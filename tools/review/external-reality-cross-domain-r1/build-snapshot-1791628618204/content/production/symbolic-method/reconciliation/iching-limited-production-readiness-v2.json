@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-LIMITED-PRODUCTION-READINESS-v2.0.0",
+  "work": "ICH-PROD-W29",
+  "baselineCommit": "0db5e11ed84829e28c5cd56244dab774059b3839",
+  "status": "EDGE_FETCH_COMPATIBILITY_SUCCESSOR_IMPLEMENTED_NEW_DEPLOYMENT_AND_LIVE_ACCEPTANCE_REQUIRED",
+  "successorOf": "content/production/symbolic-method/reconciliation/iching-limited-production-readiness-v1.json",
+  "historicalPredecessorMutated": false,
+  "observedProductionEvidence": {
+    "accessApplicationReached": true,
+    "accessPolicyPassedInBrowser": true,
+    "browserGetReachedApplicationHandler": true,
+    "browserGetResult": "METHOD_NOT_ALLOWED",
+    "livePostReachedApplicationHandler": true,
+    "livePostFailureStatus": 403,
+    "livePostFailureCode": "Invalid redirect value, must be one of \"follow\" or \"manual\" (\"error\" won't be implemented since it does not make sense at the edge; use \"manual\" and check the response status code).",
+    "failureOccursBeforeD1Probe": true,
+    "failureIsExternalConfiguration": false,
+    "failureIsHumanReviewOrCorpusDrift": false
+  },
+  "successorImplementation": {
+    "historicalSessionEndpoint": "/api/iching-limited-session",
+    "currentSessionEndpoint": "/api/iching-limited-session-v2",
+    "handler": "functions/api/iching-limited-session-v2.js",
+    "historicalVerifierPreserved": "functions/iching-limited-production/iching-limited-production-v1.js",
+    "edgeCompatibilityChange": "INJECT_FETCH_ADAPTER_THAT_CONVERTS_REDIRECT_ERROR_TO_MANUAL",
+    "manualRedirectStillFailsClosed": true,
+    "d1ProbeSemanticsChanged": false,
+    "betaSessionFormatChanged": false,
+    "stableExecutionRouteChanged": false,
+    "humanAcceptanceChanged": false,
+    "admittedCorpusChanged": false,
+    "fullProductionGranted": false
+  },
+  "operatorAction": {
+    "editExistingAccessApplicationPathTo": "/api/iching-limited-session-v2",
+    "reuseExistingAccessApplicationAndPolicy": true,
+    "audienceExpectedToRemainApplicationBound": true,
+    "deployNewCommitThenRefreshBothShaSecrets": true,
+    "runReadOnlyLiveGateBeforeLimitedLiveV2": true
+  },
+  "nextAction": "COMMIT_V2_SUCCESSOR_DEPLOY_UPDATE_ACCESS_PATH_REFRESH_EXACT_SHA_SECRETS_RUN_READ_ONLY_GATE_THEN_RUN_LIVE_V2"
+}

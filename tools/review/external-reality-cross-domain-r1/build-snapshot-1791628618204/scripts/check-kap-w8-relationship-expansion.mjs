@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {BASELINE,ROOT,readJson} from './lib/knowledge-answer-projection/kap-grounding-v1.mjs';
+import {deriveKapNodeMatches,expandKapRelationships,KAP_GROUNDING_LIMITS} from '../functions/_lib/knowledge-answer-grounding.js';
+const c=readJson(`${ROOT}/contracts/kap-w8-relationship-expansion-contract-v1.json`);
+const p=readJson(`${ROOT}/registries/kap-w8-relationship-expansion-policy-v1.json`);
+const predecessor=readJson('content/knowledge/runtime/knowledge-intelligence/package-k-b/relationship-mechanism-expansion-policy-v1.json');
+const retrieval=readJson(`${ROOT}/fixtures/kap-knowledge-retrieval.hybrid.valid.json`);
+const rel=readJson('content/knowledge/public/retrieval/relationships.json'); const exp=readJson('content/knowledge/intelligence/expansion/relationship-mechanism-expansion.json');
+assert.equal(c.step,'KAP-W8'); assert.equal(c.baselineCommit,BASELINE); assert.equal(p.relationshipAuthority,predecessor.relationshipAuthority); assert.equal(p.externalBoundaryPolicy,predecessor.externalBoundaryPolicy);
+assert.equal(p.limits.maximumDepth,1); assert.equal(KAP_GROUNDING_LIMITS.maximumRelationships,8); assert.equal(p.rules.unpublishedTargetContentInjectionAllowed,false); assert.equal(p.rules.providerAllowed,false);
+const out=expandKapRelationships({nodeMatches:deriveKapNodeMatches(retrieval),relationshipRecords:rel.records,mechanismExpansions:exp.records,locale:'zh-Hans'});
+assert.equal(out.depth,1); assert.equal(out.unpublishedTargetContentInjected,false); assert.equal(out.transitiveExpansionUsed,false); assert.equal(out.providerUsed,false); assert.equal(out.blockedContinuations.length,0); assert.ok(out.relatedPublishedNodes.includes('KN-PREFACE-002')); assert.equal(out.relationships.some(x=>x.targetPublished===false),false); assert.ok(out.mechanismFacets.every(x=>x.groundingEligible&&x.evidenceFragmentCodes.length));
+const synthetic=expandKapRelationships({nodeMatches:deriveKapNodeMatches(retrieval),relationshipRecords:[{locale:'zh-Hans',relationshipCode:'R1',sourceNodeCode:'KN-PREFACE-001',targetNodeCode:'KN-X',targetPublished:true,type:'relatedNodeCodes'}],mechanismExpansions:[],locale:'zh-Hans'});
+assert.deepEqual(synthetic.relatedPublishedNodes,['KN-X']); assert.equal(synthetic.relationships[0].groundingEligible,true);
+const unpublished=expandKapRelationships({nodeMatches:deriveKapNodeMatches(retrieval),relationshipRecords:[{locale:'zh-Hans',relationshipCode:'R2',sourceNodeCode:'KN-PREFACE-001',targetNodeCode:'KN-Y',targetPublished:false,type:'relatedNodeCodes'}],mechanismExpansions:[],locale:'zh-Hans'});
+assert.equal(unpublished.relationships.length,0); assert.equal(unpublished.blockedContinuations.length,1); assert.equal(unpublished.unpublishedTargetContentInjected,false);
+console.log('✓ KAP-W8 Relationship Expansion passed.');

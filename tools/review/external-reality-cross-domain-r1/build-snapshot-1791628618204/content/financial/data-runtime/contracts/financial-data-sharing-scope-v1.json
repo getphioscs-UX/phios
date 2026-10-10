@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W18-DATA-SHARING-SCOPE-v1.0.0",
+  "work": "FDR-W18",
+  "status": "ACTIVE_FAIL_CLOSED",
+  "purposeScopes": [
+    "FINANCIAL_PLANNING",
+    "WILL_ASSEMBLY",
+    "PROFESSIONAL_REVIEW",
+    "REPORT"
+  ],
+  "requiredFields": [
+    "sharingScopeId",
+    "financialRealityId",
+    "consentReference",
+    "purposeScope",
+    "dataScopes",
+    "personScopes",
+    "granteeReference",
+    "startsAt",
+    "expiresAt",
+    "revocationState"
+  ],
+  "dataScopes": [
+    "HOUSEHOLD",
+    "PEOPLE",
+    "ENTITIES",
+    "ASSETS",
+    "LIABILITIES",
+    "GUARANTEES",
+    "INCOME",
+    "EXPENSES",
+    "POLICIES",
+    "GOALS",
+    "ESTATE_FACTS",
+    "DOCUMENTS"
+  ],
+  "rules": {
+    "purposeScopeExpansionAllowed": false,
+    "dataScopeExpansionAllowed": false,
+    "financialPlanningToWillImplicitReuseAllowed": false,
+    "crossProfessionalReuseAllowedWithoutConsent": false,
+    "reportProjectionMayReadOnlyAuthorizedScopes": true,
+    "darMayReadOnlyWhenWillAssemblyGranted": true,
+    "revokedScopeFailsClosed": true,
+    "missingScopeFailsClosed": true
+  }
+}

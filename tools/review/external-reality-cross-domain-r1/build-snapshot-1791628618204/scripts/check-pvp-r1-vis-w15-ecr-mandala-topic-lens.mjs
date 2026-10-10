@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {buildFixtureReadingIR,buildFixtureProjection} from './lib/ecr-mandala-acceptance-fixture.mjs';
+import {buildEcrTopicProjection} from '../functions/embodied-configuration/ecr-topic-projection-runtime.js';
+import {adaptEcrPersonalRealityProduct} from '../functions/personal-reality-product/adapters/ecr-production-adapter.js';
+import {renderPhiMandalaVisual} from '../assets/customer-ui/js/specialists/ecr/mandala-renderer.js';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const text=p=>fs.readFileSync(p,'utf8');
+const contract=read('content/product-visual-platform-r1/ecr/topic/ecr-mandala-topic-lens-contract-v1.json');
+const acceptance=read('content/product-visual-platform-r1/acceptance/pvp-r1-vis-w15-ecr-mandala-topic-lens-v1.json');
+const admission=read('content/embodied-configuration/ecr-topic-r1/acceptance/ecr-topic-r1-w19-production-admission-v1.json');assert.equal(admission.status,'PRODUCTION_ADMITTED');assert.equal(admission.productionDefaultAccessState,'FREE_PREVIEW');assert.equal(admission.paidAccessRequiresExplicitEntitlement,true);
+const projection=buildFixtureProjection(),visual={title:'你的 PHI 构型',payload:projection},freeTopic=buildEcrTopicProjection(projection,{locale:'zh-Hans',accessState:'FREE_PREVIEW'}),paidTopic=buildEcrTopicProjection(projection,{locale:'zh-Hans',accessState:'PAID'});
+assert.equal(freeTopic.topics.length,6);assert.equal(freeTopic.accessState,'FREE_PREVIEW');assert.equal(paidTopic.accessState,'PAID');for(const t of freeTopic.topics){assert.ok(t.nodeIds.length<=4,`${t.topicId} free node cap`);assert.equal('matchedOwners' in t,false);assert.equal('narrative' in t,false);assert.equal('realityQuestion' in t,false);}for(const t of paidTopic.topics){assert.ok(Array.isArray(t.matchedOwners));assert.ok(t.narrative);assert.equal(typeof t.realityQuestion,'string');}
+const selected=new Set([projection.selected.grammarId,projection.selected.questionId,projection.selected.primaryCapabilityId,...projection.selected.supportingCapabilityIds,...projection.selected.driverPriority.filter(x=>Number(x.rank)<=3).map(x=>x.driverId),projection.selected.motionId,projection.selected.activationId]);for(const t of freeTopic.topics)for(const id of t.nodeIds)assert.ok(selected.has(id),`${t.topicId} contains non-selected owner ${id}`);
+const overview=renderPhiMandalaVisual(visual,{experienceState:'FREE_SNAPSHOT'});assert.match(overview,/data-ecr-topic-lens-state="OVERVIEW_ONLY"/);assert.doesNotMatch(overview,/data-ecr-topic-lens="CAREER"/);
+const freeHtml=renderPhiMandalaVisual(visual,{experienceState:'FREE_SNAPSHOT',topicProjection:freeTopic});assert.match(freeHtml,/data-ecr-topic-lens-state="READY"/);assert.match(freeHtml,/data-ecr-topic-access="FREE_PREVIEW"/);assert.equal((freeHtml.match(/data-ecr-topic-lens=/g)||[]).length,7,'overview + six governed topics');
+const readingIR=buildFixtureReadingIR(),product=adaptEcrPersonalRealityProduct({readingIR,mandalaProjection:projection,mandalaTopicProjection:freeTopic,locale:'zh-Hans'});assert.equal(product.publication.mandalaTopicProjection.accessState,'FREE_PREVIEW');assert.equal(product.publication.mandalaTopicRendererCreatesMapping,undefined);assert.equal(product.boundaries.mandalaTopicRendererCreatesMapping,false);
+const renderer=text('assets/customer-ui/js/specialists/ecr/mandala-renderer.js');assert.match(renderer,/ids=new Set\(String\(button\.dataset\.nodeIds/);assert.match(renderer,/node\.classList\.toggle\('is-topic-muted'/);for(const forbidden of ['buildEcrTopicProjection','TOPICS','MATRIX.weights'])assert.equal(renderer.includes(forbidden),false,`renderer must not own topic mapping: ${forbidden}`);
+const adapter=text('functions/personal-reality-product/adapters/ecr-production-adapter.js');assert.match(adapter,/accessState:mandalaTopicProjection\.accessState\|\|'FREE_PREVIEW'/);
+assert.equal(contract.topicAuthority.rule,'INTERSECTION_ONLY');assert.equal(contract.paidBoundary.pvpDoesNotActivatePaidTopicAccess,true);assert.equal(contract.boundaries.topicLensCreatesRealityEvidence,false);
+assert.equal(acceptance.status,'MACHINE_ACCEPTED_GOVERNED_TOPIC_LENS');assert.ok(Object.values(acceptance.checks).every(Boolean));
+console.log('✓ PVP-R1-VIS-W15 Topic Lens passed.');
+console.log('  Six governed ECR-TOPIC-R1 lenses are reused; production defaults to FREE_PREVIEW with max four selected-owner highlights per topic.');
+console.log('  The renderer only mutes/highlights supplied nodeIds and does not invent topic mapping or Reality evidence.');

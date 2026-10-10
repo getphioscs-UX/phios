@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "PHI-OS-WPR-POST-FREEZE-VISUAL-ACCEPTANCE-v1.0.0",
+  "work": "BFR-H16",
+  "baselineCommit": "167bce2a82734cf96207b78abb47cdcd8cf82522",
+  "status": "WPR_POST_FREEZE_VISUAL_ACCEPTED_REPOSITORY_SCOPE_LIVE_DELIVERY_REVALIDATION_REQUIRED",
+  "scope": "POST_FREEZE_REPOSITORY_VISUAL_CONSUMPTION",
+  "historicalBaseline": {
+    "path": "content/web-production/wpr-post-freeze-visual-baseline-v1.json",
+    "sha256": "81a27254ed99e9e1ac2835a877dc62f2abe77a3c75dcd6d974801b2edf1d1844",
+    "rewritten": false
+  },
+  "currentVisualRegistry": {
+    "path": "content/web-production/registries/client-visual-asset-registry-v1.2.json",
+    "sha256": "14adc3d2e1de48e7c0dda6494244f90a15f47ac1e068d92ecb9bd3d73573dc61",
+    "recordCount": 152,
+    "stateCounts": {
+      "UPLOADED": 123,
+      "REMOTE_VERIFIED_AWAITING_CONSUMER_ACCEPTANCE": 5,
+      "PLANNED": 24
+    },
+    "r2RemoteVerifiedCount": 118
+  },
+  "publicAssetRegistry": {
+    "path": "content/registry/public-assets.json",
+    "sha256": "75d913138d1d8dc96ff7d644915a15ed1e9d06762feae4ef674fe1aefe3b5b6f",
+    "recordCount": 149,
+    "computedRemoteVerifiedMemberCount": 123,
+    "directoryGroupCount": 4,
+    "failClosed": true
+  },
+  "resolver": {
+    "path": "assets/js/runtime/web-production/asset-resolver.js",
+    "publicConfigEndpoint": "/api/public-asset-config",
+    "hardcodedPublicBaseUrlAllowed": false
+  },
+  "surfaceCoverage": {
+    "HOMEPAGE": {
+      "required": "HIGH",
+      "accepted": "HIGH",
+      "evidence": [
+        "content/web/homepage/hpc2/homepage-visual-consumption-v2.json",
+        "content/web/homepage/hpc2/acceptance/homepage-composition-acceptance-v2.json"
+      ]
+    },
+    "LIBRARY": {
+      "required": "MEDIUM_HIGH",
+      "accepted": "MEDIUM_HIGH",
+      "consumers": [
+        "HERO-002",
+        "FIVE_BOOK_COVERS",
+        "FIG-007"
+      ],
+      "evidence": [
+        "library.html",
+        "assets/js/pages/library.js",
+        "assets/css/bfr-h16-library-visual-acceptance.css"
+      ]
+    },
+    "BOOK": {
+      "required": "HIGH",
+      "accepted": "HIGH",
+      "evidence": [
+        "assets/js/pages/books.js",
+        "assets/js/pages/book-volume.js",
+        "assets/js/web-production/public-surface-data.js"
+      ]
+    },
+    "ARTICLE": {
+      "required": "CONTENT_DEPENDENT",
+      "accepted": "CONTENT_DEPENDENT",
+      "evidence": [
+        "assets/js/knowledge/article-renderer.js"
+      ]
+    }
+  },
+  "assetAccounting": {
+    "governedVisualIdentityCount": 152,
+    "directCurrentConsumptionEvidenceCount": 11,
+    "directCurrentConsumptionEvidenceCodes": [
+      "HERO-001",
+      "HERO-002",
+      "FIG-001",
+      "FIG-006",
+      "FIG-007",
+      "FIG-054",
+      "FIG-055",
+      "FIG-056",
+      "FIG-057",
+      "ICON-014",
+      "ICON-015"
+    ],
+    "explicitPlannedCount": 24,
+    "explicitPlannedCodes": [
+      "PHIOS-ILLUSTRATION-LIBRARY-KNOWLEDGE-LANDSCAPE-V1",
+      "PHIOS-ILLUSTRATION-READING-PATH-LANDSCAPE-V1",
+      "PHIOS-ILLUSTRATION-VISUAL-KNOWLEDGE-DISCOVERY-V1",
+      "PHIOS-ILLUSTRATION-PERSONAL-REALITY-HERO-V1",
+      "PHIOS-ILLUSTRATION-FINANCIAL-REALITY-HERO-V1",
+      "PHIOS-ILLUSTRATION-ACADEMY-HERO-V1",
+      "PHIOS-ILLUSTRATION-PROFESSIONAL-WORKSPACE-HERO-V1",
+      "PHIOS-ILLUSTRATION-SERVICES-HERO-V1",
+      "PHIOS-ILLUSTRATION-MEMBERSHIP-USAGE-PATHS-V1",
+      "PHIOS-ILLUSTRATION-DIGITAL-BOOK-DELIVERY-V1",
+      "PHIOS-INSTRUCTION-START-REALITY-JOURNEY-V1",
+      "PHIOS-INSTRUCTION-FREE-OBSERVATION-V1",
+      "PHIOS-INSTRUCTION-RECONSTRUCTION-EVIDENCE-V1",
+      "PHIOS-INSTRUCTION-READING-KNOWN-UNKNOWN-V1",
+      "PHIOS-INSTRUCTION-NAVIGATION-ACTION-V1",
+      "PHIOS-INSTRUCTION-PERSONAL-RUNTIME-INPUT-V1",
+      "PHIOS-INSTRUCTION-PERSONAL-RESULT-READING-V1",
+      "PHIOS-INSTRUCTION-EXTERNAL-READER-INTAKE-V1",
+      "PHIOS-INSTRUCTION-PROFESSIONAL-CONSENT-V1",
+      "PHIOS-INSTRUCTION-PROFESSIONAL-PRIVACY-V1",
+      "PHIOS-INSTRUCTION-APPOINTMENT-FLOW-V1",
+      "PHIOS-INSTRUCTION-CHECKOUT-DIGITAL-BOOK-V1",
+      "PHIOS-INSTRUCTION-BOOK-PREVIEW-ACCESS-V1",
+      "PHIOS-INSTRUCTION-ACCOUNT-PRIVACY-CONTROL-V1"
+    ],
+    "explicitPendingConsumerCount": 117,
+    "silentGovernedVisualOrphanCount": 0,
+    "rule": "A governed asset may be direct-current, explicit PLANNED, or explicit lifecycle/consumer-pending. Unknown lifecycle or missing expected consumer is a silent orphan and fails H16."
+  },
+  "r2DeliveryBoundary": {
+    "repositoryResolverConsumptionAccepted": true,
+    "environmentPublicBaseUrlStillRequired": true,
+    "liveR2RevalidationRequired": true,
+    "productionBrowserRevalidationRequired": true
+  },
+  "authorityBoundary": {
+    "wprFreezeReopened": false,
+    "secondVisualRegistryCreated": false,
+    "secondAssetResolverCreated": false,
+    "visualRewritePerformed": false,
+    "globalProductionAccepted": false
+  },
+  "globalProductionAccepted": false,
+  "next": "BFR_PRODUCTION_SURFACE_ACCEPTANCE"
+}

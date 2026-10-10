@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-PERSONAL-READING-SECTION-EVIDENCE-v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sectionId",
+    "status",
+    "headline",
+    "summary",
+    "singleMethodReadingRefs",
+    "crossMethodClaimRefs",
+    "profileSignalRefs",
+    "selfAssessmentRefs",
+    "reasoningTaskRefs",
+    "currentRealityRefs",
+    "realityComparisonRefs",
+    "whyThisAppears",
+    "supportRefs",
+    "tensionRefs",
+    "openRefs",
+    "boundaryRefs",
+    "technicalRefs",
+    "contentUnits",
+    "governance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-PERSONAL-READING-SECTION-EVIDENCE-v2.0.0"
+    },
+    "sectionId": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "ELIGIBLE",
+        "NOT_ESTABLISHED",
+        "SUPPRESSED"
+      ]
+    },
+    "headline": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "summary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "singleMethodReadingRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "crossMethodClaimRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "profileSignalRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "selfAssessmentRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "reasoningTaskRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "currentRealityRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "realityComparisonRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "whyThisAppears": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "supportRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "tensionRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "openRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "boundaryRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "technicalRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "contentUnits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "whatWeSee",
+        "whyItAppears",
+        "howPerspectivesRelate",
+        "yourCurrentReality",
+        "whatRemainsOpen",
+        "whatToObserve"
+      ],
+      "properties": {
+        "whatWeSee": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "whyItAppears": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "howPerspectivesRelate": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "yourCurrentReality": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "whatRemainsOpen": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "whatToObserve": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "governance": {
+      "type": "object"
+    }
+  }
+}

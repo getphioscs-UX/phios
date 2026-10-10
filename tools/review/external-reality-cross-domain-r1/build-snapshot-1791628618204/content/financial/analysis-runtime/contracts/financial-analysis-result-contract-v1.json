@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-FAR-ANALYSIS-RESULT-CONTRACT-v1.0.0",
+  "phase": "FAR",
+  "status": "ACTIVE",
+  "authorityOwner": "FAR",
+  "requiredFields": [
+    "runtimeCode",
+    "runtimeVersion",
+    "analysisId",
+    "fcrResultDigest",
+    "fcrCalculationId",
+    "fdrSnapshotId",
+    "fdrDigest",
+    "analysisPolicySetId",
+    "analysisPolicyDigest",
+    "comparisonResultDigests",
+    "findings",
+    "resultDigest",
+    "determinismKey"
+  ],
+  "boundaryFlags": [
+    "independentRecalculationCreated",
+    "adviceCreated",
+    "professionalJudgmentCreated",
+    "recommendationCreated",
+    "fdrMutationCreated"
+  ],
+  "rules": {
+    "allBoundaryFlagsMustRemainFalse": true,
+    "findingAmountsMayOnlyQuoteExistingFcrResults": true,
+    "newFinancialProjectionAllowed": false,
+    "unknownMayBeSilentlyResolved": false
+  }
+}

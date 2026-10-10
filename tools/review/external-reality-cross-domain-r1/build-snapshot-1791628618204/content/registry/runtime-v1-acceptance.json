@@ -1,0 +1,31 @@
+{
+  "id": "m1-w6-runtime-v1-acceptance",
+  "version": "1.0.0",
+  "release": "runtime-engine-v1.0.0",
+  "status": "candidate",
+  "tagCreated": false,
+  "fixtures": ["fixture-a-money-fear", "fixture-b-phios-career", "fixture-c-relationship-change"],
+  "journey": ["entry", "reconstruction", "return_to_entry", "edit", "reconstruction", "reading", "navigation", "review", "memory", "continuity"],
+  "languageScenarios": [
+    { "id": "en-ui-en-input", "ui": "en", "input": "en", "switchAfterStart": false },
+    { "id": "zh-ui-zh-input", "ui": "zh-Hans", "input": "zh", "switchAfterStart": false },
+    { "id": "zh-ui-en-input", "ui": "zh-Hans", "input": "en", "switchAfterStart": false },
+    { "id": "language-switch", "ui": "en", "input": "en", "switchAfterStart": true, "switchedUi": "zh-Hans" }
+  ],
+  "viewports": [
+    { "width": 360, "class": "mobile", "status": "source_verified" },
+    { "width": 768, "class": "tablet", "status": "source_verified" },
+    { "width": 1440, "class": "desktop", "status": "source_verified" }
+  ],
+  "automatedCases": 36,
+  "releaseGates": {
+    "kernelOnlyCoreEntry": true,
+    "contractFieldsFrozen": true,
+    "providerInterfaceFrozen": true,
+    "p0Open": 0,
+    "p1Open": 0,
+    "fullJourneyAutomated": true,
+    "npmCheckRequired": true,
+    "manualDeployedVisualCheckRequiredBeforeTag": true
+  }
+}

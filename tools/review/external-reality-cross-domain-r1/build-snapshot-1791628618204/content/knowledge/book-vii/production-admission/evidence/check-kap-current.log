@@ -1,0 +1,113 @@
+
+> check:kap-current
+> node scripts/run-zero-cost-regression.mjs check:kap-current
+
+
+> check:kap
+> node scripts/run-zero-cost-regression.mjs check:kap
+
+
+> check:kap-reconciliation
+> node scripts/run-zero-cost-regression.mjs check:kap-reconciliation
+
+✓ KAP Phase 1 authority artifact reconciliation passed.
+
+> check:kap-foundation
+> node scripts/run-zero-cost-regression.mjs check:kap-foundation
+
+✓ KAP-W0 Existing Runtime Capability Audit passed.
+✓ KAP-W1 Knowledge / Answer / Publication / Reality Reading Authority Boundary passed.
+✓ KAP-W2 QuestionScopedKnowledgeAnswer foundation contract passed.
+✓ KAP-W3 Client Answer Level Registry passed.
+✓ KAP Phase 1 W0-W3 Authority Foundation accepted and frozen.
+  Knowledge / Answer / Publication / Reality Reading boundaries remain frozen; KAP-W0-W3 themselves create no MCD, AI, Guided Reading or client-surface authority.
+
+> check:kap-grounding
+> node scripts/run-zero-cost-regression.mjs check:kap-grounding
+
+✓ KAP-W4 Question Intake passed.
+✓ KAP-W5 Question Normalization passed.
+✓ KAP-W6 Knowledge Retrieval reuse passed.
+✓ KAP-W7 Canonical Node Matching passed.
+✓ KAP-W8 Relationship Expansion passed.
+✓ KAP-W9 Knowledge Grounding Bundle passed.
+✓ KAP-W10 Coverage Evaluation passed.
+✓ KAP Phase 2 W4-W10 Knowledge Grounding accepted and frozen.
+  ASK_PHIOS now resolves Question → KSAR retrieval → governed node/relationship grounding → coverage; Answer Composition remains deferred to KAP-W11.
+
+> check:kap-answer
+> node scripts/run-zero-cost-regression.mjs check:kap-answer
+
+✓ KAP-W11 Deterministic Answer First passed.
+✓ KAP-W12 Answer Depth Profiles passed.
+✓ KAP-W13 AI Assistance Eligibility passed.
+✓ KAP-W14 AI Authority Boundary passed.
+✓ KAP-W15 AI Cost Routing passed.
+✓ KAP-W16 Answer Source Projection passed.
+✓ KAP-W17 Unknown boundary current successor passed after P1 physical delete: Contextual Ask exposes limits while legacy Knowledge Search presentation is absent.
+✓ KAP-W11-W17 current answer semantics passed with presentation fingerprint decoupled.
+  knowledge-search HTML/CSS may evolve by semantic contract; CKA JS/API runtime fingerprints and authority boundaries remain fail-closed.
+
+> check:kap-guided
+> node scripts/run-zero-cost-regression.mjs check:kap-guided
+
+✓ W18 passed.
+✓ W18A passed.
+✓ W18B passed.
+✓ W18C passed.
+✓ W18D passed.
+✓ W19 passed.
+✓ W20 passed.
+✓ W21 passed.
+✓ W22 passed.
+✓ KAP-W18-W22 Guided Reading accepted: limited context, MCD-8 canonical projection handoff, deterministic recomposition and explicit stop conditions are active.
+
+> check:kap-complexity
+> node scripts/run-zero-cost-regression.mjs check:kap-complexity
+
+✓ KAP-W23 passed.
+✓ KAP-W24 passed.
+✓ KAP-W25 passed.
+✓ KAP-W23-W25 predecessor Complexity semantics preserved under KAP-W26 Reality Handoff successor; W24 remains the decisive Reality Model requirement test and W25 remains routing aid only.
+
+> check:kap-handoff
+> node scripts/run-zero-cost-regression.mjs check:kap-handoff
+
+✓ KAP-W26 passed.
+✓ KAP-W27 passed.
+✓ KAP-W28 passed.
+✓ KAP-W29 passed.
+✓ KAP-W26-W29 Reality Journey handoff accepted: client-visible escalation reason, explicit consent, Reality Entry Seed reuse and provenance-separated Knowledge/Method handoff are active without creating a Canonical Case or Reality Model.
+
+> check:kap-phase18
+> node scripts/run-zero-cost-regression.mjs check:kap-phase18
+
+✓ KAP-W30 Professional Boundary passed.
+✓ KAP-W31 Explanation vs Advice passed.
+✓ KAP-W32 Personalization Boundary passed.
+✓ KAP-W33 Grounded Acceptance backend gate passed; CKA consumer acceptance remains pending.
+✓ KAP-W34 Regression Corpus passed with six bilingual governed cases.
+✓ KAP-W35 Locale Regression backend parity gate passed; CKA locale surface acceptance remains pending.
+✓ KAP-W36 Retrieval Cache passed; private/personal context is excluded from shared caching.
+✓ KAP-W37 Answer Cache passed; personalized answers cannot be simply shared/reused.
+✓ KAP-W38 AI Budget passed; budget controls provider eligibility, never Knowledge Authority quality.
+✓ KAP-W39 AI Failure Fallback passed; basic deterministic answer remains available.
+✓ KAP-W40 Outcome Signals contract passed; production emitters remain CKA-consumer pending and registries start empty.
+✓ KAP-W41 Knowledge Gap Signal passed; only aggregated high-frequency PARTIAL/INSUFFICIENT gaps become planning signals.
+✓ KAP-W42 No Automatic Mutation passed.
+✓ KAP-W43 Free Ask PHI OS backend policy passed; CKA enforcement remains pending.
+✓ KAP-W44 Membership Answer backend policy passed; Account consumer enforcement remains pending.
+✓ KAP-W45 Method / Journey Entitlement passed; Access cannot manufacture MPA authority and paid HDR remains blocked.
+✓ KAP-W30-W45 Phase 18 backend governance accepted and frozen without reopening KAP-W0-W29.
+✓ CKA-dependent grounded surface acceptance, locale surface acceptance, analytics emitters, Free/Member client enforcement remain explicitly CONSUMER_PENDING.
+✓ Use `npm run check:kap-current` for the current KAP chain; historical `npm run check:kap` remains byte-compatible with the W0-W29 frozen checker contract.
+
+> check:kap-book-vii
+> node scripts/run-zero-cost-regression.mjs check:kap-book-vii
+
+PASS KAP Book VII: 100 section identities, 9 figures, additive SHA lineage, protected manuscript denial, contested/unknown stops, zero provider requests. Human Review generated.
+
+> check:kap-book-vii-production-admission
+> node scripts/run-zero-cost-regression.mjs check:kap-book-vii-production-admission
+
+PASS Book VII production admission: explicit Human Accept, 9 real published projections, existing Ask/CLI retrieval, 100 identities, private-source denial, zero provider/private-R2 reads; no live deployment.

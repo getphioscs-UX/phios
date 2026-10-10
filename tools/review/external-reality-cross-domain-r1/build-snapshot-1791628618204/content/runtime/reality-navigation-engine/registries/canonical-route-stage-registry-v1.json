@@ -1,0 +1,30 @@
+{
+  "registryCode": "PHI-OS-RNE-CANONICAL-ROUTE-STAGE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "runtimeCode": "RNE",
+  "containsUserData": false,
+  "stages": [
+    {
+      "stageType": "CURRENT",
+      "authority": "RNE_CURRENT_POSITION_REFERENCE",
+      "realityTruthClaimed": false
+    },
+    {
+      "stageType": "INTERMEDIATE",
+      "authority": "RNE_NAVIGATION_CHECKPOINT",
+      "realityTruthClaimed": false
+    },
+    {
+      "stageType": "TARGET",
+      "authority": "AUTHORIZED_TARGET_REFERENCE",
+      "realityTruthClaimed": false
+    }
+  ],
+  "rules": {
+    "routeRequiresCurrentIntermediateTarget": true,
+    "routeCandidateSelectionAllowed": false,
+    "jrStageMutationAllowed": false,
+    "actionExecutionAllowed": false,
+    "outcomePredictionAllowed": false
+  }
+}

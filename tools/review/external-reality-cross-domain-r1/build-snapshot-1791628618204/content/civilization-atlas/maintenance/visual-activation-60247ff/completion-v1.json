@@ -1,0 +1,112 @@
+{
+  "work": "BOOK-V-CIV-ATLAS-R1-M1",
+  "baselineHead": "60247ffa4d5fd61d1a76b0d0f328396947947bef",
+  "branch": "main",
+  "machineStatus": "PASS",
+  "browserStatus": "PASS_LOCAL_EDGE_REAL_R2",
+  "humanDecision": "PENDING_HUMAN_REVIEW",
+  "productionAdmission": "NOT_ADMITTED_PENDING_HUMAN_AND_EXTERNAL_VALIDATION",
+  "reviewHtml": "tools/review/BOOK-V-CIV-ATLAS-R1-M1-FINAL-HUMAN-REVIEW.html",
+  "delivery": {
+    "acceptedPredecessorBindings": 162,
+    "actualBucketTotal": null,
+    "candidateCount": 392,
+    "verifiedWebp": 389,
+    "bookVIObjects": 11,
+    "unresolved": [
+      {
+        "assetId": "VIS-CIV-CA-T07-01-HERO",
+        "candidateKey": "images/civilization-atlas/cases/VIS-CIV-CA-T07-01-HERO.webp",
+        "httpStatus": 404
+      },
+      {
+        "assetId": "VIS-CIV-CA-T07-02-HERO",
+        "candidateKey": "images/civilization-atlas/cases/VIS-CIV-CA-T07-02-HERO.webp",
+        "httpStatus": 404
+      },
+      {
+        "assetId": "WORLD_RECONFIGURATION_SNAPSHOT_2026",
+        "candidateKey": "images/civilization-atlas/reconfiguration/WORLD_RECONFIGURATION_SNAPSHOT_2026.webp",
+        "httpStatus": 404
+      }
+    ],
+    "newBindingsPendingHuman": 227,
+    "historicalFigures": 16,
+    "modernFlags": 24
+  },
+  "checks": [
+    {
+      "status": "PASS",
+      "command": "node scripts/check-civilization-r2-activation.mjs"
+    },
+    {
+      "status": "PASS",
+      "command": "node scripts/check-civilization-visual-review.mjs"
+    },
+    {
+      "status": "PASS",
+      "command": "node scripts/check-book-v-pka-r1.mjs"
+    },
+    {
+      "status": "PASS",
+      "command": "npm run check:book-v-atlas:r1:m1:current"
+    },
+    {
+      "status": "PASS",
+      "command": "node scripts/check-civilization-r2-browser.mjs"
+    },
+    {
+      "status": "PASS",
+      "command": "node scripts/check-civilization-final-review-browser.mjs"
+    },
+    {
+      "status": "PASS",
+      "command": "npm run check"
+    }
+  ],
+  "browserEvidence": [
+    "browser-results-v1.json",
+    "final-review-browser-v1.json"
+  ],
+  "liveProductionLLM": "NOT_RUN",
+  "deployment": "NOT_RUN",
+  "historicalRegistryChanges": false,
+  "r2Writes": false,
+  "imageGeneration": false,
+  "committed": false,
+  "pushed": false,
+  "notes": [
+    "Existing M1 state and Ask runtimes reused; no duplicate architecture.",
+    "Two unreachable case heroes have their own verified secondary visual.",
+    "2026 reconfiguration candidate belongs to Book VI.",
+    "New bindings visible locally; production requires explicit acceptance.",
+    "Image embedded text and borders have no historical authority.",
+    "No bucket inventory API; counts are reconciled candidates only."
+  ],
+  "changedFiles": [
+    " M assets/js/pages/civilization-atlas.js",
+    " M assets/js/pages/civilization-atlas/atlas-static-visual.js",
+    " M assets/js/public-v2/unified-public-visual-resolver.js",
+    " M scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs",
+    "?? content/civilization-atlas/maintenance/book-v-civ-atlas-r1-m1-r2-binding-successor-v1.json",
+    "?? content/civilization-atlas/maintenance/visual-activation-60247ff/browser-results-v1.json",
+    "?? content/civilization-atlas/maintenance/visual-activation-60247ff/completion-v1.json",
+    "?? content/civilization-atlas/maintenance/visual-activation-60247ff/final-review-browser-v1.json",
+    "?? content/civilization-atlas/maintenance/visual-activation-60247ff/human-decision-v1.json",
+    "?? content/civilization-atlas/maintenance/visual-activation-60247ff/r2-object-audit-v1.json",
+    "?? content/civilization-atlas/maintenance/visual-activation-60247ff/supplied-production-map.json",
+    "?? content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json",
+    "?? scripts/audit-civilization-r2-activation.mjs",
+    "?? scripts/build-civilization-r2-bindings-v2.mjs",
+    "?? scripts/check-civilization-final-review-browser.mjs",
+    "?? scripts/check-civilization-r2-activation.mjs",
+    "?? scripts/check-civilization-r2-browser.mjs",
+    "?? tools/review/BOOK-V-CIV-ATLAS-R1-M1-FINAL-HUMAN-REVIEW.html"
+  ],
+  "fullRepositoryCheck": {
+    "exitCode": 0,
+    "shell": "Git Bash through npm_config_script_shell on Windows",
+    "logSha256": "daebf758f63bf2642ba6369121ab6b05adaedf0b137896e554a3f9f285052f52",
+    "completedAt": "2026-09-19T11:32:51.0377501+08:00"
+  }
+}

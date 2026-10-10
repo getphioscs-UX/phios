@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
+const raw=execFileSync(process.execPath,['node_modules/wrangler/bin/wrangler.js','auth','token','--json'],{encoding:'utf8',stdio:['ignore','pipe','pipe']});
+const auth=JSON.parse(raw.slice(raw.indexOf('{')));
+if(!['oauth','api_token'].includes(auth.type)||!auth.token)throw Error('CLOUDFLARE_AUTH_UNAVAILABLE');
+const base='https://api.cloudflare.com/client/v4/accounts/0b9f36bdf56f38d7d09aebe388f15204/pages/projects/phios-github';
+const headers={Authorization:`Bearer ${auth.token}`};
+const get=async url=>{const r=await fetch(url,{headers});if(!r.ok)throw Error(`CLOUDFLARE_HTTP_${r.status}`);const j=await r.json();if(!j.success)throw Error('CLOUDFLARE_API_FAILED');return j.result};
+const p=await get(base),d=await get(base+'/deployments?env=preview&per_page=10');
+const preview=p.deployment_configs?.preview||{};
+const vars=Object.entries(preview.env_vars||{}).map(([name,v])=>({name,type:v.type,configured:Boolean(v.value)||v.type==='secret_text',...(v.type==='plain_text'&&['STRIPE_ENVIRONMENT','PHIOS_COMMERCE_QA_ENABLED','PHIOS_ENVIRONMENT'].includes(name)?{value:v.value}:{})}));
+const result={project:p.name,subdomain:p.subdomain,productionBranch:p.production_branch,source:{type:p.source?.type,owner:p.source?.config?.owner,repo:p.source?.config?.repo_name,previewDeploymentSetting:p.source?.config?.preview_deployment_setting,previewBranchIncludes:p.source?.config?.preview_branch_includes,previewBranchExcludes:p.source?.config?.preview_branch_excludes},preview:{variables:vars,d1:preview.d1_databases,r2:preview.r2_buckets},deployments:d.filter(x=>x.deployment_trigger?.metadata?.branch==='qa').map(x=>({id:x.id,environment:x.environment,url:x.url,aliases:x.aliases,stage:x.latest_stage,trigger:x.deployment_trigger}))};
+fs.writeFileSync('docs/qa/commerce-stripe-r1/remote-preview-discovery.json',JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify(result,null,2));

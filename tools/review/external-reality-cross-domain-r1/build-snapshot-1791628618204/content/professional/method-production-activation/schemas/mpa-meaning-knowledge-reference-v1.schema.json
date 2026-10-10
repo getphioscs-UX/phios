@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phi-os.mpa.meaning-knowledge-reference.v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "projectionFreezeCode",
+    "meaningCodes",
+    "knowledge",
+    "articleBodyStored",
+    "publishedFragmentTextStored",
+    "meaningCreated",
+    "meaningRewritten",
+    "knowledgeRewritten",
+    "interpretationCreated",
+    "professionalConclusionCreated",
+    "validationReferenceOnly",
+    "referenceDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MPA-MEANING-KNOWLEDGE-REFERENCE-v1.0.0"
+    },
+    "projectionFreezeCode": {
+      "type": "string"
+    },
+    "meaningCodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "knowledge": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "articleBodyStored": {
+      "const": false
+    },
+    "publishedFragmentTextStored": {
+      "const": false
+    },
+    "meaningCreated": {
+      "const": false
+    },
+    "meaningRewritten": {
+      "const": false
+    },
+    "knowledgeRewritten": {
+      "const": false
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "professionalConclusionCreated": {
+      "const": false
+    },
+    "validationReferenceOnly": {
+      "const": true
+    },
+    "referenceDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

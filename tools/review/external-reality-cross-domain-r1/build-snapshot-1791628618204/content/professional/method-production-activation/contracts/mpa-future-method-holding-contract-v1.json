@@ -1,0 +1,45 @@
+{
+  "contractCode": "PHI-OS-MPA-W25-FUTURE-METHOD-HOLDING-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "MPA-W25",
+  "baselineCommit": "d150a741231abe608a0d994e9e5787e6c71cfc3d",
+  "status": "ACTIVE_HOLDING_BOUNDARY_NO_PRODUCTION_AUTHORITY",
+  "purpose": "Hold registered or draft future Method identities without granting validation, activation, Production, Professional, Public or execution authority.",
+  "authority": {
+    "ownsHoldingStateOnly": true,
+    "ownsMethodDefinition": false,
+    "ownsAlgorithmAuthority": false,
+    "ownsValidationDecision": false,
+    "ownsProductionEligibility": false,
+    "ownsProductionExecution": false,
+    "ownsProfessionalEligibility": false,
+    "ownsPublicRelease": false
+  },
+  "allowedHoldingStates": [
+    "DRAFT",
+    "REGISTERED"
+  ],
+  "forbiddenForwardStates": [
+    "VALIDATION",
+    "ACTIVATION_CANDIDATE",
+    "PRODUCTION_ELIGIBLE",
+    "PRODUCTION",
+    "PRODUCTION_ACTIVATED",
+    "PROFESSIONAL_ELIGIBLE",
+    "PROFESSIONAL_ACTIVATED",
+    "PUBLIC",
+    "PUBLIC_RELEASED"
+  ],
+  "rules": {
+    "draftMayExistBeforeCanonicalRegistration": true,
+    "registeredRequiresCanonicalMethodRegistryBinding": true,
+    "holdingRegistrationCreatesProductionAuthority": false,
+    "holdingRegistrationCreatesProfessionalAuthority": false,
+    "holdingRegistrationOpensMpaW26": false,
+    "holdingRegistrationOpensMpaW27": false,
+    "independentActivationRequiredBeforeForwardLifecycle": true,
+    "independentActivationMustUseVersionedSuccessorEvidence": true,
+    "holdingRegistryCannotSelfPromote": true,
+    "futureMethodAdditionRequiresVersionedRegistryChange": true
+  }
+}

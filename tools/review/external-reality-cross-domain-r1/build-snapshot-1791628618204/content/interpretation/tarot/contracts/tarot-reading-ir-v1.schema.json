@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-TAROT-READING-IR-v1.0.0",
+  "title": "PHI OS Tarot Reading IR",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "readingIrVersion",
+    "methodCode",
+    "question",
+    "contextDisclosure",
+    "drawEvidence",
+    "cardObservations",
+    "sourcePerspectives",
+    "comparison",
+    "reflectiveComposition",
+    "rcc",
+    "uncertainty",
+    "agency",
+    "compositionEvidence",
+    "authority",
+    "aiUsed",
+    "providerUsed",
+    "productionEligible"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-TAROT-READING-IR-v1.0.0"
+    },
+    "readingIrVersion": {
+      "const": "1.0.0"
+    },
+    "methodCode": {
+      "const": "TAROT"
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contextDisclosure": {
+      "type": "object",
+      "required": [
+        "currentRealityContextUsed",
+        "contextUseWasExplicit",
+        "silentPrivateContextConsumption"
+      ]
+    },
+    "drawEvidence": {
+      "type": "object",
+      "required": [
+        "drawEvidenceId",
+        "deck",
+        "spread",
+        "cards",
+        "inputDigest",
+        "deterministic",
+        "aiUsed",
+        "providerUsed",
+        "redrawInsideInterpretation"
+      ]
+    },
+    "cardObservations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3
+    },
+    "sourcePerspectives": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3
+    },
+    "comparison": {
+      "type": "object",
+      "required": [
+        "mode",
+        "cards",
+        "convergence",
+        "divergence",
+        "unavailable",
+        "universalMeaningSelected",
+        "realityTruthSelected"
+      ]
+    },
+    "reflectiveComposition": {
+      "type": "object",
+      "required": [
+        "mode",
+        "questions",
+        "selectionUsesCardMeaning",
+        "selectionUsesSpreadPositionOnly",
+        "diagnosisAllowed",
+        "predictionAllowed"
+      ]
+    },
+    "rcc": {
+      "type": "object",
+      "required": [
+        "required",
+        "supportingEvidence",
+        "contradictoryEvidence",
+        "unknown",
+        "observation",
+        "rules"
+      ]
+    },
+    "uncertainty": {
+      "type": "object",
+      "required": [
+        "required",
+        "states",
+        "mayRemainUnresolved",
+        "modelMayNotEraseUncertainty"
+      ]
+    },
+    "agency": {
+      "type": "object",
+      "required": [
+        "required",
+        "decisionAuthority",
+        "tarotMayDecide",
+        "cardMayCompelAction",
+        "sourceMayCompelAction",
+        "systemMayCompelAction",
+        "userDecisionRemainsYours"
+      ]
+    },
+    "compositionEvidence": {
+      "type": "object",
+      "required": [
+        "readingIrVersion",
+        "corpusFreezeVersion",
+        "corpusFreezeSha256",
+        "cardRegistryVersion",
+        "sourceRegistryVersion",
+        "waiteSourceCorpusVersion",
+        "perspectiveRegistryVersion",
+        "reflectiveLensRegistryVersion",
+        "noSourceBlendingContractVersion",
+        "boundaryContractVersions",
+        "sourceIds",
+        "drawEvidenceId",
+        "provider",
+        "generatedAt",
+        "semanticBoundaryDeterministic",
+        "modelCalculationAllowed",
+        "modelMayMutateEvidence"
+      ]
+    },
+    "authority": {
+      "type": "object"
+    },
+    "aiUsed": {
+      "const": false
+    },
+    "providerUsed": {
+      "const": false
+    },
+    "productionEligible": {
+      "const": false
+    }
+  }
+}

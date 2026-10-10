@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Zi Wei normalized claim adapter to shared Publication IR V2",
+  "type": "object",
+  "required": [
+    "claimId",
+    "subjectId",
+    "inputFingerprint",
+    "sectionId",
+    "claimType",
+    "structure",
+    "meaning",
+    "conditions",
+    "counterweights",
+    "observableExpressions",
+    "timingRelevance",
+    "navigationImplications",
+    "sourceRefs",
+    "authority",
+    "confidence",
+    "unknowns",
+    "prohibitedExtensions"
+  ],
+  "properties": {
+    "claimId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subjectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inputFingerprint": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "sectionId": {
+      "enum": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ]
+    },
+    "claimType": {
+      "enum": [
+        "BASELINE_STRUCTURE",
+        "DOMINANT_SIGNAL",
+        "SUPPORTING_SIGNAL",
+        "COUNTERWEIGHT",
+        "STRUCTURAL_TENSION",
+        "CONDITIONAL_EXPRESSION",
+        "TIMING_MODIFIER",
+        "OBSERVABLE_EXPRESSION",
+        "NAVIGATION_IMPLICATION",
+        "UNKNOWN"
+      ]
+    },
+    "structure": {
+      "type": "object",
+      "required": [
+        "palaces",
+        "placements",
+        "relationships",
+        "transformations",
+        "timingLayers"
+      ],
+      "properties": {
+        "palaces": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "placements": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "timingLayers": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "NATAL",
+              "DA_XIAN",
+              "LIU_NIAN"
+            ]
+          }
+        }
+      }
+    },
+    "meaning": {
+      "type": "object"
+    },
+    "conditions": {
+      "type": "array"
+    },
+    "counterweights": {
+      "type": "array"
+    },
+    "observableExpressions": {
+      "type": "array"
+    },
+    "timingRelevance": {
+      "type": "array"
+    },
+    "navigationImplications": {
+      "type": "array"
+    },
+    "sourceRefs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "authority": {
+      "type": "object",
+      "required": [
+        "calculation",
+        "semantic",
+        "editorial",
+        "publication"
+      ]
+    },
+    "confidence": {
+      "enum": [
+        "SYMBOLIC_CONDITIONAL"
+      ]
+    },
+    "unknowns": {
+      "type": "array"
+    },
+    "prohibitedExtensions": {
+      "type": "array",
+      "minItems": 1
+    }
+  },
+  "description": "This validates method claims only. Publication blocks are built and verified by report-publication-ir-v2.js; no second publication framework."
+}

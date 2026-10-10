@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "PHI-OS-ZI-WEI-DYNAMIC-POLICY-v2.0.0",
+  "work": ["ZWD-W0", "ZWD-W1", "ZWD-W3"],
+  "baselineCommit": "ca15df75ff9cda6b47249954faaa74c6b4f75659",
+  "status": "HUMAN_FROZEN",
+  "authorityCode": "ZI_WEI_DYNAMIC_DOMAIN_POLICY",
+  "authorityVersion": "2.0.0",
+  "methodCode": "ZI_WEI_DOU_SHU",
+  "scopeCode": "ZI_WEI_DYNAMIC_DOMAIN_RUNTIME_V2",
+  "predecessorPolicy": "content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json",
+  "predecessorNatalScopePreserved": true,
+  "humanApproval": {
+    "approver": "PHI_OS_HUMAN_APPROVER",
+    "approvedAt": "2026-08-24T12:06:00+08:00",
+    "approvalBasis": "User explicitly requested execution of MASTER-4 ZWD-W0-W9 after the prior master plan defined dynamic policy freeze as part of this phase.",
+    "futureChangeRequiresVersionedSuccessor": true
+  },
+  "decisions": [
+    {
+      "policyCode": "DYNAMIC_PERIOD_SCOPE_V2",
+      "decision": {
+        "included": ["NATAL_CHART", "DA_XIAN", "LIU_NIAN"],
+        "deferred": ["LIU_YUE", "LIU_RI", "LIU_SHI", "XIAO_XIAN", "DOU_JUN"],
+        "predictionAuthorityGranted": false
+      }
+    },
+    {
+      "policyCode": "DA_XIAN_DIRECTION_V1",
+      "decision": {
+        "yearPolarityBasis": "BIRTH_LUNAR_YEAR_HEAVENLY_STEM",
+        "explicitCalculationInputRequired": "TRADITIONAL_CALCULATION_SEX",
+        "forward": ["YANG_MALE", "YIN_FEMALE"],
+        "reverse": ["YIN_MALE", "YANG_FEMALE"],
+        "crossMethodInferenceAllowed": false
+      }
+    },
+    {
+      "policyCode": "DA_XIAN_START_AND_AGE_V1",
+      "decision": {
+        "firstPeriodStartNominalAge": "FIVE_ELEMENT_BUREAU_NUMBER",
+        "periodLengthNominalYears": 10,
+        "ageConvention": "LUNAR_YEAR_NOMINAL_AGE",
+        "nominalAgeFormula": "targetLunarYear - birthLunarYear + 1",
+        "transitionBoundary": "ZI_WEI_LUNAR_NEW_YEAR_AFTER_23_00_DAY_BOUNDARY",
+        "supportedPalacePeriods": 12
+      }
+    },
+    {
+      "policyCode": "DA_XIAN_PALACE_PROGRESSION_V1",
+      "decision": {
+        "firstDaXianLifePalace": "NATAL_LIFE_PALACE_BRANCH",
+        "nextPeriodStepBranches": 1,
+        "stepDirection": "DA_XIAN_DIRECTION",
+        "dynamicTwelvePalaceRoles": "COUNTERCLOCKWISE_FROM_CURRENT_DA_XIAN_LIFE_BRANCH"
+      }
+    },
+    {
+      "policyCode": "LIU_NIAN_DOMAIN_V1",
+      "decision": {
+        "annualYearBoundary": "ZI_WEI_LUNAR_YEAR",
+        "annualLifePalace": "TARGET_LUNAR_YEAR_EARTHLY_BRANCH",
+        "dynamicTwelvePalaceRoles": "COUNTERCLOCKWISE_FROM_ANNUAL_LIFE_BRANCH",
+        "targetTimeRequired": true,
+        "targetTimezoneRequired": true
+      }
+    },
+    {
+      "policyCode": "DYNAMIC_FOUR_TRANSFORMATIONS_V1",
+      "decision": {
+        "tableAuthority": "BIRTH_YEAR_STEM_FOUR_TRANSFORMATIONS_SOUTHERN_TABLE_V1",
+        "tableReuseIsExplicit": true,
+        "daXianStemBasis": "NATAL_PALACE_STEM_AT_CURRENT_DA_XIAN_LIFE_BRANCH",
+        "annualStemBasis": "TARGET_LUNAR_YEAR_HEAVENLY_STEM",
+        "layersIncluded": ["DA_XIAN", "LIU_NIAN"],
+        "layersDeferred": ["LIU_YUE", "LIU_RI", "LIU_SHI"],
+        "natalTransformationsMutated": false
+      }
+    }
+  ],
+  "invariants": {
+    "natalPolicyMutated": false,
+    "natalProjectionRecalculated": false,
+    "methodVotingAllowed": false,
+    "fortunePredictionAllowed": false,
+    "eventPredictionAllowed": false,
+    "goodBadScoreAllowed": false,
+    "professionalJudgmentAllowed": false,
+    "dynamicPolicyMayNotBeSilentlyInferredFromNatal": true
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "PHI-OS-PROGRESSIVE-PROFILE-UX-CONTRACT-v2.0.0",
+  "work": "PRF-W11-SUCCESSOR-ONET-LIVE",
+  "baselineCommit": "92b30b95cf2f70af4ed2ee8e41401764b06fa8b5",
+  "predecessor": "content/profile/ux/profile-progressive-ux-contract-v1.json",
+  "customerFlow": ["CURRENT_REALITY_CORE_INTAKE","OPTIONAL_DEEPEN_MY_PROFILE","CHOOSE_ONE_OR_MORE_PROFILE_MODES","PROFILE_RESULT_WITH_SOURCE_CLASS","OPTIONAL_CURRENT_REALITY_COMPARISON"],
+  "personalReading": {"profileRequiredBeforeReading":false,"skipAllowed":true,"skipDestination":"/perspectives/personal/","profileFailureMayBlockSupportedSymbolicProduct":false,"profileFailureMayBlockCurrentRealityProduct":false},
+  "modes": [
+    {"mode":"QUICK_PROFILE","sourceClass":"CUSTOMER_SELF_REPORT","optional":true},
+    {"mode":"FULL_SELF_ASSESSMENT","sourceClass":"CUSTOMER_SELF_REPORT","optional":true},
+    {"mode":"REASONING_TASKS","sourceClass":"MEASURED_TASK_PERFORMANCE","optional":true},
+    {"mode":"IMPORT_EXTERNAL_RESULT","sourceClass":"EXTERNAL_PROFILE_RESULT","optional":true},
+    {"mode":"CAREER_INTERESTS","sourceClass":"STANDARDIZED_SELF_REPORT","provider":"O_NET_WEB_SERVICES_V2","optional":true,"submodes":["MINI_30","SHORT_60"],"providerQuestionTextVerbatim":true,"serverSideCredentialOnly":true}
+  ],
+  "resultUx": {"sourceClassLegendRequired":true,"assessmentDateVisible":true,"oldResultWarningRequired":true,"provenanceVisibleOnDemand":true,"currentRealityComparisonOptional":true,"providerRawScoreVisible":true,"providerRawFitVisibleOnDemand":true,"careerExplorationLanguageRequired":true},
+  "boundaries": {"quotientLabelsAllowed":false,"diagnosticLanguageAllowed":false,"universalMasterScoreAllowed":false,"symbolicScientificValidationTransferAllowed":false,"compatibilityPercentageAllowed":false,"partnerMindReadingAllowed":false,"automaticPersistenceAllowed":false,"jobFitGuaranteeAllowed":false,"employmentDecisionAuthority":false},
+  "publication": {"route":"/perspectives/profile/","customerPublicationAllowed":true},
+  "gate": "check:profile:onet-live"
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-VAP-W10-HUMAN-APPROVAL-PRODUCTION-ARTICLE-PACKAGE-v1.0.0",
+  "work": "VAP-W10",
+  "implementationBaselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+  "batchCode": "VAP-ARTICLE-BATCH-001",
+  "locale": "zh-Hans",
+  "purpose": "Record independent TL Human Approval decisions for W9-accepted Candidates and, only for approve outcomes, create immutable Production Article Packages for governed publication handoff.",
+  "existingPjaRuntimeReuse": {
+    "humanApprovalRuntime": "scripts/lib/knowledge-production/human-approval-v1.mjs",
+    "articlePackageV2Contract": "scripts/lib/knowledge-production/article-package-v2.mjs",
+    "secondHumanApprovalRuntimeAllowed": false
+  },
+  "humanApprovalGate": {
+    "authority": "TL Human Approval Authority",
+    "eligibleHumanReviewDecision": "accept",
+    "allowedDecisions": ["approve", "decline", "defer"],
+    "oneIndependentDecisionPerNode": true,
+    "bulkEnvelopeIsNotBulkApprovalDecision": true
+  },
+  "productionArticlePackage": {
+    "createdOnlyForApprove": true,
+    "articleBodySource": "immutable W8 PJA Candidate article.bodyMarkdown",
+    "articleBodyMutationAllowed": false,
+    "candidateDigestBindingRequired": true,
+    "reviewDigestBindingRequired": true,
+    "approvalDigestBindingRequired": true,
+    "pjaR4eArticlePackageV2BindingRequired": true,
+    "packageIsPublication": false,
+    "publicProjectionAllowed": false,
+    "nextAuthority": "PJA Publication Runtime / governed publication handoff"
+  },
+  "prohibited": [
+    "fabricate_human_approval",
+    "treat_human_editorial_accept_as_human_approval",
+    "rewrite_candidate_body",
+    "modify_human_review",
+    "create_or_invent_canonical_claims",
+    "create_or_invent_sources",
+    "publish",
+    "mutate_publication_registry",
+    "project_public_content"
+  ]
+}

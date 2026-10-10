@@ -1,0 +1,18 @@
+import {w11r6RepairAudit,w11r6ReviewUrl} from './lib/w11r6-review-paths.mjs';
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+const root='tools/review/personal-evidence-r1/',out=(w11r6RepairAudit?w11r6RepairAudit+'legacy-w11r5/':null)||'content/profile/successors/personal-evidence-r1/'+(process.env.W11R6_AUDIT_REDIRECT==='true'?'w11r6/legacy-w11r5/':'w11r5/');
+fs.mkdirSync(out,{recursive:true});
+const only=process.argv.includes('--case=CASE-01'),ids=only?['CASE-01']:Array.from({length:11},(_,i)=>'CASE-'+String(i+1).padStart(2,'0'));
+const hub=fs.readFileSync('tools/review/PROFILE-PERSONAL-EVIDENCE-R1-HUMAN-REVIEW.html','utf8'),assets=JSON.parse(hub.match(/embeddedAssets=(.*?);\s*const displayAssets/s)[1]);
+const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});
+const page=await browser.newPage(),results=[];fs.mkdirSync('output/pdf',{recursive:true});
+try{for(const id of ids){let html=fs.readFileSync(root+id+'-bilingual-dossier.html','utf8');for(const [url,data]of Object.entries(assets))html=html.replaceAll(url,data);await page.setViewportSize({width:1100,height:900});await page.setContent(html);await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})))});assert(await page.evaluate(()=>[...document.images].every(i=>i.naturalWidth>0)),'missing static image');await page.emulateMedia({media:'print'});
+ const print=await page.evaluate(()=>[...document.querySelectorAll('.pe-body')].flatMap(p=>{const footer=p.querySelector('footer').getBoundingClientRect(),field=p.querySelector('.pe-reading-field').getBoundingClientRect();return field.bottom>footer.top+1?[{section:p.dataset.peSection,bottom:field.bottom,footer:footer.top}]:[]}));
+ const figures=await page.evaluate(()=>[...document.querySelectorAll('figure[data-pfig]')].map(f=>{const r=f.getBoundingClientRect(),p=f.closest('.pub-page').getBoundingClientRect();return {id:f.dataset.pfig,width:r.width,height:r.height,clipped:r.right>p.right||r.bottom>p.bottom,breakInside:getComputedStyle(f).breakInside}}));
+ if(print.length)console.log(id,'PRINT_OVERFLOW',JSON.stringify(print));assert.equal(print.length,0,id+' print overlap');assert(figures.every(f=>f.width>0&&f.height>0&&!f.clipped&&f.breakInside==='avoid'));
+ if(['CASE-01','CASE-08','CASE-09'].includes(id)&&!process.argv.includes('--no-pdf'))await page.pdf({path:'output/pdf/'+id+'-bilingual-dossier.pdf',format:'A4',printBackground:true,preferCSSPageSize:true});
+ if(id==='CASE-01')await page.locator('[data-pfig="PFIG-002"]').screenshot({path:out+'case-01-radar.png'});
+ await page.emulateMedia({media:'screen'});await page.setViewportSize({width:390,height:844});const mobile=await page.evaluate(()=>({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth,figures:[...document.querySelectorAll('figure[data-pfig]')].map(f=>({id:f.dataset.pfig,width:f.getBoundingClientRect().width,scroll:f.scrollWidth}))}));assert(mobile.scroll<=mobile.width+1,id+' mobile overflow');assert(mobile.figures.every(f=>f.scroll<=f.width+1));if(id==='CASE-01')await page.locator('[data-pfig="PFIG-002"]').screenshot({path:out+'case-01-radar-mobile.png'});results.push({id,print:'PASS',mobile:'PASS',figures});}
+ fs.writeFileSync(out+(only?'case-01-browser.json':'browser-results.json'),JSON.stringify({results,pass:true},null,2));console.log('Print and mobile PASS '+results.length+' cases');}finally{await browser.close();}

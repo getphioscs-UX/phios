@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/video-audio-script-candidate-v1.json",
+  "title": "video-audio-script-candidate-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "scriptCode",
+    "scriptVersion",
+    "assetType",
+    "briefCode",
+    "nodeCode",
+    "meaningReferences",
+    "knowledgeReferences",
+    "sourceFragmentDigests",
+    "locale",
+    "narrationStructure",
+    "sceneOrSegmentStructure",
+    "timingSeconds",
+    "visualOrAudioDirection",
+    "boundaryNotes",
+    "ctaPolicy",
+    "captionContract",
+    "candidateState",
+    "publicationAllowed",
+    "status"
+  ],
+  "properties": {
+    "scriptCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scriptVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "assetType": {
+      "enum": [
+        "VIDEO_SCRIPT",
+        "SHORT_VIDEO_SCRIPT",
+        "AUDIO_SCRIPT",
+        "PODCAST_SCRIPT"
+      ]
+    },
+    "briefCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nodeCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "meaningReferences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "knowledgeReferences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "sourceFragmentDigests": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "narrationStructure": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "sceneOrSegmentStructure": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "timingSeconds": {
+      "type": "integer",
+      "minimum": 15,
+      "maximum": 7200
+    },
+    "visualOrAudioDirection": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "boundaryNotes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "ctaPolicy": {
+      "enum": [
+        "none",
+        "continue_reading",
+        "book_service",
+        "academy_next"
+      ]
+    },
+    "captionContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required",
+        "locale",
+        "transcriptRequired"
+      ],
+      "properties": {
+        "required": {
+          "const": true
+        },
+        "locale": {
+          "enum": [
+            "en",
+            "zh-Hans"
+          ]
+        },
+        "transcriptRequired": {
+          "const": true
+        }
+      }
+    },
+    "candidateState": {
+      "const": "candidate"
+    },
+    "publicationAllowed": {
+      "const": false
+    },
+    "status": {
+      "const": "validation_only"
+    }
+  }
+}

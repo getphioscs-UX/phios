@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "PHI-OS-MOOMOO-FIRST-DATA-EXECUTION-GUIDE-v1.0.0",
+  "version": "1.2.0",
+  "status": "PKCE_HELPER_EXECUTABLE",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P1",
+  "steps": [
+    "Run npm run moomoo:pkce-live-import from C:\\\\phios.",
+    "If no MOOMOO_CLIENT_ID or local .moomoo-auth/client.json exists, the helper dynamically registers a public OAuth client with redirect http://localhost:60355/callback.",
+    "The helper generates a new cryptographic state, code_verifier and S256 code_challenge for the session.",
+    "Your browser opens Moomoo's official authorization page. Approve only the quote/read access needed for this research import.",
+    "The localhost callback validates state, exchanges the code for tokens in memory, and immediately passes the access token only to the governed HISTORY_KLINE child process.",
+    "Access token, refresh token, authorization code and code_verifier are never printed or persisted. Only non-secret client_id metadata may be cached under gitignored .moomoo-auth/.",
+    "After successful import run npm run build:runtime-position-48:w8a:p2 and the relevant checks."
+  ],
+  "stopConditions": [
+    "NO_VALID_AUTH",
+    "ENTITLEMENT_DENIED",
+    "RATE_LIMIT_OR_PROVIDER_ERROR",
+    "RESPONSE_SCHEMA_UNEXPECTED",
+    "SECRET_FOUND_IN_EXPORT"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "id": "phi-os.financial-schema-registry",
+  "version": "1.0.0",
+  "milestone": "M4A-W8",
+  "status": "schema-and-migration-ready",
+  "schemaId": "phi-os.financial-professional-schema.v1",
+  "authority": "db/schema/financial-professional-schema-v1.sql",
+  "migration": "db/migrations/0003_financial_professional_infrastructure.sql",
+  "binding": "RUNTIME_DB",
+  "tables": [
+    {"name": "client_household", "primaryKey": "household_id"},
+    {"name": "financial_objective", "primaryKey": "objective_id"},
+    {"name": "income_item", "primaryKey": "income_id"},
+    {"name": "expense_item", "primaryKey": "expense_id"},
+    {"name": "asset_item", "primaryKey": "asset_id"},
+    {"name": "liability_item", "primaryKey": "liability_id"},
+    {"name": "bank_account_summary", "primaryKey": "bank_summary_id"},
+    {"name": "investment_item", "primaryKey": "investment_id"},
+    {"name": "property_item", "primaryKey": "property_id"},
+    {"name": "insurance_policy", "primaryKey": "insurance_policy_id"},
+    {"name": "tax_profile", "primaryKey": "tax_profile_id"},
+    {"name": "retirement_plan", "primaryKey": "retirement_plan_id"},
+    {"name": "education_plan", "primaryKey": "education_plan_id"},
+    {"name": "estate_profile", "primaryKey": "estate_profile_id"},
+    {"name": "financial_ratio", "primaryKey": "ratio_id"},
+    {"name": "financial_risk", "primaryKey": "risk_id"},
+    {"name": "financial_recommendation", "primaryKey": "recommendation_id"},
+    {"name": "financial_action", "primaryKey": "action_id"},
+    {"name": "financial_review", "primaryKey": "review_id"}
+  ],
+  "storageRules": {
+    "monetaryAmountsUseIntegerMinorUnits": true,
+    "percentageOwnershipUsesBasisPoints": true,
+    "fullAccountNumberAllowed": false,
+    "fullPolicyNumberAllowed": false,
+    "identityNumberAllowed": false,
+    "taxNumberAllowed": false,
+    "exactAddressAllowed": false,
+    "rawDocumentContentAllowed": false,
+    "maskedReferencesRequired": true,
+    "evidenceMetadataRequired": true,
+    "foreignKeysEnabled": true
+  },
+  "implementationBoundary": {
+    "workspaceUiEnabled": false,
+    "financialIntakeEnabled": false,
+    "reportGenerationEnabled": false,
+    "automatedRecommendationEnabled": false,
+    "productSpecificAdviceEnabled": false
+  }
+}

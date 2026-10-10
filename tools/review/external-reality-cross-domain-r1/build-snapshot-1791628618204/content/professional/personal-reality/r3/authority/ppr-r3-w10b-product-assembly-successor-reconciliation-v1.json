@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-PPR-R3-W10B-PRODUCT-ASSEMBLY-SUCCESSOR-RECONCILIATION-v1.0.0",
+  "workCode": "PPR-R3-W10B",
+  "integrationBaselineCommit": "7c6126404fe8e257b44937a0149bf23c837c538f",
+  "status": "AUTHORIZED_CONCURRENT_SUCCESSOR_RECONCILIATION_IMPLEMENTED",
+  "goal": "Reconcile the admitted AST W10A targetContext transport with the current ECR Mandala product-assembly successor without rolling either capability back.",
+  "predecessors": [
+    "content/professional/personal-reality/r3/authority/ppr-r3-w10a-ast-target-context-shared-input-successor-v1.json",
+    "content/embodied-configuration/ecr-customer-mandala-authority-audit-v1.json"
+  ],
+  "reconciledFile": {
+    "path": "functions/personal-reality-product/product-assembly.js",
+    "currentMainSha256": "39f8707fd9b0d5a2bff0ad6255a07fb19f0206207ff1e353e2c8e9c945b3f252",
+    "w10aExpectedSha256": "175a8b4da37fa5c71f8ac136ae2d709c0b06babf149a1115b201285f060977e7",
+    "reconciledSha256": "b03404597db2cc00be7e305c67f95f50361f5aa7324f038326b8ec8544357d98",
+    "requiredAstTransport": [
+      "astTargetContext",
+      "consentRecordId",
+      "targetContext:astTargetContext"
+    ],
+    "requiredEcrMandala": [
+      "buildEcrCustomerMandalaProjection",
+      "mandalaProjection=buildEcrCustomerMandalaProjection",
+      "mandalaProjection",
+      "phiCardSpread"
+    ]
+  },
+  "boundaries": {
+    "createsAstMeaning": false,
+    "createsAstCalculation": false,
+    "createsAstProjection": false,
+    "createsEcrMeaning": false,
+    "createsEcrCalculation": false,
+    "replacesPprR3RendererAuthority": false,
+    "changesCanonicalRoute": false,
+    "changesOtherMethodSemantics": false,
+    "sharedSingleMethodReadingModified": false
+  },
+  "w17Verdict": "CANONICAL_TIMING_REACHABILITY_RESOLVED_AND_RETAINED",
+  "w18CanonicalCustomerActivation": "EXPLICIT_COMPLETE_AST_TARGET_CONTEXT"
+}

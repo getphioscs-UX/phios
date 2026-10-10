@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+import { pathToFileURL } from 'node:url';
+const text = path => fs.readFileSync(path, 'utf8').replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
+const read = path => JSON.parse(text(path));
+const sha256 = path => crypto.createHash('sha256').update(text(path), 'utf8').digest('hex');
+const digest = value => crypto.createHash('sha256').update(value, 'utf8').digest('hex');
+const count = (source, pattern) => [...source.matchAll(pattern)].length;
+const sceneMarkup = (source, code) => { const marker=source.indexOf(`data-hpc2-scene="${code}"`); assert.ok(marker>=0, `${code} missing`); const start=source.lastIndexOf('<section',marker); const end=source.indexOf('</section>',marker); assert.ok(start>=0&&end>marker, `${code} boundary missing`); return source.slice(start,end+'</section>'.length); };
+
+const paths={contract:'content/web/homepage/hpc2/contracts/hpc2-w10-continuity-final-cta-contract-v1.json',evidence:'content/web/homepage/hpc2/evidence/hpc2-w10-continuity-final-cta-audit-v1.json',acceptance:'content/web/homepage/hpc2/acceptance/hpc2-w10-continuity-final-cta-acceptance-v1.json',freeze:'content/web/homepage/hpc2/freeze/hpc2-w10-continuity-final-cta-freeze-v1.json',successor:'content/web-production/reconciliation/hpc2-w10-444e3f0-current-successor-v1.json',w9Freeze:'content/web/homepage/hpc2/freeze/hpc2-w9-academy-services-professional-freeze-v1.json',scenes:'content/web/homepage/hpc2/homepage-scene-registry-v2.json',publicAssets:'content/registry/public-assets.json',visual:'content/web-production/registries/client-visual-asset-registry-v1.2.json',index:'index.html',css:'assets/css/hpc2-pre-home-visuals.css',runtime:'assets/js/pages/home-production.js',en:'assets/js/locales/en/public.js',zh:'assets/js/locales/zh-Hans/public.js',pkg:'package.json'};
+for(const p of Object.values(paths)) assert.ok(fs.existsSync(p),`Missing W10 dependency: ${p}`);
+const c=read(paths.contract),e=read(paths.evidence),a=read(paths.acceptance),f=read(paths.freeze),s=read(paths.successor),w9=read(paths.w9Freeze),sc=read(paths.scenes),pa=read(paths.publicAssets),vr=read(paths.visual),pkg=read(paths.pkg),html=text(paths.index),css=text(paths.css),runtime=text(paths.runtime);
+assert.equal(c.baselineCommit,'444e3f0f3dc6b5453926f4336d0fea7c9c9194c2'); assert.equal(c.status,'H01_H09_PRODUCTION_COMPOSITION_ACTIVE_REPOSITORY_GATE');
+for(const artifact of f.immutableArtifacts) assert.equal(sha256(artifact.path),artifact.sha256,`W10 frozen artifact drift: ${artifact.path}`);
+for(const artifact of w9.immutableArtifacts) assert.equal(sha256(artifact.path),artifact.sha256,`W9 immutable drift: ${artifact.path}`);
+for(const code of ['H01','H02','H03','H04','H05','H06','H07','H08','H09']) assert.equal(count(html,new RegExp(`data-hpc2-scene="${code}"`,'g')),1,`${code} count drift`);
+for(const code of ['H01','H02','H03','H04','H05','H06','H07','H08']) assert.equal(digest(sceneMarkup(html,code)),w9.structuralFreeze[`${code.toLowerCase()}MarkupSha256`],`Frozen ${code} markup drift`);
+const h09=sceneMarkup(html,'H09'); assert.equal(digest(h09),f.structuralFreeze.h09MarkupSha256); assert.equal(count(h09,/data-hpc2-loop-stage=/g),6); assert.deepEqual([...h09.matchAll(/data-hpc2-loop-stage="([A-Z]+)"/g)].map(x=>x[1]),['UNDERSTAND','CHOOSE','ACT','OBSERVE','REVIEW','CONTINUE']);
+assert.equal(count(h09,/data-hpc2-final-action=/g),3); assert.match(h09,/START_WITH_MY_REALITY/); assert.match(h09,/href="#h05-first-interaction"/); assert.match(h09,/ASK_PHIOS/); assert.match(h09,/EXPLORE_REALITY_JOURNEY/); assert.match(h09,/TERTIARY_CONTEXTUAL_COMPLEX_ONLY/);
+assert.match(h09,/data-hpc2-figure="FIG-057"/); const p57=pa.assets.find(x=>x.asset_code==='FIG-057'),v57=vr.assets.find(x=>x.assetCode==='FIG-057'); assert.equal(p57.status,'remote-verified'); assert.equal(v57.r2.remoteVerified,true);
+assert.match(runtime,/renderAssetTarget\(continuityFigureRoot, 'FIG-057'/); assert.match(runtime,/H09_PRODUCTION_COMPOSED_CONTINUITY_FIGURE_RENDERED/); assert.doesNotMatch(runtime,/pub-1967bc5812ee4164b19a806fb1427021|\.r2\.dev/); assert.match(css,/\.hpc2-h09\s*\{/);
+const en=(await import(`${pathToFileURL(`${process.cwd()}/${paths.en}`).href}?w10`)).default, zh=(await import(`${pathToFileURL(`${process.cwd()}/${paths.zh}`).href}?w10`)).default; assert.equal(en.discover.continuityFinal.title1,'Reality will keep changing.'); assert.equal(en.discover.continuityFinal.title2,'Your understanding should be able to change with it.'); assert.ok(zh.discover.continuityFinal.title1.includes('Reality'));
+assert.equal(a.humanAcceptance.claimed,false); assert.equal(a.browserAcceptance.claimed,false); assert.equal(a.deploymentAcceptance.claimed,false); assert.equal(a.globalHomepageProductionAcceptance.claimed,false); assert.equal(s.transition.sceneAdded,'H09'); assert.equal(s.transition.frozenPredecessorMarkupChanged,false);
+assert.equal(pkg.scripts['check:hpc2-w10'],'node scripts/check-hpc2-w10.mjs'); assert.ok(pkg.scripts['check:hpc2'].includes('npm run check:hpc2-w10'));
+console.log('HPC2-W10 Continuity Final CTA: ACCEPTED (repository implementation)'); console.log('  H09: continuity endpoint + UNDERSTAND → CHOOSE → ACT → OBSERVE → REVIEW → CONTINUE + FIG-057'); console.log('  CTA: Start with my reality / Ask PHI OS / Reality Journey contextual complex-only'); console.log('  H01-H08 frozen markup preserved; Human/browser/deployment/global acceptance remain pending');

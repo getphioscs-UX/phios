@@ -1,0 +1,45 @@
+{
+  "contractCode": "PHI-OS-CANONICAL-MEANING-EXECUTION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "CM-W11",
+  "status": "frozen",
+  "productionStatus": "validation_only",
+  "chain": [
+    "Canonical Projection",
+    "Mapping Registry",
+    "Boundary Validation",
+    "Canonical Meaning Bundle"
+  ],
+  "inputs": {
+    "canonicalProjection": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+    "registries": [
+      "canonical-meaning-code-registry",
+      "canonical-meaning-family-registry",
+      "canonical-meaning-dimension-registry",
+      "canonical-meaning-knowledge-map",
+      "method-specific-versioned-mapping-registry"
+    ]
+  },
+  "invariants": {
+    "deterministic": true,
+    "registryLed": true,
+    "stableMeaningCodeRequired": true,
+    "stableJsonRequired": true,
+    "completeProjectionLineageRequired": true,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "interpretationAllowed": false,
+    "articleGenerationAllowed": false,
+    "professionalConclusionAllowed": false,
+    "realityDecisionAllowed": false
+  },
+  "failClosed": [
+    "projection_schema_invalid",
+    "mapping_not_found",
+    "target_meaning_not_registered",
+    "knowledge_authority_missing",
+    "mapping_boundary_invalid",
+    "production_mapping_forbidden"
+  ]
+}

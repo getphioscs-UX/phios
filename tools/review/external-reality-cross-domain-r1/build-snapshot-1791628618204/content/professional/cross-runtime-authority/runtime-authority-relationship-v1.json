@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "PHI-OS-RUNTIME-AUTHORITY-RELATIONSHIP-v1.0.0",
+  "phaseCode": "PHASE-0",
+  "stepCode": "STEP-0.1",
+  "relationshipCode": "RUNTIME_AUTHORITY_RELATIONSHIP",
+  "relationshipVersion": "1.0.0",
+  "status": "frozen",
+  "edges": [
+    {
+      "from": "INPUT_AUTHORITY",
+      "to": "METHOD_AUTHORITY",
+      "relationship": "supplies_governed_input",
+      "writeThroughAllowed": false
+    },
+    {
+      "from": "METHOD_AUTHORITY",
+      "to": "PROJECTION_AUTHORITY",
+      "relationship": "authorizes_calculation_and_projection",
+      "writeThroughAllowed": false
+    },
+    {
+      "from": "PROJECTION_AUTHORITY",
+      "to": "MEANING_AUTHORITY",
+      "relationship": "supplies_projection_reference",
+      "writeThroughAllowed": false
+    },
+    {
+      "from": "MEANING_AUTHORITY",
+      "to": "KNOWLEDGE_AUTHORITY",
+      "relationship": "references_knowledge_nodes",
+      "writeThroughAllowed": false
+    },
+    {
+      "from": "MEANING_AUTHORITY",
+      "to": "ASSET_AUTHORITY",
+      "relationship": "supplies_meaning_reference",
+      "writeThroughAllowed": false
+    },
+    {
+      "from": "KNOWLEDGE_AUTHORITY",
+      "to": "ASSET_AUTHORITY",
+      "relationship": "supplies_knowledge_reference",
+      "writeThroughAllowed": false
+    },
+    {
+      "from": "PROJECTION_AUTHORITY",
+      "to": "JOURNEY_AUTHORITY",
+      "relationship": "supplies_projection_context",
+      "writeThroughAllowed": false
+    },
+    {
+      "from": "MEANING_AUTHORITY",
+      "to": "JOURNEY_AUTHORITY",
+      "relationship": "supplies_meaning_context",
+      "writeThroughAllowed": false
+    },
+    {
+      "from": "KNOWLEDGE_AUTHORITY",
+      "to": "JOURNEY_AUTHORITY",
+      "relationship": "supplies_published_knowledge",
+      "writeThroughAllowed": false
+    },
+    {
+      "from": "JOURNEY_AUTHORITY",
+      "to": "PROFESSIONAL_AUTHORITY",
+      "relationship": "supplies_journey_lineage",
+      "writeThroughAllowed": false
+    },
+    {
+      "from": "PROFESSIONAL_AUTHORITY",
+      "to": "REPORT_AUTHORITY",
+      "relationship": "authorizes_released_deliverable",
+      "writeThroughAllowed": false
+    },
+    {
+      "from": "ASSET_AUTHORITY",
+      "to": "PRESENTATION_AUTHORITY",
+      "relationship": "supplies_asset_candidate",
+      "writeThroughAllowed": false
+    },
+    {
+      "from": "REPORT_AUTHORITY",
+      "to": "PRESENTATION_AUTHORITY",
+      "relationship": "supplies_report_content",
+      "writeThroughAllowed": false
+    },
+    {
+      "from": "PRESENTATION_AUTHORITY",
+      "to": "PUBLICATION_AUTHORITY",
+      "relationship": "supplies_presentation_projection",
+      "writeThroughAllowed": false
+    },
+    {
+      "from": "REPORT_AUTHORITY",
+      "to": "PUBLICATION_AUTHORITY",
+      "relationship": "supplies_released_report",
+      "writeThroughAllowed": false
+    },
+    {
+      "from": "ASSET_AUTHORITY",
+      "to": "PUBLICATION_AUTHORITY",
+      "relationship": "supplies_approved_asset",
+      "writeThroughAllowed": false
+    }
+  ],
+  "forbiddenRelationships": [
+    "Projection Authority writes Meaning Registry",
+    "Meaning Authority rewrites Knowledge Node",
+    "Asset Authority publishes without Publication Authority",
+    "Journey Authority creates Professional Decision",
+    "Report Authority creates Professional Signature",
+    "Publication Authority rewrites upstream objects"
+  ]
+}

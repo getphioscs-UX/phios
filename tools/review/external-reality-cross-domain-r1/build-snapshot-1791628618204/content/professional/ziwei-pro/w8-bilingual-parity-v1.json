@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "ZWR-PRO-W8-BILINGUAL-PARITY-CONTRACT-v1",
+  "work": "ZWR-PRO-W8",
+  "status": "IMPLEMENTED_MACHINE_GATE_PENDING",
+  "parityAuthority": "STRUCTURED_LINEAGE_NOT_LITERAL_TRANSLATION",
+  "checks": [
+    "SUBJECT_BINDING",
+    "SECTION_COMPLETENESS",
+    "CLAIM_PARITY",
+    "PALACE_PARITY",
+    "TRANSFORMATION_PARITY",
+    "PARAGRAPH_FUNCTION_PARITY",
+    "PARAGRAPH_COUNT_DRIFT"
+  ],
+  "thresholds": {
+    "claimParityMin": 0.75,
+    "palaceParityMin": 0.75,
+    "transformationParityMin": 0.67,
+    "paragraphFunctionParityMin": 0.6,
+    "maxParagraphCountDrift": "SECTION_REFERENCE_DERIVED"
+  },
+  "productionAdmissionGranted": false,
+  "paragraphCountParity": {
+    "mode": "SECTION_REFERENCE_DERIVED",
+    "rule": "Paragraph-count drift is layout/editorial parity, not semantic parity. Allowed drift is max(3, the accepted bilingual gold reference drift for the same section).",
+    "semanticParityStillControlledBy": [
+      "CLAIM_PARITY",
+      "PALACE_PARITY",
+      "TRANSFORMATION_PARITY",
+      "PARAGRAPH_FUNCTION_PARITY"
+    ],
+    "acceptedReferenceExamples": {
+      "S09": {
+        "zhHansParagraphs": 9,
+        "enParagraphs": 5,
+        "allowedDrift": 4
+      },
+      "S10": {
+        "zhHansParagraphs": 9,
+        "enParagraphs": 5,
+        "allowedDrift": 4
+      }
+    }
+  }
+}

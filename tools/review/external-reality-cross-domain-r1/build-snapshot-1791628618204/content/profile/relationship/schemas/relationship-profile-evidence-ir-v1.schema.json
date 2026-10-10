@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phi-os.profile.relationship-evidence.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "relationshipIntentId", "participants", "evidence", "governance", "semanticDigest"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-RELATIONSHIP-PROFILE-EVIDENCE-IR-v1"},
+    "relationshipIntentId": {"type": "string"},
+    "participants": {"type": "object", "required": ["A", "B"]},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["relationshipProfileEvidenceId", "relationshipIntentId", "ruleId", "comparisonClass", "topicId", "statement", "participants", "sourceClass", "providerFamily", "claimStrength", "governance", "semanticDigest"],
+        "properties": {
+          "relationshipProfileEvidenceId": {"type": "string", "pattern": "^PRF-REL-[A-F0-9]{24}$"},
+          "relationshipIntentId": {"type": "string"},
+          "ruleId": {"type": "string"},
+          "comparisonClass": {"enum": ["SIMILAR_SELF_REPORTED_TENDENCY", "DIFFERENT_SELF_REPORTED_TENDENCY", "COMPLEMENTARY_PATTERN", "POTENTIAL_FRICTION_TARGET", "COMMUNICATION_OBSERVATION_TARGET", "OPEN"]},
+          "topicId": {"type": "string"},
+          "statement": {"type": "string"},
+          "participants": {"type": "object"},
+          "sourceClass": {"type": "string"},
+          "providerFamily": {"type": ["string", "null"]},
+          "claimStrength": {"enum": ["OBSERVATION_TARGET", "OPEN"]},
+          "governance": {"type": "object"},
+          "semanticDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+        }
+      }
+    },
+    "governance": {"type": "object"},
+    "semanticDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

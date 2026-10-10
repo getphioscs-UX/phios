@@ -1,0 +1,208 @@
+{
+  "articleBoundary": {
+    "assumptions": [
+      "本节点使用 PHI OS Canonical vocabulary 解释一般机制；具体外部事实必须另行来源治理。"
+    ],
+    "boundaryVersion": "1.0.0",
+    "excludedScope": [
+      "不展开具体导航算法、测绘学、控制工程或定位设备原理。",
+      "不进入个人 Reading、诊断、预测或服务建议。"
+    ],
+    "includedScope": [
+      "方向、位置、参照系、坐标比较、状态更新与导航修正。"
+    ],
+    "mustEstablish": [
+      "导航同时依赖当前位置、变化方向与共同坐标参照。",
+      "坐标不是附加标签，而是让位置与方向可以重复比较的关系结构。",
+      "导航是持续比较与修正，而不是一次性的目标选择。"
+    ],
+    "mustNotClaim": [
+      "不得把 PHI OS 的坐标概念等同于 GPS、物理空间或任何单一技术坐标系统。",
+      "不得声称只要拥有坐标就能保证正确决策或确定未来。",
+      "不得从一般导航机制直接推断个人状态或给出专业建议。"
+    ],
+    "requiredDistinctions": [
+      "位置 ≠ 方向",
+      "坐标 ≠ 地理坐标的单一形式",
+      "导航 ≠ 预测未来",
+      "结构分辨率 ≠ 导航本身"
+    ],
+    "unresolvedQuestions": []
+  },
+  "canonicalIdentity": {
+    "blueprintStatus": "planned",
+    "canonicalQuestionKey": "direction-position-and-coordinates-form-navigation",
+    "localizedQuestion": "方向、位置与坐标如何共同形成导航",
+    "localizedTitle": "为什么导航需要方向、位置与坐标",
+    "nodeCode": "KN-B1-P1-006",
+    "registryStatus": "planned",
+    "slug": "direction-position-and-coordinates-form-navigation"
+  },
+  "canonicalThesis": {
+    "continuity": {
+      "fromPreviousNode": "承接 KN-B1-P1-005 对现实持续演化的说明，把“变化”转化为“可被定位与引导的变化”。",
+      "toNextNode": "进入 KN-B1-P1-007，说明坐标与结构的分辨率如何进一步限制导航精度。"
+    },
+    "mechanism": "位置描述当前状态相对于参照系的关系，方向描述预期变化的取向，坐标把位置与方向放入可重复比较的参考结构；导航通过持续比较当前位置、目标方向与坐标变化来修正行动。",
+    "necessity": "如果缺少位置，系统无法确认起点；缺少方向，无法判断变化是否趋近目标；缺少坐标，位置与方向无法稳定比较，导航就退化为局部反应而不是可连续修正的过程。",
+    "statement": "导航之所以需要方向、位置与坐标，是因为任何从当前状态走向另一状态的行动，都必须同时知道“现在在哪里”“朝哪里变化”以及“这些差异在什么共同参照中被比较”。",
+    "systemRole": "本节点把前序对现实演化的说明推进到可导航性：现实不仅会变化，还必须能够在参照结构中被定位、比较与重新定向。",
+    "thesisVersion": "1.0.0"
+  },
+  "claimBoundary": {
+    "allowedClaimTypes": [
+      "phi_os_interpretation",
+      "canonical_transition",
+      "boundary_statement",
+      "externally_verifiable"
+    ],
+    "analogyOnlyStatements": [],
+    "internalCanonicalClaims": [
+      "导航需要方向、位置与坐标共同成立。",
+      "坐标使状态差异能够被稳定比较。"
+    ],
+    "interpretiveClaims": [],
+    "prohibitedClaims": [
+      "坐标能够消除不确定性。",
+      "导航必然产生唯一正确路径。"
+    ],
+    "qualificationRequirements": [
+      "任何外部事实、数字、研究结论或专业案例必须与 PHI OS Canonical interpretation 分离并进入 Source/Claim review。"
+    ],
+    "requiredClaimFamilies": [
+      "Position as relational state",
+      "Direction as change orientation",
+      "Coordinate as repeatable reference",
+      "Navigation as iterative correction"
+    ],
+    "sourceRequiredClaims": [
+      "任何关于 GPS、神经导航、控制系统或物理坐标的具体事实与案例。"
+    ]
+  },
+  "contentVersions": {
+    "c2ContentHash": "sha256:db96ef69fbe652e7a6e6cfa9dda35d80961ba6abbba62c542fb7af3763e5d115",
+    "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-b1-p1-006-production-readiness.json",
+    "canonicalKnowledgeVersion": "1.0.0",
+    "humanDecisionReference": "content/production/visual-article/decisions/vap-w6a-batch-001-human-decisions-v1.json"
+  },
+  "figureBoundary": {
+    "accessibilityRequirements": [
+      "如后续由 CAR 生产 Figure，必须提供 zh-Hans alt text、caption 与非颜色唯一编码。"
+    ],
+    "assetCreationAllowedAtC2": false,
+    "assetSourceBoundary": [
+      "C2 不创建 Asset；任何 Figure 必须进入 CAR governed asset workflow。"
+    ],
+    "figureRequirement": "not_required_by_c2",
+    "optionalFigures": [
+      "可选概念图显示 Position → Coordinate Comparison → Direction → Update 的循环，但不得画成唯一正确路线。"
+    ],
+    "prohibitedVisualClaims": [
+      "不得让视觉图形扩大 Canonical Thesis 或把概念关系画成未经批准的确定性因果。"
+    ],
+    "requiredFigures": [],
+    "visualMechanism": "可选概念图显示 Position → Coordinate Comparison → Direction → Update 的循环，但不得画成唯一正确路线。"
+  },
+  "hierarchy": {
+    "bookCode": "BOOK-I",
+    "bookTitle": "现实如何形成",
+    "domainCode": null,
+    "nodeCode": "KN-B1-P1-006",
+    "nodeType": "mechanism_question",
+    "partCode": "P1",
+    "partTitle": "第一部｜现实物理学",
+    "themeCode": "TH-BOOK1-P1-01"
+  },
+  "locale": "zh-Hans",
+  "localizationReadiness": {
+    "articleBoundary": "production_ready",
+    "canonicalThesis": "production_ready",
+    "languageStatus": "production_ready",
+    "localizedQuestion": "方向、位置与坐标如何共同形成导航",
+    "localizedTitle": "为什么导航需要方向、位置与坐标",
+    "searchAliases": "production_ready",
+    "supportingQuestions": "production_ready",
+    "terminologyReview": "approved"
+  },
+  "nodeCode": "KN-B1-P1-006",
+  "productionReadiness": {
+    "blockingFindings": [],
+    "blockingReasons": [],
+    "blueprintMembership": "registered",
+    "exportability": "exportable",
+    "missingFields": [],
+    "productionPriority": "P0",
+    "readinessVersion": "1.0.0",
+    "registryStatus": "planned",
+    "status": "production_ready"
+  },
+  "publicContentBoundary": {
+    "developerBoundary": [],
+    "enterpriseBoundary": [],
+    "paidBookBoundary": [
+      "不得复制 Book I manuscript 的连续受限段落或用 Article 替代付费书内容。"
+    ],
+    "professionalServiceBoundary": [
+      "不得形成个别化诊断、预测、医疗、法律、投资或其他专业建议。"
+    ],
+    "publicKnowledgeBoundary": [
+      "允许公开解释本节点已冻结的一般 Canonical mechanism 与边界。"
+    ],
+    "runtimeJourneyBoundary": [
+      "不得从一般知识直接执行个人 Runtime Reading、推断或写入。"
+    ]
+  },
+  "readinessSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-READINESS-v1.0.0",
+  "recordType": "canonical_production_readiness",
+  "review": {
+    "blockingFindings": [],
+    "humanFrozen": true,
+    "reviewedAt": "2026-08-11T12:54:00+08:00",
+    "reviewedBy": "TL",
+    "status": "approved"
+  },
+  "sequenceBoundary": {
+    "bookContribution": "为第一册后续 Projection、Runtime 与 Reality Navigation 的可定位性建立基础。",
+    "currentNodeTransformation": "本节点把前序对现实演化的说明推进到可导航性：现实不仅会变化，还必须能够在参照结构中被定位、比较与重新定向。",
+    "nextNode": "KN-B1-P1-007",
+    "nextNodePreparation": "进入 KN-B1-P1-007，说明坐标与结构的分辨率如何进一步限制导航精度。",
+    "partContribution": "在现实物理学中建立 Navigation 所需的 Direction、Position 与 Coordinate 三个基础条件。",
+    "previousNode": "KN-B1-P1-005",
+    "previousNodeContribution": "承接 KN-B1-P1-005 对现实持续演化的说明，把“变化”转化为“可被定位与引导的变化”。",
+    "systemContribution": "Supports governed public Article production without transferring Canonical authority to the generated candidate."
+  },
+  "sourceBoundary": {
+    "citationSensitivity": "medium",
+    "internalCanonicalSources": [
+      "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P1-006"
+    ],
+    "knownSources": [],
+    "manuscriptCandidateRange": "KN-B1-P1-006-R01",
+    "manuscriptObjectKey": "books/book-1/source/PHI-OS-Book-I-v1.0.0.pdf",
+    "preferredSourceTypes": [
+      "primary research",
+      "official technical source",
+      "canonical PHI OS manuscript"
+    ],
+    "prohibitedSourceTypes": [
+      "fabricated citation",
+      "untraceable AI-generated source"
+    ],
+    "researchNeeded": [],
+    "sourcePlanVersion": "1.0.0",
+    "sourceRequirement": [
+      "仅使用 Human-approved Canonical Thesis、Boundary 与确认的 Book I manuscript range 作为内部生产依据。",
+      "若 Article 引入外部可验证事实，必须新增正式 Source mapping；Provider 不得自行伪造来源。"
+    ],
+    "verificationNeeded": []
+  },
+  "supportingQuestionBoundary": [],
+  "versionBinding": {
+    "articleSchemaVersion": "PHI-OS-KNOWLEDGE-ARTICLE-v2.0.0",
+    "blueprintVersion": "PHI-OS-BOOK-I-KNOWLEDGE-BLUEPRINT-v1.3.0",
+    "claimGovernanceVersion": "PJA-W2C-v1.0.0",
+    "editorialContractVersion": "PJA-W2A-v1.0.0",
+    "exporterVersion": "PJA-W2E-v1.0.0-Frozen",
+    "registryVersion": "2.0.0"
+  }
+}

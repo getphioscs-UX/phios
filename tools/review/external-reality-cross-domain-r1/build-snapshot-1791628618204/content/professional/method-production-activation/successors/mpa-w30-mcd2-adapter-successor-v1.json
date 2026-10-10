@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W30-MCD2-ADAPTER-SUCCESSOR-v1.0.0",
+  "work": "MPA-W30-SUCCESSOR-MCD-2",
+  "baselineCommit": "eb55edb1a183a173aca707e3d3f1a6f842e36271",
+  "status": "ACTIVE_VERSIONED_SUCCESSOR_AUTHORIZING_CANONICAL_API_ADAPTER_BINDING_ONLY",
+  "authorityOwner": "MPA",
+  "predecessor": {
+    "freezePath": "content/professional/method-production-activation/freeze/mpa-production-activation-freeze-v1.json",
+    "freezeSha256": "f12ded2642f6bd9c1d9931b218c40cce141ecaa9e2e7da7103b197179bf369ac",
+    "manifestPath": "content/professional/method-production-activation/freeze/mpa-w0-w29-content-preservation-manifest-v1.json",
+    "manifestSha256": "030761529e8106c786e009a992f29d1475b860497d46268626ec2eaf3f67ae02",
+    "predecessorMutated": false
+  },
+  "authorizedDrift": [
+    {
+      "path": "functions/api/method-execute.js",
+      "predecessorSha256": "7d581174fa6fc0a83d6a3a5af7050c354e70720ba4c8942f08ff29712d01be2b",
+      "successorSha256": "a19eca9e907b6da69eb63c35837597dad15a4726eedebfa572dd094e51478821",
+      "reason": "MCD-2 binds the canonical API to the MPA-owned MCD-1 successor gate and canonical Adapter Registry.",
+      "authorityExpansion": "NONE_BEYOND_MCD_1_MPA_SUCCESSOR"
+    }
+  ],
+  "preservedHistoricalState": {
+    "w26RegistryMutated": false,
+    "w27RegistryMutated": false,
+    "w30FreezeMutated": false,
+    "w0W29ManifestMutated": false,
+    "historicalEligibleProductionExecutionCount": 0,
+    "mcd1SuccessorAuthoritySeparate": true,
+    "astBzrNumDispatchAuthoritySource": "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+    "hdrState": "BLOCKED",
+    "hdrProductionInvocationAllowed": false
+  },
+  "currentSuccessorSemantics": {
+    "apiAdapterBindingActive": true,
+    "astBzrNumMpaGateEligibleFor": [
+      "CALCULATION",
+      "PROJECTION"
+    ],
+    "rawClientPayloadCoreExecutionAllowed": false,
+    "canonicalInputRequiredAt": "MCD-3",
+    "customerCalculationActivationAt": "MCD-4",
+    "hdrValidationRegistrationAllowed": true,
+    "hdrProductionInvocationAllowed": false
+  }
+}

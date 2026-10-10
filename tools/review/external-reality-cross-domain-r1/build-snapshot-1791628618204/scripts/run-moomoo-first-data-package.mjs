@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {buildFirstMoomooPackage,providerSnapshotToW8aSource,buildProviderClaimWorkOrders} from './lib/civilization-atlas/moomoo-first-data-package-v1.mjs';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const read=rel=>JSON.parse(fs.readFileSync(path.join(root,rel),'utf8'));
+const write=(rel,v)=>fs.writeFileSync(path.join(root,rel),JSON.stringify(v,null,2)+'\n');
+const plan=read('content/civilization-atlas/reconfiguration/moomoo-first-data-request-plan-v1.json');
+const snapshots=read('content/civilization-atlas/reconfiguration/market-provider-snapshots-v1.json');
+const liveState=read('content/civilization-atlas/reconfiguration/moomoo-first-live-import-state-v1.json');
+const built=buildFirstMoomooPackage({plan,snapshots,liveState});
+const sourceRows=built.snapRows.map(providerSnapshotToW8aSource);
+const claimWorkOrders=buildProviderClaimWorkOrders(sourceRows);
+write('content/civilization-atlas/reconfiguration/market-provider-w8a-source-handoff-v1.json',{schemaVersion:'PHI-OS-MARKET-PROVIDER-W8A-SOURCE-HANDOFF-v1.0.0',version:'1.0.0',status:sourceRows.length?'PROVIDER_SOURCE_CANDIDATES_READY':'IDLE_NO_PROVIDER_SNAPSHOTS',work:'PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P1',records:sourceRows,boundary:'Provider snapshot source candidate ≠ claim ≠ CWA evidence. Handoff records only make normalized provider snapshots available to governed W8A/W8B production.'});
+write('content/civilization-atlas/reconfiguration/moomoo-provider-claim-work-orders-v1.json',{schemaVersion:'PHI-OS-MOOMOO-PROVIDER-CLAIM-WORK-ORDERS-v1.0.0',version:'1.0.0',status:claimWorkOrders.length?'ACTIVE_PROVIDER_CLAIM_WORK':'IDLE_NO_PROVIDER_SOURCE_CANDIDATES',work:'PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P1',records:claimWorkOrders,boundary:'Work order ≠ claim. Claims must cite API_RESPONSE_FIELD or PROVIDER_SERIES_WINDOW and remain NOT_EVALUATED_BY_CWA until W8C.'});
+write('content/civilization-atlas/reconfiguration/moomoo-first-data-package-status-v1.json',{schemaVersion:'PHI-OS-MOOMOO-FIRST-DATA-PACKAGE-STATUS-v1.0.0',version:'1.0.0',status:built.fullPackageComplete?'FULL_PACKAGE_SNAPSHOTS_COMPLETE':built.firstLiveBackboneComplete?'FIRST_LIVE_BACKBONE_COMPLETE__ENRICHMENT_PENDING':built.snapRows.length?'PARTIAL_LIVE_PACKAGE':'PACKAGE_READY__NO_LIVE_SNAPSHOTS',work:'PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P1',providerId:'MOOMOO_OPENAPI',requestFamilies:built.requestFamilies,completion:{firstLiveBackboneRequired:['HISTORY_KLINE'],fullPackageRequired:['HISTORY_KLINE','CAPITAL_FLOW','VALUATION','FINANCIAL_STATEMENTS'],firstLiveBackboneComplete:built.firstLiveBackboneComplete,fullPackageComplete:built.fullPackageComplete,normalizedSnapshots:built.snapRows.length,w8aSourceCandidates:sourceRows.length,providerClaimWorkOrders:claimWorkOrders.length,providerClaims:0,cwaEvidence:0,w8ePromotions:0},next:built.snapRows.length?'Review provider source candidates and create bounded provider claims; do not auto-promote W8E.':'Run the PKCE live import for HISTORY_KLINE, then rebuild this package.'});
+console.log('PASS first Moomoo data package build: snapshots='+built.snapRows.length+', W8A-sources='+sourceRows.length+', W8B-work-orders='+claimWorkOrders.length+', first-live-complete='+built.firstLiveBackboneComplete+', full-package='+built.fullPackageComplete+'.');

@@ -1,0 +1,79 @@
+{
+  "contractCode": "PHI-OS-CANONICAL-MEANING-CODE-v1.0.0",
+  "work": "CM-W3",
+  "version": "1.0.0",
+  "productionStatus": "validation_only",
+  "authority": {
+    "meaningCodeAuthority": "canonical_meaning_code_registry",
+    "meaningIdentityAuthority": "meaning_identity_runtime",
+    "familyAuthority": "canonical_meaning_family_registry",
+    "meaningDimensionAuthority": "reserved_for_cm_w4",
+    "knowledgeAuthority": "external_read_only",
+    "methodMappingAuthority": "reserved_for_cm_w6"
+  },
+  "identityRules": {
+    "meaningIdStableAcrossVersions": true,
+    "meaningCodeStableWithinIdentity": true,
+    "meaningVersionRequired": true,
+    "meaningIdentityContractRequired": true,
+    "hardDeleteAllowed": false
+  },
+  "populationRules": {
+    "phiosDefinitionRequired": true,
+    "phiosBoundaryRequired": true,
+    "knowledgeAuthorityRequired": true,
+    "sourceMethodLabelMayNotBeCopiedAsDefinition": true,
+    "familyRegistrationAloneDoesNotAuthorizePopulation": true,
+    "namespaceReservationDoesNotCreateMeaning": true,
+    "fabricatedPlaceholderDefinitionsForbidden": true
+  },
+  "reservedNamespaces": [
+    {
+      "namespaceCode": "CM-FORMATION-SDU",
+      "familyCode": "FORMATION_UNIT",
+      "reservedCapacity": 64
+    },
+    {
+      "namespaceCode": "CM-CONNECTION-SCU",
+      "familyCode": "STRUCTURAL_CONNECTION",
+      "reservedCapacity": 36
+    },
+    {
+      "namespaceCode": "CM-RESOURCE-CENTER",
+      "familyCode": "RESOURCE_CENTER",
+      "reservedCapacity": 9
+    },
+    {
+      "namespaceCode": "CM-PROCESSING-NETWORK",
+      "familyCode": "PROCESSING_NETWORK",
+      "reservedCapacity": 5
+    },
+    {
+      "namespaceCode": "CM-DIRECTION-DRIVER",
+      "familyCode": "DIRECTION_DRIVER",
+      "reservedCapacity": 12
+    },
+    {
+      "namespaceCode": "CM-QUESTION-ORIENTATION",
+      "familyCode": "QUESTION_ORIENTATION",
+      "reservedCapacity": 16
+    },
+    {
+      "namespaceCode": "CM-CAPABILITY",
+      "familyCode": "CAPABILITY_PATTERN",
+      "reservedCapacity": 9
+    }
+  ],
+  "invariants": {
+    "registryLed": true,
+    "deterministic": true,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "meaningDimensionRegistryCreated": false,
+    "methodMappingCreated": false,
+    "productionAuthorityCreated": false,
+    "khW4G6SemanticRuntimeFreezeUnchanged": true,
+    "methodRuntimeFreezesUnchanged": true
+  }
+}

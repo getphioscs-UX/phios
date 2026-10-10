@@ -1,0 +1,34 @@
+{
+  "contractCode": "PHI-OS-RRE-W1-REALITY-INPUT-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "RRE-W1",
+  "runtimeCode": "RRE",
+  "status": "validation_only",
+  "schemaReference": "content/runtime/reality-readout-engine/schemas/reality-readout-input-v1.schema.json",
+  "requiredInputs": [
+    "realityReference",
+    "observationReferences",
+    "evidenceReferences",
+    "methodProjectionReferences",
+    "meaningReferences",
+    "knowledgeReferences",
+    "previousRealityReference",
+    "timeReference",
+    "dataQuality"
+  ],
+  "allowedDataQuality": [
+    "VERIFIED",
+    "PARTIAL",
+    "CONFLICTING",
+    "LOW",
+    "UNKNOWN"
+  ],
+  "rules": {
+    "rdgGovernedReferencesOnly": true,
+    "rawArbitraryDataAccepted": false,
+    "payloadCopyAccepted": false,
+    "referenceOnlyCrossAuthorityConsumption": true,
+    "missingPreviousRealityAllowed": true,
+    "productionPersistenceActivated": false
+  }
+}

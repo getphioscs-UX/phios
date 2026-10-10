@@ -1,0 +1,1695 @@
+PHI OS · LIVE CUSTOMER EXPERIENCE + COMMERCIAL CONVERGENCE
+唯一完整执行 Master Work Step
+执行对象：
+- getphioscs-UX/phios
+- getphios.com
+- 当前真实 main
+- 当前 Cloudflare / R2 / D1 / Workers / Pages / Stripe QA / Account / Report / Method Runtime
+执行原则：
+这不是建立第二套 PHI OS。
+目标是：
+把已经存在的知识、Method、Report、Commerce、Account、Reality、Professional 与 AI 能力收缩成一条真正能够被客户理解、购买、持续使用并产生收入的闭环。
+
+当前工作不以“又完成多少内部 registry / checker / campaign”为成功标准。
+最终标准只有：
+真实客户能找到入口 → 得到有价值结果 → 愿意解锁 → 获得正确权益 → 可以追问 → 可以保存 → 可以回来继续 → 必要时进入真人服务。
+
+0｜本文件是唯一执行 authority
+从现在开始，Codex 不再分别执行任何所谓：
+- Recovery R1；
+- Commercial R2；
+- Academy R2；
+- My Reality successor；
+- Tarot successor；
+- Book VIII successor；
+这些旧文件可以保留在 repo 作为历史证据，但：
+不得再成为并行执行 authority。
+建立：
+content/production-closure/live-customer-commercial-convergence/
+
+如果 repo 已存在同职责目录则复用，不建立第二个平行 owner。
+必须生成：
+MASTER-WORK-STATE.json
+MASTER-DECISION-REGISTRY.json
+MASTER-ISSUE-EVIDENCE-MATRIX.json
+MASTER-CONSUMER-MAP.json
+MASTER-COMMERCE-MAP.json
+MASTER-PROVIDER-COST-LEDGER.json
+MASTER-BLOCKERS.json
+MASTER-HUMAN-REVIEW.html
+FINAL-CHANGE-SUMMARY.md
+
+1｜最终产品结构先冻结
+PHI OS 的客户结构不再围绕内部 runtime 分类组织。
+最终客户产品树：
+PHI OS
+│
+├── DISCOVER
+│   ├── Books I–VII
+│   ├── Free Method Readings
+│   ├── Free Academy Videos
+│   ├── Free Tarot
+│   ├── Free I Ching Base Experience
+│   └── Articles / Figures / Knowledge
+│
+├── UNDERSTAND
+│   ├── Paid Method Reports
+│   ├── Profile
+│   ├── Relationship / Cross
+│   ├── Financial
+│   ├── Paid Tarot
+│   ├── Paid I Ching personalised layer
+│   └── Academy Paid Videos
+│
+├── CONTINUE
+│   └── My Reality
+│       ├── Reports
+│       ├── Readings
+│       ├── Questions
+│       ├── Answers
+│       ├── Current Reality
+│       ├── Financial Reality
+│       └── History
+│
+├── MEMBERSHIP
+│   └── RM19/month
+│       └── Continued contextual questioning
+│
+└── PROFESSIONAL
+    ├── Cash Flow Game
+    ├── Financial Planning / Consultation
+    ├── Healing
+    └── Appointments
+
+2｜首页不再以 Ask PHIOS 作为核心商业入口
+当前 Ask 的问题已经不是单纯文案问题。
+附件调查已经指出：
+- 会泛化成要求客户重新说明主题；
+- 某些 Book context 被人为截短；
+- supporting 被清空；
+- 后台已有深度没有进入客户答案。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+因此：
+Ask PHIOS 从“产品入口”降级为“上下文问答能力”。
+首页主问题改为类似：
+你现在想了解什么？
+
+下面进入实际产品任务：
+了解自己
+了解一段关系
+了解当前阶段
+查看我的财务现实
+抽一组塔罗
+起一卦
+学习一种方法
+阅读 PHI OS
+
+不得首先要求普通客户理解：
+- Readout；
+- Navigation；
+- Reality Runtime；
+- Authority；
+- Evidence class；
+- Internal stage；
+- Governance。
+这些继续存在于后台。
+3｜Ask PHIOS 保留，但变成 Contextual Ask
+保留：
+/knowledge/ask/
+
+作为公共知识问答。
+但是所有真正有商业价值的问答，都应该嵌在已有 object 下：
+Ask about this report
+Ask about this Tarot reading
+Ask about this I Ching reading
+Ask about this chapter
+Ask about my financial reality
+Ask about my current reality
+
+核心原则：
+Context before Question.
+
+不能再让系统先收到一句孤立问题，然后猜客户究竟在问：
+- 自己；
+- 报告；
+- Book；
+- 财务；
+- Tarot；
+- I Ching；
+- 当前现实；
+- 方法知识。
+4｜修复 Ask 底层，不只是换入口
+必须继续修：
+customer-contextual-ask.js
+ask-phios-orchestrated.js
+Ask2
+knowledge-answer-composition
+customer projection
+context retrieval
+report context
+current facts
+
+必须消除：
+- 非 Book V 特殊截两句；
+- generic clarification 过早触发；
+- 明明有 selected source 却不回答；
+- supporting 被无理由清空；
+- 前一次模型推断变成下一次事实；
+- 无来源时硬补答案；
+- 报告 context 与 Knowledge context 混淆。
+第一段必须直接回应问题。
+5｜Personal 不再显示五层内部式结果
+Personal 继续采用附件已经确定的方向：
+默认直接进入各 Method 已接受的原生免费报告。
+附件对此已经有明确执行要求。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+删除客户层：
+总览
+结构
+当前情境
+模式
+细节
+
+这种人为五层组织。
+改为：
+Method
+↓
+Native Free Reading
+↓
+Unlock Full Report
+
+多 Method：
+Astrology
+[free report]
+
+BaZi
+[free report]
+
+Zi Wei
+[free report]
+
+不要强行产生跨 Method 人格总结。
+6｜所有正式 Method Report 的闭环
+标准闭环：
+FREE READING
+↓
+UNLOCK FULL REPORT
+↓
+PURCHASE
+↓
+REPORT GENERATION / ACCEPTED COPY
+↓
+ACCOUNT DELIVERY
+↓
+4 INCLUDED QUESTIONS
+↓
+SAVE TO MY REALITY
+↓
+MEMBERSHIP FOR CONTINUATION
+
+必须分开：
+purchase
+entitlement
+report generation
+report publication
+download
+question entitlement
+
+Payment Success 页面本身不得授予权限。
+7｜每份购买报告包含 4 个问题
+所有正式已购买且已经生成成功的 Report：
+includedFollowUpQuestions = 4
+
+服务器保存：
+userId
+personId
+reportId
+reportVersion
+methodId
+entitlementId
+questionsGranted = 4
+questionsUsed
+questionsRemaining
+
+不能由：
+localStorage
+query string
+client counter
+
+决定。
+8｜Report Follow-up 必须绑定该报告
+不能让：
+Ask about this report
+
+最后又退回通用 Ask。
+请求必须包含可信：
+contextType = REPORT
+contextId = reportId
+reportVersion
+personId
+methodId
+
+然后：
+Relevant Report Sections
++
+Accepted Method Context
++
+Optional Current Reality
++
+Question
+↓
+Answer
+
+不得重新胡乱生成一份命盘解释。
+9｜四问使用完以后
+客户仍拥有：
+REPORT READ = YES
+REPORT DOWNLOAD = YES（若原权益允许）
+PAST QUESTIONS = YES
+PAST ANSWERS = YES
+MY REALITY HISTORY = YES
+NEW QUESTIONS = NO
+
+UI：
+这份报告包含的 4 个追问已经使用完毕。
+你的报告与过去问答会继续保留。
+如希望继续针对自己的资料提问，可启用 My Reality Membership。
+
+10｜RM19/month Membership 的真正用途
+复用当前已经存在：
+COM-SUBSCRIPTION-MONTHLY
+MYR 19
+PHIOS_MEMBERSHIP
+
+不再另外建立第二个订阅产品。
+Membership 权益冻结为：
+ONGOING_CONTEXTUAL_QUESTIONS
+MY_REALITY_CONTINUITY
+REPORT_CONTEXT_REUSE
+READING_CONTEXT_REUSE
+CURRENT_REALITY_CONTEXT
+QUESTION_HISTORY
+ANSWER_HISTORY
+
+Membership 不包括：
+无限生成新报告
+无限重新计算命盘
+自动免费 Academy paid video
+自动免费 Professional Service
+自动免费 Book
+
+11｜Membership 可以面向客户称 Unlimited Questions
+客户文案可以写：
+Unlimited follow-up questions while your membership is active.
+
+但后台必须有 fair-use protection：
+server rate limit
+1 active generation at a time
+concurrency guard
+context token limit
+output token limit
+daily anomaly detection
+provider spend ceiling
+retry ceiling
+abuse protection
+
+普通客户不需要看到“每天 X 次”。
+12｜取消 Membership 不删除数据
+取消后：
+New Ask = disabled
+History = retained
+Reports = retained
+Readings = retained
+Academy purchases = retained
+Questions = retained
+Answers = retained
+Reality History = retained
+
+数据删除必须继续由：
+Privacy
+Retention
+Explicit User Deletion
+
+单独控制。
+重新订阅以后：
+必须恢复同一个 My Reality。
+不得产生第二个 profile。
+13｜My Reality 成为真正长期产品中心
+当前附件已经确认 My Reality 仍然只是临时投影，readout/navigation/journey/report 并未真正闭合成长期可信状态。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+因此本次必须补齐。
+最终：
+My Reality
+│
+├── My Reports
+├── My Readings
+├── My Questions
+├── My Answers
+├── Current Reality
+├── Financial Reality
+├── Relationships
+├── Timeline
+└── Saved Context
+
+14｜My Reality 不作为新访客强制入口
+Anonymous 新客户：
+不需要先注册 Reality。
+先：
+Free reading
+Tarot
+I Ching
+Article
+Book
+Academy
+
+只要形成第一个有价值 object：
+显示：
+Save to My Reality
+
+例如：
+- report；
+- reading；
+- profile；
+- financial inventory；
+- current reality object。
+15｜My Reality History 必须保存来源类别
+任何内容不得全部混成“事实”。
+至少区分：
+USER_REPORTED
+DIRECTLY_OBSERVED
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+SYSTEM_INFERENCE
+CURRENT_EXTERNAL_EVIDENCE
+OBSERVED_OUTCOME
+PROFESSIONAL_INPUT
+
+例如：
+八字报告：
+REPORT_INTERPRETATION
+
+不能自动变成：
+OBSERVED_FACT
+
+Tarot 更不能变成现实证据。
+16｜Reality History 必须版本化
+不是一个聊天 transcript 就叫 Reality History。
+至少允许：
+Reality State v1
+↓
+new report
+↓
+question
+↓
+new event
+↓
+Reality State v2
+↓
+outcome
+↓
+Reality State v3
+
+旧状态不覆盖。
+17｜Book VIII 不再出售
+Book VIII 继续是规范：
+第八册《世界将如何继续》
+
+但商业状态永久变成：
+PRIVATE_OPERATING_VOLUME
+NOT_FOR_PUBLIC_SALE
+NO_PUBLIC_FULLTEXT
+NO_PUBLIC_DOWNLOAD
+
+不得：
+- 创建新的公开 Book VIII SKU；
+- 对客户开放完整 Book VIII PDF；
+- 公开全部内部 doctrine；
+- 把它显示成 “Coming Soon”。
+18｜Book VIII 不是“没完成”，而是改变产品身份
+当前 repo manifest 还是：
+content_status = architecture-only
+publication_version = null
+
+而附件也指出 runtime 存在不能反过来证明 Book VIII 全文已经出版。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+现在建立新的合法状态：
+PRIVATE_DOCTRINE_IN_DEVELOPMENT
+PRIVATE_DOCTRINE_READY
+
+与：
+PUBLICATION_NOT_OFFERED
+
+分开。
+19｜停止把 Book VIII 当 80 节公开出版任务
+已经写出的：
+15.1–15.22
+
+全部保留。
+标记为：
+PRIVATE_DOCTRINE_SOURCE_MATERIAL
+
+后面：
+15.23–15.80
+
+不再要求逐章全部写成正式出版长文才可以结束项目。
+20｜Book VIII 改建为 Private Canonical Doctrine
+建立约 20–30 个模块。
+建议 canonical semantics：
+NAV-01 Decision Object
+NAV-02 Current Position
+NAV-03 Closed vs Open Conditions
+NAV-04 Time
+NAV-05 Inaction
+NAV-06 Reversibility
+NAV-07 Time Horizon
+NAV-08 Navigation Authority
+
+NAV-09 Change Threshold
+NAV-10 Response Level
+NAV-11 Continuation Qualification
+NAV-12 Maintenance Cost
+NAV-13 Default Direction Loss
+NAV-14 Cross-Domain Propagation
+NAV-15 Capacity Constraint
+NAV-16 Diminishing Return
+NAV-17 Structural Alternative
+NAV-18 Waiting Cost
+
+NAV-19 Value Preservation
+NAV-20 Goal vs Value
+NAV-21 Non-Exchangeable Condition
+NAV-22 Minimum Acceptable State
+
+NAV-23 Scenario Space
+NAV-24 Baseline / Upside / Downside
+NAV-25 Exit / Recovery Route
+
+NAV-26 Decision Sufficiency
+NAV-27 Impact / Reversibility Threshold
+NAV-28 Shared Authority
+NAV-29 Action Runtime
+NAV-30 Outcome → Continuation
+
+21｜每个 NAV module 至少包含
+moduleId
+canonicalTitle
+canonicalQuestion
+definition
+navigationMeaning
+requiredInputs
+allowedInference
+forbiddenInference
+authorityBoundary
+sourceSections
+relatedBookFoundations
+runtimeConsumer
+academyConsumer
+version
+status
+
+禁止 runtime 从视频 transcript 反向建立 authority。
+顺序必须：
+Private Doctrine
+↓
+Runtime Contract
+↓
+Academy Projection
+
+22｜Book VIII 的市场定位
+公开页面可以写：
+第八册并不对外出售。到了这里，它已经不再只是一本书，而是 PHI OS 如何从理解现实进入下一步的运行层。
+
+并引导：
+Book III
+Book IV
+Book VII
+
+因为：
+Book III → continuity / recovery / capacity
+Book IV → expansion / constraint / scale
+Book VII → observation / evidence / uncertainty
+
+不要声称：
+“拿到 Book VIII 就能轻易复制整个 PHI OS。”
+
+应该写成：
+它是 PHI OS 的内部运行 doctrine，而不是普通出版商品。
+
+23｜Book VIII FIG 15A–15I 保留
+赋予：
+PRIVATE_DOCTRINE
+ACADEMY_TEACHING
+MARKETING_PREVIEW
+
+三类消费权。
+公开营销只允许：
+- preview；
+- crop；
+- lower-resolution composition；
+- 视频局部。
+不要默认开放全部高清内部图。
+24｜Books I–VII 继续正常出售
+保持：
+Book I
+Book II
+Book III
+Book IV
+Book V
+Book VI
+Book VII
+
+不得因为 Book VIII private 化而重新编号现有 historic product IDs。
+附件已经明确指出历史 Commerce Book ID 不能简单按 volume number 重编。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+建立：
+BOOK-COMMERCE-IDENTITY-MAP.json
+
+25｜Academy 不再建设庞大 LMS
+当前 Academy 已经有：
+- learning paths；
+- modules；
+- lessons；
+- learning objectives；
+- teaching explanations；
+- examples；
+- practice 类型；
+但真正 learner delivery 尚未闭合。附件已明确指出当前 Academy 只能展示已批准大纲，不能假装课程系统已经完成。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+所以第一阶段：
+Academy = Video Learning Store
+暂时不建设：
+certificate
+qualification
+professional credential
+complex assessment
+cohort
+teacher messaging
+large LMS
+exam system
+
+26｜每一个实际开放 Method 固定三种视频
+VIDEO 1｜免费
+目的：
+DISCOVERY
+
+主题：
+这个方法究竟在读什么？
+
+例如：
+八字到底在看什么？
+紫微斗数到底在看什么？
+占星到底在看什么？
+
+免费。
+27｜VIDEO 2｜付费 Self Read
+主题：
+一个视频让你轻松读懂自己的［Method］命盘
+
+目的：
+SELF_READING
+
+不是培训专业人士。
+建议价格：
+MYR 129
+
+与用户希望表达的约 USD29 档位对应。
+Commerce canonical 第一阶段继续使用 MYR。
+28｜VIDEO 3｜付费 Reality Practice
+主题：
+5 个真实／受控命盘：怎样把方法解读带回现实
+
+价格：
+MYR 129
+
+每个案例必须包含：
+Chart
+Reading
+Interpretation
+Claim Boundary
+Reality
+Alignment
+Mismatch
+Unknown
+Revision
+
+这部分尤其应吸收 Book VII 与 private Book VIII 的原则。
+29｜Academy SKU
+实际拥有真实视频以后才建立：
+COM-ACADEMY-{METHOD}-SELF-READ
+COM-ACADEMY-{METHOD}-REALITY-PRACTICE
+
+例如：
+COM-ACADEMY-BZR-SELF-READ
+COM-ACADEMY-BZR-REALITY-PRACTICE
+
+Video 1 免费，不建立 RM0 Stripe checkout。
+30｜Academy Purchase = 永久视频权限
+购买以后：
+ONE_TIME
+VIDEO_ACCESS
+
+取消 Membership 不影响。
+Account 增加：
+My Learning
+
+状态：
+FREE
+OWNED
+LOCKED
+
+31｜Paid Video 不得靠前端隐藏
+禁止：
+full video public URL
++
+CSS hidden
+
+需要真实 entitlement。
+视频不要直接塞进 Pages build。
+调查当前 R2/media/CDN strategy。
+建立：
+assetId
+objectKey
+duration
+locale
+version
+poster
+accessPolicy
+commerceProductId
+
+32｜Tarot 产品最终定位
+Tarot 不跟 Report 同价。
+最终：
+FREE TAROT
++
+RM9 PERSONALIZED TAROT
+
+RM9 的主要目的：
+覆盖 AI personalized synthesis 成本，而不是追求高毛利。
+
+33｜Free Tarot 必须完全零模型成本
+Free Tarot：
+shuffle
+draw
+spread
+card
+orientation
+position
+basic accepted meaning
+basic composition
+
+必须：
+providerCalls = 0
+OpenAI = 0
+
+当前 runtime 已经能够做到模型不参与选牌和基础 interpretation，因此不得为了付费模式把 free 路径重新变成 provider dependency。
+34｜先修 Tarot 真正交互
+附件已经指出 Tarot 当前主要客户失败包含强制等待、后台切换、牌状态与完整 E2E 问题。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+必须完成：
+shuffle
+reshuffle
+select
+double click protection
+touch protection
+physical card uniqueness
+orientation
+spread slot
+background / foreground
+retry
+restart
+
+不得再有强制约 120 秒等待。
+35｜Paid Tarot = RM9
+建立或复用等价商品：
+COM-READING-TAROT-FULL
+
+canonical：
+category = SYMBOLIC_READING
+billingType = ONE_TIME
+currency = MYR
+amountMinor = 900
+entitlement = TAROT_FULL_READING
+fulfillment = READING_ACCESS
+
+36｜Paid Tarot 才调用 OpenAI
+Paid flow：
+Question
+↓
+Validated Tarot Draw
+↓
+Cards / Orientation / Position
+↓
+Accepted Tarot Corpus
+↓
+Optional Consented Reality Context
+↓
+OpenAI Personalised Synthesis
+↓
+Customer Reading
+
+37｜AI 永远不能选择 Tarot 结构
+严格禁止 provider：
+select card
+replace card
+change orientation
+change spread
+invent card
+invent position
+invent authority source
+
+结构 owner 永远：
+PHI OS deterministic runtime
+
+AI 只负责：
+composition
+contextualisation
+language synthesis
+
+38｜Tarot AI Boundary
+禁止：
+确定预测未来
+推断第三方隐藏心理
+医学诊断
+法律判断
+专业投资指令
+替客户做决定
+
+39｜Tarot 每一次付费最多 1 个主要 Provider Call
+默认：
+providerCallLimit = 1
+automaticRetry = 0
+
+不得：
+fallback call
+second polishing call
+silent rewrite call
+
+除非未来单位经济证明允许且另行批准。
+40｜Tarot Provider Failure 不得重新收费
+需要状态：
+PAYMENT_CONFIRMED
+SYNTHESIS_PENDING
+SYNTHESIS_COMPLETE
+DELIVERY_COMPLETE
+SYNTHESIS_FAILED
+
+若客户已经付款：
+provider failure 后：
+不重新购买。
+
+继续使用同一 entitlement / readingId 恢复。
+41｜Paid Tarot 不默认送四个问题
+因为 RM9 主要只用于 cover AI cost。
+因此：
+includedFollowUps = 0
+
+Membership 客户可以继续问。
+未来成本允许再重新讨论。
+42｜Paid Tarot 保存到 My Reality
+保存：
+readingId
+question
+spread
+cards
+orientation
+positions
+deterministicBase
+personalisedSynthesis
+readingVersion
+createdAt
+
+进入：
+My Reality > Readings
+
+43｜I Ching 保留确定性核心
+附件已经确认 I Ching runtime / cast / transformation / save / reading 能力存在，真正需要提升的是客户解读。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+Free I Ching：
+casting
+yin/yang
+changing lines
+primary hexagram
+transformed hexagram
+accepted corpus
+basic reading
+
+必须：
+providerCalls = 0
+
+44｜I Ching OpenAI 只允许做 Personalized Synthesis
+与 Tarot 同原则：
+STRUCTURE = deterministic
+SOURCE = accepted corpus
+SYNTHESIS = AI
+DECISION = user
+
+不能由 AI：
+- 改卦；
+- 改动爻；
+- 改之卦；
+- 发明爻辞；
+- 发明传统来源。
+45｜I Ching 商品价格不在本次擅自修改
+用户之前已经提出 I Ching 也可以走付费路径，但本轮最新明确价格只冻结：
+Tarot = RM9
+
+因此：
+I Ching Paid Personalised Synthesis
+PRICE = OWNER_DECISION_PENDING
+
+技术层、成本层、QA 可完成。
+不得 Codex 自己决定价格。
+46｜Provider Cost 必须建立统一总账
+过去不同产品不能各写自己的 cost log。
+建立：
+PROVIDER-COST-LEDGER
+
+覆盖：
+Report
+Tarot
+I Ching
+My Reality Ask
+future generative capabilities
+
+每条至少：
+requestId
+productClass
+productId
+contextId
+model
+inputTokens
+cachedTokens
+outputTokens
+providerRequests
+retryCount
+providerCostUSD
+providerCostMYR
+retailPriceMYR
+paymentCostEstimate
+grossMarginEstimate
+createdAt
+
+敏感 prompt 不写进公开 ledger。
+47｜Tarot RM9 必须做单位经济测试
+生产开放前：
+至少运行：
+20 controlled Tarot paid-synthesis cases
+
+记录：
+p50 cost
+p90 cost
+p95 cost
+maximum cost
+average input
+average output
+failure rate
+average latency
+
+输出：
+TAROT-RM9-UNIT-ECONOMICS.html
+
+判断：
+RM9
+- OpenAI
+- payment processing
+- infra allowance
+
+是否至少可接受。
+不要自行编税率。
+48｜正式客户 Provider 成本不得依赖自动重试
+一个请求错误：
+允许客户主动 retry。
+但 backend 不得 silently：
+call model again
+call another model
+rewrite again
+
+49｜AI Model 只由服务器配置
+UI 不显示：
+gpt-5.x
+tokens
+fallback chain
+provider retry
+
+客户只需要知道：
+AI-assisted personalised interpretation
+
+并有必要 AI disclosure。
+50｜Commerce 只新增明确批准的新商品
+允许：
+Academy Video
+Tarot RM9
+
+不得顺手新增：
+new report
+new membership tier
+new service
+Book VIII product
+random I Ching price
+
+51｜Commerce 继续 server authority
+当前附件已明确当前 Commerce 仍以 QA/test-only 为主，生产 checkout 不应只因为 catalog active 就自动开放。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+继续：
+catalog
+order
+Stripe session
+webhook
+entitlement
+fulfilment
+
+独立。
+52｜Stripe Metadata 不放原始敏感资料
+Tarot Checkout：
+只传：
+readingId
+
+不要传：
+question text
+personal data
+cards JSON
+reality context
+
+支付完成后 server 按 readingId 读取。
+53｜Professional Appointments 必须保留
+附件已经明确：
+Cash Flow Game、Financial Consultation、Healing 都是现有服务，Appointment 不能因为当前没完整 slot 就删除。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+必须支持：
+request
+pending
+confirmed
+reschedule
+cancel
+completed
+
+Payment 不等于 confirmed。
+54｜无真实 slot 时允许 Appointment Request
+显示：
+预约申请已提交，等待确认。
+
+绝不伪造：
+Appointment Confirmed.
+
+55｜Financial 保持独立可信 authority
+继续修复：
+EXACT
+APPROXIMATE
+RANGE
+UNKNOWN
+
+尤其附件指出当前客户 projection 会把 range 错转成 null。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+不得为了 My Reality 接入就把 UNKNOWN 转 0。
+56｜Moomoo / Current Authority 不等于投资建议
+已有：
+official/provider evidence
+RRE
+accepted positions
+
+只有真正 accepted 的 position 才可进入客户结果。
+Moomoo 数据数量不能直接投票产生投资建议。
+57｜Will 保持 Draft 与 Legal Instrument 分开
+客户资料：
+draft
+intent
+asset information
+beneficiary
+executor
+guardian
+
+不等于：
+legally executed will
+
+Professional Will service 也不等于系统自动产生有效法律文书。
+58｜Profile 继续只有一个双语版本
+不要创建：
+Profile Chinese SKU
+Profile English SKU
+
+保持：
+one bilingual Profile
+
+PFIG 继续使用已批准版本，不重新生成。
+59｜Relationship 与 Cross 接入统一闭环
+Relationship 必须真正进入：
+purpose
+participant A
+participant B
+consent
+available methods
+relationship reading
+paid report
+4 questions
+My Reality
+
+不能：
+?intent=relationship
+
+最后仍给单人结果。
+60｜Human Design 保持外部图确认机制
+不得因为 external chart 需要确认，就把整个 HD 简化成“背景资料”。
+流程：
+upload/input
+↓
+extract
+↓
+customer confirm
+↓
+canonical chart object
+↓
+admitted interpretation
+
+61｜World Snapshot 15 图必须全部恢复
+附件已确认 15 张 WORLD_SNAPSHOT_ATMOSPHERE 已有 accepted R2 binding，不能因为旧 registry 写 PLANNED 就退回无图状态。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+逐图验证：
+registry
+R2
+URL
+HTTP
+MIME
+bytes
+digest
+decode
+template
+deep view
+mobile
+language
+
+62｜Book I Figures 必须继续接最新 accepted 版本
+不得：
+- fallback 到旧版；
+- 因 hash check 不一致生成新图；
+- 简化成卡片；
+- 只验证 HTTP 200。
+需要验证图形结构。
+63｜Book VII 状态必须准确
+区分：
+WRITING_COMPLETE
+HUMAN_ACCEPTED
+PUBLICATION_READY
+DEPLOYED
+LIVE_VERIFIED
+
+不能再用：
+100 node identities
+
+冒充：
+100 chapter full publication
+
+附件对此已明确。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+64｜内部 Human Review 页面不得再公开
+附件调查发现大量：
+/content/**/review/*.html
+candidate
+benchmark
+acceptance
+
+仍被 Pages 发布。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+建立 explicit public allowlist / exclusion policy。
+不能误删 runtime 必须消费的 JSON。
+65｜Logo / Mobile / Diagram 问题必须继续完成
+统一：
+- approved dark/light logo；
+- 移动菜单；
+- Safe Area；
+- 320 / 360 / 390 / 430；
+- 768；
+- desktop；
+- diagram overflow；
+- 图中文字重叠；
+- bilingual wrap；
+- touch target；
+- footer；
+- Account；
+- Books；
+- Academy；
+- Tarot。
+不能用：
+overflow:hidden
+
+把错误藏掉。
+66｜Homepage Promise 必须和真实能力一致
+不能再宣传：
+保存历史
+自动持续导航
+当前市场实时能力
+无限 Ask
+课程认证
+
+除非真实 runtime 已闭合。
+67｜公开页面禁止内部语言
+例如：
+Authority Pack
+W8-I
+Canonical Projection
+Production Gate
+Human Decision Receipt
+Accepted Candidate Registry
+Full Production Admission
+
+不得出现在客户主文。
+这些可以留 developer evidence。
+68｜38 个现有业务域一个都不能因为商业收缩而漏掉
+至少重新对账：
+Home
+Knowledge
+Books
+Search
+Ask
+Book I
+Book II
+Book III
+Book IV
+Book V
+Book VI
+Book VII
+Book VIII
+Academy
+Academic
+Profile
+Personal
+AST
+BZR
+NUM
+ZWR
+ECR
+HD
+I Ching
+Tarot
+Relationship
+Cross
+Current Reality
+My Reality
+Financial
+Moomoo
+Will
+Professional
+Appointments
+Reports
+Account
+Commerce
+Health
+Research/About
+
+69｜不再硬编码“414 HTML”作为永恒事实
+附件中的 414 HTML 是当时 main 的调查基线。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+本次：
+必须重新从 current main 枚举：
+tracked HTML
+redirect routes
+dynamic routes
+API routes
+Workers
+consumer entry points
+
+历史 414 只作比较。
+70｜同样不把旧 API 文件数当永久断言
+重新枚举：
+functions/api/**
+Workers
+server-side APIs
+dynamic route handlers
+
+逐项映射：
+producer
+consumer
+auth
+cost
+entitlement
+deployment
+
+71｜SOURCE / DEPLOYED / LIVE 三门继续强制
+每一项：
+SOURCE PASS
+DEPLOYED PASS
+LIVE CUSTOMER PASS
+
+分别记录。
+附件定义的三门逻辑继续完整保留。   PHIOS-LIVE-CUSTOMER-EXPERIENCE-…
+不能：
+local PASS
+=
+production complete
+
+72｜执行主阶段
+统一只使用这一套编号。
+W00｜环境与工作树
+确认：
+git status --short
+git branch --show-current
+git rev-parse HEAD
+git ls-remote origin refs/heads/main
+
+保护用户本地修改。
+禁止：
+reset --hard
+force checkout
+automatic push
+
+W01｜建立唯一 Master Ledger
+创建／复用：
+MASTER-WORK-STATE
+MASTER-DECISION-REGISTRY
+MASTER-ISSUE-EVIDENCE-MATRIX
+MASTER-CONSUMER-MAP
+MASTER-BLOCKERS
+
+W02｜全站 Route / API / Consumer 重建
+重新枚举当前 main。
+建立：
+route
+source
+consumer
+owner
+public/private
+commerce
+auth
+cost
+status
+
+W03｜Accepted Content / Asset Freeze
+锁住：
+BaZi
+Zi Wei
+AST
+NUM
+HD
+ECR
+Profile
+Books
+Figures
+World Images
+
+禁止 silent fallback。
+W04｜Pages Publication Boundary
+移除公开内部：
+review
+candidate
+benchmark
+archive review
+evidence UI
+
+保留必要 JSON runtime projection。
+W05｜Homepage / Navigation 重构
+首页改成真实任务入口。
+Ask 降级。
+Signed-in user 显示：
+Continue in My Reality
+
+W06｜Personal Free Native Report
+移除五层结果。
+接原生 free renderer。
+W07｜Report Commerce / Entitlement
+保证：
+free
+unlock
+checkout
+webhook
+entitlement
+generation
+delivery
+
+真实分开。
+W08｜Report 4 Questions
+完成 server quota。
+W09｜Membership RM19
+完成持续 Ask 权益。
+W10｜My Reality Persistence
+完成：
+Reports
+Readings
+Questions
+Answers
+History
+Current Reality
+
+W11｜Contextual Ask
+接：
+Report
+Book
+Tarot
+I Ching
+Financial
+My Reality
+
+W12｜Public Knowledge Ask Repair
+修 relevance、truncation、supporting、context。
+W13｜Book VIII Private Doctrine
+完成：
+private state
+commerce exclusion
+public messaging
+NAV registry
+
+W14｜Book VIII Runtime Mapping
+建立：
+NAV → Runtime
+NAV → Academy
+
+不得公开 doctrine fulltext。
+W15｜Academy Content Model
+Method × 3 Video architecture。
+W16｜Academy Media Delivery
+处理：
+video assets
+protected paid playback
+free playback
+My Learning
+
+W17｜Academy Commerce
+仅真实已有视频开放购买。
+W18｜Tarot Interaction Repair
+真正完成洗牌、抽牌、状态与 mobile E2E。
+W19｜Tarot Free Runtime
+证明：
+providerCalls = 0
+
+W20｜Tarot RM9 Commerce
+接：
+readingId
+checkout
+webhook
+entitlement
+
+W21｜Tarot AI Synthesis
+受控单 call personalized synthesis。
+W22｜Tarot Unit Economics
+运行 20 controlled cases。
+生产收费前人工 review。
+W23｜I Ching Experience
+完成：
+cast
+transform
+reading
+question linkage
+customer language
+
+W24｜I Ching Personalised AI Candidate
+构建技术层和成本证据。
+不自行决定价格。
+W25｜Account
+统一：
+My Reality
+My Reports
+My Readings
+My Learning
+My Services
+Membership
+
+W26｜Appointments
+三类现有服务完整 request / confirmed / reschedule / cancel。
+W27｜Financial / Will
+修 range / unknown / draft / legal boundary。
+W28｜Relationship / Cross
+真正双人/多方法入口与 consent。
+W29｜Profile / Academic
+保留一个 bilingual Profile。
+Academy 与 Academic assessment 不混合。
+W30｜Books / Figures
+Book I–VII / Book VIII private 状态统一。
+W31｜World / Atlas / Book VI / Moomoo
+把 accepted current dossier 和 accepted visual 接到消费者。
+W32｜Mobile / Branding / UX
+完整视觉闭合。
+W33｜Commerce 总对账
+逐商品：
+product
+price
+currency
+entitlement
+delivery
+productionSaleAllowed
+
+W34｜Provider Cost Ledger
+Reports / Tarot / I Ching / Ask 共用。
+W35｜Security / Permission
+测试：
+URL tampering
+localStorage
+cross account
+readingId
+reportId
+video entitlement
+cancelled membership
+expired membership
+
+W36｜Targeted Regression
+只跑与当前改动相关检查。
+不能为了通过而：
+delete assert
+catch error and exit 0
+change frozen digest
+auto accept
+
+W37｜Pages Build
+继续：
+npm run build:pages
+npm run check:pages-build
+
+检查：
+25 MiB
+internal HTML exclusion
+imports
+runtime assets
+
+W38｜QA Customer Journeys
+至少跑：
+Journey A
+Free BaZi
+→ Paid Report
+→ Report Delivery
+→ Ask 4 Questions
+→ Membership
+→ My Reality
+
+Journey B
+Free Tarot
+→ RM9
+→ AI Synthesis
+→ Save My Reality
+
+Journey C
+Academy Free Video
+→ Paid Video
+→ Account My Learning
+
+Journey D
+Financial
+→ Human Service
+→ Appointment Request
+
+Journey E
+Book
+→ contextual Ask
+→ related Book
+
+W39｜Human Review
+生成唯一：
+MASTER-HUMAN-REVIEW.html
+
+W40｜Production Release
+没有明确批准：
+NOT RUN
+
+批准以后才：
+- deploy；
+- migration；
+- live Stripe；
+- real provider；
+- real customer QA。
+73｜Provider Cost 特别检查
+必须新增真实检查，而不是字符串 checker：
+Free Tarot = 0 provider
+Free I Ching = 0 provider
+Accepted report = existing approved cost contract
+Paid Tarot = max 1 provider
+Automatic Retry = 0
+
+74｜Tarot RM9 最终 Production Gate
+以下全部成立才能 LIVE：
+interaction PASS
+free deterministic PASS
+RM9 Stripe PASS
+entitlement PASS
+1-call AI PASS
+cost ledger PASS
+p95 acceptable
+failure recovery PASS
+mobile PASS
+history save PASS
+cross-account denial PASS
+
+75｜Academy 最终 Gate
+每个 Method 独立：
+Video 1 exists
+Video 2 exists
+Video 3 exists
+assets load
+paid access protected
+commerce correct
+account replay works
+mobile works
+
+缺视频：
+NOT_READY
+
+不能显示假购买按钮。
+76｜Book VIII 最终 Gate
+必须证明：
+canonical identity retained
+public sale disabled
+public fulltext disabled
+private doctrine exists
+public page correct
+Book III/IV/VII links correct
+runtime projection consumes bounded doctrine
+
+77｜My Reality 最终 Gate
+必须真实证明：
+save
+reload
+logout
+login
+reopen
+history preserved
+cancel membership
+read history
+ask blocked
+resubscribe
+ask restored
+
+78｜Report 4 Questions Gate
+测试：
+0/4
+1/4
+2/4
+3/4
+4/4
+5th denied
+localStorage tamper denied
+URL tamper denied
+cross report isolated
+cross account denied
+membership override allowed
+
+79｜必须保留的安全启动命令
+Set-Location -LiteralPath 'C:\phios'
+
+git status --short
+git branch --show-current
+git rev-parse HEAD
+git remote -v
+git ls-remote origin refs/heads/main
+
+$pkg = Get-Content '.\package.json' -Raw -Encoding UTF8 | ConvertFrom-Json
+$pkg.scripts.PSObject.Properties | Select-Object Name, Value
+
+Get-Content '.\scripts\run-zero-cost-regression.mjs' -Encoding UTF8
+Get-Content '.\scripts\build-cloudflare-pages.mjs' -Encoding UTF8
+
+不要自动：
+git push
+wrangler deploy
+production migration
+
+80｜已存在检查继续复用
+在真实 script 仍存在且范围适合时：
+npm run check:report-provider-spend-protection
+npm run check:cloudflare-function-import-compat
+
+npm run check:iching-calculation
+npm run check:iching-transformation
+npm run check:iching-customer-reading-experience
+
+npm run check:tarot-deck
+npm run check:tarot-live-browser-acceptance
+
+npm run check:financial-runtime-product
+npm run check:m4b-appointment-payment
+
+npm run check:shared-report-e2e:readiness
+
+npm run build:pages
+npm run check:pages-build
+
+如果 script 不存在：
+不得假称 PASS。
+81｜新 checker 只有创建后才能加入 package.json
+建议最终存在：
+check:book-viii-private
+check:academy-video-delivery
+check:academy-paid-entitlement
+check:report-followup-quota
+check:membership-reality-continuity
+check:my-reality-persistence
+check:contextual-ask
+check:tarot-free-zero-provider
+check:tarot-rm9-commerce
+check:tarot-ai-boundary
+check:provider-cost-ledger
+check:internal-html-publication-boundary
+
+82｜禁止事项
+整个工作期间禁止：
+1. 为了修网站重新生成所有 accepted Report；
+2. 重画已经接受的 figures；
+3. 自动重新 ACCEPT；
+4. 自动 push；
+5. 自动 production deploy；
+6. 自动生产 DB migration；
+7. 自动创建 live Stripe 商品；
+8. 自动真实收费；
+9. 未经允许批量 OpenAI 调用；
+10. 把 fixture 当 Live Customer PASS；
+11. 把 HTTP 200 当 UX PASS；
+12. 把存在代码当 production-ready；
+13. 把 Book VIII private 化理解成删除 Book VIII；
+14. 把 Membership 理解成无限报告生成；
+15. 把 Tarot AI 变成抽牌 authority；
+16. 把 symbolic interpretation 变成现实事实。
+83｜MASTER-HUMAN-REVIEW 必须一次看完
+最终一个 HTML 里面包含：
+01 Homepage before / after
+02 Personal free report
+03 Paid report flow
+04 Four follow-up questions
+05 Membership
+06 My Reality
+07 Ask
+08 Book VIII private
+09 Academy
+10 Tarot free
+11 Tarot RM9
+12 Tarot AI cost
+13 I Ching
+14 Appointment
+15 Financial
+16 Will
+17 Profile
+18 Relationship
+19 Books
+20 Figures
+21 World Snapshot
+22 Book VI current
+23 Account
+24 Commerce
+25 Mobile
+26 Security
+27 Provider spend
+28 SOURCE / DEPLOYED / LIVE
+29 Remaining blockers
+
+用户不需要再打开十几个 review 页面拼证据。
+84｜最终成功后的 PHI OS 客户闭环
+最后真正应该呈现为：
+CUSTOMER DISCOVERS
+        ↓
+FREE VALUE
+        ↓
+PAID DEPTH
+        ↓
+CONTEXTUAL QUESTION
+        ↓
+MY REALITY
+        ↓
+CONTINUED RELATIONSHIP
+        ↓
+RM19 MEMBERSHIP
+        ↓
+HUMAN HELP WHEN NECESSARY
+        ↓
+NEW REALITY
+        ↓
+CONTINUE
+
+这才是平台，而不是一堆彼此孤立的功能。

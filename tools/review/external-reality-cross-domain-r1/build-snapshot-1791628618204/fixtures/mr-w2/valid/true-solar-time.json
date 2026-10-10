@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-SHARED-DATA-RECORD-v1.0.0",
+  "recordId": "SDA-TRUE-SOLAR-0001",
+  "recordType": "TRUE_SOLAR_TIME",
+  "authority": "SHARED_DATA_AUTHORITY",
+  "authorityVersion": "1.0.0",
+  "recordVersion": "1.0.0",
+  "status": "verified",
+  "methodOwner": null,
+  "pluginOwner": null,
+  "sourceClass": "deterministic_derivation",
+  "provenance": {
+    "sourceType": "deterministic_engine",
+    "sourceId": "MR-W2-CONTRACT-FIXTURE",
+    "sourceVersion": "1.0.0",
+    "capturedAt": "2026-08-04T00:00:00Z",
+    "verificationStatus": "contract_fixture",
+    "licenseStatus": "not_required"
+  },
+  "normalization": {
+    "normalizedBy": "SHARED_DATA_AUTHORITY",
+    "normalizationVersion": "1.0.0",
+    "normalizedAt": "2026-08-04T00:00:00Z"
+  },
+  "lineage": {
+    "inputRecordIds": [
+      "SDA-BIRTH-0001",
+      "SDA-COORD-0001",
+      "SDA-TIMEZONE-0001",
+      "SDA-DST-0001"
+    ],
+    "algorithmCode": "TRUE_SOLAR_TIME_CONTRACT",
+    "algorithmVersion": "1.0.0",
+    "providerCode": null,
+    "deterministic": true,
+    "aiUsed": false
+  },
+  "payload": {
+    "inputLocalDateTime": "1990-01-15T10:30:00+08:00",
+    "longitudeDegrees": 101.6869,
+    "zoneMeridianDegrees": 120,
+    "equationOfTimeMinutes": -9.3,
+    "longitudeCorrectionMinutes": -73.2524,
+    "trueSolarDateTime": "1990-01-15T09:07:26+08:00",
+    "timeScale": "LOCAL_APPARENT_SOLAR_TIME",
+    "formulaPolicy": "EQUATION_OF_TIME_PLUS_LONGITUDE_CORRECTION"
+  }
+}

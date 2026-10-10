@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-KAU-R5-DOWNSTREAM-SUCCESSOR-GATE-v1.0.0",
+  "stage": "KAU-R5",
+  "status": "CANONICAL_SUCCESSOR_ACTIVE_DOWNSTREAM_RECONCILIATION_REQUIRED",
+  "canonicalAuthority": {
+    "nodeCount": 718,
+    "nodesSha256": "ac9f1eab7cf2534d0853dc656d1a6265d56d8afbdc879f3aff592ce5437c6ade"
+  },
+  "blueprintProjection": {
+    "totalNodes": 718,
+    "byBook": {
+      "BOOK-1": 65,
+      "BOOK-2": 182,
+      "BOOK-3": 86,
+      "BOOK-4": 187,
+      "BOOK-5": 198
+    },
+    "freezeRegistryManifestSha256": "21403346128ffa184e5ad961b4083c8f95f60b132e22c4100dd9894cfee93a03"
+  },
+  "downstreamPolicy": {
+    "historicalEvidenceRewriteAllowed": false,
+    "existingPJAArticleCARVAPAuthorityAutoInvalidated": false,
+    "newNodesAutoProductionActivated": false,
+    "deprecatedNodesMayEnterNewProduction": false,
+    "rehomePendingNodesMayEnterNewP7Production": false,
+    "successorAwareCheckersRequired": true
+  },
+  "gates": {
+    "BOOK-W1B": "P8-P15 outline reconciliation remains required",
+    "BOOK-W1D": "physical P10/P11 rehome application remains required",
+    "PJA/KPP/CAR/VAP": "successor lineage reconciliation required before new canonical mutations are treated as production authority",
+    "WPR": "production deployment remains governed by its own successor reconciliation"
+  }
+}

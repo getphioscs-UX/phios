@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/rmo/canonical-reality-v1.schema.json",
+  "title": "PHI OS Canonical Reality v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "realityCode",
+    "realityVersion",
+    "realityVersionSequence",
+    "dataDomain",
+    "dataType",
+    "realityStatus",
+    "subjectReference",
+    "sourceInitialization",
+    "governanceReferences",
+    "componentReferences",
+    "authorityBoundary",
+    "operationalMode",
+    "persistentStoreWriteAllowed",
+    "productionExecutionAllowed",
+    "createdAt",
+    "updatedAt",
+    "lineage",
+    "realityDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CANONICAL-REALITY-v1.0.0"},
+    "realityCode": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+    "realityVersion": {"$ref": "#/$defs/semver"},
+    "realityVersionSequence": {"type": "integer", "minimum": 1},
+    "dataDomain": {"const": "RUNTIME_STATE"},
+    "dataType": {"const": "RUNTIME_STATE_RECORD"},
+    "realityStatus": {"const": "INITIALIZED"},
+    "subjectReference": {"type": "string", "minLength": 1, "maxLength": 200},
+    "sourceInitialization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "initializationRequestCode",
+        "initializationRequestVersion",
+        "initializationRequestDigest",
+        "sourceCaseCode",
+        "sourceCaseVersion",
+        "sourceCaseDigest",
+        "verifiedInputReferences"
+      ],
+      "properties": {
+        "initializationRequestCode": {"type": "string", "pattern": "^ICR-RMO-INIT-[A-Z0-9-]{4,100}$"},
+        "initializationRequestVersion": {"$ref": "#/$defs/semver"},
+        "initializationRequestDigest": {"$ref": "#/$defs/digest"},
+        "sourceCaseCode": {"type": "string", "pattern": "^ICR-CASE-[A-Z0-9-]{4,100}$"},
+        "sourceCaseVersion": {"$ref": "#/$defs/semver"},
+        "sourceCaseDigest": {"$ref": "#/$defs/digest"},
+        "verifiedInputReferences": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/verifiedInputReference"}
+        }
+      }
+    },
+    "governanceReferences": {"$ref": "#/$defs/rdgLifecycleReferences"},
+    "componentReferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entities",
+        "events",
+        "signals",
+        "relationships",
+        "constraints",
+        "evidenceBindings",
+        "unknowns",
+        "actions",
+        "outcomes"
+      ],
+      "properties": {
+        "entities": {"$ref": "#/$defs/referenceArray"},
+        "events": {"$ref": "#/$defs/referenceArray"},
+        "signals": {"$ref": "#/$defs/referenceArray"},
+        "relationships": {"$ref": "#/$defs/referenceArray"},
+        "constraints": {"$ref": "#/$defs/referenceArray"},
+        "evidenceBindings": {"$ref": "#/$defs/referenceArray"},
+        "unknowns": {"$ref": "#/$defs/referenceArray"},
+        "actions": {"$ref": "#/$defs/referenceArray"},
+        "outcomes": {"$ref": "#/$defs/referenceArray"}
+      }
+    },
+    "authorityBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["inputAuthority", "realityModelAuthority", "dataGovernanceAuthority", "operationalRuntimeAuthority"],
+      "properties": {
+        "inputAuthority": {"const": "ICR"},
+        "realityModelAuthority": {"const": "RMO"},
+        "dataGovernanceAuthority": {"const": "RDG"},
+        "operationalRuntimeAuthority": {"const": "EXISTING_RUNTIME"}
+      }
+    },
+    "operationalMode": {"const": "VALIDATION_ONLY"},
+    "persistentStoreWriteAllowed": {"const": false},
+    "productionExecutionAllowed": {"const": false},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "updatedAt": {"type": "string", "format": "date-time"},
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rootRealityReference", "previousRealityVersion", "previousRealityDigest", "changeType", "changeReferences"],
+      "properties": {
+        "rootRealityReference": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+        "previousRealityVersion": {"type": "null"},
+        "previousRealityDigest": {"type": "null"},
+        "changeType": {"const": "REALITY_INITIALIZED"},
+        "changeReferences": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "realityDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "semver": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "referenceArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1, "maxLength": 200}
+    },
+    "verifiedInputReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verifiedInputCode", "verifiedInputVersion", "verifiedInputDigest", "inputType", "verificationState", "projectionEligibility"],
+      "properties": {
+        "verifiedInputCode": {"type": "string", "minLength": 1},
+        "verifiedInputVersion": {"$ref": "#/$defs/semver"},
+        "verifiedInputDigest": {"$ref": "#/$defs/digest"},
+        "inputType": {"type": "string", "minLength": 1},
+        "verificationState": {"const": "VERIFIED"},
+        "projectionEligibility": {"const": "ELIGIBLE"}
+      }
+    },
+    "rdgLifecycleReferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "rdgAuthorityReference",
+        "persistenceClass",
+        "persistenceDecisionReference",
+        "persistenceRegistryReference",
+        "persistenceEligibilityGateReference",
+        "consentClass",
+        "consentReference",
+        "consentRegistryReference",
+        "retentionClass",
+        "retentionRegistryReference",
+        "deletionState",
+        "deletionRuntimeReference"
+      ],
+      "properties": {
+        "mode": {"const": "RDG_REFERENCE_ONLY"},
+        "rdgAuthorityReference": {"const": "content/governance/reality-data-governance/registries/reality-data-registry-v1.json"},
+        "persistenceClass": {"type": "string", "minLength": 1},
+        "persistenceDecisionReference": {"type": "string", "pattern": "^RDG-PERSISTENCE-DECISION-[A-Z0-9-]{4,100}$"},
+        "persistenceRegistryReference": {"const": "content/governance/reality-data-governance/registries/canonical-persistence-class-registry-v1.json"},
+        "persistenceEligibilityGateReference": {"const": "content/governance/reality-data-governance/contracts/persistence-eligibility-gate-v1.json"},
+        "consentClass": {"type": "string", "minLength": 1},
+        "consentReference": {"type": "string", "minLength": 1},
+        "consentRegistryReference": {"const": "content/governance/reality-data-governance/registries/canonical-consent-class-registry-v1.json"},
+        "retentionClass": {"type": "string", "minLength": 1},
+        "retentionRegistryReference": {"const": "content/governance/reality-data-governance/registries/canonical-data-retention-registry-v1.json"},
+        "deletionState": {"const": "ACTIVE"},
+        "deletionRuntimeReference": {"const": "content/governance/reality-data-governance/contracts/deletion-tombstone-runtime-v1.json"}
+      }
+    }
+  }
+}

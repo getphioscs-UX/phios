@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "PHI-OS-CCR-SOURCE-ADAPTER-REGISTRY-v1.0.0",
+  "work": "CCR-W0-W1",
+  "status": "CURRENT_V1",
+  "records": [
+    {"routeKey":"AST.NATAL","lensCode":"FUNCTION","readingSchema":"PHI-OS-AST-RUNTIME-READING-IR-v1.0.0","targetSensitivity":"NATAL_ONLY"},
+    {"routeKey":"AST.CURRENT_DYNAMIC","lensCode":"FUNCTION","readingSchema":"PHI-OS-AST-TRANSIT-READING-IR-v1.0.0","targetSensitivity":"EXPLICIT_INSTANT"},
+    {"routeKey":"BZR.TEMPORAL","lensCode":"TIME","readingSchema":"PHI-OS-BZR-TEMPORAL-READING-IR-v1.0.0","targetSensitivity":"EXPLICIT_DATE_WITH_BOUNDARY_TIME"},
+    {"routeKey":"ZWR.NATAL","lensCode":"DOMAIN","readingSchema":"PHI-OS-ZWR-RUNTIME-READING-IR-v1.0.0","targetSensitivity":"NATAL_ONLY"},
+    {"routeKey":"ZWR.DYNAMIC_DOMAIN","lensCode":"DOMAIN","readingSchema":"PHI-OS-ZI-WEI-DYNAMIC-DOMAIN-READING-IR-v1.0.0","targetSensitivity":"EXPLICIT_INSTANT"},
+    {"routeKey":"NUM","lensCode":"RHYTHM","readingSchema":"PHI-OS-NUM-RUNTIME-READING-IR-v1.0.0","targetSensitivity":"EXPLICIT_DATE_WHEN_CYCLE_USED"},
+    {"routeKey":"HDR.OPERATING_READING","lensCode":"OPERATION","readingSchema":"PHI-OS-INTERNAL-OPERATING-READING-IR-v1.0.0","targetSensitivity":"NON_TEMPORAL_INTERNAL"}
+  ],
+  "rules": {
+    "adapterOnlyWrapsAcceptedReading": true,
+    "adapterDoesNotCreateMethodMeaning": true,
+    "adapterDoesNotRecalculateMethod": true,
+    "adapterDoesNotTranslateMethodIntoAnotherMethod": true
+  }
+}

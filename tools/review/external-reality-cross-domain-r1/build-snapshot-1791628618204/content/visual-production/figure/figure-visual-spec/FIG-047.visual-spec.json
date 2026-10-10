@@ -1,0 +1,99 @@
+{
+  "boundaries": [],
+  "canonicalFilename": "PHIOS-FIGURE-CONSENT-SHARING-v1.svg",
+  "diagramRole": "FLOW",
+  "domain": "PROFESSIONAL",
+  "edges": [
+    {
+      "edgeId": "FIG-047-E01",
+      "from": "FIG-047-N01",
+      "relation": "AUTHORIZES_FOR",
+      "required": true,
+      "sourceBindingId": "FIG-047-SRC-01",
+      "to": "FIG-047-N02"
+    },
+    {
+      "edgeId": "FIG-047-E02",
+      "from": "FIG-047-N02",
+      "relation": "LIMITS",
+      "required": true,
+      "sourceBindingId": "FIG-047-SRC-02",
+      "to": "FIG-047-N03"
+    },
+    {
+      "edgeId": "FIG-047-E03",
+      "from": "FIG-047-N03",
+      "relation": "RECEIVES",
+      "required": true,
+      "sourceBindingId": "FIG-047-SRC-02",
+      "to": "FIG-047-N04"
+    },
+    {
+      "edgeId": "FIG-047-E04",
+      "from": "FIG-047-N04",
+      "relation": "MUST_SUPPORT",
+      "required": true,
+      "sourceBindingId": "FIG-047-SRC-02",
+      "to": "FIG-047-N05"
+    }
+  ],
+  "figureId": "FIG-047",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-047-N01",
+    "FIG-047-N02",
+    "FIG-047-N03",
+    "FIG-047-N04",
+    "FIG-047-N05"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Consent Scope",
+      "nodeId": "FIG-047-N01",
+      "required": true,
+      "semanticKey": "CONSENT_SCOPE",
+      "sourceBindingId": "FIG-047-SRC-01"
+    },
+    {
+      "displayLabel": "Purpose",
+      "nodeId": "FIG-047-N02",
+      "required": true,
+      "semanticKey": "PURPOSE",
+      "sourceBindingId": "FIG-047-SRC-01"
+    },
+    {
+      "displayLabel": "Recipient",
+      "nodeId": "FIG-047-N03",
+      "required": true,
+      "semanticKey": "RECIPIENT",
+      "sourceBindingId": "FIG-047-SRC-01"
+    },
+    {
+      "displayLabel": "Shared Access",
+      "nodeId": "FIG-047-N04",
+      "required": true,
+      "semanticKey": "SHARED_ACCESS",
+      "sourceBindingId": "FIG-047-SRC-01"
+    },
+    {
+      "displayLabel": "Revocation / End",
+      "nodeId": "FIG-047-N05",
+      "required": true,
+      "semanticKey": "REVOCATION",
+      "sourceBindingId": "FIG-047-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "CONSENT-SHARING",
+  "title": "Consent and Sharing"
+}

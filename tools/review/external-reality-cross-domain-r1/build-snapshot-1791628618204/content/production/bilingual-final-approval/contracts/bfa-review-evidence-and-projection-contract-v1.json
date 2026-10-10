@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-BFA-REVIEW-EVIDENCE-PROJECTION-CONTRACT-v1.0.0",
+  "work": ["BFA-W2","BFA-W3","BFA-W4","BFA-W5","BFA-W6","BFA-W7","BFA-W8","BFA-W13","BFA-W14"],
+  "status": "ACTIVE_SUCCESSOR_CONTRACT",
+  "baselineCommit": "a6395ad926ce1bcd318b596d6f6ce028f5b96ae9",
+  "pjaBriefProjection": {
+    "mode": "READ_ONLY_PROJECTION",
+    "fields": ["Canonical Node","Canonical Question","Canonical Meaning","Required Coverage","Required Distinctions","Must Preserve","Must Not Claim","Terminology","Evidence Scope","Figure Requirement","Locale Requirement"],
+    "htmlMayInterpretCanonicalMeaning": false,
+    "copyAuthoringPromptSupported": true
+  },
+  "candidateIntake": {
+    "supported": ["PASTE_ARTICLE","UPLOAD_MARKDOWN","UPLOAD_JSON","IMPORT_GENERATED_CANDIDATE"],
+    "requiredBindings": ["nodeCode","locale","briefDigest","promptDigest","canonicalAuthorityDigest"],
+    "candidateOnly": true,
+    "humanApprovalCreated": false
+  },
+  "automaticPreflight": {
+    "statuses": ["PASS","WARNING","BLOCKED"],
+    "checks": ["CANDIDATE_INTEGRITY","CANONICAL_BINDING","BRIEF_DIGEST_BINDING","PROMPT_BINDING","REQUIRED_CONCEPT_COVERAGE","REQUIRED_DISTINCTION_COVERAGE","MUST_NOT_CLAIM_SCAN","TERMINOLOGY_COMPLIANCE","CJK_LEAKAGE","LOCALE_VALIDITY","TITLE_EDITORIAL_QUALITY","TITLE_IDENTITY_BINDING","SAME_ROUTE_INTEGRITY","DUPLICATE_CONTENT","BROKEN_STRUCTURE","MISSING_SUMMARY","MISSING_HEADINGS","PUBLICATION_READINESS"],
+    "automaticPassEqualsHumanAcceptance": false
+  },
+  "meaningCompare": "CANONICAL_MEANING_COVERAGE_COMPARISON_NOT_LITERAL_TRANSLATION_DIFF",
+  "figure": {
+    "states": ["FIGURE_NOT_REQUIRED","FIGURE_REQUIRED_PENDING","FIGURE_CANDIDATE_READY","FIGURE_APPROVED","FIGURE_PUBLICATION_READY"],
+    "nullAllowed": false,
+    "notRequiredNeedsReason": true,
+    "carResultReadOnly": true,
+    "carAuthorityMayBeCreatedByBfa": false,
+    "requiredAndCarNotReady": "BLOCKED_FROM_FINAL_APPROVAL"
+  },
+  "figureAuthoringBrief": ["Figure purpose","Canonical concepts represented","Required relationships","Must show","Must not imply","Visual hierarchy","Text policy","Locale policy","Alt intent","Recommended placement","Aspect ratio","Surface"],
+  "presentationPreview": {
+    "owner": "CPR",
+    "mode": "READ_ONLY_PROJECTION",
+    "required": ["Title","Summary","Article body","Figure placement","Caption","Alt","Locale","Related content","Article shell"],
+    "viewports": ["desktop","mobile"]
+  },
+  "warningWorkflow": ["accept_warning","revise","defer"],
+  "blockedMayApprove": false
+}

@@ -1,0 +1,129 @@
+{
+  "registryCode": "PHI-OS-WPR-W10-VISUAL-PRODUCTION-PROJECTION-v1",
+  "registryVersion": "1.0.0",
+  "work": "WPR-W10",
+  "phase": "WPR-B_PUBLIC_ASSET_DELIVERY",
+  "baselineCommit": "39fb21c54768c2c247a73cf5f005cf25d73435fc",
+  "status": "canonical_projection_contract_no_surface_activation",
+  "authorityChain": [
+    "VAP_OR_EXISTING_ASSET_SOURCE",
+    "CAR_OR_CANONICAL_PUBLIC_ASSET_GOVERNANCE",
+    "PUBLISHED_ASSET_WHERE_REQUIRED",
+    "CPR_PRESENTATION_WHERE_PRODUCTION_RECORD_EXISTS",
+    "WPR_DELIVERY_RESOLUTION",
+    "WEB_SURFACE"
+  ],
+  "families": [
+    {
+      "familyCode": "BOOK_COVER",
+      "sourceAuthority": "PUBLIC_ASSET_REGISTRY",
+      "matchCategories": [
+        "book-cover"
+      ],
+      "surfaceConsumers": [
+        "HOME",
+        "LIBRARY",
+        "BOOK"
+      ],
+      "currentState": "BLOCKED_UNTIL_PUBLIC_BASE_URL_AND_ASSET_VERIFICATION",
+      "carPublicationRequiredForCurrentLegacyCovers": false
+    },
+    {
+      "familyCode": "BOOK_PREVIEW",
+      "sourceAuthority": "PUBLIC_ASSET_REGISTRY",
+      "matchCategories": [
+        "book-preview"
+      ],
+      "surfaceConsumers": [
+        "BOOK"
+      ],
+      "currentState": "BLOCKED_PENDING_OBJECT_INVENTORY",
+      "directoryGroupMayRenderDirectly": false
+    },
+    {
+      "familyCode": "THESIS_VISUAL",
+      "sourceAuthority": "PUBLIC_ASSET_REGISTRY",
+      "matchCategories": [
+        "thesis"
+      ],
+      "surfaceConsumers": [
+        "DISCOVER"
+      ],
+      "currentState": "BLOCKED_PENDING_OBJECT_INVENTORY",
+      "directoryGroupMayRenderDirectly": false
+    },
+    {
+      "familyCode": "LEGACY_BOOK_FIGURE_GROUP",
+      "sourceAuthority": "PUBLIC_ASSET_REGISTRY",
+      "matchCategories": [
+        "book-figures"
+      ],
+      "surfaceConsumers": [
+        "FIGURE"
+      ],
+      "currentState": "LEGACY_MIGRATION_ONLY_NOT_CANONICAL_CAR_PUBLICATION",
+      "directoryGroupMayRenderDirectly": false
+    },
+    {
+      "familyCode": "CANONICAL_FIGURE",
+      "sourceAuthority": "CAR_PUBLISHED_ASSET_REGISTRY",
+      "matchPresentationTypes": [
+        "FIGURE"
+      ],
+      "surfaceConsumers": [
+        "ARTICLE",
+        "FIGURE",
+        "BOOK"
+      ],
+      "currentState": "BLOCKED_UNTIL_CAR_PUBLICATIONS_EXIST"
+    },
+    {
+      "familyCode": "CANONICAL_DIAGRAM",
+      "sourceAuthority": "CAR_PUBLISHED_ASSET_REGISTRY",
+      "matchPresentationTypes": [
+        "DIAGRAM"
+      ],
+      "surfaceConsumers": [
+        "ARTICLE",
+        "DIAGRAM",
+        "BOOK"
+      ],
+      "currentState": "BLOCKED_UNTIL_CAR_PUBLICATIONS_EXIST"
+    },
+    {
+      "familyCode": "EDITORIAL_ILLUSTRATION",
+      "sourceAuthority": "CAR_PUBLISHED_ASSET_REGISTRY",
+      "matchPresentationTypes": [
+        "ILLUSTRATION"
+      ],
+      "surfaceConsumers": [
+        "HOME",
+        "ARTICLE",
+        "BOOK",
+        "ACADEMY_DISCOVERY"
+      ],
+      "currentState": "BLOCKED_UNTIL_CAR_PUBLICATIONS_EXIST"
+    },
+    {
+      "familyCode": "ICON",
+      "sourceAuthority": "PUBLIC_ASSET_OR_CAR_PUBLISHED_ASSET",
+      "surfaceConsumers": [
+        "HOME",
+        "LIBRARY",
+        "ACADEMY_DISCOVERY",
+        "PROFESSIONAL"
+      ],
+      "currentState": "REGISTERED_ASSET_REQUIRED_NO_GENERIC_ICON_AUTHORITY_CREATED"
+    }
+  ],
+  "rules": {
+    "directVapToWebForbidden": true,
+    "wprCannotApproveAsset": true,
+    "wprCannotPublishAsset": true,
+    "wprCannotPromoteCarValidationOnlyRegistry": true,
+    "cprProductionRecordRequiredWhenCprCompositionIsClaimed": true,
+    "publicAssetRegistryMaySupportLegacyPreCarAssetsWithoutCreatingCarPublication": true,
+    "directoryAssetGroupIsNotConcreteRenderableAsset": true
+  },
+  "legacyAuditReference": "content/web-production/audits/wpr-legacy-governed-asset-path-audit-v1.json"
+}

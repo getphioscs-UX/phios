@@ -1,0 +1,52 @@
+{
+  "contractCode": "PHI-OS-ICR-W9-FULL-ACCEPTANCE-v1",
+  "contractVersion": "1.0.0",
+  "work": "ICR-W9",
+  "status": "acceptance_closed",
+  "baselineCommit": "1e99186e5bc5fafa705f61cc15ef57370bec07e9",
+  "acceptanceGates": [
+    {
+      "gate": "W0_W4_BYTE_PRESERVATION",
+      "required": true,
+      "evidence": "content/runtime/input-case-runtime/freeze/icr-w0-w4-byte-preservation-manifest-v1.json"
+    },
+    {
+      "gate": "W5_CANONICAL_CASE_REFERENCE_ONLY",
+      "required": true,
+      "evidence": "content/runtime/input-case-runtime/contracts/canonical-case-runtime-v1.json"
+    },
+    {
+      "gate": "W6_RDG_REFERENCE_ONLY",
+      "required": true,
+      "evidence": "content/runtime/input-case-runtime/contracts/icr-rdg-integration-v1.json"
+    },
+    {
+      "gate": "W7_RMO_HANDOFF_WITHOUT_REALITY_CREATION",
+      "required": true,
+      "evidence": "content/runtime/input-case-runtime/contracts/canonical-reality-initialization-handoff-v1.json"
+    },
+    {
+      "gate": "W8_IMMUTABLE_CASE_VERSIONING",
+      "required": true,
+      "evidence": "content/runtime/input-case-runtime/contracts/case-versioning-contract-v1.json"
+    },
+    {
+      "gate": "NO_PERSISTENCE_OR_PRODUCTION_ACTIVATION",
+      "required": true,
+      "evidence": "content/runtime/input-case-runtime/freeze/icr-w0-w9-freeze-v1.json"
+    },
+    {
+      "gate": "PACKAGE_JSON_MANUAL_WIRING",
+      "required": true,
+      "evidence": "docs/runtime/ICR-W5-W9-PACKAGE-MANUAL-WIRING.md"
+    }
+  ],
+  "checker": "scripts/check-icr-w5-w9-canonical-case-runtime.mjs",
+  "rules": {
+    "allRequiredGatesMustPass": true,
+    "checkerMayMutateRuntimeData": false,
+    "checkerMayRepairAuthority": false,
+    "checkerMayCreateReality": false,
+    "packageJsonModifiedByDelivery": false
+  }
+}

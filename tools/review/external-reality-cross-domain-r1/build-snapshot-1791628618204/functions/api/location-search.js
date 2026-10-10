@@ -1,0 +1,4 @@
+import {searchBirthPlaces,LOCATION_SEARCH_ATTRIBUTION} from '../location/place-search.js';
+const H={'content-type':'application/json; charset=utf-8','cache-control':'private, max-age=300','x-content-type-options':'nosniff'};const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
+export async function onRequestGet(context){const url=new URL(context.request.url),q=String(url.searchParams.get('q')||'').trim(),locale=url.searchParams.get('locale')==='zh-Hans'?'zh-Hans':'en';if(q.length<2)return json({ok:true,candidates:[],attribution:LOCATION_SEARCH_ATTRIBUTION});try{const candidates=await searchBirthPlaces(q,{locale,env:context.env});return json({ok:true,candidates,attribution:LOCATION_SEARCH_ATTRIBUTION})}catch(error){return json({ok:false,error:'PLACE_SEARCH_TEMPORARILY_UNAVAILABLE',candidates:[]},503)}}
+export async function onRequestPost(){return json({ok:false,error:'METHOD_NOT_ALLOWED'},405)}

@@ -1,0 +1,8 @@
+{
+  "contractCode": "PHI-OS-RDG-W18-PROFESSIONAL-DATA-ISOLATION-v1",
+  "work": "RDG-W18",
+  "status": "frozen",
+  "protectedClasses": ["RESTRICTED_PROFESSIONAL"],
+  "requirements": ["professionalAssignmentValid", "professionalAuthorityIsPR", "purposeIsProfessionalService", "consentOrLegalBasisValid", "isolatedStorageBoundary", "payloadFreeAccessAudit"],
+  "rules": {"professionalDataIsRuntimeMemoryByDefault": false, "customerSurfaceMayReadUnreleasedProfessionalData": false, "journeyMayCreateProfessionalJudgment": false, "reportMayApproveProfessionalJudgment": false, "aiMayCreateProfessionalJudgment": false, "crossCaseAccessForbidden": true}
+}

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W21-INTAKE-ADAPTER-CONTRACT-v1.0.0",
+  "work": "FDR-W21",
+  "baselineCommit": "1fcbb42",
+  "status": "ACTIVE_FAIL_CLOSED_VALIDATION_GATE",
+  "authorityOwner": "FDR",
+  "requiredFields": [
+    "intakeId",
+    "adapterType",
+    "sourceReference",
+    "receivedAt",
+    "dataSubjectReferences",
+    "purposeScope",
+    "candidateFacts",
+    "mappingVersion",
+    "validationState",
+    "validationIssues",
+    "consentReference",
+    "proposedSnapshotReference"
+  ],
+  "validationStates": [
+    "RECEIVED",
+    "MAPPED",
+    "VALIDATION_REQUIRED",
+    "VALIDATED",
+    "REJECTED"
+  ],
+  "pipeline": [
+    "RECEIVE",
+    "MAP_TO_FDR_CANDIDATE_FIELDS",
+    "NORMALIZE_REPRESENTATION_WITHOUT_INFERENCE",
+    "VALIDATE_SCHEMA_AND_REFERENCES",
+    "BIND_DISCLOSURE_AND_EVIDENCE",
+    "CHECK_CONSENT_SCOPE",
+    "PROPOSE_FACT_SET",
+    "COMMIT_AS_NEW_SNAPSHOT"
+  ],
+  "commitGate": {
+    "requiredValidationState": "VALIDATED",
+    "requiresExplicitDisclosureState": true,
+    "requiresEvidenceState": true,
+    "requiresConsentScope": true,
+    "createsNewSnapshot": true
+  },
+  "rules": {
+    "adapterIsFactAuthority": false,
+    "candidateFactsAreCanonicalFactsBeforeCommit": false,
+    "directHistoricalMutationAllowed": false,
+    "silentReplacementOfMissingDataAllowed": false,
+    "rangeMayBeCollapsedToExact": false,
+    "documentExtractionEqualsVerification": false,
+    "professionalIntakeEqualsProfessionalJudgment": false,
+    "validationRequiredBeforeCommit": true,
+    "adapterMayExpandConsentScope": false
+  }
+}

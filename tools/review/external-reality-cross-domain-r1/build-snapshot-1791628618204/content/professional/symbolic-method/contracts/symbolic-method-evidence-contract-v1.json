@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-SYMBOLIC-METHOD-EVIDENCE-CONTRACT-v1.0.0",
+  "phase": "SYM",
+  "work": "SYM-W3",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "FOUNDATION_CONTRACT_NO_METHOD_EXECUTION",
+  "schema": "content/professional/symbolic-method/schemas/symbolic-method-evidence-v1.schema.json",
+  "requiredFields": [
+    "methodId",
+    "sessionId",
+    "inputMode",
+    "selectionMode",
+    "selectionEvidence",
+    "timestamp",
+    "runtimeVersion",
+    "projectionVersion"
+  ],
+  "selectionEvidenceRequirements": [
+    "selectionOrder",
+    "selectedSymbols",
+    "runtimeVersion",
+    "aiSelected"
+  ],
+  "systemRandomAdditionalRequirements": [
+    "seed",
+    "entropyEvidence",
+    "replayToken"
+  ],
+  "rules": {
+    "everySelectionRequiresEvidence": true,
+    "evidenceMustPrecedeInterpretation": true,
+    "evidenceMayBeReconstructedByAI": false,
+    "hiddenSymbolSelectionAllowed": false,
+    "evidenceMayCreateRealityTruth": false,
+    "evidenceMayCreateProfessionalJudgment": false
+  }
+}

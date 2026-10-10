@@ -1,0 +1,87 @@
+{
+  "contractCode": "PHI-OS-CANONICAL-PRESENTATION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "CPR-W1",
+  "status": "foundation",
+  "productionStatus": "validation_only",
+  "requiredFields": [
+    "presentationCode",
+    "presentationVersion",
+    "surface",
+    "presentationType",
+    "sourceAssetReferences",
+    "sourceProjectionReferences",
+    "locale",
+    "audience",
+    "informationLayer",
+    "pdsReferences",
+    "accessibilityContract",
+    "responsiveContract",
+    "renderState"
+  ],
+  "fieldRules": {
+    "presentationCode": {
+      "pattern": "^CPR-PRESENT-[A-Z0-9-]+$",
+      "authority": "CPR identity only"
+    },
+    "presentationVersion": {
+      "semverRequired": true
+    },
+    "surface": {
+      "registry": "content/professional/canonical-presentation-runtime/registries/surface-registry-v1.json"
+    },
+    "presentationType": {
+      "registry": "content/professional/canonical-presentation-runtime/registries/presentation-type-registry-v1.json"
+    },
+    "sourceAssetReferences": {
+      "minItems": 1,
+      "publishedOnly": true,
+      "authority": "CAR Published Asset"
+    },
+    "sourceProjectionReferences": {
+      "minItems": 0,
+      "authority": "upstream projection references only"
+    },
+    "locale": {
+      "authority": "existing locale runtime",
+      "autoTranslationMayClaimPublished": false
+    },
+    "audience": {
+      "foundationClasses": [
+        "CUSTOMER",
+        "PROFESSIONAL",
+        "TECHNICAL"
+      ],
+      "expandedAudienceRegistryDeferredTo": "CPR-W17"
+    },
+    "informationLayer": {
+      "registry": "content/professional/canonical-presentation-runtime/registries/information-layer-registry-v1.json"
+    },
+    "pdsReferences": {
+      "referenceOnly": true,
+      "literalVisualValuesForbidden": true
+    },
+    "accessibilityContract": {
+      "authority": "PDS/accessibility source metadata; CPR presentation mapping only"
+    },
+    "responsiveContract": {
+      "authority": "PDS responsive semantics; expanded profiles deferred to CPR-W14"
+    },
+    "renderState": {
+      "allowed": [
+        "validation_projection",
+        "ready_for_render",
+        "rendered"
+      ],
+      "mayChangePublicationState": false,
+      "mayInferRuntimeState": false
+    }
+  },
+  "invariants": {
+    "knowledgeContentStored": false,
+    "meaningStored": false,
+    "publicationDecisionStored": false,
+    "professionalJudgmentStored": false,
+    "runtimeStateStoredAsAuthority": false
+  }
+}

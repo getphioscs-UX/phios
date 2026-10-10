@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-HD-PRO-R3-W13-SEMANTIC-PRECEDENCE-POLICY-v1.0.0",
+  "work": "HD-PRO-R3-W13",
+  "baselineCommit": "78ac0ae651133131d162e53c07cbccd793a55672",
+  "status": "SEMANTIC_PRECEDENCE_AND_DEDUP_ACTIVE_INTERNAL",
+  "precedence": [
+    {"precedenceClass":"CHART_LEVEL_COMPOSITION","rank":800,"label":"Chart-level composition"},
+    {"precedenceClass":"AUTHORITY_COMPOSITION","rank":700,"label":"Authority composition"},
+    {"precedenceClass":"PROFILE_COMPOSITION","rank":600,"label":"Profile composition"},
+    {"precedenceClass":"CHANNEL_COMPOSITION","rank":500,"label":"Channel composition"},
+    {"precedenceClass":"DEFINITION_COMPOSITION","rank":400,"label":"Definition composition"},
+    {"precedenceClass":"CENTER_MEANING","rank":300,"label":"Center meaning"},
+    {"precedenceClass":"GATE_DETAIL","rank":200,"label":"Gate detail"},
+    {"precedenceClass":"ADVANCED_VARIABLE_MODIFIER","rank":100,"label":"Advanced Variable modifier"}
+  ],
+  "duplicateDetection": {
+    "sameSemanticCluster": true,
+    "sameRealityImplication": true,
+    "sameEvidenceSet": true,
+    "overlappingEvidencePlusSameReality": true,
+    "semanticSimilarityEmbeddingRequired": false,
+    "note": "W13 is deterministic and source-preserving. Broader semantic-similarity inference may be added only through a later governed owner; this engine does not invent opaque similarity scores."
+  },
+  "primarySelection": [
+    "higher precedence rank",
+    "composition-supported before non-composed detail at equal rank",
+    "more source refs",
+    "more subject refs",
+    "stable claimId lexical tie-break"
+  ],
+  "supportPolicy": {
+    "onePrimaryExplanationPerCluster": true,
+    "supportingClaimsDeleted": false,
+    "supportingEvidenceHiddenFromDefaultNarrative": true,
+    "supportingEvidenceAvailableUnderWhy": true,
+    "sourceRefsUnionRetainedOnPrimary": true,
+    "contradictoryClaimsAutomaticallyDeduped": false
+  },
+  "boundaries": {
+    "advancedVariableMayOverrideCore": false,
+    "gateMayOverrideCompleteChannel": false,
+    "centerMayOverrideCompleteChannel": false,
+    "lowerPrecedenceMaySuppressAuthorityComposition": false,
+    "dedupCreatesNewSemanticClaim": false,
+    "dedupCreatesNewChartFact": false,
+    "r2CustomerPublicationChanged": false,
+    "r3CustomerPublishable": false
+  }
+}

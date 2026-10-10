@@ -1,0 +1,3085 @@
+# PHI OS PRODUCT CONVERGENCE R1
+
+## PRODUCT CONVERGENCE · REALITY NAVIGATION CUTOVER
+
+**Work ID:** `PHI-OS-PRODUCT-CONVERGENCE-R1`  
+**Baseline:** `81e4155f4817e613cd791f1c964388bb5e241bd6`  
+**Repository:** `getphioscs-UX/phios`  
+**Execution mode:** Existing Runtime Preservation / Product Convergence / Customer Cutover  
+**Primary goal:** 把当前由 Method、Profile、Relationship、Financial、Reality、Books、Atlas、Current Evidence 分散组成的系统，收敛成单一 **Reality Navigation Platform**。
+
+---
+
+# 0｜最终产品定义
+
+PHI OS 不再以以下任一身份作为顶层产品：
+
+```
+Method marketplace
+Assessment platform
+Report generator
+Divination website
+Book website
+Financial calculator
+```
+
+Canonical identity：
+
+```
+PHI OS
+Reality Navigation Platform
+```
+
+最终系统模型：
+
+```
+                       PHI OS
+
+                         │
+                ┌────────┴────────┐
+                │                 │
+            MY REALITY         KNOWLEDGE
+                │                 │
+      ┌─────────┼─────────┐       │
+      │         │         │       │
+  PERSONAL  RELATIONSHIP FINANCIAL WORLD
+      │         │         │       │
+      └─────────┴─────────┴───────┘
+                         │
+                 REALITY MODEL
+                         │
+       ┌─────────────────┼─────────────────┐
+       │                 │                 │
+  Perspectives       Evidence         Current Data
+       │                 │                 │
+ BaZi / HD /       self-report /       market /
+ Astrology /       measured /          economic /
+ Zi Wei / ECR      documents            world
+```
+
+---
+
+# GLOBAL EXECUTION RULES
+
+整个 R1 必须遵守：
+
+1. **不重新建立已经存在的 method calculation authority。**
+    
+2. **不重新建立 FDR / FCR / FAR / HFP / PFR。**
+    
+3. **不重新建立 Relationship W0–W8。**
+    
+4. **不删除已冻结 Profile runtime。**
+    
+5. **Profile 从产品降级，不代表删除 Profile evidence capability。**
+    
+6. **Method 不成为 Reality Fact。**
+    
+7. **Assessment 不成为 Reality Fact。**
+    
+8. **Market Data 不直接成为投资建议。**
+    
+9. **Cross-method convergence 不等于真相。**
+    
+10. **Current data 必须保留 source / time / freshness / provenance。**
+    
+11. **Unknown 不得自动补值。**
+    
+12. **Customer Reality persistence 必须明确 consent。**
+    
+13. **没有 customer-visible outcome 的新 contract 不得无限扩展。**
+    
+14. 每个新 runtime 必须最终回答：
+    
+
+```
+Who consumes this?
+Where does the customer see it?
+What action can it support?
+What does it NOT authorize?
+```
+
+15. 每个 phase 必须具备：
+    
+
+```
+Contract
+→ Runtime
+→ Projection
+→ Customer Surface
+→ Machine Gate
+→ Human Gate
+→ Cutover
+```
+
+---
+
+# PHASE A｜PRODUCT AUTHORITY FREEZE
+
+---
+
+## PC-W0｜Current Main Reconciliation
+
+### 目标
+
+建立本阶段唯一 baseline，不允许在错误 predecessor 上继续建设。
+
+### 必须审计
+
+```
+Profile
+Personal Reality
+Relationship
+Financial
+My Reality
+RMO
+Current Evidence
+Book V
+Book VI
+Moomoo
+Ask
+CX-R31
+Account / Person
+```
+
+### 输出
+
+新增：
+
+```
+content/product-convergence-r1/audits/
+pc-r1-w0-current-main-reconciliation-v1.json
+```
+
+字段至少包括：
+
+```
+baselineCommit
+canonicalAuthorities
+activeSuccessors
+legacySurfaces
+customerRoutes
+runtimeOwners
+pendingHumanGates
+pendingCutovers
+knownConflicts
+```
+
+### Machine gate
+
+新增：
+
+```
+scripts/check-pc-r1-w0-current-main.mjs
+```
+
+目标 alias：
+
+```
+npm run check:pc-r1:w0
+```
+
+### 必须同时通过现有 gates
+
+```
+npm run check:cx-r31
+npm run check:profile
+npm run check:relationship:w0-w8
+npm run check:financial-runtime-product
+npm run check:rmo
+npm run check:runtime-position-48
+```
+
+### Exit
+
+```
+CURRENT_MAIN_RECONCILED
+```
+
+---
+
+# PHASE B｜CANONICAL PRODUCT IDENTITY
+
+---
+
+## PC-W1｜Canonical Product Identity Contract
+
+建立：
+
+```
+content/product-convergence-r1/contracts/
+canonical-product-identity-contract-v1.json
+```
+
+Canonical customer domains：
+
+```
+PERSONAL
+RELATIONSHIP
+FINANCIAL
+WORLD
+MY_REALITY
+KNOWLEDGE
+ASK
+```
+
+不再把这些定义成顶层 product：
+
+```
+PROFILE
+BAZI
+ASTROLOGY
+HUMAN_DESIGN
+ZIWEI
+NUMEROLOGY
+ECR
+```
+
+它们成为：
+
+```
+PERSPECTIVE
+EVIDENCE_SOURCE
+SPECIALIST_READING
+```
+
+其中 Tarot / I Ching 保留 specialist interaction 产品身份，但不得成为整个 PHI OS 的导航骨架。
+
+### Machine gate
+
+必须检测导航 registry、route registry、产品 metadata 内没有：
+
+```
+PROFILE = canonical top-level method
+```
+
+---
+
+## PC-W2｜Canonical Product Taxonomy
+
+建立 registry：
+
+```
+content/product-convergence-r1/registries/
+canonical-product-domain-registry-v1.json
+```
+
+建议结构：
+
+```
+MY_REALITY
+PERSONAL_REALITY
+RELATIONSHIP_REALITY
+FINANCIAL_REALITY
+WORLD_REALITY
+KNOWLEDGE
+SPECIALIST_PERSPECTIVE
+PROFESSIONAL
+```
+
+每个 domain 明确：
+
+```
+authorityOwner
+inputOwners
+projectionOwner
+persistencePolicy
+customerRoute
+reportCapability
+askCapability
+currentDataCapability
+```
+
+---
+
+## PC-W3｜Product Authority Boundary
+
+明确：
+
+```
+Method Authority
+≠
+Profile Evidence Authority
+≠
+Reality Authority
+≠
+Current Data Authority
+≠
+Professional Advice Authority
+```
+
+必须禁止：
+
+```
+METHOD -> VERIFIED_REALITY_FACT
+PROFILE_SCORE -> VERIFIED_REALITY_FACT
+MARKET_DATA -> BUY/SELL
+LLM_OUTPUT -> PROFESSIONAL_RECOMMENDATION
+CROSS_METHOD_COUNT -> TRUTH
+```
+
+---
+
+# PHASE C｜PROFILE DEMOTION
+
+这是本阶段最重要的纠偏之一。
+
+---
+
+## PC-W4｜Profile Product Demotion Contract
+
+现有 Profile runtime：
+
+```
+content/profile/**
+functions/profile/**
+assets/customer-ui/js/surfaces/profile-progressive.js
+```
+
+全部保留。
+
+不得删除：
+
+```
+Big Five
+O*NET
+Reasoning
+Financial Capability
+Self Assessment
+External profile
+```
+
+但改变产品身份：
+
+```
+PROFILE_PRODUCT
+↓
+SUPPLEMENTARY_PERSON_EVIDENCE
+```
+
+新增：
+
+```
+content/product-convergence-r1/profile/
+profile-evidence-role-contract-v1.json
+```
+
+---
+
+## PC-W5｜Profile Navigation Demotion
+
+当前：
+
+```
+/perspectives/profile/
+```
+
+保留 compatibility route。
+
+但是从一级导航移除。
+
+不得继续表现成：
+
+```
+Profile
+BaZi
+Human Design
+Astrology
+...
+```
+
+新的入口语义：
+
+```
+Personal Reality
+    ↓
+Optional evidence
+    ↓
+Assessments
+```
+
+或者：
+
+```
+Personal
+→ Add evidence
+→ Assessments
+```
+
+### 不删除 route
+
+第一阶段：
+
+```
+INDEX/FOLLOW 可暂时保留
+direct URL remains functional
+```
+
+只有完成 browser acceptance 后才决定是否：
+
+```
+noindex
+secondary navigation
+redirect
+```
+
+---
+
+## PC-W6｜Profile Method Icon Retirement
+
+当前存在：
+
+```
+assets/icons/methods/PHIOS-ICON-METHOD-PROFILE-v1.svg
+```
+
+不得再把 Profile 注册成 method。
+
+进行 registry audit：
+
+```
+method registry
+commerce registry
+navigation registry
+customer perspective registry
+visual registry
+```
+
+Profile 必须从：
+
+```
+METHOD
+```
+
+转成：
+
+```
+ASSESSMENT_EVIDENCE
+```
+
+图档可以保留 archive compatibility。
+
+---
+
+## PC-W7｜Profile Evidence Envelope
+
+统一以下 source class：
+
+```
+SELF_REPORTED
+STANDARDIZED_SELF_REPORT
+MEASURED_TASK
+EXTERNAL_ASSESSMENT
+FINANCIAL_CAPABILITY
+CAREER_INTEREST
+```
+
+成为：
+
+```
+PERSON_EVIDENCE_SIGNAL
+```
+
+至少字段：
+
+```
+signalId
+personId
+sourceClass
+provider
+domain
+facet
+observedAt
+assessmentDate
+value
+range
+confidence
+provenance
+limitations
+freshnessState
+```
+
+不得存在：
+
+```
+masterScore
+overallTruth
+objectivePersonality
+universalRanking
+```
+
+---
+
+## PC-W8｜Profile → Personal Reality Bridge
+
+建立只读 adapter：
+
+```
+Profile Evidence
+↓
+Personal Reality Evidence
+```
+
+而不是：
+
+```
+Profile
+↓
+Personal Truth
+```
+
+允许输出：
+
+```
+supports
+contrasts
+currentlyResonant
+currentlyNotResonant
+open
+```
+
+禁止：
+
+```
+proves
+disproves
+validatedBy
+scientificallyConfirmsMethod
+```
+
+---
+
+## PC-W9｜Profile Relationship Demotion
+
+已有：
+
+```
+content/profile/relationship/**
+```
+
+继续保留。
+
+但其输出只能作为：
+
+```
+RELATIONSHIP_EVIDENCE
+```
+
+不得成为：
+
+```
+RELATIONSHIP_RUNTIME_OWNER
+```
+
+Relationship 主 authority 必须继续由：
+
+```
+content/personal-reading/relationship/**
+```
+
+负责。
+
+---
+
+## PC-W10｜Profile Freeze Successor
+
+不得改写旧 freeze。
+
+建立 successor：
+
+```
+profile-product-role-successor-v1.json
+```
+
+声明：
+
+```
+technical capability preserved
+production assessment capability preserved
+top-level product role superseded
+```
+
+### Human review
+
+必须审核：
+
+```
+Profile homepage
+Personal entry
+navigation
+assessment results
+method detail
+mobile
+zh-Hans
+en
+```
+
+Exit：
+
+```
+PROFILE_DEMOTED_CAPABILITY_PRESERVED
+```
+
+---
+
+# PHASE D｜PERSONAL REALITY CANONICALIZATION
+
+---
+
+## PC-W11｜Canonical Person Reality Object
+
+不要再把 Personal Reality 只当 projection grouping。
+
+建立：
+
+```
+CanonicalPersonReality
+```
+
+建议 schema：
+
+```
+personId
+
+identity
+stableStructure[]
+variablePatterns[]
+currentConditions[]
+decisionContexts[]
+environmentContexts[]
+lifeStage[]
+relationships[]
+financialLinks[]
+observations[]
+perspectives[]
+evidence[]
+unknowns[]
+openQuestions[]
+revisions[]
+```
+
+---
+
+## PC-W12｜Personal Reality Authority Contract
+
+现有：
+
+```
+content/customer-experience-rebuild/
+authority/personal-reality-customer-surface-v2.json
+```
+
+不重建。
+
+新增 successor 只增加：
+
+```
+CANONICAL_PERSON_REALITY_CONSUMPTION
+```
+
+保持：
+
+```
+methodNamesAreTopLevelTabs = false
+profileAssessmentOptional = true
+unknownRemainsUnknown = true
+```
+
+---
+
+## PC-W13｜Personal Evidence Classes
+
+Personal Reality 必须区分：
+
+```
+DECLARED
+OBSERVED
+MEASURED
+DOCUMENTED
+METHOD_DERIVED
+CURRENT_DATA_CONTEXT
+PROFESSIONALLY_REVIEWED
+UNKNOWN
+```
+
+UI 不得把它们渲染成同等 authority。
+
+---
+
+## PC-W14｜Personal Structure Composition
+
+建立：
+
+```
+Stable Structure
+Patterns
+Decision Context
+Environment
+Current Context
+Open Questions
+```
+
+但禁止把多个 method 自动 voting。
+
+合法状态：
+
+```
+SINGLE_SOURCE
+MULTI_PERSPECTIVE_CONVERGENCE
+PERSPECTIVE_DIVERGENCE
+REALITY_SUPPORTED
+REALITY_CONTRASTED
+OPEN
+```
+
+---
+
+## PC-W15｜Current Reality → Personal Bridge
+
+复用现有：
+
+```
+PPR_CURRENT_SHARED_RUNTIME
+CURRENT_REALITY_RUNTIME
+```
+
+不得建立新的 current reality authority。
+
+桥接：
+
+```
+Current Reality Observation
+↓
+Person Reality Context
+```
+
+至少支持：
+
+```
+work
+location
+family
+relationship
+finance
+health-context-if-explicit
+life-stage
+current-pressure
+current-goal
+```
+
+---
+
+## PC-W16｜Personal Reality Customer Surface V3
+
+最终 `/perspectives/personal/` 不应该是“选择 method”。
+
+首屏：
+
+```
+YOU NOW
+```
+
+客户结构：
+
+```
+01 Overview
+02 Structure
+03 Patterns
+04 Current Context
+05 Relationships
+06 Financial Context
+07 Perspectives
+08 Evidence
+09 Open Questions
+10 Ask PHI
+```
+
+Methods 进入：
+
+```
+Perspectives
+```
+
+而不是一级 tab。
+
+---
+
+## PC-W17｜Personal Reality Human Review
+
+至少准备 6 个 cases：
+
+```
+minimal-data
+multi-method
+profile-rich
+current-reality-rich
+conflicting-perspectives
+unknown-heavy
+```
+
+中英文全部看：
+
+```
+desktop
+mobile
+method disclosure
+evidence disclosure
+unknown rendering
+```
+
+Exit：
+
+```
+PERSONAL_REALITY_CUSTOMER_ACCEPTED
+```
+
+---
+
+# PHASE E｜RELATIONSHIP PRODUCT COMPLETION
+
+当前不要重做 W0–W8。
+
+---
+
+## PC-W18｜Relationship Baseline Adoption
+
+正式继承：
+
+```
+REL-W0–W3 Foundation
+REL-W4 Six-method composition
+REL-W5 Current Reality
+REL-W6 Cross Evidence
+REL-W7 Narrative Brief
+REL-W8 Paid Narrative
+```
+
+并记录：
+
+```
+144 / 144 method relationship human admission
+```
+
+禁止重新做这些 semantic authority。
+
+---
+
+## PC-W19｜Canonical Relationship Reality Object
+
+建立：
+
+```
+CanonicalRelationshipReality
+```
+
+不是 simple：
+
+```
+Person A + Person B
+```
+
+而是：
+
+```
+relationshipId
+
+participantA
+participantB
+relationshipType
+sharedHistory
+sharedEnvironment
+sharedResources
+sharedResponsibilities
+sharedGoals
+currentPressures
+interactionPatterns
+decisionDynamics
+communicationPatterns
+resourceFlows
+frictions
+complementarities
+openQuestions
+observations
+methodPerspectives
+evidence
+timeline
+unknowns
+```
+
+---
+
+## PC-W20｜Shared Reality Object
+
+这是新的关键能力。
+
+建立：
+
+```
+SharedReality
+```
+
+支持：
+
+```
+PARTNER
+MARRIAGE
+PARENT_CHILD
+FAMILY
+BUSINESS_PARTNERSHIP
+WORKING_RELATIONSHIP
+```
+
+Shared Reality 不是 method inference。
+
+只能来自：
+
+```
+declared facts
+documented facts
+shared financial facts
+current-reality observation
+explicit participant inputs
+```
+
+---
+
+## PC-W21｜Relationship Method Projection Adapter
+
+六个 method 继续独立。
+
+输出进入：
+
+```
+METHOD_RELATIONSHIP_PERSPECTIVE
+```
+
+然后映射到：
+
+```
+Structure
+Interaction
+Decision
+Friction
+Complementarity
+Pressure
+Timing
+```
+
+但必须保留：
+
+```
+methodId
+claimId
+sourceAuthority
+confidence
+limitations
+```
+
+---
+
+## PC-W22｜Relationship Composition V2
+
+客户不再看到六份 report 拼接。
+
+Canonical output：
+
+```
+01 Relationship Overview
+02 Shared Structure
+03 Interaction Dynamics
+04 Complementarity
+05 Friction
+06 Decision Dynamics
+07 Communication
+08 Resource / Responsibility Flow
+09 Current Pressures
+10 Timing Context
+11 What Is Known
+12 What Is Open
+13 Navigation
+14 Perspectives Used
+```
+
+---
+
+## PC-W23｜Relationship Current Reality Completion
+
+继续复用：
+
+```
+ME
+OTHER_AS_OBSERVED
+US
+CONTEXT
+```
+
+增加 relationship timeline：
+
+```
+T0
+past context
+
+T1
+current state
+
+T2
+watch / future observation window
+```
+
+T2 不可变成 prediction。
+
+---
+
+## PC-W24｜Relationship Persistence
+
+当前 audit 明确 persistence 尚未完成。
+
+正式绑定：
+
+```
+Account
+→ Person A
+→ Person B
+→ Relationship
+→ Shared Reality
+```
+
+必须经过 explicit consent。
+
+不能：
+
+```
+generate report
+→ silently persist
+```
+
+---
+
+## PC-W25｜Relationship Customer Workspace
+
+canonical route：
+
+```
+/perspectives/relationship/
+```
+
+最终应支持：
+
+```
+Select person A
+Select/add person B
+Relationship context
+Current relationship reality
+Generate/read relationship reading
+Save to My Reality
+Ask about relationship
+Review later
+```
+
+---
+
+## PC-W26｜Relationship Human Acceptance
+
+完成当前 audit 尚缺：
+
+```
+W71–W73 equivalent human acceptance
+```
+
+至少覆盖：
+
+```
+couple
+parent-child
+business partner
+family
+low-data
+conflicting-method
+current-reality-heavy
+```
+
+严禁：
+
+```
+compatibility %
+soulmate
+guaranteed outcome
+breakup prediction
+hidden partner state
+stay/leave directive
+```
+
+---
+
+## PC-W27｜Relationship Production Cutover
+
+完成：
+
+```
+customerPublication
+productionPersistence
+routing
+commerce
+report
+Ask
+My Reality handoff
+```
+
+更新 completeness audit 到：
+
+```
+FULL_RELATIONSHIP_PRODUCT_READY
+```
+
+---
+
+# PHASE F｜FINANCIAL CURRENT-REALITY EXPANSION
+
+Financial 不重建。
+
+继承：
+
+```
+FDR
+FCR
+FAR
+HFP
+PFR
+RR
+```
+
+---
+
+## PC-W28｜Financial Baseline Reconciliation
+
+记录当前状态：
+
+```
+FDR = ACCEPTED_AND_FROZEN_V1
+FCR = ACCEPTED_READY_FOR_V1_FREEZE
+FAR = ACCEPTED_READY_FOR_V1_FREEZE
+HFP = ARCHITECTURALLY_ACCEPTED_NOT_PILOT_VERIFIED
+PFR = ACCEPTED
+Financial Product = REALITY_ORCHESTRATION_PENDING
+```
+
+特别保留 HFP 已知缺口：
+
+```
+NO_REAL_HFP_PILOT_CASE
+NO_REAL_LONGITUDINAL_HFP_EVIDENCE
+```
+
+---
+
+## PC-W29｜Market Evidence Runtime Contract
+
+新建：
+
+```
+MER
+Market Evidence Runtime
+```
+
+注意：
+
+**MER 不是另一个 FAR。**
+
+MER 只负责：
+
+```
+market observations
+provider observations
+time series
+valuation facts
+capital-flow observations
+sector data
+company fundamentals
+macro-financial observations
+```
+
+---
+
+## PC-W30｜Market Provider Registry
+
+建立共用 provider registry。
+
+第一批：
+
+```
+MOOMOO_OPENAPI
+OFFICIAL_EXCHANGE
+CENTRAL_BANK
+NATIONAL_STATISTICS
+COMPANY_FILINGS
+OTHER_ADMITTED_MARKET_PROVIDER
+```
+
+每个 provider：
+
+```
+providerId
+authorityClass
+jurisdiction
+domains
+capabilities
+authenticationMode
+freshnessPolicy
+licensingBoundary
+redistributionBoundary
+```
+
+---
+
+## PC-W31｜Moomoo Authority Reuse
+
+现有：
+
+```
+content/civilization-atlas/reconfiguration/
+moomoo-openapi-profile-v1.json
+
+moomoo-provider-current-evidence-ir-v1.json
+```
+
+不复制。
+
+建立 cross-consumption bridge：
+
+```
+CURRENT_EVIDENCE_IR
+↓
+MER
+```
+
+不得：
+
+```
+Book VI Moomoo data
+→ copy to financial JSON manually
+```
+
+必须 source-linked consumption。
+
+---
+
+## PC-W32｜Market Evidence Normalization
+
+将：
+
+```
+HISTORY_KLINE
+CAPITAL_FLOW
+SECTOR_PLATE
+VALUATION
+FINANCIAL_STATEMENTS
+REVENUE_BREAKDOWN
+```
+
+标准化成：
+
+```
+MARKET_PRICE_SERIES
+MARKET_FLOW
+SECTOR_STRUCTURE
+VALUATION_OBSERVATION
+COMPANY_FINANCIAL_FACT
+COMPANY_REVENUE_STRUCTURE
+```
+
+每项必须有：
+
+```
+asOf
+retrievedAt
+provider
+instrument
+currency
+jurisdiction
+freshness
+sourceVersion
+digest
+```
+
+---
+
+## PC-W33｜Portfolio Position Runtime
+
+建立：
+
+```
+PortfolioReality
+```
+
+输入必须来自：
+
+```
+FDR canonical asset facts
+```
+
+而不是另建持仓数据库。
+
+增加：
+
+```
+instrumentId
+assetId
+quantity
+costBasis
+currency
+marketValue
+marketValueAsOf
+account
+ownership
+liquidityClass
+```
+
+---
+
+## PC-W34｜Portfolio Look-through
+
+建立真实 exposure projection：
+
+```
+asset class
+country
+currency
+sector
+issuer
+industry
+duration
+rate sensitivity
+equity concentration
+property concentration
+business concentration
+cash concentration
+```
+
+特别重要：
+
+```
+Nominal Diversification
+≠
+Economic Exposure Diversification
+```
+
+---
+
+## PC-W35｜Household Exposure Composition
+
+不能只看证券。
+
+必须把：
+
+```
+salary
+business
+property
+portfolio
+cash
+debt
+guarantees
+insurance
+currency
+```
+
+放到同一个 household exposure model。
+
+例如：
+
+```
+Malaysia salary
++ Malaysia properties
++ Malaysia business
++ Malaysia equities
+
+= geographic concentration
+```
+
+---
+
+## PC-W36｜Market Reality Snapshot
+
+输出：
+
+```
+MarketRealitySnapshot
+```
+
+包括：
+
+```
+market regime observations
+rates
+FX
+sector conditions
+valuation context
+liquidity context
+capital flows
+market stress observations
+```
+
+禁止：
+
+```
+bull/bear prediction as fact
+buy signal
+sell signal
+market timing certainty
+```
+
+---
+
+## PC-W37｜Macro Reality Bridge
+
+Book VI / Current Evidence 可以提供：
+
+```
+economic
+technology
+industrial
+demographic
+policy
+infrastructure
+external dependency
+```
+
+但必须经过：
+
+```
+CURRENT_EVIDENCE_IR
+```
+
+才能进入 Financial。
+
+不能直接：
+
+```
+Atlas prose
+→ financial finding
+```
+
+---
+
+## PC-W38｜FAR V2 Input Extension
+
+当前 FAR：
+
+```
+fcrResult
+fdrSnapshot
+analysisPolicySet
+comparisonResults optional
+```
+
+增加 optional：
+
+```
+marketRealitySnapshot
+portfolioExposureSnapshot
+macroRealityContext
+```
+
+但不得破坏现有 FAR deterministic boundary。
+
+FAR 可以产生：
+
+```
+concentration
+exposure
+dependency
+mismatch
+liquidity vulnerability
+currency exposure
+market-context sensitivity
+```
+
+不可产生：
+
+```
+buy XYZ
+sell XYZ
+guaranteed return
+```
+
+---
+
+## PC-W39｜Financial Reality Composition V2
+
+客户输出：
+
+```
+01 Current Position
+02 Cash Flow
+03 Liquidity
+04 Assets
+05 Liabilities
+06 Protection
+07 Goals
+08 Portfolio Reality
+09 Concentration
+10 Market Context
+11 Macro Context
+12 Dependencies
+13 Risks
+14 Unknowns
+15 Planning Options
+16 Professional Review
+```
+
+---
+
+## PC-W40｜Financial Current-Value Refresh
+
+建立：
+
+```
+static facts
+vs
+current-valued facts
+```
+
+例如：
+
+```
+quantity = canonical fact
+current price = market observation
+current value = derived calculation
+```
+
+明确：
+
+```
+sourceTimestamp
+priceTimestamp
+FXTimestamp
+calculationTimestamp
+```
+
+---
+
+## PC-W41｜HFP Real Pilot
+
+这是现在真正缺的，不要再用 fixture 代替。
+
+至少完成 3 个真实受控案例：
+
+```
+single household
+family with children
+business-owner / property-heavy
+```
+
+数据必须：
+
+```
+consented
+de-identified where possible
+reviewed
+```
+
+验证：
+
+```
+FDR
+→ FCR
+→ FAR
+→ HFP
+→ PFR
+→ RR
+```
+
+---
+
+## PC-W42｜Financial Professional Review V2
+
+PFR 继续保留 professional author。
+
+AI 可以：
+
+```
+organize
+summarize
+draft
+compare
+flag
+```
+
+AI 不可：
+
+```
+impersonate planner
+sign recommendation
+silently change professional advice
+```
+
+---
+
+## PC-W43｜Financial Report V2
+
+报告不再只是：
+
+```
+financial planning report
+```
+
+正式称：
+
+```
+Financial Reality Report
+```
+
+报告区分：
+
+```
+Facts
+Calculations
+Findings
+Current Market Context
+Planning Options
+Professional Recommendations
+Unknowns
+Sources / As-of Dates
+```
+
+---
+
+# PHASE G｜WORLD → REALITY BRIDGE
+
+---
+
+## PC-W44｜World Evidence Boundary
+
+Book V：
+
+```
+Historical / civilization structure
+```
+
+Book VI：
+
+```
+Current / reconfiguration
+```
+
+不能直接把 manuscript 当 live reality。
+
+建立统一：
+
+```
+Knowledge
+Evidence
+Current Evidence
+```
+
+三层。
+
+---
+
+## PC-W45｜Current Evidence Shared Gateway
+
+现有 Current Evidence 能力升级成共享 gateway。
+
+消费者：
+
+```
+Book VI
+Personal
+Relationship
+Financial
+Ask
+My Reality
+```
+
+不得每个产品各自 crawl / ingest current data。
+
+---
+
+## PC-W46｜Reality Domain Registry
+
+建立 canonical domain：
+
+```
+DEMOGRAPHY
+ECONOMY
+FINANCIAL_MARKETS
+INDUSTRY
+TECHNOLOGY
+INFRASTRUCTURE
+ENERGY
+POLICY
+INSTITUTIONS
+SOCIAL
+ENVIRONMENT
+EXTERNAL_DEPENDENCY
+LABOUR
+HOUSING
+```
+
+---
+
+## PC-W47｜World → Personal Relevance Bridge
+
+不是自动说：
+
+```
+AI boom therefore good for you
+```
+
+而是：
+
+```
+world condition
+↓
+relevance candidate
+↓
+personal current reality
+↓
+evidence-supported contextual relevance
+```
+
+状态：
+
+```
+RELEVANT
+POSSIBLY_RELEVANT
+NOT_CURRENTLY_RELEVANT
+OPEN
+```
+
+---
+
+## PC-W48｜World → Relationship Relevance Bridge
+
+允许进入：
+
+```
+housing cost
+employment pressure
+migration
+care burden
+family finance
+geographic separation
+schedule constraints
+```
+
+但必须是 shared reality context。
+
+---
+
+## PC-W49｜World → Financial Relevance Bridge
+
+支持：
+
+```
+rates
+inflation
+FX
+sector shifts
+market valuation
+capital flows
+employment
+property conditions
+```
+
+不得由世界资料直接产生投资建议。
+
+---
+
+# PHASE H｜MY REALITY CONVERGENCE
+
+---
+
+## PC-W50｜My Reality Canonical Workspace V2
+
+现有：
+
+```
+/reality/
+```
+
+成为整个系统最终 home after login。
+
+不是 Dashboard of products。
+
+而是：
+
+```
+YOUR REALITY
+```
+
+---
+
+## PC-W51｜My Reality Domain Model
+
+包含：
+
+```
+ME
+RELATIONSHIPS
+FINANCIAL
+CURRENT REALITY
+WORLD CONTEXT
+QUESTIONS
+OBSERVATIONS
+NAVIGATION
+REPORTS
+HISTORY
+```
+
+---
+
+## PC-W52｜Canonical Reality Entity Binding
+
+Account 下的对象：
+
+```
+Account
+│
+├─ Person
+│
+├─ Person
+├─ Relationship
+├─ Household
+├─ Financial Reality
+├─ Reality Case
+└─ Reports
+```
+
+所有 object 使用 canonical IDs。
+
+---
+
+## PC-W53｜My Reality Handoff Contract
+
+Personal：
+
+```
+Save to My Reality
+```
+
+Relationship：
+
+```
+Save relationship
+```
+
+Financial：
+
+```
+Save financial reality
+```
+
+Ask：
+
+```
+Save useful observation
+```
+
+全部要求：
+
+```
+explicit user action
+explicit consent
+```
+
+---
+
+## PC-W54｜Reality History
+
+建立：
+
+```
+what changed
+when
+source
+previous state
+new state
+reason
+```
+
+区分：
+
+```
+fact revision
+new observation
+market update
+new report
+professional amendment
+customer correction
+```
+
+---
+
+## PC-W55｜Reality Review
+
+用户能够：
+
+```
+confirm
+correct
+mark outdated
+remove from active view
+supersede
+```
+
+不允许 silent historical overwrite。
+
+---
+
+## PC-W56｜Reality Continuity
+
+支持：
+
+```
+Today
+Previous
+What changed
+What remains open
+What to observe
+```
+
+这才是 Reality Navigation，不是 report archive。
+
+---
+
+# PHASE I｜ASK PHI CONVERGENCE
+
+---
+
+## PC-W57｜Ask Context Resolver
+
+Ask 必须知道用户当前在哪：
+
+```
+Personal
+Relationship
+Financial
+World
+My Reality
+```
+
+但 Context：
+
+```
+≠ Answer
+```
+
+---
+
+## PC-W58｜Ask Evidence Stack
+
+回答来源显示：
+
+```
+Your data
+Your observations
+Method perspective
+Published knowledge
+Current evidence
+Market evidence
+Professional contribution
+```
+
+---
+
+## PC-W59｜Ask Reality Write Boundary
+
+Ask 回答不得自动进入 My Reality。
+
+必须：
+
+```
+Answer
+↓
+User selects "Keep this"
+↓
+Observation candidate
+↓
+Consent
+↓
+Reality
+```
+
+---
+
+# PHASE J｜CUSTOMER INFORMATION ARCHITECTURE
+
+---
+
+## PC-W60｜Navigation Reduction
+
+当前入口过多。
+
+最终公共一级导航建议：
+
+```
+Explore
+Personal
+Relationship
+Financial
+World
+Ask
+```
+
+登录后：
+
+```
+My Reality
+```
+
+Knowledge 可以归于：
+
+```
+Explore / Books / Articles / Academy
+```
+
+---
+
+## PC-W61｜Perspectives Demotion
+
+`Perspectives` 不再成为整个产品 identity。
+
+可以保留：
+
+```
+/perspectives/
+```
+
+但客户语义改为：
+
+```
+Different ways of reading reality
+```
+
+不是：
+
+```
+our main products
+```
+
+---
+
+## PC-W62｜Method Detail Layer
+
+客户仍可以深入：
+
+```
+BaZi
+Astrology
+Human Design
+Zi Wei
+Numerology
+ECR
+```
+
+但应该从：
+
+```
+Personal Reality
+→ Perspectives used
+→ Open method detail
+```
+
+进入。
+
+---
+
+## PC-W63｜Books / Atlas Placement
+
+Books：
+
+```
+Knowledge Foundation
+```
+
+Civilization Atlas：
+
+```
+World
+```
+
+Reconfiguration Atlas：
+
+```
+World → Current Reality
+```
+
+不再成为孤立内容区。
+
+---
+
+# PHASE K｜COMMERCE / ENTITLEMENT
+
+---
+
+## PC-W64｜Product Offer Reconciliation
+
+重审当前 offers。
+
+不要简单销售：
+
+```
+one method = one product
+```
+
+应支持：
+
+```
+Personal Reading
+Relationship Reading
+Financial Reality
+Annual Reality Review
+Method Specialist Reading
+Books
+Professional Review
+```
+
+---
+
+## PC-W65｜Method Reports as Specialist Products
+
+单独 method report 可以继续卖。
+
+但必须定位：
+
+```
+Specialist Reading
+```
+
+而不是：
+
+```
+PHI OS complete personal truth
+```
+
+---
+
+## PC-W66｜Relationship Commerce
+
+至少：
+
+```
+Relationship Overview
+Full Relationship Reading
+Relationship + Current Reality
+```
+
+---
+
+## PC-W67｜Financial Commerce
+
+至少区分：
+
+```
+Financial Snapshot
+Financial Reality Analysis
+Holistic Financial Planning
+Professional Financial Review
+Annual Review
+```
+
+---
+
+# PHASE L｜REPORT ARCHITECTURE
+
+---
+
+## PC-W68｜Unified Report Lineage
+
+每份报告必须记录：
+
+```
+subject
+participants
+dataSnapshot
+marketSnapshot
+methodVersions
+knowledgeVersion
+currentEvidenceVersion
+generatedAt
+reviewedAt
+releasedAt
+```
+
+---
+
+## PC-W69｜Report vs Living Reality
+
+明确：
+
+```
+Report = versioned snapshot
+Reality = living state
+```
+
+报告生成后不会成为未来永远的真相。
+
+---
+
+## PC-W70｜Current Data Disclosure
+
+凡使用 current data：
+
+必须显示：
+
+```
+As of
+Provider
+Freshness
+Limitations
+```
+
+---
+
+# PHASE M｜PRIVACY / CONSENT / MULTI-PERSON
+
+---
+
+## PC-W71｜Person Consent
+
+Relationship 特别要求：
+
+```
+Person A data
+Person B data
+shared data
+```
+
+权限必须分别管理。
+
+---
+
+## PC-W72｜Shared Financial Consent
+
+夫妻共同财务：
+
+```
+joint account
+joint property
+joint liability
+dependent
+shared goal
+```
+
+不能因为 A 输入就自动赋予 B 为 confirmed fact。
+
+---
+
+## PC-W73｜Data Source Consent
+
+区分：
+
+```
+customer-entered
+uploaded document
+external provider
+market provider
+professional
+method-generated
+```
+
+---
+
+# PHASE N｜CURRENT DATA GOVERNANCE
+
+---
+
+## PC-W74｜Freshness Policy
+
+建立：
+
+```
+REALTIME
+INTRADAY
+DAILY
+MONTHLY
+QUARTERLY
+ANNUAL
+STATIC
+```
+
+例如：
+
+```
+price ≠ annual filing
+```
+
+不可统一用一个 FRESH flag。
+
+---
+
+## PC-W75｜Staleness Rules
+
+例如：
+
+```
+market price > threshold age → STALE
+portfolio value based on stale price → DISCLOSE
+macro series old → LAST_AVAILABLE
+```
+
+---
+
+## PC-W76｜Provider Conflict
+
+若：
+
+```
+Provider A ≠ Provider B
+```
+
+不能简单 majority voting。
+
+保留：
+
+```
+source authority
+timestamp
+methodology
+jurisdiction
+```
+
+---
+
+## PC-W77｜Provider Failure
+
+Moomoo unavailable：
+
+```
+do not fabricate
+do not reuse stale as live without disclosure
+```
+
+返回：
+
+```
+CURRENT_DATA_UNAVAILABLE
+LAST_VERIFIED_DATA
+```
+
+---
+
+# PHASE O｜UI / VISUAL / MOBILE
+
+---
+
+## PC-W78｜One Product Shell
+
+Personal / Relationship / Financial / World / My Reality 应共享：
+
+```
+header
+context
+section nav
+evidence disclosure
+Ask
+save/handoff
+history
+```
+
+不要再出现多个完全不同 UI 系统。
+
+---
+
+## PC-W79｜Evidence Visual Language
+
+统一视觉：
+
+```
+Fact
+Observation
+Perspective
+Calculation
+Current data
+Professional
+Unknown
+```
+
+客户一眼知道 authority 不同。
+
+---
+
+## PC-W80｜No Raw Enum
+
+所有：
+
+```
+CURRENTLY_RESONANT
+MARKET_DATA_PROVIDER
+FDR
+FAR
+RRE_ELIGIBLE
+```
+
+不得直接出现在 customer UI。
+
+---
+
+## PC-W81｜Bilingual Closure
+
+每个新 surface：
+
+```
+en
+zh-Hans
+```
+
+一起完成。
+
+不得：
+
+```
+EN first
+Chinese fallback later
+```
+
+---
+
+## PC-W82｜Mobile Acceptance
+
+重点审核：
+
+```
+Personal
+Relationship
+Financial
+My Reality
+Ask
+```
+
+移动端不得出现：
+
+```
+horizontal overflow
+double hero
+tiny evidence text
+hidden actions
+desktop-only comparison
+```
+
+---
+
+# PHASE P｜CUSTOMER-FIRST ACCEPTANCE
+
+---
+
+## PC-W83｜Representative Journey Pack
+
+必须建立真正跨产品 cases。
+
+### Case 01
+
+```
+single person
+minimal data
+Personal only
+```
+
+### Case 02
+
+```
+multi-method personal
+profile assessment optional
+```
+
+### Case 03
+
+```
+couple
+relationship
+shared reality
+```
+
+### Case 04
+
+```
+family
+children
+shared financial reality
+```
+
+### Case 05
+
+```
+property-heavy household
+financial
+market exposure
+```
+
+### Case 06
+
+```
+business owner
+business + financial + current world
+```
+
+### Case 07
+
+```
+unknown-heavy
+```
+
+### Case 08
+
+```
+stale current data
+```
+
+### Case 09
+
+```
+conflicting perspectives
+```
+
+### Case 10
+
+```
+returning user
+reality changed since previous visit
+```
+
+---
+
+## PC-W84｜First-Use Test
+
+新用户必须能在不理解以下术语情况下使用：
+
+```
+runtime
+authority
+projection
+IR
+RRE
+FDR
+method composition
+```
+
+---
+
+## PC-W85｜Value Test
+
+每个主产品问：
+
+### Personal
+
+客户是否知道：
+
+```
+What does this tell me about my reality?
+```
+
+### Relationship
+
+```
+What is happening between us?
+```
+
+### Financial
+
+```
+Where am I financially and what matters now?
+```
+
+### World
+
+```
+What is changing?
+```
+
+### My Reality
+
+```
+What changed and what should I keep watching?
+```
+
+---
+
+# PHASE Q｜PRODUCTION CUTOVER
+
+---
+
+## PC-W86｜Route Cutover
+
+只有前面 human acceptance 通过后：
+
+更新 canonical route registry。
+
+保证：
+
+```
+old deep links still resolve
+```
+
+---
+
+## PC-W87｜Legacy Demotion
+
+优先：
+
+```
+redirect
+compatibility
+hidden navigation
+```
+
+最后才考虑：
+
+```
+physical deletion
+```
+
+---
+
+## PC-W88｜SEO Reconciliation
+
+Canonical public identity：
+
+```
+Reality Navigation
+Personal Reality
+Relationship Reality
+Financial Reality
+World Reality
+```
+
+避免 SEO 继续表现：
+
+```
+personality test
+astrology report site
+BaZi report generator
+```
+
+---
+
+## PC-W89｜Sitemap Reconciliation
+
+重新建立：
+
+```
+primary routes
+secondary routes
+knowledge routes
+specialist routes
+```
+
+Profile 从 primary 降级。
+
+---
+
+# PHASE R｜FINAL MACHINE GATES
+
+---
+
+## PC-W90｜Product Convergence Gate
+
+新增：
+
+```
+npm run check:pc-r1
+```
+
+建议聚合：
+
+```
+check:pc-r1:w0
+check:pc-r1:identity
+check:pc-r1:profile-demotion
+check:pc-r1:personal
+check:pc-r1:relationship
+check:pc-r1:financial
+check:pc-r1:market
+check:pc-r1:world-bridge
+check:pc-r1:my-reality
+check:pc-r1:ask
+check:pc-r1:navigation
+check:pc-r1:commerce
+check:pc-r1:privacy
+check:pc-r1:i18n
+check:pc-r1:customer-journeys
+```
+
+---
+
+## PC-W91｜Existing Regression Gate
+
+必须继续通过现有关键 gates：
+
+```
+npm run check:profile
+npm run check:relationship:w0-w8
+npm run check:financial-runtime-product
+npm run check:cx-r12
+npm run check:cx-r13
+npm run check:cx-r31
+npm run check:rmo
+npm run check:ppr-current-shared-owner
+npm run check:backend-frontend-full-production
+npm run check:runtime-position-48
+npm run check:pages-build
+```
+
+最后：
+
+```
+npm run check
+```
+
+不得以：
+
+```
+新的 Product Convergence checker PASS
+```
+
+取代旧 regression。
+
+---
+
+# PHASE S｜HUMAN ACCEPTANCE
+
+---
+
+## PC-W92｜Personal Human Review
+
+Decision：
+
+```
+ACCEPT
+REJECT
+```
+
+不得 machine auto-accept。
+
+---
+
+## PC-W93｜Relationship Human Review
+
+必须人工验收完整 customer relationship product。
+
+不是再验 method wording。
+
+---
+
+## PC-W94｜Financial Human Review
+
+重点验：
+
+```
+market data clarity
+portfolio exposure usefulness
+financial depth
+professional boundary
+report quality
+```
+
+---
+
+## PC-W95｜My Reality Human Review
+
+这是整个阶段最重要的验收。
+
+必须判断：
+
+> 登录以后，我是否感觉自己进入一个 Reality Navigation System，而不是进入一堆工具？
+
+只有答案是 ACCEPT 才允许 final cutover。
+
+---
+
+# PHASE T｜PRODUCTION FREEZE
+
+---
+
+## PC-W96｜Production Freeze
+
+建立：
+
+```
+content/product-convergence-r1/freeze/
+pc-r1-production-freeze-v1.json
+```
+
+记录：
+
+```
+baseline
+final commit
+routes
+authorities
+schemas
+human acceptance refs
+machine gates
+rollback point
+```
+
+---
+
+## PC-W97｜Rollback Contract
+
+任何 major regression：
+
+```
+profile
+relationship
+financial
+auth
+account person
+reports
+payments
+current data
+```
+
+必须可以 rollback 到 pre-cutover authority。
+
+---
+
+## PC-W98｜Post-Cutover Browser Acceptance
+
+真实 production：
+
+```
+getphios.com
+```
+
+检查：
+
+```
+anonymous
+logged-in
+new account
+existing account
+mobile
+desktop
+English
+Chinese
+paid
+unpaid
+```
+
+---
+
+## PC-W99｜Final Product Decision
+
+只有以下全部为 true：
+
+```
+PROFILE_DEMOTED
+PERSONAL_REALITY_ACCEPTED
+RELATIONSHIP_PRODUCT_READY
+FINANCIAL_CURRENT_REALITY_READY
+WORLD_BRIDGE_READY
+MY_REALITY_ACCEPTED
+ASK_CONTEXT_READY
+CURRENT_DATA_GOVERNED
+MOBILE_ACCEPTED
+BILINGUAL_ACCEPTED
+FULL_REGRESSION_PASS
+PRODUCTION_BROWSER_ACCEPTED
+```
+
+才能写：
+
+```
+PHI_OS_PRODUCT_CONVERGENCE_R1 = ACCEPTED
+```
+
+---
+
+# EXECUTION ORDER
+
+严格按照：
+
+```
+W0
+↓
+W1–W3
+↓
+W4–W10   PROFILE DEMOTION
+↓
+W11–W17  PERSONAL
+↓
+W18–W27  RELATIONSHIP
+↓
+W28–W43  FINANCIAL
+↓
+W44–W49  WORLD BRIDGE
+↓
+W50–W56  MY REALITY
+↓
+W57–W59  ASK
+↓
+W60–W63  INFORMATION ARCHITECTURE
+↓
+W64–W70  COMMERCE + REPORT
+↓
+W71–W77  PRIVACY + CURRENT DATA
+↓
+W78–W82  UI
+↓
+W83–W85  CUSTOMER ACCEPTANCE
+↓
+W86–W89  CUTOVER
+↓
+W90–W91  MACHINE REGRESSION
+↓
+W92–W95  HUMAN ACCEPTANCE
+↓
+W96–W99  PRODUCTION FREEZE
+```
+
+---
+
+# STOP LIST
+
+在 `PC-R1` 完成前，停止以下工作：
+
+```
+新增 Profile assessment
+新增 Profile scoring model
+继续把 Profile 当 method
+新增无客户用途的 semantic contract
+重新建立 Relationship method runtime
+重新建立 Financial calculation runtime
+重新建立 Current Evidence system
+大量新增 standalone method reports
+继续扩大 navigation 一级入口
+为了“完整”而增加没有真实 customer outcome 的 W
+```
+
+---
+
+# KEEP / REUSE LIST
+
+必须保留并复用：
+
+```
+FDR
+FCR
+FAR
+HFP
+PFR
+
+REL-W0–W8
+
+PPR current shared runtime
+
+Personal Reality successor
+
+My Reality workspace
+
+RMO
+
+Current Evidence IR
+
+Runtime Position 48
+
+Moomoo provider authority
+
+Book V historical knowledge
+
+Book VI reconfiguration/current evidence
+
+existing method calculation authorities
+
+existing account/person identity
+
+existing report infrastructure
+
+existing professional boundaries
+```
+
+---
+
+# PRODUCT SUCCESS CRITERION
+
+PC-R1 完成后，新客户不应该认为：
+
+> PHI OS 可以帮我生成八字、占星、人类图和 Profile 报告。
+
+而应该自然理解：
+
+> PHI OS 可以建立并持续更新我的现实模型。
+
+然后：
+
+```
+Personal
+告诉我我怎样运行
+
+Relationship
+告诉我我们怎样共同运行
+
+Financial
+告诉我我的资源、风险与当前金融现实
+
+World
+告诉我外部世界正在怎样改变
+
+My Reality
+把以上全部放进一个持续更新的现实空间
+
+Ask PHI
+让我针对这些现实继续提问
+```
+
+而 Method、Profile、Books、Atlas、Market Data、Professional Review 都成为支撑这个系统的不同 evidence / knowledge / perspective layer。
+
+---
+
+# FIRST EXECUTION BLOCK
+
+当前不要一次跳到 Financial 或 Relationship。
+
+第一批只执行：
+
+```
+PC-W0  Current Main Reconciliation
+PC-W1  Canonical Product Identity
+PC-W2  Canonical Product Taxonomy
+PC-W3  Product Authority Boundary
+PC-W4  Profile Product Demotion
+PC-W5  Profile Navigation Demotion
+PC-W6  Profile Method Icon / Registry Retirement
+PC-W7  Profile Evidence Envelope
+PC-W8  Profile → Personal Reality Bridge
+PC-W9  Profile Relationship Demotion
+PC-W10 Profile Freeze Successor
+```
+
+完成后必须：
+
+```
+npm run check:profile
+npm run check:cx-r12
+npm run check:cx-r31
+npm run check:ppr-current-shared-owner
+npm run check:backend-frontend-full-production
+npm run check:pages-build
+```
+
+并生成第一份 Human Review：
+
+```
+PHI-OS-PC-R1-PROFILE-DEMOTION-HUMAN-REVIEW.html
+```
+
+人审内容必须同时展示：
+
+```
+BEFORE
+当前 Profile / Perspectives 定位
+
+AFTER
+Profile 作为 optional evidence
+Personal Reality 作为 customer product
+Method 作为 perspective
+```
+
+只有你明确：
+
+```
+PC-R1 PROFILE DEMOTION ACCEPT
+```
+
+才继续 W11。

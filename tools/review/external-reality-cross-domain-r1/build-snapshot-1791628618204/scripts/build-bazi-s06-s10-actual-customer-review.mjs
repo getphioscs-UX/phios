@@ -1,0 +1,132 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+
+const source=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json','utf8'));
+const reading=source.reading;
+const p=reading.professionalModules;
+const pillars=reading.structuralModel.pillars;
+const pillarText=pillars.map(x=>x.stem.zh+x.branch.zh).join('・');
+assert.equal(pillarText,'己巳・庚午・癸丑・戊午');
+assert.equal(p.tenGods.dayMaster.zh,'癸');
+assert.equal(p.tenGods.monthCommand.branchZh,'午');
+assert.equal(p.timing.currentDaYun.pillar.stem.zh+p.timing.currentDaYun.pillar.branch.zh,'甲戌');
+assert.equal(p.timing.currentDaYun.startAge,34);
+assert.equal(p.timing.currentDaYun.endAge,44);
+assert.equal(p.timing.annual.year,2026);
+assert.equal(p.timing.annual.stem.zh+p.timing.annual.branch.zh,'丙午');
+
+const sections=[
+{
+ key:'S06',titleZh:'关系',titleEn:'Relationships',
+ zh:[
+ ['关系命盘重点','这张命盘是己巳・庚午・癸丑・戊午，日主为癸水，生于午月。关系主题里最明显的不是单一“配偶星”，而是官杀、财星、印星与比肩同时参与：年干己为七杀，时干戊为正官，月干庚为正印；日支丑中又藏七杀、比肩与偏印。亲近关系因此容易同时牵动责任、现实投入、自主位置和理解支持几个层面。日柱与时柱之间同时出现癸戊天干合与丑午害，使“自我位置—未来安排”成为需要持续协调的一条轴线。'],
+ ['你的关系模式','正官与七杀既有透干也有藏干，使“责任、标准、承诺是否清楚”在关系里比单纯情绪表达更重要。日支丑内有比肩，说明关系不能只靠承担责任维持；你仍需要保留自己的判断、节奏与位置。正印透月干、偏印藏日支，则让理解、解释与消化经验成为另一条重要路径。更适合的关系模式，是把责任与需要说清楚后共同承担，而不是一方不断接住所有事情。'],
+ ['关系中的优势','官星让你较容易看见责任与承诺；印星提供先理解再回应的能力；日支比肩保留自我位置；财星虽然主要藏于巳、午，却让时间、注意力与现实资源的投入成为关系能否持续的重要部分。真正的优势不是“某颗星很多”，而是能够在需要时分别使用责任、理解、自主与投入，而不是把它们混成同一种义务。'],
+ ['容易遇到的关系课题','日干癸与时干戊相合，说明自我与责任/未来安排之间容易形成连接；但日支丑与时支午构成害，月支午与日支丑也有害，月支午与时支午还有自刑。这里不能读成背叛、分离或争吵预言，更适合读成：当外部要求、未来计划和亲近关系同时增加时，需要更频繁地核对边界、分工和真实需要。'],
+ ['更适合的相处方式','把“谁负责什么、什么需要回应、什么仍由自己决定”分开谈，会比默契式承担更适合这张命盘。官杀适合用在建立规则与兑现承诺；印星适合用在理解背景、听清楚需要再回应；比肩提醒你保留自己的判断；财星则落到时间、注意力、金钱与生活资源如何投入。'],
+ ['当前大运与流年','目前在甲戌大运（34–44岁），天干甲为伤官；戌中藏正官、偏印与偏财。伤官是本命原局没有出现的表达/成果主题，因此这一运更值得观察“原本承担的责任，是否需要用更直接的表达重新界定”。甲与年干己形成天干合，但没有合化结论。2026年为丙午，丙为正财，午支又带偏财与七杀，并重复本命月、时两处午。今年更值得注意现实投入、承诺与责任如何被说清楚，而不是把它读成结婚、分手或第三者事件。'],
+ ['关系建议','最值得带走的不是“会遇到怎样的人”，而是三个关系动作：先把责任讲清楚，再把需要讲清楚，最后确认哪些决定仍属于自己。可以问：我是在真正回应对方，还是只是在完成责任？我的投入是自愿、可持续，还是因为不想让人失望？当前大运增加了表达主题，把过去习惯默默承担的部分说出来，会比继续猜测对方更有用。']
+ ],
+ en:[
+ ['Relationship chart','The chart is Ji-Si · Geng-Wu · Gui-Chou · Wu-Wu. The Day Master is Gui Water, born in a Wu month. Relationship themes are not carried by one isolated spouse indicator; Officer, Wealth, Resource and Peer functions all participate. Ji on the Year Stem is Seven Killings, Wu on the Hour Stem is Direct Officer, and Geng on the Month Stem is Direct Resource. Chou in the Day Pillar also contains Seven Killings, Peer and Indirect Resource. Close relationships therefore involve responsibility, practical investment, autonomy and support at the same time. The Day and Hour Pillars are linked by a Gui-Wu stem combination while Chou-Wu forms a branch harm.'],
+ ['Your relationship pattern','Both Direct Officer and Seven Killings are genuinely present, with Officer themes visible as well as hidden. This makes clarity around responsibility, standards and commitment more important than simply following emotion. Peer in the Day Branch means closeness also needs room for your own judgment and pace. Direct Resource on the Month Stem and Indirect Resource in the Day Branch add a need to understand and process what is happening. The more workable pattern is shared responsibility with explicit needs and boundaries, rather than one person continually carrying everything.'],
+ ['Relationship strengths','Officer gives a reference point for responsibility and commitment. Resource supports understanding before reacting. Peer in the Day Branch preserves a sense of self. Wealth, mainly hidden in Si and Wu, brings attention to practical investment of time, attention and shared resources. The advantage is not that one symbol is abundant; it is the ability to distinguish responsibility, understanding, autonomy and investment instead of turning all four into one obligation.'],
+ ['Relationship challenges','Gui on the Day Stem combines with Wu on the Hour Stem, connecting self-position with duty and future expression. Yet Chou on the Day Branch has a harm relation with Wu on the Hour Branch, the Month Wu also harms the Day Chou, and the Month and Hour Wu branches form a self-punishment pattern. This does not predict betrayal, separation or conflict. It suggests that when external demands, future plans and closeness rise together, roles and expectations need to be renegotiated more often.'],
+ ['Ways of relating','Separate three questions: who is responsible for what, what genuinely needs a response, and what remains an individual decision. Officer functions help with agreements and follow-through. Resource helps with understanding context. Peer protects independent judgment. Wealth brings the relationship back to practical investment of time, attention and shared resources. When these functions blur together, caring can turn into carrying everything.'],
+ ['Current Da Yun and annual cycle','The current Da Yun is Jia-Xu, covering ages 34–44. Jia is Hurting Officer, while Xu contains Direct Officer, Indirect Resource and Indirect Wealth. Hurting Officer is absent from the natal chart, so this cycle adds a stronger emphasis on articulation and visible output. Jia also forms a stem combination with natal Ji, with no transformation established. The annual layer for 2026 is Bing-Wu: Bing is Direct Wealth, and Wu contains Indirect Wealth and Seven Killings while repeating the natal Wu branches. This is a period for clarifying practical investment, expectations and responsibility, not evidence of marriage, breakup or a third-party event.'],
+ ['Relationship guidance','The most useful takeaway is not what kind of partner you will meet, but three actions: clarify responsibility, clarify needs, and clarify what still belongs to your own decision. Ask whether you are genuinely responding or merely completing a duty, and whether your investment is voluntary and sustainable or driven by fear of disappointing someone. The current Da Yun adds a stronger expression theme, so putting previously unspoken expectations into words may be more useful than guessing the other person.']
+ ]
+},
+{
+ key:'S07',titleZh:'健康与生活节奏',titleEn:'Health and life rhythm',
+ zh:[
+ ['身心负荷命盘重点','命盘为己巳・庚午・癸丑・戊午，癸水日主生于午月。官杀在年干、时干及多处藏干反复出现，印星由月干庚正印透出，并在年支、日支继续出现。这里不把任何十神对应成疾病，而是只读“负荷—支持—恢复节奏”。午支在月柱与时柱重复，又有午午自刑和午丑害，所以更值得观察的是责任、环境要求与自我节奏重复叠加时，恢复空间是否被挤压。'],
+ ['负荷怎样形成','七杀与正官同时存在，使负荷较容易来自“事情必须完成、标准不能掉、责任需要有人接住”。尤其时干正官把责任主题带到执行与未来安排，年干七杀则让外部要求进入更广的结构。若现实中多个角色同时要求维持标准，压力更可能表现为持续承担，而不是单一事件。这里不推断焦虑、失眠或任何生理问题。'],
+ ['什么有助于恢复','月干庚正印是最清楚的支持线索之一。正印更适合被理解为通过学习、整理、理解背景和建立方法来降低无序感，而不是“身体会自动恢复”。日支丑内的偏印与比肩，则增加了两个恢复条件：不被打扰的思考空间，以及保留自己的节奏。恢复不只是休息，还包括把复杂要求重新分类、把责任边界重新划清。'],
+ ['需要留意的负荷点','午月与午时形成重复，月—日午丑害、日—时丑午害，再加午午自刑，使“相似要求反复出现”比单一冲突更值得注意。可以观察：同一种责任是否在工作、家庭或关系中重复出现？是否经常在已经答应一件事之后，又因为新的要求继续加码？这种结构不代表疾病或事故。'],
+ ['日常维护方向','较适合的维护方式是先管理负荷来源，而不是寻找命理“补救物”。可以把责任分成必须承担、可以协商、可以延后的三类；把需要长期思考的任务集中处理，而不是持续被小要求打断；同时保留固定的无任务时段。若出现持续不适、情绪困扰或身体症状，应直接以医学与专业评估为准。'],
+ ['当前大运与流年','当前甲戌大运的甲为伤官，把“表达、输出、把话说出来”带进原本官杀较明显的结构。对负荷管理而言，这一运更值得练习把责任重新说明，而不是默认继续接住。2026年丙午，丙正财进入年度层，午又重复本命午支，使现实需求和资源投入更值得被记录。它不预测健康事件，只提示今年更需要看见承诺如何占用时间与恢复空间。'],
+ ['健康与生活节奏建议','如果只保留三条：第一，先减少重复责任，再谈恢复；第二，需要思考的事情尽量一次处理，不要让注意力被持续切碎；第三，当负荷增加时，用现实记录判断自己是否真的有足够睡眠、休息、时间与支持，而不是凭意志继续扛。八字不能替代医学诊断或治疗建议。']
+ ],
+ en:[
+ ['Load and recovery chart','The chart is Ji-Si · Geng-Wu · Gui-Chou · Wu-Wu, with a Gui Water Day Master in a Wu month. Officer functions appear on the Year and Hour Stems and recur in hidden stems, while Resource is visible through Geng on the Month Stem and appears again in hidden stems. This chapter uses those facts only to discuss load, support and recovery rhythm, not disease. Repeated Wu branches, Wu-Wu self-punishment and Wu-Chou harm relations make repeated demands and compressed recovery time the more relevant theme to observe.'],
+ ['How pressure tends to build','With both Seven Killings and Direct Officer present, load is more likely to build through standards, obligations and the feeling that something must be carried through properly. Direct Officer on the Hour Stem links this especially to execution and future arrangements, while Seven Killings on the Year Stem brings external demands into the wider frame. When several roles require standards at once, the structural risk is sustained over-commitment rather than one isolated event. This does not imply anxiety, insomnia or any bodily condition.'],
+ ['What supports recovery','Geng Direct Resource on the Month Stem is one of the clearest support indicators. Resource is better understood as reducing disorder through learning, organising information and making sense of context, not as proof of physical recovery capacity. Indirect Resource and Peer in the Day Branch add two practical conditions: private processing space and the freedom to keep your own pace. Recovery therefore includes sorting demands and clarifying responsibility, not only rest.'],
+ ['Pressure points to watch','The repeated Wu branches, Wu-Chou harm between Month and Day, Chou-Wu harm between Day and Hour, and Wu-Wu self-punishment point more to repeated demands than to one dramatic conflict. A useful reality check is whether the same type of responsibility keeps reappearing across work, family or relationships, and whether new obligations are added after you have already committed. This does not predict illness or injury.'],
+ ['Daily maintenance','The most useful maintenance approach is to manage sources of load rather than seek symbolic remedies. Separate responsibilities into what must be carried, what can be negotiated and what can wait. Group work that requires deeper thinking instead of allowing constant small demands to fragment attention. Protect periods with no active obligation so the Resource function has room to process and integrate. Persistent physical symptoms or emotional concerns should be assessed through appropriate healthcare rather than inferred from Five Elements.'],
+ ['Current Da Yun and annual cycle','The current Jia-Xu Da Yun brings Jia Hurting Officer into a natal structure where Officer themes are already prominent. For load management, that makes articulation—saying what can and cannot be carried—more relevant than automatically absorbing another responsibility. In 2026, Bing-Wu adds Direct Wealth and another Wu branch, increasing the emphasis on practical demands and resource use. This does not predict a health event; it makes the cost of commitments more important to observe.'],
+ ['Health and rhythm guidance','If you keep only three points: reduce repeated obligations before trying to recover from them; batch work that requires deep processing instead of allowing attention to be continually fragmented; and when load rises, use real evidence—sleep, rest, time and available support—to judge capacity rather than relying on willpower. BaZi is used here only as a symbolic framework for observing life rhythm. It does not replace medical diagnosis or treatment.']
+ ]
+},
+{
+ key:'S08',titleZh:'时运',titleEn:'Timing',
+ zh:[
+ ['本命时间基线','本命为己巳・庚午・癸丑・戊午，癸水日主、午月。长期底色里官杀与印星清楚，财星主要藏于巳、午，比肩与偏印落在日支。原局没有食神、伤官，因此“表达成果、主动说出不同意见”不是本命最显眼的表层主题。时间层真正重要的是：当大运或流年引入原局没有明显出现的十神时，阶段重点会改变，但不能把阶段主题倒写成本命性格。'],
+ ['当前大运','目前是第4步甲戌大运，34至44岁。甲对癸日主为伤官，这是本命原局没有出现的十神，因此这十年新增的是表达、成果输出、质疑既有做法和把经验变成可见结果的主题。戌中藏戊正官、辛偏印、丁偏财，说明表达仍要同时面对标准、理解与现实投入。甲与原局年干己形成天干合，但未确认合化。'],
+ ['当前流年','2026年为丙午。丙对癸日主为正财，把明确需求、交换、实际收入与资源投入推到年度前景；午支又藏丁偏财、己七杀。由于本命月支和时支本来就是午，2026的午会再次重复这条结构，因此这一年更容易把现实需求、责任与时间使用放在同一个议题里。年度层只说明这一年的强调，不代表一定出现财富、职位或关系事件。'],
+ ['运年与原局关系','大运甲与年干己合，是当前十年最明确的运—命互动之一，且没有合化结论。流年午与本命月支午、时支午形成重复与自刑，同时与日支丑形成害。重点不是某件事一定会发生，而是原局已经存在的午—丑、午—午主题在年度层再次被触碰。环境要求、未来安排与自我节奏之间的协调，在2026年更值得主动处理。'],
+ ['这一阶段可利用的主题','这十年的新资源是伤官：把想法、经验与不满意之处表达出来，并形成成果。2026年的正财则把表达带回现实需求：输出是否能回应客户、家庭、市场或具体交换。若能把两层结合，较有价值的方向是“先形成清楚表达，再验证它是否真正回应现实需求”。印星仍提供学习与理解背景，官星继续要求结果可以被承担与兑现。'],
+ ['这一阶段要留意的主题','需要留意的是表达、责任与现实投入同时增加时，容易出现“想改变做法，但旧责任仍然存在”的拉扯。伤官不等于一定与官星冲突，正财也不等于一定带来收入；真正要核对的是新的表达有没有足够证据、新的承诺有没有时间和资源承接、今年增加的投入是否挤压了原有责任。'],
+ ['阶段导航','把三层分开最有用：本命说明长期习惯以责任、理解与现实投入共同运作；甲戌大运把表达与成果推到十年重点；2026丙午则把现实需求与资源交换推到年度重点。做决定时依次问：这是不是长期适合我的结构？这是十年阶段需要发展的能力，还是只是一年的放大？现实数据是否支持我现在行动？']
+ ],
+ en:[
+ ['Natal timing baseline','The natal chart is Ji-Si · Geng-Wu · Gui-Chou · Wu-Wu, with Gui Water in a Wu month. The long-term baseline clearly contains Officer and Resource functions; Wealth is mainly hidden in Si and Wu, while Peer and Indirect Resource sit in the Day Branch. Eating God and Hurting Officer are absent from the natal Ten-God inventory. Explicit output and challenge are therefore not the most visible natal themes. Timing matters when a Da Yun or annual layer introduces a function that was less visible at birth; that changes period emphasis without rewriting the natal structure.'],
+ ['Current Da Yun','The current cycle is the fourth Da Yun, Jia-Xu, covering ages 34–44. Jia is Hurting Officer for a Gui Day Master, and Hurting Officer is absent from the natal Ten-God inventory. This introduces a decade-long emphasis on expression, output, questioning established methods and making results visible. Xu contains Direct Officer, Indirect Resource and Indirect Wealth, so expression still operates alongside standards, understanding and practical investment. Jia combines with natal Ji on the Year Stem, but no transformation is established.'],
+ ['Current annual layer','The annual layer for 2026 is Bing-Wu. Bing is Direct Wealth for Gui Water, bringing practical demand, exchange, income arrangements and resource commitment into the foreground. Wu also contains Indirect Wealth and Seven Killings. Because Wu is already present in both the natal Month and Hour Branches, the annual Wu repeats an existing pattern. This makes practical demand, responsibility and use of time more visible together. It describes emphasis, not a guaranteed financial, career or relationship event.'],
+ ['Timing interactions with the natal chart','One of the clearest Da-Yun-to-natal interactions is the Jia-Ji stem combination with the Year Stem, without an established transformation. The annual Wu repeats the natal Month and Hour Wu branches, activates the Wu-Wu self-punishment pattern and forms a harm relation with the Day Chou. The point is not that a specific event must happen; existing natal themes involving external demands, future arrangements and personal pacing are touched again at the annual layer.'],
+ ['Themes to use','The new resource of this decade is Hurting Officer: articulating ideas, making experience visible and turning dissatisfaction into output rather than carrying it silently. The 2026 Direct Wealth layer pulls that expression back toward real demand—whether the output actually serves customers, family needs, market exchange or practical commitments. Used together, the stronger opportunity is to express clearly and then test whether that expression answers a real need.'],
+ ['Themes to watch','The main caution is the tension that can arise when expression, responsibility and practical commitments all increase together: you may want to change how things are done while existing obligations remain. Hurting Officer does not automatically mean conflict with Officer, and Direct Wealth does not automatically mean more income. Check whether new expression is supported by evidence, whether new commitments have time and resources behind them, and whether annual demands are displacing obligations already in place.'],
+ ['Timing guidance','Keep the three layers separate. The natal chart describes a long-term operating pattern of responsibility, understanding and practical investment. Jia-Xu makes expression and output a decade-level emphasis. Bing-Wu in 2026 makes demand and resource exchange a year-level emphasis. Before acting, ask whether something fits the long-term structure, whether it is a skill this decade is asking you to develop, or whether it is simply being amplified for one year—and then check real evidence.']
+ ]
+},
+{
+ key:'S09',titleZh:'导航建议',titleEn:'Guidance',
+ zh:[
+ ['当前优先级','从命盘与当前运年来看，优先级可以浓缩成四项：把责任边界说清楚，避免官杀主题变成持续过度承担；继续利用正印与偏印所代表的学习、整理与理解能力；用甲戌大运新增的伤官，把经验转成可见表达和成果；面对2026丙午正财年度，把表达与现实需求、收入安排和资源投入连接起来。顺序是：先理解，再表达，再验证，再承担。'],
+ ['可以调用的能力','最值得调用的能力不是更努力，而是三种已有结构：正印提供系统化理解，正官与七杀提供承担标准，比肩保留自我位置。当前大运再加入伤官，使你比过去更有条件把理解转成表达。现实中可以把它用成一个工作方式：先把问题拆清楚，形成自己的判断，再用明确语言提出方案，最后才决定承担多少责任。'],
+ ['需要保留的边界','边界最容易模糊在责任、关系投入和时间。日时癸戊合让自我与责任容易连在一起，而丑午害与午午自刑提醒相似要求可能反复出现。遇到新的合作或承诺时，先分清“这是我必须承担的责任，还是我因为习惯负责而自动接下来的责任”。对关系也是一样：投入不等于替别人完成他们该承担的部分。'],
+ ['需要保护的资源','第一资源是注意力。印星要发挥作用，需要完整的理解与整理时间；若持续被小任务打断，学习优势会被削弱。第二是可保留的时间与资金，因为财星在本命与2026年度都参与现实投入。第三是恢复空间，避免责任和输出同时增加时没有回收余地。保护这些资源，是为了让你承担的事情真正可以持续。'],
+ ['当前阶段的取舍','甲戌大运的重点更适合放在“表达与成果”而不是单纯增加责任。若有新机会，先看它是否让你建立可见成果、方法或作品，再看它是否值得长期承担。2026丙午把现实需求与正财带到年度层，因此今年的选择尤其需要核对交换是否清楚：投入什么、得到什么、责任到哪里为止。'],
+ ['现实核对','核对七个问题：我现在最大的压力来自责任过多，还是优先级不清？我是否有完整时间学习和整理？有哪些观点已经形成，却一直没有表达？新的收入或合作是否有清楚交换条件？关系里哪些责任属于我，哪些应该共同承担？今年增加的投入有没有挤压已有承诺？我能否用真实结果证明新的方向值得继续？'],
+ ['导航摘要','这不是一个“继续多扛一点”的阶段，而是把过去积累的理解转成更清楚的表达，再用现实需求检验哪些表达值得变成长期责任。优先保护注意力、时间、资金与恢复空间；对工作、关系和资源承诺都先讲清交换与边界。']
+ ],
+ en:[
+ ['Current priorities','The chart and current timing can be reduced to four priorities: clarify the boundary of responsibility so the Officer theme does not become continuous over-carrying; keep using the Resource function—learning, organising and understanding; use the new Hurting Officer emphasis of the Jia-Xu Da Yun to turn experience into visible expression and output; and in the 2026 Bing-Wu year, connect that output to real demand, income arrangements and practical resource commitments. The sequence is understand, express, test, then commit.'],
+ ['Capabilities to use','The most useful capability is not simply to work harder, but to combine three existing functions: Direct Resource for structured understanding, Officer functions for standards and accountability, and Peer for maintaining your own position. The current Da Yun adds Hurting Officer, giving more room to turn understanding into expression. In practice: clarify the problem, form your own view, communicate a proposal, and only then decide how much responsibility to carry.'],
+ ['Boundaries to keep','Boundaries are most likely to blur around responsibility, relationship investment and time. The Gui-Wu Day–Hour stem combination links self-position with duty, while the Chou-Wu harm and repeated Wu pattern show how similar demands can recur. Before accepting a new role or commitment, distinguish between responsibility that genuinely belongs to you and responsibility you take on automatically because you are accustomed to being dependable.'],
+ ['Resources to protect','The first resource to protect is attention. Resource functions work best when there is uninterrupted time to understand and organise; constant fragmentation reduces that advantage. The second is retainable time and money, because Wealth participates in both the natal structure and the 2026 annual layer. The third is recovery space, especially when responsibility and output are rising at the same time. Protecting these resources preserves the capacity to follow through on what you choose to carry.'],
+ ['Choices for the current stage','In the Jia-Xu Da Yun, the more developmental choice is to build expression and output rather than simply add more responsibility. With a new opportunity, first ask whether it creates visible work, a method or a body of results, and only then whether it deserves a long-term commitment. Bing-Wu in 2026 brings practical demand and Direct Wealth into the annual layer, so exchange needs to be especially clear: what are you putting in, what is being returned, and where does responsibility end?'],
+ ['Reality checks','Ask seven questions: Is the main pressure too much responsibility or unclear priority? Do you have uninterrupted time to learn and organise? Which views are already formed but still unspoken? Are the terms of exchange in a new income or collaboration arrangement clear? Which relationship responsibilities are yours and which should be shared? Are this year’s commitments displacing obligations already in place? Can real results show that a new direction deserves continuation?'],
+ ['Navigation summary','This is less a period for carrying more and more, and more a period for turning accumulated understanding into clearer expression, then testing which outputs deserve to become long-term responsibilities. Protect attention, time, money and recovery space; make exchange and boundaries explicit in work, relationships and commitments.']
+ ]
+},
+{
+ key:'S10',titleZh:'附录',titleEn:'Appendix',
+ zh:[
+ ['四柱资料','四柱：年柱己巳、月柱庚午、日柱癸丑、时柱戊午。日主为癸水，月令为午火（夏季）。这些是本报告所有后续解读的基础坐标。'],
+ ['十神资料','比肩：日支丑藏癸。偏财：月支午藏丁、时支午藏丁。正财：年支巳藏丙。七杀：年干己透出，并藏于月支午、日支丑、时支午。正官：时干戊透出，年支巳藏戊。偏印：日支丑藏辛。正印：月干庚透出，年支巳藏庚。'],
+ ['五行原始背景','原始未加权计数：木0、火6、土7、金3、水2，合计18个可见/藏干触点。这里只记录原始分布；当前 authority 没有数值化加权强弱，因此这些数字不能直接当成旺衰、喜用神或吉凶评分。'],
+ ['原局关系','已确认关系包括：日干癸与时干戊天干合；月支午与日支丑地支害；日支丑与时支午地支害；月支午与时支午地支自刑。癸戊合未确认合化；害与自刑也只记录结构互动，不直接等同现实事件。'],
+ ['当前大运资料','当前第4步大运为甲戌，34–44岁。甲为伤官；戌中藏戊正官、辛偏印、丁偏财。与原局已确认互动：甲与年干己天干合，未确认合化。'],
+ ['当前流年资料','当前流年为2026丙午。丙为正财；午中藏丁偏财、己七杀。流年午与本命月支午、时支午存在重复/自刑互动，并与日支丑有害。这里只记录时间层结构，不给年度吉凶或事件预测。'],
+ ['阅读说明','本附录只保存可追溯的命盘事实与当前已获 authority 的关系、运年资料。原始五行计数不等于旺衰；合不等于合化；十神出现次数不等于重要性评分；本报告没有在缺乏 authority 时新增喜用神、格局完成、疾病、婚恋或财富事件判断。']
+ ],
+ en:[
+ ['Four Pillars','Four Pillars: Year Ji-Si, Month Geng-Wu, Day Gui-Chou, Hour Wu-Wu. The Day Master is Gui Water. The Month Command is Wu Fire in summer. These are the base coordinates used by the rest of the report.'],
+ ['Ten God map','Peer: Gui hidden in the Day Branch Chou. Indirect Wealth: Ding hidden in the Month and Hour Wu branches. Direct Wealth: Bing hidden in the Year Branch Si. Seven Killings: Ji visible on the Year Stem and hidden in Month Wu, Day Chou and Hour Wu. Direct Officer: Wu visible on the Hour Stem and hidden in Year Si. Indirect Resource: Xin hidden in Day Chou. Direct Resource: Geng visible on the Month Stem and hidden in Year Si.'],
+ ['Raw Five Element context','Raw unweighted counts: Wood 0, Fire 6, Earth 7, Metal 3, Water 2; total 18 visible/hidden-stem touches. These are inventory counts only. The current authority does not provide a numeric weighted-strength verdict, so the counts are not a strength score and do not establish favourable elements or useful gods.'],
+ ['Natal relations','Recorded natal relations: Gui-Wu stem combination between Day and Hour; Wu-Chou branch harm between Month and Day; Chou-Wu branch harm between Day and Hour; and Wu-Wu branch self-punishment between Month and Hour. The Gui-Wu combination has no established transformation, and the harm/self-punishment relations do not by themselves establish lived events.'],
+ ['Current Da Yun reference','Current Da Yun: cycle 4, Jia-Xu, ages 34–44. Jia is Hurting Officer. Xu contains Wu Direct Officer, Xin Indirect Resource and Ding Indirect Wealth. Recorded natal interaction: Jia combines with the Year-Stem Ji, with no transformation established.'],
+ ['Current annual reference','Current annual layer: 2026, Bing-Wu. Bing is Direct Wealth. Wu contains Ding Indirect Wealth and Ji Seven Killings. The annual Wu repeats the natal Month and Hour Wu branches, activates the self-punishment pattern, and has a harm relation with the Day Chou. These are timing-layer facts only, not a good/bad-year score or event forecast.'],
+ ['Reading notes','This appendix preserves traceable chart facts and currently admitted relation/timing evidence. Raw Five-Element counts are not strength scores; combination does not mean transformation; Ten-God occurrence counts are not importance scores. Where authority is absent, the report does not add useful-god determinations, completed-pattern verdicts, medical claims, relationship events or wealth forecasts.']
+ ]
+}
+];
+
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const html='<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>BaZi S06-S10 Actual Customer Reading Review</title><style>body{margin:0;background:#f3efe7;color:#1f3138;font:16px/1.75 system-ui,-apple-system,Segoe UI,sans-serif}main{max-width:1180px;margin:auto;padding:30px 18px}header,.section{background:#fffdf8;border:1px solid #d8cdbd;border-radius:16px;padding:26px;margin-bottom:24px}h1{font-size:30px}h2{font-size:25px;border-bottom:1px solid #ddd2c3;padding-bottom:10px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.lang{background:#faf7f1;border-radius:12px;padding:18px}.block{border-top:1px solid #e5ddd1;padding:15px 0}.block:first-child{border-top:0}.block h3{margin:0 0 8px;font-size:18px}.block p{margin:0}.reject{background:#fff0ed;border:1px solid #d9a49a;border-radius:10px;padding:12px;margin:14px 0}@media(max-width:820px){.grid{grid-template-columns:1fr}}</style><main><header><h1>BaZi S06–S10｜Actual Customer Reading</h1><div class="reject">Previous “content-plan / parity” review artifact is REJECTED. This page contains customer-facing BaZi interpretation, not writing instructions. English is independently written in English.</div><p>Fixture: 己巳・庚午・癸丑・戊午 · Day Master 癸 / Gui Water · Current Da Yun 甲戌 / Jia-Xu (34–44) · Annual 2026 丙午 / Bing-Wu.</p><p>Provider calls: 0 · Production activation: false.</p></header>'+sections.map(s=>'<section class="section"><h2>'+esc(s.key+' '+s.titleZh+' / '+s.titleEn)+'</h2><div class="grid"><div class="lang"><h3>中文客户正文</h3>'+s.zh.map(b=>'<article class="block"><h3>'+esc(b[0])+'</h3><p>'+esc(b[1])+'</p></article>').join('')+'</div><div class="lang"><h3>English customer copy</h3>'+s.en.map(b=>'<article class="block"><h3>'+esc(b[0])+'</h3><p>'+esc(b[1])+'</p></article>').join('')+'</div></div></section>').join('')+'</main></html>';
+
+fs.mkdirSync('tools/review',{recursive:true});
+fs.writeFileSync('tools/review/BAZI-S06-S10-ACTUAL-CUSTOMER-READING-REVIEW.html',html);
+console.log('PASS: wrote tools/review/BAZI-S06-S10-ACTUAL-CUSTOMER-READING-REVIEW.html');
+console.log('  Actual BaZi customer copy: S06-S10, zh-Hans + English, provider calls 0.');

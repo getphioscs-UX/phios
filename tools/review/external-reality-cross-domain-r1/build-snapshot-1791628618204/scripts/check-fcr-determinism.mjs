@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {calculateFinancialProjection,stableFinancialResult} from '../functions/financial/calculation-runtime/financial-calculation-runtime.js';
+import {sha256} from '../functions/financial/calculation-runtime/stable-digest.js';
+import {readJson} from './lib/fcr/fcr-check-lib.mjs';
+const fixture=readJson('content/financial/calculation-runtime/fixtures/retirement.json');
+const a=await calculateFinancialProjection(fixture.calculationInput); const b=await calculateFinancialProjection(structuredClone(fixture.calculationInput));
+assert.equal(a.resultDigest,b.resultDigest); assert.equal(a.determinismKey,b.determinismKey); assert.equal(stableFinancialResult(a),stableFinancialResult(b));
+const changed=structuredClone(fixture.calculationInput); const target=changed.assumptionSet.assumptions.find(x=>x.type==='INVESTMENT_RETURN'); target.value=0.051; const set=structuredClone(changed.assumptionSet); delete set.digest; changed.assumptionSet.digest=await sha256(set);
+const c=await calculateFinancialProjection(changed); assert.notEqual(c.assumptionDigest,a.assumptionDigest); assert.notEqual(c.resultDigest,a.resultDigest); assert.notEqual(c.determinismKey,a.determinismKey);
+const changedFdr=structuredClone(fixture.calculationInput); changedFdr.fdrSnapshot.digest='f'.repeat(64); const d=await calculateFinancialProjection(changedFdr); assert.notEqual(d.resultDigest,a.resultDigest); assert.notEqual(d.determinismKey,a.determinismKey);
+console.log('✓ FCR-W21 determinism/regression passed.');
+console.log('  same FDR digest + same assumption digest + same FCR version/scenario/engine set => byte-stable result digest; governed input drift changes the digest.');

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "PHI-OS-HFP-W6-W16-COMPOSITION-REGISTRY-v1.0.0",
+  "phase": "HFP",
+  "workRange": [
+    "HFP-W6",
+    "HFP-W16"
+  ],
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "ACTIVE_SOURCE_SELECTION_ONLY",
+  "fcrEngineToSection": {
+    "NET_WORTH": "NET_WORTH",
+    "LIQUIDITY": "LIQUIDITY",
+    "CASH_FLOW": "CASH_FLOW",
+    "DEBT": "LIABILITIES",
+    "CONTINGENT_EXPOSURE": "LIABILITIES",
+    "PROTECTION_NEED": "PROTECTION",
+    "EDUCATION_FUNDING": "EDUCATION",
+    "RETIREMENT": "RETIREMENT",
+    "INVESTMENT_PROJECTION": "INVESTMENT_STRUCTURE",
+    "ALLOCATION": "INVESTMENT_STRUCTURE",
+    "BUSINESS_WEALTH": "BUSINESS_WEALTH",
+    "ESTATE_LIQUIDITY": "ESTATE_SUCCESSION",
+    "CURRENCY": "CROSS_BORDER"
+  },
+  "fdrCollections": {
+    "HOUSEHOLD": [
+      "householdReference",
+      "people"
+    ],
+    "LIABILITIES": [
+      "liabilities",
+      "guarantees"
+    ],
+    "PROTECTION": [
+      "policies"
+    ],
+    "GOALS": [
+      "goals"
+    ],
+    "BUSINESS_WEALTH": [
+      "entities"
+    ],
+    "ESTATE_SUCCESSION": [
+      "estateFacts"
+    ],
+    "CROSS_BORDER": [
+      "currencyContext",
+      "assets",
+      "entities"
+    ]
+  },
+  "farFindingDestination": "KEY_FINDINGS",
+  "scenarioDestination": "SCENARIO_ANALYSIS",
+  "rules": {
+    "selectionCreatesNoNewCalculation": true,
+    "selectionCreatesNoNewFinding": true,
+    "metricValuesCopiedVerbatim": true,
+    "findingPayloadCopiedVerbatim": true,
+    "scenarioComparisonUsesUpstreamResultsOnly": true
+  }
+}

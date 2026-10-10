@@ -1,0 +1,5 @@
+import {buildZiWeiDynamicMeaningBundle} from '../zi-wei-dynamic/dynamic-meaning-runtime.js';
+import {buildZiWeiDynamicReadingIR} from '../zi-wei-dynamic/dynamic-reading-ir.js';
+function json(payload,status=200){return new Response(JSON.stringify(payload),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff'}});}
+export async function onRequestPost({request}){let body;try{body=await request.json();}catch{return json({ok:false,error:'INVALID_JSON'},400);}if(body?.schemaVersion!=='PHI-OS-ZWD-MEANING-REQUEST-v1.0.0')return json({ok:false,error:'ZWD_MEANING_REQUEST_SCHEMA_INVALID'},400);try{const meaningBundle=await buildZiWeiDynamicMeaningBundle({projection:body.dynamicProjection,locale:body.locale});const reading=buildZiWeiDynamicReadingIR({projection:body.dynamicProjection,meaningBundle});return json({ok:true,capabilityAvailability:'AVAILABLE',meaningBundle,reading},200);}catch(error){return json({ok:false,error:error?.code||'ZWD_MEANING_FAILED_CLOSED'},422);}}
+export async function onRequestGet(){return json({ok:false,error:'ZWD_MEANING_POST_ONLY'},405);}

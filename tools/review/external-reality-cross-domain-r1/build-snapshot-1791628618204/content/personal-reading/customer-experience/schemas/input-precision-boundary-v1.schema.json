@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-INPUT-NARRATIVE-PRECISION-BOUNDARY-v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schemaVersion","dimensions","dependencies","overallPrecision","narrativeWordingPolicy","certaintyMayExceedInput","aiMayImproveReadabilityOnly"],
+  "properties":{
+    "schemaVersion":{"const":"PHI-OS-INPUT-NARRATIVE-PRECISION-BOUNDARY-v1.0.0"},
+    "dimensions":{"type":"object"},
+    "dependencies":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "overallPrecision":{"enum":["EXACT","HIGH","MEDIUM","LOW","UNKNOWN","NOT_APPLICABLE"]},
+    "narrativeWordingPolicy":{"enum":["QUALIFIED_DIRECT","QUALIFIED","TENTATIVE","WITHHOLD_HIGH_PRECISION"]},
+    "certaintyMayExceedInput":{"const":false},
+    "aiMayImproveReadabilityOnly":{"const":true}
+  }
+}

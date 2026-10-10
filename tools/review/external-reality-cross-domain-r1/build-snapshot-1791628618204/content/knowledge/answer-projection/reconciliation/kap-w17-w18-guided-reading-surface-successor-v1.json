@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W17-W18-GUIDED-READING-SURFACE-SUCCESSOR-v1.0.0",
+  "status": "ACTIVE_ADDITIVE_SURFACE_SUCCESSOR",
+  "baselineCommit": "fb8101fe74db0fb66432e06d0aa003c4c2e43b2c",
+  "predecessorFreeze": "content/knowledge/answer-projection/freeze/kap-w11-w17-answer-composition-freeze-v1.json",
+  "authorizedDrift": {
+    "path": "assets/js/pages/knowledge-search.js",
+    "predecessorSha256": "38bb4f4a893bef9302b08fe83978d355985eb4d752bc8f7353bf5a36ccc6f516",
+    "reason": "Add Guided Reading eligibility and handoff UI without changing Ask PHI OS answer, source, AI, or unknown semantics.",
+    "successorSha256": "a24dd31c87d401255f26260da8c98268a0ee6417898c012c1a092e222fdea671"
+  },
+  "preservedByteExact": [
+    "functions/_lib/knowledge-answer-composition.js",
+    "functions/api/ask-phios.js",
+    "assets/js/knowledge/ask-phios-client.js",
+    "knowledge-search.html"
+  ],
+  "authorityBoundary": {
+    "askPhiosSemanticsChanged": false,
+    "askPhiosAiProviderActivated": false,
+    "askPhiosMethodExecutionActivated": false,
+    "guidedReadingIsSeparateCapability": true
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-005",
+  "title": "SHARED-INTERPRETATION-RUNTIME",
+  "scope": "SHARED",
+  "role": "ARCHITECTURE",
+  "methodRefs": [
+    "SHARED_METHOD"
+  ],
+  "runtimeRefs": [
+    "content/professional/method-runtime/shared-interpretation-runtime-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "CANONICAL_PROJECTION",
+      "displayLabel": "CANONICAL PROJECTION",
+      "nodeType": "RESULT",
+      "authorityClass": "PROJECTION",
+      "semanticRole": "INTERPRETATION",
+      "container": "SHARED_INTERPRETATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "GOVERNED_INTERPRETATION_LAYER",
+      "displayLabel": "GOVERNED INTERPRETATION LAYER",
+      "nodeType": "RUNTIME",
+      "authorityClass": "INTERPRETATION",
+      "semanticRole": "INTERPRETATION",
+      "container": "SHARED_INTERPRETATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "INTERPRETATION_CANDIDATE",
+      "displayLabel": "INTERPRETATION CANDIDATE",
+      "nodeType": "RESULT",
+      "authorityClass": "INTERPRETATION",
+      "semanticRole": "INTERPRETATION",
+      "container": "SHARED_INTERPRETATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "DOWNSTREAM_COMPOSITION_BOUNDARY",
+      "displayLabel": "DOWNSTREAM READING / COMPOSITION BOUNDARY",
+      "nodeType": "RESULT",
+      "authorityClass": "INTERPRETATION",
+      "semanticRole": "INTERPRETATION",
+      "container": null,
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-005-E01",
+      "from": "CANONICAL_PROJECTION",
+      "to": "GOVERNED_INTERPRETATION_LAYER",
+      "relation": "GOVERNED_HANDOFF",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-005-E02",
+      "from": "GOVERNED_INTERPRETATION_LAYER",
+      "to": "INTERPRETATION_CANDIDATE",
+      "relation": "PRODUCES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-005-E03",
+      "from": "INTERPRETATION_CANDIDATE",
+      "to": "DOWNSTREAM_COMPOSITION_BOUNDARY",
+      "relation": "GOVERNED_HANDOFF",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "SHARED_INTERPRETATION_RUNTIME",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "CANONICAL_PROJECTION",
+        "GOVERNED_INTERPRETATION_LAYER",
+        "INTERPRETATION_CANDIDATE"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME",
+        "DOWNSTREAM_COMPOSITION_BOUNDARY"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "CANONICAL_PROJECTION",
+    "GOVERNED_INTERPRETATION_LAYER",
+    "INTERPRETATION_CANDIDATE",
+    "DOWNSTREAM_COMPOSITION_BOUNDARY"
+  ],
+  "mustState": [
+    "Interpretation output = Interpretation Candidate",
+    "Interpretation != Meaning",
+    "Interpretation != Reading"
+  ],
+  "statementSources": {
+    "Interpretation output = Interpretation Candidate": "SRC-002",
+    "Interpretation != Meaning": "SRC-002",
+    "Interpretation != Reading": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "registryCode": "PHI-OS-PUBLIC-KNR-PROVIDER-ROUTING-REGISTRY-v1.0.0",
+  "version": "1.0.0",
+  "routes": [
+    {"routeCode":"deterministic_published_return","priority":10,"whenOutcomes":["direct_match","multi_node_match"],"providerRequired":false,"terminal":true},
+    {"routeCode":"translation_cache_lookup","priority":20,"whenOutcomes":["partial_coverage","no_coverage"],"providerRequired":false,"terminal":false},
+    {"routeCode":"google_query_translation_candidate","priority":30,"whenOutcomes":["partial_coverage","no_coverage"],"providerRequired":true,"providerCode":"google_query_translation","enabled":false,"terminal":false},
+    {"routeCode":"deterministic_rematch","priority":40,"whenOutcomes":["partial_coverage","no_coverage"],"providerRequired":false,"terminal":false},
+    {"routeCode":"workers_ai_candidate_reranking","priority":50,"whenOutcomes":["partial_coverage","no_coverage"],"providerRequired":true,"providerCode":"workers_ai_reranking","enabled":false,"terminal":false},
+    {"routeCode":"final_coverage_gate","priority":60,"whenOutcomes":["direct_match","multi_node_match","partial_coverage","no_coverage"],"providerRequired":false,"terminal":false},
+    {"routeCode":"published_projection_or_fail_closed","priority":70,"whenOutcomes":["direct_match","multi_node_match","partial_coverage","no_coverage"],"providerRequired":false,"terminal":true}
+  ]
+}

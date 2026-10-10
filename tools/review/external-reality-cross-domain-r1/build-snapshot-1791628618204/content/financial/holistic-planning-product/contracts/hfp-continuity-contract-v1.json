@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-HFP-W23-CONTINUITY-v1.0.0",
+  "phase": "HFP",
+  "work": "HFP-W23",
+  "timepoints": [
+    "t0",
+    "t1",
+    "t2"
+  ],
+  "requiredContinuityFields": [
+    "snapshotReferences",
+    "changeEventReferences",
+    "goalProgressReferences",
+    "actionProgressReferences",
+    "stalenessState"
+  ],
+  "stalenessStates": [
+    "CURRENT",
+    "STALE",
+    "UNKNOWN"
+  ],
+  "rules": {
+    "historicalCandidateMutationForbidden": true,
+    "hfpMayNotInferGoalProgress": true,
+    "hfpMayNotInferActionProgress": true,
+    "hfpMayNotSilentlyInferStaleness": true,
+    "continuityReferencesAreSourceBound": true
+  }
+}

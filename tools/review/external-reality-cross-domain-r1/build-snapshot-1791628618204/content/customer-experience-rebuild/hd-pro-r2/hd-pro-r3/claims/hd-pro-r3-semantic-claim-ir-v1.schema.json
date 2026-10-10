@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-HD-PRO-R3-SEMANTIC-CLAIM-IR-v1.schema.json",
+  "title": "PHI OS Human Design Professional Semantic Claim IR v1",
+  "type": "object",
+  "required": [
+    "claimId",
+    "methodId",
+    "claimType",
+    "scope",
+    "subjectRefs",
+    "structureRefs",
+    "sourceRefs",
+    "semanticOwnerId",
+    "admissionStatus",
+    "semanticAdmissionStatus",
+    "compositionSupported",
+    "machineVerified",
+    "humanAccepted",
+    "customerPublishable",
+    "version"
+  ],
+  "properties": {
+    "claimId": {
+      "type": "string",
+      "pattern": "^HD-R3-CLAIM-"
+    },
+    "methodId": {
+      "const": "HUMAN_DESIGN_EXTERNAL"
+    },
+    "claimType": {
+      "enum": [
+        "STRUCTURAL",
+        "DECISION",
+        "ENERGY",
+        "ROLE",
+        "RELATIONAL",
+        "ENVIRONMENT",
+        "OPENNESS",
+        "INTEGRATION",
+        "TIMING_CONTEXT",
+        "ADVANCED"
+      ]
+    },
+    "scope": {
+      "type": "string"
+    },
+    "subjectRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "structureRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sourceRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "semanticOwnerId": {
+      "type": "string"
+    },
+    "compositionRuleId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "conditions": {
+      "type": "array"
+    },
+    "counterConditions": {
+      "type": "array"
+    },
+    "realityDomains": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sourceSemanticPayload": {
+      "type": "object"
+    },
+    "customerMeaning": {
+      "type": [
+        "object",
+        "string",
+        "null"
+      ]
+    },
+    "customerBoundary": {
+      "type": [
+        "object",
+        "string",
+        "null"
+      ]
+    },
+    "admissionStatus": {
+      "enum": [
+        "SOURCE_ADMITTED",
+        "SOURCE_PENDING",
+        "SCHOOL_VARIANT",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "semanticAdmissionStatus": {
+      "enum": [
+        "SEMANTIC_REVIEW_PENDING",
+        "SEMANTIC_ADMITTED",
+        "SEMANTIC_REJECTED"
+      ]
+    },
+    "compositionSupported": {
+      "type": "boolean"
+    },
+    "machineVerified": {
+      "type": "boolean"
+    },
+    "humanAccepted": {
+      "type": "boolean"
+    },
+    "customerPublishable": {
+      "type": "boolean"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

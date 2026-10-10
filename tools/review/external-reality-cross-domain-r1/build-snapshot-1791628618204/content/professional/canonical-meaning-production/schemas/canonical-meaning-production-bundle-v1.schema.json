@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-meaning-production/canonical-meaning-production-bundle-v1.schema.json",
+  "title": "PHI OS Canonical Meaning Production Bundle v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "bundleCode",
+    "bundleVersion",
+    "status",
+    "activationState",
+    "sourceProjection",
+    "registryVersions",
+    "items",
+    "bundleDigest",
+    "boundaries"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-CANONICAL-MEANING-PRODUCTION-BUNDLE-v1.0.0"
+    },
+    "bundleCode": {
+      "type": "string",
+      "pattern": "^CMPB-[A-F0-9]{24}$"
+    },
+    "bundleVersion": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "enum": [
+        "FOUNDATION_VALIDATION_ONLY",
+        "PRODUCTION"
+      ]
+    },
+    "activationState": {
+      "enum": [
+        "NOT_USER_ACTIVE",
+        "PRODUCTION_ACTIVE"
+      ]
+    },
+    "sourceProjection": {
+      "type": "object"
+    },
+    "registryVersions": {
+      "type": "object"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "bundleDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "boundaries": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-LIU-NIAN-INTEGRATION-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W10",
+  "status": "ENGINEERING_COMPLETE",
+  "runtime": "functions/zi-wei-full-production/ziwei-liu-nian-integration-runtime.js",
+  "outputSchema": "PHI-OS-ZIWEI-LIU-NIAN-INTEGRATION-IR-v1.0.0",
+  "requiredInputs": [
+    "W9 PHI-OS-ZIWEI-DA-XIAN-INTEGRATION-IR-v1.0.0",
+    "PHI-OS-ZIWEI-CANONICAL-CHART-IR-v1.0.0 with existing ZWD annual timeLayer",
+    "W5 transformation matrix",
+    "W6 relationship engine",
+    "W7 star combinations",
+    "W8 admitted patterns"
+  ],
+  "requiredOutput": [
+    "annual",
+    "roleOverlays",
+    "currentLifeNetwork",
+    "liuNianTransformations",
+    "temporalFocus",
+    "crossLayerTransformationOverlaps",
+    "patternTemporalBindings",
+    "liuNianIntegrationDigest"
+  ],
+  "rules": {
+    "mustReuseExistingZwdAnnualContext": true,
+    "mustConsumeW9DaXianIntegration": true,
+    "mustUseExactlyFourLiuNianTransformations": true,
+    "mayRecalculateAnnualYear": false,
+    "mayRecalculateAnnualLifePalace": false,
+    "mayInferPatternActivationOrOutcome": false,
+    "mayCreateCustomerMeaning": false
+  }
+}

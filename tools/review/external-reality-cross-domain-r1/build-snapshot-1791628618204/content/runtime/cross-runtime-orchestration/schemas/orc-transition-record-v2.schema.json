@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/orc-transition-record-v2.schema.json",
+  "title": "PHI OS ORC v2 Transition Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "transitionId",
+    "caseId",
+    "serviceProfile",
+    "fromState",
+    "toState",
+    "eventCode",
+    "authorityReference",
+    "operationDigest",
+    "committedAtOrdinal",
+    "replay"
+  ],
+  "properties": {
+    "transitionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "caseId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "serviceProfile": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fromState": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "toState": {
+      "type": "string",
+      "enum": [
+        "CASE_OPENED",
+        "CONSENT_VALID",
+        "INPUT_VERIFIED",
+        "REALITY_INITIALIZED",
+        "METHOD_CALCULATED",
+        "PROJECTION_FROZEN",
+        "MEANING_RESOLVED",
+        "KNOWLEDGE_COVERAGE_CHECKED",
+        "READOUT_GENERATED",
+        "JOURNEY_ACTIVATED",
+        "PROFESSIONAL_HANDOFF",
+        "PROFESSIONAL_DECISION",
+        "REPORT_ASSEMBLED",
+        "REPORT_APPROVED",
+        "REPORT_RELEASED",
+        "ACTION_RECORDED",
+        "OUTCOME_OBSERVED",
+        "REVIEW",
+        "CONTINUITY"
+      ]
+    },
+    "eventCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authorityReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operationDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "committedAtOrdinal": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "replay": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "registryCode": "PHI-OS-HDR-RUNTIME-MAPPING-REGISTRY",
+  "registryVersion": "1.0.0",
+  "work": "CM-W7B",
+  "productionStatus": "validation_only",
+  "sourceMethodCode": "HUMAN_DESIGN",
+  "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+  "runtimeScopes": [
+    {
+      "scopeCode": "AUTHORITY",
+      "projectionType": "AUTHORITY",
+      "predicatePaths": [
+        "projectionValue.authorityCode"
+      ],
+      "mappingStatus": "blocked"
+    },
+    {
+      "scopeCode": "RUNTIME_TYPE",
+      "projectionType": "CENTER",
+      "predicatePaths": [
+        "projectionValue.typeCode"
+      ],
+      "mappingStatus": "blocked"
+    },
+    {
+      "scopeCode": "CONNECTIVITY",
+      "projectionType": "CENTER",
+      "predicatePaths": [
+        "projectionValue.definitionCode"
+      ],
+      "mappingStatus": "blocked"
+    },
+    {
+      "scopeCode": "PROFILE_NUMBER_STRUCTURE",
+      "projectionType": "PROFILE",
+      "predicatePaths": [
+        "projectionValue.profile.profileCode",
+        "projectionValue.profile.personalityLine",
+        "projectionValue.profile.designLine"
+      ],
+      "mappingStatus": "blocked"
+    }
+  ],
+  "blockers": [
+    "CANONICAL_MEANING_CODE_REGISTRY_EMPTY",
+    "KNOWLEDGE_AUTHORITY_MAPPING_NOT_POPULATED"
+  ],
+  "mappingCount": 0,
+  "mappings": []
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W26-ESCALATION-REASON-CONTRACT-v1.0.0",
+  "work": "KAP-W26",
+  "baselineCommit": "25ab44b6d832bc5a1a3ff166d89e2b53c1257b44",
+  "status": "ACTIVE_CLIENT_EXPLAINABLE_ESCALATION_REASON",
+  "eligibility": {
+    "w24RequirementMustEqual": "YES",
+    "routeMustEqual": "REALITY_JOURNEY_CANDIDATE"
+  },
+  "requiredOutput": [
+    "summary",
+    "reasonCodes",
+    "observedComplexitySignals",
+    "boundary"
+  ],
+  "rules": {
+    "reasonMustBeDeterministic": true,
+    "reasonMustBeGroundedInObservedSignals": true,
+    "mayInventClientFacts": false,
+    "mayDiagnose": false,
+    "mayCreateRealityTruth": false,
+    "mayAutoActivateJourney": false
+  },
+  "clientPrinciple": "The client must be told why a persistent Reality Model is being recommended before consent is requested."
+}

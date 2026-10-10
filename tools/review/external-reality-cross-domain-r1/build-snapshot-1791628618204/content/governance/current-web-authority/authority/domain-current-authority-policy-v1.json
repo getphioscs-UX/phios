@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "PHI-OS-CWA-DOMAIN-POLICY-v1.0.0",
+  "work": "CWA-W2",
+  "domains": {
+    "HEALTH": {
+      "allowed": [
+        "OFFICIAL_PRIMARY",
+        "REGULATOR",
+        "PUBLIC_HEALTH",
+        "GOVERNMENT",
+        "ACADEMIC"
+      ],
+      "preferredPublishers": [
+        "WHO",
+        "MOH_MY",
+        "CDC_US",
+        "NHS_UK",
+        "NIH_US",
+        "OFFICIAL_HOSPITAL_OR_GUIDELINE"
+      ],
+      "rejectedPatterns": [
+        "RANDOM_WELLNESS_BLOG"
+      ],
+      "requiredClaimBoundary": [
+        "NO_DIAGNOSIS_FROM_CURRENT_CONTEXT"
+      ]
+    },
+    "FINANCIAL_MARKETS": {
+      "allowed": [
+        "OFFICIAL_PRIMARY",
+        "REGULATOR",
+        "GOVERNMENT",
+        "MARKET_DATA_PROVIDER",
+        "OFFICIAL_COMPANY",
+        "REPUTABLE_NEWS"
+      ],
+      "preferredPublishers": [
+        "BNM",
+        "BURSA_MALAYSIA",
+        "SEC",
+        "OFFICIAL_BANK_OR_FUND",
+        "RECOGNIZED_MARKET_DATA"
+      ],
+      "requiredClaimBoundary": [
+        "LLM_MAY_NOT_CREATE_FINANCIAL_CALCULATION"
+      ]
+    },
+    "COMPANY_PRODUCT": {
+      "allowed": [
+        "OFFICIAL_PRIMARY",
+        "OFFICIAL_COMPANY",
+        "REGULATOR",
+        "REPUTABLE_NEWS",
+        "SECONDARY_REFERENCE"
+      ],
+      "preferredPublishers": [
+        "OFFICIAL_COMPANY",
+        "OFFICIAL_DOCUMENTATION"
+      ],
+      "requiredClaimBoundary": [
+        "OFFICIAL_SOURCE_PREFERRED_FOR_SPEC"
+      ]
+    },
+    "NEWS_CURRENT_EVENTS": {
+      "allowed": [
+        "OFFICIAL_PRIMARY",
+        "GOVERNMENT",
+        "REGULATOR",
+        "REPUTABLE_NEWS"
+      ],
+      "preferredPublishers": [
+        "PRIMARY_OFFICIAL",
+        "REPUTABLE_NEWS"
+      ],
+      "requiredClaimBoundary": [
+        "CORROBORATE_WHEN_PRACTICABLE"
+      ]
+    },
+    "WEATHER": {
+      "allowed": [
+        "OFFICIAL_PRIMARY",
+        "GOVERNMENT",
+        "SECONDARY_REFERENCE"
+      ],
+      "preferredPublishers": [
+        "OFFICIAL_METEOROLOGICAL_SERVICE"
+      ]
+    },
+    "GENERAL_CURRENT": {
+      "allowed": [
+        "OFFICIAL_PRIMARY",
+        "GOVERNMENT",
+        "REGULATOR",
+        "OFFICIAL_COMPANY",
+        "ACADEMIC",
+        "REPUTABLE_NEWS",
+        "SECONDARY_REFERENCE"
+      ]
+    }
+  },
+  "communityPolicy": "CONTEXT_ONLY_NOT_FACT_AUTHORITY"
+}

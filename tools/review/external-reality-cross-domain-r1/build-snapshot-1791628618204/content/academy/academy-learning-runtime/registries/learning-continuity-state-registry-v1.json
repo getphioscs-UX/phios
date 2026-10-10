@@ -1,0 +1,17 @@
+{
+  "registryCode": "PHI-OS-ALR-W30-LEARNING-CONTINUITY-STATE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W30",
+  "status": "canonical",
+  "decisions": [
+    {"decisionCode": "HOLD_DISPUTED", "priority": 1, "definition": "A disputed state blocks continuation."},
+    {"decisionCode": "HOLD_UNKNOWN", "priority": 2, "definition": "An unknown state blocks continuation until resolved."},
+    {"decisionCode": "REVIEW_REQUIRED", "priority": 3, "definition": "Lineage loss, source change, interruption or state regression requires review."},
+    {"decisionCode": "START_AVAILABLE", "priority": 4, "definition": "The registered scope may be started by explicit learner or authorized choice."},
+    {"decisionCode": "RESUME_AVAILABLE", "priority": 5, "definition": "An interrupted scope may be resumed by explicit choice with lineage preserved."},
+    {"decisionCode": "CONTINUE_AVAILABLE", "priority": 6, "definition": "The current scope may continue without automatic assignment."},
+    {"decisionCode": "COMPLETE_NO_CONTINUATION", "priority": 7, "definition": "Learning is complete and no next scope is assigned automatically."}
+  ],
+  "evaluationPriority": ["HOLD_DISPUTED", "HOLD_UNKNOWN", "REVIEW_REQUIRED", "START_AVAILABLE", "RESUME_AVAILABLE", "CONTINUE_AVAILABLE", "COMPLETE_NO_CONTINUATION"],
+  "rules": {"registryStoresLearnerContinuity": false, "automaticResumeOrAssignment": false, "semanticEvaluationIsPure": true}
+}

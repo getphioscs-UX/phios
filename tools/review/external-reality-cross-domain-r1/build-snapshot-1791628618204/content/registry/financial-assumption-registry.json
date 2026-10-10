@@ -1,0 +1,28 @@
+{
+  "id": "phi-os.financial-assumption-registry",
+  "version": "1.0.0",
+  "milestone": "M4A-W8",
+  "status": "type-registry-no-global-defaults",
+  "authority": "functions/professional/financial/financial-assumption-registry.js",
+  "rules": {
+    "numericDefaultProvidedBySystem": false,
+    "explicitValueRequired": true,
+    "sourceRequired": true,
+    "effectiveDateRequired": true,
+    "reviewDateRequired": true,
+    "allReportsListAssumptions": true,
+    "assumptionIsGuaranteedOutcome": false
+  },
+  "assumptionTypes": [
+    {"id": "inflation_rate", "unit": "percent_per_year"},
+    {"id": "investment_return", "unit": "percent_per_year"},
+    {"id": "income_growth", "unit": "percent_per_year"},
+    {"id": "expense_growth", "unit": "percent_per_year"},
+    {"id": "property_growth", "unit": "percent_per_year"},
+    {"id": "retirement_age", "unit": "age_years"},
+    {"id": "life_expectancy", "unit": "age_years"},
+    {"id": "education_inflation", "unit": "percent_per_year"},
+    {"id": "insurance_cost_growth", "unit": "percent_per_year"},
+    {"id": "exchange_rate", "unit": "currency_pair_rate"}
+  ]
+}

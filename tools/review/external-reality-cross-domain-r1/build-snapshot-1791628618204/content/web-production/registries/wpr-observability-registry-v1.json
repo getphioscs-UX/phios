@@ -1,0 +1,57 @@
+{
+  "registryCode": "PHI-OS-WPR-W28-OBSERVABILITY-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "WPR-W28",
+  "baselineCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+  "status": "active",
+  "entries": [
+    {
+      "code": "WPR-OBS-REPOSITORY",
+      "source": "Git origin/main full SHA",
+      "sensitivity": "PUBLIC_TECHNICAL_METADATA",
+      "mutationAllowed": false
+    },
+    {
+      "code": "WPR-OBS-DEPLOYMENT",
+      "source": "Cloudflare Pages full deployment SHA evidence",
+      "sensitivity": "PUBLIC_TECHNICAL_METADATA",
+      "mutationAllowed": false
+    },
+    {
+      "code": "WPR-OBS-PRODUCTION-REGISTRY",
+      "source": "canonical-web-production-registry-v1.json",
+      "sensitivity": "PUBLIC_TECHNICAL_METADATA",
+      "mutationAllowed": false
+    },
+    {
+      "code": "WPR-OBS-ASSET-DELIVERY",
+      "source": "public-assets.json + WPR-B delivery contract",
+      "sensitivity": "PUBLIC_TECHNICAL_METADATA",
+      "mutationAllowed": false
+    },
+    {
+      "code": "WPR-OBS-SECURITY",
+      "source": "WPR-W26 response security registry",
+      "sensitivity": "PUBLIC_TECHNICAL_METADATA",
+      "mutationAllowed": false
+    },
+    {
+      "code": "WPR-OBS-PDS",
+      "source": "WPR-W27 PDS integration audit",
+      "sensitivity": "PUBLIC_TECHNICAL_METADATA",
+      "mutationAllowed": false
+    },
+    {
+      "code": "WPR-OBS-UPSTREAM",
+      "source": "CPR/CAR frozen production registries",
+      "sensitivity": "PUBLIC_TECHNICAL_METADATA",
+      "mutationAllowed": false
+    }
+  ],
+  "rules": {
+    "customerIdentifiersForbidden": true,
+    "privatePayloadForbidden": true,
+    "credentialMaterialForbidden": true,
+    "observationsAreNotRealityTruth": true
+  }
+}

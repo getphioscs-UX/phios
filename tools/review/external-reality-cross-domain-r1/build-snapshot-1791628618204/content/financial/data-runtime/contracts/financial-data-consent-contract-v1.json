@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W18-DATA-CONSENT-CONTRACT-v1.0.0",
+  "work": "FDR-W18",
+  "status": "ACTIVE_SPECIALIZATION_UNDER_RDG",
+  "upstreamAuthorityReferences": [
+    "content/governance/reality-data-governance/contracts/data-permission-contract-v1.json",
+    "content/registry/professional-consent-sharing.json"
+  ],
+  "requiredFields": [
+    "consentId",
+    "dataSubjectReference",
+    "purposeScopes",
+    "dataScopes",
+    "granteeScopes",
+    "grantedAt",
+    "expiresAt",
+    "revocationState",
+    "consentVersion"
+  ],
+  "purposeScopes": [
+    "FINANCIAL_PLANNING",
+    "WILL_ASSEMBLY",
+    "PROFESSIONAL_REVIEW",
+    "REPORT"
+  ],
+  "rules": {
+    "defaultGrantAll": false,
+    "wildcardPurposeAllowed": false,
+    "financialPlanningConsentAuthorizesWillAssembly": false,
+    "willAssemblyRequiresExplicitScope": true,
+    "professionalReviewRequiresExplicitScope": true,
+    "reportUseRequiresExplicitScope": true,
+    "consentAuthorizesRetention": false,
+    "revocationSupported": true,
+    "adultHouseholdMembersRequireSeparateConsent": true,
+    "minorRequiresRecordedAuthorityBasis": true,
+    "uiMayGrantImplicitConsent": false,
+    "aiMayGrantConsent": false
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/diagram-specification-v1.json",
+  "title": "diagram-specification-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "specCode",
+    "specVersion",
+    "assetType",
+    "briefCode",
+    "nodeCode",
+    "meaningReferences",
+    "knowledgeReferences",
+    "sourceFragmentDigests",
+    "locale",
+    "status",
+    "diagramKind",
+    "visualStructure",
+    "accessibilityDescription",
+    "readingOrder",
+    "factualBoundary"
+  ],
+  "properties": {
+    "specCode": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9._-]+$"
+    },
+    "specVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "assetType": {
+      "const": "DIAGRAM"
+    },
+    "briefCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-[A-Z0-9-]+$"
+    },
+    "meaningReferences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "knowledgeReferences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "sourceFragmentDigests": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "status": {
+      "const": "validation_only"
+    },
+    "diagramKind": {
+      "enum": [
+        "flow",
+        "network",
+        "layered",
+        "matrix",
+        "cycle",
+        "timeline"
+      ]
+    },
+    "visualStructure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nodes",
+        "edges",
+        "layers",
+        "labels"
+      ],
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "layers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "accessibilityDescription": {
+      "type": "string",
+      "minLength": 1
+    },
+    "readingOrder": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "factualBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "publishedOnly",
+        "newMechanismsAllowed"
+      ],
+      "properties": {
+        "publishedOnly": {
+          "const": true
+        },
+        "newMechanismsAllowed": {
+          "const": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "contractCode": "PHI-OS-JR-W5-BOUNDED-READING-PATH-v1",
+  "contractVersion": "1.0.0",
+  "runtimeCode": "JR",
+  "work": "JR-W5",
+  "status": "active",
+  "authorities": [
+    "content/knowledge/public/public-reading-paths.json",
+    "content/knowledge/intelligence/reading/dynamic-reading-paths.json"
+  ],
+  "rules": {
+    "publishedOnly": true,
+    "maxNodeReferences": 7,
+    "maxBlockReferences": 12,
+    "infiniteRecommendationForbidden": true,
+    "unpublishedNodeForbidden": true,
+    "journeyMayReorderAuthorityPath": false,
+    "journeyMayTruncateWithinBound": true,
+    "journeyMayCreateKnowledge": false,
+    "pathMustDeclareEnd": true
+  },
+  "outputFields": [
+    "pathReference",
+    "locale",
+    "purpose",
+    "nodeReferences",
+    "blockReferences",
+    "bounded",
+    "terminationReason"
+  ]
+}

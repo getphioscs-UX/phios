@@ -1,0 +1,55 @@
+{
+  "contractCode": "PHI-OS-KAU-E1R-HUMAN-REVIEW-RESOLUTION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "workCode": "KAU-E1R",
+  "status": "ACTIVE",
+  "inputAuthority": [
+    "KAU-E1-HUMAN-REVIEW-QUEUE",
+    "KAU-E1-CROSS-BOOK-RECONCILIATION",
+    "PHI-OS-KAU-E0-LEGACY-TO-CANONICAL-RELATIONSHIP-CONTRACT-v1"
+  ],
+  "allowedHumanDecisions": [
+    "SUPPORTS",
+    "HISTORICAL_PRECURSOR",
+    "TERMINOLOGY_PREDECESSOR",
+    "PARTIAL_OVERLAP",
+    "CONFLICTS_WITH",
+    "SUPERSEDED_BY",
+    "NO_CANONICAL_MATCH",
+    "DEFER"
+  ],
+  "acceptedRelationshipTypes": [
+    "SUPPORTS",
+    "HISTORICAL_PRECURSOR",
+    "TERMINOLOGY_PREDECESSOR",
+    "PARTIAL_OVERLAP",
+    "CONFLICTS_WITH",
+    "SUPERSEDED_BY",
+    "NO_CANONICAL_MATCH"
+  ],
+  "resolutionStates": [
+    "PENDING_HUMAN_DECISION",
+    "HUMAN_REVIEWED",
+    "ACCEPTED_SUPPORTING",
+    "REJECTED",
+    "DEFERRED",
+    "UNRESOLVED"
+  ],
+  "requiredHumanFieldsOnDecision": [
+    "humanDecision",
+    "humanReason",
+    "reviewedBy",
+    "reviewedAt"
+  ],
+  "rules": {
+    "recommendationsAreAdvisoryOnly": true,
+    "deferCreatesNoRelationship": true,
+    "noCanonicalMatchCreatesNoNode": true,
+    "acceptedSupportingDoesNotOverwriteCanonical": true,
+    "canonicalRegistryMutationForbidden": true,
+    "meaningAuthorityMutationForbidden": true,
+    "productionReadinessPromotionForbidden": true,
+    "rawLegacyToKppForbidden": true,
+    "e2RequiresHumanResolution": true
+  }
+}

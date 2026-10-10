@@ -1,0 +1,36 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {sha256Stable} from '../functions/interpretation-runtime/mir7-utils.js';
+import {buildWealthBrief,WEALTH_ROLES} from '../functions/personal-reading/narrative/bazi-s05-market-reading.js';
+import {buildBaZiS05T2,validateS04OwnerAcceptance} from '../functions/personal-reading/narrative/bazi-s05-t2-runtime.js';
+import {runBaZiS04PrivateReview} from '../functions/personal-reading/narrative/bazi-s04-private-review.js';
+import {composeReportSectionT2} from '../functions/personal-reading/narrative/narrative-writer.js';
+import {evaluateMarketReading} from '../functions/personal-reading/narrative/bazi-s04-market-reading.js';
+const read=p=>JSON.parse(fs.readFileSync(p));
+const source=read('docs/guided-report-successor-r2/bazi-source.json'),registry=read('content/ai-economics/providers/ai-provider-cost-registry-v1.json');
+const owner=read('docs/acceptance/report-narrative-t2-r1/bazi/s04-csd-v4/OWNER-ACCEPTANCE.json'),gold=read('docs/acceptance/report-narrative-t2-r1/bazi/s04-csd-v4/REVIEW-EVIDENCE.json');
+assert(await validateS04OwnerAcceptance(owner));assert(!await validateS04OwnerAcceptance({...owner,decision:'PENDING'}));
+for(const l of ['en','zh-Hans']){assert.equal(owner.locales[l].artifactDigest,gold.records[l].artifactDigest);assert.equal(owner.locales[l].candidateDigest,await sha256Stable(gold.records[l].result.candidate));}
+const en=await buildWealthBrief({...source,locale:'en'}),zh=await buildWealthBrief({...source,locale:'zh-Hans'});
+assert(en.wealthNarrativeIR.eligibility.eligible);assert.deepEqual(en.claims,zh.claims);assert.equal(en.sourceSemanticDigest,zh.sourceSemanticDigest);assert.deepEqual(en.requiredClaimRoles,WEALTH_ROLES);assert(!en.careerNarrativeIR);
+assert.equal(Object.entries(en.authorityFacts).find(([k])=>k.endsWith('/leadGroup'))[1].groupCode,'WEALTH');assert(en.claims.every(c=>c.claimId.startsWith('S05:MARKET1:')));
+assert(en.marketContract.dimensions.includes('WEALTH_NOT_CAREER_SUBSTITUTION'));
+const {briefSemanticDigest,...seed}=en;assert.equal(await sha256Stable(seed),briefSemanticDigest);
+let calls=0;const broken=structuredClone(source);broken.reading.professionalModules.professionalTopics.topics=broken.reading.professionalModules.professionalTopics.topics.filter(x=>x.topicCode!=='WEALTH');assert.equal((await buildBaZiS05T2({...broken,locale:'en',registry,providerAdapters:{OPENAI:()=>{calls++;}}})).status,'NOT_ELIGIBLE');assert.equal(calls,0);
+let writers=0;await composeReportSectionT2({brief:en,registry,providerAdapters:{OPENAI:async request=>{writers++;assert.deepEqual(request.schema.properties.blocks.items.properties.role.enum,WEALTH_ROLES);assert(request.systemPrompt.includes('S05 is about earning'));assert(!request.systemPrompt.includes('S04:V4'));throw Error('injected stop');}}});assert.equal(writers,1);
+const forbidden={blocks:WEALTH_ROLES.map(role=>({role,function:role,text:'buy gold',claimRefs:[]}))};assert(evaluateMarketReading({brief:en,candidate:forbidden}).reasons.includes('WEALTH_FINANCIAL_PRESCRIPTION'));
+const objects=new Map(),reserved=new Set(),env={PHIOS_ENVIRONMENT:'qa',RNT2_S04_REVIEW:'enabled',RNT2_REVIEWER_IDS:'reviewer',OPENAI_API_KEY:'TEST_ONLY',PRIVATE_REPORTS:{get:async k=>objects.has(k)?{json:async()=>JSON.parse(objects.get(k))}:null,put:async(k,v)=>{objects.set(k,v);return {key:k};}},RUNTIME_DB:{prepare:sql=>({bind:(id)=>({run:async()=>{if(!sql.startsWith('INSERT OR IGNORE INTO runtime_artifacts'))return {meta:{changes:1}};const changes=reserved.has(id)?0:1;reserved.add(id);return {meta:{changes}};}})})}};
+let composed=0;const input={source,registry,env,lane:'S05',userId:'reviewer',body:{action:'rnt2-s05',sectionKey:'S05_WEALTH',locale:'en'},compose:async()=>{composed++;return {status:'PASS',testOnly:true};}};
+assert.equal((await runBaZiS04PrivateReview({...input,ownerAcceptance:{}})).body.code,'S04_BILINGUAL_OWNER_ACCEPTANCE_REQUIRED');assert.equal(reserved.size,0);
+assert.equal((await runBaZiS04PrivateReview({...input,userId:'other'})).status,403);
+assert.equal((await runBaZiS04PrivateReview({...input,body:{...input.body,sectionKey:'S04_CAREER'}})).status,400);
+const first=await runBaZiS04PrivateReview(input);assert.equal(first.status,200);assert(first.body.objectKey.startsWith('qa/rnt2/market-v1/s05/'));assert.equal(first.body.result.productionActivated,false);assert.equal((await runBaZiS04PrivateReview(input)).body.cacheHit,true);assert.equal(composed,1);
+console.log('PASS: S04 acceptance bound to both final candidates; S05 wealth source/locale/digest/roles; missing authority blocks provider; financial prescription rejection; QA authorization, namespace separation, reservation and cached reopen. No live calls.');
+// A frozen editorial audit is a separate review, never another generation.
+const {auditFrozenCareerCandidate}=await import('../functions/personal-reading/narrative/bazi-s04-review-audit.js');
+const frozen=read('docs/acceptance/report-narrative-t2-r1/bazi/s05-market-v1/REVIEW-EVIDENCE.json');
+let reviewCalls=0;
+const auditInput={record:(frozen.originals||frozen.records).en,key:'qa/rnt2/market-v1/s05/editorial-test.json',env,registry,adapter:async request=>{reviewCalls++;assert.equal(request.taskType,'REPORT_SECTION_SEMANTIC_VERIFICATION');return {output:{sourceBriefDigest:request.payload.sourceBriefDigest,candidateDigest:request.payload.candidateDigest,meaningfullyUsedClaimRefs:[],reasons:['INJECTED_REJECTION'],editorialAssessments:[]}};}};
+const audited=await auditFrozenCareerCandidate(auditInput);assert.equal(audited.status,200);assert.equal(audited.body.result.result.status,'FALLBACK');assert.equal(audited.body.result.result.reviewAudit.generationCalls,0);assert.equal(audited.body.result.result.reviewAudit.version,'S05-MARKET-EDIT-v1.0.0');assert.equal(reviewCalls,1);
+assert.equal((await auditFrozenCareerCandidate(auditInput)).body.cacheHit,true);assert.equal(reviewCalls,1);
+console.log('PASS: S05 frozen edit uses one independent reviewer, preserves rejection and caches without regenerating. No live calls.');

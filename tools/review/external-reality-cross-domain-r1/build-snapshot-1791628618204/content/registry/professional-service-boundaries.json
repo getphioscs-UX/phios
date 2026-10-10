@@ -1,0 +1,94 @@
+{
+  "id": "phi-os.professional-service-boundaries",
+  "version": "1.0.0",
+  "milestone": "M4A-W1",
+  "status": "boundary-frozen-enforcement-pending",
+  "sourceClasses": [
+    "observed_runtime_evidence",
+    "user_statement",
+    "financial_fact",
+    "document_supported",
+    "system_extraction",
+    "rule_inference",
+    "ai_interpretation",
+    "professional_calculation",
+    "professional_assessment",
+    "projection",
+    "assumption",
+    "recommendation",
+    "human_design_interpretation",
+    "possible_correspondence",
+    "unverified_inference",
+    "client_decision",
+    "implementation_result"
+  ],
+  "separationRules": {
+    "factsAndProfessionalOpinionShareField": false,
+    "calculationBecomesFactWithoutLabel": false,
+    "projectionBecomesGuaranteedOutcome": false,
+    "humanDesignBecomesRuntimeEvidence": false,
+    "riskFlagAutomaticallyBecomesRecommendation": false,
+    "recommendationBecomesClientDecision": false,
+    "clientDecisionBecomesImplementationResult": false
+  },
+  "universalBoundary": {
+    "medicalDiagnosis": false,
+    "psychologicalDiagnosis": false,
+    "legalAdvice": false,
+    "automaticInvestmentInstruction": false,
+    "deterministicPrediction": false,
+    "emergencyResponse": false,
+    "qualifiedProfessionalReplacement": false
+  },
+  "financialBoundary": {
+    "informationDependsOnClientAccuracy": true,
+    "informationDateRequired": true,
+    "assumptionsMustBeDisclosed": true,
+    "projectionsGuaranteeFuturePerformance": false,
+    "periodicReviewRequired": true,
+    "productNeutralFirst": true,
+    "automaticProductPurchase": false,
+    "automaticAssetSale": false,
+    "singleRatioMajorDecision": false,
+    "regulatedAdviceRequiresQualifiedAuthorisedProfessional": true,
+    "regulatedDomains": [
+      "investment",
+      "insurance",
+      "tax",
+      "legal",
+      "estate"
+    ],
+    "productSpecificStepRequires": [
+      "separate professional scope",
+      "appropriate qualification or authorisation",
+      "conflict-of-interest disclosure",
+      "commission disclosure",
+      "client decision"
+    ]
+  },
+  "humanDesignBoundary": {
+    "interpretivePerspectiveOnly": true,
+    "verifiedRealityFact": false,
+    "medicalOrScientificDiagnosis": false,
+    "deterministicPersonalityOrFate": false,
+    "birthTimeAccuracyAffectsResult": true,
+    "separateConsentRequired": true,
+    "directRequiredActionAllowed": false,
+    "realityEvidenceStillRequired": true
+  },
+  "integratedBoundary": {
+    "sourceLabelsRequired": true,
+    "sourcesMayBeMergedIntoUnlabelledFact": false,
+    "externalReaderOptional": true,
+    "clientAuthorisationRequired": true
+  },
+  "currentImplementationBoundary": {
+    "financialIntakeEnabled": false,
+    "sensitiveFinancialUploadEnabled": false,
+    "financialCalculationEngineEnabled": false,
+    "professionalRecommendationSigningEnabled": false,
+    "humanDesignChartCalculationEnabled": false,
+    "professionalCheckoutEnabled": false,
+    "workspaceEnabled": false
+  }
+}

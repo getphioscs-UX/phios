@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/external-readers/chart-upload.v1.json",
+  "title": "PHI OS External Reader Uploaded Chart",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "chart_upload_id",
+    "chart_type",
+    "file_type",
+    "source_platform",
+    "uploaded_at",
+    "calculation_settings_known",
+    "professional_verified"
+  ],
+  "properties": {
+    "chart_upload_id": {"type": "string", "minLength": 1},
+    "chart_id": {"type": "string", "minLength": 1},
+    "client_id": {"type": "string", "minLength": 1},
+    "reader_type": {
+      "enum": ["human_design", "bazi", "ziwei", "gene_keys", "astrology", "other"]
+    },
+    "chart_type": {
+      "enum": ["human_design", "bazi", "ziwei", "gene_keys", "astrology"]
+    },
+    "file_type": {"enum": ["png", "jpg", "jpeg", "webp", "pdf"]},
+    "file_reference": {"type": "string", "minLength": 1},
+    "file_name": {"type": "string", "minLength": 1},
+    "mime_type": {"type": "string", "minLength": 1},
+    "file_size": {"type": "integer", "minimum": 1},
+    "source_platform": {"type": "string", "minLength": 1},
+    "calculation_date": {"type": ["string", "null"], "format": "date-time"},
+    "uploaded_at": {"type": "string", "format": "date-time"},
+    "calculation_settings_known": {"type": "boolean"},
+    "professional_verified": {"type": "boolean"},
+    "verification_notes": {"type": ["string", "null"]},
+    "uploaded_by": {"type": "string", "minLength": 1},
+    "retention_policy": {"type": "string", "minLength": 1},
+    "access_status": {"type": "string", "minLength": 1},
+    "automatic_calculation_used": {"const": false},
+    "automatic_rendering_used": {"const": false}
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/ast/ast-foundation-audit-v1.schema.json",
+  "title": "PHI OS AST Foundation Audit v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "stageCode",
+    "methodCode",
+    "pluginCode",
+    "status",
+    "baseline",
+    "existingGovernance",
+    "auditConclusion",
+    "openPolicies",
+    "blockingFindings"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-AST-FOUNDATION-AUDIT-v1.0.0"
+    },
+    "stageCode": {
+      "const": "AST-W0"
+    },
+    "methodCode": {
+      "const": "ASTROLOGY"
+    },
+    "pluginCode": {
+      "const": "AST"
+    },
+    "status": {
+      "const": "foundation_audited_runtime_not_activated"
+    },
+    "baseline": {
+      "type": "object",
+      "required": [
+        "repository",
+        "branch",
+        "commit"
+      ],
+      "properties": {
+        "repository": {
+          "const": "getphioscs-UX/phios"
+        },
+        "branch": {
+          "const": "main"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        }
+      }
+    },
+    "existingGovernance": {
+      "type": "object"
+    },
+    "auditConclusion": {
+      "type": "object"
+    },
+    "openPolicies": {
+      "type": "array",
+      "minItems": 9,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "blockingFindings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

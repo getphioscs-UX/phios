@@ -1,0 +1,5 @@
+import assert from 'node:assert/strict'; import fs from 'node:fs/promises'; import path from 'node:path';
+const root=process.cwd(); const read=async p=>JSON.parse(await fs.readFile(path.join(root,p),'utf8'));
+const governance=await read('content/professional/core-method-runtime/ast-aspect-governance-v1.json'); const freeze=await read('content/professional/core-method-runtime/ast-aspect-governance-freeze-v1.json');
+assert.equal(governance.stageCode,'AST-W4A'); assert.equal(governance.status,'governance_frozen_runtime_not_started'); assert.equal(governance.authority.runtimeAuthority,false); assert.equal(governance.authority.productionAuthority,false); assert.equal(governance.validationBoundary.ambiguousMatchPolicy,'FAIL_CLOSED'); assert.equal(governance.runtimeContract.runtimeStage,'AST-W4B'); assert.equal(freeze.stageCode,'AST-W4A'); assert.equal(freeze.productionStatus,'blocked'); assert.equal(freeze.successorPolicy.inPlaceMutationAllowed,false);
+console.log('✓ AST-W4A Aspect Governance checker passed.');

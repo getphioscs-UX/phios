@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "PHI-OS-MOOMOO-FIRST-DATA-PACKAGE-STATUS-v1.0.0",
+  "version": "1.0.0",
+  "status": "FULL_PACKAGE_SNAPSHOTS_COMPLETE",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P1",
+  "providerId": "MOOMOO_OPENAPI",
+  "requestFamilies": [
+    {
+      "requestId": "MOOMOO-US-HISTORY-KLINE-01",
+      "capability": "HISTORY_KLINE",
+      "plannedInstruments": 8,
+      "liveSnapshots": 8,
+      "observedInstruments": 8,
+      "state": "SNAPSHOTS_COMPLETE_FOR_PLAN"
+    },
+    {
+      "requestId": "MOOMOO-US-CAPITAL-FLOW-01",
+      "capability": "CAPITAL_FLOW",
+      "plannedInstruments": 8,
+      "liveSnapshots": 8,
+      "observedInstruments": 8,
+      "state": "SNAPSHOTS_COMPLETE_FOR_PLAN"
+    },
+    {
+      "requestId": "MOOMOO-US-VALUATION-01",
+      "capability": "VALUATION",
+      "plannedInstruments": 5,
+      "liveSnapshots": 15,
+      "observedInstruments": 5,
+      "state": "SNAPSHOTS_COMPLETE_FOR_PLAN"
+    },
+    {
+      "requestId": "MOOMOO-US-FINANCIALS-01",
+      "capability": "FINANCIAL_STATEMENTS",
+      "plannedInstruments": 5,
+      "liveSnapshots": 20,
+      "observedInstruments": 5,
+      "state": "SNAPSHOTS_COMPLETE_FOR_PLAN"
+    },
+    {
+      "requestId": "MOOMOO-US-REVENUE-BREAKDOWN-01",
+      "capability": "REVENUE_BREAKDOWN",
+      "plannedInstruments": 5,
+      "liveSnapshots": 5,
+      "observedInstruments": 5,
+      "state": "SNAPSHOTS_COMPLETE_FOR_PLAN"
+    }
+  ],
+  "completion": {
+    "firstLiveBackboneRequired": [
+      "HISTORY_KLINE"
+    ],
+    "fullPackageRequired": [
+      "HISTORY_KLINE",
+      "CAPITAL_FLOW",
+      "VALUATION",
+      "FINANCIAL_STATEMENTS"
+    ],
+    "firstLiveBackboneComplete": true,
+    "fullPackageComplete": true,
+    "normalizedSnapshots": 56,
+    "w8aSourceCandidates": 56,
+    "providerClaimWorkOrders": 56,
+    "providerClaims": 0,
+    "cwaEvidence": 0,
+    "w8ePromotions": 0
+  },
+  "next": "Review provider source candidates and create bounded provider claims; do not auto-promote W8E."
+}

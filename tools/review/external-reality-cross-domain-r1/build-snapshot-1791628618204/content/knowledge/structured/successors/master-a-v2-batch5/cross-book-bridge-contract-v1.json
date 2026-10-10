@@ -1,0 +1,72 @@
+{
+  "status": "CONTRACT_ONLY_PENDING_HUMAN_REVIEW",
+  "bridges": [
+    {
+      "bridgeCode": "BOOK_V_TO_BOOK_VI",
+      "sourceBook": "BOOK-5",
+      "targetBook": "BOOK-6",
+      "semanticHandoff": "historical continuity → reconfiguration",
+      "boundary": "历史记录形成重组讨论的背景，不直接证明当前重组。",
+      "projectionState": "WITHHELD",
+      "runtimeEligibility": "REFERENCE_ONLY",
+      "canonicalNodeRefs": [],
+      "automaticAuthorityTransfer": false,
+      "actionExecution": false
+    },
+    {
+      "bridgeCode": "BOOK_VI_TO_BOOK_VII",
+      "sourceBook": "BOOK-6",
+      "targetBook": "BOOK-7",
+      "semanticHandoff": "structural claim → epistemic evaluation",
+      "boundary": "重组主张交给既有证据与知识状态权威核对；讯号不自动成为 KNOWN。",
+      "projectionState": "WITHHELD",
+      "runtimeEligibility": "REFERENCE_ONLY",
+      "canonicalNodeRefs": [],
+      "automaticAuthorityTransfer": false,
+      "actionExecution": false
+    },
+    {
+      "bridgeCode": "BOOK_VII_TO_BOOK_VIII",
+      "sourceBook": "BOOK-7",
+      "targetBook": "BOOK-8",
+      "semanticHandoff": "knowledge boundary → navigation context",
+      "boundary": "保留未知、争议、反例和观察窗口；导航情境不替读者选择行动。",
+      "projectionState": "WITHHELD",
+      "runtimeEligibility": "REFERENCE_ONLY",
+      "canonicalNodeRefs": [],
+      "automaticAuthorityTransfer": false,
+      "actionExecution": false
+    },
+    {
+      "bridgeCode": "BOOK_VIII_TO_BOOK_I",
+      "sourceBook": "BOOK-8",
+      "targetBook": "BOOK-1",
+      "semanticHandoff": "continuation condition → new formation",
+      "boundary": "结果可能成为下一段形成的条件，既不永久，也不从零归零。",
+      "projectionState": "WITHHELD",
+      "runtimeEligibility": "REFERENCE_ONLY",
+      "canonicalNodeRefs": [],
+      "automaticAuthorityTransfer": false,
+      "actionExecution": false
+    }
+  ],
+  "invariants": [
+    "BOOK_V_DOES_NOT_BECOME_BOOK_VI",
+    "BOOK_VI_DOES_NOT_DECIDE_EPISTEMIC_TRUTH",
+    "BOOK_VII_DOES_NOT_CHOOSE_ACTION",
+    "BOOK_VIII_DOES_NOT_REWRITE_EVIDENCE"
+  ],
+  "observationNavigationPredecessor": {
+    "path": "content/knowledge/structured/successors/master-a-v2-batch4/observation-navigation-formal-handoff-v1.json",
+    "sha256": "64982642f83e82ba19d7ee3ab05688248cc7789b13c7d1da083e9f66ca891af3"
+  },
+  "continuationPredecessor": {
+    "path": "content/knowledge/structured/successors/master-a-v2-batch4/reality-continuation-closure-v1.json",
+    "sha256": "856d97b3fea2b6c4336fa01b33a12edd699b9a4a90128291044c059f7b60efaa"
+  },
+  "bookIIdentityOwner": {
+    "path": "content/registry/successors/eight-volume-v1/books.json",
+    "sha256": "d458faaddb66cd4f9380fa40f59d10c56f3482a37b80e0e09abe96240c00f5f6"
+  },
+  "newCanonicalNode": false
+}

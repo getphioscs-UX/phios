@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "PHI-OS-COMPLETED-MANUSCRIPT-SOURCE-ADMISSION-v1.0.0",
+  "stage": "BOOK-I-V3-FINAL-SOURCE-ADMISSION",
+  "recordCode": "COMPLETED-MANUSCRIPT-BOOK-1-v3",
+  "status": "BINARY_VERIFIED_EXTRACTION_CANDIDATE_READY",
+  "bookCode": "BOOK-1",
+  "titleEn": "Reality Formation",
+  "titleZhHans": "世界如何形成",
+  "canonicalLanguage": "zh-Hans",
+  "sourceBinary": {
+    "fileName": "PHI-OS-Book-I-v3.pdf",
+    "mediaType": "application/pdf",
+    "byteSize": 233856065,
+    "pageCount": 440,
+    "sha256": "813481693e25bad9f35d6e13795eb51d0c35d80d9cbc62fe53a04d3cb622492e",
+    "exactBinaryMetadataStatus": "VERIFIED_FROM_PRIVATE_R2_DOWNLOAD"
+  },
+  "privateStorageBinding": {
+    "provider": "cloudflare-r2",
+    "bucket": "phios-private-manuscripts",
+    "objectKey": "books/book-1/source/PHI-OS-Book-I-v3.pdf",
+    "access": "private",
+    "bindingBasis": "owner-confirmed-final-upload-2026-10-07",
+    "remoteBinaryVerification": "VERIFIED_DOWNLOAD_SHA256",
+    "verifiedAt": "2026-10-07T10:09:11.586Z"
+  },
+  "publicationAssets": {
+    "preview": {
+      "bucket": "phios-public-assets",
+      "prefix": "books/previews/book-1/",
+      "namingPattern": "page-{NNN}.webp",
+      "ownerConfirmedUploaded": true
+    },
+    "figures": {
+      "bucket": "phios-public-assets",
+      "prefix": "images/figures/books/book-1/",
+      "ownerConfirmedUploaded": true,
+      "finalUploadedSet": [
+        "4A.webp",
+        "4B.webp",
+        "4C.webp",
+        "4D.webp",
+        "4E.webp",
+        "4F.webp"
+      ]
+    }
+  },
+  "authorityBoundary": {
+    "isSourceManuscriptAuthority": true,
+    "canonicalNodeMutationAllowed": false,
+    "canonicalNodeRevisionDeferredUntilManuscriptExtractionAndHumanReview": true,
+    "existingV2ExtractionPreservedAsHistorical": true
+  },
+  "cutoverGate": {
+    "completedManuscriptRegistryCutoverAllowed": false,
+    "requiredBeforeCutover": [
+      "EXACT_V3_BYTE_SIZE",
+      "EXACT_V3_SHA256",
+      "EXACT_V3_PAGE_COUNT",
+      "V3_MANUSCRIPT_SECTION_EXTRACTION",
+      "SECTION_TO_CANONICAL_RECONCILIATION",
+      "HUMAN_REVIEW"
+    ]
+  },
+  "supersession": {
+    "predecessorRecord": "content/knowledge/manuscripts/completed/book-1-completed-manuscript-v2.json",
+    "predecessorPreserved": true,
+    "replacementMode": "FINAL_SOURCE_ADMISSION_PENDING_VERIFIED_CUTOVER"
+  }
+}

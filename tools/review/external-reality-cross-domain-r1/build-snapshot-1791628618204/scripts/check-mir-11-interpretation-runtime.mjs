@@ -1,0 +1,6 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import {spawnSync} from 'node:child_process';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+assert.ok(String(j('content/reconciliation/mir/mir-5-canonical-interpretation-foundation-v1.json').status).startsWith('COMPLETE'));
+assert.equal(j('content/reconciliation/mir/mir-6-canonical-interpretation-kernel-v1.json').status,'COMPLETE_KERNEL_EXECUTABLE_NO_LLM_BASELINE');
+assert.equal(j('content/reconciliation/mir/mir-7-method-interpretation-result-v1.json').status,'COMPLETE_CANONICAL_INTERPRETATION_RESULT_AVAILABLE_DOWNSTREAM');
+for(const s of ['scripts/check-ir-w116-w119-kernel.mjs','scripts/check-interpretation-method-integration.mjs','scripts/check-interpretation-lineage.mjs','scripts/check-interpretation-composition.mjs','scripts/check-mir-11-interpretation-fixtures.mjs','scripts/check-mir-11-structural-hypothesis.mjs','scripts/check-mir-11-book-runtime-regression.mjs']){const r=spawnSync(process.execPath,[s],{stdio:'inherit'});assert.equal(r.status,0,`${s} failed`);}console.log('✓ MIR-11 interpretation-runtime current successor aggregate passed: deterministic kernel, method boundary, lineage/composition, fixture and structural regressions are current without replaying stale package freezes.');

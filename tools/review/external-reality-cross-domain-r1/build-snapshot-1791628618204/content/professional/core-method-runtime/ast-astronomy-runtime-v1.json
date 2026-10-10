@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-AST-ASTRONOMY-RUNTIME-v1.0.0",
+  "stageCode": "AST-W1",
+  "runtimeCode": "AST_ASTRONOMY_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "ASTROLOGY",
+  "pluginCode": "AST",
+  "status": "validation_only_not_production_eligible",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "d961a75a5d650d8a92df2d277e846a45b43db240"
+  },
+  "input": {
+    "requiredRecordType": "NORMALIZED_BIRTH_MOMENT",
+    "conditionalRecordType": "COORDINATE",
+    "coordinateRequiredFor": "TOPOCENTRIC",
+    "uncertainBirthTimeAllowed": false,
+    "authority": "SHARED_DATA_AUTHORITY"
+  },
+  "engine": {
+    "engineCode": "ASTRONOMY_ENGINE_JS",
+    "licenseCode": "MIT",
+    "commercialUseAllowed": true,
+    "noticeRequired": true,
+    "validationReferenceCode": "NASA_JPL_HORIZONS",
+    "validationReferenceRole": "validation_only"
+  },
+  "scope": {
+    "createsJulianDay": true,
+    "createsTimeScaleContext": true,
+    "createsReferenceFrameContext": true,
+    "createsObserverContext": true,
+    "createsPlanetPositions": false,
+    "createsRetrogradeStatus": false,
+    "createsHouseCusps": false,
+    "createsAspects": false,
+    "createsProjection": false
+  },
+  "execution": {
+    "allowedModes": [
+      "validation"
+    ],
+    "productionExecutionAllowed": false,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "sharedCalculationRuntimeRequired": true
+  },
+  "governance": {
+    "toleranceDefined": false,
+    "jplFixturesExecuted": false,
+    "validationPassed": false,
+    "regressionPassed": false,
+    "productionReady": false,
+    "professionalReady": false,
+    "productionEligibilityChanged": false
+  },
+  "nextStage": "AST-W2"
+}

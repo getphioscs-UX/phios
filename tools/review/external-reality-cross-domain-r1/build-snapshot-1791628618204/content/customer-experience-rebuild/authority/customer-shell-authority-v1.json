@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "PHI-OS-CX-R5-CUSTOMER-SHELL-AUTHORITY-v1.0.0",
+  "work": "CX-R5",
+  "baselineCommit": "e7a0e054591cc201b4837a09430890cbd4437415",
+  "status": "ONE_GLOBAL_CUSTOMER_SHELL_READY",
+  "implementationRoot": "assets/customer-ui/js/",
+  "modules": [
+    "shell.js",
+    "navigation.js",
+    "locale.js",
+    "assets.js",
+    "dialog.js"
+  ],
+  "primaryNavigation": [
+    "EXPLORE",
+    "MY_REALITY",
+    "PERSPECTIVES",
+    "KNOWLEDGE",
+    "PROFESSIONAL"
+  ],
+  "utilities": [
+    "SEARCH",
+    "ASK",
+    "ACCOUNT",
+    "LOCALE"
+  ],
+  "brandAssets": {
+    "header": "LOGO-003",
+    "footer": "LOGO-010",
+    "hardCodedLegacyBrandMarkAllowed": false
+  },
+  "mobileNavigation": {
+    "pattern": "NATIVE_DIALOG_DRAWER",
+    "sharedNavigationAuthority": "navigation.js",
+    "separateMobileNavigationAuthorityCreated": false
+  },
+  "search": {
+    "shellRole": "GLOBAL_ENTRY_ONLY",
+    "existingOperationalSurface": "/search/",
+    "method": "GET",
+    "queryField": "q",
+    "shellFetchesSearchBackend": false,
+    "secondSearchAuthorityCreated": false
+  },
+  "ask": {
+    "shellRole": "GLOBAL_ENTRY_ONLY",
+    "existingOperationalSurface": "/ask",
+    "method": "GET",
+    "queryField": "q",
+    "shellExecutesAskRuntime": false,
+    "secondAskAuthorityCreated": false
+  },
+  "accountPresentation": {
+    "states": [
+      "GUEST",
+      "AUTHENTICATED",
+      "PROFESSIONAL"
+    ],
+    "stateSource": "UPSTREAM_PRESENTATION_HINT_OR_GUEST_DEFAULT",
+    "securityDecisionAuthority": false,
+    "capabilityGrantAuthority": false
+  },
+  "locale": {
+    "supported": [
+      "en",
+      "zh-Hans"
+    ],
+    "singleImplementation": "assets/customer-ui/js/locale.js",
+    "pageLocalLocaleToggleAllowed": false
+  },
+  "footer": {
+    "shared": true,
+    "role": "MEANINGFUL_CONTINUATION_AND_UTILITY_NAVIGATION"
+  },
+  "boundaries": {
+    "backendAuthorityTouched": false,
+    "routeCutoverPerformed": false,
+    "legacyPhysicalDeletePerformed": false,
+    "secondKnowledgeAuthorityCreated": false,
+    "secondRealityAuthorityCreated": false,
+    "secondProfessionalAuthorityCreated": false
+  }
+}

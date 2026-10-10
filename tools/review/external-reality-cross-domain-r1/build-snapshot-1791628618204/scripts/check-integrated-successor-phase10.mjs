@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const p9=j('content/product-visual-platform-r1/freeze/pvp-r1-vis-ziwei-w17-w24-phase9-freeze-v1.json');
+const rec=j('content/integrated-master-work/phase10/p10-current-reconciliation-v1.json');
+const acc=j('content/product-visual-platform-r1/acceptance/successors/phase10/pvp-r1-vis-ast-bzr-num-w25-w28-current-acceptance-v1.json');
+const freeze=j('content/product-visual-platform-r1/freeze/pvp-r1-vis-ast-bzr-num-w25-w28-phase10-freeze-v1.json');
+assert.equal(p9.status,'PVP_R1_VIS_ZIWEI_W17_W24_PHASE9_FROZEN');assert.equal(p9.frozenExit.phase10Authorized,true);
+assert.equal(rec.phase10ExitComplete,true);assert.equal(rec.phase11Authorized,true);assert.equal(rec.boundaries.phase11WorkExecutedByThisReconciliation,false);
+assert.equal(acc.status,'MACHINE_ACCEPTED_CURRENT_AST_BZR_NUM_W25_W28');assert.equal(acc.phase11Authorized,true);assert.equal(acc.phase11Executed,false);
+assert.equal(freeze.status,'PVP_R1_VIS_AST_BZR_NUM_W25_W28_PHASE10_FROZEN');assert.equal(freeze.frozenExit.w25AstSnapshotAccepted,true);assert.equal(freeze.frozenExit.w26BzrSnapshotAccepted,true);assert.equal(freeze.frozenExit.w27NumSnapshotAccepted,true);assert.equal(freeze.frozenExit.w28PaidVisualDepthAccepted,true);assert.equal(freeze.frozenExit.phase11Authorized,true);assert.equal(freeze.preservedBoundaries.phase11ExecutedByThisFreeze,false);assert.equal(freeze.nextWork,'PHASE11_RELATIONSHIP_VISUAL');
+console.log('✓ Integrated Phase 10 passed: Phase 9 authorization is consumed, AST/BZR/NUM W25–W28 are frozen, and Relationship Visual Phase 11 is next but not executed.');

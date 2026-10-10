@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const s=read('content/civilization-atlas/reconfiguration/dossier-us-golden-closure-status-v1.json');
+assert.equal(s.dossierId,'DOSSIER-US');
+assert.equal(s.states['W8-A'],'COMPLETE');
+assert.equal(s.states['W8-B'],'COMPLETE');
+assert.equal(s.states['W8-C'],'COMPLETE');
+assert.ok(['COMPLETE','READY_TO_BUILD'].includes(s.states['W8-D']));
+assert.equal(s.states['W8-E'],'COMPLETE');
+assert.equal(s.boundaries.canonicalPositionAutoAdmission,false);
+assert.equal(s.boundaries.dossierAutoProjection,false);
+assert.deepEqual(s.boundaries.humanReviewRequiredAt,['W8-F','W8-H']);
+console.log('PASS DOSSIER-US golden closure backbone: W8-A/B/C complete, W8-D observable layer governed, W8-E RRE complete, W8-F–I remain human-gated.');

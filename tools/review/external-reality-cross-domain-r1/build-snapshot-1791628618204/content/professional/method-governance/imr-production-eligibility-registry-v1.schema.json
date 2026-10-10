@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/imr-production-eligibility-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "stageCode",
+    "registryCode",
+    "registryVersion",
+    "status",
+    "baseline",
+    "authority",
+    "runtimeAuthority",
+    "methodRegistryReference",
+    "commercialLicenseReference",
+    "algorithmGovernanceReference",
+    "professionalRuntimeReference",
+    "eligibilityPolicy",
+    "methods"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-IMR-PRODUCTION-ELIGIBILITY-REGISTRY-v1.0.0"
+    },
+    "stageCode": {
+      "const": "IMR-W4"
+    },
+    "registryCode": {
+      "const": "IMR_PRODUCTION_ELIGIBILITY_REGISTRY"
+    },
+    "registryVersion": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "const": "active_governance_registry"
+    },
+    "baseline": {
+      "type": "object"
+    },
+    "authority": {
+      "const": "INTERPRETIVE_METHOD_GOVERNANCE"
+    },
+    "runtimeAuthority": {
+      "const": false
+    },
+    "methodRegistryReference": {
+      "type": "string"
+    },
+    "commercialLicenseReference": {
+      "type": "string"
+    },
+    "algorithmGovernanceReference": {
+      "type": "string"
+    },
+    "professionalRuntimeReference": {
+      "type": "string"
+    },
+    "eligibilityPolicy": {
+      "type": "object"
+    },
+    "methods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "methodCode",
+          "methodVersion",
+          "eligibilityVersion",
+          "productionReady",
+          "professionalReady",
+          "validationPassed",
+          "regressionPassed",
+          "eligibilityStatus",
+          "blockingReasons",
+          "decisionAuthority",
+          "productionAuthorityCreated"
+        ]
+      }
+    }
+  }
+}

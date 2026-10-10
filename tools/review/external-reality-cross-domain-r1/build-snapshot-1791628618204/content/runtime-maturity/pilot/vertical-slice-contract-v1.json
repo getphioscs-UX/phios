@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S10A-VERTICAL-SLICE-CONTRACT-v1.0.0",
+  "phase": "MRM-S",
+  "work": "MRM-S10A",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "ACTIVE",
+  "verticalSlices": [
+    {
+      "product": "DAR",
+      "requiredStages": [
+        "Customer",
+        "Consent",
+        "FDR shared facts where authorised",
+        "Will Intake",
+        "Clause selection",
+        "DAR",
+        "Review",
+        "Export",
+        "Execution checklist"
+      ]
+    },
+    {
+      "product": "RRP",
+      "requiredStages": [
+        "Customer",
+        "Consent",
+        "Reality",
+        "Selected Methods",
+        "MPA / MCD",
+        "Meaning",
+        "RRP",
+        "RR",
+        "Release",
+        "CPR-CUST",
+        "Customer"
+      ]
+    },
+    {
+      "product": "FINANCIAL",
+      "requiredStages": [
+        "Customer",
+        "Progressive disclosure",
+        "FDR",
+        "FCR",
+        "FAR",
+        "HFP Draft",
+        "PFR",
+        "HFP Final",
+        "RR",
+        "Release",
+        "CPR-CUST",
+        "Customer"
+      ]
+    }
+  ],
+  "rules": {
+    "noAuthorityLayerMayBeSkipped": true,
+    "customerBindingRequired": true,
+    "consentRequired": true,
+    "releaseRequiredWhereApplicable": true,
+    "professionalHumanContributionRequiredWhereApplicable": true
+  }
+}

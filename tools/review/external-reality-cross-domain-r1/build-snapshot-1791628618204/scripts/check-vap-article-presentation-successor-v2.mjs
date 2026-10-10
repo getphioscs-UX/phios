@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { buildArticlePresentationSuccessor, paths } from './lib/visual-article-production/article-presentation-successor-v2.mjs';
+const expected = buildArticlePresentationSuccessor();
+for (const [key, relative] of Object.entries(paths)) assert.deepEqual(JSON.parse(fs.readFileSync(relative, 'utf8')), expected[key]);
+assert.equal(expected.presentation.inputs.publishedFigure.assetCode, 'ASSET-KN-PREFACE-001-MECHANISM-ZH-HANS-002');
+assert.equal(expected.presentation.composition[5].visualHierarchy, 'SECONDARY_METADATA');
+assert.equal(expected.acceptance.status, 'ACCEPTED_CPR_PRODUCTION_PRESENTATION_ACTIVE');
+const source = fs.readFileSync('scripts/check-vap-article-presentation-successor-v2.mjs', 'utf8');
+for (const name of ['writeFileSync','writeFile','rename','mkdir','publish','deploy']) assert.equal(new RegExp(`(?:fs\\.)?${name}\\s*\\(`).test(source), false);
+console.log('✓ CPR/PDS successor consumes CAR Published Asset 002; knowledge lineage is secondary metadata.');

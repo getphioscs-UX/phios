@@ -1,0 +1,5904 @@
+# All accepted by Human
+# NAV-01｜Decision Object
+
+## 决策对象｜先确定究竟在决定什么
+
+**Canonical Question｜规范问题**
+
+> **一个模糊问题，为什么无法产生真正可承担的决定？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-01
+```
+
+## 2. `canonicalTitleZh`
+
+```
+决策对象
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Decision Object
+```
+
+## 4. `canonicalQuestion`
+
+```
+一个模糊问题，为什么无法产生真正可承担的决定？
+```
+
+---
+
+# 5. `definition`
+
+**Decision Object** 是 Navigation 在进入任何选项比较、风险判断、行动建议或现实路径之前，必须先明确的“真正正在被决定的事项”。
+
+它不是客户最先说出口的动作，也不是一句宽泛愿望，更不是系统根据某种方法自动补出的隐藏问题。
+
+例如：
+
+```
+“我要不要辞职？”
+```
+
+可能仍然不是最终 Decision Object。
+
+真正需要决定的可能是：
+
+```
+是否继续以当前工作结构交换收入与稳定
+```
+
+也可能是：
+
+```
+是否在未来六个月内建立一条能够降低对现有工作的依赖路径
+```
+
+或者：
+
+```
+是否需要改变当前工作方式，而不是离开职业本身
+```
+
+因此：
+
+> **Decision Object 不是动作名称，而是一个需要在现实条件下作出取舍、承担后果并能够被后续结果检验的问题。**
+
+---
+
+# 6. `navigationMeaning`
+
+Navigation 不能在问题尚未被清楚定义时直接比较方案。
+
+如果 Decision Object 错误，后续即使拥有：
+
+- 更多资料；
+- 更好的模型；
+- 更准确的 Profile；
+- 更完整的 Financial Reality；
+- 更多 Method Readings；
+- 更复杂的 AI；
+
+最终也只是在更高效率地回答错误问题。
+
+因此 NAV-01 是所有后续 Navigation modules 的入口门。
+
+其顺序必须是：
+
+```
+User Concern
+↓
+Clarify Decision Object
+↓
+Confirm What Is Actually Being Decided
+↓
+NAV-02 Current Position
+↓
+后续 Navigation
+```
+
+而不是：
+
+```
+User Concern
+↓
+Method / AI
+↓
+Recommendation
+```
+
+---
+
+# 7. `requiredInputs`
+
+NAV-01 最低需要：
+
+```
+userQuestion
+userStatedConcern
+userStatedGoalOrDesiredChange
+```
+
+如果存在，也可以读取：
+
+```
+currentRealityContext
+relevantReportContext
+profileContext
+financialContext
+relationshipContext
+knownTimeBoundary
+knownResponsibilityBoundary
+```
+
+但这些输入只能用于**澄清决策对象**，不能提前替用户决定。
+
+---
+
+# 8. `optionalInputs`
+
+```
+recentEvents
+existingCommitments
+knownConstraints
+previousNavigationState
+priorQuestions
+professionalInput
+relevantBookKnowledge
+methodInterpretiveContext
+```
+
+这些可以帮助识别：
+
+- 用户是否把症状误当成问题；
+- 一个动作背后是否存在更核心的取舍；
+- 当前问题是否实际上包含多个独立决定。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+NAV-01 接受以下来源类别：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+CURRENT_EXTERNAL_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PROFESSIONAL_INPUT
+PRIOR_NAVIGATION_STATE
+```
+
+但它们的权重不同。
+
+优先顺序不是“哪个系统最完整”，而是：
+
+```
+用户明确表达的决定意图
++
+现实中可验证的条件
++
+与该问题直接相关的既有证据
+```
+
+Symbolic / Method interpretation 只能作为：
+
+```
+QUESTION_REFINEMENT_CONTEXT
+```
+
+不得取得：
+
+```
+DECISION_OBJECT_OWNERSHIP
+```
+
+---
+
+# 10. `allowedInference`
+
+NAV-01 可以推断：
+
+### A. 表面动作可能不是最终问题
+
+例如：
+
+```
+“我要不要搬家？”
+```
+
+可以提示进一步区分：
+
+```
+居住成本
+通勤
+照护
+工作地点
+生活质量
+家庭支持
+```
+
+但不能替客户认定其中哪一个才是“真正原因”。
+
+### B. 一个问题可能包含多个 Decision Objects
+
+例如：
+
+```
+“我要不要离婚？”
+```
+
+可能同时包含：
+
+```
+关系是否继续
+共同居住是否继续
+共同财务怎样处理
+孩子照护怎样安排
+什么时候行动
+```
+
+系统可以识别问题需要拆分。
+
+### C. 用户当前表述可能过宽
+
+例如：
+
+```
+“我人生下一步怎么办？”
+```
+
+系统可以要求收窄到当前真正需要承担的决定。
+
+### D. 当前语言可能混合目标与动作
+
+例如：
+
+```
+“我要创业，因为我想自由。”
+```
+
+系统可以区分：
+
+```
+动作 = 创业
+价值/目标 = 自主
+```
+
+但不能在 NAV-01 阶段判定创业是否适合。
+
+---
+
+# 11. `forbiddenInference`
+
+NAV-01 严禁：
+
+### A. 从 Profile 直接推定客户真正想决定什么
+
+禁止：
+
+```
+你的 Profile 显示你重视自主，所以你真正想辞职。
+```
+
+### B. 从 Method Reading 推定隐藏问题
+
+禁止：
+
+```
+八字显示当前压力增加，所以你真正的问题是职业。
+```
+
+### C. 从 Tarot / I Ching 推定真实动机
+
+禁止：
+
+```
+牌显示你其实想离开。
+```
+
+### D. 从历史行为自动定义当前 Decision Object
+
+过去做过什么不能自动决定当前问题。
+
+### E. 把系统自己的产品分类当成客户问题
+
+禁止：
+
+```
+这是 Career Navigation。
+```
+
+除非客户问题确实已被确认属于该范围。
+
+### F. 偷偷把“想了解”升级成“必须决定”
+
+例如：
+
+```
+我只是想知道为什么最近很累
+```
+
+不能自动升级成：
+
+```
+是否需要辞职
+```
+
+---
+
+# 12. `decisionEffect`
+
+NAV-01 的直接作用是：
+
+```
+DECISION_SCOPE_FORMATION
+```
+
+以及：
+
+```
+OPTION_SPACE_BOUNDARY
+```
+
+它不直接决定：
+
+```
+OPTION_ELIGIBILITY
+OPTION_WEIGHT
+DECISION_THRESHOLD
+FINAL_ACTION
+```
+
+NAV-01 只决定：
+
+> **后续 Navigation 究竟在回答哪一个问题。**
+
+---
+
+# 13. `decisionThresholdEffect`
+
+```
+NO_DIRECT_THRESHOLD_CHANGE
+```
+
+但如果 Decision Object 被重新定义，后续所有 threshold 必须重新计算。
+
+例如：
+
+```
+“我要不要辞职？”
+```
+
+与：
+
+```
+“我要不要先建立6个月可验证的职业替代路径？”
+```
+
+虽然来自同一个原始担忧，但：
+
+- 可逆性；
+- 时间；
+- financial threshold；
+- action scale；
+
+都会完全不同。
+
+因此：
+
+> **Decision Object 一旦改变，后续 Navigation 不得沿用旧 threshold。**
+
+---
+
+# 14. `authorityBoundary`
+
+NAV-01 可以：
+
+- 帮用户澄清问题；
+- 拆分复合问题；
+- 暴露模糊表述；
+- 区分动作、目标与待解决问题；
+- 提出需要进一步确认的问题。
+
+NAV-01 不可以：
+
+- 替用户选定人生目标；
+- 把系统解释当成用户意图；
+- 自动产生最终问题；
+- 以专业身份覆盖客户本人的问题定义权。
+
+---
+
+# 15. `humanDecisionBoundary`
+
+最终 Decision Object 必须保持：
+
+```
+HUMAN_CONFIRMABLE
+```
+
+即使系统提出：
+
+> “听起来你真正需要比较的可能不是‘辞不辞职’，而是‘当前工作结构是否仍值得继续，以及是否应先建立替代路径’。”
+
+客户仍必须能够：
+
+```
+CONFIRM
+REVISE
+REJECT
+SPLIT
+```
+
+系统不得因为客户没有主动纠正，就自动把候选问题提升成事实。
+
+---
+
+# 16. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.3｜先确定究竟在决定什么
+```
+
+相关前置：
+
+```
+15.1｜选择已经开始
+15.2｜知道得更多，仍然不会自动产生答案
+```
+
+NAV-01 不拥有这些章节中的全部内容，只消费其与“定义真正决策对象”直接相关的部分。
+
+---
+
+# 17. `relatedBookFoundations`
+
+### Book II｜Reality Runtime
+
+提供：
+
+```
+人的选择、内部冲突与行动形成背景
+```
+
+但 NAV-01 不重新解释 Decision Formation。
+
+### Book VII｜Reality Observation
+
+提供：
+
+```
+观察、读取、解释边界
+```
+
+尤其支持：
+
+```
+Interpretation ≠ Decision
+```
+
+但 NAV-01 不重新解释证据论。
+
+### Book VIII
+
+拥有：
+
+```
+在观察之后，究竟正在决定什么
+```
+
+---
+
+# 18. `profileConsumer`
+
+Profile 在 NAV-01 的作用：
+
+```
+QUESTION_REFINEMENT_SUPPORT
+```
+
+允许：
+
+- 暴露长期 friction；
+- 提示 recurring decision pattern；
+- 提示哪些领域可能需要进一步澄清。
+
+不允许：
+
+```
+Profile → define final Decision Object
+```
+
+---
+
+# 19. `financialConsumer`
+
+Financial 在 NAV-01 只可以帮助澄清：
+
+```
+当前问题是否实际上包含财务决定
+```
+
+例如：
+
+```
+“我要不要辞职？”
+```
+
+可能包含：
+
+```
+收入连续性
+现金缓冲
+家庭责任
+债务
+```
+
+但 Financial 不得把问题自动定义成：
+
+```
+Financial Decision
+```
+
+---
+
+# 20. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR 只能提供：
+
+```
+INTERPRETIVE QUESTION CONTEXT
+```
+
+例如帮助系统提醒：
+
+> “这个问题是否只是职业职位变化，还是你真正想讨论的是自主、责任、工作方式或长期方向？”
+
+不得：
+
+```
+Method Reading → Decision Object
+```
+
+---
+
+# 21. `currentRealityConsumer`
+
+Current Reality 是 NAV-01 最重要的辅助来源之一。
+
+它可以帮助区分：
+
+```
+current event
+symptom
+constraint
+decision
+```
+
+例如：
+
+```
+事实：连续三个月工作时间明显增加
+用户担忧：越来越累
+```
+
+仍不能自动形成：
+
+```
+Decision Object = 是否离职
+```
+
+系统应先确认：
+
+> 现在真正需要决定的是减少负荷、改变职责、建立退出条件，还是离开当前工作？
+
+---
+
+# 22. `runtimeConsumer`
+
+NAV-01 未来可由以下 runtime 消费：
+
+```
+My Reality Navigation
+Report Follow-up Navigation
+Financial Navigation
+Relationship Navigation
+Professional Handoff
+```
+
+所有 consumer 在 Decision Object 未确认时，都不得直接进入：
+
+```
+option recommendation
+action recommendation
+decision sufficiency
+```
+
+---
+
+# 23. `academyConsumer`
+
+Academy 可以把 NAV-01 投影为教学主题：
+
+> **先定义问题，再寻找答案。**
+
+适合：
+
+```
+Reality Practice
+Decision Literacy
+Method-to-Reality Alignment
+```
+
+案例教学可以展示：
+
+```
+Surface Question
+vs
+Decision Object
+```
+
+但不能展示 private runtime rule 的完整实现。
+
+---
+
+# 24. `revisionTriggers`
+
+Decision Object 必须在以下情况重新检查：
+
+```
+userGoalChanged
+newConstraintAppeared
+newResponsibilityAppeared
+newEvidenceChangesProblemScope
+currentSituationMateriallyChanged
+professionalInputReframesIssue
+userRejectsPriorDecisionObject
+multipleDecisionObjectsDetected
+timeWindowChanged
+```
+
+一旦触发：
+
+```
+Decision Object → REOPEN
+```
+
+后续 Navigation 必须重新建立。
+
+---
+
+# 25. Canonical Runtime Rule
+
+冻结为：
+
+> **Navigation must not compare options until the object of decision is sufficiently clear to be stated, challenged, and confirmed.**
+
+中文：
+
+> **在决策对象尚不足以被清楚表达、质疑与确认以前，Navigation 不得开始比较选项。**
+
+---
+
+# 26. Canonical Boundary Rule
+
+> **A system may help clarify what is being decided; it may not silently decide what the user’s real problem is.**
+
+中文：
+
+> **系统可以帮助澄清“正在决定什么”，但不能悄悄替用户定义“你真正的问题是什么”。**
+
+---
+
+# 27. Customer Projection Example
+
+客户不应该看到：
+
+```
+NAV-01 PASS
+Decision Object normalized
+```
+
+应该看到：
+
+> **你现在真正需要决定的，可能还不是“辞不辞职”。从你已经提供的情况看，目前至少有三个不同问题混在一起：工作负荷是否还能继续、现在的职位是否仍值得保留，以及是否需要先建立另一条可行路径。先把这三件事分开，后面的比较才不会把不同问题当成一个答案。**
+
+然后提供：
+
+```
+这就是我要决定的
+需要调整
+拆成几个问题
+```
+
+---
+
+# 28. Internal State Model
+
+建议状态：
+
+```
+UNFORMED
+CANDIDATE
+USER_CONFIRMED
+SPLIT_REQUIRED
+REOPENED
+```
+
+其中只有：
+
+```
+USER_CONFIRMED
+```
+
+才能正式进入 NAV-02。
+
+特殊情况：
+
+如果是极简单、低风险、明显目标的问题，可以允许：
+
+```
+SYSTEM_CANDIDATE + USER_CONTINUES
+```
+
+作为弱确认，但高风险决定不得这样处理。
+
+---
+
+# 29. Fail-Closed Conditions
+
+以下情况不得继续到 NAV-02：
+
+```
+questionTooBroad
+multipleUnresolvedDecisionObjects
+userIntentContradictory
+decisionOwnerUnknown
+thirdPartyDecisionMisrepresentedAsUserDecision
+highImpactQuestionWithoutClearScope
+```
+
+系统应返回澄清，不应填补。
+
+---
+
+# 30. Final Canonical Form
+
+```
+NAV-01
+DECISION OBJECT
+```
+
+**Input**
+
+```
+Concern / Question / Goal
+```
+
+**Process**
+
+```
+Separate:
+Action
+Goal
+Value
+Constraint
+Decision
+```
+
+**Output**
+
+```
+Confirmed Decision Object
+```
+
+**Boundary**
+
+```
+System clarifies.
+Human confirms.
+```
+
+**Next**
+
+```
+NAV-02 Current Position
+```
+# NAV-02｜Current Position
+
+## 当前位置｜决定不是从愿望开始，而是从现实位置开始
+
+**Canonical Question｜规范问题**
+
+> **为什么同一个选择，在不同现实位置上会拥有不同意义？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-02
+```
+
+## 2. `canonicalTitleZh`
+
+```
+当前位置
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Current Position
+```
+
+## 4. `canonicalQuestion`
+
+```
+为什么同一个选择，在不同现实位置上会拥有不同意义？
+```
+
+---
+
+# 5. `definition`
+
+**Current Position** 是 Navigation 在已经确认“正在决定什么”以后，对用户此刻所处现实位置的受限重构。
+
+它回答的不是：
+
+> “你是什么样的人？”
+
+也不是：
+
+> “你理想上想去哪里？”
+
+而是：
+
+> **“在这个具体决定发生的此刻，你实际上站在哪里？”**
+
+Current Position 必须由与当前 Decision Object 直接相关的现实条件组成，而不是把客户所有已知资料全部堆在一起。
+
+例如客户已经确认：
+
+```
+Decision Object:
+未来六个月内，是否应该离开当前工作，
+还是先建立替代收入与新的工作路径？
+```
+
+那么 Current Position 可能包括：
+
+```
+当前收入结构
+现金缓冲
+债务与固定责任
+家庭依赖者
+工作负荷
+身体可承受程度
+已有技能与替代机会
+当前合约 / notice period
+地域限制
+时间窗口
+```
+
+却不应该因为系统拥有客户全部资料，就自动加入：
+
+```
+所有历史报告
+全部 Personality 内容
+所有 Tarot readings
+全部 Book 阅读记录
+所有过去关系问题
+```
+
+因此：
+
+> **Current Position 不是客户资料总和，而是与当前决定有因果或约束相关性的现实位置。**
+
+---
+
+# 6. `navigationMeaning`
+
+Navigation 从来不是在真空中比较选项。
+
+同一个选择，在不同当前位置上可能代表完全不同的风险、成本与可行性。
+
+例如：
+
+```
+“离职”
+```
+
+对于：
+
+```
+12个月现金缓冲
+无债务
+没有依赖者
+已有下一份工作候选
+```
+
+与：
+
+```
+1个月现金缓冲
+房贷
+两个依赖者
+医疗责任
+没有替代收入
+```
+
+虽然动作名称完全相同，但它们并不是同一个现实决定。
+
+因此 NAV-02 的核心作用是：
+
+> **把 Decision Object 放回真实资源、责任、约束与时间里。**
+
+只有这样，后续的：
+
+- Closed vs Open Conditions；
+- Reversibility；
+- Capacity；
+- Scenario Space；
+- Decision Sufficiency；
+
+才有现实意义。
+
+---
+
+# 7. `requiredInputs`
+
+NAV-02 最低需要：
+
+```
+confirmedDecisionObject
+currentTimeBoundary
+knownMaterialConditions
+knownResponsibilities
+knownConstraints
+knownAvailableResources
+```
+
+如果这些资料缺失，应明确保留：
+
+```
+UNKNOWN
+```
+
+不得自动填补。
+
+---
+
+# 8. `optionalInputs`
+
+```
+profileNavigationProjection
+financialNavigationProjection
+currentRealityProjection
+relationshipContext
+methodNavigationProjection
+professionalInput
+externalCurrentEvidence
+previousNavigationState
+recentOutcomeHistory
+locationContext
+careerContext
+lifeStageContext
+```
+
+这些 optional inputs 只能在与 Decision Object 相关时进入 Current Position。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+CURRENT_EXTERNAL_EVIDENCE
+PROFESSIONAL_INPUT
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但必须区分 authority class。
+
+建议内部至少映射成：
+
+```
+FACTUAL_CURRENT
+USER_REPORTED_CURRENT
+MATERIAL_CONSTRAINT
+INTERPRETIVE_CONTEXT
+PROFESSIONAL_CONTEXT
+UNKNOWN
+```
+
+其中：
+
+### `FACTUAL_CURRENT`
+
+例如：
+
+```
+账户中已确认的工资
+当前债务金额
+合同期限
+已确认居住地点
+已记录的报告版本
+```
+
+### `USER_REPORTED_CURRENT`
+
+例如：
+
+```
+“最近三个月每天工作约11小时”
+“我现在很难恢复”
+```
+
+系统可以使用，但不得伪装成独立验证事实。
+
+### `INTERPRETIVE_CONTEXT`
+
+例如：
+
+```
+Profile
+BaZi
+Zi Wei
+AST
+HD
+Tarot
+I Ching
+```
+
+只能帮助理解 Current Position，不得改变现实事实层。
+
+---
+
+# 10. `allowedInference`
+
+NAV-02 可以：
+
+## A. 识别与当前决定直接相关的现实条件
+
+例如：
+
+```
+Decision Object:
+是否在半年内搬家
+```
+
+允许识别：
+
+```
+住房成本
+通勤
+家庭照护
+学校
+收入地点依赖
+搬迁成本
+租约
+签证
+```
+
+---
+
+## B. 将条件组织为 Position Dimensions
+
+例如：
+
+```
+Resources
+Responsibilities
+Constraints
+Capabilities
+Time
+Relationships
+External Conditions
+Unknowns
+```
+
+---
+
+## C. 识别现实条件之间存在依赖
+
+例如：
+
+```
+换工作
+→ 收入变化
+→ 现金流变化
+→ 房贷承受变化
+```
+
+系统可以标示依赖，但不得在 NAV-02 阶段判断哪个选择最好。
+
+---
+
+## D. 区分拥有资源与理论资源
+
+例如：
+
+```
+“我可以借钱”
+```
+
+不能自动写成：
+
+```
+available liquidity
+```
+
+除非该资金确实：
+
+```
+available
+authorized
+usable
+```
+
+---
+
+## E. 区分当前状态与未来假设
+
+例如：
+
+```
+“如果我创业，可能一年后收入更高”
+```
+
+必须保持：
+
+```
+FUTURE_ASSUMPTION
+```
+
+而不是写进：
+
+```
+CURRENT_POSITION
+```
+
+---
+
+# 11. `forbiddenInference`
+
+NAV-02 严禁：
+
+## A. 把 Profile 当现实事实
+
+禁止：
+
+```
+Profile 显示你很有韧性，
+所以你的现实容量很高。
+```
+
+Profile 只能表明：
+
+```
+某些长期倾向值得在当前现实中核实
+```
+
+---
+
+## B. 把 Method Reading 当现实条件
+
+禁止：
+
+```
+八字显示财运不错
+→ 当前 Financial Position 良好
+```
+
+---
+
+## C. 把 Tarot / I Ching 当现实状态
+
+禁止：
+
+```
+塔罗出现 Five of Pentacles
+→ 你现在财务困难
+```
+
+只有真实 financial/current evidence 才能建立财务现实状态。
+
+---
+
+## D. 把未来可能性算成当前资源
+
+禁止：
+
+```
+potential job offer
+=
+current income resource
+```
+
+---
+
+## E. 把历史条件无期限延长到现在
+
+例如：
+
+```
+三年前有10个月储蓄
+```
+
+不能自动进入今天的 Current Position。
+
+---
+
+## F. 把缺失资料默认为零或正常
+
+禁止：
+
+```
+unknown debt = 0
+unknown medical responsibility = none
+unknown family obligation = none
+```
+
+---
+
+# 12. `decisionEffect`
+
+NAV-02 可以影响：
+
+```
+OPTION_ELIGIBILITY
+OPTION_WEIGHT
+DECISION_THRESHOLD
+ACTION_SCALE
+WAIT_ACT_BALANCE
+ESCALATION_REQUIREMENT
+```
+
+但这些影响只能由当前现实条件触发。
+
+例如：
+
+```
+low liquidity
+```
+
+可能：
+
+```
+reduce immediate irreversible option eligibility
+increase value of staged action
+raise threshold for full exit
+```
+
+但不能直接变成：
+
+```
+do not resign
+```
+
+---
+
+# 13. `decisionThresholdEffect`
+
+NAV-02 允许改变后续 decision threshold。
+
+原则：
+
+> **同一个选择，在资源越少、责任越高、可恢复空间越小的当前位置上，需要更高的 Decision Sufficiency。**
+
+例如：
+
+```
+Option:
+离开当前工作
+```
+
+如果：
+
+```
+high liquidity
+low dependency
+high reversibility
+```
+
+则：
+
+```
+threshold may be lower
+```
+
+如果：
+
+```
+low liquidity
+high dependency
+low reversibility
+```
+
+则：
+
+```
+threshold must rise
+```
+
+但具体 threshold 由后续：
+
+```
+NAV-06
+NAV-15
+NAV-26
+NAV-27
+```
+
+共同决定。
+
+NAV-02 只提供现实位置。
+
+---
+
+# 14. `authorityBoundary`
+
+NAV-02 可以：
+
+- 组织现实资料；
+- 识别相关约束；
+- 暴露当前未知；
+- 显示资源与责任；
+- 标示现实依赖；
+- 指出哪些输入已经过期或不够可靠。
+
+NAV-02 不可以：
+
+- 选择方向；
+- 将 interpretive method 升级为事实；
+- 把所有客户资料都纳入当前决定；
+- 把“可能得到”算成“已经拥有”；
+- 把缺失资料当成不存在；
+- 以系统自己的 preference 定义当前位置。
+
+---
+
+# 15. `humanDecisionBoundary`
+
+用户必须能够修正：
+
+```
+Current Position
+```
+
+例如系统写：
+
+> “你目前拥有约 6 个月现金缓冲。”
+
+客户应能指出：
+
+> “其中一半不能用于生活开销。”
+
+于是该字段必须重新计算为：
+
+```
+usableLiquidity ≠ totalSavings
+```
+
+因此 Current Position 必须：
+
+```
+HUMAN_REVIEWABLE
+HUMAN_CORRECTABLE
+SOURCE_TRACEABLE
+```
+
+---
+
+# 16. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.4｜当前位置已经成为决策条件
+```
+
+相关：
+
+```
+15.3｜先确定究竟在决定什么
+15.5｜什么已经不能改变，什么仍然开放
+15.6｜时间已经进入决定
+```
+
+---
+
+# 17. `relatedBookFoundations`
+
+## Book I｜Reality Formation
+
+提供：
+
+```
+现实条件与位置并非解释产生之后才存在
+```
+
+但 NAV-02 不重新解释现实如何形成。
+
+---
+
+## Book II｜Reality Runtime
+
+提供：
+
+```
+人在既有现实中如何运行
+```
+
+但 NAV-02 不拥有个人运行机制解释。
+
+---
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+capacity
+maintenance
+resource strain
+recovery
+```
+
+但 NAV-02 只消费当前已建立的相关状态，不重新解释维护机制。
+
+---
+
+## Book IV｜Reality Expansion
+
+提供：
+
+```
+scale
+constraint
+capacity expansion
+```
+
+作为背景 foundation。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+source
+evidence
+unknown
+measurement boundary
+```
+
+NAV-02 必须继承：
+
+> **没有进入模型的东西，不代表它不存在。**
+
+因此 Current Position 永远允许：
+
+```
+UNKNOWN
+```
+
+---
+
+# 18. `profileConsumer`
+
+Profile 可以为 Current Position 提供：
+
+```
+strengthResources
+frictionConditions
+decisionTendencies
+workEnvironmentFit
+relationshipPatterns
+```
+
+但只能标记：
+
+```
+PROFILE_EVIDENCE
+```
+
+而不是：
+
+```
+CURRENT_FACT
+```
+
+例如：
+
+> Profile 显示你长期在高控制环境中摩擦较高。
+
+Current Position 可以写：
+
+```
+Relevant Profile Signal:
+high-control environments may deserve attention.
+```
+
+但必须再看：
+
+```
+当前工作是否真的属于高控制环境
+```
+
+---
+
+# 19. `financialConsumer`
+
+Financial 是 NAV-02 最重要的现实来源之一。
+
+可进入：
+
+```
+cashFlow
+liquidity
+assets
+liabilities
+debtService
+dependants
+fixedCommitments
+incomeConcentration
+financialUnknowns
+```
+
+必须保留：
+
+```
+EXACT
+APPROXIMATE
+RANGE
+UNKNOWN
+```
+
+例如：
+
+```
+Emergency liquidity:
+RANGE RM20,000–RM25,000
+```
+
+不得转成：
+
+```
+RM22,500 exact
+```
+
+除非产品合同允许区间中点估计且明确标注。
+
+---
+
+# 20. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+只能提供：
+
+```
+INTERPRETIVE_CONTEXT
+```
+
+例如：
+
+```
+possible recurring friction
+possible timing emphasis
+possible role pattern
+possible responsibility theme
+```
+
+它们不能：
+
+```
+establish current financial capacity
+establish actual relationship state
+establish actual workload
+establish hidden motivations
+```
+
+---
+
+# 21. `currentRealityConsumer`
+
+Current Reality 是 NAV-02 的主要事实入口之一。
+
+应该提供：
+
+```
+whatIsHappening
+whatChanged
+howLong
+whatMattersNow
+observedConditions
+reportedConditions
+currentUnknowns
+```
+
+并保留来源。
+
+例如：
+
+```
+USER_REPORTED:
+工作时间从约8小时增加到约11小时
+```
+
+不能因为系统没有外部验证就删掉；
+
+但也不能自动写成：
+
+```
+VERIFIED_WORKLOAD_INCREASE
+```
+
+---
+
+# 22. `runtimeConsumer`
+
+NAV-02 可服务：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+Current Reality Navigation
+```
+
+---
+
+# 23. `academyConsumer`
+
+Academy 可以把 NAV-02 教成：
+
+> **Position before Direction｜先看位置，再谈方向**
+
+教学重点：
+
+```
+同一个动作
+≠
+同一个决定
+```
+
+因为：
+
+```
+position changes meaning
+```
+
+案例可以使用：
+
+```
+same choice
+different resources
+different responsibilities
+different time window
+```
+
+但不能泄漏 private runtime thresholds。
+
+---
+
+# 24. `revisionTriggers`
+
+Current Position 必须在以下情况重新运行：
+
+```
+incomeChanged
+liquidityChanged
+debtChanged
+newDependant
+relationshipResponsibilityChanged
+healthCapacityChanged
+jobStatusChanged
+locationChanged
+legalOrInstitutionalConditionChanged
+newProfessionalInput
+newExternalEvidence
+majorTimeWindowChange
+newOutcome
+userCorrectsExistingPosition
+sourceExpired
+```
+
+---
+
+# 25. Current Position Dimensions
+
+为了 runtime 可消费，建议规范为以下维度：
+
+```
+POSITION_RESOURCES
+POSITION_RESPONSIBILITIES
+POSITION_CONSTRAINTS
+POSITION_CAPABILITIES
+POSITION_RELATIONSHIPS
+POSITION_TIME
+POSITION_EXTERNAL
+POSITION_UNKNOWN
+```
+
+可选增加：
+
+```
+POSITION_RECOVERY_MARGIN
+```
+
+但只有 Book III / Current Reality / valid evidence 支持时才能使用。
+
+---
+
+# 26. Recommended Internal Representation
+
+```
+{
+  "decisionObjectId": "",
+  "asOf": "",
+  "position": {
+    "resources": [],
+    "responsibilities": [],
+    "constraints": [],
+    "capabilities": [],
+    "relationships": [],
+    "time": [],
+    "externalConditions": [],
+    "unknowns": []
+  },
+  "sources": [],
+  "staleInputs": [],
+  "conflicts": [],
+  "status": ""
+}
+```
+
+---
+
+# 27. Source Requirement
+
+每个 Current Position item 必须至少有：
+
+```
+sourceClass
+sourceRef
+asOf
+confidence / evidenceState
+```
+
+例如：
+
+```
+{
+  "claim": "Current usable emergency liquidity is approximately RM24k–RM28k",
+  "sourceClass": "FINANCIAL_RECORD",
+  "sourceRef": "FIN-...",
+  "evidenceState": "RANGE",
+  "asOf": "2026-10-09"
+}
+```
+
+---
+
+# 28. Staleness Rule
+
+Current Position 是时间敏感对象。
+
+必须区分：
+
+```
+CURRENT
+STALE
+UNKNOWN_CURRENTNESS
+```
+
+例如：
+
+```
+salary from 2024
+```
+
+即使真实，也未必适合直接代表 2026 当前状态。
+
+因此：
+
+> **A fact can remain historically true while becoming unusable as a current position input.**
+
+中文：
+
+> **一个事实可以仍然是历史上的真事实，却已经不再足以代表当前位置。**
+
+---
+
+# 29. Conflict Rule
+
+如果不同来源冲突：
+
+例如：
+
+```
+Financial report:
+monthly surplus RM2,000
+
+User latest report:
+现在每月实际赤字约RM1,000
+```
+
+NAV-02 不得自动选择旧 report。
+
+应输出：
+
+```
+POSITION_CONFLICT
+```
+
+并优先要求当前资料确认。
+
+原则：
+
+> **Currentness can outrank historical precision when the decision concerns the present.**
+
+但不得因此自动把未经核实的新说法提升成 verified fact。
+
+---
+
+# 30. Unknown Rule
+
+未知必须显式存在。
+
+例如：
+
+```
+actual severance terms = UNKNOWN
+actual partner willingness = UNKNOWN
+future offer = UNKNOWN
+medical capacity = UNKNOWN
+```
+
+不得用：
+
+```
+none
+0
+likely okay
+```
+
+填补。
+
+---
+
+# 31. Customer Projection Example
+
+内部可能保存：
+
+```
+Resources:
+- 8 months liquidity
+- current salary
+- transferable skill set
+
+Responsibilities:
+- mortgage
+- 2 dependants
+
+Constraints:
+- 2 month notice period
+- current role requires 55h/week
+
+Unknown:
+- next role offer
+- exact insurance continuity
+```
+
+客户不需要看到内部分类代码。
+
+可以呈现为：
+
+> **你现在站在哪里**
+> 
+> 目前你并不是在“完全没有退路”与“可以随时离开”之间二选一。你有一定现金缓冲，也有可以迁移的专业能力，但同时承担固定住房支出和家庭责任，现有工作又持续占用大量时间；这意味着“离开”不是一个完全不可行的方向，却也还没有足够条件被当成低成本选择。另一方面，下一份工作的真实机会、保险延续和退出后的收入恢复速度目前仍然未知，这些未知会直接影响后续判断。
+
+然后客户可以：
+
+```
+Correct this
+Add missing information
+Continue
+```
+
+---
+
+# 32. Position Summary Must Not Become Recommendation
+
+禁止：
+
+> “你的当前位置不适合辞职。”
+
+应该：
+
+> “在当前条件下，离职的现实成本与不可逆性较高，因此后续比较需要更高的充分程度。”
+
+这是一个重要边界。
+
+Current Position 可以改变：
+
+```
+decision conditions
+```
+
+不能直接成为：
+
+```
+decision answer
+```
+
+---
+
+# 33. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+SUFFICIENT_FOR_NAVIGATION
+CONFLICTED
+STALE
+REOPENED
+```
+
+其中：
+
+```
+SUFFICIENT_FOR_NAVIGATION
+```
+
+不意味着：
+
+```
+complete
+perfect
+all-known
+```
+
+而只表示：
+
+> 已经知道得足够多，可以进入下一层 Navigation，同时未知仍被保留。
+
+---
+
+# 34. Fail-Closed Conditions
+
+以下情况不得直接进入 NAV-03：
+
+```
+decisionObjectNotConfirmed
+currentPositionHasCriticalConflict
+criticalMaterialInputsMissing
+majorSourceStaleness
+identityOrPersonMismatch
+financialObjectBelongsToDifferentPerson
+relationshipParticipantScopeAmbiguous
+professionalInputOwnershipUnclear
+```
+
+---
+
+# 35. Canonical Runtime Rule
+
+> **Navigation must establish a decision-relevant current position before evaluating direction.**
+
+中文：
+
+> **Navigation 在评估方向以前，必须先建立一个与当前决策直接相关的现实位置。**
+
+---
+
+# 36. Canonical Relevance Rule
+
+> **Current Position includes only conditions that materially change the meaning, feasibility, cost, responsibility, timing, or reversibility of the decision.**
+
+中文：
+
+> **当前位置只纳入那些会实质改变该决定之意义、可行性、成本、责任、时间或可逆性的条件。**
+
+这条很重要，因为它阻止 My Reality 变成“所有资料都塞进去”。
+
+---
+
+# 37. Canonical Evidence Rule
+
+> **Interpretive systems may contextualize position; they may not establish material reality by interpretation alone.**
+
+中文：
+
+> **解释系统可以帮助理解当前位置，但不能仅凭解释本身建立现实条件。**
+
+---
+
+# 38. Canonical Unknown Rule
+
+> **Unknown is part of the position. It is not an empty field to be silently completed.**
+
+中文：
+
+> **未知本身就是当前位置的一部分，而不是等待系统偷偷补完的空格。**
+
+---
+
+# 39. Canonical Currentness Rule
+
+> **A current position is time-bounded. When materially relevant conditions change, the position must be reopened.**
+
+中文：
+
+> **当前位置具有时间边界；只要实质相关条件发生变化，它就必须重新打开。**
+
+---
+
+# 40. Final Canonical Form
+
+```
+NAV-02
+CURRENT POSITION
+```
+
+**Input**
+
+```
+Confirmed Decision Object
++
+Decision-Relevant Reality
+```
+
+**Process**
+
+```
+Identify:
+Resources
+Responsibilities
+Constraints
+Capabilities
+Relationships
+Time
+External Conditions
+Unknowns
+```
+
+**Output**
+
+```
+Decision-Relevant Current Position
+```
+
+**Boundary**
+
+```
+Position informs direction.
+Position does not choose direction.
+```
+
+# NAV-03｜Closed vs Open Conditions
+
+## 已关闭与仍开放的条件｜先分清什么已经不能改，什么仍然可以选择
+
+**Canonical Question｜规范问题**
+
+> **为什么决定以前必须先区分既定条件与仍可选择的空间？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-03
+```
+
+## 2. `canonicalTitleZh`
+
+```
+已关闭与仍开放的条件
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Closed vs Open Conditions
+```
+
+## 4. `canonicalQuestion`
+
+```
+为什么决定以前必须先区分既定条件与仍可选择的空间？
+```
+
+---
+
+# 5. `definition`
+
+**Closed vs Open Conditions** 是 Navigation 在已经建立 Current Position 以后，对当前决策空间进行第二次分层：把已经发生、已经锁定、无法由当前决定直接撤销的条件，与仍然能够通过选择、行动、等待、谈判、准备或重新配置而改变的条件分开。
+
+它回答的不是：
+
+> “什么是好，什么是坏？”
+
+也不是：
+
+> “什么值得坚持，什么应该放弃？”
+
+而是：
+
+> **“在当前这个决定里，哪些条件现在只能被承认并带着走，哪些条件仍然拥有真实的改变空间？”**
+
+例如：
+
+```
+事实：
+过去三年已经投入某职业路径
+```
+
+这部分属于：
+
+```
+CLOSED / INHERITED CONDITION
+```
+
+因为过去时间不能被撤回。
+
+但：
+
+```
+未来是否继续投入三年
+```
+
+仍然属于：
+
+```
+OPEN CONDITION
+```
+
+同样：
+
+```
+已经发生的关系事件
+```
+
+不可撤销；
+
+但：
+
+```
+如何回应
+是否继续共同生活
+未来怎样设置边界
+```
+
+仍然可能开放。
+
+因此：
+
+> **NAV-03 不判断过去应不应该发生，而是确认从当前时点开始，真正还剩下哪些决策自由度。**
+
+---
+
+# 6. `navigationMeaning`
+
+如果 Navigation 不区分 Closed 与 Open，系统很容易犯两类相反错误。
+
+第一类：
+
+> 把已经无法改变的条件继续当作候选选项。
+
+例如：
+
+```
+“如果当时没有买这套房就好了。”
+```
+
+这可以进入复盘，却不能作为现在的实际选项。
+
+第二类：
+
+> 把仍然开放的条件误认为已经固定。
+
+例如：
+
+```
+“我已经在这个行业十年，所以以后只能继续。”
+```
+
+过去十年已经发生，但未来十年并没有因此自动关闭。
+
+因此 NAV-03 的作用是：
+
+```
+Current Position
+↓
+Separate Inherited Reality
+from
+Remaining Choice Space
+↓
+Define Real Option Space
+```
+
+只有这样，后续 Navigation 才不会：
+
+- 浪费资源处理不存在的选项；
+- 把历史惯性误当成现实必然；
+- 把理论可能误当成当前可行；
+- 把暂时不能做误写成永远不能做。
+
+---
+
+# 7. `requiredInputs`
+
+NAV-03 最低需要：
+
+```
+confirmedDecisionObject
+currentPosition
+currentTimeBoundary
+knownExistingCommitments
+knownIrreversibleEvents
+knownChangeableConditions
+knownUnknowns
+```
+
+如果关键条件无法判断其开放程度，应标记：
+
+```
+OPENNESS_UNKNOWN
+```
+
+不得自动归入 Closed 或 Open。
+
+---
+
+# 8. `optionalInputs`
+
+```
+legalOrContractualConditions
+financialNavigationProjection
+relationshipContext
+professionalInput
+institutionalRules
+locationConstraints
+careerConditions
+healthCapacityContext
+priorActions
+previousNavigationState
+externalCurrentEvidence
+```
+
+这些可以帮助判断：
+
+- 一个条件是否真实锁定；
+- 是否可以谈判；
+- 是否可以退出；
+- 是否只是当前暂不可行；
+- 是否需要专业确认。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许来源：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+LEGAL_OR_CONTRACTUAL_RECORD
+PROFESSIONAL_INPUT
+CURRENT_EXTERNAL_EVIDENCE
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但决定一个条件是否 `CLOSED`，需要比普通解释更高 authority。
+
+例如：
+
+```
+“这个合同绝对不能退出”
+```
+
+不能只根据用户感觉或 AI 推断确认。
+
+应要求：
+
+```
+contract evidence
+professional interpretation if needed
+```
+
+---
+
+# 10. Core Condition Classes
+
+建议 runtime 至少区分五类，而不是只有二元 Closed / Open：
+
+```
+CLOSED
+OPEN
+CONDITIONALLY_OPEN
+NOT_YET_OPEN
+OPENNESS_UNKNOWN
+```
+
+---
+
+## A. `CLOSED`
+
+当前决策无法直接改变。
+
+例如：
+
+```
+past event
+already elapsed time
+already incurred historical loss
+already disclosed information
+completed transaction
+confirmed irreversible biological/legal event
+```
+
+---
+
+## B. `OPEN`
+
+当前仍存在真实选择空间。
+
+例如：
+
+```
+whether to continue
+whether to pause
+whether to negotiate
+whether to apply
+whether to allocate new resources
+```
+
+---
+
+## C. `CONDITIONALLY_OPEN`
+
+理论上能改变，但必须满足前置条件。
+
+例如：
+
+```
+move country
+```
+
+可能需要：
+
+```
+visa
+income
+school
+housing
+consent
+```
+
+因此不是当前完全开放，也不是关闭。
+
+---
+
+## D. `NOT_YET_OPEN`
+
+方向可能存在，但当前尚未取得现实资格。
+
+例如：
+
+```
+创业
+```
+
+客户目前没有：
+
+```
+minimum capital
+time
+legal permission
+required skill
+```
+
+不应写成：
+
+```
+IMPOSSIBLE
+```
+
+而是：
+
+```
+NOT_YET_OPEN
+```
+
+---
+
+## E. `OPENNESS_UNKNOWN`
+
+系统不知道能不能改变。
+
+例如：
+
+```
+是否可以提前终止合同
+是否能调换岗位
+是否有资格申请某项安排
+```
+
+需要进一步确认。
+
+---
+
+# 11. `allowedInference`
+
+NAV-03 可以：
+
+## A. 将已发生事实标为 inherited condition
+
+例如：
+
+```
+already spent RM50,000
+```
+
+可以识别为：
+
+```
+historical sunk condition
+```
+
+但不能因此判断未来还要继续投入。
+
+---
+
+## B. 识别过去与未来的边界
+
+例如：
+
+```
+“我已经40岁了。”
+```
+
+年龄本身是既定条件；
+
+但：
+
+```
+未来职业方向
+学习方式
+居住地点
+工作结构
+```
+
+不因年龄自动关闭。
+
+---
+
+## C. 识别一个条件需要前置条件才能开放
+
+例如：
+
+```
+“我要搬去另一个国家。”
+```
+
+系统可以标记：
+
+```
+CONDITIONALLY_OPEN
+```
+
+如果取决于：
+
+```
+visa
+job
+family consent
+school arrangement
+```
+
+---
+
+## D. 识别一个理论选项当前没有现实资格
+
+例如：
+
+```
+“我现在马上辞职创业。”
+```
+
+如果：
+
+```
+required runway unknown
+existing debt high
+business model absent
+```
+
+可以标记：
+
+```
+OPENNESS / ELIGIBILITY NOT YET ESTABLISHED
+```
+
+但不是：
+
+```
+DO NOT START BUSINESS
+```
+
+---
+
+## E. 识别历史投入与未来投入是两个不同对象
+
+这一点必须允许：
+
+```
+Past Investment = CLOSED
+Future Commitment = OPEN
+```
+
+---
+
+# 12. `forbiddenInference`
+
+NAV-03 严禁：
+
+## A. 把“困难”自动写成 Closed
+
+禁止：
+
+```
+成本很高
+→ CLOSED
+```
+
+高成本可能只是：
+
+```
+CONDITIONALLY_OPEN
+```
+
+---
+
+## B. 把“当前做不到”写成永远不可能
+
+禁止：
+
+```
+现在没有钱
+→ 永远不能做
+```
+
+应该：
+
+```
+NOT_YET_OPEN
+```
+
+如果未来条件可以变化。
+
+---
+
+## C. 把历史身份变成未来锁定
+
+禁止：
+
+```
+你过去一直是工程师
+→ 你只能继续做工程师
+```
+
+---
+
+## D. 把 symbolic interpretation 用来关闭选项
+
+禁止：
+
+```
+八字当前运势不利
+→ 创业选项 CLOSED
+```
+
+或：
+
+```
+Tarot 显示阻碍
+→ Relationship CLOSED
+```
+
+---
+
+## E. 把情绪状态当成现实关闭
+
+例如：
+
+```
+“我现在觉得没有路了。”
+```
+
+不得自动输出：
+
+```
+NO OPEN OPTIONS
+```
+
+---
+
+## F. 把用户不想做与不能做混为一谈
+
+```
+UNWILLING
+≠
+UNAVAILABLE
+```
+
+---
+
+# 13. `decisionEffect`
+
+NAV-03 直接影响：
+
+```
+OPTION_ELIGIBILITY
+OPTION_SPACE_BOUNDARY
+WAIT_ACT_BALANCE
+ACTION_SCALE
+ESCALATION_REQUIREMENT
+```
+
+其最核心作用：
+
+> **从所有想象中的可能，收缩到真正仍然具有现实资格的选择空间。**
+
+---
+
+# 14. `decisionThresholdEffect`
+
+Closed / Open 分类本身不直接决定最终 threshold，但会改变：
+
+```
+how many real options remain
+how reversible the situation is
+how urgent information gathering becomes
+whether preparation should precede action
+```
+
+例如：
+
+如果：
+
+```
+only one condition remains open
+```
+
+后续 decision space 会显著收窄。
+
+如果：
+
+```
+multiple conditions remain open
+```
+
+则可以允许：
+
+```
+staged experiment
+comparison
+delay for information
+```
+
+因此：
+
+> **Option space 越小，不代表答案越明显；有时反而意味着需要更高责任，因为错误的代价更难修正。**
+
+---
+
+# 15. `authorityBoundary`
+
+NAV-03 可以：
+
+- 标记已发生且无法撤销的条件；
+- 标记仍然开放的条件；
+- 区分当前不可行与永久关闭；
+- 暴露条件开放所需的前置要求；
+- 标示开放程度未知；
+- 阻止过去自动控制未来。
+
+NAV-03 不可以：
+
+- 评价过去决定对错；
+- 自动建议放弃；
+- 自动建议坚持；
+- 使用 Method Reading 关闭现实选项；
+- 把成本高误判为不可能；
+- 把人的身份当作永久限制。
+
+---
+
+# 16. `humanDecisionBoundary`
+
+用户必须能纠正系统对开放程度的理解。
+
+例如系统认为：
+
+```
+“当前职位不可调整。”
+```
+
+用户补充：
+
+> “公司其实允许我申请内部调岗。”
+
+则必须重新分类：
+
+```
+CLOSED
+→
+CONDITIONALLY_OPEN
+```
+
+因此条件状态必须：
+
+```
+SOURCE_TRACEABLE
+HUMAN_CORRECTABLE
+TIME_BOUND
+```
+
+---
+
+# 17. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.5｜什么已经不能改变，什么仍然开放
+```
+
+相关：
+
+```
+15.4｜当前位置已经成为决策条件
+15.6｜时间已经进入决定
+15.8｜能不能回头，会改变决定本身
+```
+
+---
+
+# 18. `relatedBookFoundations`
+
+## Book I｜Reality Formation
+
+提供：
+
+```
+现实已经形成的条件不是解释之后才存在
+```
+
+NAV-03 不重新讲形成机制。
+
+---
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+persistent conditions
+constraints
+capacity
+maintenance burden
+```
+
+但 NAV-03 不重新判断“为什么系统仍然运行”或“怎样恢复”。
+
+这里只问：
+
+> **这些已成立条件，对下一步而言哪些已经锁定，哪些仍可改变？**
+
+---
+
+## Book IV｜Reality Expansion
+
+提供：
+
+```
+capacity / expansion constraints
+```
+
+有助于理解：
+
+```
+NOT_YET_OPEN
+```
+
+但不重新讲扩展机制。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+evidence boundary
+unknown
+currentness
+```
+
+支持：
+
+```
+OPENNESS_UNKNOWN
+```
+
+必须被合法保留。
+
+---
+
+# 19. `profileConsumer`
+
+Profile 只能帮助识别：
+
+```
+habitual attachment
+friction
+preferred environments
+adaptation patterns
+```
+
+但不能决定：
+
+```
+OPEN / CLOSED
+```
+
+例如：
+
+```
+Profile says high stability preference
+```
+
+不能推出：
+
+```
+career change option CLOSED
+```
+
+---
+
+# 20. `financialConsumer`
+
+Financial 对 NAV-03 很重要。
+
+例如可以帮助判断：
+
+```
+available liquidity
+existing debt
+locked assets
+fixed commitments
+```
+
+从而区分：
+
+```
+OPEN
+CONDITIONALLY_OPEN
+NOT_YET_OPEN
+```
+
+但财务紧张仍不自动等于：
+
+```
+option permanently closed
+```
+
+---
+
+# 21. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+只能作为：
+
+```
+INTERPRETIVE_CONTEXT
+```
+
+不得改变现实 option status。
+
+可以提示用户：
+
+> 某种主题值得进一步核对。
+
+不能：
+
+> 某种选项已经关闭。
+
+---
+
+# 22. `currentRealityConsumer`
+
+Current Reality 是判断 Open / Closed 的主要来源之一。
+
+它可提供：
+
+```
+whatChanged
+whatIsLocked
+whatIsNegotiable
+whatIsUnknown
+```
+
+但必须保持：
+
+```
+USER_REPORTED
+vs
+VERIFIED
+```
+
+区别。
+
+---
+
+# 23. `runtimeConsumer`
+
+NAV-03 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+所有 downstream consumer 必须只比较：
+
+```
+real or conditionally real options
+```
+
+不能继续把明显 closed condition 放进候选。
+
+---
+
+# 24. `academyConsumer`
+
+Academy 可投影为：
+
+> **Closed is not the same as difficult. Open is not the same as immediately feasible.**
+
+中文：
+
+> **已经关闭，不等于只是困难；仍然开放，也不等于现在立刻做得到。**
+
+教学重点：
+
+```
+Past
+≠
+Future
+
+Possible
+≠
+Available
+
+Available
+≠
+Feasible Now
+```
+
+---
+
+# 25. `revisionTriggers`
+
+以下情况必须重新判断 openness：
+
+```
+newResourceAppeared
+newPermissionGranted
+contractChanged
+legalConditionChanged
+financialCapacityChanged
+newProfessionalAdvice
+relationshipConsentChanged
+locationChanged
+institutionalRuleChanged
+newTechnologyOrCapability
+timeWindowChanged
+newEvidence
+userCorrectsCondition
+```
+
+---
+
+# 26. Canonical Condition Model
+
+建议：
+
+```
+{
+  "conditionId": "",
+  "description": "",
+  "state": "CLOSED | OPEN | CONDITIONALLY_OPEN | NOT_YET_OPEN | OPENNESS_UNKNOWN",
+  "reason": "",
+  "requiredConditions": [],
+  "sourceClass": "",
+  "sourceRef": "",
+  "asOf": "",
+  "confidence": "",
+  "revisionTriggers": []
+}
+```
+
+---
+
+# 27. Historical Cost Rule
+
+必须明确：
+
+```
+PAST COST
+≠
+FUTURE OBLIGATION
+```
+
+例如：
+
+```
+已经投入10年
+```
+
+不能推导：
+
+```
+必须再投入5年
+```
+
+冻结规则：
+
+> **Historical investment may explain current position; it cannot independently justify future commitment.**
+
+中文：
+
+> **历史投入可以解释我们为什么来到这里，却不能单独证明未来还应该继续投入。**
+
+---
+
+# 28. Identity Rule
+
+同样冻结：
+
+> **A past identity is an inherited condition, not a permanent navigation constraint.**
+
+中文：
+
+> **过去形成的身份属于继承条件，而不是永久的导航边界。**
+
+例如：
+
+```
+我一直是全职母亲
+我一直做金融
+我们公司一直卖这个产品
+```
+
+都不能自动关闭未来选项。
+
+---
+
+# 29. Theoretical Possibility Rule
+
+一个方向仅仅：
+
+```
+logically possible
+```
+
+不能进入：
+
+```
+CURRENT OPTION SPACE
+```
+
+必须至少满足：
+
+```
+not prohibited
+minimum prerequisites identifiable
+path to feasibility exists
+```
+
+否则标记：
+
+```
+NOT_YET_OPEN
+```
+
+---
+
+# 30. Conditioned Openness Rule
+
+`CONDITIONALLY_OPEN` 必须说明：
+
+```
+what must become true
+```
+
+例如：
+
+```
+Move abroad
+```
+
+条件：
+
+```
+visa approved
+minimum cash buffer
+school placement
+partner agreement
+```
+
+这使 Navigation 可以从：
+
+> “做不做？”
+
+转向：
+
+> “先让什么成立？”
+
+---
+
+# 31. Unknown Openness Rule
+
+如果无法确认：
+
+```
+can contract terminate early?
+```
+
+不要推荐路线。
+
+应该生成：
+
+```
+INFORMATION_GAP
+```
+
+并将：
+
+```
+verify contract termination terms
+```
+
+变成后续可能的最小行动。
+
+---
+
+# 32. Customer Projection Example
+
+内部：
+
+```
+CLOSED
+- 已经签署现有12个月租约
+- 已经支付过去三个月费用
+
+CONDITIONALLY_OPEN
+- 提前搬迁：需确认提前终止条款和新住所
+
+OPEN
+- 调整月度支出
+- 开始寻找新住所
+
+UNKNOWN
+- 是否允许无罚金转租
+```
+
+客户可以看到：
+
+> **现在已经不能改变的是：**现有租约已经生效，过去支付的费用也无法收回；这些不再是接下来需要重新选择的部分。
+> 
+> **仍然开放的是：**你可以开始寻找新住所、调整预算，并决定是否继续住到租约结束。
+> 
+> **目前有条件开放的是：**提前搬走并非一定做不到，但需要先确认转租或提前终止条款，以及新住所是否真正可行。
+> 
+> **仍然未知的是：**目前没有足够资料确认提前退出的实际费用，因此这部分不应该被当成已经关闭，也不能被假设为免费可行。
+
+---
+
+# 33. Customer Actions
+
+允许：
+
+```
+Confirm
+Correct
+Add information
+Check condition
+Continue
+```
+
+不应该出现：
+
+```
+System has determined your future options
+```
+
+---
+
+# 34. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+SUFFICIENT_FOR_OPTION_MAPPING
+CONFLICTED
+OPENNESS_UNKNOWN
+REOPENED
+```
+
+其中：
+
+```
+SUFFICIENT_FOR_OPTION_MAPPING
+```
+
+只代表：
+
+> 已经足够进入后续时间判断。
+
+不代表所有可能都已穷尽。
+
+---
+
+# 35. Fail-Closed Conditions
+
+以下情况不得进入 NAV-04：
+
+```
+criticalConditionStateUnknown
+legalConstraintUnverified
+materialOptionMisclassified
+currentPositionStale
+closedConditionTreatedAsOption
+theoreticalPossibilityTreatedAsAvailable
+personOrAssetOwnershipMismatch
+```
+
+---
+
+# 36. Canonical Runtime Rule
+
+> **Navigation must distinguish inherited reality from remaining choice before evaluating timing, reversibility, or direction.**
+
+中文：
+
+> **Navigation 在评估时间、可逆性或方向以前，必须先把已经继承的现实与仍然存在的选择空间分开。**
+
+---
+
+# 37. Canonical Closed Rule
+
+> **Closed conditions may shape the decision, but they are not candidate choices.**
+
+中文：
+
+> **已经关闭的条件可以影响决定，却不能继续伪装成候选选择。**
+
+---
+
+# 38. Canonical Open Rule
+
+> **An open condition is not necessarily immediately feasible; openness and current feasibility must remain distinct.**
+
+中文：
+
+> **一个条件仍然开放，并不代表它现在立刻可行；开放性与当前可行性必须分开。**
+
+---
+
+# 39. Canonical Freedom Rule
+
+> **Navigation does not create freedom by pretending constraints do not exist; it reveals freedom by locating the conditions that are still genuinely open.**
+
+中文：
+
+> **Navigation 不是靠假装限制不存在来制造自由，而是通过找出那些仍然真正开放的条件，让剩余的自由变得可见。**
+
+---
+
+# 40. Final Canonical Form
+
+```
+NAV-03
+CLOSED VS OPEN CONDITIONS
+```
+
+**Input**
+
+```
+Current Position
+```
+
+**Process**
+
+```
+Classify:
+CLOSED
+OPEN
+CONDITIONALLY_OPEN
+NOT_YET_OPEN
+OPENNESS_UNKNOWN
+```
+
+**Output**
+
+```
+Real Remaining Choice Space
+```
+
+**Boundary**
+
+```
+Past constrains.
+Past does not automatically decide future.
+```
+# NAV-04｜Time
+
+## 时间｜相同选择在不同时间发生，会成为不同决定
+
+**Canonical Question｜规范问题**
+
+> **为什么相同选择在不同时间做出，会成为不同选择？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-04
+```
+
+## 2. `canonicalTitleZh`
+
+```
+时间
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Time
+```
+
+## 4. `canonicalQuestion`
+
+```
+为什么相同选择在不同时间做出，会成为不同选择？
+```
+
+---
+
+# 5. `definition`
+
+**Time** 是 Navigation 对“何时进入现实”这一条件的正式处理。
+
+它不是简单记录日期，也不是预测未来，更不是寻找某个神秘的“最佳时机”。
+
+它回答的是：
+
+> **当一个选择仍然存在时，时间的推进会怎样改变它的成本、可行性、风险、可逆性、信息质量与未来空间？**
+
+例如：
+
+```
+离开当前工作
+```
+
+如果发生在：
+
+```
+12个月现金缓冲
+下一份工作已明确
+家庭责任较低
+```
+
+与发生在：
+
+```
+1个月现金缓冲
+医疗支出刚增加
+家庭责任上升
+```
+
+虽然动作名称相同，现实意义已经不同。
+
+同样：
+
+```
+等待三个月
+```
+
+可能：
+
+- 增加资料；
+- 增加储蓄；
+- 让条件成熟；
+
+也可能：
+
+- 失去机会；
+- 增加成本；
+- 让可逆选项关闭。
+
+因此：
+
+> **NAV-04 不寻找“完美时间”，而是判断时间正在增加什么、减少什么，以及它怎样改变当前选择空间。**
+
+---
+
+# 6. `navigationMeaning`
+
+Navigation 不能把时间当作背景。
+
+时间本身会改变：
+
+```
+option availability
+option cost
+option reversibility
+evidence quality
+resource position
+responsibility load
+exit difficulty
+opportunity window
+```
+
+因此 NAV-04 必须在后续所有重大判断之前明确：
+
+```
+Now
+vs
+Later
+```
+
+究竟是不是同一个选择。
+
+如果 Navigation 忽略时间，就容易犯两种错误：
+
+### A. 把“以后可以”误当成“以后仍然一样”
+
+例如：
+
+```
+以后再转行
+```
+
+不一定等于：
+
+```
+同样成本
+同样机会
+同样恢复空间
+```
+
+### B. 把“现在还不确定”误当成“应该继续等”
+
+未知存在，并不自动说明等待有价值。
+
+---
+
+# 7. `requiredInputs`
+
+NAV-04 最低需要：
+
+```
+confirmedDecisionObject
+currentPosition
+remainingChoiceSpace
+currentDateOrDecisionTime
+knownDeadlines
+knownTimeWindows
+knownTimeDependentConditions
+```
+
+如果时间相关条件未知，则必须保留：
+
+```
+TIME_RELEVANCE_UNKNOWN
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialProjection
+contractDeadlines
+applicationWindows
+marketWindows
+careerTiming
+familyTiming
+relationshipTiming
+professionalInput
+externalCurrentEvidence
+priorNavigationState
+knownRecoveryPeriods
+knownPreparationPeriods
+```
+
+这些输入只能在它们确实会改变当前 Decision Object 时进入 NAV-04。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_DATE
+CONTRACTUAL_DATE
+FINANCIAL_DATE
+PROFESSIONAL_INPUT
+CURRENT_EXTERNAL_EVIDENCE
+PRIOR_NAVIGATION_STATE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+```
+
+但必须区分：
+
+```
+CALENDAR_FACT
+REALITY_WINDOW
+INTERPRETIVE_TIMING
+UNKNOWN
+```
+
+其中：
+
+### `CALENDAR_FACT`
+
+例如：
+
+```
+lease ends 2027-03-31
+application closes 2026-11-15
+```
+
+### `REALITY_WINDOW`
+
+例如：
+
+```
+现有现金缓冲约可支持6个月
+```
+
+### `INTERPRETIVE_TIMING`
+
+例如：
+
+```
+BaZi timing emphasis
+Zi Wei current cycle
+Astrology transit
+Tarot / I Ching timing symbolism
+```
+
+只能作为解释性 context。
+
+不得直接定义现实时间窗口。
+
+---
+
+# 10. Core Time Classes
+
+建议 runtime 至少区分：
+
+```
+FIXED_DEADLINE
+OPEN_WINDOW
+CLOSING_WINDOW
+PREPARATION_PERIOD
+WAITING_PERIOD
+RECOVERY_PERIOD
+TIME_SENSITIVE_UNKNOWN
+NO_MATERIAL_TIME_EFFECT
+```
+
+---
+
+## A. `FIXED_DEADLINE`
+
+例如：
+
+```
+contract expiry
+application deadline
+legal filing date
+school enrollment deadline
+```
+
+这种时间条件可以直接改变 option availability。
+
+---
+
+## B. `OPEN_WINDOW`
+
+当前仍然拥有进入某项行动的现实时间空间。
+
+例如：
+
+```
+仍有4个月可以准备搬迁
+```
+
+---
+
+## C. `CLOSING_WINDOW`
+
+继续等待会实质减少选项。
+
+例如：
+
+```
+offer expires in 7 days
+visa window closing
+medical timing boundary
+```
+
+这里不代表必须行动，但 waiting cost 上升。
+
+---
+
+## D. `PREPARATION_PERIOD`
+
+等待能够增加：
+
+```
+resources
+evidence
+capability
+coordination
+```
+
+因此等待本身具有积极作用。
+
+---
+
+## E. `WAITING_PERIOD`
+
+当前等待并没有明确增加现实条件，只是：
+
+```
+decision deferred
+```
+
+这类状态必须继续观察。
+
+---
+
+## F. `RECOVERY_PERIOD`
+
+系统需要时间恢复到能承担决定的状态。
+
+例如：
+
+```
+身体恢复
+家庭稳定
+团队重新配置
+```
+
+但 NAV-04 不重新定义 Recovery 机制；它只消费已经建立的恢复需求。
+
+---
+
+## G. `TIME_SENSITIVE_UNKNOWN`
+
+系统知道时间可能重要，但不知道具体边界。
+
+---
+
+# 11. `allowedInference`
+
+NAV-04 可以：
+
+## A. 判断等待是否正在增加信息价值
+
+例如：
+
+```
+三周后会得到正式 offer
+```
+
+则等待可能：
+
+```
+increase decision quality
+```
+
+---
+
+## B. 判断等待是否正在减少 option space
+
+例如：
+
+```
+offer expires tomorrow
+```
+
+系统可以标记：
+
+```
+CLOSING_WINDOW
+```
+
+但不能直接说：
+
+```
+accept now
+```
+
+---
+
+## C. 区分“还没准备好”和“只是继续拖延”
+
+如果等待没有：
+
+```
+new evidence
+new resources
+new capability
+new permission
+```
+
+系统可以提示：
+
+```
+WAITING_VALUE_NOT_ESTABLISHED
+```
+
+---
+
+## D. 识别“同一动作已经不是同一选择”
+
+例如：
+
+```
+现在买房
+vs
+两年后买房
+```
+
+如果：
+
+```
+interest rate
+income
+family size
+location
+price
+```
+
+已变化，则两者不能视为同一 Decision Object。
+
+---
+
+## E. 识别时间会改变可逆性
+
+例如：
+
+```
+trial arrangement
+```
+
+如果持续太久后形成：
+
+```
+contract
+debt
+dependency
+identity lock-in
+```
+
+则可逆性下降。
+
+---
+
+# 12. `forbiddenInference`
+
+NAV-04 严禁：
+
+## A. 把解释系统的 timing 当现实 deadline
+
+禁止：
+
+```
+八字显示今年适合变化
+→ 必须今年行动
+```
+
+---
+
+## B. 把等待自动解释成谨慎
+
+等待也可能只是：
+
+```
+avoidance
+```
+
+但系统不能只凭延迟就下此判断。
+
+---
+
+## C. 把行动快解释成成熟或勇敢
+
+速度本身不是价值。
+
+---
+
+## D. 把未来预测当已知时间条件
+
+例如：
+
+```
+market will recover in six months
+```
+
+不能进入：
+
+```
+CALENDAR_FACT
+```
+
+---
+
+## E. 把所有 deadline 当成必须服从
+
+一个截止日期可能只是：
+
+```
+one option window
+```
+
+而不是整个决定唯一窗口。
+
+---
+
+## F. 把“现在”默认成最佳时间
+
+Navigation 不允许：
+
+```
+action bias
+```
+
+也不允许：
+
+```
+waiting bias
+```
+
+---
+
+# 13. `decisionEffect`
+
+NAV-04 可以影响：
+
+```
+OPTION_ELIGIBILITY
+OPTION_WEIGHT
+WAIT_ACT_BALANCE
+ACTION_SCALE
+DECISION_THRESHOLD
+ESCALATION_REQUIREMENT
+```
+
+尤其：
+
+```
+WAIT_ACT_BALANCE
+```
+
+是 NAV-04 的主要 decision effect。
+
+---
+
+# 14. `decisionThresholdEffect`
+
+原则：
+
+> **时间压力可以降低等待空间，但不能自动降低证据与责任门槛。**
+
+例如：
+
+```
+deadline in 24 hours
+```
+
+可能意味着必须更快决定；
+
+但如果：
+
+```
+high impact
+low reversibility
+```
+
+反而可能要求：
+
+```
+higher professional verification
+```
+
+因此：
+
+```
+less time
+≠
+lower responsibility
+```
+
+---
+
+# 15. `authorityBoundary`
+
+NAV-04 可以：
+
+- 标记 deadline；
+- 标记 time window；
+- 比较 now vs later；
+- 判断等待是否增加条件；
+- 判断等待是否消耗条件；
+- 暴露时间相关 unknown；
+- 识别时间导致 option meaning 改变。
+
+NAV-04 不可以：
+
+- 预测未来必然发生；
+- 以象征 timing 替代现实期限；
+- 把 deadline 直接转成 action command；
+- 假装等待没有成本；
+- 假装现在一定最好。
+
+---
+
+# 16. `humanDecisionBoundary`
+
+用户必须能够纠正：
+
+```
+time urgency
+deadline
+window importance
+```
+
+例如系统认为：
+
+```
+offer expires Friday
+```
+
+用户补充：
+
+> 其实可以申请延长一周。
+
+则：
+
+```
+CLOSING_WINDOW
+```
+
+需要重新计算。
+
+因此 NAV-04 必须：
+
+```
+SOURCE_TRACEABLE
+TIME_BOUND
+HUMAN_CORRECTABLE
+```
+
+---
+
+# 17. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.6｜时间已经进入决定
+```
+
+相关：
+
+```
+15.5｜什么已经不能改变，什么仍然开放
+15.7｜不行动也正在产生后果
+15.8｜能不能回头，会改变决定本身
+15.20｜什么时候等待已经比行动更昂贵
+```
+
+---
+
+# 18. `relatedBookFoundations`
+
+## Book II｜Reality Runtime
+
+提供：
+
+```
+行动与运行发生在时间中
+```
+
+但 NAV-04 不重新解释 runtime time mechanism。
+
+---
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+accumulation
+recovery window
+maintenance burden
+```
+
+但 NAV-04 只消费这些已经建立的时间性条件。
+
+---
+
+## Book IV｜Reality Expansion
+
+提供：
+
+```
+capacity development over time
+```
+
+但不重新讲扩展机制。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+currentness
+timestamp
+evidence freshness
+```
+
+支持 NAV-04 区分：
+
+```
+historical truth
+vs
+current relevance
+```
+
+---
+
+# 19. `profileConsumer`
+
+Profile 可以提示：
+
+```
+decision pace preference
+tolerance for uncertainty
+habitual delay / rapid commitment pattern
+```
+
+但不能决定：
+
+```
+when action should happen
+```
+
+Profile 只允许：
+
+```
+TIMING_BEHAVIOR_CONTEXT
+```
+
+---
+
+# 20. `financialConsumer`
+
+Financial 可以提供：
+
+```
+runway duration
+payment dates
+debt deadlines
+cash flow cycles
+major planned expenditures
+```
+
+这些会直接改变：
+
+```
+time window
+```
+
+例如：
+
+```
+liquidity supports 4 months
+```
+
+是现实 timing input。
+
+---
+
+# 21. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+只能提供：
+
+```
+INTERPRETIVE_TIMING_CONTEXT
+```
+
+不能定义：
+
+```
+FIXED_DEADLINE
+CLOSING_WINDOW
+```
+
+除非现实证据独立支持。
+
+---
+
+# 22. `currentRealityConsumer`
+
+Current Reality 可提供：
+
+```
+whenChangeStarted
+howLongConditionPersisted
+whatChangedRecently
+knownUpcomingEvents
+```
+
+这些是 NAV-04 的重要输入。
+
+但必须保留：
+
+```
+USER_REPORTED
+vs
+VERIFIED
+```
+
+---
+
+# 23. `runtimeConsumer`
+
+NAV-04 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+---
+
+# 24. `academyConsumer`
+
+Academy 可投影为：
+
+> **Same choice, different time, different decision.**
+
+中文：
+
+> **相同动作，在不同时间进入现实，就可能成为不同决定。**
+
+教学可使用：
+
+```
+Now vs Later
+Wait to Learn
+Wait to Avoid
+Window Opening
+Window Closing
+```
+
+但不得泄漏 runtime threshold 公式。
+
+---
+
+# 25. `revisionTriggers`
+
+以下情况必须重开 NAV-04：
+
+```
+deadlineChanged
+windowExtended
+windowClosed
+newEvidenceDate
+financialRunwayChanged
+newOffer
+newContractTerm
+newProfessionalInput
+familyTimingChanged
+locationTimingChanged
+healthTimingChanged
+majorExternalEvent
+userChangesPreferredTiming
+```
+
+---
+
+# 26. Canonical Time Model
+
+建议：
+
+```
+{
+  "timeConditionId": "",
+  "type": "FIXED_DEADLINE | OPEN_WINDOW | CLOSING_WINDOW | PREPARATION_PERIOD | WAITING_PERIOD | RECOVERY_PERIOD | TIME_SENSITIVE_UNKNOWN | NO_MATERIAL_TIME_EFFECT",
+  "startsAt": null,
+  "endsAt": null,
+  "description": "",
+  "decisionRelevance": "",
+  "sourceClass": "",
+  "sourceRef": "",
+  "asOf": "",
+  "revisionTriggers": []
+}
+```
+
+---
+
+# 27. Wait Value Rule
+
+等待必须有理由。
+
+建议内部：
+
+```
+WAITING_VALUE =
+INFORMATION_GAIN
+RESOURCE_GAIN
+CAPABILITY_GAIN
+COORDINATION_GAIN
+RECOVERY_GAIN
+NONE_ESTABLISHED
+UNKNOWN
+```
+
+如果：
+
+```
+NONE_ESTABLISHED
+```
+
+系统可以提示：
+
+> 继续等待目前没有显示会增加新的决定条件。
+
+但不能自动输出：
+
+> 现在就行动。
+
+---
+
+# 28. Waiting Cost Rule
+
+同样建立：
+
+```
+WAITING_COST =
+OPTION_LOSS
+RESOURCE_LOSS
+COST_ACCUMULATION
+REVERSIBILITY_LOSS
+RELATIONSHIP_COST
+CAPACITY_LOSS
+NONE_ESTABLISHED
+UNKNOWN
+```
+
+---
+
+# 29. Time Comparison Rule
+
+Navigation 应允许比较：
+
+```
+ACT_NOW
+WAIT_UNTIL_X
+PREPARE_THEN_ACT
+MONITOR_UNTIL_TRIGGER
+```
+
+而不是只有：
+
+```
+ACT
+WAIT
+```
+
+这为后续 Action Runtime 提供基础。
+
+---
+
+# 30. Timing Uncertainty Rule
+
+如果未来 timing 本身未知：
+
+例如：
+
+```
+不知道何时会收到工作 offer
+```
+
+应标记：
+
+```
+TIME_SENSITIVE_UNKNOWN
+```
+
+并可能建立：
+
+```
+review trigger
+```
+
+例如：
+
+```
+reassess in 2 weeks
+```
+
+注意：
+
+这不是预测。
+
+只是：
+
+```
+scheduled reevaluation
+```
+
+---
+
+# 31. Currentness Rule
+
+如果某时间输入过期：
+
+例如：
+
+```
+financial runway measured 8 months ago
+```
+
+不得继续使用。
+
+应：
+
+```
+STALE_TIME_INPUT
+```
+
+---
+
+# 32. Customer Projection Example
+
+内部可能是：
+
+```
+Preparation Period:
+3 months may increase savings and job-search evidence
+
+Closing Window:
+current role transfer application closes in 5 weeks
+
+Waiting Cost:
+continued overload may reduce recovery capacity
+
+Unknown:
+whether external offer will arrive
+```
+
+客户可以看到：
+
+> **时间正在改变这个决定。**
+> 
+> 现在立刻离开并不是唯一选项；未来三个月可以用来增加现金缓冲、测试其他工作机会，这使等待具有一定准备价值。与此同时，公司内部调岗窗口只剩五周，如果这条路径对你仍然重要，它不能被无限延后；而现有工作负荷是否会继续影响恢复，目前仍需要观察。
+> 
+> 因此真正需要比较的不是“现在做还是以后做”，而是：哪些等待会增加条件，哪些等待正在让选项减少。
+
+---
+
+# 33. Customer Actions
+
+允许：
+
+```
+Confirm timing
+Correct date
+Add deadline
+Set review point
+Continue
+```
+
+---
+
+# 34. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+SUFFICIENT_FOR_TIMING_COMPARISON
+CONFLICTED
+TIME_SENSITIVE_UNKNOWN
+REOPENED
+```
+
+---
+
+# 35. Fail-Closed Conditions
+
+以下情况不得进入 NAV-05：
+
+```
+criticalDeadlineUnknown
+deadlineSourceConflict
+staleTimeInput
+windowAssumedFromInterpretiveReading
+currentPositionChangedSinceTimeAssessment
+decisionObjectChanged
+```
+
+---
+
+# 36. Canonical Runtime Rule
+
+> **Navigation must treat time as a decision condition whenever waiting or acting changes the option space, cost, reversibility, evidence quality, or responsibility of the decision.**
+
+中文：
+
+> **只要等待或行动会改变选项空间、成本、可逆性、证据质量或责任，Navigation 就必须把时间作为决策条件处理。**
+
+---
+
+# 37. Canonical Waiting Rule
+
+> **Waiting is justified only when it preserves or improves decision conditions, or when acting earlier would create greater avoidable risk.**
+
+中文：
+
+> **等待只有在能够保留或改善决策条件，或能够避免过早行动带来的更大风险时，才取得导航意义。**
+
+---
+
+# 38. Canonical Timing Boundary
+
+> **Interpretive timing may contextualize a decision; it may not establish a real-world deadline or override material conditions.**
+
+中文：
+
+> **解释性的时序可以帮助理解决定，却不能建立现实期限，也不能覆盖现实条件。**
+
+---
+
+# 39. Canonical Time Freedom Rule
+
+> **Time does not merely pass around a decision; it changes the decision itself.**
+
+中文：
+
+> **时间并不只是从决定旁边经过，它会改变决定本身。**
+
+---
+
+# 40. Final Canonical Form
+
+```
+NAV-04
+TIME
+```
+
+**Input**
+
+```
+Real Remaining Choice Space
++
+Decision-Relevant Time Conditions
+```
+
+**Process**
+
+```
+Identify:
+Deadline
+Window
+Preparation
+Waiting Value
+Waiting Cost
+Time Unknowns
+```
+
+**Output**
+
+```
+Time-Bounded Decision Space
+```
+
+**Boundary**
+
+```
+Timing informs.
+Timing does not command.
+```
+
+# NAV-05｜Inaction
+
+## 不行动｜什么都不做，也正在让现实继续发生
+
+**Canonical Question｜规范问题**
+
+> **为什么“什么都不做”并不是没有选择？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-05
+```
+
+## 2. `canonicalTitleZh`
+
+```
+不行动
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Inaction
+```
+
+## 4. `canonicalQuestion`
+
+```
+为什么“什么都不做”并不是没有选择？
+```
+
+---
+
+# 5. `definition`
+
+**Inaction** 是 Navigation 对“暂不采取新动作”这一状态的正式处理。
+
+它不是：
+
+```
+NO DECISION
+```
+
+也不是：
+
+```
+NO CONSEQUENCE
+```
+
+而是：
+
+> **在当前结构继续运行的情况下，选择不介入、不改变、不终止、不重新分配资源时，现实会沿着什么方向继续。**
+
+因此，Inaction 必须被当成一种真实路径进入候选空间。
+
+例如：
+
+```
+不辞职
+```
+
+不是空白。
+
+它意味着：
+
+```
+current job continues
+current income continues
+current workload continues
+existing constraints continue
+future options continue to change
+```
+
+同样：
+
+```
+不处理债务
+```
+
+也不是：
+
+```
+nothing happened
+```
+
+而可能意味着：
+
+```
+interest continues
+liquidity changes
+future borrowing capacity changes
+```
+
+因此：
+
+> **NAV-05 的核心不是鼓励行动，而是防止“不行动”被错误地当成没有成本、没有方向、没有责任的中立状态。**
+
+---
+
+# 6. `navigationMeaning`
+
+Navigation 如果不把 Inaction 放进候选空间，就会形成一个系统性偏差：
+
+```
+Action = choice
+Inaction = default
+```
+
+这会导致现状自动获得不需要解释的特权。
+
+真正合理的结构应该是：
+
+```
+ACT
+WAIT
+MAINTAIN
+PAUSE
+MONITOR
+EXIT
+```
+
+都属于可能的导航响应。
+
+其中：
+
+```
+MAINTAIN
+```
+
+也必须重新取得资格。
+
+因此 NAV-05 的作用是：
+
+```
+Time-Bounded Decision Space
+↓
+Model Inaction as a Path
+↓
+Project Continuation Consequences
+↓
+Compare Action and Non-Action
+```
+
+它并不自动提升“行动”权重。
+
+它只是让：
+
+> **继续原样**
+
+也必须接受和其他路径一样的现实检验。
+
+---
+
+# 7. `requiredInputs`
+
+NAV-05 最低需要：
+
+```
+confirmedDecisionObject
+currentPosition
+remainingChoiceSpace
+timeBoundedDecisionSpace
+currentDefaultPath
+knownContinuationConditions
+```
+
+其中必须能够回答：
+
+```
+如果什么都不改变，
+当前系统会怎样继续？
+```
+
+如果无法回答，应保留：
+
+```
+INACTION_CONSEQUENCE_UNKNOWN
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialProjection
+currentRealityProjection
+relationshipContext
+professionalInput
+externalCurrentEvidence
+contractualConditions
+priorOutcomeHistory
+bookIIIContinuityContext
+existingMaintenanceBurden
+knownAccumulationPatterns
+```
+
+这些 optional inputs 只用于描述：
+
+```
+continuation consequence
+```
+
+不用于自动升级成行动建议。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+LEGAL_OR_CONTRACTUAL_RECORD
+CURRENT_EXTERNAL_EVIDENCE
+PROFESSIONAL_INPUT
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但 Inaction consequence 必须优先依赖：
+
+```
+MATERIAL_CURRENT
+OBSERVED_PATTERN
+VERIFIED_CONTINUATION_CONDITION
+```
+
+而不是：
+
+```
+INTERPRETIVE_WARNING
+```
+
+---
+
+# 10. Core Inaction Classes
+
+建议 runtime 至少区分：
+
+```
+STABLE_MAINTENANCE
+PASSIVE_CONTINUATION
+ACTIVE_MONITORING
+DEFERRED_DECISION
+ACCUMULATING_COST
+OPTION_DECAY
+INACTION_CONSEQUENCE_UNKNOWN
+```
+
+---
+
+## A. `STABLE_MAINTENANCE`
+
+不行动本身仍然合理，而且当前系统：
+
+```
+remains functional
+cost acceptable
+future options preserved
+```
+
+例如：
+
+```
+暂不换工作
+```
+
+同时：
+
+```
+现金流稳定
+负荷可承受
+未来选择未明显减少
+```
+
+这种 Inaction 可以继续保留资格。
+
+---
+
+## B. `PASSIVE_CONTINUATION`
+
+没有新动作，但现有结构继续。
+
+例如：
+
+```
+继续现有岗位
+继续当前家庭安排
+继续原投资配置
+```
+
+尚未证明好或坏，只是：
+
+```
+current trajectory continues
+```
+
+---
+
+## C. `ACTIVE_MONITORING`
+
+暂不改变，但设置：
+
+```
+observable indicators
+review date
+trigger conditions
+```
+
+这不是 passive inaction。
+
+例如：
+
+```
+三个月内继续当前工作，
+每月检查睡眠、工时、储蓄和招聘机会
+```
+
+---
+
+## D. `DEFERRED_DECISION`
+
+决定被推迟，但没有清楚的：
+
+```
+review point
+information target
+preparation goal
+```
+
+这类状态必须被明确标示。
+
+---
+
+## E. `ACCUMULATING_COST`
+
+继续不行动会增加：
+
+```
+financial cost
+health burden
+relationship burden
+maintenance burden
+opportunity cost
+```
+
+但必须有现实依据。
+
+---
+
+## F. `OPTION_DECAY`
+
+继续不行动会使：
+
+```
+some options become harder
+more expensive
+less reversible
+or unavailable
+```
+
+它与 NAV-04 的 Closing Window 相连。
+
+---
+
+# 11. `allowedInference`
+
+NAV-05 可以：
+
+## A. 识别现状继续本身会产生后果
+
+例如：
+
+```
+每月持续赤字 RM2,000
+```
+
+则：
+
+```
+no action
+→ liquidity declines over time
+```
+
+这是合法 consequence projection。
+
+---
+
+## B. 识别维持现状需要持续支付成本
+
+例如：
+
+```
+current workload = 60h/week
+```
+
+如果用户明确报告：
+
+```
+recovery remains insufficient
+```
+
+可以标记：
+
+```
+continuation carries ongoing capacity cost
+```
+
+但不能诊断健康结果。
+
+---
+
+## C. 识别等待与“不做任何准备”不同
+
+例如：
+
+```
+等待3个月
++
+build savings
++
+apply to jobs
+```
+
+属于：
+
+```
+ACTIVE PREPARATION
+```
+
+而不是纯 Inaction。
+
+---
+
+## D. 识别现状可能持续关闭未来选择
+
+例如：
+
+```
+application deadline approaches
+```
+
+而用户：
+
+```
+does nothing
+```
+
+则：
+
+```
+option may expire
+```
+
+---
+
+## E. 识别“不行动”也可能是成熟选择
+
+如果：
+
+```
+risk low
+current structure stable
+information expected soon
+```
+
+则维持现状可以保留高资格。
+
+---
+
+# 12. `forbiddenInference`
+
+NAV-05 严禁：
+
+## A. 把不行动自动解释成逃避
+
+禁止：
+
+```
+你没行动
+→ 你在逃避
+```
+
+需要更多证据。
+
+---
+
+## B. 把行动自动解释成更成熟
+
+禁止：
+
+```
+doing something
+>
+doing nothing
+```
+
+不存在这种默认排序。
+
+---
+
+## C. 把所有维持成本都夸大成恶化
+
+例如：
+
+```
+工作有压力
+```
+
+不等于：
+
+```
+continuation is harmful
+```
+
+---
+
+## D. 从 symbolic reading 推断“不行动会出事”
+
+禁止：
+
+```
+Tarot Tower
+→ waiting is dangerous
+```
+
+---
+
+## E. 把机会成本伪装成确定损失
+
+例如：
+
+```
+如果不辞职，你一定错过更好工作
+```
+
+不允许。
+
+只能：
+
+```
+remaining in current role may reduce time available for external search
+```
+
+如果现实上成立。
+
+---
+
+## F. 把心理不适自动升级成 action trigger
+
+不适可以进入 Current Reality；
+
+但是否需要行动由后续 modules 判断。
+
+---
+
+# 13. `decisionEffect`
+
+NAV-05 主要影响：
+
+```
+OPTION_WEIGHT
+WAIT_ACT_BALANCE
+ACTION_SCALE
+DECISION_THRESHOLD
+```
+
+尤其：
+
+```
+WAIT_ACT_BALANCE
+```
+
+它让系统正式比较：
+
+```
+cost of acting
+vs
+cost of not acting
+```
+
+---
+
+# 14. `decisionThresholdEffect`
+
+原则：
+
+> **如果不行动本身会快速增加不可逆成本，行动所需的充分程度可能需要重新平衡；但这不等于降低安全、证据或责任边界。**
+
+例如：
+
+```
+immediate safety risk
+```
+
+可能提高行动紧迫性；
+
+但仍不能：
+
+```
+invent certainty
+```
+
+相反：
+
+如果：
+
+```
+inaction cost low
+option space preserved
+```
+
+则系统可以容忍更长观察期。
+
+---
+
+# 15. `authorityBoundary`
+
+NAV-05 可以：
+
+- 描述当前路径如何继续；
+- 标示 continuation cost；
+- 标示 option decay；
+- 区分 monitoring 与 passive delay；
+- 比较 action / inaction 的现实后果；
+- 设定 review triggers。
+
+NAV-05 不可以：
+
+- 给不行动贴道德标签；
+- 自动推动客户采取行动；
+- 夸大未来损失；
+- 用 symbolic prediction 建立风险；
+- 把任何“不舒服”自动升级成必须改变。
+
+---
+
+# 16. `humanDecisionBoundary`
+
+用户可以确认：
+
+```
+我确实决定暂时不改变
+```
+
+Navigation 必须允许这种选择。
+
+但系统应明确显示：
+
+```
+what continues
+what is being monitored
+what may change
+when to review
+```
+
+用户也必须可以修正：
+
+```
+inaction consequence
+```
+
+例如系统认为：
+
+```
+继续现职会阻止求职
+```
+
+用户补充：
+
+> 我每周已经固定安排两晚求职。
+
+那么：
+
+```
+PASSIVE_CONTINUATION
+```
+
+应修正为：
+
+```
+ACTIVE_PREPARATION
+```
+
+---
+
+# 17. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.7｜不行动也正在产生后果
+```
+
+相关：
+
+```
+15.6｜时间已经进入决定
+15.12｜回应可以有不同等级
+15.15｜原方向什么时候失去默认资格
+15.20｜什么时候等待已经比行动更昂贵
+```
+
+---
+
+# 18. `relatedBookFoundations`
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+系统如何继续
+maintenance
+accumulation
+drift
+```
+
+但 NAV-05 不重新解释这些机制。
+
+它只消费：
+
+> 当前结构如果继续，会产生什么与下一步相关的后果。
+
+这是重要边界。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+observed consequence
+vs
+inferred consequence
+```
+
+支持 NAV-05 保持：
+
+```
+unknown
+```
+
+---
+
+# 19. `profileConsumer`
+
+Profile 可以提示：
+
+```
+habitual avoidance
+overcommitment
+stability preference
+change preference
+```
+
+但只能作为：
+
+```
+BEHAVIORAL_CONTEXT
+```
+
+不能推断：
+
+```
+inaction consequence
+```
+
+例如：
+
+```
+Profile says high stability preference
+```
+
+不能推出：
+
+```
+user is avoiding necessary change
+```
+
+---
+
+# 20. `financialConsumer`
+
+Financial 是 NAV-05 很强的输入。
+
+例如：
+
+```
+monthly deficit
+interest accrual
+cash runway
+insurance lapse date
+debt servicing
+```
+
+可以建立：
+
+```
+inaction cost trajectory
+```
+
+例如：
+
+```
+RM2,000 monthly deficit
+```
+
+允许：
+
+```
+3 months no change
+≈ RM6,000 additional cash depletion
+```
+
+前提是：
+
+- arithmetic transparent；
+- assumptions explicit；
+- no hidden return assumptions。
+
+---
+
+# 21. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+不得产生：
+
+```
+INACTION_RISK
+```
+
+最多只能提供：
+
+```
+interpretive theme worth checking
+```
+
+---
+
+# 22. `currentRealityConsumer`
+
+Current Reality 可以提供：
+
+```
+what is already continuing
+how long
+what repeats
+what is worsening
+what remains stable
+```
+
+但必须区分：
+
+```
+observed
+reported
+inferred
+```
+
+---
+
+# 23. `runtimeConsumer`
+
+NAV-05 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+---
+
+# 24. `academyConsumer`
+
+Academy 可投影为：
+
+> **No action is still a path.**
+
+中文：
+
+> **不采取新动作，也是在让一条路径继续。**
+
+教学可比较：
+
+```
+Act
+Wait
+Monitor
+Maintain
+Prepare
+```
+
+强调：
+
+```
+Inaction ≠ Neutral
+```
+
+但也：
+
+```
+Inaction ≠ Wrong
+```
+
+---
+
+# 25. `revisionTriggers`
+
+以下情况必须重开 NAV-05：
+
+```
+newCostAppears
+newOpportunityAppears
+windowCloses
+currentStateImproves
+currentStateWorsens
+newMonitoringEvidence
+newFinancialData
+newProfessionalInput
+userChangesDefaultPath
+reviewDateReached
+```
+
+---
+
+# 26. Canonical Inaction Model
+
+建议：
+
+```
+{
+  "inactionPathId": "",
+  "currentDefaultPath": "",
+  "type": "STABLE_MAINTENANCE | PASSIVE_CONTINUATION | ACTIVE_MONITORING | DEFERRED_DECISION | ACCUMULATING_COST | OPTION_DECAY | INACTION_CONSEQUENCE_UNKNOWN",
+  "knownConsequences": [],
+  "potentialConsequences": [],
+  "unknownConsequences": [],
+  "monitoringSignals": [],
+  "reviewAt": null,
+  "revisionTriggers": []
+}
+```
+
+---
+
+# 27. Consequence Authority Rule
+
+必须区分：
+
+```
+KNOWN_CONSEQUENCE
+PROJECTED_CONSEQUENCE
+POSSIBLE_CONSEQUENCE
+UNKNOWN
+```
+
+例如：
+
+```
+interest continues monthly
+```
+
+可能属于：
+
+```
+KNOWN_CONSEQUENCE
+```
+
+而：
+
+```
+relationship will deteriorate
+```
+
+通常只能是：
+
+```
+POSSIBLE_CONSEQUENCE
+```
+
+除非已有明确现实 evidence。
+
+---
+
+# 28. Active Monitoring Rule
+
+如果用户选择：
+
+```
+暂不行动
+```
+
+Navigation 应尽可能建立：
+
+```
+what to observe
+until when
+what would change the decision
+```
+
+例如：
+
+```
+Continue for 6 weeks
+
+Observe:
+work hours
+sleep
+monthly cash surplus
+job-search responses
+
+Reopen if:
+sleep < threshold for 2 weeks
+cash surplus turns negative
+credible offer arrives
+```
+
+具体 threshold 必须来自用户/专业/现实资料，不能由系统随意发明。
+
+---
+
+# 29. Deferred Decision Rule
+
+如果用户只是：
+
+```
+再等等
+```
+
+但没有：
+
+```
+new evidence target
+review point
+preparation plan
+```
+
+系统可以标记：
+
+```
+DEFERRED_DECISION
+```
+
+并提示：
+
+> 目前等待的结束条件还没有被定义。
+
+不能说：
+
+> 你在拖延。
+
+---
+
+# 30. Maintenance Qualification Rule
+
+“继续原样”必须回答：
+
+```
+why does continuation still qualify?
+```
+
+至少可从：
+
+```
+current value
+acceptable cost
+preserved options
+low disruption risk
+expected information gain
+```
+
+获得资格。
+
+不能只因为：
+
+```
+we have always done this
+```
+
+获得资格。
+
+---
+
+# 31. Inaction Cost Rule
+
+如果可量化：
+
+允许计算。
+
+例如：
+
+```
+monthly deficit = RM1,500
+```
+
+则：
+
+```
+6 months unchanged
+= RM9,000 projected depletion
+```
+
+但必须显示：
+
+```
+assuming deficit remains unchanged
+```
+
+不能包装成确定未来。
+
+---
+
+# 32. Option Decay Rule
+
+如果等待会让选项减少：
+
+例如：
+
+```
+internal transfer closes in 4 weeks
+```
+
+则 Inaction path 必须明确：
+
+```
+maintaining current state beyond 4 weeks
+may remove internal-transfer option
+```
+
+---
+
+# 33. Customer Projection Example
+
+内部：
+
+```
+Current Default:
+Stay in current role
+
+Type:
+ACTIVE_MONITORING
+
+Known:
+salary continues
+current hours continue unless changed
+
+Projected:
+cash buffer grows if current surplus remains
+
+Possible:
+continued overload may reduce capacity
+
+Review:
+6 weeks
+```
+
+客户可看到：
+
+> **如果现在不改变，会发生什么**
+> 
+> 暂时继续当前工作并不是“没有决定”。它意味着收入继续、现有职责继续，而你目前的工作节奏也会继续存在。按照现在的现金流，维持六周可能让你进一步增加缓冲；但工作负荷是否会继续影响恢复，目前还不能确定，因此这部分需要继续观察。
+> 
+> 如果你选择暂时维持现状，最好把这六周当成一个有边界的观察期，而不是无限延后：到期后重新检查工时、恢复、现金缓冲和外部机会，再决定是否继续。
+
+---
+
+# 34. Customer Actions
+
+允许：
+
+```
+Maintain for now
+Monitor
+Set review date
+Add trigger
+Change path
+Continue
+```
+
+---
+
+# 35. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+SUFFICIENT_FOR_CONTINUATION_COMPARISON
+ACTIVE_MONITORING
+ACCUMULATING_COST
+OPTION_DECAY
+REOPENED
+```
+
+---
+
+# 36. Fail-Closed Conditions
+
+以下情况不得进入 NAV-06：
+
+```
+defaultPathUnknown
+inactionConsequencesFabricated
+criticalContinuationCostUnknown
+monitoringPresentedAsVerifiedOutcome
+symbolicReadingUsedAsRiskAuthority
+timeAssessmentStale
+decisionObjectChanged
+```
+
+---
+
+# 37. Canonical Runtime Rule
+
+> **Navigation must treat continuation without new action as a real path whenever the current system will keep producing consequences over time.**
+
+中文：
+
+> **只要当前系统会继续随时间产生后果，Navigation 就必须把“不采取新动作而继续”视为一条真实路径。**
+
+---
+
+# 38. Canonical Neutrality Rule
+
+> **Inaction is not neutral, but it is not inherently wrong. Its qualification depends on what continuation preserves, costs, closes, or allows.**
+
+中文：
+
+> **不行动并不中立，却也不是天然错误；它是否值得继续，取决于这种延续正在保留什么、支付什么、关闭什么，以及仍允许什么。**
+
+---
+
+# 39. Canonical Responsibility Rule
+
+> **A person may choose not to act; Navigation must still make the foreseeable consequences of continuation visible without turning them into moral pressure.**
+
+中文：
+
+> **人可以选择不行动；Navigation 仍应让可合理预见的延续后果变得可见，却不能把这些后果变成道德施压。**
+
+---
+
+# 40. Final Canonical Form
+
+```
+NAV-05
+INACTION
+```
+
+**Input**
+
+```
+Time-Bounded Decision Space
++
+Current Default Path
+```
+
+**Process**
+
+```
+Identify:
+What Continues
+What Accumulates
+What Is Preserved
+What May Close
+What Remains Unknown
+When to Review
+```
+
+**Output**
+
+```
+Qualified Continuation Path
+```
+
+**Boundary**
+
+```
+No action is still a path.
+No action is not automatically the wrong path.
+```

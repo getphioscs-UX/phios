@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0.0",
+  "stageCode": "HDR-W0",
+  "layers": [
+    {
+      "layerCode": "HD-L1-BIRTH-NORMALIZATION",
+      "name": "Birth Data Normalization",
+      "status": "contract_only",
+      "authority": "PHIOS_COMMON_BIRTH_DATA_FUTURE"
+    },
+    {
+      "layerCode": "HD-L2-PERSONALITY-ASTRONOMY",
+      "name": "Personality Planetary Positions",
+      "status": "future_validation_eligible",
+      "authority": "ASTRONOMY_CORE_CANDIDATE"
+    },
+    {
+      "layerCode": "HD-L3-DESIGN-MOMENT",
+      "name": "88 Degree Solar Arc Design Moment",
+      "status": "contract_only",
+      "authority": "ASTRONOMY_CORE_CANDIDATE",
+      "fixedDaysSubtractionAllowed": false,
+      "futureContract": {
+        "searchDirection": "backward_from_birth",
+        "targetSolarArcDegrees": 88,
+        "requiredFields": [
+          "birthMomentUtc",
+          "birthSunLongitude",
+          "designMomentUtc",
+          "designSunLongitude",
+          "solarArcDifference",
+          "solverVersion",
+          "tolerance",
+          "outputHash"
+        ]
+      }
+    },
+    {
+      "layerCode": "HD-L4-GATE-LINE-MAPPING",
+      "name": "Longitude to Gate and Line Mapping",
+      "status": "blocked_pending_source_and_rights_audit",
+      "authority": null
+    },
+    {
+      "layerCode": "HD-L5-BODYGRAPH-STRUCTURE",
+      "name": "BodyGraph Structural Resolution",
+      "status": "blocked_pending_source_and_rights_audit",
+      "authority": null
+    },
+    {
+      "layerCode": "HD-L6-ADVANCED-VARIABLE-PHS",
+      "name": "Advanced Variable and PHS Resolution",
+      "status": "deferred",
+      "authority": null
+    }
+  ],
+  "calculationInterpretationSeparationRequired": true
+}

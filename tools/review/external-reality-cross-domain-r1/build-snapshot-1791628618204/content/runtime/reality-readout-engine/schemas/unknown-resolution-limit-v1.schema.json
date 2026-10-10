@@ -1,0 +1,340 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RRE Unknown and Resolution Limit v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "unknownReadingCode",
+    "realityReference",
+    "unknowns",
+    "inputGaps",
+    "missingEvidence",
+    "conflictingEvidence",
+    "resolutionLimits",
+    "unresolvableStates",
+    "unknownsHidden",
+    "silentResolutionPerformed",
+    "defaultValueApplied",
+    "inferenceFilled",
+    "permanentUnresolvabilityClaimed",
+    "professionalJudgmentCreated",
+    "validationOnly",
+    "persistentStoreWriteAllowed",
+    "unknownReadingDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RRE-UNKNOWN-RESOLUTION-LIMIT-v1.0.0"
+    },
+    "unknownReadingCode": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240
+    },
+    "realityReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "unknownReference",
+          "unknownKind",
+          "unknownState",
+          "currentResolutionState",
+          "componentReferences",
+          "evidenceBindingReferences",
+          "requiredEvidenceCount",
+          "missingResolutionEvidenceCount",
+          "professionalAuthorityRequired",
+          "truthClaimed",
+          "resolutionTransitionPerformed"
+        ],
+        "properties": {
+          "unknownReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "unknownKind": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "unknownState": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "currentResolutionState": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "componentReferences": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 240
+            }
+          },
+          "evidenceBindingReferences": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 240
+            }
+          },
+          "requiredEvidenceCount": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "missingResolutionEvidenceCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "professionalAuthorityRequired": {
+            "type": "boolean"
+          },
+          "truthClaimed": {
+            "const": false
+          },
+          "resolutionTransitionPerformed": {
+            "const": false
+          }
+        }
+      }
+    },
+    "inputGaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "limitCode",
+          "limitKind",
+          "sourceReference",
+          "descriptorCode"
+        ],
+        "properties": {
+          "limitCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "limitKind": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "sourceReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "descriptorCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          }
+        }
+      }
+    },
+    "missingEvidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "limitCode",
+          "limitKind",
+          "sourceReference",
+          "descriptorCode"
+        ],
+        "properties": {
+          "limitCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "limitKind": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "sourceReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "descriptorCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          }
+        }
+      }
+    },
+    "conflictingEvidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "limitCode",
+          "limitKind",
+          "sourceReference",
+          "descriptorCode"
+        ],
+        "properties": {
+          "limitCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "limitKind": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "sourceReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "descriptorCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          }
+        }
+      }
+    },
+    "resolutionLimits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "limitCode",
+          "limitKind",
+          "sourceReference",
+          "descriptorCode"
+        ],
+        "properties": {
+          "limitCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "limitKind": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "sourceReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "descriptorCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          }
+        }
+      }
+    },
+    "unresolvableStates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "limitCode",
+          "limitKind",
+          "sourceReference",
+          "descriptorCode"
+        ],
+        "properties": {
+          "limitCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "limitKind": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "sourceReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "descriptorCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          }
+        }
+      }
+    },
+    "unknownsHidden": {
+      "const": false
+    },
+    "silentResolutionPerformed": {
+      "const": false
+    },
+    "defaultValueApplied": {
+      "const": false
+    },
+    "inferenceFilled": {
+      "const": false
+    },
+    "permanentUnresolvabilityClaimed": {
+      "const": false
+    },
+    "professionalJudgmentCreated": {
+      "const": false
+    },
+    "validationOnly": {
+      "const": true
+    },
+    "persistentStoreWriteAllowed": {
+      "const": false
+    },
+    "unknownReadingDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

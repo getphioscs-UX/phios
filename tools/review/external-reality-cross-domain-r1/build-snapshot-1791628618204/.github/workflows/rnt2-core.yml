@@ -1,0 +1,59 @@
+name: REPORT-NARRATIVE-T2-R1 · Core Contracts
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'functions/personal-reading/narrative/report-*.js'
+      - 'functions/report-delivery/report-delivery-r2.js'
+      - 'functions/canonical-presentation-runtime/report-cover-*.js'
+      - 'scripts/check-rnt2-core.mjs'
+      - 'scripts/check-rnt2-adversarial.mjs'
+      - 'functions/personal-reading/narrative/narrative-writer.js'
+      - 'functions/personal-reading/narrative/narrative-provider.js'
+      - 'assets/customer-ui/js/personal-products/rnt2-s04-review.js'
+      - 'scripts/check-rnt2-report-subject-flow.mjs'
+      - 'functions/api/customer-personal-reality.js'
+      - 'assets/customer-ui/js/surfaces/personal-reality.js'
+      - 'perspectives/personal/index.html'
+      - 'functions/personal-reading/narrative/bazi-s04-*.js'
+      - 'functions/personal-reading/narrative/bazi-s05-*.js'
+      - 'scripts/check-bazi-s05-market.mjs'
+      - 'functions/personal-reading/narrative/bazi-s02-s03-*.js'
+      - 'scripts/check-bazi-s02-s03-reconciliation.mjs'
+      - 'functions/personal-reading/narrative/bazi-owner-acceptance.generated.js'
+      - 'scripts/check-bazi-owner-receipts.mjs'
+      - 'scripts/build-cloudflare-pages.mjs'
+      - 'functions/api/qa-bazi-t3.js'
+      - 'scripts/check-rnt2-private-review.mjs'
+      - 'scripts/check-bazi-s04-csd.mjs'
+      - 'scripts/check-bazi-s04-identity.mjs'
+      - 'scripts/check-bazi-s04-market.mjs'
+      - '.github/workflows/rnt2-core.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: npm
+      - run: npm ci
+      - run: node scripts/check-rnt2-core.mjs
+      - run: node scripts/check-rnt2-adversarial.mjs
+      - run: node scripts/check-rnt2-report-subject-flow.mjs
+      - run: node scripts/check-rnt2-private-review.mjs
+      - run: npm run check:bazi-s04-csd
+      - run: npm run check:bazi-s04-v3-editorial
+      - run: npm run check:bazi-s04-v4
+      - run: npm run check:bazi-s05-market
+      - run: node scripts/check-bazi-s02-s03-reconciliation.mjs
+      - run: node scripts/check-bazi-owner-receipts.mjs
+      - run: node --check assets/customer-ui/js/personal-products/rnt2-s04-review.js

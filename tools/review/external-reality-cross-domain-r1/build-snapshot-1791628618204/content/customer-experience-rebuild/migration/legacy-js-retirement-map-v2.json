@@ -1,0 +1,1298 @@
+{
+  "schemaVersion": "PHI-OS-CX-R-LEGACY-JS-RETIREMENT-MAP-v2.0.0",
+  "work": "CX-R0-W3",
+  "baselineCommit": "60411a80e0247a99f26d6321ea6a4f6305042b5f",
+  "recordedAt": "2026-08-24T10:06:00Z",
+  "status": "MAPPED_NOT_DELETED",
+  "rules": {
+    "runtimeJsMayNotBeDeletedAsPresentationDebt": true,
+    "pageCompositionMustMigrateBeforeDelete": true,
+    "directDeleteBeforeClassification": false
+  },
+  "entries": [
+    {
+      "javascript": "assets/js/components/five-volume-grid.js",
+      "baselineSha256": "315e14a6ad1422917195a34dfe8a9c1496e22d3aaf664e0730393ed66ed8f5b6",
+      "consumers": [
+        "/books"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION"
+      ],
+      "classification": "REVIEW_REQUIRED",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "CLASSIFY_BEFORE_ANY_PHYSICAL_DELETE",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/components/publications-v2.js",
+      "baselineSha256": "98e0b3f316dc4aa691a0f47ce5fd83bdd9d5c31d96de5332260a8812e841e703",
+      "consumers": [
+        "/",
+        "/articles",
+        "/library"
+      ],
+      "compositionRoles": [
+        "GLOBAL_SHELL",
+        "LOCALE",
+        "HEADER_INJECTION"
+      ],
+      "classification": "REVIEW_REQUIRED",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "CLASSIFY_BEFORE_ANY_PHYSICAL_DELETE",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/entry-experience.js",
+      "baselineSha256": "c5627f48af0c4b41ffcd0451d6e54b8bda134629fe09c75229261f3db10d4bf5",
+      "consumers": [
+        "/reality-entry"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "ASK"
+      ],
+      "classification": "REVIEW_REQUIRED",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "CLASSIFY_BEFORE_ANY_PHYSICAL_DELETE",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/i18n.js",
+      "baselineSha256": "d5c4a0e03418be95da5d0ac05270d2302d4261999ad98819d4ced3599af2888f",
+      "consumers": [],
+      "compositionRoles": [
+        "LOCALE",
+        "RUNTIME_HYDRATION",
+        "SEARCH",
+        "REALITY"
+      ],
+      "classification": "REVIEW_REQUIRED",
+      "currentState": "PRESENT_NO_CUSTOMER_CONSUMER_DETECTED",
+      "targetState": "CLASSIFY_BEFORE_ANY_PHYSICAL_DELETE",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/journey-shell.js",
+      "baselineSha256": "b1dd7113f895868fc92c8aa603e32291afbb90e6f95a1e01d4126fab1b37a0c8",
+      "consumers": [
+        "/my-reality",
+        "/reality-entry",
+        "/reality-journey",
+        "/reality-navigation",
+        "/reality-reading",
+        "/reality-reconstruction",
+        "/reality-review"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "ASSET_LOADING",
+        "RUNTIME_HYDRATION",
+        "REALITY",
+        "NAVIGATION"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/navigation.js",
+      "baselineSha256": "f805a93ce8b8e61d5145b4adadd198a5c4a69a910b6fd8f494cd162803cad5a5",
+      "consumers": [
+        "/reality-navigation"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "RUNTIME_HYDRATION",
+        "REALITY",
+        "NAVIGATION"
+      ],
+      "classification": "REVIEW_REQUIRED",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "CLASSIFY_BEFORE_ANY_PHYSICAL_DELETE",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/academy.js",
+      "baselineSha256": "dd2026130211743a4e6da35f8949336628d38873601c8a82c316c7da4b4ff499",
+      "consumers": [
+        "/academy",
+        "/academy-lesson"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "SEARCH",
+        "REALITY",
+        "NAVIGATION"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/account-cka.js",
+      "baselineSha256": "0e42d24d1849ddb6e5f3aae64eb8af786f9fac0e2da7af5077ca240d3bc5365e",
+      "consumers": [
+        "/account"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "ACCOUNT",
+        "ASK"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/account-method-status.js",
+      "baselineSha256": "f85616b575e573c78fe16a52d182df3fe5888f06ee4c545e39238b0279518ab1",
+      "consumers": [
+        "/account"
+      ],
+      "compositionRoles": [
+        "ACCOUNT",
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/article.js",
+      "baselineSha256": "b6a89d19c1ccb967a3216d3a368f71685baf664fcfa66a0131a4acae6cf9614c",
+      "consumers": [
+        "/articles/ai-formation-from-civilizational-capability",
+        "/articles/body-becomes-layered-and-finite-reality-carrier",
+        "/articles/civilization-acceleration-ai-attention-time-productivity",
+        "/articles/civilization-network-infrastructure-attention-economy",
+        "/articles/collective-attention-algorithm-viral-runtime",
+        "/articles/collective-limits-fragmentation-collapse-reconfiguration-maintenance",
+        "/articles/collective-priority-scarcity-reward-incentive",
+        "/articles/collective-time-generation-memory-deadline-time-debt",
+        "/articles/consciousness-visibility-experience-and-self-model",
+        "/articles/continuous-consciousness-time-memory-and-simulation",
+        "/articles/culture-economic-runtime-value-storage-credit",
+        "/articles/decision-choice-and-internal-conflict",
+        "/articles/dependency-fixed-connections-and-shared-reality-ecology",
+        "/articles/direction-position-and-coordinates-form-navigation",
+        "/articles/emotion-adaptation-observation-and-compression",
+        "/articles/emotion-prediction-regulation-distortion-and-adaptation",
+        "/articles/experience-selection-stabilization-and-integration",
+        "/articles/expression-media-influence-and-drift",
+        "/articles/family-rhythm-emotion-and-reconfiguration",
+        "/articles/finance-future-debt-capital-narrative-speculation",
+        "/articles/from-fields-to-interfaces-how-structures-expand-into-synthetic-reality",
+        "/articles/from-foundational-questions-to-capabilities-and-runtime-drives",
+        "/articles/from-human-ai-co-projection-to-time-direction-and-reality-grammar",
+        "/articles/group-polarization-attention-belief-and-narrative",
+        "/articles/groups-communities-shared-identity-and-reinforced-reality",
+        "/articles/how-a-conscious-runtime-ends-and-where-ai-differs",
+        "/articles/how-coordinates-eight-motions-and-activation-windows-organize-change",
+        "/articles/how-experienced-worlds-are-projected-compressed-and-given-meaning",
+        "/articles/how-reality-enters-life-through-carriers-senses-and-cognitive-entry",
+        "/articles/how-reality-moves-from-difference-to-navigable-structure",
+        "/articles/how-shared-reality-forms-through-synchronization-and-connection",
+        "/articles/how-structure-position-and-shared-projection-create-different-realities",
+        "/articles/how-the-body-converts-the-world-into-runtime-state-and-recovers-continuity",
+        "/articles/human-ai-collective-culture-value-coordination-saturation",
+        "/articles/identity-feedback-correction-and-experience-update",
+        "/articles/infinite-reality-compresses-into-finite-problems",
+        "/articles/initial-state-triggers-embeds-coordinates-and-stabilizes",
+        "/articles/inner-world-thought-and-expression",
+        "/articles/institution-information-media-platform-runtime",
+        "/articles/intention-identity-self-model-and-awareness",
+        "/articles/long-term-relationships-parenting-and-intergenerational-runtime",
+        "/articles/projection-bias-distortion-stability-and-renewal",
+        "/articles/projection-makes-reality-experiencable-as-world",
+        "/articles/relational-influence-suggestion-symbols-capture-and-recovery",
+        "/articles/resonance-interference-and-shared-runtime-centers",
+        "/articles/responsibility-commitment-agency-and-identity",
+        "/articles/runtime-cost-recovery-and-internal-connection-sustain-body",
+        "/articles/runtime-networks-form-state-feedback-reorganization-and-continuity",
+        "/articles/self-fragmentation-observation-and-reintegration",
+        "/articles/shared-reality-exit-memory-collective-field-and-belief",
+        "/articles/shared-reality-narrative-emotion-identity-value",
+        "/articles/shared-responsibility-cost-and-next-generation",
+        "/articles/shared-system-cost-conflict-and-boundaries",
+        "/articles/structure-forms-from-sustainable-relations",
+        "/articles/why-explanation-does-not-equal-understanding",
+        "/articles/why-more-capability-does-not-guarantee-direction-or-stability",
+        "/articles/why-navigation-begins-with-reality-position",
+        "/articles/why-phi-os-is-needed",
+        "/articles/why-reality-is-harder-to-understand-speed-cost-and-reality-grammar"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "ASK",
+        "REALITY"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/ast-production-meaning.js",
+      "baselineSha256": "83c3e12eec7f189f0020ea0c72bee680f48ce0214555996810ea14b7d1c5642c",
+      "consumers": [
+        "/personal-runtime"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "FOOTER_INJECTION",
+        "RUNTIME_HYDRATION",
+        "ASK",
+        "REALITY",
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/ast-transit-runtime.js",
+      "baselineSha256": "980cb0fa065092ff2f1c43b325e82103b3aaa8e5bcca35d06fa1b661bac88fb7",
+      "consumers": [
+        "/personal-runtime"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "FOOTER_INJECTION",
+        "RUNTIME_HYDRATION",
+        "ASK",
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/atlas-knowledge-upgrade.js",
+      "baselineSha256": "fb77d406608dc8493b1db153ed2bfd53ffbc03a6a30122c3c9afac74b27e9ac5",
+      "consumers": [
+        "/explore"
+      ],
+      "compositionRoles": [
+        "LOCALE"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/atlas.js",
+      "baselineSha256": "69b1b2675730d2ae136339cad302d92d5e6942ea227ee75e8bccf2ccc68e9439",
+      "consumers": [
+        "/explore"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "SEARCH"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/book-one-preview.js",
+      "baselineSha256": "f52006b4a1b1076280118b0ba3ac3a3b78706e9d0569dc78e3dcff50aa3ea18f",
+      "consumers": [
+        "/book-one-preview"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "ASSET_LOADING",
+        "RUNTIME_HYDRATION"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/book-one.js",
+      "baselineSha256": "8b1ed59555060ff43770cce5e72758f85fdf394e2f4967d6b9ffa652d63e97d6",
+      "consumers": [
+        "/book-one"
+      ],
+      "compositionRoles": [],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/book-volume.js",
+      "baselineSha256": "88952e1a508455e3a5f72fd162fb72fed0f871f567027ae9f135b5bb1340c0f1",
+      "consumers": [
+        "/books/reality-civilization",
+        "/books/reality-continuity",
+        "/books/reality-formation",
+        "/books/reality-navigation",
+        "/books/reality-runtime"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "ASK"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/brand-research-commerce-legal.js",
+      "baselineSha256": "9485450266051a530422c3865f7a03cb6e1dc979fc97b4fe0cb958fe796ba9c5",
+      "consumers": [
+        "/about",
+        "/ai-disclosure",
+        "/checkout",
+        "/digital-product-policy",
+        "/external-reader-intake",
+        "/guided-reading",
+        "/privacy",
+        "/professional-boundary",
+        "/professional/external-readers",
+        "/terms"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "ASSET_LOADING",
+        "RUNTIME_HYDRATION",
+        "SEARCH",
+        "REALITY",
+        "NAVIGATION"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/bzr-production-meaning.js",
+      "baselineSha256": "a282c47dd13b7a91348e59e2df35dfc21b528b002abb101426c39ebbdb83702f",
+      "consumers": [
+        "/personal-runtime"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "FOOTER_INJECTION",
+        "RUNTIME_HYDRATION",
+        "ASK",
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/bzr-temporal-runtime.js",
+      "baselineSha256": "fbb669cd09c51da77bda883e9235e6c6c7abc28ba58bad0eabeaf8cccd027932",
+      "consumers": [
+        "/personal-runtime"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "FOOTER_INJECTION",
+        "RUNTIME_HYDRATION",
+        "ASK",
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/checkout.js",
+      "baselineSha256": "cf7e23a4fc920d2d89891688965a1b8ecac9c6a71c85320a9163d2910e58d8de",
+      "consumers": [
+        "/checkout"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/client-production-surfaces.js",
+      "baselineSha256": "96bbaa0cc03e1aab8013d43217a2fb831653de131e038e2639f7a87dbf895540",
+      "consumers": [
+        "/academy",
+        "/personal-runtime"
+      ],
+      "compositionRoles": [
+        "GLOBAL_SHELL",
+        "LOCALE",
+        "HEADER_INJECTION",
+        "FOOTER_INJECTION",
+        "ASK",
+        "REALITY"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/external-reader-intake.js",
+      "baselineSha256": "30ea6c352cc01f6e51840ddc171fd7dc7cd6f0f5ee405d4f72a91b4e97e35c0e",
+      "consumers": [
+        "/external-reader-intake"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "RUNTIME_HYDRATION",
+        "ASK"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/figure-detail.js",
+      "baselineSha256": "cd48b67450532a8e3325f9469563439a48f76bf4c340ec63b407cac340a5f649",
+      "consumers": [
+        "/figure"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "SEARCH",
+        "ASK"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/figures.js",
+      "baselineSha256": "a84c06dfc9d7f03afa25afe41f628b0e29388ceb3aee5eb9ac3f8f11d6166787",
+      "consumers": [
+        "/figures"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "SEARCH"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/free-explore.js",
+      "baselineSha256": "b3dfa17358bd3dabb909dcfb86486bec64dbdd353e7291b0ece35b5a323628e2",
+      "consumers": [
+        "/explore"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "SEARCH",
+        "ASK",
+        "REALITY",
+        "NAVIGATION"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/free-observation.js",
+      "baselineSha256": "85101ab5c23d376c829d1b7b8301d2b6de00ffdda5f58bbf60cfbf6cfd34d885",
+      "consumers": [
+        "/free-observation"
+      ],
+      "compositionRoles": [
+        "LOCALE"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/glossary.js",
+      "baselineSha256": "7022258d230b3e5d918f6a9952c767e3a09ac76324582a0342ed3479f432727a",
+      "consumers": [
+        "/glossary"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "SEARCH"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/guided-reading.js",
+      "baselineSha256": "577c0de1406dd44c664df8eb42636530621f5c9b4c03369780181875ca51dad8",
+      "consumers": [
+        "/guided-reading"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "REALITY"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/health-reality-candidate.js",
+      "baselineSha256": "030bd7973d9009705db74fb875cc7c2bc06430170976913dd47f93cc6116f32b",
+      "consumers": [
+        "/health-reality"
+      ],
+      "compositionRoles": [
+        "HEADER_INJECTION",
+        "ASK",
+        "REALITY",
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/home-v2.js",
+      "baselineSha256": "c26c98042497a079ad7ed57ad7615c910bb24f11ec680ede99b46bba3447fac6",
+      "consumers": [
+        "/"
+      ],
+      "compositionRoles": [
+        "SEARCH"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/knowledge-connections.js",
+      "baselineSha256": "6972a6f2d689a3a84679de000ba948aa3596194b3d4563964b3c70b9d54f7244",
+      "consumers": [
+        "/book-one",
+        "/books/reality-formation",
+        "/explore",
+        "/thesis"
+      ],
+      "compositionRoles": [
+        "LOCALE"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/knowledge-search-b.js",
+      "baselineSha256": "67fc819d7de03f2e922e1273b8d4781400bce36f2548bb3dc12de3bcbf3504c7",
+      "consumers": [
+        "/knowledge-search"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "RUNTIME_HYDRATION",
+        "SEARCH",
+        "ASK",
+        "REALITY",
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/knowledge-spine-visuals.js",
+      "baselineSha256": "34d09641bfedb252e1f9d68c1d58b28845657852b2e806f8fd216e16d8cba16f",
+      "consumers": [
+        "/books/reality-civilization",
+        "/books/reality-continuity",
+        "/books/reality-formation",
+        "/books/reality-navigation",
+        "/books/reality-runtime",
+        "/figure",
+        "/figures"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "ASSET_LOADING",
+        "RUNTIME_HYDRATION"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/my-reality.js",
+      "baselineSha256": "7df7399a885e62796369cf6faf1c608ee0bd39a82d9571f5ef937238970055e5",
+      "consumers": [
+        "/my-reality"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "RUNTIME_HYDRATION",
+        "REALITY",
+        "NAVIGATION"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/num-production-meaning.js",
+      "baselineSha256": "90220963f0ab7bc265f92a047333c08ad640093679d84108649e486de89db8a3",
+      "consumers": [
+        "/personal-runtime"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "FOOTER_INJECTION",
+        "RUNTIME_HYDRATION",
+        "ASK",
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/payment-success.js",
+      "baselineSha256": "1fdd44ccce9719712c73521277ba04f052092e1879060575aee4a9b327074b3b",
+      "consumers": [
+        "/payment-success"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "SEARCH"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/personal-runtime.js",
+      "baselineSha256": "d90dfc3240a73d01a661b1089d6582def26bb2f8c8e967cbf9194827b28d291d",
+      "consumers": [
+        "/personal-runtime"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "RUNTIME_HYDRATION",
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/professional-appointments.js",
+      "baselineSha256": "12f079f2a7756ca579b5ca9bcda3b8d7d0f0685fc3cf6756b9833c8fe40fe34b",
+      "consumers": [
+        "/professional-appointments"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/professional-consent-sharing.js",
+      "baselineSha256": "7ed1471f7d783a783f389b145e39be4b2d7dabb00ae8205c6a7d24af12847c3c",
+      "consumers": [
+        "/professional-consent-sharing"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "RUNTIME_HYDRATION"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/professional-data-privacy.js",
+      "baselineSha256": "a8ecf90f891e0ad04c2a63344849049798d49d07788f2c39cdc5f342f7a42789",
+      "consumers": [
+        "/professional-data-privacy"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "RUNTIME_HYDRATION"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/professional-reports.js",
+      "baselineSha256": "e10e1160a2d698a21fffe3ad4927d704b607108ee4a8cec1f9aa855182898906",
+      "consumers": [
+        "/professional-reports"
+      ],
+      "compositionRoles": [
+        "LOCALE"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/professional-workspace.js",
+      "baselineSha256": "74f05b71d8cf0b916434060ed3e56fc8ee55255aaefba5121087075085d2f1f7",
+      "consumers": [
+        "/professional-workspace"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "FOOTER_INJECTION",
+        "RUNTIME_HYDRATION",
+        "ASK",
+        "REALITY",
+        "NAVIGATION"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/px2-visuals.js",
+      "baselineSha256": "30dfa1b9d9352f2558f9fe2651aaf51cf82ff452ef2ef21edc1a47f764e89415",
+      "consumers": [
+        "/professional/financial",
+        "/professional/personal-runtime",
+        "/reality"
+      ],
+      "compositionRoles": [],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/readings-v2.js",
+      "baselineSha256": "35010a05f1b7b52b75cebd2c85ee77def91e7d3a9a4f435cc90dfa12b207d53e",
+      "consumers": [
+        "/readings"
+      ],
+      "compositionRoles": [
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/reality-dashboard-cka.js",
+      "baselineSha256": "6634353d2986c97ea8057b48bce1de3c05ca239af3a103e4dd1c92a5ffeb2783",
+      "consumers": [
+        "/reality-dashboard"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "ACCOUNT",
+        "SEARCH",
+        "ASK",
+        "REALITY"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/reality-dashboard-jr-v2.js",
+      "baselineSha256": "71488d7fbfc059817f21939ec52919157b8b15afce1a26891e94f90875e445a9",
+      "consumers": [
+        "/reality-dashboard"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "RUNTIME_HYDRATION",
+        "REALITY"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/reality-dashboard.js",
+      "baselineSha256": "37467ae766fac3e1247b6a0b5a87ccbc130f0d01a43c23befe83abdc053be334",
+      "consumers": [
+        "/reality-dashboard"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "RUNTIME_HYDRATION",
+        "REALITY",
+        "NAVIGATION"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/reality-journey-production.js",
+      "baselineSha256": "f0e3f83a30b056084660959e3bc631f921286b9b7e9ba033dc70a3e029f9a002",
+      "consumers": [
+        "/reality-journey"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "RUNTIME_HYDRATION",
+        "REALITY"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/runtime-spine-visuals.js",
+      "baselineSha256": "3d9d2678431a23a98323c213ce6b3305f94adf748406f82793b34ab4bd280ea6",
+      "consumers": [
+        "/personal-runtime",
+        "/professional-reports",
+        "/professional-workspace",
+        "/reality-dashboard"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "ASSET_LOADING",
+        "RUNTIME_HYDRATION"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/search-v2.js",
+      "baselineSha256": "8ffa494a00561b09e85076b31c3bbd4d97c0ebc64e32f32ff4cacf93d2fcb12a",
+      "consumers": [
+        "/search"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "SEARCH"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/service-continuity-visuals.js",
+      "baselineSha256": "517a529dd56e0c97187cea67828529f235c80c4f521ef8451c3f91416ca018dd",
+      "consumers": [
+        "/academy",
+        "/account",
+        "/external-reader-intake",
+        "/privacy",
+        "/professional-appointments",
+        "/professional-consent-sharing",
+        "/professional-data-privacy",
+        "/professional/external-readers"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "ASSET_LOADING",
+        "RUNTIME_HYDRATION"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/symbolic-perspective.js",
+      "baselineSha256": "fce9a47b4cb657f6c99c36f0772fb8ff01df06d83bb8a453bc86f0be4098da52",
+      "consumers": [
+        "/readings/symbolic"
+      ],
+      "compositionRoles": [
+        "HEADER_INJECTION",
+        "ACCOUNT",
+        "SEARCH",
+        "REALITY",
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/thesis.js",
+      "baselineSha256": "f88bf5f5f8f3426f9ddfdb226e05a7aeb27b1b8e04404fa6d0efe3203ca279db",
+      "consumers": [
+        "/thesis"
+      ],
+      "compositionRoles": [
+        "LOCALE"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/ux-lens.js",
+      "baselineSha256": "b835a6d49a97ba61560077d21ebc6cb112c1bbf7a180b7bdf0d15da95a78d0dc",
+      "consumers": [
+        "/ask"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "RUNTIME_HYDRATION",
+        "SEARCH",
+        "ASK",
+        "REALITY",
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/zi-wei-dynamic-runtime.js",
+      "baselineSha256": "8987f07699132c03de0b8989172de8cb9aafdb5754b1e75bc4237d18dbdafbf8",
+      "consumers": [
+        "/personal-runtime"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "FOOTER_INJECTION",
+        "RUNTIME_HYDRATION",
+        "ASK",
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/pages/zwr-production-meaning.js",
+      "baselineSha256": "be9572ed8428ab53aea80a3aa192e6da8f247ac2b6429d126b1a9056d4f8877b",
+      "consumers": [
+        "/personal-runtime"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "HEADER_INJECTION",
+        "FOOTER_INJECTION",
+        "RUNTIME_HYDRATION",
+        "ASK",
+        "METHOD_RUNTIME"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/public-shell-v2.js",
+      "baselineSha256": "77b5018fc342ddb3d0b2613ec7ab7abab5e819869db1e8e4905d07e91b1f174f",
+      "consumers": [
+        "/",
+        "/articles",
+        "/ask",
+        "/books",
+        "/knowledge-search",
+        "/library",
+        "/professional/financial",
+        "/professional/personal-runtime",
+        "/readings",
+        "/readings/symbolic",
+        "/reality",
+        "/search",
+        "/services"
+      ],
+      "compositionRoles": [
+        "GLOBAL_SHELL",
+        "LOCALE",
+        "HEADER_INJECTION",
+        "FOOTER_INJECTION",
+        "ACCOUNT",
+        "SEARCH",
+        "ASK",
+        "REALITY",
+        "NAVIGATION"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/public-shell.js",
+      "baselineSha256": "1eefa12ee7fa09b3a60cee9b55925cfb36b96cede96883aa29363051fa75c65c",
+      "consumers": [
+        "/about",
+        "/about/founder",
+        "/about/reality-navigation",
+        "/about/why-phios",
+        "/academy",
+        "/academy-lesson",
+        "/account",
+        "/account-my-reality",
+        "/ai-disclosure",
+        "/articles/ai-formation-from-civilizational-capability",
+        "/articles/body-becomes-layered-and-finite-reality-carrier",
+        "/articles/civilization-acceleration-ai-attention-time-productivity",
+        "/articles/civilization-network-infrastructure-attention-economy",
+        "/articles/collective-attention-algorithm-viral-runtime",
+        "/articles/collective-limits-fragmentation-collapse-reconfiguration-maintenance",
+        "/articles/collective-priority-scarcity-reward-incentive",
+        "/articles/collective-time-generation-memory-deadline-time-debt",
+        "/articles/consciousness-visibility-experience-and-self-model",
+        "/articles/continuous-consciousness-time-memory-and-simulation",
+        "/articles/culture-economic-runtime-value-storage-credit",
+        "/articles/decision-choice-and-internal-conflict",
+        "/articles/dependency-fixed-connections-and-shared-reality-ecology",
+        "/articles/direction-position-and-coordinates-form-navigation",
+        "/articles/emotion-adaptation-observation-and-compression",
+        "/articles/emotion-prediction-regulation-distortion-and-adaptation",
+        "/articles/experience-selection-stabilization-and-integration",
+        "/articles/expression-media-influence-and-drift",
+        "/articles/family-rhythm-emotion-and-reconfiguration",
+        "/articles/finance-future-debt-capital-narrative-speculation",
+        "/articles/from-fields-to-interfaces-how-structures-expand-into-synthetic-reality",
+        "/articles/from-foundational-questions-to-capabilities-and-runtime-drives",
+        "/articles/from-human-ai-co-projection-to-time-direction-and-reality-grammar",
+        "/articles/group-polarization-attention-belief-and-narrative",
+        "/articles/groups-communities-shared-identity-and-reinforced-reality",
+        "/articles/how-a-conscious-runtime-ends-and-where-ai-differs",
+        "/articles/how-coordinates-eight-motions-and-activation-windows-organize-change",
+        "/articles/how-experienced-worlds-are-projected-compressed-and-given-meaning",
+        "/articles/how-reality-enters-life-through-carriers-senses-and-cognitive-entry",
+        "/articles/how-reality-moves-from-difference-to-navigable-structure",
+        "/articles/how-shared-reality-forms-through-synchronization-and-connection",
+        "/articles/how-structure-position-and-shared-projection-create-different-realities",
+        "/articles/how-the-body-converts-the-world-into-runtime-state-and-recovers-continuity",
+        "/articles/human-ai-collective-culture-value-coordination-saturation",
+        "/articles/identity-feedback-correction-and-experience-update",
+        "/articles/infinite-reality-compresses-into-finite-problems",
+        "/articles/initial-state-triggers-embeds-coordinates-and-stabilizes",
+        "/articles/inner-world-thought-and-expression",
+        "/articles/institution-information-media-platform-runtime",
+        "/articles/intention-identity-self-model-and-awareness",
+        "/articles/long-term-relationships-parenting-and-intergenerational-runtime",
+        "/articles/projection-bias-distortion-stability-and-renewal",
+        "/articles/projection-makes-reality-experiencable-as-world",
+        "/articles/relational-influence-suggestion-symbols-capture-and-recovery",
+        "/articles/resonance-interference-and-shared-runtime-centers",
+        "/articles/responsibility-commitment-agency-and-identity",
+        "/articles/runtime-cost-recovery-and-internal-connection-sustain-body",
+        "/articles/runtime-networks-form-state-feedback-reorganization-and-continuity",
+        "/articles/self-fragmentation-observation-and-reintegration",
+        "/articles/shared-reality-exit-memory-collective-field-and-belief",
+        "/articles/shared-reality-narrative-emotion-identity-value",
+        "/articles/shared-responsibility-cost-and-next-generation",
+        "/articles/shared-system-cost-conflict-and-boundaries",
+        "/articles/structure-forms-from-sustainable-relations",
+        "/articles/why-explanation-does-not-equal-understanding",
+        "/articles/why-more-capability-does-not-guarantee-direction-or-stability",
+        "/articles/why-navigation-begins-with-reality-position",
+        "/articles/why-phi-os-is-needed",
+        "/articles/why-reality-is-harder-to-understand-speed-cost-and-reality-grammar",
+        "/book-one",
+        "/book-one-preview",
+        "/books/reality-civilization",
+        "/books/reality-continuity",
+        "/books/reality-formation",
+        "/books/reality-navigation",
+        "/books/reality-runtime",
+        "/checkout",
+        "/contact",
+        "/digital-product-policy",
+        "/explore",
+        "/figure",
+        "/figures",
+        "/free-observation",
+        "/glossary",
+        "/membership",
+        "/payment-failure",
+        "/payment-success",
+        "/personal-runtime",
+        "/privacy",
+        "/professional",
+        "/professional-boundary",
+        "/professional/authority",
+        "/professional/external-readers",
+        "/reality-dashboard",
+        "/reality-journey",
+        "/terms",
+        "/thesis"
+      ],
+      "compositionRoles": [
+        "GLOBAL_SHELL",
+        "LOCALE",
+        "HEADER_INJECTION",
+        "FOOTER_INJECTION",
+        "ASSET_LOADING",
+        "RUNTIME_HYDRATION",
+        "ACCOUNT",
+        "REALITY",
+        "NAVIGATION"
+      ],
+      "classification": "MIGRATE_CONTENT",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "DELETE_PRESENTATION_AFTER_REPLACEMENT_ACCEPTED_ZERO_CONSUMER",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/reading.js",
+      "baselineSha256": "f138bb99f0d2b3f557bdb31f3978a44fe8a18d33d54cc3a8eec994753a8f670b",
+      "consumers": [
+        "/reality-reading"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "RUNTIME_HYDRATION",
+        "SEARCH",
+        "REALITY",
+        "NAVIGATION"
+      ],
+      "classification": "REVIEW_REQUIRED",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "CLASSIFY_BEFORE_ANY_PHYSICAL_DELETE",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/reality-entry.js",
+      "baselineSha256": "6d3c38594e41805ffd578274f6cf9f865b9756d774988176c45aa16ab56621c9",
+      "consumers": [
+        "/reality-entry"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "RUNTIME_HYDRATION",
+        "SEARCH",
+        "ASK",
+        "REALITY"
+      ],
+      "classification": "REVIEW_REQUIRED",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "CLASSIFY_BEFORE_ANY_PHYSICAL_DELETE",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/reconstruction.js",
+      "baselineSha256": "3db9b840246546a248e6efae9d5273561f423c00956ac34c85a524caca444f04",
+      "consumers": [
+        "/reality-reconstruction"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "RUNTIME_HYDRATION",
+        "SEARCH",
+        "REALITY",
+        "NAVIGATION"
+      ],
+      "classification": "REVIEW_REQUIRED",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "CLASSIFY_BEFORE_ANY_PHYSICAL_DELETE",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/review.js",
+      "baselineSha256": "92e1da1a482deb3ca368427a5b9f10c24a33ca91d0a23f3da8d64881085a5bfe",
+      "consumers": [
+        "/reality-review"
+      ],
+      "compositionRoles": [
+        "LOCALE",
+        "RUNTIME_HYDRATION",
+        "REALITY",
+        "NAVIGATION"
+      ],
+      "classification": "REVIEW_REQUIRED",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "CLASSIFY_BEFORE_ANY_PHYSICAL_DELETE",
+      "directDeleteAllowedNow": false
+    },
+    {
+      "javascript": "assets/js/shared.js",
+      "baselineSha256": "8c4d0405be791365ae8ff9718c5007b6fce9e07cbbec0e229c75bc4667f3651d",
+      "consumers": [
+        "/thesis"
+      ],
+      "compositionRoles": [
+        "HEADER_INJECTION",
+        "RUNTIME_HYDRATION",
+        "METHOD_RUNTIME",
+        "NAVIGATION"
+      ],
+      "classification": "REVIEW_REQUIRED",
+      "currentState": "LEGACY_ACTIVE",
+      "targetState": "CLASSIFY_BEFORE_ANY_PHYSICAL_DELETE",
+      "directDeleteAllowedNow": false
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "PHI-OS-AST-PRODUCTION-POLICY-SUCCESSOR-v2.0.0",
+  "successorCode": "AST-PRODUCTION-POLICY-SUCCESSOR-002",
+  "baselineCommit": "73ba874ecad0e452eb768a36af9f0c66241c906a",
+  "methodCode": "ASTROLOGY",
+  "pluginCode": "AST",
+  "methodVersion": "0.1.0",
+  "status": "APPROVED_LUNAR_NODE_INTERNAL_CALCULATION_SUCCESSOR",
+  "authorityOwner": "PHI_OS_AST_METHOD_GOVERNANCE",
+  "predecessor": "content/professional/method-governance/successors/ast-production-policy-successor-v1.json",
+  "predecessorMutationAllowed": false,
+  "policy": {
+    "planetSet": {
+      "inheritedFromV1": true,
+      "policyCode": "PHI_OS_AST_PLANET_SET_CORE_10_V1"
+    },
+    "zodiac": {
+      "inheritedFromV1": true,
+      "policyCode": "PHI_OS_AST_TROPICAL_ZODIAC_V1",
+      "frame": "TROPICAL_ECLIPTIC_LONGITUDE"
+    },
+    "nodePolicy": {
+      "included": true,
+      "policyCode": "PHI_OS_AST_TRUE_NODE_V1",
+      "nodeConvention": "TRUE_NODE.V1",
+      "model": "GEOCENTRIC_OSCULATING_ASCENDING_LUNAR_NODE",
+      "referenceFrame": "TRUE_ECLIPTIC_OF_DATE_ECT",
+      "northNodeSource": "Astronomy Engine GeoMoonState -> EQJ_TO_ECT -> instantaneous orbital-plane intersection",
+      "southNodeRule": "normalize360(NORTH_NODE + 180)",
+      "meanNodeFallbackAllowed": false,
+      "silentFallbackAllowed": false,
+      "runtimeFailureEffect": "NODE_ACTIVATIONS_UNKNOWN_NON_NODE_CONTINUES"
+    },
+    "retrogradePolicy": {
+      "inheritedFromV1": true,
+      "policyCode": "PHI_OS_AST_LONGITUDE_SPEED_RETROGRADE_V1"
+    },
+    "precisionPolicy": {
+      "inheritedFromV1": true,
+      "policyCode": "PHI_OS_AST_DECIMAL_12_V1",
+      "decimalPlaces": 12
+    },
+    "normalizationPolicy": {
+      "inheritedFromV1": true,
+      "policyCode": "PHI_OS_AST_LONGITUDE_0_360_V1",
+      "longitudeRange": "[0,360)"
+    }
+  },
+  "astronomyDataAuthority": {
+    "engine": "ASTRONOMY_ENGINE_JS",
+    "engineVersion": "2.1.19",
+    "releaseCommit": "61dc07020aaa6885d2c7f688a4d82beaf6edb9ef",
+    "license": "MIT",
+    "npmIntegrity": "sha512-8yWKNf7UeNbH458h3sAJ6ZgAjE5jTXp/mNNRFoC20j2SHwZIjAQeEsBB2Q3uCFRaTCCJRv33K2XhkhZQMXoX6w==",
+    "existingMpaAuthority": "content/professional/method-production-activation/registries/mpa-ast-ephemeris-authority-resolution-v1.json",
+    "existingTolerance": "content/professional/method-production-activation/contracts/mpa-ast-tolerance-freeze-v1.json",
+    "secondEphemerisAuthorityCreated": false
+  },
+  "scope": {
+    "internalPersonalStructureConsumptionAllowed": true,
+    "publicAstNodeProjectionCreated": false,
+    "hdrSpecificNodeConventionCreated": false,
+    "interpretationCreated": false,
+    "meaningCreated": false,
+    "professionalJudgmentCreated": false
+  },
+  "boundaries": {
+    "implicitNodeDefaultAllowed": false,
+    "meanNodeMaySubstituteTrueNode": false,
+    "expansionRequiresVersionedSuccessor": true,
+    "legacyAstFreezeMutated": false
+  }
+}

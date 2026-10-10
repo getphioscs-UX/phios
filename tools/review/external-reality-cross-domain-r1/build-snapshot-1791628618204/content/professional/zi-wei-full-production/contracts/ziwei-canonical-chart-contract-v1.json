@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-CANONICAL-CHART-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W1",
+  "status": "ENGINEERING_COMPLETE",
+  "runtime": "functions/zi-wei-full-production/ziwei-chart-runtime.js",
+  "outputSchema": "PHI-OS-ZIWEI-CANONICAL-CHART-IR-v1.0.0",
+  "purpose": "One derived canonical chart IR for downstream Zi Wei full-production analysis; it is not a second Canonical Method Projection.",
+  "requiredInputs": [
+    "existing Zi Wei canonicalProjection",
+    "existing Zi Wei sourceCalculationIR with governed calendar authority"
+  ],
+  "optionalInputs": [
+    "existing ZWD dynamicProjection"
+  ],
+  "requiredOutput": [
+    "birthAuthority",
+    "lifePalace",
+    "bodyPalace",
+    "fiveElementBureau",
+    "palaces[12]",
+    "stars[20 current baseline]",
+    "transformations[4 natal]",
+    "timeLayers",
+    "sourceProjection",
+    "chartDigest",
+    "boundaries"
+  ],
+  "rules": {
+    "projectionMustBeReused": true,
+    "natalMustNotBeRecalculated": true,
+    "sourceCalculationDigestMustMatchWhenAvailable": true,
+    "dynamicLineageMustMatchNatalProjection": true,
+    "rawEnumsMustCarryLocalizedDisplayLabels": true,
+    "sourceObjectsMustNotBeMutated": true,
+    "productionEligible": false
+  }
+}

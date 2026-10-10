@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "PHI-OS-METHOD-RUNTIME-LIFECYCLE-v1.0.0",
+  "stageCode": "MR-W0",
+  "status": "frozen",
+  "initialState": "draft",
+  "terminalState": "archived",
+  "states": [
+    "draft",
+    "experimental",
+    "internal",
+    "pilot",
+    "production",
+    "deprecated",
+    "archived"
+  ],
+  "transitions": [
+    {
+      "from": "draft",
+      "to": "experimental"
+    },
+    {
+      "from": "draft",
+      "to": "archived"
+    },
+    {
+      "from": "experimental",
+      "to": "internal"
+    },
+    {
+      "from": "experimental",
+      "to": "deprecated"
+    },
+    {
+      "from": "experimental",
+      "to": "archived"
+    },
+    {
+      "from": "internal",
+      "to": "pilot"
+    },
+    {
+      "from": "internal",
+      "to": "deprecated"
+    },
+    {
+      "from": "internal",
+      "to": "archived"
+    },
+    {
+      "from": "pilot",
+      "to": "production"
+    },
+    {
+      "from": "pilot",
+      "to": "internal"
+    },
+    {
+      "from": "pilot",
+      "to": "deprecated"
+    },
+    {
+      "from": "pilot",
+      "to": "archived"
+    },
+    {
+      "from": "production",
+      "to": "deprecated"
+    },
+    {
+      "from": "deprecated",
+      "to": "archived"
+    }
+  ],
+  "guards": {
+    "directDraftToProductionAllowed": false,
+    "archivedReactivationAllowed": false,
+    "productionImrGateRequired": true,
+    "productionLicenseGateRequired": true,
+    "productionAuthorityReviewRequired": true,
+    "productionProviderReviewRequired": true
+  }
+}
+

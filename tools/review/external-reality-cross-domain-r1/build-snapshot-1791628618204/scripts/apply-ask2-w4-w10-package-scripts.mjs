@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const path = new URL('../package.json', import.meta.url);
+if (!fs.existsSync(path)) throw new Error('ASK2_PACKAGE_JSON_NOT_FOUND');
+const pkg = JSON.parse(fs.readFileSync(path, 'utf8'));
+pkg.scripts ||= {};
+pkg.scripts['check:ask2-w4-w10'] = 'node scripts/check-ask2-w4-w10-public-consumption.mjs';
+pkg.scripts['check:ask2-current'] = 'npm run check:ask2-w0-w3 && npm run check:ask2-w4-w10';
+pkg.scripts['check:ask-runtime-orchestration-current'] = 'npm run check:ask2-current';
+pkg.scripts['check:ask2-browser-live'] = 'node scripts/check-ask2-public-browser-live.mjs';
+fs.writeFileSync(path, `${JSON.stringify(pkg, null, 2)}\n`);
+console.log('✓ ASK2-W4–W10 package script successor aliases applied.');

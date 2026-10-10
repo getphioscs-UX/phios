@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "PHI-OS-FMA-CROSS-METHOD-INPUT-GOVERNANCE-v1.0.0",
+  "work": "FMA-W7",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "ACTIVE",
+  "canonicalInputAuthority": "content/professional/method-client-delivery/contracts/canonical-birth-input-contract-v1.json",
+  "sharedInputObject": "CanonicalBirthInput",
+  "methods": [
+    "AST",
+    "BZR",
+    "NUM"
+  ],
+  "rules": {
+    "clientEntersBirthDataOnce": true,
+    "methodAdaptersDeriveInternalInputs": true,
+    "methodMayMutateCanonicalInput": false,
+    "methodDerivedFieldsMayWriteBackToCanonicalInput": false,
+    "missingValuesMayBeInvented": false,
+    "methodResultMayAlterInput": false,
+    "crossMethodExecutionSharesInputIdentityNotMutableObject": true
+  }
+}

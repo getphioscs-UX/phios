@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0.0",
+  "stage": "KAU-W0",
+  "baselineCommit": "d116732ef27fd3cc0cbbf29b7b1aa3fb4b3682d3",
+  "runtime": "Knowledge Authoring Runtime",
+  "status": "audited",
+  "readAuthorities": [
+    "content/knowledge/blueprints/blueprint-registry.json",
+    "content/knowledge/registry/nodes.json",
+    "content/knowledge/registry/supporting-questions.json",
+    "content/knowledge/contracts/knowledge-registry-authority-v2.json",
+    "content/knowledge/semantic/semantic-runtime-freeze.json",
+    "content/knowledge/intelligence/assembly/canonical-assembly.json",
+    "content/knowledge/manuscripts/manuscript-registry.json",
+    "content/knowledge/manuscripts/book-1/section-inventory-v2.json",
+    "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json",
+    "content/knowledge/production/manifests/production-runtime-manifest.json",
+    "content/knowledge/public/authority/published-knowledge-authority.json"
+  ],
+  "reconciliation": {
+    "existingManuscriptRuntime": "reuse",
+    "existingSectionInventory": "reuse",
+    "existingMappingRuntime": "reuse",
+    "pja": "external_authority",
+    "knowledgeRegistry": "external_authority"
+  },
+  "conclusion": "KAU may propose, compare, map and detect authoring changes; it never mutates Canonical Knowledge Authority or Publication Authority."
+}

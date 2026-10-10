@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-CCR-LENS-ISOLATION-CONTRACT-v1.0.0",
+  "work": "CCR-W1",
+  "status": "FROZEN_V1",
+  "invariants": {
+    "onlyRoutedLensInputsAllowed": true,
+    "primaryReadingRequiredForRoutablePlan": true,
+    "maximumSupportingReadings": 2,
+    "sourceReadingMutationForbidden": true,
+    "sourceMeaningMutationForbidden": true,
+    "oneLensCannotRewriteAnotherLens": true,
+    "crossLensCanonicalMeaningCreationForbidden": true,
+    "sourceProvenanceRequired": true,
+    "sourceExecutionCompletenessPreserved": true,
+    "blockedSupportingLensCannotBeInjected": true,
+    "unselectedLensCannotBeInjected": true
+  },
+  "acceptedReadingSchemas": {
+    "AST.NATAL": "PHI-OS-AST-RUNTIME-READING-IR-v1.0.0",
+    "AST.CURRENT_DYNAMIC": "PHI-OS-AST-TRANSIT-READING-IR-v1.0.0",
+    "BZR.TEMPORAL": "PHI-OS-BZR-TEMPORAL-READING-IR-v1.0.0",
+    "ZWR.NATAL": "PHI-OS-ZWR-RUNTIME-READING-IR-v1.0.0",
+    "ZWR.DYNAMIC_DOMAIN": "PHI-OS-ZI-WEI-DYNAMIC-DOMAIN-READING-IR-v1.0.0",
+    "NUM": "PHI-OS-NUM-RUNTIME-READING-IR-v1.0.0",
+    "HDR.OPERATING_READING": "PHI-OS-INTERNAL-OPERATING-READING-IR-v1.0.0"
+  }
+}

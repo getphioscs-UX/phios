@@ -1,0 +1,35 @@
+{
+  "reportCode": "KNR-PACKAGE-D-PRODUCTION-INTEGRATION",
+  "reportVersion": "1.0.0",
+  "qualityReportDigest": "c1bc5b03ac8d486b98a112c6582657cb9711ff6eba4e66aa4bc4d4a5e7c8944a",
+  "outcome": "blocked",
+  "productionEffects": {
+    "candidateMutation": false,
+    "reviewMutation": false,
+    "approvalMutation": false,
+    "publicationMutation": false,
+    "registryMutation": false,
+    "automaticRepublish": false
+  },
+  "recommendedActions": [
+    {
+      "findingCode": "EN_LOCALE_CJK_CONTAMINATION",
+      "severity": "warning",
+      "action": "review_locale_source_and_rebuild_published_projections",
+      "automatic": false
+    },
+    {
+      "findingCode": "EN_HEADING_CJK_CONTAMINATION",
+      "severity": "warning",
+      "action": "review_locale_source_and_rebuild_published_projections",
+      "automatic": false
+    },
+    {
+      "findingCode": "EN_BODY_CJK_CONTAMINATION",
+      "severity": "error",
+      "action": "review_locale_source_and_rebuild_published_projections",
+      "automatic": false
+    }
+  ],
+  "reportDigest": "cd81a34ea7310416fb2243415292f51cd3d99c9d53af063c1518198c7739fa5f"
+}

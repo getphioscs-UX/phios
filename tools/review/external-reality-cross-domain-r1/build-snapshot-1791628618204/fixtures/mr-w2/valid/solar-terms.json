@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-SHARED-DATA-RECORD-v1.0.0",
+  "recordId": "SDA-SOLAR-TERM-0001",
+  "recordType": "SOLAR_TERMS",
+  "authority": "SHARED_DATA_AUTHORITY",
+  "authorityVersion": "1.0.0",
+  "recordVersion": "1.0.0",
+  "status": "verified",
+  "methodOwner": null,
+  "pluginOwner": null,
+  "sourceClass": "deterministic_derivation",
+  "provenance": {
+    "sourceType": "ephemeris",
+    "sourceId": "MR-W2-CONTRACT-EPHEMERIS",
+    "sourceVersion": "1.0.0",
+    "capturedAt": "2026-08-04T00:00:00Z",
+    "verificationStatus": "contract_fixture",
+    "licenseStatus": "not_required"
+  },
+  "normalization": {
+    "normalizedBy": "SHARED_DATA_AUTHORITY",
+    "normalizationVersion": "1.0.0",
+    "normalizedAt": "2026-08-04T00:00:00Z"
+  },
+  "lineage": {
+    "inputRecordIds": [
+      "SDA-ASTRONOMY-0001"
+    ],
+    "algorithmCode": "SOLAR_TERM_LONGITUDE_CONTRACT",
+    "algorithmVersion": "1.0.0",
+    "providerCode": null,
+    "deterministic": true,
+    "aiUsed": false
+  },
+  "payload": {
+    "termCode": "START_OF_SPRING",
+    "solarLongitudeDegrees": 315,
+    "eventTime": "1990-02-04T02:14:00Z",
+    "timeScale": "UTC",
+    "ephemerisCode": "MR_W2_CONTRACT_EPHEMERIS",
+    "ephemerisVersion": "1.0.0"
+  }
+}

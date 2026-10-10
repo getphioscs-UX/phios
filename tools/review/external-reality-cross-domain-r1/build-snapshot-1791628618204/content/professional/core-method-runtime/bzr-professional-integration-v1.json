@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "PHI-OS-BZR-PROFESSIONAL-INTEGRATION-v1.0.0",
+  "stageCode": "BZR-W5",
+  "runtimeCode": "BZR_PROFESSIONAL_INTEGRATION_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "BAZI",
+  "pluginCode": "BZR",
+  "status": "integration_established_release_blocked_by_current_governance",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "9dd40ff48390cf3104c7b614dc2324a3a349b765"
+  },
+  "input": {
+    "runtimeCode": "SHARED_INTERPRETATION_RUNTIME",
+    "schemaVersion": "PHI-OS-CANONICAL-INTERPRETATION-CANDIDATE-v1.0.0",
+    "candidateStatus": "candidate",
+    "allowedProjectionTypes": [
+      "STEM",
+      "BRANCH",
+      "PILLAR",
+      "LUCK_CYCLE"
+    ]
+  },
+  "methodEligibilityGate": {
+    "authority": "INTERPRETIVE_METHOD_GOVERNANCE",
+    "allRequired": true,
+    "requiredFields": [
+      "productionReady",
+      "professionalReady",
+      "validationPassed",
+      "regressionPassed",
+      "commercialLicensePassed",
+      "sharedRuntimeImplemented",
+      "professionalBoundaryPassed",
+      "professionalWorkflowPassed"
+    ],
+    "currentBaZiReleaseAllowed": false
+  },
+  "professionalEligibilityGate": {
+    "decisionContract": "phi-os.professional-eligibility-decision.v1",
+    "requiredCapabilityCode": "BAZI_PROFESSIONAL_REVIEW",
+    "activeAssignmentRequired": true,
+    "activeConsentRequired": true,
+    "boundaryAcknowledgementRequired": true,
+    "workspaceAccessRequired": true
+  },
+  "professionalAuthority": {
+    "runtimeCode": "SHARED_PROFESSIONAL_RUNTIME",
+    "parallelRuntimeAllowed": false,
+    "requiredSequence": [
+      "PROFESSIONAL_REVIEW",
+      "BOUNDARY_VALIDATION",
+      "DELIVERABLE_ASSEMBLY",
+      "PROFESSIONAL_SIGNATURE",
+      "RELEASE"
+    ]
+  },
+  "boundaries": {
+    "methodEligibilityCreatesReleaseAuthority": false,
+    "professionalEligibilityCreatesReleaseAuthority": false,
+    "interpretationCandidateMutationAllowed": false,
+    "directReleaseAllowed": false,
+    "automaticProfessionalConclusionAllowed": false,
+    "medicalDiagnosisAllowed": false,
+    "legalDecisionAllowed": false,
+    "financialDecisionAllowed": false,
+    "identityFactClaimAllowed": false,
+    "productionEligibilityChanged": false
+  },
+  "currentGovernanceResult": {
+    "commercialLicensePassed": false,
+    "sharedRuntimeImplemented": false,
+    "validationPassed": false,
+    "regressionPassed": false,
+    "productionReady": false,
+    "professionalReady": false,
+    "releaseStatus": "blocked"
+  },
+  "nextStage": "BZR-W6"
+}

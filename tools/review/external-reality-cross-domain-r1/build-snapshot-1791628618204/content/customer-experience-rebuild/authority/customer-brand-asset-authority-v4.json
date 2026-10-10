@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "PHI-OS-CUSTOMER-BRAND-ASSET-AUTHORITY-v4.0.0",
+  "work": "P1-BROWSER-R1",
+  "status": "ACTIVE_SURFACE_AWARE_CUSTOMER_BRAND_BINDING",
+  "predecessor": "content/customer-experience-rebuild/authority/customer-brand-asset-authority-v3.json",
+  "upstreamAuthority": "content/web-production/registries/phios-logo-registry-v1.json",
+  "reason": "Production browser review showed the color PRIMARY-HORIZONTAL asset renders as a dark rectangular plate in the light CX header. The light header therefore consumes the already-canonical PRIMARY-MONO-DARK asset; upstream logo identity is unchanged.",
+  "currentConsumers": {
+    "publicHeaderLight": "LOGO-009",
+    "publicFooterDark": "LOGO-010",
+    "browserFavicon": "LOGO-011"
+  },
+  "preservedCanonicalAssets": [
+    "LOGO-003",
+    "LOGO-009",
+    "LOGO-010",
+    "LOGO-011"
+  ],
+  "authorityBoundary": {
+    "newLogoIdentityCreated": false,
+    "upstreamLogoRegistryMutated": false,
+    "historicalR0R4R5EvidenceMutated": false,
+    "surfaceAppropriateVariantSelectionOnly": true
+  }
+}

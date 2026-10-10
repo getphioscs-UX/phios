@@ -1,0 +1,67 @@
+{
+  "preflightCode": "PHI-OS-WAVE1-PRODUCTION-AUTHORIZED-v1",
+  "preflightVersion": "1.0.0",
+  "status": "AUTHORIZED_FOR_GOVERNED_PRODUCTION_BRIEF_GENERATION",
+  "baselineCommit": "07d634195cd7b1d641fbaf5bbba60137b8ca274c",
+  "humanDecisionReference": "content/knowledge/production-planning/production/wave1/human-production-decision-v1.json",
+  "humanDecisionDigest": "sha256:e9015bb270d90e406262b17198710dce804f909ee4ed45a0ce5b503ced872cfc",
+  "c3HumanApprovalReference": "content/knowledge/editorial/c3/closures/wave1-human-production-approval-v1.json",
+  "planReference": "content/knowledge/production-planning/production/wave1/frozen-production-plan-v1.json",
+  "planDigest": "sha256:39c5fed2bcee02b0b28cdc06ed0fcf992a7b23bd3a7e2bc30c8f1ed02484b5f3",
+  "waveReference": "content/knowledge/production-planning/production/wave1/frozen-production-wave-v1.json",
+  "waveResultDigest": "sha256:1a2814f465a13cdf5171a4e85f9adf7551785e9d50f4452bc7f42fc8400da4a5",
+  "executionAuthorityReference": "content/knowledge/production-planning/production/wave1/execution-authority-reconciliation-v1.json",
+  "selectedExecutionScope": [
+    {
+      "nodeCode": "KN-PREFACE-004",
+      "productionRole": "ARTICLE",
+      "dispatchTarget": "PJA",
+      "productionReady": true,
+      "briefGenerationAllowed": true
+    },
+    {
+      "nodeCode": "KN-B1-P1-003",
+      "productionRole": "FRAGMENT",
+      "dispatchTarget": "PJA",
+      "productionReady": true,
+      "briefGenerationAllowed": true
+    },
+    {
+      "nodeCode": "KN-B1-P4-003",
+      "productionRole": "FIGURE",
+      "dispatchTarget": "CAR",
+      "productionReady": true,
+      "briefGenerationAllowed": true
+    },
+    {
+      "nodeCode": "KN-B1-P4-004",
+      "productionRole": "MULTI_ASSET",
+      "dispatchTarget": "CAR",
+      "productionReady": true,
+      "briefGenerationAllowed": true
+    }
+  ],
+  "gateSnapshot": {
+    "selectedItemCount": 4,
+    "humanApprovedCount": 4,
+    "productionReadyCount": 4,
+    "productionPlanFrozen": true,
+    "productionWaveFrozen": true,
+    "digestReplayValid": true,
+    "dispatchAllowed": true,
+    "briefGenerationAllowed": true,
+    "candidateCreationAllowed": false,
+    "providerInvocationAllowed": false,
+    "publicationAllowed": false
+  },
+  "requiredNextAuthority": "PJA_AND_CAR_GOVERNED_PRODUCTION_BRIEF_GENERATION",
+  "effects": {
+    "pjaHandoffIssued": true,
+    "carHandoffIssued": true,
+    "pjaProductionBriefCreated": false,
+    "carAssetBriefCreated": false,
+    "candidateCreated": false,
+    "assetCreated": false,
+    "publicationCreated": false
+  }
+}

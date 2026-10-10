@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {parseHTML} from 'linkedom';
+import {hydrateSevenVolumeAssets} from '../assets/customer-ui/js/seven-volume-assets.js';
+const {document,window}=parseHTML('<html lang="en"><body><figure class="hero"><img data-cx-seven-volume-asset="HERO"><span data-cx-asset-fallback hidden></span></figure></body></html>');
+Object.assign(globalThis,{document,HTMLImageElement:window.HTMLImageElement});
+globalThis.fetch=async()=>Response.json({assets:[{assetId:'HERO',available:true,publicUrl:'https://example.test/image.webp',width:1600,height:900}]});
+const img=document.querySelector('img'),fallback=document.querySelector('span');
+await hydrateSevenVolumeAssets();assert.equal(img.dataset.cxAssetState,'loading');assert.equal(img.hidden,false);
+img.dispatchEvent(new window.Event('error'));assert.equal(img.dataset.cxAssetState,'unavailable');assert.equal(img.hidden,true);assert.equal(fallback.hidden,false);assert.ok(fallback.querySelector('button'));
+await hydrateSevenVolumeAssets();Object.defineProperty(img,'naturalWidth',{value:1600,configurable:true});img.dispatchEvent(new window.Event('load'));assert.equal(img.dataset.cxAssetState,'ready');assert.equal(fallback.hidden,true);assert.equal(img.width,1600);
+await hydrateSevenVolumeAssets();Object.defineProperty(img,'naturalWidth',{value:0});img.dispatchEvent(new window.Event('load'));assert.equal(img.dataset.cxAssetState,'unavailable');
+console.log('PASS: image pending/load/error/empty-load/retry states; broken image hidden and fallback retained.');

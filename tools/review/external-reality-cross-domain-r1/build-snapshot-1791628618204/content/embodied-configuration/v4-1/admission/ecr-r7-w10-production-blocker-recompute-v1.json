@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "ECR-V4.1A-R7-W10-PRODUCTION-BLOCKER-RECOMPUTE-v1",
+  "recomputedAt": "2026-09-28",
+  "branch": "ecr-r7-w6-human-review",
+  "results": {
+    "BILINGUAL_REVIEW_PAIRS": {
+      "status": "CLOSED",
+      "evidence": [
+        "content/embodied-configuration/v4-1/admission/ecr-bilingual-review-owner-decisions-r4.json",
+        "content/embodied-configuration/v4-1/review/ecr-r7-w6-human-review-pack-v1.json"
+      ],
+      "result": "14/14 OWNER ACCEPTED"
+    },
+    "COMPOSITIONAL_SEMANTIC_ADMISSION": {
+      "status": "OPEN",
+      "reason": "Gate Base and Line Modifier source canons are canonicalized but still explicitly NOT_RUNTIME_ADMITTED; composition-policy factor rows remain PENDING.",
+      "evidence": [
+        "content/embodied-configuration/v4-1/semantic-source-r6/gate-base-source-canon-v1.json",
+        "content/embodied-configuration/v4-1/semantic-source-r6/line-modifier-source-canon-v1.json",
+        "content/embodied-configuration/v4-1/semantic-admission-r2/composition-policy.json"
+      ],
+      "unresolved": {
+        "gateBasePending": 64,
+        "lineModifierPending": 6,
+        "gateSourceStatus": "64_OF_64_SOURCE_CANONICALIZED_NOT_RUNTIME_ADMITTED",
+        "lineSourceStatus": "6_OF_6_SOURCE_CANONICALIZED_NOT_RUNTIME_ADMITTED"
+      }
+    },
+    "CARD_SLOT_ELIGIBILITY": {
+      "status": "CLOSED",
+      "evidence": [
+        "content/embodied-configuration/v4-1/admission/ecr-r7-w8-operational-phi-card-admission-v1.json",
+        "content/embodied-configuration/v4-1/semantic-admission-r2/card-eligibility.json"
+      ],
+      "result": "48/48 OPERATIONALLY ADMITTED"
+    },
+    "TOPIC_PERSONAL_SELECTION": {
+      "status": "CLOSED",
+      "evidence": [
+        "content/embodied-configuration/v4-1/admission/ecr-r7-w9-dma-operational-admission-v1.json",
+        "content/embodied-configuration/v4-1/semantic-admission-r2/topic-personal-selection-proof.json"
+      ],
+      "result": "D/M/A operational rules admitted; unresolved case evidence fails closed to UNKNOWN"
+    },
+    "RENDERED_VISUAL_ACCEPTANCE": {
+      "status": "OPEN",
+      "result": "NOT_RUN"
+    },
+    "DEPLOYED_PREVIEW_E2E": {
+      "status": "OPEN",
+      "result": "NOT_RUN"
+    }
+  },
+  "summary": {
+    "closedCount": 3,
+    "openCount": 3,
+    "closed": [
+      "BILINGUAL_REVIEW_PAIRS",
+      "CARD_SLOT_ELIGIBILITY",
+      "TOPIC_PERSONAL_SELECTION"
+    ],
+    "open": [
+      "COMPOSITIONAL_SEMANTIC_ADMISSION",
+      "RENDERED_VISUAL_ACCEPTANCE",
+      "DEPLOYED_PREVIEW_E2E"
+    ]
+  },
+  "decision": "R7_W10_PARTIAL_PASS",
+  "blockingFinding": "COMPOSITIONAL_SEMANTIC_ADMISSION remains open because 64 Gate Base and 6 Line Modifier factors are source-canonicalized but not runtime-admitted.",
+  "productionImpact": {
+    "machineReady": false,
+    "customerProductionAdmitted": false,
+    "mayProceedToR8": false
+  }
+}

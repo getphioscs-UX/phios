@@ -1,0 +1,14 @@
+import {renderCustomerBaziHtml} from '../../functions/report-delivery/bazi-customer-html.js';
+import {PDFDocument} from 'pdf-lib';
+const hash=async text=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text))),b=>b.toString(16).padStart(2,'0')).join('');
+export async function verifyBaziPublication(publication,env,puppeteer){
+ const html=await renderCustomerBaziHtml(publication),origin='https://qa.phios-github.pages.dev';let browser;
+ try{
+  browser=await puppeteer.launch(env.BROWSER);const page=await browser.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.name));await page.setViewport({width:1440,height:1000});await page.setRequestInterception(true);page.on('request',r=>{const u=new URL(r.url()),allowed=u.protocol==='data:'||u.protocol==='https:'&&[new URL(origin).hostname,'pub-1967bc5812ee4164b19a806fb1427021.r2.dev','assets.getphios.com'].includes(u.hostname);return allowed?r.continue():r.abort();});
+  await page.setContent(html.replaceAll('href="/assets/',`href="${origin}/assets/`),{waitUntil:'networkidle0',timeout:60000});await page.evaluate(()=>document.fonts.ready);await page.emulateMediaType('print');
+  const measured=await page.evaluate(()=>{const pages=[...document.querySelectorAll('.bdm-page')];return {pageCount:pages.length,brokenImages:[...document.images].filter(i=>!i.complete||!i.naturalWidth).length,overflowPages:pages.filter(p=>{const c=p.querySelector('.bdm-content'),f=p.querySelector('footer');return p.scrollWidth>p.clientWidth+2||p.scrollHeight>p.clientHeight+2||c&&f&&c.getBoundingClientRect().bottom>f.getBoundingClientRect().top-4;}).map(p=>p.dataset.pageNumber),diagramCount:new Set([...document.querySelectorAll('[data-diagram-id]')].map(d=>d.dataset.diagramId)).size,missingRequiredContent:document.querySelectorAll('[data-missing-required]').length,undefinedText:/\b(?:undefined|NaN)\b/.test(document.body.textContent)};});
+  const pdf=await page.pdf({preferCSSPageSize:true,printBackground:true}),pdfPages=(await PDFDocument.load(pdf)).getPageCount();
+  const passed=measured.pageCount===48&&measured.diagramCount===15&&pdfPages===48&&!measured.brokenImages&&!measured.overflowPages.length&&!measured.missingRequiredContent&&!measured.undefinedText&&!errors.length;
+  return Response.json({html,verification:{passed,outputDigest:await hash(html),manuscriptDigest:publication.manuscript.digest,publicationDigest:publication.digest,pageCount:measured.pageCount,diagramCount:measured.diagramCount,browserReady:passed,pdfReady:pdfPages===48,printReady:passed,pdfDerivative:{persisted:false,derivedFromManuscriptDigest:publication.manuscript.digest,rendererVersion:publication.lineage.versions.renderer,renderedAt:new Date().toISOString(),bytes:pdf.byteLength,pages:pdfPages},measured,errors,providerCalls:0}},{status:passed?200:422,headers:{'cache-control':'private, no-store'}});
+ }finally{if(browser)await browser.close();}
+}

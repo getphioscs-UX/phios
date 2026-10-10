@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-KAP-REALITY-COMPLEXITY-REQUEST-v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-KAP-REALITY-COMPLEXITY-REQUEST-v1.0.0"
+    },
+    "question": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "guidedContext": {
+      "type": "object"
+    },
+    "w22StopCondition": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "structuredContext": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "peopleCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "roleCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "organizationCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "relationshipCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "goalCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "constraintCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "interventionCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "multiplePeople": {
+          "type": "boolean"
+        },
+        "multipleRoles": {
+          "type": "boolean"
+        },
+        "multipleOrganizations": {
+          "type": "boolean"
+        },
+        "multipleRelationships": {
+          "type": "boolean"
+        },
+        "multipleGoals": {
+          "type": "boolean"
+        },
+        "multipleConstraints": {
+          "type": "boolean"
+        },
+        "goalConflict": {
+          "type": "boolean"
+        },
+        "longTimeline": {
+          "type": "boolean"
+        },
+        "repeatPattern": {
+          "type": "boolean"
+        },
+        "feedbackLoopPresence": {
+          "type": "boolean"
+        },
+        "unclearCausalStructure": {
+          "type": "boolean"
+        },
+        "multipleInterventions": {
+          "type": "boolean"
+        },
+        "highConsequenceDecision": {
+          "type": "boolean"
+        },
+        "persistentUnresolvedState": {
+          "type": "boolean"
+        },
+        "timeDepth": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "uncertainty": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "dependency": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "repetition": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "decisionConsequence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "people": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "organizations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "goals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "interventions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "anyOf": [
+    {
+      "required": [
+        "question"
+      ]
+    },
+    {
+      "required": [
+        "guidedContext"
+      ]
+    },
+    {
+      "required": [
+        "structuredContext"
+      ]
+    }
+  ]
+}

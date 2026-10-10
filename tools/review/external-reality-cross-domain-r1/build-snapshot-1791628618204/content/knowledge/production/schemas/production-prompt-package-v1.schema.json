@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/production-prompt-package-v1.schema.json",
+  "title": "PHI OS Production Prompt Package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "promptPackageType",
+    "promptSchemaVersion",
+    "promptCode",
+    "nodeCode",
+    "locale",
+    "sourceBrief",
+    "writerRole",
+    "writingContract",
+    "renderedPrompt",
+    "promptPackageDigest"
+  ],
+  "properties": {
+    "promptPackageType": {
+      "const": "canonical_article_production_prompt"
+    },
+    "promptSchemaVersion": {
+      "const": "PHI-OS-PRODUCTION-PROMPT-v1.0.0"
+    },
+    "promptCode": {
+      "type": "string",
+      "pattern": "^PROMPT-KN-[A-Z0-9-]+-ZH-HANS-V1$"
+    },
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-[A-Z0-9-]+$"
+    },
+    "locale": {
+      "const": "zh-Hans"
+    },
+    "sourceBrief": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "briefCode",
+        "briefSchemaVersion",
+        "briefDigest",
+        "repositoryCommit"
+      ],
+      "properties": {
+        "briefCode": {
+          "type": "string"
+        },
+        "briefSchemaVersion": {
+          "type": "string"
+        },
+        "briefDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "repositoryCommit": {
+          "type": "string",
+          "minLength": 7
+        }
+      }
+    },
+    "writerRole": {
+      "const": "canonical_article_writer"
+    },
+    "writingContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "format",
+        "style",
+        "outputMode"
+      ],
+      "properties": {
+        "language": {
+          "const": "zh-Hans"
+        },
+        "format": {
+          "const": "continuous_publishing_prose"
+        },
+        "style": {
+          "type": "array",
+          "minItems": 5,
+          "items": {
+            "type": "string"
+          }
+        },
+        "outputMode": {
+          "const": "article_body_only"
+        }
+      }
+    },
+    "renderedPrompt": {
+      "type": "string",
+      "minLength": 500
+    },
+    "promptPackageDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

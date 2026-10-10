@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {partitionRuntimeTopology as collect} from './lib/pds-runtime-topology.mjs';
+const locales=['functions/runtime/locales/ecr-full-report.js','functions/runtime/locales/en/ecr-full-report.js','functions/runtime/locales/zh-Hans/ecr-full-report.js'];
+const nav='functions/runtime/navigation/nav-contract-freeze.js';
+assert.deepEqual(collect(locales,[],locales),[]);
+assert.deepEqual(collect([...locales,nav],[],locales),[nav]);
+assert.throws(()=>collect(locales.slice(1),[],locales),/ECR_LOCALE_TOPOLOGY_DRIFT/);
+assert.throws(()=>collect([...locales,'functions/runtime/locales/en/new.js'],[],locales),/ECR_LOCALE_TOPOLOGY_DRIFT/);
+assert.throws(()=>collect(locales.map(p=>p.replace('zh-Hans','zh')),[],locales),/ECR_LOCALE_TOPOLOGY_DRIFT/);
+assert.throws(()=>collect([...locales,nav],[nav],locales),/BASELINE_RUNTIME_FILE_CHANGED/);
+const unknown='functions/runtime/unknown.js';
+assert.deepEqual(collect([...locales,unknown],[],locales),[unknown]);
+console.log('7 runtime topology scope checks PASS; non-locale additions require separate authorization');

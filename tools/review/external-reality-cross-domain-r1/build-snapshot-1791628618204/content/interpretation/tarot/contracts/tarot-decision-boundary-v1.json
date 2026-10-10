@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-TARI-DECISION-BOUNDARY-v1.0.0",
+  "phase": "TARI",
+  "work": "TARI-W6",
+  "baselineCommit": "007fee6f24071d0653ce120be9ec832efc5c11a4",
+  "status": "ACTIVE_FAIL_CLOSED_DECISION_AUTHORITY_BOUNDARY",
+  "forbiddenDirectiveIntents": [
+    "QUIT_JOB",
+    "INVEST_FUNDS",
+    "LEAVE_PARTNER",
+    "STOP_TREATMENT"
+  ],
+  "forbiddenSystemDirectives": [
+    "quit your job",
+    "you should invest",
+    "invest your money",
+    "leave your partner",
+    "end your relationship",
+    "stop treatment",
+    "stop your medication"
+  ],
+  "allowedOutputClasses": [
+    "REFLECTION",
+    "QUESTION",
+    "PERSPECTIVE"
+  ],
+  "rules": {
+    "tarotMayDirectUserDecision": false,
+    "tarotMayIssueProfessionalInstruction": false,
+    "tarotMayReplaceMedicalAdvice": false,
+    "tarotMayReplaceFinancialAdvice": false,
+    "tarotMayReplaceRelationshipDecision": false,
+    "userDecisionAuthorityRequired": true
+  }
+}

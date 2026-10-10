@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/professional-decision-package-v2.schema.json",
+  "title": "PHI OS Professional Decision Package v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "packageReference",
+    "caseReference",
+    "professionalId",
+    "version",
+    "state",
+    "observation",
+    "judgment",
+    "recommendation",
+    "unknown",
+    "alternative",
+    "boundary",
+    "auditTrail",
+    "packageDigest"
+  ],
+  "properties": {
+    "packageReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "caseReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "professionalId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "state": {
+      "enum": [
+        "DRAFT",
+        "REVIEWED",
+        "APPROVED",
+        "SIGNED",
+        "RELEASED"
+      ]
+    },
+    "observation": {
+      "type": "object"
+    },
+    "judgment": {
+      "type": "object"
+    },
+    "recommendation": {
+      "type": "object"
+    },
+    "unknown": {
+      "type": "array"
+    },
+    "alternative": {
+      "type": "array"
+    },
+    "boundary": {
+      "type": "array",
+      "minItems": 1
+    },
+    "auditTrail": {
+      "type": "array",
+      "minItems": 1
+    },
+    "packageDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "candidateId": "PHI-OS-REALITY-WORKSPACE-GRAPH-PRESENTATION-MAINTENANCE-CANDIDATE-v1",
+  "state": "PENDING_HUMAN_REVIEW",
+  "changeClass": "VERSIONED_PRESENTATION_CONSUMER_MAINTENANCE",
+  "head": "10ef44378196ef0eb36c242485a36c5d26e6297a",
+  "predecessor": "content/web-production/successors/reality-workspace-canonical-customer-successor-v1.json",
+  "checker": "scripts/check-reality-workspace-canonical-current.mjs",
+  "firstFailure": "LEGACY_UNDERSTAND_STAGE_MARKER_ABSENT",
+  "reason": "Checker pins a three-stage legacy renderer. Current route uses existing customer-my-reality projection; owner requests graph-first presentation. Adding obsolete stage/script markers would misrepresent the consumer.",
+  "proposedSuccessor": "Preserve predecessor checks and frozen hashes as historical validation. Add explicit current-route successor with source digests, indexability, original archive hashes, no durable writes/action promotion, source/permission isolation and current browser proof. Route aggregate only after explicit candidate acceptance.",
+  "currentSource": [
+    {
+      "path": "reality/index.html",
+      "sha256": "a6e201b2e0b74ecf8ca3113667d22ead7d87e43f95c7844973cb7889947d77b7"
+    },
+    {
+      "path": "functions/api/customer-my-reality.js",
+      "sha256": "f9614e98536eafd312efc761ebd43a038616ca9072847c211602a202b8176f1f"
+    },
+    {
+      "path": "functions/customer-projection/reality-navigation-graph-projection.js",
+      "sha256": "33db04356a126f6a35530c29b8a155ae45d4bceae0d7ce3a7b42fe6ef4e0cc83"
+    },
+    {
+      "path": "assets/customer-ui/js/reality-navigation-network.js",
+      "sha256": "4aa2f145798dd53ef7fcc203a5ad5bf1f2d3ad8b19ac207e01ffdac9e563a2d9"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/my-reality.js",
+      "sha256": "6cd173de26db582aa8396196f52ff9bddd9fe94b5e62ba755644b3a926bc10e2"
+    },
+    {
+      "path": "assets/customer-ui/surfaces/reality-navigation-network.css",
+      "sha256": "0599e822e0e0cc0b1be2e580a5d869e52ec93aacfbcdbe0eb56e630f6a84b29a"
+    }
+  ],
+  "ownerUnchanged": true,
+  "publicRoute": "/reality/",
+  "permissionsChanged": false,
+  "productionActivation": false,
+  "writeAuthorityAdded": false,
+  "rollback": "Revert only listed graph display additions and restore the prior Reality page consumer. No storage migration, customer deletion or frozen-source replacement.",
+  "authorization": "Owner authorized source implementation; no separate checker migration ACCEPT has been recorded.",
+  "acceptInstruction": "Human ACCEPT — PHI-OS-REALITY-WORKSPACE-GRAPH-PRESENTATION-MAINTENANCE-CANDIDATE-v1，SHA256 <exact candidate file digest shown in this review>. Accept only the listed versioned checker/consumer successor; no production operation, commit, push or deletion."
+}

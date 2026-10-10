@@ -1,0 +1,51 @@
+import {registry,familyRegistry,visualAssets} from './report-section-config.generated.js';
+export const BAZI_SECTION_REGISTRY=registry;
+export const REPORT_PAGE_FAMILIES=familyRegistry.families;
+export const BAZI_SECTION_VISUAL_ASSETS=visualAssets;
+export const SECTION_LAYOUT='SECTION_BASED_V1';
+export function validateSectionRegistry(plan=registry){
+ if(plan.frontMatter.length!==6||plan.sections.length!==10)throw Error('SECTION_REGISTRY_STRUCTURE');
+ const keys=new Set();
+ for(const [i,s] of plan.sections.entries()){
+  if(s.number!==String(i+1).padStart(2,'0')||!s.enabled||s.pages[0]?.family!=='SECTION_OPENER_PAGE')throw Error('SECTION_OPENER_OR_ORDER');
+  for(const p of s.pages){if(keys.has(p.key)||!REPORT_PAGE_FAMILIES[p.family]||!p.dataModules?.length)throw Error('SECTION_PAGE_FAMILY_OR_MODULE');keys.add(p.key);}
+ }return plan;
+}
+export function textUnits(text,locale){return locale==='en'?String(text).trim().split(/\s+/).filter(Boolean).length:[...String(text).replace(/\s/g,'')].length;}
+export function splitSemanticBlocks(blocks,{locale,maxUnits,minUnits=0}){
+ const sizes=blocks.map(block=>textUnits(block.text,locale));
+ if(sizes.some(units=>units>maxUnits))throw Error('SECTION_SINGLE_BLOCK_OVER_BUDGET');
+ if(!blocks.length)return [];
+ const greedy=()=>{const pages=[];let current=[],size=0;for(let i=0;i<blocks.length;i++){const units=sizes[i];if(size+units>maxUnits&&current.length){pages.push(current);current=[];size=0;}current.push(blocks[i]);size+=units;}if(current.length)pages.push(current);return pages;};
+ if(!minUnits)return greedy();
+ // Find a global partition at semantic-block boundaries. This handles a thin
+ // final continuation that requires cascading both earlier boundaries, while
+ // never splitting, padding, dropping or reordering method-owned prose.
+ const n=blocks.length,prefix=[0];for(const units of sizes)prefix.push(prefix.at(-1)+units);
+ const dp=Array(n+1).fill(null);dp[0]={pages:[],penalty:0};
+ for(let end=1;end<=n;end++)for(let start=0;start<end;start++){
+  const prior=dp[start];if(!prior)continue;
+  const units=prefix[end]-prefix[start];if(units>maxUnits)continue;if(units<minUnits)continue;
+  const candidate={pages:[...prior.pages,blocks.slice(start,end)],penalty:prior.penalty+(maxUnits-units)**2},current=dp[end];
+  if(!current||candidate.pages.length<current.pages.length||candidate.pages.length===current.pages.length&&candidate.penalty<current.penalty)dp[end]=candidate;
+ }
+ if(dp[n])return dp[n].pages;
+ throw Error('SECTION_BLOCK_PARTITION_UNDER_BUDGET');
+}
+export function bindSectionVisual(sectionKey,{assets=visualAssets}={}){
+ const sectionNumber=Number(sectionKey.match(/^S(\d+)/)?.[1]||1),motifKey=assets.global.motifs?.[(sectionNumber-1)%2]||assets.global.motifLayer;
+ const assetKey=assets.sections[sectionKey],hero=assets.bindings[assetKey],style=assets.bindings[assets.global.sectionStyle],bodyUrl=assets.bindings[assets.global.bodyBackground]||null,motifUrl=assets.bindings[motifKey]||null,url=hero||style||bodyUrl;
+ // Only explicit registry bindings become images; symbolic asset IDs never do.
+ for(const v of [hero,style,bodyUrl,motifUrl].filter(Boolean))if(!/^https:\/\//.test(v)&&!/^\/assets\//.test(v))throw Error('SECTION_VISUAL_URL_INVALID');
+ return {assetKey,url:url||null,bodyUrl,motifUrl,motifKey,intensityByFamily:assets.intensityByFamily||{},candidates:[hero,style,bodyUrl].filter(Boolean),fallback:assets.fallback,selected:hero?'SECTION_HERO':style?'SECTION_STYLE':bodyUrl?(motifUrl?'BODY_WITH_MOTIF':'BODY'):'CSS_PREMIUM',motif:'LANDSCAPE_RINGS',backgroundMode:'METHOD_PRINT_SHELL_V2',placement:assets.openerRotation?.[(sectionNumber-1)%assets.openerRotation.length]||'hero-bottom',required:Boolean(hero||bodyUrl),suppressSyntheticMotif:true};
+}
+export function validateExpandedSections(pages,plan=registry){
+ let cursor=0;
+ for(const s of plan.sections.filter(s=>s.enabled)){
+  const group=[];while(pages[cursor]?.sectionKey===s.key)group.push(pages[cursor++]);
+  if(group.length<2||group[0].pageFamily!=='SECTION_OPENER_PAGE'||group.slice(1).some(p=>p.pageFamily==='SECTION_OPENER_PAGE'))throw Error('SECTION_EXPANSION_ORDER');
+  for(const p of group)if(!s.pages.some(d=>d.key===p.definitionKey&&d.family===p.pageFamily))throw Error('SECTION_EXPANSION_FAMILY');
+ }
+ if(cursor!==pages.length||pages.some((p,i)=>p.pageNumber!==i+7)||new Set(pages.map(p=>p.pageKey)).size!==pages.length)throw Error('SECTION_EXPANSION_SEQUENCE');
+ return true;
+}

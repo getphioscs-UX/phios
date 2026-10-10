@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-SOURCE-TIER-REGISTRY-v1.0.0",
+  "phase": "TPA-B",
+  "work": "TPA-W3-W5",
+  "baselineCommit": "402f2e395845782c0833d057b3ce91d33cdd6559",
+  "status": "FROZEN_SOURCE_TIER_AUTHORITY",
+  "registryCode": "TAROT_SOURCE_TIER_REGISTRY",
+  "registryVersion": "1.0.0",
+  "tiers": [
+    {
+      "tier": "T0",
+      "label": "CANONICAL_VISUAL_ARTWORK",
+      "allowedRole": [
+        "TAR_VIS_DIRECT_OBSERVATION",
+        "ARTWORK_REFERENCE"
+      ],
+      "forbiddenRole": [
+        "UNIVERSAL_MEANING_AUTHORITY"
+      ],
+      "automaticCanonicalPromotion": false,
+      "rightsGateRequired": true
+    },
+    {
+      "tier": "T1",
+      "label": "PRIMARY_HISTORICAL_INTERPRETIVE_SOURCE",
+      "allowedRole": [
+        "SOURCE_BOUND_INTERPRETATION",
+        "HISTORICAL_PROVENANCE"
+      ],
+      "forbiddenRole": [
+        "PHI_OS_PREDICTION_AUTHORITY",
+        "REALITY_TRUTH"
+      ],
+      "automaticCanonicalPromotion": false,
+      "rightsGateRequired": true
+    },
+    {
+      "tier": "T2",
+      "label": "GOVERNED_SYMBOLIC_OR_PSYCHOLOGICAL_REFLECTIVE_LENS",
+      "allowedRole": [
+        "REFLECTIVE_PERSPECTIVE",
+        "QUESTION_GENERATION"
+      ],
+      "forbiddenRole": [
+        "DIAGNOSIS",
+        "HIDDEN_STATE_CERTAINTY",
+        "UNIVERSAL_CARD_TRUTH"
+      ],
+      "automaticCanonicalPromotion": false,
+      "rightsGateRequired": true
+    },
+    {
+      "tier": "T3",
+      "label": "OWNED_OR_LICENSED_MODERN_SOURCE",
+      "allowedRole": [
+        "LICENSED_SOURCE_BOUND_PERSPECTIVE"
+      ],
+      "forbiddenRole": [
+        "UNATTRIBUTED_BLEND"
+      ],
+      "automaticCanonicalPromotion": false,
+      "rightsGateRequired": true
+    },
+    {
+      "tier": "T4",
+      "label": "PRIVATE_REFERENCE",
+      "allowedRole": [
+        "INTERNAL_COVERAGE_AUDIT",
+        "INTERNAL_EDITORIAL_COMPARISON",
+        "HUMAN_REVIEW_REFERENCE"
+      ],
+      "forbiddenRole": [
+        "PUBLIC_TEXT_VENDING",
+        "PUBLIC_CORPUS_INGESTION",
+        "RUNTIME_MEANING_AUTHORITY"
+      ],
+      "automaticCanonicalPromotion": false,
+      "rightsGateRequired": true
+    },
+    {
+      "tier": "T5",
+      "label": "WEB_DISCOVERY",
+      "allowedRole": [
+        "CANDIDATE_DISCOVERY"
+      ],
+      "forbiddenRole": [
+        "SCRAPE_TO_CANONICAL",
+        "DIRECT_RUNTIME_MEANING_AUTHORITY"
+      ],
+      "automaticCanonicalPromotion": false,
+      "rightsGateRequired": true
+    }
+  ],
+  "promotionRule": "SOURCE_TIER_NEVER_OVERRIDES_RIGHTS_CLASS_OR_HUMAN_ADMISSION"
+}

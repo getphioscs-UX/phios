@@ -1,0 +1,57 @@
+{
+  "contractCode": "PHI-OS-DAR-W3-CANONICAL-FIELD-RUNTIME-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W3",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_CANONICAL_FIELD_CONTRACT",
+  "canonicalModel": {
+    "personEntities": "persons[] use person-role-contract-v1.json",
+    "roleBindings": "testator/executors/guardians/beneficiaries/witnesses/translators are personId references",
+    "assetEntities": "typed asset arrays use will-asset-type-registry-v1.json",
+    "distributionEntities": "specificGifts[] and residuaryDistribution[] use will-distribution-contract-v1.json"
+  },
+  "requiredWillDomains": [
+    "testator",
+    "jurisdiction",
+    "domicile",
+    "executors",
+    "substituteExecutors",
+    "guardians",
+    "substituteGuardians",
+    "beneficiaries",
+    "properties",
+    "businessInterests",
+    "bankAssets",
+    "investments",
+    "insurance",
+    "epf",
+    "prs",
+    "vehicles",
+    "jewellery",
+    "digitalAssets",
+    "otherAssets",
+    "specificGifts",
+    "residuaryDistribution",
+    "trustInstructions",
+    "digitalAssetInstructions",
+    "language",
+    "translatorRequired"
+  ],
+  "legacyPresentationCodes": {
+    "codes": [
+      "A1",
+      "A2",
+      "C1",
+      "C2"
+    ],
+    "domainAuthority": false,
+    "migrationTreatment": "presentation aliases only; prohibited as canonical domain fields"
+  },
+  "invariants": [
+    "missing data remains missing",
+    "no implicit person creation",
+    "no jurisdiction inference",
+    "asset capture does not determine legal ownership or estate inclusion",
+    "input schema validation does not create legal effect"
+  ]
+}

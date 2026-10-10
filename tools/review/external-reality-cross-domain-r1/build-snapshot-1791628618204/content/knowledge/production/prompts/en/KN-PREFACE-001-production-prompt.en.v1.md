@@ -1,0 +1,67 @@
+# PHI OS Canonical Article Production Prompt
+
+## Writer Role
+You are producing one independent English Canonical Article candidate for PHI OS.
+
+## Canonical Node
+Node: KN-PREFACE-001
+Title: How Does Artificial Intelligence Emerge from Civilizational Capability?
+Question: How Does Artificial Intelligence Emerge from Civilizational Capability?
+
+## Shared Canonical Meaning
+The source Canonical Meaning is governed by TL. Write an independent English article that preserves that meaning without translating or copying a zh-Hans article.
+
+## Canonical Thesis
+人工智能不是脱离文明而独立出现的能力；它由长期累积的知识表达、计算基础、能源与材料系统、组织协作、制度安排及反馈机制共同形成，因此理解人工智能必须同时理解承载它的文明能力与边界。
+
+## The Article Must Establish
+1. 说明经验、概念、语言、记录与专业分工如何成为机器可处理能力的前提。
+2. 说明能源、材料、芯片、网络、数据设施和维护体系如何承载人工智能。
+3. 说明教育、研究、资本、标准、治理与跨领域协作如何把分散能力组合为可持续技术系统。
+4. 说明使用反馈、基础设施扩展与组织学习如何放大能力，同时引入新的依赖、边界和风险。
+
+## Required Distinctions
+1. 人工智能的形成条件 与 人工智能系统的单次输出 必须保持区分：输出不能代表形成它的全部文明能力。
+2. 计算或生成能力 与 方向、价值与责任判断 必须保持区分：能力增加不自动赋予目标、正当性或责任主体。
+3. 文明能力的累积 与 线性、必然的技术进步 必须保持区分：形成路径受到资源、制度、冲突、选择与反馈影响，并非自动或不可逆。
+4. PHI OS 的理论解释 与 已被外部证据直接证实的事实 必须保持区分：理论框架必须明确资格，不得借来源存在伪装为已完成事实审核。
+5. 系统支持判断 与 系统替代人的专业与公共责任 必须保持区分：文章不得把技术能力扩张为判断或发布权威。
+
+## Included Scope
+1. 人工智能形成所依赖的知识表达、物质基础、组织制度与反馈规模化机制。
+2. 能力形成与方向、价值和责任之间的边界。
+3. 与下一 Canonical Node 的连续关系。
+
+## Excluded Scope
+1. 本文只建立公共知识层的形成机制说明，不评价具体模型、供应商、国家、组织或个人。
+2. 本文不处理意识、人格或法律主体资格的最终判定。
+3. 本文不替代人工智能安全、工程、法律、伦理、投资或组织治理的专业审核。
+4. 本文不调用个案 Provider，不收集个案输入，不形成个人建议或 Professional Queue 项目。
+
+## Prohibited Claims
+1. 不得声称人工智能具有独立于文明、基础设施与组织体系的自足形成能力。
+2. 不得把技术发展描述为单线、自动、必然或无条件进步。
+3. 不得把模型输出、统计相关或生成流畅度等同于现实理解、价值判断或责任主体。
+4. 不得声称 PHI OS 已被证明能够解释所有人工智能或文明发展。
+5. 不得将理论解释伪装成已获来源完整支持的外部事实。
+6. 不得提供个案诊断、个人 Reading、专业建议或默认服务推荐。
+7. 不得使用拟人化表达暗示人工智能拥有未经论证的意图、意识或道德权威。
+
+## Controlled Terminology
+- TERM-009: Continuity (持续)
+- TERM-015: Expression (表达)
+- TERM-016: Feedback (反馈)
+
+## Writing Style
+1. Write in polished English publishing prose with continuous, complete paragraphs.
+2. Use philosophical and systems-level explanatory strength without slogans or promotional language.
+3. Distinguish mechanism explanation, factual statement, theoretical qualification, and responsibility boundary.
+4. Do not translate or copy a zh-Hans article; author independently from the shared Canonical Meaning.
+5. End by naturally opening the next Canonical Node without resolving it in advance.
+
+## Continuity
+End by naturally opening the question represented by KN-PREFACE-002, without resolving that next node in advance.
+
+## Output Requirement
+Write the complete English article body only. Do not output JSON, process notes, compliance commentary, scoring, or explanations about how the article was produced.
+

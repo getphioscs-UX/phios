@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-RJX-W0-ROLE-RECONCILIATION-v1.0.0",
+  "phase": "RJX",
+  "work": "RJX-W0",
+  "baselineCommit": "655a6136919fa820f6d064237cf01a8fc4f8f667",
+  "recordedAt": "2026-08-14",
+  "status": "CANDIDATE_RECONCILED",
+  "sourceAuthorities": {
+    "journeyFreeze": {
+      "path": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+      "sha256": "0f63eb01bd9af5a0ec7b8d912a2cabcd3ef25e67c515a84bbc0a99bc4dc2b47c"
+    },
+    "bookW1": {
+      "path": "content/knowledge/migrations/book-w1-five-volume-acceptance-v1.json",
+      "sha256": "e079410c9b06b530a29592cc1fed781f2eae57c6ab8281e42aeb34a7042fbfff"
+    }
+  },
+  "acceptanceEvidence": {
+    "requestClassCount": 6,
+    "allClassesHaveDestination": true,
+    "defaultAllQuestionAssumption": false,
+    "publicPrivateBoundaryCrossingCount": 0,
+    "unsupportedSilentlyAccepted": false
+  },
+  "providerDefaultRepairCandidate": {
+    "required": true,
+    "paths": [
+      "functions/runtime/entry/provider-router.js",
+      "functions/api/reconstruct-reality.js"
+    ],
+    "beforeHashes": {
+      "providerRouter": "8e12b5a7df15c170135527c5f14fdf2d2d2c0a7a78b40dd244d61df28cd01d67",
+      "reconstructApi": "83085d56a41e975fc6211699f79125c6e76d2139f7f0adbbc6b8cc8a139b8e77"
+    },
+    "rule": "OpenAI Entry requires options.openAIAllowed === true; absence of explicit permission must be false."
+  },
+  "productionEffect": "none"
+}

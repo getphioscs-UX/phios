@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-VI-KNOWLEDGE-STATE-CONTRACT-v1.0.0",
+  "version": "1.1.0",
+  "status": "ACTIVE",
+  "bookCode": "BOOK-6",
+  "partCode": "PART-13",
+  "states": [
+    {
+      "id": "CANONICAL_HISTORY",
+      "labelZh": "已发生历史",
+      "labelEn": "Historical",
+      "rule": "Completed historical claims grounded in admitted manuscript/evidence. Never mutate into current data."
+    },
+    {
+      "id": "HISTORICAL_RECONSTRUCTION",
+      "labelZh": "历史重建",
+      "labelEn": "Historical Reconstruction",
+      "rule": "Reconstructed historical state; uncertainty and source limits must remain visible."
+    },
+    {
+      "id": "STRUCTURAL_KNOWLEDGE",
+      "labelZh": "结构知识",
+      "labelEn": "Structural Knowledge",
+      "rule": "Durable system relationships grounded in admitted historical/manuscript evidence. May remain readable when no live current value is admitted, but must not be presented as a live metric."
+    },
+    {
+      "id": "OBSERVED_SIGNAL",
+      "labelZh": "观察讯号",
+      "labelEn": "Observed Signal",
+      "rule": "A registered observation target or evidenced directional signal. It does not become CURRENT_DATA or a forecast without dated source admission."
+    },
+    {
+      "id": "CURRENT_DATA",
+      "labelZh": "当前资料",
+      "labelEn": "Current",
+      "rule": "Requires asOfDate, sourceDate, retrievedAt/lastReviewedAt and freshness. STALE data must not present as current."
+    },
+    {
+      "id": "DERIVED_RUNTIME_READOUT",
+      "labelZh": "推导运行读数",
+      "labelEn": "Derived Runtime Readout",
+      "rule": "Derived from admitted inputs; derivation is not an observed fact."
+    },
+    {
+      "id": "CONDITIONAL_PROJECTION",
+      "labelZh": "条件性投影",
+      "labelEn": "Projection",
+      "rule": "Projection ≠ Prediction. No forecast certainty, guaranteed outcome or future fact."
+    },
+    {
+      "id": "UNKNOWN",
+      "labelZh": "未知",
+      "labelEn": "Unknown",
+      "rule": "A valid governed output. Missing evidence must not be hidden or filled by confident inference."
+    }
+  ],
+  "sourceClasses": [
+    "PRIMARY_SOURCE",
+    "OFFICIAL_RECORD",
+    "OFFICIAL_DATASET",
+    "SCHOLARLY_SYNTHESIS",
+    "VALIDATED_SURVEY",
+    "MANUSCRIPT_AUTHORITY",
+    "UNCERTAIN_OR_CONTESTED"
+  ],
+  "rules": {
+    "cases": [
+      "Historical identity/time/linkage may be CANONICAL_HISTORY when grounded; contested granular fields remain UNKNOWN or HISTORICAL_RECONSTRUCTION."
+    ],
+    "windows": [
+      "Window membership is historical indexing; causal weighting remains case-scoped and may remain UNKNOWN."
+    ],
+    "snapshots": [
+      "Historical snapshots may be CANONICAL_HISTORY; 2026 remains UNKNOWN until current data is admitted. Static visual availability never proves data currency."
+    ],
+    "dossiers": [
+      "CURRENT_DATA requires dates/freshness/source provenance.",
+      "STRUCTURAL_KNOWLEDGE and HISTORICAL_DERIVATION remain readable when current values are absent.",
+      "UNKNOWN must be scoped to the unresolved field and must not blank an otherwise supported dossier."
+    ],
+    "livedReality": [
+      "Observed and derived values must remain distinguishable; no universal 0–100 score.",
+      "Structural transmission mechanisms may be shown without current metrics when grounded in admitted historical/manuscript evidence.",
+      "Missing current values must not collapse a lived-reality card into a placeholder."
+    ],
+    "projection": [
+      "13.84 is CONDITIONAL_PROJECTION only; 13.85 is possibility-space/observation-threshold framing. Projection ≠ Prediction."
+    ],
+    "runtimePositions": [
+      "The 48-position registry is STRUCTURAL_KNOWLEDGE, not a deterministic civilization timeline.",
+      "A current entity-to-position correspondence is DERIVED_RUNTIME_READOUT and requires admitted evidence.",
+      "A transition signal may be OBSERVED_SIGNAL; a future reachable position is CONDITIONAL_PROJECTION only.",
+      "One entity may have primary, secondary and UNKNOWN correspondences by subsystem; no forced single global phase.",
+      "Capacity, load, alignment, resilience, adaptability, future capacity, external dependency, technology and population are reading dimensions/transition conditions, not the axes that generate the 48 positions."
+    ],
+    "runtimePositionW6": [
+      "A dossier observation target is STRUCTURAL_KNOWLEDGE until admitted current evidence supports OBSERVED_SIGNAL.",
+      "CURRENT_DATA requires dated provenance, freshness and source admission; structural prose cannot be promoted to CURRENT_DATA.",
+      "Runtime-position correspondence is DERIVED_RUNTIME_READOUT and requires human admission.",
+      "Observation-threshold crossing is not inferred from one event, one metric or a score; criteria remain explicit and human-governed.",
+      "Reachable runtime positions are CONDITIONAL_PROJECTION only and must preserve enabling conditions, closing conditions and UNKNOWN."
+    ]
+  },
+  "prohibited": [
+    "CURRENT_DATA_AS_CANONICAL_HISTORY",
+    "UNKNOWN_HIDDEN_AS_CONFIDENT_FILLER",
+    "PROJECTION_AS_FORECAST_CERTAINTY",
+    "EXTERNAL_RANKING_AS_PHI_OS_VERDICT",
+    "RUNTIME_POSITION_AS_DETERMINISTIC_CIVILIZATION_STAGE",
+    "TIME_COORDINATE_AS_DESTINY_TIMELINE",
+    "OBSERVATION_TARGET_AS_OBSERVED_SIGNAL",
+    "THRESHOLD_SCORE_AS_FACT",
+    "REACHABLE_POSITION_AS_PREDICTION"
+  ]
+}

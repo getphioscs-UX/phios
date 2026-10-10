@@ -1,0 +1,28 @@
+{
+  "contractCode": "PHI-OS-RNE-W5-NAVIGATION-RISK-CONTEXT-v1",
+  "contractVersion": "1.0.0",
+  "work": "RNE-W5",
+  "runtimeCode": "RNE",
+  "status": "validation_only",
+  "productionStatus": "validation_only",
+  "schemaReference": "content/runtime/reality-navigation-engine/schemas/navigation-risk-context-v1.schema.json",
+  "registryReference": "content/runtime/reality-navigation-engine/registries/canonical-risk-context-kind-registry-v1.json",
+  "reads": [
+    "RNE_BOUNDED_OPTION_SET",
+    "RNE_NAVIGATION_CONSTRAINT_GRAPH",
+    "RMO_UNKNOWN_REFERENCES",
+    "GOVERNED_KNOWN_RISK_REFERENCES"
+  ],
+  "rules": {
+    "knownRiskMustRemainReferencedToGovernedSource": true,
+    "unknownMustRemainExplicit": true,
+    "dependencyDerivedOnlyFromConstraintGraph": true,
+    "riskProbabilityCreated": false,
+    "riskSeverityScoreCreated": false,
+    "predictionCreated": false,
+    "recommendationCreated": false,
+    "commandCreated": false,
+    "professionalJudgmentCreated": false,
+    "persistentStoreActivated": false
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "PHI-OS-ACADEMIC-INSTRUMENT-STATUS-MODEL-v1.0.0",
+  "work": "PRF-W10A",
+  "baselineCommit": "c259917fbc55b57d35402a591f0db2e7e7b7e8c3",
+  "status": "MACHINE_CANDIDATE",
+  "principle": "Availability, norming and scoring provenance are orthogonal. AVAILABLE never implies NORMED, and an externally or adaptively scored instrument never transfers scientific authority to symbolic methods.",
+  "axes": {
+    "availabilityState": [
+      "UNAVAILABLE",
+      "AVAILABLE",
+      "AVAILABLE_WHEN_CONFIGURED"
+    ],
+    "normingState": [
+      "NOT_NORMED",
+      "REFERENCE_NORMS_AVAILABLE",
+      "NORMED"
+    ],
+    "scoringState": [
+      "FIRST_PARTY_SCORED",
+      "RAW_PERFORMANCE_ONLY",
+      "EXTERNALLY_SCORED",
+      "ADAPTED_SCORED"
+    ],
+    "publicationState": [
+      "INTERNAL_ONLY",
+      "CANDIDATE_UNPUBLISHED",
+      "CUSTOMER_PUBLISHABLE"
+    ]
+  },
+  "definitions": {
+    "AVAILABLE": "Instrument logic, rights, scoring path, runtime and signal mapping are admitted at this tranche. Customer publication can still be blocked by PRF-W12.",
+    "AVAILABLE_WHEN_CONFIGURED": "All PHI OS implementation work is admitted but a provider credential or external configuration is required at deployment.",
+    "NORMED": "An exact reference population, transformation and version are admitted for the exact instrument. Norming never transfers between instruments or translations.",
+    "EXTERNALLY_SCORED": "The authoritative score is returned by the named external provider. PHI OS may validate and map the result but does not silently reproduce provider scoring.",
+    "ADAPTED_SCORED": "PHI OS owns an explicitly adapted scoring rule derived from an admitted source. The result must not be presented as the source organisation's official score."
+  },
+  "promotionRule": {
+    "availabilityRequires": [
+      "rights_or_license_admitted",
+      "instrument_version_frozen",
+      "scoring_path_frozen",
+      "claim_boundary_frozen",
+      "runtime_implemented",
+      "profile_signal_mapping_implemented",
+      "machine_acceptance"
+    ],
+    "customerPublicationRequiresAdditionally": [
+      "PRF-W11_PROGRESSIVE_UX",
+      "PRF-W12_MACHINE_HUMAN_ACCEPTANCE_AND_FREEZE"
+    ],
+    "normingRequiredForAvailability": false
+  },
+  "governance": {
+    "availableDoesNotMeanNormed": true,
+    "normedDoesNotMeanDiagnostic": true,
+    "externalScoringDoesNotTransferProviderAuthority": true,
+    "adaptedScoringMustDiscloseAdaptation": true,
+    "symbolicScientificValidationTransferAllowed": false,
+    "customerPublishableBeforePrfW12": false
+  },
+  "gate": "check:profile:w10a-status-model"
+}

@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "PHI-OS-CARC-W2-MIR-RECONCILIATION-v1.0.0",
+  "phase": "CARC",
+  "work": "CARC-W2",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "RECONCILED_NO_SECOND_INTERPRETATION_RUNTIME",
+  "result": "EXPECTED_SUCCESSOR_CHANGE",
+  "artifacts": [
+    {
+      "role": "INTERPRETATION_AUTHORITY",
+      "path": "content/interpretation/governance/interpretation-authority-boundary-v1.json",
+      "sha256": "7c390aa6e4987f415a6a8f2b7dc16a16fb0c25f84424fa128c88e16a76846a27"
+    },
+    {
+      "role": "INTERPRETATION_KERNEL",
+      "path": "content/interpretation/runtime/interpretation-kernel-contract-v1.json",
+      "sha256": "1380dd78a24f109e3dd8a4f4b9c7e67157130a83e16144165e95277c1dbe6df5"
+    },
+    {
+      "role": "SHARED_INTERPRETATION_COMPOSITION",
+      "path": "content/professional/method-runtime/shared-interpretation-runtime-v1.json",
+      "sha256": "620302fcad136c603a3d65d1eda6b2e781ffcdf2254939d5fed67fcf9e3832b4"
+    },
+    {
+      "role": "CANONICAL_MEANING_RUNTIME",
+      "path": "content/professional/canonical-meaning-runtime/contracts/canonical-meaning-runtime-v1.json",
+      "sha256": "a88c8dd422e222fee7efd4ee4ce9f3cc4b9e780f4b7fbc11ac0c4d0250c55936"
+    },
+    {
+      "role": "KNOWLEDGE_RUNTIME",
+      "path": "content/knowledge/contracts/knowledge-registry-authority-v2.json",
+      "sha256": "9f254ebee08023fdf0eeca02f44a9d68a8638f252a07940c0e86a94c5053ac13"
+    },
+    {
+      "role": "RMO_INTERPRETATION_STATE_OR_BOUNDARY",
+      "path": "content/runtime/reality-model-runtime/contracts/interpretation-inference-boundary-contract-v1.json",
+      "sha256": "4be26255aca8272dcf469de8ae60a037db95eb41478834981b17d614349e2570"
+    },
+    {
+      "role": "READING_RUNTIME",
+      "path": "content/runtime/reality-readout-engine/contracts/rre-authority-boundary-v1.json",
+      "sha256": "a5ed4b8440a03c27418a5301890f134c1f7b37ba2be2a24e9cf7f2c949b8b26c"
+    }
+  ],
+  "mustRemainDistinct": [
+    [
+      "INTERPRETATION_KERNEL",
+      "SHARED_INTERPRETATION_COMPOSITION"
+    ],
+    [
+      "INTERPRETATION_KERNEL",
+      "CANONICAL_MEANING_RUNTIME"
+    ],
+    [
+      "INTERPRETATION_KERNEL",
+      "KNOWLEDGE_RUNTIME"
+    ],
+    [
+      "INTERPRETATION_KERNEL",
+      "RMO_INTERPRETATION_STATE_OR_BOUNDARY"
+    ],
+    [
+      "INTERPRETATION_KERNEL",
+      "RRE_READING_RUNTIME"
+    ]
+  ],
+  "proof": {
+    "artifactPathsUnique": true,
+    "artifactDigestsUnique": true,
+    "newInterpretationRuntimeCreated": false,
+    "frozenAuthorityMutated": false,
+    "wholePackageDigestAcceptedWithoutSuccessor": false
+  },
+  "currentChecker": {
+    "path": "scripts/check-mir-current-baseline.mjs",
+    "sha256": "56dc1555bf3056a975ab4b60facb2d54d5eda6cf531934637bc15287da38a1cf",
+    "npmAlias": "check:mir-baseline"
+  },
+  "rules": {
+    "interpretationKernelIsNotComposition": true,
+    "interpretationIsNotCanonicalMeaning": true,
+    "interpretationIsNotKnowledgeAuthority": true,
+    "interpretationIsNotRmoState": true,
+    "interpretationIsNotReadingRuntime": true
+  }
+}

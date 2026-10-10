@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-HFP-W6-SOURCE-LINEAGE-CONTRACT-v1.0.0",
+  "phase": "HFP",
+  "work": "HFP-W6",
+  "requiredLineage": {
+    "FDR": [
+      "snapshotId",
+      "digest"
+    ],
+    "FCR": [
+      "calculationId",
+      "resultDigest",
+      "fdrDigest",
+      "assumptionDigest"
+    ],
+    "FAR": [
+      "analysisId",
+      "resultDigest",
+      "fcrResultDigest",
+      "fdrDigest"
+    ],
+    "PFR": [
+      "contributionId",
+      "sourceDigest",
+      "authorReference"
+    ],
+    "DAR": [
+      "stateReference",
+      "sourceDigest"
+    ],
+    "ACCOUNT": [
+      "accountReference"
+    ]
+  },
+  "rules": {
+    "fcrFdrDigestMustMatch": true,
+    "farFcrDigestMustMatch": true,
+    "farFdrDigestMustMatch": true,
+    "lineageMismatchFailClosed": true,
+    "sourcePayloadMutationForbidden": true
+  }
+}

@@ -1,0 +1,612 @@
+{
+  "workId": "PHI-OS-PRODUCTION-CLOSURE",
+  "inventoryOnly": true,
+  "existingAuthorityReplaced": false,
+  "capabilities": [
+    {
+      "capability": "BOOKS",
+      "canonicalOwner": "Eight-volume architecture pointer",
+      "sourcePath": "content/registry/current-book-architecture.json",
+      "runtimeOwner": "assets/js/web-production/public-surface-data-seven.js",
+      "rendererOwner": "assets/js/pages/books.js",
+      "customerRoute": "/books/",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "content/registry/current-book-architecture.json",
+          "exists": true,
+          "sha256": "b866a9f3d8ad8f094453d64586d0d67e3e50d89214a577273ae338cf99727ea5"
+        },
+        {
+          "path": "assets/js/web-production/public-surface-data-seven.js",
+          "exists": true,
+          "sha256": "62daaf63dfcc7544d2425b15202b9e339de5f1fa9f73502f50f2f6dd07b5a902"
+        },
+        {
+          "path": "assets/js/pages/books.js",
+          "exists": true,
+          "sha256": "ca3e66c0688804249d31ac6d55d3ff69f73be6a15a238c82622ce6032e64c3a8"
+        }
+      ],
+      "productionStatus": "ANONYMOUS_PUBLIC_SURFACE_PASS_PRODUCT_ADMISSION_UNPROVEN",
+      "missingDeclaredPaths": [],
+      "productionEvidence": {
+        "observations": 4,
+        "pass": 4,
+        "fail": 0,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      }
+    },
+    {
+      "capability": "ARTICLES",
+      "canonicalOwner": "Published-only knowledge read model",
+      "sourcePath": "content/knowledge/public/public-knowledge-catalog.json",
+      "runtimeOwner": "assets/js/knowledge/published-content.js",
+      "rendererOwner": "assets/customer-ui/js/surfaces/knowledge.js",
+      "customerRoute": "/articles/",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "content/knowledge/public/public-knowledge-catalog.json",
+          "exists": true,
+          "sha256": "2004366928003948ce37184b733c18319276f1cf63a87065c12c474ad2f227aa"
+        },
+        {
+          "path": "assets/js/knowledge/published-content.js",
+          "exists": true,
+          "sha256": "7c09737aa8cf9647c8c84d4049706576ae1782d419fd1a3024aa784e4841b9de"
+        },
+        {
+          "path": "assets/customer-ui/js/surfaces/knowledge.js",
+          "exists": true,
+          "sha256": "44d62adb38b4e09103e4c9266af9dfadc881e2da1315c794c2483f6395e728cd"
+        },
+        {
+          "path": "assets/js/pages/article.js",
+          "exists": true,
+          "sha256": "a8ec778ddd234bddfe3112b392607bc621ff1e58981ff5a1da48cdc04f81b106"
+        }
+      ],
+      "productionStatus": "OBSERVED_PUBLIC_SURFACE_FAILURE_ADMISSION_NOT_GRANTED",
+      "missingDeclaredPaths": [],
+      "additionalArticleBodyRenderer": "assets/js/pages/article.js",
+      "productionEvidence": {
+        "observations": 4,
+        "pass": 0,
+        "fail": 4,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      }
+    },
+    {
+      "capability": "ATLAS",
+      "canonicalOwner": "Civilization / Reconfiguration independently scoped owners",
+      "sourcePath": "content/civilization-atlas/cases/civilization-case-registry-v1.json",
+      "runtimeOwner": "assets/js/pages/civilization-atlas.js",
+      "rendererOwner": "assets/js/pages/civilization-atlas/atlas-shell.js",
+      "customerRoute": "/books/reality-differentiation/#atlas",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "content/civilization-atlas/cases/civilization-case-registry-v1.json",
+          "exists": true,
+          "sha256": "6291f76099bfa3f0747c2c29ced4f491045d221e64730ae710031d7f821c3d1a"
+        },
+        {
+          "path": "assets/js/pages/civilization-atlas.js",
+          "exists": true,
+          "sha256": "33165c38f6af9be511e3dab543cb1bb933728a1926f3dd7380b60e75bd025764"
+        },
+        {
+          "path": "assets/js/pages/civilization-atlas/atlas-shell.js",
+          "exists": true,
+          "sha256": "7a4455609604c7c9140775e168fc88323ac2c5b634235f56fd14b7d19ba1a6bd"
+        }
+      ],
+      "productionStatus": "ANONYMOUS_PUBLIC_SURFACE_PASS_PRODUCT_ADMISSION_UNPROVEN",
+      "missingDeclaredPaths": [],
+      "productionEvidence": {
+        "observations": 4,
+        "pass": 4,
+        "fail": 0,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      }
+    },
+    {
+      "capability": "REPORTS",
+      "canonicalOwner": "Existing canonical report lifecycle and method release",
+      "sourcePath": "content/runtime/customer-report-runtime/registries/report-lifecycle-state-registry-v2.json",
+      "runtimeOwner": "functions/account/ziwei-account-delivery.js",
+      "rendererOwner": "assets/js/pages/wpr-report-workspace-production.js",
+      "customerRoute": "/professional/reports/",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "content/runtime/customer-report-runtime/registries/report-lifecycle-state-registry-v2.json",
+          "exists": true,
+          "sha256": "efd1b3e808385a8d93bba0ef30a51fbdbd9d9d4a9cf0a1427bde2bf2f2d5a72f"
+        },
+        {
+          "path": "functions/account/ziwei-account-delivery.js",
+          "exists": true,
+          "sha256": "1ae6c8446e7c61e9faf086a526dc70e859372cd77e30cc9fe9484333fb632acd"
+        },
+        {
+          "path": "assets/js/pages/wpr-report-workspace-production.js",
+          "exists": true,
+          "sha256": "e586be209943580ff7f67de8422905ef50a08da89fa9bba16284cb7c72e7322a"
+        }
+      ],
+      "productionStatus": "ANONYMOUS_PUBLIC_SURFACE_PASS_PRODUCT_ADMISSION_UNPROVEN",
+      "missingDeclaredPaths": [],
+      "productionEvidence": {
+        "observations": 4,
+        "pass": 4,
+        "fail": 0,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      }
+    },
+    {
+      "capability": "COMMERCE",
+      "canonicalOwner": "PWS COM-STRIPE-R1 product identity",
+      "sourcePath": "functions/pws/commercial/stripe-product-registry.js",
+      "runtimeOwner": "functions/commerce/commerce-stripe-api.js",
+      "rendererOwner": "functions/commerce/report-presentation.js",
+      "customerRoute": "/professional/services/",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "functions/pws/commercial/stripe-product-registry.js",
+          "exists": true,
+          "sha256": "bbd03b052ddeb8271f6b035601ec20c753c6cdd79a8f77685306e8de6ec9c223"
+        },
+        {
+          "path": "functions/commerce/commerce-stripe-api.js",
+          "exists": true,
+          "sha256": "f91e149b4dec2630420d336fa52efefa8d2530c8b480fa9d992430b2477a152b"
+        },
+        {
+          "path": "functions/commerce/report-presentation.js",
+          "exists": true,
+          "sha256": "e6db11178e2108ca108c54c6977f2179f4279ba2902430cf612fb3bed38a0cab"
+        }
+      ],
+      "productionStatus": "ANONYMOUS_PUBLIC_SURFACE_PASS_PRODUCT_ADMISSION_UNPROVEN",
+      "missingDeclaredPaths": [],
+      "productionEvidence": {
+        "observations": 4,
+        "pass": 4,
+        "fail": 0,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      },
+      "publicCatalogEvidence": {
+        "status": 200,
+        "environment": "QA",
+        "liveEnabled": false,
+        "checkoutAvailable": false
+      }
+    },
+    {
+      "capability": "ACCOUNT",
+      "canonicalOwner": "Existing authenticated account / ownership projection",
+      "sourcePath": "functions/account/oidc-auth.js",
+      "runtimeOwner": "functions/api/account-reports.js",
+      "rendererOwner": "assets/js/pages/account-method-status-v2.js",
+      "customerRoute": "/account/",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "functions/account/oidc-auth.js",
+          "exists": true,
+          "sha256": "f465f1f01fe86ccac89691dba4d966a69f240d82a7773b4860e5f72b29fe310b"
+        },
+        {
+          "path": "functions/api/account-reports.js",
+          "exists": true,
+          "sha256": "99657a9780b78d45ad7ba7adb68e69823433a5277a786785eb382f3da3d0cf8f"
+        },
+        {
+          "path": "assets/js/pages/account-method-status-v2.js",
+          "exists": true,
+          "sha256": "0bb70bf634811fb818dac9d7b6199ca75c88edc44dfa01b184bb4bc8d6bcb6bf"
+        }
+      ],
+      "productionStatus": "ANONYMOUS_PUBLIC_SURFACE_PASS_PRODUCT_ADMISSION_UNPROVEN",
+      "missingDeclaredPaths": [],
+      "productionEvidence": {
+        "observations": 4,
+        "pass": 4,
+        "fail": 0,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      }
+    },
+    {
+      "capability": "ASK",
+      "canonicalOwner": "Existing contextual Ask scope and source authority",
+      "sourcePath": "functions/contextual-ask/context-source-registry.js",
+      "runtimeOwner": "functions/contextual-ask/contextual-ask-runtime.js",
+      "rendererOwner": "assets/customer-ui/js/surfaces/contextual-ask.js",
+      "customerRoute": "/knowledge/ask/",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "functions/contextual-ask/context-source-registry.js",
+          "exists": true,
+          "sha256": "978dfbcf853f84564d99808372a76c403b6143a45f18cd214f661cd03cc4444f"
+        },
+        {
+          "path": "functions/contextual-ask/contextual-ask-runtime.js",
+          "exists": true,
+          "sha256": "6c092db735408ab69bf7fa8a001328c01a2dd4ccb8963912a2deee533fbddc05"
+        },
+        {
+          "path": "assets/customer-ui/js/surfaces/contextual-ask.js",
+          "exists": true,
+          "sha256": "0a8dd2cf3573fc7e54dc87acd09a6f360812413ae5ea72fb4ba1364105c3d657"
+        }
+      ],
+      "productionStatus": "ANONYMOUS_PUBLIC_SURFACE_PASS_PRODUCT_ADMISSION_UNPROVEN",
+      "missingDeclaredPaths": [],
+      "productionEvidence": {
+        "observations": 4,
+        "pass": 4,
+        "fail": 0,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      }
+    },
+    {
+      "capability": "PERSON",
+      "canonicalOwner": "Existing canonical account Person/subject binding",
+      "sourcePath": "functions/api/account-persons.js",
+      "runtimeOwner": "functions/symbolic-method-persistence/symbolic-account-identity-v1.js",
+      "rendererOwner": "assets/js/pages/my-reality.js",
+      "customerRoute": "/reality/",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "functions/api/account-persons.js",
+          "exists": true,
+          "sha256": "ccdeb6c8384fe97ce5133f2c63ff3276abd242b2f108713f9f95f15e7174e84f"
+        },
+        {
+          "path": "functions/symbolic-method-persistence/symbolic-account-identity-v1.js",
+          "exists": true,
+          "sha256": "18456c9dc5878e7a6eb2c5f727b9065c0cec0a8192e91ba978f6975dbf6de2b4"
+        },
+        {
+          "path": "assets/js/pages/my-reality.js",
+          "exists": true,
+          "sha256": "7df7399a885e62796369cf6faf1c608ee0bd39a82d9571f5ef937238970055e5"
+        }
+      ],
+      "productionStatus": "ANONYMOUS_PUBLIC_SURFACE_PASS_PRODUCT_ADMISSION_UNPROVEN",
+      "missingDeclaredPaths": [],
+      "productionEvidence": {
+        "observations": 4,
+        "pass": 4,
+        "fail": 0,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      }
+    },
+    {
+      "capability": "AUTH",
+      "canonicalOwner": "Existing Auth0 OIDC authority",
+      "sourcePath": "functions/account/oidc-auth.js",
+      "runtimeOwner": "functions/api/auth/[[action]].js",
+      "rendererOwner": "account/index.html",
+      "customerRoute": "/account/",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "functions/account/oidc-auth.js",
+          "exists": true,
+          "sha256": "f465f1f01fe86ccac89691dba4d966a69f240d82a7773b4860e5f72b29fe310b"
+        },
+        {
+          "path": "functions/api/auth/[[action]].js",
+          "exists": true,
+          "sha256": "00d1068377151cb0f302cad2a6c07f567506daf40780ed5eee617920896b55c9"
+        },
+        {
+          "path": "account/index.html",
+          "exists": true,
+          "sha256": "0cb97b7c13b0914012aabd50f4174bfa94912c6042ef990857d1af81697cb20d"
+        }
+      ],
+      "productionStatus": "ANONYMOUS_PUBLIC_SURFACE_PASS_PRODUCT_ADMISSION_UNPROVEN",
+      "missingDeclaredPaths": [],
+      "productionEvidence": {
+        "observations": 4,
+        "pass": 4,
+        "fail": 0,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      }
+    },
+    {
+      "capability": "R2",
+      "canonicalOwner": "Public asset registry and existing resolver; private bindings separately gated",
+      "sourcePath": "content/registry/public-assets.json",
+      "runtimeOwner": "functions/api/public-asset-config.js",
+      "rendererOwner": "assets/js/runtime/web-production/asset-resolver.js",
+      "customerRoute": "/api/public-asset-config",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "content/registry/public-assets.json",
+          "exists": true,
+          "sha256": "52f013d7f6f2b81c9204611df1b20937335133d2b17ddc10830d5e91dc062742"
+        },
+        {
+          "path": "functions/api/public-asset-config.js",
+          "exists": true,
+          "sha256": "bdce7d5bae77e191235968d45f1e8dea648013bede56533df3ba096461e3c5da"
+        },
+        {
+          "path": "assets/js/runtime/web-production/asset-resolver.js",
+          "exists": true,
+          "sha256": "9c8b37b74f53bd8a54b9a730957627b1f96d9eeee8069d9b607c9112f2dcd23f"
+        }
+      ],
+      "productionStatus": "NO_PUBLIC_RENDER_PROOF_PRIVATE_OR_NON_CUSTOMER_CAPABILITY",
+      "missingDeclaredPaths": [],
+      "productionEvidence": {
+        "observations": 0,
+        "pass": 0,
+        "fail": 0,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      },
+      "publicAssetEvidence": "content/production-closure/visual-runtime-census.json"
+    },
+    {
+      "capability": "D1",
+      "canonicalOwner": "Existing registered migrations / RUNTIME_DB",
+      "sourcePath": "content/registry/runtime-migrations.json",
+      "runtimeOwner": "wrangler.jsonc",
+      "rendererOwner": "UNKNOWN_NOT_A_CUSTOMER_RENDERER",
+      "customerRoute": "/account/",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "content/registry/runtime-migrations.json",
+          "exists": true,
+          "sha256": "c20836f29b45371f8c866bc02fc9a24b0b5df3fbeecd3bd53dd8e4a352342527"
+        },
+        {
+          "path": "wrangler.jsonc",
+          "exists": true,
+          "sha256": "696145ed9d60af5a9cb8f388d6b2bc69639908692449f942b73114c24081e83f"
+        }
+      ],
+      "productionStatus": "ANONYMOUS_PUBLIC_SURFACE_PASS_PRODUCT_ADMISSION_UNPROVEN",
+      "missingDeclaredPaths": [
+        "UNKNOWN_NOT_A_CUSTOMER_RENDERER"
+      ],
+      "productionEvidence": {
+        "observations": 4,
+        "pass": 4,
+        "fail": 0,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      },
+      "localMigrationEvidence": "content/production-closure/migration-boundary-evidence.json",
+      "productionMigrationApplication": "UNKNOWN"
+    },
+    {
+      "capability": "LOCALE",
+      "canonicalOwner": "Existing public and customer locale projections",
+      "sourcePath": "assets/js/i18n.js",
+      "runtimeOwner": "assets/customer-ui/js/locale.js",
+      "rendererOwner": "assets/js/public-shell-v2.js",
+      "customerRoute": "/",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "assets/js/i18n.js",
+          "exists": true,
+          "sha256": "d5c4a0e03418be95da5d0ac05270d2302d4261999ad98819d4ced3599af2888f"
+        },
+        {
+          "path": "assets/customer-ui/js/locale.js",
+          "exists": true,
+          "sha256": "900e424ada768a0af6f2ef01d19e1e059499ea1e890ab407312c016d371b183a"
+        },
+        {
+          "path": "assets/js/public-shell-v2.js",
+          "exists": true,
+          "sha256": "745beef608946776ed8839f26fb68ca6c8272001f0523d981b5f2dd868df53ce"
+        }
+      ],
+      "productionStatus": "ANONYMOUS_PUBLIC_SURFACE_PASS_PRODUCT_ADMISSION_UNPROVEN",
+      "missingDeclaredPaths": [],
+      "productionEvidence": {
+        "observations": 4,
+        "pass": 4,
+        "fail": 0,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      }
+    },
+    {
+      "capability": "FINANCIAL",
+      "canonicalOwner": "Existing FDR/FCR/FAR/HFP/PFR authority",
+      "sourcePath": "functions/financial/product-activation/financial-product-runtime.js",
+      "runtimeOwner": "functions/financial/analysis-runtime/financial-analysis-runtime.js",
+      "rendererOwner": "assets/js/pages/financial-runtime-product.js",
+      "customerRoute": "/professional/financial/",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "functions/financial/product-activation/financial-product-runtime.js",
+          "exists": true,
+          "sha256": "c3117904e8077f7efb5048e8203dbf230aa53ec5d1e8f177e9a13ee9f65ee7f0"
+        },
+        {
+          "path": "functions/financial/analysis-runtime/financial-analysis-runtime.js",
+          "exists": true,
+          "sha256": "8440a8cfd2eaac90cb8140a66c8ba337ffaf5bd1b8dcacf03bf3b98e67e2f487"
+        },
+        {
+          "path": "assets/js/pages/financial-runtime-product.js",
+          "exists": true,
+          "sha256": "19d7f5fd2e8ccf9a3c27c145c65b78ac099837ec7ad1e227bdbf73b9ecde9055"
+        }
+      ],
+      "productionStatus": "ANONYMOUS_PUBLIC_SURFACE_PASS_PRODUCT_ADMISSION_UNPROVEN",
+      "missingDeclaredPaths": [],
+      "productionEvidence": {
+        "observations": 4,
+        "pass": 4,
+        "fail": 0,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      }
+    },
+    {
+      "capability": "WILL",
+      "canonicalOwner": "Existing testamentary intake and jurisdiction authority",
+      "sourcePath": "content/legal/will/registries/will-jurisdiction-registry-v1.json",
+      "runtimeOwner": "functions/legal/will/escalation-gate.js",
+      "rendererOwner": "UNKNOWN_STANDALONE_PUBLIC_RENDERER_NOT_PROVEN",
+      "customerRoute": "/will/",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "content/legal/will/registries/will-jurisdiction-registry-v1.json",
+          "exists": true,
+          "sha256": "20b35aec395b6effb26bf18d308d0b89ef105d09b8d2070a06707cbf2c59ebbe"
+        },
+        {
+          "path": "functions/legal/will/escalation-gate.js",
+          "exists": true,
+          "sha256": "f3b571b10a528cf81f59858749ff3cc7ab7a5de7d5fb2b6ff21df5fe2b6ddde9"
+        }
+      ],
+      "productionStatus": "OBSERVED_PUBLIC_SURFACE_FAILURE_ADMISSION_NOT_GRANTED",
+      "missingDeclaredPaths": [
+        "UNKNOWN_STANDALONE_PUBLIC_RENDERER_NOT_PROVEN"
+      ],
+      "productionEvidence": {
+        "observations": 4,
+        "pass": 0,
+        "fail": 4,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      }
+    },
+    {
+      "capability": "ACADEMY",
+      "canonicalOwner": "Existing lesson experience / learning ownership",
+      "sourcePath": "content/academy/academy-learning-runtime/contracts/lesson-experience-contract-v1.json",
+      "runtimeOwner": "assets/js/pages/academy.js",
+      "rendererOwner": "assets/js/pages/academy.js",
+      "customerRoute": "/academy/",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "content/academy/academy-learning-runtime/contracts/lesson-experience-contract-v1.json",
+          "exists": true,
+          "sha256": "efdb26ed53f3d195769e3129827c5e3796432356cdb72e1a38d46187414aec08"
+        },
+        {
+          "path": "assets/js/pages/academy.js",
+          "exists": true,
+          "sha256": "dd2026130211743a4e6da35f8949336628d38873601c8a82c316c7da4b4ff499"
+        },
+        {
+          "path": "assets/js/pages/academy.js",
+          "exists": true,
+          "sha256": "dd2026130211743a4e6da35f8949336628d38873601c8a82c316c7da4b4ff499"
+        }
+      ],
+      "productionStatus": "ANONYMOUS_PUBLIC_SURFACE_PASS_PRODUCT_ADMISSION_UNPROVEN",
+      "missingDeclaredPaths": [],
+      "productionEvidence": {
+        "observations": 4,
+        "pass": 4,
+        "fail": 0,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      }
+    },
+    {
+      "capability": "ENTERPRISE",
+      "canonicalOwner": "Positioning/intake only; dedicated runtime not evidenced",
+      "sourcePath": "research/index.html",
+      "runtimeOwner": "UNKNOWN_DEDICATED_ENTERPRISE_RUNTIME",
+      "rendererOwner": "assets/js/pages/brand-research-commerce-legal.js",
+      "customerRoute": "/research/",
+      "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
+      "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
+      "sourceEvidence": [
+        {
+          "path": "research/index.html",
+          "exists": true,
+          "sha256": "f035b71a24814c6414552f28e706b8d46d10261e239dadc399d9e9023ee33a14"
+        },
+        {
+          "path": "assets/js/pages/brand-research-commerce-legal.js",
+          "exists": true,
+          "sha256": "3ab961f31b9be628ff42377ff84d5ec16d8f901c0d69d63bfa1a8e99219c41f7"
+        }
+      ],
+      "productionStatus": "OBSERVED_PUBLIC_SURFACE_FAILURE_ADMISSION_NOT_GRANTED",
+      "missingDeclaredPaths": [
+        "UNKNOWN_DEDICATED_ENTERPRISE_RUNTIME"
+      ],
+      "dedicatedRouteProbe": "/enterprise/ (unregistered; homepage fallback, not evidence of enterprise runtime)",
+      "productionEvidence": {
+        "observations": 4,
+        "pass": 0,
+        "fail": 4,
+        "scope": "Anonymous public surface only; authenticated customer action and product admission not inferred",
+        "evidence": "content/production-closure/web-route-census.json"
+      }
+    }
+  ],
+  "declaredSubscopes": {
+    "BOOKS": {
+      "current": "content/registry/successors/eight-volume-v1/books.json",
+      "historical": [
+        "content/registry/books.json",
+        "content/registry/successors/seven-volume-v1/books.json"
+      ]
+    },
+    "ATLAS": {
+      "bookV": "assets/js/pages/civilization-atlas.js",
+      "bookVI": "assets/js/pages/book6-reconfiguration-atlas.js"
+    },
+    "R2": {
+      "public": "PHIOS_PUBLIC_ASSET_BASE_URL + public-assets registry",
+      "private": "MANUSCRIPTS / PRIVATE_REPORTS production; QA BOOKS binding is not production proof"
+    },
+    "ARTICLES": {
+      "directory": "assets/customer-ui/js/surfaces/knowledge.js",
+      "body": "assets/js/pages/article.js",
+      "sourceReadModel": "assets/js/knowledge/published-content.js"
+    }
+  }
+}

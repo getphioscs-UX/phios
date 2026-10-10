@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-ACADEMIC-BRIDGE-FULL-ACTIVATION-v2.0.0",
+  "work": "PRF-ONET-LIVE-ACTIVATION-W5-W8",
+  "baselineCommit": "92b30b95cf2f70af4ed2ee8e41401764b06fa8b5",
+  "predecessor": "content/profile/academic/registries/academic-bridge-activation-registry-v1.json",
+  "status": "FOUR_LANE_PRODUCTION_WITH_ONET_LIVE_PROVIDER_BINDING_REQUIRED",
+  "instruments": [
+    {
+      "priority": "P1",
+      "instrumentFamily": "IPIP_BIG_FIVE",
+      "availabilityState": "AVAILABLE",
+      "scoringState": "FIRST_PARTY_SCORED",
+      "sourceClass": "STANDARDIZED_SELF_REPORT"
+    },
+    {
+      "priority": "P2",
+      "instrumentFamily": "PHI_ORIGINAL_REASONING_TASK_PERFORMANCE",
+      "availabilityState": "AVAILABLE",
+      "scoringState": "RAW_PERFORMANCE_ONLY",
+      "sourceClass": "MEASURED_TASK_PERFORMANCE"
+    },
+    {
+      "priority": "P3",
+      "instrumentFamily": "O_NET_INTEREST_PROFILER_RIASEC",
+      "availabilityState": "AVAILABLE_WHEN_DEPLOYMENT_SECRET_BOUND",
+      "scoringState": "EXTERNALLY_SCORED",
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "liveProviderAdmissionRef": "content/profile/academic/onet/live/onet-live-provider-admission-v1.json",
+      "productionFreezeRef": "content/profile/academic/onet/freeze/onet-live-provider-production-freeze-v1.json",
+      "liveProviderAdmissionState": "LIVE_PROVIDER_ADMITTED_USER_SMOKE",
+      "runtimeFailsClosedWithoutSecret": true
+    },
+    {
+      "priority": "P4",
+      "instrumentFamily": "PHI_FINANCIAL_CAPABILITY_OECD_INFE_2026_ADAPTED",
+      "availabilityState": "AVAILABLE",
+      "scoringState": "ADAPTED_SCORED",
+      "sourceClass": "MULTI_SOURCE_CLASS_PRESERVED"
+    }
+  ],
+  "governance": {
+    "sourceClassesMustRemainVisible": true,
+    "crossLaneAveragingAllowed": false,
+    "universalMasterScoreAllowed": false,
+    "symbolicScientificValidationTransferAllowed": false
+  }
+}

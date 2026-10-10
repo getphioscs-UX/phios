@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8')); const text=p=>fs.readFileSync(p,'utf8');
+const identity=read('content/health/health-reality-runtime/deployment/hrx-w33-deployment-identity-v1.json');
+const w33=read('content/health/health-reality-runtime/acceptance/hrx-w33-browser-cloudflare-acceptance-successor-v2.json');
+const w34=read('content/health/health-reality-runtime/acceptance/hrx-w34-promotion-successor-policy-v2.json');
+const freeze=read('content/health/health-reality-runtime/freeze/hrx-w35-health-runtime-freeze-successor-v2.json');
+const predecessor=read('content/health/health-reality-runtime/acceptance/hrx-w34-limited-production-promotion-v1.json');
+assert.equal(identity.sourceBaselineSha,'13364abcedc47d935829dbc4dec1a8da4a3adee9');
+assert.equal(w33.baselineCommit,identity.sourceBaselineSha);assert.equal(w33.status,'LIVE_EVIDENCE_CAPTURE_READY_NOT_YET_OBSERVED');
+assert.equal(w34.currentPromotionState,'AWAITING_MACHINE_CAPTURED_W33_EVIDENCE');assert.equal(w34.promotionRules.healthPersistenceRemainsDisabled,true);
+assert.equal(predecessor.promotionState,'BLOCKED_BY_LIVE_EVIDENCE');assert.equal(predecessor.current.publicHealthExecutionAllowed,false);
+assert.equal(freeze.freeze.liveBrowserVerified,false);assert.equal(freeze.freeze.limitedProductionPromoted,false);
+assert.match(text('functions/api/health-runtime-status.js'),/CF_PAGES_COMMIT_SHA/);assert.match(text('functions/api/health-runtime-status.js'),/cache-control.*no-store/s);
+assert.match(text('scripts/capture-hrx-w33-live-evidence.mjs'),/deployed SHA does not match expected SHA/);assert.match(text('scripts/capture-hrx-w33-live-evidence.mjs'),/approved authority live fetch/);
+assert.match(text('scripts/promote-hrx-w34-from-evidence.mjs'),/LIMITED_PRODUCTION_PROMOTED/);assert.match(text('scripts/promote-hrx-w34-from-evidence.mjs'),/healthPersistenceAllowed: false/);assert.match(text('scripts/promote-hrx-w34-from-evidence.mjs'),/HRX_LIMITED_PRODUCTION_FROZEN/);assert.match(text('scripts/promote-hrx-w34-from-evidence.mjs'),/evidenceDigest/);
+console.log('✓ HRX W33 evidence-closure → W34 successor-promotion tooling passed.');
+console.log('  Baseline remains fail-closed until machine-captured deployed evidence exists.');

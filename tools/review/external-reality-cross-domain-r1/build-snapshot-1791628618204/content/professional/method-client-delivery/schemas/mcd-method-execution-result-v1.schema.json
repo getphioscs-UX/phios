@@ -1,0 +1,13 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://getphios.com/schemas/mcd/method-execution-result-v1.schema.json",
+  "title":"PHI OS MCD-4 Method Execution Result v1",
+  "type":"object","required":["schemaVersion","requestId","methodCode","methodVersion","capability","executionStatus","mpaEvaluation","reasonCodes","governance"],
+  "properties":{
+    "schemaVersion":{"const":"PHI-OS-MCD-METHOD-EXECUTION-RESULT-v1.0.0"},
+    "executionStatus":{"enum":["BLOCKED_BY_MPA","INPUT_BLOCKED","PARTIAL_EXECUTION","EXECUTED_BOUND_SCOPE"]},
+    "requestId":{"type":["string","null"]},"methodCode":{"type":["string","null"]},"pluginCode":{"type":["string","null"]},"methodVersion":{"type":["string","null"]},"capability":{"type":["string","null"]},
+    "mpaEvaluation":{"type":["object","null"]},"inputEvaluation":{"type":["object","null"]},"partialExecution":{"type":["object","null"]},
+    "reasonCodes":{"type":"array","items":{"type":"string"},"uniqueItems":true},"governance":{"type":"object"}
+  }
+}

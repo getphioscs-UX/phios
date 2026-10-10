@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "PHI-OS-ECR-R3-W7-REALITY-BRIDGE-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "8c44a0e023a15a2e6f786306a83bd792b90bdb65",
+  "status": "ENGINEERING_COMPLETE",
+  "scope": [
+    "ECR-R3-W7 Reality Bridge"
+  ],
+  "predecessors": {
+    "w5ComparisonIr": "content/embodied-configuration/product-r3/acceptance/ecr-r3-w5-ecr-human-design-comparison-ir-v1.json",
+    "w6CustomerComparisonRenderer": "content/embodied-configuration/product-r3/acceptance/ecr-r3-w6-customer-comparison-renderer-v1.json"
+  },
+  "runtimeAuthority": {
+    "path": "functions/external-profile/ecr-human-design-reality-bridge.js",
+    "bridgeIrSchemaVersion": "PHI-OS-ECR-R3-ECR-HD-REALITY-BRIDGE-IR-v1.0.0",
+    "bridgeRuleVersion": "PHI-OS-ECR-R3-ECR-HD-REALITY-BRIDGE-RULES-v1.0.0",
+    "responseSchemaVersion": "PHI-OS-ECR-R3-ECR-HD-REALITY-BRIDGE-RESPONSE-v1.0.0",
+    "inputAuthority": "PHI-OS-ECR-R3-ECR-HD-COMPARISON-IR-v1.0.0",
+    "outputAuthority": "OBSERVATION_BRIDGE_ONLY"
+  },
+  "customerRenderer": {
+    "path": "assets/customer-ui/js/specialists/ecr/reality-bridge-renderer.js",
+    "rendererVersion": "PHI-OS-ECR-R3-ECR-HD-REALITY-BRIDGE-RENDERER-v1.0.0",
+    "canonicalSectionId": "ecr-section-10",
+    "canonicalOrder": [
+      "ECR × confirmed Human Design comparison",
+      "Reality Bridge",
+      "PHI Cards"
+    ],
+    "responseOptions": [
+      "REPEATS_RELIABLY",
+      "CONTEXT_DEPENDENT",
+      "NOT_CLEAR_YET",
+      "CONTRADICTS_READING"
+    ]
+  },
+  "handoff": {
+    "route": "/api/customer-reality-handoff",
+    "requiresExistingExplicitConsent": true,
+    "selectedResponsesOnly": true,
+    "responseAuthorityAfterHandoff": "USER_REPORTED_CONTEXT",
+    "currentRealityEvidenceCreated": false,
+    "currentRealityConclusionCreated": false,
+    "automaticPersistence": false
+  },
+  "boundaries": {
+    "bridgeCreatesMeaning": false,
+    "bridgeCreatesComparisonRules": false,
+    "bridgeCreatesFieldMapping": false,
+    "bridgeCreatesAgreementClaim": false,
+    "bridgeCreatesCompatibilityScore": false,
+    "observationPromptOnly": true,
+    "userResponseRequiredBeforeReportedContext": true,
+    "userResponseIsReportedContextNotEvidence": true,
+    "contradictionMustRemainVisible": true,
+    "currentRealityEvidenceCreated": false,
+    "currentRealityConclusionCreated": false,
+    "currentRealityFactPromoted": false,
+    "ecrCalculationChangedByResponse": false,
+    "humanDesignChartChangedByResponse": false,
+    "automaticPersistence": false,
+    "runtimeMemoryWritten": false
+  },
+  "validation": {
+    "checker": "scripts/check-ecr-product-r3-w7.mjs",
+    "bridgeDeterminismRegression": true,
+    "richAndPartialComparisonRegression": true,
+    "customerObservationControlRegression": true,
+    "contradictionPreservationRegression": true,
+    "consentedMyRealityHandoffRegression": true,
+    "noResponseNoReportedContextRegression": true,
+    "noEvidencePromotionRegression": true
+  }
+}

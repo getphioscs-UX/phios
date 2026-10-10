@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "ZWR-PRO-W10-CONTROLLED-MULTICHART-QA-CONTRACT-v1",
+  "work": "ZWR-PRO-W10",
+  "status": "IMPLEMENTED_PRE_LIVE_CAMPAIGN",
+  "fixtureSet": "ZPA-CONTROLLED-01_TO_12",
+  "deterministicCampaign": {
+    "subjectCount": 12,
+    "providerCalls": 0,
+    "checks": [
+      "UNIQUE_INPUT_FINGERPRINTS",
+      "CUSTOMER_SPECIFIC_AUTHORITY_PACK_SUBJECT_BINDING",
+      "BILINGUAL_AUTHORITY_PARITY",
+      "WHOLE_CHART_SEMANTIC_DIVERSITY",
+      "UNKNOWN_PRESERVATION",
+      "TIMING_LAYER_BOUNDARY"
+    ]
+  },
+  "liveCampaign": {
+    "referenceSubjectExcluded": "ZPA-CONTROLLED-01",
+    "selectionMode": "DETERMINISTIC_DIVERSITY_SENTINELS",
+    "minimumSubjects": 4,
+    "requiredStages": [
+      "W4",
+      "W5",
+      "W6",
+      "W7",
+      "W8",
+      "W9"
+    ],
+    "noDeterministicProseFallback": true,
+    "requiresRealProviderExecution": true,
+    "evidenceFile": "docs/reports/ziwei/production-admission/zwr-pro-w10-live-campaign.json",
+    "checkpointFile": "docs/reports/ziwei/production-admission/zwr-pro-w10-live-checkpoint.json",
+    "resumePolicy": {
+      "COMPOSITION_SAVED": "Reuse paid composition and request independent semantic review only",
+      "W5_REJECT": "Reuse W4-passed candidate and rerun local W5/W6 only",
+      "W6_REJECT": "Reuse W4-passed candidate and rerun local W5/W6 only",
+      "SECTION_PASS": "Reuse verified section with zero provider calls",
+      "W7_OR_W8_REJECT": "Reuse all passed sections and rerun report-level verifiers only",
+      "SEMANTIC_REVIEW_REJECT": "Perform one governed targeted span repair limited to reviewer-identified block roles; unchanged blocks, refs and order must remain byte-for-byte/stable.",
+      "TARGETED_REPAIR_REJECT": "Preserve repaired candidate and evidence; do not broaden verifier or silently full-regenerate. Diagnose before another paid attempt."
+    },
+    "historicalUsagePolicy": "If a pre-checkpoint provider call lacks token usage, count the transport call and mark estimatedProviderCostIsLowerBound=true; never invent cost.",
+    "targetedRepairInvariants": [
+      "ONLY_REVIEWER_IDENTIFIED_ROLES_MAY_CHANGE_TEXT",
+      "UNCHANGED_BLOCK_TEXT_BYTE_FOR_BYTE",
+      "BLOCK_ORDER_STABLE",
+      "ROLE_STABLE",
+      "CLAIM_REFS_STABLE",
+      "SUPPORT_REFS_STABLE",
+      "SOURCE_BRIEF_DIGEST_STABLE",
+      "INDEPENDENT_SEMANTIC_REVIEW_REQUIRED_AFTER_REPAIR"
+    ]
+  },
+  "productionAdmissionGranted": false
+}

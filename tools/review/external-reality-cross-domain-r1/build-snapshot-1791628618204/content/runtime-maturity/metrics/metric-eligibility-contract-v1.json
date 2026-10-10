@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S15-METRIC-ELIGIBILITY-CONTRACT-v1.0.0",
+  "phase": "MRM-S",
+  "work": "MRM-S15",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "ACTIVE",
+  "requiredFields": [
+    "metricDefinitionStable",
+    "measurementPopulationDefined",
+    "observationWindowDefined",
+    "baselineDefined",
+    "confidencePolicyDefined",
+    "missingDataPolicyDefined",
+    "unknownPolicyDefined",
+    "versionPolicyDefined",
+    "driftPolicyDefined"
+  ],
+  "rules": {
+    "allRequiredBeforeOfficialTracking": true,
+    "experimentalMetricDoesNotEqualOfficialTrackedMetric": true,
+    "validationPrerequisiteRequired": true
+  }
+}

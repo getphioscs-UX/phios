@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W26-W29-REALITY-HANDOFF-ACCEPTANCE-v1.0.0",
+  "phase": "KAP",
+  "steps": [
+    "KAP-W26",
+    "KAP-W27",
+    "KAP-W28",
+    "KAP-W29"
+  ],
+  "baselineCommit": "25ab44b6d832bc5a1a3ff166d89e2b53c1257b44",
+  "status": "ACCEPTED_EXPLICIT_CONSENT_REALITY_ENTRY_SEED_PROVENANCE_SEPARATION",
+  "acceptedFacts": {
+    "w24YesRequiredBeforeEscalationReason": true,
+    "clientReceivesDeterministicEscalationReason": true,
+    "questionSessionTemporary": true,
+    "realityJourneyPersistentCaseIntake": true,
+    "explicitConsentRequired": true,
+    "automaticConsent": false,
+    "realityEntrySeedReusesOriginalQuestion": true,
+    "realityEntrySeedReusesClarifyingAnswers": true,
+    "realityEntrySeedReusesKnownObservations": true,
+    "realityEntrySeedCarriesIdentifiedUnknowns": true,
+    "realityEntrySeedCarriesMatchedKnowledge": true,
+    "realityEntrySeedCarriesCandidateMechanisms": true,
+    "kapCreatesCanonicalCase": false,
+    "kapCreatesRealityModel": false,
+    "kapPersistsRealityEntrySeed": false,
+    "icrRemainsCanonicalCaseOwner": true,
+    "rmoRemainsRealityModelOwner": true,
+    "rdgGovernanceStillRequired": true,
+    "knowledgeGroundingBundleReferenceProjection": true,
+    "fullGroundingSourceTextNotCopied": true,
+    "authorizedCanonicalMethodProjectionOnly": true,
+    "rawMethodSchemaForbidden": true,
+    "restrictedProjectionForbidden": true,
+    "knowledgeMethodProvenanceSeparated": true,
+    "neitherAutomaticallyBecomesRealityTruth": true,
+    "aiRequired": false
+  },
+  "production": {
+    "endpoint": "/api/reality-handoff",
+    "actions": [
+      "PREPARE",
+      "HANDOFF"
+    ],
+    "persistence": false
+  },
+  "predecessor": {
+    "complexityFreezePath": "content/knowledge/answer-projection/freeze/kap-w23-w25-reality-complexity-freeze-v1.json",
+    "complexityFreezeSha256": "c39230cda46fc105488f7dbba064101a969ab3a2b2a68af2dbd9a0583efca621",
+    "mutated": false
+  },
+  "nextWork": "REALITY_JOURNEY_ENTRY_CONSUMPTION_SUCCESSOR"
+}

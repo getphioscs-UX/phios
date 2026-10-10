@@ -1,0 +1,197 @@
+{
+  "freezeCode": "KAU-R0-FIVE-VOLUME-BASELINE-FREEZE",
+  "version": "1.0.0",
+  "stage": "KAU-R0",
+  "status": "frozen",
+  "frozenAt": "2026-08-12",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "807efc359a0d1477bc697044f55970fc5e6e8500"
+  },
+  "reopensFrom": "KAU-v1-FULL-FREEZE",
+  "changeMode": "governed-book-part-authority-reconciliation",
+  "architecture": {
+    "id": "five-volume-15-part",
+    "bookCount": 5,
+    "numberedPartCount": 15,
+    "crossVolumePartCodes": [
+      "P0"
+    ],
+    "books": [
+      {
+        "bookCode": "BOOK-1",
+        "titleZhHans": "世界如何形成",
+        "titleEn": "Reality Formation",
+        "parts": [
+          "P1",
+          "P2",
+          "P3",
+          "P4"
+        ],
+        "contentStatus": "completed"
+      },
+      {
+        "bookCode": "BOOK-2",
+        "titleZhHans": "世界如何运行",
+        "titleEn": "Reality Runtime",
+        "parts": [
+          "P5",
+          "P6",
+          "P7"
+        ],
+        "contentStatus": "completed"
+      },
+      {
+        "bookCode": "BOOK-3",
+        "titleZhHans": "世界如何维持",
+        "titleEn": "Reality Continuity",
+        "parts": [
+          "P8",
+          "P9"
+        ],
+        "contentStatus": "architecture-registered"
+      },
+      {
+        "bookCode": "BOOK-4",
+        "titleZhHans": "世界如何扩展",
+        "titleEn": "Reality Civilization",
+        "parts": [
+          "P10",
+          "P11",
+          "P12"
+        ],
+        "contentStatus": "architecture-registered"
+      },
+      {
+        "bookCode": "BOOK-5",
+        "titleZhHans": "世界将如何继续",
+        "titleEn": "Reality Navigation",
+        "parts": [
+          "P13",
+          "P14",
+          "P15"
+        ],
+        "contentStatus": "architecture-registered"
+      }
+    ]
+  },
+  "ownershipTransitions": [
+    {
+      "partCodes": [
+        "P8",
+        "P9"
+      ],
+      "fromBookCode": "BOOK-2",
+      "toBookCode": "BOOK-3"
+    },
+    {
+      "partCodes": [
+        "P10",
+        "P11",
+        "P12"
+      ],
+      "fromBookCode": "BOOK-3",
+      "toBookCode": "BOOK-4"
+    },
+    {
+      "partCodes": [
+        "P13",
+        "P14",
+        "P15"
+      ],
+      "fromBookCode": "BOOK-4",
+      "toBookCode": "BOOK-5"
+    }
+  ],
+  "canonicalPreservation": {
+    "path": "content/knowledge/registry/nodes.json",
+    "canonicalNodeCount": 716,
+    "normalizedSha256": "61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431",
+    "nodeCodeSetSha256": "98cea9eb7a84970dc1ea8fb98c992ee66612f5c560b987c90ba85a11d43f50c3",
+    "nodeIdentityMutationAllowed": false,
+    "canonicalMeaningMutationAllowedInR0": false,
+    "nodeCodePrefixIsPublicationAuthority": false
+  },
+  "blueprintProjection": {
+    "BOOK-1": {
+      "parts": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ],
+      "canonicalNodeCount": 65
+    },
+    "BOOK-2": {
+      "parts": [
+        "P5",
+        "P6",
+        "P7"
+      ],
+      "canonicalNodeCount": 180
+    },
+    "BOOK-3": {
+      "parts": [
+        "P8",
+        "P9"
+      ],
+      "canonicalNodeCount": 86
+    },
+    "BOOK-4": {
+      "parts": [
+        "P10",
+        "P11",
+        "P12"
+      ],
+      "canonicalNodeCount": 187
+    },
+    "BOOK-5": {
+      "parts": [
+        "P13",
+        "P14",
+        "P15"
+      ],
+      "canonicalNodeCount": 198
+    },
+    "totalCanonicalNodes": 716
+  },
+  "boundaries": {
+    "newCanonicalNodeCreated": false,
+    "canonicalNodeRenamed": false,
+    "canonicalNodeDeleted": false,
+    "publishedAssetRewritten": false,
+    "VAPOrCARFreezeRewritten": false,
+    "productionAuthorityCreated": false,
+    "historicalFreezeRewritten": false
+  },
+  "deferred": [
+    {
+      "stage": "KAU-R1",
+      "work": "Completed Manuscript Registration for Volume I and Volume II"
+    },
+    {
+      "stage": "KAU-R2",
+      "work": "Existing Canonical Node Match: exact/expanded/remap/split/merge/new/deprecated/supporting-only"
+    },
+    {
+      "stage": "KAU-R3+",
+      "work": "Governed Canonical Registry Delta and downstream KPP/PJA/CAR/VAP/ALR reconciliation only after human decisions"
+    }
+  ],
+  "acceptance": {
+    "fiveBookIdentitiesExact": true,
+    "numberedPartsOwnedExactlyOnce": true,
+    "canonicalNodeIdentitiesPreserved": true,
+    "blueprintCoveragePreserves716Nodes": true,
+    "bookIAndBookIIMarkedCompleted": true,
+    "canonicalSemanticReconciliationDeferred": true,
+    "productionDeploymentAllowed": false
+  },
+  "downstreamGate": {
+    "webProductionRuntime": "BLOCKED_PENDING_FIVE_VOLUME_SUCCESSOR_RECONCILIATION",
+    "productionDeploymentAllowed": false,
+    "reason": "KAU-R0 changes canonical Book/Part publication authority but intentionally does not rewrite frozen WPR public composition/route/asset authority."
+  }
+}

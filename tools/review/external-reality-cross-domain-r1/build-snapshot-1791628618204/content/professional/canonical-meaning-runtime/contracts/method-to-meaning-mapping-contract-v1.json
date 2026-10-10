@@ -1,0 +1,68 @@
+{
+  "contractCode": "PHI-OS-METHOD-TO-MEANING-MAPPING-CONTRACT-v1.0.0",
+  "work": "CM-W6A",
+  "version": "1.0.0",
+  "productionStatus": "validation_only",
+  "authorityChain": [
+    "METHOD_RUNTIME",
+    "CANONICAL_PROJECTION",
+    "CMR_MAPPING_CONTRACT",
+    "CANONICAL_MEANING"
+  ],
+  "soleInputAuthority": {
+    "authority": "CANONICAL_PROJECTION",
+    "schema": "content/professional/method-runtime/canonical-projection-v1.schema.json",
+    "schemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0"
+  },
+  "requiredMappingFields": [
+    "mappingCode",
+    "mappingVersion",
+    "sourceMethodCode",
+    "sourceProjectionSchemaVersion",
+    "projectionType",
+    "projectionPredicate",
+    "targetMeaningCodes",
+    "mappingAuthority",
+    "mappingConfidence",
+    "boundary",
+    "status",
+    "createdAt",
+    "updatedAt"
+  ],
+  "allowedPredicateRoots": [
+    "projectionCode",
+    "projectionValue"
+  ],
+  "forbiddenInputs": [
+    "rawMethodObject",
+    "methodCalculationInternals",
+    "temporaryRuntimeObject",
+    "originalMethodInterpretationText"
+  ],
+  "rules": {
+    "canonicalProjectionOnly": true,
+    "rawMethodObjectAllowed": false,
+    "methodCalculationInternalsAllowed": false,
+    "temporaryRuntimeObjectAllowed": false,
+    "originalMethodInterpretationTextAllowed": false,
+    "mappingMayCreateMeaningCode": false,
+    "mappingMayRewriteProjection": false,
+    "mappingMayRewriteKnowledge": false,
+    "mappingMayInterpret": false,
+    "mappingMayCreateProfessionalConclusion": false,
+    "mappingAuthorityMustBePHIOS": true,
+    "boundaryMustBeValidationOnly": true
+  },
+  "invariants": {
+    "deterministic": true,
+    "registryLed": true,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "actualMethodMappingsCreated": false,
+    "versionedMappingRegistryCreated": false,
+    "productionAuthorityCreated": false,
+    "khW4G6SemanticRuntimeFreezeUnchanged": true,
+    "methodRuntimeFreezesUnchanged": true
+  }
+}

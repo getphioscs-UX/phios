@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {PDFDocument} from 'pdf-lib';
+import {countChromiumPdfPages} from '../workers/method-report-renderer/pdf-page-count.js';
+const pdf=await PDFDocument.create();for(let i=0;i<33;i++)pdf.addPage();
+const bytes=await pdf.save({useObjectStreams:false});
+const stream=(data,size)=>new ReadableStream({start(controller){for(let i=0;i<data.length;i+=size)controller.enqueue(data.slice(i,i+size));controller.close();}});
+for(const size of [1,17,4096,65536])assert.equal(await countChromiumPdfPages(stream(bytes,size)),33);
+await assert.rejects(()=>countChromiumPdfPages(stream(bytes.slice(0,-10),17)));
+await assert.rejects(()=>countChromiumPdfPages(stream(new TextEncoder().encode(new TextDecoder().decode(bytes).replace('/Count 33','/Count 32')),17)));
+await assert.rejects(()=>countChromiumPdfPages(stream(new TextEncoder().encode('not a PDF'),17)));
+console.log('PASS bounded Chromium PDF page-tree count, chunk boundaries, truncation and count mismatch denial.');

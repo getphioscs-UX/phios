@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Choose a Tarot spread, draw your own cards, and explore a source-bound symbolic reading with PHI OS.">
+  <title>Tarot — PHI OS</title>
+  <link rel="canonical" href="/perspectives/tarot/">
+  <link rel="stylesheet" href="/assets/customer-ui/tokens.css">
+  <link rel="stylesheet" href="/assets/customer-ui/base.css">
+  <link rel="stylesheet" href="/assets/customer-ui/typography.css">
+  <link rel="stylesheet" href="/assets/customer-ui/layout.css">
+  <link rel="stylesheet" href="/assets/customer-ui/components.css">
+  <link rel="stylesheet" href="/assets/customer-ui/motion.css">
+  <link rel="stylesheet" href="/assets/customer-ui/utilities.css">
+  <link rel="stylesheet" href="/assets/customer-ui/surfaces/symbolic-perspectives.css">
+  <link rel="stylesheet" href="/assets/customer-ui/surfaces/tarot.css">
+</head>
+<body data-cx-surface="TAROT_READING" data-cx-nav="PERSPECTIVES">
+<a class="cx-skip" href="#main">Skip to content</a>
+<div data-cx-header></div>
+<main id="main">
+  <section class="cx-section cx-tarot-intro">
+    <div class="cx-container cx-stack">
+      <p class="cx-eyebrow" data-cx-en="TAROT · REFLECTIVE READING" data-cx-zh="TAROT · 塔罗反思读取">TAROT · REFLECTIVE READING</p>
+      <h1 class="cx-display" data-cx-en="Bring a question. Choose the cards yourself. Then read what the symbols bring into focus." data-cx-zh="带着一个问题，亲自选牌，再看看这些象征把什么带到你眼前。">Bring a question. Choose the cards yourself. Then read what the symbols bring into focus.</h1>
+      <p class="cx-lead" data-cx-en="This is not a guaranteed prediction. The cards provide a structured symbolic lens; your judgment and real-world evidence remain primary." data-cx-zh="这不是保证结果的预测。牌面提供的是一个有结构的象征视角；你的判断与现实证据仍然优先。">This is not a guaranteed prediction.</p>
+    </div>
+  </section>
+
+  <section class="cx-section--tight">
+    <div class="cx-container cx-tarot-reading-flow">
+      <section class="cx-card cx-stack cx-tarot-question-card" data-reading-step="question">
+        <div class="cx-tarot-step-heading"><span>1</span><div><p class="cx-eyebrow" data-cx-en="YOUR QUESTION" data-cx-zh="你的问题">YOUR QUESTION</p><h2 class="cx-title" data-cx-en="What are you trying to understand?" data-cx-zh="你现在最想看清什么？">What are you trying to understand?</h2></div></div>
+        <label class="cx-form-field">
+          <span data-cx-en="Write the situation as a question." data-cx-zh="把你正在面对的情况写成一个问题。">Write the situation as a question.</span>
+          <textarea class="cx-symbolic-question" data-symbolic-question maxlength="800" rows="5" data-cx-en-placeholder="For example: What should I understand about changing jobs now?" data-cx-zh-placeholder="例如：关于现在换工作这件事，我最需要看清什么？" placeholder="For example: What should I understand about changing jobs now?"></textarea>
+        </label>
+        <p class="cx-meta" data-cx-en="Questions about what to understand, notice or compare usually produce a more useful reading than asking for a guaranteed outcome." data-cx-zh="与其问一个必然结果，不如问：我需要理解什么、注意什么、比较什么。这样的读取通常更有用。">Questions about what to understand usually produce a more useful reading.</p>
+      </section>
+
+      <section class="cx-card cx-stack" data-reading-step="spread">
+        <div class="cx-tarot-step-heading"><span>2</span><div><p class="cx-eyebrow" data-cx-en="CHOOSE A SPREAD" data-cx-zh="选择牌阵">CHOOSE A SPREAD</p><h2 class="cx-title" data-cx-en="How many cards do you want to work with?" data-cx-zh="这次你想用几张牌来看？">How many cards do you want to work with?</h2></div></div>
+        <div class="cx-tarot-spread-options" data-spread-options role="radiogroup" aria-label="Tarot spread"></div>
+        <label class="cx-tarot-consent"><input type="checkbox" data-use-reality-context> <span data-cx-en="Compare the reading with my current Reality context" data-cx-zh="把读取与我当前的 Reality context 一起比较">Compare the reading with my current Reality context</span></label>
+        <p class="cx-meta" data-reality-context-disclosure></p>
+      </section>
+
+      <section class="cx-card cx-stack cx-tarot-draw-stage" data-reading-step="draw">
+        <div class="cx-tarot-step-heading"><span>3</span><div><p class="cx-eyebrow" data-cx-en="DRAW YOUR CARDS" data-cx-zh="亲自抽牌">DRAW YOUR CARDS</p><h2 class="cx-title" data-cx-en="Focus on the question, shuffle, then choose the cards that draw your attention." data-cx-zh="把注意力放回问题，洗牌，然后亲自选出最吸引你注意的牌。">Focus on the question, shuffle, then choose the cards that draw your attention.</h2></div></div>
+        <div class="cx-tarot-draw-guide" data-draw-guide>
+          <p data-cx-en="For a three-card reading, you will choose one card for each position: Situation, Tension, and Consideration." data-cx-zh="三张牌读取会依次选择：① 当前局面、② 主要张力、③ 可以考虑什么。">For a three-card reading, you will choose one card for each position.</p>
+        </div>
+        <div class="cx-actions">
+          <button class="cx-button cx-button--primary" type="button" data-start-draw><span data-cx-en="Shuffle and begin" data-cx-zh="洗牌并开始抽牌">Shuffle and begin</span></button>
+          <button class="cx-button cx-button--quiet" type="button" data-reshuffle hidden><span data-cx-en="Shuffle again" data-cx-zh="重新洗牌">Shuffle again</span></button>
+        </div>
+        <div class="cx-tarot-position-focus" data-position-focus hidden aria-live="polite"></div>
+        <div class="cx-tarot-deck" data-card-picker hidden aria-label="Choose Tarot cards"></div>
+        <div class="cx-tarot-selection-summary" data-selection-summary hidden></div>
+        <div class="cx-actions cx-tarot-read-row">
+          <button class="cx-button cx-button--primary" type="button" data-symbolic-execute disabled><span data-cx-en="Read my cards" data-cx-zh="查看我的塔罗解读">Read my cards</span></button>
+          <span class="cx-meta" data-execution-status role="status" aria-live="polite"></span>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="cx-section" data-symbolic-results hidden tabindex="-1" aria-live="polite" aria-label="Tarot result">
+    <div class="cx-container cx-stack cx-tarot-results">
+      <header class="cx-tarot-result-hero cx-stack">
+        <p class="cx-eyebrow" data-cx-en="YOUR READING" data-cx-zh="你的塔罗读取">YOUR READING</p>
+        <h2 class="cx-display cx-tarot-result-title" data-cx-en="Read the cards as one connected reflection." data-cx-zh="把这些牌连起来读，而不是只看单张关键词。">Read the cards as one connected reflection.</h2>
+        <p class="cx-lead" data-reading-summary></p>
+      </header>
+
+      <section class="cx-card cx-stack" data-customer-layer="DRAW">
+        <h3 data-cx-en="The cards you chose" data-cx-zh="你亲自选出的牌">The cards you chose</h3>
+        <div data-draw-display></div>
+      </section>
+
+      <section class="cx-card cx-stack" data-customer-layer="INTERPRETATION">
+        <h3 data-cx-en="What the reading brings into focus" data-cx-zh="这次读取把什么带到焦点">What the reading brings into focus</h3>
+        <div data-interpretation-display></div>
+      </section>
+
+      <section class="cx-card cx-stack" data-customer-layer="REALITY">
+        <h3 data-cx-en="Bring it back to Reality" data-cx-zh="把读取带回现实">Bring it back to Reality</h3>
+        <div data-reality-display></div>
+      </section>
+
+      <section class="cx-card cx-stack" data-customer-layer="NEXT">
+        <h3 data-cx-en="Questions worth carrying forward" data-cx-zh="值得继续带着走的问题">Questions worth carrying forward</h3>
+        <div data-next-display></div>
+      </section>
+
+      <div class="cx-actions"><button class="cx-button" type="button" data-symbolic-save disabled data-cx-en="Save" data-cx-zh="保存">Save</button><a class="cx-button" href="/ask" data-cx-en="Ask PHI OS" data-cx-zh="Ask PHI OS">Ask PHI OS</a><a class="cx-button" href="/reality/" data-cx-en="Add to My Reality" data-cx-zh="加入我的现实">Add to My Reality</a><button class="cx-button cx-button--quiet" type="button" data-new-reading><span data-cx-en="New Tarot reading" data-cx-zh="重新进行塔罗读取">New Tarot reading</span></button></div>
+      <p class="cx-meta" data-save-status></p>
+    </div>
+  </section>
+</main>
+<div data-cx-footer></div>
+<script type="module" src="/assets/customer-ui/js/shell.js"></script>
+<script type="module" src="/assets/customer-ui/js/surfaces/tarot-tscp-v1.js"></script>
+</body>
+</html>

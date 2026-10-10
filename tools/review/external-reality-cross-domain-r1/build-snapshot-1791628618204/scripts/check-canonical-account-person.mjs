@@ -1,0 +1,107 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {DatabaseSync} from 'node:sqlite';
+import {randomBytes,createHash} from 'node:crypto';
+import {saveCanonicalPerson,loadCanonicalPerson,loadCanonicalPersonSubject,listCanonicalPersons} from '../functions/account/canonical-person-store.js';
+import {onRequest as personApi} from '../functions/api/account-persons.js';
+import {generateAccountZiweiCandidate as generateProductionAccountZiweiCandidate} from '../functions/report-delivery/ziwei-canonical-person-binding.js';
+import {releaseControlledZiweiReport,openControlledZiweiReport,listControlledZiweiReports} from '../functions/account/ziwei-controlled-report-material.js';
+import {generateAndReleaseAccountZiwei as generateProductionAndReleaseAccountZiwei,openAccountZiweiMaterial,listAccountZiweiMaterials} from '../functions/account/ziwei-account-delivery.js';
+import {digest} from '../functions/account/oidc-auth.js';
+import {generateZiweiProductionCandidate,requireZiweiEntitlement} from '../functions/report-delivery/ziwei-production-generation-v1.js';
+import {requireZwrVfrGenerationAdmission} from '../functions/report-delivery/ziwei-vfr-profile-policy.js';
+// Trusted server injection keeps this storage test offline; the production default is resolved separately from the current canonical cutover state.
+const generateAccountZiweiCandidate=(context,selection)=>generateProductionAccountZiweiCandidate(context,selection,{generateCandidate:generateZiweiProductionCandidate});
+const generateAndReleaseAccountZiwei=(context,selection)=>generateProductionAndReleaseAccountZiwei(context,selection,{generateCandidate:generateAccountZiweiCandidate});
+const sqlite=new DatabaseSync(':memory:');
+for(const file of fs.readdirSync('db/migrations').filter(f=>f.endsWith('.sql')).sort())sqlite.exec(fs.readFileSync('db/migrations/'+file,'utf8'));
+const db={prepare(sql){return {values:[],bind(...v){this.values=v;return this;},async first(){return sqlite.prepare(sql).get(...this.values)||null;},async all(){return {results:sqlite.prepare(sql).all(...this.values)};},async run(){return sqlite.prepare(sql).run(...this.values);}};},async batch(statements){sqlite.exec('BEGIN');try{const result=[];for(const s of statements)result.push(await s.run());sqlite.exec('COMMIT');return result;}catch(e){sqlite.exec('ROLLBACK');throw e;}}};
+const objects=new Map(),env={PHIOS_ENVIRONMENT:'local',RUNTIME_DB:db,CANONICAL_PERSON_ENCRYPTION_KEY:randomBytes(32).toString('hex'),PRIVATE_REPORTS:{async put(k,v){objects.set(k,v);},async get(k){return objects.has(k)?{text:async()=>objects.get(k)}:null;}}};
+const account=userId=>({env,data:{symbolicAccountIdentity:{userId,providerId:'ISOLATED_LOCAL_TEST',authenticated:true,verified:true}}});
+const a=account('LOCAL-CPA-A'),b=account('LOCAL-CPA-B'),f=JSON.parse(fs.readFileSync('docs/reports/ziwei/production-admission/controlled-subject.json'));
+const {birthDate,birthTime,birthPlace,timeAccuracy}=f.canonicalBirthInput;
+const input={action:'save',expectedVersion:0,name:'Controlled owner A',birth:{birthDate,birthTime,birthPlace,timeAccuracy,timezone:{iana:'Asia/Hong_Kong',utcOffsetAtBirth:'+08:00'}},calculationSex:'MALE',consent:{personalMethod:true,report:true,saveBirthInput:true},expiresAt:new Date(Date.now()+300*86400000).toISOString()};
+const tests=[];
+async function denied(name,call){await assert.rejects(call);tests.push({name,result:'DENIED'});}
+await denied('guest cannot create',()=>saveCanonicalPerson({env,data:{}},input));
+await denied('client owner cannot be supplied',()=>saveCanonicalPerson(a,{...input,ownerAccountId:'LOCAL-CPA-B'}));
+await denied('missing consent',()=>saveCanonicalPerson(a,{...input,consent:{}}));
+await denied('invalid date',()=>saveCanonicalPerson(a,{...input,birth:{...input.birth,birthDate:'2023-02-29'}}));
+const p=await saveCanonicalPerson(a,input),q=await saveCanonicalPerson(b,{...input,name:'Controlled owner B'});
+assert.equal(p.ownerAccountId,'LOCAL-CPA-A');assert.equal(p.version,1);
+await denied('A cannot load B',()=>loadCanonicalPerson(env,'LOCAL-CPA-A',q.personId));
+await denied('B cannot load A',()=>loadCanonicalPerson(env,'LOCAL-CPA-B',p.personId));
+await denied('B cannot update A',()=>saveCanonicalPerson(b,{...input,personId:p.personId,expectedVersion:1}));
+assert.equal((await listCanonicalPersons(a)).length,1);
+assert.equal((await listCanonicalPersons(b))[0].personId,q.personId);
+const row=sqlite.prepare('SELECT * FROM account_person_versions WHERE person_id=?').get(p.personId);
+assert(!JSON.stringify(row).includes(p.name));assert(!JSON.stringify(row).includes(birthDate));
+const request=(body,origin='https://qa.phios-github.pages.dev')=>new Request('https://qa.phios-github.pages.dev/api/account-persons',{method:'POST',headers:{origin,'content-type':'application/json'},body:JSON.stringify(body)});
+assert.equal((await personApi({...a,request:request(input,'https://wrong.example')})).status,403);
+assert.equal((await personApi({env,data:{},request:request(input)})).status,401);
+const selection={personId:p.personId,locale:'en',targetContext:f.targetContext};
+await denied('no entitlement',()=>generateAccountZiweiCandidate(a,selection));
+await denied('client birth replacement',()=>generateAccountZiweiCandidate(a,{...selection,birthDate:'2000-01-01'}));
+// SQL fixture is local policy evidence only, never Stripe/QA purchase proof.
+const product='COM-REPORT-ZIWEI-FULL';
+sqlite.prepare("INSERT INTO commerce_products(product_id,product_version,title,language,format,currency,amount_minor,source_object_key,created_at,updated_at) VALUES(?,'1','Local test','bilingual','REPORT','MYR',3900,'local','2026-10-01','2026-10-01')").run(product);
+sqlite.prepare("INSERT INTO commerce_checkout_attempts(checkout_attempt_id,customer_id,product_id,idempotency_key_hash,status,order_state,environment,context_json,created_at,updated_at) VALUES('cpa-local-order',?,?,'cpa-local-idempotency','paid','FULFILLED','QA',?,'2026-10-01','2026-10-01')").run('LOCAL-CPA-A',product,JSON.stringify({reportPresentation:{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}}));
+sqlite.prepare("INSERT INTO commerce_purchases(purchase_id,customer_id,product_id,checkout_attempt_id,stripe_checkout_session_id,currency,amount_minor,purchase_state,created_at,updated_at) VALUES('cpa-local-purchase',?,?,'cpa-local-order','LOCAL-NOT-STRIPE','MYR',3900,'purchased','2026-10-01','2026-10-01')").run('LOCAL-CPA-A',product);
+sqlite.prepare("INSERT INTO digital_entitlements(entitlement_id,purchase_id,customer_id,product_id,subject_hash,entitlement_code,entitlement_status,granted_at,created_at,updated_at) VALUES('cpa-local-entitlement','cpa-local-purchase',?,?,'controlled','REPORT_ZIWEI_FULL','active','2026-10-01','2026-10-01','2026-10-01')").run('LOCAL-CPA-A',product);
+assert.equal((await requireZiweiEntitlement(a,'en')).purchase_id,'cpa-local-purchase','Local QA entitlement must resolve before testing method admission');
+await assert.rejects(()=>requireZiweiEntitlement({...a,env:{...env,STRIPE_ENVIRONMENT:'LIVE'}},'en'),{code:'REPORT_ENTITLEMENT_REQUIRED',status:403});
+tests.push({name:'QA purchase cannot authorize LIVE environment',result:'DENIED'});
+// Current method-owner admission replaced the deleted shared E2E gate.
+// This local fixture has no deployed private-browser admission and must remain
+// unable to enter paid writing. The inherited zero-cost gate may reject first.
+await assert.rejects(()=>requireZwrVfrGenerationAdmission(env),{code:'METHOD_GENERATION_ADMISSION_REQUIRED',status:503});
+await assert.rejects(()=>generateProductionAccountZiweiCandidate(a,selection),error=>[
+ 'VFR_REPORT_PROVIDER_LIVE_NOT_ALLOWED','METHOD_GENERATION_ADMISSION_REQUIRED'
+].includes(error?.code||error?.message));
+tests.push({name:'current method admission absent; production writing blocked before paid provider',result:'DENIED'});
+const candidate=await generateAccountZiweiCandidate(a,selection),loader=(owner,id)=>loadCanonicalPersonSubject(env,owner,id);
+await denied('unconfigured server browser verifier cannot release',()=>generateAndReleaseAccountZiwei(a,selection));
+await denied('bad server browser receipt cannot release',()=>generateAndReleaseAccountZiwei({...a,env:{...env,METHOD_REPORT_RENDERER:{fetch:async()=>Response.json({html:'bad',verification:{passed:true,pageCount:33}})}}},selection));
+// Explicit local service stub tests storage/open mechanics, not browser acceptance.
+let localRenderCalls=0;
+const renderedContext={...a,env:{...env,METHOD_REPORT_RENDERER:{async fetch(request){localRenderCalls++;const {candidate}=await request.json();const html='<html><body>LOCAL_STORAGE_POLICY_FIXTURE</body></html>';return Response.json({html,verification:{semanticSnapshotId:candidate.snapshot.semanticSnapshotId,passed:true,pageCount:33,brokenImages:0,overflowCount:0,errorCount:0,outputDigest:await digest(html)}});}}}};
+const renderedRelease=await generateAndReleaseAccountZiwei(renderedContext,selection);
+const renderedFirst=await openAccountZiweiMaterial(renderedContext,renderedRelease.reportId);
+assert.equal((await openAccountZiweiMaterial(renderedContext,renderedRelease.reportId)).html,renderedFirst.html);
+assert.equal((await listAccountZiweiMaterials(renderedContext))[0].subjectName,p.name);
+assert.equal(localRenderCalls,1,'Open/list must never invoke the renderer');
+await denied('other account cannot open rendered bytes',()=>openAccountZiweiMaterial(b,renderedRelease.reportId));
+assert.equal((await listAccountZiweiMaterials(b)).length,0);
+objects.set(renderedFirst.row.object_key,'tampered');
+await denied('rendered byte digest mismatch',()=>openAccountZiweiMaterial(renderedContext,renderedRelease.reportId));
+objects.set(renderedFirst.row.object_key,renderedFirst.html);
+assert.equal(candidate.personId,p.personId);assert.equal(candidate.snapshot.semanticContent.evidence.subjectId,p.personId);
+assert.equal(candidate.snapshot.semanticContent.subject.subjectReference,p.personId);
+await denied('failed render cannot release',()=>releaseControlledZiweiReport(a,candidate,{loadSubject:loader,renderVerification:{passed:false}}));
+const release=await releaseControlledZiweiReport(a,candidate,{loadSubject:loader,renderVerification:{passed:true,pageCount:33,semanticSnapshotId:candidate.snapshot.semanticSnapshotId}});
+const args={personId:p.personId,reportId:release.reportId},first=await openControlledZiweiReport(a,args,{loadSubject:loader});
+await denied('other account cannot open',()=>openControlledZiweiReport(b,args,{loadSubject:loader}));
+assert.equal((await listControlledZiweiReports(b,{loadSubject:loader})).length,0);
+const p2=await saveCanonicalPerson(a,{...input,personId:p.personId,expectedVersion:1,birth:{...input.birth,birthDate:'1991-08-17'}});
+assert.equal(p2.version,2);
+assert.deepEqual(await openControlledZiweiReport(a,args,{loadSubject:loader}),first);
+assert.equal((await openAccountZiweiMaterial(renderedContext,renderedRelease.reportId)).html,renderedFirst.html);
+assert.equal(localRenderCalls,1);
+const next=await generateAccountZiweiCandidate(a,selection);
+assert.notEqual(next.snapshot.semanticSnapshotId,first.snapshot.semanticSnapshotId);assert.notEqual(next.birthSourceRef,first.birthSourceRef);
+await denied('stale version write',()=>saveCanonicalPerson(a,{...input,personId:p.personId,expectedVersion:1}));
+await saveCanonicalPerson(a,{action:'revoke',personId:p.personId,expectedVersion:2});
+await denied('revoked consent cannot generate',()=>generateAccountZiweiCandidate(a,selection));
+await denied('revoked consent follows existing open policy',()=>openControlledZiweiReport(a,args,{loadSubject:loader}));
+sqlite.prepare('UPDATE account_person_versions SET ciphertext=? WHERE person_id=?').run('tampered',q.personId);
+await denied('tampered ciphertext',()=>loadCanonicalPerson(env,'LOCAL-CPA-B',q.personId));
+const accountPersonUi=fs.readFileSync('assets/customer-ui/js/surfaces/account-persons.js','utf8');
+assert(accountPersonUi.includes('/api/location-search'),'Birth profile UI must use governed place search');
+assert(accountPersonUi.includes('locationProviderRef'),'Birth profile UI must submit a governed location reference');
+for(const forbidden of ["name=\"latitude\"","name=\"longitude\"","name=\"timezone\"","name=\"offset\"","name=\"country\""])assert(!accountPersonUi.includes(forbidden),'Technical birth field leaked into customer intake: '+forbidden);
+const canonicalPersonSource=fs.readFileSync('functions/account/canonical-person-store.js','utf8');
+assert(canonicalPersonSource.includes('resolveBirthPlace'),'Canonical person owner must resolve selected birth places server-side');
+assert(canonicalPersonSource.includes("source:'GOVERNED_RESOLUTION'"),'Resolved timezone authority must remain governed');
+const dir='docs/reports/ziwei/production-admission/cpa-v1';fs.mkdirSync(dir,{recursive:true});
+fs.writeFileSync(dir+'/local-person-proof.json',JSON.stringify({scope:'LOCAL_REAL_SQL_AND_CALCULATION_ONLY',canonicalPersonOwner:'IMPLEMENTED_AND_BOUND_LOCAL',encryptedAtRest:true,methodIndependent:true,subjectBinding:'PASS',birthVersioning:'PASS',oldReleasedMaterialUnchanged:true,tests,qaAccountDelivery:'NOT_PROVEN',realStripeEntitlement:'NOT_PROVEN',renderReceipt:'LOCAL_POLICY_FIXTURE_NOT_DEPLOYED_BROWSER_PROOF',productionDelivery:'NOT_RUN',sourceHashes:Object.fromEntries(['functions/account/canonical-person-store.js','functions/api/account-persons.js','functions/report-delivery/ziwei-canonical-person-binding.js','db/migrations/0009_canonical_account_person.sql'].map(path=>[path,createHash('sha256').update(fs.readFileSync(path)).digest('hex')]))},null,2)+'\n');
+sqlite.close();console.log('PASS canonical account person: real SQL, real Zi Wei calculation, owner isolation, encryption, consent, birth versioning, immutable local release. QA not claimed.');

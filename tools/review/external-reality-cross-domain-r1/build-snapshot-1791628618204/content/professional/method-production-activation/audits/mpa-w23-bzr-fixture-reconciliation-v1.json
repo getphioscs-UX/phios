@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W23-BZR-FIXTURE-RECONCILIATION-v1.0.0",
+  "work": "MPA-W23",
+  "historicalFixture": "BZR-VALID-001",
+  "historicalCorpus": "content/professional/method-production-activation/fixtures/mpa-reference-fixture-corpus-v1.json",
+  "finding": "HISTORICAL_SYNTHETIC_TIME_AND_SOLAR_TERM_VALUES_NOT_PRODUCTION_REFERENCE",
+  "discrepancies": [
+    {
+      "field": "trueSolarCorrectionMinutes",
+      "historical": -12.5,
+      "successor": -61.6823450709,
+      "reason": "Historical test adapter used synthetic longitude/equation-of-time values."
+    },
+    {
+      "field": "trueSolarClock",
+      "historical": "22:37:30",
+      "successor": "21:48:19.059744",
+      "reason": "Successor uses actual longitude correction plus equation-of-time reference."
+    },
+    {
+      "field": "LiChun1989Utc",
+      "historical": "1989-02-04T08:27:00.000Z",
+      "successorReference": "1989-02-03T20:27:10.000Z",
+      "reason": "Historical W1 adapter used a synthetic fixed timestamp; successor freezes independent astronomical reference."
+    }
+  ],
+  "pillarImpact": {
+    "yearChanged": false,
+    "monthChanged": false,
+    "dayChanged": false,
+    "hourChanged": false,
+    "successorPillars": {
+      "year": "JI-SI",
+      "month": "YI-HAI",
+      "day": "JI-MAO",
+      "hour": "YI-HAI"
+    }
+  },
+  "resolution": {
+    "historicalCorpusRewritten": false,
+    "successorCorpus": "content/professional/method-production-activation/fixtures/mpa-w23-bzr-activation-fixture-corpus-v1.1.json",
+    "productionEligibilityCreated": false
+  }
+}

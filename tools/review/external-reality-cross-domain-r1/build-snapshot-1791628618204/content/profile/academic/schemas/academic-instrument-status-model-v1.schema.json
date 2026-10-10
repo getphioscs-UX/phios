@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phi-os.profile.academic-instrument-status-model.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "work",
+    "baselineCommit",
+    "status",
+    "principle",
+    "axes",
+    "definitions",
+    "promotionRule",
+    "governance",
+    "gate"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-ACADEMIC-INSTRUMENT-STATUS-MODEL-v1.0.0"
+    },
+    "work": {
+      "const": "PRF-W10A"
+    },
+    "baselineCommit": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "principle": {
+      "type": "string"
+    },
+    "axes": {
+      "type": "object"
+    },
+    "definitions": {
+      "type": "object"
+    },
+    "promotionRule": {
+      "type": "object"
+    },
+    "governance": {
+      "type": "object"
+    },
+    "gate": {
+      "const": "check:profile:w10a-status-model"
+    }
+  }
+}

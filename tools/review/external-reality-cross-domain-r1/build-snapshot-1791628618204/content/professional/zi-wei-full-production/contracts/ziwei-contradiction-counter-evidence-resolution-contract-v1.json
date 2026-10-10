@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-CONTRADICTION-COUNTER-EVIDENCE-RESOLUTION-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W15",
+  "status": "ENGINEERING_COMPLETE",
+  "baselineCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
+  "purpose": "Prevent contradictory Zi Wei AI prose by preserving resource/activation and friction evidence together, keeping unknown semantic gaps visible, and refusing unsupported overall strong/weak winner selection.",
+  "inputSchemas": [
+    "PHI-OS-ZIWEI-CROSS-FINDING-COMPOSITION-IR-v1.0.0",
+    "PHI-OS-ZIWEI-STRUCTURAL-FINDING-COLLECTION-v1.0.0",
+    "PHI-OS-ZIWEI-INTERPRETATION-EVIDENCE-GRAPH-v1.0.0"
+  ],
+  "outputSchema": "PHI-OS-ZIWEI-CONTRADICTION-RESOLUTION-IR-v1.0.0",
+  "resolutionStates": [
+    "SUPPORTED",
+    "QUALIFIED",
+    "COUNTERBALANCED",
+    "BOUNDED_BY_UNKNOWN",
+    "PARALLEL_CONTEXT",
+    "MULTI_PATTERN_CONTEXT",
+    "PARTIAL"
+  ],
+  "rules": {
+    "huaJiVsOtherTransformationSignalsMayProduceCounterbalancedState": true,
+    "starStateCategoriesDoNotBecomeStrongWeakVerdicts": true,
+    "distinctDaXianAndLiuNianDomainsAreParallelNotConflict": true,
+    "multipleQualifiedPatternsRemainCoexistingContext": true,
+    "unknownExtensionStarMeaningIsBoundaryNotNegativeEvidence": true,
+    "counterEvidenceMustRemainAttached": true,
+    "resolverMayNotDeleteFinding": true,
+    "resolverMayNotSelectOverallStrongWeakWinner": true,
+    "resolverMayNotCreateCustomerNarrative": true,
+    "resolverMayNotPredictEvents": true
+  },
+  "runtimeRef": "functions/zi-wei-full-production/ziwei-contradiction-resolver-runtime.js",
+  "customerCutoverAllowed": false
+}

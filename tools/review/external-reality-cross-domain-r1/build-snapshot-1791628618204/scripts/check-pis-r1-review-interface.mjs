@@ -1,0 +1,31 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import {pathToFileURL} from 'node:url';
+import {previewServer} from './lib/ca-r1-preview-server.mjs';
+const {chromium}=await import(pathToFileURL(process.env.PHIOS_PLAYWRIGHT_MODULE).href);
+const server=await previewServer(),browser=await chromium.launch({channel:'msedge',headless:true});
+try{
+ const context=await browser.newContext({acceptDownloads:true});
+ const page=await context.newPage();await page.route('**/*',r=>new URL(r.request().url()).origin===server.origin?r.continue():r.abort());
+ await page.goto(server.origin+'/docs/public-index-successor/PIS-R1-HUMAN-REVIEW.html');
+ const articles=page.locator('article[data-id]');const count=await articles.count();assert.ok(count>=36);
+ assert.equal(await page.locator('[data-decision="APPROVE"][aria-pressed="true"]').count(),0);
+ await articles.nth(0).locator('[data-decision="APPROVE"]').click();
+ await articles.nth(1).locator('textarea').fill('AUTOMATED INTERFACE TEST — NOT A HUMAN DECISION');
+ await articles.nth(1).locator('[data-decision="REJECT"]').click();
+ await page.reload();assert.equal(await articles.nth(0).locator('.decision').innerText(),'APPROVE');
+ assert.equal(await articles.nth(1).locator('.decision').innerText(),'REJECT');
+ assert.equal(await articles.nth(1).locator('textarea').inputValue(),'AUTOMATED INTERFACE TEST — NOT A HUMAN DECISION');
+ const [download]=await Promise.all([page.waitForEvent('download'),page.locator('#export').click()]);
+ const stream=await download.createReadStream();let text='';for await(const chunk of stream)text+=chunk.toString();
+ const exported=JSON.parse(text);assert.equal(exported.scope,'PAGE_COPY_PLACEMENT_USABILITY_ONLY');
+ assert.equal(Object.keys(exported.decisions).length,2);assert.match(exported.revision,/^[a-f0-9]{64}$/);
+ assert.ok((await page.locator('.candidate').first().getAttribute('href')).startsWith(server.origin));
+ await context.close();
+ const clean=await browser.newContext();const p=await clean.newPage();await p.goto(server.origin+'/docs/public-index-successor/PIS-R1-HUMAN-REVIEW.html');
+ assert.equal(await p.locator('[data-decision="APPROVE"][aria-pressed="true"]').count(),0);await clean.close();
+ const path='docs/public-index-successor/PIS-R1-HUMAN-REVIEW.html';
+ fs.writeFileSync('docs/public-index-successor/pis-r1-review-interface-check-v1.json',JSON.stringify({status:'PASS',scope:'ISOLATED_AUTOMATED_INTERFACE_TEST_NOT_HUMAN_ACCEPTANCE',items:count,checks:['empty approvals initially','Approve and Reject','notes persist on reload','revision-bound JSON export','local candidate URL','fresh context remains unreviewed'],path,sha256:crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex'),humanDecisionsRecorded:0},null,2)+'\n');
+ console.log(`PASS review interface: ${count} items. Isolated test decisions discarded; no human approval recorded.`);
+}finally{await browser.close();await server.close()}

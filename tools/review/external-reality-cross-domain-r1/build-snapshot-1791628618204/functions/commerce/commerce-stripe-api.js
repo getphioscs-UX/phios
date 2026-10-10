@@ -1,0 +1,123 @@
+import {commerceEnvironment,commerceCheckoutAvailable,requireStripeCommerce} from './commerce-environment.js';
+import {isLanguageReport,commerceReportQuote,orderReportPresentation} from './report-presentation.js';
+import { normalizeVerifiedSymbolicAccountIdentity } from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
+import { commerceProduct, commerceSelection, STRIPE_PRODUCT_REGISTRY, standardBundleProducts } from '../pws/commercial/stripe-product-registry.js';
+import { createCommerceOrder, commerceOrder, commerceCustomerBinding, bindCommerceCustomer, attachCommerceCheckout, commerceAccountProjection,ownedCommerceBook,issueDownloadToken } from './book-commerce-store.js';
+import { verifyStripeQaAccount, createCanonicalStripeCustomer, createCommerceCheckoutSession, createCommercePortal, requireStripeQa } from './stripe-client.js';
+import { sha256Hex } from './commerce-crypto.js';
+import { json,commerceError,readJsonBody,localeFrom } from './commerce-http.js';
+import {commerceLog} from './commerce-observability.js';
+import {resolveCommerceBookSourceKey} from './book-product-registry.js';
+import {controlledPurchaseOffer} from './controlled-purchase-candidate.js';
+import {readContinuityQuota} from '../personal-reading/continuity/continuity-quota-d1.js';
+import {continuityRefillProduct,CONTINUITY_COMMERCIAL_AUTHORITY as continuityAuthority} from '../personal-reading/continuity/continuity-commercial-authority.js';
+
+function requireIdentity(context){
+  const identity=normalizeVerifiedSymbolicAccountIdentity(context.data?.symbolicAccountIdentity);
+  if(!identity) throw Object.assign(new Error('Sign in with your verified PHI OS account.'),{status:401,code:'commerce_authentication_required'});
+  return identity.userId;
+}
+function sameOrigin(request){
+  const origin=new URL(request.url).origin;
+  if(request.headers.get('origin')!==origin) throw Object.assign(new Error('Same-origin request required.'),{status:403,code:'commerce_origin_invalid'});
+  return origin;
+}
+export async function commerceApi(context,action){
+  const {request,env={},fetch:fetcher}=context;
+  try{
+    if(action==='catalog') return json({success:true,environment:commerceEnvironment(env),liveEnabled:commerceEnvironment(env)==='LIVE'&&commerceCheckoutAvailable(env),checkoutAvailable:commerceCheckoutAvailable(env),products:STRIPE_PRODUCT_REGISTRY.filter(p=>p.active).map(({qaPriceId,qaProductId,livePriceId,liveProductId,...p})=>{
+      let reportPresentationOptions=null,reportPurchaseState=null;
+      if(isLanguageReport(p)){
+        try{
+          reportPresentationOptions=(p.bilingualOnly?['bilingual']:['zh-Hans','en','bilingual']).map(reportLocale=>commerceReportQuote(p,{reportLocale,reportLanguageMode:reportLocale==='bilingual'?'BILINGUAL':'SINGLE'},p.productId.includes('BUNDLE')?standardBundleProducts().slice(0,p.productId.endsWith('-2')?2:p.productId.endsWith('-3')?3:5):[]));
+          reportPurchaseState='AVAILABLE';
+        }catch(error){
+          if(error?.message==='PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED'){
+            reportPresentationOptions=[];
+            reportPurchaseState='LEGACY_READABLE_NEW_PURCHASE_DISABLED';
+          }else throw error;
+        }
+      }
+      return {...p,checkoutAvailable:commerceCheckoutAvailable(env)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:commerceEnvironment(env)==='QA'&&commerceCheckoutAvailable(env)&&continuityAuthority.refill.priceMode==='INLINE_ONE_TIME_PRICE_DATA'&&env.PHIOS_CONTINUITY_QUOTA_ENABLED==='true'}:{}),reportPresentationOptions,reportPurchaseState};
+    }),eligibleBundleProducts:standardBundleProducts()});
+    const customerId=requireIdentity(context);
+    if(action==='account') return json({success:true,...await commerceAccountProjection(env,customerId)});
+    if(action==='status'){
+      const order=await commerceOrder(env,new URL(request.url).searchParams.get('order_id'),customerId);
+      if(!order) return json({success:false,code:'order_not_found'},404);
+      // Read-only: redirects and polling can never create entitlements.
+      return json({success:true,order:{orderId:order.checkout_attempt_id,productId:order.product_id,state:order.order_state,amountMinor:order.amount_minor,currency:order.currency,reviewRequired:Boolean(order.review_required),reportPresentation:orderReportPresentation(order)}});
+    }
+    const origin=sameOrigin(request);
+    if(action==='book-download'){
+      const body=await readJsonBody(request),p=commerceProduct(body.productId);
+      if(p.category!=='BOOK') return json({success:false,error:'book_required'},422);
+      const record=await ownedCommerceBook(env,customerId,p.productId);
+      if(!record) return json({success:false,error:'book_access_required'},403);
+      if(record.watermark_status!=='ready'||!record.watermarked_object_key) return json({success:false,error:'watermarked_book_not_ready'},409);
+      const token=await issueDownloadToken({env,entitlementId:record.entitlement_id});
+      return json({success:true,downloadUrl:`/api/book-one-download?token=${encodeURIComponent(token.rawToken)}`,expiresAt:token.expiresAt});
+    }
+    requireStripeCommerce(env);
+    if(!commerceCheckoutAvailable(env)) throw Object.assign(new Error('QA checkout is not enabled.'),{status:503,code:'commerce_qa_gate_closed'});
+    const body=await readJsonBody(request);
+    if(action==='portal'){
+      if(Object.keys(body).some(k=>k!=='locale')) throw Object.assign(new Error('Portal customer is server owned.'),{status:422,code:'portal_input_invalid'});
+      const binding=await commerceCustomerBinding(env,customerId);
+      if(!binding) return json({success:false,code:'stripe_customer_not_bound'},409);
+      await verifyStripeQaAccount(env,fetcher);
+      const portal=await createCommercePortal(env,binding.stripe_customer_id,origin,fetcher);
+      return json({success:true,url:portal.url});
+    }
+    // Client amount hints are ignored. Only the canonical product/language quote
+    // below is persisted and sent to Stripe; unknown identity/price IDs still fail.
+    const allowed=new Set(['productId','selectedProducts','locale','context','acceptDigitalPolicy','reportLanguageMode','reportLocale','amount','surcharge','total','purchaseKind','subscriptionId']);
+    if(Object.keys(body).some(k=>!allowed.has(k))) throw Object.assign(new Error('Only canonical product input is accepted.'),{status:422,code:'checkout_input_invalid'});
+    let product=commerceProduct(body.productId);const selected=commerceSelection(product.productId,body.selectedProducts||[]);
+    // A registered price does not establish that the private book can be delivered.
+    if(product.category==='BOOK') resolveCommerceBookSourceKey(env,product.productId);
+    if(body.acceptDigitalPolicy!==true) throw Object.assign(new Error('Accept purchase terms.'),{status:422,code:'digital_policy_acceptance_required'});
+    const supplied=request.headers.get('idempotency-key')||'';
+    if(!/^[A-Za-z0-9._:-]{16,120}$/.test(supplied)) throw Object.assign(new Error('Idempotency key required.'),{status:422,code:'idempotency_key_required'});
+    // Context stores only an opaque existing report reference, never raw intake.
+    const reference=body.context?.readingId;
+    if(body.context&&(Object.keys(body.context).some(k=>k!=='readingId')||typeof reference!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(reference))) throw Object.assign(new Error('Invalid report reference.'),{status:422,code:'checkout_context_invalid'});
+    const contextSnapshot=reference?{readingId:reference}:{};
+    if(body.purchaseKind!==undefined){
+      if(env.PHIOS_CONTINUITY_QUOTA_ENABLED!=='true'||commerceEnvironment(env)!=='QA')throw Object.assign(Error('CONTINUITY_REFILL_NOT_ACTIVATED'),{status:403});
+      if(body.purchaseKind!=='CONTINUITY_QUOTA_REFILL'||product.productId!=='COM-SUBSCRIPTION-MONTHLY')throw Object.assign(Error('CONTINUITY_REFILL_PRODUCT_REQUIRED'),{status:422});
+      const quota=await readContinuityQuota(env,customerId);
+      if(quota.subscriptionId!==body.subscriptionId||!quota.units.length)throw Object.assign(Error('CONTINUITY_REFILL_OWNED_PERIOD_REQUIRED'),{status:403});
+      if(!Number.isSafeInteger(quota.billingPeriodStart))throw Object.assign(Error('CONTINUITY_CURRENT_PAID_PERIOD_REQUIRED'),{status:403});
+      contextSnapshot.continuityRefill={subscriptionId:quota.subscriptionId,periodStart:quota.billingPeriodStart,periodEnd:quota.billingPeriodEnd};
+      product=continuityRefillProduct(product,contextSnapshot);
+    }else if(body.subscriptionId!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_KIND_REQUIRED'),{status:422});
+    if(isLanguageReport(product))contextSnapshot.reportPresentation=commerceReportQuote(product,body,selected);
+    else if(body.reportLanguageMode||body.reportLocale)throw Object.assign(new Error('Report language is not applicable.'),{status:422,code:'REPORT_PRESENTATION_NOT_APPLICABLE'});
+    const controlled=controlledPurchaseOffer(env,{ownerId:customerId,productId:product.productId,originalAmountMinor:contextSnapshot.reportPresentation?.amountMinor??product.amountMinor});
+    if(controlled){
+      if(product.billingType==='RECURRING'||!isLanguageReport(product))throw Object.assign(Error('Controlled report purchase only.'),{status:403,code:'controlled_product_denied'});
+      contextSnapshot.controlledPurchase=controlled;
+    }
+    const requestHash=await sha256Hex(JSON.stringify({productId:product.productId,selected,context:contextSnapshot}));
+    // One persisted attempt across all products for this campaign/account.
+    const key=await sha256Hex(controlled?`COM-STRIPE-R1/${commerceEnvironment(env)}/${controlled.reservationKey}`:`COM-STRIPE-R1/${commerceEnvironment(env)}/${customerId}/${supplied}`);
+    const order=await createCommerceOrder({env,customerId,productId:product.productId,selectedProducts:selected,idempotencyKeyHash:key,requestHash,locale:localeFrom(body.locale),context:contextSnapshot});
+    if(order.stripe_checkout_url&&order.order_state==='CHECKOUT_CREATED'&&Date.parse(order.expires_at)>Date.now()) return json({success:true,orderId:order.checkout_attempt_id,checkoutUrl:order.stripe_checkout_url,replay:true});
+    if(order.order_state!=='PENDING') throw Object.assign(new Error('This checkout attempt is no longer open. Start a new purchase.'),{status:409,code:'checkout_attempt_closed'});
+    await verifyStripeQaAccount(env,fetcher);
+    let binding=await commerceCustomerBinding(env,customerId);
+    if(!binding){
+      const customer=await createCanonicalStripeCustomer(env,customerId,await sha256Hex(`COM-STRIPE-R1/customer/${customerId}`),fetcher);
+      binding=await bindCommerceCustomer(env,customerId,customer.id);
+    }
+    const session=await createCommerceCheckoutSession({env,product,order,customerId:binding.stripe_customer_id,origin,locale:order.locale,idempotencyKey:`checkout-${key}`,fetcher});
+    if(!(commerceEnvironment(env)==='LIVE'?/^cs_(?!test_)/:/^cs_test_/).test(session.id)||!/^https:\/\/checkout\.stripe\.com\//.test(session.url||'')||!Number.isFinite(session.expires_at)) throw Object.assign(new Error('Invalid QA checkout response.'),{status:502,code:'checkout_response_invalid'});
+    await attachCommerceCheckout(env,order,session);
+    commerceLog('CHECKOUT_CREATED',{order_id:order.checkout_attempt_id,checkout_session_id:session.id,product_id:product.productId,amount_minor:order.amount_minor,currency:'MYR'});
+    return json({success:true,orderId:order.checkout_attempt_id,checkoutUrl:session.url},201);
+  }catch(error){
+    if(error.message==='PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED')Object.assign(error,{status:422,code:'PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED'});
+    return commerceError(error,'commerce_request_failed');
+  }
+}

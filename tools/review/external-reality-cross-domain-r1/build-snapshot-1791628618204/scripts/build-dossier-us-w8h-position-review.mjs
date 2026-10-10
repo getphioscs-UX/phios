@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const write=(p,v)=>fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n');
+const g=read('content/civilization-atlas/reconfiguration/dossier-us-w8g-rp-candidates-v1.json');
+const decisionPath='content/civilization-atlas/reconfiguration/dossier-us-w8h-human-decisions-v1.json';
+const d=fs.existsSync(decisionPath)?read(decisionPath):{records:[]};
+const dm=new Map((d.records||[]).map(x=>[x.candidateId,x]));
+const records=(g.records||[]).map(r=>({...r,reviewQuestion:'Does this evidence-lineaged subsystem candidate support admission of the mapped runtime position without extending beyond its stated scope?',humanDecision:dm.get(r.candidateId)?.decision||'PENDING'}));
+const counts={total:records.length,pending:records.filter(r=>r.humanDecision==='PENDING').length,accepted:records.filter(r=>r.humanDecision==='ACCEPT').length,rejected:records.filter(r=>r.humanDecision==='REJECT').length,revised:records.filter(r=>r.humanDecision==='REVISE').length};
+write('content/civilization-atlas/reconfiguration/dossier-us-w8h-position-human-review-v1.json',{schemaVersion:'PHI-OS-DOSSIER-US-W8H-POSITION-HUMAN-REVIEW-v1.0.0',status:records.length?(counts.pending?'READY_FOR_HUMAN_REVIEW':'HUMAN_REVIEW_DECISIONS_RECORDED'):'BLOCKED_BY_W8G',dossierId:'DOSSIER-US',stage:'W8-H',decisionOptions:['ACCEPT','REJECT','REVISE'],records,counts,boundary:'W8-H is the only gate that may admit RP candidates for W8-I dossier projection.'});
+console.log(JSON.stringify({status:records.length?(counts.pending?'READY_FOR_HUMAN_REVIEW':'HUMAN_REVIEW_DECISIONS_RECORDED'):'BLOCKED_BY_W8G',...counts},null,2));

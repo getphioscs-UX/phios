@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "PHI-OS-ACADEMIC-BRIDGE-REGISTRY-v1.0.0",
+  "work": "PRF-W10",
+  "baselineCommit": "fc9616b9f63ed4099e008a9395ad4d167bfa597e",
+  "status": "FOUNDATION_REGISTRY_MACHINE_VERIFIED",
+  "principle": "Academic and standardized sources may anchor measurement or self-report lanes without converting symbolic interpretation into scientific evidence. Each instrument remains source-classed and separately admitted.",
+  "instruments": [
+    {
+      "priority": "P1",
+      "instrumentFamily": "IPIP_BIG_FIVE",
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "sourceRefs": [
+        "https://ipip.ori.org/"
+      ],
+      "sourceReviewState": "OFFICIAL_SOURCE_VERIFIED_2026-09-01",
+      "licenseUsageStatus": "PUBLIC_DOMAIN_ITEMS_AND_SCALES_CONFIRMED_BY_OFFICIAL_IPIP_SITE",
+      "scoringAuthority": "SPECIFIC_SCALE_SELECTION_AND_SCORING_ADMISSION_REQUIRED_BEFORE_FIRST_PARTY_USE",
+      "normingStatus": "NOT_ADMITTED",
+      "manualImportedResultStatus": "FOUNDATION_ALLOWED_AS_EXTERNAL_PROFILE_RESULT",
+      "firstPartyAssessmentStatus": "INSTRUMENT_SELECTION_VALIDATION_PENDING",
+      "customerAvailability": "PARTIAL",
+      "admissionState": "PARTIAL",
+      "customerClaimBoundary": "Imported results remain external profile results. A future first-party IPIP implementation must name the exact scale, scoring method, version and norming basis; it must not create an objective personality truth claim.",
+      "relationshipUseBoundary": "Only same-provider/same-dimension comparison under PRF-W9 admitted rules; no compatibility percentage or outcome prediction.",
+      "professionalUseBoundary": "May inform reflection or professional discussion after instrument-specific admission; it cannot independently establish a professional recommendation or diagnosis."
+    },
+    {
+      "priority": "P2",
+      "instrumentFamily": "PHI_ORIGINAL_REASONING_TASK_PERFORMANCE",
+      "sourceClass": "MEASURED_TASK_PERFORMANCE",
+      "sourceRefs": [
+        "content/professional/profile/reasoning/reasoning-task-performance-contract-v1.json"
+      ],
+      "sourceReviewState": "FIRST_PARTY_FOUNDATION_ONLY",
+      "licenseUsageStatus": "FIRST_PARTY_OR_ORIGINAL_TASK_BANK_REQUIRED",
+      "scoringAuthority": "RAW_CORRECT_RAW_ATTEMPTED_AND_TASK_FAMILY_PERFORMANCE_ONLY",
+      "normingStatus": "NOT_ADMITTED",
+      "manualImportedResultStatus": "NOT_APPLICABLE",
+      "firstPartyAssessmentStatus": "NO_PRODUCTION_TASK_BANK_ADMITTED",
+      "customerAvailability": "UNAVAILABLE",
+      "admissionState": "FOUNDATION_ONLY",
+      "customerClaimBoundary": "Raw task performance is not IQ, percentile, intelligence rank or cognitive diagnosis until a separately calibrated and normed authority exists.",
+      "relationshipUseBoundary": "Only same task-family context may open an observation target; it may not rank intelligence or relationship quality.",
+      "professionalUseBoundary": "Not a selection, diagnosis or professional competency instrument."
+    },
+    {
+      "priority": "P3",
+      "instrumentFamily": "O_NET_INTEREST_PROFILER_RIASEC",
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "sourceRefs": [
+        "https://www.onetcenter.org/license_tools.html"
+      ],
+      "sourceReviewState": "OFFICIAL_LICENSE_PATH_IDENTIFIED_2026-09-01",
+      "licenseUsageStatus": "LICENSE_PATH_IDENTIFIED_NOT_YET_ADMITTED_FOR_PHI_OS",
+      "scoringAuthority": "SOURCE_AND_IMPLEMENTATION_REVIEW_PENDING",
+      "normingStatus": "SOURCE_AND_IMPLEMENTATION_REVIEW_PENDING",
+      "manualImportedResultStatus": "SOURCE_PENDING",
+      "firstPartyAssessmentStatus": "SOURCE_PENDING",
+      "customerAvailability": "UNAVAILABLE",
+      "admissionState": "SOURCE_PENDING",
+      "customerClaimBoundary": "Optional successor only. No RIASEC result is generated or interpreted by PHI OS until the exact O*NET license path, implementation, attribution and scoring authority are separately admitted.",
+      "relationshipUseBoundary": "No relationship comparison authority is admitted.",
+      "professionalUseBoundary": "Potential future career-interest reflection only; not a job-fit guarantee or employment decision authority."
+    },
+    {
+      "priority": "P4",
+      "instrumentFamily": "OECD_INFE_FINANCIAL_CAPABILITY_REFERENCE",
+      "sourceClass": "PROFESSIONAL_EVIDENCE",
+      "sourceRefs": [
+        "https://www.oecd.org/en/publications/oecd-infe-toolkit-for-measuring-financial-literacy-inclusion-and-well-being-2026_92f2d439-en.html"
+      ],
+      "sourceReviewState": "OFFICIAL_2026_TOOLKIT_IDENTIFIED_2026-09-01",
+      "licenseUsageStatus": "REFERENCE_IDENTIFIED_ITEM_REUSE_AND_IMPLEMENTATION_RIGHTS_NOT_ADMITTED",
+      "scoringAuthority": "NOT_ADMITTED",
+      "normingStatus": "NOT_ADMITTED",
+      "manualImportedResultStatus": "NOT_APPLICABLE",
+      "firstPartyAssessmentStatus": "SOURCE_PENDING",
+      "customerAvailability": "UNAVAILABLE",
+      "admissionState": "SOURCE_PENDING",
+      "customerClaimBoundary": "The OECD/INFE 2026 toolkit is an academic/professional reference for future financial-capability design. PHI OS does not reproduce its questionnaire or claim OECD scoring authority in Profile v1.",
+      "relationshipUseBoundary": "No relationship use is admitted.",
+      "professionalUseBoundary": "May inform future separately governed financial-capability instrument design; it does not replace professional financial planning authority."
+    }
+  ],
+  "governance": {
+    "p3P4OptionalAndNonBlocking": true,
+    "instrumentSpecificAdmissionRequired": true,
+    "licenseStatusDoesNotEqualScoringAuthority": true,
+    "normingStatusDoesNotTransferAcrossInstruments": true,
+    "symbolicMethodsNotScientificallyValidatedByAcademicBridge": true,
+    "customerPublishableBeforePrfW12": false
+  },
+  "gate": "check:profile:w10-academic-bridge-registry"
+}

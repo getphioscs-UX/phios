@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-APS-4-CANDIDATE-ORCHESTRATION-CONTRACT-v1.0.0",
+  "work": "APS-4",
+  "status": "ACTIVE",
+  "title": "Governed Candidate Orchestration",
+  "baselineCommit": "eb55edb1a183a173aca707e3d3f1a6f842e36271",
+  "purpose": "Extend the single article:batch entrypoint from deterministic APS-3 selection into candidate resolution. Reuse an existing valid governed PJA Candidate before considering generation; never rewrite a valid Candidate and never convert Candidate state into Human or Publication authority.",
+  "command": "npm run article:batch -- --book BOOK-1 --count 30",
+  "input": {
+    "requiredWork": "APS-3",
+    "requiredBatchState": "READY_FOR_APS_4_CANDIDATE_ORCHESTRATION",
+    "mayReinterpretAPS2C2C3KppVapReadinessInternals": false
+  },
+  "candidateResolutionOrder": [
+    "REUSE_EXISTING_GOVERNED_PJA_CANDIDATE",
+    "IF_MISSING_RETURN_GOVERNED_CANDIDATE_GENERATION_REQUIRED",
+    "NEVER_FABRICATE_ARTICLE_PROSE_FROM_METADATA"
+  ],
+  "existingCandidateRequirements": {
+    "candidateType": "canonical_article_candidate",
+    "candidateAuthority": "candidate_only",
+    "allowedStates": ["draft", "ready_for_human_review", "changes_required"],
+    "digestMustValidate": true,
+    "independentLocaleAuthoringRequired": true,
+    "publicationClaimForbidden": true
+  },
+  "generationBoundary": {
+    "implicitPaidAiInvocationAllowed": false,
+    "networkInvocationByArticleBatchAllowedAtAPS4": false,
+    "missingCandidateBehavior": "GOVERNED_CANDIDATE_GENERATION_REQUIRED",
+    "futureGenerationAdapterMustRemainCandidateOnly": true,
+    "humanReviewStillRequiredAfterGeneration": true
+  },
+  "localeIntegration": {
+    "contract": "content/production/article-simplification/contracts/aps-l10n-same-route-locale-release-contract-v1.json",
+    "defaultTargetLocales": ["zh-Hans", "en"],
+    "articleCandidateMayBecomeOtherLocaleAuthorityAutomatically": false,
+    "englishTranslationInheritanceAllowed": false,
+    "localeAuthorityMustFailClosedWhenLocaleDiscoveryIsIncomplete": true
+  },
+  "output": {
+    "artifact": "content/production/article-simplification/batches/BATCH-NNN/candidate-orchestration.v1.json",
+    "authority": "NON_AUTHORITATIVE_CANDIDATE_AND_LOCALE_HANDOFF_PROJECTION"
+  },
+  "governance": {
+    "candidateEqualsKnowledgeAuthority": false,
+    "candidateEqualsHumanReview": false,
+    "candidateEqualsHumanApproval": false,
+    "candidateEqualsPublication": false,
+    "existingCandidateMutationAllowed": false,
+    "humanAuthorityCreationAllowed": false,
+    "publicationCreationAllowed": false,
+    "carProjectionCreationAllowedAtAPS4": false,
+    "cprProjectionCreationAllowedAtAPS4": false,
+    "visualArticleReleaseCreationAllowedAtAPS4": false
+  },
+  "nextWork": "APS-5_REVIEW_BATCH_ASSEMBLY"
+}

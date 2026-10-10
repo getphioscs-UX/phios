@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/bzr/bzr-normalized-projection-facts-v1.schema.json",
+  "title": "PHI OS BZR Normalized Projection Facts v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runtimeCode",
+    "runtimeVersion",
+    "methodCode",
+    "pluginCode",
+    "executionMode",
+    "normalizationCode",
+    "normalizationVersion",
+    "calculationMode",
+    "hourPillarStatus",
+    "pillarOrder",
+    "pillars",
+    "source",
+    "deterministic",
+    "providerUsed",
+    "aiUsed",
+    "projectionNormalized",
+    "projectionCreated",
+    "interpretationCreated",
+    "knowledgeCreated",
+    "professionalConclusionCreated",
+    "productionEligible",
+    "normalizationDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-BZR-NORMALIZED-PROJECTION-FACTS-v1.0.0"
+    },
+    "runtimeCode": {
+      "const": "BZR_PROJECTION_NORMALIZATION_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "methodCode": {
+      "const": "BAZI"
+    },
+    "pluginCode": {
+      "const": "BZR"
+    },
+    "executionMode": {
+      "const": "validation"
+    },
+    "normalizationCode": {
+      "const": "BZR_CANONICAL_PROJECTION_INPUT_V1"
+    },
+    "normalizationVersion": {
+      "const": "1.0.0"
+    },
+    "calculationMode": {
+      "enum": [
+        "THREE_PILLARS",
+        "FOUR_PILLARS"
+      ]
+    },
+    "hourPillarStatus": {
+      "enum": [
+        "UNRESOLVED",
+        "RESOLVED"
+      ]
+    },
+    "pillarOrder": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 4
+    },
+    "pillars": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 4
+    },
+    "source": {
+      "type": "object"
+    },
+    "deterministic": {
+      "const": true
+    },
+    "providerUsed": {
+      "const": false
+    },
+    "aiUsed": {
+      "const": false
+    },
+    "projectionNormalized": {
+      "const": true
+    },
+    "projectionCreated": {
+      "const": false
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "knowledgeCreated": {
+      "const": false
+    },
+    "professionalConclusionCreated": {
+      "const": false
+    },
+    "productionEligible": {
+      "const": false
+    },
+    "normalizationDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W22-AST-TOLERANCE-FREEZE-v1.0.0",
+  "work": "MPA-W22",
+  "status": "FROZEN_TECHNICAL_REFERENCE_TOLERANCE",
+  "methodCode": "ASTROLOGY",
+  "reference": "NASA_JPL_HORIZONS",
+  "candidateEngine": "ASTRONOMY_ENGINE_JS",
+  "sourceEvidence": {
+    "releaseVersion": "2.1.19",
+    "releaseCommit": "61dc07020aaa6885d2c7f688a4d82beaf6edb9ef",
+    "comparisonHarnessGitBlobSha1": "05e66c569b9e65c5004487681a3bf5ba84fd8df2"
+  },
+  "angularComparison": {
+    "metricEquatorialArcminutes": {
+      "maximum": 0.878
+    },
+    "apparentEquatorialArcminutes": {
+      "maximum": 0.878
+    },
+    "horizontalArcminutes": {
+      "maximum": 0.878
+    },
+    "maximumArcminutes": 0.878,
+    "maximumArcseconds": 52.68,
+    "projectDesignTargetArcminutes": 1.0,
+    "comparisonRule": "euclidean_angular_error_must_be_lte_maximum"
+  },
+  "timeComparison": {
+    "timezoneOffsetSecondsTolerance": 0,
+    "historicalTimezoneAuthorityMustMatchPinnedTzdb": true
+  },
+  "scopeBoundary": {
+    "thisIsEphemerisValidationTolerance": true,
+    "thisIsAstrologyAspectOrbPolicy": false,
+    "productionAspectOrbPolicyApproved": false
+  },
+  "rules": {
+    "frameOrCorrectionMixingForbidden": true,
+    "silentToleranceExpansionForbidden": true,
+    "futureChangeRequiresVersionedSuccessor": true
+  },
+  "freezeDigest": "721f8eb4a166ab7058ac13e8739a03d113ac735ad0d3cb6ed3293899b156064b"
+}

@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-PERSISTENCE-CHECKER-SUCCESSOR-v1.0.0",
+  "phase": "TPA-H",
+  "work": "TPA-W35",
+  "baselineCommit": "6eb24e4e55a77859b0068836da7fa89e946ae3b1",
+  "predecessorCommit": "306b84652102583690a7f7665167f8dfdbb82541",
+  "status": "CURRENT_TAROT_PERSISTENCE_CHECKER_RECONCILED_PRODUCT_STILL_CLOSED",
+  "historicalAcceptance": {
+    "path": "content/interpretation/tarot/acceptance/tarot-persistence-acceptance-v1.json",
+    "sha256": "9150157b1d1109ee970da594545fedac5daa2263e5270c7c802022f5be2562af",
+    "preserved": true
+  },
+  "historicalSuccessor": {
+    "path": "content/interpretation/tarot/reconciliation/tarot-persistence-current-successor-v1.json",
+    "sha256": "aa2a2c696aeec19048fc5d26c3f7ae09cdf4ee3e71684d5d4f565c87bc6519ec",
+    "preserved": true
+  },
+  "checkerLifecycle": {
+    "historicalChecker": {
+      "path": "scripts/check-tarot-persistence.mjs",
+      "sha256": "47851f27cfe27580a13391b34b02a0b75a4727638d1c4fcacdefad8c9f69c832",
+      "aliases": [
+        "check:tarot-persistence",
+        "check:tarot-persistence-historical"
+      ],
+      "expectedSuccessorWorktreeResult": "FAIL_ONLY_AT_HISTORICAL_SHARED_CONTEXT_API_DIGEST"
+    },
+    "currentChecker": {
+      "path": "scripts/check-tarot-persistence-current.mjs",
+      "alias": "check:tarot-persistence-current"
+    },
+    "currentAggregateAlias": "check:tarot-product-activation-phase-h"
+  },
+  "sharedContextApiEvolution": {
+    "path": "functions/api/symbolic-method-context.js",
+    "tarotPersistenceAcceptanceSha256": "ac5f4c320d38797fe78f0f086ca46694a1979e1c645aea71f0d3c21edda59a81",
+    "iChingProductSuccessorSha256": "af8dc43a659f31aca2177b073b2a5f7238381c9d5d5348ae30adeec968a8b5e9",
+    "currentSharedSuccessorSha256": "3b5409cc5d1dfe6a1b6b83f85604e44aad00eb8cea082b6a600b5b71a4e39c96",
+    "tarotSourceReadyRestored": true,
+    "iChingSourceReadyPreserved": true,
+    "separateExecutionAuthorityPreserved": true,
+    "productionAuthorityChanged": false
+  },
+  "persistenceRuntime": {
+    "d1SourceBindingReady": true,
+    "verifiedServerIdentityRequired": true,
+    "crossAccountIsolationPreserved": true,
+    "guestPersistenceBlocked": true,
+    "explicitRealityContextOptInRequired": true
+  },
+  "productionBoundary": {
+    "globalAccountAuthenticationProviderConnected": false,
+    "verifiedLiveAccountPersistenceClaimed": false,
+    "humanAcceptanceClaimed": false,
+    "liveBrowserAcceptanceClaimed": false,
+    "liveProductionShaAlignmentClaimed": false,
+    "publicRunAllowed": false,
+    "productionCapabilityPromoted": false
+  },
+  "rules": {
+    "historicalAcceptanceMutationAllowed": false,
+    "historicalCheckerMutationAllowed": false,
+    "sharedApiSuccessorMustPreserveBothMethods": true,
+    "checkerReconciliationMayGrantProductionActivation": false
+  }
+}

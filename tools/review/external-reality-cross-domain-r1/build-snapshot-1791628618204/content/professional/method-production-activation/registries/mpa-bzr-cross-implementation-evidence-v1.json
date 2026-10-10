@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W23-BZR-CROSS-IMPLEMENTATION-EVIDENCE-v1.0.0",
+  "work": "MPA-W23",
+  "methodCode": "BAZI",
+  "status": "PASS_METHOD_SPECIFIC_REFERENCE_EVIDENCE",
+  "comparisons": {
+    "timezone": {
+      "state": "RESOLVED_PINNED_IANA_TZDB_2026C"
+    },
+    "trueSolarTime": {
+      "state": "WITHIN_FROZEN_REFERENCE_TOLERANCE",
+      "noaaMeeusTotalCorrectionMinutes": -61.6823450709,
+      "swissEphemerisTotalCorrectionMinutes": -61.7016477457,
+      "differenceSeconds": 1.1581604878039187
+    },
+    "solarTerms": {
+      "state": "REFERENCE_FROZEN",
+      "hkoDefinitionBound": true,
+      "independent1989JieFixturesFrozen": true
+    },
+    "sexagenary": {
+      "state": "EXACT_MATCH_INDEPENDENT_RECALCULATION",
+      "expected": [
+        "JI-SI",
+        "YI-HAI",
+        "JI-MAO",
+        "YI-HAI"
+      ]
+    },
+    "boundaryImplementation": {
+      "state": "SECONDARY_IMPLEMENTATION_BOUND",
+      "implementation": "lunar-javascript 1.7.7",
+      "trustedAuthority": false
+    }
+  },
+  "historicalW15BlockerResolution": {
+    "INDEPENDENT_IMPLEMENTATION_NOT_BOUND": "RESOLVED_BY_PINNED_SECONDARY_IMPLEMENTATION_PLUS_INDEPENDENT_RECALCULATION",
+    "TZDB_DATASET_DIGEST_UNRESOLVED": "RESOLVED_BY_IANA_TZDB_2026C_BINDING",
+    "SOLAR_TERM_REFERENCE_NOT_FROZEN": "RESOLVED_BY_PINNED_ENGINE_HKO_DEFINITION_AND_FROZEN_1989_REFERENCE_FIXTURES"
+  },
+  "productionComparisonSatisfiedForMethodSpecificReadiness": true,
+  "effects": {
+    "historicalW15Rewritten": false,
+    "productionEligibilityCreated": false
+  }
+}

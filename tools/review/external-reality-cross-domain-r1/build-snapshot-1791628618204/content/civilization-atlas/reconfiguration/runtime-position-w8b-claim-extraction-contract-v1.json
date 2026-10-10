@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8B-CLAIM-EXTRACTION-CONTRACT-v1.0.0",
+  "version": "1.1.0",
+  "status": "ACTIVE_CLAIM_EXTRACTION",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8B",
+  "title": "Current Evidence Claim Extraction",
+  "purpose": "Convert W8A structurally validated sources into source-bounded minimal claim candidates with explicit locators and lineage, without admitting them as current evidence.",
+  "predecessorWork": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A",
+  "predecessorSources": "content/civilization-atlas/reconfiguration/runtime-position-w8a-validated-sources-v1.json",
+  "successorWork": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8C",
+  "stages": [
+    "CLAIM_WORK_ORDER",
+    "CLAIM_CANDIDATE_INTAKE",
+    "SOURCE_BOUNDARY_VALIDATION",
+    "CWA_READY_HANDOFF"
+  ],
+  "claimIntakeRequiredFields": [
+    "claimCandidateId",
+    "sourceId",
+    "dossierId",
+    "laneId",
+    "claimType",
+    "claimText",
+    "sourceLocator",
+    "supportLevel"
+  ],
+  "sourceLocatorRequiredFields": [
+    "type",
+    "value"
+  ],
+  "allowedLocatorTypes": [
+    "PAGE",
+    "SECTION",
+    "TABLE",
+    "PARAGRAPH",
+    "ANCHOR",
+    "DATASET_FIELD",
+    "URL_FRAGMENT",
+    "FIGURE",
+    "APPENDIX",
+    "API_RESPONSE_FIELD",
+    "PROVIDER_SERIES_WINDOW"
+  ],
+  "allowedSupportLevels": [
+    "DIRECT",
+    "PARTIAL"
+  ],
+  "allowedClaimTypes": [
+    "GENERAL_CURRENT_FACT",
+    "BREAKING_NEWS",
+    "NEWS_DEVELOPMENT",
+    "POLICY_OR_REGULATION",
+    "COMPANY_PRODUCT_SPEC"
+  ],
+  "validationRules": [
+    "sourceId must resolve to a W8A structurally validated source.",
+    "Claim dossierId must equal the source dossierId.",
+    "Claim laneId must be one of the source targetLanes.",
+    "Claim text must be a bounded factual proposition and may not be empty.",
+    "Every claim requires a source locator that can be used to find the supporting material again.",
+    "DIRECT and PARTIAL are the only allowed support levels; PARTIAL remains eligible for review but is not treated as complete support.",
+    "Claim type is only a candidate classification until Current Web Authority admission.",
+    "One source may support multiple claims and lanes, but each claimCandidateId must be unique.",
+    "Conflict groups may link contradictory or materially different claims without resolving them by source count.",
+    "Claim extraction does not infer runtime grammar, reality domain, Phase, current position, threshold crossing or future reachability.",
+    "Provider-derived claims may use API_RESPONSE_FIELD or PROVIDER_SERIES_WINDOW locators, but the referenced provider snapshot must preserve responseDigest and field/window lineage."
+  ],
+  "boundaries": {
+    "claimCandidateIsFact": false,
+    "claimCandidateIsEvidence": false,
+    "cwaAdmissionPerformed": false,
+    "currentDataCreated": false,
+    "sourceVotingAllowed": false,
+    "derivedReadingAllowed": false,
+    "runtimePositionCandidateAllowed": false,
+    "autoPopulateDossiersAllowed": false,
+    "mutatesW8EvidenceBatches": false
+  },
+  "failClosed": true
+}

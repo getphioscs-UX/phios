@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/rmo/canonical-reality-event-v1.schema.json",
+  "title": "PHI OS Canonical Reality Event v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "eventCode", "eventVersion", "componentType", "eventType", "realityReference",
+    "entityReferences", "sourceReferences", "evidenceReferences", "dataNature", "certainty", "temporal",
+    "recordStatus", "evidenceEligibility", "authorityReference", "operationalMode",
+    "operationalTimelineWriteAllowed", "persistentStoreWriteAllowed", "createdAt", "eventDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CANONICAL-REALITY-EVENT-v1.0.0"},
+    "eventCode": {"type": "string", "pattern": "^RMO-EVENT-[A-Z0-9-]{4,100}$"},
+    "eventVersion": {"$ref": "#/$defs/semver"},
+    "componentType": {"const": "REALITY_EVENT"},
+    "eventType": {"type": "string", "minLength": 1},
+    "realityReference": {"$ref": "#/$defs/realityReference"},
+    "entityReferences": {"$ref": "#/$defs/referenceArray"},
+    "sourceReferences": {"$ref": "#/$defs/referenceArray"},
+    "evidenceReferences": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "dataNature": {"type": "string", "minLength": 1},
+    "certainty": {"type": "string", "minLength": 1},
+    "temporal": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "occurredAt", "startedAt", "endedAt"],
+          "properties": {
+            "mode": {"const": "INSTANT"},
+            "occurredAt": {"type": "string", "format": "date-time"},
+            "startedAt": {"type": "null"},
+            "endedAt": {"type": "null"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "occurredAt", "startedAt", "endedAt"],
+          "properties": {
+            "mode": {"const": "INTERVAL"},
+            "occurredAt": {"type": "null"},
+            "startedAt": {"type": "string", "format": "date-time"},
+            "endedAt": {"type": "string", "format": "date-time"}
+          }
+        }
+      ]
+    },
+    "recordStatus": {"const": "RECORDED"},
+    "evidenceEligibility": {"const": "NOT_EVALUATED"},
+    "authorityReference": {"const": "content/runtime/reality-model-runtime/contracts/event-runtime-contract-v1.json"},
+    "operationalMode": {"const": "VALIDATION_ONLY"},
+    "operationalTimelineWriteAllowed": {"const": false},
+    "persistentStoreWriteAllowed": {"const": false},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "eventDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "semver": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "referenceArray": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 200}},
+    "realityReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["realityCode", "realityVersion", "realityDigest"],
+      "properties": {
+        "realityCode": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+        "realityVersion": {"$ref": "#/$defs/semver"},
+        "realityDigest": {"$ref": "#/$defs/digest"}
+      }
+    }
+  }
+}

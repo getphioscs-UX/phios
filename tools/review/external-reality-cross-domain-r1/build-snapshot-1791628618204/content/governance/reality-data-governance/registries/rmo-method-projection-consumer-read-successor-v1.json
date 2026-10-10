@@ -1,0 +1,51 @@
+{
+  "registryCode": "PHI-OS-RDG-RMO-METHOD-PROJECTION-CONSUMER-READ-SUCCESSOR-v1",
+  "registryVersion": "1.0.0",
+  "status": "ACTIVE_SUCCESSOR_EXTENSION",
+  "baselineCommit": "07391e717e64c2636ce22e3f97900ff97d9571d8",
+  "extends": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+  "purpose": "Permit RMO to consume governed METHOD_PROJECTION_RECORD references read-only for reality modeling without converting projection into evidence, fact, truth, diagnosis, or professional judgment.",
+  "preservedLegacyAuthority": {
+    "runtimeCode": "RMO",
+    "baseRegistryMutated": false,
+    "producedDataTypes": [
+      "RUNTIME_STATE_RECORD"
+    ],
+    "writeAuthorityExpanded": false,
+    "evidencePromotionExpanded": false
+  },
+  "addedReadOnlyDataTypes": [
+    "METHOD_PROJECTION_RECORD"
+  ],
+  "effectiveConsumedDataTypes": [
+    "REALITY_INPUT_RECORD",
+    "REALITY_EVIDENCE_RECORD",
+    "GOVERNANCE_RECORD",
+    "METHOD_PROJECTION_RECORD"
+  ],
+  "readAuthority": {
+    "mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND",
+    "dataTypes": [
+      "METHOD_PROJECTION_RECORD"
+    ],
+    "allowedPurposes": [
+      "SERVICE_DELIVERY",
+      "RUNTIME_CONTINUITY"
+    ]
+  },
+  "rules": {
+    "consumerReadOnly": true,
+    "methodProjectionPayloadCopyForbidden": true,
+    "methodProjectionMayBeBoundByReferenceOnly": true,
+    "methodProjectionIsEvidence": false,
+    "methodProjectionIsObservedFact": false,
+    "methodProjectionIsRealityTruth": false,
+    "methodProjectionMayCreateDiagnosis": false,
+    "methodProjectionMayCreateProfessionalJudgment": false,
+    "methodProjectionMayCreateNavigationCommand": false,
+    "rmoWriteAuthorityExpanded": false,
+    "baseRegistryRewritten": false,
+    "storageLocationDoesNotGrantAuthority": true,
+    "mpaOwnsDataGovernanceAuthority": false
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RNE Bounded Navigation Option Set v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "optionSetCode",
+    "optionSetVersion",
+    "objectType",
+    "dataType",
+    "currentPositionReference",
+    "targetReference",
+    "constraintGraphReference",
+    "generationModel",
+    "options",
+    "selectionMade",
+    "rankingCreated",
+    "recommendedDirectionCreated",
+    "commandCreated",
+    "executionCreated",
+    "riskAssessmentCreated",
+    "recoverabilityAssessmentCreated",
+    "scenarioPredictionCreated",
+    "professionalJudgmentCreated",
+    "validationOnly",
+    "persistentStoreWriteAllowed",
+    "optionSetDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RNE-BOUNDED-OPTION-SET-v1.0.0"
+    },
+    "optionSetCode": {
+      "type": "string",
+      "pattern": "^RNE-OPTION-SET-[A-Z0-9-]{4,120}$"
+    },
+    "optionSetVersion": {
+      "const": "1.0.0"
+    },
+    "objectType": {
+      "const": "BOUNDED_OPTION_SET"
+    },
+    "dataType": {
+      "const": "NAVIGATION_RECORD"
+    },
+    "currentPositionReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "targetReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "constraintGraphReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "generationModel": {
+      "const": "DETERMINISTIC_RULE_FIRST"
+    },
+    "options": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "optionCode",
+          "optionClass",
+          "boundaryMode",
+          "currentPositionReference",
+          "targetReference",
+          "constraintReferences",
+          "triggerReferences",
+          "selectionState",
+          "commandCreated",
+          "executionCreated",
+          "predictionCreated",
+          "professionalJudgmentCreated"
+        ],
+        "properties": {
+          "optionCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "optionClass": {
+            "enum": [
+              "OBSERVE",
+              "CLARIFY",
+              "VERIFY",
+              "REPOSITION",
+              "RECONFIGURE"
+            ]
+          },
+          "boundaryMode": {
+            "enum": [
+              "NO_STATE_CHANGE_REQUIRED",
+              "CLARIFICATION_ONLY",
+              "DEPENDENCY_VERIFICATION_ONLY",
+              "HARD_BOUNDARY_RESPECTED",
+              "SOFT_LIMIT_RECONFIGURATION"
+            ]
+          },
+          "currentPositionReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "targetReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "constraintReferences": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 240
+            }
+          },
+          "triggerReferences": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 240
+            }
+          },
+          "selectionState": {
+            "const": "AVAILABLE_NOT_SELECTED"
+          },
+          "commandCreated": {
+            "const": false
+          },
+          "executionCreated": {
+            "const": false
+          },
+          "predictionCreated": {
+            "const": false
+          },
+          "professionalJudgmentCreated": {
+            "const": false
+          }
+        }
+      }
+    },
+    "selectionMade": {
+      "const": false
+    },
+    "rankingCreated": {
+      "const": false
+    },
+    "recommendedDirectionCreated": {
+      "const": false
+    },
+    "commandCreated": {
+      "const": false
+    },
+    "executionCreated": {
+      "const": false
+    },
+    "riskAssessmentCreated": {
+      "const": false
+    },
+    "recoverabilityAssessmentCreated": {
+      "const": false
+    },
+    "scenarioPredictionCreated": {
+      "const": false
+    },
+    "professionalJudgmentCreated": {
+      "const": false
+    },
+    "validationOnly": {
+      "const": true
+    },
+    "persistentStoreWriteAllowed": {
+      "const": false
+    },
+    "optionSetDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

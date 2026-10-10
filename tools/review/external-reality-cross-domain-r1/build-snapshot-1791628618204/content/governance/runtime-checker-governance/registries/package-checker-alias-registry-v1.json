@@ -1,0 +1,1257 @@
+{
+  "schemaVersion": "PHI-OS-PACKAGE-CHECKER-ALIAS-REGISTRY-v1.0.0",
+  "registryVersion": "1.0.0",
+  "baselineCommit": "4975180fff09ac3a1e3f559fcc02f07357ffb269",
+  "status": "ACTIVE_COMPATIBILITY_ROUTER",
+  "purpose": "Keep public/canonical npm commands in package.json while routing historical leaf W-stage aliases through one governed runner without deleting compatibility keys.",
+  "selectionPolicy": {
+    "packageKeysDeleted": false,
+    "publicCanonicalCommandsReordered": false,
+    "historicalAliasCriteria": [
+      "script name contains exactly one terminal W-stage token",
+      "script is not referenced by another npm script in the 4975180 baseline",
+      "script is either a thin npm-run wrapper or shares an exact command body with another script"
+    ],
+    "migratedAliasCount": 171
+  },
+  "parallelPackageReconciliation": {
+    "latestMainAuthority": "test.zip/package.json",
+    "candidate062458": "BYTE_EQUIVALENT_TO_LATEST_MAIN",
+    "candidate062426": {
+      "packageOnlyForwardDelta": [
+        "check:ppr-c1-w0-w3",
+        "root check appends check:ppr-c1-w0-w3"
+      ],
+      "admission": "NOT_MERGED_CHECKER_FAILS_CURRENT_MAIN",
+      "observedCurrentMainResult": "node scripts/check-ppr-c1-w0-w3.mjs exits non-zero",
+      "staleRegressionRejected": "root check references cross-r2-w24-w26-pre-admission instead of current cross-final-production-admission"
+    },
+    "candidate062542": {
+      "packageOnlyForwardDelta": [
+        "check:ast-full-production appends check:ast-fp-r2-w13-w16"
+      ],
+      "admission": "NOT_MERGED_CHECKER_FAILS_CURRENT_MAIN",
+      "observedCurrentMainResult": "npm run check:ast-fp-r2-w13-w16 exits non-zero",
+      "staleRegressionRejected": "root check references cross-r2-w24-w26-pre-admission instead of current cross-final-production-admission"
+    },
+    "rule": "Parallel package-only changes are not admitted until the corresponding runtime/checker authority is present and the target gate passes on the current main baseline."
+  },
+  "protectedCanonicalCommands": [
+    "dev",
+    "precheck",
+    "check",
+    "postcheck",
+    "check:runtime",
+    "check:cross-final-production-admission",
+    "check:cross-r2-production",
+    "check:ast-full-production",
+    "check:bazi-full-production",
+    "check:ziwei-full-production",
+    "check:num-production",
+    "check:tarot-current",
+    "check:iching-current",
+    "check:package-aliases",
+    "check:legacy"
+  ],
+  "runner": "scripts/run-package-checker-alias.mjs",
+  "checker": "scripts/check-package-checker-alias-registry.mjs",
+  "entries": [
+    {
+      "alias": "check:astt-w0",
+      "family": "ASTT",
+      "legacyCommand": "npm run check:astt-w0-w10",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:astt-w1",
+      "family": "ASTT",
+      "legacyCommand": "npm run check:astt-w0-w10",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:astt-w10",
+      "family": "ASTT",
+      "legacyCommand": "npm run check:astt-w0-w10",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:astt-w2",
+      "family": "ASTT",
+      "legacyCommand": "npm run check:astt-w0-w10",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:astt-w3",
+      "family": "ASTT",
+      "legacyCommand": "npm run check:astt-w0-w10",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:astt-w4",
+      "family": "ASTT",
+      "legacyCommand": "npm run check:astt-w0-w10",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:astt-w5",
+      "family": "ASTT",
+      "legacyCommand": "npm run check:astt-w0-w10",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:astt-w6",
+      "family": "ASTT",
+      "legacyCommand": "npm run check:astt-w0-w10",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:astt-w7",
+      "family": "ASTT",
+      "legacyCommand": "npm run check:astt-w0-w10",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:astt-w8",
+      "family": "ASTT",
+      "legacyCommand": "npm run check:astt-w0-w10",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:astt-w9",
+      "family": "ASTT",
+      "legacyCommand": "npm run check:astt-w0-w10",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:book-w1b",
+      "family": "BOOK",
+      "legacyCommand": "npm run check:book-w1-outline",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:book-w1c",
+      "family": "BOOK",
+      "legacyCommand": "npm run check:book-w1-blueprints",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:book-w1d",
+      "family": "BOOK",
+      "legacyCommand": "npm run check:book-w1-canonical",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:book-w1e",
+      "family": "BOOK",
+      "legacyCommand": "npm run check:book-w1-public-projection",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:book-w1f",
+      "family": "BOOK",
+      "legacyCommand": "npm run check:book-w1-compatibility",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:book-w1g",
+      "family": "BOOK",
+      "legacyCommand": "npm run check:book-w1-freeze",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:bzr-w2a",
+      "family": "BZR",
+      "legacyCommand": "node scripts/check-bzr-w2-four-pillars-runtime.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:bzt-w0",
+      "family": "BZT",
+      "legacyCommand": "npm run check:bzt-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:bzt-w1",
+      "family": "BZT",
+      "legacyCommand": "npm run check:bzt-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:bzt-w2",
+      "family": "BZT",
+      "legacyCommand": "npm run check:bzt-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:bzt-w3",
+      "family": "BZT",
+      "legacyCommand": "npm run check:bzt-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:bzt-w4",
+      "family": "BZT",
+      "legacyCommand": "npm run check:bzt-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:bzt-w5",
+      "family": "BZT",
+      "legacyCommand": "npm run check:bzt-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:bzt-w6",
+      "family": "BZT",
+      "legacyCommand": "npm run check:bzt-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:bzt-w7",
+      "family": "BZT",
+      "legacyCommand": "npm run check:bzt-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:bzt-w8",
+      "family": "BZT",
+      "legacyCommand": "npm run check:bzt-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:bzt-w9",
+      "family": "BZT",
+      "legacyCommand": "npm run check:bzt-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:car-w10",
+      "family": "CAR",
+      "legacyCommand": "node scripts/check-car-w10-w14-candidate-to-publication.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:car-w11",
+      "family": "CAR",
+      "legacyCommand": "node scripts/check-car-w10-w14-candidate-to-publication.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:car-w12",
+      "family": "CAR",
+      "legacyCommand": "node scripts/check-car-w10-w14-candidate-to-publication.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:car-w13",
+      "family": "CAR",
+      "legacyCommand": "node scripts/check-car-w10-w14-candidate-to-publication.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:car-w14",
+      "family": "CAR",
+      "legacyCommand": "node scripts/check-car-w10-w14-candidate-to-publication.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ccr-w0",
+      "family": "CCR",
+      "legacyCommand": "npm run check:ccr-w0-w3",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ccr-w1",
+      "family": "CCR",
+      "legacyCommand": "npm run check:ccr-w0-w3",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ccr-w2",
+      "family": "CCR",
+      "legacyCommand": "npm run check:ccr-w0-w3",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ccr-w3",
+      "family": "CCR",
+      "legacyCommand": "npm run check:ccr-w0-w3",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:cmw-w0",
+      "family": "CMW",
+      "legacyCommand": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:cmw-w1",
+      "family": "CMW",
+      "legacyCommand": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:cmw-w2",
+      "family": "CMW",
+      "legacyCommand": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:cmw-w3",
+      "family": "CMW",
+      "legacyCommand": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:cmw-w4",
+      "family": "CMW",
+      "legacyCommand": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:cmw-w5",
+      "family": "CMW",
+      "legacyCommand": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:cmw-w6",
+      "family": "CMW",
+      "legacyCommand": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:cpr-w0",
+      "family": "CPR",
+      "legacyCommand": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:cpr-w1",
+      "family": "CPR",
+      "legacyCommand": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:cpr-w2",
+      "family": "CPR",
+      "legacyCommand": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:cpr-w3",
+      "family": "CPR",
+      "legacyCommand": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:cpr-w4",
+      "family": "CPR",
+      "legacyCommand": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:cpr-w5",
+      "family": "CPR",
+      "legacyCommand": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:cpr-w6",
+      "family": "CPR",
+      "legacyCommand": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:kau-w0",
+      "family": "KAU",
+      "legacyCommand": "node scripts/check-kau-w0-w8-authoring-foundation.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:kh-w4b",
+      "family": "KH",
+      "legacyCommand": "node scripts/check-kh-w4b-w4c-registry-authority-consumption.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:kh-w4c",
+      "family": "KH",
+      "legacyCommand": "node scripts/check-kh-w4b-w4c-registry-authority-consumption.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:kpp-w0",
+      "family": "KPP",
+      "legacyCommand": "node scripts/check-kpp-w0-w12-production-planning-foundation.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:kpp-w13",
+      "family": "KPP",
+      "legacyCommand": "node scripts/check-kpp-w13-w20-handoff-governance.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:kpp-w23",
+      "family": "KPP",
+      "legacyCommand": "node scripts/check-kpp-w23-w27-w29-v2-full-freeze.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:kra-budget-w1",
+      "family": "KRA-BUDGET",
+      "legacyCommand": "node scripts/check-zero-cost-provider-foundation-step83.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:kra-provider-adapter-w1",
+      "family": "KRA-PROVIDER-ADAPTER",
+      "legacyCommand": "node scripts/check-provider-adapter-foundation-step83.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:kra-w1",
+      "family": "KRA",
+      "legacyCommand": "node scripts/check-provider-routing-step84.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:lrr-w0",
+      "family": "LRR",
+      "legacyCommand": "node scripts/check-lrr-w0-w3-lens-router.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:lrr-w1",
+      "family": "LRR",
+      "legacyCommand": "node scripts/check-lrr-w0-w3-lens-router.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:lrr-w2",
+      "family": "LRR",
+      "legacyCommand": "node scripts/check-lrr-w0-w3-lens-router.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:lrr-w3",
+      "family": "LRR",
+      "legacyCommand": "node scripts/check-lrr-w0-w3-lens-router.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ml-w0",
+      "family": "ML",
+      "legacyCommand": "npm run check:ml-w0-w3",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ml-w1",
+      "family": "ML",
+      "legacyCommand": "npm run check:ml-w0-w3",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ml-w2",
+      "family": "ML",
+      "legacyCommand": "npm run check:ml-w0-w3",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ml-w3",
+      "family": "ML",
+      "legacyCommand": "npm run check:ml-w0-w3",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w0",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W0",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w1",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W1",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w10",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W10",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w11",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W11",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w12",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W12",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w13",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W13",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w14",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W14",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w15",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W15",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w16",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W16",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w17",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W17",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w18",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W18",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w19",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W19",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w2",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W2",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w20",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W20",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w21",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W21",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w22",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W22",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w23",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W23",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w24",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W24",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w25",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W25",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w26",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W26",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w27",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W27",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w28",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W28",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w29",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W29",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w3",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W3",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w30",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W30",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w4",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W4",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w5",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W5",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w6",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W6",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w7",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W7",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w8",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W8",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rdg-w9",
+      "family": "RDG",
+      "legacyCommand": "npm run check:rdg -- RDG-W9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rjx-w10",
+      "family": "RJX",
+      "legacyCommand": "node scripts/check-rjx-phase15-w8-w18.mjs RJX-W10",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rjx-w11",
+      "family": "RJX",
+      "legacyCommand": "node scripts/check-rjx-phase15-w8-w18.mjs RJX-W11",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rjx-w12",
+      "family": "RJX",
+      "legacyCommand": "node scripts/check-rjx-phase15-w8-w18.mjs RJX-W12",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rjx-w13",
+      "family": "RJX",
+      "legacyCommand": "node scripts/check-rjx-phase15-w8-w18.mjs RJX-W13",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rjx-w14",
+      "family": "RJX",
+      "legacyCommand": "node scripts/check-rjx-phase15-w8-w18.mjs RJX-W14",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rjx-w15",
+      "family": "RJX",
+      "legacyCommand": "node scripts/check-rjx-phase15-w8-w18.mjs RJX-W15",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rjx-w16",
+      "family": "RJX",
+      "legacyCommand": "node scripts/check-rjx-phase15-w8-w18.mjs RJX-W16",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rjx-w17",
+      "family": "RJX",
+      "legacyCommand": "node scripts/check-rjx-phase15-w8-w18.mjs RJX-W17",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rjx-w18",
+      "family": "RJX",
+      "legacyCommand": "node scripts/check-rjx-phase15-w8-w18.mjs RJX-W18",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rjx-w8",
+      "family": "RJX",
+      "legacyCommand": "node scripts/check-rjx-phase15-w8-w18.mjs RJX-W8",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rjx-w9",
+      "family": "RJX",
+      "legacyCommand": "node scripts/check-rjx-phase15-w8-w18.mjs RJX-W9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rlr-w0",
+      "family": "RLR",
+      "legacyCommand": "npm run check:rlr-w0-w6",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rlr-w1",
+      "family": "RLR",
+      "legacyCommand": "npm run check:rlr-w0-w6",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rlr-w2",
+      "family": "RLR",
+      "legacyCommand": "npm run check:rlr-w0-w6",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rlr-w3",
+      "family": "RLR",
+      "legacyCommand": "npm run check:rlr-w0-w6",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rlr-w4",
+      "family": "RLR",
+      "legacyCommand": "npm run check:rlr-w0-w6",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rlr-w5",
+      "family": "RLR",
+      "legacyCommand": "npm run check:rlr-w0-w6",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:rlr-w6",
+      "family": "RLR",
+      "legacyCommand": "npm run check:rlr-w0-w6",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:vap-w12",
+      "family": "VAP",
+      "legacyCommand": "npm run check:vap-w12-w14",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:vap-w13",
+      "family": "VAP",
+      "legacyCommand": "npm run check:vap-w12-w14",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:vap-w14",
+      "family": "VAP",
+      "legacyCommand": "npm run check:vap-w12-w14",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:vap-w15",
+      "family": "VAP",
+      "legacyCommand": "npm run check:vap-w15-w19",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:vap-w16",
+      "family": "VAP",
+      "legacyCommand": "npm run check:vap-w15-w19",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:vap-w17",
+      "family": "VAP",
+      "legacyCommand": "npm run check:vap-w15-w19",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:vap-w18",
+      "family": "VAP",
+      "legacyCommand": "npm run check:vap-w15-w19",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:vap-w19",
+      "family": "VAP",
+      "legacyCommand": "npm run check:vap-w15-w19",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:vap-w25",
+      "family": "VAP",
+      "legacyCommand": "node scripts/check-vap-w25-w29-article-release.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:vap-w26",
+      "family": "VAP",
+      "legacyCommand": "node scripts/check-vap-w25-w29-article-release.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:vap-w27",
+      "family": "VAP",
+      "legacyCommand": "node scripts/check-vap-w25-w29-article-release.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:vap-w28",
+      "family": "VAP",
+      "legacyCommand": "node scripts/check-vap-w28-w29-production-acceptance-freeze.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:vap-w29",
+      "family": "VAP",
+      "legacyCommand": "node scripts/check-vap-w28-w29-production-acceptance-freeze.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ziwei-fp-w10",
+      "family": "ZIWEI-FP",
+      "legacyCommand": "npm run check:ziwei-fp-w9-w10",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ziwei-fp-w12",
+      "family": "ZIWEI-FP",
+      "legacyCommand": "npm run check:ziwei-fp-w12-w16",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ziwei-fp-w13",
+      "family": "ZIWEI-FP",
+      "legacyCommand": "npm run check:ziwei-fp-w12-w16",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ziwei-fp-w14",
+      "family": "ZIWEI-FP",
+      "legacyCommand": "npm run check:ziwei-fp-w12-w16",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ziwei-fp-w15",
+      "family": "ZIWEI-FP",
+      "legacyCommand": "npm run check:ziwei-fp-w12-w16",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ziwei-fp-w16",
+      "family": "ZIWEI-FP",
+      "legacyCommand": "npm run check:ziwei-fp-w12-w16",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ziwei-fp-w5",
+      "family": "ZIWEI-FP",
+      "legacyCommand": "npm run check:ziwei-fp-w5-w6",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ziwei-fp-w7",
+      "family": "ZIWEI-FP",
+      "legacyCommand": "npm run check:ziwei-fp-w7-w8",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ziwei-fp-w8",
+      "family": "ZIWEI-FP",
+      "legacyCommand": "npm run check:ziwei-fp-w7-w8",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:ziwei-fp-w9",
+      "family": "ZIWEI-FP",
+      "legacyCommand": "npm run check:ziwei-fp-w9-w10",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwd-w0",
+      "family": "ZWD",
+      "legacyCommand": "npm run check:zwd-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwd-w1",
+      "family": "ZWD",
+      "legacyCommand": "npm run check:zwd-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwd-w2",
+      "family": "ZWD",
+      "legacyCommand": "npm run check:zwd-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwd-w3",
+      "family": "ZWD",
+      "legacyCommand": "npm run check:zwd-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwd-w4",
+      "family": "ZWD",
+      "legacyCommand": "npm run check:zwd-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwd-w5",
+      "family": "ZWD",
+      "legacyCommand": "npm run check:zwd-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwd-w6",
+      "family": "ZWD",
+      "legacyCommand": "npm run check:zwd-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwd-w7",
+      "family": "ZWD",
+      "legacyCommand": "npm run check:zwd-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwd-w8",
+      "family": "ZWD",
+      "legacyCommand": "npm run check:zwd-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwd-w9",
+      "family": "ZWD",
+      "legacyCommand": "npm run check:zwd-w0-w9",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w0",
+      "family": "ZWR",
+      "legacyCommand": "node scripts/check-zwr-w0-w6-foundation.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w1",
+      "family": "ZWR",
+      "legacyCommand": "node scripts/check-zwr-w0-w6-foundation.mjs",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w10",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w7-w13",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w11",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w7-w13",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w12",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w7-w13",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w13",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w7-w13",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w14",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w14-w25",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w15",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w14-w25",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w16",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w14-w25",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w17",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w14-w25",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w18",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w14-w25",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w19",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w14-w25",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w20",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w14-w25",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w21",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w14-w25",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w22",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w14-w25",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w23",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w14-w25",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w24",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w14-w25",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w25",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w14-w25",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w7",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w7-w13",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w8",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w7-w13",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    },
+    {
+      "alias": "check:zwr-w9",
+      "family": "ZWR",
+      "legacyCommand": "npm run check:zwr-w7-w13",
+      "packageCompatibilityKeyRetained": true,
+      "status": "HISTORICAL_ALIAS_ROUTED"
+    }
+  ]
+}

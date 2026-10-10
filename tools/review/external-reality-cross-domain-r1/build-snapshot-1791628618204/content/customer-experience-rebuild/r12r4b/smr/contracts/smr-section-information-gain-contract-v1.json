@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-SMR-R2-SECTION-INFORMATION-GAIN-CONTRACT-v1.0.0",
+  "work": "R2-W6",
+  "outputSchemaVersion": "PHI-OS-SMR-R2-SECTION-INFORMATION-GAIN-v1.0.0",
+  "requiredInformationGainFields": [
+    "newClaimRefs",
+    "newRelationRefs",
+    "newConditionRefs",
+    "newCounterEvidenceRefs",
+    "newObservationRefs"
+  ],
+  "sectionClasses": ["CORE", "CONDITIONAL", "TECHNICAL", "TEMPORAL", "SUPPRESSED"],
+  "rules": {
+    "allFiveInformationGainFieldsEmptyMeans": "SECTION_NOT_ELIGIBLE",
+    "emptyValueSectionFillerAllowed": false,
+    "conditionalSectionsRequireMeaningfulEvidence": true,
+    "timingRequiresExplicitTemporalClaim": true,
+    "technicalDisclosureIsNotCustomerBodyInformationGain": true,
+    "technicalAppendixDefaultCollapsed": true,
+    "rendererMayCreateSectionEligibility": false,
+    "sectionEligibilityMustBeDeterministic": true
+  }
+}

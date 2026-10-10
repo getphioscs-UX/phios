@@ -1,0 +1,48 @@
+{
+  "contractCode": "PHI-OS-ICR-W3-INPUT-VERIFICATION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ICR-W3",
+  "status": "foundation",
+  "productionStatus": "validation_only",
+  "schemaReference": "content/runtime/input-case-runtime/schemas/verified-input-v1.schema.json",
+  "verificationStateRegistry": "content/runtime/input-case-runtime/registries/input-verification-state-registry-v1.json",
+  "input": "Canonical Input Envelope",
+  "output": "Verified Input Decision",
+  "fieldDecisionStates": [
+    "VERIFIED",
+    "DECLARED_NOT_VERIFIED",
+    "UNKNOWN",
+    "DISPUTED",
+    "INVALID"
+  ],
+  "verificationStates": [
+    "VERIFIED",
+    "PARTIALLY_VERIFIED",
+    "DISPUTED",
+    "REJECTED"
+  ],
+  "verifierClasses": [
+    "SUBJECT_CONFIRMATION",
+    "DOCUMENT_REVIEW",
+    "PROFESSIONAL_REVIEW",
+    "GOVERNED_SYSTEM_CONSISTENCY"
+  ],
+  "stateResolution": [
+    {"when": "ANY_INVALID", "state": "REJECTED", "projectionEligibility": "BLOCKED"},
+    {"when": "ANY_DISPUTED", "state": "DISPUTED", "projectionEligibility": "BLOCKED"},
+    {"when": "ANY_UNKNOWN_OR_DECLARED_NOT_VERIFIED", "state": "PARTIALLY_VERIFIED", "projectionEligibility": "BLOCKED"},
+    {"when": "ALL_REQUIRED_FIELDS_VERIFIED_AND_AUTHORITY_BOUND", "state": "VERIFIED", "projectionEligibility": "ELIGIBLE"}
+  ],
+  "rules": {
+    "verificationMayRewriteCanonicalInput": false,
+    "verificationMayCreateEvidence": false,
+    "verificationMayPromoteRuntimeState": false,
+    "verificationMayInferUnknown": false,
+    "verificationMayResolveDisputeSilently": false,
+    "providerOrAiMayBeVerifier": false,
+    "verifiedDecisionRequiresFieldLevelLineage": true,
+    "projectionEligibilityFailsClosed": true,
+    "verifiedFactsRequireSharedDataAuthorityBinding": true,
+    "correctionRequiresNewCanonicalInputVersion": true
+  }
+}

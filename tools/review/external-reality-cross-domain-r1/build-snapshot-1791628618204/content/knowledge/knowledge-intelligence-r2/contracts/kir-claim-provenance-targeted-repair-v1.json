@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-CLAIM-PROVENANCE-TARGETED-REPAIR-v1.0.0",
+  "baselineCommit": "454a7d1771feec5e2f6ab00bffdde46a5aa661f0",
+  "status": "CLAIM_PROVENANCE_ACCEPTED",
+  "claimFields": ["claimId","outputSpan","claimType","sourceRefs","contextRefs","status"],
+  "statuses": ["SUPPORTED","PARTIAL","UNSUPPORTED","OVERSTATED","OUT_OF_SCOPE"],
+  "sourceOptionalClaimTypes": ["GRAMMAR","TRANSITION","NON_FACTUAL_CONNECTIVE"],
+  "sourceRequiredClaimTypes": ["PERSONAL_INTERPRETATION","METHOD_CLAIM","FINANCIAL_CLAIM","REALITY_CLAIM","KNOWLEDGE_MECHANISM"],
+  "repair": {"defaultMode":"TARGETED_SPAN_REPAIR","fullRegenerationAllowedOnlyWhen":["ANSWER_STRUCTURE_INVALID","MAJORITY_CLAIMS_INVALID"],"reloadAllAccountContext":false,"inputs":["AFFECTED_SPAN","SUPPORTING_EVIDENCE","LOCAL_ANSWER_CONTEXT","REPAIR_INSTRUCTION"]}
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/rmo/canonical-reality-constraint-v1.schema.json",
+  "title": "PHI OS Canonical Reality Constraint v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "constraintCode", "constraintVersion", "componentType", "constraintType",
+    "constraintScope", "constraintMode", "realityReference", "componentReferences", "sourceReferences",
+    "evidenceReferences", "dataNature", "certainty", "validity", "recordStatus", "enforcementState",
+    "evidenceEligibility", "interpretationState", "inferenceState", "navigationRestrictionCreated",
+    "professionalJudgmentCreated", "authorityReference", "operationalMode", "persistentStoreWriteAllowed",
+    "createdAt", "constraintDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CANONICAL-REALITY-CONSTRAINT-v1.0.0"},
+    "constraintCode": {"type": "string", "pattern": "^RMO-CONSTRAINT-[A-Z0-9-]{4,100}$"},
+    "constraintVersion": {"$ref": "#/$defs/semver"},
+    "componentType": {"const": "REALITY_CONSTRAINT"},
+    "constraintType": {"type": "string", "minLength": 1},
+    "constraintScope": {"enum": ["REALITY", "ENTITY", "RELATIONSHIP", "EVENT", "SIGNAL"]},
+    "constraintMode": {"const": "DESCRIPTIVE_ONLY"},
+    "realityReference": {"$ref": "#/$defs/realityReference"},
+    "componentReferences": {"$ref": "#/$defs/referenceArray"},
+    "sourceReferences": {"$ref": "#/$defs/referenceArray"},
+    "evidenceReferences": {"$ref": "#/$defs/optionalReferenceArray"},
+    "dataNature": {"type": "string", "minLength": 1},
+    "certainty": {"type": "string", "minLength": 1},
+    "validity": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "startsAt", "endsAt"],
+          "properties": {
+            "mode": {"const": "UNBOUNDED"},
+            "startsAt": {"type": "null"},
+            "endsAt": {"type": "null"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "startsAt", "endsAt"],
+          "properties": {
+            "mode": {"const": "INTERVAL"},
+            "startsAt": {"type": "string", "format": "date-time"},
+            "endsAt": {"type": "string", "format": "date-time"}
+          }
+        }
+      ]
+    },
+    "recordStatus": {"const": "RECORDED"},
+    "enforcementState": {"const": "NOT_ENFORCED"},
+    "evidenceEligibility": {"const": "NOT_EVALUATED"},
+    "interpretationState": {"const": "NOT_INTERPRETED"},
+    "inferenceState": {"const": "NOT_INFERRED"},
+    "navigationRestrictionCreated": {"const": false},
+    "professionalJudgmentCreated": {"const": false},
+    "authorityReference": {"const": "content/runtime/reality-model-runtime/contracts/constraint-runtime-contract-v1.json"},
+    "operationalMode": {"const": "VALIDATION_ONLY"},
+    "persistentStoreWriteAllowed": {"const": false},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "constraintDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "semver": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "referenceArray": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 200}},
+    "optionalReferenceArray": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 200}},
+    "realityReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["realityCode", "realityVersion", "realityDigest"],
+      "properties": {
+        "realityCode": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+        "realityVersion": {"$ref": "#/$defs/semver"},
+        "realityDigest": {"$ref": "#/$defs/digest"}
+      }
+    }
+  }
+}

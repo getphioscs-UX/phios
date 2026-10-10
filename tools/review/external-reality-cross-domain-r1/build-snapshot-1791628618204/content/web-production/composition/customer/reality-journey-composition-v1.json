@@ -1,0 +1,46 @@
+{
+  "compositionCode": "PHI-OS-WPR-W20-REALITY-JOURNEY-COMPOSITION-v1",
+  "compositionVersion": "1.0.0",
+  "work": "WPR-W20",
+  "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+  "status": "limited_production",
+  "sourceAuthorities": [
+    "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+    "content/runtime/journey-runtime/registries/canonical-journey-stage-registry-v2.json",
+    "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json",
+    "content/runtime/journey-runtime/contracts/journey-progress-contract-v1.json",
+    "content/runtime/journey-runtime/contracts/journey-safety-boundary-contract-v1.json",
+    "content/runtime/journey-runtime/contracts/journey-recommendation-contract-v1.json"
+  ],
+  "publicOverview": {
+    "routeCode": "REALITY_JOURNEY",
+    "surfaceCode": "REALITY_JOURNEY_OVERVIEW",
+    "slots": [
+      "HERO",
+      "JR_V2_AUTHORITY_STATUS",
+      "CANONICAL_STAGE_FLOW",
+      "CUSTOMER_TASK_COMPATIBILITY",
+      "SAFETY_BOUNDARY",
+      "START"
+    ],
+    "hydration": "PUBLIC_READ_ONLY_CANONICAL_REGISTRY"
+  },
+  "localCustomerStatus": {
+    "routeCode": "CUSTOMER_WORKSPACE",
+    "surfaceCode": "REALITY_JOURNEY_LOCAL",
+    "slots": [
+      "LOCAL_RECOVERY_STATUS",
+      "CANONICAL_STAGE_MAPPING",
+      "LEGACY_PROGRESS_COMPATIBILITY",
+      "RECOVERY",
+      "TIMELINE",
+      "ACTION_BOUNDARY"
+    ],
+    "hydration": "BROWSER_LOCAL_READ_ONLY_COMPATIBILITY"
+  },
+  "presentationBoundary": {
+    "cprProductionRecordReference": null,
+    "cprBindingState": "STATIC_CUSTOMER_SHELL_TRANSITIONAL",
+    "htmlIsProjectionOnly": true
+  }
+}

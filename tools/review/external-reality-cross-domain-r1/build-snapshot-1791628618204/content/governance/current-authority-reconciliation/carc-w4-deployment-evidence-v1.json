@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-CARC-W4-DEPLOYMENT-EVIDENCE-v1.0.0",
+  "phase": "CARC",
+  "work": "CARC-W4",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "CURRENT_REPO_NOT_DEPLOYMENT_VERIFIED",
+  "repository": {
+    "sha": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+    "state": "CURRENT_MAIN_CONFIRMED"
+  },
+  "build": {
+    "sha": null,
+    "state": "NOT_OBSERVED_FOR_CURRENT_REPOSITORY_SHA"
+  },
+  "cloudflareDeployment": {
+    "sha": "dc3be86824ff7f8e5c99afe6c5058378204e1138",
+    "state": "STALE_RECORDED_DEPLOYMENT",
+    "matchesRepository": false
+  },
+  "productionEvidence": {
+    "wprAcceptancePath": "content/web-production/acceptance/wpr-w28-drift-observability-deployment-acceptance-v1.json",
+    "wprAcceptanceSha256": "0c63206ef2db97f7253239fd7695c7ba8040590216102fa7ebce0a5dedd3c1e4",
+    "deploymentContractPath": "content/web-production/contracts/wpr-drift-observability-deployment-v1.json",
+    "deploymentContractSha256": "205cda2c3693ff1941f61072421b9a8e9123d599699d92b79d272ac9b27b5887",
+    "historicalDeploymentEvidencePath": "content/production/visual-article/deployment/vap-w2-cloudflare-production-sha-verification-v1.json",
+    "historicalDeploymentEvidenceSha256": "2431cda8da60c4c8e80042f1162c65d68e1ac9a6c8b8b0bdb9174fb57ed09190"
+  },
+  "acceptance": {
+    "repositoryBaselineVerified": true,
+    "deploymentCurrentMainVerified": false,
+    "deploymentPromotionPerformed": false,
+    "productionAccepted": false,
+    "reason": "CURRENT_REPOSITORY_SHA_HAS_NO_MATCHING_OBSERVED_BUILD_AND_CLOUDFLARE_DEPLOYMENT_SHA"
+  },
+  "rules": {
+    "localCheckerGreenDoesNotEqualProductionAccepted": true,
+    "oldProductionShaCannotAuthorizeNewRepoSha": true,
+    "exactRepoBuildDeploymentEvidenceAlignmentRequired": true
+  }
+}

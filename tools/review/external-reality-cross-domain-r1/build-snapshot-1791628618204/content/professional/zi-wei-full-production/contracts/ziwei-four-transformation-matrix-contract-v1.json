@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-FOUR-TRANSFORMATION-MATRIX-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W5",
+  "status": "ENGINEERING_COMPLETE",
+  "runtime": "functions/zi-wei-full-production/ziwei-four-transformation-matrix-runtime.js",
+  "inputSchema": "PHI-OS-ZIWEI-CANONICAL-CHART-IR-v1.0.0",
+  "outputSchema": "PHI-OS-ZIWEI-FOUR-TRANSFORMATION-MATRIX-v1.0.0",
+  "requiredLayerInvariant": {
+    "NATAL": 4,
+    "DA_XIAN_when_active": 4,
+    "LIU_NIAN_when_attached": 4
+  },
+  "outputs": ["layers", "allTransformations", "palaceMatrix", "overlaps"],
+  "rules": {
+    "reuseNatalAuthority": true,
+    "reuseZwdDynamicAuthority": true,
+    "noTransformationRecalculation": true,
+    "noPalaceStemFlyingFallback": true,
+    "noLayerVoting": true,
+    "overlapIsStructuralNotGoodBad": true,
+    "customerInterpretationCreated": false
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "PHI-OS-AST-R2-W17-PRODUCTION-MACHINE-CAMPAIGN-CONTRACT-v1.0.0",
+  "workCode": "R2-W17",
+  "baselineCommit": "343773fd6fb61fbf1b37aa861537d7e8f091ec24",
+  "required": {
+    "expectedOutcomeAcceptanceRate": 1,
+    "minimumSourceBirthCases": 10,
+    "minimumDistinctBirthTimes": 10,
+    "minimumDistinctLatitudes": 10,
+    "minimumHouseSystems": 2,
+    "requiredIntentVariants": ["OPEN", "EXPRESSION", "WORK", "RELATIONSHIP", "PRESSURE", "DIRECTION"],
+    "requiredLocales": ["en", "zh-Hans"],
+    "partialDataExpectedOutcomeCoverage": true,
+    "polarPlacidusExpectedFailClosedCoverage": true,
+    "exactNarrativeDuplicatesAllowed": 0,
+    "oneNarrativeOwnerRequired": true,
+    "chartStructureOnlyRequired": true,
+    "technicalDefaultCollapsedRequired": true
+  },
+  "campaignInterpretation": {
+    "successMeans": "The final R2 composition/workspace behaves deterministically and within governed boundaries across the frozen structural diversity campaign.",
+    "doesNotMean": "Independent production ephemeris accuracy has been certified or a live deployment has passed smoke testing."
+  },
+  "boundaries": {
+    "staticIndependentReferenceMayCertifyR3DirectRuntime": false,
+    "machineAcceptanceMayReplaceFinalCustomerHumanAcceptance": false,
+    "machineAcceptanceMayActivateCustomerCutover": false,
+    "otherMethodsMayBlockAstMachineAcceptance": false
+  }
+}

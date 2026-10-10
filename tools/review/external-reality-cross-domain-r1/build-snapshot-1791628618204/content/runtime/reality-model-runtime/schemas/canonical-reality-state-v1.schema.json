@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/rmo/canonical-reality-state-v1.schema.json",
+  "title": "PHI OS Canonical Reality State v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "stateCode", "stateVersion", "componentType", "stateClass",
+    "stateDefinitionReference", "stateValueReference", "realityReference", "componentReferences",
+    "sourceReferences", "evidenceReferences", "dataNature", "certainty", "binding", "recordStatus",
+    "evidenceEligibility", "interpretationState", "inferenceState", "truthClaimed", "predictionClaimed",
+    "professionalJudgmentCreated", "navigationChoiceCreated", "actionExecutionCreated", "authorityReference",
+    "operationalMode", "persistentStoreWriteAllowed", "createdAt", "stateDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CANONICAL-REALITY-STATE-v1.0.0"},
+    "stateCode": {"type": "string", "pattern": "^RMO-STATE-[A-Z0-9-]{4,100}$"},
+    "stateVersion": {"$ref": "#/$defs/semver"},
+    "componentType": {"const": "REALITY_STATE"},
+    "stateClass": {"enum": ["OBSERVED", "DERIVED", "PROJECTED"]},
+    "stateDefinitionReference": {"type": "string", "pattern": "^STATE-DEFINITION-[A-Z0-9-]{4,120}-v[1-9][0-9]*$"},
+    "stateValueReference": {"type": "string", "pattern": "^STATE-VALUE-[A-Z0-9-]{4,120}$"},
+    "realityReference": {"$ref": "#/$defs/realityReference"},
+    "componentReferences": {"$ref": "#/$defs/referenceArray"},
+    "sourceReferences": {"$ref": "#/$defs/referenceArray"},
+    "evidenceReferences": {"$ref": "#/$defs/optionalReferenceArray"},
+    "dataNature": {"type": "string", "minLength": 1},
+    "certainty": {"type": "string", "minLength": 1},
+    "binding": {
+      "oneOf": [
+        {"$ref": "#/$defs/observationBinding"},
+        {"$ref": "#/$defs/derivationBinding"},
+        {"$ref": "#/$defs/projectionBinding"}
+      ]
+    },
+    "recordStatus": {"const": "RECORDED"},
+    "evidenceEligibility": {"const": "NOT_EVALUATED"},
+    "interpretationState": {"const": "NOT_INTERPRETED"},
+    "inferenceState": {"const": "NOT_INFERRED"},
+    "truthClaimed": {"const": false},
+    "predictionClaimed": {"const": false},
+    "professionalJudgmentCreated": {"const": false},
+    "navigationChoiceCreated": {"const": false},
+    "actionExecutionCreated": {"const": false},
+    "authorityReference": {"const": "content/runtime/reality-model-runtime/contracts/reality-state-runtime-contract-v1.json"},
+    "operationalMode": {"const": "VALIDATION_ONLY"},
+    "persistentStoreWriteAllowed": {"const": false},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "stateDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "semver": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "referenceArray": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 200}},
+    "optionalReferenceArray": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 200}},
+    "realityReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["realityCode", "realityVersion", "realityDigest"],
+      "properties": {
+        "realityCode": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+        "realityVersion": {"$ref": "#/$defs/semver"},
+        "realityDigest": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "observationBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "observedAt", "derivation", "projection"],
+      "properties": {
+        "mode": {"const": "OBSERVATION"},
+        "observedAt": {"type": "string", "format": "date-time"},
+        "derivation": {"type": "null"},
+        "projection": {"type": "null"}
+      }
+    },
+    "derivationBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "observedAt", "derivation", "projection"],
+      "properties": {
+        "mode": {"const": "DERIVATION"},
+        "observedAt": {"type": "null"},
+        "derivation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["methodReference", "methodVersion", "inputReferences", "deterministic"],
+          "properties": {
+            "methodReference": {"type": "string", "pattern": "^RMO-METHOD-[A-Z0-9-]{4,120}-v[1-9][0-9]*$"},
+            "methodVersion": {"$ref": "#/$defs/semver"},
+            "inputReferences": {"$ref": "#/$defs/referenceArray"},
+            "deterministic": {"const": true}
+          }
+        },
+        "projection": {"type": "null"}
+      }
+    },
+    "projectionBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "observedAt", "derivation", "projection"],
+      "properties": {
+        "mode": {"const": "PROJECTION"},
+        "observedAt": {"type": "null"},
+        "derivation": {"type": "null"},
+        "projection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["methodReference", "methodVersion", "basisReferences", "scenarioReference", "generatedAt", "horizon", "deterministic"],
+          "properties": {
+            "methodReference": {"type": "string", "pattern": "^RMO-METHOD-[A-Z0-9-]{4,120}-v[1-9][0-9]*$"},
+            "methodVersion": {"$ref": "#/$defs/semver"},
+            "basisReferences": {"$ref": "#/$defs/referenceArray"},
+            "scenarioReference": {"type": "string", "pattern": "^RMO-SCENARIO-[A-Z0-9-]{4,120}$"},
+            "generatedAt": {"type": "string", "format": "date-time"},
+            "horizon": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["startsAt", "endsAt"],
+              "properties": {
+                "startsAt": {"type": "string", "format": "date-time"},
+                "endsAt": {"type": "string", "format": "date-time"}
+              }
+            },
+            "deterministic": {"const": true}
+          }
+        }
+      }
+    }
+  }
+}

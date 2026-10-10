@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S10-PILOT-CASE-CONTRACT-v1.0.0",
+  "phase": "MRM-S",
+  "work": "MRM-S10",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "ACTIVE",
+  "requiredFields": [
+    "pilotCaseId",
+    "customerReference",
+    "consentReference",
+    "caseVersion",
+    "runtimeCapabilities",
+    "inputReferences",
+    "outputReferences",
+    "humanInterventions",
+    "unexpectedEvents",
+    "releaseReferences",
+    "completionState",
+    "evidenceReferences"
+  ],
+  "completionStates": [
+    "OPEN",
+    "IN_PROGRESS",
+    "COMPLETED",
+    "FAILED",
+    "WITHDRAWN",
+    "INVALIDATED"
+  ],
+  "rules": {
+    "realCustomerRequired": true,
+    "explicitConsentRequired": true,
+    "realInputRequired": true,
+    "syntheticFixtureForbidden": true,
+    "manualRepairMustBeRecorded": true,
+    "unknownPreserved": true,
+    "releaseExplicitWhereApplicable": true,
+    "api200IsNotPilotSuccess": true,
+    "pdfGeneratedIsNotPilotSuccess": true
+  }
+}

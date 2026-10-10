@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W26-W29-REALITY-HANDOFF-FREEZE-v1.0.0",
+  "phase": "KAP",
+  "steps": [
+    "KAP-W26",
+    "KAP-W27",
+    "KAP-W28",
+    "KAP-W29"
+  ],
+  "baselineCommit": "25ab44b6d832bc5a1a3ff166d89e2b53c1257b44",
+  "status": "FROZEN_EXPLICIT_CONSENT_SEED_HANDOFF_NO_CASE_OR_REALITY_MODEL_CREATION",
+  "predecessorEvidence": [
+    {
+      "path": "content/knowledge/answer-projection/freeze/kap-w23-w25-reality-complexity-freeze-v1.json",
+      "sha256": "c39230cda46fc105488f7dbba064101a969ab3a2b2a68af2dbd9a0583efca621"
+    },
+    {
+      "path": "content/professional/method-client-delivery/registries/mcd-8-guided-reading-consumption-handoff-v1.json",
+      "sha256": "d34d18ebb1123d9a010c7efe21c1d3878b4d6875e7eed98756b10415bcd178d1"
+    },
+    {
+      "path": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+      "sha256": "161bd90046f7fccad974ab4fc3a717f774aa7409cb875c7fac9fb69f1329f830"
+    }
+  ],
+  "frozenOutputs": [
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w26-escalation-reason-contract-v1.json",
+      "sha256": "1ac4b8c4fdb417a03ad50fa20948b25e2e4f3780e8e02e457a7f232d4976eb39"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w27-explicit-consent-contract-v1.json",
+      "sha256": "9dd2b78ee6314275dda933c90c1de312478442036beef7f13a68376168b997d6"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w28-question-to-case-handoff-contract-v1.json",
+      "sha256": "5c94607a2ee4e8cd9229f258b98d2b45cec5e1c68d2cf569d9bada38746ef96b"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w29-knowledge-method-handoff-contract-v1.json",
+      "sha256": "e2facc39230fa1f4287f1e80747eb7ef72ec232f3a03044d5d167e53a44d236b"
+    },
+    {
+      "path": "content/knowledge/answer-projection/registries/kap-w26-w29-reality-handoff-policy-v1.json",
+      "sha256": "0f37497df855adb94023c8ff59d2654e0920b2a9a5b6e264041fc0d9f017e95e"
+    },
+    {
+      "path": "content/knowledge/answer-projection/schemas/reality-handoff-request-v1.schema.json",
+      "sha256": "afe2f7a12d20e1681b7df64627599c5e12257f5cfeab926ee462aa337c6508c7"
+    },
+    {
+      "path": "content/knowledge/answer-projection/schemas/reality-entry-seed-v1.schema.json",
+      "sha256": "6f2a64156cfa0ea72315a6da7d32c9e2712ab985bcc0c5463fbcffef8295837c"
+    },
+    {
+      "path": "content/knowledge/answer-projection/schemas/reality-handoff-response-v1.schema.json",
+      "sha256": "e3c3f10ceec14ce6b3acdd3dba3dfc50da0aa31e34ca87893ad63cd6a7c12d74"
+    },
+    {
+      "path": "content/knowledge/answer-projection/reconciliation/kap-w25-w26-reality-handoff-successor-v1.json",
+      "sha256": "d0a3a9d774271efa6ec0a1eb6c3d413a2b25dfc8c89c164359382493401f50aa"
+    },
+    {
+      "path": "functions/_lib/knowledge-reality-handoff.js",
+      "sha256": "191d75b13d4ced61274019bbd64448d8e2e082cfecbd7370a6fc9c2c38e1027c"
+    },
+    {
+      "path": "functions/api/reality-handoff.js",
+      "sha256": "a2b562483e022632ecab554997cd67b6e0974fe38df04b7514edabf87f530577"
+    },
+    {
+      "path": "scripts/check-kap-reality-handoff.mjs",
+      "sha256": "04bd661b7f624f81c3f5079b6a9457f44258979ee9434d9a5079f7fb2f4f3fe0"
+    },
+    {
+      "path": "content/knowledge/answer-projection/acceptance/kap-w26-w29-reality-handoff-acceptance-v1.json",
+      "sha256": "092eed6d2596c478a6e4b44e92d1fb704f71b5a109cdca5e2f96dcc8b022ac47"
+    },
+    {
+      "path": "scripts/check-kap-reality-complexity-w26-successor.mjs",
+      "sha256": "0a24762e62bb9872ff508534158d780bc037187e4cafc4ef9d2ae783aa174fb1"
+    }
+  ],
+  "production": {
+    "endpoint": "/api/reality-handoff",
+    "prepareActionActive": true,
+    "handoffActionActive": true,
+    "explicitConsentRequired": true,
+    "realityEntrySeedActive": true,
+    "persistentStorage": false,
+    "canonicalCaseCreation": false,
+    "realityModelCreation": false
+  },
+  "authorityFreeze": {
+    "w24RequirementYes": "REQUIRED_PRECONDITION",
+    "w26": "EXPLANATION_ONLY",
+    "w27": "EXPLICIT_ESCALATION_CONSENT_ONLY_NOT_RDG_REPLACEMENT",
+    "w28": "TEMPORARY_REALITY_ENTRY_SEED_ONLY",
+    "w29": "PROVENANCE_SEPARATED_REFERENCE_AND_AUTHORIZED_PROJECTION_HANDOFF",
+    "icr": "CANONICAL_CASE_OWNER_UNCHANGED",
+    "rdg": "DATA_GOVERNANCE_OWNER_UNCHANGED",
+    "rmo": "REALITY_MODEL_OWNER_UNCHANGED",
+    "mpaMcd": "METHOD_AUTHORITY_UNCHANGED"
+  },
+  "successorRule": "Any future change that persists the seed, creates a Canonical Case or Reality Model, bypasses RDG governance, or accepts an unauthorized/raw Method result requires a new authority-preserving successor."
+}

@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict'; import fs from 'node:fs';
+import {readJson} from './lib/hfp/hfp-check-lib.mjs';
+const H='content/financial/holistic-planning-product';
+const product=readJson(`${H}/contracts/holistic-financial-planning-product-contract-v1.json`); assert.deepEqual(Object.keys(product.modes),['PRELIMINARY','PLANNING','VERIFIED','PROFESSIONAL']);
+const sections=readJson(`${H}/registries/holistic-financial-plan-section-registry-v1.json`); assert.equal(sections.sections.length,22); assert.deepEqual(sections.sections.map(x=>x.ordinal),Array.from({length:22},(_,i)=>i+1));
+const types=readJson(`${H}/registries/holistic-financial-statement-type-registry-v1.json`).statementTypes.map(x=>x.code); for(const t of ['FINANCIAL_FACT','CALCULATED_RESULT','ANALYTICAL_FINDING','SCENARIO_RESULT','PROFESSIONAL_RECOMMENDATION','PROFESSIONAL_WARNING','ACTION','UNKNOWN','BOUNDARY']) assert.ok(types.includes(t));
+const candidate=readJson(`${H}/contracts/holistic-financial-plan-candidate-contract-v1.json`); for(const f of ['released','approved','customerVisible','PDFProjection','willClauses','distributionInstructions']) assert.ok(candidate.forbiddenFields.includes(f));
+const visuals=readJson(`${H}/registries/holistic-financial-visual-role-registry-v1.json`).visualRoles.map(x=>x.visualRole); assert.deepEqual(visuals,['NET_WORTH_STRUCTURE','CASHFLOW','ASSET_ALLOCATION','RETIREMENT_SCENARIO','ACTION_TIMELINE']);
+for(const f of ['holistic-financial-source-lineage-contract-v1.json','hfp-dar-estate-integration-contract-v1.json','hfp-pfr-contribution-reference-contract-v1.json','hfp-suitability-composition-contract-v1.json','hfp-unknown-missing-evidence-contract-v1.json','hfp-assumption-limitation-contract-v1.json','hfp-action-plan-contract-v1.json','hfp-reality-journey-handoff-contract-v1.json','hfp-continuity-contract-v1.json','hfp-visual-reference-contract-v1.json','hfp-rr-handoff-contract-v1.json']) assert.ok(fs.existsSync(`${H}/contracts/${f}`),`Missing ${f}`);
+console.log('✓ HFP-W1–W25 contracts and registries passed.');

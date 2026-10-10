@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-CWA-CURRENTNESS-v1.0.0",
+  "work": "CWA-W2",
+  "classes": [
+    {
+      "id": "CURRENTNESS_NONE",
+      "examples": [
+        "evergreen concept",
+        "method definition"
+      ]
+    },
+    {
+      "id": "CURRENTNESS_HELPFUL",
+      "examples": [
+        "trend context where stale knowledge may still be useful"
+      ]
+    },
+    {
+      "id": "CURRENTNESS_REQUIRED",
+      "examples": [
+        "current policy",
+        "current company product",
+        "news",
+        "market condition"
+      ]
+    },
+    {
+      "id": "CURRENTNESS_CRITICAL",
+      "examples": [
+        "current public-health alert",
+        "time-sensitive safety context"
+      ],
+      "boundary": "DOMAIN_SAFETY_ROUTER_REMAINS_PRIMARY"
+    }
+  ],
+  "webCallRule": "CURRENTNESS_NONE_DOES_NOT_CALL_CWA"
+}

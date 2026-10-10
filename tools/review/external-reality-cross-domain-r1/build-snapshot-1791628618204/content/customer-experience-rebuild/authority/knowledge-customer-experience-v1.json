@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "1.0.0",
+  "program": "CX-R",
+  "phase": "CX-R8",
+  "baselineCommit": "d1e3311c5a931b7f49f07236aee8efe106eb7fcc",
+  "status": "ACCEPTANCE_CANDIDATE",
+  "principle": "Knowledge is one customer experience over existing PHI OS knowledge authorities. CX-R8 organizes discovery, reading and explicit Ask handoff; it does not create a second knowledge or answer authority.",
+  "routes": [
+    {
+      "id": "KNOWLEDGE_HOME",
+      "path": "/knowledge/",
+      "file": "knowledge/index.html",
+      "workStep": "W0"
+    },
+    {
+      "id": "KNOWLEDGE_SEARCH",
+      "path": "/search/",
+      "file": "search/index.html",
+      "workStep": "W1"
+    },
+    {
+      "id": "KNOWLEDGE_ARTICLES",
+      "path": "/articles/",
+      "file": "articles/index.html",
+      "workStep": "W2"
+    },
+    {
+      "id": "KNOWLEDGE_BOOKS",
+      "path": "/books/",
+      "file": "books/index.html",
+      "workStep": "W3"
+    },
+    {
+      "id": "KNOWLEDGE_FIGURES",
+      "path": "/figures/",
+      "file": "figures/index.html",
+      "workStep": "W4"
+    },
+    {
+      "id": "KNOWLEDGE_CONCEPTS",
+      "path": "/knowledge/concepts/",
+      "file": "knowledge/concepts/index.html",
+      "workStep": "W0_SUPPORTING"
+    },
+    {
+      "id": "CONTEXTUAL_ASK",
+      "path": "/knowledge/ask/",
+      "file": "knowledge/ask/index.html",
+      "workStep": "W5_CONSUMER",
+      "ownership": "CX-R9-R2"
+    }
+  ],
+  "knowledgeHome": [
+    "SEARCH",
+    "ASK",
+    "FEATURED_ARTICLES",
+    "BOOKS",
+    "FIGURES",
+    "CONCEPTS",
+    "LEARNING"
+  ],
+  "searchResultContract": [
+    "TITLE",
+    "TYPE",
+    "BOOK_OR_NODE_CONTEXT",
+    "SUMMARY",
+    "SOURCE",
+    "RELATED"
+  ],
+  "articleBrowse": [
+    "LATEST",
+    "VOLUME",
+    "TOPIC",
+    "RELATED"
+  ],
+  "bookAssetIds": [
+    "BOOK-1-HARDCOVER",
+    "BOOK-2-HARDCOVER",
+    "BOOK-3-HARDCOVER",
+    "BOOK-4-HARDCOVER",
+    "BOOK-5-HARDCOVER"
+  ],
+  "visualRoles": [
+    "HERO-002",
+    "HERO-003",
+    "HERO-005",
+    "ILL-001",
+    "ILL-002",
+    "ILL-003"
+  ],
+  "dataAuthorities": {
+    "publishedArticles": "content/knowledge/registry + approved publication projection via assets/js/knowledge/published-content.js",
+    "books": "content/registry/books.json",
+    "figures": "content/registry/figures.json + canonical part ownership; six structural customer visuals are consumed from customer-visual-asset-registry-v3 without changing manuscript figure authority",
+    "concepts": "content/registry/concepts.json",
+    "ask": "CX-R9-R2 /knowledge/ask/ + existing CKA/KAP consumption path"
+  },
+  "explicitAskContext": {
+    "customerAction": "Ask about this",
+    "contextType": "KNOWLEDGE",
+    "supportedPublicRefs": [
+      "ARTICLE:<slug>",
+      "BOOK:BOOK-1..BOOK-5",
+      "FIGURE:<figure-id>",
+      "CONCEPT:<concept-id>"
+    ],
+    "visibleBeforeSubmit": true,
+    "removableBeforeSubmit": true,
+    "silentContextConsumption": false,
+    "createsNewKnowledgeAuthority": false,
+    "protectedPersonalContextAuthorizationChanged": false
+  },
+  "invariants": {
+    "singleCustomerShell": true,
+    "legacyStylesheets": 0,
+    "legacyClassNamespaces": 0,
+    "secondKnowledgeAuthority": false,
+    "secondAnswerAuthority": false,
+    "publishedContentRecalculatedByCX": false,
+    "explicitAskContext": true,
+    "englishAndSimplifiedChinese": true
+  },
+  "compatibility": {
+    "/knowledge": "308 /knowledge/",
+    "/search": "308 /search/",
+    "/articles": "308 /articles/",
+    "/articles.html": "308 /articles/",
+    "/books": "308 /books/",
+    "/figures": "308 /figures/",
+    "/figures.html": "308 /figures/",
+    "/glossary": "308 /knowledge/concepts/",
+    "/glossary.html": "308 /knowledge/concepts/",
+    "/knowledge/concepts": "308 /knowledge/concepts/"
+  },
+  "figureVisualAssetIds": [
+    "FIG-001",
+    "FIG-007",
+    "FIG-008",
+    "FIG-009",
+    "FIG-010",
+    "FIG-011"
+  ]
+}

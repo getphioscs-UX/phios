@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "PHI-OS-EXTERNAL-PROFILE-PROVIDER-REGISTRY-v1.0.0",
+  "work": "PRF-W2",
+  "baselineCommit": "4b2688665e0875f6a628c2b81d1991a14ea62a49",
+  "status": "FOUNDATION_REGISTRY",
+  "providers": [
+    {
+      "providerId": "MBTI_OFFICIAL",
+      "providerFamily": "MBTI_OFFICIAL",
+      "providerName": "Official MBTI result import",
+      "resultSchema": {
+        "labelRequired": true,
+        "dimensionsAllowed": true,
+        "dimensionSemanticsProviderOwned": true
+      },
+      "firstPartyAssessmentAllowed": false,
+      "manualResultImportAllowed": true,
+      "itemBankReproductionAllowed": false,
+      "scoringAuthority": "EXTERNAL_PROVIDER_OR_CUSTOMER_ENTERED_RESULT_ONLY",
+      "interpretationAuthority": "BOUNDED_RESULT_CONTEXT_ONLY",
+      "relationshipComparisonAllowed": false,
+      "sourceDisclosureRequired": true,
+      "termsNotes": "Manual result import only. No PHI OS item-bank reproduction or provider re-scoring in PRF-W2.",
+      "customerAvailability": "FOUNDATION_ONLY_NOT_PUBLISHED_UNTIL_PRF_W12"
+    },
+    {
+      "providerId": "16P_NERIS",
+      "providerFamily": "16P_NERIS",
+      "providerName": "16Personalities / NERIS result import",
+      "resultSchema": {
+        "labelRequired": true,
+        "dimensionsAllowed": true,
+        "dimensionSemanticsProviderOwned": true
+      },
+      "firstPartyAssessmentAllowed": false,
+      "manualResultImportAllowed": true,
+      "itemBankReproductionAllowed": false,
+      "scoringAuthority": "EXTERNAL_PROVIDER_OR_CUSTOMER_ENTERED_RESULT_ONLY",
+      "interpretationAuthority": "BOUNDED_RESULT_CONTEXT_ONLY",
+      "relationshipComparisonAllowed": false,
+      "sourceDisclosureRequired": true,
+      "termsNotes": "Kept distinct from MBTI_OFFICIAL even when a four-letter label looks similar.",
+      "customerAvailability": "FOUNDATION_ONLY_NOT_PUBLISHED_UNTIL_PRF_W12"
+    },
+    {
+      "providerId": "IPIP_BIG_FIVE",
+      "providerFamily": "IPIP_BIG_FIVE",
+      "providerName": "IPIP / Big Five result import",
+      "resultSchema": {
+        "labelRequired": true,
+        "dimensionsAllowed": true,
+        "dimensionSemanticsProviderOwned": true
+      },
+      "firstPartyAssessmentAllowed": false,
+      "manualResultImportAllowed": true,
+      "itemBankReproductionAllowed": false,
+      "scoringAuthority": "EXTERNAL_PROVIDER_OR_CUSTOMER_ENTERED_RESULT_ONLY",
+      "interpretationAuthority": "BOUNDED_RESULT_CONTEXT_ONLY",
+      "relationshipComparisonAllowed": false,
+      "sourceDisclosureRequired": true,
+      "termsNotes": "Import lane only in PRF-W2. Any first-party instrument execution waits for PRF-W10 license/usage reconciliation and separate admission.",
+      "customerAvailability": "FOUNDATION_ONLY_NOT_PUBLISHED_UNTIL_PRF_W12"
+    },
+    {
+      "providerId": "OTHER_BIG_FIVE",
+      "providerFamily": "OTHER_BIG_FIVE",
+      "providerName": "Other Big Five result import",
+      "resultSchema": {
+        "labelRequired": true,
+        "dimensionsAllowed": true,
+        "dimensionSemanticsProviderOwned": true
+      },
+      "firstPartyAssessmentAllowed": false,
+      "manualResultImportAllowed": true,
+      "itemBankReproductionAllowed": false,
+      "scoringAuthority": "EXTERNAL_PROVIDER_OR_CUSTOMER_ENTERED_RESULT_ONLY",
+      "interpretationAuthority": "BOUNDED_RESULT_CONTEXT_ONLY",
+      "relationshipComparisonAllowed": false,
+      "sourceDisclosureRequired": true,
+      "termsNotes": "Provider-specific schema and rights remain external; no first-party scoring by default.",
+      "customerAvailability": "FOUNDATION_ONLY_NOT_PUBLISHED_UNTIL_PRF_W12"
+    },
+    {
+      "providerId": "OTHER_EXTERNAL_PROFILE",
+      "providerFamily": "OTHER_EXTERNAL_PROFILE",
+      "providerName": "Other external profile result",
+      "resultSchema": {
+        "labelRequired": true,
+        "dimensionsAllowed": true,
+        "dimensionSemanticsProviderOwned": true
+      },
+      "firstPartyAssessmentAllowed": false,
+      "manualResultImportAllowed": true,
+      "itemBankReproductionAllowed": false,
+      "scoringAuthority": "EXTERNAL_PROVIDER_OR_CUSTOMER_ENTERED_RESULT_ONLY",
+      "interpretationAuthority": "BOUNDED_RESULT_CONTEXT_ONLY",
+      "relationshipComparisonAllowed": false,
+      "sourceDisclosureRequired": true,
+      "termsNotes": "Unknown rights fail closed for item reproduction and scoring; only customer-entered result storage is contemplated.",
+      "customerAvailability": "FOUNDATION_ONLY_NOT_PUBLISHED_UNTIL_PRF_W12"
+    }
+  ],
+  "failClosed": {
+    "unknownProviderRights": "MANUAL_RESULT_STORAGE_ONLY_IF_CUSTOMER_CONFIRMS_SOURCE",
+    "itemReproduction": "NOT_ALLOWED",
+    "phiOsScoring": "NOT_ALLOWED",
+    "relationshipComparison": "NOT_ALLOWED_UNTIL_PRF_W9"
+  }
+}

@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const base='content/customer-experience-rebuild';
+const dev=read(`${base}/acceptance/cx-r12r3b-machine-development-acceptance-v1.json`);
+const audit=read(`${base}/acceptance/cx-r12r3b-pass2-current-audit-v1.json`);
+const v1=read(`${base}/review/cx-r12r3b-96-case-human-review-campaign-v1.json`);
+const v2=read(`${base}/review/cx-r12r3b-96-case-human-review-campaign-v2.json`);
+const results=read(`${base}/review/cx-r12r3b-human-review-results-template-v1.json`);
+const gates=read(`${base}/production/cx-r12r3b-production-gates-v1.json`);
+const aggregate=read(`${base}/evidence/cx-r12r3b/aggregate-evidence-pack-v1.json`);
+assert.equal(dev.status,'DEVELOPMENT_ACCEPTED');
+assert.equal(audit.w0ToW60.confirmed,true);
+assert.equal(audit.baselineCommit,'fc2c3dd6ab4910581fd9c859dc303e8c89697ec0');
+assert.equal(v1.caseCount,96);assert.equal(v2.caseCount,96);assert.equal(v2.cases.length,96);
+assert.equal(v2.successorOf,`${base}/review/cx-r12r3b-96-case-human-review-campaign-v1.json`);
+assert.equal(v2.historicalPredecessorMutated,false);
+assert.equal(v2.status,'PREFLIGHT_BLOCKED_CANDIDATE_MATERIALIZATION_REQUIRED');
+assert.equal(v2.currentTotals.materialized,0);assert.equal(v2.currentTotals.reviewEligible,0);assert.equal(v2.currentTotals.dualAccepted,0);
+assert(v2.cases.every(x=>x.reviewEligible===false&&x.candidateMaterialization?.state==='NOT_MATERIALIZED'&&x.customerPublishable===false));
+assert.equal(results.reviewPolicy.dualAcceptanceRequired,true);assert.equal(results.reviewPolicy.modelGeneratedAcceptanceForbidden,true);
+assert.equal(gates.prerequisites.developmentAccepted,true);assert.equal(gates.prerequisites.humanReview96DualAccepted,false);assert.equal(gates.productionFreeze.freezeAllowed,false);assert.equal(gates.fullProduction,false);
+for(const methodId of ['AST','NUM','BZR','ZWR']){
+ const pack=read(`${base}/evidence/cx-r12r3b/${methodId.toLowerCase()}-evidence-pack-v1.json`);
+ assert.equal(pack.methodId,methodId);assert.equal(pack.humanReview.accepted,0);assert.equal(pack.productionSha,null);
+}
+assert.equal(aggregate.fullProduction,false);assert.equal(aggregate.humanReviewResults,null);
+for(const p of ['tools/review/cx-r12r3b-human-review.html','scripts/validate-cx-r12r3b-human-review-results.mjs','docs/CX-R12R3B-PASS2-ACCEPTANCE-STATUS.md'])assert(fs.existsSync(p),`${p} missing`);
+console.log('✓ CX-R12R3B Pass 2 audit/preflight passed.');
+console.log('  W0–W60 DEVELOPMENT_ACCEPTED is preserved.');
+console.log('  96 case identities are preserved, but 0/96 are review-eligible because case-specific candidate/graph snapshots are not materialized and composition/customer-language blockers remain.');
+console.log('  HUMAN_ACCEPTED, LIVE_BROWSER_ACCEPTED, CONTROLLED_PRODUCTION and FULL_PRODUCTION remain fail-closed.');

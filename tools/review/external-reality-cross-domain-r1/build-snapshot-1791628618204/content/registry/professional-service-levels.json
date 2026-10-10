@@ -1,0 +1,92 @@
+{
+  "id": "phi-os.professional-service-levels",
+  "version": "1.0.0",
+  "milestone": "M4A-W1",
+  "status": "definition-frozen-operations-pending",
+  "businessDayBasis": "Malaysia working days; public holiday handling to be defined before booking launch.",
+  "startsWhen": "Required materials, consent and service scope are complete.",
+  "profiles": [
+    {
+      "profileId": "immediate",
+      "minimumBusinessDays": 0,
+      "maximumBusinessDays": 0,
+      "trigger": "validated automated request"
+    },
+    {
+      "profileId": "one_to_three_business_days",
+      "minimumBusinessDays": 1,
+      "maximumBusinessDays": 3,
+      "trigger": "complete required information received"
+    },
+    {
+      "profileId": "three_to_five_business_days",
+      "minimumBusinessDays": 3,
+      "maximumBusinessDays": 5,
+      "trigger": "complete required materials received"
+    },
+    {
+      "profileId": "five_to_seven_business_days",
+      "minimumBusinessDays": 5,
+      "maximumBusinessDays": 7,
+      "trigger": "complete required materials received"
+    },
+    {
+      "profileId": "five_to_ten_business_days",
+      "minimumBusinessDays": 5,
+      "maximumBusinessDays": 10,
+      "trigger": "complete required materials received"
+    },
+    {
+      "profileId": "seven_to_fourteen_business_days",
+      "minimumBusinessDays": 7,
+      "maximumBusinessDays": 14,
+      "trigger": "complex household or property scope confirmed"
+    },
+    {
+      "profileId": "three_to_five_after_consultation",
+      "minimumBusinessDays": 3,
+      "maximumBusinessDays": 5,
+      "trigger": "consultation completed and scope confirmed"
+    },
+    {
+      "profileId": "five_to_ten_after_complete_update",
+      "minimumBusinessDays": 5,
+      "maximumBusinessDays": 10,
+      "trigger": "complete annual update received"
+    },
+    {
+      "profileId": "scheduled_after_report",
+      "minimumBusinessDays": null,
+      "maximumBusinessDays": null,
+      "trigger": "report completed and appointment agreed"
+    },
+    {
+      "profileId": "scheduled_cycle",
+      "minimumBusinessDays": null,
+      "maximumBusinessDays": null,
+      "trigger": "agreed implementation or follow-up cycle"
+    },
+    {
+      "profileId": "monthly_or_quarterly",
+      "minimumBusinessDays": null,
+      "maximumBusinessDays": null,
+      "trigger": "agreed monthly or quarterly review date"
+    },
+    {
+      "profileId": "complex_scope_confirmed_after_intake",
+      "minimumBusinessDays": null,
+      "maximumBusinessDays": null,
+      "trigger": "scope, evidence volume, consent and assigned professional confirmed"
+    }
+  ],
+  "customerVisibleStates": [
+    "required_materials_pending",
+    "intake_complete",
+    "professional_review_pending",
+    "in_progress",
+    "consultation_pending",
+    "delivered",
+    "revision_requested",
+    "completed"
+  ]
+}

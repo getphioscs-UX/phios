@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-RJX-REALITY-TIMELINE-EVENT-TYPE-REGISTRY-v1.0.0",
+  "work": "RJX-W15",
+  "status": "CANDIDATE",
+  "baselineCommit": "fe24201c6634ddff32ef5b067f6bce4db14c3cf0",
+  "expansionConditions": [
+    "history",
+    "change_over_time",
+    "repeated_pattern",
+    "version_comparison",
+    "action_outcome_review",
+    "method_recalculation_diff"
+  ],
+  "eventTypes": [
+    "observed_event",
+    "reported_event",
+    "case_created",
+    "evidence_added",
+    "reading_created",
+    "option_selected",
+    "action_started",
+    "outcome_observed",
+    "review_completed",
+    "reality_version_created",
+    "method_result_created",
+    "method_result_superseded",
+    "case_closed",
+    "case_reopened"
+  ],
+  "rules": {
+    "timelineOptionalForSimpleCase": true,
+    "eventSourceRequired": true,
+    "eventTimeIsCausalProof": false,
+    "sequenceIsCausation": false,
+    "missingTimeBecomesUnknown": true,
+    "relativeTimePreservedAsRelative": true,
+    "aiMayInventDates": false,
+    "previousVersionsPreserved": true
+  }
+}

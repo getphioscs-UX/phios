@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+const base=String(process.env.PHIOS_UXL_BASE_URL||'').replace(/\/$/,''); const expected=String(process.env.PHIOS_EXPECTED_SHA||'');
+if(!/^https:\/\//.test(base)) throw new Error('PHIOS_UXL_BASE_URL_HTTPS_REQUIRED'); if(!/^[0-9a-f]{40}$/i.test(expected)) throw new Error('PHIOS_EXPECTED_SHA_FULL_REQUIRED');
+const get=async p=>{const r=await fetch(base+p,{redirect:'follow',headers:{accept:'text/html,application/json'}});return {r,t:await r.text()}};
+const status=await get('/api/ask2-runtime-status'); assert.equal(status.r.status,200); const sj=JSON.parse(status.t); assert.equal(sj.deployedSha||sj.deployment?.pagesCommitSha,expected);
+const page=await get('/ask'); assert.equal(page.r.status,200); assert.match(page.t,/What are you trying to understand\?/); assert.match(page.t,/ux-lens\.js/);
+const legacy=await get('/knowledge-search?q='+encodeURIComponent('为什么我会皮肤敏感')); assert.equal(legacy.r.status,200); assert.ok(legacy.r.url.includes('/ask'));
+const ask=async q=>{const r=await fetch(base+'/api/ask-phios-orchestrated',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({q,locale:'zh-Hans',publicRequest:true})});return {r,j:await r.json()}};
+const h=await ask('为什么我会皮肤敏感'); assert.equal(h.r.status,200); assert.equal(h.j.mode,'HEALTH');
+const k=await ask('什么是 Reality Drift'); assert.equal(k.r.status,200); assert.notEqual(k.j.mode,'HEALTH');
+console.log('✓ UX-LENS live browser/source acceptance passed for deployed successor',expected);

@@ -1,0 +1,17 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://getphios.com/schemas/mcd/hdr-canonical-projection-normalization-v1.schema.json",
+  "title":"PHI OS MCD-5 HDR Validation-only Canonical Projection Normalization",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schemaVersion","status","publicMethodCode","publicLabels","rawInternalSchemaAccepted","restrictedVocabularySuppressed","allowedRootSections"],
+  "properties":{
+    "schemaVersion":{"const":"PHI-OS-MCD-5-HDR-CANONICAL-PROJECTION-NORMALIZATION-v1.0.0"},
+    "status":{"const":"VALIDATION_ONLY_NOT_CLIENT_DISPATCHABLE"},
+    "publicMethodCode":{"const":"PERSONAL_RUNTIME_PROJECTION"},
+    "publicLabels":{"type":"object","additionalProperties":false,"required":["en","zh-Hans"],"properties":{"en":{"const":"Personal Runtime Projection"},"zh-Hans":{"const":"个人运行投射"}}},
+    "rawInternalSchemaAccepted":{"const":false},
+    "restrictedVocabularySuppressed":{"const":true},
+    "allowedRootSections":{"const":["method","calculation","projection","unknown","evidence","version","execution","interpretation"]}
+  }
+}

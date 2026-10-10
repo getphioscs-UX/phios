@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-APS-8-PRODUCTION-ACCEPTANCE-FREEZE-CONTRACT-v1.0.0",
+  "work": "APS-8",
+  "status": "ACTIVE",
+  "baselineCommit": "94d5efa953ff83713505b133d0039764df577675",
+  "purpose": "Accept and freeze the simplified article-production operator surface after APS-1 through APS-7 preserve all underlying authority boundaries and the two-command workflow is proven deterministic, fail-closed and idempotent.",
+  "operatorSurface": {
+    "batch": "npm run article:batch -- --book BOOK-1 --count 30",
+    "publish": "npm run article:publish -- --batch BATCH-001"
+  },
+  "acceptanceRequirements": [
+    "APS-1_TO_APS-7_CHECKS_PASS",
+    "REAL_PENDING_BATCH_FAILS_CLOSED_WITH_ZERO_PUBLICATION",
+    "EXPLICIT_DECISION_FIXTURE_SUPPORTS_PUBLISH_DEFER_DO_NOT_PUBLISH",
+    "PUBLISH_FIXTURE_REUSES_VAP_W11",
+    "PJA_PUBLICATION_W1_IMPLEMENTATION_BYTES_UNCHANGED",
+    "FROZEN_BRIEF_SUCCESSOR_VALIDATION_PROVEN",
+    "PUBLISHED_KNOWLEDGE_AUTHORITY_REBUILDS",
+    "NO_VISUAL_ASSET_PATH_RECORDS_CAR_NOT_REQUIRED",
+    "VISUAL_ASSET_PATH_CANNOT_BYPASS_CAR",
+    "CPR_ARTICLE_PRESENTATION_CREATED_FOR_PUBLISHED_ARTICLE",
+    "VISUAL_ARTICLE_AND_STATIC_ROUTE_CREATED",
+    "SAME_ROUTE_LOCALE_CONTRACT_PRESERVED",
+    "SECOND_PUBLISH_RUN_IS_IDEMPOTENT",
+    "VAP_L10N_FROZEN_REFERENCE_REMAINS_VALID"
+  ],
+  "freezeBoundary": {
+    "freezeApsOperatorContracts": true,
+    "freezeUnderlyingAuthorityImplementations": false,
+    "freezeDoesNotPromotePendingHumanDecisions": true,
+    "freezeDoesNotPublishCurrentBatch": true,
+    "futureSuccessorsMustRemainAdditive": true
+  }
+}

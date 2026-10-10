@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-CROSS-METHOD-COMPOSITION-RULE-REGISTRY-v1.0.0",
+  "work": "R2-W23/W37-W39",
+  "baselineCommit": "0692037d3a3f522de9f0eb11d37f738df3a2bae6",
+  "status": "FROZEN_CROSS_COMPOSITION_RULES",
+  "supportTypes": ["COMMON", "COMPLEMENTARY", "TENSION", "CONTEXT_DEPENDENT", "OPEN"],
+  "classificationPrecedence": ["TENSION", "OPEN", "CONTEXT_DEPENDENT", "COMPLEMENTARY", "COMMON"],
+  "classificationRules": {
+    "TENSION": "At least one CUSTOMER_PUBLISHABLE claim in the dimension is explicitly TENSION or TRADEOFF, or carries counter-evidence, and at least two distinct public methods contribute.",
+    "OPEN": "At least one CUSTOMER_PUBLISHABLE OPEN claim contributes and no explicit TENSION rule has precedence; at least two distinct public methods contribute.",
+    "CONTEXT_DEPENDENT": "At least one CUSTOMER_PUBLISHABLE CONDITION or TEMPORAL_ACTIVATION claim contributes and no higher-precedence rule applies; at least two distinct public methods contribute.",
+    "COMPLEMENTARY": "Two or more distinct public methods contribute different admitted claim types to the same shared dimension without explicit tension/open/condition precedence.",
+    "COMMON": "Two or more distinct public methods contribute the same non-conflict admitted claim class to the same shared dimension. COMMON means shared emphasis only, never factual agreement or proof."
+  },
+  "templates": {
+    "COMMON": {"headline":"Shared emphasis: {label}","narrative":"{count} customer-publishable method claims from {methods} independently contribute to the {label} dimension. This records shared emphasis only; it does not establish a fact or increase truth confidence."},
+    "COMPLEMENTARY": {"headline":"Complementary perspectives: {label}","narrative":"Customer-publishable claims from {methods} contribute different bounded claim types to the {label} dimension. They are retained as complementary perspectives rather than merged into one method conclusion."},
+    "TENSION": {"headline":"Tension remains visible: {label}","narrative":"The {label} dimension contains explicit tension, tradeoff or counter-evidence alongside another customer-publishable method contribution. Both sides remain visible; no method is selected as the winner."},
+    "CONTEXT_DEPENDENT": {"headline":"Context matters: {label}","narrative":"The {label} dimension includes an explicit condition or authorised timing context across customer-publishable method claims. The cross reading preserves that dependency instead of turning it into a fixed conclusion."},
+    "OPEN": {"headline":"Open perspective: {label}","narrative":"The {label} dimension includes an explicitly open customer-publishable claim alongside another method contribution. The unresolved state remains open rather than being filled by cross synthesis."}
+  },
+  "mandatoryGates": {
+    "minimumDistinctCustomerPublishableMethodsPerCrossClaim": 2,
+    "xpfMaySatisfyMinimum": false,
+    "hdrMaySatisfyMinimum": false,
+    "currentRealityMaySatisfyMinimum": false,
+    "methodVotingAllowed": false,
+    "percentageMatchAllowed": false,
+    "systemsProveLanguageAllowed": false,
+    "newMethodMeaningAllowed": false,
+    "smrProseBackfeedAllowed": false
+  }
+}

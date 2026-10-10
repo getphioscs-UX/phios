@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-ASK-HRX-GROUNDING-v1.0.0",
+  "requiredInputs": [
+    "question",
+    "healthIntent",
+    "safety",
+    "authorityState"
+  ],
+  "answerStates": [
+    "SAFETY_FIRST",
+    "GROUNDED_HEALTH_INFORMATION",
+    "GROUNDED_DOCUMENT_UNDERSTANDING",
+    "GUIDED_HEALTH_REALITY",
+    "AUTHORITY_REQUIRED"
+  ],
+  "hardRules": [
+    "NO_APPROVED_SOURCE_NO_HEALTH_FACT_CLAIM",
+    "GENERAL_MODEL_MAY_NOT_FILL_MISSING_HEALTH_FACTS",
+    "USER_DOCUMENT_FACTS_MUST_BE_LABELED_AS_DOCUMENT_EXTRACTED",
+    "UNKNOWN_MUST_REMAIN_VISIBLE",
+    "DIAGNOSIS_AND_TREATMENT_AUTHORITY_NOT_CREATED"
+  ]
+}

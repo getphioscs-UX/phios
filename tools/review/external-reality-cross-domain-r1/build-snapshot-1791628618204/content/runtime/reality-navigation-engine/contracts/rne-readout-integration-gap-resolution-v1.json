@@ -1,0 +1,27 @@
+{
+  "contractCode": "PHI-OS-RNE-W10-READOUT-INTEGRATION-GAP-RESOLUTION-v1",
+  "contractVersion": "1.0.0",
+  "work": "RNE-W10",
+  "status": "RESOLVED_BY_VERSIONED_RDG_CONSUMER_READ_EXTENSION",
+  "baselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+  "predecessorGapReference": "content/runtime/reality-navigation-engine/contracts/rne-readout-integration-gap-v1.json",
+  "rreReadoutAuthorityReference": "content/governance/reality-data-governance/extensions/rre-readout/contracts/reality-readout-record-data-contract-v1.json",
+  "rdgConsumerReadExtensionReference": "content/governance/reality-data-governance/extensions/rne-navigation/registries/rne-navigation-consumer-read-successor-v1.json",
+  "resolution": {
+    "canonicalReadoutDataType": "REALITY_READOUT_RECORD",
+    "rneReadMode": "READ_ONLY_PURPOSE_PERMISSION_VISIBILITY_BOUND",
+    "allowedPurpose": "SERVICE_DELIVERY",
+    "rawReadoutPayloadCopyAllowed": false,
+    "rneReadoutWriteAuthorityGranted": false,
+    "directStorageWriteGranted": false,
+    "persistenceEligibilityGatePreserved": true,
+    "historicalW1ValidationViewContractRewritten": false
+  },
+  "rules": {
+    "canonicalReadoutReferenceMayBeBoundAtW10": true,
+    "w1HistoricalValidationViewRemainsValid": true,
+    "storageLocationDoesNotGrantAuthority": true,
+    "readoutIsNavigationDecision": false,
+    "readoutIsProfessionalJudgment": false
+  }
+}

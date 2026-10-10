@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "PHI-OS-RJX-REALITY-REQUEST-ROUTE-REGISTRY-v1.0.0",
+  "phase": "RJX",
+  "work": "RJX-W0",
+  "status": "CANDIDATE_DETERMINISTIC_ROUTING",
+  "baselineCommit": "655a6136919fa820f6d064237cf01a8fc4f8f667",
+  "evaluationOrder": [
+    "PROFESSIONAL_BOUNDARY",
+    "METHOD_ONLY",
+    "KNOWLEDGE_REQUEST",
+    "COMPLEX_REALITY_CASE",
+    "SIMPLE_REALITY_CASE",
+    "UNSUPPORTED"
+  ],
+  "routes": [
+    {
+      "requestClass": "PROFESSIONAL_BOUNDARY",
+      "destination": "PROFESSIONAL_REVIEW",
+      "matchSignals": [
+        "regulated_or_high_risk_explicit",
+        "professional_judgment_required"
+      ],
+      "createsCase": false,
+      "truthDecision": false
+    },
+    {
+      "requestClass": "METHOD_ONLY",
+      "destination": "PERSONAL_RUNTIME_OR_MCD",
+      "matchSignals": [
+        "method_calculation_only",
+        "no_case_evidence_required"
+      ],
+      "createsCase": false,
+      "truthDecision": false
+    },
+    {
+      "requestClass": "KNOWLEDGE_REQUEST",
+      "destination": "KNOWLEDGE_ACCESS",
+      "matchSignals": [
+        "general_knowledge",
+        "published_phi_os_question",
+        "book_article_figure_request"
+      ],
+      "createsCase": false,
+      "truthDecision": false
+    },
+    {
+      "requestClass": "COMPLEX_REALITY_CASE",
+      "destination": "FULL_REALITY_JOURNEY",
+      "matchSignals": [
+        "case_specific",
+        "persistent",
+        "multi_factor",
+        "reality_dependent"
+      ],
+      "createsCase": true,
+      "truthDecision": false
+    },
+    {
+      "requestClass": "SIMPLE_REALITY_CASE",
+      "destination": "LIGHTWEIGHT_REALITY_WORKSPACE",
+      "matchSignals": [
+        "case_specific",
+        "bounded_decision",
+        "limited_entities"
+      ],
+      "createsCase": true,
+      "truthDecision": false
+    },
+    {
+      "requestClass": "UNSUPPORTED",
+      "destination": "FAIL_CLOSED",
+      "matchSignals": [
+        "no_governed_route"
+      ],
+      "createsCase": false,
+      "truthDecision": false
+    }
+  ],
+  "default": {
+    "requestClass": "UNSUPPORTED",
+    "silentAcceptance": false
+  },
+  "execution": {
+    "active": false,
+    "productionEffect": "none",
+    "humanAcceptanceRequired": true
+  }
+}

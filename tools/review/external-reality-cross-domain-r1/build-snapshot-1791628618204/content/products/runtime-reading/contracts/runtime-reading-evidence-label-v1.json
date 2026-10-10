@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W14-EVIDENCE-LABEL-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W14",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_INTERNAL_PROVENANCE_LABEL_REQUIREMENT",
+  "minimumInternalFields": [
+    "sourceType",
+    "sourceAuthority",
+    "confidence",
+    "evidenceStatus"
+  ],
+  "sourceTypeValues": [
+    "METHOD_PROJECTION",
+    "CANONICAL_MEANING",
+    "USER_REPORTED",
+    "REALITY",
+    "READOUT",
+    "CARRIER",
+    "TIMELINE",
+    "ENVIRONMENT",
+    "FINANCIAL",
+    "PROFESSIONAL"
+  ],
+  "confidenceValues": [
+    "HIGH",
+    "MEDIUM",
+    "LOW",
+    "UNKNOWN",
+    "NOT_APPLICABLE"
+  ],
+  "evidenceStatusValues": [
+    "AVAILABLE",
+    "PARTIAL",
+    "UNAVAILABLE",
+    "CONTRADICTED",
+    "NOT_APPLICABLE"
+  ],
+  "rules": {
+    "everyReportStatementRequiresInternalProvenance": true,
+    "customerPresentationMaySimplifyLabelsDownstream": true,
+    "internalTraceMayBeDeletedByPresentation": false,
+    "evidenceLabelCreatesTruth": false,
+    "confidenceMayBeInvented": false,
+    "professionalSourceRequiresPR": true,
+    "unknownSourceRequiresUnavailableOrUnknownDisclosure": true,
+    "fullStatementTypeRegistryDeferredTo": "RRP-W17"
+  }
+}

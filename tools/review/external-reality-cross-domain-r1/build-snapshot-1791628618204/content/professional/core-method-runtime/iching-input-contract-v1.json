@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-INPUT-CONTRACT-v1.0.0",
+  "phase": "ICH",
+  "work": "ICH-W1",
+  "baselineCommit": "b536eb5a6f69a50d7549426a09b7f123bde35c74",
+  "status": "STRUCTURAL_VALIDATION_INPUT_CONTRACT_PRODUCTION_GATE_CLOSED",
+  "methodCode": "I_CHING",
+  "pluginCode": "ICH",
+  "evidenceContract": "content/professional/symbolic-method/schemas/symbolic-method-evidence-v1.schema.json",
+  "supportedInputModes": [
+    "MANUAL_LINES",
+    "COIN_CAST",
+    "SYSTEM_RANDOM"
+  ],
+  "reservedInputModes": [
+    "YARROW_STALK"
+  ],
+  "lineOrder": "BOTTOM_TO_TOP",
+  "modeContracts": {
+    "MANUAL_LINES": {
+      "selectionMode": "MANUAL_SELECTION",
+      "selectedSymbolsFormat": "six strings, each one of 6|7|8|9"
+    },
+    "COIN_CAST": {
+      "selectionMode": "MANUAL_SELECTION",
+      "selectedSymbolsFormat": "six strings in form 2,2,3; each triple sums to 6..9",
+      "coinPointValues": [
+        2,
+        3
+      ]
+    },
+    "SYSTEM_RANDOM": {
+      "selectionMode": "SYSTEM_RANDOM",
+      "selectedSymbolsFormat": "persisted six strings, each one of 6|7|8|9",
+      "requires": [
+        "seed",
+        "entropyEvidence",
+        "replayToken"
+      ],
+      "rerollInsideCalculationAllowed": false
+    }
+  },
+  "transportBoundary": {
+    "sharedCalculationRuntimeReused": true,
+    "validationBridgeRecordType": "SYMBOLIC_METHOD_EVIDENCE",
+    "frozenSharedDataRecordV1Mutated": false,
+    "productionUseAllowed": false,
+    "productionSuccessorRequired": "MPA canonical method input + governed symbolic evidence transport successor"
+  },
+  "rules": {
+    "exactlySixLinesRequired": true,
+    "silentDefaultAllowed": false,
+    "aiSelectionAllowed": false,
+    "systemRandomMustUsePersistedEvidence": true,
+    "sourceTextRequired": false,
+    "interpretationRequired": false
+  }
+}

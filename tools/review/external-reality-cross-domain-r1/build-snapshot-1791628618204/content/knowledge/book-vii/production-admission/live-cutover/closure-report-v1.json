@@ -1,0 +1,166 @@
+{
+  "baselineHead": "cc700e6df2fffec42aa750b2b595cdb0f8ef2415",
+  "status": "KAP_BOOK_VII_PRODUCTION_ADMITTED",
+  "executionScope": "CURRENT_MAIN_REPOSITORY_AND_LOCAL_LIVE_EXISTING_PAGES_WORKER",
+  "humanAcceptRecorded": true,
+  "canonicalIdentityNodes": 100,
+  "publishedKnowledgeNodes": 11,
+  "identityOnlyNodes": 89,
+  "standaloneArticlesRequired": 0,
+  "figures": 9,
+  "publicR2Objects": 59,
+  "r2Status": "BOUND",
+  "providerRequests": 0,
+  "historicalFreezeIntegrity": true,
+  "masterAExecuted": false,
+  "liveCloudDeploymentPerformed": false,
+  "automaticCommitPerformed": false,
+  "automaticPushPerformed": false,
+  "unrelatedZiweiPreserved": [
+    {
+      "path": "docs/reports/ziwei/vfr-r1/DEEP-PUBLICATION-IR.json",
+      "sha256": "e7ee797892df55414959a16d93d190e69394a86bc7f94177abc5c803782cf7e6",
+      "unchanged": true
+    },
+    {
+      "path": "docs/reports/ziwei/vfr-r1/DEEP-RENDER-CACHE.json",
+      "sha256": "5d3ec5b59ef267e8fd126c0a6586fd4024ab1c6baec28ab04a0fdaadd7d09030",
+      "unchanged": true
+    },
+    {
+      "path": "docs/reports/ziwei/vfr-r1/PAGE-PLAN.json",
+      "sha256": "6717fae7ea8610721c069c78a0918ac9fe72c0e7fff9bce4376c5f0a1921b105",
+      "unchanged": true
+    },
+    {
+      "path": "tools/review/ZWR-VFR-R1-HUMAN-REVIEW.html",
+      "sha256": "7b6ff0ef2c8596b309c4148f010eafefef0ffd50a35d14a47ff1f7d4596b1780",
+      "unchanged": true
+    }
+  ],
+  "acceptance": {
+    "path": "content/knowledge/answer-projection/acceptance/kap-book-vii-production-admission-r1-acceptance.json",
+    "sha256": "4a8083abb9fac1549e2b2e066e39823c71040b0472bdfcbce32beeb456e95e82"
+  },
+  "freeze": {
+    "path": "content/knowledge/answer-projection/freeze/kap-book-vii-production-admission-r1-freeze.json",
+    "sha256": "ddc016eee5c8dbdb547ce78fd1531430fd0313279e53b889dee9e6e14852c2be"
+  },
+  "handoff": {
+    "path": "content/knowledge/book-vii/handoff/book-vii-kap-production-to-master-a-handoff-v1.json",
+    "sha256": "cfc58a5464884bc4ce8b0f09864bd8c4c429b80508f8ca820ee9f62d6f538507"
+  },
+  "checks": [
+    {
+      "command": "npm run check:kap",
+      "exitCode": 0,
+      "log": "content/knowledge/book-vii/production-admission/live-cutover/check-kap.log"
+    },
+    {
+      "command": "npm run check:kap-phase18",
+      "exitCode": 0,
+      "log": "content/knowledge/book-vii/production-admission/live-cutover/check-kap-phase18.log"
+    },
+    {
+      "command": "npm run check:kap-book-vii",
+      "exitCode": 0,
+      "log": "content/knowledge/book-vii/production-admission/live-cutover/check-kap-book-vii.log"
+    },
+    {
+      "command": "npm run check:kap-book-vii-production",
+      "exitCode": 0,
+      "log": "content/knowledge/book-vii/production-admission/live-cutover/check-kap-book-vii-production.log"
+    },
+    {
+      "command": "npm run check:kap-current",
+      "exitCode": 0,
+      "log": "content/knowledge/book-vii/production-admission/live-cutover/check-kap-current.log"
+    },
+    {
+      "command": "npm run knowledge:public:build",
+      "exitCode": 0,
+      "log": "content/knowledge/book-vii/production-admission/live-cutover/knowledge-public-build.log"
+    },
+    {
+      "command": "npm run check:pages-build",
+      "exitCode": 1,
+      "log": "content/knowledge/book-vii/production-admission/live-cutover/check-pages-build.log"
+    },
+    {
+      "command": "npm run check",
+      "exitCode": 0,
+      "log": "content/knowledge/book-vii/production-admission/live-cutover/check.log"
+    }
+  ],
+  "pagesRetry": {
+    "command": "npm run check:pages-build",
+    "exitCode": 0,
+    "staticProjectionIncluded": true,
+    "privateLineageExcluded": true,
+    "retryReason": "LOCAL_BROWSER_SERVER_RELEASED_OUTPUT_DIRECTORY_LOCK",
+    "providerAllowed": false
+  },
+  "browser": {
+    "status": "PASS",
+    "scope": "REAL_LOCAL_BROWSER_EXISTING_ASK_CLIENT",
+    "url": "http://127.0.0.1:8797/knowledge/ask/",
+    "observed": [
+      {
+        "id": "Q1",
+        "question": "为什么没有观察到不代表不存在？",
+        "source": "14.86",
+        "capture": "q1"
+      },
+      {
+        "id": "Q2",
+        "question": "如果两个高质量证据互相冲突怎么办？",
+        "source": "14.65 / 14.90",
+        "capture": "q2"
+      },
+      {
+        "id": "Q3",
+        "question": "为什么人工智能越流畅越不能代表越确定？",
+        "source": "14.92",
+        "capture": "q3"
+      },
+      {
+        "id": "Q5",
+        "question": "什么时候继续观察已经不再足够？",
+        "source": "14.99 / 14.100",
+        "capture": "q5"
+      },
+      {
+        "id": "MANUSCRIPT_DENIAL",
+        "sources": [],
+        "capture": "manuscript-denial"
+      },
+      {
+        "id": "FIGURE_14H",
+        "source": "14.96",
+        "supporting": "14.85–14.95",
+        "capture": "figure-14h"
+      }
+    ],
+    "fixtureOnly": false,
+    "liveCloudDeploymentPerformed": false,
+    "providerEvidence": "live-http-acceptance-v1.json",
+    "finalBuildQ2Reverified": true
+  },
+  "knownGaps": [
+    {
+      "scope": "CLOUD_DEPLOYMENT",
+      "status": "NOT_PERFORMED",
+      "detail": "Admission verified against the real local Pages Worker and current client. Public internet deployment and remote endpoint verification remain separate."
+    },
+    {
+      "scope": "CROSS_BOOK_BASELINE",
+      "status": "NO_COVERAGE",
+      "detail": "Roman civilization continuity and Japan 1945 queries remain unanswered by the existing published baseline; Book VII does not hijack them."
+    },
+    {
+      "scope": "LOCALE",
+      "status": "ZH_HANS_ONLY",
+      "detail": "English identity/prose admission has not been authorized or created."
+    }
+  ]
+}

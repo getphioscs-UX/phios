@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W3-ENTITY-OWNERSHIP-CONTRACT-v1.0.0",
+  "work": "FDR-W3",
+  "status": "ACTIVE",
+  "authorityOwner": "FDR",
+  "requiredFields": [
+    "ownershipId",
+    "entityId",
+    "ownerReference",
+    "ownershipBasis",
+    "ownershipPercentage",
+    "effectiveDate",
+    "disclosureState",
+    "evidence"
+  ],
+  "ownershipBasis": [
+    "DIRECT",
+    "INDIRECT_REPORTED",
+    "TRUST_REPORTED",
+    "UNKNOWN"
+  ],
+  "rules": {
+    "percentageMayBeExactApproximateOrRange": true,
+    "ownershipTotalsNeedNotBeForcedTo100WhenDisclosureIncomplete": true,
+    "missingOwnershipMayBeInferred": false,
+    "ownershipDoesNotGrantAccountAccess": true,
+    "allAtomicFinancialFactsUseFactEnvelope": true
+  },
+  "factEnvelopeReference": "financial-fact-contract-v1.json"
+}

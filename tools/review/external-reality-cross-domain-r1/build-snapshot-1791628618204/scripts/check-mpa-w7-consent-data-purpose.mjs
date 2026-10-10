@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import { BASELINE, readJson } from './lib/method-production-activation/mpa-input-calculation-v1.mjs';
+import { createConsentDataPurposeRuntime } from '../functions/method-production-activation/consent-data-purpose-runtime.js';
+const c=readJson('content/professional/method-production-activation/contracts/mpa-consent-data-purpose-v1.json'); const s=readJson('content/professional/method-production-activation/schemas/mpa-consent-data-purpose-record-v1.schema.json');
+assert.equal(c.work,'MPA-W7'); assert.equal(c.baselineCommit,BASELINE); assert.equal(c.rules.singleGlobalConsentForbidden,true); assert.deepEqual(c.personalMethodExecutionPurposes,['SERVICE_DELIVERY','PROFESSIONAL_SERVICE']);
+const purposes=readJson('content/governance/reality-data-governance/registries/canonical-data-purpose-registry-v1.json').purposeCodes;
+const consentClasses=readJson('content/governance/reality-data-governance/registries/canonical-consent-class-registry-v1.json').consentClasses;
+const retentionClasses=readJson('content/governance/reality-data-governance/registries/canonical-data-retention-registry-v1.json').entries.map(x=>x.retentionClass);
+const visibilityScopes=readJson('content/governance/reality-data-governance/registries/data-visibility-scope-registry-v1.json').scopes;
+const rt=createConsentDataPurposeRuntime({purposeCodes:purposes,consentClasses,retentionClasses,visibilityScopes});
+const record=rt.createRecord({consentRecordId:'CONSENT-1',subjectReference:'SUBJECT-1',methodCode:'NUMEROLOGY',purposeCode:'SERVICE_DELIVERY',consentClass:'EXPLICIT_CONSENT',retentionClass:'SERVICE_LIFECYCLE',visibilityScope:'SUBJECT_ONLY',professionalAccess:false,professionalReference:null,grantedAt:'2026-08-11T03:00:00.000Z',expiresAt:'2026-09-11T03:00:00.000Z',consentValid:true,withdrawal:{supported:true,status:'AVAILABLE',withdrawnAt:null}});
+const input={consentRecordId:'CONSENT-1',subjectReference:'SUBJECT-1',methodCode:'NUMEROLOGY',purposeCode:'SERVICE_DELIVERY'}; assert.equal(rt.assertExecutionPermission({canonicalInput:input,consentRecord:record,now:'2026-08-11T03:30:00.000Z'}),true);
+const withdrawn=rt.createRecord({...record,consentValid:true,withdrawal:{supported:true,status:'WITHDRAWN',withdrawnAt:'2026-08-11T03:20:00.000Z'}}); assert.equal(withdrawn.consentValid,false); assert.throws(()=>rt.assertExecutionPermission({canonicalInput:input,consentRecord:withdrawn}),/MPA_CONSENT_INVALID/);
+assert.throws(()=>rt.createRecord({...record,purposeCode:'GENERAL'}),/not governed by RDG/);
+assert.throws(()=>rt.createRecord({...record,professionalAccess:true,professionalReference:'PRO-1'}),/PROFESSIONAL_SHARING_CONSENT_REQUIRED/);
+const pro=rt.createRecord({...record,consentRecordId:'CONSENT-PRO',purposeCode:'PROFESSIONAL_SERVICE',consentClass:'PROFESSIONAL_SHARING_CONSENT',visibilityScope:'ASSIGNED_PROFESSIONAL',professionalAccess:true,professionalReference:'PRO-1'}); assert.equal(pro.professionalAccess,true);
+console.log('✓ MPA-W7 Consent & Data Purpose passed.');
+console.log('  Consent, purpose, retention, visibility and professional sharing remain RDG-governed and fail closed.');

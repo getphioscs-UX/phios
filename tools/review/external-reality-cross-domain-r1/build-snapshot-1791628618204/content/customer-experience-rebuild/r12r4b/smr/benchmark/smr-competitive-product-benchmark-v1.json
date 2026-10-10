@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "PHI-OS-SMR-R2-COMPETITIVE-PRODUCT-BENCHMARK-v1.0.0",
+  "work": "R2-W11",
+  "observedAt": "2026-08-28",
+  "benchmarkScope": "PRODUCT_UX_AND_COVERAGE_ONLY",
+  "comparisonMaturity": "CONTRACT_LEVEL_BEFORE_W12_W16_RENDERED_METHOD_BENCHMARKS",
+  "governance": {
+    "meaningAuthority": false,
+    "webProseCopied": false,
+    "canonicalMeaningCreatedFromBenchmark": false,
+    "sourceRole": "PRODUCT_COVERAGE_BENCHMARK_ONLY",
+    "benchmarkMayOpenUpstreamGapTicket": true
+  },
+  "dimensions": [
+    "first-screen clarity",
+    "reading hierarchy",
+    "chart-to-prose ratio",
+    "navigation",
+    "section length",
+    "progressive disclosure",
+    "technical depth",
+    "mobile behavior",
+    "paid-value cues",
+    "personal specificity",
+    "report continuity",
+    "print/PDF quality"
+  ],
+  "platforms": [
+    {
+      "platformId": "ASTRO_COM",
+      "product": "Astrodienst / astro.com",
+      "evidenceUrls": [
+        "https://www.astro.com/free/free_chart_e.htm"
+      ],
+      "observedFeatures": [
+        "Simple and extended chart entry coexist",
+        "Large range of chart types and technical configuration",
+        "Free and paid horoscope/report paths coexist",
+        "PDF chart drawings and printable ephemeris are explicit product surfaces"
+      ],
+      "benchmarkUse": [
+        "technical depth",
+        "navigation",
+        "print/PDF quality",
+        "progressive disclosure"
+      ]
+    },
+    {
+      "platformId": "ASTRO_SEEK",
+      "product": "Astro-Seek",
+      "evidenceUrls": [
+        "https://horoscopes.astro-seek.com/birth-chart-horoscope-online",
+        "https://horoscopes.astro-seek.com/astrology-chart-free-interpretations"
+      ],
+      "observedFeatures": [
+        "Birth-chart report entry exposes extended house/aspect/orb settings",
+        "Broad calculator and predictive-tool navigation",
+        "Interpretation library separates planets/signs/houses/aspects into explorable technical objects"
+      ],
+      "benchmarkUse": [
+        "technical depth",
+        "navigation",
+        "chart-to-prose ratio"
+      ]
+    },
+    {
+      "platformId": "CAFE_ASTROLOGY",
+      "product": "Cafe Astrology",
+      "evidenceUrls": [
+        "https://cafeastrology.com/free-natal-chart-report.html",
+        "https://astro.cafeastrology.com/"
+      ],
+      "observedFeatures": [
+        "Chart report combines placements, houses and aspects with interpretations",
+        "Multiple report paths include natal, transit and compatibility",
+        "Multiple house-system variants are exposed",
+        "Saved-chart/report continuation is supported in the free-report area"
+      ],
+      "benchmarkUse": [
+        "report continuity",
+        "technical depth",
+        "reading hierarchy",
+        "chart-to-prose ratio"
+      ]
+    },
+    {
+      "platformId": "THE_PATTERN",
+      "product": "The Pattern",
+      "evidenceUrls": [
+        "https://www.thepattern.com/"
+      ],
+      "observedFeatures": [
+        "Customer-facing insights intentionally reduce astrology jargon",
+        "Personal pattern, relationship, transit and time-travel surfaces are separated by use case",
+        "Conversation feature adds a guided exploration layer"
+      ],
+      "benchmarkUse": [
+        "first-screen clarity",
+        "reading hierarchy",
+        "progressive disclosure",
+        "personal specificity",
+        "report continuity"
+      ]
+    },
+    {
+      "platformId": "TIMEPASSAGES",
+      "product": "TimePassages",
+      "evidenceUrls": [
+        "https://timepassages.astrograph.com/timepassages/features"
+      ],
+      "observedFeatures": [
+        "Interactive chart supports point-and-click interpretation",
+        "Individual factors and whole-chart interpretation can be explored at different depth",
+        "Transit information includes a graphical timeline"
+      ],
+      "benchmarkUse": [
+        "progressive disclosure",
+        "technical depth",
+        "navigation",
+        "chart-to-prose ratio"
+      ]
+    },
+    {
+      "platformId": "NUMEROLOGY_COM",
+      "product": "Numerology.com",
+      "evidenceUrls": [
+        "https://www.numerology.com/articles/numerology-readings/",
+        "https://www.numerology.com/articles/your-numerology-chart/"
+      ],
+      "observedFeatures": [
+        "Personal reports group multiple chart numbers into named report products",
+        "Paid report coverage is chapter-oriented",
+        "Core numbers and changing cycles are presented as separate coverage areas"
+      ],
+      "benchmarkUse": [
+        "paid-value cues",
+        "reading hierarchy",
+        "section length",
+        "report continuity"
+      ]
+    }
+  ],
+  "phiOSComparison": [
+    {
+      "dimension": "first-screen clarity",
+      "status": "PHIOS_MATCH",
+      "reason": "W10 freezes a bounded first screen with synthesis, up to three priority themes, support/tension and one continuation CTA; rendered benchmark is still pending."
+    },
+    {
+      "dimension": "reading hierarchy",
+      "status": "PHIOS_ABOVE",
+      "reason": "W9 freezes one customer reading order and separates why/technical detail from the main body instead of leading with method-object directories."
+    },
+    {
+      "dimension": "chart-to-prose ratio",
+      "status": "PHIOS_MATCH",
+      "reason": "W9/W10 move technical chart detail to level 3 and keep the customer body claim-led; actual method benchmark rendering remains pending."
+    },
+    {
+      "dimension": "navigation",
+      "status": "PHIOS_MATCH",
+      "reason": "Three disclosure levels and ordered customer sections are explicit, but live navigation controls are not benchmarked until rendered reports exist."
+    },
+    {
+      "dimension": "section length",
+      "status": "PHIOS_MATCH",
+      "reason": "W10 has paragraph and consecutive-text constraints; rendered density remains to be tested."
+    },
+    {
+      "dimension": "progressive disclosure",
+      "status": "PHIOS_ABOVE",
+      "reason": "Reading, why-this-reading and technical detail are explicitly versioned as three disclosure levels."
+    },
+    {
+      "dimension": "technical depth",
+      "status": "NOT_COMPARABLE",
+      "reason": "Method-specific production depth must be evaluated in W12-W16 rather than inferred from the shared composition contract."
+    },
+    {
+      "dimension": "mobile behavior",
+      "status": "NOT_COMPARABLE",
+      "reason": "W10 defines mobile constraints but no rendered mobile benchmark has been accepted yet."
+    },
+    {
+      "dimension": "paid-value cues",
+      "status": "NOT_COMPARABLE",
+      "reason": "W9-W11 do not yet provide a customer-priced benchmark report."
+    },
+    {
+      "dimension": "personal specificity",
+      "status": "NOT_COMPARABLE",
+      "reason": "Specificity depends on method-native benchmark reports in W12-W16."
+    },
+    {
+      "dimension": "report continuity",
+      "status": "PHIOS_MATCH",
+      "reason": "The IA preserves a deterministic flow from synthesis through observation and explanation lineage; live continuity remains to be tested."
+    },
+    {
+      "dimension": "print/PDF quality",
+      "status": "NOT_COMPARABLE",
+      "reason": "W10 defines print rules but no W12-W16 print artifact has been human accepted."
+    }
+  ],
+  "next": "R2-W12 AST SINGLE BENCHMARK REPORT",
+  "boundary": {
+    "productionMeaningChanged": false,
+    "customerCutoverChanged": false,
+    "competitiveCopyUsed": false,
+    "liveVisualSuperiorityClaimed": false
+  }
+}

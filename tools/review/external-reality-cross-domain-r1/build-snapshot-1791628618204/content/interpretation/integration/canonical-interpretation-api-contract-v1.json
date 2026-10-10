@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "PHI-OS-MIR-7-CANONICAL-INTERPRETATION-API-CONTRACT-v1.0.0",
+  "work": "MIR-7L",
+  "status": "ACTIVE_GOVERNED_API",
+  "api": "interpretCanonicalProjection(projection, context, requestedDepth, locale)",
+  "inputs": [
+    "projection",
+    "context",
+    "requestedDepth",
+    "locale"
+  ],
+  "output": "CanonicalInterpretationResult",
+  "flow": [
+    "Method Execute",
+    "Canonical Projection",
+    "Interpretation Kernel",
+    "Canonical Meaning references when governed",
+    "Composition",
+    "Reading consumes accepted result only"
+  ],
+  "knowledgeRetrievalAlwaysRequired": false,
+  "aiAlwaysRequired": false,
+  "localeAffectsDerivation": false,
+  "methodRecalculationAllowed": false
+}

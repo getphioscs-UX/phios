@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-SOURCE-CLAIM-BATCH-001-EXTRACTION-ACCEPTANCE-v1.0.0",
+  "work": "ZIWEI-SOURCE-CLAIM-ADMISSION-001",
+  "baselineCommit": "07d01b39a98d07ff237f1516852f3b29d058a47e",
+  "status": "ACCEPTED_EXTRACTION_HUMAN_ADMISSION_PENDING",
+  "gates": {
+    "W3_8_PLACEMENT_CLAIMS_EXTRACTED": true,
+    "W4_21_STAR_STATE_ROW_CLAIMS_EXTRACTED": true,
+    "CLAIMS_MATCH_CURRENT_ENGINEERING_RUNTIME": true,
+    "SOURCE_WITNESSES_REGISTERED": true,
+    "HUMAN_SOURCE_FIDELITY_REVIEW_COMPLETE": false,
+    "RUNTIME_USE_ALLOWED": false,
+    "W5_START_ALLOWED": false,
+    "W6_START_ALLOWED": false,
+    "CUSTOMER_SURFACE_CHANGED": false
+  },
+  "knownReviewHotspots": [
+    "HUO_XING/LING_XING: classical mnemonic does not itself spell out the hour-progression convention",
+    "DI_KONG: classical witness says 天空 while engineering display says 地空",
+    "Star-state source term 地 is normalized to DE/得 and must be human-confirmed",
+    "TAN_LANG witness row transcription variant should be visually checked"
+  ],
+  "nextGate": "Human review result for all 29 claims. Apply only admitted claims, then re-freeze W3/W4 production eligibility before beginning W5/W6."
+}

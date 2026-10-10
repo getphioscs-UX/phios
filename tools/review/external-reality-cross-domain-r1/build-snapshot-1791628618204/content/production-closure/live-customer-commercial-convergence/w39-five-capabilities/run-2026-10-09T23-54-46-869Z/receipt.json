@@ -1,0 +1,1741 @@
+{
+  "head": "6e28839a7b93a2b62f0c2f7057705fc7a826f97f",
+  "startedAt": "2026-10-09T23:54:46.932Z",
+  "sourceIdentity": [
+    {
+      "path": "functions/profile/profile-production-authority.js",
+      "sha256": "25aeaf4746a0e38945a80c8dd2ed491dd27b95ae09afabd2fd7ec122f0bf2d50"
+    },
+    {
+      "path": "functions/api/profile-progressive.js",
+      "sha256": "e24e9219d3e021708201868ee9ee701cc92cff8cf87a304634eb7d72920e6bb2"
+    },
+    {
+      "path": "functions/account/profile-evidence-store.js",
+      "sha256": "e5fe51c0a3d5a46366445c147b10883f1899d0f83eed5e24a57e6d63ac4cdd72"
+    },
+    {
+      "path": "functions/account/will-information-delivery.js",
+      "sha256": "593e8e475d86b02a11b4e3f43ca42248139774828e87b10158a6b98ab9bd092f"
+    },
+    {
+      "path": "functions/professional/appointments/appointment-request-store.js",
+      "sha256": "fb653029e5580a3949b241ece6971c1d35cbc3e8bf27eacb02ba92c95bdef2c1"
+    },
+    {
+      "path": "perspectives/profile/index.html",
+      "sha256": "d63bf84aa7a71d9c5423bf1968cefaedba8369d1ec4b65c4b1283fae87161d0e"
+    },
+    {
+      "path": "professional/appointments/index.html",
+      "sha256": "918de3dcbe1e9002de468afc9ccb37aaafe3401985d5d023cf9513105e865ec6"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/profile-progressive.js",
+      "sha256": "5bd77dbd118725d94e2b58cd48e2353f0b11dfec5cc0fecd1d32e2adcd2472c2"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/appointment-request.js",
+      "sha256": "d1dbd633d9f7a8a7d3d85a4e9bd8a5be06bda5c89db4f21b0ad2d2c8663fdc14"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/secure-drafts.js",
+      "sha256": "0199f97afc003abeb632736f15655e141f77616b4c9792b855d6607215b49932"
+    },
+    {
+      "path": "perspectives/relationship/index.html",
+      "sha256": "e2840f4ee3b5a2c3df0c3e2f2e40e3dc0c9e8b7df012f54e1f0a8e16b29e20be"
+    },
+    {
+      "path": "assets/customer-ui/surfaces/account-capability-delivery.css",
+      "sha256": "e3729c85288e857b38b0b7ba9a4a750952445384f730e37c550d9502350009ee"
+    },
+    {
+      "path": "functions/api/customer-relationship-intake.js",
+      "sha256": "f199a1a8b40ed5a982ca2a6822653278cff6ac52beaca5d8ae36b2f70064695c"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/relationship-intake.js",
+      "sha256": "350cb86d0ccf788830839fa275d7e2fd7ea47acd91ccecbf7ec2a51b4f7eac5c"
+    }
+  ],
+  "run": "content/production-closure/live-customer-commercial-convergence/w39-five-capabilities/run-2026-10-09T23-54-46-869Z",
+  "providerCalls": 0,
+  "realPayments": 0,
+  "r2Deletion": 0,
+  "productionMigration": 0,
+  "deploy": 0,
+  "automaticCommitPush": 0,
+  "authScope": "LOCAL_QA_SERVER_ISSUED_SESSION; verified context adapter tested; production OIDC login NOT_RUN",
+  "rows": [
+    {
+      "capability": "Profile",
+      "width": 1280,
+      "lang": "en",
+      "clickTrace": [
+        "QUICK_PROFILE",
+        "six self-report responses",
+        "processing consent",
+        "explicit account retention/save",
+        "native generation + encrypted save",
+        "account list",
+        "same-object reopen"
+      ],
+      "resultVisible": true,
+      "overflow": false,
+      "firstStop": "SAME_OBJECT_PAID_ENTITLEMENT_RELEASE_NOT_WIRED"
+    },
+    {
+      "capability": "Appointment",
+      "width": 1280,
+      "lang": "en",
+      "clickTrace": [
+        "choose existing service",
+        "question/timezone/modality",
+        "processing and retention consent",
+        "submit",
+        "server request ID + REQUESTED",
+        "same-account reopen"
+      ],
+      "state": "PASS_LOCAL_REQUEST_SCOPE",
+      "firstStop": "PRODUCTION_BINDING_AND_DEPLOYMENT_NOT_AUTHORIZED",
+      "overflow": false
+    },
+    {
+      "capability": "Profile",
+      "width": 1280,
+      "lang": "zh-Hans",
+      "clickTrace": [
+        "QUICK_PROFILE",
+        "six self-report responses",
+        "processing consent",
+        "explicit account retention/save",
+        "native generation + encrypted save",
+        "account list",
+        "same-object reopen"
+      ],
+      "resultVisible": true,
+      "overflow": false,
+      "firstStop": "SAME_OBJECT_PAID_ENTITLEMENT_RELEASE_NOT_WIRED"
+    },
+    {
+      "capability": "Appointment",
+      "width": 1280,
+      "lang": "zh-Hans",
+      "clickTrace": [
+        "choose existing service",
+        "question/timezone/modality",
+        "processing and retention consent",
+        "submit",
+        "server request ID + REQUESTED",
+        "same-account reopen"
+      ],
+      "state": "PASS_LOCAL_REQUEST_SCOPE",
+      "firstStop": "PRODUCTION_BINDING_AND_DEPLOYMENT_NOT_AUTHORIZED",
+      "overflow": false
+    },
+    {
+      "capability": "Profile",
+      "width": 390,
+      "lang": "en",
+      "clickTrace": [
+        "QUICK_PROFILE",
+        "six self-report responses",
+        "processing consent",
+        "explicit account retention/save",
+        "native generation + encrypted save",
+        "account list",
+        "same-object reopen"
+      ],
+      "resultVisible": true,
+      "overflow": false,
+      "firstStop": "SAME_OBJECT_PAID_ENTITLEMENT_RELEASE_NOT_WIRED"
+    },
+    {
+      "capability": "Appointment",
+      "width": 390,
+      "lang": "en",
+      "clickTrace": [
+        "choose existing service",
+        "question/timezone/modality",
+        "processing and retention consent",
+        "submit",
+        "server request ID + REQUESTED",
+        "same-account reopen"
+      ],
+      "state": "PASS_LOCAL_REQUEST_SCOPE",
+      "firstStop": "PRODUCTION_BINDING_AND_DEPLOYMENT_NOT_AUTHORIZED",
+      "overflow": false
+    },
+    {
+      "capability": "Profile",
+      "width": 390,
+      "lang": "zh-Hans",
+      "clickTrace": [
+        "QUICK_PROFILE",
+        "six self-report responses",
+        "processing consent",
+        "explicit account retention/save",
+        "native generation + encrypted save",
+        "account list",
+        "same-object reopen"
+      ],
+      "resultVisible": true,
+      "overflow": false,
+      "firstStop": "SAME_OBJECT_PAID_ENTITLEMENT_RELEASE_NOT_WIRED"
+    },
+    {
+      "capability": "Appointment",
+      "width": 390,
+      "lang": "zh-Hans",
+      "clickTrace": [
+        "choose existing service",
+        "question/timezone/modality",
+        "processing and retention consent",
+        "submit",
+        "server request ID + REQUESTED",
+        "same-account reopen"
+      ],
+      "state": "PASS_LOCAL_REQUEST_SCOPE",
+      "firstStop": "PRODUCTION_BINDING_AND_DEPLOYMENT_NOT_AUTHORIZED",
+      "overflow": false
+    },
+    {
+      "capability": "Profile",
+      "width": 375,
+      "lang": "en",
+      "clickTrace": [
+        "QUICK_PROFILE",
+        "six self-report responses",
+        "processing consent",
+        "explicit account retention/save",
+        "native generation + encrypted save",
+        "account list",
+        "same-object reopen"
+      ],
+      "resultVisible": true,
+      "overflow": false,
+      "firstStop": "SAME_OBJECT_PAID_ENTITLEMENT_RELEASE_NOT_WIRED"
+    },
+    {
+      "capability": "Appointment",
+      "width": 375,
+      "lang": "en",
+      "clickTrace": [
+        "choose existing service",
+        "question/timezone/modality",
+        "processing and retention consent",
+        "submit",
+        "server request ID + REQUESTED",
+        "same-account reopen"
+      ],
+      "state": "PASS_LOCAL_REQUEST_SCOPE",
+      "firstStop": "PRODUCTION_BINDING_AND_DEPLOYMENT_NOT_AUTHORIZED",
+      "overflow": false
+    },
+    {
+      "capability": "Profile",
+      "width": 375,
+      "lang": "zh-Hans",
+      "clickTrace": [
+        "QUICK_PROFILE",
+        "six self-report responses",
+        "processing consent",
+        "explicit account retention/save",
+        "native generation + encrypted save",
+        "account list",
+        "same-object reopen"
+      ],
+      "resultVisible": true,
+      "overflow": false,
+      "firstStop": "SAME_OBJECT_PAID_ENTITLEMENT_RELEASE_NOT_WIRED"
+    },
+    {
+      "capability": "Appointment",
+      "width": 375,
+      "lang": "zh-Hans",
+      "clickTrace": [
+        "choose existing service",
+        "question/timezone/modality",
+        "processing and retention consent",
+        "submit",
+        "server request ID + REQUESTED",
+        "same-account reopen"
+      ],
+      "state": "PASS_LOCAL_REQUEST_SCOPE",
+      "firstStop": "PRODUCTION_BINDING_AND_DEPLOYMENT_NOT_AUTHORIZED",
+      "overflow": false
+    },
+    {
+      "capability": "Will",
+      "width": 1280,
+      "lang": "en",
+      "clickTrace": [
+        "existing estate form",
+        "explicit jurisdiction/date/currency",
+        "account save and retention consent",
+        "encrypted save",
+        "restore same version",
+        "explicit informational review consent",
+        "actual bilingual HTML download",
+        "existing native preview"
+      ],
+      "download": "content/production-closure/live-customer-commercial-convergence/w39-five-capabilities/run-2026-10-09T23-54-46-869Z/will-browser-1280-en.html",
+      "fileSha256": "d3080b690aae7e82973a80d742a3672901813131f857fcc9f14023919dbaea37",
+      "firstStop": "ACTUAL_PDF_DELIVERY_NOT_IMPLEMENTED",
+      "overflow": false
+    },
+    {
+      "capability": "Will",
+      "width": 1280,
+      "lang": "zh-Hans",
+      "clickTrace": [
+        "existing estate form",
+        "explicit jurisdiction/date/currency",
+        "account save and retention consent",
+        "encrypted save",
+        "restore same version",
+        "explicit informational review consent",
+        "actual bilingual HTML download",
+        "existing native preview"
+      ],
+      "download": "content/production-closure/live-customer-commercial-convergence/w39-five-capabilities/run-2026-10-09T23-54-46-869Z/will-browser-1280-zh-Hans.html",
+      "fileSha256": "f0eb3f215da0cbaddc8444ebd0a2503240c2f159b4eb32938595364cc6239acb",
+      "firstStop": "ACTUAL_PDF_DELIVERY_NOT_IMPLEMENTED",
+      "overflow": false
+    },
+    {
+      "capability": "Will",
+      "width": 390,
+      "lang": "en",
+      "clickTrace": [
+        "existing estate form",
+        "explicit jurisdiction/date/currency",
+        "account save and retention consent",
+        "encrypted save",
+        "restore same version",
+        "explicit informational review consent",
+        "actual bilingual HTML download",
+        "existing native preview"
+      ],
+      "download": "content/production-closure/live-customer-commercial-convergence/w39-five-capabilities/run-2026-10-09T23-54-46-869Z/will-browser-390-en.html",
+      "fileSha256": "b1a489cfa86de7f4522811fe136ba045382976d8f3d6fa863eb07a2e88f56f34",
+      "firstStop": "ACTUAL_PDF_DELIVERY_NOT_IMPLEMENTED",
+      "overflow": false
+    },
+    {
+      "capability": "Will",
+      "width": 390,
+      "lang": "zh-Hans",
+      "clickTrace": [
+        "existing estate form",
+        "explicit jurisdiction/date/currency",
+        "account save and retention consent",
+        "encrypted save",
+        "restore same version",
+        "explicit informational review consent",
+        "actual bilingual HTML download",
+        "existing native preview"
+      ],
+      "download": "content/production-closure/live-customer-commercial-convergence/w39-five-capabilities/run-2026-10-09T23-54-46-869Z/will-browser-390-zh-Hans.html",
+      "fileSha256": "8a89174423dd4c196c9908fa1b5f736b96fe127a075cbf5d42da4e4625039234",
+      "firstStop": "ACTUAL_PDF_DELIVERY_NOT_IMPLEMENTED",
+      "overflow": false
+    },
+    {
+      "capability": "Will",
+      "width": 375,
+      "lang": "en",
+      "clickTrace": [
+        "existing estate form",
+        "explicit jurisdiction/date/currency",
+        "account save and retention consent",
+        "encrypted save",
+        "restore same version",
+        "explicit informational review consent",
+        "actual bilingual HTML download",
+        "existing native preview"
+      ],
+      "download": "content/production-closure/live-customer-commercial-convergence/w39-five-capabilities/run-2026-10-09T23-54-46-869Z/will-browser-375-en.html",
+      "fileSha256": "b0794bbe2800a879617ebcc8efb628947c2f61f7ce801cfca2986f22a8c5c49e",
+      "firstStop": "ACTUAL_PDF_DELIVERY_NOT_IMPLEMENTED",
+      "overflow": false
+    },
+    {
+      "capability": "Will",
+      "width": 375,
+      "lang": "zh-Hans",
+      "clickTrace": [
+        "existing estate form",
+        "explicit jurisdiction/date/currency",
+        "account save and retention consent",
+        "encrypted save",
+        "restore same version",
+        "explicit informational review consent",
+        "actual bilingual HTML download",
+        "existing native preview"
+      ],
+      "download": "content/production-closure/live-customer-commercial-convergence/w39-five-capabilities/run-2026-10-09T23-54-46-869Z/will-browser-375-zh-Hans.html",
+      "fileSha256": "b103d2012cbc116a0e73871cb55abffee4c570d6cbd7b57b5e05f4fba99a0d60",
+      "firstStop": "ACTUAL_PDF_DELIVERY_NOT_IMPLEMENTED",
+      "overflow": false
+    },
+    {
+      "capability": "Relationship",
+      "width": 1280,
+      "lang": "en",
+      "url": "/perspectives/relationship/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "self relationship purpose",
+        "explicit use consent",
+        "original W0 intent normalization",
+        "distinct B input",
+        "source/permission declaration",
+        "unknown time preserved"
+      ],
+      "firstStop": "OWNED_ACCEPTED_PARTICIPANT_METHOD_READINGS_NOT_WIRED"
+    },
+    {
+      "capability": "BaZi",
+      "width": 1280,
+      "lang": "en",
+      "url": "/perspectives/personal/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "select BaZi without bypassing consent",
+        "birth date",
+        "time unknown",
+        "real place-search request refused in zero-provider QA"
+      ],
+      "firstStop": "LOCATION_PROVIDER_NOT_CONFIGURED_IN_ZERO_PROVIDER_QA"
+    },
+    {
+      "capability": "Tarot",
+      "width": 1280,
+      "lang": "en",
+      "url": "/perspectives/tarot/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "customer question",
+        "touch shuffle",
+        "three touch-selected ordered cards",
+        "server validates fixed draw",
+        "deterministic result"
+      ],
+      "firstStop": "PAID_SYNTHESIS_ENTITLEMENT_NOT_RUN",
+      "cardSelections": 0,
+      "resultVisible": true
+    },
+    {
+      "capability": "Academy",
+      "width": 1280,
+      "lang": "en",
+      "url": "/academy/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "existing approved learning outline"
+      ],
+      "firstStop": "VIDEO_ASSET_AND_CATALOG_FILTER_NOT_AVAILABLE",
+      "lessonRendered": true
+    },
+    {
+      "capability": "Books_Contextual_Ask",
+      "width": 1280,
+      "lang": "en",
+      "url": "/books/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry"
+      ],
+      "firstStop": "ARTICLE_SOURCE_ASK_RETURN_NOT_YET_EXERCISED"
+    },
+    {
+      "capability": "Relationship",
+      "width": 1280,
+      "lang": "zh-Hans",
+      "url": "/perspectives/relationship/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "self relationship purpose",
+        "explicit use consent",
+        "original W0 intent normalization",
+        "distinct B input",
+        "source/permission declaration",
+        "unknown time preserved"
+      ],
+      "firstStop": "OWNED_ACCEPTED_PARTICIPANT_METHOD_READINGS_NOT_WIRED"
+    },
+    {
+      "capability": "BaZi",
+      "width": 1280,
+      "lang": "zh-Hans",
+      "url": "/perspectives/personal/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "select BaZi without bypassing consent",
+        "birth date",
+        "time unknown",
+        "real place-search request refused in zero-provider QA"
+      ],
+      "firstStop": "LOCATION_PROVIDER_NOT_CONFIGURED_IN_ZERO_PROVIDER_QA"
+    },
+    {
+      "capability": "Tarot",
+      "width": 1280,
+      "lang": "zh-Hans",
+      "url": "/perspectives/tarot/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "customer question",
+        "touch shuffle",
+        "three touch-selected ordered cards",
+        "server validates fixed draw",
+        "deterministic result"
+      ],
+      "firstStop": "PAID_SYNTHESIS_ENTITLEMENT_NOT_RUN",
+      "cardSelections": 0,
+      "resultVisible": true
+    },
+    {
+      "capability": "Academy",
+      "width": 1280,
+      "lang": "zh-Hans",
+      "url": "/academy/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "existing approved learning outline"
+      ],
+      "firstStop": "VIDEO_ASSET_AND_CATALOG_FILTER_NOT_AVAILABLE",
+      "lessonRendered": true
+    },
+    {
+      "capability": "Books_Contextual_Ask",
+      "width": 1280,
+      "lang": "zh-Hans",
+      "url": "/books/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry"
+      ],
+      "firstStop": "ARTICLE_SOURCE_ASK_RETURN_NOT_YET_EXERCISED"
+    },
+    {
+      "capability": "Relationship",
+      "width": 390,
+      "lang": "en",
+      "url": "/perspectives/relationship/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "self relationship purpose",
+        "explicit use consent",
+        "original W0 intent normalization",
+        "distinct B input",
+        "source/permission declaration",
+        "unknown time preserved"
+      ],
+      "firstStop": "OWNED_ACCEPTED_PARTICIPANT_METHOD_READINGS_NOT_WIRED"
+    },
+    {
+      "capability": "BaZi",
+      "width": 390,
+      "lang": "en",
+      "url": "/perspectives/personal/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "select BaZi without bypassing consent",
+        "birth date",
+        "time unknown",
+        "real place-search request refused in zero-provider QA"
+      ],
+      "firstStop": "LOCATION_PROVIDER_NOT_CONFIGURED_IN_ZERO_PROVIDER_QA"
+    },
+    {
+      "capability": "Tarot",
+      "width": 390,
+      "lang": "en",
+      "url": "/perspectives/tarot/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "customer question",
+        "touch shuffle",
+        "three touch-selected ordered cards",
+        "server validates fixed draw",
+        "deterministic result"
+      ],
+      "firstStop": "PAID_SYNTHESIS_ENTITLEMENT_NOT_RUN",
+      "cardSelections": 0,
+      "resultVisible": true
+    },
+    {
+      "capability": "Academy",
+      "width": 390,
+      "lang": "en",
+      "url": "/academy/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "existing approved learning outline"
+      ],
+      "firstStop": "VIDEO_ASSET_AND_CATALOG_FILTER_NOT_AVAILABLE",
+      "lessonRendered": true
+    },
+    {
+      "capability": "Books_Contextual_Ask",
+      "width": 390,
+      "lang": "en",
+      "url": "/books/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry"
+      ],
+      "firstStop": "ARTICLE_SOURCE_ASK_RETURN_NOT_YET_EXERCISED"
+    },
+    {
+      "capability": "Relationship",
+      "width": 390,
+      "lang": "zh-Hans",
+      "url": "/perspectives/relationship/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "self relationship purpose",
+        "explicit use consent",
+        "original W0 intent normalization",
+        "distinct B input",
+        "source/permission declaration",
+        "unknown time preserved"
+      ],
+      "firstStop": "OWNED_ACCEPTED_PARTICIPANT_METHOD_READINGS_NOT_WIRED"
+    },
+    {
+      "capability": "BaZi",
+      "width": 390,
+      "lang": "zh-Hans",
+      "url": "/perspectives/personal/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "select BaZi without bypassing consent",
+        "birth date",
+        "time unknown",
+        "real place-search request refused in zero-provider QA"
+      ],
+      "firstStop": "LOCATION_PROVIDER_NOT_CONFIGURED_IN_ZERO_PROVIDER_QA"
+    },
+    {
+      "capability": "Tarot",
+      "width": 390,
+      "lang": "zh-Hans",
+      "url": "/perspectives/tarot/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "customer question",
+        "touch shuffle",
+        "three touch-selected ordered cards",
+        "server validates fixed draw",
+        "deterministic result"
+      ],
+      "firstStop": "PAID_SYNTHESIS_ENTITLEMENT_NOT_RUN",
+      "cardSelections": 0,
+      "resultVisible": true
+    },
+    {
+      "capability": "Academy",
+      "width": 390,
+      "lang": "zh-Hans",
+      "url": "/academy/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "existing approved learning outline"
+      ],
+      "firstStop": "VIDEO_ASSET_AND_CATALOG_FILTER_NOT_AVAILABLE",
+      "lessonRendered": true
+    },
+    {
+      "capability": "Books_Contextual_Ask",
+      "width": 390,
+      "lang": "zh-Hans",
+      "url": "/books/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry"
+      ],
+      "firstStop": "ARTICLE_SOURCE_ASK_RETURN_NOT_YET_EXERCISED"
+    },
+    {
+      "capability": "Relationship",
+      "width": 375,
+      "lang": "en",
+      "url": "/perspectives/relationship/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "self relationship purpose",
+        "explicit use consent",
+        "original W0 intent normalization",
+        "distinct B input",
+        "source/permission declaration",
+        "unknown time preserved"
+      ],
+      "firstStop": "OWNED_ACCEPTED_PARTICIPANT_METHOD_READINGS_NOT_WIRED"
+    },
+    {
+      "capability": "BaZi",
+      "width": 375,
+      "lang": "en",
+      "url": "/perspectives/personal/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "select BaZi without bypassing consent",
+        "birth date",
+        "time unknown",
+        "real place-search request refused in zero-provider QA"
+      ],
+      "firstStop": "LOCATION_PROVIDER_NOT_CONFIGURED_IN_ZERO_PROVIDER_QA"
+    },
+    {
+      "capability": "Tarot",
+      "width": 375,
+      "lang": "en",
+      "url": "/perspectives/tarot/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "customer question",
+        "touch shuffle",
+        "three touch-selected ordered cards",
+        "server validates fixed draw",
+        "deterministic result"
+      ],
+      "firstStop": "PAID_SYNTHESIS_ENTITLEMENT_NOT_RUN",
+      "cardSelections": 0,
+      "resultVisible": true
+    },
+    {
+      "capability": "Academy",
+      "width": 375,
+      "lang": "en",
+      "url": "/academy/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "existing approved learning outline"
+      ],
+      "firstStop": "VIDEO_ASSET_AND_CATALOG_FILTER_NOT_AVAILABLE",
+      "lessonRendered": true
+    },
+    {
+      "capability": "Books_Contextual_Ask",
+      "width": 375,
+      "lang": "en",
+      "url": "/books/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry"
+      ],
+      "firstStop": "ARTICLE_SOURCE_ASK_RETURN_NOT_YET_EXERCISED"
+    },
+    {
+      "capability": "Relationship",
+      "width": 375,
+      "lang": "zh-Hans",
+      "url": "/perspectives/relationship/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "self relationship purpose",
+        "explicit use consent",
+        "original W0 intent normalization",
+        "distinct B input",
+        "source/permission declaration",
+        "unknown time preserved"
+      ],
+      "firstStop": "OWNED_ACCEPTED_PARTICIPANT_METHOD_READINGS_NOT_WIRED"
+    },
+    {
+      "capability": "BaZi",
+      "width": 375,
+      "lang": "zh-Hans",
+      "url": "/perspectives/personal/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "select BaZi without bypassing consent",
+        "birth date",
+        "time unknown",
+        "real place-search request refused in zero-provider QA"
+      ],
+      "firstStop": "LOCATION_PROVIDER_NOT_CONFIGURED_IN_ZERO_PROVIDER_QA"
+    },
+    {
+      "capability": "Tarot",
+      "width": 375,
+      "lang": "zh-Hans",
+      "url": "/perspectives/tarot/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "customer question",
+        "touch shuffle",
+        "three touch-selected ordered cards",
+        "server validates fixed draw",
+        "deterministic result"
+      ],
+      "firstStop": "PAID_SYNTHESIS_ENTITLEMENT_NOT_RUN",
+      "cardSelections": 0,
+      "resultVisible": true
+    },
+    {
+      "capability": "Academy",
+      "width": 375,
+      "lang": "zh-Hans",
+      "url": "/academy/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry",
+        "existing approved learning outline"
+      ],
+      "firstStop": "VIDEO_ASSET_AND_CATALOG_FILTER_NOT_AVAILABLE",
+      "lessonRendered": true
+    },
+    {
+      "capability": "Books_Contextual_Ask",
+      "width": 375,
+      "lang": "zh-Hans",
+      "url": "/books/",
+      "entryRendered": true,
+      "overflow": false,
+      "clickTrace": [
+        "real canonical page entry"
+      ],
+      "firstStop": "ARTICLE_SOURCE_ASK_RETURN_NOT_YET_EXERCISED"
+    }
+  ],
+  "requests": [
+    {
+      "path": "/api/profile-progressive",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:54:53.988Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "POST",
+      "status": 201,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:54:55.471Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:54:56.241Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:54:56.372Z"
+    },
+    {
+      "path": "/api/account-appointment-requests",
+      "method": "POST",
+      "status": 201,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:54:59.917Z"
+    },
+    {
+      "path": "/api/account-appointment-requests",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:00.000Z"
+    },
+    {
+      "path": "/api/profile-progressive",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:03.059Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "POST",
+      "status": 201,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:04.710Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:05.822Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:05.939Z"
+    },
+    {
+      "path": "/api/account-appointment-requests",
+      "method": "POST",
+      "status": 201,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:09.625Z"
+    },
+    {
+      "path": "/api/account-appointment-requests",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:09.705Z"
+    },
+    {
+      "path": "/api/profile-progressive",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:11.953Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "POST",
+      "status": 201,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:13.425Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:14.523Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:14.688Z"
+    },
+    {
+      "path": "/api/account-appointment-requests",
+      "method": "POST",
+      "status": 201,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:17.147Z"
+    },
+    {
+      "path": "/api/account-appointment-requests",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:17.230Z"
+    },
+    {
+      "path": "/api/profile-progressive",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:19.004Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "POST",
+      "status": 201,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:20.489Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:21.610Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:21.735Z"
+    },
+    {
+      "path": "/api/account-appointment-requests",
+      "method": "POST",
+      "status": 201,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:24.013Z"
+    },
+    {
+      "path": "/api/account-appointment-requests",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:24.100Z"
+    },
+    {
+      "path": "/api/profile-progressive",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:25.916Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "POST",
+      "status": 201,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:27.346Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:28.518Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:28.595Z"
+    },
+    {
+      "path": "/api/account-appointment-requests",
+      "method": "POST",
+      "status": 201,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:30.646Z"
+    },
+    {
+      "path": "/api/account-appointment-requests",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:30.744Z"
+    },
+    {
+      "path": "/api/profile-progressive",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:32.732Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "POST",
+      "status": 201,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:34.114Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:35.351Z"
+    },
+    {
+      "path": "/api/account-profile-evidence",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:35.409Z"
+    },
+    {
+      "path": "/api/account-appointment-requests",
+      "method": "POST",
+      "status": 201,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:37.604Z"
+    },
+    {
+      "path": "/api/account-appointment-requests",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:37.740Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:38.444Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:38.447Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:40.248Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:40.518Z"
+    },
+    {
+      "path": "/api/account-will-information-report",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:40.656Z"
+    },
+    {
+      "path": "/api/customer-estate-planning",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:42.118Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:42.966Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:42.968Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:44.586Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:44.762Z"
+    },
+    {
+      "path": "/api/account-will-information-report",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:45.001Z"
+    },
+    {
+      "path": "/api/customer-estate-planning",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:45.364Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:46.708Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:46.716Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:48.350Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:48.513Z"
+    },
+    {
+      "path": "/api/account-will-information-report",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:48.682Z"
+    },
+    {
+      "path": "/api/customer-estate-planning",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:48.980Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:49.651Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:49.655Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:51.046Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:51.196Z"
+    },
+    {
+      "path": "/api/account-will-information-report",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:51.386Z"
+    },
+    {
+      "path": "/api/customer-estate-planning",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:51.717Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:52.383Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:52.387Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:54.031Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:54.164Z"
+    },
+    {
+      "path": "/api/account-will-information-report",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:54.305Z"
+    },
+    {
+      "path": "/api/customer-estate-planning",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:54.646Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:55.311Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:55.312Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:56.896Z"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:57.026Z"
+    },
+    {
+      "path": "/api/account-will-information-report",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:57.164Z"
+    },
+    {
+      "path": "/api/customer-estate-planning",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:57.615Z"
+    },
+    {
+      "path": "/api/customer-relationship-intake",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:59.614Z"
+    },
+    {
+      "path": "/api/customer-relationship-intake",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:55:59.879Z"
+    },
+    {
+      "path": "/api/symbolic-method-context",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:05.191Z"
+    },
+    {
+      "path": "/api/tarot-production-status",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:05.192Z"
+    },
+    {
+      "path": "/api/symbolic-method-execute",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:09.251Z"
+    },
+    {
+      "path": "/api/customer-relationship-intake",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:17.442Z"
+    },
+    {
+      "path": "/api/customer-relationship-intake",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:17.629Z"
+    },
+    {
+      "path": "/api/symbolic-method-context",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:23.884Z"
+    },
+    {
+      "path": "/api/tarot-production-status",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:23.887Z"
+    },
+    {
+      "path": "/api/symbolic-method-execute",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:27.414Z"
+    },
+    {
+      "path": "/api/customer-relationship-intake",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:35.167Z"
+    },
+    {
+      "path": "/api/customer-relationship-intake",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:35.477Z"
+    },
+    {
+      "path": "/api/symbolic-method-context",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:40.084Z"
+    },
+    {
+      "path": "/api/tarot-production-status",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:40.086Z"
+    },
+    {
+      "path": "/api/symbolic-method-execute",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:43.678Z"
+    },
+    {
+      "path": "/api/customer-relationship-intake",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:50.902Z"
+    },
+    {
+      "path": "/api/customer-relationship-intake",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:51.147Z"
+    },
+    {
+      "path": "/api/symbolic-method-context",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:56.754Z"
+    },
+    {
+      "path": "/api/tarot-production-status",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:56:56.756Z"
+    },
+    {
+      "path": "/api/symbolic-method-execute",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:57:00.993Z"
+    },
+    {
+      "path": "/api/customer-relationship-intake",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:57:09.978Z"
+    },
+    {
+      "path": "/api/customer-relationship-intake",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:57:10.264Z"
+    },
+    {
+      "path": "/api/symbolic-method-context",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:57:15.662Z"
+    },
+    {
+      "path": "/api/tarot-production-status",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:57:15.663Z"
+    },
+    {
+      "path": "/api/symbolic-method-execute",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:57:19.409Z"
+    },
+    {
+      "path": "/api/customer-relationship-intake",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:57:25.892Z"
+    },
+    {
+      "path": "/api/customer-relationship-intake",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:57:26.107Z"
+    },
+    {
+      "path": "/api/symbolic-method-context",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:57:30.891Z"
+    },
+    {
+      "path": "/api/tarot-production-status",
+      "method": "GET",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:57:30.892Z"
+    },
+    {
+      "path": "/api/symbolic-method-execute",
+      "method": "POST",
+      "status": 200,
+      "account": "W39-QA-A",
+      "at": "2026-10-09T23:57:34.628Z"
+    }
+  ],
+  "apiAssertions": [
+    {
+      "name": "browser bilingual download 1280 en",
+      "actual": true,
+      "expected": true,
+      "state": "PASS"
+    },
+    {
+      "name": "browser bilingual download 1280 zh-Hans",
+      "actual": true,
+      "expected": true,
+      "state": "PASS"
+    },
+    {
+      "name": "browser bilingual download 390 en",
+      "actual": true,
+      "expected": true,
+      "state": "PASS"
+    },
+    {
+      "name": "browser bilingual download 390 zh-Hans",
+      "actual": true,
+      "expected": true,
+      "state": "PASS"
+    },
+    {
+      "name": "browser bilingual download 375 en",
+      "actual": true,
+      "expected": true,
+      "state": "PASS"
+    },
+    {
+      "name": "browser bilingual download 375 zh-Hans",
+      "actual": true,
+      "expected": true,
+      "state": "PASS"
+    },
+    {
+      "name": "appointment cross-account denial",
+      "actual": 404,
+      "expected": 404,
+      "state": "PASS"
+    },
+    {
+      "name": "appointment anonymous denial",
+      "actual": 401,
+      "expected": 401,
+      "state": "PASS"
+    },
+    {
+      "name": "appointment payload encrypted",
+      "actual": false,
+      "expected": false,
+      "state": "PASS"
+    },
+    {
+      "name": "profile cross-account denial",
+      "actual": 404,
+      "expected": 404,
+      "state": "PASS"
+    },
+    {
+      "name": "profile payload encrypted",
+      "actual": false,
+      "expected": false,
+      "state": "PASS"
+    },
+    {
+      "name": "profile save does not release report",
+      "actual": "APPROVED_UNRELEASED",
+      "expected": "APPROVED_UNRELEASED",
+      "state": "PASS"
+    },
+    {
+      "name": "will encrypted save",
+      "actual": 200,
+      "expected": 200,
+      "state": "PASS"
+    },
+    {
+      "name": "will same-account reopen",
+      "actual": 200,
+      "expected": 200,
+      "state": "PASS"
+    },
+    {
+      "name": "will cross-account denial",
+      "actual": 404,
+      "expected": 404,
+      "state": "PASS"
+    },
+    {
+      "name": "will bilingual HTML delivery",
+      "actual": 200,
+      "expected": 200,
+      "state": "PASS"
+    },
+    {
+      "name": "will Chinese body",
+      "actual": true,
+      "expected": true,
+      "state": "PASS"
+    },
+    {
+      "name": "will English body",
+      "actual": true,
+      "expected": true,
+      "state": "PASS"
+    },
+    {
+      "name": "will cross-account download denial",
+      "actual": 404,
+      "expected": 404,
+      "state": "PASS"
+    },
+    {
+      "name": "will stale-version download denial",
+      "actual": 409,
+      "expected": 409,
+      "state": "PASS"
+    },
+    {
+      "name": "will withdrawal",
+      "actual": 200,
+      "expected": 200,
+      "state": "PASS"
+    },
+    {
+      "name": "withdrawn will cannot reopen",
+      "actual": 404,
+      "expected": 404,
+      "state": "PASS"
+    },
+    {
+      "name": "withdrawn will cannot download",
+      "actual": 404,
+      "expected": 404,
+      "state": "PASS"
+    }
+  ],
+  "errors": [],
+  "blockedNetwork": [],
+  "profileOutput": {
+    "objectId": "PRF-0cfccd99085db843212b03c960821c9f6634e6b33e10b71e50665f970705618e",
+    "profileViewId": "PRF-VIEW-6F89A3E0154C58EA092A127E",
+    "reportReference": "PERSONAL_EVIDENCE_DOSSIER-PRF-VIEW-6F89A3E0154C58EA092A127E@1.0.0",
+    "reportVersion": "1.0.0",
+    "canonicalState": "APPROVED_UNRELEASED",
+    "publicationLocaleMode": "BILINGUAL",
+    "dossierReleased": false,
+    "automaticPersistence": false
+  },
+  "willOutput": {
+    "draftId": "ecab9ed5-e105-4b8c-896c-8e97b94c0f69",
+    "version": 1,
+    "digest": "2042b55ee9d06ea12da523b9e36320742f62de2d9970a5610e616f7ae120517c",
+    "deliveredFile": "content/production-closure/live-customer-commercial-convergence/w39-five-capabilities/run-2026-10-09T23-54-46-869Z/will-information-v1.html",
+    "fileSha256": "3cd5b9d084b502fd09df9ad40aa77ed435ddb3e07e8f26704d2aa4b92f2326f9",
+    "format": "ACTUAL_HTML_FILE",
+    "pdfFile": "NOT_IMPLEMENTED",
+    "executedWill": false
+  },
+  "status": "PARTIAL_CURRENT_CUSTOMER_EVIDENCE",
+  "layoutPassed": true,
+  "finishedAt": "2026-10-09T23:57:40.135Z",
+  "sourceUnchanged": true,
+  "finalHead": "6e28839a7b93a2b62f0c2f7057705fc7a826f97f"
+}

@@ -1,0 +1,29 @@
+{
+  "contractCode": "PHI-OS-RELEASED-CUSTOMER-REPORT-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "phase": "CPR-CUST",
+  "work": "CPR-CUST-W2",
+  "status": "CURRENT_DOWNSTREAM_ELIGIBILITY_PROJECTION",
+  "accepts": [
+    "CANONICAL_FINAL_REPORT",
+    "VALID_ACTIVE_RELEASE_ASSERTION"
+  ],
+  "blocks": [
+    "DRAFT",
+    "PROFESSIONAL_REVIEW",
+    "UNSIGNED_FINAL",
+    "FINAL_BUT_UNRELEASED",
+    "REVOKED_RELEASE",
+    "WRONG_CUSTOMER",
+    "WRONG_REPORT_VERSION",
+    "SUPERSEDED_VERSION",
+    "EXPIRED_RELEASE_OR_CONSENT"
+  ],
+  "output": "ReleasedCustomerReportProjection",
+  "rules": {
+    "mutatesReport": false,
+    "clonesReportAuthority": false,
+    "changesInterpretation": false,
+    "downstreamEligibilityOnly": true
+  }
+}

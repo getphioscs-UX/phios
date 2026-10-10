@@ -1,0 +1,121 @@
+{
+  "auditCode": "PHI-OS-RMO-W8-W9-EVIDENCE-REASONING-AUTHORITY-RECONCILIATION-v1",
+  "auditVersion": "1.0.0",
+  "scope": "RMO-W8 Evidence Binding and RMO-W9 Interpretation / Inference Boundary",
+  "status": "reconciled",
+  "baselineCommit": "6920c9efb164a6e29f7dcbd8575f7a54e9d28c2f",
+  "digestMode": "UTF8_NO_BOM_LF",
+  "inspectedAuthorities": [
+    {
+      "reference": "content/runtime/reality-model-runtime/freeze/rmo-w5-w7-reality-structure-freeze-v1.json",
+      "sha256": "27cc49b4160748a64b7242e1a33c6ef09a6b308c08e330d3670b602fec9326bf",
+      "classification": "FROZEN_RMO_STRUCTURE",
+      "finding": "Reality, Entity, Event, Signal, Relationship, Constraint and OBSERVED / DERIVED / PROJECTED State remain preserved inputs to W8-W9."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/evidence-eligibility-contract-v1.json",
+      "sha256": "c61bef5b68141f7135b7d44c232b7260dc438c5f35f9d028673dbfcaeba920da",
+      "classification": "RDG_EVIDENCE_ELIGIBILITY_AUTHORITY",
+      "finding": "RMO consumes an eligibility decision and may not redefine eligibility or treat it as truth."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/evidence-promotion-runtime-v1.json",
+      "sha256": "b24ca97d7bad28731c1f02a856154672d02d2a54c952f4e507686ae12436b9c4",
+      "classification": "RDG_EVIDENCE_PROMOTION_AUTHORITY",
+      "finding": "Evidence Binding requires an already accepted RRE record; RMO does not perform promotion."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/inference-boundary-registry-v1.json",
+      "sha256": "560cf745c8e088e9b62a4487377d89fc2755a11c32b919f763a4cf02a829ee5e",
+      "classification": "RDG_INFERENCE_BOUNDARY",
+      "finding": "Inference requires method, supporting Evidence and uncertainty; Interpretation requires authority, supporting Evidence and a boundary statement."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/sensitive-inference-firewall-v1.json",
+      "sha256": "2faf5f39063b6728c4892c47fd57d35f470943916d44f6852a5bd7e29add8de8",
+      "classification": "RDG_SENSITIVE_INFERENCE_FIREWALL",
+      "finding": "Purpose, explicit consent and professional authority decisions remain RDG-governed and fail closed."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/unknown-disputed-runtime-v1.json",
+      "sha256": "db9beae9d75bca39310c8ff7944cbe79100ec63f20890295c3e6c5a10c4900a2",
+      "classification": "RDG_UNKNOWN_DISPUTED_AUTHORITY",
+      "finding": "W9 preserves UNKNOWN, UNRESOLVED and DISPUTED; RMO-W10 remains the future Unknown Runtime."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-nature-registry-v1.json",
+      "sha256": "4251781634baafbb4963f4901def5adca0110ca72b63649a74d468cf60a18490",
+      "classification": "RDG_DATA_NATURE_AUTHORITY",
+      "finding": "INFERRED, INTERPRETED and PROFESSIONAL_JUDGMENT remain RDG data natures; RMO evaluates only the W9 permission boundary."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-certainty-registry-v1.json",
+      "sha256": "0854cd9860e58eec2b98c7c9c64c4a70d7e8558c7020cb807176f43a0711f07c",
+      "classification": "RDG_DATA_CERTAINTY_AUTHORITY",
+      "finding": "Certainty remains independent from data nature and UNKNOWN, DISPUTED and UNRESOLVED remain valid."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-sensitivity-registry-v1.json",
+      "sha256": "2aa371969cdf9b025c60cc30538567d158783273cc4c1a5f70ce0902a85e09c7",
+      "classification": "RDG_DATA_SENSITIVITY_AUTHORITY",
+      "finding": "W8-W9 consume canonical sensitivity classes and categories without redefining them."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-purpose-registry-v1.json",
+      "sha256": "eeb229019f1066c11f5af21e9ab57a144c0e98c996c6e21dc668cf956434130c",
+      "classification": "RDG_DATA_PURPOSE_AUTHORITY",
+      "finding": "Evidence Binding and reasoning decisions remain purpose-bound to canonical RDG purpose codes."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+      "sha256": "04d307980a6e0f232b2c068f8ba6015027c4b13cc88951121f79850b8f8db996",
+      "classification": "RDG_CROSS_RUNTIME_DATA_CONTRACT",
+      "finding": "RRE alone produces REALITY_EVIDENCE_RECORD; RMO may read it and write only RUNTIME_STATE_RECORD with Evidence promotion denied."
+    },
+    {
+      "reference": "content/governance/operational-architecture/runtime-authority-map-v1.json",
+      "sha256": "fb57cec8df6cbe3b47f7f0d842a2fcbc32ce62e00ea16a11057299977737c82e",
+      "classification": "PROFESSIONAL_JUDGMENT_AUTHORITY",
+      "finding": "PR remains the sole Professional Judgment source of truth."
+    },
+    {
+      "reference": "scripts/lib/reality-data-governance/rdg-evidence-inference-v1.mjs",
+      "sha256": "5b10da6237c4dbd7e6aa8a899c6c0a173255eaba33580e9e0984b30daf4b761b",
+      "classification": "RDG_EVIDENCE_INFERENCE_VALIDATOR",
+      "finding": "W8-W9 reuse the current RDG eligibility and sensitive-inference decisions without mutating the implementation."
+    },
+    {
+      "reference": "functions/runtime/reading/reading-evidence-contract.js",
+      "sha256": "eb52b681592dc9eb3f2cecb082c3385b38db05188b81ba2d2e69e6ea73a488d9",
+      "classification": "EXISTING_READING_EVIDENCE_BOUNDARY",
+      "finding": "Operational Reading classifications remain distinct from canonical RMO Evidence Binding and are not replaced."
+    },
+    {
+      "reference": "functions/runtime/reading/provider-contract.js",
+      "sha256": "38ad8a65431684420e241e8f4da61292f6aad29204713188fa751805f0150d3f",
+      "classification": "EXISTING_PROVIDER_INTERPRETATION_BOUNDARY",
+      "finding": "Provider enrichment remains a bounded operational interpretation and cannot grant RMO authority."
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/contracts/assessment-evidence-rdg-handoff-contract-v1.json",
+      "sha256": "6d2d254959740c0e1c4ea29fab2e300dab1c9ef63c34b0001b96b6d6d5443552",
+      "classification": "ALR_UNMATERIALIZED_EVIDENCE_CANDIDATE",
+      "finding": "An ALR assessment Evidence candidate is not REALITY_EVIDENCE_RECORD and is ineligible for direct W8 binding."
+    }
+  ],
+  "authorityDecision": {
+    "realityEvidenceRecordOwner": "RRE",
+    "evidenceEligibilityPromotionAndInferenceGovernanceOwner": "RDG",
+    "realityEvidenceBindingOwner": "RMO",
+    "reasoningBoundaryOwner": "RMO",
+    "professionalJudgmentOwner": "PR",
+    "operationalReadingOwner": "EXISTING_RUNTIME",
+    "evidenceBindingIsEvidence": false,
+    "evidenceBindingPerformsPromotion": false,
+    "boundedDecisionCreatesInterpretationOrInference": false,
+    "providerOrAiMayGrantReasoningAuthority": false,
+    "unknownMayBeFilledByInference": false,
+    "sharedAuthorityOrOperationalRuntimeMutated": false
+  },
+  "existingRuntimeOrUserDataMutated": false
+}

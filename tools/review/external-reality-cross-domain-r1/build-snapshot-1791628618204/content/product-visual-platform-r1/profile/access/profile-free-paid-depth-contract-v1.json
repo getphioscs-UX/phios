@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W9-PROFILE-FREE-PAID-DEPTH-v1.0.0",
+  "work": "PVP-R1-VIS-W9",
+  "baselineCommit": "02d6313ddc365c1eb2ad7ce33d920ddcbf8028c3",
+  "status": "PROFILE_DEPTH_STATES_DEFINED_COMMERCE_FAIL_CLOSED",
+  "truthOwner": "PROFILE_PPR",
+  "projectionOwner": "PVP_R1",
+  "states": {
+    "FREE_SNAPSHOT": {
+      "customerLabel": {"en":"Free Snapshot","zh-Hans":"免费概览"},
+      "accessClass": "FREE_CURRENT_PROFILE_PRODUCTION",
+      "alwaysAvailableWhenProfileResultAvailable": true,
+      "visualPolicy": {
+        "PFIG-001": "SUMMARY_SOURCE_LANES",
+        "PFIG-003": "COUNTS_AND_AT_MOST_ONE_ITEM_PER_SIDE",
+        "PFIG-005": "STATE_COUNTS_ONLY",
+        "PFIG-009": "BRIDGE_STATUS_AND_AT_MOST_ONE_EXISTING_QUESTION"
+      },
+      "mayExposePaidOnlyData": false
+    },
+    "DEEP_PROFILE": {
+      "customerLabel": {"en":"Deep Profile","zh-Hans":"深度 Profile"},
+      "accessClass": "PAID_ENTITLEMENT_REQUIRED",
+      "visualPolicy": {
+        "PFIG-001":"FULL_AUTHORITY_VALID_IR",
+        "PFIG-002":"FULL_AUTHORITY_VALID_IR_WHEN_RENDERER_EXISTS",
+        "PFIG-003":"FULL_AUTHORITY_VALID_IR",
+        "PFIG-004":"FULL_AUTHORITY_VALID_IR_WHEN_RENDERER_EXISTS",
+        "PFIG-005":"FULL_AUTHORITY_VALID_IR",
+        "PFIG-006":"FULL_AUTHORITY_VALID_IR_WHEN_RENDERER_EXISTS",
+        "PFIG-007":"FULL_AUTHORITY_VALID_IR_WHEN_RENDERER_EXISTS",
+        "PFIG-008":"FULL_AUTHORITY_VALID_IR_WHEN_RENDERER_EXISTS",
+        "PFIG-009":"FULL_AUTHORITY_VALID_IR"
+      },
+      "commerceOfferDefinedByThisWork": false,
+      "customerPurchasableNow": false
+    },
+    "REALITY_PROFILE": {
+      "customerLabel": {"en":"Reality Profile","zh-Hans":"现实 Profile"},
+      "accessClass": "PAID_ENTITLEMENT_AND_CURRENT_REALITY_REQUIRED",
+      "requiresExplicitCurrentRealityEvidence": true,
+      "visualPolicy": {
+        "focus":"PROFILE_X_CURRENT_REALITY",
+        "priorityPfig":["PFIG-004","PFIG-005","PFIG-008","PFIG-009"],
+        "allAuthorityValidPfigMayRemainVisible": true
+      },
+      "commerceOfferDefinedByThisWork": false,
+      "customerPurchasableNow": false
+    }
+  },
+  "rendererAvailabilityAtW9": {
+    "implemented": ["PFIG-001","PFIG-003","PFIG-005","PFIG-009"],
+    "irReadyButRendererDeferred": ["PFIG-002","PFIG-004","PFIG-006","PFIG-007","PFIG-008"]
+  },
+  "entitlementBoundary": {
+    "clientRequestMaySelfUpgrade": false,
+    "queryParameterMayUnlockPaid": false,
+    "requestBodyMayUnlockPaid": false,
+    "onlyTrustedServerEntitlementMayUnlockPaid": true,
+    "currentProfileApiTrustedEntitlementIntegrated": false,
+    "thereforeCurrentCustomerRuntimeState": "FREE_SNAPSHOT"
+  },
+  "commerceBoundary": {
+    "priceCreated": false,
+    "offerIdCreated": false,
+    "checkoutRouteCreated": false,
+    "membershipEntitlementCreated": false,
+    "paidCommerceAuthorityDeferredTo": "PAI_R1_OR_EXISTING_COMMERCE_OWNER"
+  }
+}

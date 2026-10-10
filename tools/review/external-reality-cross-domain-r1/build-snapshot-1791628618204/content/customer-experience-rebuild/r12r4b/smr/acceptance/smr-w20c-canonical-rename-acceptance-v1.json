@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-SMR-W20C-CANONICAL-RENAME-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
+  "workCode": "W20C",
+  "status": "CANONICAL_RENAME_ACCEPTED",
+  "canonical": {
+    "runtimeDirectory": "functions/single-method-reading",
+    "contentDirectory": "content/customer-experience-rebuild/r12r4b/smr",
+    "productionBuilder": "functions/single-method-reading/single-method-reading-production.js",
+    "customerApi": "functions/api/customer-personal-reality.js",
+    "renderer": "assets/customer-ui/js/surfaces/single-method-reading.js"
+  },
+  "retiredConstructionNamespaces": [
+    "functions/single-method-reading-r2",
+    "content/customer-experience-rebuild/r12r4b/smr-r2"
+  ],
+  "rules": {
+    "secondSmrRuntimeAllowed": false,
+    "constructionSuffixDirectoryAllowed": false,
+    "legacyImplementationFallbackAllowed": false,
+    "historicalR2VersionIdentifiersMayRemainInImmutableEvidence": true
+  }
+}

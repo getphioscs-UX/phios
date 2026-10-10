@@ -1,0 +1,20 @@
+{
+  "baseFixture": "invalid-published-with-open-critical-finding.json",
+  "operations": [
+    {
+      "op": "remove",
+      "path": "/review/reviews/factualReview/findings/0"
+    },
+    {
+      "op": "replace",
+      "path": "/claims/0/status/claimStatus",
+      "value": "ready_for_review"
+    },
+    {
+      "op": "replace",
+      "path": "/claims/0/status/reviewStatus",
+      "value": "in_review"
+    }
+  ],
+  "expectedFailure": "unapproved_high_claim"
+}

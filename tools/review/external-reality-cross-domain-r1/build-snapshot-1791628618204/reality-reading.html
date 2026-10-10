@@ -1,0 +1,1311 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta
+    name="description"
+    content="See what PHI OS currently understands about your situation, what supports it, what remains unknown, and what to notice next."
+  >
+  <title data-i18n="reading.metaTitle">
+    Reality Reading Workspace — PHI OS
+  </title>
+
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/design/foundation.css">
+  <link rel="stylesheet" href="/assets/css/design/typography.css">
+  <link rel="stylesheet" href="/assets/css/design/layout.css">
+  <link rel="stylesheet" href="/assets/css/design/components.css">
+  <link rel="stylesheet" href="/assets/css/design/motion.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/reading-workspace.css">
+  <link rel="stylesheet" href="/assets/css/i18n.css">
+  <link rel="stylesheet" href="/assets/css/runtime-workspace.css">
+  <link rel="stylesheet" href="/assets/css/design/visual-acceptance.css">
+  <link rel="stylesheet" href="/assets/css/reading-visual-alignment.css">
+  <link rel="stylesheet" href="/assets/css/reading-pds-w7.css">
+  <link rel="stylesheet" href="/assets/css/design/journey-shell.css">
+</head>
+
+<body class="reading-page runtime-workspace-page">
+  <a
+    class="skip-link"
+    href="#readingWorkspace"
+    data-i18n="reading.skipLink"
+  >
+    Skip to Reality Reading
+  </a>
+
+  <header class="site-header reading-header">
+    <div class="shell nav">
+      <a
+        class="brand"
+        href="/"
+        aria-label="PHI OS Home"
+        data-i18n-aria-label="accessibility.phiOSHome"
+      >
+        <span class="phi" aria-hidden="true">Φ</span>
+        <span>PHI OS</span>
+      </a>
+
+      <div
+        class="reading-progress"
+        aria-label="Runtime Journey progress"
+        data-i18n-aria-label="accessibility.journeyProgress"
+      >
+        <span data-i18n="journey.label">
+          Runtime Journey
+        </span>
+
+        <ol data-current-stage="reading">
+          <li class="complete">
+            <b>01</b>
+            <data value="entry" data-i18n="journey.entry">
+              Reality Entry
+            </data>
+          </li>
+
+          <li class="complete">
+            <b>02</b>
+            <data value="reconstruction" data-i18n="journey.reconstruction">
+              Reality Reconstruction
+            </data>
+          </li>
+
+          <li class="active" aria-current="step">
+            <b>03</b>
+            <data value="reading" data-i18n="journey.reading">
+              Reality Reading
+            </data>
+          </li>
+
+          <li>
+            <b>04</b>
+            <data value="navigation" data-i18n="journey.navigation">
+              Reality Navigation
+            </data>
+          </li>
+
+          <li>
+            <b>05</b>
+            <data value="review" data-i18n="journey.review">
+              Review
+            </data>
+          </li>
+
+          <li>
+            <b>06</b>
+            <data value="memory" data-i18n="entry.progressMemory">
+              Memory
+            </data>
+          </li>
+
+          <li>
+            <b>07</b>
+            <data value="continuity" data-i18n="entry.progressContinuity">
+              Continuity
+            </data>
+          </li>
+        </ol>
+      </div>
+
+      <div class="reading-header-actions platform-header-actions">
+        <span
+          class="language-switcher"
+          role="group"
+          aria-label="Select interface language"
+          data-i18n-aria-label="accessibility.languageSelector"
+        >
+          <button
+            class="language-option"
+            type="button"
+            data-locale="en"
+            aria-label="Switch to English"
+            data-i18n-aria-label="language.switchToEnglish"
+          >
+            EN
+          </button>
+
+          <span aria-hidden="true">·</span>
+
+          <button
+            class="language-option"
+            type="button"
+            data-locale="zh-Hans"
+            aria-label="切换至中文"
+            data-i18n-aria-label="language.switchToChinese"
+          >
+            中文
+          </button>
+        </span>
+
+        <a
+          class="entry-exit"
+          href="/reality-reconstruction"
+          data-i18n="common.back"
+        >
+          Back
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="runtime-workspace-layout"><div data-runtime-workspace></div><div class="runtime-workspace-main">
+  <main
+    id="readingWorkspace"
+    class="reading-shell"
+  >
+    <section
+      class="reading-intro"
+      aria-labelledby="readingPageTitle"
+    >
+      <div>
+        <p
+          class="eyebrow"
+          data-i18n="reading.eyebrow"
+        >
+          Understand · Reality Reading
+        </p>
+
+        <h1
+          id="readingPageTitle"
+          data-i18n="reading.title"
+        >
+          Your current reality map
+        </h1>
+
+        <p data-i18n="reading.subtitle">
+          Start with the clearest current understanding, then review its basis and limits when you need them.
+        </p>
+
+        <p class="reading-science-statement" data-i18n="reading.workspaceKicker">
+          Your current understanding
+        </p>
+      </div>
+
+      <div class="reading-boundary">
+        <span
+          class="status-dot"
+          aria-hidden="true"
+        ></span>
+
+        <div>
+          <strong data-i18n="reading.boundaryTitle">
+            Understanding with visible boundaries
+          </strong>
+
+          <small data-i18n="reading.boundaryText">
+            Your statements, confirmed facts, possible explanations,
+            unknowns and conflicts remain visibly distinct.
+          </small>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="reading-empty hidden"
+      id="readingEmptyState"
+      aria-live="polite"
+    >
+      <p data-i18n="reading.noReading">
+        This Reading is not ready yet. Return to Reconstruction to review or complete the current situation first.
+      </p>
+
+      <a
+        class="btn primary"
+        href="/reality-reconstruction"
+        data-i18n="reading.backButton"
+      >
+        Back to Reconstruction
+      </a>
+    </section>
+
+    <section
+      class="reading-workspace hidden"
+      id="readingWorkspaceBody"
+    >
+      <aside
+        class="reading-stack reading-technical-only"
+        aria-label="PHI OS Reality Reading Stack"
+        data-i18n-aria-label="reading.stackAriaLabel"
+      >
+        <header>
+          <p>Figure 13B · Runtime Coordinates</p>
+
+          <h2 data-i18n="reading.mapTitle">
+            Reality Reading Map
+          </h2>
+        </header>
+
+        <ol>
+          <li
+            class="is-active"
+            data-reading-stage="coordinate"
+          >
+            <span>01</span>
+
+            <div>
+              <strong data-i18n="reading.stack.coordinateTitle">
+                Initialization Coordinate
+              </strong>
+
+              <small data-i18n="reading.stack.coordinateDescription">
+                Where this Runtime begins
+              </small>
+            </div>
+          </li>
+
+          <li data-reading-stage="region">
+            <span>03</span>
+
+            <div>
+              <strong data-i18n="reading.stack.regionTitle">
+                Runtime Capability
+              </strong>
+
+              <small data-i18n="reading.stack.regionDescription">
+                Where the current Reality is operating
+              </small>
+            </div>
+          </li>
+
+          <li data-reading-stage="configuration">
+            <span>04</span>
+
+            <div>
+              <strong data-i18n="reading.stack.configurationTitle">
+                Configuration
+              </strong>
+
+              <small data-i18n="reading.stack.configurationDescription">
+                Relationship, organization, and context
+              </small>
+            </div>
+          </li>
+
+          <li data-reading-stage="interfaces">
+            <span>05</span>
+
+            <div>
+              <strong data-i18n="reading.stack.interfacesTitle">
+                Reading Interfaces
+              </strong>
+
+              <small data-i18n="reading.stack.interfacesDescription">
+                Optional interpretive lenses
+              </small>
+            </div>
+          </li>
+
+          <li data-reading-stage="integrated">
+            <span>06</span>
+
+            <div>
+              <strong data-i18n="reading.stack.integratedTitle">
+                Integrated Reading
+              </strong>
+
+              <small data-i18n="reading.stack.integratedDescription">
+                Current Runtime understanding
+              </small>
+            </div>
+          </li>
+        </ol>
+      </aside>
+
+      <section class="reading-main">
+        <header class="reading-heading">
+          <div>
+            <p
+              class="workspace-kicker"
+              data-i18n="reading.workspaceKicker"
+            >
+              Your current understanding
+            </p>
+
+            <h2
+              id="readingTitle"
+              data-i18n="reading.workspaceTitle"
+            >
+              See what this situation may mean now
+            </h2>
+          </div>
+
+        </header>
+
+        <div
+          class="reading-loading"
+          id="readingLoadingState"
+          role="status"
+          aria-live="polite"
+        >
+          <div
+            class="reading-spinner"
+            aria-hidden="true"
+          ></div>
+
+          <div>
+            <strong data-i18n="reading.loading">
+              Preparing the Reality Reading…
+            </strong>
+
+            <p data-i18n="reading.loadingDetail">
+              We are separating what is supported, what may be connected,
+              and what must remain unknown.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="reading-sections hidden"
+          id="readingSections"
+        >
+          <article
+            class="reading-section"
+            id="integratedSection"
+          >
+            <div class="section-index">13E</div>
+
+            <div class="section-content">
+              <p class="section-label" data-i18n="reading.customer.label">
+                Customer Reading
+              </p>
+
+              <h3 data-i18n="reading.experience.currentUnderstandingTitle">
+                What we currently understand
+              </h3>
+
+              <p class="section-note" data-i18n="reading.experience.currentUnderstandingNote">
+                Start with the clearest current understanding, then open supporting detail only when you need it.
+              </p>
+
+              <div class="reading-experience" data-reading-experience hidden>
+                <div class="reading-experience-tabs" role="tablist" aria-label="Reading views" data-i18n-aria-label="reading.experience.viewsAria">
+                  <button type="button" role="tab" aria-selected="true" data-reading-experience-tab="customer" data-i18n="reading.experience.customerView">Customer view</button>
+                  <button type="button" role="tab" aria-selected="false" data-reading-experience-tab="evidence" data-i18n="reading.experience.evidenceView">Evidence view</button>
+                  <button type="button" role="tab" aria-selected="false" data-reading-experience-tab="technical" data-i18n="reading.experience.technicalView">Technical view</button>
+                </div>
+
+                <section class="reading-experience-panel is-active" role="tabpanel" data-reading-experience-panel="customer">
+                  <ol class="reading-value-sequence" aria-label="Reading understanding sequence" data-i18n-aria-label="reading.experience.valueSequenceAria">
+                    <li class="reading-value-step reading-value-step--understanding">
+                      <span class="reading-value-step__index">01</span>
+                      <div>
+                        <p data-i18n="reading.experience.oneSentence">What we currently understand</p>
+                        <h4 data-reading-experience-field="one_sentence_reading"></h4>
+                        <small data-i18n="reading.experience.boundary">This is a bounded interpretation, not a diagnosis, prediction, or instruction.</small>
+                      </div>
+                    </li>
+                    <li class="reading-value-step reading-value-step--change">
+                      <span class="reading-value-step__index">02</span>
+                      <div><h4 data-i18n="reading.experience.coreChangeTitle">The core change taking place</h4><p data-reading-value="what_changed"></p></div>
+                    </li>
+                    <li class="reading-value-step reading-value-step--persistence">
+                      <span class="reading-value-step__index">03</span>
+                      <div><h4 data-i18n="reading.experience.persistenceTitle">Why it may continue</h4><p data-reading-value="persistence"></p></div>
+                    </li>
+                    <li class="reading-value-step reading-value-step--confirmed">
+                      <span class="reading-value-step__index">04</span>
+                      <div><h4 data-i18n="reading.experience.confirmedTitle">What has been confirmed</h4><ul data-reading-known></ul></div>
+                    </li>
+                    <li class="reading-value-step reading-value-step--unknown">
+                      <span class="reading-value-step__index">05</span>
+                      <div><h4 data-i18n="reading.experience.unknownTitle">What remains unclear</h4><ul data-reading-unconfirmed></ul></div>
+                    </li>
+                    <li class="reading-value-step reading-value-step--next">
+                      <span class="reading-value-step__index">06</span>
+                      <div><h4 data-i18n="reading.experience.nextFocusTitle">What is worth noticing next</h4><ul data-reading-observe-next></ul></div>
+                    </li>
+                  </ol>
+
+                  <details class="reading-experience-disclosure reading-supporting-layer">
+                    <summary data-i18n="reading.experience.supportingLayerTitle">See the basis and limits of this understanding</summary>
+                    <div class="reading-supporting-grid">
+                      <section class="reading-experience-section reading-supporting-evidence">
+                        <h4 data-i18n="reading.experience.supportingBasisTitle">Supporting basis</h4>
+                        <ol class="reading-priority-list" data-reading-priority-customer></ol>
+                      </section>
+                      <section class="reading-experience-section reading-supporting-conditions">
+                        <h4 data-i18n="reading.experience.relatedConditionsTitle">Related conditions</h4>
+                        <div data-reading-related-conditions></div>
+                      </section>
+                      <section class="reading-experience-section reading-supporting-conflicts">
+                        <h4 data-i18n="reading.experience.conflictTitle">What may conflict</h4>
+                        <ul data-reading-conflicts></ul>
+                      </section>
+                      <section class="reading-experience-section reading-supporting-boundary">
+                        <h4 data-i18n="reading.experience.judgementBoundaryTitle">Judgement boundary</h4>
+                        <div data-reading-confidence-summary></div>
+                        <details class="reading-confidence-detail">
+                          <summary data-i18n="reading.experience.confidenceComponentsTitle">View confidence detail</summary>
+                          <dl class="reading-confidence-components" data-reading-confidence-components>
+                            <div><dt data-i18n="reading.experience.evidenceCoverage">Evidence Coverage</dt><dd>—</dd></div>
+                            <div><dt data-i18n="reading.experience.patternStability">Pattern Stability</dt><dd>—</dd></div>
+                            <div><dt data-i18n="reading.experience.interpretationBoundary">Interpretation Boundary</dt><dd>—</dd></div>
+                            <div><dt data-i18n="reading.experience.unknownPenalty">Unknown Penalty</dt><dd>—</dd></div>
+                          </dl>
+                        </details>
+                      </section>
+                    </div>
+                    <details class="reading-experience-disclosure">
+                      <summary data-i18n="reading.experience.alternativeTitle">Another possible Reading</summary>
+                      <div data-reading-alternative></div>
+                    </details>
+                    <details class="reading-experience-disclosure">
+                      <summary data-i18n="reading.experience.confidenceTitle">Why confidence is at this level</summary>
+                      <div data-reading-confidence-explanation></div>
+                    </details>
+                    <section class="reading-experience-section">
+                      <h4 data-i18n="reading.experience.questionsTitle">Questions that could change this Reading</h4>
+                      <ol class="reading-question-list" data-reading-unknown-questions></ol>
+                    </section>
+                    <section class="reading-customer-unknowns">
+                      <article>
+                        <h4 data-i18n="reading.customer.evidenceWatch">Evidence that may change the reading</h4>
+                        <ul data-reading-may-change></ul>
+                      </article>
+                    </section>
+                  </details>
+                  <section class="reading-navigation-rationale" data-reading-navigation-rationale></section>
+                </section>
+
+                <section class="reading-experience-panel" role="tabpanel" data-reading-experience-panel="evidence" hidden>
+                  <header>
+                    <h4 data-i18n="reading.experience.evidenceTitle">Prioritized canonical evidence</h4>
+                    <p data-i18n="reading.experience.evidenceNote">Canonical evidence stays concise; complete source lineage is available inside each item.</p>
+                  </header>
+                  <section class="reading-evidence-summary">
+                    <h4 data-i18n="reading.experience.evidenceSummaryTitle">Evidence Summary</h4>
+                    <dl data-reading-evidence-summary>
+                      <div><dt data-i18n="reading.experience.observed">Observed</dt><dd>0</dd></div>
+                      <div><dt data-i18n="reading.experience.reported">Reported</dt><dd>0</dd></div>
+                      <div><dt data-i18n="reading.experience.interpretation">Interpretation</dt><dd>0</dd></div>
+                      <div><dt data-i18n="reading.experience.unknown">Unknown</dt><dd>0</dd></div>
+                    </dl>
+                  </section>
+                  <div class="reading-evidence-cards" data-reading-priority-evidence></div>
+                </section>
+
+                <section class="reading-experience-panel reading-experience-technical" role="tabpanel" data-reading-experience-panel="technical" hidden>
+                  <header>
+                    <h4 data-i18n="reading.experience.technicalTitle">Reading contract and lineage</h4>
+                    <p data-i18n="reading.experience.technicalNote">Runtime identifiers, schemas, confidence components, lineage, revision metadata, and storage state.</p>
+                  </header>
+                  <ol class="reading-figure-index" aria-label="Part 13 figures">
+                    <li><strong>Figure 13A</strong><span>Observation Layers</span></li>
+                    <li><strong>Figure 13B</strong><span>Runtime Coordinates</span></li>
+                    <li><strong>Figure 13C</strong><span>Capability Map</span></li>
+                    <li><strong>Figure 13D</strong><span>Interpretive Interfaces</span></li>
+                    <li><strong>Figure 13E</strong><span>Reading Contract</span></li>
+                  </ol>
+                  <div class="reading-technical-grid" data-reading-technical-grid></div>
+                </section>
+              </div>
+
+              <div class="reading-customer-views" aria-label="Five customer Reading views" data-i18n-aria-label="reading.visual.viewsAria">
+                <section class="reading-customer-view" data-reading-view="observed-reality">
+                  <header>
+                    <span class="reading-view-index">01</span>
+                    <div>
+                      <p data-i18n="reading.visual.observedKicker">What is currently supported</p>
+                      <h4 data-i18n="reading.visual.observedTitle">Observed Reality</h4>
+                    </div>
+                    <div class="reading-view-status">
+                      <strong id="readingObservedStatus">0 items</strong>
+                      <small id="readingObservedSource">Observed Evidence</small>
+                    </div>
+                  </header>
+                  <p class="reading-view-intro" data-i18n="reading.visual.observedDescription">
+                    Only observable or explicitly reported changes are shown here.
+                  </p>
+                  <ul id="readingKnownReality">
+                    <li data-i18n="entry.notYetEstablished">Not yet established.</li>
+                  </ul>
+                </section>
+
+                <section class="reading-customer-view" data-reading-view="runtime-pattern">
+                  <header>
+                    <span class="reading-view-index">02</span>
+                    <div>
+                      <p data-i18n="reading.visual.patternKicker">Provisional structure</p>
+                      <h4 data-i18n="reading.visual.patternTitle">Runtime Pattern</h4>
+                    </div>
+                    <div class="reading-view-status">
+                      <strong id="readingPatternStatus">Provisional</strong>
+                      <small id="readingPatternConfidence">Structural confidence 0%</small>
+                    </div>
+                  </header>
+                  <p class="reading-view-intro" data-i18n="reading.visual.patternDescription">
+                    The strongest current pattern remains an interpretation until its evidence threshold is met.
+                  </p>
+                  <div class="runtime-pattern-map" id="primaryRuntimePattern">
+                    <p data-i18n="entry.notYetEstablished">Not yet established.</p>
+                  </div>
+                </section>
+
+                <section class="reading-customer-view" data-reading-view="evidence">
+                  <header>
+                    <span class="reading-view-index">03</span>
+                    <div>
+                      <p data-i18n="reading.visual.evidenceKicker">Traceable support</p>
+                      <h4 data-i18n="reading.visual.evidenceTitle">Evidence</h4>
+                    </div>
+                    <div class="reading-view-status">
+                      <strong id="readingEvidenceStatus">0 evidence links</strong>
+                      <small id="readingEvidenceSource">Evidence Trail</small>
+                    </div>
+                  </header>
+                  <p class="reading-view-intro" data-i18n="reading.visual.evidenceDescription">
+                    Each supporting statement keeps its evidence class visible.
+                  </p>
+                  <ol class="evidence-trail" id="readingEvidenceTrail">
+                    <li data-i18n="entry.notYetEstablished">Not yet established.</li>
+                  </ol>
+                  <div class="reading-view-subsection">
+                    <strong data-i18n="reading.customer.reliabilityTitle">Reading reliability foundation</strong>
+                    <ul id="readingStrengths">
+                      <li data-i18n="entry.notYetEstablished">Not yet established.</li>
+                    </ul>
+                  </div>
+                </section>
+
+                <section class="reading-customer-view" data-reading-view="interpretation">
+                  <header>
+                    <span class="reading-view-index">04</span>
+                    <div>
+                      <p data-i18n="reading.visual.interpretationKicker">Meaning remains bounded</p>
+                      <h4 data-i18n="reading.visual.interpretationTitle">Interpretation</h4>
+                    </div>
+                    <div class="reading-view-status">
+                      <strong id="readingInterpretationStatus">No alternative established</strong>
+                      <small id="readingInterpretationSource">Bounded interpretation</small>
+                    </div>
+                  </header>
+                  <p class="reading-view-intro" data-i18n="reading.visual.interpretationDescription">
+                    PHI OS shows a current interpretation and keeps another possible reading separate.
+                  </p>
+                  <div class="reading-interpretation-grid">
+                    <div>
+                      <span data-i18n="reading.customer.currentUnderstanding">Current understanding</span>
+                      <strong id="readingCurrentRuntime" data-i18n="entry.notYetEstablished">Not yet established.</strong>
+                    </div>
+                    <div>
+                      <span data-i18n="reading.customer.alternativeTitle">Another possible reading</span>
+                      <div id="alternativeReading">
+                        <p data-i18n="reading.integratedSection.noAlternative">No alternative reading has been established.</p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="reading-customer-view reading-boundary-view" data-reading-view="reading-boundary">
+                  <header>
+                    <span class="reading-view-index">05</span>
+                    <div>
+                      <p data-i18n="reading.visual.boundaryKicker">What this Reading cannot close</p>
+                      <h4 data-i18n="reading.visual.boundaryTitle">Reading Boundary</h4>
+                    </div>
+                    <div class="reading-view-status">
+                      <strong id="readingBoundaryStatus">0 open items</strong>
+                      <small id="readingBoundaryDecision">Navigation not ready</small>
+                    </div>
+                  </header>
+                  <p class="reading-view-intro" data-i18n="reading.visual.boundaryDescription">
+                    Unknown Reality, limitations, and future evidence remain visible before Navigation.
+                  </p>
+                  <div class="reading-boundary-grid">
+                    <div>
+                      <strong data-i18n="reading.customer.unknownTitle">Still unclear</strong>
+                      <ul id="readingUnknownReality">
+                        <li data-i18n="entry.notYetEstablished">Not yet established.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <strong data-i18n="reading.customer.limitsTitle">Reading limitations</strong>
+                      <ul id="readingRisks">
+                        <li data-i18n="entry.notYetEstablished">Not yet established.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="reading-view-subsection">
+                    <strong data-i18n="reading.customer.evidenceWatch">Evidence that may change the reading</strong>
+                    <ul id="readingEvidenceWatch">
+                      <li data-i18n="entry.notYetEstablished">Not yet established.</li>
+                    </ul>
+                  </div>
+                  <div class="reading-next-transition">
+                    <span data-i18n="reading.customer.nextClarification">What needs clarification next</span>
+                    <strong id="readingCurrentTransition" data-i18n="entry.notYetEstablished">Not yet established.</strong>
+                  </div>
+                </section>
+              </div>
+
+              <details class="reading-technical-disclosure reading-evidence-disclosure">
+                <summary>
+                  <span data-i18n="reading.visual.technicalTitle">View technical Reading detail</span>
+                  <small data-i18n="reading.visual.technicalDescription">Conscious Runtime style and the underlying PHI OS model</small>
+                </summary>
+                <div class="reading-technical-evidence">
+                  <section class="integrated-reading-card">
+                    <header>
+                      <span>T1</span>
+                      <div>
+                        <p data-i18n="reading.integratedSection.consciousDescription">Experience, expression, action, and identity</p>
+                        <h4 data-i18n="reading.integratedSection.consciousStyle">Conscious Runtime Style</h4>
+                      </div>
+                    </header>
+                    <div class="conscious-reading-grid" id="consciousReadingGrid"></div>
+                  </section>
+                </div>
+              </details>
+
+              <div class="reading-actions">
+                <button
+                  class="btn primary"
+                  id="continueToNavigation"
+                  type="button"
+                  disabled
+                  aria-disabled="true"
+                >
+                  <span data-i18n="reading.continueButton">
+                    Confirm this Reading and continue
+                  </span>
+                  <span aria-hidden="true">→</span>
+                </button>
+
+                <a
+                  class="btn"
+                  href="/reality-reconstruction"
+                  data-i18n="reading.integratedSection.reportInaccuracy"
+                >
+                  Something is inaccurate — return to Reconstruction
+                </a>
+              </div>
+
+              <p
+                class="action-note"
+                data-i18n="reading.integratedSection.actionNote"
+              >
+                Reading is frozen. Navigation references the Reading Contract,
+                Evidence, Unknown, and Current Tension without reinterpreting
+                the Reading.
+              </p>
+            </div>
+          </article>
+
+          <details class="reading-technical-disclosure">
+            <summary>
+              <span data-i18n="reading.customer.technicalTitle">View PHI OS technical model</span>
+              <small data-i18n="reading.customer.technicalDescription">Coordinates, regions, configurations, and optional interfaces</small>
+            </summary>
+
+            <div class="reading-technical-sections">
+          <article
+            class="reading-section"
+            id="coordinateSection"
+          >
+            <div class="section-index">01</div>
+
+            <div class="section-content">
+              <p class="section-label">
+                Figure 13B · Runtime Coordinates
+              </p>
+
+              <h3 data-i18n="reading.coordinateSection.title">
+                Initialization Coordinate
+              </h3>
+
+              <p
+                class="section-note"
+                data-i18n="reading.coordinateSection.note"
+              >
+                This layer identifies where Reality may have entered
+                the carrier. It does not infer biological facts
+                without supporting evidence.
+              </p>
+
+              <div
+                class="reading-coordinate-grid"
+                id="readingCoordinateGrid"
+              ></div>
+
+              <div class="reading-boundary-note">
+                <strong data-i18n="reading.evidenceBoundary">
+                  Evidence Boundary
+                </strong>
+
+                <p data-i18n="reading.coordinateSection.boundaryText">
+                  Biological coordinates remain not established
+                  unless supported by reported, documentary, sensor,
+                  biological, or professional evidence.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="reading-section"
+            id="regionSection"
+          >
+            <div class="section-index">03</div>
+
+            <div class="section-content">
+              <p class="section-label">
+                Figure 13C · Capability Map
+              </p>
+
+              <h3 data-i18n="reading.regionSection.title">
+                Runtime Region
+              </h3>
+
+              <p
+                class="section-note"
+                data-i18n="reading.regionSection.note"
+              >
+                PHI OS identifies which capability is currently available
+                to respond to the active question.
+              </p>
+
+              <div
+                class="runtime-region-grid"
+                id="runtimeRegionGrid"
+              >
+                <article data-region="R1">
+                  <span>R1</span>
+                  <strong data-i18n="reading.regions.direction">
+                    Direction
+                  </strong>
+                  <small data-i18n="entry.notYetEstablished">
+                    Not yet established.
+                  </small>
+                </article>
+
+                <article data-region="R2">
+                  <span>R2</span>
+                  <strong data-i18n="reading.regions.understanding">
+                    Understanding
+                  </strong>
+                  <small data-i18n="entry.notYetEstablished">
+                    Not yet established.
+                  </small>
+                </article>
+
+                <article data-region="R3">
+                  <span>R3</span>
+                  <strong data-i18n="reading.regions.expression">
+                    Expression
+                  </strong>
+                  <small data-i18n="entry.notYetEstablished">
+                    Not yet established.
+                  </small>
+                </article>
+
+                <article data-region="R4">
+                  <span>R4</span>
+                  <strong data-i18n="reading.regions.position">
+                    Position
+                  </strong>
+                  <small data-i18n="entry.notYetEstablished">
+                    Not yet established.
+                  </small>
+                </article>
+
+                <article data-region="R5">
+                  <span>R5</span>
+                  <strong data-i18n="reading.regions.resource">
+                    Resource
+                  </strong>
+                  <small data-i18n="entry.notYetEstablished">
+                    Not yet established.
+                  </small>
+                </article>
+
+                <article data-region="R6">
+                  <span>R6</span>
+                  <strong data-i18n="reading.regions.execution">
+                    Execution
+                  </strong>
+                  <small data-i18n="entry.notYetEstablished">
+                    Not yet established.
+                  </small>
+                </article>
+
+                <article data-region="R7">
+                  <span>R7</span>
+                  <strong data-i18n="reading.regions.relationship">
+                    Relationship
+                  </strong>
+                  <small data-i18n="entry.notYetEstablished">
+                    Not yet established.
+                  </small>
+                </article>
+
+                <article data-region="R8">
+                  <span>R8</span>
+                  <strong data-i18n="reading.regions.survival">
+                    Survival
+                  </strong>
+                  <small data-i18n="entry.notYetEstablished">
+                    Not yet established.
+                  </small>
+                </article>
+
+                <article data-region="R9">
+                  <span>R9</span>
+                  <strong data-i18n="reading.regions.driver">
+                    Driver
+                  </strong>
+                  <small data-i18n="entry.notYetEstablished">
+                    Not yet established.
+                  </small>
+                </article>
+              </div>
+
+              <div class="region-summary">
+                <div>
+                  <span data-i18n="reading.regionSection.primary">
+                    Primary Capability
+                  </span>
+
+                  <strong
+                    id="primaryRuntimeRegion"
+                    data-i18n="entry.notYetEstablished"
+                  >
+                    Not yet established.
+                  </strong>
+                </div>
+
+                <div>
+                  <span data-i18n="reading.regionSection.connected">
+                    Connected Capabilities
+                  </span>
+
+                  <strong
+                    id="connectedRuntimeRegions"
+                    data-i18n="entry.notYetEstablished"
+                  >
+                    Not yet established.
+                  </strong>
+                </div>
+
+                <div>
+                  <span data-i18n="reading.regionSection.activeQuestion">Active Question</span>
+                  <strong id="readingActiveQuestion" data-i18n="entry.notYetEstablished">Not yet established.</strong>
+                </div>
+
+                <div>
+                  <span data-i18n="reading.regionSection.driverPriority">Driver Priority</span>
+                  <strong id="readingDriverPriority" data-i18n="reading.regionSection.driverPending">Not established without explicit Reader evidence.</strong>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="reading-section"
+            id="configurationSection"
+          >
+            <div class="section-index">04</div>
+
+            <div class="section-content">
+              <p class="section-label">
+                Figure 13A · Observation Layers
+              </p>
+
+              <h3 data-i18n="reading.configurationSection.title">
+                Active Configuration
+              </h3>
+
+              <p
+                class="section-note"
+                data-i18n="reading.configurationSection.note"
+              >
+                The same Runtime may mean something different inside
+                a personal, relational, family, organizational,
+                financial, or social configuration.
+              </p>
+
+              <div class="configuration-grid">
+                <article>
+                  <span data-i18n="reading.configurationSection.relational">
+                    Relational Configuration
+                  </span>
+
+                  <strong
+                    id="relationalConfiguration"
+                    data-i18n="entry.notYetEstablished"
+                  >
+                    Not yet established.
+                  </strong>
+
+                  <small
+                    id="relationalConfigurationStatus"
+                    data-i18n="reading.configurationSection.noStable"
+                  >
+                    No stable configuration identified.
+                  </small>
+                </article>
+
+                <article>
+                  <span data-i18n="reading.configurationSection.organizational">
+                    Organizational Configuration
+                  </span>
+
+                  <strong
+                    id="organizationalConfiguration"
+                    data-i18n="entry.notYetEstablished"
+                  >
+                    Not yet established.
+                  </strong>
+
+                  <small
+                    id="organizationalConfigurationStatus"
+                    data-i18n="reading.configurationSection.noStable"
+                  >
+                    No stable configuration identified.
+                  </small>
+                </article>
+
+                <article>
+                  <span data-i18n="reading.configurationSection.contextual">
+                    Contextual Configuration
+                  </span>
+
+                  <strong
+                    id="contextualConfiguration"
+                    data-i18n="entry.notYetEstablished"
+                  >
+                    Not yet established.
+                  </strong>
+
+                  <small
+                    id="contextualConfigurationStatus"
+                    data-i18n="reading.configurationSection.noStable"
+                  >
+                    No stable configuration identified.
+                  </small>
+                </article>
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="reading-section"
+            id="interfacesSection"
+          >
+            <div class="section-index">05</div>
+
+            <div class="section-content">
+              <p class="section-label">
+                Figure 13D · Interpretive Interfaces
+              </p>
+
+              <h3 data-i18n="reading.interfacesSection.title">
+                Interpretive Reading Interfaces
+              </h3>
+
+              <p
+                class="section-note"
+                data-i18n="reading.interfacesSection.note"
+              >
+                These systems may provide symbolic, temporal,
+                carrier, contextual, or developmental lenses.
+                They do not become verified Runtime evidence.
+              </p>
+
+              <div class="interpretive-interface-grid">
+                <article data-interface="human_design">
+                  <div>
+                    <span data-i18n="servicesPublic.humanDesign">Personal Runtime Projection</span>
+                    <strong data-i18n="reading.interfacesSection.humanDesign">
+                      Carrier structure lens
+                    </strong>
+                  </div>
+
+                  <button
+                    class="interface-toggle"
+                    type="button"
+                    data-reading-interface="human_design"
+                    aria-pressed="false"
+                    data-i18n="reading.interfacesSection.notEnabled"
+                  >
+                    Not enabled
+                  </button>
+                </article>
+
+                <article data-interface="astrology">
+                  <div>
+                    <span>Astrology</span>
+                    <strong data-i18n="reading.interfacesSection.astrology">
+                      Timing and activation lens
+                    </strong>
+                  </div>
+
+                  <button
+                    class="interface-toggle"
+                    type="button"
+                    data-reading-interface="astrology"
+                    aria-pressed="false"
+                    data-i18n="reading.interfacesSection.notEnabled"
+                  >
+                    Not enabled
+                  </button>
+                </article>
+
+                <article data-interface="bazi">
+                  <div>
+                    <span>BaZi</span>
+                    <strong data-i18n="reading.interfacesSection.bazi">
+                      Rhythm, resource, and pressure lens
+                    </strong>
+                  </div>
+
+                  <button
+                    class="interface-toggle"
+                    type="button"
+                    data-reading-interface="bazi"
+                    aria-pressed="false"
+                    data-i18n="reading.interfacesSection.notEnabled"
+                  >
+                    Not enabled
+                  </button>
+                </article>
+
+                <article data-interface="ziwei">
+                  <div>
+                    <span>Zi Wei</span>
+                    <strong data-i18n="reading.interfacesSection.ziwei">
+                      Life-domain and social-role lens
+                    </strong>
+                  </div>
+
+                  <button
+                    class="interface-toggle"
+                    type="button"
+                    data-reading-interface="ziwei"
+                    aria-pressed="false"
+                    data-i18n="reading.interfacesSection.notEnabled"
+                  >
+                    Not enabled
+                  </button>
+                </article>
+
+                <article data-interface="gene_keys">
+                  <div>
+                    <span>Gene Keys</span>
+                    <strong data-i18n="reading.interfacesSection.geneKeys">
+                      Developmental transformation lens
+                    </strong>
+                  </div>
+
+                  <button
+                    class="interface-toggle"
+                    type="button"
+                    data-reading-interface="gene_keys"
+                    aria-pressed="false"
+                    data-i18n="reading.interfacesSection.notEnabled"
+                  >
+                    Not enabled
+                  </button>
+                </article>
+              </div>
+
+              <div class="interpretive-boundary">
+                <strong data-i18n="reading.interfacesSection.boundaryTitle">
+                  Interpretive boundary
+                </strong>
+
+                <p data-i18n="reading.interfacesSection.boundaryText">
+                  Optional Reading Interfaces remain Interpretive
+                  Reading, never Observed Evidence, and require
+                  relevant user-provided data and consent.
+                </p>
+              </div>
+            </div>
+          </article>
+
+            </div>
+          </details>
+
+        </div>
+      </section>
+
+      <details class="reading-inspector-disclosure">
+        <summary>
+          <span data-i18n="reading.experience.inspectorTitle">How this Reading was formed</span>
+          <small data-i18n="reading.experience.inspectorDescription">Optional system detail for review and traceability</small>
+        </summary>
+      <aside
+        class="reading-inspector reading-inspector-inline"
+        aria-label="Reading Inspector"
+        data-i18n-aria-label="reading.inspector.ariaLabel"
+      >
+        <header>
+          <p data-i18n="reading.inspector.title">
+            Reading Inspector
+          </p>
+
+          <h2 data-i18n="reading.inspector.status">
+            Interpretation status
+          </h2>
+        </header>
+
+        <div class="inspector-block">
+          <span data-i18n="reading.inspector.runtimeEntity">
+            Runtime Entity
+          </span>
+          <strong id="readingRuntimeEntityId">—</strong>
+        </div>
+
+        <div class="inspector-block">
+          <span data-i18n="reading.inspector.runtimeEntry">
+            Runtime Entry
+          </span>
+          <strong id="readingRuntimeEntryId">—</strong>
+        </div>
+
+        <div class="inspector-block">
+          <span data-i18n="reading.inspector.mode">
+            Reading mode
+          </span>
+          <strong
+            id="readingMode"
+            data-i18n="reading.inspector.initialMode"
+          >
+            Initial Integrated Reading
+          </strong>
+        </div>
+
+        <div class="inspector-block">
+          <span data-i18n="reading.inspector.primaryArc">
+            Primary Formation Arc
+          </span>
+          <strong
+            id="readingPrimaryArc"
+            data-i18n="entry.notYetEstablished"
+          >
+            Not yet established.
+          </strong>
+        </div>
+
+        <div class="inspector-block">
+          <span data-i18n="reading.inspector.primaryRegion">
+            Primary Runtime Region
+          </span>
+          <strong
+            id="readingInspectorRegion"
+            data-i18n="entry.notYetEstablished"
+          >
+            Not yet established.
+          </strong>
+        </div>
+
+        <div class="inspector-block">
+          <span data-i18n="reading.inspector.unknownPreserved">
+            Unknown Reality preserved
+          </span>
+          <strong id="readingUnknownCount">0</strong>
+        </div>
+
+        <div class="inspector-block">
+          <span data-i18n="reading.inspector.patternBoundary">
+            Pattern evidence boundary
+          </span>
+          <strong
+            id="readingPatternBoundary"
+            data-i18n="reading.inspector.notEstablished"
+          >
+            Not established
+          </strong>
+        </div>
+
+        <div class="inspector-block">
+          <span data-i18n="reading.inspector.navigationBoundary">
+            Navigation boundary
+          </span>
+          <strong
+            id="readingNavigationBoundary"
+            data-i18n="reading.inspector.blocked"
+          >
+            Blocked
+          </strong>
+        </div>
+
+        <div class="inspector-block">
+          <span data-i18n="reading.inspector.allowedSources">
+            Allowed inference sources
+          </span>
+          <strong id="readingAllowedSources">0</strong>
+        </div>
+
+        <div class="inspector-block">
+          <span data-i18n="reading.inspector.interfaces">
+            Interpretive interfaces
+          </span>
+          <strong
+            id="readingInterfaceCount"
+            data-i18n="reading.inspector.noneEnabled"
+          >
+            0 enabled
+          </strong>
+        </div>
+
+        <div class="inspector-block">
+          <span data-i18n="reading.inspector.provider">
+            Inference provider
+          </span>
+          <strong
+            id="readingInferenceProvider"
+            data-i18n="reading.inspector.ruleFirst"
+          >
+            Rule-first
+          </strong>
+        </div>
+
+        <div class="inspector-block">
+          <span data-i18n="reading.inspector.paidAI">
+            Paid AI used
+          </span>
+          <strong
+            id="readingPaidAIUsed"
+            data-i18n="common.no"
+          >
+            No
+          </strong>
+        </div>
+
+        <div class="inspector-block">
+          <span data-i18n="reading.inspector.storage">
+            Persistent storage
+          </span>
+          <strong data-i18n="reading.inspector.disabled">
+            Disabled
+          </strong>
+        </div>
+      </aside>
+      </details>
+    </section>
+  </main>
+  </div></div>
+
+  <footer class="reading-footer">
+    <div class="shell">
+      <span data-i18n="reading.footerEvidence">
+        Reality before intelligence.
+      </span>
+
+      <span data-i18n="reading.footerFlow">
+        Coordinate → Region →
+        Configuration → Reading → Transition
+      </span>
+    </div>
+  </footer>
+
+  
+  <script
+    type="module"
+    src="/assets/js/reading.js"
+  ></script>
+  <script type="module" src="/assets/js/journey-shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,1712 @@
+{
+  "status": "PASS",
+  "routingCandidatesValidated": 5,
+  "bridgesValidated": 4,
+  "negativeRoutingCases": 8,
+  "interactionCandidates": 2,
+  "projectionCandidates": 56,
+  "graphRelationshipsWithheld": 4,
+  "activeGraphEdgesAdded": 0,
+  "existingGraphOwnerRebuildValidated": true,
+  "existingAskApiRequests": 5,
+  "actualAskResponses": [
+    {
+      "caseId": "1",
+      "question": "为什么罗马帝国结束以后文明没有完全归零？",
+      "requestBookHint": "BOOK-5",
+      "httpStatus": 409,
+      "actualExistingAskResponse": {
+        "ok": false,
+        "error": {
+          "code": "BOOK_SOURCE_UNAVAILABLE",
+          "message": "当前所需来源无法公开读取，因此暂不能依据该来源回答。"
+        },
+        "availability": {
+          "state": "SOURCE_UNAVAILABLE",
+          "answerState": "UNKNOWN",
+          "reason": "PUBLIC_SOURCE_NOT_AVAILABLE",
+          "fallbackUsed": false,
+          "authorityGranted": false
+        },
+        "governance": {
+          "canonicalAuthorityCreated": false,
+          "publicationCreated": false,
+          "realityReadingCreated": false,
+          "persistentCaseCreated": false,
+          "shadowAccountCreated": false,
+          "methodExecuted": false,
+          "realityJourneyStarted": false
+        }
+      },
+      "authoredExpectationInjected": false,
+      "structuredCandidatesInjected": false,
+      "newRoutingInstalled": false
+    },
+    {
+      "caseId": "2",
+      "question": "日本 1945 以后发生了什么结构重组？",
+      "requestBookHint": "BOOK-6",
+      "httpStatus": 200,
+      "actualExistingAskResponse": {
+        "ok": true,
+        "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
+        "capability": "ASK_PHIOS",
+        "answerDepth": "STANDARD",
+        "answer": {
+          "schemaVersion": "PHI-OS-QUESTION-SCOPED-KNOWLEDGE-ANSWER-v1.0.0",
+          "answerId": "KAP-A-v1-10384808",
+          "question": "日本 1945 以后发生了什么结构重组?",
+          "normalizedQuestion": "日本 1945 以后发生了什么结构重组?",
+          "locale": "zh-Hans",
+          "answerMode": "KNOWLEDGE_ANSWER",
+          "authorityClass": "QUESTION_SCOPED_NON_AUTHORITATIVE_PROJECTION",
+          "coverageStatus": "INSUFFICIENT_COVERAGE",
+          "groundingBundleId": "KGB-v1-bb4fc56a",
+          "knowledgeRefs": {
+            "primaryNodeCodes": [],
+            "supportingNodeCodes": [],
+            "relatedNodeCodes": [],
+            "manuscriptRefs": [],
+            "publishedRefs": []
+          },
+          "content": {
+            "directAnswer": "PHI OS 目前没有足够的受治理知识来可靠回答这个问题。",
+            "mechanism": [],
+            "whyItMatters": [],
+            "whatToObserve": [],
+            "boundaries": [
+              "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
+            ],
+            "unknowns": [
+              "当前没有可用于回答的受治理来源。"
+            ],
+            "relatedKnowledge": []
+          },
+          "generation": {
+            "generationMode": "DETERMINISTIC",
+            "generativeModelUsed": false,
+            "modelRef": null
+          },
+          "lifecycle": {
+            "createdAt": "2026-10-07T05:53:12.534Z",
+            "expiresAt": null,
+            "persistentCaseCreated": false
+          },
+          "governance": {
+            "publicationStatus": "NOT_PUBLICATION",
+            "canonicalAuthorityStatus": "NONE",
+            "realityReadingStatus": "NOT_REALITY_READING"
+          }
+        },
+        "sources": [],
+        "boundary": {
+          "schemaVersion": "PHI-OS-KAP-UNKNOWN-BOUNDARY-PROJECTION-v1.0.0",
+          "knowledgeStatus": "INSUFFICIENT",
+          "coverageStatus": "INSUFFICIENT_COVERAGE",
+          "knownSourceCount": 0,
+          "unknowns": [
+            "当前没有可用于回答的受治理来源。"
+          ],
+          "limits": [
+            "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
+          ],
+          "guidedReadingRoutingActivated": false,
+          "realityJourneyRoutingActivated": false
+        },
+        "coverage": {
+          "schemaVersion": "PHI-OS-KAP-COVERAGE-DECISION-v1.0.0",
+          "status": "INSUFFICIENT_COVERAGE",
+          "reasonCodes": [
+            "NO_GROUNDED_SOURCE_MATCH"
+          ],
+          "sourceCount": 0,
+          "publishedCoverage": "none",
+          "manuscriptResultCount": 0,
+          "answerCompositionEligible": false,
+          "unknownDisclosureRequired": true,
+          "realityJourneyRequired": false,
+          "guidedReadingRequired": false,
+          "aiRequired": false,
+          "createsAuthority": false
+        },
+        "ai": {
+          "eligibility": {
+            "schemaVersion": "PHI-OS-KAP-AI-ELIGIBILITY-DECISION-v1.0.0",
+            "status": "AI_NOT_REQUIRED",
+            "reasonCodes": [
+              "NO_COMPOSITION_BENEFIT_WITHOUT_GROUNDED_COVERAGE"
+            ],
+            "aiRequired": false,
+            "aiIsKnowledgeAuthority": false,
+            "providerInvocationAuthorizedByPhase3": false,
+            "deterministicFallbackRequired": true
+          },
+          "routing": {
+            "schemaVersion": "PHI-OS-KAP-AI-COST-ROUTING-v1.0.0",
+            "requestedTier": "TIER_0_DETERMINISTIC",
+            "activeTier": "TIER_0_DETERMINISTIC",
+            "providerInvoked": false,
+            "paidProviderRequired": false,
+            "fallbackReason": null,
+            "answerMayStillBeDelivered": true
+          },
+          "providerInvoked": false,
+          "generativeModelUsed": false
+        },
+        "production": {
+          "independentlyDeliverable": true,
+          "requiresMcd": false,
+          "requiresGuidedReading": false,
+          "requiresRealityJourney": false,
+          "deterministicFallbackAvailable": true
+        },
+        "governance": {
+          "knowledgeAuthorityUnchanged": true,
+          "publicationAuthorityUnchanged": true,
+          "realityReadingAuthorityUnchanged": true,
+          "persistentCaseCreated": false,
+          "upstreamGroundedAnswerConsumed": false,
+          "groundedEvidencePackConsumed": false,
+          "kirR2Applied": false
+        },
+        "kirR2": {
+          "status": "KIR_R2_BLOCKED_BY_RELEVANCE_GATE",
+          "applied": false
+        },
+        "grounding": {
+          "bundleId": "KGB-v1-bb4fc56a",
+          "retrievalAuthority": "KSAR_KNOWLEDGE_ACCESS",
+          "sourceCount": 0,
+          "upstreamGroundedAnswerPresent": false,
+          "upstreamGroundedAnswerConsumed": false,
+          "groundedEvidencePackConsumed": false
+        },
+        "cka": {
+          "schemaVersion": "PHI-OS-CKA-RESPONSE-v1.0.0",
+          "entryContext": {
+            "entrySurface": "KNOWLEDGE_SEARCH",
+            "entryRoute": null,
+            "contextType": null,
+            "contextId": null,
+            "bookCode": "BOOK-6",
+            "partCode": null,
+            "articleCode": null,
+            "figureCode": null,
+            "realityCaseId": null,
+            "accountState": "GUEST",
+            "locale": "zh-Hans",
+            "mode": "GLOBAL",
+            "authorization": {
+              "permissionVerified": false,
+              "privacyVerified": false,
+              "entitlementVerified": false,
+              "accountVerified": false,
+              "realityCaseBound": false
+            },
+            "governance": {
+              "createsPersistentCase": false,
+              "createsShadowAccount": false,
+              "executesMethod": false,
+              "startsRealityJourney": false
+            }
+          },
+          "followUp": {
+            "currentQuestion": "日本 1945 以后发生了什么结构重组?",
+            "contextQuestion": null,
+            "parentAnswerId": null,
+            "groundingBundleId": null,
+            "followUpDepth": 0,
+            "answerContext": {
+              "parentAnswerId": null
+            },
+            "knowledgeContext": {
+              "groundingBundleId": null
+            },
+            "temporaryOnly": true,
+            "historyPersisted": false,
+            "createsPersistentCase": false,
+            "accountState": "GUEST",
+            "boundary": {
+              "simpleAskAllowed": true,
+              "classification": "SIMPLE_ASK",
+              "automaticEscalation": false,
+              "persistentCaseCreated": false
+            },
+            "guestLimitReached": false
+          },
+          "clientAnswer": {
+            "schemaVersion": "PHI-OS-CKA-CLIENT-ANSWER-v1.0.0",
+            "question": "日本 1945 以后发生了什么结构重组?",
+            "directAnswer": "PHI OS 目前没有足够的受治理知识来可靠回答这个问题。",
+            "whyThisMayHappen": [],
+            "whatToObserve": [],
+            "unknown": {
+              "state": "INSUFFICIENT_EVIDENCE",
+              "details": [
+                "当前没有可用于回答的受治理来源。",
+                "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
+              ]
+            },
+            "relatedKnowledgeCards": [],
+            "sourcesGrounding": [],
+            "entryContext": {
+              "entrySurface": "KNOWLEDGE_SEARCH",
+              "entryRoute": null,
+              "contextType": null,
+              "contextId": null,
+              "bookCode": "BOOK-6",
+              "partCode": null,
+              "articleCode": null,
+              "figureCode": null,
+              "realityCaseId": null,
+              "accountState": "GUEST",
+              "locale": "zh-Hans",
+              "mode": "GLOBAL",
+              "authorization": {
+                "permissionVerified": false,
+                "privacyVerified": false,
+                "entitlementVerified": false,
+                "accountVerified": false,
+                "realityCaseBound": false
+              },
+              "governance": {
+                "createsPersistentCase": false,
+                "createsShadowAccount": false,
+                "executesMethod": false,
+                "startsRealityJourney": false
+              }
+            },
+            "followUpDepth": 0,
+            "governance": {
+              "createsCanonicalAuthority": false,
+              "createsRealityReading": false,
+              "createsPersistentCase": false,
+              "internalNodeCodesProjectedToCards": false
+            }
+          },
+          "w5w17": {
+            "schemaVersion": "PHI-OS-CKA-W5-W17-CLIENT-ENVELOPE-v1.0.0",
+            "answerState": "NEEDS_CONTEXT",
+            "record": {
+              "answerId": "KAP-A-v1-10384808",
+              "questionId": "CKA-Q-v1-d854af52",
+              "retrievalContext": {
+                "pipeline": [
+                  "QUESTION",
+                  "INTENT",
+                  "KNOWLEDGE_RETRIEVAL",
+                  "PUBLISHED_OR_AUTHORIZED_KNOWLEDGE",
+                  "GROUNDING",
+                  "ANSWER"
+                ],
+                "authorityPriority": [
+                  "CANONICAL_OR_PUBLISHED_PHI_OS",
+                  "REVIEWED_MANUSCRIPT_OR_KSAR",
+                  "GOVERNED_EXTERNAL_AUTHORITY",
+                  "AUTHORIZED_CLIENT_CONTEXT"
+                ],
+                "authorityGroups": [
+                  {
+                    "authorityClass": "CANONICAL_OR_PUBLISHED_PHI_OS",
+                    "sources": []
+                  },
+                  {
+                    "authorityClass": "REVIEWED_MANUSCRIPT_OR_KSAR",
+                    "sources": []
+                  },
+                  {
+                    "authorityClass": "GOVERNED_EXTERNAL_AUTHORITY",
+                    "sources": []
+                  },
+                  {
+                    "authorityClass": "AUTHORIZED_CLIENT_CONTEXT",
+                    "sources": []
+                  }
+                ],
+                "llmMemoryOnlyAnswerAllowed": false,
+                "authoritiesSilentlyCollapsed": false
+              },
+              "knowledgeRefs": {
+                "primaryNodeCodes": [],
+                "supportingNodeCodes": [],
+                "relatedNodeCodes": [],
+                "manuscriptRefs": [],
+                "publishedRefs": []
+              },
+              "groundingState": "INSUFFICIENT_GROUNDING",
+              "groundingBundleId": "KGB-v1-bb4fc56a",
+              "unknownState": "UNKNOWN",
+              "locale": "zh-Hans"
+            },
+            "guidedContext": {
+              "schemaVersion": "PHI-OS-CKA-GUIDED-CONTEXT-v1.0.0",
+              "fields": {
+                "whatIsHappening": null,
+                "howLong": null,
+                "whoOrWhatIsInvolved": null,
+                "whatChanged": null,
+                "whatTried": null,
+                "whatMattersMostNow": null
+              },
+              "filledFields": [],
+              "classifications": [
+                "SIMPLE"
+              ],
+              "signals": {
+                "persistent": false,
+                "multiFactor": false,
+                "caseSpecific": false,
+                "realityDependent": false,
+                "personalized": false
+              },
+              "temporaryOnly": true,
+              "fullIcrCreated": false,
+              "classificationIsDiagnosis": false,
+              "canonicalRealityCreated": false
+            },
+            "knowledgeContext": {
+              "contextLabel": null,
+              "contextSummary": null,
+              "readingPath": null,
+              "relatedKnowledgeRef": null,
+              "temporaryOnly": true,
+              "authorityChanged": false,
+              "realityCaseCreated": false
+            },
+            "externalAuthority": {
+              "required": false,
+              "professionalJudgmentRequested": false,
+              "governedCurrentAuthorityAvailable": false,
+              "authoritySourceCount": 0,
+              "ckaMakesProfessionalJudgment": false,
+              "liveAuthorityInvented": false
+            },
+            "relatedKnowledgeCards": [],
+            "accountBoundary": {
+              "guestAllowed": [
+                "ASK",
+                "ANSWER",
+                "ONE_LIMITED_FOLLOW_UP",
+                "RELATED_KNOWLEDGE",
+                "TEMPORARY_GUIDED_CONTEXT"
+              ],
+              "accountRequired": [
+                "ANSWER_HISTORY",
+                "SAVE_RESULT_OR_KNOWLEDGE",
+                "METHOD_RESULT_PERSISTENCE",
+                "CASE_PERSISTENCE",
+                "REALITY_VERSION_HISTORY",
+                "JOURNEY_CONTINUITY"
+              ],
+              "featureGates": [
+                "ENTITLEMENT",
+                "PRIVACY",
+                "CONSENT",
+                "RETENTION"
+              ],
+              "shadowAccountCreated": false,
+              "guestHistoryPersisted": false
+            },
+            "methodBoundary": {
+              "askIsMethodExecution": false,
+              "birthDataTriggersMethod": false,
+              "executionPath": [
+                "READINESS",
+                "DISCLOSURE",
+                "CONSENT",
+                "MPA_ELIGIBILITY",
+                "EXECUTION",
+                "NORMALIZATION"
+              ],
+              "owner": "PERSONAL_RUNTIME"
+            },
+            "realityBoundary": {
+              "questionContextIsCanonicalRealityCase": false,
+              "simpleContextEphemeral": true,
+              "newCaseOnlyThroughRealityFlow": true
+            },
+            "navigationBoundary": {
+              "searchPurpose": "FIND_KNOWLEDGE",
+              "askPurpose": "UNDERSTAND_KNOWLEDGE",
+              "libraryPurpose": "BROWSE_DISCOVER_COMPARE_FOLLOW_READING_PATHS"
+            },
+            "governance": {
+              "groundedAnswerRuntimeConsumed": true,
+              "authoritativeAnswerGeneratedByCka": false,
+              "secondAnswerRuntimeCreated": false,
+              "secondRetrievalRuntimeCreated": false,
+              "persistentHistoryCreated": false,
+              "shadowAccountCreated": false,
+              "methodExecuted": false,
+              "realityJourneyActivated": false
+            }
+          },
+          "governance": {
+            "clientSurfaceOnly": true,
+            "upstreamAnswerRuntimeReused": true,
+            "secondAnswerRuntimeCreated": false,
+            "persistentHistoryCreated": false,
+            "shadowAccountCreated": false
+          }
+        }
+      },
+      "authoredExpectationInjected": false,
+      "structuredCandidatesInjected": false,
+      "newRoutingInstalled": false
+    },
+    {
+      "caseId": "3",
+      "question": "你凭什么说这是结构重组？",
+      "requestBookHint": "BOOK-7",
+      "httpStatus": 200,
+      "actualExistingAskResponse": {
+        "ok": true,
+        "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
+        "capability": "ASK_PHIOS",
+        "answerDepth": "STANDARD",
+        "answer": {
+          "schemaVersion": "PHI-OS-QUESTION-SCOPED-KNOWLEDGE-ANSWER-v1.0.0",
+          "answerId": "KAP-A-v1-02021b2d",
+          "question": "你凭什么说这是结构重组?",
+          "normalizedQuestion": "你凭什么说这是结构重组?",
+          "locale": "zh-Hans",
+          "answerMode": "KNOWLEDGE_ANSWER",
+          "authorityClass": "QUESTION_SCOPED_NON_AUTHORITATIVE_PROJECTION",
+          "coverageStatus": "INSUFFICIENT_COVERAGE",
+          "groundingBundleId": "KGB-v1-e4e5d5b2",
+          "knowledgeRefs": {
+            "primaryNodeCodes": [],
+            "supportingNodeCodes": [],
+            "relatedNodeCodes": [],
+            "manuscriptRefs": [],
+            "publishedRefs": []
+          },
+          "content": {
+            "directAnswer": "PHI OS 目前没有足够的受治理知识来可靠回答这个问题。",
+            "mechanism": [],
+            "whyItMatters": [],
+            "whatToObserve": [],
+            "boundaries": [
+              "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
+            ],
+            "unknowns": [
+              "当前没有可用于回答的受治理来源。"
+            ],
+            "relatedKnowledge": []
+          },
+          "generation": {
+            "generationMode": "DETERMINISTIC",
+            "generativeModelUsed": false,
+            "modelRef": null
+          },
+          "lifecycle": {
+            "createdAt": "2026-10-07T05:53:12.608Z",
+            "expiresAt": null,
+            "persistentCaseCreated": false
+          },
+          "governance": {
+            "publicationStatus": "NOT_PUBLICATION",
+            "canonicalAuthorityStatus": "NONE",
+            "realityReadingStatus": "NOT_REALITY_READING"
+          }
+        },
+        "sources": [],
+        "boundary": {
+          "schemaVersion": "PHI-OS-KAP-UNKNOWN-BOUNDARY-PROJECTION-v1.0.0",
+          "knowledgeStatus": "INSUFFICIENT",
+          "coverageStatus": "INSUFFICIENT_COVERAGE",
+          "knownSourceCount": 0,
+          "unknowns": [
+            "当前没有可用于回答的受治理来源。"
+          ],
+          "limits": [
+            "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
+          ],
+          "guidedReadingRoutingActivated": false,
+          "realityJourneyRoutingActivated": false
+        },
+        "coverage": {
+          "schemaVersion": "PHI-OS-KAP-COVERAGE-DECISION-v1.0.0",
+          "status": "INSUFFICIENT_COVERAGE",
+          "reasonCodes": [
+            "NO_GROUNDED_SOURCE_MATCH"
+          ],
+          "sourceCount": 0,
+          "publishedCoverage": "none",
+          "manuscriptResultCount": 0,
+          "answerCompositionEligible": false,
+          "unknownDisclosureRequired": true,
+          "realityJourneyRequired": false,
+          "guidedReadingRequired": false,
+          "aiRequired": false,
+          "createsAuthority": false
+        },
+        "ai": {
+          "eligibility": {
+            "schemaVersion": "PHI-OS-KAP-AI-ELIGIBILITY-DECISION-v1.0.0",
+            "status": "AI_NOT_REQUIRED",
+            "reasonCodes": [
+              "NO_COMPOSITION_BENEFIT_WITHOUT_GROUNDED_COVERAGE"
+            ],
+            "aiRequired": false,
+            "aiIsKnowledgeAuthority": false,
+            "providerInvocationAuthorizedByPhase3": false,
+            "deterministicFallbackRequired": true
+          },
+          "routing": {
+            "schemaVersion": "PHI-OS-KAP-AI-COST-ROUTING-v1.0.0",
+            "requestedTier": "TIER_0_DETERMINISTIC",
+            "activeTier": "TIER_0_DETERMINISTIC",
+            "providerInvoked": false,
+            "paidProviderRequired": false,
+            "fallbackReason": null,
+            "answerMayStillBeDelivered": true
+          },
+          "providerInvoked": false,
+          "generativeModelUsed": false
+        },
+        "production": {
+          "independentlyDeliverable": true,
+          "requiresMcd": false,
+          "requiresGuidedReading": false,
+          "requiresRealityJourney": false,
+          "deterministicFallbackAvailable": true
+        },
+        "governance": {
+          "knowledgeAuthorityUnchanged": true,
+          "publicationAuthorityUnchanged": true,
+          "realityReadingAuthorityUnchanged": true,
+          "persistentCaseCreated": false,
+          "upstreamGroundedAnswerConsumed": false,
+          "groundedEvidencePackConsumed": false,
+          "kirR2Applied": false
+        },
+        "kirR2": {
+          "status": "KIR_R2_BLOCKED_BY_RELEVANCE_GATE",
+          "applied": false
+        },
+        "grounding": {
+          "bundleId": "KGB-v1-e4e5d5b2",
+          "retrievalAuthority": "KSAR_KNOWLEDGE_ACCESS",
+          "sourceCount": 0,
+          "upstreamGroundedAnswerPresent": false,
+          "upstreamGroundedAnswerConsumed": false,
+          "groundedEvidencePackConsumed": false
+        },
+        "cka": {
+          "schemaVersion": "PHI-OS-CKA-RESPONSE-v1.0.0",
+          "entryContext": {
+            "entrySurface": "KNOWLEDGE_SEARCH",
+            "entryRoute": null,
+            "contextType": null,
+            "contextId": null,
+            "bookCode": "BOOK-7",
+            "partCode": null,
+            "articleCode": null,
+            "figureCode": null,
+            "realityCaseId": null,
+            "accountState": "GUEST",
+            "locale": "zh-Hans",
+            "mode": "GLOBAL",
+            "authorization": {
+              "permissionVerified": false,
+              "privacyVerified": false,
+              "entitlementVerified": false,
+              "accountVerified": false,
+              "realityCaseBound": false
+            },
+            "governance": {
+              "createsPersistentCase": false,
+              "createsShadowAccount": false,
+              "executesMethod": false,
+              "startsRealityJourney": false
+            }
+          },
+          "followUp": {
+            "currentQuestion": "你凭什么说这是结构重组?",
+            "contextQuestion": null,
+            "parentAnswerId": null,
+            "groundingBundleId": null,
+            "followUpDepth": 0,
+            "answerContext": {
+              "parentAnswerId": null
+            },
+            "knowledgeContext": {
+              "groundingBundleId": null
+            },
+            "temporaryOnly": true,
+            "historyPersisted": false,
+            "createsPersistentCase": false,
+            "accountState": "GUEST",
+            "boundary": {
+              "simpleAskAllowed": true,
+              "classification": "SIMPLE_ASK",
+              "automaticEscalation": false,
+              "persistentCaseCreated": false
+            },
+            "guestLimitReached": false
+          },
+          "clientAnswer": {
+            "schemaVersion": "PHI-OS-CKA-CLIENT-ANSWER-v1.0.0",
+            "question": "你凭什么说这是结构重组?",
+            "directAnswer": "PHI OS 目前没有足够的受治理知识来可靠回答这个问题。",
+            "whyThisMayHappen": [],
+            "whatToObserve": [],
+            "unknown": {
+              "state": "INSUFFICIENT_EVIDENCE",
+              "details": [
+                "当前没有可用于回答的受治理来源。",
+                "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
+              ]
+            },
+            "relatedKnowledgeCards": [],
+            "sourcesGrounding": [],
+            "entryContext": {
+              "entrySurface": "KNOWLEDGE_SEARCH",
+              "entryRoute": null,
+              "contextType": null,
+              "contextId": null,
+              "bookCode": "BOOK-7",
+              "partCode": null,
+              "articleCode": null,
+              "figureCode": null,
+              "realityCaseId": null,
+              "accountState": "GUEST",
+              "locale": "zh-Hans",
+              "mode": "GLOBAL",
+              "authorization": {
+                "permissionVerified": false,
+                "privacyVerified": false,
+                "entitlementVerified": false,
+                "accountVerified": false,
+                "realityCaseBound": false
+              },
+              "governance": {
+                "createsPersistentCase": false,
+                "createsShadowAccount": false,
+                "executesMethod": false,
+                "startsRealityJourney": false
+              }
+            },
+            "followUpDepth": 0,
+            "governance": {
+              "createsCanonicalAuthority": false,
+              "createsRealityReading": false,
+              "createsPersistentCase": false,
+              "internalNodeCodesProjectedToCards": false
+            }
+          },
+          "w5w17": {
+            "schemaVersion": "PHI-OS-CKA-W5-W17-CLIENT-ENVELOPE-v1.0.0",
+            "answerState": "NEEDS_CONTEXT",
+            "record": {
+              "answerId": "KAP-A-v1-02021b2d",
+              "questionId": "CKA-Q-v1-b663aaba",
+              "retrievalContext": {
+                "pipeline": [
+                  "QUESTION",
+                  "INTENT",
+                  "KNOWLEDGE_RETRIEVAL",
+                  "PUBLISHED_OR_AUTHORIZED_KNOWLEDGE",
+                  "GROUNDING",
+                  "ANSWER"
+                ],
+                "authorityPriority": [
+                  "CANONICAL_OR_PUBLISHED_PHI_OS",
+                  "REVIEWED_MANUSCRIPT_OR_KSAR",
+                  "GOVERNED_EXTERNAL_AUTHORITY",
+                  "AUTHORIZED_CLIENT_CONTEXT"
+                ],
+                "authorityGroups": [
+                  {
+                    "authorityClass": "CANONICAL_OR_PUBLISHED_PHI_OS",
+                    "sources": []
+                  },
+                  {
+                    "authorityClass": "REVIEWED_MANUSCRIPT_OR_KSAR",
+                    "sources": []
+                  },
+                  {
+                    "authorityClass": "GOVERNED_EXTERNAL_AUTHORITY",
+                    "sources": []
+                  },
+                  {
+                    "authorityClass": "AUTHORIZED_CLIENT_CONTEXT",
+                    "sources": []
+                  }
+                ],
+                "llmMemoryOnlyAnswerAllowed": false,
+                "authoritiesSilentlyCollapsed": false
+              },
+              "knowledgeRefs": {
+                "primaryNodeCodes": [],
+                "supportingNodeCodes": [],
+                "relatedNodeCodes": [],
+                "manuscriptRefs": [],
+                "publishedRefs": []
+              },
+              "groundingState": "INSUFFICIENT_GROUNDING",
+              "groundingBundleId": "KGB-v1-e4e5d5b2",
+              "unknownState": "UNKNOWN",
+              "locale": "zh-Hans"
+            },
+            "guidedContext": {
+              "schemaVersion": "PHI-OS-CKA-GUIDED-CONTEXT-v1.0.0",
+              "fields": {
+                "whatIsHappening": null,
+                "howLong": null,
+                "whoOrWhatIsInvolved": null,
+                "whatChanged": null,
+                "whatTried": null,
+                "whatMattersMostNow": null
+              },
+              "filledFields": [],
+              "classifications": [
+                "SIMPLE"
+              ],
+              "signals": {
+                "persistent": false,
+                "multiFactor": false,
+                "caseSpecific": false,
+                "realityDependent": false,
+                "personalized": false
+              },
+              "temporaryOnly": true,
+              "fullIcrCreated": false,
+              "classificationIsDiagnosis": false,
+              "canonicalRealityCreated": false
+            },
+            "knowledgeContext": {
+              "contextLabel": null,
+              "contextSummary": null,
+              "readingPath": null,
+              "relatedKnowledgeRef": null,
+              "temporaryOnly": true,
+              "authorityChanged": false,
+              "realityCaseCreated": false
+            },
+            "externalAuthority": {
+              "required": false,
+              "professionalJudgmentRequested": false,
+              "governedCurrentAuthorityAvailable": false,
+              "authoritySourceCount": 0,
+              "ckaMakesProfessionalJudgment": false,
+              "liveAuthorityInvented": false
+            },
+            "relatedKnowledgeCards": [],
+            "accountBoundary": {
+              "guestAllowed": [
+                "ASK",
+                "ANSWER",
+                "ONE_LIMITED_FOLLOW_UP",
+                "RELATED_KNOWLEDGE",
+                "TEMPORARY_GUIDED_CONTEXT"
+              ],
+              "accountRequired": [
+                "ANSWER_HISTORY",
+                "SAVE_RESULT_OR_KNOWLEDGE",
+                "METHOD_RESULT_PERSISTENCE",
+                "CASE_PERSISTENCE",
+                "REALITY_VERSION_HISTORY",
+                "JOURNEY_CONTINUITY"
+              ],
+              "featureGates": [
+                "ENTITLEMENT",
+                "PRIVACY",
+                "CONSENT",
+                "RETENTION"
+              ],
+              "shadowAccountCreated": false,
+              "guestHistoryPersisted": false
+            },
+            "methodBoundary": {
+              "askIsMethodExecution": false,
+              "birthDataTriggersMethod": false,
+              "executionPath": [
+                "READINESS",
+                "DISCLOSURE",
+                "CONSENT",
+                "MPA_ELIGIBILITY",
+                "EXECUTION",
+                "NORMALIZATION"
+              ],
+              "owner": "PERSONAL_RUNTIME"
+            },
+            "realityBoundary": {
+              "questionContextIsCanonicalRealityCase": false,
+              "simpleContextEphemeral": true,
+              "newCaseOnlyThroughRealityFlow": true
+            },
+            "navigationBoundary": {
+              "searchPurpose": "FIND_KNOWLEDGE",
+              "askPurpose": "UNDERSTAND_KNOWLEDGE",
+              "libraryPurpose": "BROWSE_DISCOVER_COMPARE_FOLLOW_READING_PATHS"
+            },
+            "governance": {
+              "groundedAnswerRuntimeConsumed": true,
+              "authoritativeAnswerGeneratedByCka": false,
+              "secondAnswerRuntimeCreated": false,
+              "secondRetrievalRuntimeCreated": false,
+              "persistentHistoryCreated": false,
+              "shadowAccountCreated": false,
+              "methodExecuted": false,
+              "realityJourneyActivated": false
+            }
+          },
+          "governance": {
+            "clientSurfaceOnly": true,
+            "upstreamAnswerRuntimeReused": true,
+            "secondAnswerRuntimeCreated": false,
+            "persistentHistoryCreated": false,
+            "shadowAccountCreated": false
+          }
+        }
+      },
+      "authoredExpectationInjected": false,
+      "structuredCandidatesInjected": false,
+      "newRoutingInstalled": false
+    },
+    {
+      "caseId": "4",
+      "question": "如果这些判断成立，下一步应该考虑什么？",
+      "requestBookHint": "BOOK-8",
+      "httpStatus": 200,
+      "actualExistingAskResponse": {
+        "ok": true,
+        "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
+        "capability": "ASK_PHIOS",
+        "answerDepth": "STANDARD",
+        "answer": {
+          "schemaVersion": "PHI-OS-QUESTION-SCOPED-KNOWLEDGE-ANSWER-v1.0.0",
+          "answerId": "KAP-A-v1-6e96a313",
+          "question": "如果这些判断成立,下一步应该考虑什么?",
+          "normalizedQuestion": "如果这些判断成立,下一步应该考虑什么?",
+          "locale": "zh-Hans",
+          "answerMode": "KNOWLEDGE_ANSWER",
+          "authorityClass": "QUESTION_SCOPED_NON_AUTHORITATIVE_PROJECTION",
+          "coverageStatus": "INSUFFICIENT_COVERAGE",
+          "groundingBundleId": "KGB-v1-0d8e48dc",
+          "knowledgeRefs": {
+            "primaryNodeCodes": [],
+            "supportingNodeCodes": [],
+            "relatedNodeCodes": [],
+            "manuscriptRefs": [],
+            "publishedRefs": []
+          },
+          "content": {
+            "directAnswer": "PHI OS 目前没有足够的受治理知识来可靠回答这个问题。",
+            "mechanism": [],
+            "whyItMatters": [],
+            "whatToObserve": [],
+            "boundaries": [
+              "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
+            ],
+            "unknowns": [
+              "当前没有可用于回答的受治理来源。"
+            ],
+            "relatedKnowledge": []
+          },
+          "generation": {
+            "generationMode": "DETERMINISTIC",
+            "generativeModelUsed": false,
+            "modelRef": null
+          },
+          "lifecycle": {
+            "createdAt": "2026-10-07T05:53:12.673Z",
+            "expiresAt": null,
+            "persistentCaseCreated": false
+          },
+          "governance": {
+            "publicationStatus": "NOT_PUBLICATION",
+            "canonicalAuthorityStatus": "NONE",
+            "realityReadingStatus": "NOT_REALITY_READING"
+          }
+        },
+        "sources": [],
+        "boundary": {
+          "schemaVersion": "PHI-OS-KAP-UNKNOWN-BOUNDARY-PROJECTION-v1.0.0",
+          "knowledgeStatus": "INSUFFICIENT",
+          "coverageStatus": "INSUFFICIENT_COVERAGE",
+          "knownSourceCount": 0,
+          "unknowns": [
+            "当前没有可用于回答的受治理来源。"
+          ],
+          "limits": [
+            "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
+          ],
+          "guidedReadingRoutingActivated": false,
+          "realityJourneyRoutingActivated": false
+        },
+        "coverage": {
+          "schemaVersion": "PHI-OS-KAP-COVERAGE-DECISION-v1.0.0",
+          "status": "INSUFFICIENT_COVERAGE",
+          "reasonCodes": [
+            "NO_GROUNDED_SOURCE_MATCH"
+          ],
+          "sourceCount": 0,
+          "publishedCoverage": "none",
+          "manuscriptResultCount": 0,
+          "answerCompositionEligible": false,
+          "unknownDisclosureRequired": true,
+          "realityJourneyRequired": false,
+          "guidedReadingRequired": false,
+          "aiRequired": false,
+          "createsAuthority": false
+        },
+        "ai": {
+          "eligibility": {
+            "schemaVersion": "PHI-OS-KAP-AI-ELIGIBILITY-DECISION-v1.0.0",
+            "status": "AI_NOT_REQUIRED",
+            "reasonCodes": [
+              "NO_COMPOSITION_BENEFIT_WITHOUT_GROUNDED_COVERAGE"
+            ],
+            "aiRequired": false,
+            "aiIsKnowledgeAuthority": false,
+            "providerInvocationAuthorizedByPhase3": false,
+            "deterministicFallbackRequired": true
+          },
+          "routing": {
+            "schemaVersion": "PHI-OS-KAP-AI-COST-ROUTING-v1.0.0",
+            "requestedTier": "TIER_0_DETERMINISTIC",
+            "activeTier": "TIER_0_DETERMINISTIC",
+            "providerInvoked": false,
+            "paidProviderRequired": false,
+            "fallbackReason": null,
+            "answerMayStillBeDelivered": true
+          },
+          "providerInvoked": false,
+          "generativeModelUsed": false
+        },
+        "production": {
+          "independentlyDeliverable": true,
+          "requiresMcd": false,
+          "requiresGuidedReading": false,
+          "requiresRealityJourney": false,
+          "deterministicFallbackAvailable": true
+        },
+        "governance": {
+          "knowledgeAuthorityUnchanged": true,
+          "publicationAuthorityUnchanged": true,
+          "realityReadingAuthorityUnchanged": true,
+          "persistentCaseCreated": false,
+          "upstreamGroundedAnswerConsumed": false,
+          "groundedEvidencePackConsumed": false,
+          "kirR2Applied": false
+        },
+        "kirR2": {
+          "status": "KIR_R2_BLOCKED_BY_RELEVANCE_GATE",
+          "applied": false
+        },
+        "grounding": {
+          "bundleId": "KGB-v1-0d8e48dc",
+          "retrievalAuthority": "KSAR_KNOWLEDGE_ACCESS",
+          "sourceCount": 0,
+          "upstreamGroundedAnswerPresent": false,
+          "upstreamGroundedAnswerConsumed": false,
+          "groundedEvidencePackConsumed": false
+        },
+        "cka": {
+          "schemaVersion": "PHI-OS-CKA-RESPONSE-v1.0.0",
+          "entryContext": {
+            "entrySurface": "KNOWLEDGE_SEARCH",
+            "entryRoute": null,
+            "contextType": null,
+            "contextId": null,
+            "bookCode": "BOOK-8",
+            "partCode": null,
+            "articleCode": null,
+            "figureCode": null,
+            "realityCaseId": null,
+            "accountState": "GUEST",
+            "locale": "zh-Hans",
+            "mode": "GLOBAL",
+            "authorization": {
+              "permissionVerified": false,
+              "privacyVerified": false,
+              "entitlementVerified": false,
+              "accountVerified": false,
+              "realityCaseBound": false
+            },
+            "governance": {
+              "createsPersistentCase": false,
+              "createsShadowAccount": false,
+              "executesMethod": false,
+              "startsRealityJourney": false
+            }
+          },
+          "followUp": {
+            "currentQuestion": "如果这些判断成立,下一步应该考虑什么?",
+            "contextQuestion": null,
+            "parentAnswerId": null,
+            "groundingBundleId": null,
+            "followUpDepth": 0,
+            "answerContext": {
+              "parentAnswerId": null
+            },
+            "knowledgeContext": {
+              "groundingBundleId": null
+            },
+            "temporaryOnly": true,
+            "historyPersisted": false,
+            "createsPersistentCase": false,
+            "accountState": "GUEST",
+            "boundary": {
+              "simpleAskAllowed": true,
+              "classification": "SIMPLE_ASK",
+              "automaticEscalation": false,
+              "persistentCaseCreated": false
+            },
+            "guestLimitReached": false
+          },
+          "clientAnswer": {
+            "schemaVersion": "PHI-OS-CKA-CLIENT-ANSWER-v1.0.0",
+            "question": "如果这些判断成立,下一步应该考虑什么?",
+            "directAnswer": "PHI OS 目前没有足够的受治理知识来可靠回答这个问题。",
+            "whyThisMayHappen": [],
+            "whatToObserve": [],
+            "unknown": {
+              "state": "INSUFFICIENT_EVIDENCE",
+              "details": [
+                "当前没有可用于回答的受治理来源。",
+                "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
+              ]
+            },
+            "relatedKnowledgeCards": [],
+            "sourcesGrounding": [],
+            "entryContext": {
+              "entrySurface": "KNOWLEDGE_SEARCH",
+              "entryRoute": null,
+              "contextType": null,
+              "contextId": null,
+              "bookCode": "BOOK-8",
+              "partCode": null,
+              "articleCode": null,
+              "figureCode": null,
+              "realityCaseId": null,
+              "accountState": "GUEST",
+              "locale": "zh-Hans",
+              "mode": "GLOBAL",
+              "authorization": {
+                "permissionVerified": false,
+                "privacyVerified": false,
+                "entitlementVerified": false,
+                "accountVerified": false,
+                "realityCaseBound": false
+              },
+              "governance": {
+                "createsPersistentCase": false,
+                "createsShadowAccount": false,
+                "executesMethod": false,
+                "startsRealityJourney": false
+              }
+            },
+            "followUpDepth": 0,
+            "governance": {
+              "createsCanonicalAuthority": false,
+              "createsRealityReading": false,
+              "createsPersistentCase": false,
+              "internalNodeCodesProjectedToCards": false
+            }
+          },
+          "w5w17": {
+            "schemaVersion": "PHI-OS-CKA-W5-W17-CLIENT-ENVELOPE-v1.0.0",
+            "answerState": "NEEDS_CONTEXT",
+            "record": {
+              "answerId": "KAP-A-v1-6e96a313",
+              "questionId": "CKA-Q-v1-f2908d48",
+              "retrievalContext": {
+                "pipeline": [
+                  "QUESTION",
+                  "INTENT",
+                  "KNOWLEDGE_RETRIEVAL",
+                  "PUBLISHED_OR_AUTHORIZED_KNOWLEDGE",
+                  "GROUNDING",
+                  "ANSWER"
+                ],
+                "authorityPriority": [
+                  "CANONICAL_OR_PUBLISHED_PHI_OS",
+                  "REVIEWED_MANUSCRIPT_OR_KSAR",
+                  "GOVERNED_EXTERNAL_AUTHORITY",
+                  "AUTHORIZED_CLIENT_CONTEXT"
+                ],
+                "authorityGroups": [
+                  {
+                    "authorityClass": "CANONICAL_OR_PUBLISHED_PHI_OS",
+                    "sources": []
+                  },
+                  {
+                    "authorityClass": "REVIEWED_MANUSCRIPT_OR_KSAR",
+                    "sources": []
+                  },
+                  {
+                    "authorityClass": "GOVERNED_EXTERNAL_AUTHORITY",
+                    "sources": []
+                  },
+                  {
+                    "authorityClass": "AUTHORIZED_CLIENT_CONTEXT",
+                    "sources": []
+                  }
+                ],
+                "llmMemoryOnlyAnswerAllowed": false,
+                "authoritiesSilentlyCollapsed": false
+              },
+              "knowledgeRefs": {
+                "primaryNodeCodes": [],
+                "supportingNodeCodes": [],
+                "relatedNodeCodes": [],
+                "manuscriptRefs": [],
+                "publishedRefs": []
+              },
+              "groundingState": "INSUFFICIENT_GROUNDING",
+              "groundingBundleId": "KGB-v1-0d8e48dc",
+              "unknownState": "UNKNOWN",
+              "locale": "zh-Hans"
+            },
+            "guidedContext": {
+              "schemaVersion": "PHI-OS-CKA-GUIDED-CONTEXT-v1.0.0",
+              "fields": {
+                "whatIsHappening": null,
+                "howLong": null,
+                "whoOrWhatIsInvolved": null,
+                "whatChanged": null,
+                "whatTried": null,
+                "whatMattersMostNow": null
+              },
+              "filledFields": [],
+              "classifications": [
+                "SIMPLE"
+              ],
+              "signals": {
+                "persistent": false,
+                "multiFactor": false,
+                "caseSpecific": false,
+                "realityDependent": false,
+                "personalized": false
+              },
+              "temporaryOnly": true,
+              "fullIcrCreated": false,
+              "classificationIsDiagnosis": false,
+              "canonicalRealityCreated": false
+            },
+            "knowledgeContext": {
+              "contextLabel": null,
+              "contextSummary": null,
+              "readingPath": null,
+              "relatedKnowledgeRef": null,
+              "temporaryOnly": true,
+              "authorityChanged": false,
+              "realityCaseCreated": false
+            },
+            "externalAuthority": {
+              "required": false,
+              "professionalJudgmentRequested": false,
+              "governedCurrentAuthorityAvailable": false,
+              "authoritySourceCount": 0,
+              "ckaMakesProfessionalJudgment": false,
+              "liveAuthorityInvented": false
+            },
+            "relatedKnowledgeCards": [],
+            "accountBoundary": {
+              "guestAllowed": [
+                "ASK",
+                "ANSWER",
+                "ONE_LIMITED_FOLLOW_UP",
+                "RELATED_KNOWLEDGE",
+                "TEMPORARY_GUIDED_CONTEXT"
+              ],
+              "accountRequired": [
+                "ANSWER_HISTORY",
+                "SAVE_RESULT_OR_KNOWLEDGE",
+                "METHOD_RESULT_PERSISTENCE",
+                "CASE_PERSISTENCE",
+                "REALITY_VERSION_HISTORY",
+                "JOURNEY_CONTINUITY"
+              ],
+              "featureGates": [
+                "ENTITLEMENT",
+                "PRIVACY",
+                "CONSENT",
+                "RETENTION"
+              ],
+              "shadowAccountCreated": false,
+              "guestHistoryPersisted": false
+            },
+            "methodBoundary": {
+              "askIsMethodExecution": false,
+              "birthDataTriggersMethod": false,
+              "executionPath": [
+                "READINESS",
+                "DISCLOSURE",
+                "CONSENT",
+                "MPA_ELIGIBILITY",
+                "EXECUTION",
+                "NORMALIZATION"
+              ],
+              "owner": "PERSONAL_RUNTIME"
+            },
+            "realityBoundary": {
+              "questionContextIsCanonicalRealityCase": false,
+              "simpleContextEphemeral": true,
+              "newCaseOnlyThroughRealityFlow": true
+            },
+            "navigationBoundary": {
+              "searchPurpose": "FIND_KNOWLEDGE",
+              "askPurpose": "UNDERSTAND_KNOWLEDGE",
+              "libraryPurpose": "BROWSE_DISCOVER_COMPARE_FOLLOW_READING_PATHS"
+            },
+            "governance": {
+              "groundedAnswerRuntimeConsumed": true,
+              "authoritativeAnswerGeneratedByCka": false,
+              "secondAnswerRuntimeCreated": false,
+              "secondRetrievalRuntimeCreated": false,
+              "persistentHistoryCreated": false,
+              "shadowAccountCreated": false,
+              "methodExecuted": false,
+              "realityJourneyActivated": false
+            }
+          },
+          "governance": {
+            "clientSurfaceOnly": true,
+            "upstreamAnswerRuntimeReused": true,
+            "secondAnswerRuntimeCreated": false,
+            "persistentHistoryCreated": false,
+            "shadowAccountCreated": false
+          }
+        }
+      },
+      "authoredExpectationInjected": false,
+      "structuredCandidatesInjected": false,
+      "newRoutingInstalled": false
+    },
+    {
+      "caseId": "5",
+      "question": "一个现实结束以后，为什么下一现实不是从零开始？",
+      "requestBookHint": "BOOK-8",
+      "httpStatus": 200,
+      "actualExistingAskResponse": {
+        "ok": true,
+        "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
+        "capability": "ASK_PHIOS",
+        "answerDepth": "STANDARD",
+        "answer": {
+          "schemaVersion": "PHI-OS-QUESTION-SCOPED-KNOWLEDGE-ANSWER-v1.0.0",
+          "answerId": "KAP-A-v1-a9757d1c",
+          "question": "一个现实结束以后,为什么下一现实不是从零开始?",
+          "normalizedQuestion": "一个现实结束以后,为什么下一现实不是从零开始?",
+          "locale": "zh-Hans",
+          "answerMode": "KNOWLEDGE_ANSWER",
+          "authorityClass": "QUESTION_SCOPED_NON_AUTHORITATIVE_PROJECTION",
+          "coverageStatus": "INSUFFICIENT_COVERAGE",
+          "groundingBundleId": "KGB-v1-b6be84ea",
+          "knowledgeRefs": {
+            "primaryNodeCodes": [],
+            "supportingNodeCodes": [],
+            "relatedNodeCodes": [],
+            "manuscriptRefs": [],
+            "publishedRefs": []
+          },
+          "content": {
+            "directAnswer": "PHI OS 目前没有足够的受治理知识来可靠回答这个问题。",
+            "mechanism": [],
+            "whyItMatters": [],
+            "whatToObserve": [],
+            "boundaries": [
+              "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
+            ],
+            "unknowns": [
+              "当前没有可用于回答的受治理来源。"
+            ],
+            "relatedKnowledge": []
+          },
+          "generation": {
+            "generationMode": "DETERMINISTIC",
+            "generativeModelUsed": false,
+            "modelRef": null
+          },
+          "lifecycle": {
+            "createdAt": "2026-10-07T05:53:12.734Z",
+            "expiresAt": null,
+            "persistentCaseCreated": false
+          },
+          "governance": {
+            "publicationStatus": "NOT_PUBLICATION",
+            "canonicalAuthorityStatus": "NONE",
+            "realityReadingStatus": "NOT_REALITY_READING"
+          }
+        },
+        "sources": [],
+        "boundary": {
+          "schemaVersion": "PHI-OS-KAP-UNKNOWN-BOUNDARY-PROJECTION-v1.0.0",
+          "knowledgeStatus": "INSUFFICIENT",
+          "coverageStatus": "INSUFFICIENT_COVERAGE",
+          "knownSourceCount": 0,
+          "unknowns": [
+            "当前没有可用于回答的受治理来源。"
+          ],
+          "limits": [
+            "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
+          ],
+          "guidedReadingRoutingActivated": false,
+          "realityJourneyRoutingActivated": false
+        },
+        "coverage": {
+          "schemaVersion": "PHI-OS-KAP-COVERAGE-DECISION-v1.0.0",
+          "status": "INSUFFICIENT_COVERAGE",
+          "reasonCodes": [
+            "NO_GROUNDED_SOURCE_MATCH"
+          ],
+          "sourceCount": 0,
+          "publishedCoverage": "none",
+          "manuscriptResultCount": 0,
+          "answerCompositionEligible": false,
+          "unknownDisclosureRequired": true,
+          "realityJourneyRequired": false,
+          "guidedReadingRequired": false,
+          "aiRequired": false,
+          "createsAuthority": false
+        },
+        "ai": {
+          "eligibility": {
+            "schemaVersion": "PHI-OS-KAP-AI-ELIGIBILITY-DECISION-v1.0.0",
+            "status": "AI_NOT_REQUIRED",
+            "reasonCodes": [
+              "NO_COMPOSITION_BENEFIT_WITHOUT_GROUNDED_COVERAGE"
+            ],
+            "aiRequired": false,
+            "aiIsKnowledgeAuthority": false,
+            "providerInvocationAuthorizedByPhase3": false,
+            "deterministicFallbackRequired": true
+          },
+          "routing": {
+            "schemaVersion": "PHI-OS-KAP-AI-COST-ROUTING-v1.0.0",
+            "requestedTier": "TIER_0_DETERMINISTIC",
+            "activeTier": "TIER_0_DETERMINISTIC",
+            "providerInvoked": false,
+            "paidProviderRequired": false,
+            "fallbackReason": null,
+            "answerMayStillBeDelivered": true
+          },
+          "providerInvoked": false,
+          "generativeModelUsed": false
+        },
+        "production": {
+          "independentlyDeliverable": true,
+          "requiresMcd": false,
+          "requiresGuidedReading": false,
+          "requiresRealityJourney": false,
+          "deterministicFallbackAvailable": true
+        },
+        "governance": {
+          "knowledgeAuthorityUnchanged": true,
+          "publicationAuthorityUnchanged": true,
+          "realityReadingAuthorityUnchanged": true,
+          "persistentCaseCreated": false,
+          "upstreamGroundedAnswerConsumed": false,
+          "groundedEvidencePackConsumed": false,
+          "kirR2Applied": false
+        },
+        "kirR2": {
+          "status": "KIR_R2_BLOCKED_BY_RELEVANCE_GATE",
+          "applied": false
+        },
+        "grounding": {
+          "bundleId": "KGB-v1-b6be84ea",
+          "retrievalAuthority": "KSAR_KNOWLEDGE_ACCESS",
+          "sourceCount": 0,
+          "upstreamGroundedAnswerPresent": false,
+          "upstreamGroundedAnswerConsumed": false,
+          "groundedEvidencePackConsumed": false
+        },
+        "cka": {
+          "schemaVersion": "PHI-OS-CKA-RESPONSE-v1.0.0",
+          "entryContext": {
+            "entrySurface": "KNOWLEDGE_SEARCH",
+            "entryRoute": null,
+            "contextType": null,
+            "contextId": null,
+            "bookCode": "BOOK-8",
+            "partCode": null,
+            "articleCode": null,
+            "figureCode": null,
+            "realityCaseId": null,
+            "accountState": "GUEST",
+            "locale": "zh-Hans",
+            "mode": "GLOBAL",
+            "authorization": {
+              "permissionVerified": false,
+              "privacyVerified": false,
+              "entitlementVerified": false,
+              "accountVerified": false,
+              "realityCaseBound": false
+            },
+            "governance": {
+              "createsPersistentCase": false,
+              "createsShadowAccount": false,
+              "executesMethod": false,
+              "startsRealityJourney": false
+            }
+          },
+          "followUp": {
+            "currentQuestion": "一个现实结束以后,为什么下一现实不是从零开始?",
+            "contextQuestion": null,
+            "parentAnswerId": null,
+            "groundingBundleId": null,
+            "followUpDepth": 0,
+            "answerContext": {
+              "parentAnswerId": null
+            },
+            "knowledgeContext": {
+              "groundingBundleId": null
+            },
+            "temporaryOnly": true,
+            "historyPersisted": false,
+            "createsPersistentCase": false,
+            "accountState": "GUEST",
+            "boundary": {
+              "simpleAskAllowed": true,
+              "classification": "SIMPLE_ASK",
+              "automaticEscalation": false,
+              "persistentCaseCreated": false
+            },
+            "guestLimitReached": false
+          },
+          "clientAnswer": {
+            "schemaVersion": "PHI-OS-CKA-CLIENT-ANSWER-v1.0.0",
+            "question": "一个现实结束以后,为什么下一现实不是从零开始?",
+            "directAnswer": "PHI OS 目前没有足够的受治理知识来可靠回答这个问题。",
+            "whyThisMayHappen": [],
+            "whatToObserve": [],
+            "unknown": {
+              "state": "INSUFFICIENT_EVIDENCE",
+              "details": [
+                "当前没有可用于回答的受治理来源。",
+                "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
+              ]
+            },
+            "relatedKnowledgeCards": [],
+            "sourcesGrounding": [],
+            "entryContext": {
+              "entrySurface": "KNOWLEDGE_SEARCH",
+              "entryRoute": null,
+              "contextType": null,
+              "contextId": null,
+              "bookCode": "BOOK-8",
+              "partCode": null,
+              "articleCode": null,
+              "figureCode": null,
+              "realityCaseId": null,
+              "accountState": "GUEST",
+              "locale": "zh-Hans",
+              "mode": "GLOBAL",
+              "authorization": {
+                "permissionVerified": false,
+                "privacyVerified": false,
+                "entitlementVerified": false,
+                "accountVerified": false,
+                "realityCaseBound": false
+              },
+              "governance": {
+                "createsPersistentCase": false,
+                "createsShadowAccount": false,
+                "executesMethod": false,
+                "startsRealityJourney": false
+              }
+            },
+            "followUpDepth": 0,
+            "governance": {
+              "createsCanonicalAuthority": false,
+              "createsRealityReading": false,
+              "createsPersistentCase": false,
+              "internalNodeCodesProjectedToCards": false
+            }
+          },
+          "w5w17": {
+            "schemaVersion": "PHI-OS-CKA-W5-W17-CLIENT-ENVELOPE-v1.0.0",
+            "answerState": "NEEDS_CONTEXT",
+            "record": {
+              "answerId": "KAP-A-v1-a9757d1c",
+              "questionId": "CKA-Q-v1-b140a1d2",
+              "retrievalContext": {
+                "pipeline": [
+                  "QUESTION",
+                  "INTENT",
+                  "KNOWLEDGE_RETRIEVAL",
+                  "PUBLISHED_OR_AUTHORIZED_KNOWLEDGE",
+                  "GROUNDING",
+                  "ANSWER"
+                ],
+                "authorityPriority": [
+                  "CANONICAL_OR_PUBLISHED_PHI_OS",
+                  "REVIEWED_MANUSCRIPT_OR_KSAR",
+                  "GOVERNED_EXTERNAL_AUTHORITY",
+                  "AUTHORIZED_CLIENT_CONTEXT"
+                ],
+                "authorityGroups": [
+                  {
+                    "authorityClass": "CANONICAL_OR_PUBLISHED_PHI_OS",
+                    "sources": []
+                  },
+                  {
+                    "authorityClass": "REVIEWED_MANUSCRIPT_OR_KSAR",
+                    "sources": []
+                  },
+                  {
+                    "authorityClass": "GOVERNED_EXTERNAL_AUTHORITY",
+                    "sources": []
+                  },
+                  {
+                    "authorityClass": "AUTHORIZED_CLIENT_CONTEXT",
+                    "sources": []
+                  }
+                ],
+                "llmMemoryOnlyAnswerAllowed": false,
+                "authoritiesSilentlyCollapsed": false
+              },
+              "knowledgeRefs": {
+                "primaryNodeCodes": [],
+                "supportingNodeCodes": [],
+                "relatedNodeCodes": [],
+                "manuscriptRefs": [],
+                "publishedRefs": []
+              },
+              "groundingState": "INSUFFICIENT_GROUNDING",
+              "groundingBundleId": "KGB-v1-b6be84ea",
+              "unknownState": "UNKNOWN",
+              "locale": "zh-Hans"
+            },
+            "guidedContext": {
+              "schemaVersion": "PHI-OS-CKA-GUIDED-CONTEXT-v1.0.0",
+              "fields": {
+                "whatIsHappening": null,
+                "howLong": null,
+                "whoOrWhatIsInvolved": null,
+                "whatChanged": null,
+                "whatTried": null,
+                "whatMattersMostNow": null
+              },
+              "filledFields": [],
+              "classifications": [
+                "SIMPLE"
+              ],
+              "signals": {
+                "persistent": false,
+                "multiFactor": false,
+                "caseSpecific": false,
+                "realityDependent": false,
+                "personalized": false
+              },
+              "temporaryOnly": true,
+              "fullIcrCreated": false,
+              "classificationIsDiagnosis": false,
+              "canonicalRealityCreated": false
+            },
+            "knowledgeContext": {
+              "contextLabel": null,
+              "contextSummary": null,
+              "readingPath": null,
+              "relatedKnowledgeRef": null,
+              "temporaryOnly": true,
+              "authorityChanged": false,
+              "realityCaseCreated": false
+            },
+            "externalAuthority": {
+              "required": false,
+              "professionalJudgmentRequested": false,
+              "governedCurrentAuthorityAvailable": false,
+              "authoritySourceCount": 0,
+              "ckaMakesProfessionalJudgment": false,
+              "liveAuthorityInvented": false
+            },
+            "relatedKnowledgeCards": [],
+            "accountBoundary": {
+              "guestAllowed": [
+                "ASK",
+                "ANSWER",
+                "ONE_LIMITED_FOLLOW_UP",
+                "RELATED_KNOWLEDGE",
+                "TEMPORARY_GUIDED_CONTEXT"
+              ],
+              "accountRequired": [
+                "ANSWER_HISTORY",
+                "SAVE_RESULT_OR_KNOWLEDGE",
+                "METHOD_RESULT_PERSISTENCE",
+                "CASE_PERSISTENCE",
+                "REALITY_VERSION_HISTORY",
+                "JOURNEY_CONTINUITY"
+              ],
+              "featureGates": [
+                "ENTITLEMENT",
+                "PRIVACY",
+                "CONSENT",
+                "RETENTION"
+              ],
+              "shadowAccountCreated": false,
+              "guestHistoryPersisted": false
+            },
+            "methodBoundary": {
+              "askIsMethodExecution": false,
+              "birthDataTriggersMethod": false,
+              "executionPath": [
+                "READINESS",
+                "DISCLOSURE",
+                "CONSENT",
+                "MPA_ELIGIBILITY",
+                "EXECUTION",
+                "NORMALIZATION"
+              ],
+              "owner": "PERSONAL_RUNTIME"
+            },
+            "realityBoundary": {
+              "questionContextIsCanonicalRealityCase": false,
+              "simpleContextEphemeral": true,
+              "newCaseOnlyThroughRealityFlow": true
+            },
+            "navigationBoundary": {
+              "searchPurpose": "FIND_KNOWLEDGE",
+              "askPurpose": "UNDERSTAND_KNOWLEDGE",
+              "libraryPurpose": "BROWSE_DISCOVER_COMPARE_FOLLOW_READING_PATHS"
+            },
+            "governance": {
+              "groundedAnswerRuntimeConsumed": true,
+              "authoritativeAnswerGeneratedByCka": false,
+              "secondAnswerRuntimeCreated": false,
+              "secondRetrievalRuntimeCreated": false,
+              "persistentHistoryCreated": false,
+              "shadowAccountCreated": false,
+              "methodExecuted": false,
+              "realityJourneyActivated": false
+            }
+          },
+          "governance": {
+            "clientSurfaceOnly": true,
+            "upstreamAnswerRuntimeReused": true,
+            "secondAnswerRuntimeCreated": false,
+            "persistentHistoryCreated": false,
+            "shadowAccountCreated": false
+          }
+        }
+      },
+      "authoredExpectationInjected": false,
+      "structuredCandidatesInjected": false,
+      "newRoutingInstalled": false
+    }
+  ],
+  "actualAnswersAreNotAuthoredExpectations": true,
+  "actualAskIntegrationStatus": "PARTIAL_KNOWN_EXISTING_SOURCE_GAP",
+  "successfulAskRequests": 4,
+  "missingAssets": [
+    "content/knowledge/public/successors/book5-publication-v1/source-readings/book5-article-003.json"
+  ],
+  "liveRoutingInstalled": false,
+  "providerRequests": 0,
+  "privateReads": 0,
+  "persistentWrites": 0,
+  "withheldReadAttempts": 0,
+  "newRuntimeOwners": 0,
+  "newRoutes": 0,
+  "newEntitlements": 0,
+  "commerceChanges": 0,
+  "bookVIIIWithheldObjects": 39,
+  "A_BATCH_6": "NOT_RUN",
+  "globalPassClaim": false
+}

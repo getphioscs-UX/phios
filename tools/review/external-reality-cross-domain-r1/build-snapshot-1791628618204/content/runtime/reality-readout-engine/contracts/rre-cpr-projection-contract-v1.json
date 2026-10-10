@@ -1,0 +1,23 @@
+{
+  "contractCode": "PHI-OS-RRE-W14-CPR-PROJECTION-v1",
+  "contractVersion": "1.0.0",
+  "work": "RRE-W14",
+  "runtimeCode": "RRE",
+  "status": "canonical_handoff_contract",
+  "pipeline": [
+    "RRE_CANONICAL_READOUT",
+    "CPR",
+    "WPR_RR_OR_PROFESSIONAL_WORKSPACE"
+  ],
+  "rules": {
+    "rreMayWriteCprRegistry": false,
+    "rreMayChooseVisualDesign": false,
+    "rreMayActivateSurface": false,
+    "rreMayCreateReport": false,
+    "rreMayCreateProfessionalJudgment": false,
+    "sourceReadoutDigestRequired": true,
+    "cprRetainsPresentationAuthority": true,
+    "customerReportTargetMustPreserveRrReleaseGate": true
+  },
+  "consumerAuthorityReference": "content/governance/reality-data-governance/extensions/rre-readout/registries/rre-readout-data-contract-successor-v1.json"
+}

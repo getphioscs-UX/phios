@@ -1,0 +1,40 @@
+{
+  "contractCode": "PHI-OS-WPR-W26-PRIVACY-SECURITY-PRODUCTION-v1",
+  "contractVersion": "1.0.0",
+  "work": "WPR-W26",
+  "baselineCommit": "d150a741231abe608a0d994e9e5787e6c71cfc3d",
+  "status": "ACTIVE_FAIL_CLOSED_RESPONSE_BOUNDARY",
+  "upstreamAuthorities": [
+    "RDG",
+    "PWS",
+    "PR",
+    "RR"
+  ],
+  "securityHeaders": {
+    "nosniff": true,
+    "strictReferrer": true,
+    "cameraMicrophoneGeolocationDenied": true,
+    "frameAncestorsNone": true,
+    "objectSrcNone": true,
+    "formActionSelf": true
+  },
+  "cspReconciliation": {
+    "googleFontsStylesAllowed": "https://fonts.googleapis.com",
+    "googleFontsFilesAllowed": "https://fonts.gstatic.com",
+    "r2PublicImagesAllowed": "https://*.r2.dev",
+    "getphiosAssetSubdomainsAllowed": "https://*.getphios.com",
+    "arbitraryHttpsImagesAllowed": false
+  },
+  "privateResponsePolicy": {
+    "cacheControl": "private, no-store",
+    "robots": "noindex, nofollow, noarchive"
+  },
+  "rules": {
+    "robotsIsNotAuthorization": true,
+    "headersDoNotGrantDataAccess": true,
+    "wprDoesNotCreateConsent": true,
+    "wprDoesNotChangeRetention": true,
+    "wprDoesNotExposePrivatePayload": true,
+    "externalAssetOriginMustRemainAllowlisted": true
+  }
+}

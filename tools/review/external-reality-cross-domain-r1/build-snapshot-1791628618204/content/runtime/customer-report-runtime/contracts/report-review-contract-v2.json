@@ -1,0 +1,29 @@
+{
+  "contractCode": "PHI-OS-RR-W5-REPORT-REVIEW-v2",
+  "contractVersion": "2.0.0",
+  "runtimeCode": "RR",
+  "work": "RR-W5",
+  "status": "canonical",
+  "checks": [
+    "completeness",
+    "sourceValidity",
+    "professionalRequirements",
+    "privacy",
+    "locale",
+    "lowConfidenceHandling",
+    "metricAvailabilityHandling"
+  ],
+  "states": [
+    "REVIEW_PASSED",
+    "REVIEW_BLOCKED"
+  ],
+  "rules": {
+    "reviewDoesNotCreateProfessionalJudgment": true,
+    "missingRequiredSectionBlocks": true,
+    "invalidSourceBlocks": true,
+    "privacyViolationBlocks": true,
+    "unsupportedLocaleBlocks": true,
+    "lowConfidenceMayPassOnlyWhenExplicit": true,
+    "optionalMetricUnavailableMayPassWithoutFabrication": true
+  }
+}

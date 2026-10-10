@@ -1,0 +1,10 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const read=p=>JSON.parse(fs.readFileSync(p));
+const root='content/embodied-configuration/v4-1/';
+const audit=read(root+'ecr-human-runtime-v4-1-current-reconciliation-v1.json'),freeze=read(root+'ecr-human-runtime-v4-1-authority-freeze-v1.json');
+assert.equal(audit.hardGate,'AUDIT_COMPLETE');assert.equal(freeze.methodId,'ECR');
+assert.deepEqual(freeze.layers,['K0','K1','K2A','K2B','K2C','K3','K4']);
+assert.equal(freeze.feedbackLoops.length,2);
+for(const key of ['secondBirthAuthorityCreated','secondEphemerisAuthorityCreated','secondGateWheelCreated','secondCurrentRealityTruthCreated','rendererCalculationAuthorityCreated','sourceTextPromotedToCalculationRule','scientificCausationClaimed','productionAdmitted'])assert.equal(freeze[key],false,key);
+assert(read('content/embodied-configuration/v4/acceptance/ecr-v4-w0-baseline-audit-v1.json').baselineCheckResults.every(r=>r.status==='PASS'));
+console.log('PASS V4.1 W1: audited ownership and nonparallel authority freeze.');

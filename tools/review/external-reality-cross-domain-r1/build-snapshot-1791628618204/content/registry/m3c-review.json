@@ -1,0 +1,69 @@
+{
+  "id": "m3c-review",
+  "version": "1.0.0-w7",
+  "status": "w7-review-ready",
+  "baseline": {
+    "branch": "main",
+    "commit": "21531bb7527b34055ec4c20e852e463dae740d1c",
+    "runtimeContractsFrozen": true,
+    "reviewSchemaId": "phi-os.review.v1"
+  },
+  "scope": {
+    "page": "reality-review.html",
+    "route": "/reality-review.html",
+    "stylesheet": "assets/css/review-memory-continuity.css",
+    "pageController": "assets/js/review.js",
+    "customerProjection": "assets/js/modules/review-customer-projection.js",
+    "visualRenderer": "assets/js/modules/review-visual-alignment.js",
+    "bilingual": [
+      "en",
+      "zh-Hans"
+    ]
+  },
+  "customerViews": [
+    "review-summary",
+    "change-since-reading",
+    "action-result",
+    "next-decision"
+  ],
+  "decisionMapping": {
+    "continue": [
+      "continue_observation",
+      "continue_selected_path"
+    ],
+    "revise": [
+      "return_to_reading",
+      "choose_another_path",
+      "start_new_entry",
+      "professional_review"
+    ],
+    "close": [
+      "remain_open"
+    ]
+  },
+  "projectionGuardrails": {
+    "readOnlyProjection": true,
+    "storageAccess": false,
+    "apiAccess": false,
+    "outcomeSelectionAllowed": false,
+    "customerReportAsFactAllowed": false
+  },
+  "frozenArtifacts": {
+    "functions/runtime/review/review-contract.js": "221e4e49ce112091f23d228d09c3e4047dd30e38cfb92a79bdd5dac71538229c",
+    "functions/runtime/review/navigation-review-builder.js": "7df24d9a523478a309efda03bd397b0171b8c2e2e0eb9e5a6efa4e7579f15529",
+    "functions/runtime/memory/runtime-memory-contract.js": "6b68f70247eb746b90d09309372d29248cea4c3810a00d429b18b40fdb9f0f19",
+    "functions/runtime/memory/review-memory-builder.js": "3bae692664d38cd7a4cdc9fa1659baca474c67bd1dd0745d8686892ac72d37d1",
+    "content/registry/runtime-contracts.json": "32a630972e4978725e7efe1a0bdc58d96fb7a6bb1145f5c5b7f308d9909745d2",
+    "wrangler.jsonc": "fd7d7e06f14509bc13216f3999bb4e21efb2cdcdb6efd14f7724153b15808ae0"
+  },
+  "acceptance": {
+    "reviewSummaryVisible": true,
+    "changeSinceReadingVisible": true,
+    "actionResultVisible": true,
+    "continueReviseCloseVisible": true,
+    "automaticOutcomeSelectionAllowed": false,
+    "readingOverwriteAllowed": false,
+    "navigationOverwriteAllowed": false
+  }
+}
+

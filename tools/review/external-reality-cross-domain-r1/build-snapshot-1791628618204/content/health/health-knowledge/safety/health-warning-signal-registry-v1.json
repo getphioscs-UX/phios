@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "PHI-OS-HEALTH-K1-WARNING-SIGNALS-v1.0.0",
+  "work": "HEALTH-K1-W6",
+  "signals": [
+    {
+      "signalId": "LIP_TONGUE_THROAT_SWELLING",
+      "triggers": [
+        "sudden lip swelling",
+        "tongue swelling",
+        "throat swelling",
+        "嘴唇突然肿",
+        "舌头肿",
+        "喉咙肿"
+      ],
+      "responseClass": "EMERGENCY",
+      "sourceIds": [
+        "HK1-NHS-ANAPHYLAXIS",
+        "HK1-NHS-ANGIOEDEMA"
+      ]
+    },
+    {
+      "signalId": "BREATHING_DIFFICULTY",
+      "triggers": [
+        "struggling to breathe",
+        "very fast breathing",
+        "呼吸困难",
+        "喘不过气"
+      ],
+      "responseClass": "EMERGENCY",
+      "sourceIds": [
+        "HK1-NHS-ANAPHYLAXIS"
+      ]
+    },
+    {
+      "signalId": "FAINT_OR_CONFUSED",
+      "triggers": [
+        "fainting",
+        "cannot be woken",
+        "sudden confusion",
+        "昏厥",
+        "叫不醒",
+        "突然意识混乱"
+      ],
+      "responseClass": "EMERGENCY",
+      "sourceIds": [
+        "HK1-NHS-ANAPHYLAXIS"
+      ]
+    },
+    {
+      "signalId": "VOMIT_BLOOD",
+      "triggers": [
+        "vomit blood",
+        "coffee-ground vomit",
+        "呕血",
+        "咖啡渣样呕吐物"
+      ],
+      "responseClass": "EMERGENCY",
+      "sourceIds": [
+        "HK1-NHS-DIARRHOEA-VOMITING"
+      ]
+    },
+    {
+      "signalId": "SEVERE_ABDOMINAL_PAIN",
+      "triggers": [
+        "sudden severe tummy ache",
+        "突然剧烈腹痛"
+      ],
+      "responseClass": "EMERGENCY",
+      "sourceIds": [
+        "HK1-NHS-DIARRHOEA-VOMITING"
+      ]
+    },
+    {
+      "signalId": "BLOODY_DIARRHEA",
+      "triggers": [
+        "bloody diarrhoea",
+        "blood in stool with diarrhoea",
+        "血性腹泻"
+      ],
+      "responseClass": "PROMPT_MEDICAL_REVIEW",
+      "sourceIds": [
+        "HK1-NHS-DIARRHOEA-VOMITING"
+      ]
+    }
+  ],
+  "governance": {
+    "routerPurpose": "CARE_URGENCY_NOT_DIAGNOSIS",
+    "diagnosisAllowed": false
+  }
+}

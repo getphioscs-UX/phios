@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const final=read('content/web/homepage/hpc2-pre/hpc2-pre-final-readiness-v1.json');
+const critical=read('content/web/homepage/hpc2-pre/hpc2-pre-critical-asset-registry-v1.json');
+const browser=read('content/web/homepage/hpc2-pre/review/browser-visual-review-v1.json');
+assert.equal(final.state,'HPC2_PRE_READY','HPC2-PRE is not ready: external R2/human/browser gates remain pending.');
+assert.equal(critical.records.filter(x=>x.humanAccepted).length,16);
+assert.equal(critical.records.filter(x=>x.remoteVerified).length,16);
+assert.ok(browser.matrix.every(r=>r.decision==='ACCEPTED'&&Object.values(r.checks).every(v=>v==='ACCEPTED')));
+assert.equal(final.gates.customerVisibleDelta,true);
+console.log('✓ HPC2_PRE_READY: 16/16 Human Accepted + 16/16 Remote Verified + 6/6 browser matrix accepted + CUSTOMER_VISIBLE_DELTA=true.');

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4B-RETIREMENT-MAP-v1.0.0",
+  "work": "CX-R12R4B-W00-W07",
+  "baselineCommit": "4a9ddcaff07abaab4c12be62cd74e0681e528af8",
+  "status": "PHASE_A_PRODUCTION_CONSUMER_RETIREMENT_ACTIVE",
+  "retirements": [
+    {
+      "path": "view.interpretation.methods",
+      "priorRole": "parallel customer interpretation projection",
+      "successor": "view.reading.methods",
+      "productionConsumerState": "RETIRED"
+    },
+    {
+      "path": "view.methodResults",
+      "priorRole": "parallel customer method result array",
+      "successor": "view.reading.methods",
+      "productionConsumerState": "RETIRED"
+    },
+    {
+      "path": "view.interpretationGate",
+      "priorRole": "hardcoded HUMAN_REVIEW_REQUIRED gate",
+      "successor": "view.reading.state derived from selected method publication results",
+      "productionConsumerState": "RETIRED"
+    },
+    {
+      "path": "canonical.interpretation",
+      "priorRole": "legacy calculation-bound interpretation field",
+      "successor": "Meaning -> Composition -> Customer Interpretation",
+      "productionConsumerState": "RETAINED_AS_LEGACY_SOURCE_INPUT_NOT_CUSTOMER_AUTHORITY"
+    },
+    {
+      "path": "projection.explanation",
+      "priorRole": "legacy projection explanation field",
+      "successor": "Meaning -> Composition -> Customer Interpretation",
+      "productionConsumerState": "NOT_READ_AS_CUSTOMER_AUTHORITY"
+    },
+    {
+      "path": "projection.meaning",
+      "priorRole": "legacy projection meaning field",
+      "successor": "Canonical Meaning Bundle",
+      "productionConsumerState": "NOT_READ_AS_CUSTOMER_AUTHORITY"
+    },
+    {
+      "path": "calculation.interpretation",
+      "priorRole": "legacy calculation interpretation field",
+      "successor": "Admitted Customer Interpretation Runtime",
+      "productionConsumerState": "NOT_READ_AS_CUSTOMER_AUTHORITY"
+    }
+  ],
+  "knownLegacyImplementationFiles": [
+    "functions/customer-projection/method-customer-projection.js",
+    "functions/customer-projection/method-customer-reading-v2.js#buildMethodCustomerDevelopmentResult"
+  ],
+  "boundary": {
+    "legacyArtifactsDeleted": false,
+    "historicalAuthorityMutated": false,
+    "productionCustomerConsumersUseLegacyInterpretation": false
+  }
+}

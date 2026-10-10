@@ -1,0 +1,156 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-EDGE-CASE-FIXTURES-v1.0.0",
+  "phase": "ICH",
+  "work": "ICH-W12",
+  "status": "MACHINE_FIXTURE_SET",
+  "fixtures": [
+    {
+      "fixtureId": "ICH-EDGE-NO-CHANGE",
+      "lines": [
+        7,
+        8,
+        7,
+        8,
+        7,
+        8
+      ],
+      "expectChangingLines": []
+    },
+    {
+      "fixtureId": "ICH-EDGE-ONE-CHANGE",
+      "lines": [
+        6,
+        8,
+        7,
+        8,
+        7,
+        8
+      ],
+      "expectChangingLines": [
+        1
+      ]
+    },
+    {
+      "fixtureId": "ICH-EDGE-MULTI-CHANGE",
+      "lines": [
+        6,
+        9,
+        7,
+        8,
+        6,
+        7
+      ],
+      "expectChangingLines": [
+        1,
+        2,
+        5
+      ]
+    },
+    {
+      "fixtureId": "ICH-EDGE-ALL-CHANGE-YIN",
+      "lines": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "expectPrimary": "HEXAGRAM-02",
+      "expectRelating": "HEXAGRAM-01",
+      "expectChangingLines": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "fixtureId": "ICH-EDGE-ALL-CHANGE-YANG",
+      "lines": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ],
+      "expectPrimary": "HEXAGRAM-01",
+      "expectRelating": "HEXAGRAM-02",
+      "expectChangingLines": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "fixtureId": "ICH-EDGE-ALL-STABLE-YIN",
+      "lines": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "expectPrimary": "HEXAGRAM-02",
+      "expectRelating": "HEXAGRAM-02",
+      "expectChangingLines": []
+    },
+    {
+      "fixtureId": "ICH-EDGE-ALL-STABLE-YANG",
+      "lines": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ],
+      "expectPrimary": "HEXAGRAM-01",
+      "expectRelating": "HEXAGRAM-01",
+      "expectChangingLines": []
+    },
+    {
+      "fixtureId": "ICH-EDGE-INVALID-LINE",
+      "lines": [
+        7,
+        7,
+        7,
+        5,
+        7,
+        7
+      ],
+      "expectError": "INVALID_ICHING_LINE_VALUE"
+    },
+    {
+      "fixtureId": "ICH-EDGE-MISSING-LINE",
+      "lines": [
+        7,
+        7,
+        7,
+        7,
+        7
+      ],
+      "expectError": "ICHING_REQUIRES_EXACTLY_SIX_LINES"
+    },
+    {
+      "fixtureId": "ICH-EDGE-EXTRA-LINE",
+      "lines": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ],
+      "expectError": "ICHING_REQUIRES_EXACTLY_SIX_LINES"
+    }
+  ]
+}

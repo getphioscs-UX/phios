@@ -1,0 +1,100 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {createHash} from 'node:crypto';
+const read=p=>fs.readFileSync(p,'utf8');
+const json=p=>JSON.parse(read(p));
+const html=read('perspectives/personal/index.html');
+const js=read('assets/customer-ui/js/surfaces/personal-reality.js');
+const api=read('functions/api/customer-personal-reality.js');
+const css=read('assets/customer-ui/surfaces/personal-reality.css');
+const authority=json('content/customer-experience-rebuild/authority/cx-r12r4-personal-reading-experience-authority-v1.json');
+const web=json('content/customer-experience-rebuild/registries/reading-science-web-projection-registry-v1.json');
+const availability=json('content/customer-experience-rebuild/registries/cx-r12r4-method-availability-registry-v1.json');
+const input=json('content/customer-experience-rebuild/contracts/cx-r12r4-personal-method-input-contract-v1.json');
+const visuals=json('content/customer-experience-rebuild/registries/cx-r12r4-visual-delivery-manifest-v1.json');
+const acceptance=json('content/customer-experience-rebuild/acceptance/cx-r12r4-w0-w9-acceptance-v1.json');
+const iconRecon=json('content/customer-experience-rebuild/registries/cx-r12r4-icon-reconciliation-v1.json');
+const customerVisuals=json('content/customer-experience-rebuild/authority/customer-visual-asset-registry-v3.json');
+assert.equal(authority.customerAuthority.canonicalPath,'/perspectives/personal/');
+assert.equal(authority.customerAuthority.surfaceId,'PERSONAL_REALITY');
+assert.equal(authority.customerAuthority.internalRuntimeName,'Personal Runtime');
+assert.equal(authority.symbolicSeparation.mustNotJoinBirthForm,true);
+assert.equal(authority.assetBoundary.createsSecondGlobalAssetAuthority,false);
+assert.equal(web.entries.length,87);
+assert.deepEqual(web.entries.map(x=>x.nodeId),Array.from({length:87},(_,i)=>`13.${i+1}`));
+assert.deepEqual(web.canonicalChain,['OBSERVATION','EVIDENCE','PROJECTION','READING','INTERPRETATION','GOVERNANCE','NAVIGATION_THRESHOLD']);
+const layerCounts=Object.fromEntries(web.canonicalChain.map(layer=>[layer,web.entries.filter(x=>x.authorityLayer===layer).length]));
+assert.deepEqual(layerCounts,{OBSERVATION:13,EVIDENCE:13,PROJECTION:13,READING:16,INTERPRETATION:11,GOVERNANCE:11,NAVIGATION_THRESHOLD:10});
+const state=id=>availability.methods.find(x=>x.methodId===id)?.experienceState;
+for(const id of ['ASTROLOGY','BAZI','NUMEROLOGY','ZI_WEI_DOU_SHU'])assert.equal(state(id),'AVAILABLE_IN_THIS_READING');
+assert.equal(state('HUMAN_DESIGN'),'NOT_CURRENTLY_AVAILABLE');
+assert.equal(state('I_CHING'),'SEPARATE_EXPERIENCE');assert.equal(state('TAROT'),'SEPARATE_EXPERIENCE');
+assert.equal(availability.rules.visualPresenceDoesNotGrantExecution,true);
+const num=input.methods.find(x=>x.methodId==='NUMEROLOGY');assert.deepEqual(num.required,['birthDate']);assert.equal(num.birthPlaceRequired,false);assert.equal(num.birthTimeRequired,false);
+for(const asset of visuals.assets){assert.equal(fs.existsSync(asset.repoPath),true,`missing R12R4 visual asset: ${asset.repoPath}`)}
+for(const file of ['PHIOS-HERO-PERSONAL-REALITY-v2.webp','PHIOS-HERO-PERSONAL-REALITY-v2-mobile.webp','PHIOS-FIGURE-READING-AUTHORITY-STACK-v1.svg','PHIOS-FIGURE-PERSONAL-PERSPECTIVE-CONSTELLATION-v1.svg','PHIOS-FIGURE-PERSONAL-READING-FLOW-v1.svg','PHIOS-FIGURE-PERSONAL-READING-MAP-v1.svg'])assert(visuals.assets.some(x=>x.filename===file),`missing visual manifest asset ${file}`);
+const pprR2ProductFirst=html.includes('data-cx-specialist-products')&&html.includes('value="ecr"');
+const pprR5Editorial=fs.existsSync('content/professional/personal-reality/r5/authority/ppr-r5-editorial-successor-v1.json')&&html.includes('data-ppr-r5-editorial="true"');
+if(pprR5Editorial){assert.match(html,/One reality\. Several ways to make it readable\./);assert.match(html,/同一个现实，需要不止一种读取方式。/);assert.match(html,/REALITY COMPRESSION/);assert.match(html,/ONE REALITY · MANY INTERFACES/);assert.match(html,/PHI Configuration/);}else if(pprR2ProductFirst){assert.match(html,/Professional personal readings, kept distinct\./);assert.match(html,/专业个人读取，各自保持完整。/);assert.match(html,/PHI Configuration/);}else{assert.match(html,/One person\. More than one perspective\./);assert.match(html,/同一个人，可以从不同视角被理解。/);}assert.match(html,/PHIOS-HERO-PERSONAL-REALITY-v2-mobile\.webp/);assert.match(html,/PHIOS-HERO-PERSONAL-REALITY-v2\.webp/);
+assert.match(html,/PHIOS-FIGURE-READING-AUTHORITY-STACK-v1\.svg/);assert.match(html,/PHIOS-FIGURE-PERSONAL-PERSPECTIVE-CONSTELLATION-v1\.svg/);assert.match(html,/PHIOS-FIGURE-PERSONAL-READING-FLOW-v1\.svg/);
+assert(html.indexOf('data-cx-method-selection')<html.indexOf('name="birthDate"'),'method selection must appear before birth inputs');
+assert.equal((html.match(/name="methods"/g)||[]).length,pprR2ProductFirst?5:4,pprR2ProductFirst?'PPR-R2 product selector must expose ECR plus four established birth-based methods':'only four birth-based methods may be selectable here');
+assert.match(html,/href="\/perspectives\/iching\/"/);assert.match(html,/href="\/perspectives\/tarot\/"/);assert.match(html,/Optional external context/);assert.equal((html.match(/name="methods"/g)||[]).length,pprR2ProductFirst?5:4,'Human Design external context must not become a calculated method checkbox');
+assert.match(html,/data-cx-adaptive-input/);assert.match(html,/data-cx-reading-contract/);
+const pprR3ReadingSurface=html.includes('data-cx-specialist-products')&&fs.existsSync('content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json');
+if(pprR3ReadingSurface){
+ const pprR3=json('content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json');
+ const productRenderers=read('assets/customer-ui/js/personal-products/personal-product-renderers.js');
+ const specialistHost=read('assets/customer-ui/js/personal-products/specialist-renderer-host.js');
+ assert.equal(pprR3.status,'FROZEN_PPR_R3_SPECIALIST_HOST');
+ assert.match(html,/data-cx-specialist-products/);
+ assert.match(js,/renderProductRoute\(view\.productRoute/);
+ assert.match(productRenderers,/mountApprovedSpecialistRenderer/);
+ assert.match(specialistHost,/mountApprovedSpecialistRenderer/);
+}else{
+ assert.match(html,/data-cx-reading-map/);
+ assert.match(js,/renderReadingMap/);
+}
+assert.match(js,/METHOD_REQUIREMENTS/);assert.match(js,/requirementsFor/);assert.match(js,/req\.place&&!selectedCandidate/);assert.match(api,/const needsPlace=selected\.some/);assert.match(api,/location=null;\s*if\(needsPlace\)/);assert.match(api,/const birthPlace=location\s*\?/);assert.match(api,/source:'GOVERNED_RESOLUTION'/);assert.match(api,/source:'UNKNOWN'/);
+assert.equal(iconRecon.authorityBoundary.createsSecondGlobalIconAuthority,false);assert.equal(iconRecon.authorityBoundary.createsSecondAssetResolver,false);assert.equal(iconRecon.forbiddenNewIdentities.includes('PERSPECTIVE_NOT_FACT'),true);
+assert.equal(fs.existsSync('assets/customer-ui/media/personal/icons'),false,'page-private Personal Reality icon directory must not exist');
+assert.equal(fs.existsSync('assets/icons/global/PHIOS-ICON-PROJECTION-v1.svg'),true);assert.equal(fs.existsSync('assets/icons/global/PHIOS-ICON-INTERPRETATION-v1.svg'),true);assert.equal(fs.existsSync('assets/icons/global/PHIOS-ICON-GOVERNANCE-v1.svg'),true);assert.equal(fs.existsSync('assets/icons/global/PHIOS-ICON-NAVIGATION-THRESHOLD-v1.svg'),true);
+assert.deepEqual(fs.readdirSync('assets/icons/methods').filter(x=>x.endsWith('.svg')).sort(),iconRecon.methods.map(x=>path.basename(x.repoPath)).sort(),'method SVG files must match the canonical icon inventory');
+assert.equal(new Set(iconRecon.methods.map(x=>x.customerAssetId)).size,iconRecon.methods.length,'method icon IDs must be unique');
+for(const icon of iconRecon.methods){
+ const asset=customerVisuals.entries.find(x=>x.assetId===icon.customerAssetId);
+ assert(asset,`unregistered method icon: ${icon.customerAssetId}`);
+ assert.equal(asset.publicUrl,`/${icon.repoPath}`);
+ assert.equal(asset.available,true);
+ assert.equal(asset.sha256,createHash('sha256').update(fs.readFileSync(icon.repoPath)).digest('hex'));
+}
+for(const id of ['CXICON-METHOD-ECR','CXICON-METHOD-PROFILE'])assert(iconRecon.methods.some(x=>x.customerAssetId===id));
+assert.match(html,/data-ppr-r5-method="ecr"[^\n]*data-cx-asset="CXICON-METHOD-ECR"/);
+assert.match(html,/data-method="ecr"[^\n]*data-cx-asset="CXICON-METHOD-ECR"/);
+assert.match(html,/data-cx-asset="CXICON-METHOD-PROFILE"/);
+assert.match(read('perspectives/profile/index.html'),/data-cx-asset="CXICON-METHOD-PROFILE"/);
+assert.equal(fs.readdirSync('assets/icons/status').filter(x=>x.endsWith('.svg')).length,5);
+const cxIconIds=new Set(customerVisuals.entries.map(x=>x.assetId));for(const id of ['ICON-007','ICON-010','ICON-011','ICON-020','ICON-027','CXICON-GLOBAL-PROJECTION','CXICON-GLOBAL-INTERPRETATION','CXICON-GLOBAL-GOVERNANCE','CXICON-GLOBAL-NAVIGATION-THRESHOLD','CXICON-METHOD-ASTROLOGY','CXICON-METHOD-BAZI','CXICON-METHOD-ZIWEI','CXICON-METHOD-NUMEROLOGY','CXICON-METHOD-HUMAN-DESIGN','CXICON-METHOD-I-CHING','CXICON-METHOD-TAROT','CXICON-STATUS-AVAILABLE','CXICON-STATUS-PARTIAL','CXICON-STATUS-SEPARATE','CXICON-STATUS-UNAVAILABLE','CXICON-STATUS-TEMPORARY'])assert(cxIconIds.has(id),`canonical CX icon binding missing ${id}`);
+assert(!html.includes('PHIOS-ICON-PERSPECTIVE-NOT-FACT'));assert(!html.includes('/assets/customer-ui/media/personal/icons/'));assert(!js.includes('/assets/customer-ui/media/personal/icons/'));
+assert.match(html,/data-cx-asset="ICON-027"/);assert.match(html,/data-cx-asset="ICON-007"/);assert.match(html,/data-cx-asset="CXICON-STATUS-TEMPORARY"/);assert.match(html,/data-cx-asset="CXICON-METHOD-ASTROLOGY"/);assert.match(html,/data-cx-asset="CXICON-GLOBAL-PROJECTION"/);if(!pprR3ReadingSurface)assert.match(html,/data-cx-asset="ICON-020"/);assert.match(js,/hydrateCustomerAssets/);
+assert.match(html,/Perspective ≠ Fact/);assert.match(html,/Unknown stays unknown/);assert.match(html,/Nothing is saved automatically/);
+if(pprR5Editorial){assert.match(html,/cannot silently promote symbolic material into objective evidence/);assert.match(html,/Similarity → observation/);}else if(pprR3ReadingSurface)assert.match(html,/Resonance is not evidence by itself/);else assert.match(html,/Resonates is not evidence by itself/);
+assert.match(css,/cx-personal-method-cards/);if(pprR3ReadingSurface)assert.match(css,/cx-specialist-products/);else assert.match(css,/cx-reading-map-live/);assert.match(css,/@media\(max-width:620px\)/);
+const cxR12Successor=fs.existsSync('content/customer-experience-rebuild/acceptance/cx-r12-acceptance-v2.json')&&html.includes('data-cx-r12-input-stage');
+if(pprR5Editorial){
+  for(const successor of ['现实原本复杂到无法被直接完整读取。','不同体系，保存的是同一份复杂现实里的不同部分。'])assert(html.includes(successor),`PPR-R5 CX editorial successor contract lost: ${successor}`);
+  if(cxR12Successor){
+    const r12=json('content/customer-experience-rebuild/acceptance/cx-r12-acceptance-v2.json');
+    assert.equal(r12.status,'ACCEPTED_PERSONAL_REALITY_CURRENT_MAIN_SUCCESSOR');
+    for(const successor of ['Birth information','What you want to explore','Optional: Deepen my profile'])assert(html.includes(successor),`CX-R12 customer input successor lost: ${successor}`);
+    assert.match(html,/birth-based profile/i,'CX-R12 must preserve the birth-based versus question-based editorial distinction');
+    assert.match(html,/I Ching and Tarot begin (?:with|from) a question/,'CX-R12 must preserve the question-based I Ching/Tarot editorial distinction');
+  }else{
+    for(const successor of ['Birth-based perspectives','I Ching and Tarot begin from a question'])assert(html.includes(successor),`PPR-R5 CX editorial successor contract lost: ${successor}`);
+  }
+}else for(const historical of ['一个人，从来不只有一种读法。','不同传统，从一开始就在问不同的问题。','Birth-based perspectives','I Ching and Tarot begin from a question'])assert(html.includes(historical),`historical CX customer contract lost: ${historical}`);
+if(pprR3ReadingSurface)assert(js.includes('Technical Details')||js.includes('技术详情'),'PPR-R3 dynamic technical disclosure missing');else assert(html.includes('Technical Details'),'historical CX customer contract lost: Technical Details');
+assert.equal(acceptance.work,'CX-R12R4-W0-W9');assert.equal(acceptance.claims.browserAccepted,false);assert.equal(acceptance.claims.productionHumanAccepted,false);assert.equal(acceptance.claims.fullProduction,false);
+console.log('✓ CX-R12R4 W0–W9 Personal Reality Reading Experience passed.');
+console.log(pprR3ReadingSurface?'  /perspectives/personal/ remains the sole customer authority; historical R12R4 intake and reading-contract boundaries now hand off to the frozen PPR-R3 specialist product host without requiring the retired static Reading Map mount.':'  /perspectives/personal/ remains the sole customer authority; Chapter 13 web projection, method availability, method-first adaptive intake, P0/P1 visual delivery, Reading Contract and live Reading Map are bound without merging symbolic methods into the birth form.');

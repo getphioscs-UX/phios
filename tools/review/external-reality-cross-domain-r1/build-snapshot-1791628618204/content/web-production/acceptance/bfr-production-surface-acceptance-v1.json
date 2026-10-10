@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "PHI-OS-BFR-H16-PRODUCTION-SURFACE-ACCEPTANCE-v1.0.0",
+  "work": "BFR-H16",
+  "baselineCommit": "167bce2a82734cf96207b78abb47cdcd8cf82522",
+  "status": "BFR_H16_VISUAL_PRODUCTION_ACCEPTED_REPOSITORY_SCOPE_WPR_PF_NEXT",
+  "scope": "BFR_FINAL_CONSUMPTION_ACCEPTANCE_REPOSITORY_SCOPE",
+  "predecessors": {
+    "bfrH15": "content/web-production/acceptance/bfr-capability-consumption-acceptance-v1.json",
+    "wprVisual": "content/web-production/acceptance/wpr-post-freeze-visual-acceptance-v1.json",
+    "hpc2": "content/web/homepage/hpc2/acceptance/homepage-composition-acceptance-v2.json",
+    "cka": "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json"
+  },
+  "gates": {
+    "backendCapabilityInventoryComplete": {
+      "accepted": true,
+      "evidence": [
+        "content/web-production/bfr-backend-capability-inventory-v1.json",
+        "content/web-production/acceptance/bfr-capability-consumption-acceptance-v1.json"
+      ]
+    },
+    "frontendSurfaceInventoryComplete": {
+      "accepted": true,
+      "evidence": [
+        "content/web-production/bfr-frontend-surface-inventory-v1.json"
+      ]
+    },
+    "capabilitySurfaceGapsReconciled": {
+      "accepted": true,
+      "evidence": [
+        "content/web-production/bfr-capability-surface-gap-matrix-v1.json",
+        "content/web-production/acceptance/bfr-capability-consumption-acceptance-v1.json"
+      ]
+    },
+    "productionSurfaceManifestActive": {
+      "accepted": true,
+      "evidence": [
+        "content/web-production/surface-production-manifest-v1.json"
+      ]
+    },
+    "pdsCprWprActualPageLineageValid": {
+      "accepted": true,
+      "evidence": [
+        "content/web-production/bfr-pds-cpr-wpr-lineage-v1.json"
+      ]
+    },
+    "fiveVolumeVisualIdentityActive": {
+      "accepted": true,
+      "evidence": [
+        "content/web-production/bfr-five-volume-visual-projection-v1.json",
+        "assets/js/web-production/public-surface-data.js"
+      ]
+    },
+    "audienceDensityValid": {
+      "accepted": true,
+      "evidence": [
+        "content/web-production/bfr-audience-information-density-projection-v1.json"
+      ]
+    },
+    "homepageCapabilityCoverageHigh": {
+      "accepted": true,
+      "evidence": [
+        "content/web/homepage/hpc2/acceptance/homepage-composition-acceptance-v2.json"
+      ]
+    },
+    "libraryVisualCoverageMediumHigh": {
+      "accepted": true,
+      "evidence": [
+        "library.html",
+        "assets/js/pages/library.js",
+        "content/web-production/acceptance/wpr-post-freeze-visual-acceptance-v1.json"
+      ]
+    },
+    "bookVisualCoverageHigh": {
+      "accepted": true,
+      "evidence": [
+        "assets/js/pages/books.js",
+        "assets/js/pages/book-volume.js"
+      ]
+    },
+    "articleFigureConsumptionContentDependent": {
+      "accepted": true,
+      "evidence": [
+        "assets/js/knowledge/article-renderer.js"
+      ]
+    },
+    "personalRealityProperlyConsumed": {
+      "accepted": true,
+      "evidence": [
+        "personal-runtime.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json"
+      ]
+    },
+    "financialRealityProperlyConsumed": {
+      "accepted": true,
+      "evidence": [
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json"
+      ]
+    },
+    "askPhiosProperlyConsumed": {
+      "accepted": true,
+      "evidence": [
+        "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json"
+      ]
+    },
+    "academyProperlyConsumed": {
+      "accepted": true,
+      "evidence": [
+        "academy.html",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json"
+      ]
+    },
+    "servicesAligned": {
+      "accepted": true,
+      "evidence": [
+        "services.html",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json"
+      ]
+    },
+    "professionalProperlyConsumed": {
+      "accepted": true,
+      "evidence": [
+        "professional/index.html",
+        "professional-workspace.html",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json"
+      ]
+    },
+    "r2GovernedAssetsConsumed": {
+      "accepted": true,
+      "evidence": [
+        "content/web-production/acceptance/wpr-post-freeze-visual-acceptance-v1.json",
+        "assets/js/runtime/web-production/asset-resolver.js"
+      ]
+    },
+    "responsiveMatrixAccepted": {
+      "accepted": true,
+      "evidence": [
+        "content/web-production/bfr-responsive-production-matrix-v1.json",
+        "content/web-production/bfr-responsive-acceptance-v1.json",
+        "content/web/homepage/hpc2/acceptance/hpc2-w13-homepage-responsive-locale-accessibility-acceptance-v1.json"
+      ]
+    },
+    "accessibilityAccepted": {
+      "accepted": true,
+      "evidence": [
+        "content/web-production/bfr-accessibility-acceptance-v1.json",
+        "content/web/homepage/hpc2/acceptance/hpc2-w13-homepage-responsive-locale-accessibility-acceptance-v1.json"
+      ]
+    },
+    "noSilentProductionRuntimeOrphan": {
+      "accepted": true,
+      "evidence": [
+        "content/web-production/acceptance/bfr-capability-consumption-acceptance-v1.json"
+      ]
+    },
+    "noGovernedVisualAssetSilentlyOrphaned": {
+      "accepted": true,
+      "evidence": [
+        "content/web-production/acceptance/wpr-post-freeze-visual-acceptance-v1.json"
+      ]
+    }
+  },
+  "acceptanceSemantics": {
+    "responsiveMatrixAcceptedAtRepositoryContractScope": true,
+    "accessibilityAcceptedAtSourceAuditScope": true,
+    "productionBrowserRevalidationPending": true,
+    "r2LiveEnvironmentRevalidationPending": true,
+    "servicesEmptyCanonicalRegistryMayRemainExplicitlyBounded": true,
+    "personalRuntimeMethodExecutionStillGated": true,
+    "professionalHumanAuthorityPreserved": true
+  },
+  "outputs": [
+    "content/web-production/acceptance/bfr-capability-consumption-acceptance-v1.json",
+    "content/web-production/acceptance/wpr-post-freeze-visual-acceptance-v1.json",
+    "content/web-production/acceptance/bfr-production-surface-acceptance-v1.json"
+  ],
+  "exitGate": {
+    "bfrH15Accepted": true,
+    "bfrH16Accepted": true,
+    "silentProductionRuntimeOrphanCount": 0,
+    "silentGovernedVisualAssetOrphanCount": 0,
+    "accepted": true
+  },
+  "globalProductionAccepted": false,
+  "next": "WPR-PF_PRODUCTION_ASSURANCE_THEN_POC-A_LIVE_PRODUCTION_CLOSURE"
+}

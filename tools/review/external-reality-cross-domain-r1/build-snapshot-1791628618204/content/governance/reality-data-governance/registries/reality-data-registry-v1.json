@@ -1,0 +1,51 @@
+{
+  "registryCode": "PHI-OS-RDG-W29-REALITY-DATA-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RDG-W29",
+  "status": "canonical",
+  "registryNature": "CONTRACT_AND_CLASSIFICATION_INDEX",
+  "containsUserData": false,
+  "containsRuntimePayloads": false,
+  "registries": {
+    "domain": "content/governance/reality-data-governance/registries/canonical-data-domain-registry-v1.json",
+    "nature": "content/governance/reality-data-governance/registries/canonical-data-nature-registry-v1.json",
+    "certainty": "content/governance/reality-data-governance/registries/canonical-data-certainty-registry-v1.json",
+    "sensitivity": "content/governance/reality-data-governance/registries/canonical-data-sensitivity-registry-v1.json",
+    "purpose": "content/governance/reality-data-governance/registries/canonical-data-purpose-registry-v1.json",
+    "consent": "content/governance/reality-data-governance/registries/canonical-consent-class-registry-v1.json",
+    "persistence": "content/governance/reality-data-governance/registries/canonical-persistence-class-registry-v1.json",
+    "retention": "content/governance/reality-data-governance/registries/canonical-data-retention-registry-v1.json",
+    "contract": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json"
+  },
+  "runtimeContractReferences": [
+    "content/governance/reality-data-governance/contracts/canonical-data-object-contract-v1.json",
+    "content/governance/reality-data-governance/contracts/retention-runtime-contract-v1.json",
+    "content/governance/reality-data-governance/contracts/persistence-eligibility-gate-v1.json",
+    "content/governance/reality-data-governance/contracts/evidence-eligibility-contract-v1.json",
+    "content/governance/reality-data-governance/contracts/evidence-promotion-runtime-v1.json",
+    "content/governance/reality-data-governance/contracts/professional-data-isolation-v1.json",
+    "content/governance/reality-data-governance/contracts/sensitive-inference-firewall-v1.json",
+    "content/governance/reality-data-governance/contracts/data-drift-control-v1.json"
+  ],
+  "storageAuthority": {
+    "userDataLocation": "RUNTIME_STORAGE_OR_DATABASE",
+    "registryMayStoreUserData": false,
+    "registryMayStorePayloadCopies": false,
+    "storageLocationGrantsDataAuthority": false
+  },
+  "forbiddenRegistryFields": [
+    "subjectReference",
+    "accountReference",
+    "runtimeRecordValue",
+    "professionalNote",
+    "assessmentResponse",
+    "rawTelemetryPayload"
+  ],
+  "rules": {
+    "registryIsDataWarehouse": false,
+    "registryIsUserProfileStore": false,
+    "registryStoresContractsNotUserData": true,
+    "unknownContractFailsClosed": true,
+    "secondDataAuthorityCreated": false
+  }
+}

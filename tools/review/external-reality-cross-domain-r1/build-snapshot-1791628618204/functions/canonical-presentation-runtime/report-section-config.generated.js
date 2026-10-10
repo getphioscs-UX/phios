@@ -1,0 +1,1566 @@
+// Generated from config/reports/*.json by scripts/sync-report-section-config.mjs.
+// Browser and Pages Functions share this data; JSON files remain canonical.
+export const registry = {
+  "reportType": "BAZI_FULL_REPORT",
+  "version": "GUIDED_REPORT_SUCCESSOR_R2_STATIC_DETERMINISTIC_R13_REUSE_EXISTING_SECTION_VISUALS",
+  "methodId": "BZR",
+  "frontMatter": [
+    {
+      "key": "FM01",
+      "sourcePage": 1,
+      "fixed": true,
+      "binding": "COVER",
+      "pagination": "NONE"
+    },
+    {
+      "key": "FM02",
+      "sourcePage": 2,
+      "fixed": true,
+      "binding": "METHOD_INTRO",
+      "pagination": "APPROVED_BAKED_ASSET"
+    },
+    {
+      "key": "FM03",
+      "sourcePage": 3,
+      "fixed": true,
+      "binding": "ORIGIN",
+      "pagination": "APPROVED_BAKED_ASSET"
+    },
+    {
+      "key": "FM04",
+      "sourcePage": 4,
+      "fixed": true,
+      "binding": "PHIOS_LENS",
+      "pagination": "APPROVED_BAKED_ASSET"
+    },
+    {
+      "key": "FM05",
+      "sourcePage": 5,
+      "fixed": true,
+      "binding": "HOW_TO_READ",
+      "pagination": "APPROVED_BAKED_ASSET"
+    },
+    {
+      "key": "FM06",
+      "sourcePage": 6,
+      "fixed": true,
+      "binding": "SNAPSHOT",
+      "pagination": "GLOBAL"
+    }
+  ],
+  "sections": [
+    {
+      "key": "S01_OVERVIEW",
+      "number": "01",
+      "title": {
+        "zh-Hans": "命盘总览",
+        "en": "Chart Overview"
+      },
+      "enabled": true,
+      "pages": [
+        {
+          "key": "S01_P1",
+          "family": "SECTION_OPENER_PAGE",
+          "executionClass": "STATIC_EDITORIAL",
+          "visualAsset": "VIS-REPORT-BAZI-SEC-01-OVERVIEW",
+          "dataModules": [
+            "sectionIntroduction"
+          ],
+          "title": {
+            "zh-Hans": "命盘总览",
+            "en": "Chart Overview"
+          },
+          "masterAsset": {
+            "assetId": "VIS-REPORT-BAZI-SEC-01-OVERVIEW",
+            "role": "SECTION_MASTER_BACKGROUND",
+            "localeIndependent": true,
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-01-OVERVIEW.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
+          }
+        },
+        {
+          "key": "S01_OVERVIEW_FOUR_PILLARS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "visual:FOUR_PILLARS"
+          ],
+          "primaryVisualRef": "BZR-VIS-FOUR-PILLARS",
+          "title": {
+            "en": "Four Pillars",
+            "zh-Hans": "四柱命盘"
+          }
+        },
+        {
+          "key": "S01_OVERVIEW_FIVE_ELEMENTS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "visual:FIVE_ELEMENTS"
+          ],
+          "primaryVisualRef": "BZR-VIS-FIVE-ELEMENTS",
+          "title": {
+            "en": "Five Elements · Structure & Season",
+            "zh-Hans": "五行 · 结构与季节"
+          }
+        }
+      ]
+    },
+    {
+      "key": "S02_PERSONALITY",
+      "number": "02",
+      "title": {
+        "zh-Hans": "核心性格",
+        "en": "Core Personality"
+      },
+      "enabled": true,
+      "pages": [
+        {
+          "key": "S02_P1",
+          "family": "SECTION_OPENER_PAGE",
+          "executionClass": "STATIC_EDITORIAL",
+          "visualAsset": "VIS-REPORT-BAZI-SEC-02-PERSONALITY",
+          "dataModules": [
+            "sectionIntroduction"
+          ],
+          "title": {
+            "zh-Hans": "核心性格",
+            "en": "Core Personality"
+          },
+          "masterAsset": {
+            "assetId": "VIS-REPORT-BAZI-SEC-02-PERSONALITY",
+            "role": "SECTION_MASTER_BACKGROUND",
+            "localeIndependent": true,
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-02-PERSONALITY.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
+          }
+        },
+        {
+          "key": "S02_PERSONALITY_TEN_GOD_OVERVIEW",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "visual:TEN_GOD_OVERVIEW"
+          ],
+          "primaryVisualRef": "BZR-VIS-TEN-GOD-OVERVIEW",
+          "title": {
+            "en": "Ten Gods · Composition",
+            "zh-Hans": "十神 · 结构占比"
+          }
+        },
+        {
+          "key": "S02_CORE_OPERATING_STYLE",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "personalityCoreStyle"
+          ],
+          "title": {
+            "zh-Hans": "核心运作方式",
+            "en": "Core Operating Style"
+          }
+        },
+        {
+          "key": "S02_CAPABILITY_DEVELOPMENT",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "personalityDevelopment"
+          ],
+          "title": {
+            "zh-Hans": "能力如何形成并稳定",
+            "en": "Capability Development"
+          }
+        },
+        {
+          "key": "S02_FRICTION",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "personalityFriction"
+          ],
+          "title": {
+            "zh-Hans": "张力与外部要求",
+            "en": "Friction & External Demands"
+          }
+        }
+      ]
+    },
+    {
+      "key": "S03_LIFE_STRUCTURE",
+      "number": "03",
+      "title": {
+        "zh-Hans": "人生格局",
+        "en": "Life Structure"
+      },
+      "enabled": true,
+      "pages": [
+        {
+          "key": "S03_P1",
+          "family": "SECTION_OPENER_PAGE",
+          "executionClass": "STATIC_EDITORIAL",
+          "visualAsset": "VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE",
+          "dataModules": [
+            "sectionIntroduction"
+          ],
+          "title": {
+            "zh-Hans": "人生格局",
+            "en": "Life Structure"
+          },
+          "masterAsset": {
+            "assetId": "VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE",
+            "role": "SECTION_MASTER_BACKGROUND",
+            "localeIndependent": true,
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
+          }
+        },
+        {
+          "key": "S03_LIFE_STRUCTURE_DAY_MASTER_CARRYING",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "visual:DAY_MASTER_CARRYING"
+          ],
+          "primaryVisualRef": "BZR-VIS-DAY-MASTER-CARRYING",
+          "title": {
+            "en": "Day Master · Carrying Conditions",
+            "zh-Hans": "日主 · 承载条件"
+          }
+        },
+        {
+          "key": "S03_LIFE_STRUCTURE_TEN_GOD_FUNCTION_GROUPS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "visual:TEN_GOD_FUNCTION_GROUPS"
+          ],
+          "primaryVisualRef": "BZR-VIS-TEN-GOD-FUNCTION-GROUPS",
+          "title": {
+            "en": "Five Functional Groups",
+            "zh-Hans": "五类功能组"
+          }
+        },
+        {
+          "key": "S03_LIFE_STRUCTURE_TEN_GOD_DETAILS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "visual:TEN_GOD_DETAILS"
+          ],
+          "primaryVisualRef": "BZR-VIS-TEN-GOD-DETAILS",
+          "title": {
+            "en": "Ten Gods · Sources & Repetition",
+            "zh-Hans": "十神 · 来源与重复"
+          }
+        },
+        {
+          "key": "S03_LIFE_STRUCTURE_PATTERN_PATHS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "visual:PATTERN_PATHS"
+          ],
+          "primaryVisualRef": "BZR-VIS-PATTERN-PATHS",
+          "title": {
+            "en": "Pattern Paths & Open Conditions",
+            "zh-Hans": "格局路径与未定条件"
+          }
+        },
+        {
+          "key": "S03_LIFE_STRUCTURE_PILLAR_RELATIONSHIPS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "visual:PILLAR_RELATIONSHIPS"
+          ],
+          "primaryVisualRef": "BZR-VIS-PILLAR-RELATIONSHIPS",
+          "title": {
+            "en": "Relationships between Pillars",
+            "zh-Hans": "柱位之间的关系"
+          }
+        },
+        {
+          "key": "S03_SYSTEM",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "lifeStructureSystem"
+          ],
+          "title": {
+            "zh-Hans": "整盘如何组织",
+            "en": "How the Chart Organizes"
+          }
+        }
+      ]
+    },
+    {
+      "key": "S04_CAREER",
+      "number": "04",
+      "title": {
+        "zh-Hans": "事业发展",
+        "en": "Career Development"
+      },
+      "enabled": true,
+      "pages": [
+        {
+          "key": "S04_P1",
+          "family": "SECTION_OPENER_PAGE",
+          "executionClass": "STATIC_EDITORIAL",
+          "visualAsset": "VIS-REPORT-BAZI-SEC-04-CAREER",
+          "dataModules": [
+            "sectionIntroduction"
+          ],
+          "title": {
+            "zh-Hans": "事业发展",
+            "en": "Career Development"
+          },
+          "masterAsset": {
+            "assetId": "VIS-REPORT-BAZI-SEC-04-CAREER",
+            "role": "SECTION_MASTER_BACKGROUND",
+            "localeIndependent": true,
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-04-CAREER.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
+          }
+        },
+        {
+          "key": "S04_CAREER_PROFESSIONAL_TOPICS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "visual:PROFESSIONAL_TOPICS"
+          ],
+          "primaryVisualRef": "BZR-VIS-PROFESSIONAL-TOPICS",
+          "visualTopic": "CAREER",
+          "title": {
+            "en": "Career · Your Structural Fingerprint",
+            "zh-Hans": "事业 · 你的结构指纹"
+          }
+        },
+        {
+          "key": "S04_ROLE_SYSTEM",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "careerRoleSystem"
+          ],
+          "title": {
+            "zh-Hans": "你的工作结构",
+            "en": "Your Work Structure"
+          }
+        },
+        {
+          "key": "S04_WORKING_DIRECTION",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "careerWorkingDirection"
+          ],
+          "title": {
+            "zh-Hans": "工作条件与长期方向",
+            "en": "Work Conditions & Long-Term Direction"
+          }
+        },
+        {
+          "key": "S04_P4",
+          "family": "TIMING_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "careerTiming"
+          ],
+          "title": {
+            "zh-Hans": "事业时间观察",
+            "en": "Career Timing"
+          },
+          "optional": true,
+          "condition": "ADMITTED_CAREER_TIMING"
+        }
+      ]
+    },
+    {
+      "key": "S05_WEALTH",
+      "number": "05",
+      "title": {
+        "zh-Hans": "财富运势",
+        "en": "Wealth Outlook"
+      },
+      "enabled": true,
+      "pages": [
+        {
+          "key": "S05_P1",
+          "family": "SECTION_OPENER_PAGE",
+          "executionClass": "STATIC_EDITORIAL",
+          "visualAsset": "VIS-REPORT-BAZI-SEC-05-WEALTH",
+          "dataModules": [
+            "sectionIntroduction"
+          ],
+          "title": {
+            "zh-Hans": "财富运势",
+            "en": "Wealth Outlook"
+          },
+          "masterAsset": {
+            "assetId": "VIS-REPORT-BAZI-SEC-05-WEALTH",
+            "role": "SECTION_MASTER_BACKGROUND",
+            "localeIndependent": true,
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-05-WEALTH.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
+          }
+        },
+        {
+          "key": "S05_WEALTH_PROFESSIONAL_TOPICS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "visual:PROFESSIONAL_TOPICS"
+          ],
+          "primaryVisualRef": "BZR-VIS-PROFESSIONAL-TOPICS",
+          "visualTopic": "WEALTH",
+          "title": {
+            "en": "Wealth · Structural Context",
+            "zh-Hans": "财富 · 结构背景"
+          }
+        },
+        {
+          "key": "S05_RESOURCE_FLOW",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "wealthResourceFlow"
+          ],
+          "title": {
+            "zh-Hans": "你的资源流动方式",
+            "en": "Your Resource Flow"
+          }
+        },
+        {
+          "key": "S05_RETENTION_REALITY",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "wealthRetentionReality"
+          ],
+          "title": {
+            "zh-Hans": "资源留存、流出与现实财务",
+            "en": "Retention, Outflow & Real Finance"
+          }
+        }
+      ]
+    },
+    {
+      "key": "S06_RELATIONSHIP",
+      "number": "06",
+      "title": {
+        "zh-Hans": "感情婚姻",
+        "en": "Relationships & Marriage"
+      },
+      "enabled": true,
+      "pages": [
+        {
+          "key": "S06_P1",
+          "family": "SECTION_OPENER_PAGE",
+          "executionClass": "STATIC_EDITORIAL",
+          "visualAsset": "VIS-REPORT-BAZI-SEC-06-RELATIONSHIP",
+          "dataModules": [
+            "sectionIntroduction"
+          ],
+          "title": {
+            "zh-Hans": "感情婚姻",
+            "en": "Relationships & Marriage"
+          },
+          "masterAsset": {
+            "assetId": "VIS-REPORT-BAZI-SEC-06-RELATIONSHIP",
+            "role": "SECTION_MASTER_BACKGROUND",
+            "localeIndependent": true,
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-06-RELATIONSHIP.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
+          }
+        },
+        {
+          "key": "S06_RELATIONSHIP_PROFESSIONAL_TOPICS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "visual:PROFESSIONAL_TOPICS"
+          ],
+          "primaryVisualRef": "BZR-VIS-PROFESSIONAL-TOPICS",
+          "visualTopic": "RELATIONSHIPS",
+          "title": {
+            "en": "Relationships · Structural Context",
+            "zh-Hans": "关系 · 结构背景"
+          }
+        },
+        {
+          "key": "S06_POSITION",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "relationshipPosition"
+          ],
+          "title": {
+            "zh-Hans": "你在重要关系中的位置",
+            "en": "Your Position in Important Relationships"
+          }
+        },
+        {
+          "key": "S06_INTERACTION_BOUNDARY",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "relationshipInteractionBoundary"
+          ],
+          "title": {
+            "zh-Hans": "互动、边界与结果",
+            "en": "Interaction, Boundaries & Outcomes"
+          }
+        }
+      ]
+    },
+    {
+      "key": "S07_HEALTH",
+      "number": "07",
+      "title": {
+        "zh-Hans": "健康养生",
+        "en": "Health & Wellbeing"
+      },
+      "enabled": true,
+      "pages": [
+        {
+          "key": "S07_P1",
+          "family": "SECTION_OPENER_PAGE",
+          "executionClass": "STATIC_EDITORIAL",
+          "visualAsset": "VIS-REPORT-BAZI-SEC-07-HEALTH",
+          "dataModules": [
+            "sectionIntroduction"
+          ],
+          "title": {
+            "zh-Hans": "健康养生",
+            "en": "Health & Wellbeing"
+          },
+          "masterAsset": {
+            "assetId": "VIS-REPORT-BAZI-SEC-07-HEALTH",
+            "role": "SECTION_MASTER_BACKGROUND",
+            "localeIndependent": true,
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-07-HEALTH.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
+          }
+        },
+        {
+          "key": "S07_P2",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "healthNarrative"
+          ],
+          "title": {
+            "zh-Hans": "压力与生活节奏",
+            "en": "Pressure & Daily Rhythm"
+          }
+        }
+      ]
+    },
+    {
+      "key": "S08_TIMING",
+      "number": "08",
+      "title": {
+        "zh-Hans": "时间结构",
+        "en": "Timing & Cycles"
+      },
+      "enabled": true,
+      "pages": [
+        {
+          "key": "S08_P1",
+          "family": "SECTION_OPENER_PAGE",
+          "executionClass": "STATIC_EDITORIAL",
+          "visualAsset": "VIS-REPORT-BAZI-SEC-08-TIMING",
+          "dataModules": [
+            "sectionIntroduction"
+          ],
+          "title": {
+            "zh-Hans": "时间结构",
+            "en": "Timing & Cycles"
+          },
+          "masterAsset": {
+            "assetId": "VIS-REPORT-BAZI-SEC-08-TIMING",
+            "role": "SECTION_MASTER_BACKGROUND",
+            "localeIndependent": true,
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-08-TIMING.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
+          }
+        },
+        {
+          "key": "S08_TIMING_TIMING_LAYERS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "visual:TIMING_LAYERS"
+          ],
+          "primaryVisualRef": "BZR-VIS-TIMING-LAYERS",
+          "title": {
+            "en": "Timing Layers",
+            "zh-Hans": "时间层次"
+          }
+        },
+        {
+          "key": "S08_P2",
+          "family": "TIMING_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "timingContext"
+          ],
+          "title": {
+            "zh-Hans": "当前时间层",
+            "en": "Current Timing"
+          }
+        },
+        {
+          "key": "S08_P3",
+          "family": "TIMING_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "currentYearInsight"
+          ],
+          "title": {
+            "zh-Hans": "当前流年观察",
+            "en": "Current-Year Insights"
+          },
+          "omitWhenInsufficient": false
+        }
+      ]
+    },
+    {
+      "key": "S09_GUIDANCE",
+      "number": "09",
+      "title": {
+        "zh-Hans": "人生建议",
+        "en": "Guidance & Recommendations"
+      },
+      "enabled": true,
+      "pages": [
+        {
+          "key": "S09_P1",
+          "family": "SECTION_OPENER_PAGE",
+          "executionClass": "STATIC_EDITORIAL",
+          "visualAsset": "VIS-REPORT-BAZI-SEC-09-GUIDANCE",
+          "dataModules": [
+            "sectionIntroduction"
+          ],
+          "title": {
+            "zh-Hans": "人生建议",
+            "en": "Guidance & Recommendations"
+          },
+          "masterAsset": {
+            "assetId": "VIS-REPORT-BAZI-SEC-09-GUIDANCE",
+            "role": "SECTION_MASTER_BACKGROUND",
+            "localeIndependent": true,
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-09-GUIDANCE.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
+          }
+        },
+        {
+          "key": "S09_INTEGRATED_GUIDANCE",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "guidanceIntegrated"
+          ],
+          "title": {
+            "zh-Hans": "跨章节主线与当前重点",
+            "en": "Themes & Current Focus"
+          }
+        }
+      ]
+    },
+    {
+      "key": "S10_APPENDIX",
+      "number": "10",
+      "title": {
+        "zh-Hans": "方法与附录",
+        "en": "Method & Appendix"
+      },
+      "enabled": true,
+      "pages": [
+        {
+          "key": "S10_P1",
+          "family": "SECTION_OPENER_PAGE",
+          "executionClass": "STATIC_EDITORIAL",
+          "visualAsset": "VIS-REPORT-BAZI-SEC-10-APPENDIX",
+          "dataModules": [
+            "sectionIntroduction"
+          ],
+          "title": {
+            "zh-Hans": "方法与附录",
+            "en": "Method & Appendix"
+          },
+          "masterAsset": {
+            "assetId": "VIS-REPORT-BAZI-SEC-10-APPENDIX",
+            "role": "SECTION_MASTER_BACKGROUND",
+            "localeIndependent": true,
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-10-APPENDIX.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
+          }
+        },
+        {
+          "key": "S10_METHOD_GUIDE",
+          "family": "METHOD_APPENDIX_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "methodGuide"
+          ],
+          "title": {
+            "zh-Hans": "如何理解方法与证据",
+            "en": "How to Read the Method"
+          }
+        }
+      ]
+    }
+  ],
+  "backMatter": [
+    {
+      "key": "BM01",
+      "family": "SUMMARY_PAGE",
+      "enabled": false
+    }
+  ],
+  "pagination": {
+    "owner": "GlobalReportPagination",
+    "total": "EXPANDED_PAGES",
+    "legacyStaticException": "USER_SELECTED_OPTION_1"
+  },
+  "policy": {
+    "minimumBodyPagesPerSection": 1,
+    "calculatedStandardTotal": 36,
+    "notes": "The attachment's 33-page sum is an arithmetic error: 6 + 10 × 3 = 36. No hard total limit; optional evidence and overflow change the total.",
+    "executionModel": {
+      "STATIC_EDITORIAL": "Fixed bilingual publication copy; never provider-generated.",
+      "DETERMINISTIC_PERSONALIZED": "Personalized from admitted BaZi engine facts/relationships without provider generation.",
+      "DYNAMIC_T3": "Not part of canonical customer publication; retained only as explicit editorial experiment evidence."
+    },
+    "canonicalCustomerPublicationT3": false,
+    "publicationPolish": {
+      "version": "R7",
+      "rule": "Long-form narrative pages require reliable evidence density; shorter boundary/condition facets use structured analysis rather than filler.",
+      "noFiller": true
+    },
+    "compression": {
+      "version": "R10",
+      "targetTotalPages": 44,
+      "targetBodyPages": 38,
+      "standaloneKeyInsights": false,
+      "sectionMasterOwns": [
+        "SECTION_OPENER",
+        "KEY_INSIGHTS",
+        "READING_FRAME"
+      ],
+      "thinPageMerge": true
+    },
+    "sectionMasterAssets": {
+      "count": 10,
+      "reuseExistingRegisteredAssets": true,
+      "newAssetsRequired": 0,
+      "localeIndependent": true,
+      "bucketPrefix": "images/reports/bazi/editorial/shared/",
+      "bakedText": false,
+      "backgroundTreatment": "CSS_OPACITY_SCRIM_ONLY",
+      "htmlOwns": [
+        "SECTION_NUMBER",
+        "SECTION_TITLE",
+        "SECTION_INTRO",
+        "THREE_KEY_INSIGHTS"
+      ]
+    }
+  }
+};
+
+export const familyRegistry = {
+  "version": "2.1.0",
+  "families": {
+    "SECTION_OPENER_PAGE": {
+      "budget": {
+        "zh": [
+          50,
+          110
+        ],
+        "en": [
+          40,
+          90
+        ]
+      },
+      "blocks": [
+        "number",
+        "bilingualTitle",
+        "intro",
+        "hero"
+      ],
+      "overflowPolicy": "SPLIT_AT_SEMANTIC_BLOCK",
+      "minFontPx": 16
+    },
+    "STRUCTURED_ANALYSIS_PAGE": {
+      "budget": {
+        "zh": [
+          36,
+          160
+        ],
+        "en": [
+          24,
+          120
+        ]
+      },
+      "blocks": [
+        "facts",
+        "diagram",
+        "explanation"
+      ],
+      "overflowPolicy": "SPLIT_AT_SEMANTIC_BLOCK",
+      "minFontPx": 16
+    },
+    "NARRATIVE_ANALYSIS_PAGE": {
+      "budget": {
+        "zh": [
+          160,
+          360
+        ],
+        "en": [
+          130,
+          260
+        ]
+      },
+      "blocks": [
+        "intro",
+        "interpretation",
+        "reflection",
+        "boundary"
+      ],
+      "overflowPolicy": "SPLIT_AT_SEMANTIC_BLOCK",
+      "minFontPx": 16
+    },
+    "INSIGHT_LIST_PAGE": {
+      "budget": {
+        "items": [
+          3,
+          6
+        ],
+        "zhItem": [
+          18,
+          60
+        ],
+        "enItem": [
+          12,
+          40
+        ]
+      },
+      "blocks": [
+        "items"
+      ],
+      "overflowPolicy": "SPLIT_AT_SEMANTIC_BLOCK",
+      "minFontPx": 16
+    },
+    "TIMING_PAGE": {
+      "budget": {
+        "observations": [
+          1,
+          4
+        ]
+      },
+      "blocks": [
+        "temporal",
+        "narrative",
+        "observations"
+      ],
+      "overflowPolicy": "SPLIT_AT_SEMANTIC_BLOCK",
+      "minFontPx": 16
+    },
+    "METHOD_APPENDIX_PAGE": {
+      "budget": {
+        "zh": [
+          120,
+          240
+        ],
+        "en": [
+          90,
+          180
+        ]
+      },
+      "blocks": [
+        "method",
+        "scope",
+        "readerGuidance"
+      ],
+      "overflowPolicy": "SPLIT_AT_SEMANTIC_BLOCK",
+      "minFontPx": 16
+    },
+    "SUMMARY_PAGE": {
+      "budget": {
+        "takeaways": [
+          3,
+          5
+        ]
+      },
+      "blocks": [
+        "narrative",
+        "takeaways"
+      ],
+      "overflowPolicy": "SPLIT_AT_SEMANTIC_BLOCK",
+      "minFontPx": 16
+    }
+  }
+};
+
+export const visualAssets = {
+  "method": "BAZI",
+  "version": "2.1.1",
+  "global": {
+    "bodyBackground": "VIS-REPORT-BAZI-BODY",
+    "motifLayer": "VIS-REPORT-BAZI-MOTIF",
+    "sectionStyle": "VIS-REPORT-BAZI-SECTION-STYLE",
+    "motifs": [
+      "VIS-REPORT-BAZI-MOTIF",
+      "VIS-REPORT-BAZI-MOTIF-2"
+    ]
+  },
+  "sections": {
+    "S01_OVERVIEW": "VIS-REPORT-BAZI-SEC-01-OVERVIEW",
+    "S02_PERSONALITY": "VIS-REPORT-BAZI-SEC-02-PERSONALITY",
+    "S03_LIFE_STRUCTURE": "VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE",
+    "S04_CAREER": "VIS-REPORT-BAZI-SEC-04-CAREER",
+    "S05_WEALTH": "VIS-REPORT-BAZI-SEC-05-WEALTH",
+    "S06_RELATIONSHIP": "VIS-REPORT-BAZI-SEC-06-RELATIONSHIP",
+    "S07_HEALTH": "VIS-REPORT-BAZI-SEC-07-HEALTH",
+    "S08_TIMING": "VIS-REPORT-BAZI-SEC-08-TIMING",
+    "S09_GUIDANCE": "VIS-REPORT-BAZI-SEC-09-GUIDANCE",
+    "S10_APPENDIX": "VIS-REPORT-BAZI-SEC-10-APPENDIX"
+  },
+  "bindings": {
+    "VIS-REPORT-BAZI-MOTIF": "/assets/images/report/VIS-REPORT-BAZI-MOTIF.svg",
+    "VIS-REPORT-BAZI-BODY": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-BODY.webp",
+    "VIS-REPORT-BAZI-SECTION-STYLE": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SECTION-STYLE.webp",
+    "VIS-REPORT-BAZI-SEC-01-OVERVIEW": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-01-OVERVIEW.webp",
+    "VIS-REPORT-BAZI-SEC-02-PERSONALITY": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-02-PERSONALITY.webp",
+    "VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE.webp",
+    "VIS-REPORT-BAZI-SEC-04-CAREER": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-04-CAREER.webp",
+    "VIS-REPORT-BAZI-SEC-05-WEALTH": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-05-WEALTH.webp",
+    "VIS-REPORT-BAZI-SEC-06-RELATIONSHIP": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-06-RELATIONSHIP.webp",
+    "VIS-REPORT-BAZI-SEC-07-HEALTH": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-07-HEALTH.webp",
+    "VIS-REPORT-BAZI-SEC-08-TIMING": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-08-TIMING.webp",
+    "VIS-REPORT-BAZI-SEC-09-GUIDANCE": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-09-GUIDANCE.webp",
+    "VIS-REPORT-BAZI-SEC-10-APPENDIX": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-10-APPENDIX.webp",
+    "VIS-REPORT-BAZI-MOTIF-2": "/assets/images/report/VIS-REPORT-BAZI-MOTIF-2.svg"
+  },
+  "fallback": "CSS_SECTION_STYLE_BODY_MOTIF",
+  "allowEmptySlots": false,
+  "fallbackOrder": [
+    "SECTION_HERO",
+    "SECTION_STYLE",
+    "BODY_WITH_MOTIF",
+    "BODY",
+    "CSS_PREMIUM"
+  ],
+  "heroPlacements": [
+    "hero-bottom",
+    "hero-right",
+    "hero-left",
+    "hero-full-fade",
+    "hero-corner"
+  ],
+  "openerRotation": [
+    "hero-bottom",
+    "hero-right",
+    "hero-left",
+    "hero-full-fade",
+    "hero-bottom",
+    "hero-right",
+    "hero-left",
+    "hero-full-fade",
+    "hero-bottom",
+    "hero-right"
+  ],
+  "bodyVariants": [
+    "BODY_A",
+    "BODY_B",
+    "BODY_C"
+  ],
+  "intensity": {
+    "body": 0.15,
+    "narrative": 0.12,
+    "insight": 0.09,
+    "opener": 0.45
+  },
+  "assets": [
+    {
+      "assetId": "VIS-REPORT-BAZI-BODY",
+      "method": "BAZI",
+      "assetType": "BODY",
+      "section": null,
+      "priority": "A",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-BODY.webp",
+      "fallback": "CSS_PREMIUM",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "R2_BOUND",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-MOTIF",
+      "method": "BAZI",
+      "assetType": "MOTIF",
+      "section": null,
+      "priority": "A",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "svg",
+      "objectKey": "reports/bazi/r2/visual/motif/VIS-REPORT-BAZI-MOTIF.svg",
+      "fallback": "CSS_PREMIUM",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "PROVIDED_LOCAL_REVIEW_PENDING",
+      "humanVisualAcceptance": "PENDING",
+      "technicalNote": "SVG contains embedded PNG raster layers; accepted as decodable SVG, not claimed to be a pure vector master."
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "method": "BAZI",
+      "assetType": "SECTION_STYLE",
+      "section": null,
+      "priority": "A",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SECTION-STYLE.webp",
+      "fallback": "VIS-REPORT-BAZI-BODY",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "R2_BOUND",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-01-OVERVIEW",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S01_OVERVIEW",
+      "priority": "B",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-01-OVERVIEW.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "R2_BOUND",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-02-PERSONALITY",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S02_PERSONALITY",
+      "priority": "B",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-02-PERSONALITY.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "R2_BOUND",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S03_LIFE_STRUCTURE",
+      "priority": "C",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "R2_BOUND",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-04-CAREER",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S04_CAREER",
+      "priority": "B",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-04-CAREER.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "R2_BOUND",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-05-WEALTH",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S05_WEALTH",
+      "priority": "B",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-05-WEALTH.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "R2_BOUND",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-06-RELATIONSHIP",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S06_RELATIONSHIP",
+      "priority": "B",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-06-RELATIONSHIP.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "R2_BOUND",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-07-HEALTH",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S07_HEALTH",
+      "priority": "C",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-07-HEALTH.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "R2_BOUND",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-08-TIMING",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S08_TIMING",
+      "priority": "C",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-08-TIMING.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "R2_BOUND",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-09-GUIDANCE",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S09_GUIDANCE",
+      "priority": "C",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-09-GUIDANCE.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "R2_BOUND",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-10-APPENDIX",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S10_APPENDIX",
+      "priority": "C",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-10-APPENDIX.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "R2_BOUND",
+      "humanVisualAcceptance": "PENDING"
+    }
+  ],
+  "motifAliases": {
+    "MOTIF_1": "VIS-REPORT-BAZI-MOTIF",
+    "MOTIF_2": "VIS-REPORT-BAZI-MOTIF-2"
+  },
+  "intensityByFamily": {
+    "STRUCTURED_ANALYSIS_PAGE": 0.22,
+    "NARRATIVE_ANALYSIS_PAGE": 0.17,
+    "INSIGHT_LIST_PAGE": 0.12,
+    "SECTION_OPENER_PAGE": 0.4,
+    "TIMING_PAGE": 0.22,
+    "SUMMARY_PAGE": 0.17,
+    "METHOD_APPENDIX_PAGE": 0.17
+  }
+};
+
+export const visualModules = {
+  "version": "BAZI_PUBLICATION_VISUAL_MODULES_V1",
+  "methodId": "BZR",
+  "publicationCreatesMeaning": false,
+  "modules": [
+    {
+      "key": "FOUR_PILLARS",
+      "id": "BZR-VIS-FOUR-PILLARS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "structuralModel/pillars"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PREVIEW",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "DAY_MASTER_CARRYING",
+      "id": "BZR-VIS-DAY-MASTER-CARRYING",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/dayMasterStrength"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PAID_LOCKED",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "FIVE_ELEMENTS",
+      "id": "BZR-VIS-FIVE-ELEMENTS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/fiveElements"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PREVIEW",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "TEN_GOD_OVERVIEW",
+      "id": "BZR-VIS-TEN-GOD-OVERVIEW",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/tenGods"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PREVIEW",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "TEN_GOD_FUNCTION_GROUPS",
+      "id": "BZR-VIS-TEN-GOD-FUNCTION-GROUPS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/tenGods/functionGroups"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PREVIEW",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "TEN_GOD_DETAILS",
+      "id": "BZR-VIS-TEN-GOD-DETAILS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/tenGods/items"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PAID_LOCKED",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "PATTERN_PATHS",
+      "id": "BZR-VIS-PATTERN-PATHS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/pattern"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PAID_LOCKED",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "PILLAR_RELATIONSHIPS",
+      "id": "BZR-VIS-PILLAR-RELATIONSHIPS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/relationships"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PAID_LOCKED",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "TIMING_LAYERS",
+      "id": "BZR-VIS-TIMING-LAYERS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/timing"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PAID_LOCKED",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "PROFESSIONAL_TOPICS",
+      "id": "BZR-VIS-PROFESSIONAL-TOPICS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/professionalTopics/topics",
+        "professionalModules/tenGods",
+        "professionalModules/professionalTimeline/currentWindow"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PAID_LOCKED",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    }
+  ]
+};

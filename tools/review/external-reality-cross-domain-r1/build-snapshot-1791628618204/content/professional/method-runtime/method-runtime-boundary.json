@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "PHI-OS-METHOD-RUNTIME-BOUNDARY-v1.0.0",
+  "stageCode": "MR-W0",
+  "status": "frozen",
+  "runtimeIdentity": {
+    "runtimeCode": "METHOD_RUNTIME",
+    "runtimeName": "PHI OS Method Runtime Platform",
+    "runtimeVersion": "1.0.0",
+    "singleton": true,
+    "pluginRegistrationRequired": true,
+    "perMethodRuntimeAllowed": false
+  },
+  "authority": {
+    "constitution": "PHI_OS_GOVERNANCE",
+    "methodDefinition": "IMR_APPROVED_METHOD_DEFINITION",
+    "data": "SHARED_DATA_AUTHORITY",
+    "calculation": "SHARED_CALCULATION_RUNTIME",
+    "projection": "SHARED_PROJECTION_RUNTIME",
+    "interpretation": "SHARED_INTERPRETATION_RUNTIME",
+    "professional": "SHARED_PROFESSIONAL_RUNTIME",
+    "release": "AUTHORIZED_HUMAN_VIA_PROFESSIONAL_RUNTIME"
+  },
+  "boundary": {
+    "aiCalculationAllowed": false,
+    "workersAiCalculationAllowed": false,
+    "promptCalculationAllowed": false,
+    "projectionMayContainInterpretation": false,
+    "projectionProfessionalAuthority": false,
+    "interpretationOutput": "INTERPRETATION_CANDIDATE",
+    "interpretationDirectReleaseAllowed": false,
+    "methodRuntimeMayCreateProfessionalJudgment": false,
+    "methodRuntimeMaySignDeliverable": false,
+    "methodRuntimeMayCreateEntitlement": false,
+    "professionalRuntimeIndependent": true,
+    "professionalWorkspaceDirectProviderAccessAllowed": false
+  },
+  "dependencies": {
+    "journeyRuntime": {
+      "required": false,
+      "access": "optional_interpretation_input_adapter"
+    },
+    "knowledgeRuntime": {
+      "required": false,
+      "access": "optional_published_knowledge_adapter"
+    },
+    "professionalWorkspace": {
+      "required": false,
+      "access": "downstream_read_and_handoff_only"
+    },
+    "professionalRuntime": {
+      "required": false,
+      "access": "governed_release_handoff_only"
+    }
+  },
+  "providerBoundary": {
+    "calculationAllowedProviders": [
+      "DETERMINISTIC_ENGINE",
+      "VERIFIED_EXTERNAL_ENGINE"
+    ],
+    "calculationProhibitedProviders": [
+      "OPENAI",
+      "WORKERS_AI",
+      "PROMPT"
+    ],
+    "interpretationAllowedProviders": [
+      "RULE_ENGINE",
+      "WORKERS_AI",
+      "OPENAI"
+    ],
+    "interpretationOutput": "INTERPRETATION_CANDIDATE",
+    "aiMayCreateCalculationFacts": false,
+    "aiMayGuessMissingMethodData": false,
+    "aiMayPromoteProjectionToProfessional": false,
+    "aiMayDirectlyReleaseInterpretation": false,
+    "externalCalculationProviderMustBeVerified": true,
+    "providerVersionRequired": true,
+    "providerFailureMustNotFabricateOutput": true
+  },
+  "productionContract": {
+    "imrProductionEligibilityRequired": true,
+    "requiredPluginStatus": "production",
+    "allowedProductionLicenseStatus": [
+      "approved",
+      "not_required"
+    ],
+    "runtimeCompatibilityRequired": true,
+    "projectionVersionRequired": true,
+    "resolvedDependenciesRequired": true,
+    "repeatabilityEvidenceRequired": true,
+    "providerBoundaryValidationRequired": true,
+    "professionalReleaseHandoffRequired": true,
+    "auditLineageRequired": true,
+    "constitutionGateRequired": "npm run check:mr-w0"
+  },
+  "futurePluginPolicy": {
+    "registrationRequired": true,
+    "constitutionAmendmentByPluginAllowed": false,
+    "newRuntimeByPluginAllowed": false,
+    "layerReorderingAllowed": false,
+    "implicitAuthorityAllowed": false,
+    "productionWithoutImrAllowed": false,
+    "productionWithoutLicenseGateAllowed": false,
+    "geneKeysRuntimePolicy": "translation_layer_over_human_design_projection_only"
+  }
+}
+

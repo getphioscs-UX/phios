@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W14-REGRESSION-RUNTIME-v2.0.0",
+  "work": "MPA-W14-CURRENT",
+  "baselineCommit": "4188ce3cb33fc4bb0ddf80b29a4ab546a74841d6",
+  "triggerRegistry": "content/professional/method-production-activation/registries/mpa-regression-trigger-registry-v2.json",
+  "methodDependencyRegistry": "content/professional/method-production-activation/registries/mpa-method-dependency-registry-v2.json",
+  "requiredFixtureType": "regression",
+  "rules": {
+    "sameFingerprintMayReuseRecordedRegressionOnlyForSamePolicyAndMethodVersion": true,
+    "changedMethodFingerprintMustRerun": true,
+    "changedMethodDependencyMustRerun": true,
+    "unresolvedExternalFingerprintBlocksProduction": true,
+    "wholePackageJsonFingerprintForbidden": true,
+    "wholePackageLockFingerprintForbidden": true,
+    "pxrBfrVisualFingerprintCouplingForbidden": true
+  },
+  "status": "ACTIVE_METHOD_SCOPED_NO_PRODUCTION_GRANT"
+}

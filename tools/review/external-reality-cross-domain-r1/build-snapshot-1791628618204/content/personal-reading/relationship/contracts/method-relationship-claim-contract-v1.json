@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "PHI-OS-METHOD-RELATIONSHIP-CLAIM-CONTRACT-v1.0.0",
+  "work": "REL-W4",
+  "productObject": "PHI-OS-METHOD-RELATIONSHIP-CLAIM-v1",
+  "claimClasses": ["CONNECTION", "COMPLEMENT", "TENSION", "ASYMMETRY", "MISREAD_RISK", "RESOURCE_DYNAMIC", "DECISION_DYNAMIC", "TIMING_CONTEXT", "OPEN"],
+  "requiredFields": [
+    "relationshipClaimId",
+    "methodId",
+    "participantARefs",
+    "participantBRefs",
+    "compositionRuleId",
+    "semanticOwnerId",
+    "claimClass",
+    "headline",
+    "summary",
+    "supportRefs",
+    "tensionRefs",
+    "conditionRefs",
+    "counterRefs",
+    "timingRefs",
+    "precisionBoundaryRefs",
+    "sourceRefs",
+    "customerPublishable",
+    "governance"
+  ],
+  "rules": {
+    "onePrimaryOwnerPerSemanticCluster": true,
+    "acceptedAAndBReadingsRequired": true,
+    "relW2SupportedCapabilityRequired": true,
+    "methodSpecificAuthorityRequired": true,
+    "crossMethodMeaningAllowed": false,
+    "rendererMeaningCreationAllowed": false,
+    "humanAdmissionRequiredBeforeCustomerPublication": true
+  },
+  "forbidden": [
+    "compatibility percentage",
+    "soulmate or destined verdict",
+    "partner hidden-state inference",
+    "guaranteed relationship outcome",
+    "stay or leave directive",
+    "diagnosis",
+    "method voting"
+  ]
+}

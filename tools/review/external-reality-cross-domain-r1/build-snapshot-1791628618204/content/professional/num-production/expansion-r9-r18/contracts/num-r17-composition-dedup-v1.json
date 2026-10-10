@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "PHI-OS-NUM-R17-COMPOSITION-DEDUP-CONTRACT-v1.0.0",
+  "workCode": "NUM-R17",
+  "baselineCommit": "d576387f33e2a1ca76f196dba5059e15499d1b4d",
+  "status": "HUMAN_ADMITTED_RUNTIME_ACTIVE",
+  "inputs": [
+    "NUM-R10 digit distribution",
+    "NUM-R11 name calculation",
+    "NUM-R12 pinnacle/challenge crosscheck evidence",
+    "NUM-R13 life-period structural codes",
+    "NUM-R14 energy grouping structural labels",
+    "NUM-R15 alternative timing flow-year + phase code",
+    "NUM-R16 relationship structural comparison + relationship number"
+  ],
+  "dedupRules": [
+    "Same digit evidence emitted by multiple sections is not restated as multiple personality claims.",
+    "Name-number raw/reduction evidence is shown once per role; intermediate 11/22/33 remains derivation evidence rather than a duplicate role.",
+    "Pinnacle/challenge values are not relabeled as life-period values.",
+    "Current R8 Personal Year/Month/Day is not merged with alternative flow-year/phase school.",
+    "Missing-digit structural state is never promoted to deficit/black-hole meaning without separate admitted semantics."
+  ],
+  "publication": {
+    "customerPublishable": true,
+    "runtimeUseAllowed": true,
+    "existingR8CustomerSurfacePreservedAndExtended": true,
+    "semanticTraitExpansionAllowed": false
+  },
+  "runtime": "functions/num-expansion/num-expansion-composer.js",
+  "currentBaselineCommit": "31f0cb5dcf47c1e9419ef67ac89968d06834b35d"
+}

@@ -1,0 +1,5 @@
+import {evaluateRealityComplexityGate,normalizeRealityComplexityRequest} from '../_lib/knowledge-reality-complexity.js';
+const H=Object.freeze({'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff'});
+const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
+export async function onRequestPost(context){let body;try{body=await context.request.json();}catch{return json({ok:false,error:{code:'INVALID_JSON'}},400);}try{const input=normalizeRealityComplexityRequest(body);return json({ok:true,...evaluateRealityComplexityGate(input)});}catch(error){const code=String(error?.code||error?.message||'KAP_COMPLEXITY_GATE_FAILED');return json({ok:false,error:{code},governance:{realityTruthCreated:false,realityModelCreated:false,persistentCaseCreated:false,realityJourneyActivated:false}},/INVALID|REQUIRED/.test(code)?400:500);}}
+export async function onRequestGet(){return json({ok:false,error:{code:'KAP_COMPLEXITY_GATE_POST_ONLY'}},405);}

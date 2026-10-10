@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W18-CLAIM-POLICY-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W18",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "ACTIVE_AUTOMATIC_READING_CLAIM_SAFETY_POLICY",
+  "purpose": "Prevent Method readings, convergence, interpretation, or incomplete evidence from being presented as unconditional facts or fate-like determinations.",
+  "preferredAutomaticFraming": {
+    "en": [
+      "The available evidence suggests...",
+      "Within the current inputs and selected methods...",
+      "The more consistent signal at present is..."
+    ],
+    "zh-Hans": [
+      "现有证据显示……",
+      "在目前输入与已选择方法中……",
+      "目前较一致的信号是……"
+    ]
+  },
+  "prohibitedAutomaticPatterns": [
+    "ABSOLUTE_DESTINY_CLAIM",
+    "UNQUALIFIED_IDENTITY_VERDICT",
+    "UNQUALIFIED_WEALTH_OR_CAREER_VERDICT",
+    "METHOD_READING_AS_OBJECTIVE_FACT",
+    "CONVERGENCE_AS_OBJECTIVE_TRUTH",
+    "PROFESSIONAL_CONCLUSION_WITHOUT_PR",
+    "UNKNOWN_HIDDEN_TO_CREATE_CERTAINTY"
+  ],
+  "exampleRejectedClaim": "你的财富不是普通工资型",
+  "automaticReplacementPolicy": "QUALIFY_BY_AVAILABLE_EVIDENCE_OR_DO_NOT_EMIT",
+  "rules": {
+    "calculatedFactMayRemainDirectWhenStrictlyCalculatedAndScoped": true,
+    "userReportedFactMayRemainDirectWhenAttributed": true,
+    "canonicalMeaningMustRetainMeaningScope": true,
+    "systemInterpretationMustBeEvidenceQualified": true,
+    "professionalJudgmentMustBeSeparatelyLabelled": true,
+    "navigationOptionMustRemainOptional": true,
+    "unknownMayBeConvertedIntoPositiveClaim": false,
+    "llmStylingMayIncreaseCertainty": false
+  }
+}

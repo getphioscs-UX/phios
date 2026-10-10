@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/icr/canonical-input-v1.schema.json",
+  "title": "PHI OS ICR Canonical Input Envelope v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "canonicalInputCode",
+    "canonicalInputVersion",
+    "inputType",
+    "inputStatus",
+    "subjectReference",
+    "sourceChannel",
+    "declaredAt",
+    "locale",
+    "payload",
+    "provenance",
+    "governanceBindings",
+    "lineage",
+    "canonicalInputDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CANONICAL-INPUT-v1.0.0"},
+    "canonicalInputCode": {"type": "string", "pattern": "^ICR-INPUT-[A-Z0-9-]{4,80}$"},
+    "canonicalInputVersion": {"$ref": "#/$defs/semver"},
+    "inputType": {"enum": ["REALITY_DESCRIPTION", "BIRTH_DATA", "FINANCIAL_INTAKE", "EXTERNAL_READER_INTAKE"]},
+    "inputStatus": {"const": "DECLARED"},
+    "subjectReference": {"type": "string", "pattern": "^SUBJECT-[A-Z0-9-]{4,80}$"},
+    "sourceChannel": {"enum": ["REALITY_ENTRY", "SELF_SERVICE_INTAKE", "PROFESSIONAL_INTAKE", "EXTERNAL_READER_INTAKE"]},
+    "declaredAt": {"type": "string", "format": "date-time"},
+    "locale": {"enum": ["en", "zh-Hans"]},
+    "payload": {"type": "object", "minProperties": 1},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceType", "sourceReferences", "capturedBy", "providerUsed", "aiUsed"],
+      "properties": {
+        "sourceType": {"enum": ["SUBJECT_DECLARATION", "VERIFIED_DOCUMENT_REFERENCE", "PROFESSIONAL_DECLARATION", "EXISTING_OPERATIONAL_INTAKE"]},
+        "sourceReferences": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "capturedBy": {"const": "ICR_OPERATIONAL_INTAKE"},
+        "providerUsed": {"const": false},
+        "aiUsed": {"const": false}
+      }
+    },
+    "governanceBindings": {"$ref": "#/$defs/governanceBindings"},
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["upstreamIntakeReferences", "previousCanonicalInputReference"],
+      "properties": {
+        "upstreamIntakeReferences": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "previousCanonicalInputReference": {"type": ["string", "null"], "pattern": "^ICR-INPUT-[A-Z0-9-]{4,80}$"}
+      }
+    },
+    "canonicalInputDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "semver": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "governanceBindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dataType", "purposeCodes", "consentClass", "consentReference", "persistenceClass", "retentionClass", "sensitivityClass", "deletionState", "rdgAuthorityReference"],
+      "properties": {
+        "dataType": {"const": "REALITY_INPUT_RECORD"},
+        "purposeCodes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "consentClass": {"type": "string"},
+        "consentReference": {"type": "string", "minLength": 1},
+        "persistenceClass": {"type": "string"},
+        "retentionClass": {"type": "string"},
+        "sensitivityClass": {"type": "string"},
+        "deletionState": {"type": "string"},
+        "rdgAuthorityReference": {"const": "content/governance/reality-data-governance/registries/reality-data-registry-v1.json"}
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-APS-5-REVIEW-BATCH-ASSEMBLY-CONTRACT-v1.0.0",
+  "work": "APS-5",
+  "status": "ACTIVE",
+  "title": "Review Batch Assembly",
+  "baselineCommit": "655a6136919fa820f6d064237cf01a8fc4f8f667",
+  "purpose": "Turn APS-4 candidate and locale handoff evidence into one human-facing review batch without recreating Human Review, Human Approval or Publication authority. Exact digest-bound accepted Review and approved Approval may be reused; unresolved Human decisions remain explicit per node and locale.",
+  "command": "npm run article:batch -- --book BOOK-1 --count 30",
+  "input": {
+    "requiredWork": "APS-4",
+    "requiredPrimaryState": "CANDIDATE_READY",
+    "eligibleLocaleLaneState": "CANDIDATE_READY_FOR_LOCALE_AUTHORITY",
+    "blockedLocaleLanesRemainExcluded": true
+  },
+  "assembly": {
+    "reviewBatchArtifact": "content/production/article-simplification/batches/BATCH-NNN/review-batch.v1.json",
+    "humanDecisionInputArtifact": "content/production/article-simplification/batches/BATCH-NNN/human-decisions.v1.json",
+    "existingAcceptedReviewReuseAllowed": true,
+    "existingApprovedApprovalReuseAllowed": true,
+    "productionArticlePackageMustMatchCandidateReviewApprovalDigests": true,
+    "publicationDecisionMustRemainExplicit": true,
+    "bulkPublicationDecisionAllowed": false
+  },
+  "currentBatchExpectedSimplification": {
+    "bookCode": "BOOK-1",
+    "locale": "zh-Hans",
+    "selectedNodeCount": 6,
+    "reusedReviewCount": 6,
+    "reusedApprovalCount": 6,
+    "pendingPublicationDecisionCount": 6,
+    "englishLaneExpectedState": "EXCLUDED_FAIL_CLOSED_UNTIL_INDEPENDENT_EN_CANDIDATE_AND_LOCALE_IDENTITY"
+  },
+  "humanDecisionInputBoundary": {
+    "fileIsAuthorityBeforeAPS6": false,
+    "mayPrepopulateReusedReviewApprovalFacts": true,
+    "mayInferPublicationDecision": false,
+    "allowedPublicationDecisions": ["publish", "do_not_publish", "defer"],
+    "oneIndependentDecisionPerNodeLocale": true
+  },
+  "localeIntegration": {
+    "sequenceAfterPublication": ["LOCALE_ARTICLE_AUTHORITY", "CAR", "CPR", "VISUAL_ARTICLE", "SAME_ROUTE_LOCALE_RELEASE"],
+    "localeAuthorityInheritanceAllowed": false,
+    "englishTranslationInheritanceAllowed": false,
+    "sameRouteReleaseDoesNotEqualSharedLocaleAuthority": true
+  },
+  "governance": {
+    "reviewBatchEqualsAuthority": false,
+    "reviewBatchEqualsBulkApproval": false,
+    "humanDecisionInputEqualsAuthorityBeforeAPS6": false,
+    "candidateMutationAllowed": false,
+    "reviewMutationAllowed": false,
+    "approvalMutationAllowed": false,
+    "publicationCreationAllowedAtAPS5": false,
+    "carCreationAllowedAtAPS5": false,
+    "cprCreationAllowedAtAPS5": false,
+    "visualArticleCreationAllowedAtAPS5": false
+  },
+  "nextWork": "APS-6_BATCH_HUMAN_REVIEW_AND_DECISION_BRIDGE"
+}

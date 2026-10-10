@@ -1,0 +1,354 @@
+{
+  "schemaVersion": "PHI-OS-FINANCIAL-CAPABILITY-INSTRUMENT-v1.0.0",
+  "work": "PRF-W10E",
+  "baselineCommit": "c259917fbc55b57d35402a591f0db2e7e7b7e8c3",
+  "instrumentId": "PHI_OS_FINANCIAL_CAPABILITY_2026_ADAPTED_V1",
+  "instrumentVersion": "1.0.0",
+  "sourceBasis": "OECD_INFE_2026",
+  "licenseAdmissionRef": "content/profile/academic/financial/oecd-infe-2026-license-admission-v1.json",
+  "adaptationDisclosure": "Adapted from the OECD/INFE Toolkit for Measuring Financial Literacy, Inclusion and Well-Being 2026. PHI OS has modified and shortened content; this is not an official OECD score or OECD-endorsed instrument.",
+  "translationDisclosure": "This zh-Hans version is a PHI OS adaptation. In case of discrepancy, the admitted English source basis controls the source comparison; PHI OS scoring remains adapted rather than OECD-official.",
+  "responseScales": {
+    "LIKERT_1_5": {
+      "min": 1,
+      "max": 5,
+      "anchors": {
+        "1": "Strongly disagree / Never",
+        "3": "Middle",
+        "5": "Strongly agree / Always"
+      }
+    },
+    "CHOICE": "item-specific",
+    "TRUE_FALSE": [
+      "TRUE",
+      "FALSE"
+    ]
+  },
+  "items": [
+    {
+      "itemId": "PHI-FCAP-01",
+      "section": "FINANCIAL_KNOWLEDGE",
+      "sourceClass": "MEASURED_TASK_PERFORMANCE",
+      "prompt": {
+        "en": "If prices rise noticeably over a year while your income stays unchanged, the same income will generally buy:",
+        "zh-Hans": "如果一年内物价明显上涨而收入不变，同样的收入通常能买到："
+      },
+      "response": "CHOICE",
+      "scoring": {
+        "correct": "LESS",
+        "options": [
+          "LESS",
+          "SAME",
+          "MORE",
+          "CANNOT_TELL"
+        ]
+      },
+      "sensitive": false,
+      "sourceAnchor": "QK3-adapted"
+    },
+    {
+      "itemId": "PHI-FCAP-02",
+      "section": "FINANCIAL_KNOWLEDGE",
+      "sourceClass": "MEASURED_TASK_PERFORMANCE",
+      "prompt": {
+        "en": "You place RM100 in savings at 2% annual interest with no fees or tax. After one year, the balance is:",
+        "zh-Hans": "你把 RM100 存入年利率 2%、无费用和税项的储蓄账户。一年后余额是："
+      },
+      "response": "CHOICE",
+      "scoring": {
+        "correct": "RM102",
+        "options": [
+          "RM98",
+          "RM100",
+          "RM102",
+          "RM120"
+        ]
+      },
+      "sensitive": false,
+      "sourceAnchor": "QK5-adapted"
+    },
+    {
+      "itemId": "PHI-FCAP-03",
+      "section": "FINANCIAL_KNOWLEDGE",
+      "sourceClass": "MEASURED_TASK_PERFORMANCE",
+      "prompt": {
+        "en": "If that RM100 keeps earning 2% annually and interest stays in the account, after five years the balance will be:",
+        "zh-Hans": "如果这 RM100 每年继续获得 2% 利息且利息留在账户中，五年后余额会："
+      },
+      "response": "CHOICE",
+      "scoring": {
+        "correct": "MORE_THAN_RM110",
+        "options": [
+          "MORE_THAN_RM110",
+          "EXACTLY_RM110",
+          "LESS_THAN_RM110",
+          "CANNOT_TELL"
+        ]
+      },
+      "sensitive": false,
+      "sourceAnchor": "QK6-adapted"
+    },
+    {
+      "itemId": "PHI-FCAP-04",
+      "section": "FINANCIAL_KNOWLEDGE",
+      "sourceClass": "MEASURED_TASK_PERFORMANCE",
+      "prompt": {
+        "en": "An investment offering a much higher expected return generally tends to involve:",
+        "zh-Hans": "预期回报高得多的投资通常也倾向伴随："
+      },
+      "response": "CHOICE",
+      "scoring": {
+        "correct": "HIGHER_RISK",
+        "options": [
+          "HIGHER_RISK",
+          "LOWER_RISK",
+          "NO_RISK_DIFFERENCE",
+          "GUARANTEED_RETURN"
+        ]
+      },
+      "sensitive": false,
+      "sourceAnchor": "QK7-risk-return-adapted"
+    },
+    {
+      "itemId": "PHI-FCAP-05",
+      "section": "FINANCIAL_KNOWLEDGE",
+      "sourceClass": "MEASURED_TASK_PERFORMANCE",
+      "prompt": {
+        "en": "Spreading investments across many unrelated assets generally reduces the chance that one failure wipes out the whole portfolio.",
+        "zh-Hans": "把投资分散到多种彼此关联较低的资产，通常会降低单一失败拖垮整个组合的风险。"
+      },
+      "response": "TRUE_FALSE",
+      "scoring": {
+        "correct": "TRUE",
+        "options": [
+          "TRUE",
+          "FALSE"
+        ]
+      },
+      "sensitive": false,
+      "sourceAnchor": "QK7-diversification-adapted"
+    },
+    {
+      "itemId": "PHI-FCAP-06",
+      "section": "FINANCIAL_KNOWLEDGE",
+      "sourceClass": "MEASURED_TASK_PERFORMANCE",
+      "prompt": {
+        "en": "When market interest rates rise, prices of existing fixed-rate bonds will typically:",
+        "zh-Hans": "当市场利率上升时，现有固定利率债券的价格通常会："
+      },
+      "response": "CHOICE",
+      "scoring": {
+        "correct": "FALL",
+        "options": [
+          "RISE",
+          "FALL",
+          "STAY_SAME",
+          "NO_RELATIONSHIP"
+        ]
+      },
+      "sensitive": false,
+      "sourceAnchor": "QK8-adapted"
+    },
+    {
+      "itemId": "PHI-FCAP-07",
+      "section": "FINANCIAL_BEHAVIOUR",
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "prompt": {
+        "en": "I keep close track of my day-to-day financial position.",
+        "zh-Hans": "我会密切留意自己日常的财务状况。"
+      },
+      "response": "LIKERT_1_5",
+      "scoring": {
+        "goodIf": [
+          4,
+          5
+        ]
+      },
+      "sensitive": true,
+      "sourceAnchor": "QS1-behaviour-adapted"
+    },
+    {
+      "itemId": "PHI-FCAP-08",
+      "section": "FINANCIAL_BEHAVIOUR",
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "prompt": {
+        "en": "I set long-term financial goals and work toward them.",
+        "zh-Hans": "我会设定长期财务目标并持续朝它们行动。"
+      },
+      "response": "LIKERT_1_5",
+      "scoring": {
+        "goodIf": [
+          4,
+          5
+        ]
+      },
+      "sensitive": true,
+      "sourceAnchor": "QS1-goal-adapted"
+    },
+    {
+      "itemId": "PHI-FCAP-09",
+      "section": "FINANCIAL_BEHAVIOUR",
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "prompt": {
+        "en": "Before buying something, I carefully consider whether I can afford it.",
+        "zh-Hans": "购买东西前，我会认真考虑自己是否负担得起。"
+      },
+      "response": "LIKERT_1_5",
+      "scoring": {
+        "goodIf": [
+          4,
+          5
+        ]
+      },
+      "sensitive": true,
+      "sourceAnchor": "QS2-affordability-adapted"
+    },
+    {
+      "itemId": "PHI-FCAP-10",
+      "section": "FINANCIAL_ATTITUDE",
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "prompt": {
+        "en": "I value taking action now to improve my future financial security.",
+        "zh-Hans": "我重视现在采取行动，以提升未来的财务安全感。"
+      },
+      "response": "LIKERT_1_5",
+      "scoring": {
+        "goodIf": [
+          4,
+          5
+        ]
+      },
+      "sensitive": true,
+      "sourceAnchor": "QS1-future-security-adapted"
+    },
+    {
+      "itemId": "PHI-FCAP-11",
+      "section": "FINANCIAL_ATTITUDE",
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "prompt": {
+        "en": "I value spending for the life I want now more than saving for the future.",
+        "zh-Hans": "比起为未来储蓄，我更重视现在就把钱花在想要的生活上。"
+      },
+      "response": "LIKERT_1_5",
+      "scoring": {
+        "goodIf": [
+          1,
+          2
+        ]
+      },
+      "sensitive": true,
+      "sourceAnchor": "QS1-present-vs-future-adapted"
+    },
+    {
+      "itemId": "PHI-FCAP-12",
+      "section": "DIGITAL_FINANCE_SAFETY",
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "prompt": {
+        "en": "It is safe to carry out financial transactions while connected to public Wi-Fi.",
+        "zh-Hans": "连接公共 Wi-Fi 时进行金融交易是安全的。"
+      },
+      "response": "LIKERT_1_5",
+      "scoring": {
+        "goodIf": [
+          1,
+          2
+        ]
+      },
+      "sensitive": true,
+      "sourceAnchor": "QS4-public-wifi-adapted"
+    },
+    {
+      "itemId": "PHI-FCAP-13",
+      "section": "DIGITAL_FINANCE_SAFETY",
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "prompt": {
+        "en": "Before buying a financial product online, I check whether the provider is regulated where I live.",
+        "zh-Hans": "在线购买金融产品前，我会检查提供方在我所在地区是否受到监管。"
+      },
+      "response": "LIKERT_1_5",
+      "scoring": {
+        "goodIf": [
+          4,
+          5
+        ]
+      },
+      "sensitive": true,
+      "sourceAnchor": "QS2-provider-regulation-adapted"
+    },
+    {
+      "itemId": "PHI-FCAP-14",
+      "section": "DIGITAL_FINANCE_SAFETY",
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "prompt": {
+        "en": "I share bank-account passwords or PINs with close friends or family.",
+        "zh-Hans": "我会把银行账户密码或 PIN 告诉亲近的朋友或家人。"
+      },
+      "response": "LIKERT_1_5",
+      "scoring": {
+        "goodIf": [
+          1,
+          2
+        ]
+      },
+      "sensitive": true,
+      "sourceAnchor": "QS2-password-sharing-adapted"
+    },
+    {
+      "itemId": "PHI-FCAP-15",
+      "section": "DIGITAL_FINANCE_SAFETY",
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "prompt": {
+        "en": "I check website security before making an online financial transaction.",
+        "zh-Hans": "进行在线金融交易前，我会检查网站的安全性。"
+      },
+      "response": "LIKERT_1_5",
+      "scoring": {
+        "goodIf": [
+          4,
+          5
+        ]
+      },
+      "sensitive": true,
+      "sourceAnchor": "QS4-site-security-adapted"
+    },
+    {
+      "itemId": "PHI-FCAP-16",
+      "section": "FINANCIAL_RESILIENCE_SELF_VIEW",
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "prompt": {
+        "en": "If a major unexpected expense happened, I have a practical plan for how I would respond.",
+        "zh-Hans": "如果突然出现一笔重大意外支出，我有一个实际可行的应对计划。"
+      },
+      "response": "LIKERT_1_5",
+      "scoring": {
+        "goodIf": [
+          4,
+          5
+        ]
+      },
+      "sensitive": true,
+      "sourceAnchor": "PHI_OS_resilience_adaptation"
+    }
+  ],
+  "scoring": {
+    "knowledge": "raw correct / attempted",
+    "selfReportSections": "proportion of items meeting adapted positive-response rule ×100",
+    "officialOecdCompositeCreated": false
+  },
+  "availabilityState": "AVAILABLE",
+  "normingState": "NOT_NORMED",
+  "scoringState": "ADAPTED_SCORED",
+  "publicationState": "CANDIDATE_UNPUBLISHED",
+  "sourceClasses": [
+    "MEASURED_TASK_PERFORMANCE",
+    "STANDARDIZED_SELF_REPORT"
+  ],
+  "governance": {
+    "explicitFinancialConsentRequired": true,
+    "professionalAdviceAuthority": false,
+    "officialOecdScoreClaimed": false,
+    "oecdEndorsementClaimed": false,
+    "customerPublishableBeforePrfW12": false
+  },
+  "gate": "check:profile:w10e-financial-capability"
+}

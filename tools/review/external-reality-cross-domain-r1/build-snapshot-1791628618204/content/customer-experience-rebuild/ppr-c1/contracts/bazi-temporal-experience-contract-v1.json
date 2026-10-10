@@ -1,0 +1,18 @@
+{
+  "schemaVersion":"PHI-OS-PPR-C1-BAZI-TEMPORAL-EXPERIENCE-CONTRACT-v1.0.0",
+  "work":"PPR-C1-W9",
+  "baselineCommit":"a06506cbbc9bf0bdd11ff1c740f7be65276d84d9",
+  "status":"FROZEN_CUSTOMER_TEMPORAL_EXPERIENCE_CONTRACT",
+  "upstream":["BAZI-FP-W7","BAZI-FP-W8","BZR_TEMPORAL_RUNTIME_V2"],
+  "layers":["NATAL_X_DA_YUN","NATAL_X_LIU_NIAN","DA_YUN_X_LIU_NIAN","NATAL_X_DA_YUN_X_LIU_NIAN"],
+  "noTarget":{
+    "fullDaYunTimelineReadable":true,
+    "currentDaYunSelectionAllowed":false,
+    "liuNianSelectionAllowed":false,
+    "browserDateInferenceAllowed":false,
+    "browserTimezoneInferenceAllowed":false,
+    "birthTimezoneSubstitutionAllowed":false
+  },
+  "explicitTarget":{"requiredFields":["targetDate","targetTime","targetTimezone.iana","targetTimezone.utcOffsetAtTarget"],"currentDaYunReadable":true,"liuNianReadable":true,"crossLayerInteractionsReadable":true},
+  "boundaries":{"combinationEqualsTransformation":false,"goodBadScoreAllowed":false,"eventPredictionAllowed":false,"fortuneCertaintyAllowed":false}
+}

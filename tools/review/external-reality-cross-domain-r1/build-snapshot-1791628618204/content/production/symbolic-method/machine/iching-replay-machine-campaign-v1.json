@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-REPLAY-MACHINE-CAMPAIGN-v1.0.0",
+  "work": "ICH-PROD-W13",
+  "baselineCommit": "40cb9e71450ebb817998cde8222225cd941c0aa0",
+  "status": "READY_PRODUCT_REPLAY_CAMPAIGN",
+  "cases": [
+    {"caseId":"ICH-RPL-01","inputMode":"MANUAL_LINES","lines":[7,8,7,8,7,8]},
+    {"caseId":"ICH-RPL-02","inputMode":"MANUAL_LINES","lines":[9,8,7,6,7,8]},
+    {"caseId":"ICH-RPL-03","inputMode":"COIN_CAST","coinLines":[[2,2,3],[2,3,3],[2,2,3],[2,3,3],[2,2,3],[2,3,3]]},
+    {"caseId":"ICH-RPL-04","inputMode":"COIN_CAST","coinLines":[[3,3,3],[2,2,2],[2,2,3],[2,3,3],[2,2,3],[2,3,3]]},
+    {"caseId":"ICH-RPL-05","inputMode":"SYSTEM_RANDOM","selectedSymbols":["7","8","7","8","7","8"],"seed":"ICH-RPL-SEED-05","replayToken":"ICH-RPL-TOKEN-05"},
+    {"caseId":"ICH-RPL-06","inputMode":"SYSTEM_RANDOM","selectedSymbols":["9","6","7","8","9","6"],"seed":"ICH-RPL-SEED-06","replayToken":"ICH-RPL-TOKEN-06"}
+  ],
+  "requiredEquality": [
+    "METHOD_EVIDENCE",
+    "CALCULATION",
+    "PROJECTION",
+    "SOURCE_AVAILABILITY",
+    "READING_IR",
+    "RCC",
+    "UNCERTAINTY",
+    "AGENCY",
+    "PUBLIC_VIEW"
+  ]
+}

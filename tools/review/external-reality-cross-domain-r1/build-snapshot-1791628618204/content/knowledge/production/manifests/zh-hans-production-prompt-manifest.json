@@ -1,0 +1,31 @@
+{
+  "manifestCode": "PJA-PROMPT-W1-ZH-HANS",
+  "manifestVersion": "1.0.0",
+  "status": "active",
+  "baselineCommit": "c5b0d05",
+  "locale": "zh-Hans",
+  "schemaPath": "content/knowledge/production/schemas/production-prompt-package-v1.schema.json",
+  "templatePath": "content/knowledge/production/prompts/templates/zh-hans-canonical-article-prompt-v1.md",
+  "generateCommand": "npm run knowledge:generate-prompt:zh-Hans -- <BRIEF_PATH>",
+  "defaultOutputDirectory": "content/knowledge/production/prompts/zh-Hans",
+  "allowedOperations": [
+    "read_brief",
+    "project_prompt",
+    "validate_prompt",
+    "export_prompt",
+    "digest_package",
+    "report"
+  ],
+  "prohibitedOperations": [
+    "write_registry",
+    "generate_candidate",
+    "record_human_review",
+    "change_approval",
+    "publish",
+    "promote_locale_state",
+    "call_provider"
+  ],
+  "deterministic": true,
+  "providerInvocation": false,
+  "candidateGeneration": false
+}

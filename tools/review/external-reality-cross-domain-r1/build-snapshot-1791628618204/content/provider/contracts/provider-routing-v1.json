@@ -1,0 +1,35 @@
+{
+  "contractCode": "PHI-OS-PUBLIC-KNR-PROVIDER-ROUTING-v1.0.0",
+  "version": "1.0.0",
+  "authority": "KRA-W1",
+  "scope": "public_knr_only",
+  "requiredOrder": [
+    "deterministic_rule_engine",
+    "published_multilingual_index",
+    "local_coverage_evaluation",
+    "translation_cache",
+    "budget_gate",
+    "google_query_translation_candidate",
+    "deterministic_rematch",
+    "workers_ai_eligibility",
+    "workers_ai_candidate_reranking",
+    "final_coverage_gate",
+    "published_projection"
+  ],
+  "principles": {
+    "deterministicFirst": true,
+    "publishedOnly": true,
+    "cacheBeforeBudget": true,
+    "budgetBeforeProvider": true,
+    "coverageAfterProviderCandidate": true,
+    "paidFallbackAllowed": false,
+    "providerMayBypassCoverage": false,
+    "providerMayCreateContent": false,
+    "failClosed": true
+  },
+  "providerAuthority": {
+    "google_query_translation": "query_translation_candidate_only",
+    "workers_ai_reranking": "routing_candidate_only",
+    "openai_public_knr": "disabled"
+  }
+}

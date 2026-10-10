@@ -1,0 +1,116 @@
+{
+  "auditCode": "PHI-OS-ALR-W10-W14-LEARNING-ARCHITECTURE-RECONCILIATION-v1",
+  "auditVersion": "1.0.0",
+  "scope": "ALR-W10-W14",
+  "status": "reconciled",
+  "baselineCommit": "1e99186e5bc5fafa705f61cc15ef57370bec07e9",
+  "canonicalPhase": "PHASE ALR v2｜Academy Learning & Capability Runtime",
+  "canonicalWork": [
+    {"workCode": "ALR-W10", "title": "Program"},
+    {"workCode": "ALR-W11", "title": "Learning Path"},
+    {"workCode": "ALR-W12", "title": "Module"},
+    {"workCode": "ALR-W13", "title": "Lesson"},
+    {"workCode": "ALR-W14", "title": "Learning Objective"}
+  ],
+  "inspectedAuthorities": [
+    {
+      "reference": "content/governance/canonical-master-work/registries/canonical-master-work-registry-v1.json",
+      "sha256": "b4105df7e8d55f0f9bf1a895f0293b3be119edfde94784d5cd48a95dcc47b172",
+      "finding": "ALR-W10 through ALR-W14 are canonical planned work; ALR-W15 remains the next authority boundary."
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/contracts/alr-authority-contract-v1.json",
+      "sha256": "d47989ba38dd8df058387d4444e9e5752950bdbef5eaa3ec368aaf817c59b13d",
+      "finding": "ALR owns Program, Learning Path, Module, Lesson and Learning Objective semantics without gaining Knowledge, Asset, Presentation, RDG, Credential or Entitlement authority."
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/learning-object-registry-v1.json",
+      "sha256": "2b67e5366f78299fbd0c84eb7a27657283eee0760472d1caae92bee9a370e3dd",
+      "finding": "The frozen W2 type registry assigns Program through Learning Objective to ALR-W10 through ALR-W14; owner registries may add instances without mutating the type registry."
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/academy-level-registry-v1.json",
+      "sha256": "0f25891ed69901b0848af515277a9d3b72f27825d8385207137e90c94ece52d0",
+      "finding": "Foundation, Reader, Navigator and Professional remain classification levels rather than learner or Capability State."
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/learning-track-registry-v1.json",
+      "sha256": "04bdb8df21f5e86a154e54ce2dc97bdff692ccd193fe2fb0411d35e8b73ba490",
+      "finding": "Learning Path may use a registered Track class but is not a Track class or legacy Knowledge path."
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/capability-registry-v1.json",
+      "sha256": "4aa82fcb20ef9caa2573ebe4750553da166fb7a9e87855e5e73f29b369790100",
+      "finding": "Architecture targets the five frozen ALR Learning Capabilities and maps Objectives to their registered evidence criteria."
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/capability-dependency-graph-v1.json",
+      "sha256": "8084f18b1f02cc743296832276e2f1eeef18485268a158d5e14fc5d9c262d36e",
+      "finding": "Learning Path prerequisites must project the canonical acyclic Capability dependencies without granting Capability State."
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/freeze/alr-w5-w9-capability-freeze-v1.json",
+      "sha256": "22019dfe3792e2f25cc4e450b709490c09e8ad1f0e586553bbd57bbc5a9b7577",
+      "finding": "ALR-B is frozen and names ALR-W10 Program as the next permitted work."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/alr-learning-data-contract-v1.json",
+      "sha256": "015fd9cc8265ccc3bc7c61254b6c70b2ca680c40979f4c35b6a0f77b2b92aac2",
+      "finding": "RDG governs future Learning records; architecture definitions cannot store learner progress or set Capability State."
+    },
+    {
+      "reference": "content/knowledge/production-planning/policies/kpp-academy-production-need-v1.json",
+      "sha256": "a6110e14c274b45fc1826d16d998702d7d4cfe3c5c88555afd440334dfd299c1",
+      "finding": "KPP Academy need is a production-planning signal and cannot create ALR Program or Lesson semantics."
+    },
+    {
+      "reference": "content/professional/canonical-asset-runtime/contracts/car-alr-cpr-authority-reconciliation-v1.json",
+      "sha256": "3f8ce8787728a2cec005289223a201c18421626ff9a6dbcb6748cab06497f662",
+      "finding": "CAR Lesson Brief, Quiz Brief and Assignment Brief are asset-production objects and cannot become Lesson Runtime, Assessment or Capability Evidence."
+    },
+    {
+      "reference": "content/runtime/input-case-runtime/contracts/canonical-input-contract-v1.json",
+      "sha256": "6e3872b8e1f656c3dd3f70d5fb69535368c11f10d8d0911d204f4a6cba5159f9",
+      "finding": "ICR owns operational input envelopes and cannot write learner, case or Canonical Input data into Learning Architecture definitions."
+    },
+    {
+      "reference": "content/runtime/input-case-runtime/freeze/icr-w0-w4-input-foundation-freeze-v1.json",
+      "sha256": "56dcf667fa767a4f79d0f9b4a62ebbb18d38402a6e819d61bfefbfe94e497ef7",
+      "finding": "ICR input foundation remains frozen with Case Runtime and persistence inactive."
+    }
+  ],
+  "baselineFindings": {
+    "alrW0W9Frozen": true,
+    "programRegistryPresent": false,
+    "learningPathRegistryPresent": false,
+    "moduleRegistryPresent": false,
+    "lessonRegistryPresent": false,
+    "learningObjectiveRegistryPresent": false,
+    "learningDeliveryRuntimeActive": false,
+    "learnerDataRuntimeActive": false,
+    "icrCaseRuntimeActive": false,
+    "postcheckInvokesAlrCapability": false
+  },
+  "implementationDecision": {
+    "canonicalProgramMayBeRegistered": true,
+    "capabilityAlignedPathsMayBeRegistered": true,
+    "modulesAndLessonStructuresMayBeRegistered": true,
+    "objectivesMayMapToCapabilityCriteria": true,
+    "knowledgeOrTeachingBodyMayBeCreated": false,
+    "practiceOrAssessmentMayBeCreated": false,
+    "learnerOrCaseDataMayBeStored": false,
+    "learningDeliveryMayBeActivated": false,
+    "programCompletionMayBeDetermined": false,
+    "credentialEntitlementOrProfessionalAuthorityMayBeGranted": false,
+    "academySurfaceMayBeModified": false
+  },
+  "preservation": {
+    "w0W4FreezeOrTypeRegistryMutated": false,
+    "w5W9FreezeOrCapabilityRegistryMutated": false,
+    "rdgContractOrRegistryMutated": false,
+    "carContractOrRegistryMutated": false,
+    "icrContractOrRegistryMutated": false,
+    "knowledgeOrPublishedAssetMutated": false,
+    "existingRuntimeOrUserDataMutated": false
+  }
+}

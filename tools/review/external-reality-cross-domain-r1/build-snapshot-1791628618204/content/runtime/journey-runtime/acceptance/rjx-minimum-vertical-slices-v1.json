@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "PHI-OS-RJX-MINIMUM-VERTICAL-SLICES-v1.0.0",
+  "baselineCommit": "311fad7653785b8f0d14d5a0a154cce3f1303eb5",
+  "status": "CANDIDATE_EVIDENCE_READY_PRODUCTION_EXECUTION_PENDING",
+  "slices": [
+    {
+      "id": "SIMPLE_PERSONAL_CASE",
+      "fixture": "content/runtime/journey-runtime/fixtures/job-change-simple-case.valid.json",
+      "evidenceStatus": "CANDIDATE_VERIFIED_BY_PREDECESSOR_CHECKERS",
+      "requirements": [
+        "minimal client input",
+        "Known / Unknown preserved",
+        "Reading does not make one decision",
+        "bounded Navigation options",
+        "Action Record after user choice",
+        "Review compares expected signal and outcome",
+        "Reality vNext preserves predecessor"
+      ]
+    },
+    {
+      "id": "COMPLEX_FAMILY_CASE",
+      "fixture": "content/runtime/journey-runtime/fixtures/family-intergenerational-case.valid.json",
+      "evidenceStatus": "CANDIDATE_VERIFIED_BY_PREDECESSOR_CHECKERS",
+      "requirements": [
+        "statements stay source-bound by person",
+        "relationship and event sources preserved",
+        "Unknown can bind to person or relationship",
+        "relational / maintenance scope classification",
+        "AI cannot invent missing relationship"
+      ]
+    },
+    {
+      "id": "ORGANIZATION_CASE",
+      "fixture": "content/runtime/journey-runtime/fixtures/organization-resource-conflict-case.valid.json",
+      "evidenceStatus": "CANDIDATE_VERIFIED_BY_PREDECESSOR_CHECKERS",
+      "requirements": [
+        "Book-4 gate requires system-scale evidence",
+        "system constraint not reduced to personal identity",
+        "multiple objectives visible",
+        "professional/business judgment boundary preserved"
+      ]
+    },
+    {
+      "id": "METHOD_ASSISTED_CASE",
+      "fixture": "content/runtime/journey-runtime/fixtures/method-result-successor.valid.json",
+      "evidenceStatus": "CANDIDATE_VERIFIED_BY_PREDECESSOR_CHECKERS",
+      "requirements": [
+        "method result not OBSERVED",
+        "handoff requires consent",
+        "recalculation creates successor",
+        "Case Reading does not silently change",
+        "HDR remains blocked"
+      ]
+    },
+    {
+      "id": "NO_PROVIDER_PRODUCTION",
+      "fixture": "content/runtime/journey-runtime/phase19/rjx-phase19-workspace-review-model-v1.json",
+      "evidenceStatus": "RULE_ONLY_SUCCESSOR_POLICY_READY_PRODUCTION_BROWSER_EXECUTION_PENDING",
+      "requirements": [
+        "Entry",
+        "Understand",
+        "Reading",
+        "Choose",
+        "Action",
+        "Review",
+        "Reality Next",
+        "Workers AI unavailable",
+        "OpenAI unavailable"
+      ]
+    }
+  ]
+}

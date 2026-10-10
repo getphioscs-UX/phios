@@ -1,0 +1,1108 @@
+PHI OS · SHARED DELIVERY BACKBONE
+ZERO-PROVIDER PRODUCT CLOSURE · MASTER WORK STEP
+Owner intent
+本窗口只负责完成 Shared Delivery Backbone 及与其直接相关的零费用产品闭环。
+当前优先方法：
+AST
+BAZI
+ZIWEI
+
+这三个方法的核心完整报告内容、既有 Human ACCEPT / publication acceptance 保留；不要重新开启全文重写，不要把免费 runtime 缺口反向解释为完整报告未完成。
+本轮目标不是继续生产更多报告内容，而是把以下共同客户链路做成可复用基础设施：
+Product
+→ Commerce / Entitlement
+→ Customer Input
+→ Generation Admission
+→ Report Generation
+→ Immutable Customer Artifact
+→ My Reality
+→ Reopen with 0 provider
+→ Follow-up Questions
+→ Navigation Handoff
+→ Outcome / History
+
+后续：
+NUM
+PROFILE
+HD
+ECR
+CROSS
+FINANCIAL
+WILL
+
+必须优先复用本轮 backbone，不得各自重新发明一套 delivery runtime。
+W0｜执行边界
+开始前先读取：
+AGENTS.md
+current HEAD
+branch
+git status
+unstaged diff
+staged diff
+origin/main
+latest main available from other window if already fetched
+
+要求：
+preserve all existing work
+no reset
+no checkout -- .
+no overwrite of other-window modifications
+no auto commit
+no auto push
+no deploy
+no production migration
+no real payment
+no production entitlement mutation
+no provider call unless separately authorized
+
+如果其他窗口正在修改：
+Personal Reality
+Account
+Commerce
+Build
+
+则先明确 owner boundary，做兼容性接线，不覆盖其逻辑。
+W1｜冻结 acceptance scope
+建立或修正统一状态模型，至少分开：
+FULL_REPORT_PUBLICATION_ACCEPTANCE
+FREE_NATAL_RUNTIME_BINDING
+CURRENT_RENDERER_VISUAL_ACCEPTANCE
+CUSTOMER_DELIVERY_RUNTIME
+ACCOUNT_E2E
+DEPLOYED
+LIVE_CUSTOMER
+
+冻结：
+FULL_REPORT_ACCEPTANCE
+≠
+FREE_RUNTIME_ACCEPTANCE
+
+CURRENT_RUNTIME_GAP
+≠
+REVOKE_EXISTING_REPORT_ACCEPTANCE
+
+NEW_RENDERER
+≠
+OLD_RENDERER_ACCEPTANCE
+
+LOCAL_COMPONENT_PASS
+≠
+ACCOUNT_E2E
+≠
+DEPLOYED
+≠
+LIVE_CUSTOMER
+
+对于 AST / BaZi / Zi Wei：
+existing accepted full-report artifact
+= preserved
+
+current free/runtime changes
+= scoped separately
+
+不得重新要求整份报告 Human ACCEPT，除非实际修改了已接受正文或已接受完整 publication artifact。
+W2｜统一 Customer Report Artifact
+不要把 40–70 页 PDF 当作客户永久主存储格式。
+建立 canonical customer artifact model。
+建议至少：
+reportArtifactId
+customerId
+personId
+methodCode
+productCode
+entitlementId
+localeMode
+inputSnapshot
+calculationSnapshot
+authorityPackVersion
+reportContentVersion
+rendererVersion
+providerGenerationReceipt
+generatedSections
+generatedCopy
+publicationIR
+htmlSnapshotOrRenderState
+sourceDigest
+contentDigest
+createdAt
+updatedAt
+generationCompletedAt
+status
+
+原则：
+PDF = on-demand derivative
+HTML / IR / generated copy = persistent customer artifact
+
+不要永久保存每位客户几十 MB 的 review PDF，除非有明确业务理由。
+同时确保：
+shared CSS
+shared JS
+shared visual assets
+
+不被重复内嵌进每个 customer artifact。
+避免：
+base64 images inside every saved HTML
+
+造成 artifact 膨胀。
+W3｜Immutable generated copy
+这是本轮最高优先级之一。
+一旦客户完成一次正式生成：
+generated report copy
+
+必须被持久保存。
+以后客户进入 My Reality 打开同一份报告：
+providerCalls = 0
+
+不得：
+recalculate provider prose on every open
+
+不得：
+same entitlement
+→ regenerate silently
+
+除非用户明确触发新版本或合法 repair/re-generation 流程。
+建立状态：
+GENERATION_NOT_STARTED
+GENERATION_IN_PROGRESS
+GENERATION_COMPLETE
+GENERATION_PARTIAL
+GENERATION_FAILED
+REPAIR_ELIGIBLE
+FROZEN_CUSTOMER_COPY
+
+FROZEN_CUSTOMER_COPY 以后重开必须读取既有 artifact。
+W4｜Report generation identity
+每次生成必须有稳定 identity。
+建议：
+generationId
+artifactId
+customerId
+personId
+productCode
+methodCode
+inputDigest
+authorityDigest
+rendererDigest
+generationPolicyVersion
+providerPolicyVersion
+
+防止：
+same request
+→ duplicate paid generation
+
+并支持：
+idempotent retry
+
+但 paid retry 是否允许必须由对应 provider policy 决定。
+W5｜购买 / Entitlement → generation
+建立 shared admission path：
+valid product
++
+valid entitlement
++
+valid customer/person
++
+required input complete
++
+method admission open
+↓
+GENERATION_ALLOWED
+
+失败时必须 fail closed。
+至少区分：
+NO_ENTITLEMENT
+ENTITLEMENT_INVALID
+ENTITLEMENT_ALREADY_CONSUMED
+INPUT_INCOMPLETE
+METHOD_NOT_ADMITTED
+PROVIDER_NOT_AUTHORIZED
+GENERATION_ALREADY_COMPLETE
+GENERATION_IN_PROGRESS
+
+不要把 HTTP 200 当成 generation success。
+W6｜Free vs Paid report boundary
+AST / BaZi / Zi Wei 免费入口与付费完整报告必须严格区分。
+例如：
+FREE_REPORT_PREVIEW
+PAID_FULL_REPORT
+
+免费不能因为共享 renderer 存在就意外暴露：
+paid manuscript
+paid sections
+paid provider-generated copy
+
+特别修正当前已发现：
+view.reading.map = FULL_REPORT readable
+
+与：
+product.reportAccess = FREE_REPORT_PREVIEW
+
+之间的摘要边界冲突。
+由对应 owner 修改，但本窗口应提供：
+expected contract
+test
+failure evidence
+
+不要覆盖 Personal Reality owner 的实现。
+W7｜My Reality report persistence
+在 My Reality 中，每份已生成报告至少应持久展示：
+report title
+method
+product
+person
+generation date
+language / bilingual mode
+status
+artifact version
+open report
+follow-up entry
+navigation entry
+
+不要只保存：
+birth data
+
+然后每次重算整份报告。
+要求：
+generate once
+→ save artifact
+→ reopen later
+→ same customer copy
+→ 0 provider calls
+
+W8｜Browser local E2E
+当前 direct handler + renderer QA 不等于完整账户 E2E。
+建立真正零网络本地链：
+browser form
+→ local HTTP server
+→ auth / synthetic account
+→ entitlement
+→ submit
+→ generation
+→ save
+→ My Reality
+→ browser close / state reset
+→ reopen session
+→ same report
+
+要求：
+all external network blocked
+only localhost / explicit local mock allowed
+provider blocked
+payment blocked
+production DB blocked
+
+并验证：
+same artifactId
+same generated copy digest
+providerCalls = 0 on reopen
+
+W9｜Cross-session reopen
+至少做：
+AST
+BAZI
+ZIWEI
+
+三条真实浏览器本地重开验证。
+每条至少：
+create/generate
+save
+close page
+new browser context or simulated new session
+login / restore synthetic identity
+open My Reality
+open prior report
+verify same artifact
+verify same content digest
+verify 0 provider calls
+
+这才可以把：
+REOPEN_VERIFIED_LOCAL
+
+写入台账。
+W10｜四次 follow-up questions shared contract
+如果当前商业规则仍是完整报告带 4 个 follow-up questions，则建立 shared quota contract。
+至少：
+followupEntitlementId
+reportArtifactId
+allowedCount
+usedCount
+reservedCount
+remainingCount
+questionId
+answerId
+
+防止并发双花：
+remaining = 1
+
+two simultaneous requests
+→ only one succeeds
+
+需要：
+reservation
+commit
+rollback
+
+机制。
+不要仅靠 UI 按钮隐藏。
+W11｜Follow-up context pack
+每次报告追问必须消费：
+frozen customer report artifact
+customer question
+relevant report sections
+current My Reality context if consented
+Navigation context if applicable
+
+不能默认重新生成报告。
+建立：
+REPORT_FOLLOWUP_CONTEXT_V1
+
+至少区分：
+REPORT_FACT
+REPORT_INTERPRETATION
+CURRENT_REALITY
+USER_REPORTED
+UNKNOWN
+
+避免把命盘解释当现实事实。
+W12｜Follow-up answer persistence
+追问答案必须持久保存。
+至少：
+question
+answer
+createdAt
+reportArtifactId
+sourceRefs
+providerReceipt if used
+navigationRelevance
+
+客户以后打开：
+0 provider calls
+
+不得重新回答历史问题。
+W13｜Navigation handoff
+现在 NAV-01–30 Doctrine 已 Human ACCEPT。
+本轮不要求完成整个复杂 Navigation UI，但必须先完成 shared handoff contract。
+建立：
+REPORT → NAVIGATION PROJECTION
+
+每份报告可以提供：
+interpretiveContext
+possibleQuestions
+valueCandidates
+frictionCandidates
+capacityQuestions
+timingContext
+unknowns
+authorityBoundary
+
+但不得输出：
+decision
+action authority
+material fact
+hidden third-party state
+
+Methods 只能：
+INTERPRETIVE_CONTEXT
+
+进入 Navigation。
+冻结：
+Method Interpretation
+≠
+Reality Evidence
+≠
+Decision Authority
+
+W14｜My Reality → Navigation entry
+从 My Reality 的报告页提供：
+Ask about this report
+Bring this into Navigation
+
+两者必须不同：
+Follow-up
+= question about report
+
+Navigation
+= use report as bounded interpretive context within real decision
+
+不要把二者混成同一 API。
+W15｜Navigation handoff persistence
+当用户把报告带入 Navigation：
+至少保存：
+sourceArtifactId
+projectionVersion
+acceptedContext
+userDecisionObject if later confirmed
+currentRealityRefs
+
+禁止：
+report alone
+→ create Decision Object automatically
+
+NAV-01 原则保持：
+System clarifies
+Human confirms
+
+W16｜AST remaining zero-cost closure
+继续 Codex 已发现的零费用问题。
+AST dense labels
+修：
+assets/customer-ui/js/specialists/ast/ast-specialist-surface-v3.js
+bodyLayout
+buildNatalChartV2
+
+目标：
+preserve accepted planet geometry
+preserve houses
+preserve aspects
+add local label collision avoidance only
+
+不要重画整张盘。
+加入：
+real dense computed fixtures
+synthetic stress fixtures
+desktop
+390px mobile
+zh
+en
+
+并确保：
+synthetic stress failure
+
+不冒充真实客户失败。
+Mobile
+检查：
+horizontal scroll
+touch discoverability
+keyboard usability
+focus
+scroll hint
+
+如果不能在默认 390px 完整展示，也必须让用户明确知道可以横向移动。
+Legacy fallback
+审查：
+legacyCompatibilityPlan
+PHI-OS-AST-INTERACTIVE-WORKSPACE-v1.0.0
+
+不要擅自删除。
+输出：
+KEEP
+REMOVE
+BLOCK_PENDING_OWNER
+
+及证据。
+W17｜BaZi remaining zero-cost closure
+继续：
+free chartOnly boundary
+reading state summary alignment
+browser account E2E
+reopen persistence
+print footer cleanup
+PDF pagination improvement
+
+免费 chartOnly 不应显示：
+missing relation → default relationship conclusion
+missing pattern → default pattern conclusion
+
+完整付费 accepted copy 不改。
+W18｜Zi Wei remaining zero-cost closure
+继续：
+mobile four-column readability
+selected-palace visibility
+screen hidden behavior
+print all-palace expansion
+PDF pagination
+repeated palace title on continued pages
+
+CSS hidden fix 只要求 limited changed-surface review。
+不要重审整个 68 页 report。
+W19｜HTML customer report rendering
+建立 production customer HTML report shell。
+要求：
+responsive
+printable
+stable reopen
+same frozen copy
+
+与 Human Review PDF 视觉可以相关，但不要把 review PDF 直接当 customer storage。
+需要分别验证：
+screen desktop
+mobile
+print stylesheet
+print-to-PDF derivative
+
+W20｜PDF on-demand derivative
+PDF 是 derivative，不是 canonical saved customer artifact。
+建立：
+artifact
+→ render print shell
+→ download PDF
+
+可以：
+ephemeral generate
+
+或短期 cache。
+但不要默认永久保存每一份大 PDF。
+至少记录：
+derivedFromArtifactId
+rendererVersion
+renderedAt
+contentDigest
+
+W21｜Print QA
+继续修：
+BaZi
+English trailing footer-only page
+pagination compactness
+
+Zi Wei
+12-palace chart split
+detail continuation title
+two-column page break
+
+AST
+继续验证：
+wheel not clipped
+dense labels
+page fit
+
+不要用：
+PDF command exit 0
+
+冒充 print layout PASS。
+W22｜Shared artifact size audit
+增加：
+artifact-size-audit
+
+统计：
+HTML size
+JSON size
+generated copy size
+embedded SVG size
+shared asset refs
+PDF derivative size
+
+明确：
+customer persistent artifact
+
+是否在合理范围。
+目标不是强制 100KB。
+而是防止：
+50MB PDF duplicated per customer
+base64 asset explosion
+shared asset duplication
+
+W23｜Shared provider readiness contract
+对未来需要 provider 的：
+AST
+BAZI
+ZIWEI
+NUM
+HD
+ECR
+CROSS
+TAROT
+ICHING
+
+统一建立 provider gate。
+至少：
+modelAllowlist
+maxCalls
+maxCostPerCall
+maxCostPerArtifact
+retryPolicy
+repairPolicy
+qaEndpoint
+productionEndpoint
+ledgerWriter
+hardBudgetBlock
+
+当前只实现：
+schema
+guard
+mock
+tests
+
+不执行真实 paid calls。
+W24｜AST / BaZi / Zi Wei 3-call contract
+先冻结但不执行。
+建议：
+PRIMARY_MAX_CALLS = 3
+
+BILINGUAL_REPORT:
+3 calls max
+complete report is mandatory
+call count must not force truncation
+
+MAX_TOTAL_PROVIDER_COST = USD 1.00 / report
+
+同时定义：
+repairEligible
+repairReason
+repairSoftLimit
+repairCost
+repairCount
+
+Repair 不是常规第四 call。
+必须：
+exceptional
+metered
+logged
+delivery-completion oriented
+
+不要等正式客户投诉以后才第一次定义。
+但当前不做新的付费 QA，除非 owner 另行授权。
+W25｜Provider-off full-path simulation
+使用：
+deterministic fixtures
+mock provider responses
+accepted frozen copy
+
+跑完整：
+commerce
+→ entitlement
+→ generation
+→ artifact
+→ My Reality
+→ reopen
+→ follow-up
+→ Navigation
+
+验证：
+providerCalls = 0
+
+这是正式 paid QA 前的主要 gate。
+W26｜Tarot zero-provider closure
+Tarot 不等长报告 backbone完成才开始。
+先完成所有零 provider 部分。
+Free Tarot
+shuffle
+draw
+orientation
+spread
+accepted deterministic meanings
+save reading
+reopen
+0 provider
+
+RM9 Tarot
+本轮只做：
+product contract
+checkout mock
+entitlement
+question intake
+context pack
+spread state
+provider prompt contract
+model allowlist
+QA endpoint
+hard budget block
+no-paid-retry
+result schema
+usage ledger
+My Reality save/reopen
+Navigation handoff
+failure states
+mobile UX
+
+不要执行 20 paid calls，直到：
+preflight complete
+
+W27｜Tarot 20-case preflight
+当前 owner authorization 保留：
+max cases = 20
+max cost per case = USD 0.10
+max total = USD 2.00
+paid retry = 0
+
+但本轮只把 preflight 做到 READY。
+必须验证：
+model allowlist
+dedicated QA endpoint
+hard per-case budget block
+hard total budget block
+usage ledger
+token metering
+no retry
+abort behavior
+upright coverage
+reversed coverage
+bilingual output contract if required
+
+Preflight 未通过：
+providerCalls = 0
+
+W28｜I Ching zero-provider closure
+免费：
+question intake
+cast
+primary hexagram
+changing lines
+resulting hexagram
+accepted deterministic corpus
+save/reopen
+0 provider
+
+付费 candidate 只做到：
+personalised synthesis contract
+prompt pack
+result schema
+provider gate
+cost guard
+entitlement
+My Reality
+Navigation projection
+
+不执行 paid synthesis，除非另行授权。
+W29｜Shared Commerce → Delivery receipt
+每次购买必须能追到：
+order
+payment state
+entitlement
+generation
+artifact
+delivery
+
+建议 receipt chain：
+orderId
+paymentIntentOrEquivalent
+entitlementId
+generationId
+artifactId
+deliveryState
+
+即使本轮不跑真钱，也要 mock 验证链路完整。
+W30｜Failure recovery
+必须覆盖：
+payment succeeded / generation failed
+generation partial
+artifact save failed
+My Reality index failed
+reopen missing
+follow-up reservation failed
+provider blocked
+provider timeout
+provider cost guard
+
+原则：
+客户已经付费，不能因为一个 transient generation error 最后什么都没有。
+
+但 repair 路径要有边界，不能无限付费 retry。
+W31｜Delivery state model
+统一：
+PURCHASED
+ENTITLED
+GENERATION_PENDING
+GENERATION_ACTIVE
+GENERATION_COMPLETE
+DELIVERED
+SAVED_TO_MY_REALITY
+REOPEN_VERIFIED
+FOLLOWUP_AVAILABLE
+NAVIGATION_AVAILABLE
+
+Failure：
+GENERATION_BLOCKED
+GENERATION_FAILED
+DELIVERY_PARTIAL
+ARTIFACT_SAVE_FAILED
+REPAIR_REQUIRED
+HUMAN_SUPPORT_REQUIRED
+
+W32｜No provider on reopen invariant
+增加正式 checker：
+REPORT_REOPEN_ZERO_PROVIDER
+
+测试：
+generate fixture artifact
+persist
+reopen 10 times
+provider calls = 0
+content digest unchanged
+
+AST / BAZI / ZIWEI 均覆盖。
+W33｜No accidental regeneration invariant
+增加：
+IMMUTABLE_CUSTOMER_REPORT
+
+如果：
+artifact already complete
+
+普通 open/report route 不允许：
+invoke provider
+replace copy
+silently upgrade renderer
+rewrite content
+
+只有明确：
+regenerate
+repair
+new version
+
+路径才可改变。
+W34｜Version migration boundary
+如果未来 renderer 更新：
+旧客户报告应默认：
+preserve delivered copy
+
+而不是：
+all historical reports re-render with new semantic content
+
+可允许：
+visual shell compatibility migration
+
+但必须避免改变：
+accepted customer copy
+
+W35｜My Reality history model
+保存：
+report generated
+report opened
+question asked
+answer saved
+navigation started
+action later recorded
+
+而不仅是文件列表。
+这将来可以支撑 NAV-30：
+Outcome → Continuation
+
+W36｜Security and privacy
+检查：
+customer A cannot open customer B artifact
+signed entitlement ownership
+person ownership
+private report route
+no predictable raw object key exposure
+no third-party private data leakage
+
+尤其：
+relationship
+family
+financial
+will
+
+以后都会复用。
+W37｜Artifact storage strategy
+确认当前 infra：
+DB = metadata / indexes / state
+R2 = larger immutable artifact if appropriate
+HTML/JSON = canonical report content
+PDF = derivative
+
+不要因为已有 R2 就强制所有 artifact 进 R2。
+选择依据：
+size
+immutability
+query pattern
+privacy
+versioning
+
+输出 architecture note。
+W38｜Cloudflare production-readiness inventory
+本轮不要购买或部署。
+只盘点：
+Workers / Pages Functions usage
+R2 usage
+D1 / DB if applicable
+current Free plan limits
+what previously hit quota
+which logs prove it
+
+不要猜：
+previous delay = definitely Cloudflare Free quota
+
+若证据不足就写：
+UNCONFIRMED
+
+同时准备：
+Paid plan readiness
+
+但不执行购买。
+W39｜Shared zero-cost end-to-end matrix
+至少建立：
+AST
+BAZI
+ZIWEI
+FREE TAROT
+ICHING
+
+矩阵：
+Input
+Calculation
+Render
+Entitlement if applicable
+Artifact Save
+My Reality
+Reopen
+Follow-up if applicable
+Navigation Handoff
+Provider Calls
+External Network
+
+状态：
+PASS
+PARTIAL
+NOT_IMPLEMENTED
+BLOCKED
+NOT_RUN
+
+W40｜Current Human Review
+更新唯一 Master review。
+不要再开多个 competing master pages。
+必须列：
+current HEAD
+evidence HEAD
+working tree state
+historical vs current evidence
+accepted report artifacts
+free runtime state
+delivery backbone state
+account E2E
+artifact persistence
+reopen
+follow-up
+Navigation handoff
+Tarot preflight
+I Ching preflight
+provider calls
+provider spend
+DEPLOYED
+LIVE_CUSTOMER
+
+W41｜下一方法进入条件
+在开始：
+NUM
+PROFILE
+HD
+ECR
+CROSS
+
+之前，shared backbone 至少应达到：
+artifact model stable
+My Reality save/reopen stable
+0-provider reopen proven
+entitlement flow proven locally
+Navigation handoff contract stable
+follow-up quota stable if applicable
+
+这样后面只做：
+Method-specific calculation
+Method-specific Authority Pack
+Method-specific report content
+Method-specific renderer
+
+不要重新做 delivery system。
+W42｜推荐后续方法顺序
+完成本轮后：
+1 Numerology
+2 Profile
+3 Human Design
+4 ECR
+5 Cross
+6 Financial
+7 Will
+
+但每个 method/product 是否需要 provider 必须独立决定。
+不要默认：
+all reports = 3 calls
+
+例如：
+Profile
+Financial
+Will
+
+可能更适合：
+deterministic evidence composition
++
+optional bounded synthesis
+
+而不是照抄 AST/BaZi/ZiWei provider pattern。
+W43｜最终本轮 gate
+本轮结束时，至少返回：
+1 current HEAD
+2 changed files
+3 files intentionally not modified because owned by another window
+4 shared artifact model state
+5 entitlement → generation state
+6 My Reality persistence state
+7 reopen zero-provider proof
+8 follow-up quota state
+9 Navigation handoff state
+10 AST remaining gaps
+11 BaZi remaining gaps
+12 Zi Wei remaining gaps
+13 Tarot zero-provider state
+14 Tarot paid preflight state
+15 I Ching zero-provider state
+16 PDF derivative / print state
+17 provider calls this run
+18 provider spend this run
+19 external network usage
+20 remaining blockers
+21 exact next executable step
+
+必须明确：
+providerCalls = 0
+providerSpend = USD 0
+
+除非 owner 后续单独授权。
+Frozen invariants
+generate once
+→ persist
+→ reopen many times
+→ zero provider
+
+PDF
+≠
+canonical persistent customer artifact
+
+purchase
+≠
+generation complete
+
+generation complete
+≠
+delivered until artifact is persisted and customer can reopen
+
+accepted report
+≠
+current free runtime acceptance
+
+report interpretation
+≠
+reality evidence
+≠
+decision authority
+
+historical PASS
+≠
+current HEAD PASS
+
+local PASS
+≠
+DEPLOYED
+≠
+LIVE_CUSTOMER
+
+provider budget
+≠
+provider authorization
+
+本轮 Codex 的最重要目标
+不要追求更多绿色状态。
+追求这条链真正成立：
+CUSTOMER PAYS
+↓
+ENTITLEMENT EXISTS
+↓
+REPORT GENERATES ONCE
+↓
+CUSTOMER COPY IS SAVED
+↓
+MY REALITY CAN REOPEN IT
+↓
+REOPEN COSTS ZERO PROVIDER
+↓
+FOLLOW-UP USES THE SAVED REPORT
+↓
+NAVIGATION CAN CONSUME IT AS BOUNDED CONTEXT

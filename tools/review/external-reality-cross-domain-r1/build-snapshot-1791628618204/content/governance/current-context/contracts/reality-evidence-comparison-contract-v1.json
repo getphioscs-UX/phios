@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-CCR-REALITY-EVIDENCE-COMPARISON-CONTRACT-v1.0.0",
+  "work": "CCR-W3",
+  "status": "FROZEN_V1",
+  "evidenceSourceTypes": [
+    "USER_REPORTED",
+    "OBSERVED_RECORD",
+    "VERIFIED_EXTERNAL",
+    "PROFESSIONAL_RECORD"
+  ],
+  "verificationStates": [
+    "USER_REPORTED",
+    "OBSERVED",
+    "VERIFIED",
+    "UNVERIFIED"
+  ],
+  "explicitBindingRelations": [
+    "CONTEXT_ONLY",
+    "SUPPORTS_OBSERVATION",
+    "CONTRADICTS_OBSERVATION",
+    "UNRESOLVED"
+  ],
+  "bindingAttribution": [
+    "USER",
+    "PROFESSIONAL",
+    "VERIFIED_EXTERNAL_RECORD"
+  ],
+  "rules": {
+    "runtimeMayNotInventEvidence": true,
+    "runtimeMayNotAutoInferSupportOrContradiction": true,
+    "systemAutoInferenceBindingForbidden": true,
+    "evidenceBindingMustReferenceExistingEvidence": true,
+    "evidenceBindingMustReferenceExistingLensContextWhenLensBound": true,
+    "decisionRouteRequiresRealityEvidence": true,
+    "evidenceDoesNotBecomeMethodMeaning": true,
+    "methodOutputDoesNotBecomeRealityFact": true,
+    "realityEvidenceRemainsFinalAuthority": true
+  }
+}

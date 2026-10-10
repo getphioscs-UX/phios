@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "PHI-OS-BOOK3-POST-FREEZE-CONTINUITY-AUDIT-v1.0.0",
+  "stage": "BOOK3-POST-FREEZE-CONTINUITY-AUDIT",
+  "status": "PASS_NO_FROZEN_PUBLICATION_DRIFT",
+  "auditBaselineCommit": "d96f4025a1b11372e676aeb26228788026185893",
+  "frozenPublicationBaselineCommit": "0b130813c6b599b48b1d76fe326c44691990b4b5",
+  "freezePath": "content/knowledge/production-planning/freeze/book3-final-publication-freeze-v1.json",
+  "continuityPolicyPath": "content/knowledge/production-planning/continuity/book3-publication-continuity-maintenance-v1.json",
+  "scope": {
+    "articlePlans": 48,
+    "locales": [
+      "zh-Hans",
+      "en"
+    ],
+    "publicProjections": 96,
+    "requiredVisuals": 3,
+    "parallelBook3RuntimeAllowed": false
+  },
+  "digestVerification": {
+    "releaseManifestExpectedSha256": "ced69cc2f93bd85f074e4a9ac5afac510a78d2dc2537b669bcd4d9169f37a440",
+    "releaseManifestObservedSha256": "ced69cc2f93bd85f074e4a9ac5afac510a78d2dc2537b669bcd4d9169f37a440",
+    "publicPayloadAggregateExpectedSha256": "a768b827c56c09a15c47556f5d5b6e6518abda88169522e65f1a283f9fbd0185",
+    "publicPayloadAggregateObservedSha256": "a768b827c56c09a15c47556f5d5b6e6518abda88169522e65f1a283f9fbd0185",
+    "releaseManifestMatchesFreeze": true,
+    "publicPayloadAggregateMatchesFreeze": true
+  },
+  "continuityVerification": {
+    "zhHansPublicationCount": 48,
+    "enPublicationCount": 48,
+    "publicProjectionCount": 96,
+    "releaseRows": 96,
+    "articleIdentityDriftDetected": false,
+    "canonicalNodeRemapDetected": false,
+    "publishedPayloadRewriteDetected": false,
+    "releaseManifestDriftDetected": false,
+    "parallelRuntimeCreated": false
+  },
+  "requiredVisualVerification": [
+    {
+      "articlePlanId": "B3-ART-013",
+      "authorityPath": "content/knowledge/production-planning/visual-production/book3-b02-a13-capacity-map-v1.json",
+      "assetPath": "assets/knowledge/BOOK-3/B3-ART-013/ASSET-B3-ART-013-FRAGMENTATION-SATURATION-CAPACITY-MAP-ZH-HANS-001.webp",
+      "assetSha256": "0462a6b31c9a6405f0903c006652fbb66d622922c03a4f4609533c217a06869d",
+      "humanVisualApproval": "ACCEPTED"
+    },
+    {
+      "articlePlanId": "B3-ART-017",
+      "authorityPath": "content/knowledge/production-planning/visual-production/book3-b03-a17-pre-collapse-window-map-v1.json",
+      "assetPath": "assets/knowledge/BOOK-3/B3-ART-017/ASSET-B3-ART-017-PRE-COLLAPSE-WINDOW-MAP-ZH-HANS-001.webp",
+      "assetSha256": "b44839253933ec7391d55cf338addf45048a233e3e1861a81bd2e68a508a2c13",
+      "humanVisualApproval": "ACCEPTED"
+    },
+    {
+      "articlePlanId": "B3-ART-044",
+      "authorityPath": "content/knowledge/production-planning/visual-production/book3-b09-a44-coordination-collapse-path-v1.json",
+      "assetPath": "assets/knowledge/BOOK-3/B3-ART-044/ASSET-B3-ART-044-COORDINATION-COLLAPSE-PATH-ZH-HANS-001.webp",
+      "assetSha256": "48c38969c70b417f884ce18df9ded867e5200ee9634e30527fc517eaa9a6cbbc",
+      "humanVisualApproval": "ACCEPTED"
+    }
+  ],
+  "maintenanceDecision": "NO_CONTENT_SUCCESSOR_REQUIRED_PLATFORM_CHANGES_PRESERVE_FROZEN_BOOK3_PUBLICATION",
+  "nextMode": "ON_DEMAND_SUCCESSOR_ONLY"
+}

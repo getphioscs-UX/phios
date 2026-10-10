@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-USEFUL-GOD-SCHOOL-REGISTRY-v1.2.0",
+  "work": "BAZI-FP-W6",
+  "baselineCommit": "abab6b358bff574c65b9dfacc7985d5de564d674",
+  "status": "SOURCE_ADMITTED_MULTI_SCHOOL_DETAILED_V2_RULESETS_FROZEN",
+  "registryVersion": "1.2.0",
+  "schools": [
+    {
+      "schoolCode": "ZI_PING_MONTH_COMMAND_USE_v1",
+      "labelZh": "子平真诠月令用神层",
+      "authoritySourceId": "BZR-SRC-ZI-PING-ZHEN-QUAN",
+      "meaningOfUsefulGod": "MONTH_COMMAND_PATTERN_USE_WITH_FOUR_PILLAR_CONDITIONS",
+      "sourceClaimRefs": [
+        "BZR-CLM-ZPZQ-08-MONTH-COMMAND-001",
+        "BZR-CLM-ZPZQ-09-CONDITIONAL-FORMATION-003",
+        "BZR-CLM-ZPZQ-10-VARIATION-004",
+        "BZR-CLM-ZPZQ-14-CLIMATE-CROSSCHECK-006",
+        "BZR-CLM-ZPZQ-45-JIANLU-YUEJIE-007",
+        "BZR-CLM-ZPZQ-09-USE-FACTOR-FROM-FORMATION-030",
+        "BZR-CLM-ZPZQ-09-RESCUE-TABLE-022",
+        "BZR-CLM-ZPZQ-45-JIANLU-YUEJIE-DETAIL-023"
+      ],
+      "productionVerdictEnabled": false,
+      "sourceAdmissionComplete": true,
+      "ruleEvaluationEnabled": true,
+      "elementSelectionEnabled": false,
+      "rulesetRef": "content/interpretation/bazi/rulesets/bazi-zi-ping-month-command-use-ruleset-v2.json",
+      "decisionCoverage": {
+        "operativeFactorFromEstablishedPatternPath": "SUPPORTED",
+        "elementRelationMapping": "SUPPORTED",
+        "finalUsefulGodSelection": "PATTERN_PATH_PREREQUISITE_GATED",
+        "customerOutcomePrediction": "FORBIDDEN"
+      },
+      "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.3.json",
+      "conditionalCandidateSelectionEnabled": true
+    },
+    {
+      "schoolCode": "DI_TIAN_SUI_TI_YONG_BALANCE_v1",
+      "labelZh": "滴天髓体用平衡层",
+      "authoritySourceId": "BZR-SRC-DI-TIAN-SUI",
+      "meaningOfUsefulGod": "MOST_STRUCTURALLY_NECESSARY_FACTOR_OR_FACTORS_WITH_PRIORITY",
+      "sourceClaimRefs": [
+        "BZR-CLM-DTS-TIYONG-MULTI-USE-008",
+        "BZR-CLM-DTS-YUELING-CONTEXT-010",
+        "BZR-CLM-DTS-STRENGTH-NON-SINGLE-FACTOR-011",
+        "BZR-CLM-DTS-TIYONG-CAIGUANSHI-TO-YINBI-024",
+        "BZR-CLM-DTS-TIYONG-YINBI-TO-XIEKE-025",
+        "BZR-CLM-DTS-TIYONG-PRIORITY-026"
+      ],
+      "productionVerdictEnabled": false,
+      "sourceAdmissionComplete": true,
+      "ruleEvaluationEnabled": true,
+      "elementSelectionEnabled": false,
+      "rulesetRef": "content/interpretation/bazi/rulesets/bazi-di-tian-sui-ti-yong-ruleset-v2.json",
+      "decisionCoverage": {
+        "conditionalDirection": "SUPPORTED_WHEN_EXCESS_ESTABLISHED",
+        "multipleCandidateRepresentation": "SUPPORTED",
+        "qualitativePriority": "SUPPORTED",
+        "excessVerdictUpstream": "NOT_ESTABLISHED",
+        "numericScore": "FORBIDDEN"
+      },
+      "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.3.json",
+      "conditionalCandidateSelectionEnabled": true
+    },
+    {
+      "schoolCode": "DI_TIAN_SUI_CLIMATE_TIAOHOU_v1",
+      "labelZh": "滴天髓寒暖燥湿层",
+      "authoritySourceId": "BZR-SRC-DI-TIAN-SUI",
+      "meaningOfUsefulGod": "CLIMATE_ADJUSTMENT_LENS_SEPARATE_FROM_GENERIC_STRENGTH",
+      "sourceClaimRefs": [
+        "BZR-CLM-DTS-HANNUAN-ZAOSHI-009",
+        "BZR-CLM-DTS-CLIMATE-THERMAL-ELEMENT-027",
+        "BZR-CLM-DTS-CLIMATE-DRY-WET-RECIPROCAL-028",
+        "BZR-CLM-DTS-CLIMATE-SHANGGUAN-EXAMPLES-029",
+        "BZR-CLM-DTS-CLIMATE-FIRE-EARTH-DRYING-PRIORITY-031",
+        "BZR-CLM-DTS-CLIMATE-METAL-MOISTENING-PRIORITY-032"
+      ],
+      "productionVerdictEnabled": false,
+      "sourceAdmissionComplete": true,
+      "ruleEvaluationEnabled": true,
+      "elementSelectionEnabled": false,
+      "rulesetRef": "content/interpretation/bazi/rulesets/bazi-di-tian-sui-tiaohou-ruleset-v2.json",
+      "decisionCoverage": {
+        "thermalElementClassSelection": "SUPPORTED_WHEN_BIAS_ESTABLISHED",
+        "moistureReciprocity": "SUPPORTED",
+        "twoOrderedExamples": "SUPPORTED_EXAMPLE_SCOPE_ONLY",
+        "exhaustiveUniversalTable": "NOT_ESTABLISHED"
+      },
+      "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.3.json",
+      "conditionalCandidateSelectionEnabled": true
+    }
+  ],
+  "crossSchoolRules": {
+    "sameTermMayHaveDifferentTechnicalMeaning": true,
+    "automaticMergeForbidden": true,
+    "majorityVoteForbidden": true,
+    "customerSurfaceMustNameSchoolWhenVerdictsDiffer": true,
+    "productionSelectionRequiresHumanAdmittedClaims": true,
+    "humanAdmittedClaimsPresent": true,
+    "productionElementSelectionStillRequiresRuleCoverage": true,
+    "batch002DetailedClaimsAdmitted": true
+  },
+  "predecessorRef": "content/interpretation/bazi/registries/bazi-useful-god-school-registry-v1.1.json",
+  "currentBaselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140"
+}

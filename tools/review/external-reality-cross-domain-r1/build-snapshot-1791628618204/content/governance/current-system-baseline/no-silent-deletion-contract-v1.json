@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-NO-SILENT-DELETION-CONTRACT-v1.0.0",
+  "work": "CBS-W6",
+  "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+  "status": "ACTIVE_FAIL_CLOSED",
+  "sequence": [
+    "OLD",
+    "SUCCESSOR_MAPPED",
+    "CONSUMER_MIGRATED",
+    "COMPATIBILITY_VERIFIED",
+    "DEPRECATED",
+    "REMOVABLE"
+  ],
+  "requiredEvidence": {
+    "SUCCESSOR_MAPPED": [
+      "successorId",
+      "successorPath",
+      "lineageEvidence"
+    ],
+    "CONSUMER_MIGRATED": [
+      "consumerInventory",
+      "migrationEvidence"
+    ],
+    "COMPATIBILITY_VERIFIED": [
+      "compatibilityChecker",
+      "checkerPassEvidence"
+    ],
+    "DEPRECATED": [
+      "deprecationRecord",
+      "currentOwnerFalse"
+    ],
+    "REMOVABLE": [
+      "SAFE_TO_REMOVE classification",
+      "zero current consumers",
+      "no unresolved successor collision"
+    ]
+  },
+  "currentBatch": {
+    "removedFiles": [],
+    "deprecatedFiles": [],
+    "silentDeletionPerformed": false
+  },
+  "rules": {
+    "directDeletionAllowed": false,
+    "unknownDeletionAllowed": false,
+    "historicalFreezeMutationAllowed": false,
+    "removalRequiresAllPriorStates": true
+  }
+}

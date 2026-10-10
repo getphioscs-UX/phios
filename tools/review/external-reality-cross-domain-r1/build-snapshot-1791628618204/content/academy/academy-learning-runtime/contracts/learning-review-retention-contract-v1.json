@@ -1,0 +1,33 @@
+{
+  "contractCode": "PHI-OS-ALR-W31-LEARNING-REVIEW-RETENTION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W31",
+  "status": "active",
+  "productionStatus": "review_semantics_and_rdg_retention_boundary_only",
+  "semanticAuthority": "ALR",
+  "retentionAuthority": "RDG",
+  "identityPrefix": "ALR-LR-",
+  "rdgRetentionContractReference": "content/governance/reality-data-governance/contracts/retention-runtime-contract-v1.json",
+  "rdgRetentionRegistryReference": "content/governance/reality-data-governance/registries/canonical-data-retention-registry-v1.json",
+  "requiredEvaluationInputFields": ["reviewCode", "reviewVersion", "progressState", "continuityDecision", "capabilityState", "sourceVersionState", "rdgRetentionDecision"],
+  "rdgRetentionDecisions": ["RDG_RETENTION_RESOLVED", "RDG_RETENTION_REVIEW_REQUIRED", "RDG_RETENTION_DENIED", "DISPUTED", "UNKNOWN"],
+  "reviewDecisions": ["RETENTION_BLOCKED", "HOLD_DISPUTED", "HOLD_UNKNOWN", "RETENTION_REVIEW_REQUIRED", "SOURCE_REVIEW_REQUIRED", "CAPABILITY_MAINTENANCE_REVIEW", "LEARNING_REVIEW_REQUIRED", "NO_REVIEW_DUE"],
+  "forbiddenInputFields": ["learnerReference", "subjectReference", "accountReference", "rawResponse", "response", "score", "retentionDuration", "deletionDecision", "legalHoldDecision", "capabilityAchieved", "credentialState", "entitlementState", "professionalJudgment", "providerPrompt", "providerResponse", "modelOutput", "persist", "persistencePayload", "presentationPayload"],
+  "rules": {
+    "alrMayDetermineLearningReviewSemantics": true,
+    "alrMayChooseRetentionClassDurationExpiryDeletionOrLegalHold": false,
+    "retentionDecisionMustComeFromRdg": true,
+    "sourceChangeContinuityBreakMaintenanceUnknownAndDisputedRemainReviewable": true,
+    "reviewDecisionMaySetCapabilityState": false,
+    "reviewDecisionMayGrantCredentialEntitlementOrProfessionalAuthority": false,
+    "reviewEvaluationPersistsLearnerData": false,
+    "unknownRetentionDecisionOrReferenceFailsClosed": true
+  },
+  "activation": {
+    "learningReviewSemanticEvaluationActive": true,
+    "rdgRetentionPolicyReferenceActive": true,
+    "retentionMutationFromAlrActive": false,
+    "deletionOrLegalHoldMutationFromAlrActive": false,
+    "learnerReviewPersistenceActive": false
+  }
+}

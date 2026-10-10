@@ -1,0 +1,78 @@
+/* EXP-W4 customer projection. Runtime and technical records remain in the DOM
+ * for the existing controller, but only appear after an explicit view choice. */
+.reconstruction-page [data-runtime-workspace],
+.reconstruction-page .reconstruction-evidence-summary,
+.reconstruction-page .customer-summary-meta {
+  display: none !important;
+}
+
+.reconstruction-page .runtime-workspace-layout {
+  display: block;
+}
+
+.w14-customer-explanation {
+  margin-top: var(--phi-space-4, 1rem);
+  border: 1px solid var(--phi-border-subtle, #d8d4ca);
+  border-radius: var(--phi-radius-lg, 1rem);
+  background: var(--phi-surface-primary, #fff);
+}
+
+.w14-customer-explanation > summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: var(--phi-space-3, .75rem) var(--phi-space-4, 1rem);
+  color: var(--phi-action-primary, #242f7a);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.w14-customer-explanation__body {
+  display: grid;
+  gap: var(--phi-space-4, 1rem);
+  padding: 0 var(--phi-space-4, 1rem) var(--phi-space-4, 1rem);
+}
+
+.w14-customer-explanation__body section {
+  padding-top: var(--phi-space-3, .75rem);
+  border-top: 1px solid var(--phi-border-subtle, #d8d4ca);
+}
+
+.w14-customer-explanation__body h4 {
+  margin: 0 0 var(--phi-space-2, .5rem);
+}
+
+.w14-customer-card--relation {
+  border-left: 4px solid var(--phi-state-info, #496a86);
+}
+
+.w14-customer-card--unknown,
+.w14-confirmation {
+  border-color: color-mix(in srgb, var(--reconstruction-unknown) 35%, var(--phi-border-subtle, #d8d4ca));
+  background: color-mix(in srgb, var(--reconstruction-unknown) 4%, white);
+}
+
+.w14-card-action {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--phi-space-2, .5rem);
+  color: var(--phi-action-primary, #242f7a);
+  font-size: .84rem;
+  font-weight: 650;
+  text-underline-offset: .2em;
+}
+
+.w14-version-confirmation {
+  margin-top: var(--phi-space-4, 1rem);
+  padding: var(--phi-space-4, 1rem);
+  border-left: 4px solid var(--reconstruction-confirmed);
+  border-radius: var(--phi-radius-md, .75rem);
+  background: color-mix(in srgb, var(--reconstruction-confirmed) 6%, white);
+}
+
+@media (max-width: 768px) {
+  .w14-customer-explanation__body {
+    padding-inline: var(--phi-space-3, .75rem);
+  }
+}

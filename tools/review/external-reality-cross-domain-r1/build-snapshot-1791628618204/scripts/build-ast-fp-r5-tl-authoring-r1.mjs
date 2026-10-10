@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {read,ref,digest,save,synthesis} from './build-ast-fp-r5-tl-reference.mjs';
+const root='content/professional/ast-full-production/';
+const c=read(ref('canonical-projection')),r=read(ref('r4-professional-semantic'));
+assert.equal(c.canonicalProjection.projectionId,'CMP2-3353E1115566DDE4F27C808E');
+assert.equal(digest(c.canonicalProjection),'02f96934070156352695f361c9f7e3c9c8f5ca39962b4c536c5eb5b3ebb9721c');
+assert.equal(digest(r.professionalSemanticProjection),'e5b89516602f0ba6371e88d0c145393cc036dc7bc7be3a085fd7c293545ac78c');
+const previous=read(ref('whole-chart-synthesis'));
+const syntheses=Object.fromEntries(['zh-Hans','en'].map(locale=>[locale,synthesis(c.canonicalProjection,r.professionalSemanticProjection,locale)]));
+save(ref('whole-chart-synthesis'),{...previous,compositionRuleRef:root+'registries/ast-r5-whole-chart-composition-rule-registry-v2.json',compositionRuleDigest:digest(read(root+'registries/ast-r5-whole-chart-composition-rule-registry-v2.json')),compositionRuleVersion:syntheses.en.technicalLineage.compositionRuleVersion,syntheses,digests:Object.fromEntries(Object.entries(syntheses).map(([k,v])=>[k,digest(v)]))});
+console.log(JSON.stringify({status:'R5_RECOMPOSED_WITHOUT_CALCULATION',themes:syntheses.en.coreThemes.map(x=>[x.familyCode,x.priority]),clusters:syntheses.en.aspectNetworkClusters.map(x=>[x.bodyCodes,x.evidenceAspectCodes,x.score])},null,2));

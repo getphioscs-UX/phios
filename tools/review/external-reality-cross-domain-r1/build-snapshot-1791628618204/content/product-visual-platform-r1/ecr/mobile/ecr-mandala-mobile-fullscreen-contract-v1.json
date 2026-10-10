@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W16-ECR-MANDALA-MOBILE-FULLSCREEN-CONTRACT-v1.0.0",
+  "work": "PVP-R1-VIS-W16",
+  "baselineCommit": "ffc05bc07345011bc24e68884cc1d569c8d96418",
+  "status": "MOBILE_FULLSCREEN_FROZEN_CURRENT_RENDERER_REUSED",
+  "controls": {
+    "openButton": "data-ecr-mandala-fullscreen-open",
+    "closeButton": "data-ecr-mandala-fullscreen-close",
+    "escapeCloses": true,
+    "focusReturnsToTrigger": true,
+    "ariaExpandedTracksState": true
+  },
+  "responsive": {
+    "desktop": "fullscreen uses Mandala + supporting rail layout",
+    "max1179": "secondary column narrows while Mandala remains primary",
+    "max767": "fullscreen occupies viewport and focuses on the scrollable Mandala",
+    "max620": "compact page starts the full Mandala exploration collapsed; customer summary remains the first reading layer outside fullscreen"
+  },
+  "mobileFullscreen": {
+    "viewportInsetZero": true,
+    "scrollRegion": true,
+    "minimumSvgWidthForPan": 680,
+    "summaryHiddenInFullscreen": true,
+    "detailHiddenInFullscreen": true,
+    "topicLensHiddenInFullscreen": true,
+    "underlyingSelectedPathPreserved": true
+  },
+  "accessibility": {
+    "keyboardAddressableNodes": 145,
+    "reducedMotionRespected": true,
+    "forcedColorsSupported": true,
+    "printResetsFullscreen": true,
+    "nativeFullscreenApiRequired": false
+  },
+  "boundaries": {
+    "fullscreenCreatesMeaning": false,
+    "fullscreenChangesSelection": false,
+    "fullscreenChangesEntitlement": false,
+    "fullscreenChangesTopicAuthority": false,
+    "mobileCreatesAlternateMandala": false
+  },
+  "nextGate": "PHASE8 FREEZE"
+}

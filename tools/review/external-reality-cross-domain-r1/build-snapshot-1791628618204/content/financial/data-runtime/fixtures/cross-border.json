@@ -1,0 +1,127 @@
+{
+  "fixtureVersion": "PHI-OS-FDR-W22-FIXTURE-v1.0.0",
+  "scenario": "cross-border",
+  "description": "Foreign asset preserved in source currency without FDR FX conversion.",
+  "synthetic": true,
+  "sourceAdapter": "DOCUMENT_EXTRACTION",
+  "purposeScope": "FINANCIAL_PLANNING",
+  "expectedProperties": {
+    "foreignCurrencyPreserved": true,
+    "jurisdictionNotInferred": true
+  },
+  "snapshots": [
+    {
+      "snapshotId": "FR-XB-S0",
+      "financialRealityId": "FR-XB",
+      "sequence": 0,
+      "timepoint": "t0",
+      "asOfDate": "2026-01-01",
+      "financialRealityVersion": 1,
+      "snapshotPayload": {
+        "financialRealityId": "FR-XB",
+        "householdReference": "HH-XB",
+        "customerReferences": [
+          "CUST-X"
+        ],
+        "asOfDate": "2026-01-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-X",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [
+          {
+            "assetId": "A-X",
+            "assetType": "FOREIGN_ASSET",
+            "ownership": {
+              "ownershipId": "OWN-X",
+              "assetId": "A-X",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P-X"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-X",
+              "factCode": "ASSET_VALUE",
+              "value": {
+                "amount": 250000,
+                "currency": "USD"
+              },
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "US",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "liabilities": [],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 1,
+        "digest": "b1d441ca2421f755bc5f8daecaa34e28739ab0f69a7a13e8b8ad55c1bebc07cf"
+      },
+      "previousSnapshotDigest": null,
+      "changeEventReferences": [],
+      "createdAt": "2026-01-01T00:00:00Z",
+      "creationReason": "INITIAL_DISCLOSURE",
+      "consentReference": "CONSENT-FP",
+      "digest": "115c04cd7a8cffb4860972eec6a853ec6566942af076a014e42e690d8715879b"
+    }
+  ],
+  "changeEvents": []
+}

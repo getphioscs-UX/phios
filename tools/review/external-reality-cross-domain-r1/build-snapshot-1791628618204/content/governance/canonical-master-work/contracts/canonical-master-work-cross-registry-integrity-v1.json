@@ -1,0 +1,20 @@
+{
+  "contractCode": "PHI-OS-CMW-CROSS-REGISTRY-INTEGRITY-v1",
+  "contractVersion": "1.0.0",
+  "work": "CMW-W5",
+  "status": "canonical_contract",
+  "registries": [
+    "canonical-master-work-registry-v1.json",
+    "canonical-master-work-migration-registry-v1.json",
+    "canonical-runtime-dependency-registry-v1.json",
+    "canonical-runtime-plane-registry-v1.json"
+  ],
+  "checks": [
+    "WORK_RUNTIME_HAS_PLANE",
+    "DEPENDENCY_RUNTIME_HAS_PLANE",
+    "MIGRATION_DESTINATION_EXISTS",
+    "NO_DUPLICATE_WORK_CODE",
+    "NO_SILENT_SUPERSEDED_ACTIVE_CONFLICT",
+    "NO_FORBIDDEN_DOWNSTREAM_AUTHORITY_WRITE"
+  ]
+}

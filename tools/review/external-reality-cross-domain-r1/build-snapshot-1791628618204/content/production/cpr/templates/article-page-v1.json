@@ -1,0 +1,87 @@
+{
+  "templateCode": "CPR-PRODUCTION-TEMPLATE-ARTICLE-PAGE-v1",
+  "templateVersion": "1.0.0",
+  "presentationType": "ARTICLE_PAGE",
+  "status": "active_production_template",
+  "semanticOrder": [
+    "BREADCRUMB_READING_CONTEXT",
+    "ARTICLE_HEADER",
+    "HERO",
+    "ARTICLE_BODY",
+    "KNOWLEDGE_CONTEXT",
+    "CONTINUITY",
+    "FOOTER"
+  ],
+  "components": [
+    {
+      "componentCode": "BREADCRUMB_READING_CONTEXT",
+      "required": true,
+      "children": []
+    },
+    {
+      "componentCode": "ARTICLE_HEADER",
+      "required": true,
+      "children": ["PART_BOOK", "CANONICAL_TITLE", "SUMMARY_LEAD", "READING_METADATA"]
+    },
+    {
+      "componentCode": "HERO",
+      "required": false,
+      "sourcePolicy": "PUBLISHED_ASSET_ONLY"
+    },
+    {
+      "componentCode": "ARTICLE_BODY",
+      "required": true,
+      "allowedChildren": ["SECTION", "FIGURE", "CALLOUT", "DIAGRAM"],
+      "sourceOrderPolicy": "PUBLISHED_ARTICLE_ORDER"
+    },
+    {
+      "componentCode": "KNOWLEDGE_CONTEXT",
+      "required": true,
+      "children": ["CANONICAL_NODE", "RELATED_NODES", "SOURCES_WHERE_PUBLIC"]
+    },
+    {
+      "componentCode": "CONTINUITY",
+      "required": true,
+      "children": ["PREVIOUS", "NEXT"]
+    },
+    {
+      "componentCode": "FOOTER",
+      "required": true,
+      "children": []
+    }
+  ],
+  "pds": {
+    "authority": "PDS",
+    "contractReferences": [
+      "content/registry/pds-w2-design-token-contract.json",
+      "content/registry/pds-w3-core-component-shell-contract.json",
+      "content/registry/pds-w7-reading-experience.json",
+      "content/registry/pds-w9-knowledge-professional.json"
+    ],
+    "styleReferences": [
+      "assets/css/tokens.css",
+      "assets/css/design/foundation.css",
+      "assets/css/design/typography.css",
+      "assets/css/design/layout.css",
+      "assets/css/design/components.css",
+      "assets/css/design/motion.css",
+      "assets/css/design/article-presentation.css"
+    ],
+    "owns": [
+      "TYPOGRAPHY",
+      "SPACING",
+      "GRID",
+      "CONTAINER_WIDTH",
+      "FIGURE_WIDTH",
+      "CAPTION",
+      "CALLOUT",
+      "COLOR",
+      "RADIUS",
+      "RESPONSIVE",
+      "FOCUS",
+      "CONTRAST",
+      "MOTION"
+    ],
+    "articleLocalCss": false
+  }
+}

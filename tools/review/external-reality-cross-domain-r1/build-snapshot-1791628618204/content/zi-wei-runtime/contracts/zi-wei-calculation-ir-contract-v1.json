@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-ZWR-CALCULATION-IR-CONTRACT-v1.0.0",
+  "work": "ZWR-W10",
+  "baselineCommit": "4c1aff3fdbf630ba94f1ef552af1d744b4b7cde6",
+  "status": "VALIDATED_INTERNAL",
+  "runtime": "functions/zi-wei-runtime/zi-wei-calculation-ir-runtime.js",
+  "irSchema": "PHI-OS-ZWR-CALCULATION-IR-v1.0.0",
+  "requiredSections": [
+    "calendar",
+    "palaceStructure",
+    "mainStars",
+    "supportStars",
+    "transformations",
+    "policy",
+    "boundaries",
+    "calculationDigest"
+  ],
+  "determinism": {
+    "sameCanonicalInputAndPolicyProducesSameCalculationDigest": true,
+    "digestAlgorithm": "SHA-256 over stable JSON"
+  },
+  "boundaries": {
+    "dynamicPeriodsIncluded": false,
+    "meaningIncluded": false,
+    "readingIncluded": false,
+    "professionalJudgmentIncluded": false,
+    "fortunePredictionIncluded": false
+  },
+  "productionDispatchAllowed": false,
+  "executionGate": {
+    "requiredMode": "INTERNAL_VALIDATION",
+    "productionModeAllowed": false,
+    "authority": "content/professional/zi-wei-runtime/successors/zwr-w7-w13-internal-calculation-activation-v1.json"
+  }
+}

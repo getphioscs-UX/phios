@@ -1,0 +1,17 @@
+{
+  "contractCode": "PHI-OS-MULTILINGUAL-PUBLISHED-RETRIEVAL-INDEX-v1.0.0",
+  "authority": "Published Knowledge Authority",
+  "sourceOfTruth": "content/knowledge/public/authority/published-knowledge-authority.json",
+  "projections": ["nodes","fragments","aliases","relationships","questions","publications","locale-availability","books","parts"],
+  "policies": {
+    "publishedOnly": true,
+    "localeIndependent": true,
+    "registryPresenceEqualsIndexPresence": false,
+    "deterministicRebuild": true,
+    "canonicalMutationAllowed": false,
+    "privateWorkflowProjectionAllowed": false,
+    "crossLocaleStateInheritanceAllowed": false
+  },
+  "operations": ["read","validate","project","digest","write_projection","report"],
+  "prohibitedOperations": ["write_registry","change_review","change_approval","change_publication","publish","repair_source_data"]
+}

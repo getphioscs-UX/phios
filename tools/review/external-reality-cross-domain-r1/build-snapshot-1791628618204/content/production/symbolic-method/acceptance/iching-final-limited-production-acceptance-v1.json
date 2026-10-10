@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-FINAL-LIMITED-PRODUCTION-ACCEPTANCE-v1.0.0",
+  "work": "ICH-PROD-W33-FINAL-LIMITED-PRODUCTION-ACCEPTANCE",
+  "evidenceCommit": "9bfca2bb8c94072feb0a280d0a4d3cb06c6ec2a9",
+  "status": "FINAL_LIMITED_PRODUCTION_ACCEPTED_FULL_PRODUCTION_PROMOTION_PENDING",
+  "historicalFirstLiveAdmissionSha": "025588253432e411b130a61bf4b38fe540cfcf54",
+  "observedSuccessorDeploymentSha": "ceb57c34f01d99ae971d8d32f1595ee728a64add",
+  "sourceEvidence": {
+    "historicalLiveEvidence": {
+      "path": "content/production/symbolic-method/deployment/iching-limited-production-live-evidence-v1.json",
+      "sha256": "4a09a0eb6a491f982fa8375b4d69fa156b1f5b08a9d46da96d4b8311b233b882"
+    },
+    "observationCampaign": {
+      "path": "content/production/symbolic-method/observation/iching-limited-production-observation-campaign-v2.json",
+      "sha256": "803779404b8404fb88417197fd345b4e3b0ff9d67741af0d8efcdd2a4c6eaf5d"
+    },
+    "runtimeFingerprint": {
+      "path": "content/production/symbolic-method/reconciliation/iching-limited-production-runtime-fingerprint-v1.json",
+      "sha256": "8269f13015a8474ce095794c8b1c15ae82ec9c29dfc6fe8cc4f6c58c3609e024"
+    },
+    "observationResults": {
+      "path": "content/production/symbolic-method/observation/iching-limited-production-observation-results-v2.json",
+      "sha256": "833858565a906b22b7d5913ab2f5c8b3e85c31b9b2de93f257c4e5f6c6662170"
+    },
+    "observationAcceptance": {
+      "path": "content/production/symbolic-method/acceptance/iching-limited-production-observation-acceptance-v2.json"
+    },
+    "observedCurrentAuthority": {
+      "path": "content/production/symbolic-method/reconciliation/iching-limited-production-current-successor-v2.json"
+    }
+  },
+  "historicalByteWitnesses": [
+    {
+      "path": "content/production/symbolic-method/observation/iching-limited-production-observation-results-v2.json",
+      "gitBlobSha1": "95486384270f1fb1d446dce9c375af68e9ed9b24"
+    },
+    {
+      "path": "content/production/symbolic-method/acceptance/iching-limited-production-observation-acceptance-v2.json",
+      "gitBlobSha1": "beac6d7687b0a0caaed3c54a11979ecde1eec2a0"
+    },
+    {
+      "path": "content/production/symbolic-method/reconciliation/iching-limited-production-current-successor-v2.json",
+      "gitBlobSha1": "df03547f87abf352c40f89847d66030583e0d7e4"
+    },
+    {
+      "path": "content/production/symbolic-method/reconciliation/iching-production-activation-readiness-v5.json",
+      "gitBlobSha1": "df94741aea8ec0c5e44833c6373537f322ab1958"
+    },
+    {
+      "path": "scripts/check-iching-current-v8.mjs",
+      "gitBlobSha1": "7a91ad2cc5c3ec31816d35251abe6f037a03b1ff"
+    },
+    {
+      "path": "scripts/check-iching-limited-production-observation-v2.mjs",
+      "gitBlobSha1": "d02a229b373f88584d640b9290d5a8f1c4b948b7"
+    }
+  ],
+  "accepted": {
+    "w31HistoricalFirstLiveAdmissionPreserved": true,
+    "w32R1SuccessorObservationAccepted": true,
+    "controlGates": "6/6",
+    "executionCases": "14/14",
+    "sensitiveDomainCases": "8/8",
+    "bilingualLocales": "2/2",
+    "replayDeterministic": true,
+    "humanApprovedDepthCoverage": "448/448",
+    "bilingualDepthRuntimeCases": "896/896",
+    "guestExecutionBlocked": true,
+    "retentionWithoutConsentBlocked": true,
+    "userDecisionAuthorityPreserved": true,
+    "privacySafeEvidence": true
+  },
+  "finalDecision": {
+    "state": "LIMITED_PRODUCTION",
+    "finalLimitedProductionAcceptance": true,
+    "governedBetaRunAllowed": true,
+    "fullProductionGranted": false,
+    "globalPublicExecutionGranted": false,
+    "productionCapabilityPromoted": false,
+    "fullProductionPromotionRequiresSeparateSuccessor": true
+  },
+  "governanceFreeze": {
+    "humanAcceptanceReopened": false,
+    "depthAdmissionReopened": false,
+    "persistenceReopened": false,
+    "historicalFirstLiveEvidenceRewritten": false,
+    "w32R1ObservationEvidenceRewritten": false,
+    "runtimeFingerprintRewritten": false,
+    "secretsOrRawIdentityMaterialized": false,
+    "observationCommitMayBeReboundToFutureSha": false
+  },
+  "nextAction": "CREATE_SEPARATE_FULL_PRODUCTION_PROMOTION_AND_FREEZE_SUCCESSOR_WITH_FRESH_EXACT_SHA_LIVE_VERIFICATION; DO_NOT_REWRITE_W31_W32R1_OR_W33_EVIDENCE"
+}

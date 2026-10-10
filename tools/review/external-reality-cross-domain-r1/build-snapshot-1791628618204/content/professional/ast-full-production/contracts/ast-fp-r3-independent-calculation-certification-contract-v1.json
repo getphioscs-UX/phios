@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R3-INDEPENDENT-CALCULATION-CERTIFICATION-CONTRACT-v1.0.0",
+  "workCode": "AST-FP-R3",
+  "sourceMainCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
+  "predecessor": "content/professional/ast-full-production/acceptance/ast-fp-r2-human-admission-acceptance-v1.json",
+  "referenceAuthorityRef": "content/professional/ast-full-production/authority/ast-fp-r3-independent-reference-authority-v1.json",
+  "referenceFixtureRef": "content/professional/ast-full-production/fixtures/ast-fp-r3-independent-reference-v1.json",
+  "certificationScope": [
+    "EXPLICIT_OFFSET_TO_UTC_NORMALIZATION",
+    "CORE_10_GEOCENTRIC_ECLIPTIC_LONGITUDES",
+    "DECISIVE_RETROGRADE_CLASSIFICATION",
+    "TRUE_LUNAR_NODE_LONGITUDE",
+    "ASC_MC_DSC_IC",
+    "PLACIDUS_12_CUSPS_AND_STABLE_HOUSE_PLACEMENTS",
+    "WHOLE_SIGN_12_CUSPS_AND_STABLE_HOUSE_PLACEMENTS",
+    "HIGH_LATITUDE_POLAR_FAIL_CLOSED",
+    "EASTERN_RISING_ASCENDANT_BRANCH",
+    "FIVE_MAJOR_ASPECT_TYPES",
+    "MAJOR_ASPECT_ORB_BOUNDARIES"
+  ],
+  "tolerances": {
+    "core10LongitudeDegrees": 0.05,
+    "trueNodeLongitudeDegrees": 0.05,
+    "angleLongitudeDegrees": 0.06,
+    "placidusCuspLongitudeDegrees": 0.06,
+    "wholeSignCuspLongitudeDegrees": 0.000000001,
+    "retrogradeReferenceSpeedGuardDegreesPerDay": 0.01,
+    "robustAspectBoundaryMarginDegrees": 0.15,
+    "stableHousePlacementCuspDistanceDegrees": 0.15,
+    "orbBoundaryEpsilonDegrees": 0.0001
+  },
+  "timePolicy": {
+    "explicitUtcOffsetAtBirthOwnsInstant": true,
+    "ianaZoneMayDescribeButDoesNotSilentlyReplaceExplicitOffset": true,
+    "dstExamplesCoveredThroughExplicitHistoricalOffsets": true,
+    "quarterHourOffsetCaseRequired": true
+  },
+  "housePolicy": {
+    "placidusComparedAgainstIndependentTwelveCuspReference": true,
+    "wholeSignComparedAgainstIndependentAscendantSignBucket": true,
+    "placidusAbsoluteLatitudeGuardDegrees": 66.5625,
+    "polarPlacidusMustFailClosedWith": "ASTA_PLACIDUS_POLAR_LIMIT",
+    "wholeSignMustRemainAvailableAtPolarEdge": true,
+    "housePlacementComparedOnlyWhenReferencePointIsAtLeastStableDistanceFromEveryCusp": true
+  },
+  "aspectPolicy": {
+    "naturalCorpusMustContainAllFiveMajorTypes": true,
+    "naturalPairComparisonSkipsOnlyBoundarySensitivePairs": true,
+    "syntheticBoundaryTestsRequiredForEveryMajorType": true,
+    "exactAuthorizedOrbIncluded": true,
+    "authorizedOrbPlusEpsilonExcluded": true,
+    "applyingSeparatingStillOutsideR3Scope": true
+  },
+  "retrogradePolicy": {
+    "referenceSpeedUsedForDirectionOnly": true,
+    "exactClassificationRequiredOutsideStationaryGuard": true,
+    "nearStationaryClassificationIsNotUsedAsCertificationFailure": true
+  },
+  "defectClosure": {
+    "code": "AST_R3_EASTERN_ASCENDANT_BRANCH",
+    "problem": "The pre-R3 ascendant formula returned one of two opposite horizon intersections without selecting the eastern/rising branch at all latitudes.",
+    "fix": "Choose between the raw candidate and its 180-degree opposite by ecliptic-to-equatorial right ascension and negative local hour angle.",
+    "existingR2FixtureOutputsExpectedUnchanged": true,
+    "newPolarCaseRequired": true,
+    "algorithmIdentityRetainedAsPolicyConformingBugFix": true
+  },
+  "failClosed": {
+    "anyDecisiveLongitudeOutsideToleranceFails": true,
+    "anyRequiredAngleOrCuspOutsideToleranceFails": true,
+    "anyRobustAspectMismatchFails": true,
+    "anyOrbBoundaryMismatchFails": true,
+    "polarWholeSignWrongAscendantBranchFails": true,
+    "missingIndependentReferenceFails": true
+  },
+  "boundaries": {
+    "meaningCreated": false,
+    "interpretationCreated": false,
+    "sourceMeaningAdmissionChanged": false,
+    "r2HumanDecisionRewritten": false,
+    "customerCutoverChanged": false,
+    "productionAdmissionChanged": false
+  }
+}

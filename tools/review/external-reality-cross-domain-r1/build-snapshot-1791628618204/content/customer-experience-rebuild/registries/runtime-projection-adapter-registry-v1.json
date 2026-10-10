@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "PHI-OS-CX-R20-RUNTIME-PROJECTION-ADAPTER-REGISTRY-v1.0.0",
+  "work": "CX-R20",
+  "executionBaselineCommit": "3eed6a26db6767cdd270719f58636376fcb29e9a",
+  "status": "CURRENT_MAIN_ADAPTER_REGISTRY_FROZEN",
+  "adapterRoot": "functions/customer-projection",
+  "adapters": [
+    {
+      "adapterId": "REALITY",
+      "file": "reality-customer-projection.js",
+      "export": "projectRealityForCustomer",
+      "sourceAuthorities": ["ICR", "RDG", "RMO", "RRE", "JR", "RNE", "RR"],
+      "customerSurfaces": ["MY_REALITY"],
+      "state": "ACTIVE_RECONCILED"
+    },
+    {
+      "adapterId": "READOUT",
+      "file": "readout-customer-projection.js",
+      "export": "projectReadoutForCustomer",
+      "sourceAuthorities": ["RRE"],
+      "customerSurfaces": ["MY_REALITY", "PERSONAL_REALITY"],
+      "state": "ACTIVE_RECONCILED"
+    },
+    {
+      "adapterId": "NAVIGATION",
+      "file": "navigation-customer-projection.js",
+      "export": "projectNavigationForCustomer",
+      "sourceAuthorities": ["RNE"],
+      "customerSurfaces": ["MY_REALITY"],
+      "state": "ACTIVE_RECONCILED"
+    },
+    {
+      "adapterId": "METHODS",
+      "file": "method-customer-projection.js",
+      "export": "projectMethodsForCustomer",
+      "sourceAuthorities": ["MPA", "METHOD_RUNTIME", "CMR"],
+      "customerSurfaces": ["PERSPECTIVES", "PERSONAL_REALITY"],
+      "state": "ACTIVE_RECONCILED"
+    },
+    {
+      "adapterId": "FINANCIAL",
+      "file": "financial-customer-projection.js",
+      "export": "projectFinancialForCustomer",
+      "sourceAuthorities": ["FDR", "FCR", "FAR", "HFP", "PFR"],
+      "customerSurfaces": ["FINANCIAL_REALITY"],
+      "state": "ACTIVE_RECONCILED"
+    },
+    {
+      "adapterId": "KNOWLEDGE_ANSWER",
+      "file": "knowledge-customer-projection.js",
+      "export": "projectKnowledgeAnswerForCustomer",
+      "sourceAuthorities": ["CKA", "KAP", "CURRENT_FACTS_GATEWAY"],
+      "customerSurfaces": ["ASK"],
+      "state": "ACTIVE_RECONCILED"
+    },
+    {
+      "adapterId": "REPORT",
+      "file": "report-customer-projection.js",
+      "export": "projectReportForCustomer",
+      "sourceAuthorities": ["RR"],
+      "customerSurfaces": ["MY_REALITY", "REPORT", "PROFESSIONAL"],
+      "state": "ACTIVE_RECONCILED"
+    },
+    {
+      "adapterId": "CONTINUITY",
+      "file": "continuity-customer-projection.js",
+      "export": "projectContinuityForCustomer",
+      "sourceAuthorities": ["JR"],
+      "customerSurfaces": ["MY_REALITY", "ACCOUNT"],
+      "state": "ACTIVE_RECONCILED"
+    },
+    {
+      "adapterId": "PROFESSIONAL_REVIEW",
+      "file": "professional-customer-projection.js",
+      "export": "projectProfessionalReviewForCustomer",
+      "sourceAuthorities": ["PR", "PFR"],
+      "customerSurfaces": ["PROFESSIONAL", "FINANCIAL_REALITY"],
+      "state": "ACTIVE_RECONCILED"
+    }
+  ],
+  "rules": {
+    "oneProjectionBoundary": true,
+    "allAdaptersConsumeOnly": true,
+    "allViewModelsFrozen": true,
+    "adapterMayNotFetch": true,
+    "adapterMayNotPersist": true,
+    "adapterMayNotCreateAuthority": true
+  }
+}

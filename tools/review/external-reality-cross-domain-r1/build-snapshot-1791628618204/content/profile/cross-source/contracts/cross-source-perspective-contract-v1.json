@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-CROSS-SOURCE-PERSPECTIVE-CONTRACT-v1.0.0",
+  "work": "PRF-W8",
+  "baselineCommit": "fc9616b9f63ed4099e008a9395ad4d167bfa597e",
+  "runtimeSchema": "PHI-OS-CROSS-SOURCE-PERSPECTIVE-IR-v1",
+  "runtimeOwner": "functions/profile/profile-context-runtime.js",
+  "ruleRegistry": "content/professional/profile/cross-source/registries/cross-source-translation-rule-registry-v1.json",
+  "sourceLanes": [
+    "SYMBOLIC_INTERPRETATION",
+    "EXTERNAL_PROFILE_RESULT",
+    "CUSTOMER_SELF_REPORT",
+    "STANDARDIZED_SELF_REPORT",
+    "MEASURED_TASK_PERFORMANCE",
+    "CURRENT_REALITY_OBSERVATION"
+  ],
+  "outputGroups": [
+    "SOURCE_ALIGNED",
+    "SOURCE_COMPLEMENTARY",
+    "SOURCE_TENSION",
+    "SOURCE_CONTRADICTION",
+    "CURRENTLY_SUPPORTED",
+    "CURRENTLY_CONTRADICTED",
+    "OPEN"
+  ],
+  "rules": {
+    "sourceClassesMustRemainVisible": true,
+    "explicitComparisonRequired": true,
+    "automaticSemanticMatching": false,
+    "crossSourceConsensusMayCreateTruth": false,
+    "symbolicConvergenceMayCreateScientificValidation": false,
+    "selfReportConvergenceMayCreateObjectivePersonalityFact": false,
+    "currentRealityMustEnterThroughPrfW7Correlation": true,
+    "disagreementMayRemainVisible": true,
+    "openMayRemainOpen": true,
+    "customerPublishableBeforePrfW12": false
+  },
+  "gate": "check:profile:w8-cross-source-translation"
+}

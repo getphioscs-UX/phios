@@ -1,0 +1,5104 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R3B-HUMAN-REVIEW-CAMPAIGN-v2.0.0",
+  "work": "CX-R12R3B-W47-W50__PASS2_PREFLIGHT_RECONCILIATION",
+  "baselineCommit": "fc2c3dd6ab4910581fd9c859dc303e8c89697ec0",
+  "status": "PREFLIGHT_BLOCKED_CANDIDATE_MATERIALIZATION_REQUIRED",
+  "predecessorPatterns": [
+    "MIR_HUMAN_REVIEW",
+    "I_CHING_HUMAN_REVIEW",
+    "TAROT_HUMAN_REVIEW"
+  ],
+  "oneSharedCampaign": true,
+  "methodIds": [
+    "AST",
+    "NUM",
+    "BZR",
+    "ZWR"
+  ],
+  "caseCount": 96,
+  "casesPerMethod": 24,
+  "categoryCountsPerMethod": {
+    "TYPICAL_STRUCTURE": 6,
+    "RELATION_DENSE": 6,
+    "MISSING_DATA": 4,
+    "CONFLICT_OR_EXTREME": 4,
+    "LOCALE_ALIGNMENT": 2,
+    "SENSITIVE_BOUNDARY": 2
+  },
+  "rubric": [
+    "calculation fidelity",
+    "projection fidelity",
+    "source fidelity",
+    "method-role accuracy",
+    "relation accuracy",
+    "priority accuracy",
+    "no invented meaning",
+    "no generic duplication",
+    "conditional language",
+    "uncertainty preserved",
+    "ordinary-reader clarity",
+    "raw codes hidden",
+    "reality remains unknown",
+    "sensitive-domain safety",
+    "lineage traceability"
+  ],
+  "reviewPerspectives": [
+    "METHOD_FIDELITY",
+    "CUSTOMER_CLARITY"
+  ],
+  "dualAcceptanceRule": "methodFidelityAccepted=true AND customerClarityAccepted=true AND external evidenceRef present",
+  "thresholds": {
+    "initialControlledProduction": "AT_LEAST_20_OF_24_PER_METHOD_AND_ZERO_CRITICAL_FAILURE",
+    "fullProduction": "24_OF_24_PER_METHOD_AND_96_OF_96_TOTAL"
+  },
+  "currentTotals": {
+    "methodFidelityAccepted": 0,
+    "customerClarityAccepted": 0,
+    "dualAccepted": 0,
+    "pending": 96,
+    "reviewEligible": 0,
+    "materialized": 0
+  },
+  "ordinaryReaderFiveMinuteTest": {
+    "status": "NOT_RUN_EXTERNAL_EVIDENCE_REQUIRED",
+    "timeLimitMinutes": 5,
+    "questions": [
+      "What is this graph showing?",
+      "What are the three most important points?",
+      "Why does the system consider them worth noticing?",
+      "What does the system still not know?",
+      "Have the methods been mixed into one conclusion?",
+      "What can you do next?"
+    ],
+    "passRule": "AN_ORDINARY_READER_ANSWERS_ALL_SIX_WITHOUT_INTERNAL_TERMINOLOGY_ASSISTANCE",
+    "reviewerRef": null,
+    "evidenceRef": null,
+    "passed": null
+  },
+  "externalEvidence": {
+    "required": true,
+    "humanAccepted": false,
+    "liveBrowserAccepted": false,
+    "fullProduction": false
+  },
+  "workCoverage": [
+    47,
+    48,
+    49,
+    50
+  ],
+  "cases": [
+    {
+      "caseId": "CX-R12R3B-HR-AST-01",
+      "methodId": "AST",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "core reference",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-02",
+      "methodId": "AST",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "secondary role emphasis",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-03",
+      "methodId": "AST",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "balanced structure",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-04",
+      "methodId": "AST",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "primary relation",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-05",
+      "methodId": "AST",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "supporting relation",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-05",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-06",
+      "methodId": "AST",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "ordinary mixed structure",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-06",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-07",
+      "methodId": "AST",
+      "caseType": "RELATION_DENSE",
+      "scenario": "three-way support",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "RELATION_DENSE-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-08",
+      "methodId": "AST",
+      "caseType": "RELATION_DENSE",
+      "scenario": "three-way tension",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "RELATION_DENSE-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-09",
+      "methodId": "AST",
+      "caseType": "RELATION_DENSE",
+      "scenario": "repetition cluster",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "RELATION_DENSE-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-10",
+      "methodId": "AST",
+      "caseType": "RELATION_DENSE",
+      "scenario": "counterbalance network",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "RELATION_DENSE-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-11",
+      "methodId": "AST",
+      "caseType": "RELATION_DENSE",
+      "scenario": "priority competition",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "RELATION_DENSE-05",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-12",
+      "methodId": "AST",
+      "caseType": "RELATION_DENSE",
+      "scenario": "dense mixed relation",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "RELATION_DENSE-06",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-13",
+      "methodId": "AST",
+      "caseType": "MISSING_DATA",
+      "scenario": "birth time unavailable",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "MISSING_DATA-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-14",
+      "methodId": "AST",
+      "caseType": "MISSING_DATA",
+      "scenario": "time accuracy approximate",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "MISSING_DATA-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-15",
+      "methodId": "AST",
+      "caseType": "MISSING_DATA",
+      "scenario": "optional context absent",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "MISSING_DATA-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-16",
+      "methodId": "AST",
+      "caseType": "MISSING_DATA",
+      "scenario": "one meaning or rule unavailable",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "MISSING_DATA-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "STRUCTURE_ONLY",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-17",
+      "methodId": "AST",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "competing priorities",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-18",
+      "methodId": "AST",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "high repetition",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-19",
+      "methodId": "AST",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "support and tension coexist",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-20",
+      "methodId": "AST",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "one dominant structure",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-21",
+      "methodId": "AST",
+      "caseType": "LOCALE_ALIGNMENT",
+      "scenario": "English and Simplified Chinese semantic pair A",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "LOCALE_ALIGNMENT-01",
+      "reviewLocales": [
+        "en",
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-22",
+      "methodId": "AST",
+      "caseType": "LOCALE_ALIGNMENT",
+      "scenario": "English and Simplified Chinese semantic pair B",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "LOCALE_ALIGNMENT-02",
+      "reviewLocales": [
+        "en",
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-23",
+      "methodId": "AST",
+      "caseType": "SENSITIVE_BOUNDARY",
+      "scenario": "health or certainty pressure",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "SENSITIVE_BOUNDARY-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-AST-24",
+      "methodId": "AST",
+      "caseType": "SENSITIVE_BOUNDARY",
+      "scenario": "financial relationship or event pressure",
+      "fixedInputRef": "content/professional/ast-production/fixtures/ast-structural-scope-fixture-v1.json",
+      "fixedVariant": "SENSITIVE_BOUNDARY-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-01",
+      "methodId": "NUM",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "core reference",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-02",
+      "methodId": "NUM",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "secondary role emphasis",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-03",
+      "methodId": "NUM",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "balanced structure",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-04",
+      "methodId": "NUM",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "primary relation",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-05",
+      "methodId": "NUM",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "supporting relation",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-05",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-06",
+      "methodId": "NUM",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "ordinary mixed structure",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-06",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-07",
+      "methodId": "NUM",
+      "caseType": "RELATION_DENSE",
+      "scenario": "three-way support",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "RELATION_DENSE-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-08",
+      "methodId": "NUM",
+      "caseType": "RELATION_DENSE",
+      "scenario": "three-way tension",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "RELATION_DENSE-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-09",
+      "methodId": "NUM",
+      "caseType": "RELATION_DENSE",
+      "scenario": "repetition cluster",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "RELATION_DENSE-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-10",
+      "methodId": "NUM",
+      "caseType": "RELATION_DENSE",
+      "scenario": "counterbalance network",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "RELATION_DENSE-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-11",
+      "methodId": "NUM",
+      "caseType": "RELATION_DENSE",
+      "scenario": "priority competition",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "RELATION_DENSE-05",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-12",
+      "methodId": "NUM",
+      "caseType": "RELATION_DENSE",
+      "scenario": "dense mixed relation",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "RELATION_DENSE-06",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-13",
+      "methodId": "NUM",
+      "caseType": "MISSING_DATA",
+      "scenario": "birth time unavailable",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "MISSING_DATA-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-14",
+      "methodId": "NUM",
+      "caseType": "MISSING_DATA",
+      "scenario": "time accuracy approximate",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "MISSING_DATA-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-15",
+      "methodId": "NUM",
+      "caseType": "MISSING_DATA",
+      "scenario": "optional context absent",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "MISSING_DATA-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-16",
+      "methodId": "NUM",
+      "caseType": "MISSING_DATA",
+      "scenario": "one meaning or rule unavailable",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "MISSING_DATA-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "STRUCTURE_ONLY",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-17",
+      "methodId": "NUM",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "competing priorities",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-18",
+      "methodId": "NUM",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "high repetition",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-19",
+      "methodId": "NUM",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "support and tension coexist",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-20",
+      "methodId": "NUM",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "one dominant structure",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-21",
+      "methodId": "NUM",
+      "caseType": "LOCALE_ALIGNMENT",
+      "scenario": "English and Simplified Chinese semantic pair A",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "LOCALE_ALIGNMENT-01",
+      "reviewLocales": [
+        "en",
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-22",
+      "methodId": "NUM",
+      "caseType": "LOCALE_ALIGNMENT",
+      "scenario": "English and Simplified Chinese semantic pair B",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "LOCALE_ALIGNMENT-02",
+      "reviewLocales": [
+        "en",
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-23",
+      "methodId": "NUM",
+      "caseType": "SENSITIVE_BOUNDARY",
+      "scenario": "health or certainty pressure",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "SENSITIVE_BOUNDARY-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-NUM-24",
+      "methodId": "NUM",
+      "caseType": "SENSITIVE_BOUNDARY",
+      "scenario": "financial relationship or event pressure",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "SENSITIVE_BOUNDARY-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-01",
+      "methodId": "BZR",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "core reference",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-02",
+      "methodId": "BZR",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "secondary role emphasis",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-03",
+      "methodId": "BZR",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "balanced structure",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-04",
+      "methodId": "BZR",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "primary relation",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-05",
+      "methodId": "BZR",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "supporting relation",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-05",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-06",
+      "methodId": "BZR",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "ordinary mixed structure",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-06",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-07",
+      "methodId": "BZR",
+      "caseType": "RELATION_DENSE",
+      "scenario": "three-way support",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "RELATION_DENSE-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-08",
+      "methodId": "BZR",
+      "caseType": "RELATION_DENSE",
+      "scenario": "three-way tension",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "RELATION_DENSE-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-09",
+      "methodId": "BZR",
+      "caseType": "RELATION_DENSE",
+      "scenario": "repetition cluster",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "RELATION_DENSE-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-10",
+      "methodId": "BZR",
+      "caseType": "RELATION_DENSE",
+      "scenario": "counterbalance network",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "RELATION_DENSE-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-11",
+      "methodId": "BZR",
+      "caseType": "RELATION_DENSE",
+      "scenario": "priority competition",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "RELATION_DENSE-05",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-12",
+      "methodId": "BZR",
+      "caseType": "RELATION_DENSE",
+      "scenario": "dense mixed relation",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "RELATION_DENSE-06",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-13",
+      "methodId": "BZR",
+      "caseType": "MISSING_DATA",
+      "scenario": "birth time unavailable",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "MISSING_DATA-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-14",
+      "methodId": "BZR",
+      "caseType": "MISSING_DATA",
+      "scenario": "time accuracy approximate",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "MISSING_DATA-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-15",
+      "methodId": "BZR",
+      "caseType": "MISSING_DATA",
+      "scenario": "optional context absent",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "MISSING_DATA-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-16",
+      "methodId": "BZR",
+      "caseType": "MISSING_DATA",
+      "scenario": "one meaning or rule unavailable",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "MISSING_DATA-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "STRUCTURE_ONLY",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-17",
+      "methodId": "BZR",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "competing priorities",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-18",
+      "methodId": "BZR",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "high repetition",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-19",
+      "methodId": "BZR",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "support and tension coexist",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-20",
+      "methodId": "BZR",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "one dominant structure",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-21",
+      "methodId": "BZR",
+      "caseType": "LOCALE_ALIGNMENT",
+      "scenario": "English and Simplified Chinese semantic pair A",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "LOCALE_ALIGNMENT-01",
+      "reviewLocales": [
+        "en",
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-22",
+      "methodId": "BZR",
+      "caseType": "LOCALE_ALIGNMENT",
+      "scenario": "English and Simplified Chinese semantic pair B",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "LOCALE_ALIGNMENT-02",
+      "reviewLocales": [
+        "en",
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-23",
+      "methodId": "BZR",
+      "caseType": "SENSITIVE_BOUNDARY",
+      "scenario": "health or certainty pressure",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "SENSITIVE_BOUNDARY-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-BZR-24",
+      "methodId": "BZR",
+      "caseType": "SENSITIVE_BOUNDARY",
+      "scenario": "financial relationship or event pressure",
+      "fixedInputRef": "content/professional/bzr-production/fixtures/bzr-canonical-projection.production.valid.json",
+      "fixedVariant": "SENSITIVE_BOUNDARY-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-01",
+      "methodId": "ZWR",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "core reference",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-02",
+      "methodId": "ZWR",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "secondary role emphasis",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-03",
+      "methodId": "ZWR",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "balanced structure",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-04",
+      "methodId": "ZWR",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "primary relation",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-05",
+      "methodId": "ZWR",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "supporting relation",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-05",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-06",
+      "methodId": "ZWR",
+      "caseType": "TYPICAL_STRUCTURE",
+      "scenario": "ordinary mixed structure",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "TYPICAL_STRUCTURE-06",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-07",
+      "methodId": "ZWR",
+      "caseType": "RELATION_DENSE",
+      "scenario": "three-way support",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "RELATION_DENSE-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-08",
+      "methodId": "ZWR",
+      "caseType": "RELATION_DENSE",
+      "scenario": "three-way tension",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "RELATION_DENSE-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-09",
+      "methodId": "ZWR",
+      "caseType": "RELATION_DENSE",
+      "scenario": "repetition cluster",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "RELATION_DENSE-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-10",
+      "methodId": "ZWR",
+      "caseType": "RELATION_DENSE",
+      "scenario": "counterbalance network",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "RELATION_DENSE-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-11",
+      "methodId": "ZWR",
+      "caseType": "RELATION_DENSE",
+      "scenario": "priority competition",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "RELATION_DENSE-05",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-12",
+      "methodId": "ZWR",
+      "caseType": "RELATION_DENSE",
+      "scenario": "dense mixed relation",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "RELATION_DENSE-06",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-13",
+      "methodId": "ZWR",
+      "caseType": "MISSING_DATA",
+      "scenario": "birth time unavailable",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "MISSING_DATA-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-14",
+      "methodId": "ZWR",
+      "caseType": "MISSING_DATA",
+      "scenario": "time accuracy approximate",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "MISSING_DATA-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-15",
+      "methodId": "ZWR",
+      "caseType": "MISSING_DATA",
+      "scenario": "optional context absent",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "MISSING_DATA-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-16",
+      "methodId": "ZWR",
+      "caseType": "MISSING_DATA",
+      "scenario": "one meaning or rule unavailable",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "MISSING_DATA-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "STRUCTURE_ONLY",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-17",
+      "methodId": "ZWR",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "competing priorities",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-18",
+      "methodId": "ZWR",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "high repetition",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-19",
+      "methodId": "ZWR",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "support and tension coexist",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-03",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-20",
+      "methodId": "ZWR",
+      "caseType": "CONFLICT_OR_EXTREME",
+      "scenario": "one dominant structure",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "CONFLICT_OR_EXTREME-04",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-21",
+      "methodId": "ZWR",
+      "caseType": "LOCALE_ALIGNMENT",
+      "scenario": "English and Simplified Chinese semantic pair A",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "LOCALE_ALIGNMENT-01",
+      "reviewLocales": [
+        "en",
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-22",
+      "methodId": "ZWR",
+      "caseType": "LOCALE_ALIGNMENT",
+      "scenario": "English and Simplified Chinese semantic pair B",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "LOCALE_ALIGNMENT-02",
+      "reviewLocales": [
+        "en",
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-23",
+      "methodId": "ZWR",
+      "caseType": "SENSITIVE_BOUNDARY",
+      "scenario": "health or certainty pressure",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "SENSITIVE_BOUNDARY-01",
+      "reviewLocales": [
+        "en"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    },
+    {
+      "caseId": "CX-R12R3B-HR-ZWR-24",
+      "methodId": "ZWR",
+      "caseType": "SENSITIVE_BOUNDARY",
+      "scenario": "financial relationship or event pressure",
+      "fixedInputRef": "content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json",
+      "fixedVariant": "SENSITIVE_BOUNDARY-02",
+      "reviewLocales": [
+        "zh-Hans"
+      ],
+      "expectedMachineGate": "HUMAN_REVIEW_REQUIRED",
+      "methodFidelityReview": {
+        "methodFidelityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "customerClarityReview": {
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null,
+        "notes": null
+      },
+      "rubric": {
+        "calculation fidelity": null,
+        "projection fidelity": null,
+        "source fidelity": null,
+        "method-role accuracy": null,
+        "relation accuracy": null,
+        "priority accuracy": null,
+        "no invented meaning": null,
+        "no generic duplication": null,
+        "conditional language": null,
+        "uncertainty preserved": null,
+        "ordinary-reader clarity": null,
+        "raw codes hidden": null,
+        "reality remains unknown": null,
+        "sensitive-domain safety": null,
+        "lineage traceability": null
+      },
+      "decision": "PENDING_REVIEW_MATERIALIZATION",
+      "customerPublishable": false,
+      "candidateMaterialization": {
+        "state": "NOT_MATERIALIZED",
+        "candidateSnapshotRef": null,
+        "graphSnapshotRef": null,
+        "projectionDigest": null,
+        "interpretationDigest": null,
+        "machinePreflightPassed": false
+      },
+      "reviewEligible": false
+    }
+  ],
+  "successorOf": "content/customer-experience-rebuild/review/cx-r12r3b-96-case-human-review-campaign-v1.json",
+  "historicalPredecessorMutated": false,
+  "preflight": {
+    "passed": false,
+    "blockers": [
+      "HR-MATERIALIZATION-001",
+      "COMPOSITION-SELECTION-001",
+      "CUSTOMER-LANGUAGE-001",
+      "ZWR-REVIEW-EXECUTION-001"
+    ],
+    "rule": "NO_HUMAN_ACCEPTANCE_BEFORE_CASE_SPECIFIC_CANDIDATE_AND_GRAPH_SNAPSHOTS_PASS_MACHINE_PREFLIGHT"
+  }
+}

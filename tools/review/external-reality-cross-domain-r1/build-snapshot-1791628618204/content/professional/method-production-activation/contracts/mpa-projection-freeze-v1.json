@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHI-OS-MPA-PROJECTION-FREEZE-CONTRACT-v1.0.0",
+  "work": "MPA-W17",
+  "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+  "status": "validation_only",
+  "purpose": "Freeze each governed Canonical Projection as an immutable lineage artifact before any Interpretation, Meaning/Knowledge reference resolution or Professional handoff.",
+  "acceptedProjectionSchemas": [
+    "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+    "PHI-OS-CANONICAL-NUMERIC-PROJECTION-v1.0.0"
+  ],
+  "requiredFreezeFields": [
+    "methodReference",
+    "calculationReference",
+    "policyReferences",
+    "projectionReference",
+    "projectionSnapshot",
+    "freezeDigest"
+  ],
+  "requiredLineage": {
+    "method": [
+      "methodCode",
+      "pluginCode",
+      "methodVersion"
+    ],
+    "calculation": [
+      "calculationId",
+      "runtimeCode",
+      "runtimeVersion",
+      "algorithmCode",
+      "algorithmVersion",
+      "inputDigest",
+      "outputDigest"
+    ],
+    "policy": [
+      "calculationPolicyCode",
+      "calculationPolicyVersion",
+      "projectionPolicyCode",
+      "projectionPolicyVersion"
+    ],
+    "projection": [
+      "schemaVersion",
+      "projectionType",
+      "projectionCode",
+      "projectionVersion",
+      "projectionDigest"
+    ]
+  },
+  "rules": {
+    "projectionSnapshotImmutable": true,
+    "sameProjectionAndVersionSetProducesSameFreezeDigest": true,
+    "freezeMayCreateInterpretation": false,
+    "freezeMayCreateMeaning": false,
+    "freezeMayCreateKnowledge": false,
+    "freezeMayCreateRealityFact": false,
+    "freezeMayCreateDiagnosis": false,
+    "freezeMayCreateProfessionalJudgment": false,
+    "validationProjectionBecomesProductionByFreeze": false,
+    "productionAuthorityCreated": false
+  },
+  "authorities": {
+    "projectionRuntime": "content/professional/method-runtime/shared-projection-runtime-v1.json",
+    "numericProjectionExtension": "content/professional/method-runtime/canonical-projection-numeric-extension-v1.json",
+    "calculationRuntime": "content/professional/method-runtime/shared-calculation-runtime-v1.json"
+  },
+  "nextWork": "MPA-W18"
+}

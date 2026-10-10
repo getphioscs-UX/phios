@@ -1,0 +1,45 @@
+{
+  "contractCode": "PHI-OS-DAR-W18-HUMAN-REVIEW-SURFACE-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W18",
+  "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+  "status": "ACTIVE_REQUIRED_PRE_EXPORT_REVIEW",
+  "runtime": "functions/document-assembly/human-review-gate.js",
+  "flow": [
+    "FILL",
+    "REVIEW_SUMMARY",
+    "CLAUSE_PREVIEW",
+    "WARNINGS",
+    "CONFIRMATION",
+    "EXPORT"
+  ],
+  "requiredConfirmations": [
+    {
+      "confirmationId": "REVIEWED_NAMES",
+      "label": "I reviewed names"
+    },
+    {
+      "confirmationId": "REVIEWED_BENEFICIARIES",
+      "label": "I reviewed beneficiaries"
+    },
+    {
+      "confirmationId": "REVIEWED_ASSET_ALLOCATIONS",
+      "label": "I reviewed asset allocations"
+    },
+    {
+      "confirmationId": "REVIEWED_RESIDUE",
+      "label": "I reviewed residue"
+    },
+    {
+      "confirmationId": "EXPORT_NOT_EXECUTION",
+      "label": "I understand export ≠ execution"
+    }
+  ],
+  "rules": {
+    "fillDirectToDownloadForbidden": true,
+    "allConfirmationsRequired": true,
+    "confirmationMayNotWaiveLegalEscalation": true,
+    "exportNotExecutionMustRemainVisible": true,
+    "silentConfirmationForbidden": true
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "contractCode": "PHI-OS-RNE-W3-NAVIGATION-CONSTRAINT-GRAPH-v1",
+  "contractVersion": "1.0.0",
+  "work": "RNE-W3",
+  "runtimeCode": "RNE",
+  "status": "validation_only",
+  "productionStatus": "validation_only",
+  "schemaReference": "content/runtime/reality-navigation-engine/schemas/navigation-constraint-graph-v1.schema.json",
+  "registryReference": "content/runtime/reality-navigation-engine/registries/canonical-navigation-constraint-role-registry-v1.json",
+  "rules": {
+    "nodesMustReferenceCurrentPositionConstraints": true,
+    "graphMayClassifyNavigationRoleWithoutChangingRmoConstraintAuthority": true,
+    "dependenciesMustReferenceGraphNodes": true,
+    "selfDependencyAllowed": false,
+    "cyclesAllowed": false,
+    "unknownConstraintMayBeSilentlyResolved": false,
+    "graphCreatesRealityConstraint": false,
+    "graphCreatesEvidence": false,
+    "graphCreatesProfessionalJudgment": false,
+    "graphExecutesNavigation": false,
+    "persistentStoreActivated": false
+  }
+}

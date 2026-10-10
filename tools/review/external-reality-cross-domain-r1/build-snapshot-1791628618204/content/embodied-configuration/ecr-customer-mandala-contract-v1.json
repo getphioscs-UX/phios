@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "PHI-OS-ECR-CUSTOMER-MANDALA-CONTRACT-v1.0.0",
+  "work": "ECR-PHI-MANDALA-W1",
+  "baselineCommit": "1189c0519f1c5e9376965324b6010c00c212a3a1",
+  "status": "ACTIVE_VISUAL_PROJECTION_CONTRACT",
+  "authorityClass": "CUSTOMER_VISUAL_PROJECTION_CONTRACT_ONLY",
+  "boundaries": {
+    "createsCalculationAuthority": false,
+    "createsMeaningAuthority": false,
+    "createsOntologyAuthority": false,
+    "rendererMayCreateSemanticSelection": false,
+    "rendererMayCalculateGeometryFromOrdinalAndCount": true,
+    "legacyMandalaIsSemanticAuthority": false
+  },
+  "layerOrder": [
+    "CC12",
+    "G16",
+    "Q16",
+    "R9",
+    "D12",
+    "M8",
+    "H64",
+    "A8"
+  ],
+  "layers": [
+    {
+      "layerId": "CC12",
+      "role": "LONG_RANGE_CONTEXT",
+      "visualMode": "EQUAL_SECTOR_RING",
+      "sourceAuthority": "content/embodied-configuration/ecr-cosmological-context-registry-v1.json",
+      "displayLabel": {
+        "en": "Long-range context",
+        "zh-Hans": "长期方向背景"
+      }
+    },
+    {
+      "layerId": "G16",
+      "role": "REALITY_GRAMMAR",
+      "visualMode": "EQUAL_SECTOR_RING",
+      "sourceAuthority": "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#grammar",
+      "displayLabel": {
+        "en": "Reality Grammar",
+        "zh-Hans": "现实语法"
+      }
+    },
+    {
+      "layerId": "Q16",
+      "role": "BASELINE_QUESTION",
+      "visualMode": "GRAMMAR_PAIRED_RING",
+      "sourceAuthority": "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#questions",
+      "relationAuthority": "content/embodied-configuration/ecr-calculation-spec-v1.json#layerRules.Q16",
+      "displayLabel": {
+        "en": "Baseline question",
+        "zh-Hans": "基础问题"
+      }
+    },
+    {
+      "layerId": "R9",
+      "role": "RESPONSE_CAPABILITY",
+      "visualMode": "QUESTION_CAPABILITY_NETWORK",
+      "sourceAuthority": "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#capabilities",
+      "relationAuthority": "content/embodied-configuration/ecr-calculation-spec-v1.json#questionCapabilityMatrix",
+      "displayLabel": {
+        "en": "Response capability",
+        "zh-Hans": "回应能力"
+      }
+    },
+    {
+      "layerId": "D12",
+      "role": "BASELINE_DRIVER_AFFINITY",
+      "visualMode": "RANKED_RADIAL_PROFILE",
+      "sourceAuthority": "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#drivers",
+      "relationAuthority": "content/embodied-configuration/ecr-calculation-spec-v1.json#layerRules.D12",
+      "displayLabel": {
+        "en": "Baseline driver affinity",
+        "zh-Hans": "出生基线驱动"
+      }
+    },
+    {
+      "layerId": "M8",
+      "role": "CHANGE_MOTION",
+      "visualMode": "EQUAL_SECTOR_RING",
+      "sourceAuthority": "content/embodied-configuration/ecr-motion-registry-v1.json",
+      "displayLabel": {
+        "en": "Change motion",
+        "zh-Hans": "变化运动"
+      }
+    },
+    {
+      "layerId": "H64",
+      "role": "ENVIRONMENT_RESPONSE_CONFIGURATION",
+      "visualMode": "EQUAL_SECTOR_RING",
+      "sourceAuthority": "content/embodied-configuration/ecr-environment-first-configuration-v1.json",
+      "relationAuthority": "content/embodied-configuration/ecr-calculation-spec-v1.json#layerRules.H64",
+      "displayLabel": {
+        "en": "Environment-response configuration",
+        "zh-Hans": "环境—回应构型"
+      }
+    },
+    {
+      "layerId": "A8",
+      "role": "RUNTIME_ACTIVATION_STAGE",
+      "visualMode": "WITHIN_CONFIGURATION_STAGE",
+      "sourceAuthority": "content/embodied-configuration/ecr-activation-registry-v1.json",
+      "relationAuthority": "content/embodied-configuration/ecr-calculation-spec-v1.json#layerRules.A8",
+      "displayLabel": {
+        "en": "Activation stage",
+        "zh-Hans": "激活阶段"
+      }
+    }
+  ],
+  "selectedCoordinateRelation": {
+    "source": "PHI-OS-ECR-RUNTIME-READING-IR-v1.0.0",
+    "requiredFields": [
+      "anchorLongitude",
+      "context",
+      "grammar",
+      "question",
+      "capabilities",
+      "driverPriority",
+      "motion",
+      "configuration",
+      "activation"
+    ],
+    "semanticSelectionMustAlreadyExistBeforeRenderer": true,
+    "rendererLongitudeToCodeMappingForbidden": true
+  },
+  "interactionContract": {
+    "selectionSource": "CUSTOMER_MANDALA_PROJECTION_SELECTED",
+    "geometryMayUse": [
+      "ordinal",
+      "catalogCount",
+      "ringRadius",
+      "viewport"
+    ],
+    "geometryMustNotInfer": [
+      "contextId",
+      "grammarId",
+      "questionId",
+      "capabilityId",
+      "driverRank",
+      "motionId",
+      "configurationId",
+      "activationId"
+    ],
+    "keyboardRequired": true,
+    "focusAndHoverParityRequired": true
+  },
+  "customerDisclosure": {
+    "en": "The astronomical position is calculated. The ECR layer mappings are PHI OS first-party interpretive conventions used to organize observation, not scientific personality facts or guaranteed outcomes.",
+    "zh-Hans": "天文位置属于计算结果；ECR 各层映射是 PHI OS 原生解释约定，用来组织观察，不把出生坐标当作科学人格事实或必然结果。"
+  },
+  "accessibilityLabels": {
+    "codeIsTechnicalIndex": {
+      "en": "Technical index",
+      "zh-Hans": "技术编号"
+    },
+    "selected": {
+      "en": "Selected in this configuration",
+      "zh-Hans": "本次构型命中"
+    },
+    "primary": {
+      "en": "Primary",
+      "zh-Hans": "主要"
+    },
+    "supporting": {
+      "en": "Supporting",
+      "zh-Hans": "辅助"
+    },
+    "baselineNotCurrentReality": {
+      "en": "Birth baseline, not current Reality priority",
+      "zh-Hans": "出生基线，不等于当前现实优先级"
+    }
+  }
+}

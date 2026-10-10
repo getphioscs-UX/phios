@@ -1,0 +1,26 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+import {assessCrossIssuerScope} from './runtime-position-w8e-p5-b4-scope.mjs';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const base=path.join(root,'content/civilization-atlas/reconfiguration');
+const read=f=>{const bytes=fs.readFileSync(path.join(base,f));return {bytes,data:JSON.parse(bytes.toString('utf8').replace(/^\uFEFF/,''))};};
+const b3=read('runtime-position-w8e-p5-b3-structural-change-derivation-v1.json');
+const b2=read('runtime-position-w8e-p5-b2-comparable-period-extraction-v1.json');
+const manifest=read('runtime-position-w8e-p5-b1-primary-filing-manifest-v1.json');
+const hash=b=>createHash('sha256').update(b).digest('hex');
+assert.equal(b3.data.predecessor.sha256,hash(b2.bytes),'B2/B3 lineage mismatch');
+for(const p of b2.data.packets)for(const f of p.filings){const s=manifest.data.records.find(s=>s.sourceId===f.sourceId);assert(s);assert.equal(hash(fs.readFileSync(path.join(base,'p5-b1-filings',s.file))),f.sha256);}
+const out=assessCrossIssuerScope(b3.data,b2.data,manifest.data);
+out.predecessors={b3Sha256:hash(b3.bytes),b2Sha256:hash(b2.bytes),b1ManifestSha256:hash(manifest.bytes)};
+fs.writeFileSync(path.join(base,'runtime-position-w8e-p5-b4-cross-issuer-scope-v1.json'),JSON.stringify(out,null,2)+'\n');
+const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+const rows=out.candidates.map(c=>'<tr><td>'+c.issuer+'</td><td>'+esc(c.types.join(' / '))+'</td><td>'+esc(c.allowedReading.zh)+'</td><td>未建立</td></tr>').join('');
+const gaps=out.representativenessGaps.map(g=>'<li><strong>'+g.id+'</strong>：'+g.state+'<p>'+esc(g.needed)+'</p></li>').join('');
+const pairs=out.pairAssessments.map(p=>'<tr><td>'+p.issuers.join(' + ')+'</td><td>未建立共同机制</td><td>'+String(p.synchronousPeriodEnds)+'</td><td>禁止直接汇总</td></tr>').join('');
+const periods=out.candidates.map(c=>'<tr><td>'+c.issuer+'</td>'+c.periods.map(p=>'<td>'+p.periodEnd+'</td>').join('')+'</tr>').join('');
+fs.mkdirSync(path.join(root,'tools/review'),{recursive:true});
+fs.writeFileSync(path.join(root,'tools/review/PHI-OS-W8E-P5-B4-CROSS-ISSUER-SCOPE.html'),'<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>B4 跨企业范围与代表性</title><style>body{max-width:1100px;margin:auto;padding:28px;font:16px/1.65 system-ui;background:#121820;color:#e8e2d6}h1,h2{color:#dcc18a}section{padding:24px;margin:24px 0;border:1px solid #665840;border-radius:10px}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px;border-bottom:1px solid #4d4d4d}pre{white-space:pre-wrap}.scroll{overflow:auto}</style><h1>B4｜跨企业范围与代表性</h1><p>范围检查完成：5 家企业、3 个局部候选、3 组候选配对。共同机制及全国代表性均未建立。G14=0，RP=0。</p><section><h2>可以保留的综合表述</h2><p>'+esc(out.boundedSynthesis.zh)+'</p><p>'+esc(out.boundedSynthesis.en)+'</p><p>三项是候选清单数量，不是全国重组比例；Apple / Amazon 本轮未生成候选也不证明它们没有结构变化。</p></section><section><h2>逐企业范围</h2><div class="scroll"><table><tr><th>企业</th><th>局部候选</th><th>可支持的读取</th><th>全国代表性</th></tr>'+rows+'</table></div><p>Microsoft/JPM 的正式报告分部调整与 NVIDIA 的收入组合迁移属于不同证据类别，不以三家公司投票形成统一语义。</p></section><section><h2>时间窗口</h2><table><tr><th>企业</th><th>FY2023 期末</th><th>FY2024 期末</th><th>FY2025 期末</th></tr>'+periods+'</table><p>这是年度报告期末，不是重组事件日期。NVIDIA 的 FY2025 期末早于 Microsoft 和 JPM。相同年度标签不表示同期观察。</p></section><section><h2>候选配对</h2><table><tr><th>配对</th><th>共同机制</th><th>期末同步</th><th>收入／HHI 汇总</th></tr>'+pairs+'</table><p>企业合并报表收入含全球业务。没有完成美国国内活动归属、样本覆盖与去重检查，不能把它们视为美国经济份额。</p></section><section><h2>扩大范围前仍需补齐</h2><ul>'+gaps+'</ul><p>本轮只完成范围治理。来源与主张准入及 G14 语义人审仍待完成；不产生跨企业 G14 或 DOSSIER-US 全局结论。</p></section></html>');
+console.log('PASS B4: 5 issuer scope checks, 3 candidate scope checks, 3 pair checks; representative national candidates=0; G14=0; RP=0.');

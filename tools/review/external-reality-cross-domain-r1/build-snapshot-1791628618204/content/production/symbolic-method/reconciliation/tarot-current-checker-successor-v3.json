@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-CURRENT-CHECKER-SUCCESSOR-v3.0.0",
+  "phase": "TPA-M",
+  "work": "M-W58_CURRENT_CHECKER_RECONCILIATION",
+  "baselineCommit": "fc2c3dd6ab4910581fd9c859dc303e8c89697ec0",
+  "status": "CURRENT_PHASE_M_SOURCE_READY_LIVE_SERVER_PROMOTION_DYNAMIC",
+  "successorOf": "content/production/symbolic-method/reconciliation/tarot-current-checker-successor-v2.json",
+  "predecessorMutated": false,
+  "current": {
+    "machineAcceptance": true,
+    "humanAcceptance24Of24": true,
+    "browserAcceptance": true,
+    "pcmCapability": "LIMITED",
+    "runtimeAuthority": "SERVER_D1_COMMIT_PINNED",
+    "phaseLCurrentVerifier": "scripts/verify-tarot-production-sha-alignment-v2.mjs",
+    "phaseMReadinessChecker": "scripts/check-tarot-production-capability-readiness.mjs",
+    "livePromotionChecker": "scripts/check-tarot-production-capability-live.mjs"
+  },
+  "operationalEvidence": {
+    "phaseL": ".runtime-evidence/tarot-production-sha-alignment-v2.json",
+    "phaseM": ".runtime-evidence/tarot-production-capability-live-evidence-v1.json",
+    "committedAsAuthority": false
+  },
+  "productionBoundary": {
+    "staticRunAllowed": false,
+    "dynamicServerRunAllowedOnly": true,
+    "clientMayGrantAuthority": false,
+    "guestPersistence": false,
+    "futureShaDriftFailsClosed": true
+  },
+  "nextAction": "COMMIT_PUSH_DEPLOY_EXACT_SHA_VERIFY_PHASE_L_V2_THEN_PROMOTE_D1"
+}

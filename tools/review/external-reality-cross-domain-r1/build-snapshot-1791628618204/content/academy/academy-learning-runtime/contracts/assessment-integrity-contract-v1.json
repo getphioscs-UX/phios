@@ -1,0 +1,31 @@
+{
+  "contractCode": "PHI-OS-ALR-W26-ASSESSMENT-INTEGRITY-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W26",
+  "status": "active",
+  "productionStatus": "deterministic_fail_closed_integrity_semantics",
+  "authorityReference": "ALR",
+  "requiredEvaluationInputFields": ["assessmentCode", "assessmentVersion", "assessmentTypeCode", "scenarioVersion", "criterionFindings"],
+  "requiredCriterionFindingFields": ["criterionCode", "evidencePresent", "unknownsPreserved", "constraintsCorrect", "interpretationBounded", "boundaryPreserved", "supportLevel"],
+  "supportLevels": ["FULL", "PARTIAL", "NONE"],
+  "integrityDecisions": ["INTEGRITY_VALID", "DENY_UNKNOWN_ASSESSMENT", "DENY_VERSION_MISMATCH", "DENY_TYPE_MISMATCH", "DENY_SCENARIO_VERSION_MISMATCH", "DENY_CRITERION_COVERAGE", "DENY_FINDING_SHAPE", "DENY_FORBIDDEN_INPUT_FIELD", "DENY_INACTIVE_DEFINITION"],
+  "forbiddenEvaluationInputFields": ["learnerReference", "subjectReference", "accountReference", "attemptReference", "assessmentResponse", "response", "responseReference", "rawResponse", "answerKey", "correctAnswer", "modelAnswer", "score", "grade", "passThreshold", "capabilityState", "credentialState", "entitlementState", "professionalJudgment", "caseReference", "canonicalInputReference", "verifiedInputReference", "realityReference", "providerPrompt", "providerResponse", "modelOutput", "networkRequest", "persist", "persistencePayload", "presentationPayload"],
+  "rules": {
+    "registeredAssessmentDefinitionRequired": true,
+    "assessmentVersionTypeAndScenarioMustMatch": true,
+    "criterionCoverageMustBeExactAndUnique": true,
+    "criterionFindingsMustUseControlledValues": true,
+    "rawResponseOrAnswerKeyMayEnterSemanticEvaluator": false,
+    "providerOrAiMayScoreAssessment": false,
+    "integrityFailureProducesFeedback": false,
+    "integrityValidationMutatesInputOrRegistry": false,
+    "unknownOrUncontrolledInputFailsClosed": true
+  },
+  "activation": {
+    "integrityValidationActive": true,
+    "providerRuntimeActive": false,
+    "networkRuntimeActive": false,
+    "learnerSessionActive": false,
+    "persistenceRuntimeActive": false
+  }
+}

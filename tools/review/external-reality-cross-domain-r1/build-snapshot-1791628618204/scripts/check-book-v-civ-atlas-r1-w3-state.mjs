@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {createCivilizationAtlasState,normalizeAtlasState,ATLAS_LAYERS} from '../assets/js/pages/civilization-atlas/atlas-state.js';
+import {atlasStateFromUrl,atlasUrlFromState} from '../assets/js/pages/civilization-atlas/atlas-url-state.js';
+const root=process.cwd(); const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+assert.deepEqual(ATLAS_LAYERS,['timeline','cases','comparison','world','trajectories','transitions','loss']);
+const normalized=normalizeAtlasState({activeLayer:'bad',time:'1000',caseIds:['CA-T09-01','CA-T09-01'],trajectoryIds:['A','B','C','D','E','F'],compareBasket:['1','2','3','4','5','6','7'],locale:'zh-Hans'});
+assert.equal(normalized.activeLayer,'timeline'); assert.equal(normalized.time,1000); assert.deepEqual(normalized.caseIds,['CA-T09-01']); assert.equal(normalized.primaryCaseId,'CA-T09-01'); assert.equal(normalized.trajectoryIds.length,5); assert.equal(normalized.compareBasket.length,6); assert.equal(normalized.locale,'zh-Hans');
+const store=createCivilizationAtlasState(); let seen=0; const off=store.subscribe(()=>seen++); store.set({activeLayer:'world',snapshotId:'WS-1000'}); off(); assert.equal(seen,1); assert.equal(store.get().activeLayer,'world');
+const parsed=atlasStateFromUrl('https://getphios.com/books/reality-differentiation/?atlas=comparison&time=1000&case=CA-T09-01&cases=CA-T09-01,CA-T06-02&family=KNOWLEDGE_EXPANSION&compare=CA-T09-01,CA-T06-02#atlas','zh-Hans');
+assert.equal(parsed.activeLayer,'comparison'); assert.equal(parsed.time,1000); assert.equal(parsed.primaryCaseId,'CA-T09-01'); assert.equal(parsed.comparisonFamilyId,'KNOWLEDGE_EXPANSION'); assert.equal(parsed.compareBasket.length,2);
+const url=atlasUrlFromState('https://getphios.com/books/reality-differentiation/?utm_source=test',parsed); assert.equal(url.pathname,'/books/reality-differentiation/'); assert.equal(url.searchParams.get('utm_source'),'test'); assert.equal(url.searchParams.get('atlas'),'comparison'); assert.equal(url.hash,'#atlas');
+const raw=read('assets/js/pages/civilization-atlas/atlas-url-state.js'); assert.match(raw,/pushState/); assert.match(raw,/replaceState/); assert.match(raw,/popstate/);
+console.log('✓ BOOK-V-CIV-ATLAS-R1-W3 Shared Atlas State + URL Contract passed.');
+console.log('  Single normalized state, deep-link serialization, safe recovery and popstate restoration are present; no later Atlas data is populated.');

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-FAR-W18-FINDING-CONFIDENCE-CONTRACT-v1.0.0",
+  "phase": "FAR",
+  "work": "FAR-W18",
+  "status": "ACTIVE",
+  "authorityOwner": "FAR",
+  "states": [
+    "HIGH",
+    "MEDIUM",
+    "LOW"
+  ],
+  "inputs": [
+    "FCR_VALUE_KIND",
+    "FDR_DISCLOSURE_STATE",
+    "FDR_EVIDENCE_CONFIDENCE",
+    "DOCUMENT_VERIFICATION",
+    "UNKNOWN_INPUT_OR_ASSUMPTION"
+  ],
+  "rules": {
+    "unknownCapsConfidence": "LOW",
+    "rangeCapsScoreAt": 0.6,
+    "approximateCapsScoreAt": 0.75,
+    "documentVerificationMayIncreaseConfidence": true,
+    "missingEvidenceMustLowerConfidence": true,
+    "confidenceDoesNotCreateProfessionalCertainty": true
+  }
+}

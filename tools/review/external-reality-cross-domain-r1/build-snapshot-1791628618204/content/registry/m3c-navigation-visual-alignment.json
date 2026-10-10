@@ -1,0 +1,107 @@
+{
+  "id": "m3c-navigation-visual-alignment",
+  "version": "1.0.0-w6",
+  "status": "w6-navigation-visual-alignment-ready",
+  "baseline": {
+    "branch": "main",
+    "commit": "8efaae557b05f0187f514798b5a592fbaebbe171",
+    "githubMilestone": "M3C-W4 Reconstruction Visual Alignment",
+    "runtimeContractsFrozen": true,
+    "navigationContractVersion": "1.0.0",
+    "navigationSchemaId": "phi-os.navigation.v1"
+  },
+  "scope": {
+    "page": "reality-navigation.html",
+    "route": "/reality-navigation.html",
+    "stylesheet": "assets/css/navigation-visual-alignment.css",
+    "pageController": "assets/js/navigation.js",
+    "customerProjection": "assets/js/modules/navigation-customer-projection.js",
+    "visualRenderer": "assets/js/modules/navigation-visual-alignment.js",
+    "bilingual": [
+      "en",
+      "zh-Hans"
+    ]
+  },
+  "customerViews": [
+    "available-direction",
+    "reason",
+    "evidence",
+    "constraint",
+    "first-action",
+    "review-point"
+  ],
+  "viewMapping": {
+    "available-direction": [
+      "availablePaths",
+      "recommendedDirection"
+    ],
+    "reason": [
+      "currentPosition.priority",
+      "currentTransition",
+      "selectedPath.rationale"
+    ],
+    "evidence": [
+      "evidenceWatch",
+      "selectedPath.evidenceWatch"
+    ],
+    "constraint": [
+      "constraints",
+      "unknownReality",
+      "selectedPath.boundary"
+    ],
+    "first-action": [
+      "selectedPath.firstStep"
+    ],
+    "review-point": [
+      "selectedPath.reviewConditions",
+      "reviewConditions",
+      "professionalReview"
+    ]
+  },
+  "choiceBoundary": {
+    "automaticPathSelectionAllowed": false,
+    "automaticPathExecutionAllowed": false,
+    "userChoiceRequired": true,
+    "firstActionRequiresSelectedPath": true,
+    "reviewPreparationOwnedByExistingStateModule": true
+  },
+  "projectionGuardrails": {
+    "readOnlyProjection": true,
+    "storageAccess": false,
+    "apiAccess": false,
+    "pathSelectionAllowed": false,
+    "reviewPreparationAllowed": false,
+    "sessionWriteAllowed": false
+  },
+  "hashPolicy": {
+    "algorithm": "sha256",
+    "encoding": "utf8",
+    "textNormalization": "lf",
+    "byteOrderMarkIgnored": true
+  },
+  "frozenArtifacts": {
+    "functions/api/navigate-runtime.js": "5148746542baa77f36fde7f4fd42f621b874b4dbf6d13375efdc572f21da5eb4",
+    "functions/runtime/navigation/rule-navigation.js": "2b324f5b79f5644fa061127cc313c4c2a7cfbcb5e4a1b17c9f22f5ed41dc4979",
+    "functions/runtime/navigation/navigation-contract.js": "e2231c43d98222efce013945720e208865f90a14727376a2a3dbe490d5c731d5",
+    "functions/runtime/navigation/reading-navigation-contract.js": "e13cbe27699a2c8ace980eab46c7ba22c379ff97d82db7e121def2726b6f3001",
+    "assets/js/modules/navigation-loader.js": "93937470d353d53f4e1b6c944450c869d2e1b61c9034c0bf9af07a85431c0d17",
+    "assets/js/modules/navigation-render.js": "a623448922a567fcd192002932e6ae4e9c443c45ccbf47c36d931c1f90780f26",
+    "assets/js/modules/navigation-state.js": "36566e1c9da6e252048d497af54732d7eac4468536221372c6277b7ad3ceddc8",
+    "assets/js/modules/navigation-path-selection.js": "c4900d99676e7d91d6f38b7f1e0429f5113a722523dba00328728a66f0c4aca1",
+    "content/registry/runtime-contracts.json": "32a630972e4978725e7efe1a0bdc58d96fb7a6bb1145f5c5b7f308d9909745d2",
+    "wrangler.jsonc": "fd7d7e06f14509bc13216f3999bb4e21efb2cdcdb6efd14f7724153b15808ae0"
+  },
+  "acceptance": {
+    "navigationContractChanged": false,
+    "navigationSchemaChanged": false,
+    "navigationApiChanged": false,
+    "pathGenerationChanged": false,
+    "pathSelectionChanged": false,
+    "navigationStateChanged": false,
+    "reviewGateChanged": false,
+    "professionalBoundaryChanged": false,
+    "persistenceContractChanged": false,
+    "languageParityRequired": true,
+    "mobileContractsPresent": true
+  }
+}

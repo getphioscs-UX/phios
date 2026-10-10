@@ -1,0 +1,8 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import {parseHTML} from 'linkedom';import {execFileSync} from 'node:child_process';
+const dir='docs/assets/r2-public/wiring-20261009',manifestPath='content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/owner-acceptance/ACCEPTED-ARTIFACT-MANIFEST.json',manifest=JSON.parse(fs.readFileSync(manifestPath)),source=manifest.artifacts.find(x=>x.path.endsWith('CASE-08-bilingual-dossier.html')),pdf=manifest.artifacts.find(x=>x.caseId==='CASE-08'&&x.path.endsWith('.pdf'));
+const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const {document}=parseHTML(fs.readFileSync(source.path,'utf8')),articles=[...document.querySelectorAll('.pub-report>article')],section=document.querySelector('[data-pe-static="SEC-05"]'),page=articles.indexOf(section)+1;
+const result={acceptanceManifest:manifestPath,receipt:'content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/owner-acceptance/ACCEPTANCE-RECEIPT.json',source:source.path,sourceDigestMatches:hash(source.path)===source.sha256,pdf:pdf.path,pdfDigestMatches:hash(pdf.path)===pdf.sha256,pageCount:pdf.pageCount,sectionPage:page,key:section.querySelector('img').src,scope:manifest.scope,productionReadinessInferred:false};
+if(!result.sourceDigestMatches||!result.pdfDigestMatches||page<1)throw Error('CURRENT_ACCEPTED_ARTIFACT_DRIFT');
+execFileSync('pdftoppm',['-f',String(page),'-l',String(page),'-scale-to','1200','-png','-singlefile',pdf.path,dir+'/PROFILE-SEC-05-ACCEPTED-PRINT']);
+fs.writeFileSync(dir+'/PROFILE-SEC-05-ACCEPTANCE-PROOF.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-NUM-R8-W18-FULL-PRODUCTION-CUTOVER-v1.0.0",
+  "workCode": "NUM-R8",
+  "baselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140",
+  "targetCapability": "NUMEROLOGY_FULL_READING_V2",
+  "status": "FULL_PRODUCTION_CUTOVER_ACTIVE",
+  "scopeDecision": {
+    "lifePeriod": "DEFERRED_OUT_OF_NUM_R8_TARGET",
+    "reason": "Not present in current calculation authority; Pinnacle + Challenge + Personal Year/Month/Day remain in-scope."
+  },
+  "preCutoverGates": {
+    "predecessorNumFpW0W16Machine64Pass": true,
+    "predecessorW17CaseDecisions12Accepted": true,
+    "predecessorW17CriterionAttestationComplete": false,
+    "numR1SourceSetApproved": true,
+    "numR2ClaimsExtracted": true,
+    "numR3RoleClaimCandidatesBuilt": true,
+    "numR4MasterKarmicCandidatesBuilt": true,
+    "numR5CycleCandidatesBuilt": true,
+    "numR6CompositionCandidateBuilt": true,
+    "numR7HumanAcceptance12Pass": true,
+    "richClaimRuntimeAdmission": true,
+    "defaultCustomerCutover": true,
+    "numR3SourceClaimHumanAdmission": true,
+    "predecessorW17SupersededByNumR7": true
+  },
+  "blockingReasons": [],
+  "productionRules": {
+    "machinePassCannotSubstituteHumanAcceptance": true,
+    "caseDecisionAcceptWithoutCriteriaDoesNotEqualCriterionAttestation": true,
+    "sourceEligibilityDoesNotEqualClaimAdmission": true,
+    "customerCutoverRequiresExplicitR8GateFlip": true,
+    "lifePeriodCannotBeSynthesized": true
+  },
+  "nextAction": "Production active. Preserve fail-closed exceptions and treat learning-note expansions as a separate governed successor.",
+  "humanAdmissionEvidence": {
+    "sourceClaims": "content/professional/num-production/full-production/rich-meaning/review/num-r3-source-claim-human-review-results-v1.json",
+    "composition": "content/professional/num-production/full-production/rich-meaning/review/num-r7-human-review-results-v1.json"
+  },
+  "runtimeUseAllowed": true
+}

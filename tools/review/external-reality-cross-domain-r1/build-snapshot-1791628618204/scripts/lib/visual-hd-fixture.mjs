@@ -1,0 +1,8 @@
+import {onRequestPost as intakeApi} from '../../functions/api/customer-external-profile-intake.js';
+import {onRequestPost as confirmApi} from '../../functions/api/customer-external-profile-confirm.js';
+import assert from 'node:assert/strict';
+export async function visualHdFixture(locale='en',{advanced=true}={}){
+const form=new FormData();form.set('profileFamily','HUMAN_DESIGN');form.set('consent','true');form.set('manualType','Generator');form.set('manualStrategy','Wait to Respond');form.set('manualAuthority','Emotional Authority');form.set('manualProfile','5/1');form.set('manualDefinition','Triple Split Definition');form.set('manualSignature','Satisfaction');form.set('manualNotSelfTheme','Frustration');form.set('manualChannels','43-23, 37-40, 29-46');form.set('manualDefinedCenters','Ajna, Throat, Solar Plexus, Ego, G, Sacral');form.set('manualOpenCenters','Head, Spleen, Root');form.set('manualDesignActivations','29.1 46.2 37.5');form.set('manualPersonalityActivations','43.5 23.5 40.2');if(advanced)form.set('environment','Markets');
+const intake=await intakeApi({request:new Request('https://example.test/api/customer-external-profile-intake',{method:'POST',body:form}),env:{}});assert.equal(intake.status,200);const ip=await intake.json();assert(ip.externalProfileIntake.confirmationDraft);
+const confirm=await confirmApi({request:new Request('https://example.test/api/customer-external-profile-confirm',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({confirmationDraft:ip.externalProfileIntake.confirmationDraft,edits:{},structureEdits:{},locale,intent:'工作、关系与重要决定',consent:true})})});if(confirm.status!==200)throw Error('HD_FIXTURE_CONFIRM_FAILED');return (await confirm.json()).humanDesignProfessionalReading;
+}

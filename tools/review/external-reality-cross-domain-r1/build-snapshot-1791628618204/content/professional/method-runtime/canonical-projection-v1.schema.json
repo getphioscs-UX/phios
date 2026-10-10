@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/method-runtime/canonical-projection-v1.schema.json",
+  "title": "PHI OS Canonical Projection v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "projectionType", "projectionCode", "projectionVersion",
+    "projectionValue", "projectionSource", "projectionConfidence",
+    "deterministic", "providerUsed", "aiUsed", "interpretationCreated",
+    "knowledgeCreated", "realityConclusionCreated", "professionalConclusionCreated"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "PHI-OS-CANONICAL-PROJECTION-v1.0.0" },
+    "projectionType": {
+      "enum": [
+        "GATE", "CHANNEL", "CENTER", "AUTHORITY", "PROFILE",
+        "PLANET", "HOUSE", "ASPECT", "STEM", "BRANCH", "PILLAR",
+        "LUCK_CYCLE", "HEXAGRAM", "CARD"
+      ]
+    },
+    "projectionCode": { "type": "string", "pattern": "^PRJ-[A-Z_]+-[A-F0-9]{24}$" },
+    "projectionVersion": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "projectionValue": {},
+    "projectionSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "calculationId", "calculationRuntimeCode", "calculationRuntimeVersion",
+        "methodCode", "pluginCode", "algorithmCode", "algorithmVersion",
+        "inputDigest", "outputDigest"
+      ],
+      "properties": {
+        "calculationId": { "type": "string", "minLength": 1 },
+        "calculationRuntimeCode": { "const": "SHARED_CALCULATION_RUNTIME" },
+        "calculationRuntimeVersion": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "methodCode": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "pluginCode": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "algorithmCode": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "algorithmVersion": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "inputDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "outputDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "projectionConfidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "score", "basis"],
+      "properties": {
+        "level": { "enum": ["exact", "derived", "conditional"] },
+        "score": { "type": "number", "minimum": 0, "maximum": 1 },
+        "basis": { "enum": ["deterministic_mapping", "controlled_lookup", "explicit_input"] }
+      }
+    },
+    "deterministic": { "const": true },
+    "providerUsed": { "const": false },
+    "aiUsed": { "const": false },
+    "interpretationCreated": { "const": false },
+    "knowledgeCreated": { "const": false },
+    "realityConclusionCreated": { "const": false },
+    "professionalConclusionCreated": { "const": false }
+  }
+}

@@ -1,0 +1,491 @@
+{
+  "fixtureVersion": "PHI-OS-FDR-W22-FIXTURE-v1.0.0",
+  "scenario": "high-net-worth",
+  "description": "Multiple high-value assets with customer-stated wealth-transfer goal.",
+  "synthetic": true,
+  "sourceAdapter": "PROFESSIONAL_INTAKE",
+  "purposeScope": "FINANCIAL_PLANNING",
+  "expectedProperties": {
+    "recommendationAbsent": true,
+    "goalChanged": true
+  },
+  "snapshots": [
+    {
+      "snapshotId": "FR-HNW-S0",
+      "financialRealityId": "FR-HNW",
+      "sequence": 0,
+      "timepoint": "t0",
+      "asOfDate": "2026-01-01",
+      "financialRealityVersion": 1,
+      "snapshotPayload": {
+        "financialRealityId": "FR-HNW",
+        "householdReference": "HH-HNW",
+        "customerReferences": [
+          "CUST-HNW"
+        ],
+        "asOfDate": "2026-01-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-HNW",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [
+          {
+            "assetId": "A-H1",
+            "assetType": "PROPERTY",
+            "ownership": {
+              "ownershipId": "OWN-H1",
+              "assetId": "A-H1",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P-HNW"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-H1",
+              "factCode": "ASSET_VALUE",
+              "value": 5000000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          },
+          {
+            "assetId": "A-H2",
+            "assetType": "LISTED_SECURITY",
+            "ownership": {
+              "ownershipId": "OWN-H2",
+              "assetId": "A-H2",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P-HNW"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-H2",
+              "factCode": "ASSET_VALUE",
+              "value": 3000000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          },
+          {
+            "assetId": "A-H3",
+            "assetType": "PRIVATE_COMPANY_SHARE",
+            "ownership": {
+              "ownershipId": "OWN-H3",
+              "assetId": "A-H3",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P-HNW"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-H3",
+              "factCode": "ASSET_VALUE",
+              "value": 6000000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "liabilities": [],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [],
+        "goals": [
+          {
+            "goalId": "G-HNW",
+            "goalType": "WEALTH_TRANSFER",
+            "target": {
+              "amount": 2000000,
+              "currency": "MYR"
+            },
+            "targetDate": "2045-01-01",
+            "priority": "HIGH",
+            "owner": "P-HNW",
+            "fundingSource": "UNKNOWN",
+            "status": "ACTIVE",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 1,
+        "digest": "0e9bf43c83da39bc32f83335a178f8951c95b6ddd64e7fb0f82c890cf035cf1f"
+      },
+      "previousSnapshotDigest": null,
+      "changeEventReferences": [],
+      "createdAt": "2026-01-01T00:00:00Z",
+      "creationReason": "INITIAL_DISCLOSURE",
+      "consentReference": "CONSENT-FP",
+      "digest": "8c145f898de7fce578ea990dda705b40704a384c0491ce6489525342f785d4b3"
+    },
+    {
+      "snapshotId": "FR-HNW-S1",
+      "financialRealityId": "FR-HNW",
+      "sequence": 1,
+      "timepoint": "t1",
+      "asOfDate": "2026-06-01",
+      "financialRealityVersion": 2,
+      "snapshotPayload": {
+        "financialRealityId": "FR-HNW",
+        "householdReference": "HH-HNW",
+        "customerReferences": [
+          "CUST-HNW"
+        ],
+        "asOfDate": "2026-06-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-HNW",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [
+          {
+            "assetId": "A-H1",
+            "assetType": "PROPERTY",
+            "ownership": {
+              "ownershipId": "OWN-H1",
+              "assetId": "A-H1",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P-HNW"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-H1",
+              "factCode": "ASSET_VALUE",
+              "value": 5000000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          },
+          {
+            "assetId": "A-H2",
+            "assetType": "LISTED_SECURITY",
+            "ownership": {
+              "ownershipId": "OWN-H2",
+              "assetId": "A-H2",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P-HNW"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-H2",
+              "factCode": "ASSET_VALUE",
+              "value": 3000000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          },
+          {
+            "assetId": "A-H3",
+            "assetType": "PRIVATE_COMPANY_SHARE",
+            "ownership": {
+              "ownershipId": "OWN-H3",
+              "assetId": "A-H3",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P-HNW"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-H3",
+              "factCode": "ASSET_VALUE",
+              "value": 6000000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "liabilities": [],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [],
+        "goals": [
+          {
+            "goalId": "G-HNW",
+            "goalType": "WEALTH_TRANSFER",
+            "target": {
+              "amount": 3000000,
+              "currency": "MYR"
+            },
+            "targetDate": "2045-01-01",
+            "priority": "HIGH",
+            "owner": "P-HNW",
+            "fundingSource": "UNKNOWN",
+            "status": "ACTIVE",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 2,
+        "digest": "a5b8e9482b0d25b19468fe50837ba67f14048a3e16080372f9a5ebeaadc3468c"
+      },
+      "previousSnapshotDigest": "8c145f898de7fce578ea990dda705b40704a384c0491ce6489525342f785d4b3",
+      "changeEventReferences": [
+        "EV-HNW-1"
+      ],
+      "createdAt": "2026-06-01T00:00:00Z",
+      "creationReason": "VALIDATED_CHANGE",
+      "consentReference": "CONSENT-FP",
+      "digest": "2b47a68c187e20d77e1986af37f9f4987d21a7cc977f756378e03d0f977c8b33"
+    }
+  ],
+  "changeEvents": [
+    {
+      "eventId": "EV-HNW-1",
+      "financialRealityId": "FR-HNW",
+      "eventType": "GOAL_CHANGED",
+      "occurredAt": "2026-06-01",
+      "recordedAt": "2026-06-01T12:00:00Z",
+      "subjectReference": "G-HNW",
+      "factReferences": [
+        "G-HNW"
+      ],
+      "fromSnapshotId": "FR-HNW-S0",
+      "toSnapshotId": "FR-HNW-S1",
+      "source": "SYNTHETIC_FIXTURE",
+      "validationState": "VALIDATED",
+      "consentReference": "CONSENT-FP",
+      "digest": "2228b637eb29675c2b5efde1a02b9a3f12cd5e9ec6aa01d4edfd1f3d37e3a7ff"
+    }
+  ]
+}

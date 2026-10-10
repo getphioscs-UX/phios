@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+let p='assets/customer-ui/js/surfaces/account-persons.js',s=fs.readFileSync(p,'utf8');
+s=s.replace("tr('Create a Zi Wei report','创建紫微报告')","tr('Create your report','创建个人报告')").replace("tr('Generate Zi Wei report','生成紫微报告')","tr('Generate your purchased report','生成已购买报告')");
+s=s.replace('<h3>${esc(tr(\'Generate your purchased report\',\'生成已购买报告\'))}</h3>',`<h3>\${esc(tr('Generate your purchased report','生成已购买报告'))}</h3><label class="cx-field">\${esc(tr('Method','方法'))}<select class="cx-select" name="methodCode"><option value="BZR">BaZi · 八字</option><option value="ZWR">Zi Wei · 紫微</option></select></label>`);
+s=s.replace("tr('Zi Wei report','紫微报告')","r.method==='BZR'?tr('BaZi report','八字报告'):tr('Zi Wei report','紫微报告')");
+s=s.replace('· ${esc(r.subjectName)}','· ${esc(r.subjectName||\'\')}');
+s=s.replace('href="/api/account-method-reports?reportId=${encodeURIComponent(r.reportId)}">${esc(tr(\'Open report\',\'打开报告\'))}</a>','href="/api/account-method-reports?reportId=${encodeURIComponent(r.reportId)}">${esc(tr(\'Open report\',\'打开报告\'))}</a><a class="cx-button cx-button--secondary" href="/api/account-method-reports?reportId=${encodeURIComponent(r.reportId)}&amp;download=1">${esc(tr(\'Download saved report\',\'下载已保存报告\'))}</a>');
+// Preserve existing Zi Wei context controls; BaZi submits its own small selection.
+const old="const contextSelection=await prepareReportContext(e.target,{request:accountRequest,locale});await accountRequest('/api/account-method-reports',{...contextSelection,personId:f.get('personId'),locale:f.get('locale'),targetContext:{targetDate:f.get('targetDate'),targetTime:'12:00:00',targetTimezone:{iana:'Etc/UTC',utcOffsetAtTarget:'+00:00'},source:'EXPLICIT_REQUEST'}});";
+const replacement="const methodCode=f.get('methodCode')||'ZWR';const payload=methodCode==='BZR'?{methodCode,personId:f.get('personId'),locale:f.get('locale')}:{...(await prepareReportContext(e.target,{request:accountRequest,locale})),methodCode,personId:f.get('personId'),locale:f.get('locale'),targetContext:{targetDate:f.get('targetDate'),targetTime:'12:00:00',targetTimezone:{iana:'Etc/UTC',utcOffsetAtTarget:'+00:00'},source:'EXPLICIT_REQUEST'}};await accountRequest('/api/account-method-reports',payload);";
+s=s.replace(old,replacement);
+fs.writeFileSync(p,s);
+p='assets/customer-ui/js/surfaces/commerce-account.js';s=fs.readFileSync(p,'utf8');
+if(!s.includes('function orderAmounts'))s=s.replace('function unit(p)',`function orderAmounts(o){const c=o.controlledPayment;if(!c)return o.paidAmountMinor==null?'':t(' · Paid ',' · 实付 ')+money({...o,amountMinor:o.paidAmountMinor});return t(' · Original ',' · 原价 ')+money({...o,amountMinor:c.originalAmountMinor})+t(' · Discount ',' · 优惠 ')+money({...o,amountMinor:c.discountAmountMinor})+(c.paidAmountMinor==null?t(' · Payable ',' · 应付 ')+money({...o,amountMinor:c.payableAmountMinor}):t(' · Paid ',' · 实付 ')+money({...o,amountMinor:c.paidAmountMinor}));}\nfunction unit(p)`);
+s=s.replace('${esc(state(o.state))}${o.reportPresentation?', '${esc(state(o.state))}${esc(orderAmounts(o))}${o.reportPresentation?');fs.writeFileSync(p,s);

@@ -1,0 +1,33 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const read=p=>fs.readFileSync(p,'utf8');
+const json=p=>JSON.parse(read(p));
+const successor=json('content/web-production/successors/client-production-surface-consolidation-w0-w12-v1.json');
+assert.equal(successor.status,'CURRENT_CLIENT_PRODUCTION_SURFACE_CONSOLIDATED');
+assert.equal(successor.baselineCommit,'1d9b248f314308ef4f2a06354fb962ca46fff5c4');
+const shell=read('assets/js/public-shell.js');
+assert.match(shell,/href: '\/reality\/'/,'CPSC-W4: public Reality nav must resolve to /reality/');
+assert.doesNotMatch(shell,/id: 'reality', href: '\/reality-journey'/,'CPSC-W4: legacy Reality Journey cannot own public nav');
+const lib=read('library.html');
+assert.equal((lib.match(/<section class="ks-hero"/g)||[]).length,1,'CPSC-W6: Library needs one current hero');
+assert.doesNotMatch(lib,/<section class="knowledge-hero"[^>]*data-pxr-hidden="true"/,'CPSC-W1: predecessor Library hero cannot remain in production DOM');
+const personal=read('personal-runtime.html');
+assert.doesNotMatch(personal,/<section class="rs-hero"/,'CPSC-W7: additive Personal Runtime hero must retire');
+assert.match(personal,/id="personalRuntimeInput"/,'CPSC-W7: Personal Runtime form authority hook preserved');
+const askHtml=read('knowledge-search.html');
+assert.match(askHtml,/cps-internal-state[^>]*data-cka-answer-state/,'CPSC-W2: answer state hook must be retained but client-hidden');
+const askJs=read('assets/js/pages/knowledge-search-b.js');
+assert.doesNotMatch(askJs,/complete} · \$\{envelope\.answerState\}/,'CPSC-W2: raw answer enum cannot be shown in status');
+assert.match(askJs,/实时外部来源尚未接入/,'CPSC-W5: current authority must fail closed in customer language');
+for (const p of ['reality/index.html','knowledge-search.html','library.html','personal-runtime.html','academy.html','professional/financial/index.html']) {
+  const html=read(p);
+  assert.match(html,/client-production-surfaces\.css/,`CPSC-W11 missing CSS: ${p}`);
+  assert.match(html,/client-production-surfaces\.js/,`CPSC-W10 missing runtime: ${p}`);
+}
+const css=read('assets/css/client-production-surfaces.css');
+assert.match(css,/@media\(max-width:760px\)/,'CPSC-W11: mobile acceptance rules missing');
+console.log('✓ CPSC-W0–W12 Client Production Surface Consolidation passed.');
+console.log('  Reality public nav now resolves to /reality/; predecessor Library/Personal presentation is retired from current DOM.');
+console.log('  Raw CKA enums are client-hidden and current-authority questions fail closed instead of displaying unrelated internal answers.');
+console.log('  Library uses mobile progressive disclosure; Personal/Financial/Academy share current mobile production rules.');
+console.log('  Live external-authority retrieval remains an explicit open boundary and is not falsely marked connected.');

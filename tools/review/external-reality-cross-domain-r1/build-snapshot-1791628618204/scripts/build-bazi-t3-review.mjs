@@ -1,0 +1,46 @@
+import fs from 'node:fs';
+import {build} from 'esbuild';
+import {projectBaziSectionPublication} from '../functions/personal-reading/bazi-section-publication.js';
+import {assemblePublicationSnapshot} from '../functions/canonical-presentation-runtime/visual-report-page-runtime.js';
+import {SECTION_LAYOUT} from '../functions/canonical-presentation-runtime/report-section-contract.js';
+import {extractPublicationDiagram} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
+import {COMPOSITION_VERSION,VERIFIER_VERSION,EDITORIAL_VERSION,T3_SECTIONS} from '../functions/personal-reading/narrative/bazi-editorial-contract.js';
+import {EXPLANATORY_AUTHORITY_VERSION} from '../functions/personal-reading/narrative/bazi-explanatory-authority.js';
+import {loadAcceptedBaziSnapshots} from './lib/bazi-accepted-snapshot-loader.mjs';
+const root='docs/guided-report-successor-r2/bazi-t3',read=p=>JSON.parse(fs.readFileSync(p));
+fs.mkdirSync(root,{recursive:true});
+// Pages does not serve functions/** as static modules. Bundle the canonical
+// presentation imports into this review entry without copying their authority.
+await build({entryPoints:['assets/customer-ui/js/personal-products/bazi-t3-review.js'],outfile:'assets/customer-ui/js/personal-products/bazi-t3-review.bundle.js',bundle:true,format:'esm',platform:'browser',minify:true,logLevel:'silent'});
+await build({entryPoints:['assets/customer-ui/js/personal-products/publication-report-pages.js'],outfile:'assets/customer-ui/js/personal-products/publication-report-pages.bundle.js',bundle:true,format:'esm',platform:'browser',minify:true,logLevel:'silent'});
+const {reading,temporalSnapshot}=read('docs/guided-report-successor-r2/bazi-source.json');
+const registry=read('content/ai-economics/providers/ai-provider-cost-registry-v1.json');
+const records={},accepted=await loadAcceptedBaziSnapshots(),snapshots=accepted.snapshots;
+if(fs.existsSync('.tmp/bazi-t3-live'))for(const file of fs.readdirSync('.tmp/bazi-t3-live').filter(n=>n.endsWith('.json'))){const r=read(`.tmp/bazi-t3-live/${file}`);if(r.snapshot&&r.profileId==='BASELINE_NOW'){const review=accepted.acceptance.humanReviews.find(a=>a.profileId==='BASELINE_NOW'&&a.locale===r.snapshot.locale&&a.sectionKey===r.snapshot.sectionKey&&a.decision==='ACCEPT'&&a.snapshotDigest===r.snapshot.snapshotDigest&&a.briefDigest===r.snapshot.sectionNarrativeBriefDigest);if(review)snapshots[r.snapshot.locale][r.snapshot.sectionKey]=r.snapshot;}records[file]=r;}
+const summaries=[];
+for(const locale of ['en','zh-Hans']){
+ const baseline=read(`docs/guided-report-successor-r2/addendum-b/bazi-${locale}.json`);
+ const projection=await projectBaziSectionPublication({reading,locale,temporalContext:temporalSnapshot,composition:{registry,t3:{stage:'QA',environment:'qa',acceptance:accepted.acceptance,snapshots:snapshots[locale]}}});
+ for(const p of projection.pages)if(p.sourcePages?.length){const n=projection.legacy.pages.find(x=>x.pageNumber===p.sourcePages[0]).sourcePageNumber,source=projection.legacy.reports.find(r=>r.pages.some(x=>x.pageNumber===n));p.primaryVisualHtml=extractPublicationDiagram(source,n);}
+ const bundle=assemblePublicationSnapshot({methodId:'BZR',locale,pages:projection.pages,intro:baseline.intro,temporalSnapshot,internalPages:projection.internalSections,generatedAt:temporalSnapshot.generatedAt,layout:SECTION_LAYOUT});
+ fs.writeFileSync(`${root}/bazi-${locale}.json`,JSON.stringify(bundle.customer,null,2)+'\n');
+ fs.writeFileSync(`${root}/bazi-${locale}-internal.json`,JSON.stringify(bundle.internalOnly,null,2)+'\n');
+ const status=T3_SECTIONS.map(sectionKey=>{
+  const section=projection.internalSections.find(s=>s.sectionKey===sectionKey);
+  if(section?.t3)return {locale,sectionKey,status:projection.t3Fallback?'FALLBACK':section.t3.status,reason:projection.t3Fallback||section.t3.internalOnly?.fallbackReason||null,snapshotDigest:section.t3.snapshot?.snapshotDigest||null};
+  return {locale,sectionKey,status:'NOT_ATTACHED_TO_FROZEN_PUBLICATION',reason:'OWNER_ACCEPTED_FROZEN_COPY',snapshotDigest:null};
+ });summaries.push(...status);
+ const comparison=T3_SECTIONS.map(sectionKey=>{const row=status.find(s=>s.sectionKey===sectionKey);return {sectionKey,snapshotDigest:row?.snapshotDigest||null,status:row?.status||'NOT_AVAILABLE',current:baseline.pages.filter(p=>p.sectionKey===sectionKey).flatMap(p=>[...p.paragraphs,...(p.items||[])]),candidate:projection.pages.filter(p=>p.sectionKey===sectionKey).flatMap(p=>[...p.paragraphs,...(p.items||[])])};});
+ fs.writeFileSync(`${root}/comparison-${locale}.json`,JSON.stringify(comparison,null,2)+'\n');
+ fs.mkdirSync(`${root}/${locale}`,{recursive:true});
+ fs.writeFileSync(`${root}/${locale}/review.html`,review(locale));
+}
+fs.writeFileSync(`${root}/review.html`,review(null));
+fs.writeFileSync(`${root}/generation-evidence.json`,JSON.stringify({summaries,canonicalAcceptedSnapshots:accepted.records,liveRecords:records,productionActivated:false},null,2)+'\n');
+const acceptancePath=`${root}/acceptance.json`;
+const priorAcceptance=fs.existsSync(acceptancePath)?read(acceptancePath):{stage:'SHADOW',BAZI_R2_T3_ACCEPTED:false,BAZI_PRODUCTION_SUCCESSOR_ACTIVE:false};
+const canonicalHumanReviews=accepted.records.map(record=>accepted.acceptance.humanReviews.find(review=>review.profileId===record.profileId&&review.locale===record.locale&&review.sectionKey===record.sectionKey&&review.decision==='ACCEPT'&&review.snapshotDigest===record.snapshotDigest&&review.briefDigest===record.briefDigest)).filter(Boolean);
+const releaseAcceptance={...priorAcceptance,explanatoryAuthorityVersion:EXPLANATORY_AUTHORITY_VERSION,compositionVersion:COMPOSITION_VERSION,verifierVersion:VERIFIER_VERSION,editorialVersion:EDITORIAL_VERSION,humanReviews:canonicalHumanReviews,snapshotDigests:Object.fromEntries(accepted.records.map(record=>[`${record.locale}:${record.sectionKey}`,record.snapshotDigest])),canonicalAcceptanceSource:'config/reports/bazi-editorial-quality-acceptance.json',canonicalSnapshotSource:'docs/acceptance/bazi-paid-report/snapshots'};
+fs.writeFileSync(acceptancePath,JSON.stringify(releaseAcceptance,null,2)+'\n');
+function review(locale){return `<!doctype html><html lang="${locale||'en'}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BaZi T3 · Editorial review</title><link rel="stylesheet" href="/assets/css/tokens.css"><link rel="stylesheet" href="/assets/customer-ui/surfaces/visual-report.css"><link rel="stylesheet" href="/assets/customer-ui/surfaces/report-publication.css"><style>body{margin:0;background:#e8e5de}nav{max-width:1000px;margin:auto;padding:20px;font:16px/1.6 system-ui}button,select{font:inherit;padding:9px}#comparison{max-width:1400px;margin:auto;padding:20px}#comparison article{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:30px}#comparison article>div{padding:20px;background:#fffcf4}#comparison h2{grid-column:1/-1}pre{white-space:pre-wrap;overflow-wrap:anywhere}@media(max-width:650px){#comparison article{grid-template-columns:1fr}}@media print{nav,#comparison{display:none!important}body{background:white}}</style><nav><h1>BaZi T3 · Editorial review</h1><p>合成测试盘 / Synthetic benchmark. T3 remains an offline editorial experiment. Owner-accepted S02–S10 customer publication stays frozen and deterministic; sections without an attached T3 snapshot are shown as not attached rather than treated as failures. Production remains unchanged.</p><a href="/docs/guided-report-successor-r2/bazi-t3/en/review.html">English</a> · <a href="/docs/guided-report-successor-r2/bazi-t3/zh-Hans/review.html">中文</a> · <a id="pdf">PDF</a> · <a href="/docs/guided-report-successor-r2/bazi-t3/STATUS.md">Evidence and remaining gates</a> · <a href="/docs/guided-report-successor-r2/bazi-t3/s02-gold-standard.html">S02 Gold Standard</a><p><button id="compare">T2 CURRENT | T3 CANDIDATE</button></p><details><summary>Preview shadow generation — authenticated QA only</summary><p>Uses only the fixed synthetic benchmark. A saved result is reopened without another provider call.</p><select id="section">${T3_SECTIONS.map(s=>`<option>${s}</option>`).join('')}</select> <button id="generate" disabled>Generate selected section</button><pre id="generation-status"></pre></details></nav><main id="report"></main><section id="comparison" hidden></section><script type="module" src="/assets/customer-ui/js/personal-products/bazi-t3-review.bundle.js" data-locale="${locale||''}"></script></html>`;}
+console.log(JSON.stringify({reviewBuilt:true,canonicalAcceptedSnapshots:accepted.records.length,sections:summaries,productionActivated:false},null,2));

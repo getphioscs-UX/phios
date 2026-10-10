@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import {spawnSync} from 'node:child_process';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
+const dir='content/knowledge/book-vii/production-admission/live-cutover';
+const env={...process.env,REPORT_PROVIDER_LIVE_ALLOWED:'false',REPORT_ZERO_COST_REPLAY:'true',NODE_OPTIONS:`${process.env.NODE_OPTIONS||''} --import=${pathToFileURL(path.resolve('scripts/lib/report-zero-cost-preload.mjs')).href}`};
+const r=spawnSync('npm run check:pages-build',{shell:true,encoding:'utf8',env,maxBuffer:16*1024*1024});
+fs.writeFileSync(`${dir}/pages-build-final.log`,(r.stdout||'')+(r.stderr||''));
+const staticProjectionIncluded=fs.existsSync('.pages-output/content/knowledge/public/successors/book-vii-production-live-cutover-r1/published-projection.json');
+const privateLineageExcluded=!fs.existsSync('.pages-output/content/knowledge/book-vii');
+fs.writeFileSync(`${dir}/pages-build-final-v1.json`,JSON.stringify({command:'npm run check:pages-build',exitCode:r.status,staticProjectionIncluded,privateLineageExcluded,retryReason:'LOCAL_BROWSER_SERVER_RELEASED_OUTPUT_DIRECTORY_LOCK',providerAllowed:false},null,2)+'\n');
+console.log(((r.stdout||'')+(r.stderr||'')).slice(-1200));
+if(r.status!==0||!staticProjectionIncluded||!privateLineageExcluded)process.exit(1);

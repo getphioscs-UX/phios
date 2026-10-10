@@ -1,0 +1,17 @@
+{
+  "paths": {
+    "catalog": "docs/visual-report-r1/commerce-catalog.json",
+    "productRuntime": "functions/pws/product/",
+    "commerceRuntime": "functions/pws/commercial/commercial-runtime.js",
+    "offerRegistry": "functions/pws/commercial/report-successor-contract.js",
+    "stripe": "EXISTING_PWS_PAYMENT_GATE",
+    "entitlements": "EXISTING_ORDER_REPORT_ENTITLEMENT_PLAN",
+    "reportLibrary": "EXISTING_PURCHASED_REPORT_PRESENTATION"
+  },
+  "changes": [
+    "Exclude legacy Profile from future eligibility and new offer projection",
+    "Reject new legacy order/quote/preview",
+    "Keep product resolver, entitlement key, purchased language and historical order plans"
+  ],
+  "historyModified": false
+}

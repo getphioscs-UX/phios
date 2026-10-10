@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/production/visual-article/vap-w9-candidate-promotion-v1.schema.json",
+  "title": "PHI OS VAP-W9 Candidate Promotion v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "promotionCode", "work", "batchCode", "nodeCode", "locale", "candidateCode", "candidateDigest", "reviewCode", "reviewDigest", "reviewDecision", "promotionState", "nextAuthority", "candidateContentMutated", "candidateRegistryMutated", "candidateAcceptanceIsApproval", "approvalRecorded", "publicationRecorded", "authority", "promotedAt"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-VAP-W9-CANDIDATE-PROMOTION-v1.0.0"},
+    "promotionCode": {"type": "string"},
+    "work": {"const": "VAP-W9"},
+    "batchCode": {"const": "VAP-ARTICLE-BATCH-001"},
+    "nodeCode": {"type": "string"},
+    "locale": {"const": "zh-Hans"},
+    "candidateCode": {"type": "string"},
+    "candidateDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "reviewCode": {"type": "string"},
+    "reviewDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "reviewDecision": {"const": "accept"},
+    "promotionState": {"const": "promoted_to_pja_approval_eligibility"},
+    "nextAuthority": {"const": "PJA Human Approval Runtime"},
+    "candidateContentMutated": {"const": false},
+    "candidateRegistryMutated": {"const": false},
+    "candidateAcceptanceIsApproval": {"const": false},
+    "approvalRecorded": {"const": false},
+    "publicationRecorded": {"const": false},
+    "authority": {"const": false},
+    "promotedAt": {"type": "string", "format": "date-time"}
+  }
+}

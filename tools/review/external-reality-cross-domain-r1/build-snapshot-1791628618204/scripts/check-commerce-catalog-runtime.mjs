@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import {commerceApi} from '../functions/commerce/commerce-stripe-api.js';
+
+const request=new Request('https://qa.phios-github.pages.dev/api/commerce-catalog',{method:'GET'});
+const context={request,env:{STRIPE_ENVIRONMENT:'QA',PHIOS_COMMERCE_QA_ENABLED:'true',STRIPE_SECRET_KEY:'sk_test_placeholder'}};
+const response=await commerceApi(context,'catalog');
+assert.equal(response.status,200);
+const body=await response.json();
+assert.equal(body.success,true);
+assert(Array.isArray(body.products));
+assert(body.products.length>0);
+const profile=body.products.find(p=>p.productId==='COM-REPORT-PROFILE-FULL');
+assert(profile);
+assert.equal(profile.reportPurchaseState,'AVAILABLE');
+assert.equal(profile.reportPresentationOptions.length,1);
+assert.equal(profile.reportPresentationOptions[0].surchargeAmountMinor,0);
+const ziwei=body.products.find(p=>p.productId==='COM-REPORT-ZIWEI-FULL');
+assert(ziwei);
+assert.equal(ziwei.reportPurchaseState,'AVAILABLE');
+assert.equal(ziwei.reportPresentationOptions.length,3);
+console.log('PASS commerce catalog: fixed bilingual Profile retains one included presentation; current Zi Wei report retains three language presentation quotes.');

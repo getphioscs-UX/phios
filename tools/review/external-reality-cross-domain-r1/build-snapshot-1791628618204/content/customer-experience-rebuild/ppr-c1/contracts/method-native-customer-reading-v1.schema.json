@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-METHOD-NATIVE-CUSTOMER-READING-v1.schema.json",
+  "title": "PHI OS Method-Native Customer Reading",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "methodId",
+    "productVersion",
+    "summary",
+    "structuralModel",
+    "readingSections",
+    "temporalContext",
+    "openVerdicts",
+    "evidence",
+    "publicationDecision",
+    "governance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-METHOD-NATIVE-CUSTOMER-READING-v1.0.0"
+    },
+    "methodId": {
+      "type": "string",
+      "enum": [
+        "BZR",
+        "NUM",
+        "ZWR",
+        "AST",
+        "ECR"
+      ]
+    },
+    "productVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "object"
+    },
+    "structuralModel": {
+      "type": [
+        "object",
+        "array",
+        "null"
+      ]
+    },
+    "readingSections": {
+      "type": "array"
+    },
+    "temporalContext": {
+      "type": "object"
+    },
+    "openVerdicts": {
+      "type": "array"
+    },
+    "evidence": {
+      "type": "object"
+    },
+    "publicationDecision": {
+      "type": "object"
+    },
+    "governance": {
+      "type": "object"
+    }
+  }
+}

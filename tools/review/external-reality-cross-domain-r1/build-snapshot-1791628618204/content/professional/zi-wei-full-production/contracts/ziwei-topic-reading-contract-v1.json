@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-TOPIC-READING-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W20",
+  "baselineCommit": "a30a38d45a273fa0de603dcb9da827bf4c4ca307",
+  "status": "ENGINEERING_FROZEN",
+  "requiredInputs": ["PHI-OS-ZIWEI-CUSTOMER-REPORT-v1.0.0","PHI-OS-ZIWEI-INTERACTIVE-CHART-SURFACE-v1.0.0"],
+  "outputSchema": "PHI-OS-ZIWEI-TOPIC-READING-v1.0.0",
+  "requiredTopicCodes": ["CAREER","WEALTH","RELATIONSHIPS","FAMILY","HEALTH_WELLBEING","TRAVEL_MOBILITY","HOME_PROPERTY","SOCIAL_NETWORKS"],
+  "compositionRules": {
+    "primaryAndContextPalacesMustResolveToW18Blocks": true,
+    "topicOverviewMayOnlyFrameExistingW18Blocks": true,
+    "timingMayOnlyAttachExistingW18TimingEvidence": true,
+    "openBoundariesMustRemainVisible": true,
+    "allTopicsAutoRenderedTogether": false,
+    "presentationMode": "ON_DEMAND_TOPIC_SELECTOR"
+  },
+  "boundaries": {
+    "newMeaningCreated": false,
+    "newFindingCreated": false,
+    "compatibilityScoreCreated": false,
+    "medicalClaimCreated": false,
+    "financialAdviceCreated": false,
+    "eventPredictionCreated": false,
+    "fortunePredictionCreated": false
+  },
+  "customerCutoverAllowed": false
+}

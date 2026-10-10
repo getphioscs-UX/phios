@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-W16R2B-PRODUCTION-ADMISSION-FINAL-v1.0.0",
+  "baselineCommit": "80bae71675ef8b196cd10402ea0ccbf9b833ee57",
+  "predecessor": "content/knowledge/knowledge-intelligence-r2/successor/kir-r2-w16r2b-production-admission-runtime-cutover-v1.json",
+  "status": "PRODUCTION_ADMITTED_RUNTIME_CUTOVER_READY",
+  "humanEvidence": {
+    "finalAcceptance": "content/knowledge/knowledge-intelligence-r2/acceptance/kir-r2-w16r-final-human-acceptance-v1.json",
+    "effectiveAccepted": 100,
+    "effectiveTotal": 100,
+    "criticalFailures": 0,
+    "case084R2HumanAccepted": true
+  },
+  "cutover": {
+    "buildAdmitted": true,
+    "runtimeFlag": "PHIOS_KIR_R2_W16R2B_PRODUCTION_ADMITTED",
+    "gatewayFlag": "PHIOS_KIR_R2_MODEL_GATEWAY_ENABLED",
+    "explicitRuntimeEnableStillRequired": true,
+    "fallbackPreservedWhenRuntimeFlagOff": true,
+    "defaultComposer": "OPENAI_LUNA",
+    "complexComposer": "DEEPSEEK_V4_FLASH"
+  },
+  "authorityBoundary": {
+    "knowledgeAuthorityOwnedByProvider": false,
+    "articleAuthorityChanged": false,
+    "bookAuthorityChanged": false,
+    "providerMayOverrideCanonicalMeaning": false,
+    "historicalEvidenceRewritten": false
+  }
+}

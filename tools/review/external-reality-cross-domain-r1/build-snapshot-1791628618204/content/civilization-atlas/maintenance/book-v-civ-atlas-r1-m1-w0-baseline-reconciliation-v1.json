@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-V-CIV-ATLAS-R1-M1-W0-BASELINE-v1.0.0",
+  "work": "BOOK-V-CIV-ATLAS-R1-M1-W0",
+  "baselineCommit": "42324d1a3492f801d7de19758ea4c88f2f1ede42",
+  "status": "RECONCILED",
+  "r1Freeze": "content/civilization-atlas/freeze/book-v-civ-atlas-r1-production-freeze-v1.json",
+  "findings": {
+    "favicon": {
+      "canonicalAssetCode": "LOGO-011",
+      "canonicalFilename": "PHIOS-FAVICON-v1.svg",
+      "objectKey": "images/branding/logo/PHIOS-FAVICON-v1.svg",
+      "baselineBehavior": "ASYNC_RUNTIME_ONLY_ON_PUBLIC_SHELL_WITH_BROWSER_DEFAULT_OR_EXISTING_ICON_FALLBACK",
+      "observedDefect": "USER_OBSERVED_LEGACY_GENERIC_PHI_IN_BROWSER_TAB",
+      "publicShellConsumerCount": 142,
+      "journeyShellConsumerCount": 6,
+      "staticIconConsumerCountBeforeRecovery": 2
+    },
+    "bookVProjection": {
+      "route": "/books/reality-differentiation/",
+      "atlasMount": "#atlas",
+      "baselineEntry": "HERO_CTA_TO_ATLAS_BUT_ATLAS_MOUNT_AFTER_BOOK_PARTS",
+      "defect": "DISCOVERABILITY_DEFECT",
+      "r1AssetsPresent": true,
+      "r1RegistriesPresent": true
+    },
+    "askChain": {
+      "route": "/knowledge/ask/",
+      "client": "assets/customer-ui/js/surfaces/contextual-ask.js",
+      "api": "functions/api/customer-contextual-ask.js",
+      "atlasContextBuilder": "assets/js/pages/civilization-atlas/atlas-ask-context.js",
+      "status": "IDENTIFIED_FOR_M1_W5_W6_NOT_MODIFIED_IN_W0_W2"
+    }
+  },
+  "boundaries": {
+    "noR2": true,
+    "noNewAskRuntime": true,
+    "noRegistryRewrite": true,
+    "noPosterAsAuthority": true
+  }
+}

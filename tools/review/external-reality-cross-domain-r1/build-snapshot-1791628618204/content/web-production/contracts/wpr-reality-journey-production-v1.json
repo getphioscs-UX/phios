@@ -1,0 +1,61 @@
+{
+  "contractCode": "PHI-OS-WPR-W20-REALITY-JOURNEY-PRODUCTION-v1",
+  "contractVersion": "1.0.0",
+  "work": "WPR-W20",
+  "phase": "WPR-E_REALITY_AND_CUSTOMER_SURFACE",
+  "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+  "status": "active_limited_production_jr_v2_read_only_projection",
+  "authority": {
+    "journeyAuthority": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+    "canonicalStageAuthority": "content/runtime/journey-runtime/registries/canonical-journey-stage-registry-v2.json",
+    "legacyCompatibilityAuthority": "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json",
+    "progressAuthority": "content/runtime/journey-runtime/contracts/journey-progress-contract-v1.json",
+    "safetyAuthority": "content/runtime/journey-runtime/contracts/journey-safety-boundary-contract-v1.json",
+    "recommendationAuthority": "content/runtime/journey-runtime/contracts/journey-recommendation-contract-v1.json",
+    "wprAuthority": "WEB_PRODUCTION_PROJECTION_ONLY",
+    "stageDecisionAuthorityCreated": false,
+    "journeyProgressAuthorityCreated": false,
+    "safetyDecisionAuthorityCreated": false,
+    "workflowRecommendationAuthorityCreated": false
+  },
+  "projections": {
+    "publicOverview": {
+      "route": "/reality-journey",
+      "surfaceCode": "REALITY_JOURNEY_OVERVIEW",
+      "mode": "JR_V2_CANONICAL_AUTHORITY_OVERVIEW",
+      "audience": "PUBLIC",
+      "readsPrivateState": false,
+      "indexable": true,
+      "canonicalStagesRenderedFromRegistry": true,
+      "legacySixTaskProjectionPreservedAsCompatibility": true
+    },
+    "localCustomerStatus": {
+      "route": "/reality-dashboard",
+      "surfaceCode": "REALITY_JOURNEY_LOCAL",
+      "mode": "BROWSER_LOCAL_JOURNEY_COMPATIBILITY",
+      "audience": "CUSTOMER",
+      "canonicalCustomerWorkspaceClaimed": false,
+      "serverAuthenticationClaimed": false,
+      "canonicalJourneyPersistenceClaimed": false,
+      "browserLocalRecoveryMayBeRead": true,
+      "indexable": false,
+      "legacyM3cStagesMustMapThroughCompatibilityRegistry": true
+    }
+  },
+  "rules": {
+    "wprMayInventJourneyStage": false,
+    "wprMayInferCanonicalStageFromPageOrder": false,
+    "pageVisitCountsAsCompletion": false,
+    "routeLoadCountsAsCompletion": false,
+    "legacyStageMayBeProjectedOnlyThroughCompatibilityRegistry": true,
+    "missingJrAuthorityFailsClosed": true,
+    "missingCompatibilityMappingFailsClosed": true,
+    "unknownsRemainVisible": true,
+    "wprMayClaimLiveRrePersistence": false,
+    "wprMayClaimRneExecution": false,
+    "wprMayClaimLrmPersistence": false,
+    "wprMayCreateProfessionalResponsibility": false,
+    "wprMayCreateLifeFinancialMedicalLegalDecision": false,
+    "wprW21MethodExecutionActivated": false
+  }
+}

@@ -1,0 +1,448 @@
+{
+  "schemaVersion": "PHI-OS-CURRENT-AUTHORITY-INVENTORY-v1.0.0",
+  "work": "CBS-W1",
+  "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+  "status": "CURRENT_AUTHORITY_INVENTORIED",
+  "scanTerms": [
+    "canonical",
+    "registry",
+    "authority",
+    "successor",
+    "freeze",
+    "frozen",
+    "legacy",
+    "compatibility",
+    "reconciliation"
+  ],
+  "scanSummary": {
+    "canonicalPathHits": 550,
+    "registryPathHits": 637,
+    "authorityPathHits": 346,
+    "successorPathHits": 226,
+    "freezePathHits": 408,
+    "frozenTextHits": 25,
+    "legacyPathHits": 80,
+    "compatibilityPathHits": 22,
+    "reconciliationPathHits": 256
+  },
+  "authorities": [
+    {
+      "authorityId": "INPUT_AUTHORITY",
+      "domain": "CANONICAL_INPUT",
+      "currentFile": "content/professional/method-runtime/shared-data-authority-v1.json",
+      "currentSha256": "a9acf53273a43088e4a191060e00250d8d8773c71ac653ee23a18f006a5b107c",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "ICR",
+        "MPA",
+        "MCD"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:mpa",
+      "productionStatus": "CURRENT_SHARED_INPUT_AUTHORITY",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "METHOD_AUTHORITY",
+      "domain": "METHOD_DEFINITION",
+      "currentFile": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "currentSha256": "7cab1dca382de4a796a8a92de3fb0105ae23689f91e4661a48ea1e4e4ca563b0",
+      "successorFile": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "legacyPredecessors": [
+        {
+          "path": "content/professional/method-runtime/method-registry-v1.json",
+          "sha256": "a16b6f316365592acec4be4588a5305aedd3f760b9445ecae1c63b4bcb1161e1"
+        }
+      ],
+      "consumers": [
+        "MPA",
+        "MCD",
+        "HDR",
+        "AST",
+        "BZR",
+        "NUM",
+        "ICH",
+        "TAR"
+      ],
+      "consumerCount": 8,
+      "checker": "npm run check:mpa",
+      "productionStatus": "CURRENT_ACTIVATION_SUCCESSOR",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "PROJECTION_AUTHORITY",
+      "domain": "METHOD_PROJECTION",
+      "currentFile": "content/professional/method-runtime/shared-projection-runtime-v1.json",
+      "currentSha256": "8ffa3bf46930025cbf8ec3352223e7cdc5cc420b9f40016aa9e3edde6e981f13",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "MCD",
+        "MPA",
+        "MIR"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:mpa",
+      "productionStatus": "CURRENT_SHARED_PROJECTION_AUTHORITY",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "INTERPRETATION_AUTHORITY",
+      "domain": "INTERPRETATION",
+      "currentFile": "content/interpretation/governance/interpretation-authority-boundary-v1.json",
+      "currentSha256": "7c390aa6e4987f415a6a8f2b7dc16a16fb0c25f84424fa128c88e16a76846a27",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "MIR",
+        "KAP",
+        "RJX",
+        "MCD"
+      ],
+      "consumerCount": 4,
+      "checker": "npm run check:interpretation-runtime",
+      "productionStatus": "MACHINE_ACCEPTED_CURRENT_SUCCESSOR_REPOSITORY_GATE_PENDING",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "MEANING_AUTHORITY",
+      "domain": "CANONICAL_MEANING",
+      "currentFile": "content/professional/canonical-meaning-runtime/contracts/canonical-meaning-runtime-v1.json",
+      "currentSha256": "a88c8dd422e222fee7efd4ee4ce9f3cc4b9e780f4b7fbc11ac0c4d0250c55936",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "MIR",
+        "KAP"
+      ],
+      "consumerCount": 2,
+      "checker": "npm run check:interpretation-runtime",
+      "productionStatus": "CURRENT_DISTINCT_FROM_INTERPRETATION",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "KNOWLEDGE_AUTHORITY",
+      "domain": "KNOWLEDGE",
+      "currentFile": "content/knowledge/contracts/knowledge-registry-authority-v2.json",
+      "currentSha256": "9f254ebee08023fdf0eeca02f44a9d68a8638f252a07940c0e86a94c5053ac13",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "KAU",
+        "KAP",
+        "CKA",
+        "WPR"
+      ],
+      "consumerCount": 4,
+      "checker": "npm run check:kap-current",
+      "productionStatus": "CURRENT_SUCCESSOR_FROZEN",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "ASSET_AUTHORITY",
+      "domain": "CANONICAL_ASSET",
+      "currentFile": "content/professional/canonical-asset-runtime/contracts/canonical-asset-contract-v1.json",
+      "currentSha256": "f2de620f429ad9d9b0d019d580ad5a3fe4f2c33bc792257b31a258e9c934c366",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "CAR",
+        "CPR",
+        "WPR"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:car-preserved",
+      "productionStatus": "CURRENT_PROVIDER_ACTIVATION_DISABLED",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "JOURNEY_AUTHORITY",
+      "domain": "JOURNEY_STATE",
+      "currentFile": "content/runtime/journey-runtime/contracts/canonical-journey-contract-v2.json",
+      "currentSha256": "5f6859209bbfe4a49d3d533f63b703e0d0199989c462c8ac9a11f9bcd910c044",
+      "successorFile": "content/runtime/journey-runtime/contracts/canonical-journey-contract-v2.json",
+      "legacyPredecessors": [
+        {
+          "path": "content/registry/journeys.json",
+          "sha256": "3682b1cf29b375f394228f26f491efcce7254876021a24c8e83d86ded6a4e83a"
+        }
+      ],
+      "consumers": [
+        "RJX",
+        "RMO",
+        "RDG",
+        "WPR"
+      ],
+      "consumerCount": 4,
+      "checker": "npm run check:rjx",
+      "productionStatus": "CURRENT_V2_LIMITED_READ_ONLY_PRODUCTION",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "REALITY_MODEL_AUTHORITY",
+      "domain": "REALITY_MODEL",
+      "currentFile": "content/runtime/reality-model-runtime/freeze/rmo-v1-freeze-v1.json",
+      "currentSha256": "10dd5d3f29963a3be601491d316701d6f631a0bb7064aa1136f0b743bfa1fd81",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "RMO",
+        "RJX",
+        "RDG"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:rmo",
+      "productionStatus": "FROZEN_NOT_ACTIVATED",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "REALITY_DATA_GOVERNANCE_AUTHORITY",
+      "domain": "REALITY_DATA_GOVERNANCE",
+      "currentFile": "content/governance/reality-data-governance/freeze/reality-data-governance-freeze-v1.json",
+      "currentSha256": "79e5433ae73ff11ea6ead081f85f6b4a7e6573d3850756c52749c184eaf6d9a4",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "RDG",
+        "RMO",
+        "RJX",
+        "PR"
+      ],
+      "consumerCount": 4,
+      "checker": "npm run check:rdg",
+      "productionStatus": "GOVERNANCE_AUTHORITY_FROZEN",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "PROFESSIONAL_AUTHORITY",
+      "domain": "PROFESSIONAL_JUDGMENT",
+      "currentFile": "content/runtime/professional-runtime/contracts/professional-authority-boundary-v2.json",
+      "currentSha256": "b280fe736bcaa9802463c1941b9d1b3448f0848b7eb19dce9ff2dd7b645b6f7d",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "PR",
+        "RR",
+        "FDR"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:professional-runtime",
+      "productionStatus": "CURRENT_V2_BOUNDARY",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "REPORT_AUTHORITY",
+      "domain": "REPORT_ASSEMBLY",
+      "currentFile": "content/runtime/customer-report-runtime/freeze/rr-v2-freeze-v1.json",
+      "currentSha256": "1ffd7087e750104baf2d1be72117afb659145617d8a96c45d598cc227c36ef5e",
+      "successorFile": "content/runtime/customer-report-runtime/freeze/rr-v2-freeze-v1.json",
+      "legacyPredecessors": [
+        {
+          "path": "content/registry/professional-deliverable-catalog.json",
+          "sha256": "e9bab57d3c8ece0d4e00244aab30d1a7455c1c0ab5eb55671aeefecc4492f80d"
+        }
+      ],
+      "consumers": [
+        "RR",
+        "CPR",
+        "WPR"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:customer-report-runtime",
+      "productionStatus": "CURRENT_V2_FROZEN",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "PRESENTATION_AUTHORITY",
+      "domain": "PRESENTATION",
+      "currentFile": "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+      "currentSha256": "568cda919515f825b229698046c24998783b2c9a96ca644d4ca5031b5879bdfe",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "CPR",
+        "WPR",
+        "CKA",
+        "HPC2"
+      ],
+      "consumerCount": 4,
+      "checker": "npm run check:cpr",
+      "productionStatus": "CURRENT_AUTHORITY_HISTORICAL_ASSET_DIGEST_CHECKER_DRIFT",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "PUBLICATION_AUTHORITY",
+      "domain": "PUBLICATION",
+      "currentFile": "content/knowledge/production/contracts/publication-contract.json",
+      "currentSha256": "545674a931d6f0db3015df65d9f6dae9ec281ee67816a2f67a90d2e7dadd3d69",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "WPR",
+        "CPR",
+        "KAP"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:wpr",
+      "productionStatus": "CURRENT_PUBLICATION_BOUNDARY",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "METHOD_ACTIVATION_AUTHORITY",
+      "domain": "METHOD_ACTIVATION",
+      "currentFile": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "currentSha256": "7cab1dca382de4a796a8a92de3fb0105ae23689f91e4661a48ea1e4e4ca563b0",
+      "successorFile": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "legacyPredecessors": [
+        {
+          "path": "content/professional/method-runtime/method-registry-v1.json",
+          "sha256": "a16b6f316365592acec4be4588a5305aedd3f760b9445ecae1c63b4bcb1161e1"
+        }
+      ],
+      "consumers": [
+        "MPA",
+        "MCD"
+      ],
+      "consumerCount": 2,
+      "checker": "npm run check:mpa",
+      "productionStatus": "CURRENT_GLOBAL_EXECUTION_BLOCKED",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "METHOD_CLIENT_DELIVERY_AUTHORITY",
+      "domain": "METHOD_CLIENT_DELIVERY",
+      "currentFile": "content/professional/method-client-delivery/contracts/mcd-0-method-client-delivery-authority-boundary-v1.json",
+      "currentSha256": "ecf11e4d3c9bce7ea913d0912a2c73d74ed0a46357a3d0be4184bfc3e3e43ebf",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "MCD",
+        "MPA"
+      ],
+      "consumerCount": 2,
+      "checker": "npm run check:mcd-8",
+      "productionStatus": "CURRENT_CLIENT_DELIVERY_BOUNDARY",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "CLIENT_KNOWLEDGE_ASK_AUTHORITY",
+      "domain": "CLIENT_KNOWLEDGE_ASK",
+      "currentFile": "content/client/knowledge-ask/contracts/cka-grounded-answer-binding-v1.json",
+      "currentSha256": "17e88bfe10bcbf0eef32e53831b810b2bfa94152e952716f7a276af66e06d7df",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "CKA",
+        "KAP",
+        "HPC2"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:cka-current",
+      "productionStatus": "CURRENT_PRESENTATION_FINGERPRINT_CHECKER_RECONCILIATION_REQUIRED",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "WEB_PRODUCTION_AUTHORITY",
+      "domain": "WEB_PRODUCTION",
+      "currentFile": "content/web-production/freeze/wpr-v1-freeze-v1.json",
+      "currentSha256": "405efc8d15e0c604ca9797267ff405e4fa38591f5b9b2f76a0a230720f980c66",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "WPR",
+        "CPR",
+        "RJX",
+        "CKA",
+        "HPC2"
+      ],
+      "consumerCount": 5,
+      "checker": "npm run check:wpr",
+      "productionStatus": "FROZEN_LIMITED_PRODUCTION_OPERATIONAL_GATES_REMAIN",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "FINANCIAL_FACT_AUTHORITY",
+      "domain": "FINANCIAL_FACT",
+      "currentFile": "content/financial/data-runtime/authority/financial-data-authority-baseline-v1.json",
+      "currentSha256": "16748999480db6c52df3e9e9f7a061eaa6d55bae36da2463a8b6d1c8abd5fa08",
+      "successorFile": "content/financial/data-runtime/authority/financial-data-authority-baseline-v1.json",
+      "legacyPredecessors": [
+        {
+          "path": "content/registry/financial-authority-boundary.json",
+          "sha256": "e8708450a169dc41f7cb26a1e83378a6ad06587f7b39d02fd90808e5bd73beb4"
+        },
+        {
+          "path": "content/registry/financial-schema-registry.json",
+          "sha256": "c5c0527c32fcb91844477c719f9865763ea5408c54ce6e7a3f547465b48e0eae"
+        }
+      ],
+      "consumers": [
+        "FDR",
+        "PR",
+        "RR",
+        "DAR"
+      ],
+      "consumerCount": 4,
+      "checker": "npm run check:fdr-w0-w18",
+      "productionStatus": "ACTIVE_FOUNDATION_W19_W24_DEFERRED",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "DOCUMENT_ASSEMBLY_AUTHORITY",
+      "domain": "DOCUMENT_ASSEMBLY",
+      "currentFile": "content/document-assembly/authority/dar-authority-baseline-v1.json",
+      "currentSha256": "c47251da49030df134452e8a7ec7baf7fb7ab7c3a569b6d3c7b9943d075d9872",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "DAR",
+        "FDR",
+        "RR"
+      ],
+      "consumerCount": 3,
+      "checker": "NOT_YET_UNIFIED",
+      "productionStatus": "FOUNDATION_ACTIVE_NOT_FINAL_FROZEN",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "ACCOUNT_AUTHORITY",
+      "domain": "ACCOUNT_IDENTITY",
+      "currentFile": "content/registry/m4c-account-payment-membership.json",
+      "currentSha256": "1c769b379e8340214887dc8e91edbadba42f0c22fdc395abd53b3cc66827882a",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "CKA",
+        "RJX",
+        "FDR"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:account-system",
+      "productionStatus": "CURRENT_ACCOUNT_BOUNDARY",
+      "currentOwner": true
+    }
+  ],
+  "knownSuccessorReconciliations": [
+    {
+      "id": "CKA_PRESENTATION_FINGERPRINT",
+      "state": "RESOLVED_CLASSIFICATION",
+      "classification": "SUCCESSOR_REPLACED",
+      "evidence": "content/knowledge/answer-projection/reconciliation/kap-w11-w17-current-presentation-successor-v2.json",
+      "rule": "presentation whole-file drift is not runtime authority drift"
+    },
+    {
+      "id": "CPR_PUBLIC_ASSET_DIGEST",
+      "state": "RESOLVED_CLASSIFICATION",
+      "classification": "SUCCESSOR_REPLACED",
+      "evidence": "content/web-production/client-visual-consumption/successors/part-h5a-current-branding-successor-v1.json",
+      "rule": "newer public asset successor exists; frozen historical CPR baseline remains historical"
+    }
+  ],
+  "rules": {
+    "oneCurrentAuthorityPerDomain": true,
+    "duplicateCurrentAuthorityAllowed": false,
+    "historicalAuthorityMayRemain": true,
+    "historicalAuthorityIsCurrentOwner": false
+  }
+}

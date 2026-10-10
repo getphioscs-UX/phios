@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8D-RRE-CONSUMPTION-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE_RRE_CURRENT_EVIDENCE_CONSUMPTION",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8D",
+  "title": "RRE Current Evidence Consumption",
+  "purpose": "Consume only W8C RRE-eligible current evidence into the existing Reality Readout Engine, preserving evidence lineage and required-lane coverage without deriving or admitting runtime positions.",
+  "predecessorWork": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8C",
+  "predecessorHandoff": "content/civilization-atlas/reconfiguration/runtime-position-w8c-rre-eligible-handoff-v1.json",
+  "readoutOwner": "REALITY_READOUT_ENGINE",
+  "adapter": "scripts/lib/civilization-atlas/book6-rre-adapter-v1.mjs",
+  "successorWork": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E",
+  "rules": [
+    "Only evidence marked RRE_ELIGIBLE by W8C may be consumed.",
+    "No Dossier receives an RRE record unless at least one RRE-eligible evidence record exists for that Dossier.",
+    "RRE evidence references must preserve W8C claim IDs and lane lineage.",
+    "Required-lane completeness is measured against W7 readiness and must remain explicit.",
+    "Incomplete required-lane coverage may produce a limited RRE readout but cannot become position-derivation-ready.",
+    "Complete required-lane coverage means evidence coverage is sufficient for the next derivation stage; it does not itself establish grammar, reality domain or runtime position.",
+    "W8D never writes CURRENT_DATA values into contemporary-runtime-dossiers-v1.json.",
+    "W8D never invents observables, metrics, signals, runtime positions or projections from absent evidence."
+  ],
+  "consumptionStates": [
+    "NO_RRE_ELIGIBLE_EVIDENCE",
+    "RRE_PARTIAL_EVIDENCE_CONSUMED",
+    "RRE_REQUIRED_LANES_CONSUMED"
+  ],
+  "boundaries": {
+    "canonicalDossierMutationAllowed": false,
+    "missingEvidenceInferenceAllowed": false,
+    "grammarDerivationAllowed": false,
+    "realityDomainDerivationAllowed": false,
+    "runtimePositionCandidateAllowed": false,
+    "positionAdmissionAllowed": false,
+    "transitionSignalAdmissionAllowed": false,
+    "thresholdAdmissionAllowed": false,
+    "projectionAllowed": false
+  },
+  "failClosed": true
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kpp-pja-handoff-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "handoffCode",
+    "nodeCode",
+    "productionRole",
+    "productionPlanCode",
+    "knowledgeVersion",
+    "locale",
+    "readinessState",
+    "authorityMode"
+  ],
+  "properties": {
+    "handoffCode": {
+      "type": "string",
+      "pattern": "^KPP-PJA-"
+    },
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-"
+    },
+    "productionRole": {
+      "enum": [
+        "ARTICLE",
+        "FRAGMENT"
+      ]
+    },
+    "productionPlanCode": {
+      "type": "string",
+      "pattern": "^KPP-PLAN-"
+    },
+    "knowledgeVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locale": {
+      "type": "string",
+      "minLength": 2
+    },
+    "readinessState": {
+      "enum": [
+        "ready_for_pja",
+        "blocked",
+        "deferred"
+      ]
+    },
+    "authorityMode": {
+      "const": "readiness_handoff_only"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+import assert from 'node:assert/strict'; import fs from 'node:fs';
+import {readJson,sha256File} from './lib/hfp/hfp-check-lib.mjs';
+const acceptance=readJson('content/financial/holistic-planning-product/acceptance/hfp-w0-w28-acceptance-v1.json'); for(const [k,v] of Object.entries(acceptance.gates)) assert.equal(v,true,`HFP acceptance gate failed: ${k}`);
+const freeze=readJson('content/financial/holistic-planning-product/freeze/hfp-w0-w28-freeze-manifest-v1.json'); assert.equal(freeze.baselineCommit,'eb1b0671eddb4933303b9b5444ead82bd7480945'); assert.equal(freeze.status,'FROZEN_CANONICAL_HFP_V1'); assert.equal(freeze.phase,'HFP');
+for(const item of freeze.artifacts){ assert.ok(fs.existsSync(item.path),`Missing frozen HFP artifact: ${item.path}`); assert.equal(sha256File(item.path),item.sha256,`Frozen HFP drift: ${item.path}`); }
+const pkg=readJson('package.json'); assert.ok(pkg.scripts['check:hfp']); for(const n of ['check-hfp-authority.mjs','check-hfp-contracts.mjs','check-hfp-composition.mjs','check-hfp-professional-boundary.mjs','check-hfp-handoffs.mjs','check-hfp-continuity.mjs','check-hfp-fixtures.mjs','check-hfp-determinism.mjs','check-hfp-mrm-binding.mjs','check-hfp-freeze.mjs']) assert.match(pkg.scripts['check:hfp'],new RegExp(n.replaceAll('.','\\.')));
+console.log('✓ HFP-W28 acceptance + freeze passed.'); console.log(`  ${freeze.artifacts.length} HFP v1 artifacts are digest-frozen; final gate is check:hfp.`);

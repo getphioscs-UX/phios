@@ -1,0 +1,1927 @@
+<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>财务现实 / Financial Reality</title><style>body{font:16px/1.6 system-ui;margin:0 auto;padding:20px;max-width:1000px;color:#182d40;background:#f7f9fc}section{background:white;border:1px solid #ccd7e1;padding:18px;margin:18px 0;break-inside:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.6 system-ui}nav{display:flex;flex-wrap:wrap;gap:12px}a{color:#135775}@page{size:A4;margin:16mm}@media print{body{padding:0}section{box-shadow:none}}</style><h1>财务现实报告 / Financial Reality Report</h1><p>本地合成测试，非真实家庭试点。专业审核待完成。<br>Local synthetic replay; not a real household pilot. Professional review pending.</p><nav><a href="#FIN-01">当前状况 / Current Position</a><a href="#FIN-02">现金流 / Cash Flow</a><a href="#FIN-03">流动性 / Liquidity</a><a href="#FIN-04">资产 / Assets</a><a href="#FIN-05">负债 / Liabilities</a><a href="#FIN-06">保障 / Protection</a><a href="#FIN-07">目标 / Goals</a><a href="#FIN-08">持仓现实 / Portfolio Reality</a><a href="#FIN-09">集中程度 / Concentration</a><a href="#FIN-10">市场背景 / Market Context</a><a href="#FIN-11">宏观背景 / Macro Context</a><a href="#FIN-12">依赖 / Dependencies</a><a href="#FIN-13">风险 / Risks</a><a href="#FIN-14">未知 / Unknowns</a><a href="#FIN-15">规划选项 / Planning Options</a><a href="#FIN-16">专业审核 / Professional Review</a></nav><section id="FIN-01"><h2>当前状况 / Current Position</h2><p>已有记录 / Recorded</p><pre>{
+  &quot;snapshotId&quot;: &quot;FRS-E9CE11B4B9E30C43685CE43F&quot;,
+  &quot;asOf&quot;: &quot;2026-10-08&quot;
+}</pre></section><section id="FIN-02"><h2>现金流 / Cash Flow</h2><p>已有记录 / Recorded</p><pre>{
+  &quot;engineCode&quot;: &quot;CASH_FLOW&quot;,
+  &quot;status&quot;: &quot;PARTIAL&quot;,
+  &quot;metrics&quot;: {
+    &quot;grossIncome&quot;: {
+      &quot;resultCode&quot;: &quot;grossIncome&quot;,
+      &quot;value&quot;: {
+        &quot;kind&quot;: &quot;EXACT&quot;,
+        &quot;value&quot;: 6000
+      },
+      &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-grossIncome&quot;,
+      &quot;trace&quot;: {
+        &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-grossIncome&quot;,
+        &quot;engineCode&quot;: &quot;CASH_FLOW&quot;,
+        &quot;resultCode&quot;: &quot;grossIncome&quot;,
+        &quot;formula&quot;: &quot;Σ normalized monthly gross income&quot;,
+        &quot;inputReferences&quot;: [
+          &quot;F-INC&quot;
+        ],
+        &quot;assumptionReferences&quot;: [],
+        &quot;notes&quot;: [],
+        &quot;recommendationCreated&quot;: false,
+        &quot;professionalJudgmentCreated&quot;: false
+      }
+    },
+    &quot;netIncome&quot;: {
+      &quot;resultCode&quot;: &quot;netIncome&quot;,
+      &quot;value&quot;: {
+        &quot;kind&quot;: &quot;UNKNOWN&quot;,
+        &quot;reason&quot;: &quot;MISSING_ASSUMPTION:TAX_EFFECTIVE_RATE&quot;
+      },
+      &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-netIncome&quot;,
+      &quot;trace&quot;: {
+        &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-netIncome&quot;,
+        &quot;engineCode&quot;: &quot;CASH_FLOW&quot;,
+        &quot;resultCode&quot;: &quot;netIncome&quot;,
+        &quot;formula&quot;: &quot;grossIncome × (1 - taxEffectiveRate)&quot;,
+        &quot;inputReferences&quot;: [
+          &quot;F-INC&quot;
+        ],
+        &quot;assumptionReferences&quot;: [],
+        &quot;notes&quot;: [],
+        &quot;recommendationCreated&quot;: false,
+        &quot;professionalJudgmentCreated&quot;: false
+      }
+    },
+    &quot;expenses&quot;: {
+      &quot;resultCode&quot;: &quot;expenses&quot;,
+      &quot;value&quot;: {
+        &quot;kind&quot;: &quot;EXACT&quot;,
+        &quot;value&quot;: 4000
+      },
+      &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-expenses&quot;,
+      &quot;trace&quot;: {
+        &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-expenses&quot;,
+        &quot;engineCode&quot;: &quot;CASH_FLOW&quot;,
+        &quot;resultCode&quot;: &quot;expenses&quot;,
+        &quot;formula&quot;: &quot;Σ normalized monthly expenses&quot;,
+        &quot;inputReferences&quot;: [
+          &quot;F-EXP&quot;
+        ],
+        &quot;assumptionReferences&quot;: [],
+        &quot;notes&quot;: [],
+        &quot;recommendationCreated&quot;: false,
+        &quot;professionalJudgmentCreated&quot;: false
+      }
+    },
+    &quot;debtService&quot;: {
+      &quot;resultCode&quot;: &quot;debtService&quot;,
+      &quot;value&quot;: {
+        &quot;kind&quot;: &quot;EXACT&quot;,
+        &quot;value&quot;: 0
+      },
+      &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-debtService&quot;,
+      &quot;trace&quot;: {
+        &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-debtService&quot;,
+        &quot;engineCode&quot;: &quot;CASH_FLOW&quot;,
+        &quot;resultCode&quot;: &quot;debtService&quot;,
+        &quot;formula&quot;: &quot;Σ monthly DEBT_SERVICE expenses&quot;,
+        &quot;inputReferences&quot;: [],
+        &quot;assumptionReferences&quot;: [],
+        &quot;notes&quot;: [],
+        &quot;recommendationCreated&quot;: false,
+        &quot;professionalJudgmentCreated&quot;: false
+      }
+    },
+    &quot;savings&quot;: {
+      &quot;resultCode&quot;: &quot;savings&quot;,
+      &quot;value&quot;: {
+        &quot;kind&quot;: &quot;UNKNOWN&quot;,
+        &quot;reason&quot;: &quot;MISSING_ASSUMPTION:TAX_EFFECTIVE_RATE&quot;
+      },
+      &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-savings&quot;,
+      &quot;trace&quot;: {
+        &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-savings&quot;,
+        &quot;engineCode&quot;: &quot;CASH_FLOW&quot;,
+        &quot;resultCode&quot;: &quot;savings&quot;,
+        &quot;formula&quot;: &quot;netIncome - expenses&quot;,
+        &quot;inputReferences&quot;: [
+          &quot;F-INC&quot;,
+          &quot;F-EXP&quot;
+        ],
+        &quot;assumptionReferences&quot;: [],
+        &quot;notes&quot;: [],
+        &quot;recommendationCreated&quot;: false,
+        &quot;professionalJudgmentCreated&quot;: false
+      }
+    },
+    &quot;surplus&quot;: {
+      &quot;resultCode&quot;: &quot;surplus&quot;,
+      &quot;value&quot;: {
+        &quot;kind&quot;: &quot;UNKNOWN&quot;,
+        &quot;reason&quot;: &quot;MISSING_ASSUMPTION:TAX_EFFECTIVE_RATE&quot;
+      },
+      &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-surplus&quot;,
+      &quot;trace&quot;: {
+        &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-surplus&quot;,
+        &quot;engineCode&quot;: &quot;CASH_FLOW&quot;,
+        &quot;resultCode&quot;: &quot;surplus&quot;,
+        &quot;formula&quot;: &quot;netIncome - expenses&quot;,
+        &quot;inputReferences&quot;: [
+          &quot;F-INC&quot;,
+          &quot;F-EXP&quot;
+        ],
+        &quot;assumptionReferences&quot;: [],
+        &quot;notes&quot;: [],
+        &quot;recommendationCreated&quot;: false,
+        &quot;professionalJudgmentCreated&quot;: false
+      }
+    },
+    &quot;deficit&quot;: {
+      &quot;resultCode&quot;: &quot;deficit&quot;,
+      &quot;value&quot;: {
+        &quot;kind&quot;: &quot;UNKNOWN&quot;,
+        &quot;reason&quot;: &quot;MISSING_ASSUMPTION:TAX_EFFECTIVE_RATE&quot;
+      },
+      &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-deficit&quot;,
+      &quot;trace&quot;: {
+        &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-deficit&quot;,
+        &quot;engineCode&quot;: &quot;CASH_FLOW&quot;,
+        &quot;resultCode&quot;: &quot;deficit&quot;,
+        &quot;formula&quot;: &quot;max(0, expenses - netIncome)&quot;,
+        &quot;inputReferences&quot;: [
+          &quot;F-INC&quot;,
+          &quot;F-EXP&quot;
+        ],
+        &quot;assumptionReferences&quot;: [],
+        &quot;notes&quot;: [],
+        &quot;recommendationCreated&quot;: false,
+        &quot;professionalJudgmentCreated&quot;: false
+      }
+    },
+    &quot;savingsRate&quot;: {
+      &quot;resultCode&quot;: &quot;savingsRate&quot;,
+      &quot;value&quot;: {
+        &quot;kind&quot;: &quot;UNKNOWN&quot;,
+        &quot;reason&quot;: &quot;MISSING_ASSUMPTION:TAX_EFFECTIVE_RATE&quot;
+      },
+      &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-savingsRate&quot;,
+      &quot;trace&quot;: {
+        &quot;traceId&quot;: &quot;TRACE-CASH_FLOW-savingsRate&quot;,
+        &quot;engineCode&quot;: &quot;CASH_FLOW&quot;,
+        &quot;resultCode&quot;: &quot;savingsRate&quot;,
+        &quot;formula&quot;: &quot;savings / netIncome&quot;,
+        &quot;inputReferences&quot;: [
+          &quot;F-INC&quot;,
+          &quot;F-EXP&quot;
+        ],
+        &quot;assumptionReferences&quot;: [],
+        &quot;notes&quot;: [],
+        &quot;recommendationCreated&quot;: false,
+        &quot;professionalJudgmentCreated&quot;: false
+      }
+    }
+  },
+  &quot;recommendationCreated&quot;: false,
+  &quot;professionalJudgmentCreated&quot;: false
+}</pre></section><section id="FIN-03"><h2>流动性 / Liquidity</h2><p>已有记录 / Recorded</p><pre>{
+  &quot;engineCode&quot;: &quot;LIQUIDITY&quot;,
+  &quot;status&quot;: &quot;CALCULATED&quot;,
+  &quot;metrics&quot;: {
+    &quot;liquidityRatio&quot;: {
+      &quot;resultCode&quot;: &quot;liquidityRatio&quot;,
+      &quot;value&quot;: {
+        &quot;kind&quot;: &quot;EXACT&quot;,
+        &quot;value&quot;: 0.08928571
+      },
+      &quot;traceId&quot;: &quot;TRACE-LIQUIDITY-liquidityRatio&quot;,
+      &quot;trace&quot;: {
+        &quot;traceId&quot;: &quot;TRACE-LIQUIDITY-liquidityRatio&quot;,
+        &quot;engineCode&quot;: &quot;LIQUIDITY&quot;,
+        &quot;resultCode&quot;: &quot;liquidityRatio&quot;,
+        &quot;formula&quot;: &quot;liquidAssets / grossAssets&quot;,
+        &quot;inputReferences&quot;: [
+          &quot;F-A-LIQ&quot;,
+          &quot;F-A-INV&quot;,
+          &quot;F-A-PROP&quot;
+        ],
+        &quot;assumptionReferences&quot;: [],
+        &quot;notes&quot;: [],
+        &quot;recommendationCreated&quot;: false,
+        &quot;professionalJudgmentCreated&quot;: false
+      }
+    },
+    &quot;liquidNetWorth&quot;: {
+      &quot;resultCode&quot;: &quot;liquidNetWorth&quot;,
+      &quot;value&quot;: {
+        &quot;kind&quot;: &quot;EXACT&quot;,
+        &quot;value&quot;: -200000
+      },
+      &quot;traceId&quot;: &quot;TRACE-LIQUIDITY-liquidNetWorth&quot;,
+      &quot;trace&quot;: {
+        &quot;traceId&quot;: &quot;TRACE-LIQUIDITY-liquidNetWorth&quot;,
+        &quot;engineCode&quot;: &quot;LIQUIDITY&quot;,
+        &quot;resultCode&quot;: &quot;liquidNetWorth&quot;,
+        &quot;formula&quot;: &quot;liquidAssets - liabilities&quot;,
+        &quot;inputReferences&quot;: [
+          &quot;F-A-LIQ&quot;,
+          &quot;F-LIAB-BAL&quot;
+        ],
+        &quot;assumptionReferences&quot;: [],
+        &quot;notes&quot;: [],
+        &quot;recommendationCreated&quot;: false,
+        &quot;professionalJudgmentCreated&quot;: false
+      }
+    },
+    &quot;monthsOfExpenses&quot;: {
+      &quot;resultCode&quot;: &quot;monthsOfExpenses&quot;,
+      &quot;value&quot;: {
+        &quot;kind&quot;: &quot;EXACT&quot;,
+        &quot;value&quot;: 12.5
+      },
+      &quot;traceId&quot;: &quot;TRACE-LIQUIDITY-monthsOfExpenses&quot;,
+      &quot;trace&quot;: {
+        &quot;traceId&quot;: &quot;TRACE-LIQUIDITY-monthsOfExpenses&quot;,
+        &quot;engineCode&quot;: &quot;LIQUIDITY&quot;,
+        &quot;resultCode&quot;: &quot;monthsOfExpenses&quot;,
+        &quot;formula&quot;: &quot;liquidAssets / monthlyExpenses&quot;,
+        &quot;inputReferences&quot;: [
+          &quot;F-A-LIQ&quot;,
+          &quot;F-EXP&quot;
+        ],
+        &quot;assumptionReferences&quot;: [],
+        &quot;notes&quot;: [],
+        &quot;recommendationCreated&quot;: false,
+        &quot;professionalJudgmentCreated&quot;: false
+      }
+    }
+  },
+  &quot;recommendationCreated&quot;: false,
+  &quot;professionalJudgmentCreated&quot;: false
+}</pre></section><section id="FIN-04"><h2>资产 / Assets</h2><p>已有记录 / Recorded</p><pre>[
+  {
+    &quot;assetId&quot;: &quot;A-LIQ&quot;,
+    &quot;assetType&quot;: &quot;CASH&quot;,
+    &quot;ownership&quot;: {
+      &quot;ownershipId&quot;: &quot;OWN-A-LIQ&quot;,
+      &quot;assetId&quot;: &quot;A-LIQ&quot;,
+      &quot;ownershipMode&quot;: &quot;SOLE&quot;,
+      &quot;ownerReferences&quot;: [
+        &quot;P1&quot;
+      ],
+      &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+      &quot;evidence&quot;: {
+        &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+        &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+        &quot;verifiedAt&quot;: null,
+        &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+        &quot;documentReference&quot;: null,
+        &quot;confidence&quot;: 0.6
+      }
+    },
+    &quot;valueFact&quot;: {
+      &quot;factId&quot;: &quot;F-A-LIQ&quot;,
+      &quot;factCode&quot;: &quot;ASSET_VALUE&quot;,
+      &quot;value&quot;: 50000,
+      &quot;valueRepresentation&quot;: &quot;EXACT&quot;,
+      &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+      &quot;evidence&quot;: {
+        &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+        &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+        &quot;verifiedAt&quot;: null,
+        &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+        &quot;documentReference&quot;: null,
+        &quot;confidence&quot;: 0.6
+      },
+      &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+      &quot;recordedAt&quot;: &quot;2026-10-08T00:00:00Z&quot;
+    },
+    &quot;jurisdiction&quot;: &quot;UNSPECIFIED&quot;,
+    &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+    &quot;evidence&quot;: {
+      &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+      &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+      &quot;verifiedAt&quot;: null,
+      &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+      &quot;documentReference&quot;: null,
+      &quot;confidence&quot;: 0.6
+    }
+  },
+  {
+    &quot;assetId&quot;: &quot;A-INV&quot;,
+    &quot;assetType&quot;: &quot;LISTED_SECURITY&quot;,
+    &quot;ownership&quot;: {
+      &quot;ownershipId&quot;: &quot;OWN-A-INV&quot;,
+      &quot;assetId&quot;: &quot;A-INV&quot;,
+      &quot;ownershipMode&quot;: &quot;SOLE&quot;,
+      &quot;ownerReferences&quot;: [
+        &quot;P1&quot;
+      ],
+      &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+      &quot;evidence&quot;: {
+        &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+        &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+        &quot;verifiedAt&quot;: null,
+        &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+        &quot;documentReference&quot;: null,
+        &quot;confidence&quot;: 0.6
+      }
+    },
+    &quot;valueFact&quot;: {
+      &quot;factId&quot;: &quot;F-A-INV&quot;,
+      &quot;factCode&quot;: &quot;ASSET_VALUE&quot;,
+      &quot;value&quot;: 10000,
+      &quot;valueRepresentation&quot;: &quot;EXACT&quot;,
+      &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+      &quot;evidence&quot;: {
+        &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+        &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+        &quot;verifiedAt&quot;: null,
+        &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+        &quot;documentReference&quot;: null,
+        &quot;confidence&quot;: 0.6
+      },
+      &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+      &quot;recordedAt&quot;: &quot;2026-10-08T00:00:00Z&quot;
+    },
+    &quot;jurisdiction&quot;: &quot;UNSPECIFIED&quot;,
+    &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+    &quot;evidence&quot;: {
+      &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+      &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+      &quot;verifiedAt&quot;: null,
+      &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+      &quot;documentReference&quot;: null,
+      &quot;confidence&quot;: 0.6
+    }
+  },
+  {
+    &quot;assetId&quot;: &quot;A-PROP&quot;,
+    &quot;assetType&quot;: &quot;PROPERTY&quot;,
+    &quot;ownership&quot;: {
+      &quot;ownershipId&quot;: &quot;OWN-A-PROP&quot;,
+      &quot;assetId&quot;: &quot;A-PROP&quot;,
+      &quot;ownershipMode&quot;: &quot;SOLE&quot;,
+      &quot;ownerReferences&quot;: [
+        &quot;P1&quot;
+      ],
+      &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+      &quot;evidence&quot;: {
+        &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+        &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+        &quot;verifiedAt&quot;: null,
+        &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+        &quot;documentReference&quot;: null,
+        &quot;confidence&quot;: 0.6
+      }
+    },
+    &quot;valueFact&quot;: {
+      &quot;factId&quot;: &quot;F-A-PROP&quot;,
+      &quot;factCode&quot;: &quot;ASSET_VALUE&quot;,
+      &quot;value&quot;: 500000,
+      &quot;valueRepresentation&quot;: &quot;EXACT&quot;,
+      &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+      &quot;evidence&quot;: {
+        &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+        &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+        &quot;verifiedAt&quot;: null,
+        &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+        &quot;documentReference&quot;: null,
+        &quot;confidence&quot;: 0.6
+      },
+      &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+      &quot;recordedAt&quot;: &quot;2026-10-08T00:00:00Z&quot;
+    },
+    &quot;jurisdiction&quot;: &quot;UNSPECIFIED&quot;,
+    &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+    &quot;evidence&quot;: {
+      &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+      &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+      &quot;verifiedAt&quot;: null,
+      &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+      &quot;documentReference&quot;: null,
+      &quot;confidence&quot;: 0.6
+    }
+  }
+]</pre></section><section id="FIN-05"><h2>负债 / Liabilities</h2><p>已有记录 / Recorded</p><pre>[
+  {
+    &quot;liabilityId&quot;: &quot;LIAB-1&quot;,
+    &quot;liabilityType&quot;: &quot;OTHER_LOAN&quot;,
+    &quot;borrowerReferences&quot;: [
+      &quot;P1&quot;
+    ],
+    &quot;balanceFact&quot;: {
+      &quot;factId&quot;: &quot;F-LIAB-BAL&quot;,
+      &quot;factCode&quot;: &quot;LIABILITY_BALANCE&quot;,
+      &quot;value&quot;: 250000,
+      &quot;valueRepresentation&quot;: &quot;EXACT&quot;,
+      &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+      &quot;evidence&quot;: {
+        &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+        &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+        &quot;verifiedAt&quot;: null,
+        &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+        &quot;documentReference&quot;: null,
+        &quot;confidence&quot;: 0.6
+      },
+      &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+      &quot;recordedAt&quot;: &quot;2026-10-08T00:00:00Z&quot;
+    },
+    &quot;currency&quot;: &quot;MYR&quot;,
+    &quot;repaymentFact&quot;: null,
+    &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+    &quot;evidence&quot;: {
+      &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+      &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+      &quot;verifiedAt&quot;: null,
+      &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+      &quot;documentReference&quot;: null,
+      &quot;confidence&quot;: 0.6
+    }
+  }
+]</pre></section><section id="FIN-06"><h2>保障 / Protection</h2><p>暂无记录 / Empty</p><pre>[]</pre></section><section id="FIN-07"><h2>目标 / Goals</h2><p>暂无记录 / Empty</p><pre>[]</pre></section><section id="FIN-08"><h2>持仓现实 / Portfolio Reality</h2><p>已有记录 / Recorded</p><pre>{
+  &quot;snapshotId&quot;: &quot;FRS-E9CE11B4B9E30C43685CE43F&quot;,
+  &quot;digest&quot;: &quot;6381d0d8602f28f161856d33c32491047c141de286bd4c01c9d94b5d06663d8a&quot;,
+  &quot;positions&quot;: [
+    {
+      &quot;assetId&quot;: &quot;A-LIQ&quot;,
+      &quot;instrumentId&quot;: null,
+      &quot;quantity&quot;: null,
+      &quot;quantitySourceTimestamp&quot;: null,
+      &quot;quantitySourceFactId&quot;: null,
+      &quot;sourceSnapshotDigest&quot;: &quot;6381d0d8602f28f161856d33c32491047c141de286bd4c01c9d94b5d06663d8a&quot;,
+      &quot;costBasis&quot;: null,
+      &quot;currency&quot;: &quot;MYR&quot;,
+      &quot;marketValue&quot;: 50000,
+      &quot;marketValueAsOf&quot;: &quot;2026-10-08&quot;,
+      &quot;marketValueAuthority&quot;: &quot;SELF_REPORTED&quot;,
+      &quot;account&quot;: null,
+      &quot;ownership&quot;: {
+        &quot;ownershipId&quot;: &quot;OWN-A-LIQ&quot;,
+        &quot;assetId&quot;: &quot;A-LIQ&quot;,
+        &quot;ownershipMode&quot;: &quot;SOLE&quot;,
+        &quot;ownerReferences&quot;: [
+          &quot;P1&quot;
+        ],
+        &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+        &quot;evidence&quot;: {
+          &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+          &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+          &quot;verifiedAt&quot;: null,
+          &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+          &quot;documentReference&quot;: null,
+          &quot;confidence&quot;: 0.6
+        }
+      },
+      &quot;liquidityClass&quot;: null,
+      &quot;sourceFactId&quot;: &quot;F-A-LIQ&quot;,
+      &quot;assetClass&quot;: &quot;CASH&quot;,
+      &quot;country&quot;: null,
+      &quot;sector&quot;: null,
+      &quot;issuer&quot;: null,
+      &quot;industry&quot;: null,
+      &quot;duration&quot;: null,
+      &quot;rateSensitivity&quot;: null
+    },
+    {
+      &quot;assetId&quot;: &quot;A-INV&quot;,
+      &quot;instrumentId&quot;: null,
+      &quot;quantity&quot;: null,
+      &quot;quantitySourceTimestamp&quot;: null,
+      &quot;quantitySourceFactId&quot;: null,
+      &quot;sourceSnapshotDigest&quot;: &quot;6381d0d8602f28f161856d33c32491047c141de286bd4c01c9d94b5d06663d8a&quot;,
+      &quot;costBasis&quot;: null,
+      &quot;currency&quot;: &quot;MYR&quot;,
+      &quot;marketValue&quot;: 10000,
+      &quot;marketValueAsOf&quot;: &quot;2026-10-08&quot;,
+      &quot;marketValueAuthority&quot;: &quot;SELF_REPORTED&quot;,
+      &quot;account&quot;: null,
+      &quot;ownership&quot;: {
+        &quot;ownershipId&quot;: &quot;OWN-A-INV&quot;,
+        &quot;assetId&quot;: &quot;A-INV&quot;,
+        &quot;ownershipMode&quot;: &quot;SOLE&quot;,
+        &quot;ownerReferences&quot;: [
+          &quot;P1&quot;
+        ],
+        &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+        &quot;evidence&quot;: {
+          &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+          &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+          &quot;verifiedAt&quot;: null,
+          &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+          &quot;documentReference&quot;: null,
+          &quot;confidence&quot;: 0.6
+        }
+      },
+      &quot;liquidityClass&quot;: null,
+      &quot;sourceFactId&quot;: &quot;F-A-INV&quot;,
+      &quot;assetClass&quot;: &quot;LISTED_SECURITY&quot;,
+      &quot;country&quot;: null,
+      &quot;sector&quot;: null,
+      &quot;issuer&quot;: null,
+      &quot;industry&quot;: null,
+      &quot;duration&quot;: null,
+      &quot;rateSensitivity&quot;: null
+    },
+    {
+      &quot;assetId&quot;: &quot;A-PROP&quot;,
+      &quot;instrumentId&quot;: null,
+      &quot;quantity&quot;: null,
+      &quot;quantitySourceTimestamp&quot;: null,
+      &quot;quantitySourceFactId&quot;: null,
+      &quot;sourceSnapshotDigest&quot;: &quot;6381d0d8602f28f161856d33c32491047c141de286bd4c01c9d94b5d06663d8a&quot;,
+      &quot;costBasis&quot;: null,
+      &quot;currency&quot;: &quot;MYR&quot;,
+      &quot;marketValue&quot;: 500000,
+      &quot;marketValueAsOf&quot;: &quot;2026-10-08&quot;,
+      &quot;marketValueAuthority&quot;: &quot;SELF_REPORTED&quot;,
+      &quot;account&quot;: null,
+      &quot;ownership&quot;: {
+        &quot;ownershipId&quot;: &quot;OWN-A-PROP&quot;,
+        &quot;assetId&quot;: &quot;A-PROP&quot;,
+        &quot;ownershipMode&quot;: &quot;SOLE&quot;,
+        &quot;ownerReferences&quot;: [
+          &quot;P1&quot;
+        ],
+        &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+        &quot;evidence&quot;: {
+          &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+          &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+          &quot;verifiedAt&quot;: null,
+          &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+          &quot;documentReference&quot;: null,
+          &quot;confidence&quot;: 0.6
+        }
+      },
+      &quot;liquidityClass&quot;: null,
+      &quot;sourceFactId&quot;: &quot;F-A-PROP&quot;,
+      &quot;assetClass&quot;: &quot;PROPERTY&quot;,
+      &quot;country&quot;: null,
+      &quot;sector&quot;: null,
+      &quot;issuer&quot;: null,
+      &quot;industry&quot;: null,
+      &quot;duration&quot;: null,
+      &quot;rateSensitivity&quot;: null
+    }
+  ],
+  &quot;parallelHoldingsStoreCreated&quot;: false
+}</pre></section><section id="FIN-09"><h2>集中程度 / Concentration</h2><p>已有记录 / Recorded</p><pre>{
+  &quot;snapshotId&quot;: &quot;FRS-E9CE11B4B9E30C43685CE43F&quot;,
+  &quot;dimensions&quot;: {
+    &quot;assetClass&quot;: [
+      {
+        &quot;assetId&quot;: &quot;A-LIQ&quot;,
+        &quot;value&quot;: &quot;CASH&quot;,
+        &quot;state&quot;: &quot;DECLARED&quot;,
+        &quot;amount&quot;: 50000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-INV&quot;,
+        &quot;value&quot;: &quot;LISTED_SECURITY&quot;,
+        &quot;state&quot;: &quot;DECLARED&quot;,
+        &quot;amount&quot;: 10000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-PROP&quot;,
+        &quot;value&quot;: &quot;PROPERTY&quot;,
+        &quot;state&quot;: &quot;DECLARED&quot;,
+        &quot;amount&quot;: 500000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      }
+    ],
+    &quot;country&quot;: [
+      {
+        &quot;assetId&quot;: &quot;A-LIQ&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 50000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-INV&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 10000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-PROP&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 500000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      }
+    ],
+    &quot;currency&quot;: [
+      {
+        &quot;assetId&quot;: &quot;A-LIQ&quot;,
+        &quot;value&quot;: &quot;MYR&quot;,
+        &quot;state&quot;: &quot;DECLARED&quot;,
+        &quot;amount&quot;: 50000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-INV&quot;,
+        &quot;value&quot;: &quot;MYR&quot;,
+        &quot;state&quot;: &quot;DECLARED&quot;,
+        &quot;amount&quot;: 10000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-PROP&quot;,
+        &quot;value&quot;: &quot;MYR&quot;,
+        &quot;state&quot;: &quot;DECLARED&quot;,
+        &quot;amount&quot;: 500000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      }
+    ],
+    &quot;sector&quot;: [
+      {
+        &quot;assetId&quot;: &quot;A-LIQ&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 50000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-INV&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 10000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-PROP&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 500000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      }
+    ],
+    &quot;issuer&quot;: [
+      {
+        &quot;assetId&quot;: &quot;A-LIQ&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 50000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-INV&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 10000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-PROP&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 500000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      }
+    ],
+    &quot;industry&quot;: [
+      {
+        &quot;assetId&quot;: &quot;A-LIQ&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 50000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-INV&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 10000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-PROP&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 500000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      }
+    ],
+    &quot;duration&quot;: [
+      {
+        &quot;assetId&quot;: &quot;A-LIQ&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 50000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-INV&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 10000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-PROP&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 500000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      }
+    ],
+    &quot;rateSensitivity&quot;: [
+      {
+        &quot;assetId&quot;: &quot;A-LIQ&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 50000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-INV&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 10000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      },
+      {
+        &quot;assetId&quot;: &quot;A-PROP&quot;,
+        &quot;value&quot;: null,
+        &quot;state&quot;: &quot;UNKNOWN&quot;,
+        &quot;amount&quot;: 500000,
+        &quot;currency&quot;: &quot;MYR&quot;
+      }
+    ]
+  },
+  &quot;concentration&quot;: {
+    &quot;equity&quot;: [
+      &quot;A-INV&quot;
+    ],
+    &quot;property&quot;: [
+      &quot;A-PROP&quot;
+    ],
+    &quot;business&quot;: [],
+    &quot;cash&quot;: [
+      &quot;A-LIQ&quot;
+    ]
+  },
+  &quot;diversificationConclusion&quot;: &quot;UNKNOWN&quot;,
+  &quot;limitation&quot;: &quot;Nominal asset count does not establish economic exposure diversification.&quot;
+}</pre></section><section id="FIN-10"><h2>市场背景 / Market Context</h2><p>已有记录 / Recorded</p><pre>{
+  &quot;state&quot;: &quot;SOURCE_LINKED_CONTEXT&quot;,
+  &quot;domains&quot;: {
+    &quot;regime&quot;: {
+      &quot;records&quot;: [],
+      &quot;state&quot;: &quot;UNKNOWN&quot;
+    },
+    &quot;rates&quot;: {
+      &quot;records&quot;: [],
+      &quot;state&quot;: &quot;UNKNOWN&quot;
+    },
+    &quot;FX&quot;: {
+      &quot;records&quot;: [],
+      &quot;state&quot;: &quot;UNKNOWN&quot;
+    },
+    &quot;sector&quot;: {
+      &quot;records&quot;: [],
+      &quot;state&quot;: &quot;UNKNOWN&quot;
+    },
+    &quot;valuation&quot;: {
+      &quot;records&quot;: [
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-VALUATION-US-AAPL-PE-3c29c842432f&quot;,
+          &quot;kind&quot;: &quot;VALUATION_OBSERVATION&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-VALUATION-US-AAPL-PE-3c29c842432f&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.AAPL valuation PE; snapshot=MOOMOO-US-VALUATION-01-US-AAPL-PE-2026-10-02T09-35-39-292Z; digest=3c29c842432f5786b94d892b863b459d85902f11676148144782b20937741bb7&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;3c29c842432f5786b94d892b863b459d85902f11676148144782b20937741bb7&quot;,
+          &quot;digest&quot;: &quot;3c29c842432f5786b94d892b863b459d85902f11676148144782b20937741bb7&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-VALUATION-US-AAPL-PB-f4706caecf82&quot;,
+          &quot;kind&quot;: &quot;VALUATION_OBSERVATION&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-VALUATION-US-AAPL-PB-f4706caecf82&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.AAPL valuation PB; snapshot=MOOMOO-US-VALUATION-01-US-AAPL-PB-2026-10-02T09-35-39-292Z; digest=f4706caecf825971bd267f1af9be901249f222397a9e74f03ac271dc2261b2dc&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;f4706caecf825971bd267f1af9be901249f222397a9e74f03ac271dc2261b2dc&quot;,
+          &quot;digest&quot;: &quot;f4706caecf825971bd267f1af9be901249f222397a9e74f03ac271dc2261b2dc&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-VALUATION-US-AAPL-PS-9f9dc4dd8a19&quot;,
+          &quot;kind&quot;: &quot;VALUATION_OBSERVATION&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-VALUATION-US-AAPL-PS-9f9dc4dd8a19&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.AAPL valuation PS; snapshot=MOOMOO-US-VALUATION-01-US-AAPL-PS-2026-10-02T09-35-39-292Z; digest=9f9dc4dd8a190388564e461afac95a6184bc9cda1a689abd4a57a8f0e1a1e729&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;9f9dc4dd8a190388564e461afac95a6184bc9cda1a689abd4a57a8f0e1a1e729&quot;,
+          &quot;digest&quot;: &quot;9f9dc4dd8a190388564e461afac95a6184bc9cda1a689abd4a57a8f0e1a1e729&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-VALUATION-US-MSFT-PE-1c269a237a05&quot;,
+          &quot;kind&quot;: &quot;VALUATION_OBSERVATION&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-VALUATION-US-MSFT-PE-1c269a237a05&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.MSFT valuation PE; snapshot=MOOMOO-US-VALUATION-01-US-MSFT-PE-2026-10-02T09-35-39-292Z; digest=1c269a237a05f94d9551e1f2bc85239a1243964b502aa6bcd083e3932c4f22c3&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;1c269a237a05f94d9551e1f2bc85239a1243964b502aa6bcd083e3932c4f22c3&quot;,
+          &quot;digest&quot;: &quot;1c269a237a05f94d9551e1f2bc85239a1243964b502aa6bcd083e3932c4f22c3&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-VALUATION-US-MSFT-PB-d97df01f3fb6&quot;,
+          &quot;kind&quot;: &quot;VALUATION_OBSERVATION&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-VALUATION-US-MSFT-PB-d97df01f3fb6&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.MSFT valuation PB; snapshot=MOOMOO-US-VALUATION-01-US-MSFT-PB-2026-10-02T09-35-39-292Z; digest=d97df01f3fb601dbee36027d7a62b4068a0e7c348d7c21f5f9991fdd24aff273&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;d97df01f3fb601dbee36027d7a62b4068a0e7c348d7c21f5f9991fdd24aff273&quot;,
+          &quot;digest&quot;: &quot;d97df01f3fb601dbee36027d7a62b4068a0e7c348d7c21f5f9991fdd24aff273&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-VALUATION-US-MSFT-PS-05b72a5eafa4&quot;,
+          &quot;kind&quot;: &quot;VALUATION_OBSERVATION&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-VALUATION-US-MSFT-PS-05b72a5eafa4&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.MSFT valuation PS; snapshot=MOOMOO-US-VALUATION-01-US-MSFT-PS-2026-10-02T09-35-39-292Z; digest=05b72a5eafa4cec42ff6a43c580151049d09fc4b0ef4211c1cbd87da3e7d5c52&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;05b72a5eafa4cec42ff6a43c580151049d09fc4b0ef4211c1cbd87da3e7d5c52&quot;,
+          &quot;digest&quot;: &quot;05b72a5eafa4cec42ff6a43c580151049d09fc4b0ef4211c1cbd87da3e7d5c52&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-VALUATION-US-AMZN-PE-e6c727c266ae&quot;,
+          &quot;kind&quot;: &quot;VALUATION_OBSERVATION&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-VALUATION-US-AMZN-PE-e6c727c266ae&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.AMZN valuation PE; snapshot=MOOMOO-US-VALUATION-01-US-AMZN-PE-2026-10-02T09-35-39-292Z; digest=e6c727c266ae740a9ccc9033b92193af58753be5d854d3702acce78a87956d6b&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;e6c727c266ae740a9ccc9033b92193af58753be5d854d3702acce78a87956d6b&quot;,
+          &quot;digest&quot;: &quot;e6c727c266ae740a9ccc9033b92193af58753be5d854d3702acce78a87956d6b&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-VALUATION-US-AMZN-PB-b4bd35f5f4b2&quot;,
+          &quot;kind&quot;: &quot;VALUATION_OBSERVATION&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-VALUATION-US-AMZN-PB-b4bd35f5f4b2&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.AMZN valuation PB; snapshot=MOOMOO-US-VALUATION-01-US-AMZN-PB-2026-10-02T09-35-39-292Z; digest=b4bd35f5f4b28fdd4286ae8a74bb0ce0b35d2ca5ee25c2de639d5bb7607451d1&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;b4bd35f5f4b28fdd4286ae8a74bb0ce0b35d2ca5ee25c2de639d5bb7607451d1&quot;,
+          &quot;digest&quot;: &quot;b4bd35f5f4b28fdd4286ae8a74bb0ce0b35d2ca5ee25c2de639d5bb7607451d1&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-VALUATION-US-AMZN-PS-cbf4e81dcb13&quot;,
+          &quot;kind&quot;: &quot;VALUATION_OBSERVATION&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-VALUATION-US-AMZN-PS-cbf4e81dcb13&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.AMZN valuation PS; snapshot=MOOMOO-US-VALUATION-01-US-AMZN-PS-2026-10-02T09-35-39-292Z; digest=cbf4e81dcb131b1493e6e11775bd7486fea11d07e98ea9659e24bfdd7ddf565c&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;cbf4e81dcb131b1493e6e11775bd7486fea11d07e98ea9659e24bfdd7ddf565c&quot;,
+          &quot;digest&quot;: &quot;cbf4e81dcb131b1493e6e11775bd7486fea11d07e98ea9659e24bfdd7ddf565c&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-VALUATION-US-NVDA-PE-d9c7cc989693&quot;,
+          &quot;kind&quot;: &quot;VALUATION_OBSERVATION&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-VALUATION-US-NVDA-PE-d9c7cc989693&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.NVDA valuation PE; snapshot=MOOMOO-US-VALUATION-01-US-NVDA-PE-2026-10-02T09-35-39-292Z; digest=d9c7cc98969363a0b0de1bebd13b2004ad2606ab600240030e910082ea9d1b49&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;d9c7cc98969363a0b0de1bebd13b2004ad2606ab600240030e910082ea9d1b49&quot;,
+          &quot;digest&quot;: &quot;d9c7cc98969363a0b0de1bebd13b2004ad2606ab600240030e910082ea9d1b49&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-VALUATION-US-NVDA-PB-d808f14aa5be&quot;,
+          &quot;kind&quot;: &quot;VALUATION_OBSERVATION&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-VALUATION-US-NVDA-PB-d808f14aa5be&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.NVDA valuation PB; snapshot=MOOMOO-US-VALUATION-01-US-NVDA-PB-2026-10-02T09-35-39-292Z; digest=d808f14aa5be25c6f3ef48ad09aa9882ec3798f40fd3995a8d8699533a0e621a&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;d808f14aa5be25c6f3ef48ad09aa9882ec3798f40fd3995a8d8699533a0e621a&quot;,
+          &quot;digest&quot;: &quot;d808f14aa5be25c6f3ef48ad09aa9882ec3798f40fd3995a8d8699533a0e621a&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-VALUATION-US-NVDA-PS-2c3b0489ae98&quot;,
+          &quot;kind&quot;: &quot;VALUATION_OBSERVATION&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-VALUATION-US-NVDA-PS-2c3b0489ae98&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.NVDA valuation PS; snapshot=MOOMOO-US-VALUATION-01-US-NVDA-PS-2026-10-02T09-35-39-292Z; digest=2c3b0489ae9814781c4e1c5652220ac142de40c3d75a0c428e70790c89791223&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;2c3b0489ae9814781c4e1c5652220ac142de40c3d75a0c428e70790c89791223&quot;,
+          &quot;digest&quot;: &quot;2c3b0489ae9814781c4e1c5652220ac142de40c3d75a0c428e70790c89791223&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-VALUATION-US-JPM-PE-00b1b7654c0a&quot;,
+          &quot;kind&quot;: &quot;VALUATION_OBSERVATION&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-VALUATION-US-JPM-PE-00b1b7654c0a&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.JPM valuation PE; snapshot=MOOMOO-US-VALUATION-01-US-JPM-PE-2026-10-02T09-35-39-292Z; digest=00b1b7654c0aa8340ece078e254355462d9812f5c42158f4f03c8782cfe4b35e&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;00b1b7654c0aa8340ece078e254355462d9812f5c42158f4f03c8782cfe4b35e&quot;,
+          &quot;digest&quot;: &quot;00b1b7654c0aa8340ece078e254355462d9812f5c42158f4f03c8782cfe4b35e&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-VALUATION-US-JPM-PB-9351604c22ff&quot;,
+          &quot;kind&quot;: &quot;VALUATION_OBSERVATION&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-VALUATION-US-JPM-PB-9351604c22ff&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.JPM valuation PB; snapshot=MOOMOO-US-VALUATION-01-US-JPM-PB-2026-10-02T09-35-39-292Z; digest=9351604c22ff142c67197c1d7926dfebb4f4f4de8de3dd5e2d746800460a24bd&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;9351604c22ff142c67197c1d7926dfebb4f4f4de8de3dd5e2d746800460a24bd&quot;,
+          &quot;digest&quot;: &quot;9351604c22ff142c67197c1d7926dfebb4f4f4de8de3dd5e2d746800460a24bd&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-VALUATION-US-JPM-PS-dc08bcbc4299&quot;,
+          &quot;kind&quot;: &quot;VALUATION_OBSERVATION&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-VALUATION-US-JPM-PS-dc08bcbc4299&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.JPM valuation PS; snapshot=MOOMOO-US-VALUATION-01-US-JPM-PS-2026-10-02T09-35-39-292Z; digest=dc08bcbc4299b932f6988c604127cf5d73bb3b2001812867f444d3ee15de4cc7&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;dc08bcbc4299b932f6988c604127cf5d73bb3b2001812867f444d3ee15de4cc7&quot;,
+          &quot;digest&quot;: &quot;dc08bcbc4299b932f6988c604127cf5d73bb3b2001812867f444d3ee15de4cc7&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        }
+      ],
+      &quot;state&quot;: &quot;UNKNOWN&quot;
+    },
+    &quot;liquidity&quot;: {
+      &quot;records&quot;: [],
+      &quot;state&quot;: &quot;UNKNOWN&quot;
+    },
+    &quot;capitalFlows&quot;: {
+      &quot;records&quot;: [
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-SPY-af2addfaea49&quot;,
+          &quot;kind&quot;: &quot;MARKET_FLOW&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-SPY-af2addfaea49&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.SPY in_flow 2025-10-02..2026-10-01; snapshot=MOOMOO-US-CAPITAL-FLOW-01-US-SPY-2026-10-02T09-35-39-292Z; digest=af2addfaea49da24984b411e3497b680eb379bef624648323bd1ce00e2a18f83&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;af2addfaea49da24984b411e3497b680eb379bef624648323bd1ce00e2a18f83&quot;,
+          &quot;digest&quot;: &quot;af2addfaea49da24984b411e3497b680eb379bef624648323bd1ce00e2a18f83&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-QQQ-c736b3c5b706&quot;,
+          &quot;kind&quot;: &quot;MARKET_FLOW&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-QQQ-c736b3c5b706&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.QQQ in_flow 2025-10-02..2026-10-01; snapshot=MOOMOO-US-CAPITAL-FLOW-01-US-QQQ-2026-10-02T09-35-39-292Z; digest=c736b3c5b7066cd269dac69ea8af99915b29b8d31b8dea383f6838a06f9931d4&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;c736b3c5b7066cd269dac69ea8af99915b29b8d31b8dea383f6838a06f9931d4&quot;,
+          &quot;digest&quot;: &quot;c736b3c5b7066cd269dac69ea8af99915b29b8d31b8dea383f6838a06f9931d4&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-XLK-303fde7c04a7&quot;,
+          &quot;kind&quot;: &quot;MARKET_FLOW&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-XLK-303fde7c04a7&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.XLK in_flow 2025-10-02..2026-10-01; snapshot=MOOMOO-US-CAPITAL-FLOW-01-US-XLK-2026-10-02T09-35-39-292Z; digest=303fde7c04a758c25539c557920e5b3a6492a2997013c520c6a185bda1194ae2&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;303fde7c04a758c25539c557920e5b3a6492a2997013c520c6a185bda1194ae2&quot;,
+          &quot;digest&quot;: &quot;303fde7c04a758c25539c557920e5b3a6492a2997013c520c6a185bda1194ae2&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-XLF-ef5988702834&quot;,
+          &quot;kind&quot;: &quot;MARKET_FLOW&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-XLF-ef5988702834&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.XLF in_flow 2025-10-02..2026-10-01; snapshot=MOOMOO-US-CAPITAL-FLOW-01-US-XLF-2026-10-02T09-35-39-292Z; digest=ef59887028344ce6a30fdf458dedfb98f4c51b070a8947e6169686e22c4f3f9f&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;ef59887028344ce6a30fdf458dedfb98f4c51b070a8947e6169686e22c4f3f9f&quot;,
+          &quot;digest&quot;: &quot;ef59887028344ce6a30fdf458dedfb98f4c51b070a8947e6169686e22c4f3f9f&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-XLI-3d5b79033370&quot;,
+          &quot;kind&quot;: &quot;MARKET_FLOW&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-XLI-3d5b79033370&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.XLI in_flow 2025-10-02..2026-10-01; snapshot=MOOMOO-US-CAPITAL-FLOW-01-US-XLI-2026-10-02T09-35-39-292Z; digest=3d5b790333700732b5dff29967565828571cba8ea91bddfbf975c699511cf046&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;3d5b790333700732b5dff29967565828571cba8ea91bddfbf975c699511cf046&quot;,
+          &quot;digest&quot;: &quot;3d5b790333700732b5dff29967565828571cba8ea91bddfbf975c699511cf046&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-XLY-214848ca8020&quot;,
+          &quot;kind&quot;: &quot;MARKET_FLOW&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-XLY-214848ca8020&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.XLY in_flow 2025-10-02..2026-10-01; snapshot=MOOMOO-US-CAPITAL-FLOW-01-US-XLY-2026-10-02T09-35-39-292Z; digest=214848ca8020c32151435e041d6826366c964483f45b322dbadf3df717f877c7&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;214848ca8020c32151435e041d6826366c964483f45b322dbadf3df717f877c7&quot;,
+          &quot;digest&quot;: &quot;214848ca8020c32151435e041d6826366c964483f45b322dbadf3df717f877c7&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-XLE-b3a889fce7db&quot;,
+          &quot;kind&quot;: &quot;MARKET_FLOW&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-XLE-b3a889fce7db&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.XLE in_flow 2025-10-02..2026-10-01; snapshot=MOOMOO-US-CAPITAL-FLOW-01-US-XLE-2026-10-02T09-35-39-292Z; digest=b3a889fce7db5ab7d00849b7747a22f3eff6d1ca04e29fe5c289927759c2231d&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;b3a889fce7db5ab7d00849b7747a22f3eff6d1ca04e29fe5c289927759c2231d&quot;,
+          &quot;digest&quot;: &quot;b3a889fce7db5ab7d00849b7747a22f3eff6d1ca04e29fe5c289927759c2231d&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        },
+        {
+          &quot;claimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-XLV-1d33a605f2db&quot;,
+          &quot;kind&quot;: &quot;MARKET_FLOW&quot;,
+          &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+          &quot;sourceClaimId&quot;: &quot;MOOMOO-CAPITAL-FLOW-US-XLV-1d33a605f2db&quot;,
+          &quot;sourceLocator&quot;: {
+            &quot;type&quot;: &quot;PROVIDER_SERIES_WINDOW&quot;,
+            &quot;value&quot;: &quot;US.XLV in_flow 2025-10-02..2026-10-01; snapshot=MOOMOO-US-CAPITAL-FLOW-01-US-XLV-2026-10-02T09-35-39-292Z; digest=1d33a605f2dbeca301be4907d811005e7fc629fcf683acc2b4aabf5b07f42bc9&quot;
+          },
+          &quot;asOf&quot;: null,
+          &quot;retrievedAt&quot;: &quot;2026-10-02T09:35:39.292Z&quot;,
+          &quot;provider&quot;: &quot;MOOMOO_OPENAPI&quot;,
+          &quot;instrument&quot;: null,
+          &quot;currency&quot;: null,
+          &quot;jurisdiction&quot;: &quot;US&quot;,
+          &quot;freshness&quot;: &quot;UNKNOWN&quot;,
+          &quot;sourceFreshnessState&quot;: &quot;FRESH&quot;,
+          &quot;sourceVersion&quot;: &quot;1d33a605f2dbeca301be4907d811005e7fc629fcf683acc2b4aabf5b07f42bc9&quot;,
+          &quot;digest&quot;: &quot;1d33a605f2dbeca301be4907d811005e7fc629fcf683acc2b4aabf5b07f42bc9&quot;,
+          &quot;value&quot;: null,
+          &quot;state&quot;: &quot;UNKNOWN&quot;,
+          &quot;authorityClass&quot;: &quot;MARKET_DATA_PROVIDER&quot;,
+          &quot;methodology&quot;: null,
+          &quot;limits&quot;: [
+            &quot;Retrieval date is not observation date.&quot;,
+            &quot;Claim prose is not parsed into holdings, prices or currency.&quot;
+          ]
+        }
+      ],
+      &quot;state&quot;: &quot;UNKNOWN&quot;
+    },
+    &quot;stress&quot;: {
+      &quot;records&quot;: [],
+      &quot;state&quot;: &quot;UNKNOWN&quot;
+    }
+  },
+  &quot;predictionCreated&quot;: false,
+  &quot;adviceCreated&quot;: false
+}</pre></section><section id="FIN-11"><h2>宏观背景 / Macro Context</h2><p>已有记录 / Recorded</p><pre>{
+  &quot;sourceRef&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-current-evidence-ir-v1.json&quot;,
+  &quot;records&quot;: [],
+  &quot;financialFindingCreated&quot;: false
+}</pre></section><section id="FIN-12"><h2>依赖 / Dependencies</h2><p>已有记录 / Recorded</p><pre>{
+  &quot;snapshotId&quot;: &quot;FRS-E9CE11B4B9E30C43685CE43F&quot;,
+  &quot;components&quot;: {
+    &quot;salary&quot;: [],
+    &quot;business&quot;: [],
+    &quot;property&quot;: [
+      {
+        &quot;assetId&quot;: &quot;A-PROP&quot;,
+        &quot;assetType&quot;: &quot;PROPERTY&quot;,
+        &quot;ownership&quot;: {
+          &quot;ownershipId&quot;: &quot;OWN-A-PROP&quot;,
+          &quot;assetId&quot;: &quot;A-PROP&quot;,
+          &quot;ownershipMode&quot;: &quot;SOLE&quot;,
+          &quot;ownerReferences&quot;: [
+            &quot;P1&quot;
+          ],
+          &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+          &quot;evidence&quot;: {
+            &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+            &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+            &quot;verifiedAt&quot;: null,
+            &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+            &quot;documentReference&quot;: null,
+            &quot;confidence&quot;: 0.6
+          }
+        },
+        &quot;valueFact&quot;: {
+          &quot;factId&quot;: &quot;F-A-PROP&quot;,
+          &quot;factCode&quot;: &quot;ASSET_VALUE&quot;,
+          &quot;value&quot;: 500000,
+          &quot;valueRepresentation&quot;: &quot;EXACT&quot;,
+          &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+          &quot;evidence&quot;: {
+            &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+            &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+            &quot;verifiedAt&quot;: null,
+            &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+            &quot;documentReference&quot;: null,
+            &quot;confidence&quot;: 0.6
+          },
+          &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+          &quot;recordedAt&quot;: &quot;2026-10-08T00:00:00Z&quot;
+        },
+        &quot;jurisdiction&quot;: &quot;UNSPECIFIED&quot;,
+        &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+        &quot;evidence&quot;: {
+          &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+          &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+          &quot;verifiedAt&quot;: null,
+          &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+          &quot;documentReference&quot;: null,
+          &quot;confidence&quot;: 0.6
+        }
+      }
+    ],
+    &quot;portfolio&quot;: [
+      {
+        &quot;assetId&quot;: &quot;A-INV&quot;,
+        &quot;assetType&quot;: &quot;LISTED_SECURITY&quot;,
+        &quot;ownership&quot;: {
+          &quot;ownershipId&quot;: &quot;OWN-A-INV&quot;,
+          &quot;assetId&quot;: &quot;A-INV&quot;,
+          &quot;ownershipMode&quot;: &quot;SOLE&quot;,
+          &quot;ownerReferences&quot;: [
+            &quot;P1&quot;
+          ],
+          &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+          &quot;evidence&quot;: {
+            &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+            &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+            &quot;verifiedAt&quot;: null,
+            &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+            &quot;documentReference&quot;: null,
+            &quot;confidence&quot;: 0.6
+          }
+        },
+        &quot;valueFact&quot;: {
+          &quot;factId&quot;: &quot;F-A-INV&quot;,
+          &quot;factCode&quot;: &quot;ASSET_VALUE&quot;,
+          &quot;value&quot;: 10000,
+          &quot;valueRepresentation&quot;: &quot;EXACT&quot;,
+          &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+          &quot;evidence&quot;: {
+            &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+            &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+            &quot;verifiedAt&quot;: null,
+            &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+            &quot;documentReference&quot;: null,
+            &quot;confidence&quot;: 0.6
+          },
+          &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+          &quot;recordedAt&quot;: &quot;2026-10-08T00:00:00Z&quot;
+        },
+        &quot;jurisdiction&quot;: &quot;UNSPECIFIED&quot;,
+        &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+        &quot;evidence&quot;: {
+          &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+          &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+          &quot;verifiedAt&quot;: null,
+          &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+          &quot;documentReference&quot;: null,
+          &quot;confidence&quot;: 0.6
+        }
+      }
+    ],
+    &quot;cash&quot;: [
+      {
+        &quot;assetId&quot;: &quot;A-LIQ&quot;,
+        &quot;assetType&quot;: &quot;CASH&quot;,
+        &quot;ownership&quot;: {
+          &quot;ownershipId&quot;: &quot;OWN-A-LIQ&quot;,
+          &quot;assetId&quot;: &quot;A-LIQ&quot;,
+          &quot;ownershipMode&quot;: &quot;SOLE&quot;,
+          &quot;ownerReferences&quot;: [
+            &quot;P1&quot;
+          ],
+          &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+          &quot;evidence&quot;: {
+            &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+            &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+            &quot;verifiedAt&quot;: null,
+            &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+            &quot;documentReference&quot;: null,
+            &quot;confidence&quot;: 0.6
+          }
+        },
+        &quot;valueFact&quot;: {
+          &quot;factId&quot;: &quot;F-A-LIQ&quot;,
+          &quot;factCode&quot;: &quot;ASSET_VALUE&quot;,
+          &quot;value&quot;: 50000,
+          &quot;valueRepresentation&quot;: &quot;EXACT&quot;,
+          &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+          &quot;evidence&quot;: {
+            &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+            &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+            &quot;verifiedAt&quot;: null,
+            &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+            &quot;documentReference&quot;: null,
+            &quot;confidence&quot;: 0.6
+          },
+          &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+          &quot;recordedAt&quot;: &quot;2026-10-08T00:00:00Z&quot;
+        },
+        &quot;jurisdiction&quot;: &quot;UNSPECIFIED&quot;,
+        &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+        &quot;evidence&quot;: {
+          &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+          &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+          &quot;verifiedAt&quot;: null,
+          &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+          &quot;documentReference&quot;: null,
+          &quot;confidence&quot;: 0.6
+        }
+      }
+    ],
+    &quot;debt&quot;: [
+      {
+        &quot;liabilityId&quot;: &quot;LIAB-1&quot;,
+        &quot;liabilityType&quot;: &quot;OTHER_LOAN&quot;,
+        &quot;borrowerReferences&quot;: [
+          &quot;P1&quot;
+        ],
+        &quot;balanceFact&quot;: {
+          &quot;factId&quot;: &quot;F-LIAB-BAL&quot;,
+          &quot;factCode&quot;: &quot;LIABILITY_BALANCE&quot;,
+          &quot;value&quot;: 250000,
+          &quot;valueRepresentation&quot;: &quot;EXACT&quot;,
+          &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+          &quot;evidence&quot;: {
+            &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+            &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+            &quot;verifiedAt&quot;: null,
+            &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+            &quot;documentReference&quot;: null,
+            &quot;confidence&quot;: 0.6
+          },
+          &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+          &quot;recordedAt&quot;: &quot;2026-10-08T00:00:00Z&quot;
+        },
+        &quot;currency&quot;: &quot;MYR&quot;,
+        &quot;repaymentFact&quot;: null,
+        &quot;disclosureState&quot;: &quot;SELF_REPORTED&quot;,
+        &quot;evidence&quot;: {
+          &quot;evidenceType&quot;: &quot;SELF_DECLARATION&quot;,
+          &quot;source&quot;: &quot;FINANCIAL_RUNTIME_QUICK_INTAKE&quot;,
+          &quot;verifiedAt&quot;: null,
+          &quot;effectiveDate&quot;: &quot;2026-10-08&quot;,
+          &quot;documentReference&quot;: null,
+          &quot;confidence&quot;: 0.6
+        }
+      }
+    ],
+    &quot;guarantees&quot;: [],
+    &quot;insurance&quot;: [],
+    &quot;currency&quot;: {
+      &quot;baseCurrency&quot;: &quot;MYR&quot;
+    }
+  },
+  &quot;nativeUnitsPreserved&quot;: true,
+  &quot;aggregateAcrossIncomeStockDebtCreated&quot;: false
+}</pre></section><section id="FIN-13"><h2>风险 / Risks</h2><p>已有记录 / Recorded</p><pre>[
+  {
+    &quot;findingId&quot;: &quot;FAR-0001-LIQUIDITY_STRENGTH&quot;,
+    &quot;findingCode&quot;: &quot;LIQUIDITY_STRENGTH&quot;,
+    &quot;findingType&quot;: &quot;STRENGTH&quot;,
+    &quot;domain&quot;: &quot;LIQUIDITY&quot;,
+    &quot;sourceCalculationReferences&quot;: [
+      &quot;FCR-PC-REPLAY:LIQUIDITY:monthsOfExpenses&quot;
+    ],
+    &quot;factReferences&quot;: [
+      &quot;F-A-LIQ&quot;,
+      &quot;F-EXP&quot;
+    ],
+    &quot;assumptionReferences&quot;: [],
+    &quot;severityState&quot;: &quot;UNSPECIFIED&quot;,
+    &quot;confidence&quot;: {
+      &quot;state&quot;: &quot;MEDIUM&quot;,
+      &quot;score&quot;: 0.6,
+      &quot;basis&quot;: {
+        &quot;valueKinds&quot;: [
+          &quot;EXACT&quot;
+        ],
+        &quot;factCount&quot;: 2,
+        &quot;evidenceState&quot;: &quot;SELF_REPORTED_OR_UNVERIFIED&quot;
+      }
+    },
+    &quot;evidenceState&quot;: &quot;SELF_REPORTED_OR_UNVERIFIED&quot;,
+    &quot;limitations&quot;: [],
+    &quot;policyReferences&quot;: [
+      &quot;FAR-P-LIQ-STRONG&quot;
+    ],
+    &quot;summary&quot;: &quot;Liquidity coverage exceeds the versioned strength threshold relative to current expenses.&quot;,
+    &quot;provenance&quot;: {
+      &quot;fcrResultDigest&quot;: &quot;047705b3fe7e453e3b76f055fe2e615fd30e2e8c3ef69d9dfd06162abffb5647&quot;,
+      &quot;calculationReferences&quot;: [
+        &quot;FCR-PC-REPLAY:LIQUIDITY:monthsOfExpenses&quot;
+      ],
+      &quot;fcrTraceReferences&quot;: [
+        &quot;TRACE-LIQUIDITY-monthsOfExpenses&quot;
+      ],
+      &quot;fdrSnapshotId&quot;: &quot;FRS-E9CE11B4B9E30C43685CE43F&quot;,
+      &quot;fdrDigest&quot;: &quot;6381d0d8602f28f161856d33c32491047c141de286bd4c01c9d94b5d06663d8a&quot;,
+      &quot;comparisonResultDigests&quot;: [],
+      &quot;factReferences&quot;: [
+        &quot;F-A-LIQ&quot;,
+        &quot;F-EXP&quot;
+      ],
+      &quot;assumptionReferences&quot;: []
+    }
+  },
+  {
+    &quot;findingId&quot;: &quot;FAR-0002-PROPERTY_CONCENTRATION&quot;,
+    &quot;findingCode&quot;: &quot;PROPERTY_CONCENTRATION&quot;,
+    &quot;findingType&quot;: &quot;CONCENTRATION&quot;,
+    &quot;domain&quot;: &quot;ASSET_CONCENTRATION&quot;,
+    &quot;sourceCalculationReferences&quot;: [
+      &quot;FCR-PC-REPLAY:ALLOCATION:propertyPercent&quot;
+    ],
+    &quot;factReferences&quot;: [
+      &quot;F-A-PROP&quot;,
+      &quot;F-A-LIQ&quot;,
+      &quot;F-A-INV&quot;
+    ],
+    &quot;assumptionReferences&quot;: [],
+    &quot;severityState&quot;: &quot;UNSPECIFIED&quot;,
+    &quot;confidence&quot;: {
+      &quot;state&quot;: &quot;MEDIUM&quot;,
+      &quot;score&quot;: 0.6,
+      &quot;basis&quot;: {
+        &quot;valueKinds&quot;: [
+          &quot;EXACT&quot;
+        ],
+        &quot;factCount&quot;: 3,
+        &quot;evidenceState&quot;: &quot;SELF_REPORTED_OR_UNVERIFIED&quot;
+      }
+    },
+    &quot;evidenceState&quot;: &quot;SELF_REPORTED_OR_UNVERIFIED&quot;,
+    &quot;limitations&quot;: [],
+    &quot;policyReferences&quot;: [
+      &quot;FAR-P-PROP-CONC&quot;
+    ],
+    &quot;summary&quot;: &quot;Property allocation exceeds the versioned concentration threshold.&quot;,
+    &quot;provenance&quot;: {
+      &quot;fcrResultDigest&quot;: &quot;047705b3fe7e453e3b76f055fe2e615fd30e2e8c3ef69d9dfd06162abffb5647&quot;,
+      &quot;calculationReferences&quot;: [
+        &quot;FCR-PC-REPLAY:ALLOCATION:propertyPercent&quot;
+      ],
+      &quot;fcrTraceReferences&quot;: [
+        &quot;TRACE-ALLOCATION-propertyPercent&quot;
+      ],
+      &quot;fdrSnapshotId&quot;: &quot;FRS-E9CE11B4B9E30C43685CE43F&quot;,
+      &quot;fdrDigest&quot;: &quot;6381d0d8602f28f161856d33c32491047c141de286bd4c01c9d94b5d06663d8a&quot;,
+      &quot;comparisonResultDigests&quot;: [],
+      &quot;factReferences&quot;: [
+        &quot;F-A-PROP&quot;,
+        &quot;F-A-LIQ&quot;,
+        &quot;F-A-INV&quot;
+      ],
+      &quot;assumptionReferences&quot;: []
+    }
+  },
+  {
+    &quot;findingId&quot;: &quot;FAR-0003-LOW_LIQUIDITY_CONCENTRATION&quot;,
+    &quot;findingCode&quot;: &quot;LOW_LIQUIDITY_CONCENTRATION&quot;,
+    &quot;findingType&quot;: &quot;CONCENTRATION&quot;,
+    &quot;domain&quot;: &quot;ASSET_CONCENTRATION&quot;,
+    &quot;sourceCalculationReferences&quot;: [
+      &quot;FCR-PC-REPLAY:ALLOCATION:cashPercent&quot;
+    ],
+    &quot;factReferences&quot;: [
+      &quot;F-A-LIQ&quot;,
+      &quot;F-A-INV&quot;,
+      &quot;F-A-PROP&quot;
+    ],
+    &quot;assumptionReferences&quot;: [],
+    &quot;severityState&quot;: &quot;UNSPECIFIED&quot;,
+    &quot;confidence&quot;: {
+      &quot;state&quot;: &quot;MEDIUM&quot;,
+      &quot;score&quot;: 0.6,
+      &quot;basis&quot;: {
+        &quot;valueKinds&quot;: [
+          &quot;EXACT&quot;
+        ],
+        &quot;factCount&quot;: 3,
+        &quot;evidenceState&quot;: &quot;SELF_REPORTED_OR_UNVERIFIED&quot;
+      }
+    },
+    &quot;evidenceState&quot;: &quot;SELF_REPORTED_OR_UNVERIFIED&quot;,
+    &quot;limitations&quot;: [],
+    &quot;policyReferences&quot;: [
+      &quot;FAR-P-LIQ-CONC&quot;
+    ],
+    &quot;summary&quot;: &quot;Cash allocation is below the versioned liquidity-allocation threshold.&quot;,
+    &quot;provenance&quot;: {
+      &quot;fcrResultDigest&quot;: &quot;047705b3fe7e453e3b76f055fe2e615fd30e2e8c3ef69d9dfd06162abffb5647&quot;,
+      &quot;calculationReferences&quot;: [
+        &quot;FCR-PC-REPLAY:ALLOCATION:cashPercent&quot;
+      ],
+      &quot;fcrTraceReferences&quot;: [
+        &quot;TRACE-ALLOCATION-cashPercent&quot;
+      ],
+      &quot;fdrSnapshotId&quot;: &quot;FRS-E9CE11B4B9E30C43685CE43F&quot;,
+      &quot;fdrDigest&quot;: &quot;6381d0d8602f28f161856d33c32491047c141de286bd4c01c9d94b5d06663d8a&quot;,
+      &quot;comparisonResultDigests&quot;: [],
+      &quot;factReferences&quot;: [
+        &quot;F-A-LIQ&quot;,
+        &quot;F-A-INV&quot;,
+        &quot;F-A-PROP&quot;
+      ],
+      &quot;assumptionReferences&quot;: []
+    }
+  },
+  {
+    &quot;findingId&quot;: &quot;FAR-0004-MISSING_CALCULATION_EVIDENCE&quot;,
+    &quot;findingCode&quot;: &quot;MISSING_CALCULATION_EVIDENCE&quot;,
+    &quot;findingType&quot;: &quot;MISSING_EVIDENCE&quot;,
+    &quot;domain&quot;: &quot;DISCLOSURE_EVIDENCE&quot;,
+    &quot;sourceCalculationReferences&quot;: [
+      &quot;FCR-PC-REPLAY:CASH_FLOW:netIncome&quot;,
+      &quot;FCR-PC-REPLAY:CASH_FLOW:savings&quot;,
+      &quot;FCR-PC-REPLAY:CASH_FLOW:surplus&quot;,
+      &quot;FCR-PC-REPLAY:CASH_FLOW:deficit&quot;,
+      &quot;FCR-PC-REPLAY:CASH_FLOW:savingsRate&quot;
+    ],
+    &quot;factReferences&quot;: [
+      &quot;F-INC&quot;,
+      &quot;F-EXP&quot;
+    ],
+    &quot;assumptionReferences&quot;: [],
+    &quot;severityState&quot;: &quot;UNSPECIFIED&quot;,
+    &quot;confidence&quot;: {
+      &quot;state&quot;: &quot;LOW&quot;,
+      &quot;score&quot;: 0.2,
+      &quot;basis&quot;: {
+        &quot;valueKinds&quot;: [
+          &quot;UNKNOWN&quot;
+        ],
+        &quot;factCount&quot;: 2,
+        &quot;evidenceState&quot;: &quot;SELF_REPORTED_OR_UNVERIFIED&quot;
+      }
+    },
+    &quot;evidenceState&quot;: &quot;SELF_REPORTED_OR_UNVERIFIED&quot;,
+    &quot;limitations&quot;: [
+      &quot;MISSING_ASSUMPTION:TAX_EFFECTIVE_RATE&quot;
+    ],
+    &quot;policyReferences&quot;: [],
+    &quot;summary&quot;: &quot;CASH_FLOW contains unavailable calculation output because required facts or assumptions are incomplete.&quot;,
+    &quot;provenance&quot;: {
+      &quot;fcrResultDigest&quot;: &quot;047705b3fe7e453e3b76f055fe2e615fd30e2e8c3ef69d9dfd06162abffb5647&quot;,
+      &quot;calculationReferences&quot;: [
+        &quot;FCR-PC-REPLAY:CASH_FLOW:netIncome&quot;,
+        &quot;FCR-PC-REPLAY:CASH_FLOW:savings&quot;,
+        &quot;FCR-PC-REPLAY:CASH_FLOW:surplus&quot;,
+        &quot;FCR-PC-REPLAY:CASH_FLOW:deficit&quot;,
+        &quot;FCR-PC-REPLAY:CASH_FLOW:savingsRate&quot;
+      ],
+      &quot;fcrTraceReferences&quot;: [
+        &quot;TRACE-CASH_FLOW-netIncome&quot;,
+        &quot;TRACE-CASH_FLOW-savings&quot;,
+        &quot;TRACE-CASH_FLOW-surplus&quot;,
+        &quot;TRACE-CASH_FLOW-deficit&quot;,
+        &quot;TRACE-CASH_FLOW-savingsRate&quot;
+      ],
+      &quot;fdrSnapshotId&quot;: &quot;FRS-E9CE11B4B9E30C43685CE43F&quot;,
+      &quot;fdrDigest&quot;: &quot;6381d0d8602f28f161856d33c32491047c141de286bd4c01c9d94b5d06663d8a&quot;,
+      &quot;comparisonResultDigests&quot;: [],
+      &quot;factReferences&quot;: [
+        &quot;F-INC&quot;,
+        &quot;F-EXP&quot;
+      ],
+      &quot;assumptionReferences&quot;: []
+    }
+  },
+  {
+    &quot;findingId&quot;: &quot;FAR-0005-MISSING_CALCULATION_EVIDENCE&quot;,
+    &quot;findingCode&quot;: &quot;MISSING_CALCULATION_EVIDENCE&quot;,
+    &quot;findingType&quot;: &quot;MISSING_EVIDENCE&quot;,
+    &quot;domain&quot;: &quot;DISCLOSURE_EVIDENCE&quot;,
+    &quot;sourceCalculationReferences&quot;: [
+      &quot;FCR-PC-REPLAY:DEBT:debtServiceRatio&quot;,
+      &quot;FCR-PC-REPLAY:DEBT:loanBalanceProjection&quot;
+    ],
+    &quot;factReferences&quot;: [
+      &quot;F-INC&quot;,
+      &quot;F-LIAB-BAL&quot;
+    ],
+    &quot;assumptionReferences&quot;: [],
+    &quot;severityState&quot;: &quot;UNSPECIFIED&quot;,
+    &quot;confidence&quot;: {
+      &quot;state&quot;: &quot;LOW&quot;,
+      &quot;score&quot;: 0.2,
+      &quot;basis&quot;: {
+        &quot;valueKinds&quot;: [
+          &quot;UNKNOWN&quot;
+        ],
+        &quot;factCount&quot;: 2,
+        &quot;evidenceState&quot;: &quot;SELF_REPORTED_OR_UNVERIFIED&quot;
+      }
+    },
+    &quot;evidenceState&quot;: &quot;SELF_REPORTED_OR_UNVERIFIED&quot;,
+    &quot;limitations&quot;: [
+      &quot;MISSING_ASSUMPTION:TAX_EFFECTIVE_RATE&quot;,
+      &quot;MISSING_LOAN_PROJECTION_INPUT&quot;
+    ],
+    &quot;policyReferences&quot;: [],
+    &quot;summary&quot;: &quot;DEBT contains unavailable calculation output because required facts or assumptions are incomplete.&quot;,
+    &quot;provenance&quot;: {
+      &quot;fcrResultDigest&quot;: &quot;047705b3fe7e453e3b76f055fe2e615fd30e2e8c3ef69d9dfd06162abffb5647&quot;,
+      &quot;calculationReferences&quot;: [
+        &quot;FCR-PC-REPLAY:DEBT:debtServiceRatio&quot;,
+        &quot;FCR-PC-REPLAY:DEBT:loanBalanceProjection&quot;
+      ],
+      &quot;fcrTraceReferences&quot;: [
+        &quot;TRACE-DEBT-debtServiceRatio&quot;,
+        &quot;TRACE-DEBT-loanBalanceProjection&quot;
+      ],
+      &quot;fdrSnapshotId&quot;: &quot;FRS-E9CE11B4B9E30C43685CE43F&quot;,
+      &quot;fdrDigest&quot;: &quot;6381d0d8602f28f161856d33c32491047c141de286bd4c01c9d94b5d06663d8a&quot;,
+      &quot;comparisonResultDigests&quot;: [],
+      &quot;factReferences&quot;: [
+        &quot;F-INC&quot;,
+        &quot;F-LIAB-BAL&quot;
+      ],
+      &quot;assumptionReferences&quot;: []
+    }
+  }
+]</pre></section><section id="FIN-14"><h2>未知 / Unknowns</h2><p>已有记录 / Recorded</p><pre>[
+  &quot;No admitted current price supplied.&quot;,
+  &quot;Occupational income and asset exposures retain native units.&quot;
+]</pre></section><section id="FIN-15"><h2>规划选项 / Planning Options</h2><p>已有记录 / Recorded</p><pre>{
+  &quot;state&quot;: &quot;PROFESSIONAL_REVIEW_REQUIRED&quot;,
+  &quot;options&quot;: []
+}</pre></section><section id="FIN-16"><h2>专业审核 / Professional Review</h2><p>已有记录 / Recorded</p><pre>{
+  &quot;state&quot;: &quot;PENDING_PROFESSIONAL_REVIEW&quot;,
+  &quot;recommendations&quot;: []
+}</pre></section><p>专业建议须由专业作者审核及签署。Professional recommendations require professional authorship and review.</p></html>

@@ -1,0 +1,9 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';
+import {adaptTarotProjections} from '../functions/interpretation-runtime/adapters/tarot-interpretation-adapter-v1.js';
+import {composeTarotRealityComparison,assertTarotGeneratedBoundaries} from '../functions/interpretation-runtime/tarot-reality-comparison-v1.js';
+import {tariAuthorities,projectThree} from './lib/tarot/tari-fixtures-v1.mjs';
+const c=JSON.parse(fs.readFileSync('content/interpretation/tarot/contracts/tarot-non-prediction-boundary-v1.json','utf8'));assert.equal(c.work,'TARI-W5');assert.equal(c.checker,'check:tarot-non-prediction-boundary');assert.equal(c.sourcePreservationBoundary.sourceLanguageMayNotBePromotedToSystemClaim,true);
+for(const phrase of ['This will happen','You will marry','You will divorce','You will get rich','You will get sick','You will die']) assert.throws(()=>assertTarotGeneratedBoundaries({systemClaim:phrase}),/TAROT_NON_PREDICTION_BOUNDARY/);
+const b=adaptTarotProjections(await projectThree(undefined,'TARI-NP'),{cardRegistry:tariAuthorities.cardRegistry,sourceRegistry:tariAuthorities.sourceRegistry,perspectiveRegistry:tariAuthorities.perspectiveRegistry,symbolDimensionRegistry:tariAuthorities.symbolDimensionRegistry,corpus:tariAuthorities.corpus});const out=composeTarotRealityComparison(b);const generated=JSON.stringify({rules:out.rules,authority:out.authority,cards:out.cards.map(x=>({lenses:x.lenses.map(y=>y.lensIntroduction),questions:x.realityQuestions}))}).toLowerCase();for(const phrase of c.forbiddenSystemClaims)assert.equal(generated.includes(phrase.toLowerCase()),false,phrase);
+assert.ok(out.cards.flatMap(x=>x.lenses).every(x=>x.sourceClaim.predictionPromotedToSystemClaim===false));
+console.log('✓ TARI-W5 tarot non-prediction boundary passed; source-bound historical claims cannot become PHI OS predictions.');

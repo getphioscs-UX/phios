@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "PHI-OS-MCD-7-PERSONAL-RUNTIME-RESULT-SURFACE-REGISTRY-v2.0.0",
+  "work": "ZWR-W19",
+  "status": "ACTIVE_ZWR_RESULT_SUCCESSOR",
+  "route": "/personal-runtime",
+  "productionTabs": [
+    {
+      "tabCode": "overview",
+      "label": {
+        "en": "Overview",
+        "zh-Hans": "总览"
+      },
+      "productionTab": true,
+      "methodResult": false
+    },
+    {
+      "tabCode": "astrology",
+      "label": {
+        "en": "Astrology",
+        "zh-Hans": "占星"
+      },
+      "productionTab": true,
+      "methodResult": true,
+      "methodCode": "ASTROLOGY",
+      "methodVersion": "0.1.0",
+      "publicMethodCode": "ASTROLOGY_PROJECTION",
+      "requiredInputPaths": [
+        "birthDate",
+        "birthTime",
+        "birthPlace.displayName",
+        "timezone.iana",
+        "timezone.utcOffsetAtBirth"
+      ]
+    },
+    {
+      "tabCode": "bazi",
+      "label": {
+        "en": "BaZi",
+        "zh-Hans": "八字"
+      },
+      "productionTab": true,
+      "methodResult": true,
+      "methodCode": "BAZI",
+      "methodVersion": "0.1.0",
+      "publicMethodCode": "BAZI_PROJECTION",
+      "requiredInputPaths": [
+        "birthDate",
+        "birthPlace.displayName",
+        "timezone.iana"
+      ]
+    },
+    {
+      "tabCode": "numeric",
+      "label": {
+        "en": "Numeric",
+        "zh-Hans": "数字"
+      },
+      "productionTab": true,
+      "methodResult": true,
+      "methodCode": "NUMEROLOGY",
+      "methodVersion": "0.1.0-candidate",
+      "publicMethodCode": "NUMEROLOGY_PROJECTION",
+      "requiredInputPaths": [
+        "birthDate"
+      ]
+    },
+    {
+      "tabCode": "ziwei",
+      "label": {
+        "en": "Zi Wei",
+        "zh-Hans": "紫微斗数"
+      },
+      "productionTab": true,
+      "methodResult": true,
+      "methodCode": "ZI_WEI_DOU_SHU",
+      "methodVersion": "1.0.0",
+      "publicMethodCode": "ZI_WEI_PROJECTION",
+      "requiredInputPaths": [
+        "birthDate",
+        "birthTime",
+        "timezone.iana",
+        "timezone.utcOffsetAtBirth"
+      ],
+      "executionEndpoint": "/api/zi-wei-execute",
+      "meaningEndpoint": "/api/method-meaning"
+    },
+    {
+      "tabCode": "reading",
+      "label": {
+        "en": "Reading",
+        "zh-Hans": "读取"
+      },
+      "productionTab": true,
+      "methodResult": false,
+      "placeholder": true,
+      "calculationAllowed": false,
+      "interpretationAllowed": false
+    }
+  ],
+  "controlledAvailability": {
+    "publicMethodCode": "PERSONAL_RUNTIME_PROJECTION",
+    "label": {
+      "en": "Personal Runtime Projection",
+      "zh-Hans": "个人运行投射"
+    },
+    "state": "CURRENTLY_UNAVAILABLE",
+    "resultTab": false,
+    "productionResult": false,
+    "customerChart": false,
+    "visibilityCreatesAvailability": false
+  },
+  "authoritySources": {
+    "mpa": "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+    "input": "functions/method-client-delivery/canonical-birth-input-runtime.js",
+    "projection": "content/professional/method-client-delivery/contracts/mcd-5-canonical-method-projection-contract-v1.json",
+    "renderer": "content/professional/method-client-delivery/registries/mcd-6-dynamic-renderer-registry-v1.json",
+    "ziWeiMpa": "content/professional/method-production-activation/successors/mpa-zwr-production-activation-successor-v1.json",
+    "ziWeiMcd": "content/professional/method-client-delivery/successors/mcd-zwr-production-adapter-successor-v1.json"
+  },
+  "rules": {
+    "frontendEligibilityIsInputReadinessOnly": true,
+    "actualDispatchDecisionComesFromMpaInApi": true,
+    "browserTimezoneFallbackAllowed": false,
+    "coordinateGuessingAllowed": false,
+    "timezoneGuessingAllowed": false,
+    "unknownDefaultFillingAllowed": false,
+    "browserStorageAllowed": false
+  },
+  "predecessor": "content/professional/method-client-delivery/registries/mcd-7-personal-runtime-result-surface-registry-v1.json",
+  "predecessorMutated": false
+}

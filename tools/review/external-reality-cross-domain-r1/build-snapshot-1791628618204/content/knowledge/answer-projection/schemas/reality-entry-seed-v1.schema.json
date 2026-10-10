@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS Reality Entry Seed",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "seedId",
+    "authorityClass",
+    "originalQuestion",
+    "clarifyingAnswers",
+    "knownObservations",
+    "identifiedUnknowns",
+    "matchedKnowledge",
+    "candidateMechanisms",
+    "governance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-KAP-REALITY-ENTRY-SEED-v1.0.0"
+    },
+    "seedId": {
+      "type": "string"
+    },
+    "authorityClass": {
+      "const": "TEMPORARY_CONSENTED_REALITY_ENTRY_SEED"
+    },
+    "originalQuestion": {
+      "type": "string"
+    },
+    "clarifyingAnswers": {
+      "type": "array"
+    },
+    "knownObservations": {
+      "type": "array"
+    },
+    "identifiedUnknowns": {
+      "type": "array"
+    },
+    "matchedKnowledge": {
+      "type": "array"
+    },
+    "candidateMechanisms": {
+      "type": "array"
+    },
+    "governance": {
+      "type": "object"
+    }
+  }
+}

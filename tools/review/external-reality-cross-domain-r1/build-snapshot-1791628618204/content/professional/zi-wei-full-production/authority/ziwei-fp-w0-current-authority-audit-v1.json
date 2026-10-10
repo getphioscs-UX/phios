@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-FP-W0-CURRENT-AUTHORITY-AUDIT-v1.0.0",
+  "work": "ZIWEI-FP-W0",
+  "baselineCommit": "abab6b358bff574c65b9dfacc7985d5de564d674",
+  "status": "COMPLETE",
+  "auditedCurrentAuthorities": [
+    "content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json",
+    "content/zi-wei-runtime/registries/zi-wei-main-star-placement-registry-v1.json",
+    "content/zi-wei-runtime/registries/zi-wei-support-star-scope-registry-v1.json",
+    "content/zi-wei-runtime/contracts/zi-wei-four-transformations-runtime-contract-v1.json",
+    "content/zi-wei-runtime/contracts/zi-wei-canonical-projection-contract-v1.json",
+    "content/professional/zi-wei-dynamic/authority/zi-wei-dynamic-policy-v2.json"
+  ],
+  "capabilities": [
+    {
+      "capability": "CANONICAL_BIRTH_INPUT",
+      "status": "CALCULATED",
+      "finding": "MCD canonical birth input; exact time + governed timezone required by production Zi Wei v1."
+    },
+    {
+      "capability": "GREGORIAN_TO_LUNAR_CONVERSION",
+      "status": "CALCULATED",
+      "finding": "Deterministic 1901–2100 conversion with frozen 23:00 day boundary and leap-month split policy."
+    },
+    {
+      "capability": "LIFE_BODY_PALACES",
+      "status": "CALCULATED",
+      "finding": "Life Palace and Body Palace are deterministic."
+    },
+    {
+      "capability": "TWELVE_PALACES",
+      "status": "CALCULATED",
+      "finding": "Twelve palace roles, branches and Five Tiger Dun palace stems are deterministic."
+    },
+    {
+      "capability": "FIVE_ELEMENT_BUREAU",
+      "status": "CALCULATED",
+      "finding": "Five-element bureau is deterministic from Life Palace stem/branch."
+    },
+    {
+      "capability": "FOURTEEN_MAIN_STARS",
+      "status": "CALCULATED",
+      "finding": "All 14 main stars are deterministically placed."
+    },
+    {
+      "capability": "SUPPORT_STARS",
+      "status": "PARTIAL",
+      "finding": "Current production admits only Zuo Fu, You Bi, Wen Chang, Wen Qu, Tian Kui and Tian Yue."
+    },
+    {
+      "capability": "MALEFIC_AND_EXTENDED_STARS",
+      "status": "ABSENT",
+      "finding": "Lu Cun, Qing Yang, Tuo Luo, Fire, Bell, Earth Void, Earth Robbery, Tian Ma and other miscellaneous stars are deferred in current natal v1."
+    },
+    {
+      "capability": "NATAL_FOUR_TRANSFORMATIONS",
+      "status": "CALCULATED",
+      "finding": "Birth-year-stem Southern table is frozen and deterministic."
+    },
+    {
+      "capability": "PALACE_STEM_FLYING_TRANSFORMATIONS",
+      "status": "ABSENT",
+      "finding": "Not authorised in current natal v1."
+    },
+    {
+      "capability": "STAR_BRIGHTNESS_STATE",
+      "status": "ABSENT",
+      "finding": "Current main-star policy explicitly has brightnessStateIncluded=false."
+    },
+    {
+      "capability": "PALACE_OPPOSITION_TRIAD_NETWORK",
+      "status": "PARTIAL",
+      "finding": "Interpretation/graph can consume opposite/triad relations, but there is not yet a full dedicated calculation primitive for all classical palace-network relations."
+    },
+    {
+      "capability": "STAR_COMBINATIONS",
+      "status": "ABSENT",
+      "finding": "No governed star × star / star × palace combination runtime."
+    },
+    {
+      "capability": "PATTERN_CLASSIFICATION",
+      "status": "ABSENT",
+      "finding": "No governed 格局 qualification/disqualifier runtime."
+    },
+    {
+      "capability": "DA_XIAN",
+      "status": "CALCULATED",
+      "finding": "Separate ZWD v2 production authority calculates Da Xian domain focus and dynamic transformations."
+    },
+    {
+      "capability": "LIU_NIAN",
+      "status": "CALCULATED",
+      "finding": "Separate ZWD v2 production authority calculates annual domain focus and annual transformations."
+    },
+    {
+      "capability": "LIU_YUE",
+      "status": "ABSENT",
+      "finding": "Not activated."
+    },
+    {
+      "capability": "LIU_RI",
+      "status": "ABSENT",
+      "finding": "Not activated."
+    },
+    {
+      "capability": "LIU_SHI",
+      "status": "ABSENT",
+      "finding": "Not activated."
+    },
+    {
+      "capability": "CUSTOMER_MEANING",
+      "status": "CALCULATED",
+      "finding": "36 admitted natal atomic meanings are available in current production."
+    },
+    {
+      "capability": "CUSTOMER_COMPOSITION",
+      "status": "PARTIAL",
+      "finding": "Current composition is palace-network centric and structurally shallow; repeated evidence-shaped prose remains visible."
+    },
+    {
+      "capability": "SEMANTIC_DEDUPLICATION",
+      "status": "PARTIAL",
+      "finding": "Shared reading dedup exists, but Zi Wei-specific repeated palace-network content remains."
+    },
+    {
+      "capability": "ZIWEI_SPECIFIC_UX",
+      "status": "PARTIAL",
+      "finding": "Current result surface is available but raw enum/debug-shaped content and repeated blocks remain; no full interactive 12-palace customer chart surface."
+    }
+  ],
+  "currentRuntime": {
+    "natalProductionState": "AVAILABLE_NATAL_STRUCTURAL_V1",
+    "natalStarCount": 20,
+    "mainStarCount": 14,
+    "supportStarCount": 6,
+    "natalTransformationCount": 4,
+    "dynamicProductionScope": [
+      "DA_XIAN",
+      "LIU_NIAN"
+    ],
+    "dynamicNotActivated": [
+      "LIU_YUE",
+      "LIU_RI",
+      "LIU_SHI",
+      "RELATIONAL"
+    ],
+    "currentStarStateIncluded": false
+  },
+  "rootCause": {
+    "calculationCoverage": "STRONG_FOR_FROZEN_NATAL_CORE",
+    "interpretationCoverage": "TOO_SHALLOW_FOR_GENERAL_ZI_WEI_PLATFORM",
+    "customerSurfaceProblem": [
+      "RAW_ENUMS_VISIBLE_AS_READING_CONTENT",
+      "SAME_FINDING_RENDERED_IN_MULTIPLE_SECTIONS",
+      "PALACE_NETWORK_METADATA_REPEATED_AS_EXPLANATION",
+      "STAR_COMBINATION_PATTERN_AND_STATE_LAYERS_MISSING"
+    ]
+  },
+  "successorDecision": {
+    "reuseCurrentNatalCalculation": true,
+    "reuseZwdDynamicCalculation": true,
+    "predecessorsMutated": false,
+    "secondProjectionAuthorityCreated": false,
+    "createDerivedCanonicalChartIR": true,
+    "newProductionClaimsOpen": false
+  }
+}

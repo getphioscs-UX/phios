@@ -1,0 +1,28 @@
+{
+  "contractCode": "PHI-OS-RRE-W5-CONSTRAINT-READING-v1",
+  "contractVersion": "1.0.0",
+  "work": "RRE-W5",
+  "runtimeCode": "RRE",
+  "status": "validation_only",
+  "productionStatus": "validation_only",
+  "schemaReference": "content/runtime/reality-readout-engine/schemas/constraint-reading-v1.schema.json",
+  "registryReference": "content/runtime/reality-readout-engine/registries/canonical-constraint-reading-class-registry-v1.json",
+  "reads": [
+    "RMO_REALITY_CONSTRAINT_REFERENCE",
+    "RRE_SUPPORTED_CONSTRAINT_OBSERVABLE"
+  ],
+  "outputs": [
+    "rigidityClass",
+    "domainClass",
+    "supportReferences"
+  ],
+  "rules": {
+    "createsRealityConstraint": false,
+    "changesRmoConstraintType": false,
+    "changesRmoConstraintScope": false,
+    "recommendationCreated": false,
+    "navigationRestrictionCreated": false,
+    "professionalJudgmentCreated": false,
+    "persistentStoreActivated": false
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W13-METHOD-VALIDATION-HARNESS-v1.0.0",
+  "work": "MPA-W13",
+  "baselineCommit": "3dd903344945ecd3b585c8aafe48b93d7894caa9",
+  "status": "ACTIVE_VALIDATION_FAIL_CLOSED",
+  "fixtureCorpus": "content/professional/method-production-activation/fixtures/mpa-reference-fixture-corpus-v1.json",
+  "requiredChecks": [
+    "determinism",
+    "schema",
+    "policy",
+    "boundary",
+    "reference_comparison"
+  ],
+  "methodEvidenceCheckers": {
+    "NUMEROLOGY": [
+      "scripts/check-num-w1-birth-number-runtime.mjs",
+      "scripts/check-num-w2-number-structure-runtime.mjs",
+      "scripts/check-num-w3-cycle-runtime.mjs"
+    ],
+    "ASTROLOGY": [
+      "scripts/check-ast-w1-astronomy-runtime.mjs",
+      "scripts/check-ast-w2-planet-runtime.mjs",
+      "scripts/check-ast-w3-house-runtime.mjs",
+      "scripts/check-ast-w4b-aspect-runtime.mjs"
+    ],
+    "BAZI": [
+      "scripts/check-bzr-w1-solar-calendar-runtime.mjs",
+      "scripts/check-bzr-w2-four-pillars-runtime.mjs",
+      "scripts/check-bzr-w3-luck-cycle-runtime.mjs"
+    ],
+    "HUMAN_DESIGN": [
+      "scripts/check-hdr-w1-astronomy-runtime.mjs",
+      "scripts/check-hdr-w2-design-moment-solver.mjs",
+      "scripts/check-hdr-w3-gate-runtime.mjs",
+      "scripts/check-hdr-w4-bodygraph-runtime.mjs"
+    ]
+  },
+  "decisionRule": "Any failed required check or unresolved required authority/reference blocks Production eligibility. Passing validation-only checkers does not alter IMR or MPA eligibility.",
+  "productionEligibilityMutationAllowed": false
+}

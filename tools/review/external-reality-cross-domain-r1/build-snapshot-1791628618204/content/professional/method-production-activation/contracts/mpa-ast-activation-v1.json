@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W22-AST-ACTIVATION-CONTRACT-v1.0.0",
+  "work": "MPA-W22",
+  "baselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+  "method": {
+    "methodCode": "ASTROLOGY",
+    "pluginCode": "AST",
+    "methodVersion": "0.1.0"
+  },
+  "purpose": "Resolve AST technical activation evidence for ephemeris identity, trusted JPL comparison, frozen tolerance, and historical timezone authority without inventing Method-owned production policies or bypassing MPA-W26/W27.",
+  "prerequisites": [
+    "MPA-W0-W21"
+  ],
+  "requestedTechnicalClosures": [
+    "ephemerisVersion",
+    "ephemerisDigest",
+    "nasaJplTrustedReferenceComparison",
+    "toleranceFreeze",
+    "historicalTimezoneTzdbAuthority"
+  ],
+  "activationSemantics": {
+    "technicalActivationEvidenceReadyMeans": "All five W22 technical authority/comparison gates are resolved with immutable evidence.",
+    "methodSpecificReadyForW26RequiresProductionPolicyAuthority": true,
+    "createsProductionEligibility": false,
+    "createsProductionExecutionAuthority": false,
+    "createsProfessionalEligibility": false,
+    "createsPublicEligibility": false,
+    "nextGlobalEligibilityGate": "MPA-W26",
+    "nextProductionExecutionGate": "MPA-W27"
+  },
+  "methodPolicyBoundary": {
+    "owner": "AST_METHOD_GOVERNANCE_NOT_MPA",
+    "unapprovedProductionPolicies": [
+      "planetSet",
+      "houseSystem",
+      "zodiac",
+      "productionOrbPolicy",
+      "minorAspects"
+    ],
+    "mpaMaySelectOrApproveThesePolicies": false,
+    "technicalEvidenceMayOverridePolicyBlocker": false
+  },
+  "rules": {
+    "legacyAstFreezeMutationAllowed": false,
+    "frozenMrMutationAllowed": false,
+    "frozenImrMutationAllowed": false,
+    "w11HistoricalAuthorityRegistryMayBeRewritten": false,
+    "w15HistoricalComparisonRegistryMayBeRewritten": false,
+    "implicitAstrologyDefaultsForbidden": true,
+    "latestTimezoneAliasForbidden": true,
+    "exactMatchClaimWithoutDirectReplayForbidden": true,
+    "productionExecutionBeforeW27Forbidden": true
+  }
+}

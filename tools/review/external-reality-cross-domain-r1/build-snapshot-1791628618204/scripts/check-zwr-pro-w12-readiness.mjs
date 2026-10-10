@@ -1,0 +1,20 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+
+const decision=JSON.parse(fs.readFileSync('docs/reports/ziwei/production-admission/zwr-pro-w11-human-decision.json','utf8'));
+assert.equal(decision.decision,'ACCEPT','ZWR_PRO_W12_BLOCKED: W11 human ACCEPT required');
+assert.equal(decision.accepted,true,'ZWR_PRO_W12_BLOCKED: accepted=true required');
+assert.equal(decision.productionCutoverAuthorized,true,'ZWR_PRO_W12_BLOCKED: explicit production cutover authorization required');
+const campaign=JSON.parse(fs.readFileSync('docs/reports/ziwei/production-admission/zwr-pro-w10-live-campaign.json','utf8'));
+const manifest=JSON.parse(fs.readFileSync('docs/reports/ziwei/production-admission/zwr-pro-w11-review-manifest.json','utf8'));
+assert.equal(campaign.status,'PASS_LIVE_CAMPAIGN');
+assert.equal(manifest.status,'READY_FOR_HUMAN_REVIEW');
+assert.equal(decision.acceptedManifestDigest,manifest.manifestDigest,'W11 accepted manifest digest mismatch');
+assert.equal(decision.acceptedCampaignCompletedAt,campaign.completedAt,'W10 campaign identity mismatch');
+const binding=fs.readFileSync('functions/report-delivery/ziwei-canonical-person-binding.js','utf8');
+const successor=fs.readFileSync('functions/report-delivery/ziwei-professional-production-w12-generation.js','utf8');
+assert(successor.includes('buildZwrProBilingualCandidateW4W8'));
+assert(successor.includes('createZwrProImmutableSnapshotW9'));
+assert(successor.includes('productionAdmissionGranted:false'),'staged successor itself must not self-authorize');
+assert(!binding.includes('ziwei-professional-production-w12-generation.js'),'readiness gate expects cutover not yet applied');
+console.log('READY ZWR-PRO W12: all machine, live multi-chart and human gates accepted; canonical account binding may now be cut over in a dedicated reviewed commit.');

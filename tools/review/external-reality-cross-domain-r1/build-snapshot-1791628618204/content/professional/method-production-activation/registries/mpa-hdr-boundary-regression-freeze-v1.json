@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W24-HDR-BOUNDARY-REGRESSION-FREEZE-v1.0.0",
+  "work": "MPA-W24",
+  "status": "FROZEN_RESTRICTED_BOUNDARY_REGRESSION",
+  "methodCode": "HUMAN_DESIGN",
+  "pluginCode": "HDR",
+  "checkerAliases": [
+    "check:hdr-w0",
+    "check:hdr-w1",
+    "check:hdr-w2",
+    "check:hdr-w3",
+    "check:hdr-w4",
+    "check:hdr-w5",
+    "check:hdr-w6",
+    "check:hdr-w7"
+  ],
+  "frozenHistoricalAuthorities": [
+    {
+      "path": "content/professional/method-runtime/method-registry-v1.json",
+      "sha256": "a16b6f316365592acec4be4588a5305aedd3f760b9445ecae1c63b4bcb1161e1"
+    },
+    {
+      "path": "content/professional/method-runtime/method-runtime-freeze-v1.json",
+      "sha256": "8004a17aeb8936303221c9b3b37e190856bcb81067496322d72283472b6f4a83"
+    },
+    {
+      "path": "content/professional/method-governance/imr-method-registry-v1.json",
+      "sha256": "f6793363f06aa37be1f7ea8b52b7e07068cfcf48d6bd796c14e0ed2d7d7ae7e1"
+    },
+    {
+      "path": "content/professional/method-governance/imr-production-eligibility-registry-v1.json",
+      "sha256": "40a1a7312d88e53335dcdfaab331c50bdbc62f9938a6002826adfe9c9e36421b"
+    },
+    {
+      "path": "content/professional/method-governance/imr-method-governance-freeze-v1.json",
+      "sha256": "5fc6c6fa8353d54754aa06f51a907192f93d92da7301e385d3fe91a5fc200c11"
+    },
+    {
+      "path": "content/professional/core-method-runtime/hdr-runtime-manifest-v1.json",
+      "sha256": "5908dbec70087d90a78a8c377dc0cb21d653caad536e118e759c97dd855f5801"
+    },
+    {
+      "path": "content/professional/core-method-runtime/hdr-production-freeze-v1.json",
+      "sha256": "edc383857ae02ecd5c050291aa2b1ef3f47ae0ca8296c65f9e1ba29a9b9e5296"
+    },
+    {
+      "path": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "sha256": "7cab1dca382de4a796a8a92de3fb0105ae23689f91e4661a48ea1e4e4ca563b0"
+    },
+    {
+      "path": "content/professional/method-production-activation/registries/mpa-method-capability-matrix-v1.json",
+      "sha256": "b7da6d917c5d50f199d33ba0c5db5c4518f471c48837a9a57cd5a06153d5d5ce"
+    },
+    {
+      "path": "content/professional/method-production-activation/registries/mpa-public-method-vocabulary-boundary-v1.json",
+      "sha256": "9a9abdb8b03338bef1d3146b94b3a04a049d9a2471f6637970ef68e070a67c05"
+    },
+    {
+      "path": "content/web-production/registries/wpr-public-vocabulary-registry-v2.json",
+      "sha256": "43276a6a1a22987070b2ab3ce15934b07015567cabe0e8935b631768efdd2bdf"
+    },
+    {
+      "path": "content/professional/canonical-meaning-runtime/acceptance/cmr-w7-hdr-mapping-acceptance-v1.json",
+      "sha256": "6832223a96bc7f87405a42736e92c3000e1d576740b3dbb5512e062320ac8762"
+    },
+    {
+      "path": "content/professional/method-production-activation/registries/mpa-cross-implementation-comparison-registry-v1.json",
+      "sha256": "e7127066b0fd26657f404efe069281f4a745bd45354631e295bce01408189c5a"
+    },
+    {
+      "path": "content/professional/method-production-activation/registries/mpa-calculation-data-authority-registry-v1.json",
+      "sha256": "71352ed3b231449cec638e8347b5c9dcc50cd1aacf14eaf35e7a7aa79f5418d8"
+    }
+  ],
+  "boundaryFiles": [
+    "content/professional/method-production-activation/contracts/mpa-hdr-restricted-boundary-v1.json",
+    "content/professional/method-production-activation/registries/mpa-hdr-rights-license-boundary-v1.json",
+    "content/professional/method-production-activation/registries/mpa-hdr-public-vocabulary-boundary-v1.json",
+    "content/professional/method-production-activation/registries/mpa-hdr-astronomy-authority-boundary-v1.json",
+    "content/professional/method-production-activation/registries/mpa-hdr-mapping-authority-boundary-v1.json",
+    "content/professional/method-production-activation/registries/mpa-hdr-meaning-integration-boundary-v1.json",
+    "content/professional/method-production-activation/registries/mpa-hdr-professional-boundary-v1.json"
+  ],
+  "rules": {
+    "anyFrozenHistoricalAuthorityDriftFails": true,
+    "publicRestrictedTermRegressionFails": true,
+    "hdrLegacyCheckerFailureFails": true,
+    "futureBoundaryChangeRequiresVersionedSuccessor": true
+  }
+}

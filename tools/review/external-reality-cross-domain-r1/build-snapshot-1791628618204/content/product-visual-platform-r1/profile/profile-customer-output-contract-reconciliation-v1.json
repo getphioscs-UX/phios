@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W6-PROFILE-CUSTOMER-OUTPUT-CONTRACT-RECONCILIATION-v1.0.0",
+  "work": "PVP-R1-VIS-W6",
+  "baselineCommit": "b0bc35d27f1379ec24f11200874b1f32b2135ad8",
+  "status": "RECONCILIATION_COMPLETE_PROFILE_PPR_GAPS_OPEN",
+  "truthOwner": "EXISTING_PROFILE_PPR_AUTHORITY",
+  "pvpRole": "PROJECTION_CONTRACT_ONLY",
+  "sourceAuthoritySnapshot": [
+    {
+      "path": "content/profile/current/profile-current-v3.json",
+      "sha256": "2cc506c5ab897a4b6c31b62e3a98742f3d8489fa3bd5cf93b3f825ed1b83526b"
+    },
+    {
+      "path": "content/profile/ux/profile-progressive-ux-contract-v3.json",
+      "sha256": "daa0bb107887082ffde90768bc820cb1cf7bb2ad8a6936079d55cf892e643428"
+    },
+    {
+      "path": "content/profile/acceptance/profile-prf-w12-production-admission-v1.json",
+      "sha256": "51c10e0e997eba91a0212a120271853d9dc3bc42d19350b4af56606379e9bbbd"
+    },
+    {
+      "path": "functions/profile/profile-progressive-ux-runtime.js",
+      "sha256": "0ea5be88c7e7a03f2a2bf38947f9adfbecdd5082876731a40511b2f2fd8cf3fd"
+    },
+    {
+      "path": "functions/api/profile-progressive.js",
+      "sha256": "01e67e37f616b9ca6a15811d3d62116ded7f8119ff178e7f1354cad977ee94cd"
+    },
+    {
+      "path": "content/professional/profile/assessment/self-assessment-scoring-contract-v1.json",
+      "sha256": "cee6854fbef0acfe777e21cd3b165dd819132455bacc0f57b4183ae90059d018"
+    },
+    {
+      "path": "content/profile/academic/ipip/ipip-scoring-contract-v1.json",
+      "sha256": "033d8d3450b1ee3afa6a3a7a91a956bf80e742c6ac99bed92d64dc5b6b8962ed"
+    },
+    {
+      "path": "content/profile/academic/financial/financial-capability-scoring-contract-v1.json",
+      "sha256": "b58849e511836a026718076618858d0f3c0607c1460f8c2ff53ec8a7d3dea34b"
+    },
+    {
+      "path": "content/profile/academic/onet/contracts/onet-career-exploration-normalization-contract-v1.json",
+      "sha256": "9b0a5b293cb5afe65583aeb47c225806e319ce78e19de6adcd9be9bf3ea7f52c"
+    },
+    {
+      "path": "content/profile/current-reality/contracts/profile-current-reality-correlation-contract-v1.json",
+      "sha256": "4ef0ce553d472c08ac016368fe161c5d97b95af123b82be6954d05cdae16a792"
+    },
+    {
+      "path": "content/profile/cross-source/contracts/cross-source-perspective-contract-v1.json",
+      "sha256": "81734b4b1770b86320eac547c0e9f07c2e460b0a6e6fff4f7bef1d1a05261120"
+    },
+    {
+      "path": "content/profile/relationship/contracts/relationship-profile-evidence-contract-v1.json",
+      "sha256": "da1971d2b1b9bc8d75fae74fe9dd3a6fc5360eacc7195c1238762fc9e00fdf1b"
+    }
+  ],
+  "currentCustomerOutputTruth": {
+    "progressiveViewFields": [
+      "mode",
+      "participantRef",
+      "asOfDate",
+      "sourceLegend",
+      "signalCards",
+      "selfAssessmentRadar",
+      "careerInterest",
+      "currentReality",
+      "crossSource",
+      "relationshipProfile",
+      "freshness",
+      "customerPublication",
+      "boundaries"
+    ],
+    "apiSourceScopedSummaries": [
+      "reasoningView",
+      "careerExploration",
+      "profileSummary",
+      "financialSummary"
+    ],
+    "sourceScopedDimensionFamilies": [
+      {
+        "lane": "PHI_SELF_ASSESSMENT",
+        "truth": "six admitted self-report domains with facet/raw/normalized self-report indices",
+        "universalProfileDimensions": false
+      },
+      {
+        "lane": "IPIP_BIG_FIVE",
+        "truth": "instrument-scoped Big Five keyed scores; not normed and not objective trait truth",
+        "universalProfileDimensions": false
+      },
+      {
+        "lane": "O_NET_RIASEC",
+        "truth": "raw/provider interest profile and exploration ranking; not ability or job-fit truth",
+        "universalProfileDimensions": false
+      },
+      {
+        "lane": "PHI_FINANCIAL_CAPABILITY",
+        "truth": "section-scoped measured/self-report metrics; not official OECD composite or advice",
+        "universalProfileDimensions": false
+      },
+      {
+        "lane": "PHI_REASONING",
+        "truth": "task-performance signals; not IQ or percentile",
+        "universalProfileDimensions": false
+      },
+      {
+        "lane": "EXTERNAL_PROFILE_RESULT",
+        "truth": "customer-confirmed provider label/dimensions with external semantics preserved",
+        "universalProfileDimensions": false
+      }
+    ],
+    "contextTruth": {
+      "currentRealityStates": [
+        "CURRENTLY_RESONANT",
+        "PARTIALLY_RESONANT",
+        "CURRENTLY_NOT_RESONANT",
+        "OPEN"
+      ],
+      "crossSourceGroups": [
+        "SOURCE_ALIGNED",
+        "SOURCE_COMPLEMENTARY",
+        "SOURCE_TENSION",
+        "SOURCE_CONTRADICTION",
+        "CURRENTLY_SUPPORTED",
+        "CURRENTLY_CONTRADICTED",
+        "OPEN"
+      ],
+      "relationshipOutputs": [
+        "SIMILAR_SELF_REPORTED_TENDENCY",
+        "DIFFERENT_SELF_REPORTED_TENDENCY",
+        "COMPLEMENTARY_PATTERN",
+        "POTENTIAL_FRICTION_TARGET",
+        "COMMUNICATION_OBSERVATION_TARGET",
+        "OPEN"
+      ]
+    }
+  },
+  "masterRequiredOutputAudit": [
+    {
+      "field": "PROFILE_OVERVIEW",
+      "status": "MISSING_OWNER_OUTPUT_TRUTH",
+      "why": "No canonical cross-source Profile overview field exists in current Profile/PPR authority.",
+      "pvpMayInfer": false
+    },
+    {
+      "field": "CORE_DIMENSIONS",
+      "status": "PARTIAL_SOURCE_SCOPED_ONLY",
+      "why": "Multiple admitted source-specific dimension families exist, but no universal cross-source Profile dimension set is admitted.",
+      "pvpMayInfer": false
+    },
+    {
+      "field": "STRENGTH_PATTERNS",
+      "status": "MISSING_OWNER_OUTPUT_TRUTH",
+      "why": "Current numeric or ranked source outputs are not authorized to be relabeled as generic strengths.",
+      "pvpMayInfer": false
+    },
+    {
+      "field": "COST_TENSION_PATTERNS",
+      "status": "PARTIAL_CONTEXT_SIGNALS_ONLY",
+      "why": "SOURCE_TENSION and POTENTIAL_FRICTION_TARGET exist, but no canonical Profile cost/tension pattern or strength-cost pairing exists.",
+      "pvpMayInfer": false
+    },
+    {
+      "field": "DECISION_STYLE",
+      "status": "MISSING_OWNER_OUTPUT_TRUTH",
+      "why": "No general Profile decision-style field exists; isolated source facets cannot be promoted into one.",
+      "pvpMayInfer": false
+    },
+    {
+      "field": "RELATIONSHIP_STYLE",
+      "status": "PARTIAL_RELATIONSHIP_EVIDENCE_ONLY",
+      "why": "Relationship comparison evidence exists, but no individual canonical relationship-style output exists.",
+      "pvpMayInfer": false
+    },
+    {
+      "field": "WORK_STYLE",
+      "status": "PARTIAL_CAREER_INTEREST_ONLY",
+      "why": "O*NET interests and careers are exploration outputs, not a canonical work-style field.",
+      "pvpMayInfer": false
+    },
+    {
+      "field": "STRESS_PATTERN",
+      "status": "PARTIAL_SELF_REPORT_FACETS_ONLY",
+      "why": "Pressure/recovery/self-regulation facets exist only as source-scoped signals; no canonical stress-pattern output exists.",
+      "pvpMayInfer": false
+    },
+    {
+      "field": "ENVIRONMENT_FIT",
+      "status": "PARTIAL_SELF_REPORT_FACET_ONLY",
+      "why": "ENVIRONMENT_FIT exists as a self-report facet, not as a governed fit conclusion across Profile sources.",
+      "pvpMayInfer": false
+    },
+    {
+      "field": "CONTEXT_VARIATION",
+      "status": "PARTIAL_CONTEXT_EVIDENCE_ONLY",
+      "why": "Current Reality and cross-source states exist, but no canonical Profile context-variation classification is admitted.",
+      "pvpMayInfer": false
+    },
+    {
+      "field": "CONTRADICTIONS",
+      "status": "AVAILABLE_SOURCE_SCOPED",
+      "why": "SOURCE_CONTRADICTION and CURRENTLY_NOT_RESONANT are admitted source/context states and may be projected with provenance intact.",
+      "pvpMayInfer": false
+    },
+    {
+      "field": "REALITY_QUESTIONS",
+      "status": "PARTIAL_LANE_SPECIFIC_ONLY",
+      "why": "Career-interest Reality prompts exist, but there is no generic Profile-wide Reality-question output contract for all modes.",
+      "pvpMayInfer": false
+    }
+  ],
+  "pfigAdmissionImpact": [
+    {
+      "pfig": "PFIG-001",
+      "name": "PROFILE-DIMENSION-MAP",
+      "state": "SOURCE_SCOPED_PROJECTION_ONLY",
+      "productionState": "BLOCKED_FOR_UNIVERSAL_PROFILE",
+      "reason": "No universal Core Dimensions authority."
+    },
+    {
+      "pfig": "PFIG-002",
+      "name": "PROFILE-PATTERN-RADAR",
+      "state": "BLOCKED",
+      "productionState": "BLOCKED",
+      "reason": "PVP may not invent radar axes or combine source-specific scores."
+    },
+    {
+      "pfig": "PFIG-003",
+      "name": "PROFILE-STRENGTH-COST-MAP",
+      "state": "BLOCKED",
+      "productionState": "BLOCKED",
+      "reason": "Strength and cost/tension pattern truth is not admitted."
+    },
+    {
+      "pfig": "PFIG-004",
+      "name": "PROFILE-CONTEXT-VARIATION",
+      "state": "BLOCKED",
+      "productionState": "BLOCKED",
+      "reason": "Context-variation classification truth is not admitted."
+    },
+    {
+      "pfig": "PFIG-005",
+      "name": "PROFILE-CONVERGENCE-DIVERGENCE",
+      "state": "BLOCKED_MAPPING_AUTHORITY_GAP",
+      "productionState": "BLOCKED",
+      "reason": "Current Profile cross-source groups are not the required CONVERGES/CONTEXT_DEPENDENT/DIVERGES/UNKNOWN projection states; PVP cannot invent the semantic mapping."
+    },
+    {
+      "pfig": "PFIG-006",
+      "name": "PROFILE-WORK-MAP",
+      "state": "BLOCKED",
+      "productionState": "BLOCKED",
+      "reason": "Career interests are not canonical work style."
+    },
+    {
+      "pfig": "PFIG-007",
+      "name": "PROFILE-RELATIONSHIP-MAP",
+      "state": "PARTIAL_EVIDENCE_ONLY",
+      "productionState": "BLOCKED",
+      "reason": "Relationship evidence exists but relationship-style output truth is absent."
+    },
+    {
+      "pfig": "PFIG-008",
+      "name": "PROFILE-DECISION-MAP",
+      "state": "BLOCKED",
+      "productionState": "BLOCKED",
+      "reason": "Decision-style truth is absent."
+    },
+    {
+      "pfig": "PFIG-009",
+      "name": "PROFILE-REALITY-BRIDGE",
+      "state": "PARTIAL_EXISTING_TRUTH",
+      "productionState": "BLOCKED_PENDING_GENERIC_OUTPUT_CONTRACT",
+      "reason": "Current Reality states exist, but generic Profile reality-question/context-variation output is incomplete."
+    }
+  ],
+  "exitAssertions": {
+    "PROFILE_TRUTH_OWNER_UNCHANGED": true,
+    "PROFILE_CUSTOMER_OUTPUT_CONTRACT_READY": true,
+    "NO_PVP_PROFILE_MEANING_AUTHORITY": true,
+    "PROFILE_PPR_AUTHORITY_GAPS_CLOSED": false,
+    "PROFILE_DYNAMIC_VISUAL_PRODUCTION_ALLOWED": false,
+    "PVP_R1_VIS_W7_ALLOWED_NOW": false
+  },
+  "nextOwnerGate": {
+    "owner": "PROFILE_PPR",
+    "requiredAction": "Create a governed Profile/PPR customer-output successor for any generic overview/pattern/style/context fields intended for PFIG production; do not solve these semantics inside PVP.",
+    "pvpNextWorkAfterClosure": "PVP-R1-VIS-W7 Profile Projection IR"
+  }
+}

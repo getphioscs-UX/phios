@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {fixture,buildFixtureProjection} from './lib/ecr-mandala-acceptance-fixture.mjs';
+import {renderPhiMandalaVisual} from '../assets/customer-ui/js/specialists/ecr/mandala-renderer.js';
+import {renderDriverProfileVisual} from '../assets/customer-ui/js/specialists/ecr/driver-profile-renderer.js';
+import {renderMotionConfigurationVisual} from '../assets/customer-ui/js/specialists/ecr/motion-renderer.js';
+import {renderActivationTimelineVisual} from '../assets/customer-ui/js/specialists/ecr/activation-renderer.js';
+const p=buildFixtureProjection(),visual={title:'你的 PHI 构型',payload:p},mandala=renderPhiMandalaVisual(visual),driver=renderDriverProfileVisual(visual),motion=renderMotionConfigurationVisual(visual),activation=renderActivationTimelineVisual(visual),css=fs.readFileSync('assets/customer-ui/surfaces/ecr-specialist.css','utf8'),source=fs.readFileSync('assets/customer-ui/js/specialists/ecr/mandala-renderer.js','utf8');
+assert.match(mandala,/role="img"/);assert.match(mandala,/aria-labelledby=/);assert.match(mandala,/aria-live="polite"/);assert.match(mandala,/aria-atomic="true"/);
+assert.equal((mandala.match(/data-ecr-mandala-node="true"/g)||[]).length,145,'all 145 Mandala nodes must be keyboard-addressable');
+assert.equal((mandala.match(/tabindex="0" role="button"/g)||[]).length,145,'all Mandala nodes need keyboard focus + button role');
+assert.ok((mandala.match(/aria-current="true"/g)||[]).length>=8,'calculated selections must expose non-color state');
+assert.match(mandala,/●/);assert.match(mandala,/★R7/);assert.match(driver,/role="meter"/);assert.match(motion,/当前计算运动/);assert.match(activation,/aria-current="step"/);
+assert.match(source,/event\.key==='Enter'/);assert.match(source,/event\.key===' '/);assert.match(source,/event\.key==='Escape'/);assert.match(source,/max-width:620px/);
+assert.match(css,/:focus-visible/);assert.match(css,/prefers-reduced-motion:reduce/);assert.match(css,/forced-colors:active/);assert.match(css,/max-width:1179px/);assert.match(css,/max-width:767px/);assert.match(css,/max-width:620px/);assert.match(css,/max-width:390px/);assert.match(css,/width:680px/);
+assert.deepEqual(fixture.responsiveProfiles.map(x=>x.width),[1440,1280,1024,768,430,390]);
+console.log('✓ ECR Mandala accessibility/responsive gate passed: keyboard parity, non-color selection markers, mobile expandable Mandala, focus, reduced-motion and forced-color support are present.');

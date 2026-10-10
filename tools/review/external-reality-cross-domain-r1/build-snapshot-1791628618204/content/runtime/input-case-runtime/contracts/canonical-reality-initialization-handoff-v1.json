@@ -1,0 +1,34 @@
+{
+  "contractCode": "PHI-OS-ICR-W7-CANONICAL-REALITY-INITIALIZATION-HANDOFF-v1",
+  "contractVersion": "1.0.0",
+  "work": "ICR-W7",
+  "status": "handoff_contract_complete",
+  "productionStatus": "validation_only",
+  "sourceRuntime": "ICR",
+  "targetRuntime": "RMO",
+  "targetWork": "RMO-W1",
+  "schemaReference": "content/runtime/input-case-runtime/schemas/reality-initialization-request-v1.schema.json",
+  "chain": [
+    "Verified Inputs",
+    "Canonical Case",
+    "Reality Initialization Request",
+    "RMO acceptance",
+    "Reality v1"
+  ],
+  "icrOutput": "Reality Initialization Request",
+  "rmoOutput": "Reality v1",
+  "requestedOutputDataType": "RUNTIME_STATE_RECORD",
+  "rules": {
+    "verifiedCaseRequired": true,
+    "activeRdgDeletionStateRequired": true,
+    "requestContainsInputPayload": false,
+    "requestContainsRealityPayload": false,
+    "icrMayCreateRealityIdentity": false,
+    "icrMayCreateRealityV1": false,
+    "icrMayWriteRuntimeStateRecord": false,
+    "rmoAcceptanceRequired": true,
+    "rmoContractImplementedByThisWork": false,
+    "rmoProductionExecutionActivated": false,
+    "handoffDigestMustBeDeterministic": true
+  }
+}

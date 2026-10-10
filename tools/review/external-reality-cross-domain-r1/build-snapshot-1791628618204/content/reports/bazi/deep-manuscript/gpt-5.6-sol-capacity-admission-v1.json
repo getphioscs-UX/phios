@@ -1,0 +1,75 @@
+{
+  "version": "GPT-5.6-SOL-CAPACITY-ADMISSION-V1",
+  "modelId": "gpt-5.6-sol",
+  "contextTokens": 1050000,
+  "maxOutputTokens": 128000,
+  "responsesApiSupported": true,
+  "structuredOutputSupported": true,
+  "reasoningSupported": true,
+  "constraintsVerified": true,
+  "pricingVerified": true,
+  "verifiedAt": "2026-10-06",
+  "reviewAfter": "2026-11-06",
+  "verificationSource": "CURRENT_OFFICIAL_OPENAI_DOCUMENTATION",
+  "sources": [
+    {
+      "url": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+      "retrievedAt": "2026-10-06",
+      "claims": [
+        "context/output limits",
+        "Responses",
+        "Structured Outputs",
+        "reasoning effort"
+      ]
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "retrievedAt": "2026-10-06",
+      "claims": [
+        "short and long-context pricing"
+      ]
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/guides/reasoning",
+      "retrievedAt": "2026-10-06",
+      "claims": [
+        "generated output includes reasoning and formatting",
+        "reasoning billed as output",
+        "incomplete max_output_tokens"
+      ]
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/guides/token-counting",
+      "retrievedAt": "2026-10-06",
+      "claims": [
+        "local tokenizer cannot count all envelope overhead"
+      ]
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+      "retrievedAt": "2026-10-06",
+      "claims": [
+        "simple JSON schema transport"
+      ]
+    }
+  ],
+  "pricing": {
+    "currency": "USD",
+    "perTokens": 1000000,
+    "longContextInputThresholdTokens": 272000,
+    "short": {
+      "input": 4,
+      "cachedInput": 0.4,
+      "output": 20
+    },
+    "long": {
+      "input": 8,
+      "cachedInput": 0.8,
+      "output": 30
+    },
+    "cacheWriteMultiplier": 1.25,
+    "scope": "Standard processing, no residency/FedRAMP uplift, no tools. Cached tokens assumed zero before telemetry.",
+    "promotionalPricingAvailableAtLeastThrough": "2026-11-21"
+  },
+  "outputAccounting": "Visible + reasoning + non-visible formatting share max_output_tokens; reasoning billed as output."
+}

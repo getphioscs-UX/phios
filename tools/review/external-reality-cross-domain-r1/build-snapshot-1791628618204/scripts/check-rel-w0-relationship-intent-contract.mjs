@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {normalizeRelationshipIntent,RELATIONSHIP_INTENT_SCHEMA,RELATIONSHIP_INTENT_VALUES} from '../functions/personal-reading/relationship/relationship-intent.js';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const c=j('content/personal-reading/relationship/contracts/relationship-intent-contract-v1.json');
+assert.equal(c.work,'REL-W0');assert.equal(c.productObject,'PHI-OS-RELATIONSHIP-INTENT-v1');assert.equal(c.focusSelection.minimum,1);assert.equal(c.focusSelection.maximum,3);
+assert.ok(c.predecessorRefs.every(fs.existsSync));assert.ok(RELATIONSHIP_INTENT_VALUES.relationshipTypes.includes('SPOUSE'));assert.ok(RELATIONSHIP_INTENT_VALUES.focusAreas.includes('CONFLICT_REPAIR'));
+const base={relationshipIntentId:'REL-TEST-001',mode:'SPECIFIC_PERSON_RELATIONSHIP',relationshipType:'SPOUSE',focusAreas:['COMMUNICATION','CURRENT_PHASE'],customerQuestion:'Why do we keep getting stuck around the same decision?',participantARef:'PERSON-A',locale:'en',purpose:'RELATIONSHIP_READING',consent:{relationshipReadingUseAllowed:true,consentRecordId:'CONSENT-A-REL'}};
+const out=normalizeRelationshipIntent(base);assert.equal(out.schemaVersion,RELATIONSHIP_INTENT_SCHEMA);assert.equal(out.participantBRequired,true);assert.equal(out.governance.relationshipTypeInferred,false);assert.equal(out.governance.compatibilityScoreAllowed,false);assert.equal(out.governance.partnerHiddenStateInferenceAllowed,false);
+const self=normalizeRelationshipIntent({...base,relationshipIntentId:'REL-SELF-001',mode:'SELF_RELATIONSHIP_PATTERN',focusAreas:['UNDERSTANDING']});assert.equal(self.participantBRequired,false);
+assert.throws(()=>normalizeRelationshipIntent({...base,focusAreas:[]}),e=>e?.code==='REL_W0_FOCUS_AREAS_INVALID');
+assert.throws(()=>normalizeRelationshipIntent({...base,focusAreas:['COMMUNICATION','CURRENT_PHASE','TIMING','OPEN_QUESTION']}),e=>e?.code==='REL_W0_FOCUS_AREAS_INVALID');
+assert.throws(()=>normalizeRelationshipIntent({...base,relationshipType:'ROMANTIC_INFERRED'}),e=>e?.code==='REL_W0_RELATIONSHIP_TYPE_INVALID');
+assert.throws(()=>normalizeRelationshipIntent({...base,compatibilityScore:90}),e=>String(e?.code).startsWith('REL_W0_PROHIBITED_FIELD'));
+console.log('✓ REL-W0 Relationship Intent Contract passed: explicit self/specific modes, 1–3 focus areas, explicit purpose/consent, and no inferred relationship type/outcome/compatibility authority.');

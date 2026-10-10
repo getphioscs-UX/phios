@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "PHI-OS-RJX-VERTICAL-SLICE-SIMPLE-PERSONAL-v1.0.0",
+  "status": "VALIDATION_ONLY_VERTICAL_SLICE_FIXTURE",
+  "baselineCommit": "167bce2a82734cf96207b78abb47cdcd8cf82522",
+  "questionZhHans": "是否换工作？",
+  "mode": "SIMPLE_REALITY_CASE",
+  "clientStages": [
+    "Understand",
+    "Choose",
+    "Review"
+  ],
+  "requirements": {
+    "aiRequired": false,
+    "methodRequired": false,
+    "professionalRequiredByDefault": false,
+    "professionalTriggerOnly": [
+      "regulated_or_high_risk_explicit",
+      "professional_judgment_required"
+    ]
+  },
+  "input": {
+    "requiredFields": [
+      "currentSituation",
+      "alternative",
+      "constraints",
+      "goals"
+    ],
+    "fieldsCollected": [
+      "currentSituation",
+      "alternative",
+      "constraints",
+      "goals"
+    ],
+    "providerFieldsCollected": false,
+    "methodFieldsCollected": false
+  },
+  "ruleEngine": {
+    "providerUsed": false,
+    "known": [
+      {
+        "id": "K1",
+        "classification": "REPORTED_EXPERIENCE",
+        "sourceRef": "CLIENT-STATEMENT-1",
+        "value": "Current role feels persistently misaligned"
+      },
+      {
+        "id": "K2",
+        "classification": "OBSERVED",
+        "sourceRef": "EMPLOYMENT-RECORD-1",
+        "value": "Current compensation is verified"
+      }
+    ],
+    "unknown": [
+      {
+        "id": "U1",
+        "scopeType": "ALTERNATIVE_JOB",
+        "scopeId": "ALT-JOB-1",
+        "question": "What would the alternative role actually require?",
+        "resolved": false
+      }
+    ]
+  },
+  "reading": {
+    "singleDecisionOutput": false,
+    "providerUsed": false,
+    "alternativeReadingPresent": true,
+    "unknownVisible": true
+  },
+  "navigation": {
+    "automaticSelection": false,
+    "options": [
+      {
+        "optionId": "OPT-1",
+        "possibleAction": "Request a written offer before deciding.",
+        "expectedSignal": "Verified compensation and conditions become available.",
+        "reversibility": "HIGH"
+      },
+      {
+        "optionId": "OPT-2",
+        "possibleAction": "Remain in current role while gathering evidence.",
+        "expectedSignal": "Additional verified role information becomes available.",
+        "reversibility": "HIGH"
+      }
+    ]
+  },
+  "userChoice": {
+    "optionId": "OPT-1",
+    "selectedBy": "CLIENT",
+    "selected": true
+  },
+  "actionRecord": {
+    "actionId": "ACTION-1",
+    "sourceOptionId": "OPT-1",
+    "createdAfterUserChoice": true,
+    "authority": "CLIENT_SELECTED_ACTION_REFERENCE",
+    "executionAuthorityCreatedByFixture": false
+  },
+  "review": {
+    "expectedSignal": "Verified compensation and conditions become available.",
+    "outcome": "Written offer received with compensation and conditions.",
+    "comparison": "EXPECTED_SIGNAL_OBSERVED",
+    "causalityClaimed": false
+  },
+  "realityNext": {
+    "previousVersionId": "REALITY-v1",
+    "versionId": "REALITY-v2",
+    "diffId": "DIFF-001",
+    "pastMutated": false
+  }
+}

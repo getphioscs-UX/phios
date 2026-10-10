@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "PHI-OS-HPC2-W13-HOMEPAGE-RESPONSIVE-LOCALE-ACCESSIBILITY-CONTRACT-v1.0.0",
+  "work": "HPC2-W13",
+  "baselineCommit": "64ead9a9addf56f4f83c28736bf205cdc9380c10",
+  "status": "BFR_H12_H14_HOMEPAGE_SUBSET_ONLY_NO_SECOND_RESPONSIVE_SYSTEM",
+  "predecessors": [
+    "content/web/homepage/hpc2/freeze/hpc2-w12-r2-homepage-consumer-projection-freeze-v1.json",
+    "content/web-production/bfr-responsive-production-matrix-v1.json",
+    "content/web-production/bfr-responsive-acceptance-v1.json",
+    "content/web-production/bfr-accessibility-acceptance-v1.json"
+  ],
+  "matrix": "content/web/homepage/hpc2/homepage-responsive-locale-accessibility-matrix-v1.json",
+  "requiredMatrix": {
+    "surfaceFamily": "Homepage",
+    "viewports": [
+      360,
+      390,
+      430,
+      768,
+      1024,
+      1280,
+      1440
+    ],
+    "locales": [
+      "en",
+      "zh-Hans"
+    ],
+    "primaryStateCount": 14
+  },
+  "hero": {
+    "canonicalAssetCode": "HERO-001",
+    "desktopFullBleed": true,
+    "mobileArtDirectionRequired": true,
+    "objectPositionControlRequired": true,
+    "gradientAdjustmentRequired": true,
+    "copyWidthChangeRequired": true,
+    "mobileCtaStackRequired": true,
+    "allowedVisualModes": [
+      "SAME_CANONICAL_ASSET",
+      "REGISTERED_MOBILE_VARIANT"
+    ],
+    "unregisteredAlternateForbidden": true
+  },
+  "locale": {
+    "sourceModules": [
+      "assets/js/locales/en/public.js",
+      "assets/js/locales/zh-Hans/public.js"
+    ],
+    "sceneRange": "H01_H09",
+    "missingSceneKeyAllowed": false
+  },
+  "accessibility": {
+    "inheritsBfrH14": true,
+    "keyboard": true,
+    "visibleFocus": true,
+    "semanticLandmarks": true,
+    "headingHierarchy": true,
+    "altOrDecorativeSemantics": true,
+    "reducedMotion": true,
+    "touchTarget": true,
+    "formLabels": true,
+    "skipNavigation": true
+  },
+  "browserEvidence": {
+    "claimed": false,
+    "state": "REVALIDATION_REQUIRED"
+  },
+  "globalProductionFreezeDeclared": false
+}

@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {BASELINE,ROOT,readJson,assertEvidence} from './lib/knowledge-answer-projection/kap-foundation-v1.mjs';
+const a=readJson(`${ROOT}/audits/kap-w0-existing-runtime-capability-audit-v1.json`);
+assert.equal(a.step,'KAP-W0'); assert.equal(a.baselineCommit,BASELINE); assert.equal(a.status,'AUDITED_NO_RUNTIME_MUTATION');
+for(const e of Object.values(a.evidence)) assertEvidence(e);
+assert.equal(a.capabilities.knowledge.questionScopedGroundingAvailable,true);
+assert.equal(a.capabilities.knowledge.rawFullBookDeliveryBlocked,true);
+assert.equal(a.capabilities.answer.existingProjectionType,'DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER');
+assert.equal(a.capabilities.answer.existingGenerativeModelUsed,false);
+assert.equal(a.capabilities.answer.answerMayCreateCanonicalAuthority,false);
+assert.equal(a.capabilities.publication.articleAuthorityOwner,'PJA'); assert.equal(a.capabilities.publication.nonArticleAssetAuthorityOwner,'CAR');
+assert.equal(a.capabilities.publication.approvalImpliesPublication,false);
+assert.equal(a.capabilities.realityReading.canonicalRealityOwner,'RMO'); assert.equal(a.capabilities.realityReading.dataGovernanceOwner,'RDG');
+assert.equal(a.capabilities.realityReading.rreCurrentStatus,'FROZEN_VALIDATION_ONLY_READING_RUNTIME'); assert.equal(a.capabilities.realityReading.kapMayActivateReadingProduction,false);
+const api=fs.readFileSync('functions/_lib/knowledge-access-api.js','utf8'); assert.match(api,/DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER/); assert.match(api,/generativeModelUsed:\s*false/);
+console.log('✓ KAP-W0 Existing Runtime Capability Audit passed.');

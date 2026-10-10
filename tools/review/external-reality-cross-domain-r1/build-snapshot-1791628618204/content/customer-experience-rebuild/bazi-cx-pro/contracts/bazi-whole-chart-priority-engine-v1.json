@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-CX-PRO-WHOLE-CHART-PRIORITY-CONTRACT-v1.0.0",
+  "workId": "BAZI-CX-PRO-W7",
+  "title": "Whole-Chart Priority Engine",
+  "status": "ADMITTED",
+  "objective": "Select 3–5 chart-level themes that organize the rest of the BaZi reading so the customer sees structural priority instead of a flat catalogue of symbols.",
+  "sourceModules": [
+    "tenGods",
+    "dayMasterStrength",
+    "relationships",
+    "pattern",
+    "timing"
+  ],
+  "outputSchemaVersion": "PHI-OS-BAZI-CX-PRO-WHOLE-CHART-PRIORITY-v1.0.0",
+  "requiredThemeTypes": [
+    "CARRYING",
+    "TEN_GOD_GROUP",
+    "RELATIONSHIP",
+    "PATTERN",
+    "TIMING"
+  ],
+  "selection": {
+    "minimumThemes": 3,
+    "maximumThemes": 5,
+    "maximumPerThemeType": {
+      "TEN_GOD_GROUP": 2,
+      "CARRYING": 1,
+      "RELATIONSHIP": 1,
+      "PATTERN": 1,
+      "TIMING": 1
+    },
+    "diversityRequired": true,
+    "numericSalienceCustomerVisible": false
+  },
+  "boundaries": {
+    "priorityIsReadingOrderNotFateRank": true,
+    "oneSymbolDoesNotBecomeWholeIdentity": true,
+    "goodBadScoreCreated": false,
+    "eventPredictionCreated": false
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-FP-W5-FOUR-TRANSFORMATION-AUTHORITY-v1.0.0",
+  "work": "ZIWEI-FP-W5",
+  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
+  "status": "ENGINEERING_FROZEN_EXISTING_HUMAN_AUTHORITIES_REUSED",
+  "principle": "W5 composes already-authorised transformation layers. It does not invent a new four-transformation table and does not turn palace-stem flying transformations on by implication.",
+  "layers": {
+    "NATAL": {
+      "included": true,
+      "authorityRef": "content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json",
+      "tableCode": "BIRTH_YEAR_STEM_FOUR_TRANSFORMATIONS_SOUTHERN_TABLE_V1",
+      "stemBasis": "LUNAR_BIRTH_YEAR_HEAVENLY_STEM",
+      "recalculatedByW5": false
+    },
+    "DA_XIAN": {
+      "included": true,
+      "authorityRef": "content/professional/zi-wei-dynamic/authority/zi-wei-dynamic-policy-v2.json",
+      "stemBasis": "NATAL_PALACE_STEM_AT_CURRENT_DA_XIAN_LIFE_BRANCH",
+      "recalculatedByW5": false
+    },
+    "LIU_NIAN": {
+      "included": true,
+      "authorityRef": "content/professional/zi-wei-dynamic/authority/zi-wei-dynamic-policy-v2.json",
+      "stemBasis": "TARGET_LUNAR_YEAR_HEAVENLY_STEM",
+      "recalculatedByW5": false
+    },
+    "PALACE_STEM_FLYING": {
+      "included": false,
+      "state": "DEFERRED_SEPARATE_SCHOOL_AND_SOURCE_FREEZE_REQUIRED"
+    },
+    "LIU_YUE": {"included": false, "state": "DEFERRED"},
+    "LIU_RI": {"included": false, "state": "DEFERRED"},
+    "LIU_SHI": {"included": false, "state": "DEFERRED"}
+  },
+  "renConflict": {
+    "currentHumanFrozenRow": ["TIAN_LIANG", "ZI_WEI", "ZUO_FU", "WU_QU"],
+    "classicalWitnessVariantRecordedElsewhere": ["TIAN_LIANG", "ZI_WEI", "TIAN_FU", "WU_QU"],
+    "resolution": "PRESERVE_CURRENT_HUMAN_FROZEN_RUNTIME_AUTHORITY",
+    "silentOverrideAllowed": false
+  },
+  "sourceAdmissionPrerequisite": "ZIWEI-SOURCE-CLAIM-BATCH-001:HUMAN_ADMITTED_29_OF_29",
+  "customerInterpretationApproved": false,
+  "customerCutoverAllowed": false
+}

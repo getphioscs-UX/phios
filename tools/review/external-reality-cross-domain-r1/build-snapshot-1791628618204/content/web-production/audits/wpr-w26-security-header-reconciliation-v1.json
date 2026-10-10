@@ -1,0 +1,17 @@
+{
+  "auditCode": "PHI-OS-WPR-W26-SECURITY-HEADER-RECONCILIATION-v1",
+  "work": "WPR-W26",
+  "baselineCommit": "d150a741231abe608a0d994e9e5787e6c71cfc3d",
+  "findings": {
+    "existingGoogleFontsBlockedByPreviousCsp": true,
+    "futureR2ImagesBlockedByPreviousCsp": true,
+    "privateWprRoutesMissingUniformResponseNoStore": true
+  },
+  "resolution": {
+    "googleFontsOriginsNarrowlyAllowed": true,
+    "r2AndGetphiosAssetOriginsNarrowlyAllowed": true,
+    "arbitraryHttpsImageWildcardAdded": false,
+    "privateRoutesNoStoreAndNoIndexAdded": true
+  },
+  "authorityExpansionGranted": false
+}

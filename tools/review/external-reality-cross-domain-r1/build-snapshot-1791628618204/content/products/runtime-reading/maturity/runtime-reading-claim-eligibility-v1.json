@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W27-CLAIM-ELIGIBILITY-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W27.6",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "MRM_S_DERIVED_CLAIM_BOUNDARY",
+  "maturityAuthority": "MRM-S",
+  "records": [
+    {
+      "capabilityCode": "RRP-INPUT-BUNDLE",
+      "derivedEM": "EM-0",
+      "allowedClaims": [
+        "Architecturally defined Runtime Reading input bundle"
+      ],
+      "prohibitedClaims": [
+        "Fixture-validated input runtime",
+        "Pilot-verified input runtime",
+        "Production-mature Runtime Reading system"
+      ]
+    },
+    {
+      "capabilityCode": "RRP-PROJECTION-INTAKE",
+      "derivedEM": "EM-0",
+      "allowedClaims": [
+        "Architecturally defined projection intake boundary"
+      ],
+      "prohibitedClaims": [
+        "Validated projection intake",
+        "Pilot-verified Runtime Reading"
+      ]
+    },
+    {
+      "capabilityCode": "RRP-MEANING-ADMISSION",
+      "derivedEM": "EM-0",
+      "allowedClaims": [
+        "Architecturally defined meaning admission boundary"
+      ],
+      "prohibitedClaims": [
+        "Validated meaning runtime",
+        "Production meaning authority"
+      ]
+    },
+    {
+      "capabilityCode": "RRP-CONVERGENCE",
+      "derivedEM": "EM-0",
+      "allowedClaims": [
+        "Architecturally defined convergence classification boundary"
+      ],
+      "prohibitedClaims": [
+        "Validated cross-method truth engine"
+      ]
+    },
+    {
+      "capabilityCode": "RRP-REALITY-BINDING",
+      "derivedEM": "EM-0",
+      "allowedClaims": [
+        "Architecturally defined Reality binding boundary"
+      ],
+      "prohibitedClaims": [
+        "Validated Reality inference"
+      ]
+    },
+    {
+      "capabilityCode": "RRP-CARRIER-BINDING",
+      "derivedEM": "EM-0",
+      "allowedClaims": [
+        "Architecturally defined Carrier binding boundary"
+      ],
+      "prohibitedClaims": [
+        "Validated personality inference"
+      ]
+    },
+    {
+      "capabilityCode": "RRP-REPORT-COMPOSITION",
+      "derivedEM": "EM-2",
+      "allowedClaims": [
+        "Fixture-validated canonical report candidate composition"
+      ],
+      "prohibitedClaims": [
+        "Pilot-verified Runtime Reading system",
+        "Validated Runtime Reading system",
+        "Production-mature Runtime Reading system"
+      ]
+    },
+    {
+      "capabilityCode": "RRP-VISUAL-REFERENCE",
+      "derivedEM": "EM-0",
+      "allowedClaims": [
+        "Architecturally governed semantic visual reference binding"
+      ],
+      "prohibitedClaims": [
+        "Published visual production runtime",
+        "Validated visual interpretation"
+      ]
+    },
+    {
+      "capabilityCode": "RRP-RR-HANDOFF",
+      "derivedEM": "EM-1",
+      "allowedClaims": [
+        "Deterministically verified RR candidate-submission construction"
+      ],
+      "prohibitedClaims": [
+        "Pilot-verified RR handoff",
+        "Released customer report"
+      ]
+    }
+  ],
+  "rules": {
+    "rrpMaySelfAssignEM": false,
+    "claimCannotExceedDerivedEM": true,
+    "passAloneCannotRaiseEM": true,
+    "productionWordingRequiresMRMSEligibility": true
+  },
+  "derivedFromMatrix": "content/runtime-maturity/matrices/master-evidence-maturity-matrix-v1.2.json",
+  "manualAssignmentAuthority": false
+}

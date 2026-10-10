@@ -1,0 +1,7 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import crypto from 'node:crypto';
+const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
+const refs=[['content/registry/pds-w1-experience-contract.json','76a3da891c172e7bf36372134086e33c03867012bc02f2079ee1d197f8fd7aa3'],['scripts/check-pds-w10-full-site-acceptance.mjs','e08783d2ef208775758c103dec4923c0d20cae3963ece89c8969107b00945a18'],['content/registry/pds-w10-full-site-acceptance.json','c0e452604366314517d81748996b0b297b3e3cb80347a119cfe422606bf43fbe']];
+const records=refs.map(([path,expected])=>{const before=fs.readFileSync(path,'utf8'),restored=before.replace(/\r?\n/g,'\r\n');assert.equal(sha(restored),expected,'CONTENT_DIFF_NOT_LINE_ENDINGS_ONLY:'+path);if(path.endsWith('.json'))assert.deepEqual(JSON.parse(before),JSON.parse(restored));return{path,before,restored,expected};});
+for(const r of records){if(r.before!==r.restored)fs.writeFileSync(r.path,r.restored);assert.equal(sha(fs.readFileSync(r.path)),r.expected);}
+fs.writeFileSync('content/production-closure/live-customer-commercial-convergence/PDS-FROZEN-TEXT-REPRESENTATION.json',JSON.stringify({changeClass:'RESTORE_EXACT_FROZEN_CRLF_BYTES',frozenDigestChanged:false,semanticContentChanged:false,productionOperations:false,files:records.map(r=>({path:r.path,beforeSha256:sha(r.before),afterSha256:r.expected}))},null,2)+'\n');
+console.log('Exact frozen PDS bytes restored without changing frozen hashes or logical content.');

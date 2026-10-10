@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-VI-ATLAS-DATA-LOADER-SUCCESSOR-v4.0.0",
+  "status": "ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW",
+  "predecessor": "content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-data-loader-successor-v3.json",
+  "predecessorSha256": "ec9f6e9794d9b29f541f56e8bb2f50c81d7e10c200c86b9bb9f176deba614a0e",
+  "change": {
+    "path": "assets/js/pages/civilization-atlas/atlas-data.js",
+    "previousSha256": "5578cc7bc5f1d1d29e54c867f66540b445df8d25093cf127d1f1062c2553301c",
+    "successorSha256": "34b4b0c9f6f0e2a1242ba9233ca13ef9da5ced7f132ab6fdc29adfdf84ff2ea1",
+    "changeClass": "NEW_ATLAS_RELEASE_SUCCESSOR"
+  },
+  "reason": "Reconcile existing L2 macro-era loader, FR5-F dossier depth shards and B6-FR3 knowledge-depth overlay; runtime bytes are unchanged by this registration.",
+  "existingCommits": [
+    "7cfdbf83",
+    "8f9c2be2",
+    "0771471d"
+  ],
+  "governanceEvidence": [
+    "content/civilization-atlas/evidence/civ-atlas-fr5-f-remaining-11-completion-v1.json",
+    "content/civilization-atlas/evidence/b6-fr3-dossier-lived-depth-v1.json"
+  ],
+  "checks": [
+    "scripts/check-civilization-atlas-fr5-f-remaining-11-depth.mjs",
+    "scripts/check-b6-fr3-dossier-lived-depth.mjs"
+  ],
+  "scope": {
+    "bookVCanonicalTheoryChanged": false,
+    "bookVHistoricalRegistriesChanged": false,
+    "parallelAtlasRuntimeCreated": false,
+    "parallelAskRuntimeCreated": false,
+    "productionAdmissionChanged": false
+  }
+}

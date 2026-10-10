@@ -1,0 +1,136 @@
+{
+  "preflightCode": "PHI-OS-WAVE1-HUMAN-PRODUCTION-DECISION-ELIGIBILITY-v1",
+  "preflightVersion": "1.0.0",
+  "status": "READY_FOR_HUMAN_PRODUCTION_DECISION",
+  "baselineCommit": "335ccbaed4e8210119e2935001e571790ec2fcd1",
+  "sourcePilotPlan": "content/knowledge/production-planning/plans/kpp-pilot-production-plan-v2.json",
+  "c3ClosureReference": "content/knowledge/editorial/c3/closures/wave1-c3-readiness-closure-v1.json",
+  "activationGateReference": "content/knowledge/production-planning/contracts/wave1-production-activation-gate-v1.json",
+  "selectedExecutionScope": [
+    {
+      "nodeCode": "KN-PREFACE-004",
+      "productionRole": "ARTICLE",
+      "dispatchTarget": "PJA",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-preface-004-production-readiness.json",
+      "c3Status": "human_approval_required",
+      "productionReady": false,
+      "humanProductionDecisionEligible": true,
+      "remainingBlocking": [
+        "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
+        "EXPORTABILITY_NOT_ALLOWED"
+      ]
+    },
+    {
+      "nodeCode": "KN-B1-P1-003",
+      "productionRole": "FRAGMENT",
+      "dispatchTarget": "PJA",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-b1-p1-003-production-readiness.json",
+      "c3Status": "human_approval_required",
+      "productionReady": false,
+      "humanProductionDecisionEligible": true,
+      "remainingBlocking": [
+        "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
+        "EXPORTABILITY_NOT_ALLOWED"
+      ]
+    },
+    {
+      "nodeCode": "KN-B1-P4-003",
+      "productionRole": "FIGURE",
+      "dispatchTarget": "CAR",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-b1-p4-003-production-readiness.json",
+      "c3Status": "human_approval_required",
+      "productionReady": false,
+      "humanProductionDecisionEligible": true,
+      "remainingBlocking": [
+        "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
+        "EXPORTABILITY_NOT_ALLOWED"
+      ]
+    },
+    {
+      "nodeCode": "KN-B1-P4-004",
+      "productionRole": "MULTI_ASSET",
+      "dispatchTarget": "CAR",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-b1-p4-004-production-readiness.json",
+      "c3Status": "human_approval_required",
+      "productionReady": false,
+      "humanProductionDecisionEligible": true,
+      "remainingBlocking": [
+        "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
+        "EXPORTABILITY_NOT_ALLOWED"
+      ]
+    }
+  ],
+  "gateSnapshot": {
+    "selectedItemCount": 4,
+    "c2FrozenCount": 4,
+    "nonHumanC3GateReadyCount": 4,
+    "humanApprovalRequiredCount": 4,
+    "productionReadyCount": 0,
+    "humanProductionDecisionAllowed": true,
+    "productionPlanFreezeAllowed": false,
+    "productionWaveFreezeAllowed": false,
+    "dispatchAllowed": false
+  },
+  "eligibilitySemantics": {
+    "humanProductionDecisionEligibleMeans": "All required C3 gates except humanProductionApproval and exportability are passed.",
+    "productionReadyStillFalse": true,
+    "humanProductionApprovalStillRequired": true,
+    "exportabilityDependsOnRecordedHumanProductionDecision": true,
+    "planAndWaveFreezeRemainDownstream": true,
+    "dispatchRemainsDownstream": true
+  },
+  "requiredNextAuthority": "KPP_W25_HUMAN_PRODUCTION_DECISION",
+  "decisionScope": [
+    {
+      "nodeCode": "KN-PREFACE-004",
+      "productionRole": "ARTICLE",
+      "dispatchTarget": "PJA",
+      "allowedHumanDecisions": [
+        "approve_for_production",
+        "defer",
+        "reject"
+      ]
+    },
+    {
+      "nodeCode": "KN-B1-P1-003",
+      "productionRole": "FRAGMENT",
+      "dispatchTarget": "PJA",
+      "allowedHumanDecisions": [
+        "approve_for_production",
+        "defer",
+        "reject"
+      ]
+    },
+    {
+      "nodeCode": "KN-B1-P4-003",
+      "productionRole": "FIGURE",
+      "dispatchTarget": "CAR",
+      "allowedHumanDecisions": [
+        "approve_for_production",
+        "defer",
+        "reject"
+      ]
+    },
+    {
+      "nodeCode": "KN-B1-P4-004",
+      "productionRole": "MULTI_ASSET",
+      "dispatchTarget": "CAR",
+      "allowedHumanDecisions": [
+        "approve_for_production",
+        "defer",
+        "reject"
+      ]
+    }
+  ],
+  "effects": {
+    "humanProductionDecisionCreated": false,
+    "productionPlanFrozen": false,
+    "productionWaveFrozen": false,
+    "dispatchCreated": false,
+    "pjaCandidateCreated": false,
+    "carAssetBriefCreated": false,
+    "carAssetCreated": false,
+    "publicationCreated": false
+  },
+  "eligibilityContractReference": "content/knowledge/production-planning/contracts/wave1-human-production-decision-eligibility-v1.json"
+}

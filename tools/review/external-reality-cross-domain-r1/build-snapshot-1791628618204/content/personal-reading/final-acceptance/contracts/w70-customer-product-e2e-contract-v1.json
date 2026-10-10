@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-W70-CUSTOMER-PRODUCT-E2E-CONTRACT-v1.0.0",
+  "work": "W70",
+  "baselineCommit": "3297246c2467a7034817eb89f6d4f615b2675b7a",
+  "status": "ACTIVE_MACHINE_VERIFIED",
+  "cohorts": {
+    "ordinaryPaidNarrative": 24,
+    "profileAssessment": 24,
+    "relationship": 24,
+    "totalCompleteCases": 72
+  },
+  "flow": [
+    "input",
+    "methods",
+    "AcceptedMethodReadingEnvelope",
+    "Cross",
+    "Current Reality",
+    "Governed Personal Reading",
+    "Narrative Brief",
+    "Narrative Preview",
+    "Checkout",
+    "Payment verification",
+    "Entitlement",
+    "Narrative Writer",
+    "Verifier",
+    "Targeted Repair",
+    "Stored NarrativeReadingIR",
+    "Web",
+    "Print",
+    "PDF",
+    "Reopen",
+    "NO regeneration"
+  ],
+  "failureCoverage": [
+    "OpenAI timeout",
+    "OpenAI refusal",
+    "invalid provider output",
+    "verification failure",
+    "repair failure",
+    "payment succeeds but generation fails",
+    "generation retry",
+    "no duplicate charge",
+    "no duplicate narrative",
+    "reopen without provider call",
+    "PDF without provider call"
+  ],
+  "successorCoverage": {
+    "humanDesignIncluded": true,
+    "profileCohortSeparate": true,
+    "relationshipCohortSeparate": true,
+    "ordinaryCasesDoNotCountAsProfileOrRelationshipAcceptance": true
+  }
+}

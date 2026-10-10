@@ -1,0 +1,11 @@
+export const HDR2_MANUAL_EXTENSION_RUNTIME_CODE='PHI_OS_HDR2_PROFESSIONAL_MANUAL_EXTENSION_RUNTIME';
+export const HDR2_MANUAL_EXTENSION_RUNTIME_VERSION='1.0.0';
+const ALLOWED=new Set(['PHS','VARIABLES','ENVIRONMENT','VIEW','MOTIVATION','COGNITION','DREAM_RAVE']);
+const FORBIDDEN_SOURCE_TYPES=new Set(['PHI_OS_CALCULATION','AUTOMATIC_CALCULATION','DERIVED_BY_RUNTIME','AI_GENERATED']);
+function text(value,code){if(typeof value!=='string'||!value.trim())throw new TypeError(code);return value.trim();}
+function iso(value,code){const v=text(value,code);if(Number.isNaN(Date.parse(v)))throw new TypeError(code);return v;}
+export function normalizeHdr2ProfessionalManualExtensions(input){
+  if(input==null)return Object.freeze([]);if(!Array.isArray(input))throw new TypeError('HDR2_MANUAL_EXTENSIONS_ARRAY_REQUIRED');const seen=new Set();
+  const normalized=input.map((entry,index)=>{if(!entry||typeof entry!=='object'||Array.isArray(entry))throw new TypeError(`HDR2_MANUAL_EXTENSION_${index}_OBJECT_REQUIRED`);const extensionCode=text(entry.extensionCode,`HDR2_MANUAL_EXTENSION_${index}_CODE_REQUIRED`);if(!ALLOWED.has(extensionCode))throw new Error(`HDR2_MANUAL_EXTENSION_NOT_ADMITTED:${extensionCode}`);if(seen.has(extensionCode))throw new Error(`HDR2_MANUAL_EXTENSION_DUPLICATE:${extensionCode}`);seen.add(extensionCode);const sourceType=text(entry.sourceType,`HDR2_MANUAL_EXTENSION_${index}_SOURCE_TYPE_REQUIRED`);if(FORBIDDEN_SOURCE_TYPES.has(sourceType)||sourceType!=='PROFESSIONAL_MANUAL_INPUT')throw new Error(`HDR2_AUTOMATIC_EXTENSION_SOURCE_FORBIDDEN:${extensionCode}`);const enteredBy=text(entry.enteredBy,`HDR2_MANUAL_EXTENSION_${index}_ENTERED_BY_REQUIRED`);const enteredAt=iso(entry.enteredAt,`HDR2_MANUAL_EXTENSION_${index}_ENTERED_AT_REQUIRED`);const sourceRef=text(entry.sourceRef,`HDR2_MANUAL_EXTENSION_${index}_SOURCE_REF_REQUIRED`);if(!Object.prototype.hasOwnProperty.call(entry,'value'))throw new TypeError(`HDR2_MANUAL_EXTENSION_${index}_VALUE_REQUIRED`);return Object.freeze({extensionCode,sourceType:'PROFESSIONAL_MANUAL_INPUT',enteredBy,enteredAt,sourceRef,value:structuredClone(entry.value),confidence:typeof entry.confidence==='string'?entry.confidence:'PROFESSIONAL_DECLARED',automaticCalculationUsed:false,calculationAuthorityClaimed:false,interpretationAuthority:'PROFESSIONAL_DECLARED_CONTEXT_ONLY'});});
+  return Object.freeze(normalized);
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W23-W25-REALITY-COMPLEXITY-ACCEPTANCE-v1.0.0",
+  "phase": "KAP",
+  "steps": [
+    "KAP-W23",
+    "KAP-W24",
+    "KAP-W25"
+  ],
+  "baselineCommit": "a6e6297fe5d353c56b859d0f80608e847eba9376",
+  "status": "ACCEPTED_COMPLEXITY_GATE_W24_DECISIVE_SCORE_ROUTING_AID_ONLY",
+  "acceptedFacts": {
+    "allFourteenComplexitySignalsImplemented": true,
+    "allTenScoreDimensionsImplemented": true,
+    "scoreClasses": [
+      "LOW",
+      "MEDIUM",
+      "HIGH"
+    ],
+    "highScoreAutomaticallyRequiresRealityModel": false,
+    "highScoreAutomaticallyActivatesRealityJourney": false,
+    "w24RequirementTestDecisive": true,
+    "w22RealityModelRequiredTreatedAsCandidateUntilW24": true,
+    "requirementNoKeepsAskOrGuidedReading": true,
+    "requirementYesCreatesRealityJourneyCandidateOnly": true,
+    "automaticRealityJourney": false,
+    "explicitEscalationConsentRequired": true,
+    "realityTruthCreated": false,
+    "realityModelCreated": false,
+    "persistentCaseCreated": false,
+    "aiRequired": false
+  },
+  "production": {
+    "endpoint": "/api/reality-complexity",
+    "deterministic": true,
+    "persistence": false
+  },
+  "predecessor": {
+    "guidedReadingFreezePath": "content/knowledge/answer-projection/freeze/kap-w18-w22-guided-reading-freeze-v1.json",
+    "guidedReadingFreezeSha256": "51da9537f515e902d0a1b3c605506543a2dc5f732d42bde2dc30f546f6893608",
+    "mutated": false
+  },
+  "nextWork": "REALITY_JOURNEY_HANDOFF_SUCCESSOR_IF_REQUIRED",
+  "predecessorRestoration": {
+    "required": true,
+    "path": "content/professional/method-client-delivery/successors/mcd-8-kap-w18-guided-reading-consumption-successor-v1.json",
+    "sha256": "ab23f197db212d318628e6d8b8f44c93010c4abcc7cb5b95e66214843d4d2bc0",
+    "authorityChanged": false
+  }
+}

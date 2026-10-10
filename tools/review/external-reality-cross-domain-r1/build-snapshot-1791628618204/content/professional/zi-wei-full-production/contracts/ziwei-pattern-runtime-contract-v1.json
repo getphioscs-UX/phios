@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-PATTERN-RUNTIME-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W8",
+  "status": "ENGINEERING_MATCHER_COMPLETE_SOURCE_RULESET_GATED",
+  "runtime": "functions/zi-wei-full-production/ziwei-pattern-runtime.js",
+  "inputSchema": "PHI-OS-ZIWEI-STAR-COMBINATION-RUNTIME-v1.0.0",
+  "outputSchema": "PHI-OS-ZIWEI-PATTERN-RUNTIME-v1.0.0",
+  "ruleRegistryRequirements": {
+    "admissionState": "HUMAN_ADMITTED",
+    "sourceClaimIdRequired": true,
+    "versionRequired": true,
+    "pendingRegistryExecutionForbidden": true,
+    "testOnlyRegistryAllowedOnlyIn": "INTERNAL_VALIDATION"
+  },
+  "predicateVocabulary": [
+    "SAME_PALACE_STARS",
+    "STAR_IN_PALACE",
+    "STAR_IN_PALACE_BRANCH",
+    "STAR_STATE_IN",
+    "FLANK_STARS_AROUND_PALACE",
+    "NETWORK_HAS_STARS",
+    "TRANSFORMATIONS_IN_NETWORK"
+  ],
+  "outputSeparation": {
+    "structuralCandidates": "ENGINEERING_FEATURES_NOT_TRADITIONAL_PATTERNS",
+    "traditionalPatterns": "ONLY_MATCHED_FROM_ADMITTED_RULE_REGISTRY"
+  },
+  "invariants": [
+    "NO_PATTERN_FROM_NAME_ONLY",
+    "NO_PENDING_SOURCE_CLAIM_EXECUTION",
+    "NO_NUMERIC_PATTERN_STRENGTH",
+    "NO_FORTUNE_OUTCOME",
+    "NO_CUSTOMER_CUTOVER"
+  ]
+}

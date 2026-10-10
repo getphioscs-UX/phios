@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-ASTA-W10-CANONICAL-PROJECTION-v2.0.0",
+  "work": "ASTA-W10",
+  "status": "READY_FOR_CLIENT_SUCCESSOR_BINDING_NOT_PUBLICLY_PROMOTED",
+  "canonicalObject": "CanonicalMethodProjection",
+  "projectionSchemaVersion": "PHI-OS-CANONICAL-METHOD-PROJECTION-v2.0.0",
+  "methodCode": "ASTROLOGY_PROJECTION",
+  "calculation": {
+    "positions": [
+      "CORE_10_PLANETS",
+      "NORTH_NODE",
+      "SOUTH_NODE"
+    ],
+    "structures": [
+      "ANGLES",
+      "HOUSE_CUSPS",
+      "HOUSE_PLACEMENTS",
+      "ASPECTS"
+    ]
+  },
+  "unknownPolicy": {
+    "missingCoordinates": "PARTIAL_WITH_AST_HOUSES_ANGLES_NOT_CALCULATED",
+    "nodeCalculationFailure": "FAIL_CLOSED",
+    "rendererMustDisclosePartial": true
+  },
+  "boundaries": {
+    "rawCoreSchemaExposed": false,
+    "interpretationIncluded": false,
+    "meaningAuthorityCreated": false,
+    "professionalJudgmentCreated": false,
+    "availabilityPromotionCreated": false
+  },
+  "runtime": "functions/method-client-delivery/canonical-projection-runtime-ast-v2.js",
+  "publicBinding": {
+    "currentApiRemainsV1": true,
+    "activationDeferredTo": "ASTA-W19",
+    "reason": "Batch 4 completes calculation/projection scope without prematurely changing the current Limited frontend contract."
+  }
+}

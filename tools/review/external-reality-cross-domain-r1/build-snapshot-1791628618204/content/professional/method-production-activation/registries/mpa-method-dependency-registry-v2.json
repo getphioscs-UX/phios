@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-MPA-METHOD-DEPENDENCY-REGISTRY-v2.0.0",
+  "work": "MPA-W14-CURRENT",
+  "baselineCommit": "4188ce3cb33fc4bb0ddf80b29a4ab546a74841d6",
+  "status": "ACTIVE_METHOD_DEPENDENCIES_ONLY",
+  "fingerprintMode": "PACKAGE_ENTRY_VERSION_AND_INTEGRITY_ONLY",
+  "wholePackageJsonFingerprint": false,
+  "wholePackageLockFingerprint": false,
+  "methodDependencies": [
+    {
+      "package": "astronomy-engine",
+      "packageJsonSection": "dependencies",
+      "version": "2.1.19",
+      "packageLockPath": "node_modules/astronomy-engine",
+      "integrity": "sha512-8yWKNf7UeNbH458h3sAJ6ZgAjE5jTXp/mNNRFoC20j2SHwZIjAQeEsBB2Q3uCFRaTCCJRv33K2XhkhZQMXoX6w==",
+      "authorityRole": "CANONICAL_ASTRONOMY_ENGINE_DEPENDENCY",
+      "consumers": [
+        "ASTROLOGY",
+        "BAZI",
+        "HUMAN_DESIGN",
+        "PHI_OS_PERSONAL_STRUCTURE"
+      ]
+    }
+  ],
+  "explicitNonMethodDependenciesExcludedFromMpa": [
+    "sharp",
+    "wrangler",
+    "pdfjs-dist",
+    "ajv",
+    "linkedom",
+    "@aws-sdk/client-s3"
+  ],
+  "rules": {
+    "methodDependencyVersionDriftRequiresRegression": true,
+    "methodDependencyIntegrityDriftRequiresRegression": true,
+    "unrelatedDependencyDriftDoesNotTriggerMpa": true,
+    "packageScriptDriftDoesNotTriggerMpa": true,
+    "visualProductionDependencyDriftDoesNotTriggerMpa": true
+  }
+}

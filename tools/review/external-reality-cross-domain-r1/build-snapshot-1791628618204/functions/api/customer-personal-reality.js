@@ -1,0 +1,435 @@
+import {validateCanonicalBirthInput} from '../method-client-delivery/canonical-birth-input-runtime.js';
+import {onRequestPost as runMethodExecute} from './method-execute.js';
+import {onRequestPost as runAstStructuralExecute} from './ast-structural-execute.js';
+import {onRequestPost as runZiWeiExecute} from './zi-wei-execute.js'; // compatibility witness; current Zi Wei customer path is owned by Full Production runtime
+import {onRequestPost as runEcrExecute} from './ecr-execute.js';
+import {projectMethodsForCustomer} from '../customer-projection/method-customer-projection.js';
+import {projectAstrologyForCustomer} from '../customer-projection/astrology-customer-projection.js';
+import {buildAstrologyCustomerReading} from '../customer-projection/astrology-customer-reading.js';
+import {buildAcceptedMethodCustomerResult} from '../customer-projection/method-customer-reading-v2.js';
+import {buildProductionMethodMeaningPayload} from '../canonical-meaning-production/api-method-meaning-handler.js';
+import {buildNumerologyCustomerReadingEnvelope,projectNumerologyEnvelopeForCustomer} from '../customer-projection/numerology-customer-reading-envelope-v1.js';
+import {maybeBuildProductionSingleMethodReading} from '../single-method-reading/single-method-reading-production.js';
+import {executeAndProjectMcd5CurrentRequest} from '../method-client-delivery/canonical-projection-runtime-current.js';
+import {buildBaziMethodNativeReading} from '../personal-professional-reading/bazi-method-native-reading-adapter.js';
+import {resolveBirthPlace} from '../location/place-resolver.js';
+import {consumeConfirmedBirthLocationSnapshot} from '../location/confirmed-birth-location-snapshot.js';
+import {buildZiweiFullProductionCustomerRuntime} from '../zi-wei-full-production/ziwei-full-production-customer-runtime.js';
+import {resolveZiweiLiveTargetContext} from '../zi-wei-full-production/ziwei-live-target-context-runtime.js';
+import {buildPersonalRealityProductRoute} from '../personal-reality-product/product-assembly.js';
+import {attachBaziPublicationAccess} from '../personal-reading/bazi-customer-publication.js';
+import {createReportSubjectPresentation} from '../canonical-presentation-runtime/report-cover-subject.js';
+import {maybeBuildProductionCombinedReading} from '../runtime-reading/cross-reading-production.js';
+import {buildConfirmedHumanDesignContextTransport,normalizeConfirmedHumanDesignContextProfile} from '../external-profile/human-design-context-transport.js';
+import {buildEcrHumanDesignComparisonIR} from '../external-profile/ecr-human-design-comparison-ir.js';
+import {buildEcrHumanDesignRealityBridgeIR} from '../external-profile/ecr-human-design-reality-bridge.js';
+import {buildEcrTargetContextSnapshot} from '../embodied-configuration/ecr-target-context-runtime.js';
+import {buildHdrTransitOverlay} from '../external-profile/hdr-target-activation-reference.js';
+import {buildProgressiveCurrentRealityIntake,buildRealityComparisonCandidates} from '../current-reality/personal-current-reality-runtime.js';
+
+const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
+const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
+const clean=value=>String(value??'').trim();
+const nullable=value=>clean(value)||null;
+const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const item of Object.values(value))freeze(item)}return value};
+const METHOD_ID=Object.freeze({ASTROLOGY:'AST',BAZI:'BZR',NUMEROLOGY:'NUM',ZI_WEI_DOU_SHU:'ZWR',EMBODIED_CONFIGURATION:'ECR'});
+const METHOD_ID_BY_PUBLIC=Object.freeze({ASTROLOGY_PROJECTION:'AST',BAZI_PROJECTION:'BZR',NUMEROLOGY_PROJECTION:'NUM',ZI_WEI_PROJECTION:'ZWR',EMBODIED_CONFIGURATION_PROJECTION:'ECR'});
+const METHODS=Object.freeze({
+  astrology:{methodCode:'ASTROLOGY',methodVersion:'0.1.0',publicMethodCode:'ASTROLOGY_PROJECTION',label:{en:'Astrology',zh:'占星'},endpoint:'/api/ast-structural-execute'},
+  bazi:{methodCode:'BAZI',methodVersion:'0.1.0',publicMethodCode:'BAZI_PROJECTION',label:{en:'BaZi',zh:'八字'},endpoint:'/api/method-execute'},
+  numeric:{methodCode:'NUMEROLOGY',methodVersion:'0.1.0-candidate',publicMethodCode:'NUMEROLOGY_PROJECTION',label:{en:'Numerology',zh:'数字学'},endpoint:'/api/method-execute'},
+  ziwei:{methodCode:'ZI_WEI_DOU_SHU',methodVersion:'1.0.0',publicMethodCode:'ZI_WEI_PROJECTION',label:{en:'Zi Wei',zh:'紫微斗数'},endpoint:'/api/zi-wei-execute'},
+  ecr:{methodCode:'EMBODIED_CONFIGURATION',methodVersion:'1.0.0',publicMethodCode:'EMBODIED_CONFIGURATION_PROJECTION',label:{en:'Embodied Configuration',zh:'载体构型读取'},endpoint:'/api/ecr-execute'}
+});
+
+function canonicalInput(body,location,consentRecordId,locale){
+  const hasTime=!body?.birthTimeUnknown&&Boolean(clean(body.birthTime));
+  const birthPlace=location
+    ?freeze({displayName:location.displayName,countryCode:location.countryCode,latitude:location.latitude,longitude:location.longitude})
+    :freeze({displayName:null,countryCode:null,latitude:null,longitude:null});
+  const timezone=location
+    ?freeze({iana:location.timezone.iana,utcOffsetAtBirth:location.timezone.utcOffsetAtBirth,source:'GOVERNED_RESOLUTION',confidence:'HIGH'})
+    :freeze({iana:null,utcOffsetAtBirth:null,source:'UNKNOWN',confidence:'UNKNOWN'});
+  return freeze({
+    birthDate:nullable(body.birthDate),
+    birthTime:hasTime?`${clean(body.birthTime)}${clean(body.birthTime).length===5?':00':''}`:null,
+    birthPlace,
+    timezone,
+    timeAccuracy:hasTime?'EXACT':'UNKNOWN',
+    locale,
+    consent:freeze({recordId:consentRecordId,granted:true,purposeCode:'PERSONAL_RUNTIME_METHOD_PROJECTION',persistence:'NONE'}),
+    inputVersion:'MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0'
+  });
+}
+
+function executionParameters(body){
+  const traditional=clean(body?.traditionalCalculationSex).toUpperCase();
+  const houseSystem=clean(body?.astrologyHouseSystem).toUpperCase();
+  const targetDate=clean(body?.numerologyTargetDate);
+  const out={};
+  if(traditional==='MALE'||traditional==='FEMALE')out.traditionalCalculationSex=traditional;
+  if(houseSystem==='WHOLE_SIGN_V1'||houseSystem==='PLACIDUS_V1')out.houseSystemCode=houseSystem;
+  if(targetDate)out.targetDate=targetDate;
+  return freeze(out);
+}
+function isoDate(value){const v=clean(value);if(!v)return null;if(!/^\d{4}-\d{2}-\d{2}$/.test(v))return null;const d=new Date(`${v}T00:00:00.000Z`);return !Number.isNaN(d.valueOf())&&d.toISOString().slice(0,10)===v?v:null}
+function numerologyExpansionInput(body){
+  const fullBirthName=clean(body?.numerologyFullBirthName);
+  const targetDate=clean(body?.numerologyTargetDate);
+  const comparisonBirthDate=clean(body?.numerologyComparisonBirthDate);
+  const identityInput=fullBirthName?freeze({fullBirthName,customerConfirmed:body?.numerologyNameConfirmed===true,alphabetSystemId:'PYTHAGOREAN_LATIN_1_9_V1',nameNormalizationPolicy:'ASCII_LATIN_LETTERS_ONLY_V1'}):null;
+  return freeze({birthDate:nullable(body?.birthDate),...(targetDate?{targetDate}:{}),...(identityInput?{identityInput}:{}),...(comparisonBirthDate?{relationship:freeze({comparisonBirthDate})}:{})});
+}
+function validateNumerologyExpansionRequest(body,selected){
+  if(!selected.includes('numeric'))return null;
+  const target=clean(body?.numerologyTargetDate),comparison=clean(body?.numerologyComparisonBirthDate),name=clean(body?.numerologyFullBirthName);
+  if(target&&!isoDate(target))return 'NUM_CX_TARGET_DATE_INVALID';
+  if(comparison&&!isoDate(comparison))return 'NUM_CX_COMPARISON_BIRTH_DATE_INVALID';
+  if(body?.numerologyNameConfirmed===true&&!name)return 'NUM_CX_CONFIRMED_NAME_REQUIRED';
+  return null;
+}
+function validClockTime(value){return /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(clean(value))}
+function validUtcOffset(value){return /^[+-](?:0\d|1[0-4]):[0-5]\d$/.test(clean(value))}
+function validIanaTimezone(value){const iana=clean(value);if(!iana)return false;try{new Intl.DateTimeFormat('en-US',{timeZone:iana}).format(new Date(0));return true}catch{return false}}
+export function resolveAstTargetContextInput(body,selected=[]){
+  if(!selected.includes('astrology'))return null;
+  const targetDate=clean(body?.astTargetContext?.targetDate),rawTime=clean(body?.astTargetContext?.targetTime),iana=clean(body?.astTargetContext?.targetTimezone?.iana),utcOffsetAtTarget=clean(body?.astTargetContext?.targetTimezone?.utcOffsetAtTarget);
+  const supplied=[targetDate,rawTime,iana,utcOffsetAtTarget].filter(Boolean).length;
+  if(supplied===0)return null;
+  if(supplied!==4){const e=new Error('AST_CX_R3_TARGET_CONTEXT_INCOMPLETE');e.code='AST_CX_R3_TARGET_CONTEXT_INCOMPLETE';e.status=422;throw e}
+  if(!isoDate(targetDate)){const e=new Error('AST_CX_R3_TARGET_DATE_INVALID');e.code='AST_CX_R3_TARGET_DATE_INVALID';e.status=422;throw e}
+  if(!validClockTime(rawTime)){const e=new Error('AST_CX_R3_TARGET_TIME_INVALID');e.code='AST_CX_R3_TARGET_TIME_INVALID';e.status=422;throw e}
+  if(!validIanaTimezone(iana)){const e=new Error('AST_CX_R3_TARGET_TIMEZONE_INVALID');e.code='AST_CX_R3_TARGET_TIMEZONE_INVALID';e.status=422;throw e}
+  if(!validUtcOffset(utcOffsetAtTarget)){const e=new Error('AST_CX_R3_TARGET_UTC_OFFSET_INVALID');e.code='AST_CX_R3_TARGET_UTC_OFFSET_INVALID';e.status=422;throw e}
+  const targetTime=rawTime.length===5?`${rawTime}:00`:rawTime;
+  return freeze({targetDate,targetTime,targetTimezone:freeze({iana,utcOffsetAtTarget})});
+}
+function resolveEcrTargetContextInput(body,selected=[]){
+  if(!selected.includes('ecr'))return null;
+  const raw=body?.ecrTargetContext;if(raw==null)return null;
+  const targetDate=clean(raw?.targetDate),rawTime=clean(raw?.targetTime),iana=clean(raw?.targetTimezone?.iana),utcOffsetAtTarget=clean(raw?.targetTimezone?.utcOffsetAtTarget),source=clean(raw?.source).toUpperCase()||'EXPLICIT_REQUEST';
+  const supplied=[targetDate,rawTime,iana,utcOffsetAtTarget].filter(Boolean).length;if(supplied===0)return null;
+  const fail=(code)=>{const e=new Error(code);e.code=code;e.status=422;throw e};
+  if(supplied!==4)fail('ECR_TARGET_CONTEXT_INCOMPLETE');if(!isoDate(targetDate))fail('ECR_TARGET_DATE_INVALID');if(!validClockTime(rawTime))fail('ECR_TARGET_TIME_INVALID');if(!validIanaTimezone(iana))fail('ECR_TARGET_TIMEZONE_INVALID');if(!validUtcOffset(utcOffsetAtTarget))fail('ECR_TARGET_UTC_OFFSET_INVALID');
+  return freeze({targetDate,targetTime:rawTime.length===5?`${rawTime}:00`:rawTime,targetTimezone:freeze({iana,utcOffsetAtTarget}),source});
+}
+export function resolveHdrTargetContextInput(body){
+  const raw=body?.hdrTargetContext;if(raw==null)return null;
+  const targetDate=clean(raw?.targetDate),rawTime=clean(raw?.targetTime),iana=clean(raw?.targetTimezone?.iana),utcOffsetAtTarget=clean(raw?.targetTimezone?.utcOffsetAtTarget),source=clean(raw?.source).toUpperCase()||'EXPLICIT_REQUEST';
+  const supplied=[targetDate,rawTime,iana,utcOffsetAtTarget].filter(Boolean).length;if(supplied===0)return null;
+  const fail=(code)=>{const e=new Error(code);e.code=code;e.status=422;throw e};
+  if(supplied!==4)fail('HDR_TARGET_CONTEXT_INCOMPLETE');if(!isoDate(targetDate))fail('HDR_TARGET_DATE_INVALID');if(!validClockTime(rawTime))fail('HDR_TARGET_TIME_INVALID');if(!validIanaTimezone(iana))fail('HDR_TARGET_TIMEZONE_INVALID');if(!validUtcOffset(utcOffsetAtTarget))fail('HDR_TARGET_UTC_OFFSET_INVALID');
+  return freeze({targetDate,targetTime:rawTime.length===5?`${rawTime}:00`:rawTime,targetTimezone:freeze({iana,utcOffsetAtTarget}),source});
+}
+function ziweiTargetContextInput(body,selected){
+  if(!selected.includes('ziwei'))return null;
+  const targetDate=clean(body?.ziweiTargetDate),targetTime=clean(body?.ziweiTargetTime),iana=clean(body?.ziweiTargetTimezoneIana),utcOffsetAtTarget=clean(body?.ziweiTargetUtcOffset),source=clean(body?.ziweiTargetContextSource).toUpperCase();
+  const supplied=[targetDate,targetTime,iana,utcOffsetAtTarget].filter(Boolean).length;
+  if(supplied===0)return null;
+  return freeze({targetDate,targetTime,targetTimezone:freeze({iana,utcOffsetAtTarget}),source:source||'EXPLICIT_REQUEST'});
+}
+function ziweiCompatibilityReadingMethod(spec,locale,fullProduct,projection){
+  const report=fullProduct?.report;
+  const summary=report?.subtitle||report?.title||(locale==='zh-Hans'?'紫微完整读取已经准备好。':'The full Zi Wei reading is ready.');
+  return freeze({
+    schemaVersion:'PHI-OS-CX-R12R4B-CUSTOMER-READING-METHOD-v1.0.0',
+    methodId:'ZWR',methodLabel:methodLabel(spec,locale),locale,state:'READY_TO_READ',stateLabel:locale==='zh-Hans'?'可以阅读':'Ready to read',summary,insights:[],visualModel:null,
+    source:{label:locale==='zh-Hans'?'紫微 Full Production 已准备':'Zi Wei Full Production ready',lineageAvailable:true},openQuestions:[],
+    technical:{methodId:'ZWR',publicMethodCode:spec.publicMethodCode,projectionId:projection?.projectionId||null,compatibilityOnly:true,completeZiweiReportOwner:false,fullProductRef:'view.ziweiFullProduction',boundary:{rendererCreatesMeaning:false,aiCreatesMeaning:false,realityKnown:false}}
+  });
+}
+
+function methodLabel(spec,locale){return spec.label[locale==='zh-Hans'?'zh':'en']}
+
+function limitedReadingMethod(spec,locale,error,projection=null){
+  const message=locale==='zh-Hans'
+    ?'这次没有形成足够完整、可面向客户发布的解释。已建立的结构会保留，但系统不会自行补写意义。'
+    :'This run did not produce a complete customer-publishable explanation. Established structure remains available, and no meaning will be invented to fill the gap.';
+  return freeze({
+    schemaVersion:'PHI-OS-CX-R12R4B-CUSTOMER-READING-METHOD-v1.0.0',
+    methodId:METHOD_ID[spec.methodCode],
+    methodLabel:methodLabel(spec,locale),
+    locale,
+    state:'NEEDS_ATTENTION',
+    stateLabel:locale==='zh-Hans'?'还需要资料':'Needs more information',
+    summary:message,
+    insights:[],
+    visualModel:null,
+    source:{label:locale==='zh-Hans'?'尚未形成可发布解释':'No publishable interpretation yet',lineageAvailable:Boolean(projection?.projectionId)},
+    openQuestions:[message],
+    technical:{
+      methodId:METHOD_ID[spec.methodCode],
+      publicMethodCode:spec.publicMethodCode,
+      projectionId:projection?.projectionId||null,
+      reasonCode:error?.code||'CX_R12R4B_COMPOSITION_UNAVAILABLE',
+      constraints:error?.constraints||[],
+      acceptanceBasis:null,
+      boundary:{rendererCreatesMeaning:false,aiCreatesMeaning:false,realityKnown:false}
+    }
+  });
+}
+
+function nativeBackedReadingMethod(spec,locale,projection,{available=true,reasonCode=null}={}){
+  const ready=available===true;
+  const message=locale==='zh-Hans'
+    ?(ready?'专业八字读取由 BaZi Full Production 提供；旧逐柱解释链不再参与本页面。':'八字计算结构已建立，但方法原生客户报告这次未能发布。')
+    :(ready?'The professional BaZi reading is supplied by BaZi Full Production; the legacy pillar-by-pillar composer is not used on this page.':'The BaZi calculation is established, but the method-native customer report could not be published this time.');
+  return freeze({schemaVersion:'PHI-OS-CX-R12R4B-CUSTOMER-READING-METHOD-v1.0.0',methodId:'BZR',methodLabel:methodLabel(spec,locale),locale,state:ready?'READY_TO_READ':'NEEDS_ATTENTION',stateLabel:ready?(locale==='zh-Hans'?'可以阅读':'Ready to read'):(locale==='zh-Hans'?'需要补充':'Needs attention'),summary:message,insights:[],visualModel:null,source:{label:'BAZI-FP-v1.0.0',lineageAvailable:Boolean(projection?.projectionId)},openQuestions:ready?[]:[message],technical:{methodId:'BZR',publicMethodCode:spec.publicMethodCode,projectionId:projection?.projectionId||null,reasonCode,acceptanceBasis:'PPR-C1_METHOD_NATIVE_BAZI',legacyComposerUsed:false,boundary:{rendererCreatesMeaning:false,aiCreatesMeaning:false,realityKnown:false}}});
+}
+
+async function executeOne(context,input,key,consentRecordId,parameters,numExpansionInput,ziweiTargetContext){
+  const spec=METHODS[key];
+  const requestId=`CX-${spec.methodCode}-${crypto.randomUUID()}`;
+  const body=spec.methodCode==='EMBODIED_CONFIGURATION'
+    ?{canonicalInput:input,consent:true,requestId}
+    :{schemaVersion:'PHI-OS-MCD-METHOD-EXECUTION-REQUEST-v1.0.0',methodCode:spec.methodCode,methodVersion:spec.methodVersion,capability:'CALCULATION',purposeCode:'PERSONAL_RUNTIME_METHOD_PROJECTION',canonicalInput:input,executionParameters:parameters,consentRecordId,requestId};
+  if(spec.methodCode==='BAZI'){
+    try{
+      const direct=await executeAndProjectMcd5CurrentRequest(body);
+      const baseExecution=direct.execution,canonicalProjection=direct.canonicalProjection,execution=baseExecution;
+      if(!canonicalProjection||execution?.executionStatus==='BLOCKED_BY_MPA'||execution?.executionStatus==='INPUT_BLOCKED')return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:execution?.reasonCodes||['METHOD_EXECUTION_FAILED']};
+      let crossReadingMethod=null;try{crossReadingMethod=await buildAcceptedMethodCustomerResult({canonicalProjection,locale:context.locale,requestedDepth:'STANDARD'})}catch{}
+      return {ok:true,key,spec,canonicalProjection,baseExecution,readingMethod:nativeBackedReadingMethod(spec,context.locale,canonicalProjection),crossReadingMethod};
+    }catch(error){return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:[error?.code||'METHOD_EXECUTION_FAILED']};}
+  }
+  // const request=new Request — PPR BZR canonical branch ends above; later branches retain their own authority.
+  if(spec.methodCode==='ZI_WEI_DOU_SHU'){
+    try{
+      const fullRuntime=await buildZiweiFullProductionCustomerRuntime({executionRequest:body,targetContext:ziweiTargetContext,locale:context.locale});
+      let readingMethod;
+      try{readingMethod=await buildAcceptedMethodCustomerResult({canonicalProjection:fullRuntime.canonicalProjection,locale:context.locale,requestedDepth:'STANDARD'})}
+      catch{readingMethod=ziweiCompatibilityReadingMethod(spec,context.locale,fullRuntime.customerProduct,fullRuntime.canonicalProjection)}
+      return {ok:true,key,spec,canonicalProjection:fullRuntime.canonicalProjection,readingMethod,ziweiFullProduction:fullRuntime.customerProduct,ziweiExecutionReuse:fullRuntime.executionReuse};
+    }catch(error){
+      return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:[error?.code||'ZIWEI_CX_R1_FULL_PRODUCTION_UNAVAILABLE']};
+    }
+  }
+  const request=new Request(new URL(spec.endpoint,context.request.url),{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},body:JSON.stringify(body)});
+  const handler=spec.endpoint.includes('ecr-execute')?runEcrExecute:spec.endpoint.includes('ast-structural')?runAstStructuralExecute:runMethodExecute;
+  const response=await handler({request});
+  const payload=await response.json().catch(()=>({}));
+  if(!response.ok||payload?.ok!==true)return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:payload?.reasonCodes||[payload?.error||'METHOD_EXECUTION_FAILED']};
+
+  let readingMethod;
+  try{
+    readingMethod=await buildAcceptedMethodCustomerResult({canonicalProjection:payload.result,locale:context.locale,requestedDepth:'STANDARD'});
+  }catch(error){
+    readingMethod=limitedReadingMethod(spec,context.locale,error,payload.result);
+  }
+  if(spec.methodCode==='NUMEROLOGY'){
+    try{
+      const meaningPayload=await buildProductionMethodMeaningPayload({canonicalProjection:payload.result,locale:context.locale,numerologyExpansionInput:numExpansionInput||{}});
+      const numerologyEnvelope=buildNumerologyCustomerReadingEnvelope({canonicalProjection:payload.result,meaningPayload,expansionInput:numExpansionInput||{},locale:context.locale});
+      return {ok:true,key,spec,canonicalProjection:payload.result,readingMethod,numerologyEnvelope,numerologyIntegratedReading:meaningPayload.integratedReading||null};
+    }catch(error){
+      return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:[error?.code||error?.message||'NUM_CX_PRODUCTION_READING_UNAVAILABLE']};
+    }
+  }
+  if(spec.methodCode!=='ASTROLOGY')return {ok:true,key,spec,canonicalProjection:payload.result,readingMethod};
+
+  let meaningPayload;
+  try{
+    meaningPayload=await buildAstrologyCustomerReading({canonicalProjection:payload.result,locale:context.locale});
+  }catch(error){
+    return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:[error?.code||'ASTROLOGY_MEANING_UNAVAILABLE']};
+  }
+  return {ok:true,key,spec,canonicalProjection:payload.result,readingMethod,customerProjection:projectAstrologyForCustomer({canonicalProjection:payload.result,meaningPayload,locale:context.locale})};
+}
+
+
+function stage(locale,stageId,state,enLabel,zhLabel,enDetail,zhDetail){
+  return freeze({stageId,state,label:locale==='zh-Hans'?zhLabel:enLabel,detail:locale==='zh-Hans'?zhDetail:enDetail});
+}
+
+function buildReadingView({methods,selectedCount,calculationCount,locale,combinedReading=null,ziweiFullProduction=null,singleZiwei=false,hasPublishableNativeReport=false,currentRealityCandidateCount=0}){
+  const readable=methods.filter(item=>item.state==='READY_TO_READ');
+  const fullZiweiReady=singleZiwei&&ziweiFullProduction?.state==='CUSTOMER_PUBLISHABLE';
+  const allCalculated=calculationCount===selectedCount;
+  const combinedReady=combinedReading?.schemaVersion==='PHI-OS-CROSS-METHOD-RUNTIME-READING-IR-v2.0.0'&&combinedReading?.publicationState==='CUSTOMER_PUBLISHABLE_CROSS_READING';
+  const allReadable=fullZiweiReady||hasPublishableNativeReport||readable.length===selectedCount;
+  const readingState=allReadable?'READY_TO_READ':readable.length?'PARTIALLY_PREPARED':'NEEDS_ATTENTION';
+  const customerLabel=locale==='zh-Hans'
+    ?allReadable?'所选视角都可以阅读':readable.length?'部分视角可以阅读':'还需要更多资料'
+    :allReadable?'All selected perspectives are ready to read':readable.length?'Some perspectives are ready to read':'More information is needed';
+  return freeze({
+    schemaVersion:'PHI-OS-CX-R12R4B-CUSTOMER-READING-VIEW-v1.0.0',
+    state:readingState,
+    customerLabel,
+    selectedPerspectiveCount:selectedCount,
+    readablePerspectiveCount:readable.length,
+    methods,
+    map:[
+      stage(locale,'DATA','PREPARED','Information','资料','Required information was validated for this run.','本次所需资料已经通过验证。'),
+      stage(locale,'METHOD_CALCULATION',allCalculated?'PREPARED':'NEEDS_INFORMATION','Method calculation','方法计算',allCalculated?'All selected calculations completed.':'Some selected calculations still need attention.',allCalculated?'所选方法都已完成计算。':'部分所选方法仍需要补充资料。'),
+      stage(locale,'METHOD_INTERPRETATION',allReadable?'READABLE':readable.length?'READABLE':'NEEDS_INFORMATION','Method interpretation','方法解释',allReadable?'All selected method readings are ready.':readable.length?'Some method readings are ready; the remaining methods stay open.':'No customer-readable method interpretation is ready yet.',allReadable?'所选方法的解释都可以阅读。':readable.length?'部分方法解释可以阅读，其余部分继续保持开放。':'目前还没有可面向客户阅读的方法解释。'),
+      stage(locale,'COMBINED_READING',combinedReady?'READABLE':'NOT_STARTED','Cross-perspective reading','跨视角读取',combinedReady?'A governed cross-perspective reading is available after the distinct method readings.':'A governed cross-perspective reading appears only when at least two accepted method readings are eligible.',combinedReady?'各方法完整读取之后，已经形成受治理的跨视角读取。':'只有至少两个已获准的方法读取符合条件时，才会形成受治理的跨视角读取。'),
+      stage(locale,'CURRENT_REALITY',currentRealityCandidateCount>0?'WAITING_FOR_CONFIRMATION':'NOT_STARTED','Current Reality','当前现实',currentRealityCandidateCount>0?'Your reading is ready for optional lived-reality comparison. Nothing is inferred until you add or confirm your own observations.':'Current Reality becomes available after at least one governed method reading is ready.',currentRealityCandidateCount>0?'读取已经可以进入可选的现实对照；在你亲自填写或确认以前，系统不会推断你的现实状态。':'至少一个受治理的方法读取准备好之后，才会进入 Current Reality。'),
+      stage(locale,'FULL_REPORT',(fullZiweiReady||hasPublishableNativeReport)?'READABLE':'NOT_STARTED','Full report','完整报告',fullZiweiReady?'The governed Zi Wei Full Production report, interactive twelve-palace surface and topic readings are available in this result.':hasPublishableNativeReport?'A governed method-native Full Production report is available in this result.':'The full Personal Reading Report has not been composed yet.',fullZiweiReady?'本次结果已经包含受治理的紫微完整报告、十二宫互动结构与主题读取。':hasPublishableNativeReport?'本次结果已经包含受治理的方法原生 Full Production 完整报告。':'完整 Personal Reading Report 尚未生成。')
+    ],
+    governance:{
+      acceptanceBasis:'ADMITTED_COMPOSITION_RULESET',
+      liveCustomerHumanReviewClaimed:false,
+      rawProjectionUsedAsCustomerInterpretation:false,
+      currentRealityAssumed:false,
+      ziweiProductionCompositionHumanAccepted:fullZiweiReady,
+      ziweiLiveIndividualHumanReviewClaimed:false,
+      persistence:false
+    },
+    combinedReading:combinedReady?combinedReading:freeze({state:'NOT_STARTED',crossMethodCompositionPerformed:false})
+  });
+}
+
+function stripLegacyInterpretation(baseView){
+  const structure={methods:(baseView.structure?.methods||[]).map(method=>({
+    methodId:METHOD_ID_BY_PUBLIC[method.publicMethodCode],
+    label:method.label,
+    values:(method.values||[]).map(item=>({label:item.label,value:item.value})),
+    structures:(method.structures||[]).map(group=>({label:group.label,items:(group.items||[]).map(item=>({label:item.label,value:item.value}))}))
+  }))};
+  const currentContext={items:(baseView.currentContext?.items||[]).map(item=>({label:item.label,value:item.value}))};
+  return {schemaVersion:'PHI-OS-CX-R12R4B-CUSTOMER-SURFACE-SHELL-v1.0.0',surface:baseView.surface,locale:baseView.locale,intent:baseView.intent,structure,currentContext};
+}
+
+function stripAstrologyTechnicalProjection(astrology){
+  if(!astrology)return null;
+  const {projectionId:_projectionId,executionCompleteness:_executionCompleteness,interpretation:_legacyInterpretation,unknowns:_technicalUnknowns,boundary:_technicalBoundary,...safe}=astrology;
+  return {
+    ...safe,
+    bodies:(safe.bodies||[]).map(({meaningRefs:_meaningRefs,...body})=>body)
+  };
+}
+
+export async function onRequestPost(context){
+  let body;
+  try{body=await context.request.json()}catch{return json({ok:false,error:'INVALID_JSON'},400)}
+  if(body?.consent!==true)return json({ok:false,error:'PERSONAL_REALITY_PROCESSING_CONSENT_REQUIRED'},403);
+  const selected=[...(Array.isArray(body?.methods)?body.methods:[])].map(value=>clean(value).toLowerCase()).filter(key=>METHODS[key]);
+  if(!selected.length)return json({ok:false,error:'PERSONAL_REALITY_METHOD_REQUIRED'},400);
+  const needsPlace=selected.some(key=>['astrology','bazi','ziwei','ecr'].includes(key));
+  if(needsPlace&&!clean(body?.placeRef))return json({ok:false,error:'LOCATION_SELECTION_REQUIRED'},422);
+
+  const expansionError=validateNumerologyExpansionRequest(body,selected);
+  if(expansionError)return json({ok:false,error:expansionError},422);
+  const locale=body?.locale==='zh-Hans'?'zh-Hans':'en';
+  context.locale=locale;
+  context.customerIntent=body?.intent||null;
+  let confirmedXpf=null;
+  let humanDesignContext=null;
+  if(body?.confirmedExternalProfile!=null){
+    if(body?.externalProfileContextConsent!==true)return json({ok:false,error:'EXTERNAL_PROFILE_CONTEXT_CONSENT_REQUIRED'},403);
+    try{
+      confirmedXpf=normalizeConfirmedHumanDesignContextProfile(body.confirmedExternalProfile);
+      humanDesignContext=buildConfirmedHumanDesignContextTransport(confirmedXpf,{locale,intent:body?.intent||''});
+    }catch(error){return json({ok:false,error:error?.code||error?.message||'HD_CONTEXT_CONFIRMED_PROFILE_INVALID'},422)}
+  }
+  let location=null;
+  if(needsPlace){
+    const snapshot=body?.birthLocationSnapshot||null;
+    try{
+      if(snapshot)location=consumeConfirmedBirthLocationSnapshot(snapshot,{providerRef:body.placeRef,birthDate:nullable(body.birthDate),birthTime:body?.birthTimeUnknown?null:nullable(body.birthTime)});
+      else location=await resolveBirthPlace(body.placeRef,{birthDate:nullable(body.birthDate),birthTime:body?.birthTimeUnknown?null:nullable(body.birthTime),locale,env:context.env});
+    }catch(error){return json({ok:false,error:error?.code||'LOCATION_RESOLUTION_FAILED'},422)}
+  }
+  const consentRecordId=`CX-CONSENT-${crypto.randomUUID()}`;
+  const input=canonicalInput(body,location,consentRecordId,locale);
+  const shape=validateCanonicalBirthInput(input);
+  if(!shape.valid)return json({ok:false,error:'PERSONAL_REALITY_INPUT_INVALID',reasonCodes:shape.reasonCodes},422);
+  const reportSubjectName=clean(body?.reportSubjectName);
+  if(!reportSubjectName)return json({ok:false,error:'REPORT_SUBJECT_NAME_REQUIRED'},422);
+  if(reportSubjectName.length>120)return json({ok:false,error:'REPORT_SUBJECT_NAME_INVALID'},422);
+  const accountIdentity=context.data?.symbolicAccountIdentity||null;
+  if(accountIdentity?.authenticated===true&&accountIdentity?.userId){
+    try{
+      context.data.reportSubjectPresentation=await createReportSubjectPresentation({
+        subjectReference:accountIdentity.userId,
+        displayName:reportSubjectName,
+        canonicalBirthInput:input,
+        identitySourceRef:'CUSTOMER_DECLARED_SELF_REPORT_DISPLAY_NAME',
+        birthSourceRef:'MCD3_CANONICAL_BIRTH_INPUT'
+      });
+    }catch(error){return json({ok:false,error:error?.code||error?.message||'REPORT_SUBJECT_PRESENTATION_INVALID'},422)}
+  }
+
+  const parameters=executionParameters(body);
+  const numExpansionInput=numerologyExpansionInput(body);
+  let astTargetContext=null;
+  try{astTargetContext=resolveAstTargetContextInput(body,selected)}catch(error){return json({ok:false,error:error?.code||'AST_CX_R3_TARGET_CONTEXT_INVALID'},error?.status||422)}
+  const ziweiTargetContextRaw=ziweiTargetContextInput(body,selected);
+  let ziweiTargetContext=null;
+  if(ziweiTargetContextRaw){try{ziweiTargetContext=resolveZiweiLiveTargetContext(ziweiTargetContextRaw)}catch(error){return json({ok:false,error:error?.code||'ZIWEI_CX_R1_TARGET_CONTEXT_INVALID'},error?.status||422)}}
+  let ecrTargetContext=null;try{ecrTargetContext=resolveEcrTargetContextInput(body,selected)}catch(error){return json({ok:false,error:error?.code||'ECR_TARGET_CONTEXT_INVALID'},error?.status||422)}
+  let hdrTargetContext=null;try{hdrTargetContext=resolveHdrTargetContextInput(body)}catch(error){return json({ok:false,error:error?.code||'HDR_TARGET_CONTEXT_INVALID'},error?.status||422)}
+  if(hdrTargetContext&&!confirmedXpf)return json({ok:false,error:'HDR_TARGET_CONFIRMED_PROFILE_REQUIRED'},422);
+  const results=await Promise.all(selected.map(key=>executeOne(context,input,key,consentRecordId,parameters,numExpansionInput,ziweiTargetContext)));
+  const projections=results.filter(result=>result.ok).map(result=>result.canonicalProjection);
+  const blocked=results.filter(result=>!result.ok);
+  const baseView=projectMethodsForCustomer({projections,blocked,intent:body?.intent,locale,includeLegacyInterpretation:false});
+  const blockedByCode=new Map((baseView.overview?.blocked||[]).map(item=>[item.methodCode,item]));
+  const readingMethods=results.map(result=>{
+    if(result.ok)return result.readingMethod;
+    const publicBlocked=blockedByCode.get(result.methodCode)||blockedByCode.get(result.publicMethodCode);
+    const error={code:result.reasonCodes?.[0]||'METHOD_EXECUTION_FAILED'};
+    const limited=limitedReadingMethod(result.spec,locale,error);
+    return publicBlocked?.message?freeze({...limited,summary:publicBlocked.message,openQuestions:[publicBlocked.message]}):limited;
+  });
+  const methodNativeReading={};
+  const baziResult=results.find(result=>result.ok&&result.spec?.methodCode==='BAZI');
+  if(baziResult){
+    try{
+      methodNativeReading.BZR=await buildBaziMethodNativeReading({canonicalProjection:baziResult.canonicalProjection,canonicalInput:input,baseExecution:baziResult.baseExecution,locale,targetContext:body?.baziTemporalContext||null});
+      baziResult.readingMethod=nativeBackedReadingMethod(baziResult.spec,locale,baziResult.canonicalProjection,{available:true});
+      const i=results.indexOf(baziResult); if(i>=0)readingMethods[i]=baziResult.readingMethod;
+    }catch(error){
+      baziResult.readingMethod=nativeBackedReadingMethod(baziResult.spec,locale,baziResult.canonicalProjection,{available:false,reasonCode:error?.code||'PPR_C1_BAZI_METHOD_NATIVE_UNAVAILABLE'});
+      const i=results.indexOf(baziResult); if(i>=0)readingMethods[i]=baziResult.readingMethod;
+    }
+  }
+  const hasPublishableNativeReport=Object.values(methodNativeReading).some(product=>product?.publicationDecision?.customerPublishable===true);
+    const ziweiFullProduction=results.find(result=>result.ok&&result.ziweiFullProduction)?.ziweiFullProduction||null;
+  const singleZiwei=selected.length===1&&selected[0]==='ziwei'&&ziweiFullProduction?.state==='CUSTOMER_PUBLISHABLE';
+  let combinedReading=null;
+  if(selected.length>=2&&selected.length<=5){
+    const crossInputs=results.map(result=>result?.crossReadingMethod||result?.readingMethod).filter(method=>method?.state==='READY_TO_READ'&&method?.technical?.acceptanceBasis==='ADMITTED_COMPOSITION_RULESET');
+    if(crossInputs.length>=2){try{combinedReading=await maybeBuildProductionCombinedReading({acceptedMethodReadings:crossInputs,customerIntent:body?.intent||null,confirmedXpf,hdrInternalReading:null})}catch{combinedReading=null}}
+  }
+  // Cross production compatibility witness: buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale,combinedReading})
+  const currentRealityComparisonCandidates=buildRealityComparisonCandidates(readingMethods);
+  const currentRealityIntake=buildProgressiveCurrentRealityIntake(locale);
+  const reading=buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale,combinedReading,ziweiFullProduction,singleZiwei,hasPublishableNativeReport,currentRealityCandidateCount:currentRealityComparisonCandidates.length});
+  const nativeFullReportStage=reading.map.find(item=>item.stageId==='FULL_REPORT'); void nativeFullReportStage;
+  let singleMethodReading=null;
+  const hasSingleNativeReport=selected.length===1&&hasPublishableNativeReport;
+  if(!singleZiwei&&!hasSingleNativeReport&&selected.length===1&&readingMethods[0]?.state==='READY_TO_READ'){
+    try{singleMethodReading=await maybeBuildProductionSingleMethodReading({methodResult:readingMethods[0],customerIntent:context.customerIntent,locale})}
+    catch{singleMethodReading=null}
+  }
+  const astrology=stripAstrologyTechnicalProjection(results.find(result=>result.ok&&result.customerProjection)?.customerProjection||null);
+  const numerology=projectNumerologyEnvelopeForCustomer(results.find(result=>result.ok&&result.numerologyEnvelope)?.numerologyEnvelope||null);
+  let ecrTargetContextSnapshot=null;const ecrResult=results.find(result=>result.ok&&result.spec?.methodCode==='EMBODIED_CONFIGURATION');
+  if(ecrTargetContext&&ecrResult?.canonicalProjection){try{ecrTargetContextSnapshot=await buildEcrTargetContextSnapshot({canonicalProjection:ecrResult.canonicalProjection,targetContext:ecrTargetContext,locale})}catch(error){ecrTargetContextSnapshot=freeze({state:'UNAVAILABLE',reasonCode:error?.code||error?.message||'ECR_TARGET_CONTEXT_RUNTIME_UNAVAILABLE'})}}
+  let hdrTransitOverlay=null;
+  if(hdrTargetContext&&confirmedXpf){try{hdrTransitOverlay=await buildHdrTransitOverlay({targetContext:hdrTargetContext,confirmedProfile:confirmedXpf})}catch(error){hdrTransitOverlay=freeze({state:'UNAVAILABLE',reasonCode:error?.code||error?.message||'HDR_TRANSIT_OVERLAY_UNAVAILABLE',boundary:freeze({usesConfirmedNatalChart:true,natalBaselineImmutable:true,transitDesignLayerCalculated:false,confirmedChartChanged:false,interpretationCreated:false,persisted:false})})}}
+  const primaryCustomerProduct=singleZiwei?freeze({type:'ZIWEI_FULL_PRODUCTION',owner:'ZIWEI_CX_R1_FULL_PRODUCTION_PRODUCT',payloadRef:'view.ziweiFullProduction',genericSmrCompleteReportOwner:false}):null;
+  const productRoute=await buildPersonalRealityProductRoute({canonicalBirthInput:input,selectedKeys:selected,results,methodNativeReading,locale,intent:body?.intent||'',astTargetContext,consentRecordId});
+  let ecrHumanDesignComparison=null;
+  let ecrHumanDesignRealityBridge=null;
+  if(humanDesignContext){
+    const ecrAcceptedReading=results.find(result=>result.ok&&result.spec?.methodCode==='EMBODIED_CONFIGURATION')?.readingMethod||null;
+    if(ecrAcceptedReading){
+      try{
+        ecrHumanDesignComparison=buildEcrHumanDesignComparisonIR({acceptedEcrReading:ecrAcceptedReading,humanDesignContext,locale});
+        ecrHumanDesignRealityBridge=buildEcrHumanDesignRealityBridgeIR({comparisonIr:ecrHumanDesignComparison,locale});
+      }catch{ecrHumanDesignComparison=null;ecrHumanDesignRealityBridge=null}
+    }
+  }
+  const crossPerspectiveReading=combinedReading;
+  // Historical CX-R12R4A successor shape witness for compatibility checker only: view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading}) · methods:readingMethods
+  const currentReality=freeze({schemaVersion:'PHI-OS-PPR-R2-CURRENT-REALITY-ENTRY-v1.0.0',state:currentRealityComparisonCandidates.length?'OPTIONAL_INPUT_AVAILABLE':'NOT_AVAILABLE',intake:currentRealityIntake,comparisonCandidates:currentRealityComparisonCandidates,observations:null,realityComparison:null,methodCurrentRealityCorrelation:null,governance:freeze({customerInputRequiredForRealityEvidence:true,methodTimingIsCurrentReality:false,automaticPersistence:false})});
+  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute,crossPerspectiveReading,currentReality,humanDesignContext,ecrHumanDesignComparison,ecrHumanDesignRealityBridge,ecrTargetContext:ecrTargetContextSnapshot,hdrTransitOverlay,hdrTargetActivationReference:hdrTransitOverlay});
+  return json({
+    ok:true,
+    view:await attachBaziPublicationAccess(view,context),
+    location:location?{state:'CONFIRMED',displayName:location.displayName,locality:location.locality,region:location.region,country:location.country,timeZone:location.timezone.iana}:null,
+    privacy:{saved:false}
+  });
+}

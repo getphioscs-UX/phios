@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-CX-R1-CANONICAL-API-BINDING-CONTRACT-v1.0.0",
+  "work": "ZIWEI-CX-R1-W4",
+  "integrationBaselineCommit": "343773fd6fb61fbf1b37aa861537d7e8f091ec24",
+  "status": "ENGINEERING_CONTRACT_ACTIVE",
+  "canonicalApi": "/api/customer-personal-reality",
+  "requiredViewField": "view.ziweiFullProduction",
+  "requiredPayloadFields": ["report","interactiveSurface","topics","currentAuthority","sourceDigests","targetContext"],
+  "singleZiweiRules": {
+    "primaryAuthority": "ZIWEI_FULL_PRODUCTION",
+    "genericSmrMayOwnCompleteReport": false,
+    "genericMethodReadingRetained": "COMPATIBILITY_ONLY",
+    "fullReportMapState": "READABLE",
+    "currentTimingMapState": "READABLE"
+  },
+  "crossMethodRules": {
+    "genericMethodReadingMaySupportComparison": true,
+    "ziweiFullProductionPayloadStillAvailable": true,
+    "ziweiFullProductionDoesNotBecomeCrossMethodConsensus": true
+  }
+}

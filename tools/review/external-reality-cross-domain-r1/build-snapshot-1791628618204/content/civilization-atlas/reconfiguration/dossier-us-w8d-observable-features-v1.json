@@ -1,0 +1,240 @@
+{
+  "schemaVersion": "PHI-OS-DOSSIER-US-W8D-OBSERVABLE-FEATURES-v1.0.0",
+  "status": "REQUIRED_LANES_COMPLETE",
+  "dossierId": "DOSSIER-US",
+  "stage": "W8-D",
+  "sourceClaimCount": 7,
+  "featureCount": 7,
+  "requiredLaneIds": [
+    "DEMOGRAPHY",
+    "INDUSTRY",
+    "INFRASTRUCTURE",
+    "TECHNOLOGY",
+    "EXTERNAL_DEPENDENCY",
+    "CARRIER_STRUCTURE",
+    "PRESSURE_FIELD"
+  ],
+  "coveredLaneIds": [
+    "CARRIER_STRUCTURE",
+    "DEMOGRAPHY",
+    "EXTERNAL_DEPENDENCY",
+    "INDUSTRY",
+    "INFRASTRUCTURE",
+    "PRESSURE_FIELD",
+    "TECHNOLOGY"
+  ],
+  "missingRequiredLanes": [],
+  "features": [
+    {
+      "featureId": "US-OBS-001",
+      "dossierId": "DOSSIER-US",
+      "laneId": "DEMOGRAPHY",
+      "featureClass": "DEMOGRAPHIC_STATE",
+      "observation": "U.S. population growth slowed to 0.5% between July 1, 2024 and July 1, 2025.",
+      "claimId": "US-DEMOGRAPHY-2026-001",
+      "sourceId": "US-CENSUS-VINTAGE-2025-NATIONAL-STATE",
+      "authorityClass": "OFFICIAL_PRIMARY",
+      "observedAt": "2026-10-02T02:47:00.000Z",
+      "publishedAt": "2026-01-27T00:00:00.000Z",
+      "freshnessState": "FRESH",
+      "evidenceState": "DIRECT_CWA_OBSERVATION",
+      "supportLevel": "DIRECT",
+      "provenance": {
+        "currentEvidenceIR": "content/civilization-atlas/reconfiguration/runtime-position-w8c-current-evidence-ir-v1.json",
+        "sourceVersion": "VINTAGE-2025-NATIONAL-STATE-20260127",
+        "sourceLocator": {
+          "type": "SECTION",
+          "value": "News Release > Population Growth Slows Due to Decline in Net International Migration"
+        }
+      },
+      "boundaries": {
+        "grammarAssigned": false,
+        "realityDomainAssigned": false,
+        "runtimePositionAssigned": false,
+        "predictionCreated": false,
+        "missingDataInferred": false
+      }
+    },
+    {
+      "featureId": "US-OBS-002",
+      "dossierId": "DOSSIER-US",
+      "laneId": "INDUSTRY",
+      "featureClass": "INDUSTRY_ACTIVITY",
+      "observation": "In the second quarter of 2026, real value added increased 2.5% for private services-producing industries, 2.3% for private goods-producing industries, and less than 0.1% for government; real GDP increased at a 2.2% annual rate.",
+      "claimId": "US-INDUSTRY-2026-001",
+      "sourceId": "US-BEA-GDP-BY-INDUSTRY-2026Q2",
+      "authorityClass": "OFFICIAL_PRIMARY",
+      "observedAt": "2026-10-02T02:47:00.000Z",
+      "publishedAt": "2026-09-30T00:00:00.000Z",
+      "freshnessState": "FRESH",
+      "evidenceState": "DIRECT_CWA_OBSERVATION",
+      "supportLevel": "DIRECT",
+      "provenance": {
+        "currentEvidenceIR": "content/civilization-atlas/reconfiguration/runtime-position-w8c-current-evidence-ir-v1.json",
+        "sourceVersion": "2026Q2-THIRD-ESTIMATE-20260930",
+        "sourceLocator": {
+          "type": "SECTION",
+          "value": "GDP by Industry > current release summary, September 30, 2026"
+        }
+      },
+      "boundaries": {
+        "grammarAssigned": false,
+        "realityDomainAssigned": false,
+        "runtimePositionAssigned": false,
+        "predictionCreated": false,
+        "missingDataInferred": false
+      }
+    },
+    {
+      "featureId": "US-OBS-003",
+      "dossierId": "DOSSIER-US",
+      "laneId": "INFRASTRUCTURE",
+      "featureClass": "INFRASTRUCTURE_STATE",
+      "observation": "The September 30, 2026 National Transportation Statistics update added new data to the Number of U.S. Airports and U.S. Vehicle-Miles tables.",
+      "claimId": "US-INFRASTRUCTURE-2026-001",
+      "sourceId": "US-BTS-NTS-UPDATE-20260930",
+      "authorityClass": "OFFICIAL_PRIMARY",
+      "observedAt": "2026-10-02T02:47:00.000Z",
+      "publishedAt": "2026-09-30T00:00:00.000Z",
+      "freshnessState": "FRESH",
+      "evidenceState": "DIRECT_CWA_OBSERVATION",
+      "supportLevel": "DIRECT",
+      "provenance": {
+        "currentEvidenceIR": "content/civilization-atlas/reconfiguration/runtime-position-w8c-current-evidence-ir-v1.json",
+        "sourceVersion": "NTS-UPDATE-20260930",
+        "sourceLocator": {
+          "type": "SECTION",
+          "value": "This month, the following tables received new data"
+        }
+      },
+      "boundaries": {
+        "grammarAssigned": false,
+        "realityDomainAssigned": false,
+        "runtimePositionAssigned": false,
+        "predictionCreated": false,
+        "missingDataInferred": false
+      }
+    },
+    {
+      "featureId": "US-OBS-004",
+      "dossierId": "DOSSIER-US",
+      "laneId": "TECHNOLOGY",
+      "featureClass": "TECHNOLOGY_CAPACITY",
+      "observation": "U.S. gross domestic R&D expenditures were $1.009 trillion in 2024 on a purchasing-power-parity basis, equal to 3.4% of U.S. GDP; the United States accounted for 29% of global R&D performance.",
+      "claimId": "US-TECHNOLOGY-2026-001",
+      "sourceId": "US-NSF-NSB-SEP-2026-1",
+      "authorityClass": "OFFICIAL_PRIMARY",
+      "observedAt": "2026-10-02T02:47:00.000Z",
+      "publishedAt": "2026-05-04T00:00:00.000Z",
+      "freshnessState": "FRESH",
+      "evidenceState": "DIRECT_CWA_OBSERVATION",
+      "supportLevel": "DIRECT",
+      "provenance": {
+        "currentEvidenceIR": "content/civilization-atlas/reconfiguration/runtime-position-w8c-current-evidence-ir-v1.json",
+        "sourceVersion": "NSB-SEP-2026-1",
+        "sourceLocator": {
+          "type": "SECTION",
+          "value": "Executive Summary > Discovery: R&D Activity and Research Publications > R&D Activity"
+        }
+      },
+      "boundaries": {
+        "grammarAssigned": false,
+        "realityDomainAssigned": false,
+        "runtimePositionAssigned": false,
+        "predictionCreated": false,
+        "missingDataInferred": false
+      }
+    },
+    {
+      "featureId": "US-OBS-005",
+      "dossierId": "DOSSIER-US",
+      "laneId": "EXTERNAL_DEPENDENCY",
+      "featureClass": "EXTERNAL_EXCHANGE",
+      "observation": "In July 2026, U.S. goods and services exports were $310.7 billion, imports were $399.3 billion, and the goods and services deficit was $88.6 billion.",
+      "claimId": "US-EXTERNAL-DEPENDENCY-2026-001",
+      "sourceId": "US-BEA-TRADE-GOODS-SERVICES-JULY-2026",
+      "authorityClass": "OFFICIAL_PRIMARY",
+      "observedAt": "2026-10-02T02:47:00.000Z",
+      "publishedAt": "2026-09-03T00:00:00.000Z",
+      "freshnessState": "FRESH",
+      "evidenceState": "DIRECT_CWA_OBSERVATION",
+      "supportLevel": "DIRECT",
+      "provenance": {
+        "currentEvidenceIR": "content/civilization-atlas/reconfiguration/runtime-position-w8c-current-evidence-ir-v1.json",
+        "sourceVersion": "BEA-26-40_CB-26-142_JULY-2026",
+        "sourceLocator": {
+          "type": "TABLE",
+          "value": "U.S. International Trade in Goods and Services Deficit / Exports, Imports, and Balance (exhibit 1)"
+        }
+      },
+      "boundaries": {
+        "grammarAssigned": false,
+        "realityDomainAssigned": false,
+        "runtimePositionAssigned": false,
+        "predictionCreated": false,
+        "missingDataInferred": false
+      }
+    },
+    {
+      "featureId": "US-OBS-006",
+      "dossierId": "DOSSIER-US",
+      "laneId": "CARRIER_STRUCTURE",
+      "featureClass": "CARRIER_STRUCTURE",
+      "observation": "As of February 2026, the United States had 36,207,130 small businesses, and U.S. small businesses employed 62.3 million people, or 45.9% of private-sector workers.",
+      "claimId": "US-CARRIER-STRUCTURE-2026-001",
+      "sourceId": "US-SBA-FAQ-SMALL-BUSINESS-2026",
+      "authorityClass": "GOVERNMENT",
+      "observedAt": "2026-10-02T02:47:00.000Z",
+      "publishedAt": "2026-02-03T00:00:00.000Z",
+      "freshnessState": "FRESH",
+      "evidenceState": "DIRECT_CWA_OBSERVATION",
+      "supportLevel": "DIRECT",
+      "provenance": {
+        "currentEvidenceIR": "content/civilization-atlas/reconfiguration/runtime-position-w8c-current-evidence-ir-v1.json",
+        "sourceVersion": "SBA-ADVOCACY-FAQ-SMALL-BUSINESS-2026-02",
+        "sourceLocator": {
+          "type": "SECTION",
+          "value": "Frequently Asked Questions About Small Business 2026 > key statistics"
+        }
+      },
+      "boundaries": {
+        "grammarAssigned": false,
+        "realityDomainAssigned": false,
+        "runtimePositionAssigned": false,
+        "predictionCreated": false,
+        "missingDataInferred": false
+      }
+    },
+    {
+      "featureId": "US-OBS-007",
+      "dossierId": "DOSSIER-US",
+      "laneId": "PRESSURE_FIELD",
+      "featureClass": "PRESSURE_AND_VULNERABILITY",
+      "observation": "The Federal Reserve's May 2026 Financial Stability Report assessed U.S. financial-system vulnerabilities across valuation pressures, borrowing by businesses and households, financial-sector leverage, and funding risks, using market conditions and data as of April 23, 2026.",
+      "claimId": "US-PRESSURE-FIELD-2026-001",
+      "sourceId": "US-FED-FSR-MAY-2026",
+      "authorityClass": "REGULATOR",
+      "observedAt": "2026-10-02T02:47:00.000Z",
+      "publishedAt": null,
+      "freshnessState": "FRESH",
+      "evidenceState": "DIRECT_CWA_OBSERVATION",
+      "supportLevel": "DIRECT",
+      "provenance": {
+        "currentEvidenceIR": "content/civilization-atlas/reconfiguration/runtime-position-w8c-current-evidence-ir-v1.json",
+        "sourceVersion": "FED-FSR-MAY-2026",
+        "sourceLocator": {
+          "type": "SECTION",
+          "value": "Overview > Overview of financial system vulnerabilities"
+        }
+      },
+      "boundaries": {
+        "grammarAssigned": false,
+        "realityDomainAssigned": false,
+        "runtimePositionAssigned": false,
+        "predictionCreated": false,
+        "missingDataInferred": false
+      }
+    }
+  ],
+  "boundary": "Observable features are evidence-preserving current observations only. Grammar/domain/RP semantics are prohibited at this stage."
+}

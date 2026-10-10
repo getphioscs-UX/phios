@@ -1,0 +1,9 @@
+{
+  "contractCode": "PHI-OS-RDG-W15-UNKNOWN-DISPUTED-RUNTIME-v1",
+  "work": "RDG-W15",
+  "status": "active",
+  "states": ["UNKNOWN", "UNRESOLVED", "DISPUTED", "SUPPORTED", "RESOLVED"],
+  "transitions": ["UNKNOWN->SUPPORTED", "UNKNOWN->UNRESOLVED", "SUPPORTED->DISPUTED", "DISPUTED->RESOLVED", "DISPUTED->UNRESOLVED"],
+  "requiredTransitionFields": ["fromState", "toState", "reason", "evidenceReferences", "authorityReference", "recordedAt"],
+  "rules": {"unknownIsValidFormalState": true, "unknownCannotBeSilentlyDefaulted": true, "disputedEvidenceMustRemainVisibleToAuthorizedReview": true, "resolutionRequiresAuthorityAndLineage": true}
+}

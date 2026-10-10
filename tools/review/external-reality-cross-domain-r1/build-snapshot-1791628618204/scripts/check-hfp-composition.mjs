@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {runHfpFixture} from './lib/hfp/hfp-check-lib.mjs';
+const {input,candidate}=await runHfpFixture('business-owner.json');
+assert.equal(candidate.sections.length,22); assert.equal(candidate.productCode,'HFP'); assert.equal(candidate.terminalState,'CANDIDATE');
+const net=candidate.sections.find(s=>s.sectionCode==='NET_WORTH'); const sourceNet=input.fcrResult.engines.NET_WORTH.metrics.netWorth; const composed=net.statements.find(s=>s.payload.metricCode==='netWorth'); assert.deepEqual(composed.payload.value,sourceNet.value,'HFP changed FCR numeric result.'); assert.equal(composed.sourceDigest,input.fcrResult.resultDigest);
+const findings=candidate.sections.find(s=>s.sectionCode==='KEY_FINDINGS').statements; assert.equal(findings.length,input.farResult.findings.length); assert.deepEqual(findings.map(x=>x.payload.findingCode),input.farResult.findings.map(x=>x.findingCode));
+const assumptions=candidate.sections.find(s=>s.sectionCode==='ASSUMPTIONS_BOUNDARIES').statements.find(s=>s.semanticCode==='HFP.ASSUMPTIONS.FCR'); assert.deepEqual(assumptions.payload,input.fcrAssumptionSet,'HFP changed FCR assumptions.');
+const range=await runHfpFixture('range-only.json'); const rangeValues=range.candidate.sections.flatMap(s=>s.statements).filter(s=>s.sourceAuthority==='FCR').map(s=>s.payload?.value).filter(v=>v?.kind==='RANGE'); assert.ok(rangeValues.length>0,'Range input was not preserved in HFP.');
+const prelim=await runHfpFixture('preliminary.json'); assert.equal(prelim.candidate.mode,'PRELIMINARY'); assert.ok(prelim.candidate.unknowns.some(u=>u.sourceAuthority==='FCR')); assert.ok(prelim.candidate.unknowns.some(u=>u.sourceAuthority==='FAR'));
+console.log('✓ HFP-W6–W16 source-bound composition passed.');

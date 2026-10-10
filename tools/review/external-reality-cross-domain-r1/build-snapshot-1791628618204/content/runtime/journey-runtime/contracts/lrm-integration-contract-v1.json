@@ -1,0 +1,38 @@
+{
+  "contractCode": "PHI-OS-JR-W12-LRM-INTEGRATION-v1",
+  "contractVersion": "1.0.0",
+  "runtimeCode": "JR",
+  "work": "JR-W12",
+  "status": "EVENT_INTENT_CONTRACT_READY_LRM_EXECUTION_NOT_ACTIVATED",
+  "timelineMilestones": [
+    "start",
+    "stage",
+    "handoff",
+    "action",
+    "review",
+    "close"
+  ],
+  "eventRegistryReference": "content/runtime/journey-runtime/registries/journey-event-type-registry-v1.json",
+  "eventFields": [
+    "eventType",
+    "journeyReference",
+    "stage",
+    "sourceReference",
+    "occurredAt",
+    "dataPurpose",
+    "consentReferences"
+  ],
+  "rules": {
+    "jrCreatesEventIntent": true,
+    "jrOwnsLongitudinalTimeline": false,
+    "jrWritesLrmDirectlyWithoutExecutor": false,
+    "lrmOwnsTimelinePersistence": true,
+    "browserHistoryIsTimelineAuthority": false,
+    "fabricatedTimelinePersistenceForbidden": true
+  },
+  "currentBaseline": {
+    "dedicatedLrmRuntimeImplementationObserved": false,
+    "executionActivated": false,
+    "deliveryMode": "DEFERRED_FAIL_CLOSED"
+  }
+}

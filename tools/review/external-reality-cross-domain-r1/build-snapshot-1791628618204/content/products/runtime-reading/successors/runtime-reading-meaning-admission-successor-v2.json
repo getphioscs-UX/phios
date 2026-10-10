@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-RRP-MEANING-ADMISSION-SUCCESSOR-v2.0.0",
+  "work": "CMP-W8",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "CURRENT_SUCCESSOR_NUM_PRODUCTION_MEANING_ACTIVE",
+  "predecessor": "content/products/runtime-reading/contracts/runtime-reading-meaning-admission-v1.json",
+  "predecessorMutated": false,
+  "meaningAuthority": "content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v1.json",
+  "requiredFlow": [
+    "CANONICAL_METHOD_PROJECTION",
+    "CMP_PRODUCTION_ACTIVATION_GATE",
+    "CANONICAL_MEANING_PRODUCTION_BUNDLE",
+    "RRP_CANONICAL_MEANING_CONSUMER"
+  ],
+  "methodStates": {
+    "NUM": "AVAILABLE",
+    "BZR": "UNAVAILABLE_PENDING_BZRA",
+    "AST": "UNAVAILABLE_PENDING_ASTA",
+    "HDR": "UNAVAILABLE"
+  },
+  "rules": {
+    "llmMayCreateMissingMeaning": false,
+    "providerMayCreateMissingMeaning": false,
+    "projectionMayBeTreatedAsMeaning": false,
+    "onlyProductionBundleMayEnterAutomaticCustomerReading": true,
+    "missingMeaningMustRemainExplicit": true
+  }
+}

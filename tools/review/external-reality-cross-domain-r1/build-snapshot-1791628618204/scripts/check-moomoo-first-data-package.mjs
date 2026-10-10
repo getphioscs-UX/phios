@@ -1,0 +1,26 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const read=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
+const ok=(v,c)=>{if(!v)throw new Error('MOOMOO_FIRST_DATA_PACKAGE:'+c);};
+const contract=read('content/civilization-atlas/reconfiguration/moomoo-first-data-package-contract-v1.json');
+const plan=read('content/civilization-atlas/reconfiguration/moomoo-first-data-package-requests-v1.json');
+const template=read('content/civilization-atlas/reconfiguration/moomoo-first-data-package-import-template-v1.json');
+const provider=read('content/civilization-atlas/reconfiguration/market-data-provider-registry-v1.json');
+ok(contract.status==='READY_FOR_AUTHORIZED_RETRIEVAL','CONTRACT');
+ok(plan.providerId==='MOOMOO_OPENAPI','PROVIDER');
+ok((plan.requests||[]).length===3,'REQUEST_COUNT');
+ok((plan.requests||[]).some(x=>x.capability==='HISTORY_KLINE'),'KLINE');
+ok((plan.requests||[]).some(x=>x.capability==='CAPITAL_FLOW'),'CAPITAL_FLOW');
+ok((plan.requests||[]).some(x=>x.capability==='FINANCIAL_STATEMENTS'),'FINANCIALS');
+ok((contract.targetGaps||[]).length===3,'GAP_COUNT');
+ok(contract.boundaries?.proxyInstrumentEqualsEconomy===false,'PROXY_BOUNDARY');
+ok(contract.boundaries?.providerAloneEstablishesConstraint===false,'CONSTRAINT_BOUNDARY');
+ok(contract.boundaries?.providerAloneEstablishesReconfiguration===false,'RECONFIGURATION_BOUNDARY');
+ok(contract.boundaries?.providerAloneEstablishesContinuity===false,'CONTINUITY_BOUNDARY');
+ok(template.status==='TEMPLATE_NOT_DATA','TEMPLATE_STATE');
+const m=(provider.providers||[]).find(x=>x.providerId==='MOOMOO_OPENAPI');ok(Boolean(m),'PROVIDER_REGISTERED');
+for(const req of plan.requests)ok(m.capabilities.includes(req.capability),'CAPABILITY_'+req.capability);
+const unique=new Set();for(const req of plan.requests){ok(!unique.has(req.requestId),'DUPLICATE_REQUEST_ID');unique.add(req.requestId);}
+console.log('PASS first Moomoo data package: 3 governed request groups target all 3 W8E gaps; live data remains uncollected until authorized retrieval.');

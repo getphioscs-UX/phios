@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {buildBaZiNarrativeClaimIR,RELATION_TYPES,DEFECT_CODES} from '../functions/personal-reading/narrative/bazi-explanatory-authority.js';
+import {validateEditorial,validateSemanticVerdict,semanticCoverage} from '../functions/personal-reading/narrative/bazi-editorial-contract.js';
+import {checkBaziShadowStage} from '../functions/personal-reading/narrative/bazi-t3-shadow-stages.js';
+import {editorialFixture} from './lib/bazi-t3-test-fixture.mjs';
+const source=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json'));
+const [en,zh]=await Promise.all(['en','zh-Hans'].map(locale=>buildBaZiNarrativeClaimIR({...source,sectionKey:'S02_PERSONALITY',locale})));
+const structural=ir=>ir.claims.map(({text,conditionText,...claim})=>claim);
+assert.deepEqual(structural(en),structural(zh));
+assert.equal(en.version,'BAZI_EXPLANATORY_AUTHORITY_V2');assert.equal(en.manifestationLicenses.length,0);
+for(const c of en.claims){assert(RELATION_TYPES.includes(c.relationType));assert(c.sourceRefs.length);for(const k of ['allowCausalLanguage','allowSequenceLanguage','allowManifestation','allowObservedRealityClaim'])assert.equal(c[k],false);}
+assert.equal(en.claims.find(c=>c.relationType==='EMPHASIS').objects[0],'RESOURCE');
+assert.equal(en.claims.filter(c=>c.relationType==='CONTEXT_MODIFIER').length,source.reading.professionalModules.professionalTopics.topics.find(t=>t.topicCode==='CAPABILITY').relationshipInterfaces.length);
+assert.equal(en.claims.filter(c=>c.relationType==='SUPPORT_CONDITION').length,0);
+assert.equal(new Set(en.claims.map(c=>c.id)).size,en.claims.length,'licensed claim IDs must be unique');
+const domainClaim=en.claims.find(c=>c.relationType==='LIFE_DOMAIN_EXPLANATION'),operatingClaim=en.claims.find(c=>c.relationType==='OPERATING_CONDITION');assert(domainClaim&&operatingClaim);assert(!/\d+(?:\.\d+)?\s*%|leading functional group|self anchor|later expression|output cost/i.test(domainClaim.text));assert(!/output cost/i.test(operatingClaim.text));
+assert(en.claims.some(c=>c.relationType==='OPEN_CONDITION'));assert(en.claims.some(c=>c.relationType==='LIFE_DOMAIN_EXPLANATION'));assert(en.claims.some(c=>c.relationType==='OPERATING_CONDITION'));assert(en.reflectionQuestions.some(q=>q.id.includes('RB-TOPIC-CAPABILITY-1')));assert(en.counterPrompts.some(q=>q.id.includes('RB-TOPIC-CAPABILITY-2')));assert.equal(en.depth.version,'BAZI_RICH_CLAIM_IR_V2');
+const timing=await buildBaZiNarrativeClaimIR({...source,sectionKey:'S08_TIMING',locale:'en'});assert(timing.temporalAuthority.available);assert(timing.temporalAuthority.topicTemporalRelevance.length);assert(timing.temporalAuthority.boundaries.fortunePredictionCreated===false);
+const guidance=await buildBaZiNarrativeClaimIR({...source,sectionKey:'S09_GUIDANCE',locale:'en'});assert.equal(guidance.integratedGuidanceIR.primaryThemeId,source.reading.professionalModules.wholeChartPriority.themes[0].priorityId);
+const {pack,candidate,verdict}=editorialFixture();assert.equal(validateEditorial(candidate,pack).status,'PASS','unlicensed manifestation/support remain empty without penalty');
+for(const [mutate,code] of [[n=>n.interpretation[0].operator='SEQUENCE','UNLICENSED_SEQUENCE'],[n=>n.lead.operator='CAUSE','UNLICENSED_CAUSAL'],[n=>n.observationPrompt[0].kind='CUSTOMER_CLAIM','QUESTION_TO_FACT_PROMOTION'],[n=>n.howThisMayShowUp=[n.lead],'UNLICENSED_MANIFESTATION'],[n=>n.lead.factRefs=['dimensions'],'RANK_FLATTENING']]){const n=structuredClone(candidate);mutate(n);assert(validateEditorial(n,pack).issues.some(x=>x.includes(code)));}
+for(const code of DEFECT_CODES)assert.equal(validateSemanticVerdict({...verdict,defects:[{code,path:'lead',detail:'A genuine semantic defect must block publication.'}]},candidate,pack),false);
+assert.equal(validateSemanticVerdict({...verdict,assessments:verdict.assessments.map((a,i)=>i? a:{...a,candidateRelationType:'SEQUENCE'})},candidate,pack),false,'mislabelled actual semantics cannot be admitted');
+assert.equal(semanticCoverage(candidate,pack).claims.length,5);
+const stagedProfiles={HIGH_EVIDENCE:'high',LOW_EVIDENCE:'low',MIXED:'mixed'},passed=new Set(),human=new Set(),pass=async(p,l,s)=>passed.has(`${p}:${l}:${s}`),gate=(profileId,sectionKey,action)=>checkBaziShadowStage({profileId,sectionKey,action,stagedProfiles,passed:pass,humanAccepted:async(p,l,s)=>human.has(`${p}:${l}:${s}`)});
+assert((await gate('BASELINE_NOW','S02_PERSONALITY')).allowed);
+for(const l of ['en','zh-Hans'])passed.add(`BASELINE_NOW:${l}:S02_PERSONALITY`);
+assert(!(await gate('BASELINE_NOW','S03_LIFE_STRUCTURE')).allowed,'machine pass alone cannot authorize next section');
+for(const l of ['en','zh-Hans'])human.add(`BASELINE_NOW:${l}:S02_PERSONALITY`);
+assert((await gate('BASELINE_NOW','S03_LIFE_STRUCTURE')).allowed);
+assert(!(await gate('high','S02_PERSONALITY')).allowed);assert(!(await gate('BASELINE_NOW','S04_CAREER')).allowed);
+assert(!(await gate('BASELINE_NOW','S02_PERSONALITY','matrix-status')).allowed);assert((await gate('BASELINE_NOW','S02_PERSONALITY','parity')).allowed,'Master Work permits current-section parity after two machine-valid snapshots; it does not admit the next section');
+console.log('PASS native licensed IR and semantic operator boundaries; Addendum F supersedes machine-only staging with per-section human editorial gates.');

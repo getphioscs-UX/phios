@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-CROSS-FINDING-COMPOSITION-RULE-REGISTRY-v1.0.0",
+  "work": "ZIWEI-FP-W14",
+  "status": "FROZEN_ENGINEERING_REGISTRY",
+  "baselineCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
+  "rules": [
+    {
+      "ruleId": "ZWR-COMP-FOUNDATION",
+      "compositionType": "FOUNDATION_SYNTHESIS",
+      "findingTypes": [
+        "LIFE_BODY_FOUNDATION"
+      ],
+      "mode": "SINGLE_UNIT"
+    },
+    {
+      "ruleId": "ZWR-COMP-PALACE-CORE",
+      "compositionType": "PALACE_CORE_STRUCTURE",
+      "findingTypes": [
+        "PALACE_CONFIGURATION"
+      ],
+      "mode": "ONE_PER_PALACE"
+    },
+    {
+      "ruleId": "ZWR-COMP-PALACE-NETWORK",
+      "compositionType": "PALACE_NETWORK_CONTEXT",
+      "findingTypes": [
+        "PALACE_RELATIONSHIP_NETWORK"
+      ],
+      "mode": "ONE_PER_PALACE"
+    },
+    {
+      "ruleId": "ZWR-COMP-PATTERN-SET",
+      "compositionType": "QUALIFIED_PATTERN_SET",
+      "findingTypes": [
+        "QUALIFIED_PATTERN"
+      ],
+      "mode": "OPTIONAL_SET"
+    },
+    {
+      "ruleId": "ZWR-COMP-DAXIAN",
+      "compositionType": "DA_XIAN_CURRENT_STRUCTURE",
+      "findingTypes": [
+        "DA_XIAN_DOMAIN_FOCUS"
+      ],
+      "mode": "OPTIONAL_SINGLE"
+    },
+    {
+      "ruleId": "ZWR-COMP-LIUNIAN",
+      "compositionType": "LIU_NIAN_CURRENT_STRUCTURE",
+      "findingTypes": [
+        "LIU_NIAN_DOMAIN_FOCUS"
+      ],
+      "mode": "OPTIONAL_SINGLE"
+    },
+    {
+      "ruleId": "ZWR-COMP-TEMPORAL-CROSS",
+      "compositionType": "TEMPORAL_CROSS_LAYER_STRUCTURE",
+      "findingTypes": [
+        "TEMPORAL_DOMAIN_RELATION",
+        "CROSS_LAYER_TRANSFORMATION_OVERLAP"
+      ],
+      "mode": "OPTIONAL_SET"
+    }
+  ],
+  "governance": {
+    "oneFindingInAtMostOneCompositionUnit": true,
+    "palaceCoreAndNetworkHaveSharedSemanticKey": true,
+    "compositionCreatesNarrative": false,
+    "compositionResolvesContradiction": false
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "contractCode": "PHI-OS-RR-W7-CANONICAL-REPORT-OBJECT-v2",
+  "contractVersion": "2.0.0",
+  "runtimeCode": "RR",
+  "work": "RR-W7",
+  "status": "canonical",
+  "dataType": "REPORT_RECORD",
+  "pipeline": [
+    "RR Assembly",
+    "Immutable Candidate",
+    "RR Review",
+    "Upstream Approval Gate",
+    "Canonical Report",
+    "CPR",
+    "HTML / PDF / Workspace"
+  ],
+  "rules": {
+    "canonicalReportRequiresPassedReview": true,
+    "canonicalReportRequiresApproval": true,
+    "canonicalReportMayBeReleasedOnlyByNewImmutableVersion": true,
+    "cprOwnsPresentation": true,
+    "rrDoesNotRender": true,
+    "cprRegistryWrittenByRr": false
+  }
+}

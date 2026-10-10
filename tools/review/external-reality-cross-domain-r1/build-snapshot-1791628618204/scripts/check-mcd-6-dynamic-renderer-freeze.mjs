@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const freeze=j('content/professional/method-client-delivery/freeze/mcd-6-dynamic-renderer-freeze-v1.json');
+assert.equal(freeze.work,'MCD-6');assert.equal(freeze.status,'FROZEN_RENDERER_ONLY_MCD7_SURFACE_NOT_BOUND');
+for(const item of [...freeze.frozenOutputs,...freeze.predecessorEvidence,...freeze.preservedMcd7Surfaces]) assert.equal(sha(item.path),item.sha256,`MCD-6 freeze drift: ${item.path}`);
+for(const value of Object.values(freeze.nonActivation)) assert.equal(value,false);
+const pkg=j('package.json');assert.equal(pkg.scripts['check:mcd-6'],'node scripts/check-mcd-6-dynamic-renderers.mjs && node scripts/check-mcd-6-dynamic-renderer-freeze.mjs');assert.equal(pkg.scripts['check:mcd-renderer'],'npm run check:mcd-6');
+assert.equal(pkg.scripts['check:mcd'],'npm run check:mcd-production-authority && npm run check:mcd-2 && npm run check:mcd-3 && npm run check:mcd-4 && npm run check:mcd-5');assert.equal(pkg.scripts['check:mcd-through-6'],'npm run check:mcd && npm run check:mcd-6');
+console.log('✓ MCD-6 Dynamic Renderer freeze passed.');
+console.log('  Renderer outputs are frozen against MCD-5 predecessor evidence; MCD-7 client surfaces remain unchanged and HDR Production rendering remains disabled.');

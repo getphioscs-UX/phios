@@ -1,0 +1,74 @@
+{
+  "auditCode": "PHI-OS-RNE-W0-W4-AUTHORITY-RECONCILIATION-v1",
+  "auditVersion": "1.0.0",
+  "runtimeCode": "RNE",
+  "phase": "REALITY_NAVIGATION_ENGINE",
+  "scope": "RNE-W0 through RNE-W4 navigation intelligence foundation",
+  "status": "reconciled_validation_only_foundation",
+  "baselineCommit": "3dd903344945ecd3b585c8aafe48b93d7894caa9",
+  "inspectedAuthorities": [
+    {
+      "reference": "content/governance/operational-architecture/runtime-inventory-v1.json",
+      "reason": "RNE runtime-family registration"
+    },
+    {
+      "reference": "content/governance/canonical-master-work/registries/canonical-master-work-registry-v1.json",
+      "reason": "RNE-W0 through RNE-W14 planned work identity"
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+      "reason": "existing RNE NAVIGATION_RECORD data authority"
+    },
+    {
+      "reference": "content/runtime/reality-model-runtime/contracts/constraint-runtime-contract-v1.json",
+      "reason": "RMO owns descriptive Reality Constraint authority"
+    },
+    {
+      "reference": "content/runtime/reality-readout-engine/contracts/constraint-reading-contract-v1.json",
+      "reason": "RRE reads constraints without creating navigation restrictions"
+    },
+    {
+      "reference": "content/registry/m3c-public-journey.json",
+      "reason": "legacy Journey workflow and explicit user transition boundary"
+    },
+    {
+      "reference": "functions/runtime/navigation/navigation-contract.js",
+      "reason": "legacy bounded navigation contract remains frozen compatibility surface"
+    },
+    {
+      "reference": "functions/runtime/navigation/rule-navigation.js",
+      "reason": "legacy rule navigation remains unchanged pending governed RNE/JR integration"
+    }
+  ],
+  "authorityDecision": {
+    "rneRuntimeIdentityAlreadyRegistered": true,
+    "rneCanonicalDataAuthorityAlreadyExists": true,
+    "rneProducedDataType": "NAVIGATION_RECORD",
+    "rneCurrentPositionTargetConstraintGraphOptionSetAreNavigationIntelligenceObjects": true,
+    "jrOwnsJourneyWorkflowAndStageTransitions": true,
+    "rmoOwnsRealityConstraintActionOutcomeAndDiffRepresentation": true,
+    "rreOwnsReadoutAndEvidenceEvaluation": true,
+    "prOwnsProfessionalJudgmentAndProfessionalRecommendation": true,
+    "valOwnsNavigationEffectivenessValidation": true,
+    "rneSupportsDecision": true,
+    "rneCommandsDecision": false,
+    "rneMayInventTarget": false,
+    "rneMayAutoSelectOption": false,
+    "rneMayExecuteOption": false,
+    "legacyNavigationCutoverByThisBatch": false,
+    "rdgRegistryMutationByThisBatch": false
+  },
+  "readoutIntegrationGap": {
+    "currentRneConsumedDataTypes": [
+      "RUNTIME_STATE_RECORD",
+      "GOVERNANCE_RECORD"
+    ],
+    "currentRrePersistentReadoutDataTypeAvailable": false,
+    "w1ReadoutMode": "VALIDATION_VIEW_REFERENCE_ONLY",
+    "persistentCanonicalReadoutConsumptionActivated": false,
+    "requiredBeforePersistentRreReadoutBinding": [
+      "versioned RDG authorization for a canonical RRE readout data type",
+      "versioned RNE consumed-data contract extension if that data type becomes canonical"
+    ]
+  }
+}

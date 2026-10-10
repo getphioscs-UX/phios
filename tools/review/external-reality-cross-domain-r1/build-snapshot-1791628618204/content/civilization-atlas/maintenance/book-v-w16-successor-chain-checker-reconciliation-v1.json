@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-V-W16-SUCCESSOR-CHAIN-CHECKER-RECONCILIATION-v1.0.0",
+  "status": "ACTIVE_CHECKER_RECONCILIATION",
+  "baselineCommit": "77d284ef9fc797c4b8066aac2f47f2e6850e1703",
+  "path": "scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs",
+  "problem": "The checker incorrectly recomputed the current atlas-data.js digest against the historical intermediate Book VI v2 successor, so a valid later v3 successor could never pass.",
+  "rule": {
+    "intermediateSuccessorValidation": "CHAIN_LINK_ONLY",
+    "finalSuccessorValidation": "CURRENT_FILE_DIGEST_MUST_MATCH",
+    "historicalSuccessorRecordsImmutable": true
+  },
+  "expectedChain": {
+    "v2SuccessorSha256": "1e31f8f322c6c766df3395e648ec307f34162df515972730b33ba5b546902601",
+    "v3CurrentSha256": "5578cc7bc5f1d1d29e54c867f66540b445df8d25093cf127d1f1062c2553301c"
+  },
+  "boundary": {
+    "bookVFreezeChanged": false,
+    "bookVISuccessorV1Changed": false,
+    "bookVISuccessorV2Changed": false,
+    "bookVISuccessorV3Changed": false,
+    "runtimeCodeChanged": false
+  }
+}

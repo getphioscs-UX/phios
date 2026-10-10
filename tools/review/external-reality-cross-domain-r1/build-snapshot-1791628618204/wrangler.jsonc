@@ -1,0 +1,71 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "phios-github",
+  "pages_build_output_dir": ".pages-output",
+  "compatibility_date": "2026-07-14",
+  "ai": {
+    "binding": "AI"
+  },
+  "d1_databases": [
+    {
+      "binding": "RUNTIME_DB",
+      "database_name": "phios-runtime-production",
+      "database_id": "073639fa-01e4-4868-af10-6ed032637dab",
+      "migrations_dir": "db/migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "MANUSCRIPTS",
+      "bucket_name": "phios-private-manuscripts"
+    },
+    {
+      "binding": "PRIVATE_REPORTS",
+      "bucket_name": "phios-private-reports"
+    }
+  ],
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "env": {
+    "preview": {
+      "services": [{"binding":"METHOD_REPORT_RENDERER","service":"phios-method-report-renderer-qa"}],
+      "ai": {
+        "binding": "AI"
+      },
+      "d1_databases": [
+        {
+          "binding": "RUNTIME_DB",
+          "database_name": "phios-runtime-sandbox",
+          "database_id": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+          "migrations_dir": "db/migrations"
+        }
+      ],
+      "r2_buckets": [
+        {
+          "binding": "BOOKS",
+          "bucket_name": "phios-private-books-sandbox"
+        },
+        {
+          "binding": "PRIVATE_REPORTS",
+          "bucket_name": "phios-private-reports-sandbox"
+        }
+      ],
+      "vars": {
+        "PHIOS_ENVIRONMENT": "qa",
+        "PHIOS_MANUSCRIPT_RETRIEVAL_ENABLED": "false",
+        "FW_PREVIEW_ACCEPTANCE_FIXTURES": "enabled",
+        "BAZI_T3_PREVIEW_SHADOW": "enabled",
+        "RNT2_S04_REVIEW": "enabled",
+        "STRIPE_ENVIRONMENT": "QA",
+        "PHIOS_COMMERCE_QA_ENABLED": "true",
+        "AUTH_PROVIDER": "auth0",
+        "AUTH_ISSUER": "https://dev-2g55joboofph0ax7.us.auth0.com/",
+        "AUTH_CLIENT_ID": "eSmR58lhvWkRCTyo7RdMxTuQzLM85Axr",
+        "AUTH_CALLBACK_URL": "https://qa.phios-github.pages.dev/api/auth/callback",
+        "BOOK_ONE_SOURCE_KEY": "books/book-one/PHI-OS-Book-I-v2",
+        "PHIOS_BOOK_ONE_SALES_ENABLED": "false"
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "contractCode": "PHI-OS-VAP-W2-CLOUDFLARE-PRODUCTION-SHA-VERIFICATION-v1",
+  "contractVersion": "1.0.1",
+  "work": "VAP-W2",
+  "status": "active",
+  "implementationBaselineCommit": "dc3be86824ff7f8e5c99afe6c5058378204e1138",
+  "prerequisites": [
+    "VAP-W0_PRODUCTION_BASELINE_FROZEN",
+    "VAP-W1_PUBLISHED_KNOWLEDGE_INTEGRITY_REPAIR_PASSED"
+  ],
+  "cloudflare": {
+    "projectName": "phios-github",
+    "environment": "production",
+    "productionBranch": "main",
+    "productionUrl": "https://phios-github.pages.dev/",
+    "metadataAuthority": "CLOUDFLARE_PAGES_DEPLOYMENTS_REST_API_AUTHENTICATED_BY_WRANGLER",
+    "authenticationCommands": [
+      "wrangler whoami --json",
+      "wrangler auth token --json"
+    ],
+    "apiOperation": "GET /accounts/{account_id}/pages/projects/phios-github/deployments?env=production",
+    "wranglerListOutputIsNotCommitAuthority": true,
+    "reason": "Wrangler pages deployment list --json intentionally emits a presentation row with Source truncated to seven Git characters; exact production verification therefore consumes the authenticated Cloudflare Pages REST deployment object instead."
+  },
+  "requiredVerification": {
+    "originMainMustEqualImplementationBaselineAtVerification": true,
+    "headMustEqualOriginMainAtVerification": true,
+    "deploymentEnvironmentMustEqualProduction": true,
+    "deploymentBranchMustEqualMain": true,
+    "deploymentCommitMustBeFullGitSha": true,
+    "deploymentCommitMustEqualOriginMain": true,
+    "deploymentCommitDirtyMustBeFalse": true,
+    "deploymentStageMustBeSuccessful": true,
+    "productionUrlMustBeReachable": true
+  },
+  "selectionPolicy": {
+    "preferDeploymentOwningProductionAlias": true,
+    "fallbackToNewestSuccessfulProductionDeployment": true,
+    "randomDeploymentShortIdIsNotCommitAuthority": true,
+    "wranglerSevenCharacterSourceIsNotCommitAuthority": true
+  },
+  "failClosedStates": [
+    "BASELINE_DRIFT",
+    "HEAD_NOT_AT_ORIGIN_MAIN",
+    "CLOUDFLARE_AUTH_OR_NETWORK_UNAVAILABLE",
+    "CLOUDFLARE_PROJECT_NOT_FOUND",
+    "NO_PRODUCTION_DEPLOYMENT_FOUND",
+    "PRODUCTION_DEPLOYMENT_NOT_SUCCESSFUL",
+    "PRODUCTION_ENVIRONMENT_MISMATCH",
+    "PRODUCTION_BRANCH_MISMATCH",
+    "PRODUCTION_COMMIT_METADATA_INCOMPLETE",
+    "PRODUCTION_COMMIT_DIRTY",
+    "PRODUCTION_BEHIND_OR_DIVERGED_FROM_MAIN",
+    "PRODUCTION_URL_UNREACHABLE"
+  ],
+  "effects": {
+    "repositoryMutationAllowed": false,
+    "cloudflareDeploymentMutationAllowed": false,
+    "cloudflareRollbackAllowed": false,
+    "candidateCreationAllowed": false,
+    "providerInvocationAllowed": false,
+    "publicationAllowed": false,
+    "vapW3AllowedOnlyAfterVerifiedEvidence": true
+  }
+}

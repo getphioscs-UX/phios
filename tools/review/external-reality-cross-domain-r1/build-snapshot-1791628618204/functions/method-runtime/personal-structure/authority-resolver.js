@@ -1,0 +1,4 @@
+/** MIR-3 Authority resolver. Precedence is source-frozen. */
+import {centersConnected} from './center-graph.js';
+export const AUTHORITY_PRECEDENCE=Object.freeze(['EMOTIONAL','SACRAL','SPLENIC','SELF_PROJECTED','EGO_MANIFESTED','EGO_PROJECTED','MENTAL_ENVIRONMENTAL','LUNAR']);
+export function resolveAuthority(graph,typeCode){const d=new Set(graph.definedCenters);if(d.has('SOLAR_PLEXUS'))return 'EMOTIONAL';if(d.has('SACRAL'))return 'SACRAL';if(d.has('SPLEEN'))return 'SPLENIC';if(centersConnected(graph,'G','THROAT'))return 'SELF_PROJECTED';if(centersConnected(graph,'EGO','THROAT'))return 'EGO_MANIFESTED';if(centersConnected(graph,'EGO','G'))return 'EGO_PROJECTED';const upper=new Set(['HEAD','AJNA','THROAT']);if(typeCode==='PROJECTOR'&&d.size>0&&[...d].every(c=>upper.has(c)))return 'MENTAL_ENVIRONMENTAL';if(d.size===0)return 'LUNAR';return 'UNRESOLVED';}

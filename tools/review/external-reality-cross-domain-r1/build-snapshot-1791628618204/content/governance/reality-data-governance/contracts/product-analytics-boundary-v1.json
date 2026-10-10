@@ -1,0 +1,30 @@
+{
+  "contractCode": "PHI-OS-RDG-W21-PRODUCT-ANALYTICS-BOUNDARY-v1",
+  "contractVersion": "1.0.0",
+  "work": "RDG-W21",
+  "status": "active",
+  "layerRegistry": "content/governance/reality-data-governance/registries/data-event-layer-registry-v1.json",
+  "canonicalRuntimeEventEligibilityInputs": [
+    "formalOperation",
+    "operationSucceeded",
+    "operationGoverned",
+    "canonicalStateReference",
+    "causationReference"
+  ],
+  "classificationOutputs": [
+    "UI_TELEMETRY",
+    "PRODUCT_ANALYTICS",
+    "RUNTIME_EVENT_ELIGIBLE",
+    "NON_CANONICAL_OPERATION_ATTEMPT"
+  ],
+  "rules": {
+    "buttonClickedIsUiTelemetry": true,
+    "uiTelemetryCollectionDefaultEnabled": false,
+    "persistentProductAnalyticsRequiresPurposeAndConsent": true,
+    "analyticsMayCreateRealityEvidence": false,
+    "analyticsMayChangeCanonicalRuntimeState": false,
+    "failedOrUngovernedOperationMayEmitCanonicalRuntimeEvent": false,
+    "successfulGovernedOperationMayEmitCanonicalRuntimeEvent": true,
+    "eventEmissionDoesNotPerformTheOperation": true
+  }
+}

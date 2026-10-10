@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {buildBenchmark,METHODS} from './smr-benchmark-support.mjs';
+import {buildCrossPerspectiveInputIR} from '../functions/runtime-reading/cross-perspective-input-ir.js';
+import {buildSemanticEvidenceMatrix} from '../functions/runtime-reading/semantic-evidence-matrix.js';
+import {buildCrossMethodRuntimeReadingIRv2,classifyCrossDimension} from '../functions/runtime-reading/cross-method-reading-ir-v2.js';
+import {CROSS_COMPOSITION_TEMPLATES} from '../functions/runtime-reading/cross-composition-rules-v1.js';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const rules=j('content/customer-experience-rebuild/r12r4b/cross/registries/cross-method-composition-rule-registry-v1.json');
+assert.deepEqual(CROSS_COMPOSITION_TEMPLATES,rules.templates);assert.equal(rules.mandatoryGates.minimumDistinctCustomerPublishableMethodsPerCrossClaim,2);assert.equal(rules.mandatoryGates.percentageMatchAllowed,false);
+const built=[];for(const method of METHODS)built.push(await buildBenchmark(method));
+const xpf={schemaVersion:'PHI-OS-CONFIRMED-EXTERNAL-PROFILE-v1.0.0',methodId:'XPF',authorityClass:'CUSTOMER_SUPPLIED_EXTERNAL_CONTEXT',intakeId:'XPF-CROSS-W23',records:[{field:'authority',value:'Confirmed context',sourceType:'CUSTOMER_CONFIRMED',customerConfirmed:true,phiosCalculated:false}],provenance:{customerConfirmed:true,phiosCalculated:false},boundary:{calculatedMethodConsensusEligible:false},profileDigest:'d'.repeat(64)};
+const input=await buildCrossPerspectiveInputIR({acceptedMethodReadingEnvelopes:built.map(x=>x.envelope),claimCollections:built.map(x=>x.claims),confirmedXpf:xpf});const matrix=await buildSemanticEvidenceMatrix(input);const reading=await buildCrossMethodRuntimeReadingIRv2({crossInput:input,semanticMatrix:matrix});
+assert.equal(reading.schemaVersion,'PHI-OS-CROSS-METHOD-RUNTIME-READING-IR-v2.0.0');assert(reading.claims.length>0);
+const index=new Map(input.methodInputs.flatMap(m=>m.claims).map(c=>[c.claimId,c]));
+for(const claim of reading.claims){assert(claim.methodRefs.length>=2);assert(claim.claimRefs.length>=2);assert.equal(new Set(claim.methodRefs).size,claim.methodRefs.length);assert(claim.claimRefs.every(ref=>index.get(ref)?.publicationState==='CUSTOMER_PUBLISHABLE'));assert.equal(claim.boundary.customerPublishableMethodRefMinimumSatisfied,true);assert.equal(claim.boundary.methodAgreementIsNotProof,true);assert.equal(claim.boundary.percentageMatchCreated,false);assert.equal(claim.boundary.methodWinnerSelected,false);assert.equal(claim.lineage.currentRealityRefs.length,0);assert.doesNotMatch(`${claim.headline} ${claim.narrative}`,/\b\d{1,3}%\b|5 systems prove|systems prove|proves? that/i);for(const source of index.values())assert.notEqual(claim.narrative,source.structuralMeaning)}
+assert(!reading.claims.some(claim=>claim.semanticDimension==='DECISION'),'One public method + XPF context must not satisfy the 2-method cross gate');
+assert.equal(reading.technical.hdrInternalContextProjectedToCustomer,false);assert.equal(reading.boundaries.customerCutoverActivated,false);assert.equal(reading.boundaries.currentRealityIntegrationActivated,false);
+const synthIndex=new Map([['A',{claimId:'A',methodId:'AST',publicationState:'CUSTOMER_PUBLISHABLE',claimType:'SUPPORT'}],['B',{claimId:'B',methodId:'BZR',publicationState:'CUSTOMER_PUBLISHABLE',claimType:'TENSION'}],['C',{claimId:'C',methodId:'NUM',publicationState:'CUSTOMER_PUBLISHABLE',claimType:'OPEN'}]]);
+assert.equal(classifyCrossDimension({methodClaimRefs:['A','B'],tensions:['B'],open:[]},synthIndex),'TENSION');assert.equal(classifyCrossDimension({methodClaimRefs:['A','C'],tensions:[],open:['C']},synthIndex),'OPEN');assert.equal(classifyCrossDimension({methodClaimRefs:['A'],tensions:[],open:[]},synthIndex),null);
+const counts=Object.fromEntries(rules.supportTypes.map(type=>[type,reading.claims.filter(c=>c.supportType===type).length]));
+console.log(`✓ R2-W23 Cross composition passed: ${reading.claims.length} governed cross claims; support types ${JSON.stringify(counts)}; every claim has >=2 distinct CUSTOMER_PUBLISHABLE method refs; no voting/percentage/proof language.`);

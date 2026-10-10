@@ -1,0 +1,4 @@
+/** MIR-3 natal/transit/relationship separation. Overlays never rewrite natal baseline. */
+export function createNatalPersonalStructure(calculation){return Object.freeze({objectType:'NatalPersonalStructure',baselineImmutable:true,inputVersion:calculation.inputVersion||null,calculation});}
+export function createTransitOverlay({natalRef,asOf,activations=[]}){return Object.freeze({objectType:'TransitOverlay',natalRef,asOf,temporaryActivations:Object.freeze([...activations]),overlayType:null,overlayAuthorityContext:null,natalMutationAllowed:false});}
+export function createRelationshipOverlay({natalRefA,natalRefB,activations=[]}){return Object.freeze({objectType:'RelationshipOverlay',natalRefA,natalRefB,temporaryActivations:Object.freeze([...activations]),overlayType:null,overlayAuthorityContext:null,natalMutationAllowed:false});}

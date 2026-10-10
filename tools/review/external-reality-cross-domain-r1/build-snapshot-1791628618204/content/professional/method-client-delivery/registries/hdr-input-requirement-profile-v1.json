@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "PHI-OS-MCD-3-HDR-INPUT-REQUIREMENT-PROFILE-v1.0.0",
+  "work": "MCD-3D-HDR",
+  "baselineCommit": "eb55edb1a183a173aca707e3d3f1a6f842e36271",
+  "status": "REGISTERED_INPUT_PROFILE_PRODUCTION_BLOCKED",
+  "internalIdentity": {
+    "methodCode": "HUMAN_DESIGN",
+    "pluginCode": "HDR",
+    "governanceVisibility": "INTERNAL_ONLY"
+  },
+  "controlledPublicLabelReservedForFutureGovernanceOnly": {
+    "en": "Personal Runtime Projection",
+    "zh-Hans": "个人运行投射",
+    "currentlyRenderable": false
+  },
+  "requirementProfile": {
+    "birthDate": {
+      "classification": "REQUIRED",
+      "reason": "full internal validation path temporal initialization"
+    },
+    "birthTime": {
+      "classification": "REQUIRED",
+      "reason": "full internal calculation path is birth-moment sensitive",
+      "unknownPolicy": "FAIL_CLOSED_FOR_FULL_INTERNAL_PATH"
+    },
+    "birthPlace": {
+      "classification": "REQUIRED",
+      "reason": "temporal/spatial initialization provenance"
+    },
+    "coordinates": {
+      "classification": "REQUIRED",
+      "reason": "full internal astronomy-dependent validation path; coordinates may only come from client-provided values or governed resolution, never a guess"
+    },
+    "birthTimezone": {
+      "classification": "REQUIRED",
+      "reason": "historical civil time must resolve against pinned temporal authority"
+    },
+    "utcOffsetAtBirth": {
+      "classification": "REQUIRED_FOR_FULL_INSTANT",
+      "reason": "current offset/browser timezone cannot substitute"
+    },
+    "approximateTime": {
+      "classification": "POLICY_DEPENDENT",
+      "executionMode": "validation_only"
+    }
+  },
+  "historicalTimezoneAuthority": {
+    "authorityCode": "IANA_TZDB",
+    "releaseVersion": "2026c",
+    "releaseDate": "2026-07-08",
+    "releaseTag": "2026c",
+    "releaseCommit": "71f28b9ab3b67c0f9466803f6151812d4fc8e357",
+    "artifact": {
+      "name": "tzdata2026c.tar.gz",
+      "digestAlgorithm": "SHA512",
+      "digest": "3e5aec7d93522efc875fc8af553f78029677aaa9be8db396c862d687bdedb930379ba6246b33a15c5fb3a76d24e937dac4f4f66d6f9edf69a668bb21e9eeada7"
+    },
+    "license": "PUBLIC_DOMAIN",
+    "authorityBindingDigest": "3d2de97f4f5dceb2545aa3cd52e7523ac44ac2c4bc14fff285e958f178fbe682"
+  },
+  "authorityGate": {
+    "mcd1Resolution": "content/professional/method-client-delivery/resolutions/mcd-1-hdr-restricted-method-resolution-v1.json",
+    "mpaSuccessor": "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+    "state": "BLOCKED",
+    "productionEligible": false,
+    "professionalEligible": false,
+    "dispatchAllowed": false,
+    "executionMode": "validation_only",
+    "inputCompleteDoesNotEqualExecutable": true,
+    "inputReadyDoesNotEqualProductionEligible": true,
+    "mpaBlockPrecedesInputReadiness": true,
+    "validationRequirementRegistrationAllowed": true,
+    "productionCoreInvocationAllowed": false,
+    "professionalReleaseAllowed": false,
+    "customerResultAllowed": false
+  },
+  "blockingReasons": [
+    "RESTRICTED_LICENSE",
+    "EXTERNAL_ALGORITHM_AUTHORITY",
+    "PUBLIC_VOCABULARY_RESTRICTED",
+    "COMMERCIAL_ACTIVATION_NOT_APPROVED",
+    "AUTHORIZED_MAPPING_AUTHORITY_UNRESOLVED",
+    "AUTHORIZED_STRUCTURE_AUTHORITY_UNRESOLVED"
+  ],
+  "unknownRules": {
+    "unknownBirthTimeRemainsNull": true,
+    "fabricatedBirthTimeForbidden": true,
+    "fabricatedCoordinatesForbidden": true,
+    "fabricatedTimezoneForbidden": true,
+    "validationFixtureMayNotBecomeCustomerResult": true
+  },
+  "futureExecutionGate": {
+    "requiredBeforeHdrInternalInputMayReachProductionCore": [
+      "RIGHTS_RESOLVED",
+      "MAPPING_AUTHORITY_RESOLVED",
+      "STRUCTURE_AUTHORITY_RESOLVED",
+      "COMMERCIAL_APPROVAL",
+      "MPA_PRODUCTION_GRANT",
+      "AUTHORIZED_ADAPTER_BINDING",
+      "CANONICAL_PROJECTION_ACCEPTED",
+      "CLIENT_PROJECTION_ACCEPTED"
+    ],
+    "allCurrentlySatisfied": false
+  },
+  "nextWork": "MCD-4_HDR_REQUEST_MUST_FAIL_CLOSED_WHILE_BLOCKED"
+}

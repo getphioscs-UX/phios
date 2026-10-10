@@ -1,0 +1,28 @@
+{
+  "contractCode": "PHI-OS-RUNTIME-CHECKER-ALIAS-CONTRACT",
+  "contractVersion": "1.0.0",
+  "status": "active",
+  "authority": "PHIOS_RUNTIME_GOVERNANCE",
+  "purpose": "Resolve stable Work Codes to historically frozen checker filenames without renaming or rewriting accepted checker artifacts.",
+  "identityRules": {
+    "workCodeStable": true,
+    "checkerFilenameMayDifferAcrossHistoricalTracks": true,
+    "renameRequired": false,
+    "acceptedCheckerMustNotBeRewrittenForNamingConsistency": true
+  },
+  "runnerBoundary": {
+    "allowedOperations": ["read_registry", "resolve_work_code", "validate_file_presence", "execute_checker", "report"],
+    "forbiddenOperations": ["rename_checker", "rewrite_checker", "update_freeze", "repair_digest", "promote_state", "publish", "modify_runtime"]
+  },
+  "resolutionOrder": [
+    "exact_work_code",
+    "registered_alias",
+    "fail_closed"
+  ],
+  "invariants": {
+    "frozenHistoryPreserved": true,
+    "packageJsonIsNotSourceOfTruthForCheckerIdentity": true,
+    "registryDoesNotBecomeRuntimeAuthority": true,
+    "checkerExitCodePropagated": true
+  }
+}

@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const hierarchy=JSON.parse(fs.readFileSync('content/interpretation/governance/interpretation-source-authority-hierarchy-v1.json','utf8'));
+const policy=JSON.parse(fs.readFileSync('content/interpretation/governance/interpretation-conflict-resolution-policy-v1.json','utf8'));
+assert.equal(hierarchy.status,'FROZEN');
+assert.equal(hierarchy.scope,'INTERPRETATION_SOURCE_CONFLICT_RESOLUTION_ONLY');
+assert.equal(hierarchy.objectDomainAuthorityPrecedesSourceHierarchy,true);
+assert.deepEqual(hierarchy.levels.map(x=>x.authority),['FROZEN_PHI_OS_CANONICAL_REGISTRIES','CURRENT_CANONICAL_MANUSCRIPTS','CANONICAL_FIGURES','CANONICAL_KNOWLEDGE_NODES','METHOD_PROJECTION_CONTRACTS','RUNTIME_STATE_CASE_EVIDENCE','GOVERNED_INTERPRETATION_HYPOTHESES','AI_COMPOSITION']);
+for (const rule of ['AI_COMPOSITION_OVER_CANONICAL_STRUCTURE','HISTORICAL_OR_OLD_FIGURE_OVER_CURRENT_CANONICAL_MANUSCRIPT_AUTHORITY','INTERPRETATION_OVER_CALCULATION_TRUTH']) assert.ok(hierarchy.forbiddenPrecedence.includes(rule), rule);
+assert.equal(policy.status,'FROZEN');
+assert.equal(policy.successorPolicy.silentMutationAllowed,false);
+assert.ok(policy.principles.includes('UNKNOWN_IS_PRESERVED_WHEN_AUTHORIZED_DERIVATION_IS_MISSING'));
+console.log('✓ IR-W2 source authority hierarchy passed: canonical source precedence is frozen and cannot override object-domain authority.');

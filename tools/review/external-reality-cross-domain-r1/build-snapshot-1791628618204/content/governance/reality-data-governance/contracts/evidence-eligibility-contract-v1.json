@@ -1,0 +1,8 @@
+{
+  "contractCode": "PHI-OS-RDG-W11-EVIDENCE-ELIGIBILITY-v1",
+  "work": "RDG-W11",
+  "status": "active",
+  "requiredInputs": ["dataReference", "dataNature", "sourceReference", "lineageReferences", "certainty", "purposeCodes", "sensitivityClass"],
+  "outputs": ["ELIGIBLE", "INELIGIBLE", "REQUIRES_CORROBORATION", "DISPUTED", "UNKNOWN"],
+  "rules": {"telemetryIsNotEvidence": true, "calculationRequiresAlgorithmVersionAndInputLineage": true, "eligibilityDoesNotEqualTruth": true, "missingLineageFailsClosed": true}
+}

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W37-REAL-EVIDENCE-INTAKE-CONTRACT-v1.0.0",
+  "work": "PVP-R1-VIS-W37",
+  "acceptedAgainstCommit": "d7d3a82b6fec2c48033fac346030702928065eb7",
+  "status": "REAL_EVIDENCE_COLLECTION_READY",
+  "publicRepoPrivacyBoundary": {
+    "rawCustomerContentAllowed": false,
+    "customerIdentifiersAllowed": false,
+    "rawStripeIdsAllowed": false,
+    "paymentDetailsAllowed": false,
+    "privateProofMustRemainOutsidePublicRepo": true,
+    "publicArtifactStoresOnlyProofDigestAndNonSensitiveMetadata": true
+  },
+  "requiredEventFields": [
+    "signal",
+    "evidenceClass",
+    "real",
+    "productionEnvironment",
+    "synthetic",
+    "controlledReplay",
+    "testTransaction",
+    "occurredAt",
+    "sourceSystem",
+    "proofDigestSha256",
+    "ownerVerified",
+    "privateEvidenceRetainedOutsideRepo"
+  ],
+  "signalRules": {
+    "click": {
+      "evidenceClass": "REAL_CLIENT_INTERACTION",
+      "allowedSourceSystems": [
+        "LIVE_BROWSER"
+      ]
+    },
+    "unlock": {
+      "evidenceClass": "REAL_SERVER_ENTITLEMENT_TRANSITION",
+      "allowedSourceSystems": [
+        "ENTITLEMENT_RUNTIME",
+        "COMMERCE_RUNTIME"
+      ]
+    },
+    "purchase": {
+      "evidenceClass": "REAL_COMMERCE_TRANSACTION",
+      "allowedSourceSystems": [
+        "STRIPE",
+        "COMMERCE_RUNTIME"
+      ]
+    },
+    "upgrade": {
+      "evidenceClass": "REAL_SERVER_ENTITLEMENT_OR_PLAN_TRANSITION",
+      "allowedSourceSystems": [
+        "ENTITLEMENT_RUNTIME",
+        "COMMERCE_RUNTIME"
+      ]
+    },
+    "reality_return": {
+      "evidenceClass": "REAL_CLIENT_HANDOFF_AND_DESTINATION_ARRIVAL",
+      "allowedSourceSystems": [
+        "LIVE_BROWSER"
+      ]
+    }
+  },
+  "forbiddenEvidence": [
+    "SYNTHETIC",
+    "CONTROLLED_REPLAY",
+    "TEST_TRANSACTION",
+    "SCREENSHOT_WITH_CUSTOMER_PII",
+    "RAW_PAYMENT_PROVIDER_IDENTIFIER"
+  ],
+  "acceptanceRequiresAllFiveSignals": true
+}

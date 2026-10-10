@@ -1,0 +1,24 @@
+{
+  "successorCode": "PHI-OS-CPR-CUSTOMER-PRESENTATION-SUCCESSOR-v1",
+  "successorVersion": "1.0.0",
+  "phase": "CPR-CUST",
+  "work": "CPR-CUST-W3/W4",
+  "status": "CURRENT_CUSTOMER_REPORT_PRODUCTION_SLICE",
+  "extends": "content/professional/canonical-presentation-runtime/contracts/canonical-presentation-contract-v1.json",
+  "extension": "content/professional/canonical-presentation-runtime/successors/canonical-presentation-contract-v2-successor.json",
+  "projectionType": "CUSTOMER_REPORT",
+  "audience": "CUSTOMER",
+  "authority": {
+    "presentationOwner": "CPR",
+    "reportOwner": "PROFESSIONAL_REPORT",
+    "releaseOwner": "REPORT_RELEASE",
+    "dataAccessOwner": "EXTERNAL_PERMISSION_RUNTIME",
+    "visualOwner": "PDS",
+    "renderOwner": "SURFACE_RENDERER"
+  },
+  "rules": {
+    "secondPresentationAuthorityCreated": false,
+    "secondReportAuthorityCreated": false,
+    "audienceDoesNotGrantDataAccess": true
+  }
+}

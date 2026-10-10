@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W22-NAVIGATION-OUTPUT-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W22",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "ACTIVE_BOUNDED_NAVIGATION_COMPOSITION_OUTPUT",
+  "navigationLoop": [
+    "OBSERVE",
+    "CLARIFY",
+    "CHOOSE",
+    "ACT",
+    "REVIEW",
+    "CONTINUE"
+  ],
+  "requiredOutputFields": [
+    "currentReality",
+    "majorSignals",
+    "uncertainties",
+    "possibleDirections",
+    "nextObservation",
+    "reviewWindow"
+  ],
+  "authorityReferences": {
+    "journeyNavigationProjection": "content/runtime/journey-runtime/contracts/navigation-projection-contract-v1.json",
+    "journeyReviewNext": "content/runtime/journey-runtime/contracts/reality-review-next-contract-v1.json",
+    "rneBoundary": "content/runtime/reality-navigation-engine/contracts/rne-authority-boundary-v1.json",
+    "reality": "content/products/runtime-reading/contracts/runtime-reading-reality-binding-v1.json",
+    "uncertainty": "content/products/runtime-reading/contracts/runtime-reading-unknown-contradiction-contract-v1.json"
+  },
+  "fieldAuthority": {
+    "currentReality": [
+      "RMO",
+      "RRE"
+    ],
+    "majorSignals": [
+      "ADMITTED_EVIDENCE",
+      "GOVERNED_INTERPRETATION"
+    ],
+    "uncertainties": [
+      "RRP-W19"
+    ],
+    "possibleDirections": [
+      "JR_NAVIGATION_PROJECTION",
+      "AUTHORIZED_BOUNDED_NAVIGATION_SOURCE"
+    ],
+    "nextObservation": [
+      "JR_NAVIGATION_PROJECTION",
+      "RRE_READOUT"
+    ],
+    "reviewWindow": [
+      "JR_REVIEW_CONDITION",
+      "USER_OR_AUTHORIZED_PROFESSIONAL"
+    ]
+  },
+  "rules": {
+    "navigationIsFortuneTellingConclusion": false,
+    "rrpChoosesForUser": false,
+    "rrpCommandsAction": false,
+    "possibleDirectionsMustRemainBoundedOptions": true,
+    "uncertaintyMustRemainVisible": true,
+    "reviewWindowMayBeInvented": false,
+    "methodReadingMayDirectlyBecomeLifeAdvice": false,
+    "rneValidationOnlyStatusMayBeSilentlyPromoted": false,
+    "continuityRequiresFutureReviewOrClosureBoundary": true
+  }
+}

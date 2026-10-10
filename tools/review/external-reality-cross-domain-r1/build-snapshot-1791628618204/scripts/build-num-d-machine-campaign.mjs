@@ -1,0 +1,36 @@
+import fs from 'node:fs';
+import {buildNumSecondaryChart} from '../functions/num-depth/num-secondary-chart-runtime.js';
+import {buildNumNameRoleMeaningCandidate} from '../functions/num-depth/num-name-role-meaning-runtime.js';
+import {buildNumEnergyPatternMeaningCandidate} from '../functions/num-depth/num-energy-pattern-meaning-runtime.js';
+import {composeNumAlternativeTimingMeaning} from '../functions/num-depth/num-alternative-timing-composer.js';
+import {buildNumRelationshipMeaningCandidate} from '../functions/num-depth/num-relationship-meaning-engine.js';
+import {composeNumDepthCandidate} from '../functions/num-depth/num-depth-composer.js';
+import {buildHiddenPassionMeaningCandidate,buildKarmicLessonMeaningCandidate} from '../functions/num-depth/num-missing-repeated-meaning-runtime.js';
+import {buildNumLongCycleMeaningCandidate} from '../functions/num-depth/num-long-cycle-meaning-runtime.js';
+import {recoverLifePeriod} from '../functions/num-expansion/num-life-period-recovery.js';
+import {resolveAlternativeTimingPhase} from '../functions/num-expansion/num-alternative-timing-runtime.js';
+import {buildNumRelationshipStructure} from '../functions/num-expansion/num-relationship-runtime.js';
+const base='content/professional/num-production/depth-d1-d8';const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const claimFiles=['num-d1-name-role-source-claims-v1.json','num-d2-missing-repeated-source-claims-v1.json','num-d3-secondary-role-source-claims-v1.json','num-d4-long-cycle-source-claims-v1.json','num-d5-energy-pattern-source-claims-v1.json'];
+const claims=claimFiles.flatMap(f=>read(`${base}/claims/${f}`).claims||[]);const results=[];
+for(const c of claims){let ok=Boolean(c.claimId&&c.workCode&&c.primarySourceId&&c.sourceBoundParaphrase?.en&&c.sourceBoundParaphrase?.zhHans&&c.reviewState==='EXTRACTED_PENDING_HUMAN_REVIEW'&&c.runtimeUseAllowed===false);results.push({caseId:`CLAIM-${c.claimId}`,workCode:c.workCode,status:ok?'PASS':'FAIL',focus:'claim schema/source lineage/fail-closed'});}
+function record(id,focus,fn){try{const v=fn();if(v!==true)throw new Error('predicate false');results.push({caseId:id,status:'PASS',focus})}catch(e){results.push({caseId:id,status:'FAIL',focus,error:String(e?.message||e)})}}
+const sec=buildNumSecondaryChart({fullBirthName:'Thomas John Hancock',birthDayNumber:3,lifePathValue:1,expressionValue:7,soulUrgeValue:2,personalityValue:5});
+record('RUNTIME-01','secondary chart canonical fixture',()=>sec.availability==='AVAILABLE'&&sec.balance.value===2&&sec.rationalThought.value===7);
+record('RUNTIME-02','alias/multiple-name marker fail closed',()=>buildNumSecondaryChart({fullBirthName:'Lee Guat Shin/Teresa/YueXin',birthDayNumber:15,lifePathValue:8,expressionValue:8,soulUrgeValue:6,personalityValue:2}).availability==='BLOCKED_ALIAS_OR_MULTIPLE_NAME_MARKER');
+record('RUNTIME-02B','non-ASCII birth-name input fails closed instead of silent transliteration',()=>buildNumSecondaryChart({fullBirthName:'José Silva',birthDayNumber:1,lifePathValue:1,expressionValue:1,soulUrgeValue:1,personalityValue:1}).availability==='BLOCKED_NON_ASCII_OR_UNSUPPORTED_NAME_CHARACTERS');
+record('RUNTIME-03','Y classification fail closed',()=>buildNumSecondaryChart({fullBirthName:'Mary Lynn',birthDayNumber:1,lifePathValue:1,expressionValue:1,soulUrgeValue:1,personalityValue:1}).sourceAlignedCore.availability==='Y_CLASSIFICATION_REQUIRED_FOR_CORE_NAME_ALIGNMENT');
+record('RUNTIME-04','single-digit D1 method eligible',()=>buildNumNameRoleMeaningCandidate({role:'EXPRESSION',value:7,secondaryChart:sec,currentNameProfile:{values:{expression:{reducedValue:7}}}}).methodAlignment.eligible===true);
+record('RUNTIME-05','master mismatch fail closed',()=>buildNumNameRoleMeaningCandidate({role:'EXPRESSION',value:11,secondaryChart:sec,currentNameProfile:{values:{expression:{reducedValue:11}}}}).methodAlignment.eligible===false);
+record('RUNTIME-06','known energy pattern resolves',()=>buildNumEnergyPatternMeaningCandidate({pattern:'516'}).canonicalClaimPattern==='516');
+record('RUNTIME-07','energy alias resolves to canonical claim',()=>buildNumEnergyPatternMeaningCandidate({pattern:'156'}).canonicalClaimPattern==='516');
+record('RUNTIME-08','unknown energy pattern structural only',()=>buildNumEnergyPatternMeaningCandidate({pattern:'222'}).availability==='STRUCTURAL_ONLY_NO_SOURCE_WITNESSED_MEANING');
+const timing=composeNumAlternativeTimingMeaning({lifePeriod:recoverLifePeriod({birthDate:'1989-11-15'}),alternativeTiming:resolveAlternativeTimingPhase({birthDate:'1989-11-15',targetDate:'2025-05-15'})});
+record('RUNTIME-09','alternative timing stays separate from western personal cycles',()=>timing.westernPersonalCycleMerged===false&&timing.units.length===3);
+const er=buildNumRelationshipStructure({left:{birthDate:'1989-11-15'},right:{birthDate:'1988-03-20'}});const rel=buildNumRelationshipMeaningCandidate({left:{LIFE_PATH:8,EXPRESSION:7,SOUL_URGE:6,PERSONALITY:2},right:{LIFE_PATH:4,EXPRESSION:7,SOUL_URGE:4,PERSONALITY:2},energyRelationship:er});
+record('RUNTIME-10','relationship engine produces no score/verdict/outcome',()=>rel.boundaries.compatibilityScoreCreated===false&&rel.boundaries.goodBadMatchVerdictCreated===false&&rel.boundaries.relationshipOutcomePredicted===false);
+const composed=composeNumDepthCandidate({nameRoleMeanings:[buildNumNameRoleMeaningCandidate({role:'EXPRESSION',value:7,secondaryChart:sec,currentNameProfile:{values:{expression:{reducedValue:7}}}})],hiddenPassionMeanings:[buildHiddenPassionMeaningCandidate(1)],karmicLessonMeanings:[buildKarmicLessonMeaningCandidate(4)],secondaryChart:sec,longCycleMeanings:[buildNumLongCycleMeaningCandidate({role:'PINNACLE_CYCLE',value:8})],alternativeTiming:timing,relationship:rel});
+record('RUNTIME-11','unadmitted depth cannot reach default surface',()=>composed.customerPublishable===false&&composed.boundaries.unadmittedClaimsOnDefaultCustomerSurface===false);
+record('RUNTIME-12','same value in distinct role preserved',()=>composed.deduplication.sameValueDifferentRolePreserved===true);
+const aliasTiming={units:[{role:'BASELINE_LIFE_PERIOD',pattern:'516',meaning:buildNumEnergyPatternMeaningCandidate({pattern:'516'})},{role:'CURRENT_PHASE',pattern:'156',meaning:buildNumEnergyPatternMeaningCandidate({pattern:'156'})}]};const aliasDedup=composeNumDepthCandidate({alternativeTiming:aliasTiming});record('RUNTIME-13','canonical energy aliases dedup once with both evidence refs',()=>{const u=aliasDedup.sections.priorityUnits.find(x=>x.key==='ENERGY:516');return aliasDedup.deduplication.duplicateCount===1&&u?.evidenceCount===2&&u?.evidenceRefs?.length===2&&aliasDedup.deduplication.sourceLineagePreserved===true});
+const pass=results.filter(x=>x.status==='PASS').length,fail=results.length-pass;const out={schemaVersion:'PHI-OS-NUM-D-MACHINE-CAMPAIGN-v1.0.0',baselineCommit:'f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837',status:fail===0?'PASS':'FAIL',caseCount:results.length,passed:pass,failed:fail,claimSchemaCases:claims.length,runtimeBoundaryCases:14,results};fs.writeFileSync(`${base}/machine/num-d-machine-campaign-v1.json`,JSON.stringify(out,null,2)+'\n');if(fail)process.exitCode=1;console.log(`✓ NUM-D machine campaign ${pass}/${results.length}`);

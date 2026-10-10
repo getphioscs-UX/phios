@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/hdr/hdr-astronomy-result-v1.schema.json",
+  "title": "PHI OS HDR Astronomy Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runtimeCode",
+    "runtimeVersion",
+    "methodCode",
+    "pluginCode",
+    "calculationType",
+    "utcIso",
+    "referenceFrame",
+    "timeScale",
+    "observerMode",
+    "longitudes",
+    "lineage",
+    "deterministic",
+    "providerUsed",
+    "aiUsed",
+    "designMomentCreated",
+    "gateMappingCreated",
+    "bodyGraphCreated",
+    "projectionCreated",
+    "interpretationCreated",
+    "professionalConclusionCreated"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-HDR-ASTRONOMY-RESULT-v1.0.0"
+    },
+    "runtimeCode": {
+      "const": "HDR_ASTRONOMY_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "methodCode": {
+      "const": "HUMAN_DESIGN"
+    },
+    "pluginCode": {
+      "const": "HDR"
+    },
+    "calculationType": {
+      "const": "PERSONALITY_ASTRONOMY"
+    },
+    "utcIso": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "referenceFrame": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timeScale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observerMode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "longitudes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "SUN",
+        "EARTH",
+        "MOON",
+        "NORTH_NODE",
+        "SOUTH_NODE",
+        "MERCURY",
+        "VENUS",
+        "MARS",
+        "JUPITER",
+        "SATURN",
+        "URANUS",
+        "NEPTUNE",
+        "PLUTO"
+      ],
+      "properties": {
+        "SUN": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "EARTH": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "MOON": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "NORTH_NODE": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "SOUTH_NODE": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "MERCURY": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "VENUS": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "MARS": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "JUPITER": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "SATURN": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "URANUS": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "NEPTUNE": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "PLUTO": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adapterCode",
+        "adapterVersion",
+        "ephemerisVersion",
+        "referenceVersions"
+      ],
+      "properties": {
+        "adapterCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "adapterVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ephemerisVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "referenceVersions": {
+          "type": "object"
+        }
+      }
+    },
+    "deterministic": {
+      "const": true
+    },
+    "providerUsed": {
+      "const": false
+    },
+    "aiUsed": {
+      "const": false
+    },
+    "designMomentCreated": {
+      "const": false
+    },
+    "gateMappingCreated": {
+      "const": false
+    },
+    "bodyGraphCreated": {
+      "const": false
+    },
+    "projectionCreated": {
+      "const": false
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "professionalConclusionCreated": {
+      "const": false
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "registryCode": "PHI-OS-DAR-W13-WILL-EXECUTION-REQUIREMENT-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "DAR-W13",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "REFERENCE_OBSERVATIONS_ONLY_LEGAL_VALIDATION_REQUIRED",
+  "requirements": [
+    {
+      "jurisdiction": "MALAYSIA",
+      "version": "0.0.0-reference-candidate",
+      "authorityStatus": "REFERENCE_TEMPLATE_OBSERVATION",
+      "productionChecklistEnabled": false,
+      "legalValidationRequired": true,
+      "referenceObservations": [
+        {
+          "code": "TESTATOR_SIGNATURE_SLOT",
+          "observed": true
+        },
+        {
+          "code": "WITNESS_SLOTS",
+          "observedCount": 2
+        },
+        {
+          "code": "TRANSLATOR_DECLARATION_SECTION",
+          "observedWhenApplicable": true
+        }
+      ],
+      "canonicalExecutionRequirements": []
+    }
+  ],
+  "lifecycleSeparation": {
+    "generated": "DOCUMENT_CANDIDATE_OR_EXPORTED_STATE",
+    "signed": "SIGNED_EXTERNALLY",
+    "witnessed": "EXTERNAL_EXECUTION_EVENT",
+    "executionRecorded": "RECORD_OF_EXTERNAL_EVENT_ONLY"
+  },
+  "rules": {
+    "darMayDisplayExecutionChecklistOnlyAfterRequirementVersionApproved": true,
+    "darMayNotClaimWillIsValid": true,
+    "exportDoesNotEqualExecution": true,
+    "signatureCaptureDoesNotCreateLegalValidityAuthority": true
+  }
+}

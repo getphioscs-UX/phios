@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "PHI-OS-PAID-ASK-PILOT-OPERATOR-ACCEPTANCE-v1.0.0",
+  "stage": "PASK-W9/W10",
+  "baselineCommit": "340d9850779d41e1cd4185a77659207daca71c48",
+  "recordedAt": "2026-09-10",
+  "status": "PAID_ASK_PILOT_ACCEPTED",
+  "accepted": true,
+  "decisionAuthority": "PROJECT_OWNER_EXPLICIT_ACCEPTANCE_IN_EXECUTION_SESSION",
+  "decision": "PAID_ASK_PILOT_ACCEPTED",
+  "evidenceInterpretation": {
+    "existingRealProviderCalibrationAccepted": true,
+    "existingRealRelevanceCalibrationAccepted": true,
+    "controlledExecutionClassAndEntitlementReplayAcceptedForPilotCloseout": true,
+    "controlledMarginModelAcceptedForPilotCloseout": true,
+    "actualPaidCommerceCohortClaimed": false,
+    "actualCommerceTransactionsClaimed": false,
+    "actualPaidAskGrossMarginClaimed": false
+  },
+  "truthBoundary": {
+    "operatorAcceptanceDoesNotRewriteHistoricalTelemetry": true,
+    "operatorAcceptanceDoesNotCreateCommerceTransactions": true,
+    "operatorAcceptanceDoesNotCreateProductionPriceAuthority": true,
+    "operatorAcceptanceDoesNotAuthorizeProductionCutover": true,
+    "phase6CxWorkMayProceed": true
+  },
+  "sourceEvidence": [
+    "content/ai-economics/paid-ask/evidence/paid-ask-existing-real-evidence-calibration-v1.json",
+    "content/ai-economics/paid-ask/fixtures/paid-ask-controlled-preflight-v1.json",
+    "content/ai-economics/freeze/pai-r1-w0-w10-freeze-v1.json"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S9-EDGE-FIXTURE-REGISTRY-RRP-SUBSET-v1.0.0",
+  "phase": "MRM-S",
+  "work": "MRM-S9_SYNC_RRP-W27",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "ACTIVE_RRP_W27_FIXTURE_SUBSET_GLOBAL_MRM_S9_NOT_FROZEN",
+  "evidenceObjects": [
+    {
+      "evidenceId": "MRM-RRP-W27-EDGE-REPORT-COMPOSITION-F09-v1",
+      "runtimeCode": "RRP",
+      "capabilityCode": "RRP-REPORT-COMPOSITION",
+      "evidenceClass": "EDGE_FIXTURE",
+      "source": "RRP_W26_EDGE_FIXTURE",
+      "environment": "REPOSITORY_BASELINE_f010b292e2c778c744913f1789148c53db89926f",
+      "version": "1.0.0",
+      "createdAt": "2026-08-22",
+      "producer": "RRP-W27_MRM_S_SYNC",
+      "reviewStatus": "MACHINE_VERIFIED",
+      "result": "PASS",
+      "artifactDigest": "b0a825853251039dce652f0191cd7912d607e8e49dc87ba59b1e6a3eda96be38",
+      "scope": [
+        "RRP-REPORT-COMPOSITION"
+      ],
+      "limitations": [
+        "FIXTURE_OR_DETERMINISM_EVIDENCE_ONLY",
+        "NOT_PILOT_EVIDENCE"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "content/products/runtime-reading/fixtures/cases/F09/expected-candidate.json",
+          "sha256": "b0a825853251039dce652f0191cd7912d607e8e49dc87ba59b1e6a3eda96be38"
+        }
+      ],
+      "fixtureId": "F09"
+    }
+  ],
+  "rules": {
+    "subsetDoesNotCompleteGlobalMRMS9": true,
+    "fixturesAreNotPilotCases": true,
+    "passAloneDoesNotPromote": true
+  }
+}

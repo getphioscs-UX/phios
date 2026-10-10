@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises'; import path from 'node:path';
+import {assertKauE2Handoff,legacyReevaluation,assertPilotNonActivation,replayPilot,assertFullAcceptance,assertFullFreeze} from './lib/knowledge-production-planning/kpp-v2-final.mjs';
+const root=process.cwd(); const j=async p=>JSON.parse(await fs.readFile(path.join(root,p),'utf8'));
+const base='content/knowledge/production-planning';
+const handoff=await j('content/knowledge/authoring/extensions/legacy-supporting-source/handoff/kau-e2-kpp-accepted-supporting-relationship-handoff-v1.json'); assertKauE2Handoff(handoff); assert.equal(handoff.acceptedReviewCount,155); assert.equal(handoff.canonicalNodeReferenceEdgeCount,597); assert.equal(handoff.deferredReviewCount,30);
+const rel=await j('content/knowledge/authoring/extensions/legacy-supporting-source/registries/legacy-accepted-supporting-relationship-registry-v1.json'); assert.equal(rel.relationshipCount,155); assert.equal(rel.authority.productionDecisionAuthority,false); assert(rel.entries.every(x=>x.supportingOnly===true&&x.productionDecisionAuthority===false&&x.mayOverwriteCanonical===false));
+assert.throws(()=>legacyReevaluation({rawLegacySource:true,acceptedSupportingRelationship:true}),/KPP_RAW_LEGACY_SOURCE_FORBIDDEN/); const rr=legacyReevaluation({acceptedSupportingRelationship:true}); assert.equal(rr.automaticRoleChangeAllowed,false); assert.equal(rr.automaticWaveMutationAllowed,false);
+const ree=await j(`${base}/registries/kpp-legacy-gap-reevaluation-registry-v2.json`); assert.equal(ree.acceptedReviewCount,155); assert.equal(ree.canonicalNodeReferenceEdgeCount,597); assert.equal(ree.uniqueCanonicalNodesImpacted,248); assert(ree.entries.every(x=>x.productionChange==='RE_EVALUATION_REQUIRED'&&x.automaticRoleChangeAllowed===false));
+const pilot=await j(`${base}/plans/kpp-pilot-production-plan-v2.json`); assertPilotNonActivation(pilot); const roles=new Set(pilot.nodes.map(x=>x.productionRole)); for(const r of ['ARTICLE','FRAGMENT','FIGURE','STRUCTURED_ONLY','JOURNEY_ONLY','ACADEMY','MULTI_ASSET']) assert(roles.has(r)); assert.equal(pilot.crossNodeAssembly.articleRequiredByAssembly,false); assert.deepEqual(replayPilot(pilot),{inputDigest:pilot.inputDigest,policyDigest:pilot.policyDigest,resultDigest:pilot.resultDigest});
+const a=await j(`${base}/acceptance/kpp-w28-full-acceptance-v2.json`); assertFullAcceptance(a); assert.equal(a.predecessors.kauE2,'frozen');
+const f=await j(`${base}/freeze/kpp-w29-knowledge-production-planning-v2-freeze.json`); assertFullFreeze(f); assert.equal(f.authority.canonicalKnowledgeAuthority,false); assert.equal(f.authority.publicationAuthority,false); assert.equal(f.authority.bookCompletionAuthority,false);
+console.log('✓ KPP-W23 Governed Legacy Gap Production Assessment v2 passed.');
+console.log('✓ KPP-W27 Pilot Production Plan v2 passed without production activation or unnecessary Article assumption.');
+console.log('✓ KPP-W28 Full Acceptance v2 passed across KAU-E2, KPP planning, handoff, replay and authority boundaries.');
+console.log('✓ KPP-W29 Knowledge Production Planning v2 Full Freeze passed; KPP-W0～W29 is frozen validation-only.');

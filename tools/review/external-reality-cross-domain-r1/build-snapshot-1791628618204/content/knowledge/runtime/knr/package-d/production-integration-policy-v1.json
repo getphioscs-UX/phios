@@ -1,0 +1,37 @@
+{
+  "policyCode": "KNR-W11-PRODUCTION-INTEGRATION",
+  "version": "1.0.0",
+  "mode": "read_only_gate",
+  "inputs": [
+    "quality-evaluation-report",
+    "published-authority-digest",
+    "retrieval-index-digest"
+  ],
+  "outcomes": [
+    "ready_for_scale",
+    "attention_required",
+    "blocked"
+  ],
+  "rules": [
+    {
+      "when": "critical_or_error_findings_exist",
+      "outcome": "blocked"
+    },
+    {
+      "when": "warning_findings_exist",
+      "outcome": "attention_required"
+    },
+    {
+      "when": "no_warning_error_or_critical_findings",
+      "outcome": "ready_for_scale"
+    }
+  ],
+  "effects": {
+    "candidateMutation": false,
+    "reviewMutation": false,
+    "approvalMutation": false,
+    "publicationMutation": false,
+    "registryMutation": false,
+    "automaticRepublish": false
+  }
+}

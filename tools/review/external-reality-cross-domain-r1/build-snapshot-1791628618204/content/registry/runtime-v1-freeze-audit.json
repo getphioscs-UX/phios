@@ -1,0 +1,51 @@
+{
+  "id": "m1-w7-runtime-freeze-audit",
+  "version": "1.0.0",
+  "release": "runtime-engine-v1.0.0",
+  "status": "deployed_acceptance_pending",
+  "decision": "release_candidate",
+  "auditedCommit": "8baa0d1",
+  "production": {
+    "status": "passed",
+    "environment": "production",
+    "deploymentUrl": "https://8e39f12c.phios-github.pages.dev",
+    "domain": "phios-github.pages.dev",
+    "evidence": "User-supplied Cloudflare deployment screenshot image(148).png",
+    "deployedAtEvidence": "Production deployment shown successful on 2026-07-22"
+  },
+  "automatedGates": {
+    "npmCheck": "passed",
+    "fullJourneyCases": 36,
+    "kernelOnlyCoreEntry": "passed",
+    "contractFreeze": "passed",
+    "providerFreeze": "passed",
+    "runtimeStageFreeze": "passed",
+    "p0Open": 0,
+    "p1Open": 0
+  },
+  "deployedAcceptance": {
+    "productionJourney": "pending",
+    "chineseUiChineseInput": "pending",
+    "chineseUiEnglishInput": "pending",
+    "languageSwitchPreservesEvidence": "pending",
+    "viewport360": "pending",
+    "viewport768": "pending",
+    "viewport1440": "pending"
+  },
+  "requiredJourney": [
+    "entry",
+    "reconstruction",
+    "return_to_entry",
+    "edit",
+    "reading",
+    "navigation",
+    "review",
+    "memory",
+    "continuity"
+  ],
+  "tag": {
+    "name": "runtime-engine-v1.0.0",
+    "created": false,
+    "allowedWhen": "All deployedAcceptance gates are passed and the tag points to auditedCommit."
+  }
+}

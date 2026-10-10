@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/icr/case-version-request-v1.schema.json",
+  "title": "PHI OS ICR Case Version Request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "caseCode",
+    "nextCaseVersion",
+    "nextCaseVersionSequence",
+    "nextStatus",
+    "changeType",
+    "changeReferences",
+    "revisedAt",
+    "governanceBindings",
+    "rdgLifecycleReferenceRequest",
+    "providerUsed",
+    "aiUsed"
+  ],
+  "properties": {
+    "caseCode": {"type": "string", "pattern": "^ICR-CASE-[A-Z0-9-]{4,100}$"},
+    "nextCaseVersion": {"$ref": "#/$defs/semver"},
+    "nextCaseVersionSequence": {"type": "integer", "minimum": 2},
+    "nextStatus": {
+      "enum": ["DRAFT", "VERIFICATION_PENDING", "READY_FOR_RMO", "HANDED_OFF_TO_RMO", "CLOSED"]
+    },
+    "changeType": {
+      "enum": [
+        "STATUS_TRANSITION",
+        "VERIFIED_INPUT_ADDED",
+        "VERIFIED_INPUT_REPLACED",
+        "VERIFIED_INPUT_REMOVED",
+        "GOVERNANCE_REBIND",
+        "CASE_CORRECTION"
+      ]
+    },
+    "changeReferences": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "revisedAt": {"type": "string", "format": "date-time"},
+    "governanceBindings": {"$ref": "#/$defs/governanceBindings"},
+    "rdgLifecycleReferenceRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["persistenceDecisionReference"],
+      "properties": {
+        "persistenceDecisionReference": {
+          "type": "string",
+          "pattern": "^RDG-PERSISTENCE-DECISION-[A-Z0-9-]{4,100}$"
+        }
+      }
+    },
+    "providerUsed": {"const": false},
+    "aiUsed": {"const": false}
+  },
+  "$defs": {
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "governanceBindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dataType",
+        "purposeCodes",
+        "consentClass",
+        "consentReference",
+        "persistenceClass",
+        "retentionClass",
+        "sensitivityClass",
+        "deletionState",
+        "rdgAuthorityReference"
+      ],
+      "properties": {
+        "dataType": {"const": "REALITY_INPUT_RECORD"},
+        "purposeCodes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "consentClass": {"type": "string", "minLength": 1},
+        "consentReference": {"type": "string", "minLength": 1},
+        "persistenceClass": {"type": "string", "minLength": 1},
+        "retentionClass": {"type": "string", "minLength": 1},
+        "sensitivityClass": {"type": "string", "minLength": 1},
+        "deletionState": {"type": "string", "minLength": 1},
+        "rdgAuthorityReference": {
+          "const": "content/governance/reality-data-governance/registries/reality-data-registry-v1.json"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "PHI-OS-INTEGRATED-SUCCESSOR-PHASE0-ACCEPTANCE-v1.0.0",
+  "work": "PHASE-0-CURRENT-MAIN-RECONCILIATION-SOURCE-MASTER-MIGRATION",
+  "status": "PHASE0_ACCEPTED_WITH_ARCHIVE_ENVIRONMENT_LIMITATIONS",
+  "baselineCommit": "552f6d973dcaa32aa72f7f1d676ec2bc74434729",
+  "acceptedAt": "2026-09-07",
+  "scope": [
+    "CURRENT_MAIN_RECONCILIATION",
+    "SOURCE_MASTER_MIGRATION",
+    "CURRENT_PRESENTATION_CHECKER_SUCCESSORS",
+    "CURRENT_SHARED_RUNTIME_OWNERSHIP_RECONCILIATION"
+  ],
+  "sourceMasterMigration": {
+    "sourceMasterCount": 3,
+    "bytePreservedSnapshots": true,
+    "oneCrossProgramSuccessor": true,
+    "historicalSourceMastersRewritten": false,
+    "integratedMasterRef": "content/governance/integrated-successor/master-work/phi-os-integrated-successor-master-work-v3.0.0.md"
+  },
+  "resolvedCurrentMainDrifts": [
+    {
+      "id": "KAP-CX-HOME-PRESENTATION",
+      "originalFailure": "check-kap-w11-w17-current.mjs required retired data-cir-root on current index.html",
+      "resolution": "Current KAP checker now follows CX/P1 presentation authority and validates the clean-room HOME plus canonical /knowledge/ask/ without restoring retired CIR presentation.",
+      "semanticAuthorityChanged": false
+    },
+    {
+      "id": "ICHING-1.0.1-CX-PRESENTATION",
+      "originalFailure": "Historical I Ching release freeze pinned the old whole-file presentation digest after the current Ask CTA migrated to /knowledge/ask/.",
+      "resolution": "Historical release freeze remains intact; a current presentation successor permits only the canonical CX Ask-route presentation delta while preserving non-presentation release artifact digests.",
+      "semanticAuthorityChanged": false
+    },
+    {
+      "id": "PPR-CURRENT-SHARED-OWNER-PRODUCT-ASSEMBLY",
+      "originalFailure": "PPR-R3 current successor checker found functions/personal-reality-product/product-assembly.js unregistered in the active shared-owner registry.",
+      "resolution": "Current ownership/lineage is registered for the existing production-admitted ECR Topic FREE_PREVIEW wiring; product assembly semantics are not modified by PHASE 0.",
+      "semanticAuthorityChanged": false
+    }
+  ],
+  "machineValidation": {
+    "checkIntegratedPhase0": "PASS",
+    "checkKap": "PASS",
+    "checkIchingCurrent": "PASS",
+    "checkIchingReleaseFreezeCurrent": "PASS",
+    "checkPprCurrentSharedOwner": "PASS_14_OF_14",
+    "checkPprR3": "PASS",
+    "checkHdProR2": "PASS",
+    "checkPprR5": "PASS",
+    "checkPprR6": "PASS",
+    "checkEcrMandala": "PASS",
+    "checkEcrR3": "PASS",
+    "checkProfile": "PASS",
+    "checkBackendFrontendFullProduction": "PASS_23_OF_23",
+    "checkHdRelR1": "PASS",
+    "checkPprR2Final": "PASS",
+    "checkPprR2PostMachineHumanGate": "PASS",
+    "w88ExpectedState": "BLOCKED_FAIL_CLOSED_PENDING_W87_HUMAN_AND_LIVE_RECURRING_CONFIGURATION"
+  },
+  "fullNpmCheck": {
+    "claimedPass": false,
+    "archiveEnvironmentOnlyLimitations": [
+      {
+        "id": "ARCHIVE_NO_GIT_HISTORY",
+        "observedAt": "check-pds-w0-current",
+        "cause": "The aligned ZIP is an extracted source archive and does not contain .git objects required by historical git rev-parse checks.",
+        "checkerWeakeningAllowed": false,
+        "repoCodeDefectClaimed": false
+      },
+      {
+        "id": "ARCHIVE_NO_NODE_MODULES_AJV",
+        "observedAt": "check-ast-fp-fidelity",
+        "cause": "The aligned ZIP contains no installed node_modules; the existing Astrology fidelity checker imports the declared ajv package.",
+        "checkerWeakeningAllowed": false,
+        "repoCodeDefectClaimed": false
+      }
+    ],
+    "realGitCheckoutRequiredForFinalTopLevelCheck": true
+  },
+  "boundaries": {
+    "historicalFreezeRewritten": false,
+    "backendMeaningAuthorityChanged": false,
+    "methodCalculationAuthorityChanged": false,
+    "profileTruthAuthorityChanged": false,
+    "relationshipTruthAuthorityChanged": false,
+    "commerceEntitlementAuthorityChanged": false,
+    "retiredPresentationRestored": false,
+    "fullNpmCheckPassFabricated": false
+  },
+  "exit": [
+    "CURRENT_BASELINE_RESOLVED",
+    "SOURCE_STEPS_MAPPED",
+    "CURRENT_CHECKER_DRIFT_RECONCILED",
+    "NO_SILENT_OVERWRITE",
+    "READY_FOR_INTEGRATED_PHASE1"
+  ]
+}

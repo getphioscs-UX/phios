@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "PHI-OS-PPR-R2-W0-SHARED-AUTHORITY-AUDIT-v1.0.0",
+  "workCode": "PPR-R2-W0",
+  "baselineCommit": "a06506cbbc9bf0bdd11ff1c740f7be65276d84d9",
+  "status": "AUDITED_WITH_EXPLICIT_UPSTREAM_GAPS",
+  "sharedCustomerFiles": [
+    "perspectives/personal/index.html",
+    "assets/customer-ui/js/surfaces/personal-reality.js",
+    "functions/api/customer-personal-reality.js"
+  ],
+  "finding": "Five method programs have been converging on three shared customer files. Method depth and customer orchestration must be separated before further surface work.",
+  "methods": {
+    "AST": {
+      "professionalCapability": "AST_R2_CUSTOMER_WORKSPACE_IMPLEMENTED_AND_HUMAN_ACCEPTED",
+      "productionAuthorityRef": "functions/ast-full-production/ast-r2-production-admission-authority.js",
+      "currentProductionState": "METHOD_SCOPED_GATE_BLOCKED_BY_R3_INDEPENDENT_EPHEMERIS_CERTIFICATION",
+      "customerCutoverAllowed": false,
+      "adapterInputAuthority": "PHI-OS-AST-INTERACTIVE-WORKSPACE-v1.0.0",
+      "note": "Adapter can be completed without promoting the current AST cutover gate."
+    },
+    "BZR": {
+      "professionalCapability": "FULL_PRODUCTION_FROZEN",
+      "productionAuthorityRef": "functions/bzr-full-production/bazi-production-gate-runtime.js",
+      "currentProductionState": "CUSTOMER_PUBLISHABLE",
+      "customerCutoverAllowed": true,
+      "adapterInputAuthority": "PHI-OS-BAZI-CUSTOMER-REPORT-v1.0.0"
+    },
+    "NUM": {
+      "professionalCapability": "FULL_PRODUCTION_ACTIVE_WITH_D1_D8_DEPTH_SUCCESSOR",
+      "productionAuthorityRef": "content/professional/num-production/full-production/admission/num-fp-w18-full-production-gate-v1.json",
+      "depthProductionAuthorityRef": "content/professional/num-production/depth-d1-d8/admission/num-d8-full-production-cutover-v1.json",
+      "currentProductionState": "CUSTOMER_PUBLISHABLE",
+      "customerCutoverAllowed": true,
+      "adapterInputAuthority": "PHI-OS-NUM-INTEGRATED-READING-IR-v1.0.0"
+    },
+    "ZWR": {
+      "professionalCapability": "FULL_PRODUCTION_ACTIVE",
+      "productionAuthorityRef": "content/professional/zi-wei-full-production/acceptance/ziwei-fp-w23-production-cutover-acceptance-v1.json",
+      "currentProductionState": "PRODUCTION_CUTOVER_ALLOWED",
+      "customerCutoverAllowed": true,
+      "adapterInputAuthority": "PHI-OS-ZIWEI-CX-R1-CURRENT-PUBLICATION-ENVELOPE-v1.0.0"
+    },
+    "ECR": {
+      "professionalCapability": "CANONICAL_READING_IR_PLUS_CUSTOMER_ADMITTED_PHI_CARD_PRESENTATION",
+      "productionAuthorityRef": "content/ecr-phi-card/admission/ecr-phi-card-customer-admission-v1.json",
+      "currentProductionState": "CARD_PRESENTATION_CUSTOMER_ADMITTED_FULL_REPORT_PRODUCT_STILL_SEPARATE",
+      "customerCutoverAllowed": false,
+      "adapterInputAuthority": "PHI-OS-ECR-RUNTIME-READING-IR-v1.0.0 + PHI-OS-ECR-PHI-CARD-SPREAD-v1.0.0",
+      "note": "Card admission does not by itself create a complete ECR customer report authority."
+    }
+  },
+  "decision": {
+    "methodProgramsMayDirectlyOwnSharedCustomerFiles": false,
+    "personalRealityOwnsSharedCustomerFiles": true,
+    "adaptersMayCreateNewMeaning": false,
+    "adaptersMayRecalculate": false,
+    "routerMayPromoteBlockedUpstreamAuthority": false,
+    "singleMethodSpecialistProductMustRemainMethodOwned": true
+  }
+}

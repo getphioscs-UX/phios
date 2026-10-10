@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "PHI-OS-PAI-R1-REQUEST-COST-CEILING-v1.0.0",
+  "baselineCommit": "454a7d1771feec5e2f6ab00bffdde46a5aa661f0",
+  "status": "COST_CEILING_READY",
+  "currency": "USD",
+  "ceilings": {"T0_DETERMINISTIC":0,"T1_CANONICAL_ASSEMBLY":0.002,"T2_LIGHT_COMPOSITION":0.03,"T3_DEEP_COMPOSITION":0.15},
+  "limits": {"maxRetrievalTokens":3000,"maxComposerInputTokens":3600,"maxOutputTokens":900,"maxDeepRequestsPerDay":3,"maxT2RequestsPerDay":20,"maxT3RequestsPerDay":3,"maxProviderAttempts":2,"maxAuthorizedContextTokens":1200,"maxEvidencePackTokens":2400},
+  "overCeilingOrder": ["REDUCE_EVIDENCE_SAFELY","DOWNGRADE_IF_CONTRACT_SATISFIED","USE_DETERMINISTIC_PATH","CONTROLLED_COST_BOUNDARY"],
+  "silentExecutionOverCeiling": false
+}

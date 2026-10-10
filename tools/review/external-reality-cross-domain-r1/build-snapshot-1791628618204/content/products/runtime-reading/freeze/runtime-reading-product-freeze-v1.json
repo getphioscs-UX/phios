@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W28-PRODUCT-FREEZE-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W28.7",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "FROZEN_CANONICAL_RRP_REPORT_CANDIDATE_PRODUCT_BOUNDARY",
+  "canonicalStatement": "RRP owns the governed composition of Runtime Reading evidence into a canonical report candidate. It stops at RR handoff and owns neither report finalization, customer release, customer presentation, nor rendering.",
+  "frozenAuthorities": [
+    {
+      "path": "content/products/runtime-reading/authority/runtime-reading-authority-baseline-v1.json",
+      "sha256": "e249974d8631c5b041174237db15ec13074bea0bb6f65ce97e9668abb2648bb6"
+    },
+    {
+      "path": "content/products/runtime-reading/registries/runtime-reading-section-registry-v1.json",
+      "sha256": "f23e7e2462d3f7190449152f4ff82c59c077557c8dc022e9d1cbb1caa71e73f4"
+    },
+    {
+      "path": "content/products/runtime-reading/contracts/runtime-reading-report-candidate-contract-v1.json",
+      "sha256": "d17e6ec401c93a9ba37ba585758d06466fd0f154a3566276e5d6ab2327238de5"
+    },
+    {
+      "path": "content/products/runtime-reading/contracts/runtime-reading-statement-contract-v1.json",
+      "sha256": "ba56aa3f953ab0d111f3d2f21237d4b41f52c7f8b416468339dacdef33a3500d"
+    },
+    {
+      "path": "content/products/runtime-reading/contracts/runtime-reading-report-provenance-contract-v1.json",
+      "sha256": "b2c9c47f577210c11562ae882d9b534e423e6f3f5d4a60fb4482a62e68e1b327"
+    },
+    {
+      "path": "content/products/runtime-reading/contracts/runtime-reading-visual-reference-contract-v1.json",
+      "sha256": "72d7fd24408887133f81521497299cc023665084dc81f40c495f241f2af4f5fb"
+    },
+    {
+      "path": "content/products/runtime-reading/contracts/rrp-rr-handoff-contract-v1.json",
+      "sha256": "dac69704ab1a4fff9c2ff773791d08eeb6c7ea39c7088574ba395b7cd38643a7"
+    },
+    {
+      "path": "content/runtime-maturity/successors/rrp-w27-mrm-binding-successor-v1.json",
+      "sha256": "2dcd819534789986f878b4a626accbf431be105cda67648d67b267c6a8e73be1"
+    }
+  ],
+  "frozenScope": [
+    "PRODUCT_AUTHORITY",
+    "SECTION_REGISTRY",
+    "CANDIDATE_CONTRACT",
+    "STATEMENT_TYPES",
+    "SOURCE_PROVENANCE_CONTRACT",
+    "VISUAL_REFERENCE_BOUNDARY",
+    "RR_HANDOFF_BOUNDARY",
+    "MRM_S_BINDING"
+  ],
+  "explicitlyNotFrozen": [
+    "CUSTOMER_PAGE",
+    "PDF_STYLE",
+    "CPR_CUST_PRESENTATION"
+  ],
+  "downstreamAuthorityFlow": [
+    "RRP",
+    "RuntimeReadingReportCandidate",
+    "RR",
+    "Final Canonical Report",
+    "Report Release",
+    "CPR-CUST",
+    "PDS_OR_RENDERER",
+    "Workspace_or_PDF_or_App"
+  ],
+  "acceptanceReference": "content/products/runtime-reading/acceptance/runtime-reading-product-acceptance-v1.json",
+  "rules": {
+    "historicalFreezeMutated": false,
+    "rrpMayFinalizeReport": false,
+    "rrpMayReleaseReport": false,
+    "rrpMayAuthorizeCustomer": false,
+    "rrpMayDecideClientVisibility": false,
+    "rrpMayOwnPdfWorkspaceLayout": false,
+    "rrRemainsFinalReportAuthority": true,
+    "cprCustRemainsCustomerPresentationAuthority": true,
+    "mrmSOwnsMaturityEvidenceInterpretation": true
+  }
+}

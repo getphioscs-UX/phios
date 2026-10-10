@@ -1,0 +1,127 @@
+{
+  "workId": "PHI-OS-PRODUCTION-CLOSURE",
+  "machineGroups": [
+    {
+      "name": "migration preserves existing book purchases, rights and download tokens",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "25 approved QA prices and all existing report prices agree",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "bundle eligibility/count/uniqueness server policy",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "checkout authenticated, tamper rejected, live keys fail closed, origin protected",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "bundle checkout idempotency, collision protection, customer reuse",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "success poll creates no rights, another account cannot read order",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "unpaid completed does not grant; paid replay and concurrent deliveries grant only selected rights",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "invalid signature and live event do not mutate; RECEIVED replay recovers",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "active single products fulfill; retired Profile denies before order or provider operations",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "subscription created is not entitlement; invoice activates; cancellation retains only paid interval; terminal status denies",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "partial/full refunds recorded with review; permanent rights not silently revoked",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "provider price mismatch is review-required without grants; portal cannot select another customer",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "temporary DB failure returns 503; failed event retry succeeds without duplicate rights",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "expiration/payment failure do not grant; protected book access is account-bound",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "unknown order or absent metadata records terminal review without granting",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "bilingual bundle settlement persists one language across every child and blocks tampered provider price",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "bundle language policy: six totals, order-level modifier, browser totals ignored",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    }
+  ],
+  "localFixtureStatus": "PASS",
+  "realStripeE2E": "NOT_RUN",
+  "newPaymentActions": 0,
+  "credentialsReadOrPrinted": false,
+  "controlledCredentialAvailability": "NOT_INDEPENDENTLY_VERIFIED",
+  "twoAuthenticQaAccounts": "NOT_VERIFIED; two local identities are synthetic fixtures",
+  "externalAuthorization": "Separate payment/activation permission absent",
+  "historicalEvidence": [
+    {
+      "path": "docs/qa/commerce-stripe-r1/real-e2e-acceptance.json",
+      "sha256": "59da4b6d5b974d9c5188cbe87791b9f273d0cd0e7a64ce3452956c1d592a9297"
+    },
+    {
+      "path": "docs/qa/commerce-stripe-r1/real-e2e-readiness.json",
+      "sha256": "b53c8c62cb25c4a60e6bb390c0f8b61a12afc9cf72c42c7b9563c62c5d21dc2f"
+    },
+    {
+      "path": "docs/qa/commerce-stripe-r1/eight-volume-remote-qa.json",
+      "sha256": "e088f70a79a3ba5f8a0376f01db3eaddc582896ded755b654de66714b17a33fe"
+    },
+    {
+      "path": "docs/qa/commerce-stripe-r1/live-cutover-readiness.json",
+      "sha256": "1045eec61dfef8e9d537da395c2ea2892a7f2ecbfea1b1567bfae39427023d2e"
+    },
+    {
+      "path": "docs/qa/commerce-stripe-r1/COM-8V-STRIPE-R1A.md",
+      "sha256": "325ce5835013547106c2507b7f086fdca42677d866fcc419bec6de477c9590e2"
+    }
+  ],
+  "historicalPreview": "Existing archived public deployment/config checks retained; they are not new paid-loop evidence",
+  "missing": [
+    "Explicit QA transaction permission",
+    "Controlled QA bindings and active webhook configuration",
+    "Two authentic accounts with explicit owner consent",
+    "Actual payment → webhook → entitlement → subject-bound report → private download evidence"
+  ],
+  "liveActivation": false
+}

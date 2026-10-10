@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W12-CARRIER-BOUNDARY-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W12",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_CARRIER_BINDING_BOUNDARY",
+  "definition": "Carrier binding reads governed current inputs about how embodied capacity and environmental conditions modulate present runtime. It is not personality, value, destiny, or medical authority.",
+  "allowedCarrierDimensions": [
+    "STRUCTURE",
+    "INPUT",
+    "RHYTHM",
+    "SENSITIVITY",
+    "BUFFER",
+    "RECOVERY_SIGNAL"
+  ],
+  "allowedSourceTypes": [
+    "USER_REPORTED",
+    "ICR_VERIFIED_REFERENCE",
+    "RMO_CURRENT_REALITY_REFERENCE",
+    "RRE_DESCRIPTIVE_READOUT_REFERENCE"
+  ],
+  "authorityReferences": {
+    "icr": "content/runtime/input-case-runtime/contracts/canonical-input-contract-v1.json",
+    "rmo": "content/runtime/reality-model-runtime/contracts/canonical-reality-object-v1.json",
+    "rre": "content/runtime/reality-readout-engine/contracts/rre-authority-boundary-v1.json"
+  },
+  "forbiddenInferences": [
+    "PERSONALITY_INFERENCE",
+    "VALUE_JUDGMENT",
+    "DESTINY_INTERPRETATION",
+    "MEDICAL_DIAGNOSIS",
+    "MEDICAL_TREATMENT_RECOMMENDATION",
+    "IDENTITY_TRUTH"
+  ],
+  "rules": {
+    "carrierIsPersonality": false,
+    "carrierIsMedicalDiagnosis": false,
+    "missingCarrierInputMayBeGuessed": false,
+    "methodProjectionMaySubstituteCarrierInput": false,
+    "professionalObservationRequiresPR": true
+  }
+}

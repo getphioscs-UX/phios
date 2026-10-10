@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "PHI-OS-AST-ASPECT-RUNTIME-v1.0.0",
+  "stageCode": "AST-W4B",
+  "runtimeCode": "AST_ASPECT_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "ASTROLOGY",
+  "pluginCode": "AST",
+  "status": "validation_only_governance_led_not_production_eligible",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "0348586b1e3ab64ce580bffc82983e5387a6e26c"
+  },
+  "input": {
+    "recordType": "AST_PLANET_RESULT",
+    "runtimeCode": "AST_PLANET_RUNTIME",
+    "houseResultRequired": false,
+    "authority": "SHARED_DATA_AUTHORITY"
+  },
+  "governanceAuthority": {
+    "governanceCode": "AST_ASPECT_GOVERNANCE",
+    "governanceVersion": "1.0.0",
+    "freezeStatus": "AST Aspect Governance Frozen v1",
+    "registryReadRequired": true,
+    "runtimeMayInventPolicy": false
+  },
+  "requiredPolicies": [
+    "aspectSetCode",
+    "orbPolicyCode",
+    "applyingPolicyCode",
+    "priorityPolicyCode",
+    "normalizationPolicyCode"
+  ],
+  "scope": {
+    "createsAngularSeparation": true,
+    "createsAspectMatch": true,
+    "createsOrb": true,
+    "createsApplyingSeparating": true,
+    "createsPriorityRank": true,
+    "createsProjection": false,
+    "createsInterpretation": false,
+    "createsProfessionalConclusion": false
+  },
+  "execution": {
+    "allowedModes": [
+      "validation"
+    ],
+    "productionExecutionAllowed": false,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "sharedCalculationRuntimeRequired": true
+  },
+  "currentPolicyBoundary": {
+    "aspectSetCode": "MAJOR_ASPECTS_V1",
+    "orbPolicyCode": "EXACT_ONLY_VALIDATION_V1",
+    "maximumAuthorizedOrbDegrees": 0,
+    "minorAspectsAllowed": false,
+    "customOrbAllowed": false
+  },
+  "governance": {
+    "validationPassed": false,
+    "regressionPassed": false,
+    "productionReady": false,
+    "professionalReady": false,
+    "productionEligibilityChanged": false
+  },
+  "nextStage": "AST-W5"
+}

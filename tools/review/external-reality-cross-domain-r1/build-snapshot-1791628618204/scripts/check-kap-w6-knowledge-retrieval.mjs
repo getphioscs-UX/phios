@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {BASELINE,ROOT,readJson,fakeAssetsEnv} from './lib/knowledge-answer-projection/kap-grounding-v1.mjs';
+import {createKapQuestionIntake,normalizeKapQuestion,buildKapRetrievalRequest,retrieveKapKnowledge} from '../functions/_lib/knowledge-answer-grounding.js';
+const c=readJson(`${ROOT}/contracts/kap-w6-knowledge-retrieval-contract-v1.json`);
+const r=readJson(`${ROOT}/registries/kap-w6-knowledge-retrieval-source-registry-v1.json`);
+assert.equal(c.step,'KAP-W6'); assert.equal(c.baselineCommit,BASELINE); assert.equal(c.authority.retrievalOwner,'KSAR');
+assert.equal(r.retrievalAuthority,'KSAR_KNOWLEDGE_ACCESS'); assert.equal(r.defaultSourceMode,'hybrid'); assert.equal(r.rules.kapMayReimplementRetrieval,false); assert.equal(r.rules.kapConsumesUpstreamGroundedAnswerInPhase2,false);
+const normalized=normalizeKapQuestion(createKapQuestionIntake({question:'为什么人工智能是文明能力长期累积的结果',locale:'zh-Hans'}));
+const req=buildKapRetrievalRequest(normalized);
+assert.equal(req.endpoint,'/api/knowledge-access'); assert.equal(req.params.source,'hybrid'); assert.equal(req.governance.answerCompositionRequested,false); assert.equal(req.governance.rawFullBookRequested,false);
+const env=fakeAssetsEnv();
+const result=await retrieveKapKnowledge({request:new Request('https://kap.local/ask'),env,normalized,options:{source:'published'}});
+assert.equal(result.ok,true); assert.equal(result.authority,'KSAR_KNOWLEDGE_ACCESS'); assert.ok((result.published?.results||[]).length>0); assert.equal(result.upstreamGroundedAnswerConsumed,false); assert.equal(result.governance.answerComposedByKapPhase2,false);
+const api=fs.readFileSync('functions/_lib/knowledge-access-api.js','utf8'); assert.match(api,/rawFullBookAvailable:\s*false/); assert.match(api,/sourceNativeSectionMayAnswerWithoutCanonicalNodeClaim:\s*true/);
+console.log('✓ KAP-W6 Knowledge Retrieval reuse passed.');

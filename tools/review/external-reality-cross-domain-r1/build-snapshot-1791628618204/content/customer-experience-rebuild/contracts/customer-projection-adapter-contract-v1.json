@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-CX-R20-CUSTOMER-PROJECTION-ADAPTER-CONTRACT-v1.0.0",
+  "work": "CX-R20",
+  "baselineCommit": "40cb9e71450ebb817998cde8222225cd941c0aa0",
+  "flow": [
+    "RUNTIME_OUTPUT",
+    "CUSTOMER_PROJECTION_ADAPTER",
+    "CUSTOMER_VIEW_MODEL",
+    "CX_UI"
+  ],
+  "adapters": [
+    "reality-customer-projection.js",
+    "readout-customer-projection.js",
+    "navigation-customer-projection.js",
+    "method-customer-projection.js",
+    "financial-customer-projection.js",
+    "knowledge-customer-projection.js",
+    "report-customer-projection.js"
+  ],
+  "allowedOperations": [
+    "RENAME",
+    "GROUP",
+    "ORDER",
+    "FORMAT",
+    "LOCALIZE",
+    "HIDE_UNAUTHORIZED_FIELDS"
+  ],
+  "forbiddenOperations": [
+    "CALCULATE",
+    "INFER_NEW_FINDING",
+    "CHANGE_MEANING",
+    "RECOMMEND",
+    "CREATE_TRUTH"
+  ],
+  "rules": {
+    "backendAuthorityCreated": false,
+    "rawRuntimeProjectedToCxUi": false,
+    "viewModelIsAuthority": false,
+    "unknownMustRemainVisible": true
+  }
+}

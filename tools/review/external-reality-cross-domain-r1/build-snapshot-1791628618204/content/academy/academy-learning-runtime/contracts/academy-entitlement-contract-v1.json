@@ -1,0 +1,37 @@
+{
+  "contractCode": "PHI-OS-ALR-W33-ACADEMY-ENTITLEMENT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W33",
+  "status": "active",
+  "productionStatus": "deterministic_access_eligibility_projection_only",
+  "semanticAuthority": "ALR",
+  "entitlementAuthority": "runtime/entitlement",
+  "canonicalEntitlementObjectReference": "docs/pws/contracts/pws-canonical-object-registry-v1.json",
+  "canonicalEntitlementStateReference": "docs/pws/contracts/pws-canonical-states-v1.json",
+  "canonicalEntitlementOperationReference": "docs/pws/contracts/pws-canonical-operations-v1.json",
+  "identityPrefix": "ALR-AER-",
+  "requiredEvaluationInputFields": ["accessRequirementCode", "accessRequirementVersion", "entitlementResolution", "entitlementScopeCode", "entitlementState", "entitlementSubjectMatch", "entitlementTargetMatch"],
+  "entitlementResolutions": ["CANONICAL_ENTITLEMENT_RESOLVED", "NO_CANONICAL_ENTITLEMENT", "NON_AUTHORITATIVE_MEMBERSHIP_PROJECTION", "UNKNOWN"],
+  "canonicalEntitlementStates": ["pending", "active", "suspended", "expired", "revoked", "consumed"],
+  "forbiddenInputFields": ["learnerReference", "subjectReference", "accountReference", "entitlementId", "orderReference", "paymentReference", "membershipTier", "membershipProjection", "activateEntitlement", "revokeEntitlement", "createEnrollment", "unlockContent", "credentialState", "professionalReadinessState", "professionalJudgment", "providerPrompt", "providerResponse", "modelOutput", "persistencePayload"],
+  "rules": {
+    "alrOwnsAcademyAccessRequirementSemantics": true,
+    "canonicalEntitlementObjectAndStateAreExternalInputs": true,
+    "membershipProjectionIsAuthoritativeEntitlement": false,
+    "activeCanonicalEntitlementWithMatchingScopeSubjectAndTargetRequired": true,
+    "academyAccessScopeIsProfessionalServiceEntitlement": false,
+    "professionalFormationAccessScopeGrantsProfessionalAuthority": false,
+    "accessEligibilityCreatesEntitlementEnrollmentOrUnlock": false,
+    "alrMayActivateSuspendExpireRevokeOrConsumeEntitlement": false,
+    "evaluationPersistsLearnerOrEntitlementData": false,
+    "unknownResolutionStateScopeOrReferenceFailsClosed": true
+  },
+  "activation": {
+    "accessRequirementSemanticsActive": true,
+    "accessEligibilityEvaluationActive": true,
+    "canonicalEntitlementWriteRuntimeActiveFromAlr": false,
+    "academyEnrollmentRuntimeActive": false,
+    "learningDeliveryRuntimeActive": false,
+    "learnerDataPersistenceActive": false
+  }
+}

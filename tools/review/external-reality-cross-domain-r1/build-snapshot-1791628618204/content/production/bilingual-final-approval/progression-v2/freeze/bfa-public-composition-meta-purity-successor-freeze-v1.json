@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-BFA-PUBLIC-COMPOSITION-META-PURITY-SUCCESSOR-FREEZE-v1.0.0",
+  "work": "BFA-BATCH-005-PUBLIC-COMPOSITION-META-PURITY-REPAIR",
+  "status": "FROZEN_ADDITIVE_BFA_PUBLIC_COMPOSITION_META_PURITY_SUCCESSOR",
+  "baselineCommit": "3986cca72634d9a09bb4cfd38d1d11981bce571e",
+  "predecessorFreeze": "content/production/bilingual-final-approval/progression-v2/freeze/bfa-auto-c2c3-book-source-authority-successor-freeze-v1.json",
+  "files": {
+    "content/production/bilingual-final-approval/contracts/bfa-public-composition-meta-purity-v1.json": "41e0848b56195ca79f97350ab7010dc3a40e926c87541f39a63b17c3fcbf8df5",
+    "scripts/repair-bfa-batch5-public-meta-intro.mjs": "11aab55f764dba95ad6ba8721289266311510a255bc289b5dc3b6fc0fc8f58a4",
+    "scripts/check-bfa-batch5-public-meta-intro-repair.mjs": "8a51d11c371816cae8e96d1c6a8167f8d3accefad97437adea6859ef8348e802",
+    "scripts/check-bfa-batch5-composition-production.mjs": "13fe211dd26d29a57c7ff272c751cd317e19b39742633cc4da47b486f23d8cee"
+  },
+  "reconciledPredecessorFiles": {
+    "scripts/generate-bfa-composition-batch.mjs": {
+      "predecessorSha256": "0c89072b424d0719909a8254ba506a8464babbc8cc04ea286f60970513afa686",
+      "successorSha256": "5ea11ceb2bcb090f82561027eca83da1d0938b7ba236aa53408e7ebbab61cbbc",
+      "reason": "Approved BATCH-005 Article Composition packages must remain byte-stable while unapproved article units can be repaired independently; future composition authoring binds per-article content rather than batch-global prose digest."
+    },
+    "scripts/check-bfa-w28-w39-production-acceptance-freeze.mjs": {
+      "predecessorSha256": "6e7715b5445bfe9276d7707460ae7752db818a03a26ab28511196d5267d21b78",
+      "successorSha256": "460d0e51fecef0495833bd32e2dbbb42a0de9955e503d5f00832ed087c64c1b6",
+      "reason": "Accept the additive public-composition meta-purity successor without rebasing historical BFA/AUTO-C2C3 freezes."
+    }
+  },
+  "invariants": [
+    "CURRENT_TL_APPROVED_PACKAGES_ARE_BYTE_STABLE",
+    "UNAPPROVED_ARTICLE_UNITS_MAY_BE_REPAIRED_WITH_NEW_CANDIDATE_AND_PACKAGE_DIGESTS",
+    "CANONICAL_NODE_AND_ARTICLE_COMPOSITION_MECHANICS_ARE_INTERNAL_ONLY",
+    "PUBLIC_ARTICLE_INTRODUCTION_MUST_BE_READER_FACING_NOT_PRODUCTION_FACING",
+    "BFA_FINAL_PUBLICATION_APPROVAL_REMAINS_PACKAGE_SCOPED_TL_HUMAN_AUTHORITY"
+  ],
+  "notFrozen": [
+    "specific BATCH-005 approval identities",
+    "specific future article prose",
+    "specific future final approvals",
+    "specific publication outcomes"
+  ]
+}

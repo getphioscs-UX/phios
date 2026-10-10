@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {buildBook4A4Benchmark} from './lib/book4-a4-machine-benchmark.mjs';
+const root=process.cwd();
+const write=(p,v)=>{fs.mkdirSync(path.dirname(path.join(root,p)),{recursive:true});fs.writeFileSync(path.join(root,p),JSON.stringify(v,null,2)+'\n')};
+const {benchmark,acceptance,audit}=buildBook4A4Benchmark();
+write('content/knowledge/knowledge-intelligence-r2/benchmarks/book4-a4-machine-retrieval-benchmark-v1.json',benchmark);
+write('content/knowledge/production-planning/acceptance/book4-a4-machine-acceptance-v1.json',acceptance);
+write('content/knowledge/production-planning/audits/book4-a4-machine-retrieval-audit-v1.json',audit);
+console.log(JSON.stringify({machineAccepted:benchmark.machineAccepted,summary:benchmark.summary,residualDiagnostics:{top5Misses:benchmark.residualDiagnostics.top5Misses.length,wrongBookTop1:benchmark.residualDiagnostics.wrongBookTop1.length}},null,2));

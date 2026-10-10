@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "PHI-OS-RELATIONSHIP-PROFILE-COMPARISON-RULE-REGISTRY-v1.0.0",
+  "work": "PRF-W9",
+  "baselineCommit": "fc9616b9f63ed4099e008a9395ad4d167bfa597e",
+  "status": "FOUNDATION_ADMITTED_MACHINE_ONLY",
+  "rules": [
+    {
+      "ruleId": "PRF-REL-SELF-REPORT-SAME-DOMAIN-v1",
+      "status": "ADMITTED",
+      "sourceClass": "CUSTOMER_SELF_REPORT",
+      "requiresSameDomain": true,
+      "requiresSameFacet": false,
+      "requiresSameProviderFamily": false,
+      "requiresExplicitComparison": true,
+      "allowedClasses": [
+        "SIMILAR_SELF_REPORTED_TENDENCY",
+        "DIFFERENT_SELF_REPORTED_TENDENCY",
+        "COMPLEMENTARY_PATTERN",
+        "POTENTIAL_FRICTION_TARGET",
+        "COMMUNICATION_OBSERVATION_TARGET",
+        "OPEN"
+      ],
+      "claimStrength": "OBSERVATION_TARGET_ONLY",
+      "boundary": "Two self-reported profiles may be compared as reported tendencies; no compatibility verdict or relationship outcome follows."
+    },
+    {
+      "ruleId": "PRF-REL-EXTERNAL-SAME-PROVIDER-DIMENSION-v1",
+      "status": "ADMITTED",
+      "sourceClass": "EXTERNAL_PROFILE_RESULT",
+      "requiresSameDomain": true,
+      "requiresSameFacet": false,
+      "requiresSameProviderFamily": true,
+      "requiresExplicitComparison": true,
+      "allowedClasses": [
+        "SIMILAR_SELF_REPORTED_TENDENCY",
+        "DIFFERENT_SELF_REPORTED_TENDENCY",
+        "COMPLEMENTARY_PATTERN",
+        "POTENTIAL_FRICTION_TARGET",
+        "COMMUNICATION_OBSERVATION_TARGET",
+        "OPEN"
+      ],
+      "claimStrength": "OBSERVATION_TARGET_ONLY",
+      "boundary": "Only the same imported provider family and dimension are compared. Provider result does not become an objective relationship fact."
+    },
+    {
+      "ruleId": "PRF-REL-REASONING-SAME-TASK-FAMILY-CONTEXT-v1",
+      "status": "ADMITTED",
+      "sourceClass": "MEASURED_TASK_PERFORMANCE",
+      "requiresSameDomain": true,
+      "requiresSameFacet": true,
+      "requiresSameProviderFamily": false,
+      "requiresExplicitComparison": true,
+      "allowedClasses": [
+        "COMMUNICATION_OBSERVATION_TARGET",
+        "OPEN"
+      ],
+      "claimStrength": "CONTEXT_ONLY",
+      "boundary": "Raw task-performance differences may only open an observation target. They are not intelligence rank, compatibility, or relationship quality."
+    }
+  ],
+  "governance": {
+    "crossSourceParticipantComparison": false,
+    "automaticSimilarityThresholds": false,
+    "compatibilityScoring": false,
+    "hiddenStateInference": false,
+    "relationshipOutcomePrediction": false,
+    "humanAdmissionStillRequiredAtPrfW12": true
+  }
+}

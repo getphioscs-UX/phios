@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "PHI-OS-MULTI-LENS-AUTHORITY-RECONCILIATION-v1.0.0",
+  "work": "ML-W0",
+  "baselineCommit": "6f2b4c6791c552c065ac699b12e08ebe4aa1e7fe",
+  "status": "RECONCILED_ADDITIVE_AUTHORITY_ONLY",
+  "purpose": "Create a canonical lens-role layer above existing method runtimes without mutating calculation, projection, meaning, reading, MPA, MCD, FMA, PCM or historical HDR authority.",
+  "predecessorAuthorities": [
+    {
+      "code": "pcmCurrent",
+      "path": "content/governance/production-capability-matrix/registries/production-capability-registry-v6.json",
+      "sha256": "86e4ac39dd4a90a81f88dbb128e238e4878713dce0a633510c59bbe5135bb662",
+      "mutatedByMaster1": false
+    },
+    {
+      "code": "pcmPointer",
+      "path": "content/governance/production-capability-matrix/reconciliation/production-capability-current-successor-v6.json",
+      "sha256": "8a920f7bda39087cacbf89a086b189c6788032b2f29dd7c2ddb66d5bed530885",
+      "mutatedByMaster1": false
+    },
+    {
+      "code": "fmaFreeze",
+      "path": "content/governance/full-method-availability/freeze/full-method-availability-freeze-v1.json",
+      "sha256": "4d12ebd52eb14fd1a9e89cdd68dd974035a7c2f1443e559180891dff9e8a83d2",
+      "mutatedByMaster1": false
+    },
+    {
+      "code": "hdrFreeze",
+      "path": "content/professional/core-method-runtime/hdr-production-freeze-v1.json",
+      "sha256": "edc383857ae02ecd5c050291aa2b1ef3f47ae0ca8296c65f9e1ba29a9b9e5296",
+      "mutatedByMaster1": false
+    },
+    {
+      "code": "hdrProjection",
+      "path": "content/professional/core-method-runtime/hdr-projection-runtime-v1.json",
+      "sha256": "d9f0469e7a08ea904ef55a1493a28ebaa78f807c4dc3b6c1008d990844ed82a8",
+      "mutatedByMaster1": false
+    },
+    {
+      "code": "zwrFreeze",
+      "path": "content/zi-wei-runtime/freeze/zi-wei-capability-v1-freeze.json",
+      "sha256": "7608278eac6271f974eb4222a0890d915b76d56e802f77146f0e2383ff796206",
+      "mutatedByMaster1": false
+    },
+    {
+      "code": "homepageManyLenses",
+      "path": "content/web/homepage/hpc2/contracts/hpc2-w4-many-lenses-category-transition-contract-v1.json",
+      "sha256": "a3d92e162e088f7e9ecad5b51ce8b888ba33ed4593bd956bd51a17e7ac163b36",
+      "mutatedByMaster1": false
+    }
+  ],
+  "findings": {
+    "astBzrNumZiWeiPublicProduction": "PCM_V6_AVAILABLE",
+    "hdrHistoricalPublicProduction": "BLOCKED_VALIDATION_ONLY",
+    "hdrImplementationEvidence": "HDR_W0_W6_IMPLEMENTED_AND_CHECKED_UNDER_FROZEN_VALIDATION_ONLY_SCOPE",
+    "multiLensRoleLayerPreviouslyCanonical": false,
+    "realityFinalAuthorityPreviouslyPreservedByHomepageManyLenses": true
+  },
+  "reconciliationRules": {
+    "roleAssignmentDoesNotActivateFutureRuntime": true,
+    "internalCapabilityDoesNotImplyPublicCapability": true,
+    "publicCapabilityDoesNotInferExecutionCompleteness": true,
+    "historicalAuthorityMutationForbidden": true,
+    "futureChangeRequiresVersionedSuccessor": true
+  }
+}

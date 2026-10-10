@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4B-EXTERNAL-PROFILE-EXTRACTION-AUTHORITY-v2.0.0",
+  "work": "CX-R12R4B-R2-W16R-W17R",
+  "baselineCommit": "6afe4a602659155b8419bdfc0345313376dbe28e",
+  "predecessor": "content/customer-experience-rebuild/r12r4b/human-design-external-profile-contract-v1.json",
+  "status": "ACTIVE_UPLOAD_DERIVED_EXTRACTION_WITH_CONFIRMATION_REQUIRED",
+  "profileFamily": "HUMAN_DESIGN",
+  "methodId": "XPF",
+  "authorityClass": "CUSTOMER_SUPPLIED_EXTERNAL_CONTEXT",
+  "documentConversion": {
+    "runtime": "CLOUDFLARE_WORKERS_AI_MARKDOWN_CONVERSION",
+    "binding": "AI",
+    "supportedInputs": ["png", "jpg", "jpeg", "webp", "pdf"],
+    "conversionOutput": "TEXT_OR_MARKDOWN_FOR_PARSING_ONLY",
+    "conversionMayUseAiForImages": true,
+    "conversionCreatesMeaning": false,
+    "conversionCreatesInterpretation": false,
+    "liveExternalServiceAcceptanceClaimed": false,
+    "gracefulFallbackRequired": true
+  },
+  "coreProfile": ["type", "authority", "profile", "definition", "incarnationCross"],
+  "structuralDetail": ["activations", "channels", "definedCenters", "openCenters"],
+  "manualAdvancedFields": ["cognition", "determination", "environment", "perspective", "motivation", "trajectory"],
+  "rules": {
+    "machineExtractionIsCandidateOnly": true,
+    "customerConfirmationRequired": true,
+    "rawUploadMayNotBecomeCanonicalMethodProjection": true,
+    "extractionMayNotInferMeaning": true,
+    "structuralDetailNormalManualEntryRequired": false,
+    "fileContentPersistence": "NONE",
+    "runtimeMemoryWrite": false
+  }
+}

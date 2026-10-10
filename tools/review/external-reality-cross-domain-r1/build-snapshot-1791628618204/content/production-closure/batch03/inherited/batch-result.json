@@ -1,0 +1,91 @@
+{
+  "workId": "PHI-OS-PRODUCTION-CLOSURE",
+  "batch": "02",
+  "state": "PARTIAL_COMPLETE_WITH_BLOCKERS",
+  "reviewPackage": "READY_FOR_BATCH_02_HUMAN_REVIEW",
+  "masterState": "IN_PROGRESS",
+  "startHead": "dcf4f0f5007e5bc602c040328d3929d710e137ae",
+  "observedHead": "2fa38db275a5b912fe83027e8065d1c36d45648a",
+  "protectedFiles": 172,
+  "protectedDrift": 0,
+  "originalOnlineFailures": 36,
+  "reconciliationCounts": {
+    "BLOCKED_EXTERNAL_ASSET_404": 4,
+    "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED": 24,
+    "UNREGISTERED_PROBE_NOT_CUSTOMER_LINK_FAILURE": 8
+  },
+  "m1FocusedGroups": 14,
+  "stripeFixtureGroups": 17,
+  "browserCurrentObservations": 74,
+  "browserCurrentPass": 72,
+  "browserCurrentFail": 2,
+  "realPaidLoopVerified": false,
+  "cost": {
+    "scope": "Batch02 only; historical cost records preserved",
+    "guardedProcesses": 57,
+    "providerCalls": 0,
+    "openAiCalls": 0,
+    "externalAttemptsBlocked": 11,
+    "payments": 0,
+    "readOnlyRemote": "Exact public R2 image GET for existing archive + one recorded HEAD; no API provider or payment transport",
+    "source": "content/production-closure/batch02/zero-cost-processes.jsonl"
+  },
+  "productionReady": false,
+  "accepted": false,
+  "requiredNextDependencies": [
+    {
+      "id": "BAZI_SHARED_WORKER_FREEZE",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/bazi-freeze-investigation.json"
+    },
+    {
+      "id": "BOOKS_RESOURCE_SUCCESSOR",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/books-postcheck-investigation.json"
+    },
+    {
+      "id": "BOOK_VI_PRICE_CONFLICT",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/book-vi-price-authority.json"
+    },
+    {
+      "id": "ONLINE_REPAIR_DEPLOYMENT",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/failure-reconciliation.json"
+    },
+    {
+      "id": "BOOK_VIII_HERO",
+      "status": "BLOCKED_BY_EXTERNAL",
+      "evidence": "content/production-closure/batch02/asset-http-probe.json"
+    },
+    {
+      "id": "M1_SUBJECT_BOUND_PUBLICATION_RELEASE",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/m1-results.json"
+    },
+    {
+      "id": "CONTROLLED_ARCHIVE_MOBILE",
+      "status": "FAIL",
+      "evidence": "content/production-closure/batch02/archive-mobile-findings.json"
+    },
+    {
+      "id": "STRIPE_REAL_QA",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/stripe-qa-readiness.json"
+    },
+    {
+      "id": "CPR",
+      "status": "FAIL_BASELINE_EXTERNAL",
+      "evidence": "docs/production-closure/evidence/cpr-current.txt"
+    },
+    {
+      "id": "PDS_0013",
+      "status": "LOCAL_REGISTRY_PASS_PRODUCTION_UNKNOWN",
+      "evidence": "content/production-closure/migration-boundary-evidence.json"
+    },
+    {
+      "id": "REAL_CUSTOMER_PROFESSIONAL_STORAGE",
+      "status": "BLOCKED_BY_EXTERNAL"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+import {normalizeRealityHandoffRequest,prepareRealityJourneyHandoff} from '../_lib/knowledge-reality-handoff.js';
+const H=Object.freeze({'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff'});
+const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
+export async function onRequestPost(context){let body;try{body=await context.request.json();}catch{return json({ok:false,error:{code:'INVALID_JSON'}},400);}try{const input=normalizeRealityHandoffRequest(body);return json({ok:true,...await prepareRealityJourneyHandoff({...input,env:context.env||{}})});}catch(error){const code=String(error?.code||error?.message||'KAP_REALITY_HANDOFF_FAILED');const status=/CONSENT_REQUIRED/.test(code)?409:/INVALID|REQUIRED|W24_YES/.test(code)?400:500;return json({ok:false,error:{code},governance:{persistentCaseCreated:false,realityModelCreated:false,realityJourneyActivated:false}},status);}}
+export async function onRequestGet(){return json({ok:false,error:{code:'KAP_REALITY_HANDOFF_POST_ONLY'}},405);}

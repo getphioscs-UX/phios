@@ -1,0 +1,287 @@
+{
+  "person": {
+    "schemaVersion": "PC-R1-CANONICAL-PERSON-v1",
+    "accountId": "fixture-owner",
+    "personId": "fixture-person",
+    "identity": {
+      "displayName": "Review participant / 审阅案例"
+    },
+    "evidence": [
+      {
+        "id": "current:CR-OBS-01",
+        "evidenceClass": "DECLARED",
+        "sourceRef": "CURRENT_REALITY_RUNTIME:CR-OBS-01",
+        "statement": "Working from a new location / 工作地点发生变化",
+        "domain": "ENVIRONMENT",
+        "contextTag": "location",
+        "sensitive": false,
+        "personId": "fixture-person",
+        "authority": "DECLARED",
+        "objectiveFact": false
+      },
+      {
+        "id": "current:CR-OBS-02",
+        "evidenceClass": "DECLARED",
+        "sourceRef": "CURRENT_REALITY_RUNTIME:CR-OBS-02",
+        "statement": "A heavier work week / 本周工作负荷增加",
+        "domain": "LOAD",
+        "contextTag": "work",
+        "sensitive": false,
+        "personId": "fixture-person",
+        "authority": "DECLARED",
+        "objectiveFact": false
+      }
+    ],
+    "stableStructure": [],
+    "variablePatterns": [],
+    "currentConditions": [
+      {
+        "id": "current:CR-OBS-02",
+        "statement": "A heavier work week / 本周工作负荷增加",
+        "contextTag": "work",
+        "evidenceRefs": [
+          "current:CR-OBS-02"
+        ]
+      }
+    ],
+    "decisionContexts": [],
+    "environmentContexts": [
+      {
+        "id": "current:CR-OBS-01",
+        "statement": "Working from a new location / 工作地点发生变化",
+        "contextTag": "location",
+        "evidenceRefs": [
+          "current:CR-OBS-01"
+        ]
+      }
+    ],
+    "lifeStage": [],
+    "relationships": [],
+    "financialLinks": [],
+    "observations": [
+      {
+        "observationId": "CR-OBS-01",
+        "domain": "ENVIRONMENT",
+        "promptId": "DOMAIN_DETAIL",
+        "statement": "Working from a new location / 工作地点发生变化",
+        "source": "CUSTOMER",
+        "confidence": "SELF_REPORTED",
+        "sensitive": false,
+        "objectiveFact": false,
+        "diagnosis": false,
+        "professionalEvidence": false,
+        "evidenceRefs": [
+          "current:CR-OBS-01"
+        ]
+      },
+      {
+        "observationId": "CR-OBS-02",
+        "domain": "LOAD",
+        "promptId": "DOMAIN_DETAIL",
+        "statement": "A heavier work week / 本周工作负荷增加",
+        "source": "CUSTOMER",
+        "confidence": "SELF_REPORTED",
+        "sensitive": false,
+        "objectiveFact": false,
+        "diagnosis": false,
+        "professionalEvidence": false,
+        "evidenceRefs": [
+          "current:CR-OBS-02"
+        ]
+      }
+    ],
+    "perspectives": [],
+    "unknowns": [
+      {
+        "id": "unknown-context",
+        "statement": "Workplace observations are missing / 缺少工作现场观察"
+      }
+    ],
+    "openQuestions": [],
+    "revisions": [],
+    "boundaries": {
+      "profileAssessmentOptional": true,
+      "methodNamesAreTopLevelTabs": false,
+      "unknownRemainsUnknown": true,
+      "persisted": false,
+      "productionActivated": false
+    }
+  },
+  "surface": {
+    "title": {
+      "en": "You now",
+      "zh": "现在的你"
+    },
+    "sections": [
+      {
+        "id": "overview",
+        "title": {
+          "en": "Overview",
+          "zh": "概览"
+        },
+        "items": [
+          {
+            "id": "identity",
+            "statement": "Review participant / 审阅案例"
+          }
+        ],
+        "empty": true
+      },
+      {
+        "id": "stableStructure",
+        "title": {
+          "en": "Structure",
+          "zh": "结构"
+        },
+        "items": [],
+        "empty": true
+      },
+      {
+        "id": "variablePatterns",
+        "title": {
+          "en": "Patterns",
+          "zh": "模式"
+        },
+        "items": [],
+        "empty": true
+      },
+      {
+        "id": "currentConditions",
+        "title": {
+          "en": "Current Context",
+          "zh": "当前处境"
+        },
+        "items": [
+          {
+            "id": "current:CR-OBS-02",
+            "statement": "A heavier work week / 本周工作负荷增加",
+            "contextTag": "work",
+            "evidenceRefs": [
+              "current:CR-OBS-02"
+            ],
+            "state": "SINGLE_SOURCE",
+            "sources": [
+              {
+                "id": "current:CR-OBS-02",
+                "evidenceClass": "DECLARED",
+                "sourceRef": "CURRENT_REALITY_RUNTIME:CR-OBS-02",
+                "statement": "A heavier work week / 本周工作负荷增加",
+                "domain": "LOAD",
+                "contextTag": "work",
+                "sensitive": false,
+                "personId": "fixture-person",
+                "authority": "DECLARED",
+                "objectiveFact": false
+              }
+            ],
+            "comparisons": [],
+            "majorityVotePerformed": false,
+            "personalFactCreated": false
+          }
+        ],
+        "empty": false
+      },
+      {
+        "id": "relationships",
+        "title": {
+          "en": "Relationships",
+          "zh": "关系"
+        },
+        "items": [],
+        "empty": true
+      },
+      {
+        "id": "financialLinks",
+        "title": {
+          "en": "Financial Context",
+          "zh": "财务处境"
+        },
+        "items": [],
+        "empty": true
+      },
+      {
+        "id": "perspectives",
+        "title": {
+          "en": "Perspectives",
+          "zh": "视角"
+        },
+        "items": [],
+        "empty": true
+      },
+      {
+        "id": "evidence",
+        "title": {
+          "en": "Evidence",
+          "zh": "证据"
+        },
+        "items": [
+          {
+            "id": "current:CR-OBS-01",
+            "evidenceClass": "DECLARED",
+            "sourceRef": "CURRENT_REALITY_RUNTIME:CR-OBS-01",
+            "statement": "Working from a new location / 工作地点发生变化",
+            "domain": "ENVIRONMENT",
+            "contextTag": "location",
+            "sensitive": false,
+            "personId": "fixture-person",
+            "authority": "DECLARED",
+            "objectiveFact": false
+          },
+          {
+            "id": "current:CR-OBS-02",
+            "evidenceClass": "DECLARED",
+            "sourceRef": "CURRENT_REALITY_RUNTIME:CR-OBS-02",
+            "statement": "A heavier work week / 本周工作负荷增加",
+            "domain": "LOAD",
+            "contextTag": "work",
+            "sensitive": false,
+            "personId": "fixture-person",
+            "authority": "DECLARED",
+            "objectiveFact": false
+          }
+        ],
+        "empty": false
+      },
+      {
+        "id": "openQuestions",
+        "title": {
+          "en": "Open Questions",
+          "zh": "开放问题"
+        },
+        "items": [],
+        "empty": true
+      },
+      {
+        "id": "ask",
+        "title": {
+          "en": "Ask PHI",
+          "zh": "询问 PHI"
+        },
+        "items": [
+          {
+            "context": {
+              "accountId": "fixture-owner",
+              "personId": "fixture-person"
+            },
+            "answer": null,
+            "persisted": false
+          }
+        ],
+        "empty": true
+      }
+    ],
+    "unknowns": [
+      {
+        "id": "unknown-context",
+        "statement": "Workplace observations are missing / 缺少工作现场观察"
+      }
+    ],
+    "boundaries": {
+      "profileAssessmentOptional": true,
+      "methodNamesAreTopLevelTabs": false,
+      "unknownRemainsUnknown": true,
+      "persisted": false,
+      "productionActivated": false
+    }
+  }
+}

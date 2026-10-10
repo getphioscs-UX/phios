@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {ROOT,BASELINE,readJson} from './lib/knowledge-answer-projection/kap-answer-v1.mjs';
+import {composeDeterministicKapAnswer} from '../functions/_lib/knowledge-answer-composition.js';
+const c=readJson(`${ROOT}/contracts/kap-w11-deterministic-answer-first-contract-v1.json`);
+const p=readJson(`${ROOT}/registries/kap-w11-deterministic-answer-policy-v1.json`);
+const bundle=readJson(`${ROOT}/fixtures/knowledge-grounding-bundle.valid.json`);
+const coverage=readJson(`${ROOT}/fixtures/kap-coverage-decision.valid.json`);
+const expected=readJson(`${ROOT}/fixtures/question-scoped-knowledge-answer.strong.valid.json`);
+assert.equal(c.baselineCommit,BASELINE); assert.equal(c.status,'ACTIVE_DETERMINISTIC_QUESTION_SCOPED_ANSWER_COMPOSITION');
+assert.equal(c.rules.deterministicFirst,true); assert.equal(c.rules.upstreamGroundedAnswerConsumed,false); assert.equal(c.rules.providerRequired,false);
+assert.equal(p.claimRules.substantiveAnswerTextMustComeFromGroundingSources,true); assert.equal(p.claimRules.unpublishedRelationshipTargetContentAllowed,false);
+const actual=composeDeterministicKapAnswer({bundle,coverageDecision:coverage,depth:'STANDARD',now:new Date('2026-08-14T02:00:00Z')});
+assert.deepEqual(actual,expected);
+assert.equal(actual.generation.generativeModelUsed,false); assert.equal(actual.governance.publicationStatus,'NOT_PUBLICATION'); assert.equal(actual.governance.canonicalAuthorityStatus,'NONE'); assert.equal(actual.governance.realityReadingStatus,'NOT_REALITY_READING');
+assert.ok(bundle.sources.some(s=>actual.content.directAnswer.includes(String(s.text).split('。')[0])));
+console.log('✓ KAP-W11 Deterministic Answer First passed.');

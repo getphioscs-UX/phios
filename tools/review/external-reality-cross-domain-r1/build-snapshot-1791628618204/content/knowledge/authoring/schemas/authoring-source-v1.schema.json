@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/authoring-source-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sourceCode",
+    "sourceVersion",
+    "sourceType",
+    "bookCode",
+    "partCode",
+    "sectionCode",
+    "title",
+    "locale",
+    "sourceDigest",
+    "sourceLocation",
+    "status",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "sourceCode": {
+      "type": "string",
+      "pattern": "^KAU-SRC-[A-Z0-9-]+$"
+    },
+    "sourceVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "sourceType": {
+      "enum": [
+        "MANUSCRIPT",
+        "BOOK_SECTION",
+        "CHAPTER",
+        "SUBCHAPTER",
+        "FIGURE",
+        "TABLE",
+        "AUTHOR_NOTE",
+        "RESEARCH_NOTE",
+        "EXISTING_ARTICLE",
+        "SUPPORTING_QUESTION",
+        "EDITORIAL_NOTE"
+      ]
+    },
+    "bookCode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "partCode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sectionCode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locale": {
+      "enum": [
+        "zh-Hans",
+        "en"
+      ]
+    },
+    "sourceDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "sourceLocation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "registered",
+        "verified",
+        "superseded",
+        "archived"
+      ]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

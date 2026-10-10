@@ -1,0 +1,26 @@
+{
+  "registryCode": "PHI-OS-ICR-W3-INPUT-VERIFICATION-STATE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ICR-W3",
+  "status": "foundation",
+  "fieldDecisionStates": [
+    {"state": "VERIFIED", "mayProject": true, "meaning": "The declared field is supported by the recorded verification lineage."},
+    {"state": "DECLARED_NOT_VERIFIED", "mayProject": false, "meaning": "The field remains a declaration and has not been verified."},
+    {"state": "UNKNOWN", "mayProject": false, "meaning": "The field is explicitly unknown and must not be inferred."},
+    {"state": "DISPUTED", "mayProject": false, "meaning": "Conflicting information exists and requires governed resolution."},
+    {"state": "INVALID", "mayProject": false, "meaning": "The field fails the applicable contract."}
+  ],
+  "verificationStates": [
+    {"state": "VERIFIED", "projectionEligibility": "ELIGIBLE"},
+    {"state": "PARTIALLY_VERIFIED", "projectionEligibility": "BLOCKED"},
+    {"state": "DISPUTED", "projectionEligibility": "BLOCKED"},
+    {"state": "REJECTED", "projectionEligibility": "BLOCKED"}
+  ],
+  "rules": {
+    "unknownIsNotInvalid": true,
+    "declaredIsNotVerified": true,
+    "systemConsistencyIsNotEvidenceAuthority": true,
+    "blockedInputMayNotProject": true,
+    "providerMayChangeState": false
+  }
+}

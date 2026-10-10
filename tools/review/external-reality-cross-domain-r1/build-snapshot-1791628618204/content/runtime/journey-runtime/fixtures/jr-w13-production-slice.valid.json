@@ -1,0 +1,58 @@
+{
+  "sliceCode": "PHI-OS-JR-W13-ENTRY-READOUT-NAVIGATION-REVIEW-v1",
+  "sliceVersion": "1.0.0",
+  "status": "EXECUTABLE_INTEGRATION_SLICE_VALIDATION_ONLY",
+  "customerReference": "CUST-FIXTURE-0001",
+  "journeyReference": "JR-FIXTURE-0001",
+  "consentReferences": [
+    "CONSENT-FIXTURE-0001"
+  ],
+  "dataPurpose": "SERVICE_DELIVERY",
+  "milestones": [
+    {
+      "ordinal": 1,
+      "stage": "entry",
+      "eventReference": "JR-EVENT-ENTRY-0001"
+    },
+    {
+      "ordinal": 2,
+      "stage": "orientation",
+      "eventReference": "JR-EVENT-ORIENTATION-0001"
+    },
+    {
+      "ordinal": 3,
+      "stage": "reading",
+      "readoutBinding": "RRE_RUNTIME_EXECUTION_FROM_EXISTING_FIXTURES",
+      "eventReference": "JR-EVENT-READING-0001"
+    },
+    {
+      "ordinal": 4,
+      "stage": "reconstruction",
+      "eventReference": "JR-EVENT-RECONSTRUCTION-0001"
+    },
+    {
+      "ordinal": 5,
+      "stage": "navigation",
+      "eventReference": "JR-EVENT-NAVIGATION-0001"
+    },
+    {
+      "ordinal": 6,
+      "stage": "review",
+      "eventReference": "JR-EVENT-REVIEW-0001"
+    }
+  ],
+  "requiredProof": [
+    "ENTRY_PRESENT",
+    "RRE_READOUT_COMPONENTS_EXECUTED",
+    "NAVIGATION_STAGE_PRESENT",
+    "REVIEW_STAGE_PRESENT",
+    "ACTUAL_COMPLETION_EVENTS_USED"
+  ],
+  "nonProductionFacts": {
+    "liveCustomerDataUsed": false,
+    "canonicalReadoutPersisted": false,
+    "lrmEventPersisted": false,
+    "rneExecuted": false,
+    "professionalJudgmentCreated": false
+  }
+}

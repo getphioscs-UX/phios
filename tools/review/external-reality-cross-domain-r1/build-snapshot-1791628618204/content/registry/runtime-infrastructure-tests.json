@@ -1,0 +1,69 @@
+{
+  "id": "phi-os.runtime-infrastructure-tests.v1",
+  "milestone": "M2-W9",
+  "status": "acceptance_ready",
+  "tests": {
+    "persistence": {
+      "command": "npm run check:runtime-persistence-contract",
+      "automated": true
+    },
+    "migration": {
+      "command": "npm run check:runtime-migrations",
+      "automated": true
+    },
+    "recovery": {
+      "command": "npm run check:runtime-recovery",
+      "automated": true
+    },
+    "timeline_replay": {
+      "command": "npm run check:runtime-timeline",
+      "automated": true
+    },
+    "lineage": {
+      "command": "npm run check:runtime-lineage-revision",
+      "automated": true
+    },
+    "d1_integration": {
+      "command": "npm run check:runtime-d1-integration",
+      "automated": true,
+      "flow": [
+        "migration",
+        "persistence",
+        "recovery",
+        "timeline",
+        "lineage",
+        "privacy"
+      ]
+    },
+    "production_smoke": {
+      "command": "npm run check:runtime-production-smoke",
+      "automated": true,
+      "read_only": true,
+      "live_run_required": true,
+      "status": "pending_post_deploy"
+    }
+  },
+  "production_health": {
+    "route": "/api/runtime-infrastructure-health",
+    "mutates_data": false,
+    "required_binding": "RUNTIME_DB",
+    "required_migration_count": 2,
+    "accepted_history_tables": [
+      "runtime_migration_history",
+      "d1_migrations"
+    ]
+  },
+  "acceptance": {
+    "local_suite": "passed",
+    "d1_compatible_integration": "passed",
+    "production_live_smoke": "pending_post_deploy",
+    "m2_complete_when": "all_local_checks_and_live_production_smoke_pass"
+  },
+  "guardrails": {
+    "old_migrations_modified": false,
+    "production_smoke_writes_data": false,
+    "sensitive_payload_logged": false,
+    "new_runtime_stage": false,
+    "same_timestamp_event_order": "created_at_then_event_id"
+  }
+}

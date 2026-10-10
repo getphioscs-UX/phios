@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const write=(p,v)=>fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n');
+const review=read('content/civilization-atlas/reconfiguration/dossier-sea-w8h-position-human-review-v1.json');
+const decisionsPath='content/civilization-atlas/reconfiguration/dossier-sea-w8h-human-decisions-v1.json';
+assert.ok(fs.existsSync(decisionsPath),'SEA_W8I_BLOCKED: W8-H human decision file is absent');
+const decisions=read(decisionsPath);
+const accepted=(decisions.records||[]).filter(x=>x.decision==='ACCEPT');
+assert.ok(accepted.length>0,'SEA_W8I_BLOCKED: no W8-H ACCEPT decisions');
+const known=new Map(review.records.map(x=>[x.candidateId,x]));
+for(const a of accepted) assert.ok(known.has(a.candidateId),'SEA_W8I_BLOCKED: unknown accepted candidate '+a.candidateId);
+const admittedPositions=accepted.map(a=>{const r=known.get(a.candidateId);return {candidateId:r.candidateId,runtimePositionId:r.runtimePositionId,scope:r.scope,subsystem:r.subsystem,grammarId:r.grammarId,realityDomainId:r.realityDomainId,evidenceRefs:r.evidenceRefs,readoutReference:r.readoutReference};});
+const out={schemaVersion:'PHI-OS-DOSSIER-SEA-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0',status:'ACCEPTED_CURRENT_DOSSIER',dossierId:'DOSSIER-SEA',admittedPositions,projectionBoundary:{subsystemPositionsDoNotImplySingleWholeDossierPosition:true,cnPositionReuse:false,usPositionReuse:false,prediction:false,historicalPositionShortcut:false},providerCalls:0};
+write('content/civilization-atlas/reconfiguration/dossier-sea-w8i-accepted-current-dossier-v1.json',out);
+console.log(JSON.stringify({status:out.status,dossierId:out.dossierId,admittedPositions:admittedPositions.length,providerCalls:0},null,2));

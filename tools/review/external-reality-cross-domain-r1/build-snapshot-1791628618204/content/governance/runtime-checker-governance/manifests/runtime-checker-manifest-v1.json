@@ -1,0 +1,19 @@
+{
+  "manifestCode": "PHI-OS-RG-W12-UNIFIED-CHECKER-MANIFEST-v1",
+  "manifestVersion": "1.0.0",
+  "work": "RG-W12",
+  "status": "canonical",
+  "resolutionAuthority": "content/governance/runtime-checker-governance/registries/runtime-checker-alias-registry-v3.json",
+  "groupAuthority": "content/governance/runtime-checker-governance/registries/runtime-checker-group-registry-v1.json",
+  "successorAuthority": "content/governance/runtime-checker-governance/registries/checker-successor-deprecation-registry-v1.json",
+  "identityContract": "content/governance/runtime-checker-governance/contracts/checker-identity-contract-v1.json",
+  "noMutationContract": "content/governance/runtime-checker-governance/contracts/checker-no-mutation-contract-v1.json",
+  "runner": "scripts/run-runtime-checker-v3.mjs",
+  "publicEntries": {
+    "atomic": "npm run check:runtime -- <WORK-CODE>",
+    "group": "npm run check:runtime -- --group=<GROUP-CODE>",
+    "integrity": "npm run check:runtime:integrity",
+    "fullRegression": "npm run check:runtime:all"
+  },
+  "authorityBoundary": {"runtimeFreezeIsRuntimeAuthority": true, "checkerManifestIsResolutionAuthority": true, "checkerManifestMayChangeRuntimeState": false}
+}

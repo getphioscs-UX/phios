@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R-LOCATION-INPUT-HUMANIZATION-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "9a9a0b26bf077523b915375afdf6c4058d44bf30",
+  "sourceMirror": "data.zip",
+  "work": "CX-R12R-LOCATION-INPUT-HUMANIZATION",
+  "status": "SOURCE_ACCEPTED_PRODUCTION_HUMAN_ACCEPTANCE_PENDING",
+  "mixedScriptSearchRequired": true,
+  "examples": [
+    {
+      "uiLocale": "zh-Hans",
+      "typed": "Seremban",
+      "expectedCandidateIncludes": ["芙蓉", "Seremban", "Malaysia"]
+    },
+    {
+      "uiLocale": "zh-Hans",
+      "typed": "芙蓉",
+      "expectedCandidateIncludes": ["芙蓉"]
+    }
+  ],
+  "customerSurface": {
+    "suggestionsAdjacentToInput": true,
+    "mobileDetachedBottomSheet": false,
+    "localizedPlaceholder": true,
+    "keyboardSelection": true,
+    "internalLocationExplainerVisible": false,
+    "coordinatesVisibleByDefault": false,
+    "timezoneVisibleByDefault": false
+  },
+  "runtimeBoundary": {
+    "serverSideSearchPreserved": true,
+    "serverSideResolvePreserved": true,
+    "confirmedProviderReferenceRequired": true,
+    "coordinatesRemainCanonicalRuntimeInput": true,
+    "timezoneResolutionPreserved": true
+  },
+  "productionHumanAcceptance": "PENDING"
+}

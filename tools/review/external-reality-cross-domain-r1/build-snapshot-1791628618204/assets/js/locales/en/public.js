@@ -1,0 +1,1221 @@
+/* PHI OS en public-experience translations. Keep keys aligned with zh-Hans/public.js. */
+const publicExperience = Object.freeze({
+  publicShell: {
+    nav: {
+      label: 'Primary navigation',
+      explore: 'Explore',
+      myReality: 'My Reality',
+      perspectives: 'Perspectives',
+      search: 'Search',
+      discover: 'Discover',
+      knowledge: 'Knowledge',
+      realityJourney: 'Reality Journey',
+      professional: 'Professional',
+      about: 'About',
+      signIn: 'Sign In',
+      language: 'Language',
+      openMenu: 'Open navigation',
+      closeMenu: 'Close navigation'
+    },
+    footer: {
+      label: 'Footer navigation',
+      statement: 'A public platform for understanding how Reality forms, changes and can be navigated.',
+      knowledgeHub: 'Knowledge Hub',
+      articles: 'Articles',
+      thesis: 'Thesis',
+      books: 'Books',
+      atlas: 'Atlas',
+      realityJourney: 'Reality Journey',
+      services: 'Services',
+      about: 'About',
+      privacy: 'Privacy',
+      terms: 'Terms',
+      contact: 'Contact',
+      aiDisclosure: 'AI Disclosure',
+      professionalBoundary: 'Professional Boundary',
+      copyright: '© 2026 PHI OS. All rights reserved.',
+      boundary: 'AI-assisted · Evidence-aware · Human responsibility remains'
+    }
+  },
+  discover: {
+    metaTitle: 'Discover PHI OS — Understand changing reality',
+    skip: 'Skip to Discover',
+    hero: {
+      brand: 'PHI OS',
+      platform: 'Reality Navigation Platform',
+      line1: 'Reality is already happening.',
+      line2: 'Navigate what comes next.',
+      principles: 'Understand · Choose · Continue',
+      actionsLabel: 'Hero actions',
+      primary: 'Start with my reality',
+      secondary: 'Explore PHI OS',
+      eyebrow: 'PHI OS · Reality Navigation',
+      title: 'Reality is already happening. Navigate what comes next.',
+      line3: 'Reality can be navigated.',
+      lead: 'PHI OS helps you organize a changing situation, distinguish what you know from what you are interpreting, and find a direction you can review over time.',
+      distinction: 'It is not a general chatbot that gives an instant answer. It keeps the situation, evidence, uncertainty and next steps connected.',
+      secondaryLabel: 'Other ways to begin',
+      knowledge: 'Browse free Knowledge',
+      professional: 'Understand Professional services'
+    },
+    oneReality: {
+      eyebrow: 'One Reality',
+      title: 'See the Reality before defining it.',
+      lead: 'A current reality is not one event or one feeling. It forms across connected domains, observable signals, lived experience, relationships and structures, projections, and what remains unknown.',
+      fieldLabel: 'Connected domains around one current reality',
+      core: 'CURRENT REALITY',
+      coreNote: 'One connected field',
+      domainsLabel: 'Reality domains',
+      domains: {
+        work: 'Work',
+        money: 'Money',
+        family: 'Family',
+        body: 'Body',
+        relationship: 'Relationship',
+        time: 'Time',
+        identity: 'Identity',
+        history: 'History',
+        evidence: 'Evidence',
+        unknown: 'Unknown'
+      },
+      semanticsLabel: 'Reality signal distinctions',
+      semantics: {
+        observed: 'Observed',
+        experienced: 'Experienced',
+        relationalStructural: 'Relational / Structural',
+        derived: 'Derived',
+        projected: 'Projected',
+        unknown: 'Unknown'
+      },
+      figureCaption: 'Governed Current Reality map',
+      exampleEyebrow: 'Public example · Not a personal case',
+      examples: {
+        observedLabel: 'OBSERVED',
+        observedValue: 'Income changed',
+        experiencedLabel: 'EXPERIENCED',
+        experiencedValue: 'I feel exhausted',
+        structuralLabel: 'STRUCTURAL',
+        structuralValue: 'Family capacity is constrained',
+        projectedLabel: 'PROJECTED',
+        projectedValue: 'A method suggests timing pressure',
+        unknownLabel: 'UNKNOWN',
+        unknownValue: 'Whether conditions will improve',
+        navigationLabel: 'NAVIGATION',
+        navigationValue: 'What can be tested next'
+      },
+      boundary: 'These signals do not become one conclusion automatically. Their sources and limits remain visible before navigation.',
+      definitionBoundary: 'The complete Reality definition and Jade metaphor belong in the dedicated Reality Navigation explanation.'
+    },
+    manyLenses: {
+      eyebrow: 'Many lenses · One changing Reality',
+      titleLine1: 'AI can answer.',
+      titleLine2: 'Reality still has to be navigated.',
+      lead: 'Knowledge, AI, methods, lived experience and professional evidence can each reveal something. None of them automatically becomes the whole Reality.',
+      figureCaption: 'Governed Many Lenses / Fragmentation figure',
+      fragmentationThesis: 'The problem is often not “I have no answer.” It is “I have too many disconnected answers.”',
+      fragmentationCopy: 'Without shared boundaries, evidence can become story, projection can become fact, and confident synthesis can hide what remains unknown.',
+      guardrails: {
+        partNotWhole: 'Each lens can contribute without becoming the whole Reality.',
+        sourceAndType: 'Claims keep their source and type.',
+        conflictAndUnknown: 'Conflicts and unknowns remain visible.'
+      },
+      lensesLabel: 'Five bounded lenses',
+      lenses: {
+        knowledge: { label: 'Knowledge', question: 'What has already been learned?', role: 'Context and models' },
+        ai: { label: 'AI', question: 'What can be explained or synthesized?', role: 'Language and synthesis' },
+        method: { label: 'Method', question: 'What does this bounded model project?', role: 'Projection' },
+        experience: { label: 'Experience', question: 'What is being lived and reported?', role: 'First-person experience' },
+        professionalEvidence: { label: 'Professional evidence', question: 'What can qualified assessment establish?', role: 'Scoped evidence and judgment' }
+      },
+      transitionEyebrow: 'Category transition',
+      transitionTitle: 'The missing layer is not another lens. It is a governed way for lenses to meet Reality.',
+      stages: {
+        find: { label: 'FIND', copy: 'Search locates information.' },
+        explain: { label: 'EXPLAIN', copy: 'General AI generates and explains answers.' },
+        navigate: { label: 'NAVIGATE', copy: 'Reality Navigation keeps the case, boundaries and change connected.' }
+      },
+      bridge: 'Self-discovery is where many people begin. Reality Navigation is what comes next.',
+      boundary: 'The full category comparison and the Human Reading Systems research remain in their dedicated explanations.'
+    },
+    phiosRuntime: {
+      eyebrow: 'PHI OS Runtime',
+      title: 'The intelligence is not one model. It is an architecture.',
+      lead: 'PHI OS keeps a changing reality connected from reconstruction and reading through bounded navigation, action, outcome and review.',
+      figureCaption: 'Governed PHI OS Runtime Cycle',
+      stagesLabel: 'Eight-stage PHI OS runtime cycle',
+      stages: {
+        input: { label: 'Input', copy: 'Begin with a question or a changing situation—not an automatic conclusion.' },
+        realityModel: { label: 'Reality Model', copy: 'Reconstruct events, relationships, constraints, evidence and unknowns as distinct components.' },
+        reading: { label: 'Reading', copy: 'Organize what is observed, experienced, derived and projected without collapsing their authority.' },
+        navigation: { label: 'Navigation', copy: 'Form bounded options, constraints and signals. The system does not choose for you.' },
+        action: { label: 'Action', copy: 'A human or authorized professional chooses what is actually carried into Reality.' },
+        outcome: { label: 'Outcome', copy: 'Record what happened after action instead of treating advice as the result.' },
+        review: { label: 'Review', copy: 'Compare expectation with outcome while conflicts, limits and unknowns remain visible.' },
+        continuity: { label: 'Continuity', copy: 'Let the next reading begin from the changed Reality—not from a blank conversation.' }
+      },
+      valuesEyebrow: 'What changes the category',
+      valuesTitle: 'Keep what people value. Keep each authority bounded.',
+      values: {
+        resolution: { label: 'Reality Resolution', copy: 'Turn confusion into a structured representation without pretending every layer has equal authority.' },
+        personalization: { label: 'Governed Personalization', copy: 'Make the experience personally relevant without manufacturing certainty.' },
+        navigation: { label: 'Navigation', copy: 'Move from understanding into bounded choices, constraints, signals and action.' },
+        continuity: { label: 'Continuity', copy: 'Compare Reality versions and learn from outcome instead of restarting from zero.' }
+      },
+      boundaries: {
+        readout: { label: 'Reading remains bounded', copy: 'A readout does not create diagnosis, professional judgment or a navigation decision.' },
+        navigation: { label: 'Navigation is not command', copy: 'Options remain multiple and the decision remains human or belongs to an authorized professional.' },
+        outcome: { label: 'Outcome becomes new evidence', copy: 'What happened can change the next reading, but it does not retroactively prove the earlier reading was true.' },
+        persistence: { label: 'Continuity is governed', copy: 'Public explanation creates no case and writes no persistent state; consent and data governance remain independent.' }
+      },
+      ask: {
+        eyebrow: 'Ask PHI OS · Simple Ask',
+        title: 'Begin with one question. Keep the answer grounded and bounded.',
+        copy: 'Ask PHI OS remains question-scoped and grounded: no generic chat authority, no persistent case, no automatic Method execution and no forced Reality Journey.',
+        state: 'Ask PHI OS'
+      },
+      destinationBoundary: 'The complete system architecture and interpretation boundaries remain in the dedicated PHI OS system explanation.'
+    },
+    firstInteraction: {
+      eyebrow: 'First interaction',
+      title: 'Begin with what is happening—not with a system.',
+      lead: 'Choose the smallest useful first step: describe one situation, ask one question or open the existing Personal Runtime setup.',
+      situationEyebrow: 'Start with a situation',
+      situationTitle: 'What is changing, difficult or unclear right now?',
+      situationLabel: 'Briefly describe the situation in your own words.',
+      situationHint: 'Do not include sensitive personal data in this public first step.',
+      situationAction: 'Tell PHI OS what is happening',
+      simpleBoundary: 'This opens the existing Simple Ask. It creates no account or persistent case, executes no Method and starts no Reality Journey.',
+      pathsLabel: 'Other governed first steps',
+      questionEyebrow: 'I just have a question',
+      questionTitle: 'Ask within governed PHI OS knowledge.',
+      questionCopy: 'Use a question-scoped answer when personal context is not required.',
+      questionAction: 'Ask a question',
+      personalEyebrow: 'Explore my personal reality',
+      personalTitle: 'Open the existing Personal Runtime setup.',
+      personalCopy: 'This separate public setup is ephemeral and fail-closed. Opening it does not execute a Method.',
+      personalAction: 'Explore Personal Runtime',
+      financialTitle: 'Working with financial evidence?',
+      financialCopy: 'Financial calculations and professional responsibility remain on their dedicated governed surface.',
+      financialAction: 'Explore Financial Reality'
+    },
+    realitySurfaces: {
+      eyebrow: 'Reality surfaces',
+      title: 'Choose the surface that matches what you need to understand.',
+      lead: 'PHI OS does not turn every internal route into a choice. The Homepage keeps four client-facing anchors.',
+      personal: {
+        kind: 'Personal Reality',
+        title: 'See the configuration you are living through.',
+        copy: 'Explore personal patterns and capacity without turning one projection into the whole Reality.',
+        patterns: 'patterns', timing: 'timing', configuration: 'configuration', experience: 'experience', identity: 'identity', capacity: 'capacity',
+        action: 'Explore Personal Reality'
+      },
+      financial: {
+        kind: 'Financial Reality',
+        title: 'Read financial conditions as a connected, dated reality.',
+        copy: 'Keep evidence, calculations, scenarios and professional responsibility visibly separated.',
+        income: 'income', cashFlow: 'cash flow', assets: 'assets', liabilities: 'liabilities', protection: 'protection', constraints: 'constraints', scenarios: 'scenarios',
+        action: 'Explore Financial Reality'
+      },
+      journey: {
+        kind: 'Reality Journey',
+        title: 'Use a Journey when one answer is not enough.',
+        copy: 'The overview is for situations that depend on a persistent, complex and case-specific Reality. Opening it creates no case and activates no Journey.',
+        persistent: 'persistent', complex: 'complex', multiFactor: 'multi-factor', caseSpecific: 'case-specific', realityDependent: 'reality-dependent',
+        action: 'Understand Reality Journey'
+      },
+      knowledge: {
+        kind: 'Knowledge & Learning',
+        title: 'Follow knowledge through more than one format.',
+        copy: 'Browse, compare, read and learn without turning public knowledge activity into a personal Reality case.',
+        books: 'Books', library: 'Library', figures: 'Figures', articles: 'Articles', readingPaths: 'Reading Paths', academy: 'Academy', ask: 'Ask PHI OS',
+        action: 'Explore Knowledge & Learning'
+      },
+      visualAction: 'Explore Visual Knowledge',
+      askAction: 'Ask PHI OS where to begin',
+      boundary: 'These anchors disclose existing surfaces. They create no account, case, Method execution, professional judgment or automatic Reality Journey.'
+    },
+    fiveVolumeKnowledge: {
+      eyebrow: 'Eight-volume knowledge',
+      title: 'Eight volumes. One architecture for understanding Reality.',
+      lead: 'The books move from formation to runtime, continuity, civilization and navigation. Each volume keeps its own scope while contributing to one connected model.',
+      progression: {
+        formation: 'How Reality Forms',
+        runtime: 'How Reality Runs',
+        continuity: 'How Reality Continues',
+        civilization: 'How Reality Expands',
+        navigation: 'How Reality Is Read & Navigated'
+      },
+      figureCaption: 'The canonical Eight-Volume Architecture figure connects the sequence without collapsing the volumes into one undifferentiated answer.',
+      coverUnavailable: 'Governed cover unavailable',
+      actions: {
+        read: 'Published Knowledge',
+        see: 'Figures & Diagrams',
+        ask: 'Ask PHI OS',
+        learn: 'Academy'
+      },
+      boundary: 'Published knowledge, visual knowledge, contextual Ask and Academy remain separate governed consumers. This scene creates no new Knowledge, Reading or learning authority.'
+    },
+    capabilitySupport: {
+      eyebrow: 'Capability and support',
+      title: 'Build capability—or get bounded human support.',
+      lead: 'Learning and professional support are different paths. One develops your ability to understand Reality Navigation; the other introduces human scope, consent and responsibility when a situation requires it.',
+      build: {
+        title: 'Learn how Reality Navigation works.',
+        copy: 'Move through governed knowledge and structured learning without turning progress, assessment or credentials into Knowledge authority.',
+        books: 'Books', knowledge: 'Knowledge', academy: 'Academy', action: 'Explore Academy'
+      },
+      support: {
+        title: 'Some realities need human judgment.',
+        copy: 'See bounded support orientations without presenting an empty service registry as a complete offer catalog or placing a price menu on the Homepage.',
+        readout: 'Reality Readout', navigation: 'Navigation', financial: 'Financial Reality', review: 'Professional Review', action: 'Explore Services'
+      },
+      authority: {
+        eyebrow: 'Authority remains bounded',
+        phiosTitle: 'PHI OS',
+        phiosCopy: 'Structured Reality Navigation.',
+        professionalTitle: 'PHI OS Professional',
+        professionalCopy: 'Human case review with explicit scope and responsibility.',
+        externalTitle: 'Qualified External Professional',
+        externalCopy: 'Medical, psychological, legal, regulated financial and other licensed domains remain with their qualified authorities.'
+      },
+      boundary: 'This Homepage composition activates no /professional successor route, loads no private workspace, creates no professional judgment and shows no price menu.'
+    },
+    value: {
+      eyebrow: 'What PHI OS helps you see',
+      title: 'A difficult situation is usually more than one isolated question.',
+      example: 'A change in work can also affect money, confidence, relationships and timing. A quick answer may address one part while losing how the parts are connected.',
+      explanation: 'PHI OS helps you describe the change, examine how it formed, understand the current picture, choose a bounded direction and later compare it with what actually changed.'
+    },
+    routes: {
+      eyebrow: 'Three clear entrances',
+      title: 'Start with the kind of help you need now.',
+      journeyStatus: 'PRIMARY · FREE OVERVIEW',
+      journeyTitle: 'Reality Journey',
+      journeyCopy: 'Understand the guided path from describing a change to choosing and reviewing a direction.',
+      journeyAction: 'See the Journey',
+      knowledgeStatus: 'FREE PUBLIC CONTENT',
+      knowledgeTitle: 'Knowledge',
+      knowledgeCopy: 'Explore the Thesis, articles, Book I, figures and Atlas without starting a personal journey.',
+      knowledgeAction: 'Browse Knowledge',
+      professionalStatus: 'SEPARATE PAID SERVICES',
+      professionalTitle: 'Professional',
+      professionalCopy: 'Understand services that involve a qualified person, separate consent, scope, price and responsibility.',
+      professionalAction: 'View Professional services'
+    },
+    boundary: {
+      eyebrow: 'How PHI OS keeps boundaries',
+      title: 'Understanding comes before conclusions.',
+      evidenceTitle: 'Evidence stays distinct',
+      evidenceCopy: 'What happened, what you reported and what is interpreted are not presented as the same thing.',
+      unknownTitle: 'Unknowns stay visible',
+      unknownCopy: 'Missing information is named instead of being filled with a confident guess.',
+      responsibilityTitle: 'Human responsibility remains',
+      responsibilityCopy: 'PHI OS does not turn automated output into diagnosis, regulated advice or professional responsibility.',
+      action: 'Read why PHI OS was built'
+    },
+    problem: {
+      eyebrow: 'The question beneath the questions',
+      title: 'Why does the same world become a different reality for each person?',
+      intro: 'Events alone do not determine reality. Position, history, relationships, resources, constraints and interpretation shape what becomes possible next.',
+      q1: 'Why do people experience completely different realities?',
+      q2: 'Why do life trajectories diverge?',
+      q3: 'Can reality itself be read?'
+    },
+    entries: {
+      eyebrow: 'Three ways to enter',
+      title: 'Begin with knowledge, experience or the system itself.',
+      knowledgeTitle: 'Explore Knowledge',
+      knowledgeCopy: 'Enter the Thesis, eight books, fifteen-part architecture and Reality Atlas.',
+      knowledgeAction: 'Open the Atlas',
+      realityTitle: 'Experience Reality Journey',
+      realityCopy: 'Understand the six-stage path, its information boundaries and what happens before you choose to begin.',
+      realityAction: 'Understand the Reality Journey',
+      phiosTitle: 'Discover PHI OS',
+      phiosCopy: 'Understand the research origin, architecture, platform and future ecosystem.',
+      phiosAction: 'Read About PHI OS'
+    },
+    overview: {
+      eyebrow: 'Reality Navigation overview',
+      title: 'From change to a direction that can be reviewed.',
+      lead: 'Each stage preserves the distinction between what was observed, what was interpreted and what still remains unknown.',
+      observedTitle: 'Observed Change',
+      observedCopy: 'Begin with a difference that can be named.',
+      evidenceTitle: 'Evidence',
+      evidenceCopy: 'Organize events, conditions and gaps.',
+      readingTitle: 'Light Reading',
+      readingCopy: 'Interpret position without turning inference into fact.',
+      navigationTitle: 'Light Navigation',
+      navigationCopy: 'Identify a bounded next movement.',
+      reviewTitle: 'Review',
+      reviewCopy: 'Compare expectation with what actually changed.',
+      action: 'See how it works'
+    },
+    ecosystem: {
+      eyebrow: 'Ecosystem preview',
+      title: 'One architecture, several ways to use it.',
+      lead: 'PHI OS connects a public knowledge layer, a personal Reality Journey and bounded professional applications around the same evidence and continuity principles.',
+      knowledgeTitle: 'Knowledge',
+      knowledgeCopy: 'Thesis, books, figures, Atlas and learning.',
+      journeyTitle: 'Reality Journey',
+      journeyCopy: 'Entry, Reconstruction, Reading, Navigation, Review and Continuity.',
+      professionalTitle: 'Professional',
+      professionalCopy: 'Human interpretation and intervention with explicit scope and responsibility.',
+      platformTitle: 'Platform',
+      platformCopy: 'Runtime, memory, lineage, privacy and future interoperable services.',
+      action: 'Explore the ecosystem'
+    },
+    production: {
+      booksEyebrow: 'Canonical Knowledge · Eight Volumes',
+      booksTitle: 'Eight volumes now share one governed public architecture.',
+      booksLead: 'Book identity, Part ownership and public status are projected from canonical registries rather than a separate frontend catalogue.',
+      knowledgePulse: '{articles} published article records · {figures} aligned Book I figures · {parts} canonical Parts',
+      volumeLabel: 'Volume {volume}',
+      bookStatus: {
+        'publication-preparation': 'Publication preparation',
+        'in-development': 'In development',
+        'architecture-defined': 'Architecture defined'
+      },
+      sourceUnavailable: 'The governed source is currently unavailable.',
+      platformEyebrow: 'Reality Navigation Platform',
+      platformTitle: 'Knowledge, Journey, personal Runtime, finance, learning and professional support connect through one architecture.',
+      platformLead: 'Public discovery shows what each governed layer can do without presenting validation-only or private runtime state as production truth.',
+      journeyTitle: 'Reality Journey', journeyCopy: 'Enter a governed path from change and evidence toward reading, navigation, review and continuity.', openJourney: 'Open Reality Journey',
+      personalTitle: 'Personal Runtime', personalCopy: 'See how governed personal inputs and method availability will connect without exposing blocked methods as production.', openEntry: 'Open Reality Entry', openPersonalRuntime: 'Open Personal Runtime',
+      financialTitle: 'Financial Reality', financialCopy: 'Explore the financial Reality service boundary, inputs and professional support path.', openFinancial: 'Explore Financial Reality',
+      academyTitle: 'Reality Academy', academyCopy: 'Discover governed learning architecture while live entitlement, progress, assessment and credentials remain separate.', openAcademy: 'Explore Academy',
+      professionalTitle: 'Professional Support', professionalCopy: 'Understand where human observation, judgment, recommendation and accountability begin.', openProfessional: 'Explore Professional',
+      visualTitle: 'Visual Knowledge', visualCopy: 'Browse governed figures and diagrams that remain aligned with canonical ownership.', openFigures: 'Browse Figures',
+      visualEyebrow: 'Visual Knowledge',
+      visualGalleryTitle: 'See the architecture, not only the text.',
+      visualGalleryLead: 'Registry-led figures provide visual anchors while canonical asset publication and R2 verification continue under their own authorities.'
+    },
+    continuityFinal: {
+      eyebrow: 'Continuity',
+      title1: 'Reality will keep changing.',
+      title2: 'Your understanding should be able to change with it.',
+      lead: 'The goal is not to finish with one answer. Act, observe what Reality does, review what changed, and continue from the new evidence.',
+      loopLabel: 'Reality continuity loop',
+      loop: { understand: 'Understand', choose: 'Choose', act: 'Act', observe: 'Observe', review: 'Review', continue: 'Continue' },
+      actionsLabel: 'Continuity actions',
+      start: 'Start with my reality', ask: 'Ask PHI OS', journey: 'Explore Reality Journey',
+      boundary: 'Reality Journey is emphasized only when the situation is complex, persistent, multi-factor or needs continuity beyond a question-scoped answer.'
+    },
+    book: {
+      eyebrow: 'Book I preview',
+      title: 'How Reality Forms',
+      lead: 'Book I is the first human-readable route through the PHI OS architecture: from Reality physics and projection to temporal dynamics, the human carrier and conscious Runtime.',
+      note: 'The book is one knowledge route within PHI OS—not the purpose of the homepage.',
+      action: 'Explore Book I in the Atlas',
+      thesis: 'Read the Thesis'
+    }
+  },
+  hpc2Destinations: {
+    "common": {
+      "source": "Continue through the linked books and research pages to examine these ideas in context.",
+      "boundary": "Keep observations, interpretations and professional advice distinct."
+    },
+    "why": {
+      "metaTitle": "Why PHI OS — From answers to Reality Navigation",
+      "skip": "Skip to Why PHI OS",
+      "eyebrow": "Why PHI OS",
+      "title": "AI can answer. Reality still has to be navigated.",
+      "lead": "Search can find information and general AI can explain or generate. PHI OS is designed for the next layer: keeping one changing reality understandable, reviewable and connected across time.",
+      "comparisonTitle": "A different product category",
+      "googleTitle": "Search",
+      "googleCopy": "Find information, sources and services. Relevance still has to be judged against a specific Reality.",
+      "aiTitle": "General AI",
+      "aiCopy": "Explain, synthesize and generate. A conversation is not automatically a governed Reality state.",
+      "phiosTitle": "PHI OS",
+      "phiosCopy": "Reconstruct what is happening, keep evidence and interpretation separate, navigate bounded choices and carry outcome forward.",
+      "gapTitle": "The market gap is fragmentation.",
+      "gapCopy": "People often do not lack answers. They have too many disconnected answers and no governed way to connect information, interpretation, constraints, action and outcome.",
+      "bridgeTitle": "From self-discovery to Reality Navigation",
+      "bridgeCopy": "Keep the value of personalization and meaning, then upgrade the question from “Who am I?” to “What is happening, what can I know, what remains uncertain, what can I choose, and what changed after I acted?”",
+      "upgradeTitle": "The PHI OS upgrade",
+      "upgradeCopy": "Observed stays observed. Experience stays valid without becoming proof. Projection stays projection. Unknown stays unknown. Action generates new evidence and outcome changes the next Reading.",
+      "valueTitle": "Market value",
+      "valueCopy": "PHI OS is a larger value architecture: Reality Resolution, Governed Personalization, Navigation and Continuity.",
+      "positionTitle": "Position stack",
+      "positionCopy": "Brand category: Reality Navigation Platform. Consumer bridge: Self-Discovery → Reality Navigation. Core problem: disconnected answers without governed continuity."
+    },
+    "reality": {
+      "metaTitle": "What Reality Navigation Means — PHI OS",
+      "skip": "Skip to Reality Navigation",
+      "eyebrow": "Reality Navigation",
+      "title": "Reality is not one statement about what is true.",
+      "lead": "PHI OS treats Reality as the changing configuration of what exists, happened, is experienced, constrained, interacting, inferred—and still unknown.",
+      "notTitle": "What Reality is not",
+      "notCopy": "Consensus alone, feeling alone, a test result alone, identity alone or one interpretation alone can each matter without becoming the whole Reality.",
+      "layersTitle": "Keep the layers visible",
+      "observed": "Observed — events, records, measurements, actions and dated facts.",
+      "experienced": "Experienced — what a person feels, perceives, remembers and reports.",
+      "structural": "Relational & Structural — people, roles, resources, dependencies, constraints and feedback loops.",
+      "derived": "Derived / Interpreted — patterns and explanations inferred from evidence.",
+      "unknown": "Projected & Unknown — what models suggest and what still cannot be known.",
+      "jadeTitle": "The jade metaphor",
+      "jadeCopy": "Polishing does not invent the jade underneath. It reduces distortion, changes the light, respects the grain, preserves Unknown when evidence ends, and returns after action to read the new surface.",
+      "verbsTitle": "Understand · Choose · Continue",
+      "verbsCopy": "Bring the Reality together, turn interpretation into bounded options, then record action and outcome so the next Reading begins from Reality Next rather than a blank conversation."
+    },
+    "research": {
+      "metaTitle": "Why Reality Navigation — Research Foundation",
+      "skip": "Skip to research foundation",
+      "eyebrow": "Research foundation",
+      "title": "Why people seek coherence when Reality becomes uncertain.",
+      "lead": "This research does not validate a particular spiritual claim. It explains why uncertainty, self-relevance, structured attention and coherent narratives can make interpretive systems compelling—and why professional boundaries matter.",
+      "uncertainty": "Uncertainty — anxiety can increase repetitive or ritualized behavior as people seek control.",
+      "coherence": "Coherence — people do not only want facts; they want events to make sense together.",
+      "self": "Self-Relevance — information changes value when it becomes “about me,” which increases the need to resist manufactured certainty.",
+      "attention": "Structured Attention — a dedicated session can create a meaningful container of time, focus and follow-up.",
+      "care": "Professional Care — some problems require qualified treatment, not another interpretation.",
+      "gap": "Market Gap — the missing product is not another lens; it is a system for governing lenses."
+    },
+    "systems": {
+      "metaTitle": "Human Reading Systems — PHI OS Research",
+      "skip": "Skip to human reading systems",
+      "eyebrow": "Human reading systems",
+      "title": "Different approaches can reveal something without owning the whole Reality.",
+      "lead": "PHI OS keeps historical, psychological, spiritual, professional, search and AI approaches inside explicit authority boundaries.",
+      "historicalTitle": "Historical reading methods",
+      "historicalCopy": "Astrology, BaZi, numerology, tarot and related methods can provide symbolic perspective, timing frameworks and pattern language. Their outputs remain bounded projection, not automatic Reality Truth or destiny.",
+      "psychTitle": "Psychological approaches",
+      "psychCopy": "Psychology and psychotherapy have professional roles in assessing and treating mental, emotional and behavioral difficulties. PHI OS does not replace clinical care.",
+      "spiritualTitle": "Spiritual / meaning approaches",
+      "spiritualCopy": "Ritual and spiritual language may support meaning-making and reflection. Subjective meaning can be respected without being presented as verified external fact.",
+      "authorityTitle": "Authority boundary",
+      "authorityCopy": "The useful question is not which system is “the truth,” but what it observes, what it can legitimately infer, where it needs external professional authority and what remains unknown."
+    },
+    "professional": {
+      "metaTitle": "PHI OS Professional — Bounded Human Review",
+      "skip": "Skip to Professional",
+      "eyebrow": "PHI OS Professional",
+      "title": "Human judgment belongs inside explicit scope and responsibility.",
+      "lead": "Professional work is not “the same UI plus more fields.” It introduces human observation, judgment, consent, case relevance and accountable handoff.",
+      "reviewTitle": "Professional Reality Review",
+      "reviewCopy": "Human review for ambiguous, persistent, multi-factor or consequential cases: reconstruction, evidence/interpretation separation, conflict and Unknown review, Reality Version / Diff and navigation framing.",
+      "financialTitle": "Financial Reality Navigation",
+      "financialCopy": "Cash flow, protection, assets, liabilities, goals and scenarios can be integrated into Reality while regulated recommendations remain subject to licensing and jurisdiction.",
+      "methodTitle": "Method Interpretation Review",
+      "methodCopy": "Deep human interpretation of supported method projections without promoting them into Reality Truth.",
+      "crossTitle": "Cross-Domain Navigation",
+      "crossCopy": "Work, family, relationship, money, identity and other dimensions can be read together when the problem does not fit one category.",
+      "handoffTitle": "Professional Handoff",
+      "handoffCopy": "Recognize when the correct next move is qualified external care or advice—not more PHI OS interpretation.",
+      "continuityTitle": "Professional Continuity",
+      "continuityCopy": "Return to the same governed case after action, external assessment or new evidence instead of restarting from zero."
+    },
+    "authority": {
+      "metaTitle": "Professional Authority — PHI OS",
+      "skip": "Skip to Professional Authority",
+      "eyebrow": "External Reality Grounding",
+      "title": "PHI OS does not need to own every domain of truth. It needs to know what authority it is using.",
+      "lead": "The eight-volume framework stays connected to a changing world through source, authority, date, jurisdiction, evidence type, confidence and case fit.",
+      "groundTitle": "External Reality Grounding",
+      "groundCopy": "Changing facts enter through governed sources rather than being silently absorbed into a permanent interpretation.",
+      "chainTitle": "Authority chain",
+      "chainCopy": "Source → Authority → Date → Jurisdiction → Evidence Type → Confidence → Case Fit.",
+      "caseTitle": "One Reality can require several authorities",
+      "caseCopy": "A case involving exhaustion, work change, money and abnormal lab values should not collapse lived experience, financial constraints and medical interpretation into one answer.",
+      "medical": "Medical",
+      "psychological": "Psychological",
+      "financial": "Financial / Economic",
+      "legal": "Legal / Regulatory",
+      "scientific": "Scientific",
+      "government": "Public / Government",
+      "temporal": "Temporal",
+      "professionalEvidence": "Professional Evidence"
+    },
+    "founder": {
+      "publication": {
+  "S01": {
+    "eyebrow": {
+      "0": "Founder · PHI OS · Reality Navigation"
+    },
+    "h1": {
+      "0": "Answers are becoming easier to get. The harder question is which answer actually belongs to your reality."
+    },
+    "lead": {
+      "0": "Today, a person can search for information in seconds, ask an AI, watch expert commentary, read reports, compare perspectives, and draw on financial, relational, personal, symbolic, or professional frameworks.",
+      "1": "The problem is no longer simply whether an answer is available.",
+      "2": "The harder problem is that these answers come from different sources, use different methods, and describe different layers of reality. Some agree. Some conflict. Some remain relevant. Others have already been overtaken by events. Some are interpretations; others depend on facts that still need to be established.",
+      "3": "PHI OS begins at that point.",
+      "4": "It is not designed to become one more source of answers. It is designed to help a person bring information, interpretations, perspectives, and real-world conditions into one inspectable structure—so they can see what is happening now, what is actually known, what remains uncertain, and what any next step is based on."
+    }
+  },
+  "S02": {
+    "title": {
+      "0": "The problem is no longer access to information."
+    },
+    "display_statement": {
+      "0": "We have more answers than ever. Reality has not become easier to judge."
+    },
+    "body": {
+      "0": "For much of the past, many decisions were difficult because information was scarce.",
+      "1": "Today, difficulty can come from having too much of it.",
+      "2": "A person considering a career change may already have search results, AI conversations, industry news, personal reports, a partner’s opinion, financial numbers, past experience, and their own intuition. A relationship question may bring together psychological content, friends’ views, symbolic readings, social-media experiences, and professional advice.",
+      "3": "Each source may contribute something useful.",
+      "4": "But none of them automatically explains how all the pieces relate.",
+      "5": "A report may describe a long-term pattern without knowing that the person has just lost a job. A financial model may calculate cash flow without understanding what is changing inside a family. An AI conversation may synthesize large amounts of text while relying on information that is no longer current. A symbolic method may offer a valuable perspective without turning that interpretation into an established fact.",
+      "6": "The shortage is no longer perspectives.",
+      "7": "The shortage is a way to keep asking, over time:",
+      "8": "What is actually happening?",
+      "9": "Where did this information come from?",
+      "10": "Is it a fact, an interpretation, a projection, a lived experience, or a methodological perspective?",
+      "11": "Is it still current?",
+      "12": "Does it agree with other information, or is there a conflict?",
+      "13": "What remains unknown?",
+      "14": "And after a decision is made, what actually changed?"
+    },
+    "caption": {
+      "0": "Reality leaves traces. Traces become information. Information becomes useful knowledge only when its source, scope, and uncertainty remain visible."
+    }
+  },
+  "S03": {
+    "title": {
+      "0": "The real market pain is fragmentation."
+    },
+    "display_statement": {
+      "0": "We do not lack tools. Each tool simply sees a different part of reality."
+    },
+    "body": {
+      "0": "Modern life is distributed across many separate systems.",
+      "1": "Search engines retain queries.",
+      "2": "AI systems retain conversations.",
+      "3": "Financial tools hold numbers.",
+      "4": "Calendars hold schedules.",
+      "5": "Social platforms hold relationships and expression.",
+      "6": "Work and professional systems each hold their own domain-specific information.",
+      "7": "Personal reports and historical reading systems provide yet another layer of interpretation.",
+      "8": "None of these systems is necessarily the problem.",
+      "9": "The problem is that a person does not live inside ten separate systems when making one real decision.",
+      "10": "A career decision may involve income, family responsibility, location, time, personal tendencies, relationship pressure, industry conditions, and long-term direction at the same time.",
+      "11": "A relationship decision may involve events, needs, financial circumstances, family structure, prior experience, personal interpretation, and information that has not yet been established.",
+      "12": "Reality is connected.",
+      "13": "The tools we use to understand it are usually not.",
+      "14": "The result is a familiar burden: people accumulate information while carrying the entire integration problem in their own heads.",
+      "15": "They must remember which information is still current, which interpretation came from which framework, what belongs to their own experience, what came from somebody else, what has actually been confirmed, what remains provisional, and whether an earlier conclusion still holds after circumstances have changed.",
+      "16": "PHI OS is designed around this gap.",
+      "17": "It does not require every source to become the same kind of thing.",
+      "18": "It preserves the differences.",
+      "19": "Financial information remains financial information.",
+      "20": "Personal evidence retains its provenance.",
+      "21": "Symbolic and historical reading methods remain perspectives.",
+      "22": "Professional judgment retains its scope and responsibility.",
+      "23": "Public knowledge does not automatically become personal reality.",
+      "24": "And an AI-generated interpretation does not gain greater authority simply because it is fluent.",
+      "25": "The purpose is not to connect every piece of data.",
+      "26": "It is to connect the small amount of relevant information a person deliberately chooses to bring into a specific question.",
+      "27": "That distinction matters.",
+      "28": "Reality Navigation is not an attempt to know everything about a person.",
+      "29": "It is an attempt to know, at a particular moment:",
+      "30": "What do we actually need to know in order to understand this situation?",
+      "31": "",
+      "32": "",
+      "33": "",
+      "34": "",
+      "35": "",
+      "36": "",
+      "37": "",
+      "38": ""
+    },
+    "caption": {
+      "0": "Cross-domain context does not mean automatic data merging. Only information that is relevant to the current question, source-visible, and appropriately selected should enter the same Reality reading."
+    }
+  },
+  "S04": {
+    "title": {
+      "0": "PHI OS does not need other tools to fail in order to matter."
+    },
+    "lead": {
+      "0": "Search, artificial intelligence, social platforms, professional services, and different reading systems already solve important problems.",
+      "1": "The deeper issue is that they were not designed to jointly maintain one person’s changing reality."
+    },
+    "body": {
+      "0": "Search tools such as Google are highly effective at helping people find information, websites, news, services, and different sources.",
+      "1": "General AI systems such as ChatGPT and Meta AI can explain complex material, synthesize information, generate text, support research, and allow a person to continue exploring through conversation.",
+      "2": "YouTube and TikTok make experience, instruction, and commentary dramatically easier to discover.",
+      "3": "X and other public-discussion platforms make events, reactions, commentary, and public signals visible.",
+      "4": "Financial planners and other professionals contribute domain-specific human judgment within defined service scopes and responsibilities.",
+      "5": "BaZi, Zi Wei, Astrology, I Ching, Tarot, and other historical or symbolic reading systems offer another kind of value: they provide alternative structures through which people can reflect on patterns, timing, relationships, and experience.",
+      "6": "PHI OS does not need to replace any of these.",
+      "7": "Its usefulness depends on preserving the differences between them.",
+      "8": "A search result is not professional advice.",
+      "9": "A professional opinion does not automatically become an established fact.",
+      "10": "A social-media experience is not personal evidence.",
+      "11": "A symbolic interpretation is not the same thing as an event in the world.",
+      "12": "And the ability of an AI system to synthesize many sources does not mean that it should decide which source deserves the highest authority in a person’s life.",
+      "13": "Different tools answer different questions.",
+      "14": "PHI OS is concerned with what happens when those answers meet:",
+      "15": "How can they remain identifiable, sourced, and bounded instead of collapsing into one apparently complete answer?"
+    },
+    "caption": {
+      "0": "Different systems can contribute different capabilities. Their evidence, responsibility, and decision authority should not disappear simply because they appear in the same interface."
+    }
+  },
+  "S05": {
+    "title": {
+      "0": "PHI OS adds a layer for bringing answers back into reality."
+    },
+    "body": {
+      "0": "The core of PHI OS is not a larger database, nor an attempt to build a personal assistant that knows everything.",
+      "1": "What it adds is a persistent structure for reality.",
+      "2": "When information enters PHI OS, it should not be reduced to another piece of text.",
+      "3": "Where possible, the system keeps visible:",
+      "4": "Where it came from.",
+      "5": "Is it public knowledge, self-report, professional information, a calculation, a historical method, a symbolic reading, or an AI-generated interpretation?",
+      "6": "What kind of claim it is.",
+      "7": "Is it an established fact, an observation, an estimate, a calculation, an interpretation, a projection, an opinion, or something still unresolved?",
+      "8": "What it applies to.",
+      "9": "Does it concern a person, a relationship, a financial condition, a public context, or a specific moment in time?",
+      "10": "When it was true.",
+      "11": "Information that was valid earlier may no longer describe the present.",
+      "12": "Whether the person chose to bring it into this question.",
+      "13": "The fact that information exists in an account does not give a system permission to use it everywhere.",
+      "14": "What it is connected to.",
+      "15": "Only information that is relevant to the current question should enter the same Reality context.",
+      "16": "What remains unknown.",
+      "17": "An explicit unknown is not a failure. In many situations, knowing where the evidence ends is more useful than filling the gap with a plausible answer.",
+      "18": "What happened afterward.",
+      "19": "If an interpretation informs a choice, and the choice leads to action, what happens next should be able to revise the earlier understanding.",
+      "20": "That is why PHI OS should not become merely a conversation history.",
+      "21": "A good answer can still become outdated tomorrow.",
+      "22": "A Reality system must allow new information to enter, earlier conclusions to change, unknowns to be resolved, and directions to be reconsidered.",
+      "23": ""
+    },
+    "founder_quote": {
+      "0": "PHI OS does not need to know everything about a person. It needs to know what actually matters for the question being faced now."
+    }
+  },
+  "S06": {
+    "title": {
+      "0": "Finding an answer, understanding it, and knowing how to move are three different problems."
+    },
+    "body": {
+      "0": "A system can be extremely good at search without knowing which result actually changes a person’s situation.",
+      "1": "An AI can provide an excellent explanation without knowing whether the person acted on it, or what happened afterward.",
+      "2": "A report can be comprehensive while remaining a reading produced by a particular method at a particular point in time.",
+      "3": "A professional can give important advice within a defined domain, while the real decision still depends on conditions outside that domain.",
+      "4": "This is why PHI OS places Reality Navigation at the center of the system.",
+      "5": "Navigation does not mean the system telling a person what to do.",
+      "6": "It is not a ranking engine that assigns every option a score and selects the highest one.",
+      "7": "Navigation capability has to emerge from the reality itself.",
+      "8": "Reality first has structure.",
+      "9": "Elements within that structure begin to form connections.",
+      "10": "Some connections become better supported through repeated observation and evidence.",
+      "11": "Over time, certain directions may become clearer than others.",
+      "12": "But direction alone is not enough. A person also needs to understand where they are positioned within that structure.",
+      "13": "Only when structure, direction, and position are sufficiently established does it become meaningful to talk about bounded Navigation Potential.",
+      "14": "That is the deeper idea expressed in Figure 1B:",
+      "15": "Structure → Connectivity → Network → Structural Reinforcement → Direction → Position → Navigation Potential",
+      "16": "These are not seven website steps.",
+      "17": "They describe how navigation capability forms.",
+      "18": "And the process does not end when a decision is made.",
+      "19": "Reality Navigation continues through:",
+      "20": "Action → Observation → Outcome → Revision",
+      "21": "Because reality does not stop at the moment of choice.",
+      "22": "An interpretation remains useful only if it can be revised when new facts arrive.",
+      "23": "PHI OS therefore does not aim merely to become better at answering questions.",
+      "24": "Its longer-term purpose is to provide an infrastructure through which a person can repeatedly:",
+      "25": "see the reality they are currently facing, understand which information genuinely matters, compare possible directions while uncertainty remains, make a decision that remains their own, and return later to see what actually changed."
+    }
+  },
+  "S07": {
+    "title": {
+      "0": "The more a system can connect, the more clearly it must show what each source can—and cannot—support."
+    },
+    "body": {
+      "0": "PHI OS can connect information from different domains, but connection must not erase the differences between them.",
+      "1": "This is one of the most important constraints in the system.",
+      "2": "A fact may come from an observed event or record.",
+      "3": "A financial number may come from account information or a calculation.",
+      "4": "A Profile result may come from a defined assessment or questionnaire.",
+      "5": "A professional judgment may come from a person who accepts responsibility within a specific scope.",
+      "6": "BaZi, Zi Wei, Astrology, I Ching, Tarot, and other methods provide a different kind of interpretive structure.",
+      "7": "AI can help organize, compare, explain, and connect these materials.",
+      "8": "But they do not become the same kind of evidence simply because they appear in one interface.",
+      "9": "PHI OS therefore needs to keep several questions visible:",
+      "10": "Who provided this?",
+      "11": "What method produced it?",
+      "12": "What does it apply to?",
+      "13": "Is it presenting a fact or an interpretation?",
+      "14": "Was it reviewed by a person?",
+      "15": "Is it still current?",
+      "16": "Did the user choose to bring it into this question?",
+      "17": "And what is the system actually authorized to do with it?",
+      "18": "These boundaries become more important as AI becomes more capable.",
+      "19": "A fluent answer can combine established facts, inference, interpretation, general knowledge, model synthesis, and unresolved uncertainty in a single paragraph.",
+      "20": "If the interface no longer distinguishes those layers, the user may experience one highly confident voice where several different kinds of claims actually exist.",
+      "21": "PHI OS should not work that way.",
+      "22": "AI can participate in reading reality.",
+      "23": "But AI should not automatically become the highest authority over reality.",
+      "24": "The ability to summarize financial information does not make it a financial adviser.",
+      "25": "The ability to interpret a symbolic method does not turn that interpretation into an established personality fact.",
+      "26": "And the ability to see several sources at once does not authorize a system to make a decision for the person when consent, evidence, or responsibility is insufficient.",
+      "27": "Professional participation also needs clear boundaries.",
+      "28": "Professional responsibility belongs to a specific person, service scope, and point in time—not to a generic “Professional” label.",
+      "29": "PHI OS is designed to preserve those relationships of responsibility rather than absorb them into a vague system authority.",
+      "30": "The platform can organize and present.",
+      "31": "A professional can judge within an appropriate scope.",
+      "32": "A method can offer a perspective.",
+      "33": "AI can assist interpretation.",
+      "34": "But the person retains the decision."
+    },
+    "caption": {
+      "0": "The more capable the system becomes, the more important its boundaries become. Connecting sources does not mean merging their responsibilities."
+    }
+  },
+  "S08": {
+    "eyebrow": {
+      "0": "Founder & Research Origin"
+    },
+    "title": {
+      "0": "PHI OS did not begin as a technology idea. It began as a recurring problem in real decisions."
+    },
+    "body": {
+      "0": "In financial planning, a decision is rarely only about numbers.",
+      "1": "Cash flow, assets, liabilities, family responsibilities, risk, time, and future objectives often exist together.",
+      "2": "In resource allocation and organizational restructuring, a plan that appears logical on paper may fail if it ignores people, structure, authority, execution capacity, or the external environment.",
+      "3": "In systems analysis, a conclusion that looks correct locally can produce a very different outcome when placed inside a larger structure.",
+      "4": "Human reality makes the problem even more complex.",
+      "5": "A person can simultaneously hold professional advice, family views, personal intuition, historical experience, financial constraints, interpretive frameworks, and new changes in circumstance.",
+      "6": "None of these sources needs to be wrong.",
+      "7": "But they are often disconnected.",
+      "8": "The recurring question was never how to find one framework that would always be correct.",
+      "9": "It was:",
+      "10": "What does a framework actually see?",
+      "11": "What does it leave out?",
+      "12": "What is its interpretation based on?",
+      "13": "And when reality changes, does the interpretation still hold?",
+      "14": "This is why seemingly distant fields became relevant to the same inquiry.",
+      "15": "Finance and resource allocation deal with real constraints.",
+      "16": "Organizational and systems work deal with structure and connection.",
+      "17": "Historical reading systems deal with patterns, timing, and meaning.",
+      "18": "Observation science deals with how information, evidence, and knowledge are formed.",
+      "19": "Artificial intelligence pushes all of these questions into a new stage: when generating and synthesizing answers becomes extremely fast and inexpensive, what capability becomes more important?",
+      "20": "PHI OS emerged from the convergence of those questions.",
+      "21": "It is not an attempt to prove that one framework is more correct than every other framework.",
+      "22": "Nor is it an attempt to build a system that knows every answer about a person’s life.",
+      "23": "Its purpose is closer to this:",
+      "24": "to build an infrastructure in which different sources can be used without losing their identities;",
+      "25": "where interpretation can exist without automatically replacing fact;",
+      "26": "where unknowns can remain visible rather than being prematurely filled;",
+      "27": "where an earlier conclusion can be checked again as reality changes;",
+      "28": "and where a person can understand what their own decision is actually based on."
+    },
+    "short_intro": {
+      "0": "PHI OS did not begin with a decision to build an AI platform and then search for a problem to solve.",
+      "1": "It began with the same fracture appearing repeatedly across different areas of work and research."
+    },
+    "founder_quote": {
+      "0": "The problem I wanted to solve was not how to give people more answers. It was how to help them still see their reality clearly after they already have so many."
+    }
+  },
+  "S09": {
+    "title": {
+      "0": "Begin with the question you are actually facing."
+    },
+    "body": {
+      "0": "Reality Navigation does not require a person to understand the entire system before they begin.",
+      "1": "You do not need to purchase a report, complete every personal-data field, or choose a method first.",
+      "2": "Different people can enter from different points.",
+      "3": "If you simply have a question, begin with Ask PHI OS.",
+      "4": "If you prefer to read first, begin with Knowledge, published articles, or the public material from the eight-book series.",
+      "5": "If you want to examine yourself or a situation through another lens, explore Perspectives.",
+      "6": "If you are facing a complex real-world situation, bring the relevant facts, constraints, unknowns, and selected information into My Reality.",
+      "7": "If the question requires accountable human involvement in finance, professional review, or another defined service scope, continue into Professional.",
+      "8": "And if you already have a report, reading, Profile, Relationship, Financial context, or other established material, you can continue asking from what has already been built instead of starting from zero each time.",
+      "9": "The important thing is not which product you begin with.",
+      "10": "It is beginning with a real question and bringing in only the information needed to understand it.",
+      "11": "As reality becomes clearer, the next step can change.",
+      "12": "That is the difference between navigation and a one-time answer."
+    },
+    "final_closing": {
+      "0": "PHI OS does not try to own a person’s reality.",
+      "1": "It is designed to keep reality clear enough for a person to continue judging, choosing, acting, and understanding again after the world changes."
+    }
+  },
+  "navigation": {
+    "explore": "Explore Reality Navigation",
+    "why": "Why PHI OS",
+    "ask": "Ask a question",
+    "reality": "Open My Reality",
+    "perspectives": "Explore Perspectives",
+    "books": "Read PHI OS",
+    "professional": "Professional support",
+    "full": "View full figure",
+    "identity": "Teresa Lee",
+    "role": "Founder & Principal Architect, PHI OS"
+  },
+  "figures": {
+    "PLATFORM-RELATIONSHIP-NETWORK": {
+      "alt": "Conceptual illustration: platform relationship network"
+    },
+    "OBSERVATION-EVIDENCE-KNOWLEDGE": {
+      "alt": "Conceptual illustration: observation evidence knowledge"
+    },
+    "CROSS-DOMAIN-CONTEXT-LINKS": {
+      "alt": "Conceptual illustration: cross domain context links"
+    },
+    "HUMAN-SYSTEM-RESPONSIBILITY": {
+      "alt": "Conceptual illustration: human system responsibility"
+    },
+    "NAVIGATION-FORMATION-1B": {
+      "alt": "Conceptual illustration: navigation formation 1b"
+    },
+    "OBSERVATION-RETURN-LOOP": {
+      "alt": "Conceptual illustration: observation return loop"
+    },
+    "CUSTOMER-ENTRY-PATHS": {
+      "alt": "Conceptual illustration: customer entry paths"
+    }
+  },
+  "market": {
+    "0": {
+      "title": "Search / Google",
+      "body": "Discovery, retrieval, sources and public information."
+    },
+    "1": {
+      "title": "General AI / ChatGPT / Meta AI",
+      "body": "Dialogue, synthesis, explanation, generation and research assistance."
+    },
+    "2": {
+      "title": "X / YouTube / TikTok / Social & Video",
+      "body": "Public signals, commentary, experience, teaching and discovery."
+    },
+    "3": {
+      "title": "Historical / symbolic reading systems",
+      "body": "Alternative interpretive lenses, patterns, timing and reflection."
+    },
+    "4": {
+      "title": "Financial / professional services",
+      "body": "Domain-specific human judgment within defined service and responsibility boundaries."
+    },
+    "5": {
+      "title": "PHI OS",
+      "body": "Reality Navigation across deliberately selected sources while preserving provenance, uncertainty, responsibility and continuity."
+    }
+  },
+  "metaDescription": "Teresa Lee founded PHI OS after work across financial planning, resource allocation, organizational restructuring and systems analysis revealed a recurring problem: more answers do not automatically produce a clearer reality. PHI OS develops Reality Navigation as a way to connect sources, evidence, interpretation, action and review.",
+  "navigationFormation": "Structure → Connectivity → Network → Structural Reinforcement → Direction → Position → Navigation Potential"
+},
+      "metaTitle": "Teresa Lee — Founder & Principal Architect of PHI OS",
+      "skip": "Skip to Founder",
+      "eyebrow": "Founder & Principal Architect",
+      "title": "Teresa Lee",
+      "lead": "PHI OS began from a recurring practical problem: people can possess more information, more frameworks and more advice and still be unable to see what is actually happening in their Reality.",
+      "originTitle": "Founder origin",
+      "originCopy": "Her work moved across financial planning, resource allocation, organizational restructuring and systems analysis while also studying historical frameworks used to read human patterns and timing. Across them, the same limitation appeared: each system could reveal something, but no single Reading preserved the whole situation, evidence, uncertainty and change across time.",
+      "quote": "“The question was never which framework is right. The deeper question was: what does this framework actually observe, what can it legitimately infer, and how does that interpretation survive contact with reality?”",
+      "factsTitle": "Facts & research orientation",
+      "factsCopy": "Founder & Principal Architect · Author of The Reality Navigation Thesis and the PHI OS eight-volume knowledge architecture · Practical background in financial planning, organizational restructuring, resource and system analysis · Research focus: Reality formation, human runtime, interpretation, continuity, AI and civilization.",
+      "researchTitle": "Why the work continues",
+      "researchCopy": "AI expands language and synthesis capability. PHI OS asks what infrastructure must come after AI so intelligence can remain grounded in evidence, continuity and accountable navigation."
+    },
+    "founderTeaser": {
+      "eyebrow": "Founder",
+      "name": "Teresa Lee",
+      "role": "Founder & Principal Architect",
+      "action": "Why PHI OS was built →"
+    }
+  },
+  aboutPublic: {
+    metaTitle: 'About PHI OS — Purpose, responsibility and trust',
+    skip: 'Skip to About PHI OS',
+    hero: {
+      eyebrow: 'About PHI OS',
+      title: 'Built to keep a changing reality understandable.',
+      lead: 'PHI OS began with a practical problem: useful answers lose their meaning when the situation, evidence and changes around them are not carried forward.',
+      action: 'Read the design responsibilities',
+      thesis: 'Read the Thesis',
+    },
+    index: {
+      label: 'On this page',
+      why: 'Why PHI OS',
+      responsibility: 'Design responsibility',
+      limits: 'What PHI OS does not do',
+      trust: 'Builder and trust',
+      research: 'Research Foundation',
+      books: 'Eight Books',
+      architecture: 'Fifteen-Part Architecture',
+      platform: 'Platform',
+      ecosystem: 'Future Ecosystem'
+    },
+    why: {
+      eyebrow: '01 · Why PHI OS',
+      title: 'Reality does not arrive as one question with one answer.',
+      statement: 'A change in one area can alter work, money, relationships, health, identity and future choices at the same time.',
+      body1: 'Most tools respond to the latest prompt. PHI OS was built to help preserve how a situation develops, what supports each interpretation and what remains uncertain.',
+      body2: 'The purpose is not to replace judgment. It is to make the reality being judged easier to see and revisit.'
+    },
+    responsibility: {
+      eyebrow: '02 · Design responsibility',
+      title: 'Reality first. Understanding before intervention.',
+      contextTitle: 'Keep context connected',
+      contextCopy: 'A response should remain connected to the situation and changes that give it meaning.',
+      evidenceTitle: 'Separate evidence and interpretation',
+      evidenceCopy: 'Reported experience, observed facts, interpretation and unknowns must remain distinguishable.',
+      reviewTitle: 'Make direction reviewable',
+      reviewCopy: 'A next step should be bounded and later compared with what actually changed.'
+    },
+    limits: {
+      eyebrow: '03 · What PHI OS does not do',
+      title: 'The platform does not turn uncertainty into authority.',
+      body1: 'PHI OS does not present an automated interpretation as fact, diagnosis, legal advice, financial recommendation or a professional decision.',
+      body2: 'Public Knowledge and the Reality Journey Overview are orientation routes. A personal Journey is a separate experience. Professional work has separate scope, consent, price and human responsibility.',
+      action: 'Read the Professional boundary'
+    },
+    trust: {
+      eyebrow: '04 · Builder and trust',
+      title: 'Research led by Teresa Lee, made accountable in public.',
+      body1: 'Teresa Lee founded PHI OS after years of working across financial planning, organizational systems and different frameworks for understanding human experience.',
+      body2: 'The work asks why different systems can each reveal something useful while still losing the whole situation across time. PHI OS makes its evidence boundaries, AI use, privacy terms and professional limits visible so visitors can judge the platform before relying on it.',
+      aiAction: 'Read the AI disclosure',
+      privacyAction: 'Read the Privacy policy'
+    },
+    research: {
+      eyebrow: '02 · Research Foundation',
+      title: 'Reality Navigation is the category. Runtime is the continuity layer.',
+      body1: 'The Reality Navigation Thesis asks how evolving reality can become observable, computable and navigable without collapsing evidence, interpretation and uncertainty.',
+      body2: 'The Unified Runtime Framework provides the theoretical language for evidence, state, transition, memory and continuity. PHI OS is the integrated reference implementation.',
+      body3: 'Founded by Teresa Lee, the work emerged from a long effort to understand why different systems can each reveal something meaningful while still failing to preserve the whole reality across time.',
+      timelineTitle: 'Reality timeline',
+      research: 'Research',
+      thesis: 'Thesis',
+      books: 'Books',
+      runtime: 'Runtime Engine',
+      platform: 'Platform',
+      ecosystem: 'Ecosystem'
+    },
+    books: {
+      eyebrow: '03 · Eight Books',
+      title: 'Seven reading volumes of one architecture.',
+      lead: 'The eight books are not separate architectures. Together they form the human-readable route through fifteen connected Parts.',
+      b1Title: "Book I · Reality Formation",
+      b1Copy: "Foundations of Reality Formation and Runtime",
+      b2Title: "Book II · Reality Runtime",
+      b2Copy: "How Humans and the World Run Together",
+      b3Title: "Book III · Reality Continuity",
+      b3Copy: "How Runtime Is Maintained, Recovered and Coordinated",
+      b4Title: "Book IV · Reality Expansion",
+      b4Copy: "Runtime Expansion and Civilization Runtime",
+      b5Title: "Book V · Reality Differentiation",
+      b5Copy: "Civilization Atlas"
+    },
+    architecture: {
+      eyebrow: '04 · Fifteen-Part Architecture',
+      title: 'From the smallest observable difference to civilizational continuity.',
+      lead: 'Fifteen interoperable Parts organize the architecture without turning them into fifteen separate journeys.',
+      formationTitle: 'Parts 1–4 · Reality Formation',
+      formationCopy: 'Reality Physics, Projection System, Reality Dynamics and Human Runtime Carrier.',
+      sharedTitle: 'Parts 5–7 · Reality Runtime',
+      sharedCopy: 'Conscious Runtime, Relational Runtime and Collective Runtime.',
+      continuityTitle: 'Parts 8–9 · Reality Continuity',
+      continuityCopy: 'Runtime Maintenance and Coordination Runtime.',
+      civilizationTitle: 'Parts 10–12 · Reality Civilization',
+      civilizationCopy: 'Runtime Expansion, Civilization Runtime and Civilization Atlas.',
+      navigationTitle: 'Parts 13–15 · Reality Navigation',
+      navigationCopy: 'Reading Science, Navigation Science and Reality Continuation.',
+      action: 'Explore all fifteen Parts'
+    },
+    platform: {
+      eyebrow: '05 · Platform',
+      title: 'Research becomes useful when continuity can be maintained.',
+      body1: 'The PHI OS platform connects Entry, Reconstruction, Reading, Navigation, Review and Continuity to one versioned Runtime.',
+      body2: 'Infrastructure adds persistence, recovery, timeline replay, revision lineage and privacy controls while keeping provider output inside the evidence boundary.',
+      action: 'Start a full Reality Journey'
+    },
+    ecosystem: {
+      eyebrow: '06 · Future Ecosystem',
+      title: 'A shared architecture for people, knowledge, professionals and systems.',
+      lead: 'The future ecosystem extends outward from the same Runtime core while keeping access, interpretation and intervention explicitly bounded.',
+      figureTitle: 'Figure V.2 · PHI OS Ecosystem Architecture',
+      figureCopy: 'Knowledge and public experience feed understanding; professional and organizational applications remain governed by evidence, consent, privacy and human responsibility.',
+      nodeKnowledge: 'Knowledge',
+      nodeKnowledgeDetail: 'Thesis · Books · Atlas',
+      nodePublic: 'Public Experience',
+      nodePublicDetail: 'Discover · Journey Overview · Journey',
+      nodeCore: 'PHI OS',
+      nodeCoreDetail: 'Runtime · Evidence · Memory · Continuity',
+      nodeProfessional: 'Professional',
+      nodeProfessionalDetail: 'Interpretation · Intervention',
+      nodeSystems: 'Systems',
+      nodeSystemsDetail: 'Organizations · API · Research',
+      action: 'View professional boundaries'
+    }
+  },
+  servicesPublic: {
+    metaTitle: 'Professional Applications — PHI OS',
+    skip: 'Skip to Professional applications',
+    heroEyebrow: 'Professional',
+    heroTitle: 'Interpretation and intervention require explicit boundaries.',
+    heroLead: 'PHI OS professional applications begin only after evidence, uncertainty, scope and responsibility have been made visible.',
+    observeTitle: 'Observe',
+    observeCopy: 'Begin with what changed and what the available evidence can support.',
+    interpretTitle: 'Interpret',
+    interpretCopy: 'Keep reported experience, inference and professional assessment distinct.',
+    interveneTitle: 'Intervene',
+    interveneCopy: 'Act only within competence, consent and accountable professional scope.',
+    boundaryTitle: 'Professional Boundary',
+    boundaryCopy: 'PHI OS does not convert AI output into professional authority. Licensed decisions and duty of care remain with the responsible human professional.',
+    boundaryAction: 'Read the Professional Boundary',
+    contactAction: 'Contact PHI OS',
+    servicesEyebrow: 'Professional Services',
+    servicesTitle: 'Choose the level of professional interpretation and follow-up you need.',
+    runtimeReading: 'Professional Runtime Reading',
+    runtimeReadingCopy: 'A professional review of the current Reading, its evidence boundary, unknowns and alternative interpretations.',
+    humanDesign: 'Personal Runtime Projection',
+    humanDesignCopy: 'A secondary interpretive perspective, kept separate from Runtime Evidence.',
+    consultation: 'Reading + Consultation',
+    consultationCopy: 'Discuss a completed Reading with a professional without replacing its evidence record.',
+    navigationFollowup: 'Navigation Follow-up',
+    navigationFollowupCopy: 'Review what changed after a selected Navigation action and what remains uncertain.',
+    longTermReview: 'Long-term Runtime Review',
+    longTermReviewCopy: 'Compare versioned Readings, Navigation outcomes and new evidence over time.',
+    learnMore: 'Learn more', comparisonEyebrow: 'Service comparison',
+    comparisonTitle: 'Runtime evidence remains primary in every service.',
+    service: 'Service', primaryPurpose: 'Primary purpose', professionalReview: 'Professional review',
+    externalReader: 'External Reader', automatedRuntime: 'Automated Runtime Reading',
+    foundationReport: 'Personal Runtime Foundation Report', realitySpecific: 'Reality-Specific Interpretation',
+    integratedReview: 'Integrated Runtime Review', purposeRuntime: 'Establish a bounded Reality Reading',
+    purposeProfessional: 'Professional review and revision', purposeFoundation: 'Chart-based interpretive foundation',
+    purposeCorrespondence: 'Examine possible Runtime correspondence', purposeQuestion: 'Examine one current Reality question',
+    purposeIntegrated: 'Keep multiple professional perspectives visibly separated',
+    included: 'Included', notIncluded: 'Not included', optional: 'Optional', hdOnly: 'Personal Runtime Projection',
+    exploreReaders: 'Explore External Readers', bookService: 'Book Service',
+    disclaimerTitle: 'Interpretation boundary',
+    disclaimerOne: 'Professional interpretation is not the same as observed evidence.',
+    disclaimerTwo: 'External Readers are used as interpretive perspectives, not as diagnostic, deterministic or evidentiary systems.'
+  },
+  humanDesignPublic: {
+    metaTitle: 'Personal Runtime Projection — PHI OS', skip: 'Skip to Personal Runtime Projection service',
+    eyebrow: 'External Reader · Available', title: 'Personal Runtime Projection as a secondary lens on current reality.',
+    lead: 'PHI OS uses a governed Personal Runtime Projection to examine possible correspondences after Runtime Evidence has been established.',
+    whatTitle: 'What It Is', whatCopy: 'A structured interpretive system based on birth information or an uploaded chart.',
+    useTitle: 'How PHI OS Uses Personal Runtime Projection', useCopy: 'Registry-based concepts are rewritten into PHI OS Runtime language and reviewed by a professional.',
+    examineTitle: 'What It Can Examine', examineCopy: 'Possible patterns involving decision, environment, relationship, experience, expression, action, resources and constraints.',
+    cannotTitle: 'What It Cannot Establish', cannotCopy: 'It cannot prove events, causes, diagnosis, identity, destiny, required action or future outcome.',
+    optionsTitle: 'Report Options', optionsCopy: 'Foundation Report, Runtime Interpretation, Reality-Specific Interpretation, or an Integrated Runtime Review.',
+    processTitle: 'Process', processCopy: 'Choose a service, grant consent, provide materials, complete professional review, then receive a source-labelled report.',
+    materialsTitle: 'Required Materials', materialsCopy: 'Accurate birth date, birth time, birth place and timezone, or an existing chart in PNG, JPG, WEBP or PDF format.',
+    boundaryTitle: 'Professional Boundary', boundaryCopy: 'Personal Runtime Projection remains separate from observed and reported Runtime Evidence.',
+    priceTitle: 'Price', priceCopy: 'Pricing is confirmed before booking. Public checkout and published amounts are not yet enabled.',
+    book: 'Book Service'
+  },
+  externalReadersPublic: {
+    metaTitle: 'External Readers — PHI OS', skip: 'Skip to External Readers',
+    eyebrow: 'External Reader Framework', title: 'Interpretive perspectives remain secondary to Reality Reading.',
+    lead: 'Each Reader uses the same source, correspondence, limitation and professional-review boundaries.',
+    available: 'Available', planned: 'Planned', humanDesign: 'Personal Runtime Projection',
+    humanDesignCopy: 'Learn about the available interpretation and its scope before continuing.',
+    bazi: 'BaZi', ziwei: 'Zi Wei', geneKeys: 'Gene Keys', astrology: 'Astrology'
+  },
+  privacyPublic: {
+    metaTitle: 'Privacy Policy — PHI OS',
+    skip: 'Skip to Privacy Policy',
+    eyebrow: 'Legal & Trust',
+    title: 'Privacy Policy',
+    lead: 'This policy explains how the public PHI OS website and Reality Journey handle information.',
+    updated: 'Last updated: 23 July 2026',
+    toc: 'On this page',
+    s1Title: '1. Scope',
+    s1Copy: 'This policy covers the PHI OS public website and Reality Journey. A future service with different data practices will publish an additional notice before collecting information.',
+    s2Title: '2. Information you provide',
+    s2Copy: 'Information may include the text you enter, Runtime evidence you choose to save, language preference and messages you send through contact channels.',
+    s3Title: '3. How information is used',
+    s3Copy: 'Information is used to provide the requested experience, preserve an authorized Runtime, recover an interrupted journey, secure the service and improve reliability.',
+    s4Title: '4. Storage and retention',
+    s4Copy: 'The Reality Journey may use browser session storage and, when configured and authorized, service infrastructure. Retention should be limited to the purpose presented to you.',
+    s5Title: '5. Your choices',
+    s5Copy: 'You may stop a Journey, avoid entering sensitive information, request available export or deletion functions, and contact PHI OS about a privacy question.',
+    s6Title: '6. Contact',
+    s6Copy: 'For privacy questions, use the Contact page. Do not send medical records, government identifiers or other highly sensitive material by ordinary email.',
+    contact: 'Open Contact'
+  },
+  termsPublic: {
+    metaTitle: 'Terms of Use — PHI OS',
+    skip: 'Skip to Terms of Use',
+    eyebrow: 'Legal & Trust',
+    title: 'Terms of Use',
+    lead: 'These terms govern access to the public PHI OS website, knowledge material and Reality Journey.',
+    updated: 'Last updated: 23 July 2026',
+    toc: 'On this page',
+    s1Title: '1. Informational purpose',
+    s1Copy: 'PHI OS provides research, educational and Reality Navigation tools. Outputs are not a guarantee of accuracy, outcome or future events.',
+    s2Title: '2. Responsible use',
+    s2Copy: 'Do not use the service to harm others, violate law, impersonate a person, compromise security or submit content you have no right to use.',
+    s3Title: '3. No professional advice',
+    s3Copy: 'PHI OS is not medical diagnosis, legal advice or a financial recommendation. Seek a qualified professional when a decision requires licensed judgment.',
+    s4Title: '4. AI-assisted outputs',
+    s4Copy: 'Some experiences may use AI assistance. AI output can be incomplete or wrong and must be evaluated against evidence, context and human responsibility.',
+    s5Title: '5. Intellectual property',
+    s5Copy: 'PHI OS names, original research, diagrams, interface material and publications remain protected by applicable intellectual-property rights unless stated otherwise.',
+    s6Title: '6. Availability and changes',
+    s6Copy: 'Features may change, pause or be withdrawn. Material changes to these terms will be published with a revised date.',
+    s7Title: '7. Contact',
+    s7Copy: 'Questions about these terms can be sent through the Contact page.',
+    contact: 'Open Contact'
+  },
+  aiPublic: {
+    metaTitle: 'AI Disclosure — PHI OS',
+    skip: 'Skip to AI Disclosure',
+    eyebrow: 'Legal & Trust',
+    title: 'AI Disclosure',
+    lead: 'PHI OS may use AI to assist reconstruction, reading and navigation. Assistance is not authority.',
+    assistedTitle: 'AI-assisted',
+    assistedCopy: 'Where AI is available, it helps organize user-provided material and produce bounded interpretations. Provider output cannot upgrade an inference into observed evidence.',
+    medicalTitle: 'Not medical diagnosis',
+    medicalCopy: 'PHI OS does not diagnose, treat or replace care from a qualified health professional.',
+    legalTitle: 'Not legal advice',
+    legalCopy: 'PHI OS does not establish a lawyer-client relationship or replace advice from qualified legal counsel.',
+    financeTitle: 'Not a financial recommendation',
+    financeCopy: 'PHI OS does not recommend securities, investments, credit or other regulated financial action.',
+    responsibilityTitle: 'Human responsibility remains',
+    responsibilityCopy: 'Users and responsible professionals must evaluate evidence, uncertainty, risk and the consequences of any decision.',
+    journey: 'Understand the Reality Journey'
+  },
+  professionalBoundaryPublic: {
+    metaTitle: 'Professional Boundary — PHI OS',
+    skip: 'Skip to Professional Boundary',
+    eyebrow: 'Legal & Trust',
+    title: 'Professional Boundary',
+    lead: 'A professional may contribute interpretation or intervention, but never outside identifiable scope, competence, consent and accountability.',
+    evidenceTitle: 'Evidence remains traceable',
+    evidenceCopy: 'Professional assessment is labeled separately from observed evidence, reported experience and AI-assisted interpretation.',
+    consentTitle: 'Access requires purpose and consent',
+    consentCopy: 'A professional workspace must not imply open access to a person’s Runtime. Access must be purpose-bound and revocable.',
+    scopeTitle: 'Scope remains explicit',
+    scopeCopy: 'Medical, legal, financial and other regulated judgments remain inside the relevant professional relationship and jurisdiction.',
+    emergencyTitle: 'Not an emergency service',
+    emergencyCopy: 'PHI OS is not designed for urgent medical, safety or crisis response. Use appropriate local emergency services when immediate help is needed.',
+    action: 'View Professional applications'
+  },
+  contactPublic: {
+    metaTitle: 'Contact — PHI OS',
+    skip: 'Skip to Contact',
+    eyebrow: 'Contact',
+    title: 'Start with the purpose of your message.',
+    lead: 'Use email for research, publication, professional, partnership, accessibility, privacy or platform enquiries.',
+    emailLabel: 'Email',
+    emailValue: 'getphios.cs@gmail.com',
+    guidanceTitle: 'Before sending',
+    guidanceCopy: 'Please do not include medical records, government identifiers, passwords, payment credentials or a full personal Runtime in ordinary email.',
+    action: 'Compose email',
+    privacy: 'Read Privacy Policy'
+  },
+  academyPublic: {
+    metaTitle: 'Reality Academy — PHI OS',
+    skip: 'Skip to Reality Academy',
+    eyebrow: 'Knowledge · Learning',
+    title: 'Reality Academy',
+    lead: 'Learn to observe, reconstruct, distinguish evidence from interpretation, navigate transitions and review change.',
+    observeTitle: 'Observe',
+    observeCopy: 'Begin with what changed and what can be supported.',
+    organizeTitle: 'Organize',
+    organizeCopy: 'Connect knowledge, experience and evidence without collapsing their boundaries.',
+    continueTitle: 'Continue',
+    continueCopy: 'Return outcomes to the same Runtime for review and continuity.',
+    atlas: 'Explore the Reality Atlas'
+  }
+});
+
+export default publicExperience;

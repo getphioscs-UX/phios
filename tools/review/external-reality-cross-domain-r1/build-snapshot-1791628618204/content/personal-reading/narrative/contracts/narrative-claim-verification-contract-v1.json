@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-NARRATIVE-CLAIM-VERIFICATION-CONTRACT-v1.0.0",
+  "work": "W54N2",
+  "baselineCommit": "8331a81358531a1a80c077ac65dc5e3bd588ae15",
+  "status": "ACTIVE_MACHINE_VERIFIED",
+  "outputSchema": "PHI-OS-NARRATIVE-CLAIM-VERIFICATION-v1.0.0",
+  "classes": [
+    "SUPPORTED_FACT",
+    "SUPPORTED_SYNTHESIS",
+    "STYLE_ONLY",
+    "UNSUPPORTED_FACT",
+    "PROHIBITED_CLAIM",
+    "AMBIGUOUS"
+  ],
+  "requiredAuthorities": [
+    "NarrativeBrief",
+    "W53 evidence rules",
+    "W54 factual guard"
+  ],
+  "rules": {
+    "writerModelMaySelfVerifyAsAuthority": false,
+    "unknownSupportRefFailsClosed": true,
+    "sourceClassLocksPreserved": true,
+    "relationshipHiddenStateFailsClosed": true,
+    "crossSourceProofFailsClosed": true
+  },
+  "gate": "check:ppr-narrative:w54n2-verifier"
+}

@@ -1,0 +1,27 @@
+{
+  "registryCode": "PHI-OS-RMO-W2-CANONICAL-ENTITY-TYPE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RMO-W2",
+  "status": "canonical_foundation",
+  "runtimeAuthority": "RMO",
+  "containsUserData": false,
+  "containsEntityInstances": false,
+  "entityTypes": [
+    {"entityType": "SUBJECT", "allowedRoles": ["PRIMARY_SUBJECT"], "requiredCanonicalReference": true},
+    {"entityType": "PERSON", "allowedRoles": ["PARTICIPANT"], "requiredCanonicalReference": true},
+    {"entityType": "GROUP", "allowedRoles": ["PARTICIPANT", "CONTEXT"], "requiredCanonicalReference": true},
+    {"entityType": "ORGANIZATION", "allowedRoles": ["PARTICIPANT", "CONTEXT"], "requiredCanonicalReference": true},
+    {"entityType": "LOCATION", "allowedRoles": ["CONTEXT", "ENVIRONMENT"], "requiredCanonicalReference": true},
+    {"entityType": "OBJECT", "allowedRoles": ["CONTEXT", "RESOURCE"], "requiredCanonicalReference": true},
+    {"entityType": "SYSTEM", "allowedRoles": ["PARTICIPANT", "CONTEXT", "RESOURCE"], "requiredCanonicalReference": true},
+    {"entityType": "RESOURCE", "allowedRoles": ["RESOURCE"], "requiredCanonicalReference": true},
+    {"entityType": "ENVIRONMENT", "allowedRoles": ["ENVIRONMENT", "CONTEXT"], "requiredCanonicalReference": true}
+  ],
+  "instances": [],
+  "rules": {
+    "registryDefinesTypesOnly": true,
+    "registryMayStoreEntityInstances": false,
+    "entityTypeDoesNotGrantAccountAuthority": true,
+    "unknownEntityTypeFailsClosed": true
+  }
+}

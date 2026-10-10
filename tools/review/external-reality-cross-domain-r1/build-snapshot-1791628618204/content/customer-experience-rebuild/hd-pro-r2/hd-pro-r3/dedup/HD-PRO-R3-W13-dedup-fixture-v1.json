@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "PHI-OS-HD-PRO-R3-W13-DEDUP-FIXTURE-v1.0.0",
+  "fixtureId": "HD-R3-W13-DUPLICATE-CLUSTERS",
+  "description": "Synthetic semantic claims used only to verify deterministic precedence and evidence retention; they are not a birth calculation or customer reading.",
+  "claims": [
+    {
+      "claimId":"FIX-AUTHORITY-RUSH",
+      "precedenceClass":"AUTHORITY_COMPOSITION","precedenceRank":700,
+      "semanticClusterId":"RUSHED_DECISION_PRESSURE","realityImplicationKey":"EXTERNAL_PRESSURE_RUSHES_DECISION",
+      "compositionSupported":true,"compositionRuleId":"HD-R3-COMP-AUTHORITY_PROFILE","semanticOwnerId":"human_design.composition.authority_x_profile",
+      "subjectRefs":["AUTHORITY.EMOTIONAL","PROFILE.5_1"],"sourceRefs":["HD-UA-AUTHORITY-EMOTIONAL","HD-UA-PROFILE-5_1"],
+      "customerMeaning":{"en":"External role pressure can rush a decision whose final timing still belongs to Authority.","zhHans":"外部角色压力可能催促一个最终时序仍属于 Authority 的决定。"}
+    },
+    {
+      "claimId":"FIX-PROFILE-RUSH",
+      "precedenceClass":"PROFILE_COMPOSITION","precedenceRank":600,
+      "semanticClusterId":"RUSHED_DECISION_PRESSURE","realityImplicationKey":"EXTERNAL_PRESSURE_RUSHES_DECISION",
+      "compositionSupported":true,"compositionRuleId":"HD-R3-COMP-TYPE_PROFILE","semanticOwnerId":"human_design.composition.type_x_profile",
+      "subjectRefs":["TYPE.GENERATOR","PROFILE.5_1"],"sourceRefs":["HD-UA-TYPE-GENERATOR","HD-UA-PROFILE-5_1"],
+      "customerMeaning":{"en":"Role expectation can increase the urge to answer quickly.","zhHans":"角色期待可能增加快速回答的冲动。"}
+    },
+    {
+      "claimId":"FIX-CENTER-RUSH",
+      "precedenceClass":"CENTER_MEANING","precedenceRank":300,
+      "semanticClusterId":"RUSHED_DECISION_PRESSURE","realityImplicationKey":"EXTERNAL_PRESSURE_RUSHES_DECISION",
+      "compositionSupported":false,"compositionRuleId":null,"semanticOwnerId":"human_design.center.root",
+      "subjectRefs":["CENTER.ROOT.UNDEFINED"],"sourceRefs":["HD-UA-CENTER-ROOT-UNDEFINED"],
+      "customerMeaning":{"en":"Variable pressure can feel like urgency.","zhHans":"可变压力可能被体验成急迫感。"}
+    },
+    {
+      "claimId":"FIX-VARIABLE-RUSH",
+      "precedenceClass":"ADVANCED_VARIABLE_MODIFIER","precedenceRank":100,
+      "semanticClusterId":"RUSHED_DECISION_PRESSURE","realityImplicationKey":"EXTERNAL_PRESSURE_RUSHES_DECISION",
+      "compositionSupported":true,"compositionRuleId":"HD-R3-COMP-VARIABLE_CORE","semanticOwnerId":"human_design.advanced.environment",
+      "subjectRefs":["ADVANCED.ENVIRONMENT.2.左"],"sourceRefs":["HD-UA-ENVIRONMENT-2-左"],
+      "customerMeaning":{"en":"Environment may modify how pressure is noticed but cannot replace the decision architecture.","zhHans":"环境可能修饰压力如何被察觉，但不能替代决策架构。"}
+    },
+    {
+      "claimId":"FIX-CHANNEL-43-23",
+      "precedenceClass":"CHANNEL_COMPOSITION","precedenceRank":500,
+      "semanticClusterId":"CHANNEL_43-23_EXPRESSION","realityImplicationKey":"INSIGHT_TRANSLATION_EXPRESSION",
+      "compositionSupported":true,"compositionRuleId":"HD-R3-COMP-CHANNEL_GATE","semanticOwnerId":"human_design.channel.43_23",
+      "subjectRefs":["CHANNEL.43-23","GATE.43","GATE.23"],"sourceRefs":["HD-UA-CHANNEL-43_23","HD-UA-GATE-43-REL-43_23-LEFT","HD-UA-GATE-23-REL-43_23-RIGHT"],
+      "customerMeaning":{"en":"The complete 43-23 Channel owns the whole pattern of insight moving into expression.","zhHans":"完整 43-23 Channel 拥有洞见进入表达这一整体现象的主解释。"}
+    },
+    {
+      "claimId":"FIX-GATE-43",
+      "precedenceClass":"GATE_DETAIL","precedenceRank":200,
+      "semanticClusterId":"CHANNEL_43-23_EXPRESSION","realityImplicationKey":"INSIGHT_TRANSLATION_EXPRESSION",
+      "compositionSupported":false,"compositionRuleId":null,"semanticOwnerId":"human_design.gate.43",
+      "subjectRefs":["GATE.43"],"sourceRefs":["HD-UA-GATE-43-REL-43_23-LEFT"],
+      "customerMeaning":{"en":"Gate 43 is supporting evidence within this complete Channel.","zhHans":"Gate 43 是这条完整 Channel 内的支持证据。"}
+    },
+    {
+      "claimId":"FIX-CENTER-AJNA",
+      "precedenceClass":"CENTER_MEANING","precedenceRank":300,
+      "semanticClusterId":"CHANNEL_43-23_EXPRESSION","realityImplicationKey":"INSIGHT_TRANSLATION_EXPRESSION",
+      "compositionSupported":false,"compositionRuleId":null,"semanticOwnerId":"human_design.center.ajna",
+      "subjectRefs":["CENTER.AJNA.DEFINED"],"sourceRefs":["HD-UA-CENTER-AJNA-DEFINED"],
+      "customerMeaning":{"en":"Defined Ajna is structural context beneath the complete Channel.","zhHans":"定义 Ajna 是完整 Channel 之下的结构背景。"}
+    }
+  ],
+  "expected": {
+    "inputClaims":7,
+    "primaryClaims":2,
+    "supportingClaims":5,
+    "rushClusterPrimary":"FIX-AUTHORITY-RUSH",
+    "channelClusterPrimary":"FIX-CHANNEL-43-23",
+    "sourceEvidenceMustBeRetained":true,
+    "advancedVariableMayOverrideCore":false
+  }
+}

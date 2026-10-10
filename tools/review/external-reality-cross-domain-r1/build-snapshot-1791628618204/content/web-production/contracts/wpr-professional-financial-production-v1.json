@@ -1,0 +1,48 @@
+{
+  "contractCode": "PHI-OS-WPR-W22-PROFESSIONAL-FINANCIAL-PRODUCTION-v1",
+  "contractVersion": "1.0.0",
+  "work": "WPR-W22",
+  "phase": "WPR-F_PROFESSIONAL_FINANCIAL_REPORT_SURFACES",
+  "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+  "status": "ACTIVE_LIMITED_PRODUCTION_PR_HUMAN_AUTHORITY_GATED_FINANCIAL_PRODUCT_NEUTRAL",
+  "purpose": "Project Professional and Financial public surfaces from frozen PR v2 and governed Financial Runtime sources without creating professional judgment, regulated advice, product selection, report content, or private workspace authority.",
+  "authority": {
+    "professionalRuntime": "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json",
+    "financialAuthority": "content/registry/financial-authority-boundary.json",
+    "financialRuntime": "content/registry/m4a-financial-reality-navigation.json",
+    "professionalJudgmentAuthority": "PR_ONLY_HUMAN_ATTRIBUTABLE",
+    "financialCalculationAuthority": "UPSTREAM_FINANCIAL_RUNTIME",
+    "wprAuthority": "WEB_PROJECTION_ONLY"
+  },
+  "surfaces": [
+    {
+      "surfaceCode": "PROFESSIONAL",
+      "route": "/services",
+      "audience": "PUBLIC",
+      "mode": "EXISTING_PUBLIC_PROFESSIONAL_DISCOVERY"
+    },
+    {
+      "surfaceCode": "FINANCIAL",
+      "route": "/professional/financial",
+      "audience": "PUBLIC",
+      "mode": "GOVERNED_FINANCIAL_DISCOVERY"
+    }
+  ],
+  "financialBoundary": {
+    "productSpecificAdviceAllowed": false,
+    "automaticProductSelectionAllowed": false,
+    "futureOutcomeGuaranteeAllowed": false,
+    "professionalAuthorityRequiredForRegulatedMatters": true,
+    "publicAmountsPublished": false,
+    "checkoutEnabled": false
+  },
+  "nonAuthority": {
+    "wprCreatesProfessionalJudgment": false,
+    "wprCreatesFinancialCalculation": false,
+    "wprCreatesFinancialRecommendation": false,
+    "wprCreatesRegulatedAdvice": false,
+    "wprCreatesReport": false,
+    "wprCreatesProfessionalPermission": false
+  },
+  "nextWork": "WPR-W23_REPORT_WORKSPACE_PRODUCTION"
+}

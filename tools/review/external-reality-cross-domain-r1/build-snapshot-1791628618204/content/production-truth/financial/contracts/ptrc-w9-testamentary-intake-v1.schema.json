@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-PTRC-W9-TESTAMENTARY-INTAKE-v1.0.0",
+  "title": "PTRC-W9 Testamentary Intake",
+  "type": "object",
+  "required": ["caseId", "clientId", "jurisdiction", "currency", "dataDate", "sections"],
+  "properties": {
+    "caseId": {"type": "string", "minLength": 1},
+    "clientId": {"type": "string", "minLength": 1},
+    "jurisdiction": {"type": "string", "minLength": 2},
+    "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+    "dataDate": {"type": "string", "format": "date"},
+    "dataVersion": {"type": "integer", "minimum": 1},
+    "sections": {
+      "type": "object",
+      "required": ["identity", "family", "executors", "guardians", "beneficiaries", "assets", "liabilities", "trusts", "gifts", "exclusions", "digital_assets", "funeral_wishes", "advisors", "documents", "review_consent"],
+      "additionalProperties": false,
+      "properties": {
+        "identity": {"$ref": "#/$defs/section"}, "family": {"$ref": "#/$defs/section"},
+        "executors": {"$ref": "#/$defs/section"}, "guardians": {"$ref": "#/$defs/section"},
+        "beneficiaries": {"$ref": "#/$defs/section"}, "assets": {"$ref": "#/$defs/section"},
+        "liabilities": {"$ref": "#/$defs/section"}, "trusts": {"$ref": "#/$defs/section"},
+        "gifts": {"$ref": "#/$defs/section"}, "exclusions": {"$ref": "#/$defs/section"},
+        "digital_assets": {"$ref": "#/$defs/section"}, "funeral_wishes": {"$ref": "#/$defs/section"},
+        "advisors": {"$ref": "#/$defs/section"}, "documents": {"$ref": "#/$defs/section"},
+        "review_consent": {"$ref": "#/$defs/section"}
+      }
+    }
+  },
+  "$defs": {
+    "section": {
+      "type": "object",
+      "required": ["status", "items", "sourceReferences"],
+      "properties": {
+        "status": {"enum": ["UNSET", "KNOWN", "PARTIAL", "UNKNOWN", "NOT_APPLICABLE"]},
+        "items": {"type": "array", "items": {"type": "object"}},
+        "sourceReferences": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "conflicts": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "note": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "recordedAt": "2026-10-07T06:05:45.863Z",
+  "observedHead": "0a960c918653b0541040dce4bc8bc2602e9f8570",
+  "commands": [
+    {
+      "command": "npm run check:master-a:v2:a-batch-4",
+      "exitCode": 0,
+      "status": "PASS",
+      "evidence": {
+        "path": "content/knowledge/structured/successors/master-a-v2-batch6/validation-capture-batch4-current-v1.json",
+        "sha256": "5f6a6435b2174bad76c8a8b25ed88d16871ae5306e9e98a015a6ad8588dfc259"
+      }
+    },
+    {
+      "command": "npm run check:master-a:v2:a-batch-5",
+      "exitCode": 0,
+      "status": "PASS",
+      "evidence": {
+        "path": "content/knowledge/structured/successors/master-a-v2-batch6/validation-capture-batch5-current-v1.json",
+        "sha256": "297e30fdf03980729a8c279436c8be7080966dde1957f5f05f0af54f61349982"
+      }
+    },
+    {
+      "command": "npm run check:master-a:v2:a-batch-6",
+      "exitCode": 0,
+      "status": "PASS",
+      "evidence": {
+        "path": "content/knowledge/structured/successors/master-a-v2-batch6/check-results-v1.json",
+        "sha256": "bc7811c95703f994e0c0413505a674967c3e96dd8be132ca1a6e071fe40ca462"
+      }
+    },
+    {
+      "command": "npm run check:kap-current",
+      "exitCode": 0,
+      "status": "PASS",
+      "evidence": {
+        "path": "tools/review/MASTER-A-V2-FINAL-CHECK-KAP-CURRENT.log",
+        "sha256": "98632900ebed21469faef9c17f292810188f40dc9cf69986b7e9a9275ee80b8f"
+      }
+    },
+    {
+      "command": "npm run check:kap-book-vii-production",
+      "exitCode": 0,
+      "status": "PASS",
+      "evidence": {
+        "path": "tools/review/MASTER-A-V2-FINAL-CHECK-KAP-PRODUCTION.log",
+        "sha256": "a28e07b6d3f35941ef92c40e38a23c4d8f382ecf60dafc3beca1aa129d0b93bd"
+      }
+    },
+    {
+      "command": "npm run check:pages-build",
+      "exitCode": 0,
+      "status": "PASS",
+      "evidence": {
+        "path": "tools/review/MASTER-A-V2-FINAL-CHECK-PAGES.log",
+        "sha256": "9757983ad65b7a72647b4c4db44c20149ec2b7bd79e88c5faa4b514ccb43b3ca"
+      }
+    },
+    {
+      "command": "npm run check",
+      "exitCode": 1,
+      "status": "FAIL",
+      "evidence": {
+        "path": "tools/review/MASTER-A-V2-FINAL-FULL-CHECK-UNSANDBOXED.log",
+        "sha256": "27555b020fa05be1a5874acd838c7a869bea88e22e4bccffa3cc0129457df12c"
+      }
+    }
+  ],
+  "fullRepositoryPass": false,
+  "unresolvedGates": [
+    {
+      "classification": "PREEXISTING_PARALLEL_WORK_DEBT",
+      "actualError": "ZERO_COST_COMMAND_MISSING:check:book-i-v3-final-source",
+      "failingCheck": "check:kau-r2",
+      "mappingMissing": "config/reports/zero-cost-check-commands.json",
+      "packageIntroducedBy": "95efab61",
+      "baselineHadAlias": false,
+      "scope": "Parallel Book I v3 work, not MASTER A; not classified as BaZi debt",
+      "repairPerformed": false
+    }
+  ],
+  "scopedChecksPassedBeforeConcurrentBookIAliasChange": true,
+  "doNotAssumeStableHead": true,
+  "legacyRneDebt": "PREEXISTING_PACKAGE_WRAPPER_EXPECTATION_MISMATCH_NOT_MUTATED",
+  "sandboxAttempts": [
+    {
+      "path": "tools/review/MASTER-A-V2-FINAL-FULL-CHECK.log",
+      "exitCode": 1,
+      "reason": "EPERM temporary fixture rename"
+    },
+    {
+      "path": "tools/review/MASTER-A-V2-FINAL-FULL-CHECK-RETRY.log",
+      "exitCode": 1,
+      "reason": "UNKNOWN diagnostic file write"
+    },
+    {
+      "path": "tools/review/MASTER-A-V2-FINAL-FULL-CHECK-CURRENT.log",
+      "exitCode": 1,
+      "reason": "EPERM temporary fixture cleanup"
+    }
+  ],
+  "providerRequests": 0,
+  "paidNetworkGuarded": true,
+  "commit": false,
+  "push": false,
+  "deploy": false
+}

@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/icr/canonical-case-v1.schema.json",
+  "title": "PHI OS ICR Canonical Case Snapshot v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "caseCode",
+    "caseVersion",
+    "caseVersionSequence",
+    "caseType",
+    "caseStatus",
+    "subjectReference",
+    "verifiedInputReferences",
+    "governanceBindings",
+    "rdgLifecycleReferences",
+    "operationalMode",
+    "persistentStoreWriteAllowed",
+    "rmoRealityWriteAllowed",
+    "createdAt",
+    "updatedAt",
+    "lineage",
+    "caseDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CANONICAL-CASE-v1.0.0"},
+    "caseCode": {"$ref": "#/$defs/caseCode"},
+    "caseVersion": {"$ref": "#/$defs/semver"},
+    "caseVersionSequence": {"type": "integer", "minimum": 1},
+    "caseType": {"const": "REALITY_INITIALIZATION"},
+    "caseStatus": {
+      "enum": ["DRAFT", "VERIFICATION_PENDING", "READY_FOR_RMO", "HANDED_OFF_TO_RMO", "CLOSED"]
+    },
+    "subjectReference": {"type": "string", "pattern": "^SUBJECT-[A-Z0-9-]{4,80}$"},
+    "verifiedInputReferences": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/verifiedInputReference"}
+    },
+    "governanceBindings": {"$ref": "#/$defs/governanceBindings"},
+    "rdgLifecycleReferences": {"$ref": "#/$defs/rdgLifecycleReferences"},
+    "operationalMode": {"const": "VALIDATION_ONLY"},
+    "persistentStoreWriteAllowed": {"const": false},
+    "rmoRealityWriteAllowed": {"const": false},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "updatedAt": {"type": "string", "format": "date-time"},
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rootCaseReference",
+        "previousCaseVersion",
+        "previousCaseDigest",
+        "changeType",
+        "changeReferences"
+      ],
+      "properties": {
+        "rootCaseReference": {"$ref": "#/$defs/caseCode"},
+        "previousCaseVersion": {
+          "oneOf": [{"type": "null"}, {"$ref": "#/$defs/semver"}]
+        },
+        "previousCaseDigest": {
+          "oneOf": [{"type": "null"}, {"$ref": "#/$defs/digest"}]
+        },
+        "changeType": {
+          "enum": [
+            "CASE_CREATED",
+            "STATUS_TRANSITION",
+            "VERIFIED_INPUT_ADDED",
+            "VERIFIED_INPUT_REPLACED",
+            "VERIFIED_INPUT_REMOVED",
+            "GOVERNANCE_REBIND",
+            "CASE_CORRECTION"
+          ]
+        },
+        "changeReferences": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "caseDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "caseCode": {"type": "string", "pattern": "^ICR-CASE-[A-Z0-9-]{4,100}$"},
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "verifiedInputReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "verifiedInputCode",
+        "verifiedInputVersion",
+        "verifiedInputDigest",
+        "inputType",
+        "verificationState",
+        "projectionEligibility"
+      ],
+      "properties": {
+        "verifiedInputCode": {"type": "string", "pattern": "^ICR-VERIFIED-[A-Z0-9-]{4,80}$"},
+        "verifiedInputVersion": {"$ref": "#/$defs/semver"},
+        "verifiedInputDigest": {"$ref": "#/$defs/digest"},
+        "inputType": {"type": "string", "minLength": 1},
+        "verificationState": {"const": "VERIFIED"},
+        "projectionEligibility": {"const": "ELIGIBLE"}
+      }
+    },
+    "governanceBindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dataType",
+        "purposeCodes",
+        "consentClass",
+        "consentReference",
+        "persistenceClass",
+        "retentionClass",
+        "sensitivityClass",
+        "deletionState",
+        "rdgAuthorityReference"
+      ],
+      "properties": {
+        "dataType": {"const": "REALITY_INPUT_RECORD"},
+        "purposeCodes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "consentClass": {"type": "string", "minLength": 1},
+        "consentReference": {"type": "string", "minLength": 1},
+        "persistenceClass": {"type": "string", "minLength": 1},
+        "retentionClass": {"type": "string", "minLength": 1},
+        "sensitivityClass": {"type": "string", "minLength": 1},
+        "deletionState": {"type": "string", "minLength": 1},
+        "rdgAuthorityReference": {
+          "const": "content/governance/reality-data-governance/registries/reality-data-registry-v1.json"
+        }
+      }
+    },
+    "rdgLifecycleReferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "rdgAuthorityReference",
+        "persistenceClass",
+        "persistenceDecisionReference",
+        "persistenceRegistryReference",
+        "persistenceEligibilityGateReference",
+        "consentClass",
+        "consentReference",
+        "consentRegistryReference",
+        "retentionClass",
+        "retentionRegistryReference",
+        "deletionState",
+        "deletionRuntimeReference"
+      ],
+      "properties": {
+        "mode": {"const": "RDG_REFERENCE_ONLY"},
+        "rdgAuthorityReference": {
+          "const": "content/governance/reality-data-governance/registries/reality-data-registry-v1.json"
+        },
+        "persistenceClass": {"type": "string", "minLength": 1},
+        "persistenceDecisionReference": {
+          "type": "string",
+          "pattern": "^RDG-PERSISTENCE-DECISION-[A-Z0-9-]{4,100}$"
+        },
+        "persistenceRegistryReference": {
+          "const": "content/governance/reality-data-governance/registries/canonical-persistence-class-registry-v1.json"
+        },
+        "persistenceEligibilityGateReference": {
+          "const": "content/governance/reality-data-governance/contracts/persistence-eligibility-gate-v1.json"
+        },
+        "consentClass": {"type": "string", "minLength": 1},
+        "consentReference": {"type": "string", "minLength": 1},
+        "consentRegistryReference": {
+          "const": "content/governance/reality-data-governance/registries/canonical-consent-class-registry-v1.json"
+        },
+        "retentionClass": {"type": "string", "minLength": 1},
+        "retentionRegistryReference": {
+          "const": "content/governance/reality-data-governance/registries/canonical-data-retention-registry-v1.json"
+        },
+        "deletionState": {"type": "string", "minLength": 1},
+        "deletionRuntimeReference": {
+          "const": "content/governance/reality-data-governance/contracts/deletion-tombstone-runtime-v1.json"
+        }
+      }
+    }
+  }
+}

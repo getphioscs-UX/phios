@@ -1,0 +1,67 @@
+{
+  "contract": "PHI-OS-KNOWLEDGE-BLUEPRINT-FREEZE-v2.0.0",
+  "contractVersion": "PHI-OS-BOOK-W1D-KNOWLEDGE-BLUEPRINT-FREEZE-v1.0.0",
+  "status": "frozen-book-w1d-human-approved-successor",
+  "registryManifestPath": "content/knowledge/blueprints/blueprint-registry.json",
+  "registryManifestSHA": "e234261da01a06a6098dfdbcc1319fe7f9fc5e63224e7c1c01d3eb18e2d20941",
+  "migrationRecord": [
+    "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-active-v1.json",
+    "content/knowledge/migrations/book-w1d/book-w1d-human-acceptance-v1.json"
+  ],
+  "supersedes": {
+    "path": "content/knowledge/blueprints/knowledge-blueprint-freeze-v2.json",
+    "historicalAuthorityMutationAllowed": false
+  },
+  "humanAcceptance": {
+    "path": "content/knowledge/migrations/book-w1d/book-w1d-human-acceptance-v1.json",
+    "actor": "TL",
+    "decision": "ACCEPT"
+  },
+  "bookFreeze": [
+    {
+      "bookCode": "BOOK-1",
+      "blueprintPath": "content/knowledge/blueprints/book-1-knowledge-blueprint.json",
+      "blueprintSHA": "c0b76c15b40ecd4daf7249d67ff14b0a500a7111e078adb25ab8d83e26b46ae3",
+      "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-v2.0.0",
+      "contractVersion": "PHI-OS-BOOK-1-KNOWLEDGE-BLUEPRINT-v2.0.0",
+      "status": "planning-freeze"
+    },
+    {
+      "bookCode": "BOOK-2",
+      "blueprintPath": "content/knowledge/blueprints/successors/book-w1d/book-2-knowledge-blueprint-v4.json",
+      "blueprintSHA": "e90c0720444db76b5a34f59759142f684479028e6d42641a7104347966e6495d",
+      "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-v2.0.0",
+      "contractVersion": "PHI-OS-BOOK-2-KNOWLEDGE-BLUEPRINT-v4.0.0",
+      "status": "book-w1d-human-approved-active-successor"
+    },
+    {
+      "bookCode": "BOOK-3",
+      "blueprintPath": "content/knowledge/blueprints/successors/book-w1d/book-3-knowledge-blueprint-v2.json",
+      "blueprintSHA": "00232d7c2b6d9fb6fad7fc43f58dfb07adb4b00cd3d863867bfb6c03e51a7eac",
+      "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-v2.0.0",
+      "contractVersion": "PHI-OS-BOOK-3-KNOWLEDGE-BLUEPRINT-v2.0.0",
+      "status": "book-w1d-human-approved-active-successor"
+    },
+    {
+      "bookCode": "BOOK-4",
+      "blueprintPath": "content/knowledge/blueprints/successors/book-w1d/book-4-knowledge-blueprint-v4.json",
+      "blueprintSHA": "c3c9253f4eb3e6bf764fab5ad0c18fbb8cf17e3c312e02d4dd14bf3358aa93c0",
+      "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-v2.0.0",
+      "contractVersion": "PHI-OS-BOOK-4-KNOWLEDGE-BLUEPRINT-v4.0.0",
+      "status": "book-w1d-human-approved-active-successor"
+    },
+    {
+      "bookCode": "BOOK-5",
+      "blueprintPath": "content/knowledge/blueprints/successors/book-w1d/book-5-knowledge-blueprint-v2.json",
+      "blueprintSHA": "a0cd78865aaf46f67e1ff0b46687b416acac3ff45d695f73bf8eb95cd6a14d4c",
+      "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-v2.0.0",
+      "contractVersion": "PHI-OS-BOOK-5-KNOWLEDGE-BLUEPRINT-v2.0.0",
+      "status": "book-w1d-human-approved-active-successor"
+    }
+  ],
+  "updatePolicy": {
+    "automaticCheckerUpdateAllowed": false,
+    "explicitCommandRequired": "BOOK-W1D-HUMAN-ACCEPTANCE",
+    "independentBookDigestRequired": true
+  }
+}

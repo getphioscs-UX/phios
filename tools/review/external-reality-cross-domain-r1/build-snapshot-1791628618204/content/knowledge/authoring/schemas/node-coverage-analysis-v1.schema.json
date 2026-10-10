@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "KAU Node Coverage Analysis v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "nodeCode",
+    "coverageStatus",
+    "dimensions",
+    "evidence",
+    "authorityMode"
+  ],
+  "properties": {
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-"
+    },
+    "coverageStatus": {
+      "enum": [
+        "complete",
+        "partial",
+        "thin",
+        "conflicted",
+        "missing"
+      ]
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceCoverage",
+        "definitionCoverage",
+        "mechanismCoverage",
+        "boundaryCoverage",
+        "failureCoverage",
+        "exampleCoverage",
+        "crossReferenceCoverage",
+        "localeCoverage"
+      ],
+      "properties": {
+        "sourceCoverage": {
+          "enum": [
+            "complete",
+            "partial",
+            "thin",
+            "conflicted",
+            "missing"
+          ]
+        },
+        "definitionCoverage": {
+          "enum": [
+            "complete",
+            "partial",
+            "thin",
+            "conflicted",
+            "missing"
+          ]
+        },
+        "mechanismCoverage": {
+          "enum": [
+            "complete",
+            "partial",
+            "thin",
+            "conflicted",
+            "missing"
+          ]
+        },
+        "boundaryCoverage": {
+          "enum": [
+            "complete",
+            "partial",
+            "thin",
+            "conflicted",
+            "missing"
+          ]
+        },
+        "failureCoverage": {
+          "enum": [
+            "complete",
+            "partial",
+            "thin",
+            "conflicted",
+            "missing"
+          ]
+        },
+        "exampleCoverage": {
+          "enum": [
+            "complete",
+            "partial",
+            "thin",
+            "conflicted",
+            "missing"
+          ]
+        },
+        "crossReferenceCoverage": {
+          "enum": [
+            "complete",
+            "partial",
+            "thin",
+            "conflicted",
+            "missing"
+          ]
+        },
+        "localeCoverage": {
+          "enum": [
+            "complete",
+            "partial",
+            "thin",
+            "conflicted",
+            "missing"
+          ]
+        }
+      }
+    },
+    "evidence": {
+      "type": "object"
+    },
+    "authorityMode": {
+      "const": "analysis_only"
+    }
+  }
+}

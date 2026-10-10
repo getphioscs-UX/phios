@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-VI-ATLAS-DATA-LOADER-SUCCESSOR-v3.0.0",
+  "work": "BOOK-VI-ATLAS-DATA-LOADER-SUCCESSOR-V3",
+  "baselineCommit": "6d36e138af926b998698f4898395704311d9f6b8",
+  "status": "ACTIVE_VERSIONED_SUCCESSOR",
+  "predecessor": "content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-data-loader-successor-v2.json",
+  "change": {
+    "path": "assets/js/pages/civilization-atlas/atlas-data.js",
+    "previousSha256": "1e31f8f322c6c766df3395e648ec307f34162df515972730b33ba5b546902601",
+    "successorSha256": "5578cc7bc5f1d1d29e54c867f66540b445df8d25093cf127d1f1062c2553301c",
+    "changeClass": "NEW_ATLAS_RELEASE_SUCCESSOR"
+  },
+  "reason": "B6-WEB-E extended the existing shared Book VI Atlas data loader with governed visual-status and approved-visual-binding loaders. Book V theory, registries and loader behavior remain preserved.",
+  "addedBookVILoaders": [
+    {
+      "export": "loadReconfigurationVisualStatus",
+      "path": "/content/civilization-atlas/reconfiguration/book-vi-visual-asset-status-v1.json"
+    },
+    {
+      "export": "loadCivilizationVisualBindings",
+      "path": "/content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json"
+    }
+  ],
+  "governanceEvidence": [
+    "scripts/check-b6-web-e.mjs",
+    "content/civilization-atlas/reconfiguration/book-vi-visual-asset-status-v1.json",
+    "content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json"
+  ],
+  "scope": {
+    "bookVCanonicalTheoryChanged": false,
+    "bookVHistoricalRegistriesChanged": false,
+    "bookVLoaderFunctionsRemovedOrRewritten": false,
+    "bookVIReconfigurationLoadersAdded": true,
+    "parallelAtlasRuntimeCreated": false,
+    "parallelAskRuntimeCreated": false,
+    "productionAdmissionChanged": false
+  },
+  "boundary": "This v3 successor extends the local v2 successor chain. Do not rewrite Book V freeze, v1 or v2 history."
+}

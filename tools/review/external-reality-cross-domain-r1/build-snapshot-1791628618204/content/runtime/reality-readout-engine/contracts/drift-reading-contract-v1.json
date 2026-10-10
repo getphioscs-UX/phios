@@ -1,0 +1,26 @@
+{
+  "contractCode": "PHI-OS-RRE-W8-DRIFT-READING-v1",
+  "contractVersion": "1.0.0",
+  "work": "RRE-W8",
+  "runtimeCode": "RRE",
+  "status": "validation_only",
+  "productionStatus": "validation_only",
+  "schemaReference": "content/runtime/reality-readout-engine/schemas/drift-reading-v1.schema.json",
+  "registryReference": "content/runtime/reality-readout-engine/registries/canonical-drift-reading-registry-v1.json",
+  "rmoAuthorityReference": "content/runtime/reality-model-runtime/contracts/reality-diff-contract-v1.json",
+  "outputs": [
+    "direction",
+    "magnitudeClass",
+    "domains",
+    "persistence",
+    "uncertainty"
+  ],
+  "rules": {
+    "consumeExistingRmoRealityDiff": true,
+    "recomputeRealityDiff": false,
+    "noPreviousRealityIsExplicitState": true,
+    "magnitudeIsStructuralCoverageClassNotMetric": true,
+    "causalityClaimed": false,
+    "persistentStoreActivated": false
+  }
+}

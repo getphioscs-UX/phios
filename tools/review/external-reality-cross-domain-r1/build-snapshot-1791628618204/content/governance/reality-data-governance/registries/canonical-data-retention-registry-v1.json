@@ -1,0 +1,24 @@
+{
+  "registryCode": "PHI-OS-RDG-W29-CANONICAL-DATA-RETENTION-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RDG-W29",
+  "status": "canonical",
+  "runtimeContractAuthority": "content/governance/reality-data-governance/contracts/retention-runtime-contract-v1.json",
+  "entries": [
+    {"retentionClass": "SESSION_END", "allowedPersistenceClasses": ["EPHEMERAL", "SESSION"], "expiryBehavior": "DELETE"},
+    {"retentionClass": "RECOVERY_WINDOW", "allowedPersistenceClasses": ["RECOVERY"], "expiryBehavior": "DELETE"},
+    {"retentionClass": "PURPOSE_BOUND_RUNTIME", "allowedPersistenceClasses": ["RUNTIME"], "expiryBehavior": "REVIEW_REQUIRED"},
+    {"retentionClass": "ACCOUNT_LIFECYCLE", "allowedPersistenceClasses": ["ACCOUNT"], "expiryBehavior": "REVIEW_REQUIRED"},
+    {"retentionClass": "SERVICE_LIFECYCLE", "allowedPersistenceClasses": ["SERVICE_SCOPED"], "expiryBehavior": "DELETE"},
+    {"retentionClass": "PROFESSIONAL_OBLIGATION", "allowedPersistenceClasses": ["PROFESSIONAL_SCOPED"], "expiryBehavior": "REVIEW_REQUIRED"},
+    {"retentionClass": "EXPLICIT_LONG_TERM_MEMORY", "allowedPersistenceClasses": ["LONG_TERM_MEMORY"], "expiryBehavior": "DELETE"},
+    {"retentionClass": "GOVERNED_ANONYMIZED_AGGREGATE", "allowedPersistenceClasses": ["ANONYMIZED_AGGREGATE"], "expiryBehavior": "ANONYMIZE"}
+  ],
+  "rules": {
+    "entryIsPolicyClassNotDurationDecision": true,
+    "concreteDurationRequiredByRuntimeContract": true,
+    "retentionMustRemainPurposeBound": true,
+    "silentIndefiniteRetentionForbidden": true,
+    "legalHoldRequiresExplicitOverride": true
+  }
+}

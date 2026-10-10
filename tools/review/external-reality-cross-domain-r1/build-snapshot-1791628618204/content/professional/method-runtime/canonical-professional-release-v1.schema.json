@@ -1,0 +1,280 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-professional-release-v1.schema.json",
+  "title": "PHI OS Canonical Professional Release v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runtimeCode",
+    "runtimeVersion",
+    "releaseCode",
+    "releaseVersion",
+    "releaseStatus",
+    "methodReference",
+    "interpretationCandidateReference",
+    "professionalReview",
+    "boundaryValidation",
+    "deliverable",
+    "professionalSignature",
+    "release",
+    "auditTrail",
+    "professionalReviewCompleted",
+    "boundaryValidationCompleted",
+    "deliverableAssemblyCompleted",
+    "professionalSignatureCompleted",
+    "released"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-CANONICAL-PROFESSIONAL-RELEASE-v1.0.0"
+    },
+    "runtimeCode": {
+      "const": "SHARED_PROFESSIONAL_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "releaseCode": {
+      "type": "string",
+      "pattern": "^PRO-[A-F0-9]{24}$"
+    },
+    "releaseVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "releaseStatus": {
+      "const": "released"
+    },
+    "methodReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodCode",
+        "pluginCode"
+      ],
+      "properties": {
+        "methodCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pluginCode": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "interpretationCandidateReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtimeCode",
+        "candidateCode",
+        "candidateVersion"
+      ],
+      "properties": {
+        "runtimeCode": {
+          "const": "SHARED_INTERPRETATION_RUNTIME"
+        },
+        "candidateCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candidateVersion": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "professionalReview": {
+      "type": "object"
+    },
+    "boundaryValidation": {
+      "type": "object"
+    },
+    "deliverable": {
+      "type": "object"
+    },
+    "professionalSignature": {
+      "type": "object"
+    },
+    "release": {
+      "type": "object"
+    },
+    "auditTrail": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/reviewAudit"
+        },
+        {
+          "$ref": "#/$defs/boundaryAudit"
+        },
+        {
+          "$ref": "#/$defs/assemblyAudit"
+        },
+        {
+          "$ref": "#/$defs/signatureAudit"
+        },
+        {
+          "$ref": "#/$defs/releaseAudit"
+        }
+      ],
+      "items": false
+    },
+    "professionalReviewCompleted": {
+      "const": true
+    },
+    "boundaryValidationCompleted": {
+      "const": true
+    },
+    "deliverableAssemblyCompleted": {
+      "const": true
+    },
+    "professionalSignatureCompleted": {
+      "const": true
+    },
+    "released": {
+      "const": true
+    }
+  },
+  "$defs": {
+    "reviewAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage",
+        "adapterCode",
+        "adapterVersion",
+        "resultDigest"
+      ],
+      "properties": {
+        "stage": {
+          "const": "PROFESSIONAL_REVIEW"
+        },
+        "adapterCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "adapterVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resultDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "boundaryAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage",
+        "adapterCode",
+        "adapterVersion",
+        "resultDigest"
+      ],
+      "properties": {
+        "stage": {
+          "const": "BOUNDARY_VALIDATION"
+        },
+        "adapterCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "adapterVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resultDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "assemblyAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage",
+        "adapterCode",
+        "adapterVersion",
+        "resultDigest"
+      ],
+      "properties": {
+        "stage": {
+          "const": "DELIVERABLE_ASSEMBLY"
+        },
+        "adapterCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "adapterVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resultDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "signatureAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage",
+        "adapterCode",
+        "adapterVersion",
+        "resultDigest"
+      ],
+      "properties": {
+        "stage": {
+          "const": "PROFESSIONAL_SIGNATURE"
+        },
+        "adapterCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "adapterVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resultDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "releaseAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage",
+        "adapterCode",
+        "adapterVersion",
+        "resultDigest"
+      ],
+      "properties": {
+        "stage": {
+          "const": "RELEASE"
+        },
+        "adapterCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "adapterVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resultDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    }
+  }
+}

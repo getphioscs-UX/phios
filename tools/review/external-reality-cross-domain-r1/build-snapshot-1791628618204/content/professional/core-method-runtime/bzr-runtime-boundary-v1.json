@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "PHI-OS-BZR-RUNTIME-BOUNDARY-v1.0.0",
+  "stageCode": "BZR-W0",
+  "methodCode": "BAZI",
+  "pluginCode": "BZR",
+  "inputBoundary": {
+    "requiredForFourPillars": [
+      "birthDate",
+      "birthTime",
+      "birthLocation",
+      "timezone"
+    ],
+    "requiredForThreePillars": [
+      "birthDate",
+      "birthLocation",
+      "timezone"
+    ],
+    "conditional": [
+      "dstResolution",
+      "coordinateResolution",
+      "birthTimePrecision",
+      "traditionalCalculationSex"
+    ],
+    "traditionalCalculationSexRequiredOnlyFor": [
+      "luck_cycle_direction"
+    ],
+    "traditionalCalculationSexProhibitedFor": [
+      "identity_inference",
+      "personality_claim",
+      "relationship_role_claim",
+      "general_profile_claim"
+    ],
+    "unknownBirthTimePolicy": "three_pillars_only_hour_unresolved",
+    "fabricatedBirthTimeAllowed": false,
+    "fabricatedHourPillarAllowed": false,
+    "consentRequired": true
+  },
+  "calculationBoundary": {
+    "orderedStages": [
+      "CIVIL_TIME_NORMALIZATION",
+      "TIMEZONE_AND_DST_RESOLUTION",
+      "TRUE_SOLAR_TIME",
+      "SOLAR_TERM_CONTEXT",
+      "SOLAR_CALENDAR",
+      "FOUR_PILLARS",
+      "LUCK_CYCLE"
+    ],
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "deterministicRequired": true,
+    "sharedCalculationRuntimeRequired": true
+  },
+  "calendarBoundary": {
+    "yearBoundary": "exact_li_chun_instant",
+    "monthBoundary": "exact_twelve_jie_instants",
+    "dayBoundaryTimeBasis": "true_solar_time",
+    "dayBoundaryLocalTime": "00:00",
+    "fixedGregorianMonthBoundaryAllowed": false,
+    "fixedCalendarDateLiChunAllowed": false,
+    "civilTimeSubstitutionForTrueSolarTimeAllowed": false
+  },
+  "projectionBoundary": {
+    "canonicalTypes": [
+      "STEM",
+      "BRANCH",
+      "PILLAR",
+      "LUCK_CYCLE"
+    ],
+    "sharedProjectionRuntimeRequired": true,
+    "localProjectionSchemaAllowed": false,
+    "interpretationCreated": false,
+    "knowledgeCreated": false,
+    "realityConclusionCreated": false
+  },
+  "professionalBoundary": {
+    "integrationStage": "BZR-W5",
+    "sharedProfessionalRuntimeRequired": true,
+    "automaticProfessionalConclusionAllowed": false,
+    "medicalDiagnosisAllowed": false,
+    "legalDecisionAllowed": false,
+    "financialDecisionAllowed": false,
+    "identityFactClaimAllowed": false
+  },
+  "stageOwnership": {
+    "BZR-W1": [
+      "timezoneResolution",
+      "dstResolution",
+      "trueSolarTime",
+      "solarTermContext",
+      "liChunBoundary",
+      "twelveJieBoundaries"
+    ],
+    "BZR-W2": [
+      "yearPillar",
+      "monthPillar",
+      "dayPillar",
+      "hourPillar",
+      "threePillarFallback"
+    ],
+    "BZR-W3": [
+      "luckDirection",
+      "luckStart",
+      "luckCycleSequence"
+    ],
+    "BZR-W4": [
+      "canonicalProjection"
+    ],
+    "BZR-W5": [
+      "professionalIntegration"
+    ],
+    "BZR-W6": [
+      "productionFreeze"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4B-EXTERNAL-PROFILE-AUTHORITY-v1.0.0",
+  "work": "CX-R12R4B-W11R",
+  "baselineCommit": "a9556d446cb289787fceea611341d7dd67de5dcf",
+  "status": "EXTERNAL_PROFILE_AUTHORITY_ACTIVE",
+  "methodId": "XPF",
+  "methodCode": "EXTERNAL_PROFILE",
+  "profileFamily": "HUMAN_DESIGN",
+  "authorityClass": "CUSTOMER_SUPPLIED_EXTERNAL_CONTEXT",
+  "authority": {
+    "phiosCalculated": false,
+    "canonicalMethodProjection": false,
+    "customerEditable": true,
+    "customerConfirmationRequiredForExtractedValues": true,
+    "customerReportEligibleAfterConfirmation": true,
+    "crossPerspectiveContextEligibleAfterConfirmation": true,
+    "calculatedMethodConsensusEligible": false,
+    "meaningAuthority": "EXTERNAL_OR_CUSTOMER_SUPPLIED",
+    "productionUse": "CONTEXT_ONLY"
+  },
+  "allowedIngress": [
+    "CUSTOMER_UPLOADED_DOCUMENT",
+    "CUSTOMER_UPLOADED_IMAGE",
+    "CUSTOMER_PASTED_TEXT",
+    "CUSTOMER_MANUAL_ADVANCED_FIELDS"
+  ],
+  "manualAdvancedFields": [
+    "cognition",
+    "determination",
+    "environment",
+    "perspective",
+    "motivation",
+    "trajectory"
+  ],
+  "boundaries": {
+    "uploadDoesNotBecomeCalculationAuthority": true,
+    "machineExtractionDoesNotBecomeCustomerAuthorityBeforeConfirmation": true,
+    "hdrShadowMayValidateButMayNotOverwriteCustomerInput": true,
+    "externalProfileDoesNotCreateCanonicalHumanDesignMeaning": true,
+    "rendererCreatesMeaning": false,
+    "aiCreatesMeaning": false,
+    "automaticPersistence": false
+  },
+  "predecessor": "CX-R12R4B-W09 HDR definitive repository audit",
+  "decision": "FORK_CUSTOMER_SUPPLIED_EXTERNAL_PROFILE_FROM_RESTRICTED_HDR_PRODUCTION"
+}

@@ -1,0 +1,541 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/legal/will/will-intake-v1.schema.json",
+  "title": "PHI OS Will Intake v1",
+  "description": "Structured intake only. Validation does not establish legal sufficiency, ownership, distributability, or validity.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "persons",
+    "testator",
+    "jurisdiction",
+    "domicile",
+    "executors",
+    "substituteExecutors",
+    "guardians",
+    "substituteGuardians",
+    "beneficiaries",
+    "properties",
+    "businessInterests",
+    "bankAssets",
+    "investments",
+    "insurance",
+    "epf",
+    "prs",
+    "vehicles",
+    "jewellery",
+    "digitalAssets",
+    "otherAssets",
+    "specificGifts",
+    "residuaryDistribution",
+    "trustInstructions",
+    "digitalAssetInstructions",
+    "language",
+    "translatorRequired"
+  ],
+  "properties": {
+    "persons": {
+      "type": "array",
+      "items": {
+        "$ref": "../../../document-assembly/contracts/person-role-contract-v1.json"
+      }
+    },
+    "testator": {
+      "type": "string",
+      "minLength": 1
+    },
+    "jurisdiction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domicile": {
+      "type": "string",
+      "minLength": 1
+    },
+    "executors": {
+      "$ref": "#/$defs/personIdList"
+    },
+    "substituteExecutors": {
+      "$ref": "#/$defs/personIdList"
+    },
+    "guardians": {
+      "$ref": "#/$defs/personIdList"
+    },
+    "substituteGuardians": {
+      "$ref": "#/$defs/personIdList"
+    },
+    "beneficiaries": {
+      "$ref": "#/$defs/personIdList"
+    },
+    "witnesses": {
+      "$ref": "#/$defs/personIdList"
+    },
+    "digitalFacilitators": {
+      "$ref": "#/$defs/personIdList"
+    },
+    "translators": {
+      "$ref": "#/$defs/personIdList"
+    },
+    "properties": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/asset"
+          },
+          {
+            "properties": {
+              "assetType": {
+                "enum": [
+                  "IMMOVABLE_PROPERTY"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "businessInterests": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/asset"
+          },
+          {
+            "properties": {
+              "assetType": {
+                "enum": [
+                  "PRIVATE_COMPANY",
+                  "PARTNERSHIP",
+                  "SOLE_PROPRIETORSHIP"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "bankAssets": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/asset"
+          },
+          {
+            "properties": {
+              "assetType": {
+                "enum": [
+                  "BANK_ACCOUNT"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "investments": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/asset"
+          },
+          {
+            "properties": {
+              "assetType": {
+                "enum": [
+                  "UNIT_TRUST",
+                  "LISTED_SECURITY"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "insurance": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/asset"
+          },
+          {
+            "properties": {
+              "assetType": {
+                "enum": [
+                  "INSURANCE"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "epf": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/asset"
+          },
+          {
+            "properties": {
+              "assetType": {
+                "enum": [
+                  "EPF"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "prs": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/asset"
+          },
+          {
+            "properties": {
+              "assetType": {
+                "enum": [
+                  "PRS"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "vehicles": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/asset"
+          },
+          {
+            "properties": {
+              "assetType": {
+                "enum": [
+                  "VEHICLE"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "jewellery": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/asset"
+          },
+          {
+            "properties": {
+              "assetType": {
+                "enum": [
+                  "JEWELLERY"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "digitalAssets": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/asset"
+          },
+          {
+            "properties": {
+              "assetType": {
+                "enum": [
+                  "DIGITAL_ASSET",
+                  "INTELLECTUAL_PROPERTY",
+                  "DOMAIN_NAME",
+                  "ONLINE_ACCOUNT",
+                  "CRYPTO_ASSET"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "otherAssets": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/asset"
+          },
+          {
+            "properties": {
+              "assetType": {
+                "enum": [
+                  "SAFE_DEPOSIT",
+                  "OTHER"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "specificGifts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/distribution"
+      }
+    },
+    "residuaryDistribution": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/residueShare"
+      }
+    },
+    "trustInstructions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/structuredInstruction"
+      }
+    },
+    "digitalAssetInstructions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/structuredInstruction"
+      }
+    },
+    "language": {
+      "type": "string",
+      "minLength": 1
+    },
+    "translatorRequired": {
+      "type": "boolean"
+    },
+    "customClauseRequested": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "$defs": {
+    "personIdList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assetId",
+        "assetType",
+        "description"
+      ],
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assetType": {
+          "enum": [
+            "IMMOVABLE_PROPERTY",
+            "BANK_ACCOUNT",
+            "UNIT_TRUST",
+            "LISTED_SECURITY",
+            "PRIVATE_COMPANY",
+            "PARTNERSHIP",
+            "SOLE_PROPRIETORSHIP",
+            "EPF",
+            "INSURANCE",
+            "PRS",
+            "VEHICLE",
+            "JEWELLERY",
+            "SAFE_DEPOSIT",
+            "DIGITAL_ASSET",
+            "INTELLECTUAL_PROPERTY",
+            "DOMAIN_NAME",
+            "ONLINE_ACCOUNT",
+            "CRYPTO_ASSET",
+            "OTHER"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ownershipStatement": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "referenceLast4": {
+          "type": "string",
+          "maxLength": 4
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "share": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "beneficiaryPersonId",
+        "percentage"
+      ],
+      "properties": {
+        "beneficiaryPersonId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "percentage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "distribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "distributionId",
+        "distributionType",
+        "beneficiaryPersonIds",
+        "sourceConfirmation"
+      ],
+      "properties": {
+        "distributionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "distributionType": {
+          "enum": [
+            "SPECIFIC_GIFT",
+            "PERCENTAGE_GIFT",
+            "EQUAL_SHARE_GIFT",
+            "RESIDUE_SHARE",
+            "SUBSTITUTE_BENEFICIARY",
+            "PER_ASSET_DISTRIBUTION",
+            "CLASS_DISTRIBUTION",
+            "SURVIVORSHIP_CONDITION",
+            "AGE_CONDITION",
+            "TRUST_CONDITION"
+          ]
+        },
+        "assetId": {
+          "type": "string"
+        },
+        "beneficiaryPersonIds": {
+          "$ref": "#/$defs/personIdList"
+        },
+        "percentageShares": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/share"
+          }
+        },
+        "substituteBeneficiaryPersonIds": {
+          "$ref": "#/$defs/personIdList"
+        },
+        "classDefinition": {
+          "type": "string"
+        },
+        "survivorshipCondition": {
+          "type": "string"
+        },
+        "ageCondition": {
+          "type": "string"
+        },
+        "trustCondition": {
+          "type": "string"
+        },
+        "sourceConfirmation": {
+          "type": "boolean"
+        }
+      }
+    },
+    "residueShare": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "beneficiaryPersonId",
+        "percentage"
+      ],
+      "properties": {
+        "beneficiaryPersonId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "percentage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "substituteBeneficiaryPersonId": {
+          "type": "string"
+        },
+        "survivorshipCondition": {
+          "type": "string"
+        },
+        "ageCondition": {
+          "type": "string"
+        },
+        "trustCondition": {
+          "type": "string"
+        }
+      }
+    },
+    "structuredInstruction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "instructionId",
+        "instructionType",
+        "textProvidedByCustomer"
+      ],
+      "properties": {
+        "instructionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "instructionType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "textProvidedByCustomer": {
+          "type": "string"
+        },
+        "requiresLegalReview": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    }
+  },
+  "x-phi-os": {
+    "work": "DAR-W3",
+    "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+    "canonicalPersonAuthority": "../../../document-assembly/contracts/person-role-contract-v1.json",
+    "legacyPresentationCodesAreNotDomainFields": true,
+    "missingDataMayNotBeSilentlyReplaced": true,
+    "schemaValidationIsNotLegalReview": true
+  }
+}

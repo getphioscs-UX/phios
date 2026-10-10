@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "PHI-OS-BFA-PROGRESSION-V2-DEFER-SUCCESSOR-FREEZE-v1.0.0",
+  "work": "BFA-PROG-v2.1-EXPLICIT-DEFER",
+  "baselineCommit": "4ca882d95f27b262bc21693a65eeff436a408905",
+  "status": "FROZEN_ADDITIVE_BFA_PROGRESSION_V2_DEFER_SUCCESSOR",
+  "predecessorFreeze": "content/production/bilingual-final-approval/progression-v2/freeze/bfa-progression-v2-capability-successor-freeze-v1.json",
+  "reconciledPredecessorFiles": {
+    "scripts/lib/bilingual-final-approval/bfa-progression-v2.mjs": {
+      "predecessorSha256": "80953cc58596ff58a47f7802c4d01fa6206c6a899a4a89cba19c8702c8d907f6",
+      "successorSha256": "c4da3a4040038ea5795bd89d59b54b9ff71eccbdac8833716bda096bfef38ab9",
+      "reason": "BFA-PROG v2.1 explicit Human DEFER lifecycle plus stable createdAt reuse for idempotent reruns of the same resolved progress window."
+    },
+    "scripts/apply-bfa-prog-c2-decisions.mjs": {
+      "predecessorSha256": "dc3c8fa8b67d80c3d5680b0a77cc9713003e0b0f3a8df1d34590971b764b3978",
+      "successorSha256": "8a0e95502578bcef1555a5bd4bd44b835fe7e4c98e823df32d559d9eb405b21e",
+      "reason": "BFA-PROG v2.1 explicit Human DEFER lifecycle: defer resolves the current progress cursor but never becomes C2/Candidate/publication authority."
+    },
+    "scripts/check-bfa-progression-v2.mjs": {
+      "predecessorSha256": "75d5c52306600a58a2c7892d5508c844912f83b9c51feedda7ede2e06ea17bb7",
+      "successorSha256": "02d79f59bb482f3f6c70d4611b8f936eab7379f69dfdce8e9526578b05204109",
+      "reason": "BFA-PROG v2.1 explicit Human DEFER lifecycle: defer resolves the current progress cursor but never becomes C2/Candidate/publication authority."
+    }
+  },
+  "files": {
+    "scripts/lib/bilingual-final-approval/bfa-progression-v2.mjs": "c4da3a4040038ea5795bd89d59b54b9ff71eccbdac8833716bda096bfef38ab9",
+    "scripts/apply-bfa-prog-c2-decisions.mjs": "8a0e95502578bcef1555a5bd4bd44b835fe7e4c98e823df32d559d9eb405b21e",
+    "scripts/check-bfa-progression-v2.mjs": "02d79f59bb482f3f6c70d4611b8f936eab7379f69dfdce8e9526578b05204109",
+    "scripts/check-bfa-batch3-preflight.mjs": "a7e654937d5f3ac0ce2c8d508a73ae4f92a257e766ba655648538bfa5ca3d6fa",
+    "scripts/generate-bfa-prog-batch3-candidates.mjs": "6f46d244bf39541501c194c34662af541429c9933b8f2ab4b6e0a7f7b1932304",
+    "content/production/bilingual-final-approval/progression-v2/contracts/bfa-prog-v2-explicit-defer-contract-v1.json": "e0a6fdf2bdd23f244151e06b01d50d0508ca070f8d7f8fea2dd3f414efdcc32d"
+  },
+  "notFrozen": [
+    "specific BATCH-003 Candidate prose",
+    "specific BATCH-003 BFA Final Approval decisions",
+    "specific BATCH-003 publication outcomes"
+  ],
+  "invariants": [
+    "DEFER_NEVER_EQUALS_FREEZE_APPROVAL",
+    "DEFER_NEVER_CREATES_CANDIDATE",
+    "DEFER_NEVER_CREATES_PUBLICATION_AUTHORITY",
+    "RESOLVED_24_NODE_WINDOW_MAY_HAVE_FEWER_THAN_24_ARTICLES_AFTER_EXPLICIT_HUMAN_DEFER",
+    "SAME_BATCH_REFILL_IS_NOT_REQUIRED_AFTER_EXPLICIT_HUMAN_DEFER",
+    "SAME_RESOLVED_WINDOW_RERUN_REUSES_IDENTICAL_BATCH_DIGEST"
+  ]
+}

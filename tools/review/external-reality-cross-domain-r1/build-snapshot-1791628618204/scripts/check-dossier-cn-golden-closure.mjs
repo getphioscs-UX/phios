@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const s=read('content/civilization-atlas/reconfiguration/dossier-cn-golden-closure-status-v1.json');
+assert.equal(s.dossierId,'DOSSIER-CN');
+assert.equal(s.boundaries.canonicalPositionAutoAdmission,false);
+assert.equal(s.boundaries.dossierAutoProjection,false);
+assert.equal(s.boundaries.usPositionReuseAllowed,false);
+assert.equal(s.boundaries.semanticBasisMustBeCNLineaged,true);
+assert.deepEqual(s.boundaries.humanReviewRequiredAt,['W8-F','W8-H']);
+console.log('PASS DOSSIER-CN golden closure governance: CN must derive from its own evidence lineage; US position reuse and automatic admission are prohibited.');

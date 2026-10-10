@@ -1,0 +1,56 @@
+{
+  "contractCode": "PHI-OS-WPR-W27-PDS-RESPONSIVE-ACCESSIBILITY-INTEGRATION-v1",
+  "contractVersion": "1.0.0",
+  "work": "WPR-W27",
+  "baselineCommit": "d150a741231abe608a0d994e9e5787e6c71cfc3d",
+  "status": "ACTIVE_PDS_AUTHORITY_PRESERVED_PRODUCTION_REVALIDATION_REQUIRED",
+  "authorities": {
+    "breakpoints": "content/registry/pds-w2-design-token-contract.json",
+    "componentShell": "content/registry/pds-w3-core-component-shell-contract.json",
+    "fullSiteAcceptance": "content/registry/pds-w10-full-site-acceptance.json",
+    "cprResponsive": "content/professional/canonical-presentation-runtime/contracts/cpr-responsive-presentation-runtime-v1.json",
+    "cprAccessibility": "content/professional/canonical-presentation-runtime/contracts/cpr-accessibility-presentation-runtime-v1.json"
+  },
+  "responsiveModeMapping": {
+    "COMPACT": {
+      "pdsViewportEvidencePx": 360,
+      "pdsBreakpoint": "compactMax"
+    },
+    "STANDARD": {
+      "pdsViewportEvidencePx": 768,
+      "pdsBreakpoint": "contentMin"
+    },
+    "EXPANDED": {
+      "pdsViewportEvidencePx": 1440,
+      "pdsBreakpoint": "wideMin"
+    },
+    "PRINT_FIXED": {
+      "pdsMode": "PRINT"
+    }
+  },
+  "accessibilityRequirements": [
+    "ALT_TEXT",
+    "CAPTION",
+    "TRANSCRIPT_WHEN_REQUIRED",
+    "READING_ORDER",
+    "KEYBOARD_NAVIGATION",
+    "FOCUS_VISIBILITY",
+    "CONTRAST_REFERENCE"
+  ],
+  "rules": {
+    "wprCreatesBreakpointAuthority": false,
+    "wprCreatesDesignTokenAuthority": false,
+    "semanticOrderMayNotChangeByViewport": true,
+    "boundaryMayNotBeHidden": true,
+    "unknownMayNotBeHidden": true,
+    "productionRevalidationViewports": [
+      360,
+      768,
+      1440
+    ],
+    "locales": [
+      "en",
+      "zh-Hans"
+    ]
+  }
+}

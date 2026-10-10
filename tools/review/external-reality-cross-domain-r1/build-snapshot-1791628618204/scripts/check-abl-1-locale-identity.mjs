@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { ABL_BASELINE, buildAbl1IdentityProposals, buildIdentityAuthority, buildIdentityDecisionInput, pathsFor, readJson } from './lib/article-bilingual-production/abl-v1.mjs';
+import { verifyKnrL10nFreeze } from './lib/article-bilingual-production/check-fixture-v1.mjs';
+
+const root = process.cwd(), batchCode = 'BATCH-001', p = pathsFor(batchCode);
+verifyKnrL10nFreeze(root);
+const contract = await readJson(root, 'content/production/article-simplification/bilingual/contracts/abl-1-locale-identity-successor-contract-v1.json');
+assert.equal(contract.baselineCommit, ABL_BASELINE);
+assert.equal(contract.rules.explicitTlDiscoveryReviewRequired, true);
+assert.equal(contract.rules.centralFrozenKnrL10nRegistryMutated, false);
+assert.equal(contract.historicalPjaL10nW4.status, 'PRE_EXISTING_BASELINE_DRIFT_RECORDED_NOT_REWRITTEN_BY_ABL');
+const proposals = await buildAbl1IdentityProposals(root, batchCode);
+assert.equal(proposals.proposalCount, 6);
+assert.equal(proposals.entries.every(entry => entry.targetLocale === 'en' && entry.proposedEnglishIdentity.slug === entry.sourceIdentity.slug && entry.proposedEnglishIdentity.sameRouteSlugLocked === true), true);
+let decisions;
+if (fs.existsSync(path.join(root, p.identityDecisions))) decisions = await readJson(root, p.identityDecisions); else decisions = buildIdentityDecisionInput(proposals);
+const authority = buildIdentityAuthority(proposals, decisions);
+assert.equal(authority.errors.length, 0);
+assert.equal(authority.records.every(record => record.locale === 'en' && record.translationMode === 'independent_authoring' && record.authority === 'tl_reviewed_locale_identity_successor'), true);
+assert.equal(authority.governance.translationAuthorityInherited, false);
+assert.equal(authority.governance.centralFrozenKnrL10nRegistryMutated, false);
+console.log('✓ ABL-1 Locale Identity Discovery & TL Review Successor passed.');
+console.log(`✓ BATCH-001 exposes ${proposals.proposalCount} same-route English identity proposals; current explicit identity authority ${authority.recordCount}/6.`);
+console.log('✓ Frozen KNR-L10N registries remain byte-identical; proposal != authority and absence of review != approval.');
+console.log('✓ Pre-existing PJA-L10N-W4 English brief freeze drift is recorded, not rewritten by ABL.');

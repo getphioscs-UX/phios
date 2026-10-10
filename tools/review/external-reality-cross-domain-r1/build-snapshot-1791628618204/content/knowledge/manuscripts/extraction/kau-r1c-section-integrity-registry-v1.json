@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-KAU-R1C-SECTION-INTEGRITY-REGISTRY-v1.0.0",
+  "stage": "KAU-R1C",
+  "status": "FULL_SECTION_EXTRACTION_INTEGRITY_COMPLETE",
+  "baselineCommit": "7043d884c27bc38c42106ace336b5f4cb6ae54ab",
+  "books": [
+    {
+      "bookCode": "BOOK-1",
+      "inventory": "content/knowledge/manuscripts/extraction/book-1-full-section-inventory-v1.json",
+      "integrity": "content/knowledge/manuscripts/extraction/book-1-section-integrity-v1.json",
+      "physicalSegments": 275,
+      "logicalSectionSegments": 274,
+      "frontMatterSegments": 1,
+      "partCounts": {"FRONT": 1, "P0": 12, "P1": 28, "P2": 49, "P3": 104, "P4": 81},
+      "exactCoverage": true,
+      "duplicatePageGroups": []
+    },
+    {
+      "bookCode": "BOOK-2",
+      "inventory": "content/knowledge/manuscripts/extraction/book-2-full-section-inventory-v1.json",
+      "integrity": "content/knowledge/manuscripts/extraction/book-2-section-integrity-v1.json",
+      "physicalSegments": 173,
+      "logicalSectionSegments": 172,
+      "frontMatterSegments": 1,
+      "partCounts": {"FRONT": 1, "P5": 66, "P6": 49, "P7": 57},
+      "exactCoverage": true,
+      "duplicatePageGroups": [[100, 101]]
+    }
+  ],
+  "totals": {
+    "physicalSegments": 448,
+    "logicalSectionSegments": 446,
+    "frontMatterSegments": 2,
+    "gaps": 0,
+    "overlaps": 0
+  },
+  "sourceIntegrityFindings": [
+    {
+      "findingCode": "BOOK2-EXACT-DUPLICATE-PAGE-100-101",
+      "severity": "SOURCE_INTEGRITY_NOTICE",
+      "bookCode": "BOOK-2",
+      "pages": [100, 101],
+      "textLayerExactDuplicate": true,
+      "renderExactDuplicate": true,
+      "preservedInMaterialization": true,
+      "secondCopyHeadingSuppressedFromLogicalSectionStart": true,
+      "canonicalInterpretation": "UNDECIDED",
+      "humanDispositionRequiredBeforeCanonicalAcceptance": true
+    }
+  ],
+  "boundaries": {
+    "sectionExtractionIsSourceDerivative": true,
+    "humanReviewStatus": "PENDING",
+    "automaticCanonicalNodeCreation": false,
+    "canonicalNodeMutation": false,
+    "KAUR2MayGenerateMatchCandidates": true,
+    "KAUR2MayAutoAcceptCanonicalDecisions": false
+  }
+}

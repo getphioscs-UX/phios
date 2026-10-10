@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "PHI-OS-W8E-MARKET-PROVIDER-GAP-TARGETS-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE_GAP_TARGETING",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2",
+  "dossierId": "DOSSIER-US",
+  "targets": [
+    {
+      "semanticBasisId": "US-W8E-SEM-FINANCIAL-CONSTRAINT",
+      "currentState": "INSUFFICIENT_EVIDENCE",
+      "targetPair": "G2+P3",
+      "requiredEvidenceDesign": [
+        "Longitudinal valuation or volatility pressure series",
+        "Capital-flow response under identified pressure periods",
+        "Official/regulatory evidence of financing, leverage or funding constraint response"
+      ],
+      "providerCapabilities": [
+        "CAPITAL_FLOW",
+        "VALUATION",
+        "HISTORY_KLINE"
+      ],
+      "authorityMixRequirement": "MARKET_DATA_PROVIDER + REGULATOR_OR_OFFICIAL_PRIMARY",
+      "providerAloneSufficient": false
+    },
+    {
+      "semanticBasisId": "US-W8E-SEM-MACRO-RECONFIGURATION",
+      "currentState": "INSUFFICIENT_EVIDENCE",
+      "targetPair": "G14+P2",
+      "requiredEvidenceDesign": [
+        "Before/after sector or revenue composition",
+        "Sustained capital-flow or sector-weight migration",
+        "Evidence that carriers, routing, institutional organization or relationship structure changed"
+      ],
+      "providerCapabilities": [
+        "SECTOR_PLATE",
+        "CAPITAL_FLOW",
+        "HISTORY_KLINE",
+        "FINANCIAL_STATEMENTS",
+        "REVENUE_BREAKDOWN"
+      ],
+      "authorityMixRequirement": "MULTI_SOURCE_LONGITUDINAL",
+      "providerAloneSufficient": false
+    },
+    {
+      "semanticBasisId": "US-W8E-SEM-SYSTEM-CONTINUITY",
+      "currentState": "INSUFFICIENT_EVIDENCE",
+      "targetPair": "G16+P3",
+      "requiredEvidenceDesign": [
+        "Multi-year financial or market series",
+        "Repeated operating capacity or cash-flow evidence across observation times",
+        "Cross-time persistence or recovery evidence rather than one current snapshot"
+      ],
+      "providerCapabilities": [
+        "HISTORY_KLINE",
+        "FINANCIAL_STATEMENTS",
+        "REVENUE_BREAKDOWN"
+      ],
+      "authorityMixRequirement": "LONGITUDINAL_PROVIDER + PRIMARY_CROSSCHECK",
+      "providerAloneSufficient": false
+    }
+  ],
+  "boundary": "Gap targets specify evidence to collect. They do not pre-approve the target grammar/domain pair."
+}

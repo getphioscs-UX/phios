@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "PHI-OS-MCD-6-DYNAMIC-RENDERER-REGISTRY-v1.0.0",
+  "work": "MCD-6",
+  "baselineCommit": "2bd7fd80da907a53f5f4a0f5c0e2db0a87100a4e",
+  "status": "ACTIVE_MCD5_CANONICAL_PROJECTION_BOUND_MPA_GATED",
+  "entries": [
+    {
+      "publicMethodCode": "ASTROLOGY_PROJECTION",
+      "rendererModule": "assets/js/method-client-delivery/renderers/astrology-renderer.js",
+      "mode": "PRODUCTION_WHEN_MPA_ALLOWED_AND_CANONICAL_PRODUCTION_RESULT",
+      "features": [
+        "ZODIAC_RING",
+        "HOUSES_IF_CANONICAL_FACTS_PRESENT",
+        "HOUSE_CUSPS_IF_CANONICAL_FACTS_PRESENT",
+        "PLANETS_FROM_CANONICAL_POSITIONS",
+        "DEGREES",
+        "RETROGRADE_FROM_CANONICAL_VALUE_FACT",
+        "ASPECTS_IF_CANONICAL_FACTS_PRESENT",
+        "ASPECT_LEGEND_IF_CANONICAL_FACTS_PRESENT",
+        "COLLISION_HANDLING_PRESENTATION_ONLY",
+        "ACCESSIBLE_TEXT",
+        "CALCULATION_PROVENANCE",
+        "UNKNOWN_STATE",
+        "PROJECTION_REFERENCE",
+        "EVIDENCE_REFERENCE"
+      ],
+      "rendererMayCreateMissingLayer": false
+    },
+    {
+      "publicMethodCode": "BAZI_PROJECTION",
+      "rendererModule": "assets/js/method-client-delivery/renderers/bazi-renderer.js",
+      "mode": "PRODUCTION_WHEN_MPA_ALLOWED_AND_CANONICAL_PRODUCTION_RESULT",
+      "features": [
+        "FOUR_PILLARS",
+        "HEAVENLY_STEMS",
+        "EARTHLY_BRANCHES",
+        "HIDDEN_STEMS",
+        "ELEMENT_DISTRIBUTION",
+        "GOVERNED_TEN_GOD_PROJECTION",
+        "LUCK_CYCLES",
+        "AGE_TIMELINE",
+        "YEAR_TIMELINE",
+        "UNKNOWN_BIRTH_TIME"
+      ],
+      "tenGodActivationSource": "CANONICAL_STRUCTURE_PLUS_RULE_SOURCE_EVIDENCE",
+      "syntheticHourPillarAllowed": false
+    },
+    {
+      "publicMethodCode": "NUMEROLOGY_PROJECTION",
+      "rendererModule": "assets/js/method-client-delivery/renderers/numerology-renderer.js",
+      "mode": "PRODUCTION_WHEN_MPA_ALLOWED_AND_CANONICAL_PRODUCTION_RESULT",
+      "features": [
+        "CORE_NUMBERS",
+        "REDUCTION_PATHS",
+        "NUMBER_EVIDENCE",
+        "CYCLES",
+        "TIMELINE",
+        "MISSING_VALUES",
+        "CALCULATION_EXPANSION"
+      ],
+      "mfigBindings": [
+        "MFIG-035",
+        "MFIG-036",
+        "MFIG-037",
+        "MFIG-038",
+        "MFIG-039",
+        "MFIG-040"
+      ]
+    },
+    {
+      "publicMethodCode": "PERSONAL_RUNTIME_PROJECTION",
+      "rendererModule": "assets/js/method-client-delivery/renderers/hdr-validation-renderer.js",
+      "mode": "VALIDATION_ONLY",
+      "productionAllowed": false,
+      "validationFixtureRequired": true,
+      "publicSurfaceResultAllowed": false,
+      "controlledPublicLabels": {
+        "en": "Personal Runtime Projection",
+        "zh-Hans": "个人运行投射"
+      }
+    }
+  ],
+  "crossMethod": {
+    "rendererModule": "assets/js/method-client-delivery/renderers/cross-method-renderer.js",
+    "inputSchema": "content/professional/method-client-delivery/schemas/mcd-6-cross-method-composition-v1.schema.json",
+    "mode": "UPSTREAM_CLASSIFIED_COMPOSITION_VISUALIZATION_ONLY",
+    "sourceMethodValuesAccepted": false,
+    "classifications": [
+      "CONVERGENCE",
+      "DIVERGENCE",
+      "UNKNOWN"
+    ],
+    "mfigBindings": [
+      "MFIG-041",
+      "MFIG-042",
+      "MFIG-043",
+      "MFIG-044",
+      "MFIG-045",
+      "MFIG-046",
+      "MFIG-047",
+      "MFIG-048",
+      "MFIG-049",
+      "MFIG-050"
+    ]
+  },
+  "sharedRuntime": "assets/js/method-client-delivery/dynamic-renderer-runtime.js",
+  "sharedStyle": "assets/css/method-client-delivery/dynamic-renderers.css",
+  "rules": {
+    "coreRuntimeImportAllowed": false,
+    "aiCallAllowed": false,
+    "unknownFillAllowed": false,
+    "inputMutationAllowed": false,
+    "rawRuntimeObjectAllowed": false,
+    "productionAuthorityOverrideAllowed": false
+  }
+}

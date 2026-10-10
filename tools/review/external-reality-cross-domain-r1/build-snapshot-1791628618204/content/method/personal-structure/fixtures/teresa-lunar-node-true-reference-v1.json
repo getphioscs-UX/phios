@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-LUNAR-NODE-REFERENCE-FIXTURE-v1.0.0",
+  "role": "VALIDATION_ONLY_NOT_RUNTIME_AUTHORITY",
+  "subjectCode": "TERESA_GOLDEN",
+  "nodeConvention": "TRUE_NODE.V1",
+  "reference": {
+    "engine": "Swiss Ephemeris",
+    "version": "2.10.03",
+    "mode": "TRUE_NODE",
+    "runtimeAuthority": false
+  },
+  "personality": {
+    "instantUTC": "1989-11-15T14:50:00Z",
+    "northNodeLongitudeDeg": 320.761158209905,
+    "southNodeLongitudeDeg": 140.761158209905,
+    "expectedNorth": {
+      "gate": 49,
+      "line": 3
+    },
+    "expectedSouth": {
+      "gate": 4,
+      "line": 3
+    },
+    "nearestLineBoundaryArcsec": 40.169555659
+  },
+  "design": {
+    "instantUTC": "1989-08-18T04:38:04Z",
+    "northNodeLongitudeDeg": 325.809142207977,
+    "southNodeLongitudeDeg": 145.809142207977,
+    "expectedNorth": {
+      "gate": 30,
+      "line": 2
+    },
+    "expectedSouth": {
+      "gate": 29,
+      "line": 2
+    },
+    "nearestLineBoundaryArcsec": 1337.911948716
+  },
+  "boundaryRule": "Reference longitude validates model identity; production Gate/Line are always mapped from the pinned runtime longitude, never copied from this fixture.",
+  "notGeneralAlgorithm": true
+}

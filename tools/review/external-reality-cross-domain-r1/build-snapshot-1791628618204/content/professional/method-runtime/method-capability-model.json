@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "PHI-OS-METHOD-CAPABILITY-MODEL-v1.0.0",
+  "stageCode": "MR-W0",
+  "status": "frozen",
+  "layerOrder": [
+    "Definition",
+    "Data",
+    "Calculation",
+    "Projection",
+    "Interpretation",
+    "Professional"
+  ],
+  "layers": [
+    {
+      "order": 1,
+      "code": "Definition",
+      "name": "Method Definition",
+      "runtimeOwner": "METHOD_RUNTIME",
+      "insideMethodRuntime": true,
+      "purpose": "Declare method scope, concepts, rules, provenance and license scope.",
+      "authorityRequired": true
+    },
+    {
+      "order": 2,
+      "code": "Data",
+      "name": "Data Authority",
+      "runtimeOwner": "SHARED_DATA_AUTHORITY",
+      "insideMethodRuntime": true,
+      "purpose": "Normalize verified shared data under explicit authority and version contracts.",
+      "belongsToIndividualMethod": false
+    },
+    {
+      "order": 3,
+      "code": "Calculation",
+      "name": "Calculation Runtime",
+      "runtimeOwner": "SHARED_CALCULATION_RUNTIME",
+      "insideMethodRuntime": true,
+      "purpose": "Produce reproducible method facts through deterministic or verified external engines.",
+      "aiAllowed": false,
+      "workersAiAllowed": false,
+      "promptAllowed": false,
+      "interpretationAllowed": false,
+      "repeatability": "100_percent"
+    },
+    {
+      "order": 4,
+      "code": "Projection",
+      "name": "Projection Runtime",
+      "runtimeOwner": "SHARED_PROJECTION_RUNTIME",
+      "insideMethodRuntime": true,
+      "purpose": "Emit versioned Projection JSON containing governed method output only.",
+      "interpretationAllowed": false,
+      "professionalAuthority": false
+    },
+    {
+      "order": 5,
+      "code": "Interpretation",
+      "name": "Interpretation Runtime",
+      "runtimeOwner": "SHARED_INTERPRETATION_RUNTIME",
+      "insideMethodRuntime": true,
+      "purpose": "Use Projection, Published Knowledge and optional Journey context to produce an Interpretation Candidate.",
+      "aiAllowed": true,
+      "allowedAiProviders": [
+        "WORKERS_AI",
+        "OPENAI"
+      ],
+      "output": "INTERPRETATION_CANDIDATE",
+      "directReleaseAllowed": false
+    },
+    {
+      "order": 6,
+      "code": "Professional",
+      "name": "Professional Runtime",
+      "runtimeOwner": "SHARED_PROFESSIONAL_RUNTIME",
+      "insideMethodRuntime": false,
+      "purpose": "Perform professional review, boundary validation, deliverable assembly, signature and release.",
+      "authorizedHumanRequired": true,
+      "professionalWorkspaceDirectAiReadAllowed": false
+    }
+  ],
+  "universalConstraints": {
+    "orderImmutable": true,
+    "activeLayerBypassAllowed": false,
+    "calculationMayUseAI": false,
+    "projectionMayContainInterpretation": false,
+    "projectionMayCreateProfessionalAuthority": false,
+    "interpretationMayDirectlyRelease": false,
+    "professionalReleaseRequiresAuthorizedHuman": true
+  }
+}
+

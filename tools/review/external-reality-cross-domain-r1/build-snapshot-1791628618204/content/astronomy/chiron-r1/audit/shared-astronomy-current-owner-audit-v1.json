@@ -1,0 +1,115 @@
+{
+  "baseline": "241aab892549432ed1903517b7bf263d0fa2d9fc",
+  "owners": [
+    {
+      "capability": "canonicalBirth",
+      "path": "functions/method-client-delivery/canonical-birth-input-runtime.js",
+      "classification": "SHARED",
+      "sha256": "a80be668022504a1c571830e450a9a34226381c15b7b9c12e742a061d47a84c2"
+    },
+    {
+      "capability": "utcNormalization",
+      "path": "functions/embodied-configuration/ecr-calculation-runtime.js",
+      "classification": "METHOD_SPECIFIC",
+      "sha256": "b8e959bc474e157d34be1d1264fc3c24ab73571e0f853f117c380f505cc145b4"
+    },
+    {
+      "capability": "primaryEphemeris",
+      "path": "functions/method-client-delivery/production-adapters/astronomy-engine-production-adapter.js",
+      "classification": "PRODUCTION_ACTIVE",
+      "sha256": "f1d94976e11c04ecdf66c5ecfc9f990c6e1e54557620ef231b9cc4bc392a48c6"
+    },
+    {
+      "capability": "nodeProvider",
+      "path": "functions/core-method-runtime/ast-lunar-node-adapter.js",
+      "classification": "SHARED",
+      "sha256": "4e86af8587dd52211029ced5bd316a01569883d8318961a0b0b94d9dcf3940cd"
+    },
+    {
+      "capability": "currentEcrWrapper",
+      "path": "functions/embodied-configuration/ecr-shared-initialization-capability.js",
+      "classification": "METHOD_SPECIFIC",
+      "sha256": "0f8ced32ae76d300174b549fabd1a6cca8838afe37f8e64635f022607098ff05"
+    },
+    {
+      "capability": "reusedCoreAdapter",
+      "path": "functions/professional/hdr-internal/hdr-internal-astronomy-adapter.js",
+      "classification": "METHOD_SPECIFIC",
+      "sha256": "a7273d9d09e9343e0480531142e890c403004c7ee39bbf06018a0bb837054e70"
+    },
+    {
+      "capability": "designMoment",
+      "path": "functions/core-method-runtime/hdr-design-moment-runtime.js",
+      "classification": "SHARED",
+      "sha256": "2d684ac53e2847d34094605f4dddb765566fb82e346643be9b8a46f3ef074e32"
+    },
+    {
+      "capability": "houseImplementation",
+      "path": "functions/core-method-runtime/ast-house-runtime.js",
+      "classification": "VALIDATION_ONLY",
+      "sha256": "b606bf844e4ddb0c121dceec1bce64fdaba738d9b2c97ed4c6ffe0d146a0d97b"
+    },
+    {
+      "capability": "aspectImplementation",
+      "path": "functions/core-method-runtime/ast-aspect-runtime.js",
+      "classification": "VALIDATION_ONLY",
+      "sha256": "1499593085089b28a6e373cac18b40955434c70ebe7016127290c9e0ebcd7d06"
+    },
+    {
+      "capability": "bodyAndZodiacPolicy",
+      "path": "content/professional/method-governance/successors/ast-production-policy-successor-v1.json",
+      "classification": "PRODUCTION_ACTIVE",
+      "sha256": "fc545f48aa730ad058a4ef15641515148aa7343d70b0acf0b4c17cbcf311dcb8"
+    }
+  ],
+  "callGraph": [
+    "ECR initialization -> ECR shared wrapper -> existing HDR internal adapter -> AST production adapter + TRUE_NODE.V1",
+    "ECR Design -> existing 88-degree solar arc solver -> same core astronomy"
+  ],
+  "primaryProvider": {
+    "code": "ASTRONOMY_ENGINE_JS",
+    "version": "2.1.19",
+    "license": "MIT",
+    "chiron": "ABSENT",
+    "decision": "CASE_B_REQUIRED"
+  },
+  "output": {
+    "longitude": "longitude [0,360)",
+    "latitude": "latitude [-90,90]",
+    "distance": "distanceAu",
+    "speed": "speedLongitudeDegreesPerDay; centered +/-1 hour difference",
+    "retrograde": "speed < 0",
+    "frame": "TRUE_ECLIPTIC_OF_DATE_ECT"
+  },
+  "derivedGeometry": {
+    "zodiac": {
+      "classification": "PRODUCTION_ACTIVE",
+      "policy": "PHI_OS_AST_TROPICAL_ZODIAC_V1"
+    },
+    "houses": {
+      "classification": "DEFERRED",
+      "existingCode": "VALIDATION_ONLY",
+      "productionPolicyAdmitted": false
+    },
+    "aspects": {
+      "classification": "DEFERRED",
+      "existingCode": "VALIDATION_ONLY",
+      "productionPolicyAdmitted": false
+    }
+  },
+  "runtime": {
+    "core": "Existing Pages-compatible JS provider",
+    "extendedMinorBody": "NOT_YET_ADMITTED"
+  },
+  "tests": [
+    "check:mir-3",
+    "check:mir-3-node-production",
+    "check:ecr-human-runtime-v4-1"
+  ],
+  "fixtures": "content/embodied-configuration/v4-1/acceptance/birth-fixtures-v1.json",
+  "conclusions": [
+    "HDR is a consumer/adapter path, not the new astronomy owner",
+    "No house system or orb defaults admitted",
+    "No Chiron interpretation or customer admission implied"
+  ]
+}

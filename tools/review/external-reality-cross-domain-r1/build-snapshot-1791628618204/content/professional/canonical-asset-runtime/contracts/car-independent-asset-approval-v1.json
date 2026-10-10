@@ -1,0 +1,24 @@
+{
+  "contractCode": "PHI-OS-CAR-INDEPENDENT-ASSET-APPROVAL-v1",
+  "version": "1.0.0",
+  "work": "CAR-W12",
+  "status": "frozen",
+  "productionStatus": "validation_only",
+  "decisions": [
+    "approved",
+    "conditionally_approved",
+    "rejected",
+    "revoked"
+  ],
+  "approvalPrerequisites": [
+    "candidate digest valid",
+    "latest independent review = accept",
+    "review digest valid"
+  ],
+  "invariants": {
+    "approvalIsReview": false,
+    "approvalIsPublication": false,
+    "articleApprovalDoesNotApproveOtherAssets": true,
+    "approverIndependentFromCandidateBuilder": true
+  }
+}

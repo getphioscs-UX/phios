@@ -1,0 +1,63 @@
+{
+  "fixtureId": "exp-r0.runtime-security-professional-access-priority.v1",
+  "contract": "phi-os.runtime-security-privacy.v1",
+  "decisionOrder": [
+    "active-purpose-bound-consent",
+    "explicit-professional-and-runtime-scope"
+  ],
+  "grant": {
+    "status": "granted",
+    "professional_id": "professional_1",
+    "runtime_ids": [
+      "runtime_root"
+    ],
+    "purpose": "financial evidence review",
+    "consent_version": "1.0",
+    "expires_at": "2026-08-01T00:00:00.000Z"
+  },
+  "scenarios": [
+    {
+      "id": "active-consent-in-scope",
+      "now": "2026-07-23T12:00:00.000Z",
+      "runtime_id": "runtime_root",
+      "professional_id": "professional_1",
+      "expected": "allowed"
+    },
+    {
+      "id": "active-consent-runtime-out-of-scope",
+      "now": "2026-07-23T12:00:00.000Z",
+      "runtime_id": "runtime_other",
+      "professional_id": "professional_1",
+      "expected": "security_professional_scope_denied"
+    },
+    {
+      "id": "active-consent-wildcard-scope-denied",
+      "now": "2026-07-23T12:00:00.000Z",
+      "runtime_id": "runtime_root",
+      "professional_id": "professional_1",
+      "grant": {
+        "runtime_ids": [
+          "*"
+        ]
+      },
+      "expected": "security_professional_scope_denied"
+    },
+    {
+      "id": "expired-consent-precedes-runtime-scope",
+      "now": "2026-08-02T00:00:00.000Z",
+      "runtime_id": "runtime_other",
+      "professional_id": "professional_1",
+      "expected": "security_professional_consent_required"
+    },
+    {
+      "id": "revoked-consent-precedes-runtime-scope",
+      "now": "2026-07-23T12:00:00.000Z",
+      "runtime_id": "runtime_other",
+      "professional_id": "professional_1",
+      "grant": {
+        "revoked": true
+      },
+      "expected": "security_professional_consent_required"
+    }
+  ]
+}

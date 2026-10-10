@@ -1,0 +1,929 @@
+{
+  "schemaVersion": "PHI-OS-WAVE1-C2-HUMAN-EDITORIAL-REVIEW-PACKAGE-REGISTRY-v1.0.0",
+  "registryCode": "PHI-OS-WAVE1-C2-HUMAN-EDITORIAL-REVIEW-PACKAGE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "status": "OPEN_PENDING_HUMAN",
+  "baselineCommit": "0732b3dfef7c15d3571d980887f1423b68eee6a2",
+  "contractReference": "content/knowledge/production-planning/contracts/wave1-c2-human-editorial-review-foundation-v1.json",
+  "sourcePreflight": "content/knowledge/production-planning/activation/wave1-production-activation-preflight-v1.json",
+  "sourceQueue": "content/knowledge/production-planning/review/wave1-c2-human-review-queue-v1.json",
+  "sourcePilotPlan": "content/knowledge/production-planning/plans/kpp-pilot-production-plan-v2.json",
+  "digestBinding": {
+    "algorithm": "sha256",
+    "canonicalization": "recursive_key_sort_json",
+    "inputProjection": "selected_wave1_authority_projection_v1",
+    "inputDigest": "sha256:2a414a7f57bdc54b4327c92eedba7f44613ad835fdc0cff024cc1c94768983f9",
+    "packageSetDigest": "sha256:348c8f46dee494657edbe453bc8cc32613d32d1d94844f400d377c80856efb68"
+  },
+  "authoritySnapshot": {
+    "kppProductionStatus": "validation_only",
+    "kpeAuthorityStatus": "NOT_PRESENT_IN_CURRENT_MAIN",
+    "humanProductionDecisionCount": 0,
+    "frozenProductionPlanCount": 0,
+    "frozenProductionWaveCount": 0,
+    "pjaHandoffCount": 0,
+    "carHandoffCount": 0
+  },
+  "requiredHumanSubmission": {
+    "canonicalThesisFields": [
+      "statement",
+      "mechanism",
+      "necessity",
+      "systemRole",
+      "continuity",
+      "partContribution",
+      "bookContribution"
+    ],
+    "c2BoundaryFamilies": [
+      "article",
+      "claims",
+      "questions",
+      "sources",
+      "figures",
+      "publicContent"
+    ],
+    "additionalReviewDimensions": [
+      "sequenceBoundary",
+      "crossNodeBoundary"
+    ],
+    "freezeEvidence": [
+      "real reviewer",
+      "reviewedAt",
+      "approved decision",
+      "contentHash"
+    ],
+    "allowedDecisions": [
+      "freeze_approved",
+      "changes_required",
+      "deferred",
+      "rejected"
+    ]
+  },
+  "packageCount": 4,
+  "packages": [
+    {
+      "packageCode": "PHI-OS-WAVE1-C2-REVIEW-KN-PREFACE-004-v1",
+      "packageVersion": "1.0.0",
+      "nodeCode": "KN-PREFACE-004",
+      "titleZhHans": "为什么需要 PHI OS",
+      "locale": "zh-Hans",
+      "status": "PENDING_HUMAN",
+      "approvalState": "pending_human",
+      "authority": "PJA_C2_HUMAN_EDITORIAL_REVIEW",
+      "candidateReference": "content/knowledge/editorial/c2/candidates/kn-preface-004.json",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-preface-004-production-readiness.json",
+      "productionProjection": {
+        "productionRole": "ARTICLE",
+        "dispatchTarget": "PJA",
+        "sourcePlan": "content/knowledge/production-planning/plans/kpp-pilot-production-plan-v2.json",
+        "sourceIsProductionDecision": false
+      },
+      "canonicalSnapshot": {
+        "nodeVersion": "1.1.0",
+        "registryStatus": "frozen",
+        "canonicalLanguage": "zh-Hans",
+        "nodeRequiredPublicLanguages": [
+          "zh-Hans",
+          "en"
+        ],
+        "blueprintStatus": "registered",
+        "blueprintArticleRequiredNow": true,
+        "blueprintPublicLanguagePlan": [
+          "zh-Hans",
+          "en"
+        ],
+        "sourceCodes": [
+          "SRC-PREFACE-S02"
+        ],
+        "supportingQuestionCodes": [
+          "SQ-PREFACE-008",
+          "SQ-PREFACE-009"
+        ],
+        "prerequisiteNodeCodes": [
+          "KN-PREFACE-003"
+        ],
+        "nextNodeCodes": [],
+        "relatedNodeCodes": [
+          "KN-PREFACE-010",
+          "KN-PREFACE-012",
+          "KN-PREFACE-013"
+        ],
+        "pilotAssemblyParticipation": "none"
+      },
+      "c2Snapshot": {
+        "status": "human_review_required",
+        "thesisState": "not_assessed",
+        "boundaryState": "not_assessed",
+        "humanFreezeState": "required",
+        "authorityFinding": "INSUFFICIENT_MANUSCRIPT_AUTHORITY",
+        "candidateThesisPresent": false,
+        "candidateBoundariesPresent": false,
+        "blocking": [
+          "CANONICAL_THESIS_NOT_READY",
+          "BOUNDARY_NOT_READY",
+          "HUMAN_FREEZE_REQUIRED"
+        ]
+      },
+      "c3Snapshot": {
+        "status": "blocked_by_c2",
+        "productionReady": false,
+        "c2GateCode": "C2_NOT_FROZEN",
+        "publicationState": "not_published",
+        "blocking": [
+          "C2_THESIS_BOUNDARY_NOT_FROZEN",
+          "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
+          "EXPORTABILITY_NOT_ALLOWED"
+        ]
+      },
+      "publishedKnowledgeSnapshot": {
+        "publishedAssetCodes": [
+          "KA-PREFACE-004-ZH-ARTICLE",
+          "KA-PREFACE-004-ZH-MASTER-POST",
+          "KA-PREFACE-004-EN-ARTICLE",
+          "KA-PREFACE-004-EN-MASTER-POST"
+        ],
+        "publishedArticleCodes": [
+          "KA-PREFACE-004-EN-ARTICLE",
+          "KA-PREFACE-004-ZH-ARTICLE"
+        ],
+        "runtimePublishedFragmentCount": 16,
+        "carAuthoritativePublishedFragmentCount": 0,
+        "c3PublicationStateConflict": true,
+        "silentRebuildAllowed": false
+      },
+      "legacySupportingRelationships": [],
+      "reviewDimensions": [
+        {
+          "dimension": "CANONICAL_THESIS",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "CANDIDATE_THESIS_NULL",
+            "INSUFFICIENT_MANUSCRIPT_AUTHORITY"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "ARTICLE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "CANDIDATE_BOUNDARIES_NULL",
+            "BLUEPRINT_ARTICLE_REQUIRED_NOW_TRUE",
+            "EXISTING_BILINGUAL_ARTICLE_ALREADY_PUBLISHED"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "SUPPORTING_QUESTION_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "SQ-PREFACE-008",
+            "SQ-PREFACE-009"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "SEQUENCE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "PREREQUISITE_KN-PREFACE-003",
+            "NO_CANONICAL_NEXT_NODE"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "CLAIM_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "NO_FROZEN_C2_CLAIM_BOUNDARY",
+            "RUNTIME_PUBLISHED_FRAGMENTS_HAVE_EMPTY_CLAIM_CODES"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "SOURCE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "CANONICAL_SOURCE_SRC-PREFACE-S02",
+            "NO_ACCEPTED_LEGACY_SUPPORTING_RELATIONSHIP"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "FIGURE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "NODE_DERIVATIVE_POLICY_REQUIRES_FIGURE_BRIEF",
+            "NO_FROZEN_C2_FIGURE_BOUNDARY"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "PUBLIC_CONTENT_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "FOUR_PUBLISHED_ASSETS_EXIST",
+            "TWO_PUBLISHED_ARTICLES_EXIST",
+            "C3_REPORTS_NOT_PUBLISHED"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "CROSS_NODE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "PREREQUISITE_KN-PREFACE-003",
+            "RELATED_KN-PREFACE-010",
+            "RELATED_KN-PREFACE-012",
+            "RELATED_KN-PREFACE-013"
+          ],
+          "humanFinding": null
+        }
+      ],
+      "unresolvedFindings": [
+        "C2_THESIS_BOUNDARY_NOT_FROZEN",
+        "EXISTING_PUBLISHED_ARTICLE_REQUIRES_C2_AUTHORITY_RECONCILIATION",
+        "C3_PUBLICATION_STATE_CONFLICT",
+        "CAR_PUBLISHED_FRAGMENT_AUTHORITY_NOT_ESTABLISHED"
+      ],
+      "humanQuestions": [
+        "Should the existing published bilingual Article be reconciled into a new Human C2 freeze, enter governed revision or replacement, or be deferred?",
+        "What Canonical Thesis and all required boundary families govern the existing public content?",
+        "How must the C3 publication-state conflict be resolved without silently rebuilding or unpublishing existing authority?"
+      ],
+      "humanDecision": {
+        "decision": null,
+        "actor": null,
+        "actorRole": null,
+        "decidedAt": null,
+        "rationale": null
+      },
+      "effects": {
+        "c2Frozen": false,
+        "c3Rebuilt": false,
+        "productionDecisionCreated": false,
+        "productionPlanFrozen": false,
+        "productionWaveFrozen": false,
+        "kpeActivated": false,
+        "pjaCandidateCreated": false,
+        "carCandidateCreated": false,
+        "reviewApproved": false,
+        "published": false
+      }
+    },
+    {
+      "packageCode": "PHI-OS-WAVE1-C2-REVIEW-KN-B1-P1-003-v1",
+      "packageVersion": "1.0.0",
+      "nodeCode": "KN-B1-P1-003",
+      "titleZhHans": "为什么现实需要结构",
+      "locale": "zh-Hans",
+      "status": "PENDING_HUMAN",
+      "approvalState": "pending_human",
+      "authority": "PJA_C2_HUMAN_EDITORIAL_REVIEW",
+      "candidateReference": "content/knowledge/editorial/c2/candidates/kn-b1-p1-003.json",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-b1-p1-003-production-readiness.json",
+      "productionProjection": {
+        "productionRole": "FRAGMENT",
+        "dispatchTarget": "PJA",
+        "sourcePlan": "content/knowledge/production-planning/plans/kpp-pilot-production-plan-v2.json",
+        "sourceIsProductionDecision": false
+      },
+      "canonicalSnapshot": {
+        "nodeVersion": "1.0.0",
+        "registryStatus": "planned",
+        "canonicalLanguage": "zh-Hans",
+        "nodeRequiredPublicLanguages": [],
+        "blueprintStatus": "planned",
+        "blueprintArticleRequiredNow": false,
+        "blueprintPublicLanguagePlan": [
+          "zh-Hans",
+          "en"
+        ],
+        "sourceCodes": [],
+        "supportingQuestionCodes": [],
+        "prerequisiteNodeCodes": [
+          "KN-B1-P1-002"
+        ],
+        "nextNodeCodes": [
+          "KN-B1-P1-004"
+        ],
+        "relatedNodeCodes": [],
+        "pilotAssemblyParticipation": "none"
+      },
+      "c2Snapshot": {
+        "status": "human_review_required",
+        "thesisState": "not_assessed",
+        "boundaryState": "not_assessed",
+        "humanFreezeState": "required",
+        "authorityFinding": "INSUFFICIENT_MANUSCRIPT_AUTHORITY",
+        "candidateThesisPresent": false,
+        "candidateBoundariesPresent": false,
+        "blocking": [
+          "CANONICAL_THESIS_NOT_READY",
+          "BOUNDARY_NOT_READY",
+          "HUMAN_FREEZE_REQUIRED"
+        ]
+      },
+      "c3Snapshot": {
+        "status": "blocked_by_c2",
+        "productionReady": false,
+        "c2GateCode": "C2_NOT_FROZEN",
+        "publicationState": "not_published",
+        "blocking": [
+          "C2_THESIS_BOUNDARY_NOT_FROZEN",
+          "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
+          "EXPORTABILITY_NOT_ALLOWED"
+        ]
+      },
+      "publishedKnowledgeSnapshot": {
+        "publishedAssetCodes": [],
+        "publishedArticleCodes": [],
+        "runtimePublishedFragmentCount": 0,
+        "carAuthoritativePublishedFragmentCount": 0,
+        "c3PublicationStateConflict": false,
+        "silentRebuildAllowed": false
+      },
+      "legacySupportingRelationships": [
+        {
+          "relationshipCode": "KAU-E2-REL-0018",
+          "sourceCode": "LEGACY-PHIOS-UNIFIED-LANGUAGE-PART-1",
+          "legacySectionCode": "LEGACY-SEC-2-8",
+          "relationshipType": "HISTORICAL_PRECURSOR",
+          "state": "ACCEPTED_SUPPORTING",
+          "supportingOnly": true,
+          "canonicalAuthority": false,
+          "productionDecisionAuthority": false
+        },
+        {
+          "relationshipCode": "KAU-E2-REL-0020",
+          "sourceCode": "LEGACY-PHIOS-UNIFIED-LANGUAGE-PART-1",
+          "legacySectionCode": "LEGACY-SEC-2-10",
+          "relationshipType": "SUPPORTS",
+          "state": "ACCEPTED_SUPPORTING",
+          "supportingOnly": true,
+          "canonicalAuthority": false,
+          "productionDecisionAuthority": false
+        },
+        {
+          "relationshipCode": "KAU-E2-REL-0021",
+          "sourceCode": "LEGACY-PHIOS-UNIFIED-LANGUAGE-PART-1",
+          "legacySectionCode": "LEGACY-SEC-2-11",
+          "relationshipType": "SUPERSEDED_BY",
+          "state": "ACCEPTED_SUPPORTING",
+          "supportingOnly": true,
+          "canonicalAuthority": false,
+          "productionDecisionAuthority": false
+        }
+      ],
+      "reviewDimensions": [
+        {
+          "dimension": "CANONICAL_THESIS",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "CANDIDATE_THESIS_NULL",
+            "INSUFFICIENT_MANUSCRIPT_AUTHORITY"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "ARTICLE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "CANDIDATE_BOUNDARIES_NULL",
+            "BLUEPRINT_ARTICLE_REQUIRED_NOW_FALSE",
+            "PILOT_ROLE_FRAGMENT_IS_NOT_PRODUCTION_DECISION"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "SUPPORTING_QUESTION_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "NO_REGISTERED_SUPPORTING_QUESTION"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "SEQUENCE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "PREREQUISITE_KN-B1-P1-002",
+            "NEXT_KN-B1-P1-004"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "CLAIM_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "NO_FROZEN_C2_CLAIM_BOUNDARY"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "SOURCE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "NO_CANONICAL_SOURCE_REFERENCE",
+            "THREE_ACCEPTED_LEGACY_RELATIONSHIPS_SUPPORTING_ONLY"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "FIGURE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "NO_FROZEN_C2_FIGURE_BOUNDARY",
+            "PILOT_ROLE_FRAGMENT"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "PUBLIC_CONTENT_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "NO_PUBLISHED_ARTICLE_OR_ASSET_AUTHORITY",
+            "NO_CAR_PUBLISHED_FRAGMENT_COVERAGE"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "CROSS_NODE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "PREREQUISITE_KN-B1-P1-002",
+            "NEXT_KN-B1-P1-004"
+          ],
+          "humanFinding": null
+        }
+      ],
+      "unresolvedFindings": [
+        "C2_THESIS_BOUNDARY_NOT_FROZEN",
+        "LEGACY_SUPPORTING_ONLY_CANNOT_FREEZE_C2",
+        "NO_CANONICAL_SOURCE_REFERENCE"
+      ],
+      "humanQuestions": [
+        "What Canonical Thesis and six C2 boundary families govern this Node?",
+        "Is FRAGMENT the correct later production role after C3 readiness, while Article remains not required now?",
+        "Which claims require new canonical sources rather than Legacy Supporting evidence?"
+      ],
+      "humanDecision": {
+        "decision": null,
+        "actor": null,
+        "actorRole": null,
+        "decidedAt": null,
+        "rationale": null
+      },
+      "effects": {
+        "c2Frozen": false,
+        "c3Rebuilt": false,
+        "productionDecisionCreated": false,
+        "productionPlanFrozen": false,
+        "productionWaveFrozen": false,
+        "kpeActivated": false,
+        "pjaCandidateCreated": false,
+        "carCandidateCreated": false,
+        "reviewApproved": false,
+        "published": false
+      }
+    },
+    {
+      "packageCode": "PHI-OS-WAVE1-C2-REVIEW-KN-B1-P4-003-v1",
+      "packageVersion": "1.0.0",
+      "nodeCode": "KN-B1-P4-003",
+      "titleZhHans": "初始化状态如何嵌入坐标并形成长期稳定",
+      "locale": "zh-Hans",
+      "status": "PENDING_HUMAN",
+      "approvalState": "pending_human",
+      "authority": "PJA_C2_HUMAN_EDITORIAL_REVIEW",
+      "candidateReference": "content/knowledge/editorial/c2/candidates/kn-b1-p4-003.json",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-b1-p4-003-production-readiness.json",
+      "productionProjection": {
+        "productionRole": "FIGURE",
+        "dispatchTarget": "CAR",
+        "sourcePlan": "content/knowledge/production-planning/plans/kpp-pilot-production-plan-v2.json",
+        "sourceIsProductionDecision": false
+      },
+      "canonicalSnapshot": {
+        "nodeVersion": "1.0.0",
+        "registryStatus": "planned",
+        "canonicalLanguage": "zh-Hans",
+        "nodeRequiredPublicLanguages": [],
+        "blueprintStatus": "planned",
+        "blueprintArticleRequiredNow": true,
+        "blueprintPublicLanguagePlan": [
+          "zh-Hans",
+          "en"
+        ],
+        "sourceCodes": [],
+        "supportingQuestionCodes": [],
+        "prerequisiteNodeCodes": [
+          "KN-B1-P4-002"
+        ],
+        "nextNodeCodes": [
+          "KN-B1-P4-004"
+        ],
+        "relatedNodeCodes": [],
+        "pilotAssemblyParticipation": "supporting_node"
+      },
+      "c2Snapshot": {
+        "status": "human_review_required",
+        "thesisState": "not_assessed",
+        "boundaryState": "not_assessed",
+        "humanFreezeState": "required",
+        "authorityFinding": "INSUFFICIENT_MANUSCRIPT_AUTHORITY",
+        "candidateThesisPresent": false,
+        "candidateBoundariesPresent": false,
+        "blocking": [
+          "CANONICAL_THESIS_NOT_READY",
+          "BOUNDARY_NOT_READY",
+          "HUMAN_FREEZE_REQUIRED"
+        ]
+      },
+      "c3Snapshot": {
+        "status": "blocked_by_c2",
+        "productionReady": false,
+        "c2GateCode": "C2_NOT_FROZEN",
+        "publicationState": "not_published",
+        "blocking": [
+          "C2_THESIS_BOUNDARY_NOT_FROZEN",
+          "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
+          "EXPORTABILITY_NOT_ALLOWED"
+        ]
+      },
+      "publishedKnowledgeSnapshot": {
+        "publishedAssetCodes": [],
+        "publishedArticleCodes": [],
+        "runtimePublishedFragmentCount": 0,
+        "carAuthoritativePublishedFragmentCount": 0,
+        "c3PublicationStateConflict": false,
+        "silentRebuildAllowed": false
+      },
+      "legacySupportingRelationships": [],
+      "reviewDimensions": [
+        {
+          "dimension": "CANONICAL_THESIS",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "CANDIDATE_THESIS_NULL",
+            "INSUFFICIENT_MANUSCRIPT_AUTHORITY"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "ARTICLE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "CANDIDATE_BOUNDARIES_NULL",
+            "BLUEPRINT_ARTICLE_REQUIRED_NOW_TRUE",
+            "PILOT_ROLE_FIGURE_IS_NOT_PRODUCTION_DECISION"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "SUPPORTING_QUESTION_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "NO_REGISTERED_SUPPORTING_QUESTION"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "SEQUENCE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "PREREQUISITE_KN-B1-P4-002",
+            "NEXT_KN-B1-P4-004"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "CLAIM_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "NO_FROZEN_C2_CLAIM_BOUNDARY"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "SOURCE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "NO_CANONICAL_SOURCE_REFERENCE",
+            "NO_ACCEPTED_LEGACY_SUPPORTING_RELATIONSHIP"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "FIGURE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "PILOT_ROLE_FIGURE",
+            "NO_FROZEN_C2_FIGURE_BOUNDARY",
+            "NO_CAR_PUBLISHED_FRAGMENT_COVERAGE"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "PUBLIC_CONTENT_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "NO_PUBLISHED_ARTICLE_OR_ASSET_AUTHORITY",
+            "BLUEPRINT_ARTICLE_REQUIRED_NOW_TRUE"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "CROSS_NODE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "PILOT_ASSEMBLY_SUPPORTING_NODE",
+            "PILOT_ASSEMBLY_PRIMARY_KN-B1-P4-004",
+            "NEXT_KN-B1-P4-004"
+          ],
+          "humanFinding": null
+        }
+      ],
+      "unresolvedFindings": [
+        "C2_THESIS_BOUNDARY_NOT_FROZEN",
+        "PILOT_ROLE_DIFFERS_FROM_BLUEPRINT_ARTICLE_REQUIREMENT",
+        "CAR_PUBLISHED_FRAGMENT_AUTHORITY_NOT_ESTABLISHED",
+        "CROSS_NODE_ASSEMBLY_BOUNDARY_NOT_FROZEN"
+      ],
+      "humanQuestions": [
+        "What Canonical Thesis and six C2 boundary families govern this Node?",
+        "How should the later FIGURE projection relate to the Blueprint Article requirement without treating either as a Human Production Decision?",
+        "What knowledge and cross-node boundaries permit this Node to support the Part 4 assembly?"
+      ],
+      "humanDecision": {
+        "decision": null,
+        "actor": null,
+        "actorRole": null,
+        "decidedAt": null,
+        "rationale": null
+      },
+      "effects": {
+        "c2Frozen": false,
+        "c3Rebuilt": false,
+        "productionDecisionCreated": false,
+        "productionPlanFrozen": false,
+        "productionWaveFrozen": false,
+        "kpeActivated": false,
+        "pjaCandidateCreated": false,
+        "carCandidateCreated": false,
+        "reviewApproved": false,
+        "published": false
+      }
+    },
+    {
+      "packageCode": "PHI-OS-WAVE1-C2-REVIEW-KN-B1-P4-004-v1",
+      "packageVersion": "1.0.0",
+      "nodeCode": "KN-B1-P4-004",
+      "titleZhHans": "为什么身体是分层且有限的现实载体",
+      "locale": "zh-Hans",
+      "status": "PENDING_HUMAN",
+      "approvalState": "pending_human",
+      "authority": "PJA_C2_HUMAN_EDITORIAL_REVIEW",
+      "candidateReference": "content/knowledge/editorial/c2/candidates/kn-b1-p4-004.json",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-b1-p4-004-production-readiness.json",
+      "productionProjection": {
+        "productionRole": "MULTI_ASSET",
+        "dispatchTarget": "CAR",
+        "sourcePlan": "content/knowledge/production-planning/plans/kpp-pilot-production-plan-v2.json",
+        "sourceIsProductionDecision": false
+      },
+      "canonicalSnapshot": {
+        "nodeVersion": "1.0.0",
+        "registryStatus": "planned",
+        "canonicalLanguage": "zh-Hans",
+        "nodeRequiredPublicLanguages": [],
+        "blueprintStatus": "planned",
+        "blueprintArticleRequiredNow": false,
+        "blueprintPublicLanguagePlan": [
+          "zh-Hans",
+          "en"
+        ],
+        "sourceCodes": [],
+        "supportingQuestionCodes": [],
+        "prerequisiteNodeCodes": [
+          "KN-B1-P4-003"
+        ],
+        "nextNodeCodes": [
+          "KN-B1-P4-005"
+        ],
+        "relatedNodeCodes": [],
+        "pilotAssemblyParticipation": "primary_node"
+      },
+      "c2Snapshot": {
+        "status": "human_review_required",
+        "thesisState": "not_assessed",
+        "boundaryState": "not_assessed",
+        "humanFreezeState": "required",
+        "authorityFinding": "INSUFFICIENT_MANUSCRIPT_AUTHORITY",
+        "candidateThesisPresent": false,
+        "candidateBoundariesPresent": false,
+        "blocking": [
+          "CANONICAL_THESIS_NOT_READY",
+          "BOUNDARY_NOT_READY",
+          "HUMAN_FREEZE_REQUIRED"
+        ]
+      },
+      "c3Snapshot": {
+        "status": "blocked_by_c2",
+        "productionReady": false,
+        "c2GateCode": "C2_NOT_FROZEN",
+        "publicationState": "not_published",
+        "blocking": [
+          "C2_THESIS_BOUNDARY_NOT_FROZEN",
+          "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
+          "EXPORTABILITY_NOT_ALLOWED"
+        ]
+      },
+      "publishedKnowledgeSnapshot": {
+        "publishedAssetCodes": [],
+        "publishedArticleCodes": [],
+        "runtimePublishedFragmentCount": 0,
+        "carAuthoritativePublishedFragmentCount": 0,
+        "c3PublicationStateConflict": false,
+        "silentRebuildAllowed": false
+      },
+      "legacySupportingRelationships": [
+        {
+          "relationshipCode": "KAU-E2-REL-0019",
+          "sourceCode": "LEGACY-PHIOS-UNIFIED-LANGUAGE-PART-1",
+          "legacySectionCode": "LEGACY-SEC-2-9",
+          "relationshipType": "HISTORICAL_PRECURSOR",
+          "state": "ACCEPTED_SUPPORTING",
+          "supportingOnly": true,
+          "canonicalAuthority": false,
+          "productionDecisionAuthority": false
+        },
+        {
+          "relationshipCode": "KAU-E2-REL-0024",
+          "sourceCode": "LEGACY-PHIOS-UNIFIED-LANGUAGE-PART-1",
+          "legacySectionCode": "LEGACY-SEC-3-3",
+          "relationshipType": "PARTIAL_OVERLAP",
+          "state": "ACCEPTED_SUPPORTING",
+          "supportingOnly": true,
+          "canonicalAuthority": false,
+          "productionDecisionAuthority": false
+        },
+        {
+          "relationshipCode": "KAU-E2-REL-0042",
+          "sourceCode": "LEGACY-PHIOS-UNIFIED-LANGUAGE-PART-1",
+          "legacySectionCode": "LEGACY-SEC-3-21",
+          "relationshipType": "PARTIAL_OVERLAP",
+          "state": "ACCEPTED_SUPPORTING",
+          "supportingOnly": true,
+          "canonicalAuthority": false,
+          "productionDecisionAuthority": false
+        },
+        {
+          "relationshipCode": "KAU-E2-REL-0053",
+          "sourceCode": "LEGACY-PHIOS-UNIFIED-LANGUAGE-PART-1",
+          "legacySectionCode": "LEGACY-SEC-4-8",
+          "relationshipType": "PARTIAL_OVERLAP",
+          "state": "ACCEPTED_SUPPORTING",
+          "supportingOnly": true,
+          "canonicalAuthority": false,
+          "productionDecisionAuthority": false
+        },
+        {
+          "relationshipCode": "KAU-E2-REL-0088",
+          "sourceCode": "LEGACY-PHIOS-UNIFIED-LANGUAGE-PART-1",
+          "legacySectionCode": "LEGACY-SEC-6-8",
+          "relationshipType": "SUPPORTS",
+          "state": "ACCEPTED_SUPPORTING",
+          "supportingOnly": true,
+          "canonicalAuthority": false,
+          "productionDecisionAuthority": false
+        }
+      ],
+      "reviewDimensions": [
+        {
+          "dimension": "CANONICAL_THESIS",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "CANDIDATE_THESIS_NULL",
+            "INSUFFICIENT_MANUSCRIPT_AUTHORITY"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "ARTICLE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "CANDIDATE_BOUNDARIES_NULL",
+            "BLUEPRINT_ARTICLE_REQUIRED_NOW_FALSE",
+            "PILOT_ROLE_MULTI_ASSET_IS_NOT_PRODUCTION_DECISION"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "SUPPORTING_QUESTION_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "NO_REGISTERED_SUPPORTING_QUESTION"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "SEQUENCE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "PREREQUISITE_KN-B1-P4-003",
+            "NEXT_KN-B1-P4-005"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "CLAIM_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "NO_FROZEN_C2_CLAIM_BOUNDARY"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "SOURCE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "NO_CANONICAL_SOURCE_REFERENCE",
+            "FIVE_ACCEPTED_LEGACY_RELATIONSHIPS_SUPPORTING_ONLY"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "FIGURE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "PILOT_ROLE_MULTI_ASSET",
+            "NO_FROZEN_C2_FIGURE_BOUNDARY",
+            "NO_CAR_PUBLISHED_FRAGMENT_COVERAGE"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "PUBLIC_CONTENT_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "NO_PUBLISHED_ARTICLE_OR_ASSET_AUTHORITY",
+            "BLUEPRINT_ARTICLE_REQUIRED_NOW_FALSE"
+          ],
+          "humanFinding": null
+        },
+        {
+          "dimension": "CROSS_NODE_BOUNDARY",
+          "state": "PENDING_HUMAN",
+          "evidence": [
+            "PILOT_ASSEMBLY_PRIMARY_NODE",
+            "PILOT_ASSEMBLY_SUPPORTING_KN-B1-P4-003",
+            "PILOT_ASSEMBLY_SUPPORTING_KN-B1-P4-005"
+          ],
+          "humanFinding": null
+        }
+      ],
+      "unresolvedFindings": [
+        "C2_THESIS_BOUNDARY_NOT_FROZEN",
+        "LEGACY_SUPPORTING_ONLY_CANNOT_FREEZE_C2",
+        "CAR_PUBLISHED_FRAGMENT_AUTHORITY_NOT_ESTABLISHED",
+        "CROSS_NODE_ASSEMBLY_BOUNDARY_NOT_FROZEN"
+      ],
+      "humanQuestions": [
+        "What Canonical Thesis and six C2 boundary families govern this Node?",
+        "Which parts of the five Legacy Supporting relationships are evidence or gap signals only, and which new canonical sources are required?",
+        "What knowledge, source, figure and cross-node boundaries govern the proposed primary MULTI_ASSET assembly role?"
+      ],
+      "humanDecision": {
+        "decision": null,
+        "actor": null,
+        "actorRole": null,
+        "decidedAt": null,
+        "rationale": null
+      },
+      "effects": {
+        "c2Frozen": false,
+        "c3Rebuilt": false,
+        "productionDecisionCreated": false,
+        "productionPlanFrozen": false,
+        "productionWaveFrozen": false,
+        "kpeActivated": false,
+        "pjaCandidateCreated": false,
+        "carCandidateCreated": false,
+        "reviewApproved": false,
+        "published": false
+      }
+    }
+  ],
+  "effects": {
+    "c2Frozen": false,
+    "c3Rebuilt": false,
+    "productionDecisionCreated": false,
+    "productionPlanFrozen": false,
+    "productionWaveFrozen": false,
+    "kpeActivated": false,
+    "pjaCandidateCreated": false,
+    "carCandidateCreated": false,
+    "reviewApproved": false,
+    "published": false
+  }
+}

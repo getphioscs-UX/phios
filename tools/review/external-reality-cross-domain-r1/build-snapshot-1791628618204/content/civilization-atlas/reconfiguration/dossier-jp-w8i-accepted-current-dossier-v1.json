@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "PHI-OS-DOSSIER-JP-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+  "status": "ACCEPTED_CURRENT_DOSSIER",
+  "dossierId": "DOSSIER-JP",
+  "stage": "W8-I",
+  "acceptedAt": "2026-10-08",
+  "humanDecisionReference": "content/civilization-atlas/reconfiguration/dossier-jp-w8h-human-decisions-v1.json",
+  "readoutReference": {
+    "code": "RRE-READOUT-B6-JP-2026-1-CONTRACT",
+    "version": "2026.1-contract",
+    "digest": "49d9af5f5299315450262148980236301041f614b7000cfcc6a47ad873d8aca6"
+  },
+  "admittedPositions": [
+    {
+      "candidateId": "JP-RP-22-JP-W8F-SEM-PAYMENT-SETTLEMENT-CARRIER",
+      "runtimePositionId": "RP-22",
+      "scope": "SUBSYSTEM",
+      "subsystem": "PAYMENT_SETTLEMENT_CARRIER",
+      "grammarId": "G6",
+      "realityDomainId": "P2",
+      "evidenceRefs": [
+        "JP-CARRIER-STRUCTURE-2026-001"
+      ]
+    },
+    {
+      "candidateId": "JP-RP-23-JP-W8F-SEM-INDUSTRIAL-INFRASTRUCTURE-RUNTIME",
+      "runtimePositionId": "RP-23",
+      "scope": "SUBSYSTEM",
+      "subsystem": "INDUSTRIAL_INFRASTRUCTURE_RUNTIME",
+      "grammarId": "G7",
+      "realityDomainId": "P2",
+      "evidenceRefs": [
+        "JP-INDUSTRY-2026-001",
+        "JP-INFRASTRUCTURE-2026-001",
+        "JP-TECHNOLOGY-2026-001"
+      ]
+    },
+    {
+      "candidateId": "JP-RP-18-JP-W8F-SEM-ENERGY-IMPORT-DEPENDENCY-CONSTRAINT",
+      "runtimePositionId": "RP-18",
+      "scope": "SUBSYSTEM",
+      "subsystem": "ENERGY_IMPORT_DEPENDENCY_RUNTIME",
+      "grammarId": "G2",
+      "realityDomainId": "P2",
+      "evidenceRefs": [
+        "JP-EXTERNAL-DEPENDENCY-2026-001",
+        "JP-PRESSURE-FIELD-2026-001"
+      ]
+    }
+  ],
+  "preservedReferenceOnly": [
+    {
+      "semanticBasisId": "JP-W8E-SEM-DEMOGRAPHIC-ADAPTATION-CONTINUITY",
+      "state": "REFERENCE_ONLY",
+      "reason": "Ageing and selected automation responses are observed but do not yet establish a complete cross-system P3 continuity mechanism."
+    }
+  ],
+  "preservedUnknowns": [
+    "Industrial improvement persistence is not established.",
+    "Automation implementation is not uniform nationwide.",
+    "A complete cross-system demographic-continuity mechanism is not established.",
+    "No single whole-dossier Japan runtime position is established."
+  ],
+  "preservedConflicts": [
+    "Mature carriers coexist with ageing, labour shortages, energy vulnerability and uneven modernization depth."
+  ],
+  "projectionBoundary": {
+    "subsystemPositionsDoNotImplySingleWholeDossierPosition": true,
+    "cnPositionReuse": false,
+    "seaPositionReuse": false,
+    "inPositionReuse": false,
+    "euPositionReuse": false,
+    "usPositionReuse": false,
+    "prediction": false,
+    "historicalPositionShortcut": false,
+    "regionalAndSectorHeterogeneityPreserved": true,
+    "demographicAdaptationContinuityNotAdmitted": true
+  },
+  "providerCalls": 0
+}

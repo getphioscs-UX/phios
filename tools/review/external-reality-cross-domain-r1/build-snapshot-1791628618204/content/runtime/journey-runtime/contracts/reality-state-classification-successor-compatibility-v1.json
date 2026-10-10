@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "PHI-OS-RJX-STATE-CLASSIFICATION-SUCCESSOR-COMPATIBILITY-v1.0.0",
+  "work": "RJX-W9",
+  "status": "ACTIVE_COMPATIBILITY_NO_RMO_ENUM_MUTATION",
+  "baselineCommit": "fe24201c6634ddff32ef5b067f6bce4db14c3cf0",
+  "frozenRmoStateClasses": [
+    "OBSERVED",
+    "DERIVED",
+    "PROJECTED"
+  ],
+  "journeySemanticClasses": [
+    "OBSERVED",
+    "DERIVED",
+    "PROJECTED",
+    "CALCULATED",
+    "UNKNOWN"
+  ],
+  "compatibility": {
+    "CALCULATED": {
+      "rmoStateClass": "DERIVED",
+      "sourceType": "METHOD_CALCULATION",
+      "fullProvenanceRequired": true
+    },
+    "UNKNOWN": {
+      "representedBy": "RMO_UNKNOWN_RUNTIME",
+      "notAStateClass": true
+    }
+  },
+  "definitions": {
+    "OBSERVED": "DIRECT_OR_GOVERNED_DOCUMENTARY_OBSERVATION",
+    "DERIVED": "DETERMINISTIC_TRANSFORMATION_FROM_ACCEPTED_INPUT",
+    "PROJECTED": "BOUNDED_FORWARD_OR_ALTERNATIVE_PROJECTION",
+    "CALCULATED": "METHOD_CALCULATION_WITH_FULL_PROVENANCE",
+    "UNKNOWN": "NOT_ESTABLISHED"
+  },
+  "prohibitedPromotions": [
+    "REPORTED_EXPERIENCE_TO_OBSERVED",
+    "AI_INTERPRETATION_TO_DERIVED",
+    "METHOD_CALCULATION_TO_OBSERVED",
+    "PROJECTION_TO_EXPECTED_FACT",
+    "UNKNOWN_TO_FALSE"
+  ],
+  "frozenRmoEnumMutation": false
+}

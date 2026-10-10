@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W7-GUARANTEE-CONTRACT-v1.0.0",
+  "work": "FDR-W7",
+  "status": "ACTIVE",
+  "authorityOwner": "FDR",
+  "guaranteeTypes": [
+    "PERSONAL_GUARANTEE",
+    "CORPORATE_GUARANTEE",
+    "JOINT_GUARANTEE",
+    "CONTINGENT_LIABILITY"
+  ],
+  "requiredFields": [
+    "guaranteeId",
+    "guaranteeType",
+    "guarantorReferences",
+    "obligorReferences",
+    "exposureFact",
+    "currency",
+    "disclosureState",
+    "evidence"
+  ],
+  "optionalFields": [
+    "beneficiaryOrLender",
+    "relatedLiabilityReference",
+    "limitFact",
+    "expiryDate",
+    "securedAssetReferences",
+    "jointGuarantorReferences",
+    "documentReferences"
+  ],
+  "rules": {
+    "materialGuaranteeMustBeStructuredFact": true,
+    "largeBusinessGuaranteeMayNotBeNoteOnly": true,
+    "exposureMayBeRange": true,
+    "contingentExposureDoesNotBecomeCurrentDebtAutomatically": true,
+    "missingExposureDoesNotBecomeZero": true,
+    "allAtomicFinancialFactsUseFactEnvelope": true
+  },
+  "factEnvelopeReference": "financial-fact-contract-v1.json"
+}

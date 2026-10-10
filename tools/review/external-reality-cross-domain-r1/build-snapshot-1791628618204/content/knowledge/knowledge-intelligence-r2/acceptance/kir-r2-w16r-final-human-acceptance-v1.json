@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-W16R-FINAL-HUMAN-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "80bae71675ef8b196cd10402ea0ccbf9b833ee57",
+  "status": "HUMAN_ACCEPTED_PRODUCTION_ADMITTED",
+  "scope": "KIR-R2 W16R / W16R2 / W16R2A / W16R2B successor lineage",
+  "historicalEvidence": {
+    "w16rV2": {
+      "status": "HUMAN_REVIEW_FAILED",
+      "accepted": 48,
+      "total": 100,
+      "preserved": true
+    },
+    "w16r2Initial100": {
+      "path": "review/KIR-R2-W16R2-100-CASE-HUMAN-REVIEW-v1.json",
+      "accepted": 93,
+      "rejected": 7,
+      "criticalFailures": 0,
+      "gatePassed": true,
+      "preserved": true
+    },
+    "w16r2aTargetedMachine": {
+      "path": "review/KIR-R2-W16R2A-7-CASE-TARGETED-LIVE-RESULTS.json",
+      "applied": 7,
+      "guardPassed": 7
+    },
+    "w16r2aHumanSpot": {
+      "path": "review/KIR-R2-W16R2A-7-CASE-HUMAN-SPOT-REVIEW-v1.json",
+      "accepted": 6,
+      "rejected": 1,
+      "preserved": true
+    },
+    "case084R1": {
+      "path": "review/KIR-R2-W16R2A-R1-CASE084-HUMAN-SPOT-REVIEW-v1.json",
+      "decision": "REJECT",
+      "preserved": true
+    },
+    "case084R2": {
+      "path": "review/KIR-R2-W16R2B-CASE084-R2-HUMAN-SPOT-REVIEW-v1.json",
+      "decision": "ACCEPT",
+      "gatePassed": true
+    }
+  },
+  "effectiveSuccessorAcceptance": {
+    "originalAccepted": 93,
+    "targetedRemediationsAccepted": 7,
+    "effectiveAccepted": 100,
+    "effectiveTotal": 100,
+    "effectiveAcceptanceRate": 1,
+    "criticalFailures": 0,
+    "allPreviouslyRejectedCasesClosed": true,
+    "full100HumanReviewRepeated": false,
+    "reason": "The seven originally rejected outputs were regenerated under successor guards and individually human-reviewed; six passed W16R2A spot review and case 084 passed W16R2B R2 review."
+  },
+  "authorityBoundary": {
+    "knowledgeAuthorityOwnedByProvider": false,
+    "articleAuthorityChanged": false,
+    "bookAuthorityChanged": false,
+    "historicalEvidenceRewritten": false,
+    "languageModelRole": "COMPOSER_ONLY"
+  },
+  "productionGate": {
+    "humanAcceptancePassed": true,
+    "guardGapClosed": true,
+    "productionAdmissionAllowed": true
+  }
+}

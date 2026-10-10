@@ -1,0 +1,49 @@
+{
+  "registryCode": "PHI-OS-PR-E8-PRODUCTION-SECURITY-OPERATION-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "runtimeCode": "PR",
+  "status": "canonical",
+  "operations": [
+    {
+      "operationCode": "REVISION_CREATE",
+      "requiresReleasedPredecessor": true,
+      "requiresHumanProfessional": true
+    },
+    {
+      "operationCode": "REREVIEW",
+      "requiresReleasedPredecessor": false,
+      "requiresHumanProfessional": true
+    },
+    {
+      "operationCode": "APPROVE",
+      "requiresReleasedPredecessor": false,
+      "requiresHumanProfessional": true
+    },
+    {
+      "operationCode": "SIGN",
+      "requiresReleasedPredecessor": false,
+      "requiresHumanProfessional": true
+    },
+    {
+      "operationCode": "RELEASE",
+      "requiresReleasedPredecessor": false,
+      "requiresHumanProfessional": true
+    },
+    {
+      "operationCode": "PWS_HANDOFF",
+      "requiresReleasedPredecessor": false,
+      "requiresHumanProfessional": true
+    },
+    {
+      "operationCode": "RR_HANDOFF",
+      "requiresReleasedPredecessor": false,
+      "requiresHumanProfessional": true
+    }
+  ],
+  "rules": {
+    "unknownOperationFailsClosed": true,
+    "accountRoleMayGrantOperation": false,
+    "aiMayGrantOperation": false,
+    "providerMayGrantOperation": false
+  }
+}

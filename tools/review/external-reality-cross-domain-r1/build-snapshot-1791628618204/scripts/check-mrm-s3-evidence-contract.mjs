@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import { PATHS, readJson, assertBaseline } from './lib/runtime-maturity/mrm-s-phase-a-lib.mjs';
+const classes=readJson(PATHS.s3classes), contract=readJson(PATHS.s3contract); assertBaseline(classes,'MRM_S3_CLASSES'); assertBaseline(contract,'MRM_S3_CONTRACT');
+const expected=['ARCHITECTURE','DETERMINISM','REFERENCE_FIXTURE','EDGE_FIXTURE','NEGATIVE_FIXTURE','REGRESSION_FIXTURE','PILOT','CASE','FOLLOW_UP','OUTCOME','VALIDATION','METRIC','RESEARCH','MONITORING','DRIFT','INCIDENT','RECOVERY'];
+assert.deepEqual(classes.evidenceClasses.map(x=>x.code),expected,'MRM_S3_EVIDENCE_CLASS_DRIFT');
+assert.equal(new Set(classes.evidenceClasses.map(x=>x.code)).size,expected.length);
+for(const f of ['evidenceId','runtimeCode','capabilityCode','evidenceClass','version','artifactDigest','scope','limitations','evidenceState']) assert.ok(contract.requiredFields.includes(f),`MRM_S3_REQUIRED_FIELD_MISSING_${f}`);
+assert.deepEqual(contract.rules.caseIdRequiredFor,['PILOT','CASE','FOLLOW_UP','OUTCOME']);
+assert.ok(contract.rules.fixtureIdRequiredFor.includes('REGRESSION_FIXTURE'));
+assert.equal(contract.rules.evidenceObjectDoesNotChangeRuntimeAuthority,true);
+console.log('✓ MRM-S3 Evidence Object Contract passed.');
+console.log(`  ${expected.length} evidence classes are governed; evidence requires version, digest, scope and limitations.`);

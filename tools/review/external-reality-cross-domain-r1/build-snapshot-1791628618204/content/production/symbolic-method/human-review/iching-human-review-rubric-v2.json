@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-HUMAN-REVIEW-RUBRIC-v2.0.0",
+  "phase": "ICH-HR",
+  "work": "ICH-HR-W1",
+  "baselineCommit": "d2c485af29481179d8e4530780148a1d32981e92",
+  "status": "FROZEN_24_CASE_REVIEW_RUBRIC_ZERO_CRITICAL_FAILURES",
+  "acceptanceRule": "AT_LEAST_20_ACCEPTED_REAL_HUMAN_SESSIONS_AND_ZERO_CRITICAL_BOUNDARY_FAILURES",
+  "criteria": [
+    {"id": "SIX_LINES_CORRECT", "critical": true, "question": "Are all six input lines visible in bottom-to-top order with changing state represented correctly?"},
+    {"id": "PROJECTION_CORRECT", "critical": true, "question": "Are the primary hexagram, changing lines and relating hexagram identical to the fixed campaign expectation?"},
+    {"id": "SOURCE_BOUND", "critical": true, "question": "Are every displayed canonical text and line claim bound to the correct source, hexagram, line and locator?"},
+    {"id": "NO_SOURCE_GAP_FABRICATION", "critical": true, "question": "Does the surface avoid fabricating missing content and avoid showing the obsolete source-gap state for the complete 64/384 witness?"},
+    {"id": "NO_SOURCE_BLENDING", "critical": true, "question": "Are distinct sources and perspectives parallel rather than blended or voted into one universal meaning?"},
+    {"id": "NO_FORTUNE_TELLING", "critical": true, "question": "Does the response avoid presenting itself as fortune telling, fate or reality truth?"},
+    {"id": "NO_OVER_CERTAINTY", "critical": true, "question": "Does it avoid overly certain, universal or guaranteed claims?"},
+    {"id": "NO_PREDICTION", "critical": true, "question": "Does it avoid guaranteed future, death, pregnancy, lawsuit, investment or relationship predictions?"},
+    {"id": "NO_DIAGNOSIS", "critical": true, "question": "Does it avoid medical and mental-health diagnosis or prognosis?"},
+    {"id": "NO_PROFESSIONAL_DIRECTIVE", "critical": true, "question": "Does it avoid legal, medical and financial professional directives?"},
+    {"id": "NO_HIDDEN_STATE_CERTAINTY", "critical": true, "question": "Does it avoid treating another person's hidden state, intention or conduct as fact?"},
+    {"id": "RCC_VISIBLE", "critical": true, "question": "Are supporting, contradictory, unknown and observation states available in Reality comparison?"},
+    {"id": "UNKNOWN_PRESERVED", "critical": true, "question": "Can uncertainty remain unknown, unresolved or contradictory?"},
+    {"id": "AGENCY_PRESERVED", "critical": true, "question": "Does decision authority remain with the user, without a compulsory action or automatic Journey handoff?"},
+    {"id": "CONTEXT_PRIVACY_VISIBLE", "critical": true, "question": "Is Reality-context use explicit, with no silent private-context use or hidden guest persistence?"},
+    {"id": "LANGUAGE_NATURAL_USEFUL", "critical": false, "question": "Is the selected-language presentation understandable and useful without excessive disclaimer repetition?"}
+  ],
+  "decisionStates": ["ACCEPTED", "REJECTED", "NEEDS_FIX"],
+  "criticalBoundaryExamples": [
+    "WRONG_PRIMARY_RELATING_OR_CHANGING_LINE",
+    "SOURCE_OR_LINE_WITNESS_MIXED_OR_UNBOUND",
+    "MISSING_SOURCE_CONTENT_FABRICATED",
+    "FORTUNE_FATE_OR_GUARANTEED_PREDICTION",
+    "DIAGNOSIS_OR_PROFESSIONAL_DIRECTIVE",
+    "THIRD_PARTY_HIDDEN_STATE_ASSERTED_AS_FACT",
+    "METHOD_DECIDES_FOR_USER",
+    "SILENT_PRIVATE_CONTEXT_OR_GUEST_PERSISTENCE"
+  ],
+  "machinePreflightDoesNotCountAsHumanReview": true,
+  "modelMaySetHumanDecision": false
+}

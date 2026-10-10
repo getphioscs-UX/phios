@@ -1,0 +1,358 @@
+OWNER CORRECTION · SHARED DELIVERY BACKBONE DELTA
+Tarot RM19 + Current/ Historical QA Truth
+继续执行刚才已经收到的 PHI OS · SHARED DELIVERY BACKBONE · ZERO-PROVIDER PRODUCT CLOSURE · MASTER WORK STEP。
+不要重新开始，不要另建第二套 backbone，不要覆盖已经执行中的修改。
+本消息只修正 / 补充以下 owner truth。
+1. Tarot 最终商业价格修正
+此前消息中如出现：
+RM9 Tarot
+
+全部视为旧值 / 错误值。
+当前最终 owner decision 为：
+COM-READING-TAROT-FULL
+price = RM19
+
+因此保留当前 Master 中：
+Tarot paid RM19
+
+以及：
+RM19 bilingual Tarot
+
+作为当前 commercial truth。
+冻结：
+TAROT_CURRENT_PRICE = RM19
+
+不要降回 RM9。
+2. Tarot 当前产品形态
+当前 Tarot 应明确分成两个产品层：
+FREE TAROT
+= deterministic
+= zero provider
+= shuffle / draw / orientation / spread
+= accepted deterministic meaning
+
+以及：
+PAID TAROT RM19
+= same deterministic validated draw
++ customer question/context
++ personalised AI synthesis
++ bilingual delivery where product contract requires
++ four follow-up questions under current paid-report rule
++ save to My Reality
+
+AI 不得：
+choose cards
+change cards
+change orientation
+change spread
+invent draw
+override deterministic reading identity
+
+AI 只做：
+bounded personalised synthesis
+
+3. 20-case Tarot QA 必须区分“历史测试”和“当前授权批次”
+当前 Master 存在两个不同事实，不得合并。
+A. 历史 20-case cost / quality evidence
+仓库已经存在历史：
+TAROT-COST-QUALITY-REVIEW
+
+以及历史真实 synthesis 测试数据。
+这些可以继续保留为：
+HISTORICAL_COST_QUALITY_EVIDENCE
+
+它们的作用是：
+historical model/cost/latency/quality reference
+
+但它们：
+≠ current batch admission
+≠ current commercial full-order validation
+≠ current preflight completion
+
+不得删除或伪装成不存在。
+B. 当前 owner 授权的 20-case batch
+当前新的正式授权仍然是：
+maxCases = 20
+maxPerCaseUSD = 0.10
+maxTotalUSD = 2.00
+paidRetry = 0
+
+但是当前 batch：
+preflightRequired = true
+currentCalls = 0
+currentSpendUSD = 0
+currentBatchState = NOT_STARTED
+
+因此：
+HISTORICAL_20_CASE_TEST_COMPLETED
+
+可以成立，
+同时：
+CURRENT_AUTHORIZED_20_CASE_BATCH_NOT_STARTED
+
+也成立。
+两者不得互相覆盖。
+4. 修正 W22 的表达，不得产生自相矛盾
+当前 Master 中如果同时存在：
+currentCalls = 0
+
+和：
+20次真实合成调用已完成
+
+必须改成明确的双层状态。
+建议 W22 改为：
+W22 · Tarot 20-case unit economics
+
+HISTORICAL_EVIDENCE:
+AVAILABLE
+
+CURRENT_AUTHORIZED_BATCH:
+AUTHORIZED_NOT_STARTED
+
+CURRENT_PREFLIGHT:
+PENDING
+
+CURRENT_CALLS:
+0
+
+CURRENT_SPEND_USD:
+0
+
+PAID_RETRY:
+0
+
+并明确：
+历史 20-case 数据仅作为 cost / quality reference；当前 RM19 bilingual + four-follow-up commercial path 尚未通过本批 preflight，因此不能用历史 20-case 自动证明当前整单成本或当前 production admission。
+
+5. 不要重复历史 20 calls，除非当前 QA 目标确实需要新样本
+当前 20-case authorization 不是要求“因为存在授权就必须再花钱跑 20 次”。
+先完成零费用 preflight：
+model allowlist
+dedicated QA endpoint
+hard per-case budget guard
+hard total budget guard
+paidRetry = 0
+usage ledger
+token / cost metering
+abort behavior
+fixed deterministic draw binding
+bilingual output contract
+four-question whole-order cost ownership
+failure recovery
+
+然后判断：
+historical evidence
+
+是否足够支持部分 unit-economics 项。
+只有当前新商业 contract 需要新的真实证据时，才使用已经授权的最多 20 cases。
+不能为了“把授权用完”而产生无必要调用。
+6. Tarot provider contract
+当前 paid Tarot 的正常生成原则：
+ONE primary synthesis call
+
+不是长报告 3-call contract。
+不要把 AST / BaZi / Zi Wei 的：
+PRIMARY_MAX_CALLS = 3
+
+套到 Tarot。
+Tarot 应单独保持：
+PRIMARY_SYNTHESIS_CALLS = 1
+PAID_RETRY = 0
+
+异常失败应进入：
+RECOVERABLE_DELIVERY_STATE
+
+而不是自动 paid retry。
+7. 四次 follow-up 的费用必须进入产品总成本
+RM19 Tarot 当前包括的四次 follow-up questions 如果属于 current commercial contract，则成本核算不能只看：
+initial Tarot synthesis
+
+必须计算：
+initial synthesis
++
+up to four follow-up answers
++
+bilingual generation where applicable
++
+any permitted exceptional repair
+
+形成：
+PRODUCT_TOTAL_COST
+
+所以：
+single-call cost
+≠
+full RM19 order cost
+
+历史 20-case initial synthesis 的平均成本不能自动证明：
+RM19 product total economics PASS
+
+8. Shared Delivery Backbone 继续按原指令执行
+刚才已经收到的 backbone 保持不变，继续优先：
+CUSTOMER_REPORT_ARTIFACT
+IMMUTABLE_GENERATED_COPY
+GENERATION_IDENTITY
+ENTITLEMENT_TO_GENERATION_BINDING
+MY_REALITY_ARTIFACT_INDEX
+CROSS_SESSION_REOPEN
+REPORT_REOPEN_ZERO_PROVIDER
+IMMUTABLE_CUSTOMER_REPORT
+FOLLOWUP_BINDING
+NAVIGATION_HANDOFF
+PDF_DERIVATIVE_ONLY
+ARTIFACT_SIZE_AUDIT
+
+不要因为本消息是 Tarot correction 而暂停 backbone。
+9. AST / BaZi / Zi Wei 3-call contract 保持不变
+长报告当前 owner contract 仍是：
+AST
+BAZI
+ZIWEI
+
+PRIMARY_MAX_CALLS = 3
+
+双语报告：
+complete bilingual report required
+max total provider cost = USD 1.00 / report
+
+冻结：
+3 calls is a ceiling,
+not a reason to shorten the report.
+
+Repair：
+exceptional
+metered
+delivery-completion oriented
+soft-limit governed
+not automatic retry
+
+Tarot 不使用这个 3-call contract。
+10. I Ching 仍独立处理
+当前 I Ching：
+FREE
+= deterministic cast
+= primary hexagram
+= changing lines
+= resulting hexagram
+= accepted corpus
+= 0 provider
+
+Paid I Ching 按当前 owner commercial decision：
+RM39
+
+如果采用 personalised synthesis：
+deterministic cast first
+→ fixed cast identity
+→ bounded AI synthesis
+
+不得让 provider 改卦。
+继续完成零费用：
+commerce binding
+entitlement
+cast identity
+artifact persistence
+My Reality reopen
+Navigation handoff
+provider gate
+cost guard
+failure state
+
+之后再决定是否授权实际 paid synthesis QA。
+11. Master truth 中请明确保留以下区别
+HISTORICAL_PROVIDER_EVIDENCE
+≠
+CURRENT_PROVIDER_ADMISSION
+
+PROVIDER_AUTHORIZATION
+≠
+PROVIDER_CALL_REQUIRED
+
+SINGLE_SYNTHESIS_COST
+≠
+PRODUCT_TOTAL_COST
+
+TAROT_ONE_CALL_CONTRACT
+≠
+AST_BAZI_ZIWEI_THREE_CALL_CONTRACT
+
+FREE_TAROT
+≠
+PAID_TAROT_RM19
+
+12. 更新唯一 Master，不建立新 Master
+在当前：
+MASTER-HUMAN-REVIEW
+
+里修正即可。
+Tarot 部分最终应至少显示：
+Current price:
+RM19
+
+Free Tarot:
+deterministic / zero provider
+
+Paid Tarot:
+one primary personalised synthesis
+
+Follow-ups:
+4 under current commercial contract
+
+Historical real synthesis evidence:
+AVAILABLE
+
+Current authorized QA batch:
+NOT_STARTED
+
+Current QA calls:
+0
+
+Current QA spend:
+USD 0
+
+Current preflight:
+PENDING
+
+Paid retry:
+0
+
+13. 本轮仍然不授权
+本消息：
+does not authorize new paid calls
+does not authorize deploy
+does not authorize production payment
+does not authorize commit
+does not authorize push
+
+继续所有可完成的：
+source work
+local E2E
+artifact persistence
+reopen
+follow-up
+Navigation handoff
+cost guard
+provider preflight
+Tarot / I Ching zero-provider closure
+
+14. 本轮回报
+继续执行原 Shared Delivery Backbone 后，除原要求外，请额外返回：
+Tarot current price truth
+historical 20-case evidence state
+current authorized batch state
+current calls
+current spend
+preflight blockers
+one-call synthesis contract state
+four-follow-up whole-product cost state
+I Ching zero-provider delivery state
+
+FINAL OWNER TRUTH
+Tarot final price = RM19
+
+Historical 20-case evidence may exist
+while current authorized batch remains 0 calls / USD0.
+
+Tarot paid generation = one bounded synthesis call,
+not the three-call long-report contract.
+
+Shared Delivery Backbone remains the current execution priority.

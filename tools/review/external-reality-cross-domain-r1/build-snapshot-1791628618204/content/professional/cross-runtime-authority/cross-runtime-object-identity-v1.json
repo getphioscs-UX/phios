@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "PHI-OS-CROSS-RUNTIME-OBJECT-IDENTITY-v1.0.0",
+  "phaseCode": "PHASE-0",
+  "stepCode": "STEP-0.2",
+  "contractCode": "CROSS_RUNTIME_OBJECT_IDENTITY",
+  "contractVersion": "1.0.0",
+  "status": "frozen",
+  "identities": [
+    {
+      "field": "caseCode",
+      "objectType": "CASE",
+      "prefix": "CASE-",
+      "authorityCode": "INPUT_AUTHORITY"
+    },
+    {
+      "field": "projectionCode",
+      "objectType": "CANONICAL_PROJECTION",
+      "prefix": "PRJ-",
+      "authorityCode": "PROJECTION_AUTHORITY"
+    },
+    {
+      "field": "meaningCode",
+      "objectType": "CANONICAL_MEANING",
+      "prefix": "CM-",
+      "authorityCode": "MEANING_AUTHORITY"
+    },
+    {
+      "field": "nodeCode",
+      "objectType": "CANONICAL_KNOWLEDGE_NODE",
+      "prefix": "KN-",
+      "authorityCode": "KNOWLEDGE_AUTHORITY"
+    },
+    {
+      "field": "briefCode",
+      "objectType": "CANONICAL_ASSET_BRIEF",
+      "prefix": "BRIEF-",
+      "authorityCode": "ASSET_AUTHORITY"
+    },
+    {
+      "field": "assetCode",
+      "objectType": "CANONICAL_ASSET",
+      "prefix": "ASSET-",
+      "authorityCode": "ASSET_AUTHORITY"
+    },
+    {
+      "field": "journeyCode",
+      "objectType": "JOURNEY",
+      "prefix": "JRN-",
+      "authorityCode": "JOURNEY_AUTHORITY"
+    },
+    {
+      "field": "professionalDecisionCode",
+      "objectType": "PROFESSIONAL_DECISION",
+      "prefix": "PDEC-",
+      "authorityCode": "PROFESSIONAL_AUTHORITY"
+    },
+    {
+      "field": "reportCode",
+      "objectType": "REPORT",
+      "prefix": "RPT-",
+      "authorityCode": "REPORT_AUTHORITY"
+    },
+    {
+      "field": "publicationCode",
+      "objectType": "PUBLICATION",
+      "prefix": "PUB-",
+      "authorityCode": "PUBLICATION_AUTHORITY"
+    }
+  ],
+  "rules": {
+    "canonicalCodeImmutable": true,
+    "sameCodeMayRepresentDifferentObjectTypes": false,
+    "prefixesUnique": true,
+    "aliasesRequireExplicitAliasRegistry": true,
+    "codeMayBeDerivedFromDisplayTitle": false,
+    "codeMayChangeWithLocale": false,
+    "codeMayChangeWithPublicationState": false
+  }
+}

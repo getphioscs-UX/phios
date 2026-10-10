@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-MCD-2-CANONICAL-RUNTIME-ADAPTER-CONTRACT-v1.0.0",
+  "work": "MCD-2",
+  "baselineCommit": "eb55edb1a183a173aca707e3d3f1a6f842e36271",
+  "status": "ACTIVE_CANONICAL_ADAPTER_BINDING_NO_CANONICAL_INPUT_OR_CUSTOMER_CALCULATION_ACTIVATION",
+  "authorityChain": [
+    "API",
+    "MPA",
+    "ADAPTER_REGISTRY",
+    "METHOD_ADAPTER",
+    "CORE_METHOD_RUNTIME"
+  ],
+  "canonicalEndpoint": "functions/api/method-execute.js",
+  "mpaGate": "functions/method-production-activation/method-execution-gate-runtime.js",
+  "mpaAuthoritySuccessor": "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+  "adapterRegistry": "content/professional/method-client-delivery/registries/mcd-2-canonical-runtime-adapter-registry-v1.json",
+  "rules": {
+    "apiMayGrantAuthority": false,
+    "mcdMayGrantAuthority": false,
+    "adapterMayGrantAuthority": false,
+    "mpaSuccessorControlsDispatchAllowed": true,
+    "frontendDirectCoreImportAllowed": false,
+    "apiDirectCoreImportAllowed": false,
+    "adapterIsOnlyCoreBindingLayer": true,
+    "rawClientPayloadMayEnterCoreBeforeMcd3": false,
+    "customerProductionCalculationMayExecuteBeforeMcd4": false,
+    "coreHistoricalValidationBoundaryRewritten": false,
+    "interpretationIncluded": false,
+    "professionalJudgmentIncluded": false,
+    "frozenW30HistoricalArtifactsMutated": false,
+    "canonicalApiDriftRequiresVersionedMpaFreezeSuccessor": true
+  },
+  "hdr": {
+    "registrationMode": "VALIDATION_ONLY",
+    "adapterRegistrationAllowed": true,
+    "productionInvocationAllowed": false,
+    "publicRequestAliasActivated": false,
+    "publicSurfaceExposureAllowed": false,
+    "adapterBypassMayNotInvokeCore": true
+  },
+  "nextWork": "MCD-3",
+  "mpaFreezeSuccessor": "content/professional/method-production-activation/successors/mpa-w30-mcd2-adapter-successor-v1.json"
+}

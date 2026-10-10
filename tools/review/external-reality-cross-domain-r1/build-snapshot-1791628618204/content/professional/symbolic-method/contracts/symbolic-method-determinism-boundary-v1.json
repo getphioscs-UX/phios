@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-SYMBOLIC-METHOD-DETERMINISM-BOUNDARY-v1.0.0",
+  "phase": "SYM",
+  "work": "SYM-W4",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "FROZEN_SELECTION_BOUNDARY",
+  "separations": [
+    "RANDOM_SELECTION_NE_AI_CHOICE",
+    "SELECTION_EVIDENCE_NE_INTERPRETATION",
+    "REPLAY_NE_REROLL"
+  ],
+  "randomSelection": {
+    "allowed": true,
+    "aiChoiceAllowed": false,
+    "providerChoiceAllowed": false,
+    "mustPersist": [
+      "seed",
+      "entropyEvidence",
+      "selectionOrder",
+      "selectedSymbols",
+      "runtimeVersion",
+      "replayToken"
+    ],
+    "replayRequired": true,
+    "replayUsesStoredEvidence": true,
+    "replayMayGenerateNewRandomOutcome": false
+  },
+  "manualSelection": {
+    "allowed": true,
+    "selectionOrderRequired": true,
+    "selectedSymbolsRequired": true,
+    "aiChoiceAllowed": false
+  },
+  "postSelectionDeterminism": {
+    "sameStoredEvidenceMustRestoreSameSelection": true,
+    "sameProjectionVersionMustRestoreSameProjection": true,
+    "interpretationMayNotAlterSelection": true
+  }
+}

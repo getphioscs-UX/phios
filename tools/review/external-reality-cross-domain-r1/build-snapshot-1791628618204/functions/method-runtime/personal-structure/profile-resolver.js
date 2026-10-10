@@ -1,0 +1,2 @@
+/** MIR-3 Profile resolver: Personality Sun line / Design Sun line only. */
+export function resolveProfile(activations){const p=activations.find(a=>a.layer==='PERSONALITY'&&a.bodyCode==='SUN'&&a.status!=='UNKNOWN');const d=activations.find(a=>a.layer==='DESIGN'&&a.bodyCode==='SUN'&&a.status!=='UNKNOWN');if(!p||!d)return Object.freeze({status:'UNKNOWN',personalityLine:null,designLine:null,profileCode:null});return Object.freeze({status:'CALCULATED',personalityLine:p.line,designLine:d.line,profileCode:`${p.line}/${d.line}`});}

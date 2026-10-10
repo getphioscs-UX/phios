@@ -1,0 +1,2417 @@
+{
+  "registryCode": "PHI-OS-RG-W0-RUNTIME-CHECKER-INVENTORY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RG-W0",
+  "status": "audit",
+  "baselineCommit": "c6ff0a9d0481cafeb57f6c3248b6377d78444859",
+  "counts": {
+    "checkerFiles": 324,
+    "packageCheckAliases": 364,
+    "legacyAliasEntries": 22,
+    "freezeFiles": 81,
+    "acceptanceFiles": 20
+  },
+  "existingAliasRegistry": "content/runtime/checkers/runtime-checker-alias-registry-v1.json",
+  "checkerFiles": [
+    "scripts/check-about-thesis-i18n.mjs",
+    "scripts/check-ast-w0-astrology-runtime-foundation.mjs",
+    "scripts/check-ast-w1-astronomy-runtime.mjs",
+    "scripts/check-ast-w2-planet-runtime.mjs",
+    "scripts/check-ast-w3-house-runtime.mjs",
+    "scripts/check-ast-w4b-aspect-runtime.mjs",
+    "scripts/check-ast-w5-projection-runtime.mjs",
+    "scripts/check-ast-w6-professional-integration.mjs",
+    "scripts/check-ast-w7-production-freeze.mjs",
+    "scripts/check-book-1-figure-runtime-alignment.mjs",
+    "scripts/check-book-1-runtime-alignment.mjs",
+    "scripts/check-book-w0-four-volume-migration.mjs",
+    "scripts/check-bug-fix-closure.mjs",
+    "scripts/check-bzr-w0-bazi-runtime-foundation.mjs",
+    "scripts/check-bzr-w1-solar-calendar-runtime.mjs",
+    "scripts/check-bzr-w2-four-pillars-runtime.mjs",
+    "scripts/check-bzr-w3-luck-cycle-runtime.mjs",
+    "scripts/check-bzr-w4-projection-runtime.mjs",
+    "scripts/check-bzr-w5-professional-integration.mjs",
+    "scripts/check-car-w0-foundation-audit.mjs",
+    "scripts/check-car-w1-canonical-asset-contract.mjs",
+    "scripts/check-car-w10-w14-candidate-to-publication.mjs",
+    "scripts/check-car-w2-canonical-asset-brief-runtime.mjs",
+    "scripts/check-car-w3-article-reconciliation.mjs",
+    "scripts/check-car-w4-figure-diagram.mjs",
+    "scripts/check-car-w5-prompt-asset-runtime.mjs",
+    "scripts/check-car-w6-video-audio.mjs",
+    "scripts/check-car-w7-slides-academy.mjs",
+    "scripts/check-car-w8-website-module-projection.mjs",
+    "scripts/check-car-w9-provider-routing-integration.mjs",
+    "scripts/check-cm-w10-cross-method-number-meaning.mjs",
+    "scripts/check-cm-w14-meaning-projection-for-journey.mjs",
+    "scripts/check-cm-w9-bzr-target-meaning-population.mjs",
+    "scripts/check-cmr-w0-cross-system-baseline-audit.mjs",
+    "scripts/check-cmr-w1-5-meaning-identity-runtime.mjs",
+    "scripts/check-cmr-w1-canonical-meaning-contract.mjs",
+    "scripts/check-cmr-w11-w12-canonical-meaning-runtime-convergence.mjs",
+    "scripts/check-cmr-w13-meaning-to-knowledge-bridge.mjs",
+    "scripts/check-cmr-w15-acceptance-freeze.mjs",
+    "scripts/check-cmr-w2-canonical-meaning-family-registry.mjs",
+    "scripts/check-cmr-w3-canonical-meaning-code-registry.mjs",
+    "scripts/check-cmr-w4-meaning-dimension-registry.mjs",
+    "scripts/check-cmr-w5-book-to-meaning-authority-mapping.mjs",
+    "scripts/check-cmr-w6a-method-to-meaning-mapping-contract.mjs",
+    "scripts/check-cmr-w6b-versioned-mapping-registry.mjs",
+    "scripts/check-cmr-w6c-mapping-checker-compatibility.mjs",
+    "scripts/check-cmr-w6d-mapping-foundation-acceptance-freeze.mjs",
+    "scripts/check-cmr-w7a-hdr-structure-mapping.mjs",
+    "scripts/check-cmr-w7b-hdr-runtime-mapping.mjs",
+    "scripts/check-cmr-w7c-w7d-hdr-mapping-acceptance.mjs",
+    "scripts/check-cmr-w8-ast-meaning-mapping-foundation.mjs",
+    "scripts/check-cmr-w9-bzr-meaning-mapping-foundation.mjs",
+    "scripts/check-cmw-w0-w6-master-work-governance.mjs",
+    "scripts/check-cmw-w7-freeze.mjs",
+    "scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+    "scripts/check-cpr-w19-w29-composition-surfaces.mjs",
+    "scripts/check-cpr-w30-full-freeze.mjs",
+    "scripts/check-cpr-w7-w18-presentation-objects.mjs",
+    "scripts/check-exp-g1-core-public-experience-gate.mjs",
+    "scripts/check-exp-w2-home-about.mjs",
+    "scripts/check-exp-w3-journey-overview-demo-entry.mjs",
+    "scripts/check-exp-w4-reconstruction-customer-projection.mjs",
+    "scripts/check-exp-w4a-public-reality-demo-retirement.mjs",
+    "scripts/check-exp-w5-reading-value-reveal.mjs",
+    "scripts/check-exp-w6-navigation-review-memory-continuity.mjs",
+    "scripts/check-full-journey-acceptance.mjs",
+    "scripts/check-hdr-w0-human-design-runtime-foundation.mjs",
+    "scripts/check-hdr-w1-astronomy-runtime.mjs",
+    "scripts/check-hdr-w2-design-moment-solver.mjs",
+    "scripts/check-hdr-w3-gate-runtime.mjs",
+    "scripts/check-hdr-w4-bodygraph-runtime.mjs",
+    "scripts/check-hdr-w5-projection-runtime.mjs",
+    "scripts/check-hdr-w6-professional-integration.mjs",
+    "scripts/check-hdr-w7-production-freeze.mjs",
+    "scripts/check-i18n.mjs",
+    "scripts/check-imr-w0-scope-data-algorithm-license-audit.mjs",
+    "scripts/check-imr-w1-method-governance-registry.mjs",
+    "scripts/check-imr-w2-commercial-license.mjs",
+    "scripts/check-imr-w3-algorithm-governance.mjs",
+    "scripts/check-imr-w4-production-eligibility.mjs",
+    "scripts/check-imr-w5-version-management.mjs",
+    "scripts/check-imr-w6-method-governance-freeze.mjs",
+    "scripts/check-kau-w0-w8-authoring-foundation.mjs",
+    "scripts/check-kau-w9-w14-authoring-governance-readiness.mjs",
+    "scripts/check-kh-p1-p5-knowledge-runtime-completion.mjs",
+    "scripts/check-kh-w3-5a-d-pkr-foundation.mjs",
+    "scripts/check-kh-w3-5e-preface-canonical-consolidation.mjs",
+    "scripts/check-kh-w3-5f-canonical-extraction-scaling-freeze.mjs",
+    "scripts/check-kh-w3-5g-book-i-knowledge-blueprint.mjs",
+    "scripts/check-kh-w3-5h-universal-knowledge-blueprint-v2.mjs",
+    "scripts/check-kh-w4a-knowledge-runtime-v2.mjs",
+    "scripts/check-kh-w4b-w4c-registry-authority-consumption.mjs",
+    "scripts/check-kh-w4b5-book-2-canonical-node-registry.mjs",
+    "scripts/check-kh-w4b5-book-3-canonical-node-registry.mjs",
+    "scripts/check-kh-w4b5-book-4-canonical-node-registry.mjs",
+    "scripts/check-kh-w4b5-r1-blueprint-registry-authority-refresh.mjs",
+    "scripts/check-kh-w4d-w4e-freeze-ownership.mjs",
+    "scripts/check-kh-w4g-knr-registry-consumption-migration.mjs",
+    "scripts/check-kh-w4g5-semantic-graph-foundation.mjs",
+    "scripts/check-kh-w4g6-w4h-manuscript-mapping-foundation.mjs",
+    "scripts/check-kh-w4h-phase-e-private-manuscript-pja-revalidation.mjs",
+    "scripts/check-kh-w4h-phase-f-production-intelligence.mjs",
+    "scripts/check-kh-w4i-w4k-public-foundation-acceptance.mjs",
+    "scripts/check-knowledge-intelligence-package-k-a.mjs",
+    "scripts/check-knowledge-intelligence-package-k-b.mjs",
+    "scripts/check-knowledge-intelligence-package-k-c.mjs",
+    "scripts/check-knowledge-intelligence-package-k-d.mjs",
+    "scripts/check-knowledge-intelligence-phase-k-full-acceptance.mjs",
+    "scripts/check-knowledge-rule-engine-step82.mjs",
+    "scripts/check-knowledge-runtime.mjs",
+    "scripts/check-knr-l10n-w1-multilingual-authority.mjs",
+    "scripts/check-knr-package-a-routing-ranking-coverage.mjs",
+    "scripts/check-knr-package-b-adaptive-projection-reading-paths.mjs",
+    "scripts/check-knr-package-c-public-api-experience.mjs",
+    "scripts/check-knr-package-d-quality-production-integration.mjs",
+    "scripts/check-knr-w0r-knowledge-inventory-reconciliation.mjs",
+    "scripts/check-knr-w2r1-t04-searchable-pdf-extraction.mjs",
+    "scripts/check-knr-w2r1-t05-p0-human-normalization-review.mjs",
+    "scripts/check-knr-w2r1-t06-book-i-section-inventory.mjs",
+    "scripts/check-knr-w2r1-t07-canonical-node-mapping-identity.mjs",
+    "scripts/check-knr-w2r1-t08-preface-mapping-review.mjs",
+    "scripts/check-knr-w2r1-t09-controlled-mapping-candidates.mjs",
+    "scripts/check-knr-w2r1-t09-p1-progressive-extraction.mjs",
+    "scripts/check-knr-w2r1-t09-p2-p5-progressive-extraction.mjs",
+    "scripts/check-kpp-w0-w12-production-planning-foundation.mjs",
+    "scripts/check-kpr-w0-compatibility-boundary.mjs",
+    "scripts/check-m3a-design-foundation.mjs",
+    "scripts/check-m3a-public-experience.mjs",
+    "scripts/check-m3a-visual-acceptance-fixes.mjs",
+    "scripts/check-m3b-book-access-payment.mjs",
+    "scripts/check-m3b-knowledge-release.mjs",
+    "scripts/check-m3c-continuity.mjs",
+    "scripts/check-m3c-entry-recovery-consent.mjs",
+    "scripts/check-m3c-entry-visual-alignment.mjs",
+    "scripts/check-m3c-guided-entry.mjs",
+    "scripts/check-m3c-journey-dashboard.mjs",
+    "scripts/check-m3c-journey-overview.mjs",
+    "scripts/check-m3c-memory.mjs",
+    "scripts/check-m3c-navigation-action-schema.mjs",
+    "scripts/check-m3c-navigation-evidence-log.mjs",
+    "scripts/check-m3c-navigation-execution.mjs",
+    "scripts/check-m3c-navigation-final-polish.mjs",
+    "scripts/check-m3c-navigation-recovery.mjs",
+    "scripts/check-m3c-navigation-review-gate.mjs",
+    "scripts/check-m3c-navigation-visual-alignment.mjs",
+    "scripts/check-m3c-public-journey-acceptance.mjs",
+    "scripts/check-m3c-public-journey-production.mjs",
+    "scripts/check-m3c-reading-experience-visual.mjs",
+    "scripts/check-m3c-reading-experience.mjs",
+    "scripts/check-m3c-reading-production-polish.mjs",
+    "scripts/check-m3c-reading-visual-alignment.mjs",
+    "scripts/check-m3c-reconstruction-experience.mjs",
+    "scripts/check-m3c-reconstruction-visual-alignment.mjs",
+    "scripts/check-m3c-review.mjs",
+    "scripts/check-m4a-consent-sharing.mjs",
+    "scripts/check-m4a-financial-infrastructure.mjs",
+    "scripts/check-m4a-financial-reality-navigation.mjs",
+    "scripts/check-m4a-professional-data-privacy.mjs",
+    "scripts/check-m4a-professional-service-definition.mjs",
+    "scripts/check-m4a-w2a-financial-workspace-operationalization.mjs",
+    "scripts/check-m4a-w2b-financial-revision-navigation.mjs",
+    "scripts/check-m4a-w2c-financial-intake-calculation.mjs",
+    "scripts/check-m4a-w4-financial-reports.mjs",
+    "scripts/check-m4a-w5-financial-appointments.mjs",
+    "scripts/check-m4a-w6-financial-public-pages.mjs",
+    "scripts/check-m4b-appointment-payment.mjs",
+    "scripts/check-m4b-consent-sharing.mjs",
+    "scripts/check-m4b-contract-acceptance.mjs",
+    "scripts/check-m4b-external-reader-data-privacy.mjs",
+    "scripts/check-m4b-external-reader-framework.mjs",
+    "scripts/check-m4b-external-reader-intake.mjs",
+    "scripts/check-m4b-professional-public-pages.mjs",
+    "scripts/check-m4b-professional-reports.mjs",
+    "scripts/check-m4b-professional-revision-navigation-follow-up.mjs",
+    "scripts/check-m4b-professional-workspace-foundation.mjs",
+    "scripts/check-m4b-professional-workspace-views.mjs",
+    "scripts/check-m4b-release-freeze.mjs",
+    "scripts/check-m4c-account-payment-membership.mjs",
+    "scripts/check-master-governance.mjs",
+    "scripts/check-mr-w0-method-runtime-constitution.mjs",
+    "scripts/check-mr-w1-method-registry.mjs",
+    "scripts/check-mr-w2-shared-data-authority.mjs",
+    "scripts/check-mr-w3-shared-calculation-runtime.mjs",
+    "scripts/check-mr-w4-shared-projection-runtime.mjs",
+    "scripts/check-mr-w5-shared-interpretation-runtime.mjs",
+    "scripts/check-mr-w6-shared-professional-runtime.mjs",
+    "scripts/check-mr-w7-method-runtime-freeze.mjs",
+    "scripts/check-navigation-customer-view.mjs",
+    "scripts/check-navigation-path-rules.mjs",
+    "scripts/check-navigation-state.mjs",
+    "scripts/check-num-w0-numeric-runtime-foundation.mjs",
+    "scripts/check-num-w1-birth-number-runtime.mjs",
+    "scripts/check-num-w2-number-structure-runtime.mjs",
+    "scripts/check-num-w3-cycle-runtime.mjs",
+    "scripts/check-num-w4-projection-runtime.mjs",
+    "scripts/check-num-w5-professional-integration.mjs",
+    "scripts/check-num-w6-production-freeze.mjs",
+    "scripts/check-pds-w0-baseline-boundary.mjs",
+    "scripts/check-pds-w1-experience-contract.mjs",
+    "scripts/check-pds-w10-full-site-acceptance.mjs",
+    "scripts/check-pds-w2-design-tokens.mjs",
+    "scripts/check-pds-w3-core-component-shell.mjs",
+    "scripts/check-pds-w4-reality-journey-shell.mjs",
+    "scripts/check-pds-w5-entry-experience.mjs",
+    "scripts/check-pds-w6-reconstruction-experience.mjs",
+    "scripts/check-pds-w7-reading-experience.mjs",
+    "scripts/check-pds-w8-navigation-review-continuity.mjs",
+    "scripts/check-pds-w9-knowledge-professional.mjs",
+    "scripts/check-phase-0-cross-runtime-authority-freeze.mjs",
+    "scripts/check-pja-approval-w1-human-approval-runtime.mjs",
+    "scripts/check-pja-candidate-w1-runtime.mjs",
+    "scripts/check-pja-l10n-w2-zh-hans-brief-export.mjs",
+    "scripts/check-pja-l10n-w3-zh-hans-candidate-import.mjs",
+    "scripts/check-pja-l10n-w4-english-brief-export.mjs",
+    "scripts/check-pja-l10n-w5-independent-english-production.mjs",
+    "scripts/check-pja-node.mjs",
+    "scripts/check-pja-prompt-w1-production-prompt-runtime.mjs",
+    "scripts/check-pja-publication-w1-runtime.mjs",
+    "scripts/check-pja-r4-four-volume-blueprint-binding-reconciliation.mjs",
+    "scripts/check-pja-r4a-blueprint-binding-foundation.mjs",
+    "scripts/check-pja-r4b-production-repository-migration.mjs",
+    "scripts/check-pja-r4c-readiness-migration.mjs",
+    "scripts/check-pja-r4d-production-orchestration-migration.mjs",
+    "scripts/check-pja-r4e-article-package-contract-v2.mjs",
+    "scripts/check-pja-r4f-acceptance-freeze.mjs",
+    "scripts/check-pja-review-w1-human-review-runtime.mjs",
+    "scripts/check-pja-w0-cross-system-boundary.mjs",
+    "scripts/check-pja-w1-blueprint-led-knowledge.mjs",
+    "scripts/check-pja-w2-free-explore-rule-navigation.mjs",
+    "scripts/check-pja-w2a-canonical-article-editorial-contract.mjs",
+    "scripts/check-pja-w2b-structured-article-schema.mjs",
+    "scripts/check-pja-w2c-claim-source-review-governance.mjs",
+    "scripts/check-pja-w2d-article-renderer-expansion.mjs",
+    "scripts/check-pja-w2e-production-tools.mjs",
+    "scripts/check-pja-w2e-r1-production-brief-hardening.mjs",
+    "scripts/check-pja-w2f-a-universal-production-readiness.mjs",
+    "scripts/check-pja-w2f-b1-preface-content-population.mjs",
+    "scripts/check-pja-w2f-b2-preface-article-production.mjs",
+    "scripts/check-pja-w2f-b2a-first-human-frozen-pilot.mjs",
+    "scripts/check-pja-w2f-b2b-schema-validator-alignment.mjs",
+    "scripts/check-pja-w2f-c0-book-i-registry-population.mjs",
+    "scripts/check-pja-w2f-c0b-historical-registry-migration.mjs",
+    "scripts/check-pja-w2f-c1-article-production-pilot.mjs",
+    "scripts/check-pja-w2f-c1-readiness-skeleton-population (1).mjs",
+    "scripts/check-pja-w2f-c1-readiness-skeleton-population.mjs",
+    "scripts/check-pja-w2f-c2-canonical-thesis-boundary-freeze.mjs",
+    "scripts/check-pja-w2f-c2-universal-scope-batch-production.mjs",
+    "scripts/check-pja-w2f-c3-registered-production-ready-node-production.mjs",
+    "scripts/check-pja-w2f-c3-universal-production-readiness.mjs",
+    "scripts/check-pja-w2f-c3r1-preface-production-readiness-closure.mjs",
+    "scripts/check-pja-w2f-d-book-i-batch-production.mjs",
+    "scripts/check-pja-w3a-editorial-package-foundation.mjs",
+    "scripts/check-pja-w3r-production-workflow-review.mjs",
+    "scripts/check-pja-w3r1-scalable-article-production.mjs",
+    "scripts/check-pja-w3r2-governed-editorial-generation.mjs",
+    "scripts/check-pja-w3r3-knowledge-production-orchestration.mjs",
+    "scripts/check-pja.mjs",
+    "scripts/check-professional-boundary.mjs",
+    "scripts/check-provider-adapter-foundation-step83.mjs",
+    "scripts/check-provider-closure.mjs",
+    "scripts/check-provider-routing-step84.mjs",
+    "scripts/check-pws-entry-paid-w2-journey-activation-boundary.mjs",
+    "scripts/check-pws-entry-professional-w3-handoff-boundary.mjs",
+    "scripts/check-pws-entry-public-w1-navigation-boundary.mjs",
+    "scripts/check-pws-entry-w0-payment-boundary.mjs",
+    "scripts/check-pws-entry-w1-authorised-data-loader.mjs",
+    "scripts/check-pws-entry-w2-canonical-ownership.mjs",
+    "scripts/check-pws-entry-w3-implementation-sequence.mjs",
+    "scripts/check-pws-i1-t01-canonical-glossary.mjs",
+    "scripts/check-pws-i1-t02-canonical-identifiers.mjs",
+    "scripts/check-pws-i1-t02-object-registry-t03-schema-version.mjs",
+    "scripts/check-pws-i1-t04-canonical-states.mjs",
+    "scripts/check-pws-i1-t05-t06-operations-events.mjs",
+    "scripts/check-pws-i1-t07-canonical-errors.mjs",
+    "scripts/check-pws-i1-t08-directory-blueprint.mjs",
+    "scripts/check-pws-i1-v1-freeze.mjs",
+    "scripts/check-pws-i2-v1-freeze.mjs",
+    "scripts/check-pws-i2-w0-registry-baseline-audit.mjs",
+    "scripts/check-pws-i2-w1-universal-registry-core.mjs",
+    "scripts/check-pws-i2-w2-professional-registry.mjs",
+    "scripts/check-pws-i2-w3-capability-credential-registry.mjs",
+    "scripts/check-pws-i2-w4-method-service-registry.mjs",
+    "scripts/check-pws-i2-w5-product-offer-registry.mjs",
+    "scripts/check-pws-i2-w6-knowledge-deliverable-type-registry.mjs",
+    "scripts/check-pws-i2-w7-migration-reconciliation.mjs",
+    "scripts/check-pws-i4-w0-commercial-baseline-audit.mjs",
+    "scripts/check-pws-i4-w1-product-runtime.mjs",
+    "scripts/check-pws-i4-w2-commercial-runtime.mjs",
+    "scripts/check-pws-i8-free-observation-privacy-foundation.mjs",
+    "scripts/check-pws-i9-rule-engine-foundation.mjs",
+    "scripts/check-pws-w0-baseline-responsibility-boundary.mjs",
+    "scripts/check-pws-w1a-revenue-architecture.mjs",
+    "scripts/check-reading-customer-language.mjs",
+    "scripts/check-reading-dedup.mjs",
+    "scripts/check-reading-evidence-boundary.mjs",
+    "scripts/check-reading-navigation-contract.mjs",
+    "scripts/check-reality-continuity-contract.mjs",
+    "scripts/check-review-contract.mjs",
+    "scripts/check-runtime-checker-alias-foundation.mjs",
+    "scripts/check-runtime-contracts.mjs",
+    "scripts/check-runtime-d1-integration.mjs",
+    "scripts/check-runtime-d1-schema.mjs",
+    "scripts/check-runtime-freeze.mjs",
+    "scripts/check-runtime-gap-closure.mjs",
+    "scripts/check-runtime-inventory.mjs",
+    "scripts/check-runtime-kernel.mjs",
+    "scripts/check-runtime-lineage-revision.mjs",
+    "scripts/check-runtime-lineage-timeline.mjs",
+    "scripts/check-runtime-memory-contract.mjs",
+    "scripts/check-runtime-migrations.mjs",
+    "scripts/check-runtime-persistence-contract.mjs",
+    "scripts/check-runtime-persistence-recovery.mjs",
+    "scripts/check-runtime-production-smoke.mjs",
+    "scripts/check-runtime-recovery.mjs",
+    "scripts/check-runtime-registry-layer.mjs",
+    "scripts/check-runtime-revision-initialization.mjs",
+    "scripts/check-runtime-security-privacy.mjs",
+    "scripts/check-runtime-timeline.mjs",
+    "scripts/check-runtime-v1-freeze-audit.mjs",
+    "scripts/check-runtime-workspace.mjs",
+    "scripts/check-schema-references.mjs",
+    "scripts/check-step63-published-knowledge-authority.mjs",
+    "scripts/check-step64-multilingual-published-retrieval-index.mjs",
+    "scripts/check-zero-cost-provider-foundation-step83.mjs"
+  ],
+  "packageCheckAliases": [
+    {
+      "npmAlias": "check:ast-w0",
+      "command": "node scripts/check-ast-w0-astrology-runtime-foundation.mjs",
+      "implementationFile": "scripts/check-ast-w0-astrology-runtime-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:ast-w1",
+      "command": "node scripts/check-ast-w1-astronomy-runtime.mjs",
+      "implementationFile": "scripts/check-ast-w1-astronomy-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:ast-w2",
+      "command": "node scripts/check-ast-w2-planet-runtime.mjs",
+      "implementationFile": "scripts/check-ast-w2-planet-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:ast-w3",
+      "command": "node scripts/check-ast-w3-house-runtime.mjs",
+      "implementationFile": "scripts/check-ast-w3-house-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:ast-w4a",
+      "command": "node scripts/check-ast-w4a-aspect-governance.mjs",
+      "implementationFile": "scripts/check-ast-w4a-aspect-governance.mjs"
+    },
+    {
+      "npmAlias": "check:ast-w4b",
+      "command": "node scripts/check-ast-w4b-aspect-runtime.mjs",
+      "implementationFile": "scripts/check-ast-w4b-aspect-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:ast-w5",
+      "command": "node scripts/check-ast-w5-projection-runtime.mjs",
+      "implementationFile": "scripts/check-ast-w5-projection-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:ast-w6",
+      "command": "node scripts/check-ast-w6-professional-integration.mjs",
+      "implementationFile": "scripts/check-ast-w6-professional-integration.mjs"
+    },
+    {
+      "npmAlias": "check:ast-w7",
+      "command": "node scripts/check-ast-w7-production-freeze.mjs",
+      "implementationFile": "scripts/check-ast-w7-production-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:book-1-figure-runtime-alignment",
+      "command": "node scripts/check-book-1-figure-runtime-alignment.mjs",
+      "implementationFile": "scripts/check-book-1-figure-runtime-alignment.mjs"
+    },
+    {
+      "npmAlias": "check:book-1-runtime-alignment",
+      "command": "node scripts/check-book-1-runtime-alignment.mjs",
+      "implementationFile": "scripts/check-book-1-runtime-alignment.mjs"
+    },
+    {
+      "npmAlias": "check:book-w0",
+      "command": "node scripts/check-book-w0-four-volume-migration.mjs",
+      "implementationFile": "scripts/check-book-w0-four-volume-migration.mjs"
+    },
+    {
+      "npmAlias": "check:bug-fix-closure",
+      "command": "node scripts/check-bug-fix-closure.mjs",
+      "implementationFile": "scripts/check-bug-fix-closure.mjs"
+    },
+    {
+      "npmAlias": "check:bzr-w0",
+      "command": "node scripts/check-bzr-w0-bazi-runtime-foundation.mjs",
+      "implementationFile": "scripts/check-bzr-w0-bazi-runtime-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:bzr-w1",
+      "command": "node scripts/check-bzr-w1-solar-calendar-runtime.mjs",
+      "implementationFile": "scripts/check-bzr-w1-solar-calendar-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:bzr-w2",
+      "command": "node scripts/check-bzr-w2-four-pillars-runtime.mjs",
+      "implementationFile": "scripts/check-bzr-w2-four-pillars-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:bzr-w2a",
+      "command": "node scripts/check-bzr-w2-four-pillars-runtime.mjs",
+      "implementationFile": "scripts/check-bzr-w2-four-pillars-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:bzr-w3",
+      "command": "node scripts/check-bzr-w3-luck-cycle-runtime.mjs",
+      "implementationFile": "scripts/check-bzr-w3-luck-cycle-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:bzr-w4",
+      "command": "node scripts/check-bzr-w4-projection-runtime.mjs",
+      "implementationFile": "scripts/check-bzr-w4-projection-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:bzr-w5",
+      "command": "node scripts/check-bzr-w5-professional-integration.mjs",
+      "implementationFile": "scripts/check-bzr-w5-professional-integration.mjs"
+    },
+    {
+      "npmAlias": "check:canonical-manuscript-binding",
+      "command": "npm run knowledge:validate-bindings",
+      "implementationFile": null
+    },
+    {
+      "npmAlias": "check:car-w0",
+      "command": "node scripts/check-car-w0-foundation-audit.mjs",
+      "implementationFile": "scripts/check-car-w0-foundation-audit.mjs"
+    },
+    {
+      "npmAlias": "check:car-w1",
+      "command": "node scripts/check-car-w1-canonical-asset-contract.mjs",
+      "implementationFile": "scripts/check-car-w1-canonical-asset-contract.mjs"
+    },
+    {
+      "npmAlias": "check:car-w10",
+      "command": "node scripts/check-car-w10-w14-candidate-to-publication.mjs",
+      "implementationFile": "scripts/check-car-w10-w14-candidate-to-publication.mjs"
+    },
+    {
+      "npmAlias": "check:car-w10-w14",
+      "command": "node scripts/check-car-w10-w14-candidate-to-publication.mjs",
+      "implementationFile": "scripts/check-car-w10-w14-candidate-to-publication.mjs"
+    },
+    {
+      "npmAlias": "check:car-w11",
+      "command": "node scripts/check-car-w10-w14-candidate-to-publication.mjs",
+      "implementationFile": "scripts/check-car-w10-w14-candidate-to-publication.mjs"
+    },
+    {
+      "npmAlias": "check:car-w12",
+      "command": "node scripts/check-car-w10-w14-candidate-to-publication.mjs",
+      "implementationFile": "scripts/check-car-w10-w14-candidate-to-publication.mjs"
+    },
+    {
+      "npmAlias": "check:car-w13",
+      "command": "node scripts/check-car-w10-w14-candidate-to-publication.mjs",
+      "implementationFile": "scripts/check-car-w10-w14-candidate-to-publication.mjs"
+    },
+    {
+      "npmAlias": "check:car-w14",
+      "command": "node scripts/check-car-w10-w14-candidate-to-publication.mjs",
+      "implementationFile": "scripts/check-car-w10-w14-candidate-to-publication.mjs"
+    },
+    {
+      "npmAlias": "check:car-w15",
+      "command": "node scripts/check-car-w15-surface-projection.mjs",
+      "implementationFile": "scripts/check-car-w15-surface-projection.mjs"
+    },
+    {
+      "npmAlias": "check:car-w15-w18",
+      "command": "npm run check:car-w15 && npm run check:car-w16 && npm run check:car-w17 && npm run check:car-w18",
+      "implementationFile": null
+    },
+    {
+      "npmAlias": "check:car-w16",
+      "command": "node scripts/check-car-w16-quality-drift.mjs",
+      "implementationFile": "scripts/check-car-w16-quality-drift.mjs"
+    },
+    {
+      "npmAlias": "check:car-w17",
+      "command": "node scripts/check-car-w17-pds-integration.mjs",
+      "implementationFile": "scripts/check-car-w17-pds-integration.mjs"
+    },
+    {
+      "npmAlias": "check:car-w18",
+      "command": "node scripts/check-car-w18-full-acceptance-freeze.mjs",
+      "implementationFile": "scripts/check-car-w18-full-acceptance-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:car-w2",
+      "command": "node scripts/check-car-w2-canonical-asset-brief-runtime.mjs",
+      "implementationFile": "scripts/check-car-w2-canonical-asset-brief-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:car-w3",
+      "command": "node scripts/check-car-w3-article-reconciliation.mjs",
+      "implementationFile": "scripts/check-car-w3-article-reconciliation.mjs"
+    },
+    {
+      "npmAlias": "check:car-w4",
+      "command": "node scripts/check-car-w4-figure-diagram.mjs",
+      "implementationFile": "scripts/check-car-w4-figure-diagram.mjs"
+    },
+    {
+      "npmAlias": "check:car-w5",
+      "command": "node scripts/check-car-w5-prompt-asset-runtime.mjs",
+      "implementationFile": "scripts/check-car-w5-prompt-asset-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:car-w6",
+      "command": "node scripts/check-car-w6-video-audio.mjs",
+      "implementationFile": "scripts/check-car-w6-video-audio.mjs"
+    },
+    {
+      "npmAlias": "check:car-w7",
+      "command": "node scripts/check-car-w7-slides-academy.mjs",
+      "implementationFile": "scripts/check-car-w7-slides-academy.mjs"
+    },
+    {
+      "npmAlias": "check:car-w8",
+      "command": "node scripts/check-car-w8-website-module-projection.mjs",
+      "implementationFile": "scripts/check-car-w8-website-module-projection.mjs"
+    },
+    {
+      "npmAlias": "check:car-w9",
+      "command": "node scripts/check-car-w9-provider-routing-integration.mjs",
+      "implementationFile": "scripts/check-car-w9-provider-routing-integration.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w0",
+      "command": "node scripts/check-cmr-w0-cross-system-baseline-audit.mjs",
+      "implementationFile": "scripts/check-cmr-w0-cross-system-baseline-audit.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w1",
+      "command": "node scripts/check-cmr-w1-canonical-meaning-contract.mjs",
+      "implementationFile": "scripts/check-cmr-w1-canonical-meaning-contract.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w1-5",
+      "command": "node scripts/check-cmr-w1-5-meaning-identity-runtime.mjs",
+      "implementationFile": "scripts/check-cmr-w1-5-meaning-identity-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w10",
+      "command": "node scripts/check-cm-w10-cross-method-number-meaning.mjs",
+      "implementationFile": "scripts/check-cm-w10-cross-method-number-meaning.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w11-w12",
+      "command": "node scripts/check-cmr-w11-w12-canonical-meaning-runtime-convergence.mjs",
+      "implementationFile": "scripts/check-cmr-w11-w12-canonical-meaning-runtime-convergence.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w13",
+      "command": "node scripts/check-cmr-w13-meaning-to-knowledge-bridge.mjs",
+      "implementationFile": "scripts/check-cmr-w13-meaning-to-knowledge-bridge.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w14",
+      "command": "node scripts/check-cmr-w14-meaning-projection-for-journey.mjs",
+      "implementationFile": "scripts/check-cmr-w14-meaning-projection-for-journey.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w15",
+      "command": "node scripts/check-cmr-w15-acceptance-freeze.mjs",
+      "implementationFile": "scripts/check-cmr-w15-acceptance-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w2",
+      "command": "node scripts/check-cmr-w2-canonical-meaning-family-registry.mjs",
+      "implementationFile": "scripts/check-cmr-w2-canonical-meaning-family-registry.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w3",
+      "command": "node scripts/check-cmr-w3-canonical-meaning-code-registry.mjs",
+      "implementationFile": "scripts/check-cmr-w3-canonical-meaning-code-registry.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w4",
+      "command": "node scripts/check-cmr-w4-meaning-dimension-registry.mjs",
+      "implementationFile": "scripts/check-cmr-w4-meaning-dimension-registry.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w5",
+      "command": "node scripts/check-cmr-w5-book-to-meaning-authority-mapping.mjs",
+      "implementationFile": "scripts/check-cmr-w5-book-to-meaning-authority-mapping.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w6a",
+      "command": "node scripts/check-cmr-w6a-method-to-meaning-mapping-contract.mjs",
+      "implementationFile": "scripts/check-cmr-w6a-method-to-meaning-mapping-contract.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w6b",
+      "command": "node scripts/check-cmr-w6b-versioned-mapping-registry.mjs",
+      "implementationFile": "scripts/check-cmr-w6b-versioned-mapping-registry.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w6c",
+      "command": "node scripts/check-cmr-w6c-mapping-checker-compatibility.mjs",
+      "implementationFile": "scripts/check-cmr-w6c-mapping-checker-compatibility.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w6d",
+      "command": "node scripts/check-cmr-w6d-mapping-foundation-acceptance-freeze.mjs",
+      "implementationFile": "scripts/check-cmr-w6d-mapping-foundation-acceptance-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w7",
+      "command": "node scripts/check-cmr-w7c-w7d-hdr-mapping-acceptance.mjs",
+      "implementationFile": "scripts/check-cmr-w7c-w7d-hdr-mapping-acceptance.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w7a",
+      "command": "node scripts/check-cmr-w7a-hdr-structure-mapping.mjs",
+      "implementationFile": "scripts/check-cmr-w7a-hdr-structure-mapping.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w7b",
+      "command": "node scripts/check-cmr-w7b-hdr-runtime-mapping.mjs",
+      "implementationFile": "scripts/check-cmr-w7b-hdr-runtime-mapping.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w8",
+      "command": "node scripts/check-cmr-w8-ast-meaning-mapping-foundation.mjs",
+      "implementationFile": "scripts/check-cmr-w8-ast-meaning-mapping-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w9",
+      "command": "node scripts/check-cm-w9-bzr-target-meaning-population.mjs",
+      "implementationFile": "scripts/check-cm-w9-bzr-target-meaning-population.mjs"
+    },
+    {
+      "npmAlias": "check:cmw",
+      "command": "npm run check:cmw-w0-w6 && npm run check:cmw-w7",
+      "implementationFile": null
+    },
+    {
+      "npmAlias": "check:cmw-w0",
+      "command": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+      "implementationFile": "scripts/check-cmw-w0-w6-master-work-governance.mjs"
+    },
+    {
+      "npmAlias": "check:cmw-w0-w6",
+      "command": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+      "implementationFile": "scripts/check-cmw-w0-w6-master-work-governance.mjs"
+    },
+    {
+      "npmAlias": "check:cmw-w1",
+      "command": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+      "implementationFile": "scripts/check-cmw-w0-w6-master-work-governance.mjs"
+    },
+    {
+      "npmAlias": "check:cmw-w2",
+      "command": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+      "implementationFile": "scripts/check-cmw-w0-w6-master-work-governance.mjs"
+    },
+    {
+      "npmAlias": "check:cmw-w3",
+      "command": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+      "implementationFile": "scripts/check-cmw-w0-w6-master-work-governance.mjs"
+    },
+    {
+      "npmAlias": "check:cmw-w4",
+      "command": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+      "implementationFile": "scripts/check-cmw-w0-w6-master-work-governance.mjs"
+    },
+    {
+      "npmAlias": "check:cmw-w5",
+      "command": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+      "implementationFile": "scripts/check-cmw-w0-w6-master-work-governance.mjs"
+    },
+    {
+      "npmAlias": "check:cmw-w6",
+      "command": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+      "implementationFile": "scripts/check-cmw-w0-w6-master-work-governance.mjs"
+    },
+    {
+      "npmAlias": "check:cmw-w7",
+      "command": "node scripts/check-cmw-w7-freeze.mjs",
+      "implementationFile": "scripts/check-cmw-w7-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:cpr",
+      "command": "npm run check:cpr-w0-w6 && npm run check:cpr-w7-w18 && npm run check:cpr-w19-w29 && npm run check:cpr-w30",
+      "implementationFile": null
+    },
+    {
+      "npmAlias": "check:cpr-complete",
+      "command": "npm run check:cpr",
+      "implementationFile": null
+    },
+    {
+      "npmAlias": "check:cpr-w0",
+      "command": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "implementationFile": "scripts/check-cpr-w0-w6-presentation-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:cpr-w0-w6",
+      "command": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "implementationFile": "scripts/check-cpr-w0-w6-presentation-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:cpr-w1",
+      "command": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "implementationFile": "scripts/check-cpr-w0-w6-presentation-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:cpr-w19-w29",
+      "command": "node scripts/check-cpr-w19-w29-composition-surfaces.mjs",
+      "implementationFile": "scripts/check-cpr-w19-w29-composition-surfaces.mjs"
+    },
+    {
+      "npmAlias": "check:cpr-w2",
+      "command": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "implementationFile": "scripts/check-cpr-w0-w6-presentation-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:cpr-w3",
+      "command": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "implementationFile": "scripts/check-cpr-w0-w6-presentation-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:cpr-w30",
+      "command": "node scripts/check-cpr-w30-full-freeze.mjs",
+      "implementationFile": "scripts/check-cpr-w30-full-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:cpr-w4",
+      "command": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "implementationFile": "scripts/check-cpr-w0-w6-presentation-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:cpr-w5",
+      "command": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "implementationFile": "scripts/check-cpr-w0-w6-presentation-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:cpr-w6",
+      "command": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "implementationFile": "scripts/check-cpr-w0-w6-presentation-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:cpr-w7-w18",
+      "command": "node scripts/check-cpr-w7-w18-presentation-objects.mjs",
+      "implementationFile": "scripts/check-cpr-w7-w18-presentation-objects.mjs"
+    },
+    {
+      "npmAlias": "check:exp-w4",
+      "command": "node scripts/check-exp-w4-reconstruction-customer-projection.mjs",
+      "implementationFile": "scripts/check-exp-w4-reconstruction-customer-projection.mjs"
+    },
+    {
+      "npmAlias": "check:exp-w4a",
+      "command": "node scripts/check-exp-w4a-public-reality-demo-retirement.mjs",
+      "implementationFile": "scripts/check-exp-w4a-public-reality-demo-retirement.mjs"
+    },
+    {
+      "npmAlias": "check:external-reader",
+      "command": "node scripts/check-m4b-external-reader-framework.mjs && node scripts/check-m4b-external-reader-intake.mjs && node scripts/check-m4b-consent-sharing.mjs && node scripts/check-m4b-external-reader-data-privacy.mjs && node scripts/check-m4b-contract-acceptance.mjs",
+      "implementationFile": "scripts/check-m4b-external-reader-framework.mjs"
+    },
+    {
+      "npmAlias": "check:full-journey",
+      "command": "node scripts/check-full-journey-acceptance.mjs",
+      "implementationFile": "scripts/check-full-journey-acceptance.mjs"
+    },
+    {
+      "npmAlias": "check:hdr-w0",
+      "command": "node scripts/check-hdr-w0-human-design-runtime-foundation.mjs",
+      "implementationFile": "scripts/check-hdr-w0-human-design-runtime-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:hdr-w1",
+      "command": "node scripts/check-hdr-w1-astronomy-runtime.mjs",
+      "implementationFile": "scripts/check-hdr-w1-astronomy-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:hdr-w2",
+      "command": "node scripts/check-hdr-w2-design-moment-solver.mjs",
+      "implementationFile": "scripts/check-hdr-w2-design-moment-solver.mjs"
+    },
+    {
+      "npmAlias": "check:hdr-w3",
+      "command": "node scripts/check-hdr-w3-gate-runtime.mjs",
+      "implementationFile": "scripts/check-hdr-w3-gate-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:hdr-w4",
+      "command": "node scripts/check-hdr-w4-bodygraph-runtime.mjs",
+      "implementationFile": "scripts/check-hdr-w4-bodygraph-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:hdr-w5",
+      "command": "node scripts/check-hdr-w5-projection-runtime.mjs",
+      "implementationFile": "scripts/check-hdr-w5-projection-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:hdr-w6",
+      "command": "node scripts/check-hdr-w6-professional-integration.mjs",
+      "implementationFile": "scripts/check-hdr-w6-professional-integration.mjs"
+    },
+    {
+      "npmAlias": "check:hdr-w7",
+      "command": "node scripts/check-hdr-w7-production-freeze.mjs",
+      "implementationFile": "scripts/check-hdr-w7-production-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:i18n",
+      "command": "node scripts/check-i18n.mjs",
+      "implementationFile": "scripts/check-i18n.mjs"
+    },
+    {
+      "npmAlias": "check:imr-w0",
+      "command": "node scripts/check-imr-w0-scope-data-algorithm-license-audit.mjs",
+      "implementationFile": "scripts/check-imr-w0-scope-data-algorithm-license-audit.mjs"
+    },
+    {
+      "npmAlias": "check:imr-w1",
+      "command": "node scripts/check-imr-w1-method-governance-registry.mjs",
+      "implementationFile": "scripts/check-imr-w1-method-governance-registry.mjs"
+    },
+    {
+      "npmAlias": "check:imr-w2",
+      "command": "node scripts/check-imr-w2-commercial-license.mjs",
+      "implementationFile": "scripts/check-imr-w2-commercial-license.mjs"
+    },
+    {
+      "npmAlias": "check:imr-w3",
+      "command": "node scripts/check-imr-w3-algorithm-governance.mjs",
+      "implementationFile": "scripts/check-imr-w3-algorithm-governance.mjs"
+    },
+    {
+      "npmAlias": "check:imr-w4",
+      "command": "node scripts/check-imr-w4-production-eligibility.mjs",
+      "implementationFile": "scripts/check-imr-w4-production-eligibility.mjs"
+    },
+    {
+      "npmAlias": "check:imr-w5",
+      "command": "node scripts/check-imr-w5-version-management.mjs",
+      "implementationFile": "scripts/check-imr-w5-version-management.mjs"
+    },
+    {
+      "npmAlias": "check:imr-w6",
+      "command": "node scripts/check-imr-w6-method-governance-freeze.mjs",
+      "implementationFile": "scripts/check-imr-w6-method-governance-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:kau",
+      "command": "npm run check:kau-w0-w8 && npm run check:kau-w9-w14",
+      "implementationFile": null
+    },
+    {
+      "npmAlias": "check:kau-w0",
+      "command": "node scripts/check-kau-w0-w8-authoring-foundation.mjs",
+      "implementationFile": "scripts/check-kau-w0-w8-authoring-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:kau-w0-w8",
+      "command": "node scripts/check-kau-w0-w8-authoring-foundation.mjs",
+      "implementationFile": "scripts/check-kau-w0-w8-authoring-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:kau-w1-w8",
+      "command": "node scripts/check-kau-w0-w8-authoring-foundation.mjs",
+      "implementationFile": "scripts/check-kau-w0-w8-authoring-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:kau-w10-w14",
+      "command": "node scripts/check-kau-w9-w14-authoring-governance-readiness.mjs",
+      "implementationFile": "scripts/check-kau-w9-w14-authoring-governance-readiness.mjs"
+    },
+    {
+      "npmAlias": "check:kau-w9",
+      "command": "node scripts/check-kau-w9-w14-authoring-governance-readiness.mjs",
+      "implementationFile": "scripts/check-kau-w9-w14-authoring-governance-readiness.mjs"
+    },
+    {
+      "npmAlias": "check:kau-w9-w14",
+      "command": "node scripts/check-kau-w9-w14-authoring-governance-readiness.mjs",
+      "implementationFile": "scripts/check-kau-w9-w14-authoring-governance-readiness.mjs"
+    },
+    {
+      "npmAlias": "check:kh-p1",
+      "command": "node scripts/check-kh-p1-p5-knowledge-runtime-completion.mjs",
+      "implementationFile": "scripts/check-kh-p1-p5-knowledge-runtime-completion.mjs"
+    },
+    {
+      "npmAlias": "check:kh-p1-p5",
+      "command": "node scripts/check-kh-p1-p5-knowledge-runtime-completion.mjs",
+      "implementationFile": "scripts/check-kh-p1-p5-knowledge-runtime-completion.mjs"
+    },
+    {
+      "npmAlias": "check:kh-p2",
+      "command": "node scripts/check-kh-p1-p5-knowledge-runtime-completion.mjs",
+      "implementationFile": "scripts/check-kh-p1-p5-knowledge-runtime-completion.mjs"
+    },
+    {
+      "npmAlias": "check:kh-p3",
+      "command": "node scripts/check-kh-p1-p5-knowledge-runtime-completion.mjs",
+      "implementationFile": "scripts/check-kh-p1-p5-knowledge-runtime-completion.mjs"
+    },
+    {
+      "npmAlias": "check:kh-p4",
+      "command": "node scripts/check-kh-p1-p5-knowledge-runtime-completion.mjs",
+      "implementationFile": "scripts/check-kh-p1-p5-knowledge-runtime-completion.mjs"
+    },
+    {
+      "npmAlias": "check:kh-p5",
+      "command": "node scripts/check-kh-p1-p5-knowledge-runtime-completion.mjs",
+      "implementationFile": "scripts/check-kh-p1-p5-knowledge-runtime-completion.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w3.5a-d",
+      "command": "node scripts/check-kh-w3-5a-d-pkr-foundation.mjs",
+      "implementationFile": "scripts/check-kh-w3-5a-d-pkr-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w3.5e",
+      "command": "node scripts/check-kh-w3-5e-preface-canonical-consolidation.mjs",
+      "implementationFile": "scripts/check-kh-w3-5e-preface-canonical-consolidation.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w3.5f",
+      "command": "node scripts/check-kh-w3-5f-canonical-extraction-scaling-freeze.mjs",
+      "implementationFile": "scripts/check-kh-w3-5f-canonical-extraction-scaling-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w3.5g",
+      "command": "node scripts/check-kh-w3-5g-book-i-knowledge-blueprint.mjs",
+      "implementationFile": "scripts/check-kh-w3-5g-book-i-knowledge-blueprint.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w3.5h",
+      "command": "node scripts/check-kh-w3-5h-universal-knowledge-blueprint-v2.mjs",
+      "implementationFile": "scripts/check-kh-w3-5h-universal-knowledge-blueprint-v2.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w4a",
+      "command": "node scripts/check-kh-w4a-knowledge-runtime-v2.mjs",
+      "implementationFile": "scripts/check-kh-w4a-knowledge-runtime-v2.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w4b",
+      "command": "node scripts/check-kh-w4b-w4c-registry-authority-consumption.mjs",
+      "implementationFile": "scripts/check-kh-w4b-w4c-registry-authority-consumption.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w4b-w4c",
+      "command": "node scripts/check-kh-w4b-w4c-registry-authority-consumption.mjs",
+      "implementationFile": "scripts/check-kh-w4b-w4c-registry-authority-consumption.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w4b.5-book-2",
+      "command": "node scripts/check-kh-w4b5-book-2-canonical-node-registry.mjs",
+      "implementationFile": "scripts/check-kh-w4b5-book-2-canonical-node-registry.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w4b.5-book-3",
+      "command": "node scripts/check-kh-w4b5-book-3-canonical-node-registry.mjs",
+      "implementationFile": "scripts/check-kh-w4b5-book-3-canonical-node-registry.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w4b.5-book-4",
+      "command": "node scripts/check-kh-w4b5-book-4-canonical-node-registry.mjs",
+      "implementationFile": "scripts/check-kh-w4b5-book-4-canonical-node-registry.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w4b.5-r1",
+      "command": "node scripts/check-kh-w4b5-r1-blueprint-registry-authority-refresh.mjs",
+      "implementationFile": "scripts/check-kh-w4b5-r1-blueprint-registry-authority-refresh.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w4c",
+      "command": "node scripts/check-kh-w4b-w4c-registry-authority-consumption.mjs",
+      "implementationFile": "scripts/check-kh-w4b-w4c-registry-authority-consumption.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w4d-w4e",
+      "command": "node scripts/check-kh-w4d-w4e-freeze-ownership.mjs",
+      "implementationFile": "scripts/check-kh-w4d-w4e-freeze-ownership.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w4g",
+      "command": "node scripts/check-kh-w4g-knr-registry-consumption-migration.mjs",
+      "implementationFile": "scripts/check-kh-w4g-knr-registry-consumption-migration.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w4g.5",
+      "command": "node scripts/check-kh-w4g5-semantic-graph-foundation.mjs",
+      "implementationFile": "scripts/check-kh-w4g5-semantic-graph-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w4g.6-w4h",
+      "command": "node scripts/check-kh-w4g6-w4h-manuscript-mapping-foundation.mjs",
+      "implementationFile": "scripts/check-kh-w4g6-w4h-manuscript-mapping-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w4h-phase-e",
+      "command": "node scripts/check-kh-w4h-phase-e-private-manuscript-pja-revalidation.mjs",
+      "implementationFile": "scripts/check-kh-w4h-phase-e-private-manuscript-pja-revalidation.mjs"
+    },
+    {
+      "npmAlias": "check:kh-w4i-w4k",
+      "command": "node scripts/check-kh-w4i-w4k-public-foundation-acceptance.mjs",
+      "implementationFile": "scripts/check-kh-w4i-w4k-public-foundation-acceptance.mjs"
+    },
+    {
+      "npmAlias": "check:knowledge-blueprints",
+      "command": "node scripts/check-kh-w3-5e-preface-canonical-consolidation.mjs && node scripts/check-kh-w3-5f-canonical-extraction-scaling-freeze.mjs && node scripts/check-kh-w4a-knowledge-runtime-v2.mjs",
+      "implementationFile": "scripts/check-kh-w3-5e-preface-canonical-consolidation.mjs"
+    },
+    {
+      "npmAlias": "check:knowledge-intelligence:k-a",
+      "command": "node scripts/check-knowledge-intelligence-package-k-a.mjs",
+      "implementationFile": "scripts/check-knowledge-intelligence-package-k-a.mjs"
+    },
+    {
+      "npmAlias": "check:knowledge-intelligence:k-b",
+      "command": "node scripts/check-knowledge-intelligence-package-k-b.mjs",
+      "implementationFile": "scripts/check-knowledge-intelligence-package-k-b.mjs"
+    },
+    {
+      "npmAlias": "check:knowledge-intelligence:k-c",
+      "command": "node scripts/check-knowledge-intelligence-package-k-c.mjs",
+      "implementationFile": "scripts/check-knowledge-intelligence-package-k-c.mjs"
+    },
+    {
+      "npmAlias": "check:knowledge-intelligence:k-d",
+      "command": "node scripts/check-knowledge-intelligence-package-k-d.mjs",
+      "implementationFile": "scripts/check-knowledge-intelligence-package-k-d.mjs"
+    },
+    {
+      "npmAlias": "check:knowledge-intelligence:phase-k",
+      "command": "node scripts/check-knowledge-intelligence-phase-k-full-acceptance.mjs",
+      "implementationFile": "scripts/check-knowledge-intelligence-phase-k-full-acceptance.mjs"
+    },
+    {
+      "npmAlias": "check:knowledge-rule-engine",
+      "command": "node scripts/check-knowledge-rule-engine-step82.mjs",
+      "implementationFile": "scripts/check-knowledge-rule-engine-step82.mjs"
+    },
+    {
+      "npmAlias": "check:knowledge-runtime",
+      "command": "node scripts/check-knowledge-runtime.mjs",
+      "implementationFile": "scripts/check-knowledge-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:knr-l10n-w1",
+      "command": "node scripts/check-knr-l10n-w1-multilingual-authority.mjs",
+      "implementationFile": "scripts/check-knr-l10n-w1-multilingual-authority.mjs"
+    },
+    {
+      "npmAlias": "check:knr-package-a",
+      "command": "node scripts/check-knr-package-a-routing-ranking-coverage.mjs",
+      "implementationFile": "scripts/check-knr-package-a-routing-ranking-coverage.mjs"
+    },
+    {
+      "npmAlias": "check:knr-package-b",
+      "command": "node scripts/check-knr-package-b-adaptive-projection-reading-paths.mjs",
+      "implementationFile": "scripts/check-knr-package-b-adaptive-projection-reading-paths.mjs"
+    },
+    {
+      "npmAlias": "check:knr-package-c",
+      "command": "node scripts/check-knr-package-c-public-api-experience.mjs",
+      "implementationFile": "scripts/check-knr-package-c-public-api-experience.mjs"
+    },
+    {
+      "npmAlias": "check:knr-package-d",
+      "command": "node scripts/check-knr-package-d-quality-production-integration.mjs",
+      "implementationFile": "scripts/check-knr-package-d-quality-production-integration.mjs"
+    },
+    {
+      "npmAlias": "check:knr-published-retrieval-w1",
+      "command": "node scripts/check-step64-multilingual-published-retrieval-index.mjs",
+      "implementationFile": "scripts/check-step64-multilingual-published-retrieval-index.mjs"
+    },
+    {
+      "npmAlias": "check:knr-w0r",
+      "command": "node scripts/check-knr-w0r-knowledge-inventory-reconciliation.mjs",
+      "implementationFile": "scripts/check-knr-w0r-knowledge-inventory-reconciliation.mjs"
+    },
+    {
+      "npmAlias": "check:knr-w2r1-t04",
+      "command": "node scripts/check-knr-w2r1-t04-searchable-pdf-extraction.mjs",
+      "implementationFile": "scripts/check-knr-w2r1-t04-searchable-pdf-extraction.mjs"
+    },
+    {
+      "npmAlias": "check:knr-w2r1-t05",
+      "command": "node scripts/check-knr-w2r1-t05-p0-human-normalization-review.mjs",
+      "implementationFile": "scripts/check-knr-w2r1-t05-p0-human-normalization-review.mjs"
+    },
+    {
+      "npmAlias": "check:knr-w2r1-t06",
+      "command": "node scripts/check-knr-w2r1-t06-book-i-section-inventory.mjs",
+      "implementationFile": "scripts/check-knr-w2r1-t06-book-i-section-inventory.mjs"
+    },
+    {
+      "npmAlias": "check:knr-w2r1-t07",
+      "command": "node scripts/check-knr-w2r1-t07-canonical-node-mapping-identity.mjs",
+      "implementationFile": "scripts/check-knr-w2r1-t07-canonical-node-mapping-identity.mjs"
+    },
+    {
+      "npmAlias": "check:knr-w2r1-t08",
+      "command": "node scripts/check-knr-w2r1-t08-preface-mapping-review.mjs",
+      "implementationFile": "scripts/check-knr-w2r1-t08-preface-mapping-review.mjs"
+    },
+    {
+      "npmAlias": "check:knr-w2r1-t09-mapping-candidates",
+      "command": "node scripts/check-knr-w2r1-t09-controlled-mapping-candidates.mjs",
+      "implementationFile": "scripts/check-knr-w2r1-t09-controlled-mapping-candidates.mjs"
+    },
+    {
+      "npmAlias": "check:knr-w2r1-t09-p1",
+      "command": "node scripts/check-knr-w2r1-t09-p1-progressive-extraction.mjs",
+      "implementationFile": "scripts/check-knr-w2r1-t09-p1-progressive-extraction.mjs"
+    },
+    {
+      "npmAlias": "check:knr-w2r1-t09-p2-p5",
+      "command": "node scripts/check-knr-w2r1-t09-p2-p5-progressive-extraction.mjs",
+      "implementationFile": "scripts/check-knr-w2r1-t09-p2-p5-progressive-extraction.mjs"
+    },
+    {
+      "npmAlias": "check:knr-w2r1-v1.2",
+      "command": "node scripts/check-knr-w2r1-v1-2.mjs",
+      "implementationFile": "scripts/check-knr-w2r1-v1-2.mjs"
+    },
+    {
+      "npmAlias": "check:knr-w2r1-v1.2.1",
+      "command": "node scripts/check-knr-w2r1-v1-2-1.mjs",
+      "implementationFile": "scripts/check-knr-w2r1-v1-2-1.mjs"
+    },
+    {
+      "npmAlias": "check:knr-w2r1-v1.3",
+      "command": "node scripts/check-knr-w2r1-v1-3.mjs",
+      "implementationFile": "scripts/check-knr-w2r1-v1-3.mjs"
+    },
+    {
+      "npmAlias": "check:kpp-w0",
+      "command": "node scripts/check-kpp-w0-w12-production-planning-foundation.mjs",
+      "implementationFile": "scripts/check-kpp-w0-w12-production-planning-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:kpp-w0-w12",
+      "command": "node scripts/check-kpp-w0-w12-production-planning-foundation.mjs",
+      "implementationFile": "scripts/check-kpp-w0-w12-production-planning-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:kpp-w1-w12",
+      "command": "node scripts/check-kpp-w0-w12-production-planning-foundation.mjs",
+      "implementationFile": "scripts/check-kpp-w0-w12-production-planning-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:kra-budget-w1",
+      "command": "node scripts/check-zero-cost-provider-foundation-step83.mjs",
+      "implementationFile": "scripts/check-zero-cost-provider-foundation-step83.mjs"
+    },
+    {
+      "npmAlias": "check:kra-provider-adapter-w1",
+      "command": "node scripts/check-provider-adapter-foundation-step83.mjs",
+      "implementationFile": "scripts/check-provider-adapter-foundation-step83.mjs"
+    },
+    {
+      "npmAlias": "check:kra-w1",
+      "command": "node scripts/check-provider-routing-step84.mjs",
+      "implementationFile": "scripts/check-provider-routing-step84.mjs"
+    },
+    {
+      "npmAlias": "check:m3a-public-experience",
+      "command": "node scripts/check-m3a-public-experience.mjs",
+      "implementationFile": "scripts/check-m3a-public-experience.mjs"
+    },
+    {
+      "npmAlias": "check:m3b-book-access-payment",
+      "command": "node --no-warnings scripts/check-m3b-book-access-payment.mjs",
+      "implementationFile": "scripts/check-m3b-book-access-payment.mjs"
+    },
+    {
+      "npmAlias": "check:m3b-knowledge-release",
+      "command": "node scripts/check-m3b-knowledge-release.mjs",
+      "implementationFile": "scripts/check-m3b-knowledge-release.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-continuity",
+      "command": "node scripts/check-m3c-continuity.mjs",
+      "implementationFile": "scripts/check-m3c-continuity.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-entry-recovery-consent",
+      "command": "node scripts/check-m3c-entry-recovery-consent.mjs",
+      "implementationFile": "scripts/check-m3c-entry-recovery-consent.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-entry-visual-alignment",
+      "command": "node scripts/check-m3c-entry-visual-alignment.mjs",
+      "implementationFile": "scripts/check-m3c-entry-visual-alignment.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-guided-entry",
+      "command": "node scripts/check-m3c-guided-entry.mjs",
+      "implementationFile": "scripts/check-m3c-guided-entry.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-journey-dashboard",
+      "command": "node scripts/check-m3c-journey-dashboard.mjs",
+      "implementationFile": "scripts/check-m3c-journey-dashboard.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-journey-overview",
+      "command": "node scripts/check-m3c-journey-overview.mjs",
+      "implementationFile": "scripts/check-m3c-journey-overview.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-memory",
+      "command": "node scripts/check-m3c-memory.mjs",
+      "implementationFile": "scripts/check-m3c-memory.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-navigation-action-schema",
+      "command": "node scripts/check-m3c-navigation-action-schema.mjs",
+      "implementationFile": "scripts/check-m3c-navigation-action-schema.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-navigation-evidence-log",
+      "command": "node scripts/check-m3c-navigation-evidence-log.mjs",
+      "implementationFile": "scripts/check-m3c-navigation-evidence-log.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-navigation-execution",
+      "command": "node scripts/check-m3c-navigation-execution.mjs",
+      "implementationFile": "scripts/check-m3c-navigation-execution.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-navigation-final-polish",
+      "command": "node scripts/check-m3c-navigation-final-polish.mjs",
+      "implementationFile": "scripts/check-m3c-navigation-final-polish.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-navigation-recovery",
+      "command": "node scripts/check-m3c-navigation-recovery.mjs",
+      "implementationFile": "scripts/check-m3c-navigation-recovery.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-navigation-review-gate",
+      "command": "node scripts/check-m3c-navigation-review-gate.mjs",
+      "implementationFile": "scripts/check-m3c-navigation-review-gate.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-navigation-visual-alignment",
+      "command": "node scripts/check-m3c-navigation-visual-alignment.mjs",
+      "implementationFile": "scripts/check-m3c-navigation-visual-alignment.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-public-journey-acceptance",
+      "command": "node scripts/check-m3c-public-journey-acceptance.mjs",
+      "implementationFile": "scripts/check-m3c-public-journey-acceptance.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-public-journey-production",
+      "command": "node scripts/check-m3c-public-journey-production.mjs",
+      "implementationFile": "scripts/check-m3c-public-journey-production.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-reading-experience",
+      "command": "node scripts/check-m3c-reading-experience.mjs",
+      "implementationFile": "scripts/check-m3c-reading-experience.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-reading-production-polish",
+      "command": "node scripts/check-m3c-reading-production-polish.mjs",
+      "implementationFile": "scripts/check-m3c-reading-production-polish.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-reading-visual-alignment",
+      "command": "node scripts/check-m3c-reading-visual-alignment.mjs",
+      "implementationFile": "scripts/check-m3c-reading-visual-alignment.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-reconstruction-experience",
+      "command": "node scripts/check-m3c-reconstruction-experience.mjs",
+      "implementationFile": "scripts/check-m3c-reconstruction-experience.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-reconstruction-visual-alignment",
+      "command": "node scripts/check-m3c-reconstruction-visual-alignment.mjs",
+      "implementationFile": "scripts/check-m3c-reconstruction-visual-alignment.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-review",
+      "command": "node scripts/check-m3c-review.mjs",
+      "implementationFile": "scripts/check-m3c-review.mjs"
+    },
+    {
+      "npmAlias": "check:m3c-runtime-completion",
+      "command": "node scripts/check-m3c-review.mjs && node scripts/check-m3c-memory.mjs && node scripts/check-m3c-continuity.mjs",
+      "implementationFile": "scripts/check-m3c-review.mjs"
+    },
+    {
+      "npmAlias": "check:m4a-consent-sharing",
+      "command": "node scripts/check-m4a-consent-sharing.mjs",
+      "implementationFile": "scripts/check-m4a-consent-sharing.mjs"
+    },
+    {
+      "npmAlias": "check:m4a-financial-infrastructure",
+      "command": "node --no-warnings scripts/check-m4a-financial-infrastructure.mjs",
+      "implementationFile": "scripts/check-m4a-financial-infrastructure.mjs"
+    },
+    {
+      "npmAlias": "check:m4a-financial-reality-navigation",
+      "command": "node scripts/check-m4a-financial-reality-navigation.mjs",
+      "implementationFile": "scripts/check-m4a-financial-reality-navigation.mjs"
+    },
+    {
+      "npmAlias": "check:m4a-professional-data-privacy",
+      "command": "node scripts/check-m4a-professional-data-privacy.mjs",
+      "implementationFile": "scripts/check-m4a-professional-data-privacy.mjs"
+    },
+    {
+      "npmAlias": "check:m4a-professional-service-definition",
+      "command": "node scripts/check-m4a-professional-service-definition.mjs",
+      "implementationFile": "scripts/check-m4a-professional-service-definition.mjs"
+    },
+    {
+      "npmAlias": "check:m4a-w2a-financial-workspace",
+      "command": "node scripts/check-m4a-w2a-financial-workspace-operationalization.mjs",
+      "implementationFile": "scripts/check-m4a-w2a-financial-workspace-operationalization.mjs"
+    },
+    {
+      "npmAlias": "check:m4a-w2b-financial-revision-navigation",
+      "command": "node scripts/check-m4a-w2b-financial-revision-navigation.mjs",
+      "implementationFile": "scripts/check-m4a-w2b-financial-revision-navigation.mjs"
+    },
+    {
+      "npmAlias": "check:m4a-w2c-financial-intake-calculation",
+      "command": "node scripts/check-m4a-w2c-financial-intake-calculation.mjs",
+      "implementationFile": "scripts/check-m4a-w2c-financial-intake-calculation.mjs"
+    },
+    {
+      "npmAlias": "check:m4a-w4-financial-reports",
+      "command": "node scripts/check-m4a-w4-financial-reports.mjs",
+      "implementationFile": "scripts/check-m4a-w4-financial-reports.mjs"
+    },
+    {
+      "npmAlias": "check:m4a-w5-financial-appointments",
+      "command": "node scripts/check-m4a-w5-financial-appointments.mjs",
+      "implementationFile": "scripts/check-m4a-w5-financial-appointments.mjs"
+    },
+    {
+      "npmAlias": "check:m4a-w6-financial-public-pages",
+      "command": "node scripts/check-m4a-w6-financial-public-pages.mjs",
+      "implementationFile": "scripts/check-m4a-w6-financial-public-pages.mjs"
+    },
+    {
+      "npmAlias": "check:m4b-appointment-payment",
+      "command": "node scripts/check-m4b-appointment-payment.mjs",
+      "implementationFile": "scripts/check-m4b-appointment-payment.mjs"
+    },
+    {
+      "npmAlias": "check:m4b-consent-sharing",
+      "command": "node scripts/check-m4b-consent-sharing.mjs",
+      "implementationFile": "scripts/check-m4b-consent-sharing.mjs"
+    },
+    {
+      "npmAlias": "check:m4b-contract-acceptance",
+      "command": "node scripts/check-m4b-contract-acceptance.mjs",
+      "implementationFile": "scripts/check-m4b-contract-acceptance.mjs"
+    },
+    {
+      "npmAlias": "check:m4b-external-reader-data-privacy",
+      "command": "node scripts/check-m4b-external-reader-data-privacy.mjs",
+      "implementationFile": "scripts/check-m4b-external-reader-data-privacy.mjs"
+    },
+    {
+      "npmAlias": "check:m4b-external-reader-framework",
+      "command": "node scripts/check-m4b-external-reader-framework.mjs",
+      "implementationFile": "scripts/check-m4b-external-reader-framework.mjs"
+    },
+    {
+      "npmAlias": "check:m4b-external-reader-intake",
+      "command": "node scripts/check-m4b-external-reader-intake.mjs",
+      "implementationFile": "scripts/check-m4b-external-reader-intake.mjs"
+    },
+    {
+      "npmAlias": "check:m4b-professional-public-pages",
+      "command": "node scripts/check-m4b-professional-public-pages.mjs",
+      "implementationFile": "scripts/check-m4b-professional-public-pages.mjs"
+    },
+    {
+      "npmAlias": "check:m4b-professional-reports",
+      "command": "node scripts/check-m4b-professional-reports.mjs",
+      "implementationFile": "scripts/check-m4b-professional-reports.mjs"
+    },
+    {
+      "npmAlias": "check:m4b-professional-revision-navigation-follow-up",
+      "command": "node scripts/check-m4b-professional-revision-navigation-follow-up.mjs",
+      "implementationFile": "scripts/check-m4b-professional-revision-navigation-follow-up.mjs"
+    },
+    {
+      "npmAlias": "check:m4b-professional-workspace-foundation",
+      "command": "node scripts/check-m4b-professional-workspace-foundation.mjs",
+      "implementationFile": "scripts/check-m4b-professional-workspace-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:m4b-professional-workspace-views",
+      "command": "node scripts/check-m4b-professional-workspace-views.mjs",
+      "implementationFile": "scripts/check-m4b-professional-workspace-views.mjs"
+    },
+    {
+      "npmAlias": "check:m4b-release-freeze",
+      "command": "node scripts/check-m4b-release-freeze.mjs",
+      "implementationFile": "scripts/check-m4b-release-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:m4c-account-membership",
+      "command": "node scripts/check-m4c-account-payment-membership.mjs",
+      "implementationFile": "scripts/check-m4c-account-payment-membership.mjs"
+    },
+    {
+      "npmAlias": "check:master-governance",
+      "command": "node scripts/check-master-governance.mjs",
+      "implementationFile": "scripts/check-master-governance.mjs"
+    },
+    {
+      "npmAlias": "check:mr-w0",
+      "command": "node scripts/check-mr-w0-method-runtime-constitution.mjs",
+      "implementationFile": "scripts/check-mr-w0-method-runtime-constitution.mjs"
+    },
+    {
+      "npmAlias": "check:mr-w1",
+      "command": "node scripts/check-mr-w1-method-registry.mjs",
+      "implementationFile": "scripts/check-mr-w1-method-registry.mjs"
+    },
+    {
+      "npmAlias": "check:mr-w2",
+      "command": "node scripts/check-mr-w2-shared-data-authority.mjs",
+      "implementationFile": "scripts/check-mr-w2-shared-data-authority.mjs"
+    },
+    {
+      "npmAlias": "check:mr-w3",
+      "command": "node scripts/check-mr-w3-shared-calculation-runtime.mjs",
+      "implementationFile": "scripts/check-mr-w3-shared-calculation-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:mr-w4",
+      "command": "node scripts/check-mr-w4-shared-projection-runtime.mjs",
+      "implementationFile": "scripts/check-mr-w4-shared-projection-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:mr-w5",
+      "command": "node scripts/check-mr-w5-shared-interpretation-runtime.mjs",
+      "implementationFile": "scripts/check-mr-w5-shared-interpretation-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:mr-w6",
+      "command": "node scripts/check-mr-w6-shared-professional-runtime.mjs",
+      "implementationFile": "scripts/check-mr-w6-shared-professional-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:mr-w7",
+      "command": "node scripts/check-mr-w7-method-runtime-freeze.mjs",
+      "implementationFile": "scripts/check-mr-w7-method-runtime-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:navigation-contract",
+      "command": "node scripts/check-reading-navigation-contract.mjs && node scripts/check-reading-customer-language.mjs",
+      "implementationFile": "scripts/check-reading-navigation-contract.mjs"
+    },
+    {
+      "npmAlias": "check:navigation-paths",
+      "command": "node scripts/check-navigation-path-rules.mjs && node scripts/check-navigation-customer-view.mjs",
+      "implementationFile": "scripts/check-navigation-path-rules.mjs"
+    },
+    {
+      "npmAlias": "check:navigation-state",
+      "command": "node scripts/check-navigation-state.mjs",
+      "implementationFile": "scripts/check-navigation-state.mjs"
+    },
+    {
+      "npmAlias": "check:num-w0",
+      "command": "node scripts/check-num-w0-numeric-runtime-foundation.mjs",
+      "implementationFile": "scripts/check-num-w0-numeric-runtime-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:num-w1",
+      "command": "node scripts/check-num-w1-birth-number-runtime.mjs",
+      "implementationFile": "scripts/check-num-w1-birth-number-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:num-w2",
+      "command": "node scripts/check-num-w2-number-structure-runtime.mjs",
+      "implementationFile": "scripts/check-num-w2-number-structure-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:num-w3",
+      "command": "node scripts/check-num-w3-cycle-runtime.mjs",
+      "implementationFile": "scripts/check-num-w3-cycle-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:num-w4",
+      "command": "node scripts/check-num-w4-projection-runtime.mjs",
+      "implementationFile": "scripts/check-num-w4-projection-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:num-w5",
+      "command": "node scripts/check-num-w5-professional-integration.mjs",
+      "implementationFile": "scripts/check-num-w5-professional-integration.mjs"
+    },
+    {
+      "npmAlias": "check:num-w6",
+      "command": "node scripts/check-num-w6-production-freeze.mjs",
+      "implementationFile": "scripts/check-num-w6-production-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:pds-w0",
+      "command": "node scripts/check-pds-w0-baseline-boundary.mjs",
+      "implementationFile": "scripts/check-pds-w0-baseline-boundary.mjs"
+    },
+    {
+      "npmAlias": "check:pds-w1",
+      "command": "node scripts/check-pds-w1-experience-contract.mjs",
+      "implementationFile": "scripts/check-pds-w1-experience-contract.mjs"
+    },
+    {
+      "npmAlias": "check:pds-w10",
+      "command": "node scripts/check-pds-w10-full-site-acceptance.mjs",
+      "implementationFile": "scripts/check-pds-w10-full-site-acceptance.mjs"
+    },
+    {
+      "npmAlias": "check:pds-w2",
+      "command": "node scripts/check-pds-w2-design-tokens.mjs",
+      "implementationFile": "scripts/check-pds-w2-design-tokens.mjs"
+    },
+    {
+      "npmAlias": "check:pds-w3",
+      "command": "node scripts/check-pds-w3-core-component-shell.mjs",
+      "implementationFile": "scripts/check-pds-w3-core-component-shell.mjs"
+    },
+    {
+      "npmAlias": "check:pds-w4",
+      "command": "node scripts/check-pds-w4-reality-journey-shell.mjs",
+      "implementationFile": "scripts/check-pds-w4-reality-journey-shell.mjs"
+    },
+    {
+      "npmAlias": "check:pds-w5",
+      "command": "node scripts/check-pds-w5-entry-experience.mjs",
+      "implementationFile": "scripts/check-pds-w5-entry-experience.mjs"
+    },
+    {
+      "npmAlias": "check:pds-w6",
+      "command": "node scripts/check-pds-w6-reconstruction-experience.mjs",
+      "implementationFile": "scripts/check-pds-w6-reconstruction-experience.mjs"
+    },
+    {
+      "npmAlias": "check:pds-w7",
+      "command": "node scripts/check-pds-w7-reading-experience.mjs",
+      "implementationFile": "scripts/check-pds-w7-reading-experience.mjs"
+    },
+    {
+      "npmAlias": "check:pds-w8",
+      "command": "node scripts/check-pds-w8-navigation-review-continuity.mjs",
+      "implementationFile": "scripts/check-pds-w8-navigation-review-continuity.mjs"
+    },
+    {
+      "npmAlias": "check:pds-w9",
+      "command": "node scripts/check-pds-w9-knowledge-professional.mjs",
+      "implementationFile": "scripts/check-pds-w9-knowledge-professional.mjs"
+    },
+    {
+      "npmAlias": "check:phase-0",
+      "command": "node scripts/check-phase-0-cross-runtime-authority-freeze.mjs",
+      "implementationFile": "scripts/check-phase-0-cross-runtime-authority-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:phase-0-1",
+      "command": "node scripts/check-phase-0-cross-runtime-authority-freeze.mjs",
+      "implementationFile": "scripts/check-phase-0-cross-runtime-authority-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:phase-0-2",
+      "command": "node scripts/check-phase-0-cross-runtime-authority-freeze.mjs",
+      "implementationFile": "scripts/check-phase-0-cross-runtime-authority-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:phase-0-3",
+      "command": "node scripts/check-phase-0-cross-runtime-authority-freeze.mjs",
+      "implementationFile": "scripts/check-phase-0-cross-runtime-authority-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:pja",
+      "command": "node scripts/check-pja.mjs",
+      "implementationFile": "scripts/check-pja.mjs"
+    },
+    {
+      "npmAlias": "check:pja-approval-w1",
+      "command": "node scripts/check-pja-approval-w1-human-approval-runtime.mjs",
+      "implementationFile": "scripts/check-pja-approval-w1-human-approval-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:pja-candidate-w1",
+      "command": "node scripts/check-pja-candidate-w1-runtime.mjs",
+      "implementationFile": "scripts/check-pja-candidate-w1-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:pja-l10n-w2",
+      "command": "node scripts/check-pja-l10n-w2-zh-hans-brief-export.mjs",
+      "implementationFile": "scripts/check-pja-l10n-w2-zh-hans-brief-export.mjs"
+    },
+    {
+      "npmAlias": "check:pja-l10n-w3",
+      "command": "node scripts/check-pja-l10n-w3-zh-hans-candidate-import.mjs",
+      "implementationFile": "scripts/check-pja-l10n-w3-zh-hans-candidate-import.mjs"
+    },
+    {
+      "npmAlias": "check:pja-l10n-w4",
+      "command": "node scripts/check-pja-l10n-w4-english-brief-export.mjs",
+      "implementationFile": "scripts/check-pja-l10n-w4-english-brief-export.mjs"
+    },
+    {
+      "npmAlias": "check:pja-l10n-w5",
+      "command": "node scripts/check-pja-l10n-w5-independent-english-production.mjs",
+      "implementationFile": "scripts/check-pja-l10n-w5-independent-english-production.mjs"
+    },
+    {
+      "npmAlias": "check:pja-prompt-w1",
+      "command": "node scripts/check-pja-prompt-w1-production-prompt-runtime.mjs",
+      "implementationFile": "scripts/check-pja-prompt-w1-production-prompt-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:pja-publication-w1",
+      "command": "node scripts/check-pja-publication-w1-runtime.mjs",
+      "implementationFile": "scripts/check-pja-publication-w1-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:pja-published-authority-w1",
+      "command": "node scripts/check-step63-published-knowledge-authority.mjs",
+      "implementationFile": "scripts/check-step63-published-knowledge-authority.mjs"
+    },
+    {
+      "npmAlias": "check:pja-r4",
+      "command": "npm run check:pja-r4a && npm run check:pja-r4f",
+      "implementationFile": null
+    },
+    {
+      "npmAlias": "check:pja-r4a",
+      "command": "node scripts/check-pja-r4a-blueprint-binding-foundation.mjs",
+      "implementationFile": "scripts/check-pja-r4a-blueprint-binding-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:pja-r4b",
+      "command": "node scripts/check-pja-r4b-production-repository-migration.mjs",
+      "implementationFile": "scripts/check-pja-r4b-production-repository-migration.mjs"
+    },
+    {
+      "npmAlias": "check:pja-r4c",
+      "command": "npm run check:pja-r4b && node scripts/check-pja-r4c-readiness-migration.mjs",
+      "implementationFile": "scripts/check-pja-r4c-readiness-migration.mjs"
+    },
+    {
+      "npmAlias": "check:pja-r4d",
+      "command": "npm run check:pja-r4c && node scripts/check-pja-r4d-production-orchestration-migration.mjs",
+      "implementationFile": "scripts/check-pja-r4d-production-orchestration-migration.mjs"
+    },
+    {
+      "npmAlias": "check:pja-r4e",
+      "command": "npm run check:pja-r4d && node scripts/check-pja-r4e-article-package-contract-v2.mjs",
+      "implementationFile": "scripts/check-pja-r4e-article-package-contract-v2.mjs"
+    },
+    {
+      "npmAlias": "check:pja-r4f",
+      "command": "npm run check:pja-r4e && node scripts/check-pja-r4f-acceptance-freeze.mjs",
+      "implementationFile": "scripts/check-pja-r4f-acceptance-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:pja-review-w1",
+      "command": "node scripts/check-pja-review-w1-human-review-runtime.mjs",
+      "implementationFile": "scripts/check-pja-review-w1-human-review-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w0",
+      "command": "node scripts/check-pja-w0-cross-system-boundary.mjs",
+      "implementationFile": "scripts/check-pja-w0-cross-system-boundary.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w1",
+      "command": "node scripts/check-pja-w1-blueprint-led-knowledge.mjs",
+      "implementationFile": "scripts/check-pja-w1-blueprint-led-knowledge.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2a",
+      "command": "npm run check:pja-w1 && node scripts/check-pja-w2a-canonical-article-editorial-contract.mjs",
+      "implementationFile": "scripts/check-pja-w2a-canonical-article-editorial-contract.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2b",
+      "command": "npm run check:pja-w2a && node scripts/check-pja-w2b-structured-article-schema.mjs",
+      "implementationFile": "scripts/check-pja-w2b-structured-article-schema.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2c",
+      "command": "npm run check:pja-w2b && node scripts/check-pja-w2c-claim-source-review-governance.mjs",
+      "implementationFile": "scripts/check-pja-w2c-claim-source-review-governance.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2d",
+      "command": "npm run check:pja-w2c && node scripts/check-pja-w2d-article-renderer-expansion.mjs",
+      "implementationFile": "scripts/check-pja-w2d-article-renderer-expansion.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2e",
+      "command": "npm run check:pja-w2d && node scripts/check-pja-w2e-production-tools.mjs",
+      "implementationFile": "scripts/check-pja-w2e-production-tools.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2e-r1",
+      "command": "npm run check:pja-w2e && node scripts/check-pja-w2e-r1-production-brief-hardening.mjs",
+      "implementationFile": "scripts/check-pja-w2e-r1-production-brief-hardening.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2f-a",
+      "command": "npm run check:pja-w2e-r1 && node scripts/check-pja-w2f-a-universal-production-readiness.mjs",
+      "implementationFile": "scripts/check-pja-w2f-a-universal-production-readiness.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2f-b1",
+      "command": "npm run check:pja-w2f-a && node scripts/check-pja-w2f-b1-preface-content-population.mjs",
+      "implementationFile": "scripts/check-pja-w2f-b1-preface-content-population.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2f-b2",
+      "command": "npm run check:pja-w2f-b1 && node scripts/check-pja-w2f-b2-preface-article-production.mjs",
+      "implementationFile": "scripts/check-pja-w2f-b2-preface-article-production.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2f-b2a",
+      "command": "npm run check:pja-w2f-b2 && node scripts/check-pja-w2f-b2a-first-human-frozen-pilot.mjs",
+      "implementationFile": "scripts/check-pja-w2f-b2a-first-human-frozen-pilot.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2f-b2b",
+      "command": "npm run check:pja-w2f-b2a && node scripts/check-pja-w2f-b2b-schema-validator-alignment.mjs",
+      "implementationFile": "scripts/check-pja-w2f-b2b-schema-validator-alignment.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2f-c0",
+      "command": "npm run check:pja-w2f-b1 && node scripts/check-pja-w2f-c0-book-i-registry-population.mjs",
+      "implementationFile": "scripts/check-pja-w2f-c0-book-i-registry-population.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2f-c1",
+      "command": "npm run check:pja-w2f-c0 && node scripts/check-pja-w2f-c1-readiness-skeleton-population.mjs",
+      "implementationFile": "scripts/check-pja-w2f-c1-readiness-skeleton-population.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2f-c1-article-pilot-historical",
+      "command": "npm run check:pja-w2f-b2b && node scripts/check-pja-w2f-c1-article-production-pilot.mjs",
+      "implementationFile": "scripts/check-pja-w2f-c1-article-production-pilot.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2f-c2",
+      "command": "npm run check:pja-w2f-c1 && node scripts/check-pja-w2f-c2-canonical-thesis-boundary-freeze.mjs",
+      "implementationFile": "scripts/check-pja-w2f-c2-canonical-thesis-boundary-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2f-c2-batch-historical",
+      "command": "npm run check:pja-w2f-c1-article-pilot-historical && node scripts/check-pja-w2f-c2-universal-scope-batch-production.mjs",
+      "implementationFile": "scripts/check-pja-w2f-c2-universal-scope-batch-production.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2f-c3",
+      "command": "npm run check:pja-w2f-c2 && node scripts/check-pja-w2f-c3-universal-production-readiness.mjs",
+      "implementationFile": "scripts/check-pja-w2f-c3-universal-production-readiness.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2f-c3-production-historical",
+      "command": "npm run check:pja-w2f-c2-batch-historical && node scripts/check-pja-w2f-c3-registered-production-ready-node-production.mjs",
+      "implementationFile": "scripts/check-pja-w2f-c3-registered-production-ready-node-production.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2f-c3r1",
+      "command": "npm run check:pja-w2f-d && node scripts/check-pja-w2f-c3r1-preface-production-readiness-closure.mjs",
+      "implementationFile": "scripts/check-pja-w2f-c3r1-preface-production-readiness-closure.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w2f-d",
+      "command": "npm run check:pja-w2f-c3 && node scripts/check-pja-w2f-d-book-i-batch-production.mjs",
+      "implementationFile": "scripts/check-pja-w2f-d-book-i-batch-production.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w3a",
+      "command": "npm run check:pja-w2f-c3r1 && node scripts/check-pja-w3a-editorial-package-foundation.mjs",
+      "implementationFile": "scripts/check-pja-w3a-editorial-package-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w3r",
+      "command": "node scripts/check-pja-w3r-production-workflow-review.mjs",
+      "implementationFile": "scripts/check-pja-w3r-production-workflow-review.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w3r1",
+      "command": "node scripts/check-pja-w3r1-scalable-article-production.mjs",
+      "implementationFile": "scripts/check-pja-w3r1-scalable-article-production.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w3r2",
+      "command": "node scripts/check-pja-w3r2-governed-editorial-generation.mjs",
+      "implementationFile": "scripts/check-pja-w3r2-governed-editorial-generation.mjs"
+    },
+    {
+      "npmAlias": "check:pja-w3r3",
+      "command": "npm run check:pja-w3r2 && node scripts/check-pja-w3r3-knowledge-production-orchestration.mjs",
+      "implementationFile": "scripts/check-pja-w3r3-knowledge-production-orchestration.mjs"
+    },
+    {
+      "npmAlias": "check:pja:node",
+      "command": "node scripts/check-pja-node.mjs",
+      "implementationFile": "scripts/check-pja-node.mjs"
+    },
+    {
+      "npmAlias": "check:professional-boundary",
+      "command": "node scripts/check-professional-boundary.mjs",
+      "implementationFile": "scripts/check-professional-boundary.mjs"
+    },
+    {
+      "npmAlias": "check:professional-workspace",
+      "command": "node scripts/check-m4b-professional-workspace-foundation.mjs && node scripts/check-m4b-professional-workspace-views.mjs && node scripts/check-m4b-professional-revision-navigation-follow-up.mjs && node scripts/check-m4b-professional-reports.mjs && node scripts/check-m4b-appointment-payment.mjs",
+      "implementationFile": "scripts/check-m4b-professional-workspace-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:provider-adapter-foundation",
+      "command": "node scripts/check-provider-adapter-foundation-step83.mjs",
+      "implementationFile": "scripts/check-provider-adapter-foundation-step83.mjs"
+    },
+    {
+      "npmAlias": "check:provider-closure",
+      "command": "node scripts/check-provider-closure.mjs",
+      "implementationFile": "scripts/check-provider-closure.mjs"
+    },
+    {
+      "npmAlias": "check:provider-routing",
+      "command": "node scripts/check-provider-routing-step84.mjs",
+      "implementationFile": "scripts/check-provider-routing-step84.mjs"
+    },
+    {
+      "npmAlias": "check:pws-entry-w1",
+      "command": "node scripts/check-pws-entry-w1-authorised-data-loader.mjs",
+      "implementationFile": "scripts/check-pws-entry-w1-authorised-data-loader.mjs"
+    },
+    {
+      "npmAlias": "check:pws-entry-w2",
+      "command": "node scripts/check-pws-entry-w2-canonical-ownership.mjs",
+      "implementationFile": "scripts/check-pws-entry-w2-canonical-ownership.mjs"
+    },
+    {
+      "npmAlias": "check:pws-entry-w3",
+      "command": "node scripts/check-pws-entry-w3-implementation-sequence.mjs",
+      "implementationFile": "scripts/check-pws-entry-w3-implementation-sequence.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i1",
+      "command": "node scripts/check-pws-i1-v1-freeze.mjs",
+      "implementationFile": "scripts/check-pws-i1-v1-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i1-t01",
+      "command": "node scripts/check-pws-i1-t01-canonical-glossary.mjs",
+      "implementationFile": "scripts/check-pws-i1-t01-canonical-glossary.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i1-t02",
+      "command": "node scripts/check-pws-i1-t02-canonical-identifiers.mjs",
+      "implementationFile": "scripts/check-pws-i1-t02-canonical-identifiers.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i1-t02-registry",
+      "command": "node scripts/check-pws-i1-t02-object-registry-t03-schema-version.mjs",
+      "implementationFile": "scripts/check-pws-i1-t02-object-registry-t03-schema-version.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i1-t03",
+      "command": "node scripts/check-pws-i1-t02-object-registry-t03-schema-version.mjs",
+      "implementationFile": "scripts/check-pws-i1-t02-object-registry-t03-schema-version.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i1-t04",
+      "command": "node scripts/check-pws-i1-t04-canonical-states.mjs",
+      "implementationFile": "scripts/check-pws-i1-t04-canonical-states.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i1-t05",
+      "command": "node scripts/check-pws-i1-t05-t06-operations-events.mjs",
+      "implementationFile": "scripts/check-pws-i1-t05-t06-operations-events.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i1-t06",
+      "command": "node scripts/check-pws-i1-t05-t06-operations-events.mjs",
+      "implementationFile": "scripts/check-pws-i1-t05-t06-operations-events.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i1-t07",
+      "command": "node scripts/check-pws-i1-t07-canonical-errors.mjs",
+      "implementationFile": "scripts/check-pws-i1-t07-canonical-errors.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i1-t08",
+      "command": "node scripts/check-pws-i1-t08-directory-blueprint.mjs",
+      "implementationFile": "scripts/check-pws-i1-t08-directory-blueprint.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i2",
+      "command": "node scripts/check-pws-i2-w0-registry-baseline-audit.mjs && node --no-warnings scripts/check-pws-i2-w1-universal-registry-core.mjs && node --no-warnings scripts/check-pws-i2-w2-professional-registry.mjs && node --no-warnings scripts/check-pws-i2-w3-capability-credential-registry.mjs && node --no-warnings scripts/check-pws-i2-w4-method-service-registry.mjs && node --no-warnings scripts/check-pws-i2-w5-product-offer-registry.mjs && node --no-warnings scripts/check-pws-i2-w6-knowledge-deliverable-type-registry.mjs && node --no-warnings scripts/check-pws-i2-w7-migration-reconciliation.mjs && node scripts/check-kh-w3-5f-canonical-extraction-scaling-freeze.mjs && node scripts/check-kh-w3-5g-book-i-knowledge-blueprint.mjs && node scripts/check-kh-w3-5h-universal-knowledge-blueprint-v2.mjs && node --no-warnings scripts/check-pws-i2-v1-freeze.mjs",
+      "implementationFile": "scripts/check-pws-i2-w0-registry-baseline-audit.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i2-w0",
+      "command": "node scripts/check-pws-i2-w0-registry-baseline-audit.mjs",
+      "implementationFile": "scripts/check-pws-i2-w0-registry-baseline-audit.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i2-w1",
+      "command": "node --no-warnings scripts/check-pws-i2-w1-universal-registry-core.mjs",
+      "implementationFile": "scripts/check-pws-i2-w1-universal-registry-core.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i2-w2",
+      "command": "node --no-warnings scripts/check-pws-i2-w2-professional-registry.mjs",
+      "implementationFile": "scripts/check-pws-i2-w2-professional-registry.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i2-w3",
+      "command": "node --no-warnings scripts/check-pws-i2-w3-capability-credential-registry.mjs",
+      "implementationFile": "scripts/check-pws-i2-w3-capability-credential-registry.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i2-w4",
+      "command": "node --no-warnings scripts/check-pws-i2-w4-method-service-registry.mjs",
+      "implementationFile": "scripts/check-pws-i2-w4-method-service-registry.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i2-w5",
+      "command": "node --no-warnings scripts/check-pws-i2-w5-product-offer-registry.mjs",
+      "implementationFile": "scripts/check-pws-i2-w5-product-offer-registry.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i2-w6",
+      "command": "node --no-warnings scripts/check-pws-i2-w6-knowledge-deliverable-type-registry.mjs",
+      "implementationFile": "scripts/check-pws-i2-w6-knowledge-deliverable-type-registry.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i2-w7",
+      "command": "node --no-warnings scripts/check-pws-i2-w7-migration-reconciliation.mjs",
+      "implementationFile": "scripts/check-pws-i2-w7-migration-reconciliation.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i4-w1",
+      "command": "node scripts/check-pws-i4-w1-product-runtime.mjs",
+      "implementationFile": "scripts/check-pws-i4-w1-product-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:pws-i4-w2",
+      "command": "node scripts/check-pws-i4-w2-commercial-runtime.mjs",
+      "implementationFile": "scripts/check-pws-i4-w2-commercial-runtime.mjs"
+    },
+    {
+      "npmAlias": "check:pws-w0",
+      "command": "node scripts/check-pws-w0-baseline-responsibility-boundary.mjs",
+      "implementationFile": "scripts/check-pws-w0-baseline-responsibility-boundary.mjs"
+    },
+    {
+      "npmAlias": "check:pws-w1a-revenue",
+      "command": "node scripts/check-pws-w1a-revenue-architecture.mjs",
+      "implementationFile": "scripts/check-pws-w1a-revenue-architecture.mjs"
+    },
+    {
+      "npmAlias": "check:reader-boundary",
+      "command": "node scripts/check-m4b-consent-sharing.mjs && node scripts/check-m4b-external-reader-data-privacy.mjs && node scripts/check-m4b-contract-acceptance.mjs",
+      "implementationFile": "scripts/check-m4b-consent-sharing.mjs"
+    },
+    {
+      "npmAlias": "check:reader-registry",
+      "command": "node scripts/check-m4b-external-reader-framework.mjs",
+      "implementationFile": "scripts/check-m4b-external-reader-framework.mjs"
+    },
+    {
+      "npmAlias": "check:reading-boundary",
+      "command": "node scripts/check-reading-evidence-boundary.mjs",
+      "implementationFile": "scripts/check-reading-evidence-boundary.mjs"
+    },
+    {
+      "npmAlias": "check:reading-dedup",
+      "command": "node scripts/check-reading-dedup.mjs",
+      "implementationFile": "scripts/check-reading-dedup.mjs"
+    },
+    {
+      "npmAlias": "check:review-contract",
+      "command": "node scripts/check-review-contract.mjs",
+      "implementationFile": "scripts/check-review-contract.mjs"
+    },
+    {
+      "npmAlias": "check:runtime",
+      "command": "node scripts/run-runtime-checker.mjs",
+      "implementationFile": null
+    },
+    {
+      "npmAlias": "check:runtime-alias",
+      "command": "node scripts/check-runtime-checker-alias-foundation.mjs",
+      "implementationFile": "scripts/check-runtime-checker-alias-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-contracts",
+      "command": "node scripts/check-runtime-contracts.mjs",
+      "implementationFile": "scripts/check-runtime-contracts.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-d1-integration",
+      "command": "node --no-warnings scripts/check-runtime-d1-integration.mjs",
+      "implementationFile": "scripts/check-runtime-d1-integration.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-d1-schema",
+      "command": "node --no-warnings scripts/check-runtime-d1-schema.mjs",
+      "implementationFile": "scripts/check-runtime-d1-schema.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-engine",
+      "command": "node scripts/check-runtime-workspace.mjs",
+      "implementationFile": "scripts/check-runtime-workspace.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-freeze",
+      "command": "node scripts/check-runtime-freeze.mjs",
+      "implementationFile": "scripts/check-runtime-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-gap-closure",
+      "command": "node scripts/check-runtime-gap-closure.mjs",
+      "implementationFile": "scripts/check-runtime-gap-closure.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-infrastructure",
+      "command": "node scripts/check-runtime-persistence-contract.mjs && node --no-warnings scripts/check-runtime-migrations.mjs && node scripts/check-runtime-recovery.mjs && node scripts/check-runtime-timeline.mjs && node --no-warnings scripts/check-runtime-lineage-revision.mjs && node --no-warnings scripts/check-runtime-security-privacy.mjs && node --no-warnings scripts/check-runtime-d1-integration.mjs && node --no-warnings scripts/check-runtime-production-smoke.mjs",
+      "implementationFile": "scripts/check-runtime-persistence-contract.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-inventory",
+      "command": "node scripts/check-runtime-inventory.mjs",
+      "implementationFile": "scripts/check-runtime-inventory.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-kernel",
+      "command": "node scripts/check-runtime-kernel.mjs",
+      "implementationFile": "scripts/check-runtime-kernel.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-lineage",
+      "command": "node scripts/check-runtime-lineage-timeline.mjs",
+      "implementationFile": "scripts/check-runtime-lineage-timeline.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-lineage-revision",
+      "command": "node --no-warnings scripts/check-runtime-lineage-revision.mjs",
+      "implementationFile": "scripts/check-runtime-lineage-revision.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-memory",
+      "command": "node scripts/check-runtime-memory-contract.mjs && node scripts/check-reality-continuity-contract.mjs",
+      "implementationFile": "scripts/check-runtime-memory-contract.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-migrations",
+      "command": "node --no-warnings scripts/check-runtime-migrations.mjs",
+      "implementationFile": "scripts/check-runtime-migrations.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-persistence",
+      "command": "node scripts/check-runtime-persistence-recovery.mjs",
+      "implementationFile": "scripts/check-runtime-persistence-recovery.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-persistence-contract",
+      "command": "node scripts/check-runtime-persistence-contract.mjs",
+      "implementationFile": "scripts/check-runtime-persistence-contract.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-production-smoke",
+      "command": "node --no-warnings scripts/check-runtime-production-smoke.mjs",
+      "implementationFile": "scripts/check-runtime-production-smoke.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-recovery",
+      "command": "node scripts/check-runtime-recovery.mjs",
+      "implementationFile": "scripts/check-runtime-recovery.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-registry",
+      "command": "node scripts/check-runtime-registry-layer.mjs",
+      "implementationFile": "scripts/check-runtime-registry-layer.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-revision",
+      "command": "node scripts/check-runtime-revision-initialization.mjs",
+      "implementationFile": "scripts/check-runtime-revision-initialization.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-security-privacy",
+      "command": "node --no-warnings scripts/check-runtime-security-privacy.mjs",
+      "implementationFile": "scripts/check-runtime-security-privacy.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-timeline",
+      "command": "node scripts/check-runtime-timeline.mjs",
+      "implementationFile": "scripts/check-runtime-timeline.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-v1-audit",
+      "command": "node scripts/check-runtime-v1-freeze-audit.mjs",
+      "implementationFile": "scripts/check-runtime-v1-freeze-audit.mjs"
+    },
+    {
+      "npmAlias": "check:runtime-workspace",
+      "command": "node scripts/check-runtime-workspace.mjs",
+      "implementationFile": "scripts/check-runtime-workspace.mjs"
+    },
+    {
+      "npmAlias": "check:schema-references",
+      "command": "node scripts/check-schema-references.mjs",
+      "implementationFile": "scripts/check-schema-references.mjs"
+    },
+    {
+      "npmAlias": "check:semantic-runtime",
+      "command": "node scripts/check-kh-w4g6-w4h-manuscript-mapping-foundation.mjs",
+      "implementationFile": "scripts/check-kh-w4g6-w4h-manuscript-mapping-foundation.mjs"
+    },
+    {
+      "npmAlias": "check:zero-cost-provider-foundation",
+      "command": "node scripts/check-zero-cost-provider-foundation-step83.mjs",
+      "implementationFile": "scripts/check-zero-cost-provider-foundation-step83.mjs"
+    }
+  ],
+  "legacyAliasEntries": [
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W0",
+      "actualCheckerFile": "scripts/check-cmr-w0-cross-system-baseline-audit.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W1",
+      "actualCheckerFile": "scripts/check-cmr-w1-canonical-meaning-contract.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W1.5",
+      "actualCheckerFile": "scripts/check-cmr-w1-5-meaning-identity-runtime.mjs",
+      "aliases": [
+        "CM-W1-5"
+      ]
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W2",
+      "actualCheckerFile": "scripts/check-cmr-w2-canonical-meaning-family-registry.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W3",
+      "actualCheckerFile": "scripts/check-cmr-w3-canonical-meaning-code-registry.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W4",
+      "actualCheckerFile": "scripts/check-cmr-w4-meaning-dimension-registry.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W5",
+      "actualCheckerFile": "scripts/check-cmr-w5-book-to-meaning-authority-mapping.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W6A",
+      "actualCheckerFile": "scripts/check-cmr-w6a-method-to-meaning-mapping-contract.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W6B",
+      "actualCheckerFile": "scripts/check-cmr-w6b-versioned-mapping-registry.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W6C",
+      "actualCheckerFile": "scripts/check-cmr-w6c-mapping-checker-compatibility.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W6D",
+      "actualCheckerFile": "scripts/check-cmr-w6d-mapping-foundation-acceptance-freeze.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W7A",
+      "actualCheckerFile": "scripts/check-cmr-w7a-hdr-structure-mapping.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W7B",
+      "actualCheckerFile": "scripts/check-cmr-w7b-hdr-runtime-mapping.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W7",
+      "actualCheckerFile": "scripts/check-cmr-w7c-w7d-hdr-mapping-acceptance.mjs",
+      "aliases": [
+        "CM-W7C",
+        "CM-W7D"
+      ]
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W8",
+      "actualCheckerFile": "scripts/check-cmr-w8-ast-meaning-mapping-foundation.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W9",
+      "actualCheckerFile": "scripts/check-cmr-w9-bzr-meaning-mapping-foundation.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W9-TARGET",
+      "actualCheckerFile": "scripts/check-cm-w9-bzr-target-meaning-population.mjs",
+      "aliases": [
+        "CM-W9A"
+      ]
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W10",
+      "actualCheckerFile": "scripts/check-cm-w10-cross-method-number-meaning.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W11-W12",
+      "actualCheckerFile": "scripts/check-cmr-w11-w12-canonical-meaning-runtime-convergence.mjs",
+      "aliases": [
+        "CM-W11",
+        "CM-W12"
+      ]
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W13",
+      "actualCheckerFile": "scripts/check-cmr-w13-meaning-to-knowledge-bridge.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W14",
+      "actualCheckerFile": "scripts/check-cm-w14-meaning-projection-for-journey.mjs",
+      "aliases": []
+    },
+    {
+      "runtimeCode": "CMR",
+      "workCode": "CM-W15",
+      "actualCheckerFile": "scripts/check-cmr-w15-acceptance-freeze.mjs",
+      "aliases": []
+    }
+  ],
+  "freezeFiles": [
+    "content/governance/canonical-master-work/freeze/cmw-w0-w7-canonical-master-work-freeze-v1.json",
+    "content/knowledge/authoring/freeze/kau-full-freeze-v1.json",
+    "content/knowledge/authoring/freeze/kau-w0-w8-authoring-foundation-freeze-v1.json",
+    "content/knowledge/authoring/freeze/kau-w9-w14-authoring-governance-freeze-v1.json",
+    "content/knowledge/production-planning/freeze/kpp-w0-w12-production-planning-foundation-freeze-v1.json",
+    "content/knowledge/production/freeze/PHASE-I-PREPARATION-v1.0.0.json",
+    "content/knowledge/production/freeze/knowledge-intelligence-package-k-a-v1.json",
+    "content/knowledge/production/freeze/knowledge-intelligence-package-k-b-v1.json",
+    "content/knowledge/production/freeze/knowledge-intelligence-package-k-c-v1.json",
+    "content/knowledge/production/freeze/knowledge-intelligence-package-k-d-v1.json",
+    "content/knowledge/production/freeze/knowledge-intelligence-phase-k-v1.json",
+    "content/knowledge/production/freeze/knowledge-rule-engine-step82-v1.json",
+    "content/knowledge/production/freeze/knr-package-a-routing-ranking-coverage-v1.json",
+    "content/knowledge/production/freeze/knr-package-b-adaptive-projection-reading-paths-v1.json",
+    "content/knowledge/production/freeze/knr-package-c-public-api-experience-v1.json",
+    "content/knowledge/production/freeze/knr-package-d-quality-production-integration-v1.json",
+    "content/knowledge/production/freeze/knr-published-retrieval-w1-freeze-v1.json",
+    "content/knowledge/production/freeze/pja-approval-w1-checker-compatibility-v1.json",
+    "content/knowledge/production/freeze/pja-approval-w1-freeze-v1.json",
+    "content/knowledge/production/freeze/pja-candidate-w1-freeze-v1.json",
+    "content/knowledge/production/freeze/pja-candidate-w1-locale-aware-checker-v1.json",
+    "content/knowledge/production/freeze/pja-l10n-w2-zh-hans-brief-freeze-v1.json",
+    "content/knowledge/production/freeze/pja-l10n-w3-zh-hans-candidate-freeze-v1.json",
+    "content/knowledge/production/freeze/pja-l10n-w4-english-brief-freeze-v1.json",
+    "content/knowledge/production/freeze/pja-l10n-w5-independent-english-production-freeze-v1.json",
+    "content/knowledge/production/freeze/pja-prompt-w1-freeze-v1.json",
+    "content/knowledge/production/freeze/pja-publication-w1-freeze-v1.json",
+    "content/knowledge/production/freeze/pja-publication-w1-locale-aware-checker-v1.json",
+    "content/knowledge/production/freeze/pja-published-knowledge-authority-w1-freeze-v1.json",
+    "content/knowledge/production/freeze/pja-review-w1-checker-compatibility-v1.json",
+    "content/knowledge/production/freeze/pja-review-w1-freeze-v1.json",
+    "content/knowledge/production/freeze/provider-adapter-foundation-step83-v1.json",
+    "content/knowledge/production/freeze/provider-routing-step84-v1.json",
+    "content/knowledge/production/freeze/zero-cost-provider-foundation-step83-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w0-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w1-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w10-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w11-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w12-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w13-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w14-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w15-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w16-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w17-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w18-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w2-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w3-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w4-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w5-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w6-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w7-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w8-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/freeze/car-w9-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w0-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w1-5-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w1-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w10-corrected-number-meaning-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w11-canonical-meaning-runtime-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w12-cross-method-convergence-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w13-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w14-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w14-journey-meaning-projection-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w15-full-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w2-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w3-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w4-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w5-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w6a-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w6b-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w6c-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w6d-mapping-foundation-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w7-hdr-mapping-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w7a-hdr-structure-mapping-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w7a-populated-state-freeze-v1.1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w7b-hdr-runtime-mapping-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w8-ast-mapping-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w9-bzr-meaning-mapping-freeze-v1.json",
+    "content/professional/canonical-meaning-runtime/freeze/cmr-w9-corrected-meaning-population-freeze-v1.json",
+    "content/professional/canonical-presentation-runtime/freeze/cpr-w0-w6-foundation-freeze-v1.json",
+    "content/professional/canonical-presentation-runtime/freeze/cpr-w7-w30-full-freeze-v1.json",
+    "content/runtime/freeze/runtime-checker-alias-foundation-v1.json"
+  ],
+  "acceptanceFiles": [
+    "content/knowledge/contracts/book-4-canonical-node-registry-acceptance-v1.json",
+    "content/knowledge/contracts/kh-w4k-acceptance-freeze-v1.json",
+    "content/professional/canonical-asset-runtime/contracts/car-full-acceptance-v1.json",
+    "content/professional/canonical-meaning-runtime/acceptance/cmr-w10-number-meaning-acceptance-v1.json",
+    "content/professional/canonical-meaning-runtime/acceptance/cmr-w13-meaning-knowledge-bridge-acceptance-v1.json",
+    "content/professional/canonical-meaning-runtime/acceptance/cmr-w14-journey-meaning-projection-acceptance-v1.json",
+    "content/professional/canonical-meaning-runtime/acceptance/cmr-w15-full-acceptance-v1.json",
+    "content/professional/canonical-meaning-runtime/acceptance/cmr-w6-mapping-foundation-acceptance-v1.json",
+    "content/professional/canonical-meaning-runtime/acceptance/cmr-w7-hdr-mapping-acceptance-v1.json",
+    "content/professional/canonical-meaning-runtime/acceptance/cmr-w8-ast-mapping-acceptance-v1.json",
+    "content/professional/canonical-meaning-runtime/acceptance/cmr-w9-bzr-mapping-acceptance-v1.json",
+    "content/professional/canonical-meaning-runtime/acceptance/cmr-w9a-w9d-bzr-meaning-population-acceptance-v1.json",
+    "content/professional/canonical-meaning-runtime/contracts/cmr-w15-acceptance-contract-v1.json",
+    "content/professional/canonical-meaning-runtime/contracts/mapping-foundation-acceptance-contract-v1.json",
+    "content/professional/canonical-presentation-runtime/contracts/cpr-presentation-acceptance-contract-v1.json",
+    "content/registry/m3a-w1-visual-acceptance-fixes.json",
+    "content/registry/m3c-public-journey-acceptance.json",
+    "content/registry/m4b-contract-acceptance.json",
+    "content/registry/pds-w10-full-site-acceptance.json",
+    "content/registry/runtime-v1-acceptance.json"
+  ],
+  "rules": {
+    "auditOnly": true,
+    "renameForbidden": true,
+    "historicalFreezeMutationForbidden": true
+  }
+}

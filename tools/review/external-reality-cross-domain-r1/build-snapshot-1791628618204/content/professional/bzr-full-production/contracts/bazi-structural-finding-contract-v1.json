@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-STRUCTURAL-FINDING-CONTRACT-v1.0.0",
+  "work": "BAZI-FP-W9",
+  "status": "ENGINEERING_COMPLETE",
+  "baselineCommit": "dd15cb928004dfc16768df9eeb4c2b0689a6f0a9",
+  "purpose": "Convert governed W1-W8 BaZi structural evidence into typed findings without creating customer interpretation, outcome claims, hidden scoring or silent school synthesis.",
+  "inputWorks": ["BAZI-FP-W1","BAZI-FP-W2","BAZI-FP-W3","BAZI-FP-W4","BAZI-FP-W5","BAZI-FP-W6","BAZI-FP-W7","BAZI-FP-W8"],
+  "collectionSchema": "PHI-OS-BAZI-STRUCTURAL-FINDING-COLLECTION-v1.0.0",
+  "findingSchema": "PHI-OS-BAZI-STRUCTURAL-FINDING-v1.0.0",
+  "requiredFindingFields": ["findingId","findingType","scope","state","semanticDimension","technicalLabel","evidenceRefs","counterEvidenceRefs","authorityRefs","unknownRefs","confidenceClass"],
+  "findingStates": ["ESTABLISHED","CANDIDATE","OPEN","PARTIAL"],
+  "confidenceMeaning": "Evidence and authority completeness only; never predictive accuracy or probability of life outcomes.",
+  "rules": {
+    "oneFindingPerSemanticStructureInsteadOfOneParagraphPerPillar": true,
+    "rawPillarMayAppearAsEvidenceButNotAsStandaloneCustomerConclusion": true,
+    "patternCandidateMayNotBecomePrimaryPatternWithoutUpstreamVerdict": true,
+    "schoolQualifiedUseViewsMustRemainSeparate": true,
+    "unknownsMustRemainVisible": true,
+    "counterEvidenceResolutionOwnedByW12": true,
+    "semanticDeduplicationOwnedByW13": true,
+    "customerInterpretationOwnedByW15": true,
+    "fortuneOrEventPredictionForbidden": true
+  },
+  "runtimeRef": "functions/bzr-full-production/bazi-structural-finding-runtime.js",
+  "registryRef": "content/professional/bzr-full-production/registries/bazi-structural-finding-type-registry-v1.json"
+}

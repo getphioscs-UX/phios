@@ -1,0 +1,97 @@
+{
+  "boundaries": [
+    {
+      "boundaryId": "UNCERTAINTY_BOUNDARY",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "FIG-044-N01",
+        "FIG-044-N02",
+        "FIG-044-N03"
+      ],
+      "mustExclude": [
+        "FIG-044-N04"
+      ],
+      "sourceBindingId": "FIG-044-SRC-01"
+    }
+  ],
+  "canonicalFilename": "PHIOS-FIGURE-UNCERTAINTY-BOUNDARY-v1.svg",
+  "diagramRole": "BOUNDARY",
+  "domain": "PROFESSIONAL",
+  "edges": [
+    {
+      "edgeId": "FIG-044-E01",
+      "from": "FIG-044-N01",
+      "relation": "MAY_SUPPORT",
+      "required": true,
+      "sourceBindingId": "FIG-044-SRC-01",
+      "to": "FIG-044-N03"
+    },
+    {
+      "edgeId": "FIG-044-E02",
+      "from": "FIG-044-N02",
+      "relation": "BOUNDS",
+      "required": true,
+      "sourceBindingId": "FIG-044-SRC-02",
+      "to": "FIG-044-N03"
+    },
+    {
+      "edgeId": "FIG-044-E03",
+      "from": "FIG-044-N03",
+      "relation": "MAY_INFORM",
+      "required": true,
+      "sourceBindingId": "FIG-044-SRC-02",
+      "to": "FIG-044-N04"
+    }
+  ],
+  "figureId": "FIG-044",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-044-N01",
+    "FIG-044-N02",
+    "FIG-044-N03",
+    "FIG-044-N04"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Known Evidence",
+      "nodeId": "FIG-044-N01",
+      "required": true,
+      "semanticKey": "KNOWN_EVIDENCE",
+      "sourceBindingId": "FIG-044-SRC-01"
+    },
+    {
+      "displayLabel": "Unknown",
+      "nodeId": "FIG-044-N02",
+      "required": true,
+      "semanticKey": "UNKNOWN",
+      "sourceBindingId": "FIG-044-SRC-01"
+    },
+    {
+      "displayLabel": "Inference",
+      "nodeId": "FIG-044-N03",
+      "required": true,
+      "semanticKey": "INFERENCE",
+      "sourceBindingId": "FIG-044-SRC-01"
+    },
+    {
+      "displayLabel": "Professional Judgment",
+      "nodeId": "FIG-044-N04",
+      "required": true,
+      "semanticKey": "PRO_JUDGMENT",
+      "sourceBindingId": "FIG-044-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "UNCERTAINTY-BOUNDARY",
+  "title": "Uncertainty Boundary"
+}

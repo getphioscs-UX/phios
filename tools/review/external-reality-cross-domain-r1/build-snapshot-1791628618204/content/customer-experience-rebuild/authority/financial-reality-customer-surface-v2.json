@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-CX-R13-FINANCIAL-REALITY-CUSTOMER-SURFACE-v2.0.0",
+  "work": "CX-R13",
+  "executionBaselineCommit": "5c6594b197be80dbf40da97e15486e8450d39830",
+  "status": "FINANCIAL_REALITY_CURRENT_MAIN_SUCCESSOR_READY",
+  "identity": {
+    "customerName": "Financial Reality",
+    "canonicalRoute": "/professional/financial/",
+    "html": "professional/financial/index.html",
+    "client": "assets/customer-ui/js/surfaces/financial-reality.js",
+    "api": "/api/customer-financial-reality"
+  },
+  "consumes": {
+    "projectionBoundary": "CX-R20",
+    "financialData": "FDR",
+    "calculations": "FCR",
+    "findings": "FAR",
+    "planning": "HFP_WHEN_UPSTREAM_PRESENT",
+    "professionalReview": "PFR_WHEN_UPSTREAM_PRESENT",
+    "report": "RR_RELEASED_ONLY"
+  },
+  "customerComposition": {
+    "stagedIntake": true,
+    "intakeStageCount": 9,
+    "overviewBeforeCalculations": true,
+    "calculationDrilldown": true,
+    "findingTypeHumanization": true,
+    "planningFailClosed": true,
+    "professionalLayersSeparated": true,
+    "reportReleaseGated": true,
+    "explicitMyRealityHandoff": true
+  },
+  "rules": {
+    "backendAuthorityRebuilt": false,
+    "secondFinancialAuthorityCreated": false,
+    "professionalRecommendationCreated": false,
+    "planningCreatedByCx": false,
+    "reportCreatedByCx": false,
+    "p1RouteCutoverPerformed": false,
+    "physicalLegacyDeletePerformed": false
+  }
+}

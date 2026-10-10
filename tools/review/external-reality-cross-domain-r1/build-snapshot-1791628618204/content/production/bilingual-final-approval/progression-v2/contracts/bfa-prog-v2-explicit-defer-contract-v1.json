@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-BFA-PROG-v2.1-EXPLICIT-DEFER-CONTRACT-v1.0.0",
+  "work": "BFA-PROG-v2.1",
+  "baselineCommit": "4ca882d95f27b262bc21693a65eeff436a408905",
+  "status": "ACTIVE_ADDITIVE_SUCCESSOR",
+  "purpose": "Allow an explicit TL C2 defer to resolve a node for the current canonical publication cursor without converting defer into C2 freeze, Candidate authority, BFA approval, or publication authority.",
+  "rules": {
+    "freezeApprovedCreatesC2FrozenSuccessor": true,
+    "deferCreatesC2FrozenSuccessor": false,
+    "deferCreatesCandidateAuthority": false,
+    "deferCreatesPublicationAuthority": false,
+    "deferMayResolveCurrentProgressWindow": true,
+    "resolvedWindowMayProduceApprovedSubset": true,
+    "maximumProgressWindowSize": 24,
+    "batchArticleCountMayBeBelowWindowMaximumAfterExplicitHumanDefer": true,
+    "automaticRefillWithoutNewHumanC2Decision": false,
+    "deferredNodeMustRemainInGovernedBacklog": true,
+    "deferredNodeReentryRequiresNewHumanDecision": true,
+    "sameBatchRefillRequired": false,
+    "nextBatchContinuesFromNextCanonicalCursor": true
+  },
+  "authorityBoundary": {
+    "humanDeferOwner": "TL_HUMAN_C2_EDITORIAL_AUTHORITY",
+    "runtimeMayInferFreezeFromDefer": false,
+    "runtimeMayInferReplacementApproval": false,
+    "bfaFinalApprovalRemainsSeparate": true
+  }
+}

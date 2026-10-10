@@ -1,0 +1,45 @@
+{
+  "contract": "PHI-OS-PJA-W2F-C1-READINESS-IDENTITY-v1.0.0",
+  "stage": "PJA-W2F-C1",
+  "status": "frozen",
+  "schemaVersion": "PHI-OS-READINESS-IDENTITY-v1.0.0",
+  "scope": {
+    "registryNodeCount": 78,
+    "locale": "zh-Hans",
+    "oneSchemaForAllNodeTypes": true,
+    "oneSchemaForAllParts": true
+  },
+  "stateMachine": {
+    "initial": "skeleton",
+    "states": [
+      "skeleton", "canonical_thesis_ready", "boundary_ready",
+      "editorial_ready", "production_ready", "published"
+    ],
+    "transitions": [
+      ["skeleton", "canonical_thesis_ready"],
+      ["canonical_thesis_ready", "boundary_ready"],
+      ["boundary_ready", "editorial_ready"],
+      ["editorial_ready", "production_ready"],
+      ["production_ready", "published"]
+    ],
+    "forbiddenAliases": ["draft", "completed"]
+  },
+  "blockingContract": [
+    { "code": "CANONICAL_THESIS_NOT_READY", "message": "Canonical Thesis has not been frozen.", "ownerStage": "PJA-W2F-C2", "missing": "thesis" },
+    { "code": "BOUNDARY_NOT_READY", "message": "Canonical and article boundaries have not been frozen.", "ownerStage": "PJA-W2F-C2", "missing": "boundary" },
+    { "code": "CLAIMS_NOT_READY", "message": "Claim plan has not been frozen.", "ownerStage": "PJA-W2F-C2", "missing": "claims" },
+    { "code": "SOURCE_PLAN_NOT_READY", "message": "Source plan has not been frozen.", "ownerStage": "PJA-W2F-C2", "missing": "sources" },
+    { "code": "QUESTION_PLAN_NOT_READY", "message": "Supporting Question plan has not been frozen.", "ownerStage": "PJA-W2F-C2", "missing": "questions" },
+    { "code": "FIGURE_PLAN_NOT_READY", "message": "Figure plan has not been frozen.", "ownerStage": "PJA-W2F-C2", "missing": "figures" },
+    { "code": "EDITORIAL_REVIEW_REQUIRED", "message": "Editorial review has not been completed.", "ownerStage": "PJA-W2F-C3", "missing": "review" },
+    { "code": "HUMAN_FREEZE_REQUIRED", "message": "Human freeze has not been granted.", "ownerStage": "PJA-W2F-C3", "missing": "review.humanFrozen" }
+  ],
+  "populationBoundary": {
+    "allowedWrites": ["readiness skeleton records", "canonical readiness index"],
+    "forbiddenWrites": [
+      "Canonical Thesis content", "Boundary content", "Claim content", "Source plan content",
+      "Question treatment", "Figure plan content", "Article", "Approval", "Publication",
+      "Production export", "Canonical Registry"
+    ]
+  }
+}

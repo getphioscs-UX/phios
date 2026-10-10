@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-HFP-W17-PFR-CONTRIBUTION-REFERENCE-v1.0.0",
+  "phase": "HFP",
+  "work": "HFP-W17",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "FAIL_CLOSED_UNTIL_CANONICAL_PFR_INSTALLED",
+  "requiredFields": [
+    "contributionId",
+    "contributionType",
+    "sourceAuthority",
+    "sourceReference",
+    "sourceDigest",
+    "authorReference",
+    "authoredAt",
+    "content"
+  ],
+  "contributionTypes": [
+    "RECOMMENDATION",
+    "WARNING",
+    "SUITABILITY",
+    "ALTERNATIVE",
+    "DISADVANTAGE",
+    "ACTION"
+  ],
+  "productionSourceAuthority": "PFR",
+  "fixtureSourceAuthority": "FIXTURE_PFR",
+  "rules": {
+    "hfpMayCreateContribution": false,
+    "hfpMayRewriteContribution": false,
+    "humanAuthorshipRequired": true,
+    "sourceDigestRequired": true,
+    "productionPfrAuthorityCurrentlyInstalled": false,
+    "fixturePfrNeverProductionEligible": true,
+    "legacyProfessionalRecommendationNotAutoPromoted": true
+  }
+}

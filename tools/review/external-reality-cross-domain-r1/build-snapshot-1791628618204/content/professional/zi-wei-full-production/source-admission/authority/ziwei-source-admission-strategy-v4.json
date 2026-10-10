@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-SOURCE-ADMISSION-STRATEGY-v4.0.0",
+  "work": "ZIWEI-SOURCE-CLAIM-ADMISSION-002-PATTERNS",
+  "baselineCommit": "dd15cb928004dfc16768df9eeb4c2b0689a6f0a9",
+  "predecessor": "content/professional/zi-wei-full-production/source-admission/authority/ziwei-source-admission-strategy-v3.json",
+  "predecessorMutated": false,
+  "status": "BATCH_001_AND_BATCH_002_HUMAN_ADMITTED_W8_PATTERN_RULES_ACTIVE_W9_W10_ENGINEERING_OPEN",
+  "priorAdmission": {
+    "batchId": "ZIWEI-SOURCE-CLAIM-BATCH-001",
+    "admitted": 29,
+    "total": 29,
+    "unchanged": true
+  },
+  "currentBatch": {
+    "batchId": "ZIWEI-SOURCE-CLAIM-BATCH-002-PATTERNS",
+    "claims": 11,
+    "humanDecisions": 11,
+    "admitted": 11,
+    "rejected": 0,
+    "needsRevision": 0,
+    "runtimeUseAllowed": true,
+    "humanReviewRef": "content/professional/zi-wei-full-production/source-admission/review/ziwei-source-claim-batch-002-patterns-human-review-result-v1.json"
+  },
+  "downstream": {
+    "W8": "ADMITTED_PATTERN_RULE_REGISTRY_ACTIVE",
+    "W9": "OPEN_CONSUME_EXISTING_ZWD_DA_XIAN",
+    "W10": "OPEN_CONSUME_EXISTING_ZWD_LIU_NIAN",
+    "W11": "NOT_OPENED_BY_SOURCE_ADMISSION_ALONE",
+    "customerCutover": "BLOCKED"
+  },
+  "principles": {
+    "patternQualificationSeparatedFromOutcomeLanguage": true,
+    "classicalOutcomeTextNotImported": true,
+    "humanAdmissionConfirmsSourceFidelityOnly": true,
+    "schoolVariantStillRequiresExplicitAuthority": true,
+    "dynamicAuthorityReusedNotRebuilt": true
+  }
+}

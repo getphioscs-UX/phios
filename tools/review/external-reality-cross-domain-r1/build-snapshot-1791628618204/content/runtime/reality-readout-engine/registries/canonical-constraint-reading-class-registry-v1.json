@@ -1,0 +1,31 @@
+{
+  "registryCode": "PHI-OS-RRE-W5-CONSTRAINT-READING-CLASS-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RRE-W5",
+  "status": "canonical_validation_only",
+  "containsUserData": false,
+  "domainClasses": [
+    "GENERAL",
+    "RESOURCE",
+    "TIME",
+    "CAPABILITY",
+    "RELATIONSHIP",
+    "ENVIRONMENT",
+    "UNKNOWN"
+  ],
+  "rigidityClasses": [
+    "HARD",
+    "SOFT",
+    "UNKNOWN"
+  ],
+  "rules": {
+    "rmoConstraintTypeRemainsAuthority": true,
+    "rmoConstraintScopeRemainsAuthority": true,
+    "timeRequiresTemporalWindowConstraint": true,
+    "capabilityRequiresCapacityConstraint": true,
+    "relationshipRequiresRelationshipScopeOrDependency": true,
+    "resourceOrEnvironmentRequiresExplicitClassificationSupport": true,
+    "hardOrSoftRequiresExplicitRigiditySupport": true,
+    "unknownMayNotBeSilentlyReclassified": true
+  }
+}

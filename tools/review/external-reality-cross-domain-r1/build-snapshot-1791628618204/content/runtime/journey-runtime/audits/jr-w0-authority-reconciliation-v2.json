@@ -1,0 +1,129 @@
+{
+  "auditCode": "PHI-OS-JR-W0-JOURNEY-RECONCILIATION-v2",
+  "auditVersion": "2.0.0",
+  "runtimeCode": "JR",
+  "work": "JR-W0",
+  "baselineCommit": "3dd903344945ecd3b585c8aafe48b93d7894caa9",
+  "status": "RECONCILED_SINGLE_JOURNEY_SUCCESSOR_NO_SECOND_RUNTIME",
+  "legacyJourneyAuthorities": [
+    {
+      "reference": "content/registry/journeys.json",
+      "sha256": "3682b1cf29b375f394228f26f491efcce7254876021a24c8e83d86ded6a4e83a",
+      "preservation": "READ_ONLY_COMPATIBILITY_AUTHORITY"
+    },
+    {
+      "reference": "content/registry/m3c-public-journey.json",
+      "sha256": "54ee33c5ee59fe0693503f9606f71879a2a981956b0089ee290a83df9cc37b1d",
+      "preservation": "READ_ONLY_COMPATIBILITY_AUTHORITY"
+    },
+    {
+      "reference": "content/registry/m3c-journey-dashboard.json",
+      "sha256": "95f916910fa5c96b16bf8f53e1aa04b8f7c9c6725ded481b8e6694bdb9f13636",
+      "preservation": "READ_ONLY_COMPATIBILITY_AUTHORITY"
+    },
+    {
+      "reference": "content/registry/m3c-public-journey-acceptance.json",
+      "sha256": "813277d484186d9a8bd30a585694ac77441abd18d2c06c7f91bd122017eab101",
+      "preservation": "READ_ONLY_COMPATIBILITY_AUTHORITY"
+    },
+    {
+      "reference": "content/registry/m3c-continuity.json",
+      "sha256": "ec26e6623f78daa01a80490e37911bf168a22de513448609736c74435d68d798",
+      "preservation": "READ_ONLY_COMPATIBILITY_AUTHORITY"
+    },
+    {
+      "reference": "content/registry/runtime-contracts.json",
+      "sha256": "32a630972e4978725e7efe1a0bdc58d96fb7a6bb1145f5c5b7f308d9909745d2",
+      "preservation": "READ_ONLY_COMPATIBILITY_AUTHORITY"
+    },
+    {
+      "reference": "docs/pws/architecture/pws-entry-paid-journey-activation-boundary-v1.json",
+      "sha256": "2384b86085840679111467cd2bbeb001a33bd0e91be244c27dc2d6b66c409d42",
+      "preservation": "READ_ONLY_COMPATIBILITY_AUTHORITY"
+    },
+    {
+      "reference": "docs/pws/architecture/pws-entry-professional-handoff-boundary-v1.json",
+      "sha256": "9adfc7dc304746adb7bf327fa2a7ce098f81cfb0666f3b2e0912609ae9e0caef",
+      "preservation": "READ_ONLY_COMPATIBILITY_AUTHORITY"
+    }
+  ],
+  "upstreamAuthorities": [
+    {
+      "code": "RMO",
+      "reference": "content/runtime/reality-model-runtime/freeze/rmo-v1-freeze-v1.json",
+      "observedState": "FROZEN_MODEL_AUTHORITY",
+      "sha256": "10dd5d3f29963a3be601491d316701d6f631a0bb7064aa1136f0b743bfa1fd81"
+    },
+    {
+      "code": "RRE_FOUNDATION",
+      "reference": "content/runtime/reality-readout-engine/freeze/rre-w0-w4-readout-foundation-freeze-v1.json",
+      "observedState": "FROZEN_VALIDATION_ONLY",
+      "sha256": "68984e12f2c668d80ba5c9120c692cfc79cc2823fee1927f4d44250936c1e3af"
+    },
+    {
+      "code": "RRE_READING",
+      "reference": "content/runtime/reality-readout-engine/freeze/rre-w5-w10-reading-runtime-freeze-v1.json",
+      "observedState": "FROZEN_VALIDATION_ONLY",
+      "sha256": "ce435f7b8e7464314af264cf7e1d796cabaadbadd53ab6531019f463509bd302"
+    },
+    {
+      "code": "RDG",
+      "reference": "content/governance/reality-data-governance/freeze/reality-data-governance-freeze-v1.json",
+      "observedState": "FROZEN_DATA_GOVERNANCE",
+      "sha256": "79e5433ae73ff11ea6ead081f85f6b4a7e6573d3850756c52749c184eaf6d9a4"
+    },
+    {
+      "code": "CPR",
+      "reference": "content/professional/canonical-presentation-runtime/freeze/cpr-w7-w30-full-freeze-v1.json",
+      "observedState": "FROZEN_PRESENTATION_AUTHORITY",
+      "sha256": "03cb9b8c1a1d599705544dbd6d39c80f494e629f8d9502c55e5acbaad6ef0a60"
+    },
+    {
+      "code": "PUBLIC_READING_PATHS",
+      "reference": "content/knowledge/public/public-reading-paths.json",
+      "observedState": "PUBLISHED_KNOWLEDGE_READ_MODEL",
+      "sha256": "412dd91e0007d5d15ab6abb7b124d55ff0eb0ccbdd4ba1e6536a9bb5007c5bee"
+    },
+    {
+      "code": "DYNAMIC_READING_PATHS",
+      "reference": "content/knowledge/intelligence/reading/dynamic-reading-paths.json",
+      "observedState": "KNOWLEDGE_INTELLIGENCE_READ_MODEL",
+      "sha256": "94bdae77133d14909c3c84e8ef1fcd77c41854b31171e5161f18d1f431b60e7a"
+    }
+  ],
+  "futureRuntimeObservations": {
+    "RNE": {
+      "canonicalMasterWorkState": "PLANNED",
+      "rdgDataContractState": "EXISTING",
+      "dedicatedRuntimeImplementationObserved": false,
+      "integrationMode": "CONTRACT_ONLY_FAIL_CLOSED"
+    },
+    "LRM": {
+      "canonicalMasterWorkState": "PLANNED",
+      "rdgDataContractState": "EXISTING",
+      "dedicatedRuntimeImplementationObserved": false,
+      "integrationMode": "EVENT_INTENT_CONTRACT_ONLY_FAIL_CLOSED"
+    }
+  },
+  "reconciliationDecisions": {
+    "secondJourneyRuntimeCreated": false,
+    "legacyJourneyIdentityPreserved": true,
+    "legacyRuntimeContractsPreserved": true,
+    "legacyPublicJourneyPreserved": true,
+    "legacyStageNamesBecomeCompatibilityProjectionOnly": true,
+    "canonicalStageAuthorityOwnedByJrV2": true,
+    "rmoRealityAuthorityPreserved": true,
+    "rreReadoutAuthorityPreserved": true,
+    "rdgDataAuthorityPreserved": true,
+    "cprPresentationAuthorityPreserved": true,
+    "rneNavigationIntelligenceAuthorityPreserved": true,
+    "lrmTimelineAuthorityPreserved": true,
+    "professionalJudgmentAuthorityNotCreated": true
+  },
+  "blockingFacts": [
+    "RRE persistent Canonical Readout remains blocked pending RDG REALITY_READOUT_RECORD successor authority.",
+    "RNE has canonical architecture/data-contract registration but no dedicated runtime implementation/freeze in this baseline.",
+    "LRM has canonical architecture/data-contract registration but no dedicated runtime implementation/freeze in this baseline.",
+    "CPR is frozen presentation authority; JR does not become presentation authority."
+  ]
+}

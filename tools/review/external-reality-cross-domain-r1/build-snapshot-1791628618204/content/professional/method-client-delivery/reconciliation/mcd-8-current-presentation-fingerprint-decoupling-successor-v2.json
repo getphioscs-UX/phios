@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "PHI-OS-MCD-8-CURRENT-PRESENTATION-FINGERPRINT-DECOUPLING-SUCCESSOR-v2.0.0",
+  "work": "MCD-8-CURRENT-PRESENTATION-FINGERPRINT-DECOUPLING",
+  "status": "ACTIVE_CURRENT_MCD8_AUTHORITY_PRESERVED_PRESENTATION_DECOUPLED",
+  "predecessor": {
+    "path": "content/professional/method-client-delivery/reconciliation/mcd-8-mir-4-renderer-leakage-successor-v1.json",
+    "sha256": "f1337b35a5f4d416904dda94ac56433be48405d063261bad4198e8d043d601c7",
+    "mutated": false,
+    "role": "HISTORICAL_MIR4_RENDERER_SUCCESSOR"
+  },
+  "historicalFreeze": {
+    "path": "content/professional/method-client-delivery/freeze/mcd-8-production-acceptance-freeze-v1.json",
+    "sha256": "b914bc09e24e3b4d61ffbc410285ddbcf27cea88813c547017f091ad665f2070",
+    "mutated": false
+  },
+  "currentPolicy": {
+    "wholePackageFingerprintRequired": false,
+    "wholeProfessionalWorkspaceHtmlFingerprintRequired": false,
+    "wholeExternalReaderIntakeHtmlFingerprintRequired": false,
+    "presentationMayEvolve": true,
+    "methodClientDeliveryAuthorityExactFingerprintRequired": true,
+    "scopedRendererAuthorityExactFingerprintRequired": true,
+    "reason": "Professional Workspace and External Reader Intake are client presentation/interaction surfaces. MCD-8 current authority is the accepted production boundary, MPA dispatch ownership, guided-reading handoff, renderer leakage scope and consent/runtime semantics—not whole-page byte identity."
+  },
+  "exactAuthorityArtifacts": [
+    {
+      "path": "content/professional/method-client-delivery/contracts/mcd-8-production-acceptance-contract-v1.json",
+      "sha256": "ec58cbf7a25a3996dafc53d6c58ae47433da13b5187eb2302877524e62f95b0a"
+    },
+    {
+      "path": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+      "sha256": "161bd90046f7fccad974ab4fc3a717f774aa7409cb875c7fac9fb69f1329f830"
+    },
+    {
+      "path": "content/professional/method-client-delivery/registries/mcd-8-guided-reading-consumption-handoff-v1.json",
+      "sha256": "d34d18ebb1123d9a010c7efe21c1d3878b4d6875e7eed98756b10415bcd178d1"
+    },
+    {
+      "path": "content/professional/method-client-delivery/freeze/mcd-7-personal-runtime-result-surface-freeze-v1.json",
+      "sha256": "ba4e0428abd03d2d05dad98cdcee2799f493c6fab66ed39d3291d4ea985378e5"
+    },
+    {
+      "path": "scripts/check-mcd-8-production-acceptance.mjs",
+      "sha256": "10a21798ab705a70c164506a40b66e162c6b69738bfd0004b9ebbb8f4bc974b9"
+    },
+    {
+      "path": "assets/js/locales/en/professional.js",
+      "sha256": "fc0159aebcb874378872f45197244465d554268e26b6b0953fe49e1afa8a05a9"
+    },
+    {
+      "path": "assets/js/locales/zh-Hans/professional.js",
+      "sha256": "cf641fa8bf0d090b4fe7ea6a6285b4bc9495a1ff84b53e086da778f909bf7bbc"
+    },
+    {
+      "path": "assets/js/modules/reconstruction-reading.js",
+      "sha256": "895fe8f30ff8de3c56d91a0b42def97323be559834666bb118562e35daeca722"
+    },
+    {
+      "path": "assets/js/method-client-delivery/renderers/personal-structure-renderer.js",
+      "sha256": "7d4d07c26fcef41387b237c4da07c3f0ffb52000bb8b9eb6935026c22a731cc1"
+    },
+    {
+      "path": "assets/js/method-client-delivery/renderers/personal-structure-visual-angle.js",
+      "sha256": "4968a94b99625537f1be3723544146c22f5c69a9304052220ade040b0637906e"
+    }
+  ],
+  "semanticPresentationSurfaces": [
+    {
+      "path": "professional-workspace.html",
+      "requiredTokens": [
+        "data-workspace-status=\"unavailable\"",
+        "data-workspace-unavailable",
+        "data-professional-view=\"clients\"",
+        "data-professional-view=\"runtime\"",
+        "data-professional-view=\"human-design\"",
+        "data-professional-view=\"financial\"",
+        "data-professional-view=\"notes\"",
+        "data-professional-view=\"queue\"",
+        "data-professional-view=\"revisions\"",
+        "data-professional-view=\"considerations\"",
+        "data-professional-view=\"timeline\"",
+        "data-professional-view=\"readers\"",
+        "id=\"professionalClientList\"",
+        "id=\"professionalRuntimeView\"",
+        "id=\"professionalExternalReaders\"",
+        "href=\"/professional-reports\"",
+        "href=\"/professional-consent-sharing\"",
+        "href=\"/professional-data-privacy\""
+      ],
+      "presentationFingerprintRequired": false
+    },
+    {
+      "path": "external-reader-intake.html",
+      "requiredTokens": [
+        "id=\"externalReaderIntakeForm\"",
+        "id=\"externalReaderType\"",
+        "id=\"externalReaderChartFile\"",
+        "name=\"retention_choice\"",
+        "name=\"data_submission_confirmed\"",
+        "name=\"interpretation_boundary_acknowledged\"",
+        "name=\"professional_access_confirmed\"",
+        "id=\"externalReaderHandoff\"",
+        "data-i18n=\"externalReaderIntake.footerBoundary\""
+      ],
+      "presentationFingerprintRequired": false
+    }
+  ],
+  "packageAliasSuccessor": {
+    "check:mcd-8": "node scripts/check-mcd-8-current.mjs",
+    "historicalCurrentChecker": "scripts/check-mcd-8-mir-4-successor.mjs",
+    "historicalCheckerMutated": false
+  },
+  "authorityBoundary": {
+    "historicalFreezeMutated": false,
+    "mir4SuccessorMutated": false,
+    "mpaAuthorityChanged": false,
+    "mcd8GuidedReadingHandoffChanged": false,
+    "rendererCalculationAuthorityCreated": false,
+    "rendererProjectionAuthorityCreated": false,
+    "rendererInterpretationAuthorityCreated": false,
+    "rendererMeaningAuthorityCreated": false,
+    "professionalPresentationBecameMethodAuthority": false,
+    "externalReaderPresentationBecameMethodAuthority": false
+  }
+}

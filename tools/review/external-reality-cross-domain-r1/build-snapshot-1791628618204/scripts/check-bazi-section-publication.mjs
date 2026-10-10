@@ -1,0 +1,102 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {BAZI_SECTION_REGISTRY as plan,REPORT_PAGE_FAMILIES as families,BAZI_SECTION_VISUAL_ASSETS as assets,validateSectionRegistry,validateExpandedSections,bindSectionVisual,splitSemanticBlocks,textUnits} from '../functions/canonical-presentation-runtime/report-section-contract.js';
+import {projectBaziSectionPublication} from '../functions/personal-reading/bazi-section-publication.js';
+import {renderVisualReportPages} from '../assets/customer-ui/js/personal-products/visual-report-pages.js';
+const root='docs/guided-report-successor-r2/visual-commerce',read=p=>JSON.parse(fs.readFileSync(p));
+const reports=['zh-Hans','en'].map(l=>read(`${root}/bazi-${l}.json`));
+const semanticPagination=report=>{
+ const rows=[];
+ for(const p of report.pages){
+  const row=[p.sectionKey,p.definitionKey,p.pageFamily];
+  const prev=rows.at(-1);
+  if(!prev||prev.some((value,index)=>value!==row[index]))rows.push(row);
+ }
+ return rows;
+};
+validateSectionRegistry();
+for(const [name,data] of [['bazi-section-registry',plan],['report-page-families',{version:'2.1.0',families}],['bazi-visual-assets',assets]])assert.deepEqual(data,read(`config/reports/${name}.json`),'generated config must match canonical JSON');
+const invalid=structuredClone(plan);invalid.sections[0].pages[0].family='NARRATIVE_ANALYSIS_PAGE';assert.throws(()=>validateSectionRegistry(invalid));
+assert.equal(Object.keys(families).length,7);assert.equal(assets.assets.length,13);
+const declaredPageFamilies=[...new Set(plan.sections.flatMap(section=>section.pages.map(page=>page.family)))];
+assert(declaredPageFamilies.every(family=>families[family]),'every BaZi-declared page family must exist in the global family registry');
+for(const asset of assets.assets){assert.equal(asset.containsText,false);assert.equal(asset.localeIndependent,true);assert(asset.objectKey.endsWith(`${asset.assetId}.${asset.preferredFormat}`));assert(!asset.objectKey.includes('LIFE_STRUCTURE'));}
+for(const [id,url] of Object.entries(assets.bindings)){if(url.startsWith('https://')){assert.equal(new URL(url).origin,'https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev');assert.equal(url.split('/').at(-1),id+'.webp');continue;}assert(fs.existsSync('.'+url),id);assert(url.endsWith('.svg')||url.endsWith('.webp'));if(url.endsWith('.svg')){const svg=fs.readFileSync('.'+url,'utf8');assert(!/<(?:text|foreignObject|script)\b|\bon\w+\s*=/.test(svg));for(const match of svg.matchAll(/(?:xlink:)?href="([^"]+)"/g))assert(/^data:image\/(png|webp);base64,|^#/.test(match[1]));}}
+const layers=structuredClone(assets),key=plan.sections[0].key;
+layers.bindings={};assert.equal(bindSectionVisual(key,{assets:layers}).selected,'CSS_PREMIUM');
+layers.bindings[layers.global.bodyBackground]='/assets/body.webp';assert.equal(bindSectionVisual(key,{assets:layers}).selected,'BODY');
+layers.bindings[layers.global.motifLayer]='/assets/motif.svg';assert.equal(bindSectionVisual(key,{assets:layers}).selected,'BODY_WITH_MOTIF');
+layers.bindings[layers.global.sectionStyle]='/assets/style.webp';assert.equal(bindSectionVisual(key,{assets:layers}).selected,'SECTION_STYLE');
+layers.bindings[layers.sections[key]]='/assets/hero.webp';assert.equal(bindSectionVisual(key,{assets:layers}).selected,'SECTION_HERO');
+layers.bindings[layers.sections[key]]='javascript:alert(1)';assert.throws(()=>bindSectionVisual(key,{assets:layers}));
+const budgets=[];
+for(const report of reports){
+ assert.equal(report.totalPages,report.pages.length+6);assert.notEqual(report.totalPages,26);validateExpandedSections(report.pages);
+ const previous=read(`docs/guided-report-successor-r2/bazi-${report.locale}.json`);
+ assert.deepEqual(report.intro.slice(0,5),previous.intro.slice(0,5));
+ assert.equal(report.intro[5].html.replaceAll(` / ${report.totalPages}`,' / TOTAL'),previous.intro[5].html.replaceAll(' / 26',' / TOTAL'));
+ const html=renderVisualReportPages(report);assert.equal((html.match(/data-pagination-owner=/g)||[]).length,report.totalPages-5);
+ assert(!/CMP-|PPR-C1-|BAZI_FULL_REPORT:|未选择目标时间|T3_DEEP_COMPOSITION/.test(html));
+ assert.equal(report.pages.filter(p=>p.pageFamily==='SECTION_OPENER_PAGE').length,10);
+ const timingGroups=new Map();
+ for(const p of report.pages.filter(p=>p.pageFamily==='TIMING_PAGE')){
+  if(!timingGroups.has(p.definitionKey))timingGroups.set(p.definitionKey,[]);
+  timingGroups.get(p.definitionKey).push(...(p.observations||[]));
+ }
+ for(const [definitionKey,observations] of timingGroups){
+  const [minObs,maxObs]=families.TIMING_PAGE.budget.observations;
+  assert(observations.length>=minObs&&observations.length<=maxObs,`TIMING_OBSERVATIONS:${definitionKey}:${observations.length}`);
+ }
+ const renderedFamilies=[...new Set(report.pages.map(p=>p.pageFamily))];
+ assert.deepEqual(renderedFamilies.slice().sort(),declaredPageFamilies.slice().sort(),'rendered BaZi report must cover exactly the page families declared by the BaZi section registry');
+ for(const p of report.pages){
+  const budget=families[p.pageFamily].budget,range=budget[report.locale==='en'?'en':'zh'];
+  if(range){const units=textUnits(p.paragraphs.join(' '),report.locale);budgets.push({locale:report.locale,key:p.pageKey,units,range});assert(units<=range[1],`CONTENT_BUDGET_MAX:${p.pageKey}:${units}`);}
+  if(p.pageFamily==='NARRATIVE_ANALYSIS_PAGE'&&!/_CONT_\d+$/.test(p.pageKey)){
+   const group=report.pages.filter(x=>x.definitionKey===p.definitionKey&&x.pageFamily==='NARRATIVE_ANALYSIS_PAGE');
+   const groupUnits=group.map(x=>textUnits(x.paragraphs.join(' '),report.locale));
+   if(group.length===1)assert(p.primaryVisualRef||groupUnits[0]>=range[0],`THIN_NARRATIVE:${p.pageKey}:${groupUnits[0]}`);
+   else{
+    assert(groupUnits.every(units=>units>0&&units<=range[1]),`NARRATIVE_CONTINUATION_BUDGET:${p.definitionKey}:${groupUnits.join(',')}`);
+    assert(groupUnits.reduce((sum,units)=>sum+units,0)>range[1],`UNNECESSARY_NARRATIVE_CONTINUATION:${p.definitionKey}:${groupUnits.join(',')}`);
+   }
+  }
+  if(p.pageFamily==='INSIGHT_LIST_PAGE'){assert(p.items.length>=3&&p.items.length<=6);const range=budget[report.locale==='en'?'enItem':'zhItem'];for(const item of p.items){const units=textUnits(item,report.locale);assert(units>=range[0]&&units<=range[1],`${p.pageKey}:${units}`);}}
+  if(p.pageFamily==='TIMING_PAGE')assert(p.temporal?.date&&p.temporal?.annual&&p.temporal?.selectedLuck,`TIMING_TEMPORAL:${p.pageKey}`);
+ }
+ const liveSource=read('docs/guided-report-successor-r2/bazi-source.json');const built=await projectBaziSectionPublication({reading:liveSource.reading,locale:report.locale,temporalContext:liveSource.temporalSnapshot});const internal={internalPages:built.internalSections};assert.equal(internal.internalPages.length,10);
+ for(const s of internal.internalPages){
+  assert(s.sectionComposition.pageBlocks.length>=1);
+  assert.equal(s.sectionComposition.sectionKey,s.sectionKey);
+  assert.equal(s.interpretation.topic,s.sectionKey);
+  const expectedFrozen=s.sectionKey!=='S01_OVERVIEW';
+  assert.equal(s.composition.executionClass,expectedFrozen?'OWNER_ACCEPTED_FROZEN_COPY':'T2_LIGHT_COMPOSITION');
+ }
+}
+// Different locales use different text-unit systems and budgets. A semantic
+// block may therefore require an extra continuation page in one locale without
+// any information gain or loss. Bilingual parity is semantic, not identical
+// physical pagination.
+assert.deepEqual(
+ semanticPagination(reports[0]),
+ semanticPagination(reports[1]),
+ 'bilingual semantic page structure must match even when locale pagination differs'
+);
+for(const report of reports){
+ for(let i=1;i<report.pages.length;i++){
+  const p=report.pages[i],previous=report.pages[i-1];
+  if(/_CONT_\d+$/.test(p.pageKey))assert.equal(p.definitionKey,previous.definitionKey,`ORPHAN_CONTINUATION:${report.locale}:${p.pageKey}`);
+ }
+}
+const source=read('docs/guided-report-successor-r2/bazi-source.json');
+const withoutLegacyCareerItems=await projectBaziSectionPublication({reading:source.reading,temporalContext:source.temporalSnapshot,locale:'en',unavailableModules:['careerFields']});
+assert.equal(withoutLegacyCareerItems.pages.length,reports[1].pages.length,'legacy careerFields items no longer own a publication page');validateExpandedSections(withoutLegacyCareerItems.pages);assert.equal(withoutLegacyCareerItems.pages.filter(p=>p.pageFamily==='SECTION_OPENER_PAGE').length,10);assert(withoutLegacyCareerItems.pages.some(p=>p.definitionKey==='S04_CAREER_PROFESSIONAL_TOPICS'&&p.primaryVisualRef==='BZR-VIS-PROFESSIONAL-TOPICS'),'canonical career visual page must not depend on legacy careerFields items');
+const chunks=splitSemanticBlocks([{text:'one two three'},{text:'four five six'},{text:'seven eight'}],{locale:'en',maxUnits:5});assert.equal(chunks.length,2);assert.deepEqual(chunks.flat().map(x=>x.text),['one two three','four five six','seven eight']);assert.throws(()=>splitSemanticBlocks([{text:'one two three four'}],{locale:'en',maxUnits:3}));
+const rebalanceSizes=[4,4,13,4,5,5,5,5,4,5,2,9,6],rebalanceBlocks=rebalanceSizes.map((n,i)=>({text:Array(n).fill('w'+i).join(' ')}));const rebalanced=splitSemanticBlocks(rebalanceBlocks,{locale:'en',maxUnits:36,minUnits:18}),rebalanceUnits=rebalanced.map(page=>page.reduce((sum,b)=>sum+textUnits(b.text,'en'),0));assert.equal(rebalanced.length,2,'global partition should use the minimum legal page count');assert(rebalanceUnits.every(units=>units>=18&&units<=36),`REBALANCE_BUDGET:${rebalanceUnits.join(',')}`);assert.equal(rebalanceUnits.reduce((a,b)=>a+b,0),rebalanceSizes.reduce((a,b)=>a+b,0),'global rebalance must preserve all text units');assert.deepEqual(rebalanced.flat(),rebalanceBlocks,'global rebalance must preserve semantic block order and identity');assert.throws(()=>splitSemanticBlocks([{text:'one two'},{text:'three'}],{locale:'en',maxUnits:5,minUnits:4}),/SECTION_BLOCK_PARTITION_UNDER_BUDGET/);
+let requests=[];
+const deterministicProbe=await projectBaziSectionPublication({reading:source.reading,temporalContext:source.temporalSnapshot,locale:'en',composition:{registry:{models:[{providerId:'test',modelId:'test',capabilityClass:'DEEP',planningCostRank:1,status:'AVAILABLE'}]},providerAdapters:{test:async r=>{requests.push(r);return {paragraphs:['Unsupported invented conclusion.']};}},verifyComposition:async()=>({accepted:false})}});
+assert.equal(requests.length,0,'canonical BaZi publication must not invoke provider-backed PUBLICATION_SECTION composition');
+assert(deterministicProbe.internalSections.every(s=>s.sectionKey==='S01_OVERVIEW'?s.composition.executionClass==='T2_LIGHT_COMPOSITION':s.composition.executionClass==='OWNER_ACCEPTED_FROZEN_COPY'));
+assert(deterministicProbe.internalSections.every(s=>s.composition.evidenceAdmission!=='SEMANTIC_VERIFIER_ACCEPTED'));
+fs.writeFileSync(`${root}/contract-evidence.json`,JSON.stringify({machinePass:true,totalPages:reports.map(r=>({locale:r.locale,total:r.totalPages})),semanticPaginationParity:true,physicalPaginationMayDifferByLocale:true,withoutLegacyCareerItemsPages:withoutLegacyCareerItems.pages.length+6,sectionLevelProviderRequests:requests.length,canonicalProviderInvocation:false,budgets,humanAccepted:false},null,2)+'\n');
+console.log('PASS: section order, registered/deployed family alignment, variable locale-safe totals, deterministic section composition, frozen intro, bilingual semantic parity, text budgets, temporal data, 13-asset registry and fallback chain.');

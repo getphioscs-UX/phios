@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-CKA-W18-W33-CLIENT-CONSUMPTION-AUDIT-v1.0.0",
+  "baselineCommit": "311fad7653785b8f0d14d5a0a154cce3f1303eb5",
+  "findings": [
+    {
+      "id": "CKA-AUDIT-01",
+      "finding": "Homepage already contains governed CKA entries at H04/H05/H07; no answer UI should be dumped into Hero.",
+      "decision": "REUSE"
+    },
+    {
+      "id": "CKA-AUDIT-02",
+      "finding": "HPC2 H09 is not present in the current homepage baseline.",
+      "decision": "NONE_BY_DESIGN_NO_FAKE_H09"
+    },
+    {
+      "id": "CKA-AUDIT-03",
+      "finding": "Account provider is not connected in public baseline.",
+      "decision": "FAIL_CLOSED_TRUSTED_PROVIDER_ONLY"
+    },
+    {
+      "id": "CKA-AUDIT-04",
+      "finding": "Reality Dashboard has browser-local Journey state but that state is not trusted account authorization.",
+      "decision": "DO_NOT_SILENTLY_UPLOAD_BROWSER_STATE"
+    },
+    {
+      "id": "CKA-AUDIT-05",
+      "finding": "Existing CKA client used GET query parameters for temporary Guided Context.",
+      "decision": "MIGRATE_TO_POST_JSON_NO_STORE"
+    },
+    {
+      "id": "CKA-AUDIT-06",
+      "finding": "BFR-H12 already owns the seven viewport x two locale Ask PHI OS matrix.",
+      "decision": "BIND_NOT_REBUILD"
+    },
+    {
+      "id": "CKA-AUDIT-07",
+      "finding": "KAP already owns grounded answer and Reality handoff complexity/consent authority.",
+      "decision": "CONSUME_NOT_DUPLICATE"
+    }
+  ],
+  "duplicateAuthorityCreated": false
+}

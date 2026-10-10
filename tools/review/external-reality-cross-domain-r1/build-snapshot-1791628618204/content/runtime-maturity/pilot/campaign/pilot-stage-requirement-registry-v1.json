@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S10A-PILOT-STAGE-REQUIREMENT-REGISTRY-v1.0.0",
+  "baselineCommit": "007fee6f24071d0653ce120be9ec832efc5c11a4",
+  "status": "ACTIVE",
+  "verticalSliceReference": {
+    "path": "content/runtime-maturity/pilot/vertical-slice-contract-v1.json",
+    "sha256": "df114fd823b29bc3150f8dfee45869b3a97492fbbadab23f5b5687d00377bf57"
+  },
+  "products": [
+    {
+      "product": "DAR",
+      "requiredStages": [
+        "Customer",
+        "Consent",
+        "FDR shared facts where authorised",
+        "Will Intake",
+        "Clause selection",
+        "DAR",
+        "Review",
+        "Export",
+        "Execution checklist"
+      ],
+      "requiredPurposeScopes": [
+        "WILL_ASSEMBLY"
+      ],
+      "releaseSemantics": "DAR_EXPORT_AND_EXECUTION_CHECKLIST_EXPLICIT",
+      "professionalHumanReviewRequired": true
+    },
+    {
+      "product": "RRP",
+      "requiredStages": [
+        "Customer",
+        "Consent",
+        "Reality",
+        "Selected Methods",
+        "MPA / MCD",
+        "Meaning",
+        "RRP",
+        "RR",
+        "Release",
+        "CPR-CUST",
+        "Customer"
+      ],
+      "requiredPurposeScopes": [
+        "EXPLICIT_PURPOSE_BOUND_RUNTIME_CONSENT"
+      ],
+      "releaseSemantics": "RR_RELEASE_EXPLICIT",
+      "professionalHumanReviewRequired": false,
+      "note": "Exact consent purpose code must be bound to the current RRP/runtime consent authority at real-case admission; this registry does not invent one."
+    },
+    {
+      "product": "FINANCIAL",
+      "requiredStages": [
+        "Customer",
+        "Progressive disclosure",
+        "FDR",
+        "FCR",
+        "FAR",
+        "HFP Draft",
+        "PFR",
+        "HFP Final",
+        "RR",
+        "Release",
+        "CPR-CUST",
+        "Customer"
+      ],
+      "requiredPurposeScopes": [
+        "FINANCIAL_PLANNING",
+        "PROFESSIONAL_REVIEW",
+        "REPORT"
+      ],
+      "releaseSemantics": "RR_RELEASE_EXPLICIT",
+      "professionalHumanReviewRequired": true
+    }
+  ]
+}

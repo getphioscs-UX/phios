@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "PHI-OS-ECR-MANDALA-W28-FULL-GATE-v1.0.0",
+  "work": "ECR-PHI-MANDALA-W28",
+  "baselineCommit": "7c6126404fe8e257b44937a0149bf23c837c538f",
+  "status": "FULL_GATE_BLOCKED_OUTSIDE_ECR",
+  "executedInAlignedWorkspace": "library:glossary.zip",
+  "orderedGates": [
+    {
+      "command": "node --check functions/embodied-configuration/ecr-customer-mandala-projection.js",
+      "status": "PASS"
+    },
+    {
+      "command": "node --check assets/customer-ui/js/specialists/ecr/mandala-geometry.js",
+      "status": "PASS"
+    },
+    {
+      "command": "node --check assets/customer-ui/js/specialists/ecr/mandala-renderer.js",
+      "status": "PASS"
+    },
+    {
+      "command": "node --check assets/customer-ui/js/specialists/ecr/product-renderer.js",
+      "status": "PASS"
+    },
+    {
+      "command": "npm run check:ecr-mandala",
+      "status": "PASS",
+      "scope": "W0-W27 aggregate including machine + rendered visual acceptance"
+    },
+    {
+      "command": "npm run check:ppr-r3",
+      "status": "BLOCKED_PRE_EXISTING_BASELINE_DRIFT",
+      "failingGate": "check:ppr-r3-w0-w3",
+      "error": "PPR-R3 W0 PPR-R4 successor digest drift: perspectives/personal/index.html",
+      "authorityDigest": "e7babe088b63fe8266787ed855726b7dfd3969b6e3c1a3854a509e07ba245376",
+      "currentBaselineDigest": "45ce923352d91dca8d7b3d3cc4dde47b70234ce6fad684b35b34b4e34d52d33e",
+      "reproducedOnUntouchedGlossaryBaseline": true,
+      "causedByEcrW24W29Delta": false,
+      "unrelatedAuthorityModifiedToForcePass": false
+    },
+    {
+      "command": "npm run check:cx-r12r4",
+      "status": "PASS"
+    },
+    {
+      "command": "npm run check:cx-r12r4b:smr",
+      "status": "PASS"
+    },
+    {
+      "command": "npm run check",
+      "status": "BLOCKED_WORKSPACE_ENVIRONMENT",
+      "failingGate": "precheck -> scripts/check-pds-w0-current.mjs",
+      "error": "git rev-parse failed: fatal: not a git repository (or any of the parent directories): .git",
+      "reason": "The aligned Library ZIP intentionally contains no .git metadata. Full repository check therefore cannot complete in this extracted workspace.",
+      "fullCheckPassed": false
+    }
+  ],
+  "ecrVerdict": {
+    "ecrMachineGatePassed": true,
+    "ecrVisualGatePassed": true,
+    "customerLanguageAccepted": true,
+    "technicalDisclosureAccepted": true,
+    "targetedPprBoundaryRegressionPassed": true
+  },
+  "fullProductionGatePassed": false,
+  "blockers": [
+    "PPR-R3 W0 has a pre-existing PPR-R4 successor digest drift on the untouched 7c61264/glossary.zip baseline.",
+    "The extracted Library ZIP has no .git directory, so npm run check cannot complete check-pds-w0-current.mjs."
+  ],
+  "requiredNextVerification": "Apply this delta to the real Git checkout at 7c61264 (or its direct successor preserving the same ECR files), reconcile the independent PPR-R4 successor authority in its own workstream, then rerun the exact W28 ordered gate sequence including npm run check."
+}

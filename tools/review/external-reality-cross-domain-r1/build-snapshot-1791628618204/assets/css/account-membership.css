@@ -1,0 +1,61 @@
+.account-hero { padding: clamp(5rem, 10vw, 8rem) 0 3rem; }
+.account-grid,
+.membership-grid,
+.reality-account-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.membership-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.account-card {
+  min-width: 0;
+  padding: clamp(1.2rem, 2.5vw, 2rem);
+  border: 1px solid rgba(17, 20, 26, .14);
+  border-radius: 1rem;
+  background: #fff;
+  overflow-wrap: anywhere;
+}
+.account-card h2,
+.account-card h3 { margin-top: 0; }
+.account-card p { color: #515866; line-height: 1.65; }
+.account-status {
+  display: inline-flex;
+  padding: .35rem .7rem;
+  border-radius: 999px;
+  background: #ece9e0;
+  color: #303641;
+  font-size: .75rem;
+  font-weight: 650;
+}
+.account-boundary {
+  padding: 1.25rem;
+  border-left: 4px solid #9b7735;
+  background: #f4f0e6;
+  color: #303641;
+}
+.membership-tier--featured {
+  border-color: #9b7735;
+  box-shadow: 0 12px 32px rgba(17, 20, 26, .09);
+}
+.entitlement-table-wrap { overflow-x: auto; }
+.entitlement-table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+}
+.entitlement-table th,
+.entitlement-table td {
+  padding: .85rem;
+  border-bottom: 1px solid rgba(17, 20, 26, .14);
+  text-align: left;
+}
+.account-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; }
+@media (max-width: 900px) {
+  .membership-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .account-grid,
+  .membership-grid,
+  .reality-account-grid { grid-template-columns: 1fr; }
+  .account-hero { padding-top: 3.5rem; }
+}

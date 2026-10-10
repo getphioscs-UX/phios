@@ -1,0 +1,20 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {runKirR2W16R2Successor} from '../functions/_lib/kir-r2-w16r2-successor.js';
+import {articleAuthorityToKirSources} from '../functions/_lib/kir-r2-answer-intelligence.js';
+import {KIR_R2_PRODUCTION_PROFILE_PATH,KIR_R2_PRODUCTION_ARTICLE_BINDING_PATH} from '../functions/_lib/kir-r2-production.js';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const read=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
+if(!process.env.DEEPSEEK_API_KEY)throw new Error('DEEPSEEK_API_KEY is required for case 084 R2 regression.');
+const benchmark=read('content/knowledge/knowledge-intelligence-r2/benchmarks/kir-r2-w15r-100-question-answer-benchmark-v2.json');
+const c=benchmark.cases.find(x=>x.caseId==='KIR-R2-W15R-084');if(!c)throw new Error('case 084 missing');
+const profiles=read(KIR_R2_PRODUCTION_PROFILE_PATH);const bindings=read(KIR_R2_PRODUCTION_ARTICLE_BINDING_PATH);
+const byNode=new Map();for(const b of bindings.records||[]){if(!byNode.has(b.nodeCode))byNode.set(b.nodeCode,[]);byNode.get(b.nodeCode).push(b)}
+const enriched=profiles.profiles.map(p=>{const rows=byNode.get(p.nodeCode)||[];return rows.length?{...p,articleSources:rows.map(r=>({articleCode:r.articleCode,slug:r.slug,href:r.href,title:r.title,locale:r.locale,authorityDigest:r.authorityDigest})),aliases:[...(p.aliases||[]),...rows.flatMap(r=>[r.title,r.slug])],userLanguage:[...(p.userLanguage||[]),...rows.map(r=>r.title)]}:p});
+const authority=read(c.expected.authorityPath);const articleSources=articleAuthorityToKirSources(authority,c.expected.bookCode);const groundingBundle={sources:articleSources};
+const started=performance.now();const projection=await runKirR2W16R2Successor({question:c.question,locale:c.locale,profiles:enriched,groundingBundle,env:{...process.env,PHIOS_KIR_R2_MODEL_GATEWAY_ENABLED:'true'},fetcher:globalThis.fetch});
+const latencyMs=Number((performance.now()-started).toFixed(2));
+const answer=projection?.result?.answer||null;
+const output={schemaVersion:'PHI-OS-KIR-R2-W16R2B-CASE084-R2-LIVE-REGRESSION-v1.0.0',baselineCommit:'415f73c258454c23d1569c9e2c2f381dcfb6a715',startedAt:new Date(Date.now()-latencyMs).toISOString(),completedAt:new Date().toISOString(),status:'CASE084_R2_LIVE_COMPLETED_HUMAN_REVIEW_REQUIRED',case:{caseId:c.caseId,question:c.question,locale:c.locale,expected:c.expected,status:projection.status,applied:projection.applied===true,answer:answer?.text||'',providerMeta:answer?.providerMeta||null,baseGuard:projection?.result?.guard||null,successorGuard:projection?.successorGuard||null,escalated:projection?.escalated||false,attempts:projection?.attempts||1,latencyMs}};
+const out=path.join(root,'review','KIR-R2-W16R2B-CASE084-R2-LIVE-RESULT.json');fs.writeFileSync(out,JSON.stringify(output,null,2));console.log(JSON.stringify({applied:output.case.applied,provider:output.case.providerMeta?.providerId||null,guardPassed:output.case.successorGuard?.passed===true,latencyMs},null,2));console.log(`Wrote ${path.relative(root,out)}`);

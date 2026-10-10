@@ -1,0 +1,39 @@
+{
+  "contractCode": "PHI-OS-ORC-W4-FAILURE-CONTRACT-v2",
+  "contractVersion": "2.0.0",
+  "runtimeCode": "ORC",
+  "work": "ORC-W4",
+  "status": "canonical",
+  "failureClasses": [
+    {
+      "code": "RETRYABLE",
+      "automaticRetryEligible": true,
+      "requiresHuman": false
+    },
+    {
+      "code": "NON_RETRYABLE",
+      "automaticRetryEligible": false,
+      "requiresHuman": false
+    },
+    {
+      "code": "BLOCKED",
+      "automaticRetryEligible": false,
+      "requiresHuman": false
+    },
+    {
+      "code": "MANUAL_REVIEW",
+      "automaticRetryEligible": false,
+      "requiresHuman": true
+    },
+    {
+      "code": "DATA_CORRECTION_REQUIRED",
+      "automaticRetryEligible": false,
+      "requiresHuman": true
+    }
+  ],
+  "rules": {
+    "failureClassificationDoesNotRepairDomainData": true,
+    "unknownFailureFailsClosed": true,
+    "retryMayNotBypassDependency": true
+  }
+}

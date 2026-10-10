@@ -1,0 +1,2 @@
+import {getAcceptedBook6Projection} from '../_lib/book6-current-source.js';
+export async function onRequestGet({request}){try{const id=new URL(request.url).searchParams.get('dossier')?.trim().toUpperCase(),projection=getAcceptedBook6Projection(id);return projection?Response.json({ok:true,projection},{headers:{'cache-control':'public, max-age=60'}}):Response.json({ok:false,error:'BOOK6_ACCEPTED_DOSSIER_NOT_FOUND'},{status:404});}catch(e){return Response.json({ok:false,error:e.code||'BOOK6_ACCEPTED_PROJECTION_FAILED'},{status:e.status||409});}}

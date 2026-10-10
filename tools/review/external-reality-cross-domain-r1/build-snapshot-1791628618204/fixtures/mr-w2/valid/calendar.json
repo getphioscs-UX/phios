@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-SHARED-DATA-RECORD-v1.0.0",
+  "recordId": "SDA-CALENDAR-0001",
+  "recordType": "CALENDAR",
+  "authority": "SHARED_DATA_AUTHORITY",
+  "authorityVersion": "1.0.0",
+  "recordVersion": "1.0.0",
+  "status": "verified",
+  "methodOwner": null,
+  "pluginOwner": null,
+  "sourceClass": "deterministic_derivation",
+  "provenance": {
+    "sourceType": "calendar_standard",
+    "sourceId": "PROLEPTIC_GREGORIAN",
+    "sourceVersion": "1.0.0",
+    "capturedAt": "2026-08-04T00:00:00Z",
+    "verificationStatus": "contract_fixture",
+    "licenseStatus": "not_required"
+  },
+  "normalization": {
+    "normalizedBy": "SHARED_DATA_AUTHORITY",
+    "normalizationVersion": "1.0.0",
+    "normalizedAt": "2026-08-04T00:00:00Z"
+  },
+  "lineage": {
+    "inputRecordIds": [
+      "SDA-BIRTH-0001"
+    ],
+    "algorithmCode": "CALENDAR_CONVERSION_CONTRACT",
+    "algorithmVersion": "1.0.0",
+    "providerCode": null,
+    "deterministic": true,
+    "aiUsed": false
+  },
+  "payload": {
+    "inputDate": "1990-01-15",
+    "sourceCalendar": "PROLEPTIC_GREGORIAN",
+    "targetCalendar": "JULIAN_DAY_NUMBER",
+    "targetDate": "2447906.5",
+    "conventionCode": "MIDNIGHT_UTC_EPOCH",
+    "conventionVersion": "1.0.0"
+  }
+}

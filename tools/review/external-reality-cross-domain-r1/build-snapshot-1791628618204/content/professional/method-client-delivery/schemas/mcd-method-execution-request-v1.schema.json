@@ -1,0 +1,18 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://getphios.com/schemas/mcd/method-execution-request-v1.schema.json",
+  "title":"PHI OS MCD-4 Method Execution Request v1",
+  "type":"object","additionalProperties":false,
+  "required":["schemaVersion","methodCode","methodVersion","capability","purposeCode","canonicalInput","consentRecordId","requestId"],
+  "properties":{
+    "schemaVersion":{"const":"PHI-OS-MCD-METHOD-EXECUTION-REQUEST-v1.0.0"},
+    "methodCode":{"enum":["ASTROLOGY","BAZI","NUMEROLOGY","HUMAN_DESIGN"]},
+    "methodVersion":{"type":"string","minLength":1},
+    "capability":{"enum":["CALCULATION","PROJECTION"]},
+    "purposeCode":{"type":"string","minLength":1},
+    "canonicalInput":{"$ref":"./canonical-birth-input-v1.schema.json"},
+    "executionParameters":{"type":"object","additionalProperties":false,"properties":{"targetDate":{"type":["string","null"],"pattern":"^[0-9]{4}-[0-9]{2}-[0-9]{2}$"}}},
+    "consentRecordId":{"type":"string","minLength":1},
+    "requestId":{"type":"string","minLength":1}
+  }
+}

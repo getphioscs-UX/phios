@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-INTEGRATED-SUCCESSOR-PHASE0-NO-SILENT-OVERWRITE-CONTRACT-v1.0.0",
+  "work": "INTEGRATED-PHASE0-PARALLEL-WORK-SAFETY",
+  "status": "ACTIVE",
+  "baselineCommit": "552f6d973dcaa32aa72f7f1d676ec2bc74434729",
+  "upstreamCanonicalMasterWork": {
+    "registry": "content/governance/canonical-master-work/registries/canonical-master-work-registry-v1.json",
+    "migrationRegistry": "content/governance/canonical-master-work/registries/canonical-master-work-migration-registry-v1.json",
+    "freeze": "content/governance/canonical-master-work/freeze/cmw-w0-w7-canonical-master-work-freeze-v1.json",
+    "freezeSha256": "0266c48896bc58b35378ecc4cc04363feda93226ad0b3b4efdd82292375488da",
+    "migrationRegistrySha256": "63b54a3edeca4ea525f64e727818169c7e93f0c8d8d6613f0228326bec992454",
+    "mutatedByIntegratedPhase0": false
+  },
+  "rules": {
+    "currentMainFirst": true,
+    "currentRegistryCensusBeforeAllocatingIds": true,
+    "historicalFreezeRewriteForbidden": true,
+    "parallelCommitOverwriteForbidden": true,
+    "secondAuthorityForbidden": true,
+    "historicalCheckerCanRemainHistorical": true,
+    "currentCheckerMustFollowCurrentSuccessorAuthority": true,
+    "runtimeSemanticChangeRequiresOwnedSuccessor": true,
+    "presentationCheckerDriftMustNotRestoreRetiredPresentation": true
+  },
+  "idFamiliesRequiringCurrentRegistryCheck": [
+    "MFIG",
+    "PFIG",
+    "RFIG",
+    "PVP-VIS",
+    "VIS-TEX",
+    "VIS-DEC",
+    "CX",
+    "KIR",
+    "PAI",
+    "ZV"
+  ],
+  "checkerDriftPolicy": {
+    "historicalRequirement": "preserve historical evidence unchanged",
+    "currentRequirement": "validate current successor semantic contract",
+    "forbiddenRepair": "reinsert retired Stage16/CIR/PX2 DOM or legacy CSS merely to satisfy a stale checker"
+  }
+}

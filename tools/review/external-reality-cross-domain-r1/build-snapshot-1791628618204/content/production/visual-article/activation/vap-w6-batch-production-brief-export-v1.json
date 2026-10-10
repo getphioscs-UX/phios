@@ -1,0 +1,59 @@
+{
+  "activationCode": "PHI-OS-VAP-W6-BATCH-PRODUCTION-BRIEF-EXPORT-ACTIVATION-v1",
+  "activationDigest": "sha256:cb1a3f0bc4c32f36bec2ef04cbf05fac2476f9b6ad0757bcd8e951481b2196e5",
+  "activationVersion": "1.0.0",
+  "baselineCommit": "1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7",
+  "batchDigest": "sha256:185b269db6b4031041e7bd21f0b057044eabdf74f61618574ccf0967cec36d38",
+  "batchReference": "content/production/visual-article/batches/vap-article-batch-001-selection-v1.json",
+  "contractReference": "content/production/visual-article/contracts/vap-w6-batch-article-selection-production-brief-export-v1.json",
+  "currentBatch": {
+    "batchCode": "VAP-ARTICLE-BATCH-001",
+    "currentBriefExportCount": 0,
+    "currentStatus": "PARTIAL_OR_FULL_EXPORT_AVAILABLE",
+    "productionBriefExportReadyCount": 6,
+    "productionBriefExportReadyNodeCodes": [
+      "KN-B1-P1-006",
+      "KN-B1-P2-001",
+      "KN-B1-P2-009",
+      "KN-B1-P3-005",
+      "KN-B1-P3-015",
+      "KN-B1-P4-006"
+    ],
+    "selectedNodeCodes": [
+      "KN-B1-P1-006",
+      "KN-B1-P2-001",
+      "KN-B1-P2-009",
+      "KN-B1-P3-005",
+      "KN-B1-P3-015",
+      "KN-B1-P4-006"
+    ],
+    "selectedNodeCount": 6
+  },
+  "effects": {
+    "candidateCreated": false,
+    "humanProductionDecisionCreated": false,
+    "networkGenerationCallMade": false,
+    "productionBriefGeneratedByActivation": false,
+    "productionPlanFrozen": false,
+    "productionWaveFrozen": false,
+    "providerInvoked": false,
+    "publicationCreated": false
+  },
+  "existingPjaRuntimeReuse": {
+    "batchWrapperNpmScript": "vap:batch:export-briefs",
+    "batchWrapperScript": "scripts/export-vap-w6-batch-production-briefs.mjs",
+    "exporterPath": "scripts/export-knowledge-production-brief.mjs",
+    "npmScript": "knowledge:export-brief",
+    "singleNodeExporterReimplemented": false,
+    "wrapperAuthority": "ORCHESTRATION_ONLY"
+  },
+  "nextAction": "Record per-node Human KPP Article decisions for the selected cohort, complete C2 thesis/boundary freeze and C3 readiness, freeze the Article production plan/wave, establish W4R new-Article execution eligibility, then run the batch brief exporter.",
+  "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION",
+  "schemaVersion": "PHI-OS-VAP-W6-BATCH-PRODUCTION-BRIEF-EXPORT-ACTIVATION-v1.0.0",
+  "sourceDigests": {
+    "content/production/visual-article/batches/vap-article-batch-001-selection-v1.json": "sha256:4204a2235c53f07796fcf8e4ef307dd9e3e2318cef8d645fa4bf174808691fc9",
+    "scripts/export-knowledge-production-brief.mjs": "sha256:e2566e2486d607596739760cc3fcb1974872bb33f48a1367d34e6109165e2521"
+  },
+  "status": "BATCH_SELECTION_AND_EXISTING_PJA_EXPORT_ORCHESTRATION_ACTIVE",
+  "work": "VAP-W6"
+}

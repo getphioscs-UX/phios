@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-SHARED-DATA-RECORD-v1.0.0",
+  "recordId": "SDA-ASTRONOMY-0001",
+  "recordType": "ASTRONOMY",
+  "authority": "SHARED_DATA_AUTHORITY",
+  "authorityVersion": "1.0.0",
+  "recordVersion": "1.0.0",
+  "status": "verified",
+  "methodOwner": null,
+  "pluginOwner": null,
+  "sourceClass": "deterministic_derivation",
+  "provenance": {
+    "sourceType": "ephemeris",
+    "sourceId": "MR-W2-CONTRACT-EPHEMERIS",
+    "sourceVersion": "1.0.0",
+    "capturedAt": "2026-08-04T00:00:00Z",
+    "verificationStatus": "contract_fixture",
+    "licenseStatus": "not_required"
+  },
+  "normalization": {
+    "normalizedBy": "SHARED_DATA_AUTHORITY",
+    "normalizationVersion": "1.0.0",
+    "normalizedAt": "2026-08-04T00:00:00Z"
+  },
+  "lineage": {
+    "inputRecordIds": [
+      "SDA-COORD-0001",
+      "SDA-TIMEZONE-0001"
+    ],
+    "algorithmCode": "ASTRONOMY_CONTRACT_FIXTURE",
+    "algorithmVersion": "1.0.0",
+    "providerCode": null,
+    "deterministic": true,
+    "aiUsed": false
+  },
+  "payload": {
+    "epoch": "1990-01-15T02:30:00Z",
+    "timeScale": "UTC",
+    "referenceFrame": "ICRF_CONTRACT_FIXTURE",
+    "ephemerisCode": "MR_W2_CONTRACT_EPHEMERIS",
+    "ephemerisVersion": "1.0.0",
+    "observerCoordinateRecordId": "SDA-COORD-0001",
+    "calculationStatus": "contract_fixture_only",
+    "outputs": [
+      {
+        "bodyCode": "SUN",
+        "longitudeDegrees": 294.7,
+        "latitudeDegrees": 0,
+        "distanceAu": 0.9836
+      }
+    ]
+  }
+}

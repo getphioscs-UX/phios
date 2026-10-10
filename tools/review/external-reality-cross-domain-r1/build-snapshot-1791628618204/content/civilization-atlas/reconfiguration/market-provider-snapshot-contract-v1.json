@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "PHI-OS-MARKET-PROVIDER-SNAPSHOT-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2",
+  "requiredFields": [
+    "snapshotId",
+    "providerId",
+    "capability",
+    "request",
+    "retrievedAt",
+    "responseDigest",
+    "records"
+  ],
+  "requestRequiredFields": [
+    "market",
+    "symbols"
+  ],
+  "rules": [
+    "responseDigest is SHA-256 over the canonical raw provider response or imported fixture payload.",
+    "records contain normalized provider observations only; no interpretation is generated here.",
+    "Each normalized record must preserve source field names or fieldPath lineage.",
+    "Snapshot retention never includes credentials or authorization headers.",
+    "Snapshot is a source candidate and requires W8B claim extraction."
+  ]
+}

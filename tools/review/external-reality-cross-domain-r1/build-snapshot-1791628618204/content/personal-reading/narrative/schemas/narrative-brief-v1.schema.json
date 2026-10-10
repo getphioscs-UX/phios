@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-NARRATIVE-BRIEF-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "briefId",
+    "sourceReportId",
+    "sourceSemanticDigest",
+    "locale",
+    "coreThemes",
+    "priorityFindings",
+    "importantRelationships",
+    "methodSignals",
+    "profileSignals",
+    "crossPerspectiveSignals",
+    "crossSourceSignals",
+    "currentRealitySignals",
+    "timingContext",
+    "tensions",
+    "counterEvidence",
+    "openQuestions",
+    "factsAiMustNotAlter",
+    "sourceClassLocks",
+    "unsupportedAreas",
+    "sensitiveBoundaries",
+    "styleIntent",
+    "customerContext",
+    "narrativeFreedom",
+    "prohibitedClaimClasses",
+    "briefSemanticDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-NARRATIVE-BRIEF-v1.0.0"},
+    "briefId": {"type": "string", "pattern": "^NBR-[A-F0-9]{24}$"},
+    "sourceReportId": {"type": "string", "minLength": 1},
+    "sourceSemanticDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "locale": {"enum": ["en", "zh-Hans"]},
+    "coreThemes": {"type": "array", "items": {"$ref": "#/$defs/signal"}, "maxItems": 5},
+    "priorityFindings": {"type": "array", "items": {"$ref": "#/$defs/signal"}, "maxItems": 5},
+    "importantRelationships": {"type": "array", "items": {"$ref": "#/$defs/signal"}, "maxItems": 8},
+    "methodSignals": {"type": "array", "items": {"$ref": "#/$defs/signal"}, "maxItems": 12},
+    "profileSignals": {"type": "array", "items": {"$ref": "#/$defs/signal"}, "maxItems": 12},
+    "crossPerspectiveSignals": {"type": "array", "items": {"$ref": "#/$defs/signal"}, "maxItems": 12},
+    "crossSourceSignals": {"type": "array", "items": {"$ref": "#/$defs/signal"}, "maxItems": 12},
+    "currentRealitySignals": {"type": "array", "items": {"$ref": "#/$defs/signal"}, "maxItems": 12},
+    "timingContext": {"type": "array", "items": {"type": "string"}, "maxItems": 24, "uniqueItems": true},
+    "tensions": {"type": "array", "items": {"type": "string"}, "maxItems": 24, "uniqueItems": true},
+    "counterEvidence": {"type": "array", "items": {"type": "string"}, "maxItems": 24, "uniqueItems": true},
+    "openQuestions": {"type": "array", "items": {"type": "string"}, "maxItems": 12, "uniqueItems": true},
+    "factsAiMustNotAlter": {"type": "array", "items": {"$ref": "#/$defs/factLock"}, "minItems": 1, "maxItems": 96},
+    "sourceClassLocks": {"type": "array", "items": {"$ref": "#/$defs/sourceClassLock"}, "minItems": 1, "maxItems": 48},
+    "unsupportedAreas": {"type": "array", "items": {"$ref": "#/$defs/unsupportedArea"}, "maxItems": 32},
+    "sensitiveBoundaries": {"type": "array", "items": {"type": "string"}, "minItems": 1, "maxItems": 24, "uniqueItems": true},
+    "styleIntent": {"type": "object"},
+    "customerContext": {"type": ["object", "null"]},
+    "narrativeFreedom": {"type": "object"},
+    "prohibitedClaimClasses": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "briefSemanticDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "$defs": {
+    "signal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["signalId", "kind", "statement", "refs", "sourceClasses"],
+      "properties": {
+        "signalId": {"type": "string", "minLength": 1},
+        "kind": {"type": "string", "minLength": 1},
+        "statement": {"type": "string", "minLength": 1, "maxLength": 900},
+        "refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true, "maxItems": 24},
+        "sourceClasses": {"type": "array", "items": {"type": "string"}, "uniqueItems": true, "maxItems": 12}
+      }
+    },
+    "factLock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lockType", "value"],
+      "properties": {
+        "lockType": {"type": "string", "minLength": 1},
+        "value": {"type": "string", "minLength": 1, "maxLength": 1400}
+      }
+    },
+    "sourceClassLock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceClass", "sourceRef", "mayBecomeOtherSourceClass"],
+      "properties": {
+        "sourceClass": {"type": "string", "minLength": 1},
+        "sourceRef": {"type": "string", "minLength": 1},
+        "semanticDigest": {"type": ["string", "null"]},
+        "mayBecomeOtherSourceClass": {"const": false}
+      }
+    },
+    "unsupportedArea": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sectionId", "status"],
+      "properties": {
+        "sectionId": {"type": "string", "minLength": 1},
+        "status": {"enum": ["NOT_ESTABLISHED", "SUPPRESSED"]}
+      }
+    }
+  }
+}

@@ -1,0 +1,6031 @@
+# NAV-06｜Reversibility
+
+## 可逆性｜能不能回头，会改变决定本身
+
+**Canonical Question｜规范问题**
+
+> **为什么可逆与不可逆的行动不能使用同样的门槛？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-06
+```
+
+## 2. `canonicalTitleZh`
+
+```
+可逆性
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Reversibility
+```
+
+## 4. `canonicalQuestion`
+
+```
+为什么可逆与不可逆的行动不能使用同样的门槛？
+```
+
+---
+
+# 5. `definition`
+
+**Reversibility** 是 Navigation 对“一个行动进入现实以后，还能不能撤回、修正、缩小、恢复或转向”的正式判断。
+
+它不是简单的：
+
+```
+YES / NO
+```
+
+也不是：
+
+```
+risk high / risk low
+```
+
+而是要回答：
+
+> **如果这个决定后来被现实证明不合适，我们还有多少机会回来，又需要付出多大代价才能回来？**
+
+一个行动即使表面相同，其真正的风险也会因为可逆性不同而完全改变。
+
+例如：
+
+```
+尝试一门短期课程
+```
+
+通常具有较高可逆性；
+
+而：
+
+```
+辞去唯一收入来源
+出售主要住所
+签署长期债务
+进行不可逆医疗程序
+作出重大法律承诺
+```
+
+则可能具有较低可逆性。
+
+因此：
+
+> **NAV-06 不判断一个选择是否值得，而是判断“做错以后还能怎样修正”，并据此调整后续 Decision Sufficiency 的门槛。**
+
+---
+
+# 6. `navigationMeaning`
+
+可逆性决定 Navigation 能允许多少未知继续存在。
+
+当行动：
+
+```
+highly reversible
+```
+
+Navigation 可以容许：
+
+- 信息仍不完整；
+- 先做小范围实验；
+- 通过行动获取反馈；
+- 较低成本地停止或修正。
+
+当行动：
+
+```
+low reversibility
+```
+
+Navigation 必须提高：
+
+- 证据要求；
+- 准备要求；
+- 专业核验；
+- consent；
+- contingency planning；
+- downstream consequence review。
+
+因此 NAV-06 的核心逻辑是：
+
+```
+Reversibility High
+→ Reality can help us learn after acting
+
+Reversibility Low
+→ More must be understood before acting
+```
+
+但这不等于：
+
+```
+reversible = safe
+irreversible = bad
+```
+
+只是决策结构不同。
+
+---
+
+# 7. `requiredInputs`
+
+NAV-06 最低需要：
+
+```
+confirmedDecisionObject
+currentPosition
+remainingChoiceSpace
+timeBoundedDecisionSpace
+inactionPath
+candidateActionOrActionClass
+knownExitConditions
+knownRecoveryConditions
+```
+
+如果尚未形成 candidate action，则 NAV-06 可以先对：
+
+```
+action classes
+```
+
+而不是最终方案做初步判断。
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialProjection
+contractualTerms
+legalConditions
+relationshipCommitments
+professionalInput
+healthOrSafetyContext
+locationConstraints
+assetOwnership
+dependantResponsibilities
+priorOutcomeHistory
+currentExternalEvidence
+```
+
+这些用于判断：
+
+- 能否退出；
+- 退出成本；
+- 是否可以恢复；
+- 是否存在残余后果；
+- 是否会影响他人。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+LEGAL_OR_CONTRACTUAL_RECORD
+PROFESSIONAL_INPUT
+CURRENT_EXTERNAL_EVIDENCE
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但判断：
+
+```
+IRREVERSIBLE
+```
+
+时，不应仅依赖解释性来源。
+
+高影响不可逆性应优先依赖：
+
+```
+MATERIAL_RECORD
+LEGAL_OR_CONTRACTUAL_FACT
+PROFESSIONAL_INPUT
+DIRECTLY_OBSERVED_CONDITION
+```
+
+---
+
+# 10. Core Reversibility Classes
+
+建议至少区分：
+
+```
+HIGHLY_REVERSIBLE
+REVERSIBLE_WITH_COST
+PARTIALLY_REVERSIBLE
+LOW_REVERSIBILITY
+EFFECTIVELY_IRREVERSIBLE
+REVERSIBILITY_UNKNOWN
+```
+
+---
+
+## A. `HIGHLY_REVERSIBLE`
+
+行动可以较容易停止或撤回，而且：
+
+```
+exit cost low
+residual consequence low
+future options largely preserved
+```
+
+例如：
+
+```
+短期试课
+小规模试点
+限时项目
+非排他性探索
+```
+
+---
+
+## B. `REVERSIBLE_WITH_COST`
+
+可以退出，但需要支付明确成本。
+
+例如：
+
+```
+提前结束租约
+结束某些服务合同
+退出一个已开始的小型项目
+```
+
+---
+
+## C. `PARTIALLY_REVERSIBLE`
+
+可以改变一部分，但无法恢复原状。
+
+例如：
+
+```
+搬迁后再搬回
+```
+
+地点可以恢复，但：
+
+- 时间；
+- 搬迁成本；
+- 学校变化；
+- 工作变化；
+
+未必能完全恢复。
+
+---
+
+## D. `LOW_REVERSIBILITY`
+
+退出虽然理论可行，但：
+
+```
+cost high
+recovery long
+future options materially changed
+```
+
+例如：
+
+```
+大规模资本投入
+长期职业退出
+高度绑定的合作结构
+```
+
+---
+
+## E. `EFFECTIVELY_IRREVERSIBLE`
+
+在当前导航范围内，行动一旦发生，不应假设可以恢复。
+
+例如：
+
+```
+不可逆法律行为
+某些医疗程序
+公开披露无法收回的信息
+某些已执行资产转移
+```
+
+具体判断需要合法 authority。
+
+---
+
+## F. `REVERSIBILITY_UNKNOWN`
+
+系统不知道能否退出或恢复。
+
+例如：
+
+```
+合同退出条款未读
+退款权利未知
+许可恢复条件未知
+```
+
+必须先确认。
+
+---
+
+# 11. Reversibility Dimensions
+
+不能只存一个标签。
+
+至少应检查：
+
+```
+LEGAL_REVERSIBILITY
+FINANCIAL_REVERSIBILITY
+OPERATIONAL_REVERSIBILITY
+RELATIONAL_REVERSIBILITY
+TEMPORAL_REVERSIBILITY
+IDENTITY_OR_REPUTATION_RESIDUE
+OPTION_SPACE_REVERSIBILITY
+```
+
+---
+
+# 12. `allowedInference`
+
+NAV-06 可以：
+
+## A. 判断一个方案是否可以通过小范围试验降低风险
+
+例如：
+
+```
+full career switch
+```
+
+可能拆成：
+
+```
+course
+freelance test
+part-time experiment
+internal project
+```
+
+这不是自动推荐，而是识别：
+
+```
+MORE_REVERSIBLE_VARIANT_EXISTS
+```
+
+---
+
+## B. 识别退出成本
+
+例如：
+
+```
+lease break penalty
+```
+
+可以进入：
+
+```
+REVERSIBLE_WITH_COST
+```
+
+---
+
+## C. 识别“能恢复”与“能回到原样”不同
+
+例如：
+
+```
+relationship pause
+```
+
+即使后来继续，也不代表：
+
+```
+original relationship state restored
+```
+
+---
+
+## D. 识别时间会降低可逆性
+
+例如：
+
+```
+pilot project
+```
+
+在早期可以轻易退出；
+
+但随着：
+
+```
+more capital
+more staff
+more contracts
+```
+
+进入后，可逆性可能下降。
+
+---
+
+## E. 识别行动可以被重新设计成更可逆
+
+例如：
+
+```
+buy
+→ rent first
+
+quit
+→ leave / reduced hours / internal transfer first
+
+full rollout
+→ pilot
+```
+
+只允许作为候选结构，不得自动替用户选择。
+
+---
+
+# 13. `forbiddenInference`
+
+NAV-06 严禁：
+
+## A. 把“可逆”当成“无风险”
+
+例如：
+
+```
+可以退出
+```
+
+不等于：
+
+```
+没有损失
+```
+
+---
+
+## B. 把“不可逆”当成“不能做”
+
+某些重要决定天然不可逆。
+
+Navigation 只能：
+
+```
+raise threshold
+```
+
+不能：
+
+```
+ban action
+```
+
+除非另有合法 safety / professional authority。
+
+---
+
+## C. 用 Profile 判断客观可逆性
+
+禁止：
+
+```
+你适应性强
+→ 这项决定容易恢复
+```
+
+---
+
+## D. 用 Method Reading 判断退出路径
+
+禁止：
+
+```
+八字显示以后会有机会
+→ 离职可逆
+```
+
+---
+
+## E. 用 Tarot / I Ching 判断损失会不会恢复
+
+禁止：
+
+```
+牌面显示转机
+→ 资金风险可恢复
+```
+
+---
+
+## F. 把理论上存在出口当成现实可退出
+
+例如：
+
+```
+理论可以卖掉资产
+```
+
+不等于：
+
+```
+asset liquidation is currently feasible
+```
+
+---
+
+# 14. `decisionEffect`
+
+NAV-06 主要影响：
+
+```
+DECISION_THRESHOLD
+ACTION_SCALE
+OPTION_WEIGHT
+OPTION_ELIGIBILITY
+WAIT_ACT_BALANCE
+ESCALATION_REQUIREMENT
+```
+
+尤其核心是：
+
+```
+DECISION_THRESHOLD
+ACTION_SCALE
+```
+
+---
+
+# 15. `decisionThresholdEffect`
+
+核心冻结关系：
+
+```
+higher reversibility
+→ lower required decision sufficiency may be acceptable
+
+lower reversibility
+→ higher required decision sufficiency
+```
+
+但必须加入：
+
+```
+impact
+responsibility
+```
+
+共同判断。
+
+因此不能简单写成：
+
+```
+reversible = low threshold
+```
+
+真正逻辑：
+
+```
+Reversibility
+×
+Impact
+×
+Responsibility
+×
+Uncertainty
+→ Required Decision Sufficiency
+```
+
+NAV-26 / NAV-27 最终处理完整门槛。
+
+---
+
+# 16. `authorityBoundary`
+
+NAV-06 可以：
+
+- 判断退出空间；
+- 判断恢复难度；
+- 标识残余后果；
+- 比较大动作与可逆小动作；
+- 调高后续 decision threshold；
+- 标记需要专业核验的退出条件。
+
+NAV-06 不可以：
+
+- 宣布不可逆选择一定错误；
+- 宣布可逆选择一定安全；
+- 自动把大决定拆成小决定并执行；
+- 用 symbolic system 建立现实恢复能力；
+- 用未来想象当 exit plan。
+
+---
+
+# 17. `humanDecisionBoundary`
+
+用户必须能够确认：
+
+```
+what loss they consider recoverable
+what cost they are willing to bear
+what state counts as acceptable recovery
+```
+
+例如：
+
+一个人可能认为：
+
+```
+loss of RM5,000
+```
+
+可承受；
+
+另一个人可能认为不可承受。
+
+因此：
+
+```
+material reversibility
+```
+
+与：
+
+```
+personal tolerance
+```
+
+必须分开。
+
+系统可以说：
+
+> 这项行动在技术上可以撤回，但撤回需要承担约 RM5,000 成本。
+
+不能直接说：
+
+> 这是可逆的，所以风险低。
+
+---
+
+# 18. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.8｜能不能回头，会改变决定本身
+```
+
+相关：
+
+```
+15.5｜什么已经不能改变，什么仍然开放
+15.6｜时间已经进入决定
+15.9｜我们究竟在决定多远的未来
+15.35｜坏情况必须能够被承担
+15.38｜退出路径必须在进入以前被看见
+15.40｜失败以后还能去哪里
+15.45｜可逆性会改变所需确定程度
+```
+
+---
+
+# 19. `relatedBookFoundations`
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+recovery
+continuity
+capacity after disruption
+```
+
+NAV-06 不重新解释 Recovery。
+
+它只问：
+
+> 如果这个行动失败，系统还能不能回到一个可承担状态？
+
+---
+
+## Book IV｜Reality Expansion
+
+提供：
+
+```
+capacity
+scale
+commitment expansion
+```
+
+支持理解：
+
+```
+larger scale often reduces reversibility
+```
+
+但不是绝对规律。
+
+---
+
+## Book VI｜Reality Reconfiguration
+
+提供：
+
+```
+structural change
+reconfiguration
+```
+
+但 NAV-06 不重新解释结构如何重组。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+uncertainty
+evidence limitation
+```
+
+支持：
+
+> 不确定越高、可逆性越低，行动前越需要保守地处理未知。
+
+---
+
+# 20. `profileConsumer`
+
+Profile 可以帮助理解：
+
+```
+toleranceForChange
+adaptationPattern
+stabilityPreference
+riskExperience
+```
+
+但只能作为：
+
+```
+PERSONAL_TOLERANCE_CONTEXT
+```
+
+不能改变：
+
+```
+OBJECTIVE_REVERSIBILITY
+```
+
+---
+
+# 21. `financialConsumer`
+
+Financial 是 NAV-06 的核心现实来源之一。
+
+可以提供：
+
+```
+exitCost
+cashRunway
+liquidityAfterAction
+debtLockIn
+assetIlliquidity
+recoveryCapacity
+```
+
+例如：
+
+```
+quit job
+```
+
+在：
+
+```
+12 months liquidity
+```
+
+与：
+
+```
+1 month liquidity
+```
+
+的现实可恢复性显著不同。
+
+---
+
+# 22. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+只可以提供：
+
+```
+INTERPRETIVE_CONTEXT
+```
+
+不得建立：
+
+```
+exit feasibility
+recovery time
+future opportunity certainty
+```
+
+---
+
+# 23. `currentRealityConsumer`
+
+Current Reality 可提供：
+
+```
+whatCanCurrentlyBeUndone
+whatHasAlreadyLockedIn
+whatExitRoutesExist
+whatRecoveryResourcesExist
+```
+
+并必须保留：
+
+```
+verified
+reported
+unknown
+```
+
+---
+
+# 24. `runtimeConsumer`
+
+NAV-06 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+高影响且低可逆性的路径，应允许 downstream：
+
+```
+professional escalation
+```
+
+---
+
+# 25. `academyConsumer`
+
+Academy 可以投影为：
+
+> **Before asking whether an option is good, ask what happens if it is wrong.**
+
+中文：
+
+> **在问一个选择好不好以前，先问：如果判断错了，我们还能怎样回来？**
+
+教学可比较：
+
+```
+Trial
+Pilot
+Commitment
+Lock-in
+Exit
+Recovery
+```
+
+但不公开完整 threshold logic。
+
+---
+
+# 26. `revisionTriggers`
+
+以下情况必须重新判断可逆性：
+
+```
+newContractSigned
+newCapitalCommitted
+newDependant
+newDebt
+newConsent
+newLegalCondition
+newExitOption
+newProfessionalInput
+newRecoveryResource
+timePassed
+pilotExpanded
+relationshipCommitmentDeepened
+```
+
+---
+
+# 27. Canonical Reversibility Model
+
+建议：
+
+```
+{
+  "actionId": "",
+  "overallReversibility": "HIGHLY_REVERSIBLE | REVERSIBLE_WITH_COST | PARTIALLY_REVERSIBLE | LOW_REVERSIBILITY | EFFECTIVELY_IRREVERSIBLE | REVERSIBILITY_UNKNOWN",
+  "dimensions": {
+    "legal": "",
+    "financial": "",
+    "operational": "",
+    "relational": "",
+    "temporal": "",
+    "optionSpace": ""
+  },
+  "exitRoutes": [],
+  "exitCosts": [],
+  "residualEffects": [],
+  "recoveryConditions": [],
+  "unknowns": [],
+  "sources": [],
+  "asOf": ""
+}
+```
+
+---
+
+# 28. Exit Route Rule
+
+任何重要行动，如果可以合法建立 exit route，Navigation 应显式保留：
+
+```
+EXIT_ROUTE
+```
+
+例如：
+
+```
+trial period
+notice clause
+stop-loss condition
+pause point
+rollback procedure
+```
+
+但：
+
+> **存在退出路线，不等于退出路线现实可用。**
+
+必须检查实际条件。
+
+---
+
+# 29. Recovery Rule
+
+退出之后还必须问：
+
+```
+what state can realistically be recovered?
+```
+
+例如：
+
+```
+business closes
+```
+
+能恢复的可能是：
+
+```
+cash preservation
+employment re-entry
+operational stability
+```
+
+而不是：
+
+```
+all prior money and time
+```
+
+---
+
+# 30. Residual Effect Rule
+
+一个行动即使撤回，仍可能留下：
+
+```
+financial residue
+relationship residue
+legal residue
+reputation residue
+time loss
+identity impact
+```
+
+因此：
+
+```
+rollback
+≠
+full restoration
+```
+
+---
+
+# 31. Minimum Reversible Action Rule
+
+当：
+
+```
+uncertainty high
+```
+
+且存在合法的较小行动时，Navigation 可以生成：
+
+```
+MORE_REVERSIBLE_VARIANT_AVAILABLE
+```
+
+例如：
+
+```
+full move
+→ temporary stay first
+
+full business launch
+→ pilot
+
+full resignation
+→ internal transfer / leave / side test
+```
+
+但这只是候选，不是系统推荐。
+
+---
+
+# 32. Irreversibility Escalation Rule
+
+如果同时满足：
+
+```
+LOW_REVERSIBILITY
++
+HIGH_IMPACT
++
+MATERIAL_UNKNOWN
+```
+
+必须产生：
+
+```
+ESCALATION_REQUIRED
+```
+
+可能需要：
+
+```
+professional advice
+legal review
+financial review
+medical review
+shared decision consent
+```
+
+具体专业类型由问题域决定。
+
+---
+
+# 33. Reversibility and Other People
+
+如果行动影响他人：
+
+```
+child
+partner
+employee
+dependant
+co-owner
+```
+
+不能只评估“对用户本人是否可逆”。
+
+必须增加：
+
+```
+OTHER_PARTY_REVERSIBILITY
+```
+
+例如：
+
+客户可以搬回来，
+
+但孩子：
+
+```
+school disruption
+```
+
+未必可完全恢复。
+
+---
+
+# 34. Customer Projection Example
+
+内部：
+
+```
+Option:
+Quit immediately
+
+Reversibility:
+PARTIALLY_REVERSIBLE
+
+Exit from action:
+Can seek employment again
+
+Residual effects:
+income gap
+benefit interruption
+career transition cost
+
+Recovery:
+requires liquidity + job re-entry
+
+Unknown:
+re-entry time
+```
+
+客户可看到：
+
+> **这个选择不是完全不可回头，但也不是按下撤销键就能恢复原状。**
+> 
+> 你以后仍然可以重新就业，因此它并非绝对不可逆；但收入中断、福利连续性、重新求职所需时间，以及职业路径变化都可能留下残余影响。换句话说，真正需要判断的不是“以后还能不能找工作”，而是“如果这次离开没有按预期发展，你是否有足够资源支撑恢复过程”。
+
+---
+
+# 35. Customer Actions
+
+允许：
+
+```
+Review exit route
+Add recovery resource
+Compare smaller step
+Correct reversibility
+Request professional review
+Continue
+```
+
+---
+
+# 36. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+SUFFICIENT_FOR_THRESHOLDING
+REVERSIBILITY_UNKNOWN
+ESCALATION_REQUIRED
+REOPENED
+```
+
+---
+
+# 37. Fail-Closed Conditions
+
+以下情况不得进入 NAV-07：
+
+```
+criticalExitTermsUnknown
+irreversibleImpactUnverified
+recoveryCapacityFabricated
+symbolicReadingUsedAsRecoveryAuthority
+legalReversibilityAssumed
+financialReversibilityStale
+affectedPartiesIgnored
+decisionObjectChanged
+```
+
+---
+
+# 38. Canonical Runtime Rule
+
+> **Navigation must evaluate how much of an action can be undone, what cannot be restored, and what recovery would require before treating that action as decision-ready.**
+
+中文：
+
+> **Navigation 在把一个行动视为可进入决定以前，必须先判断其中多少能够撤回、什么无法恢复，以及如果判断错误，恢复需要什么条件。**
+
+---
+
+# 39. Canonical Threshold Rule
+
+> **The less reversible an action is, the more decision sufficiency is required before action; reversibility does not eliminate the need to consider impact or responsibility.**
+
+中文：
+
+> **一个行动越难撤回，行动以前所需要的决策充分程度就越高；但可逆性本身并不能取代对影响与责任的判断。**
+
+---
+
+# 40. Canonical Experiment Rule
+
+> **When uncertainty is high and a materially more reversible path exists, Navigation may expose the smaller path as an option for learning without treating it as the preferred answer.**
+
+中文：
+
+> **当未知较高，而现实中存在明显更可逆的小范围路径时，Navigation 可以把它作为获取现实反馈的候选，却不能因此把它自动设为首选答案。**
+
+---
+
+# 41. Canonical Restoration Rule
+
+> **Reversal is not restoration. Returning from an action may stop further consequences without recovering everything that has already changed.**
+
+中文：
+
+> **撤回不等于恢复原状；停止一个行动，可以阻止后果继续扩大，却未必能够取回已经改变的部分。**
+
+---
+
+# 42. Final Canonical Form
+
+```
+NAV-06
+REVERSIBILITY
+```
+
+**Input**
+
+```
+Candidate Action
++
+Current Position
++
+Exit / Recovery Conditions
+```
+
+**Process**
+
+```
+Assess:
+Can It Be Reversed?
+At What Cost?
+What Remains Changed?
+What Recovery Requires?
+Who Else Is Affected?
+```
+
+**Output**
+
+```
+Reversibility Profile
+```
+
+**Boundary**
+
+```
+Reversible does not mean safe.
+Irreversible does not mean forbidden.
+```
+
+# NAV-07｜Time Horizon
+
+## 时间尺度｜我们究竟在决定多远的未来
+
+**Canonical Question｜规范问题**
+
+> **为什么眼前、几年以后与长期未来不能被压成同一个目标？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-07
+```
+
+## 2. `canonicalTitleZh`
+
+```
+时间尺度
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Time Horizon
+```
+
+## 4. `canonicalQuestion`
+
+```
+为什么眼前、几年以后与长期未来不能被压成同一个目标？
+```
+
+---
+
+# 5. `definition`
+
+**Time Horizon** 是 Navigation 对“一个决定究竟正在影响多远的未来”进行正式分层的机制。
+
+它不是简单区分：
+
+```
+short term
+medium term
+long term
+```
+
+也不是要求客户优先考虑长期利益。
+
+它真正回答的是：
+
+> **这个决定会在什么时间尺度上产生价值、成本、锁定、责任与机会，而不同时间尺度之间是否正在互相冲突？**
+
+例如：
+
+```
+接受更高薪但高强度的工作
+```
+
+可能在：
+
+```
+0–12 months
+```
+
+带来：
+
+```
+higher income
+debt repayment
+cash accumulation
+```
+
+但在：
+
+```
+3–5 years
+```
+
+可能同时影响：
+
+```
+health capacity
+family time
+skill development
+career optionality
+```
+
+因此：
+
+> **NAV-07 不寻找“最长远的答案”，而是阻止一个时间尺度上的收益偷偷代表所有未来。**
+
+---
+
+# 6. `navigationMeaning`
+
+一个方案可能：
+
+```
+SHORT_TERM_STRONG
+LONG_TERM_WEAK
+```
+
+也可能：
+
+```
+SHORT_TERM_COSTLY
+LONG_TERM_CAPACITY_BUILDING
+```
+
+如果 Navigation 只看单一时间层，就很容易产生错误比较。
+
+例如：
+
+```
+Option A:
+立即增加收入
+
+Option B:
+暂时减少收入，建立新能力
+```
+
+如果只看：
+
+```
+next 3 months
+```
+
+A 可能明显更好。
+
+如果只看：
+
+```
+next 10 years
+```
+
+B 可能更有价值。
+
+但真正的 Navigation 必须继续问：
+
+```
+客户能不能撑过 B 的前 12 个月？
+```
+
+所以：
+
+> **短期现实资格与长期方向价值必须同时成立，不能互相替代。**
+
+---
+
+# 7. `requiredInputs`
+
+NAV-07 最低需要：
+
+```
+confirmedDecisionObject
+currentPosition
+remainingChoiceSpace
+timeAssessment
+reversibilityProfile
+candidateOptions
+```
+
+以及至少一个：
+
+```
+userRelevantHorizon
+```
+
+如果客户没有表达时间尺度，系统可以提出候选，但不得自行锁定。
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialGoals
+careerGoals
+familyLifecycle
+dependantTimeline
+educationTimeline
+retirementHorizon
+relationshipCommitments
+professionalInput
+currentExternalEvidence
+priorNavigationState
+knownFutureCommitments
+```
+
+这些只在它们与当前 Decision Object 有直接关系时进入。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+CONTRACTUAL_RECORD
+PROFESSIONAL_INPUT
+CURRENT_EXTERNAL_EVIDENCE
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但未来时间层中的内容必须区分：
+
+```
+KNOWN_FUTURE_COMMITMENT
+PROJECTED_FUTURE_CONDITION
+SCENARIO_ASSUMPTION
+INTERPRETIVE_CONTEXT
+UNKNOWN
+```
+
+例如：
+
+```
+孩子两年后进入小学
+```
+
+如果已知年龄与计划，可以属于：
+
+```
+KNOWN_FUTURE_COMMITMENT
+```
+
+而：
+
+```
+两年后一定升职
+```
+
+只能是：
+
+```
+SCENARIO_ASSUMPTION
+```
+
+---
+
+# 10. Core Horizon Classes
+
+建议至少区分：
+
+```
+IMMEDIATE
+NEAR_TERM
+MEDIUM_TERM
+LONG_TERM
+INTERGENERATIONAL_OR_LEGACY
+HORIZON_UNDEFINED
+```
+
+不必硬编码全球统一年数。
+
+但默认参考可以是：
+
+```
+IMMEDIATE:
+days to weeks
+
+NEAR_TERM:
+months to ~1 year
+
+MEDIUM_TERM:
+~1–5 years
+
+LONG_TERM:
+5+ years
+
+INTERGENERATIONAL_OR_LEGACY:
+beyond the user's direct operating horizon
+```
+
+这些只是 UI / runtime reference，不是不可变规则。
+
+---
+
+# 11. `allowedInference`
+
+NAV-07 可以：
+
+## A. 识别同一个方案在不同时间尺度上的结果不同
+
+例如：
+
+```
+reduce working hours
+```
+
+可能：
+
+```
+Immediate:
+lower income
+
+Medium:
+higher recovery capacity
+
+Long:
+greater career sustainability
+```
+
+---
+
+## B. 识别短期收益正在消耗未来选择
+
+例如：
+
+```
+use all emergency savings
+to preserve current lifestyle
+```
+
+短期：
+
+```
+maintains current consumption
+```
+
+长期：
+
+```
+reduces financial optionality
+```
+
+---
+
+## C. 识别短期成本可能是在建立长期能力
+
+例如：
+
+```
+training
+education
+system migration
+process redesign
+```
+
+但必须有现实路径支持。
+
+不能因为“长期可能有回报”就自动合理化高成本。
+
+---
+
+## D. 识别某些目标本身只属于某个时间尺度
+
+例如：
+
+```
+survive next 3 months
+```
+
+与：
+
+```
+build retirement security
+```
+
+不是同一个目标。
+
+---
+
+## E. 识别不同时间尺度之间发生冲突
+
+例如：
+
+```
+financial stability now
+vs
+career freedom later
+```
+
+系统可以标记：
+
+```
+HORIZON_CONFLICT
+```
+
+但不能自动决定哪个优先。
+
+---
+
+# 12. `forbiddenInference`
+
+NAV-07 严禁：
+
+## A. 把长期自动当成更高级
+
+禁止：
+
+```
+long-term
+>
+short-term
+```
+
+如果客户当前连短期安全都无法维持，长期方案可能没有现实资格。
+
+---
+
+## B. 把短期需求自动解释成缺乏规划
+
+例如：
+
+```
+需要马上增加收入
+```
+
+可能只是当前现实需要。
+
+---
+
+## C. 把远期预测当确定未来
+
+禁止：
+
+```
+10年后行业一定怎样
+```
+
+除非属于已知合同或确定制度条件。
+
+---
+
+## D. 用 Method Reading 定义未来时间层
+
+禁止：
+
+```
+八字说未来十年很好
+→ long-term option value high
+```
+
+---
+
+## E. 把“以后再处理”视为没有代价
+
+延期仍可能改变未来选项。
+
+---
+
+## F. 把“长期有价值”当作“今天就应行动”
+
+未来价值与当前 readiness 必须分开。
+
+---
+
+# 13. `decisionEffect`
+
+NAV-07 可以影响：
+
+```
+OPTION_WEIGHT
+OPTION_ELIGIBILITY
+ACTION_SCALE
+WAIT_ACT_BALANCE
+DECISION_THRESHOLD
+VALUE_PRESERVATION
+```
+
+其核心 effect：
+
+```
+HORIZON_BALANCING
+```
+
+---
+
+# 14. `decisionThresholdEffect`
+
+时间尺度越长：
+
+```
+forecast uncertainty usually increases
+```
+
+因此不应该因为“这是长期规划”就假装未来更可知。
+
+原则：
+
+> **Longer horizon increases the need for flexibility, not false certainty.**
+
+中文：
+
+> **时间尺度越长，越需要保留调整空间，而不是制造更强的确定感。**
+
+同时：
+
+如果一个决定会长期锁定：
+
+```
+capital
+location
+relationship
+career identity
+debt
+```
+
+那么后续 threshold 需要结合 NAV-06 可逆性提高。
+
+---
+
+# 15. `authorityBoundary`
+
+NAV-07 可以：
+
+- 分开短中长期；
+- 比较不同时间尺度的收益与代价；
+- 暴露时间尺度冲突；
+- 标记长期锁定；
+- 识别短期生存条件；
+- 识别未来选择空间变化。
+
+NAV-07 不可以：
+
+- 强迫客户牺牲现在换未来；
+- 强迫客户牺牲未来换现在；
+- 预测远期结果；
+- 把长期愿景变成事实；
+- 把未来计划伪装成当前资源。
+
+---
+
+# 16. `humanDecisionBoundary`
+
+用户必须能够表达：
+
+```
+what matters now
+what must be built next
+what future they do not want to close
+```
+
+Navigation 可以帮助显化冲突，但价值排序必须由用户确认。
+
+例如：
+
+```
+“这份工作未来机会很好，
+但我现在最重要的是陪伴孩子。”
+```
+
+系统不得自动认为：
+
+```
+career growth should override family time
+```
+
+也不能反过来。
+
+---
+
+# 17. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.9｜我们究竟在决定多远的未来
+```
+
+相关：
+
+```
+15.6｜时间已经进入决定
+15.8｜能不能回头，会改变决定本身
+15.27｜今天得到的东西，会不会关闭明天
+15.33｜先建立基线情景
+15.37｜延迟也是一条路径
+```
+
+---
+
+# 18. `relatedBookFoundations`
+
+## Book II｜Reality Runtime
+
+提供：
+
+```
+人如何在不同时间要求之间分配注意与行动
+```
+
+NAV-07 不重新解释内部时间运行机制。
+
+---
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+long-term maintenance
+sustainability
+recovery
+continuity
+```
+
+支持判断某路径是否只是短期可撑。
+
+---
+
+## Book IV｜Reality Expansion
+
+提供：
+
+```
+capacity growth
+scale
+future capability
+```
+
+但 NAV-07 不重新讲扩展机制。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+future uncertainty
+projection boundary
+```
+
+支持：
+
+> 越远的未来，越不能把 scenario 当 evidence。
+
+---
+
+# 19. `profileConsumer`
+
+Profile 可以帮助理解：
+
+```
+futureOrientation
+stabilityPreference
+autonomyPreference
+growthPreference
+```
+
+但只能作为：
+
+```
+VALUE_AND_TENDENCY_CONTEXT
+```
+
+不能替用户决定未来时间权重。
+
+---
+
+# 20. `financialConsumer`
+
+Financial 对 NAV-07 非常重要。
+
+可以提供：
+
+```
+cash runway
+shortTermObligations
+mediumTermGoals
+retirementNeeds
+debtMaturity
+educationFunding
+insuranceContinuity
+estateCommitments
+```
+
+并帮助区分：
+
+```
+current affordability
+vs
+long-term sustainability
+```
+
+---
+
+# 21. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+可提供：
+
+```
+INTERPRETIVE_HORIZON_CONTEXT
+```
+
+但不得：
+
+```
+predict actual long-term outcome
+assign time horizon priority
+override financial or material reality
+```
+
+---
+
+# 22. `currentRealityConsumer`
+
+Current Reality 可提供：
+
+```
+currentUrgency
+recentChange
+nearTermCommitments
+knownUpcomingEvents
+```
+
+帮助确定：
+
+```
+which horizons materially matter now
+```
+
+---
+
+# 23. `runtimeConsumer`
+
+NAV-07 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+---
+
+# 24. `academyConsumer`
+
+Academy 可投影为：
+
+> **A good decision must know which future it is trying to protect.**
+
+中文：
+
+> **一个成熟决定，必须知道自己正在保护哪一个未来。**
+
+教学可比较：
+
+```
+Now
+Next
+Later
+```
+
+并强调：
+
+```
+short-term optimal
+≠
+long-term optimal
+```
+
+---
+
+# 25. `revisionTriggers`
+
+以下情况必须重开 NAV-07：
+
+```
+newDependant
+newDebt
+newCareerStage
+retirementHorizonChanged
+familyLifecycleChanged
+locationChanged
+majorHealthCapacityChange
+newFinancialGoal
+newProfessionalInput
+newLongTermCommitment
+userChangesPriority
+majorExternalChange
+```
+
+---
+
+# 26. Canonical Horizon Model
+
+建议：
+
+```
+{
+  "horizonId": "",
+  "type": "IMMEDIATE | NEAR_TERM | MEDIUM_TERM | LONG_TERM | INTERGENERATIONAL_OR_LEGACY | HORIZON_UNDEFINED",
+  "decisionRelevance": "",
+  "goals": [],
+  "constraints": [],
+  "expectedBenefits": [],
+  "expectedCosts": [],
+  "lockedOptions": [],
+  "preservedOptions": [],
+  "unknowns": [],
+  "sources": []
+}
+```
+
+---
+
+# 27. Horizon Conflict Model
+
+建议额外维护：
+
+```
+HORIZON_CONFLICT
+```
+
+例如：
+
+```
+Immediate:
+Need income stability
+
+Medium:
+Need skill transition
+
+Long:
+Want location freedom
+```
+
+Navigation 需要保持冲突可见。
+
+不能为了生成简单答案，把三个 horizon 压成一个数字。
+
+---
+
+# 28. Immediate Survival Rule
+
+如果：
+
+```
+basic safety
+housing
+food
+medical need
+critical cash flow
+```
+
+受到威胁，
+
+则：
+
+```
+IMMEDIATE
+```
+
+可以临时取得更高 priority。
+
+但这不等于长期目标被删除。
+
+应：
+
+```
+defer
+not erase
+```
+
+---
+
+# 29. Future Option Preservation Rule
+
+Navigation 必须关注：
+
+```
+what today's decision closes tomorrow
+```
+
+例如：
+
+```
+large irreversible debt
+```
+
+可能减少：
+
+```
+career mobility
+location mobility
+future capital flexibility
+```
+
+这必须进入 horizon analysis。
+
+---
+
+# 30. Delayed Reward Rule
+
+如果一个方案的收益主要在未来：
+
+```
+training
+education
+system redesign
+```
+
+必须同时检查：
+
+```
+can current position sustain the delay?
+```
+
+不能只写：
+
+```
+worth it long term
+```
+
+---
+
+# 31. Delayed Cost Rule
+
+同样：
+
+```
+benefit now
+cost later
+```
+
+必须显式标出。
+
+例如：
+
+```
+high income
++
+chronic workload
+```
+
+不能只呈现今天的收入。
+
+---
+
+# 32. Horizon Weight Rule
+
+禁止系统偷偷建立统一权重。
+
+例如：
+
+```
+Immediate = 20%
+Medium = 30%
+Long = 50%
+```
+
+除非用户明确设定。
+
+默认应显示：
+
+```
+separate horizon consequences
+```
+
+而不是自动汇总成一个总分。
+
+---
+
+# 33. Time Horizon and Reversibility
+
+NAV-07 必须读取 NAV-06。
+
+一个长期影响但高度可逆的决定，与：
+
+```
+long-term + low reversibility
+```
+
+完全不同。
+
+因此：
+
+```
+Long Horizon
++
+Low Reversibility
++
+High Impact
+```
+
+应在后续提高 Decision Sufficiency。
+
+---
+
+# 34. Time Horizon and Inaction
+
+NAV-07 也必须读取 NAV-05。
+
+例如：
+
+```
+do nothing now
+```
+
+短期可能保留稳定，
+
+长期却可能：
+
+```
+reduce career options
+increase debt
+lose time window
+```
+
+因此 Inaction 也必须跨 horizon 比较。
+
+---
+
+# 35. Customer Projection Example
+
+内部：
+
+```
+Immediate:
+preserve income
+
+Medium:
+build transferable skill
+
+Long:
+retain location and career flexibility
+```
+
+客户可看到：
+
+> **这个决定同时影响三个不同的未来。**
+> 
+> 眼前六个月，最重要的是收入和现金流不能突然失去；未来两三年，你真正需要建立的是可以离开当前结构而仍然维持收入的能力；更长时间来看，你希望保留职业与居住选择，而不是让今天的决定把未来全部锁死。
+> 
+> 这意味着，单纯问“哪一个选择收入最高”不足以回答现在的问题，因为最高的短期收入未必保留最大的长期空间，而最理想的长期方向也未必能够由你当前的资源立即承受。
+
+---
+
+# 36. Customer Actions
+
+允许：
+
+```
+Confirm horizons
+Change priority
+Add future commitment
+Add long-term goal
+Compare horizon effects
+Continue
+```
+
+---
+
+# 37. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+SUFFICIENT_FOR_HORIZON_COMPARISON
+HORIZON_CONFLICT
+HORIZON_UNDEFINED
+REOPENED
+```
+
+---
+
+# 38. Fail-Closed Conditions
+
+以下情况不得进入 NAV-08：
+
+```
+criticalHorizonUndefined
+futureAssumptionPresentedAsFact
+longTermProjectionUnsupported
+currentSurvivalConstraintIgnored
+reversibilityProfileMissingForLongLockIn
+userPrioritySilentlyInferred
+decisionObjectChanged
+```
+
+---
+
+# 39. Canonical Runtime Rule
+
+> **Navigation must distinguish the futures a decision affects before treating short-term benefit, medium-term development, or long-term preservation as equivalent.**
+
+中文：
+
+> **Navigation 在比较决定以前，必须先区分这个决定正在影响哪些不同时间尺度的未来，不能把短期收益、中期发展与长期保留压成同一种价值。**
+
+---
+
+# 40. Canonical Present-Future Rule
+
+> **The present cannot be sacrificed indefinitely for the future, and the future cannot be silently consumed to preserve the present.**
+
+中文：
+
+> **现在不能被无限期牺牲给未来，未来也不能在维持眼前时被悄悄耗尽。**
+
+---
+
+# 41. Canonical Projection Rule
+
+> **The farther the horizon, the more Navigation must preserve uncertainty and adaptability rather than increase certainty claims.**
+
+中文：
+
+> **时间尺度越远，Navigation 越应该保留未知与调整空间，而不是增强确定性声明。**
+
+---
+
+# 42. Canonical Option-Space Rule
+
+> **A strong option is not only one that produces value now, but one whose present value does not unnecessarily destroy future choice.**
+
+中文：
+
+> **一个有现实资格的好选项，不只要能在现在产生价值，也不应为了眼前收益而不必要地摧毁未来选择。**
+
+---
+
+# 43. Final Canonical Form
+
+```
+NAV-07
+TIME HORIZON
+```
+
+**Input**
+
+```
+Current Position
++
+Reversibility Profile
++
+Decision-Relevant Futures
+```
+
+**Process**
+
+```
+Separate:
+Immediate
+Near-Term
+Medium-Term
+Long-Term
+Legacy / Intergenerational
+```
+
+**Output**
+
+```
+Multi-Horizon Decision Map
+```
+
+**Boundary**
+
+```
+Short-term does not equal shallow.
+Long-term does not equal superior.
+```
+# NAV-08｜Navigation Authority
+
+## 导航权威边界｜导航不会替你活
+
+**Canonical Question｜规范问题**
+
+> **一个导航系统究竟可以做到哪里，又必须在哪里停止？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-08
+```
+
+## 2. `canonicalTitleZh`
+
+```
+导航权威边界
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Navigation Authority
+```
+
+## 4. `canonicalQuestion`
+
+```
+一个导航系统究竟可以做到哪里，又必须在哪里停止？
+```
+
+---
+
+# 5. `definition`
+
+**Navigation Authority** 是 PHI OS 对“系统能够参与决定到什么程度”的正式边界。
+
+它不是一般性的 AI disclaimer，也不是一句简单的：
+
+```
+最终决定由用户负责
+```
+
+而是要明确区分：
+
+```
+系统可以组织什么
+系统可以比较什么
+系统可以推断什么
+系统可以建议到哪里
+系统什么时候必须停止
+系统什么时候必须升级给专业人士、共同决策者或真正拥有决定权的人
+```
+
+Navigation 可以：
+
+- 建立 Decision Object；
+- 重构 Current Position；
+- 区分 Closed / Open Conditions；
+- 比较时间与可逆性；
+- 组织 options；
+- 暴露 constraints；
+- 显示 evidence / unknown；
+- 比较 consequences；
+- 提出更可逆的候选动作；
+- 指出哪些信息会改变判断；
+- 识别需要专业核验或共同同意的地方。
+
+但它不能因为掌握：
+
+```
+更多数据
+更多报告
+更多模型
+更强计算
+更完整 Profile
+更多历史
+```
+
+就自动取得：
+
+```
+LIFE_DECISION_OWNERSHIP
+```
+
+因此：
+
+> **NAV-08 定义的不是系统“能不能给建议”，而是任何建议都必须停留在不夺走人类决定权的位置。**
+
+---
+
+# 6. `navigationMeaning`
+
+前面的 NAV-01–07 已经让 Navigation 逐渐形成一个很强的能力：
+
+```
+知道正在决定什么
+知道用户站在哪里
+知道什么已关闭
+知道什么仍开放
+知道时间如何改变问题
+知道不行动会发生什么
+知道行动是否可逆
+知道这个决定影响多远的未来
+```
+
+如果没有 NAV-08，这些能力越强，风险反而越大，因为系统很容易从：
+
+```
+better understanding
+```
+
+越界到：
+
+```
+decision substitution
+```
+
+例如：
+
+```
+Current Position shows low liquidity
++
+Profile shows high autonomy need
++
+BaZi shows timing pressure
++
+Tarot shows transition
+```
+
+系统绝不能因此输出：
+
+> “所以你应该辞职。”
+
+真正合法的输出只能是：
+
+> “当前离职路径的现实门槛较高；如果自主性仍是你想保护的价值，可以比较更可逆的路径，例如先建立替代收入、内部调岗或缩小现有负荷。”
+
+也就是说：
+
+> **Navigation 的作用是提高决定质量，不是取得决定所有权。**
+
+---
+
+# 7. `requiredInputs`
+
+NAV-08 最低需要：
+
+```
+confirmedDecisionObject
+currentPosition
+remainingChoiceSpace
+timeAssessment
+inactionAssessment
+reversibilityProfile
+timeHorizonMap
+decisionOwner
+affectedParties
+decisionDomain
+```
+
+如果：
+
+```
+decisionOwner
+```
+
+不明确，则不得进入下一阶段。
+
+---
+
+# 8. `optionalInputs`
+
+```
+professionalAuthorityContext
+relationshipConsentContext
+legalAuthorityContext
+financialProfessionalContext
+medicalProfessionalContext
+organizationalAuthorityContext
+guardianOrRepresentativeContext
+institutionalRules
+accountEntitlements
+priorNavigationState
+```
+
+这些用于判断：
+
+- 谁拥有决定权；
+- 谁必须参与；
+- 谁可以提供专业意见；
+- 谁不能被系统代替。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+VERIFIED_IDENTITY
+VERIFIED_ROLE
+PROFESSIONAL_INPUT
+LEGAL_OR_CONTRACTUAL_RECORD
+ORGANIZATIONAL_AUTHORITY
+CONSENT_RECORD
+CURRENT_EXTERNAL_EVIDENCE
+REPORT_INTERPRETATION
+PROFILE_EVIDENCE
+SYMBOLIC_READING
+```
+
+但只有某些来源能够建立：
+
+```
+FORMAL_DECISION_AUTHORITY
+```
+
+例如：
+
+```
+verified user ownership
+legal guardian role
+professional licence / role
+organizational assignment
+contractual authority
+valid consent
+```
+
+Profile、BaZi、Tarot、I Ching 永远不能建立决定权。
+
+---
+
+# 10. Core Authority Classes
+
+建议 runtime 至少区分：
+
+```
+USER_DECISION_OWNER
+SHARED_DECISION
+PROFESSIONAL_ADVISORY
+PROFESSIONAL_REQUIRED
+REPRESENTATIVE_DECISION
+INSTITUTIONAL_AUTHORITY
+CONSENT_REQUIRED
+NAVIGATION_SUPPORT_ONLY
+AUTHORITY_UNKNOWN
+```
+
+---
+
+## A. `USER_DECISION_OWNER`
+
+决定主要属于用户本人。
+
+例如：
+
+```
+职业方向
+个人学习计划
+个人生活节奏
+非共同财务范围内的个人选择
+```
+
+系统可以帮助比较，但最终选择属于用户。
+
+---
+
+## B. `SHARED_DECISION`
+
+决定影响多个拥有真实利益与权利的人。
+
+例如：
+
+```
+家庭搬迁
+共同资产
+关系结构
+共同育儿安排
+公司合伙决策
+```
+
+系统不能把一个人的 preference 当成全部人的决定。
+
+---
+
+## C. `PROFESSIONAL_ADVISORY`
+
+用户仍拥有最终决定权，但需要专业意见显著提高判断质量。
+
+例如：
+
+```
+复杂财务规划
+税务安排
+某些法律安排
+复杂职业转型
+```
+
+---
+
+## D. `PROFESSIONAL_REQUIRED`
+
+某些行动在进入现实以前必须经过有资格专业人士。
+
+例如：
+
+```
+某些医疗程序
+正式法律文件
+受监管财务行为
+专业签署
+```
+
+系统不得绕过。
+
+---
+
+## E. `REPRESENTATIVE_DECISION`
+
+当本人无法完整表达或承担决定时：
+
+```
+minor
+dependent
+incapacitated person
+```
+
+可能需要合法代表。
+
+Navigation 必须区分：
+
+```
+representing interests
+≠
+projecting hidden preference
+```
+
+---
+
+## F. `INSTITUTIONAL_AUTHORITY`
+
+组织、学校、公司、政府或制度可能拥有某些正式决定权。
+
+但 authority 必须具体、可验证、有限。
+
+不能因为：
+
+```
+institution exists
+```
+
+就推定其拥有无限决定权。
+
+---
+
+## G. `CONSENT_REQUIRED`
+
+某些决定如果缺少相关方真实同意，就不能继续。
+
+例如：
+
+```
+relationship sharing
+data sharing
+joint decision
+professional handoff
+certain interventions
+```
+
+---
+
+## H. `NAVIGATION_SUPPORT_ONLY`
+
+系统只能：
+
+```
+organize
+compare
+surface
+clarify
+```
+
+不能作决定。
+
+这是 PHI OS 默认位置。
+
+---
+
+# 11. `allowedInference`
+
+NAV-08 可以：
+
+## A. 判断决定是否已经超出单人范围
+
+例如：
+
+```
+family relocation
+```
+
+可识别为：
+
+```
+SHARED_DECISION
+```
+
+因为它影响伴侣、孩子、照护安排等。
+
+---
+
+## B. 识别需要专业核验的部分
+
+例如：
+
+```
+estate arrangement
+```
+
+可提示：
+
+```
+legal review required before execution
+```
+
+---
+
+## C. 识别同意缺失
+
+例如：
+
+```
+relationship comparison using Person B private data
+```
+
+可以标记：
+
+```
+CONSENT_REQUIRED
+```
+
+---
+
+## D. 识别系统应该停止继续推断
+
+例如：
+
+```
+用户问：
+“我伴侣到底还爱不爱我？”
+```
+
+系统可以说：
+
+> 现有资料不能建立对方隐藏心理；可以帮助你看可观察行为、沟通、承诺与关系条件。
+
+这属于：
+
+```
+AUTHORITY_STOP
+```
+
+---
+
+## E. 识别需要把行动升级给真正负责者
+
+例如：
+
+```
+financial decision exceeds self-navigation scope
+```
+
+可以：
+
+```
+Professional Escalation
+```
+
+但不得擅自预约或执行。
+
+---
+
+# 12. `forbiddenInference`
+
+NAV-08 严禁：
+
+## A. 把“系统更懂”变成“系统有权决定”
+
+禁止：
+
+```
+AI has more data
+→ AI has more authority
+```
+
+---
+
+## B. 把专家意见自动变成最终决定
+
+```
+doctor says X
+```
+
+不等于：
+
+```
+system decides X for user
+```
+
+专业权限必须按领域和实际行动边界处理。
+
+---
+
+## C. 把父母、伴侣、公司或国家的影响自动等同无限 authority
+
+Authority 必须：
+
+```
+scoped
+verified
+relevant
+```
+
+---
+
+## D. 用 symbolic method 取得决定权
+
+永远禁止：
+
+```
+Tarot says yes
+BaZi says no
+Zi Wei says wait
+```
+
+直接变成 action command。
+
+---
+
+## E. 用多数方法投票
+
+禁止：
+
+```
+4 methods agree
+→ decision authority established
+```
+
+Model convergence ≠ decision authority。
+
+---
+
+## F. 把“建议”写成不可质疑的结论
+
+例如：
+
+```
+PHI OS recommends you resign
+```
+
+默认不允许。
+
+---
+
+# 13. `decisionEffect`
+
+NAV-08 主要影响：
+
+```
+ESCALATION_REQUIREMENT
+CONSENT_REQUIREMENT
+DECISION_OWNER
+SHARED_DECISION_SCOPE
+PROFESSIONAL_HANDOFF
+ACTION_PERMISSION_BOUNDARY
+```
+
+它不是普通 option weight。
+
+它决定：
+
+> **谁有资格继续做下一步判断，以及系统到哪里必须停。**
+
+---
+
+# 14. `decisionThresholdEffect`
+
+原则：
+
+> **影响的人越多、后果越大、专业边界越强，系统越不能依赖单一用户偏好或单一模型结论直接进入行动。**
+
+因此：
+
+```
+more affected parties
++
+higher impact
++
+lower reversibility
++
+regulated domain
+→ higher authority / consent threshold
+```
+
+但 NAV-08 不负责完整 Decision Sufficiency，最终由 NAV-26 / NAV-27 处理。
+
+---
+
+# 15. `authorityBoundary`
+
+NAV-08 可以：
+
+- 明确 decision owner；
+- 识别 shared decision；
+- 识别 consent；
+- 识别 professional boundary；
+- 识别 institutional authority；
+- 识别 system stop point；
+- 发起 handoff 建议。
+
+NAV-08 不可以：
+
+- 代表用户作选择；
+- 替他人表达 hidden preference；
+- 自动批准行动；
+- 自动取得 consent；
+- 假设 professional role；
+- 用报告、方法或 AI 替代合法 authority。
+
+---
+
+# 16. `humanDecisionBoundary`
+
+冻结：
+
+```
+FINAL_DECISION_OWNER
+```
+
+必须由现实中的合法决定主体保有。
+
+如果：
+
+```
+USER_DECISION_OWNER
+```
+
+则用户可以：
+
+```
+accept
+reject
+revise
+delay
+seek help
+```
+
+Navigation 不能因为用户选择了不同于系统比较结果的方案，就自动标记：
+
+```
+WRONG
+```
+
+系统可以提示：
+
+```
+known consequences
+unknowns
+threshold concerns
+```
+
+但不能夺取 agency。
+
+---
+
+# 17. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.10｜导航不会替你活
+```
+
+相关：
+
+```
+15.47｜影响别人，会改变你的决定权
+15.49｜什么时候必须把决定升级给别人
+15.61–15.70｜谁有权一起决定
+```
+
+---
+
+# 18. `relatedBookFoundations`
+
+## Book II｜Reality Runtime
+
+提供：
+
+```
+agency
+choice
+responsibility
+```
+
+但 NAV-08 不重新解释 agency formation。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+observer authority
+professional authority boundary
+interpretation limit
+```
+
+尤其继承：
+
+> **读取强度不等于证据权威。**
+
+并扩展为：
+
+> **证据权威也不自动等于决定权威。**
+
+---
+
+# 19. `profileConsumer`
+
+Profile 不拥有 decision authority。
+
+它可以提供：
+
+```
+preference context
+decision tendency
+friction pattern
+```
+
+但永远不能：
+
+```
+PROFILE → ACTION AUTHORITY
+```
+
+---
+
+# 20. `financialConsumer`
+
+Financial 可以显著影响 Navigation，但：
+
+```
+financial model
+≠
+financial professional authority
+```
+
+例如：
+
+```
+Financial Report
+```
+
+可以帮助比较；
+
+涉及：
+
+```
+regulated investment
+tax
+insurance
+legal structure
+```
+
+时可能需要专业升级。
+
+---
+
+# 21. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+全部：
+
+```
+NAVIGATION_SUPPORT_ONLY
+```
+
+永远不得成为：
+
+```
+DECISION_OWNER
+PROFESSIONAL_AUTHORITY
+LEGAL_AUTHORITY
+```
+
+---
+
+# 22. `currentRealityConsumer`
+
+Current Reality 可以提供：
+
+```
+facts
+reported state
+current conditions
+```
+
+但：
+
+```
+reality evidence
+```
+
+仍不等于：
+
+```
+decision authority
+```
+
+---
+
+# 23. `runtimeConsumer`
+
+NAV-08 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+Current Reality Navigation
+```
+
+所有 runtime 必须继承：
+
+```
+decisionOwner
+authorityState
+consentState
+handoffRequirement
+```
+
+---
+
+# 24. `academyConsumer`
+
+Academy 可投影为：
+
+> **Better information does not create the right to decide for someone else.**
+
+中文：
+
+> **知道得更多，并不会自动产生替别人作决定的权利。**
+
+特别适合：
+
+```
+Professional Formation
+Reality Practice
+AI Boundary
+Method-to-Reality Alignment
+```
+
+---
+
+# 25. `revisionTriggers`
+
+以下情况必须重开 NAV-08：
+
+```
+newAffectedParty
+newConsentRequirement
+decisionOwnerChanged
+professionalDomainEntered
+legalStatusChanged
+relationshipScopeChanged
+minorOrDependentInvolved
+institutionalAuthorityChanged
+newProfessionalInput
+dataSharingScopeChanged
+```
+
+---
+
+# 26. Canonical Authority Model
+
+建议：
+
+```
+{
+  "decisionObjectId": "",
+  "decisionOwner": "",
+  "authorityState": "USER_DECISION_OWNER | SHARED_DECISION | PROFESSIONAL_ADVISORY | PROFESSIONAL_REQUIRED | REPRESENTATIVE_DECISION | INSTITUTIONAL_AUTHORITY | CONSENT_REQUIRED | NAVIGATION_SUPPORT_ONLY | AUTHORITY_UNKNOWN",
+  "affectedParties": [],
+  "consentRequirements": [],
+  "professionalRequirements": [],
+  "institutionalRequirements": [],
+  "systemStopPoints": [],
+  "handoffOptions": [],
+  "sources": [],
+  "status": ""
+}
+```
+
+---
+
+# 27. Decision Owner Rule
+
+Navigation 必须明确：
+
+```
+WHO OWNS THE DECISION?
+```
+
+不能只知道：
+
+```
+who asked the question
+```
+
+因为：
+
+```
+question asker
+≠
+decision owner
+```
+
+例如：
+
+父母问：
+
+> “孩子应该选什么学校？”
+
+父母可能拥有一定决定权，但孩子的利益、年龄、意愿、制度条件也必须进入。
+
+---
+
+# 28. Shared Decision Rule
+
+如果：
+
+```
+multiple legitimate decision owners
+```
+
+则不能输出：
+
+```
+single-user final recommendation
+```
+
+应该输出：
+
+```
+shared decision conditions
+points requiring consent
+areas of disagreement
+unresolved responsibility
+```
+
+---
+
+# 29. Professional Boundary Rule
+
+当 Navigation 进入：
+
+```
+medical
+legal
+regulated financial
+high-risk professional
+```
+
+领域时，应区分：
+
+```
+information support
+vs
+professional judgment
+```
+
+系统不能模拟：
+
+```
+licensed approval
+formal diagnosis
+legal execution
+regulated advice
+```
+
+---
+
+# 30. Consent Rule
+
+Consent 必须：
+
+```
+explicit
+scope-bound
+revocable where applicable
+source-traceable
+```
+
+不能因为：
+
+```
+Person B data exists in account
+```
+
+就推定：
+
+```
+Person B consented to this use
+```
+
+---
+
+# 31. AI Authority Rule
+
+冻结：
+
+> **AI may structure evidence, compare options, surface conflicts, identify unknowns, and generate bounded candidate paths; it does not acquire ownership of the decision by doing these things well.**
+
+中文：
+
+> **AI 可以组织证据、比较选项、暴露冲突、指出未知并生成受限候选路径；即使这些事情做得很好，也不会因此取得决定所有权。**
+
+---
+
+# 32. Method Authority Rule
+
+冻结：
+
+> **A method may contribute an interpretation; it may not convert interpretation into decision authority.**
+
+中文：
+
+> **一个方法可以贡献一种解释，却不能把解释转换成决定权。**
+
+---
+
+# 33. Professional Authority Rule
+
+冻结：
+
+> **Professional expertise can narrow uncertainty and establish domain-specific requirements; it does not automatically absorb the whole person’s life decision.**
+
+中文：
+
+> **专业知识可以缩小未知、建立领域内的必要条件，却不会自动取得整个人生决定的全部权力。**
+
+---
+
+# 34. Escalation Rule
+
+如果存在：
+
+```
+AUTHORITY_UNKNOWN
+CONSENT_REQUIRED
+PROFESSIONAL_REQUIRED
+```
+
+则后续 Navigation 必须：
+
+```
+PAUSE ACTION ADVANCEMENT
+```
+
+直到对应条件得到解决。
+
+但不一定阻止：
+
+```
+information gathering
+scenario comparison
+question clarification
+```
+
+---
+
+# 35. Customer Projection Example
+
+内部：
+
+```
+Decision:
+Sell jointly owned property
+
+Authority:
+SHARED_DECISION
+
+Affected:
+User
+Partner
+
+Consent:
+Both required
+
+Professional:
+Legal / financial review may be relevant
+```
+
+客户可看到：
+
+> **这个决定并不只属于你一个人。**
+> 
+> 你可以独立澄清自己的目标、可接受价格和希望保护的条件，但共同产权意味着真正进入出售以前，还需要另一位产权人的同意；如果涉及税务、贷款解除或法律文件，也需要相应专业确认。PHI OS 可以帮助你比较不同出售路径和后果，却不能替另一位产权人同意，也不能代替正式法律或财务程序。
+
+---
+
+# 36. Customer Actions
+
+允许：
+
+```
+Confirm decision owner
+Add affected person
+Review consent
+Request professional support
+Continue analysis without action
+Correct authority
+```
+
+---
+
+# 37. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+AUTHORITY_CLEAR
+SHARED_DECISION
+CONSENT_REQUIRED
+PROFESSIONAL_REQUIRED
+AUTHORITY_UNKNOWN
+REOPENED
+```
+
+只有：
+
+```
+AUTHORITY_CLEAR
+```
+
+或合法已处理的 shared / professional state，才允许进入下一阶段。
+
+---
+
+# 38. Fail-Closed Conditions
+
+以下情况不得进入 NAV-09：
+
+```
+decisionOwnerUnknown
+affectedPartyIgnored
+consentRequiredButMissing
+professionalRequirementIgnored
+institutionalAuthorityUnverified
+methodReadingUsedAsDecisionAuthority
+AIRecommendationPresentedAsFinalDecision
+thirdPartyHiddenStateClaimed
+```
+
+---
+
+# 39. Canonical Runtime Rule
+
+> **Navigation may organize and improve a decision, but it must not silently acquire ownership of that decision.**
+
+中文：
+
+> **Navigation 可以组织并提高决定质量，却不能在过程中悄悄取得这个决定的所有权。**
+
+---
+
+# 40. Canonical Human Authority Rule
+
+> **The final decision remains with the legitimate human decision-maker or decision-makers, except where lawful professional or institutional authority specifically governs an action.**
+
+中文：
+
+> **最终决定应保留给真正拥有决定权的人；只有在法律、专业或制度明确规定某项行动必须由特定权威处理时，才由相应权威承担其限定范围内的决定责任。**
+
+---
+
+# 41. Canonical Advice Boundary
+
+> **Recommendation is not command, expertise is not ownership, and explanation is not consent.**
+
+中文：
+
+> **建议不是命令，专业不是所有权，解释也不是同意。**
+
+---
+
+# 42. Canonical Stop Rule
+
+> **A trustworthy Navigation system must know not only how to continue reasoning, but when continued reasoning would exceed its authority.**
+
+中文：
+
+> **可信的 Navigation 不只要知道怎样继续推理，也必须知道什么时候继续推理已经越过自己的权威边界。**
+
+---
+
+# 43. Final Canonical Form
+
+```
+NAV-08
+NAVIGATION AUTHORITY
+```
+
+**Input**
+
+```
+Multi-Horizon Decision Map
++
+Decision Owners
++
+Affected Parties
++
+Authority / Consent Context
+```
+
+**Process**
+
+```
+Identify:
+Who Decides
+Who Is Affected
+Who Must Consent
+Who Advises
+Who Has Formal Authority
+Where Navigation Must Stop
+```
+
+**Output**
+
+```
+Bounded Decision Authority Map
+```
+
+**Boundary**
+
+```
+Navigation supports.
+Humans decide.
+Legitimate authority governs only its proper domain.
+```
+# NAV-09｜Change Threshold
+
+## 变化阈值｜变化什么时候真正取得决策意义
+
+**Canonical Question｜规范问题**
+
+> **现实已经改变，与现实已经足以改变下一步，中间差了什么？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-09
+```
+
+## 2. `canonicalTitleZh`
+
+```
+变化阈值
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Change Threshold
+```
+
+## 4. `canonicalQuestion`
+
+```
+现实已经改变，与现实已经足以改变下一步，中间差了什么？
+```
+
+---
+
+# 5. `definition`
+
+**Change Threshold** 是 Navigation 对“现实中的变化是否已经重要到足以重新打开决定”进行正式判断的机制。
+
+它不回答：
+
+> “现实有没有变化？”
+
+因为现实几乎一直在变化。
+
+它真正回答的是：
+
+> **“这个变化是否已经触及原先决定赖以成立的条件，以至于原方向不能再被自动延续？”**
+
+例如：
+
+```
+收入本月下降 5%
+```
+
+本身不一定触发重决策。
+
+但如果同时发生：
+
+```
+收入下降
++
+现金缓冲缩小
++
+固定支出增加
++
+工作稳定性降低
+```
+
+那么真正变化的已经不是一个单独数字，而是：
+
+```
+原先继续当前路径的现实基础
+```
+
+因此：
+
+> **NAV-09 不是变化侦测器，而是“变化是否足以重新取得决策资格”的阈值判断。**
+
+---
+
+# 6. `navigationMeaning`
+
+如果 Navigation 把所有变化都当作需要行动，会产生：
+
+```
+OVERREACTION
+```
+
+如果 Navigation 只在彻底失败时才承认变化，会产生：
+
+```
+LATE_REACTION
+```
+
+因此 NAV-09 必须区分：
+
+```
+change observed
+≠
+decision-relevant change
+```
+
+真正取得 Navigation 意义的变化，通常至少改变以下一种：
+
+```
+feasibility
+cost
+capacity
+responsibility
+risk
+time window
+reversibility
+future option space
+decision owner / consent
+```
+
+只有当变化触及这些条件之一，原 Decision State 才应被重新打开。
+
+---
+
+# 7. `requiredInputs`
+
+NAV-09 最低需要：
+
+```
+currentPosition
+previousDecisionBasis
+observedChange
+changeTimeBoundary
+changeSource
+```
+
+如果没有 previous decision basis，系统只能判断：
+
+```
+change significance unknown
+```
+
+因为不能知道它究竟改变了原来什么。
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialProjection
+currentRealityProjection
+professionalInput
+externalCurrentEvidence
+relationshipContext
+profileNavigationProjection
+priorNavigationState
+bookIIIContinuityContext
+bookIVCapacityContext
+```
+
+这些用于判断变化是否穿透到决策条件。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+DIRECTLY_OBSERVED
+USER_REPORTED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+CURRENT_EXTERNAL_EVIDENCE
+PROFESSIONAL_INPUT
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但变化是否存在，优先依赖：
+
+```
+MATERIAL_CURRENT
+OBSERVED_CHANGE
+VERIFIED_CONDITION_CHANGE
+```
+
+而不是解释系统的主题变化。
+
+---
+
+# 10. Core Change Classes
+
+建议 runtime 至少区分：
+
+```
+NO_MATERIAL_CHANGE
+LOCAL_CHANGE
+PERSISTENT_CHANGE
+CROSS_DOMAIN_CHANGE
+FOUNDATIONAL_CHANGE
+CHANGE_SIGNIFICANCE_UNKNOWN
+```
+
+---
+
+## A. `NO_MATERIAL_CHANGE`
+
+现实有波动，但没有改变决策条件。
+
+例如：
+
+```
+单月小幅收入波动
+短期工作忙碌
+一次关系摩擦
+```
+
+如果：
+
+```
+resources stable
+capacity stable
+future options stable
+```
+
+则原决定可继续保持。
+
+---
+
+## B. `LOCAL_CHANGE`
+
+变化只影响局部条件。
+
+例如：
+
+```
+通勤时间增加
+某一项目延期
+某项费用上升
+```
+
+可能需要局部回应，但不一定重新打开整个决定。
+
+---
+
+## C. `PERSISTENT_CHANGE`
+
+变化不再是一次性波动，而持续存在。
+
+例如：
+
+```
+连续4个月现金流恶化
+长期工作时数增加
+重复出现的交付失败
+```
+
+这种状态提高重决策权重。
+
+---
+
+## D. `CROSS_DOMAIN_CHANGE`
+
+变化开始影响多个重要领域。
+
+例如：
+
+```
+workload
+→ sleep
+→ family interaction
+→ financial spending
+```
+
+这与后续 NAV-14 直接相关。
+
+---
+
+## E. `FOUNDATIONAL_CHANGE`
+
+变化直接改变原先 Decision Basis。
+
+例如：
+
+```
+job security lost
+new dependant
+major debt
+legal status changed
+partner consent withdrawn
+critical capacity reduced
+```
+
+这类变化应触发：
+
+```
+DECISION_REOPEN
+```
+
+---
+
+# 11. `allowedInference`
+
+NAV-09 可以：
+
+## A. 比较新现实与原 Decision Basis
+
+例如：
+
+```
+Original basis:
+salary stable
+
+Current:
+salary materially reduced
+```
+
+可以标记：
+
+```
+FOUNDATIONAL_CHANGE
+```
+
+---
+
+## B. 识别一个变化是否持续到足以失去“只是波动”的资格
+
+例如：
+
+```
+1 week overload
+```
+
+与：
+
+```
+6 months overload
+```
+
+不应同等处理。
+
+---
+
+## C. 识别多个小变化组合后产生更大意义
+
+例如：
+
+```
+small income drop
++
+small cost increase
++
+small debt increase
+```
+
+单项都不大，但组合后可能改变 liquidity。
+
+---
+
+## D. 识别一个变化是否改变 option eligibility
+
+例如：
+
+```
+visa eligibility changed
+```
+
+可能直接改变迁移选项。
+
+---
+
+## E. 识别变化是否只是表面指标变动
+
+例如：
+
+```
+title changed
+```
+
+但：
+
+```
+responsibility
+income
+authority
+workload
+```
+
+不变，则 decision relevance 可能较低。
+
+---
+
+# 12. `forbiddenInference`
+
+NAV-09 严禁：
+
+## A. 把变化强度直接等同决策重要性
+
+大变化可能是短期波动。
+
+小变化可能触及关键边界。
+
+---
+
+## B. 用 symbolic timing 证明现实已变化
+
+禁止：
+
+```
+八字进入新大运
+→现实条件已改变
+```
+
+除非 Current Reality 独立支持。
+
+---
+
+## C. 把用户情绪变化自动写成系统条件改变
+
+情绪重要，但必须区分：
+
+```
+felt change
+vs
+material change
+```
+
+---
+
+## D. 把一次异常直接升级成新结构
+
+禁止：
+
+```
+one bad month
+→ financial structure broken
+```
+
+---
+
+## E. 把变化存在直接变成行动命令
+
+```
+change detected
+≠
+change required
+```
+
+---
+
+# 13. `decisionEffect`
+
+NAV-09 主要影响：
+
+```
+DECISION_REOPEN
+OPTION_REASSESSMENT
+OPTION_WEIGHT
+WAIT_ACT_BALANCE
+ESCALATION_REQUIREMENT
+```
+
+它的核心作用不是选方向，而是：
+
+> **决定原来的判断是否仍有资格继续被沿用。**
+
+---
+
+# 14. `decisionThresholdEffect`
+
+如果变化：
+
+```
+FOUNDATIONAL_CHANGE
+```
+
+则原先的 Decision Sufficiency 不应自动继承。
+
+必须：
+
+```
+reassess current position
+reassess option space
+reassess threshold
+```
+
+原则：
+
+> **A decision that was sufficient under one reality state does not remain sufficient after its material basis changes.**
+
+中文：
+
+> **一个决定在旧现实下曾经充分，并不代表在决定基础发生实质变化以后仍然充分。**
+
+---
+
+# 15. `authorityBoundary`
+
+NAV-09 可以：
+
+- 识别变化；
+- 判断变化是否触及 Decision Basis；
+- 重开 Navigation；
+- 标记局部变化；
+- 标记 persistent / foundational change；
+- 要求更新 Current Position。
+
+NAV-09 不可以：
+
+- 仅凭变化就建议彻底改变；
+- 把短期波动夸大；
+- 用方法解释证明现实变化；
+- 把新状态自动升级成危机。
+
+---
+
+# 16. `humanDecisionBoundary`
+
+用户必须能够修正：
+
+```
+what changed
+when
+how much
+whether it matters
+```
+
+例如系统认为：
+
+```
+收入下降
+```
+
+用户补充：
+
+> 这是一次性 bonus 没有发，不影响基本现金流。
+
+则：
+
+```
+FOUNDATIONAL_CHANGE
+```
+
+可能应降级为：
+
+```
+LOCAL_CHANGE
+```
+
+---
+
+# 17. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.11｜变化什么时候取得决策意义
+```
+
+相关：
+
+```
+15.12｜回应可以有不同等级
+15.13｜还在运行，究竟能证明什么
+15.16｜问题扩散以后，优先级为什么会改变
+```
+
+---
+
+# 18. `relatedBookFoundations`
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+drift
+degradation
+persistence
+threshold
+```
+
+但 NAV-09 不重新解释变化怎样累积。
+
+只消费：
+
+> 已经观察到的变化，是否足以改变下一步。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+measurement
+evidence
+change detection
+uncertainty
+```
+
+支持：
+
+```
+change observed
+≠
+decision implication established
+```
+
+---
+
+# 19. `profileConsumer`
+
+Profile 可以提示：
+
+```
+which changes may matter more to this person
+```
+
+例如：
+
+```
+high autonomy importance
+```
+
+可能让 authority loss 更具 relevance。
+
+但 Profile 不能证明：
+
+```
+material change occurred
+```
+
+---
+
+# 20. `financialConsumer`
+
+Financial 是 NAV-09 强输入。
+
+例如：
+
+```
+cash flow deterioration
+debt increase
+liquidity reduction
+income concentration change
+```
+
+都可以建立 decision-relevant change。
+
+必须保留：
+
+```
+EXACT
+RANGE
+APPROXIMATE
+UNKNOWN
+```
+
+---
+
+# 21. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+只能提供：
+
+```
+CHANGE_ATTENTION_CONTEXT
+```
+
+不能建立：
+
+```
+FOUNDATIONAL_CHANGE
+```
+
+---
+
+# 22. `currentRealityConsumer`
+
+Current Reality 是 NAV-09 的核心 producer。
+
+至少提供：
+
+```
+whatChanged
+whenChanged
+howLong
+observedEffect
+affectedDomain
+sourceState
+```
+
+---
+
+# 23. `runtimeConsumer`
+
+NAV-09 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+---
+
+# 24. `academyConsumer`
+
+Academy 可投影为：
+
+> **Not every change deserves a new direction. But some changes remove the old direction’s automatic right to continue.**
+
+中文：
+
+> **不是所有变化都需要改变方向，但有些变化会让原方向失去自动继续的资格。**
+
+---
+
+# 25. `revisionTriggers`
+
+NAV-09 本身在以下情况重新运行：
+
+```
+newObservedChange
+changePersists
+changeSpreads
+changeReverses
+newEvidence
+userCorrectsChange
+financialStateUpdates
+professionalInput
+externalConditionUpdates
+```
+
+---
+
+# 26. Canonical Change Model
+
+建议：
+
+```
+{
+  "changeId": "",
+  "description": "",
+  "state": "NO_MATERIAL_CHANGE | LOCAL_CHANGE | PERSISTENT_CHANGE | CROSS_DOMAIN_CHANGE | FOUNDATIONAL_CHANGE | CHANGE_SIGNIFICANCE_UNKNOWN",
+  "changedFrom": "",
+  "changedTo": "",
+  "startedAt": null,
+  "duration": null,
+  "affectedDecisionBasis": [],
+  "affectedDomains": [],
+  "sources": [],
+  "status": ""
+}
+```
+
+---
+
+# 27. Decision Basis Comparison Rule
+
+每次 NAV-09 必须能够回答：
+
+```
+What did the previous decision assume?
+What is different now?
+Does that difference matter?
+```
+
+如果不能回答第三个问题：
+
+```
+CHANGE_SIGNIFICANCE_UNKNOWN
+```
+
+---
+
+# 28. Persistence Rule
+
+变化持续时间本身可以增加 significance。
+
+但不能设统一：
+
+```
+3 months = significant
+```
+
+因为不同领域时标不同。
+
+必须：
+
+```
+domain-sensitive
+decision-sensitive
+```
+
+---
+
+# 29. Magnitude Rule
+
+不得建立简单：
+
+```
+bigger change = higher significance
+```
+
+真正决定 relevance 的是：
+
+```
+where the change lands
+```
+
+例如：
+
+```
+small legal status change
+```
+
+可能比：
+
+```
+large temporary mood swing
+```
+
+更改变现实选项。
+
+---
+
+# 30. Combined Change Rule
+
+允许多个变化形成：
+
+```
+COMPOUND_CHANGE
+```
+
+例如：
+
+```
+income -5%
+expenses +7%
+debt +3%
+```
+
+单项较小，但组合后：
+
+```
+monthly surplus → deficit
+```
+
+这属于更高 decision relevance。
+
+---
+
+# 31. Threshold Reopen Rule
+
+若变化改变：
+
+```
+capacity
+reversibility
+responsibility
+time window
+option eligibility
+```
+
+则：
+
+```
+REOPEN NAVIGATION
+```
+
+至少重新检查：
+
+```
+NAV-02
+NAV-03
+NAV-04
+NAV-06
+NAV-07
+```
+
+必要时重新检查 NAV-08。
+
+---
+
+# 32. No-Panic Rule
+
+即使：
+
+```
+FOUNDATIONAL_CHANGE
+```
+
+也不等于：
+
+```
+IMMEDIATE ACTION REQUIRED
+```
+
+它只意味着：
+
+```
+OLD DECISION NO LONGER AUTO-VALID
+```
+
+---
+
+# 33. Customer Projection Example
+
+内部：
+
+```
+Original basis:
+stable salary
+manageable workload
+family schedule stable
+
+New:
+salary unchanged
+workload increased 40%
+sleep reduced
+family conflict increased
+```
+
+客户可看到：
+
+> **真正变化的并不是收入，而是维持这份工作的现实条件。**
+> 
+> 你的薪资没有明显变化，但工作负荷已经持续增加，并开始影响恢复和家庭安排；这意味着“继续留下”原本依赖的条件已经发生改变。这个变化还不足以自动推出“应该离职”，但足以让原来的继续路径重新接受比较，而不能只因为过去一直这样工作就继续默认延长。
+
+---
+
+# 34. Customer Actions
+
+允许：
+
+```
+Confirm change
+Correct significance
+Add evidence
+Keep monitoring
+Reopen decision
+Continue
+```
+
+---
+
+# 35. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+NO_MATERIAL_CHANGE
+DECISION_RELEVANT_CHANGE
+FOUNDATIONAL_CHANGE
+SIGNIFICANCE_UNKNOWN
+REOPENED
+```
+
+---
+
+# 36. Fail-Closed Conditions
+
+以下情况不得进入 NAV-10：
+
+```
+changeSourceUnknown
+criticalChangeUnverified
+historicalChangePresentedAsCurrent
+symbolicReadingUsedAsChangeEvidence
+decisionBasisUnknown
+changeSignificanceFabricated
+decisionObjectChanged
+```
+
+---
+
+# 37. Canonical Runtime Rule
+
+> **Navigation must distinguish a reality change from a decision-relevant reality change before altering the current direction.**
+
+中文：
+
+> **Navigation 在改变当前方向以前，必须先区分“现实发生了变化”与“这个变化已经取得决策意义”。**
+
+---
+
+# 38. Canonical Threshold Rule
+
+> **A change becomes navigation-relevant when it materially alters the conditions under which the current decision remained qualified.**
+
+中文：
+
+> **当一个变化实质改变了原决定继续成立所依赖的条件，它才真正取得 Navigation 意义。**
+
+---
+
+# 39. Canonical Reopen Rule
+
+> **Decision-relevant change reopens the decision; it does not predetermine the new answer.**
+
+中文：
+
+> **具有决策意义的变化会重新打开决定，却不会预先决定新的答案。**
+
+---
+
+# 40. Canonical Stability Rule
+
+> **Stability is not the absence of change; it is the continued qualification of the current path despite change.**
+
+中文：
+
+> **稳定并不是没有变化，而是在变化发生以后，当前路径仍然能够重新取得继续资格。**
+
+---
+
+# 41. Final Canonical Form
+
+```
+NAV-09
+CHANGE THRESHOLD
+```
+
+**Input**
+
+```
+Previous Decision Basis
++
+Observed Reality Change
+```
+
+**Process**
+
+```
+Compare:
+What Changed
+How Long
+Where It Lands
+What Decision Condition It Alters
+```
+
+**Output**
+
+```
+Decision-Relevant Change State
+```
+
+**Boundary**
+
+```
+Change does not command action.
+Change may reopen the decision.
+```
+
+# NAV-10｜Response Level
+
+## 回应等级｜发现问题以后，不是只有忍耐与彻底改变
+
+**Canonical Question｜规范问题**
+
+> **为什么发现问题以后，不是只有继续忍耐与彻底改变两个选择？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-10
+```
+
+## 2. `canonicalTitleZh`
+
+```
+回应等级
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Response Level
+```
+
+## 4. `canonicalQuestion`
+
+```
+为什么发现问题以后，不是只有继续忍耐与彻底改变两个选择？
+```
+
+---
+
+# 5. `definition`
+
+**Response Level** 是 Navigation 对“现实已经取得决策意义之后，应该以多大尺度回应”进行正式分层的机制。
+
+它不是：
+
+```
+ACT / DO NOTHING
+```
+
+这种二元选择，也不是把任何变化都直接升级成：
+
+```
+LEAVE
+STOP
+RESTRUCTURE
+END
+```
+
+它真正回答的是：
+
+> **当前变化究竟需要注意、监测、准备、局部调整，还是已经达到结构性回应的程度？**
+
+现实问题有不同深度。
+
+例如：
+
+```
+一次短期工作高峰
+```
+
+可能只需要：
+
+```
+MONITOR
+```
+
+而：
+
+```
+长期工作负荷上升
++
+恢复下降
++
+家庭安排持续受影响
+```
+
+可能需要：
+
+```
+LOCAL_ADJUSTMENT
+```
+
+甚至：
+
+```
+STRUCTURAL_RESPONSE
+```
+
+因此：
+
+> **NAV-10 的作用不是决定“改不改变”，而是让回应尺度与现实问题尺度相匹配。**
+
+---
+
+# 6. `navigationMeaning`
+
+如果系统没有 Response Level，Navigation 很容易出现两种极端。
+
+第一种：
+
+```
+UNDER_RESPONSE
+```
+
+现实已经明显改变，却因为“还没彻底坏掉”而继续维持。
+
+第二种：
+
+```
+OVER_RESPONSE
+```
+
+一个局部、暂时、可恢复的问题，被立刻升级成全面改变。
+
+因此 NAV-10 建立的是：
+
+```
+Observed Problem
+↓
+Decision-Relevant Change
+↓
+Response Scale
+```
+
+而不是：
+
+```
+Problem
+↓
+Maximum Action
+```
+
+成熟 Navigation 应该能够说：
+
+> 现在需要回应，但不一定需要最大回应。
+
+---
+
+# 7. `requiredInputs`
+
+NAV-10 最低需要：
+
+```
+decisionRelevantChangeState
+currentPosition
+remainingChoiceSpace
+timeAssessment
+inactionAssessment
+reversibilityProfile
+authorityMap
+```
+
+如果问题严重度、持续性或影响范围仍不清楚，应保持：
+
+```
+RESPONSE_LEVEL_UNCERTAIN
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+currentRealityProjection
+relationshipContext
+professionalInput
+externalCurrentEvidence
+capacityContext
+priorResponseHistory
+priorNavigationState
+```
+
+这些用于判断：
+
+- 问题是否持续；
+- 已尝试回应是否有效；
+- 是否需要升级；
+- 是否可以降级；
+- 是否存在高风险例外。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+CURRENT_EXTERNAL_EVIDENCE
+PROFESSIONAL_INPUT
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但回应等级必须主要建立在：
+
+```
+MATERIAL_CURRENT
+OBSERVED_EFFECT
+PERSISTENCE
+SCOPE
+REVERSIBILITY
+```
+
+而不是解释系统的“严重语气”。
+
+---
+
+# 10. Core Response Levels
+
+建议 runtime 至少区分六级：
+
+```
+R0_OBSERVE
+R1_MONITOR
+R2_PREPARE
+R3_LOCAL_ADJUST
+R4_STRUCTURAL_CHANGE_CANDIDATE
+R5_IMMEDIATE_ESCALATION
+```
+
+---
+
+## A. `R0_OBSERVE`
+
+变化已被看见，但：
+
+```
+decision relevance low
+impact limited
+persistence not established
+```
+
+当前动作：
+
+```
+observe only
+```
+
+例如：
+
+```
+一次短期收入波动
+一次沟通摩擦
+短暂工作高峰
+```
+
+---
+
+## B. `R1_MONITOR`
+
+变化值得持续追踪，但尚不足以改变结构。
+
+必须定义：
+
+```
+what to observe
+review interval
+trigger conditions
+```
+
+例如：
+
+```
+连续观察3个月现金流
+连续记录睡眠与工作时长
+```
+
+---
+
+## C. `R2_PREPARE`
+
+现实已经足以让系统为改变做准备，但尚未要求真正实施重大变化。
+
+例如：
+
+```
+更新履历
+增加现金缓冲
+搜集学校资料
+确认合同
+了解替代方案
+```
+
+这一级很重要，因为它让 Navigation 不必等到危机才开始行动。
+
+---
+
+## D. `R3_LOCAL_ADJUST`
+
+需要直接改变当前运行中的局部参数。
+
+例如：
+
+```
+减少某项负荷
+重新分配预算
+调整工作边界
+改变会议频率
+重新分工
+```
+
+目标是：
+
+```
+restore fit
+without redesigning entire structure
+```
+
+---
+
+## E. `R4_STRUCTURAL_CHANGE_CANDIDATE`
+
+局部回应持续不足，或原结构已经无法通过参数调整重新适配现实。
+
+这时可以把：
+
+```
+alternative structure
+```
+
+正式放进候选。
+
+注意：
+
+```
+CANDIDATE
+```
+
+不等于：
+
+```
+EXECUTE
+```
+
+---
+
+## F. `R5_IMMEDIATE_ESCALATION`
+
+当存在：
+
+```
+safety risk
+critical legal issue
+acute financial failure
+professional requirement
+high-impact rapidly closing window
+```
+
+时，系统需要立即升级给：
+
+```
+qualified human authority
+professional support
+emergency process
+```
+
+而不是自己继续普通导航。
+
+---
+
+# 11. `allowedInference`
+
+NAV-10 可以：
+
+## A. 根据持续性提高回应等级
+
+例如：
+
+```
+one-week overload
+```
+
+与：
+
+```
+six-month overload
+```
+
+不应使用同一级回应。
+
+---
+
+## B. 根据跨领域影响升级回应
+
+例如：
+
+```
+work issue
+→ sleep
+→ family
+→ finances
+```
+
+可提高 Response Level。
+
+---
+
+## C. 根据已有回应失效升级
+
+例如：
+
+```
+R1_MONITOR
+↓
+R3_LOCAL_ADJUST
+↓
+problem persists
+```
+
+可以考虑：
+
+```
+R4_STRUCTURAL_CHANGE_CANDIDATE
+```
+
+---
+
+## D. 根据现实改善降级
+
+回应不是只能升级。
+
+例如：
+
+```
+local adjustment effective
+```
+
+可以从：
+
+```
+R3
+```
+
+降回：
+
+```
+R1
+```
+
+---
+
+## E. 识别准备本身就是有效回应
+
+例如：
+
+```
+还未辞职
+但已经增加现金缓冲、更新技能、建立替代路径
+```
+
+这不是“什么都没做”。
+
+应识别为：
+
+```
+R2_PREPARE
+```
+
+---
+
+# 12. `forbiddenInference`
+
+NAV-10 严禁：
+
+## A. 把“回应等级高”理解成“问题一定严重”
+
+Response Level 是行动尺度，不是诊断标签。
+
+---
+
+## B. 把第一次失败就升级成结构性改变
+
+局部调整失败一次，不足以自动：
+
+```
+R4
+```
+
+---
+
+## C. 用 symbolic reading 决定回应等级
+
+禁止：
+
+```
+Tarot Tower
+→ R4
+```
+
+---
+
+## D. 把客户情绪强度直接映射成行动强度
+
+```
+feels terrible
+≠
+maximum structural response
+```
+
+除非现实证据支持。
+
+---
+
+## E. 把准备误写成最终决定
+
+```
+prepare to leave
+≠
+decision to leave
+```
+
+---
+
+## F. 把专业升级误写成系统自己下结论
+
+```
+R5
+```
+
+通常意味着：
+
+```
+handoff
+```
+
+而不是系统继续输出更强建议。
+
+---
+
+# 13. `decisionEffect`
+
+NAV-10 主要影响：
+
+```
+ACTION_SCALE
+WAIT_ACT_BALANCE
+ESCALATION_REQUIREMENT
+OPTION_PREPARATION
+STRUCTURAL_CHANGE_ADMISSION
+```
+
+其中最核心：
+
+```
+ACTION_SCALE
+```
+
+---
+
+# 14. `decisionThresholdEffect`
+
+原则：
+
+> **回应越大、越不可逆、影响越广，所需 Decision Sufficiency 越高。**
+
+例如：
+
+```
+R1_MONITOR
+```
+
+通常需要较低 threshold。
+
+```
+R4_STRUCTURAL_CHANGE_CANDIDATE
+```
+
+需要更高 threshold。
+
+```
+R5_IMMEDIATE_ESCALATION
+```
+
+不是“降低 threshold”，而是：
+
+```
+change authority path
+```
+
+把问题交给更适当的人或程序。
+
+---
+
+# 15. `authorityBoundary`
+
+NAV-10 可以：
+
+- 划分回应等级；
+- 建议观察；
+- 建议准备；
+- 建议局部调整；
+- 将结构性变化放入候选；
+- 建议专业升级；
+- 根据现实结果升降级。
+
+NAV-10 不可以：
+
+- 自动执行结构性变化；
+- 自动终止关系／工作／合同；
+- 用 symbolic interpretation 决定行动等级；
+- 把更强回应包装成更“勇敢”；
+- 把低级回应包装成逃避。
+
+---
+
+# 16. `humanDecisionBoundary`
+
+用户必须能够：
+
+```
+accept response level
+choose lower level
+choose higher level
+request professional review
+revise action scale
+```
+
+例如系统建议：
+
+```
+R2_PREPARE
+```
+
+用户可以说：
+
+> 我只想先观察。
+
+系统应保留风险与 trade-off，但不能强制升级。
+
+高风险安全场景除外，应按 NAV-08 authority / professional rule 处理。
+
+---
+
+# 17. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.12｜回应可以有不同等级
+```
+
+相关：
+
+```
+15.11｜变化什么时候取得决策意义
+15.13｜还在运行，究竟能证明什么
+15.18｜什么时候更多投入已经不再合理
+15.19｜修正参数，还是把重构放进候选
+15.20｜什么时候等待已经比行动更昂贵
+```
+
+---
+
+# 18. `relatedBookFoundations`
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+maintenance
+recovery
+failure response
+```
+
+但 NAV-10 不重新解释恢复机制。
+
+只决定：
+
+> 当前现实需要多大尺度的导航回应。
+
+---
+
+## Book VI｜Reality Reconfiguration
+
+提供：
+
+```
+structural reconfiguration
+```
+
+但 NAV-10 只负责判断：
+
+```
+when structural alternative deserves candidate status
+```
+
+不拥有重构机制本身。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+evidence strength
+uncertainty
+observation boundary
+```
+
+支持：
+
+```
+response scale
+must remain evidence-bounded
+```
+
+---
+
+# 19. `profileConsumer`
+
+Profile 可以帮助理解：
+
+```
+habitual overreaction
+habitual underreaction
+stability bias
+change bias
+```
+
+但只能作为：
+
+```
+BEHAVIORAL_CONTEXT
+```
+
+不能自动提升或降低 Response Level。
+
+---
+
+# 20. `financialConsumer`
+
+Financial 可以直接影响回应等级。
+
+例如：
+
+```
+temporary surplus decline
+```
+
+可能只需要：
+
+```
+R1
+```
+
+而：
+
+```
+persistent deficit
++
+low liquidity
++
+debt deadline
+```
+
+可能需要：
+
+```
+R3 or higher
+```
+
+但具体仍取决于整个 Decision Context。
+
+---
+
+# 21. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+只允许：
+
+```
+INTERPRETIVE_CONTEXT
+```
+
+不得输出：
+
+```
+R3
+R4
+R5
+```
+
+这种行动等级。
+
+---
+
+# 22. `currentRealityConsumer`
+
+Current Reality 是 NAV-10 核心 producer。
+
+至少应提供：
+
+```
+persistence
+scope
+affectedDomains
+currentImpact
+trend
+unknowns
+```
+
+---
+
+# 23. `runtimeConsumer`
+
+NAV-10 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+---
+
+# 24. `academyConsumer`
+
+Academy 可以投影为：
+
+> **A problem can deserve a response without deserving the biggest response.**
+
+中文：
+
+> **一个问题可以值得回应，却未必值得最大的回应。**
+
+教学可使用：
+
+```
+Observe
+Monitor
+Prepare
+Adjust
+Restructure
+Escalate
+```
+
+---
+
+# 25. `revisionTriggers`
+
+以下情况必须重开 NAV-10：
+
+```
+problemPersists
+problemImproves
+problemSpreads
+localAdjustmentFails
+newRiskAppears
+newProfessionalInput
+newResourceAppears
+timeWindowChanges
+userChangesResponsePreference
+newOutcome
+```
+
+---
+
+# 26. Canonical Response Model
+
+建议：
+
+```
+{
+  "responseId": "",
+  "decisionObjectId": "",
+  "level": "R0_OBSERVE | R1_MONITOR | R2_PREPARE | R3_LOCAL_ADJUST | R4_STRUCTURAL_CHANGE_CANDIDATE | R5_IMMEDIATE_ESCALATION",
+  "reason": "",
+  "requiredConditions": [],
+  "actionsAllowed": [],
+  "actionsNotYetQualified": [],
+  "monitoringSignals": [],
+  "reviewAt": null,
+  "escalationTriggers": [],
+  "sources": [],
+  "status": ""
+}
+```
+
+---
+
+# 27. Escalation Ladder Rule
+
+默认顺序可以是：
+
+```
+Observe
+↓
+Monitor
+↓
+Prepare
+↓
+Adjust
+↓
+Structural Candidate
+↓
+Escalate
+```
+
+但不是必须一级一级经过。
+
+例如：
+
+```
+acute safety issue
+```
+
+可以直接：
+
+```
+R5
+```
+
+---
+
+# 28. De-Escalation Rule
+
+如果现实改善：
+
+```
+R4
+→ R3
+→ R1
+```
+
+是合法的。
+
+因此 Navigation 不应形成：
+
+```
+once severe, always severe
+```
+
+---
+
+# 29. Preparation Rule
+
+`R2_PREPARE` 必须是真实准备，不是模糊焦虑。
+
+至少应有：
+
+```
+preparation target
+resource target
+information target
+review point
+```
+
+例如：
+
+```
+save 3 months runway
+confirm contract terms
+complete 2 job interviews
+```
+
+不能只写：
+
+```
+prepare more
+```
+
+---
+
+# 30. Local Adjustment Rule
+
+`R3_LOCAL_ADJUST` 应尽量限定：
+
+```
+scope
+duration
+expected effect
+review trigger
+```
+
+例如：
+
+```
+reduce workload by 20%
+for 6 weeks
+review sleep and delivery quality
+```
+
+不得无期限。
+
+---
+
+# 31. Structural Candidate Rule
+
+`R4_STRUCTURAL_CHANGE_CANDIDATE` 只意味着：
+
+> 原结构不再享有唯一默认资格。
+
+它不意味着：
+
+```
+must restructure
+```
+
+后续仍需 NAV-17 等模块进一步判断。
+
+---
+
+# 32. Immediate Escalation Rule
+
+`R5_IMMEDIATE_ESCALATION` 应优先输出：
+
+```
+who to contact
+what domain authority is needed
+what action should pause
+what information should be preserved
+```
+
+而不是生成更多普通建议。
+
+---
+
+# 33. Customer Projection Example
+
+内部：
+
+```
+Change:
+persistent workload increase
+
+Current response history:
+monitoring for 8 weeks
+minor schedule adjustment failed
+
+Response level:
+R3_LOCAL_ADJUST
+
+Potential escalation:
+R4 if workload remains unchanged after review
+```
+
+客户可以看到：
+
+> **现在已经不只是“再观察一下”的阶段。**
+> 
+> 过去八周你已经持续记录工作时长，并尝试过局部排程调整，但负荷没有明显下降；这使回应可以从单纯监测提高到局部调整，例如重新谈职责、减少部分工作范围，或改变当前分配方式。
+> 
+> 这还不足以自动推出“必须离开”，但如果局部调整之后现实仍然没有改善，就需要把另一种工作结构正式放进候选。
+
+---
+
+# 34. Customer Actions
+
+允许：
+
+```
+Accept response level
+Choose smaller response
+Prepare first
+Set review point
+Request escalation
+Correct current impact
+Continue
+```
+
+---
+
+# 35. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+RESPONSE_LEVEL_SET
+MONITORING
+PREPARING
+LOCAL_ADJUSTMENT
+STRUCTURAL_CANDIDATE
+ESCALATION_REQUIRED
+REOPENED
+```
+
+---
+
+# 36. Fail-Closed Conditions
+
+以下情况不得进入 NAV-11：
+
+```
+changeSignificanceUnknown
+responseLevelBasedOnSymbolicReading
+criticalImpactUnverified
+professionalEscalationIgnored
+currentPositionStale
+priorResponseHistoryFabricated
+decisionObjectChanged
+```
+
+---
+
+# 37. Canonical Runtime Rule
+
+> **Navigation must scale the response to the decision-relevant change rather than forcing a binary choice between endurance and total change.**
+
+中文：
+
+> **Navigation 必须让回应尺度与具有决策意义的变化相匹配，而不是把用户逼进“继续忍耐”与“彻底改变”的二选一。**
+
+---
+
+# 38. Canonical Proportionality Rule
+
+> **The smallest response capable of materially improving the situation should remain visible before larger and less reversible responses are treated as necessary.**
+
+中文：
+
+> **在更大、更难撤回的回应被视为必要以前，能够实质改善现实的较小回应必须先保持可见。**
+
+这不是强制先做小动作，而是防止大动作过早取得默认资格。
+
+---
+
+# 39. Canonical Escalation Rule
+
+> **Response level may increase when persistence, spread, failed lower-level responses, shrinking option space, or high-impact risk materially changes what the current path can still absorb.**
+
+中文：
+
+> **当问题持续、扩散、较低等级回应持续失效、选择空间收窄，或高影响风险已经改变当前路径的承受能力时，回应等级可以上升。**
+
+---
+
+# 40. Canonical De-escalation Rule
+
+> **Navigation must be able to reduce response intensity when reality improves; escalation is not a one-way status.**
+
+中文：
+
+> **当现实改善时，Navigation 必须能够降低回应强度；升级不是单向状态。**
+
+---
+
+# 41. Final Canonical Form
+
+```
+NAV-10
+RESPONSE LEVEL
+```
+
+**Input**
+
+```
+Decision-Relevant Change
++
+Current Position
++
+Prior Response
++
+Risk / Persistence / Scope
+```
+
+**Process**
+
+```
+Determine:
+Observe
+Monitor
+Prepare
+Local Adjust
+Structural Candidate
+Immediate Escalation
+```
+
+**Output**
+
+```
+Bounded Response Level
+```
+
+**Boundary**
+
+```
+More response is not always better.
+Less response is not always avoidance.
+```

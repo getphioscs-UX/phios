@@ -1,0 +1,10 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { importZhHansCandidate } from './lib/knowledge-production/zh-hans-candidate-v1.mjs';
+const args=process.argv.slice(2); const apply=args.includes('--apply'); const targetIndex=args.indexOf('--target-root'); const briefIndex=args.indexOf('--brief');
+const positional=args.filter((arg,index)=>!arg.startsWith('--') && index!==targetIndex+1 && index!==briefIndex+1);
+const candidateArg=positional[0];
+if(!candidateArg)throw new Error('Usage: npm run knowledge:import-candidate:zh-Hans -- <candidate.json> [--brief <brief.json>] [--target-root <path>] [--apply]');
+const root=process.cwd(); const candidate=JSON.parse(await fs.readFile(path.resolve(root,candidateArg),'utf8'));
+const report=await importZhHansCandidate(root,candidate,{briefPath:briefIndex>=0?path.resolve(root,args[briefIndex+1]):undefined,targetRoot:targetIndex>=0?path.resolve(root,args[targetIndex+1]):root,apply});
+console.log(JSON.stringify(report,null,2));

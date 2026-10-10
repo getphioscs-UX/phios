@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-LIMITED-PRODUCTION-IMPLEMENTATION-FREEZE-v2.0.0",
+  "work": "ICH-PROD-W29",
+  "baselineCommit": "0db5e11ed84829e28c5cd56244dab774059b3839",
+  "status": "EDGE_FETCH_COMPATIBILITY_SUCCESSOR_FROZEN_NEW_DEPLOYMENT_LIVE_ACCEPTANCE_PENDING",
+  "successorOf": "content/production/symbolic-method/freeze/iching-limited-production-implementation-freeze-v1.json",
+  "historicalPredecessorMutated": false,
+  "artifacts": [
+    {
+      "path": "functions/api/iching-limited-session-v2.js",
+      "sha256": "b48c5520d6258812b60c2e8a5a90927e3e36627df73466c303648873fc5e3bfc"
+    },
+    {
+      "path": "scripts/check-iching-limited-production-static-v2.mjs",
+      "sha256": "25b0a54a5fca377015a2754f1ff80935d5c5b4d43a67e7e55e4cd4fe76b21517"
+    },
+    {
+      "path": "scripts/check-iching-limited-production-live-v2.mjs",
+      "sha256": "b2ffababa2d86541d76a897d0bbe11918acbe3755966833c57c115ddd79c2463"
+    },
+    {
+      "path": "scripts/check-iching-limited-production-freeze-v2.mjs",
+      "sha256": "0c2b03fc0e03e9af35e5c2ebde13b05df5f352d184f81038b0a7a372012b542f"
+    },
+    {
+      "path": "content/production/symbolic-method/reconciliation/iching-limited-production-readiness-v2.json",
+      "sha256": "8565db467cf45b61e032df3775a1ecb9b74731f48f9afda72cd4b8123d4845dc"
+    },
+    {
+      "path": "docs/ICHING-LIMITED-PRODUCTION-ACTIVATION-v2.md",
+      "sha256": "20d9d2f6530a6663404df5db9706066251c5b5e2a9d64e136e0197528a0789da"
+    }
+  ],
+  "historicalPredecessorWitnesses": [
+    {
+      "path": "functions/iching-limited-production/iching-limited-production-v1.js",
+      "sha256": "d1150295d7f6bf0f33f3d683d9ef7d695ee263789e6439792eb58d8d0e91c537"
+    },
+    {
+      "path": "functions/api/iching-limited-session.js",
+      "sha256": "9c83e619180d4398037b2246feb8a53ad09589459fb27fcf8fc86af99cb384e1"
+    },
+    {
+      "path": "content/production/symbolic-method/freeze/iching-limited-production-implementation-freeze-v1.json",
+      "sha256": "37139fc9e74905d633a0496ddb9ce1a3b56e9d96b4a4e276ac86defb2cdaff71"
+    }
+  ],
+  "acceptance": {
+    "observedProductionBug": "WORKER_EDGE_REJECTED_REDIRECT_ERROR_FOR_ACCESS_JWKS_SUBREQUEST",
+    "edgeRedirectMode": "manual",
+    "manualRedirectRequiresResponseOk": true,
+    "d1ProbeSemanticsChanged": false,
+    "betaSessionFormatChanged": false,
+    "stableExecutionRouteChanged": false,
+    "humanDepth": "448/448",
+    "bilingualRuntimeCases": "896/896",
+    "guestRunAllowed": false,
+    "retentionImplicitlyGranted": false,
+    "fullProductionAllowed": false
+  },
+  "deploymentBoundary": {
+    "accessApplicationPathMustMoveTo": "/api/iching-limited-session-v2",
+    "newCommitDeploymentRequired": true,
+    "bothShaSecretsMustMatchNewDeployment": true,
+    "readOnlyLiveGateRequired": true,
+    "liveV2CheckerRequired": true,
+    "liveLimitedProductionClaimed": false
+  }
+}

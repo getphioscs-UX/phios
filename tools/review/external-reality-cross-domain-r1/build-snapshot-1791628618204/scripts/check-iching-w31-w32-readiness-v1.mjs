@@ -1,0 +1,7 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const e=j('content/production/symbolic-method/deployment/iching-limited-production-live-evidence-v1.json');const c=j('content/production/symbolic-method/observation/iching-limited-production-observation-campaign-v1.json');
+assert.equal(e.status,'ADMITTED_LIVE_LIMITED_PRODUCTION_V2_EXACT_SHA');assert.equal(c.status,'READY_FOR_EXACT_SHA_LIVE_MATERIALIZATION');assert.equal(c.targetDeploymentSha,e.deployment.commitSha);assert.equal(c.executionCases.length,14);assert.equal(c.executionCases.filter(x=>x.sensitiveDomain).length,8);assert.equal(e.scope.authorityState,'LIMITED_PRODUCTION');assert.equal(e.scope.fullProduction,false);
+for(const p of ['scripts/run-iching-limited-production-observation-v1.mjs','scripts/check-iching-limited-production-observation-v1.mjs','scripts/lib/iching/limited-production-observation-v1.mjs'])assert.ok(fs.existsSync(p),p);
+assert.equal(fs.existsSync(c.resultPath),false,'W32 result already exists before live materialization; remove stale results and rerun exact-SHA observation');assert.equal(fs.existsSync(c.acceptancePath),false,'W32 acceptance already exists before live materialization; remove stale acceptance and rerun exact-SHA observation');
+console.log('✓ ICH-PROD-W31/W32 one-commit readiness passed: W31 live evidence is admitted and the exact-SHA W32 runner is ready; no observation acceptance is fabricated before the live run.');

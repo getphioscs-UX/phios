@@ -1,0 +1,27 @@
+{
+  "registryCode": "PHI-OS-RMO-W4-CANONICAL-SIGNAL-TYPE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RMO-W4",
+  "status": "canonical_foundation",
+  "runtimeAuthority": "RMO",
+  "containsUserData": false,
+  "containsSignalInstances": false,
+  "signalTypes": [
+    {"signalType": "STATE_INDICATOR", "allowedDirections": ["PRESENT", "ABSENT", "STABLE", "UNKNOWN"], "allowedDataNatures": ["OBSERVED", "MAPPED", "CALCULATED", "DERIVED"]},
+    {"signalType": "CHANGE_INDICATOR", "allowedDirections": ["CHANGED", "INCREASE", "DECREASE", "STABLE", "UNKNOWN"], "allowedDataNatures": ["OBSERVED", "MAPPED", "CALCULATED", "DERIVED"]},
+    {"signalType": "TREND_INDICATOR", "allowedDirections": ["INCREASE", "DECREASE", "STABLE", "UNKNOWN"], "allowedDataNatures": ["OBSERVED", "MAPPED", "CALCULATED", "DERIVED"]},
+    {"signalType": "THRESHOLD_INDICATOR", "allowedDirections": ["PRESENT", "ABSENT", "UNKNOWN"], "allowedDataNatures": ["OBSERVED", "MAPPED", "CALCULATED", "DERIVED"]},
+    {"signalType": "ANOMALY_INDICATOR", "allowedDirections": ["PRESENT", "ABSENT", "UNKNOWN"], "allowedDataNatures": ["OBSERVED", "MAPPED", "CALCULATED", "DERIVED"]},
+    {"signalType": "ABSENCE_INDICATOR", "allowedDirections": ["ABSENT", "UNKNOWN"], "allowedDataNatures": ["OBSERVED", "MAPPED", "CALCULATED", "DERIVED"]}
+  ],
+  "instances": [],
+  "rules": {
+    "registryDefinesTypesOnly": true,
+    "registryMayStoreSignalInstances": false,
+    "signalDoesNotEqualEvidence": true,
+    "signalDoesNotEqualInterpretation": true,
+    "signalDoesNotEqualInference": true,
+    "calculatedOrDerivedSignalExecutionDeferred": true,
+    "unknownSignalTypeFailsClosed": true
+  }
+}

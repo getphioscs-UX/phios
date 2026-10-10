@@ -1,0 +1,34 @@
+{
+  "contractCode": "PHI-OS-RR-W10-LRM-INTEGRATION-v2",
+  "contractVersion": "2.0.0",
+  "runtimeCode": "RR",
+  "work": "RR-W10",
+  "status": "EVENT_INTENT_CONTRACT_READY_LRM_EXECUTION_NOT_ACTIVATED",
+  "eventTypes": [
+    "REPORT_RELEASED",
+    "REPORT_REVISED"
+  ],
+  "eventFields": [
+    "eventType",
+    "reportReference",
+    "case",
+    "customer",
+    "sourceReference",
+    "occurredAt",
+    "dataPurpose",
+    "consentReferences",
+    "revisionVersion"
+  ],
+  "rules": {
+    "rrCreatesTimelineEventIntent": true,
+    "rrOwnsLongitudinalTimeline": false,
+    "rrWritesLrmDirectlyWithoutExecutor": false,
+    "lrmOwnsTimelinePersistence": true,
+    "fabricatedTimelinePersistenceForbidden": true
+  },
+  "currentBaseline": {
+    "dedicatedLrmRuntimeImplementationObserved": false,
+    "executionActivated": false,
+    "deliveryMode": "DEFERRED_FAIL_CLOSED"
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "work": "BAZI-THREE-CALL-BILINGUAL-USD1-CONTRACT-RECONCILIATION",
+  "policy": {
+    "NORMAL_GENERATION_CALLS_MAX": 3,
+    "NORMAL_GENERATION_COST_USD_MAX": 1,
+    "BILINGUAL_ZH_EN_INCLUDED_IN_SAME_3_CALLS": true,
+    "REPAIR": "CONDITIONAL_ONLY",
+    "REPAIR_BUDGET": "EXISTING_AUTHORIZED_POLICY"
+  },
+  "groups": 14,
+  "results": [
+    {
+      "name": "Selected zh-Hans complete output shares three normal calls / USD1 ledger",
+      "status": "PASS",
+      "providerCalls": 0,
+      "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+    },
+    {
+      "name": "Selected en complete output shares three normal calls / USD1 ledger",
+      "status": "PASS",
+      "providerCalls": 0,
+      "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+    },
+    {
+      "name": "Selected zh-Hans+en complete output shares three normal calls / USD1 ledger",
+      "status": "PASS",
+      "providerCalls": 0,
+      "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+    },
+    {
+      "name": "Successful verification/complete healthy units produce zero repair calls",
+      "status": "PASS",
+      "providerCalls": 0,
+      "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+    },
+    {
+      "name": "Genuine verifier rejection is targeted eligibility only, no automatic invocation",
+      "status": "PASS",
+      "providerCalls": 0,
+      "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+    },
+    {
+      "name": "Missing Accepted Copy coverage is not repair eligible",
+      "status": "PASS",
+      "providerCalls": 0,
+      "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+    },
+    {
+      "name": "Fourth normal call denied",
+      "status": "PASS",
+      "providerCalls": 0,
+      "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+    },
+    {
+      "name": "Next normal request above USD1 denied despite soft limit settings",
+      "status": "PASS",
+      "providerCalls": 0,
+      "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+    },
+    {
+      "name": "Language switch reuses same immutable report/checkpoint; no reset",
+      "status": "PASS",
+      "providerCalls": 0,
+      "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+    },
+    {
+      "name": "Unknown billed timeout blocks retry before transport",
+      "status": "PASS",
+      "providerCalls": 0,
+      "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+    },
+    {
+      "name": "Duplicate rejected condition / unaffected section cannot repair",
+      "status": "PASS",
+      "providerCalls": 0,
+      "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+    },
+    {
+      "name": "Actual recorded cost and pending maximum reservation stay separate",
+      "status": "PASS",
+      "providerCalls": 0,
+      "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+    },
+    {
+      "name": "Actual runtime timeout cannot automatically issue a second attempt",
+      "status": "PASS",
+      "providerCalls": 0,
+      "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+    },
+    {
+      "name": "Current full-depth repository pricing exceeds cap => zero-call budget block, no depth reduction",
+      "status": "PASS",
+      "providerCalls": 0,
+      "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+    }
+  ],
+  "bilingualProof": [
+    {
+      "selectedOutput": [
+        "zh-Hans"
+      ],
+      "mockTransportCalls": 3,
+      "bothLocalesIncludedInEachBatch": true,
+      "normalCostUSD": 0.00018,
+      "priceRecord": "EXPLICIT_SYNTHETIC_FIXTURE_ONLY_NOT_REPOSITORY_RATES",
+      "realProviderCalls": 0
+    },
+    {
+      "selectedOutput": [
+        "en"
+      ],
+      "mockTransportCalls": 3,
+      "bothLocalesIncludedInEachBatch": true,
+      "normalCostUSD": 0.00018,
+      "priceRecord": "EXPLICIT_SYNTHETIC_FIXTURE_ONLY_NOT_REPOSITORY_RATES",
+      "realProviderCalls": 0
+    },
+    {
+      "selectedOutput": [
+        "zh-Hans",
+        "en"
+      ],
+      "mockTransportCalls": 3,
+      "bothLocalesIncludedInEachBatch": true,
+      "normalCostUSD": 0.00018,
+      "priceRecord": "EXPLICIT_SYNTHETIC_FIXTURE_ONLY_NOT_REPOSITORY_RATES",
+      "realProviderCalls": 0
+    }
+  ],
+  "currentRepositoryBudgetPlan": [
+    {
+      "batch": "B01",
+      "plannedInputTokens": 12510,
+      "plannedMaxOutputTokens": 62585,
+      "expectedCostUSD": 1.09312,
+      "maximumConfiguredCostUSD": 1.30174
+    },
+    {
+      "batch": "B02",
+      "plannedInputTokens": 12762,
+      "plannedMaxOutputTokens": 60437,
+      "expectedCostUSD": 1.058328,
+      "maximumConfiguredCostUSD": 1.259788
+    },
+    {
+      "batch": "B03",
+      "plannedInputTokens": 13835,
+      "plannedMaxOutputTokens": 66405,
+      "expectedCostUSD": 1.11782,
+      "maximumConfiguredCostUSD": 1.38344
+    }
+  ],
+  "unresolvedCostConflict": {
+    "currentThreeBatchExpectedCostUSD": 3.2692680000000003,
+    "currentThreeBatchMaximumCostUSD": 3.9449680000000003,
+    "state": "BUDGET_BLOCKED_CURRENT_CONFIG_OVER_USD1",
+    "modelActivated": false,
+    "depthReduced": false
+  },
+  "actualProviderCalls": 0,
+  "actualIncurredCostUSD": 0,
+  "fixturePricesNotRealCosts": true,
+  "existingLegacyRepairPolicyUnmodified": true
+}

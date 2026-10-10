@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-PRODUCTION-CAPABILITY-CURRENT-SUCCESSOR-v1.0.0",
+  "phase": "TPA-M",
+  "work": "M-W51-M-W58",
+  "baselineCommit": "fc2c3dd6ab4910581fd9c859dc303e8c89697ec0",
+  "status": "CURRENT_PHASE_M_SOURCE_READY_LIVE_PROMOTION_PENDING",
+  "successorOf": "content/production/symbolic-method/reconciliation/tarot-production-sha-current-successor-v1.json",
+  "current": {
+    "sourceReady": true,
+    "pcmCapability": "LIMITED",
+    "runtimeAuthority": "SERVER_D1_COMMIT_PINNED",
+    "statusEndpoint": "/api/tarot-production-status",
+    "executeEndpoint": "/api/symbolic-method-execute"
+  },
+  "productionBoundary": {
+    "staticPublicRunAllowed": false,
+    "liveRunAllowedFromServerOnly": true,
+    "guestPersistence": false,
+    "clientMayGrantAuthority": false
+  },
+  "nextAction": "COMMIT_PUSH_DEPLOY_VERIFY_PHASE_L_V2_THEN_PROMOTE_D1"
+}

@@ -1,0 +1,5 @@
+{
+  "$schema":"http://json-schema.org/draft-07/schema#","$id":"https://getphios.com/schemas/guided-reading-request-v1.schema.json","title":"PHI OS Guided Reading Request","type":"object","additionalProperties":false,
+  "required":["schemaVersion","action","question"],
+  "properties":{"schemaVersion":{"const":"PHI-OS-KAP-GUIDED-READING-REQUEST-v1.0.0"},"action":{"enum":["ELIGIBILITY","RECOMPOSE"]},"question":{"type":"string","minLength":1,"maxLength":500},"locale":{"enum":["zh-Hans","en"]},"depth":{"enum":["QUICK","STANDARD","DEEP"]},"selectedReadingMode":{"enum":["KNOWLEDGE_ONLY","METHOD_AWARE","METHOD_REQUIRED"]},"explicitMethodInterest":{"type":"boolean"},"clarifyingAnswers":{"type":"array","maxItems":3},"temporaryObservations":{"type":"array","maxItems":6},"methodConsent":{"type":"object"},"methodProjections":{"type":"array"},"escalationSignals":{"type":"object"}}
+}

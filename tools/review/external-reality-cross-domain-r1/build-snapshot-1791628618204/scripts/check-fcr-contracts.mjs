@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {readJson} from './lib/fcr/fcr-check-lib.mjs';
+const input=readJson('content/financial/calculation-runtime/contracts/financial-calculation-input-contract-v1.json');
+assert.deepEqual(input.numericAuthorityInputs,['fdrSnapshot','assumptionSet']); assert.equal(input.rules.professionalOverrideAllowed,false); assert.equal(input.rules.promptArithmeticAllowed,false);
+const as=readJson('content/financial/calculation-runtime/contracts/financial-assumption-set-contract-v1.json');
+for(const k of ['versioned','effectiveDated','sourceLabelled']) assert.equal(as.rules[k],true); assert.equal(as.rules.globalNumericDefaultsAllowed,false);
+const reg=readJson('content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json');
+for(const type of ['INFLATION','FX_RATE','INVESTMENT_RETURN','EPF_RETURN','SALARY_GROWTH','RETIREMENT_AGE','LONGEVITY_AGE','TAX_EFFECTIVE_RATE']) assert.ok(reg.entries.some(x=>x.type===type),`Missing assumption ${type}`);
+assert.equal(reg.entries.every(x=>x.numericDefault===null&&x.sourceRequired&&x.effectiveDateRequired&&x.versionRequired),true);
+const scenarios=readJson('content/financial/calculation-runtime/registries/financial-scenario-registry-v1.json'); assert.deepEqual(scenarios.entries.map(x=>x.code),['BASE','CONSERVATIVE','STRESS','CUSTOM']); assert.equal(scenarios.rules.scenarioCodeDoesNotImplyNumericDefaults,true);
+const engines=readJson('content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json');
+const required=['CURRENCY','NET_WORTH','LIQUIDITY','CASH_FLOW','DEBT','CONTINGENT_EXPOSURE','EMERGENCY_RESERVE','PROTECTION_NEED','EDUCATION_FUNDING','RETIREMENT','INVESTMENT_PROJECTION','ESTATE_LIQUIDITY','BUSINESS_WEALTH','ALLOCATION'];
+assert.deepEqual(engines.entries.map(x=>x.engineCode),required); assert.equal(engines.entries.every(x=>x.deterministic&&!x.createsAnalysis&&!x.createsAdvice&&!x.createsProfessionalJudgment),true);
+const range=readJson('content/financial/calculation-runtime/contracts/financial-range-arithmetic-contract-v1.json'); assert.equal(range.rules.midpointSubstitutionAllowed,false); assert.equal(range.rules.unknownSilentlyZeroAllowed,false);
+const result=readJson('content/financial/calculation-runtime/contracts/financial-calculation-result-contract-v1.json'); assert.deepEqual(result.valueKinds,['EXACT','APPROXIMATE','RANGE','UNKNOWN']); assert.equal(result.rules.recommendationTextAllowed,false);
+const trace=readJson('content/financial/calculation-runtime/contracts/financial-calculation-trace-contract-v1.json'); assert.deepEqual(trace.requiredPath,['result','formula','inputReferences','assumptionReferences']);
+console.log('✓ FCR-W1–W19 contracts and registries passed.');
+console.log(`  ${required.length} deterministic engines + 4 scenarios + explicit versioned/source-labelled assumption authority are bound.`);

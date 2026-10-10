@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-VI-ATLAS-DATA-LOADER-SUCCESSOR-v2.0.0",
+  "work": "BOOK-VI-ATLAS-DATA-LOADER-SUCCESSOR-V2",
+  "baselineCommit": "f5c9445027e30ef5a4d0390f0a01c3e021032993",
+  "status": "ACTIVE_VERSIONED_SUCCESSOR",
+  "predecessor": "content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-data-loader-successor-v1.json",
+  "change": {
+    "path": "assets/js/pages/civilization-atlas/atlas-data.js",
+    "previousSha256": "daf5e2e09307a94bf1880287d4c3636d7206a4036c9549a04354b24c17e3c515",
+    "successorSha256": "1e31f8f322c6c766df3395e648ec307f34162df515972730b33ba5b546902601",
+    "changeClass": "NEW_ATLAS_RELEASE_SUCCESSOR"
+  },
+  "reason": "Book VI Atlas data closure added governed relationship and knowledge-state loaders after the first Book VI shared-loader successor. Book V loader functions and frozen Book V registries remain unchanged.",
+  "addedBookVILoaders": [
+    {
+      "export": "loadReconfigurationRelationships",
+      "path": "/content/civilization-atlas/reconfiguration/book-vi-atlas-relationships-v2.json"
+    },
+    {
+      "export": "loadReconfigurationKnowledgeStates",
+      "path": "/content/civilization-atlas/reconfiguration/knowledge-state-contract-v1.json"
+    }
+  ],
+  "scope": {
+    "bookVCanonicalTheoryChanged": false,
+    "bookVHistoricalRegistriesChanged": false,
+    "bookVLoaderFunctionsRemovedOrRewritten": false,
+    "bookVIReconfigurationLoadersAdded": true,
+    "parallelAtlasRuntimeCreated": false,
+    "parallelAskRuntimeCreated": false,
+    "productionAdmissionChanged": false
+  },
+  "boundary": "This successor extends the v1 Book VI loader successor. Historical Book V freeze and the v1 successor record are not rewritten."
+}

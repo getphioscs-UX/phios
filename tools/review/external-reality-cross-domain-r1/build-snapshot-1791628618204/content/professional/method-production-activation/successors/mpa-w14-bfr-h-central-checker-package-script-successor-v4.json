@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W14-BFR-H-CENTRAL-CHECKER-PACKAGE-SCRIPT-SUCCESSOR-v4.0.0",
+  "work": "MPA-W14-PACKAGE-JSON-SCRIPT-SUCCESSOR",
+  "baselineCommit": "579618c93fbc674d8528cd5b6a18df868c5e7e42",
+  "status": "AUTHORIZED_PACKAGE_JSON_SCRIPT_SUCCESSOR_BFR_H_CENTRAL_ENTRY_DEPENDENCY_FREEZE_PRESERVED",
+  "objective": "Authorize only the PART G/PART H npm checker entry additions while preserving dependency, Method runtime, visual-raster dependency and production eligibility authority.",
+  "predecessor": {
+    "path": "content/professional/method-production-activation/successors/mpa-w14-mcd-package-script-regression-successor-v3.json",
+    "sha256": "e4305c1b0d7aa51ea551fcaeee3518c65832eed28c66b484946c7d9d7f226f06",
+    "packageJsonSha256": "79e3893d128fac1d8f35803deb3399638bd9d85da6a4318e8628acd1381e71ce",
+    "checkerSha256": "0b02cd196b9f224372e64be4ac7d8829e04edf23301eb27344a64920feefa1d3",
+    "rewritten": false
+  },
+  "successor": {
+    "packageJsonSha256": "c1411d9e3c7ed405ad570a978cd24d8d52187e1069aea3d9fa85e9904cd9c1ff",
+    "packageLockSha256": "7059fc59f0e4963605efe517723b8ea316a046c0ba2fe8c9074abdd36252a176",
+    "checkerPath": "scripts/check-mpa-w14-regression-runtime.mjs",
+    "checkerSha256": "59940aa141bdd94c2a5cae72a75471b63d5a0b1259a6043a70abe7a97465cbe1"
+  },
+  "authorizedPackageJsonChange": {
+    "scope": "SCRIPTS_ONLY_BFR_H_CKA_WEB_PRODUCTION_CHECKER_ENTRYPOINTS",
+    "dependenciesChanged": false,
+    "devDependenciesChanged": false,
+    "dependenciesSha256": "fdb26beafb30c99afae2d8cd362236425a4be4a48d52263f27ef4aa083aca8dc",
+    "devDependenciesSha256": "b86c1a6248172fb90efe608000cb7ee507afa3f664e9e179d69c1aee7d643384",
+    "scripts": {
+      "check:cka-contracts": "node scripts/check-cka-canonical-contract-projections.mjs",
+      "precheck:cka": "npm run check:cka-contracts",
+      "check:bfr-h-required-files": "node scripts/check-bfr-h-required-files-contracts.mjs",
+      "precheck:bfr-h": "npm run check:bfr-h-required-files",
+      "check:bfr-h15": "node scripts/check-bfr-h15-capability-consumption.mjs",
+      "check:bfr-h16": "node scripts/check-bfr-h16-visual-production.mjs",
+      "postcheck:bfr-h": "npm run check:hpc2-cka-direct-mapping && npm run check:bfr-h-cka-direct-mapping && npm run check:bfr-h15 && npm run check:bfr-h16",
+      "check:web-production-current": "npm run check:web-production-runtime && npm run check:wpr-pf"
+    },
+    "frozenPredecessorScriptsUnchanged": [
+      "check:bfr-h",
+      "check:hpc2",
+      "check:cka",
+      "check:web-production-runtime"
+    ]
+  },
+  "boundaries": {
+    "historicalRegressionRegistryMutated": false,
+    "v3SuccessorMutated": false,
+    "packageLockChanged": false,
+    "dependencyChanged": false,
+    "methodProductionEligibilityChanged": false,
+    "professionalEligibilityChanged": false,
+    "secondMethodAuthorityCreated": false,
+    "futurePackageScriptDriftRequiresVersionedSuccessor": true
+  }
+}

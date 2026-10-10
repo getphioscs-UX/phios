@@ -1,0 +1,23 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'BINARY_VERIFIED_EXTRACTION_CANDIDATE_READY'
+- 'OWNER_CONFIRMED_FINAL_UPLOAD_BINARY_VERIFICATION_PENDING'
+
+    at file:///C:/phios/scripts/check-book-i-v3-final-source-admission.mjs:16:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'BINARY_VERIFIED_EXTRACTION_CANDIDATE_READY',
+  expected: 'OWNER_CONFIRMED_FINAL_UPLOAD_BINARY_VERIFICATION_PENDING',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

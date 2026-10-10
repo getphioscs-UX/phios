@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+globalThis.document={documentElement:{lang:'zh-Hans'}};
+const {onRequestPost}=await import('../functions/api/customer-personal-reality.js');
+const {buildNumerologyReadingHtml}=await import('../assets/customer-ui/js/numerology/reading-renderer.js');
+const body={birthDate:'1989-11-15',birthTimeUnknown:true,methods:['numeric'],consent:true,locale:'zh-Hans',numerologyTargetDate:'2025-05-15',numerologyFullBirthName:'Thomas John Hancock',numerologyNameConfirmed:true,numerologyComparisonBirthDate:'1988-03-20'};
+const response=await onRequestPost({request:new Request('https://phios.local/api/customer-personal-reality',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}),env:{}});
+const payload=await response.json();if(!response.ok||payload?.ok!==true)throw new Error(JSON.stringify(payload));
+const html=buildNumerologyReadingHtml(payload.view.numerology);if(!html)throw new Error('NUM_RENDERER_EMPTY');
+fs.mkdirSync('content/professional/num-production/customer/evidence/dom',{recursive:true});
+fs.writeFileSync('content/professional/num-production/customer/evidence/dom/num-cx-w15-renderer-fragment-v1.html',html+'\n');
+fs.writeFileSync('content/professional/num-production/customer/evidence/dom/num-cx-w15-primary-view-v1.json',JSON.stringify({schemaVersion:'PHI-OS-NUM-CX-W15-PRIMARY-VIEW-v1.0.0',request:body,reading:payload.view.reading,numerology:payload.view.numerology},null,2)+'\n');
+console.log('✓ NUM-CX-W15 production renderer fixture generated.');

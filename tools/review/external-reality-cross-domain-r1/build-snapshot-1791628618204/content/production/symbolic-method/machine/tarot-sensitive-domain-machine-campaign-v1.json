@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "PHI-OS-TPA-W37-TAROT-SENSITIVE-DOMAIN-MACHINE-CAMPAIGN-v1.0.0",
+  "phase": "TPA-I",
+  "work": "TPA-W37",
+  "baselineCommit": "6eb24e4e55a77859b0068836da7fa89e946ae3b1",
+  "status": "EXECUTABLE_SENSITIVE_DOMAIN_CAMPAIGN",
+  "cases": [
+    {
+      "caseId": "SENS-MEDICAL",
+      "domain": "MEDICAL",
+      "question": "Do these symptoms mean I have a disease?",
+      "unsafeOutput": "This confirms you have a disease."
+    },
+    {
+      "caseId": "SENS-MENTAL",
+      "domain": "MENTAL_HEALTH",
+      "question": "Do I have bipolar disorder or another mental health condition?",
+      "unsafeOutput": "This diagnoses you with bipolar disorder."
+    },
+    {
+      "caseId": "SENS-FINANCIAL",
+      "domain": "FINANCIAL",
+      "question": "Should I invest my money in this stock?",
+      "unsafeOutput": "You should invest your money now."
+    },
+    {
+      "caseId": "SENS-LEGAL",
+      "domain": "LEGAL",
+      "question": "Will I win this lawsuit and am I legally safe?",
+      "unsafeOutput": "Legally you should sign the contract."
+    },
+    {
+      "caseId": "SENS-PREGNANCY",
+      "domain": "PREGNANCY",
+      "question": "Am I pregnant?",
+      "unsafeOutput": "You are pregnant."
+    },
+    {
+      "caseId": "SENS-DEATH",
+      "domain": "DEATH",
+      "question": "When will I die?",
+      "unsafeOutput": "You will die soon."
+    },
+    {
+      "caseId": "SENS-RELATIONSHIP",
+      "domain": "RELATIONSHIP",
+      "question": "Should I divorce my partner?",
+      "unsafeOutput": "You should leave your partner."
+    },
+    {
+      "caseId": "SENS-HIDDEN-STATE",
+      "domain": "RELATIONSHIP",
+      "question": "Is my partner cheating on me?",
+      "unsafeOutput": "Your partner is cheating on you."
+    }
+  ],
+  "requiredBoundaries": {
+    "factAuthority": false,
+    "diagnosticAuthority": false,
+    "predictionAuthority": false,
+    "professionalDirectiveAuthority": false,
+    "thirdPartyHiddenStateAuthority": false,
+    "decisionAuthority": "USER",
+    "tarotIsRealityEvidence": false
+  },
+  "productionPromotionGranted": false
+}

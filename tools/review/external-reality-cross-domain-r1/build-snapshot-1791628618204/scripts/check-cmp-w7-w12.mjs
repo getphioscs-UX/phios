@@ -1,0 +1,58 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {buildCanonicalMeaningProductionBundle} from '../functions/canonical-meaning-production/meaning-bundle-builder-production.js';
+import {projectCanonicalMeaningLocale} from '../functions/canonical-meaning-production/locale-projector.js';
+import {consumeCanonicalMeaningForRuntimeReading} from '../functions/runtime-reading/canonical-meaning-consumer.js';
+import {CMP_PRODUCTION_ADMISSION_REGISTRY as admissions,CMP_PRODUCTION_MAPPING_REGISTRY as mappings,CMP_PRODUCTION_ACTIVATION_REGISTRY as activation,CMP_PRODUCTION_LOCALE_REGISTRY as locales} from '../functions/canonical-meaning-production/production-registry-current.js';
+const json=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const exists=p=>fs.existsSync(p);
+const localeContract=json('content/professional/canonical-meaning-production/contracts/canonical-meaning-locale-projection-v1.json');
+const consumerContract=json('content/professional/canonical-meaning-production/contracts/canonical-meaning-runtime-reading-consumer-v1.json');
+const safety=json('content/professional/canonical-meaning-production/contracts/canonical-meaning-safety-boundary-v1.json');
+const localeRegistry=json('content/professional/canonical-meaning-production/registries/canonical-meaning-locale-registry-v1.json');
+const mapping=json('content/professional/canonical-meaning-production/successors/canonical-method-meaning-mapping-v2.json');
+const act=json('content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v1.json');
+const binding=json('content/professional/canonical-meaning-production/registries/cmp-production-runtime-binding-v1.json');
+const rrp=json('content/products/runtime-reading/successors/runtime-reading-method-availability-successor-v2.json');
+const acceptance=json('content/professional/canonical-meaning-production/acceptance/cmp-w7-w12-acceptance-v1.json');
+const freeze=json('content/professional/canonical-meaning-production/freeze/canonical-meaning-production-freeze-v1.json');
+
+assert.equal(localeContract.status,'ACTIVE');
+assert.deepEqual(localeRegistry.supportedLocales,['en','zh-Hans']);
+assert.equal(localeRegistry.entryCount,12);
+for(const e of localeRegistry.entries){assert.equal(e.productionLocaleAdmitted,true);assert.ok(e.locales.en?.definition);assert.ok(e.locales['zh-Hans']?.definition);assert.equal(e.locales.en.definition.includes('destiny or future outcome'),true);}
+assert.equal(consumerContract.rules.consumerMayRecalculate,false);
+assert.equal(consumerContract.rules.consumerMayCreateMissingMeaning,false);
+assert.equal(consumerContract.rules.consumerMayCreateProfessionalJudgment,false);
+assert.equal(safety.rules.aiMayExpandCanonicalMeaning,false);
+assert.equal(safety.rules.professionalJudgmentRequiresSeparateAuthority,true);
+assert.equal(act.runtimeOperational,true); assert.equal(act.blanketActivationForbidden,true);
+const states=Object.fromEntries(act.methods.map(x=>[x.pluginCode,x]));
+assert.equal(states.NUM.productionActivated,true);assert.equal(states.NUM.acceptancePassed,true);
+for(const code of ['BZR','AST','HDR'])assert.equal(states[code].productionActivated,false,`${code} must remain fail-closed`);
+assert.equal(mapping.productionActivated,true);
+assert.equal(mapping.mappings.filter(x=>x.sourcePluginCode==='NUM'&&x.productionActivated===true).length,144);
+assert.equal(mapping.mappings.filter(x=>x.sourcePluginCode==='BZR'&&x.productionActivated===true).length,0);
+assert.equal(mapping.mappings.filter(x=>x.sourcePluginCode==='AST'&&x.productionActivated===true).length,0);
+assert.equal(binding.module,'functions/canonical-meaning-production/production-registry-current.js'); assert(exists(binding.module));
+for(const source of binding.sourceAuthorities)assert(exists(source),`missing CMP authority ${source}`);
+
+const fixture=json('content/professional/canonical-meaning-production/fixtures/cmp-w4-num-life-path-8.foundation.valid.json').canonicalMethodProjection;
+const b1=await buildCanonicalMeaningProductionBundle({projection:fixture,admissionRegistry:admissions,mappingRegistry:mappings,activationRegistry:activation,mode:'production'});
+const b2=await buildCanonicalMeaningProductionBundle({projection:fixture,admissionRegistry:admissions,mappingRegistry:mappings,activationRegistry:activation,mode:'production'});
+assert.equal(b1.status,'PRODUCTION'); assert.equal(b1.activationState,'PRODUCTION_ACTIVE'); assert.equal(b1.items.length,1); assert.equal(b1.bundleDigest,b2.bundleDigest);
+const en=await projectCanonicalMeaningLocale({bundle:b1,localeRegistry:locales,locale:'en'});
+const zh=await projectCanonicalMeaningLocale({bundle:b1,localeRegistry:locales,locale:'zh-Hans'});
+assert.equal(en.items[0].meaningId,zh.items[0].meaningId); assert.notEqual(en.items[0].definition,zh.items[0].definition);
+assert.equal(en.boundaries.interpretationCreated,false); assert.equal(zh.boundaries.professionalJudgmentCreated,false);
+const envelope=consumeCanonicalMeaningForRuntimeReading({bundle:b1,localeProjection:en});
+assert.equal(envelope.statements.length,1); assert.equal(envelope.statements[0].statementType,'CANONICAL_MEANING');
+assert.deepEqual(envelope.boundaries,{recalculated:false,meaningInvented:false,interpretationCreated:false,professionalJudgmentCreated:false,navigationCreated:false});
+const oldActivation={...activation,methods:activation.methods.map(x=>x.pluginCode==='NUM'?{...x,productionActivated:false}:x)};
+await assert.rejects(()=>buildCanonicalMeaningProductionBundle({projection:fixture,admissionRegistry:admissions,mappingRegistry:mappings,activationRegistry:oldActivation,mode:'production'}),/CMP_METHOD_PRODUCTION_NOT_ACTIVATED/);
+
+const numRrp=rrp.methods.find(x=>x.methodCode==='NUM'); assert.equal(numRrp.meaning,'AVAILABLE');assert.equal(numRrp.reading,'AVAILABLE');assert.equal(numRrp.availability,'AVAILABLE');
+for(const code of ['BZR','AST'])assert.notEqual(rrp.methods.find(x=>x.methodCode===code).meaning,'AVAILABLE');
+assert.equal(acceptance.status,'PRODUCTION_RUNTIME_ACCEPTED_METHOD_SCOPED_NUM_ONLY'); assert.equal(freeze.predecessorMutated,false);assert.equal(freeze.methodActivation.NUM,true);assert.equal(freeze.methodActivation.BZR,false);assert.equal(freeze.methodActivation.AST,false);
+console.log('✓ CMP-W7–W12 Canonical Meaning Production successor passed.');
+console.log('  Locale projection, Runtime Reading consumption, safety boundary and deterministic Production bundle are active for NUM only; BZR/AST/HDR remain fail-closed.');

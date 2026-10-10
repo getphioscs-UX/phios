@@ -1,0 +1,510 @@
+{
+  "schemaVersion": "PHI-OS-CARC-W3-WPR-ROUTE-RECONCILIATION-v1.0.0",
+  "phase": "CARC",
+  "work": "CARC-W3",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "RECONCILED_CURRENT_ROUTE_REGISTRY",
+  "routeRegistry": {
+    "path": "content/web-production/registries/wpr-route-registry-v1.json",
+    "sha256": "79cb71a17868ca127ec9e6151cd453a5d29cf541cc6366c9aa72b0c5e7ea9d74",
+    "count": 28
+  },
+  "surfaceRegistry": {
+    "path": "content/web-production/registries/wpr-surface-registry-v1.json",
+    "sha256": "84399fb47db1b5ca9c61c546cf0b3234629f09f00636c28c6a87a15f98dd61c5",
+    "count": 26
+  },
+  "proof": {
+    "uniqueRouteCodes": true,
+    "uniquePaths": true,
+    "missingSurfaceOwnerCount": 0,
+    "missingConsumerCount": 0,
+    "unknownProductionStatusCount": 0,
+    "missingCanonicalOwnerCount": 0
+  },
+  "routes": [
+    {
+      "routeCode": "HOME",
+      "path": "/",
+      "surfaceCode": "HOME",
+      "canonicalOwner": [
+        "PUBLISHED_KNOWLEDGE",
+        "BOOK_REGISTRY",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "index.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "LIBRARY",
+      "path": "/library",
+      "surfaceCode": "LIBRARY",
+      "canonicalOwner": [
+        "PUBLISHED_KNOWLEDGE",
+        "BOOK_REGISTRY",
+        "PART_REGISTRY"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "library.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "ARTICLES",
+      "path": "/articles",
+      "surfaceCode": "LIBRARY",
+      "canonicalOwner": [
+        "PUBLISHED_KNOWLEDGE",
+        "BOOK_REGISTRY",
+        "PART_REGISTRY"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "articles.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "ARTICLE",
+      "path": "/articles/:slug",
+      "surfaceCode": "ARTICLE",
+      "canonicalOwner": [
+        "PUBLISHED_KNOWLEDGE"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "articles",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING_STATIC_PUBLISHED_ROUTES"
+    },
+    {
+      "routeCode": "FIGURES",
+      "path": "/figures",
+      "surfaceCode": "FIGURE",
+      "canonicalOwner": [
+        "PUBLISHED_ASSET_REGISTRY",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "figures.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "FIGURE",
+      "path": "/figure",
+      "surfaceCode": "FIGURE",
+      "canonicalOwner": [
+        "PUBLISHED_ASSET_REGISTRY",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "figure.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING_QUERY_RESOLVED"
+    },
+    {
+      "routeCode": "BOOKS",
+      "path": "/books",
+      "surfaceCode": "BOOK",
+      "canonicalOwner": [
+        "BOOK_REGISTRY",
+        "PART_REGISTRY",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "books/index.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "BOOK_REALITY_FORMATION",
+      "path": "/books/reality-formation",
+      "surfaceCode": "BOOK",
+      "canonicalOwner": [
+        "BOOK_REGISTRY",
+        "PART_REGISTRY",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "books/reality-formation/index.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "BOOK_REALITY_RUNTIME",
+      "path": "/books/reality-runtime",
+      "surfaceCode": "BOOK",
+      "canonicalOwner": [
+        "BOOK_REGISTRY",
+        "PART_REGISTRY",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "books/reality-runtime/index.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "BOOK_REALITY_CONTINUITY",
+      "path": "/books/reality-continuity",
+      "surfaceCode": "BOOK",
+      "canonicalOwner": [
+        "BOOK_REGISTRY",
+        "PART_REGISTRY",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "books/reality-continuity/index.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "BOOK_REALITY_CIVILIZATION",
+      "path": "/books/reality-civilization",
+      "surfaceCode": "BOOK",
+      "canonicalOwner": [
+        "BOOK_REGISTRY",
+        "PART_REGISTRY",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "books/reality-civilization/index.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "BOOK_REALITY_NAVIGATION",
+      "path": "/books/reality-navigation",
+      "surfaceCode": "BOOK",
+      "canonicalOwner": [
+        "BOOK_REGISTRY",
+        "PART_REGISTRY",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "books/reality-navigation/index.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "ACADEMY",
+      "path": "/academy",
+      "surfaceCode": "ACADEMY_DISCOVERY",
+      "canonicalOwner": [
+        "ALR"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "academy.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "REALITY_JOURNEY",
+      "path": "/reality-journey",
+      "surfaceCode": "REALITY_JOURNEY_OVERVIEW",
+      "canonicalOwner": [
+        "JR",
+        "RDG"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "reality-journey.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING_WPR_W20_JR_V2_OVERVIEW"
+    },
+    {
+      "routeCode": "REALITY_ENTRY",
+      "path": "/reality-entry",
+      "surfaceCode": "REALITY_ENTRY",
+      "canonicalOwner": [
+        "RDG"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "reality-entry.html",
+      "consumerExists": true,
+      "audienceClass": "CUSTOMER",
+      "visibility": "RESTRICTED",
+      "authRequired": true,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "CUSTOMER_WORKSPACE",
+      "path": "/reality-dashboard",
+      "surfaceCode": "REALITY_JOURNEY_LOCAL",
+      "canonicalOwner": [
+        "JR",
+        "RDG",
+        "M3C_BROWSER_LOCAL_COMPATIBILITY"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "reality-dashboard.html",
+      "consumerExists": true,
+      "audienceClass": "CUSTOMER",
+      "visibility": "RESTRICTED",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING_WPR_W20_BROWSER_LOCAL_COMPATIBILITY"
+    },
+    {
+      "routeCode": "PROFESSIONAL",
+      "path": "/services",
+      "surfaceCode": "PROFESSIONAL",
+      "canonicalOwner": [
+        "PR"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "services.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "PROFESSIONAL_WORKSPACE",
+      "path": "/professional-workspace",
+      "surfaceCode": "PROFESSIONAL_WORKSPACE",
+      "canonicalOwner": [
+        "PR",
+        "RDG",
+        "RR",
+        "FINANCIAL_RUNTIME"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "professional-workspace.html",
+      "consumerExists": true,
+      "audienceClass": "PROFESSIONAL",
+      "visibility": "RESTRICTED",
+      "authRequired": true,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "FINANCIAL",
+      "path": "/professional/financial",
+      "surfaceCode": "FINANCIAL",
+      "canonicalOwner": [
+        "FINANCIAL_RUNTIME",
+        "PR"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "professional/financial/index.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "ACCOUNT",
+      "path": "/account",
+      "surfaceCode": "ACCOUNT",
+      "canonicalOwner": [
+        "ACCOUNT_RUNTIME"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "account.html",
+      "consumerExists": true,
+      "audienceClass": "CUSTOMER",
+      "visibility": "RESTRICTED",
+      "authRequired": true,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "CHECKOUT",
+      "path": "/checkout",
+      "surfaceCode": "CHECKOUT",
+      "canonicalOwner": [
+        "COMMERCE_RUNTIME"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "checkout.html",
+      "consumerExists": true,
+      "audienceClass": "CUSTOMER",
+      "visibility": "RESTRICTED",
+      "authRequired": true,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "ABOUT",
+      "path": "/about",
+      "surfaceCode": "ABOUT",
+      "canonicalOwner": [
+        "WPR_SURFACE_REGISTRY_STATIC_SHELL"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "about.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "PRIVACY",
+      "path": "/privacy",
+      "surfaceCode": "LEGAL",
+      "canonicalOwner": [
+        "RDG"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "privacy.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "TERMS",
+      "path": "/terms",
+      "surfaceCode": "LEGAL",
+      "canonicalOwner": [
+        "RDG"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "terms.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "CONTACT",
+      "path": "/contact",
+      "surfaceCode": "CONTACT",
+      "canonicalOwner": [
+        "WPR_SURFACE_REGISTRY_STATIC_SHELL"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "contact.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "PROFESSIONAL_PERSONAL_RUNTIME",
+      "path": "/professional/personal-runtime",
+      "surfaceCode": "PROFESSIONAL",
+      "canonicalOwner": [
+        "PR"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "professional/personal-runtime/index.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    },
+    {
+      "routeCode": "PERSONAL_RUNTIME_SETUP",
+      "path": "/personal-runtime",
+      "surfaceCode": "PERSONAL_RUNTIME_SETUP",
+      "canonicalOwner": [
+        "MPA",
+        "RDG"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "personal-runtime.html",
+      "consumerExists": true,
+      "audienceClass": "PUBLIC",
+      "visibility": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING_WPR_W21_EPHEMERAL_INPUT_READINESS"
+    },
+    {
+      "routeCode": "PROFESSIONAL_REPORTS",
+      "path": "/professional-reports",
+      "surfaceCode": "PROFESSIONAL_REPORT_VIEWER",
+      "canonicalOwner": [
+        "RR",
+        "PR",
+        "RDG"
+      ],
+      "localeOwnership": "RUNTIME_LOCALE",
+      "consumer": "professional-reports.html",
+      "consumerExists": true,
+      "audienceClass": "PROFESSIONAL",
+      "visibility": "RESTRICTED",
+      "authRequired": true,
+      "entitlementRequired": false,
+      "productionStatus": "EXISTING"
+    }
+  ],
+  "rules": {
+    "routePresenceDoesNotImplyRuntimeProduction": true,
+    "localeOwnershipMustBeExplicit": true,
+    "visibilityMustFollowSurfaceAudience": true
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "v1": {
+    "status": "HUMAN_ACCEPTED_EXACT_11_FILES",
+    "candidate": "docs/design-system/pds-w0-navigation-topology-migration-candidate-v1.json",
+    "SHA256": "95f119b1fc4987d24ba3d3d88d8c9fb9a5e3b67d8d35abfc50c5f616afccb69e",
+    "receipt": "docs/design-system/pds-w0-navigation-topology-human-accept-v1.json",
+    "successor": "docs/design-system/pds-w0-navigation-topology-successor-v1.json",
+    "preBatch06PdsCheck": "PASS"
+  },
+  "v2": {
+    "status": "HUMAN_ACCEPTED_EXACT_TWO_BATCH06_FILES",
+    "candidateID": "PHI-OS-PDS-W0-NAVIGATION-BATCH06-TOPOLOGY-CANDIDATE-v2",
+    "candidate": "docs/design-system/pds-w0-navigation-batch06-topology-candidate-v2.json",
+    "SHA256": "7a716027c9f36a83e765c84e4889fe4e7bf7cf72e1981a6b56e8ab5dff744beb",
+    "files": [
+      {
+        "path": "functions/runtime/navigation/nav-accepted-batch-06-contract.js",
+        "sha256": "20a10a40c97fe0464c05af653852c9075843cb3a31f842effe9b8ded120066f5",
+        "gitBlobSha": "9cd17128f2a6addfcbe20986e684429dc97b81b9"
+      },
+      {
+        "path": "functions/runtime/navigation/nav-accepted-batch-06-runtime.js",
+        "sha256": "3664d067dad75785291b13e3abbb64a883aea2dcecc95ca66875da79730bcc34",
+        "gitBlobSha": "346797bb7eba46969486d5843c9cab671c0c6504"
+      }
+    ],
+    "currentPdsCheck": "PASS",
+    "receipt": "docs/design-system/pds-w0-navigation-batch06-human-accept-v2.json",
+    "successor": "docs/design-system/pds-w0-navigation-batch06-successor-v2.json"
+  },
+  "canonicalModules": 30,
+  "providerCalls": 0,
+  "productionActivation": false,
+  "validation": {
+    "zeroCostPds": "PASS",
+    "navBatch06": "20_CHECKS_PASS",
+    "topologyScope": "7_CHECKS_PASS",
+    "precheck": "FAIL_SEPARATE_PWS_ENTRY_DATA_LOADER_ASSERTION",
+    "remaining": {
+      "file": "scripts/check-pws-entry-w1-authorised-data-loader.mjs",
+      "line": 274,
+      "expected": 13,
+      "actual": 17
+    },
+    "providerCalls": 0,
+    "productionActions": 0
+  }
+}

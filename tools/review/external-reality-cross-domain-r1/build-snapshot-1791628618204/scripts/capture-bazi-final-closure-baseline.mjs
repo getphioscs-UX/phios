@@ -1,0 +1,5 @@
+import fs from 'node:fs';import {ROOT,write,sha} from './lib/bazi-deep-manuscript-review.mjs';
+const paths=new Set([ROOT+'EXPERIMENT-MACHINE-REPORT.json',ROOT+'CONTROLLED-EXPERIMENT-APPROVAL.json',ROOT+'USAGE-RECONCILIATION.json',ROOT+'POST-3-CALL-SOURCE-SNAPSHOT.json','config/reports/bazi-deep-manuscript-r2/policy.json']);
+function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){const p=dir+e.name;if(e.isDirectory()){if(!/^(fit|final|closure)/i.test(e.name))walk(p+'/');}else if(/(LIVE-MANUSCRIPT-SNAPSHOT\.json|usage.*\.json|ledger.*\.json|provider.*receipt.*\.json|checkpoint.*\.json)$/i.test(e.name))paths.add(p);}}
+walk(ROOT);const files=[...paths].filter(p=>fs.existsSync(p)).sort().map(path=>({path,sha256:sha(path)}));
+write(ROOT+'FINAL-CLOSURE-PROTECTED-BASELINE.json',{scope:'Existing receipts and ledger bytes captured before closure rebuild',files,providerCallsDuringClosure:0,sourceUsageVerified:false});console.log(JSON.stringify({protectedFiles:files.length,providerCalls:0}));

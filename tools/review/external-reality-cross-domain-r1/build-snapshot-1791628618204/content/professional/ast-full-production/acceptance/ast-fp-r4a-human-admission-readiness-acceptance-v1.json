@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R4A-HUMAN-ADMISSION-READINESS-ACCEPTANCE-v1.0.0",
+  "workCode": "AST-FP-R4A",
+  "sourceMainCommit": "0692037d3a3f522de9f0eb11d37f738df3a2bae6",
+  "status": "REVIEW_READY_HUMAN_DECISION_PENDING",
+  "candidateClaimCount": 21,
+  "claimBundleDigest": "c2a6b66709bc5f538c6c3b7a2991c1376aee8acf0f5d2f3e2c217288e0b7d3ef",
+  "families": {
+    "ANGLE_SEMANTICS": 4,
+    "ASPECT_DYNAMICS_SEMANTICS": 4,
+    "ASPECT_PATTERN_SEMANTICS": 5,
+    "ELEMENT_MODALITY_SEMANTICS": 4,
+    "RULERSHIP_AND_DISPOSITOR_SEMANTICS": 4
+  },
+  "evidence": {
+    "contract": "content/professional/ast-full-production/contracts/ast-fp-r4a-professional-semantic-human-admission-contract-v1.json",
+    "claims": "content/professional/ast-full-production/claims/ast-fp-r4a-professional-semantic-candidate-claims-v1.json",
+    "reviewCases": "content/professional/ast-full-production/review/ast-fp-r4a-professional-semantic-human-review-cases-v1.json",
+    "reviewResults": "content/professional/ast-full-production/review/ast-fp-r4a-professional-semantic-human-review-results-v1.json",
+    "reviewUi": "content/professional/ast-full-production/review/ast-fp-r4a-professional-semantic-human-review.html",
+    "admission": "content/professional/ast-full-production/admission/ast-fp-r4a-professional-semantic-human-admission-v1.json",
+    "checker": "scripts/check-ast-fp-r4a-human-admission.mjs"
+  },
+  "humanReview": {
+    "accepted": 0,
+    "pending": 21,
+    "modelMayApprove": false,
+    "explicitHumanDecisionRequired": true
+  },
+  "governance": {
+    "reviewReadinessIsHumanAdmission": false,
+    "r2AcceptanceTransferred": false,
+    "r4EngineeringAcceptanceTransferred": false,
+    "r5EngineeringMayProceedFailClosed": true,
+    "customerPublicationAllowed": false,
+    "productionAllowed": false,
+    "customerCutoverAllowed": false
+  },
+  "next": "Human reviewer must decide all 21 exact claim digests. Only then may a successor R4A human-admission artifact change semantic admission state."
+}

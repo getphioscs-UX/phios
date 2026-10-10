@@ -1,0 +1,60 @@
+{
+  "contractCode": "PHI-OS-ORC-W0-AUTHORITY-BOUNDARY-v2",
+  "contractVersion": "2.0.0",
+  "runtimeCode": "ORC",
+  "work": "ORC-W0",
+  "status": "canonical",
+  "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+  "migration": {
+    "legacyRuntime": "ORC_V1",
+    "legacyScope": "ORC-W0-W4",
+    "successorRuntime": "ORC",
+    "successorScope": "ORC-W0-W12",
+    "migrationStatus": "UPGRADED",
+    "canonicalMigrationRegistry": "content/governance/canonical-master-work/registries/canonical-master-work-migration-registry-v1.json",
+    "legacyFreezeMutationAllowed": false
+  },
+  "coreBoundary": {
+    "coordinates": true,
+    "decides": false,
+    "ownsDomainAuthority": false
+  },
+  "may": [
+    "evaluate orchestration prerequisites from authoritative references",
+    "advance or block governed orchestration state",
+    "record SYSTEM_OPERATION_RECORD orchestration outcomes",
+    "coordinate optional service paths",
+    "create idempotency and replay-safe orchestration records"
+  ],
+  "mustNot": [
+    "validate consent as consent authority",
+    "verify input as input authority",
+    "calculate a method",
+    "freeze a method projection",
+    "resolve canonical meaning",
+    "decide knowledge truth or coverage",
+    "generate a reality readout",
+    "choose a navigation option",
+    "make Professional Judgment",
+    "approve report content",
+    "execute payment",
+    "execute action",
+    "declare outcome causality"
+  ],
+  "rdgAuthority": {
+    "registry": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+    "consumedDataTypes": [
+      "RUNTIME_STATE_RECORD",
+      "GOVERNANCE_RECORD"
+    ],
+    "producedDataTypes": [
+      "SYSTEM_OPERATION_RECORD"
+    ],
+    "payloadCopyFromDomainRecordsAllowed": false
+  },
+  "rules": {
+    "coordinateNotDecide": true,
+    "domainAuthorityNeverInheritedFromEvent": true,
+    "unknownAuthorityFailsClosed": true
+  }
+}

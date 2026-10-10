@@ -1,0 +1,363 @@
+{
+  "fixtureVersion": "PHI-OS-FDR-W22-FIXTURE-v1.0.0",
+  "scenario": "couple",
+  "description": "Two consenting adults with joint-both property ownership.",
+  "synthetic": true,
+  "sourceAdapter": "CSV",
+  "purposeScope": "FINANCIAL_PLANNING",
+  "expectedProperties": {
+    "adultSeparateConsent": true,
+    "jointOwnershipNotEqualShareInference": true
+  },
+  "snapshots": [
+    {
+      "snapshotId": "FR-COUPLE-S0",
+      "financialRealityId": "FR-COUPLE",
+      "sequence": 0,
+      "timepoint": "t0",
+      "asOfDate": "2026-01-01",
+      "financialRealityVersion": 1,
+      "snapshotPayload": {
+        "financialRealityId": "FR-COUPLE",
+        "householdReference": "HH-COUPLE",
+        "customerReferences": [
+          "CUST-C1",
+          "CUST-C2"
+        ],
+        "asOfDate": "2026-01-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-C1",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          },
+          {
+            "personId": "P-C2",
+            "roles": [
+              "SPOUSE",
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "SPOUSE",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [
+          {
+            "assetId": "A-HOME",
+            "assetType": "PROPERTY",
+            "ownership": {
+              "ownershipId": "OWN-JOINT",
+              "assetId": "A-HOME",
+              "ownershipMode": "JOINT_BOTH",
+              "ownerReferences": [
+                "P-C1",
+                "P-C2"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-HOME",
+              "factCode": "ASSET_VALUE",
+              "value": 900000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "liabilities": [
+          {
+            "liabilityId": "L-HOME",
+            "liabilityType": "MORTGAGE",
+            "borrowerReferences": [
+              "P-C1",
+              "P-C2"
+            ],
+            "balanceFact": {
+              "factId": "F-LOAN",
+              "factCode": "LIABILITY_BALANCE",
+              "value": 400000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "currency": "MYR",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 1,
+        "digest": "d73ded0f9411655c14608f24a3393456a7ffed0156ec5ba8e3f13df5f4185a4a"
+      },
+      "previousSnapshotDigest": null,
+      "changeEventReferences": [],
+      "createdAt": "2026-01-01T00:00:00Z",
+      "creationReason": "INITIAL_DISCLOSURE",
+      "consentReference": "CONSENT-FP",
+      "digest": "4dddb064e20b0ed214114c161e8858a2799538bfeedc82fbd450737763362604"
+    },
+    {
+      "snapshotId": "FR-COUPLE-S1",
+      "financialRealityId": "FR-COUPLE",
+      "sequence": 1,
+      "timepoint": "t1",
+      "asOfDate": "2026-04-01",
+      "financialRealityVersion": 2,
+      "snapshotPayload": {
+        "financialRealityId": "FR-COUPLE",
+        "householdReference": "HH-COUPLE",
+        "customerReferences": [
+          "CUST-C1",
+          "CUST-C2"
+        ],
+        "asOfDate": "2026-04-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-C1",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          },
+          {
+            "personId": "P-C2",
+            "roles": [
+              "SPOUSE",
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "SPOUSE",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [
+          {
+            "assetId": "A-HOME",
+            "assetType": "PROPERTY",
+            "ownership": {
+              "ownershipId": "OWN-JOINT",
+              "assetId": "A-HOME",
+              "ownershipMode": "JOINT_BOTH",
+              "ownerReferences": [
+                "P-C1",
+                "P-C2"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-HOME",
+              "factCode": "ASSET_VALUE",
+              "value": 900000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "liabilities": [
+          {
+            "liabilityId": "L-HOME",
+            "liabilityType": "MORTGAGE",
+            "borrowerReferences": [
+              "P-C1",
+              "P-C2"
+            ],
+            "balanceFact": {
+              "factId": "F-LOAN-PAID",
+              "factCode": "LIABILITY_BALANCE",
+              "value": 0,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "DOCUMENT_VERIFIED",
+              "evidence": {
+                "evidenceType": "DOCUMENT",
+                "source": "SYNTHETIC_LOAN_STATEMENT",
+                "verifiedAt": "2026-04-01T00:00:00Z",
+                "effectiveDate": "2026-04-01",
+                "documentReference": "DOC-LOAN",
+                "confidence": 1
+              },
+              "effectiveDate": "2026-04-01",
+              "recordedAt": "2026-04-01T00:00:00Z"
+            },
+            "currency": "MYR",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 2,
+        "digest": "2f842c0239271fe0c8adadaf8f06169800787d7915ef9d0cd037fafb83af893f"
+      },
+      "previousSnapshotDigest": "4dddb064e20b0ed214114c161e8858a2799538bfeedc82fbd450737763362604",
+      "changeEventReferences": [
+        "EV-COUPLE-1"
+      ],
+      "createdAt": "2026-04-01T00:00:00Z",
+      "creationReason": "VALIDATED_CHANGE",
+      "consentReference": "CONSENT-FP",
+      "digest": "1f6a0bb51570fe5526c84cfc603da8f7de66cf8d42d14fd933819851ae5e2645"
+    }
+  ],
+  "changeEvents": [
+    {
+      "eventId": "EV-COUPLE-1",
+      "financialRealityId": "FR-COUPLE",
+      "eventType": "LOAN_REPAID",
+      "occurredAt": "2026-04-01",
+      "recordedAt": "2026-04-01T12:00:00Z",
+      "subjectReference": "L-HOME",
+      "factReferences": [
+        "F-LOAN-PAID"
+      ],
+      "fromSnapshotId": "FR-COUPLE-S0",
+      "toSnapshotId": "FR-COUPLE-S1",
+      "source": "SYNTHETIC_FIXTURE",
+      "validationState": "VALIDATED",
+      "consentReference": "CONSENT-FP",
+      "digest": "4fce3ec6ed48571f5739eac98f9f569634a72459ba108c63444c8757b217826d"
+    }
+  ]
+}

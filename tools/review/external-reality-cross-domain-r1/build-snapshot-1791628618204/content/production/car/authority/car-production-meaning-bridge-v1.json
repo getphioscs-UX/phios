@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "PHI-OS-CAR-PRODUCTION-MEANING-BRIDGE-v1.0.0",
+  "status": "active_reconciliation",
+  "purpose": "Allow the frozen CAR-W2 pilot to be reproduced without creating a new Canonical Meaning or mutating CMR.",
+  "bindings": [
+    {
+      "nodeCode": "KN-PREFACE-001",
+      "meaningCode": "CM-DECISION-INTERNAL-RESPONSE",
+      "sourceMeaningPath": "content/professional/canonical-meaning-runtime/fixtures/canonical-meaning.valid.json",
+      "authorityMode": "legacy_car_w2_pilot_bridge",
+      "createsNewMeaning": false,
+      "mutatesCanonicalMeaningRegistry": false
+    }
+  ],
+  "invariants": {
+    "carMayCreateMeaning": false,
+    "bridgeMayGeneralizeToOtherNodes": false,
+    "missingMeaningAuthorityFailsClosed": true
+  }
+}

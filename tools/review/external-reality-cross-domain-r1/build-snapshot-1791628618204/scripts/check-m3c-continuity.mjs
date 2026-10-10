@@ -1,0 +1,147 @@
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+
+const root = process.cwd();
+const read = async relative => (await fs.readFile(path.join(root, relative), 'utf8'))
+  .replace(/^\uFEFF/, '')
+  .replace(/\r\n?/g, '\n');
+const json = async relative => JSON.parse(await read(relative));
+const exists = async relative => fs.access(path.join(root, relative))
+  .then(() => true)
+  .catch(() => false);
+const sha256 = async relative => crypto.createHash('sha256')
+  .update(await read(relative), 'utf8')
+  .digest('hex');
+
+const P1_DELETE='content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json';
+if(await exists(P1_DELETE)){
+  const p1=await json(P1_DELETE);
+  if(p1.status==='PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE'){
+    for(const retired of ['my-reality.html'])assert.equal(await exists(retired),false,`P1 retired presentation still exists: ${retired}`);
+    assert.equal(await exists('reality/index.html'),true,'P1 canonical My Reality missing');
+    const currentReality=await read('reality/index.html');
+    assert.ok(currentReality.includes('data-cx-surface="MY_REALITY"'));
+    assert.ok(currentReality.includes('data-cx-panel="continuity"'));
+    assert.equal(await exists('assets/js/pages/my-reality.js'),true,'historical runtime controller missing');
+    console.log('✓ M3C-W9 Continuity historical customer presentation retired after P1 browser acceptance; runtime evidence remains and canonical My Reality now owns the customer surface.');
+    process.exit(0);
+  }
+}
+
+const required = [
+  'my-reality.html',
+  'assets/css/review-memory-continuity.css',
+  'assets/js/pages/my-reality.js',
+  'assets/js/modules/continuity-customer-projection.js',
+  'assets/js/locales/en/review.js',
+  'assets/js/locales/zh-Hans/review.js',
+  'content/registry/m3c-continuity.json',
+  'docs/public/M3C-W9-CONTINUITY.md'
+];
+for (const file of required) {
+  assert.equal(await exists(file), true, `Missing M3C-W9 deliverable: ${file}`);
+}
+
+const page = await read('my-reality.html');
+for (const token of [
+  'data-continuity-view="check-in"',
+  'id="continuityTrigger"',
+  'id="continuityNextReview"',
+  'id="continuityTriggerInput"',
+  'id="continuityNextReviewInput"',
+  'name="newChangeStatus"',
+  'id="continuityNewChange"',
+  'id="continuityBranch"',
+  'id="continuityBranchTitle"',
+  'id="confirmContinuity"',
+  'id="executeTransition"'
+]) {
+  assert.equal(page.includes(token), true, `Continuity customer contract is missing: ${token}`);
+}
+
+const controller = await read('assets/js/pages/my-reality.js');
+for (const token of [
+  "from '../modules/continuity-customer-projection.js'",
+  'buildContinuityCustomerProjection(',
+  'customerCheckIn: checkIn',
+  "evidenceClass: 'reported_experience'",
+  'automaticDetection: false',
+  "status: 'prepared'",
+  'automaticSelection:false',
+  'createsNextRuntime:false',
+  'RuntimeKernel.transition.execute('
+]) {
+  assert.equal(controller.includes(token), true, `Continuity controller is missing: ${token}`);
+}
+
+const projectionSource = await read('assets/js/modules/continuity-customer-projection.js');
+for (const forbidden of ['sessionStorage', 'localStorage', 'fetch(', 'setSession(', '/api/']) {
+  assert.equal(
+    projectionSource.includes(forbidden),
+    false,
+    `Continuity projection must remain read-only: ${forbidden}`
+  );
+}
+const projectionModule = await import(
+  `${pathToFileURL(path.join(root, 'assets/js/modules/continuity-customer-projection.js')).href}?w9=${Date.now()}`
+);
+const revision = projectionModule.buildContinuityCustomerProjection({
+  createdAt: '2026-07-23T00:00:00.000Z',
+  selectedPath: { observationWindow: '7 days' },
+  outcomeMemory: { nextRuntimeState: 'return_to_reading' }
+});
+assert.equal(revision.trigger.code, 'revision_needed');
+assert.equal(revision.reviewTiming.nextReviewAt, '2026-07-30T00:00:00.000Z');
+assert.equal(revision.branch.type, 'revision');
+assert.equal(revision.branch.revisionAvailable, true);
+assert.equal(revision.checkIn.automaticDetection, false);
+
+const newJourney = projectionModule.buildContinuityCustomerProjection({
+  createdAt: '2026-07-23T00:00:00.000Z',
+  selectedPath: { observationWindow: '2 weeks' },
+  outcomeMemory: { nextRuntimeState: 'start_new_entry' }
+}, {
+  userChoice: { confirmed: true },
+  customerCheckIn: {
+    trigger: 'new_change',
+    nextReviewAt: '2026-08-10T00:00:00.000Z',
+    newChangeStatus: 'yes',
+    newChangeText: 'A new work change became visible.'
+  }
+});
+assert.equal(newJourney.branch.type, 'new_journey');
+assert.equal(newJourney.branch.newJourneyAvailable, true);
+assert.equal(newJourney.checkIn.recorded, true);
+assert.equal(newJourney.checkIn.evidenceClass, 'reported_experience');
+assert.equal(newJourney.guardrails.automaticNextRuntimeCreationAllowed, false);
+
+const registry = await json('content/registry/m3c-continuity.json');
+assert.equal(registry.baseline.commit, '21531bb7527b34055ec4c20e852e463dae740d1c');
+assert.equal(registry.checkInBoundary.automaticDetectionAllowed, false);
+assert.equal(registry.branchBoundary.automaticNextRuntimeCreationAllowed, false);
+const navigationOperationalization = await json(
+  'content/registry/m3c-navigation-operationalization.json'
+);
+const authorizedW12Updates =
+  navigationOperationalization.authorizedFrozenArtifactUpdates || {};
+for (const [file, expected] of Object.entries(registry.frozenArtifacts)) {
+  if (file === 'wrangler.jsonc') { const reconciliation = await json('content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v1.json'); assert.equal(reconciliation.predecessor.wranglerSha256, expected); assert.equal(await sha256(file), reconciliation.successor.wranglerSha256); continue; }
+  assert.equal(
+    await sha256(file),
+    authorizedW12Updates[file] || expected,
+    `Frozen M3C-W9 artifact changed: ${file}`
+  );
+}
+
+const packageJson = await json('package.json');
+assert.equal(
+  packageJson.scripts['check:m3c-continuity'],
+  'node scripts/check-m3c-continuity.mjs'
+);
+assert.equal(packageJson.scripts.check.includes('scripts/check-m3c-continuity.mjs'), true);
+
+console.log('✓ M3C-W9 Continuity passed: trigger, next Review, Check-in, new-change report and Revision / New Journey branch are customer-visible.');
+console.log('  Check-in remains reported experience; Review outcome matching, confirmation, lineage and no-automatic-Runtime guardrails remain intact.');

@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "PHI-OS-METHOD-RUNTIME-PRINCIPLES-v1.0.0",
+  "stageCode": "MR-W0",
+  "runtimeCode": "METHOD_RUNTIME",
+  "status": "frozen",
+  "principles": [
+    {
+      "number": 1,
+      "code": "MR-P01-SINGLE-RUNTIME",
+      "title": "Method Runtime is the only Method platform",
+      "statementZhHans": "Method Runtime 是唯一 Method 平台。",
+      "rule": "PHI OS has exactly one Method Runtime Platform. A method cannot create, fork or rename a second Method Runtime."
+    },
+    {
+      "number": 2,
+      "code": "MR-P02-PLUGIN-REGISTRATION",
+      "title": "Every Method must register as a Plugin",
+      "statementZhHans": "所有 Method 必须以 Plugin 注册。",
+      "rule": "Every Method registers as a governed Plugin. A method-specific engine executes inside the shared platform and is not an independent Runtime."
+    },
+    {
+      "number": 3,
+      "code": "MR-P03-DEFINITION-FIRST",
+      "title": "Method Definition before Runtime",
+      "statementZhHans": "Method Definition 必须先于 Runtime。",
+      "rule": "An IMR-governed Method Definition must exist before Runtime execution. Runtime cannot invent a Method."
+    },
+    {
+      "number": 4,
+      "code": "MR-P04-SHARED-DATA-AUTHORITY",
+      "title": "One Data Authority",
+      "statementZhHans": "Data Authority 必须唯一。",
+      "rule": "Birth, coordinate, timezone, DST, true solar time, astronomy, calendar, solar terms and reference tables use one shared Data Authority and belong to no individual Method."
+    },
+    {
+      "number": 5,
+      "code": "MR-P05-DETERMINISTIC-CALCULATION",
+      "title": "Fully deterministic Calculation",
+      "statementZhHans": "Calculation 必须完全确定性。",
+      "rule": "Calculation is versioned and 100% repeatable."
+    },
+    {
+      "number": 6,
+      "code": "MR-P06-PROJECTION-SEPARATION",
+      "title": "Projection is not Interpretation",
+      "statementZhHans": "Projection 不等于 Interpretation。",
+      "rule": "Projection JSON contains governed method output only. It is neither Interpretation nor Professional judgment."
+    },
+    {
+      "number": 7,
+      "code": "MR-P07-INTERPRETATION-NOT-CONCLUSION",
+      "title": "Interpretation is not a Professional Conclusion",
+      "statementZhHans": "Interpretation 不等于 Professional Conclusion。",
+      "rule": "Interpretation produces an Interpretation Candidate and cannot automatically become a formal Professional Conclusion."
+    },
+    {
+      "number": 8,
+      "code": "MR-P08-PROVIDER-NOT-CALCULATION",
+      "title": "Provider does not participate in Calculation",
+      "statementZhHans": "Provider 不参与 Calculation。",
+      "rule": "OpenAI, Workers AI, prompts and interpretive Providers cannot participate in Calculation or create calculation facts."
+    },
+    {
+      "number": 9,
+      "code": "MR-P09-INDEPENDENT-PROFESSIONAL-REVIEW",
+      "title": "Independent Professional Review",
+      "statementZhHans": "Professional Review 必须独立。",
+      "rule": "Professional review, boundary validation, deliverable assembly, signature and release remain independent from Calculation, Projection and Interpretation."
+    },
+    {
+      "number": 10,
+      "code": "MR-P10-ALL-PLUGINS-PASS-IMR",
+      "title": "Every Plugin must pass IMR",
+      "statementZhHans": "所有 Plugin 必须通过 IMR。",
+      "rule": "Every Plugin must pass Interpretive Method Governance for scope, algorithm, data authority, validation, license, commercial rights and production eligibility."
+    },
+    {
+      "number": 11,
+      "code": "MR-P11-UNIFIED-LIFECYCLE",
+      "title": "Every Plugin follows one Lifecycle",
+      "statementZhHans": "所有 Plugin 必须遵守统一 Lifecycle。",
+      "rule": "Every Plugin follows the same lifecycle states and legal transitions; version and license evidence remain explicit and auditable."
+    },
+    {
+      "number": 12,
+      "code": "MR-P12-RUNTIME-INDEPENDENCE",
+      "title": "Method Runtime remains independent",
+      "statementZhHans": "Method Runtime 永远独立于 Journey、Knowledge 与 Professional Workspace。",
+      "rule": "Method Runtime remains independent from Journey Runtime, Knowledge Runtime and Professional Workspace. Optional integrations are adapter-bound and never required dependencies."
+    }
+  ]
+}

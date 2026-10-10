@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import {planVfrProviderBudget,assertVfrCallCount} from '../functions/personal-reading/visual-first/report-provider-budget.js';
+
+const model={inputPricePerMillion:2.5,cachedInputPricePerMillion:.25,outputPricePerMillion:15};
+const input='x'.repeat(12000);
+const allow=planVfrProviderBudget({model,input,maxOutputTokens:8000,spentUsd:0,nextCallKind:'PRIMARY'});
+assert.equal(allow.allowed,true);
+assert.equal(allow.budgetLimitUsd,4);
+const blocked=planVfrProviderBudget({model,input:'x'.repeat(5000000),maxOutputTokens:12000,spentUsd:0,nextCallKind:'PRIMARY'});
+assert.equal(blocked.allowed,false);
+assert.equal(blocked.status,'PROVIDER_BUDGET_PRECHECK_BLOCKED');
+const repairDenied=planVfrProviderBudget({model,input:'x'.repeat(12000),maxOutputTokens:8000,spentUsd:3.55,nextCallKind:'REPAIR'});
+assert.equal(repairDenied.allowed,false);
+const repairAllowed=planVfrProviderBudget({model,input:'x'.repeat(12000),maxOutputTokens:8000,spentUsd:.5,nextCallKind:'REPAIR'});
+assert.equal(repairAllowed.allowed,true);
+assert.doesNotThrow(()=>assertVfrCallCount({providerCalls:1,semanticReviewCalls:0}));
+assert.doesNotThrow(()=>assertVfrCallCount({providerCalls:3,semanticReviewCalls:0}));
+assert.equal(planVfrProviderBudget({model,input,maxOutputTokens:8000,methodId:'ZWR'}).budgetLimitUsd,3);
+assert.throws(()=>assertVfrCallCount({providerCalls:1,semanticReviewCalls:1}),/VFR_SEMANTIC_AI_REVIEW_FORBIDDEN/);
+console.log('PASS PHI-OS-VFR-R1 shared core: method-specific total cost governor, three primary calls plus bounded repair, zero semantic-AI review in customer hot path.');

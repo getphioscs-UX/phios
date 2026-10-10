@@ -1,0 +1,439 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/iching/iching-depth-interpretation-entry-v1.schema.json",
+  "title": "PHI OS I Ching Human-governed Depth Interpretation Entry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "interpretationId",
+    "methodCode",
+    "hexagramId",
+    "scope",
+    "contentClass",
+    "sourceBindings",
+    "localeProjections",
+    "review",
+    "authority"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-ICHI-DEPTH-INTERPRETATION-ENTRY-v1.0.0"
+    },
+    "interpretationId": {
+      "type": "string",
+      "pattern": "^ICH-DEPTH-(HEX|LINE)-[0-9]{2}(-L[1-6])?-[A-Z0-9-]+-v[0-9]+$"
+    },
+    "methodCode": {
+      "const": "I_CHING"
+    },
+    "hexagramId": {
+      "type": "string",
+      "pattern": "^HEXAGRAM-(0[1-9]|[1-5][0-9]|6[0-4])$"
+    },
+    "scope": {
+      "enum": [
+        "HEXAGRAM",
+        "LINE"
+      ]
+    },
+    "linePosition": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 6
+    },
+    "contentClass": {
+      "enum": [
+        "PHIOS_PLAIN_LANGUAGE_INTERPRETATION",
+        "PHIOS_DEPTH_EDITORIAL_INTERPRETATION"
+      ]
+    },
+    "sourceBindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceIds",
+        "sourceClaimRefs",
+        "derivationMode",
+        "sourceTextCopied"
+      ],
+      "properties": {
+        "sourceIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^ICH-SRC-"
+          }
+        },
+        "sourceClaimRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^ICH-CLM-"
+          }
+        },
+        "derivationMode": {
+          "enum": [
+            "ORIGINAL_EDITORIAL_PARAPHRASE",
+            "ORIGINAL_SOURCE_BOUND_SYNTHESIS"
+          ]
+        },
+        "sourceTextCopied": {
+          "const": false
+        }
+      }
+    },
+    "hexagramInterpretation": {
+      "$ref": "#/$defs/hexagramInterpretation"
+    },
+    "lineInterpretation": {
+      "$ref": "#/$defs/lineInterpretation"
+    },
+    "localeProjections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "zh-Hans",
+        "en"
+      ],
+      "properties": {
+        "zh-Hans": {
+          "$ref": "#/$defs/localeProjection"
+        },
+        "en": {
+          "$ref": "#/$defs/localeProjection"
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "humanApproved",
+        "reviewer",
+        "reviewedAt",
+        "sourceFidelityChecked",
+        "localeFidelityChecked",
+        "boundaryChecked"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "CANDIDATE",
+            "SOURCE_VERIFIED",
+            "HUMAN_APPROVED",
+            "REJECTED"
+          ]
+        },
+        "humanApproved": {
+          "type": "boolean"
+        },
+        "reviewer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reviewedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "sourceFidelityChecked": {
+          "type": "boolean"
+        },
+        "localeFidelityChecked": {
+          "type": "boolean"
+        },
+        "boundaryChecked": {
+          "type": "boolean"
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalMeaningCreated",
+        "realityTruthCreated",
+        "fateConclusionCreated",
+        "professionalJudgmentCreated",
+        "runtimeModelGenerationAllowed"
+      ],
+      "properties": {
+        "canonicalMeaningCreated": {
+          "const": false
+        },
+        "realityTruthCreated": {
+          "const": false
+        },
+        "fateConclusionCreated": {
+          "const": false
+        },
+        "professionalJudgmentCreated": {
+          "const": false
+        },
+        "runtimeModelGenerationAllowed": {
+          "const": false
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "scope": {
+            "const": "HEXAGRAM"
+          }
+        },
+        "required": [
+          "scope"
+        ]
+      },
+      "then": {
+        "required": [
+          "hexagramInterpretation"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "linePosition"
+              ]
+            },
+            {
+              "required": [
+                "lineInterpretation"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "scope": {
+            "const": "LINE"
+          }
+        },
+        "required": [
+          "scope"
+        ]
+      },
+      "then": {
+        "required": [
+          "linePosition",
+          "lineInterpretation"
+        ],
+        "not": {
+          "required": [
+            "hexagramInterpretation"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "review": {
+            "properties": {
+              "status": {
+                "const": "HUMAN_APPROVED"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "review": {
+            "properties": {
+              "humanApproved": {
+                "const": true
+              },
+              "reviewer": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reviewedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "sourceFidelityChecked": {
+                "const": true
+              },
+              "localeFidelityChecked": {
+                "const": true
+              },
+              "boundaryChecked": {
+                "const": true
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "review": {
+            "properties": {
+              "humanApproved": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "nonEmptyText": {
+      "type": "string",
+      "minLength": 1
+    },
+    "textList": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/nonEmptyText"
+      }
+    },
+    "hexagramInterpretation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "situationPattern",
+        "coreTension",
+        "developmentDirection",
+        "constructiveExpression",
+        "distortionRisk",
+        "timingCondition",
+        "observationDimensionCount",
+        "reflectionDimensionCount"
+      ],
+      "properties": {
+        "situationPattern": {
+          "const": true
+        },
+        "coreTension": {
+          "const": true
+        },
+        "developmentDirection": {
+          "const": true
+        },
+        "constructiveExpression": {
+          "const": true
+        },
+        "distortionRisk": {
+          "const": true
+        },
+        "timingCondition": {
+          "const": true
+        },
+        "observationDimensionCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reflectionDimensionCount": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "lineInterpretation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stageRole",
+        "currentCondition",
+        "centralTension",
+        "constructiveMovement",
+        "excessOrFailureRisk",
+        "observableSignalCount",
+        "reflectionQuestionCount"
+      ],
+      "properties": {
+        "stageRole": {
+          "const": true
+        },
+        "currentCondition": {
+          "const": true
+        },
+        "centralTension": {
+          "const": true
+        },
+        "constructiveMovement": {
+          "const": true
+        },
+        "excessOrFailureRisk": {
+          "const": true
+        },
+        "observableSignalCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reflectionQuestionCount": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "localeProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plainMeaning",
+        "situationOrStage",
+        "centralTension",
+        "constructiveExpressionOrMovement",
+        "distortionOrFailureRisk",
+        "timingOrCondition",
+        "whatToObserve",
+        "reflectionQuestions",
+        "misreadingWarnings"
+      ],
+      "properties": {
+        "plainMeaning": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "situationOrStage": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "centralTension": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "constructiveExpressionOrMovement": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "distortionOrFailureRisk": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "timingOrCondition": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "whatToObserve": {
+          "$ref": "#/$defs/textList"
+        },
+        "reflectionQuestions": {
+          "$ref": "#/$defs/textList"
+        },
+        "misreadingWarnings": {
+          "$ref": "#/$defs/textList"
+        }
+      }
+    }
+  }
+}
+

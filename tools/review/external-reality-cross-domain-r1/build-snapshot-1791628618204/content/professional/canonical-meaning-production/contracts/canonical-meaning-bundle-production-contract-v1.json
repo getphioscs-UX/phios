@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-CANONICAL-MEANING-BUNDLE-CONTRACT-v2.0.0",
+  "work": "CMP-W5",
+  "baselineCommit": "1d9b248f314308ef4f2a06354fb962ca46fff5c4",
+  "status": "PRODUCTION_BUNDLE_SUCCESSOR_DEFINED_NOT_USER_ACTIVE",
+  "schema": "content/professional/canonical-meaning-production/schemas/canonical-meaning-production-bundle-v1.schema.json",
+  "bundleSchemaVersion": "PHI-OS-CANONICAL-MEANING-PRODUCTION-BUNDLE-v1.0.0",
+  "requiredItemFields": [
+    "meaningId",
+    "meaningCode",
+    "meaningVersion",
+    "meaningType",
+    "canonicalTextKey",
+    "sourceProjectionRef",
+    "sourceFields",
+    "mappingLineage",
+    "knowledgeAuthority"
+  ],
+  "determinismSeed": [
+    "projectionDigest",
+    "admissionRegistryVersion",
+    "mappingRegistryVersion",
+    "matchedMappingCodes",
+    "meaningIdentityDigests"
+  ],
+  "rules": {
+    "bundleDoesNotContainInterpretation": true,
+    "bundleDoesNotContainProfessionalJudgment": true,
+    "bundleDoesNotRecalculate": true,
+    "localeRenderingDeferredToCMPW7": true,
+    "foundationBundleCannotBeConsumedAsProduction": true
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "contractCode": "PHI-OS-CANONICAL-ASSET-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "phase": "PHASE-CAR",
+  "work": "CAR-W1",
+  "status": "frozen",
+  "productionStatus": "validation_only",
+  "authority": {
+    "canonicalAssetAuthority": "PHI_OS_CANONICAL_ASSET_RUNTIME",
+    "canonicalMeaningAuthority": "external_read_only",
+    "knowledgeAuthority": "external_read_only",
+    "publishedFragmentAuthority": "external_read_only",
+    "articleAuthority": "PJA_reference_only",
+    "providerRoutingAuthority": "external_read_only"
+  },
+  "assetDefinition": {
+    "is": [
+      "versioned purpose-and-medium projection",
+      "lineage-bound reference to Canonical Meaning and Knowledge Authority",
+      "governed record with independent lifecycle state"
+    ],
+    "isNot": [
+      "Canonical Meaning",
+      "Knowledge Node",
+      "Published Fragment",
+      "new Knowledge Source",
+      "Professional Conclusion"
+    ]
+  },
+  "requiredProperties": [
+    "assetCode", "assetVersion", "assetType", "nodeCode", "meaningReferences",
+    "knowledgeReferences", "sourceFragmentDigests", "locale", "audience", "purpose",
+    "providerLineage", "reviewState", "approvalState", "publicationState", "createdAt", "updatedAt"
+  ],
+  "runtimeInvariants": {
+    "registryLed": true,
+    "stableAssetCodeRequired": true,
+    "versionRequired": true,
+    "completeMeaningLineageRequired": true,
+    "completeKnowledgeLineageRequired": true,
+    "publishedFragmentDigestRequired": true,
+    "nodeCodeMustAppearInKnowledgeReferences": true,
+    "mayCreateCanonicalMeaning": false,
+    "mayRewriteKnowledgeNode": false,
+    "mayStorePublishedFragmentAsAuthority": false,
+    "mayTreatAssetAsKnowledgeAuthority": false,
+    "articleMustUseExistingPJA": true,
+    "providerRoutingMayBeRebuilt": false,
+    "providerMayCreatePublishedContent": false
+  },
+  "lifecycleSeparation": {
+    "reviewIsApproval": false,
+    "approvalIsPublication": false,
+    "candidateIsPublishedAsset": false,
+    "articleApprovalImpliesOtherAssetApproval": false
+  },
+  "futureRuntimeOwnership": {
+    "assetBrief": "CAR-W2",
+    "articleReconciliation": "CAR-W3",
+    "candidate": "CAR-W10",
+    "review": "CAR-W11",
+    "approval": "CAR-W12",
+    "mediaRegistry": "CAR-W13",
+    "publication": "CAR-W14"
+  }
+}

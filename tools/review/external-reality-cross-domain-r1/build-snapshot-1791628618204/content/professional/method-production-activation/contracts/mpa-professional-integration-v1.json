@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHI-OS-MPA-PROFESSIONAL-INTEGRATION-v1.0.0",
+  "work": "MPA-W20",
+  "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+  "status": "integration_boundary_established_release_blocked",
+  "separation": {
+    "customerCalculation": "CALCULATION_AND_PROJECTION_MAY_EXIST_WITHOUT_PROFESSIONAL_INTERPRETATION",
+    "professionalInterpretation": "SEPARATE_GOVERNED_SERVICE_PATH",
+    "professionalRelease": "OWNED_BY_PR_V2_AND_SHARED_PROFESSIONAL_RUNTIME",
+    "mpaOwnsProfessionalRelease": false
+  },
+  "requiredProfessionalGates": [
+    "methodProfessionalEligible",
+    "separateProfessionalEligibility",
+    "activeAssignment",
+    "activeServiceConsent",
+    "boundaryAcknowledged",
+    "workspaceAccess",
+    "prV2AuthorityResolved"
+  ],
+  "authorities": {
+    "sharedProfessionalRuntime": "content/professional/method-runtime/shared-professional-runtime-v1.json",
+    "journeyProfessionalHandoff": "content/runtime/journey-runtime/contracts/professional-handoff-package-contract-v1.json",
+    "pwsProfessionalHandoff": "docs/pws/architecture/pws-entry-professional-handoff-boundary-v1.json",
+    "prV2CanonicalArtifact": null
+  },
+  "currentState": {
+    "prV2CanonicalArtifactResolved": false,
+    "sharedProfessionalRuntimeEstablished": true,
+    "professionalReleaseActivated": false,
+    "professionalEligibilityGrantedByMpa": false,
+    "professionalJudgmentCreatedByMpa": false
+  },
+  "rules": {
+    "methodProductionEligibilityDoesNotCreateProfessionalEligibility": true,
+    "professionalEligibilityDoesNotBypassAssignment": true,
+    "professionalEligibilityDoesNotBypassConsent": true,
+    "professionalEligibilityDoesNotBypassBoundary": true,
+    "professionalEligibilityDoesNotBypassWorkspaceAccess": true,
+    "handoffCreatesProfessionalResponsibility": false,
+    "sharedProfessionalRuntimeSequenceMayNotBeSkipped": true,
+    "directProfessionalReleaseForbidden": true,
+    "mpaMayNotSignOrReleaseDeliverable": true
+  },
+  "methodTracks": {
+    "NUMEROLOGY": {
+      "currentProfessionalIntegration": "blocked",
+      "reference": "content/professional/core-method-runtime/num-professional-integration-v1.json"
+    },
+    "ASTROLOGY": {
+      "currentProfessionalIntegration": "blocked",
+      "reference": "content/professional/core-method-runtime/ast-professional-integration-v1.json"
+    },
+    "BAZI": {
+      "currentProfessionalIntegration": "blocked",
+      "reference": "content/professional/core-method-runtime/bzr-professional-integration-v1.json"
+    },
+    "HUMAN_DESIGN": {
+      "currentProfessionalIntegration": "blocked",
+      "reference": "content/professional/core-method-runtime/hdr-professional-integration-v1.json"
+    }
+  },
+  "productionEligibilityChanged": false,
+  "professionalEligibilityChanged": false,
+  "nextWork": "MPA-W21_NUM_PRODUCTION_ACTIVATION"
+}

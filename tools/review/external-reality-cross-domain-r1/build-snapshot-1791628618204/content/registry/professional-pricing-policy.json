@@ -1,0 +1,91 @@
+{
+  "id": "phi-os.professional-pricing-policy",
+  "version": "1.0.0",
+  "milestone": "M4A-W1",
+  "status": "structure-frozen-amounts-pending",
+  "defaultCurrency": "MYR",
+  "amountsPublished": false,
+  "checkoutEnabled": false,
+  "requiredFields": [
+    "service_id",
+    "currency",
+    "base_price",
+    "consultation_price",
+    "follow_up_price",
+    "rush_fee",
+    "discount_rule",
+    "tax_rule",
+    "active_from",
+    "active_until"
+  ],
+  "financialSupplementFields": [
+    "individual_price",
+    "joint_household_price",
+    "business_owner_supplement",
+    "property_portfolio_supplement",
+    "insurance_review_supplement",
+    "investment_review_supplement",
+    "estate_planning_supplement",
+    "follow_up_price",
+    "annual_review_price"
+  ],
+  "profiles": [
+    "entry_level",
+    "professional_core",
+    "consultation",
+    "follow_up",
+    "annual_or_periodic_review",
+    "human_design_standalone",
+    "human_design_premium",
+    "financial_individual_or_joint",
+    "financial_plan",
+    "integrated_premium"
+  ],
+  "allowedComplexityDrivers": [
+    "data_volume",
+    "document_count",
+    "account_count",
+    "property_count",
+    "policy_count",
+    "investment_position_count",
+    "household_participant_count",
+    "business_owner_scope",
+    "jurisdiction_count",
+    "analysis_complexity",
+    "consultation_duration",
+    "delivery_urgency"
+  ],
+  "prohibitedPricingDrivers": [
+    "client_asset_total",
+    "client_net_worth",
+    "investment_portfolio_value",
+    "income_level_without_scope_reason"
+  ],
+  "rules": {
+    "assetValueAutomaticallyRaisesPrice": false,
+    "complexityReasonMustBeDisclosed": true,
+    "regulatedAdviceBundledByDefault": false,
+    "commissionBasedProductSelection": false,
+    "amountsMayBeActivatedOnlyAfterApproval": true
+  },
+  "template": {
+    "service_id": null,
+    "currency": "MYR",
+    "base_price": null,
+    "individual_price": null,
+    "joint_household_price": null,
+    "business_owner_supplement": null,
+    "property_portfolio_supplement": null,
+    "insurance_review_supplement": null,
+    "investment_review_supplement": null,
+    "estate_planning_supplement": null,
+    "consultation_price": null,
+    "follow_up_price": null,
+    "annual_review_price": null,
+    "rush_fee": null,
+    "discount_rule": null,
+    "tax_rule": null,
+    "active_from": null,
+    "active_until": null
+  }
+}

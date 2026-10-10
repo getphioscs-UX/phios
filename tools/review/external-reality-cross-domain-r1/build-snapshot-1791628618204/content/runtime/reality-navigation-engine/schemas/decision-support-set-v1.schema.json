@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RNE Decision Support Set v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "decisionSupportCode",
+    "decisionSupportVersion",
+    "objectType",
+    "dataType",
+    "optionSetReference",
+    "riskContextReference",
+    "recoverabilityAssessmentReference",
+    "optionDecisionSupport",
+    "decisionAuthority",
+    "rankingCreated",
+    "selectionMade",
+    "recommendedDirectionCreated",
+    "commandCreated",
+    "executionCreated",
+    "professionalJudgmentCreated",
+    "validationOnly",
+    "persistentStoreWriteAllowed",
+    "decisionSupportDigest"
+  ],
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "strarr": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      }
+    }
+  },
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RNE-DECISION-SUPPORT-SET-v1.0.0"
+    },
+    "decisionSupportCode": {
+      "type": "string",
+      "pattern": "^RNE-DECISION-SUPPORT-[A-Z0-9-]{4,120}$"
+    },
+    "decisionSupportVersion": {
+      "const": "1.0.0"
+    },
+    "objectType": {
+      "const": "DECISION_SUPPORT_SET"
+    },
+    "dataType": {
+      "const": "NAVIGATION_RECORD"
+    },
+    "optionSetReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "riskContextReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "recoverabilityAssessmentReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "optionDecisionSupport": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "optionCode",
+          "optionClass",
+          "tradeoff",
+          "dependencyReferences",
+          "reversibility",
+          "observationPoint",
+          "knownRiskReferences",
+          "unknownReferences",
+          "selectionState"
+        ],
+        "properties": {
+          "optionCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "optionClass": {
+            "enum": [
+              "OBSERVE",
+              "CLARIFY",
+              "VERIFY",
+              "REPOSITION",
+              "RECONFIGURE"
+            ]
+          },
+          "tradeoff": {
+            "enum": [
+              "MORE_OBSERVATION_BEFORE_CHANGE",
+              "DEFER_COMMITMENT_UNTIL_UNKNOWN_REVIEW",
+              "ADD_VERIFICATION_BEFORE_TRANSITION",
+              "NARROW_ROUTE_TO_RESPECT_HARD_BOUNDARY",
+              "CHANGE_CONFIGURATION_WITHIN_RECORDED_LIMITS"
+            ]
+          },
+          "dependencyReferences": {
+            "$ref": "#/$defs/strarr"
+          },
+          "reversibility": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "mode",
+              "recoverabilityClass"
+            ],
+            "properties": {
+              "mode": {
+                "enum": [
+                  "NO_STATE_CHANGE_REQUIRED",
+                  "REVERSIBILITY_SUPPORTED_BY_OPEN_RECOVERY_WINDOW",
+                  "REVERSIBILITY_CONDITIONAL",
+                  "REVERSIBILITY_NOT_ESTABLISHED",
+                  "REVERSIBILITY_UNKNOWN"
+                ]
+              },
+              "recoverabilityClass": {
+                "enum": [
+                  "NO_STATE_CHANGE_REQUIRED",
+                  "RECOVERY_WINDOW_OPEN",
+                  "RECOVERY_WINDOW_CONDITIONAL",
+                  "RECOVERY_NOT_OBSERVED",
+                  "RECOVERY_UNKNOWN"
+                ]
+              }
+            }
+          },
+          "observationPoint": {
+            "enum": [
+              "AFTER_NEW_OBSERVATION",
+              "AFTER_UNKNOWN_REVIEW",
+              "AFTER_DEPENDENCY_VERIFICATION",
+              "AFTER_BOUNDARY_REPOSITION",
+              "AFTER_RECONFIGURATION_CHECK"
+            ]
+          },
+          "knownRiskReferences": {
+            "$ref": "#/$defs/strarr"
+          },
+          "unknownReferences": {
+            "$ref": "#/$defs/strarr"
+          },
+          "selectionState": {
+            "const": "AVAILABLE_NOT_SELECTED"
+          }
+        }
+      }
+    },
+    "decisionAuthority": {
+      "const": "HUMAN_OR_AUTHORIZED_PROFESSIONAL"
+    },
+    "rankingCreated": {
+      "const": false
+    },
+    "selectionMade": {
+      "const": false
+    },
+    "recommendedDirectionCreated": {
+      "const": false
+    },
+    "commandCreated": {
+      "const": false
+    },
+    "executionCreated": {
+      "const": false
+    },
+    "professionalJudgmentCreated": {
+      "const": false
+    },
+    "validationOnly": {
+      "const": true
+    },
+    "persistentStoreWriteAllowed": {
+      "const": false
+    },
+    "decisionSupportDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

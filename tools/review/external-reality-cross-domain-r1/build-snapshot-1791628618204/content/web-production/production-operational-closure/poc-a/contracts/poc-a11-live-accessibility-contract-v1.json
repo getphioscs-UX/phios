@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "PHI-OS-POC-A11-LIVE-ACCESSIBILITY-CONTRACT-v1.0.0",
+  "work": "POC-A11",
+  "generationBaselineCommit": "ee27b8f7e9ca5369419b2516c7db9f6ae38a484e",
+  "productionOrigin": "https://phios-github.pages.dev",
+  "status": "LIVE_BROWSER_ACCESSIBILITY_REVALIDATION_CONTRACTED_NOT_YET_ACCEPTED",
+  "authority": {
+    "bfrH14AccessibilityCriteria": {
+      "path": "content/web-production/bfr-accessibility-acceptance-v1.json",
+      "sha256": "648761b41809f3ef41d082bbfcf3ee5ccebbe367592a9cc7688b73e6e5dc2870",
+      "schemaVersion": "PHI-OS-BFR-H14-ACCESSIBILITY-ACCEPTANCE-v1.0.0",
+      "rewritten": false
+    },
+    "wprPdsAccessibilityIntegration": {
+      "path": "content/web-production/contracts/wpr-pds-responsive-accessibility-integration-v1.json",
+      "sha256": "ba37ac2a2514ddd11d40a14d62c4d6d05af04c30b8997536ba54ec938705219f",
+      "rewritten": false
+    },
+    "pdsDesignTokenContract": {
+      "path": "content/registry/pds-w2-design-token-contract.json",
+      "sha256": "022521975e037b42c84e5eba2613c4c0a0d93acfc57210b363f632e25ac8c782",
+      "rewritten": false
+    },
+    "pdsComponentShellContract": {
+      "path": "content/registry/pds-w3-core-component-shell-contract.json",
+      "sha256": "14868d1328780c63309c3527ce8d3dce81d1e1a7712ef13dd0e4c65dc8552cd8",
+      "rewritten": false
+    },
+    "pdsFullSiteAcceptance": {
+      "path": "content/registry/pds-w10-full-site-acceptance.json",
+      "sha256": "c0e452604366314517d81748996b0b297b3e3cb80347a119cfe422606bf43fbe",
+      "rewritten": false
+    },
+    "cprAccessibilityRuntime": {
+      "path": "content/professional/canonical-presentation-runtime/contracts/cpr-accessibility-presentation-runtime-v1.json",
+      "sha256": "224245c9178da1a5495f944312cdffb1ba8cfad283b74a7d90a4911ab65797fb",
+      "rewritten": false
+    },
+    "a10RepresentativeSurfaceContract": {
+      "path": "content/web-production/production-operational-closure/poc-a/contracts/poc-a10-live-responsive-matrix-contract-v1.json",
+      "sha256": "30bf30f60ccc92e03c026445b7b9af562bfebd94c149c1870ba4fefff7001e0d",
+      "rewritten": false
+    },
+    "surfaceReadinessBoundary": {
+      "path": "content/web-production/production-operational-closure/poc-a/audits/poc-a10-surface-readiness-boundary-v1.json",
+      "sha256": "1a3c5cb2649b6a80c10dbeea8d7482718ebcccadc1c8985f07eab1924ec8c033",
+      "rewritten": false
+    },
+    "a10AcceptancePrerequisite": {
+      "path": "content/web-production/production-operational-closure/poc-a/acceptance/poc-a10-live-responsive-matrix-acceptance-v1.json",
+      "sha256": "43fa2041f802e59428432ef2f547f2a845c8a20131a82db5ba0e266ddee6523a",
+      "requiredAccepted": true,
+      "rewritten": false
+    }
+  },
+  "matrix": {
+    "viewports": [
+      360,
+      768,
+      1440
+    ],
+    "viewportsAuthority": "WPR-W27 / PDS production accessibility revalidation scope",
+    "locales": [
+      "en",
+      "zh-Hans"
+    ],
+    "surfaceFamilies": [
+      "Homepage",
+      "Library",
+      "Book",
+      "Article",
+      "Figure",
+      "Ask PHI OS",
+      "Academy",
+      "Journey",
+      "Personal Runtime",
+      "Financial",
+      "Customer Workspace",
+      "Professional Workspace",
+      "Report"
+    ],
+    "requiredStateCount": 78
+  },
+  "representativeSurfaceAuthority": "POC-A10",
+  "criteria": [
+    "KEYBOARD_NAVIGATION",
+    "VISIBLE_FOCUS",
+    "SEMANTIC_LANDMARKS",
+    "HEADING_HIERARCHY",
+    "ALT",
+    "FIGURE_CAPTION",
+    "LONG_DESCRIPTION_WHERE_NEEDED",
+    "CONTRAST",
+    "REDUCED_MOTION",
+    "TOUCH_TARGET",
+    "FORM_LABELS",
+    "ERROR_IDENTIFICATION",
+    "ARIA_CURRENT",
+    "ARIA_EXPANDED",
+    "DIALOG_SEMANTICS",
+    "SKIP_NAVIGATION",
+    "VISUAL_INFORMATION_NOT_COLOR_ONLY",
+    "VOLUME_IDENTITY_NOT_COLOR_ONLY",
+    "UNKNOWN_WARNING_NOT_COLOR_ONLY",
+    "INTERACTIVE_FIGURE_KEYBOARD_ACCESSIBILITY",
+    "ASK_COMPOSER_KEYBOARD_ACCESSIBILITY",
+    "ANSWER_EXPANDABLE_REGIONS_ACCESSIBLE"
+  ],
+  "conditionalCriteria": {
+    "FIGURE_CAPTION": "PASS when every rendered <figure> with meaningful visual content has figcaption or an explicit labelled/described relation; NOT_APPLICABLE when no rendered figure exists.",
+    "LONG_DESCRIPTION_WHERE_NEEDED": "Figure surface must expose textual explanation/caption/description relation for its governed figure; other surfaces are NOT_APPLICABLE unless a complex governed figure is rendered.",
+    "ERROR_IDENTIFICATION": "PASS when rendered error/invalid states are programmatically identified; NOT_APPLICABLE when no error or invalid state is rendered.",
+    "ARIA_CURRENT": "PASS when current-state navigation exists and uses valid aria-current; NOT_APPLICABLE when no current-state navigation item is rendered.",
+    "ARIA_EXPANDED": "PASS for rendered disclosure controls with valid boolean aria-expanded and resolvable aria-controls when supplied; NOT_APPLICABLE when no disclosure control is rendered.",
+    "DIALOG_SEMANTICS": "PASS for rendered dialogs with role/dialog semantics and accessible name; NOT_APPLICABLE when no dialog is rendered.",
+    "INTERACTIVE_FIGURE_KEYBOARD_ACCESSIBILITY": "Figure surface is evaluated when interactive figure controls exist; NOT_APPLICABLE for static figures.",
+    "ANSWER_EXPANDABLE_REGIONS_ACCESSIBLE": "Ask PHI OS is evaluated when expandable answer regions are rendered; NOT_APPLICABLE before an answer/disclosure exists."
+  },
+  "execution": {
+    "engine": "CHROMIUM_CDP_SINGLE_RUNNER",
+    "headlessRequired": true,
+    "localeSelection": "QUERY_PARAMETER_LANG_PRECEDENCE",
+    "viewportHeightsByWidth": {
+      "360": 800,
+      "768": 1024,
+      "1440": 900
+    },
+    "defaultSettleMs": 700,
+    "keyboardTraversalMaxSteps": 18,
+    "touchTargetMinimumCssPx": 24,
+    "contrast": {
+      "normalTextMinimum": 4.5,
+      "largeTextMinimum": 3.0,
+      "largeTextPx": 24,
+      "largeBoldTextPx": 18.66
+    },
+    "prefersReducedMotion": "reduce",
+    "failureScreenshots": "OPTIONAL_LOCAL_EVIDENCE",
+    "browserEvidenceRequired": true,
+    "screenshotsAloneAreNotAcceptance": true
+  },
+  "acceptanceGate": {
+    "all78StatesMustPass": true,
+    "allowedCriterionOutcomes": [
+      "PASS",
+      "NOT_APPLICABLE"
+    ],
+    "runnerStateErrorFails": true,
+    "representativeSelectorMustResolve": true,
+    "documentHttpMustBe200": true,
+    "documentReadyStateMustBeComplete": true,
+    "documentLanguageMustMatchLocale": true,
+    "evidenceMustBindFullCandidateCommit": true
+  },
+  "interpretationBoundary": {
+    "machineBrowserAccessibilityAcceptanceOnly": true,
+    "wcagConformanceCertification": false,
+    "screenReaderHumanAcceptance": false,
+    "assistiveTechnologyHumanAcceptance": false,
+    "humanVisualContrastAcceptance": false,
+    "pageCompletionAccepted": false,
+    "surfaceCompletionAccepted": false,
+    "contentCompletionAccepted": false,
+    "featureCompletionAccepted": false,
+    "productionStatePromoted": false,
+    "a12HumanProductionDecisionRemainsSeparate": true,
+    "globalProductionAccepted": false
+  },
+  "artifacts": {
+    "runner": "scripts/run-poc-a11-live-accessibility.mjs",
+    "checker": "scripts/check-poc-a11-live-accessibility.mjs",
+    "evidence": "content/web-production/production-operational-closure/poc-a/evidence/poc-a11-live-accessibility-evidence-v1.json",
+    "acceptance": "content/web-production/production-operational-closure/poc-a/acceptance/poc-a11-live-accessibility-acceptance-v1.json"
+  }
+}

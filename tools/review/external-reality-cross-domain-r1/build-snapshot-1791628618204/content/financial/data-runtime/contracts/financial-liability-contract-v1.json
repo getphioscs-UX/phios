@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W6-LIABILITY-CONTRACT-v1.0.0",
+  "work": "FDR-W6",
+  "status": "ACTIVE",
+  "authorityOwner": "FDR",
+  "requiredFields": [
+    "liabilityId",
+    "liabilityType",
+    "borrowerReferences",
+    "balanceFact",
+    "currency",
+    "disclosureState",
+    "evidence"
+  ],
+  "optionalFields": [
+    "lender",
+    "maskedReference",
+    "securedAssetReferences",
+    "interestRateFact",
+    "repaymentFact",
+    "maturityDate",
+    "jointLiability",
+    "documentReferences"
+  ],
+  "rules": {
+    "balanceIsFactNotCalculated": true,
+    "interestRateMayBeUnknown": true,
+    "repaymentMayBeIrregular": true,
+    "missingBalanceDoesNotBecomeZero": true,
+    "guaranteeUsesDedicatedContract": true,
+    "allAtomicFinancialFactsUseFactEnvelope": true
+  },
+  "factEnvelopeReference": "financial-fact-contract-v1.json"
+}

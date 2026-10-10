@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-HD-REL-R1-W4-OWNERSHIP-DEDUP-POLICY-v1.0.0",
+  "work": "HD-REL-R1-W4",
+  "baselineCommit": "2b660066669190eee55de54a2bb87b10be0eb3c4",
+  "status": "OWNERSHIP_POLICY_ACTIVE_SHADOW",
+  "precedence": [
+    "RELATIONSHIP_CHANNEL_INTERACTION",
+    "RELATIONSHIP_GATE_COMPANIONSHIP",
+    "RELATIONSHIP_CENTER_FIELD_CONTEXT"
+  ],
+  "rules": [
+    "ONE_PRIMARY_SEMANTIC_OWNER_PER_CHANNEL_INTERACTION_CLASS",
+    "WHEN_CHANNEL_INTERACTION_EXISTS_COMPONENT_GATES_ARE_SUPPORTING_EVIDENCE_ONLY",
+    "CENTER_FIELD_CHANGES_ARE_CONTEXTUAL_SUPPORTING_EVIDENCE_ONLY",
+    "SHARED_GATE_COMPANIONSHIP_IS_SUPPRESSED_WHEN_THE_SAME_GATE_IS_ALREADY_OWNED_BY_A_PRIMARY_CHANNEL_RELATION",
+    "A_SINGLE_SOURCE_STRUCTURE_MAY_SUPPORT_MULTIPLE_FACTS_BUT_MUST_NOT_REPEAT_CUSTOMER_PROSE",
+    "NO_PSEUDO_PRECISION_RANKING"
+  ],
+  "ownerKey": "HD_REL:{ownerType}:{subjectId}:{interactionClass}",
+  "dedupKey": "interactionClass + primary structural subject + participant ownership pattern",
+  "boundaries": {
+    "channelOverridesGate": true,
+    "gateOverridesGenericCenter": true,
+    "relationshipOwnerNeverOverridesIndividualDecisionAuthority": true,
+    "compatibilityScore": false
+  }
+}

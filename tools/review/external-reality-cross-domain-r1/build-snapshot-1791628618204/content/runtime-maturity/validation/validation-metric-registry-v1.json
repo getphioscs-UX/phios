@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S14-VALIDATION-METRIC-REGISTRY-v1.0.0",
+  "phase": "MRM-S",
+  "work": "MRM-S14",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "ACTIVE",
+  "capabilityTypeMetrics": [
+    {
+      "capabilityType": "CALCULATION",
+      "metrics": [
+        "accuracy",
+        "tolerance",
+        "repeatability",
+        "reference_agreement"
+      ]
+    },
+    {
+      "capabilityType": "CLASSIFICATION_FINDING",
+      "metrics": [
+        "precision",
+        "recall",
+        "false_positive",
+        "false_negative",
+        "abstention"
+      ]
+    },
+    {
+      "capabilityType": "INTERPRETATION",
+      "metrics": [
+        "human_agreement",
+        "inter_rater_agreement",
+        "calibration",
+        "confidence_quality",
+        "abstention_quality"
+      ]
+    },
+    {
+      "capabilityType": "NAVIGATION",
+      "metrics": [
+        "utility",
+        "follow_through",
+        "outcome_direction",
+        "stability",
+        "harm_adverse_signal"
+      ]
+    }
+  ],
+  "rules": {
+    "metricSelectionMustMatchCapabilityType": true,
+    "scientificProofClaimNotImplied": true
+  }
+}

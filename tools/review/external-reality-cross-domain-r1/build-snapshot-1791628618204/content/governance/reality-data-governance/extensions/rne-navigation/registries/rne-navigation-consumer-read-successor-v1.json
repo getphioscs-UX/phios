@@ -1,0 +1,67 @@
+{
+  "registryCode": "PHI-OS-RDG-RNE-NAVIGATION-CONSUMER-READ-SUCCESSOR-v1",
+  "registryVersion": "1.0.0",
+  "status": "ACTIVE_SUCCESSOR_EXTENSION",
+  "baselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+  "extends": [
+    "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+    "content/governance/reality-data-governance/extensions/rre-readout/registries/rre-readout-data-contract-successor-v1.json"
+  ],
+  "consumerReadExtensions": [
+    {
+      "runtimeCode": "RNE",
+      "dataType": "REALITY_READOUT_RECORD",
+      "sourceRuntimeCode": "RRE",
+      "readAuthorityMode": "PURPOSE_PERMISSION_VISIBILITY_BOUND",
+      "allowedPurposes": [
+        "SERVICE_DELIVERY"
+      ],
+      "writeAuthorityExpanded": false,
+      "reason": "RNE-W10 canonical readout reference consumption for bounded navigation intelligence; no readout payload ownership or storage authority transferred."
+    },
+    {
+      "runtimeCode": "JR",
+      "dataType": "NAVIGATION_RECORD",
+      "sourceRuntimeCode": "RNE",
+      "readAuthorityMode": "PURPOSE_PERMISSION_VISIBILITY_BOUND",
+      "allowedPurposes": [
+        "SERVICE_DELIVERY",
+        "RUNTIME_CONTINUITY"
+      ],
+      "writeAuthorityExpanded": false,
+      "reason": "JR-W11 frozen integration contract consumes RNE navigation references while JR retains workflow authority."
+    },
+    {
+      "runtimeCode": "PR",
+      "dataType": "NAVIGATION_RECORD",
+      "sourceRuntimeCode": "RNE",
+      "readAuthorityMode": "ASSIGNMENT_PURPOSE_PERMISSION_BOUND",
+      "allowedPurposes": [
+        "PROFESSIONAL_SERVICE"
+      ],
+      "writeAuthorityExpanded": false,
+      "reason": "RNE-W11 high-risk professional review may expose minimum-necessary navigation references only after independent PWS assignment and consent gates."
+    },
+    {
+      "runtimeCode": "VAL",
+      "dataType": "NAVIGATION_RECORD",
+      "sourceRuntimeCode": "RNE",
+      "readAuthorityMode": "PURPOSE_PERMISSION_VISIBILITY_BOUND",
+      "allowedPurposes": [
+        "SERVICE_DELIVERY"
+      ],
+      "writeAuthorityExpanded": false,
+      "reason": "RNE-W13 delegates navigation effectiveness validation to VAL without granting RNE validation authority."
+    }
+  ],
+  "rules": {
+    "baseRegistryMutated": false,
+    "rreReadoutSuccessorMutated": false,
+    "consumerWriteAuthorityExpanded": false,
+    "professionalJudgmentAuthorityExpanded": false,
+    "navigationDecisionAuthorityExpanded": false,
+    "evidencePromotionAuthorityExpanded": false,
+    "storageAuthorityExpanded": false,
+    "sourceRuntimeAuthorityRemainsAuthoritative": true
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-RLR-SOURCE-ADAPTER-REGISTRY-v1.0.0",
+  "work": "RLR-W0-W6",
+  "status": "CURRENT_V1",
+  "records": [
+    {
+      "componentCode": "AST_RELATIONAL_STRUCTURE",
+      "pluginCode": "AST",
+      "sourceSchema": "PHI-OS-AST-RUNTIME-READING-IR-v1.0.0",
+      "access": "PUBLIC_AND_INTERNAL",
+      "role": "PRIMARY_STRUCTURE"
+    },
+    {
+      "componentCode": "HDR_INTERNAL_RELATIONAL_STRUCTURE",
+      "pluginCode": "HDR",
+      "sourceSchema": "PHI-OS-INTERNAL-OPERATING-READING-IR-v1.0.0",
+      "access": "INTERNAL_ONLY",
+      "role": "OPTIONAL_INTERNAL_CONTEXT"
+    },
+    {
+      "componentCode": "ZI_WEI_PARTNERSHIP_DOMAIN_CONTEXT",
+      "pluginCode": "ZWR",
+      "sourceSchema": "PHI-OS-ZWR-RUNTIME-READING-IR-v1.0.0",
+      "access": "PUBLIC_AND_INTERNAL",
+      "role": "CONTEXTUAL"
+    },
+    {
+      "componentCode": "BZR_RELATIONAL_TEMPORAL_CONTEXT",
+      "pluginCode": "BZR",
+      "sourceSchema": "PHI-OS-BZR-TEMPORAL-READING-IR-v1.0.0",
+      "access": "PUBLIC_AND_INTERNAL",
+      "role": "CONTEXTUAL"
+    }
+  ],
+  "rules": {
+    "sourceAdaptersDoNotRecalculateNatalMethods": true,
+    "sourceAdaptersDoNotCreateCrossMethodMeaning": true,
+    "hdrNeverBecomesPublicThroughRlr": true
+  }
+}

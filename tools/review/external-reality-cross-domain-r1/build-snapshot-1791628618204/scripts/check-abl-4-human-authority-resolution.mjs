@@ -1,0 +1,94 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+
+const dir='content/production/article-simplification/bilingual/BATCH-001';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8').replace(/^\uFEFF/,''));
+const shaText=value=>crypto.createHash('sha256').update(String(value)).digest('hex');
+const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(k=>[k,canonical(value[k])])):value;
+const digest=value=>crypto.createHash('sha256').update(`${JSON.stringify(canonical(value),null,2)}\n`).digest('hex');
+const resolution=read(`${dir}/abl-4-title-revision-resolution-v1.json`);
+const advisory=read(`${dir}/abl-4-human-review-advisory-v1.json`);
+const reviewBatch=read(`${dir}/bilingual-review-batch.v1.json`);
+const human=read(`${dir}/english-human-decisions.v1.json`);
+const bridge=read(`${dir}/decision-bridge.v1.json`);
+const candidateRegistry=read('content/knowledge/production/registry/candidate-registry.json');
+const reviewRegistry=read('content/knowledge/production/registry/review-registry.json');
+const approvalRegistry=read('content/knowledge/production/registry/approval-registry.json');
+
+assert.equal(resolution.work,'ABL-4');
+assert.equal(resolution.batchCode,'BATCH-001');
+assert.equal(resolution.repositoryBaseline,'65fe9cb7f039ca8672c3af20d44879baf8ed267b');
+assert.equal(resolution.sourceAdvisory.advisoryDigest,advisory.advisoryDigest);
+assert.equal(resolution.status,'READY_FOR_ABL_5_PUBLICATION');
+assert.equal(resolution.entryCount,6);
+assert.deepEqual(resolution.summary,{titleRevisionAppliedCount:6,reviewAcceptedCount:6,approvalApprovedCount:6,publicationDecisionPublishCount:6,publicationCreatedCount:0});
+assert.equal(resolution.governance.titleRevisionExplicitlyAuthorized,true);
+assert.equal(resolution.governance.bodyMutationAllowed,false);
+assert.equal(resolution.governance.summaryMutationAllowed,false);
+assert.equal(resolution.governance.sameRouteSlugMutationAllowed,false);
+assert.equal(resolution.governance.candidateRevisionOccurredBeforeHumanReviewAuthority,true);
+assert.equal(resolution.governance.explicitTlHumanAuthorityRecorded,true);
+assert.equal(resolution.governance.publicationDecisionEqualsPublication,false);
+assert.equal(resolution.governance.publicationCreated,false);
+const copy=structuredClone(resolution); delete copy.resolutionDigest; assert.equal(resolution.resolutionDigest,digest(copy));
+assert.equal(resolution.sourceReviewBatch.reviewBatchDigest,reviewBatch.reviewBatchDigest);
+assert.equal(resolution.humanDecisionInput.sourceReviewBatchDigest,human.sourceReviewBatchDigest);
+assert.equal(human.sourceReviewBatchDigest,reviewBatch.reviewBatchDigest);
+assert.equal(resolution.decisionBridge.bridgeDigest,bridge.bridgeDigest);
+assert.equal(bridge.status,'READY_FOR_ABL_5_PUBLICATION');
+assert.equal(bridge.pendingNodeCodes.length,0);
+
+const advMap=new Map(advisory.entries.map(x=>[x.nodeCode,x]));
+const reviewBatchMap=new Map(reviewBatch.entries.map(x=>[x.nodeCode,x]));
+const humanMap=new Map(human.entries.map(x=>[x.nodeCode,x]));
+const bridgeMap=new Map(bridge.entries.map(x=>[x.nodeCode,x]));
+for(const entry of resolution.entries){
+  const candidate=read(`content/knowledge/production/candidates/en/${entry.nodeCode}/candidate.v1.json`);
+  const adv=advMap.get(entry.nodeCode), rb=reviewBatchMap.get(entry.nodeCode), h=humanMap.get(entry.nodeCode), b=bridgeMap.get(entry.nodeCode);
+  assert.ok(adv&&rb&&h&&b,entry.nodeCode);
+  assert.equal(adv.candidateDigest,entry.oldCandidateDigest);
+  assert.equal(adv.currentTitle,entry.oldTitle);
+  assert.equal(adv.proposedTitle,entry.newTitle);
+  assert.notEqual(entry.oldCandidateDigest,entry.newCandidateDigest);
+  assert.equal(candidate.candidateDigest,entry.newCandidateDigest);
+  assert.equal(candidate.article.title,entry.newTitle);
+  assert.equal(shaText(candidate.article.bodyMarkdown),entry.bodyDigest);
+  assert.equal(shaText(candidate.article.summary),entry.summaryDigest);
+  assert.equal(entry.bodyUnchanged,true); assert.equal(entry.summaryUnchanged,true); assert.equal(entry.sameRouteSlugUnchanged,true);
+  assert.equal(rb.sameRouteSlug,entry.sameRouteSlug);
+  assert.equal(rb.candidate.candidateDigest,entry.newCandidateDigest);
+  assert.equal(h.candidateDigest,entry.newCandidateDigest);
+  assert.equal(h.reviewDecision,'accept'); assert.equal(h.reviewerCode,'TL'); assert.ok(Date.parse(h.reviewedAt)); assert.ok(h.reviewSummary.trim());
+  assert.equal(h.approvalDecision,'approve'); assert.equal(h.approverCode,'TL'); assert.ok(Date.parse(h.approvedAt)); assert.ok(h.approvalSummary.trim());
+  assert.equal(h.publicationDecision,'publish'); assert.equal(h.publisherCode,'TL'); assert.ok(Date.parse(h.decidedAt)); assert.ok(h.publicationSummary.trim());
+  assert.equal(b.explicitHumanDecisionComplete,true); assert.equal(b.candidate.candidateDigest,entry.newCandidateDigest); assert.equal(b.review.accepted,true); assert.equal(b.approval.approved,true);
+  const review=read(b.review.path),approval=read(b.approval.path);
+  assert.equal(review.candidate.candidateDigest,entry.newCandidateDigest); assert.equal(review.decision,'accept'); assert.equal(review.reviewer.reviewerCode,'TL');
+  assert.equal(approval.candidate.candidateDigest,entry.newCandidateDigest); assert.equal(approval.review.reviewDigest,review.reviewDigest); assert.equal(approval.decision,'approve'); assert.equal(approval.approver.approverCode,'TL');
+  assert.equal(entry.reviewDigest,review.reviewDigest); assert.equal(entry.approvalDigest,approval.approvalDigest);
+  assert.equal(candidateRegistry.records.some(x=>x.nodeCode===entry.nodeCode&&x.locale==='en'&&x.candidateDigest===entry.newCandidateDigest&&x.review==='not_reviewed'&&x.approval==='not_approved'&&x.publication==='not_published'),true);
+  assert.equal(reviewRegistry.records.some(x=>x.nodeCode===entry.nodeCode&&x.locale==='en'&&x.candidateDigest===entry.newCandidateDigest&&x.reviewDigest===review.reviewDigest&&x.decision==='accept'),true);
+  assert.equal(approvalRegistry.records.some(x=>x.nodeCode===entry.nodeCode&&x.locale==='en'&&x.candidateDigest===entry.newCandidateDigest&&x.approvalDigest===approval.approvalDigest&&x.decision==='approve'),true);
+  const publicationPath=`content/knowledge/production/publications/en/${entry.nodeCode}/publication.v1.json`;
+  if (fs.existsSync(`${dir}/publication-run.v1.json`)) {
+    assert.equal(fs.existsSync(publicationPath),true);
+    const publication=read(publicationPath);
+    assert.equal(publication.candidate.candidateDigest,entry.newCandidateDigest);
+    assert.equal(publication.review.reviewDigest,review.reviewDigest);
+    assert.equal(publication.approval.approvalDigest,approval.approvalDigest);
+    assert.equal(publication.decision,'publish');
+  } else assert.equal(fs.existsSync(publicationPath),false);
+}
+const typo=resolution.entries.find(x=>x.nodeCode==='KN-B1-P2-001');
+assert.match(typo.oldTitle,/Experiencable/); assert.match(typo.newTitle,/Experienceable/); assert.doesNotMatch(typo.newTitle,/Experiencable/);
+const publicationRunExists=fs.existsSync(`${dir}/publication-run.v1.json`);
+if (publicationRunExists) {
+  const run=read(`${dir}/publication-run.v1.json`);
+  assert.equal(run.publishAuthorizedCount,6);
+  assert.equal(run.outcomes.every(x=>x.locale==='en'&&x.decision==='publish'&&x.publicationCreated&&x.publicReleaseCreated),true);
+}
+console.log('✓ ABL-4 Human Authority Resolution passed.');
+console.log('✓ 6/6 approved title-only revisions are rebound to new Candidate digests with body, summary and same-route slugs unchanged.');
+console.log('✓ 6/6 explicit TL English Review=accept, Approval=approve and Publication Decision=publish are bound to the revised Candidates.');
+console.log(publicationRunExists ? '✓ Later ABL-5 publication is attributable to these explicit ABL-4 decisions; ABL-4 resolution itself remains historically publication-free.' : '✓ ABL-4 is READY_FOR_ABL_5_PUBLICATION and has created no PJA Publication record yet.');

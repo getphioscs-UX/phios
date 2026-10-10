@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-INTERPRETATION-EVIDENCE-GRAPH-CONTRACT-v1.0.0",
+  "work": "BAZI-FP-W10",
+  "status": "ENGINEERING_COMPLETE",
+  "baselineCommit": "dd15cb928004dfc16768df9eeb4c2b0689a6f0a9",
+  "purpose": "Make every W9 finding traceable to governed evidence, authority and unresolved boundaries before composition begins.",
+  "inputSchema": "PHI-OS-BAZI-STRUCTURAL-FINDING-COLLECTION-v1.0.0",
+  "outputSchema": "PHI-OS-BAZI-INTERPRETATION-EVIDENCE-GRAPH-v1.0.0",
+  "nodeTypes": ["FINDING","EVIDENCE","AUTHORITY","UNKNOWN"],
+  "edgeTypes": ["SUPPORTS","QUALIFIES","COUNTERS","GOVERNS","BOUNDS"],
+  "rules": {
+    "everyFindingRequiresEvidenceEdge": true,
+    "everyFindingRequiresAuthorityEdge": true,
+    "unknownBoundaryMustNotBeDropped": true,
+    "graphMayNotCreateNewFinding": true,
+    "graphMayNotResolveContradictions": true,
+    "graphMayNotComposeNarrative": true,
+    "graphMayNotMergeSchools": true,
+    "graphMayNotPredictEvents": true,
+    "rendererMustNotTreatGraphTopologyAsProbability": true
+  },
+  "runtimeRef": "functions/bzr-full-production/bazi-interpretation-evidence-graph-runtime.js",
+  "handoff": "BAZI-FP-W11 consumes W9 findings plus W10 trace graph; W12 owns contradiction/counter-evidence resolution."
+}

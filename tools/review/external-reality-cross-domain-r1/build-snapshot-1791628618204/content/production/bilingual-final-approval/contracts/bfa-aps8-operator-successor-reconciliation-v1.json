@@ -1,0 +1,15 @@
+{
+  "schemaVersion":"PHI-OS-BFA-APS8-OPERATOR-SUCCESSOR-RECONCILIATION-v1.0.0",
+  "work":"BFA-W25 / BFA-W34",
+  "status":"ACTIVE_ADDITIVE_SUCCESSOR",
+  "historicalFrozenImplementations":{
+    "articleBatch":{"historicalPath":"scripts/article-batch.mjs","preservedCopyPath":"scripts/frozen/aps8/article-batch.mjs","sha256":"4691238f23363277f74fe286a4a018d884fafc598d2d26373842c2146a727ef4"},
+    "articlePublish":{"historicalPath":"scripts/article-publish.mjs","preservedCopyPath":"scripts/frozen/aps8/article-publish.mjs","sha256":"cfbcb1c61fe6a21be1d1c7768a3d9f0a51da0c3c9af2518f64c5b3b0f9f43921"},
+    "historicalBytesPreserved":true,
+    "historicalAuthorityInvalidated":false
+  },
+  "operatorAliases":{"article:batch":"node scripts/article-batch.mjs","article:publish":"node scripts/article-publish.mjs"},
+  "routing":{"BATCH-001":"delegates to preserved historical APS/ABL implementation","BATCH-002_PLUS":"BFA single-final-authority successor"},
+  "operatorEntrypointsEvolvedByVersionedSuccessor":true,
+  "successorIsAdditive":true
+}

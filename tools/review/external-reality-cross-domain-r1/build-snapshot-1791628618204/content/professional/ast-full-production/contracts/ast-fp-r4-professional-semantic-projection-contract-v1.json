@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R4-PROFESSIONAL-SEMANTIC-PROJECTION-CONTRACT-v1.0.0",
+  "workCode": "AST-FP-R4",
+  "baselineCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
+  "inputSchema": "PHI-OS-CANONICAL-METHOD-PROJECTION-v2.0.0",
+  "outputSchema": "PHI-OS-AST-PROFESSIONAL-SEMANTIC-PROJECTION-v1.0.0",
+  "requiredInput": [
+    "CORE_10_POSITIONS",
+    "POSITION_SPEEDS_FOR_DYNAMICS"
+  ],
+  "conditionalInput": [
+    "ANGLES",
+    "HOUSE_CUSPS",
+    "MAJOR_ASPECTS"
+  ],
+  "sections": [
+    "angles",
+    "rulership",
+    "elementModality",
+    "aspectPatterns",
+    "aspectDynamics"
+  ],
+  "rules": {
+    "existingCanonicalProjectionNotMutated": true,
+    "r2DigestBoundAcceptanceNotReusedForR4": true,
+    "r4IsSidecarSuccessor": true,
+    "angleSemanticsRequireActualAngles": true,
+    "chartRulerRequiresAscendant": true,
+    "houseRulersRequireCusps": true,
+    "dispositorUsesFrozenPrimaryRulerSchool": true,
+    "elementModalityUsesUnweightedCore10Counts": true,
+    "aspectPatternUsesOnlyExistingMajorAspectEdges": true,
+    "applyingSeparatingUsesRecordedSpeeds": true,
+    "missingSpeedFailsToUndetermined": true,
+    "noPerfectionTiming": true
+  },
+  "failClosed": [
+    "UNKNOWN_SIGN",
+    "UNKNOWN_RULERSHIP_ROW",
+    "DUPLICATE_CORE_BODY",
+    "INVALID_ASPECT_ENDPOINT",
+    "UNREGISTERED_PATTERN_TYPE",
+    "SCHOOL_POLICY_MISMATCH"
+  ],
+  "boundaries": {
+    "createsNewEphemeris": false,
+    "createsNewHouseCalculation": false,
+    "createsNewAspectGeometry": false,
+    "createsTransitOrProgression": false,
+    "createsRealityFact": false,
+    "createsOutcomePrediction": false,
+    "createsCustomerProductionAdmission": false
+  }
+}

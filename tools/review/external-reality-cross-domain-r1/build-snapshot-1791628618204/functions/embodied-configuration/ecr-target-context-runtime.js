@@ -1,0 +1,19 @@
+import {calculateEcrSolarAnchor,resolveEcrCoordinateFromSolarLongitude} from './ecr-calculation-runtime.js';
+
+export const ECR_TARGET_CONTEXT_RUNTIME_VERSION='PHI-OS-ECR-TARGET-CONTEXT-v1.0.0';
+const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const child of Object.values(value))freeze(child)}return value};
+const clean=value=>String(value??'').trim();
+function targetCanonicalInput(targetContext,locale='en'){
+  const targetDate=clean(targetContext?.targetDate),targetTime=clean(targetContext?.targetTime),offset=clean(targetContext?.targetTimezone?.utcOffsetAtTarget),iana=clean(targetContext?.targetTimezone?.iana);
+  return freeze({birthDate:targetDate,birthTime:targetTime,timeAccuracy:'EXACT',birthPlace:freeze({displayName:null,countryCode:null,latitude:null,longitude:null}),timezone:freeze({iana:iana||null,utcOffsetAtBirth:offset,source:'SHARED_TARGET_CONTEXT',confidence:'HIGH'}),locale:locale==='zh-Hans'?'zh-Hans':'en',consent:freeze({recordId:'ECR-TARGET-CONTEXT',granted:true,purposeCode:'ECR_TARGET_CONTEXT_REFERENCE',persistence:'NONE'}),inputVersion:'MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0'});
+}
+function projectionCode(projection,structureCode){return projection?.calculation?.structures?.find(group=>group?.code===structureCode)?.items?.[0]?.code||null}
+function targetCodes(resolved){return freeze({contextId:resolved.cosmologicalContext?.contextId||null,grammarCode:resolved.grammar?.code||null,questionId:resolved.question?.questionId||null,primaryCapabilityId:resolved.capability?.primary?.id||null,motionId:resolved.motion?.motionId||null,configurationId:resolved.configuration?.configurationId||null,activationId:resolved.activation?.activationId||null})}
+function natalCodes(projection){return freeze({contextId:projectionCode(projection,'ECR_CONTEXT'),grammarCode:projectionCode(projection,'ECR_GRAMMAR'),questionId:projectionCode(projection,'ECR_QUESTION'),primaryCapabilityId:projectionCode(projection,'ECR_CAPABILITIES'),motionId:projectionCode(projection,'ECR_MOTION'),configurationId:projectionCode(projection,'ECR_CONFIGURATION'),activationId:projectionCode(projection,'ECR_ACTIVATION')})}
+export async function buildEcrTargetContextSnapshot({canonicalProjection,targetContext,locale='en',astronomyModuleLoader}={}){
+  if(!targetContext)return null;
+  const input=targetCanonicalInput(targetContext,locale),anchor=await calculateEcrSolarAnchor(input,{astronomyModuleLoader}),resolved=resolveEcrCoordinateFromSolarLongitude(anchor.longitude),target=targetCodes(resolved),baseline=natalCodes(canonicalProjection);
+  const changedLayers=Object.keys(target).filter(key=>baseline[key]&&target[key]&&baseline[key]!==target[key]);
+  return freeze({schemaVersion:ECR_TARGET_CONTEXT_RUNTIME_VERSION,state:'AVAILABLE',targetContext:freeze({targetDate:clean(targetContext.targetDate),targetTime:clean(targetContext.targetTime),targetTimezone:freeze({iana:clean(targetContext?.targetTimezone?.iana)||null,utcOffsetAtTarget:clean(targetContext?.targetTimezone?.utcOffsetAtTarget)||null}),source:clean(targetContext.source)||'EXPLICIT_REQUEST'}),utcIso:anchor.utcIso,solarLongitude:anchor.longitude,baseline,target,changedLayers:freeze(changedLayers),labels:freeze({context:resolved.cosmologicalContext?.label||null,contextZhHans:resolved.cosmologicalContext?.labelZhHans||null,grammar:resolved.grammar?.label||null,grammarZhHans:resolved.grammar?.chineseLabel||null,question:resolved.question?.question||null,questionZhHans:resolved.question?.questionZhHans||null,motion:resolved.motion?.label||null,motionZhHans:resolved.motion?.labelZhHans||null,activation:resolved.activation?.label||null,activationZhHans:resolved.activation?.labelZhHans||null}),boundary:freeze({targetReferenceOnly:true,natalProjectionChanged:false,meaningCreated:false,realityClaimCreated:false,persisted:false})});
+}
+export default Object.freeze({ECR_TARGET_CONTEXT_RUNTIME_VERSION,buildEcrTargetContextSnapshot});

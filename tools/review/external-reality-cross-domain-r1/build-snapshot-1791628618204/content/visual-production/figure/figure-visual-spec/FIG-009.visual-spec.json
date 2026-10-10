@@ -1,0 +1,99 @@
+{
+  "boundaries": [],
+  "canonicalFilename": "PHIOS-FIGURE-CROSS-VOLUME-READING-PATH-v1.svg",
+  "diagramRole": "FLOW",
+  "domain": "KNOWLEDGE",
+  "edges": [
+    {
+      "edgeId": "FIG-009-E01",
+      "from": "FIG-009-N01",
+      "relation": "ENTERS",
+      "required": true,
+      "sourceBindingId": "FIG-009-SRC-01",
+      "to": "FIG-009-N02"
+    },
+    {
+      "edgeId": "FIG-009-E02",
+      "from": "FIG-009-N02",
+      "relation": "RELATES_TO",
+      "required": true,
+      "sourceBindingId": "FIG-009-SRC-02",
+      "to": "FIG-009-N03"
+    },
+    {
+      "edgeId": "FIG-009-E03",
+      "from": "FIG-009-N03",
+      "relation": "MAY_CROSS",
+      "required": true,
+      "sourceBindingId": "FIG-009-SRC-02",
+      "to": "FIG-009-N04"
+    },
+    {
+      "edgeId": "FIG-009-E04",
+      "from": "FIG-009-N04",
+      "relation": "SUPPORTS",
+      "required": true,
+      "sourceBindingId": "FIG-009-SRC-02",
+      "to": "FIG-009-N05"
+    }
+  ],
+  "figureId": "FIG-009",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-009-N01",
+    "FIG-009-N02",
+    "FIG-009-N03",
+    "FIG-009-N04",
+    "FIG-009-N05"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Volume Entry",
+      "nodeId": "FIG-009-N01",
+      "required": true,
+      "semanticKey": "VOLUME_ENTRY",
+      "sourceBindingId": "FIG-009-SRC-01"
+    },
+    {
+      "displayLabel": "Canonical Node",
+      "nodeId": "FIG-009-N02",
+      "required": true,
+      "semanticKey": "CANONICAL_NODE",
+      "sourceBindingId": "FIG-009-SRC-01"
+    },
+    {
+      "displayLabel": "Related Node",
+      "nodeId": "FIG-009-N03",
+      "required": true,
+      "semanticKey": "RELATED_NODE",
+      "sourceBindingId": "FIG-009-SRC-01"
+    },
+    {
+      "displayLabel": "Cross-Volume Path",
+      "nodeId": "FIG-009-N04",
+      "required": true,
+      "semanticKey": "CROSS_VOLUME",
+      "sourceBindingId": "FIG-009-SRC-01"
+    },
+    {
+      "displayLabel": "Reading Continuity",
+      "nodeId": "FIG-009-N05",
+      "required": true,
+      "semanticKey": "READING_CONTINUITY",
+      "sourceBindingId": "FIG-009-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "CROSS-VOLUME-READING-PATH",
+  "title": "Cross-Volume Reading Path"
+}

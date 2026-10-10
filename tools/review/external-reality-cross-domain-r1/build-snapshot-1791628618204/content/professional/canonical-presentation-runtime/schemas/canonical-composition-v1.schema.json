@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-composition-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "compositionCode",
+    "compositionVersion",
+    "surface",
+    "audience",
+    "locale",
+    "sourcePresentationReferences",
+    "componentSequence",
+    "informationLayers",
+    "pdsReferences",
+    "state"
+  ],
+  "properties": {
+    "compositionCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "compositionVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "surface": {
+      "type": "string"
+    },
+    "audience": {
+      "type": "string"
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "sourcePresentationReferences": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "componentSequence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "informationLayers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "pdsReferences": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "state": {
+      "enum": [
+        "RESOLVED",
+        "RENDERABLE",
+        "BLOCKED"
+      ]
+    }
+  }
+}

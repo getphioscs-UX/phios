@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W27-EVIDENCE-STALENESS-BINDING-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W27.7",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "ACTIVE_MRM_S_STALENESS_BINDING",
+  "mrmPolicy": "content/runtime-maturity/contracts/evidence-staleness-policy-v1.json",
+  "rrpMaterialChangeTriggers": [
+    {
+      "change": "SECTION_ARCHITECTURE_CHANGED",
+      "mapsTo": "OUTPUT_SCHEMA_CHANGED"
+    },
+    {
+      "change": "MEANING_ADMISSION_CHANGED",
+      "mapsTo": "MEANING_MAPPING_CHANGED"
+    },
+    {
+      "change": "CONVERGENCE_POLICY_CHANGED",
+      "mapsTo": "INTERPRETATION_POLICY_CHANGED"
+    }
+  ],
+  "requiredResult": "REVALIDATION_REQUIRED",
+  "rules": {
+    "oldEvidenceAutomaticallyInherited": false,
+    "invalidatedEvidenceContributesToEM": false,
+    "versionChangeRequiresReview": true
+  }
+}

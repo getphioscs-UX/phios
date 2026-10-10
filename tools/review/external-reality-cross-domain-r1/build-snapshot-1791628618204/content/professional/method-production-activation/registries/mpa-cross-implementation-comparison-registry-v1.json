@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W15-CROSS-IMPLEMENTATION-COMPARISON-REGISTRY-v1.0.0",
+  "work": "MPA-W15",
+  "baselineCommit": "3dd903344945ecd3b585c8aafe48b93d7894caa9",
+  "registryVersion": "1.0.0",
+  "status": "ACTIVE_EVIDENCE_LEDGER_FAIL_CLOSED",
+  "allowedSources": [
+    "internal_implementation",
+    "trusted_reference",
+    "independent_implementation"
+  ],
+  "resultStates": [
+    "EXACT_MATCH",
+    "WITHIN_TOLERANCE",
+    "KNOWN_DIFFERENCE",
+    "UNRESOLVED_DISCREPANCY",
+    "REFERENCE_PENDING",
+    "BLOCKED"
+  ],
+  "rules": {
+    "looksCorrectForbidden": true,
+    "toleranceMustBeExplicitBeforeWithinTolerance": true,
+    "unresolvedDiscrepancyBlocksProduction": true,
+    "referencePendingBlocksProductionWhenReferenceRequired": true,
+    "syntheticAdapterCannotStandInForTrustedReference": true
+  },
+  "methods": [
+    {
+      "methodCode": "NUMEROLOGY",
+      "comparisonMode": "internal_vs_independent_recalculation",
+      "currentState": "EXACT_MATCH_VALIDATION_FIXTURE_ONLY",
+      "tolerance": {
+        "type": "exact",
+        "value": 0
+      },
+      "evidenceFixtures": [
+        "NUM-VALID-001",
+        "NUM-EDGE-LEAP-001"
+      ],
+      "trustedReferenceRequiredForProduction": false,
+      "productionComparisonSatisfied": false,
+      "blockingReasons": [
+        "FULL_REGRESSION_CORPUS_NOT_YET_PRODUCTION_FROZEN"
+      ]
+    },
+    {
+      "methodCode": "ASTROLOGY",
+      "comparisonMode": "internal_vs_NASA_JPL_HORIZONS",
+      "currentState": "REFERENCE_PENDING",
+      "tolerance": {
+        "type": "angular_and_time",
+        "value": null
+      },
+      "evidenceFixtures": [
+        "AST-VALID-001",
+        "AST-REGRESSION-001"
+      ],
+      "trustedReferenceRequiredForProduction": true,
+      "productionComparisonSatisfied": false,
+      "blockingReasons": [
+        "NASA_JPL_HORIZONS_NOT_EXECUTED",
+        "TOLERANCE_NOT_DEFINED",
+        "EPHEMERIS_VERSION_DIGEST_UNRESOLVED"
+      ]
+    },
+    {
+      "methodCode": "BAZI",
+      "comparisonMode": "internal_vs_independent_calendar_reference",
+      "currentState": "REFERENCE_PENDING",
+      "tolerance": {
+        "type": "boundary_exactness",
+        "value": 0
+      },
+      "evidenceFixtures": [
+        "BZR-VALID-001",
+        "BZR-REGRESSION-001"
+      ],
+      "trustedReferenceRequiredForProduction": true,
+      "productionComparisonSatisfied": false,
+      "blockingReasons": [
+        "INDEPENDENT_IMPLEMENTATION_NOT_BOUND",
+        "TZDB_DATASET_DIGEST_UNRESOLVED",
+        "SOLAR_TERM_REFERENCE_NOT_FROZEN"
+      ]
+    },
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "comparisonMode": "restricted_internal_validation_vs_authorized_reference",
+      "currentState": "BLOCKED",
+      "tolerance": {
+        "type": "exact_external_output_match",
+        "value": null
+      },
+      "evidenceFixtures": [
+        "HDR-VALID-001",
+        "HDR-REGRESSION-001"
+      ],
+      "trustedReferenceRequiredForProduction": true,
+      "productionComparisonSatisfied": false,
+      "blockingReasons": [
+        "LICENSE_RESTRICTED",
+        "AUTHORIZED_MAPPING_REFERENCE_UNRESOLVED",
+        "EPHEMERIS_DATA_AUTHORITY_UNRESOLVED"
+      ]
+    }
+  ],
+  "productionEligibilityChanged": false
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-REL-W0-W3-MACHINE-ACCEPTANCE-v1.0.0",
+  "work": ["REL-W0", "REL-W1", "REL-W2", "REL-W3"],
+  "baselineCommit": "4b2688665e0875f6a628c2b81d1991a14ea62a49",
+  "status": "MACHINE_VERIFIED",
+  "scope": "FOUNDATION_ONLY_ZERO_RELATIONSHIP_MEANING",
+  "gates": {
+    "check:relationship:w0-intent-contract": "PASS",
+    "check:relationship:w1-shared-person-b-input": "PASS",
+    "check:relationship:w2-method-capability-matrix": "PASS",
+    "check:relationship:w3-independent-reading-freeze": "PASS",
+    "check:relationship:w0-w3": "PASS"
+  },
+  "neighborRegressions": {
+    "check:relational-runtime": "PASS",
+    "check:mcd-canonical-input": "PASS",
+    "scripts/check-cx-r12r4b-smr-w0-w8.mjs": "PASS",
+    "check:ppr-r5": "PASS",
+    "scripts/check-schema-references.mjs": "PASS",
+    "check.mjs": "PASS",
+    "check:package-aliases": "PASS"
+  },
+  "relationshipEligibility": {
+    "AST": "SUPPORTED_CURRENT_STRUCTURAL_RELATION_AUTHORITY",
+    "BZR": "PARTIAL_FAIL_CLOSED",
+    "ZWR": "PARTIAL_FAIL_CLOSED",
+    "NUM": "PARTIAL_FAIL_CLOSED",
+    "ECR": "AUTHORITY_PENDING_FAIL_CLOSED",
+    "HD": "DUAL_CHART_NOT_SUPPORTED_FAIL_CLOSED"
+  },
+  "boundaries": {
+    "humanRelationshipSemanticAdmissionGranted": false,
+    "relationshipCustomerPublicationGranted": false,
+    "relationshipMeaningCreatedByW0W3": false,
+    "compatibilityScoreCreated": false,
+    "partnerHiddenStateInferred": false,
+    "personBAccountCreated": false,
+    "hiddenPersistenceActivated": false,
+    "natalMethodAuthorityDuplicated": false
+  }
+}

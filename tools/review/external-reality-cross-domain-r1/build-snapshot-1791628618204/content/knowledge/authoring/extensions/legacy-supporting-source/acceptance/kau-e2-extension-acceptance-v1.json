@@ -1,0 +1,61 @@
+{
+  "acceptanceCode": "KAU-E2-EXTENSION-ACCEPTANCE",
+  "acceptanceVersion": "1.0.0",
+  "workCode": "KAU-E2",
+  "status": "ACCEPTED_READY_TO_FREEZE",
+  "baselineCommit": "c1ded91129cea2e9406f49c5066fdf041df0c1eb",
+  "acceptedAt": "2026-08-10T13:53:00+08:00",
+  "predecessorState": {
+    "e0RegisteredSources": 2,
+    "e1CandidateReviews": 185,
+    "e1rHumanReviewed": 185,
+    "e1rPending": 0
+  },
+  "relationshipState": {
+    "acceptedSupporting": 155,
+    "deferred": 30,
+    "canonicalNodeReferenceEdges": 597,
+    "relationshipTypeCounts": {
+      "HISTORICAL_PRECURSOR": 48,
+      "PARTIAL_OVERLAP": 36,
+      "SUPERSEDED_BY": 8,
+      "SUPPORTS": 49,
+      "TERMINOLOGY_PREDECESSOR": 14
+    }
+  },
+  "authoritySnapshots": {
+    "canonicalNodeRegistry": {
+      "path": "content/knowledge/registry/nodes.json",
+      "sha256": "61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431",
+      "expectedNodeCount": 716
+    },
+    "canonicalMeaningCodeRegistry": {
+      "path": "content/professional/canonical-meaning-runtime/registries/canonical-meaning-code-registry-v1.2.json",
+      "sha256": "3390219dac03a537edc68d7af98339cf352a8d4386dadd646039c1b769479bf9"
+    },
+    "kppCanonicalProductionPlanRegistry": {
+      "path": "content/knowledge/production-planning/registries/kpp-canonical-production-plan-registry-v1.json",
+      "sha256": "de89a1d5041a7909f0f44573b9d84e088d7c94a6adcceafe372bd5b571c8bcce"
+    }
+  },
+  "checks": {
+    "twoLegacySourcesRemainSupportingOnly": true,
+    "all185HumanReviewsResolved": true,
+    "acceptedSupportingRegistryCreated": true,
+    "deferredRegistryCreated": true,
+    "kppControlledHandoffCreated": true,
+    "canonicalNodeRegistryMutated": false,
+    "meaningAuthorityMutated": false,
+    "publicationAuthorityMutated": false,
+    "productionReadinessPromoted": false,
+    "articleRequirementCreated": false,
+    "frozenWaveMutated": false,
+    "rawLegacyToKppForbidden": true,
+    "deferredItemsAutoResolved": false,
+    "baseKauFreezeMutated": false,
+    "cmwRegistryMutated": false
+  },
+  "freezeManifest": "content/knowledge/authoring/extensions/legacy-supporting-source/manifests/kau-e2-extension-freeze-manifest-v1.json",
+  "freezeManifestSha256": "5fbf0e548536ae9dc21ce110f43b4b03633cf2f9462a0f437ba3bb6faf9477da",
+  "nextState": "KAU_E2_EXTENSION_FREEZE"
+}

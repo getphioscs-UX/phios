@@ -1,0 +1,25 @@
+/* Existing PHI OS tokens and source-owned diagrams remain authoritative. */
+.cx-commerce-section{width:min(100% - 2*var(--cx-gutter,1.5rem),76rem);margin:2.5rem auto;padding:1.5rem 0;border-top:1px solid var(--cx-color-border,#d4c6aa);color:var(--cx-color-ink,#171914);font-family:var(--cx-font-body,system-ui)}
+.cx-commerce-section>h2{font-size:clamp(1.7rem,2.6vw,2.4rem);font-family:var(--cx-font-display,Georgia);line-height:1.2;margin:0 0 .8rem}
+.cx-commerce-section>p{max-width:52rem;color:var(--cx-color-ink-muted,#676a61)}
+.cx-commerce-offer{display:grid;grid-template-columns:minmax(160px,300px) minmax(0,1fr);gap:2rem;align-items:start;padding:1.5rem;background:var(--cx-color-surface,#fff);border:1px solid var(--cx-color-border,#d4c6aa);border-radius:var(--cx-radius-md,1rem);max-width:68rem}
+.cx-commerce-offer[data-poster="held"]{grid-template-columns:1fr}
+.cx-commerce-offer__copy{min-width:0;display:grid;gap:.8rem;align-content:start;color:var(--cx-color-ink,#171914)}
+.cx-commerce-offer__copy h3{font-size:1.35rem;line-height:1.4;margin:0}.cx-commerce-offer__copy p{margin:0;line-height:1.65}.cx-commerce-offer__copy .cx-button{justify-self:start;display:inline-flex;align-items:center;min-height:44px;padding:.7rem 1rem;border:1px solid #8d6a1f;border-radius:.625rem;background:#f7f5ef;color:#171914;text-decoration:none}
+.cx-commerce-selector{display:grid;gap:.5rem;font-size:.9rem;max-width:32rem;margin:0 0 1rem}.cx-commerce-selector select{width:100%;padding:.7rem;min-height:44px;font:inherit;color:#171914;background:#fff;border:1px solid #aaa18b;border-radius:.5rem}
+.cx-commerce-meta{font-size:.83rem;color:#676a61}.cx-commerce-price{font-size:1.3rem;font-weight:600;color:#403a2c}
+.cx-commerce-visual{margin:0!important;min-width:0;max-width:360px;width:100%;color:#676a61}
+.cx-commerce-visual img{display:block;width:100%;height:auto!important;aspect-ratio:1;object-fit:contain!important;border-radius:.7rem;background:#f7f5ef}.cx-commerce-visual a{display:block}.cx-commerce-visual figcaption{margin-top:.5rem;font-size:.75rem;line-height:1.5}
+.cx-commerce-visual--compact{max-width:160px}.cx-commerce-visual--unlock{margin-block:1rem!important;max-width:220px}
+.cx-commerce-hero-slot .cx-commerce-offer{grid-template-columns:minmax(180px,360px) 1fr;background:transparent;padding:0;border:0}.cx-commerce-hero-slot .cx-commerce-price{font-size:1rem}
+.cx-commerce-order-thumb{display:inline-block;vertical-align:middle;margin-right:.65rem;margin-block:.3rem}.cx-commerce-order-thumb img{width:64px;height:64px;object-fit:contain;border-radius:.4rem}
+/* Public introductions stay compact; accepted dedicated diagrams keep their own rules. */
+body:not([data-perspectives-visual]) main h1{font-size:clamp(2.4rem,4.6vw,4.75rem);line-height:1.12}
+body:not([data-perspectives-visual]) .pis-landing-hero{min-height:24rem;padding-block:clamp(2.5rem,5vw,4rem)}
+main>.cx-section{padding-block:clamp(2rem,4vw,3.5rem)}
+:is(body[data-cx-surface="PROFESSIONAL_SERVICES"],body[data-cx-surface="PROFESSIONAL_APPOINTMENTS"]) main .cx-card{background:#fff;color:#171914}
+:is(body[data-cx-surface="PROFESSIONAL_SERVICES"],body[data-cx-surface="PROFESSIONAL_APPOINTMENTS"]) main .cx-card :is(h2,p,a){color:#171914}
+body[data-page="membership"] .membership-grid{gap:1rem}body[data-page="membership"] section{padding-block:2rem}
+.knowledge-shell :is(pre,code),main :is(pre,code){max-width:100%;overflow-wrap:anywhere}pre{overflow:auto}
+@media(max-width:760px){.cx-commerce-section{margin-block:1.7rem}.cx-commerce-offer,.cx-commerce-hero-slot .cx-commerce-offer{grid-template-columns:1fr;gap:1rem;padding:1rem}.cx-commerce-offer .cx-commerce-visual{max-width:min(100%,360px);margin-inline:auto!important}.cx-commerce-offer .cx-commerce-visual--compact{max-width:140px;margin-inline:0!important}body:not([data-perspectives-visual]) main h1{font-size:clamp(2.1rem,8.5vw,2.8rem)}.cx-commerce-offer__copy .cx-button{width:100%;justify-content:center;text-align:center}.cx-commerce-order-thumb img{width:52px;height:52px}}
+@media print{.cx-commerce-section,.cx-commerce-visual--unlock,.cx-commerce-order-thumb{display:none!important}}

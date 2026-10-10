@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-PRODUCT-RUNTIME-CHECKER-SUCCESSOR-v1.0.0",
+  "phase": "ICH-PROD",
+  "work": "ICH-PROD-W10",
+  "baselineCommit": "6eb24e4e55a77859b0068836da7fa89e946ae3b1",
+  "predecessorCommit": "306b84652102583690a7f7665167f8dfdbb82541",
+  "status": "CURRENT_CHECKER_RECONCILED_SOURCE_RUNTIME_COMPLETE_ACTIVATION_NOT_GRANTED",
+  "historicalFreeze": {
+    "path": "content/interpretation/iching/freeze/iching-product-runtime-source-freeze-v1.json",
+    "sha256": "9c90336065d2af6d082c3a4a2346a42e6b1204e45bfb18bc284b99621404516f",
+    "status": "I_CHING_PRODUCT_RUNTIME_SOURCE_FROZEN_ACTIVATION_EVIDENCE_PENDING",
+    "preserved": true,
+    "historicalPackageSha256": "d0288f84181a9b679563d27e7a770c917dee4ec285120e60acf3309d47be2093"
+  },
+  "checkerLifecycle": {
+    "historicalChecker": {
+      "path": "scripts/check-iching-product-runtime.mjs",
+      "sha256": "8eb58369036e6e82e5eec0dda24e1ee080f1ca3466fa72d56d88fa2fda15a993",
+      "aliases": [
+        "check:iching-product-runtime",
+        "check:iching-product-runtime-historical"
+      ],
+      "expectedSuccessorWorktreeResult": "FAIL_ONLY_AT_APPROVED_SHARED_CONTEXT_API_OR_HISTORICAL_PACKAGE_DIGEST"
+    },
+    "currentChecker": {
+      "path": "scripts/check-iching-product-runtime-current.mjs",
+      "alias": "check:iching-product-runtime-current"
+    },
+    "currentAggregateAlias": "check:iching-product-current"
+  },
+  "packageEvolution": {
+    "historicalPackageDigestRemainsEvidence": true,
+    "currentPackageMayEvolveAdditively": true,
+    "fullCurrentPackageDigestIsNotFrozenByThisSuccessor": true,
+    "requiredCurrentAliases": [
+      "check:iching-product-runtime-historical",
+      "check:iching-product-runtime-current",
+      "check:iching-product-current"
+    ]
+  },
+  "sharedApiEvolution": {
+    "path": "functions/api/symbolic-method-context.js",
+    "historicalIChingProductSha256": "af8dc43a659f31aca2177b073b2a5f7238381c9d5d5348ae30adeec968a8b5e9",
+    "currentSha256": "3b5409cc5d1dfe6a1b6b83f85604e44aad00eb8cea082b6a600b5b71a4e39c96",
+    "reason": "Shared product-runtime readiness now reports the already-frozen source readiness of both I Ching and Tarot while preserving separate fail-closed execution authority.",
+    "productionAuthorityChanged": false
+  },
+  "sourceRuntime": {
+    "structuralRuntimeImplemented": true,
+    "interpretationRealityRuntimeImplemented": true,
+    "productRuntimeImplemented": true,
+    "historicalFrozenArtifactsExceptPackageRemainByteStable": true
+  },
+  "productionBoundary": {
+    "humanReviewAcceptedSessions": 0,
+    "humanReviewRequiredSessions": 24,
+    "verifiedPersistenceIdentity": false,
+    "liveBrowserAcceptance": false,
+    "liveProductionShaAlignment": false,
+    "publicRunAllowed": false,
+    "limitedProductionActivated": false,
+    "productionCapabilityPromoted": false
+  },
+  "rules": {
+    "historicalFreezeMutationAllowed": false,
+    "historicalCheckerMutationAllowed": false,
+    "approvedSharedApiSuccessorRequired": true,
+    "packageEvolutionMayInvalidateHistoricalChecker": true,
+    "currentCheckerMustValidateHistoricalRuntimeBeforeAcceptingPackageEvolution": true,
+    "checkerReconciliationMayGrantProductionActivation": false
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-STAGE17-MANUAL-PROFESSIONAL-INPUT-CONTRACT-v1.0.0",
+  "stage": "STAGE_17",
+  "status": "MANUAL_PROFESSIONAL_INPUT_ONLY",
+  "allowedExtensionCodes": [
+    "PHS",
+    "DREAM_RAVE",
+    "VARIABLES"
+  ],
+  "requiredFields": [
+    "extensionCode",
+    "enteredBy",
+    "enteredAt",
+    "sourceType",
+    "sourceRef",
+    "professionalScope",
+    "value"
+  ],
+  "requiredSourceType": "PROFESSIONAL_MANUAL_INPUT",
+  "forbiddenSourceTypes": [
+    "PHI_OS_CALCULATION",
+    "AUTOMATIC_CALCULATION",
+    "DERIVED_BY_RUNTIME",
+    "AI_GENERATED"
+  ],
+  "projection": {
+    "informationClass": "PROFESSIONAL_DECLARED_CONTEXT",
+    "calculationFact": false,
+    "realityEvidence": false,
+    "clientFact": false
+  },
+  "rules": {
+    "valueMayBeBlank": false,
+    "sourceRefRequired": true,
+    "professionalScopeRequired": true,
+    "enteredAtMustBeIso8601": true,
+    "automaticCalculationAllowed": false,
+    "automaticPersistenceAllowed": false
+  }
+}

@@ -1,0 +1,15 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import crypto from 'node:crypto';
+const historicalPath='scripts/check-dar-w15-w24-document-assembly-runtime.mjs',currentPath='scripts/check-dar-w15-w24-document-assembly-runtime-current.mjs';
+const historical=fs.readFileSync(historicalPath,'utf8');
+assert.equal(crypto.createHash('sha256').update(fs.readFileSync(historicalPath)).digest('hex'),'2e0100df00551af64ad2e39a43a9b0df43c481b523a007c38762526026defdea');
+let current="import {effectivePackageScripts,registeredCheckerCommandMatches} from './lib/effective-package-scripts.mjs';\n"+historical.replace("const packageJson=readJson('package.json');","const packageJson=effectivePackageScripts(readJson('package.json'),root);");
+const old="assert.equal(packageJson.scripts?.['check:dar-w15-w24'],'node scripts/check-dar-w15-w24-document-assembly-runtime.mjs');";
+assert.ok(current.includes(old));current=current.replace(old,"assert.equal(registeredCheckerCommandMatches('check:dar-w15-w24',packageJson.scripts?.['check:dar-w15-w24'],'node scripts/check-dar-w15-w24-document-assembly-runtime.mjs',root),true,'DAR_REGISTERED_CURRENT_CHECK_ROUTE_REQUIRED');");
+if(fs.existsSync(currentPath))assert.equal(fs.readFileSync(currentPath,'utf8'),current);else fs.writeFileSync(currentPath,current);
+const textSha=p=>crypto.createHash('sha256').update(fs.readFileSync(p,'utf8').replace(/^\uFEFF/,'').replace(/\r\n?/g,'\n')).digest('hex');
+const registryPath='config/reports/zero-cost-check-successors.json',registry=JSON.parse(fs.readFileSync(registryPath));
+const record={historicalPath,historicalTextSha256:textSha(historicalPath),currentPath,currentTextSha256:textSha(currentPath),commands:['check:dar-w15-w24'],changeClass:'ACCEPTANCE_FIX',scope:'Effective zero-cost command routing only; all DAR business assertions retained; no runtime/production admission.'};
+const prior=registry.files.find(r=>r.historicalPath===historicalPath);if(prior)assert.deepEqual(prior,record);else registry.files.push(record);
+fs.writeFileSync(registryPath,JSON.stringify(registry,null,2)+'\n');
+const commandsPath='config/reports/zero-cost-check-commands.json',commands=JSON.parse(fs.readFileSync(commandsPath));assert.ok([`node ${historicalPath}`,`node ${currentPath}`].includes(commands['check:dar-w15-w24']));commands['check:dar-w15-w24']=`node ${currentPath}`;fs.writeFileSync(commandsPath,JSON.stringify(commands,null,2)+'\n');
+console.log('Registered command-only DAR successor; frozen historical bytes and hashes unchanged.');

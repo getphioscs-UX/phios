@@ -1,0 +1,1 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';const x=JSON.parse(fs.readFileSync('content/health/health-reflective/authority/health-reflective-perspective-boundary-v1.json','utf8'));assert.equal(x.invariant,'REFLECTIVE_MEANING_NE_MEDICAL_CAUSALITY');assert.ok(x.mayNot.includes('DIAGNOSE'));console.log('✓ Health reflective authority passed.');

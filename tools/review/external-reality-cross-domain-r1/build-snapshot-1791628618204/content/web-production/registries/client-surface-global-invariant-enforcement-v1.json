@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "PHI-OS-CLIENT-SURFACE-GLOBAL-INVARIANT-ENFORCEMENT-v1.0.0",
+  "work": "CLIENT-SURFACE-INV-01-INV-10",
+  "baselineCommit": "a6395ad926ce1bcd318b596d6f6ce028f5b96ae9",
+  "status": "ACTIVE_FOUNDATION_ENFORCEMENT_REGISTRY",
+  "contract": "content/web-production/contracts/client-surface-global-invariants-v1.json",
+  "entries": [
+    {
+      "code": "INV-01",
+      "foundationState": "PASS_PREDECESSOR_ORPHAN_POLICY_PRESENT",
+      "foundationProof": [
+        "WPR_RUNTIME_CONSUMPTION_REGISTRY_HAS_ORPHAN_POLICY",
+        "EMPTY_SURFACE_CONSUMERS_REQUIRE_NONE_BY_DESIGN"
+      ],
+      "fullProductionEvidenceState": "REQUIRES_BFR_H0_H2_H15",
+      "mayClaimProductionCompleteNow": false
+    },
+    {
+      "code": "INV-02",
+      "foundationState": "PASS_REGISTRY_AND_RESOLVER_PRESENT",
+      "foundationProof": [
+        "PUBLIC_ASSET_REGISTRY_PRESENT",
+        "FAIL_CLOSED_RESOLVER_PRESENT"
+      ],
+      "fullProductionEvidenceState": "CONSUMER_AND_VISIBLE_EVIDENCE_REQUIRED",
+      "mayClaimProductionCompleteNow": false
+    },
+    {
+      "code": "INV-03",
+      "foundationState": "RULE_FROZEN",
+      "foundationProof": [
+        "WPR_HOMEPAGE_COMPOSITION_IS_COMPOSED_NOT_RUNTIME_PER_SECTION"
+      ],
+      "fullProductionEvidenceState": "REQUIRES_BFR_H7_AND_HPC2",
+      "mayClaimProductionCompleteNow": false
+    },
+    {
+      "code": "INV-04",
+      "foundationState": "RULE_FROZEN",
+      "foundationProof": [
+        "RUNTIME_EXISTENCE_DOES_NOT_CREATE_CUSTOMER_AVAILABILITY"
+      ],
+      "fullProductionEvidenceState": "REQUIRES_HOME_SCENE_DECLARATIONS",
+      "mayClaimProductionCompleteNow": false
+    },
+    {
+      "code": "INV-05",
+      "foundationState": "PASS_EXISTING_KAP_BOUNDARY",
+      "foundationProof": [
+        "ASK_PHIOS_QUESTION_SCOPED_NON_AUTHORITATIVE",
+        "ASK_PHIOS_INDEPENDENT_OF_JOURNEY"
+      ],
+      "fullProductionEvidenceState": "CKA_SURFACE_COMPOSITION_REQUIRED",
+      "mayClaimProductionCompleteNow": false
+    },
+    {
+      "code": "INV-06",
+      "foundationState": "PASS_EXISTING_KAP_ROUTING_BOUNDARY",
+      "foundationProof": [
+        "AUTOMATIC_REALITY_JOURNEY_FALSE",
+        "EXPLICIT_ESCALATION_CONSENT_REQUIRED"
+      ],
+      "fullProductionEvidenceState": "CKA_W5_W6_CLIENT_HANDOFF_REQUIRED",
+      "mayClaimProductionCompleteNow": false
+    },
+    {
+      "code": "INV-07",
+      "foundationState": "PASS_EXISTING_TEMPORARY_CONTEXT_BOUNDARY",
+      "foundationProof": [
+        "GUIDED_CONTEXT_TEMPORARY_NON_CANONICAL",
+        "PERSISTENT_CASE_FALSE"
+      ],
+      "fullProductionEvidenceState": "CKA_TO_ICR_HANDOFF_REQUIRED",
+      "mayClaimProductionCompleteNow": false
+    },
+    {
+      "code": "INV-08",
+      "foundationState": "PASS_NO_AUTO_METHOD_EXECUTION_BOUNDARY",
+      "foundationProof": [
+        "KAP_ALL_METHODS_AUTO_EXECUTE_FALSE",
+        "MPA_OWNS_ELIGIBILITY",
+        "MPA_SOLE_DISPATCH_AUTHORITY",
+        "MCD_CANONICAL_PROJECTION_ONLY"
+      ],
+      "fullProductionEvidenceState": "DISCLOSURE_AND_CKA_HANDOFF_COMPOSITION_REQUIRED",
+      "mayClaimProductionCompleteNow": false
+    },
+    {
+      "code": "INV-09",
+      "foundationState": "PASS_PUBLIC_ASK_NO_PERSISTENT_CASE",
+      "foundationProof": [
+        "ASK_ENDPOINT_HAS_GUEST_PATH",
+        "ASK_PHIOS_PERSISTENT_CASE_FALSE"
+      ],
+      "fullProductionEvidenceState": "CKA_W7_ENTITLEMENT_BOUNDARY_REQUIRED",
+      "mayClaimProductionCompleteNow": false
+    },
+    {
+      "code": "INV-10",
+      "foundationState": "RULE_FROZEN_SOURCE_MIGRATION_NOT_YET_EXECUTED",
+      "foundationProof": [
+        "NO_DELETION_ALLOWED_WITHOUT_VERIFIED_SUCCESSOR"
+      ],
+      "fullProductionEvidenceState": "REQUIRES_HPC2_W0_V8_PRESERVATION_RECORDS",
+      "mayClaimProductionCompleteNow": false
+    }
+  ],
+  "phaseConsumption": {
+    "BFR-H": [
+      "INV-01",
+      "INV-02",
+      "INV-03",
+      "INV-04",
+      "INV-09"
+    ],
+    "HPC2": [
+      "INV-03",
+      "INV-04",
+      "INV-10"
+    ],
+    "CKA": [
+      "INV-05",
+      "INV-06",
+      "INV-07",
+      "INV-08",
+      "INV-09"
+    ]
+  },
+  "acceptanceRule": "FOUNDATION_CHECKER_PASS_FREEZES_RULES_ONLY; IT DOES NOT ASSERT BFR-H/HPC2/CKA PRODUCTION COMPLETION."
+}

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-APS-2-SINGLE-READINESS-CONTRACT-v1.0.0",
+  "work": "APS-2",
+  "status": "ACTIVE",
+  "title": "Single Article Readiness Contract",
+  "baselineCommit": "b7df645a7c4a5ab2fa5e80f5cae57a26e2803e39",
+  "purpose": "Collapse the existing upstream Article production prerequisites into one fail-closed machine-readable readiness result without changing or bypassing any upstream authority.",
+  "interface": {
+    "readyState": "ARTICLE_READY",
+    "notReadyState": "ARTICLE_NOT_READY",
+    "blockersRequiredWhenNotReady": true,
+    "consumerMustNotReinterpretUnderlyingAuthorities": true
+  },
+  "requiredGates": [
+    "canonicalNodePresent",
+    "articleIntentApproved",
+    "c2Frozen",
+    "manuscriptMappingHumanVerified",
+    "c3ProductionReady",
+    "productionPlanFrozen",
+    "productionWaveFrozen",
+    "executionAuthorityValid",
+    "localeReady",
+    "notAlreadyPublished"
+  ],
+  "authoritySources": {
+    "canonicalNode": "Canonical Knowledge Authority",
+    "articleIntentAndHumanProductionDecision": "existing Human Production Authority / VAP-W6A successor-readable evidence",
+    "c2": "Human Editorial C2 Frozen Authority",
+    "c3": "PJA C3 Production Readiness",
+    "productionPlanAndWave": "existing frozen KPP/VAP production planning authority",
+    "executionAuthority": "existing active execution authority",
+    "locale": "KNR-L10N",
+    "publicationGuard": "Publication Runtime plus existing portfolio publication evidence"
+  },
+  "governance": {
+    "derivedProjectionOnly": true,
+    "mayCreateOrChangeHumanDecision": false,
+    "mayFreezeC2OrC3": false,
+    "mayCreateProductionPlanOrWave": false,
+    "mayCreateExecutionAuthority": false,
+    "mayCreateCandidate": false,
+    "mayInvokeProvider": false,
+    "mayPublish": false,
+    "articleReadyEqualsPublicationAuthority": false
+  },
+  "consumerContract": {
+    "APS-3": "Batch selection consumes ARTICLE_READY and blockers only. APS-3 must not duplicate C2/C3/KPP/VAP gate interpretation.",
+    "futureCandidateOrchestration": "May consume selected nodes only after APS-3 selection; candidate material remains non-authoritative.",
+    "futurePublication": "Must still require explicit Human Publication Decision."
+  },
+  "nextWork": "APS-3_BATCH_ORCHESTRATOR"
+}

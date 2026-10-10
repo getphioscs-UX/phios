@@ -1,0 +1,46 @@
+{
+  "baseFixture": "valid-publication-ready-article.json",
+  "operations": [
+    {
+      "op": "replace",
+      "path": "/article/publicationStatus",
+      "value": "published"
+    },
+    {
+      "op": "replace",
+      "path": "/article/publishedAt",
+      "value": "2000-01-01"
+    },
+    {
+      "op": "replace",
+      "path": "/article/publicationOrder",
+      "value": 1
+    },
+    {
+      "op": "replace",
+      "path": "/review/lifecycleStatus",
+      "value": "published"
+    },
+    {
+      "op": "add",
+      "path": "/review/reviews/factualReview/findings/-",
+      "value": {
+        "findingCode": "FND-KN-PREFACE-001-001",
+        "severity": "critical",
+        "category": "unsupported_claim",
+        "location": {
+          "sectionCode": "S01",
+          "blockCode": "S01-B01",
+          "claimCode": "CLM-KN-PREFACE-001-001"
+        },
+        "description": "测试未解决 critical Finding。",
+        "requiredAction": "必须由人工处理并验证。",
+        "status": "open",
+        "resolvedBy": null,
+        "resolvedAt": null,
+        "resolutionNotes": ""
+      }
+    }
+  ],
+  "expectedFailure": "open_critical_finding"
+}

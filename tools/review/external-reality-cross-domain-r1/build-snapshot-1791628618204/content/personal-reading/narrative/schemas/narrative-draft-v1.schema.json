@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-NARRATIVE-DRAFT-v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "narrativeType",
+    "sourceBriefId",
+    "sourceBriefDigest",
+    "locale",
+    "promptVersion",
+    "opening",
+    "chapters",
+    "phiOsLensBlocks",
+    "closing",
+    "openQuestions",
+    "claims",
+    "writer",
+    "draftDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-NARRATIVE-DRAFT-v1.0.0"
+    },
+    "narrativeType": {
+      "enum": [
+        "PERSONAL",
+        "RELATIONSHIP"
+      ]
+    },
+    "sourceBriefId": {
+      "type": "string"
+    },
+    "sourceBriefDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "promptVersion": {
+      "type": "string"
+    },
+    "opening": {
+      "type": "object"
+    },
+    "chapters": {
+      "type": "array",
+      "minItems": 1
+    },
+    "phiOsLensBlocks": {
+      "type": "array"
+    },
+    "closing": {
+      "type": "object"
+    },
+    "openQuestions": {
+      "type": "array"
+    },
+    "claims": {
+      "type": "array"
+    },
+    "writer": {
+      "type": "object"
+    },
+    "draftDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

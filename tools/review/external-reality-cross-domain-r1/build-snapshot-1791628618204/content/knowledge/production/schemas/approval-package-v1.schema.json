@@ -1,0 +1,200 @@
+{
+  "$id": "https://getphios.com/schemas/knowledge/approval-package-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approvalCode": {
+      "pattern": "^APPROVAL-REVIEW-CANDIDATE-KN-[A-Z0-9-]+-ZH-HANS-V1-V1-V1$",
+      "type": "string"
+    },
+    "approvalDigest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "approvalSchemaVersion": {
+      "const": "PHI-OS-APPROVAL-PACKAGE-v1.0.0"
+    },
+    "approvalType": {
+      "const": "canonical_article_human_approval"
+    },
+    "approvedAt": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "approver": {
+      "additionalProperties": false,
+      "properties": {
+        "approverCode": {
+          "const": "TL"
+        },
+        "authority": {
+          "const": "TL Human Approval Authority"
+        }
+      },
+      "required": [
+        "approverCode",
+        "authority"
+      ],
+      "type": "object"
+    },
+    "authority": {
+      "additionalProperties": false,
+      "properties": {
+        "approval": {
+          "const": "human_approval_recorded"
+        },
+        "canonicalMeaning": {
+          "const": "TL"
+        },
+        "publication": {
+          "const": "not_published"
+        },
+        "review": {
+          "const": "human_review_accepted"
+        }
+      },
+      "required": [
+        "canonicalMeaning",
+        "review",
+        "approval",
+        "publication"
+      ],
+      "type": "object"
+    },
+    "candidate": {
+      "additionalProperties": false,
+      "properties": {
+        "candidateCode": {
+          "type": "string"
+        },
+        "candidateDigest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "locale": {
+          "const": "zh-Hans"
+        },
+        "nodeCode": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "candidateCode",
+        "candidateDigest",
+        "nodeCode",
+        "locale"
+      ],
+      "type": "object"
+    },
+    "conditions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "conditionCode": {
+            "pattern": "^CONDITION-[0-9]{3}$",
+            "type": "string"
+          },
+          "description": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "satisfied",
+              "pending",
+              "not_applicable"
+            ]
+          }
+        },
+        "required": [
+          "conditionCode",
+          "status",
+          "description"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "decision": {
+      "enum": [
+        "approve",
+        "decline",
+        "defer"
+      ]
+    },
+    "governance": {
+      "additionalProperties": false,
+      "properties": {
+        "candidateMutationAllowed": {
+          "const": false
+        },
+        "knowledgeRegistryMutationAllowed": {
+          "const": false
+        },
+        "localeStatePromotionAllowed": {
+          "const": false
+        },
+        "publicationRecorded": {
+          "const": false
+        },
+        "reviewMutationAllowed": {
+          "const": false
+        }
+      },
+      "required": [
+        "candidateMutationAllowed",
+        "reviewMutationAllowed",
+        "knowledgeRegistryMutationAllowed",
+        "publicationRecorded",
+        "localeStatePromotionAllowed"
+      ],
+      "type": "object"
+    },
+    "review": {
+      "additionalProperties": false,
+      "properties": {
+        "decision": {
+          "const": "accept"
+        },
+        "reviewCode": {
+          "type": "string"
+        },
+        "reviewDigest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "reviewerCode": {
+          "const": "TL"
+        }
+      },
+      "required": [
+        "reviewCode",
+        "reviewDigest",
+        "decision",
+        "reviewerCode"
+      ],
+      "type": "object"
+    },
+    "summary": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "approvalType",
+    "approvalSchemaVersion",
+    "approvalCode",
+    "candidate",
+    "review",
+    "approver",
+    "decision",
+    "summary",
+    "conditions",
+    "authority",
+    "governance",
+    "approvedAt",
+    "approvalDigest"
+  ],
+  "title": "PHI OS Approval Package v1",
+  "type": "object"
+}

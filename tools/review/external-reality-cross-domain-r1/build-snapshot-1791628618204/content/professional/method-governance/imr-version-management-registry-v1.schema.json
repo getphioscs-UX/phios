@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/imr-version-management-v1.schema.json",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "stageCode",
+    "registryCode",
+    "registryVersion",
+    "status",
+    "baseline",
+    "authority",
+    "runtimeAuthority",
+    "governedRegistries",
+    "versionPolicy",
+    "compatibilityContract",
+    "methods"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-IMR-VERSION-MANAGEMENT-REGISTRY-v1.0.0"
+    },
+    "stageCode": {
+      "const": "IMR-W5"
+    },
+    "registryCode": {
+      "const": "IMR_VERSION_MANAGEMENT_REGISTRY"
+    },
+    "registryVersion": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "const": "active_governance_registry"
+    },
+    "baseline": {
+      "type": "object"
+    },
+    "authority": {
+      "const": "INTERPRETIVE_METHOD_GOVERNANCE"
+    },
+    "runtimeAuthority": {
+      "const": false
+    },
+    "governedRegistries": {
+      "type": "array"
+    },
+    "versionPolicy": {
+      "type": "object"
+    },
+    "compatibilityContract": {
+      "type": "object"
+    },
+    "methods": {
+      "type": "array"
+    }
+  }
+}

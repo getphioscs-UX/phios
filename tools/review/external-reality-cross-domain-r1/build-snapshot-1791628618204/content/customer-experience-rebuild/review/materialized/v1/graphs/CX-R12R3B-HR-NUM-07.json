@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R3B-HUMAN-REVIEW-GRAPH-CASE-v1.0.0",
+  "caseId": "CX-R12R3B-HR-NUM-07",
+  "methodId": "NUM",
+  "localized": [
+    {
+      "schemaVersion": "PHI-OS-CX-R12R3B-HUMAN-REVIEW-GRAPH-SNAPSHOT-v1.0.0",
+      "caseId": "CX-R12R3B-HR-NUM-07",
+      "methodId": "NUM",
+      "locale": "en",
+      "projectionDigest": "7a9fddcf358e22b1e83bd5658b92843967409fd8e301ab76ea836c3b6749afcd",
+      "graphDigest": "0573e1fcba387ba8d02793a82cbee90e1b42f7243a9355fbbd121b8b63801152",
+      "graphType": "NUMBER_DERIVATION",
+      "houseSystemId": null,
+      "nodes": [
+        {
+          "nodeId": "NUM-LIFE_PATH-1",
+          "canonicalRef": "CMP-000000000000000000000003#VALUE:LIFE_PATH:STEP:1",
+          "label": "LIFE_PATH:1",
+          "localizedLabel": "Step 1",
+          "role": "DERIVATION_STEP",
+          "value": 35,
+          "state": "CALCULATED",
+          "priority": "SUPPORTING",
+          "interpretationUnitRefs": [
+            "CXI-NUM-7A9FDDCF358E-01"
+          ]
+        },
+        {
+          "nodeId": "NUM-LIFE_PATH-2",
+          "canonicalRef": "CMP-000000000000000000000003#VALUE:LIFE_PATH:STEP:2",
+          "label": "LIFE_PATH:2",
+          "localizedLabel": "Life Path",
+          "role": "CALCULATION_ROLE",
+          "value": 8,
+          "state": "CALCULATED",
+          "priority": "PRIMARY",
+          "interpretationUnitRefs": [
+            "CXI-NUM-7A9FDDCF358E-01"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "NUM-LIFE_PATH-REDUCE-1",
+          "sourceNodeId": "NUM-LIFE_PATH-1",
+          "targetNodeId": "NUM-LIFE_PATH-2",
+          "relationType": "TRANSITION",
+          "canonicalRelationRef": "CMP-000000000000000000000003#VALUE:LIFE_PATH:REDUCTION:1",
+          "interpretationUnitRefs": []
+        }
+      ],
+      "groups": [],
+      "overlays": [],
+      "legend": [
+        {
+          "code": "DERIVATION_STEP",
+          "label": "Derivation Step"
+        },
+        {
+          "code": "CALCULATION_ROLE",
+          "label": "Calculation Role"
+        }
+      ],
+      "textEquivalent": {
+        "summary": "Every node and relationship is also available in the table fallback.",
+        "nodeCount": 2,
+        "edgeCount": 1
+      },
+      "reviewFocus": {
+        "focusInterpretationUnitRefs": [
+          "CXI-NUM-7A9FDDCF358E-01"
+        ],
+        "focusNodeRefs": [
+          "CMP-000000000000000000000003#VALUE:LIFE_PATH:STEP:1"
+        ],
+        "focusRelationRefs": [
+          "CMP-000000000000000000000003#VALUE:LIFE_PATH:REDUCTION:1"
+        ],
+        "scenario": "three-way support",
+        "caseType": "RELATION_DENSE",
+        "variantMode": "REVIEW_LENS_OVER_GOVERNED_FIXED_PROJECTION",
+        "calculationVariantInvented": false
+      },
+      "customerInterpretationBindingsAccepted": false
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W20-CHANGE-EVENT-CONTRACT-v1.0.0",
+  "work": "FDR-W20",
+  "baselineCommit": "1fcbb42",
+  "status": "ACTIVE_APPEND_ONLY_CHANGE_LOG",
+  "authorityOwner": "FDR",
+  "requiredFields": [
+    "eventId",
+    "financialRealityId",
+    "eventType",
+    "occurredAt",
+    "recordedAt",
+    "subjectReference",
+    "factReferences",
+    "fromSnapshotId",
+    "toSnapshotId",
+    "source",
+    "validationState",
+    "consentReference",
+    "digest"
+  ],
+  "validationStates": [
+    "PENDING_VALIDATION",
+    "VALIDATED",
+    "REJECTED"
+  ],
+  "eventTypeRegistry": "../registries/financial-change-event-type-registry-v1.json",
+  "rules": {
+    "appendOnly": true,
+    "validatedEventRequiredForCommittedSnapshot": true,
+    "eventMayMutateHistoricalSnapshot": false,
+    "eventMayInventMissingFact": false,
+    "beforeAfterSnapshotReferencesRequired": true,
+    "eventDigestIndependentFromSnapshotDigest": true,
+    "calculationAllowed": false,
+    "analysisAllowed": false,
+    "recommendationAllowed": false,
+    "professionalJudgmentAllowed": false
+  }
+}

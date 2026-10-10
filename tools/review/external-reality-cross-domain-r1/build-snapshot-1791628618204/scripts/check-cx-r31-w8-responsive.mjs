@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+const json=p=>JSON.parse(read(p));
+const c=json('content/customer-experience-rebuild/cx-r31/acceptance/cx-r31-w8-responsive-machine-acceptance-v1.json');
+const askCss=read('assets/customer-ui/surfaces/contextual-ask.css'),homeCss=read('assets/customer-ui/surfaces/home.css');
+assert.deepEqual(c.viewports,[360,768,1440]);
+assert.equal(c.browserHumanAcceptanceClaimed,false);
+for(const required of ['QUESTION_INPUT','CONTEXT_DISCLOSURE','CONTEXT_PICKER','ANSWER','CLAIM_SAFE_RENDERING','NEXT_STEPS','PAID_STATE','HANDOFF','REALITY_RETURN'])assert.ok(c.covered.includes(required),`responsive coverage missing ${required}`);
+assert.ok(askCss.includes('@media(max-width:860px)'));
+assert.ok(askCss.includes('@media(max-width:620px)'));
+assert.ok(homeCss.includes('@media (max-width: 52rem)'));
+assert.ok(homeCss.includes('@media (max-width: 30rem)'));
+assert.ok(homeCss.includes('.cx-home-ask__row { grid-template-columns: 1fr; }'));
+console.log('✓ CX-R31-W8 responsive machine contract passed for 360 / 768 / 1440 coverage.');

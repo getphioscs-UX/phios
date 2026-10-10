@@ -1,0 +1,104 @@
+{
+  "auditCode": "PHI-OS-ICR-W5-CASE-RUNTIME-AUTHORITY-AUDIT-v1",
+  "auditVersion": "1.0.0",
+  "work": "ICR-W5",
+  "status": "reconciled",
+  "baselineCommit": "1e99186e5bc5fafa705f61cc15ef57370bec07e9",
+  "scope": "ICR-W5-W9 Canonical Case Runtime",
+  "inspectedAuthorities": [
+    {
+      "reference": "content/runtime/input-case-runtime/freeze/icr-w0-w4-input-foundation-freeze-v1.json",
+      "sha256": "56dcf667fa767a4f79d0f9b4a62ebbb18d38402a6e819d61bfefbfe94e497ef7",
+      "classification": "FROZEN_ICR_INPUT_FOUNDATION",
+      "finding": "ICR-W0-W4 is the preserved input foundation and must remain byte-identical."
+    },
+    {
+      "reference": "content/governance/canonical-master-work/registries/canonical-master-work-registry-v1.json",
+      "sha256": "b4105df7e8d55f0f9bf1a895f0293b3be119edfde94784d5cd48a95dcc47b172",
+      "classification": "MASTER_WORK_AUTHORITY",
+      "finding": "ICR-W5 through ICR-W9 precede the planned RMO-W0 through RMO-W15 work family."
+    },
+    {
+      "reference": "content/governance/canonical-master-work/registries/canonical-runtime-plane-registry-v1.json",
+      "sha256": "f6837142a46c1f9f0e965c3f1a38038fd7a6e13ea6d47e2d48e470576a83eae8",
+      "classification": "RUNTIME_PLANE_AUTHORITY",
+      "finding": "ICR and RMO are separate governed runtimes; RDG remains governance."
+    },
+    {
+      "reference": "content/governance/canonical-master-work/registries/canonical-runtime-dependency-registry-v1.json",
+      "sha256": "f69a1954d0f9191cfabeb69a1e175df87670b3fd65ffe83f5ff51ee2250da2e6",
+      "classification": "RUNTIME_DEPENDENCY_AUTHORITY",
+      "finding": "No canonical ICR or RMO dependency entry exists at baseline; W5-W9 defines a local handoff contract without mutating the shared registry."
+    },
+    {
+      "reference": "content/professional/cross-runtime-authority/runtime-authority-registry-v1.json",
+      "sha256": "446f4c93fa156af704daf9fa6946d284c8b020685bc8c6eefb85dc8631c42f76",
+      "classification": "FROZEN_CROSS_RUNTIME_AUTHORITY",
+      "finding": "Shared Data Authority remains the input fact authority; a Canonical Case may reference but not duplicate governed facts."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+      "sha256": "04d307980a6e0f232b2c068f8ba6015027c4b13cc88951121f79850b8f8db996",
+      "classification": "RDG_CROSS_RUNTIME_DATA_CONTRACT",
+      "finding": "ICR produces REALITY_INPUT_RECORD; RMO consumes REALITY_INPUT_RECORD and alone produces RUNTIME_STATE_RECORD."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/reality-data-registry-v1.json",
+      "sha256": "aa022977faeb68379588bc850221e97573c461d3a43a5152dee1446b2fa7ce4d",
+      "classification": "RDG_AUTHORITY_ENTRYPOINT",
+      "finding": "The RDG registry stores contracts rather than runtime payloads or user data."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-consent-class-registry-v1.json",
+      "sha256": "316373319d8d67cadfd67713a773ab7ba2b9fd380ac83cb9273af03ab2ea5adb",
+      "classification": "RDG_CONSENT_AUTHORITY",
+      "finding": "ICR may retain a consent reference but cannot define or grant consent."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-persistence-class-registry-v1.json",
+      "sha256": "f3165db998abeb8eaa8e52279f9cb39e37ebc4d68bbd38397070efe1f49abe1e",
+      "classification": "RDG_PERSISTENCE_AUTHORITY",
+      "finding": "ICR may bind an RDG persistence class but cannot create persistence eligibility."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/persistence-eligibility-gate-v1.json",
+      "sha256": "c7e25707a91011a810304a573c054b6fcfc7a78c5700374cb9ddea36d39fdd2f",
+      "classification": "RDG_PERSISTENCE_GATE",
+      "finding": "Persistence decisions remain externally governed and fail closed."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-retention-registry-v1.json",
+      "sha256": "498838a91799bc89167b65765d6bec710327e0e29be32ba92a43a5e541990708",
+      "classification": "RDG_RETENTION_AUTHORITY",
+      "finding": "Case snapshots reference a retention class without defining a duration or expiry policy."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/deletion-tombstone-runtime-v1.json",
+      "sha256": "9e39a5c88caff145b35057fdd243e90153e9568b7226e1330f5487c8c9bed7db",
+      "classification": "RDG_DELETION_AUTHORITY",
+      "finding": "ICR observes deletion state and blocks handoff when inactive; it does not delete, tombstone or restore data."
+    },
+    {
+      "reference": "functions/runtime/lineage/lineage-revision-service.js",
+      "sha256": "6c88fac7ff7a540ddeacc1473543c63f3dede1778356fed5080b96d1d33bbd72",
+      "classification": "EXISTING_RUNTIME_LINEAGE_SERVICE",
+      "finding": "Existing Runtime persistence lineage is preserved; ICR-W8 establishes immutable Case snapshot lineage without reusing or modifying that store."
+    }
+  ],
+  "authorityDecision": {
+    "canonicalCaseOwner": "ICR",
+    "verifiedFactOwner": "SHARED_DATA_AUTHORITY",
+    "persistenceConsentRetentionDeletionOwner": "RDG",
+    "realityV1Owner": "RMO",
+    "caseDataType": "REALITY_INPUT_RECORD",
+    "rmoOutputDataType": "RUNTIME_STATE_RECORD",
+    "caseContainsReferencesOnly": true,
+    "caseIsReality": false,
+    "caseIsRuntimeState": false,
+    "icrMayCreateRealityV1": false,
+    "icrMayCreatePersistenceEntitlement": false,
+    "existingRuntimeLineageStoreMutated": false,
+    "sharedGovernanceRegistriesMutated": false
+  },
+  "existingRuntimeOrUserDataMutated": false
+}

@@ -1,0 +1,127 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "candidateId",
+    "customerRef",
+    "locale",
+    "sourceDigests",
+    "sectionManuscripts"
+  ],
+  "properties": {
+    "candidateId": {
+      "const": "AST-R5-TL-EN-MANUSCRIPT-CANDIDATE-v1"
+    },
+    "customerRef": {
+      "const": "TL-REFERENCE-01"
+    },
+    "locale": {
+      "const": "en"
+    },
+    "sourceDigests": {
+      "type": "object",
+      "required": [
+        "zhContentDigest",
+        "authoringPackDigest",
+        "canonicalProjectionDigest",
+        "r4ProjectionDigest"
+      ],
+      "properties": {
+        "zhContentDigest": {
+          "const": "ce713a64c4a5203c1ad05270b732e63bbb3253df28a064332425297ce214c9ef"
+        },
+        "authoringPackDigest": {
+          "const": "4cd0aeab0feeb2b711d2aaa508d58db29eac036d18807a6f2f96cb7c9e9e4f19"
+        },
+        "canonicalProjectionDigest": {
+          "const": "02f96934070156352695f361c9f7e3c9c8f5ca39962b4c536c5eb5b3ebb9721c"
+        },
+        "r4ProjectionDigest": {
+          "const": "e5b89516602f0ba6371e88d0c145393cc036dc7bc7be3a085fd7c293545ac78c"
+        }
+      }
+    },
+    "sectionManuscripts": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sectionId",
+          "title",
+          "sourceBlocks",
+          "paragraphs",
+          "sourceThemeRefs",
+          "sourceRouteRefs",
+          "sourceAspectRefs",
+          "boundaryRefs"
+        ],
+        "properties": {
+          "sectionId": {
+            "enum": [
+              "SEC-01",
+              "SEC-02",
+              "SEC-03",
+              "SEC-04",
+              "SEC-05",
+              "SEC-06",
+              "SEC-07",
+              "SEC-08",
+              "SEC-09",
+              "SEC-10"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceBlocks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "paragraphs": {
+            "type": "array",
+            "minItems": 3,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "sourceThemeRefs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sourceRouteRefs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sourceAspectRefs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "boundaryRefs": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "NO_TIMING_AUTHORITY",
+                "REALITY_ABSENT",
+                "NO_GUARANTEES",
+                "NO_DIAGNOSIS"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

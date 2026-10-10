@@ -1,0 +1,10 @@
+import http from 'node:http';
+import fs from 'node:fs';
+import path from 'node:path';
+import {build} from 'esbuild';
+import {pathToFileURL} from 'node:url';
+const root=process.cwd(),out=path.resolve('.tmp/reality-navigation-preview-api.mjs');
+await build({stdin:{contents:"export {onRequestGet,onRequestPost} from './functions/api/customer-my-reality.js';",resolveDir:root},bundle:true,platform:'node',format:'esm',outfile:out});
+const api=await import(pathToFileURL(out)),origin='http://127.0.0.1:55270';
+const types={'.html':'text/html; charset=utf-8','.js':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.webp':'image/webp','.png':'image/png'};
+http.createServer(async(req,res)=>{try{const url=new URL(req.url,origin);if(url.pathname==='/api/customer-my-reality'&&['GET','POST'].includes(req.method)){const chunks=[];for await(const c of req)chunks.push(c);const response=await api[req.method==='GET'?'onRequestGet':'onRequestPost']({request:new Request(url,{method:req.method,headers:req.headers,...(req.method==='POST'?{body:Buffer.concat(chunks)}:{})}),env:{},data:{}});res.writeHead(response.status,Object.fromEntries(response.headers));res.end(await response.text());return;}if(req.method!=='GET'){res.writeHead(405);res.end('Local preview: no other writes or payment handlers enabled');return;}let p=path.resolve(root,'.'+decodeURIComponent(url.pathname));if(!p.startsWith(root+path.sep)||!fs.existsSync(p)){res.writeHead(404);res.end();return;}if(fs.statSync(p).isDirectory())p=path.join(p,'index.html');res.writeHead(200,{'Content-Type':types[path.extname(p)]||'application/octet-stream'});res.end(fs.readFileSync(p));}catch(e){res.writeHead(500);res.end(e.message);}}).listen(55270,'127.0.0.1',()=>console.log(origin+'/reality/ — ephemeral projection only; no database/provider/payment bindings'));

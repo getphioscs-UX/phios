@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-CROSS-R2-W26-FINAL-PRODUCTION-ADMISSION-CONTRACT-v1.0.0",
+  "work": "R2-W26",
+  "baselineCommit": "a30a38d45a273fa0de603dcb9da827bf4c4ca307",
+  "status": "FROZEN_FAIL_CLOSED",
+  "prerequisites": {
+    "crossInputFreeze": "W21_ACCEPTED",
+    "semanticFoundation": "W22_ACCEPTED",
+    "crossComposition": "W23_ACCEPTED",
+    "machineCampaign": "W24_64_OF_64",
+    "humanReview": "W25_36_ACCEPTED_0_REJECTED_0_PENDING"
+  },
+  "productionTarget": {
+    "api": "/api/customer-personal-reality",
+    "singleMethodSelection": "view.singleMethodReading remains canonical SMR v2",
+    "multiMethodSelection": "view.reading.combinedReading becomes governed Cross v2 only after W26 admission",
+    "minimumMethods": 2,
+    "maximumMethods": 5,
+    "crossSchema": "PHI-OS-CROSS-METHOD-RUNTIME-READING-IR-v2.0.0"
+  },
+  "publicationRules": {
+    "sourceMustBeCustomerPublishableMethodClaims": true,
+    "minimumDistinctMethodsPerCrossClaim": 2,
+    "xpfContextOnly": true,
+    "hdrInternalOnly": true,
+    "currentRealityIntegrationActivated": false,
+    "smrProseBackfeedAllowed": false,
+    "rawSymbolCrossAuthorityAllowed": false,
+    "rawProjectionCrossConclusionAllowed": false,
+    "methodVotingAllowed": false,
+    "percentageCompatibilityAllowed": false,
+    "systemsProveLanguageAllowed": false,
+    "automaticConflictWinnerAllowed": false,
+    "rendererMayCreateMeaning": false
+  },
+  "failClosed": {
+    "humanPendingBlocksProduction": true,
+    "humanRejectBlocksProduction": true,
+    "machineFailureBlocksProduction": true,
+    "missingLineageBlocksClaim": true,
+    "unmappedClaimDoesNotGetGuessed": true
+  }
+}

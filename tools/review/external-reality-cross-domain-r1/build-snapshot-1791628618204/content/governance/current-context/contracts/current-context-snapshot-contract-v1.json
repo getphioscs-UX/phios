@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-CCR-CURRENT-CONTEXT-SNAPSHOT-CONTRACT-v1.0.0",
+  "work": "CCR-W0",
+  "baselineCommit": "7375eeaf8185e6dfa533c1d47540360cdbbcb7b2",
+  "status": "FROZEN_V1",
+  "runtimeCode": "PHI_OS_CURRENT_CONTEXT_RUNTIME",
+  "outputSchema": "PHI-OS-CURRENT-CONTEXT-SNAPSHOT-v1.0.0",
+  "inputAuthority": {
+    "routePlan": "PHI-OS-LENS-ROUTE-PLAN-v1.0.0",
+    "routePlanOwner": "LRR-W0-W3",
+    "lensInputsMustMatchRoutedCandidates": true,
+    "acceptedSourceKind": "READING_IR_ONLY",
+    "realityEvidenceIsExternallySupplied": true
+  },
+  "contextTargetRules": {
+    "explicitTargetRequiredForTargetSensitiveSources": true,
+    "serverNowInferenceAllowed": false,
+    "browserNowInferenceAllowed": false,
+    "browserTimezoneInferenceAllowed": false,
+    "sourceTargetMustMatchSnapshotTarget": true,
+    "targetMismatchFailsClosed": true
+  },
+  "outputSections": [
+    "routeContext",
+    "contextTarget",
+    "lensContexts",
+    "observedAlignment",
+    "realityEvidenceComparison",
+    "unknownAndLimitations",
+    "provenance"
+  ],
+  "rules": {
+    "snapshotDoesNotExecuteMethodRuntime": true,
+    "snapshotDoesNotCreateCanonicalMeaning": true,
+    "snapshotDoesNotCreateReadingMeaning": true,
+    "snapshotDoesNotChooseWinnerMethod": true,
+    "snapshotIdIsDeterministic": true,
+    "realityEvidenceRemainsFinalAuthority": true
+  }
+}

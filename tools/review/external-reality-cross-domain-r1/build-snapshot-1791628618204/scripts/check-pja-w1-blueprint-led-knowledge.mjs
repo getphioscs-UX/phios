@@ -1,0 +1,463 @@
+import {execFileSync} from 'node:child_process';
+import {assertCurrentMigrationBoundary,methodCacheSuccessor} from './lib/production-closure-migration-boundary.mjs';
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
+import {usesGovernedArticleEntry} from './lib/article-shell-entry-contract.mjs';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { loadPjaBlueprintContext } from './lib/knowledge-production/blueprint-context.mjs';
+
+const root = process.cwd();
+const read = file => fs.readFile(path.join(root, file), 'utf8');
+const readJson = async file => JSON.parse(await read(file));
+const exists = file => fs.access(path.join(root, file)).then(() => true, () => false);
+
+const evidencePath = 'docs/pja/pja-w1-blueprint-led-public-knowledge-ecosystem-v1.json';
+const [
+  evidence,
+  w0,
+  blueprint,
+  nodesRegistry,
+  localizedRegistry,
+  assetsRegistry,
+  themesRegistry,
+  packageJson,
+  publicShell,
+  publishedLoader
+] = await Promise.all([
+  readJson(evidencePath),
+  readJson('docs/pja/pja-w0-cross-system-boundary-freeze-v1.json'),
+  loadPjaBlueprintContext(root),
+  readJson('content/knowledge/registry/nodes.json'),
+  readJson('content/knowledge/registry/localized-content.json'),
+  readJson('content/knowledge/registry/assets.json'),
+  readJson('content/knowledge/registry/themes.json'),
+  effectivePackageScripts(readJson('package.json')),
+  read('assets/js/public-shell.js'),
+  read('assets/js/knowledge/published-content.js')
+]);
+
+assert.equal(evidence.freezeId, 'PJA-W1-v1.1.0-Blueprint-led');
+assert.equal(evidence.programme, 'PJA Public Architecture');
+assert.equal(evidence.step, 'PJA-W1');
+assert.equal(evidence.version, '1.1.0');
+assert.equal(evidence.status, 'frozen');
+assert.deepEqual(evidence.baseline, {
+  repository: 'getphioscs-UX/phios',
+  branch: 'main',
+  commit: 'fd022414b5add0acdef5a0e45f8f890a3addf087',
+  prerequisite: 'PJA-W0-v1.0.0-Frozen'
+});
+assert.equal(w0.freezeId, evidence.baseline.prerequisite);
+
+assert.deepEqual(evidence.knowledgeRoles, [
+  'Brand',
+  'Education',
+  'Trust',
+  'SEO',
+  'Book Sales',
+  'Free Understanding',
+  'Professional Boundary Support'
+]);
+assert.equal(evidence.prohibitedRoles.length, 5);
+assert.equal(evidence.sourceAuthority.publicProjectionWriteAuthority, 'none');
+for (const source of evidence.canonicalSources) {
+  assert.equal(await exists(source), true, `Missing canonical source: ${source}`);
+}
+
+const wave1 = blueprint.releaseRecommendation.wave1;
+const active = evidence.release.activeArticles;
+const activeCodes = active.map(article => article.nodeCode);
+const deferredCodes = evidence.release.deferredWave1Candidates
+  .map(article => article.nodeCode);
+assert.equal(blueprint.activeProductionLimit, 8);
+assert.equal(evidence.release.activeArticleMaximum, 8);
+assert(active.length > 0 && active.length <= 8);
+assert.deepEqual(activeCodes, [
+  'KN-PREFACE-004',
+  'KN-PREFACE-010',
+  'KN-PREFACE-013'
+]);
+assert.deepEqual([...activeCodes, ...deferredCodes], wave1);
+assert(
+  evidence.release.deferredWave1Candidates.every(candidate => (
+    candidate.reason ===
+      'planned_blueprint_node_not_registered_in_canonical_node_registry'
+  ))
+);
+
+const activeNodesRegistry = blueprint.authorities.nodes;
+const nodeByCode = new Map(
+  activeNodesRegistry.nodes.map(node => [node.nodeCode, node])
+);
+const localizedByCode = new Map(
+  localizedRegistry.localizedContent.map(record => [record.nodeCode, record])
+);
+const assetByCode = new Map(
+  assetsRegistry.assets.map(asset => [asset.assetCode, asset])
+);
+assert.equal(nodesRegistry.nodes.length, 718, 'Historical KAU-R5 nodes.json remains immutable.');
+assert.equal(activeNodesRegistry.nodes.length, blueprint.plannedCanonicalNodes);
+assert.equal(
+  activeNodesRegistry.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
+  blueprint.prefaceCanonicalNodes
+);
+const pjaW1NodeCodes = new Set([...activeCodes, ...deferredCodes]);
+const referencedThemeCodes = new Set(
+  activeNodesRegistry.nodes
+    .filter(node => pjaW1NodeCodes.has(node.nodeCode))
+    .map(node => node.themeCode)
+);
+assert(
+  [...referencedThemeCodes].every(themeCode =>
+    themesRegistry.themes.some(theme => theme.themeCode === themeCode)
+  ),
+  'PJA-W1 validates Theme coverage only for its active and deferred Wave 1 Nodes.'
+);
+
+const publishedLocaleRecords = [];
+for (const article of active) {
+  const node = nodeByCode.get(article.nodeCode);
+  assert(node, `Active article is not a Canonical Node: ${article.nodeCode}`);
+  assert.equal(node.registryStatus, 'frozen');
+  assert.equal(node.canonicalLanguage, 'zh-Hans');
+  assert.equal(node.productionTier, 'tier_c');
+  assert.equal(node.publicationPriority, 'launch');
+  assert.deepEqual(article.publishedLanguages, node.requiredPublicLanguages);
+  assert.equal(article.canonicalLanguage, node.canonicalLanguage);
+
+  const localizedRecord = localizedByCode.get(article.nodeCode);
+  assert(localizedRecord, `Missing localized state: ${article.nodeCode}`);
+
+  for (const locale of node.requiredPublicLanguages) {
+    const localized = localizedRecord.locales[locale];
+    assert(localized, `Missing ${locale} publication state: ${article.nodeCode}`);
+    assert.equal(localized.contentStatus, 'content_reviewed');
+    assert.equal(localized.reviewStatus, 'approved');
+    assert.equal(localized.publicationStatus, 'published');
+    assert.equal(localized.slug, article.slug);
+    assert.equal(
+      localized.contentRole,
+      locale === 'zh-Hans' ? 'canonical' : 'localized'
+    );
+    if (locale === 'en') {
+      assert.equal(localized.terminologyReviewStatus, 'approved');
+      assert.equal(localized.semanticParityStatus, 'approved');
+      assert.equal(localized.localizationSourceLocale, 'zh-Hans');
+    }
+    publishedLocaleRecords.push({ node, localized });
+
+    for (const [code, type] of [
+      [localized.articleAssetCode, 'article'],
+      [localized.masterMediaPostAssetCode, 'master_media_post']
+    ]) {
+      const asset = assetByCode.get(code);
+      assert(asset, `Missing published asset: ${code}`);
+      assert.equal(asset.nodeCode, node.nodeCode);
+      assert.equal(asset.locale, locale);
+      assert.equal(asset.assetType, type);
+      assert.equal(asset.contentStatus, 'content_reviewed');
+      assert.equal(asset.reviewStatus, 'approved');
+      assert.equal(asset.publicationStatus, 'published');
+      assert.equal(await exists(asset.contentPath), true);
+
+      const content = await readJson(asset.contentPath);
+      assert.equal(content.nodeCode, node.nodeCode);
+      assert.equal(content.locale, locale);
+      assert.equal(content.contentStatus, 'content_reviewed');
+      assert.equal(content.reviewStatus, 'approved');
+      assert.equal(content.publicationStatus, 'published');
+      assert.equal(content.slug, article.slug);
+      if (type === 'article') {
+        assert.equal(content.assetCode, code);
+        assert(asset.publicHref.startsWith('/articles/'));
+      } else {
+        assert.equal(content.masterMediaPost.assetCode, code);
+        assert.equal(asset.contentSection, 'masterMediaPost');
+      }
+      assert.deepEqual(content.connections.relatedServices, []);
+      assert(content.knowledgeBoundary.length > 0);
+    }
+  }
+}
+
+assert.equal(publishedLocaleRecords.length, 6);
+assert.equal(
+  localizedRegistry.localizedContent.reduce(
+    (count, record) => count + Object.values(record.locales)
+      .filter(locale => locale.publicationStatus === 'published').length,
+    0
+  ),
+  6
+);
+assert.equal(assetsRegistry.assets.length, 12);
+assert(
+  assetsRegistry.assets.every(asset => asset.publicationStatus === 'published')
+);
+for (const code of deferredCodes) {
+  const node = nodeByCode.get(code);
+  const localizedRecord = localizedByCode.get(code);
+  assert(node, `Deferred Wave 1 node is not registered: ${code}`);
+  assert(localizedRecord, `Deferred Wave 1 node has no localized identity: ${code}`);
+  assert.equal(
+    assetsRegistry.assets.some(asset => asset.nodeCode === code),
+    false
+  );
+  assert(
+    Object.values(localizedRecord.locales || {}).every(locale => (
+      locale.publicationStatus !== 'published'
+    )),
+    `Deferred Wave 1 node became publicly published: ${code}`
+  );
+}
+
+assert(publishedLoader.includes('/content/knowledge/registry/nodes.json'));
+assert(publishedLoader.includes('/content/knowledge/registry/localized-content.json'));
+assert(publishedLoader.includes('/content/knowledge/registry/assets.json'));
+assert(publishedLoader.includes("node.registryStatus !== 'frozen'"));
+assert(publishedLoader.includes("publicationStatus === 'published'"));
+assert(publishedLoader.includes("contentStatus === 'content_reviewed'"));
+assert(publishedLoader.includes("reviewStatus === 'approved'"));
+for (const forbidden of ['/api/', 'openai', 'RuntimeKernel', 'fetchProvider']) {
+  assert.equal(
+    publishedLoader.toLowerCase().includes(forbidden.toLowerCase()),
+    false,
+    `Public Knowledge loader contains forbidden dependency: ${forbidden}`
+  );
+}
+
+const expW1 = await readJson('docs/experience/EXP-W1-global-ia-shared-shell.json');
+const iaSuccessor = await readJson('docs/pja/pja-w1-current-reality-route-successor-v2.json');
+const px2Successor = await readJson(
+  'content/web-production/px2/successors/px2-w11-checker-successor-v1.json'
+);
+assert.equal(expW1.freezeId, 'EXP-W1-v1.0.0-Frozen');
+assert.equal(expW1.supersedes.field, 'publicInformationArchitecture');
+assert.equal(
+  expW1.primaryNavigation.find(item => item.id === 'reality')?.href,
+  '/reality-journey',
+  'Historical EXP-W1 Reality route must remain byte-semantically frozen.'
+);
+assert.equal(iaSuccessor.schemaVersion, 'PHI-OS-PJA-W1-CURRENT-REALITY-ROUTE-SUCCESSOR-v2');
+assert.equal(iaSuccessor.predecessor.freezeId, expW1.freezeId);
+assert.equal(iaSuccessor.predecessor.realityHref, '/reality-journey');
+assert.equal(iaSuccessor.current.realityHref, '/reality/');
+assert.equal(iaSuccessor.current.canonicalWorkspace, true);
+assert.equal(iaSuccessor.boundaries.knowledgeAuthorityChanged, false);
+assert.equal(iaSuccessor.boundaries.publicationAuthorityChanged, false);
+assert.equal(iaSuccessor.boundaries.runtimeAuthorityChanged, false);
+assert.equal(px2Successor.successorCode, 'PX2-W11-CHECKER-SUCCESSOR');
+assert.equal(px2Successor.status, 'ACTIVE');
+assert.equal(
+  px2Successor.checker,
+  'scripts/check-px2-w0-w13-public-experience-v2.mjs'
+);
+assert(px2Successor.preservesRuntimeAuthority.includes('published knowledge authority'));
+
+const pisNavigation=await readJson('content/web/index-surfaces/pis-r1-navigation-successor-v1.json');
+assert.deepEqual(pisNavigation.primaryNavigation.map(item=>item.href),['/explore/','/reality/','/perspectives/','/knowledge/','/professional/']);
+assert.equal(pisNavigation.runtimeChanged,false);
+const expectedMainNavigation = pisNavigation.primaryNavigation.map(item => [item.id,item.href]);
+for (const [id, href] of expectedMainNavigation) {
+  assert(
+    publicShell.includes(`{ id: '${id}', href: '${href}'`),
+    `Missing main navigation route: ${id}`
+  );
+}
+assert(publicShell.includes('href="/account"'));
+assert(publicShell.includes("{ id: 'reality', href: '/reality/'"));
+assert(publicShell.includes('public-nav__actions'));
+assert.equal(publicShell.includes("{ id: 'reality', href: '/reality-journey'"), false);
+assert.equal(publicShell.includes("id: 'explore'"), false);
+assert.equal(publicShell.includes("id: 'services'"), false);
+
+const requiredPages = [
+  ...evidence.publicInformationArchitecture.requiredPages,
+  ...evidence.publicInformationArchitecture.articlePages
+];
+const homepageComposition = await readJson('content/customer-experience-rebuild/authority/homepage-customer-composition-v1.json');
+assert.equal(homepageComposition.invariants.legacyShellDependency, false);
+const currentPageByHistoricalPage = new Map([
+  ['articles.html', 'articles/index.html'],
+  ['explore.html', 'explore/index.html']
+]);
+const cxMigratedPjaPages = new Set(['index.html', 'articles/index.html', 'explore/index.html']);
+const px2MigratedPjaPages = new Set(['library.html']);
+for (const historicalPage of requiredPages) {
+  const page = currentPageByHistoricalPage.get(historicalPage) || historicalPage;
+  assert.equal(await exists(page), true, `Missing current PJA-W1 page: ${page}`);
+  const html = await read(page);
+  if (cxMigratedPjaPages.has(page)) {
+    assert(
+      html.includes('/assets/customer-ui/js/shell.js'),
+      `PJA-W1 current page must consume the governed customer shell successor: ${page}`
+    );
+    assert.equal(html.includes('/assets/js/public-shell-v2.js'), false);
+    assert.equal(html.includes('/assets/js/public-shell.js'), false);
+    continue;
+  }
+  const expectedShell = px2MigratedPjaPages.has(page)
+    ? '/assets/js/public-shell-v2.js'
+    : '/assets/js/public-shell.js';
+  assert(
+    html.includes(expectedShell),
+    `PJA-W1 page does not consume its governed current shell: ${page}`
+  );
+  assert.equal(
+    html.includes('/assets/js/public-shell.js') &&
+      html.includes('/assets/js/public-shell-v2.js'),
+    false,
+    `PJA-W1 page loads both historical and PX2 shells: ${page}`
+  );
+}
+for (const page of evidence.publicInformationArchitecture.articlePages) {
+  const html = await read(page);
+  assert(html.includes('data-article-slug='));
+  assert(usesGovernedArticleEntry(html));
+  assert(html.includes('/assets/css/knowledge-release.css'));
+}
+const expW2 = await readJson('docs/experience/EXP-W2-home-discover-about-contract.json');
+assert.equal(expW2.freezeId, 'EXP-W2-v1.0.0-Frozen');
+assert.equal((await read('index.html')).includes('data-knowledge-article-grid'), false);
+for (const page of ['library.html', 'book-one.html', 'thesis.html']) {
+  const html = await read(page);
+  if (page === 'library.html') {
+    const px2Publications = await read('assets/js/components/publications-v2.js');
+    assert(html.includes('data-puxr-publications'));
+    assert(html.includes('/assets/js/components/publications-v2.js'));
+    assert(px2Publications.includes('/content/knowledge/public/retrieval/publications.json'));
+    assert(px2Publications.includes("record.status === 'published'"));
+  } else {
+    assert(html.includes('data-knowledge-article-grid'));
+    assert(html.includes('/assets/js/pages/knowledge-connections.js'));
+  }
+}
+const currentKnowledgeHome = await read('knowledge/index.html');
+const currentExplore = await read('explore/index.html');
+for (const [page, html] of [['knowledge/index.html', currentKnowledgeHome], ['explore/index.html', currentExplore]]) {
+  assert(html.includes('/assets/customer-ui/js/shell.js'), `${page} must consume the current CX shell`);
+}
+assert(currentKnowledgeHome.includes('/assets/customer-ui/js/surfaces/knowledge.js'));
+assert(currentKnowledgeHome.includes('href="/articles/"'));
+
+function publicTargetToFile(href) {
+  const clean = href.split('#')[0].split('?')[0];
+  if (!clean || clean === '/') return 'index.html';
+  const canonicalRouteFiles = new Map([
+    ['/about', 'about/index.html'],
+    ['/explore', 'explore/index.html'],
+    ['/articles', 'articles/index.html'],
+    ['/figures', 'figures/index.html'],
+    ['/glossary', 'knowledge/concepts/index.html'],
+    ['/books/reality-maintenance', 'books/reality-continuity/index.html'],
+    ['/readings/symbolic', 'perspectives/index.html'],
+    ['/professional/human-design', 'perspectives/personal/index.html']
+  ]);
+  const normalized = clean.length > 1 ? clean.replace(/\/$/, '') : clean;
+  if (canonicalRouteFiles.has(normalized)) return canonicalRouteFiles.get(normalized);
+  const relative = clean.replace(/^\//, '');
+  if (path.extname(relative)) return relative;
+  return `${relative}.html`;
+}
+
+const contentFiles = assetsRegistry.assets
+  .filter(asset => asset.assetType === 'article')
+  .map(asset => asset.contentPath);
+for (const contentFile of contentFiles) {
+  const content = await readJson(contentFile);
+  const linkedItems = [
+    ...content.sourceReferences,
+    ...content.connections.relatedBooks,
+    ...content.connections.relatedAtlasEntries,
+    ...content.connections.relatedFigures,
+    ...content.connections.relatedServices,
+    ...content.connections.journeyEntryTopics
+  ];
+  for (const item of linkedItems) {
+    assert(item.href.startsWith('/'), `External or malformed public link: ${item.href}`);
+    const target = publicTargetToFile(item.href);
+    assert.equal(
+      await exists(target),
+      true,
+      `Visible link does not resolve: ${item.href} from ${contentFile}`
+    );
+  }
+}
+
+const registryFiles = (await fs.readdir(path.join(root, 'content/knowledge/registry')))
+  .filter(file => file.endsWith('.json'));
+const registrySchemas = (await fs.readdir(path.join(root, 'content/knowledge/registry/schemas')))
+  .filter(file => file.endsWith('.json'));
+const frozenKnowledgeRegistryFiles = [
+  'assets.json', 'canonical-extraction-policy.json', 'collections.json',
+  'learning-paths.json', 'localized-content.json', 'nodes.json',
+  'search-aliases.json', 'services.json', 'sources.json',
+  'supporting-questions.json', 'terminology.json', 'themes.json'
+];
+assert.deepEqual(
+  registryFiles.filter(file => frozenKnowledgeRegistryFiles.includes(file)).sort(),
+  [...frozenKnowledgeRegistryFiles].sort()
+);
+assert.equal(registrySchemas.length, 12);
+assert.equal(evidence.preservation.knowledgeRegistryFileCount, 12);
+assert.equal(evidence.preservation.knowledgeRegistrySchemaCount, 12);
+assert.equal(evidence.preservation.newKnowledgeRegistryLayerAdded, false);
+assert.equal(evidence.preservation.newRuntimeSourceOfTruthAdded, false);
+assert.equal(evidence.preservation.publicCaseProviderInvocation, false);
+assert.equal(evidence.preservation.personalJudgmentGenerated, false);
+assert.equal(evidence.preservation.professionalWorkspaceBlocked, false);
+assert.equal(evidence.preservation.commercialRuntimeBlocked, false);
+
+const migrationFiles = (await fs.readdir(path.join(root, 'db/migrations')))
+  .filter(file => file.endsWith('.sql'));
+execFileSync('git',['merge-base','--is-ancestor',methodCacheSuccessor.sourceCommit,'HEAD']);
+await assertCurrentMigrationBoundary({files:migrationFiles.sort(),historicalFiles:[
+  '0001_platform_foundation.sql',
+  '0002_initial_runtime.sql',
+  '0003_financial_professional_infrastructure.sql',
+  '0004_book_commerce.sql',
+  '0005_pws_universal_registry.sql',
+  '0006_commerce_stripe_r1.sql',
+  '0007_account_oidc_sessions.sql',
+  '0008_financial_will_encrypted_drafts.sql',
+  '0009_canonical_account_person.sql',
+  '0010_account_method_report_material.sql',
+  '0011_report_context_sequence_reservation.sql',
+  '0012_report_context_admission.sql'
+],registry:await readJson('content/registry/runtime-migrations.json'),sql:await read(methodCacheSuccessor.file),committedSql:execFileSync('git',['show',methodCacheSuccessor.sourceCommit+':'+methodCacheSuccessor.file],{encoding:'utf8'})});
+assert.equal(evidence.preservation.d1MigrationAdded, false);
+
+assert.equal(
+  packageJson.scripts['check:pja-w1'],
+  'node scripts/check-pja-w1-blueprint-led-knowledge.mjs'
+);
+assert(
+  packageJson.scripts.precheck.includes(
+    'node scripts/check-pja-w1-blueprint-led-knowledge.mjs'
+  )
+);
+assert(
+  packageJson.scripts.precheck.indexOf('check-pja-w1-blueprint-led-knowledge') >
+    packageJson.scripts.precheck.indexOf('check-pja-w0-cross-system-boundary')
+);
+
+assert.deepEqual(evidence.acceptance, {
+  existingRegistryAndBlueprintDriven: true,
+  secondKnowledgeSourceOfTruth: false,
+  unpublishedResourcesVisible: false,
+  chineseCanonicalExplicit: true,
+  englishPublicationRequirementEnforced: true,
+  individualOpenAIProviderInvoked: false,
+  personalJudgmentFormed: false,
+  serviceRecommendedByDefault: false,
+  visibleLinksResolve: true,
+  pwsOrCommercialRuntimeBlocked: false,
+  command: 'npm run check:pja-w1'
+});
+
+console.log('✓ PJA-W1 Blueprint-led Public Knowledge Ecosystem passed.');
+console.log('  3 frozen Canonical Nodes publish 3 Chinese articles and 3 required English localizations.');
+console.log('  5 Wave 1 Nodes remain publication-deferred; their Registry identities are supplied by PKR population, not PJA.');
+console.log('  Home, Hub, Articles, Book I, Thesis, Atlas and shared navigation use published-only projections.');
+console.log('  No case Provider, personal judgment, default service recommendation, Runtime write or Entitlement substitute exists.');
+console.log('  State: PJA-W1-v1.1.0-Blueprint-led.');

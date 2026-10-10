@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phios://knowledge/section-inventory-v2",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "manuscriptCode",
+    "sourceBookCode",
+    "locale",
+    "sourceHash",
+    "sections"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "2.0.0"
+    },
+    "manuscriptCode": {
+      "type": "string"
+    },
+    "sourceBookCode": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string"
+    },
+    "sourceHash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "sectionCode",
+          "partCode",
+          "sectionOrder",
+          "startHeading",
+          "endHeading",
+          "startAnchor",
+          "endAnchor",
+          "sourceRangeHash",
+          "previousSection",
+          "nextSection",
+          "status"
+        ],
+        "properties": {
+          "sectionCode": {
+            "type": "string"
+          },
+          "partCode": {
+            "type": "string"
+          },
+          "sectionOrder": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "startHeading": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "endHeading": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "startAnchor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "endAnchor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sourceRangeHash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "previousSection": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "nextSection": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "enum": [
+              "candidate",
+              "human_verified",
+              "stale"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

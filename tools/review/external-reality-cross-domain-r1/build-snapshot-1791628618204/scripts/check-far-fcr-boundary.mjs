@@ -1,0 +1,3 @@
+import assert from 'node:assert/strict'; import {read,readJson} from './lib/far/far-check-lib.mjs';
+const runtime=read('functions/financial/analysis-runtime/financial-analysis-runtime.js'); assert.doesNotMatch(runtime,/fromFact\s*\(/); assert.doesNotMatch(runtime,/assetValues\s*\(/); assert.doesNotMatch(runtime,/liabilityValues\s*\(/); const auth=readJson('content/financial/analysis-runtime/authority/financial-analysis-authority-baseline-v1.json'); assert.equal(auth.reconciliation.FCR.independentRecalculationAllowed,false); assert.equal(auth.invariants.fdrFactsMutated,false);
+console.log('✓ FAR FCR/FDR boundary passed: no independent financial recalculation or FDR mutation authority.');

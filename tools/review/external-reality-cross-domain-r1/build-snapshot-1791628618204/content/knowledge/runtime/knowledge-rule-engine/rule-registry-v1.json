@@ -1,0 +1,50 @@
+{
+  "defaultMode": "deterministic_only",
+  "providerEnabled": false,
+  "registryCode": "PHI-OS-KNOWLEDGE-RULE-REGISTRY-v1.0.0",
+  "rules": [
+    {
+      "operation": "question_normalization",
+      "order": 10,
+      "policy": "normalization-policy-v1.json",
+      "ruleCode": "KRE-NORMALIZE-001"
+    },
+    {
+      "authority": "KNR Package A",
+      "operation": "published_alias_question_matching",
+      "order": 20,
+      "ruleCode": "KRE-MATCH-002"
+    },
+    {
+      "authority": "KNR Package A",
+      "operation": "published_fragment_ranking",
+      "order": 30,
+      "ruleCode": "KRE-RANK-003"
+    },
+    {
+      "authority": "PHASE K Package K-B",
+      "operation": "published_relationship_mechanism_expansion",
+      "order": 40,
+      "ruleCode": "KRE-EXPAND-004"
+    },
+    {
+      "operation": "coverage_decision",
+      "order": 50,
+      "policy": "coverage-decision-policy-v1.json",
+      "ruleCode": "KRE-COVER-005"
+    },
+    {
+      "maximumRecommendations": 5,
+      "operation": "published_article_recommendation",
+      "order": 60,
+      "ruleCode": "KRE-RECOMMEND-006"
+    },
+    {
+      "operation": "controlled_projection_contract",
+      "order": 70,
+      "policy": "projection-contract-v1.json",
+      "ruleCode": "KRE-PROJECT-007"
+    }
+  ],
+  "version": "1.0.0"
+}

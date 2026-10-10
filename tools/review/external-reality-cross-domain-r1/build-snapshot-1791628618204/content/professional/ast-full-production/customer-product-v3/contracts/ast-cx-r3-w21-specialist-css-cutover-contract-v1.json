@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-AST-CX-R3-W21-SPECIALIST-CSS-CUTOVER-CONTRACT-v1.0.0",
+  "workCode": "AST-CX-R3-W21",
+  "baselineCommit": "492ecdddc1f84e5a915f416c60c61ed23e4fcb7f",
+  "status": "SPECIALIST_CSS_PRIMARY",
+  "stylesheet": "assets/customer-ui/surfaces/astrology-specialist-v3.css",
+  "loader": "assets/customer-ui/js/specialists/ast/product-renderer.js",
+  "cssContract": "PHI-OS-AST-CX-R3-SPECIALIST-CSS-v1.0.0",
+  "styleOwner": "AST_CX_R3_SPECIALIST_V3",
+  "primaryNamespace": ".ast-cx-r3",
+  "navigationNamespace": ".ast-cx-r3-nav",
+  "legacyWorkspacePolicy": "COMPATIBILITY_ONLY_NOT_PRIMARY",
+  "requirements": [
+    "AST specialist renderer self-loads the specialist stylesheet",
+    "Primary AST DOM uses ast-cx-r3 namespace",
+    "PPR-R3 shared host owns containment only",
+    "No legacy cx-astw selector is required by the v3 primary surface",
+    "AST CSS does not create method meaning or alter shared routing"
+  ],
+  "boundaries": {
+    "pprR3SharedCssModified": false,
+    "personalRealityCssModified": false,
+    "sharedSingleMethodReadingCssModified": false,
+    "otherMethodCssModified": false
+  }
+}

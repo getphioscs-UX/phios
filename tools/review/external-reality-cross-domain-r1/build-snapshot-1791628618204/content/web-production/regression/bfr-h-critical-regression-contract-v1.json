@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "PHI-OS-BFR-H-PART-I-CRITICAL-REGRESSION-CONTRACT-v1.0.0",
+  "work": "PART-I",
+  "baselineCommit": "85a6cf68a4ca458142f20b8a5bd9a58f3e7b8d67",
+  "status": "REG_01_REG_15_FAIL_CLOSED_BEFORE_BFR_H16_PRODUCTION_ACCEPTANCE",
+  "purpose": "Prevent canonical knowledge, Homepage composition, governed visual consumption, CKA boundaries, Method consent, publication ownership, audience privacy and structured-answer semantics from silently regressing after BFR-H/HPC2/CKA integration.",
+  "execution": {
+    "checker": "scripts/check-bfr-h-critical-regressions.mjs",
+    "finalGate": "scripts/check-bfr-h16-visual-production.mjs",
+    "dailyEntry": "npm run check:bfr-h",
+    "packageScriptChangeRequired": false,
+    "failureMode": "ASSERTION_FAIL_CLOSED"
+  },
+  "regressions": [
+    {
+      "code": "REG-01",
+      "failure": "5 books canonical + Homepage shows 4",
+      "authorities": ["content/registry/books.json", "content/knowledge/public/public-book-metadata.json", "content/web/homepage/hpc2/contracts/hpc2-w8-five-volume-knowledge-composition-contract-v1.json", "index.html", "assets/js/pages/home-production.js"]
+    },
+    {
+      "code": "REG-02",
+      "failure": "Financial Runtime production + Homepage expectedSurface defined + Homepage consumer none",
+      "authorities": ["content/web-production/registries/wpr-professional-financial-projection-registry-v1.json", "content/web/homepage/hpc2/homepage-capability-intake-v1.json", "index.html"]
+    },
+    {
+      "code": "REG-03",
+      "failure": "R2 governed hero exists + Homepage hardcodes unrelated local asset",
+      "authorities": ["content/registry/public-assets.json", "content/web-production/registries/client-visual-asset-registry-v1.2.json", "index.html", "assets/js/pages/home-production.js"]
+    },
+    {
+      "code": "REG-04",
+      "failure": "V8 semantic block removed + successor missing",
+      "authorities": ["content/web/homepage/hpc2/v8-content-preservation-manifest-v1.json", "content/web/homepage/hpc2/v8-content-destination-migration-v1.json", "content/web/homepage/hpc2/evidence/hpc2-w14-v8-successor-completion-v1.json"]
+    },
+    {
+      "code": "REG-05",
+      "failure": "simple Ask + forced account",
+      "authorities": ["content/client/knowledge-ask/contracts/cka-w5-w17-batch-b-contract-v1.json", "content/client/knowledge-ask/contracts/cka-w18-w33-client-consumption-contract-v1.json", "knowledge-search.html"]
+    },
+    {
+      "code": "REG-06",
+      "failure": "simple Ask + Journey CTA primary",
+      "authorities": ["content/client/knowledge-ask/contracts/cka-w18-w33-client-consumption-contract-v1.json", "knowledge-search.html", "assets/js/pages/knowledge-search-b.js"]
+    },
+    {
+      "code": "REG-07",
+      "failure": "birthday entered + all methods auto-executed without consent",
+      "authorities": ["content/client/knowledge-ask/contracts/cka-w5-w17-batch-b-contract-v1.json", "personal-runtime.html", "assets/js/pages/personal-runtime.js"]
+    },
+    {
+      "code": "REG-08",
+      "failure": "CKA answer + no grounding state",
+      "authorities": ["content/client/knowledge-ask/contracts/cka-w5-w17-batch-b-contract-v1.json", "content/client/knowledge-ask/contracts/cka-w18-w33-client-consumption-contract-v1.json", "functions/_lib/client-knowledge-ask-b.js", "knowledge-search.html"]
+    },
+    {
+      "code": "REG-09",
+      "failure": "CKA answer + Unknown not represented when evidence incomplete",
+      "authorities": ["content/client/knowledge-ask/contracts/cka-w5-w17-batch-b-contract-v1.json", "content/client/knowledge-ask/contracts/cka-w18-w33-client-consumption-contract-v1.json", "functions/_lib/client-knowledge-ask-c.js", "knowledge-search.html"]
+    },
+    {
+      "code": "REG-10",
+      "failure": "Article related Book inferred from KN-B prefix instead of Publication Ownership",
+      "authorities": ["content/web-production/registries/wpr-five-volume-publication-context-registry-v1.json", "content/knowledge/migrations/node-publication-ownership-v2.json", "assets/js/web-production/public-surface-data.js", "assets/js/knowledge/published-content.js"]
+    },
+    {
+      "code": "REG-11",
+      "failure": "Public Homepage exposes private Reality context",
+      "authorities": ["content/client/knowledge-ask/contracts/cka-w5-w17-batch-b-contract-v1.json", "content/client/knowledge-ask/contracts/cka-w18-w33-client-consumption-contract-v1.json", "index.html"]
+    },
+    {
+      "code": "REG-12",
+      "failure": "Professional Judgment shown as CKA-generated content",
+      "authorities": ["content/client/knowledge-ask/contracts/cka-w5-w17-batch-b-contract-v1.json", "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json", "assets/js/pages/knowledge-search-b.js"]
+    },
+    {
+      "code": "REG-13",
+      "failure": "Homepage gains new section only because new runtime exists",
+      "authorities": ["content/web/homepage/hpc2/homepage-scene-registry-v2.json", "index.html"]
+    },
+    {
+      "code": "REG-14",
+      "failure": "Volume identity color-only",
+      "authorities": ["content/web-production/bfr-five-volume-visual-projection-v1.json", "content/web/homepage/hpc2/contracts/hpc2-w8-five-volume-knowledge-composition-contract-v1.json", "index.html"]
+    },
+    {
+      "code": "REG-15",
+      "failure": "Ask PHI OS becomes unstructured generic chat",
+      "authorities": ["content/client/knowledge-ask/contracts/cka-w18-w33-client-consumption-contract-v1.json", "knowledge-search.html"]
+    }
+  ],
+  "authorityBoundary": {
+    "newRuntimeAuthorityCreated": false,
+    "secondHomepageAuthorityCreated": false,
+    "secondCkaAnswerRuntimeCreated": false,
+    "publicationOwnershipRewritten": false,
+    "methodExecutionAuthorityCreated": false,
+    "privateRealityContextActivated": false,
+    "professionalJudgmentAuthorityCreated": false,
+    "historicalFreezeRewritten": false,
+    "globalProductionAccepted": false
+  }
+}

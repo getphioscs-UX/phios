@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-CUSTOMER-REPORT-COMPOSITION-RULE-REGISTRY-v1.0.0",
+  "work": "ZIWEI-FP-W18",
+  "status": "FROZEN_ENGINEERING_REGISTRY",
+  "baselineCommit": "0692037d3a3f522de9f0eb11d37f738df3a2bae6",
+  "rules": [
+    {
+      "ruleId": "ZWR-REPORT-COMP-01",
+      "target": "READING_FIRST",
+      "inputs": [
+        "LIFE_PALACE",
+        "BODY_PALACE",
+        "DA_XIAN_FOCUS",
+        "LIU_NIAN_FOCUS",
+        "QUALIFIED_PATTERNS_IF_ANY"
+      ],
+      "operation": "STRUCTURAL_ANCHOR_SUMMARY",
+      "forbidden": [
+        "GOOD_BAD_RANKING",
+        "STRONG_WEAK_RANKING"
+      ]
+    },
+    {
+      "ruleId": "ZWR-REPORT-COMP-02",
+      "target": "FOUNDATION",
+      "inputs": [
+        "W17_FOUNDATION_READING_UNIT"
+      ],
+      "operation": "LIFE_BODY_CROSS_COORDINATE_NARRATIVE",
+      "forbidden": [
+        "FIXED_IDENTITY_CLAIM"
+      ]
+    },
+    {
+      "ruleId": "ZWR-REPORT-COMP-03",
+      "target": "PALACE_BLOCK",
+      "inputs": [
+        "W17_PALACE_PRIMARY",
+        "W17_PALACE_CONTEXT_DERIVATIVE"
+      ],
+      "operation": "ONE_FULL_EXPLANATION_PLUS_ATTACHED_NETWORK_CONTEXT",
+      "forbidden": [
+        "SECOND_NETWORK_ESSAY",
+        "UNADMITTED_STAR_FALLBACK"
+      ]
+    },
+    {
+      "ruleId": "ZWR-REPORT-COMP-04",
+      "target": "PATTERN_BLOCK",
+      "inputs": [
+        "W17_QUALIFIED_PATTERN_UNIT"
+      ],
+      "operation": "QUALIFICATION_ONLY",
+      "forbidden": [
+        "WEALTH_RANK_HARM_EVENT_OUTCOME"
+      ]
+    },
+    {
+      "ruleId": "ZWR-REPORT-COMP-05",
+      "target": "TIMING_BLOCK",
+      "inputs": [
+        "W17_DA_XIAN",
+        "W17_LIU_NIAN",
+        "W17_CROSS_LAYER"
+      ],
+      "operation": "STRUCTURAL_FOCUS_AND_OVERLAP",
+      "forbidden": [
+        "EVENT_PREDICTION",
+        "INEVITABILITY_CLAIM"
+      ]
+    },
+    {
+      "ruleId": "ZWR-REPORT-COMP-06",
+      "target": "OPEN_BOUNDARIES",
+      "inputs": [
+        "W17_UNKNOWN_ITEMS"
+      ],
+      "operation": "EXPLICIT_GAP_DISCLOSURE",
+      "forbidden": [
+        "GENERIC_MEANING_FILL"
+      ]
+    },
+    {
+      "ruleId": "ZWR-REPORT-COMP-07",
+      "target": "WHY_THIS_READING",
+      "inputs": [
+        "W17_LINEAGE"
+      ],
+      "operation": "COLLAPSED_TRACEABILITY",
+      "forbidden": [
+        "RAW_INTERNAL_CODE_ON_DEFAULT_READING_SURFACE"
+      ]
+    }
+  ],
+  "globalRules": {
+    "oneFullExplanationPerSemanticCluster": true,
+    "zeroExactCustomerTextDuplicates": true,
+    "counterEvidencePreserved": true,
+    "unknownsPreserved": true,
+    "newMeaningCreated": false,
+    "newCalculationCreated": false
+  }
+}

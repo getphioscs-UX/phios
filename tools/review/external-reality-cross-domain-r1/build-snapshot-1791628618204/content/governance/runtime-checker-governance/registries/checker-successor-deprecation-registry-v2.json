@@ -1,0 +1,54 @@
+{
+  "registryCode": "PHI-OS-RG-ORC-CHECKER-SUCCESSOR-DEPRECATION-REGISTRY-v2",
+  "registryVersion": "2.0.0",
+  "work": "ORC-W9",
+  "status": "accepted_successor_extension",
+  "implementations": [
+    {
+      "implementation": "scripts/run-runtime-checker.mjs",
+      "status": "legacy_frozen",
+      "successor": "scripts/run-runtime-checker-v2.mjs"
+    },
+    {
+      "implementation": "scripts/run-runtime-checker-v2.mjs",
+      "status": "superseded",
+      "successor": "scripts/run-runtime-checker-v3.mjs"
+    },
+    {
+      "implementation": "scripts/run-runtime-checker-v3.mjs",
+      "status": "legacy_active_global",
+      "successor": "scripts/run-runtime-checker-v4.mjs"
+    },
+    {
+      "implementation": "scripts/run-runtime-checker-v4.mjs",
+      "status": "active_explicit_successor",
+      "successor": null
+    }
+  ],
+  "registries": [
+    {
+      "registry": "content/runtime/checkers/runtime-checker-alias-registry-v1.json",
+      "status": "legacy_frozen"
+    },
+    {
+      "registry": "content/governance/runtime-checker-governance/registries/runtime-checker-alias-registry-v2.json",
+      "status": "superseded_foundation"
+    },
+    {
+      "registry": "content/governance/runtime-checker-governance/registries/runtime-checker-alias-registry-v3.json",
+      "status": "legacy_active_global"
+    },
+    {
+      "registry": "content/governance/runtime-checker-governance/registries/runtime-checker-alias-registry-v4.json",
+      "status": "active_explicit_successor"
+    }
+  ],
+  "rules": {
+    "workCodeChangesAcrossSuccessor": false,
+    "acceptedHistoricalFileMayBeRenamed": false,
+    "inPlaceLegacyFreezeMutationAllowed": false,
+    "successorMustBeExplicit": true,
+    "globalV3AliasMutated": false,
+    "explicitV4EntryRequiredForOrc": true
+  }
+}

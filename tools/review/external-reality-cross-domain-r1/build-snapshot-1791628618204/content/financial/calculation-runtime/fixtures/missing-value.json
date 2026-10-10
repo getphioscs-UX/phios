@@ -1,0 +1,369 @@
+{
+  "fixtureVersion": "PHI-OS-FCR-W20-FIXTURE-v1.0.0",
+  "scenario": "missing-value",
+  "synthetic": true,
+  "calculationInput": {
+    "runtimeCode": "FINANCIAL_CALCULATION_RUNTIME",
+    "calculationId": "CALC-MISSING-VALUE",
+    "scenarioCode": "BASE",
+    "fdrSnapshot": {
+      "snapshotId": "SNAP-FR-MISSING_VALUE",
+      "financialRealityId": "FR-MISSING_VALUE",
+      "sequence": 0,
+      "timepoint": "t0",
+      "asOfDate": "2026-01-01",
+      "financialRealityVersion": 1,
+      "snapshotPayload": {
+        "financialRealityId": "FR-MISSING_VALUE",
+        "householdReference": "HH-MISSING_VALUE",
+        "customerReferences": [
+          "CUST1"
+        ],
+        "asOfDate": "2026-01-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P1",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "FCR_SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [
+          {
+            "assetId": "UNK",
+            "assetType": "PROPERTY",
+            "ownership": {
+              "ownershipId": "OWN-UNK",
+              "assetId": "UNK",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P1"
+              ],
+              "disclosureState": "UNKNOWN",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "FCR_SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-UNK",
+              "factCode": "ASSET_VALUE",
+              "value": null,
+              "valueRepresentation": "UNKNOWN",
+              "disclosureState": "UNKNOWN",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "FCR_SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "UNKNOWN",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "FCR_SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "liabilities": [],
+        "incomeStreams": [
+          {
+            "incomeStreamId": "SAL",
+            "incomeType": "SALARY",
+            "recipientReference": "P1",
+            "amountFact": {
+              "factId": "F-SAL",
+              "factCode": "INCOME_AMOUNT",
+              "value": 8000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "FCR_SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "frequency": "MONTHLY",
+            "currency": "MYR",
+            "grossOrNet": "GROSS",
+            "effectivePeriod": {
+              "from": "2026-01-01",
+              "to": null
+            },
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "FCR_SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "expenses": [
+          {
+            "expenseId": "ESS",
+            "expenseType": "ESSENTIAL",
+            "payerReference": "P1",
+            "amountFact": {
+              "factId": "F-ESS",
+              "factCode": "EXPENSE_AMOUNT",
+              "value": 3000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "FCR_SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "frequency": "MONTHLY",
+            "currency": "MYR",
+            "effectivePeriod": {
+              "from": "2026-01-01",
+              "to": null
+            },
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "FCR_SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "policies": [],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "PLANNING"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 1,
+        "digest": "c89ce924ba6432277a6db3908d052a68d57cd7f33bd8848ee1b6ab43df374442"
+      },
+      "previousSnapshotDigest": null,
+      "changeEventReferences": [],
+      "createdAt": "2026-01-01T00:00:00Z",
+      "creationReason": "FCR_SYNTHETIC_FIXTURE",
+      "consentReference": "CONSENT-FP",
+      "digest": "38fd2461472e8b9704b7c0f39e628d34c3d58a6a7c2eb33e2f98f44b49a0b529"
+    },
+    "assumptionSet": {
+      "assumptionSetId": "AS-BASE",
+      "version": "1.0.0",
+      "effectiveDate": "2026-01-01",
+      "sourceLabel": "FCR_SYNTHETIC_SET",
+      "scenarioCode": "BASE",
+      "assumptions": [
+        {
+          "assumptionId": "ASM-BASE-INFLATION",
+          "type": "INFLATION",
+          "version": "1.0.0",
+          "value": 0.025,
+          "unit": "decimal_per_year",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-INVESTMENT_RETURN",
+          "type": "INVESTMENT_RETURN",
+          "version": "1.0.0",
+          "value": 0.05,
+          "unit": "decimal_per_year",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-EPF_RETURN",
+          "type": "EPF_RETURN",
+          "version": "1.0.0",
+          "value": 0.05,
+          "unit": "decimal_per_year",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-SALARY_GROWTH",
+          "type": "SALARY_GROWTH",
+          "version": "1.0.0",
+          "value": 0.03,
+          "unit": "decimal_per_year",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-RETIREMENT_AGE",
+          "type": "RETIREMENT_AGE",
+          "version": "1.0.0",
+          "value": 60,
+          "unit": "age_years",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-LONGEVITY_AGE",
+          "type": "LONGEVITY_AGE",
+          "version": "1.0.0",
+          "value": 85,
+          "unit": "age_years",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-TAX_EFFECTIVE_RATE",
+          "type": "TAX_EFFECTIVE_RATE",
+          "version": "1.0.0",
+          "value": 0.1,
+          "unit": "decimal",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-EMERGENCY_RESERVE_MONTHS",
+          "type": "EMERGENCY_RESERVE_MONTHS",
+          "version": "1.0.0",
+          "value": 6,
+          "unit": "months",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-PROTECTION_INCOME_REPLACEMENT_YEARS",
+          "type": "PROTECTION_INCOME_REPLACEMENT_YEARS",
+          "version": "1.0.0",
+          "value": 10,
+          "unit": "years",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-EDUCATION_INFLATION",
+          "type": "EDUCATION_INFLATION",
+          "version": "1.0.0",
+          "value": 0.04,
+          "unit": "decimal_per_year",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-RETIREMENT_INCOME_REPLACEMENT_RATE",
+          "type": "RETIREMENT_INCOME_REPLACEMENT_RATE",
+          "version": "1.0.0",
+          "value": 0.7,
+          "unit": "decimal",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-ESTATE_EXPENSE_RATE",
+          "type": "ESTATE_EXPENSE_RATE",
+          "version": "1.0.0",
+          "value": 0.03,
+          "unit": "decimal",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-INVESTMENT_CONTRIBUTION_ANNUAL",
+          "type": "INVESTMENT_CONTRIBUTION_ANNUAL",
+          "version": "1.0.0",
+          "value": 12000,
+          "unit": "currency_per_year",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-INVESTMENT_HORIZON_YEARS",
+          "type": "INVESTMENT_HORIZON_YEARS",
+          "version": "1.0.0",
+          "value": 10,
+          "unit": "years",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-FX-USD-MYR",
+          "type": "FX_RATE",
+          "version": "1.0.0",
+          "value": 4.5,
+          "unit": "currency_pair_rate",
+          "fromCurrency": "USD",
+          "toCurrency": "MYR",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_FX"
+        },
+        {
+          "assumptionId": "ASM-BASE-FX-SGD-MYR",
+          "type": "FX_RATE",
+          "version": "1.0.0",
+          "value": 3.4,
+          "unit": "currency_pair_rate",
+          "fromCurrency": "SGD",
+          "toCurrency": "MYR",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_FX"
+        },
+        {
+          "assumptionId": "ASM-BASE-FX-IDR-MYR",
+          "type": "FX_RATE",
+          "version": "1.0.0",
+          "value": 0.0003,
+          "unit": "currency_pair_rate",
+          "fromCurrency": "IDR",
+          "toCurrency": "MYR",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_FX"
+        }
+      ],
+      "digest": "7469df452483b0661e5e19814f413d87defc074e759115b165a5c99dc78c9d96"
+    }
+  },
+  "expected": {
+    "grossAssetsKind": "UNKNOWN",
+    "inventedZeroForbidden": true
+  }
+}

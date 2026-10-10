@@ -1,0 +1,297 @@
+{
+  "schemaVersion": "PHI-OS-CX-CUSTOMER-SURFACE-REGISTRY-v3.0.0",
+  "work": "CX-R2-W10",
+  "baselineCommit": "f6d31dafdc37dcf3d8f2ebd1236bfa500b7dc64c",
+  "recordedAt": "2026-09-03T03:18:00Z",
+  "status": "CUSTOMER_SURFACE_AUTHORITY_FROZEN_PRE_PRESENTATION_CUTOVER",
+  "surfaceCount": 15,
+  "surfaces": [
+    {
+      "surfaceId": "HOME",
+      "route": "/",
+      "customerPurpose": "Orient the customer and offer the three primary ways to begin.",
+      "runtimeConsumers": [],
+      "authRequirement": "PUBLIC",
+      "primaryAction": "START_WITH_MY_REALITY",
+      "secondaryAction": "ASK_PHI_OS",
+      "futureDependencies": [],
+      "namespace": "cx-",
+      "shellAuthority": "ONE_GLOBAL_CUSTOMER_SHELL_TARGET",
+      "availabilityAuthority": "UPSTREAM_AUTHORITY_OR_ROUTE_STATE",
+      "availabilityHardCodedByCx": false,
+      "successorAuthorityState": "R2_ROUTE_AND_PURPOSE_FROZEN_PRESENTATION_NOT_ACTIVATED_BY_R2"
+    },
+    {
+      "surfaceId": "EXPLORE",
+      "route": "/explore/",
+      "customerPurpose": "Explain PHI OS, how it works and where to begin.",
+      "runtimeConsumers": [
+        "KNOWLEDGE"
+      ],
+      "authRequirement": "PUBLIC",
+      "primaryAction": "START_HERE",
+      "secondaryAction": "OPEN_KNOWLEDGE",
+      "futureDependencies": [],
+      "namespace": "cx-",
+      "shellAuthority": "ONE_GLOBAL_CUSTOMER_SHELL_TARGET",
+      "availabilityAuthority": "UPSTREAM_AUTHORITY_OR_ROUTE_STATE",
+      "availabilityHardCodedByCx": false,
+      "successorAuthorityState": "R2_ROUTE_AND_PURPOSE_FROZEN_PRESENTATION_NOT_ACTIVATED_BY_R2"
+    },
+    {
+      "surfaceId": "MY_REALITY",
+      "route": "/reality/",
+      "customerPurpose": "Work through a current real situation in one continuing workspace.",
+      "runtimeConsumers": [
+        "ICR",
+        "RDG",
+        "RMO",
+        "RRE",
+        "JR",
+        "RNE",
+        "RR"
+      ],
+      "authRequirement": "MIXED",
+      "primaryAction": "CONTINUE_MY_REALITY",
+      "secondaryAction": "REVIEW_CURRENT_REALITY",
+      "futureDependencies": [
+        "LRM_FUTURE"
+      ],
+      "namespace": "cx-",
+      "shellAuthority": "ONE_GLOBAL_CUSTOMER_SHELL_TARGET",
+      "availabilityAuthority": "UPSTREAM_AUTHORITY_OR_ROUTE_STATE",
+      "availabilityHardCodedByCx": false,
+      "successorAuthorityState": "R2_ROUTE_AND_PURPOSE_FROZEN_PRESENTATION_NOT_ACTIVATED_BY_R2"
+    },
+    {
+      "surfaceId": "PERSPECTIVES",
+      "route": "/perspectives/",
+      "customerPurpose": "Choose a governed perspective without implying equal evidence status or availability.",
+      "runtimeConsumers": [
+        "MPA",
+        "METHOD_RUNTIMES",
+        "CMR"
+      ],
+      "authRequirement": "PUBLIC",
+      "primaryAction": "CHOOSE_A_PERSPECTIVE",
+      "secondaryAction": "RETURN_TO_MY_REALITY",
+      "futureDependencies": [],
+      "namespace": "cx-",
+      "shellAuthority": "ONE_GLOBAL_CUSTOMER_SHELL_TARGET",
+      "availabilityAuthority": "UPSTREAM_AUTHORITY_OR_ROUTE_STATE",
+      "availabilityHardCodedByCx": false,
+      "successorAuthorityState": "R2_ROUTE_AND_PURPOSE_FROZEN_PRESENTATION_NOT_ACTIVATED_BY_R2"
+    },
+    {
+      "surfaceId": "PERSONAL_REALITY",
+      "route": "/perspectives/personal/",
+      "customerPurpose": "Use governed personal reading outputs inside the shared customer system.",
+      "runtimeConsumers": [
+        "MPA",
+        "METHOD_RUNTIMES",
+        "CMR",
+        "RRE"
+      ],
+      "authRequirement": "MIXED",
+      "primaryAction": "OPEN_PERSONAL_READING",
+      "secondaryAction": "ASK_ABOUT_THIS_READING",
+      "futureDependencies": [],
+      "namespace": "cx-",
+      "shellAuthority": "ONE_GLOBAL_CUSTOMER_SHELL_TARGET",
+      "availabilityAuthority": "UPSTREAM_AUTHORITY_OR_ROUTE_STATE",
+      "availabilityHardCodedByCx": false,
+      "successorAuthorityState": "R2_ROUTE_AND_PURPOSE_FROZEN_PRESENTATION_NOT_ACTIVATED_BY_R2"
+    },
+    {
+      "surfaceId": "RELATIONSHIP",
+      "route": "/perspectives/relationship/",
+      "customerPurpose": "Use governed relationship outputs with explicit participant and case scope.",
+      "runtimeConsumers": [
+        "RELATIONSHIP_PRODUCT_AUTHORITY"
+      ],
+      "authRequirement": "MIXED",
+      "primaryAction": "OPEN_RELATIONSHIP",
+      "secondaryAction": "ASK_ABOUT_THIS_RELATIONSHIP",
+      "futureDependencies": [],
+      "namespace": "cx-",
+      "shellAuthority": "ONE_GLOBAL_CUSTOMER_SHELL_TARGET",
+      "availabilityAuthority": "UPSTREAM_AUTHORITY_OR_ROUTE_STATE",
+      "availabilityHardCodedByCx": false,
+      "successorAuthorityState": "R2_ROUTE_AND_PURPOSE_FROZEN_PRESENTATION_NOT_ACTIVATED_BY_R2"
+    },
+    {
+      "surfaceId": "PROFILE_ASSESSMENT",
+      "route": "/perspectives/profile/",
+      "customerPurpose": "Host profile and assessment context when the successor product authority is ready.",
+      "runtimeConsumers": [
+        "PROFILE_PRODUCT_AUTHORITY"
+      ],
+      "authRequirement": "MIXED",
+      "primaryAction": "OPEN_PROFILE",
+      "secondaryAction": "COMPARE_WITH_CURRENT_REALITY",
+      "futureDependencies": [
+        "CX-R11_PRODUCT_AUTHORITY"
+      ],
+      "namespace": "cx-",
+      "shellAuthority": "ONE_GLOBAL_CUSTOMER_SHELL_TARGET",
+      "availabilityAuthority": "UPSTREAM_AUTHORITY_OR_ROUTE_STATE",
+      "availabilityHardCodedByCx": false,
+      "successorAuthorityState": "R2_ROUTE_AND_PURPOSE_FROZEN_PRESENTATION_NOT_ACTIVATED_BY_R2"
+    },
+    {
+      "surfaceId": "KNOWLEDGE",
+      "route": "/knowledge/",
+      "customerPurpose": "Search, read and navigate governed PHI OS knowledge.",
+      "runtimeConsumers": [
+        "CKA",
+        "KAP",
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "authRequirement": "PUBLIC",
+      "primaryAction": "SEARCH_KNOWLEDGE",
+      "secondaryAction": "ASK_PHI_OS",
+      "futureDependencies": [],
+      "namespace": "cx-",
+      "shellAuthority": "ONE_GLOBAL_CUSTOMER_SHELL_TARGET",
+      "availabilityAuthority": "UPSTREAM_AUTHORITY_OR_ROUTE_STATE",
+      "availabilityHardCodedByCx": false,
+      "successorAuthorityState": "R2_ROUTE_AND_PURPOSE_FROZEN_PRESENTATION_NOT_ACTIVATED_BY_R2"
+    },
+    {
+      "surfaceId": "ASK",
+      "route": "/knowledge/ask/",
+      "customerPurpose": "Ask one contextual question with explicit source/context selection.",
+      "runtimeConsumers": [
+        "CKA",
+        "KAP",
+        "CURRENT_FACTS_GATEWAY"
+      ],
+      "authRequirement": "PUBLIC",
+      "primaryAction": "ASK_QUESTION",
+      "secondaryAction": "CHOOSE_CONTEXT",
+      "futureDependencies": [
+        "CX-R9-R2_REPLACEMENT_ACCEPTANCE"
+      ],
+      "namespace": "cx-",
+      "shellAuthority": "ONE_GLOBAL_CUSTOMER_SHELL_TARGET",
+      "availabilityAuthority": "UPSTREAM_AUTHORITY_OR_ROUTE_STATE",
+      "availabilityHardCodedByCx": false,
+      "successorAuthorityState": "R2_ROUTE_AND_PURPOSE_FROZEN_PRESENTATION_NOT_ACTIVATED_BY_R2"
+    },
+    {
+      "surfaceId": "SEARCH",
+      "route": "/knowledge/search/",
+      "customerPurpose": "Search governed knowledge without creating a second knowledge authority.",
+      "runtimeConsumers": [
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "authRequirement": "PUBLIC",
+      "primaryAction": "SEARCH",
+      "secondaryAction": "OPEN_KNOWLEDGE_HOME",
+      "futureDependencies": [],
+      "namespace": "cx-",
+      "shellAuthority": "ONE_GLOBAL_CUSTOMER_SHELL_TARGET",
+      "availabilityAuthority": "UPSTREAM_AUTHORITY_OR_ROUTE_STATE",
+      "availabilityHardCodedByCx": false,
+      "successorAuthorityState": "R2_ROUTE_AND_PURPOSE_FROZEN_PRESENTATION_NOT_ACTIVATED_BY_R2"
+    },
+    {
+      "surfaceId": "FINANCIAL_REALITY",
+      "route": "/professional/financial/",
+      "customerPurpose": "Project governed financial runtime outputs for customer and professional review.",
+      "runtimeConsumers": [
+        "FINANCIAL_RUNTIMES",
+        "PFR"
+      ],
+      "authRequirement": "MIXED",
+      "primaryAction": "OPEN_FINANCIAL_REALITY",
+      "secondaryAction": "PROFESSIONAL_REVIEW",
+      "futureDependencies": [],
+      "namespace": "cx-",
+      "shellAuthority": "ONE_GLOBAL_CUSTOMER_SHELL_TARGET",
+      "availabilityAuthority": "UPSTREAM_AUTHORITY_OR_ROUTE_STATE",
+      "availabilityHardCodedByCx": false,
+      "successorAuthorityState": "R2_ROUTE_AND_PURPOSE_FROZEN_PRESENTATION_NOT_ACTIVATED_BY_R2"
+    },
+    {
+      "surfaceId": "PROFESSIONAL",
+      "route": "/professional/",
+      "customerPurpose": "Enter the professional layer for review, services, reports and appointments.",
+      "runtimeConsumers": [
+        "PR",
+        "PFR",
+        "RR"
+      ],
+      "authRequirement": "PUBLIC",
+      "primaryAction": "VIEW_PROFESSIONAL_OPTIONS",
+      "secondaryAction": "OPEN_REPORTS",
+      "futureDependencies": [],
+      "namespace": "cx-",
+      "shellAuthority": "ONE_GLOBAL_CUSTOMER_SHELL_TARGET",
+      "availabilityAuthority": "UPSTREAM_AUTHORITY_OR_ROUTE_STATE",
+      "availabilityHardCodedByCx": false,
+      "successorAuthorityState": "R2_ROUTE_AND_PURPOSE_FROZEN_PRESENTATION_NOT_ACTIVATED_BY_R2"
+    },
+    {
+      "surfaceId": "REPORT",
+      "route": "/professional/reports/",
+      "customerPurpose": "Access governed reports without letting the CX layer assemble a canonical report.",
+      "runtimeConsumers": [
+        "RR"
+      ],
+      "authRequirement": "ACCOUNT",
+      "primaryAction": "OPEN_REPORT",
+      "secondaryAction": "RETURN_TO_MY_REALITY",
+      "futureDependencies": [],
+      "namespace": "cx-",
+      "shellAuthority": "ONE_GLOBAL_CUSTOMER_SHELL_TARGET",
+      "availabilityAuthority": "UPSTREAM_AUTHORITY_OR_ROUTE_STATE",
+      "availabilityHardCodedByCx": false,
+      "successorAuthorityState": "R2_ROUTE_AND_PURPOSE_FROZEN_PRESENTATION_NOT_ACTIVATED_BY_R2"
+    },
+    {
+      "surfaceId": "ACCOUNT",
+      "route": "/account/",
+      "customerPurpose": "Resume work, access recent perspectives and reports, and manage settings.",
+      "runtimeConsumers": [
+        "ACCOUNT"
+      ],
+      "authRequirement": "ACCOUNT",
+      "primaryAction": "CONTINUE",
+      "secondaryAction": "OPEN_SETTINGS",
+      "futureDependencies": [
+        "LRM_FUTURE"
+      ],
+      "namespace": "cx-",
+      "shellAuthority": "ONE_GLOBAL_CUSTOMER_SHELL_TARGET",
+      "availabilityAuthority": "UPSTREAM_AUTHORITY_OR_ROUTE_STATE",
+      "availabilityHardCodedByCx": false,
+      "successorAuthorityState": "R2_ROUTE_AND_PURPOSE_FROZEN_PRESENTATION_NOT_ACTIVATED_BY_R2"
+    },
+    {
+      "surfaceId": "ACADEMY",
+      "route": "/knowledge/learn/",
+      "customerPurpose": "Access learning as part of Knowledge rather than a first-level platform kingdom.",
+      "runtimeConsumers": [
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "authRequirement": "PUBLIC",
+      "primaryAction": "START_LEARNING",
+      "secondaryAction": "OPEN_KNOWLEDGE_HOME",
+      "futureDependencies": [],
+      "namespace": "cx-",
+      "shellAuthority": "ONE_GLOBAL_CUSTOMER_SHELL_TARGET",
+      "availabilityAuthority": "UPSTREAM_AUTHORITY_OR_ROUTE_STATE",
+      "availabilityHardCodedByCx": false,
+      "successorAuthorityState": "R2_ROUTE_AND_PURPOSE_FROZEN_PRESENTATION_NOT_ACTIVATED_BY_R2"
+    }
+  ],
+  "rules": {
+    "oneSurfaceIdOneRoute": true,
+    "methodSpecificGlobalShellAllowed": false,
+    "duplicateCustomerNavigationAllowed": false,
+    "routeDeclarationImpliesAvailability": false,
+    "r2ActivatesPresentation": false,
+    "r2PerformsRouteCutover": false
+  }
+}

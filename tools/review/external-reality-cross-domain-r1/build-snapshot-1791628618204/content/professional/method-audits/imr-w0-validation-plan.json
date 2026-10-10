@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0.0",
+  "stageCode": "IMR-W0",
+  "validationStatus": "contract_only",
+  "astrology": {
+    "referenceSources": [
+      "NASA_JPL_HORIZONS",
+      "trusted_commercial_chart_reference"
+    ],
+    "requiredCases": [
+      "ordinary_birth_chart",
+      "leap_day",
+      "historical_dst",
+      "ambiguous_location",
+      "zodiac_boundary",
+      "house_cusp_boundary",
+      "retrograde_boundary",
+      "high_latitude"
+    ],
+    "requiredMeasures": [
+      "planet_longitude",
+      "ascendant",
+      "midheaven",
+      "house_cusps",
+      "retrograde_status",
+      "aspect_detection"
+    ]
+  },
+  "bazi": {
+    "referenceSources": [
+      "HONG_KONG_OBSERVATORY_CALENDAR",
+      "multiple_reference_implementations",
+      "TL_known_reference_charts"
+    ],
+    "requiredCases": [
+      "ordinary_date",
+      "leap_day",
+      "before_after_li_chun",
+      "before_after_jie",
+      "23_00_boundary",
+      "00_00_boundary",
+      "true_solar_time_cross_hour",
+      "true_solar_time_cross_day",
+      "unknown_birth_time"
+    ],
+    "requiredMeasures": [
+      "year_pillar",
+      "month_pillar",
+      "day_pillar",
+      "hour_pillar",
+      "solar_term_instant",
+      "luck_direction",
+      "luck_start"
+    ]
+  },
+  "acceptancePrinciple": "same_input_same_policy_same_engine_same_output_hash"
+}

@@ -1,0 +1,67 @@
+{
+  "freezeCode": "KAU-R1-COMPLETED-MANUSCRIPT-FREEZE",
+  "version": "1.0.0",
+  "stage": "KAU-R1",
+  "status": "frozen",
+  "frozenAt": "2026-08-12",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "b42b775e460041605955d2baee4f15234b649b11"
+  },
+  "completedManuscripts": {
+    "BOOK-1": {
+      "fileName": "PHI-OS-Book-I-v2.pdf",
+      "pageCount": 402,
+      "byteSize": 122565526,
+      "sha256": "7f7ed51199302b83d5bb5e48224a5f5995123171645e820925508fb31d97174d",
+      "partCodes": ["P1", "P2", "P3", "P4"],
+      "r2ObjectKey": "books/book-1/source/PHI-OS-Book-I-v2.pdf"
+    },
+    "BOOK-2": {
+      "fileName": "PHI-OS-Book-2-v1.pdf",
+      "pageCount": 386,
+      "byteSize": 105071786,
+      "sha256": "1ae413dbfddae604f65af3e9b16a28a923899e3ebe8f419d9b7f3ff10bfa41fe",
+      "partCodes": ["P5", "P6", "P7"],
+      "r2ObjectKey": "books/book-2/source/PHI-OS-Book-2-v1.pdf"
+    }
+  },
+  "boundaries": {
+    "legacyManuscriptRegistryRewritten": false,
+    "canonicalNodesModified": false,
+    "canonicalNodeCodesRenamed": false,
+    "blueprintsRewritten": false,
+    "publicationStateChanged": false,
+    "PJAStateChanged": false,
+    "KPPStateChanged": false,
+    "CARStateChanged": false,
+    "VAPStateChanged": false
+  },
+  "acceptance": {
+    "book1CompletedBinaryRegistered": true,
+    "book2CompletedBinaryRegistered": true,
+    "book1FiveVolumeTextReconciled": true,
+    "book2SettlementTextReconciled": true,
+    "book2SettlementVisualReconciled": true,
+    "r2PrivateObjectKeysDeclared": true,
+    "remoteR2BinaryEqualityVerifiedByAssistant": false,
+    "canonical716Preserved": true,
+    "semanticNodeReconciliationDeferred": true
+  },
+  "handoff": {
+    "nextStage": "KAU-R2",
+    "work": "Existing Canonical Node Match against the completed Book I and Book II manuscripts",
+    "allowedDecisions": [
+      "EXACT_MATCH",
+      "EXPANDED_MATCH",
+      "REMAP",
+      "SPLIT_REQUIRED",
+      "MERGE_REQUIRED",
+      "NEW_NODE_REQUIRED",
+      "DEPRECATED",
+      "SUPPORTING_ONLY"
+    ],
+    "nodesJsonMutationInR2": false
+  }
+}

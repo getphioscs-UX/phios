@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W5-ASSET-OWNERSHIP-CONTRACT-v1.0.0",
+  "work": "FDR-W5",
+  "status": "ACTIVE",
+  "authorityOwner": "FDR",
+  "ownershipModes": [
+    "SOLE",
+    "JOINT",
+    "JOINT_EITHER",
+    "JOINT_BOTH",
+    "TENANCY_SHARE",
+    "COMPANY_OWNED",
+    "TRUST_OWNED",
+    "UNKNOWN"
+  ],
+  "requiredFields": [
+    "ownershipId",
+    "assetId",
+    "ownershipMode",
+    "ownerReferences",
+    "disclosureState",
+    "evidence"
+  ],
+  "optionalFields": [
+    "shareFacts",
+    "jointOperationRule",
+    "legalTitleReference",
+    "effectiveDate"
+  ],
+  "rules": {
+    "jointDoesNotMeanEqualShares": true,
+    "tenancyShareRequiresExplicitShareFactsWhenKnown": true,
+    "companyOwnedReferencesEntity": true,
+    "trustOwnedReferencesEntity": true,
+    "unknownOwnershipAllowed": true,
+    "ownershipMayBeInferred": false,
+    "ownershipDoesNotGrantConsent": true,
+    "allAtomicFinancialFactsUseFactEnvelope": true
+  },
+  "factEnvelopeReference": "financial-fact-contract-v1.json"
+}

@@ -1,0 +1,24 @@
+{
+  "contractCode": "PHI-OS-ORC-W5-RECOVERY-CONTRACT-v2",
+  "contractVersion": "2.0.0",
+  "runtimeCode": "ORC",
+  "work": "ORC-W5",
+  "status": "canonical",
+  "recoveryAnchor": "LAST_COMMITTED_CANONICAL_STATE",
+  "recoveryInputs": [
+    "committedState",
+    "auditTimeline",
+    "idempotencyLedger",
+    "governedServiceProfile"
+  ],
+  "forbidden": [
+    "guess latest state",
+    "infer missing domain decision",
+    "replay already committed external side effect"
+  ],
+  "rules": {
+    "recoveryFromLastCommittedOnly": true,
+    "uncommittedAttemptMayBeDiscarded": true,
+    "domainStateRepairDelegatedToAuthority": true
+  }
+}

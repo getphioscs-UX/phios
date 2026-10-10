@@ -1,0 +1,59 @@
+{
+  "contractCode": "PHI-OS-VAP-W4-NODE-PRODUCTION-ELIGIBILITY-v1",
+  "contractVersion": "1.0.0",
+  "work": "VAP-W4",
+  "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION",
+  "status": "active",
+  "implementationBaselineCommit": "cdcb11be3e2db494fa1c40c7814604e2de31f34e",
+  "purpose": "Fail closed before Article production by proving Canonical Node identity, frozen C2 thesis and boundary, passed C3 readiness, Human Production Decision, frozen KPP plan and wave, valid execution authority, dispatch authorization, eligible ARTICLE or MULTI_ASSET role, and explicit locale availability.",
+  "articleEligibilityRequirements": [
+    "CANONICAL_NODE_EXISTS",
+    "CANONICAL_THESIS_FROZEN",
+    "ARTICLE_BOUNDARY_FROZEN",
+    "PRODUCTION_READINESS_PASSED",
+    "HUMAN_PRODUCTION_DECISION_APPROVED",
+    "PRODUCTION_PLAN_FROZEN",
+    "PRODUCTION_WAVE_FROZEN",
+    "EXECUTION_AUTHORITY_VALID",
+    "DISPATCH_ALLOWED_TRUE",
+    "KPP_ROLE_ARTICLE_OR_MULTI_ASSET",
+    "LOCALE_SUPPORTED"
+  ],
+  "authorityGateSequence": [
+    "C2_FROZEN",
+    "C3_PRODUCTION_READY",
+    "HUMAN_PRODUCTION_DECISION",
+    "PRODUCTION_PLAN_FROZEN",
+    "PRODUCTION_WAVE_FROZEN",
+    "EXECUTION_AUTHORITY_VALID",
+    "DISPATCH_ALLOWED_TRUE"
+  ],
+  "eligibleProductionRoles": [
+    "ARTICLE",
+    "MULTI_ASSET"
+  ],
+  "preservedFailureCodes": [
+    "CANONICAL_NODE_NOT_FOUND",
+    "C2_THESIS_BOUNDARY_NOT_FROZEN",
+    "PRODUCTION_READINESS_NOT_PASSED",
+    "HUMAN_PRODUCTION_DECISION_NOT_APPROVED",
+    "PRODUCTION_PLAN_NOT_FROZEN",
+    "PRODUCTION_WAVE_NOT_FROZEN",
+    "EXECUTION_AUTHORITY_INVALID",
+    "DISPATCH_NOT_ALLOWED",
+    "KPP_ROLE_NOT_ARTICLE_OR_MULTI_ASSET",
+    "LOCALE_NOT_SUPPORTED"
+  ],
+  "boundary": {
+    "fragmentAndFigureMayRemainAuthorizedWaveOutputs": true,
+    "fragmentAndFigureAreNotArticleProductionRoles": true,
+    "eligibilityDoesNotOverrideVapW3ExecutionMode": true,
+    "eligibilityDoesNotResolveVapW3AdapterRequirements": true,
+    "eligibilityDoesNotCreateBrief": true,
+    "eligibilityDoesNotCreateCandidate": true,
+    "eligibilityDoesNotInvokeProvider": true,
+    "eligibilityDoesNotPublish": true
+  },
+  "output": "content/production/visual-article/eligibility/visual-article-production-eligibility-v1.json",
+  "nextWork": "VAP-W5_PJA_PRODUCTION_BRIEF_EXPORT_ACCEPTANCE"
+}

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-P3-CURRENT-RECONCILIATION-v1.0.0",
+  "baselineCommit": "489eb817fde8bc34f2faefe395eca128ef997220",
+  "currentPvpState": "W0_W5_FOUNDATION_RECONCILED_W6_PLUS_NOT_AUTHORIZED_BY_THIS_CLOSEOUT",
+  "w0": "ACCEPTED",
+  "w1": "ACCEPTED",
+  "w2": "ACCEPTED",
+  "w3": "ACCEPTED",
+  "w4": "ACCEPTED",
+  "w5": "ACCEPTED",
+  "currentAuthorities": {
+    "pvpRegistry": "content/product-visual-platform-r1/foundation/visual-registry-census-v1.json",
+    "profileSuccessor": "content/product-visual-platform-r1/profile/profile-authority-gap-closure-successor-v1.json",
+    "visualRegistry": "content/web-production/registries/client-visual-asset-registry-v1.7.json",
+    "assetRegistry": "content/registry/public-assets.json",
+    "logoRegistry": "content/web-production/registries/phios-logo-registry-v1.json",
+    "packageManifest": "package.json"
+  },
+  "parallelSuccessors": [
+    {"range":"PVP-R1-VIS-W6-W9","state":"PRESENT_FROM_PREVIOUS_PARALLEL_EXECUTION","authorityInThisCloseout":"NONE","cutoverAuthorized":false},
+    {"range":"PVP-R1-VIS-W10-W11","state":"PRESENT_FROM_PREVIOUS_PARALLEL_EXECUTION","authorityInThisCloseout":"NONE","cutoverAuthorized":false},
+    {"range":"7V_ARCHITECTURE_SUCCESSOR","state":"ACTIVE_CURRENT_MAIN_INPUT","authorityInThisCloseout":"READ_ONLY_RECONCILED","cutoverAuthorized":true}
+  ],
+  "conflicts": [],
+  "foundationBoundary": {
+    "profileProductCutover": false,
+    "ecrR2Cutover": false,
+    "ziWeiCutover": false,
+    "baZiVisualProduction": false,
+    "astrologyVisualProduction": false,
+    "numerologyVisualProduction": false,
+    "relationshipVisualProduction": false,
+    "paidVisualEntitlementActivation": false,
+    "productionConversionActivation": false
+  },
+  "safeToFreezeFoundation": true,
+  "nextGate": "PAI-R1-W0"
+}

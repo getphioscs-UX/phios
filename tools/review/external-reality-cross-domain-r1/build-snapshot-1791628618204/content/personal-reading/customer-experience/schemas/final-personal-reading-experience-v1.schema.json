@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-FINAL-PERSONAL-READING-EXPERIENCE-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion","locale","sections","overview","crossGroups","technicalDrawer","surfaces","precisionBoundary","customerLanguage","myRealityHandoff","boundaries","governance","semanticDigest"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-FINAL-PERSONAL-READING-EXPERIENCE-v1.0.0"},
+    "locale": {"enum": ["en","zh-Hans"]},
+    "sections": {"type":"array","items":{"$ref":"#/$defs/section"},"minItems":10,"maxItems":20},
+    "overview": {"type":"object"},
+    "crossGroups": {"type":"array","items":{"type":"string"},"minItems":7,"uniqueItems":true},
+    "technicalDrawer": {"type":"object","required":["collapsedByDefault","fields"]},
+    "surfaces": {"type":"object","required":["free","paid","oneProductOneSemanticIr"]},
+    "precisionBoundary": {"type":["object","null"]},
+    "customerLanguage": {"type":"object"},
+    "myRealityHandoff": {"type":"object"},
+    "boundaries": {"type":"object"},
+    "governance": {"type":"object"},
+    "semanticDigest": {"type":"string","pattern":"^[a-f0-9]{64}$"}
+  },
+  "$defs": {
+    "section": {"type":"object","additionalProperties":false,"required":["sectionId","label","visible","sourceRef"],"properties":{"sectionId":{"type":"string"},"label":{"type":"string"},"visible":{"type":"boolean"},"sourceRef":{"type":["string","null"]}}}
+  }
+}

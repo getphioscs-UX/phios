@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict'; import crypto from 'node:crypto'; import fs from 'node:fs/promises';
+const norm=s=>s.replace(/^\uFEFF/,'').replace(/\r\n?/g,'\n'); const hash=s=>crypto.createHash('sha256').update(norm(s),'utf8').digest('hex');
+const read=async p=>fs.readFile(p,'utf8'); const readJson=async p=>JSON.parse(await read(p));
+const f=await readJson('content/professional/method-governance/imr-method-governance-freeze-v1.json');
+assert.equal(f.status,'IMR Frozen v1'); assert.equal(f.runtimeAuthority,false); assert.equal(f.freezeRules.hashRepairForbidden,true); assert.equal(f.freezeRules.semanticValidationRequired,true); assert.equal(f.freezeRules.versionedSuccessorRequired,true);
+for(const [p,d] of Object.entries(f.digests)) assert.equal(hash(await read(p)),d,`IMR_W6_FROZEN_FILE_CHANGED:${p}`);
+const w2=await readJson('content/professional/method-governance/imr-commercial-license-registry-v1.json'); assert.equal(w2.governancePolicy.commercialRightsCreateProductionEligibility,false);
+const w3=await readJson('content/professional/method-governance/imr-algorithm-governance-registry-v1.json'); assert.equal(w3.governancePolicy.algorithmRegistrationCreatesExecutionAuthority,false);
+const w4=await readJson('content/professional/method-governance/imr-production-eligibility-registry-v1.json'); assert.equal(w4.eligibilityPolicy.allGatesRequired,true); assert.equal(w4.methods.some(x=>x.productionReady),false);
+const w5=await readJson('content/professional/method-governance/imr-version-management-registry-v1.json'); assert.equal(w5.versionPolicy.inPlaceBreakingMutationAllowed,false);
+const num=await readJson('content/professional/method-governance/numerology-method-proposal-v1.json'); assert.equal(num.proposalStatus,'proposal_only'); assert.equal(num.activationPolicy.productionUseAllowed,false);
+console.log('✓ IMR-W6 Method Governance Freeze passed.'); console.log(`  Status: ${f.status}`); console.log(`  Frozen files: ${Object.keys(f.digests).length}`); console.log('  Governance may change only through a versioned successor.');

@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const status=read('content/civilization-atlas/reconfiguration/dossier-us-golden-closure-status-v1.json');
+const f=read('content/civilization-atlas/reconfiguration/dossier-us-w8f-human-decisions-v1.json');
+const g=read('content/civilization-atlas/reconfiguration/dossier-us-w8g-rp-candidates-v1.json');
+const h=read('content/civilization-atlas/reconfiguration/dossier-us-w8h-human-decisions-v1.json');
+const i=read('content/civilization-atlas/reconfiguration/dossier-us-w8i-accepted-current-dossier-v1.json');
+
+assert.equal(status.status,'GOLDEN_DOSSIER_CLOSED');
+for(const stage of ['W8-A','W8-B','W8-C','W8-D','W8-E','W8-F','W8-G','W8-H','W8-I']) assert.equal(status.states[stage],'COMPLETE');
+assert.equal(status.boundaries.otherDossiersMayStartGoldenExpansion,true);
+assert.equal(f.records.filter(x=>x.decision==='ACCEPT').length,2);
+assert.equal(g.records.length,2);
+assert.equal(h.records.filter(x=>x.decision==='ACCEPT').length,2);
+assert.equal(i.status,'ACCEPTED_CURRENT_DOSSIER');
+assert.equal(i.admittedPositions.length,2);
+assert.deepEqual(new Set(i.admittedPositions.map(x=>x.runtimePositionId)),new Set(['RP-22','RP-23']));
+assert.equal(i.projectionBoundary.subsystemPositionsDoNotImplySingleWholeDossierPosition,true);
+assert.equal(i.projectionBoundary.prediction,false);
+assert.equal(i.projectionBoundary.historicalPositionShortcut,false);
+console.log('PASS DOSSIER-US golden dossier closure: W8-A through W8-I complete, 2 human-accepted subsystem positions admitted, no whole-dossier collapse, prediction, or historical shortcut.');

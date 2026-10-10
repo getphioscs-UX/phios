@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const r=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const s=r('content/civilization-atlas/reconfiguration/dossier-af-golden-closure-status-v1.json');
+const e=r('content/civilization-atlas/reconfiguration/dossier-af-w8e-semantic-basis-v1.json');
+const h=r('content/civilization-atlas/reconfiguration/dossier-af-w8h-human-decisions-v1.json');
+const i=r('content/civilization-atlas/reconfiguration/dossier-af-w8i-accepted-current-dossier-v1.json');
+const receipt=r('content/civilization-atlas/reconfiguration/dossier-af-w8i-golden-closure-receipt-v1.json');
+assert.equal(s.status,'GOLDEN_DOSSIER_CLOSED');
+for(const stage of ['W8-A','W8-B','W8-C','W8-D','W8-E','W8-F','W8-G','W8-H','W8-I']) assert.equal(s.states[stage],'COMPLETE');
+assert.equal(h.records.filter(x=>x.decision==='ACCEPT').length,3);
+assert.equal(i.admittedPositions.length,3);
+assert.deepEqual(new Set(i.admittedPositions.map(x=>x.runtimePositionId)),new Set(['RP-18','RP-22','RP-23']));
+assert.equal(e.records.find(x=>x.semanticBasisId==='AF-W8E-SEM-CONTINENTAL-INTEGRATION-RECONFIGURATION').supportState,'REFERENCE_ONLY');
+assert.equal(i.projectionBoundary.continentalIntegrationReconfigurationNotAdmitted,true);
+assert.equal(receipt.invariants.continentalIntegrationReconfigurationPromoted,false);
+assert.equal(receipt.invariants.providerCalls,0);
+console.log('PASS DOSSIER-AF golden dossier closure: W8-A through W8-I complete; 3 Africa-evidence-lineaged subsystem positions admitted; Continental integration reconfiguration remains REFERENCE_ONLY. prior dossier authority not reused; providerCalls=0.');

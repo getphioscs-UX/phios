@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-WPR-W1F-PUBLIC-SURFACE-DATA-EXPORT-REPAIR-v1.0.0",
+  "work": "WPR-W1F-RECONCILIATION",
+  "baselineCommit": "09d6ee76315cf7a8d6ab7e373d86fff816866845",
+  "status": "SUCCESSOR_EXPORT_REPAIR_NO_AUTHORITY_CHANGE",
+  "problem": {
+    "consumer": "assets/js/knowledge/published-content.js",
+    "module": "assets/js/web-production/public-surface-data.js",
+    "missingExports": [
+      "loadFiveVolumePublicationContextRegistry",
+      "resolvePublicationContextForNode",
+      "resolveFigurePublicationContext",
+      "readingPathVolumeTransition"
+    ],
+    "observedFailure": "SyntaxError: module does not provide export named loadFiveVolumePublicationContextRegistry"
+  },
+  "repair": {
+    "restoresFiveVolumePublicationContextConsumption": true,
+    "preservesFiveVolumeRoutes": true,
+    "preservesCompatibilityRedirect": true,
+    "nodeBPrefixBookInferenceAllowed": false,
+    "publicationOwnershipRemainsAuthoritative": true,
+    "changesCanonicalBookOwnership": false,
+    "changesKnowledgeAuthority": false
+  }
+}

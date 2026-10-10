@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/semantic-profile.schema.json",
+  "title": "PHI OS Canonical Semantic Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "nodeCode",
+    "canonicalQuestion",
+    "mechanism",
+    "mechanismScope",
+    "boundary",
+    "carrierScope",
+    "runtimeLayer",
+    "inputs",
+    "outputs",
+    "conditions",
+    "dependencies",
+    "contradictions",
+    "distinctions",
+    "searchConcepts",
+    "searchAliases",
+    "evidenceTypes",
+    "notThisNodeWhen",
+    "lifecycle",
+    "profileVersion",
+    "status",
+    "humanReviewed"
+  ],
+  "properties": {
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-[A-Z0-9-]+$"
+    },
+    "canonicalQuestion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mechanism": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mechanismScope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "boundary": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "carrierScope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "runtimeLayer": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "contradictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "distinctions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "searchConcepts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "searchAliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "evidenceTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "notThisNodeWhen": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "createdFrom",
+        "reviewState"
+      ],
+      "properties": {
+        "createdFrom": {
+          "const": "canonical-node-registry"
+        },
+        "reviewState": {
+          "enum": [
+            "candidate",
+            "human_review_required",
+            "approved",
+            "deprecated"
+          ]
+        }
+      }
+    },
+    "profileVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "status": {
+      "enum": [
+        "candidate",
+        "human_review_required",
+        "approved",
+        "deprecated"
+      ]
+    },
+    "humanReviewed": {
+      "type": "boolean"
+    }
+  }
+}

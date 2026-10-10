@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-MOOMOO-PROVIDER-W8C-ADMISSION-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "EXECUTABLE_MARKET_DATA_PROVIDER_ADMISSION",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8C-P2",
+  "providerId": "MOOMOO_OPENAPI",
+  "authorityClass": "MARKET_DATA_PROVIDER",
+  "domain": "FINANCIAL_MARKETS",
+  "predecessorClaims": "content/civilization-atlas/reconfiguration/moomoo-provider-cwa-ready-claims-v1.json",
+  "providerRegistry": "content/civilization-atlas/reconfiguration/market-data-provider-registry-v1.json",
+  "providerSourceHandoff": "content/civilization-atlas/reconfiguration/market-provider-w8a-source-handoff-v1.json",
+  "canonicalCwaRuntime": "functions/current-web-authority/current-web-authority-runtime.js",
+  "canonicalW8cLib": "scripts/lib/civilization-atlas/runtime-position-w8c-cwa-admission-v1.mjs",
+  "purpose": "Apply explicit MARKET_DATA_PROVIDER / FINANCIAL_MARKETS authority decisions to real Moomoo provider claims and admit them through the canonical Current Web Authority runtime without promoting W8E.",
+  "rules": [
+    "Every claim sourceId must resolve to the governed provider-source handoff.",
+    "The provider source must be Moomoo OpenAPI and carry MARKET_DATA_PROVIDER authority class.",
+    "The registered provider must explicitly map to FINANCIAL_MARKETS.",
+    "Authority decisions are generated as explicit policy decisions only after source/provider identity checks pass.",
+    "GENERAL_CURRENT_FACT freshness is evaluated by the canonical CWA runtime at execution time.",
+    "Only DIRECT, admitted, non-conflicted selected provider evidence enters the provider RRE-eligible handoff.",
+    "Provider evidence is kept separate from the original W8C official/regulator batch until a later governed merge stage.",
+    "No provider admission may modify W8E semantic-basis supportState."
+  ],
+  "boundaries": {
+    "authorityHintIsDecision": false,
+    "providerIdentityVerificationRequired": true,
+    "officialBatchMutationAllowed": false,
+    "rreExecuted": false,
+    "w8ePromotion": false,
+    "runtimePositionCandidate": false
+  }
+}

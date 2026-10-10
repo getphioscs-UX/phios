@@ -1,0 +1,31 @@
+{
+  "auditCode": "PHI-OS-RDG-W27-W28-DATA-DRIFT-RECONCILIATION-v1",
+  "auditVersion": "1.0.0",
+  "work": "RDG-W27-W28",
+  "status": "reconciled",
+  "baselineCommit": "ab07f77f1e389b7a99499b8f242751cc64ecc1ad",
+  "dataDriftFindings": {
+    "purposeDrift": "CONTROLLED",
+    "consentDrift": "CONTROLLED",
+    "retentionDrift": "CONTROLLED",
+    "sensitivityDrift": "CONTROLLED",
+    "evidenceDrift": "CONTROLLED",
+    "authorityDrift": "CONTROLLED",
+    "professionalBoundaryDrift": "CONTROLLED",
+    "inferenceDrift": "CONTROLLED",
+    "analyticsDrift": "CONTROLLED",
+    "deletionDrift": "CONTROLLED"
+  },
+  "checkerIntegrationFinding": {
+    "baselinePostcheckGovernanceIntegrationPresent": false,
+    "cause": "A later package integration change replaced the governance-prefixed postcheck chain while RDG-W21-W25 files remained present.",
+    "resolution": "REPAIRED_IN_RDG_W28",
+    "restoredEntry": "npm run check:governance-data-closure",
+    "rdgStableWorkCodeRoutingAdded": true
+  },
+  "rulesVerified": {
+    "journeyDataSilentlyReusedForMarketing": false,
+    "registryOrCheckerMayRepairDataAutomatically": false,
+    "existingRuntimeDataMutated": false
+  }
+}

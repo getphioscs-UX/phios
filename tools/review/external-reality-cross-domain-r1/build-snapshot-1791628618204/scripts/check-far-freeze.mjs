@@ -1,0 +1,6 @@
+import assert from 'node:assert/strict'; import fs from 'node:fs'; import {readJson,sha256File} from './lib/far/far-check-lib.mjs';
+const acceptance=readJson('content/financial/analysis-runtime/acceptance/far-w0-w22-acceptance-v1.json'); for(const [k,v] of Object.entries(acceptance.gates)) assert.equal(v,true,`FAR acceptance gate failed: ${k}`);
+const freeze=readJson('content/financial/analysis-runtime/authority/far-w0-w22-freeze-manifest-v1.json'); assert.equal(freeze.baselineCommit,'f010b29'); assert.equal(freeze.status,'FROZEN_V1'); assert.equal(freeze.phase,'FAR');
+for(const item of freeze.artifacts){ assert.ok(fs.existsSync(item.path),`Missing frozen FAR artifact: ${item.path}`); assert.equal(sha256File(item.path),item.sha256,`Frozen FAR drift: ${item.path}`); }
+const pkg=readJson('package.json'); assert.ok(pkg.scripts['check:far']); for(const n of ['check-far-authority.mjs','check-far-contracts.mjs','check-far-runtime.mjs','check-far-provenance.mjs','check-far-confidence.mjs','check-far-anti-advice.mjs','check-far-fixtures.mjs','check-far-fcr-boundary.mjs','check-far-freeze.mjs']) assert.match(pkg.scripts['check:far'],new RegExp(n.replaceAll('.','\\.')));
+console.log('✓ FAR-W22 acceptance + freeze passed.'); console.log(`  ${freeze.artifacts.length} FAR v1 artifacts are digest-frozen; final gate is check:far.`);

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/rmo/canonical-reality-evidence-binding-v1.schema.json",
+  "title": "PHI OS Canonical Reality Evidence Binding v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "bindingCode", "bindingVersion", "componentType", "bindingRole",
+    "realityReference", "componentReferences", "evidenceReference", "dataNatureSnapshot",
+    "certaintySnapshot", "evidenceStateSnapshot", "eligibilityDecisionSnapshot", "purposeCodes",
+    "sensitivityClass", "sourceReferences", "bindingState", "evidencePayloadStored",
+    "evidencePromotionPerformed", "truthClaimed", "interpretationCreated", "inferenceCreated",
+    "professionalJudgmentCreated", "authorityReference", "operationalMode",
+    "persistentStoreWriteAllowed", "createdAt", "evidenceBindingDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CANONICAL-REALITY-EVIDENCE-BINDING-v1.0.0"},
+    "bindingCode": {"type": "string", "pattern": "^RMO-EVIDENCE-BINDING-[A-Z0-9-]{4,100}$"},
+    "bindingVersion": {"$ref": "#/$defs/semver"},
+    "componentType": {"const": "REALITY_EVIDENCE_BINDING"},
+    "bindingRole": {"enum": ["SUPPORTS", "CONTRADICTS", "QUALIFIES", "CONTEXTUALIZES"]},
+    "realityReference": {"$ref": "#/$defs/realityReference"},
+    "componentReferences": {"$ref": "#/$defs/referenceArray"},
+    "evidenceReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidenceCode", "evidenceVersion", "evidenceDigest", "producingRuntime", "dataType"],
+      "properties": {
+        "evidenceCode": {"type": "string", "pattern": "^RRE-EVIDENCE-[A-Z0-9-]{4,100}$"},
+        "evidenceVersion": {"$ref": "#/$defs/semver"},
+        "evidenceDigest": {"$ref": "#/$defs/digest"},
+        "producingRuntime": {"const": "RRE"},
+        "dataType": {"const": "REALITY_EVIDENCE_RECORD"}
+      }
+    },
+    "dataNatureSnapshot": {"type": "string", "minLength": 1},
+    "certaintySnapshot": {"type": "string", "minLength": 1},
+    "evidenceStateSnapshot": {"const": "ACCEPTED_EVIDENCE"},
+    "eligibilityDecisionSnapshot": {"const": "ELIGIBLE"},
+    "purposeCodes": {"$ref": "#/$defs/referenceArray"},
+    "sensitivityClass": {"type": "string", "minLength": 1},
+    "sourceReferences": {"$ref": "#/$defs/referenceArray"},
+    "bindingState": {"const": "BOUND"},
+    "evidencePayloadStored": {"const": false},
+    "evidencePromotionPerformed": {"const": false},
+    "truthClaimed": {"const": false},
+    "interpretationCreated": {"const": false},
+    "inferenceCreated": {"const": false},
+    "professionalJudgmentCreated": {"const": false},
+    "authorityReference": {"const": "content/runtime/reality-model-runtime/contracts/evidence-binding-runtime-contract-v1.json"},
+    "operationalMode": {"const": "VALIDATION_ONLY"},
+    "persistentStoreWriteAllowed": {"const": false},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "evidenceBindingDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "semver": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "referenceArray": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 200}},
+    "realityReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["realityCode", "realityVersion", "realityDigest"],
+      "properties": {
+        "realityCode": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+        "realityVersion": {"$ref": "#/$defs/semver"},
+        "realityDigest": {"$ref": "#/$defs/digest"}
+      }
+    }
+  }
+}

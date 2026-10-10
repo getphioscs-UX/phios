@@ -1,0 +1,134 @@
+import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
+export const EXPLANATORY_AUTHORITY_VERSION='BAZI_EXPLANATORY_AUTHORITY_V2';
+export const RELATION_TYPES=Object.freeze(['EMPHASIS','LIFE_DOMAIN_EXPLANATION','OPERATING_CONDITION','ASSOCIATION','CO_OCCURRING_DIMENSIONS','CONTEXT_MODIFIER','SUPPORT_CONDITION','TENSION','CONTRAST','OPEN_CONDITION','COUNTER_SIGNAL','TEMPORAL_RELEVANCE','CROSS_SECTION_RELEVANCE','BOUNDARY']);
+export const PROHIBITED_OPERATORS=Object.freeze(['CAUSE','SEQUENCE','BEHAVIORAL_EFFECT','EVENT_INFERENCE','REALITY_ASSERTION']);
+export const BLOCK_KINDS=Object.freeze(['CUSTOMER_CLAIM','OBSERVATION_PROMPT','COUNTER_PROMPT','BOUNDARY','TECHNICAL_NOTE']);
+export const COMPOSER_OPERATORS=Object.freeze(['PARAPHRASE','PLAIN_LANGUAGE_ABSTRACTION','RANK_PRESERVING_SUMMARY','CONDITIONAL_REFRAME','CONTRAST','QUESTION_GENERATION']);
+export const DEFECT_CODES=Object.freeze(['UNLICENSED_CAUSAL','UNLICENSED_SEQUENCE','UNLICENSED_MANIFESTATION','COUNTERSIGNAL_EXPANSION','QUESTION_TO_FACT_PROMOTION','PAIRWISE_RELATION_COLLAPSE','RANK_FLATTENING','RANK_INVERSION','TECHNICAL_LANGUAGE_LEAK','REALITY_INFERENCE','UNLICENSED_CLAIM','CONDITION_OMISSION','TEMPORAL_CONFLICT']);
+const GROUP={PEER:['peer relationships and self-position','同类关系与自我位置'],OUTPUT:['expression and output','表达与输出'],WEALTH:['resources and exchange','资源与交换'],OFFICER:['rules, responsibility and pressure','规则、责任与压力'],RESOURCE:['learning, support and absorption','学习、支持与吸收']};
+const POSITION={YEAR:['outer context','外部背景'],MONTH:['environment','环境'],DAY:['self-position','自我位置'],HOUR:['expression','表达']};
+const TOPICS={S02_PERSONALITY:'CAPABILITY',S03_LIFE_STRUCTURE:'LIFE_OPERATION',S04_CAREER:'CAREER',S05_WEALTH:'WEALTH',S06_RELATIONSHIP:'RELATIONSHIPS',S07_HEALTH:'PRESSURE',S08_TIMING:'TIMING',S09_GUIDANCE:'GUIDANCE'};
+const MODULES=['tenGods','dayMasterStrength','relationships','pattern','wholeChartPriority','professionalTopics','professionalTimeline','customerNarrative'];
+const arr=x=>Array.isArray(x)?x:[];
+const pathGet=(root,path)=>path.split('/').reduce((v,k)=>v?.[k],root);
+
+// Projection of admitted professional reading only. No birth calculation,
+// reassignment of ranks, new pattern verdict or causal rule is performed here.
+export async function buildBaZiNarrativeClaimIR({reading,sectionKey,locale,temporalSnapshot}){
+ const p=reading?.professionalModules;if(!p||!TOPICS[sectionKey])throw Error('EXPLANATORY_AUTHORITY_INPUT_REQUIRED');
+ const zh=locale==='zh-Hans',lang=zh?'zhHans':'en',say=(en,cn)=>zh?cn:en,group=code=>GROUP[code]?.[zh?1:0];
+ const topicCode=TOPICS[sectionKey],topicIndex=arr(p.professionalTopics?.topics).findIndex(t=>t.topicCode===topicCode),topic=p.professionalTopics?.topics?.[topicIndex];
+ const narrativeIndex=arr(p.customerNarrative?.topicNarratives).findIndex(t=>t.topicCode===topicCode),narrative=p.customerNarrative?.topicNarratives?.[narrativeIndex];
+ const claims=[];
+ function add(key,relationType,subject,objects,text,sourceRefs,options={}){
+  if(!RELATION_TYPES.includes(relationType)||!sourceRefs.length||sourceRefs.some(ref=>!MODULES.some(m=>ref.startsWith(`professionalModules/${m}/`))||pathGet(reading,ref)===undefined))return null;
+  const claim={id:`${sectionKey}:${key}`,sectionKey,domain:topicCode,subject,relationType,objects,rank:null,modality:'SYMBOLIC_CONDITIONAL',sourceRefs,allowParaphrase:true,allowConditionalLanguage:true,allowCausalLanguage:false,allowSequenceLanguage:false,allowManifestation:false,allowObservedRealityClaim:false,conditions:[],openConditions:[],text,...options};
+  claims.push(claim);return claim;
+ }
+ const topicRef=`professionalModules/professionalTopics/topics/${topicIndex}`,narrativeRef=`professionalModules/customerNarrative/topicNarratives/${narrativeIndex}`;
+ if(topic&&narrative){
+  if(group(topic.leadGroup?.groupCode)){const primaryText=sectionKey==='S02_PERSONALITY'?say(`${group(topic.leadGroup.groupCode)} is the first lens for capability, but it is a reading priority rather than a measured personality trait.`,`「${group(topic.leadGroup.groupCode)}」是能力主题的第一阅读视角，但它代表阅读优先级，不是测得的人格特质。`):say(`Within this topic, ${group(topic.leadGroup.groupCode)} receives the first emphasis. This is a reading priority, not a measured trait.`,`在这个主题中，${group(topic.leadGroup.groupCode)}是首先关注的内容。这表示解读重点，不是测得的人格特质。`);add('PRIMARY','EMPHASIS',topicCode,[topic.leadGroup.groupCode],primaryText,[`${topicRef}/leadGroup`,`${narrativeRef}/development`],{rank:1});}
+  const secondary=arr(topic.relevantGroups).filter(g=>g.groupCode!==topic.leadGroup?.groupCode&&group(g.groupCode));
+  if(secondary.length)add('SECONDARY','ASSOCIATION',topicCode,secondary.map(g=>g.groupCode),say(`Other associated themes are ${secondary.map(g=>group(g.groupCode)).join('; ')}. They do not replace the topic's first emphasis.`,`同时相关的主题包括${secondary.map(g=>group(g.groupCode)).join('、')}，它们不取代本章的首要重点。`),[`${topicRef}/relevantGroups`,`${topicRef}/leadGroup`]);
+  if(narrative.development?.[lang]){
+   const secondaryLabels=secondary.map(g=>group(g.groupCode)).filter(Boolean),primary=group(topic.leadGroup?.groupCode),others=secondaryLabels.join(zh?'、':', ')||say('the other functional themes','其他功能主题');
+   const domainText=({
+    S02_PERSONALITY:say(`Capability is not read here as a single trait. ${primary} is the first emphasis, while ${others} remain part of the same picture. The method therefore keeps absorption, practice, expression and repeated carrying in view together, while the recorded relations among self-position, environment and expression keep capability context-sensitive rather than reducing it to one personality label.`,`能力在这里不是单一特质。「${primary}」是第一重点，同时${others}仍属于同一幅结构图。方法因此把吸收、练习、表达与反复承载放在一起阅读；自我位置、环境与表达之间已经记录的关系，也要求能力保持情境性，而不是被压成一句固定人格标签。`),
+    S03_LIFE_STRUCTURE:say(`Life structure is organized around how ${primary} works together with ${others}. The reading keeps carrying conditions, pattern candidates and recorded pillar relationships in the same frame, because none of those layers is complete on its own. The useful question is how support, demand and direction are organized across the chart while unresolved conditions remain visibly unresolved.`,`人生格局以「${primary}」如何与${others}共同运作为主线。读取会把承载条件、格局候选与已经记录的柱位关系放在同一框架中，因为任何一层单独拿出来都不足以代表整盘。真正要理解的是支持、负荷与方向如何被组织，同时让尚未成立的条件继续保持开放。`),
+    S04_CAREER:say(`Career is read through the interaction between ${primary} and ${others}. This places responsibility, output, resource access and learning support inside one working system. Recorded pillar relationships and carrying conditions then modify how that system can be organized, so the reading focuses on workable role conditions rather than assigning one profession from a single symbol.`,`事业主题以「${primary}」与${others}之间的互动为主线，把责任、产出、资源取得与学习支持放进同一套工作系统。已经记录的柱位关系与承载条件会进一步修正这套系统怎样运作，因此本章关注的是可持续的角色条件，而不是从一个符号直接指定职业。`),
+    S05_WEALTH:say(`Wealth is read as a resource system in which ${primary} works together with ${others}. The chart therefore distinguishes resource entry, exchange, competing demands and the conditions needed to retain or redirect resources. Structural relationships may change how these functions meet, but they do not turn symbolic wealth language into a guaranteed financial outcome.`,`财富主题把「${primary}」与${others}放进同一套资源系统中阅读，因此会区分资源进入、交换、分流，以及保留或重新调动资源所需的条件。结构关系可以改变这些功能如何相遇，但不会把象征性的财富语言直接变成保证的财务结果。`),
+    S06_RELATIONSHIP:say(`Relationships are read through how ${primary} meets ${others} across the chart's recorded relational positions. This keeps self-position, expectations, exchange, support and responsibility connected without reducing another person to a symbol. The same underlying structure may be negotiated differently in different relationships because the other participant and the setting remain independent parts of reality.`,`关系主题读取「${primary}」如何在已记录的关系位置中与${others}相遇，把自我位置、期待、交换、支持与责任放在一起理解，而不把另一个人压缩成命盘符号。同一套底层结构在不同关系中仍可能被不同方式协商，因为对方与现实环境始终是独立变量。`),
+    S07_HEALTH:say(`Wellbeing is read non-clinically through how ${primary} sits beside ${others} and the chart's carrying conditions. This creates a view of demand, support and daily rhythm rather than a diagnosis. Structural pressure can be meaningful for observing load and recovery, while medical conclusions remain outside the authority of the chart.`,`身心状态以非临床方式读取「${primary}」如何与${others}及承载条件并存，由此观察负荷、支持与日常节奏，而不是形成诊断。结构压力可以帮助理解负荷与恢复，但任何医学结论都不属于命盘的判断权限。`)
+   })[sectionKey]||narrative.development[lang];
+   add('DOMAIN_EXPLANATION','LIFE_DOMAIN_EXPLANATION',topicCode,[topicCode],domainText,[`${narrativeRef}/development`,`${topicRef}/leadGroup`,`${topicRef}/relevantTenGods`,`${topicRef}/relationshipInterfaces`,`${topicRef}/carryingContext`,`${topicRef}/priorityRefs`],{conditions:['METHOD_OWNED_MULTI_FACTOR_EXPLANATION','NOT_OBSERVED_REALITY'],explanationScope:'LIFE_DOMAIN'});
+  }
+  add('DIMENSIONS','CO_OCCURRING_DIMENSIONS',topicCode,[topicCode],narrative.lead[lang],[`${narrativeRef}/lead`],{conditions:['DIMENSIONS_ARE_SIMULTANEOUS_NOT_A_SEQUENCE']});
+  // S02's accepted evidence is frozen. Successor sections retain every
+  // section-owned relation, including contradictory pairs, without a top-N cap.
+  for(const rel of arr(topic.relationshipInterfaces)){
+   const i=topic.relationshipInterfaces.indexOf(rel),positions=arr(rel.positions);
+   if((positions.length===2||sectionKey!=='S02_PERSONALITY'&&positions.length>2)&&positions.every(x=>POSITION[x])){
+    const family={LINK:['symbolic linkage','象征性联结'],TENSION:['structural tension','结构张力'],REPEAT_TENSION:['repeated structural tension','重复的结构张力']}[rel.relationFamily];
+    const text=say(`The relation among ${positions.map(x=>POSITION[x][0]).join(', ')} is ${family?.[0]||'a recorded structural relation'}. It modifies how the method reads this topic together with the other chart factors, without establishing an observed behavior.`,`${positions.map(x=>POSITION[x][1]).join('、')}之间呈现${family?.[1]||'已记录的结构关系'}。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。`);
+    add(`PAIR_${rel.relationId}`,'CONTEXT_MODIFIER',positions[0],positions.slice(1),text,[`${topicRef}/relationshipInterfaces/${i}`],{conditions:['KEEP_THIS_PAIR_DISTINCT','NO_BEHAVIORAL_EFFECT'],relationQualifier:rel.relationFamily});
+   }
+  }
+  const carry=topic.carryingContext;
+  if(carry?.supportVisible>0)add('SUPPORT','SUPPORT_CONDITION',topicCode,['STRUCTURAL_SUPPORT'],say('The method records support within the structure. This does not establish how much practical help is available.','方法在结构中记录到支持，但这不能证明现实中有多少帮助可用。'),[`${topicRef}/carryingContext`, 'professionalModules/dayMasterStrength/supportBalance']);
+  if(carry?.pressureVisible>0||carry?.outwardVisible>0)add('TENSION','TENSION',topicCode,['SUPPORT','EXPRESSION','EXTERNAL_DEMAND'],sectionKey==='S02_PERSONALITY'?say('Support, expression and external demands are simultaneous constraints in this capability reading. None of them alone establishes how capability is experienced; the useful interpretation is whether the combination remains sustainable under the available carrying conditions.','支持、表达与外部要求是能力主题里同时存在的条件。任何一项都不能单独证明现实中的能力表现；更有用的读取，是观察这些因素在现有承载条件下能否一起维持。'):say('Support, expression and external demands must be considered together in this reading; the chart does not establish how they are experienced.','这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。'),[`${topicRef}/carryingContext`,`${narrativeRef}/condition`],{conditions:['NO_OBSERVED_PRESSURE_ASSERTION']});
+  if(narrative.condition?.[lang]){const operatingText=sectionKey==='S02_PERSONALITY'?say('Reliability remains conditional on how available support, outward effort and pressure can be carried together over time. Carrying conditions therefore remain separate from a fixed strong-or-weak identity.','能力是否稳定，仍取决于可用支持、向外表达所需的投入与压力能否在时间中一起被承载。因此，承载条件必须与固定的强弱身份分开。'):narrative.condition[lang];add('OPERATING_CONDITION','OPERATING_CONDITION',topicCode,[topicCode],operatingText,[`${narrativeRef}/condition`,`${topicRef}/carryingContext`],{conditions:['METHOD_OWNED_OPERATING_CONDITION','NOT_OBSERVED_REALITY']});}
+ }
+ if(topic&&p.dayMasterStrength?.withheldVerdict?.strongWeakLabelCreated===false)add('OPEN_STRENGTH','OPEN_CONDITION','FINAL_STRENGTH',[],say('The reading leaves a final strong-or-weak judgment open; it is not a fixed identity.','解读保留最终强弱判断，不据此定义固定身份。'),['professionalModules/dayMasterStrength/withheldVerdict'],{modality:'UNRESOLVED',openConditions:['FINAL_STRENGTH_WITHHELD']});
+ if(sectionKey==='S03_LIFE_STRUCTURE'&&p.pattern?.summary?.primaryPatternEstablished===false)add('OPEN_PATTERN','OPEN_CONDITION','PRIMARY_PATTERN',[],say('A final primary pattern has not been established; visible candidates remain conditional.','最终主格局尚未成立；可见候选仍须保留条件。'),['professionalModules/pattern/summary','professionalModules/pattern/state'],{modality:'UNRESOLVED',openConditions:arr(p.pattern.qualifierCodes)});
+ const timeline=buildTemporalRelevanceIR(p);
+ if(sectionKey!=='S08_TIMING'&&topic&&p.professionalTimeline?.currentWindow?.available){
+  const ti=arr(p.professionalTimeline.currentWindow.topicTimeline).findIndex(x=>x.topicCode===topicCode),tw=p.professionalTimeline.currentWindow.topicTimeline?.[ti];
+  if(tw?.activationState){
+   const band=x=>x?.activationBand||null;
+   const matched=[...new Set([...arr(tw.daYun?.matchedGroups),...arr(tw.liuNian?.matchedGroups)])].map(group).filter(Boolean);
+   const timingText=say(
+    `In the selected timing window, this topic is active across both Da Yun and annual layers (${band(tw.daYun)} / ${band(tw.liuNian)}). The overlapping functions include ${matched.join(', ')||'the section-owned functions'}. This raises the topic's relevance for observation without predicting a specific event.`,
+    `在当前选定的时间窗口里，这个主题同时受到大运与流年层关注（${band(tw.daYun)}／${band(tw.liuNian)}）。两层共同涉及的功能包括${matched.join('、')||'本章已有功能'}。这会提高本阶段观察这个主题的相关性，但不预测具体事件。`
+   );
+   add('TIME_TOPIC','TEMPORAL_RELEVANCE',topicCode,[topicCode],timingText,[`professionalModules/professionalTimeline/currentWindow/topicTimeline/${ti}`],{conditions:['NATAL_TOPIC_REMAINS_PRIMARY_CONTEXT','ACTIVATION_IS_NOT_PREDICTION'],temporalContext:temporalSnapshot});
+  }
+ }
+ if(sectionKey==='S08_TIMING'){
+  if(timeline.available){
+   for(const [key,value] of Object.entries(timeline).filter(([key])=>key.endsWith('Relevance')||key==='natalPriorityRelations')){
+    if(!value||Array.isArray(value)&&!value.length)continue;
+    add(`TIME_${key}`,'TEMPORAL_RELEVANCE',key,[value],say(`The saved ${key==='natalPriorityRelations'?'natal priorities':key==='daYunRelevance'?'Da Yun layer':key==='annualRelevance'?'annual layer':key==='topicTemporalRelevance'?'topic relevance':'cross-layer relations'} provide a structural comparison for the selected observation window. Relevance does not predict events.`,`保存的${key==='natalPriorityRelations'?'本命重点':key==='daYunRelevance'?'大运层':key==='annualRelevance'?'流年层':key==='topicTemporalRelevance'?'主题关联':'跨层关系'}用于所选观察窗口中的结构比较，相关性不等于事件预测。`),['professionalModules/professionalTimeline/currentWindow','professionalModules/professionalTimeline/natalPriorityRefs'],{conditions:['NATAL_REMAINS_BASELINE','NO_EVENT_CERTAINTY'],temporalContext:temporalSnapshot});
+   }
+  }else add('OPEN_TIME','OPEN_CONDITION','TEMPORAL_WINDOW',[],say('The available reading does not establish a complete time comparison.','现有读取未建立完整的时间层比较。'),['professionalModules/professionalTimeline/state'],{modality:'UNRESOLVED'});
+ }
+ const guidance=sectionKey==='S09_GUIDANCE'?buildIntegratedGuidanceIR(p):null;
+ if(guidance)for(const theme of guidance.themes){
+  const index=arr(p.wholeChartPriority.themes).findIndex(t=>t.priorityId===theme.priorityId),chapter=arr(p.customerNarrative.priorityChapters).find(c=>c.priorityRef===theme.priorityId),ci=arr(p.customerNarrative.priorityChapters).indexOf(chapter);
+  if(chapter)add(`GUIDANCE_${theme.priorityId}`,'CROSS_SECTION_RELEVANCE',theme.priorityId,theme.topicCodes,chapter.development[lang],[`professionalModules/wholeChartPriority/themes/${index}`,`professionalModules/customerNarrative/priorityChapters/${ci}/development`],{rank:theme.rank,conditions:['PRIORITY_IS_READING_ORDER_NOT_FATE'],temporalRelevance:theme.temporalRelevance});
+ }
+ const boundary=add('BOUNDARY','BOUNDARY','SYMBOLIC_READING',[],say('This is a conditional symbolic reading, not a claim about observed behavior or a prediction of events.','这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。'),['professionalModules/customerNarrative/boundaries'],{allowConditionalLanguage:false});
+ // Questions are licensed as questions, never as new counterexamples or facts.
+ const anchor=claims.find(c=>c.id.endsWith(':DIMENSIONS'))||claims.find(c=>!['BOUNDARY','OPEN_CONDITION'].includes(c.relationType));
+ const questions=anchor?[{id:`${sectionKey}:OBSERVE`,kind:'OBSERVATION_PROMPT',relationType:anchor.relationType,claimIds:[anchor.id],text:say('Which of these themes fits a concrete experience, and which does not?','这些主题中，哪些符合你的一段具体经历，哪些并不符合？')}]:[];
+ const counters=boundary?[{id:`${sectionKey}:COUNTER`,kind:'COUNTER_PROMPT',relationType:'COUNTER_SIGNAL',claimIds:[boundary.id],text:say('What in your experience does not fit this reading?','你的经历中，有哪些部分并不符合这份解读？')}]:[];
+ let depth=null;
+ {
+  const bi=arr(p.realityBridge?.topicPrompts).findIndex(t=>t.topicCode===topicCode),nativePrompts=p.realityBridge?.topicPrompts?.[bi]?.prompts||[];
+  for(const [index,prompt] of nativePrompts.entries())if(anchor&&prompt.prompt?.[lang]){
+   const counter=prompt.promptType==='COUNTEREXAMPLE';
+   (counter?counters:questions).push({id:`${sectionKey}:${prompt.promptId}`,kind:counter?'COUNTER_PROMPT':'OBSERVATION_PROMPT',relationType:counter?'COUNTER_SIGNAL':anchor.relationType,claimIds:[anchor.id],text:prompt.prompt[lang],sourceRefs:[`professionalModules/realityBridge/topicPrompts/${bi}/prompts/${index}`],scope:'QUESTION_ONLY_NEVER_OBSERVED_FACT'});
+  }
+  for(const priorityRef of arr(topic?.priorityRefs)){
+   const ci=arr(p.customerNarrative?.priorityChapters).findIndex(c=>c.priorityRef===priorityRef),chapter=p.customerNarrative?.priorityChapters?.[ci];
+   const pi=arr(p.wholeChartPriority?.themes).findIndex(t=>t.priorityId===priorityRef);
+   if(chapter?.development?.[lang]&&pi>=0){let wholeText=chapter.development[lang];if(sectionKey==='S02_PERSONALITY'&&chapter.themeType==='TEN_GOD_GROUP'&&chapter.themeKey==='OFFICER')wholeText=say('Rules, responsibility and pressure are a wider chart priority that also reaches this capability reading. They remain a counterweight to a learning-only interpretation: standards and demand need to stay visible without becoming a personality score.','规则、责任与压力是整盘优先主题，也会进入能力读取。它们构成对“只看学习与支持”的修正：标准与要求需要保留，但不能被写成固定人格评分。');if(sectionKey==='S02_PERSONALITY'&&chapter.themeType==='CARRYING')wholeText=say('Carrying is a separate whole-chart priority. In this capability reading, having access to a skill and being able to keep it usable under continued expression and demand are related but not identical questions.','承载条件是整盘另一条独立优先主线。在能力主题里，“拥有一项能力”与“在持续表达和要求之下仍能使用它”是相关但不能混为一谈的两个问题。');add(`WHOLE_${priorityRef}`,'CROSS_SECTION_RELEVANCE',priorityRef,[topicCode],wholeText,[`professionalModules/customerNarrative/priorityChapters/${ci}/development`,`professionalModules/wholeChartPriority/themes/${pi}`,...(chapter.condition?.[lang]?[`professionalModules/customerNarrative/priorityChapters/${ci}/condition`]:[])],{rank:null,wholeChartRank:chapter.rank,conditions:chapter.condition?.[lang]?['NATIVE_PRIORITY_CONDITION']:[],conditionText:chapter.condition?.[lang]||null});}
+  }
+  const OPERATOR_BY_RELATION={EMPHASIS:'CONTEXTUALIZES',LIFE_DOMAIN_EXPLANATION:'CONTEXTUALIZES',OPERATING_CONDITION:'CONSTRAINS',ASSOCIATION:'ASSOCIATED_WITH',CO_OCCURRING_DIMENSIONS:'CO_OCCURS_WITH',CONTEXT_MODIFIER:'MODIFIES',SUPPORT_CONDITION:'SUPPORTS',TENSION:'CONSTRAINS',CONTRAST:'CONTEXTUALIZES',OPEN_CONDITION:'OPEN',COUNTER_SIGNAL:'CONSTRAINS',TEMPORAL_RELEVANCE:'TIMING_RELEVANCE',CROSS_SECTION_RELEVANCE:'CONTEXTUALIZES',BOUNDARY:'CONSTRAINS'};
+  const ROLE_BY_RELATION={EMPHASIS:'STRUCTURE',LIFE_DOMAIN_EXPLANATION:'MEANING',OPERATING_CONDITION:'CONDITIONS',ASSOCIATION:'STRUCTURE',CO_OCCURRING_DIMENSIONS:'STRUCTURE',CONTEXT_MODIFIER:'STRUCTURE',SUPPORT_CONDITION:'CONDITIONS',TENSION:'COUNTERWEIGHTS',CONTRAST:'COUNTERWEIGHTS',OPEN_CONDITION:'COUNTERWEIGHTS',COUNTER_SIGNAL:'COUNTERWEIGHTS',TEMPORAL_RELEVANCE:'TIMING_RELEVANCE',CROSS_SECTION_RELEVANCE:'NAVIGATION',BOUNDARY:'COUNTERWEIGHTS'};
+  for(const claim of claims){
+   claim.claimId=claim.id;claim.claimType=claim.relationType;claim.priority=claim.rank===1?'PRIMARY':claim.relationType==='TENSION'?'CONTRADICTORY':claim.relationType==='TEMPORAL_RELEVANCE'?'TIMING':claim.relationType==='ASSOCIATION'?'SECONDARY':'SUPPORTING';
+   claim.semanticOperators=[OPERATOR_BY_RELATION[claim.relationType]||'CONTEXTUALIZES'];claim.explanationRole=ROLE_BY_RELATION[claim.relationType]||'STRUCTURE';
+   claim.basis=claim.sourceRefs.map(ref=>({ref,value:pathGet(reading,ref)}));
+   claim.counterweights=arr(topic?.patternCandidates).filter(c=>c.conclusionState?.startsWith('OPEN')).map(c=>({candidateId:c.candidateId,state:c.conclusionState,sourceRef:`${topicRef}/patternCandidates/${topic.patternCandidates.indexOf(c)}`,scope:'SECTION_CONTEXT_NOT_NEW_RELATION',permission:'UNCERTAINTY_ONLY'}));
+   claim.timing=claim.temporalContext?[claim.temporalContext]:[];claim.lifeDomains=[topicCode];claim.observableSignals=questions.filter(q=>q.sourceRefs).map(q=>({questionId:q.id,sourceRefs:q.sourceRefs,scope:'REFLECTION_ONLY_NOT_PREDICTED_MANIFESTATION'}));claim.confidence='BOUNDED_SOURCE_PROJECTION_NOT_EMPIRICAL_CERTAINTY';claim.license={owner:EXPLANATORY_AUTHORITY_VERSION,createsMethodRule:false,allowsObservedReality:false};claim.provenance=claim.sourceRefs;
+  }
+  const relations=arr(topic?.relationshipInterfaces).map(r=>({relationId:r.relationId,priority:r.relationFamily==='TENSION'||r.relationFamily==='REPEAT_TENSION'?'CONTRADICTORY':r.dayMasterDirect?'PRIMARY':'SUPPORTING',source:r,canonicalRelation:arr(p.relationships?.items).find(x=>x.relationId===r.relationId)||null}));
+  const semanticFacts=arr(p.tenGods?.items).filter(t=>arr(topic?.relevantTenGods).some(x=>x.tenGodCode===t.tenGodCode)).map(t=>({sourceRef:`professionalModules/tenGods/items/${p.tenGods.items.indexOf(t)}`,value:t}));
+  for(const key of ['supportBalance','seasonalSupport','roots','withheldVerdict'])if(p.dayMasterStrength?.[key])semanticFacts.push({sourceRef:`professionalModules/dayMasterStrength/${key}`,value:p.dayMasterStrength[key]});
+  for(const r of relations){const index=arr(p.relationships?.items).findIndex(x=>x.relationId===r.relationId);if(index>=0)semanticFacts.push({sourceRef:`professionalModules/relationships/items/${index}`,value:p.relationships.items[index]});}
+  if(sectionKey==='S03_LIFE_STRUCTURE')for(const key of ['candidates','summary','counterEvidenceRefs','qualifierCodes'])if(p.pattern?.[key])semanticFacts.push({sourceRef:`professionalModules/pattern/${key}`,value:p.pattern[key]});
+  depth={version:'BAZI_RICH_CLAIM_IR_V2',selection:'FULL_SECTION_RELATIONS_PLUS_METHOD_OWNED_LIFE_LAYER',relations,semanticFacts,patternCandidates:topic?.patternCandidates||[],carryingContext:topic?.carryingContext||null,priorityRefs:topic?.priorityRefs||[],rawFactsAreNotNarrativeLicenses:true,licensedLifeLayerExplanation:true,observableLifeClaims:'QUESTIONS_ONLY_UNLESS_EXPLICIT_NATIVE_SOURCE',missingFacets:['NO_AUTOMATIC_OBSERVED_REALITY']};
+ }
+ const provenance=await Promise.all([...MODULES,...(depth?['realityBridge']:[])].filter(k=>p[k]).map(async module=>({module:`professionalModules/${module}`,digest:await sha256Stable(p[module])})));
+ return deepFreeze({version:EXPLANATORY_AUTHORITY_VERSION,claims,reflectionQuestions:questions,counterPrompts:counters,manifestationLicenses:[],temporalAuthority:['S08_TIMING','S09_GUIDANCE'].includes(sectionKey)?timeline:null,integratedGuidanceIR:guidance,sourceLineage:provenance,...(depth?{depth}: {})});
+}
+export function buildTemporalRelevanceIR(p){
+ const t=p.professionalTimeline,w=t?.currentWindow;
+ if(!t?.schemaVersion?.startsWith('PHI-OS-BAZI-CX-PRO-DA-YUN-LIU-NIAN-PROFESSIONAL-TIMELINE')||!w?.available)return {available:false};
+ return {available:true,authority:t.schemaVersion,natalPriorityRelations:arr(t.natalPriorityRefs),daYunRelevance:w.currentDaYun?{pillar:w.currentDaYun.pillar,priorityRefs:arr(w.currentDaYunPriorityRefs)}:null,annualRelevance:w.annual?{year:w.annual.year,stem:w.annual.stem,branch:w.annual.branch,priorityRefs:arr(w.annualPriorityRefs)}:null,crossLayerRelevance:w.interactions||{},topicTemporalRelevance:arr(w.topicTimeline).map(x=>({topicCode:x.topicCode,activationState:x.activationState,priorityRefs:x.priorityRefs,daYun:x.daYun,liuNian:x.liuNian})),boundaries:t.boundaries};
+}
+export function buildIntegratedGuidanceIR(p){
+ const topics=arr(p.professionalTopics?.topics),timeline=buildTemporalRelevanceIR(p);
+ const themes=arr(p.wholeChartPriority?.themes).slice().sort((a,b)=>a.rank-b.rank).map(t=>({priorityId:t.priorityId,rank:t.rank,themeType:t.themeType,themeKey:t.themeKey,topicCodes:topics.filter(x=>arr(x.priorityRefs).includes(t.priorityId)).map(x=>x.topicCode),temporalRelevance:arr(timeline.topicTemporalRelevance).filter(x=>arr(x.priorityRefs).includes(t.priorityId)).map(x=>({topicCode:x.topicCode,activationState:x.activationState})),sourceRefs:t.sourceRefs}));
+ return {version:'BAZI_INTEGRATED_GUIDANCE_IR_V1',themes,primaryThemeId:themes[0]?.priorityId||null,temporalAuthority:timeline.available?timeline.authority:null,methodOwned:true,eventPrediction:false};
+}

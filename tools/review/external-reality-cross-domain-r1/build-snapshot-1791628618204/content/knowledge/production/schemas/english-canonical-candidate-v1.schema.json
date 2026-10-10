@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/english-canonical-candidate-v1.schema.json",
+  "title": "PHI OS English Canonical Article Candidate v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "candidateType",
+    "candidateSchemaVersion",
+    "candidateCode",
+    "nodeCode",
+    "locale",
+    "sourceBrief",
+    "authority",
+    "candidateState",
+    "article",
+    "governance",
+    "provenance",
+    "candidateDigest"
+  ],
+  "properties": {
+    "candidateType": {
+      "const": "canonical_article_candidate"
+    },
+    "candidateSchemaVersion": {
+      "const": "PHI-OS-EN-CANONICAL-CANDIDATE-v1.0.0"
+    },
+    "candidateCode": {
+      "type": "string",
+      "pattern": "^CANDIDATE-KN-[A-Z0-9-]+-EN-V1$"
+    },
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "locale": {
+      "const": "en"
+    },
+    "sourceBrief": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "briefCode",
+        "briefSchemaVersion",
+        "briefDigest",
+        "repositoryCommit"
+      ],
+      "properties": {
+        "briefCode": {
+          "type": "string"
+        },
+        "briefSchemaVersion": {
+          "const": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0"
+        },
+        "briefDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "repositoryCommit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalMeaning",
+        "candidateContent",
+        "humanReview",
+        "approval",
+        "publication"
+      ],
+      "properties": {
+        "canonicalMeaning": {
+          "const": "TL"
+        },
+        "candidateContent": {
+          "const": "candidate_only"
+        },
+        "humanReview": {
+          "const": "not_reviewed"
+        },
+        "approval": {
+          "const": "not_approved"
+        },
+        "publication": {
+          "const": "not_published"
+        }
+      }
+    },
+    "candidateState": {
+      "enum": [
+        "draft",
+        "ready_for_human_review",
+        "changes_required"
+      ]
+    },
+    "article": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "summary",
+        "bodyMarkdown",
+        "sectionHeadings",
+        "terminologyTermsUsed"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bodyMarkdown": {
+          "type": "string",
+          "minLength": 200
+        },
+        "sectionHeadings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "terminologyTermsUsed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registryMutationAllowed",
+        "canonicalMeaningMutationAllowed",
+        "reviewRecorded",
+        "approvalRecorded",
+        "publicationRecorded",
+        "localeStatePromotionAllowed"
+      ],
+      "properties": {
+        "registryMutationAllowed": {
+          "const": false
+        },
+        "canonicalMeaningMutationAllowed": {
+          "const": false
+        },
+        "reviewRecorded": {
+          "const": false
+        },
+        "approvalRecorded": {
+          "const": false
+        },
+        "publicationRecorded": {
+          "const": false
+        },
+        "localeStatePromotionAllowed": {
+          "const": false
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "productionMode",
+        "producer",
+        "independentLocaleAuthoring"
+      ],
+      "properties": {
+        "productionMode": {
+          "const": "brief_bound_candidate_authoring"
+        },
+        "producer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "independentLocaleAuthoring": {
+          "const": true
+        }
+      }
+    },
+    "candidateDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

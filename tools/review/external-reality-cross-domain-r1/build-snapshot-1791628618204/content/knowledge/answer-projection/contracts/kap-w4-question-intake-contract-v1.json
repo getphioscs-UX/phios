@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W4-QUESTION-INTAKE-CONTRACT-v1.0.0",
+  "phase": "KAP",
+  "step": "KAP-W4",
+  "baselineCommit": "a1c724138c4fcb43599537e6b58cb0b8205253e4",
+  "status": "ACTIVE_GROUNDING_INPUT_CONTRACT_NO_ANSWER_COMPOSITION",
+  "capability": "ASK_PHIOS",
+  "schemaPath": "content/knowledge/answer-projection/schemas/kap-question-intake-v1.schema.json",
+  "rules": {
+    "questionRequired": true,
+    "maximumQueryLength": 500,
+    "supportedLocales": [
+      "en",
+      "zh-Hans"
+    ],
+    "surfaceContextOptional": true,
+    "sessionReferenceOpaqueOptional": true,
+    "fullRealityIntakeRequired": false,
+    "birthInputRequired": false,
+    "methodExecutionRequired": false,
+    "persistentCaseCreated": false,
+    "questionIntakeCreatesKnowledgeAuthority": false,
+    "questionIntakeCreatesPublicationAuthority": false,
+    "questionIntakeCreatesRealityReadingAuthority": false
+  },
+  "forbiddenInputExpansion": [
+    "AUTO_CREATE_CASE",
+    "AUTO_REQUEST_BIRTH_DATA",
+    "AUTO_RUN_METHOD",
+    "AUTO_PROMOTE_CLIENT_STATEMENT_TO_REALITY_EVIDENCE"
+  ],
+  "nextStep": "KAP-W5_QUESTION_NORMALIZATION"
+}

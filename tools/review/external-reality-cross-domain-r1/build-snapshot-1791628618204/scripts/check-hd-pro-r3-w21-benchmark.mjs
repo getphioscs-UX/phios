@@ -1,0 +1,8 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import {spawnSync} from 'node:child_process';
+const ROOT='content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3';const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const g=spawnSync(process.execPath,['scripts/generate-hd-pro-r3-w21-benchmark.mjs','--check'],{stdio:'inherit'});assert.equal(g.status,0);
+const b=read(`${ROOT}/benchmark/HD-PRO-R3-W21-r2-vs-r3-benchmark-v1.json`);const s=read(`${ROOT}/semantics/HD-PRO-R3-semantic-production-status-v18.json`);const prev=read(`${ROOT}/semantics/HD-PRO-R3-semantic-production-status-v17.json`);
+assert.equal(b.status,'BENCHMARK_PASS_12_OF_12');assert.equal(b.summary.total,12);assert.equal(b.summary.passed,12);assert.equal(b.summary.failed,0);assert.equal(b.benchmarks.length,12);for(const row of b.benchmarks){assert.equal(row.pass,true);for(const dim of b.rubricDimensions)assert.equal(row.rubric[dim],true,`${row.benchmarkId}:${dim}`);assert(row.evidence.r3.compositionRuleFamilies>=2);assert(row.evidence.r3.realityQuestions>=4);assert.equal(row.evidence.r3.internalTermLeaks,0);}
+assert.equal(prev.updatedByWork,'HD-PRO-R3-W20');assert.equal(s.updatedByWork,'HD-PRO-R3-W21');assert.equal(s.aggregate.professionalBenchmarkPassed,true);assert.equal(s.aggregate.professionalBenchmarkPassedCases,12);assert.equal(s.aggregate.r3CustomerCutoverAllowed,false);
+console.log('✓ HD-PRO-R3-W21 professional reading benchmark passed 12/12.');
+console.log('  R3 is measurably more chart-specific, compositional, non-repetitive, structurally faithful, customer-readable and reality-linked than the R2 basic external reading on the benchmark set.');

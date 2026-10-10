@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+const dir='content/production-closure/batch02',docs='docs/production-closure/batch02';
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+if(fs.existsSync(dir+'/baseline.json'))throw Error('BATCH02_BASELINE_IMMUTABLE');
+fs.mkdirSync(dir+'/inherited',{recursive:true});fs.mkdirSync(docs+'/evidence',{recursive:true});fs.mkdirSync(docs+'/screenshots',{recursive:true});
+const inherited=['baseline.json','work-status.json','remaining-blockers.json','batch-result.json','artifact-manifest.json','web-route-census.json','visual-runtime-census.json','locale-census.json','execution-ledger.json'];
+for(const name of inherited)fs.copyFileSync('content/production-closure/'+name,dir+'/inherited/'+name);
+fs.copyFileSync('C:/Users/Guest Account/.codex/attachments/51b8c6b0-17c4-4504-b974-671c8fa36189/Pasted text.txt',docs+'/OWNER-INSTRUCTION.txt');
+const b=JSON.parse(fs.readFileSync('content/production-closure/baseline.json'));
+const files=b.protectedFiles.map(r=>({...r,batch02StartSha256:sha(r.path),unchanged:sha(r.path)===r.sha256}));
+const record={workId:b.workId,batch:'02',timestamp:new Date().toISOString(),head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),branch:execFileSync('git',['branch','--show-current'],{encoding:'utf8'}).trim(),sharedWorktreeStatus:execFileSync('git',['status','--porcelain=v1'],{encoding:'utf8'}),protectedFiles:files,baselineDrift:files.filter(r=>!r.unchanged),inheritedEvidence:inherited.map(name=>({path:dir+'/inherited/'+name,sha256:sha(dir+'/inherited/'+name)})),forbiddenActions:['payment','commit','push','deployment','production freeze','price change','production activation']};
+fs.writeFileSync(dir+'/baseline.json',JSON.stringify(record,null,2)+'\n');console.log('Batch 02 baseline: '+files.length+' protected files; '+record.baselineDrift.length+' drift; HEAD '+record.head);

@@ -1,0 +1,28 @@
+{
+  "contract": "PHI-OS-PJA-W2F-C3R1-PREFACE-001-CLOSURE-v1.0.0",
+  "stage": "PJA-W2F-C3R1",
+  "nodeCode": "KN-PREFACE-001",
+  "allowedDecisions": ["approved", "changes_required", "rejected"],
+  "requiredClosureRecords": ["sourceResearch", "claimCoverage", "evidenceTraceability", "humanProductionApproval", "exportability"],
+  "sourceAuthority": {
+    "registrySourceRequired": true,
+    "externalAuthoritiesAreVerificationEvidenceOnly": true,
+    "externalAuthoritiesDoNotCreateRegistrySources": true,
+    "unknownOrMissingRegistrySourceBlocks": true
+  },
+  "approvalBoundary": {
+    "distinctFromC2Freeze": true,
+    "knownHumanAuthoritySource": "content/knowledge/editorial/c2/freezes/kn-preface-001-freeze.json",
+    "forbiddenReviewers": ["AI", "ai", "system", "migration", "initializer", "automation"],
+    "approvedDecisionRequired": true,
+    "matchingContentHashRequired": true
+  },
+  "exportabilityBoundary": {
+    "approvalRequired": true,
+    "defaultAllowed": false,
+    "requiredOutputs": ["governed_production_input_package", "production_manifest", "claim_source_boundary_bindings"],
+    "targetFormats": ["json", "markdown"],
+    "targetLanguage": "zh-Hans"
+  },
+  "forbiddenWrites": ["Registry", "Blueprint", "C2", "other 77 Nodes", "Batch package", "Article", "Production Export", "Publication"]
+}

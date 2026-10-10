@@ -1,0 +1,47 @@
+{
+  "contractCode": "PHI-OS-ICR-W4-METHOD-INPUT-PROJECTION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ICR-W4",
+  "status": "foundation",
+  "productionStatus": "validation_only",
+  "schemaReference": "content/runtime/input-case-runtime/schemas/method-input-projection-v1.schema.json",
+  "requirementRegistry": "content/runtime/input-case-runtime/registries/method-input-requirement-registry-v1.json",
+  "chain": [
+    "Operational Intake",
+    "Canonical Input Envelope",
+    "Verified Input Decision",
+    "Shared Data Authority Binding",
+    "Method-specific Input Projection",
+    "Method Runtime"
+  ],
+  "projectionMode": "REFERENCE_ONLY_VIA_ICR",
+  "allowedProjectionContent": [
+    "Method identity",
+    "Verified Input lineage",
+    "Shared Data Authority record references",
+    "RDG governance bindings",
+    "Deterministic projection digest"
+  ],
+  "forbiddenProjectionContent": [
+    "Customer DB record",
+    "Account record",
+    "Raw Birth Data payload",
+    "Raw document",
+    "Method-owned copy of shared facts",
+    "Unverified Canonical Input payload"
+  ],
+  "rules": {
+    "methodMayReadCustomerDatabase": false,
+    "methodMayReadAccountRecord": false,
+    "methodMayReadCanonicalInputDirectly": false,
+    "methodMayReadUnverifiedInput": false,
+    "methodMayMutateSharedDataRecord": false,
+    "methodSpecificPersistentCopyAllowed": false,
+    "projectionMustBeReferenceOnly": true,
+    "projectionMustBeDeterministic": true,
+    "projectionEligibilityFailsClosed": true,
+    "methodRegistrationOrProductionEligibilityChanged": false,
+    "projectionCreatesMethodOutput": false,
+    "projectionCreatesInterpretation": false
+  }
+}

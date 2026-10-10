@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {readJson,sha256} from './lib/runtime-maturity/pilot-campaign-lib.mjs';
+const freeze=readJson('content/runtime-maturity/pilot/freeze/mrm-s10-s11-pilot-campaign-freeze-v1.json');
+const pkg=readJson('package.json');
+for(const x of freeze.frozenArtifacts) assert.equal(sha256(x.path),x.sha256,`PILOT_CAMPAIGN_FREEZE_DRIFT:${x.path}`);
+assert.equal(pkg.scripts['check:mrm-s'],freeze.packageBinding.preservedMasterCommand);
+assert.equal(pkg.scripts['check:mrm-s-pilot'],freeze.packageBinding.pilotCheckCommand);
+assert.equal(pkg.scripts['pilot:evaluate-case'],freeze.packageBinding.evaluatorCommand);
+assert.equal(pkg.scripts['pilot:case-template'],freeze.packageBinding.templateCommand);
+assert.equal(freeze.currentPilotEvidence.qualifyingRealCases,0);
+assert.equal(freeze.currentPilotEvidence.em3Promotions,0);
+assert.equal(freeze.claimState,'PILOT_CAMPAIGN_READY_NOT_PILOT_VERIFIED');
+console.log('✓ MRM-S10/S11 Pilot Campaign governance freeze passed.');
+console.log('  Campaign governance is frozen; real-case evidence remains empty and EM-3 remains correctly unclaimed.');

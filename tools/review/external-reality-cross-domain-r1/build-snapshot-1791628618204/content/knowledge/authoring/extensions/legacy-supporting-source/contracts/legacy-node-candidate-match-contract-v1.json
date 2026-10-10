@@ -1,0 +1,27 @@
+{
+  "contractCode": "KAU-E1-LEGACY-NODE-CANDIDATE-MATCH-CONTRACT",
+  "contractVersion": "1.0.0",
+  "workCode": "KAU-E1",
+  "purpose": "Produce deterministic candidate matches against the existing Canonical Node Registry for human review.",
+  "matchingMethod": "deterministic_title_char_ngram_tfidf_v1",
+  "candidateOnly": true,
+  "topCandidateLimit": 3,
+  "relationshipCandidates": [
+    "POTENTIAL_SUPPORTS",
+    "POTENTIAL_PARTIAL_OVERLAP",
+    "UNRESOLVED"
+  ],
+  "forbidden": [
+    "automatic_acceptance",
+    "canonical_node_mutation",
+    "canonical_node_creation",
+    "meaning_mutation",
+    "production_readiness_promotion",
+    "publication"
+  ],
+  "invariants": {
+    "existingNodeMatchingMandatory": true,
+    "humanEditorialMandatory": true,
+    "scoreIsNotAuthority": true
+  }
+}

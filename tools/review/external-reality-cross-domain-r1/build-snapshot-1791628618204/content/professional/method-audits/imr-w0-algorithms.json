@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0.0",
+  "stageCode": "IMR-W0",
+  "algorithms": [
+    {
+      "algorithmCode": "ASTROLOGY-NATAL-v1",
+      "methodCode": "ASTROLOGY",
+      "version": "1.0.0-candidate",
+      "deterministic": true,
+      "engine": "ASTRONOMY_ENGINE_JS",
+      "engineSelected": true,
+      "policyStatus": "incomplete",
+      "validationStatus": "not_started",
+      "productionEligible": false,
+      "openAiCalculationAllowed": false,
+      "requiredFuturePolicies": [
+        "zodiac_type",
+        "house_system",
+        "planet_set",
+        "node_type",
+        "aspect_set",
+        "aspect_orbs",
+        "retrograde_policy",
+        "precision_policy"
+      ]
+    },
+    {
+      "algorithmCode": "BAZI-NATAL-v1",
+      "methodCode": "BAZI",
+      "version": "1.0.0-candidate",
+      "deterministic": true,
+      "engine": "PHIOS_DETERMINISTIC_IMPLEMENTATION",
+      "policyStatus": "human_frozen_candidate",
+      "validationStatus": "not_started",
+      "productionEligible": false,
+      "openAiCalculationAllowed": false,
+      "sourceStack": [
+        "IANA_TZDB",
+        "ASTRONOMY_ENGINE_JS",
+        "PHIOS_TRUE_SOLAR_TIME",
+        "PHIOS_SEXAGENARY_CALENDAR",
+        "PHIOS_BAZI_POLICY_V1"
+      ],
+      "policy": {
+        "methodFamily": "zi_ping_four_pillars",
+        "formalTimeBasis": "true_solar_time",
+        "trueSolarTimeEnabledByDefault": true,
+        "preserveRecordedCivilTime": true,
+        "yearBoundary": "exact_li_chun_instant",
+        "monthBoundary": "exact_twelve_jie_instants",
+        "dayBoundary": {
+          "timeBasis": "true_solar_time",
+          "boundary": "00:00"
+        },
+        "ziHour": {
+          "range": "23:00-00:59",
+          "beforeMidnight": {
+            "range": "23:00-23:59",
+            "dateBasis": "same_true_solar_date"
+          },
+          "afterMidnight": {
+            "range": "00:00-00:59",
+            "dateBasis": "next_true_solar_date"
+          }
+        },
+        "luckDirection": {
+          "rule": "year_stem_polarity_plus_traditional_calculation_sex",
+          "forward": [
+            "yang_year_male",
+            "yin_year_female"
+          ],
+          "backward": [
+            "yin_year_male",
+            "yang_year_female"
+          ]
+        },
+        "luckStart": {
+          "forwardReference": "next_jie",
+          "backwardReference": "previous_jie",
+          "threeDaysEqualYears": 1,
+          "oneDayEqualMonths": 4,
+          "twoHoursEqualDays": 10,
+          "rounding": "no_rounding_in_engine"
+        },
+        "unknownBirthTime": {
+          "threePillarCalculationAllowed": true,
+          "fabricatedHourPillarProhibited": true,
+          "hourPillarStatus": "unresolved",
+          "hourDependentInterpretation": "conditional"
+        },
+        "traditionalCalculationSex": {
+          "requiredFor": [
+            "luck_cycle_direction"
+          ],
+          "prohibitedFor": [
+            "identity_inference",
+            "personality_claim",
+            "relationship_role_claim",
+            "general_profile_claim"
+          ]
+        }
+      }
+    }
+  ]
+}

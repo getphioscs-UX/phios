@@ -1,0 +1,200 @@
+{
+  "workId": "PHI-OS-METHOD-REPORTS-PRODUCTION-ROLLOUT",
+  "schemaVersion": 1,
+  "auditedAt": "2026-10-01",
+  "baselineCommit": "611ddf2dd7e4bdced6358879a5bdb9656c0f0286",
+  "status": "READY_FOR_REVIEW",
+  "components": [
+    {
+      "component": "cover",
+      "disposition": "REUSE_PARTIAL",
+      "refs": [
+        "assets/reports/PHIOS-COM-REPORT-ZIWEI-FULL-v1.svg"
+      ],
+      "gap": "Existing commercial cover; verify personalized report cover through shared subject contract."
+    },
+    {
+      "component": "free_report",
+      "disposition": "REUSE_PARTIAL",
+      "refs": [
+        "functions/personal-reading/ziwei-visual-report-projection.js"
+      ],
+      "gap": "FREE branch renders palace preview; verify new delivery entitlement and leakage boundaries later."
+    },
+    {
+      "component": "paid_report",
+      "disposition": "REUSE_PARTIAL",
+      "refs": [
+        "functions/zi-wei-full-production/ziwei-customer-report-runtime.js",
+        "functions/personal-reading/ziwei-visual-report-projection.js"
+      ],
+      "gap": "Existing full reading and non-FREE visual pages; not proof of paid snapshot delivery."
+    },
+    {
+      "component": "section_renderer",
+      "disposition": "KEEP",
+      "refs": [
+        "functions/zi-wei-full-production/ziwei-interactive-chart-surface-runtime.js"
+      ],
+      "gap": "Existing dynamic chart and source-bound palace data; adapt section routing after human architecture decision."
+    },
+    {
+      "component": "narrative",
+      "disposition": "REUSE_PARTIAL",
+      "refs": [
+        "functions/zi-wei-full-production/ziwei-professional-reading-r2-runtime-v2.js"
+      ],
+      "gap": "Existing 12 palace units and 8 topic readings; audit and map before composing new prose."
+    },
+    {
+      "component": "locale",
+      "disposition": "REUSE_PARTIAL",
+      "refs": [
+        "functions/zi-wei-full-production/ziwei-professional-reading-r2-authority-v2.js"
+      ],
+      "gap": "ZH/EN present; stabilize terminology canon and full-report language review later."
+    },
+    {
+      "component": "visual_assets",
+      "disposition": "REUSE_PARTIAL",
+      "refs": [
+        "assets/images/report/VIS-REPORT-ZIWEI-MOTIF-1.svg",
+        "assets/images/report/VIS-REPORT-ZIWEI-MOTIF-2.svg"
+      ],
+      "gap": "Reuse existing motifs and dynamic chart. Section Master family completeness not yet established; do not generate new family now."
+    },
+    {
+      "component": "commerce",
+      "disposition": "REUSE_PARTIAL",
+      "refs": [
+        "functions/report-delivery/report-delivery-contract.js",
+        "functions/report-delivery/report-access-resolver.js"
+      ],
+      "gap": "SKU mapping exists; delivery pilot is BaZi-only and full release remains gated. Zi Wei purchase→snapshot→account is not validated by existing customer publication."
+    },
+    {
+      "component": "legacy_audit_as_current_authority",
+      "disposition": "DEPRECATE",
+      "refs": [
+        "content/professional/zi-wei-full-production/authority/ziwei-fp-w0-current-authority-audit-v1.json"
+      ],
+      "gap": "Preserve history, but do not use historical ABSENT/PENDING fields as current capability truth."
+    }
+  ],
+  "proposedArchitecture": {
+    "status": "ACCEPT",
+    "humanDecision": "ACCEPT",
+    "allowedDecisions": [
+      "ACCEPT",
+      "REJECT"
+    ],
+    "sections": [
+      {
+        "id": "S01",
+        "title": "Chart Overview / 整体命盘",
+        "requires": [
+          "twelve_palaces"
+        ],
+        "state": "READY_FOR_REVIEW"
+      },
+      {
+        "id": "S02",
+        "title": "Core Orientation / 命身与核心运行",
+        "requires": [
+          "life_palace",
+          "body_palace",
+          "main_stars"
+        ],
+        "state": "READY_FOR_REVIEW"
+      },
+      {
+        "id": "S03",
+        "title": "Inner Structure / 福德与内部调节",
+        "requires": [
+          "palace_relationships"
+        ],
+        "state": "READY_FOR_REVIEW"
+      },
+      {
+        "id": "S04",
+        "title": "Work & Direction / 工作与外部方向",
+        "requires": [
+          "palace_relationships"
+        ],
+        "state": "READY_FOR_REVIEW"
+      },
+      {
+        "id": "S05",
+        "title": "Resources & Wealth / 资源与财帛田宅",
+        "requires": [
+          "palace_relationships"
+        ],
+        "state": "READY_FOR_REVIEW"
+      },
+      {
+        "id": "S06",
+        "title": "Relationships / 关系运行",
+        "requires": [
+          "palace_relationships"
+        ],
+        "state": "READY_FOR_REVIEW"
+      },
+      {
+        "id": "S07",
+        "title": "Family & Support / 家庭与支持",
+        "requires": [
+          "palace_relationships"
+        ],
+        "state": "READY_FOR_REVIEW"
+      },
+      {
+        "id": "S08",
+        "title": "Pressure & Vulnerability / 压力与脆弱点",
+        "requires": [
+          "malefic_stars",
+          "palace_relationships"
+        ],
+        "state": "READY_FOR_REVIEW"
+      },
+      {
+        "id": "S09",
+        "title": "Long-term Cycles / 大限",
+        "requires": [
+          "da_xian"
+        ],
+        "state": "READY_FOR_REVIEW"
+      },
+      {
+        "id": "S10",
+        "title": "Current Timing / 流年",
+        "requires": [
+          "liu_nian"
+        ],
+        "state": "READY_FOR_REVIEW"
+      },
+      {
+        "id": "S11",
+        "title": "Navigation / 现实导航",
+        "requires": [
+          "palace_relationships",
+          "liu_nian"
+        ],
+        "state": "READY_FOR_REVIEW"
+      },
+      {
+        "id": "S12",
+        "title": "Appendix / 计算、术语、边界与来源",
+        "requires": [
+          "lunar_solar_conversion"
+        ],
+        "state": "READY_FOR_REVIEW"
+      }
+    ],
+    "conditions": [
+      "S09/S10 require governed timing inputs; omit unsupported monthly claims.",
+      "S08 symbolic stress only, never medical diagnosis.",
+      "S03/S07 require evidence-backed composition before prose; palace label alone does not establish a claim."
+    ]
+  },
+  "nextWork": "Full report R1 READY_FOR_HUMAN_REVIEW; production admission and commerce remain independent."
+}

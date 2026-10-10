@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4-READING-CLAIM-AUTHORITY-MAP-v1.0.0",
+  "work": "CX-R12R4-W19",
+  "canonicalLayers": [
+    "OBSERVATION",
+    "EVIDENCE",
+    "PROJECTION",
+    "READING",
+    "INTERPRETATION",
+    "GOVERNANCE",
+    "NAVIGATION_THRESHOLD"
+  ],
+  "resultPanels": [
+    {
+      "panel": "overview",
+      "authorityLayers": [
+        "READING"
+      ]
+    },
+    {
+      "panel": "graph",
+      "authorityLayers": [
+        "PROJECTION"
+      ]
+    },
+    {
+      "panel": "structure",
+      "authorityLayers": [
+        "PROJECTION",
+        "INTERPRETATION"
+      ]
+    },
+    {
+      "panel": "patterns",
+      "authorityLayers": [
+        "INTERPRETATION"
+      ]
+    },
+    {
+      "panel": "context",
+      "authorityLayers": [
+        "READING"
+      ]
+    },
+    {
+      "panel": "reality",
+      "authorityLayers": [
+        "OBSERVATION",
+        "EVIDENCE"
+      ]
+    },
+    {
+      "panel": "details",
+      "authorityLayers": [
+        "GOVERNANCE"
+      ]
+    }
+  ],
+  "navigationHandoff": {
+    "authorityLayer": "NAVIGATION_THRESHOLD",
+    "decisionAuthority": "USER"
+  },
+  "forbidden": [
+    "UNTYPED_RESULT_PANEL",
+    "PROJECTION_PROMOTED_TO_EVIDENCE",
+    "INTERPRETATION_PROMOTED_TO_REALITY",
+    "RESONANCE_PROMOTED_TO_EVIDENCE",
+    "NAVIGATION_AUTOMATICALLY_SELECTED"
+  ]
+}

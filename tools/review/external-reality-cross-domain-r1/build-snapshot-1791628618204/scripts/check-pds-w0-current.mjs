@@ -1,0 +1,314 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+import path from 'node:path';
+import { execFileSync } from 'node:child_process';
+import { resolveGitExecutable } from './lib/git-executable.mjs';
+import {partitionRuntimeTopology} from './lib/pds-runtime-topology.mjs';
+
+import './check-master-governance.mjs';
+
+const root = process.cwd();
+const gitExecutable = resolveGitExecutable();
+const text = relativePath => fs.readFileSync(path.join(root, relativePath), 'utf8').replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
+const read = relativePath => JSON.parse(text(relativePath));
+const canonicalTextSha256 = relativePath => crypto.createHash('sha256').update(text(relativePath), 'utf8').digest('hex');
+const canonicalTextGitBlobSha = relativePath => {
+  const source = Buffer.from(text(relativePath), 'utf8');
+  return crypto.createHash('sha1').update(`blob ${source.length}\0`).update(source).digest('hex');
+};
+const exists = relativePath => fs.existsSync(path.join(root, relativePath));
+const git = args => execFileSync(gitExecutable, args, {
+  cwd: root,
+  encoding: 'utf8',
+  stdio: ['ignore', 'pipe', 'pipe']
+}).trim();
+const gitObjectExists = spec => {
+  try {
+    execFileSync(gitExecutable, ['cat-file', '-e', spec], { cwd: root, stdio: 'ignore' });
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+const paths = Object.freeze({
+  contract: 'content/registry/pds-w0-baseline-boundary.json',
+  fixture: 'tests/fixtures/pds-w0-baseline-boundary.json',
+  freezeDocument: 'docs/design-system/PDS-W0-BASELINE-AND-BOUNDARY-FREEZE.md',
+  historicalChecker: 'scripts/check-pds-w0-baseline-boundary.mjs',
+  postFreezeRegistry: 'docs/design-system/pds-w0-post-freeze-protected-path-additions-v1.json',
+  successor: 'content/web-production/reconciliation/pds-w0-hpc2-pre-asset-resolver-successor-v1.json',
+  pxrResolverSuccessor: 'content/web-production/reconciliation/pds-w0-pxr-asset-resolver-successor-v2.json',
+  migrationRegistry: 'content/registry/runtime-migrations.json',
+  package: 'package.json'
+});
+
+for (const relativePath of Object.values(paths)) assert.ok(exists(relativePath), `PDS_W0_CURRENT_DEPENDENCY_MISSING:${relativePath}`);
+
+const contract = read(paths.contract);
+const fixture = read(paths.fixture);
+const postFreezeRegistry = read(paths.postFreezeRegistry);
+const successor = read(paths.successor);
+const pxrResolverSuccessor = read(paths.pxrResolverSuccessor);
+const migrationRegistry = read(paths.migrationRegistry);
+const pkg = effectivePackageScripts(read(paths.package));
+
+assert.equal(contract.milestone, 'PDS-W0');
+assert.equal(contract.status, 'baseline-and-boundary-frozen');
+assert.equal(contract.baseline.commit, fixture.expectedBaseline.commit);
+assert.equal(contract.baseline.tree, fixture.expectedBaseline.tree);
+assert.equal(git(['rev-parse', `${contract.baseline.commit}^{commit}`]), contract.baseline.commit);
+assert.equal(git(['rev-parse', `${contract.baseline.commit}^{tree}`]), contract.baseline.tree);
+assert.deepEqual(contract.protectedScopes.flatMap(scope => scope.paths), fixture.protectedPaths);
+
+assert.equal(successor.work, 'PDS-W0-CURRENT-PROTECTED-PATH-RECONCILIATION');
+assert.equal(successor.baselineCommit, 'aab18446a012938ccd24043751469866831fe4e0');
+assert.equal(successor.status, 'ACTIVE_ADDITIVE_CANONICAL_TEXT_AND_EXACT_BLOB_SUCCESSOR_PDS_W0_AND_WPR_B_HISTORY_PRESERVED');
+for (const record of Object.values(successor.historicalAuthority)) {
+  if (!record || typeof record !== 'object' || !record.path) continue;
+  assert.equal(canonicalTextSha256(record.path), record.sha256, `PDS_W0_FROZEN_ARTIFACT_DRIFT:${record.path}`);
+}
+assert.equal(successor.historicalAuthority.historicalArtifactsRewritten, false);
+assert.equal(successor.historicalAuthority.postFreezeAdditionRegistry.authorizationMode, 'ADD_ONLY_EXACT_GIT_BLOB');
+assert.equal(postFreezeRegistry.status, 'canonical');
+assert.equal(postFreezeRegistry.authorizationMode, 'ADD_ONLY_EXACT_GIT_BLOB');
+assert.equal(postFreezeRegistry.pdsBaseline.commit, contract.baseline.commit);
+assert.equal(postFreezeRegistry.rules.pdsBaselineCommitRemainsFrozen, true);
+assert.equal(postFreezeRegistry.rules.baselineFileModificationAllowed, false);
+assert.equal(postFreezeRegistry.rules.baselineFileDeletionAllowed, false);
+assert.equal(postFreezeRegistry.rules.unregisteredProtectedPathAdditionAllowed, false);
+
+const transition = successor.assetResolverTransition;
+const originalEntry = postFreezeRegistry.entries.find(entry => entry.path === transition.path);
+assert.ok(originalEntry, 'PDS_W0_ASSET_RESOLVER_ORIGINAL_AUTHORIZATION_MISSING');
+assert.equal(originalEntry.protectedPath, transition.protectedPath);
+assert.equal(originalEntry.gitBlobSha, transition.originalWprBBlobSha);
+assert.equal(originalEntry.introducedByCommit, transition.originalWprBCommit);
+assert.equal(originalEntry.immutable, true);
+assert.equal(gitObjectExists(`${contract.baseline.commit}:${transition.path}`), false, 'ASSET_RESOLVER_EXISTED_IN_PDS_BASELINE');
+assert.equal(git(['rev-parse', `${transition.originalWprBCommit}:${transition.path}`]), transition.originalWprBBlobSha);
+assert.equal(git(['rev-parse', `${transition.successorCommit}:${transition.path}`]), transition.successorBlobSha);
+assert.equal(pxrResolverSuccessor.work, 'PDS-W0-PXR-ASSET-RESOLVER-CURRENT-SUCCESSOR');
+assert.equal(pxrResolverSuccessor.status, 'ACTIVE_ADDITIVE_PXR_GROUP_MEMBER_SUCCESSOR_PDS_W0_HISTORY_PRESERVED');
+assert.equal(pxrResolverSuccessor.predecessor.path, transition.path);
+assert.equal(pxrResolverSuccessor.predecessor.sha256, transition.successorSha256);
+assert.equal(pxrResolverSuccessor.predecessor.gitBlobSha, transition.successorBlobSha);
+assert.equal(pxrResolverSuccessor.predecessor.rewritten, false);
+assert.equal(pxrResolverSuccessor.pxrAuthority.path, 'content/web-production/pxr/successors/pxr-asset-resolver-group-member-successor-v1.json');
+assert.equal(canonicalTextSha256(pxrResolverSuccessor.pxrAuthority.path), pxrResolverSuccessor.pxrAuthority.sha256);
+const heroResolverSuccessor = read('content/web-production/reconciliation/pds-w0-asset-resolver-hero-successor-v3.json');
+assert.equal(heroResolverSuccessor.status, 'ENGINEERING_RECONCILIATION');
+assert.equal(heroResolverSuccessor.predecessor.path, paths.pxrResolverSuccessor);
+assert.equal(heroResolverSuccessor.predecessor.sha256, canonicalTextSha256(paths.pxrResolverSuccessor));
+assert.equal(heroResolverSuccessor.predecessor.rewritten, false);
+assert.equal(heroResolverSuccessor.historicalRecordsRewritten, false);
+assert.equal(heroResolverSuccessor.newProductionAcceptanceGranted, false);
+assert.equal(heroResolverSuccessor.current.path, transition.path);
+assert.deepEqual(heroResolverSuccessor.assetIds, ['HERO-021','HERO-022','HERO-023']);
+assert.equal(git(['rev-parse', `${heroResolverSuccessor.sourceCommit}^:${transition.path}`]), pxrResolverSuccessor.current.gitBlobSha);
+assert.equal(git(['rev-parse', `${heroResolverSuccessor.sourceCommit}:${transition.path}`]), heroResolverSuccessor.current.gitBlobSha);
+assert.equal(canonicalTextGitBlobSha(transition.path), heroResolverSuccessor.current.gitBlobSha, 'PDS_W0_CURRENT_ASSET_RESOLVER_BLOB_DRIFT');
+assert.equal(canonicalTextSha256(transition.path), heroResolverSuccessor.current.sha256, 'PDS_W0_CURRENT_ASSET_RESOLVER_SHA256_DRIFT');
+const {resolveCustomerAssetFromRegistry} = await import('../assets/customer-ui/js/assets.js');
+const heroRegistry = read(heroResolverSuccessor.customerRegistry);
+for(const id of heroResolverSuccessor.assetIds)assert.ok(resolveCustomerAssetFromRegistry(heroRegistry,id).publicUrl);
+assert.equal(pxrResolverSuccessor.current.singleResolverIdentityPreserved, true);
+assert.equal(pxrResolverSuccessor.current.groupMemberOnlyExtension, true);
+for (const value of Object.values(pxrResolverSuccessor.authorityBoundary)) assert.equal(value, false);
+assert.equal(transition.resolverIdentityChanged, false);
+assert.equal(transition.secondResolverCreated, false);
+assert.equal(transition.urlResolutionAuthorityChanged, false);
+assert.equal(transition.registryAuthorityChanged, false);
+assert.equal(transition.baselineRuntimeFileModified, false);
+
+for (const evidence of successor.successorAuthorityEvidence) {
+  assert.equal(canonicalTextSha256(evidence.path), evidence.sha256, `PDS_W0_SUCCESSOR_AUTHORITY_DRIFT:${evidence.path}`);
+}
+const wprHpc2Successor = read(successor.successorAuthorityEvidence[0].path);
+const deliveryActivation = read(successor.successorAuthorityEvidence[1].path);
+const homepageConsumption = read(successor.successorAuthorityEvidence[2].path);
+const hpc2PreFreeze = read(successor.successorAuthorityEvidence[3].path);
+assert.equal(wprHpc2Successor.successorRules.existingAssetResolverRemainsSingleAuthority, true);
+assert.equal(deliveryActivation.resolver, transition.path);
+assert.equal(deliveryActivation.secondResolverCreated, false);
+assert.equal(homepageConsumption.resolver, transition.path);
+assert.equal(homepageConsumption.consumerModule, 'assets/js/pages/home-production.js');
+assert.equal(hpc2PreFreeze.implementationDigests[transition.path], transition.successorSha256);
+
+const resolverSource = text(transition.path);
+for (const field of transition.authorizedAdditiveReturnFields) {
+  assert.match(resolverSource, new RegExp(`\\b${field}\\s*[:,]`), `PDS_W0_ASSET_RESOLVER_FIELD_MISSING:${field}`);
+}
+const resolverFiles = fs.readdirSync(path.join(root, 'assets/js/runtime/web-production')).sort();
+assert.deepEqual(resolverFiles, [
+  'asset-resolver.js',
+  'composition-resolver.js',
+  'locale-resolver.js',
+  'vocabulary-resolver.js'
+]);
+
+const unchangedSuccessors = new Map(successor.unchangedRegisteredAdditions.map(entry => [entry.path, entry]));
+for (const [relativePath, expected] of unchangedSuccessors) {
+  const registered = postFreezeRegistry.entries.find(entry => entry.path === relativePath);
+  assert.ok(registered, `PDS_W0_REGISTERED_ADDITION_MISSING:${relativePath}`);
+  assert.equal(registered.gitBlobSha, expected.gitBlobSha);
+  assert.equal(canonicalTextGitBlobSha(relativePath), expected.gitBlobSha, `PDS_W0_REGISTERED_ADDITION_DRIFT:${relativePath}`);
+}
+
+const authorizedRuntimePaths = new Set([transition.path, ...unchangedSuccessors.keys()]);
+const registeredMigrations = new Set(
+  migrationRegistry.migrations
+    .filter(migration => migration.immutable === true)
+    .map(migration => migration.file)
+);
+
+for (const protectedPath of fixture.protectedPaths) {
+  const baselineFiles = git([
+    'ls-tree',
+    '-r',
+    '--name-only',
+    contract.baseline.commit,
+    '--',
+    protectedPath
+  ]).split('\n').filter(Boolean);
+  assert.ok(baselineFiles.length > 0, `PDS_W0_PROTECTED_PATH_MISSING_FROM_BASELINE:${protectedPath}`);
+
+  const changedFiles = [...new Set([...git([
+    'diff',
+    '--name-only',
+    contract.baseline.commit,
+    '--',
+    protectedPath
+  ]).split('\n').filter(Boolean), ...git([
+    'ls-files', '--others', '--exclude-standard', '--', protectedPath
+  ]).split('\n').filter(Boolean)])];
+  if (!changedFiles.length) continue;
+
+  // COM-STRIPE-R1 schema was already committed in the user-approved 16a0ca9
+  // baseline. Admit that single additive file, not arbitrary schema changes.
+  if (protectedPath === 'db/schema' && changedFiles.length === 1 &&
+      changedFiles[0] === 'db/schema/commerce-stripe-r1.sql' &&
+      !baselineFiles.includes(changedFiles[0])) {
+    const accepted = git(['show', `16a0ca903137fdd83cd31e639a119c8c5b3d3c48:${changedFiles[0]}`]).replace(/\r\n?/g, '\n');
+    assert.equal(text(changedFiles[0]).trim(), accepted, 'PDS_W0_COMMERCE_SCHEMA_BASELINE_DRIFT');
+    continue;
+  }
+
+  if (protectedPath === 'functions/runtime') {
+    const ecrLocales = read('content/web-production/reconciliation/pds-w0-ecr-full-r1-locale-successor-v1.json');
+    assert.equal(ecrLocales.baselineFilesMayChange, false);
+    assert.equal(ecrLocales.newUnregisteredFilesAllowed, false);
+    // ECR has a three-file successor, but W0 protects the entire runtime tree.
+    // Keep locale topology exact and review every non-locale addition separately.
+    const otherChanges = partitionRuntimeTopology(changedFiles, baselineFiles, ecrLocales.files.map(x => x.path));
+    for (const entry of ecrLocales.files) {
+      assert.equal(baselineFiles.includes(entry.path), false, 'PDS_W0_ECR_BASELINE_FILE_CHANGED');
+      assert.equal(canonicalTextSha256(entry.path), entry.sha256, `PDS_W0_ECR_LOCALE_DRIFT:${entry.path}`);
+      const committed = git(['show', `${ecrLocales.sourceCommit}:${entry.path}`]).replace(/\r\n?/g, '\n');
+      assert.equal(committed, text(entry.path).trim(), `PDS_W0_ECR_LOCALE_BASELINE_MISMATCH:${entry.path}`);
+    }
+    if (otherChanges.length) {
+      const candidate = read('docs/design-system/pds-w0-navigation-topology-migration-candidate-v1.json');
+      assert.equal(candidate.pdsBaselineCommit, contract.baseline.commit);
+      assert.equal(candidate.changeClass, 'explicit-contract-version-upgrade');
+      const admittedPaths = candidate.entries.map(entry => entry.path);
+      assert.deepEqual(otherChanges.filter(file => admittedPaths.includes(file)).sort(), [...admittedPaths].sort(), 'PDS_W0_ACCEPTED_RUNTIME_ADDITION_MISSING');
+      const pendingPaths = otherChanges.filter(file => !admittedPaths.includes(file));
+      for (const entry of candidate.entries) {
+        assert.equal(canonicalTextSha256(entry.path), entry.sha256, `PDS_W0_NAV_CANDIDATE_SOURCE_DRIFT:${entry.path}`);
+        assert.equal(canonicalTextGitBlobSha(entry.path), entry.gitBlobSha, `PDS_W0_NAV_CANDIDATE_BLOB_DRIFT:${entry.path}`);
+      }
+      // A candidate and doctrine acceptance are not topology authorization.
+      // A reviewed versioned successor is required to admit this migration.
+      const admission = read('docs/design-system/pds-w0-navigation-topology-successor-v1.json');
+      assert.equal(admission.status, 'EXPLICIT_OWNER_ACCEPTED_ADDITIVE_SOURCE_TOPOLOGY');
+      assert.equal(admission.productionActivation, false);
+      assert.equal(admission.baselineCommit, contract.baseline.commit);
+      assert.equal(admission.candidateSHA256, crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'docs/design-system/pds-w0-navigation-topology-migration-candidate-v1.json'))).digest('hex'));
+      assert.equal(admission.candidateSHA256, '95f119b1fc4987d24ba3d3d88d8c9fb9a5e3b67d8d35abfc50c5f616afccb69e');
+      const acceptedReceipt = read(admission.receiptPath);
+      assert.equal(canonicalTextSha256(admission.receiptPath), admission.receiptSHA256);
+      assert.equal(acceptedReceipt.authority, 'DIRECT_OWNER_MESSAGE');
+      assert.equal(acceptedReceipt.candidateID, candidate.registryCode);
+      assert.equal(acceptedReceipt.candidateSHA256, admission.candidateSHA256);
+      assert.equal(acceptedReceipt.productionActivation, false);
+      assert.deepEqual(acceptedReceipt.acceptedEntries, candidate.entries);
+      assert.deepEqual(admission.entries, candidate.entries);
+      if (pendingPaths.length) {
+        const pending = read('docs/design-system/pds-w0-navigation-batch06-topology-candidate-v2.json');
+        assert.equal(pending.status, 'PENDING_EXPLICIT_TOPOLOGY_ACCEPTANCE');
+        assert.equal(pending.productionActivation, false);
+        assert.deepEqual(pendingPaths.sort(), pending.entries.map(entry => entry.path).sort(), 'PDS_W0_UNREGISTERED_RUNTIME_ADDITION');
+        for (const entry of pending.entries) {
+          assert.equal(canonicalTextSha256(entry.path), entry.sha256, `PDS_W0_PENDING_RUNTIME_SOURCE_DRIFT:${entry.path}`);
+          assert.equal(canonicalTextGitBlobSha(entry.path), entry.gitBlobSha, `PDS_W0_PENDING_RUNTIME_BLOB_DRIFT:${entry.path}`);
+        }
+        const batch06Admission = read('docs/design-system/pds-w0-navigation-batch06-successor-v2.json');
+        assert.equal(batch06Admission.status, 'EXPLICIT_OWNER_ACCEPTED_ADDITIVE_SOURCE_TOPOLOGY');
+        assert.equal(batch06Admission.productionActivation, false);
+        assert.equal(batch06Admission.predecessorSuccessor, 'docs/design-system/pds-w0-navigation-topology-successor-v1.json');
+        assert.equal(batch06Admission.candidatePath, 'docs/design-system/pds-w0-navigation-batch06-topology-candidate-v2.json');
+        const batch06Hash = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, batch06Admission.candidatePath))).digest('hex');
+        assert.equal(batch06Hash, '7a716027c9f36a83e765c84e4889fe4e7bf7cf72e1981a6b56e8ab5dff744beb');
+        assert.equal(batch06Admission.candidateSHA256, batch06Hash);
+        assert.equal(canonicalTextSha256(batch06Admission.receiptPath), batch06Admission.receiptSHA256);
+        const batch06Receipt = read(batch06Admission.receiptPath);
+        assert.equal(batch06Receipt.authority, 'DIRECT_OWNER_MESSAGE');
+        assert.equal(batch06Receipt.candidateID, pending.candidateID);
+        assert.equal(batch06Receipt.candidateSHA256, batch06Hash);
+        assert.equal(batch06Receipt.productionActivation, false);
+        assert.equal(batch06Receipt.deletionAuthorized, false);
+        assert.equal(batch06Receipt.commitOrPushAuthorized, false);
+        assert.deepEqual(batch06Receipt.acceptedEntries, pending.entries);
+        assert.deepEqual(batch06Admission.entries, pending.entries);
+      }
+    }
+    continue;
+  }
+
+  if (protectedPath === 'db/migrations') {
+    assert.ok(changedFiles.every(file => !baselineFiles.includes(file) && registeredMigrations.has(file)), 'PDS_W0_UNAUTHORIZED_MIGRATION_CHANGE');
+    continue;
+  }
+
+  if (protectedPath === transition.protectedPath) {
+    assert.deepEqual([...changedFiles].sort(), [...authorizedRuntimePaths].sort(), 'PDS_W0_RUNTIME_PROTECTED_PATH_TOPOLOGY_DRIFT');
+    for (const file of changedFiles) assert.equal(baselineFiles.includes(file), false, `PDS_W0_BASELINE_RUNTIME_FILE_CHANGED:${file}`);
+    continue;
+  }
+
+  const exactBaselineRecovery = changedFiles.every(file => {
+    if (!baselineFiles.includes(file) || !exists(file)) return false;
+    return git(['rev-parse', `${contract.baseline.commit}:${file}`]) === git(['hash-object', file]);
+  });
+  assert.equal(exactBaselineRecovery, true, `PDS_W0_UNAUTHORIZED_PROTECTED_PATH_CHANGE:${protectedPath}`);
+}
+
+for (const boundary of Object.values(successor.boundaries)) assert.equal(boundary, false);
+assert.equal(successor.successorPolicy.failClosed, true);
+assert.equal(successor.successorPolicy.deterministic, true);
+assert.equal(successor.successorPolicy.exactGitBlobRequired, true);
+assert.equal(successor.successorPolicy.exactSha256Required, true);
+assert.equal(successor.successorPolicy.textDigestNormalization, 'UTF8_BOM_STRIPPED_LF');
+assert.equal(successor.successorPolicy.unregisteredProtectedPathChangeForbidden, true);
+assert.equal(successor.successorPolicy.baselineFileModificationOrDeletionForbidden, true);
+
+assert.equal(pkg.scripts['check:pds-w0'], 'node scripts/check-pds-w0-baseline-boundary.mjs');
+assert.equal(pkg.scripts['check:pds-w0-current'], 'node scripts/check-pds-w0-current.mjs');
+assert.deepEqual(
+  pkg.scripts.precheck.split(' && ').slice(0, 3),
+  [
+    'npm run check:report-provider-spend-protection',
+    'npm run check:cloudflare-function-import-compat',
+    'node scripts/check-pds-w0-current.mjs'
+  ],
+  'CLOUDFLARE_FUNCTION_IMPORT_COMPAT_AND_PDS_W0_CURRENT_PRECHECK_ORDER_DRIFT'
+);
+assert.equal(pkg.scripts.precheck.includes('nodescripts/'), false, 'PDS_W0_CURRENT_PRECHECK_COMMAND_CONCATENATION_DRIFT');
+
+console.log('âœ“ PDS-W0 current protected-path successor passed.');
+console.log('âœ“ Frozen PDS-W0 artifacts remain canonical-text exact across LF/CRLF checkout policy; the original WPR-B registry is unchanged.');
+console.log('âœ“ HPC2-PRE asset-resolver successor ec25872c is accepted from its exact commit/blob and freeze evidence.');
+console.log('âœ“ Four existing WPR resolver identities remain singular; baseline mutation and unregistered drift remain fail-closed.');

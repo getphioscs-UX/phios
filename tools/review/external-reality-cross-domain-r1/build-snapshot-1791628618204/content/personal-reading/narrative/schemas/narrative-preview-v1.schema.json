@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-NARRATIVE-PREVIEW-v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "sourceBriefDigest",
+    "previewMode",
+    "openingPreview",
+    "dynamicCuriosityQuestions",
+    "fullNarrativeAdds",
+    "offer",
+    "cta",
+    "productLabel",
+    "priceHardcodedInRenderer",
+    "previewDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-NARRATIVE-PREVIEW-v1.0.0"
+    },
+    "sourceBriefDigest": {
+      "type": "string"
+    },
+    "previewMode": {
+      "enum": [
+        "VERIFIED_AI_PREVIEW",
+        "DETERMINISTIC_FALLBACK"
+      ]
+    },
+    "openingPreview": {
+      "type": "string"
+    },
+    "dynamicCuriosityQuestions": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "fullNarrativeAdds": {
+      "type": "array"
+    },
+    "offer": {
+      "type": "object"
+    },
+    "cta": {
+      "type": "string"
+    },
+    "productLabel": {
+      "type": "string"
+    },
+    "priceHardcodedInRenderer": {
+      "const": false
+    },
+    "previewDigest": {
+      "type": "string"
+    }
+  }
+}

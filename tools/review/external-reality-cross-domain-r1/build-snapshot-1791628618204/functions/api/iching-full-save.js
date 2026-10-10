@@ -1,0 +1,12 @@
+import {resolveIChingFullProductionAuthority,ensureIChingGuestSession,guestPersistenceIdentity,explicitGuestRetentionConsent} from '../iching-full-production/iching-full-production-v1.js';
+import {createIChingFullProductionPersistenceEnvelope} from '../iching-full-production/iching-full-persistence-v1.js';
+import {createSymbolicReadingD1StoreV2} from '../symbolic-method-persistence/symbolic-reading-store-d1-v2.js';
+const headers={'content-type':'application/json; charset=utf-8','cache-control':'no-store','referrer-policy':'no-referrer','x-content-type-options':'nosniff'};
+function json(body,status=200,setCookie=null){const h=new Headers(headers);if(setCookie)h.append('set-cookie',setCookie);return new Response(JSON.stringify(body),{status,headers:h});}
+export async function onRequestPost(context){
+  const production=await resolveIChingFullProductionAuthority(context);if(!production.authorized||production.guestPersistenceAllowed!==true)return json({ok:false,error:{code:'ICHING_FULL_PRODUCTION_GUEST_PERSISTENCE_NOT_AVAILABLE'},production},423);
+  let body;try{body=await context.request.json();}catch{return json({ok:false,error:{code:'INVALID_JSON'}},400);}if(!explicitGuestRetentionConsent(body))return json({ok:false,error:{code:'GUEST_RETENTION_CONSENT_REQUIRED'},governance:{guestPersistenceAllowed:true,retentionExplicit:false,automaticPersistence:false}},403);
+  const guest=await ensureIChingGuestSession(context);const identity=guestPersistenceIdentity(guest.session);if(!identity)return json({ok:false,error:{code:'SIGNED_GUEST_SESSION_REQUIRED'}},503,guest.setCookie);
+  try{const envelope=createIChingFullProductionPersistenceEnvelope(body,{guest:true,retentionDays:production.guestRetentionDays});const store=createSymbolicReadingD1StoreV2({db:context.env.RUNTIME_DB});const saved=await store.save({identity,envelope});return json({ok:true,saved:true,recordId:saved.recordId,provider:saved.provider,governance:{guestPersistenceAllowed:true,signedGuestSessionUsed:true,retentionExplicit:true,retentionPolicyVersion:'ICHING-GUEST-RETENTION-v1',guestRetentionDays:production.guestRetentionDays,automaticPersistence:false,browserLocalFallbackUsed:false,canonicalRealityCreated:false,canonicalRawReadingIrPersisted:false,publicReadingIrProjectionPersisted:true}},200,guest.setCookie);}
+  catch(error){return json({ok:false,error:{code:error.code||error.message||'ICHING_GUEST_SAVE_FAILED'}},error.status||400,guest.setCookie);}
+}

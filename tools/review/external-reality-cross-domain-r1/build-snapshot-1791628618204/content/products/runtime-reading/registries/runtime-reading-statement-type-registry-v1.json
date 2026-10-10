@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W17-STATEMENT-TYPE-REGISTRY-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W17",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "ACTIVE_INTERNAL_STATEMENT_TYPE_REGISTRY",
+  "visibility": "INTERNAL_PROVENANCE_REQUIRED_CUSTOMER_CODE_VISIBILITY_NOT_REQUIRED",
+  "statementTypes": [
+    {
+      "statementType": "CALCULATED_FACT",
+      "definition": "A deterministic fact emitted by an authorized calculation/projection runtime; no interpretation is implied."
+    },
+    {
+      "statementType": "USER_REPORTED_FACT",
+      "definition": "A fact explicitly reported by the user and preserved with source provenance."
+    },
+    {
+      "statementType": "CANONICAL_MEANING",
+      "definition": "A meaning record admitted from CMR under the W9 production-admission gate."
+    },
+    {
+      "statementType": "SYSTEM_INTERPRETATION",
+      "definition": "A governed interpretation result from the existing interpretation authority; never raw-model invention."
+    },
+    {
+      "statementType": "PROFESSIONAL_JUDGMENT",
+      "definition": "A separately attributable human professional judgment from PR."
+    },
+    {
+      "statementType": "NAVIGATION_OPTION",
+      "definition": "A bounded possible direction or observation option that does not choose for the user."
+    },
+    {
+      "statementType": "UNKNOWN",
+      "definition": "An explicit unresolved, unavailable, not-included, or insufficiently supported state."
+    }
+  ],
+  "reservedFuturePayloadExtensions": [
+    "BOUNDARY"
+  ],
+  "rules": {
+    "statementTypeMustBeKnown": true,
+    "calculatedFactMayBeRewrittenAsInterpretation": false,
+    "canonicalMeaningRequiresMeaningAuthority": true,
+    "systemInterpretationRequiresGovernedInterpretationAuthority": true,
+    "professionalJudgmentRequiresPR": true,
+    "navigationOptionIsDecision": false,
+    "unknownMayBeOmittedForCompleteness": false
+  }
+}

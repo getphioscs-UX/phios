@@ -1,0 +1,12 @@
+import {ECR_V41_AUTHORITIES} from './ecr-v41-authorities.generated.js';
+const f0=ECR_V41_AUTHORITIES['content/embodied-configuration/figure-runtime-authority/FIG-4A-carrier-embedding-contract.json'];
+const f1=ECR_V41_AUTHORITIES['content/embodied-configuration/figure-runtime-authority/FIG-4B-human-carrier-architecture-contract.json'];
+const f2=ECR_V41_AUTHORITIES['content/embodied-configuration/figure-runtime-authority/FIG-4C-carrier-runtime-configuration-contract.json'];
+const f3=ECR_V41_AUTHORITIES['content/embodied-configuration/figure-runtime-authority/FIG-4D-runtime-stabilization-continuity-contract.json'];
+const f4=ECR_V41_AUTHORITIES['content/embodied-configuration/figure-runtime-authority/FIG-4E-continuous-human-runtime-contract.json'];
+const f5=ECR_V41_AUTHORITIES['content/embodied-configuration/figure-runtime-authority/FIG-5A-experience-configuration-contract.json'];
+const f6=ECR_V41_AUTHORITIES['content/embodied-configuration/figure-runtime-authority/FIG-5B-expression-configuration-contract.json'];
+const f7=ECR_V41_AUTHORITIES['content/embodied-configuration/figure-runtime-authority/FIG-5C-agency-configuration-contract.json'];
+const f8=ECR_V41_AUTHORITIES['content/embodied-configuration/figure-runtime-authority/FIG-5D-identity-continuity-contract.json'];
+const f9=ECR_V41_AUTHORITIES['content/embodied-configuration/figure-runtime-authority/FIG-5E-human-runtime-engine-integration-contract.json'];
+export const ECR_FIGURES=Object.freeze({'FIG-4A':f0,'FIG-4B':f1,'FIG-4C':f2,'FIG-4D':f3,'FIG-4E':f4,'FIG-5A':f5,'FIG-5B':f6,'FIG-5C':f7,'FIG-5D':f8,'FIG-5E':f9});

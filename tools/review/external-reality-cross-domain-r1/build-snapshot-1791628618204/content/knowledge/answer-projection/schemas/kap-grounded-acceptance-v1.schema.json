@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-KAP-GROUNDED-ACCEPTANCE-v1",
+  "title": "KAP Grounded Acceptance",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "status",
+    "checks",
+    "claimCount",
+    "claims"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-KAP-W33-GROUNDED-ACCEPTANCE-v1.0.0"
+    },
+    "status": {
+      "enum": [
+        "ACCEPTED",
+        "REJECTED"
+      ]
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "claimCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "claims": {
+      "type": "array"
+    }
+  }
+}

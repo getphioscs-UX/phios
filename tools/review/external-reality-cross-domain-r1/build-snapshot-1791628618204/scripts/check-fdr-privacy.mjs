@@ -1,0 +1,8 @@
+import assert from 'node:assert/strict';
+import {base, readJson, getFixtures} from './fdr-check-lib.mjs';
+const consent=readJson(`${base}/contracts/financial-data-consent-contract-v1.json`), sharing=readJson(`${base}/contracts/financial-data-sharing-scope-v1.json`), retention=readJson(`${base}/contracts/financial-data-retention-contract-v1.json`), adapter=readJson(`${base}/contracts/financial-intake-adapter-contract-v1.json`);
+assert.deepEqual(consent.purposeScopes,['FINANCIAL_PLANNING','WILL_ASSEMBLY','PROFESSIONAL_REVIEW','REPORT']); assert.equal(consent.rules.financialPlanningConsentAuthorizesWillAssembly,false); assert.equal(consent.rules.willAssemblyRequiresExplicitScope,true); assert.equal(consent.rules.consentAuthorizesRetention,false); assert.equal(consent.rules.adultHouseholdMembersRequireSeparateConsent,true);
+assert.equal(sharing.rules.financialPlanningToWillImplicitReuseAllowed,false); assert.equal(sharing.rules.crossProfessionalReuseAllowedWithoutConsent,false); assert.equal(sharing.rules.revokedScopeFailsClosed,true); assert.equal(sharing.rules.missingScopeFailsClosed,true);
+assert.equal(retention.rules.silentIndefiniteRetentionAllowed,false); assert.equal(retention.rules.purposeBoundRetentionRequired,true); assert.equal(adapter.rules.adapterMayExpandConsentScope,false);
+for(const {scenario,data} of getFixtures()) assert.ok(consent.purposeScopes.includes(data.purposeScope),`${scenario} invalid purpose scope`);
+console.log('✓ FDR privacy passed: reuse is purpose-scoped and fail-closed; FINANCIAL_PLANNING never implies WILL_ASSEMBLY, retention, or cross-professional sharing.');

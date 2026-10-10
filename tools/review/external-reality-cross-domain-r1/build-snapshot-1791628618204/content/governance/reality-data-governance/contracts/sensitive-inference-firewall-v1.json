@@ -1,0 +1,9 @@
+{
+  "contractCode": "PHI-OS-RDG-W14-SENSITIVE-INFERENCE-FIREWALL-v1",
+  "work": "RDG-W14",
+  "status": "active",
+  "protectedSensitivityClasses": ["SENSITIVE", "HIGHLY_SENSITIVE", "RESTRICTED_PROFESSIONAL"],
+  "protectedCategories": ["HEALTH", "FINANCIAL", "RELATIONSHIP", "FAMILY", "LOCATION", "BIRTH_DATA", "PROFESSIONAL_NOTES"],
+  "decisions": ["ALLOW_PURPOSE_BOUND", "REQUIRE_EXPLICIT_CONSENT", "REQUIRE_PROFESSIONAL_AUTHORITY", "DENY", "UNRESOLVED"],
+  "rules": {"sensitiveInferenceByDefaultDenied": true, "purposeAndConsentRequired": true, "presentationCannotBypassFirewall": true, "aiProviderCannotGrantPermission": true, "professionalIsolationPreserved": true}
+}

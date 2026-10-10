@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W26-FIXTURE-REGISTRY-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W26.1-W26.4",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "ACTIVE_PRODUCT_FIXTURE_REGISTRY",
+  "positiveFixtures": [
+    {
+      "fixtureId": "F01",
+      "title": "Reality Only",
+      "kind": "POSITIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/cases/F01/input.json",
+      "expectedCandidateFile": "content/products/runtime-reading/fixtures/cases/F01/expected-candidate.json",
+      "expectedOutcome": "PASS"
+    },
+    {
+      "fixtureId": "F02",
+      "title": "AST Only",
+      "kind": "POSITIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/cases/F02/input.json",
+      "expectedCandidateFile": "content/products/runtime-reading/fixtures/cases/F02/expected-candidate.json",
+      "expectedOutcome": "PASS"
+    },
+    {
+      "fixtureId": "F03",
+      "title": "BZR Only",
+      "kind": "POSITIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/cases/F03/input.json",
+      "expectedCandidateFile": "content/products/runtime-reading/fixtures/cases/F03/expected-candidate.json",
+      "expectedOutcome": "PASS"
+    },
+    {
+      "fixtureId": "F04",
+      "title": "AST + BZR",
+      "kind": "POSITIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/cases/F04/input.json",
+      "expectedCandidateFile": "content/products/runtime-reading/fixtures/cases/F04/expected-candidate.json",
+      "expectedOutcome": "PASS"
+    },
+    {
+      "fixtureId": "F05",
+      "title": "Missing Birth Time",
+      "kind": "POSITIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/cases/F05/input.json",
+      "expectedCandidateFile": "content/products/runtime-reading/fixtures/cases/F05/expected-candidate.json",
+      "expectedOutcome": "PASS"
+    },
+    {
+      "fixtureId": "F06",
+      "title": "Invalid Birth Place",
+      "kind": "POSITIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/cases/F06/input.json",
+      "expectedCandidateFile": "content/products/runtime-reading/fixtures/cases/F06/expected-candidate.json",
+      "expectedOutcome": "PASS"
+    },
+    {
+      "fixtureId": "F07",
+      "title": "Meaning Unavailable",
+      "kind": "POSITIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/cases/F07/input.json",
+      "expectedCandidateFile": "content/products/runtime-reading/fixtures/cases/F07/expected-candidate.json",
+      "expectedOutcome": "PASS"
+    },
+    {
+      "fixtureId": "F08",
+      "title": "Contradictory Inputs",
+      "kind": "POSITIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/cases/F08/input.json",
+      "expectedCandidateFile": "content/products/runtime-reading/fixtures/cases/F08/expected-candidate.json",
+      "expectedOutcome": "PASS"
+    },
+    {
+      "fixtureId": "F09",
+      "title": "Unknown-heavy Case",
+      "kind": "POSITIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/cases/F09/input.json",
+      "expectedCandidateFile": "content/products/runtime-reading/fixtures/cases/F09/expected-candidate.json",
+      "expectedOutcome": "PASS"
+    },
+    {
+      "fixtureId": "F10",
+      "title": "HDR Professional-only",
+      "kind": "POSITIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/cases/F10/input.json",
+      "expectedCandidateFile": "content/products/runtime-reading/fixtures/cases/F10/expected-candidate.json",
+      "expectedOutcome": "PASS"
+    },
+    {
+      "fixtureId": "F11",
+      "title": "Professional Runtime Reading",
+      "kind": "POSITIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/cases/F11/input.json",
+      "expectedCandidateFile": "content/products/runtime-reading/fixtures/cases/F11/expected-candidate.json",
+      "expectedOutcome": "PASS"
+    },
+    {
+      "fixtureId": "F12",
+      "title": "Visual Degraded",
+      "kind": "POSITIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/cases/F12/input.json",
+      "expectedCandidateFile": "content/products/runtime-reading/fixtures/cases/F12/expected-candidate.json",
+      "expectedOutcome": "PASS"
+    }
+  ],
+  "negativeFixtures": [
+    {
+      "fixtureId": "N01",
+      "title": "Fake meaning",
+      "kind": "NEGATIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/negative/N01.json",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedFailureCode": "MEANING_AUTHORITY_REQUIRED"
+    },
+    {
+      "fixtureId": "N02",
+      "title": "Fake professional judgment",
+      "kind": "NEGATIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/negative/N02.json",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedFailureCode": "PR_SOURCE_REQUIRED"
+    },
+    {
+      "fixtureId": "N03",
+      "title": "Missing statement source",
+      "kind": "NEGATIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/negative/N03.json",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedFailureCode": "STATEMENT_SOURCE_REQUIRED"
+    },
+    {
+      "fixtureId": "N04",
+      "title": "Unknown silently deleted",
+      "kind": "NEGATIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/negative/N04.json",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedFailureCode": "UNKNOWN_PRESERVATION_REQUIRED"
+    },
+    {
+      "fixtureId": "N05",
+      "title": "Unsupported method execution",
+      "kind": "NEGATIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/negative/N05.json",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedFailureCode": "UNSUPPORTED_METHOD_EXECUTION"
+    },
+    {
+      "fixtureId": "N06",
+      "title": "Method executed without consent",
+      "kind": "NEGATIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/negative/N06.json",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedFailureCode": "METHOD_CONSENT_REQUIRED"
+    },
+    {
+      "fixtureId": "N07",
+      "title": "Layout field inside RRP",
+      "kind": "NEGATIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/negative/N07.json",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedFailureCode": "PRESENTATION_AUTHORITY_LEAKAGE"
+    },
+    {
+      "fixtureId": "N08",
+      "title": "releaseId inside RRP",
+      "kind": "NEGATIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/negative/N08.json",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedFailureCode": "RELEASE_AUTHORITY_LEAKAGE"
+    },
+    {
+      "fixtureId": "N09",
+      "title": "Customer-visible access assertion",
+      "kind": "NEGATIVE",
+      "inputFile": "content/products/runtime-reading/fixtures/negative/N09.json",
+      "expectedOutcome": "FAIL_CLOSED",
+      "expectedFailureCode": "CUSTOMER_PRESENTATION_AUTHORITY_LEAKAGE"
+    }
+  ],
+  "rules": {
+    "minimumPositiveFixtureCount": 12,
+    "goldenCandidateRequired": true,
+    "candidateDigestRequired": true,
+    "sameInputAndVersionsSameCandidate": true,
+    "allPositiveFixturesMustPass": true,
+    "allNegativeFixturesMustFailClosed": true,
+    "fixturesAreNotPilotCases": true,
+    "fixturesCannotPromoteToEM3": true
+  }
+}

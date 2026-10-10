@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-PJA-W2D-VAP-L10N-ENGLISH-PUBLICATION-SUCCESSOR-RECONCILIATION-v1.0.0",
+  "status": "ACTIVE_SUCCESSOR_AWARE_HISTORICAL_CHECKER_RECONCILIATION",
+  "scope": "PJA-W2D published-content regression only",
+  "problem": "PJA-W2D historically fixed the English public article count at three even after a governed VAP-L10N English visual article successor may be published for KN-PREFACE-001.",
+  "preservedAuthority": {
+    "legacyEnglishArticleCount": 3,
+    "legacyArticleBodiesRemainPjaAuthority": true,
+    "visualArticlePublicationAuthorityRemainsVap": true,
+    "noPublicationCreatedByThisReconciliation": true
+  },
+  "successorRule": {
+    "optionalSuccessorNodeCode": "KN-PREFACE-001",
+    "optionalSuccessorLocale": "en",
+    "requiredManifest": "content/knowledge/public/visual-article-release.json",
+    "requiredManifestStatus": "published",
+    "expectedCountWhenSuccessorAbsent": 3,
+    "expectedCountWhenSuccessorPresent": 4,
+    "arbitraryFourthEnglishArticleAllowed": false
+  },
+  "rendererRegressionBoundary": {
+    "legacyArticleShapeAssertionsApplyToLegacyArticles": true,
+    "vapVisualArticleShapeGovernedByVapCheckers": true,
+    "knPreface001VisualSuccessorExcludedFromLegacyFourSectionAssertion": true
+  }
+}

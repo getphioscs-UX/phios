@@ -1,0 +1,49 @@
+{
+  "contractCode": "PHI-OS-WPR-W28-DRIFT-OBSERVABILITY-DEPLOYMENT-v1",
+  "contractVersion": "1.0.0",
+  "work": "WPR-W28",
+  "baselineCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+  "status": "ACTIVE_OBSERVABILITY_DEPLOYMENT_REVALIDATION_REQUIRED",
+  "authority": {
+    "wprObservesWebProductionState": true,
+    "wprMayMutateDeployment": false,
+    "wprMayDeploy": false,
+    "wprMayRollback": false,
+    "wprMayCreatePublication": false,
+    "wprMayCreateProfessionalJudgment": false,
+    "wprMayReadPrivateCustomerPayloadForObservability": false
+  },
+  "observabilityDimensions": [
+    "REPOSITORY_BASELINE",
+    "DEPLOYMENT_SHA_ALIGNMENT",
+    "PRODUCTION_RECORD_STATE",
+    "ROUTE_SURFACE_COVERAGE",
+    "PUBLIC_ASSET_DELIVERY",
+    "DISCOVERY_ORIGIN",
+    "PRIVATE_RESPONSE_SECURITY",
+    "PDS_BROWSER_REVALIDATION",
+    "UPSTREAM_PRESENTATION_PUBLICATION_STATE",
+    "CHECKER_ALIAS_INTEGRITY"
+  ],
+  "deploymentShaPolicy": {
+    "repositoryAuthority": "GITHUB_ORIGIN_MAIN_FULL_SHA",
+    "deploymentAuthority": "CLOUDFLARE_PAGES_FULL_DEPLOYMENT_COMMIT_SHA",
+    "shortShaIsAuthority": false,
+    "exactMatchRequiredForCurrentDeploymentClaim": true,
+    "staleVerificationMayBeRecordedButNotPromoted": true,
+    "verificationIsReadOnly": true
+  },
+  "privacy": {
+    "piiAllowed": false,
+    "customerPayloadAllowed": false,
+    "professionalPayloadAllowed": false,
+    "credentialsAllowed": false,
+    "queryLoggingRequired": false
+  },
+  "rules": {
+    "observabilityDoesNotGrantAuthority": true,
+    "driftMustRemainExplicit": true,
+    "externalGateMayNotBeClosedWithoutEvidence": true,
+    "deploymentObservationMayChangeAfterFreeze": true
+  }
+}

@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const aggregate=items=>crypto.createHash('sha256').update(items.sort((a,b)=>a[0].localeCompare(b[0])).map(([p,d])=>`${p}:${d}`).join('\n')).digest('hex');
+const BASE='d96f4025a1b11372e676aeb26228788026185893';
+const AUD='content/knowledge/production-planning/continuity/book3-post-freeze-continuity-audit-d96f402-v1.json';
+const FR='content/knowledge/production-planning/freeze/book3-final-publication-freeze-v1.json';
+const CT='content/knowledge/production-planning/continuity/book3-publication-continuity-maintenance-v1.json';
+const ZH='content/knowledge/production-planning/publication/book3-zh-hans-publication-customer-integration-v1.json';
+const EN='content/knowledge/production-planning/publication/book3-en-publication-customer-integration-v1.json';
+const RELEASE='content/knowledge/public/visual-article-release.json';
+const aud=read(AUD),fr=read(FR),ct=read(CT),zh=read(ZH),en=read(EN),release=read(RELEASE);
+assert.equal(aud.auditBaselineCommit,BASE);assert.equal(aud.status,'PASS_NO_FROZEN_PUBLICATION_DRIFT');assert.equal(ct.status,'ACTIVE_POST_FREEZE_MAINTENANCE_POLICY');assert.equal(ct.nextMaintenanceMode,'SUCCESSOR_ONLY_NO_PARALLEL_RUNTIME');
+assert.equal(zh.records.length,48);assert.equal(en.records.length,48);const items=[...zh.records,...en.records].map(r=>[r.publicArticlePath,r.publicArticleSha256]);assert.equal(items.length,96);assert.equal(aud.digestVerification.releaseManifestObservedSha256,sha(RELEASE));assert.equal(aud.digestVerification.releaseManifestObservedSha256,fr.digests.releaseManifestSha256);assert.equal(aud.digestVerification.publicPayloadAggregateObservedSha256,aggregate(items));assert.equal(aud.digestVerification.publicPayloadAggregateObservedSha256,fr.digests.publicPayloadAggregateSha256);assert.equal(aud.digestVerification.releaseManifestMatchesFreeze,true);assert.equal(aud.digestVerification.publicPayloadAggregateMatchesFreeze,true);
+const rows=release.records.filter(x=>x.source==='BOOK3-FINAL-ARTICLE-PRODUCTION');assert.equal(rows.length,96);assert.equal(new Set(rows.filter(x=>x.locale==='zh-Hans').map(x=>x.articlePlanId)).size,48);assert.equal(new Set(rows.filter(x=>x.locale==='en').map(x=>x.articlePlanId)).size,48);
+assert.equal(aud.continuityVerification.articleIdentityDriftDetected,false);assert.equal(aud.continuityVerification.canonicalNodeRemapDetected,false);assert.equal(aud.continuityVerification.publishedPayloadRewriteDetected,false);assert.equal(aud.continuityVerification.releaseManifestDriftDetected,false);assert.equal(aud.continuityVerification.parallelRuntimeCreated,false);assert.equal(aud.maintenanceDecision,'NO_CONTENT_SUCCESSOR_REQUIRED_PLATFORM_CHANGES_PRESERVE_FROZEN_BOOK3_PUBLICATION');
+assert.equal(aud.requiredVisualVerification.length,3);for(const v of aud.requiredVisualVerification){assert.ok(fs.existsSync(v.assetPath));assert.equal(sha(v.assetPath),v.assetSha256);assert.equal(v.humanVisualApproval,'ACCEPTED');}
+const loader=fs.readFileSync('assets/js/knowledge/published-content.js','utf8');assert.ok(loader.includes('visual-article-release.json'));assert.ok(loader.includes('loadPublishedArticleBySlug'));assert.ok(loader.includes('record.locale === normalizedLocale'));
+console.log('✓ BOOK-3 post-freeze continuity maintenance passed: frozen bilingual publication remains unchanged at 48 zh-Hans + 48 en = 96 public projections.');
+console.log('✓ Freeze digests, Article identities, release rows, required visual binaries and locale-aware Article runtime remain aligned; no content successor is required at d96f402.');
+console.log('✓ Continuity remains successor-only and on-demand; this audit does not reopen Book III production.');

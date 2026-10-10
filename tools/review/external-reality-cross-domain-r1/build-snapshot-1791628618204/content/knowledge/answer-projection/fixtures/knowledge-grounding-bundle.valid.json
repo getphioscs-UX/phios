@@ -1,0 +1,264 @@
+{
+  "schemaVersion": "PHI-OS-KNOWLEDGE-GROUNDING-BUNDLE-v1.0.0",
+  "objectType": "KnowledgeGroundingBundle",
+  "bundleId": "KGB-v1-fccd2634",
+  "authorityClass": "GROUNDED_NON_AUTHORITATIVE_INPUT",
+  "question": {
+    "capability": "ASK_PHIOS",
+    "text": "为什么人工智能是文明能力长期累积的结果?",
+    "locale": "zh-Hans"
+  },
+  "normalization": {
+    "searchText": "为什么人工智能是文明能力长期累积的结果?",
+    "tokens": [
+      "为什",
+      "什么",
+      "么人",
+      "人工",
+      "工智",
+      "智能",
+      "能是",
+      "是文",
+      "文明",
+      "明能",
+      "能力",
+      "力长",
+      "长期",
+      "期累",
+      "累积",
+      "积的",
+      "的结",
+      "结果"
+    ],
+    "hints": {
+      "intent": "UNDERSTAND_KNOWLEDGE",
+      "questionType": "CAUSAL",
+      "subject": "GENERAL",
+      "timeScope": "LONG_TERM",
+      "containsPersonalContextHint": false
+    },
+    "hintsAreMeaningAuthority": false
+  },
+  "retrieval": {
+    "authority": "KSAR_KNOWLEDGE_ACCESS",
+    "sourceMode": "hybrid",
+    "upstreamCoverage": {
+      "level": "hybrid",
+      "published": "exact",
+      "manuscript": "covered",
+      "answerGroundingAllowed": true
+    },
+    "upstreamGroundedAnswerPresent": true,
+    "upstreamGroundedAnswerConsumed": false
+  },
+  "nodeMatches": {
+    "primaryNodes": [
+      {
+        "nodeCode": "KN-PREFACE-001",
+        "title": "为什么人工智能是文明能力长期累积的结果",
+        "score": 1000,
+        "sources": [
+          {
+            "sourceType": "PUBLISHED_RETRIEVAL",
+            "rank": 1,
+            "href": "/articles/ai-formation-from-civilizational-capability"
+          }
+        ],
+        "published": true,
+        "approvedManuscriptBinding": false,
+        "relationshipExpansionEligible": true,
+        "matchRole": "PRIMARY"
+      }
+    ],
+    "supportingNodes": [
+      {
+        "nodeCode": "KN-PREFACE-004",
+        "title": null,
+        "score": 420,
+        "sources": [
+          {
+            "sourceType": "APPROVED_MANUSCRIPT_BINDING",
+            "sectionCode": "CM-B1V2-P0-S001",
+            "mappingCodes": [
+              "KAU-R3-B1-MAP-001"
+            ]
+          }
+        ],
+        "published": false,
+        "approvedManuscriptBinding": true,
+        "relationshipExpansionEligible": false,
+        "matchRole": "SUPPORTING"
+      }
+    ],
+    "relatedPublishedNodeCodes": [],
+    "canonicalAuthorityCreated": false,
+    "automaticSemanticBindingUsed": false
+  },
+  "relationships": {
+    "depth": 1,
+    "authority": "PUBLISHED_GRAPH_ONLY_WITH_CONTROLLED_EVIDENCE_BACKED_MECHANISM_FACETS",
+    "relatedPublishedNodes": [],
+    "relationships": [],
+    "blockedContinuations": [
+      {
+        "relationshipCode": "REL-KN-PREFACE-001-ZH-HANS-nextNodeCodes-KN-PREFACE-002",
+        "sourceNodeCode": "KN-PREFACE-001",
+        "targetNodeCode": "KN-PREFACE-002",
+        "type": "nextNodeCodes",
+        "reason": "TARGET_NOT_PUBLISHED_IN_REQUESTED_LOCALE",
+        "groundingEligible": false
+      },
+      {
+        "relationshipCode": "REL-KN-PREFACE-001-ZH-HANS-relatedNodeCodes-KN-PREFACE-002",
+        "sourceNodeCode": "KN-PREFACE-001",
+        "targetNodeCode": "KN-PREFACE-002",
+        "type": "relatedNodeCodes",
+        "reason": "TARGET_NOT_PUBLISHED_IN_REQUESTED_LOCALE",
+        "groundingEligible": false
+      }
+    ],
+    "mechanismFacets": [
+      {
+        "nodeCode": "KN-PREFACE-001",
+        "facetCode": "knowledge_expression",
+        "facetKind": "formation_condition",
+        "evidenceMode": "controlled_term_match",
+        "evidenceFragmentCodes": [
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-003",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-004",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-005",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-008"
+        ],
+        "groundingEligible": true
+      },
+      {
+        "nodeCode": "KN-PREFACE-001",
+        "facetCode": "material_infrastructure",
+        "facetKind": "formation_condition",
+        "evidenceMode": "controlled_term_match",
+        "evidenceFragmentCodes": [
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-004",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-005",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-006"
+        ],
+        "groundingEligible": true
+      },
+      {
+        "nodeCode": "KN-PREFACE-001",
+        "facetCode": "organizational_coordination",
+        "facetKind": "coordination_mechanism",
+        "evidenceMode": "controlled_term_match",
+        "evidenceFragmentCodes": [
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-003",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-004",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-005",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-006",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-008",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-009"
+        ],
+        "groundingEligible": true
+      },
+      {
+        "nodeCode": "KN-PREFACE-001",
+        "facetCode": "feedback_scaling",
+        "facetKind": "amplification_mechanism",
+        "evidenceMode": "controlled_term_match",
+        "evidenceFragmentCodes": [
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-002",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-003",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-004",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-006",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-007",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-008",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-009"
+        ],
+        "groundingEligible": true
+      },
+      {
+        "nodeCode": "KN-PREFACE-001",
+        "facetCode": "responsibility_boundary",
+        "facetKind": "governance_boundary",
+        "evidenceMode": "controlled_term_match",
+        "evidenceFragmentCodes": [
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-005",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-006",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-007",
+          "FRAGMENT-KN-PREFACE-001-ZH-HANS-008"
+        ],
+        "groundingEligible": true
+      }
+    ],
+    "providerUsed": false,
+    "unsupportedInferenceUsed": false,
+    "unpublishedTargetContentInjected": false,
+    "transitiveExpansionUsed": false
+  },
+  "sources": [
+    {
+      "sourceId": "PUBLISHED:KN-PREFACE-001:FRAGMENT-KN-PREFACE-001-ZH-HANS-002",
+      "sourceType": "PUBLISHED_CANONICAL_ARTICLE",
+      "nodeCode": "KN-PREFACE-001",
+      "fragmentCode": "FRAGMENT-KN-PREFACE-001-ZH-HANS-002",
+      "digest": "fixture-fragment",
+      "text": "人工智能依赖文明长期累积的知识表达、物质基础、组织制度与反馈机制。"
+    },
+    {
+      "sourceId": "MANUSCRIPT:CM-B1V2-P0-S001",
+      "sourceType": "COMPLETED_MANUSCRIPT",
+      "bookCode": "BOOK-1",
+      "partCode": "P0",
+      "sectionCode": "CM-B1V2-P0-S001",
+      "pageRange": {
+        "start": 1,
+        "end": 2
+      },
+      "sourceDigest": "fixture-manuscript-1",
+      "canonicalBinding": {
+        "status": "APPROVED",
+        "nodeCodes": [
+          "KN-PREFACE-004"
+        ],
+        "mappingCodes": [
+          "KAU-R3-B1-MAP-001"
+        ]
+      },
+      "text": "文明能力通过知识表达、基础设施与组织协作长期累积。"
+    }
+  ],
+  "unknowns": [
+    {
+      "code": "CANONICAL_BINDING_PENDING",
+      "sectionCode": "CM-B1V2-P1-S999",
+      "canonicalBindingStatus": "PENDING"
+    },
+    {
+      "code": "RELATED_TARGET_NOT_PUBLISHED",
+      "targetNodeCode": "KN-PREFACE-002",
+      "relationshipCode": "REL-KN-PREFACE-001-ZH-HANS-nextNodeCodes-KN-PREFACE-002"
+    },
+    {
+      "code": "RELATED_TARGET_NOT_PUBLISHED",
+      "targetNodeCode": "KN-PREFACE-002",
+      "relationshipCode": "REL-KN-PREFACE-001-ZH-HANS-relatedNodeCodes-KN-PREFACE-002"
+    }
+  ],
+  "excludedMaterial": [
+    "RAW_FULL_BOOK",
+    "RAW_SECTION_BODY",
+    "UNPUBLISHED_RELATIONSHIP_TARGET_CONTENT",
+    "UPSTREAM_GROUNDED_ANSWER_TEXT",
+    "CLIENT_REALITY_EVIDENCE",
+    "METHOD_CALCULATION_RESULT",
+    "AI_GENERATED_KNOWLEDGE"
+  ],
+  "governance": {
+    "answerComposed": false,
+    "aiUsed": false,
+    "canonicalAuthorityCreated": false,
+    "publicationCreated": false,
+    "realityReadingCreated": false,
+    "persistentCaseCreated": false,
+    "rawFullBookExposed": false,
+    "unpublishedTargetContentInjected": false
+  }
+}

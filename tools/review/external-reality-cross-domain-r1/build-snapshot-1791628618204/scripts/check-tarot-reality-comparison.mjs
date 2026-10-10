@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';
+import {adaptTarotProjections} from '../functions/interpretation-runtime/adapters/tarot-interpretation-adapter-v1.js';
+import {composeTarotRealityComparison,TAROT_REALITY_QUESTIONS} from '../functions/interpretation-runtime/tarot-reality-comparison-v1.js';
+import {tariAuthorities,projectThree} from './lib/tarot/tari-fixtures-v1.mjs';
+const c=JSON.parse(fs.readFileSync('content/interpretation/tarot/contracts/tarot-reality-comparison-contract-v1.json','utf8'));
+const b=adaptTarotProjections(await projectThree(),{cardRegistry:tariAuthorities.cardRegistry,sourceRegistry:tariAuthorities.sourceRegistry,perspectiveRegistry:tariAuthorities.perspectiveRegistry,symbolDimensionRegistry:tariAuthorities.symbolDimensionRegistry,corpus:tariAuthorities.corpus});const out=composeTarotRealityComparison(b);
+assert.equal(c.work,'TARI-W4');assert.deepEqual(c.requiredQuestions,[...TAROT_REALITY_QUESTIONS]);assert.equal(out.cards.length,3);assert.equal(out.rules.cardSaysFramingUsed,false);assert.equal(out.rules.realityMayContradictLens,true);assert.equal(out.rules.userDecisionAuthority,true);assert.equal(out.authority.compositionOwnsRealityTruth,false);assert.equal(out.aiUsed,false);assert.equal(out.providerUsed,false);
+for(const card of out.cards){assert.deepEqual(card.realityQuestions,[...TAROT_REALITY_QUESTIONS]);for(const l of card.lenses){assert.match(l.lensIntroduction,/^This card introduces .+ as a source-bound lens\.$/);assert.equal(l.evidenceQuestion,'Does your current evidence support that lens?');assert.ok(l.sourceId&&l.perspectiveId&&l.provenance&&l.sourceClaim.sourceBound);}}
+const generated=JSON.stringify(out.cards.map(x=>({lenses:x.lenses.map(y=>y.lensIntroduction),questions:x.realityQuestions}))).toLowerCase();for(const bad of ['card says ','the card says ','this card proves '])assert.equal(generated.includes(bad),false);
+console.log('✓ TARI-W4 Reality Comparison passed: source-bound lens framing + evidence/contradiction/unknown/observation/user-decision questions.');

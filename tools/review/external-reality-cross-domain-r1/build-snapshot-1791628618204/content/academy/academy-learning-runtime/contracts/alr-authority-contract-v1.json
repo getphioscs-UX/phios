@@ -1,0 +1,88 @@
+{
+  "contractCode": "PHI-OS-ALR-W1-AUTHORITY-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W1",
+  "status": "foundation",
+  "productionStatus": "validation_only",
+  "runtimeCode": "ALR",
+  "runtimeName": "Academy Learning & Capability Runtime",
+  "authorityClass": "LEARNING_CAPABILITY",
+  "authorityReference": "content/governance/operational-architecture/runtime-authority-map-v1.json",
+  "semanticAuthority": [
+    "LEARNING_OBJECT",
+    "ACADEMY_LEVEL",
+    "LEARNING_TRACK",
+    "PROGRAM",
+    "LEARNING_PATH",
+    "MODULE",
+    "LESSON",
+    "LEARNING_OBJECTIVE",
+    "PRACTICE",
+    "ASSESSMENT",
+    "LEARNING_FEEDBACK",
+    "LEARNING_CAPABILITY",
+    "CAPABILITY_DEPENDENCY",
+    "CAPABILITY_STATE",
+    "CAPABILITY_GAP",
+    "LEARNING_PROGRESS",
+    "LEARNING_CONTINUITY"
+  ],
+  "upstreamAuthorities": [
+    {"runtime": "KNOWLEDGE_AUTHORITY", "provides": ["PUBLISHED_KNOWLEDGE"], "alrMayMutate": false},
+    {"runtime": "KPP", "provides": ["ACADEMY_PRODUCTION_NEED"], "alrMayMutate": false},
+    {"runtime": "CAR", "provides": ["PUBLISHED_LEARNING_ASSETS", "LESSON_BRIEF", "SLIDES_BRIEF", "QUIZ_BRIEF", "ASSIGNMENT_BRIEF"], "alrMayMutate": false},
+    {"runtime": "RDG", "provides": ["LEARNING_DATA_GOVERNANCE", "CAPABILITY_EVIDENCE_DATA_BOUNDARY"], "alrMayMutate": false}
+  ],
+  "downstreamAuthorities": [
+    {"runtime": "CPR", "receives": ["ACADEMY_PRESENTATION_PROJECTION"], "mayMutateAlrSemantics": false},
+    {"runtime": "PROFESSIONAL_READINESS", "receives": ["BOUNDED_READINESS_HANDOFF"], "mayGrantCredentialFromHandoff": false}
+  ],
+  "namespaceBoundaries": {
+    "alrLearningCapabilityPrefix": "ALR-CAP-",
+    "pwsProfessionalCapabilityPrefix": "pws.capability.",
+    "alrLearningCapabilityIsPwsProfessionalCapability": false,
+    "academyLevelIsCapabilityState": false,
+    "learningTrackIsLearningPath": false,
+    "carLessonBriefIsAlrLessonRuntime": false,
+    "kppAcademyNeedIsAlrLessonRuntime": false,
+    "cprAcademyPresentationIsAlrLearningAuthority": false
+  },
+  "actionMatrix": [
+    {"action": "REGISTER_LEARNING_OBJECT_TYPE", "decision": "ALLOW_FOUNDATION_DECLARATION", "ownerWork": "ALR-W2"},
+    {"action": "REGISTER_ACADEMY_LEVEL", "decision": "ALLOW_FOUNDATION_DECLARATION", "ownerWork": "ALR-W3"},
+    {"action": "REGISTER_LEARNING_TRACK_CLASS", "decision": "ALLOW_FOUNDATION_DECLARATION", "ownerWork": "ALR-W4"},
+    {"action": "REFERENCE_PUBLISHED_KNOWLEDGE", "decision": "ALLOW_REFERENCE_ONLY", "ownerWork": "ALR-W15"},
+    {"action": "REFERENCE_PUBLISHED_ASSET", "decision": "ALLOW_REFERENCE_ONLY", "ownerWork": "ALR-W19"},
+    {"action": "SET_CAPABILITY_STATE", "decision": "DEFER_TO_FUTURE_WORK", "ownerWork": "ALR-W8"},
+    {"action": "WRITE_LEARNING_PROGRESS", "decision": "DEFER_TO_FUTURE_WORK", "ownerWork": "ALR-W29"},
+    {"action": "WRITE_KNOWLEDGE", "decision": "DENY_ALR_AUTHORITY", "authority": "KNOWLEDGE_AUTHORITY"},
+    {"action": "PUBLISH_KNOWLEDGE", "decision": "DENY_ALR_AUTHORITY", "authority": "PUBLICATION_AUTHORITY"},
+    {"action": "CREATE_OR_APPROVE_ASSET", "decision": "DENY_ALR_AUTHORITY", "authority": "CAR"},
+    {"action": "RENDER_PRESENTATION", "decision": "DENY_ALR_AUTHORITY", "authority": "CPR"},
+    {"action": "DECIDE_DATA_PURPOSE_RETENTION_OR_DELETION", "decision": "DENY_ALR_AUTHORITY", "authority": "RDG"},
+    {"action": "WRITE_REALITY_EVIDENCE", "decision": "DENY_ALR_AUTHORITY", "authority": "RRE/RDG"},
+    {"action": "WRITE_PROFESSIONAL_JUDGMENT", "decision": "DENY_ALR_AUTHORITY", "authority": "PR"},
+    {"action": "GRANT_PROFESSIONAL_CREDENTIAL", "decision": "DENY_ALR_AUTHORITY", "authority": "PROFESSIONAL_GOVERNANCE"},
+    {"action": "GRANT_ACADEMY_ENTITLEMENT", "decision": "DENY_ALR_AUTHORITY", "authority": "PERMISSION_ENTITLEMENT"}
+  ],
+  "foundationActivation": {
+    "contractAndRegistriesActive": true,
+    "learningDataRuntimeActive": false,
+    "capabilityStateRuntimeActive": false,
+    "assessmentRuntimeActive": false,
+    "credentialRuntimeActive": false,
+    "academyPresentationRuntimeActive": false
+  },
+  "rules": {
+    "publishedKnowledgeRequiredForTeachingProjection": true,
+    "publishedAssetRequiredForAssetProjection": true,
+    "assessmentScoreIsCapability": false,
+    "lessonCompletionIsCapability": false,
+    "capabilityEvidenceIsCapabilityState": false,
+    "professionalAcademyLevelGrantsProfessionalAuthority": false,
+    "providerMaySetCapabilityState": false,
+    "surfaceMaySetLearningState": false,
+    "registryMayStoreUserData": false,
+    "foundationMayActivateCourseDelivery": false
+  }
+}

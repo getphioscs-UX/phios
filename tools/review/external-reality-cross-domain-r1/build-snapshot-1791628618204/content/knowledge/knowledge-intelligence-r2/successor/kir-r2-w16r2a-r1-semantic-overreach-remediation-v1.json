@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-W16R2A-R1-SEMANTIC-OVERREACH-REMEDIATION-v1.0.0",
+  "work": "KIR-R2-W16R2A-R1",
+  "baselineCommit": "d49dd16b38d7f858c9bad861b788919d0dec4c33",
+  "status": "ENGINEERING_READY_CASE084_LIVE_RERUN_REQUIRED",
+  "preserves": {
+    "w16r2HumanReview": "93/100 accepted; immutable historical evidence",
+    "w16r2aTargetedMachine": "7/7 applied and guard-passed",
+    "w16r2aTargetedHuman": "6/7 accepted; case 084 remains rejected",
+    "rewritePriorEvidence": false
+  },
+  "remainingGap": {
+    "caseId": "KIR-R2-W15R-084",
+    "class": "SOURCE_BOUNDARY_CAUSAL_SUBSTITUTION",
+    "description": "The regenerated answer replaced the admitted internal-conflict mechanism (cost allocation and boundaries) with unsupported competing-directions / old-vs-new-inertia causes."
+  },
+  "remediation": {
+    "guard": "Reject novel causal vocabulary such as competing directions or old/new inertia when it is absent from the supplied Evidence Pack.",
+    "prompt": "Require the composer to preserve the evidence-stated causal mechanism and abstain instead of inventing a cause.",
+    "rerunScope": "CASE084_ONLY"
+  },
+  "productionGate": {
+    "humanAcceptance93of100Preserved": true,
+    "targetedSpotReviewRequired": true,
+    "case084MustBeAccepted": true,
+    "productionCutoverAllowedNow": false
+  }
+}

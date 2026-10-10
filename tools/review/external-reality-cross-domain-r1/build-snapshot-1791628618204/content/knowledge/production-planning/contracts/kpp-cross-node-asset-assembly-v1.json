@@ -1,0 +1,22 @@
+{
+  "contractCode": "KPP-CROSS-NODE-ASSET-ASSEMBLY-v1",
+  "workCode": "KPP-W15",
+  "cardinality": "many_nodes_to_one_asset_brief",
+  "requiredFields": [
+    "assemblyCode",
+    "primaryNode",
+    "supportingNodes",
+    "knowledgeBoundaries",
+    "sourceFragmentDigests",
+    "targetAssetType",
+    "locale",
+    "status"
+  ],
+  "rules": [
+    "PRIMARY_NODE_MUST_NOT_REPEAT_IN_SUPPORTING_NODES",
+    "ALL_REFERENCES_SHARE_GOVERNED_KNOWLEDGE_AUTHORITY",
+    "ASSET_MAY_NOT_CREATE_NEW_KNOWLEDGE",
+    "ARTICLE_NOT_REQUIRED_AS_PREREQUISITE"
+  ],
+  "handoffOnly": true
+}

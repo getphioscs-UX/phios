@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-INTEGRATED-SUCCESSOR-PHASE0-FREEZE-v1.0.0",
+  "work": "PHASE-0-CURRENT-MAIN-RECONCILIATION-SOURCE-MASTER-MIGRATION",
+  "status": "PHASE0_FROZEN",
+  "baselineCommit": "552f6d973dcaa32aa72f7f1d676ec2bc74434729",
+  "frozenAt": "2026-09-07",
+  "acceptanceRef": "content/governance/integrated-successor/acceptance/phase0-current-main-reconciliation-acceptance-v1.json",
+  "artifactDigests": {
+    "content/governance/integrated-successor/authority/current-main-reconciliation-v1.json": "863a3c2b5811a5f8fd43de5eb8513a8c8bc8db069e03ee68f7bc7d0a18853886",
+    "content/governance/integrated-successor/contracts/phase0-no-silent-overwrite-contract-v1.json": "1ed691a9858c88837601478a7f0e088a3cdcca00fb9f1945f224fed84e07aed9",
+    "content/governance/integrated-successor/master-work/phi-os-integrated-successor-master-work-v3.0.0.md": "b6262c7aadcad0bec1a97ab4706879ef0fb2cd4890444b1c3cb2d91317fd2486",
+    "content/governance/integrated-successor/registries/source-master-migration-registry-v1.json": "97eb763d43ff0fa199d988e2dc525b9167a36149cba13afbb1961b893f9866df",
+    "content/governance/integrated-successor/source-masters/cx-r-customer-experience-master-work-v2.md": "bfb569c1b93c4c38389ce5dd96bfc869feb1e306db752134d9c75f86919408ca",
+    "content/governance/integrated-successor/source-masters/kir-r2-paid-ask-universal-entry-master-work-v1.md": "a95f1f6f8c21eaac7da80309c71ac67124401765728a27b3b6fc38a838c72528",
+    "content/governance/integrated-successor/source-masters/pvp-r1-vis-master-work.md": "40b1d382b340368c73d0e39fb6ef5d230de0b97a3507005cf35ba7e052694b4a",
+    "content/governance/integrated-successor/acceptance/phase0-current-main-reconciliation-acceptance-v1.json": "06703312920e8bbe56d2e9f3f2c387350261abaf3f106ebe03fdf7ab22e16672",
+    "content/knowledge/answer-projection/reconciliation/kap-w11-w17-cx-home-presentation-successor-v1.json": "0affe853642048a5839db3023ee5e96bd8b8e57b65a58903b9d47f615bc7c8ed",
+    "content/production/symbolic-method/reconciliation/iching-release-1.0.1-cx-presentation-successor-v1.json": "fe6022bf372118b69a482534989a9877d0cb35ed6475a1dd0ba307e7fe4b3bb6",
+    "content/professional/personal-reality/current/reconciliation/ppr-current-product-assembly-ecr-topic-successor-v1.json": "fa1f12c06d39ca0117e1f60871ca5ec9a00fc4a8b9b1b0b305786f5e6b813ce4"
+  },
+  "currentSuccessorCheckers": [
+    "scripts/check-integrated-successor-phase0.mjs",
+    "scripts/check-kap-w11-w17-current.mjs",
+    "scripts/check-iching-release-freeze-current.mjs",
+    "scripts/check-ppr-current-shared-owner.mjs"
+  ],
+  "historicalArtifactsRemainImmutable": [
+    "content/governance/canonical-master-work/freeze/cmw-w0-w7-canonical-master-work-freeze-v1.json",
+    "scripts/check-iching-release-freeze.mjs"
+  ],
+  "boundaries": {
+    "createsSecondMasterAuthority": false,
+    "rewritesHistoricalFreeze": false,
+    "restoresLegacyPresentation": false,
+    "authorizesFutureUnregisteredDrift": false,
+    "claimsArchiveFullNpmCheckPass": false
+  },
+  "futureSuccessorRule": "Any intentional future change to a frozen PHASE 0 current fact must add an explicit successor/reconciliation rather than rewriting historical PHASE 0 evidence."
+}

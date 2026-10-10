@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/authoring-supporting-question-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "questionCode",
+    "nodeCode",
+    "question",
+    "sourceSection",
+    "questionType",
+    "coveragePurpose",
+    "authorityMode"
+  ],
+  "properties": {
+    "questionCode": {
+      "type": "string"
+    },
+    "nodeCode": {
+      "type": "string"
+    },
+    "question": {
+      "type": "string"
+    },
+    "sourceSection": {
+      "type": "string"
+    },
+    "questionType": {
+      "enum": [
+        "definition",
+        "mechanism",
+        "boundary",
+        "example",
+        "failure",
+        "comparison",
+        "application",
+        "continuity"
+      ]
+    },
+    "coveragePurpose": {
+      "type": "string"
+    },
+    "authorityMode": {
+      "const": "mapping_proposal_only"
+    }
+  }
+}

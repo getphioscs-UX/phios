@@ -1,0 +1,35 @@
+{
+  "contractCode": "PHI-OS-RNE-W4-BOUNDED-OPTION-GENERATION-v1",
+  "contractVersion": "1.0.0",
+  "work": "RNE-W4",
+  "runtimeCode": "RNE",
+  "status": "validation_only",
+  "productionStatus": "validation_only",
+  "schemaReference": "content/runtime/reality-navigation-engine/schemas/bounded-navigation-option-set-v1.schema.json",
+  "registryReference": "content/runtime/reality-navigation-engine/registries/canonical-option-class-registry-v1.json",
+  "generationModel": "DETERMINISTIC_RULE_FIRST",
+  "baseOptions": [
+    "OBSERVE",
+    "CLARIFY"
+  ],
+  "conditionalOptions": {
+    "DEPENDENCY": "VERIFY",
+    "HARD_BOUNDARY": "REPOSITION",
+    "SOFT_LIMIT": "RECONFIGURE"
+  },
+  "rules": {
+    "minimumBoundedOptions": 2,
+    "optionsMustReferenceCurrentPosition": true,
+    "optionsMustReferenceTarget": true,
+    "optionSelectionMade": false,
+    "optionRankingCreated": false,
+    "recommendedDirectionCreated": false,
+    "commandCreated": false,
+    "executionCreated": false,
+    "riskAssessmentCreated": false,
+    "recoverabilityAssessmentCreated": false,
+    "scenarioPredictionCreated": false,
+    "professionalJudgmentCreated": false,
+    "persistentStoreActivated": false
+  }
+}

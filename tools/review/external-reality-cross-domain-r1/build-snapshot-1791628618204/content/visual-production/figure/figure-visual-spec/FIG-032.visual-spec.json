@@ -1,0 +1,107 @@
+{
+  "boundaries": [],
+  "canonicalFilename": "PHIOS-FIGURE-CASHFLOW-RUNTIME-v1.svg",
+  "diagramRole": "LOOP",
+  "domain": "FINANCIAL",
+  "edges": [
+    {
+      "edgeId": "FIG-032-E01",
+      "from": "FIG-032-N01",
+      "relation": "STARTS",
+      "required": true,
+      "sourceBindingId": "FIG-032-SRC-01",
+      "to": "FIG-032-N02"
+    },
+    {
+      "edgeId": "FIG-032-E02",
+      "from": "FIG-032-N02",
+      "relation": "NETTED_WITH",
+      "required": true,
+      "sourceBindingId": "FIG-032-SRC-02",
+      "to": "FIG-032-N03"
+    },
+    {
+      "edgeId": "FIG-032-E03",
+      "from": "FIG-032-N03",
+      "relation": "FORMS",
+      "required": true,
+      "sourceBindingId": "FIG-032-SRC-02",
+      "to": "FIG-032-N04"
+    },
+    {
+      "edgeId": "FIG-032-E04",
+      "from": "FIG-032-N04",
+      "relation": "REVIEWED_BY",
+      "required": true,
+      "sourceBindingId": "FIG-032-SRC-02",
+      "to": "FIG-032-N05"
+    },
+    {
+      "edgeId": "FIG-032-E05",
+      "from": "FIG-032-N05",
+      "relation": "NEXT_PERIOD",
+      "required": true,
+      "sourceBindingId": "FIG-032-SRC-02",
+      "to": "FIG-032-N01"
+    }
+  ],
+  "figureId": "FIG-032",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-032-N01",
+    "FIG-032-N02",
+    "FIG-032-N03",
+    "FIG-032-N04",
+    "FIG-032-N05"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Opening Cash",
+      "nodeId": "FIG-032-N01",
+      "required": true,
+      "semanticKey": "OPENING_CASH",
+      "sourceBindingId": "FIG-032-SRC-01"
+    },
+    {
+      "displayLabel": "Inflows",
+      "nodeId": "FIG-032-N02",
+      "required": true,
+      "semanticKey": "INFLOWS",
+      "sourceBindingId": "FIG-032-SRC-01"
+    },
+    {
+      "displayLabel": "Outflows",
+      "nodeId": "FIG-032-N03",
+      "required": true,
+      "semanticKey": "OUTFLOWS",
+      "sourceBindingId": "FIG-032-SRC-01"
+    },
+    {
+      "displayLabel": "Closing Cash",
+      "nodeId": "FIG-032-N04",
+      "required": true,
+      "semanticKey": "CLOSING_CASH",
+      "sourceBindingId": "FIG-032-SRC-01"
+    },
+    {
+      "displayLabel": "Review",
+      "nodeId": "FIG-032-N05",
+      "required": true,
+      "semanticKey": "REVIEW",
+      "sourceBindingId": "FIG-032-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "CASHFLOW-RUNTIME",
+  "title": "Cashflow Runtime"
+}

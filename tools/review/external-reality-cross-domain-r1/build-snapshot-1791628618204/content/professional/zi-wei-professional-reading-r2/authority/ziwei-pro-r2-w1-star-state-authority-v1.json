@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-PRO-R2-W1-STAR-STATE-AUTHORITY-v1.0.0",
+  "work": "ZIWEI-PRO-R2-W1",
+  "statuses": [
+    "ADMITTED",
+    "NOT_APPLICABLE",
+    "SCHOOL_VARIANT",
+    "SOURCE_PENDING"
+  ],
+  "customerRule": "Only ADMITTED renders a state chip. NOT_APPLICABLE, SCHOOL_VARIANT and SOURCE_PENDING are suppressed from default customer UI.",
+  "noTableStars": [
+    "ZUO_FU",
+    "YOU_BI",
+    "TIAN_KUI",
+    "TIAN_YUE",
+    "DI_KONG",
+    "DI_JIE",
+    "TIAN_MA"
+  ],
+  "counts": {
+    "ADMITTED": 190,
+    "NOT_APPLICABLE": 84,
+    "SOURCE_PENDING": 62,
+    "SCHOOL_VARIANT": 0
+  },
+  "forbiddenFallbacks": [
+    "UNSPECIFIED -> 平",
+    "missing cell -> guessed state",
+    "no table -> 未载明 chip"
+  ],
+  "schoolBoundary": "Classification describes this versioned W2/W4 component authority only; it does not claim that every Zi Wei school treats states identically."
+}

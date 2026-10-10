@@ -1,0 +1,21 @@
+{
+  "manifestCode": "PHI-OS-RG-ORC-UNIFIED-CHECKER-MANIFEST-v2",
+  "manifestVersion": "2.0.0",
+  "work": "ORC-W9",
+  "status": "accepted_successor_extension",
+  "predecessor": "content/governance/runtime-checker-governance/manifests/runtime-checker-manifest-v1.json",
+  "predecessorMutated": false,
+  "resolutionAuthority": "content/governance/runtime-checker-governance/registries/runtime-checker-alias-registry-v4.json",
+  "groupAuthority": "content/governance/runtime-checker-governance/registries/runtime-checker-group-registry-v2.json",
+  "successorAuthority": "content/governance/runtime-checker-governance/registries/checker-successor-deprecation-registry-v2.json",
+  "runner": "scripts/run-runtime-checker-v4.mjs",
+  "activation": {
+    "globalCheckRuntimeCutoverPerformed": false,
+    "explicitSuccessorCommand": "npm run check:runtime:v4 -- <WORK-CODE>"
+  },
+  "authorityBoundary": {
+    "runtimeFreezeIsRuntimeAuthority": true,
+    "checkerManifestIsResolutionAuthority": true,
+    "checkerManifestMayChangeRuntimeState": false
+  }
+}

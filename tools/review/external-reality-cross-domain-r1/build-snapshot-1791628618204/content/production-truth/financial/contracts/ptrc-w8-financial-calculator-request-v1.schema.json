@@ -1,0 +1,17 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"PHI-OS-PTRC-W8-FINANCIAL-CALCULATOR-REQUEST-v1",
+  "type":"object",
+  "required":["calculatorId","asOfDate","currency","inputs"],
+  "properties":{
+    "calculatorId":{"enum":["CASH_FLOW","NET_WORTH","DEBT","SAVINGS","RETIREMENT_SCENARIO","COMPOUNDING","INFLATION","DRAWDOWN","AFFORDABILITY","ESTATE_SUMMARY","FINANCIAL_POSITION"]},
+    "asOfDate":{"type":"string","format":"date"},
+    "currency":{"type":"string","pattern":"^[A-Za-z]{3}$"},
+    "jurisdiction":{"type":"string","minLength":1,"maxLength":64},
+    "locale":{"enum":["en","zh-Hans"]},
+    "formulaVersion":{"type":"string","minLength":1},
+    "assumptions":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "inputs":{"type":"object"}
+  },
+  "additionalProperties":true
+}

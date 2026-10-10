@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-PCM-W0-W5-ACCEPTANCE-v1.0.0",
+  "work": "PCM-W5",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "ACCEPTED_PRODUCTION_CAPABILITY_MATRIX_FOUNDATION",
+  "acceptedFacts": {
+    "capabilityRegistryEstablished": true,
+    "backendDoesNotImplyFrontend": true,
+    "runtimeFrontendParityCheckerEstablished": true,
+    "productionAcceptedRuntimeRequiresConsumer": true,
+    "frontendExecutableMethodRequiresCanonicalRuntimeAuthority": true,
+    "statusProjectionUsesFiveExplicitStates": true,
+    "allCapabilitiesCannotDefaultToAvailable": true,
+    "hdrBlocked": true,
+    "astLimitedScoped": true,
+    "bzrLimitedScoped": true,
+    "numLimitedScoped": true,
+    "iChingRegisteredNotImplemented": true,
+    "tarotRegisteredNotImplemented": true,
+    "historicalCbsMethodBlockStatesReconciledBySuccessorWithoutMutation": true
+  },
+  "exitGate": {
+    "canonicalQuestion": "Can the user really use this backend capability now?",
+    "answerAuthority": "content/governance/production-capability-matrix/registries/production-capability-registry-v1.json",
+    "checker": "npm run check:runtime-frontend-parity",
+    "passCondition": "The registry and repository evidence agree on authority + runtime + projection + frontend + acceptance.",
+    "phaseComplete": true
+  }
+}

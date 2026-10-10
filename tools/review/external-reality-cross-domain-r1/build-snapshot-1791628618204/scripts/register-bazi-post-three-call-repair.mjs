@@ -1,0 +1,7 @@
+import fs from 'node:fs';
+const commands={'build:bazi-post-three-call:repair-review':'node scripts/build-bazi-post-three-call-repair.mjs','check:bazi-post-three-call:repair':'node scripts/check-bazi-post-three-call-repair.mjs','build:bazi-publication-fit:r1-review':'node scripts/build-bazi-post-three-call-repair.mjs','check:bazi-publication-fit:r1-browser':'node scripts/check-bazi-publication-fit-r1-browser.mjs','check:bazi-publication-fit:r1-architecture':'node scripts/check-bazi-post-three-call-repair.mjs'};
+const paths=['package.json','config/reports/zero-cost-check-commands.json'],texts=paths.map(p=>fs.readFileSync(p,'utf8')),values=texts.map(t=>JSON.parse(t.replace(/^\uFEFF/,'')));
+for(const [key,command] of Object.entries(commands)){const alias='node scripts/run-zero-cost-regression.mjs '+key;for(const [i,v] of values.entries()){const target=i===0?v.scripts:v,value=i===0?alias:command;if(target[key]&&target[key]!==value)throw Error('Existing repair command differs: '+key);target[key]=value;}}
+const check='npm run check:bazi-post-three-call:repair',anchor='npm run check:bazi-deep-manuscript:r2-prelive';if(!values[1].check.includes(check))values[1].check=values[1].check.includes(anchor)?values[1].check.replace(anchor,check+' && '+anchor):values[1].check+' && '+check;
+for(let i=0;i<paths.length;i++){const newline=texts[i].includes('\r\n')?'\r\n':'\n';fs.writeFileSync(paths[i],(JSON.stringify(values[i],null,2)+'\n').replace(/\n/g,newline));}
+console.log('Repair commands registered; existing commands preserved; providerCalls=0.');

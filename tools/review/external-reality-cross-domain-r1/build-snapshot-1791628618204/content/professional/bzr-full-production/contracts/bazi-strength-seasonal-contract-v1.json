@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-FP-W2-STRENGTH-SEASONAL-CONTRACT-v1.0.0",
+  "work": "BAZI-FP-W2",
+  "status": "ACTIVE_EVIDENCE_ONLY",
+  "runtime": "functions/bzr-full-production/bazi-strength-seasonal-runtime.js",
+  "outputs": [
+    "seasonalContext",
+    "dayMasterContext",
+    "rootEvidence",
+    "visibleElementRelations",
+    "evidenceSummary"
+  ],
+  "verdictPolicy": {
+    "strongWeakVerdictAllowed": false,
+    "usefulGodVerdictAllowed": false,
+    "numericalStrengthScoreAllowed": false,
+    "reason": "BZR-R1 production rule claims not yet human-admitted"
+  },
+  "futureProductionGate": [
+    "HUMAN_ADMITTED_SEASONAL_RULE_CLAIMS",
+    "VERSIONED_STRENGTH_MODEL_ID",
+    "COUNTER_EVIDENCE_RULES",
+    "MACHINE_FIXTURE_CAMPAIGN"
+  ]
+}

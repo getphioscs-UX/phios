@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-PCM-STATUS-PROJECTION-CONTRACT-v1.0.0",
+  "work": "PCM-W3",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "ACTIVE_USER_SAFE_CAPABILITY_STATUS",
+  "allowedStatuses": [
+    "Available",
+    "Limited",
+    "Preview",
+    "Blocked",
+    "Coming later"
+  ],
+  "semantics": {
+    "Available": "Production accepted, user executable, and not materially scope-limited for the advertised capability.",
+    "Limited": "Production accepted and user executable only within an explicit governed scope.",
+    "Preview": "A visible surface may exist, but Production acceptance or executable authority is not complete.",
+    "Blocked": "The capability is implemented or registered but a governing block forbids user execution.",
+    "Coming later": "The capability is registered/planned but not implemented for Production use."
+  },
+  "projectionTargets": [
+    "ACCOUNT",
+    "INTERNAL_ADMIN",
+    "DEVELOPER_STATUS"
+  ],
+  "rules": {
+    "allCapabilitiesMayAppearAvailableByDefault": false,
+    "limitedMustExposeScope": true,
+    "blockedMustExposeReason": true,
+    "comingLaterMustNotExposeExecutableRoute": true,
+    "previewMustNotImplyProductionAcceptance": true,
+    "internalNamesMayBeHiddenByConsumerWithoutChangingStatus": true
+  }
+}

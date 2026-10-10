@@ -1,0 +1,7 @@
+import fs from 'node:fs';import {sha,json,writeJson} from './lib/r2-260-evidence.mjs';
+const key='images/figures/books/book-1/4E.webp',url='https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/'+key;
+const response=await fetch(url,{signal:AbortSignal.timeout(30000)}),bytes=Buffer.from(await response.arrayBuffer());
+if(!response.ok||bytes.toString('ascii',0,4)!=='RIFF'||bytes.toString('ascii',8,12)!=='WEBP')throw Error('4E is not a valid public WebP');
+const result={key,url,httpStatus:response.status,mime:response.headers.get('content-type'),size:bytes.length,sha256:sha(bytes),observedAt:new Date().toISOString(),httpImagePass:true,source:'Owner uploaded; GET verified unchanged at expected key; no R2 mutation'};
+const path='docs/assets/r2-public/r2-image-http-audit-2026-09-19.json',audit=json(path);const index=audit.results.findIndex(r=>r.key===key);if(index<0)audit.results.push(result);else audit.results[index]=result;audit.total=audit.results.length;audit.httpImagePass=audit.results.filter(r=>r.httpImagePass).length;audit.latestIncrementalCheck=result.observedAt;writeJson(path,audit);
+const samplePath='content/web-production/registries/book-public-samples-v1.json',samples=json(samplePath),figure=samples.books[0].figures.find(f=>f.number==='4E');if(figure.url!==url)throw Error('Fixed 4E URL drift');figure.deliveryState='VERIFIED_PUBLIC_IMAGE';writeJson(samplePath,samples);writeJson('docs/assets/r2-public/book-one-4e-verification-v1.json',result);console.log(result);

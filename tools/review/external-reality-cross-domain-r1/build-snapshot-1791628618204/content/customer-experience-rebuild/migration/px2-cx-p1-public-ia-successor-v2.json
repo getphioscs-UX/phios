@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "PHI-OS-PX2-CX-P1-PUBLIC-IA-SUCCESSOR-v2.0.0",
+  "work": "P1-ROUTE-CUTOVER-CURRENT-SUCCESSOR",
+  "status": "ACTIVE_P1_ROUTE_CUTOVER_SUCCESSOR_BROWSER_ACCEPTANCE_PENDING",
+  "predecessor": {
+    "path": "content/customer-experience-rebuild/migration/px2-cx-p1-public-ia-successor-v1.json",
+    "status": "ACTIVE_CX_P1_PUBLIC_IA_SUCCESSOR",
+    "mutated": false,
+    "role": "PRE_P1_CURRENT_SUCCESSOR"
+  },
+  "currentAuthority": {
+    "routeRegistry": "content/customer-experience-rebuild/authority/canonical-customer-route-registry-v4.json",
+    "customerSpine": "content/customer-experience-rebuild/registries/customer-experience-spine-v1.json",
+    "priorityCutover": "content/customer-experience-rebuild/migration/priority-route-cutover-registry-v2.json",
+    "navigationRuntime": "assets/customer-ui/js/navigation.js",
+    "shellRuntime": "assets/customer-ui/js/shell.js"
+  },
+  "currentPrimaryNavigation": [
+    "EXPLORE",
+    "MY_REALITY",
+    "PERSPECTIVES",
+    "KNOWLEDGE",
+    "PROFESSIONAL"
+  ],
+  "currentUtilities": [
+    "SEARCH",
+    "ASK",
+    "ACCOUNT",
+    "LOCALE"
+  ],
+  "priorityCanonicalDestinations": {
+    "ASK": "/knowledge/ask/",
+    "MY_REALITY": "/reality/",
+    "PERSONAL_REALITY": "/perspectives/personal/",
+    "FINANCIAL_REALITY": "/professional/financial/"
+  },
+  "legacyRoutePolicy": {
+    "legacyRoutesMayRemainInCurrentCxNavigation": false,
+    "legacyRoutesMayRemainAsRedirectAliases": true,
+    "publicShellV2IsCurrentAuthority": false,
+    "stage16SemanticsPreserved": true,
+    "realityJourneyFirstLevel": false,
+    "methodTaxonomyFirstLevel": false,
+    "askCompatibilityOnly": true,
+    "activeUiMayLinkToAskCompatibilityAlias": false
+  },
+  "authorityBoundary": {
+    "px2FreezeMutated": false,
+    "stage16SuccessorMutated": false,
+    "backendAuthorityCreated": false,
+    "methodAuthorityCreated": false,
+    "knowledgeAuthorityCreated": false,
+    "routeCompatibilityAuthority": "_redirects",
+    "routeCutoverPerformedByP1": true,
+    "physicalLegacyDeletePerformed": false
+  }
+}

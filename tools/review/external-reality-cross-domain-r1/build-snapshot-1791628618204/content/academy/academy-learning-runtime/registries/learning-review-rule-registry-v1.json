@@ -1,0 +1,18 @@
+{
+  "registryCode": "PHI-OS-ALR-W31-LEARNING-REVIEW-RULE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W31",
+  "status": "canonical",
+  "rules": [
+    {"decisionCode": "RETENTION_BLOCKED", "priority": 1, "reasonCode": "RDG_RETENTION_DENIED", "authority": "RDG"},
+    {"decisionCode": "HOLD_DISPUTED", "priority": 2, "reasonCode": "DISPUTED_PROGRESS_CONTINUITY_CAPABILITY_OR_RETENTION", "authority": "ALR_SEMANTICS_RDG_RETENTION"},
+    {"decisionCode": "HOLD_UNKNOWN", "priority": 3, "reasonCode": "UNKNOWN_PROGRESS_CONTINUITY_CAPABILITY_OR_RETENTION", "authority": "ALR_SEMANTICS_RDG_RETENTION"},
+    {"decisionCode": "RETENTION_REVIEW_REQUIRED", "priority": 4, "reasonCode": "RDG_RETENTION_REVIEW_REQUIRED", "authority": "RDG"},
+    {"decisionCode": "SOURCE_REVIEW_REQUIRED", "priority": 5, "reasonCode": "SOURCE_VERSION_CHANGED", "authority": "ALR"},
+    {"decisionCode": "CAPABILITY_MAINTENANCE_REVIEW", "priority": 6, "reasonCode": "CAPABILITY_MAINTENANCE_DUE", "authority": "ALR"},
+    {"decisionCode": "LEARNING_REVIEW_REQUIRED", "priority": 7, "reasonCode": "PROGRESS_OR_CONTINUITY_REVIEW_DUE", "authority": "ALR"},
+    {"decisionCode": "NO_REVIEW_DUE", "priority": 8, "reasonCode": "NO_CONTROLLED_REVIEW_TRIGGER", "authority": "ALR"}
+  ],
+  "evaluationPriority": ["RETENTION_BLOCKED", "HOLD_DISPUTED", "HOLD_UNKNOWN", "RETENTION_REVIEW_REQUIRED", "SOURCE_REVIEW_REQUIRED", "CAPABILITY_MAINTENANCE_REVIEW", "LEARNING_REVIEW_REQUIRED", "NO_REVIEW_DUE"],
+  "rulesBoundary": {"alrOwnsLearningReviewSemantics": true, "rdgOwnsRetention": true, "registryStoresReviewData": false, "semanticEvaluationIsPure": true}
+}

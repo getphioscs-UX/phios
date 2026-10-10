@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phios://knowledge/mapping-candidate-v2",
+  "type": "object",
+  "required": [
+    "candidateCode",
+    "nodeCode",
+    "sectionCode",
+    "role",
+    "confidence",
+    "explanation",
+    "status",
+    "humanReviewed"
+  ],
+  "properties": {
+    "candidateCode": {
+      "type": "string"
+    },
+    "nodeCode": {
+      "type": "string"
+    },
+    "sectionCode": {
+      "type": "string"
+    },
+    "role": {
+      "enum": [
+        "primary",
+        "supporting",
+        "alternative",
+        "excluded",
+        "duplicate"
+      ]
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "explanation": {
+      "type": "string"
+    },
+    "status": {
+      "const": "human_review_required"
+    },
+    "humanReviewed": {
+      "const": false
+    }
+  },
+  "additionalProperties": false
+}

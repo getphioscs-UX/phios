@@ -1,0 +1,106 @@
+{
+  "workId": "PHI-OS-PRODUCTION-CLOSURE",
+  "scope": "Server-only local implementation; no public endpoint or production registration",
+  "matrix": [
+    {
+      "stage": "Entitlement",
+      "result": "PASS_LOCAL_FIXTURE",
+      "detail": "Native ownedReportPresentation; no grants created"
+    },
+    {
+      "stage": "Account / bound person / birth input",
+      "result": "PASS_LOCAL_FIXTURE",
+      "detail": "Encrypted canonical owner and consent; exact selection only"
+    },
+    {
+      "stage": "Canonical BaZi calculation",
+      "result": "PASS_NATIVE_LOCAL",
+      "detail": "Current MCD5 actual calculation, source fingerprint retained"
+    },
+    {
+      "stage": "Authority pack",
+      "result": "PASS_FACTUAL_LOCAL",
+      "detail": "Native projection plus account/person/version lineage; no new interpretation authority"
+    },
+    {
+      "stage": "Accepted narrative selection",
+      "result": "BLOCKED_ACCEPTED_COPY_COVERAGE",
+      "detail": "Five existing source inventories examined; no reusable subject-context bilingual admission"
+    },
+    {
+      "stage": "Publication IR / semantic editorial verification",
+      "result": "BLOCKED_NO_ACCEPTED_COPY",
+      "detail": "No fabricated claim IR or semantic acceptance; binding race rejects independently"
+    },
+    {
+      "stage": "Subject-specific bilingual full report",
+      "result": "BLOCKED_ACCEPTED_COPY_COVERAGE",
+      "detail": "Actual candidate contains native facts and missing-content disclosure only"
+    },
+    {
+      "stage": "Versioned snapshot",
+      "result": "PASS_LOCAL_BLOCKED_SNAPSHOT_ONLY",
+      "detail": "Immutable in-memory candidate history; no production storage"
+    },
+    {
+      "stage": "Authorized release candidate",
+      "result": "BLOCKED",
+      "detail": "READY/RELEASED states remain unreachable without content and method-native admission"
+    },
+    {
+      "stage": "Customer Reports / Library",
+      "result": "PASS_NATIVE_DENIAL",
+      "detail": "Actual Reports list contains no released report; existing private entry retained"
+    },
+    {
+      "stage": "View / Download",
+      "result": "PASS_LOCAL_HISTORY_AND_DOWNLOAD_DENIAL",
+      "detail": "Local blocked snapshot view allowed with rights; no native PDF release → download denied"
+    },
+    {
+      "stage": "Successor customer renderer",
+      "result": "PASS_CONTROLLED_COMPATIBILITY",
+      "detail": "Existing26-page controlled source renders desktop/390/A4 without changing archive/Masters; not subject-specific accepted content"
+    }
+  ],
+  "stateMachine": [
+    "INPUT_INVALID",
+    "INPUT_REQUIRED",
+    "CALCULATION_FAILED",
+    "BLOCKED_ACCEPTED_COPY_COVERAGE",
+    "VERIFICATION_REJECTED",
+    "RENDERING_FAILED",
+    "ENTITLEMENT_MISSING",
+    "ACCOUNT_OR_SUBJECT_MISMATCH",
+    "RELEASE_CANDIDATE_READY",
+    "RELEASED_ACCOUNT_AUTHORIZED",
+    "SUPERSEDED"
+  ],
+  "implementedReachableStates": [
+    "INPUT_REQUIRED",
+    "ENTITLEMENT_MISSING",
+    "ACCOUNT_OR_SUBJECT_MISMATCH",
+    "VERIFICATION_REJECTED",
+    "BLOCKED_ACCEPTED_COPY_COVERAGE",
+    "SUPERSEDED (local candidate history)"
+  ],
+  "notImplementedDueToContentAdmission": [
+    "Full approved narrative→Publication IR→semantic/editorial gate→authorized renderer→native released report"
+  ],
+  "futureStatesNotClaimedTested": [
+    "CALCULATION_FAILED",
+    "RENDERING_FAILED",
+    "RELEASE_CANDIDATE_READY",
+    "RELEASED_ACCOUNT_AUTHORIZED"
+  ],
+  "reuseOwners": [
+    "Native Commerce rights",
+    "Canonical encrypted person/consent",
+    "Current canonical BaZi calculation",
+    "Native subject presentation/binding",
+    "Existing customer report/Library access",
+    "Current report publication renderer and frozen Masters"
+  ],
+  "m1": "NOT_LIVE_VERIFIED",
+  "fullLocalReportCandidate": "BLOCKED_ACCEPTED_COPY_COVERAGE"
+}

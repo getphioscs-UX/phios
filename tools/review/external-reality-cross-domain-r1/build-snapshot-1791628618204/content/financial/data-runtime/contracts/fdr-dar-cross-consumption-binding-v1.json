@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W24-DAR-CROSS-CONSUMPTION-BINDING-v1.0.0",
+  "work": "FDR-W24",
+  "baselineCommit": "1fcbb42",
+  "status": "ACTIVE_EXPLICIT_READ_ONLY_BINDING_PRE_DAR_PRODUCTION",
+  "producer": "FDR",
+  "consumer": "DAR",
+  "predecessorContract": "content/financial/data-runtime/contracts/fdr-dar-cross-consumption-contract-v1.json",
+  "darAuthorityReference": "content/document-assembly/authority/dar-authority-baseline-v1.json",
+  "darFoundationAcceptanceReference": "content/document-assembly/acceptance/dar-w0-w14-foundation-acceptance-v1.json",
+  "requiredPurposeScope": "WILL_ASSEMBLY",
+  "lineageRequired": [
+    "financialRealityId",
+    "financialRealityVersion",
+    "financialRealityDigest",
+    "snapshotId",
+    "snapshotDigest",
+    "factId"
+  ],
+  "bindingRules": {
+    "darMayReadAuthorizedFdrFacts": true,
+    "darMayMutateFdrFacts": false,
+    "darMayCreateSecondAssetFactRegistry": false,
+    "darWillAssetTypeRegistryIsTaxonomyOnly": true,
+    "darMayInferOwnership": false,
+    "darMayInferBeneficiary": false,
+    "darMayInferExecutor": false,
+    "darMayConvertFactIntoDistributionInstruction": false,
+    "financialPlanningConsentIsSufficient": false,
+    "explicitWillAssemblyConsentRequired": true,
+    "revokedOrMissingScopeFailsClosed": true,
+    "currentDarProductionEnabledByThisBinding": false,
+    "reason": "DAR W0-W14 is a fail-closed pre-assembly foundation; this binding closes fact-authority lineage only and does not bypass later DAR production/legal gates."
+  }
+}

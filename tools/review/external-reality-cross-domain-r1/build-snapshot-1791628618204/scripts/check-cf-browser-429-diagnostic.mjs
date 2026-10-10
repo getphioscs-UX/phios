@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import diagnostic from './diagnostics/cf-browser-429-worker.js';
+const calls=[];
+const env={PHIOS_ENVIRONMENT:'qa',BROWSER:{async fetch(input,init){
+ const path=new URL(input).pathname;calls.push({path,method:init?.method??'GET'});
+ if(path==='/v1/limits')return Response.json({activeSessions:[],maxConcurrentSessions:4,allowedBrowserAcquisitions:1,timeUntilNextAllowedBrowserAcquisition:0,usedBrowserTimeSeconds:650});
+ assert.equal(path,'/v1/devtools/browser');assert.equal(init.method,'POST');
+ return new Response('Rate limit exceeded',{status:429,statusText:'Rate limit exceeded',headers:{'Retry-After':'50957','RateLimit-Remaining':'0'}});
+}}};
+const req=()=>new Request('https://diagnostic.invalid/diagnose',{method:'POST'});
+assert.equal((await diagnostic.fetch(req(),{...env,PHIOS_ENVIRONMENT:'production'})).status,404);
+const response=await diagnostic.fetch(req(),env),evidence=await response.json();
+assert.equal(response.status,200);assert.equal(evidence.upstream.status,429);
+assert.equal(evidence.upstream.bodyText,'Rate limit exceeded');
+assert.equal(Buffer.from(evidence.upstream.bodyBase64,'base64').toString(),'Rate limit exceeded');
+assert.equal(evidence.upstream.bodyByteLength,19);
+assert.equal(evidence.upstream.retryAfter,'50957');
+assert.equal(evidence.upstream.ratelimitHeaders['ratelimit-remaining'],'0');
+assert.equal(evidence.acquisitionAttempts,1);assert.equal(evidence.retries,0);
+assert.equal((await diagnostic.fetch(req(),env)).status,409);
+assert.equal(calls.length,3);assert.equal(calls.filter(c=>c.method==='POST').length,1);
+console.log('PASS diagnostic exact upstream body/header capture, outer/upstream status distinction, QA scope and one-attempt/no-retry guard.');

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W11-GOAL-CONTRACT-v1.0.0",
+  "work": "FDR-W11",
+  "status": "ACTIVE",
+  "authorityOwner": "FDR",
+  "goalTypes": [
+    "EMERGENCY",
+    "RETIREMENT",
+    "EDUCATION",
+    "PROPERTY",
+    "BUSINESS_SUCCESSION",
+    "ESTATE_LIQUIDITY",
+    "WEALTH_TRANSFER",
+    "INVESTMENT",
+    "DEBT_REDUCTION",
+    "OTHER"
+  ],
+  "requiredFields": [
+    "goalId",
+    "goalType",
+    "target",
+    "targetDate",
+    "priority",
+    "owner",
+    "fundingSource",
+    "status",
+    "disclosureState",
+    "evidence"
+  ],
+  "optionalFields": [
+    "currency",
+    "notes",
+    "relatedAssetReferences",
+    "relatedLiabilityReferences",
+    "relatedEntityReferences"
+  ],
+  "rules": {
+    "goalIsCustomerStatedFactNotRecommendation": true,
+    "targetMayBeAmountRangeOrNonMonetary": true,
+    "fundingSourceMayBeUnknown": true,
+    "priorityMayBeCustomerStated": true,
+    "fdrMayNotOptimizeGoals": true,
+    "allAtomicFinancialFactsUseFactEnvelope": true
+  },
+  "factEnvelopeReference": "financial-fact-contract-v1.json"
+}

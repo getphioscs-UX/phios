@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "PHI-OS-APS-7-ONE-COMMAND-PUBLICATION-CONTRACT-v1.0.0",
+  "work": "APS-7",
+  "status": "ACTIVE",
+  "baselineCommit": "94d5efa953ff83713505b133d0039764df577675",
+  "command": "npm run article:publish -- --batch BATCH-001",
+  "purpose": "Collapse publication operator choreography into one fail-closed command after explicit TL decisions while preserving the existing Human Publication, PJA Publication, Published Knowledge, CAR, CPR and Visual Article authority boundaries.",
+  "preflight": {
+    "aps6ReadyRequired": true,
+    "allSelectedNodeLocaleDecisionsExplicit": true,
+    "candidateReviewApprovalPackageLineageExact": true,
+    "frozenVapW11QueueLineageExact": true,
+    "frozenPjaPublicationImplementationDigestRequired": "7e62f8b2a61524eb735d332103d5970ebf17130f0f26857782e5bc39b77bbe30"
+  },
+  "sequence": [
+    "APS6_DECISION_BRIDGE",
+    "VAP_W11_HUMAN_PUBLICATION_HANDOFF",
+    "PJA_FROZEN_BRIEF_PUBLICATION_SUCCESSOR",
+    "PUBLISHED_KNOWLEDGE_AUTHORITY",
+    "CONDITIONAL_CAR",
+    "CPR",
+    "VISUAL_ARTICLE",
+    "SAME_ROUTE_LOCALE_RELEASE"
+  ],
+  "conditionalCar": {
+    "visualAssetPresent": "CAR_AUTHORITY_REQUIRED_AND_FAIL_CLOSED_UNTIL_SUPPORTED",
+    "noVisualAsset": "NOT_REQUIRED_NO_VISUAL_ASSET",
+    "apsMayCreateCarAuthority": false,
+    "carBypassAllowedWhenVisualAssetRequired": false
+  },
+  "pjaSuccessor": {
+    "frozenImplementationMutated": false,
+    "candidateValidatedAgainstExactCandidateBoundFrozenBrief": true,
+    "publicationSemanticsRemainPjaPublicationW1": true,
+    "idempotentExistingEquivalentPublicationAllowed": true,
+    "conflictingExistingPublicationFailsClosed": true
+  },
+  "locale": {
+    "sameCanonicalRoutePerSlug": true,
+    "localeAuthorityIndependent": true,
+    "translationInheritanceAllowed": false,
+    "currentBatchEnglishLaneRemainsBlockedUntilIndependentEnglishAuthority": true
+  },
+  "governance": {
+    "articlePublishMayInferHumanDecision": false,
+    "articlePublishMayRewriteCandidate": false,
+    "articlePublishMayRewriteReview": false,
+    "articlePublishMayRewriteApproval": false,
+    "articlePublishMayMutateFrozenPjaPublicationImplementation": false,
+    "publicationDoesNotEqualCarAuthority": true,
+    "publicationDoesNotEqualCprAuthority": true,
+    "sameRouteDoesNotEqualSharedLocaleAuthority": true
+  },
+  "nextWork": "APS-8_PRODUCTION_ACCEPTANCE_AND_FREEZE"
+}

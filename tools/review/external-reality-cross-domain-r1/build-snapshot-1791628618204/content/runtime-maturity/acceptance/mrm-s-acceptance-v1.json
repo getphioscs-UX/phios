@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S18-MASTER-ACCEPTANCE-v1.0.0",
+  "phase": "MRM-S",
+  "work": "MRM-S18",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "ACCEPTED_MASTER_MATURITY_SYSTEM_CURRENT_FREEZE",
+  "frameworkStatus": "PRODUCTION_GOVERNANCE_ACTIVE",
+  "allCapabilitiesAtEM9Required": false,
+  "currentState": {
+    "trackedRuntimeCount": 42,
+    "trackedCapabilityCount": 186,
+    "rmCounts": {
+      "RM-5": 153,
+      "RM-6": 13,
+      "RM-8": 1,
+      "RM-7": 4,
+      "RM-4": 4,
+      "RM-2": 5,
+      "RM-1": 6
+    },
+    "emCounts": {
+      "EM-0": 145,
+      "EM-1": 15,
+      "EM-2": 26
+    },
+    "pilotCount": 0,
+    "operationalCaseCount": 0,
+    "longitudinalCount": 0,
+    "validationCorpusCount": 0,
+    "em9Count": 0
+  },
+  "masterExitGate": {
+    "everyTrackedRuntimeHasOneCanonicalAuthority": true,
+    "everyTrackedCapabilityHasOneCanonicalOwner": true,
+    "rmAndEmAreSeparate": true,
+    "maturityIsCapabilityLevel": true,
+    "emIsEvidenceDerived": true,
+    "emLevelsCannotSkipContiguousPrerequisites": true,
+    "passAloneCannotPromoteRmOrEm": true,
+    "evidenceBindsRuntimeVersion": true,
+    "staleEvidenceCannotSilentlyRemainCurrent": true,
+    "unknownAndFailureEvidencePreserved": true,
+    "realCaseRequiredForEm3": true,
+    "longitudinalEvidenceRequiredForEm5": true,
+    "formalValidationRequiredForEm6": true,
+    "rmeEligibilitySeparatelyGoverned": true,
+    "productionLogsNotAutomaticallyResearchCorpus": true,
+    "em9RequiresMonitoringDriftRecovery": true,
+    "claimsCannotExceedEvidenceMaturity": true,
+    "noHistoricalFreezeMutated": true,
+    "noSecondProductionAuthorityCreated": true
+  },
+  "canonicalStatement": "Runtime Maturity measures how completely a capability has been architected, implemented, integrated and operationalized. Evidence Maturity measures how strongly that exact capability and version are supported by governed evidence. Evidence promotion occurs continuously as qualifying evidence is produced; it is never inferred from PASS/FAIL alone and never inherited silently across material version changes.",
+  "canonicalStatementZh": "Runtime Maturity 衡量一个具体能力已经被架构、实现、整合与运行到什么程度；Evidence Maturity 衡量该能力在特定版本下拥有多少受治理证据支持。Evidence promotion 应随着合格证据产生而持续发生，不得仅由 PASS / FAIL 推断，也不得在重大版本变化后静默继承。",
+  "currentMatrices": {
+    "runtime": {
+      "path": "content/runtime-maturity/matrices/master-runtime-maturity-matrix-v1.3.json",
+      "sha256": "acecf1ae2615a14aa5337ae3c19349e9fa4a6143d255ebcf50531e71b2b6c5dd"
+    },
+    "evidence": {
+      "path": "content/runtime-maturity/matrices/master-evidence-maturity-matrix-v1.5.json",
+      "sha256": "b977958d7875f1b8fc67312b0fd538b3cfbe64417853b5b0ecad5af145b023d6"
+    },
+    "claims": {
+      "path": "content/runtime-maturity/matrices/runtime-claim-eligibility-matrix-v1.3.json",
+      "sha256": "fd69a6de8699f6eebfee4bafd8489a78acffbeaee00abde93c0ab95676e78a96"
+    }
+  },
+  "nextPromotionReality": {
+    "EM-3": "BLOCKED_NO_QUALIFYING_REAL_PILOT_CASE",
+    "EM-4": "BLOCKED_NO_MULTI_CASE_OPERATIONAL_CORPUS",
+    "EM-5": "BLOCKED_NO_LONGITUDINAL_CORPUS",
+    "EM-6": "BLOCKED_NO_FORMAL_VALIDATION",
+    "EM-7": "BLOCKED_NO_METRIC_ELIGIBILITY",
+    "EM-8": "BLOCKED_NO_RESEARCH_CORPUS",
+    "EM-9": "BLOCKED_NO_PRIOR_EVIDENCE_AND_OPERATIONAL_MONITORING_DRIFT_RECOVERY"
+  }
+}

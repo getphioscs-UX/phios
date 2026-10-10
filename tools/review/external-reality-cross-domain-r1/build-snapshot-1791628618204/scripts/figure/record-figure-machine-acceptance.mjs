@@ -1,0 +1,5 @@
+import fs from 'node:fs';
+import {P,ids,requestedIds,read,stable,writeFile,manifestPath,carPath,sha} from './figure-lib.mjs';
+let current=fs.existsSync(P.acceptance)?read(P.acceptance):{schemaVersion:'1.0.0',registryId:'PHI-OS-FIGURE-MACHINE-ACCEPTANCE-v1',entries:[]};const map=new Map((current.entries||[]).map(x=>[x.figureId,x]));
+for(const id of requestedIds()){if(!fs.existsSync(manifestPath(id)))throw new Error(`${id}: manifest missing`);const m=read(manifestPath(id)),c=read(carPath(id));c.machineAccepted=true;c.handoffStatus='MACHINE_ACCEPTED_CANDIDATE_ONLY';writeFile(carPath(id),stable(c));map.set(id,{figureId:id,status:'MACHINE_ACCEPTED',stale:false,productionManifestDigest:sha(manifestPath(id)),carHandoffDigest:sha(carPath(id)),publicationAuthorityOwnedHere:false});console.log(`✓ ${id} machine acceptance recorded`);}
+current.entries=ids().map(id=>map.get(id)).filter(Boolean);current.acceptedCount=current.entries.filter(x=>x.status==='MACHINE_ACCEPTED').length;current.expectedCount=57;current.allAccepted=current.acceptedCount===57;writeFile(P.acceptance,stable(current));

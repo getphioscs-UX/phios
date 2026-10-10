@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-ZWD-INPUT-CONTRACT-v1.0.0",
+  "work": "ZWD-W1",
+  "status": "FROZEN",
+  "requestSchema": "PHI-OS-ZWD-EXECUTION-REQUEST-v1.0.0",
+  "required": ["requestId", "consentRecordId", "canonicalInput", "natalProjection", "targetContext", "executionParameters.traditionalCalculationSex"],
+  "targetContext": {
+    "required": ["targetDate", "targetTime", "targetTimezone.iana", "targetTimezone.utcOffsetAtTarget"],
+    "inferenceForbidden": ["BROWSER_TIMEZONE", "SERVER_NOW", "AUTOMATIC_TODAY", "CURRENT_UTC_OFFSET"]
+  },
+  "traditionalCalculationSex": {
+    "allowed": ["MALE", "FEMALE"],
+    "purpose": "DA_XIAN_DIRECTION_ONLY",
+    "identityClaim": false,
+    "mayNotBeCopiedFromBzrWithoutExplicitInput": true
+  },
+  "natalProjection": {
+    "method": "ZI_WEI_PROJECTION",
+    "productionResultRequired": true,
+    "mpaEligibleRequired": true,
+    "recalculationForbidden": true
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S18-PACKAGE-SCRIPT-SUCCESSOR-v1.0.0",
+  "phase": "MRM-S",
+  "work": "MRM-S18",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "ACTIVE_SINGLE_PACKAGE_SUCCESSOR_AT_S18",
+  "script": "check:mrm-s",
+  "command": "node scripts/check-mrm-s9-fixtures.mjs && node scripts/check-mrm-s10-pilot-framework.mjs && node scripts/check-mrm-s11-em3-promotion.mjs && node scripts/check-mrm-s12-operational.mjs && node scripts/check-mrm-s13-longitudinal.mjs && node scripts/check-mrm-s14-validation.mjs && node scripts/check-mrm-s15-rme-eligibility.mjs && node scripts/check-mrm-s16-research.mjs && node scripts/check-mrm-s17-production-maturity.mjs && node scripts/check-mrm-s18-master-freeze.mjs",
+  "preS18Policy": "S0_S17_DID_NOT_ADD_CHECK_MRM_S_ALIAS",
+  "wholePackageJsonFingerprintAuthority": false,
+  "packageLockChanged": false,
+  "rules": {
+    "oneS18AliasOnly": true,
+    "historicalMRMCheckerFilesNotRewrittenForPackageAlias": true,
+    "packageFingerprintNotMaturityAuthority": true
+  }
+}

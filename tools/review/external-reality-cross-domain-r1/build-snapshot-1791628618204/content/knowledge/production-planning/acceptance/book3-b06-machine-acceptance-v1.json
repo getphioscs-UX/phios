@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-BOOK3-B06-MACHINE-ACCEPTANCE-v1.0.0",
+  "stage": "BOOK3-B06-MACHINE-ACCEPTANCE",
+  "status": "MACHINE_ACCEPTED_ZH_HANS_EDITORIAL_CANDIDATES_HUMAN_PENDING",
+  "baselineCommit": "415f73c258454c23d1569c9e2c2f381dcfb6a715",
+  "batchCode": "B3-B06",
+  "manifestPath": "content/knowledge/production-planning/production/book3-b06/manifest-v1.json",
+  "checkerPath": "scripts/check-book3-b06-zh-hans-production.mjs",
+  "counts": {
+    "articleCandidates": 3,
+    "finalCanonicalNodes": 6,
+    "sourceSections": 6,
+    "humanAcceptedArticles": 0
+  },
+  "machineGates": {
+    "frozenW5ArticleGroupingExact": true,
+    "sourceSectionDigestAndPageBindingsExact": true,
+    "finalCanonicalNodeBindingsExact": true,
+    "articleBlockContractValid": true,
+    "medicalAuthorityNotCreated": true,
+    "canonicalMutationDetected": false,
+    "englishCandidateCreated": false,
+    "publicationAuthorityCreated": false
+  },
+  "candidateDigests": [
+    {
+      "candidateId": "B3-B06-A27",
+      "path": "content/knowledge/production-planning/production/book3-b06/candidates/zh-Hans/b3-b06-a27.zh-Hans.v1.json",
+      "sha256": "ecec2364d9087127ced88abf7617649042febaa94d4fcab9479bfbd118d1c2ec"
+    },
+    {
+      "candidateId": "B3-B06-A28",
+      "path": "content/knowledge/production-planning/production/book3-b06/candidates/zh-Hans/b3-b06-a28.zh-Hans.v1.json",
+      "sha256": "66ca93a3dd043fc6b269527f73671f52acd891cbcec6340bdcf7546a8e7410e6"
+    },
+    {
+      "candidateId": "B3-B06-A29",
+      "path": "content/knowledge/production-planning/production/book3-b06/candidates/zh-Hans/b3-b06-a29.zh-Hans.v1.json",
+      "sha256": "9e85dcdb89ed57b960dc75e05c429b83c26107ae71dc8190ca4eec46ab634e71"
+    }
+  ],
+  "humanGate": {
+    "status": "PENDING_0_OF_3",
+    "machineAcceptanceCannotSelfAcceptHumanGate": true,
+    "requiredExplicitAcceptCount": 3
+  },
+  "nextGate": "Human editorial review of the three zh-Hans B06 Articles."
+}

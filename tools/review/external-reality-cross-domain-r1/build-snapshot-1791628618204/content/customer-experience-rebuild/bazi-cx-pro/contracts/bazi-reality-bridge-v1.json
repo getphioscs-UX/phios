@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-CX-PRO-REALITY-BRIDGE-CONTRACT-v1.0.0",
+  "workId": "BAZI-CX-PRO-W11",
+  "title": "Reality Bridge",
+  "status": "ENGINEERING_READY",
+  "baselineCommit": "78ac0ae651133131d162e53c07cbccd793a55672",
+  "objective": "Attach one or two high-quality reality prompts to the end of each professional narrative chapter instead of rendering a separate repetitive generic question bank.",
+  "sourceInputs": [
+    "professionalModules.customerNarrative.priorityChapters",
+    "professionalModules.customerNarrative.topicNarratives",
+    "professionalModules.customerNarrative.timingNarrative"
+  ],
+  "requirements": {
+    "promptsPerProfessionalChapterMin": 1,
+    "promptsPerProfessionalChapterMax": 2,
+    "exactPromptDuplicatesAllowed": 0,
+    "counterExamplePromptRequired": true,
+    "timingCorrespondencePromptRequiredWhenTimingAvailable": true,
+    "genericQuestionBankIsDefault": false
+  },
+  "boundaries": {
+    "customerAnswerBecomesChartEvidence": false,
+    "customerAnswerRewritesCalculation": false,
+    "customerAnswerChangesMethodVerdict": false,
+    "agreementRequired": false,
+    "counterEvidenceWelcome": true,
+    "eventPredictionCreated": false,
+    "goodBadScoreCreated": false
+  }
+}

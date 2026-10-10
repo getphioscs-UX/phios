@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-NO-SOURCE-BLENDING-CONTRACT-v1.0.0",
+  "phase": "TPA-E",
+  "work": "TPA-W18",
+  "baselineCommit": "f10a0bc30526b5551ca00ffa9c674f2798d7fd7e",
+  "status": "FROZEN_PARALLEL_ORIGIN_PRESERVATION_NO_UNIVERSAL_SYNTHESIS",
+  "contractVersion": "1.0.0",
+  "predecessor": {
+    "path": "content/interpretation/tarot/contracts/tarot-cross-source-interpretation-contract-v1.json",
+    "sha256": "48a242bcc76be2410875d77a9115569191d2875c4e25acaefa235302b4f19ecc",
+    "preserved": true
+  },
+  "originLayers": [
+    {
+      "layer": "T0_VISUAL_OBSERVATION",
+      "authorityTier": "T0",
+      "role": "WHAT_IS_VISIBLE",
+      "meaningAuthority": false
+    },
+    {
+      "layer": "T1_SOURCE_BOUND_HISTORICAL",
+      "authorityTier": "T1",
+      "role": "WHAT_A_NAMED_SOURCE_SAYS",
+      "meaningAuthority": "SOURCE_BOUND_ONLY"
+    },
+    {
+      "layer": "T2_GOVERNED_REFLECTIVE_INQUIRY",
+      "authorityTier": "T2",
+      "role": "WHAT_MAY_BE_WORTH_ASKING_OR_CONSIDERING",
+      "meaningAuthority": false
+    },
+    {
+      "layer": "T3_LICENSED_SOURCE_BOUND",
+      "authorityTier": "T3",
+      "role": "WHAT_AN_ADMITTED_LICENSED_SOURCE_SAYS",
+      "meaningAuthority": "SOURCE_BOUND_ONLY_WHEN_ADMITTED"
+    },
+    {
+      "layer": "T4_PRIVATE_REFERENCE",
+      "authorityTier": "T4",
+      "role": "INTERNAL_RESEARCH_ONLY",
+      "runtimeAllowed": false
+    },
+    {
+      "layer": "T5_WEB_DISCOVERY",
+      "authorityTier": "T5",
+      "role": "CANDIDATE_DISCOVERY_ONLY",
+      "runtimeAllowed": false
+    }
+  ],
+  "comparisonRules": {
+    "parallelPresentationAllowed": true,
+    "convergenceMayBeDescribed": true,
+    "divergenceMayBeDescribed": true,
+    "unavailableMustRemainVisible": true,
+    "provenanceRequiredForSourceClaims": true,
+    "reflectiveOriginLabelRequired": true,
+    "visualObservationMustRemainMeaningFree": true
+  },
+  "forbidden": {
+    "sourceVoting": true,
+    "majorityMeaningSelection": true,
+    "universalSynthesis": true,
+    "originLabelRemoval": true,
+    "privateReferenceRuntimeUse": true,
+    "webDiscoveryRuntimeUse": true,
+    "modelFillMissingPerspective": true,
+    "convertReflectionToFact": true,
+    "convertCardToHiddenStateFact": true
+  },
+  "exampleBoundary": {
+    "allowed": [
+      "Waite source reports one source-bound association.",
+      "The visible image contains an observed object.",
+      "A reflective question asks what deserves attention."
+    ],
+    "forbidden": [
+      "All three layers prove the card universally means X.",
+      "Two sources agree, therefore X is true in the user’s life."
+    ]
+  },
+  "runtimeBinding": {
+    "tariRuntimeConsumerRebound": false,
+    "rebindRequiredAt": "TPA-W21"
+  }
+}

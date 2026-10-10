@@ -1,0 +1,52 @@
+{
+  "id": "phi-os.runtime-timeline.v1",
+  "version": "1.0.0",
+  "status": "stable",
+  "milestone": "M2-W6",
+  "source": "runtime_events",
+  "methods": [
+    "append",
+    "read",
+    "project"
+  ],
+  "event_version": {
+    "current": "1.0.0",
+    "legacy_supported": [
+      "0.9.0"
+    ],
+    "unknown_version_policy": "isolate_with_warning",
+    "new_event_policy": "current_version_only"
+  },
+  "customer_events": [
+    "runtime.created",
+    "entry.answer_added",
+    "entry.completed",
+    "reconstruction.generated",
+    "reconstruction.revised",
+    "reading.generated",
+    "navigation.generated",
+    "review.completed",
+    "memory.committed",
+    "continuity.started",
+    "revision.created"
+  ],
+  "internal_events": [
+    "runtime.partial_write_recovered",
+    "provider.completed",
+    "provider.failed"
+  ],
+  "projection": {
+    "locales": [
+      "en",
+      "zh-Hans"
+    ],
+    "raw_payload_exposed": false,
+    "reported_experience_promoted_to_evidence": false,
+    "historical_overwrite_allowed": false
+  },
+  "compatibility": {
+    "m1_session_lineage_retained": true,
+    "m2_timeline_is_canonical": true,
+    "new_runtime_stage": false
+  }
+}

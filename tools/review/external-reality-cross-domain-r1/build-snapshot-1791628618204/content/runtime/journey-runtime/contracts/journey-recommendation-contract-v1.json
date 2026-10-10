@@ -1,0 +1,34 @@
+{
+  "contractCode": "PHI-OS-JR-W10-JOURNEY-RECOMMENDATION-v1",
+  "contractVersion": "1.0.0",
+  "runtimeCode": "JR",
+  "work": "JR-W10",
+  "status": "active_workflow_only",
+  "allowedWorkflowSteps": [
+    "COLLECT_INPUT",
+    "COLLECT_CONSENT",
+    "ORIENT",
+    "READ",
+    "RECONSTRUCT",
+    "NAVIGATE",
+    "REVIEW",
+    "CONTINUE",
+    "CLOSE",
+    "PROFESSIONAL_HANDOFF",
+    "PAUSE"
+  ],
+  "forbiddenDecisionClasses": [
+    "LIFE_DECISION",
+    "FINANCIAL_DECISION",
+    "MEDICAL_DECISION",
+    "LEGAL_DECISION",
+    "PROFESSIONAL_JUDGMENT",
+    "REALITY_TRUTH"
+  ],
+  "rules": {
+    "recommendationIsWorkflowStepOnly": true,
+    "supportReferencesRequired": true,
+    "safetyStateOverridesNormalFlow": true,
+    "rneOutputMayInformNavigationWorkflowButDoesNotTransferAuthority": true
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "allowedOperations": [
+    "read",
+    "normalize",
+    "classify_intent",
+    "select_published_fragments",
+    "build_reading_path",
+    "report"
+  ],
+  "contractCode": "KNR-PACKAGE-B-ADAPTIVE-PROJECTION-READING-PATHS",
+  "contractVersion": "1.0.0",
+  "dependsOn": [
+    "KNR-PACKAGE-A-v1.0.0-Frozen"
+  ],
+  "policies": {
+    "deterministic": true,
+    "localeBound": true,
+    "providerFree": true,
+    "publishedOnly": true,
+    "unpublishedContinuationFailClosed": true,
+    "verbatimFragmentsOnly": true
+  },
+  "prohibitedOperations": [
+    "generate_answer",
+    "rewrite_fragment",
+    "summarize_with_provider",
+    "call_provider",
+    "translate_content",
+    "index_unpublished_content",
+    "promote_unpublished_relationship",
+    "modify_registry",
+    "modify_publication",
+    "modify_canonical_state"
+  ],
+  "scope": [
+    "KNR-W6_adaptive_projection",
+    "KNR-W7_published_reading_paths"
+  ],
+  "sourceAuthority": "STEP64_MULTILINGUAL_PUBLISHED_RETRIEVAL_INDEX",
+  "status": "active"
+}

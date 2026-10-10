@@ -1,0 +1,5175 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-FP-W17-MACHINE-CAMPAIGN-RESULT-v1.0.0",
+  "work": "BAZI-FP-W17",
+  "baselineCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
+  "status": "MACHINE_CAMPAIGN_PASS",
+  "inputClass": "GOVERNED_SYNTHETIC_STRUCTURAL_FIXTURES_NOT_LIVE_CUSTOMERS",
+  "campaignBoundary": "This campaign validates W1-W16 downstream structural interpretation/composition behavior. It does not replace BZR calendar, solar-term, timezone, true-solar-time, or Luck Cycle calculation campaigns.",
+  "coverage": {
+    "caseCount": 96,
+    "passCount": 96,
+    "failCount": 0,
+    "scenarioCount": 12,
+    "monthBranches": [
+      "CHEN",
+      "CHOU",
+      "HAI",
+      "MAO",
+      "SHEN",
+      "SI",
+      "WEI",
+      "WU",
+      "XU",
+      "YIN",
+      "YOU",
+      "ZI"
+    ],
+    "dayMasters": [
+      "BING",
+      "DING",
+      "GENG",
+      "GUI",
+      "JI",
+      "JIA",
+      "REN",
+      "WU",
+      "XIN",
+      "YI"
+    ],
+    "relationTypes": [
+      "BRANCH_BREAK",
+      "BRANCH_CLASH",
+      "BRANCH_HARM",
+      "BRANCH_PUNISHMENT_GROUP",
+      "BRANCH_PUNISHMENT_PAIR",
+      "BRANCH_SELF_PUNISHMENT",
+      "BRANCH_SIX_COMBINATION",
+      "BRANCH_THREE_HARMONY",
+      "BRANCH_THREE_MEETING",
+      "STEM_COMBINATION"
+    ],
+    "temporalRelationTypes": [
+      "BRANCH_BREAK",
+      "BRANCH_CLASH",
+      "BRANCH_HARM",
+      "BRANCH_PUNISHMENT_GROUP_WITH_DA_YUN",
+      "BRANCH_PUNISHMENT_GROUP_WITH_LIU_NIAN",
+      "BRANCH_PUNISHMENT_PAIR",
+      "BRANCH_REPEAT",
+      "BRANCH_SELF_PUNISHMENT",
+      "BRANCH_SIX_COMBINATION",
+      "BRANCH_THREE_HARMONY_WITH_DA_YUN",
+      "BRANCH_THREE_HARMONY_WITH_LIU_NIAN",
+      "BRANCH_THREE_MEETING_WITH_DA_YUN",
+      "BRANCH_THREE_MEETING_WITH_LIU_NIAN",
+      "STEM_COMBINATION",
+      "STEM_REPEAT"
+    ],
+    "variants": [
+      "ACTIVE_ALTERNATE",
+      "ANNUAL_RELATION_SHIFT",
+      "ANNUAL_UNAVAILABLE",
+      "COMPLETE_ACTIVE",
+      "CURRENT_UNAVAILABLE",
+      "HOUR_UNKNOWN",
+      "HOUR_UNKNOWN_ACTIVE_ALT",
+      "TRANSITION_DAY"
+    ],
+    "locales": [
+      "en",
+      "zh-Hans"
+    ],
+    "threePillarCases": 24,
+    "fourPillarCases": 72,
+    "transitionCases": 12,
+    "currentUnavailableCases": 12,
+    "annualUnavailableCases": 12
+  },
+  "criteria": [
+    "PIPELINE_EXECUTION",
+    "DETERMINISM",
+    "SCHEMA_AND_SECTION_IA",
+    "SCHOOL_SEPARATION",
+    "UNKNOWN_VISIBILITY",
+    "SEMANTIC_NARRATIVE_DEDUP",
+    "NO_RAW_INTERNAL_CODES_DEFAULT_SURFACE",
+    "NO_GOOD_BAD_SCORE",
+    "NO_EVENT_OR_FORTUNE_CERTAINTY",
+    "THREE_AND_FOUR_PILLAR_HANDLING"
+  ],
+  "regressionFinding": {
+    "code": "BAZI_W17_SCHOOL_CARD_GENERIC_COPY_REPETITION",
+    "detectedBeforeFinalPass": true,
+    "resolution": "W16_PRESENTATION_COPY_SUCCESSOR",
+    "runtimeAuthorityChanged": false,
+    "meaningAuthorityChanged": false,
+    "detail": "The first campaign pass exposed identical generic text across the three deliberately separate school cards. The W16 renderer now uses school-specific method framing while leaving the W15 governed report payload and school authority separation unchanged."
+  },
+  "counts": {
+    "total": 96,
+    "passed": 96,
+    "failed": 0
+  },
+  "cases": [
+    {
+      "caseId": "BAZI-FP-W17-001",
+      "scenarioCode": "CLASH_NETWORK",
+      "scenarioFocus": "branch_clash",
+      "variantCode": "COMPLETE_ACTIVE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "JIA-ZI",
+        "REN-WU",
+        "GENG-YIN",
+        "WU-SHEN"
+      ],
+      "pillarZh": [
+        "甲子",
+        "壬午",
+        "庚寅",
+        "戊申"
+      ],
+      "monthBranch": "WU",
+      "dayMaster": "GENG",
+      "relationTypes": [
+        "BRANCH_CLASH"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_BREAK",
+        "BRANCH_HARM",
+        "BRANCH_SIX_COMBINATION",
+        "STEM_COMBINATION",
+        "BRANCH_THREE_HARMONY_WITH_LIU_NIAN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 2,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "2a495beb9d050d07cdecf2f302e3173fe700d7c604ff39fa67cae51d09370e3d",
+      "reportDigest": "330e6854f0b12a3d1847368c05934ab588c757040631c585858552c52f75903a",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-002",
+      "scenarioCode": "CLASH_NETWORK",
+      "scenarioFocus": "branch_clash",
+      "variantCode": "HOUR_UNKNOWN",
+      "locale": "en",
+      "pillarCodes": [
+        "REN-WU",
+        "GENG-YIN",
+        "WU-SHEN"
+      ],
+      "pillarZh": [
+        "壬午",
+        "庚寅",
+        "戊申"
+      ],
+      "monthBranch": "YIN",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "BRANCH_CLASH"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_HARM",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK",
+        "STEM_REPEAT",
+        "BRANCH_PUNISHMENT_GROUP_WITH_LIU_NIAN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "db6013a4c456bd68f0d954b0544418d50f8f3747d2a2106c4c38597b22783dbe",
+      "reportDigest": "4ac0ea225784843ba9f6be7aefe4da993c44f62980ce9547864e290be4c5bb1c",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-003",
+      "scenarioCode": "CLASH_NETWORK",
+      "scenarioFocus": "branch_clash",
+      "variantCode": "ACTIVE_ALTERNATE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "GENG-YIN",
+        "WU-SHEN",
+        "REN-ZI",
+        "GENG-WU"
+      ],
+      "pillarZh": [
+        "庚寅",
+        "戊申",
+        "壬子",
+        "庚午"
+      ],
+      "monthBranch": "SHEN",
+      "dayMaster": "REN",
+      "relationTypes": [
+        "BRANCH_CLASH"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_REPEAT",
+        "BRANCH_CLASH",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK",
+        "BRANCH_HARM"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "9e494ad0b9847760ffcdbd3a5ec6ee4b342709830cfa964ba4998936d0ff41ac",
+      "reportDigest": "0ae89deac4debf58953507122d92b8347c03f3e0121cca0169065fb5cc875a3f",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-004",
+      "scenarioCode": "CLASH_NETWORK",
+      "scenarioFocus": "branch_clash",
+      "variantCode": "ANNUAL_RELATION_SHIFT",
+      "locale": "en",
+      "pillarCodes": [
+        "WU-SHEN",
+        "REN-ZI",
+        "GENG-WU",
+        "WU-YIN"
+      ],
+      "pillarZh": [
+        "戊申",
+        "壬子",
+        "庚午",
+        "戊寅"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "GENG",
+      "relationTypes": [
+        "BRANCH_CLASH"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_HARM",
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_THREE_HARMONY_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "0f6b4aec23285fbbf7f2945567ce8b2542aba04ad0aa364122b21cf7353fbe7d",
+      "reportDigest": "60d4c34c66de8cde606108c8fc992f79d02e82f03be0b792d5ed7cfbf53243fd",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-005",
+      "scenarioCode": "CLASH_NETWORK",
+      "scenarioFocus": "branch_clash",
+      "variantCode": "TRANSITION_DAY",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "REN-ZI",
+        "GENG-WU",
+        "WU-YIN",
+        "BING-SHEN"
+      ],
+      "pillarZh": [
+        "壬子",
+        "庚午",
+        "戊寅",
+        "丙申"
+      ],
+      "monthBranch": "WU",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "BRANCH_CLASH"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_REPEAT",
+        "BRANCH_CLASH"
+      ],
+      "currentLuckState": "TRANSITION_DAY",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 2,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "221d8ea33a5530acc49cad3b3b873544e8f72c54d1687b00fe0634104084bad3",
+      "reportDigest": "c6027afaac63896186c43b4256cad32ff702acae8c61863c780094b178cbeb85",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-006",
+      "scenarioCode": "CLASH_NETWORK",
+      "scenarioFocus": "branch_clash",
+      "variantCode": "ANNUAL_UNAVAILABLE",
+      "locale": "en",
+      "pillarCodes": [
+        "GENG-WU",
+        "WU-YIN",
+        "BING-SHEN",
+        "GENG-ZI"
+      ],
+      "pillarZh": [
+        "庚午",
+        "戊寅",
+        "丙申",
+        "庚子"
+      ],
+      "monthBranch": "YIN",
+      "dayMaster": "BING",
+      "relationTypes": [
+        "BRANCH_CLASH"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_REPEAT"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": false,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 7,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "51e6eda20a0f987c50637a6071b94a7443a6b6f1b8a6b41f7970c0cc42d626f3",
+      "reportDigest": "7f1e8f37a1463147327534396681deb8c34739738e402dd4d4b50d104d630754",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-007",
+      "scenarioCode": "CLASH_NETWORK",
+      "scenarioFocus": "branch_clash",
+      "variantCode": "CURRENT_UNAVAILABLE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "WU-YIN",
+        "BING-SHEN",
+        "GENG-ZI",
+        "WU-WU"
+      ],
+      "pillarZh": [
+        "戊寅",
+        "丙申",
+        "庚子",
+        "戊午"
+      ],
+      "monthBranch": "SHEN",
+      "dayMaster": "GENG",
+      "relationTypes": [
+        "BRANCH_CLASH"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_THREE_HARMONY_WITH_LIU_NIAN"
+      ],
+      "currentLuckState": "UNAVAILABLE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "93782594c3fdcb526c4c07e60c9584be194cbf7ea358e1a547276261e2e28d28",
+      "reportDigest": "f5a08ddb828dfbb883288b110e073da5fbd77100ae8a18d225f875e086d2d1ca",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-008",
+      "scenarioCode": "CLASH_NETWORK",
+      "scenarioFocus": "branch_clash",
+      "variantCode": "HOUR_UNKNOWN_ACTIVE_ALT",
+      "locale": "en",
+      "pillarCodes": [
+        "BING-SHEN",
+        "GENG-ZI",
+        "WU-WU"
+      ],
+      "pillarZh": [
+        "丙申",
+        "庚子",
+        "戊午"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "BRANCH_CLASH"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_HARM",
+        "STEM_COMBINATION",
+        "BRANCH_REPEAT",
+        "STEM_REPEAT"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "b84826cb630d37d9d707786d88b4622f006f66122105cb3438ce37347ed5a213",
+      "reportDigest": "cbc19b34756453adf99fe7a6344f0298a1bf36c0d23d001a7e8573edca365332",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-009",
+      "scenarioCode": "SIX_COMBINATION",
+      "scenarioFocus": "six_combination",
+      "variantCode": "COMPLETE_ACTIVE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "BING-ZI",
+        "JI-CHOU",
+        "GUI-MAO",
+        "REN-XU"
+      ],
+      "pillarZh": [
+        "丙子",
+        "己丑",
+        "癸卯",
+        "壬戌"
+      ],
+      "monthBranch": "CHOU",
+      "dayMaster": "GUI",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_CLASH",
+        "STEM_REPEAT",
+        "BRANCH_THREE_MEETING_WITH_LIU_NIAN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "f030bced30ad954d8c70a904c57f16448dadae54280eb16c3e73a964f6549423",
+      "reportDigest": "dd167671a138e2bd1077f375aa04c191e835b83635f1c5e12a9853bf0058d8b2",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-010",
+      "scenarioCode": "SIX_COMBINATION",
+      "scenarioFocus": "six_combination",
+      "variantCode": "HOUR_UNKNOWN",
+      "locale": "en",
+      "pillarCodes": [
+        "JI-CHOU",
+        "GUI-MAO",
+        "REN-XU"
+      ],
+      "pillarZh": [
+        "己丑",
+        "癸卯",
+        "壬戌"
+      ],
+      "monthBranch": "MAO",
+      "dayMaster": "REN",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_BREAK"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "979997d3cd1a2a24597308048635e38675b543c975a9c1e662b00a718a12b3fa",
+      "reportDigest": "60e206fcc147870ae86ddddce62ecc20789d4e21c3387ba0174dd543bbaa5faf",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-011",
+      "scenarioCode": "SIX_COMBINATION",
+      "scenarioFocus": "six_combination",
+      "variantCode": "ACTIVE_ALTERNATE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "GUI-MAO",
+        "REN-XU",
+        "JIA-ZI",
+        "DING-CHOU"
+      ],
+      "pillarZh": [
+        "癸卯",
+        "壬戌",
+        "甲子",
+        "丁丑"
+      ],
+      "monthBranch": "XU",
+      "dayMaster": "JIA",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_REPEAT",
+        "BRANCH_BREAK",
+        "STEM_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_CLASH"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "85bdacfadc777ed23236eb8f37ffb66428fd19e30fe586c320d3a852731496a9",
+      "reportDigest": "4d66a68e5b0f234757b7c34d9bca067fb00861997a6d6c03d365a9142d33a5fe",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-012",
+      "scenarioCode": "SIX_COMBINATION",
+      "scenarioFocus": "six_combination",
+      "variantCode": "ANNUAL_RELATION_SHIFT",
+      "locale": "en",
+      "pillarCodes": [
+        "REN-XU",
+        "JIA-ZI",
+        "DING-CHOU",
+        "XIN-MAO"
+      ],
+      "pillarZh": [
+        "壬戌",
+        "甲子",
+        "丁丑",
+        "辛卯"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "DING",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_BREAK",
+        "BRANCH_HARM",
+        "BRANCH_CLASH",
+        "STEM_REPEAT",
+        "BRANCH_PUNISHMENT_GROUP_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "f64594ae85c5bd3983f5c701ec1e0da5fe06443369028bfa84b7c58bee8a1555",
+      "reportDigest": "73821f89671c73645ddf7316c2fcd57b51a9a41e7c443f6962858d2eece4419f",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-013",
+      "scenarioCode": "SIX_COMBINATION",
+      "scenarioFocus": "six_combination",
+      "variantCode": "TRANSITION_DAY",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "JIA-ZI",
+        "DING-CHOU",
+        "XIN-MAO",
+        "GENG-XU"
+      ],
+      "pillarZh": [
+        "甲子",
+        "丁丑",
+        "辛卯",
+        "庚戌"
+      ],
+      "monthBranch": "CHOU",
+      "dayMaster": "XIN",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_PUNISHMENT_PAIR",
+        "BRANCH_REPEAT",
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION"
+      ],
+      "currentLuckState": "TRANSITION_DAY",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "2096ee0e925b4a792b47ff23a45d153cc8d13ff46bfa5a974f18f5059bf5001b",
+      "reportDigest": "335ddc5b5da35a00c71fbab1e1d8fe63bfae69509480089cbf8fd277da5a85cf",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-014",
+      "scenarioCode": "SIX_COMBINATION",
+      "scenarioFocus": "six_combination",
+      "variantCode": "ANNUAL_UNAVAILABLE",
+      "locale": "en",
+      "pillarCodes": [
+        "DING-CHOU",
+        "XIN-MAO",
+        "GENG-XU",
+        "REN-ZI"
+      ],
+      "pillarZh": [
+        "丁丑",
+        "辛卯",
+        "庚戌",
+        "壬子"
+      ],
+      "monthBranch": "MAO",
+      "dayMaster": "GENG",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_BREAK",
+        "BRANCH_HARM",
+        "BRANCH_CLASH",
+        "STEM_REPEAT"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": false,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 7,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "19e40214f0d5e3b637130c614a4260f77895e185b448130bb2f973abd6a10957",
+      "reportDigest": "0430b8767d2c23e3f6c9efd8c1ecc89228ab2d963c74fd2de7ea82ce62cab7b9",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-015",
+      "scenarioCode": "SIX_COMBINATION",
+      "scenarioFocus": "six_combination",
+      "variantCode": "CURRENT_UNAVAILABLE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "XIN-MAO",
+        "GENG-XU",
+        "REN-ZI",
+        "YI-CHOU"
+      ],
+      "pillarZh": [
+        "辛卯",
+        "庚戌",
+        "壬子",
+        "乙丑"
+      ],
+      "monthBranch": "XU",
+      "dayMaster": "REN",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "temporalRelationTypes": [],
+      "currentLuckState": "UNAVAILABLE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "1c15d543a9c232a0516d54e0582d3a8531752d3ca6593a77c2de1958becf1c04",
+      "reportDigest": "ba52bbed65c01b2758c1f82e65dcaae5f3a371e4dac0d76607b22b1f00f4555d",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-016",
+      "scenarioCode": "SIX_COMBINATION",
+      "scenarioFocus": "six_combination",
+      "variantCode": "HOUR_UNKNOWN_ACTIVE_ALT",
+      "locale": "en",
+      "pillarCodes": [
+        "GENG-XU",
+        "REN-ZI",
+        "YI-CHOU"
+      ],
+      "pillarZh": [
+        "庚戌",
+        "壬子",
+        "乙丑"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "YI",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_REPEAT",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_PUNISHMENT_PAIR",
+        "STEM_COMBINATION",
+        "STEM_REPEAT"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "d0eb2f97acfb1b53cd018e0b3b4ec642bcdf1165e196559b3479a358d54173e8",
+      "reportDigest": "f7131c602e4fb6207b58e58355e956e59fea08250253e888dd955dc489c91431",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-017",
+      "scenarioCode": "HARM_NETWORK",
+      "scenarioFocus": "branch_harm",
+      "variantCode": "COMPLETE_ACTIVE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "WU-ZI",
+        "DING-WEI",
+        "GENG-SHEN",
+        "YI-HAI"
+      ],
+      "pillarZh": [
+        "戊子",
+        "丁未",
+        "庚申",
+        "乙亥"
+      ],
+      "monthBranch": "WEI",
+      "dayMaster": "GENG",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_REPEAT",
+        "BRANCH_HARM",
+        "STEM_REPEAT",
+        "STEM_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "ef8cb80ca1ee5228ca67ac3a3e8289e6046af33d1c73f7b4248f016d4a87bfdf",
+      "reportDigest": "80c9ea077756d05d3f88e915f14889bf6bfa944893a3a7f28ea47d143e9f48c7",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-018",
+      "scenarioCode": "HARM_NETWORK",
+      "scenarioFocus": "branch_harm",
+      "variantCode": "HOUR_UNKNOWN",
+      "locale": "en",
+      "pillarCodes": [
+        "DING-WEI",
+        "GENG-SHEN",
+        "YI-HAI"
+      ],
+      "pillarZh": [
+        "丁未",
+        "庚申",
+        "乙亥"
+      ],
+      "monthBranch": "SHEN",
+      "dayMaster": "YI",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_REPEAT"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "c6563d31d246a3d6f39e6294c9a373b84e809bee88c214241db5a295db38f23c",
+      "reportDigest": "509f3ca6ced3dac5987364323f905d12aa6f92543bce24817f5b62d13c7017e5",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-019",
+      "scenarioCode": "HARM_NETWORK",
+      "scenarioFocus": "branch_harm",
+      "variantCode": "ACTIVE_ALTERNATE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "GENG-SHEN",
+        "YI-HAI",
+        "BING-ZI",
+        "YI-WEI"
+      ],
+      "pillarZh": [
+        "庚申",
+        "乙亥",
+        "丙子",
+        "乙未"
+      ],
+      "monthBranch": "HAI",
+      "dayMaster": "BING",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK",
+        "STEM_REPEAT",
+        "BRANCH_REPEAT",
+        "BRANCH_HARM"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 2,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "202cf779bf36ed6d109958deb0bf6b5faf2fa615d63e73ce0baa76b112817723",
+      "reportDigest": "36cf31c157769457d48ff109ccfc065a4c0de4e8bdd7dd87d2c13230f154ab62",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-020",
+      "scenarioCode": "HARM_NETWORK",
+      "scenarioFocus": "branch_harm",
+      "variantCode": "ANNUAL_RELATION_SHIFT",
+      "locale": "en",
+      "pillarCodes": [
+        "YI-HAI",
+        "BING-ZI",
+        "YI-WEI",
+        "WU-SHEN"
+      ],
+      "pillarZh": [
+        "乙亥",
+        "丙子",
+        "乙未",
+        "戊申"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "YI",
+      "relationTypes": [
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_BREAK",
+        "BRANCH_SIX_COMBINATION",
+        "STEM_REPEAT",
+        "BRANCH_CLASH"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "710d7c1c49c34f7a6f0d21c3eb83e973ba20cf882819a3bd3f5cf8061a2e5da9",
+      "reportDigest": "ccafe8e01f4acbbe070b9ad7b258c53c5fe148bf82bdacda1ceac878ef4a1375",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-021",
+      "scenarioCode": "HARM_NETWORK",
+      "scenarioFocus": "branch_harm",
+      "variantCode": "TRANSITION_DAY",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "BING-ZI",
+        "YI-WEI",
+        "WU-SHEN",
+        "GUI-HAI"
+      ],
+      "pillarZh": [
+        "丙子",
+        "乙未",
+        "戊申",
+        "癸亥"
+      ],
+      "monthBranch": "WEI",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "STEM_COMBINATION",
+        "BRANCH_THREE_HARMONY_WITH_LIU_NIAN"
+      ],
+      "currentLuckState": "TRANSITION_DAY",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "9e08d1268adaf0e8d0618e0294d31f23e821a1fbd09c8c43e79c6e632553e81d",
+      "reportDigest": "c2aac9ba7702d2b7858bf961c630b385228e0beda38dbb53fb5a2d198e3de341",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-022",
+      "scenarioCode": "HARM_NETWORK",
+      "scenarioFocus": "branch_harm",
+      "variantCode": "ANNUAL_UNAVAILABLE",
+      "locale": "en",
+      "pillarCodes": [
+        "YI-WEI",
+        "WU-SHEN",
+        "GUI-HAI",
+        "JIA-ZI"
+      ],
+      "pillarZh": [
+        "乙未",
+        "戊申",
+        "癸亥",
+        "甲子"
+      ],
+      "monthBranch": "SHEN",
+      "dayMaster": "GUI",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_HARM",
+        "BRANCH_REPEAT"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": false,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 7,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "2bed258a5006e0078f7aa0037c8bd8a13a29851466ba5e703a10264820cbe89c",
+      "reportDigest": "891c7437603cbe4849db6a0856f653cd82b3e966ed0f0235e6f3a0b41b940509",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-023",
+      "scenarioCode": "HARM_NETWORK",
+      "scenarioFocus": "branch_harm",
+      "variantCode": "CURRENT_UNAVAILABLE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "WU-SHEN",
+        "GUI-HAI",
+        "JIA-ZI",
+        "GUI-WEI"
+      ],
+      "pillarZh": [
+        "戊申",
+        "癸亥",
+        "甲子",
+        "癸未"
+      ],
+      "monthBranch": "HAI",
+      "dayMaster": "JIA",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_SIX_COMBINATION"
+      ],
+      "currentLuckState": "UNAVAILABLE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 2,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "665f2e5345af3fce930634a124a4959788a5bfe5398195f3f07f7d3bb70c4698",
+      "reportDigest": "d7fb474981224f722c87c8bb9c7e0d884649d7a2004ddc3068b93bed0caff0a7",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-024",
+      "scenarioCode": "HARM_NETWORK",
+      "scenarioFocus": "branch_harm",
+      "variantCode": "HOUR_UNKNOWN_ACTIVE_ALT",
+      "locale": "en",
+      "pillarCodes": [
+        "GUI-HAI",
+        "JIA-ZI",
+        "GUI-WEI"
+      ],
+      "pillarZh": [
+        "癸亥",
+        "甲子",
+        "癸未"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "GUI",
+      "relationTypes": [
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "BRANCH_THREE_MEETING_WITH_LIU_NIAN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 5,
+      "readingDigest": "a151d06503240102da4c8589ffec9f585d06aca6892429ef6325f8c2b7cd3a89",
+      "reportDigest": "e62895ce4551c726b988d556de1e32330bb8b45df98c774f651d0a505d8992da",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-025",
+      "scenarioCode": "BREAK_NETWORK",
+      "scenarioFocus": "branch_break",
+      "variantCode": "COMPLETE_ACTIVE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "GENG-ZI",
+        "XIN-YOU",
+        "WU-CHEN",
+        "DING-CHOU"
+      ],
+      "pillarZh": [
+        "庚子",
+        "辛酉",
+        "戊辰",
+        "丁丑"
+      ],
+      "monthBranch": "YOU",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "STEM_COMBINATION",
+        "BRANCH_BREAK",
+        "BRANCH_REPEAT",
+        "STEM_REPEAT",
+        "BRANCH_THREE_MEETING_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 5,
+      "readingDigest": "71bae0cf1e3b7d778c1fe3bb6e819a644ea7ee46d85ea0edaab389d4239680da",
+      "reportDigest": "a5d0fc4fde4b9ab115af40f97624c6053dc4ef8273c5f31edada1f37850927a2",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-026",
+      "scenarioCode": "BREAK_NETWORK",
+      "scenarioFocus": "branch_break",
+      "variantCode": "HOUR_UNKNOWN",
+      "locale": "en",
+      "pillarCodes": [
+        "XIN-YOU",
+        "WU-CHEN",
+        "DING-CHOU"
+      ],
+      "pillarZh": [
+        "辛酉",
+        "戊辰",
+        "丁丑"
+      ],
+      "monthBranch": "CHEN",
+      "dayMaster": "DING",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_CLASH"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "06d8faad9109e251e84e5c903f26916745e003e467a4c1f6100eb42c8ec19501",
+      "reportDigest": "320e7555a52c186a2af2f50e303b8d9b1e223640ec3587a36e07a3e9461a18a8",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-027",
+      "scenarioCode": "BREAK_NETWORK",
+      "scenarioFocus": "branch_break",
+      "variantCode": "ACTIVE_ALTERNATE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "WU-CHEN",
+        "DING-CHOU",
+        "WU-ZI",
+        "JI-YOU"
+      ],
+      "pillarZh": [
+        "戊辰",
+        "丁丑",
+        "戊子",
+        "己酉"
+      ],
+      "monthBranch": "CHOU",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_HARM",
+        "STEM_REPEAT",
+        "BRANCH_PUNISHMENT_PAIR",
+        "BRANCH_CLASH",
+        "BRANCH_THREE_HARMONY_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "0486c7591522f47ead2a2154772e6677f61f76d44887f6b55b2ab0b16e7738a3",
+      "reportDigest": "cbdaf371b1e374561be85e4ee6a19c3e7c2316c1869cad5aaeab4376d8c9ca2b",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-028",
+      "scenarioCode": "BREAK_NETWORK",
+      "scenarioFocus": "branch_break",
+      "variantCode": "ANNUAL_RELATION_SHIFT",
+      "locale": "en",
+      "pillarCodes": [
+        "DING-CHOU",
+        "WU-ZI",
+        "JI-YOU",
+        "BING-CHEN"
+      ],
+      "pillarZh": [
+        "丁丑",
+        "戊子",
+        "己酉",
+        "丙辰"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "JI",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_CLASH",
+        "BRANCH_THREE_HARMONY_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "2fb49d977d839ccaba101cc6449a6f11cde6868bafc462857b3e8fcf0c7c9f26",
+      "reportDigest": "8f0be5efe48bf8f6590f41f6d141df150910066fab6f8270c9d81f9c9bb0d116",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-029",
+      "scenarioCode": "BREAK_NETWORK",
+      "scenarioFocus": "branch_break",
+      "variantCode": "TRANSITION_DAY",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "WU-ZI",
+        "JI-YOU",
+        "BING-CHEN",
+        "YI-CHOU"
+      ],
+      "pillarZh": [
+        "戊子",
+        "己酉",
+        "丙辰",
+        "乙丑"
+      ],
+      "monthBranch": "YOU",
+      "dayMaster": "BING",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_THREE_HARMONY_WITH_LIU_NIAN"
+      ],
+      "currentLuckState": "TRANSITION_DAY",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "36a2fe99dacb56675f1fe2918676fee4dd130e87a67395b96c25b0498d91e305",
+      "reportDigest": "bb061056a5f5c477e854f301b3de573e8ff30eb973f9a5bb53f6e5ad1670eb63",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-030",
+      "scenarioCode": "BREAK_NETWORK",
+      "scenarioFocus": "branch_break",
+      "variantCode": "ANNUAL_UNAVAILABLE",
+      "locale": "en",
+      "pillarCodes": [
+        "JI-YOU",
+        "BING-CHEN",
+        "YI-CHOU",
+        "BING-ZI"
+      ],
+      "pillarZh": [
+        "己酉",
+        "丙辰",
+        "乙丑",
+        "丙子"
+      ],
+      "monthBranch": "CHEN",
+      "dayMaster": "YI",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_THREE_MEETING_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": false,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 7,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "c36c05dd2341333abe137db1053b7045c1c04cee7592f27592351be5a4d1bcc1",
+      "reportDigest": "0905314c7b8ec5237a394caf0b6a66f60c5081a13c4565f112d39b8341cd3561",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-031",
+      "scenarioCode": "BREAK_NETWORK",
+      "scenarioFocus": "branch_break",
+      "variantCode": "CURRENT_UNAVAILABLE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "BING-CHEN",
+        "YI-CHOU",
+        "BING-ZI",
+        "DING-YOU"
+      ],
+      "pillarZh": [
+        "丙辰",
+        "乙丑",
+        "丙子",
+        "丁酉"
+      ],
+      "monthBranch": "CHOU",
+      "dayMaster": "BING",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_CLASH",
+        "BRANCH_HARM"
+      ],
+      "currentLuckState": "UNAVAILABLE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "1adbb81eef9287564427b596a4a037ee54d82fc566d9731c9562f0e4c80b1ed1",
+      "reportDigest": "eff15639d0f3d66826fc1c904273ebbb21940bb6f05146055412001b6a6ef7f5",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-032",
+      "scenarioCode": "BREAK_NETWORK",
+      "scenarioFocus": "branch_break",
+      "variantCode": "HOUR_UNKNOWN_ACTIVE_ALT",
+      "locale": "en",
+      "pillarCodes": [
+        "YI-CHOU",
+        "BING-ZI",
+        "DING-YOU"
+      ],
+      "pillarZh": [
+        "乙丑",
+        "丙子",
+        "丁酉"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "DING",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_REPEAT",
+        "BRANCH_SIX_COMBINATION",
+        "STEM_REPEAT"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "01ec3dc07f73e6118c623c780fe4b45f6e082bd3c65856ef4a25afebde52d5d9",
+      "reportDigest": "6ee99d2bbbb85a0d0fb9b028a797714976824534ed54b9b8a7fbeb4d66eb9969",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-033",
+      "scenarioCode": "THREE_HARMONY_WATER",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "COMPLETE_ACTIVE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "GENG-SHEN",
+        "JIA-ZI",
+        "GENG-CHEN",
+        "GENG-YIN"
+      ],
+      "pillarZh": [
+        "庚申",
+        "甲子",
+        "庚辰",
+        "庚寅"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "GENG",
+      "relationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_THREE_HARMONY"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_REPEAT",
+        "BRANCH_HARM",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK",
+        "STEM_COMBINATION",
+        "BRANCH_PUNISHMENT_GROUP_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "0170b17968037df3f9f7d577892e5a9d7046534ede93bdca8d1f7e6edd29e59d",
+      "reportDigest": "c8a419490af74ae72b0bdeba2abad5cdf4aec29f399e0a887be16c51acc3f2d5",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-034",
+      "scenarioCode": "THREE_HARMONY_WATER",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "HOUR_UNKNOWN",
+      "locale": "en",
+      "pillarCodes": [
+        "JIA-ZI",
+        "GENG-CHEN",
+        "GENG-YIN"
+      ],
+      "pillarZh": [
+        "甲子",
+        "庚辰",
+        "庚寅"
+      ],
+      "monthBranch": "CHEN",
+      "dayMaster": "GENG",
+      "relationTypes": [],
+      "temporalRelationTypes": [
+        "BRANCH_BREAK",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_CLASH"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 6,
+      "temporalInteractionCount": 3,
+      "readingDigest": "7d3202b017bb29432e47ca71e7d8988b1f3106fdf6db1fca0494afce6e78129e",
+      "reportDigest": "f008c26a37bb59bb2269b89795645ab5b27f18b1d573f4bc6d74327a3a1b5f31",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-035",
+      "scenarioCode": "THREE_HARMONY_WATER",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "ACTIVE_ALTERNATE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "GENG-CHEN",
+        "GENG-YIN",
+        "WU-SHEN",
+        "REN-ZI"
+      ],
+      "pillarZh": [
+        "庚辰",
+        "庚寅",
+        "戊申",
+        "壬子"
+      ],
+      "monthBranch": "YIN",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_THREE_HARMONY"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_REPEAT",
+        "BRANCH_SELF_PUNISHMENT",
+        "BRANCH_SIX_COMBINATION",
+        "STEM_COMBINATION",
+        "BRANCH_BREAK"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 5,
+      "readingDigest": "b77256f3ae79ec9e39522a32d21b4647ba5ea8cfbaae303de0f083814d62d0eb",
+      "reportDigest": "c29e10cac73ec9840d6eaea8e1073adb82964d2078b5df12688b5fdd51d503b5",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-036",
+      "scenarioCode": "THREE_HARMONY_WATER",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "ANNUAL_RELATION_SHIFT",
+      "locale": "en",
+      "pillarCodes": [
+        "GENG-YIN",
+        "WU-SHEN",
+        "REN-ZI",
+        "WU-CHEN"
+      ],
+      "pillarZh": [
+        "庚寅",
+        "戊申",
+        "壬子",
+        "戊辰"
+      ],
+      "monthBranch": "SHEN",
+      "dayMaster": "REN",
+      "relationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_THREE_HARMONY"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK",
+        "BRANCH_HARM",
+        "STEM_COMBINATION",
+        "BRANCH_REPEAT",
+        "BRANCH_SELF_PUNISHMENT",
+        "BRANCH_THREE_HARMONY_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "f133a2872aac77ef0522dc9230c7eee97f61f707c7ec011f50e1bea9d2e225ce",
+      "reportDigest": "ef5418aadf48f32bc39fd3461650db33137b7431eaa80e6f672951be7c8cd660",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-037",
+      "scenarioCode": "THREE_HARMONY_WATER",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "TRANSITION_DAY",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "WU-SHEN",
+        "REN-ZI",
+        "WU-CHEN",
+        "WU-YIN"
+      ],
+      "pillarZh": [
+        "戊申",
+        "壬子",
+        "戊辰",
+        "戊寅"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_THREE_HARMONY"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_CLASH"
+      ],
+      "currentLuckState": "TRANSITION_DAY",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 1,
+      "readingDigest": "c2223d3bdfa7c2b10990d7748d88d258d68dd0e911cd05c72cf8039fada42fbf",
+      "reportDigest": "d3766b4c2cb5a088fbb85d6baa9766e4819a94b59dbc20c8b5521bb655e4bdd0",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-038",
+      "scenarioCode": "THREE_HARMONY_WATER",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "ANNUAL_UNAVAILABLE",
+      "locale": "en",
+      "pillarCodes": [
+        "REN-ZI",
+        "WU-CHEN",
+        "WU-YIN",
+        "BING-SHEN"
+      ],
+      "pillarZh": [
+        "壬子",
+        "戊辰",
+        "戊寅",
+        "丙申"
+      ],
+      "monthBranch": "CHEN",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_THREE_HARMONY"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_CLASH"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": false,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 7,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "bcd339b6cedeafd27ebb2b81c5c1488c90803ad25a68684f7b102da150fc0708",
+      "reportDigest": "abd8d759db498836778195f0870e53494423bd86500a5a8c286fdfdf522facc9",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-039",
+      "scenarioCode": "THREE_HARMONY_WATER",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "CURRENT_UNAVAILABLE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "WU-CHEN",
+        "WU-YIN",
+        "BING-SHEN",
+        "GENG-ZI"
+      ],
+      "pillarZh": [
+        "戊辰",
+        "戊寅",
+        "丙申",
+        "庚子"
+      ],
+      "monthBranch": "YIN",
+      "dayMaster": "BING",
+      "relationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_THREE_HARMONY"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_CLASH",
+        "BRANCH_REPEAT"
+      ],
+      "currentLuckState": "UNAVAILABLE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "d589d8f402fa354d7cb367aa6e322343d31173dcbeb9db6f44d6aa338505d9ec",
+      "reportDigest": "02ee087b6b36eb52d4f0588ded0be7f7e5691d14ba2ba846bbb5abd9c8ba0c57",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-040",
+      "scenarioCode": "THREE_HARMONY_WATER",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "HOUR_UNKNOWN_ACTIVE_ALT",
+      "locale": "en",
+      "pillarCodes": [
+        "WU-YIN",
+        "BING-SHEN",
+        "GENG-ZI"
+      ],
+      "pillarZh": [
+        "戊寅",
+        "丙申",
+        "庚子"
+      ],
+      "monthBranch": "SHEN",
+      "dayMaster": "GENG",
+      "relationTypes": [
+        "BRANCH_CLASH"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_PUNISHMENT_PAIR",
+        "STEM_REPEAT",
+        "BRANCH_REPEAT"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "ce24e6a47fb9da0f232fd0765f03c729bf30d282165691dc4b04535c8a313d43",
+      "reportDigest": "d351dc4528c2a969e44218fb71db036bcb433e2ea71b8275890b510a90092cbe",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-041",
+      "scenarioCode": "THREE_MEETING_WOOD",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "COMPLETE_ACTIVE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "BING-YIN",
+        "JI-MAO",
+        "REN-CHEN",
+        "GENG-XU"
+      ],
+      "pillarZh": [
+        "丙寅",
+        "己卯",
+        "壬辰",
+        "庚戌"
+      ],
+      "monthBranch": "MAO",
+      "dayMaster": "REN",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "BRANCH_THREE_MEETING"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_REPEAT",
+        "BRANCH_HARM",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK",
+        "STEM_COMBINATION"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "35fa4efb76c29afe4583ca9f522b2f91a97f3b564a0108163629ac8b62c39074",
+      "reportDigest": "429af37913b7d1b82df326a4be6a487ec248fe1d9b9b160108deaa21a45cce3e",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-042",
+      "scenarioCode": "THREE_MEETING_WOOD",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "HOUR_UNKNOWN",
+      "locale": "en",
+      "pillarCodes": [
+        "JI-MAO",
+        "REN-CHEN",
+        "GENG-XU"
+      ],
+      "pillarZh": [
+        "己卯",
+        "壬辰",
+        "庚戌"
+      ],
+      "monthBranch": "CHEN",
+      "dayMaster": "GENG",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_REPEAT"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "f16c9dea4a7d18a03712bee2646f15a2c17cc1d66d8e574732d52779a378a193",
+      "reportDigest": "839775254b54a43cece75e3952a8dbb43f9679c15abd66fece174c33a3b8a2fe",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-043",
+      "scenarioCode": "THREE_MEETING_WOOD",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "ACTIVE_ALTERNATE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "REN-CHEN",
+        "GENG-XU",
+        "JIA-YIN",
+        "DING-MAO"
+      ],
+      "pillarZh": [
+        "壬辰",
+        "庚戌",
+        "甲寅",
+        "丁卯"
+      ],
+      "monthBranch": "XU",
+      "dayMaster": "JIA",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "BRANCH_THREE_MEETING"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_HARM",
+        "STEM_REPEAT",
+        "STEM_COMBINATION",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 1,
+      "readingDigest": "e27cf552f084e7774e26f22b353b670ec794b5fe3e7834cd8379a0fc9c5e3758",
+      "reportDigest": "7b634afc6341f62bf533d223311cf1837e90d24eb686cca8beae91874c5312e6",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-044",
+      "scenarioCode": "THREE_MEETING_WOOD",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "ANNUAL_RELATION_SHIFT",
+      "locale": "en",
+      "pillarCodes": [
+        "GENG-XU",
+        "JIA-YIN",
+        "DING-MAO",
+        "GENG-CHEN"
+      ],
+      "pillarZh": [
+        "庚戌",
+        "甲寅",
+        "丁卯",
+        "庚辰"
+      ],
+      "monthBranch": "YIN",
+      "dayMaster": "DING",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "BRANCH_THREE_MEETING"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_PUNISHMENT_PAIR",
+        "BRANCH_HARM"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "a2799e569b67d7a7c98f24865b37c3d0ba9b12d17b44443937b918e9d2b405fe",
+      "reportDigest": "d25f42037225385d4856799013bed1a6aa7cdb4c1e6be31830014d327d7e7904",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-045",
+      "scenarioCode": "THREE_MEETING_WOOD",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "TRANSITION_DAY",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "JIA-YIN",
+        "DING-MAO",
+        "GENG-CHEN",
+        "WU-XU"
+      ],
+      "pillarZh": [
+        "甲寅",
+        "丁卯",
+        "庚辰",
+        "戊戌"
+      ],
+      "monthBranch": "MAO",
+      "dayMaster": "GENG",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "BRANCH_THREE_MEETING"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_BREAK"
+      ],
+      "currentLuckState": "TRANSITION_DAY",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "41dc34ad668bf6a5fceb327c5321169040b48d5c5dda5e7a51205d308eab7225",
+      "reportDigest": "6e40e6b250b1684a0c32f1372e7b54d40bc95ef79d1958509a075e8a41023306",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-046",
+      "scenarioCode": "THREE_MEETING_WOOD",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "ANNUAL_UNAVAILABLE",
+      "locale": "en",
+      "pillarCodes": [
+        "DING-MAO",
+        "GENG-CHEN",
+        "WU-XU",
+        "REN-YIN"
+      ],
+      "pillarZh": [
+        "丁卯",
+        "庚辰",
+        "戊戌",
+        "壬寅"
+      ],
+      "monthBranch": "CHEN",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "BRANCH_THREE_MEETING"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_CLASH",
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": false,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 7,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "e0c236e5a65be080064482ae812adda62df7470a1fe31b3c97b3a04e237acbc4",
+      "reportDigest": "4beffd7068adc0a903e240db5f7108a895279dc8cfb81b7d2f92c3ce18a072ac",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-047",
+      "scenarioCode": "THREE_MEETING_WOOD",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "CURRENT_UNAVAILABLE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "GENG-CHEN",
+        "WU-XU",
+        "REN-YIN",
+        "YI-MAO"
+      ],
+      "pillarZh": [
+        "庚辰",
+        "戊戌",
+        "壬寅",
+        "乙卯"
+      ],
+      "monthBranch": "XU",
+      "dayMaster": "REN",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "BRANCH_THREE_MEETING"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_CLASH"
+      ],
+      "currentLuckState": "UNAVAILABLE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "5126d7f8cc21218d1447316de71e67e2a3e8a97b55ace0dd385c03ff04e8b857",
+      "reportDigest": "853970d02d552b3789b6a9e42b2bf496a9c2253a82f57923e0f11630708e3e6e",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-048",
+      "scenarioCode": "THREE_MEETING_WOOD",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "HOUR_UNKNOWN_ACTIVE_ALT",
+      "locale": "en",
+      "pillarCodes": [
+        "WU-XU",
+        "REN-YIN",
+        "YI-MAO"
+      ],
+      "pillarZh": [
+        "戊戌",
+        "壬寅",
+        "乙卯"
+      ],
+      "monthBranch": "YIN",
+      "dayMaster": "YI",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_THREE_MEETING_WITH_LIU_NIAN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 5,
+      "readingDigest": "2a0a7df21c644b5dd21d46fadf66b5afa69c1c550b05bba999fd65884adce7a7",
+      "reportDigest": "1ff926485bc683afb4a1980e12eb31eb01017d26488425f35b4953dbf2fa17f6",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-049",
+      "scenarioCode": "THREE_PUNISHMENT",
+      "scenarioFocus": "three_punishment",
+      "variantCode": "COMPLETE_ACTIVE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "WU-YIN",
+        "GUI-SI",
+        "WU-SHEN",
+        "YI-MAO"
+      ],
+      "pillarZh": [
+        "戊寅",
+        "癸巳",
+        "戊申",
+        "乙卯"
+      ],
+      "monthBranch": "SI",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "BRANCH_BREAK",
+        "BRANCH_PUNISHMENT_GROUP"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_HARM",
+        "BRANCH_CLASH",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK",
+        "BRANCH_REPEAT",
+        "BRANCH_PUNISHMENT_GROUP_WITH_DA_YUN",
+        "BRANCH_THREE_MEETING_WITH_LIU_NIAN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "19d94e020ab53102c8d60fded93782effb3dcd336f06573136ccd49bb0303c6e",
+      "reportDigest": "f7e009d4406a0e88089d5614de68f2303f57de9b9b3107824d39430db6d697de",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-050",
+      "scenarioCode": "THREE_PUNISHMENT",
+      "scenarioFocus": "three_punishment",
+      "variantCode": "HOUR_UNKNOWN",
+      "locale": "en",
+      "pillarCodes": [
+        "GUI-SI",
+        "WU-SHEN",
+        "YI-MAO"
+      ],
+      "pillarZh": [
+        "癸巳",
+        "戊申",
+        "乙卯"
+      ],
+      "monthBranch": "SHEN",
+      "dayMaster": "YI",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "b3ec79644e0272c3d2063be08543f1417f739a8bb9e6bcb1457d3aa0eb68e964",
+      "reportDigest": "61a7b247fe6574df48e66e6fb4a554eb7c6839ff25d6f884409822fdad671e10",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-051",
+      "scenarioCode": "THREE_PUNISHMENT",
+      "scenarioFocus": "three_punishment",
+      "variantCode": "ACTIVE_ALTERNATE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "WU-SHEN",
+        "YI-MAO",
+        "BING-YIN",
+        "XIN-SI"
+      ],
+      "pillarZh": [
+        "戊申",
+        "乙卯",
+        "丙寅",
+        "辛巳"
+      ],
+      "monthBranch": "MAO",
+      "dayMaster": "BING",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "BRANCH_BREAK",
+        "BRANCH_PUNISHMENT_GROUP"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_BREAK",
+        "STEM_REPEAT",
+        "STEM_COMBINATION",
+        "BRANCH_REPEAT",
+        "BRANCH_CLASH",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_PUNISHMENT_GROUP_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "7aa6e00c751420c8a123333c7f067cb708b01377a8e3044cae730bfff5f8760d",
+      "reportDigest": "3955249d5237aedeef668495d95d0aba5e5a431ab59b754d396f69820ee01198",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-052",
+      "scenarioCode": "THREE_PUNISHMENT",
+      "scenarioFocus": "three_punishment",
+      "variantCode": "ANNUAL_RELATION_SHIFT",
+      "locale": "en",
+      "pillarCodes": [
+        "YI-MAO",
+        "BING-YIN",
+        "XIN-SI",
+        "BING-SHEN"
+      ],
+      "pillarZh": [
+        "乙卯",
+        "丙寅",
+        "辛巳",
+        "丙申"
+      ],
+      "monthBranch": "YIN",
+      "dayMaster": "XIN",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "BRANCH_BREAK",
+        "BRANCH_PUNISHMENT_GROUP"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK",
+        "BRANCH_REPEAT",
+        "BRANCH_PUNISHMENT_GROUP_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "cd8b963fa891370e7d50a5478c2ae1f5064d0ba8326630b72b77155615cd64be",
+      "reportDigest": "7ff3e9c606282bb65d906d3903a004dcaaf12acf3cb55ffdc6c3d7a02e7662c4",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-053",
+      "scenarioCode": "THREE_PUNISHMENT",
+      "scenarioFocus": "three_punishment",
+      "variantCode": "TRANSITION_DAY",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "BING-YIN",
+        "XIN-SI",
+        "BING-SHEN",
+        "GUI-MAO"
+      ],
+      "pillarZh": [
+        "丙寅",
+        "辛巳",
+        "丙申",
+        "癸卯"
+      ],
+      "monthBranch": "SI",
+      "dayMaster": "BING",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "BRANCH_BREAK",
+        "BRANCH_PUNISHMENT_GROUP"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK",
+        "BRANCH_REPEAT"
+      ],
+      "currentLuckState": "TRANSITION_DAY",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "e70e3c17e9220fb2c237caaf0f20e67f92694d31451e3a5538b846acc07ce4de",
+      "reportDigest": "c0337310272156e9a85f679404ce84490d16edeebcff4052dfa47f5a736be2c4",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-054",
+      "scenarioCode": "THREE_PUNISHMENT",
+      "scenarioFocus": "three_punishment",
+      "variantCode": "ANNUAL_UNAVAILABLE",
+      "locale": "en",
+      "pillarCodes": [
+        "XIN-SI",
+        "BING-SHEN",
+        "GUI-MAO",
+        "JIA-YIN"
+      ],
+      "pillarZh": [
+        "辛巳",
+        "丙申",
+        "癸卯",
+        "甲寅"
+      ],
+      "monthBranch": "SHEN",
+      "dayMaster": "GUI",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "BRANCH_BREAK",
+        "BRANCH_PUNISHMENT_GROUP"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_HARM",
+        "STEM_REPEAT",
+        "BRANCH_THREE_MEETING_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": false,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 7,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "98ae5bb15e488a8f57d2f91eadc0c1688021b5af0533d3c013e494bf476d4a31",
+      "reportDigest": "ed8168caf833be9e6cad0a4bc9aa400d64f192e14dd6ab59fbbc1d014c686a3e",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-055",
+      "scenarioCode": "THREE_PUNISHMENT",
+      "scenarioFocus": "three_punishment",
+      "variantCode": "CURRENT_UNAVAILABLE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "BING-SHEN",
+        "GUI-MAO",
+        "JIA-YIN",
+        "JI-SI"
+      ],
+      "pillarZh": [
+        "丙申",
+        "癸卯",
+        "甲寅",
+        "己巳"
+      ],
+      "monthBranch": "MAO",
+      "dayMaster": "JIA",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "BRANCH_BREAK",
+        "BRANCH_PUNISHMENT_GROUP"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "STEM_REPEAT",
+        "STEM_COMBINATION"
+      ],
+      "currentLuckState": "UNAVAILABLE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "89ae7ca683d0b3f01582954b493a702b81932c2bfcea8dd32f1c45c916fc5480",
+      "reportDigest": "fe8e070899a67c79a1a0f179d7c752b6b85b273cfd40c49d5373223d7964ecf2",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-056",
+      "scenarioCode": "THREE_PUNISHMENT",
+      "scenarioFocus": "three_punishment",
+      "variantCode": "HOUR_UNKNOWN_ACTIVE_ALT",
+      "locale": "en",
+      "pillarCodes": [
+        "GUI-MAO",
+        "JIA-YIN",
+        "JI-SI"
+      ],
+      "pillarZh": [
+        "癸卯",
+        "甲寅",
+        "己巳"
+      ],
+      "monthBranch": "YIN",
+      "dayMaster": "JI",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_HARM",
+        "BRANCH_REPEAT",
+        "STEM_COMBINATION",
+        "BRANCH_THREE_MEETING_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "468210c33b474613bb57dbda167905120b6d5de462ef1b9cc7a836cb7c067c9e",
+      "reportDigest": "d4abef7c7a239ab0cd7f4a3f31e4e66223c92347bdfd81d3f5ef9be717e60f5b",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-057",
+      "scenarioCode": "SELF_PUNISHMENT_REPEAT",
+      "scenarioFocus": "self_punishment_repeat",
+      "variantCode": "COMPLETE_ACTIVE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "REN-CHEN",
+        "JIA-CHEN",
+        "WU-WU",
+        "GENG-WU"
+      ],
+      "pillarZh": [
+        "壬辰",
+        "甲辰",
+        "戊午",
+        "庚午"
+      ],
+      "monthBranch": "CHEN",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "BRANCH_SELF_PUNISHMENT"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_CLASH",
+        "STEM_REPEAT"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "fa9e1a193667e12831ee99880f6193b9a9fdbda031464120e8ab68406eb85240",
+      "reportDigest": "9d8243d801e928db74d855f3ee9d4a6efcd81f18a73159df55b4252ccfe6bc23",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-058",
+      "scenarioCode": "SELF_PUNISHMENT_REPEAT",
+      "scenarioFocus": "self_punishment_repeat",
+      "variantCode": "HOUR_UNKNOWN",
+      "locale": "en",
+      "pillarCodes": [
+        "JIA-CHEN",
+        "WU-WU",
+        "GENG-WU"
+      ],
+      "pillarZh": [
+        "甲辰",
+        "戊午",
+        "庚午"
+      ],
+      "monthBranch": "WU",
+      "dayMaster": "GENG",
+      "relationTypes": [
+        "BRANCH_SELF_PUNISHMENT"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK",
+        "BRANCH_HARM",
+        "STEM_COMBINATION"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 2,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "7edff87f2cd872879971edc97828c4e9e53ac1b793b558b1119a9b7d9a0ee45d",
+      "reportDigest": "24e0a83a4b2d59e75f5b4815aa7c7baf7cef66267d129cc277b29012c44c46cb",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-059",
+      "scenarioCode": "SELF_PUNISHMENT_REPEAT",
+      "scenarioFocus": "self_punishment_repeat",
+      "variantCode": "ACTIVE_ALTERNATE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "WU-WU",
+        "GENG-WU",
+        "GENG-CHEN",
+        "REN-CHEN"
+      ],
+      "pillarZh": [
+        "戊午",
+        "庚午",
+        "庚辰",
+        "壬辰"
+      ],
+      "monthBranch": "WU",
+      "dayMaster": "GENG",
+      "relationTypes": [
+        "BRANCH_SELF_PUNISHMENT"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "STEM_REPEAT"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 2,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "642e5b2afb98bee7d75b9a818bff06f4bd9cfc55b8256ce4896ec3c2b1313389",
+      "reportDigest": "8c25272425b2da1208f401c033451d74d2e0b5ce425e8ecc3e251c34e0ee17f9",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-060",
+      "scenarioCode": "SELF_PUNISHMENT_REPEAT",
+      "scenarioFocus": "self_punishment_repeat",
+      "variantCode": "ANNUAL_RELATION_SHIFT",
+      "locale": "en",
+      "pillarCodes": [
+        "GENG-WU",
+        "GENG-CHEN",
+        "REN-CHEN",
+        "BING-WU"
+      ],
+      "pillarZh": [
+        "庚午",
+        "庚辰",
+        "壬辰",
+        "丙午"
+      ],
+      "monthBranch": "CHEN",
+      "dayMaster": "REN",
+      "relationTypes": [
+        "BRANCH_SELF_PUNISHMENT"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "STEM_COMBINATION",
+        "BRANCH_HARM"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "1ceee43b6f5802716abf8853379c508b8fa913c9efe587e8e5458d8eea5445b8",
+      "reportDigest": "f93857d57e7d16ed5adacbe9262188201ce3437a1ea4a62db738195630d75c1a",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-061",
+      "scenarioCode": "SELF_PUNISHMENT_REPEAT",
+      "scenarioFocus": "self_punishment_repeat",
+      "variantCode": "TRANSITION_DAY",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "GENG-CHEN",
+        "REN-CHEN",
+        "BING-WU",
+        "WU-WU"
+      ],
+      "pillarZh": [
+        "庚辰",
+        "壬辰",
+        "丙午",
+        "戊午"
+      ],
+      "monthBranch": "CHEN",
+      "dayMaster": "BING",
+      "relationTypes": [
+        "BRANCH_SELF_PUNISHMENT"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "STEM_COMBINATION"
+      ],
+      "currentLuckState": "TRANSITION_DAY",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "cd2860e0439d6b574f7c466f44c0a252863cdfb5b5b0f8f6bd017857bd78a4e5",
+      "reportDigest": "7b0621e52acc9468ca640242fb866d25cbab3d0ed5eab575382e12475522b727",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-062",
+      "scenarioCode": "SELF_PUNISHMENT_REPEAT",
+      "scenarioFocus": "self_punishment_repeat",
+      "variantCode": "ANNUAL_UNAVAILABLE",
+      "locale": "en",
+      "pillarCodes": [
+        "REN-CHEN",
+        "BING-WU",
+        "WU-WU",
+        "WU-CHEN"
+      ],
+      "pillarZh": [
+        "壬辰",
+        "丙午",
+        "戊午",
+        "戊辰"
+      ],
+      "monthBranch": "WU",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "BRANCH_SELF_PUNISHMENT"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_SIX_COMBINATION"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": false,
+      "includeHour": true,
+      "patternCandidateCount": 2,
+      "unknownCount": 7,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "f0df98b77c86337e6e9033ae5de84c2793916813837eb792f0ba9eef84c5bfd3",
+      "reportDigest": "941d86bd8e119db7c3b702df82f1e312a2b19c383f1f69d7402a2f1d5016908e",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-063",
+      "scenarioCode": "SELF_PUNISHMENT_REPEAT",
+      "scenarioFocus": "self_punishment_repeat",
+      "variantCode": "CURRENT_UNAVAILABLE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "BING-WU",
+        "WU-WU",
+        "WU-CHEN",
+        "GENG-CHEN"
+      ],
+      "pillarZh": [
+        "丙午",
+        "戊午",
+        "戊辰",
+        "庚辰"
+      ],
+      "monthBranch": "WU",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "BRANCH_SELF_PUNISHMENT"
+      ],
+      "temporalRelationTypes": [],
+      "currentLuckState": "UNAVAILABLE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 2,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "d104e491a29dff3a52a532bd2032114c7bc0ffdca3a404bb4218e47c72b1d7c2",
+      "reportDigest": "7be7bd07eff2faa86e4f4fe4bc4a277bd1dc6c899760c5eaa55d11c00b026602",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-064",
+      "scenarioCode": "SELF_PUNISHMENT_REPEAT",
+      "scenarioFocus": "self_punishment_repeat",
+      "variantCode": "HOUR_UNKNOWN_ACTIVE_ALT",
+      "locale": "en",
+      "pillarCodes": [
+        "WU-WU",
+        "WU-CHEN",
+        "GENG-CHEN"
+      ],
+      "pillarZh": [
+        "戊午",
+        "戊辰",
+        "庚辰"
+      ],
+      "monthBranch": "CHEN",
+      "dayMaster": "GENG",
+      "relationTypes": [
+        "BRANCH_SELF_PUNISHMENT"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_REPEAT",
+        "BRANCH_SELF_PUNISHMENT",
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "073b4d8b22248e69ddda41621f0836586c7ac9fa97e2f06b26abdf353cb32d7c",
+      "reportDigest": "52bee30ec829f8eb23e62593bb3cefcf72af9503bff9afa205782cee3fa011ab",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-065",
+      "scenarioCode": "ZI_MAO_PUNISHMENT",
+      "scenarioFocus": "punishment_pair",
+      "variantCode": "COMPLETE_ACTIVE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "GENG-ZI",
+        "YI-MAO",
+        "JIA-XU",
+        "GUI-WEI"
+      ],
+      "pillarZh": [
+        "庚子",
+        "乙卯",
+        "甲戌",
+        "癸未"
+      ],
+      "monthBranch": "MAO",
+      "dayMaster": "JIA",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_BREAK",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_BREAK",
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "c94b16c4420eeb934202b9692c37642eb74f7684d5bb254333fdf515ef5184f5",
+      "reportDigest": "dd0412f539d5687f1a4650dac240084a1a648ea6d3b959355c251a74d3b48a46",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-066",
+      "scenarioCode": "ZI_MAO_PUNISHMENT",
+      "scenarioFocus": "punishment_pair",
+      "variantCode": "HOUR_UNKNOWN",
+      "locale": "en",
+      "pillarCodes": [
+        "YI-MAO",
+        "JIA-XU",
+        "GUI-WEI"
+      ],
+      "pillarZh": [
+        "乙卯",
+        "甲戌",
+        "癸未"
+      ],
+      "monthBranch": "XU",
+      "dayMaster": "GUI",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_CLASH",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_PUNISHMENT_PAIR",
+        "BRANCH_HARM",
+        "BRANCH_PUNISHMENT_GROUP_WITH_LIU_NIAN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "d0c1b6acd9b10119b75ecd3e13ab78f94b5fce9e1d62a7e2d6fbb80a3dc1639e",
+      "reportDigest": "4d365c234cdcec24487bd7d3e6bd2da6cf8707c3c395dd9a1fcdfbbfafca0f69",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-067",
+      "scenarioCode": "ZI_MAO_PUNISHMENT",
+      "scenarioFocus": "punishment_pair",
+      "variantCode": "ACTIVE_ALTERNATE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "JIA-XU",
+        "GUI-WEI",
+        "WU-ZI",
+        "GUI-MAO"
+      ],
+      "pillarZh": [
+        "甲戌",
+        "癸未",
+        "戊子",
+        "癸卯"
+      ],
+      "monthBranch": "WEI",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_BREAK",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_REPEAT",
+        "BRANCH_BREAK",
+        "BRANCH_SIX_COMBINATION"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "c3671bfc420759784c25dfb5d51d7dc7ebf1833726f8203f1ece74cb61d51066",
+      "reportDigest": "097496379ec2fe0ba5c75574cdb123d67ff280063912fd9fd5fb63f3be4e882e",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-068",
+      "scenarioCode": "ZI_MAO_PUNISHMENT",
+      "scenarioFocus": "punishment_pair",
+      "variantCode": "ANNUAL_RELATION_SHIFT",
+      "locale": "en",
+      "pillarCodes": [
+        "GUI-WEI",
+        "WU-ZI",
+        "GUI-MAO",
+        "REN-XU"
+      ],
+      "pillarZh": [
+        "癸未",
+        "戊子",
+        "癸卯",
+        "壬戌"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "GUI",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_BREAK",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_PUNISHMENT_PAIR",
+        "BRANCH_REPEAT",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM",
+        "STEM_REPEAT",
+        "BRANCH_CLASH"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "af5ddd5244c7ee48204f7e57bf14427a2cd65079c9efdee2a9acda8c91b36212",
+      "reportDigest": "25a28d4d0d2805e30e7c44ef9a72e857b692303fde85cd3aa22bb0a67c1fc7e1",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-069",
+      "scenarioCode": "ZI_MAO_PUNISHMENT",
+      "scenarioFocus": "punishment_pair",
+      "variantCode": "TRANSITION_DAY",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "WU-ZI",
+        "GUI-MAO",
+        "REN-XU",
+        "XIN-WEI"
+      ],
+      "pillarZh": [
+        "戊子",
+        "癸卯",
+        "壬戌",
+        "辛未"
+      ],
+      "monthBranch": "MAO",
+      "dayMaster": "REN",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_BREAK",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_REPEAT",
+        "STEM_COMBINATION",
+        "BRANCH_BREAK"
+      ],
+      "currentLuckState": "TRANSITION_DAY",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "4f70d6d0f2a1c3a1f8e0db2c9a5cda7e87efce727aef91629880d474b6a49104",
+      "reportDigest": "2722f303456655e763d38b1590d7f07ad97700ad99e84ffb45b8641070c23394",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-070",
+      "scenarioCode": "ZI_MAO_PUNISHMENT",
+      "scenarioFocus": "punishment_pair",
+      "variantCode": "ANNUAL_UNAVAILABLE",
+      "locale": "en",
+      "pillarCodes": [
+        "GUI-MAO",
+        "REN-XU",
+        "XIN-WEI",
+        "BING-ZI"
+      ],
+      "pillarZh": [
+        "癸卯",
+        "壬戌",
+        "辛未",
+        "丙子"
+      ],
+      "monthBranch": "XU",
+      "dayMaster": "XIN",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_BREAK",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_CLASH"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": false,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 7,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "96cd94abdff12d42a88fdf6d783ae43ee45e72c97af9eb3ded687268b00bd03f",
+      "reportDigest": "b6ca7d3efd929771dfe2a35e20f4a2b37dfafa8596965e4e70b53b375a982a8c",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-071",
+      "scenarioCode": "ZI_MAO_PUNISHMENT",
+      "scenarioFocus": "punishment_pair",
+      "variantCode": "CURRENT_UNAVAILABLE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "REN-XU",
+        "XIN-WEI",
+        "BING-ZI",
+        "XIN-MAO"
+      ],
+      "pillarZh": [
+        "壬戌",
+        "辛未",
+        "丙子",
+        "辛卯"
+      ],
+      "monthBranch": "WEI",
+      "dayMaster": "BING",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_BREAK",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_HARM",
+        "BRANCH_REPEAT",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "currentLuckState": "UNAVAILABLE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "a9461ca0c5928f66ff6b1b690c9a3b814000af06a77cf01e6e21a5bee24768a4",
+      "reportDigest": "c63061c8ec6177dc3bcd4ee6b0d1f801d91e0cc4c20417c2eda636f459e658a8",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-072",
+      "scenarioCode": "ZI_MAO_PUNISHMENT",
+      "scenarioFocus": "punishment_pair",
+      "variantCode": "HOUR_UNKNOWN_ACTIVE_ALT",
+      "locale": "en",
+      "pillarCodes": [
+        "XIN-WEI",
+        "BING-ZI",
+        "XIN-MAO"
+      ],
+      "pillarZh": [
+        "辛未",
+        "丙子",
+        "辛卯"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "XIN",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_REPEAT",
+        "BRANCH_HARM"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "c9af54398b26fa21f64c3b71ff18152cecd40c32fa2bb72ba34bb7bb24b259e1",
+      "reportDigest": "9c69fad93e2bcdf5d5523b78689c66e04a020521313631953eff5feb61bb2812",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-073",
+      "scenarioCode": "MIXED_RELATIONS",
+      "scenarioFocus": "mixed",
+      "variantCode": "COMPLETE_ACTIVE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "REN-ZI",
+        "BING-YIN",
+        "GENG-CHEN",
+        "GUI-SI"
+      ],
+      "pillarZh": [
+        "壬子",
+        "丙寅",
+        "庚辰",
+        "癸巳"
+      ],
+      "monthBranch": "YIN",
+      "dayMaster": "GENG",
+      "relationTypes": [
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_HARM",
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH",
+        "STEM_REPEAT",
+        "BRANCH_THREE_MEETING_WITH_LIU_NIAN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "4e977b7cad7b34e16ea448032ac916a6fe74c247bd2fefae8c3fc7b54d772eca",
+      "reportDigest": "736496e0e75a51d3b534b4a44e29b073671f33c21ef828eab9acd80f6705289a",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-074",
+      "scenarioCode": "MIXED_RELATIONS",
+      "scenarioFocus": "mixed",
+      "variantCode": "HOUR_UNKNOWN",
+      "locale": "en",
+      "pillarCodes": [
+        "BING-YIN",
+        "GENG-CHEN",
+        "GUI-SI"
+      ],
+      "pillarZh": [
+        "丙寅",
+        "庚辰",
+        "癸巳"
+      ],
+      "monthBranch": "CHEN",
+      "dayMaster": "GUI",
+      "relationTypes": [
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_REPEAT",
+        "STEM_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_SIX_COMBINATION"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "8dfcf1ff4e2f35b8109957ac7227e935244e85c79bb5e1d00183abafee45e46f",
+      "reportDigest": "9f59bf7915d0d9e882b060f62c0cd4f7fd7d29cda2c7e934184d45ffbfa83650",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-075",
+      "scenarioCode": "MIXED_RELATIONS",
+      "scenarioFocus": "mixed",
+      "variantCode": "ACTIVE_ALTERNATE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "GENG-CHEN",
+        "GUI-SI",
+        "GENG-ZI",
+        "JIA-YIN"
+      ],
+      "pillarZh": [
+        "庚辰",
+        "癸巳",
+        "庚子",
+        "甲寅"
+      ],
+      "monthBranch": "SI",
+      "dayMaster": "GENG",
+      "relationTypes": [
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK",
+        "BRANCH_CLASH"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "b36bb8c027581179dbe7e8a9c49e92d4d8d1ca5121042a8ed96473526d95e719",
+      "reportDigest": "a1684a03f4b9b0bbb6474c1262d7c05da8204fba32df0627b51f964487090398",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-076",
+      "scenarioCode": "MIXED_RELATIONS",
+      "scenarioFocus": "mixed",
+      "variantCode": "ANNUAL_RELATION_SHIFT",
+      "locale": "en",
+      "pillarCodes": [
+        "GUI-SI",
+        "GENG-ZI",
+        "JIA-YIN",
+        "WU-CHEN"
+      ],
+      "pillarZh": [
+        "癸巳",
+        "庚子",
+        "甲寅",
+        "戊辰"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "JIA",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_REPEAT",
+        "BRANCH_SELF_PUNISHMENT",
+        "STEM_COMBINATION",
+        "BRANCH_HARM"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "13ef90cd54efca9a2da759dcc30fc29f8f749fb81a4ba1f756cd1df096f7e1b6",
+      "reportDigest": "097716de10abd2676bb0bcf39f6e76f319fa226057fb27be7b88798b9a31bdc1",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-077",
+      "scenarioCode": "MIXED_RELATIONS",
+      "scenarioFocus": "mixed",
+      "variantCode": "TRANSITION_DAY",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "GENG-ZI",
+        "JIA-YIN",
+        "WU-CHEN",
+        "XIN-SI"
+      ],
+      "pillarZh": [
+        "庚子",
+        "甲寅",
+        "戊辰",
+        "辛巳"
+      ],
+      "monthBranch": "YIN",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK",
+        "BRANCH_CLASH"
+      ],
+      "currentLuckState": "TRANSITION_DAY",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "fa6d5e6c7f0b53b81888768189dd70982d61d78f5870abe6f12119468633459a",
+      "reportDigest": "7459c97c705c4f661fab46d887164e8fd66da089671f1a6068bcd98320e95bc8",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-078",
+      "scenarioCode": "MIXED_RELATIONS",
+      "scenarioFocus": "mixed",
+      "variantCode": "ANNUAL_UNAVAILABLE",
+      "locale": "en",
+      "pillarCodes": [
+        "JIA-YIN",
+        "WU-CHEN",
+        "XIN-SI",
+        "WU-ZI"
+      ],
+      "pillarZh": [
+        "甲寅",
+        "戊辰",
+        "辛巳",
+        "戊子"
+      ],
+      "monthBranch": "CHEN",
+      "dayMaster": "XIN",
+      "relationTypes": [
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_REPEAT"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": false,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 7,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "ae896d1dd470de44c1a5c3bea49c3f9b02030dd82824552ca77433ad5b992582",
+      "reportDigest": "8737b31966db30c22ebceb117efeeeb1462892816e46d92ed05ccbe4fce9c951",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-079",
+      "scenarioCode": "MIXED_RELATIONS",
+      "scenarioFocus": "mixed",
+      "variantCode": "CURRENT_UNAVAILABLE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "WU-CHEN",
+        "XIN-SI",
+        "WU-ZI",
+        "REN-YIN"
+      ],
+      "pillarZh": [
+        "戊辰",
+        "辛巳",
+        "戊子",
+        "壬寅"
+      ],
+      "monthBranch": "SI",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_BREAK",
+        "BRANCH_SIX_COMBINATION"
+      ],
+      "currentLuckState": "UNAVAILABLE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "46cd225dcdb242128f98a4cd3ba75aea76acd1a06a53c98dc433b2323a4a937d",
+      "reportDigest": "465289dc760bf69fb6c98117efbebcd05e117424856b00f3967b19744fec4f78",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-080",
+      "scenarioCode": "MIXED_RELATIONS",
+      "scenarioFocus": "mixed",
+      "variantCode": "HOUR_UNKNOWN_ACTIVE_ALT",
+      "locale": "en",
+      "pillarCodes": [
+        "XIN-SI",
+        "WU-ZI",
+        "REN-YIN"
+      ],
+      "pillarZh": [
+        "辛巳",
+        "戊子",
+        "壬寅"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "REN",
+      "relationTypes": [
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK",
+        "BRANCH_CLASH",
+        "STEM_REPEAT",
+        "BRANCH_PUNISHMENT_PAIR",
+        "BRANCH_PUNISHMENT_GROUP_WITH_LIU_NIAN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "e62bcd20515d314dcabcab1666e278962ac142e5bb8ea9ed0e79675cbcb87c2d",
+      "reportDigest": "0be9123901b30fa25d75ab9f7e401be957f7c97f5caf0ebb3869d0ea7903297b",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-081",
+      "scenarioCode": "THREE_HARMONY_WOOD",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "COMPLETE_ACTIVE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "YI-HAI",
+        "JI-MAO",
+        "YI-WEI",
+        "YI-SI"
+      ],
+      "pillarZh": [
+        "乙亥",
+        "己卯",
+        "乙未",
+        "乙巳"
+      ],
+      "monthBranch": "MAO",
+      "dayMaster": "YI",
+      "relationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_THREE_HARMONY"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_HARM",
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "7b754ab9eca0c71aa45f15b92952bbc88678da2df91fd9fe54e427888f6b7b4f",
+      "reportDigest": "b4d12ba67e9144d5496627de0410226ccfd5099e8f6c9909927d94642ca1181f",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-082",
+      "scenarioCode": "THREE_HARMONY_WOOD",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "HOUR_UNKNOWN",
+      "locale": "en",
+      "pillarCodes": [
+        "JI-MAO",
+        "YI-WEI",
+        "YI-SI"
+      ],
+      "pillarZh": [
+        "己卯",
+        "乙未",
+        "乙巳"
+      ],
+      "monthBranch": "WEI",
+      "dayMaster": "YI",
+      "relationTypes": [],
+      "temporalRelationTypes": [
+        "BRANCH_REPEAT"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 6,
+      "temporalInteractionCount": 2,
+      "readingDigest": "02e9b16df7d126cf10f9d3c8a7586b41e4d458468c7921d3390a1daff80f1ecd",
+      "reportDigest": "af12c7c6e7751d4d136364812a31c861400b4c60fe00b13eb0bd8504b4ab27d6",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-083",
+      "scenarioCode": "THREE_HARMONY_WOOD",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "ACTIVE_ALTERNATE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "YI-WEI",
+        "YI-SI",
+        "GUI-HAI",
+        "DING-MAO"
+      ],
+      "pillarZh": [
+        "乙未",
+        "乙巳",
+        "癸亥",
+        "丁卯"
+      ],
+      "monthBranch": "SI",
+      "dayMaster": "GUI",
+      "relationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_THREE_HARMONY"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_BREAK",
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_THREE_MEETING_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "9ee9e135a3a891b85b65a5b23317e885bcdc16a945391463270abe0e69d11a5e",
+      "reportDigest": "372a3f2003c6e93a9366e164b3ed17b37022a4263449baadaaa4add9136bdfa5",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-084",
+      "scenarioCode": "THREE_HARMONY_WOOD",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "ANNUAL_RELATION_SHIFT",
+      "locale": "en",
+      "pillarCodes": [
+        "YI-SI",
+        "GUI-HAI",
+        "DING-MAO",
+        "GUI-WEI"
+      ],
+      "pillarZh": [
+        "乙巳",
+        "癸亥",
+        "丁卯",
+        "癸未"
+      ],
+      "monthBranch": "HAI",
+      "dayMaster": "DING",
+      "relationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_THREE_HARMONY"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_REPEAT",
+        "BRANCH_CLASH"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 2,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "339ba5e343a012fa6dbddadaa752d28c3a2a0e68b0f30aa81a435511c4c47819",
+      "reportDigest": "fa56d9c470fa410265c16c320fc9968654fccbebf5c7c9d0aeb6c0b3a50d2bcc",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-085",
+      "scenarioCode": "THREE_HARMONY_WOOD",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "TRANSITION_DAY",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "GUI-HAI",
+        "DING-MAO",
+        "GUI-WEI",
+        "GUI-SI"
+      ],
+      "pillarZh": [
+        "癸亥",
+        "丁卯",
+        "癸未",
+        "癸巳"
+      ],
+      "monthBranch": "MAO",
+      "dayMaster": "GUI",
+      "relationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_THREE_HARMONY"
+      ],
+      "temporalRelationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_PUNISHMENT_PAIR",
+        "BRANCH_HARM"
+      ],
+      "currentLuckState": "TRANSITION_DAY",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "d23690b66425d5b8e04d0110f2ebcf8da90e6e7c6452fdfd74a739800af8bdac",
+      "reportDigest": "4a179104688a20f4da71ac2f9889dc3c65b027d176544a8c348d10bde688c740",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-086",
+      "scenarioCode": "THREE_HARMONY_WOOD",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "ANNUAL_UNAVAILABLE",
+      "locale": "en",
+      "pillarCodes": [
+        "DING-MAO",
+        "GUI-WEI",
+        "GUI-SI",
+        "XIN-HAI"
+      ],
+      "pillarZh": [
+        "丁卯",
+        "癸未",
+        "癸巳",
+        "辛亥"
+      ],
+      "monthBranch": "WEI",
+      "dayMaster": "GUI",
+      "relationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_THREE_HARMONY"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_CLASH",
+        "BRANCH_REPEAT",
+        "BRANCH_SELF_PUNISHMENT",
+        "BRANCH_THREE_HARMONY_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": false,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 7,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "f4f53a6c3a49f91ec61df54fcea80c1dbca1177d733e061898a92a9e2b444e03",
+      "reportDigest": "f85124e2f6874c90863548029fda565921f389424a92797156fe1cb455ef8645",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-087",
+      "scenarioCode": "THREE_HARMONY_WOOD",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "CURRENT_UNAVAILABLE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "GUI-WEI",
+        "GUI-SI",
+        "XIN-HAI",
+        "YI-MAO"
+      ],
+      "pillarZh": [
+        "癸未",
+        "癸巳",
+        "辛亥",
+        "乙卯"
+      ],
+      "monthBranch": "SI",
+      "dayMaster": "XIN",
+      "relationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_THREE_HARMONY"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_HARM",
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_BREAK"
+      ],
+      "currentLuckState": "UNAVAILABLE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "1a1dbe1902924e371540c26be1f9f86c50ab34f66496f08237ca005f27590b20",
+      "reportDigest": "0040405950ff39c89b56cc97ff931390086c96488ad7fabf3c5d18df5a32ae62",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-088",
+      "scenarioCode": "THREE_HARMONY_WOOD",
+      "scenarioFocus": "three_harmony",
+      "variantCode": "HOUR_UNKNOWN_ACTIVE_ALT",
+      "locale": "en",
+      "pillarCodes": [
+        "GUI-SI",
+        "XIN-HAI",
+        "YI-MAO"
+      ],
+      "pillarZh": [
+        "癸巳",
+        "辛亥",
+        "乙卯"
+      ],
+      "monthBranch": "HAI",
+      "dayMaster": "YI",
+      "relationTypes": [
+        "BRANCH_CLASH"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_CLASH",
+        "BRANCH_REPEAT"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 2,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "60f3ab0beafbc270925d41c03cb7eb49a608d72c992b70b90b286b20edb9a3f9",
+      "reportDigest": "9597cbc6478ae0e859a3ca351c86be3035124bd4252ff28b3ebab7b15f15abf3",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-089",
+      "scenarioCode": "THREE_MEETING_WATER",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "COMPLETE_ACTIVE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "DING-HAI",
+        "WU-ZI",
+        "XIN-CHOU",
+        "GENG-SHEN"
+      ],
+      "pillarZh": [
+        "丁亥",
+        "戊子",
+        "辛丑",
+        "庚申"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "XIN",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_THREE_MEETING"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_BREAK",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_CLASH"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "4a415802529e70c357f471fec4dc81d19010ffc3050d5e7a8030395858b57eb9",
+      "reportDigest": "bf96b5ded0d786d6de42a131ccd9b3bbd0cd7c3777820c1b5af2eaecc6056984",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-090",
+      "scenarioCode": "THREE_MEETING_WATER",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "HOUR_UNKNOWN",
+      "locale": "en",
+      "pillarCodes": [
+        "WU-ZI",
+        "XIN-CHOU",
+        "GENG-SHEN"
+      ],
+      "pillarZh": [
+        "戊子",
+        "辛丑",
+        "庚申"
+      ],
+      "monthBranch": "CHOU",
+      "dayMaster": "GENG",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_BREAK",
+        "STEM_REPEAT",
+        "BRANCH_REPEAT",
+        "BRANCH_SELF_PUNISHMENT",
+        "BRANCH_THREE_HARMONY_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 4,
+      "readingDigest": "66262571e13a1785ffeeba67c57e06430f93e7525ddf92d92cdaacf958d65a3d",
+      "reportDigest": "0a26e3347f507556c0a264731e58eedfb3a263bed5c0546fb710d93d8513c274",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-091",
+      "scenarioCode": "THREE_MEETING_WATER",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "ACTIVE_ALTERNATE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "XIN-CHOU",
+        "GENG-SHEN",
+        "YI-HAI",
+        "BING-ZI"
+      ],
+      "pillarZh": [
+        "辛丑",
+        "庚申",
+        "乙亥",
+        "丙子"
+      ],
+      "monthBranch": "SHEN",
+      "dayMaster": "YI",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_THREE_MEETING"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_HARM",
+        "BRANCH_REPEAT",
+        "BRANCH_SELF_PUNISHMENT",
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_THREE_MEETING_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 5,
+      "readingDigest": "f2c383eebf7126229d8ee5d6d364090e29b95a6fc72dc040b5442c8d60800336",
+      "reportDigest": "25b34958b0021e18232977985de0385a6d4ee2e1ec274879860bbc716f1590e0",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-092",
+      "scenarioCode": "THREE_MEETING_WATER",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "ANNUAL_RELATION_SHIFT",
+      "locale": "en",
+      "pillarCodes": [
+        "GENG-SHEN",
+        "YI-HAI",
+        "BING-ZI",
+        "JI-CHOU"
+      ],
+      "pillarZh": [
+        "庚申",
+        "乙亥",
+        "丙子",
+        "己丑"
+      ],
+      "monthBranch": "HAI",
+      "dayMaster": "BING",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_THREE_MEETING"
+      ],
+      "temporalRelationTypes": [
+        "BRANCH_CLASH",
+        "BRANCH_HARM",
+        "STEM_REPEAT",
+        "STEM_COMBINATION",
+        "BRANCH_BREAK",
+        "BRANCH_THREE_HARMONY_WITH_DA_YUN"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 2,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 2,
+      "readingDigest": "c0f9a21c07b39ff38a9eb0aeb233a999685870d04179beb19699c2cde9f28f47",
+      "reportDigest": "29b995df3792f61a8607c6559da93d05d87550df8ca1324cfcc66a485a75e9b2",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-093",
+      "scenarioCode": "THREE_MEETING_WATER",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "TRANSITION_DAY",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "YI-HAI",
+        "BING-ZI",
+        "JI-CHOU",
+        "WU-SHEN"
+      ],
+      "pillarZh": [
+        "乙亥",
+        "丙子",
+        "己丑",
+        "戊申"
+      ],
+      "monthBranch": "ZI",
+      "dayMaster": "JI",
+      "relationTypes": [
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_THREE_MEETING"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_REPEAT"
+      ],
+      "currentLuckState": "TRANSITION_DAY",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 1,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "9b0cdcc41ef822de6a6418c01e5491fe24406fe86cce136e14ef5e1227ca5eba",
+      "reportDigest": "72ce7f3ea58885091df554898d3c1650cd0b213b92bc29479628060c951c72e8",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-094",
+      "scenarioCode": "THREE_MEETING_WATER",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "ANNUAL_UNAVAILABLE",
+      "locale": "en",
+      "pillarCodes": [
+        "BING-ZI",
+        "JI-CHOU",
+        "WU-SHEN",
+        "GUI-HAI"
+      ],
+      "pillarZh": [
+        "丙子",
+        "己丑",
+        "戊申",
+        "癸亥"
+      ],
+      "monthBranch": "CHOU",
+      "dayMaster": "WU",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_THREE_MEETING"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_REPEAT",
+        "BRANCH_HARM"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": false,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 7,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "c93e4a82497f51161be98abaa81bb61169923e6b8cfd624d87e43f4b4dbebd80",
+      "reportDigest": "de1b5e874a27d1cab538e58e40fd6927bb8c60b31ece3201096d658299ac0888",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-095",
+      "scenarioCode": "THREE_MEETING_WATER",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "CURRENT_UNAVAILABLE",
+      "locale": "zh-Hans",
+      "pillarCodes": [
+        "JI-CHOU",
+        "WU-SHEN",
+        "GUI-HAI",
+        "JIA-ZI"
+      ],
+      "pillarZh": [
+        "己丑",
+        "戊申",
+        "癸亥",
+        "甲子"
+      ],
+      "monthBranch": "SHEN",
+      "dayMaster": "GUI",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_SIX_COMBINATION",
+        "BRANCH_HARM",
+        "BRANCH_THREE_MEETING"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "STEM_COMBINATION",
+        "BRANCH_PUNISHMENT_PAIR"
+      ],
+      "currentLuckState": "UNAVAILABLE",
+      "annualAvailable": true,
+      "includeHour": true,
+      "patternCandidateCount": 3,
+      "unknownCount": 8,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 3,
+      "readingDigest": "3d1f2e7387e32f2d17cc515a3343e94420d5d1c1d76c6744f362990b97decb41",
+      "reportDigest": "6d6cbe66d64558f96d6c21a109afde1e7f42cd142e35d65c4b9f1b10ee997cd5",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    },
+    {
+      "caseId": "BAZI-FP-W17-096",
+      "scenarioCode": "THREE_MEETING_WATER",
+      "scenarioFocus": "three_meeting",
+      "variantCode": "HOUR_UNKNOWN_ACTIVE_ALT",
+      "locale": "en",
+      "pillarCodes": [
+        "WU-SHEN",
+        "GUI-HAI",
+        "JIA-ZI"
+      ],
+      "pillarZh": [
+        "戊申",
+        "癸亥",
+        "甲子"
+      ],
+      "monthBranch": "HAI",
+      "dayMaster": "JIA",
+      "relationTypes": [
+        "STEM_COMBINATION",
+        "BRANCH_HARM"
+      ],
+      "temporalRelationTypes": [
+        "STEM_REPEAT",
+        "BRANCH_REPEAT"
+      ],
+      "currentLuckState": "ACTIVE",
+      "annualAvailable": true,
+      "includeHour": false,
+      "patternCandidateCount": 2,
+      "unknownCount": 5,
+      "renderOwnerCount": 7,
+      "temporalInteractionCount": 0,
+      "readingDigest": "b5f8f669ff933efc3248f2f0b9c145d0b49d504b7bf0de1abd55febc24bd9c55",
+      "reportDigest": "df3ece57748fd6a201fd37b477735e21a98b1b5a59ef40c2f222e0200a2d4aef",
+      "checks": {
+        "pipeline": true,
+        "deterministic": true,
+        "schema": true,
+        "sectionIA": true,
+        "schoolSeparation": true,
+        "unknownVisibility": true,
+        "dedup": true,
+        "noRawCodes": true,
+        "boundaries": true,
+        "pillarCount": true
+      },
+      "pass": true
+    }
+  ]
+}

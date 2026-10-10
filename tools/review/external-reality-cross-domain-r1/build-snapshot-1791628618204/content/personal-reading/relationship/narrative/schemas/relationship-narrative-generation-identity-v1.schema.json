@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-RELATIONSHIP-NARRATIVE-GENERATION-IDENTITY-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion","purchaseId","participantASourceDigest","participantBSourceDigest","participantBSourceState","relationshipBriefDigest","promptVersion","relationshipProductVersion","generationKey","identityDigest"],
+  "properties": {
+    "schemaVersion": {"const":"PHI-OS-RELATIONSHIP-NARRATIVE-GENERATION-IDENTITY-v1.0.0"},
+    "purchaseId": {"type":"string","minLength":1},
+    "participantASourceDigest": {"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "participantBSourceDigest": {"type":["string","null"],"pattern":"^[a-f0-9]{64}$"},
+    "participantBSourceState": {"enum":["PRESENT","NOT_APPLICABLE_SELF_RELATIONSHIP_PATTERN"]},
+    "relationshipBriefDigest": {"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "promptVersion": {"type":"string","minLength":1},
+    "relationshipProductVersion": {"type":"string","minLength":1},
+    "generationKey": {"type":"string","pattern":"^REL-NGEN-[A-F0-9]{64}$"},
+    "identityDigest": {"type":"string","pattern":"^[a-f0-9]{64}$"}
+  }
+}

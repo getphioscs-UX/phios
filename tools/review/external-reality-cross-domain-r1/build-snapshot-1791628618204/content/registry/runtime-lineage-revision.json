@@ -1,0 +1,60 @@
+{
+  "id": "phi-os.runtime-lineage-revision.v1",
+  "version": "1.0.0",
+  "status": "stable",
+  "milestone": "M2-W7",
+  "tables": [
+    "runtimes",
+    "runtime_revisions",
+    "runtime_lineages",
+    "runtime_events",
+    "runtime_snapshots"
+  ],
+  "modes": {
+    "edit": {
+      "result": "same_runtime_new_revision",
+      "new_runtime": false,
+      "lineage_edge": false
+    },
+    "new_journey": {
+      "result": "new_independent_runtime",
+      "new_runtime": true,
+      "lineage_edge": false
+    },
+    "branch": {
+      "result": "new_child_runtime",
+      "new_runtime": true,
+      "lineage_edge": true,
+      "relationship_type": "branch"
+    }
+  },
+  "revision_chain": {
+    "schema_version": "phi-os.runtime-revision.v1",
+    "parent_field": "parent_revision_id",
+    "append_only": true,
+    "historical_overwrite_allowed": false
+  },
+  "parent_child_runtime": {
+    "parent_field": "parent_runtime_id",
+    "child_field": "child_runtime_id",
+    "self_parent_allowed": false,
+    "branch_inheritance": "reference_only",
+    "inherited_as_fact": false
+  },
+  "viewer_data": {
+    "schema_version": "phi-os.lineage-viewer-data.v1",
+    "raw_runtime_state_exposed": false,
+    "raw_revision_values_exposed": false,
+    "includes": [
+      "nodes",
+      "edges",
+      "revision_chains"
+    ]
+  },
+  "guardrails": {
+    "explicit_user_action_required": true,
+    "automatic_runtime_creation": false,
+    "new_runtime_stage": false,
+    "old_migration_modified": false
+  }
+}

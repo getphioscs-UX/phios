@@ -1,0 +1,76 @@
+{
+  "fixtureOnly": true,
+  "productionAuthority": false,
+  "articleFixture": "../articles/valid-structured-article-without-figure.json",
+  "claimDossierFixture": "kn-preface-001-claims.json",
+  "sourceDossierFixture": "kn-preface-001-sources.json",
+  "reviewFixture": "kn-preface-001-review.json",
+  "articleOperations": [
+    {
+      "op": "replace",
+      "path": "/contentStatus",
+      "value": "content_reviewed"
+    },
+    {
+      "op": "replace",
+      "path": "/reviewStatus",
+      "value": "approved"
+    },
+    {
+      "op": "replace",
+      "path": "/sections/0/blocks/0/text",
+      "value": "人工智能的形成涉及长期累积的基础设施、研究与数字资料；其材料来自文明留下并被选择与组织的表达。"
+    },
+    {
+      "op": "add",
+      "path": "/sections/0/blocks/0/sourceClaimCodes",
+      "value": [
+        "CLM-KN-PREFACE-001-001",
+        "CLM-KN-PREFACE-001-003"
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/sections/0/blocks/1/text",
+      "value": "在 PHI OS 的理论解释中，文明的部分能力可以由外部载体承接。"
+    },
+    {
+      "op": "add",
+      "path": "/sections/0/blocks/1/sourceClaimCodes",
+      "value": [
+        "CLM-KN-PREFACE-001-002"
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/sections/0/blocks/2/description",
+      "value": "知识处理能力扩大后，下一节点继续追问为什么方向不会自动形成。"
+    },
+    {
+      "op": "add",
+      "path": "/sections/0/blocks/2/sourceClaimCodes",
+      "value": [
+        "CLM-KN-PREFACE-001-004"
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/sourceReferences/0/sourceCode",
+      "value": "SRC-PHIOS-FIXTURE-001"
+    },
+    {
+      "op": "add",
+      "path": "/sourceReferences/-",
+      "value": {
+        "sourceCode": "SRC-AI-FIXTURE-001",
+        "label": "PJA-W2C source projection fixture",
+        "href": "/articles"
+      }
+    }
+  ],
+  "canonicalChineseApproval": {
+    "status": "approved",
+    "articleVersion": "0.0.1"
+  },
+  "expectedPublicationGate": "allow"
+}

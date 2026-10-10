@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "PHI-OS-MIR-3-MFIG-PROJECTION-RUNTIME-BINDING-v1.0.0",
+  "work": "MIR-3",
+  "baselineCommit": "6eb067c8944d641d7fa40393ed00c15802d7208d",
+  "status": "ACTIVE_RECONCILED",
+  "identityAuthority": "content/professional/method-runtime/canonical-mfig-authority-registry-v1.json",
+  "projectionAuthority": "functions/method-runtime/shared-projection-runtime.js",
+  "secondProjectionAuthorityCreated": false,
+  "bindings": [
+    {
+      "mfigId": "MFIG-004",
+      "role": "SHARED_PROJECTION_AUTHORITY",
+      "runtimeRefs": [
+        "functions/method-runtime/shared-projection-runtime.js"
+      ],
+      "authority": "SHARED_PROJECTION_RUNTIME"
+    },
+    {
+      "mfigId": "MFIG-016",
+      "role": "PERSONAL_STRUCTURE_PROJECTION_SUCCESSOR",
+      "runtimeRefs": [
+        "functions/method-runtime/personal-structure/personal-structure-projection-runtime.js"
+      ],
+      "authority": "SHARED_PROJECTION_RUNTIME",
+      "historicalRuntimeRef": "functions/core-method-runtime/hdr-projection-runtime.js",
+      "publicVocabulary": "PHI_OS_ONLY"
+    },
+    {
+      "mfigId": "MFIG-024",
+      "role": "AST_PROJECTION",
+      "runtimeRefs": [
+        "functions/core-method-runtime/ast-projection-runtime.js",
+        "functions/method-client-delivery/canonical-projection-runtime.js"
+      ],
+      "authority": "SHARED_PROJECTION_RUNTIME",
+      "currentMcdState": "VALID_PARTIAL_CANONICAL_PROJECTION_UNTIL_ENGINE_ADAPTER_MATERIALIZED"
+    },
+    {
+      "mfigId": "MFIG-032",
+      "role": "BZR_PROJECTION_NORMALIZATION",
+      "runtimeRefs": [
+        "functions/core-method-runtime/bzr-projection-normalization-runtime.js"
+      ],
+      "authority": "SHARED_PROJECTION_RUNTIME"
+    },
+    {
+      "mfigId": "MFIG-033",
+      "role": "BZR_PROJECTION",
+      "runtimeRefs": [
+        "functions/core-method-runtime/bzr-projection-runtime.js",
+        "functions/method-client-delivery/canonical-projection-runtime.js"
+      ],
+      "authority": "SHARED_PROJECTION_RUNTIME",
+      "currentMcdState": "VALID_PARTIAL_CANONICAL_PROJECTION_UNTIL_SOLAR_TERM_ADAPTER_MATERIALIZED"
+    },
+    {
+      "mfigId": "MFIG-039",
+      "role": "NUM_PROJECTION",
+      "runtimeRefs": [
+        "functions/core-method-runtime/num-projection-runtime.js",
+        "functions/method-client-delivery/canonical-projection-runtime.js"
+      ],
+      "authority": "SHARED_PROJECTION_RUNTIME",
+      "currentMcdState": "ACTIVE_BOUND_SCOPE"
+    }
+  ]
+}

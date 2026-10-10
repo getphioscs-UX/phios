@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/published-asset-v1.schema.json",
+  "title": "PHI OS Published Asset v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "publicationCode",
+    "publicationVersion",
+    "assetCode",
+    "assetType",
+    "candidateCode",
+    "candidateDigest",
+    "reviewCode",
+    "reviewDigest",
+    "approvalCode",
+    "approvalDigest",
+    "mediaReferences",
+    "surface",
+    "locale",
+    "rightsStatus",
+    "accessibilityStatus",
+    "publicationState",
+    "publishedAt",
+    "publicationDigest"
+  ],
+  "properties": {
+    "publicationCode": {
+      "type": "string",
+      "pattern": "^CAR-PUB-[A-Z0-9-]+$"
+    },
+    "publicationVersion": {
+      "type": "string"
+    },
+    "assetCode": {
+      "type": "string"
+    },
+    "assetType": {
+      "type": "string"
+    },
+    "candidateCode": {
+      "type": "string"
+    },
+    "candidateDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "reviewCode": {
+      "type": "string"
+    },
+    "reviewDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "approvalCode": {
+      "type": "string"
+    },
+    "approvalDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "mediaReferences": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "surface": {
+      "enum": [
+        "WEBSITE",
+        "BOOK",
+        "ACADEMY",
+        "VIDEO",
+        "AUDIO",
+        "PRESENTATION",
+        "SOCIAL",
+        "API"
+      ]
+    },
+    "locale": {
+      "type": "string"
+    },
+    "rightsStatus": {
+      "enum": [
+        "cleared",
+        "owned",
+        "licensed"
+      ]
+    },
+    "accessibilityStatus": {
+      "const": "passed"
+    },
+    "publicationState": {
+      "const": "published"
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "publicationDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

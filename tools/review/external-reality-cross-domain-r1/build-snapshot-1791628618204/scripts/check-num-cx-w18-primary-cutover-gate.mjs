@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const human=j('content/professional/num-production/customer/acceptance/num-cx-w17-human-review-results-v1.json');
+const humanAcceptance=j('content/professional/num-production/customer/acceptance/num-cx-w17-human-acceptance-v1.json');
+const candidate=j('content/professional/num-production/customer/cutover/num-cx-w18-primary-route-cutover-candidate-v1.json');
+const cutover=j('content/professional/num-production/customer/cutover/num-cx-w18-primary-route-cutover-v1.json');
+const current=j('content/governance/production-capability-matrix/reconciliation/production-capability-current-successor-v9.json');
+assert.equal(human.summary.accepted,12);assert.equal(human.summary.pending,0);assert.equal(human.status,'HUMAN_ACCEPTED');
+assert.equal(humanAcceptance.status,'HUMAN_ACCEPTED');assert.equal(humanAcceptance.runtimeUseAllowed,true);assert.equal(humanAcceptance.boundaries.reviewerIdentityFabricated,false);
+assert.equal(candidate.activationAllowed,true);assert.deepEqual(candidate.blockedBy,[]);
+assert.equal(cutover.status,'FULL_PRIMARY_CUSTOMER_ROUTE_AUTHORITY_ACTIVE');
+assert.equal(cutover.primaryCustomerRoute,'/perspectives/personal/');assert.equal(cutover.secondaryDiagnosticRoute,'/personal-runtime');
+assert.equal(cutover.boundaries.predecessorPCMRegistryMutated,false);assert.equal(cutover.deploymentVerified,false);
+assert.equal(current.predecessor,'content/governance/production-capability-matrix/reconciliation/production-capability-current-successor-v8.json');
+assert.equal(current.predecessorMutated,false);
+assert.equal(current.currentRegistry,'content/governance/production-capability-matrix/registries/production-capability-registry-v9.json');
+console.log('✓ NUM-CX-W18 primary-route authority cutover passed after explicit W17 human acceptance 12/12.');

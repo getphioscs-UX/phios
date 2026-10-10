@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-HRP-PERSPECTIVE-COMPOSITION-CONTRACT-v1.0.0",
+  "work": "HRP-W4",
+  "status": "HEALTH_REFLECTIVE_COMPOSITION_FROZEN",
+  "requiredOrder": [
+    "SAFETY",
+    "HEALTH_REALITY",
+    "GOVERNED_HEALTH_INFORMATION",
+    "UNKNOWNS",
+    "CARE_NAVIGATION",
+    "OPTIONAL_REFLECTIVE_PERSPECTIVE"
+  ],
+  "preconditionsForReflectiveContent": {
+    "safetyStateMustBeNonUrgent": true,
+    "governedHealthInformationSectionRequired": true,
+    "careNavigationSectionRequired": true,
+    "explicitReflectiveOptInRequired": true
+  },
+  "ui": {
+    "entryLabel": "Explore a reflective perspective",
+    "forbiddenLabel": "Spiritual cause",
+    "sourceLabel": "Source",
+    "perspectiveLabel": "Perspective",
+    "boundaryLabel": "Boundary"
+  },
+  "requiredBoundaryText": "This perspective does not establish the medical cause of the symptom.",
+  "fallback": {
+    "whenNoMatchingSource": "REFLECTIVE_PERSPECTIVE_UNAVAILABLE",
+    "whenNotOptedIn": "REFLECTIVE_PERSPECTIVE_NOT_CONSUMED",
+    "whenUrgent": "REFLECTIVE_PERSPECTIVE_SUPPRESSED_BY_SAFETY"
+  }
+}

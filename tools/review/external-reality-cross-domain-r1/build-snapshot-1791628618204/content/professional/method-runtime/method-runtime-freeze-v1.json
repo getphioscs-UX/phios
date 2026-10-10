@@ -1,0 +1,56 @@
+{
+  "contract": "PHI-OS-METHOD-RUNTIME-FREEZE-v1",
+  "freezeVersion": "1.0.0",
+  "stageCode": "MR-W7",
+  "status": "MR Frozen v1",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "4b91aea2738c28f39b3466fc7a568e578157d243"
+  },
+  "frozenScope": {
+    "contracts": [
+      "content/professional/method-runtime/method-runtime-lifecycle.json",
+      "content/professional/method-runtime/shared-projection-runtime-v1.json",
+      "content/professional/method-runtime/shared-interpretation-runtime-v1.json",
+      "content/professional/method-runtime/shared-professional-runtime-v1.json"
+    ],
+    "projectionSchema": [
+      "content/professional/method-runtime/canonical-projection-v1.schema.json"
+    ],
+    "pluginInterface": [
+      "content/professional/method-runtime/method-plugin-registry.json"
+    ],
+    "registry": [
+      "content/professional/method-runtime/method-registry.json"
+    ],
+    "calculationBoundary": [
+      "functions/method-runtime/shared-calculation-runtime.js"
+    ],
+    "runtimeContinuity": [
+      "functions/method-runtime/shared-projection-runtime.js",
+      "functions/method-runtime/shared-interpretation-runtime.js",
+      "functions/method-runtime/shared-professional-runtime.js"
+    ]
+  },
+  "freezeRules": {
+    "baselineContentImmutable": true,
+    "lineEndingNormalizationAllowed": true,
+    "hashOnlyRepairForbidden": true,
+    "semanticValidationRequired": true,
+    "registryLed": true,
+    "pluginBypassForbidden": true,
+    "calculationMustRemainDeterministic": true,
+    "calculationProviderForbidden": true,
+    "calculationAiForbidden": true,
+    "calculationProjectionForbidden": true,
+    "projectionInterpretationSeparationRequired": true,
+    "allMethodsUseSharedProfessionalRuntime": true,
+    "futureChangeRequiresVersionedSuccessor": true
+  },
+  "successorPolicy": {
+    "inPlaceMutationAllowed": false,
+    "requiredAction": "Create a versioned successor contract and explicit migration.",
+    "currentFrozenVersion": "MR-FROZEN-v1.0.0"
+  }
+}

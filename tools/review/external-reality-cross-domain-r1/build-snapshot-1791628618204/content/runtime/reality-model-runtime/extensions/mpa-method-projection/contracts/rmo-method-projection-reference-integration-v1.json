@@ -1,0 +1,35 @@
+{
+  "contractCode": "PHI-OS-RMO-MPA-METHOD-PROJECTION-REFERENCE-INTEGRATION-v1",
+  "contractVersion": "1.0.0",
+  "status": "VERSIONED_SUCCESSOR_REFERENCE_INTEGRATION",
+  "baselineCommit": "07391e717e64c2636ce22e3f97900ff97d9571d8",
+  "upstreamRuntime": "MPA",
+  "consumerRuntime": "RMO",
+  "sourceDataType": "METHOD_PROJECTION_RECORD",
+  "rdgAuthorityReference": "content/governance/reality-data-governance/extensions/mpa-rmo-method-projection/registries/rmo-method-projection-consumer-read-successor-v1.json",
+  "rmoFrozenAuthorityReference": "content/runtime/reality-model-runtime/freeze/rmo-v1-freeze-v1.json",
+  "integrationMode": "REFERENCE_ONLY",
+  "rmoBinding": {
+    "allowedReferenceFields": [
+      "sourceReferences",
+      "binding.projection.basisReferences"
+    ],
+    "stateClassWhenProjected": "PROJECTED",
+    "dataNatureMustNotBeUpgradedToObserved": true,
+    "truthClaimed": false,
+    "predictionClaimed": false,
+    "professionalJudgmentCreated": false,
+    "navigationChoiceCreated": false
+  },
+  "rules": {
+    "rmoV1FreezeRewritten": false,
+    "methodProjectionPayloadCopied": false,
+    "methodProjectionPromotedToEvidence": false,
+    "methodProjectionPromotedToRealityFact": false,
+    "rmoMayChangeMethodEligibility": false,
+    "rmoMayExecuteMethod": false,
+    "rmoMayCreateCustomerReadout": false,
+    "productionUseRequiresMpaEligibleProjection": true,
+    "productionUseRequiresMpaW27Gate": true
+  }
+}

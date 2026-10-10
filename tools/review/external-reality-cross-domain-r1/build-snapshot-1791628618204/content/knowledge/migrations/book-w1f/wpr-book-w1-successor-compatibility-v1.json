@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-W1F-WPR-SUCCESSOR-COMPATIBILITY-v1.0.0",
+  "phase": "BOOK-W1",
+  "step": "BOOK-W1F",
+  "status": "accepted-successor-web-production-runtime-active",
+  "recordedAt": "2026-08-14",
+  "predecessor": {
+    "freeze": {
+      "path": "content/web-production/freeze/wpr-v1-freeze-v1.json",
+      "sha256": "405efc8d15e0c604ca9797267ff405e4fa38591f5b9b2f76a0a230720f980c66",
+      "freezeCode": "WPR-v1.0.0-FROZEN",
+      "status": "HISTORICAL_ALLOWED",
+      "rewritten": false
+    },
+    "baselineAudit": {
+      "path": "content/web-production/audits/wpr-production-baseline-v1.json",
+      "sha256": "377610ab7a1478fb400ac8f5556553eb83526e3a89cde21c8a268dcb3baecb08",
+      "publicAssetsSha256": "49b4993a75c19cb3f4dab6baf392da81dbb2eb0e00aa6983681667a471b4a9b0",
+      "status": "HISTORICAL_ALLOWED"
+    },
+    "historicalChecker": {
+      "command": "check:wpr-final",
+      "w0Path": "scripts/check-wpr-w0-production-baseline.mjs",
+      "w0Sha256": "68d272c6572c5e0740b12a765f5f042fabc72c3bdbcc5dedde0e866287f63946",
+      "w30Path": "scripts/check-wpr-w30-freeze.mjs",
+      "w30Sha256": "7c6f00a7274d98a040d14093c91cb72f5b57aaad160e8df003f3ddde5a9689bc",
+      "disposition": "KEEP",
+      "rewrittenToFiveVolume": false
+    },
+    "historicalNeutralAlias": {
+      "command": "check:web-production-runtime",
+      "implementation": "npm run check:wpr-final",
+      "status": "superseded-by-book-w1-runtime-alias"
+    }
+  },
+  "successor": {
+    "command": "check:book-w1-web-production-runtime",
+    "stableRuntimeAlias": {
+      "command": "check:web-production-runtime",
+      "implementation": "npm run check:book-w1-web-production-runtime",
+      "supersedes": "npm run check:wpr-final"
+    },
+    "publicProjectionAuthority": {
+      "path": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-active-v1.json",
+      "sha256": "712171d2ae9934987baa514b98dfd8d0daf27823a4222fab2744bf6cd379c951"
+    },
+    "currentSources": [
+      {
+        "path": "content/registry/public-assets.json",
+        "sha256": "f35bda5cb70beb4c69d2bb9fffe9e237a7b49b00d529fb8bb5c1ea3cac81f0a8"
+      },
+      {
+        "path": "content/web-production/registries/wpr-route-registry-v1.json",
+        "sha256": "a03f4fff9bcfe75cb1eaabad280d897cfdd4a1b49322e3bd73ba8d0fc44ce229"
+      },
+      {
+        "path": "content/web-production/registries/wpr-public-discovery-registry-v1.json",
+        "sha256": "3a846c03b20df78d64b23552aee43034652e910789baff0f5128c54c69f22833"
+      },
+      {
+        "path": "content/web-production/composition/public/book-composition-v1.json",
+        "sha256": "ae4c626ecf595d53dd3525818d362591e262dabc8216e922b07913cd2792f4cf"
+      }
+    ],
+    "acceptedSuccessorObservations": {
+      "registeredPublicAssets": 8,
+      "routeEntryCount": 28,
+      "discoveryEntryCount": 18,
+      "nonIndexableCompatibilityEntryCount": 1,
+      "canonicalBookRouteCount": 5,
+      "maintenanceRedirectStatus": 308
+    },
+    "historicalCurrentStateChecksReplaced": [
+      {
+        "work": "WPR-W0",
+        "reason": "The historical source digest remains frozen while current public-assets.json is governed by BOOK-W1E."
+      },
+      {
+        "work": "WPR-W8",
+        "reason": "The historical seven-asset observation remains frozen while BOOK-5 adds the eighth governed asset."
+      },
+      {
+        "work": "WPR-W25",
+        "reason": "Canonical routes remain indexable; the compatibility redirect is intentionally noindex and outside sitemap authority."
+      },
+      {
+        "work": "WPR-W28",
+        "reason": "The historical 27-route observation remains frozen; the successor route registry contains the required compatibility alias."
+      },
+      {
+        "work": "WPR-W30",
+        "reason": "The WPR v1 freeze remains immutable and is a predecessor, not the active BOOK-W1 public projection freeze."
+      }
+    ]
+  },
+  "authorityBoundary": {
+    "historicalWprFactsChanged": false,
+    "historicalWprFreezePromotesFiveVolumes": false,
+    "bookW1SuccessorChangesCanonicalKnowledge": false,
+    "bookW1SuccessorCreatesPublicationAuthority": false,
+    "bookW1SuccessorOwnsPublicProjectionOnly": true
+  }
+}

@@ -1,0 +1,1 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';const p='content/civilization-atlas/reconfiguration/dossier-me-w8h-human-decisions-v1.json';assert.ok(fs.existsSync(p),'ME_W8I_BLOCKED: W8-H human decision file is absent');

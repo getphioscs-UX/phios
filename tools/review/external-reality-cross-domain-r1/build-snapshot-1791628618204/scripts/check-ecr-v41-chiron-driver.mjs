@@ -1,0 +1,10 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+import {buildEcrHumanRuntime} from '../functions/embodied-configuration/ecr-canonical-projection-runtime-v2.js';
+const input=JSON.parse(fs.readFileSync('content/embodied-configuration/v4-1/acceptance/birth-fixtures-v1.json')).cases[0].canonicalInput;
+const ir=await buildEcrHumanRuntime({canonicalInput:input});
+assert.equal(ir.initialization.activations.filter(a=>a.bodyCode==='CHIRON').length,0);
+const earth=ir.initialization.activations.filter(a=>a.bodyCode==='EARTH');
+assert.equal(earth.length,2);assert.deepEqual(earth.map(a=>a.layer),['PERSONALITY','DESIGN']);assert(earth.every(a=>a.status==='CALCULATED'&&a.p64&&Number.isFinite(a.eclipticLongitude)));
+assert.equal(ir.driverField.drivers[10].driverId,'D11');assert.deepEqual(ir.driverField.drivers[10].bodyBinding,['EARTH']);assert.equal(ir.driverField.drivers[10].status,'CALCULATED');
+assert.equal(ir.initialization.activations.filter(a=>a.status==='CALCULATED').length,26);
+console.log('PASS ECR D11 Earth regression: Personality/Design Earth are derived from Sun opposition; operational Chiron removed.');

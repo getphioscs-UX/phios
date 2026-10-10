@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S8-DETERMINISM-EVIDENCE-REGISTRY-RRP-SUBSET-v1.0.0",
+  "phase": "MRM-S",
+  "work": "MRM-S8_SYNC_RRP-W27",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "ACTIVE_RRP_W27_DETERMINISM_SUBSET_GLOBAL_MRM_S8_NOT_FROZEN",
+  "evaluationRule": "same canonical input + same runtime version + same dependency version = same canonical output",
+  "evidenceObjects": [
+    {
+      "evidenceId": "MRM-RRP-W27-DET-REPORT-COMPOSITION-v1",
+      "runtimeCode": "RRP",
+      "capabilityCode": "RRP-REPORT-COMPOSITION",
+      "evidenceClass": "DETERMINISM",
+      "source": "RRP_W26_GOLDEN_CANDIDATE_DETERMINISM",
+      "environment": "REPOSITORY_BASELINE_f010b292e2c778c744913f1789148c53db89926f",
+      "version": "1.0.0",
+      "createdAt": "2026-08-22",
+      "producer": "RRP-W27_MRM_S_SYNC",
+      "reviewStatus": "MACHINE_VERIFIED",
+      "result": "PASS",
+      "artifactDigest": "f7f340f172bf325b53b747013ccdbbeb168a0097c73acb5d76a5b2e5844017f8",
+      "scope": [
+        "RRP-REPORT-COMPOSITION"
+      ],
+      "limitations": [
+        "FIXTURE_OR_DETERMINISM_EVIDENCE_ONLY",
+        "NOT_PILOT_EVIDENCE"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "content/products/runtime-reading/fixtures/cases/F01/expected-candidate.json",
+          "sha256": "f7f340f172bf325b53b747013ccdbbeb168a0097c73acb5d76a5b2e5844017f8"
+        }
+      ],
+      "fixtureId": "F01"
+    },
+    {
+      "evidenceId": "MRM-RRP-W27-DET-RR-HANDOFF-v1",
+      "runtimeCode": "RRP",
+      "capabilityCode": "RRP-RR-HANDOFF",
+      "evidenceClass": "DETERMINISM",
+      "source": "RRP_W28_SUBMISSION_DETERMINISM",
+      "environment": "REPOSITORY_BASELINE_f010b292e2c778c744913f1789148c53db89926f",
+      "version": "1.0.0",
+      "createdAt": "2026-08-22",
+      "producer": "RRP-W27_MRM_S_SYNC",
+      "reviewStatus": "MACHINE_VERIFIED",
+      "result": "PASS",
+      "artifactDigest": "f530aebfd3b6f8bb72b666fcd76ce5621025abb8641fde2e2fe3cc0f0105ccaa",
+      "scope": [
+        "RRP-RR-HANDOFF"
+      ],
+      "limitations": [
+        "FIXTURE_OR_DETERMINISM_EVIDENCE_ONLY",
+        "NOT_PILOT_EVIDENCE"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "content/products/runtime-reading/fixtures/cases/F11/expected-candidate.json",
+          "sha256": "f530aebfd3b6f8bb72b666fcd76ce5621025abb8641fde2e2fe3cc0f0105ccaa"
+        }
+      ],
+      "fixtureId": "F11"
+    }
+  ],
+  "rules": {
+    "subsetDoesNotCompleteGlobalMRMS8": true,
+    "passAloneDoesNotPromote": true,
+    "versionBindingRequired": true
+  }
+}

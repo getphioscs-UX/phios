@@ -1,0 +1,71 @@
+{
+  "contractCode": "PHI-OS-ALR-W36-CPR-ACADEMY-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W36",
+  "status": "active",
+  "productionStatus": "validation_projection_only",
+  "surface": "ACADEMY",
+  "semanticAuthority": "ALR",
+  "presentationAuthority": "CPR",
+  "assetAuthority": "CAR",
+  "inputAuthorities": {
+    "learningSemantics": "ALR",
+    "publishedKnowledge": "PUBLISHED_KNOWLEDGE_AUTHORITY",
+    "publishedAssets": "CAR",
+    "canonicalPresentation": "CPR",
+    "designAndInteraction": "PDS",
+    "learningData": "RDG",
+    "entitlement": "runtime/entitlement"
+  },
+  "allowedCprPresentationTypes": [
+    "ACADEMY_LESSON",
+    "FIGURE_CARD",
+    "QUIZ",
+    "SUMMARY_BLOCK",
+    "JOURNEY_PROGRESS"
+  ],
+  "requiredProjectionInputFields": [
+    "viewCode",
+    "projectionVersion",
+    "locale",
+    "generatedAt",
+    "providerUsed",
+    "aiUsed"
+  ],
+  "forbiddenInputFields": [
+    "learnerReference",
+    "subjectReference",
+    "accountReference",
+    "email",
+    "name",
+    "rawResponse",
+    "score",
+    "assessmentResult",
+    "capabilityState",
+    "credentialState",
+    "entitlementState",
+    "professionalJudgment",
+    "diagnosis",
+    "recommendation",
+    "personalData"
+  ],
+  "sourceAssetGate": {
+    "canonicalPresentationRequiresPublishedAsset": true,
+    "emptyPublishedAssetRegistryDecision": "VALIDATION_PROJECTION_SOURCE_ASSET_BLOCKED",
+    "validationProjectionMayClaimCanonicalPresentation": false,
+    "validationProjectionMayClaimPublishedOrReleased": false
+  },
+  "rules": {
+    "alrMayCreateLearningPresentationRequest": true,
+    "alrMayCreateCanonicalPresentation": false,
+    "cprMayMutateLearningSemantics": false,
+    "cprMayPromoteSourcePublication": false,
+    "surfaceMayInferLearningProgress": false,
+    "surfaceMaySetCapabilityState": false,
+    "surfaceMayGrantEntitlementCredentialOrProfessionalAuthority": false,
+    "providerOrAiMayGrantPresentationAuthority": false,
+    "networkCallAllowed": false,
+    "persistenceAllowed": false,
+    "academyDeliveryActivated": false
+  }
+}

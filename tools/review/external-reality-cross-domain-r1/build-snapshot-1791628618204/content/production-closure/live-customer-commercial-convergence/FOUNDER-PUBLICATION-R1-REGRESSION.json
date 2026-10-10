@@ -1,0 +1,63 @@
+{
+  "rows": [
+    {
+      "command": "check:founder-publication:r1",
+      "exitCode": 0,
+      "state": "PASS",
+      "log": "content/production-closure/live-customer-commercial-convergence/founder-publication-r1/check-founder-publication-r1.log"
+    },
+    {
+      "command": "check:i18n",
+      "exitCode": 0,
+      "state": "PASS",
+      "log": "content/production-closure/live-customer-commercial-convergence/founder-publication-r1/check-i18n.log"
+    },
+    {
+      "command": "check:public-client-experience-current",
+      "exitCode": 1,
+      "state": "PRE_EXISTING_UNRELATED_BLOCKER",
+      "log": "content/production-closure/live-customer-commercial-convergence/founder-publication-r1/check-public-client-experience-current.log",
+      "failure": "check-stage16-client-intent-router.mjs:19 expects data-cir-root in unchanged index.html",
+      "affectedPath": "index.html",
+      "headBytesEqual": true,
+      "sourceSHA256": "b3e59b257c38fe4019bc1779fdbbe38f5e354c5ab0ed0eaa82171882b2ca9357"
+    },
+    {
+      "command": "check:client-visual-consumption-current",
+      "exitCode": 1,
+      "state": "PRE_EXISTING_UNRELATED_BLOCKER",
+      "log": "content/production-closure/live-customer-commercial-convergence/founder-publication-r1/check-client-visual-consumption-current.log",
+      "failure": "HOME index.html cannot reach H.5 bootstrap",
+      "affectedPath": "index.html",
+      "headBytesEqual": true,
+      "sourceSHA256": "b3e59b257c38fe4019bc1779fdbbe38f5e354c5ab0ed0eaa82171882b2ca9357"
+    },
+    {
+      "command": "check:visual-binding:r5",
+      "exitCode": 0,
+      "state": "PASS",
+      "log": "content/production-closure/live-customer-commercial-convergence/founder-publication-r1/check-visual-binding-r5.log"
+    },
+    {
+      "command": "check:hdr-public-brand-leak",
+      "exitCode": 0,
+      "state": "PASS",
+      "log": "content/production-closure/live-customer-commercial-convergence/founder-publication-r1/check-hdr-public-brand-leak.log"
+    },
+    {
+      "command": "check:cx-home",
+      "exitCode": 0,
+      "state": "PASS",
+      "log": "content/production-closure/live-customer-commercial-convergence/founder-publication-r1/check-cx-home.log"
+    },
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:pages-build",
+      "exitCode": 0,
+      "state": "PASS",
+      "stale": false,
+      "evidenceCommit": "609105c9dc67ac5e8ac1966094ea40f39f8d1922",
+      "log": "content/production-closure/live-customer-commercial-convergence/OWNER-CORRECTION-PAGES-BUILD.log"
+    }
+  ],
+  "providerCalls": 0
+}

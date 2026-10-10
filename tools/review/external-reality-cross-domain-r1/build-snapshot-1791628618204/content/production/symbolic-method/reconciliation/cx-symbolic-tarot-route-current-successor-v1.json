@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-CANONICAL-ROUTE-CURRENT-SUCCESSOR-v1.0.0",
+  "phase": "TPA-MR",
+  "work": "MR-W1-CANONICAL-ROUTE-RECONCILIATION",
+  "baselineCommit": "5c1d05f400bd01e5d278327c97dffb5322940129",
+  "status": "CURRENT_CANONICAL_TAROT_ROUTE_RECONCILED_SERVER_GATED",
+  "canonicalRoute": "/perspectives/tarot/",
+  "canonicalSource": "perspectives/tarot/index.html",
+  "canonicalClient": "assets/customer-ui/js/surfaces/tarot.js",
+  "runtimeAuthorityEndpoint": "/api/tarot-production-status",
+  "contextEndpoint": "/api/symbolic-method-context?method=TAROT",
+  "executeEndpoint": "/api/symbolic-method-execute",
+  "legacyCompatibility": {
+    "route": "/readings/symbolic/",
+    "redirectTarget": "/perspectives/",
+    "tarotAuthority": false,
+    "genericHubAuthority": false
+  },
+  "boundaries": {
+    "staticRouteMayGrantRunAllowed": false,
+    "clientMayGrantAuthority": false,
+    "guestPersistence": false,
+    "predictionAuthority": false,
+    "diagnosticAuthority": false,
+    "hiddenStateAuthority": false,
+    "decisionAuthority": "USER"
+  }
+}

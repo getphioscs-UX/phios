@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-METHOD-INTERPRETATION-ADAPTER-REGISTRY-v2.0.0",
+  "work": "CX-R12R3B-W4-W5-W31-W46",
+  "status": "DEVELOPMENT_ACTIVE_HUMAN_REVIEW_REQUIRED",
+  "predecessor": "content/interpretation/integration/method-interpretation-adapter-registry-v1.json",
+  "predecessorMutated": false,
+  "successorReason": "Admit Zi Wei and relation-aware composition through one shared successor without creating four interpretation systems.",
+  "sharedRuntimeModule": "functions/interpretation-runtime/cx-r12r3b-shared-runtime-v2.js",
+  "inputContract": "PHI-OS-CX-R12R3B-METHOD-INTERPRETATION-INPUT-v1.0.0",
+  "resultSuccessor": "PHI-OS-CANONICAL-INTERPRETATION-RESULT-v2.0.0",
+  "adapters": [
+    {"methodId": "AST", "publicMethodCode": "ASTROLOGY_PROJECTION", "projectionSchemaVersion": "PHI-OS-CANONICAL-METHOD-PROJECTION-v2.0.0", "strategy": "AST_SHARED_COMPOSITION_STRATEGY", "independentInterpretationAuthority": false},
+    {"methodId": "NUM", "publicMethodCode": "NUMEROLOGY_PROJECTION", "projectionSchemaVersion": "PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0", "strategy": "NUM_SHARED_COMPOSITION_STRATEGY", "independentInterpretationAuthority": false},
+    {"methodId": "BZR", "publicMethodCode": "BAZI_PROJECTION", "projectionSchemaVersion": "PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0", "strategy": "BZR_SHARED_COMPOSITION_STRATEGY", "independentInterpretationAuthority": false},
+    {"methodId": "ZWR", "publicMethodCode": "ZI_WEI_PROJECTION", "projectionSchemaVersion": "PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0", "strategy": "ZWR_SHARED_COMPOSITION_STRATEGY", "independentInterpretationAuthority": false}
+  ],
+  "boundaries": {
+    "canonicalProjectionOnly": true,
+    "mayRecalculate": false,
+    "mayCreateAtomicMeaning": false,
+    "atomicMeaningEqualsCustomerInterpretation": false,
+    "rendererMayReadCandidateAsAccepted": false,
+    "rendererMayCreateMeaning": false,
+    "aiMayCreateMeaning": false,
+    "humanAcceptanceRequiresBothPerspectives": true,
+    "crossPerspectiveConsumesAcceptedInterpretationsOnly": true
+  }
+}

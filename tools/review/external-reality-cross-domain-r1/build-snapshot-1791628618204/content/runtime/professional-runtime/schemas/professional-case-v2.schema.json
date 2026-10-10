@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/professional-case-v2.schema.json",
+  "title": "PHI OS Professional Case Context v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "caseId",
+    "customer",
+    "professional",
+    "scope",
+    "consent",
+    "service",
+    "status",
+    "assignmentReference",
+    "workspaceReference",
+    "createdAt"
+  ],
+  "properties": {
+    "caseId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "customer": {
+      "type": "object",
+      "required": [
+        "customerId"
+      ],
+      "properties": {
+        "customerId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "professional": {
+      "type": "object",
+      "required": [
+        "professionalId"
+      ],
+      "properties": {
+        "professionalId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "consent": {
+      "type": "object",
+      "required": [
+        "reference",
+        "state",
+        "purpose",
+        "scopes"
+      ],
+      "properties": {
+        "reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state": {
+          "const": "ACTIVE"
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "service": {
+      "type": "object",
+      "required": [
+        "serviceId",
+        "purpose"
+      ],
+      "properties": {
+        "serviceId": {
+          "type": "string"
+        },
+        "purpose": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "status": {
+      "enum": [
+        "ACTIVE",
+        "SUSPENDED",
+        "CLOSED"
+      ]
+    },
+    "assignmentReference": {
+      "type": "object",
+      "required": [
+        "assignmentId",
+        "state"
+      ],
+      "properties": {
+        "assignmentId": {
+          "type": "string"
+        },
+        "state": {
+          "const": "active"
+        }
+      },
+      "additionalProperties": false
+    },
+    "workspaceReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-KAP-BOOK-VII-OBSERVATION-TIME-v1.0.0",
+  "states": [
+    "CURRENT",
+    "LONGITUDINAL",
+    "STRUCTURAL"
+  ],
+  "rules": {
+    "currentAloneProvesStructural": false,
+    "longitudinalRequiresRepeatedEvidenceAcrossTime": true,
+    "structuralRequires": [
+      "relation",
+      "carrier",
+      "routing",
+      "constraint"
+    ],
+    "persistentPriceOrScoreAloneProvesStructural": false
+  },
+  "appliesTo": [
+    "market data",
+    "fund flow",
+    "sector rotation",
+    "financial statements",
+    "current reality evidence"
+  ]
+}

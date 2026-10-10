@@ -1,0 +1,2 @@
+import {generateW17Campaign,writeJson,W17_CAMPAIGN_PATH} from './lib/ast-full-production/ast-r2-w17-w20-support.mjs';
+const campaign=await generateW17Campaign();writeJson(W17_CAMPAIGN_PATH,campaign);console.log(JSON.stringify({status:campaign.status,total:campaign.coverage.totalAssertions,rendered:campaign.coverage.renderedSurfaceCases,full:campaign.coverage.fullSurfaceCases,partial:campaign.coverage.partialSurfaceCases,failClosed:campaign.coverage.expectedFailClosedCases,rate:campaign.coverage.acceptanceRate},null,2));

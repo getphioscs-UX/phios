@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4B-AUTHORITY-MAP-v1.0.0",
+  "work": "CX-R12R4B-W00-W07",
+  "baselineCommit": "4a9ddcaff07abaab4c12be62cd74e0681e528af8",
+  "status": "PHASE_A_SINGLE_OWNER_MAP_ACTIVE",
+  "owners": {
+    "calculation": {
+      "AST": "functions/method-client-delivery/canonical-projection-runtime-ast-v2.js",
+      "BZR": "functions/method-client-delivery/canonical-projection-runtime-current.js",
+      "NUM": "functions/method-client-delivery/canonical-projection-runtime-current.js",
+      "ZWR": "functions/method-client-delivery/zwr-canonical-projection-runtime.js"
+    },
+    "meaning": {
+      "sharedProductionBuilder": "functions/canonical-meaning-production/meaning-bundle-builder-production.js",
+      "astProductionBuilder": "functions/canonical-meaning-production/meaning-bundle-builder-ast-v2.js",
+      "zwrGovernedRuntime": "functions/canonical-meaning-production/zi-wei-meaning-runtime.js",
+      "sharedConsumer": "functions/customer-projection/method-customer-reading-v2.js#buildMethodMeaningPayloadV2"
+    },
+    "composition": "functions/interpretation-runtime/cx-r12r3b-shared-runtime-v2.js",
+    "admission": "functions/interpretation-runtime/customer-composition-admission-resolver-v1.js",
+    "customerPublication": "functions/interpretation-runtime/admitted-customer-interpretation-runtime-v1.js",
+    "customerViewModel": "functions/customer-projection/method-customer-reading-v2.js#buildAcceptedMethodCustomerResult",
+    "apiProjection": "functions/api/customer-personal-reality.js#view.reading.methods",
+    "renderer": "assets/customer-ui/js/surfaces/personal-reality.js",
+    "methodGraphRenderer": "assets/customer-ui/js/method-graph-v1.js"
+  },
+  "authorityBoundary": {
+    "calculationEqualsInterpretation": false,
+    "atomicMeaningEqualsPersonalReading": false,
+    "admissionMeansRulesetAuthorized": true,
+    "admissionMeansLiveCustomerHumanReviewed": false,
+    "rendererCreatesMeaning": false,
+    "aiCreatesMeaning": false,
+    "currentRealityAssumed": false,
+    "oneAdmissionResolver": true,
+    "oneAdmittedExecutor": true,
+    "oneCustomerInterpretationViewModel": true
+  }
+}

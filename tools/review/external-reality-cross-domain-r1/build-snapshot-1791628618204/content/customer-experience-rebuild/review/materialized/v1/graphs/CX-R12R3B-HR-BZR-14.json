@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R3B-HUMAN-REVIEW-GRAPH-CASE-v1.0.0",
+  "caseId": "CX-R12R3B-HR-BZR-14",
+  "methodId": "BZR",
+  "localized": [
+    {
+      "schemaVersion": "PHI-OS-CX-R12R3B-HUMAN-REVIEW-GRAPH-SNAPSHOT-v1.0.0",
+      "caseId": "CX-R12R3B-HR-BZR-14",
+      "methodId": "BZR",
+      "locale": "zh-Hans",
+      "projectionDigest": "d9cf1a7cbcdab558388bedf9bb34becfd9b161fb597a1abf57c65facedda26d2",
+      "graphDigest": "8ec819eade30e4811545ffdaff9b98b057587a5f0d182744f6cde8f6ccdccb5e",
+      "graphType": "FOUR_PILLARS",
+      "houseSystemId": null,
+      "nodes": [
+        {
+          "nodeId": "BZR-YEAR-STEM",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:YEAR_STEM",
+          "label": "YEAR_STEM",
+          "localizedLabel": "甲",
+          "role": "STEM",
+          "value": "甲",
+          "state": "CALCULATED",
+          "priority": "SUPPORTING",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-01"
+          ],
+          "groupId": "BZR-YEAR"
+        },
+        {
+          "nodeId": "BZR-YEAR-BRANCH",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:YEAR_BRANCH",
+          "label": "YEAR_BRANCH",
+          "localizedLabel": "子",
+          "role": "BRANCH",
+          "value": "子",
+          "state": "CALCULATED",
+          "priority": "SUPPORTING",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-01"
+          ],
+          "groupId": "BZR-YEAR"
+        },
+        {
+          "nodeId": "BZR-MONTH-STEM",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:MONTH_STEM",
+          "label": "MONTH_STEM",
+          "localizedLabel": "丙",
+          "role": "STEM",
+          "value": "丙",
+          "state": "CALCULATED",
+          "priority": "SUPPORTING",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-02"
+          ],
+          "groupId": "BZR-MONTH"
+        },
+        {
+          "nodeId": "BZR-MONTH-BRANCH",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:MONTH_BRANCH",
+          "label": "MONTH_BRANCH",
+          "localizedLabel": "寅",
+          "role": "BRANCH",
+          "value": "寅",
+          "state": "CALCULATED",
+          "priority": "SUPPORTING",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-01",
+            "CXI-BZR-D9CF1A7CBCDA-02",
+            "CXI-BZR-D9CF1A7CBCDA-03",
+            "CXI-BZR-D9CF1A7CBCDA-04"
+          ],
+          "groupId": "BZR-MONTH"
+        },
+        {
+          "nodeId": "BZR-DAY-STEM",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:DAY_STEM",
+          "label": "DAY_STEM",
+          "localizedLabel": "庚",
+          "role": "STEM",
+          "value": "庚",
+          "state": "CALCULATED",
+          "priority": "PRIMARY",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-01",
+            "CXI-BZR-D9CF1A7CBCDA-02",
+            "CXI-BZR-D9CF1A7CBCDA-03",
+            "CXI-BZR-D9CF1A7CBCDA-04"
+          ],
+          "groupId": "BZR-DAY"
+        },
+        {
+          "nodeId": "BZR-DAY-BRANCH",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:DAY_BRANCH",
+          "label": "DAY_BRANCH",
+          "localizedLabel": "申",
+          "role": "BRANCH",
+          "value": "申",
+          "state": "CALCULATED",
+          "priority": "PRIMARY",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-03"
+          ],
+          "groupId": "BZR-DAY"
+        },
+        {
+          "nodeId": "BZR-HOUR-STEM",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:HOUR_STEM",
+          "label": "HOUR_STEM",
+          "localizedLabel": "壬",
+          "role": "STEM",
+          "value": "壬",
+          "state": "CALCULATED",
+          "priority": "SUPPORTING",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-04"
+          ],
+          "groupId": "BZR-HOUR"
+        },
+        {
+          "nodeId": "BZR-HOUR-BRANCH",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:HOUR_BRANCH",
+          "label": "HOUR_BRANCH",
+          "localizedLabel": "子",
+          "role": "BRANCH",
+          "value": "子",
+          "state": "CALCULATED",
+          "priority": "SUPPORTING",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-04"
+          ],
+          "groupId": "BZR-HOUR"
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "BZR-YEAR-PAIR",
+          "sourceNodeId": "BZR-YEAR-STEM",
+          "targetNodeId": "BZR-YEAR-BRANCH",
+          "relationType": "DEPENDENCY",
+          "canonicalRelationRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:YEAR:PAIR",
+          "interpretationUnitRefs": []
+        },
+        {
+          "edgeId": "BZR-MONTH-PAIR",
+          "sourceNodeId": "BZR-MONTH-STEM",
+          "targetNodeId": "BZR-MONTH-BRANCH",
+          "relationType": "DEPENDENCY",
+          "canonicalRelationRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:MONTH:PAIR",
+          "interpretationUnitRefs": []
+        },
+        {
+          "edgeId": "BZR-DAY-PAIR",
+          "sourceNodeId": "BZR-DAY-STEM",
+          "targetNodeId": "BZR-DAY-BRANCH",
+          "relationType": "DEPENDENCY",
+          "canonicalRelationRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:DAY:PAIR",
+          "interpretationUnitRefs": []
+        },
+        {
+          "edgeId": "BZR-HOUR-PAIR",
+          "sourceNodeId": "BZR-HOUR-STEM",
+          "targetNodeId": "BZR-HOUR-BRANCH",
+          "relationType": "DEPENDENCY",
+          "canonicalRelationRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:HOUR:PAIR",
+          "interpretationUnitRefs": []
+        }
+      ],
+      "groups": [
+        {
+          "groupId": "BZR-YEAR",
+          "label": "年柱"
+        },
+        {
+          "groupId": "BZR-MONTH",
+          "label": "月柱"
+        },
+        {
+          "groupId": "BZR-DAY",
+          "label": "日柱"
+        },
+        {
+          "groupId": "BZR-HOUR",
+          "label": "时柱"
+        }
+      ],
+      "overlays": [
+        {
+          "overlayId": "BZR-CYCLE-1",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#CYCLE:1",
+          "label": "第 1 运",
+          "active": false
+        }
+      ],
+      "legend": [
+        {
+          "code": "STEM",
+          "label": "stem"
+        },
+        {
+          "code": "BRANCH",
+          "label": "branch"
+        }
+      ],
+      "textEquivalent": {
+        "summary": "每个节点和关系都可在表格后备视图中读取。",
+        "nodeCount": 8,
+        "edgeCount": 4
+      },
+      "reviewFocus": {
+        "focusInterpretationUnitRefs": [
+          "CXI-BZR-D9CF1A7CBCDA-02"
+        ],
+        "focusNodeRefs": [
+          "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:DAY_BRANCH"
+        ],
+        "focusRelationRefs": [
+          "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:MONTH:PAIR"
+        ],
+        "scenario": "time accuracy approximate",
+        "caseType": "MISSING_DATA",
+        "variantMode": "REVIEW_LENS_OVER_GOVERNED_FIXED_PROJECTION",
+        "calculationVariantInvented": false
+      },
+      "customerInterpretationBindingsAccepted": false
+    }
+  ]
+}

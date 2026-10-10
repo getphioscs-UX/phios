@@ -1,0 +1,276 @@
+{
+  "contractId": "PJA-W2C-v1.0.0-Claim-Source-Editorial-Review-Governance",
+  "step": "PJA-W2C",
+  "version": "1.0.0",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "1f3a6e36d9bbd5466b6c42926505da45623db719",
+    "prerequisite": "PJA-W2B"
+  },
+  "responsibilitySeparation": {
+    "article": [
+      "public_body",
+      "titles",
+      "sections",
+      "blocks",
+      "summary",
+      "seo",
+      "knowledge_boundary",
+      "connections"
+    ],
+    "claim": [
+      "auditable_assertion",
+      "claim_type",
+      "article_location",
+      "source_support_mapping",
+      "claim_review_state"
+    ],
+    "source": [
+      "source_identity",
+      "bibliographic_metadata",
+      "scope",
+      "quality_assessment",
+      "source_review_state",
+      "public_metadata_policy"
+    ],
+    "review": [
+      "version_bound_audit",
+      "review_dimensions",
+      "findings",
+      "required_changes",
+      "human_decision_evidence"
+    ],
+    "articleJsonRemainsOnlyPublicBodyAuthority": true,
+    "sourcePresenceEqualsClaimSupport": false,
+    "schemaValidityEqualsApproval": false,
+    "buildSuccessEqualsEditorialApproval": false
+  },
+  "claimGovernance": {
+    "claimTypes": [
+      "externally_verifiable",
+      "phi_os_interpretation",
+      "editorial_inference",
+      "mixed",
+      "canonical_transition",
+      "boundary_statement"
+    ],
+    "materiality": [
+      "low",
+      "medium",
+      "high",
+      "critical"
+    ],
+    "usage": [
+      "direct",
+      "paraphrased",
+      "contextual",
+      "illustrative",
+      "transitional"
+    ],
+    "claimStatus": [
+      "draft",
+      "mapped",
+      "ready_for_review",
+      "changes_required",
+      "approved",
+      "rejected",
+      "deprecated"
+    ],
+    "claimCodePattern": "CLM-<NODE-CODE>-<NNN>",
+    "claimCodesAreStableAndNeverReused": true,
+    "aiMaximumClaimStatus": "ready_for_review",
+    "highAndCriticalRequireHumanApprovalBeforePublication": true,
+    "phiOsInterpretationRequiresCanonicalTrace": true,
+    "mixedClaimsShouldBeSplitWhenPractical": true
+  },
+  "sourceGovernance": {
+    "sourceCodePattern": "SRC-<DOMAIN>-<NNN>",
+    "sourceCodesAreUniqueStableAndNeverUrls": true,
+    "supportTypes": [
+      "direct",
+      "partial",
+      "contextual",
+      "contradictory",
+      "not_supportive"
+    ],
+    "supportLevels": [
+      "strong",
+      "moderate",
+      "weak",
+      "none",
+      "not_assessed"
+    ],
+    "authorityLevels": [
+      "primary",
+      "authoritative_secondary",
+      "reputable_secondary",
+      "contextual",
+      "reference_only"
+    ],
+    "publicationStatuses": [
+      "internal_only",
+      "public_citation_allowed",
+      "public_metadata_only",
+      "restricted",
+      "deprecated"
+    ],
+    "contraryEvidenceMustBeRecordable": true,
+    "contradictoryAndNotSupportiveDoNotCountTowardMinimum": true,
+    "referenceOnlyCannotSupportHighOrCriticalClaims": true,
+    "deprecatedCannotSupportNewClaims": true,
+    "sourceMetadataIsNotArticleBody": true,
+    "sourceAcquisitionDoesNotAutoRegisterOrApprove": true,
+    "copyrightStorageDefault": "metadata_only"
+  },
+  "reviewGovernance": {
+    "reviewStatuses": [
+      "not_applicable",
+      "not_reviewed",
+      "in_review",
+      "changes_required",
+      "conditionally_approved",
+      "approved",
+      "rejected"
+    ],
+    "dimensions": [
+      "canonicalReview",
+      "factualReview",
+      "sourceReview",
+      "boundaryReview",
+      "languageReview",
+      "readabilityReview",
+      "crossNodeReview",
+      "continuityReview",
+      "visualReview",
+      "localizationReadinessReview"
+    ],
+    "reviewerTypes": [
+      "human",
+      "ai_assistant",
+      "automated_validator",
+      "system"
+    ],
+    "humanOnlyDecisions": [
+      "conditionally_approved",
+      "approved",
+      "rejected",
+      "accepted_risk"
+    ],
+    "aiAllowedReviewOutputs": [
+      "not_reviewed",
+      "in_review",
+      "changes_required_suggestion"
+    ],
+    "automatedValidatorMayApprove": false,
+    "aiAssistantMayApprove": false,
+    "approvalRequiresReviewerIdAndTimestamp": true,
+    "criticalFindingMayBeClosedByAi": false,
+    "majorFindingRequiresAddressedAndVerified": true
+  },
+  "lifecycle": [
+    "node_selected",
+    "thesis_frozen",
+    "claim_dossier_prepared",
+    "source_dossier_prepared",
+    "outline_approved",
+    "canonical_draft_created",
+    "claim_mapping_completed",
+    "fact_review",
+    "source_review",
+    "canonical_review",
+    "language_review",
+    "changes_required",
+    "revision_completed",
+    "content_reviewed",
+    "editorially_approved",
+    "publication_ready",
+    "published"
+  ],
+  "versionBinding": {
+    "required": [
+      "articleVersion",
+      "claimSetVersion",
+      "sourceSetVersion"
+    ],
+    "recommended": [
+      "reviewedArticleHash",
+      "reviewedClaimSetHash",
+      "reviewedSourceSetHash"
+    ],
+    "sameFilenameDoesNotPreserveApproval": true
+  },
+  "publicationGate": {
+    "articleState": {
+      "contentStatus": "content_reviewed",
+      "reviewStatus": "approved",
+      "publicationStatus": "published"
+    },
+    "requiredReviewDecision": "approved",
+    "requiredReviewDimensions": "approved_or_explicitly_not_applicable",
+    "requiredClaimStateForHighAndCritical": "approved",
+    "requiredSourceReviewState": "approved",
+    "blockingFindingSeverities": [
+      "major",
+      "critical"
+    ],
+    "articleAndReviewVersionsMustMatch": true,
+    "claimAndSourceSetVersionsMustMatch": true,
+    "nextNodeMustMatchCanonicalRegistry": true,
+    "englishRequiresApprovedCanonicalChinese": true,
+    "publicSourceStatuses": [
+      "public_citation_allowed",
+      "public_metadata_only"
+    ],
+    "missingGovernanceRecordBlocksNewStructuredPublication": true,
+    "legacyPjaW1ArticlesRemainOnFrozenW1GateUntilExplicitHumanMigration": true
+  },
+  "publicProjection": {
+    "allowed": [
+      "published_article_body",
+      "public_source_metadata",
+      "published_related_nodes",
+      "published_assets",
+      "knowledge_boundary"
+    ],
+    "forbidden": [
+      "claim_dossier",
+      "claim_codes",
+      "support_assessment",
+      "internal_contrary_evidence_notes",
+      "review_findings",
+      "reviewer_identity",
+      "reviewer_notes",
+      "internal_source_url",
+      "accepted_risk",
+      "restricted_book_source",
+      "ai_editorial_notes"
+    ]
+  },
+  "preservation": {
+    "canonicalNodeCount": 13,
+    "canonicalThemeCount": 6,
+    "knowledgeRegistryFileCount": 12,
+    "knowledgeRegistrySchemaCount": 12,
+    "productionArticleCount": 6,
+    "articleV2BlockAllowlistChanged": false,
+    "canonicalRegistryChanged": false,
+    "localizedRegistryChanged": false,
+    "assetRegistryChanged": false,
+    "sourceRegistryChanged": false,
+    "productionArticleBodyChanged": false,
+    "runtimeChanged": false,
+    "providerChanged": false,
+    "paymentChanged": false,
+    "entitlementChanged": false,
+    "d1MigrationAdded": false
+  },
+  "knPreface001": {
+    "fixtureOnly": true,
+    "productionArticleCreated": false,
+    "englishArticleCreated": false,
+    "publishedAssetCreated": false,
+    "canonicalLocaleState": "not_started",
+    "englishLocaleState": "localization_pending"
+  }
+}

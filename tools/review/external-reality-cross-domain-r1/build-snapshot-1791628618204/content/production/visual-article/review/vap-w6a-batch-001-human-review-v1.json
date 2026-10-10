@@ -1,0 +1,1372 @@
+{
+  "schemaVersion": "PHI-OS-VAP-W6A-BATCH-ARTICLE-C2-HUMAN-REVIEW-v1.0.0",
+  "reviewCode": "PHI-OS-VAP-W6A-BATCH-001-ARTICLE-C2-HUMAN-REVIEW-v1",
+  "reviewVersion": "1.0.0",
+  "work": "VAP-W6A",
+  "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION",
+  "status": "AWAITING_EXPLICIT_HUMAN_DECISIONS",
+  "baselineCommit": "3dd903344945ecd3b585c8aafe48b93d7894caa9",
+  "batchCode": "VAP-ARTICLE-BATCH-001",
+  "sourceBatch": "content/production/visual-article/batches/vap-article-batch-001-selection-v1.json",
+  "proposalAuthority": "AI_EDITORIAL_RECOMMENDATION_ONLY",
+  "humanAuthorityRequired": true,
+  "bulkEnvelopeIsNotBulkApproval": true,
+  "perNodeDecisionRequired": true,
+  "entries": [
+    {
+      "reviewIndex": 1,
+      "nodeCode": "KN-B1-P1-006",
+      "titleZhHans": "为什么导航需要方向、位置与坐标",
+      "knowledgeVersion": "1.0.0",
+      "locale": "zh-Hans",
+      "requestedProductionRole": "ARTICLE",
+      "requiredOutputs": [
+        "ARTICLE"
+      ],
+      "dispatchTarget": "PJA",
+      "productionPriority": "P0",
+      "articleDecisionRecommendation": "APPROVE_ARTICLE",
+      "recommendationAuthority": "EDITORIAL_RECOMMENDATION_ONLY_NOT_HUMAN_DECISION",
+      "manuscriptMappingReview": {
+        "reference": "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P1-006",
+        "sourceObjectKey": "books/book-1/source/PHI-OS-Book-I-v1.0.0.pdf",
+        "sourceVersion": "1.0.0",
+        "rangeCode": "KN-B1-P1-006-R01",
+        "startHeading": "现实如何获得位置",
+        "endHeading": "现实如何提高导航精度",
+        "sectionHash": "26f0c4e965845c118de524dadbb049feab634b9090112683eba6c14ffe1df804",
+        "currentMappingStatus": "candidate",
+        "currentAuthorityStatus": "automation_candidate",
+        "humanVerified": false,
+        "humanDecisionRequired": true
+      },
+      "proposedContent": {
+        "canonicalThesis": {
+          "statement": "导航之所以需要方向、位置与坐标，是因为任何从当前状态走向另一状态的行动，都必须同时知道“现在在哪里”“朝哪里变化”以及“这些差异在什么共同参照中被比较”。",
+          "mechanism": "位置描述当前状态相对于参照系的关系，方向描述预期变化的取向，坐标把位置与方向放入可重复比较的参考结构；导航通过持续比较当前位置、目标方向与坐标变化来修正行动。",
+          "necessity": "如果缺少位置，系统无法确认起点；缺少方向，无法判断变化是否趋近目标；缺少坐标，位置与方向无法稳定比较，导航就退化为局部反应而不是可连续修正的过程。",
+          "systemRole": "本节点把前序对现实演化的说明推进到可导航性：现实不仅会变化，还必须能够在参照结构中被定位、比较与重新定向。",
+          "continuity": {
+            "fromPreviousNode": "承接 KN-B1-P1-005 对现实持续演化的说明，把“变化”转化为“可被定位与引导的变化”。",
+            "toNextNode": "进入 KN-B1-P1-007，说明坐标与结构的分辨率如何进一步限制导航精度。"
+          },
+          "partContribution": "在现实物理学中建立 Navigation 所需的 Direction、Position 与 Coordinate 三个基础条件。",
+          "bookContribution": "为第一册后续 Projection、Runtime 与 Reality Navigation 的可定位性建立基础。"
+        },
+        "boundaries": {
+          "article": {
+            "boundaryVersion": "1.0.0",
+            "mustEstablish": [
+              "导航同时依赖当前位置、变化方向与共同坐标参照。",
+              "坐标不是附加标签，而是让位置与方向可以重复比较的关系结构。",
+              "导航是持续比较与修正，而不是一次性的目标选择。"
+            ],
+            "requiredDistinctions": [
+              "位置 ≠ 方向",
+              "坐标 ≠ 地理坐标的单一形式",
+              "导航 ≠ 预测未来",
+              "结构分辨率 ≠ 导航本身"
+            ],
+            "mustNotClaim": [
+              "不得把 PHI OS 的坐标概念等同于 GPS、物理空间或任何单一技术坐标系统。",
+              "不得声称只要拥有坐标就能保证正确决策或确定未来。",
+              "不得从一般导航机制直接推断个人状态或给出专业建议。"
+            ],
+            "includedScope": [
+              "方向、位置、参照系、坐标比较、状态更新与导航修正。"
+            ],
+            "excludedScope": [
+              "不展开具体导航算法、测绘学、控制工程或定位设备原理。",
+              "不进入个人 Reading、诊断、预测或服务建议。"
+            ],
+            "assumptions": [
+              "本节点使用 PHI OS Canonical vocabulary 解释一般机制；具体外部事实必须另行来源治理。"
+            ],
+            "unresolvedQuestions": []
+          },
+          "claims": {
+            "requiredClaimFamilies": [
+              "Position as relational state",
+              "Direction as change orientation",
+              "Coordinate as repeatable reference",
+              "Navigation as iterative correction"
+            ],
+            "allowedClaimTypes": [
+              "phi_os_interpretation",
+              "canonical_transition",
+              "boundary_statement",
+              "externally_verifiable"
+            ],
+            "sourceRequiredClaims": [
+              "任何关于 GPS、神经导航、控制系统或物理坐标的具体事实与案例。"
+            ],
+            "internalCanonicalClaims": [
+              "导航需要方向、位置与坐标共同成立。",
+              "坐标使状态差异能够被稳定比较。"
+            ],
+            "interpretiveClaims": [],
+            "analogyOnlyStatements": [],
+            "prohibitedClaims": [
+              "坐标能够消除不确定性。",
+              "导航必然产生唯一正确路径。"
+            ],
+            "qualificationRequirements": [
+              "任何外部事实、数字、研究结论或专业案例必须与 PHI OS Canonical interpretation 分离并进入 Source/Claim review。"
+            ]
+          },
+          "questions": [],
+          "sources": {
+            "sourcePlanVersion": "1.0.0",
+            "sourceRequirement": [
+              "仅使用 Human-approved Canonical Thesis、Boundary 与确认的 Book I manuscript range 作为内部生产依据。",
+              "若 Article 引入外部可验证事实，必须新增正式 Source mapping；Provider 不得自行伪造来源。"
+            ],
+            "internalCanonicalSources": [
+              "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P1-006"
+            ],
+            "knownSources": [],
+            "manuscriptObjectKey": "books/book-1/source/PHI-OS-Book-I-v1.0.0.pdf",
+            "manuscriptCandidateRange": "KN-B1-P1-006-R01",
+            "preferredSourceTypes": [
+              "primary research",
+              "official technical source",
+              "canonical PHI OS manuscript"
+            ],
+            "prohibitedSourceTypes": [
+              "fabricated citation",
+              "untraceable AI-generated source"
+            ],
+            "researchNeeded": [],
+            "verificationNeeded": [],
+            "citationSensitivity": "medium"
+          },
+          "figures": {
+            "figureRequirement": "not_required_by_c2",
+            "requiredFigures": [],
+            "optionalFigures": [
+              "可选概念图显示 Position → Coordinate Comparison → Direction → Update 的循环，但不得画成唯一正确路线。"
+            ],
+            "visualMechanism": "可选概念图显示 Position → Coordinate Comparison → Direction → Update 的循环，但不得画成唯一正确路线。",
+            "assetCreationAllowedAtC2": false,
+            "prohibitedVisualClaims": [
+              "不得让视觉图形扩大 Canonical Thesis 或把概念关系画成未经批准的确定性因果。"
+            ],
+            "accessibilityRequirements": [
+              "如后续由 CAR 生产 Figure，必须提供 zh-Hans alt text、caption 与非颜色唯一编码。"
+            ],
+            "assetSourceBoundary": [
+              "C2 不创建 Asset；任何 Figure 必须进入 CAR governed asset workflow。"
+            ]
+          },
+          "publicContent": {
+            "publicKnowledgeBoundary": [
+              "允许公开解释本节点已冻结的一般 Canonical mechanism 与边界。"
+            ],
+            "paidBookBoundary": [
+              "不得复制 Book I manuscript 的连续受限段落或用 Article 替代付费书内容。"
+            ],
+            "runtimeJourneyBoundary": [
+              "不得从一般知识直接执行个人 Runtime Reading、推断或写入。"
+            ],
+            "professionalServiceBoundary": [
+              "不得形成个别化诊断、预测、医疗、法律、投资或其他专业建议。"
+            ],
+            "enterpriseBoundary": [],
+            "developerBoundary": []
+          }
+        }
+      },
+      "proposalContentHash": "sha256:db96ef69fbe652e7a6e6cfa9dda35d80961ba6abbba62c542fb7af3763e5d115",
+      "reviewDimensionProposals": [
+        {
+          "dimension": "CANONICAL_THESIS",
+          "recommendation": "确认上述 Canonical Thesis 是否准确表达本节点机制。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "ARTICLE_BOUNDARY",
+          "recommendation": "确认 must-establish / distinctions / scope / prohibited claims。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SUPPORTING_QUESTION_BOUNDARY",
+          "recommendation": "当前无 Supporting Question；确认不自动创建。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SEQUENCE_BOUNDARY",
+          "recommendation": "确认 KN-B1-P1-005 → KN-B1-P1-006 → KN-B1-P1-007 的连续性。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "CLAIM_BOUNDARY",
+          "recommendation": "确认内部 Canonical claims 与外部可验证事实边界。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SOURCE_BOUNDARY",
+          "recommendation": "确认 manuscript range KN-B1-P1-006-R01 可作为内部 Canonical source mapping。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "FIGURE_BOUNDARY",
+          "recommendation": "确认 C2 不要求 Figure，后续视觉资产仍由 CAR 决定。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "PUBLIC_CONTENT_BOUNDARY",
+          "recommendation": "确认 Public / Paid Book / Runtime / Professional 内容边界。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "CROSS_NODE_BOUNDARY",
+          "recommendation": "确认前后节点只提供 continuity，不转移 Canonical ownership。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        }
+      ],
+      "approvalState": "pending_human",
+      "promotionAllowed": false,
+      "humanDecision": null
+    },
+    {
+      "reviewIndex": 2,
+      "nodeCode": "KN-B1-P2-001",
+      "titleZhHans": "为什么现实必须经过投影才能成为世界",
+      "knowledgeVersion": "1.0.0",
+      "locale": "zh-Hans",
+      "requestedProductionRole": "ARTICLE",
+      "requiredOutputs": [
+        "ARTICLE"
+      ],
+      "dispatchTarget": "PJA",
+      "productionPriority": "P0",
+      "articleDecisionRecommendation": "APPROVE_ARTICLE",
+      "recommendationAuthority": "EDITORIAL_RECOMMENDATION_ONLY_NOT_HUMAN_DECISION",
+      "manuscriptMappingReview": {
+        "reference": "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P2-001",
+        "sourceObjectKey": "books/book-1/source/PHI-OS-Book-I-v1.0.0.pdf",
+        "sourceVersion": "1.0.0",
+        "rangeCode": "KN-B1-P2-001-R01",
+        "startHeading": "Projection Necessity | 为什么现实必然需要投影",
+        "endHeading": "投影表面 Projection Surface | 现实表面如何成为经验界面",
+        "sectionHash": "7651bf2c8cc45530cec8478522bf7d733b09905cf07b7e2f46a9ccf88c8d3976",
+        "currentMappingStatus": "candidate",
+        "currentAuthorityStatus": "automation_candidate",
+        "humanVerified": false,
+        "humanDecisionRequired": true
+      },
+      "proposedContent": {
+        "canonicalThesis": {
+          "statement": "现实要成为一个系统能够经验、读取与行动的“世界”，必须先经过投影，因为任何有限载体都只能接收、压缩并组织现实的一部分，而不能直接拥有现实的全部状态。",
+          "mechanism": "现实中的差异经过载体能力、接口、选择条件与分辨率限制，被映射为一个可访问的投影版本；这个版本保留足够的关系以支持经验与行动，同时舍弃大量未被当前系统呈现的信息。",
+          "necessity": "没有投影，有限系统面对的是无法直接承载的开放复杂性；投影把不可完全访问的现实转化为可被感知、比较、记忆与操作的世界版本。",
+          "systemRole": "本节点把第一部的可观察接口推进为第二部的 Projection Runtime，建立“Reality”与“experienced world”之间的结构性边界。",
+          "continuity": {
+            "fromPreviousNode": "承接 KN-B1-P1-012 对可观察接口的说明，进一步解释接口为何必然形成选择性的投影。",
+            "toNextNode": "进入 KN-B1-P2-002，说明投影如何在表面形成可经验的界面。"
+          },
+          "partContribution": "定义 Projection Necessity，作为第二部所有投影机制的入口。",
+          "bookContribution": "解释世界为何不是现实本身的完整复制，而是有限系统可访问的现实版本。"
+        },
+        "boundaries": {
+          "article": {
+            "boundaryVersion": "1.0.0",
+            "mustEstablish": [
+              "有限载体不能同时呈现现实的全部差异。",
+              "投影通过选择、压缩与映射形成可访问世界。",
+              "投影保留可行动关系，但不等于现实本体。"
+            ],
+            "requiredDistinctions": [
+              "Reality ≠ World Projection",
+              "Projection ≠ Illusion",
+              "Selection ≠ Fabrication",
+              "Interface ≠ Total Reality"
+            ],
+            "mustNotClaim": [
+              "不得把投影描述为现实不存在或世界纯属虚构。",
+              "不得声称所有观察者的投影完全相同或完全任意。",
+              "不得把 PHI OS Projection 直接等同于某一哲学、心理学或物理学理论。"
+            ],
+            "includedScope": [
+              "有限载体、选择、压缩、映射、可访问现实与经验世界。"
+            ],
+            "excludedScope": [
+              "不讨论特定感官、脑区、物理测量理论或个人心理诊断。",
+              "不进入后续投影偏差、群体协调的完整机制。"
+            ],
+            "assumptions": [
+              "本节点使用 PHI OS Canonical vocabulary 解释一般机制；具体外部事实必须另行来源治理。"
+            ],
+            "unresolvedQuestions": []
+          },
+          "claims": {
+            "requiredClaimFamilies": [
+              "Finite carrier access",
+              "Projection selection",
+              "Compression into accessible world",
+              "Reality/projection boundary"
+            ],
+            "allowedClaimTypes": [
+              "phi_os_interpretation",
+              "canonical_transition",
+              "boundary_statement",
+              "externally_verifiable"
+            ],
+            "sourceRequiredClaims": [
+              "任何关于神经感知、测量科学、认知系统或物理观测的具体事实。"
+            ],
+            "internalCanonicalClaims": [
+              "世界是现实经过有限系统投影后形成的可访问版本。"
+            ],
+            "interpretiveClaims": [],
+            "analogyOnlyStatements": [],
+            "prohibitedClaims": [
+              "投影等于幻觉。",
+              "现实只能通过单一投影存在。"
+            ],
+            "qualificationRequirements": [
+              "任何外部事实、数字、研究结论或专业案例必须与 PHI OS Canonical interpretation 分离并进入 Source/Claim review。"
+            ]
+          },
+          "questions": [],
+          "sources": {
+            "sourcePlanVersion": "1.0.0",
+            "sourceRequirement": [
+              "仅使用 Human-approved Canonical Thesis、Boundary 与确认的 Book I manuscript range 作为内部生产依据。",
+              "若 Article 引入外部可验证事实，必须新增正式 Source mapping；Provider 不得自行伪造来源。"
+            ],
+            "internalCanonicalSources": [
+              "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P2-001"
+            ],
+            "knownSources": [],
+            "manuscriptObjectKey": "books/book-1/source/PHI-OS-Book-I-v1.0.0.pdf",
+            "manuscriptCandidateRange": "KN-B1-P2-001-R01",
+            "preferredSourceTypes": [
+              "primary research",
+              "official technical source",
+              "canonical PHI OS manuscript"
+            ],
+            "prohibitedSourceTypes": [
+              "fabricated citation",
+              "untraceable AI-generated source"
+            ],
+            "researchNeeded": [],
+            "verificationNeeded": [],
+            "citationSensitivity": "medium"
+          },
+          "figures": {
+            "figureRequirement": "not_required_by_c2",
+            "requiredFigures": [],
+            "optionalFigures": [
+              "可选概念图显示 Reality → Selection/Constraint → Projection → Accessible World，不得暗示投影创造全部现实。"
+            ],
+            "visualMechanism": "可选概念图显示 Reality → Selection/Constraint → Projection → Accessible World，不得暗示投影创造全部现实。",
+            "assetCreationAllowedAtC2": false,
+            "prohibitedVisualClaims": [
+              "不得让视觉图形扩大 Canonical Thesis 或把概念关系画成未经批准的确定性因果。"
+            ],
+            "accessibilityRequirements": [
+              "如后续由 CAR 生产 Figure，必须提供 zh-Hans alt text、caption 与非颜色唯一编码。"
+            ],
+            "assetSourceBoundary": [
+              "C2 不创建 Asset；任何 Figure 必须进入 CAR governed asset workflow。"
+            ]
+          },
+          "publicContent": {
+            "publicKnowledgeBoundary": [
+              "允许公开解释本节点已冻结的一般 Canonical mechanism 与边界。"
+            ],
+            "paidBookBoundary": [
+              "不得复制 Book I manuscript 的连续受限段落或用 Article 替代付费书内容。"
+            ],
+            "runtimeJourneyBoundary": [
+              "不得从一般知识直接执行个人 Runtime Reading、推断或写入。"
+            ],
+            "professionalServiceBoundary": [
+              "不得形成个别化诊断、预测、医疗、法律、投资或其他专业建议。"
+            ],
+            "enterpriseBoundary": [],
+            "developerBoundary": []
+          }
+        }
+      },
+      "proposalContentHash": "sha256:896c4329bb24733e87344f28d2adb255610d61e9213689cb9f5dc4a1b0826131",
+      "reviewDimensionProposals": [
+        {
+          "dimension": "CANONICAL_THESIS",
+          "recommendation": "确认上述 Canonical Thesis 是否准确表达本节点机制。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "ARTICLE_BOUNDARY",
+          "recommendation": "确认 must-establish / distinctions / scope / prohibited claims。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SUPPORTING_QUESTION_BOUNDARY",
+          "recommendation": "当前无 Supporting Question；确认不自动创建。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SEQUENCE_BOUNDARY",
+          "recommendation": "确认 KN-B1-P1-012 → KN-B1-P2-001 → KN-B1-P2-002 的连续性。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "CLAIM_BOUNDARY",
+          "recommendation": "确认内部 Canonical claims 与外部可验证事实边界。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SOURCE_BOUNDARY",
+          "recommendation": "确认 manuscript range KN-B1-P2-001-R01 可作为内部 Canonical source mapping。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "FIGURE_BOUNDARY",
+          "recommendation": "确认 C2 不要求 Figure，后续视觉资产仍由 CAR 决定。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "PUBLIC_CONTENT_BOUNDARY",
+          "recommendation": "确认 Public / Paid Book / Runtime / Professional 内容边界。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "CROSS_NODE_BOUNDARY",
+          "recommendation": "确认前后节点只提供 continuity，不转移 Canonical ownership。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        }
+      ],
+      "approvalState": "pending_human",
+      "promotionAllowed": false,
+      "humanDecision": null
+    },
+    {
+      "reviewIndex": 3,
+      "nodeCode": "KN-B1-P2-009",
+      "titleZhHans": "为什么投影会产生偏向、失真、稳定与更新",
+      "knowledgeVersion": "1.0.0",
+      "locale": "zh-Hans",
+      "requestedProductionRole": "ARTICLE",
+      "requiredOutputs": [
+        "ARTICLE"
+      ],
+      "dispatchTarget": "PJA",
+      "productionPriority": "P0",
+      "articleDecisionRecommendation": "APPROVE_ARTICLE",
+      "recommendationAuthority": "EDITORIAL_RECOMMENDATION_ONLY_NOT_HUMAN_DECISION",
+      "manuscriptMappingReview": {
+        "reference": "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P2-009",
+        "sourceObjectKey": "books/book-1/source/PHI-OS-Book-I-v1.0.0.pdf",
+        "sourceVersion": "1.0.0",
+        "rangeCode": "KN-B1-P2-009-R01",
+        "startHeading": "Projection Bias | 为什么投影会产生偏向",
+        "endHeading": "Collective Coordination | 多个现实如何形成协调",
+        "sectionHash": "7651bf2c8cc45530cec8478522bf7d733b09905cf07b7e2f46a9ccf88c8d3976",
+        "currentMappingStatus": "candidate",
+        "currentAuthorityStatus": "automation_candidate",
+        "humanVerified": false,
+        "humanDecisionRequired": true
+      },
+      "proposedContent": {
+        "canonicalThesis": {
+          "statement": "投影会同时产生偏向、失真、稳定与更新，因为投影必须选择有限信息，而选择一旦持续运行就会形成稳定模式；当投影与新信号、约束或结果不再匹配时，系统又必须修正或重组原有投影。",
+          "mechanism": "选择条件决定哪些差异被放大或忽略，从而形成偏向；模型与输入或结果的不匹配形成失真；重复选择与反馈使投影稳定；持续出现的误差、新证据或环境变化则推动权重调整、边界重构与版本更新。",
+          "necessity": "没有偏向，有限系统无法完成选择；没有稳定，经验无法形成连续性；没有更新，稳定投影会在现实变化后积累失配，因此四者共同构成投影运行的动态平衡。",
+          "systemRole": "本节点把前序的位置、感知、行为、角色与方向整合为 Projection Maintenance，并为后续多个投影如何协调共同现实建立前提。",
+          "continuity": {
+            "fromPreviousNode": "承接 KN-B1-P2-008 对位置、感知、行为、角色与方向塑造现实版本的说明。",
+            "toNextNode": "进入 KN-B1-P2-010，讨论多个不同投影如何在差异中形成协调。"
+          },
+          "partContribution": "解释投影不是静态画面，而是会稳定、偏移、校正与更新的 Runtime。",
+          "bookContribution": "为后续 Feedback、Relationship 与 Collective Reality 中的版本差异提供基础模型。"
+        },
+        "boundaries": {
+          "article": {
+            "boundaryVersion": "1.0.0",
+            "mustEstablish": [
+              "偏向首先来自有限选择，不必然等于错误。",
+              "失真是投影与可用信号或结果之间的失配。",
+              "稳定来自重复权重、反馈与持续条件。",
+              "更新需要新信号、误差或约束改变推动重组。"
+            ],
+            "requiredDistinctions": [
+              "Bias ≠ Error",
+              "Stability ≠ Accuracy",
+              "Update ≠ Complete Replacement",
+              "Distortion ≠ Moral Failure"
+            ],
+            "mustNotClaim": [
+              "不得把所有偏向都描述为心理缺陷或认知错误。",
+              "不得把稳定投影当成客观真理。",
+              "不得声称更新一定更准确或更优。",
+              "不得从一般投影机制推断个人心理状态。"
+            ],
+            "includedScope": [
+              "选择偏向、失配、重复稳定、反馈、误差与版本更新。"
+            ],
+            "excludedScope": [
+              "不展开具体认知偏误清单、精神健康诊断或社会群体标签。",
+              "不提前展开 KN-B1-P2-010 的共同现实协调机制。"
+            ],
+            "assumptions": [
+              "本节点使用 PHI OS Canonical vocabulary 解释一般机制；具体外部事实必须另行来源治理。"
+            ],
+            "unresolvedQuestions": []
+          },
+          "claims": {
+            "requiredClaimFamilies": [
+              "Selection bias",
+              "Projection mismatch",
+              "Stabilization by repetition/feedback",
+              "Update under new constraints"
+            ],
+            "allowedClaimTypes": [
+              "phi_os_interpretation",
+              "canonical_transition",
+              "boundary_statement",
+              "externally_verifiable"
+            ],
+            "sourceRequiredClaims": [
+              "任何具体心理学偏误、神经机制、统计误差或社会传播案例。"
+            ],
+            "internalCanonicalClaims": [
+              "偏向、稳定与更新是有限投影运行的结构性结果。"
+            ],
+            "interpretiveClaims": [],
+            "analogyOnlyStatements": [],
+            "prohibitedClaims": [
+              "偏向必然等于错误。",
+              "稳定必然代表真实性。"
+            ],
+            "qualificationRequirements": [
+              "任何外部事实、数字、研究结论或专业案例必须与 PHI OS Canonical interpretation 分离并进入 Source/Claim review。"
+            ]
+          },
+          "questions": [],
+          "sources": {
+            "sourcePlanVersion": "1.0.0",
+            "sourceRequirement": [
+              "仅使用 Human-approved Canonical Thesis、Boundary 与确认的 Book I manuscript range 作为内部生产依据。",
+              "若 Article 引入外部可验证事实，必须新增正式 Source mapping；Provider 不得自行伪造来源。"
+            ],
+            "internalCanonicalSources": [
+              "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P2-009"
+            ],
+            "knownSources": [],
+            "manuscriptObjectKey": "books/book-1/source/PHI-OS-Book-I-v1.0.0.pdf",
+            "manuscriptCandidateRange": "KN-B1-P2-009-R01",
+            "preferredSourceTypes": [
+              "primary research",
+              "official technical source",
+              "canonical PHI OS manuscript"
+            ],
+            "prohibitedSourceTypes": [
+              "fabricated citation",
+              "untraceable AI-generated source"
+            ],
+            "researchNeeded": [],
+            "verificationNeeded": [],
+            "citationSensitivity": "medium"
+          },
+          "figures": {
+            "figureRequirement": "not_required_by_c2",
+            "requiredFigures": [],
+            "optionalFigures": [
+              "可选循环图显示 Selection → Stable Projection → Mismatch/Feedback → Update，必须保留可逆与多路径。"
+            ],
+            "visualMechanism": "可选循环图显示 Selection → Stable Projection → Mismatch/Feedback → Update，必须保留可逆与多路径。",
+            "assetCreationAllowedAtC2": false,
+            "prohibitedVisualClaims": [
+              "不得让视觉图形扩大 Canonical Thesis 或把概念关系画成未经批准的确定性因果。"
+            ],
+            "accessibilityRequirements": [
+              "如后续由 CAR 生产 Figure，必须提供 zh-Hans alt text、caption 与非颜色唯一编码。"
+            ],
+            "assetSourceBoundary": [
+              "C2 不创建 Asset；任何 Figure 必须进入 CAR governed asset workflow。"
+            ]
+          },
+          "publicContent": {
+            "publicKnowledgeBoundary": [
+              "允许公开解释本节点已冻结的一般 Canonical mechanism 与边界。"
+            ],
+            "paidBookBoundary": [
+              "不得复制 Book I manuscript 的连续受限段落或用 Article 替代付费书内容。"
+            ],
+            "runtimeJourneyBoundary": [
+              "不得从一般知识直接执行个人 Runtime Reading、推断或写入。"
+            ],
+            "professionalServiceBoundary": [
+              "不得形成个别化诊断、预测、医疗、法律、投资或其他专业建议。"
+            ],
+            "enterpriseBoundary": [],
+            "developerBoundary": []
+          }
+        }
+      },
+      "proposalContentHash": "sha256:02cc48e3be61ced9e3eef7c69b84239dac3d7e6d4855735926e1e386c1dfc533",
+      "reviewDimensionProposals": [
+        {
+          "dimension": "CANONICAL_THESIS",
+          "recommendation": "确认上述 Canonical Thesis 是否准确表达本节点机制。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "ARTICLE_BOUNDARY",
+          "recommendation": "确认 must-establish / distinctions / scope / prohibited claims。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SUPPORTING_QUESTION_BOUNDARY",
+          "recommendation": "当前无 Supporting Question；确认不自动创建。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SEQUENCE_BOUNDARY",
+          "recommendation": "确认 KN-B1-P2-008 → KN-B1-P2-009 → KN-B1-P2-010 的连续性。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "CLAIM_BOUNDARY",
+          "recommendation": "确认内部 Canonical claims 与外部可验证事实边界。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SOURCE_BOUNDARY",
+          "recommendation": "确认 manuscript range KN-B1-P2-009-R01 可作为内部 Canonical source mapping。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "FIGURE_BOUNDARY",
+          "recommendation": "确认 C2 不要求 Figure，后续视觉资产仍由 CAR 决定。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "PUBLIC_CONTENT_BOUNDARY",
+          "recommendation": "确认 Public / Paid Book / Runtime / Professional 内容边界。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "CROSS_NODE_BOUNDARY",
+          "recommendation": "确认前后节点只提供 continuity，不转移 Canonical ownership。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        }
+      ],
+      "approvalState": "pending_human",
+      "promotionAllowed": false,
+      "humanDecision": null
+    },
+    {
+      "reviewIndex": 4,
+      "nodeCode": "KN-B1-P3-005",
+      "titleZhHans": "无限现实如何压缩为有限问题",
+      "knowledgeVersion": "1.0.0",
+      "locale": "zh-Hans",
+      "requestedProductionRole": "ARTICLE",
+      "requiredOutputs": [
+        "ARTICLE"
+      ],
+      "dispatchTarget": "PJA",
+      "productionPriority": "P0",
+      "articleDecisionRecommendation": "APPROVE_ARTICLE",
+      "recommendationAuthority": "EDITORIAL_RECOMMENDATION_ONLY_NOT_HUMAN_DECISION",
+      "manuscriptMappingReview": {
+        "reference": "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P3-005",
+        "sourceObjectKey": "books/book-1/source/PHI-OS-Book-I-v1.0.0.pdf",
+        "sourceVersion": "1.0.0",
+        "rangeCode": "KN-B1-P3-005-R01",
+        "startHeading": "Question Compression |为什么无限现实形成有限问题",
+        "endHeading": "Sixteen Fundamental Questions | 为什么现实形成十六种基础问题",
+        "sectionHash": "edf299383b27f0631a4d258ef98ed49ef40d7799a2f6c705ad107c419f646c5b",
+        "currentMappingStatus": "candidate",
+        "currentAuthorityStatus": "automation_candidate",
+        "humanVerified": false,
+        "humanDecisionRequired": true
+      },
+      "proposedContent": {
+        "canonicalThesis": {
+          "statement": "无限开放的现实之所以会被压缩为有限问题，是因为任何实际运行都必须从无数可能差异中选择当前可处理的边界、变量与关系；问题就是这种压缩后的可操作结构。",
+          "mechanism": "系统通过关注范围、约束、时间窗口、资源与目标，把开放现实切分为有限观察对象，并将复杂差异组织成可以辨认、比较与回应的问题形式；问题因此决定了当前哪些现实进入运算，哪些暂时留在边界之外。",
+          "necessity": "如果没有问题压缩，有限 Runtime 无法在无限可能中形成明确输入、判断条件或行动范围；有限问题让复杂现实进入可持续处理，同时也必然留下未被当前问题覆盖的部分。",
+          "systemRole": "本节点把 Reality Grammar 推进为 Question Architecture，说明 Runtime 如何从开放现实形成有限计算与导航入口。",
+          "continuity": {
+            "fromPreviousNode": "承接 KN-B1-P3-004 对现实语法如何组织形成、激活、内化与重组的说明。",
+            "toNextNode": "进入 KN-B1-P3-006，说明一组基础问题如何进一步组织现实辨认、建立、共存与延续。"
+          },
+          "partContribution": "建立 Question Compression 作为运行动力学中的复杂度压缩机制。",
+          "bookContribution": "解释 PHI OS 为什么能够用有限问题读取复杂现实，同时保持对未被压缩部分的边界意识。"
+        },
+        "boundaries": {
+          "article": {
+            "boundaryVersion": "1.0.0",
+            "mustEstablish": [
+              "问题是对开放现实的结构化压缩，而不是现实本身。",
+              "压缩通过边界、变量、时间窗口、资源与目标限制处理范围。",
+              "任何有限问题都会保留盲区与未覆盖现实。"
+            ],
+            "requiredDistinctions": [
+              "Question ≠ Reality",
+              "Compression ≠ Complete Explanation",
+              "Operational Boundary ≠ Ontological Boundary",
+              "Finite Problem ≠ Simple Problem"
+            ],
+            "mustNotClaim": [
+              "不得声称现实能够被有限问题完全穷尽。",
+              "不得把问题分类当作自然界唯一结构。",
+              "不得在本节点提前宣称十六个问题是唯一可能分类。"
+            ],
+            "includedScope": [
+              "问题形成、复杂度压缩、边界选择、可操作变量与未覆盖空间。"
+            ],
+            "excludedScope": [
+              "不完整展开十六基础问题的内容。",
+              "不讨论具体求解算法、个人问诊或专业诊断。"
+            ],
+            "assumptions": [
+              "本节点使用 PHI OS Canonical vocabulary 解释一般机制；具体外部事实必须另行来源治理。"
+            ],
+            "unresolvedQuestions": []
+          },
+          "claims": {
+            "requiredClaimFamilies": [
+              "Reality openness",
+              "Boundary selection",
+              "Question compression",
+              "Operational tractability"
+            ],
+            "allowedClaimTypes": [
+              "phi_os_interpretation",
+              "canonical_transition",
+              "boundary_statement",
+              "externally_verifiable"
+            ],
+            "sourceRequiredClaims": [
+              "任何关于信息论、计算复杂度、科学问题形成或认知容量的具体事实。"
+            ],
+            "internalCanonicalClaims": [
+              "问题是有限 Runtime 对开放现实进行结构压缩后的可操作入口。"
+            ],
+            "interpretiveClaims": [],
+            "analogyOnlyStatements": [],
+            "prohibitedClaims": [
+              "有限问题可以穷尽现实。",
+              "问题边界天然等于现实边界。"
+            ],
+            "qualificationRequirements": [
+              "任何外部事实、数字、研究结论或专业案例必须与 PHI OS Canonical interpretation 分离并进入 Source/Claim review。"
+            ]
+          },
+          "questions": [],
+          "sources": {
+            "sourcePlanVersion": "1.0.0",
+            "sourceRequirement": [
+              "仅使用 Human-approved Canonical Thesis、Boundary 与确认的 Book I manuscript range 作为内部生产依据。",
+              "若 Article 引入外部可验证事实，必须新增正式 Source mapping；Provider 不得自行伪造来源。"
+            ],
+            "internalCanonicalSources": [
+              "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P3-005"
+            ],
+            "knownSources": [],
+            "manuscriptObjectKey": "books/book-1/source/PHI-OS-Book-I-v1.0.0.pdf",
+            "manuscriptCandidateRange": "KN-B1-P3-005-R01",
+            "preferredSourceTypes": [
+              "primary research",
+              "official technical source",
+              "canonical PHI OS manuscript"
+            ],
+            "prohibitedSourceTypes": [
+              "fabricated citation",
+              "untraceable AI-generated source"
+            ],
+            "researchNeeded": [],
+            "verificationNeeded": [],
+            "citationSensitivity": "medium"
+          },
+          "figures": {
+            "figureRequirement": "not_required_by_c2",
+            "requiredFigures": [],
+            "optionalFigures": [
+              "可选漏斗/边界图显示 Open Reality → Constraints → Finite Question，同时必须显示 Excluded/Unresolved Reality。"
+            ],
+            "visualMechanism": "可选漏斗/边界图显示 Open Reality → Constraints → Finite Question，同时必须显示 Excluded/Unresolved Reality。",
+            "assetCreationAllowedAtC2": false,
+            "prohibitedVisualClaims": [
+              "不得让视觉图形扩大 Canonical Thesis 或把概念关系画成未经批准的确定性因果。"
+            ],
+            "accessibilityRequirements": [
+              "如后续由 CAR 生产 Figure，必须提供 zh-Hans alt text、caption 与非颜色唯一编码。"
+            ],
+            "assetSourceBoundary": [
+              "C2 不创建 Asset；任何 Figure 必须进入 CAR governed asset workflow。"
+            ]
+          },
+          "publicContent": {
+            "publicKnowledgeBoundary": [
+              "允许公开解释本节点已冻结的一般 Canonical mechanism 与边界。"
+            ],
+            "paidBookBoundary": [
+              "不得复制 Book I manuscript 的连续受限段落或用 Article 替代付费书内容。"
+            ],
+            "runtimeJourneyBoundary": [
+              "不得从一般知识直接执行个人 Runtime Reading、推断或写入。"
+            ],
+            "professionalServiceBoundary": [
+              "不得形成个别化诊断、预测、医疗、法律、投资或其他专业建议。"
+            ],
+            "enterpriseBoundary": [],
+            "developerBoundary": []
+          }
+        }
+      },
+      "proposalContentHash": "sha256:dc9ddbc6e571f04d46c820e611a956b55354d42c7f9d2a095fa80c11dd9dc672",
+      "reviewDimensionProposals": [
+        {
+          "dimension": "CANONICAL_THESIS",
+          "recommendation": "确认上述 Canonical Thesis 是否准确表达本节点机制。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "ARTICLE_BOUNDARY",
+          "recommendation": "确认 must-establish / distinctions / scope / prohibited claims。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SUPPORTING_QUESTION_BOUNDARY",
+          "recommendation": "当前无 Supporting Question；确认不自动创建。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SEQUENCE_BOUNDARY",
+          "recommendation": "确认 KN-B1-P3-004 → KN-B1-P3-005 → KN-B1-P3-006 的连续性。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "CLAIM_BOUNDARY",
+          "recommendation": "确认内部 Canonical claims 与外部可验证事实边界。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SOURCE_BOUNDARY",
+          "recommendation": "确认 manuscript range KN-B1-P3-005-R01 可作为内部 Canonical source mapping。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "FIGURE_BOUNDARY",
+          "recommendation": "确认 C2 不要求 Figure，后续视觉资产仍由 CAR 决定。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "PUBLIC_CONTENT_BOUNDARY",
+          "recommendation": "确认 Public / Paid Book / Runtime / Professional 内容边界。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "CROSS_NODE_BOUNDARY",
+          "recommendation": "确认前后节点只提供 continuity，不转移 Canonical ownership。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        }
+      ],
+      "approvalState": "pending_human",
+      "promotionAllowed": false,
+      "humanDecision": null
+    },
+    {
+      "reviewIndex": 5,
+      "nodeCode": "KN-B1-P3-015",
+      "titleZhHans": "运行网络如何形成状态、反馈、重组与连续性",
+      "knowledgeVersion": "1.0.0",
+      "locale": "zh-Hans",
+      "requestedProductionRole": "ARTICLE",
+      "requiredOutputs": [
+        "ARTICLE"
+      ],
+      "dispatchTarget": "PJA",
+      "productionPriority": "P0",
+      "articleDecisionRecommendation": "APPROVE_ARTICLE",
+      "recommendationAuthority": "EDITORIAL_RECOMMENDATION_ONLY_NOT_HUMAN_DECISION",
+      "manuscriptMappingReview": {
+        "reference": "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P3-015",
+        "sourceObjectKey": "books/book-1/source/PHI-OS-Book-I-v1.0.0.pdf",
+        "sourceVersion": "1.0.0",
+        "rangeCode": "KN-B1-P3-015-R01",
+        "startHeading": "Runtime State Formation | 所有运行层级如何共同形成当前状态",
+        "endHeading": null,
+        "sectionHash": "edf299383b27f0631a4d258ef98ed49ef40d7799a2f6c705ad107c419f646c5b",
+        "currentMappingStatus": "candidate",
+        "currentAuthorityStatus": "automation_candidate",
+        "humanVerified": false,
+        "humanDecisionRequired": true
+      },
+      "proposedContent": {
+        "canonicalThesis": {
+          "statement": "运行网络之所以能够形成状态、反馈、重组与连续性，是因为当前现实不是由单一节点决定，而是由多个运行关系在同一时间窗口中的激活、权重、约束与反馈共同形成，并在变化后保留足够结构继续运行。",
+          "mechanism": "网络中的节点和关系以不同强度参与当前状态；输出成为新的输入并形成反馈；反馈改变权重、连接或边界，从而触发局部或整体重组；只要关键关系仍能传递状态并维持必要约束，系统就可以在变化中保持连续性。",
+          "necessity": "没有状态整合，网络只能是离散活动；没有反馈，运行无法根据结果调整；没有重组，网络会在条件变化后失配；没有连续性，系统无法把前后状态连接为持续 Runtime。",
+          "systemRole": "本节点收束第三部运行动力学，把激活、权重、场与时间整合为网络级状态，并把书的逻辑桥接到第四部生命载体。",
+          "continuity": {
+            "fromPreviousNode": "承接 KN-B1-P3-014 对激活窗口、权重、场与时间如何放大或结束运动的说明。",
+            "toNextNode": "进入 KN-B1-P4-001，解释持续 Runtime 为什么需要进一步压缩并承载为生命组织。"
+          },
+          "partContribution": "完成 Runtime Dynamics 从局部激活到网络状态、反馈、重组与连续性的整合。",
+          "bookContribution": "为后续 Carrier、Conscious、Relational 与 Collective Runtime 提供统一网络运行基础。"
+        },
+        "boundaries": {
+          "article": {
+            "boundaryVersion": "1.0.0",
+            "mustEstablish": [
+              "当前状态由多个节点与关系共同形成。",
+              "反馈把运行结果重新带回网络并改变后续状态。",
+              "重组可以改变连接、权重或边界而不必摧毁全部结构。",
+              "连续性来自变化中仍被维持的关键关系与约束。"
+            ],
+            "requiredDistinctions": [
+              "State ≠ Single Cause",
+              "Feedback ≠ Simple Loop",
+              "Reorganization ≠ Total Reset",
+              "Continuity ≠ No Change"
+            ],
+            "mustNotClaim": [
+              "不得把网络状态归因于单一中央控制器。",
+              "不得把反馈写成必然稳定或必然自我修复。",
+              "不得声称连续性要求结构完全不变。"
+            ],
+            "includedScope": [
+              "网络状态、节点参与、关系权重、反馈、重组与连续性。"
+            ],
+            "excludedScope": [
+              "不展开具体神经网络、社会网络或计算机网络技术细节。",
+              "不提前进入第四部生命载体的生理机制。"
+            ],
+            "assumptions": [
+              "本节点使用 PHI OS Canonical vocabulary 解释一般机制；具体外部事实必须另行来源治理。"
+            ],
+            "unresolvedQuestions": []
+          },
+          "claims": {
+            "requiredClaimFamilies": [
+              "Distributed state formation",
+              "Feedback",
+              "Network reorganization",
+              "Continuity under change"
+            ],
+            "allowedClaimTypes": [
+              "phi_os_interpretation",
+              "canonical_transition",
+              "boundary_statement",
+              "externally_verifiable"
+            ],
+            "sourceRequiredClaims": [
+              "任何具体复杂系统、控制论、神经网络或生态网络事实。"
+            ],
+            "internalCanonicalClaims": [
+              "Runtime state is network-formed rather than single-node determined."
+            ],
+            "interpretiveClaims": [],
+            "analogyOnlyStatements": [],
+            "prohibitedClaims": [
+              "网络必然自动稳定。",
+              "反馈总能恢复原状态。"
+            ],
+            "qualificationRequirements": [
+              "任何外部事实、数字、研究结论或专业案例必须与 PHI OS Canonical interpretation 分离并进入 Source/Claim review。"
+            ]
+          },
+          "questions": [],
+          "sources": {
+            "sourcePlanVersion": "1.0.0",
+            "sourceRequirement": [
+              "仅使用 Human-approved Canonical Thesis、Boundary 与确认的 Book I manuscript range 作为内部生产依据。",
+              "若 Article 引入外部可验证事实，必须新增正式 Source mapping；Provider 不得自行伪造来源。"
+            ],
+            "internalCanonicalSources": [
+              "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P3-015"
+            ],
+            "knownSources": [],
+            "manuscriptObjectKey": "books/book-1/source/PHI-OS-Book-I-v1.0.0.pdf",
+            "manuscriptCandidateRange": "KN-B1-P3-015-R01",
+            "preferredSourceTypes": [
+              "primary research",
+              "official technical source",
+              "canonical PHI OS manuscript"
+            ],
+            "prohibitedSourceTypes": [
+              "fabricated citation",
+              "untraceable AI-generated source"
+            ],
+            "researchNeeded": [],
+            "verificationNeeded": [],
+            "citationSensitivity": "medium"
+          },
+          "figures": {
+            "figureRequirement": "not_required_by_c2",
+            "requiredFigures": [],
+            "optionalFigures": [
+              "可选网络图显示 Nodes/Relations → State → Feedback → Reorganization → Continuity，禁止中央控制器式视觉。"
+            ],
+            "visualMechanism": "可选网络图显示 Nodes/Relations → State → Feedback → Reorganization → Continuity，禁止中央控制器式视觉。",
+            "assetCreationAllowedAtC2": false,
+            "prohibitedVisualClaims": [
+              "不得让视觉图形扩大 Canonical Thesis 或把概念关系画成未经批准的确定性因果。"
+            ],
+            "accessibilityRequirements": [
+              "如后续由 CAR 生产 Figure，必须提供 zh-Hans alt text、caption 与非颜色唯一编码。"
+            ],
+            "assetSourceBoundary": [
+              "C2 不创建 Asset；任何 Figure 必须进入 CAR governed asset workflow。"
+            ]
+          },
+          "publicContent": {
+            "publicKnowledgeBoundary": [
+              "允许公开解释本节点已冻结的一般 Canonical mechanism 与边界。"
+            ],
+            "paidBookBoundary": [
+              "不得复制 Book I manuscript 的连续受限段落或用 Article 替代付费书内容。"
+            ],
+            "runtimeJourneyBoundary": [
+              "不得从一般知识直接执行个人 Runtime Reading、推断或写入。"
+            ],
+            "professionalServiceBoundary": [
+              "不得形成个别化诊断、预测、医疗、法律、投资或其他专业建议。"
+            ],
+            "enterpriseBoundary": [],
+            "developerBoundary": []
+          }
+        }
+      },
+      "proposalContentHash": "sha256:a1d0fb294291fb7e30226d6f0f7f71dc7d9e4cb8351f8cb263a4cda16cb62e90",
+      "reviewDimensionProposals": [
+        {
+          "dimension": "CANONICAL_THESIS",
+          "recommendation": "确认上述 Canonical Thesis 是否准确表达本节点机制。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "ARTICLE_BOUNDARY",
+          "recommendation": "确认 must-establish / distinctions / scope / prohibited claims。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SUPPORTING_QUESTION_BOUNDARY",
+          "recommendation": "当前无 Supporting Question；确认不自动创建。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SEQUENCE_BOUNDARY",
+          "recommendation": "确认 KN-B1-P3-014 → KN-B1-P3-015 → KN-B1-P4-001 的连续性。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "CLAIM_BOUNDARY",
+          "recommendation": "确认内部 Canonical claims 与外部可验证事实边界。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SOURCE_BOUNDARY",
+          "recommendation": "确认 manuscript range KN-B1-P3-015-R01 可作为内部 Canonical source mapping。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "FIGURE_BOUNDARY",
+          "recommendation": "确认 C2 不要求 Figure，后续视觉资产仍由 CAR 决定。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "PUBLIC_CONTENT_BOUNDARY",
+          "recommendation": "确认 Public / Paid Book / Runtime / Professional 内容边界。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "CROSS_NODE_BOUNDARY",
+          "recommendation": "确认前后节点只提供 continuity，不转移 Canonical ownership。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        }
+      ],
+      "approvalState": "pending_human",
+      "promotionAllowed": false,
+      "humanDecision": null
+    },
+    {
+      "reviewIndex": 6,
+      "nodeCode": "KN-B1-P4-006",
+      "titleZhHans": "运行成本、恢复与内部连接如何维持身体稳定",
+      "knowledgeVersion": "1.0.0",
+      "locale": "zh-Hans",
+      "requestedProductionRole": "ARTICLE",
+      "requiredOutputs": [
+        "ARTICLE"
+      ],
+      "dispatchTarget": "PJA",
+      "productionPriority": "P0",
+      "articleDecisionRecommendation": "APPROVE_ARTICLE",
+      "recommendationAuthority": "EDITORIAL_RECOMMENDATION_ONLY_NOT_HUMAN_DECISION",
+      "manuscriptMappingReview": {
+        "reference": "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P4-006",
+        "sourceObjectKey": "books/book-1/source/PHI-OS-Book-I-v1.0.0.pdf",
+        "sourceVersion": "1.0.0",
+        "rangeCode": "KN-B1-P4-006-R01",
+        "startHeading": "Internal Connectivity | 现实如何在载体内部形成连接运行",
+        "endHeading": "Determination Runtime |现实在什么条件下被允许进入",
+        "sectionHash": "850031096453eef73b0fb2bd1eea6a734181b018199a3a91e37c97bad61e049b",
+        "currentMappingStatus": "candidate",
+        "currentAuthorityStatus": "automation_candidate",
+        "humanVerified": false,
+        "humanDecisionRequired": true
+      },
+      "proposedContent": {
+        "canonicalThesis": {
+          "statement": "身体稳定不是零成本的静止状态，而是运行成本、恢复能力与内部连接持续协调的结果：载体必须支付资源以维持活动，又必须通过恢复补充可用能力，并依赖内部连接把局部状态与整体需要持续交换。",
+          "mechanism": "每次感知、调节、行动与维护都会占用有限资源并形成运行成本；恢复过程重新建立可用容量与调节余量；内部连接让不同层级传递状态、需求与反馈，使资源配置和恢复能够根据当前条件调整。",
+          "necessity": "如果成本长期超过恢复，载体的可用能力会下降；如果内部连接失效，局部变化难以被整体读取与协调；稳定因此依赖成本、恢复与连接之间持续而非一次性的平衡。",
+          "systemRole": "本节点承接载体能力、约束、完整性与适应，进一步说明有限身体如何维持持续 Runtime，并为下一节点环境与摄取条件如何调节输入做准备。",
+          "continuity": {
+            "fromPreviousNode": "承接 KN-B1-P4-005 对载体能力、约束、完整性与适应如何共同塑造运行的说明。",
+            "toNextNode": "进入 KN-B1-P4-007，讨论感官、环境与摄取条件如何改变载体接收的现实输入。"
+          },
+          "partContribution": "解释 Human Runtime Carrier 的 maintenance：成本、恢复与内部连接如何共同维持可运行状态。",
+          "bookContribution": "把抽象 Runtime Cost 与 Recovery 转化为有限生命载体的一般运行边界，同时保持非医学、非诊断定位。"
+        },
+        "boundaries": {
+          "article": {
+            "boundaryVersion": "1.0.0",
+            "mustEstablish": [
+              "身体持续运行会产生资源与调节成本。",
+              "恢复用于重建可用容量与调节余量。",
+              "内部连接使局部状态能够被更大范围的载体协调。",
+              "稳定是动态维持结果，不是无变化。"
+            ],
+            "requiredDistinctions": [
+              "Stability ≠ Inactivity",
+              "Recovery ≠ Guaranteed Restoration",
+              "Runtime Cost ≠ Moral Weakness",
+              "Carrier mechanism ≠ Medical diagnosis"
+            ],
+            "mustNotClaim": [
+              "不得诊断疾病、疲劳原因、营养状态或心理状态。",
+              "不得给出睡眠、饮食、运动、治疗或医疗建议。",
+              "不得把一般 Runtime Cost 模型声称为具体生理机制的完整解释。"
+            ],
+            "includedScope": [
+              "有限资源、运行成本、恢复窗口、内部连接、反馈与动态稳定。"
+            ],
+            "excludedScope": [
+              "不讨论具体疾病、器官诊断、药物、治疗、营养方案或健康个案。",
+              "不把一般模型用于个人风险判断。"
+            ],
+            "assumptions": [
+              "本节点使用 PHI OS Canonical vocabulary 解释一般机制；具体外部事实必须另行来源治理。"
+            ],
+            "unresolvedQuestions": []
+          },
+          "claims": {
+            "requiredClaimFamilies": [
+              "Finite carrier cost",
+              "Recovery capacity",
+              "Internal connectivity",
+              "Dynamic stability"
+            ],
+            "allowedClaimTypes": [
+              "phi_os_interpretation",
+              "canonical_transition",
+              "boundary_statement",
+              "externally_verifiable"
+            ],
+            "sourceRequiredClaims": [
+              "任何具体生理、医学、睡眠、营养、运动或神经机制事实。"
+            ],
+            "internalCanonicalClaims": [
+              "身体稳定依赖成本、恢复与内部连接的持续协调。"
+            ],
+            "interpretiveClaims": [],
+            "analogyOnlyStatements": [],
+            "prohibitedClaims": [
+              "PHI OS 可以从一般模型诊断个人身体状态。",
+              "恢复机制保证恢复到原状态。"
+            ],
+            "qualificationRequirements": [
+              "任何外部事实、数字、研究结论或专业案例必须与 PHI OS Canonical interpretation 分离并进入 Source/Claim review。"
+            ]
+          },
+          "questions": [],
+          "sources": {
+            "sourcePlanVersion": "1.0.0",
+            "sourceRequirement": [
+              "仅使用 Human-approved Canonical Thesis、Boundary 与确认的 Book I manuscript range 作为内部生产依据。",
+              "若 Article 引入外部可验证事实，必须新增正式 Source mapping；Provider 不得自行伪造来源。"
+            ],
+            "internalCanonicalSources": [
+              "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P4-006"
+            ],
+            "knownSources": [],
+            "manuscriptObjectKey": "books/book-1/source/PHI-OS-Book-I-v1.0.0.pdf",
+            "manuscriptCandidateRange": "KN-B1-P4-006-R01",
+            "preferredSourceTypes": [
+              "primary research",
+              "official technical source",
+              "canonical PHI OS manuscript"
+            ],
+            "prohibitedSourceTypes": [
+              "fabricated citation",
+              "untraceable AI-generated source"
+            ],
+            "researchNeeded": [],
+            "verificationNeeded": [],
+            "citationSensitivity": "high"
+          },
+          "figures": {
+            "figureRequirement": "not_required_by_c2",
+            "requiredFigures": [],
+            "optionalFigures": [
+              "可选概念图显示 Cost ↔ Recovery ↔ Internal Connectivity ↔ Stability，明确为非医学概念图。"
+            ],
+            "visualMechanism": "可选概念图显示 Cost ↔ Recovery ↔ Internal Connectivity ↔ Stability，明确为非医学概念图。",
+            "assetCreationAllowedAtC2": false,
+            "prohibitedVisualClaims": [
+              "不得让视觉图形扩大 Canonical Thesis 或把概念关系画成未经批准的确定性因果。"
+            ],
+            "accessibilityRequirements": [
+              "如后续由 CAR 生产 Figure，必须提供 zh-Hans alt text、caption 与非颜色唯一编码。"
+            ],
+            "assetSourceBoundary": [
+              "C2 不创建 Asset；任何 Figure 必须进入 CAR governed asset workflow。"
+            ]
+          },
+          "publicContent": {
+            "publicKnowledgeBoundary": [
+              "允许公开解释本节点已冻结的一般 Canonical mechanism 与边界。"
+            ],
+            "paidBookBoundary": [
+              "不得复制 Book I manuscript 的连续受限段落或用 Article 替代付费书内容。"
+            ],
+            "runtimeJourneyBoundary": [
+              "不得从一般知识直接执行个人 Runtime Reading、推断或写入。"
+            ],
+            "professionalServiceBoundary": [
+              "不得形成个别化诊断、预测、医疗、法律、投资或其他专业建议。"
+            ],
+            "enterpriseBoundary": [],
+            "developerBoundary": []
+          }
+        }
+      },
+      "proposalContentHash": "sha256:23591767c2a47dfbc551a4f22cf83d73d55371e2f2d28850ebfce2f1965ffc57",
+      "reviewDimensionProposals": [
+        {
+          "dimension": "CANONICAL_THESIS",
+          "recommendation": "确认上述 Canonical Thesis 是否准确表达本节点机制。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "ARTICLE_BOUNDARY",
+          "recommendation": "确认 must-establish / distinctions / scope / prohibited claims。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SUPPORTING_QUESTION_BOUNDARY",
+          "recommendation": "当前无 Supporting Question；确认不自动创建。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SEQUENCE_BOUNDARY",
+          "recommendation": "确认 KN-B1-P4-005 → KN-B1-P4-006 → KN-B1-P4-007 的连续性。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "CLAIM_BOUNDARY",
+          "recommendation": "确认内部 Canonical claims 与外部可验证事实边界。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "SOURCE_BOUNDARY",
+          "recommendation": "确认 manuscript range KN-B1-P4-006-R01 可作为内部 Canonical source mapping。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "FIGURE_BOUNDARY",
+          "recommendation": "确认 C2 不要求 Figure，后续视觉资产仍由 CAR 决定。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "PUBLIC_CONTENT_BOUNDARY",
+          "recommendation": "确认 Public / Paid Book / Runtime / Professional 内容边界。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        },
+        {
+          "dimension": "CROSS_NODE_BOUNDARY",
+          "recommendation": "确认前后节点只提供 continuity，不转移 Canonical ownership。",
+          "state": "PROPOSED_FOR_HUMAN_REVIEW",
+          "humanFinding": null
+        }
+      ],
+      "approvalState": "pending_human",
+      "promotionAllowed": false,
+      "humanDecision": null
+    }
+  ],
+  "effects": {
+    "humanProductionDecisionCreated": false,
+    "c2Frozen": false,
+    "c3Rebuilt": false,
+    "productionPlanFrozen": false,
+    "productionWaveFrozen": false,
+    "productionBriefGenerated": false,
+    "providerInvoked": false,
+    "candidateCreated": false,
+    "published": false
+  },
+  "proposalSetDigest": "sha256:df75340719789d8c55a71542b5566576a1239ec095fbb9a43c9d0f17f34ffb1f"
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-GOVERNED-PERSONAL-READING-CONTRACT-v2.0.0",
+  "work": "W49",
+  "baselineCommit": "22904e2f6db4c980ea86083b963c722c69f2fe7e",
+  "status": "ACTIVE_MACHINE_VERIFIED",
+  "outputSchema": "PHI-OS-GOVERNED-PERSONAL-READING-v2.0.0",
+  "mayConsume": [
+    "PHI-OS-ACCEPTED-METHOD-READING-ENVELOPE-v1.0.0[]",
+    "PHI-OS-CROSS-METHOD-RUNTIME-READING-IR-v2.0.0 optional",
+    "PHI-OS-PROFILE-SIGNAL-ENVELOPE-v1[] optional",
+    "PHI-OS-CROSS-SOURCE-PERSPECTIVE-IR-v1 optional",
+    "PHI-OS-CURRENT-REALITY-OBSERVATION-v1 optional",
+    "PHI-OS-REALITY-COMPARISON-v1 optional",
+    "W47 Section Registry",
+    "W49 Composition Rules"
+  ],
+  "mustNotConsumeDirectly": [
+    "raw planets",
+    "raw pillars",
+    "raw palaces",
+    "raw numbers",
+    "raw ECR structures",
+    "raw self-assessment answers without admitted scoring",
+    "raw external profile labels without provider provenance"
+  ],
+  "rules": {
+    "deterministic": true,
+    "profileOptional": true,
+    "profileRequiresPrfW12WhenPresent": true,
+    "oneFreeGovernedReportAuthority": true,
+    "paidNarrativeCreated": false,
+    "customerPublicationCutoverExecuted": false
+  },
+  "gate": "check:ppr-r2:w49-personal-reading-composer"
+}

@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const inv=read('content/knowledge/manuscripts/extraction/book-3-full-section-inventory-v1.json');
+const sem=read('content/knowledge/manuscripts/extraction/book-3-final-section-semantics-v1.json');
+const reg=read('content/knowledge/registry/successors/kau-r6e-book3-final/canonical-nodes-v1.json');
+const bp=read('content/knowledge/blueprints/successors/kau-r6e-book3-final/book-3-knowledge-blueprint-v3.json');
+const auth=read('content/knowledge/contracts/book-3-final-canonical-authority-v1.json');
+const mig=read('content/knowledge/migrations/kau-r6e-book3-final-canonical-migration-v1.json');
+const old=read('content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json');
+const sections=inv.sections.filter(x=>x.segmentType==='SECTION');
+assert.equal(sections.length,103);assert.equal(sections.filter(x=>x.partCode==='P8').length,60);assert.equal(sections.filter(x=>x.partCode==='P9').length,43);
+assert.equal(sem.records.length,103);assert.equal(reg.nodes.length,103);assert.equal(bp.plannedCanonicalNodes,103);assert.equal(auth.finalAuthority.canonicalNodeCount,103);
+assert.equal(new Set(reg.nodes.map(x=>x.nodeCode)).size,103);assert.equal(reg.nodes.filter(x=>x.partCode==='P8').length,60);assert.equal(reg.nodes.filter(x=>x.partCode==='P9').length,43);
+const secByCode=new Map(sections.map(x=>[x.sectionCode,x]));
+for(const n of reg.nodes){const b=n.canonicalSourceBinding;const s=secByCode.get(b.sectionCode);assert.ok(s,b.sectionCode);assert.equal(s.textSha256,b.textSha256);assert.deepEqual([s.startPage,s.endPage],b.pages);assert.ok(n.canonicalQuestion);assert.ok(n.titleZhHans);assert.equal(n.publicationBookCode,'BOOK-3');assert.equal(n.canonicalReconciliation.predecessorIdentityMutationPerformed,false);}
+const oldB3=old.nodes.filter(x=>x.publicationBookCode==='BOOK-3');assert.equal(oldB3.length,105);assert.equal(mig.counts.oldBook3Nodes,105);assert.equal(mig.counts.finalBook3Nodes,103);assert.equal(mig.counts.silentDeletion,0);assert.equal(mig.counts.oldMeaningMutation,0);
+assert.equal(auth.invariants.completedManuscriptIsSourceTruth,true);assert.equal(auth.invariants.old105Book3NodesRemainHistorical,true);assert.equal(auth.invariants.otherBooksUnaffected,true);
+console.log('✓ KAU-R6E Book III final canonical authority passed: 103 completed-manuscript sections -> 103 final Canonical Nodes (P8 60 + P9 43).');
+console.log('✓ Pre-completion 86-node / interim 105-node structures are not final Book III authority; old 105 identities remain historical compatibility evidence without meaning mutation.');

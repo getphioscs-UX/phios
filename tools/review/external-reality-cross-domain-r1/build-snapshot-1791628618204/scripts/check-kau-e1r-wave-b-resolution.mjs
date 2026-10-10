@@ -1,0 +1,34 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const read=async f=>JSON.parse(await fs.readFile(f,'utf8'));
+const d=await read('content/knowledge/authoring/extensions/legacy-supporting-source/review-resolution/decisions/legacy-human-review-wave-b-decisions-v1.json');
+const r=await read('content/knowledge/authoring/extensions/legacy-supporting-source/review-resolution/resolved/legacy-human-review-wave-b-resolution-v1.json');
+const a=await read('content/knowledge/authoring/extensions/legacy-supporting-source/acceptance/kau-e1r-wave-b-human-review-resolution-acceptance-v1.json');
+const q=await read('content/knowledge/authoring/extensions/legacy-supporting-source/review/legacy-unified-language-human-review-queue-v1.json');
+const v3=await read('content/knowledge/authoring/extensions/legacy-supporting-source/review-resolution/batches/legacy-human-review-resolution-registry-v3.json');
+assert.equal(d.decisionCount,38);
+assert.equal(r.decisionCount,38);
+assert.equal(a.checks.decisionCount,38);
+assert.equal(a.checks.acceptedRelationshipCount,33);
+assert.equal(a.checks.deferredCount,5);
+assert.equal(a.checks.canonicalNodeRegistryMutated,false);
+assert.equal(a.checks.meaningAuthorityMutated,false);
+assert.equal(a.checks.productionReadinessPromoted,false);
+const codes=new Set(q.entries.map(x=>x.reviewCode));
+for(const x of d.decisions){
+  assert.ok(codes.has(x.reviewCode));
+  assert.equal(x.reviewedBy,'TL');
+  assert.ok(x.reviewedAt);
+  assert.ok(x.humanReason);
+  if(x.humanDecision==='DEFER') assert.equal(x.acceptedCanonicalNodeReferences.length,0);
+  else assert.ok(x.acceptedCanonicalNodeReferences.length>0);
+}
+assert.equal(v3.progress.humanReviewed,59);
+assert.equal(v3.progress.pendingHumanDecision,126);
+assert.equal(v3.progress.acceptedSupporting,50);
+assert.equal(v3.progress.deferred,9);
+assert.equal(v3.nextState,'WAVE_C_HUMAN_REVIEW');
+const statuses=Object.fromEntries(v3.batches.map(x=>[x.batchCode,x.status]));
+assert.equal(statuses['KAU-E1R-WAVE-A'],'HUMAN_REVIEW_RESOLVED');
+assert.equal(statuses['KAU-E1R-WAVE-B'],'HUMAN_REVIEW_RESOLVED');
+console.log('✓ KAU-E1R Wave B: 38 explicit TL decisions recorded; 33 supporting relationships accepted, 5 deferred. Cumulative: 59/185 reviewed, 50 accepted, 9 deferred; no Canonical/Meaning/KPP mutation.');

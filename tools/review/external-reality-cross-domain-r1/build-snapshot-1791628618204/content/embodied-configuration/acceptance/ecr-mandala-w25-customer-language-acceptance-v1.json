@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-ECR-MANDALA-W25-CUSTOMER-LANGUAGE-ACCEPTANCE-v1.0.0",
+  "work": "ECR-PHI-MANDALA-W25",
+  "baselineCommit": "7c6126404fe8e257b44937a0149bf23c837c538f",
+  "status": "CUSTOMER_LANGUAGE_ACCEPTED",
+  "rule": "HUMAN_LABEL_THEN_PLAIN_LANGUAGE_EXPLANATION_THEN_OPTIONAL_TECHNICAL_CODE",
+  "protectedCurrentCodes": [
+    "CC08",
+    "G11",
+    "Q11",
+    "R7",
+    "D8",
+    "ECR-H41",
+    "A1"
+  ],
+  "forbiddenDefaultRawPhrases": [
+    "SOLAR_ANCHOR_DRIVER_SECTOR_DISTANCE_V1",
+    "EQUAL_SECTOR_ENVIRONMENT_FIRST",
+    "ADMITTED_COMPOSITION_RULESET",
+    "solar-anchor sector-distance rule",
+    "environment-first configuration",
+    "admitted composition"
+  ],
+  "customerPresentationPolicy": {
+    "internalCodeIsPrimaryHeading": false,
+    "selectedCoordinateExplanationPrecedesMandalaSvg": true,
+    "technicalCodesRetainedForTraceability": true,
+    "governanceTerminologyUsedAsPrimaryCustomerHeading": false
+  },
+  "acceptanceEvidence": {
+    "machineGate": "scripts/check-ecr-mandala-w25-customer-language.mjs",
+    "machineGatePassed": true
+  }
+}

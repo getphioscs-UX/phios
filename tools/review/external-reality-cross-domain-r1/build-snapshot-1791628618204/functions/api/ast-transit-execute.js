@@ -1,0 +1,4 @@
+import {executeAstTransitRequest} from '../ast-transit/transit-runtime.js';
+function json(payload,status=200){return new Response(JSON.stringify(payload),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff'}});}
+export async function onRequestPost({request}){let body;try{body=await request.json();}catch{return json({ok:false,error:'INVALID_JSON'},400);}if(body?.schemaVersion!=='PHI-OS-AST-TRANSIT-EXECUTION-REQUEST-v1.0.0')return json({ok:false,error:'ASTT_EXECUTION_SCHEMA_INVALID'},400);try{const {projection}=await executeAstTransitRequest(body);return json({ok:true,result:projection},200);}catch(error){return json({ok:false,error:error?.code||'ASTT_EXECUTION_FAILED_CLOSED'},error?.status||500);}}
+export async function onRequestGet(){return json({ok:false,error:'ASTT_EXECUTION_POST_ONLY'},405);}

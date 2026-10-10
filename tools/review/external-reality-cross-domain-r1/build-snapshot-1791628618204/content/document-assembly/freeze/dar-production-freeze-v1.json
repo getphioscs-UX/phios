@@ -1,0 +1,36 @@
+{
+  "freezeCode": "PHI-OS-DAR-W24-PRODUCTION-FREEZE-v1",
+  "freezeVersion": "1.0.0",
+  "work": "DAR-W24",
+  "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+  "status": "FROZEN_RUNTIME_BOUNDARY_FAIL_CLOSED",
+  "finalChecker": "npm run check:dar",
+  "frozenInvariants": [
+    "DAR != Legal Judgment Runtime",
+    "DAR != AI Clause Generator",
+    "DAR != Will Execution Authority",
+    "Renderer != Clause Authority",
+    "EXPORTED != LEGALLY_EXECUTED",
+    "No silent share repair",
+    "No unsupported jurisdiction export",
+    "No unresolved placeholder export",
+    "Private download by default",
+    "No URL/query PII",
+    "FDR facts remain FDR-owned"
+  ],
+  "productionEnablementRequires": [
+    "jurisdiction registry status PRODUCTION_APPROVED",
+    "production-enabled immutable assembly template",
+    "approved clause bundle admitted by DAR-W12 authority",
+    "approved execution requirement version",
+    "passing document validation",
+    "passing human review confirmations",
+    "no escalation block"
+  ],
+  "mutationPolicy": {
+    "existingExportVersionImmutable": true,
+    "changedInputCreatesNewDocumentVersion": true,
+    "clauseVersionChangeCreatesNewAssemblyAndDocumentVersion": true,
+    "silentMutationForbidden": true
+  }
+}

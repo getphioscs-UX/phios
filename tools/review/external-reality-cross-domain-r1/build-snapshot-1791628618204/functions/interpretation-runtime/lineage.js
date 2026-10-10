@@ -1,0 +1,1 @@
+export function createInterpretationLineage({sourceRefs=[], evidenceRefs=[], ruleRef=null, projectionRef=null}={}){ return Object.freeze({sourceRefs:[...sourceRefs],evidenceRefs:[...evidenceRefs],ruleRef,projectionRef,authorityTransfer:false}); }

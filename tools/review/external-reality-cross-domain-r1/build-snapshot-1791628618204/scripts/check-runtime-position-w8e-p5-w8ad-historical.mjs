@@ -1,0 +1,26 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {spawnSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
+import {buildHistoricalAdmission} from './build-runtime-position-w8e-p5-w8ad-historical.mjs';
+import {validateW8bClaimIntake as validateCurrent} from './lib/civilization-atlas/runtime-position-w8b-claim-extraction-v1.mjs';
+import {validateW8bClaimIntake as validateHistorical} from './lib/civilization-atlas/runtime-position-w8b-historical-claim-extraction-v1.mjs';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+for(const stage of [1,2,3,4]){const run=spawnSync(process.execPath,[path.join(root,`scripts/check-runtime-position-w8e-p5-b${stage}.mjs`)],{encoding:'utf8'});if(run.status!==0)throw new Error(run.stdout+run.stderr);}
+const base=path.join(root,'content/civilization-atlas/reconfiguration');
+const out=buildHistoricalAdmission(base);
+assert.deepEqual(JSON.parse(fs.readFileSync(path.join(base,'runtime-position-w8e-p5-w8ad-historical-admission-v1.json'))),out);
+const claim=out.w8b.records[0];
+const raw={...claim};
+const validate=claims=>validateHistorical({intake:{producedAt:out.producedAt,claims},validatedSources:out.w8a});
+assert.equal(validate([raw,{...raw}]).rejected.length,1,'duplicate claims must reject');
+assert.equal(validate([{...raw,sourceId:'MISSING'}]).records.length,0,'orphan source must reject');
+assert.equal(validate([{...raw,dossierId:'DOSSIER-US'}]).records.length,0,'global scope substitution must reject');
+assert.equal(validate([{...raw,claimType:'GENERAL_CURRENT_FACT'}]).records.length,0,'current type must reject in historical branch');
+assert.equal(validateCurrent({intake:{producedAt:out.producedAt,claims:[raw]},validatedSources:out.w8a}).records.length,0,'historical type must reject in original current W8B');
+assert(out.w8cHistorical.currentAdmissionResults.every(r=>r.reason==='CWA_CLAIM_TYPE_NOT_ALLOWED_FOR_DOMAIN'));
+assert(out.w8cHistorical.evidence.every(e=>e.humanApproval===false&&e.knowledgeState==='HISTORICAL'&&!e.boundaries.isCurrentData));
+assert(out.w8dHistorical.consumption.every(r=>r.scope==='SUBSYSTEM'&&r.g14Pair===null&&r.runtimePosition===null&&!r.currentDataAdmitted));
+assert.equal(out.w8dHistorical.currentRreReadouts.length,0);
+console.log('PASS W8AD: B1–B4 primary-file replay, deterministic admission, duplicate/orphan/global/currentness guards; 15 sources, 47 historical claims, 5 issuer lineages; current RRE BLOCKED; G14=0; RP=0.');

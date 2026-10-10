@@ -1,0 +1,65 @@
+name: BaZi R11 Canonical Browser + Physical PDF Audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/bazi-r9-browser-audit.yml"
+      - "scripts/build-bazi-r9-browser-review.mjs"
+      - "scripts/audit-bazi-r9-browser.mjs"
+      - "scripts/sync-bazi-r9-review-browser.mjs"
+      - "functions/personal-reading/bazi-section-publication.js"
+      - "functions/canonical-presentation-runtime/report-section-config.generated.js"
+      - "config/reports/bazi-section-registry.json"
+      - "assets/customer-ui/js/personal-products/publication-report-pages.js"
+      - "assets/customer-ui/surfaces/report-publication.css"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bazi-r11-canonical-browser-pdf-audit
+  cancel-in-progress: true
+
+jobs:
+  browser-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+          cache: npm
+      - name: Install repository dependencies
+        run: npm ci
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Build R11 browser runtime
+        run: node scripts/sync-bazi-r9-review-browser.mjs
+      - name: Materialize canonical R11 review snapshots
+        run: node scripts/build-bazi-r9-review.mjs
+      - name: Build R11 browser audit fixture
+        run: node scripts/build-bazi-r9-browser-review.mjs
+      - name: Start local review server
+        run: |
+          python3 -m http.server 8788 --bind 127.0.0.1 > /tmp/bazi-r9-http.log 2>&1 &
+          echo $! > /tmp/bazi-r9-http.pid
+          for i in {1..30}; do
+            curl -fsS http://127.0.0.1:8788/artifacts/bazi-r9-browser/review.html >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/bazi-r9-http.log
+          exit 1
+      - name: Run browser and print audit
+        run: node scripts/audit-bazi-r9-browser.mjs
+      - name: Upload R9 review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bazi-r11-canonical-browser-pdf-audit
+          path: artifacts/bazi-r9-browser
+          if-no-files-found: error

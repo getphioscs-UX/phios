@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W8-PROJECTION-ENVELOPE-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W8",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_CANONICAL_PROJECTION_ENVELOPE",
+  "canonicalObject": "RuntimeReadingProjectionEnvelope",
+  "requiredFields": [
+    "methodCode",
+    "methodVersion",
+    "calculationDigest",
+    "projectionVersion",
+    "projection",
+    "unknowns",
+    "limitations"
+  ],
+  "fieldSemantics": {
+    "methodCode": "RRP controlled method reference resolved from CanonicalMethodProjection",
+    "methodVersion": "Upstream method version; RRP may not rewrite it",
+    "calculationDigest": "Governed upstream calculation digest when supplied; null requires explicit limitation and must never be synthesized from raw Core output",
+    "projectionVersion": "CanonicalMethodProjection contract/version identity",
+    "projection": "CanonicalMethodProjection only; no raw Core schema",
+    "unknowns": "Union of upstream explicit unknown disclosures and RRP admission unknowns without deletion",
+    "limitations": "Bound-scope, policy, availability and evidence limitations"
+  },
+  "authorityReference": "content/professional/method-client-delivery/contracts/mcd-5-canonical-method-projection-contract-v1.json",
+  "rules": {
+    "normalizesCrossMethodEnvelopeShape": true,
+    "rewritesProjectionMeaning": false,
+    "rawCoreSchemaAllowed": false,
+    "unknownMayBeDropped": false,
+    "limitationMayBeHidden": false,
+    "projectionEnvelopeCreatesMeaningAuthority": false
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-ANSWER-INTELLIGENCE-CORRECTION-ACCEPTANCE-v2.0.0",
+  "status": "MACHINE_ACCEPTED_HUMAN_PENDING",
+  "baselineCommit": "f3811673588eef38814c26fbbd1c52cbf2405f6a",
+  "reopens": [
+    "W3",
+    "W6",
+    "W7",
+    "W8",
+    "W9",
+    "W10",
+    "W12",
+    "W13",
+    "W14",
+    "W15",
+    "W16"
+  ],
+  "works": {
+    "W3R": "PUBLISHED_ARTICLE_BINDING_COMPLETE",
+    "W6R": "ARTICLE_AND_EXISTING_KSAR_BOOK_CONTENT_PATH_READY",
+    "W7R": "FRAGMENT_SEMANTIC_RERANKING_READY",
+    "W8R": "CROSS_SOURCE_DEDUP_V2_READY",
+    "W9R": "CONTENT_BEARING_EVIDENCE_PACK_READY",
+    "W10R": "MATERIAL_GROUNDED_CONSUMPTION_READY",
+    "W12R": "REAL_CONTENT_GROUNDED_COMPOSER_READY",
+    "W13R": "SEMANTIC_ANSWER_QUALITY_GUARD_READY",
+    "W14R": "MATERIAL_SOURCE_USAGE_READY",
+    "W15R": "100_CASE_V2_MACHINE_ACCEPTED",
+    "W16R": "NEW_HUMAN_REVIEW_PENDING"
+  },
+  "previousW15W16Disposition": {
+    "w15v1": "SUPERSEDED_FOR_ANSWER_QUALITY",
+    "w16v1": "HALTED_NOT_ACCEPTED"
+  },
+  "machineSummary": {
+    "caseCount": 100,
+    "publishedArticleBindingRecords": 112,
+    "publishedArticleBoundNodes": 56,
+    "articleBackedNodeCount": 56,
+    "bookDistribution": {
+      "BOOK-1": 39,
+      "BOOK-2": 61,
+      "BOOK-3": 0
+    },
+    "top5Recall": 1,
+    "articleBindingRate": 1,
+    "contentEvidenceRate": 1,
+    "articleContentConsumptionRate": 1,
+    "materialContentConsumptionRate": 1,
+    "semanticGuardPassRate": 1,
+    "noEmptyRephraseRate": 1,
+    "noLegacyTemplateRate": 1,
+    "questionTypeSatisfiedRate": 1,
+    "mechanismExplainedRate": 1,
+    "sourceSupportedRate": 1,
+    "wrongRouteRate": 0,
+    "uniqueAnswerRate": 0.91,
+    "maximumRepeatedLeadingSentenceRate": 0.02,
+    "averageConsumedContentChars": 494.1,
+    "latencyMs": {
+      "p50": 6.127,
+      "p95": 10.211,
+      "max": 22.72
+    },
+    "totalBenchmarkMs": 699.964,
+    "book3ContentBenchmark": {
+      "status": "NOT_LOCALLY_EXECUTED_PRIVATE_R2_REQUIRED",
+      "productionRetrievalPath": "KAP/KSAR reviewed manuscript grounding → KIR-R2 content composer",
+      "humanReadabilityAccepted": true
+    }
+  },
+  "humanGate": {
+    "status": "PENDING",
+    "threshold": {
+      "minimumAccepted": 85,
+      "totalCases": 100,
+      "criticalFailuresAllowed": 0,
+      "acceptedDefinition": "answersQuestion && relevance && explanationDepth && naturalness && phiOsDistinctValue && articleMateriallyUsed && nonRepetitive && !methodHijack && !criticalFailure"
+    }
+  },
+  "boundaries": {
+    "publishedArticleAuthorityMutated": false,
+    "canonicalMeaningMutated": false,
+    "book4Book5RetrievalAllowed": false,
+    "book3PrivateR2NotFakedInLocalBenchmark": true,
+    "humanAcceptanceClaimed": false
+  }
+}

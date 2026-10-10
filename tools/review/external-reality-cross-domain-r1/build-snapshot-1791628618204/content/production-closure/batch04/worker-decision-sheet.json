@@ -1,0 +1,46 @@
+{
+  "decision": "PENDING_NOT_ACCEPTED",
+  "gate": "FAIL_BLOCKED",
+  "frozenCommit": "0b4a72ea7edafdd9caabcaa5318b91ac50a69db9",
+  "frozenSha256": "0e19c4cf3cf5b00f26de877161e73d1bc7a6fbf663a37f4f25fcd18de9f1fb1b",
+  "expectedFrozenSha256": "0e19c4cf3cf5b00f26de877161e73d1bc7a6fbf663a37f4f25fcd18de9f1fb1b",
+  "currentSha256": "bbd95b389ea7797083d70232f8ed5b9d29e6e4f2697dc2071435788298b54b89",
+  "exactDiff": "docs/production-closure/batch03/evidence/worker-diff.txt",
+  "hunks": [
+    "@@ -1,34 +1,38 @@",
+    "@@ -38,39 +42,63 @@ export default {",
+    "@@ -79,9 +107,22 @@ export default {",
+    "@@ -97,7 +138,8 @@ export default {"
+  ],
+  "consumers": [
+    "functions/account/ziwei-account-delivery.js:16: if(!context.env.METHOD_REPORT_RENDERER?.fetch)throw fail('REPORT_BROWSER_VERIFIER_NOT_CONFIGURED',503);",
+    "functions/account/ziwei-account-delivery.js:21: if(!context.env.METHOD_REPORT_RENDERER?.fetch)throw fail('REPORT_BROWSER_VERIFIER_NOT_CONFIGURED',503);",
+    "functions/account/ziwei-account-delivery.js:26:   const response=await context.env.METHOD_REPORT_RENDERER.fetch(new Request('https://method-report-renderer.internal/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({candidate,method:'ZWR',compositionVersion:candidate.snapshot.compositionVersion})}));",
+    "functions/api/shared-report-renderer-stability.js:20:  if(!context.env.METHOD_REPORT_RENDERER?.fetch)throw fail('REPORT_BROWSER_VERIFIER_NOT_CONFIGURED',503);",
+    "functions/api/shared-report-renderer-stability.js:23:   const response=await context.env.METHOD_REPORT_RENDERER.fetch(new Request('https://method-report-renderer.internal/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({candidate,method:contract.methodCode,compositionVersion:contract.compositionVersion})}));",
+    "functions/report-delivery/zwr-native-renderer-acceptance.js:16: if(!env.METHOD_REPORT_RENDERER?.fetch)throw fail('REPORT_BROWSER_VERIFIER_NOT_CONFIGURED',503);",
+    "functions/report-delivery/zwr-native-renderer-acceptance.js:19:  const response=await env.METHOD_REPORT_RENDERER.fetch(new Request('https://method-report-renderer.internal/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({candidate,method:'ZWR',compositionVersion:contract.compositionVersion})}));",
+    "workers/method-report-renderer/wrangler.jsonc:3: \"name\":\"phios-method-report-renderer-qa\","
+  ],
+  "requestedScope": [
+    "Shared private QA Worker source delta only",
+    "Native ZWR method-specific render contract selection",
+    "Existing private service binding and source-bound snapshot validation",
+    "Image allowlists, print/browser diagnostics and semantic verification changes"
+  ],
+  "excludedScope": [
+    "BaZi accepted-copy admission",
+    "BZR adapter registration",
+    "Production release or storage",
+    "Any owner receipt/digest change",
+    "Deployment"
+  ],
+  "consumerEffects": {
+    "ZWR": "Current native method adapter/accepted renderer verification uses successor; must retain its method/version/publication fingerprint gates",
+    "BZR": "Still unadmitted by method-render-contract.js; accepting Worker source alone cannot make BZR publishable",
+    "others": "No additional method adapter is registered; reject-by-default must remain"
+  },
+  "acceptConsequence": "Owner would authorize a governed successor reconciliation for these exact bytes and consumers through existing freeze mechanism. This document performs none of it.",
+  "rejectConsequence": "Preserve both sources; determine scoped replacement without overwriting shared ZWR consumers or frozen BaZi audit.",
+  "freezeChanged": false
+}

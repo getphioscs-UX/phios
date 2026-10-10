@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R5-WHOLE-CHART-SYNTHESIS-CONTRACT-v1.0.0",
+  "workCode": "AST-FP-R5",
+  "baselineCommit": "0692037d3a3f522de9f0eb11d37f738df3a2bae6",
+  "predecessors": ["AST-FP-R2", "AST-FP-R4", "AST-FP-R4A"],
+  "input": {
+    "canonicalProjection": "PHI-OS-CANONICAL-METHOD-PROJECTION-v2.0.0",
+    "professionalSemanticProjection": "PHI-OS-AST-PROFESSIONAL-SEMANTIC-PROJECTION-v1.0.0",
+    "meaningOntology": "PHI-OS-ASTA-W11-MEANING-ONTOLOGY-v1.0.0",
+    "compositionRuleRegistry": "PHI-OS-AST-R5-WHOLE-CHART-COMPOSITION-RULE-REGISTRY-v1.0.0",
+    "r4aAdmission": "OPTIONAL_DURING_ENGINEERING_REQUIRED_FOR_CUSTOMER_PUBLICATION"
+  },
+  "outputSchemaVersion": "PHI-OS-AST-WHOLE-CHART-SYNTHESIS-v1.0.0",
+  "requiredOutput": [
+    "methodId",
+    "projectionId",
+    "semanticState",
+    "coreThemes",
+    "supportSignals",
+    "tensionSignals",
+    "wholeChartSummary",
+    "technicalLineage",
+    "governance"
+  ],
+  "themeRules": {
+    "targetCoreThemeCount": "3_TO_5_WHEN_EVIDENCE_AVAILABLE",
+    "wholeChartBeforeObjectDirectory": true,
+    "multipleEvidenceFamiliesPreferred": true,
+    "duplicateEvidenceOwnershipForbidden": true,
+    "unsupportedThemeOmitted": true,
+    "intentMayReorderButNotInventEvidence": true
+  },
+  "productionBoundary": {
+    "engineeringCandidateAllowedWithPendingR4A": true,
+    "customerPublicationRequiresR4AHumanAdmission": true,
+    "customerPublicationRequiresR5HumanAcceptance": true,
+    "r3CertificationStillIndependentGate": true,
+    "customerCutoverAllowed": false
+  }
+}

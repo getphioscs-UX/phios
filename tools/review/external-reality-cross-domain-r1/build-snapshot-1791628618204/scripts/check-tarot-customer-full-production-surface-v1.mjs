@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+const html=read('perspectives/tarot/index.html');
+const js=read('assets/customer-ui/js/surfaces/tarot.js');
+assert.match(html,/Tarot is in Full Production\./);
+assert.match(html,/塔罗已进入正式生产。/);
+assert.match(html,/ordinary deployments do not expire the release authority/);
+assert.doesNotMatch(html,/Public execution remains closed until verified account persistence/);
+assert.doesNotMatch(html,/公开执行仍保持关闭，直到已验证账号持久化/);
+assert.match(js,/FULL_PRODUCTION:\{en:'Full Production · Permanent authority'/);
+assert.match(js,/sameRelease/);
+assert.match(js,/sameAuthorityDigest/);
+assert.doesNotMatch(js,/sameCommit/);
+assert.match(js,/execute\.disabled=!serverAuthorityOk/);
+assert.match(js,/Tarot Full Production is active/);
+assert.match(js,/Tarot execution is not active:/);
+console.log('✓ Tarot customer FULL_PRODUCTION surface v1 passed: UI is release-scoped, server-authority gated, runnable when authorized, and exposes a concrete blocker when denied.');

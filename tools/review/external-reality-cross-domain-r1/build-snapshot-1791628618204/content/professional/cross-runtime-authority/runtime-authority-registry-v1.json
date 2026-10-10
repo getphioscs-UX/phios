@@ -1,0 +1,213 @@
+{
+  "schemaVersion": "PHI-OS-RUNTIME-AUTHORITY-REGISTRY-v1.0.0",
+  "phaseCode": "PHASE-0",
+  "stepCode": "STEP-0.1",
+  "registryCode": "RUNTIME_AUTHORITY_REGISTRY",
+  "registryVersion": "1.0.0",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "9132b4eebc382efe5801d1054ca4d8a647b37b10"
+  },
+  "authorities": [
+    {
+      "authorityCode": "INPUT_AUTHORITY",
+      "objectDomain": "input",
+      "sourceOfTruth": "content/professional/method-runtime/shared-data-authority-v1.json",
+      "runtimeAuthority": "SHARED_DATA_AUTHORITY",
+      "ownedObjects": [
+        "declared input records",
+        "governed data records",
+        "input provenance"
+      ],
+      "readOnlyConsumers": [
+        "SHARED_CALCULATION_RUNTIME",
+        "Journey Runtime"
+      ],
+      "mayCreateDownstreamObjects": false
+    },
+    {
+      "authorityCode": "METHOD_AUTHORITY",
+      "objectDomain": "method",
+      "sourceOfTruth": "content/professional/method-runtime/method-registry-v1.json",
+      "governanceSourceOfTruth": "content/professional/method-governance/imr-method-registry-v1.json",
+      "runtimeAuthority": "METHOD_RUNTIME",
+      "ownedObjects": [
+        "method identity",
+        "plugin binding",
+        "calculation eligibility"
+      ],
+      "readOnlyConsumers": [
+        "SHARED_CALCULATION_RUNTIME",
+        "SHARED_PROJECTION_RUNTIME"
+      ],
+      "mayCreateDownstreamObjects": false
+    },
+    {
+      "authorityCode": "PROJECTION_AUTHORITY",
+      "objectDomain": "projection",
+      "sourceOfTruth": "content/professional/method-runtime/shared-projection-runtime-v1.json",
+      "schemaSourceOfTruth": "content/professional/method-runtime/canonical-projection-v1.schema.json",
+      "extensionSourceOfTruth": "content/professional/method-runtime/canonical-projection-numeric-extension-v1.json",
+      "runtimeAuthority": "SHARED_PROJECTION_RUNTIME",
+      "ownedObjects": [
+        "canonical projection identity",
+        "projection lineage",
+        "projection confidence"
+      ],
+      "readOnlyConsumers": [
+        "CANONICAL_MEANING_RUNTIME",
+        "SHARED_INTERPRETATION_RUNTIME"
+      ],
+      "mayCreateDownstreamObjects": false
+    },
+    {
+      "authorityCode": "MEANING_AUTHORITY",
+      "objectDomain": "meaning",
+      "sourceOfTruth": "content/professional/canonical-meaning-runtime/contracts/canonical-meaning-runtime-v1.json",
+      "identitySourceOfTruth": "content/professional/canonical-meaning-runtime/contracts/meaning-identity-contract-v1.json",
+      "runtimeAuthority": "CANONICAL_MEANING_RUNTIME",
+      "ownedObjects": [
+        "canonical meaning codes",
+        "meaning families",
+        "meaning dimensions",
+        "method-to-meaning mappings"
+      ],
+      "readOnlyConsumers": [
+        "KNOWLEDGE_RUNTIME",
+        "CANONICAL_ASSET_RUNTIME",
+        "Journey Runtime"
+      ],
+      "mayCreateDownstreamObjects": false
+    },
+    {
+      "authorityCode": "KNOWLEDGE_AUTHORITY",
+      "objectDomain": "knowledge",
+      "sourceOfTruth": "content/knowledge/contracts/knowledge-registry-authority-v2.json",
+      "publishedSourceOfTruth": "content/knowledge/contracts/published-knowledge-authority-v1.json",
+      "runtimeAuthority": "KNOWLEDGE_RUNTIME",
+      "ownedObjects": [
+        "canonical knowledge nodes",
+        "knowledge semantic profiles",
+        "published fragments",
+        "canonical assemblies"
+      ],
+      "readOnlyConsumers": [
+        "CANONICAL_ASSET_RUNTIME",
+        "SHARED_INTERPRETATION_RUNTIME",
+        "Journey Runtime"
+      ],
+      "mayCreateDownstreamObjects": false
+    },
+    {
+      "authorityCode": "ASSET_AUTHORITY",
+      "objectDomain": "asset",
+      "sourceOfTruth": "content/professional/canonical-asset-runtime/contracts/canonical-asset-contract-v1.json",
+      "briefSourceOfTruth": "content/professional/canonical-asset-runtime/contracts/canonical-asset-brief-runtime-v1.json",
+      "runtimeAuthority": "CANONICAL_ASSET_RUNTIME",
+      "ownedObjects": [
+        "asset briefs",
+        "asset candidates",
+        "asset lineage"
+      ],
+      "readOnlyConsumers": [
+        "Presentation Authority",
+        "Publication Authority"
+      ],
+      "mayCreateDownstreamObjects": false
+    },
+    {
+      "authorityCode": "JOURNEY_AUTHORITY",
+      "objectDomain": "journey",
+      "sourceOfTruth": "content/registry/journeys.json",
+      "runtimeContractSourceOfTruth": "content/registry/runtime-contracts.json",
+      "runtimeAuthority": "JOURNEY_RUNTIME",
+      "ownedObjects": [
+        "journey identity",
+        "journey sequence",
+        "experience orchestration state"
+      ],
+      "readOnlyConsumers": [
+        "SHARED_INTERPRETATION_RUNTIME",
+        "SHARED_PROFESSIONAL_RUNTIME"
+      ],
+      "mayCreateDownstreamObjects": false
+    },
+    {
+      "authorityCode": "PROFESSIONAL_AUTHORITY",
+      "objectDomain": "professional_decision",
+      "sourceOfTruth": "content/professional/method-runtime/shared-professional-runtime-v1.json",
+      "workspaceSourceOfTruth": "content/registry/m4b-w2-professional-workspace-foundation.json",
+      "runtimeAuthority": "SHARED_PROFESSIONAL_RUNTIME",
+      "ownedObjects": [
+        "professional review",
+        "boundary validation",
+        "professional signature",
+        "release decision"
+      ],
+      "readOnlyConsumers": [
+        "REPORT_AUTHORITY",
+        "PUBLICATION_AUTHORITY"
+      ],
+      "mayCreateDownstreamObjects": false
+    },
+    {
+      "authorityCode": "REPORT_AUTHORITY",
+      "objectDomain": "report",
+      "sourceOfTruth": "content/registry/professional-deliverable-catalog.json",
+      "releaseSourceOfTruth": "content/professional/method-runtime/canonical-professional-release-v1.schema.json",
+      "runtimeAuthority": "PROFESSIONAL_DELIVERABLE_ASSEMBLY",
+      "ownedObjects": [
+        "report identity",
+        "report sections",
+        "report lineage",
+        "released deliverable"
+      ],
+      "readOnlyConsumers": [
+        "Presentation Authority",
+        "Publication Authority"
+      ],
+      "mayCreateDownstreamObjects": false
+    },
+    {
+      "authorityCode": "PRESENTATION_AUTHORITY",
+      "objectDomain": "presentation",
+      "sourceOfTruth": "content/registry/pds-w2-design-token-contract.json",
+      "acceptanceSourceOfTruth": "content/registry/pds-w10-full-site-acceptance.json",
+      "runtimeAuthority": "PDS_PRESENTATION_CONTRACTS",
+      "ownedObjects": [
+        "presentation constraints",
+        "design tokens",
+        "component and accessibility contracts"
+      ],
+      "readOnlyConsumers": [
+        "PUBLICATION_AUTHORITY"
+      ],
+      "mayCreateDownstreamObjects": false
+    },
+    {
+      "authorityCode": "PUBLICATION_AUTHORITY",
+      "objectDomain": "publication",
+      "sourceOfTruth": "content/knowledge/production/contracts/publication-contract.json",
+      "publishedAuthoritySourceOfTruth": "content/knowledge/contracts/published-knowledge-authority-v1.json",
+      "publicAssetSourceOfTruth": "content/registry/public-assets.json",
+      "runtimeAuthority": "PUBLICATION_PACKAGE_AUTHORITY",
+      "ownedObjects": [
+        "publication decision",
+        "publication package",
+        "locale publication state",
+        "public asset resolution metadata"
+      ],
+      "readOnlyConsumers": [],
+      "mayCreateDownstreamObjects": false
+    }
+  ],
+  "invariants": {
+    "oneAuthorityPerObjectDomain": true,
+    "authorityRegistryMayRewriteSourceRegistries": false,
+    "authorityRegistryMayCreateProductionState": false,
+    "crossRuntimeBypassForbidden": true,
+    "futureAuthorityChangeRequiresVersionedSuccessor": true
+  }
+}

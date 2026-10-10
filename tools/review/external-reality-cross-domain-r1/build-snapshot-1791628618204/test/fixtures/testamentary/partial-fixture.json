@@ -1,0 +1,25 @@
+{
+  "caseId": "PTRC-W9-PARTIAL-001",
+  "clientId": "CLIENT-002",
+  "jurisdiction": "MY",
+  "currency": "MYR",
+  "dataDate": "2026-09-14",
+  "dataVersion": 1,
+  "sections": {
+    "identity": {"status":"KNOWN","items":[{"display_name":"B. Client"}],"sourceReferences":["client-confirmation:identity"]},
+    "family": {"status":"PARTIAL","items":[{"relation":"spouse","display_name":"Spouse"}],"sourceReferences":["client-confirmation:family-partial"]},
+    "executors": {"status":"UNKNOWN","items":[],"sourceReferences":[]},
+    "guardians": {"status":"PARTIAL","items":[],"sourceReferences":["client-confirmation:guardian-open"],"conflicts":["Preferred guardian and alternate guardian have not been reconciled."]},
+    "beneficiaries": {"status":"UNKNOWN","items":[],"sourceReferences":[]},
+    "assets": {"status":"KNOWN","items":[{"asset_type":"cash","label":"Known cash","value":100000}],"sourceReferences":["financial-intake:assets:v1"]},
+    "liabilities": {"status":"KNOWN","items":[{"liability_type":"loan","label":"Known loan","value":20000}],"sourceReferences":["financial-intake:liabilities:v1"]},
+    "trusts": {"status":"UNKNOWN","items":[],"sourceReferences":[]},
+    "gifts": {"status":"UNKNOWN","items":[],"sourceReferences":[]},
+    "exclusions": {"status":"UNKNOWN","items":[],"sourceReferences":[]},
+    "digital_assets": {"status":"UNSET","items":[],"sourceReferences":[]},
+    "funeral_wishes": {"status":"UNKNOWN","items":[],"sourceReferences":[]},
+    "advisors": {"status":"NOT_APPLICABLE","items":[],"sourceReferences":[]},
+    "documents": {"status":"PARTIAL","items":[{"document_type":"old notes","reference":"DOC-META-PARTIAL"}],"sourceReferences":["document-metadata:DOC-META-PARTIAL"]},
+    "review_consent": {"status":"KNOWN","items":[{"consent_id":"CONSENT-002","scope":"partial draft review"}],"sourceReferences":["consent:CONSENT-002"]}
+  }
+}

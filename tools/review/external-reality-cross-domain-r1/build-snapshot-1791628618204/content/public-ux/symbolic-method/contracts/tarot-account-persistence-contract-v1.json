@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-ACCOUNT-PERSISTENCE-CONTRACT-v1.0.0",
+  "phase": "TPA-H",
+  "work": "TPA-W31",
+  "baselineCommit": "306b84652102583690a7f7665167f8dfdbb82541",
+  "status": "D1_PROVIDER_BOUND_VERIFIED_IDENTITY_REQUIRED_GLOBAL_ACCOUNT_PROVIDER_STILL_EXTERNAL",
+  "methodCode": "TAROT",
+  "provider": {
+    "binding": "RUNTIME_DB",
+    "driver": "D1",
+    "existingTablesOnly": true,
+    "newMigrationRequired": false,
+    "runtimeTables": ["runtime_users", "runtimes", "runtime_artifacts", "runtime_events"]
+  },
+  "identity": {
+    "source": "TRUSTED_SERVER_REQUEST_CONTEXT_ONLY",
+    "requiredFields": ["userId", "providerId", "verified", "authenticated"],
+    "clientSuppliedIdentityAllowed": false,
+    "requestHeaderIdentityAllowed": false,
+    "browserCookieIdentityFallbackAllowed": false,
+    "globalAccountProviderConnectionRequired": true
+  },
+  "retention": {
+    "explicitPolicyAcceptanceRequired": true,
+    "guestPersistenceAllowed": false,
+    "localStorageFallbackAllowed": false,
+    "sessionStorageFallbackAllowed": false
+  },
+  "savedState": [
+    "readingId",
+    "accountUserId",
+    "createdAt",
+    "question",
+    "contextConsent",
+    "drawEvidence",
+    "projection",
+    "readingIrPublicProjection",
+    "sourceVersions",
+    "userNotes",
+    "realityHandoff",
+    "reviewState"
+  ],
+  "rules": {
+    "userScopedReadsOnly": true,
+    "userScopedUpdatesOnly": true,
+    "canonicalRealityCreatedBySave": false,
+    "tarotReadingBecomesRealityTruth": false,
+    "privateContextSilentlyPersisted": false,
+    "canonicalRawReadingIrClaimAllowed": false
+  }
+}

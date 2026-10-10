@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W1-PRODUCT-CONTRACT-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W1",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_FOUNDATION_PRODUCT_DEFINITION",
+  "productCode": "RRP",
+  "productName": "Runtime Reading Product",
+  "definition": "A governed composition product that selects admissible source outputs, preserves unknowns and provenance, and prepares reading content for later RR handoff without becoming Report authority.",
+  "productTypes": [
+    {
+      "productType": "RRP-SELF",
+      "label": "Self-service Runtime Reading",
+      "professionalJudgmentAllowed": false,
+      "methodExecutionRule": "ONLY_EXPLICITLY_SELECTED_CONSENTED_AND_CURRENTLY_AVAILABLE_METHODS",
+      "professionalCompletionAllowed": false
+    },
+    {
+      "productType": "RRP-PRO",
+      "label": "Professional Runtime Reading",
+      "professionalJudgmentAllowed": true,
+      "professionalJudgmentAuthority": "PR",
+      "professionalAttributionRequired": true,
+      "systemMayImpersonateProfessional": false
+    }
+  ],
+  "productPipeline": [
+    "GOVERNED_INPUT_REFERENCES",
+    "EXPLICIT_METHOD_SELECTION",
+    "METHOD_SPECIFIC_CONSENT",
+    "AUTHORIZED_PROJECTION_INTAKE",
+    "APPROVED_MEANING_ADMISSION_WHEN_AVAILABLE",
+    "REALITY_CARRIER_TIMELINE_BINDING",
+    "GOVERNED_READING_COMPOSITION",
+    "LATER_RR_HANDOFF"
+  ],
+  "currentFoundationScope": "RRP-W0-W14",
+  "deferredCanonicalReportCandidate": "RRP-W24",
+  "deferredRrHandoff": "RRP-W23_AND_RRP-W28",
+  "rules": {
+    "sampleTemplateDoesNotCreateRuntimeAuthority": true,
+    "missingMethodDoesNotBlockSelfServiceProduct": true,
+    "unsupportedMethodMustRemainExplicitlyUnavailable": true,
+    "providerOrAiMayGrantSourceAuthority": false,
+    "rrpMayFinalizeReport": false,
+    "rrpMayReleaseReport": false,
+    "rrpMayOwnPresentation": false
+  }
+}

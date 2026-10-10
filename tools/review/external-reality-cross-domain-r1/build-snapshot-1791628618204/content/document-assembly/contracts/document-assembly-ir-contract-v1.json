@@ -1,0 +1,61 @@
+{
+  "contractCode": "PHI-OS-DAR-W15-DOCUMENT-ASSEMBLY-IR-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W15",
+  "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+  "status": "ACTIVE_CANONICAL_INTERMEDIATE_REPRESENTATION",
+  "purpose": "One deterministic assembled state consumed by HTML, PDF and DOCX renderers; renderers never select or author legal clauses.",
+  "documentShape": {
+    "schemaVersion": "PHI-OS-DAR-ASSEMBLY-IR-v1",
+    "documentType": "registered document type",
+    "assemblyVersion": "semantic assembly runtime version",
+    "assemblyStatus": [
+      "DOCUMENT_CANDIDATE",
+      "AUTOMATIC_ASSEMBLY_BLOCKED",
+      "LEGAL_REVIEW_REQUIRED"
+    ],
+    "jurisdiction": "explicit customer/professional supplied value only",
+    "language": "explicit supplied value",
+    "inputDigest": "sha256 canonical input",
+    "templateVersion": "immutable template version",
+    "templateDigest": "sha256 canonical template",
+    "clauseRegistryVersion": "immutable clause registry version",
+    "clauseRegistryDigest": "sha256 canonical clause registry",
+    "resolverVersion": "runtime version",
+    "determinismKey": "sha256 of immutable assembly basis",
+    "sourceReality": "optional FDR lineage only; not a duplicate fact store",
+    "sections[]": {
+      "clauseId": "approved registry id",
+      "clauseVersion": "approved registry version",
+      "approvalDigest": "legal review admission digest",
+      "parameters": "explicit bound field values",
+      "sourceFields[]": "canonical field paths used by the clause",
+      "conditionEvidence[]": "deterministic rule evidence",
+      "renderText": "exact approved text after deterministic parameter binding; never AI-authored"
+    },
+    "gates": "fail-closed runtime dispositions",
+    "warnings[]": "non-authoritative warnings",
+    "assemblyDigest": "sha256 canonical IR excluding assemblyDigest",
+    "assemblyId": "deterministic identifier derived from the immutable assembly basis"
+  },
+  "fdrBinding": {
+    "contract": "content/financial/data-runtime/contracts/fdr-dar-cross-consumption-contract-v1.json",
+    "consentScope": "WILL_ASSEMBLY",
+    "requiredLineageWhenFdrFactsConsumed": [
+      "fdrRealityId",
+      "fdrVersion",
+      "fdrDigest"
+    ],
+    "darMayMutateFdrFacts": false,
+    "darMayReplaceUnknownWithAssumption": false,
+    "darBinding": "content/document-assembly/contracts/dar-fdr-consumption-binding-v1.json"
+  },
+  "invariants": {
+    "jsonToWordStringReplaceForbidden": true,
+    "rendererClauseSelectionForbidden": true,
+    "rendererLegalAuthorityForbidden": true,
+    "aiClauseGenerationForbidden": true,
+    "missingDataSubstitutionForbidden": true,
+    "timestampExcludedFromAssemblyIr": true
+  }
+}

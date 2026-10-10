@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "PHI-OS-CX-R20-CUSTOMER-PROJECTION-ADAPTER-CONTRACT-v2.0.0",
+  "work": "CX-R20",
+  "executionBaselineCommit": "3eed6a26db6767cdd270719f58636376fcb29e9a",
+  "predecessor": {
+    "contract": "content/customer-experience-rebuild/contracts/customer-projection-adapter-contract-v1.json",
+    "acceptance": "content/customer-experience-rebuild/acceptance/cx-r20-acceptance-v1.json",
+    "status": "HISTORICAL_IMPLEMENTATION_PRESERVED"
+  },
+  "currentInputs": {
+    "backendBoundary": "content/customer-experience-rebuild/registries/backend-customer-projection-map-v3.json",
+    "surfaceAuthority": "content/customer-experience-rebuild/registries/customer-surface-registry-v3.json",
+    "shellAcceptance": "content/customer-experience-rebuild/acceptance/cx-r5-acceptance-v2.json",
+    "preR20Reconciliation": "content/customer-experience-rebuild/audits/pre-r20-parallel-reconciliation-v1.json"
+  },
+  "status": "CURRENT_MAIN_RECONCILED",
+  "flow": [
+    "UPSTREAM_RUNTIME_AUTHORITY_OUTPUT",
+    "CUSTOMER_PROJECTION_ADAPTER",
+    "IMMUTABLE_CUSTOMER_VIEW_MODEL",
+    "CX_CUSTOMER_SURFACE"
+  ],
+  "allowedOperations": [
+    "RENAME",
+    "GROUP",
+    "ORDER",
+    "FORMAT",
+    "LOCALIZE",
+    "HIDE_UNAUTHORIZED_FIELDS",
+    "PRESERVE_UPSTREAM_STATE",
+    "PRESERVE_UNKNOWN",
+    "PRESERVE_PROVENANCE"
+  ],
+  "forbiddenOperations": [
+    "CALCULATE",
+    "INFER_NEW_FINDING",
+    "CHANGE_MEANING",
+    "RECOMMEND",
+    "CREATE_TRUTH",
+    "UPGRADE_AVAILABILITY",
+    "CREATE_ENTITLEMENT",
+    "CREATE_AUTHENTICATION",
+    "CREATE_PROFESSIONAL_JUDGMENT",
+    "CREATE_PERSISTENCE"
+  ],
+  "rules": {
+    "backendAuthorityCreated": false,
+    "rawRuntimeProjectedToCxUi": false,
+    "viewModelIsAuthority": false,
+    "unknownMustRemainVisible": true,
+    "upstreamAvailabilityMayNotDefaultToAvailable": true,
+    "financialCurrencyMayNotBeInventedByAdapter": true,
+    "methodAvailabilityMustReadUpstreamAuthority": true,
+    "currentFactsRemainSeparateFromCanonicalKnowledge": true,
+    "journeyRemainsProgressAndContinuityProjection": true,
+    "professionalJudgmentMustComeFromProfessionalAuthority": true,
+    "authenticationAndEntitlementRemainUpstream": true,
+    "viewModelsMustBeDeepFrozen": true,
+    "routeCutoverPerformedByR20": false,
+    "physicalLegacyDeletePerformedByR20": false
+  },
+  "priorityProductTranche": [
+    "CX-R10_MY_REALITY",
+    "CX-R12_PERSONAL_REALITY",
+    "CX-R13_FINANCIAL_REALITY",
+    "CX-R9-R2_CONTEXTUAL_ASK_PHI_OS"
+  ]
+}

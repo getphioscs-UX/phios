@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "PHI-OS-HD-PRO-R3-W0-CURRENT-OWNER-MAP-v1.0.0",
+  "work": "HD-PRO-R3-W0",
+  "baselineCommit": "dae24c1dd8de49a6c238ddffb8d52b388e8da10d",
+  "status": "OWNER_FROZEN_R3_SHADOW",
+  "r2Production": {
+    "mustRemainOnline": true,
+    "publicationState": "CUSTOMER_PUBLISHED",
+    "humanAdmission": "24/24",
+    "authorityPath": "content/professional/personal-reality/r5/authority/ppr-r5-hd-pro-r2-customer-published-successor-v1.json"
+  },
+  "hardBoundaries": {
+    "phiosHumanDesignBirthCalculationAuthority": false,
+    "externalConfirmedChartAuthority": true,
+    "importedReportEqualsPhiosCalculatedChart": false,
+    "atomicMeaningEqualsCustomerReading": false,
+    "automaticVariableOrPHSCalculationAllowed": false,
+    "r2HumanReviewMayAutoAdmitR3Semantics": false
+  },
+  "freezeRules": [
+    "NO_SECOND_HD_REGISTRY",
+    "NO_SECOND_CUSTOMER_RENDERER",
+    "NO_SECOND_READING_ENGINE",
+    "NO_PARALLEL_HUMAN_DESIGN_TREE"
+  ],
+  "owners": {
+    "canonicalIntakeOwner": {
+      "path": "functions/external-profile/human-design-canonical-chart.js",
+      "sha256": "9aaf13eb94a899822382f175382a49011f66b34f16bcf5fccc0d89fde5091115"
+    },
+    "externalChartAdapterOwner": {
+      "path": "functions/external-profile/hd-profile-parser.js",
+      "sha256": "2ee72ecbdf696e2afe50982a6554ad929a7eca40ae5f44b159207c2d9ce3af0b"
+    },
+    "chartConfirmationOwner": {
+      "path": "functions/external-profile/external-profile-confirmation.js",
+      "sha256": "5411e4b141f4a63e572db7e0c562aec43f4bbec797fca541e47ae13aa8b5c6c8"
+    },
+    "semanticRegistryOwner": {
+      "path": "knowledge/external-readers/human-design/registry/entries.json",
+      "sha256": "6e38811d8095fdefde549733efe466d2215ddf11e0dcf856798150fd8745a0d3"
+    },
+    "categoryAuthorityOwner": {
+      "path": "functions/external-profile/human-design-external-authority.js",
+      "sha256": "4ff021856fdd3d08fb111ad511c76a34ec04a195c82c565a9bcc4ebf7403fc7f"
+    },
+    "readingIrOwner": {
+      "path": "functions/external-profile/human-design-reading-runtime.js",
+      "sha256": "7c9622dc5bf927c39463391971b8e948a4159f620059f4f1bfe9f4f03844902f"
+    },
+    "realityCompositionOwner": {
+      "path": "functions/external-profile/human-design-reality-composition.js",
+      "sha256": "89095d1d0e4d532c16b2977a603da18003571ef5d3e828202cc47866cdca4a36"
+    },
+    "customerConfirmApiOwner": {
+      "path": "functions/api/customer-external-profile-confirm.js",
+      "sha256": "aca7f07ce56c3e940c012784fe424104a794a977b6406f596af6ac54c380d45d"
+    },
+    "customerRendererOwner": {
+      "path": "assets/customer-ui/js/surfaces/personal-reality.js",
+      "sha256": "83899a7aaf6382b1d1395a0a68c9c4f5e8950852355b0e09cd5c02a7e5ca6952"
+    },
+    "customerRouteOwner": {
+      "path": "perspectives/personal/index.html",
+      "sha256": "880ccf69ce172dbd615c47f70507f02351c66083ed4e6ebe9ae25cefeae897a9"
+    },
+    "pprSharedRendererOwner": {
+      "path": "assets/customer-ui/js/personal-products/personal-product-renderers.js",
+      "sha256": "9d64e9db9cff8215ecdb743f3b1d6e030f792125ddb543faf1a6133fc7c411d2"
+    },
+    "productionPublicationAuthority": {
+      "path": "content/professional/personal-reality/r5/authority/ppr-r5-hd-pro-r2-customer-published-successor-v1.json",
+      "sha256": "d7f9fbe2059e80e3a28c0e2a4ee6da0a62a2678baa3407be02c87a3ef51b5181"
+    },
+    "r2ProductionGate": {
+      "path": "content/customer-experience-rebuild/hd-pro-r2/hd-w10-production-cutover-v1.json",
+      "sha256": "484b2f77bc85a836c32f054955653c81f22b687b4ffce276e6a5a1739542a144"
+    },
+    "r2HumanAdmission": {
+      "path": "content/customer-experience-rebuild/hd-pro-r2/review/hd-w9-human-review-results-v1.json",
+      "sha256": "157b57e8394facaa6562869249a0604d42acf3708e497b4b7963ab86b53c2967"
+    },
+    "internalHdrFreeze": {
+      "path": "content/professional/core-method-runtime/hdr-production-freeze-v1.json",
+      "sha256": "edc383857ae02ecd5c050291aa2b1ef3f47ae0ca8296c65f9e1ba29a9b9e5296"
+    },
+    "internalHdrPublicBoundary": {
+      "path": "content/professional/method-production-activation/registries/mpa-hdr-boundary-readiness-v1.json",
+      "sha256": "af57b5a916250c36d5600e0ba778fade746bbe68d9f580565d28f661962e1958"
+    }
+  },
+  "hdPackageScriptsAtBaseline": {
+    "check:cpr-customer-hdr-boundary": "node scripts/check-cpr-customer.mjs hdr-boundary",
+    "check:cx-r12r4b:hdr-audit": "node scripts/generate-cx-r12r4b-hdr-repository-audit.mjs --check && node scripts/check-cx-r12r4b-hdr-audit.mjs",
+    "check:hdr-no-restricted-auto-calculation": "node scripts/check-hdr-no-restricted-auto-calculation.mjs",
+    "check:hdr-public-brand-leak": "node scripts/check-hdr-public-brand-leak.mjs",
+    "check:hdr-w0": "node scripts/check-hdr-w0-human-design-runtime-foundation.mjs",
+    "check:hdr-w1": "node scripts/check-hdr-w1-astronomy-runtime.mjs",
+    "check:hdr-w2": "node scripts/check-hdr-w2-design-moment-solver.mjs",
+    "check:hdr-w3": "node scripts/check-hdr-w3-gate-runtime.mjs",
+    "check:hdr-w4": "node scripts/check-hdr-w4-bodygraph-runtime.mjs",
+    "check:hdr-w5": "node scripts/check-hdr-w5-projection-runtime.mjs",
+    "check:hdr-w6": "node scripts/check-hdr-w6-professional-integration.mjs",
+    "check:hdr-w7": "node scripts/check-hdr-w7-production-freeze.mjs",
+    "check:hdr2-internal-operating-lens": "npm run check:hdr2-w0-w12",
+    "check:hdr2-w0-w12": "node scripts/check-hdr2-w0-w12-internal-operating-lens.mjs && npm run check:hdr-public-brand-leak && npm run check:hdr-no-restricted-auto-calculation",
+    "check:hd-pro-r2": "node scripts/check-hd-pro-r2-w0-w10.mjs",
+    "check:rjx-hdr-boundary": "node scripts/check-rjx-package-b.mjs RJX-W7C"
+  },
+  "hdCheckerFilesAtBaseline": [
+    "scripts/check-cmr-w7a-hdr-structure-mapping.mjs",
+    "scripts/check-cmr-w7b-hdr-runtime-mapping.mjs",
+    "scripts/check-cmr-w7c-w7d-hdr-mapping-acceptance.mjs",
+    "scripts/check-cx-r12r4b-hdr-audit.mjs",
+    "scripts/check-hd-pro-r2-w0-w10.mjs",
+    "scripts/check-hdr-internal-professional-validation-report.mjs",
+    "scripts/check-hdr-no-restricted-auto-calculation.mjs",
+    "scripts/check-hdr-public-brand-leak.mjs",
+    "scripts/check-hdr-registered-professional-final-report.mjs",
+    "scripts/check-hdr-w0-human-design-runtime-foundation.mjs",
+    "scripts/check-hdr-w1-astronomy-runtime.mjs",
+    "scripts/check-hdr-w2-design-moment-solver.mjs",
+    "scripts/check-hdr-w3-gate-runtime.mjs",
+    "scripts/check-hdr-w4-bodygraph-runtime.mjs",
+    "scripts/check-hdr-w5-projection-runtime.mjs",
+    "scripts/check-hdr-w6-professional-integration.mjs",
+    "scripts/check-hdr-w7-production-freeze.mjs",
+    "scripts/check-hdr2-w0-w12-internal-operating-lens.mjs",
+    "scripts/check-mpa-w24-hdr-boundary-current.mjs",
+    "scripts/check-mpa-w24-hdr-boundary.mjs",
+    "scripts/finalize-hdr-registered-professional-report.mjs",
+    "scripts/generate-cx-r12r4b-hdr-repository-audit.mjs",
+    "scripts/generate-hdr-internal-validation-report.mjs",
+    "scripts/review-hdr-internal-validation-report.mjs"
+  ],
+  "r3SuccessorPolicy": {
+    "semanticSuccessorMustExtendExistingRegistry": true,
+    "customerRendererMustRemainExistingOwner": "assets/customer-ui/js/surfaces/personal-reality.js",
+    "r2RuntimeMustRemainDefaultUntilR3HumanAccepted": true,
+    "r3DefaultPublicationState": "SHADOW_CANDIDATE"
+  }
+}

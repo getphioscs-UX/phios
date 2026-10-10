@@ -1,0 +1,110 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import {buildEcrCanonicalProjectionFromAnchor} from '../functions/embodied-configuration/ecr-canonical-projection-runtime.js';
+import {buildMethodMeaningPayloadV2} from '../functions/customer-projection/method-customer-reading-v2.js';
+import {createMethodInterpretationInput,createMethodInterpretationCandidate,projectMethodGraph} from '../functions/interpretation-runtime/cx-r12r3b-shared-runtime-v2.js';
+
+const check=process.argv.includes('--check');
+const stable=v=>v===null||typeof v!=='object'?JSON.stringify(v):Array.isArray(v)?`[${v.map(stable).join(',')}]`:`{${Object.keys(v).sort().map(k=>`${JSON.stringify(k)}:${stable(v[k])}`).join(',')}}`;
+const sha=v=>crypto.createHash('sha256').update(typeof v==='string'?v:stable(v)).digest('hex');
+const write=(p,text)=>{if(check){if(!fs.existsSync(p)||fs.readFileSync(p,'utf8')!==text)throw new Error(`CAMPAIGN_DRIFT:${p}`)}else{fs.mkdirSync(p.split('/').slice(0,-1).join('/'),{recursive:true});fs.writeFileSync(p,text)}};
+const input=(locale='en')=>({birthDate:'2000-01-01',birthTime:'12:00:00',birthPlace:{displayName:'ECR Machine Fixture',countryCode:'MY',latitude:3.139,longitude:101.6869},timezone:{iana:'Asia/Kuala_Lumpur',utcOffsetAtBirth:'+08:00',source:'HUMAN_DECLARATION',confidence:'HIGH'},timeAccuracy:'EXACT',locale,consent:{recordId:'ECR-MACHINE-CAMPAIGN',granted:true,purposeCode:'ECR_MACHINE_VALIDATION',persistence:'NONE'},inputVersion:'MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0'});
+const hSize=360/64,aSize=hSize/8,cases=[],coverage={CC:new Set(),G:new Set(),Q:new Set(),R:new Set(),D:new Set(),M:new Set(),H:new Set(),A:new Set()};
+for(let h=0;h<64;h++){
+ const a=h%8;const longitude=h*hSize+(a+0.5)*aSize;const locale=h%2?'zh-Hans':'en';const canonicalInput=input(locale);const anchor={schemaVersion:'PHI-OS-ECR-SOLAR-ANCHOR-v1.0.0',utcIso:'2000-01-01T04:00:00.000Z',longitude,referenceFrame:'TEST_DETERMINISTIC_SOLAR_ANCHOR',engineCode:'ECR_TEST_ANCHOR',engineVersion:'1.0.0',licenseCode:'PHIOS_FIRST_PARTY_TEST',providerUsed:false,aiUsed:false,interpretationCreated:false};
+ const projection=await buildEcrCanonicalProjectionFromAnchor({canonicalInput,anchor,requestId:`ECR-MACHINE-${String(h+1).padStart(2,'0')}`});const groups=Object.fromEntries(projection.calculation.structures.map(x=>[x.code,x.items]));
+ const ids={CC:groups.ECR_CONTEXT[0].code,G:groups.ECR_GRAMMAR[0].code,Q:groups.ECR_QUESTION[0].code,R:groups.ECR_CAPABILITIES[0].code,D:groups.ECR_DRIVER_PRIORITY.slice().sort((a,b)=>a.meta.rank-b.meta.rank)[0].code,M:groups.ECR_MOTION[0].code,H:groups.ECR_CONFIGURATION[0].code,A:groups.ECR_ACTIVATION[0].code};for(const [k,v] of Object.entries(ids))coverage[k].add(v);for(const cap of groups.ECR_CAPABILITIES)coverage.R.add(cap.code);
+ const meaning=await buildMethodMeaningPayloadV2({canonicalProjection:projection,locale});const interpretationInput=await createMethodInterpretationInput({canonicalProjection:projection,methodId:'ECR',locale,requestedDepth:'STANDARD',authorityState:{meaningBundleCode:meaning.meaningBundle.bundleCode}});const candidate=await createMethodInterpretationCandidate({input:interpretationInput,meaningPayload:meaning});const graph=await projectMethodGraph({input:interpretationInput,candidate,meaningPayload:meaning});
+ cases.push({caseId:`ECR-MACHINE-${String(h+1).padStart(2,'0')}`,longitude:Number(longitude.toFixed(9)),locale,ids,projectionId:projection.projectionId,candidateId:candidate.candidateId,candidateStatus:candidate.status,candidateValid:candidate.validation.valid,interpretationUnitCount:candidate.interpretationUnits.length,graphNodeCount:graph.nodes.length,graphEdgeCount:graph.edges.length,semanticDigest:candidate.semanticDigest});
+}
+const campaign={schemaVersion:'PHI-OS-CX-R12R4B-R4-ECR-MACHINE-CAMPAIGN-v1.0.0',work:'CX-R12R4B-R4-W33R',status:'MACHINE_ACCEPTED_HUMAN_REVIEW_REQUIRED',caseCount:cases.length,coverage:Object.fromEntries(Object.entries(coverage).map(([k,v])=>[k,[...v].sort()])),assertions:{allCasesValid:cases.every(x=>x.candidateValid),allCasesHumanReviewRequired:cases.every(x=>x.candidateStatus==='HUMAN_REVIEW_REQUIRED'),allHaveFiveInterpretationUnits:cases.every(x=>x.interpretationUnitCount===5),h64Complete:coverage.H.size===64,a8Complete:coverage.A.size===8,g16Complete:coverage.G.size===16,q16Complete:coverage.Q.size===16,r9Complete:coverage.R.size===9,d12PrimaryCoverage:coverage.D.size===12,m8Complete:coverage.M.size===8,cc12Complete:coverage.CC.size===12},cases};
+write('content/customer-experience-rebuild/r12r4b/cx-r12r4b-r4-ecr-machine-campaign-v1.json',JSON.stringify(campaign,null,2)+'\n');
+
+const reviewCasesPath='content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-cases-v1.json';
+const previousReviewFile=fs.existsSync(reviewCasesPath)?JSON.parse(fs.readFileSync(reviewCasesPath,'utf8')):null;
+const previousReviewById=new Map((previousReviewFile?.cases||[]).map(x=>[x.caseId,x]));
+const reviewableCase=value=>({
+ caseId:value.caseId,
+ locale:value.locale,
+ longitude:value.longitude,
+ coordinateCodes:Object.fromEntries(Object.entries(value.coordinate||{}).map(([group,items])=>[group,(items||[]).map(x=>x.code)])),
+ interpretationUnits:(value.interpretationUnits||[]).map(u=>({
+  title:u.title,
+  plainLanguageExplanation:u.plainLanguageExplanation,
+  structuralReason:u.structuralReason,
+  relationContext:u.relationContext,
+  constructiveExpression:u.constructiveExpression,
+  frictionExpression:u.frictionExpression,
+  observableSignals:u.observableSignals,
+  realityComparisonQuestions:u.realityComparisonQuestions,
+  meaningRefs:u.meaningRefs,
+  ruleRefs:u.ruleRefs,
+  confidenceBoundary:u.confidenceBoundary
+ }))
+});
+const reviewCaseDigest=value=>sha(reviewableCase(value));
+const reviewCases=[];for(let i=0;i<48;i++){const machine=cases[(i*5)%64];const hIndex=Number(machine.ids.H.split('H')[1])-1;const a=i%8;const longitude=hIndex*hSize+(a+0.5)*aSize;const locale=i%2?'zh-Hans':'en';const canonicalInput=input(locale),anchor={utcIso:'2000-01-01T04:00:00.000Z',longitude,referenceFrame:'HUMAN_REVIEW_MATERIALIZED_ANCHOR',engineCode:'ECR_REVIEW_ANCHOR',engineVersion:'1.0.0'};const projection=await buildEcrCanonicalProjectionFromAnchor({canonicalInput,anchor,requestId:`ECR-HR-${String(i+1).padStart(2,'0')}`});const meaning=await buildMethodMeaningPayloadV2({canonicalProjection:projection,locale});const interpretationInput=await createMethodInterpretationInput({canonicalProjection:projection,methodId:'ECR',locale,requestedDepth:'STANDARD',authorityState:{meaningBundleCode:meaning.meaningBundle.bundleCode}});const candidate=await createMethodInterpretationCandidate({input:interpretationInput,meaningPayload:meaning});const reviewCase={caseId:`ECR-HR-${String(i+1).padStart(2,'0')}`,locale,longitude:Number(longitude.toFixed(9)),projectionId:projection.projectionId,candidateId:candidate.candidateId,coordinate:Object.fromEntries(projection.calculation.structures.map(g=>[g.code,g.items.map(x=>({code:x.code,value:x.value,meta:x.meta}))])),interpretationUnits:candidate.interpretationUnits.map(u=>({interpretationUnitId:u.interpretationUnitId,title:u.title,plainLanguageExplanation:u.plainLanguageExplanation,structuralReason:u.structuralReason,relationContext:u.relationContext,constructiveExpression:u.constructiveExpression,frictionExpression:u.frictionExpression,observableSignals:u.observableSignals,realityComparisonQuestions:u.realityComparisonQuestions,projectionRefs:u.projectionRefs,meaningRefs:u.meaningRefs,ruleRefs:u.ruleRefs,confidenceBoundary:u.confidenceBoundary})),semanticDigest:candidate.semanticDigest};
+ reviewCases.push({...reviewCase,reviewCaseDigest:reviewCaseDigest(reviewCase)});}
+const review={schemaVersion:'PHI-OS-ECR-HUMAN-REVIEW-CASES-v1.1.0',work:'CX-R12R4B-R4-W33R',status:'PENDING_HUMAN_REVIEW',requiredCaseCount:48,reviewDimensions:['methodFidelityAccepted','customerClarityAccepted','nonFortuneTellingBoundaryAccepted','lineageAccepted'],cases:reviewCases};write(reviewCasesPath,JSON.stringify(review,null,2)+'\n');
+const resultsPath='content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-results-v1.json';
+const dims=['methodFidelityAccepted','customerClarityAccepted','nonFortuneTellingBoundaryAccepted','lineageAccepted'];
+const existingResults=fs.existsSync(resultsPath)?JSON.parse(fs.readFileSync(resultsPath,'utf8')):null;
+const existingResultById=new Map((existingResults?.results||[]).map(x=>[x.caseId,x]));
+const deltaReceiptPath='content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-r4-d11-earth-delta-owner-acceptance-v1.json';
+const deltaReceipt=fs.existsSync(deltaReceiptPath)?JSON.parse(fs.readFileSync(deltaReceiptPath,'utf8')):null;
+const deltaAcceptanceById=new Map();
+if(deltaReceipt){
+ const {acceptanceDigest,...receiptSeed}=deltaReceipt;
+ if(deltaReceipt.schemaVersion!=='PHI-OS-ECR-R4-D11-EARTH-DELTA-OWNER-ACCEPTANCE-v1.0.0')throw new Error('ECR_D11_DELTA_RECEIPT_SCHEMA_INVALID');
+ if(deltaReceipt.decision!=='ACCEPT')throw new Error('ECR_D11_DELTA_RECEIPT_NOT_ACCEPTED');
+ if(sha(receiptSeed)!==acceptanceDigest)throw new Error('ECR_D11_DELTA_RECEIPT_DIGEST_INVALID');
+ if(deltaReceipt.correction?.driver!=='D11'||deltaReceipt.correction?.identity!=='Earth'||deltaReceipt.correction?.canonicalRole!=='Embodiment'||deltaReceipt.correction?.retiredMeaning!=='Recovery')throw new Error('ECR_D11_DELTA_RECEIPT_SCOPE_INVALID');
+ for(const row of deltaReceipt.cases||[]){
+  if(row.decision!=='ACCEPT')throw new Error('ECR_D11_DELTA_CASE_NOT_ACCEPTED:'+row.caseId);
+  if(!row.reviewCaseDigest||!/^([a-f0-9]{64})$/.test(row.reviewCaseDigest))throw new Error('ECR_D11_DELTA_CASE_DIGEST_INVALID:'+row.caseId);
+  if(!dims.every(k=>row.dimensions?.[k]===true))throw new Error('ECR_D11_DELTA_DIMENSION_NOT_ACCEPTED:'+row.caseId);
+  deltaAcceptanceById.set(row.caseId,row);
+ }
+}
+const migratedResults=reviewCases.map(current=>{
+ const previousCase=previousReviewById.get(current.caseId);
+ const previousResult=existingResultById.get(current.caseId);
+ const unchanged=Boolean(previousCase)&&reviewCaseDigest(previousCase)===current.reviewCaseDigest;
+ const previouslyAccepted=Boolean(previousResult)&&dims.every(k=>previousResult[k]===true);
+ if(unchanged&&previouslyAccepted)return {...previousResult,reviewCaseDigest:current.reviewCaseDigest};
+ const delta=deltaAcceptanceById.get(current.caseId);
+ if(delta){
+  if(delta.reviewCaseDigest!==current.reviewCaseDigest)throw new Error('ECR_D11_DELTA_RECEIPT_CASE_DRIFT:'+current.caseId);
+  return {
+   caseId:current.caseId,reviewCaseDigest:current.reviewCaseDigest,
+   methodFidelityAccepted:true,customerClarityAccepted:true,nonFortuneTellingBoundaryAccepted:true,lineageAccepted:true,
+   reviewerRef:'TL',reviewedAt:deltaReceipt.reviewedAt,notes:'OWNER_ACCEPTED_D11_EARTH_EMBODIMENT_DELTA'
+  };
+ }
+ return {caseId:current.caseId,reviewCaseDigest:current.reviewCaseDigest,methodFidelityAccepted:null,customerClarityAccepted:null,nonFortuneTellingBoundaryAccepted:null,lineageAccepted:null,reviewerRef:null,reviewedAt:null,notes:unchanged?'PREVIOUS_REVIEW_NOT_FULLY_ACCEPTED':'CONTENT_CHANGED_REVIEW_REQUIRED'};
+});
+const acceptedCaseCount=migratedResults.filter(x=>dims.every(k=>x[k]===true)).length;
+const rejectedCaseCount=migratedResults.filter(x=>dims.some(k=>x[k]===false)).length;
+const pendingCaseCount=48-acceptedCaseCount-rejectedCaseCount;
+const allAccepted=acceptedCaseCount===48&&rejectedCaseCount===0&&pendingCaseCount===0;
+const migratedPayload={
+ schemaVersion:'PHI-OS-ECR-HUMAN-REVIEW-RESULTS-v1.1.0',work:'CX-R12R4B-R4-W33R',
+ status:allAccepted?'HUMAN_REVIEW_COMPLETE':'PENDING_HUMAN_REVIEW',
+ requiredCaseCount:48,acceptedCaseCount,rejectedCaseCount,pendingCaseCount,
+ aggregateAttestation:allAccepted?(deltaReceipt?{
+  reviewedBy:'TL',reviewedAt:deltaReceipt.reviewedAt,
+  statement:'45 unchanged ECR review cases retain prior acceptance by review digest; ECR-HR-12, ECR-HR-25 and ECR-HR-38 were re-reviewed and accepted after the D11 Earth / Embodiment correction.',
+  deltaAcceptanceRef:deltaReceiptPath,reviewCaseDigestsBound:true
+ }:(existingResults?.aggregateAttestation||{reviewCaseDigestsBound:true})):null,
+ results:migratedResults
+};
+const migratedText=JSON.stringify(migratedPayload,null,2)+'\n';
+if(check){
+ if(!fs.existsSync(resultsPath))throw new Error(`CAMPAIGN_DRIFT:${resultsPath}`);
+ let actualResults;
+ try{actualResults=JSON.parse(fs.readFileSync(resultsPath,'utf8'));}catch{throw new Error(`CAMPAIGN_RESULTS_UNREADABLE:${resultsPath}`);}
+ if(stable(actualResults)!==stable(migratedPayload))throw new Error(`CAMPAIGN_DRIFT:${resultsPath}`);
+}else write(resultsPath,migratedText);
+
+const html=`<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><title>ECR Human Review 48</title><style>body{font:16px/1.55 system-ui;margin:0;background:#f6f3ed;color:#202020}main{max-width:1100px;margin:auto;padding:32px}.case{background:#fff;border:1px solid #ddd;border-radius:14px;padding:22px;margin:18px 0}.unit{border-top:1px solid #eee;padding:14px 0}.coord{font-family:ui-monospace,monospace;background:#f3f3f3;padding:10px;border-radius:8px}.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}label{background:#fafafa;padding:8px;border-radius:8px}h1,h2,h3{line-height:1.2}.note{color:#666}</style><main><h1>CX-R12R4B ECR｜48-case Human Review</h1><p class="note">此页面只用于审核 W32R 的解释组合。机器已通过不代表客户解释已获准；请逐例检查方法忠实度、客户清晰度、非算命边界与 lineage。</p>${reviewCases.map(c=>`<section class="case"><h2>${c.caseId} · ${c.locale}</h2><div class="coord">${Object.entries(c.coordinate).map(([k,v])=>`${k}: ${v.map(x=>x.code).join(', ')}`).join('<br>')}</div>${c.interpretationUnits.map(u=>`<article class="unit"><h3>${u.title}</h3><p>${u.plainLanguageExplanation}</p><p><b>Observe:</b> ${u.observableSignals.join(' ')}</p><p><b>Reality question:</b> ${u.realityComparisonQuestions.join(' ')}</p></article>`).join('')}<div class="checks"><label><input type="checkbox"> 方法忠实度接受</label><label><input type="checkbox"> 客户清晰度接受</label><label><input type="checkbox"> 非算命边界接受</label><label><input type="checkbox"> Lineage 接受</label></div></section>`).join('')}</main></html>`;write('content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review.html',html);
+const currentReviewResults=JSON.parse(fs.readFileSync(resultsPath,'utf8'));const humanState=currentReviewResults.status==='HUMAN_REVIEW_COMPLETE'?`${currentReviewResults.acceptedCaseCount}/48 accepted`:`${currentReviewResults.acceptedCaseCount}/48 accepted · ${currentReviewResults.pendingCaseCount}/48 pending`;console.log(check?'✓ ECR R4 machine/review campaign is current.':'✓ ECR R4 machine/review campaign written.');console.log(`  Machine ${cases.length}/64; human review ${humanState}.`);

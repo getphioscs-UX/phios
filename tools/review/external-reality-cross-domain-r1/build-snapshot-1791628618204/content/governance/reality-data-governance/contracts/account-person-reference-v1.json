@@ -1,0 +1,11 @@
+{
+  "contractCode":"PHIOS-RDG-ACCOUNT-PERSON-REFERENCE-v1",
+  "authorityOwner":"RDG",
+  "workspaceOwner":"MY_REALITY",
+  "upstreamPermission":"content/governance/reality-data-governance/contracts/data-permission-contract-v1.json",
+  "requiredFields":["personId","accountOwnerUserId","subjectClass","displayName","relationshipToAccountOwner","relationshipVerificationState","createdAt","updatedAt","version"],
+  "optionalFields":["linkedUserId","birthDate","birthTime","birthTimePrecision","birthPlace","residencyJurisdiction","minorOrDependentState"],
+  "subjectClasses":["SELF","DEPENDENT","DECLARED_THIRD_PARTY","LINKED_ADULT_ACCOUNT"],
+  "relationshipVerificationStates":["SELF_DECLARED","GUARDIAN_DECLARED","BILATERAL_CONFIRMED","UNVERIFIED"],
+  "rules":{"accountScoped":true,"automaticPersonMerge":false,"automaticAccountLink":false,"relationshipLabelConfersDomainRole":false,"financialHouseholdInfersOwnership":false,"universalFinancialPersonOwner":false,"newRelationshipRuntime":false}
+}

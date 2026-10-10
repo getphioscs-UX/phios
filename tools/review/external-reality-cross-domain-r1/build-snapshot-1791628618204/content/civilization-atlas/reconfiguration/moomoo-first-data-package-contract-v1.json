@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-MOOMOO-FIRST-DATA-PACKAGE-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "READY_FOR_AUTHORIZED_RETRIEVAL",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P1",
+  "providerId": "MOOMOO_OPENAPI",
+  "authorityClass": "MARKET_DATA_PROVIDER",
+  "purpose": "Retrieve the smallest governed market-data package capable of testing the three current DOSSIER-US W8E evidence gaps without treating proxy markets as the whole U.S. reality.",
+  "requestManifest": "content/civilization-atlas/reconfiguration/moomoo-first-data-package-requests-v1.json",
+  "importTemplate": "content/civilization-atlas/reconfiguration/moomoo-first-data-package-import-template-v1.json",
+  "targetGaps": [
+    "US-W8E-SEM-FINANCIAL-CONSTRAINT",
+    "US-W8E-SEM-MACRO-RECONFIGURATION",
+    "US-W8E-SEM-SYSTEM-CONTINUITY"
+  ],
+  "rules": [
+    "Market instruments are observational proxies, not definitions of the U.S. economy or any Reality Grammar.",
+    "Broad-market and sector ETFs may support market-structure observations only; they do not establish economy-wide structural change alone.",
+    "Capital-flow observations must retain instrument, period type, start/end dates and provider timestamps.",
+    "Historical candlestick observations must retain adjustment mode, interval, field paths and pagination lineage when applicable.",
+    "Financial statements must retain issuer, statement type, reporting period, currency, accounting metadata and pagination lineage.",
+    "A provider payload is imported only after successful authorized retrieval; placeholder/template records never count as evidence.",
+    "No trade execution, recommendation, portfolio instruction or account action is part of this work."
+  ],
+  "boundaries": {
+    "proxyInstrumentEqualsEconomy": false,
+    "providerAloneEstablishesConstraint": false,
+    "providerAloneEstablishesReconfiguration": false,
+    "providerAloneEstablishesContinuity": false,
+    "currentPositionAdmission": false
+  }
+}

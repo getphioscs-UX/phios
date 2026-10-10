@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W22-AST-PRODUCTION-POLICY-BLOCKER-v1.0.0",
+  "work": "MPA-W22",
+  "status": "BLOCKED_METHOD_POLICY_AUTHORITY_REQUIRED",
+  "methodCode": "ASTROLOGY",
+  "authorityOwner": "AST_METHOD_GOVERNANCE_NOT_MPA",
+  "sourceFreeze": "content/professional/core-method-runtime/ast-production-freeze-v1.json",
+  "unapprovedPolicies": [
+    {
+      "policy": "planetSet",
+      "approved": false
+    },
+    {
+      "policy": "houseSystem",
+      "approved": false
+    },
+    {
+      "policy": "zodiac",
+      "approved": false
+    },
+    {
+      "policy": "productionOrbPolicy",
+      "approved": false
+    },
+    {
+      "policy": "minorAspects",
+      "approved": false
+    }
+  ],
+  "additionalExplicitPoliciesRequiredBeforeProduction": [
+    "nodePolicy",
+    "retrogradePolicy",
+    "precisionPolicy",
+    "anglePolicy",
+    "aspectSet",
+    "applyingPolicy",
+    "priorityPolicy",
+    "normalizationPolicy"
+  ],
+  "mpaDecision": {
+    "mayInventDefaults": false,
+    "mayApproveMethodPolicy": false,
+    "technicalGatePassMayOverride": false
+  },
+  "remainingBlockerCode": "PRODUCTION_POLICIES_NOT_APPROVED"
+}

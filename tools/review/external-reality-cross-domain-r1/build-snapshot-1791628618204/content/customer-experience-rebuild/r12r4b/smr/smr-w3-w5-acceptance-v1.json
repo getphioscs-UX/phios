@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4B-SMR-R2-W3-W5-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "07d01b39a98d07ff237f1516852f3b29d058a47e",
+  "commitUnit": "R2-2",
+  "work": ["R2-W3", "R2-W4", "R2-W5"],
+  "predecessor": "content/customer-experience-rebuild/r12r4b/smr/smr-w0-w2-acceptance-v1.json",
+  "status": "ENGINEERING_ACCEPTED_READY_FOR_W6",
+  "w3": {
+    "customerPriorityResolver": "PASS",
+    "priorityRuleRegistry": "PHI-OS-SMR-R2-PRIORITY-RULE-REGISTRY-v1.0.0",
+    "priorityClasses": ["PRIMARY", "SECONDARY", "SUPPORTING", "CONDITIONAL", "TECHNICAL", "SUPPRESS"],
+    "priorityReasonRefsRequired": true,
+    "llmPriority": false,
+    "rendererPriority": false,
+    "firstScreenConsumesOnlyPrimaryAndSelectedSecondary": true
+  },
+  "w4": {
+    "customerThemeIr": "PASS",
+    "schemaVersion": "PHI-OS-CUSTOMER-THEME-IR-v1.0.0",
+    "claimTextOnly": true,
+    "newMeaningCreated": false,
+    "tensionPreserved": true,
+    "conditionsPreserved": true
+  },
+  "w5": {
+    "evidenceDedup": "PASS",
+    "claimDedup": "PASS",
+    "narrativeDedup": "PASS",
+    "fullExplanationMaxPerSemanticCluster": 1,
+    "contextDerivativeRequiresNewInformation": true,
+    "evidenceLineageDeleted": false
+  },
+  "realMethodRegression": {
+    "methods": ["AST", "BZR", "ZWR", "NUM", "ECR"],
+    "AST": {"claims": 3, "primary": 3, "secondary": 0, "supporting": 0, "firstScreen": 3, "themes": 3, "claimClusters": 2},
+    "BZR": {"claims": 4, "primary": 2, "secondary": 2, "supporting": 0, "firstScreen": 3, "themes": 4, "claimClusters": 1},
+    "ZWR": {"claims": 3, "primary": 1, "secondary": 2, "supporting": 0, "firstScreen": 3, "themes": 3, "claimClusters": 3},
+    "NUM": {"claims": 5, "primary": 2, "secondary": 1, "supporting": 2, "firstScreen": 3, "themes": 4, "claimClusters": 5},
+    "ECR": {"claims": 5, "primary": 3, "secondary": 2, "supporting": 0, "firstScreen": 3, "themes": 1, "claimClusters": 5},
+    "status": "PASS"
+  },
+  "boundaries": {
+    "duplicateMethodRuntimeCreated": false,
+    "rawProjectionCustomerConclusionCreated": false,
+    "rendererMeaningCreated": false,
+    "rendererPriorityCreated": false,
+    "themeMeaningInvented": false,
+    "tensionSilentlyRemoved": false,
+    "humanEvidenceRewritten": false,
+    "w6Started": false
+  },
+  "next": "R2-W6 SECTION INFORMATION-GAIN ELIGIBILITY",
+  "production": {
+    "r2CustomerCutover": false,
+    "reason": "W6-W20_NOT_COMPLETE"
+  }
+}

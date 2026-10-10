@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-HRX-W33-BROWSER-CLOUDFLARE-ACCEPTANCE-v2.0.0",
+  "work": "HRX-W33-EVIDENCE-CLOSURE",
+  "successorOf": "hrx-w33-browser-cloudflare-acceptance-v1.json",
+  "baselineCommit": "13364abcedc47d935829dbc4dec1a8da4a3adee9",
+  "deploymentIdentityEndpoint": "/api/health-runtime-status",
+  "liveSmokeCommand": "npm run hrx:capture-live-evidence",
+  "evidenceOutput": "dist/hrx-live-evidence/hrx-w33-live-evidence.json",
+  "requiredEvidence": [
+    "DEPLOYED_SHA_MATCH",
+    "HTTPS_PRODUCTION_URL",
+    "HEALTH_PAGE_RENDER",
+    "POST_API_HEALTH_ROUTE",
+    "APPROVED_AUTHORITY_FETCH",
+    "NO_STORE_HEADERS",
+    "NO_DIAGNOSIS_TREATMENT_REGRESSION",
+    "MOBILE_BROWSER_ATTESTATION",
+    "EN_AND_ZH_HANS_ATTESTATION"
+  ],
+  "evidenceRules": {
+    "machineEvidenceCannotBeHandEntered": true,
+    "deploymentShaMustComeFromLiveStatusEndpoint": true,
+    "captureMustFailClosed": true,
+    "promotionMayNotConsumePartialEvidence": true
+  },
+  "liveEvidenceObservedInBaseline": false,
+  "status": "LIVE_EVIDENCE_CAPTURE_READY_NOT_YET_OBSERVED"
+}

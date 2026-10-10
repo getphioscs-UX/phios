@@ -1,0 +1,96 @@
+{
+  "milestone": "PDS-W3",
+  "contractVersion": "1.0.0",
+  "schemaVersion": "phi-os.pds-core-component-shell-contract.v1",
+  "status": "core-component-shell-aligned",
+  "frozenAt": "2026-07-29",
+  "purpose": "Align the existing global shell and shared controls without redesigning page information architecture.",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "3311262b377fb1e936fe39cfdd0528e6f3ce3e2e"
+  },
+  "informationArchitecture": {
+    "changed": false,
+    "primaryNavigation": ["discover", "knowledge", "reality", "professional", "about", "language"],
+    "footerNavigation": ["thesis", "books", "atlas", "realityJourney", "services", "privacy", "terms", "contact"]
+  },
+  "sharedShell": {
+    "script": "assets/js/public-shell.js",
+    "stylesheet": "assets/css/public-experience.css",
+    "parts": ["skip-link", "header", "brand", "primary-navigation", "mobile-navigation", "locale-switch", "page-container", "footer"]
+  },
+  "componentContract": {
+    "button": {
+      "minimumTargetToken": "--phi-control-target-min",
+      "states": ["default", "hover", "focus-visible", "active", "disabled"]
+    },
+    "link": {
+      "states": ["default", "hover", "focus-visible", "current"]
+    },
+    "focus": {
+      "widthToken": "--phi-focus-width",
+      "offsetToken": "--phi-focus-offset",
+      "mustRemainVisible": true
+    },
+    "container": {
+      "shellToken": "--phi-container-shell",
+      "gutterToken": "--phi-gutter"
+    }
+  },
+  "interactionContract": {
+    "mobileMenu": {
+      "toggleOwnsExpandedState": true,
+      "escapeClosesAndRestoresFocus": true,
+      "focusContainedWhileOpen": true,
+      "outsideClickCloses": true,
+      "linkOrLocaleSelectionCloses": true,
+      "desktopResizeCloses": true
+    },
+    "locale": {
+      "locales": ["en", "zh-Hans"],
+      "existingStorageKeyChanged": false,
+      "activeStateUsesAriaPressed": true
+    },
+    "skipLink": {
+      "hiddenUntilKeyboardFocus": true,
+      "targetMustExist": true
+    }
+  },
+  "responsiveContract": [
+    {
+      "viewportPx": 360,
+      "mode": "compact",
+      "navigation": "single-column-disclosure",
+      "footer": "single-column",
+      "horizontalOverflowAllowed": false
+    },
+    {
+      "viewportPx": 768,
+      "mode": "tablet",
+      "navigation": "two-column-disclosure",
+      "footer": "two-column",
+      "horizontalOverflowAllowed": false
+    },
+    {
+      "viewportPx": 1440,
+      "mode": "desktop",
+      "navigation": "inline",
+      "footer": "four-column",
+      "horizontalOverflowAllowed": false
+    }
+  ],
+  "boundaries": {
+    "pageContentChanged": false,
+    "pageMissionChanged": false,
+    "translationKeysChanged": false,
+    "runtimeChanged": false,
+    "runtimeSdkChanged": false,
+    "apiChanged": false,
+    "storageKeysChanged": false
+  },
+  "downstream": {
+    "nextMilestone": "PDS-W4",
+    "pageMigrationBeginsAt": "PDS-W4"
+  }
+}

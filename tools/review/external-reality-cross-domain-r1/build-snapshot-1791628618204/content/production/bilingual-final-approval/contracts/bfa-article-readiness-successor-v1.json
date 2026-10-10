@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-BFA-ARTICLE-READINESS-SUCCESSOR-v1.0.0",
+  "work": "BFA-BATCH2-ARTICLE-READINESS-ACTIVATION",
+  "status": "ACTIVE_SUCCESSOR_CONTRACT",
+  "appliesFromBatch": "BATCH-002",
+  "purpose": "Allow BFA successor batches to select unpublished ARTICLE-primary Canonical Nodes whose Canonical thesis/boundary, manuscript mapping and C3 production readiness are already Human-governed, without requiring the historical Batch-1 production-role choreography to be replayed.",
+  "requiredUpstreamEvidence": [
+    "CANONICAL_NODE_PRIMARY_ASSET_TYPE_ARTICLE",
+    "C2_THLESIS_AND_BOUNDARY_FROZEN",
+    "C2_HUMAN_EDITORIAL_APPROVED",
+    "MANUSCRIPT_MAPPING_HUMAN_VERIFIED",
+    "C3_PRODUCTION_READY",
+    "ZH_HANS_CANONICAL_LOCALE_READY",
+    "NOT_ALREADY_PUBLISHED_FOR_REQUESTED_LOCALES"
+  ],
+  "historicalRolePolicy": {
+    "existingWave1RoleRemainsValid": true,
+    "existingFragmentFigureOrMultiAssetRoleIsNotRevoked": true,
+    "successorArticleProjectionIsAdditive": true,
+    "c2MayNotBeReinterpretedAsProductionRoleAuthority": true
+  },
+  "humanAuthorityBoundary": {
+    "articleActivationIsHumanPublicationApproval": false,
+    "candidateGenerationIsHumanApproval": false,
+    "automaticPreflightIsHumanJudgment": false,
+    "finalHumanAuthority": "BILINGUAL_FINAL_PUBLICATION_APPROVAL",
+    "reviewerCode": "TL"
+  },
+  "figureBoundary": {
+    "c2RecommendationEqualsRequirement": false,
+    "figureRequiredOnlyWhenUpstreamExplicitlyRequired": true,
+    "carAuthorityMayBeInferred": false
+  },
+  "forbidden": [
+    "BYPASS_C2_OR_C3",
+    "FABRICATE_MANUSCRIPT_MAPPING_APPROVAL",
+    "REWRITE_HISTORICAL_PRODUCTION_ROLE",
+    "INFER_CAR_APPROVAL",
+    "INFER_TL_FINAL_APPROVAL"
+  ]
+}

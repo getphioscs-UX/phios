@@ -1,0 +1,4 @@
+import {retrieveCurrentFacts} from '../current-facts-gateway/current-facts-gateway.js';
+const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
+export async function onRequestPost(context){let body;try{body=await context.request.json()}catch{return json({ok:false,error:'INVALID_JSON'},400)};const question=String(body?.question||body?.q||'').trim();if(!question)return json({ok:false,error:'QUESTION_REQUIRED'},400);const result=await retrieveCurrentFacts({question,env:context.env||{},fetcher:fetch});return json({ok:true,result});}
+export async function onRequestGet(){return json({ok:false,error:'CURRENT_FACTS_POST_ONLY'},405)}

@@ -1,0 +1,7462 @@
+# NAV-16｜Diminishing Return
+
+## 边际收益递减｜什么时候更多投入已经不再合理
+
+**Canonical Question｜规范问题**
+
+> **当投入不断增加，而现实改善越来越少时，为什么“再多做一点”不再天然合理？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-16
+```
+
+## 2. `canonicalTitleZh`
+
+```
+边际收益递减
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Diminishing Return
+```
+
+## 4. `canonicalQuestion`
+
+```
+当投入不断增加，而现实改善越来越少时，
+为什么“再多做一点”不再天然合理？
+```
+
+---
+
+# 5. `definition`
+
+**Diminishing Return** 是 Navigation 对“继续增加投入是否仍然产生足够现实改善”进行正式判断的机制。
+
+它不是一般经济学意义上的抽象边际收益公式，也不是简单地问：
+
+> 花的钱值不值？
+
+NAV-16 真正处理的是：
+
+> **当一个方向已经持续获得更多时间、金钱、注意力、协调、恢复牺牲或其他容量，但每一轮新增投入所换来的现实改善越来越少时，继续追加投入是否仍然拥有资格？**
+
+例如：
+
+```
+第一次增加投入：
+每周多投入 5 小时
+→ 明显改善交付
+
+第二次增加投入：
+再多 5 小时
+→ 有一些改善
+
+第三次增加投入：
+再多 10 小时
+→ 结果几乎不变
+```
+
+这时，问题已经不再只是：
+
+```
+还能不能继续投入？
+```
+
+而是：
+
+```
+新增投入
+是否仍然改变
+真正重要的现实结果？
+```
+
+因此：
+
+> **NAV-16 的核心不是反对投入，而是阻止“过去多投入有效”被自动外推成“继续多投入一定仍然有效”。**
+
+---
+
+# 6. `navigationMeaning`
+
+现实中的很多路径都会形成一种惯性：
+
+```
+问题没有解决
+→ 再投入一点
+
+仍然没有解决
+→ 再投入更多
+```
+
+这种逻辑在早期可能完全合理。
+
+但随着投入增加，现实可能出现三种不同情况：
+
+```
+MORE INPUT
+→ MORE CAPABILITY
+
+MORE INPUT
+→ SAME OUTCOME
+
+MORE INPUT
+→ MORE COST + NO MATERIAL IMPROVEMENT
+```
+
+三者不能被同等处理。
+
+因此 NAV-16 建立：
+
+```
+Existing Path
++
+Additional Input
+↓
+Observed Incremental Improvement
+↓
+Incremental Cost
+↓
+Return Qualification
+```
+
+它真正要发现的是：
+
+> **什么时候“继续加资源”已经不再是解决问题，而是在补贴一个越来越不能自我成立的结构。**
+
+---
+
+# 7. `requiredInputs`
+
+NAV-16 最低需要：
+
+```
+currentPath
+currentOutcomeState
+maintenanceCostState
+capacityQualificationState
+additionalInputHistory
+observedOutcomeChange
+timeBoundary
+```
+
+如果没有足够 baseline 比较：
+
+```
+priorInput
+priorOutcome
+currentInput
+currentOutcome
+```
+
+则不得宣称已经出现 diminishing return。
+
+应保留：
+
+```
+RETURN_PATTERN_UNKNOWN
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+currentRealityProjection
+operationalMetrics
+relationshipContext
+professionalInput
+priorNavigationState
+historicalPerformance
+capacityContext
+futureOptionEffects
+```
+
+这些用于判断：
+
+- 更多投入到底产生了什么；
+- 改善是否真实；
+- 是否只是延迟恶化；
+- 是否正在建立未来能力；
+- 是否存在替代投入方式。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+OPERATIONAL_RECORD
+PROFESSIONAL_INPUT
+CURRENT_EXTERNAL_EVIDENCE
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但 Return 判断必须主要依赖：
+
+```
+OBSERVED_INPUT_CHANGE
+OBSERVED_OUTCOME_CHANGE
+VERIFIED_COST_CHANGE
+MATERIAL_CAPACITY_CHANGE
+```
+
+而不是解释系统对“现在应该坚持”的描述。
+
+---
+
+# 10. Core Return States
+
+建议 runtime 至少区分：
+
+```
+RETURN_IMPROVING
+RETURN_PROPORTIONATE
+RETURN_DIMINISHING
+RETURN_FLAT
+NEGATIVE_RETURN
+RETURN_PATTERN_UNKNOWN
+```
+
+---
+
+## A. `RETURN_IMPROVING`
+
+新增投入带来的现实改善正在扩大。
+
+例如：
+
+```
+每增加一单位培训
+→ 执行能力明显提高
+```
+
+这可能说明当前投入仍在建立能力。
+
+---
+
+## B. `RETURN_PROPORTIONATE`
+
+新增投入仍然产生大致相称的现实改善。
+
+这通常意味着：
+
+```
+more input
+still has current qualification
+```
+
+---
+
+## C. `RETURN_DIMINISHING`
+
+新增投入仍然产生改善，但：
+
+```
+incremental gain
+<
+previous incremental gain
+```
+
+这并不自动意味着停止。
+
+它意味着：
+
+```
+more input now requires justification
+```
+
+---
+
+## D. `RETURN_FLAT`
+
+新增投入已经没有产生实质可观察改善。
+
+例如：
+
+```
+more overtime
+→ same delivery
+
+more marketing spend
+→ no material lead improvement
+
+more relationship effort
+→ no observable change in coordination
+```
+
+必须谨慎判断，因为结果可能有延迟。
+
+---
+
+## E. `NEGATIVE_RETURN`
+
+新增投入不仅没有改善，反而：
+
+```
+increases cost
+reduces capacity
+reduces future option space
+worsens other domains
+```
+
+例如：
+
+```
+more overtime
+→ lower recovery
+→ more errors
+→ more overtime
+```
+
+---
+
+# 11. Return Dimensions
+
+NAV-16 不应只评价一个结果。
+
+至少可以检查：
+
+```
+OUTPUT_RETURN
+CAPABILITY_RETURN
+FINANCIAL_RETURN
+TIME_RETURN
+CAPACITY_RETURN
+RELATIONSHIP_RETURN
+OPTION_SPACE_RETURN
+LEARNING_RETURN
+```
+
+一个投入可能：
+
+```
+output return low
+```
+
+但：
+
+```
+learning return high
+```
+
+因此不能只看眼前 output。
+
+---
+
+# 12. `allowedInference`
+
+NAV-16 可以：
+
+## A. 比较连续投入与连续结果
+
+例如：
+
+```
+Month 1:
+marketing RM2k
+→ 100 qualified leads
+
+Month 2:
+marketing RM4k
+→ 130 qualified leads
+
+Month 3:
+marketing RM8k
+→ 138 qualified leads
+```
+
+可以标记：
+
+```
+RETURN_DIMINISHING
+```
+
+但不能自动判断广告应停止，因为还需要考虑利润、战略与时间。
+
+---
+
+## B. 识别投入正在变成补偿性维护
+
+直接读取 NAV-12：
+
+```
+COMPENSATORY_MAINTENANCE
+```
+
+例如：
+
+```
+更多人力
+更多会议
+更多加班
+```
+
+只维持：
+
+```
+same output
+```
+
+可提高：
+
+```
+DIMINISHING_RETURN_CONCERN
+```
+
+---
+
+## C. 识别投入正在建立未来能力
+
+例如：
+
+```
+training cost high now
+output improvement small now
+```
+
+但：
+
+```
+skill capability rising
+```
+
+则不能仅因短期 output return 低就判断为无效。
+
+可标记：
+
+```
+CAPABILITY_BUILDING_RETURN
+```
+
+---
+
+## D. 识别结果改善来自其他变量
+
+例如：
+
+```
+more staff hired
++
+market demand suddenly rises
+```
+
+不能把所有改善都归功于 staff。
+
+必须保留：
+
+```
+RETURN_ATTRIBUTION_UNCERTAIN
+```
+
+---
+
+## E. 识别继续投入是否正在消耗未来选择
+
+例如：
+
+```
+additional capital
+→ same business revenue
+→ liquidity falls
+```
+
+则即使 output 没下降，整体 return 可能已经恶化。
+
+---
+
+# 13. `forbiddenInference`
+
+NAV-16 严禁：
+
+## A. 没有 baseline 就声称 diminishing return
+
+禁止：
+
+```
+感觉投入很多
+→ diminishing return
+```
+
+---
+
+## B. 把短期无结果当成长期无回报
+
+某些投入存在：
+
+```
+lag
+learning curve
+implementation delay
+```
+
+必须保留时间边界。
+
+---
+
+## C. 把任何递减都解释成应该停止
+
+```
+diminishing
+≠
+worthless
+```
+
+很多正常系统都存在边际收益递减。
+
+---
+
+## D. 把沉没成本变成继续追加理由
+
+禁止：
+
+```
+already spent RM100k
+→ need another RM20k
+```
+
+除非新增投入本身拥有独立现实资格。
+
+---
+
+## E. 用 symbolic method 判断回报递减
+
+禁止：
+
+```
+Tarot shows blockage
+→ return diminishing
+```
+
+---
+
+## F. 因为用户很努力就假设投入仍然有效
+
+```
+effort
+≠
+return
+```
+
+---
+
+# 14. `decisionEffect`
+
+NAV-16 主要影响：
+
+```
+OPTION_WEIGHT
+ADDITIONAL_INPUT_ELIGIBILITY
+ACTION_SCALE
+WAIT_ACT_BALANCE
+STRUCTURAL_CHANGE_ADMISSION
+RESOURCE_REALLOCATION
+```
+
+核心 effect：
+
+```
+MARGINAL_INPUT_QUALIFICATION
+```
+
+即：
+
+> **下一单位投入还值不值得进入？**
+
+---
+
+# 15. `decisionThresholdEffect`
+
+当：
+
+```
+RETURN_PROPORTIONATE
+```
+
+时，继续投入可能维持原有资格。
+
+当：
+
+```
+RETURN_DIMINISHING
+```
+
+时，下一单位投入需要更强理由。
+
+当：
+
+```
+RETURN_FLAT
+```
+
+或：
+
+```
+NEGATIVE_RETURN
+```
+
+时，应提高：
+
+```
+ADDITIONAL_INPUT_THRESHOLD
+```
+
+并正式允许：
+
+```
+alternative allocation
+parameter change
+structural alternative
+```
+
+进入后续比较。
+
+冻结原则：
+
+> **The weaker the incremental improvement from additional input, the stronger the justification required for the next unit of input.**
+
+中文：
+
+> **新增投入带来的增量改善越弱，下一单位投入所需要的现实理由就越强。**
+
+---
+
+# 16. `authorityBoundary`
+
+NAV-16 可以：
+
+- 比较投入变化；
+- 比较结果变化；
+- 判断边际改善；
+- 标记 attribution uncertainty；
+- 标记追加投入需要重新证明；
+- 建议比较替代用途；
+- 为 NAV-17 Structural Alternative 提供 admission basis。
+
+NAV-16 不可以：
+
+- 自动停止项目；
+- 自动撤资；
+- 自动结束关系；
+- 自动判定某个方向失败；
+- 用单一数字取代价值判断；
+- 把解释性系统当回报证据。
+
+---
+
+# 17. `humanDecisionBoundary`
+
+即使出现：
+
+```
+RETURN_DIMINISHING
+```
+
+用户仍然可能认为继续投入合理。
+
+例如：
+
+```
+照护家人
+```
+
+未必追求：
+
+```
+economic return
+```
+
+又或者：
+
+```
+艺术
+教育
+长期研究
+```
+
+可能接受低短期回报。
+
+因此系统必须区分：
+
+```
+RETURN
+```
+
+与：
+
+```
+VALUE
+```
+
+Navigation 可以说：
+
+> 继续投入的增量改善已经明显变小。
+
+但不能自动说：
+
+> 因此这件事不值得。
+
+后者进入 NAV-19 / NAV-20 的价值判断。
+
+---
+
+# 18. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.18｜什么时候更多投入已经不再合理
+```
+
+相关：
+
+```
+15.14｜维持成本什么时候改变决定
+15.15｜原方向什么时候失去默认资格
+15.17｜容量什么时候成为硬约束
+15.19｜修正参数，还是把重构放进候选
+15.20｜什么时候等待已经比行动更昂贵
+```
+
+---
+
+# 19. `relatedBookFoundations`
+
+## Book III｜Reality Continuity
+
+Book III 提供：
+
+```
+maintenance escalation
+accumulated burden
+compensatory inputs
+```
+
+NAV-16 不重新解释这些机制。
+
+它只问：
+
+> **新增投入还在改善现实，还是只是越来越昂贵地维持同一结果？**
+
+---
+
+## Book IV｜Reality Expansion
+
+提供：
+
+```
+capacity investment
+scale
+resource expansion
+```
+
+支持判断：
+
+```
+more input
+=
+capacity building?
+```
+
+还是：
+
+```
+more input
+=
+maintenance subsidy?
+```
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+measurement
+comparison
+uncertainty
+causal caution
+```
+
+尤其支持：
+
+> **投入增加与结果改善同时发生，不足以证明前者造成后者。**
+
+---
+
+# 20. `profileConsumer`
+
+Profile 可以帮助理解：
+
+```
+overinvestment tendency
+persistence tendency
+loss aversion
+attachment to completion
+```
+
+但只能作为：
+
+```
+BEHAVIORAL_CONTEXT
+```
+
+不能证明：
+
+```
+RETURN_DIMINISHING
+```
+
+---
+
+# 21. `financialConsumer`
+
+Financial 是 NAV-16 的强输入。
+
+可提供：
+
+```
+incremental spend
+incremental income
+cash burn
+capital use
+debt increase
+liquidity effect
+```
+
+但必须谨慎区分：
+
+```
+revenue return
+profit return
+cash-flow return
+```
+
+不能只看收入增长。
+
+---
+
+# 22. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+只可以提供：
+
+```
+INTERPRETIVE_PERSISTENCE_CONTEXT
+```
+
+不得决定：
+
+```
+return state
+additional input eligibility
+resource reallocation
+```
+
+---
+
+# 23. `currentRealityConsumer`
+
+Current Reality 应至少提供：
+
+```
+whatWasAdded
+howMuchWasAdded
+whatChangedAfterward
+whatDidNotChange
+whatCostMore
+whatCapacityChanged
+whatRemainsUnknown
+```
+
+---
+
+# 24. `runtimeConsumer`
+
+NAV-16 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+在 Financial / Career / Business 场景尤其重要，但不应被限制成纯商业 ROI 模块。
+
+---
+
+# 25. `academyConsumer`
+
+Academy 可投影为：
+
+> **Persistence and additional input are only justified while reality continues to respond to them in a meaningful way.**
+
+中文：
+
+> **坚持与追加投入只有在现实仍然对它们产生有意义的回应时，才继续拥有资格。**
+
+---
+
+# 26. `revisionTriggers`
+
+以下情况必须重开 NAV-16：
+
+```
+newInputAdded
+inputScaleChanged
+newOutcomeObserved
+delayedOutcomeAppears
+capacityChanged
+maintenanceCostChanged
+externalConditionChanged
+newProfessionalInput
+alternativeUseAppears
+measurementMethodChanged
+```
+
+---
+
+# 27. Canonical Return Model
+
+建议：
+
+```
+{
+  "returnAssessmentId": "",
+  "pathId": "",
+  "inputHistory": [],
+  "outcomeHistory": [],
+  "incrementalChanges": [],
+  "returnDimensions": {
+    "output": [],
+    "capability": [],
+    "financial": [],
+    "time": [],
+    "capacity": [],
+    "relationship": [],
+    "optionSpace": [],
+    "learning": []
+  },
+  "state": "RETURN_IMPROVING | RETURN_PROPORTIONATE | RETURN_DIMINISHING | RETURN_FLAT | NEGATIVE_RETURN | RETURN_PATTERN_UNKNOWN",
+  "attributionState": "",
+  "lagConsiderations": [],
+  "unknowns": [],
+  "sources": [],
+  "status": ""
+}
+```
+
+---
+
+# 28. Incremental Rule
+
+NAV-16 必须比较：
+
+```
+ADDITIONAL INPUT
+```
+
+对应的：
+
+```
+ADDITIONAL EFFECT
+```
+
+而不能只比较：
+
+```
+total input
+vs
+total result
+```
+
+因为真正的问题是：
+
+> 下一单位投入还产生什么？
+
+---
+
+# 29. Attribution Rule
+
+冻结：
+
+> **Observed improvement after additional input does not automatically prove that the additional input caused the improvement.**
+
+中文：
+
+> **新增投入之后出现改善，并不能自动证明改善就是由这项新增投入造成的。**
+
+允许状态：
+
+```
+ATTRIBUTION_SUPPORTED
+ATTRIBUTION_PARTIAL
+ATTRIBUTION_UNCERTAIN
+```
+
+---
+
+# 30. Lag Rule
+
+如果投入存在合理延迟：
+
+```
+training
+system migration
+relationship repair
+research
+business build
+```
+
+不能过早判断：
+
+```
+RETURN_FLAT
+```
+
+建议记录：
+
+```
+EXPECTED_LAG_WINDOW
+```
+
+但该窗口必须有现实依据。
+
+---
+
+# 31. Compensatory Input Rule
+
+如果新增投入的主要效果只是：
+
+```
+prevent deterioration
+```
+
+而不是：
+
+```
+produce improvement
+```
+
+应标记：
+
+```
+COMPENSATORY_INPUT
+```
+
+这并不自动无价值。
+
+例如：
+
+```
+medical care
+critical maintenance
+caregiving
+```
+
+“防止更坏”本身可能非常重要。
+
+因此：
+
+```
+no improvement
+```
+
+不能总是解释成：
+
+```
+no value
+```
+
+---
+
+# 32. Preservation Return Rule
+
+允许增加一个重要维度：
+
+```
+PRESERVATION_RETURN
+```
+
+即：
+
+> 新增投入虽然没有让结果变得更好，但保护了某个本来会失去的重要条件。
+
+例如：
+
+```
+spending to preserve housing
+caregiving to preserve safety
+maintenance to prevent system failure
+```
+
+这会与 NAV-19 Value Preservation 连接。
+
+---
+
+# 33. Capability-Building Rule
+
+如果新增投入没有立即提升 visible outcome，但：
+
+```
+skill
+system quality
+process
+future option space
+```
+
+明显提高，应标记：
+
+```
+CAPABILITY_BUILDING_RETURN
+```
+
+不能误判成低回报。
+
+---
+
+# 34. Sunk-Cost Firewall
+
+每一次追加投入必须重新获得资格。
+
+冻结：
+
+> **No prior investment grants automatic authority to the next unit of investment.**
+
+中文：
+
+> **任何过去的投入，都不能自动替下一单位投入取得资格。**
+
+---
+
+# 35. Escalating Commitment Rule
+
+如果发现：
+
+```
+input rising
+outcome flat
+future options narrowing
+```
+
+同时用户的主要理由是：
+
+```
+we have already spent too much to stop
+```
+
+应标记：
+
+```
+ESCALATING_COMMITMENT_RISK
+```
+
+但不能诊断用户具有某种心理障碍。
+
+---
+
+# 36. Alternative Allocation Rule
+
+当：
+
+```
+RETURN_DIMINISHING
+RETURN_FLAT
+NEGATIVE_RETURN
+```
+
+成立时，应允许：
+
+```
+ALTERNATIVE_RESOURCE_ALLOCATION
+```
+
+进入候选。
+
+例如：
+
+```
+再投入 RM10k 到现有方向
+```
+
+必须能够与：
+
+```
+保留现金
+培训
+偿还债务
+小规模测试其他方向
+```
+
+进行比较。
+
+但这属于候选 admission，不是最终推荐。
+
+---
+
+# 37. Return vs Value Rule
+
+冻结：
+
+```
+LOW RETURN
+≠
+LOW VALUE
+```
+
+例如：
+
+```
+照护
+安全
+责任
+法律义务
+家庭支持
+```
+
+有时并不以“改善更多”为目标。
+
+所以 NAV-16 必须把：
+
+```
+performance return
+```
+
+与：
+
+```
+preservation / responsibility value
+```
+
+分开。
+
+---
+
+# 38. Return vs Capacity Rule
+
+NAV-15 与 NAV-16 必须明确分工：
+
+```
+NAV-15:
+Can reality carry more input?
+
+NAV-16:
+If reality can carry it, is more input still producing enough value?
+```
+
+因此：
+
+```
+CAPACITY_AVAILABLE
+```
+
+不等于：
+
+```
+ADDITIONAL_INPUT_QUALIFIED
+```
+
+---
+
+# 39. Return vs Structural Change Rule
+
+如果：
+
+```
+additional input
+repeatedly produces weak or negative incremental return
+```
+
+则 NAV-16 可以正式生成：
+
+```
+STRUCTURAL_ALTERNATIVE_ADMISSION
+```
+
+进入 NAV-17。
+
+但不得自己判断：
+
+```
+structure must change
+```
+
+---
+
+# 40. Customer Projection Example
+
+内部：
+
+```
+Path:
+Stay in current role and keep absorbing more workload
+
+Input change:
++15 hours/week over 3 months
+
+Output:
+delivery unchanged
+
+Capability:
+no new authority
+no new compensation
+no meaningful skill expansion
+
+Costs:
+recovery down
+family time down
+
+State:
+RETURN_FLAT
++
+COMPENSATORY_INPUT
+```
+
+客户可以看到：
+
+> **现在的问题已经不是你还能不能再投入，而是再投入以后究竟还改变了什么。**
+> 
+> 过去三个月，你额外投入了大约十五小时工作时间，但交付结果并没有因此明显提高，也没有换来新的权限、薪酬或可迁移能力；新增时间主要是在维持原本已经存在的工作结果，同时恢复与家庭时间继续减少。
+> 
+> 这并不自动意味着应该离开，但它说明“再多投入一点”已经不能继续作为无需证明的答案。下一步需要比较的，开始不是如何继续增加投入，而是参数还能不能调整，或者是否应该让另一种结构正式进入候选。
+
+---
+
+# 41. Customer Actions
+
+允许：
+
+```
+Confirm return pattern
+Correct input history
+Add delayed outcome
+Identify preservation value
+Compare alternative use
+Stop additional input
+Continue current level
+Admit structural alternative
+Continue
+```
+
+---
+
+# 42. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+RETURN_IMPROVING
+RETURN_PROPORTIONATE
+RETURN_DIMINISHING
+RETURN_FLAT
+NEGATIVE_RETURN
+RETURN_PATTERN_UNKNOWN
+REASSESSMENT_REQUIRED
+REOPENED
+```
+
+---
+
+# 43. Fail-Closed Conditions
+
+以下情况不得进入 NAV-17：
+
+```
+inputBaselineMissing
+outcomeBaselineMissing
+returnTrendFabricated
+lagIgnored
+preservationValueIgnored
+attributionPresentedAsCertainWithoutEvidence
+symbolicReadingUsedAsReturnAuthority
+costDoubleCounted
+decisionObjectChanged
+```
+
+---
+
+# 44. Canonical Runtime Rule
+
+> **Navigation must reassess additional input when each new unit of effort, money, time, or capacity produces materially less improvement than before.**
+
+中文：
+
+> **当每一单位新增时间、金钱、努力或容量所换来的现实改善明显少于过去时，Navigation 必须重新评估追加投入本身。**
+
+---
+
+# 45. Canonical Marginal Rule
+
+> **Past effectiveness does not guarantee future marginal effectiveness.**
+
+中文：
+
+> **过去增加投入曾经有效，并不能保证下一单位投入仍然具有同样效果。**
+
+---
+
+# 46. Canonical Preservation Rule
+
+> **An input that prevents loss may still carry value even when it does not improve the visible outcome; preservation return must remain distinct from growth return.**
+
+中文：
+
+> **一项投入即使没有让表面结果变得更好，只要它确实阻止了重要条件的丧失，仍然可能具有价值；保护性回报必须与增长性回报分开。**
+
+---
+
+# 47. Canonical Sunk-Cost Rule
+
+> **What has already been invested explains the current position; it does not automatically justify the next investment.**
+
+中文：
+
+> **已经投入的东西可以解释我们为什么来到这里，却不能自动证明下一笔投入仍然合理。**
+
+---
+
+# 48. Canonical Structural Admission Rule
+
+> **When additional input repeatedly produces weak, flat, or negative return, Navigation must allow structural alternatives to enter comparison without assuming that structural change is already the answer.**
+
+中文：
+
+> **当新增投入反复只产生很弱、停滞或负向回报时，Navigation 必须允许结构性替代进入比较，却不能因此预设结构性改变已经是答案。**
+
+---
+
+# 49. Final Canonical Form
+
+```
+NAV-16
+DIMINISHING RETURN
+```
+
+**Input**
+
+```
+Current Path
++
+Additional Inputs
++
+Observed Outcomes
++
+Maintenance Cost
++
+Capacity State
+```
+
+**Process**
+
+```
+Compare:
+What More Was Added?
+What More Was Gained?
+What Was Merely Preserved?
+What Became More Expensive?
+Is the Next Unit Still Qualified?
+```
+
+**Output**
+
+```
+Marginal Return Qualification State
+```
+
+**Boundary**
+
+```
+More input is not automatically more progress.
+Low return does not automatically mean low value.
+```
+
+# NAV-17｜Structural Alternative
+
+## 结构性替代｜什么时候不该再继续修参数，而应该让另一种结构进入候选
+
+**Canonical Question｜规范问题**
+
+> **当局部调整与追加投入都越来越难改善现实以后，什么时候“换一种结构”才真正取得候选资格？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-17
+```
+
+## 2. `canonicalTitleZh`
+
+```
+结构性替代
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Structural Alternative
+```
+
+## 4. `canonicalQuestion`
+
+```
+当局部调整与追加投入都越来越难改善现实以后，
+什么时候“换一种结构”才真正取得候选资格？
+```
+
+---
+
+# 5. `definition`
+
+**Structural Alternative** 是 Navigation 对“当前结构是否已经不值得只继续做参数修正，而应正式允许另一种组织方式、关系方式、工作方式、资源配置方式或生活结构进入比较”进行判断的机制。
+
+它不等于：
+
+```
+RESTRUCTURE_NOW
+```
+
+也不等于：
+
+```
+CURRENT_STRUCTURE_FAILED
+```
+
+更不是：
+
+```
+NEW_STRUCTURE_IS_BETTER
+```
+
+它真正回答的是：
+
+> **什么时候现实已经提供足够理由，让另一种结构从‘想象中的可能’升级成‘应该被认真比较的候选’？**
+
+例如，当前工作问题最初可能只是：
+
+```
+meeting load too high
+```
+
+可以通过：
+
+```
+schedule adjustment
+meeting reduction
+delegation
+```
+
+处理。
+
+但如果经过多轮局部调整以后，真正不变的仍然是：
+
+```
+role requires permanent availability
+authority remains low
+workload remains structurally high
+income depends on this arrangement
+```
+
+那么问题可能已经不是：
+
+> 怎样把这个岗位调得更舒服？
+
+而是：
+
+> **这个岗位结构本身，是否还应该继续垄断候选空间？**
+
+因此：
+
+> **NAV-17 不负责宣布必须重构，而是决定“另一种结构是否已经有资格进入正式比较”。**
+
+---
+
+# 6. `navigationMeaning`
+
+很多现实问题会长期停留在：
+
+```
+adjust parameter
+add resource
+try harder
+monitor longer
+```
+
+因为结构性改变通常：
+
+- 成本更高；
+- 风险更大；
+- 更不可逆；
+- 会影响更多人；
+- 会打破既有秩序。
+
+因此，保守地先做局部调整通常是合理的。
+
+但如果 Navigation 永远只允许：
+
+```
+PARAMETER_REPAIR
+```
+
+它也会形成另一种偏差：
+
+> **无论现实怎样变化，都假设原结构必须保留。**
+
+NAV-17 因此建立：
+
+```
+Current Structure
+↓
+Local Adjustment History
+↓
+Maintenance Cost
+↓
+Capacity Constraint
+↓
+Diminishing Return
+↓
+Structural Alternative Admission
+```
+
+关键 distinction：
+
+```
+STRUCTURAL_ALTERNATIVE_ADMITTED
+≠
+STRUCTURAL_CHANGE_CHOSEN
+```
+
+---
+
+# 7. `requiredInputs`
+
+NAV-17 最低需要：
+
+```
+currentStructure
+currentDecisionObject
+currentPosition
+currentResponseLevel
+localAdjustmentHistory
+continuationQualificationState
+maintenanceCostState
+capacityQualificationState
+marginalReturnState
+```
+
+如果系统不知道：
+
+```
+what counts as the current structure
+```
+
+则不得进入结构比较。
+
+应标记：
+
+```
+STRUCTURE_UNDEFINED
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+currentRealityProjection
+relationshipContext
+careerContext
+organizationalContext
+professionalInput
+timeHorizonMap
+reversibilityProfile
+crossDomainPropagationMap
+priorNavigationState
+externalCurrentEvidence
+```
+
+这些用于判断：
+
+- 结构到底是什么；
+- 哪些部分只是参数；
+- 哪些部分已经属于结构；
+- 改变结构会影响谁；
+- 是否存在更小的结构替代。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+CONTRACTUAL_RECORD
+ORGANIZATIONAL_RECORD
+PROFESSIONAL_INPUT
+CURRENT_EXTERNAL_EVIDENCE
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但结构存在与结构约束必须主要来自：
+
+```
+OBSERVED_STRUCTURE
+VERIFIED_CONSTRAINT
+MATERIAL_DEPENDENCY
+ROLE_OR_CONTRACT_STRUCTURE
+```
+
+不能仅凭解释系统说：
+
+```
+you need transformation
+```
+
+就建立结构改变资格。
+
+---
+
+# 10. What Counts as Structure
+
+NAV-17 必须区分：
+
+```
+PARAMETER
+```
+
+与：
+
+```
+STRUCTURE
+```
+
+---
+
+## A. Parameter
+
+在不改变系统基本组织方式的情况下调整。
+
+例如：
+
+```
+working hours
+meeting count
+budget amount
+schedule
+task allocation
+communication frequency
+```
+
+---
+
+## B. Structure
+
+决定系统基本运行关系的 arrangement。
+
+例如：
+
+```
+employment model
+ownership model
+income model
+location model
+care arrangement
+relationship arrangement
+organizational hierarchy
+debt structure
+business model
+role definition
+```
+
+---
+
+## C. Why the distinction matters
+
+例如：
+
+```
+Current structure:
+full-time fixed-location employment
+```
+
+参数调整可能是：
+
+```
+start 1 hour later
+work from home 1 day/week
+reduce one project
+```
+
+结构替代可能是：
+
+```
+hybrid role
+part-time role
+contract work
+different employer
+portfolio work
+self-employment
+```
+
+NAV-17 不允许把任何小变化都夸成 structural change。
+
+---
+
+# 11. Core Structural States
+
+建议 runtime 至少区分：
+
+```
+PARAMETER_ADJUSTMENT_STILL_QUALIFIED
+STRUCTURAL_ALTERNATIVE_NOT_YET_ADMITTED
+STRUCTURAL_ALTERNATIVE_ADMISSION_SUPPORTED
+MULTIPLE_STRUCTURAL_ALTERNATIVES_ADMITTED
+STRUCTURAL_REVIEW_REQUIRED
+STRUCTURAL_EVIDENCE_INSUFFICIENT
+```
+
+---
+
+## A. `PARAMETER_ADJUSTMENT_STILL_QUALIFIED`
+
+现实仍显示：
+
+```
+local adjustment
+can materially improve fit
+```
+
+此时没有必要提前把结构性改变推到前面。
+
+---
+
+## B. `STRUCTURAL_ALTERNATIVE_NOT_YET_ADMITTED`
+
+虽然存在不满或摩擦，但：
+
+```
+current structure still responsive
+lower-level responses not exhausted
+material threshold not reached
+```
+
+---
+
+## C. `STRUCTURAL_ALTERNATIVE_ADMISSION_SUPPORTED`
+
+已有足够现实依据让至少一个不同结构进入正式比较。
+
+不是推荐，只是：
+
+```
+comparison eligibility granted
+```
+
+---
+
+## D. `MULTIPLE_STRUCTURAL_ALTERNATIVES_ADMITTED`
+
+可能存在多个结构候选。
+
+例如：
+
+```
+stay but reduce scope
+internal transfer
+different employer
+portfolio career
+self-employment
+```
+
+不得自动压成：
+
+```
+stay vs quit
+```
+
+---
+
+## E. `STRUCTURAL_REVIEW_REQUIRED`
+
+当前结构已经与现实发生足够大失配，应正式重新检查结构本身。
+
+但仍未决定替代方案。
+
+---
+
+# 12. `allowedInference`
+
+NAV-17 可以：
+
+## A. 识别局部调整反复失败
+
+例如：
+
+```
+reduce meetings
+change schedule
+delegate tasks
+```
+
+都已尝试，但核心：
+
+```
+availability expectation
+role scope
+authority mismatch
+```
+
+仍不变。
+
+可以判断：
+
+```
+PARAMETER_REPAIR_INSUFFICIENT
+```
+
+---
+
+## B. 识别新增投入已无法改善结构失配
+
+直接读取 NAV-16：
+
+```
+RETURN_DIMINISHING
+RETURN_FLAT
+NEGATIVE_RETURN
+```
+
+作为结构候选 admission evidence。
+
+---
+
+## C. 识别真正问题属于结构而非参数
+
+例如：
+
+```
+“我需要更少会议”
+```
+
+如果根源是：
+
+```
+job requires permanent cross-time-zone coordination
+```
+
+那么会议数量可能只是表面参数。
+
+---
+
+## D. 识别存在另一种结构但尚未成熟
+
+例如：
+
+```
+part-time model
+```
+
+概念上可行，但需要：
+
+```
+employer agreement
+income recalculation
+care coordination
+```
+
+可以标记：
+
+```
+CONDITIONALLY_ADMITTED_STRUCTURAL_ALTERNATIVE
+```
+
+---
+
+## E. 识别结构改变可以分阶段发生
+
+例如：
+
+```
+full-time employment
+→ reduced scope
+→ hybrid
+→ contract
+```
+
+不是只有：
+
+```
+stay
+vs
+leave
+```
+
+---
+
+# 13. `forbiddenInference`
+
+NAV-17 严禁：
+
+## A. 把困难直接解释成结构问题
+
+```
+hard
+≠
+structural mismatch
+```
+
+---
+
+## B. 把所有局部调整失败解释成必须重构
+
+有时问题是：
+
+```
+execution quality
+temporary shock
+wrong adjustment
+insufficient time
+```
+
+---
+
+## C. 用 symbolic reading 宣布结构必须改变
+
+禁止：
+
+```
+BaZi says transformation
+→ career structure must change
+```
+
+---
+
+## D. 把“新结构存在”当成“新结构更好”
+
+```
+alternative exists
+≠
+alternative qualified
+```
+
+---
+
+## E. 把改变形式包装成进步
+
+```
+new
+≠
+better
+```
+
+---
+
+## F. 用用户厌倦自动推断 structural mismatch
+
+厌倦可以触发 inquiry，但不是结构证据。
+
+---
+
+# 14. `decisionEffect`
+
+NAV-17 主要影响：
+
+```
+OPTION_SPACE_EXPANSION
+STRUCTURAL_ALTERNATIVE_ADMISSION
+OPTION_COMPARISON_REQUIREMENT
+ACTION_SCALE
+DECISION_THRESHOLD
+```
+
+核心 effect：
+
+```
+REMOVE_STRUCTURE_MONOPOLY
+```
+
+即：
+
+> **原结构不再自动拥有唯一的解决权。**
+
+---
+
+# 15. `decisionThresholdEffect`
+
+结构性替代通常：
+
+```
+higher impact
+lower reversibility
+more affected parties
+larger transition cost
+```
+
+因此：
+
+```
+admission threshold
+```
+
+和：
+
+```
+execution threshold
+```
+
+必须分开。
+
+冻结：
+
+```
+LOWER THRESHOLD:
+allow alternative to be compared
+
+HIGHER THRESHOLD:
+actually execute structural change
+```
+
+这是 NAV-17 很重要的边界。
+
+> **让一个方案进入比较，不应该和真正执行它使用同样高的门槛。**
+
+否则系统会因为改变成本高，而连替代方案都不允许被看见。
+
+---
+
+# 16. `authorityBoundary`
+
+NAV-17 可以：
+
+- 区分 parameter / structure；
+- 识别局部修正是否仍有效；
+- 允许结构性替代进入候选；
+- 建立多个结构候选；
+- 识别 transition requirements；
+- 要求后续更高 threshold。
+
+NAV-17 不可以：
+
+- 自动选择新结构；
+- 自动执行结构改变；
+- 因现结构不完美而取消它；
+- 使用 Method Reading 建立结构现实；
+- 把 novelty 当价值。
+
+---
+
+# 17. `humanDecisionBoundary`
+
+系统可以判断：
+
+```
+structural alternative deserves comparison
+```
+
+但用户仍然决定：
+
+```
+whether changing structure is worth the disruption
+```
+
+例如系统可以说：
+
+> 目前已经有足够理由让“内部调岗”和“不同雇主”进入比较。
+
+不能直接说：
+
+> 你应该换工作。
+
+---
+
+# 18. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.19｜修正参数，还是把重构放进候选
+```
+
+相关：
+
+```
+15.13｜还在运行，究竟能证明什么
+15.14｜维持成本什么时候改变决定
+15.15｜原方向什么时候失去默认资格
+15.16｜问题扩散以后，优先级为什么会改变
+15.17｜容量什么时候成为硬约束
+15.18｜什么时候更多投入已经不再合理
+```
+
+---
+
+# 19. `relatedBookFoundations`
+
+## Book VI｜Reality Reconfiguration
+
+Book VI 拥有：
+
+```
+structure
+reconfiguration
+carrier change
+constraint rearrangement
+```
+
+NAV-17 不重新解释现实如何重组。
+
+它只决定：
+
+> **什么时候结构性替代应该进入下一步决策空间。**
+
+这是非常重要的 owner boundary：
+
+```
+Book VI:
+How structures reconfigure
+
+NAV-17:
+When structural reconfiguration deserves decision consideration
+```
+
+---
+
+## Book III｜Reality Continuity
+
+Book III 提供：
+
+```
+maintenance
+failure compensation
+continuity strain
+```
+
+帮助 NAV-17 判断局部维护是否仍足够。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+evidence
+uncertainty
+causal boundary
+```
+
+防止系统因为表面失效就过度归因于结构。
+
+---
+
+# 20. `profileConsumer`
+
+Profile 可以帮助理解：
+
+```
+environment fit
+role preference
+autonomy preference
+friction pattern
+```
+
+但不能直接建立：
+
+```
+CURRENT_STRUCTURE_MISMATCH
+```
+
+必须由现实支持。
+
+---
+
+# 21. `financialConsumer`
+
+Financial 对结构候选非常重要。
+
+例如：
+
+```
+employment structure change
+```
+
+需要比较：
+
+```
+income model
+liquidity
+insurance
+debt
+fixed commitments
+transition runway
+```
+
+因此一个结构可能 conceptually attractive，却因财务条件：
+
+```
+NOT_YET_EXECUTABLE
+```
+
+但仍可以：
+
+```
+ADMITTED_FOR_COMPARISON
+```
+
+---
+
+# 22. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+只能：
+
+```
+raise interpretive questions
+```
+
+例如：
+
+```
+是否当前角色结构长期制造某种重复摩擦？
+```
+
+但必须回到现实验证。
+
+不得：
+
+```
+declare restructuring necessary
+```
+
+---
+
+# 23. `currentRealityConsumer`
+
+Current Reality 至少应提供：
+
+```
+currentStructure
+adjustmentsTried
+persistentConstraints
+whatDidNotChange
+whatImproved
+whatStillCostsMore
+```
+
+---
+
+# 24. `runtimeConsumer`
+
+NAV-17 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Organizational Navigation
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+尤其需要支持：
+
+```
+same domain
+different structure
+```
+
+而不是只支持：
+
+```
+same structure
+different parameter
+```
+
+---
+
+# 25. `academyConsumer`
+
+Academy 可投影为：
+
+> **Not every hard problem requires a new structure; but some problems remain hard precisely because the structure itself has stopped responding to adjustment.**
+
+中文：
+
+> **不是所有困难都需要换结构，但有些问题之所以反复存在，正是因为原结构已经不再对局部调整产生足够回应。**
+
+---
+
+# 26. `revisionTriggers`
+
+以下情况必须重开 NAV-17：
+
+```
+localAdjustmentSucceeds
+localAdjustmentFails
+newAlternativeAppears
+capacityChanges
+maintenanceCostChanges
+returnPatternChanges
+contractChanges
+authorityChanges
+financialRunwayChanges
+affectedPartyChanges
+professionalInput
+```
+
+---
+
+# 27. Canonical Structural Alternative Model
+
+建议：
+
+```
+{
+  "structuralReviewId": "",
+  "currentStructure": "",
+  "parameterAdjustmentsTried": [],
+  "persistentStructuralConstraints": [],
+  "admissionState": "PARAMETER_ADJUSTMENT_STILL_QUALIFIED | STRUCTURAL_ALTERNATIVE_NOT_YET_ADMITTED | STRUCTURAL_ALTERNATIVE_ADMISSION_SUPPORTED | MULTIPLE_STRUCTURAL_ALTERNATIVES_ADMITTED | STRUCTURAL_REVIEW_REQUIRED | STRUCTURAL_EVIDENCE_INSUFFICIENT",
+  "alternatives": [],
+  "transitionRequirements": [],
+  "transitionCosts": [],
+  "reversibilityEffects": [],
+  "capacityRequirements": [],
+  "affectedParties": [],
+  "unknowns": [],
+  "sources": [],
+  "status": ""
+}
+```
+
+---
+
+# 28. Parameter-vs-Structure Rule
+
+冻结：
+
+> **A parameter changes how the current structure operates; a structural alternative changes the arrangement through which the system operates.**
+
+中文：
+
+> **参数调整改变的是现有结构怎样运行；结构性替代改变的是系统通过什么样的安排来运行。**
+
+---
+
+# 29. Repair Sufficiency Rule
+
+如果现实仍然对：
+
+```
+lower-cost
+lower-impact
+more reversible adjustments
+```
+
+产生明显回应，则这些路径必须保持可见。
+
+系统不能因为“结构改变更彻底”就提高其权重。
+
+---
+
+# 30. Structural Admission Rule
+
+至少出现以下一种情况时，可以支持结构候选 admission：
+
+```
+persistent structural constraint
+repeated local adjustment failure
+maintenance cost materially rising
+capacity repeatedly saturated
+diminishing / flat / negative marginal return
+cross-domain propagation persists
+current structure no longer serves core value
+```
+
+但没有任何单项必须自动触发。
+
+应综合判断。
+
+---
+
+# 31. Admission vs Execution Rule
+
+冻结：
+
+> **The threshold for allowing a structural alternative to be considered is lower than the threshold for actually executing structural change.**
+
+中文：
+
+> **让结构性替代进入比较所需要的门槛，应低于真正执行结构性改变的门槛。**
+
+---
+
+# 32. Transition Cost Rule
+
+任何结构性替代必须显式记录：
+
+```
+transition cost
+```
+
+例如：
+
+```
+income gap
+learning curve
+relationship disruption
+moving cost
+legal cost
+operational downtime
+identity adjustment
+```
+
+否则 Navigation 会对新结构产生不公平偏好。
+
+---
+
+# 33. Alternative Structure Must Also Be Tested
+
+不能因为原结构出现问题，就把新结构理想化。
+
+每个 alternative 仍需进入：
+
+```
+NAV-02 Current Position
+NAV-04 Time
+NAV-06 Reversibility
+NAV-07 Time Horizon
+NAV-15 Capacity
+```
+
+的相关检查。
+
+新结构不能绕过现实。
+
+---
+
+# 34. Structural Alternative Classes
+
+可以扩展：
+
+```
+ROLE_STRUCTURE_ALTERNATIVE
+INCOME_STRUCTURE_ALTERNATIVE
+LOCATION_STRUCTURE_ALTERNATIVE
+RELATIONSHIP_STRUCTURE_ALTERNATIVE
+CARE_STRUCTURE_ALTERNATIVE
+OWNERSHIP_STRUCTURE_ALTERNATIVE
+ORGANIZATIONAL_STRUCTURE_ALTERNATIVE
+FINANCIAL_STRUCTURE_ALTERNATIVE
+```
+
+避免所有 structural change 都被理解成：
+
+```
+leave / quit / end
+```
+
+---
+
+# 35. Partial Structural Change Rule
+
+有些结构改变可以是部分的。
+
+例如：
+
+```
+full-time → 4-day week
+single-income → mixed-income
+office-only → hybrid
+centralized care → shared care
+single supplier → diversified supplier
+```
+
+这类方案可能比完全退出具有更高可逆性。
+
+---
+
+# 36. Structural Continuity Rule
+
+新结构不一定意味着放弃旧结构中的全部价值。
+
+可以问：
+
+```
+what should be carried forward?
+```
+
+这直接为 NAV-19 Value Preservation 做准备。
+
+---
+
+# 37. Structure Lock-In Rule
+
+如果现结构存在：
+
+```
+high switching cost
+legal lock-in
+debt lock-in
+relationship dependency
+institutional dependency
+```
+
+应标记：
+
+```
+STRUCTURAL_LOCK_IN
+```
+
+但：
+
+```
+lock-in
+≠
+permanent impossibility
+```
+
+它只是提高 transition burden。
+
+---
+
+# 38. Structural Fantasy Rule
+
+如果替代结构仅存在于愿望层：
+
+```
+“I'll just start a business”
+“I'll just move overseas”
+“I'll just freelance”
+```
+
+但没有：
+
+```
+capacity
+pathway
+conditions
+```
+
+则只能：
+
+```
+CONCEPTUAL_ALTERNATIVE
+```
+
+不能视为成熟候选。
+
+---
+
+# 39. Structural Evidence Rule
+
+新结构取得候选资格至少需要：
+
+```
+problem it addresses
+conditions it changes
+requirements it creates
+costs it introduces
+what remains unknown
+```
+
+不能只因为：
+
+```
+sounds better
+```
+
+---
+
+# 40. Current Structure May Requalify
+
+即使结构性替代已经进入比较，原结构仍可能通过：
+
+```
+new authority
+new resources
+role redesign
+cost reduction
+capacity restoration
+```
+
+重新取得资格。
+
+因此：
+
+```
+STRUCTURAL_ALTERNATIVE_ADMITTED
+```
+
+不意味着：
+
+```
+CURRENT_STRUCTURE_REJECTED
+```
+
+---
+
+# 41. Customer Projection Example
+
+内部：
+
+```
+Current Structure:
+Full-time role with fixed scope and permanent availability expectation
+
+Adjustments Tried:
+schedule change
+meeting reduction
+delegation
+
+Result:
+hours remain high
+authority unchanged
+maintenance cost rising
+return flat
+
+State:
+STRUCTURAL_ALTERNATIVE_ADMISSION_SUPPORTED
+```
+
+客户可以看到：
+
+> **现在值得进入比较的，已经不只是“怎样把现有工作再调好一点”。**
+> 
+> 你已经尝试过调整排程、减少会议和重新分工，但真正没有改变的是岗位本身对持续在线、职责范围和权限关系的要求；与此同时，为了维持同样结果，你投入的时间继续增加，新增投入带来的改善却越来越有限。
+> 
+> 这还不足以推出“应该离职”，但已经足以让另一种工作结构正式进入候选，例如内部角色转换、不同雇主、缩小工作范围，或其他收入结构。接下来需要比较的，是这些结构分别保护什么、要求什么，又会带来哪些新的代价。
+
+---
+
+# 42. Customer Actions
+
+允许：
+
+```
+Keep parameter adjustment
+Admit structural alternative
+Add alternative
+Reject alternative
+Compare structures
+Define transition requirement
+Reassess current structure
+Continue
+```
+
+---
+
+# 43. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+PARAMETER_ADJUSTMENT_QUALIFIED
+STRUCTURAL_ALTERNATIVE_NOT_ADMITTED
+STRUCTURAL_ALTERNATIVE_ADMITTED
+MULTIPLE_ALTERNATIVES_ADMITTED
+STRUCTURAL_REVIEW_REQUIRED
+STRUCTURAL_EVIDENCE_INSUFFICIENT
+REOPENED
+```
+
+---
+
+# 44. Fail-Closed Conditions
+
+以下情况不得进入 NAV-18：
+
+```
+currentStructureUndefined
+parameterAndStructureConflated
+localAdjustmentHistoryFabricated
+alternativeInventedWithoutFeasibilityBasis
+symbolicReadingUsedAsStructuralAuthority
+transitionCostIgnored
+affectedPartyIgnored
+capacityStateMissing
+marginalReturnStateMissing
+decisionObjectChanged
+```
+
+---
+
+# 45. Canonical Runtime Rule
+
+> **Navigation must allow structural alternatives to enter comparison when the current structure repeatedly fails to respond to proportionate adjustment, additional input, or restored capacity.**
+
+中文：
+
+> **当现有结构反复无法对合理的局部调整、追加投入或容量恢复产生足够回应时，Navigation 必须允许结构性替代进入正式比较。**
+
+---
+
+# 46. Canonical Non-Automation Rule
+
+> **Admitting a structural alternative does not mean choosing it.**
+
+中文：
+
+> **允许一种结构性替代进入候选，并不等于已经选择它。**
+
+---
+
+# 47. Canonical Proportionality Rule
+
+> **Structural change should not be granted default priority merely because it is more comprehensive than parameter adjustment.**
+
+中文：
+
+> **结构性改变不能仅仅因为“更彻底”，就比参数调整自动取得更高优先权。**
+
+---
+
+# 48. Canonical Transition Rule
+
+> **Every structural alternative must carry its own transition cost, capacity requirement, reversibility profile, and unknowns into comparison.**
+
+中文：
+
+> **每一种结构性替代都必须带着自己的转换成本、容量要求、可逆性与未知进入比较，而不能只展示它理想的一面。**
+
+---
+
+# 49. Canonical Continuity Rule
+
+> **Changing structure does not require abandoning every value contained in the old structure; what deserves preservation must be identified separately.**
+
+中文：
+
+> **改变结构并不意味着必须放弃旧结构中的全部价值；哪些东西值得被保留下来，必须另外判断。**
+
+---
+
+# 50. Final Canonical Form
+
+```
+NAV-17
+STRUCTURAL ALTERNATIVE
+```
+
+**Input**
+
+```
+Current Structure
++
+Adjustment History
++
+Maintenance Cost
++
+Capacity State
++
+Marginal Return
+```
+
+**Process**
+
+```
+Ask:
+Is the problem still a parameter problem?
+Have proportionate adjustments worked?
+Is more input still productive?
+Which structural constraints persist?
+Should another arrangement enter comparison?
+```
+
+**Output**
+
+```
+Structural Alternative Admission State
+```
+
+**Boundary**
+
+```
+Alternative admitted does not mean alternative chosen.
+Current structure questioned does not mean current structure failed.
+```
+
+# NAV-18｜Waiting Cost
+
+## 等待成本｜什么时候等待已经比行动更昂贵
+
+**Canonical Question｜规范问题**
+
+> **当等待不再只是保留选择，而开始持续消耗现实条件时，什么时候“再等等”本身就需要被重新证明？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-18
+```
+
+## 2. `canonicalTitleZh`
+
+```
+等待成本
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Waiting Cost
+```
+
+## 4. `canonicalQuestion`
+
+```
+当等待不再只是保留选择，而开始持续消耗现实条件时，
+什么时候“再等等”本身就需要被重新证明？
+```
+
+---
+
+# 5. `definition`
+
+**Waiting Cost** 是 Navigation 对“延迟决定或延迟行动本身正在付出什么”进行正式判断的机制。
+
+它与 NAV-04｜Time 和 NAV-05｜Inaction 不同。
+
+NAV-04 处理的是：
+
+```
+时间怎样改变决定
+```
+
+NAV-05 处理的是：
+
+```
+不采取新动作时，当前路径会怎样继续
+```
+
+而 NAV-18 进一步问：
+
+> **当“继续等”已经成为一个主动选择时，这段等待本身正在消耗什么，而这些消耗是否已经大到足以改变 Wait / Act 的相对资格？**
+
+例如：
+
+```
+等待 3 个月
+```
+
+可能带来：
+
+```
+more information
+more savings
+more recovery
+better coordination
+```
+
+这时等待具有现实价值。
+
+但相同的三个月也可能意味着：
+
+```
+cash burn continues
+application window closes
+skills become less current
+relationship strain continues
+health capacity declines
+alternative options disappear
+```
+
+因此：
+
+> **NAV-18 不反对等待；它只是拒绝把等待当成零成本背景。**
+
+---
+
+# 6. `navigationMeaning`
+
+很多决定之所以长期停滞，不是因为用户真的选择了等待，而是因为系统没有要求等待回答：
+
+```
+What are we gaining?
+What are we losing?
+What becomes harder later?
+What becomes easier later?
+```
+
+结果就是：
+
+```
+ACT
+```
+
+需要证明，
+
+但：
+
+```
+WAIT
+```
+
+不需要证明。
+
+NAV-18 必须取消这种不对称。
+
+正确逻辑应该是：
+
+```
+ACT
+and
+WAIT
+```
+
+都要接受现实检验。
+
+因此 NAV-18 建立：
+
+```
+Current Decision Space
++
+Time
++
+Inaction Consequences
++
+Closing / Opening Conditions
+↓
+Waiting Value
+vs
+Waiting Cost
+↓
+Wait Qualification
+```
+
+核心问题不是：
+
+> “现在行动是不是最勇敢？”
+
+而是：
+
+> **“从现在开始继续等待，是否仍然比现在行动保留更多价值与现实空间？”**
+
+---
+
+# 7. `requiredInputs`
+
+NAV-18 最低需要：
+
+```
+confirmedDecisionObject
+currentPosition
+timeAssessment
+inactionAssessment
+remainingChoiceSpace
+currentDefaultPath
+knownWaitingBenefits
+knownWaitingCosts
+knownTimeSensitiveOptions
+```
+
+如果无法确认等待正在带来什么或消耗什么，应保持：
+
+```
+WAITING_VALUE_UNKNOWN
+WAITING_COST_UNKNOWN
+```
+
+而不是自动假设：
+
+```
+waiting is safer
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+currentRealityProjection
+capacityQualificationState
+maintenanceCostState
+crossDomainPropagationMap
+structuralAlternativeState
+professionalInput
+externalCurrentEvidence
+relationshipContext
+priorNavigationState
+```
+
+这些用于判断：
+
+- 等待是否增加现实准备；
+- 等待是否继续耗损容量；
+- 等待是否使选项关闭；
+- 等待是否只是延后不可避免的决定；
+- 是否存在更可逆的中间行动。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+CONTRACTUAL_RECORD
+CURRENT_EXTERNAL_EVIDENCE
+PROFESSIONAL_INPUT
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但现实 Waiting Cost 应主要来自：
+
+```
+MATERIAL_TIME_EFFECT
+OBSERVED_RESOURCE_CHANGE
+VERIFIED_WINDOW_CHANGE
+OBSERVED_CAPACITY_CHANGE
+```
+
+而不是：
+
+```
+INTERPRETIVE_URGENCY
+```
+
+---
+
+# 10. Core Waiting States
+
+建议 runtime 至少区分：
+
+```
+WAITING_QUALIFIED
+WAITING_QUALIFIED_WITH_REVIEW
+WAITING_VALUE_DECLINING
+WAITING_COST_RISING
+WAITING_NO_LONGER_DEFAULT
+WAITING_NOT_CURRENTLY_QUALIFIED
+WAITING_COST_UNKNOWN
+```
+
+---
+
+## A. `WAITING_QUALIFIED`
+
+等待正在带来真实价值，例如：
+
+```
+new evidence expected
+cash buffer growing
+recovery improving
+permission pending
+capability building
+```
+
+而成本仍可接受。
+
+---
+
+## B. `WAITING_QUALIFIED_WITH_REVIEW`
+
+等待仍然合理，但某些条件开始：
+
+```
+close
+decay
+accumulate cost
+```
+
+需要明确 review point。
+
+---
+
+## C. `WAITING_VALUE_DECLINING`
+
+等待原本有价值，但继续多等带来的新增价值正在下降。
+
+例如：
+
+```
+first month:
+useful information arrives
+
+next three months:
+no new information expected
+```
+
+---
+
+## D. `WAITING_COST_RISING`
+
+等待开始持续增加：
+
+```
+financial cost
+capacity cost
+relationship cost
+option loss
+maintenance burden
+```
+
+---
+
+## E. `WAITING_NO_LONGER_DEFAULT`
+
+等待仍然是一个候选，但不能再因为：
+
+```
+“还没决定”
+```
+
+而自动成为默认路径。
+
+---
+
+## F. `WAITING_NOT_CURRENTLY_QUALIFIED`
+
+当前 evidence 已不足以支持继续等待作为主要路径。
+
+这不等于：
+
+```
+ACT NOW
+```
+
+而是：
+
+```
+WAIT must be re-justified
+or replaced by
+PREPARE / MONITOR / ACT / ESCALATE
+```
+
+---
+
+# 11. Waiting Cost Dimensions
+
+建议至少检查：
+
+```
+FINANCIAL_WAITING_COST
+OPTION_WAITING_COST
+CAPACITY_WAITING_COST
+RELATIONSHIP_WAITING_COST
+INFORMATION_WAITING_COST
+OPPORTUNITY_WAITING_COST
+REVERSIBILITY_WAITING_COST
+RESPONSIBILITY_WAITING_COST
+```
+
+---
+
+## A. `FINANCIAL_WAITING_COST`
+
+例如：
+
+```
+monthly deficit continues
+interest accumulates
+reserve declines
+```
+
+---
+
+## B. `OPTION_WAITING_COST`
+
+例如：
+
+```
+application closes
+offer expires
+role disappears
+school window ends
+```
+
+---
+
+## C. `CAPACITY_WAITING_COST`
+
+例如：
+
+```
+continued overload
+continues to reduce usable bandwidth
+```
+
+但必须基于现实 observation。
+
+---
+
+## D. `RELATIONSHIP_WAITING_COST`
+
+例如：
+
+```
+unresolved issue
+continues to increase coordination burden
+```
+
+不能推测他人隐藏心理。
+
+---
+
+## E. `INFORMATION_WAITING_COST`
+
+有些时候等待不仅没有增加信息，反而让资料失效。
+
+例如：
+
+```
+market quote becomes stale
+offer terms change
+current state moves
+```
+
+---
+
+## F. `OPPORTUNITY_WAITING_COST`
+
+等待可能让现实中的替代机会减少。
+
+不能把假想收益当确定损失。
+
+---
+
+## G. `REVERSIBILITY_WAITING_COST`
+
+继续等待可能让原本可逆的路径逐渐变得更难撤回。
+
+例如：
+
+```
+more capital committed
+more dependence created
+more contract lock-in
+```
+
+---
+
+# 12. `allowedInference`
+
+NAV-18 可以：
+
+## A. 比较等待期间发生的资源变化
+
+例如：
+
+```
+monthly deficit = RM2,000
+```
+
+如果其他条件不变：
+
+```
+3 months waiting
+≈ RM6,000 further depletion
+```
+
+必须明确：
+
+```
+assuming current deficit persists
+```
+
+---
+
+## B. 判断等待是否真的会增加信息
+
+例如：
+
+```
+formal interview result expected next week
+```
+
+则等待一周具有：
+
+```
+INFORMATION_GAIN
+```
+
+---
+
+## C. 判断等待是否只是延后同一个问题
+
+如果：
+
+```
+no new information
+no resource gain
+no capacity gain
+no opening condition
+```
+
+则可以标记：
+
+```
+WAITING_VALUE_NOT_ESTABLISHED
+```
+
+---
+
+## D. 识别等待是否让选项逐渐关闭
+
+例如：
+
+```
+internal transfer deadline in 2 weeks
+```
+
+继续等待可能带来：
+
+```
+OPTION_WAITING_COST
+```
+
+---
+
+## E. 识别等待本身可以分阶段
+
+例如：
+
+```
+WAIT 2 WEEKS FOR DATA
+then
+REASSESS
+```
+
+而不是：
+
+```
+WAIT INDEFINITELY
+```
+
+---
+
+# 13. `forbiddenInference`
+
+NAV-18 严禁：
+
+## A. 把时间过去本身当作行动理由
+
+禁止：
+
+```
+we have waited long enough
+→ act
+```
+
+必须看等待到底改变了什么。
+
+---
+
+## B. 把行动焦虑包装成 Waiting Cost
+
+```
+I hate waiting
+```
+
+可以进入用户体验，但不能自动建立现实成本。
+
+---
+
+## C. 把未来机会想象成确定损失
+
+禁止：
+
+```
+if you wait you will miss a better job
+```
+
+除非有真实窗口或机会存在。
+
+---
+
+## D. 用 symbolic timing 建立现实紧迫性
+
+禁止：
+
+```
+Tarot says now
+→ waiting cost high
+```
+
+---
+
+## E. 因为等待有成本就自动推行动
+
+```
+waiting costs something
+≠
+acting costs less
+```
+
+两边必须比较。
+
+---
+
+## F. 把没有行动等同无准备
+
+用户可能正在：
+
+```
+save
+learn
+negotiate
+recover
+collect evidence
+```
+
+这属于准备，不是纯等待。
+
+---
+
+# 14. `decisionEffect`
+
+NAV-18 主要影响：
+
+```
+WAIT_ACT_BALANCE
+OPTION_WEIGHT
+ACTION_TIMING
+REVIEW_TRIGGER
+ACTION_SCALE
+STRUCTURAL_ALTERNATIVE_PRIORITY
+```
+
+核心 effect：
+
+```
+WAIT_QUALIFICATION
+```
+
+---
+
+# 15. `decisionThresholdEffect`
+
+等待成本上升并不会自动降低重大行动所需要的 Decision Sufficiency。
+
+冻结：
+
+```
+HIGH WAITING COST
+≠
+LOW ACTION THRESHOLD
+```
+
+正确关系是：
+
+```
+Waiting Cost rises
+→ Waiting loses default privilege
+→ Alternative responses gain comparison priority
+```
+
+如果：
+
+```
+action = high impact + low reversibility
+```
+
+仍需要高门槛。
+
+因此可能出现：
+
+```
+Waiting no longer qualified
++
+Major action not yet qualified
+```
+
+此时最佳 Navigation 可能是：
+
+```
+PREPARE
+LOCAL ADJUST
+SMALL REVERSIBLE ACTION
+PROFESSIONAL ESCALATION
+```
+
+而不是硬逼出一个二元答案。
+
+---
+
+# 16. `authorityBoundary`
+
+NAV-18 可以：
+
+- 计算等待成本；
+- 识别等待价值；
+- 识别 option decay；
+- 识别等待失去默认资格；
+- 设定 review point；
+- 让较小行动进入比较。
+
+NAV-18 不可以：
+
+- 因等待昂贵而自动要求行动；
+- 制造人为 deadline；
+- 使用 Method Reading 制造紧迫性；
+- 把机会成本伪装成确定损失；
+- 将情绪焦虑当现实 deadline。
+
+---
+
+# 17. `humanDecisionBoundary`
+
+即使：
+
+```
+WAITING_NO_LONGER_DEFAULT
+```
+
+用户仍然可以选择等待。
+
+但应变成：
+
+```
+CONSCIOUS_WAITING
+```
+
+也就是：
+
+> 我知道等待每个月正在消耗什么，也知道什么条件可能关闭，但我仍然决定等待到某个明确节点。
+
+这与：
+
+```
+INDEFINITE_DEFERRAL
+```
+
+不同。
+
+---
+
+# 18. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.20｜什么时候等待已经比行动更昂贵
+```
+
+相关：
+
+```
+15.6｜时间已经进入决定
+15.7｜不行动也正在产生后果
+15.8｜能不能回头，会改变决定本身
+15.12｜回应可以有不同等级
+15.18｜什么时候更多投入已经不再合理
+15.19｜修正参数，还是把重构放进候选
+```
+
+---
+
+# 19. `relatedBookFoundations`
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+accumulation
+maintenance burden
+continued cost
+```
+
+NAV-18 不重新解释成本为什么累积。
+
+只问：
+
+> **如果等待让这些成本继续累积，这是否已经改变 Wait 的现实资格？**
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+currentness
+evidence freshness
+unknown
+```
+
+支持：
+
+```
+waiting may improve evidence
+or
+waiting may make evidence stale
+```
+
+---
+
+# 20. `profileConsumer`
+
+Profile 可以提供：
+
+```
+delay preference
+urgency preference
+uncertainty tolerance
+action tendency
+```
+
+但只能作为：
+
+```
+BEHAVIORAL_CONTEXT
+```
+
+不能决定：
+
+```
+WAITING_COST
+```
+
+或：
+
+```
+ACT_NOW
+```
+
+---
+
+# 21. `financialConsumer`
+
+Financial 是 NAV-18 的强输入。
+
+可提供：
+
+```
+monthly burn
+liquidity decay
+interest accumulation
+payment dates
+runway
+```
+
+例如：
+
+```
+RM60,000 usable liquidity
+RM10,000 monthly deficit
+```
+
+可以形成：
+
+```
+~6 months current runway
+```
+
+但必须保留假设与 currentness。
+
+---
+
+# 22. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+只能提供：
+
+```
+INTERPRETIVE_TIMING_CONTEXT
+```
+
+不得建立：
+
+```
+REAL_WAITING_COST
+FIXED_DEADLINE
+ACT_NOW
+```
+
+---
+
+# 23. `currentRealityConsumer`
+
+Current Reality 至少应提供：
+
+```
+whatContinuesWhileWaiting
+whatImprovesWhileWaiting
+whatDecaysWhileWaiting
+whatMayClose
+whatNewInformationIsExpected
+whatRemainsUnknown
+```
+
+---
+
+# 24. `runtimeConsumer`
+
+NAV-18 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+尤其适用于：
+
+```
+“我是不是应该再等等？”
+```
+
+这类问题。
+
+---
+
+# 25. `academyConsumer`
+
+Academy 可以投影为：
+
+> **Waiting is valuable only while time is doing useful work for the decision.**
+
+中文：
+
+> **只有当时间正在为这个决定做有价值的工作时，等待才继续拥有资格。**
+
+---
+
+# 26. `revisionTriggers`
+
+以下情况必须重开 NAV-18：
+
+```
+reviewDateReached
+deadlineChanged
+newInformationArrived
+expectedInformationDelayed
+financialRunwayChanged
+optionClosed
+newOptionOpened
+capacityImproved
+capacityDeclined
+structuralAlternativeAppeared
+userChangesWaitBoundary
+professionalInput
+```
+
+---
+
+# 27. Canonical Waiting Model
+
+建议：
+
+```
+{
+  "waitingAssessmentId": "",
+  "decisionObjectId": "",
+  "waitingUntil": null,
+  "waitingFor": [],
+  "waitingValue": [],
+  "waitingCosts": {
+    "financial": [],
+    "option": [],
+    "capacity": [],
+    "relationship": [],
+    "information": [],
+    "opportunity": [],
+    "reversibility": [],
+    "responsibility": []
+  },
+  "closingConditions": [],
+  "openingConditions": [],
+  "reviewTriggers": [],
+  "state": "WAITING_QUALIFIED | WAITING_QUALIFIED_WITH_REVIEW | WAITING_VALUE_DECLINING | WAITING_COST_RISING | WAITING_NO_LONGER_DEFAULT | WAITING_NOT_CURRENTLY_QUALIFIED | WAITING_COST_UNKNOWN",
+  "unknowns": [],
+  "sources": [],
+  "status": ""
+}
+```
+
+---
+
+# 28. Waiting-for-What Rule
+
+任何 meaningful waiting 都应该尽量回答：
+
+```
+WAITING FOR WHAT?
+```
+
+例如：
+
+```
+waiting for:
+job offer
+medical result
+cash buffer
+school decision
+contract clarification
+recovery period
+```
+
+如果答案只是：
+
+```
+waiting for things to become clearer
+```
+
+系统应继续问：
+
+```
+what information would make it clearer?
+```
+
+---
+
+# 29. Review Boundary Rule
+
+等待不能无限期缺乏边界。
+
+可以通过：
+
+```
+DATE_TRIGGER
+EVENT_TRIGGER
+STATE_TRIGGER
+```
+
+结束。
+
+例如：
+
+```
+DATE_TRIGGER:
+30 days
+
+EVENT_TRIGGER:
+offer received
+
+STATE_TRIGGER:
+cash buffer reaches target
+```
+
+---
+
+# 30. Productive Waiting Rule
+
+等待如果同时包含：
+
+```
+information gain
+resource gain
+capacity gain
+recovery gain
+coordination gain
+```
+
+可标记：
+
+```
+PRODUCTIVE_WAITING
+```
+
+它与：
+
+```
+PASSIVE_DELAY
+```
+
+必须区分。
+
+---
+
+# 31. Passive Delay Rule
+
+如果：
+
+```
+no defined gain
+no review point
+no trigger
+no preparation
+```
+
+则可以标记：
+
+```
+PASSIVE_DELAY
+```
+
+但不能道德化成：
+
+```
+cowardice
+avoidance
+failure
+```
+
+---
+
+# 32. Waiting Value Decay Rule
+
+一种等待最初可能非常有价值。
+
+例如：
+
+```
+wait for formal result
+```
+
+但一旦结果已经到达：
+
+```
+original waiting value = exhausted
+```
+
+如果继续等待，必须重新取得新理由。
+
+---
+
+# 33. Waiting Cost Acceleration Rule
+
+等待成本可能不是线性的。
+
+例如：
+
+```
+first month:
+small cost
+
+after deadline:
+large penalty
+```
+
+或：
+
+```
+early delay:
+reversible
+
+later delay:
+lock-in increases
+```
+
+因此应支持：
+
+```
+WAITING_COST_ACCELERATION
+```
+
+而不能一律按固定 monthly cost 处理。
+
+---
+
+# 34. Wait-to-Act Crossover Rule
+
+当：
+
+```
+additional waiting value
+<
+additional waiting cost
+```
+
+并且这个差异已经具有现实意义时，可以标记：
+
+```
+WAIT_TO_ACT_CROSSOVER
+```
+
+但这仍然只表示：
+
+```
+waiting loses relative advantage
+```
+
+不是：
+
+```
+execute biggest action now
+```
+
+---
+
+# 35. Waiting vs Preparation Rule
+
+冻结：
+
+```
+WAITING
+≠
+PREPARATION
+```
+
+例如：
+
+```
+不辞职 + 存钱 + 面试 + 学技能
+```
+
+不是纯等待。
+
+应进入：
+
+```
+R2_PREPARE
+```
+
+以及相应 action path。
+
+---
+
+# 36. Waiting vs Monitoring Rule
+
+同样：
+
+```
+WAITING
+≠
+ACTIVE_MONITORING
+```
+
+如果已经定义：
+
+```
+signal
+threshold
+review time
+```
+
+则等待具有明确 observation function。
+
+---
+
+# 37. Waiting vs Inaction Rule
+
+NAV-05 与 NAV-18 分工：
+
+```
+NAV-05:
+What happens if nothing new is done?
+
+NAV-18:
+Has continuing to defer the next decision itself become too costly?
+```
+
+---
+
+# 38. Waiting vs Reversibility Rule
+
+等待并不总是更可逆。
+
+有时：
+
+```
+waiting
+```
+
+本身会造成：
+
+```
+loss of reversible window
+```
+
+例如：
+
+```
+early intervention possible
+later intervention expensive
+```
+
+因此：
+
+```
+wait
+≠
+safe
+```
+
+---
+
+# 39. Waiting vs Authority Rule
+
+如果：
+
+```
+professionalRequired
+consentRequired
+authorityUnknown
+```
+
+导致行动必须等待，
+
+则这类等待不能被简单标成不合理。
+
+它可能属于：
+
+```
+REQUIRED_WAITING
+```
+
+但仍需跟踪成本与期限。
+
+---
+
+# 40. Customer Projection Example
+
+内部：
+
+```
+Decision:
+Whether to remain in current role
+
+Waiting:
+3 more months
+
+Waiting value:
+possible annual bonus
+two active job applications may resolve
+
+Waiting cost:
+monthly recovery strain
+internal transfer closes in 5 weeks
+job-search time remains limited
+
+State:
+WAITING_QUALIFIED_WITH_REVIEW
+```
+
+客户可以看到：
+
+> **继续等一段时间仍然有价值，但这段等待已经不能没有边界。**
+> 
+> 接下来几周可能出现两项真正会改变判断的信息：年度奖金是否兑现，以及正在进行的两项工作申请是否有结果，因此立刻作出最大的决定并不一定更好；但同时，内部调岗窗口只剩五周，而现有工作负荷还在继续占用恢复与求职时间。
+> 
+> 所以目前更合理的并不是简单地“再等三个月”，而是把等待拆成一个有边界的阶段：先等到这些关键资料出现，同时保留调岗窗口；一旦原本期待的信息已经得到，等待本身就需要重新取得理由。
+
+---
+
+# 41. Customer Actions
+
+允许：
+
+```
+Wait with boundary
+Set review date
+Set event trigger
+Add expected information
+Add waiting cost
+Convert waiting to preparation
+Choose smaller action
+Reassess now
+Continue
+```
+
+---
+
+# 42. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+WAITING_QUALIFIED
+WAITING_WITH_REVIEW
+WAITING_VALUE_DECLINING
+WAITING_COST_RISING
+WAITING_NO_LONGER_DEFAULT
+WAITING_NOT_QUALIFIED
+WAITING_COST_UNKNOWN
+REOPENED
+```
+
+---
+
+# 43. Fail-Closed Conditions
+
+以下情况不得进入 NAV-19：
+
+```
+waitingPurposeUnknown
+waitingCostFabricated
+deadlineInvented
+opportunityLossPresentedAsCertainWithoutEvidence
+symbolicTimingUsedAsUrgencyAuthority
+expectedInformationUndefined
+reviewBoundaryMissingForMaterialDelay
+currentPositionStale
+decisionObjectChanged
+```
+
+---
+
+# 44. Canonical Runtime Rule
+
+> **Navigation must require waiting to justify itself whenever delay materially changes cost, option space, reversibility, capacity, or responsibility.**
+
+中文：
+
+> **只要延迟会实质改变成本、选择空间、可逆性、容量或责任，Navigation 就必须要求“等待”本身取得现实理由。**
+
+---
+
+# 45. Canonical Value Rule
+
+> **Waiting remains qualified while time is expected to add information, capacity, recovery, coordination, or option value that outweighs the material cost of delay.**
+
+中文：
+
+> **只有当时间预计能够增加信息、容量、恢复、协调或选择价值，并且这些增益足以覆盖延迟的现实成本时，等待才继续拥有资格。**
+
+---
+
+# 46. Canonical Default-Loss Rule
+
+> **When waiting stops creating meaningful new decision conditions and begins mainly consuming existing ones, it loses automatic default status.**
+
+中文：
+
+> **当等待不再产生新的有效决策条件，而主要开始消耗既有条件时，它就失去自动成为默认路径的资格。**
+
+---
+
+# 47. Canonical Threshold Rule
+
+> **A rising cost of waiting does not automatically qualify a large irreversible action; it first removes waiting’s privilege and reopens comparison among available responses.**
+
+中文：
+
+> **等待成本上升，并不会自动让一个巨大且不可逆的行动取得资格；它首先做的是取消等待的默认特权，并重新打开不同回应之间的比较。**
+
+---
+
+# 48. Canonical Bounded-Wait Rule
+
+> **A bounded wait has a reason, a review point, and a condition that can end the wait.**
+
+中文：
+
+> **有边界的等待必须知道自己为什么等、什么时候复核，以及什么条件出现以后就不再继续等。**
+
+---
+
+# 49. Final Canonical Form
+
+```
+NAV-18
+WAITING COST
+```
+
+**Input**
+
+```
+Current Decision Space
++
+Waiting Path
++
+Expected Waiting Value
++
+Waiting Costs
++
+Time-Sensitive Conditions
+```
+
+**Process**
+
+```
+Ask:
+What are we waiting for?
+What will time add?
+What will time consume?
+What may close?
+When does waiting lose its advantage?
+```
+
+**Output**
+
+```
+Waiting Qualification State
++
+Review / Trigger Boundary
+```
+
+**Boundary**
+
+```
+Waiting is not free.
+Waiting is not automatically wrong.
+Urgency does not automatically justify the largest action.
+```
+
+# NAV-19｜Value Preservation
+
+## 价值保留｜改变以前，先确认什么不能被无意失去
+
+**Canonical Question｜规范问题**
+
+> **当我们准备改变方向、结构或行动方式时，怎样区分“必须改变的部分”与“其实仍然值得被保留下来的价值”？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-19
+```
+
+## 2. `canonicalTitleZh`
+
+```
+价值保留
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Value Preservation
+```
+
+## 4. `canonicalQuestion`
+
+```
+当我们准备改变方向、结构或行动方式时，
+怎样区分“必须改变的部分”与“其实仍然值得被保留下来的价值”？
+```
+
+---
+
+# 5. `definition`
+
+**Value Preservation** 是 Navigation 在结构改变、方向调整或重大行动进入比较以前，对“哪些价值、条件、能力、关系、责任或现实成果不应该因为改变本身而被无意摧毁”进行正式识别的机制。
+
+它不回答：
+
+> “什么是人生最重要的价值？”
+
+也不是要求用户建立一套抽象价值观排名。
+
+它真正处理的是：
+
+> **如果当前路径需要改变，我们究竟是在改变什么，又有哪些原本由旧结构承载的东西，其实仍然值得继续被保护？**
+
+例如，一个人可能想：
+
+```
+离开当前工作
+```
+
+但真正不想失去的可能包括：
+
+```
+稳定收入
+医疗保障
+专业身份
+团队关系
+某些技能积累
+家庭时间可预测性
+```
+
+因此：
+
+```
+LEAVE JOB
+```
+
+并不必然意味着：
+
+```
+ABANDON EVERYTHING THE JOB CURRENTLY PROVIDES
+```
+
+同样，一个家庭想搬家，可能想改变：
+
+```
+通勤
+住房成本
+生活环境
+```
+
+但希望保留：
+
+```
+孩子教育连续性
+家庭支持网络
+财务缓冲
+照护关系
+```
+
+因此：
+
+> **NAV-19 的核心不是阻止改变，而是防止“为了离开一个有问题的结构，把结构里仍有价值的部分一起丢掉”。**
+
+---
+
+# 6. `navigationMeaning`
+
+当 Default Direction 已经失去资格，Structural Alternative 已经进入候选以后，很容易出现另一种偏差：
+
+```
+old structure has problems
+→ everything associated with old structure becomes suspect
+```
+
+这会造成：
+
+```
+necessary change
++
+unnecessary loss
+```
+
+Navigation 必须把两者拆开。
+
+因此 NAV-19 建立：
+
+```
+Current Structure
+↓
+What Is No Longer Working
+↓
+What Still Produces Value
+↓
+What Must Not Be Accidentally Destroyed
+↓
+Preservation Requirements
+```
+
+其真正目的不是保守，而是：
+
+> **让改变更精确。**
+
+---
+
+# 7. `requiredInputs`
+
+NAV-19 最低需要：
+
+```
+confirmedDecisionObject
+currentPosition
+currentDirectionState
+structuralAlternativeState
+currentValueProduced
+knownResponsibilities
+knownCriticalConditions
+```
+
+最好还包括：
+
+```
+maintenanceCostState
+timeHorizonMap
+reversibilityProfile
+crossDomainPropagationMap
+```
+
+如果系统不知道当前路径到底还在提供什么，应保留：
+
+```
+PRESERVATION_VALUE_UNKNOWN
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+profileNavigationProjection
+financialNavigationProjection
+currentRealityProjection
+relationshipContext
+careerContext
+professionalInput
+estateContext
+careContext
+priorNavigationState
+userStatedValues
+```
+
+这些用于帮助识别：
+
+- 哪些价值只是习惯；
+- 哪些价值是现实依赖；
+- 哪些是责任；
+- 哪些可以换一种方式继续存在。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+PROFESSIONAL_INPUT
+CURRENT_EXTERNAL_EVIDENCE
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但必须区分：
+
+```
+USER_STATED_VALUE
+MATERIAL_DEPENDENCY
+OBSERVED_BENEFIT
+RESPONSIBILITY
+INTERPRETIVE_VALUE_CONTEXT
+UNKNOWN
+```
+
+Profile / Method 可以帮助用户看见可能重视的主题，但不能替用户声明：
+
+```
+THIS IS YOUR CORE VALUE
+```
+
+---
+
+# 10. Core Preservation Classes
+
+建议至少区分：
+
+```
+MUST_PRESERVE
+PREFER_TO_PRESERVE
+PRESERVE_IF_FEASIBLE
+TRANSFERABLE_VALUE
+STRUCTURE_BOUND_VALUE
+VALUE_UNCERTAIN
+```
+
+---
+
+## A. `MUST_PRESERVE`
+
+一旦失去，会触及：
+
+```
+safety
+basic financial continuity
+legal duty
+dependant welfare
+critical health continuity
+essential housing
+```
+
+等高重要性条件。
+
+这类通常不是普通 preference。
+
+---
+
+## B. `PREFER_TO_PRESERVE`
+
+用户明确重视，但在现实 trade-off 中可以重新比较。
+
+例如：
+
+```
+same neighborhood
+same job title
+same routine
+same team
+```
+
+---
+
+## C. `PRESERVE_IF_FEASIBLE`
+
+如果替代方案可以保留最好，但不应因此阻止必要变化。
+
+---
+
+## D. `TRANSFERABLE_VALUE`
+
+价值可以脱离旧结构继续存在。
+
+例如：
+
+```
+current structure:
+full-time employer
+
+value:
+professional identity
+```
+
+专业身份可能通过：
+
+```
+different employer
+portfolio career
+consulting
+```
+
+继续保留。
+
+---
+
+## E. `STRUCTURE_BOUND_VALUE`
+
+某些价值确实与旧结构高度绑定。
+
+例如：
+
+```
+specific pension entitlement
+specific school placement
+specific ownership right
+specific location-based support
+```
+
+改变结构就可能真实失去。
+
+---
+
+## F. `VALUE_UNCERTAIN`
+
+系统无法确认：
+
+```
+用户到底是否仍然重视它
+```
+
+必须由用户确认。
+
+---
+
+# 11. Preservation Dimensions
+
+建议至少检查：
+
+```
+SAFETY
+FINANCIAL_CONTINUITY
+RELATIONSHIP_CONTINUITY
+CARE_CONTINUITY
+IDENTITY
+AUTONOMY
+CAPABILITY
+OPTIONALITY
+STABILITY
+MEANING
+RESPONSIBILITY
+ACCESS
+LOCATION
+TIME
+```
+
+这些不是固定人生价值排行榜。
+
+只是 Navigation 的检查面。
+
+---
+
+# 12. `allowedInference`
+
+NAV-19 可以：
+
+## A. 识别旧结构里仍然存在的现实价值
+
+例如：
+
+```
+工作虽然高负荷
+但仍提供稳定收入与保险
+```
+
+可以把：
+
+```
+income continuity
+insurance continuity
+```
+
+标记为 preservation candidates。
+
+---
+
+## B. 区分价值与承载价值的结构
+
+例如：
+
+```
+Value:
+financial stability
+
+Current carrier:
+current employer
+```
+
+不能自动推导：
+
+```
+financial stability requires current employer
+```
+
+系统应问：
+
+```
+can the value move to another carrier?
+```
+
+---
+
+## C. 识别一个替代方案可能无意摧毁其他重要条件
+
+例如：
+
+```
+Move abroad
+```
+
+可能影响：
+
+```
+family support network
+care access
+school continuity
+```
+
+这些必须进入比较。
+
+---
+
+## D. 识别某些价值其实已经不再由旧结构提供
+
+例如：
+
+用户认为：
+
+```
+current job = growth
+```
+
+但现实显示：
+
+```
+no meaningful learning for 3 years
+```
+
+则：
+
+```
+growth
+```
+
+不能继续自动记在旧结构的 preservation column。
+
+---
+
+## E. 识别某个价值可以通过别的方式保留
+
+例如：
+
+```
+current job provides identity
+```
+
+但如果身份来自专业领域，而不是公司本身，则可能属于：
+
+```
+TRANSFERABLE_VALUE
+```
+
+---
+
+# 13. `forbiddenInference`
+
+NAV-19 严禁：
+
+## A. 替用户定义人生最高价值
+
+禁止：
+
+```
+family must matter more than career
+```
+
+或反过来。
+
+---
+
+## B. 把用户过去重视的东西永久化
+
+```
+you valued status before
+→ status must remain important
+```
+
+不允许。
+
+---
+
+## C. 把 Profile 直接当成价值声明
+
+禁止：
+
+```
+Profile shows autonomy
+→ autonomy = MUST_PRESERVE
+```
+
+必须由用户或现实责任确认。
+
+---
+
+## D. 把旧结构与价值绑定
+
+禁止：
+
+```
+leaving job
+=
+losing professional identity
+```
+
+除非确实 structure-bound。
+
+---
+
+## E. 把所有损失都视为不可接受
+
+改变一定可能带来损失。
+
+NAV-19 不是：
+
+```
+LOSS ELIMINATION
+```
+
+而是：
+
+```
+UNINTENDED VALUE LOSS PREVENTION
+```
+
+---
+
+## F. 用 symbolic reading 声称某价值是“命中注定”
+
+禁止。
+
+---
+
+# 14. `decisionEffect`
+
+NAV-19 主要影响：
+
+```
+OPTION_ELIGIBILITY
+OPTION_WEIGHT
+STRUCTURAL_ALTERNATIVE_DESIGN
+TRANSITION_REQUIREMENT
+ACTION_SCALE
+DECISION_THRESHOLD
+```
+
+核心 effect：
+
+```
+PRESERVATION_REQUIREMENT
+```
+
+也就是：
+
+> **候选方案除了回答“要改变什么”，也必须回答“准备保留什么”。**
+
+---
+
+# 15. `decisionThresholdEffect`
+
+如果一个方案会影响：
+
+```
+MUST_PRESERVE
+```
+
+条件，则需要更高：
+
+```
+evidence
+transition planning
+reversibility review
+professional input where relevant
+```
+
+冻结原则：
+
+> **The more a decision threatens values or conditions that must be preserved, the stronger the transition proof required before execution.**
+
+中文：
+
+> **一个决定越可能伤及必须保留的价值或条件，真正执行以前所需要的转换证明就越强。**
+
+---
+
+# 16. `authorityBoundary`
+
+NAV-19 可以：
+
+- 暴露值得保留的价值；
+- 区分 value / carrier；
+- 识别 unintended loss；
+- 为 alternative 增加 preservation requirement；
+- 识别价值是否可迁移；
+- 触发更谨慎 transition design。
+
+NAV-19 不可以：
+
+- 替用户制定价值层级；
+- 用 Profile 或 Method 替用户决定价值；
+- 要求零损失改变；
+- 因为某价值存在就否决所有改变；
+- 把过去依恋伪装成必须保留。
+
+---
+
+# 17. `humanDecisionBoundary`
+
+价值判断最终必须回到用户。
+
+系统可以说：
+
+> 目前这份工作仍然提供稳定收入、医疗保障和专业身份；如果你想改变工作结构，需要确认这三项里哪些是你真正必须保留的，哪些可以通过其他方式重新建立。
+
+但系统不能说：
+
+> 稳定收入一定比职业自由重要。
+
+用户应能够将每项标记为：
+
+```
+MUST_PRESERVE
+PREFER_TO_PRESERVE
+NOT_REQUIRED
+UNSURE
+```
+
+---
+
+# 18. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.21｜改变以前，先确认什么不能被无意失去
+```
+
+相关：
+
+```
+15.22｜目标不是价值本身
+15.23｜价值什么时候彼此冲突
+15.24｜改变不是把旧世界全部清空
+15.26｜哪些损失可以交换，哪些不能
+15.27｜今天得到的东西，会不会关闭明天
+```
+
+---
+
+# 19. `relatedBookFoundations`
+
+## Book III｜Reality Continuity
+
+Book III 提供：
+
+```
+what allows reality to continue
+```
+
+NAV-19 只问：
+
+> **在改变时，哪些 continuity conditions 不应该被无意破坏？**
+
+---
+
+## Book IV｜Reality Expansion
+
+提供：
+
+```
+capacity expansion
+future possibility
+```
+
+帮助判断某些值得保留的东西是不是：
+
+```
+current comfort
+```
+
+还是：
+
+```
+future capability
+```
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+evidence boundary
+interpretation boundary
+```
+
+防止系统把“我觉得这很重要”与“用户明确确认这很重要”混为一谈。
+
+---
+
+# 20. `profileConsumer`
+
+Profile 可以帮助生成：
+
+```
+VALUE_CHECK_CANDIDATES
+```
+
+例如：
+
+```
+autonomy
+stability
+relationship continuity
+meaning
+mastery
+```
+
+但只能问：
+
+> 这些是不是你这次决定真正想保护的东西？
+
+不能直接写入：
+
+```
+MUST_PRESERVE
+```
+
+---
+
+# 21. `financialConsumer`
+
+Financial 可以建立一些更强的 preservation requirement，例如：
+
+```
+minimum liquidity
+housing continuity
+insurance continuity
+dependant support
+debt servicing
+```
+
+这些不只是 preference。
+
+有些可能属于：
+
+```
+MATERIAL_MUST_PRESERVE
+```
+
+---
+
+# 22. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+可以提供：
+
+```
+INTERPRETIVE_VALUE_CONTEXT
+```
+
+例如某些反复主题。
+
+但不得直接：
+
+```
+rank values
+declare life purpose
+override user's stated values
+```
+
+---
+
+# 23. `currentRealityConsumer`
+
+Current Reality 应至少提供：
+
+```
+whatStillWorks
+whatWouldBeLostIfChanged
+whatResponsibilitiesDependOnCurrentStructure
+whatBenefitsRemainReal
+whatBenefitsAreAlreadyGone
+```
+
+---
+
+# 24. `runtimeConsumer`
+
+NAV-19 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Structural Transition Planning
+Report Follow-up
+```
+
+消费。
+
+---
+
+# 25. `academyConsumer`
+
+Academy 可投影为：
+
+> **Changing the structure does not require destroying everything the structure once carried.**
+
+中文：
+
+> **改变一个结构，并不意味着必须连同这个结构曾经承载的所有价值一起摧毁。**
+
+---
+
+# 26. `revisionTriggers`
+
+以下情况必须重开 NAV-19：
+
+```
+userValueChanged
+responsibilityChanged
+dependantChanged
+financialMinimumChanged
+relationshipStateChanged
+alternativeDesignChanged
+carrierChanged
+currentBenefitDisappeared
+newBenefitAppeared
+professionalInput
+timeHorizonChanged
+```
+
+---
+
+# 27. Canonical Preservation Model
+
+建议：
+
+```
+{
+  "preservationAssessmentId": "",
+  "decisionObjectId": "",
+  "values": [
+    {
+      "valueId": "",
+      "description": "",
+      "state": "MUST_PRESERVE | PREFER_TO_PRESERVE | PRESERVE_IF_FEASIBLE | VALUE_UNCERTAIN",
+      "carrierType": "CURRENT_STRUCTURE | TRANSFERABLE | MULTIPLE_CARRIERS | UNKNOWN",
+      "currentCarrier": "",
+      "alternativeCarriers": [],
+      "lossIfNotPreserved": [],
+      "sources": []
+    }
+  ],
+  "materialRequirements": [],
+  "responsibilityRequirements": [],
+  "unknowns": [],
+  "status": ""
+}
+```
+
+---
+
+# 28. Value vs Carrier Rule
+
+冻结：
+
+```
+VALUE
+≠
+CURRENT CARRIER OF VALUE
+```
+
+例如：
+
+```
+Value:
+financial stability
+
+Carrier:
+current employer
+```
+
+Navigation 必须问：
+
+```
+Is the employer the value?
+or
+Is the employer one current carrier of that value?
+```
+
+---
+
+# 29. Goal vs Value Boundary
+
+这是 NAV-19 通往 NAV-20 的核心桥梁。
+
+例如：
+
+```
+Goal:
+earn RM20,000/month
+```
+
+背后可能保护：
+
+```
+security
+family support
+autonomy
+future option space
+status
+```
+
+因此：
+
+```
+GOAL
+```
+
+不能自动等于：
+
+```
+VALUE
+```
+
+NAV-20 将正式拆开两者。
+
+---
+
+# 30. Preservation Does Not Mean Preservation of Form
+
+例如：
+
+```
+relationship value:
+care
+trust
+shared parenting
+```
+
+不一定要求：
+
+```
+same living arrangement forever
+```
+
+又例如：
+
+```
+professional value:
+mastery
+contribution
+identity
+```
+
+不一定要求：
+
+```
+same employer
+```
+
+冻结：
+
+> **Preserve the value where possible, not necessarily the form that once carried it.**
+
+中文：
+
+> **能够保留的，应优先保留价值本身，而不是把过去承载这个价值的形式永久冻结。**
+
+---
+
+# 31. Must-Preserve Threshold Rule
+
+`MUST_PRESERVE` 不应轻易使用。
+
+至少应来自：
+
+```
+basic safety
+legal obligation
+dependant welfare
+critical continuity requirement
+explicit user non-negotiable
+```
+
+如果只是：
+
+```
+preference
+habit
+comfort
+```
+
+不能自动升级。
+
+---
+
+# 32. Transferability Rule
+
+如果价值可以迁移到新结构：
+
+```
+TRANSFERABLE_VALUE
+```
+
+必须进入 alternative comparison。
+
+例如：
+
+```
+current role provides:
+income
+identity
+social network
+```
+
+新的工作结构未必全部失去这些。
+
+---
+
+# 33. Structure-Bound Value Rule
+
+如果某个价值确实无法脱离当前结构：
+
+```
+STRUCTURE_BOUND_VALUE
+```
+
+则需要明确：
+
+```
+if structure changes
+this value may actually be lost
+```
+
+这是真正的 transition cost。
+
+---
+
+# 34. Preservation Conflict Rule
+
+两个 preservation requirements 可能冲突。
+
+例如：
+
+```
+MUST_PRESERVE:
+financial continuity
+
+PREFER_TO_PRESERVE:
+time autonomy
+```
+
+或者：
+
+```
+family proximity
+vs
+career expansion
+```
+
+NAV-19 不解决这种冲突。
+
+应标记：
+
+```
+VALUE_CONFLICT
+```
+
+并交给后续 NAV-20 / NAV-21 / NAV-22。
+
+---
+
+# 35. Unintentional Loss Rule
+
+NAV-19 特别防止：
+
+```
+UNINTENDED_VALUE_LOSS
+```
+
+例如：
+
+用户为了：
+
+```
+离开高压工作
+```
+
+直接接受另一份：
+
+```
+更高薪但更长工时
+```
+
+虽然改变了 employer，却失去了真正想保护的：
+
+```
+time autonomy
+recovery
+```
+
+这说明：
+
+```
+structural change occurred
+but value was not preserved
+```
+
+---
+
+# 36. Preservation vs Sunk Cost
+
+必须区分：
+
+```
+valuable thing that still exists
+```
+
+与：
+
+```
+past investment already lost
+```
+
+例如：
+
+```
+10 years seniority
+```
+
+可能包含：
+
+```
+current pension entitlement
+network
+reputation
+```
+
+这些可能仍有现实价值。
+
+但：
+
+```
+10 years already spent
+```
+
+本身不能成为 preservation requirement。
+
+---
+
+# 37. Preservation vs Fear
+
+用户害怕失去某东西，并不自动说明它必须保留。
+
+Navigation 可以问：
+
+```
+What exactly would be lost?
+Is it current reality or anticipated loss?
+Can it be replaced?
+Can it be transferred?
+```
+
+不能说：
+
+```
+fear = value
+```
+
+---
+
+# 38. Preservation and Other People
+
+如果决定影响：
+
+```
+children
+partner
+dependants
+employees
+co-owner
+```
+
+必须把相关：
+
+```
+responsibility-preservation conditions
+```
+
+纳入。
+
+但仍需 NAV-08 的 legitimate authority / consent boundary。
+
+---
+
+# 39. Preservation Floor
+
+建议引入：
+
+```
+PRESERVATION_FLOOR
+```
+
+表示一个候选方案在进入后续比较以前，至少不能跌破的现实底线。
+
+例如：
+
+```
+minimum housing continuity
+minimum dependant support
+minimum liquidity
+minimum medical access
+```
+
+这将直接连接 NAV-22：
+
+```
+Minimum Acceptable State
+```
+
+---
+
+# 40. Option Design Rule
+
+NAV-19 不只用于筛选 option，也可以帮助重新设计 option。
+
+例如：
+
+原候选：
+
+```
+quit immediately
+```
+
+为了保留：
+
+```
+income continuity
+```
+
+可能形成新候选：
+
+```
+secure next role first
+reduce hours first
+build runway first
+```
+
+这不是自动推荐，而是：
+
+```
+PRESERVATION-AWARE OPTION DESIGN
+```
+
+---
+
+# 41. Customer Projection Example
+
+内部：
+
+```
+Current Structure:
+Full-time role
+
+Problem:
+high workload
+low autonomy
+
+Still Valuable:
+stable income
+insurance
+professional identity
+strong team relationships
+
+Preservation State:
+income = MUST_PRESERVE
+insurance = MUST_PRESERVE
+professional identity = TRANSFERABLE_VALUE
+team relationship = PREFER_TO_PRESERVE
+```
+
+客户可以看到：
+
+> **如果你真的要改变，最重要的不是“离开多少”，而是先知道哪些东西不能被一起丢掉。**
+> 
+> 当前工作的问题已经足以让其他结构进入比较，但这份工作仍然真实提供稳定收入、医疗保障、专业身份和一部分重要的人际关系。这里面并不是所有东西都必须绑定在现有岗位上：专业身份可以被带到新的工作结构，人际关系也未必会因为离开而完全消失；真正需要在转换以前明确保护的，是收入与保障的连续性。
+> 
+> 因此下一步不是简单地比较“留下还是离开”，而是比较：哪些候选能够解决当前结构的问题，同时又不把你其实仍然需要的东西一起摧毁。
+
+---
+
+# 42. Customer Actions
+
+允许：
+
+```
+Confirm value
+Mark must preserve
+Mark preference only
+Remove value
+Add missing value
+Identify alternative carrier
+Set preservation floor
+Compare alternatives
+Continue
+```
+
+---
+
+# 43. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+PRESERVATION_VALUES_IDENTIFIED
+PRESERVATION_FLOOR_SET
+VALUE_CONFLICT
+VALUE_UNCERTAIN
+READY_FOR_VALUE_COMPARISON
+REOPENED
+```
+
+---
+
+# 44. Fail-Closed Conditions
+
+以下情况不得进入 NAV-20：
+
+```
+criticalValueUnknown
+mustPreserveInferredWithoutAuthority
+currentCarrierConflatedWithValue
+responsibilityRequirementIgnored
+materialMinimumIgnored
+profileUsedAsFinalValueAuthority
+symbolicReadingUsedAsValueAuthority
+currentBenefitFabricated
+decisionObjectChanged
+```
+
+---
+
+# 45. Canonical Runtime Rule
+
+> **Navigation must identify what deserves preservation before comparing major change, so that changing the carrier does not accidentally destroy the value.**
+
+中文：
+
+> **Navigation 在比较重大改变以前，必须先确认哪些东西值得被保留，避免因为改变了承载价值的结构，而无意间把价值本身一起摧毁。**
+
+---
+
+# 46. Canonical Value-Carrier Rule
+
+> **A value and the structure currently carrying that value must remain conceptually separate.**
+
+中文：
+
+> **价值本身，与当前承载这个价值的结构，必须始终保持概念上的分离。**
+
+---
+
+# 47. Canonical Preservation Rule
+
+> **Preservation does not mean freezing the current structure; it means protecting the conditions that should survive the transition where reasonably possible.**
+
+中文：
+
+> **保留并不意味着冻结现有结构，而是在合理可能的范围内，让真正应该延续的条件能够穿过改变继续存在。**
+
+---
+
+# 48. Canonical Loss Rule
+
+> **A change becomes poorly designed when it solves the visible problem by unnecessarily destroying values the user still needs.**
+
+中文：
+
+> **如果一个改变只是解决了表面问题，却不必要地摧毁了用户仍然需要的价值，那么这个改变本身就没有被设计完整。**
+
+---
+
+# 49. Canonical Human Authority Rule
+
+> **Navigation may reveal value candidates and preservation consequences; only legitimate human decision-makers can confirm what is genuinely non-negotiable.**
+
+中文：
+
+> **Navigation 可以揭示价值候选及其保留后果，但真正什么属于不可交换的条件，必须由拥有决定权的人确认。**
+
+---
+
+# 50. Final Canonical Form
+
+```
+NAV-19
+VALUE PRESERVATION
+```
+
+**Input**
+
+```
+Current Structure
++
+Structural Alternatives
++
+Current Real Benefits
++
+Responsibilities
++
+Future Conditions
+```
+
+**Process**
+
+```
+Ask:
+What is actually valuable here?
+What merely carries that value today?
+What must survive change?
+What can be transferred?
+What loss would be unintended?
+```
+
+**Output**
+
+```
+Preservation Requirements
++
+Preservation Floor Candidates
+```
+
+**Boundary**
+
+```
+Changing structure does not require destroying value.
+Preserving value does not require preserving structure.
+```
+
+# NAV-20｜Goal vs Value
+
+## 目标与价值｜你想得到的结果，不一定就是你真正想保护的东西
+
+**Canonical Question｜规范问题**
+
+> **为什么一个明确目标，仍然不能直接代表这个决定真正要保护的价值？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-20
+```
+
+## 2. `canonicalTitleZh`
+
+```
+目标与价值
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Goal vs Value
+```
+
+## 4. `canonicalQuestion`
+
+```
+为什么一个明确目标，
+仍然不能直接代表这个决定真正要保护的价值？
+```
+
+---
+
+# 5. `definition`
+
+**Goal vs Value** 是 Navigation 对“用户想实现的具体结果”与“这个结果背后真正希望保护、获得或维持的价值”进行正式拆分的机制。
+
+它不否定目标。
+
+也不把目标降格成表面需求。
+
+它真正要避免的是：
+
+```
+GOAL
+=
+VALUE
+```
+
+被系统默认为同一件事。
+
+例如：
+
+```
+Goal:
+月收入达到 RM20,000
+```
+
+这个目标背后可能是在保护：
+
+```
+financial security
+family responsibility
+autonomy
+status
+future optionality
+reduced anxiety
+```
+
+其中不同价值会导向完全不同的 Navigation。
+
+如果真正想保护的是：
+
+```
+family financial security
+```
+
+那么：
+
+```
+RM20,000 salary
+```
+
+只是一个可能 carrier。
+
+如果真正想保护的是：
+
+```
+autonomy
+```
+
+那么更高薪但更强控制的岗位，可能达成目标数字，却没有达成真正价值。
+
+因此：
+
+> **NAV-20 的核心不是追问“你真正想要什么”这种无限心理挖掘，而是确保系统不会把某个具体目标误当成不可替代的价值本身。**
+
+---
+
+# 6. `navigationMeaning`
+
+目标通常比价值更容易表达。
+
+人会说：
+
+```
+我要升职
+我要买房
+我要离职
+我要移民
+我要赚更多钱
+我要让孩子进这间学校
+我要修复关系
+```
+
+这些都是合法目标。
+
+但 Navigation 必须继续问：
+
+> **这个目标如果达成，它究竟应该保护或创造什么？**
+
+因为两个完全不同的人可能拥有同一个目标，却在追求不同的现实。
+
+例如：
+
+```
+Goal:
+Buy a house
+```
+
+可能分别代表：
+
+```
+Person A:
+housing stability
+
+Person B:
+investment return
+
+Person C:
+family identity
+
+Person D:
+school access
+
+Person E:
+status
+```
+
+如果不拆开 Goal 与 Value，系统很容易：
+
+```
+optimize goal completion
+while destroying actual value
+```
+
+所以 NAV-20 建立：
+
+```
+Stated Goal
+↓
+What Does This Goal Protect / Enable?
+↓
+Value Candidates
+↓
+Human Confirmation
+↓
+Goal-Value Alignment
+```
+
+---
+
+# 7. `requiredInputs`
+
+NAV-20 最低需要：
+
+```
+confirmedDecisionObject
+userStatedGoal
+preservationRequirements
+currentPosition
+```
+
+最好同时拥有：
+
+```
+structuralAlternatives
+timeHorizonMap
+currentRealityProjection
+knownResponsibilities
+```
+
+如果目标已经明确，但价值尚未确认，应保持：
+
+```
+VALUE_UNCONFIRMED
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+profileNavigationProjection
+financialNavigationProjection
+relationshipContext
+careerContext
+professionalInput
+priorNavigationState
+methodNavigationProjection
+userStatedValues
+historicalGoalPattern
+```
+
+这些只能帮助形成：
+
+```
+VALUE_CANDIDATES
+```
+
+不能替用户确认最终价值。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_STATED_GOAL
+USER_STATED_VALUE
+MATERIAL_DEPENDENCY
+RESPONSIBILITY
+OBSERVED_BEHAVIOR
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+必须区分：
+
+```
+GOAL
+VALUE_CANDIDATE
+VALUE_CONFIRMED
+RESPONSIBILITY_REQUIREMENT
+MATERIAL_REQUIREMENT
+UNKNOWN
+```
+
+尤其：
+
+```
+Profile
+Method
+Tarot
+I Ching
+```
+
+最多只能产生：
+
+```
+VALUE_CANDIDATE
+```
+
+永远不能直接产生：
+
+```
+VALUE_CONFIRMED
+```
+
+---
+
+# 10. Core Goal-Value States
+
+建议至少区分：
+
+```
+GOAL_VALUE_ALIGNED
+GOAL_PARTIALLY_ALIGNED
+GOAL_VALUE_CONFLICT
+GOAL_IS_ONLY_ONE_CARRIER
+GOAL_NO_LONGER_SERVES_VALUE
+VALUE_UNCONFIRMED
+```
+
+---
+
+## A. `GOAL_VALUE_ALIGNED`
+
+当前目标与用户确认的价值高度一致。
+
+例如：
+
+```
+Goal:
+reduce debt
+
+Value:
+financial stability
+```
+
+现实上也确实能够提高财务稳定。
+
+---
+
+## B. `GOAL_PARTIALLY_ALIGNED`
+
+目标满足部分价值，但同时伤害其他重要价值。
+
+例如：
+
+```
+Goal:
+accept promotion
+
+Protects:
+income
+status
+
+Costs:
+family time
+autonomy
+recovery
+```
+
+---
+
+## C. `GOAL_VALUE_CONFLICT`
+
+目标的实现方式已经与用户明确想保护的价值发生实质冲突。
+
+例如：
+
+```
+Goal:
+earn more
+
+Value:
+more control over time
+```
+
+但唯一当前方案是：
+
+```
+higher pay
++
+permanent availability
+```
+
+此时 Goal 本身需要重新设计。
+
+---
+
+## D. `GOAL_IS_ONLY_ONE_CARRIER`
+
+目标并非价值本身，只是达到价值的一种路径。
+
+例如：
+
+```
+Goal:
+buy property
+
+Value:
+housing security
+```
+
+其他 carrier 可能包括：
+
+```
+long lease
+lower-cost property
+family-owned housing arrangement
+```
+
+---
+
+## E. `GOAL_NO_LONGER_SERVES_VALUE`
+
+目标曾经服务某项价值，但现实已经改变。
+
+例如：
+
+```
+Goal:
+get promoted
+```
+
+最初服务：
+
+```
+growth
+autonomy
+income
+```
+
+后来 promotion 只带来：
+
+```
+more responsibility
+same authority
+slightly higher pay
+```
+
+则需要重新判断。
+
+---
+
+# 11. `allowedInference`
+
+NAV-20 可以：
+
+## A. 从用户明确表述中提出价值候选
+
+例如用户说：
+
+> “我想赚更多，因为现在很怕一旦出事家里没有缓冲。”
+
+系统可以提出：
+
+```
+Goal:
+higher income
+
+Possible Value:
+financial security
+family protection
+```
+
+但必须让用户确认。
+
+---
+
+## B. 判断目标是否只是一个 carrier
+
+例如：
+
+```
+Goal:
+stay at current company
+```
+
+用户真正重视：
+
+```
+stable income
+trusted team
+career continuity
+```
+
+Navigation 可以问：
+
+```
+Can those values exist elsewhere?
+```
+
+---
+
+## C. 识别同一目标承载多个价值
+
+例如：
+
+```
+Goal:
+move abroad
+```
+
+可能同时承载：
+
+```
+career growth
+education
+autonomy
+safety
+family experience
+```
+
+不能压成单一原因。
+
+---
+
+## D. 识别目标已经发生漂移
+
+例如：
+
+最初：
+
+```
+Goal:
+build business for autonomy
+```
+
+后来变成：
+
+```
+business requires total availability
+```
+
+则可以提示：
+
+```
+GOAL_VALUE_ALIGNMENT_REVIEW
+```
+
+---
+
+## E. 识别用户正在为了指标牺牲原价值
+
+例如：
+
+```
+target:
+RM20k/month
+```
+
+导致：
+
+```
+70h workweek
+```
+
+而用户最初确认的是：
+
+```
+financial security + family time
+```
+
+可以标记：
+
+```
+GOAL_METRIC_OVERRUN
+```
+
+---
+
+# 12. `forbiddenInference`
+
+NAV-20 严禁：
+
+## A. 进行未经授权的“深层心理解释”
+
+禁止：
+
+> “你说想买房，其实真正想要的是父母认同。”
+
+除非用户明确支持这一点。
+
+---
+
+## B. 认为显性目标一定是假的
+
+用户说：
+
+```
+I want more money
+```
+
+钱本身可以是合法目标。
+
+Navigation 不需要把一切重新解释成心理需求。
+
+---
+
+## C. 用 Profile 决定价值
+
+禁止：
+
+```
+Profile says autonomy
+→ your real value is autonomy
+```
+
+---
+
+## D. 用 Method Reading 发现“真正人生目标”
+
+禁止：
+
+```
+BaZi / Zi Wei / Astrology
+→ your true life purpose is...
+```
+
+作为 Navigation authority 不允许。
+
+---
+
+## E. 把所有目标都无限抽象化
+
+系统不能不断追问：
+
+```
+why?
+why?
+why?
+```
+
+直到目标失去现实意义。
+
+---
+
+## F. 因目标与价值冲突就自动删除目标
+
+有时冲突可以通过：
+
+```
+different carrier
+different scale
+different timing
+```
+
+解决。
+
+---
+
+# 13. `decisionEffect`
+
+NAV-20 主要影响：
+
+```
+OPTION_WEIGHT
+GOAL_REDESIGN
+OPTION_DESIGN
+VALUE_PRESERVATION
+STRUCTURAL_ALTERNATIVE_COMPARISON
+DECISION_THRESHOLD
+```
+
+核心 effect：
+
+```
+GOAL_VALUE_ALIGNMENT
+```
+
+---
+
+# 14. `decisionThresholdEffect`
+
+如果一个高影响行动主要是为了实现：
+
+```
+GOAL
+```
+
+但尚不清楚：
+
+```
+what value it serves
+```
+
+则不应轻易进入不可逆执行。
+
+尤其当：
+
+```
+high impact
++
+low reversibility
++
+goal-value alignment unclear
+```
+
+时，应提高确认要求。
+
+原则：
+
+> **The larger the sacrifice required by a goal, the clearer its relationship to the value being protected must become.**
+
+中文：
+
+> **一个目标要求付出的牺牲越大，它与真正要保护的价值之间的关系就必须越清楚。**
+
+---
+
+# 15. `authorityBoundary`
+
+NAV-20 可以：
+
+- 区分 Goal / Value；
+- 生成价值候选；
+- 检查目标是否仍服务价值；
+- 识别目标只是 carrier；
+- 识别目标价值冲突；
+- 帮助重新设计目标。
+
+NAV-20 不可以：
+
+- 宣称用户隐藏价值；
+- 替用户决定人生意义；
+- 用 Profile / Method 取得价值 authority；
+- 把显性目标贬低成“表面欲望”；
+- 自动取消用户目标。
+
+---
+
+# 16. `humanDecisionBoundary`
+
+只有用户或合法 shared decision owners 能确认：
+
+```
+VALUE_CONFIRMED
+```
+
+例如系统可以问：
+
+> 你想达到 RM20,000 月收入，是因为你需要更高的家庭安全感、更多自由，还是这个数字本身就是你想完成的目标？
+
+用户可以回答：
+
+> 主要是家庭安全，而且我不愿意用长期失去家庭时间换这个数字。
+
+此时才可以写入：
+
+```
+VALUE_CONFIRMED:
+family financial security
+family time continuity
+```
+
+---
+
+# 17. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.22｜目标不是价值本身
+```
+
+相关：
+
+```
+15.21｜改变以前，先确认什么不能被无意失去
+15.23｜价值什么时候彼此冲突
+15.24｜改变不是把旧世界全部清空
+15.25｜替代方案必须保护什么
+15.26｜哪些损失可以交换，哪些不能
+```
+
+---
+
+# 18. `relatedBookFoundations`
+
+## Book II｜Reality Runtime
+
+提供：
+
+```
+human preference
+choice
+internal conflict
+```
+
+NAV-20 不重新解释欲望如何形成。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+interpretation boundary
+observer limit
+```
+
+支持：
+
+> **系统不能因为拥有更完整模型，就声称比用户更知道用户真正重视什么。**
+
+---
+
+# 19. `profileConsumer`
+
+Profile 可以提出：
+
+```
+possible recurring values
+possible friction priorities
+possible environmental preferences
+```
+
+例如：
+
+```
+autonomy
+stability
+mastery
+connection
+```
+
+但只能输出：
+
+```
+VALUE_CANDIDATE
+```
+
+最终必须经过：
+
+```
+HUMAN_CONFIRMATION
+```
+
+---
+
+# 20. `financialConsumer`
+
+Financial 需要严格区分：
+
+```
+financial goal
+```
+
+和：
+
+```
+financial value / condition
+```
+
+例如：
+
+```
+Goal:
+RM1 million portfolio
+```
+
+背后可能是：
+
+```
+retirement security
+family provision
+freedom from employment
+legacy
+```
+
+不同 value 会改变：
+
+```
+time horizon
+risk tolerance
+liquidity need
+```
+
+但这些不能由系统自己猜定。
+
+---
+
+# 21. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+可以提供：
+
+```
+INTERPRETIVE_VALUE_QUESTION
+```
+
+例如：
+
+> 这个系统反复提示自主性主题；在你现在这个决定里，自主性对你实际重要吗？
+
+而不能说：
+
+> 你的命盘证明自主性就是你的核心人生价值。
+
+---
+
+# 22. `currentRealityConsumer`
+
+Current Reality 可以帮助检查：
+
+```
+is current goal still solving current problem?
+```
+
+例如：
+
+原目标：
+
+```
+higher income
+```
+
+但用户当前真正问题已经变成：
+
+```
+lack of time
+care burden
+```
+
+则系统可以提出：
+
+```
+GOAL_RELEVANCE_REVIEW
+```
+
+---
+
+# 23. `runtimeConsumer`
+
+NAV-20 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Structural Transition Planning
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+---
+
+# 24. `academyConsumer`
+
+Academy 可投影为：
+
+> **A goal names an outcome. A value explains why that outcome matters.**
+
+中文：
+
+> **目标说的是想得到什么；价值解释的是为什么这件事值得得到。**
+
+---
+
+# 25. `revisionTriggers`
+
+以下情况必须重开 NAV-20：
+
+```
+goalChanged
+goalAchieved
+goalFailed
+userValueChanged
+currentRealityChanged
+newResponsibility
+carrierChanged
+newOptionAppeared
+goalNoLongerProducesExpectedValue
+timeHorizonChanged
+```
+
+---
+
+# 26. Canonical Goal-Value Model
+
+建议：
+
+```
+{
+  "goalValueAssessmentId": "",
+  "decisionObjectId": "",
+  "goals": [
+    {
+      "goalId": "",
+      "description": "",
+      "timeHorizon": "",
+      "status": ""
+    }
+  ],
+  "values": [
+    {
+      "valueId": "",
+      "description": "",
+      "authority": "USER_CONFIRMED | SHARED_CONFIRMED | CANDIDATE | UNKNOWN"
+    }
+  ],
+  "goalValueLinks": [
+    {
+      "goalId": "",
+      "valueId": "",
+      "state": "ALIGNED | PARTIAL | CONFLICTED | UNKNOWN"
+    }
+  ],
+  "alternativeCarriers": [],
+  "conflicts": [],
+  "unknowns": [],
+  "status": ""
+}
+```
+
+---
+
+# 27. Goal Rule
+
+冻结：
+
+> **A goal is a desired state or result; it is not automatically the reason that result matters.**
+
+中文：
+
+> **目标是希望达到的状态或结果，却不自动等于这个结果为什么重要。**
+
+---
+
+# 28. Value Rule
+
+冻结：
+
+> **A value is something the decision-maker wants to protect, express, preserve, or make possible across more than one potential path.**
+
+中文：
+
+> **价值是决定者希望保护、表达、延续或使之成为可能的东西，而且它原则上可以由不止一条路径承载。**
+
+这正是 Goal 与 Value 的主要区别。
+
+---
+
+# 29. Carrier Rule
+
+如果只有一条路径能达到某 Goal，不代表只有一条路径能保护相同 Value。
+
+例如：
+
+```
+Goal:
+promotion
+```
+
+Value：
+
+```
+growth
+income
+authority
+recognition
+```
+
+可能通过其他 carrier 获得。
+
+---
+
+# 30. Metric Rule
+
+目标一旦数字化，很容易产生：
+
+```
+METRIC_CAPTURE
+```
+
+例如：
+
+```
+RM20k income
+10% investment return
+title promotion
+business revenue
+exam grade
+```
+
+系统必须检查：
+
+> 指标是否开始取代它原本服务的价值？
+
+---
+
+# 31. Goal Drift Rule
+
+目标会漂移。
+
+例如：
+
+```
+Original:
+build business to gain freedom
+
+Later:
+business growth becomes goal itself
+
+Result:
+less freedom than before
+```
+
+应标记：
+
+```
+GOAL_DRIFT
+```
+
+但不是 moral failure。
+
+---
+
+# 32. Goal Completion Rule
+
+即使目标完成，也必须允许：
+
+```
+VALUE_NOT_DELIVERED
+```
+
+例如：
+
+```
+Goal achieved:
+promotion
+
+Expected value:
+autonomy
+
+Reality:
+autonomy decreased
+```
+
+这说明：
+
+```
+goal success
+≠
+navigation success
+```
+
+---
+
+# 33. Goal Failure Rule
+
+相反：
+
+```
+GOAL_NOT_ACHIEVED
+```
+
+也不一定意味着：
+
+```
+VALUE_LOST
+```
+
+例如没有买到原定房子，却找到：
+
+```
+stable long-term housing
+better school access
+more liquidity
+```
+
+原价值可能仍然被保护。
+
+---
+
+# 34. Multi-Value Goal Rule
+
+一个目标可同时服务多个价值。
+
+例如：
+
+```
+move abroad
+```
+
+可能服务：
+
+```
+career
+education
+safety
+autonomy
+family experience
+```
+
+系统不能只保留最容易量化的那一项。
+
+---
+
+# 35. Goal-Value Conflict Rule
+
+同一个目标可能：
+
+```
+protect Value A
+damage Value B
+```
+
+例如：
+
+```
+higher-paying job
+```
+
+保护：
+
+```
+financial security
+```
+
+却损害：
+
+```
+time autonomy
+family continuity
+```
+
+应标记：
+
+```
+GOAL_VALUE_CONFLICT
+```
+
+不应自动汇总成单一总分。
+
+---
+
+# 36. Responsibility vs Value Rule
+
+责任不应被误写成个人 preference。
+
+例如：
+
+```
+dependant support
+legal obligation
+care duty
+```
+
+属于：
+
+```
+RESPONSIBILITY_REQUIREMENT
+```
+
+可能需要保护，即使用户不会把它描述为个人“价值”。
+
+---
+
+# 37. Material Requirement vs Value Rule
+
+同样：
+
+```
+minimum housing
+minimum liquidity
+medical access
+```
+
+可能属于：
+
+```
+MATERIAL_REQUIREMENT
+```
+
+而不是哲学价值。
+
+NAV-20 必须保持三者分开：
+
+```
+GOAL
+VALUE
+REQUIREMENT
+```
+
+---
+
+# 38. No Hidden-Value Rule
+
+冻结：
+
+> **Navigation may propose possible values behind a goal; it may not assert a hidden value that the decision-maker has not confirmed.**
+
+中文：
+
+> **Navigation 可以提出某个目标背后可能存在的价值，却不能把未经决定者确认的价值宣称为其隐藏真相。**
+
+---
+
+# 39. Alternative Goal Rule
+
+如果当前 Goal 与 Value 冲突，Navigation 可以生成：
+
+```
+ALTERNATIVE_GOAL_CANDIDATE
+```
+
+例如：
+
+原目标：
+
+```
+earn RM20k/month
+```
+
+如果价值是：
+
+```
+financial security + time autonomy
+```
+
+可能重新形成：
+
+```
+increase monthly surplus
+reduce debt
+build 12-month runway
+create second income source
+```
+
+作为候选目标。
+
+但用户必须确认。
+
+---
+
+# 40. Goal Hierarchy Rule
+
+可以存在：
+
+```
+PRIMARY_GOAL
+SUPPORTING_GOAL
+INSTRUMENTAL_GOAL
+```
+
+例如：
+
+```
+Primary:
+financial independence
+
+Supporting:
+build RM500k invested assets
+
+Instrumental:
+save RM5k/month
+```
+
+这样可以避免工具目标取代最终目标。
+
+---
+
+# 41. Goal Time-Horizon Rule
+
+目标必须读取 NAV-07。
+
+例如：
+
+```
+Immediate Goal:
+stabilize cash flow
+
+Medium Goal:
+change career
+
+Long Goal:
+location freedom
+```
+
+不能把不同 horizon 的目标直接互相淘汰。
+
+---
+
+# 42. Customer Projection Example
+
+内部：
+
+```
+Stated Goal:
+Get a promotion within 12 months
+
+Possible Values:
+higher income
+career growth
+more authority
+recognition
+
+User Confirmed:
+career growth
+more decision authority
+
+Current promotion reality:
+higher pay
+larger workload
+little additional authority
+
+State:
+GOAL_PARTIALLY_ALIGNED
+```
+
+客户可以看到：
+
+> **“升职”本身不是你真正需要保护的全部东西。**
+> 
+> 你最初希望升职，是因为它代表成长、更大的决定空间，以及一定程度的收入提升；但从目前掌握的岗位条件看，新职位虽然会增加收入和职责，却未必明显增加你真正重视的决定权。
+> 
+> 这并不意味着升职失去价值，而是说明接下来不能只比较“能不能升上去”，还需要比较：这个职位是否真的带来你原本希望通过升职取得的东西；如果没有，其他职业路径也应该被允许进入候选。
+
+---
+
+# 43. Customer Actions
+
+允许：
+
+```
+Confirm value
+Reject value candidate
+Add value
+Keep goal
+Redesign goal
+Add alternative carrier
+Mark responsibility
+Mark material requirement
+Continue
+```
+
+---
+
+# 44. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+VALUE_UNCONFIRMED
+GOAL_VALUE_ALIGNED
+GOAL_PARTIALLY_ALIGNED
+GOAL_VALUE_CONFLICT
+GOAL_IS_ONLY_ONE_CARRIER
+GOAL_NO_LONGER_SERVES_VALUE
+READY_FOR_VALUE_CONFLICT_REVIEW
+REOPENED
+```
+
+---
+
+# 45. Fail-Closed Conditions
+
+以下情况不得进入 NAV-21：
+
+```
+goalUnknown
+valueAssertedWithoutHumanAuthority
+goalAndValueConflated
+responsibilityMisclassifiedAsPreference
+materialRequirementMisclassifiedAsValue
+profileUsedAsFinalValueAuthority
+symbolicReadingUsedAsHiddenValueAuthority
+goalValueConflictSuppressed
+decisionObjectChanged
+```
+
+---
+
+# 46. Canonical Runtime Rule
+
+> **Navigation must distinguish the outcome a person is trying to reach from the value that makes that outcome worth reaching.**
+
+中文：
+
+> **Navigation 必须把一个人想要达到的结果，与使这个结果值得追求的价值分开。**
+
+---
+
+# 47. Canonical Goal Rule
+
+> **A goal can be changed without abandoning the value it was meant to serve.**
+
+中文：
+
+> **目标可以改变，而不等于放弃这个目标原本想服务的价值。**
+
+---
+
+# 48. Canonical Alignment Rule
+
+> **A goal loses navigation strength when achieving it no longer reliably protects or creates the value that originally justified it.**
+
+中文：
+
+> **当一个目标的实现已经不能可靠保护或产生原本赋予它意义的价值时，它的 Navigation 资格就会下降。**
+
+---
+
+# 49. Canonical Metric Rule
+
+> **A measurable target must not silently replace the less measurable value it was designed to serve.**
+
+中文：
+
+> **一个可量化的目标，不能在运行过程中悄悄取代它原本应该服务、却较难量化的价值。**
+
+---
+
+# 50. Canonical Human Authority Rule
+
+> **Navigation may clarify the relationship between goals and values; it cannot claim privileged access to what a person “really” values.**
+
+中文：
+
+> **Navigation 可以帮助澄清目标与价值之间的关系，却不能声称自己比当事人更知道他“真正”重视什么。**
+
+---
+
+# 51. Final Canonical Form
+
+```
+NAV-20
+GOAL VS VALUE
+```
+
+**Input**
+
+```
+Stated Goal
++
+Preservation Requirements
++
+Current Reality
++
+Decision-Relevant Futures
+```
+
+**Process**
+
+```
+Ask:
+What outcome is being pursued?
+Why does that outcome matter?
+Which values does it actually serve?
+Is the goal the value, or one carrier of it?
+Does the current form of the goal still protect what matters?
+```
+
+**Output**
+
+```
+Goal–Value Alignment Map
+```
+
+**Boundary**
+
+```
+Goal is not automatically value.
+Value does not require one permanent goal.
+```

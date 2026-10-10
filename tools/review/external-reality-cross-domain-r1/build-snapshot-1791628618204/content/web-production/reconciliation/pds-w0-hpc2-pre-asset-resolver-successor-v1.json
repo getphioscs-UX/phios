@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "PHI-OS-PDS-W0-HPC2-PRE-ASSET-RESOLVER-SUCCESSOR-v1.0.0",
+  "work": "PDS-W0-CURRENT-PROTECTED-PATH-RECONCILIATION",
+  "baselineCommit": "aab18446a012938ccd24043751469866831fe4e0",
+  "status": "ACTIVE_ADDITIVE_CANONICAL_TEXT_AND_EXACT_BLOB_SUCCESSOR_PDS_W0_AND_WPR_B_HISTORY_PRESERVED",
+  "purpose": "Reconcile the existing HPC2-PRE asset-resolver successor inside the PDS-W0 protected runtime path without rewriting the frozen PDS baseline or the original WPR-B add-only authorization, while making textual evidence digests deterministic across LF and CRLF checkout policies.",
+  "historicalAuthority": {
+    "pdsContract": {
+      "path": "content/registry/pds-w0-baseline-boundary.json",
+      "sha256": "fce81ed714020127e8678c7c05c7cb836c101785eced35697a4f4db95828875b"
+    },
+    "pdsFixture": {
+      "path": "tests/fixtures/pds-w0-baseline-boundary.json",
+      "sha256": "92f85b689cb33845fdf7ad51f9742994911bcec9d370e69df1df884fc72850fc"
+    },
+    "pdsFreezeDocument": {
+      "path": "docs/design-system/PDS-W0-BASELINE-AND-BOUNDARY-FREEZE.md",
+      "sha256": "6bb1dccea2c15e662b6c3d8c42f789a532b80461ce9719de8ee597c7f88d864c"
+    },
+    "historicalChecker": {
+      "path": "scripts/check-pds-w0-baseline-boundary.mjs",
+      "sha256": "441565239dbc85da130d4dfa13c47b6c033ee731bce460c9e67411b7b63df322"
+    },
+    "postFreezeAdditionRegistry": {
+      "path": "docs/design-system/pds-w0-post-freeze-protected-path-additions-v1.json",
+      "sha256": "585f9aaed5228f9136816f7b3890540dd32eec387578ee56dbbca40ea08973e8",
+      "authorizationMode": "ADD_ONLY_EXACT_GIT_BLOB"
+    },
+    "historicalArtifactsRewritten": false
+  },
+  "assetResolverTransition": {
+    "path": "assets/js/runtime/web-production/asset-resolver.js",
+    "protectedPath": "assets/js/runtime",
+    "originalWprBCommit": "1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7",
+    "originalWprBBlobSha": "bb61dc08b10f562530c335a48aa46accffbd7bcb",
+    "originalWprBSha256": "77c5a540b1e6fc789acce708152bbee690d7840c1b1d709d4df9bca8c6a6e6c3",
+    "successorCommit": "63180ab0d4a64197eca06715601d371dea8b8cd7",
+    "successorBlobSha": "ec25872c12fe0ebaff9e26d46e64264635d2b03a",
+    "successorSha256": "6a44f5d3371f3dde0f0b51e95d97c74c1640d3767cb870a3fa5b7df75b8b64f0",
+    "authorizedAdditiveReturnFields": [
+      "family",
+      "objectKey",
+      "contentType",
+      "canonicalFormat"
+    ],
+    "resolverIdentityChanged": false,
+    "secondResolverCreated": false,
+    "urlResolutionAuthorityChanged": false,
+    "registryAuthorityChanged": false,
+    "baselineRuntimeFileModified": false,
+    "changeClassification": "POST_PDS_REGISTERED_ADDITION_VERSIONED_BY_HPC2_PRE_SUCCESSOR"
+  },
+  "successorAuthorityEvidence": [
+    {
+      "path": "content/web-production/reconciliation/wpr-w7-w10-hpc2-pre-successor-v1.json",
+      "sha256": "44cff1d45f22858f04da68f8006e82478ba639a23b24f7d31172ac1366d85a46",
+      "role": "EXISTING_ASSET_RESOLVER_REMAINS_SINGLE_AUTHORITY"
+    },
+    {
+      "path": "content/web/homepage/hpc2-pre/hpc2-pre-public-delivery-activation-v1.json",
+      "sha256": "b50dd2f3ec6def477aa2c1cdeae0f381360a667e2338b8facd28497da8333780",
+      "role": "PUBLIC_DELIVERY_USES_EXISTING_RESOLVER_NO_SECOND_RESOLVER"
+    },
+    {
+      "path": "content/web/homepage/hpc2-pre/hpc2-pre-homepage-consumption-v1.json",
+      "sha256": "7d6d6a92ea1eb7aa495ed2e8f59b97ff6d762bd79e0ceb2bcf2774830f15b82b",
+      "role": "ACTUAL_HOMEPAGE_CONSUMER_RESOLVER_BINDING"
+    },
+    {
+      "path": "content/web/homepage/hpc2-pre/freeze/hpc2-pre-v2-freeze-v1.json",
+      "sha256": "2e0ec15eea5f3a7308f69931365a736e5bce45a850521da1ad188ab4faea01a3",
+      "role": "SUCCESSOR_RESOLVER_IMPLEMENTATION_DIGEST_FREEZE"
+    }
+  ],
+  "unchangedRegisteredAdditions": [
+    {
+      "path": "assets/js/runtime/web-production/composition-resolver.js",
+      "gitBlobSha": "8ec22b86c38fed83aa30fb09a7f427c89bf6de26"
+    },
+    {
+      "path": "assets/js/runtime/web-production/locale-resolver.js",
+      "gitBlobSha": "e21aa7ae47883b730557cbc21d831dbf4ba829c4"
+    },
+    {
+      "path": "assets/js/runtime/web-production/vocabulary-resolver.js",
+      "gitBlobSha": "63eae597812259925d1a8151819671cdad683549"
+    }
+  ],
+  "checkerRouting": {
+    "historicalCheckerPreserved": "scripts/check-pds-w0-baseline-boundary.mjs",
+    "currentChecker": "scripts/check-pds-w0-current.mjs",
+    "historicalPackageAliasPreserved": "check:pds-w0",
+    "currentPackageAlias": "check:pds-w0-current",
+    "globalPrecheckUsesCurrentChecker": true
+  },
+  "boundaries": {
+    "pdsBaselineReopened": false,
+    "pdsMutationAuthorityGranted": false,
+    "originalPostFreezeRegistryRewritten": false,
+    "assetResolverDuplicated": false,
+    "compositionResolverDuplicated": false,
+    "localeResolverDuplicated": false,
+    "vocabularyResolverDuplicated": false,
+    "homepageRuntimeCreated": false,
+    "knowledgeAuthorityCreated": false,
+    "methodAuthorityCreated": false,
+    "professionalJudgmentAuthorityCreated": false,
+    "humanAcceptanceClaimed": false,
+    "browserAcceptanceClaimed": false,
+    "deploymentAcceptanceClaimed": false
+  },
+  "successorPolicy": {
+    "failClosed": true,
+    "deterministic": true,
+    "exactGitBlobRequired": true,
+    "exactSha256Required": true,
+    "textDigestNormalization": "UTF8_BOM_STRIPPED_LF",
+    "unregisteredProtectedPathChangeForbidden": true,
+    "baselineFileModificationOrDeletionForbidden": true,
+    "futureRegisteredAdditionDriftRequiresVersionedSuccessor": true
+  }
+}

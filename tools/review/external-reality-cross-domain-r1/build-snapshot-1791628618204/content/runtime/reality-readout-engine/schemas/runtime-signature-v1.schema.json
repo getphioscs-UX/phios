@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "signatureCode",
+    "whatPersists",
+    "whatRepeats",
+    "whatActivates",
+    "whatDeactivates",
+    "whatRemainsUnstable",
+    "personalityProfile",
+    "identityTruth",
+    "supportOnly",
+    "signatureDigest"
+  ],
+  "properties": {
+    "signatureCode": {
+      "type": "string"
+    },
+    "whatPersists": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "signatureFragmentCode",
+          "role",
+          "descriptorCode",
+          "observableReferences",
+          "supportReferences"
+        ],
+        "properties": {
+          "signatureFragmentCode": {
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "PERSISTS",
+              "REPEATS",
+              "ACTIVATES",
+              "DEACTIVATES",
+              "REMAINS_UNSTABLE"
+            ]
+          },
+          "descriptorCode": {
+            "type": "string"
+          },
+          "observableReferences": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "supportReferences": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "whatRepeats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "signatureFragmentCode",
+          "role",
+          "descriptorCode",
+          "observableReferences",
+          "supportReferences"
+        ],
+        "properties": {
+          "signatureFragmentCode": {
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "PERSISTS",
+              "REPEATS",
+              "ACTIVATES",
+              "DEACTIVATES",
+              "REMAINS_UNSTABLE"
+            ]
+          },
+          "descriptorCode": {
+            "type": "string"
+          },
+          "observableReferences": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "supportReferences": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "whatActivates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "signatureFragmentCode",
+          "role",
+          "descriptorCode",
+          "observableReferences",
+          "supportReferences"
+        ],
+        "properties": {
+          "signatureFragmentCode": {
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "PERSISTS",
+              "REPEATS",
+              "ACTIVATES",
+              "DEACTIVATES",
+              "REMAINS_UNSTABLE"
+            ]
+          },
+          "descriptorCode": {
+            "type": "string"
+          },
+          "observableReferences": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "supportReferences": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "whatDeactivates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "signatureFragmentCode",
+          "role",
+          "descriptorCode",
+          "observableReferences",
+          "supportReferences"
+        ],
+        "properties": {
+          "signatureFragmentCode": {
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "PERSISTS",
+              "REPEATS",
+              "ACTIVATES",
+              "DEACTIVATES",
+              "REMAINS_UNSTABLE"
+            ]
+          },
+          "descriptorCode": {
+            "type": "string"
+          },
+          "observableReferences": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "supportReferences": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "whatRemainsUnstable": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "signatureFragmentCode",
+          "role",
+          "descriptorCode",
+          "observableReferences",
+          "supportReferences"
+        ],
+        "properties": {
+          "signatureFragmentCode": {
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "PERSISTS",
+              "REPEATS",
+              "ACTIVATES",
+              "DEACTIVATES",
+              "REMAINS_UNSTABLE"
+            ]
+          },
+          "descriptorCode": {
+            "type": "string"
+          },
+          "observableReferences": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "supportReferences": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "personalityProfile": {
+      "const": false
+    },
+    "identityTruth": {
+      "const": false
+    },
+    "supportOnly": {
+      "const": true
+    },
+    "signatureDigest": {
+      "type": "string",
+      "pattern": "^[A-Fa-f0-9]{64}$"
+    }
+  }
+}

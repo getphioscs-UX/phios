@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "PHI-OS-RJX-CANONICAL-NODE-RULE-BINDING-CONTRACT-v1.0.0",
+  "contractVersion": "1.0.0",
+  "phase": "RJX",
+  "work": "RJX-W1",
+  "status": "CANDIDATE_ONLY",
+  "baselineCommit": "655a6136919fa820f6d064237cf01a8fc4f8f667",
+  "sourceAuthority": [
+    "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json",
+    "content/knowledge/blueprints/blueprint-registry.json",
+    "content/knowledge/migrations/book-w1-five-volume-acceptance-v1.json"
+  ],
+  "requiredFields": [
+    "bindingCode",
+    "version",
+    "status",
+    "sourceNodeCodes",
+    "publicationBookCodes",
+    "partCodes",
+    "journeyStages",
+    "ruleRole",
+    "inputFacts",
+    "predicate",
+    "outputSignals",
+    "outputQuestions",
+    "evidenceClassesAllowed",
+    "counterEvidencePolicy",
+    "unknownPolicy",
+    "professionalBoundary",
+    "explanationFragmentRefs",
+    "sourceAuthority",
+    "migrationRecord",
+    "humanAcceptance"
+  ],
+  "eligibilityClasses": [
+    "EXECUTABLE_RULE",
+    "STATE_PRIMITIVE",
+    "EVIDENCE_QUESTION",
+    "EXPLANATION_FRAGMENT",
+    "RETRIEVAL_ONLY",
+    "CONTEXT_ONLY",
+    "PROFESSIONAL_GATED",
+    "NON_EXECUTABLE",
+    "DEFER"
+  ],
+  "safePredicateOperators": [
+    "all",
+    "any",
+    "not",
+    "equals",
+    "not_equals",
+    "contains",
+    "in",
+    "exists",
+    "count_gte",
+    "count_lte",
+    "score_gte",
+    "score_lt",
+    "time_span_gte",
+    "changed_from_previous",
+    "evidence_class_is",
+    "source_type_is"
+  ],
+  "forbiddenPredicateMechanisms": [
+    "arbitrary_code",
+    "eval",
+    "dynamic_javascript",
+    "request_time_llm_predicate",
+    "client_supplied_unbounded_regex",
+    "silent_threshold_mutation",
+    "unknown_as_false_without_policy"
+  ],
+  "outputMayInclude": [
+    "signal_candidate",
+    "grammar_state",
+    "runtime_scope",
+    "maintenance_status",
+    "coordination_pressure",
+    "evidence_gap",
+    "unknown_question",
+    "reading_readiness",
+    "navigation_readiness",
+    "available_option_type",
+    "review_trigger",
+    "continuity_condition",
+    "professional_handoff_requirement",
+    "explanation_fragment_reference"
+  ],
+  "outputForbidden": [
+    "diagnosis",
+    "prediction",
+    "guaranteed_outcome",
+    "unqualified_professional_recommendation",
+    "automatic_irreversible_command",
+    "canonical_truth_mutation"
+  ],
+  "activation": {
+    "automaticNodeToRuleActivation": false,
+    "humanAcceptanceRequiredPerBinding": true,
+    "productionEffect": "none"
+  }
+}

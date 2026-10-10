@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-ICHI-CHANGING-LINE-INTERPRETATION-CONTRACT-v1.0.0",
+  "phase": "ICHI",
+  "work": "ICHI-W4",
+  "baselineCommit": "ec0f8d4b9ba37599affda909a47d1e41a1033037",
+  "status": "ACTIVE_VALIDATION_ONLY",
+  "requiredBindings": [
+    "hexagramId",
+    "linePosition",
+    "sourceId",
+    "perspectiveId",
+    "provenance"
+  ],
+  "rules": {
+    "hexagramBound": true,
+    "lineBound": true,
+    "sourceBound": true,
+    "linePositionRange": [
+      1,
+      6
+    ],
+    "changingLineSelectionComesOnlyFromCanonicalProjection": true,
+    "nonChangingLineMayNotBeSilentlyPromoted": true,
+    "sourceClaimMayNotMutateChangingState": true
+  }
+}

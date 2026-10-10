@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "PHI-OS-MARKET-PROVIDER-SERIES-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2",
+  "requiredFields": [
+    "seriesId",
+    "providerId",
+    "capability",
+    "instrument",
+    "window",
+    "retrievedAt",
+    "responseDigest",
+    "observations"
+  ],
+  "rules": [
+    "Time-series observations preserve provider timestamps and units.",
+    "No trend, constraint, continuity or reconfiguration conclusion is embedded in the raw series.",
+    "Longitudinal claims must cite a defined window and the exact fields used.",
+    "A series may support semantic derivation only after source admission, bounded claims, CWA admission and RRE lineage."
+  ]
+}

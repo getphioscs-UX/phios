@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "PHI-OS-MOOMOO-OPENAPI-PROFILE-v1.0.0",
+  "version": "1.1.0",
+  "status": "REGISTERED_AUTH_REQUIRED",
+  "providerId": "MOOMOO_OPENAPI",
+  "transport": {
+    "rest": "https://webapi.moomoo.com",
+    "websocketQuote": "wss://webapi-quote.moomoo.com/ws"
+  },
+  "authentication": {
+    "preferred": "OAUTH_2_1_PKCE",
+    "optional": "API_KEY",
+    "environmentBindings": [
+      "MOOMOO_ACCESS_TOKEN",
+      "MOOMOO_API_KEY"
+    ],
+    "persistEnvironmentBindings": false
+  },
+  "capabilityBindings": [
+    {
+      "capability": "HISTORY_KLINE",
+      "sourceFamily": "MARKET_SERIES",
+      "suggestedLocator": "API_RESPONSE_FIELD",
+      "gapTargets": [
+        "US-W8E-SEM-MACRO-RECONFIGURATION",
+        "US-W8E-SEM-SYSTEM-CONTINUITY"
+      ]
+    },
+    {
+      "capability": "CAPITAL_FLOW",
+      "sourceFamily": "MARKET_FLOW_SERIES",
+      "suggestedLocator": "API_RESPONSE_FIELD",
+      "gapTargets": [
+        "US-W8E-SEM-FINANCIAL-CONSTRAINT",
+        "US-W8E-SEM-MACRO-RECONFIGURATION"
+      ]
+    },
+    {
+      "capability": "SECTOR_PLATE",
+      "sourceFamily": "MARKET_STRUCTURE",
+      "suggestedLocator": "API_RESPONSE_FIELD",
+      "gapTargets": [
+        "US-W8E-SEM-MACRO-RECONFIGURATION"
+      ]
+    },
+    {
+      "capability": "VALUATION",
+      "sourceFamily": "MARKET_VALUATION",
+      "suggestedLocator": "API_RESPONSE_FIELD",
+      "gapTargets": [
+        "US-W8E-SEM-FINANCIAL-CONSTRAINT"
+      ]
+    },
+    {
+      "capability": "FINANCIAL_STATEMENTS",
+      "sourceFamily": "COMPANY_FINANCIAL_SERIES",
+      "suggestedLocator": "API_RESPONSE_FIELD",
+      "gapTargets": [
+        "US-W8E-SEM-SYSTEM-CONTINUITY",
+        "US-W8E-SEM-MACRO-RECONFIGURATION"
+      ]
+    },
+    {
+      "capability": "REVENUE_BREAKDOWN",
+      "sourceFamily": "COMPANY_STRUCTURE_SERIES",
+      "suggestedLocator": "API_RESPONSE_FIELD",
+      "gapTargets": [
+        "US-W8E-SEM-MACRO-RECONFIGURATION"
+      ]
+    }
+  ],
+  "liveExecution": {
+    "enabled": false,
+    "reason": "Credentials are not configured in repository state. Live calls must be executed only with runtime secrets and explicit provider entitlements."
+  },
+  "firstPackage": "content/civilization-atlas/reconfiguration/moomoo-first-data-request-plan-v1.json"
+}

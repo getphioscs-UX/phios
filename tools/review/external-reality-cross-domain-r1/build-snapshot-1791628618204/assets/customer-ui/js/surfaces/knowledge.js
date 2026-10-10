@@ -1,0 +1,158 @@
+import {rankPublicSearch} from '../search-ranking.js';
+import {knowledgeNavigationIntent} from '../navigation-intent.js';
+import {articleHref,loadPublishedArticles} from '../../../js/knowledge/published-content.js';
+import {loadPublicKnowledgeCatalog,loadPublicSearchIndex} from '../../../js/knowledge/public-discovery.js';
+import {BOOK_ROUTE_BY_ID,loadSevenVolumeBooks,loadSevenVolumeParts} from '../../../js/web-production/public-surface-data-seven.js';
+import {hydrateSevenVolumeAssets} from '../seven-volume-assets.js';
+import {loadFigureRegistry} from '../../../js/web-production/public-surface-data.js';
+import {structuredDiscoveryRows} from '../../../js/knowledge/structured-discovery.js';
+import {knowledgeTopicLabel} from '../knowledge-topic-label.js';
+
+const $=(selector,scope=document)=>scope.querySelector(selector);
+const $$=(selector,scope=document)=>[...scope.querySelectorAll(selector)];
+const clean=value=>String(value??'').trim();
+const esc=value=>clean(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
+const locale=()=>String(document.documentElement.lang||'en').toLowerCase().startsWith('zh')?'zh-Hans':'en';
+const tr=(en,zh)=>locale()==='zh-Hans'?zh:en;
+const label=(value)=>typeof value==='object'?(value?.[locale()]||value?.en||value?.['zh-Hans']||''):clean(value);
+const fetchJson=async path=>{const response=await fetch(path,{credentials:'same-origin',signal:AbortSignal.timeout(12000),headers:{Accept:'application/json'}});if(!response.ok)throw new Error(`CX_KNOWLEDGE_SOURCE_UNAVAILABLE:${path}`);return response.json()};
+const state={articles:new Map(),books:null,concepts:null,figures:null,parts:null,catalog:null,searchIndex:new Map(),themes:[]};
+
+const BOOK_ROLE={
+ 'BOOK-6':{en:'Reality Reconfiguration',zh:'世界如何重组'},
+ 'BOOK-1':{en:'How reality forms',zh:'现实如何形成'},
+ 'BOOK-2':{en:'How reality runs',zh:'现实如何运行'},
+ 'BOOK-3':{en:'How reality maintains continuity',zh:'现实如何维持与延续'},
+ 'BOOK-4':{en:'How reality expands across scale',zh:'现实如何跨越尺度扩展'},
+ 'BOOK-5':{en:'How civilizations occupy different reality positions',zh:'文明如何占据不同现实位置'},
+ 'BOOK-7':{en:'How reality becomes observable and readable',zh:'现实如何被观察与读取'},
+ 'BOOK-8':{en:'How reading becomes navigation and continuation',zh:'读取如何进入导航与延续'}
+};
+const BOOK_ASSET=Object.fromEntries(Array.from({length:8},(_,i)=>[`BOOK-${i+1}`,`BOOK-${i+1}-HARDCOVER`]));
+const BOOK_ROUTE={'BOOK-1':'/books/reality-formation/','BOOK-2':'/books/reality-runtime/','BOOK-3':'/books/reality-continuity/','BOOK-4':'/books/reality-expansion/','BOOK-5':'/books/reality-differentiation/','BOOK-6':'/books/reality-configuration/','BOOK-7':'/books/reality-observation/','BOOK-8':'/books/reality-navigation/'};
+
+function askHref(kind,ref,labelText,route,bookCode=''){
+ const params=new URLSearchParams({contextType:'KNOWLEDGE',contextRef:`${kind}:${ref}`,contextLabel:clean(labelText).slice(0,160),contextRoute:clean(route).slice(0,240)});
+ if(/^BOOK-[1-8]$/.test(clean(bookCode)))params.set('bookCode',clean(bookCode));
+ return `/knowledge/ask/?${params.toString()}`;
+}
+const BOOK6_ATLAS_RESULT_TYPES=new Set(['CASE','WINDOW','SNAPSHOT','DOSSIER','BOOK_SECTION','LIVED_REALITY']);
+function atlasAskHref(record){
+ if(!record?.atlasScope)return null;
+ const params=new URLSearchParams({contextType:'KNOWLEDGE',contextRef:'BOOK:BOOK-6',contextLabel:clean(record.title).slice(0,160),contextRoute:clean(record.href).slice(0,240),readingPath:'BOOK-6 > PART-13 > RECONFIGURATION',relatedKnowledgeRef:'BOOK:BOOK-6',retrievalScope:JSON.stringify(record.atlasScope)});
+ return '/knowledge/ask/?'+params.toString();
+}
+function relatedLabel(article){
+ const context=article?.publicationContext||{};
+ const part=label(context.partTitle)||clean(context.partCode);
+ const book=label(context.bookTitle)||clean(context.publicationBookCode||context.bookCode);
+ const related=[book,part].filter(Boolean);
+ return related.join(' · ')||tr('Published PHI OS knowledge','已发布 PHI OS 知识');
+}
+function articleCard(article){
+ const href=articleHref(article);
+ const title=clean(article?.title)||tr('Untitled article','未命名文章');
+ const date=clean(article?.publishedAt);
+ return `<article class="cx-knowledge-article-card"><div class="cx-stack"><div class="cx-knowledge-meta-row"><span>${esc(tr('Article','文章'))}</span>${date?`<time datetime="${esc(date)}">${esc(date.slice(0,10))}</time>`:''}</div><h3 class="cx-heading-3">${esc(title)}</h3><p>${esc(article?.summary||article?.shortAnswer||'')}</p><div class="cx-meta">${esc(relatedLabel(article))}</div></div><div class="cx-cluster"><a class="cx-button cx-button--text" href="${esc(href)}">${esc(tr('Read article →','阅读文章 →'))}</a><a class="cx-button cx-button--quiet" href="${esc(askHref('ARTICLE',article.slug,title,href,clean(article?.publicationContext?.publicationBookCode||article?.publicationContext?.bookCode)))}">${esc(tr('Ask about this','针对这个提问'))}</a></div></article>`;
+}
+async function articlesForLocale(){
+ const key=locale();
+ if(!state.articles.has(key))state.articles.set(key,loadPublishedArticles(key));
+ return state.articles.get(key);
+}
+async function books(){if(!state.books)state.books=loadSevenVolumeBooks();return state.books}
+async function concepts(){if(!state.concepts)state.concepts=fetchJson('/content/registry/concepts.json');return state.concepts}
+async function figures(){if(!state.figures)state.figures=loadFigureRegistry();return state.figures}
+async function parts(){if(!state.parts)state.parts=loadSevenVolumeParts();return state.parts}
+async function discoveryCatalog(){if(!state.catalog)state.catalog=loadPublicKnowledgeCatalog();return state.catalog}
+async function discoveryIndex(){const key=locale();if(!state.searchIndex.has(key))state.searchIndex.set(key,loadPublicSearchIndex(key));return state.searchIndex.get(key)}
+function figureHasCanonicalBookOwnership(figure,partsRegistry){if(!figure||!partsRegistry)return false;if(Number(figure.part)===0)return Number(figure.book)===1;const part=partsRegistry.parts?.find(p=>Number(p.number)===Number(figure.part));return part?.book===`book-${Number(figure.book)}`}
+function loading(node){if(node)node.innerHTML=`<div class="cx-knowledge-state">${esc(tr('Loading published knowledge…','正在读取已发布知识……'))}</div>`}
+function unavailable(node){if(node){node.innerHTML=`<div class="cx-knowledge-state">${esc(tr('This knowledge view is temporarily unavailable.','这个知识视图暂时无法读取。'))}</div>`;const retry=document.createElement('button');retry.className='cx-button';retry.textContent=tr('Retry','重试');retry.onclick=()=>location.reload();node.append(retry);}}
+
+async function renderHome(){
+ const node=$('[data-cx-knowledge-featured]');if(!node)return;loading(node);
+ try{const list=[...(await articlesForLocale())].sort((a,b)=>clean(b.publishedAt).localeCompare(clean(a.publishedAt))||Number(a.publicationOrder)-Number(b.publicationOrder)).slice(0,3);node.innerHTML=list.length?list.map(articleCard).join(''):`<div class="cx-knowledge-state">${esc(tr('No published articles are available in this language yet.','这个语言目前还没有可显示的已发布文章。'))}</div>`}catch{unavailable(node)}
+}
+
+function bookCard(book,catalogRecord,commerceProduct){
+ const code=book.bookCode;const title=label(book.title);const subtitle=label(book.subtitle);const role=BOOK_ROLE[code]?.[locale()==='zh-Hans'?'zh':'en']||subtitle;const href=BOOK_ROUTE[code]||BOOK_ROUTE_BY_ID[book.book_id]||'/books/';
+ const published=book.status==='published'&&book.content_status==='completed';
+ const commerceReady=code!=='BOOK-8'&&published&&commerceProduct?.active&&Number(book.volume)<=6;
+ const price=commerceReady?new Intl.NumberFormat(locale()==='zh-Hans'?'zh-MY':'en-MY',{style:'currency',currency:commerceProduct.currency||'MYR'}).format(Number(commerceProduct.amountMinor||0)/100):'';
+ const purchase=commerceReady?`<a class="cx-button" href="/account/?product=${encodeURIComponent(commerceProduct.productId)}#commerce">${esc(tr('Buy complete volume','购买完整书籍'))} · ${esc(price)}</a>`:'';
+ return `<article class="cx-knowledge-book-card"><figure class="cx-knowledge-book-card__cover cx-visual"><img data-cx-seven-volume-asset="${esc(BOOK_ASSET[code])}" alt="${esc(title)}"><span class="cx-knowledge__asset-fallback cx-meta" data-cx-asset-fallback hidden>${esc(tr('Cover temporarily unavailable','封面暂时无法显示'))}</span></figure><div class="cx-knowledge-book-card__body"><div class="cx-knowledge-meta-row"><span>${esc(tr(`Volume ${book.volume}`,`第 ${book.volume} 册`))}</span><span>${esc(code==='BOOK-8'?tr('Operating volume · Not for public sale','运行卷 · 不对外出售'):published?tr('Published · complete','已出版 · 完整版'):clean(book.content_status).replaceAll('-',' '))}</span></div><h2 class="cx-heading-2">${esc(title)}</h2><p class="cx-knowledge-book-card__role">${esc(role)}</p>${subtitle&&subtitle!==role?`<p class="cx-meta">${esc(subtitle)}</p>`:''}${catalogRecord?.hasPublishedKnowledge?`<p class="cx-meta">${esc(tr(`${catalogRecord.publishedArticleCount} published articles`,`${catalogRecord.publishedArticleCount} 篇已发布文章`))}</p>`:''}<div class="cx-cluster">${purchase}<a class="cx-button cx-button--secondary" href="${esc(href)}">${esc(tr('Open volume','打开本册'))}</a><a class="cx-button cx-button--quiet" href="${esc(askHref('BOOK',code,title,href,code))}">${esc(tr('Ask about this','针对这册提问'))}</a></div></div></article>`;
+}
+async function renderBooks(){const node=$('[data-cx-book-grid]');if(!node)return;loading(node);try{const [registry,catalog,commerce]=await Promise.all([books(),discoveryCatalog().catch(()=>({books:[]})),fetchJson('/api/commerce-catalog').catch(()=>({products:[]}))]);const byCode=new Map((catalog.books||[]).map(record=>[record.bookCode,record]));const commerceByCode=new Map((commerce.products||[]).filter(p=>p.category==='BOOK').map(p=>[p.publicationBookCode,p]));node.innerHTML=(registry.books||[]).sort((a,b)=>Number(a.volume)-Number(b.volume)).map(book=>bookCard(book,byCode.get(book.bookCode),commerceByCode.get(book.bookCode))).join('');await hydrateSevenVolumeAssets(document)}catch{unavailable(node)}}
+
+function articleVolume(article){const context=article?.publicationContext||{};if(Number.isInteger(context.publicationVolume))return String(context.publicationVolume);const code=clean(context.publicationBookCode||context.bookCode);const match=code.match(/BOOK-(\d+)/);return match?match[1]:'unknown'}
+function articleTopics(article){const tags=article?.taxonomy?.tags||[];const theme=clean(article?.taxonomy?.themeCode);return [...new Set([theme,...tags].map(clean).filter(Boolean))]}
+async function renderArticles(){
+ const grid=$('[data-cx-article-grid]'),filters=$('[data-cx-article-filters]'),summary=$('[data-cx-article-summary]');if(!grid||!filters)return;loading(grid);
+ try{const [list,taxonomy]=await Promise.all([articlesForLocale(),fetchJson('/content/knowledge/registry/themes.json').catch(()=>({themes:[]}))]);state.themes=taxonomy.themes||[];const volumeSelect=$('select[name="volume"]',filters),topicSelect=$('select[name="topic"]',filters);const volumes=[...new Set(list.map(articleVolume).filter(v=>/^\d+$/.test(v)))].sort((a,b)=>Number(a)-Number(b));const topics=[...new Set(list.flatMap(articleTopics))].sort((a,b)=>a.localeCompare(b));
+  volumeSelect.innerHTML=`<option value="all">${esc(tr('All volumes','全部册别'))}</option>`+volumes.map(v=>`<option value="${esc(v)}">${esc(tr(`Volume ${v}`,`第 ${v} 册`))}</option>`).join('');topicSelect.innerHTML=`<option value="all">${esc(tr('All topics','全部主题'))}</option>`+topics.map(t=>`<option value="${esc(t)}">${esc(knowledgeTopicLabel(t,state.themes,locale()))}</option>`).join('');
+  const draw=()=>{const order=filters.elements?.order?.value||$('select[name="order"]',filters)?.value||'latest',volume=volumeSelect.value,topic=topicSelect.value;let visible=list.filter(a=>(volume==='all'||articleVolume(a)===volume)&&(topic==='all'||articleTopics(a).includes(topic)));visible=[...visible].sort(order==='latest'?((a,b)=>clean(b.publishedAt).localeCompare(clean(a.publishedAt))||Number(a.publicationOrder)-Number(b.publicationOrder)):((a,b)=>Number(a.publicationOrder)-Number(b.publicationOrder)));grid.innerHTML=visible.length?visible.map(articleCard).join(''):`<div class="cx-knowledge-state">${esc(tr('No published articles match these filters.','没有已发布文章符合这些筛选条件。'))}</div>`;if(summary)summary.textContent=tr(`${visible.length} published articles`,`${visible.length} 篇已发布文章`)};
+  filters.addEventListener('change',draw,{once:false});draw();
+ }catch{unavailable(grid)}
+}
+
+function figureCard(figure){const title=label(figure.title)||`Figure ${figure.figure_number}`;const route=`/figure?id=${encodeURIComponent(figure.figure_id)}`;return `<article class="cx-knowledge-figure-card" id="${esc(figure.figure_id)}"><div class="cx-knowledge-figure-card__mark"><strong>FIG ${esc(figure.figure_number)}</strong><span>${esc(tr(`Part ${figure.part}`,`第 ${figure.part} 部分`))}</span></div><div class="cx-stack"><div class="cx-knowledge-meta-row"><span>${esc(tr(`Book ${figure.book}`,`第 ${figure.book} 册`))}</span><span>${esc(clean(figure.status).replaceAll('-',' '))}</span></div><h3 class="cx-heading-3">${esc(title)}</h3><p>${esc(figure.purpose)}</p></div><div class="cx-cluster"><a class="cx-button cx-button--text" href="${esc(route)}">${esc(tr('Open figure →','打开图示 →'))}</a><a class="cx-button cx-button--quiet" href="${esc(askHref('FIGURE',figure.figure_id,title,route,`BOOK-${Number(figure.book)}`))}">${esc(tr('Ask about this','针对这张图提问'))}</a></div></article>`}
+async function renderFigures(){const grid=$('[data-cx-figure-grid]'),select=$('[data-cx-figure-part]'),summary=$('[data-cx-figure-summary]');if(!grid||!select)return;loading(grid);try{const [registry,partsRegistry]=await Promise.all([figures(),parts()]);const list=(registry.figures||[]).filter(f=>figureHasCanonicalBookOwnership(f,partsRegistry));const partValues=[...new Set(list.map(f=>String(f.part)))].sort((a,b)=>Number(a)-Number(b));select.innerHTML=`<option value="all">${esc(tr('All parts','全部部分'))}</option>`+partValues.map(v=>`<option value="${esc(v)}">${esc(tr(`Part ${v}`,`第 ${v} 部分`))}</option>`).join('');const draw=()=>{const selected=select.value;const visible=list.filter(f=>selected==='all'||String(f.part)===selected);grid.innerHTML=visible.map(figureCard).join('');if(summary)summary.textContent=tr(`${visible.length} canonical figures`,`${visible.length} 张规范图示`)};select.addEventListener('change',draw);draw()}catch{unavailable(grid)}}
+
+function conceptDefinition(concept,enMap){if(locale()==='zh-Hans')return clean(concept.definition);return clean(enMap.get(concept.id)||concept.definition)}
+async function loadEnglishConceptDefinitions(){try{const data=await fetchJson('/content/knowledge/glossary-en.json');if(data?.definitions&&typeof data.definitions==='object'&&!Array.isArray(data.definitions))return new Map(Object.entries(data.definitions).map(([key,value])=>[clean(key),clean(value)]).filter(([k,v])=>k&&v));const rows=Array.isArray(data)?data:(data.terms||data.concepts||data.entries||[]);return new Map(rows.map(row=>[clean(row.id||row.key||row.termId||row.slug),clean(row.definition||row.en||row.meaning)]).filter(([k,v])=>k&&v))}catch{return new Map()}}
+function conceptCard(concept,enMap){const title=locale()==='zh-Hans'?clean(concept['zh-Hans']):clean(concept.en);return `<article class="cx-knowledge-concept-card" id="term-${esc(concept.id)}"><div class="cx-knowledge-meta-row"><span>${esc(tr(`Part ${concept.part}`,`第 ${concept.part} 部分`))}</span><span>${esc(clean(concept.status))}</span></div><h3 class="cx-heading-3">${esc(title)}</h3><p>${esc(conceptDefinition(concept,enMap))}</p>${locale()==='zh-Hans'&&concept.en?`<div class="cx-meta">${esc(concept.en)}</div>`:''}</article>`}
+async function renderConcepts(){const grid=$('[data-cx-concept-grid]'),form=$('[data-cx-concept-search-form]'),summary=$('[data-cx-concept-summary]');if(!grid||!form)return;loading(grid);try{const [registry,enMap]=await Promise.all([concepts(),loadEnglishConceptDefinitions()]);const list=registry.concepts||[];const draw=()=>{const q=clean(form.elements.q?.value).toLowerCase();const visible=list.filter(c=>!q||[c.id,c.en,c['zh-Hans'],c.definition,enMap.get(c.id)].map(clean).join(' ').toLowerCase().includes(q));grid.innerHTML=visible.map(c=>conceptCard(c,enMap)).join('');if(summary)summary.textContent=tr(`${visible.length} concepts`,`${visible.length} 个概念`)};form.addEventListener('submit',event=>{event.preventDefault();draw()});form.elements.q?.addEventListener('input',draw);draw()}catch{unavailable(grid)}}
+
+async function searchCorpus(){
+ const summary=$('[data-cx-knowledge-search-summary]');if(summary)delete summary.dataset.partial;
+ let failures=0;
+ const recover=fallback=>()=>{failures++;if(summary)summary.dataset.partial='true';return fallback;};
+ const [discoveryRows,bookRegistry,conceptRegistry,figureRegistry,partsRegistry]=await Promise.all([discoveryIndex().catch(recover([])),books().catch(recover({books:[]})),concepts().catch(recover({concepts:[]})),figures().catch(recover({figures:[]})),parts().catch(recover({parts:[]}))]);
+ if(failures===5)throw new Error('SEARCH_SOURCES_UNAVAILABLE');
+ const articleRows=discoveryRows.map(record=>({type:record.type||'ARTICLE',ids:[record.slug,record.nodeCode,record.articleCode],title:record.title,summary:record.summary,source:[label(record.bookTitle),label(record.partTitle)].filter(Boolean).join(' · '),related:[record.themeCode,...(record.tags||[])].filter(Boolean).slice(0,3).join(' · '),href:record.href,ask:BOOK6_ATLAS_RESULT_TYPES.has(record.type)?atlasAskHref(record):record.type==='ATLAS'?null:askHref('ARTICLE',record.slug,record.title,record.href),terms:record.searchText||[record.title,record.summary,record.displayQuestion,...(record.keyConcepts||[]),...(record.tags||[])].join(' '),crossBook:record.crossBookNeighbors||[]}));
+ const bookRows=(bookRegistry.books||[]).map(b=>{const title=label(b.title),href=BOOK_ROUTE[b.bookCode]||'/books/';return {type:'BOOK',ids:[b.bookCode],aliases:[b.title?.en,b.title?.['zh-Hans']],title,summary:label(b.subtitle),source:tr(`PHI OS Volume ${b.volume}`,`PHI OS 第 ${b.volume} 册`),related:BOOK_ROLE[b.bookCode]?.[locale()==='zh-Hans'?'zh':'en']||'',href,ask:askHref('BOOK',b.bookCode,title,href,b.bookCode),terms:[title,label(b.subtitle),BOOK_ROLE[b.bookCode]?.en,BOOK_ROLE[b.bookCode]?.zh].join(' ')}});
+ const conceptRows=(conceptRegistry.concepts||[]).map(c=>({type:'CONCEPT',ids:[c.id],aliases:[c.en,c['zh-Hans']],title:locale()==='zh-Hans'?c['zh-Hans']:c.en,summary:c.definition,source:tr('PHI OS concept registry','PHI OS 概念表'),related:tr(`Part ${c.part}`,`第 ${c.part} 部分`),href:`/knowledge/concepts/#term-${encodeURIComponent(c.id)}`,ask:null,terms:[c.id,c.en,c['zh-Hans'],c.definition].join(' ')}));
+ const figureRows=(figureRegistry.figures||[]).filter(f=>figureHasCanonicalBookOwnership(f,partsRegistry)).map(f=>{const title=label(f.title),href=`/figure?id=${encodeURIComponent(f.figure_id)}`;return {type:'FIGURE',ids:[f.figure_id,'FIG '+f.figure_number],title,summary:f.purpose,source:tr(`Book ${f.book} · Figure ${f.figure_number}`,`第 ${f.book} 册 · 图 ${f.figure_number}`),related:tr(`Part ${f.part}`,`第 ${f.part} 部分`),href,ask:askHref('FIGURE',f.figure_id,title,href,`BOOK-${Number(f.book)}`),terms:[title,f.purpose,f.figure_number,f.figure_id].join(' ')}});
+ const [structured,index]=await Promise.all([fetchJson('/content/knowledge/structured/structured-knowledge-registry-v1.json'),fetchJson('/content/knowledge/structured/structured-knowledge-search-index-v1.json')]).catch(()=>{const summary=$('[data-cx-knowledge-search-summary]');if(summary)summary.dataset.partial='true';return [{objects:[]},[]];});
+ return [...articleRows,...bookRows,...figureRows,...conceptRows,...structuredDiscoveryRows(structured,index.objects||index,bookRegistry,locale())];
+}
+function resultType(type){return ({ARTICLE:tr('Article','文章'),BOOK:tr('Book','书籍'),FIGURE:tr('Figure','图示'),CONCEPT:tr('Concept','概念'),STRUCTURED_OBJECT:tr('Structured object','结构化对象'),ATLAS:tr('Atlas','图谱'),CASE:tr('Case','案例'),WINDOW:tr('Window','重组窗口'),SNAPSHOT:tr('Snapshot','世界横切面'),DOSSIER:tr('Dossier','运行档案'),BOOK_SECTION:tr('Book section','正文节点'),LIVED_REALITY:tr('Lived Reality','日常现实')})[type]||type}
+function resultCard(item){const cross=(item.crossBook||[]).slice(0,3);return `<article class="cx-knowledge-result"><div class="cx-knowledge-result__type">${esc(resultType(item.type))}</div><div class="cx-stack"><h2 class="cx-heading-3"><a href="${esc(item.href)}">${esc(item.title)}</a></h2><p>${esc(item.summary)}</p><dl class="cx-knowledge-result__facts"><div><dt>${esc(tr('Source','来源'))}</dt><dd>${esc(item.source)}</dd></div><div><dt>${esc(tr('Related','相关'))}</dt><dd>${esc(item.related||tr('PHI OS knowledge','PHI OS 知识'))}</dd></div></dl>${cross.length?`<div class="cx-meta"><strong>${esc(tr('Across other volumes','跨册发现'))}</strong> · ${cross.map(link=>`<a href="${esc(link.href)}">${esc(link.title)}</a>`).join(' · ')}</div>`:''}<div class="cx-cluster"><a class="cx-button cx-button--text" href="${esc(item.href)}">${esc(tr('Open →','打开 →'))}</a>${item.ask?`<a class="cx-button cx-button--quiet" href="${esc(item.ask)}">${esc(tr('Ask about this','针对这个提问'))}</a>`:''}</div></div></article>`}
+async function renderSearch(){
+ const form=$('[data-cx-knowledge-search-form]'),node=$('[data-cx-knowledge-search-results]'),summary=$('[data-cx-knowledge-search-summary]');if(!form||!node)return;delete node.dataset.r6NoMatchingResults;loading(node);
+ try{
+  const corpus=await searchCorpus(),params=new URLSearchParams(location.search);form.elements.q.value=clean(params.get('q'));
+  let limit=24;
+  let type=form.querySelector('[data-search-type]');
+  if(!type){const label=document.createElement('label');label.textContent=tr('Result type ','结果类型 ');type=document.createElement('select');type.dataset.searchType='';type.name='type';for(const value of ['ALL','ARTICLE','BOOK','FIGURE','CONCEPT','STRUCTURED_OBJECT','ATLAS','CASE','WINDOW','SNAPSHOT','DOSSIER','BOOK_SECTION','LIVED_REALITY']){const option=document.createElement('option');option.value=value;option.textContent=value==='ALL'?tr('All types','全部类型'):resultType(value);type.append(option);}label.append(type);form.append(label);}
+  type.value=['ARTICLE','BOOK','FIGURE','CONCEPT','STRUCTURED_OBJECT','ATLAS','CASE','WINDOW','SNAPSHOT','DOSSIER','BOOK_SECTION','LIVED_REALITY'].includes((params.get('type')||'').toUpperCase())?params.get('type').toUpperCase():'ALL';
+  const draw=()=>{
+   const q=clean(form.elements.q.value),navigation=knowledgeNavigationIntent(q,locale());
+   const rows=navigation?[{type:'NAVIGATION',title:navigation.title,href:navigation.href,summary:navigation.text,source:'',related:''}]:rankPublicSearch(corpus,q).filter(item=>type.value==='ALL'||item.type===type.value);
+   const visible=rows.slice(0,limit);
+   node.innerHTML=visible.length?visible.map((item,i)=>(q&&i===0&&item.exactMatch?'<h2>'+esc(tr('Exact match','精确匹配'))+'</h2>':q&&!item.exactMatch&&visible[i-1]?.exactMatch?'<h2>'+esc(tr('Related results','相关结果'))+'</h2>':'')+resultCard(item)).join(''):'<p>'+esc(tr('No published knowledge matched this search.','没有已发布知识符合这次搜索。'))+'</p>';
+   if(q&&rows.length===0&&!summary.dataset.partial)node.dataset.r6NoMatchingResults='true';else delete node.dataset.r6NoMatchingResults;
+   queueMicrotask(()=>document.dispatchEvent(new Event('phios:search-rendered')));
+   if(rows.length>limit){const more=document.createElement('button');more.type='button';more.className='cx-button';more.textContent=tr('Show more results','显示更多结果');more.onclick=()=>{limit+=24;draw();};node.append(more);}
+   summary.textContent=q?tr(rows.length+' matches; showing '+visible.length,rows.length+' 项匹配，显示 '+visible.length+' 项'):tr('Browse articles, books, figures and concepts.','浏览文章、书籍、图示与概念。');
+   if(summary.dataset.partial){summary.textContent+=tr(' Some sources are unavailable.',' 部分来源暂不可用。');const retry=document.createElement('button');retry.type='button';retry.textContent=tr('Retry unavailable sources','重试未加载的来源');retry.onclick=()=>location.reload();summary.append(retry);}
+  };
+  const submit=event=>{event?.preventDefault();limit=24;draw();const url=new URL(location.href),q=clean(form.elements.q.value);q?url.searchParams.set('q',q):url.searchParams.delete('q');type.value==='ALL'?url.searchParams.delete('type'):url.searchParams.set('type',type.value.toLowerCase());history.replaceState({},'',url);};form.onsubmit=submit;type.onchange=submit;draw();
+ }catch{unavailable(node);}
+}
+
+async function render(){
+ const view=document.body.dataset.cxKnowledgeView;
+ if(view==='home')await renderHome();
+ if(view==='search')await renderSearch();
+ if(view==='articles')await renderArticles();
+ if(view==='books')await renderBooks();
+ if(view==='figures')await renderFigures();
+ if(view==='concepts')await renderConcepts();
+}
+
+let rendering=false;
+async function boot(){if(rendering)return;rendering=true;try{await render()}finally{rendering=false}}
+window.addEventListener('phios:localechange',()=>boot());
+boot();

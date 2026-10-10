@@ -1,0 +1,25 @@
+{
+  "schemaVersion":"PHI-OS-ASTA-STRUCTURAL-SCOPE-FIXTURE-v1.0.0",
+  "purpose":"Deterministic ASTA-W0-W10 successor validation without requiring a mounted node_modules tree.",
+  "input":{
+    "birthDate":"1989-11-15",
+    "birthTime":"22:50:00",
+    "birthPlace":{"displayName":"Taiping","countryCode":"MY","latitude":4.85,"longitude":100.7333},
+    "timezone":{"iana":"Asia/Kuala_Lumpur","utcOffsetAtBirth":"+08:00","source":"HUMAN_DECLARATION","confidence":"HIGH"},
+    "timeAccuracy":"EXACT",
+    "locale":"en",
+    "consent":{"recordId":"ASTA-FIXTURE-CONSENT","granted":true},
+    "inputVersion":"MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0"
+  },
+  "expected":{
+    "corePlanetCount":10,
+    "projectedPositionCount":12,
+    "nodeCodes":["NORTH_NODE","SOUTH_NODE"],
+    "angleCodes":["ASC","MC","DSC","IC"],
+    "houseCuspCount":12,
+    "housePlacementCount":12,
+    "houseSystemCode":"WHOLE_SIGN_V1",
+    "aspectSetCode":"MAJOR_ASPECTS_V1",
+    "projectionSchemaVersion":"PHI-OS-CANONICAL-METHOD-PROJECTION-v2.0.0"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "boundaries": [],
+  "canonicalFilename": "PHIOS-FIGURE-REALITY-REVIEW-v1.svg",
+  "diagramRole": "LOOP",
+  "domain": "JOURNEY",
+  "edges": [
+    {
+      "edgeId": "FIG-019-E01",
+      "from": "FIG-019-N01",
+      "relation": "REVIEWED_BY",
+      "required": true,
+      "sourceBindingId": "FIG-019-SRC-01",
+      "to": "FIG-019-N02"
+    },
+    {
+      "edgeId": "FIG-019-E02",
+      "from": "FIG-019-N02",
+      "relation": "INFORMS",
+      "required": true,
+      "sourceBindingId": "FIG-019-SRC-02",
+      "to": "FIG-019-N03"
+    },
+    {
+      "edgeId": "FIG-019-E03",
+      "from": "FIG-019-N03",
+      "relation": "CONTINUES",
+      "required": true,
+      "sourceBindingId": "FIG-019-SRC-02",
+      "to": "FIG-019-N04"
+    },
+    {
+      "edgeId": "FIG-019-E04",
+      "from": "FIG-019-N04",
+      "relation": "FEEDBACK",
+      "required": true,
+      "sourceBindingId": "FIG-019-SRC-02",
+      "to": "FIG-019-N01"
+    }
+  ],
+  "figureId": "FIG-019",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-019-N01",
+    "FIG-019-N02",
+    "FIG-019-N03",
+    "FIG-019-N04"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Outcome",
+      "nodeId": "FIG-019-N01",
+      "required": true,
+      "semanticKey": "OUTCOME",
+      "sourceBindingId": "FIG-019-SRC-01"
+    },
+    {
+      "displayLabel": "Review",
+      "nodeId": "FIG-019-N02",
+      "required": true,
+      "semanticKey": "REVIEW",
+      "sourceBindingId": "FIG-019-SRC-01"
+    },
+    {
+      "displayLabel": "Next Decision",
+      "nodeId": "FIG-019-N03",
+      "required": true,
+      "semanticKey": "NEXT_DECISION",
+      "sourceBindingId": "FIG-019-SRC-01"
+    },
+    {
+      "displayLabel": "Continuity",
+      "nodeId": "FIG-019-N04",
+      "required": true,
+      "semanticKey": "CONTINUITY",
+      "sourceBindingId": "FIG-019-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "REALITY-REVIEW",
+  "title": "Reality Review"
+}

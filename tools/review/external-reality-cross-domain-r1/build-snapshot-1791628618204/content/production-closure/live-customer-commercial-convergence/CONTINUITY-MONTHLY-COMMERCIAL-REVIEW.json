@@ -1,0 +1,79 @@
+{
+  "candidateId": "PHI-OS-CONTINUITY-QUOTA-0018-CANDIDATE-v1",
+  "state": "PENDING_HUMAN_GOVERNANCE_REVIEW",
+  "changeClass": "ADDITIVE_ENTITLEMENT_STORAGE_AND_VERSIONED_COMMERCIAL_SUCCESSOR",
+  "sql": "db/migration-candidates/0018_continuity_quota_units.sql",
+  "sha256": "0963a4c4d471a6dcf3b3d0386a32795aa4188c6aca40a9214262d8f356e63b67",
+  "owner": "Existing Commerce subscription owner; existing unified provider-cost ledger",
+  "addedTable": "continuity_quota_units (allocation only; no second monetary ledger)",
+  "consumers": [
+    "verified invoice/refill webhook",
+    "existing delivered-report membership question adapter",
+    "existing account/refill Checkout"
+  ],
+  "publicRoutes": "Existing account/commerce/report-questions routes; no new subscription runtime",
+  "authority": "Owner current RM19/USD3/Luna commercial instruction; no production migration authorization",
+  "compatibility": "Additive table. Existing paid report four-question ledger and 17 active migrations untouched; quota activation requires explicit server flag and installed candidate.",
+  "productionActivation": false,
+  "rollback": "Disable PHIOS_CONTINUITY_PROVIDER_ENABLED and PHIOS_CONTINUITY_QUOTA_ENABLED; preserve all quota/cost/question records. No destructive rollback.",
+  "SOURCE": "PASS_BOUNDED_COMMERCIAL_AUTHORITY",
+  "DEPLOYED": "NOT_RUN",
+  "LIVE_CUSTOMER": "NOT_RUN",
+  "firstStops": [
+    "Candidate admission and server verified pricing/configuration",
+    "Remaining eligible-source customer adapters",
+    "Authorized staging/deployment and real customer validation"
+  ],
+  "reviewInstruction": "Human ACCEPT — PHI-OS-CONTINUITY-QUOTA-0018-CANDIDATE-v1, SHA256 0963a4c4d471a6dcf3b3d0386a32795aa4188c6aca40a9214262d8f356e63b67; approve source migration registration only; no production execution.",
+  "zeroRealProviderCalls": true,
+  "zeroRealCharges": true,
+  "checksExecuted": [
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:continuity:monthly-commercial",
+      "result": "PASS",
+      "evidence": "CONTINUITY-MONTHLY-COMMERCIAL-QA.json"
+    },
+    {
+      "command": "node scripts/verify-continuity-monthly-browser.mjs",
+      "result": "PASS_BOUNDED_REFILL_UI",
+      "evidence": "CONTINUITY-MONTHLY-BROWSER-QA.json"
+    },
+    {
+      "command": "check:continuity:w79-w85 / check:continuity:d1-persistence",
+      "result": "PASS"
+    },
+    {
+      "command": "check:commerce-stripe",
+      "result": "PASS_17_LOCAL_FIXTURE_GROUPS"
+    },
+    {
+      "command": "check:paid-report-durable-integration",
+      "result": "PASS_6_SYNTHETIC_TRANSPORTS_REAL_SQL"
+    },
+    {
+      "command": "node scripts/check-product-cost-envelope.mjs",
+      "result": "PASS_REAL_IN_MEMORY_SQL"
+    },
+    {
+      "command": "node scripts/check-runtime-migrations.mjs",
+      "result": "PASS_17_ACTIVE_UNCHANGED"
+    },
+    {
+      "command": "check:i18n",
+      "result": "PASS_4610_KEYS"
+    },
+    {
+      "command": "node scripts/run-master-pages-current-build.mjs",
+      "result": "PASS",
+      "evidence": "MASTER-PAGES-CURRENT-RECEIPT.json"
+    }
+  ],
+  "currentHead": "3024c004cb8fbec22e0673bf642e602d5f225937",
+  "browserScreenshots": [
+    "tools/review/continuity-monthly-commercial/refill-1440-en.png",
+    "tools/review/continuity-monthly-commercial/refill-1440-zh-Hans.png",
+    "tools/review/continuity-monthly-commercial/refill-390-en.png",
+    "tools/review/continuity-monthly-commercial/refill-390-zh-Hans.png"
+  ],
+  "buildNote": "Worker compilation/publication boundary PASS; sandbox denied optional Wrangler user-profile log write, preserved in build log. Exit 0; no fake generated files."
+}

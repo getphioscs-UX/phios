@@ -1,0 +1,102 @@
+{
+  "contract": "PHI-OS-HDR-PRODUCTION-FREEZE-v1",
+  "freezeVersion": "1.0.0",
+  "stageCode": "HDR-W7",
+  "status": "HDR Frozen v1",
+  "productionStatus": "blocked",
+  "executionMode": "validation_only",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "b622eb53ec29367e81365bd49ba2d64f0e567002"
+  },
+  "frozenScope": {
+    "foundation": [
+      "content/professional/core-method-runtime/hdr-foundation-audit-v1.json",
+      "content/professional/core-method-runtime/hdr-foundation-audit-v1.schema.json",
+      "content/professional/core-method-runtime/hdr-runtime-boundary-v1.json",
+      "content/professional/core-method-runtime/hdr-runtime-manifest-v1.json"
+    ],
+    "astronomy": [
+      "functions/core-method-runtime/hdr-astronomy-runtime.js",
+      "content/professional/core-method-runtime/hdr-astronomy-runtime-v1.json",
+      "content/professional/core-method-runtime/hdr-astronomy-result-v1.schema.json"
+    ],
+    "designMoment": [
+      "functions/core-method-runtime/hdr-design-moment-runtime.js",
+      "content/professional/core-method-runtime/hdr-design-moment-runtime-v1.json",
+      "content/professional/core-method-runtime/hdr-design-moment-result-v1.schema.json"
+    ],
+    "gate": [
+      "functions/core-method-runtime/hdr-gate-runtime.js",
+      "content/professional/core-method-runtime/hdr-gate-runtime-v1.json",
+      "content/professional/core-method-runtime/hdr-gate-result-v1.schema.json"
+    ],
+    "bodyGraph": [
+      "functions/core-method-runtime/hdr-bodygraph-runtime.js",
+      "content/professional/core-method-runtime/hdr-bodygraph-runtime-v1.json",
+      "content/professional/core-method-runtime/hdr-bodygraph-result-v1.schema.json"
+    ],
+    "projection": [
+      "functions/core-method-runtime/hdr-projection-runtime.js",
+      "content/professional/core-method-runtime/hdr-projection-runtime-v1.json",
+      "content/professional/core-method-runtime/hdr-projection-bundle-v1.schema.json"
+    ],
+    "professionalIntegration": [
+      "functions/core-method-runtime/hdr-professional-integration-runtime.js",
+      "content/professional/core-method-runtime/hdr-professional-integration-v1.json",
+      "content/professional/core-method-runtime/hdr-professional-integration-result-v1.schema.json"
+    ],
+    "sharedAuthorities": [
+      "content/professional/method-runtime/method-runtime-freeze-v1.json",
+      "content/professional/method-runtime/canonical-projection-v1.schema.json",
+      "content/professional/method-runtime/shared-calculation-runtime-v1.json",
+      "content/professional/method-runtime/shared-projection-runtime-v1.json",
+      "content/professional/method-runtime/shared-interpretation-runtime-v1.json",
+      "content/professional/method-runtime/shared-professional-runtime-v1.json"
+    ],
+    "governance": [
+      "content/professional/method-governance/imr-method-governance-freeze-v1.json",
+      "content/professional/method-governance/imr-commercial-license-registry-v1.json",
+      "content/professional/method-governance/imr-algorithm-governance-registry-v1.json",
+      "content/professional/method-governance/imr-production-eligibility-registry-v1.json",
+      "content/professional/method-governance/imr-version-management-registry-v1.json"
+    ]
+  },
+  "pipeline": [
+    "HDR-W0 Foundation Audit",
+    "HDR-W1 Astronomy Runtime",
+    "HDR-W2 Design Moment Solver",
+    "HDR-W3 Gate Runtime",
+    "HDR-W4 BodyGraph Runtime",
+    "HDR-W5 Projection Runtime",
+    "HDR-W6 Professional Integration"
+  ],
+  "productionGates": {
+    "commercialLicensePassed": false,
+    "validationPassed": false,
+    "regressionPassed": false,
+    "productionReady": false,
+    "professionalReady": false,
+    "productionExecutionAllowed": false,
+    "professionalReleaseAllowed": false
+  },
+  "freezeRules": {
+    "checkerReadOnly": true,
+    "baselineContentImmutable": true,
+    "lineEndingNormalizationAllowed": true,
+    "hashOnlyRepairForbidden": true,
+    "semanticValidationRequired": true,
+    "sharedRuntimeBypassForbidden": true,
+    "embeddedRestrictedMappingForbidden": true,
+    "productionEligibilityPromotionForbidden": true,
+    "professionalReleaseBypassForbidden": true,
+    "futureChangeRequiresVersionedSuccessor": true
+  },
+  "successorPolicy": {
+    "inPlaceMutationAllowed": false,
+    "requiredAction": "Create a versioned HDR successor, explicit migration, renewed IMR eligibility and a new Production Freeze.",
+    "currentFrozenVersion": "HDR-FROZEN-v1.0.0"
+  },
+  "nextStage": null
+}

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-ICHI-INTERPRETATION-PERSPECTIVE-REGISTRY-v2.0.0",
+  "phase": "ICHI",
+  "work": "ICHI-W17",
+  "baselineCommit": "90f87b962cc0f9a77996d2bb6deca5bfa38a1634",
+  "status": "ACTIVE_CURRENT_SOURCE_PERSPECTIVES",
+  "registryVersion": "2.0.0",
+  "successorOf": "content/interpretation/iching/registries/iching-interpretation-perspective-registry-v1.json",
+  "historicalPredecessorMutated": false,
+  "perspectives": [
+    {
+      "perspectiveId": "ICH-PERSPECTIVE-LEGGE-TEXTUAL",
+      "label": "Legge translated core text",
+      "sourceIds": ["ICH-SRC-LEGGE-1882-TEXT"],
+      "scope": ["HEXAGRAM", "LINE"],
+      "sourceBound": true,
+      "mayOverrideCanonicalStructure": false,
+      "mayClaimRealityTruth": false
+    },
+    {
+      "perspectiveId": "ICH-PERSPECTIVE-LEGGE-THWAN",
+      "label": "Legge translated traditional Thwan commentary",
+      "sourceIds": ["ICH-SRC-LEGGE-1882-THWAN"],
+      "scope": ["HEXAGRAM_COMMENTARY"],
+      "sourceBound": true,
+      "mayOverrideCanonicalStructure": false,
+      "mayClaimRealityTruth": false
+    },
+    {
+      "perspectiveId": "ICH-PERSPECTIVE-ZHOUYI-ANCIENT-CANONICAL-TEXT",
+      "label": "周易古文原文见证",
+      "perspectiveClass": "ANCIENT_CANONICAL_TEXT_WITNESS",
+      "sourceIds": ["ICH-SRC-ZHOUYI-ANCIENT-CN-WITNESS-25501"],
+      "scope": ["HEXAGRAM", "LINE"],
+      "sourceBound": true,
+      "isTranslation": false,
+      "isEditorialInterpretation": false,
+      "mayOverrideCanonicalStructure": false,
+      "mayClaimRealityTruth": false,
+      "mayCreateProfessionalJudgment": false,
+      "mayCreateDecisionDirective": false,
+      "mayBePresentedAsUniversalMeaning": false
+    }
+  ],
+  "requiredEntryShape": ["hexagramId", "sourceId", "perspectiveId", "claim", "scope", "provenance"]
+}

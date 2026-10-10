@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {BASELINE,ROOT,readJson,assertEvidence} from './lib/knowledge-answer-projection/kap-foundation-v1.mjs';
+const c=readJson(`${ROOT}/contracts/kap-w1-authority-boundary-v1.json`);
+assert.equal(c.step,'KAP-W1'); assert.equal(c.baselineCommit,BASELINE); assert.equal(c.status,'FROZEN_AUTHORITY_BOUNDARY');
+for(const e of Object.values(c.predecessorEvidence)) assertEvidence(e);
+assert.equal(c.domains.ANSWER.authority,'NON_AUTHORITATIVE_QUESTION_SCOPED_PROJECTION');
+for(const forbidden of ['CREATE_CANONICAL_KNOWLEDGE','APPROVE_PUBLICATION','PUBLISH_ARTICLE','CREATE_REALITY_STATE','CREATE_REALITY_READING_AUTHORITY']) assert.ok(c.domains.ANSWER.mayNot.includes(forbidden),`ANSWER_BOUNDARY_MISSING:${forbidden}`);
+assert.equal(c.domains.PUBLICATION.owners.article,'PJA'); assert.equal(c.domains.PUBLICATION.owners.nonArticleAsset,'CAR');
+assert.equal(c.domains.REALITY_READING.currentRreActivation,'VALIDATION_ONLY');
+for(const [k,v] of Object.entries(c.invariants)) assert.equal(v,true,`INVARIANT_FALSE:${k}`);
+console.log('✓ KAP-W1 Knowledge / Answer / Publication / Reality Reading Authority Boundary passed.');

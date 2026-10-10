@@ -1,0 +1,4 @@
+import assert from 'node:assert/strict'; import {readJson,runFarFixture} from './lib/far/far-check-lib.mjs'; import {containsBlockedFinancialActionText} from '../functions/financial/analysis-runtime/financial-analysis-runtime.js';
+const reg=readJson('content/financial/analysis-runtime/fixtures/far-fixture-registry-v1.json'); for(const f of reg.fixtures.filter(x=>x!=='anti-advice-block.json')){ const {far}=await runFarFixture(f); for(const finding of far.findings){ assert.equal(containsBlockedFinancialActionText(finding.summary),false,`${f} action text`); for(const x of finding.limitations) assert.equal(containsBlockedFinancialActionText(x),false); }}
+const block=readJson('content/financial/analysis-runtime/fixtures/anti-advice-block.json'); assert.equal(containsBlockedFinancialActionText(block.candidateNarrative),true); assert.equal(block.expected,'BLOCK');
+console.log('✓ FAR-W20 anti-advice boundary passed.');

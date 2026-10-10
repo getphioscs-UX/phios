@@ -1,0 +1,30 @@
+{
+  "contractCode": "PHI-OS-RMO-W11-ACTION-RUNTIME-v1",
+  "contractVersion": "1.0.0",
+  "work": "RMO-W11",
+  "status": "boundary_complete",
+  "productionStatus": "validation_only",
+  "runtimeCode": "RMO",
+  "componentType": "REALITY_ACTION",
+  "rdgDataType": "RUNTIME_STATE_RECORD",
+  "schemaReference": "content/runtime/reality-model-runtime/schemas/canonical-reality-action-v1.schema.json",
+  "registryReference": "content/runtime/reality-model-runtime/registries/canonical-action-class-registry-v1.json",
+  "authorityBoundary": {
+    "rmoOwns": ["Reality Action representation", "Action-to-Reality component binding"],
+    "existingNavigationOwns": ["path generation", "user selection", "Navigation Action execution"],
+    "prOwns": ["Professional Judgment", "professional recommendation authority"]
+  },
+  "rules": {
+    "observedActionRequiresAcceptedEvidenceBinding": true,
+    "reportedActionRemainsUserReported": true,
+    "declaredIntentIsNotExecution": true,
+    "unknownActionRequiresUnknownReference": true,
+    "actionMaySelectNavigationPath": false,
+    "actionMayIssueRequiredCommand": false,
+    "actionMayPerformExecution": false,
+    "actionMayCreateProfessionalRecommendation": false,
+    "actionMayPredictOutcome": false,
+    "providerOrAiMayGrantActionAuthority": false,
+    "persistentStoreActivated": false
+  }
+}

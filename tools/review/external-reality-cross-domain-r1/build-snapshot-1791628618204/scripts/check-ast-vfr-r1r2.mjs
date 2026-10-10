@@ -1,0 +1,21 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import crypto from 'node:crypto';import {parseHTML} from 'linkedom';
+import {buildAstR1R2PagePlan} from '../functions/ast-full-production/ast-vfr-r1r2-page-plan.js';
+import {layoutAstPlanetLabels,renderAstR1R2Diagram} from '../functions/ast-full-production/ast-vfr-r1r2-diagram-system.js';
+const root='content/professional/ast-full-production/',out=root+'publication/r1r2/',read=f=>JSON.parse(fs.readFileSync(f,'utf8')),hash=x=>crypto.createHash('sha256').update(x).digest('hex');
+const audit=read(out+'source-preservation-audit.json');for(const [f,digest] of Object.entries(audit.frozenFiles))assert.equal(hash(fs.readFileSync(f)),digest,'FROZEN_SOURCE_CHANGED:'+f);
+const ir=read(root+'publication/ast-vfr-r1-publication-ir.json'),plan=read(out+'page-plan.json'),data=read(out+'diagram-data.json'),snapshot=read(out+'publication-snapshot.json');assert.deepEqual(buildAstR1R2PagePlan(ir),plan);assert.equal(plan.globalPageCount,null);
+const used=new Set(plan.pages.map(p=>p.composition).filter(Boolean));assert(used.size>=5);assert.equal(plan.pages.filter(p=>p.pageType==='SECTION_OPENER').length,10);assert.equal(plan.pages.filter(p=>p.pageType==='EDITORIAL_FULL_PAGE').length,5);
+for(const block of ir.contentBlocks){const expected=block.text.split(/\r?\n\r?\n/);expected.forEach((text,index)=>{const parts=plan.pages.flatMap(p=>p.parts).filter(p=>p.blockId===block.blockId&&p.paragraphIndex===index);assert.equal(parts.map(p=>p.text).join(''),text,'PROSE_DRIFT:'+block.blockId);let offset=0;for(const p of parts){assert.equal(p.offset,offset);offset+=p.text.length;}});}
+const ids=plan.pages.flatMap(p=>p.diagramIds);assert.equal(ids.length,new Set(ids).size);assert.deepEqual([...ids].sort(),ir.diagramBlocks.map(d=>d.diagramId).sort());assert(!ids.includes('AST-D13'));
+const html=fs.readFileSync('tools/review/AST-VFR-R1R2-TL-PUBLICATION-REVIEW.html','utf8'),doc=parseHTML(html).document;assert.equal(doc.querySelectorAll('article.page').length,plan.pages.length);for(const br of doc.querySelectorAll('[data-part] br'))br.replaceWith('\n');assert.equal([...doc.querySelectorAll('[data-part]')].map(p=>p.textContent).join(''),plan.pages.flatMap(p=>p.parts).map(p=>p.text).join(''));
+assert(!/overflow\s*:\s*hidden|background:\s*#0b263bdd/.test(html));assert.equal(snapshot.providerCalls,0);assert.equal(snapshot.manuscriptDigest,'ce713a64c4a5203c1ad05270b732e63bbb3253df28a064332425297ce214c9ef');
+const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+for(const bodies of [data.bodies,Object.fromEntries(Object.entries(data.bodies).map(([k,b],i)=>[k,{...b,longitude:100+i*.01}])),Object.fromEntries(Object.entries(data.bodies).map(([k,b],i)=>[k,{...b,longitude:359.7+i*.04}]))]){
+ const labels=layoutAstPlanetLabels(bodies,108);for(let i=0;i<labels.length;i++)for(let j=i+1;j<labels.length;j++)assert(distance(labels[i].labelPosition,labels[j].labelPosition)>37.7,'NATAL_GLYPH_COLLISION');for(const l of labels)assert.equal(l.trueAngle,((180+bodies[l.code].longitude-108)%360+360)%360);
+}
+for(const id of ids){assert.equal(renderAstR1R2Diagram(id,data),renderAstR1R2Diagram(id,data));}
+let denseRun=0;for(const page of plan.pages){denseRun=page.density==='DENSE'?denseRun+1:0;assert(denseRun<=3);if(page.pageType==='DIAGRAM_TEXT_COMBO_PAGE')assert(page.parts.length||page.intentionalDiagramDominance,'EMPTY_COMBO_PAGE');}
+for(const asset of ir.visualBindings){assert.equal(hash(fs.readFileSync(asset.path)),asset.sourceDigest,'ARTWORK_CHANGED:'+asset.assetId);}
+for(const image of doc.querySelectorAll('[data-motif-purpose]'))assert(['section-marker','insight-divider'].includes(image.dataset.motifPurpose));
+const expanded=buildAstR1R2PagePlan({...ir,contentBlocks:ir.contentBlocks.map((b,i)=>i===0?{...b,text:b.text.repeat(10)}:b)});assert(expanded.pages.length>plan.pages.length);
+const receipt={status:'PASS',check:process.argv[2]||'all',compositions:[...used],acceptedCopyChanged:false,canonicalDigestChanged:false,r1Preserved:true,referencePageCount:plan.pages.length,fullPageDiagramCount:snapshot.fullPageDiagramCount,comboPageDiagramCount:snapshot.comboPageDiagramCount,providerCalls:0,browserReceipt:'SEPARATE',humanVisualApproval:'PENDING'};fs.writeFileSync(out+'zero-cost-check-receipt.json',JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify(receipt));

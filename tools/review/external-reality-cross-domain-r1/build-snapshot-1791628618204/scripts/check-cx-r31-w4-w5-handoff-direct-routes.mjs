@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+const json=p=>JSON.parse(read(p));
+const handoff=json('content/customer-experience-rebuild/cx-r31/contracts/cx-r31-w4-conversational-handoff-v1.json');
+const direct=json('content/customer-experience-rebuild/cx-r31/contracts/cx-r31-w5-specialist-direct-route-protection-v1.json');
+const client=read('assets/customer-ui/js/surfaces/contextual-ask.js'),html=read('knowledge/ask/index.html'),personal=read('perspectives/personal/index.html');
+assert.equal(handoff.status,'COMPLETE');
+for(const key of ['REALITY','RELATIONSHIP','PROFILE','FINANCIAL','SPECIALIST','PROFESSIONAL'])assert.ok(handoff.destinations[key],`missing handoff ${key}`);
+for(const metric of ['handoffOffered','handoffAccepted','handoffCompleted','handoffReturned'])assert.ok(handoff.telemetry.includes(metric),`missing telemetry ${metric}`);
+for(const marker of ['RELATIONSHIP','PROFILE','FINANCIAL','SPECIALIST','PROFESSIONAL','phi:cx-r31','data-cx-ask-reality'])assert.ok(client.includes(marker),`handoff client missing ${marker}`);
+assert.equal(direct.universalAskMandatoryProxy,false);
+for(const row of direct.protectedEntries)assert.equal(fs.existsSync(row.physical),true,`direct specialist physical entry missing ${row.id}`);
+for(const marker of ['data-cx-r31-direct-specialists','href="/perspectives/iching/"','href="/perspectives/tarot/"','href="/perspectives/personal/"'])assert.ok(html.includes(marker),`Ask direct-route protection missing ${marker}`);
+for(const method of ['data-method="astrology"','data-method="bazi"','data-method="ziwei"','data-method="numeric"'])assert.ok(personal.includes(method),`Personal direct method selector missing ${method}`);
+console.log('✓ CX-R31-W4/W5 Conversational Handoff + Specialist Direct Route Protection passed.');

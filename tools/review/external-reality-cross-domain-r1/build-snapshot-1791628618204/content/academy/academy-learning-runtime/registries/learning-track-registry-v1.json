@@ -1,0 +1,42 @@
+{
+  "registryCode": "PHI-OS-ALR-W4-LEARNING-TRACK-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W4",
+  "status": "canonical",
+  "productionStatus": "classification_only",
+  "identityPrefix": "ALR-TRACK-",
+  "requiredTrackFields": [
+    "trackCode",
+    "trackVersion",
+    "trackClass",
+    "title",
+    "allowedAcademyLevels",
+    "sourceScopeReferences",
+    "status",
+    "authorityReference"
+  ],
+  "trackClasses": [
+    {"trackClass": "CORE_LITERACY", "definition": "Canonical PHI OS concepts and Reality formation literacy."},
+    {"trackClass": "READING_LITERACY", "definition": "Observation, evidence, inference-boundary and Reading literacy."},
+    {"trackClass": "NAVIGATION_PRACTICE", "definition": "Constraint-aware option, action, review and continuity practice."},
+    {"trackClass": "METHOD_LEARNING", "definition": "Governed learning about a registered Method without merging Method authority into ALR."},
+    {"trackClass": "PROFESSIONAL_FORMATION", "definition": "Advanced learning formation before a separately governed Professional readiness handoff."}
+  ],
+  "trackStatusValues": ["DRAFT", "REVIEW_REQUIRED", "APPROVED", "ACTIVE", "SUSPENDED", "RETIRED"],
+  "tracks": [],
+  "populationState": "EMPTY_BY_DESIGN_UNTIL_ALR-W10-W14",
+  "legacyProjectionReference": "content/knowledge/registry/learning-paths.json",
+  "legacyProjectionMigration": "REFERENCE_ONLY_NO_AUTOMATIC_IMPORT",
+  "rules": {
+    "trackClassIsTrackInstance": false,
+    "trackIsProgram": false,
+    "trackIsLearningPath": false,
+    "legacyKnowledgePathIsAlrTrack": false,
+    "trackRegistrationCreatesCourseContent": false,
+    "trackRegistryStoresUserProgress": false,
+    "trackMayRewritePublishedKnowledge": false,
+    "methodTrackMayBecomeMethodAuthority": false,
+    "professionalTrackGrantsProfessionalAuthority": false,
+    "unknownTrackClassOrLevelFailsClosed": true
+  }
+}

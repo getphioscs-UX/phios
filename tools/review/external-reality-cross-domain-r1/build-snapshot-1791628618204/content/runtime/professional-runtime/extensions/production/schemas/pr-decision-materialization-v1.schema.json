@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schema/pr-decision-materialization-v1.schema.json",
+  "title": "PHI OS PR Decision Materialization v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "objectClass",
+    "caseVersionReference",
+    "caseVersionDigest",
+    "professionalReference",
+    "evidenceProjection",
+    "observation",
+    "judgment",
+    "recommendation",
+    "decisionPackage",
+    "authorityFlags",
+    "materializationDigest"
+  ],
+  "properties": {
+    "objectClass": {
+      "const": "PR_DECISION_MATERIALIZATION"
+    },
+    "caseVersionReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "caseVersionDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "professionalReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidenceProjection": {
+      "type": "object"
+    },
+    "observation": {
+      "type": "object"
+    },
+    "judgment": {
+      "type": "object"
+    },
+    "recommendation": {
+      "type": "object"
+    },
+    "decisionPackage": {
+      "type": "object"
+    },
+    "authorityFlags": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "humanProfessionalAttributable",
+        "aiJudgmentCreated",
+        "providerJudgmentCreated",
+        "automaticRecommendationCreated",
+        "readoutConvertedToJudgment",
+        "metricConvertedToJudgment",
+        "rawDataPromotedToEvidence"
+      ],
+      "properties": {
+        "humanProfessionalAttributable": {
+          "const": true
+        },
+        "aiJudgmentCreated": {
+          "const": false
+        },
+        "providerJudgmentCreated": {
+          "const": false
+        },
+        "automaticRecommendationCreated": {
+          "const": false
+        },
+        "readoutConvertedToJudgment": {
+          "const": false
+        },
+        "metricConvertedToJudgment": {
+          "const": false
+        },
+        "rawDataPromotedToEvidence": {
+          "const": false
+        }
+      }
+    },
+    "materializationDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-CMP-W7-W12-ACCEPTANCE-v1.0.0",
+  "work": "CMP-W7-W12",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "PRODUCTION_RUNTIME_ACCEPTED_METHOD_SCOPED_NUM_ONLY",
+  "gates": {
+    "localeProjection": true,
+    "runtimeReadingConsumer": true,
+    "safetyBoundary": true,
+    "methodScopedActivation": true,
+    "productionChecker": true,
+    "freeze": true
+  },
+  "methodActivation": {
+    "NUM": "PRODUCTION_ACTIVE",
+    "BZR": "BLOCKED_PENDING_BZRA",
+    "AST": "BLOCKED_PENDING_ASTA",
+    "HDR": "BLOCKED_BY_METHOD_AUTHORITY"
+  },
+  "rules": {
+    "blanketActivationForbidden": true,
+    "canonicalProjectionMayNotBeRecalculated": true,
+    "meaningMayNotCreateProfessionalJudgment": true,
+    "historicalCmrFreezeMutated": false
+  },
+  "checker": "npm run check:canonical-meaning-production"
+}

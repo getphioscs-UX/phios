@@ -1,0 +1,77 @@
+{
+  "registryCode": "PHI-OS-DAR-W10-WILL-CLAUSE-SELECTION-RULES-v1",
+  "registryVersion": "1.0.0",
+  "work": "DAR-W10",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "CANDIDATE_SELECTION_ONLY_NO_LEGAL_APPROPRIATENESS_AUTHORITY",
+  "rules": [
+    {
+      "ruleId": "WILL-RULE-MINOR-CHILDREN",
+      "predicate": {
+        "field": "minorChildren",
+        "equals": true
+      },
+      "candidateClauseIds": [
+        "WILL-CLAUSE-004",
+        "WILL-CLAUSE-020"
+      ],
+      "candidateDocumentTypes": [],
+      "disposition": "LEGAL_REVIEW_REQUIRED"
+    },
+    {
+      "ruleId": "WILL-RULE-DIGITAL-ASSETS",
+      "predicate": {
+        "field": "digitalAssets",
+        "nonEmpty": true
+      },
+      "candidateClauseIds": [
+        "WILL-CLAUSE-011",
+        "WILL-CLAUSE-017"
+      ],
+      "candidateDocumentTypes": [
+        "DIGITAL_ASSET_MEMORANDUM"
+      ],
+      "disposition": "LEGAL_REVIEW_REQUIRED"
+    },
+    {
+      "ruleId": "WILL-RULE-BUSINESS-INTEREST",
+      "predicate": {
+        "field": "businessInterests",
+        "nonEmpty": true
+      },
+      "candidateClauseIds": [
+        "WILL-CLAUSE-008"
+      ],
+      "candidateDocumentTypes": [],
+      "disposition": "LEGAL_REVIEW_REQUIRED"
+    },
+    {
+      "ruleId": "WILL-RULE-SPECIFIC-GIFTS",
+      "predicate": {
+        "field": "specificGifts",
+        "nonEmpty": true
+      },
+      "candidateClauseIds": [
+        "WILL-CLAUSE-005"
+      ],
+      "candidateDocumentTypes": [],
+      "disposition": "CANDIDATE_ONLY"
+    },
+    {
+      "ruleId": "WILL-RULE-CUSTOM-CLAUSE",
+      "predicate": {
+        "field": "customClauseRequested",
+        "equals": true
+      },
+      "candidateClauseIds": [],
+      "candidateDocumentTypes": [],
+      "disposition": "AUTOMATIC_ASSEMBLY_BLOCKED"
+    }
+  ],
+  "invariants": {
+    "candidateIsNotAutomaticallyLegallyAppropriate": true,
+    "ruleMayNeverDraftClauseText": true,
+    "onlyW12ApprovedClauseVersionsMayLaterResolve": true,
+    "unsupportedOrCustomConditionsFailClosed": true
+  }
+}

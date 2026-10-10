@@ -1,0 +1,253 @@
+{
+  "schemaVersion": "PHI-OS-IMR-ALGORITHM-GOVERNANCE-REGISTRY-v1.0.0",
+  "stageCode": "IMR-W3",
+  "registryCode": "IMR_ALGORITHM_GOVERNANCE_REGISTRY",
+  "registryVersion": "1.0.0",
+  "status": "active_governance_registry",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "e2cb2de96550054346775aae48d4f1fc596b332e"
+  },
+  "authority": "INTERPRETIVE_METHOD_GOVERNANCE",
+  "runtimeAuthority": false,
+  "methodRegistryReference": "content/professional/method-governance/imr-method-registry-v1.json",
+  "commercialLicenseReference": "content/professional/method-governance/imr-commercial-license-registry-v1.json",
+  "calculationRuntimeReference": "content/professional/method-runtime/shared-calculation-runtime-v1.json",
+  "governancePolicy": {
+    "algorithmRegistrationCreatesExecutionAuthority": false,
+    "validationRequiredBeforeProduction": true,
+    "toleranceRequiredBeforeValidationPass": true,
+    "referenceLineageRequired": true,
+    "auditRequired": true,
+    "providerForbiddenInCalculation": true,
+    "aiForbiddenInCalculation": true,
+    "productionEligibilityGovernedBy": "IMR-W4"
+  },
+  "methods": [
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "methodVersion": "1.0.0",
+      "algorithmStatus": "external_only",
+      "calculation": {
+        "authority": "EXTERNAL_HUMAN_DESIGN_CALCULATION",
+        "algorithmCode": "EXTERNAL_HD",
+        "algorithmVersion": "external",
+        "deterministicRequired": true,
+        "implementedInSharedRuntime": false
+      },
+      "references": [
+        {
+          "referenceCode": "HDR-W0",
+          "referenceType": "governance_audit",
+          "authority": "PHI_OS"
+        }
+      ],
+      "validation": {
+        "status": "deferred_to_external_authority",
+        "fixturesRequired": true,
+        "fixturesPassed": false,
+        "regressionPassed": false
+      },
+      "tolerance": {
+        "type": "exact_external_output_match",
+        "value": null,
+        "unit": null,
+        "policy": "No PHI OS self-calculation tolerance is authorized."
+      },
+      "audit": {
+        "auditStatus": "conditional",
+        "lastAuditStage": "HDR-W0",
+        "independentReviewRequired": true
+      },
+      "productionAuthorityCreated": false
+    },
+    {
+      "methodCode": "ASTROLOGY",
+      "methodVersion": "0.1.0",
+      "algorithmStatus": "pilot_candidate",
+      "calculation": {
+        "authority": "ASTRONOMY_ENGINE_JS",
+        "algorithmCode": "ASTRONOMY_ENGINE_EPHEMERIS",
+        "algorithmVersion": "unfrozen",
+        "deterministicRequired": true,
+        "implementedInSharedRuntime": false
+      },
+      "references": [
+        {
+          "referenceCode": "NASA_JPL_HORIZONS",
+          "referenceType": "validation_reference",
+          "authority": "NASA_JPL"
+        },
+        {
+          "referenceCode": "ASTRONOMY_ENGINE_JS",
+          "referenceType": "candidate_engine",
+          "authority": "THIRD_PARTY"
+        }
+      ],
+      "validation": {
+        "status": "not_executed",
+        "fixturesRequired": true,
+        "fixturesPassed": false,
+        "regressionPassed": false
+      },
+      "tolerance": {
+        "type": "angular_and_time_tolerance",
+        "value": null,
+        "unit": null,
+        "policy": "Tolerance must be defined from reference comparison before validation can pass."
+      },
+      "audit": {
+        "auditStatus": "pending_validation",
+        "lastAuditStage": "IMR-W0",
+        "independentReviewRequired": true
+      },
+      "productionAuthorityCreated": false
+    },
+    {
+      "methodCode": "BAZI",
+      "methodVersion": "0.1.0",
+      "algorithmStatus": "policy_candidate",
+      "calculation": {
+        "authority": "PHI_OS_BAZI_POLICY_V1",
+        "algorithmCode": "PHI_OS_BAZI_POLICY",
+        "algorithmVersion": "candidate-1",
+        "deterministicRequired": true,
+        "implementedInSharedRuntime": false
+      },
+      "references": [
+        {
+          "referenceCode": "IANA_TZDB",
+          "referenceType": "timezone_authority",
+          "authority": "IANA"
+        },
+        {
+          "referenceCode": "ASTRONOMY_ENGINE_SOLAR_LONGITUDE",
+          "referenceType": "solar_term_candidate",
+          "authority": "THIRD_PARTY"
+        },
+        {
+          "referenceCode": "PHI_OS_TRUE_SOLAR_TIME",
+          "referenceType": "internal_algorithm",
+          "authority": "PHI_OS"
+        },
+        {
+          "referenceCode": "PHI_OS_SEXAGENARY_CALENDAR",
+          "referenceType": "internal_algorithm",
+          "authority": "PHI_OS"
+        }
+      ],
+      "validation": {
+        "status": "not_executed",
+        "fixturesRequired": true,
+        "fixturesPassed": false,
+        "regressionPassed": false
+      },
+      "tolerance": {
+        "type": "boundary_exactness",
+        "value": 0,
+        "unit": "fabricated_defaults",
+        "policy": "Li Chun, Jie, true-solar-date and unknown-time boundaries must fail closed; no fabricated hour."
+      },
+      "audit": {
+        "auditStatus": "policy_frozen_validation_pending",
+        "lastAuditStage": "IMR-W0",
+        "independentReviewRequired": true
+      },
+      "productionAuthorityCreated": false
+    },
+    {
+      "methodCode": "I_CHING",
+      "methodVersion": "0.1.0",
+      "algorithmStatus": "not_defined",
+      "calculation": {
+        "authority": "UNDEFINED",
+        "algorithmCode": "UNDEFINED",
+        "algorithmVersion": "0.0.0",
+        "deterministicRequired": true,
+        "implementedInSharedRuntime": false
+      },
+      "references": [],
+      "validation": {
+        "status": "not_started",
+        "fixturesRequired": true,
+        "fixturesPassed": false,
+        "regressionPassed": false
+      },
+      "tolerance": {
+        "type": "undefined",
+        "value": null,
+        "unit": null,
+        "policy": "Algorithm and tolerance must be governed before implementation."
+      },
+      "audit": {
+        "auditStatus": "not_started",
+        "lastAuditStage": "IMR-W1",
+        "independentReviewRequired": true
+      },
+      "productionAuthorityCreated": false
+    },
+    {
+      "methodCode": "TAROT",
+      "methodVersion": "0.1.0",
+      "algorithmStatus": "not_defined",
+      "calculation": {
+        "authority": "UNDEFINED",
+        "algorithmCode": "UNDEFINED",
+        "algorithmVersion": "0.0.0",
+        "deterministicRequired": true,
+        "implementedInSharedRuntime": false
+      },
+      "references": [],
+      "validation": {
+        "status": "not_started",
+        "fixturesRequired": true,
+        "fixturesPassed": false,
+        "regressionPassed": false
+      },
+      "tolerance": {
+        "type": "undefined",
+        "value": null,
+        "unit": null,
+        "policy": "Algorithm and tolerance must be governed before implementation."
+      },
+      "audit": {
+        "auditStatus": "not_started",
+        "lastAuditStage": "IMR-W1",
+        "independentReviewRequired": true
+      },
+      "productionAuthorityCreated": false
+    },
+    {
+      "methodCode": "PSYCHOLOGY",
+      "methodVersion": "0.1.0",
+      "algorithmStatus": "not_defined",
+      "calculation": {
+        "authority": "UNDEFINED",
+        "algorithmCode": "UNDEFINED",
+        "algorithmVersion": "0.0.0",
+        "deterministicRequired": true,
+        "implementedInSharedRuntime": false
+      },
+      "references": [],
+      "validation": {
+        "status": "not_started",
+        "fixturesRequired": true,
+        "fixturesPassed": false,
+        "regressionPassed": false
+      },
+      "tolerance": {
+        "type": "undefined",
+        "value": null,
+        "unit": null,
+        "policy": "Algorithm and tolerance must be governed before implementation."
+      },
+      "audit": {
+        "auditStatus": "not_started",
+        "lastAuditStage": "IMR-W1",
+        "independentReviewRequired": true
+      },
+      "productionAuthorityCreated": false
+    }
+  ]
+}

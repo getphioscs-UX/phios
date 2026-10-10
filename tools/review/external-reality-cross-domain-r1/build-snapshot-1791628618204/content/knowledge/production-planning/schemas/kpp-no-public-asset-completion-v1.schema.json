@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kpp-no-public-asset-completion-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "nodeCode",
+    "productionRole",
+    "canonicalKnowledgeExists",
+    "authorityValid",
+    "runtimeUsable",
+    "articleNotRequired",
+    "publicAssetNotRequired",
+    "humanProductionDecisionRecorded",
+    "completionState"
+  ],
+  "properties": {
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-"
+    },
+    "productionRole": {
+      "const": "NO_PUBLIC_ASSET_REQUIRED"
+    },
+    "canonicalKnowledgeExists": {
+      "const": true
+    },
+    "authorityValid": {
+      "const": true
+    },
+    "runtimeUsable": {
+      "const": true
+    },
+    "articleNotRequired": {
+      "const": true
+    },
+    "publicAssetNotRequired": {
+      "const": true
+    },
+    "humanProductionDecisionRecorded": {
+      "const": true
+    },
+    "completionState": {
+      "const": "complete"
+    }
+  }
+}

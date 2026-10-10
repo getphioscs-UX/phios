@@ -1,0 +1,37 @@
+{
+  "policyCode": "PHI-OS-MAPPING-COMPATIBILITY-POLICY-v1.0.0",
+  "work": "CM-W6C",
+  "version": "1.0.0",
+  "productionStatus": "validation_only",
+  "changeClassification": {
+    "predicateHashChanged": "breaking",
+    "targetMeaningHashChanged": "breaking",
+    "mappingAuthorityChanged": "breaking",
+    "boundaryChanged": "breaking",
+    "mappingConfidenceChanged": "metadata",
+    "lifecycleChanged": "metadata",
+    "compatibleFromVersionsExtended": "compatible_extension"
+  },
+  "requiredVersionBump": {
+    "breaking": "major",
+    "compatible_extension": "minor_or_major",
+    "metadata": "patch_or_higher",
+    "none": "none"
+  },
+  "compatibilityRules": {
+    "sameMappingIdRequiredForVersionComparison": true,
+    "sameMappingCodeRequiredWithinMappingId": true,
+    "versionsStrictlyIncrease": true,
+    "sameVersionContentMutationForbidden": true,
+    "backwardCompatibleFalseRequiresMigration": true,
+    "compatibleFromVersionsMustExistInSameIdentityChain": true,
+    "deprecatedVersionMayRemainReferenced": true,
+    "deprecatedVersionCannotBecomeActiveAgain": true
+  },
+  "successorRules": {
+    "successorMappingIdMustDiffer": true,
+    "successorMustResolveInRegistry": true,
+    "successorDoesNotInheritValidation": true,
+    "successorDoesNotInheritProductionAuthority": true
+  }
+}

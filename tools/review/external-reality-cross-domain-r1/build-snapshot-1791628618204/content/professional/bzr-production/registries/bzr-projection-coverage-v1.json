@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-BZRA-W5-PROJECTION-COVERAGE-v1.0.0",
+  "work": "BZRA-W5",
+  "status": "COMPLETE_FOR_DECLARED_V1_SCOPE",
+  "projectionAuthority": "functions/method-client-delivery/canonical-projection-runtime-current.js",
+  "schemaVersionBound": "PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0",
+  "publicMethodCode": "BAZI_PROJECTION",
+  "coverage": [
+    {
+      "surface": "STEM",
+      "status": "COVERED",
+      "path": "calculation.structures[FOUR_PILLARS].items[*_STEM]"
+    },
+    {
+      "surface": "BRANCH",
+      "status": "COVERED",
+      "path": "calculation.structures[FOUR_PILLARS].items[*_BRANCH]"
+    },
+    {
+      "surface": "PILLAR",
+      "status": "COVERED",
+      "path": "calculation.structures[FOUR_PILLARS].items"
+    },
+    {
+      "surface": "LUCK_CYCLE_SEQUENCE",
+      "status": "COVERED_WHEN_CALCULATED",
+      "path": "calculation.cycles[LUCK_CYCLE]"
+    }
+  ],
+  "deferred": [
+    {
+      "surface": "LUCK_CYCLE_DIRECTION",
+      "reason": "NOT_PRESENT_IN_CANONICAL_METHOD_PROJECTION_V1",
+      "requiredForV1Availability": false
+    }
+  ],
+  "silentDropForbidden": true
+}

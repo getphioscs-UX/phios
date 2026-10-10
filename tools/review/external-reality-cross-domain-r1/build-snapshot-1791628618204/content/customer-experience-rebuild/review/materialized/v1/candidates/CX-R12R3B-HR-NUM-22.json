@@ -1,0 +1,291 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R3B-HUMAN-REVIEW-CASE-v1.0.0",
+  "caseId": "CX-R12R3B-HR-NUM-22",
+  "methodId": "NUM",
+  "reviewLocales": [
+    "en",
+    "zh-Hans"
+  ],
+  "caseType": "LOCALE_ALIGNMENT",
+  "scenario": "English and Simplified Chinese semantic pair B",
+  "localized": [
+    {
+      "schemaVersion": "PHI-OS-CX-R12R3B-HUMAN-REVIEW-CANDIDATE-SNAPSHOT-v1.0.0",
+      "caseId": "CX-R12R3B-HR-NUM-22",
+      "methodId": "NUM",
+      "locale": "en",
+      "caseType": "LOCALE_ALIGNMENT",
+      "scenario": "English and Simplified Chinese semantic pair B",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "LOCALE_ALIGNMENT-02",
+      "variantDisclosure": {
+        "mode": "REVIEW_LENS_OVER_GOVERNED_FIXED_PROJECTION",
+        "doesNotClaimDistinctCalculationUnlessFixtureDiffers": true
+      },
+      "sourceReference": {
+        "projectionId": "CMP-000000000000000000000003",
+        "projectionVersion": "1.0.0",
+        "projectionDigest": "7a9fddcf358e22b1e83bd5658b92843967409fd8e301ab76ea836c3b6749afcd"
+      },
+      "projectionDigest": "7a9fddcf358e22b1e83bd5658b92843967409fd8e301ab76ea836c3b6749afcd",
+      "interpretationDigest": "1941f01a769a9b82de9e2e87c41e338d42fc5f6af3294c3dd937e6fd30508611",
+      "candidateId": "CXIC-NUM-1941F01A769A9B82DE9E",
+      "status": "HUMAN_REVIEW_REQUIRED",
+      "lifecycle": {
+        "sequence": [
+          "CALCULATED",
+          "PROJECTED",
+          "MEANING_AVAILABLE",
+          "SOURCE_ADMITTED",
+          "LOCALE_COMPLETE",
+          "COMPOSITION_SUPPORTED",
+          "HUMAN_REVIEWED",
+          "CUSTOMER_PUBLISHABLE"
+        ],
+        "flags": {
+          "CALCULATED": true,
+          "PROJECTED": true,
+          "MEANING_AVAILABLE": true,
+          "SOURCE_ADMITTED": true,
+          "LOCALE_COMPLETE": true,
+          "COMPOSITION_SUPPORTED": true,
+          "HUMAN_REVIEWED": false,
+          "CUSTOMER_PUBLISHABLE": false
+        },
+        "currentStage": "COMPOSITION_SUPPORTED",
+        "customerPublishable": false
+      },
+      "validation": {
+        "valid": true,
+        "failures": [],
+        "failureMode": "NONE"
+      },
+      "interpretationUnits": [
+        {
+          "interpretationUnitId": "CXI-NUM-7A9FDDCF358E-01",
+          "methodId": "NUM",
+          "projectionRefs": [
+            "CMP-000000000000000000000003#VALUE:LIFE_PATH",
+            "CMP-000000000000000000000003#VALUE:LIFE_PATH:STEP:1",
+            "CMP-000000000000000000000003#VALUE:LIFE_PATH:STEP:2"
+          ],
+          "meaningRefs": [
+            "CM-NUMBER-ORIENTATION-NO08@1.0.0"
+          ],
+          "ruleRefs": [
+            "CX-COMP-NUM-ROLE-NUMBER-PATH-v1"
+          ],
+          "title": "Life Path: role and derivation",
+          "plainLanguageExplanation": "This theme comes from the Life Path role and its recorded path 35 → 8; it is not a free-standing meaning for the final digit. A constructive expression may be to use the role deliberately while retaining the nuance of its derivation: Life Path · 8 is used here only within the role and reduction path that produced it. Read it together with that calculation context; the number on its own does not define personality, life purpose, ability, destiny, or a future event. When the final number is treated as a complete identity, context is lost and the reading can become too rigid.",
+          "structuralReason": "This theme comes from the Life Path role and its recorded path 35 → 8; it is not a free-standing meaning for the final digit.",
+          "relationContext": "The role is read against its compound and reduction context; no active cycle was established.",
+          "constructiveExpression": "A constructive expression may be to use the role deliberately while retaining the nuance of its derivation: Life Path · 8 is used here only within the role and reduction path that produced it. Read it together with that calculation context; the number on its own does not define personality, life purpose, ability, destiny, or a future event.",
+          "frictionExpression": "When the final number is treated as a complete identity, context is lost and the reading can become too rigid.",
+          "activationConditions": [
+            "The role is read against its compound and reduction context; no active cycle was established."
+          ],
+          "observableSignals": [
+            "Observe whether the Life Path pattern appears differently across distinct responsibilities."
+          ],
+          "alternativeInterpretations": [
+            "Another expression is possible when transition is not active in the same context."
+          ],
+          "uncertainties": [],
+          "confidenceBoundary": "This is a conditional structural interpretation, not a fact about lived reality.",
+          "sourceLineage": [
+            "CMP:CMPB-007EFA2822C381E852C4F80E",
+            "MAP:CMP2-MAP-NUM-LIFE_PATH-8-TO-NO08",
+            "PROJECTION:CMP-000000000000000000000003"
+          ],
+          "priority": "PRIMARY",
+          "subject": "LIFE_PATH",
+          "relationType": "TRANSITION",
+          "realityComparisonQuestions": [
+            "Which real situation best shows how this role operates, rather than merely matching the number label?"
+          ],
+          "customerPublicationStatus": "HUMAN_REVIEW_REQUIRED"
+        }
+      ],
+      "reviewFocus": {
+        "focusInterpretationUnitRefs": [
+          "CXI-NUM-7A9FDDCF358E-01"
+        ],
+        "focusNodeRefs": [
+          "CMP-000000000000000000000003#VALUE:LIFE_PATH:STEP:2"
+        ],
+        "focusRelationRefs": [
+          "CMP-000000000000000000000003#VALUE:LIFE_PATH:REDUCTION:1"
+        ],
+        "scenario": "English and Simplified Chinese semantic pair B",
+        "caseType": "LOCALE_ALIGNMENT",
+        "variantMode": "REVIEW_LENS_OVER_GOVERNED_FIXED_PROJECTION",
+        "calculationVariantInvented": false
+      },
+      "languagePreflight": {
+        "internalPhraseFree": true,
+        "rawCodeFree": true
+      },
+      "customerLanguageAuthority": {
+        "version": "CX-R12R3B-CUSTOMER-LANGUAGE-v1.0.0",
+        "methodId": "NUM",
+        "locale": "en",
+        "meaningIdentityChanged": false,
+        "selectorChanged": false,
+        "sourceMeaningChanged": false,
+        "newMethodClaimCreated": false,
+        "purpose": "ORDINARY_READER_WORDING_ONLY"
+      },
+      "meaningSelection": {
+        "selectorBound": true,
+        "firstNSelectionForbidden": true
+      },
+      "humanReview": {
+        "methodFidelityAccepted": null,
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null
+      },
+      "customerPublishable": false
+    },
+    {
+      "schemaVersion": "PHI-OS-CX-R12R3B-HUMAN-REVIEW-CANDIDATE-SNAPSHOT-v1.0.0",
+      "caseId": "CX-R12R3B-HR-NUM-22",
+      "methodId": "NUM",
+      "locale": "zh-Hans",
+      "caseType": "LOCALE_ALIGNMENT",
+      "scenario": "English and Simplified Chinese semantic pair B",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "LOCALE_ALIGNMENT-02",
+      "variantDisclosure": {
+        "mode": "REVIEW_LENS_OVER_GOVERNED_FIXED_PROJECTION",
+        "doesNotClaimDistinctCalculationUnlessFixtureDiffers": true
+      },
+      "sourceReference": {
+        "projectionId": "CMP-000000000000000000000003",
+        "projectionVersion": "1.0.0",
+        "projectionDigest": "7a9fddcf358e22b1e83bd5658b92843967409fd8e301ab76ea836c3b6749afcd"
+      },
+      "projectionDigest": "7a9fddcf358e22b1e83bd5658b92843967409fd8e301ab76ea836c3b6749afcd",
+      "interpretationDigest": "fbdeeb7abda5edb41604be438f7589cea17da29c02d2b7e231ac2f93efe80745",
+      "candidateId": "CXIC-NUM-FBDEEB7ABDA5EDB41604",
+      "status": "HUMAN_REVIEW_REQUIRED",
+      "lifecycle": {
+        "sequence": [
+          "CALCULATED",
+          "PROJECTED",
+          "MEANING_AVAILABLE",
+          "SOURCE_ADMITTED",
+          "LOCALE_COMPLETE",
+          "COMPOSITION_SUPPORTED",
+          "HUMAN_REVIEWED",
+          "CUSTOMER_PUBLISHABLE"
+        ],
+        "flags": {
+          "CALCULATED": true,
+          "PROJECTED": true,
+          "MEANING_AVAILABLE": true,
+          "SOURCE_ADMITTED": true,
+          "LOCALE_COMPLETE": true,
+          "COMPOSITION_SUPPORTED": true,
+          "HUMAN_REVIEWED": false,
+          "CUSTOMER_PUBLISHABLE": false
+        },
+        "currentStage": "COMPOSITION_SUPPORTED",
+        "customerPublishable": false
+      },
+      "validation": {
+        "valid": true,
+        "failures": [],
+        "failureMode": "NONE"
+      },
+      "interpretationUnits": [
+        {
+          "interpretationUnitId": "CXI-NUM-7A9FDDCF358E-01",
+          "methodId": "NUM",
+          "projectionRefs": [
+            "CMP-000000000000000000000003#VALUE:LIFE_PATH",
+            "CMP-000000000000000000000003#VALUE:LIFE_PATH:STEP:1",
+            "CMP-000000000000000000000003#VALUE:LIFE_PATH:STEP:2"
+          ],
+          "meaningRefs": [
+            "CM-NUMBER-ORIENTATION-NO08@1.0.0"
+          ],
+          "ruleRefs": [
+            "CX-COMP-NUM-ROLE-NUMBER-PATH-v1"
+          ],
+          "title": "life path：角色与推导",
+          "plainLanguageExplanation": "这一主题来自“life path”这一计算角色及其实际推导路径 35 → 8，不是只看最终数字的独立标签。 建设性的表现可能是有意识地运用这一角色，同时保留推导路径的差异：生命路径 · 8只在产生它的计算角色与化简路径中阅读。数字本身不会单独定义人格、人生目的、能力、命运，也不会预告未来事件。 若把最终数字当成完整身份，推导情境会被抹去，解释也容易变得僵化。",
+          "structuralReason": "这一主题来自“life path”这一计算角色及其实际推导路径 35 → 8，不是只看最终数字的独立标签。",
+          "relationContext": "这一角色需结合原数和化简路径阅读；本次没有建立获准的活动周期。",
+          "constructiveExpression": "建设性的表现可能是有意识地运用这一角色，同时保留推导路径的差异：生命路径 · 8只在产生它的计算角色与化简路径中阅读。数字本身不会单独定义人格、人生目的、能力、命运，也不会预告未来事件。",
+          "frictionExpression": "若把最终数字当成完整身份，推导情境会被抹去，解释也容易变得僵化。",
+          "activationConditions": [
+            "这一角色需结合原数和化简路径阅读；本次没有建立获准的活动周期。"
+          ],
+          "observableSignals": [
+            "观察“life path”在不同责任情境中是否以不同方式出现。"
+          ],
+          "alternativeInterpretations": [
+            "当这一角色需结合原数和化简路径阅读；本次没有建立获准的活动周期。没有在同一情境启动时，也可能出现另一种表现。"
+          ],
+          "uncertainties": [],
+          "confidenceBoundary": "这是有条件的结构解释，不是对现实经历的事实判定。",
+          "sourceLineage": [
+            "CMP:CMPB-007EFA2822C381E852C4F80E",
+            "MAP:CMP2-MAP-NUM-LIFE_PATH-8-TO-NO08",
+            "PROJECTION:CMP-000000000000000000000003"
+          ],
+          "priority": "PRIMARY",
+          "subject": "LIFE_PATH",
+          "relationType": "TRANSITION",
+          "realityComparisonQuestions": [
+            "哪一个现实情境最能说明这个角色如何运作，而不只是“对上数字标签”？"
+          ],
+          "customerPublicationStatus": "HUMAN_REVIEW_REQUIRED"
+        }
+      ],
+      "reviewFocus": {
+        "focusInterpretationUnitRefs": [
+          "CXI-NUM-7A9FDDCF358E-01"
+        ],
+        "focusNodeRefs": [
+          "CMP-000000000000000000000003#VALUE:LIFE_PATH:STEP:2"
+        ],
+        "focusRelationRefs": [
+          "CMP-000000000000000000000003#VALUE:LIFE_PATH:REDUCTION:1"
+        ],
+        "scenario": "English and Simplified Chinese semantic pair B",
+        "caseType": "LOCALE_ALIGNMENT",
+        "variantMode": "REVIEW_LENS_OVER_GOVERNED_FIXED_PROJECTION",
+        "calculationVariantInvented": false
+      },
+      "languagePreflight": {
+        "internalPhraseFree": true,
+        "rawCodeFree": true
+      },
+      "customerLanguageAuthority": {
+        "version": "CX-R12R3B-CUSTOMER-LANGUAGE-v1.0.0",
+        "methodId": "NUM",
+        "locale": "zh-Hans",
+        "meaningIdentityChanged": false,
+        "selectorChanged": false,
+        "sourceMeaningChanged": false,
+        "newMethodClaimCreated": false,
+        "purpose": "ORDINARY_READER_WORDING_ONLY"
+      },
+      "meaningSelection": {
+        "selectorBound": true,
+        "firstNSelectionForbidden": true
+      },
+      "humanReview": {
+        "methodFidelityAccepted": null,
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null
+      },
+      "customerPublishable": false
+    }
+  ],
+  "machinePreflightPassed": true,
+  "reviewEligible": true
+}

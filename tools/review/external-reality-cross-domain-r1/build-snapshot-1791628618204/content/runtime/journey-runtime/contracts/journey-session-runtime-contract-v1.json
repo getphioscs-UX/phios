@@ -1,0 +1,42 @@
+{
+  "contractCode": "PHI-OS-JR-W6-SESSION-RUNTIME-v1",
+  "contractVersion": "1.0.0",
+  "runtimeCode": "JR",
+  "work": "JR-W6",
+  "status": "active_rdg_bound",
+  "rdgAuthorityReferences": [
+    "content/governance/reality-data-governance/registries/canonical-data-purpose-registry-v1.json",
+    "content/governance/reality-data-governance/registries/canonical-persistence-class-registry-v1.json",
+    "content/governance/reality-data-governance/registries/canonical-consent-class-registry-v1.json"
+  ],
+  "classes": {
+    "session": {
+      "persistenceClass": "SESSION",
+      "purpose": [
+        "SERVICE_DELIVERY"
+      ],
+      "canonical": false
+    },
+    "recovery": {
+      "persistenceClass": "RECOVERY",
+      "purpose": [
+        "RUNTIME_RECOVERY"
+      ],
+      "canonical": false
+    },
+    "canonicalPersistence": {
+      "persistenceClass": "RUNTIME",
+      "purpose": [
+        "RUNTIME_CONTINUITY"
+      ],
+      "canonical": true
+    }
+  },
+  "rules": {
+    "sessionIsCanonicalPersistence": false,
+    "recoveryIsCanonicalPersistence": false,
+    "browserStorageIsAuthority": false,
+    "canonicalPersistenceRequiresRdgPermission": true,
+    "optionalMemoryRequiresSeparateConsent": true
+  }
+}

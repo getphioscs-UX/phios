@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const registry=JSON.parse(fs.readFileSync('content/reports/method-report-delivery-delta-registry-v1.json'));
+assert(registry.methods.every(x=>x.status==='PASS'),'ALL_TARGET_METHOD_DELIVERY_DELTAS_REQUIRED');
+const path='docs/reports/SHARED-REPORT-E2E-REFERENCE-v2.json';
+assert(fs.existsSync(path),'REAL_SHARED_LIVE_PROOF_REQUIRED_NO_SYNTHETIC_FINAL_RECEIPT');
+const receipt=JSON.parse(fs.readFileSync(path));
+assert.equal(receipt.finalSharedAuthorityState,'PASS');
+for(const field of ['generationReleaseProven','releasedMaterialProven','reopenProven','logoutVerified','sharedDeliveryAuthorityEligible','rendererStabilityPass','actualAccountGenerateReleasePass','libraryPass','differentSessionReopenPass','sameImmutableSnapshot','sameImmutableRenderedMaterial','noProviderRegenerationOnReopen','noRendererRegenerationOnReopen','secondAccountIsolationPass'])assert.equal(receipt[field],true,field);
+const global=JSON.parse(fs.readFileSync('docs/reports/delivery-r4/GLOBAL-REPOSITORY-CHECK-R4.json'));
+assert.equal(global.status,'PASS');
+console.log('PASS shared final live E2E admission with all target deltas and global regression.');

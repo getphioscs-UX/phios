@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-FP-W19-FULL-PRODUCTION-FREEZE-v1.0.0",
+  "work": "BAZI-FP-W19",
+  "sourceMainCommit": "0692037d3a3f522de9f0eb11d37f738df3a2bae6",
+  "reviewedCandidateBaselineCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
+  "status": "FULL_PRODUCTION_FROZEN",
+  "releaseId": "BAZI-FP-v1.0.0",
+  "freezeDigest": "71c1e45705b81feac8a65663bd4e8460b4946c3fe557b1c86a7984f4a1005604",
+  "machineAcceptance": {
+    "status": "96_OF_96_PASS",
+    "ref": "content/professional/bzr-full-production/acceptance/bazi-fp-w17-machine-acceptance-v1.json",
+    "campaignSha256": "8e9468ef0383539263c42683d042242333937a5a4287eada084eb88d53071754"
+  },
+  "humanAcceptance": {
+    "status": "24_OF_24_ACCEPT",
+    "ref": "content/professional/bzr-full-production/admission/bazi-fp-w18-human-admission-v1.json",
+    "decisionDigest": "8c0072751b2eae96d3fce86ac5120a9622376fae406519d651ccd3c55e4dbbd8",
+    "reviewSurfaceDigest": "333fcffa4d5a4c10d8004af16e52aa4dba03dd5a6532b0de6df83784398fe997"
+  },
+  "frozenArtifacts": [
+    {
+      "path": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.3.json",
+      "sha256": "34f4a4e1d95ab9f899098f48e9aff75ebfb1b5b78604cbdce3f84ae5e92a4196"
+    },
+    {
+      "path": "content/interpretation/bazi/rulesets/bazi-pattern-ruleset-v2.json",
+      "sha256": "ecd0b02ed1d4d74d6e931ffd2a2f3a4de526f269b85c2cf12607beb3cba05495"
+    },
+    {
+      "path": "content/interpretation/bazi/rulesets/bazi-zi-ping-month-command-use-ruleset-v2.json",
+      "sha256": "afdaa06a6c87aceb4534490298fdc265a79d0de5d18fd89f5616671d5a5e3060"
+    },
+    {
+      "path": "content/interpretation/bazi/rulesets/bazi-di-tian-sui-ti-yong-ruleset-v2.json",
+      "sha256": "892a6fbaae7fc90c032b47c2c4fee7ff4098b2f0a8d2eee7c4a2b129132d7530"
+    },
+    {
+      "path": "content/interpretation/bazi/rulesets/bazi-di-tian-sui-tiaohou-ruleset-v2.json",
+      "sha256": "95932094ac712395dafeb7ce7ac8104129b33fe99cb855c37083729429cdddce"
+    },
+    {
+      "path": "functions/bzr-full-production/bazi-reading-ir-runtime.js",
+      "sha256": "c1bf0e765bd9e2b1039dac69dff97100ee5ad14c0c6128fd37dd9cf35bc7e48d"
+    },
+    {
+      "path": "functions/bzr-full-production/bazi-customer-report-runtime.js",
+      "sha256": "8d5852a3c7643e06fcf47767fe00e5c93f57e359bcdeca45701c158f344d4c68"
+    },
+    {
+      "path": "functions/bzr-full-production/bazi-production-gate-runtime.js",
+      "sha256": "b7220618bd01cdb10a9618bd5a63ed9e98fcbd57e8f477427ffc8a3ee3005023"
+    },
+    {
+      "path": "functions/api/bazi-full-reading.js",
+      "sha256": "9034b9246b7bcb3dfcc3ba99c7b7d3160462903794acfb2efeb214642ca2b16a"
+    },
+    {
+      "path": "assets/js/pages/bazi-full-reading.js",
+      "sha256": "f9825d53bb73de07ab34ed4146fda289db7dbf8c334121f0cab4f253a1e884c0"
+    },
+    {
+      "path": "assets/css/bazi-full-reading.css",
+      "sha256": "6fc33b144db46bc9bd449b8c4388917d86074685c1deb6b2c33f90c9fec0fa47"
+    },
+    {
+      "path": "content/professional/bzr-full-production/machine/bazi-fp-w17-machine-results-v1.json",
+      "sha256": "8e9468ef0383539263c42683d042242333937a5a4287eada084eb88d53071754"
+    },
+    {
+      "path": "content/professional/bzr-full-production/review/bazi-fp-w18-human-review-cases-v1.json",
+      "sha256": "919d7df213429bbdcfe1713dc4f9ee52cab89ecdf417be3933f77f3bcb100d67"
+    },
+    {
+      "path": "content/professional/bzr-full-production/review/evidence/bazi-fp-w18-human-review-export-tl-20260829.json",
+      "sha256": "f059fc45a473fd68d669f406ef05f0d33dbf4dbd5115e31310b1a056be2cbb5c"
+    },
+    {
+      "path": "content/professional/bzr-full-production/admission/bazi-fp-w18-human-admission-v1.json",
+      "sha256": "55e449687a3608dac4d844526f695afe7c36a62377283ffc093bfc767670462c"
+    },
+    {
+      "path": "content/professional/bzr-full-production/contracts/bazi-production-gate-contract-v1.json",
+      "sha256": "95ba0dc6d7d6a6dbe1306a09d1f36c2c725caa66f252868163a3046c39f998e7"
+    }
+  ],
+  "publication": {
+    "productionAllowed": true,
+    "customerPublishable": true,
+    "defaultCustomerSurfaceAllowed": true,
+    "api": "/api/bazi-full-reading",
+    "surface": "personal-runtime.html#bazi",
+    "publicationDecisionRequired": true
+  },
+  "successorPolicy": {
+    "historicalFreezeMutable": false,
+    "changesRequireNewVersion": true,
+    "machineRegressionRequired": true,
+    "humanReacceptanceRequiredWhenCustomerMeaningOrNarrativeChanges": true,
+    "gateFailsClosedOnRuntimeOrBoundaryDrift": true
+  }
+}

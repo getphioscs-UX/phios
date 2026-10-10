@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import { createFinancialProfessionalDomain } from '../functions/runtime/navigation/professional-domains-financial.js';
+import { validateProfessionalDomainContract } from '../functions/runtime/navigation/professional-domain-contract.js';
+import { generateNavigationPaths } from '../functions/runtime/navigation/navigation-path-rules.js';
+const domain=createFinancialProfessionalDomain({language:'en',reasons:['professional_assessment_present']});
+assert.equal(validateProfessionalDomainContract(domain).valid,true);
+assert.equal(domain.sensitiveDataCollection,false);
+assert.equal(domain.uploadEnabled,false);
+assert.equal(domain.conclusionsProvided,false);
+assert(domain.preparationChecklist.length>0);
+assert(domain.unknownReality.length>0);
+assert(domain.excludedServices.includes('Investment recommendations'));
+const result=generateNavigationPaths({navigationReady:true,blockers:[],currentReality:{confidence:.8,primaryPattern:{established:true}},currentTransition:'change',desiredDirection:'stability',evidenceWatch:[],constraints:[],unknownReality:[],professionalBoundary:{escalationNeeded:true,domains:['financial'],reasons:['professional_assessment_present']}},{outputLanguage:'en'});
+const path=result.availablePaths.find(item=>item.pathType==='professional_review');
+assert(path);
+assert.equal(path.professionalBoundary.domainId,'financial');
+assert.equal(path.professionalBoundary.consentRequired,true);
+console.log('✓ Professional Boundary Layer and Financial Domain v1 checks passed.');

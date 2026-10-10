@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-CX-CUSTOMER-INTENT-MODEL-v1.0.0",
+  "work": "CX-R2-W1",
+  "baselineCommit": "f6d31dafdc37dcf3d8f2ebd1236bfa500b7dc64c",
+  "recordedAt": "2026-09-03T03:18:00Z",
+  "status": "PRIMARY_CUSTOMER_INTENTS_FROZEN",
+  "principle": "ENTRY_BY_CUSTOMER_INTENT_NOT_PRODUCT_CATALOG",
+  "primaryIntents": [
+    {
+      "intentId": "QUESTION",
+      "customerLanguage": "I have a question",
+      "primaryRouteId": "ASK",
+      "canonicalPath": "/knowledge/ask/",
+      "handoff": "CONTEXTUAL_ASK",
+      "availabilityRule": "ROUTE_MAY_EXIST_BEFORE_CONTEXT_CAPABILITY; CONTEXT AVAILABILITY REMAINS UPSTREAM_CONTROLLED"
+    },
+    {
+      "intentId": "PERSPECTIVE",
+      "customerLanguage": "I want another perspective",
+      "primaryRouteId": "PERSPECTIVES",
+      "canonicalPath": "/perspectives/",
+      "handoff": "PERSPECTIVE_SELECTION",
+      "availabilityRule": "METHOD_AND_INSTRUMENT_AVAILABILITY_READS_MPA_OR_PRODUCT_AUTHORITY"
+    },
+    {
+      "intentId": "REALITY_WORK",
+      "customerLanguage": "I need to work through something real",
+      "primaryRouteId": "MY_REALITY",
+      "canonicalPath": "/reality/",
+      "handoff": "MY_REALITY_WORKSPACE",
+      "availabilityRule": "CURRENT_REALITY_AND_RUNTIME_CAPABILITY_REMAIN_UPSTREAM_CONTROLLED"
+    }
+  ],
+  "rules": {
+    "onePrimaryDestinationPerIntent": true,
+    "productGridAsPrimaryEntryForbidden": true,
+    "methodGridAsPrimaryEntryForbidden": true,
+    "cxMayInventNewIntentAuthority": false
+  }
+}

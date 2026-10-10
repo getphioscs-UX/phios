@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "PHI-OS-PRE-R20-PARALLEL-RECONCILIATION-v1.0.0",
+  "baselineCommit": "d4b565daf3aecb968fa530ec41bf9c968dc33fd4",
+  "status": "RECONCILED_READY_FOR_CX_R20",
+  "scope": [
+    "assets/customer-ui/js/navigation.js",
+    "assets/customer-ui/js/locale.js",
+    "assets/customer-ui/surfaces/personal-reality.css",
+    "scripts/check-px2-cx-p1-successor.mjs"
+  ],
+  "navigation": {
+    "baselineSha256": "f9d4f3fdb1ee78acdd6e95d8ce3fc47df9138b3635d5b9d2ef60cfa776356638",
+    "runtimeChanged": false,
+    "finding": "NO_NAV_AUTHORITY_LOSS",
+    "detail": "EXPLORE, MY_REALITY, PERSPECTIVES, KNOWLEDGE, PROFESSIONAL and SEARCH/ASK/ACCOUNT remain present in CX_NAVIGATION. The PX2 failure was caused by whitespace-sensitive source matching in the checker.",
+    "resolution": "CHECKER_NOW_IMPORTS_AND_VALIDATES_EXPORTED_CX_NAVIGATION_SEMANTICS"
+  },
+  "locale": {
+    "r5PredecessorSha256": "989d111a59ec8e69537e5d95cc9cd04c149a7994cbee6098d1b07b70b7130a80",
+    "d4b565dParallelSha256": "7474c8a5c70a9c064d4a1f48e0a7114226335bf9431859d6ebf7bd425f2aee39",
+    "uploadedLocaleSha256": "7474c8a5c70a9c064d4a1f48e0a7114226335bf9431859d6ebf7bd425f2aee39",
+    "reconciledSha256": "f06668112a0f0a58c44b616f45f39cc32547ac2f759c69e6688d5854eb5b657e",
+    "finding": "PARALLEL_FEATURE_VALID_BUT_R5_COMPATIBILITY_REGRESSED",
+    "preserved": [
+      "dynamic cross-perspective EN/ZH projection",
+      "COMMON/COMPLEMENTARY/TENSION/CONTEXT_DEPENDENT/OPEN customer copy",
+      "MutationObserver for dynamically mounted cross-reading claims"
+    ],
+    "restored": [
+      "safe localStorage read/write guards",
+      "dual write to phios-cx-locale and phiOSLocale for predecessor compatibility"
+    ]
+  },
+  "personalRealityCss": {
+    "r5PredecessorSha256": "8ee834da4c7930cb34f9373422acedc0ce16239dd268a7c0fcf05b359aeacdcd",
+    "d4b565dSha256": "92306da5e4fc5b5c60bd8f861b0100173b90003005aa5c99efe0ebf6bff679a6",
+    "runtimeChangedByThisReconciliation": false,
+    "finding": "PARALLEL_CHANGE_ADDITIVE_AND_REQUIRED",
+    "preserved": [
+      "hidden target-place confirmation protection",
+      "hidden healthy asset fallback protection",
+      "BaZi school/source-technical customer-surface suppression"
+    ],
+    "resolution": "KEEP_CURRENT_MAIN_BYTE_CONTENT"
+  },
+  "authorityBoundary": {
+    "backendAuthorityCreated": false,
+    "methodAuthorityChanged": false,
+    "routeCutoverPerformed": false,
+    "physicalLegacyDeletePerformed": false,
+    "cxR20StartedByThisReconciliation": false
+  },
+  "next": "CX-R20_RUNTIME_PROJECTION_ADAPTERS_RECONCILIATION"
+}

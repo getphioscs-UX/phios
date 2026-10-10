@@ -1,0 +1,35 @@
+{
+  "contractCode": "PHI-OS-PR-E7-DECISION-REVISION-REREVIEW-v1",
+  "contractVersion": "1.0.0",
+  "runtimeCode": "PR",
+  "extension": "PR-E7",
+  "status": "ACTIVE_APPEND_ONLY_REVISION_REREVIEW",
+  "sourceFreeze": "content/runtime/professional-runtime/extensions/production/freeze/pr-e4-e6-decision-integration-freeze-v1.json",
+  "revisionSourceState": "RELEASED",
+  "revisionTargetState": "DRAFT",
+  "rules": {
+    "releasedDecisionMayBeOverwritten": false,
+    "previousPackageDigestRequired": true,
+    "previousReleaseReferenceRequired": true,
+    "newPackageReferenceRequired": true,
+    "newPackageReferenceMustDiffer": true,
+    "newVersionMustBeGreater": true,
+    "caseReferenceMustRemainBound": true,
+    "professionalReferenceMustRemainBound": true,
+    "revisionRequiresHumanReason": true,
+    "revisionRequiresSecurityEnvelope": true,
+    "revisionRequiresReReview": true,
+    "approvalMayBeReusedFromPreviousVersion": false,
+    "signatureMayBeReusedFromPreviousVersion": false,
+    "releaseMayBeReusedFromPreviousVersion": false,
+    "reviewLifecycleMayBeSkipped": false,
+    "previousContentPreserved": true
+  },
+  "requiredReReviewLifecycle": [
+    "DRAFT",
+    "REVIEWED",
+    "APPROVED",
+    "SIGNED",
+    "RELEASED"
+  ]
+}

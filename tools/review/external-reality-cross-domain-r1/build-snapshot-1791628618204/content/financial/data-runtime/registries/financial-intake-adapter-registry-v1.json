@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W21-INTAKE-ADAPTER-REGISTRY-v1.0.0",
+  "work": "FDR-W21",
+  "status": "ACTIVE_NON_AUTHORITATIVE_INPUT_ADAPTERS",
+  "authorityOwner": "FDR",
+  "adapters": [
+    {
+      "adapterType": "FORM",
+      "inputClass": "STRUCTURED_USER_INPUT"
+    },
+    {
+      "adapterType": "CSV",
+      "inputClass": "TABULAR_IMPORT"
+    },
+    {
+      "adapterType": "EXCEL",
+      "inputClass": "TABULAR_WORKBOOK_IMPORT"
+    },
+    {
+      "adapterType": "PROFESSIONAL_INTAKE",
+      "inputClass": "STRUCTURED_PROFESSIONAL_INPUT"
+    },
+    {
+      "adapterType": "DOCUMENT_EXTRACTION",
+      "inputClass": "EXTRACTED_CANDIDATE_FACTS"
+    }
+  ],
+  "rules": {
+    "adapterIsFactAuthority": false,
+    "adapterMayWriteCanonicalRealityDirectly": false,
+    "adapterMayBypassValidation": false,
+    "adapterMayUpgradeEvidenceToVerifiedByItself": false,
+    "adapterMayInferDeclinedOrUnknownValues": false,
+    "adapterMayExpandConsentScope": false
+  }
+}

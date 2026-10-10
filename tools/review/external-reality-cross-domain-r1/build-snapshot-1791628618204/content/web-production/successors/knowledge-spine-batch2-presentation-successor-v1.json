@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "PHI-OS-KNOWLEDGE-SPINE-BATCH2-PRESENTATION-SUCCESSOR-v1.0.0",
+  "work": "KNOWLEDGE-SPINE-BATCH2",
+  "status": "PRESENTATION_SUCCESSOR_NO_KNOWLEDGE_AUTHORITY",
+  "baselineCommit": "ef4d0b5a2e3a75e5557045c7e4bc59a2f3672cd5",
+  "predecessorVisualRegistry": {
+    "path": "content/web-production/registries/client-visual-asset-registry-v1.4.json",
+    "sha256": "9ebf499e1e2b103427e8b6f6f1878e6d2f67d2477f5090750ac165cc74ed3edc"
+  },
+  "sharedPresentation": {
+    "stylesheet": "assets/css/knowledge-spine.css",
+    "visualHydrator": "assets/js/pages/knowledge-spine-visuals.js",
+    "assetResolver": "assets/js/runtime/web-production/asset-resolver.js"
+  },
+  "surfaces": [
+    {
+      "surface": "LIBRARY",
+      "path": "library.html",
+      "hero": "HERO-002",
+      "support": [
+        "ILL-001"
+      ]
+    },
+    {
+      "surface": "ARTICLES",
+      "path": "articles.html",
+      "hero": "HERO-004",
+      "support": [
+        "ILL-002"
+      ]
+    },
+    {
+      "surface": "ARTICLE",
+      "path": "articles/*.html",
+      "master": "assets/js/knowledge/article-renderer.js",
+      "hero": "HERO-004",
+      "support": []
+    },
+    {
+      "surface": "FIGURES",
+      "path": "figures.html",
+      "hero": "HERO-005",
+      "support": [
+        "ILL-003"
+      ]
+    },
+    {
+      "surface": "FIGURE",
+      "path": "figure.html",
+      "hero": "HERO-005",
+      "support": [
+        "DYNAMIC_CANONICAL_FIGURE"
+      ]
+    },
+    {
+      "surface": "BOOKS",
+      "path": "books/index.html",
+      "hero": "HERO-003",
+      "support": [
+        "FIG-007",
+        "FIG-009"
+      ]
+    },
+    {
+      "surface": "BOOK_1",
+      "path": "books/reality-formation/index.html",
+      "hero": "HERO-019",
+      "support": [
+        "FIG-009"
+      ]
+    },
+    {
+      "surface": "BOOK_2",
+      "path": "books/reality-runtime/index.html",
+      "hero": "HERO-020",
+      "support": [
+        "FIG-009"
+      ]
+    },
+    {
+      "surface": "BOOK_3",
+      "path": "books/reality-continuity/index.html",
+      "hero": "HERO-021",
+      "support": [
+        "FIG-009"
+      ]
+    },
+    {
+      "surface": "BOOK_4",
+      "path": "books/reality-civilization/index.html",
+      "hero": "HERO-022",
+      "support": [
+        "FIG-009"
+      ]
+    },
+    {
+      "surface": "BOOK_5",
+      "path": "books/reality-navigation/index.html",
+      "hero": "HERO-023",
+      "support": [
+        "FIG-009"
+      ]
+    }
+  ],
+  "articleMaster": {
+    "staticArticleHtmlMutationRequired": false,
+    "masterRenderer": "assets/js/knowledge/article-renderer.js",
+    "pageController": "assets/js/pages/article.js",
+    "allPublishedArticleShellsInheritMaster": true,
+    "rendererBytePreserved": true,
+    "presentationDecorator": "assets/js/pages/knowledge-spine-visuals.js"
+  },
+  "bookDetailMaster": {
+    "renderer": "assets/js/pages/book-volume.js",
+    "bookRegistryAuthorityPreserved": true,
+    "partOwnershipAuthorityPreserved": true,
+    "fiveHeroMapping": {
+      "book-1": "HERO-019",
+      "book-2": "HERO-020",
+      "book-3": "HERO-021",
+      "book-4": "HERO-022",
+      "book-5": "HERO-023"
+    },
+    "rendererBytePreserved": true,
+    "presentationDecorator": "assets/js/pages/knowledge-spine-visuals.js"
+  },
+  "boundaries": {
+    "createsKnowledgeAuthority": false,
+    "createsPublicationAuthority": false,
+    "createsFigureAuthority": false,
+    "createsBookOwnershipAuthority": false,
+    "createsSecondAssetResolver": false,
+    "writesRuntimeState": false,
+    "changesEntitlement": false,
+    "changesMethodAuthority": false,
+    "changesPackageJson": false
+  },
+  "packageFreeze": {
+    "packageJsonSha256": "34f375ac53e0fe7e0d5267c7b6bec8149bd839c3d72edc870ce3af55be306dc0",
+    "packageLockSha256": "7059fc59f0e4963605efe517723b8ea316a046c0ba2fe8c9074abdd36252a176"
+  }
+}

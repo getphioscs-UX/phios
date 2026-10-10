@@ -1,0 +1,39 @@
+{
+  "registryCode": "PHI-OS-PR-W8-PROFESSIONAL-LIFECYCLE-STATE-REGISTRY-v2",
+  "registryVersion": "2.0.0",
+  "runtimeCode": "PR",
+  "work": "PR-W8",
+  "status": "canonical",
+  "states": [
+    {
+      "stateCode": "DRAFT",
+      "ordinal": 0
+    },
+    {
+      "stateCode": "REVIEWED",
+      "ordinal": 1
+    },
+    {
+      "stateCode": "APPROVED",
+      "ordinal": 2
+    },
+    {
+      "stateCode": "SIGNED",
+      "ordinal": 3
+    },
+    {
+      "stateCode": "RELEASED",
+      "ordinal": 4
+    }
+  ],
+  "strictlyIncreasing": true,
+  "skipAllowed": false,
+  "pwsMapping": {
+    "DRAFT": "deliverable:draft",
+    "REVIEWED": "deliverable:review_required gate completed",
+    "APPROVED": "deliverable:approved",
+    "SIGNED": "deliverable:signed",
+    "RELEASED": "deliverable:released"
+  },
+  "pwsCanonicalStatesRewritten": false
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/external-readers/normalized-chart.v1.json",
+  "title": "PHI OS External Reader Normalized Chart Container",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["chart_id", "reader_type", "reader_version", "input_summary", "chart_data", "derived_fields", "warnings", "uncertainties", "source", "verification_status", "generated_at", "updated_at"],
+  "properties": {
+    "chart_id": {"type": "string", "minLength": 1},
+    "reader_type": {"enum": ["human_design", "bazi", "ziwei", "gene_keys", "astrology"]},
+    "reader_version": {"type": "string", "minLength": 1},
+    "input_summary": {"type": "string"},
+    "chart_data": {"type": "object"},
+    "derived_fields": {"type": "object"},
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "uncertainties": {"type": "array", "items": {"type": "string"}},
+    "source": {"$ref": "source-label.schema.json"},
+    "verification_status": {"enum": ["unverified", "professional_review", "verified", "conflicting"]},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "runtime_evidence_written": {"const": false}
+  }
+}

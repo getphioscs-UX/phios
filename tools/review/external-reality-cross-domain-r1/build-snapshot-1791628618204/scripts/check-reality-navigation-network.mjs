@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';
+import {projectRealityNavigationGraph,assertRealityNavigationGraph} from '../functions/customer-projection/reality-navigation-graph-projection.js';
+const source={schemaVersion:'CURRENT_CUSTOMER_PROJECTION-v1',overview:{bundleId:'CONTROLLED-SESSION-001',createdAt:'2026-10-09T00:00:00Z'},currentReality:{reportedContext:['I have limited time.','I need to understand my options.'],importantFacts:['Not independently admitted'],constraints:['Source metadata missing']}};
+const graph=assertRealityNavigationGraph(projectRealityNavigationGraph({reality:source}));assert.equal(graph.G1.nodes.length,2);assert.equal(graph.G1.edges.length,0);assert.equal(graph.G2.nodes.length,0);assert.equal(graph.G3.nodes.length,0);
+assert.equal(projectRealityNavigationGraph({reality:source,authorized:false}).G1.nodes.length,0);
+assert.equal(projectRealityNavigationGraph({}).G1.nodes.length,0);
+assert.equal(projectRealityNavigationGraph({reality:{...source,overview:{...source.overview,createdAt:null}}}).G1.nodes.length,0);
+assert.throws(()=>assertRealityNavigationGraph({...graph,G1:{...graph.G1,edges:[{from:graph.G1.nodes[0].id,to:graph.G1.nodes[1].id}]}}),/GRAPH_EDGE_OWNER_ADAPTER_NOT_ADMITTED/);
+assert.throws(()=>assertRealityNavigationGraph({...graph,G1:{...graph.G1,nodes:[{...graph.G1.nodes[0],sourceVersion:null}]}}),/PROVENANCE/);
+assert.throws(()=>assertRealityNavigationGraph({...graph,G1:{...graph.G1,nodes:[{...graph.G1.nodes[0],permissions:{processingAllowed:false}}]}}),/PERMISSION/);
+assert.throws(()=>assertRealityNavigationGraph({...graph,governance:{...graph.governance,persisted:true}}),/READ_ONLY/);
+assert.equal(graph.G1.nodes[0].independentlyConfirmedFact,false);assert.equal(graph.governance.actionAdvancementAllowed,false);
+const receipt={state:'PASS_BOUNDED_SELF_REPORT_CONTRACT',scope:'Empty / isolated self-reports / missing metadata / denied access / permission / invented edge / write denial',futureScopesNotImplemented:['admitted owner edges','stale canonical sources','version mismatch','third-party grants','direction/position admission','qualifying historical diff'],providerCalls:0};fs.mkdirSync('content/production-closure/live-customer-commercial-convergence/reality-navigation-network-r1',{recursive:true});fs.writeFileSync('content/production-closure/live-customer-commercial-convergence/reality-navigation-network-r1/contract-qa.json',JSON.stringify(receipt,null,2)+'\n');console.log(receipt.state);

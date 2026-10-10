@@ -1,0 +1,3 @@
+import { publishAbl } from './lib/article-bilingual-production/abl-v1.mjs';
+const args=process.argv.slice(2);const ix=args.indexOf('--batch');const batchCode=ix>=0?args[ix+1]:'BATCH-001';
+try{const result=await publishAbl(process.cwd(),batchCode,{apply:true});console.log(`✓ ABL-5 ${batchCode}: ${result.status}`);console.log(`✓ English publish ${result.publishAuthorizedCount}; defer ${result.deferCount}; do_not_publish ${result.doNotPublishCount}.`);console.log('✓ Same-route English release uses the additive ABL manifest; frozen VAP-L10N manifest remains unchanged.');}catch(error){console.error(`ABL-5 BLOCKED: ${error.code||'ABL5_ERROR'}`);console.error(error.message);process.exitCode=2;}

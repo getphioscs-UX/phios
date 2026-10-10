@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-CROSS-R2-W23-COMPOSITION-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "0692037d3a3f522de9f0eb11d37f738df3a2bae6",
+  "work": "R2-W23/W37-W39",
+  "status": "ENGINEERING_ACCEPTED_CROSS_COMPOSITION_CUSTOMER_CUTOVER_CLOSED",
+  "realFiveMethodValidation": {
+    "crossClaims": 10,
+    "supportTypeCounts": {"COMMON":1,"COMPLEMENTARY":4,"TENSION":0,"CONTEXT_DEPENDENT":5,"OPEN":0},
+    "minimumDistinctCustomerPublishableMethodsPerClaim": 2,
+    "allCrossClaimsMeetMinimum": true,
+    "percentageMatchClaims": 0,
+    "methodWinnerClaims": 0,
+    "systemsProveClaims": 0
+  },
+  "categoryCoverage": {
+    "COMMON": "REAL_FIXTURE",
+    "COMPLEMENTARY": "REAL_FIXTURE",
+    "CONTEXT_DEPENDENT": "REAL_FIXTURE",
+    "TENSION": "DETERMINISTIC_PRECEDENCE_PROBE_ONLY_NO_REAL_FIXTURE_TENSION_INVENTED",
+    "OPEN": "DETERMINISTIC_PRECEDENCE_PROBE_ONLY_NO_REAL_FIXTURE_OPEN_INVENTED"
+  },
+  "gates": {
+    "twoCustomerPublishableRefsMinimum": true,
+    "xpfCannotSatisfyMinimum": true,
+    "hdrCannotSatisfyMinimum": true,
+    "smrProseBackfeedForbidden": true,
+    "methodVotingForbidden": true,
+    "truthConfidencePercentageForbidden": true,
+    "automaticConflictWinnerForbidden": true,
+    "newMethodMeaningForbidden": true,
+    "currentRealityAssumptionForbidden": true
+  },
+  "checker": "scripts/check-cross-composition-v2.mjs",
+  "next": "Cross benchmark / customer information architecture / human acceptance must be separately admitted before any combinedReading customer cutover.",
+  "customerCrossCutoverAllowed": false
+}

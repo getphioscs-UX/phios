@@ -1,0 +1,1635 @@
+# PHI OS
+
+# MASTER C
+
+# VALIDATED OPERATIONAL SUCCESSORS
+
+# VAL + RME + RNE-V2 + AIR + CIV
+
+# v2.0.0
+
+---
+
+# 0｜GLOBAL RULE
+
+本 Master 是：
+
+```text
+GATED FUTURE EXECUTION
+```
+
+不是：
+
+```text
+execute everything now
+```
+
+每一个 Runtime 必须先满足其 Gate。
+
+如果 Gate 未满足：
+
+```text
+BLOCKED
+```
+
+Codex 不得创建假的 production state。
+
+---
+
+# PART C1｜VAL FULL EXECUTION
+
+Trigger：
+
+```text
+VALIDATION_CORPUS_READY = TRUE
+```
+
+只有此时执行：
+
+```text
+VAL-W7–W16
+```
+
+---
+
+# VAL-W7｜Outcome Correlation
+
+比较：
+
+```text
+Readout / Navigation
+vs
+Observed Outcome
+```
+
+明确：
+
+```text
+correlation
+≠
+causation
+```
+
+---
+
+# VAL-W8｜Navigation Effectiveness
+
+消费：
+
+```text
+RNE navigation events
++
+LRM outcomes
++
+RCL eligible cases
+```
+
+测试：
+
+```text
+navigation utility
+not philosophical plausibility
+```
+
+---
+
+# VAL-W9｜Calibration
+
+校准：
+
+```text
+confidence
+
+probability-like claims
+
+threshold behavior
+```
+
+禁止：
+
+```text
+uncalibrated number
+displayed as calibrated confidence
+```
+
+---
+
+# VAL-W10｜False Positive Registry
+
+保存：
+
+```text
+system detected pattern / risk
+that was not supported
+```
+
+需要：
+
+```text
+runtime version
+case refs
+claim
+evidence
+review
+```
+
+---
+
+# VAL-W11｜False Negative Registry
+
+保存：
+
+```text
+relevant pattern / risk existed
+but system failed to identify it
+```
+
+---
+
+# VAL-W12｜Human vs AI
+
+比较：
+
+```text
+human-only
+
+AI-assisted
+
+system-only
+```
+
+不能把不同任务 population 混合比较。
+
+---
+
+# VAL-W13｜Professional Validation
+
+由：
+
+```text
+qualified professional
+```
+
+进行适当 capability review。
+
+---
+
+# VAL-W14｜Validation Result Registry
+
+字段至少：
+
+```text
+validationStudyId
+capability
+runtimeVersion
+corpus
+populationBoundary
+methodology
+metric
+result
+confidence
+limitations
+status
+```
+
+状态：
+
+```text
+SUPPORTED
+
+PROVISIONAL
+
+FAILED
+
+INSUFFICIENT_EVIDENCE
+```
+
+---
+
+# VAL-W15｜Research Handoff
+
+输出：
+
+```text
+methodology
+results
+corpusRefs
+limitations
+```
+
+交：
+
+```text
+RCL Research Projection
+
+MRM-S Research Eligibility if current owner exists
+
+existing publication authority
+```
+
+不得建立第二套 research runtime。
+
+---
+
+# VAL-W16｜Freeze
+
+```text
+VAL FROZEN v1
+```
+
+VAL Freeze 独立。
+
+不得与其他 MRM-S / research freeze 合并。
+
+---
+
+# PART C2｜RME
+
+# REALITY METRICS ENGINE
+
+硬依赖：
+
+```text
+LRM
++
+RCL
++
+VAL
+↓
+RME
+```
+
+Book VII Indicator：
+
+```text
+≠
+RME Metric
+```
+
+---
+
+# RME-W0｜Metrics Audit
+
+全仓审计：
+
+```text
+scores
+ratings
+indexes
+confidence numbers
+compatibility scores
+stability scores
+```
+
+标记：
+
+```text
+AUTHORIZED
+PROVISIONAL
+VISUAL_ONLY
+UNSUPPORTED
+RETIRE
+```
+
+---
+
+# RME-W1｜Metric Contract
+
+每个 metric：
+
+```text
+construct
+input
+formula
+range
+missingness
+confidence
+version
+validationRefs
+populationBoundary
+```
+
+---
+
+# RME-W2｜RSI
+
+```text
+Reality Stability Index
+```
+
+初期：
+
+```text
+PROVISIONAL
+```
+
+直到 validation 支持升级。
+
+---
+
+# RME-W3｜RLI
+
+```text
+Reality Load Index
+```
+
+初期：
+
+```text
+PROVISIONAL
+```
+
+---
+
+# RME-W4｜RDI
+
+```text
+Reality Drift Index
+```
+
+必须消费：
+
+```text
+LRM
+```
+
+---
+
+# RME-W5｜RRI
+
+```text
+Reality Recovery Index
+```
+
+至少需要：
+
+```text
+degradation
+recovery
+longitudinal observation
+```
+
+---
+
+# RME-W6｜Missingness
+
+硬规则：
+
+```text
+missing
+≠
+zero
+```
+
+---
+
+# RME-W7｜Metric Confidence
+
+必须分开：
+
+```text
+metricValue
+
+metricConfidence
+```
+
+---
+
+# RME-W8｜Normalization
+
+禁止：
+
+```text
+unvalidated cross-population norm
+```
+
+任何 norm 必须记录：
+
+```text
+population
+sample
+version
+validation
+```
+
+---
+
+# RME-W9｜Versioning
+
+Formula change：
+
+```text
+new metric version
+```
+
+历史值：
+
+```text
+immutable
+```
+
+---
+
+# RME-W10｜Explainability
+
+用户应能看到：
+
+```text
+why this value
+
+which inputs participated
+
+which inputs were missing
+
+which limitations exist
+```
+
+---
+
+# RME-W11｜Calibration Binding
+
+正式：
+
+```text
+VAL calibrates
+↓
+RME consumes calibration
+```
+
+RME 自己不能宣布：
+
+```text
+CALIBRATED
+```
+
+---
+
+# RME-W12｜Validation Status
+
+```text
+PROVISIONAL
+
+VALIDATION_SUPPORTED
+
+CALIBRATED
+
+FAILED_VALIDATION
+
+REVALIDATION_REQUIRED
+```
+
+---
+
+# RME-W13｜Presentation
+
+正式：
+
+```text
+RME
+↓
+CPR
+```
+
+Customer UI 不自行重新解释 metric。
+
+---
+
+# RME-W14｜Freeze
+
+只有依赖真正满足：
+
+```text
+RME FROZEN v1
+```
+
+---
+
+# PART C3｜RNE-V2
+
+# VALIDATED NAVIGATION SUCCESSOR
+
+Book VIII：
+
+```text
+defines Navigation Knowledge
+```
+
+RNE-V2：
+
+```text
+executes Navigation Intelligence
+```
+
+禁止：
+
+```text
+Book VIII Navigation Runtime #2
+```
+
+---
+
+# RNE ADMISSION GATE
+
+可以进入 RNE Pilot 的最低条件：
+
+```text
+BOOK VIII NAVIGATION KNOWLEDGE READY
+
+Canonical Reality active
+
+RRE active
+
+LRM Foundation active
+
+RCL Foundation active
+```
+
+注意：
+
+```text
+RNE Pilot
+≠
+RNE Validated
+```
+
+RNE Freeze 需要真实 outcome loop 与 VAL。
+
+---
+
+# RNE-W0｜Authority
+
+冻结：
+
+```text
+RNE supports decision
+
+RNE does not command decision
+```
+
+---
+
+# RNE-W1｜Current Position
+
+读取：
+
+```text
+Canonical Reality
+
+RRE Readout
+
+Book VII governed observations
+
+Constraints
+
+Unknown
+```
+
+注意：
+
+不是旧：
+
+```text
+Book VI observations
+```
+
+---
+
+# RNE-W2｜Target State
+
+只能来自：
+
+```text
+customer
+
+professional
+
+authorized service
+```
+
+禁止系统自创。
+
+---
+
+# RNE-W3｜Constraint Model
+
+消费：
+
+```text
+Book VIII Constraint Schema
+```
+
+知识 schema 属于 Book VIII。
+
+实例属于 RNE。
+
+---
+
+# RNE-W4｜Option Generation
+
+生成：
+
+```text
+bounded options
+```
+
+禁止：
+
+```text
+infinite generic suggestions
+```
+
+---
+
+# RNE-W5｜Risk
+
+输出：
+
+```text
+known risk
+unknown
+dependency
+```
+
+---
+
+# RNE-W6｜Recovery Window
+
+描述：
+
+```text
+reversibility
+
+recoverability
+
+point of no easy return
+```
+
+---
+
+# RNE-W7｜Decision Support
+
+至少显示：
+
+```text
+tradeoff
+dependency
+reversibility
+observation point
+```
+
+---
+
+# RNE-W8｜Scenario Simulation
+
+硬边界：
+
+```text
+scenario
+≠
+prediction
+```
+
+---
+
+# RNE-W9｜Route Runtime
+
+```text
+current
+→
+intermediate
+→
+target
+```
+
+保持 bounded route。
+
+---
+
+# RNE-W10｜JR Integration
+
+正式分工：
+
+```text
+JR
+=
+workflow / journey progression
+
+RNE
+=
+navigation intelligence
+```
+
+---
+
+# RNE-W11｜Professional Boundary
+
+高风险 / regulated / professional domains：
+
+```text
+may require PR
+or qualified professional
+```
+
+RNE 不越权。
+
+---
+
+# RNE-W12｜Outcome Feedback
+
+消费：
+
+```text
+Action
+Outcome
+Reality Diff
+LRM
+```
+
+---
+
+# RNE-W13｜VAL Handoff
+
+正式：
+
+```text
+RNE
+↓
+Navigation Event
+↓
+LRM + RCL
+↓
+VAL-W8
+↓
+Validation Result
+```
+
+---
+
+# RNE-W14｜Freeze
+
+只有真实：
+
+```text
+Runtime use
++
+Outcome loop
++
+VAL evidence
++
+human acceptance
+```
+
+以后才允许：
+
+```text
+RNE FROZEN v1
+```
+
+否则最多：
+
+```text
+RNE PILOT / PROVISIONAL
+```
+
+---
+
+# PART C4｜AIR
+
+# AI RUNTIME ASSISTANCE
+
+AIR 永远是：
+
+```text
+successor auxiliary layer
+```
+
+不是 Authority。
+
+---
+
+# AIR-W0｜Authority Boundary
+
+冻结：
+
+```text
+AI ≠ Knowledge Authority
+
+AI ≠ Meaning Authority
+
+AI ≠ Reality Truth
+
+AI ≠ Professional Authority
+
+AI ≠ Metric Authority
+
+AI ≠ Navigation Goal Authority
+```
+
+---
+
+# AIR-W1｜Provider Governance
+
+统一：
+
+```text
+OpenAI
+Workers AI
+future provider
+```
+
+全部接：
+
+```text
+existing Model Router
+```
+
+禁止新 provider runtime。
+
+---
+
+# AIR-W2｜Input Minimization
+
+严格：
+
+```text
+minimum required input
+```
+
+不得为了“更聪明”默认传输完整用户 history。
+
+---
+
+# AIR-W3｜Reading Assistant
+
+辅助：
+
+```text
+RRE
+```
+
+不拥有 RRE。
+
+---
+
+# AIR-W4｜Learning Assistant
+
+辅助：
+
+```text
+ALR
+```
+
+---
+
+# AIR-W5｜Navigation Assistant
+
+辅助：
+
+```text
+RNE
+```
+
+不能绕过 RNE。
+
+---
+
+# AIR-W6｜Professional Assistant
+
+只辅助：
+
+```text
+PR
+```
+
+不替代 professional authority。
+
+---
+
+# AIR-W7｜Uncertainty
+
+每个适用 AI output 支持：
+
+```text
+known
+inferred
+unknown
+limitations
+```
+
+---
+
+# AIR-W8｜Explainability
+
+至少记录：
+
+```text
+model
+provider
+promptContract
+inputClasses
+references
+runtimeVersion
+```
+
+---
+
+# AIR-W9｜Human Override
+
+审计：
+
+```text
+originalAIResult
+humanRevision
+reason
+actor
+time
+```
+
+---
+
+# AIR-W10｜Provider Audit
+
+验证：
+
+```text
+provider
+model
+eligibility
+data policy
+cost class
+fallback
+```
+
+---
+
+# AIR-W11｜Human-AI Alignment
+
+进入：
+
+```text
+VAL-W12
+```
+
+---
+
+# AIR-W12｜Proactive Observation
+
+允许：
+
+```text
+this may deserve observation
+```
+
+禁止：
+
+```text
+this is happening
+```
+
+除非已有正式 authority evidence。
+
+---
+
+# AIR-W13｜Proactive Navigation
+
+允许提示：
+
+```text
+review may be useful
+```
+
+禁止未经授权改变 Journey。
+
+---
+
+# AIR-W14｜VAL Handoff
+
+所有 substantive AIR capability：
+
+```text
+must be validation eligible
+```
+
+---
+
+# AIR-W15｜Freeze
+
+只有对应能力验证与治理完成：
+
+```text
+AIR FROZEN v1
+```
+
+---
+
+# PART C5｜CIV
+
+# CIVILIZATION RUNTIME
+
+CIV 是长期独立 Runtime。
+
+它与 Book V、Book VI 都必须分开。
+
+---
+
+# CIV-W0｜Boundary
+
+区分：
+
+```text
+INDIVIDUAL
+
+COLLECTIVE
+
+INSTITUTIONAL
+
+CIVILIZATIONAL
+```
+
+---
+
+# CIV-W1｜Collective Data Governance
+
+定义：
+
+```text
+aggregation
+privacy
+cohort
+source authority
+```
+
+---
+
+# CIV-W2｜Institutional Data
+
+建立独立 collective/institutional data contract。
+
+---
+
+# CIV-W3｜Economic Data
+
+---
+
+# CIV-W4｜Environmental Data
+
+---
+
+# CIV-W5｜Technology Data
+
+---
+
+# CIV-W6｜Population Data
+
+---
+
+# CIV-W7｜Collective Runtime Model
+
+这是：
+
+```text
+live collective runtime
+```
+
+不是：
+
+```text
+Book V Case Registry
+```
+
+也不是：
+
+```text
+Book VI Dossier Registry
+```
+
+---
+
+# CIV-W8｜Civilization State
+
+正式：
+
+```text
+Canonical Civilization State
+```
+
+必须来自：
+
+```text
+governed current collective data
+```
+
+不是：
+
+```text
+historical poster
+
+Book V snapshot
+
+Book VI dossier alone
+```
+
+---
+
+# CIV-W9｜Civilization Drift
+
+需要：
+
+```text
+civilization-level longitudinal memory
+```
+
+禁止直接复制 individual LRM schema 后假装完成。
+
+---
+
+# CIV-W10｜Civilization Metrics
+
+禁止直接复制：
+
+```text
+RSI
+RLI
+RDI
+RRI
+```
+
+Civilization metric 必须有：
+
+```text
+independent construct validation
+```
+
+---
+
+# CIV-W11｜Collective Navigation
+
+RNE 原理可以作为参考。
+
+但：
+
+```text
+individual navigation
+≠
+collective governance decision
+```
+
+---
+
+# CIV-W12｜Policy Simulation
+
+明确：
+
+```text
+simulation
+≠
+prediction
+```
+
+---
+
+# CIV-W13｜Resource Allocation
+
+只允许：
+
+```text
+model
+support
+scenario comparison
+```
+
+不能未经授权成为真实 governance authority。
+
+---
+
+# CIV-W14｜Outcome Feedback
+
+必须消费：
+
+```text
+real collective outcome
+```
+
+---
+
+# CIV-W15｜Artificial Civilization Layer
+
+可与 AIR 连接。
+
+但 AI participation：
+
+```text
+≠ AI authority over civilization
+```
+
+---
+
+# CIV-W16｜Civilization Validation
+
+需要未来独立：
+
+```text
+CIV-VAL
+```
+
+或正式 civilization-scale VAL profile。
+
+硬规则：
+
+```text
+individual validation
+≠
+civilization validation
+```
+
+---
+
+# CIV-W17｜Freeze
+
+长期只有 civilization-scale requirements 满足后：
+
+```text
+CIV FROZEN v1
+```
+
+当前不得提前宣布。
+
+---
+
+# PART C6｜CIV ADMISSION BRIDGE
+
+正式关系不是：
+
+```text
+AIR
+↓
+CIV
+```
+
+而是：
+
+```text
+Book V
+historical / comparative knowledge
+        │
+
+Book VI
+reconfiguration / current structured reference
+        │
+
+Book VII
+governed observation grammar
+        │
+
+Validated collective evidence
+        │
+
+Civilization-scale longitudinal data
+        │
+
+CIV ADMISSION GATE
+        ↓
+CIV
+```
+
+Book VIII individual Navigation 不自动成为 collective governance Navigation。
+
+---
+
+# PART C7｜GLOBAL DEPENDENCY CHECKER
+
+必须检查：
+
+```text
+RME requires:
+LRM
+RCL
+VAL
+
+RNE Pilot requires:
+Book VIII Knowledge
+Reality Runtime
+RRE
+LRM
+RCL
+
+RNE Freeze requires:
+Outcome Loop
+VAL evidence
+
+AIR substantive validation requires:
+VAL
+
+CIV metrics require:
+civilization-scale validation
+```
+
+---
+
+# PART C8｜UNKNOWN PRESERVATION
+
+必须覆盖：
+
+```text
+VAL
+RME
+RNE
+AIR
+CIV
+```
+
+并保留：
+
+```text
+UNKNOWN
+
+INSUFFICIENT_EVIDENCE
+
+CONFLICTING_EVIDENCE
+
+OUTSIDE_AUTHORITY
+```
+
+---
+
+# PART C9｜FREEZE ORDER
+
+不能一次 Freeze 所有系统。
+
+正确：
+
+```text
+VAL FOUNDATION
+↓
+Validation Corpus Ready
+↓
+VAL Full
+↓
+RME when eligible
+```
+
+并行：
+
+```text
+Book VIII Knowledge
++
+Reality Runtime
++
+LRM / RCL
+↓
+RNE Pilot
+↓
+Observed Outcomes
+↓
+VAL-W8
+↓
+RNE Validation
+↓
+RNE Freeze
+```
+
+AIR：
+
+```text
+Capability
+↓
+Pilot
+↓
+VAL
+↓
+AIR Freeze
+```
+
+CIV：
+
+```text
+LONG TERM ONLY
+```
+
+---
+
+# PART C10｜GLOBAL EXECUTION MAP
+
+```text
+────────────────────────────────────────
+CURRENT KNOWLEDGE WORK
+────────────────────────────────────────
+
+BOOK V
+Reality Differentiation
+Civilization Atlas
+Publication / Article / Ask
+↓
+Book V Knowledge Ready
+
+
+BOOK VI
+Reality Reconfiguration
+Reconfiguration Living Atlas
+↓
+Book VI Knowledge Ready
+
+
+BOOK VII
+Reality Observation
+Observation Lab
+↓
+Book VII Knowledge Ready
+
+
+BOOK VIII
+Reality Navigation
+Navigation Explorer
+↓
+Book VIII Knowledge Ready
+
+
+────────────────────────────────────────
+FIRST GOVERNED PILOT
+────────────────────────────────────────
+
+First real governed Pilot
+↓
+START IN PARALLEL:
+
+LRM
++
+RCL
+
+not:
+wait for many cases
+
+
+────────────────────────────────────────
+VALIDATION FOUNDATION
+────────────────────────────────────────
+
+VAL-W0–W6
+
+contracts / protocol
+↓
+
+
+────────────────────────────────────────
+CASE MATURITY
+────────────────────────────────────────
+
+M0
+→ M1
+→ M2
+→ M3
+→ M4
+→ M5
+→ M6
+→ M7
+
+
+────────────────────────────────────────
+VALIDATION CORPUS READY
+────────────────────────────────────────
+
+VAL-W7–W16
+
+↓
+
+Validation Result Registry
+
+
+────────────────────────────────────────
+METRICS
+────────────────────────────────────────
+
+LRM
++
+RCL
++
+VAL
+↓
+RME
+
+
+────────────────────────────────────────
+NAVIGATION
+────────────────────────────────────────
+
+Book VIII Navigation Knowledge
++
+Reality Runtime
++
+RRE
++
+LRM
++
+RCL
+↓
+RNE-V2 PILOT
+
+↓
+
+Outcome
+
+↓
+
+LRM / RCL
+
+↓
+
+VAL-W8
+
+↓
+
+Validated RNE
+
+
+────────────────────────────────────────
+AI
+────────────────────────────────────────
+
+AIR
+↓
+assist only
+↓
+VAL
+
+
+────────────────────────────────────────
+LONG TERM
+────────────────────────────────────────
+
+CIV
+
+↓
+
+separate civilization-scale evidence
+validation
+governance
+```
+
+---
+
+# PART C11｜FINAL CODEX RULE
+
+Codex 必须始终判断：
+
+```text
+CURRENTLY EXECUTABLE
+
+GATE SATISFIED
+
+BLOCKED
+
+NOT_RUN
+```
+
+绝对禁止：
+
+```text
+implement future phase merely because
+its specification exists in this file
+```
+
+如果当前只满足 Master A：
+
+```text
+do Master A
+```
+
+如果第一个 governed Pilot 尚未完成：
+
+```text
+Master B LRM/RCL
+=
+BLOCKED
+```
+
+如果 Validation Corpus 未 Ready：
+
+```text
+VAL-W7+
+=
+BLOCKED
+```
+
+如果 LRM / RCL / VAL 未满足：
+
+```text
+RME
+=
+BLOCKED
+```
+
+如果 RNE 没有真实 outcome loop：
+
+```text
+RNE FROZEN
+=
+BLOCKED
+```
+
+如果没有 civilization-scale governed evidence：
+
+```text
+CIV production
+=
+BLOCKED
+```

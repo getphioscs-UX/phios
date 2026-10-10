@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-MOOMOO-FIRST-DATA-PACKAGE-IMPORT-v1.0.0",
+  "version": "1.0.0",
+  "status": "TEMPLATE_NOT_DATA",
+  "providerId": "MOOMOO_OPENAPI",
+  "instructions": [
+    "Create a new local JSON file from this template after an authorized Moomoo retrieval.",
+    "Do not paste access tokens, API keys, authorization headers or account identifiers.",
+    "Each payloadId must be unique and must correspond to exactly one capability/request/instrument retrieval unit.",
+    "rawResponse must contain only the provider response body required for lineage/digest.",
+    "normalizedRecords must preserve exact fieldPath lineage."
+  ],
+  "payloadTemplate": {
+    "payloadId": "REPLACE_ME",
+    "providerId": "MOOMOO_OPENAPI",
+    "capability": "HISTORY_KLINE",
+    "retrievedAt": "REPLACE_WITH_ISO_TIMESTAMP",
+    "request": {
+      "requestId": "MOOMOO-P1-KLINE-BROAD-SECTOR",
+      "market": "US",
+      "symbols": [
+        "US.SPY"
+      ],
+      "parameters": {
+        "start": "2022-01-01",
+        "end": "2026-10-02",
+        "interval": "DAY",
+        "adjustment": "QFQ"
+      }
+    },
+    "rawResponse": {},
+    "normalizedRecords": [
+      {
+        "fieldPath": "REPLACE_WITH_PROVIDER_FIELD_PATH",
+        "instrument": "US.SPY",
+        "timestamp": "REPLACE_WITH_PROVIDER_TIMESTAMP",
+        "value": null,
+        "unit": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const x=j('content/product-visual-platform-r1/static-assets/pvp-r1-vis-w30-static-production-asset-registry-v1.json');
+const shell=fs.readFileSync('assets/customer-ui/js/shell.js','utf8');
+const atmosphere=fs.readFileSync('assets/customer-ui/js/static-atmosphere.js','utf8');
+const css=fs.readFileSync('assets/customer-ui/base.css','utf8');
+assert.equal(x.work,'PVP-R1-VIS-W30');
+assert.equal(x.status,'OWNER_UPLOAD_CONFIRMED_BINDINGS_PREPARED_W31_REQUIRED');
+assert.equal(x.r2.uploadActionPerformedByThisWork,false);
+assert.equal(x.r2.ownerConfirmedAssetsAlreadyUploaded,true);
+assert.equal(x.authority.secondAssetAuthorityCreated,false);
+assert.equal(x.backgroundBindings.length,8);
+assert.equal(x.coverage.selectedCount,12);
+assert.equal(x.coverage.allRequestedCategoriesBound,true);
+assert.equal(x.coverage.allEightMasterBackgroundsBound,true);
+const ill=x.existingRepresentativeBindings.find(a=>a.assetId==='ILL-001');assert.equal(ill.objectKey,'images/illustrations/PHIOS-ILLUSTRATION-LIBRARY-KNOWLEDGE-LANDSCAPE-v1.webp');
+assert.equal(x.pathReconciliation?.status,'OWNER_R2_PATH_CONFIRMED_PENDING_W31_REVERIFY');
+assert.ok(fs.existsSync(x.pathReconciliation.ref),'W31 path reconciliation record missing');
+for(const b of x.backgroundBindings){
+  assert.match(b.objectKey,/^images\/background\/PHI-OS-[A-Z0-9-]+\.webp$/);
+  assert.ok(!b.objectKey.includes('-v1.webp'),`background path must match owner R2 object ${b.assetId}`);
+  assert.equal(b.contentType,'image/webp');
+  assert.equal(b.ownerReportedUploaded,true);
+  assert.equal(b.activationState,'PENDING_W31_REMOTE_VERIFICATION');
+}
+assert.match(shell,/installStaticAtmosphere/);
+assert.match(atmosphere,/REMOTE_VERIFIED_ALL_SELECTED/);
+assert.match(atmosphere,/fail-closed/);
+for(const id of ['001','002','003','004'])assert.match(css,new RegExp(`--pvp-vis-tex-${id}`));
+for(const id of ['001','002','003','004'])assert.match(css,new RegExp(`--pvp-vis-dec-${id}`));
+assert.equal(x.boundaries.unverifiedBackgroundActivated,false);
+assert.equal(x.boundaries.phase13Authorized,false);
+console.log('✓ PVP W30 passed: owner-reported R2 assets are bound to the existing authority model; all 8 backgrounds are consumer-bound but remain fail-closed pending W31.');

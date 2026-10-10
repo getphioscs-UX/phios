@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {BASELINE,ROOT,readJson} from './lib/knowledge-answer-projection/kap-grounding-v1.mjs';
+import {evaluateKapCoverage} from '../functions/_lib/knowledge-answer-grounding.js';
+const c=readJson(`${ROOT}/contracts/kap-w10-coverage-evaluation-contract-v1.json`); const p=readJson(`${ROOT}/registries/kap-w10-coverage-policy-v1.json`); const bundle=readJson(`${ROOT}/fixtures/knowledge-grounding-bundle.valid.json`); const retrieval=readJson(`${ROOT}/fixtures/kap-knowledge-retrieval.hybrid.valid.json`); const expected=readJson(`${ROOT}/fixtures/kap-coverage-decision.valid.json`);
+assert.equal(c.step,'KAP-W10'); assert.equal(c.baselineCommit,BASELINE); assert.deepEqual(p.statuses,['STRONG_COVERAGE','PARTIAL_COVERAGE','INSUFFICIENT_COVERAGE','OUT_OF_SCOPE']); assert.equal(p.rules.outOfScopeRequiresExplicitScopeDisposition,true);
+const strong=evaluateKapCoverage({bundle,retrieval}); assert.deepEqual(strong,expected); assert.equal(strong.status,'STRONG_COVERAGE'); assert.equal(strong.answerCompositionEligible,true); assert.equal(strong.unknownDisclosureRequired,true); assert.equal(strong.aiRequired,false); assert.equal(strong.realityJourneyRequired,false);
+const partialRetrieval={...retrieval,published:{...retrieval.published,coverage:{level:'limited'}},coverage:{...retrieval.coverage,level:'manuscript',published:'limited'}}; const partial=evaluateKapCoverage({bundle,retrieval:partialRetrieval}); assert.equal(partial.status,'PARTIAL_COVERAGE');
+const emptyBundle={...bundle,sources:[],unknowns:[{code:'NO_GROUNDED_SOURCE_MATCH'}]}; const insufficient=evaluateKapCoverage({bundle:emptyBundle,retrieval:{...retrieval,published:{coverage:{level:'none'}},manuscript:{status:'no_match',records:[],errors:[]}}}); assert.equal(insufficient.status,'INSUFFICIENT_COVERAGE'); assert.equal(insufficient.answerCompositionEligible,false);
+const out=evaluateKapCoverage({bundle,retrieval,scopeDisposition:'OUT_OF_SCOPE'}); assert.equal(out.status,'OUT_OF_SCOPE'); assert.equal(out.answerCompositionEligible,false);
+for(const x of [strong,partial,insufficient,out]){assert.equal(x.guidedReadingRequired,false); assert.equal(x.realityJourneyRequired,false); assert.equal(x.aiRequired,false); assert.equal(x.createsAuthority,false);}
+console.log('✓ KAP-W10 Coverage Evaluation passed.');

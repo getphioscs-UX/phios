@@ -1,0 +1,23 @@
+{
+  "policyCode": "CMR-MEANING-KNOWLEDGE-COVERAGE-v1",
+  "policyVersion": "1.0.0",
+  "status": "validation_only",
+  "outcomes": [
+    "full_coverage",
+    "partial_coverage",
+    "no_coverage"
+  ],
+  "rules": {
+    "full_coverage": "Every referenced Knowledge Node has a published locale Semantic Profile and Published Knowledge Graph membership.",
+    "partial_coverage": "At least one but not every referenced Knowledge Node is published for the requested locale.",
+    "no_coverage": "No referenced Knowledge Node is published for the requested locale."
+  },
+  "interpretationEligibility": {
+    "full_coverage": true,
+    "partial_coverage": false,
+    "no_coverage": false
+  },
+  "failClosed": true,
+  "providerFallbackAllowed": false,
+  "paidFallbackAllowed": false
+}

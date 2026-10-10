@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "KPP Production Plan Revision Proposal v2",
+  "type": "object",
+  "required": [
+    "proposalCode",
+    "nodeCode",
+    "previousPlanReference",
+    "triggerType",
+    "supportingRelationshipReferences",
+    "proposedChange",
+    "status"
+  ],
+  "properties": {
+    "proposalCode": {
+      "type": "string"
+    },
+    "nodeCode": {
+      "type": "string"
+    },
+    "previousPlanReference": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "triggerType": {
+      "const": "ACCEPTED_LEGACY_SUPPORTING_RELATIONSHIP"
+    },
+    "supportingRelationshipReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "proposedChange": {
+      "enum": [
+        "REASSESS_ONLY",
+        "ROLE_CHANGE_PROPOSED",
+        "OUTPUT_CHANGE_PROPOSED",
+        "PRIORITY_REVIEW_PROPOSED",
+        "NO_CHANGE"
+      ]
+    },
+    "status": {
+      "enum": [
+        "PROPOSED",
+        "HUMAN_REVIEW_REQUIRED",
+        "ACCEPTED",
+        "REJECTED",
+        "DEFERRED"
+      ]
+    },
+    "automaticApplicationAllowed": {
+      "const": false
+    }
+  }
+}

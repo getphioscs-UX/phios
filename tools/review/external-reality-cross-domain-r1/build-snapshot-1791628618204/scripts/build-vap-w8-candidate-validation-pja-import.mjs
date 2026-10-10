@@ -1,0 +1,10 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { buildVapW8Plan, buildVapW8Activation, stableJson, validationProjection, VAP_W8_ACTIVATION, VAP_W8_VALIDATION } from './lib/visual-article-production/candidate-validation-pja-import-v1.mjs';
+const root = process.cwd();
+const write = async (relative, value) => { const file = path.join(root, relative); await fs.mkdir(path.dirname(file), { recursive: true }); await fs.writeFile(file, stableJson(value)); };
+const plan = await buildVapW8Plan(root);
+await write(VAP_W8_VALIDATION, validationProjection(plan));
+await write(VAP_W8_ACTIVATION, await buildVapW8Activation(root));
+console.log(`✓ VAP-W8 validation built: ${plan.summary.validationPassedCount}/${plan.summary.providerCandidateCount} candidates valid.`);
+console.log(`✓ PJA schema-compatible: ${plan.summary.pjaSchemaCompatibleCount}/${plan.summary.providerCandidateCount}.`);

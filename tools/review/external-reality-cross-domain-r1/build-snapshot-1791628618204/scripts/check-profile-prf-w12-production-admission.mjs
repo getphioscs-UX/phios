@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const h=read('content/profile/review/profile-prf-w12-human-review-results-v1.json');
+const a=read('content/profile/acceptance/profile-prf-w12-production-admission-v1.json');
+const i=read('content/profile/freeze/profile-production-freeze-index-v1.json');
+const c=read('content/profile/acceptance/profile-customer-cutover-eligibility-v1.json');
+assert.deepEqual({accepted:h.accepted,rejected:h.rejected,pending:h.pending},{accepted:24,rejected:0,pending:0});
+assert.equal(a.status,'PRODUCTION_ADMITTED_CUTOVER_ELIGIBLE');assert.equal(a.gates.requiredFreezePromotion,'PASS_8_OF_8');
+assert.equal(i.status,'ACTIVE_8_OF_8');assert.equal(i.activeFreezeCount,8);
+assert.equal(c.status,'ELIGIBLE_NOT_EXECUTED');assert.equal(c.effects.cutoverExecuted,false);
+console.log('✓ PRF-W12 production promotion gate passed: 24/24 human acceptance -> 8/8 active freezes -> customer cutover eligible/not executed.');

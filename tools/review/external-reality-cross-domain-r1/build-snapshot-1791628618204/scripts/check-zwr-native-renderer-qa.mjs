@@ -1,0 +1,25 @@
+// Offline transport tests. These receipts are never written to remote storage.
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {buildAcceptedZwrRendererCandidate,sourceAcceptanceDigest} from './lib/zwr-native-renderer-candidate.mjs';
+import {runZwrNativeRendererAcceptance} from '../functions/report-delivery/zwr-native-renderer-acceptance.js';
+import {assertMethodGeneration} from '../functions/report-delivery/method-render-contract.js';
+const hash=s=>createHash('sha256').update(s).digest('hex'),candidate=await buildAcceptedZwrRendererCandidate(),text=JSON.stringify(candidate),contract=await assertMethodGeneration(candidate),root='qa/method-delivery/ZWR/';
+globalThis.fetch=async()=>{throw Error('PROVIDER_OR_NETWORK_FORBIDDEN');};
+export function fixture({badRun=0,tamper=false}={}){
+ const objects=new Map([[root+'renderer-manifest.json',JSON.stringify({schemaVersion:'ZWR_NATIVE_RENDERER_QA_MANIFEST_V1',authorized:true,scope:'DEPLOYED_PRIVATE_BROWSER',sourceAcceptanceDigest,candidateKey:root+'accepted-renderer-candidate.json',candidateDigest:hash(text),semanticSnapshotId:candidate.snapshot.semanticSnapshotId})],[root+'accepted-renderer-candidate.json',tamper?text+' ':text]]),writes=[];let calls=0,inFlight=0;
+ const env={PHIOS_ENVIRONMENT:'qa',PRIVATE_REPORTS:{async get(k){const value=objects.get(k);return value===undefined?null:{json:async()=>JSON.parse(value),text:async()=>value};},async put(k,v){writes.push(k);objects.set(k,v);}},METHOD_REPORT_RENDERER:{async fetch(){assert.equal(inFlight++,0);await Promise.resolve();const run=++calls;inFlight--;if(run===badRun)return Response.json({stage:'VERIFY',reason:'RENDER_VERIFICATION_FAILED'},{status:422});const html=contract.renderFunction();return Response.json({html,verification:{schemaVersion:'METHOD_BROWSER_VERIFICATION_V1',verifier:'CLOUDFLARE_BROWSER_QA',passed:true,semanticSnapshotId:candidate.snapshot.semanticSnapshotId,snapshotId:candidate.snapshot.semanticSnapshotId,pagePlanDigest:candidate.snapshot.semanticContent.vfrLineage.pagePlanDigest,publicationIrDigest:candidate.snapshot.semanticContent.visualReportIr.publicationIrDigest,sourceResultDigest:candidate.snapshot.semanticContent.vfrDeepManuscriptDigest,rendererVersion:contract.rendererVersion,compositionVersion:contract.compositionVersion,verificationMode:contract.verificationMode,pageSequenceValid:true,hiddenOrZeroGeometryCount:0,hiddenRequiredContentCount:0,expectedPageCount:contract.expectedPageCount,actualPageCount:contract.expectedPageCount,pageCount:contract.expectedPageCount,diagramRegistryValid:true,undefinedText:false,brokenImages:0,overflowCount:0,errorCount:0,outputDigest:hash(html),timings:{totalRequestMs:1},htmlBytes:Buffer.byteLength(html),imageCount:15}});}}};
+ return {env,objects,writes,get calls(){return calls;}};
+}
+const success=fixture();const result=await runZwrNativeRendererAcceptance(success.env);assert.equal(result.sequentialRuns,8);assert.equal(result.productionAdmissionGranted,false);assert.equal(success.calls,8);assert.equal(success.writes.at(-1),root+'generation-admission.json');
+const admission=JSON.parse(success.objects.get(root+'generation-admission.json')),receiptText=success.objects.get(admission.rendererReceiptKey);assert.equal(hash(receiptText),admission.rendererAcceptanceDigest);assert.deepEqual(JSON.parse(receiptText).measurements.map(x=>x.groupSize),[3,3,3,5,5,5,5,5]);
+for(const badRun of [1,4,8]){const f=fixture({badRun});await assert.rejects(()=>runZwrNativeRendererAcceptance(f.env),{code:'NATIVE_RENDERER_RUN_FAILED'});assert.equal(f.writes.length,0);assert.equal(f.calls,badRun);}
+const tampered=fixture({tamper:true});await assert.rejects(()=>runZwrNativeRendererAcceptance(tampered.env),{code:'NATIVE_RENDERER_CANDIDATE_TAMPERED'});assert.equal(tampered.calls,0);
+const prod=fixture();prod.env.PHIOS_ENVIRONMENT='production';await assert.rejects(()=>runZwrNativeRendererAcceptance(prod.env),{code:'QA_ONLY'});assert.equal(prod.calls,0);
+const missing=fixture();missing.objects.delete(root+'renderer-manifest.json');await assert.rejects(()=>runZwrNativeRendererAcceptance(missing.env),{code:'NATIVE_RENDERER_MANIFEST_REQUIRED'});assert.equal(missing.calls,0);
+const {onRequest}=await import('../functions/api/zwr-native-renderer-acceptance.js');
+const origin='https://qa.phios-github.pages.dev';
+assert.equal((await onRequest({request:new Request(origin+'/api/zwr-native-renderer-acceptance'),env:{}})).status,405);
+assert.equal((await onRequest({request:new Request(origin+'/api/zwr-native-renderer-acceptance',{method:'POST',headers:{origin:'https://wrong.example'}}),env:{}})).status,403);
+assert.equal((await onRequest({request:new Request(origin+'/api/zwr-native-renderer-acceptance',{method:'POST',headers:{origin}}),env:{}})).status,401);
+console.log('PASS: OFFLINE native preflight; frozen accepted source; sequential 3+5; tamper/non-QA/missing authority denied; runs 1/4/8 failures write no admission; no provider calls. Deployed browser proof NOT_RUN.');

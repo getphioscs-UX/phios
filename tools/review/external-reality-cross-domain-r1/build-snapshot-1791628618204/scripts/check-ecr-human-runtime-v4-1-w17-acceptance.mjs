@@ -1,0 +1,12 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+import {buildEcrHumanRuntime} from '../functions/embodied-configuration/ecr-canonical-projection-runtime-v2.js';
+import {buildEcrHumanRuntimeReport} from '../functions/ecr-full-report/ecr-human-runtime-report-v4-1.js';
+const input=JSON.parse(fs.readFileSync('content/embodied-configuration/v4-1/acceptance/birth-fixtures-v1.json')).cases[0].canonicalInput,ir=await buildEcrHumanRuntime({canonicalInput:input});
+const entitlement={schemaVersion:'PHI-OS-KAP-W45-METHOD-JOURNEY-ENTITLEMENT-v1.0.0',methodCode:'ECR',access:{methodAllowed:true,readingDepthAllowed:true}};
+const en=buildEcrHumanRuntimeReport({ir,reviewMode:true,locale:'en',sharedEntitlement:entitlement}),zh=buildEcrHumanRuntimeReport({ir,reviewMode:true,locale:'zh-Hans',sharedEntitlement:entitlement});
+assert.deepEqual(en.sections.map(s=>[s.sectionId,s.scope,s.sourceRefs]),zh.sections.map(s=>[s.sectionId,s.scope,s.sourceRefs]));
+const reviews=JSON.parse(fs.readFileSync('content/embodied-configuration/v4-1/admission/ecr-bilingual-review-owner-decisions-r4.json'));
+assert.equal(reviews.summary.ACCEPT,14);assert.equal(reviews.summary.REVISE,0);assert(reviews.pairs.every(r=>r.ownerDecision==='ACCEPT'));
+assert.equal(ir.driverField.drivers[10].status,'CALCULATED');assert.deepEqual(ir.driverField.drivers[10].bodyBinding,['EARTH']);
+assert.equal(ir.currentReality.dynamicRuntime,null);assert.equal(ir.boundaries.customerProductionAdmitted,false);
+console.log('PASS V4.1 W17: bilingual owner admission, deterministic Earth D11, honest Current Reality UNKNOWN and separate production gate.');

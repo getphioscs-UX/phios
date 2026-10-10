@@ -1,0 +1,60 @@
+{
+  "enabled": false,
+  "providerCalls": 0,
+  "openAiCalls": 0,
+  "automaticPaidRetries": 0,
+  "automaticSave": false,
+  "automaticRelease": false,
+  "state": "SEPARATE_EXPLICIT_AUTHORIZATION_REQUIRED",
+  "repositoryModel": {
+    "path": "content/reports/bazi/deep-manuscript/gpt-5.6-sol-capacity-admission-v1.json",
+    "sha256": "50aa668ef7627a053d5a8478386d728169eae6b48c16c1dd7e84af9d7f6b6ef3",
+    "modelId": "gpt-5.6-sol",
+    "recordedVerificationDate": "2026-10-06",
+    "liveReverifiedThisBatch": false,
+    "pricing": {
+      "currency": "USD",
+      "perTokens": 1000000,
+      "longContextInputThresholdTokens": 272000,
+      "short": {
+        "input": 4,
+        "cachedInput": 0.4,
+        "output": 20
+      },
+      "long": {
+        "input": 8,
+        "cachedInput": 0.8,
+        "output": 30
+      },
+      "cacheWriteMultiplier": 1.25,
+      "scope": "Standard processing, no residency/FedRAMP uplift, no tools. Cached tokens assumed zero before telemetry.",
+      "promotionalPricingAvailableAtLeastThrough": "2026-11-21"
+    },
+    "maxOutputTokens": 128000,
+    "contextTokens": 1050000
+  },
+  "proposedPerReportLimits": {
+    "authoringCalls": 3,
+    "semanticReviewCalls": 3,
+    "totalCalls": 6,
+    "automaticPaidRetries": 0,
+    "totalInputTokens": 150000,
+    "totalGeneratedTokensIncludingReasoning": 300000,
+    "maxInputPerCall": 25000,
+    "maxGeneratedPerAuthoringCall": 90000,
+    "maxGeneratedPerReviewCall": 10000,
+    "hardUsdCap": 7,
+    "allLimitsMustPass": true
+  },
+  "costCalculation": "Stored short-tier noncached upper bound: 150000/1e6*4 + 300000/1e6*20 = USD6.60; proposed USD7 hard cap. Not a quote, measured cost, depth guarantee or authorization. Reject if actual existing capacity planner requires more tokens; never truncate to fit. Fresh model/pricing verification required before any separately authorized live experiment.",
+  "telemetry": [
+    "request ID and pseudonymous candidate ID",
+    "versioned source/prompt/schema/model digests",
+    "planned vs actual input/cached/output/reasoning tokens",
+    "actual cost and uncertain-usage status",
+    "no raw birth data in routine logs"
+  ],
+  "failure": "Checkpoint valid units; unknown usage blocks further spending; no automatic paid retry/recovery/delivery rescue. Any further call requires explicit owner authorization within revised cap.",
+  "fallback": "Retain blocked candidate and factual native evidence only, no generic substitute professional report.",
+  "reuse": "Existing budget planner, provider spend guard and checkpoint ledger; successor overrides/admission needed. Historical BDM retry defaults unchanged and not invoked."
+}

@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "PHI-OS-CURRENT-SYSTEM-BASELINE-FREEZE-v1.0.0",
+  "work": "CBS-W8",
+  "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+  "status": "FROZEN_CBS_W0_W8",
+  "preFreezeGate": {
+    "command": "node scripts/check-current-system-baseline.mjs --pre-freeze",
+    "result": "PASS",
+    "authorityDomains": 21,
+    "requiredRuntimes": 20,
+    "unknownCurrentRuntimeCount": 0,
+    "silentDeletionCount": 0
+  },
+  "frozenArtifacts": [
+    {
+      "path": "content/governance/current-system-baseline/current-system-baseline-v1.json",
+      "sha256": "e41b03ee2c8def83cae6e1c59a64c9cae67b602ff5487ebd7698d593a461d412"
+    },
+    {
+      "path": "content/governance/current-system-baseline/current-authority-inventory.json",
+      "sha256": "0bd23c2b41c8322fc9dc6a040ac01094eb4d2cc84b6f7b5ff00eb8305ace4cb7"
+    },
+    {
+      "path": "content/governance/current-system-baseline/current-runtime-inventory.json",
+      "sha256": "b35a014dfcef512c9e6351412d79a0d05cebfb4f64cb158277031a10e651ba23"
+    },
+    {
+      "path": "content/governance/current-system-baseline/runtime-consumer-map-v1.json",
+      "sha256": "83b800ec19bbd573f24debc6ede35bf6a99c734d83e50070d7d8586835c84fb0"
+    },
+    {
+      "path": "content/governance/current-system-baseline/runtime-block-state-registry-v1.json",
+      "sha256": "8f046c7e42880976577d93950edd65b8b4986b66aea5a7f0f25865bceb5a5485"
+    },
+    {
+      "path": "content/governance/current-system-baseline/runtime-orphan-audit-v1.json",
+      "sha256": "25ec65f0e4a6073e537594eacbc2a7fe5a5a6cea4a64445e9f3c14d7128bbe84"
+    },
+    {
+      "path": "content/governance/current-system-baseline/no-silent-deletion-contract-v1.json",
+      "sha256": "110695b7c7142ca8d30c43d597287a55b0299c67de900642a394a8a1d98cab8e"
+    },
+    {
+      "path": "scripts/check-current-system-baseline.mjs",
+      "sha256": "3216eaff8794855b12f4239e2130749449248578418f20fce81663023ec99e89"
+    }
+  ],
+  "knownNonCBSSubsystemStates": [
+    {
+      "scope": "CKA/HPC2",
+      "state": "KNOWN_PRESENTATION_FINGERPRINT_CHECKER_RECONCILIATION_REQUIRED",
+      "authorityCollision": false,
+      "phase1Action": "CARC checker lifecycle reconciliation"
+    },
+    {
+      "scope": "CPR",
+      "state": "KNOWN_PUBLIC_ASSET_SUCCESSOR_DIGEST_RECONCILIATION_REQUIRED",
+      "authorityCollision": false,
+      "phase1Action": "CARC historical/current checker isolation"
+    },
+    {
+      "scope": "ICR/RMO extracted mirror execution",
+      "state": "ENVIRONMENT_DEPENDENCY_NOT_INSTALLED",
+      "dependency": "ajv",
+      "repositoryDefectClaimed": false
+    }
+  ],
+  "exitGate": {
+    "currentSystemBaselineCheckerGreen": true,
+    "phase1EntryAllowed": true,
+    "phase1Name": "CURRENT_AUTHORITY_RECONCILIATION",
+    "doesNotClaimAllHistoricalSubsystemCheckersGreen": true
+  },
+  "rules": {
+    "historicalFreezeMutationAllowed": false,
+    "silentDeletionAllowed": false,
+    "unknownArtifactDeletionAllowed": false,
+    "baselineChangeRequiresSuccessor": true
+  }
+}

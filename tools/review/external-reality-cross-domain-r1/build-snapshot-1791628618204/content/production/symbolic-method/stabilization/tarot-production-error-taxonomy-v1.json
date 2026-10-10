@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-PRODUCTION-ERROR-TAXONOMY-v1.0.0",
+  "phase": "TPA-N",
+  "work": "N-W60",
+  "baselineCommit": "a9556d446cb289787fceea611341d7dd67de5dcf",
+  "status": "ACTIVE_FAIL_CLOSED_ERROR_TAXONOMY",
+  "methodCode": "TAROT",
+  "classes": [
+    {
+      "code": "CANONICAL_ROUTE_UNAVAILABLE",
+      "class": "ROUTE",
+      "httpExpectation": "NON_200_OR_REDIRECT",
+      "safeToRetry": true
+    },
+    {
+      "code": "SERVER_PRODUCTION_AUTHORITY_NOT_PROMOTED",
+      "class": "AUTHORITY",
+      "httpExpectation": 423,
+      "safeToRetry": false
+    },
+    {
+      "code": "DEPLOYED_SHA_NOT_PROMOTED",
+      "class": "AUTHORITY",
+      "httpExpectation": 423,
+      "safeToRetry": false
+    },
+    {
+      "code": "SERVER_PRODUCTION_AUTHORITY_INVALID_OR_INCOMPLETE",
+      "class": "AUTHORITY",
+      "httpExpectation": 423,
+      "safeToRetry": false
+    },
+    {
+      "code": "RUNTIME_DB_PRODUCTION_AUTHORITY_UNAVAILABLE",
+      "class": "PERSISTENCE_INFRASTRUCTURE",
+      "httpExpectation": 423,
+      "safeToRetry": true
+    },
+    {
+      "code": "SYMBOLIC_LIMITED_PRODUCTION_NOT_ACTIVATED",
+      "class": "EXECUTION_GATE",
+      "httpExpectation": 423,
+      "safeToRetry": false
+    },
+    {
+      "code": "TAROT_AUTHORITY_ASSET_UNAVAILABLE",
+      "class": "SOURCE_ASSET",
+      "httpExpectation": 400,
+      "safeToRetry": true
+    },
+    {
+      "code": "TAROT_PRODUCT_EXECUTION_REJECTED",
+      "class": "EXECUTION",
+      "httpExpectation": 400,
+      "safeToRetry": false
+    },
+    {
+      "code": "ACCOUNT_REQUIRED",
+      "class": "PERSISTENCE_BOUNDARY",
+      "httpExpectation": 401,
+      "safeToRetry": false
+    },
+    {
+      "code": "METHOD_NOT_ALLOWED",
+      "class": "HTTP_CONTRACT",
+      "httpExpectation": 405,
+      "safeToRetry": false
+    },
+    {
+      "code": "UNSUPPORTED_SYMBOLIC_METHOD",
+      "class": "HTTP_CONTRACT",
+      "httpExpectation": 400,
+      "safeToRetry": false
+    },
+    {
+      "code": "NETWORK_UNAVAILABLE",
+      "class": "NETWORK",
+      "httpExpectation": null,
+      "safeToRetry": true
+    },
+    {
+      "code": "UNEXPECTED_SERVER_ERROR",
+      "class": "UNKNOWN",
+      "httpExpectation": "5XX",
+      "safeToRetry": true
+    }
+  ],
+  "privacy": {
+    "questionTextStored": false,
+    "readingTextStored": false,
+    "userIdentityStored": false,
+    "requestHeadersStored": false,
+    "credentialsStored": false
+  },
+  "rules": {
+    "unknownErrorsFailClosed": true,
+    "telemetryIsNotRealityEvidence": true,
+    "errorObservationDoesNotGrantAuthority": true
+  }
+}

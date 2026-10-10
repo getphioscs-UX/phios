@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W23-BZR-BOUNDARY-TOLERANCE-FREEZE-v1.0.0",
+  "work": "MPA-W23",
+  "boundaryClassification": {
+    "requiredExact": true,
+    "allowedAmbiguitySeconds": 0,
+    "meaning": "A birth instant must be classified on one side of the governed Li Chun/Jie/day/hour boundary; no fuzzy boundary classification is allowed."
+  },
+  "independentAstronomyComparison": {
+    "maximumTimestampDifferenceSeconds": 120,
+    "purpose": "Cross-engine validation tolerance for independently calculated solar-term timestamps only.",
+    "mayShiftBoundaryClassification": false
+  },
+  "trueSolarReferenceComparison": {
+    "maximumDifferenceSeconds": 2,
+    "purpose": "NOAA/Meeus reference implementation versus independent Swiss Ephemeris equation-of-time smoke comparison.",
+    "mayReplaceCanonicalProductionAuthority": false
+  },
+  "luckStart": {
+    "exactIntervalRequired": true,
+    "roundingAllowed": false,
+    "authoritativeRepresentation": "RATIONAL_YEARS_FROM_INTERVAL_SECONDS",
+    "displayComponentRoundingCreatesAuthority": false
+  },
+  "scopeBoundary": {
+    "notAstrologyOrb": true,
+    "notInterpretationTolerance": true
+  }
+}

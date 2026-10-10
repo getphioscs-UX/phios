@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S10-PILOT-CASE-ADMISSION-CONTRACT-v1.0.0",
+  "phase": "MRM-S",
+  "work": "S10-PILOT-ADMISSION",
+  "baselineCommit": "007fee6f24071d0653ce120be9ec832efc5c11a4",
+  "status": "ACTIVE",
+  "requiredFields": [
+    "pilotCaseId",
+    "campaignCaseId",
+    "product",
+    "customerReference",
+    "consentReference",
+    "consentPurposeScopes",
+    "caseVersion",
+    "runtimeCapabilities",
+    "stageEvidence",
+    "inputReferences",
+    "outputReferences",
+    "humanInterventions",
+    "unexpectedEvents",
+    "releaseReferences",
+    "completionState",
+    "evidenceReferences",
+    "privacyEnvelope",
+    "realCaseAttestation",
+    "productBindings"
+  ],
+  "completionStates": [
+    "OPEN",
+    "IN_PROGRESS",
+    "COMPLETED",
+    "FAILED",
+    "WITHDRAWN",
+    "INVALIDATED"
+  ],
+  "privacyEnvelopeRequiredFields": [
+    "privateStorageReference",
+    "retentionClass",
+    "rawPayloadStoredInRepository",
+    "consentCheckedAt"
+  ],
+  "realCaseAttestationRequiredFields": [
+    "attestationId",
+    "attestedByRole",
+    "attestedAt",
+    "sourceSystemReference",
+    "synthetic"
+  ],
+  "forbiddenRepositoryFields": [
+    "name",
+    "fullName",
+    "email",
+    "phone",
+    "address",
+    "birthDate",
+    "identityNumber",
+    "passportNumber",
+    "taxNumber",
+    "rawInput",
+    "rawOutput",
+    "documentContent",
+    "financialAccountNumber"
+  ],
+  "rules": {
+    "customerReferenceMustBeOpaque": true,
+    "syntheticMustBeFalse": true,
+    "fixturePathReferencesForbidden": true,
+    "rawPayloadStoredInRepositoryMustBeFalse": true,
+    "privateStorageReferenceMustNotBePublicUrl": true,
+    "consentStateMustBeValidAtExecution": true,
+    "caseVersionImmutableAfterAdmission": true,
+    "manualRepairMustBeRecorded": true,
+    "stageEvidenceMustMatchVerticalSlice": true,
+    "everyExecutedCapabilityMustBindRuntimeVersion": true,
+    "everyPromotedCapabilityMustHavePriorEM2": true,
+    "productSpecificBindingsRequired": true
+  }
+}

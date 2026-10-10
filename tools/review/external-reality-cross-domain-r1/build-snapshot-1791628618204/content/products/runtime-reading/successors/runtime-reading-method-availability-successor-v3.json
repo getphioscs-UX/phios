@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "PHI-OS-RRP-METHOD-AVAILABILITY-SUCCESSOR-v3.0.0",
+  "work": "BZRA-W7/BZRA-W13",
+  "baselineCommit": "b536eb5a6f69a50d7549426a09b7f123bde35c74",
+  "status": "CURRENT_SUCCESSOR_NUM_BZR_AVAILABLE_AST_PARTIAL",
+  "predecessor": "content/products/runtime-reading/successors/runtime-reading-method-availability-successor-v2.json",
+  "predecessorMutated": false,
+  "methods": [
+    {
+      "methodCode": "NUM",
+      "canonicalMethodCode": "NUMEROLOGY",
+      "capabilityVersion": "1.0.0",
+      "executionAuthorityMethodVersion": "0.1.0-candidate",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "AVAILABLE",
+      "reading": "AVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "AVAILABLE",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "CMP_PRODUCTION_MEANING_ACTIVE_FOR_NUM",
+        "NUMA_PRODUCTION_ACCEPTED"
+      ]
+    },
+    {
+      "methodCode": "BZR",
+      "canonicalMethodCode": "BAZI",
+      "capabilityVersion": "1.0.0",
+      "executionAuthorityMethodVersion": "0.1.0",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "AVAILABLE",
+      "reading": "AVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "AVAILABLE",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "CMP_PRODUCTION_MEANING_ACTIVE_FOR_BZR",
+        "BZRA_PRODUCTION_ACCEPTED"
+      ],
+      "executionCompletenessIndependent": true
+    },
+    {
+      "methodCode": "AST",
+      "canonicalMethodCode": "ASTROLOGY",
+      "methodVersion": "0.1.0",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "UNAVAILABLE",
+      "reading": "CALCULATED_STRUCTURE_ONLY",
+      "professional": "UNAVAILABLE",
+      "availability": "PARTIAL",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "ASTA_NOT_COMPLETE"
+      ]
+    },
+    {
+      "methodCode": "HDR",
+      "canonicalMethodCode": "HUMAN_DESIGN",
+      "methodVersion": "1.0.0",
+      "calculation": "UNAVAILABLE",
+      "projection": "UNAVAILABLE",
+      "meaning": "UNAVAILABLE",
+      "reading": "UNAVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "UNAVAILABLE",
+      "selfServiceAllowed": false,
+      "reasonCodes": [
+        "MPA_DISPATCH_BLOCKED"
+      ]
+    }
+  ],
+  "rules": {
+    "capabilityAvailabilityIndependentFromExecutionCompleteness": true,
+    "optionalCycleTargetDateMayYieldPartialExecutionWithoutGlobalDowngrade": true,
+    "professionalJudgmentNotRequiredForSelfServiceAvailability": true
+  }
+}

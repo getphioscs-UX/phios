@@ -1,0 +1,31 @@
+{
+  "id": "phi-os.financial-risk-registry",
+  "version": "1.0.0",
+  "milestone": "M4A-W8",
+  "status": "risk-types-and-policy-contract-ready",
+  "authority": "functions/professional/financial/financial-risk-registry.js",
+  "riskTypes": [
+    "negative_cash_flow",
+    "insufficient_liquidity",
+    "high_debt_burden",
+    "low_savings_capacity",
+    "insurance_gap",
+    "concentrated_investment",
+    "property_concentration",
+    "currency_exposure",
+    "retirement_gap",
+    "education_gap",
+    "estate_gap",
+    "missing_critical_evidence",
+    "outdated_valuation"
+  ],
+  "rules": {
+    "thresholdPolicyVersionRequired": true,
+    "evidenceReferencesRequired": true,
+    "riskFlagEqualsRecommendation": false,
+    "riskFlagAutoExecutesAction": false,
+    "professionalReviewRequired": true,
+    "missingEvidenceRemainsVisible": true,
+    "outdatedValuationRemainsVisible": true
+  }
+}

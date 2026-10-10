@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const results=read('content/production/symbolic-method/human-review/tarot-human-review-results-v3.json');
+const rubric=read('content/production/symbolic-method/human-review/tarot-human-review-rubric-v3.json');
+const campaign=read('content/production/symbolic-method/human-review/tarot-human-review-campaign-v3.json');
+const preflight=read('content/production/symbolic-method/human-review/tarot-human-review-preflight-v2.json');
+const freeze=read('content/production/symbolic-method/freeze/tarot-human-acceptance-freeze-v3.json');
+const successor=read('content/production/symbolic-method/reconciliation/tarot-human-review-current-successor-v3.json');
+assert.equal(results.planned,24);assert.equal(results.machinePreflightPassed,24);assert.equal(results.sessions.length,24);assert.equal(preflight.caseCount,24);
+for(const row of results.sessions){const session=campaign.sessions.find(x=>x.sessionId===row.sessionId);const snap=preflight.snapshots.find(x=>x.sessionId===row.sessionId);assert.ok(session&&snap,`${row.sessionId}: campaign/preflight evidence required`);const digest=crypto.createHash('sha256').update(JSON.stringify(snap)).digest('hex');assert.equal(row.machineEvidenceDigest,digest,`${row.sessionId}: machine evidence digest changed`);assert.equal(row.humanReviewed,true,`${row.sessionId}: real human review pending`);assert.equal(row.decision,'ACCEPTED',`${row.sessionId}: must be ACCEPTED`);assert.ok(String(row.reviewerId||'').trim(),`${row.sessionId}: reviewerId required`);assert.ok(String(row.reviewedAt||'').trim(),`${row.sessionId}: reviewedAt required`);for(const c of rubric.criteria.filter(c=>c.critical&&(c.appliesTo==='ALL'||c.appliesTo===session.group)))assert.equal(row.criteria?.[c.id],true,`${row.sessionId}: ${c.id} must be explicitly true`);}
+assert.equal(results.humanReviewed,24);assert.equal(results.accepted,24);assert.equal(results.rejected,0);assert.equal(results.needsFix,0);assert.equal(results.criticalBoundaryFailures,0);assert.equal(results.humanAcceptanceComplete,true);assert.equal(freeze.humanAcceptanceComplete,true,'run npm run finalize:tarot-human-review-jr after recording all human results');assert.equal(freeze.current.humanReviewed,24);assert.equal(freeze.current.accepted,24);assert.equal(successor.humanState.humanAcceptanceComplete,true);assert.equal(successor.humanState.humanReviewed,24);assert.equal(successor.humanState.accepted,24);assert.equal(successor.productionBoundary.publicRunAllowed,false);assert.equal(successor.productionBoundary.productionCapabilityPromoted,false);
+console.log('✓ TPA-W42 real human acceptance passed: 24/24 J0-regenerated cases accepted with all applicable critical criteria, reviewer identity/time and zero critical failures.');
+console.log('  Human acceptance does not itself grant live-browser acceptance, production SHA alignment, PCM promotion or public runAllowed.');

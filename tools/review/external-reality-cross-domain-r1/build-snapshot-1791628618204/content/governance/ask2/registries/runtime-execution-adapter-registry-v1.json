@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "PHI-OS-ASK2-RUNTIME-EXECUTION-ADAPTER-REGISTRY-v1.0.0",
+  "work": "ASK2-W0",
+  "baselineCommit": "3ccbb60485c466e145ff33da0addfd6d991ac1c8",
+  "status": "CURRENT_EXECUTION_AUTHORITY_REGISTRY",
+  "adapters": [
+    {
+      "routeKey": "AST.NATAL",
+      "runtime": "AST",
+      "capability": "NATAL",
+      "visibility": "PUBLIC",
+      "requiredOrigin": "DETERMINISTIC_RUNTIME"
+    },
+    {
+      "routeKey": "AST.CURRENT_DYNAMIC",
+      "runtime": "AST_TRANSIT",
+      "capability": "CURRENT_DYNAMIC",
+      "visibility": "PUBLIC",
+      "requiredOrigin": "DETERMINISTIC_RUNTIME"
+    },
+    {
+      "routeKey": "BZR.TEMPORAL",
+      "runtime": "BZR_TEMPORAL",
+      "capability": "TEMPORAL",
+      "visibility": "PUBLIC",
+      "requiredOrigin": "DETERMINISTIC_RUNTIME"
+    },
+    {
+      "routeKey": "ZWR.NATAL",
+      "runtime": "ZI_WEI",
+      "capability": "NATAL",
+      "visibility": "PUBLIC",
+      "requiredOrigin": "DETERMINISTIC_RUNTIME"
+    },
+    {
+      "routeKey": "ZWR.DYNAMIC_DOMAIN",
+      "runtime": "ZI_WEI_DYNAMIC",
+      "capability": "DYNAMIC_DOMAIN",
+      "visibility": "PUBLIC",
+      "requiredOrigin": "DETERMINISTIC_RUNTIME"
+    },
+    {
+      "routeKey": "NUM",
+      "runtime": "NUMERIC_RUNTIME",
+      "capability": "RHYTHM",
+      "visibility": "PUBLIC",
+      "requiredOrigin": "DETERMINISTIC_RUNTIME"
+    },
+    {
+      "routeKey": "HDR.OPERATING_READING",
+      "runtime": "HDR_INTERNAL",
+      "capability": "OPERATING_READING",
+      "visibility": "INTERNAL_ONLY",
+      "requiredOrigin": "GOVERNED_RUNTIME"
+    },
+    {
+      "routeKey": "RELATIONAL_RUNTIME",
+      "runtime": "PHI_OS_RELATIONAL_RUNTIME",
+      "capability": "RELATIONAL",
+      "visibility": "PUBLIC",
+      "requiredOrigin": "GOVERNED_RUNTIME"
+    },
+    {
+      "routeKey": "CCR",
+      "runtime": "PHI_OS_CURRENT_CONTEXT_RUNTIME",
+      "capability": "CURRENT_CONTEXT",
+      "visibility": "CONTEXTUAL",
+      "requiredOrigin": "GOVERNED_RUNTIME"
+    },
+    {
+      "routeKey": "CWA",
+      "runtime": "PHI_OS_CURRENT_WEB_AUTHORITY_RUNTIME",
+      "capability": "CURRENT_EXTERNAL_EVIDENCE",
+      "visibility": "CONTEXTUAL",
+      "requiredOrigin": "GOVERNED_RUNTIME"
+    }
+  ],
+  "rules": {
+    "modelCalculationAdapterExists": false,
+    "silentFallbackAdapterExists": false,
+    "unavailableCapabilityMayFallbackToNatal": false
+  }
+}

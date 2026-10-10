@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "PHI-OS-AST-R5-WHOLE-CHART-COMPOSITION-RULE-REGISTRY-v1.0.0",
+  "workCode": "AST-FP-R5",
+  "baselineCommit": "0692037d3a3f522de9f0eb11d37f738df3a2bae6",
+  "status": "ENGINEERING_FROZEN_NOT_HUMAN_ADMITTED",
+  "themeFamilies": [
+    {"familyCode":"PATTERN_NETWORK","basePriority":100,"maxSelected":2},
+    {"familyCode":"RULERSHIP_NETWORK","basePriority":88,"maxSelected":1},
+    {"familyCode":"ASPECT_DYNAMICS","basePriority":78,"maxSelected":1},
+    {"familyCode":"ANGLE_FRAME","basePriority":74,"maxSelected":1},
+    {"familyCode":"DISTRIBUTION_CONTEXT","basePriority":70,"maxSelected":1}
+  ],
+  "patternPriority": {
+    "GRAND_CROSS": 100,
+    "KITE": 96,
+    "T_SQUARE": 94,
+    "MYSTIC_RECTANGLE": 92,
+    "GRAND_TRINE": 90
+  },
+  "selection": {
+    "minimumThemesWhenEvidenceAvailable": 3,
+    "maximumThemes": 5,
+    "sameFamilyLimitDefault": 1,
+    "patternFamilyLimit": 2,
+    "patternBodyOverlapSuppressionJaccard": 0.75,
+    "minimumIndependentEvidenceFamilies": 2,
+    "intentBoostMaximum": 8,
+    "scoreTieBreak": "FAMILY_THEN_THEME_KEY"
+  },
+  "supportTension": {
+    "supportAspectTypes": ["TRINE", "SEXTILE"],
+    "tensionAspectTypes": ["SQUARE", "OPPOSITION"],
+    "conjunctionClass": "CONCENTRATION_NOT_AUTO_SUPPORT_OR_TENSION",
+    "maximumSignalsPerSide": 3
+  },
+  "intentProfiles": {
+    "OPEN": {"bodyCodes":[],"houseNumbers":[],"angleCodes":[],"patternCodes":[]},
+    "EXPRESSION": {"bodyCodes":["SUN","MERCURY","VENUS"],"houseNumbers":[3,5,10],"angleCodes":["ASC","MC"],"patternCodes":[]},
+    "WORK": {"bodyCodes":["MERCURY","MARS","SATURN"],"houseNumbers":[6,10],"angleCodes":["MC"],"patternCodes":[]},
+    "RELATIONSHIP": {"bodyCodes":["MOON","VENUS"],"houseNumbers":[7,8],"angleCodes":["DSC"],"patternCodes":[]},
+    "PRESSURE": {"bodyCodes":["MARS","SATURN","PLUTO"],"houseNumbers":[6,8,12],"angleCodes":[],"patternCodes":["T_SQUARE","GRAND_CROSS"]},
+    "DIRECTION": {"bodyCodes":["SUN","JUPITER","SATURN"],"houseNumbers":[9,10],"angleCodes":["ASC","MC"],"patternCodes":[]}
+  },
+  "governance": {
+    "fixedTopThreePlanetsForbidden": true,
+    "themeMayAggregateMultipleBodies": true,
+    "onePlanetOneParagraphDirectoryForbidden": true,
+    "semanticEvidenceMustBeLineaged": true,
+    "rendererMayInventMeaning": false,
+    "customerIntentChangesPriorityNotUnderlyingMeaning": true,
+    "predictionCreated": false,
+    "customerCutoverAllowed": false
+  }
+}

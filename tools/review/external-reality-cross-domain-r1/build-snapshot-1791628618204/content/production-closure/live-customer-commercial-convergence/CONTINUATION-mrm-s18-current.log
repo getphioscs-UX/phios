@@ -1,0 +1,25 @@
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: RT_CHECK_RDG_DIGEST_DRIFT:scripts/check-rdg-w26-w30-governance-acceptance-freeze.mjs
++ actual - expected
+
++ 'e7296b10c650b8048a95413cbb6870eea0026300814cb16598b2ac801f157b64'
+- 'c9c6e09b6c12fd69e3ee3bd1c7574ebfff0af5a14ff57d62423fbd304eb9c6cd'
+
+    at assertRef (file:///C:/phios/scripts/lib/runtime-maturity/mrm-s-current-lib.mjs:20:260)
+    at file:///C:/phios/scripts/check-mrm-s18-master-freeze.mjs:6:249
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'e7296b10c650b8048a95413cbb6870eea0026300814cb16598b2ac801f157b64',
+  expected: 'c9c6e09b6c12fd69e3ee3bd1c7574ebfff0af5a14ff57d62423fbd304eb9c6cd',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

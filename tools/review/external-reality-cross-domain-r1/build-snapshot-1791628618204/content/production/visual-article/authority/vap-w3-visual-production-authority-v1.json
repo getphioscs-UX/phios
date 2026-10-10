@@ -1,0 +1,318 @@
+{
+  "authorityAssignments": {
+    "articleAndFragmentProduction": "PJA",
+    "governedFigureAndDiagramProduction": "CAR",
+    "presentationProjection": "CPR_AFTER_GOVERNED_SOURCE_ASSET",
+    "productionDecisionAndPrimaryDispatch": "KPP_WAVE1_PRODUCTION_OVERLAY",
+    "publication": "UNCHANGED_INDEPENDENT_GOVERNED_PUBLICATION_AUTHORITIES"
+  },
+  "authorityCode": "PHI-OS-VAP-W3-VISUAL-PRODUCTION-AUTHORITY-v1",
+  "authorityDigest": "sha256:8c0e3be2a1f043f3a9175d367abeb6b2cd6b6d192a2e0e6908f27b373590d339",
+  "authorityVersion": "1.0.0",
+  "checkerIntegration": {
+    "vapHistoricalAggregateScriptMustRemainW0Only": true,
+    "wave1AggregateMustIncludeHumanProductionDecision": true,
+    "wave1AggregateMustIncludeProductionAuthorization": true
+  },
+  "compatibility": {
+    "adapterImplementationRequired": true,
+    "carAssetAuthorityAssigned": true,
+    "carExistingBuilderRequiresPublishedCoverage": true,
+    "carNetworkCallsEnabled": false,
+    "carProviderMode": "disabled",
+    "carProvidersEnabled": false,
+    "cprProductionRecordCount": 0,
+    "directBriefExecutionReady": false,
+    "kppBriefGenerationAuthorized": true,
+    "pjaBriefAuthorityAssigned": true,
+    "pjaStandardExporterArticleOnly": true
+  },
+  "contractReference": "content/production/visual-article/contracts/vap-w3-visual-production-authority-v1.json",
+  "deferredFailClosedFindings": [
+    "EN_LOCALE_CJK_CONTAMINATION",
+    "EN_HEADING_CJK_CONTAMINATION",
+    "EN_BODY_CJK_CONTAMINATION"
+  ],
+  "dispatchMatrix": [
+    {
+      "candidateCreationAllowed": false,
+      "directBriefExecutionReady": false,
+      "executionMode": "EXISTING_ARTICLE_RECONCILIATION_FOR_VISUAL_RELEASE",
+      "existingPublication": {
+        "c3Reconciliation": "EXISTING_PUBLISHED_CONTENT_RECONCILED_NO_NEW_PUBLICATION",
+        "carArticleReferenceRecords": 0,
+        "enPublicationStatus": "published",
+        "mode": "REUSE_EXISTING_PUBLISHED_ARTICLE",
+        "modernPublishedKnowledgeAuthorityRecords": 0,
+        "newArticleCandidateRequired": false,
+        "references": [
+          "KA-PREFACE-004-ZH-ARTICLE",
+          "KA-PREFACE-004-EN-ARTICLE"
+        ],
+        "zhHansPublicationStatus": "published"
+      },
+      "kppDispatchConfirmed": true,
+      "locale": "zh-Hans",
+      "nodeCode": "KN-PREFACE-004",
+      "primaryAuthority": "PJA",
+      "primaryBriefAdapter": "PJA_EXISTING_ARTICLE_RECONCILIATION_BRIEF_ADAPTER_REQUIRED",
+      "productionRole": "ARTICLE",
+      "requiredOutputs": [
+        "ARTICLE_RECONCILIATION_FOR_VISUAL_RELEASE"
+      ],
+      "secondaryVisualNeed": {
+        "carDirectBriefExecutionReady": false,
+        "changesKppPrimaryDispatch": false,
+        "currentPublishedFragmentCount": 0,
+        "handoffSequence": [
+          "KPP_PJA_PRIMARY_HANDOFF",
+          "PJA_RECONCILIATION_BRIEF",
+          "DERIVED_CAR_ASSET_NEED",
+          "CAR_DETERMINISTIC_ASSET_BRIEF"
+        ],
+        "meaningCandidates": [],
+        "meaningSelectionResolved": false,
+        "required": true,
+        "requirementCode": "FIGURE-REQ-KN-PREFACE-004-NAVIGATION-LOOP-001",
+        "target": "CAR"
+      },
+      "standardPjaArticleDraftExporterAllowed": false
+    },
+    {
+      "candidateCreationAllowed": false,
+      "directBriefExecutionReady": false,
+      "executionMode": "NEW_FRAGMENT_PRODUCTION_BRIEF",
+      "kppDispatchConfirmed": true,
+      "locale": "zh-Hans",
+      "nodeCode": "KN-B1-P1-003",
+      "primaryAuthority": "PJA",
+      "primaryBriefAdapter": "PJA_FRAGMENT_PRODUCTION_BRIEF_ADAPTER_REQUIRED",
+      "productionRole": "FRAGMENT",
+      "reason": "The existing exporter is explicitly a canonical_article_production_brief and must not silently reinterpret a KPP FRAGMENT role as ARTICLE.",
+      "requiredOutputs": [
+        "FRAGMENT"
+      ],
+      "standardPjaArticleDraftExporterAllowed": false
+    },
+    {
+      "candidateCreationAllowed": false,
+      "carPublishedCoverageGateRequired": true,
+      "currentPublishedFragmentCount": 0,
+      "directBriefExecutionReady": false,
+      "executionMode": "PREPUBLICATION_FIGURE_ASSET_BRIEF",
+      "kppDispatchConfirmed": true,
+      "locale": "zh-Hans",
+      "meaningCandidates": [
+        "CM-CARRIER-CONTEXT-CC01",
+        "CM-CARRIER-CONTEXT-CC02",
+        "CM-CARRIER-CONTEXT-CC03",
+        "CM-CARRIER-CONTEXT-CC04",
+        "CM-CARRIER-CONTEXT-CC05",
+        "CM-CARRIER-CONTEXT-CC06",
+        "CM-CARRIER-CONTEXT-CC07",
+        "CM-CARRIER-CONTEXT-CC08",
+        "CM-CARRIER-CONTEXT-CC09",
+        "CM-CARRIER-CONTEXT-CC10",
+        "CM-CARRIER-CONTEXT-CC11",
+        "CM-CARRIER-CONTEXT-CC12"
+      ],
+      "meaningSelectionResolved": false,
+      "nodeCode": "KN-B1-P4-003",
+      "primaryAuthority": "CAR",
+      "primaryBriefAdapter": "CAR_PREPUBLICATION_ASSET_BRIEF_ADAPTER_REQUIRED",
+      "productionRole": "FIGURE",
+      "registeredOutputAuthority": {
+        "FIGURE": "CAR"
+      },
+      "requiredOutputs": [
+        "FIGURE"
+      ]
+    },
+    {
+      "candidateCreationAllowed": false,
+      "carPublishedCoverageGateRequired": true,
+      "currentPublishedFragmentCount": 0,
+      "directBriefExecutionReady": false,
+      "executionMode": "PREPUBLICATION_MULTI_ASSET_BRIEF",
+      "kppDispatchConfirmed": true,
+      "locale": "zh-Hans",
+      "meaningCandidates": [
+        "CM-CARRIER-CONTEXT-CC01",
+        "CM-CARRIER-CONTEXT-CC02",
+        "CM-CARRIER-CONTEXT-CC03",
+        "CM-CARRIER-CONTEXT-CC04",
+        "CM-CARRIER-CONTEXT-CC05",
+        "CM-CARRIER-CONTEXT-CC06",
+        "CM-CARRIER-CONTEXT-CC07",
+        "CM-CARRIER-CONTEXT-CC08",
+        "CM-CARRIER-CONTEXT-CC09",
+        "CM-CARRIER-CONTEXT-CC10",
+        "CM-CARRIER-CONTEXT-CC11",
+        "CM-CARRIER-CONTEXT-CC12"
+      ],
+      "meaningSelectionResolved": false,
+      "nodeCode": "KN-B1-P4-004",
+      "primaryAuthority": "CAR",
+      "primaryBriefAdapter": "CAR_PREPUBLICATION_ASSET_BRIEF_ADAPTER_REQUIRED",
+      "productionRole": "MULTI_ASSET",
+      "registeredOutputAuthority": {
+        "DIAGRAM": "CAR",
+        "FIGURE": "CAR"
+      },
+      "requiredOutputs": [
+        "FIGURE",
+        "DIAGRAM"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "findingCode": "VAP-W3-PJA-ARTICLE-RECONCILIATION-BRIEF-ADAPTER-REQUIRED",
+      "nodeCodes": [
+        "KN-PREFACE-004"
+      ],
+      "reason": "KPP requires reuse of an existing published article and no new ARTICLE candidate; the current PJA exporter is a new canonical article draft brief path.",
+      "severity": "P0",
+      "status": "OPEN_FOR_VAP_W4"
+    },
+    {
+      "findingCode": "VAP-W3-PJA-FRAGMENT-BRIEF-ADAPTER-REQUIRED",
+      "nodeCodes": [
+        "KN-B1-P1-003"
+      ],
+      "reason": "The current PJA production brief exporter is ARTICLE-specific and cannot silently reinterpret FRAGMENT authority.",
+      "severity": "P0",
+      "status": "OPEN_FOR_VAP_W4"
+    },
+    {
+      "findingCode": "VAP-W3-CAR-PREPUBLICATION-ASSET-BRIEF-ADAPTER-REQUIRED",
+      "nodeCodes": [
+        "KN-B1-P4-003",
+        "KN-B1-P4-004",
+        "KN-PREFACE-004"
+      ],
+      "reason": "CAR-W2 requires published fragment coverage, while these Wave 1 visual needs are authorized before matching Published Fragment coverage exists.",
+      "severity": "P0",
+      "status": "OPEN_FOR_VAP_W4"
+    },
+    {
+      "findingCode": "VAP-W3-PREFACE004-MODERN-PUBLISHED-AUTHORITY-REFERENCE-GAP",
+      "nodeCodes": [
+        "KN-PREFACE-004"
+      ],
+      "observed": {
+        "carArticleReferenceRecords": 0,
+        "legacyEnPublished": true,
+        "legacyZhHansPublished": true,
+        "modernPublishedKnowledgeAuthorityRecords": 0
+      },
+      "reason": "The existing published article must be reconciled into modern reference lineage without duplicate publication or body mutation before CAR/CPR visual integration.",
+      "severity": "P1",
+      "status": "OPEN_FOR_VAP_W4_RECONCILIATION"
+    },
+    {
+      "findingCode": "VAP-W3-CAR-MEANING-SELECTION-GAP",
+      "nodeCodes": [
+        "KN-PREFACE-004",
+        "KN-B1-P4-003",
+        "KN-B1-P4-004"
+      ],
+      "observed": {
+        "p4_003MeaningCandidates": [
+          "CM-CARRIER-CONTEXT-CC01",
+          "CM-CARRIER-CONTEXT-CC02",
+          "CM-CARRIER-CONTEXT-CC03",
+          "CM-CARRIER-CONTEXT-CC04",
+          "CM-CARRIER-CONTEXT-CC05",
+          "CM-CARRIER-CONTEXT-CC06",
+          "CM-CARRIER-CONTEXT-CC07",
+          "CM-CARRIER-CONTEXT-CC08",
+          "CM-CARRIER-CONTEXT-CC09",
+          "CM-CARRIER-CONTEXT-CC10",
+          "CM-CARRIER-CONTEXT-CC11",
+          "CM-CARRIER-CONTEXT-CC12"
+        ],
+        "p4_004MeaningCandidates": [
+          "CM-CARRIER-CONTEXT-CC01",
+          "CM-CARRIER-CONTEXT-CC02",
+          "CM-CARRIER-CONTEXT-CC03",
+          "CM-CARRIER-CONTEXT-CC04",
+          "CM-CARRIER-CONTEXT-CC05",
+          "CM-CARRIER-CONTEXT-CC06",
+          "CM-CARRIER-CONTEXT-CC07",
+          "CM-CARRIER-CONTEXT-CC08",
+          "CM-CARRIER-CONTEXT-CC09",
+          "CM-CARRIER-CONTEXT-CC10",
+          "CM-CARRIER-CONTEXT-CC11",
+          "CM-CARRIER-CONTEXT-CC12"
+        ],
+        "preface004MeaningCandidates": []
+      },
+      "reason": "CAR brief construction requires governed meaningReferences. W3 records candidates but does not invent or silently select Canonical Meaning authority.",
+      "severity": "P1",
+      "status": "OPEN_FOR_VAP_W4"
+    }
+  ],
+  "gates": {
+    "actualProductionBriefGenerationAllowedByW3": false,
+    "assetCandidateMaterializationAllowed": false,
+    "binaryAssetGenerationAllowed": false,
+    "candidateCreationAllowed": false,
+    "cprProductionRecordCreationAllowed": false,
+    "networkCallAllowed": false,
+    "providerInvocationAllowed": false,
+    "publicationAllowed": false,
+    "vapW4Allowed": true
+  },
+  "implementationBaselineCommit": "bdd9adf0dd28a6de47488089507228eb165e72db",
+  "invariants": {
+    "canonicalMeaningInvented": false,
+    "duplicatePreface004ArticleCandidateAllowed": false,
+    "englishLocaleContaminationRepairedByW3": false,
+    "humanProductionDecisionMutated": false,
+    "kppPlanOrWaveMutated": false,
+    "kppPrimaryDispatchRewrittenBySecondaryVisualNeed": false,
+    "pjaOrCarFrozenAuthorityMutated": false
+  },
+  "nextWork": "VAP-W4_GOVERNED_BRIEF_ADAPTERS_AND_WAVE1_BRIEF_GENERATION",
+  "prerequisiteEvidence": {
+    "executionAuthorityOwner": "KPP_WAVE1_PRODUCTION_OVERLAY",
+    "executionAuthorityScope": "GOVERNED_HANDOFF_AND_BRIEF_GENERATION_ONLY",
+    "vapW2Status": "VERIFIED_CURRENT_MAIN_DEPLOYED",
+    "vapW3Allowed": true,
+    "wave1AuthorizationStatus": "AUTHORIZED_FOR_GOVERNED_PRODUCTION_BRIEF_GENERATION",
+    "wave1PlanStatus": "FROZEN",
+    "wave1WaveStatus": "FROZEN"
+  },
+  "sourceDigestMode": "GIT_BASELINE_CANONICAL_TEXT_LF",
+  "sourceDigests": {
+    "content/knowledge/articles/en/why-phi-os-is-needed.json": "sha256:324764afa4e9c4bf9a86e44b0f91245cfd7d2572af9e6da3ec1cd11e60732169",
+    "content/knowledge/articles/zh-Hans/why-phi-os-is-needed.json": "sha256:fae12d4d1356cf5a955d9087144de427020a93b47fc20207f674b5625995811b",
+    "content/knowledge/editorial/c3/assessments/kn-preface-004-production-readiness.json": "sha256:60631dac08cbdee1b01666f16fe0bb792a6a3f8db072cf139c10422513638ce8",
+    "content/knowledge/production-planning/activation/wave1-production-authorized-v1.json": "sha256:242d9a1ed1fa932608d3edb374291df24fcdf05fb0fab1020d3b4ce9d0292a6f",
+    "content/knowledge/production-planning/freeze/kpp-w29-knowledge-production-planning-v2-freeze.json": "sha256:85217f79ff21a8db4f292c6abdfa3a100d0ad62a103ef2c2c388cff37d15aa7c",
+    "content/knowledge/production-planning/production/wave1/execution-authority-reconciliation-v1.json": "sha256:81caef26989a722b5462ede6f784317d1826ec0a80f9b51c33c92df4dd2b0af4",
+    "content/knowledge/production-planning/production/wave1/frozen-production-plan-v1.json": "sha256:68c85415b6f6c942b9690c6702b7b4f07dd12f9d340d79f0d98e7ac55054f749",
+    "content/knowledge/production-planning/production/wave1/frozen-production-wave-v1.json": "sha256:af7ec32408f94926a154d01e7781f0f1909c3b3dfb7ca0db5c55efe8b0057320",
+    "content/knowledge/production-planning/production/wave1/handoffs/car-handoff-v1.json": "sha256:105f5d4949abbd074cc1c08bd12e6ad05a8bc40aa4095c35fb6d577090121bc5",
+    "content/knowledge/production-planning/production/wave1/handoffs/pja-handoff-v1.json": "sha256:54ee5886802aad2f172d8afbf4b2628bdac380acdceea8fba19ca2d68e95816c",
+    "content/knowledge/public/authority/published-knowledge-authority.json": "sha256:6aa2977a2ca25f1ea633efc12b3597b6d77a8598436620fafdf32a190d6f044f",
+    "content/knowledge/public/retrieval/fragments.json": "sha256:986578dab3ca525e8d99100d398df0136ab364ffdad2a2eae314ba318454dd83",
+    "content/production/visual-article/deployment/vap-w2-cloudflare-production-sha-verification-v1.json": "sha256:2431cda8da60c4c8e80042f1162c65d68e1ac9a6c8b8b0bdb9174fb57ed09190",
+    "content/professional/canonical-asset-runtime/contracts/canonical-asset-brief-runtime-v1.json": "sha256:437920fdf898b452648faac169847a61598e399098f18aac5929c4e052aa652e",
+    "content/professional/canonical-asset-runtime/contracts/car-article-reconciliation-contract-v1.json": "sha256:8e706d8e62922f1f5eadc818d6f708b3dd87346afd1dfa348ccc8c89e0713423",
+    "content/professional/canonical-asset-runtime/contracts/car-asset-candidate-runtime-v1.json": "sha256:6ff57e20a0bbf8e320ea82c77dd7e4120fc4b9f9fadd5878e8096b230ad41e8f",
+    "content/professional/canonical-asset-runtime/contracts/car-asset-publication-runtime-v1.json": "sha256:41eb5d727d24700914457736576160e52e67096290f1ae2c46e2229c9fde00ee",
+    "content/professional/canonical-asset-runtime/freeze/car-w18-freeze-v1.json": "sha256:8ea26f9b89dbd0b52a334a5e3155b8beef92702bca05c746b5b48dd521763020",
+    "content/professional/canonical-asset-runtime/policies/car-provider-execution-policy-v1.json": "sha256:4e6f82f4aa4b3aa79b90782bb0c8229eafcadcf1c0fe8734396377185e857441",
+    "content/professional/canonical-asset-runtime/registries/canonical-article-reference-registry-v1.json": "sha256:6ba731d95e186209e8ec6bdf4f9f5d8a3fef018046a3f849baaced9b76dd3883",
+    "content/professional/canonical-asset-runtime/registries/canonical-asset-type-registry-v1.json": "sha256:5900137c184f49e852bf5f05b99e998f061f39998322387d4b096d5ef4dd6c6b",
+    "content/professional/canonical-meaning-runtime/registries/canonical-meaning-knowledge-map-v1.2.json": "sha256:1c01f39cdab68e05bfaea963b00ff21cbac9e2a24d5a6b8b10b8f5ef805ad1bc",
+    "content/professional/canonical-presentation-runtime/freeze/cpr-w7-w30-full-freeze-v1.json": "sha256:03cb9b8c1a1d599705544dbd6d39c80f494e629f8d9502c55e5acbaad6ef0a60",
+    "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json": "sha256:568cda919515f825b229698046c24998783b2c9a96ca644d4ca5031b5879bdfe",
+    "scripts/export-knowledge-production-brief.mjs": "sha256:e2566e2486d607596739760cc3fcb1974872bb33f48a1367d34e6109165e2521",
+    "scripts/lib/canonical-asset-runtime/canonical-asset-brief-v1.mjs": "sha256:173c8740ffe1a51fd187aa333768a0fd6e06a6221da629715f31f566cd48ab60"
+  },
+  "status": "VISUAL_PRODUCTION_AUTHORITY_FROZEN_READY_FOR_VAP_W4_ADAPTERS",
+  "work": "VAP-W3"
+}

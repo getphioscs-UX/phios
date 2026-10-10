@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/external-readers/reader-adapter.v1.json",
+  "title": "PHI OS External Reader Adapter",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["adapter_id", "reader_type", "input_modes", "output_schema", "status", "automatic_calculation", "automatic_rendering"],
+  "properties": {
+    "adapter_id": {"type": "string", "minLength": 1},
+    "reader_type": {"enum": ["human_design", "bazi", "ziwei", "gene_keys", "astrology"]},
+    "input_modes": {"type": "array", "items": {"enum": ["shared_birth_data", "uploaded_chart", "manual_entry"]}},
+    "output_schema": {"const": "external-reader-normalized-chart.v1"},
+    "status": {"enum": ["manual_entry_and_upload", "scaffold_only"]},
+    "automatic_calculation": {"const": false},
+    "automatic_rendering": {"const": false}
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "workId": "PHI-OS-PRODUCTION-CLOSURE",
+  "batch": "05",
+  "state": "READY_FOR_BATCH_05_COMPOSITION_ARCHITECTURE_HUMAN_REVIEW",
+  "master": "IN_PROGRESS",
+  "accepted": false,
+  "customerProductionReady": false,
+  "newReports": 0,
+  "focusedGroups": 24,
+  "visualReview": {
+    "results": [
+      {
+        "width": 1280,
+        "horizontalOverflow": false,
+        "sections": 17,
+        "forms": 0,
+        "screenshot": "docs/production-closure/batch05/screenshots/REVIEW-1280.png",
+        "status": "PASS"
+      },
+      {
+        "width": 390,
+        "horizontalOverflow": false,
+        "sections": 17,
+        "forms": 0,
+        "screenshot": "docs/production-closure/batch05/screenshots/REVIEW-390.png",
+        "status": "PASS"
+      }
+    ],
+    "errors": [],
+    "blocked": [],
+    "externalResources": 0,
+    "scope": "Actual architecture review rendering; no new customer report visual validation claimed."
+  },
+  "cost": {
+    "providerCalls": 0,
+    "openAiCalls": 0,
+    "guardedProcesses": 4,
+    "externalAttemptsBlocked": 3,
+    "realPayments": 0,
+    "productionStorageWrites": 0,
+    "providerProposalEnabled": false
+  },
+  "inheritedCoverage": {
+    "COVERED": 0,
+    "PARTIAL": 0,
+    "MISSING": 0,
+    "INAPPLICABLE": 108,
+    "AUTHORITY_BLOCKED": 36
+  },
+  "protectedDrift": 0,
+  "priceReceipt": "PRODUCTION-CLOSURE-BOOK-VI-PRICE-E26A1527AB20E284EA5CFB18",
+  "finalReviewCommand": {
+    "reason": "Verify finalized standalone HTML with embedded execution evidence",
+    "startedAt": "2026-10-09T00:03:07.5537504Z",
+    "output": "PASS 24 recorded focused groups, protected/inherited SHA preservation, external provider transport denied, 1280px and 390px portable review: no overflow, no external resources, no acceptance forms.",
+    "exitCode": 0,
+    "command": "node --import ./scripts/lib/pc-r1-zero-cost-preload.mjs scripts/check-production-closure-batch05.mjs"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "contractCode": "PHI-OS-PR-E2-CASE-PERSISTENCE-v1",
+  "contractVersion": "1.0.0",
+  "runtimeCode": "PR",
+  "extensionWork": "PR-E2",
+  "status": "CASE_VERSIONING_READY_STORAGE_EXECUTION_BLOCKED",
+  "canonicalObjectClass": "PR_CASE_VERSION",
+  "requiredFields": [
+    "caseReference",
+    "caseVersion",
+    "caseDigest",
+    "previousCaseVersion",
+    "previousCaseDigest",
+    "assignmentReference",
+    "workspaceReference",
+    "customerReference",
+    "professionalReference",
+    "serviceReference",
+    "scope",
+    "consentReferences",
+    "status",
+    "openedAt",
+    "closedAt",
+    "versionDigest"
+  ],
+  "versioning": {
+    "immutable": true,
+    "appendOnly": true,
+    "overwriteAllowed": false,
+    "versionOneRequiresPrevious": false,
+    "laterVersionRequiresPrevious": true,
+    "previousDigestRequiredForLaterVersion": true
+  },
+  "persistenceIntent": {
+    "emittedByPr": true,
+    "storageExecutedByPr": false,
+    "requiredExternalAuthority": "PWS_OR_STORAGE_EXECUTOR",
+    "currentExecutorState": "NOT_IMPLEMENTED_FAIL_CLOSED"
+  },
+  "rules": {
+    "pwsCaseObjectCreated": false,
+    "assignmentIdentityReusedAsCaseIdentity": false,
+    "caseVersionDoesNotMutateAssignment": true,
+    "closedVersionCannotBeReopenedInPlace": true
+  }
+}

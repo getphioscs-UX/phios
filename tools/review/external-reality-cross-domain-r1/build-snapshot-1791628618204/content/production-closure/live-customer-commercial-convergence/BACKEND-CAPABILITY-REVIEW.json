@@ -1,0 +1,503 @@
+{
+  "HEAD": "36462bb852277a6df9a5221f18f07aa4dad6623a",
+  "status": "IN_PROGRESS_NO_EXECUTABLE_DELETE_PLAN_READY",
+  "SOURCE": "STATIC_AND_VERSION_INHERITANCE_REVIEW",
+  "DEPLOYED": "NOT_REVIEWED_CURRENT_HEAD",
+  "LIVE_CUSTOMER": "RUNTIME_UNVERIFIED",
+  "runs": [
+    {
+      "key": "check:health-k1-current",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "BACKEND-check-health-k1-current.log"
+    },
+    {
+      "key": "check:health-reflective-firewall",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "BACKEND-check-health-reflective-firewall.log"
+    },
+    {
+      "key": "check:book-i-v3-final-source",
+      "exitCode": 1,
+      "result": "BASELINE_FAILURE",
+      "log": "BACKEND-check-book-i-v3-final-source.log"
+    },
+    {
+      "key": "check:book-i-v3-extraction",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "BACKEND-check-book-i-v3-extraction.log"
+    },
+    {
+      "key": "check:b14-sks:freeze",
+      "exitCode": 1,
+      "result": "BASELINE_FAILURE",
+      "log": "BACKEND-check-b14-sks-freeze.log"
+    }
+  ],
+  "evidenceGaps": [
+    {
+      "capability": "Health",
+      "files": [
+        "scripts/check-health-k1-w0-w15-corpus-expansion.mjs",
+        "scripts/check-health-k1-current-successor.mjs",
+        "content/health/health-reflective/acceptance/health-k1-hrp-successor-reconciliation-v1.json"
+      ],
+      "existing": "Explicit HRP successor preserves historical pre-HRP no-silent-creation gate; current gate enforces distinct medical/reflective source IDs, no medical causality and no diagnosis/treatment",
+      "missing": "Current production requests/source-level live admission; cannot infer factual production execution",
+      "obtain": "Zero-cost current/firewall checks; separately owner-authorized production retrieval evidence",
+      "decision": "Retain historical and current checkers; use successor gate in current chain",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "capability": "Book I",
+      "files": [
+        "scripts/check-book-i-v3-final-source-admission.mjs",
+        "scripts/check-book-i-v3-extraction-integrity.mjs",
+        "content/knowledge/manuscripts/completed/book-1-completed-manuscript-v3.json"
+      ],
+      "existing": "Current source reports BINARY_VERIFIED_EXTRACTION_CANDIDATE_READY with SHA256/size/pages and extraction integrity; cutover still false and Human review pending",
+      "missing": "Final section-to-canonical reconciliation and Human cutover acceptance; old checker expects upload-only null metadata",
+      "obtain": "Run extraction integrity; inspect source version history; future explicit admission successor preserving old stage assertions",
+      "decision": "Propose versioned current-stage checker, retain prior-stage checker; no automatic cutover",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "capability": "Book VII / Ask",
+      "files": [
+        "functions/api/customer-contextual-ask.js",
+        "scripts/check-b14-sks-freeze.mjs",
+        "docs/customer-activation-r1/structured-freeze-successor-v1.json",
+        "content/registry/figures.json",
+        "scripts/build-b14-sks-dedup.mjs"
+      ],
+      "existing": "Existing successor keeps productionActivation=false/humanApproval=false and old freezes exact; current Ask SHA differs from successor artifact. Changes include preserving full selected answer/support, articleContext/bookCode and publicationNavigation; current freeze chain first fails at DEDUP_SOURCE_DRIFT:content/registry/figures.json before runtime hash comparison. Ask successor hash mismatch is independently verified statically.",
+      "missing": "Accepted maintenance successor matching current Ask implementation and customer/runtime evidence",
+      "obtain": "Compare current source to successor hashes and git history; run freeze; prepare narrowly scoped maintenance review without rewriting hashes",
+      "decision": "Retain API/customer renderers; current successor does not cover all current drift",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "capability": "Original baseline and old Linux copy",
+      "files": [
+        "FINAL-BASELINE.json (prior source missing)",
+        "Linux 89-file original list (missing)"
+      ],
+      "existing": "Windows current HEAD and exact git deltas independently established",
+      "missing": "Prior full snapshot and Linux original file list",
+      "obtain": "Retrieve original audit artifact if available; do not infer completion or obsolescence from missing list",
+      "decision": "Windows static inventory proceeds; old Linux snapshot remains OLD_SNAPSHOT_UNRECONCILED"
+    },
+    {
+      "capability": "Cleanup candidates",
+      "files": [
+        ".pages-output",
+        ".wrangler/pages-production-build",
+        "scripts/check-seven-volume-successor.mjs"
+      ],
+      "existing": "Build generator defines both output paths; four script wrappers byte-identical; three wrappers retain command/checker callers",
+      "missing": "Exact current rebuild comparison, packaging compatibility, historical invocations for orphan-looking wrapper",
+      "obtain": "Isolated full build under zero-cost wrapper and per-candidate filesystem exclusion regression; retrieve CI/history entrypoint inventory",
+      "decision": "No executable deletion plan qualifies for READY_FOR_HUMAN_REVIEW"
+    }
+  ],
+  "duplicates": [
+    {
+      "files": [
+        "scripts/check-book-w1e-public-book-locale-icon-projection-seven-volume-current.mjs",
+        "scripts/check-cx-r6-homepage-seven-volume-current.mjs",
+        "scripts/check-cx-r8-knowledge-seven-volume-current.mjs",
+        "scripts/check-seven-volume-successor.mjs"
+      ],
+      "callers": {
+        "scripts/check-book-w1e-public-book-locale-icon-projection-seven-volume-current.mjs": [
+          "config/reports/zero-cost-check-commands.json"
+        ],
+        "scripts/check-cx-r6-homepage-seven-volume-current.mjs": [
+          "config/reports/zero-cost-check-commands.json",
+          "scripts/check-book-w1f-wpr-successor-current.mjs"
+        ],
+        "scripts/check-cx-r8-knowledge-seven-volume-current.mjs": [
+          "config/reports/zero-cost-check-commands.json",
+          "scripts/check-book-w1f-wpr-successor-current.mjs"
+        ],
+        "scripts/check-seven-volume-successor.mjs": []
+      },
+      "decision": "RETAIN_PENDING_ALL_DYNAMIC_AND_HISTORICAL_ENTRYPOINT_EVIDENCE"
+    }
+  ],
+  "candidates": [
+    {
+      "path": ".pages-output",
+      "category": "REPRODUCIBLE_BUILD_OUTPUT_CANDIDATE",
+      "generator": "scripts/build-cloudflare-pages.mjs",
+      "evidence": "Configured output, generator removes/recreates output; prior build records exist",
+      "missing": "Current HEAD exact rebuild/content comparison and deployment packaging consumers",
+      "decision": "WAITING_EVIDENCE"
+    },
+    {
+      "path": ".wrangler/pages-production-build",
+      "category": "REPRODUCIBLE_BUILD_OUTPUT_CANDIDATE",
+      "generator": "scripts/build-cloudflare-pages.mjs",
+      "evidence": "Dedicated workerBuild path generated by Wrangler",
+      "missing": "Current HEAD isolated rebuild plus packaging regression",
+      "decision": "WAITING_EVIDENCE"
+    },
+    {
+      "path": "dist",
+      "category": "MIXED_ASSETS_NOT_BULK_DELETABLE",
+      "evidence": "Contains tracked canonical asset briefs/intake contracts and production reports",
+      "missing": "Per-file Human ACCEPT/history/reproducibility inventory",
+      "decision": "MUST_RETAIN"
+    }
+  ],
+  "canDelete": [],
+  "mustRetain": [
+    "functions/runtime/navigation/nav-accepted-batch-*",
+    "functions/runtime/navigation/nav-contract-freeze.js",
+    "Human ACCEPT sources and receipts",
+    "historical customer renderers",
+    "db/migrations/*",
+    "security and migration checkers",
+    "scripts/check-health-k1-w0-w15-corpus-expansion.mjs",
+    "scripts/check-health-k1-current-successor.mjs",
+    "scripts/check-book-i-v3-final-source-admission.mjs",
+    "functions/api/customer-contextual-ask.js",
+    "dist tracked authority/intake assets"
+  ],
+  "waitingEvidence": [
+    ".pages-output",
+    ".wrangler/pages-production-build",
+    "scripts/check-book-w1e-public-book-locale-icon-projection-seven-volume-current.mjs",
+    "scripts/check-cx-r6-homepage-seven-volume-current.mjs",
+    "scripts/check-cx-r8-knowledge-seven-volume-current.mjs",
+    "scripts/check-seven-volume-successor.mjs"
+  ],
+  "deletionSimulation": "No evidence-sufficient candidates: simulation admission deferred. No actual deletion; static absence/caller analysis is not deletion regression.",
+  "providerCalls": 0,
+  "deletedFiles": 0,
+  "commitOrPush": false,
+  "windowsCapabilities": [
+    {
+      "id": "PERSONAL_ECR",
+      "family": "PERSONAL_READING",
+      "backendState": "PRODUCTION_FROZEN",
+      "surface": "/perspectives/personal/",
+      "consumer": "assets/customer-ui/js/surfaces/personal-reality.js",
+      "customerState": "ACTIVE",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "bf9298a84c1a5271aca78f66be5b6c1061737ece1b2b35f8569d71bffb8f56e4",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "PERSONAL_ASTROLOGY",
+      "family": "PERSONAL_READING",
+      "backendState": "PRODUCTION_FROZEN",
+      "surface": "/perspectives/personal/",
+      "consumer": "assets/customer-ui/js/specialists/ast/ast-specialist-surface-v3.js",
+      "customerState": "ACTIVE",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "e3fab7a3268feecd9c53862940c58a5d9410387e03e69cbceb7e3bbc2398e652",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "PERSONAL_BAZI",
+      "family": "PERSONAL_READING",
+      "backendState": "PRODUCTION_FROZEN",
+      "surface": "/perspectives/personal/",
+      "consumer": "assets/customer-ui/js/surfaces/bazi-professional-reading.js",
+      "customerState": "ACTIVE",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "e4ad1e9367606f9efb59e38578ef01a95867f0da4d18844347eb66d035c93a7b",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "PERSONAL_ZIWEI",
+      "family": "PERSONAL_READING",
+      "backendState": "PRODUCTION_FROZEN",
+      "surface": "/perspectives/personal/",
+      "consumer": "assets/customer-ui/js/surfaces/ziwei-professional-reading.js",
+      "customerState": "ACTIVE",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "88865cc48602e14bf5b4ac2fa9b3f7e1f29a57da247f160e01fa7f8823551f21",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "PERSONAL_NUMEROLOGY",
+      "family": "PERSONAL_READING",
+      "backendState": "PRODUCTION_FROZEN",
+      "surface": "/perspectives/personal/",
+      "consumer": "assets/customer-ui/js/numerology/reading-renderer.js",
+      "customerState": "ACTIVE",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "dbea9c9e241abd38a9be623a2190d4915574c6d20adc260dc17adb32ad980d72",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "PERSONAL_HUMAN_DESIGN",
+      "family": "PERSONAL_READING",
+      "backendState": "PRODUCTION_FROZEN_EXTERNAL_CHART_AUTHORITY",
+      "surface": "/perspectives/personal/",
+      "consumer": "assets/customer-ui/js/surfaces/personal-reality.js",
+      "customerState": "CONDITIONAL_CONFIRMED_EXTERNAL_CHART",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "bf9298a84c1a5271aca78f66be5b6c1061737ece1b2b35f8569d71bffb8f56e4",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "PROFILE_QUICK",
+      "family": "PROFILE_ASSESSMENT",
+      "backendState": "PRODUCTION_ADMITTED",
+      "surface": "/perspectives/profile/",
+      "consumer": "assets/customer-ui/js/surfaces/profile-progressive.js",
+      "customerState": "ACTIVE",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "c72590d9eb59ab3e4c7bdff44fa67dd8c41da81a0dc693bbccc3112ea0345d55",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "PROFILE_FULL_SELF_ASSESSMENT",
+      "family": "PROFILE_ASSESSMENT",
+      "backendState": "PRODUCTION_ADMITTED",
+      "surface": "/perspectives/profile/",
+      "consumer": "assets/customer-ui/js/surfaces/profile-progressive.js",
+      "customerState": "ACTIVE",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "c72590d9eb59ab3e4c7bdff44fa67dd8c41da81a0dc693bbccc3112ea0345d55",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "PROFILE_REASONING",
+      "family": "PROFILE_ASSESSMENT",
+      "backendState": "PRODUCTION_ADMITTED_NON_IQ",
+      "surface": "/perspectives/profile/",
+      "consumer": "assets/customer-ui/js/surfaces/profile-progressive.js",
+      "customerState": "ACTIVE",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "c72590d9eb59ab3e4c7bdff44fa67dd8c41da81a0dc693bbccc3112ea0345d55",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "PROFILE_EXTERNAL_IMPORT",
+      "family": "PROFILE_ASSESSMENT",
+      "backendState": "PRODUCTION_ADMITTED",
+      "surface": "/perspectives/profile/",
+      "consumer": "assets/customer-ui/js/surfaces/profile-progressive.js",
+      "customerState": "ACTIVE",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "c72590d9eb59ab3e4c7bdff44fa67dd8c41da81a0dc693bbccc3112ea0345d55",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "PROFILE_IPIP_BIG_FIVE_50",
+      "family": "PROFILE_ASSESSMENT",
+      "backendState": "PRODUCTION_ADMITTED_NOT_NORMED",
+      "surface": "/perspectives/profile/",
+      "consumer": "assets/customer-ui/js/surfaces/profile-progressive.js",
+      "customerState": "ACTIVE",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "c72590d9eb59ab3e4c7bdff44fa67dd8c41da81a0dc693bbccc3112ea0345d55",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "PROFILE_IPIP_NEO_120",
+      "family": "PROFILE_ASSESSMENT",
+      "backendState": "PRODUCTION_ADMITTED_NOT_NORMED",
+      "surface": "/perspectives/profile/",
+      "consumer": "assets/customer-ui/js/surfaces/profile-progressive.js",
+      "customerState": "ACTIVE",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "c72590d9eb59ab3e4c7bdff44fa67dd8c41da81a0dc693bbccc3112ea0345d55",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "PROFILE_ONET_MINI_30",
+      "family": "PROFILE_ASSESSMENT",
+      "backendState": "LIVE_PROVIDER_ADMITTED",
+      "surface": "/perspectives/profile/",
+      "consumer": "assets/customer-ui/js/surfaces/profile-progressive.js",
+      "customerState": "CONDITIONAL_SERVER_SECRET",
+      "serverSecret": "ONET_WEB_SERVICES_API_KEY",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "c72590d9eb59ab3e4c7bdff44fa67dd8c41da81a0dc693bbccc3112ea0345d55",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "PROFILE_ONET_SHORT_60",
+      "family": "PROFILE_ASSESSMENT",
+      "backendState": "RUNTIME_ADMITTED_MACHINE_VERIFIED",
+      "surface": "/perspectives/profile/",
+      "consumer": "assets/customer-ui/js/surfaces/profile-progressive.js",
+      "customerState": "CONDITIONAL_SERVER_SECRET",
+      "serverSecret": "ONET_WEB_SERVICES_API_KEY",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "c72590d9eb59ab3e4c7bdff44fa67dd8c41da81a0dc693bbccc3112ea0345d55",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "PROFILE_FINANCIAL_CAPABILITY",
+      "family": "PROFILE_ASSESSMENT",
+      "backendState": "PRODUCTION_ADMITTED_ADAPTED_NON_ADVICE",
+      "surface": "/perspectives/profile/",
+      "consumer": "assets/customer-ui/js/surfaces/profile-progressive.js",
+      "customerState": "ACTIVE",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "c72590d9eb59ab3e4c7bdff44fa67dd8c41da81a0dc693bbccc3112ea0345d55",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "CROSS_PERSPECTIVE",
+      "family": "GOVERNED_READING",
+      "backendState": "PRODUCTION_FROZEN",
+      "surface": "/perspectives/personal/",
+      "consumer": "assets/customer-ui/js/personal-products/final-personal-reading-experience.js",
+      "customerState": "ACTIVE_WHEN_INPUTS_EXIST",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "39ab0d2ee4383b5075a91c077bb4f38faa4d5b7f98140ad7f6618f986b3033cf",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "CURRENT_REALITY",
+      "family": "GOVERNED_READING",
+      "backendState": "PRODUCTION_FROZEN",
+      "surface": "/perspectives/personal/",
+      "consumer": "assets/customer-ui/js/surfaces/personal-reality.js",
+      "customerState": "ACTIVE",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "bf9298a84c1a5271aca78f66be5b6c1061737ece1b2b35f8569d71bffb8f56e4",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "PAID_NARRATIVE",
+      "family": "NARRATIVE",
+      "backendState": "PRODUCTION_FROZEN",
+      "surface": "/perspectives/personal/",
+      "consumer": "assets/customer-ui/js/personal-products/final-personal-reading-experience.js",
+      "customerState": "CONDITIONAL_ENTITLEMENT_AND_PROVIDER",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "39ab0d2ee4383b5075a91c077bb4f38faa4d5b7f98140ad7f6618f986b3033cf",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "RELATIONSHIP_NARRATIVE",
+      "family": "RELATIONSHIP",
+      "backendState": "PRODUCTION_FROZEN",
+      "surface": "/perspectives/personal/",
+      "consumer": "assets/customer-ui/js/personal-products/final-personal-reading-experience.js",
+      "customerState": "CONDITIONAL_RELATIONSHIP_INTENT",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "39ab0d2ee4383b5075a91c077bb4f38faa4d5b7f98140ad7f6618f986b3033cf",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "I_CHING",
+      "family": "QUESTION_READING",
+      "backendState": "FULL_PRODUCTION",
+      "surface": "/perspectives/iching/",
+      "consumer": "perspectives/iching/index.html",
+      "customerState": "ACTIVE",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "c296a44b8fedfa37e1d0af2069eac9608f4740f53f0bb620018158fb826b2687",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "TAROT",
+      "family": "QUESTION_READING",
+      "backendState": "SERVER_RELEASE_AUTHORITY",
+      "surface": "/perspectives/tarot/",
+      "consumer": "perspectives/tarot/index.html",
+      "customerState": "CONDITIONAL_SERVER_AUTHORITY",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "2b627eb12adb16b79ef5fef6c054781eba28d1ff42f1ba944bfd21168652038c",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "CONTINUITY_CONTEXT",
+      "family": "CONTINUITY",
+      "backendState": "ENGINEERING_COMPLETE_MACHINE_VERIFIED",
+      "surface": "/reality/#continuity",
+      "consumer": "reality/index.html",
+      "customerState": "ACTIVE_IN_CANONICAL_MY_REALITY_WORKSPACE",
+      "successorOf": "/my-reality.html#continuity",
+      "projectionBoundary": "CX_R20_CONTINUITY_TO_CX_R10_WORKSPACE",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "ba9d85de61b4771719f39823cae2640cf46879639182ef6d0b01561e8e1e0010",
+      "runtime": "RUNTIME_UNVERIFIED"
+    },
+    {
+      "id": "CONTINUITY_SUBSCRIPTION",
+      "family": "CONTINUITY",
+      "backendState": "CONFIGURATION_REQUIRED_W88_BLOCKED",
+      "surface": "/membership.html",
+      "consumer": "membership.html",
+      "customerState": "NOT_ADVERTISED_AS_LIVE_SUBSCRIPTION",
+      "reviewState": "STATIC_CONSUMER_INVENTORY_NOT_LIVE_VERIFICATION",
+      "consumerExists": true,
+      "consumerSHA256": "29049f709c1fda4de4186f3d6e9711cde3f8fdee8e4f70b4c809e8413601d0cd",
+      "runtime": "RUNTIME_UNVERIFIED"
+    }
+  ],
+  "referenceAuditScope": "Tracked scripts/functions/assets/config/.github text under 1MB; exact static path/basename matches. Dynamic/external callers and larger records unresolved; zero hits are not proof of unreachability.",
+  "readyForHumanReview": false,
+  "cleanupLists": {
+    "canDelete": [],
+    "mustRetain": [
+      "functions/runtime/navigation/nav-accepted-batch-*",
+      "functions/runtime/navigation/nav-contract-freeze.js",
+      "Human ACCEPT sources and receipts",
+      "historical customer renderers",
+      "db/migrations/*",
+      "security and migration checkers",
+      "scripts/check-health-k1-w0-w15-corpus-expansion.mjs",
+      "scripts/check-health-k1-current-successor.mjs",
+      "scripts/check-book-i-v3-final-source-admission.mjs",
+      "functions/api/customer-contextual-ask.js",
+      "dist tracked authority/intake assets"
+    ],
+    "waitingEvidence": [
+      ".pages-output",
+      ".wrangler/pages-production-build",
+      "scripts/check-book-w1e-public-book-locale-icon-projection-seven-volume-current.mjs",
+      "scripts/check-cx-r6-homepage-seven-volume-current.mjs",
+      "scripts/check-cx-r8-knowledge-seven-volume-current.mjs",
+      "scripts/check-seven-volume-successor.mjs"
+    ]
+  },
+  "sourceFingerprints": {
+    "scripts/check-health-k1-w0-w15-corpus-expansion.mjs": "560a356d06c0a90f92ab52670eb1c31a545480ecfc89fe98c1ef6e12188dedbf",
+    "scripts/check-health-k1-current-successor.mjs": "dcaf319f78ed8cf086cd0aed90ceb0f2376f14099c4863458381e8611364f716",
+    "content/health/health-reflective/acceptance/health-k1-hrp-successor-reconciliation-v1.json": "dad45b78d83434bab07312ca244767a9ac4715e58896e5c293b52d3343ad31d5",
+    "scripts/check-book-i-v3-final-source-admission.mjs": "487f86200b3cd4e818db9ee61a4b553782cf1004e1520ad119d93c4d95d01591",
+    "scripts/check-book-i-v3-extraction-integrity.mjs": "359427b58ab931bfba916f56ef03b9a8840e6b839be532102fabed0d11a926f8",
+    "content/knowledge/manuscripts/completed/book-1-completed-manuscript-v3.json": "e8cb2a5b77f7f67b1b5ccec620559e85f0e185efbf6505228821b9f2cd908708",
+    "functions/api/customer-contextual-ask.js": "89980b65cbc1702f3b9f9c74cf377d1234e1d4496a1b288bd5b9c2e96a6ab9d6",
+    "scripts/check-b14-sks-freeze.mjs": "2c95b3b0247af3f85d68437b9f0140b3406dba6421ebdf11c5c2922354b55f11",
+    "docs/customer-activation-r1/structured-freeze-successor-v1.json": "7337c45a0a3477ef1b637969acd5347140e7c7cee54c3960b88e5f3db965aebc",
+    "content/registry/figures.json": "498c6c456eb1d726340b6a0bae1cbceac5b37d2d35db5c01b99c79a361f821ed",
+    "scripts/build-b14-sks-dedup.mjs": "1bfd1457258047e10e1e2b17805f89474a7b849b59ad8bcde21132b14d5816cc",
+    "scripts/check-seven-volume-successor.mjs": "ecb3ccb02f57f9b71e4bedc02c97a33a355fef67dd794a2321a04c93586a14a6"
+  }
+}

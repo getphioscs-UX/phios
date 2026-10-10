@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "PHI-OS-REL-METHOD-CAPABILITY-PROMOTION-OVERLAY-v1.0.0",
+  "baselineCommit": "2b660066669190eee55de54a2bb87b10be0eb3c4",
+  "status": "BZR_ZWR_ECR_HUMAN_ADMITTED_OVERLAY_ACTIVE",
+  "baseCapabilityMatrixRef": "content/personal-reading/relationship/registries/relationship-method-capability-matrix-v1.json",
+  "baseCompositionRegistryRef": "content/personal-reading/relationship/registries/relationship-method-composition-registry-v1.json",
+  "humanAdmissionRef": "content/personal-reading/relationship/acceptance/rel-method-authority-successor-human-admission-v1.json",
+  "methods": {
+    "BZR": {
+      "relationshipCompositionSupported": "SUPPORTED",
+      "executionState": "HUMAN_ADMITTED_CROSS_PERSON_STRUCTURAL_NEUTRAL",
+      "allowedClaimClasses": [
+        "OPEN"
+      ],
+      "authorityRefs": [
+        "content/personal-reading/relationship/bzr/contracts/bzr-rel-cross-person-structural-contract-v1.json",
+        "content/personal-reading/relationship/bzr/registries/bzr-rel-structural-rule-registry-v1.json",
+        "content/personal-reading/relationship/acceptance/rel-method-authority-successor-human-admission-v1.json"
+      ],
+      "timingState": "CONTEXT_PREDECESSOR_ONLY_NO_NEW_TIMING_SEMANTICS"
+    },
+    "ZWR": {
+      "relationshipCompositionSupported": "SUPPORTED",
+      "executionState": "HUMAN_ADMITTED_DUAL_READING_SEMANTIC_COMPARISON",
+      "allowedClaimClasses": [
+        "OPEN",
+        "TIMING_CONTEXT"
+      ],
+      "authorityRefs": [
+        "content/personal-reading/relationship/zwr/contracts/zwr-rel-dual-reading-composition-contract-v1.json",
+        "content/personal-reading/relationship/zwr/registries/zwr-rel-comparison-rule-registry-v1.json",
+        "content/personal-reading/relationship/acceptance/rel-method-authority-successor-human-admission-v1.json"
+      ],
+      "crossChartStarInteractionAllowed": false
+    },
+    "ECR": {
+      "relationshipCompositionSupported": "SUPPORTED",
+      "executionState": "HUMAN_ADMITTED_FIRST_PARTY_DIRECTED_PAIR_ONTOLOGY",
+      "allowedClaimClasses": [
+        "OPEN"
+      ],
+      "authorityRefs": [
+        "content/personal-reading/relationship/ecr/contracts/ecr-rel-pair-ontology-v1.json",
+        "content/personal-reading/relationship/ecr/authority/ecr-rel-atomic-pair-rule-corpus-v1.json",
+        "content/personal-reading/relationship/acceptance/rel-method-authority-successor-human-admission-v1.json"
+      ],
+      "relationshipTimingSupported": "AUTHORITY_PENDING",
+      "activationContextIsNotTimingForecastAuthority": true
+    }
+  },
+  "parallelLane": {
+    "HD": "NOT_MODIFIED_BY_THIS_OVERLAY__HD_REL_R1_W0_W8_PROCEEDS_SEPARATELY"
+  },
+  "productBoundary": {
+    "relW5MayStartBeforeHdReconciliation": false,
+    "customerCutoverAllowed": false,
+    "crossMethodMeaningCreated": false
+  },
+  "admittedCompositionRuntime": "functions/personal-reading/relationship/admitted-method-relationship-composition.js",
+  "admittedCompositionSchema": "PHI-OS-ADMITTED-METHOD-RELATIONSHIP-COMPOSITION-v1.0.0"
+}

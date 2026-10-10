@@ -1,0 +1,3926 @@
+{
+  "currentHead": "6786cfa10068f3b85f90f56fd6c6314c0c240e47",
+  "recordedAt": "2026-10-09T10:09:45.650Z",
+  "scope": "SOURCE_AND_LOCAL_BROWSER_NOT_DEPLOYED_OR_LIVE_CUSTOMER",
+  "states": {
+    "BOOK_V_SOURCE": "PARTIAL",
+    "BOOK_V_CONSUMER": "PASS",
+    "BOOK_V_CUSTOMER_RENDER": "PASS",
+    "BOOK_V_CONTEXTUAL_ASK": "PASS",
+    "BOOK_VI_DOSSIER_ACCEPTANCE": "PARTIAL",
+    "BOOK_VI_RUNTIME_CONSUMER": "PASS",
+    "BOOK_VI_CUSTOMER_RENDER": "PARTIAL",
+    "BOOK_VI_CURRENTNESS": "PARTIAL",
+    "MOOMOO_EVIDENCE_BINDING": "PARTIAL",
+    "BOOK_V_ASSET_RESOLUTION": "PASS",
+    "BOOK_VI_CONTEXTUAL_ASK": "PASS"
+  },
+  "bookVRegistries": [
+    {
+      "item": "120 cases",
+      "path": "content/civilization-atlas/cases/civilization-case-registry-v1.json",
+      "version": "1.0.0",
+      "status": "ACTIVE",
+      "sha256": "6291f76099bfa3f0747c2c29ced4f491045d221e64730ae710031d7f821c3d1a",
+      "array": "cases",
+      "actualCount": 120,
+      "expectedCount": 120,
+      "state": "PASS",
+      "consumer": "assets/js/pages/civilization-atlas/atlas-data.js",
+      "browserEvidence": "W31-ATLAS-CLOSED-LOOP-QA.json",
+      "acceptanceBinding": "FR5_G_CONTENT_ACCEPTANCE_PRESERVED",
+      "successorEvidence": {
+        "path": "content/civilization-atlas/maintenance/book-v-civ-atlas-current-engineering-successor-v1.json",
+        "status": "ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "humanDecision": "PENDING",
+        "hashMatches": true,
+        "changeClass": "NEW_ATLAS_RELEASE_SUCCESSOR"
+      }
+    },
+    {
+      "item": "20 periods",
+      "path": "content/civilization-atlas/timeline/timeline-periods-v1.json",
+      "version": "1.0.0",
+      "status": "ACTIVE",
+      "sha256": "ebbb012a998257b011fa6a13afa7a5872e52e8c52c186f58c2efe699c8c00840",
+      "array": "periods",
+      "actualCount": 20,
+      "expectedCount": 20,
+      "state": "PASS",
+      "consumer": "assets/js/pages/civilization-atlas/atlas-data.js",
+      "browserEvidence": "W31-ATLAS-CLOSED-LOOP-QA.json",
+      "acceptanceBinding": "EXACT_HUMAN_ACCEPTED_FREEZE_HASH"
+    },
+    {
+      "item": "comparison",
+      "path": "content/civilization-atlas/comparison/comparison-families-v1.json",
+      "version": "1.0.0",
+      "status": "ACTIVE",
+      "sha256": "eecb224ed9edfa07f6922be3ed8e630644ced28157f297c58e777e08590ab214",
+      "array": "families",
+      "actualCount": 6,
+      "expectedCount": 6,
+      "state": "PASS",
+      "consumer": "assets/js/pages/civilization-atlas/atlas-data.js",
+      "browserEvidence": "W31-ATLAS-CLOSED-LOOP-QA.json",
+      "acceptanceBinding": "EXACT_HUMAN_ACCEPTED_FREEZE_HASH"
+    },
+    {
+      "item": "world snapshots",
+      "path": "content/civilization-atlas/snapshots/world-snapshots-v1.json",
+      "version": "1.0.0",
+      "status": "ACTIVE",
+      "sha256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+      "array": "snapshots",
+      "actualCount": 15,
+      "expectedCount": 15,
+      "state": "PASS",
+      "consumer": "assets/js/pages/civilization-atlas/atlas-data.js",
+      "browserEvidence": "W31-ATLAS-CLOSED-LOOP-QA.json",
+      "acceptanceBinding": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+      "successorEvidence": {
+        "path": "content/civilization-atlas/maintenance/book-v-civ-atlas-current-engineering-successor-v1.json",
+        "status": "ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "humanDecision": "PENDING",
+        "hashMatches": true,
+        "changeClass": "NEW_ATLAS_RELEASE_SUCCESSOR"
+      }
+    },
+    {
+      "item": "trajectories",
+      "path": "content/civilization-atlas/trajectories/long-duration-trajectories-v1.json",
+      "version": "1.0.0",
+      "status": "ACTIVE",
+      "sha256": "0d8516de73256ce10c0711a216cd9312e2b613e5debde247e2dbcf3aaaeac9c8",
+      "array": "trajectories",
+      "actualCount": 16,
+      "expectedCount": 16,
+      "state": "PASS",
+      "consumer": "assets/js/pages/civilization-atlas/atlas-data.js",
+      "browserEvidence": "W31-ATLAS-CLOSED-LOOP-QA.json",
+      "acceptanceBinding": "EXACT_HUMAN_ACCEPTED_FREEZE_HASH"
+    },
+    {
+      "item": "transitions",
+      "path": "content/civilization-atlas/transitions/transition-windows-v1.json",
+      "version": "1.0.0",
+      "status": "ACTIVE",
+      "sha256": "48ac7cebbddffc593893337a5a0c44ce50521444e72618a0908d7ba5c5945cd9",
+      "array": "transitionWindows",
+      "actualCount": 32,
+      "expectedCount": 32,
+      "state": "PASS",
+      "consumer": "assets/js/pages/civilization-atlas/atlas-data.js",
+      "browserEvidence": "W31-ATLAS-CLOSED-LOOP-QA.json",
+      "acceptanceBinding": "EXACT_HUMAN_ACCEPTED_FREEZE_HASH"
+    },
+    {
+      "item": "loss",
+      "path": "content/civilization-atlas/loss/reversal-loss-atlas-v1.json",
+      "version": "1.0.0",
+      "status": "ACTIVE",
+      "sha256": "08e76a4c7a2ef2bda82ce61c2b76ba007988f6fcb8d02311cf4afb7696edb526",
+      "array": "caseProfiles",
+      "actualCount": 24,
+      "expectedCount": 24,
+      "state": "PASS",
+      "consumer": "assets/js/pages/civilization-atlas/atlas-data.js",
+      "browserEvidence": "W31-ATLAS-CLOSED-LOOP-QA.json",
+      "acceptanceBinding": "EXACT_HUMAN_ACCEPTED_FREEZE_HASH"
+    }
+  ],
+  "bookVLayers": [
+    {
+      "layer": "timeline",
+      "state": "PASS",
+      "scope": "MOBILE_TEXT_CONTROL_RENDER",
+      "textLength": 1387
+    },
+    {
+      "layer": "cases",
+      "state": "PASS",
+      "scope": "MOBILE_TEXT_CONTROL_RENDER",
+      "textLength": 3723
+    },
+    {
+      "layer": "comparison",
+      "state": "PASS",
+      "scope": "MOBILE_TEXT_CONTROL_RENDER",
+      "textLength": 3509
+    },
+    {
+      "layer": "trajectories",
+      "state": "PASS",
+      "scope": "MOBILE_TEXT_CONTROL_RENDER",
+      "textLength": 3367
+    },
+    {
+      "layer": "transitions",
+      "state": "PASS",
+      "scope": "MOBILE_TEXT_CONTROL_RENDER",
+      "textLength": 1123
+    },
+    {
+      "layer": "loss",
+      "state": "PASS",
+      "scope": "MOBILE_TEXT_CONTROL_RENDER",
+      "textLength": 1179
+    }
+  ],
+  "snapshots": [
+    {
+      "snapshotId": "WS-M3000",
+      "acceptedAssetId": "VIS-CIV-WS-M3000-ATMOSPHERE",
+      "sourceVersion": "world-snapshots-v1.json current unchanged semantics",
+      "acceptedState": "CONTENT_ACCEPTANCE_PRESERVED_LABEL_REVIEW_SCOPED",
+      "consumer": "world-slice-renderer.js selected .civ-world__globe img",
+      "desktop": {
+        "snapshotId": "WS-M3000",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-M3000-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-M3000-ATMOSPHERE",
+        "contentObjectId": "WS-M3000",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 1280,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-M3000-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 526,
+        "renderedHeight": 296.03125,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 463168,
+        "responseDigest": "745bc83b0b17f0a66a50a22003f487bf49d1116a4315c8e0ae1bcbfba81a16d9",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-M3000%23atlas&contextSummary=World+%C2%B7+World+c.+3000+BCE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-M3000%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 526,
+          "height": 296.03125
+        }
+      },
+      "mobile": {
+        "snapshotId": "WS-M3000",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-M3000-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-M3000-ATMOSPHERE",
+        "contentObjectId": "WS-M3000",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 390,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-M3000-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 256,
+        "renderedHeight": 144.0625,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 463168,
+        "responseDigest": "745bc83b0b17f0a66a50a22003f487bf49d1116a4315c8e0ae1bcbfba81a16d9",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-M3000%23atlas&contextSummary=World+%C2%B7+World+c.+3000+BCE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-M3000%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 256,
+          "height": 144.0625
+        }
+      },
+      "askContextState": "SELECTED_SNAPSHOT_SCOPE_BOUND",
+      "stale": false
+    },
+    {
+      "snapshotId": "WS-M1500",
+      "acceptedAssetId": "VIS-CIV-WS-M1500-ATMOSPHERE",
+      "sourceVersion": "world-snapshots-v1.json current unchanged semantics",
+      "acceptedState": "CONTENT_ACCEPTANCE_PRESERVED_LABEL_REVIEW_SCOPED",
+      "consumer": "world-slice-renderer.js selected .civ-world__globe img",
+      "desktop": {
+        "snapshotId": "WS-M1500",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-M1500-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-M1500-ATMOSPHERE",
+        "contentObjectId": "WS-M1500",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 1280,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-M1500-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 526,
+        "renderedHeight": 296.03125,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 480258,
+        "responseDigest": "05b774f66f10d47a2337053f2ed315b23a3b6e99205a37634e064f9c481831e7",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-M1500%23atlas&contextSummary=World+%C2%B7+World+c.+1500+BCE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-M1500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 526,
+          "height": 296.03125
+        }
+      },
+      "mobile": {
+        "snapshotId": "WS-M1500",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-M1500-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-M1500-ATMOSPHERE",
+        "contentObjectId": "WS-M1500",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 390,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-M1500-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 256,
+        "renderedHeight": 144.0625,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 480258,
+        "responseDigest": "05b774f66f10d47a2337053f2ed315b23a3b6e99205a37634e064f9c481831e7",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-M1500%23atlas&contextSummary=World+%C2%B7+World+c.+1500+BCE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-M1500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 256,
+          "height": 144.0625
+        }
+      },
+      "askContextState": "SELECTED_SNAPSHOT_SCOPE_BOUND",
+      "stale": false
+    },
+    {
+      "snapshotId": "WS-M0500",
+      "acceptedAssetId": "VIS-CIV-WS-M0500-ATMOSPHERE",
+      "sourceVersion": "world-snapshots-v1.json current unchanged semantics",
+      "acceptedState": "CONTENT_ACCEPTANCE_PRESERVED_LABEL_REVIEW_SCOPED",
+      "consumer": "world-slice-renderer.js selected .civ-world__globe img",
+      "desktop": {
+        "snapshotId": "WS-M0500",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-M0500-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-M0500-ATMOSPHERE",
+        "contentObjectId": "WS-M0500",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 1280,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-M0500-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 526,
+        "renderedHeight": 296.03125,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 492928,
+        "responseDigest": "0fbf78f8fb79df0f2d1db283b132cc26c48f596687c2c3b09ddc996e0e2fe359",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-M0500%23atlas&contextSummary=World+%C2%B7+World+c.+500+BCE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-M0500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 526,
+          "height": 296.03125
+        }
+      },
+      "mobile": {
+        "snapshotId": "WS-M0500",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-M0500-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-M0500-ATMOSPHERE",
+        "contentObjectId": "WS-M0500",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 390,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-M0500-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 256,
+        "renderedHeight": 144.0625,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 492928,
+        "responseDigest": "0fbf78f8fb79df0f2d1db283b132cc26c48f596687c2c3b09ddc996e0e2fe359",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-M0500%23atlas&contextSummary=World+%C2%B7+World+c.+500+BCE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-M0500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 256,
+          "height": 144.0625
+        }
+      },
+      "askContextState": "SELECTED_SNAPSHOT_SCOPE_BOUND",
+      "stale": false
+    },
+    {
+      "snapshotId": "WS-0001",
+      "acceptedAssetId": "VIS-CIV-WS-0001-ATMOSPHERE",
+      "sourceVersion": "world-snapshots-v1.json current unchanged semantics",
+      "acceptedState": "CONTENT_ACCEPTANCE_PRESERVED_LABEL_REVIEW_SCOPED",
+      "consumer": "world-slice-renderer.js selected .civ-world__globe img",
+      "desktop": {
+        "snapshotId": "WS-0001",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-0001-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-0001-ATMOSPHERE",
+        "contentObjectId": "WS-0001",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 1280,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-0001-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 526,
+        "renderedHeight": 296.03125,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 570690,
+        "responseDigest": "c0a52c2eb63ddc9e9bf5276ed6a82639fb99c6d3713bff269b81b78ecb354824",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-0001%23atlas&contextSummary=World+%C2%B7+World+c.+1+CE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-0001%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 526,
+          "height": 296.03125
+        }
+      },
+      "mobile": {
+        "snapshotId": "WS-0001",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-0001-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-0001-ATMOSPHERE",
+        "contentObjectId": "WS-0001",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 390,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-0001-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 256,
+        "renderedHeight": 144.0625,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 570690,
+        "responseDigest": "c0a52c2eb63ddc9e9bf5276ed6a82639fb99c6d3713bff269b81b78ecb354824",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-0001%23atlas&contextSummary=World+%C2%B7+World+c.+1+CE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-0001%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 256,
+          "height": 144.0625
+        }
+      },
+      "askContextState": "SELECTED_SNAPSHOT_SCOPE_BOUND",
+      "stale": false
+    },
+    {
+      "snapshotId": "WS-0500",
+      "acceptedAssetId": "VIS-CIV-WS-0500-ATMOSPHERE",
+      "sourceVersion": "world-snapshots-v1.json current unchanged semantics",
+      "acceptedState": "CONTENT_ACCEPTANCE_PRESERVED_LABEL_REVIEW_SCOPED",
+      "consumer": "world-slice-renderer.js selected .civ-world__globe img",
+      "desktop": {
+        "snapshotId": "WS-0500",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-0500-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-0500-ATMOSPHERE",
+        "contentObjectId": "WS-0500",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 1280,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-0500-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 526,
+        "renderedHeight": 296.03125,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 555246,
+        "responseDigest": "595e7ec2ebd302898e902fe7d3ba6ffed8864e714418872772836ec39e6a7c6b",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-0500%23atlas&contextSummary=World+%C2%B7+World+c.+500&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-0500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 526,
+          "height": 296.03125
+        }
+      },
+      "mobile": {
+        "snapshotId": "WS-0500",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-0500-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-0500-ATMOSPHERE",
+        "contentObjectId": "WS-0500",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 390,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-0500-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 256,
+        "renderedHeight": 144.0625,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 555246,
+        "responseDigest": "595e7ec2ebd302898e902fe7d3ba6ffed8864e714418872772836ec39e6a7c6b",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-0500%23atlas&contextSummary=World+%C2%B7+World+c.+500&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-0500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 256,
+          "height": 144.0625
+        }
+      },
+      "askContextState": "SELECTED_SNAPSHOT_SCOPE_BOUND",
+      "stale": false
+    },
+    {
+      "snapshotId": "WS-1000",
+      "acceptedAssetId": "VIS-CIV-WS-1000-ATMOSPHERE",
+      "sourceVersion": "world-snapshots-v1.json current unchanged semantics",
+      "acceptedState": "CONTENT_ACCEPTANCE_PRESERVED_LABEL_REVIEW_SCOPED",
+      "consumer": "world-slice-renderer.js selected .civ-world__globe img",
+      "desktop": {
+        "snapshotId": "WS-1000",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1000-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1000-ATMOSPHERE",
+        "contentObjectId": "WS-1000",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 1280,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1000-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 526,
+        "renderedHeight": 296.03125,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 473936,
+        "responseDigest": "91a5e6525287a84157b436342c3d18f498f16e3e81f229d30904f15ddc24cabc",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1000%23atlas&contextSummary=World+%C2%B7+World+c.+1000&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1000%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 526,
+          "height": 296.03125
+        }
+      },
+      "mobile": {
+        "snapshotId": "WS-1000",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1000-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1000-ATMOSPHERE",
+        "contentObjectId": "WS-1000",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 390,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1000-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 256,
+        "renderedHeight": 144.0625,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 473936,
+        "responseDigest": "91a5e6525287a84157b436342c3d18f498f16e3e81f229d30904f15ddc24cabc",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1000%23atlas&contextSummary=World+%C2%B7+World+c.+1000&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1000%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 256,
+          "height": 144.0625
+        }
+      },
+      "askContextState": "SELECTED_SNAPSHOT_SCOPE_BOUND",
+      "stale": false
+    },
+    {
+      "snapshotId": "WS-1250",
+      "acceptedAssetId": "VIS-CIV-WS-1250-ATMOSPHERE",
+      "sourceVersion": "world-snapshots-v1.json current unchanged semantics",
+      "acceptedState": "CONTENT_ACCEPTANCE_PRESERVED_LABEL_REVIEW_SCOPED",
+      "consumer": "world-slice-renderer.js selected .civ-world__globe img",
+      "desktop": {
+        "snapshotId": "WS-1250",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1250-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1250-ATMOSPHERE",
+        "contentObjectId": "WS-1250",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 1280,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1250-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 526,
+        "renderedHeight": 296.03125,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 561516,
+        "responseDigest": "086c55e6c3b2b8a34dc61d2399e52f59ff1568bd320bf5ec28b45290048e8196",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1250%23atlas&contextSummary=World+%C2%B7+World+c.+1250&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1250%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 526,
+          "height": 296.03125
+        }
+      },
+      "mobile": {
+        "snapshotId": "WS-1250",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1250-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1250-ATMOSPHERE",
+        "contentObjectId": "WS-1250",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 390,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1250-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 256,
+        "renderedHeight": 144.0625,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 561516,
+        "responseDigest": "086c55e6c3b2b8a34dc61d2399e52f59ff1568bd320bf5ec28b45290048e8196",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1250%23atlas&contextSummary=World+%C2%B7+World+c.+1250&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1250%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 256,
+          "height": 144.0625
+        }
+      },
+      "askContextState": "SELECTED_SNAPSHOT_SCOPE_BOUND",
+      "stale": false
+    },
+    {
+      "snapshotId": "WS-1500",
+      "acceptedAssetId": "VIS-CIV-WS-1500-ATMOSPHERE",
+      "sourceVersion": "world-snapshots-v1.json current unchanged semantics",
+      "acceptedState": "CONTENT_ACCEPTANCE_PRESERVED_LABEL_REVIEW_SCOPED",
+      "consumer": "world-slice-renderer.js selected .civ-world__globe img",
+      "desktop": {
+        "snapshotId": "WS-1500",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1500-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1500-ATMOSPHERE",
+        "contentObjectId": "WS-1500",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 1280,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1500-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 526,
+        "renderedHeight": 296.03125,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 587968,
+        "responseDigest": "0c43880528e09fb486bac87c3af1e8a1fdc4f345898b44e9fb875994a0ca4005",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1500%23atlas&contextSummary=World+%C2%B7+World+c.+1500&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 526,
+          "height": 296.03125
+        }
+      },
+      "mobile": {
+        "snapshotId": "WS-1500",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1500-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1500-ATMOSPHERE",
+        "contentObjectId": "WS-1500",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 390,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1500-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 256,
+        "renderedHeight": 144.0625,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 587968,
+        "responseDigest": "0c43880528e09fb486bac87c3af1e8a1fdc4f345898b44e9fb875994a0ca4005",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1500%23atlas&contextSummary=World+%C2%B7+World+c.+1500&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 256,
+          "height": 144.0625
+        }
+      },
+      "askContextState": "SELECTED_SNAPSHOT_SCOPE_BOUND",
+      "stale": false
+    },
+    {
+      "snapshotId": "WS-1750",
+      "acceptedAssetId": "VIS-CIV-WS-1750-ATMOSPHERE",
+      "sourceVersion": "world-snapshots-v1.json current unchanged semantics",
+      "acceptedState": "CONTENT_ACCEPTANCE_PRESERVED_LABEL_REVIEW_SCOPED",
+      "consumer": "world-slice-renderer.js selected .civ-world__globe img",
+      "desktop": {
+        "snapshotId": "WS-1750",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1750-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1750-ATMOSPHERE",
+        "contentObjectId": "WS-1750",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 1280,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1750-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 526,
+        "renderedHeight": 296.03125,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 543272,
+        "responseDigest": "29fba7cb4af640f147e4c7286eeb8afa7f28f2b5c2a6c1d0b890cd8cda4cb5d8",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1750%23atlas&contextSummary=World+%C2%B7+World+c.+1750&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1750%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 526,
+          "height": 296.03125
+        }
+      },
+      "mobile": {
+        "snapshotId": "WS-1750",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1750-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1750-ATMOSPHERE",
+        "contentObjectId": "WS-1750",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 390,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1750-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 256,
+        "renderedHeight": 144.0625,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 543272,
+        "responseDigest": "29fba7cb4af640f147e4c7286eeb8afa7f28f2b5c2a6c1d0b890cd8cda4cb5d8",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1750%23atlas&contextSummary=World+%C2%B7+World+c.+1750&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1750%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 256,
+          "height": 144.0625
+        }
+      },
+      "askContextState": "SELECTED_SNAPSHOT_SCOPE_BOUND",
+      "stale": false
+    },
+    {
+      "snapshotId": "WS-1850",
+      "acceptedAssetId": "VIS-CIV-WS-1850-ATMOSPHERE",
+      "sourceVersion": "world-snapshots-v1.json current unchanged semantics",
+      "acceptedState": "CONTENT_ACCEPTANCE_PRESERVED_LABEL_REVIEW_SCOPED",
+      "consumer": "world-slice-renderer.js selected .civ-world__globe img",
+      "desktop": {
+        "snapshotId": "WS-1850",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1850-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1850-ATMOSPHERE",
+        "contentObjectId": "WS-1850",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 1280,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1850-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 526,
+        "renderedHeight": 296.03125,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 531492,
+        "responseDigest": "21e60d301d5a0fddc2416c9cf1c6998d29ca7b660237b528b5da1740104ae185",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1850%23atlas&contextSummary=World+%C2%B7+World+c.+1850&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1850%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 526,
+          "height": 296.03125
+        }
+      },
+      "mobile": {
+        "snapshotId": "WS-1850",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1850-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1850-ATMOSPHERE",
+        "contentObjectId": "WS-1850",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 390,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1850-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 256,
+        "renderedHeight": 144.0625,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 531492,
+        "responseDigest": "21e60d301d5a0fddc2416c9cf1c6998d29ca7b660237b528b5da1740104ae185",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1850%23atlas&contextSummary=World+%C2%B7+World+c.+1850&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1850%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 256,
+          "height": 144.0625
+        }
+      },
+      "askContextState": "SELECTED_SNAPSHOT_SCOPE_BOUND",
+      "stale": false
+    },
+    {
+      "snapshotId": "WS-1914",
+      "acceptedAssetId": "VIS-CIV-WS-1914-ATMOSPHERE",
+      "sourceVersion": "world-snapshots-v1.json current unchanged semantics",
+      "acceptedState": "CONTENT_ACCEPTANCE_PRESERVED_LABEL_REVIEW_SCOPED",
+      "consumer": "world-slice-renderer.js selected .civ-world__globe img",
+      "desktop": {
+        "snapshotId": "WS-1914",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1914-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1914-ATMOSPHERE",
+        "contentObjectId": "WS-1914",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 1280,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1914-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 526,
+        "renderedHeight": 296.03125,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 605696,
+        "responseDigest": "ed747ffe335b90c930b4a82d898eb7489705d2757c8efe496967d3c58676a064",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1914%23atlas&contextSummary=World+%C2%B7+World+in+1914&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1914%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 526,
+          "height": 296.03125
+        }
+      },
+      "mobile": {
+        "snapshotId": "WS-1914",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1914-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1914-ATMOSPHERE",
+        "contentObjectId": "WS-1914",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 390,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1914-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 256,
+        "renderedHeight": 144.0625,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 605696,
+        "responseDigest": "ed747ffe335b90c930b4a82d898eb7489705d2757c8efe496967d3c58676a064",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1914%23atlas&contextSummary=World+%C2%B7+World+in+1914&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1914%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 256,
+          "height": 144.0625
+        }
+      },
+      "askContextState": "SELECTED_SNAPSHOT_SCOPE_BOUND",
+      "stale": false
+    },
+    {
+      "snapshotId": "WS-1945",
+      "acceptedAssetId": "VIS-CIV-WS-1945-ATMOSPHERE",
+      "sourceVersion": "world-snapshots-v1.json current unchanged semantics",
+      "acceptedState": "CONTENT_ACCEPTANCE_PRESERVED_LABEL_REVIEW_SCOPED",
+      "consumer": "world-slice-renderer.js selected .civ-world__globe img",
+      "desktop": {
+        "snapshotId": "WS-1945",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1945-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1945-ATMOSPHERE",
+        "contentObjectId": "WS-1945",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 1280,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1945-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 526,
+        "renderedHeight": 296.03125,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 573868,
+        "responseDigest": "9bec4422eb7e9f63afb3ccd9c37240326b5e209fa667a36e07c3004a3924763c",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1945%23atlas&contextSummary=World+%C2%B7+World+in+1945&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1945%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 526,
+          "height": 296.03125
+        }
+      },
+      "mobile": {
+        "snapshotId": "WS-1945",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1945-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1945-ATMOSPHERE",
+        "contentObjectId": "WS-1945",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 390,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1945-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 256,
+        "renderedHeight": 144.0625,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 573868,
+        "responseDigest": "9bec4422eb7e9f63afb3ccd9c37240326b5e209fa667a36e07c3004a3924763c",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1945%23atlas&contextSummary=World+%C2%B7+World+in+1945&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1945%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 256,
+          "height": 144.0625
+        }
+      },
+      "askContextState": "SELECTED_SNAPSHOT_SCOPE_BOUND",
+      "stale": false
+    },
+    {
+      "snapshotId": "WS-1980",
+      "acceptedAssetId": "VIS-CIV-WS-1980-ATMOSPHERE",
+      "sourceVersion": "world-snapshots-v1.json current unchanged semantics",
+      "acceptedState": "CONTENT_ACCEPTANCE_PRESERVED_LABEL_REVIEW_SCOPED",
+      "consumer": "world-slice-renderer.js selected .civ-world__globe img",
+      "desktop": {
+        "snapshotId": "WS-1980",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1980-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1980-ATMOSPHERE",
+        "contentObjectId": "WS-1980",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 1280,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1980-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 526,
+        "renderedHeight": 296.03125,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 633548,
+        "responseDigest": "14a0853186645b0ad23905b88b3f05b034add6d8a78dff37c3119cc0d857fb80",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1980%23atlas&contextSummary=World+%C2%B7+World+in+1980&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1980%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 526,
+          "height": 296.03125
+        }
+      },
+      "mobile": {
+        "snapshotId": "WS-1980",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-1980-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-1980-ATMOSPHERE",
+        "contentObjectId": "WS-1980",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 390,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-1980-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 256,
+        "renderedHeight": 144.0625,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 633548,
+        "responseDigest": "14a0853186645b0ad23905b88b3f05b034add6d8a78dff37c3119cc0d857fb80",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-1980%23atlas&contextSummary=World+%C2%B7+World+in+1980&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1980%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 256,
+          "height": 144.0625
+        }
+      },
+      "askContextState": "SELECTED_SNAPSHOT_SCOPE_BOUND",
+      "stale": false
+    },
+    {
+      "snapshotId": "WS-2000",
+      "acceptedAssetId": "VIS-CIV-WS-2000-ATMOSPHERE",
+      "sourceVersion": "world-snapshots-v1.json current unchanged semantics",
+      "acceptedState": "CONTENT_ACCEPTANCE_PRESERVED_LABEL_REVIEW_SCOPED",
+      "consumer": "world-slice-renderer.js selected .civ-world__globe img",
+      "desktop": {
+        "snapshotId": "WS-2000",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-2000-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-2000-ATMOSPHERE",
+        "contentObjectId": "WS-2000",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 1280,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-2000-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 526,
+        "renderedHeight": 296.03125,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 635518,
+        "responseDigest": "aa6fe60aeff0c258412f1e0d1b09cd77fdc8adecb8719ab51a54c8ab30cb4299",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-2000%23atlas&contextSummary=World+%C2%B7+World+in+2000&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-2000%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 526,
+          "height": 296.03125
+        }
+      },
+      "mobile": {
+        "snapshotId": "WS-2000",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-2000-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-2000-ATMOSPHERE",
+        "contentObjectId": "WS-2000",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 390,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-2000-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 256,
+        "renderedHeight": 144.0625,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 635518,
+        "responseDigest": "aa6fe60aeff0c258412f1e0d1b09cd77fdc8adecb8719ab51a54c8ab30cb4299",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-2000%23atlas&contextSummary=World+%C2%B7+World+in+2000&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-2000%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 256,
+          "height": 144.0625
+        }
+      },
+      "askContextState": "SELECTED_SNAPSHOT_SCOPE_BOUND",
+      "stale": false
+    },
+    {
+      "snapshotId": "WS-2026",
+      "acceptedAssetId": "VIS-CIV-WS-2026-ATMOSPHERE",
+      "sourceVersion": "world-snapshots-v1.json current unchanged semantics",
+      "acceptedState": "CONTENT_ACCEPTANCE_PRESERVED_LABEL_REVIEW_SCOPED",
+      "consumer": "world-slice-renderer.js selected .civ-world__globe img",
+      "desktop": {
+        "snapshotId": "WS-2026",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-2026-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-2026-ATMOSPHERE",
+        "contentObjectId": "WS-2026",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 1280,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-2026-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 526,
+        "renderedHeight": 296.03125,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 604022,
+        "responseDigest": "922224fc48c0b13c3bc01d2ae0b23ad0550249db4999808c6e77a665687124e9",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-2026%23atlas&contextSummary=World+%C2%B7+World+in+2026&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-2026%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 526,
+          "height": 296.03125
+        }
+      },
+      "mobile": {
+        "snapshotId": "WS-2026",
+        "objectKey": "images/civilization-atlas/snapshots/VIS-CIV-WS-2026-ATMOSPHERE.webp",
+        "acceptedAssetId": "VIS-CIV-WS-2026-ATMOSPHERE",
+        "contentObjectId": "WS-2026",
+        "acceptanceReceipt": "content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json",
+        "expectedConsumer": "world-slice-renderer.js selected .civ-world__globe img",
+        "width": 390,
+        "R2_OBJECT_PRESENT": "CONFIRMED_BY_OWNER",
+        "state": "PASS_LOAD_DECODE_IDENTITY_VISIBLE_SELECTED_CONSUMER",
+        "resolvedUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/civilization-atlas/snapshots/VIS-CIV-WS-2026-ATMOSPHERE.webp",
+        "naturalWidth": 1672,
+        "naturalHeight": 941,
+        "visibleInViewport": true,
+        "decodeState": "DECODE_SUCCESS",
+        "renderedWidth": 256,
+        "renderedHeight": 144.0625,
+        "requestStatus": 200,
+        "contentType": "image/webp",
+        "responseBytes": 604022,
+        "responseDigest": "922224fc48c0b13c3bc01d2ae0b23ad0550249db4999808c6e77a665687124e9",
+        "selectedState": 1,
+        "correctAssetIdentity": true,
+        "unrelatedFallbackUsed": false,
+        "askHref": "/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Flocale%3Den%26atlas%3Dworld%26snapshot%3DWS-2026%23atlas&contextSummary=World+%C2%B7+World+in+2026&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-2026%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D",
+        "printApplicability": {
+          "state": "VISIBLE",
+          "display": "block",
+          "width": 256,
+          "height": 144.0625
+        }
+      },
+      "askContextState": "SELECTED_SNAPSHOT_SCOPE_BOUND",
+      "stale": false
+    }
+  ],
+  "dossiers": [
+    {
+      "dossierId": "DOSSIER-US",
+      "sourceVersion": "PHI-OS-DOSSIER-US-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+      "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+      "acceptedPositionCount": 2,
+      "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+      "runtimeState": "PASS",
+      "renderState": "PASS",
+      "mobileState": "PASS",
+      "wholeDossierPosition": "UNKNOWN",
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-US-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "bdcd2690aba53b0dee677c7458174a575a9475b947e7e3b50aca67d54b74ffc7"
+      },
+      "sourceTimestamp": "2026-10-02T02:47:00.000Z",
+      "currentness": "SOURCE_TIMESTAMPS_BOUND_CURRENT_FRESHNESS_NOT_INFERRED",
+      "moomoo": [
+        {
+          "claimId": "MOOMOO-HISTORY-US-SPY-f159349bd998",
+          "freshness": "STALE",
+          "sourceVersion": "f159349bd998fa4edbdf89447d6ce6faa04bafb994a77acff2c2b60e929c53d3"
+        },
+        {
+          "claimId": "MOOMOO-HISTORY-US-QQQ-7ed38bb436d6",
+          "freshness": "STALE",
+          "sourceVersion": "7ed38bb436d6fa2180869a5feda125b2c611f806a70beac0683da428be3086d8"
+        },
+        {
+          "claimId": "MOOMOO-HISTORY-US-XLK-38b43e0def10",
+          "freshness": "STALE",
+          "sourceVersion": "38b43e0def100c2f3679ffc5a11981d1acb9dd3c41586020f4f1e07f6bc7b0b3"
+        },
+        {
+          "claimId": "MOOMOO-HISTORY-US-XLF-4ffdd091ef10",
+          "freshness": "STALE",
+          "sourceVersion": "4ffdd091ef1064b2add3526eacba101dd6891a5deb8ce807e4b302130de1fc06"
+        },
+        {
+          "claimId": "MOOMOO-HISTORY-US-XLI-a06d1db8fb7e",
+          "freshness": "STALE",
+          "sourceVersion": "a06d1db8fb7ee8596dc12636fc04aa0bb90cb6bebeaa25759a5265a95e77e07d"
+        },
+        {
+          "claimId": "MOOMOO-HISTORY-US-XLY-9731ca840f2a",
+          "freshness": "STALE",
+          "sourceVersion": "9731ca840f2a4047e8936197e3d696ce0b54af2752291dcb457d0546b51a9df5"
+        },
+        {
+          "claimId": "MOOMOO-HISTORY-US-XLE-e2653235fef6",
+          "freshness": "STALE",
+          "sourceVersion": "e2653235fef62ac7218caa51b1da78e95581eca64c477b4dd6016f03a6996631"
+        },
+        {
+          "claimId": "MOOMOO-HISTORY-US-XLV-eb3652f6f62f",
+          "freshness": "STALE",
+          "sourceVersion": "eb3652f6f62f0a26e27211ebe9e28b9b615fe5c05b1a141ed756ba32b6d215ff"
+        },
+        {
+          "claimId": "MOOMOO-CAPITAL-FLOW-US-SPY-af2addfaea49",
+          "freshness": "CURRENT",
+          "sourceVersion": "af2addfaea49da24984b411e3497b680eb379bef624648323bd1ce00e2a18f83"
+        },
+        {
+          "claimId": "MOOMOO-CAPITAL-FLOW-US-QQQ-c736b3c5b706",
+          "freshness": "CURRENT",
+          "sourceVersion": "c736b3c5b7066cd269dac69ea8af99915b29b8d31b8dea383f6838a06f9931d4"
+        },
+        {
+          "claimId": "MOOMOO-CAPITAL-FLOW-US-XLK-303fde7c04a7",
+          "freshness": "CURRENT",
+          "sourceVersion": "303fde7c04a758c25539c557920e5b3a6492a2997013c520c6a185bda1194ae2"
+        },
+        {
+          "claimId": "MOOMOO-CAPITAL-FLOW-US-XLF-ef5988702834",
+          "freshness": "CURRENT",
+          "sourceVersion": "ef59887028344ce6a30fdf458dedfb98f4c51b070a8947e6169686e22c4f3f9f"
+        },
+        {
+          "claimId": "MOOMOO-CAPITAL-FLOW-US-XLI-3d5b79033370",
+          "freshness": "CURRENT",
+          "sourceVersion": "3d5b790333700732b5dff29967565828571cba8ea91bddfbf975c699511cf046"
+        },
+        {
+          "claimId": "MOOMOO-CAPITAL-FLOW-US-XLY-214848ca8020",
+          "freshness": "CURRENT",
+          "sourceVersion": "214848ca8020c32151435e041d6826366c964483f45b322dbadf3df717f877c7"
+        },
+        {
+          "claimId": "MOOMOO-CAPITAL-FLOW-US-XLE-b3a889fce7db",
+          "freshness": "CURRENT",
+          "sourceVersion": "b3a889fce7db5ab7d00849b7747a22f3eff6d1ca04e29fe5c289927759c2231d"
+        },
+        {
+          "claimId": "MOOMOO-CAPITAL-FLOW-US-XLV-1d33a605f2db",
+          "freshness": "CURRENT",
+          "sourceVersion": "1d33a605f2dbeca301be4907d811005e7fc629fcf683acc2b4aabf5b07f42bc9"
+        },
+        {
+          "claimId": "MOOMOO-VALUATION-US-AAPL-PE-3c29c842432f",
+          "freshness": "CURRENT",
+          "sourceVersion": "3c29c842432f5786b94d892b863b459d85902f11676148144782b20937741bb7"
+        },
+        {
+          "claimId": "MOOMOO-VALUATION-US-AAPL-PB-f4706caecf82",
+          "freshness": "CURRENT",
+          "sourceVersion": "f4706caecf825971bd267f1af9be901249f222397a9e74f03ac271dc2261b2dc"
+        },
+        {
+          "claimId": "MOOMOO-VALUATION-US-AAPL-PS-9f9dc4dd8a19",
+          "freshness": "CURRENT",
+          "sourceVersion": "9f9dc4dd8a190388564e461afac95a6184bc9cda1a689abd4a57a8f0e1a1e729"
+        },
+        {
+          "claimId": "MOOMOO-VALUATION-US-MSFT-PE-1c269a237a05",
+          "freshness": "CURRENT",
+          "sourceVersion": "1c269a237a05f94d9551e1f2bc85239a1243964b502aa6bcd083e3932c4f22c3"
+        },
+        {
+          "claimId": "MOOMOO-VALUATION-US-MSFT-PB-d97df01f3fb6",
+          "freshness": "CURRENT",
+          "sourceVersion": "d97df01f3fb601dbee36027d7a62b4068a0e7c348d7c21f5f9991fdd24aff273"
+        },
+        {
+          "claimId": "MOOMOO-VALUATION-US-MSFT-PS-05b72a5eafa4",
+          "freshness": "CURRENT",
+          "sourceVersion": "05b72a5eafa4cec42ff6a43c580151049d09fc4b0ef4211c1cbd87da3e7d5c52"
+        },
+        {
+          "claimId": "MOOMOO-VALUATION-US-AMZN-PE-e6c727c266ae",
+          "freshness": "CURRENT",
+          "sourceVersion": "e6c727c266ae740a9ccc9033b92193af58753be5d854d3702acce78a87956d6b"
+        },
+        {
+          "claimId": "MOOMOO-VALUATION-US-AMZN-PB-b4bd35f5f4b2",
+          "freshness": "CURRENT",
+          "sourceVersion": "b4bd35f5f4b28fdd4286ae8a74bb0ce0b35d2ca5ee25c2de639d5bb7607451d1"
+        },
+        {
+          "claimId": "MOOMOO-VALUATION-US-AMZN-PS-cbf4e81dcb13",
+          "freshness": "CURRENT",
+          "sourceVersion": "cbf4e81dcb131b1493e6e11775bd7486fea11d07e98ea9659e24bfdd7ddf565c"
+        },
+        {
+          "claimId": "MOOMOO-VALUATION-US-NVDA-PE-d9c7cc989693",
+          "freshness": "CURRENT",
+          "sourceVersion": "d9c7cc98969363a0b0de1bebd13b2004ad2606ab600240030e910082ea9d1b49"
+        },
+        {
+          "claimId": "MOOMOO-VALUATION-US-NVDA-PB-d808f14aa5be",
+          "freshness": "CURRENT",
+          "sourceVersion": "d808f14aa5be25c6f3ef48ad09aa9882ec3798f40fd3995a8d8699533a0e621a"
+        },
+        {
+          "claimId": "MOOMOO-VALUATION-US-NVDA-PS-2c3b0489ae98",
+          "freshness": "CURRENT",
+          "sourceVersion": "2c3b0489ae9814781c4e1c5652220ac142de40c3d75a0c428e70790c89791223"
+        },
+        {
+          "claimId": "MOOMOO-VALUATION-US-JPM-PE-00b1b7654c0a",
+          "freshness": "CURRENT",
+          "sourceVersion": "00b1b7654c0aa8340ece078e254355462d9812f5c42158f4f03c8782cfe4b35e"
+        },
+        {
+          "claimId": "MOOMOO-VALUATION-US-JPM-PB-9351604c22ff",
+          "freshness": "CURRENT",
+          "sourceVersion": "9351604c22ff142c67197c1d7926dfebb4f4f4de8de3dd5e2d746800460a24bd"
+        },
+        {
+          "claimId": "MOOMOO-VALUATION-US-JPM-PS-dc08bcbc4299",
+          "freshness": "CURRENT",
+          "sourceVersion": "dc08bcbc4299b932f6988c604127cf5d73bb3b2001812867f444d3ee15de4cc7"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-AAPL-S1-3c8df0dee6b3",
+          "freshness": "CURRENT",
+          "sourceVersion": "3c8df0dee6b37169d56d96affa0d2b16d3e662fe46312bd3b6efa587c57478fe"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-AAPL-S2-8ef3f09a181e",
+          "freshness": "CURRENT",
+          "sourceVersion": "8ef3f09a181eadbaeff85099bbcb56ab00b629c59917f48a5de597513a7e3c4e"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-AAPL-S3-3f28163636d0",
+          "freshness": "CURRENT",
+          "sourceVersion": "3f28163636d0b75f53b91c69b26728aadd4dd2277a5793746f1e55852038809c"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-AAPL-S4-3b758143ba4c",
+          "freshness": "CURRENT",
+          "sourceVersion": "3b758143ba4c6d2b614d9225ba1fd5aea14ecad6520d401a1a17fb290e65d80b"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-MSFT-S1-a54658d106ce",
+          "freshness": "CURRENT",
+          "sourceVersion": "a54658d106ceb28930e983e67186e4b4125ecd64e865f178483698dcfa532f6b"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-MSFT-S2-53ecfdf6b3bf",
+          "freshness": "CURRENT",
+          "sourceVersion": "53ecfdf6b3bff22ba91911517b402d7ef5e20058a063d46e977344b30281517d"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-MSFT-S3-cc7be48456b3",
+          "freshness": "CURRENT",
+          "sourceVersion": "cc7be48456b36eb996632e1256ab4aedd4a9550cb45db1673d0df6d7c5e96309"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-MSFT-S4-701db431959c",
+          "freshness": "CURRENT",
+          "sourceVersion": "701db431959c5a0371a570cd3fb0ede01a2ae8dec4a6ad20d9f77f1f925f5f8d"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-AMZN-S1-7e7caab530d4",
+          "freshness": "CURRENT",
+          "sourceVersion": "7e7caab530d49afa469648f834a19d0a1393589bf57b0819df8e463c63e745d6"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-AMZN-S2-c52c3ba75470",
+          "freshness": "CURRENT",
+          "sourceVersion": "c52c3ba7547029e485c78282ebec8858597490d3a569629dbff97cc8ea70ee5a"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-AMZN-S3-53cb070505ce",
+          "freshness": "CURRENT",
+          "sourceVersion": "53cb070505ce2ffea719de21fd64b332a21eeeb11d9d86c7b0a47100ffcaf0d0"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-AMZN-S4-bff326051ec7",
+          "freshness": "CURRENT",
+          "sourceVersion": "bff326051ec73fcb81576875b84ecedfb59b68f76e8dfb8f1694576092750126"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-NVDA-S1-af8404f86a79",
+          "freshness": "CURRENT",
+          "sourceVersion": "af8404f86a79b9dd9520bbb4ee07cc40f5e0e5eed1253fae15b7bd5fc5052106"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-NVDA-S2-1a23b9f36576",
+          "freshness": "CURRENT",
+          "sourceVersion": "1a23b9f36576a5927f01c9729e151f6511832ea8b7bddd02346bfd7d691a749d"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-NVDA-S3-56fb80c85a76",
+          "freshness": "CURRENT",
+          "sourceVersion": "56fb80c85a76ec3d40372e87036a35c435f1456f99dc8541b26dfa399e1a6b49"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-NVDA-S4-33463c5ceec7",
+          "freshness": "CURRENT",
+          "sourceVersion": "33463c5ceec7e7b7b6bc91ac94f32dd56eea4ef17d4fd13e5b74d15558e4fad7"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-JPM-S1-d19774bcd7dc",
+          "freshness": "CURRENT",
+          "sourceVersion": "d19774bcd7dc4622b1d2aea0d9204856bc92af54f9a0c1344b8b4827bce83448"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-JPM-S2-9d0af479d394",
+          "freshness": "CURRENT",
+          "sourceVersion": "9d0af479d3946dd243dc0ef9336f506ac3a69eaecc7c80581be5d4a9875f15a0"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-JPM-S3-4d0fb94c1ddf",
+          "freshness": "CURRENT",
+          "sourceVersion": "4d0fb94c1ddf6a8635b2ff86d1ed02e785dc5ef84b3205cd6cea62e81193ce2c"
+        },
+        {
+          "claimId": "MOOMOO-FINANCIALS-US-JPM-S4-0c6cf1014aa8",
+          "freshness": "CURRENT",
+          "sourceVersion": "0c6cf1014aa820923a6712d98f69e9d07e9cf82c4779bb88521a96955e3b6cba"
+        },
+        {
+          "claimId": "MOOMOO-REVENUE-BREAKDOWN-US-AAPL-685aae881d35",
+          "freshness": "CURRENT",
+          "sourceVersion": "685aae881d3542e3b7716c48f2cd93bc1849da6394c14aa015d4e91529324a26"
+        },
+        {
+          "claimId": "MOOMOO-REVENUE-BREAKDOWN-US-MSFT-ed4dfc0eaf45",
+          "freshness": "CURRENT",
+          "sourceVersion": "ed4dfc0eaf452602cec127d342120cb403ea709a7ebb297b3ead619f425926a3"
+        },
+        {
+          "claimId": "MOOMOO-REVENUE-BREAKDOWN-US-AMZN-d04cbc0a3af5",
+          "freshness": "CURRENT",
+          "sourceVersion": "d04cbc0a3af5759411b384e455165a40216ccab3ffec1fb498ffe307f569659c"
+        },
+        {
+          "claimId": "MOOMOO-REVENUE-BREAKDOWN-US-NVDA-94da861559a8",
+          "freshness": "CURRENT",
+          "sourceVersion": "94da861559a8e3d28c31f85f16a45343303a34211ea1bdf05c404e3257640687"
+        },
+        {
+          "claimId": "MOOMOO-REVENUE-BREAKDOWN-US-JPM-7f1bc205f22f",
+          "freshness": "CURRENT",
+          "sourceVersion": "7f1bc205f22ffa90dc7b1a79978ceb16e0aee7df2bdd9c060c00e01922c3d62a"
+        }
+      ],
+      "renderStateEvidence": {
+        "textLength": 694,
+        "viewport": 1280
+      },
+      "mobileStateEvidence": {
+        "textLength": 694,
+        "viewport": 390
+      },
+      "sourceEvidence": [
+        {
+          "claimId": "US-DEMOGRAPHY-2026-001",
+          "sourceId": "US-CENSUS-VINTAGE-2025-NATIONAL-STATE",
+          "sourceVersion": "VINTAGE-2025-NATIONAL-STATE-20260127",
+          "sourceUrl": "https://www.census.gov/newsroom/press-kits/2026/national-state-population-estimates.html",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-01-27T00:00:00.000Z",
+          "retrievedAt": "2026-10-02T02:47:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+        },
+        {
+          "claimId": "US-INDUSTRY-2026-001",
+          "sourceId": "US-BEA-GDP-BY-INDUSTRY-2026Q2",
+          "sourceVersion": "2026Q2-THIRD-ESTIMATE-20260930",
+          "sourceUrl": "https://www.bea.gov/data/gdp/gdp-industry",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-09-30T00:00:00.000Z",
+          "retrievedAt": "2026-10-02T02:47:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+        },
+        {
+          "claimId": "US-INFRASTRUCTURE-2026-001",
+          "sourceId": "US-BTS-NTS-UPDATE-20260930",
+          "sourceVersion": "NTS-UPDATE-20260930",
+          "sourceUrl": "https://www.bts.gov/newsroom/bts-updates-national-transportation-statistics-93026",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-09-30T00:00:00.000Z",
+          "retrievedAt": "2026-10-02T02:47:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+        },
+        {
+          "claimId": "US-TECHNOLOGY-2026-001",
+          "sourceId": "US-NSF-NSB-SEP-2026-1",
+          "sourceVersion": "NSB-SEP-2026-1",
+          "sourceUrl": "https://ncses.nsf.gov/pubs/nsbsep20261/executive-summary",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-05-04T00:00:00.000Z",
+          "retrievedAt": "2026-10-02T02:47:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+        },
+        {
+          "claimId": "US-EXTERNAL-DEPENDENCY-2026-001",
+          "sourceId": "US-BEA-TRADE-GOODS-SERVICES-JULY-2026",
+          "sourceVersion": "BEA-26-40_CB-26-142_JULY-2026",
+          "sourceUrl": "https://www.bea.gov/news/2026/us-international-trade-goods-and-services-july-2026",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-09-03T00:00:00.000Z",
+          "retrievedAt": "2026-10-02T02:47:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+        },
+        {
+          "claimId": "US-CARRIER-STRUCTURE-2026-001",
+          "sourceId": "US-SBA-FAQ-SMALL-BUSINESS-2026",
+          "sourceVersion": "SBA-ADVOCACY-FAQ-SMALL-BUSINESS-2026-02",
+          "sourceUrl": "https://advocacy.sba.gov/2026/02/03/frequently-asked-questions-about-small-business-2026/",
+          "authorityClass": "GOVERNMENT",
+          "publishedAt": "2026-02-03T00:00:00.000Z",
+          "retrievedAt": "2026-10-02T02:47:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+        },
+        {
+          "claimId": "US-PRESSURE-FIELD-2026-001",
+          "sourceId": "US-FED-FSR-MAY-2026",
+          "sourceVersion": "FED-FSR-MAY-2026",
+          "sourceUrl": "https://www.federalreserve.gov/publications/2026-may-financial-stability-report-overview.htm",
+          "authorityClass": "REGULATOR",
+          "publishedAt": null,
+          "retrievedAt": "2026-10-02T02:47:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+        }
+      ],
+      "missingTimestampEvidence": [],
+      "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+      "acceptedPositionsUnchanged": true,
+      "timestampEvidence": "W31-DOSSIER-TIMESTAMP-AUDIT.json",
+      "currentEvidenceRefreshRequired": false
+    },
+    {
+      "dossierId": "DOSSIER-CN",
+      "sourceVersion": "PHI-OS-DOSSIER-CN-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+      "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+      "acceptedPositionCount": 2,
+      "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+      "runtimeState": "PASS",
+      "renderState": "PASS",
+      "mobileState": "PASS",
+      "wholeDossierPosition": "UNKNOWN",
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-CN-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "dd903415622cf8390634eeaf758b432489868352eb6a79a5f3e024e67c7fe871"
+      },
+      "sourceTimestamp": "2026-10-08T04:20:00.000Z",
+      "currentness": "SOURCE_TIMESTAMPS_BOUND_CURRENT_FRESHNESS_NOT_INFERRED",
+      "moomoo": [],
+      "renderStateEvidence": {
+        "textLength": 648,
+        "viewport": 1280
+      },
+      "mobileStateEvidence": {
+        "textLength": 648,
+        "viewport": 390
+      },
+      "sourceEvidence": [
+        {
+          "claimId": "CN-DEMOGRAPHY-2026-001",
+          "sourceId": "CN-NBS-1PCT-POP-2025",
+          "sourceVersion": "NBS-1PCT-POP-2025-20260522",
+          "sourceUrl": "https://www.stats.gov.cn/sj/zxfb/202605/t20260522_1963788.html",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-05-22T07:00:00.000Z",
+          "retrievedAt": "2026-10-08T04:20:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+        },
+        {
+          "claimId": "CN-INDUSTRY-2026-001",
+          "sourceId": "CN-NBS-INDUSTRY-AUG-2026",
+          "sourceVersion": "NBS-INDUSTRY-2026-08-20260915",
+          "sourceUrl": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202609/t20260915_1965308.html",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-09-15T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T04:20:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+        },
+        {
+          "claimId": "CN-INFRASTRUCTURE-2026-001",
+          "sourceId": "CN-MOT-LOGISTICS-20260921-27",
+          "sourceVersion": "MOT-LOGISTICS-20260921-27",
+          "sourceUrl": "https://www.mot.gov.cn/zhuanti/wuliubtbc/qingkuangtongbao_wuliu/202609/t20260928_4225051.html",
+          "authorityClass": "GOVERNMENT",
+          "publishedAt": "2026-09-28T07:26:00.000Z",
+          "retrievedAt": "2026-10-08T04:20:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+        },
+        {
+          "claimId": "CN-TECHNOLOGY-2026-001",
+          "sourceId": "CN-NBS-RD-2025-ACHIEVEMENT",
+          "sourceVersion": "NBS-RD-2025-ACHIEVEMENT-20260602",
+          "sourceUrl": "https://www.stats.gov.cn/sj/sjjd/202606/t20260602_1963863.html",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-06-02T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T04:20:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+        },
+        {
+          "claimId": "CN-EXTERNAL-DEPENDENCY-2026-001",
+          "sourceId": "CN-SAFE-TRADE-GS-AUG-2026",
+          "sourceVersion": "SAFE-TRADE-GS-2026-08-20260929",
+          "sourceUrl": "https://www.safe.gov.cn/en/2026/0929/2456.html",
+          "authorityClass": "REGULATOR",
+          "publishedAt": "2026-09-29T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T04:20:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+        },
+        {
+          "claimId": "CN-CARRIER-STRUCTURE-2026-001",
+          "sourceId": "CN-NBS-STAT-COMMUNIQUE-2025",
+          "sourceVersion": "NBS-STAT-COMMUNIQUE-2025-20260228",
+          "sourceUrl": "https://www.stats.gov.cn/sj/zxfbhjd/202602/t20260228_1962662.html",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-02-28T01:30:00.000Z",
+          "retrievedAt": "2026-10-08T04:20:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+        },
+        {
+          "claimId": "CN-PRESSURE-FIELD-2026-001",
+          "sourceId": "CN-GOV-WORK-REPORT-RISK-2026",
+          "sourceVersion": "STATE-COUNCIL-2026-GOV-WORK-RISK",
+          "sourceUrl": "https://english.www.gov.cn/2026special/2026npcandcpcc/202603/05/content_WS69a8f1dec6d00ca5f9a098ae.html",
+          "authorityClass": "GOVERNMENT",
+          "publishedAt": "2026-03-05T03:00:00.000Z",
+          "retrievedAt": "2026-10-08T04:20:00.000Z",
+          "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+        }
+      ],
+      "missingTimestampEvidence": [],
+      "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+      "acceptedPositionsUnchanged": true,
+      "timestampEvidence": "W31-DOSSIER-TIMESTAMP-AUDIT.json",
+      "currentEvidenceRefreshRequired": false
+    },
+    {
+      "dossierId": "DOSSIER-IN",
+      "sourceVersion": "PHI-OS-DOSSIER-IN-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+      "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+      "acceptedPositionCount": 3,
+      "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+      "runtimeState": "PASS",
+      "renderState": "PASS",
+      "mobileState": "PASS",
+      "wholeDossierPosition": "UNKNOWN",
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-IN-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "c8ca419d414b51ca8aaf08491566e0fd5212db790690989243a1c5d74df848f8"
+      },
+      "sourceTimestamp": "2026-10-08T06:25:00.000Z",
+      "currentness": "SOURCE_TIMESTAMPS_BOUND_CURRENT_FRESHNESS_NOT_INFERRED",
+      "moomoo": [],
+      "renderStateEvidence": {
+        "textLength": 624,
+        "viewport": 1280
+      },
+      "mobileStateEvidence": {
+        "textLength": 624,
+        "viewport": 390
+      },
+      "sourceEvidence": [
+        {
+          "claimId": "IN-DEMOGRAPHY-2026-001",
+          "sourceId": "IN-ECONOMIC-SURVEY-DEMOGRAPHY-2025-26",
+          "sourceVersion": "ECONOMIC-SURVEY-2025-26-CH12",
+          "sourceUrl": "https://www.indiabudget.gov.in/economicsurvey/",
+          "authorityClass": "GOVERNMENT",
+          "publishedAt": "2026-01-29T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:25:00.000Z",
+          "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "IN-INDUSTRY-2026-001",
+          "sourceId": "IN-MOSPI-IIP-AUG-2026",
+          "sourceVersion": "MOSPI-IIP-2026-08-20260928",
+          "sourceUrl": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2315957&lang=1&reg=3",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-09-28T16:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:25:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "IN-INFRASTRUCTURE-2026-001",
+          "sourceId": "IN-RAILWAYS-GCT-JUL-2026",
+          "sourceVersion": "RAILWAYS-GCT-20260723",
+          "sourceUrl": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2288380&lang=1&reg=20",
+          "authorityClass": "GOVERNMENT",
+          "publishedAt": "2026-07-23T17:14:00.000Z",
+          "retrievedAt": "2026-10-08T06:25:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "IN-TECHNOLOGY-2026-001",
+          "sourceId": "IN-MEITY-DIGITAL-INFRA-AUG-2026",
+          "sourceVersion": "MEITY-DIGITAL-INFRA-20260806",
+          "sourceUrl": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2295635&lang=1&reg=48",
+          "authorityClass": "GOVERNMENT",
+          "publishedAt": "2026-08-06T18:07:00.000Z",
+          "retrievedAt": "2026-10-08T06:25:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "IN-EXTERNAL-DEPENDENCY-2026-001",
+          "sourceId": "IN-MOPNG-SAMUDRA-MANTHAN-2026",
+          "sourceVersion": "MOPNG-SAMUDRA-MANTHAN-20260803",
+          "sourceUrl": "https://www.pib.gov.in/PressNoteDetails.aspx?ModuleId=3&NoteId=159415&lang=2&reg=48",
+          "authorityClass": "GOVERNMENT",
+          "publishedAt": "2026-08-03T18:02:00.000Z",
+          "retrievedAt": "2026-10-08T06:25:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "IN-CARRIER-STRUCTURE-2026-001",
+          "sourceId": "IN-UPI-10Y-AUG-2026",
+          "sourceVersion": "UPI-10Y-20260824",
+          "sourceUrl": "https://www.pib.gov.in/PressReleseDetailm.aspx?PRID=2302657&lang=1&reg=3",
+          "authorityClass": "GOVERNMENT",
+          "publishedAt": "2026-08-24T13:57:00.000Z",
+          "retrievedAt": "2026-10-08T06:25:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "IN-PRESSURE-FIELD-2026-001",
+          "sourceId": "IN-WPI-AUG-2026",
+          "sourceVersion": "WPI-2026-08-20260914",
+          "sourceUrl": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2309977&lang=2&reg=48",
+          "authorityClass": "GOVERNMENT",
+          "publishedAt": "2026-09-14T12:01:00.000Z",
+          "retrievedAt": "2026-10-08T06:25:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        }
+      ],
+      "missingTimestampEvidence": [],
+      "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+      "acceptedPositionsUnchanged": true,
+      "timestampEvidence": "W31-DOSSIER-TIMESTAMP-AUDIT.json",
+      "currentEvidenceRefreshRequired": false
+    },
+    {
+      "dossierId": "DOSSIER-EU",
+      "sourceVersion": "PHI-OS-DOSSIER-EU-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+      "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+      "acceptedPositionCount": 3,
+      "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+      "runtimeState": "PASS",
+      "renderState": "PASS",
+      "mobileState": "PASS",
+      "wholeDossierPosition": "UNKNOWN",
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-EU-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "6fe8d9d2b675f8b1548b1a0b43f8ce80f8fa41af1d968425de6fb0d6ee2040c2"
+      },
+      "sourceTimestamp": "2026-10-08T06:58:00.000Z",
+      "currentness": "SOURCE_TIMESTAMPS_BOUND_CURRENT_FRESHNESS_NOT_INFERRED",
+      "moomoo": [],
+      "renderStateEvidence": {
+        "textLength": 612,
+        "viewport": 1280
+      },
+      "mobileStateEvidence": {
+        "textLength": 612,
+        "viewport": 390
+      },
+      "sourceEvidence": [
+        {
+          "claimId": "EU-DEMOGRAPHY-2026-001",
+          "sourceId": "EU-EUROSTAT-POP-2026",
+          "sourceVersion": "EUROSTAT-POP-2026-20260710",
+          "sourceUrl": "https://ec.europa.eu/eurostat/en/web/products-eurostat-news/w/ddn-20260710-3",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-07-10T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:58:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "EU-INDUSTRY-2026-001",
+          "sourceId": "EU-EUROSTAT-IP-JUL-2026",
+          "sourceVersion": "EUROSTAT-IP-2026-07-20260916",
+          "sourceUrl": "https://ec.europa.eu/eurostat/de/web/products-euro-indicators/w/4-16092026-ap",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-09-16T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:58:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "EU-INFRASTRUCTURE-2026-001",
+          "sourceId": "EU-TENT-WORKPLANS-SEP-2026",
+          "sourceVersion": "TEN-T-WORKPLANS-20260930",
+          "sourceUrl": "https://transport.ec.europa.eu/news-events/news/work-plans-ten-t-european-coordinators-published-2026-09-30_en",
+          "authorityClass": "GOVERNMENT",
+          "publishedAt": "2026-09-30T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:58:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "EU-TECHNOLOGY-2026-001",
+          "sourceId": "EU-DIGITAL-DECADE-2026",
+          "sourceVersion": "DIGITAL-DECADE-2026-20260617",
+          "sourceUrl": "https://commission.europa.eu/news-and-media/news/state-digital-decade-report-progress-made-gaps-remain-2026-06-17_en",
+          "authorityClass": "GOVERNMENT",
+          "publishedAt": "2026-06-17T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:58:00.000Z",
+          "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "EU-EXTERNAL-DEPENDENCY-2026-001",
+          "sourceId": "EU-EUROSTAT-ENERGY-2026",
+          "sourceVersion": "EUROSTAT-ENERGY-DEPENDENCY-2026",
+          "sourceUrl": "https://ec.europa.eu/eurostat/en/web/products-eurostat-news/w/wdn-20260318-1",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-03-18T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:58:00.000Z",
+          "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "EU-CARRIER-STRUCTURE-2026-001",
+          "sourceId": "EU-ECB-TARGET-AR-2025",
+          "sourceVersion": "ECB-TARGET-SERVICES-AR-2025-20260612",
+          "sourceUrl": "https://www.ecb.europa.eu/press/targetservar/html/ecb.targetservar2025.en.html",
+          "authorityClass": "REGULATOR",
+          "publishedAt": "2026-06-12T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:58:00.000Z",
+          "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "EU-PRESSURE-FIELD-2026-001",
+          "sourceId": "EU-EUROSTAT-PPI-AUG-2026",
+          "sourceVersion": "EUROSTAT-PPI-2026-08-20261005",
+          "sourceUrl": "https://ec.europa.eu/eurostat/en/web/products-euro-indicators/w/4-05102026-ap",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-10-05T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:58:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        }
+      ],
+      "missingTimestampEvidence": [],
+      "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+      "acceptedPositionsUnchanged": true,
+      "timestampEvidence": "W31-DOSSIER-TIMESTAMP-AUDIT.json",
+      "currentEvidenceRefreshRequired": false
+    },
+    {
+      "dossierId": "DOSSIER-JP",
+      "sourceVersion": "PHI-OS-DOSSIER-JP-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+      "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+      "acceptedPositionCount": 3,
+      "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+      "runtimeState": "PASS",
+      "renderState": "PASS",
+      "mobileState": "PASS",
+      "wholeDossierPosition": "UNKNOWN",
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-JP-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "49d9af5f5299315450262148980236301041f614b7000cfcc6a47ad873d8aca6"
+      },
+      "sourceTimestamp": null,
+      "currentness": "CURRENTNESS_UNKNOWN",
+      "moomoo": [],
+      "renderStateEvidence": {
+        "textLength": 624,
+        "viewport": 1280
+      },
+      "mobileStateEvidence": {
+        "textLength": 624,
+        "viewport": 390
+      },
+      "sourceEvidence": [],
+      "missingTimestampEvidence": [
+        "JP-DEMOGRAPHY-2026-001",
+        "JP-INDUSTRY-2026-001",
+        "JP-INFRASTRUCTURE-2026-001",
+        "JP-TECHNOLOGY-2026-001",
+        "JP-EXTERNAL-DEPENDENCY-2026-001",
+        "JP-CARRIER-STRUCTURE-2026-001",
+        "JP-PRESSURE-FIELD-2026-001"
+      ],
+      "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+      "acceptedPositionsUnchanged": true,
+      "timestampEvidence": "W31-DOSSIER-TIMESTAMP-AUDIT.json",
+      "currentEvidenceRefreshRequired": true
+    },
+    {
+      "dossierId": "DOSSIER-KR",
+      "sourceVersion": "PHI-OS-DOSSIER-KR-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+      "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+      "acceptedPositionCount": 3,
+      "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+      "runtimeState": "PASS",
+      "renderState": "PASS",
+      "mobileState": "PASS",
+      "wholeDossierPosition": "UNKNOWN",
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-KR-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "a0b6ef2eb56d53ca2f5fc1d48c1b8d83c72edc984ce447f45ba16ea14dbb13ea"
+      },
+      "sourceTimestamp": null,
+      "currentness": "CURRENTNESS_UNKNOWN",
+      "moomoo": [],
+      "renderStateEvidence": {
+        "textLength": 633,
+        "viewport": 1280
+      },
+      "mobileStateEvidence": {
+        "textLength": 633,
+        "viewport": 390
+      },
+      "sourceEvidence": [],
+      "missingTimestampEvidence": [
+        "KR-DEMOGRAPHY-2026-001",
+        "KR-INDUSTRY-2026-001",
+        "KR-INFRASTRUCTURE-2026-001",
+        "KR-TECHNOLOGY-2026-001",
+        "KR-EXTERNAL-DEPENDENCY-2026-001",
+        "KR-CARRIER-STRUCTURE-2026-001",
+        "KR-PRESSURE-FIELD-2026-001"
+      ],
+      "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+      "acceptedPositionsUnchanged": true,
+      "timestampEvidence": "W31-DOSSIER-TIMESTAMP-AUDIT.json",
+      "currentEvidenceRefreshRequired": true
+    },
+    {
+      "dossierId": "DOSSIER-RU",
+      "sourceVersion": "PHI-OS-DOSSIER-RU-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+      "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+      "acceptedPositionCount": 3,
+      "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+      "runtimeState": "PASS",
+      "renderState": "PASS",
+      "mobileState": "PASS",
+      "wholeDossierPosition": "UNKNOWN",
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-RU-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "e54f03481e51ab8b69bc6624aecaa4f94c114c0b6be838496d1f5d6e6c9c24ab"
+      },
+      "sourceTimestamp": null,
+      "currentness": "CURRENTNESS_UNKNOWN",
+      "moomoo": [],
+      "renderStateEvidence": {
+        "textLength": 621,
+        "viewport": 1280
+      },
+      "mobileStateEvidence": {
+        "textLength": 621,
+        "viewport": 390
+      },
+      "sourceEvidence": [],
+      "missingTimestampEvidence": [
+        "RU-DEMOGRAPHY-2026-001",
+        "RU-INDUSTRY-2026-001",
+        "RU-INFRASTRUCTURE-2026-001",
+        "RU-TECHNOLOGY-2026-001",
+        "RU-EXTERNAL-DEPENDENCY-2026-001",
+        "RU-CARRIER-STRUCTURE-2026-001",
+        "RU-PRESSURE-FIELD-2026-001"
+      ],
+      "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+      "acceptedPositionsUnchanged": true,
+      "timestampEvidence": "W31-DOSSIER-TIMESTAMP-AUDIT.json",
+      "currentEvidenceRefreshRequired": true
+    },
+    {
+      "dossierId": "DOSSIER-SEA",
+      "sourceVersion": "PHI-OS-DOSSIER-SEA-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+      "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+      "acceptedPositionCount": 3,
+      "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+      "runtimeState": "PASS",
+      "renderState": "PASS",
+      "mobileState": "PASS",
+      "wholeDossierPosition": "UNKNOWN",
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-SEA-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "61adf35a8205ca5ab493c9136466a9cdc0a457df6ed9fd55832875b127bdb88b"
+      },
+      "sourceTimestamp": "2026-10-08T06:00:00.000Z",
+      "currentness": "SOURCE_TIMESTAMPS_BOUND_CURRENT_FRESHNESS_NOT_INFERRED",
+      "moomoo": [],
+      "renderStateEvidence": {
+        "textLength": 708,
+        "viewport": 1280
+      },
+      "mobileStateEvidence": {
+        "textLength": 708,
+        "viewport": 390
+      },
+      "sourceEvidence": [
+        {
+          "claimId": "SEA-DEMOGRAPHY-2026-001",
+          "sourceId": "SEA-ASEANSTATS-POP-2025",
+          "sourceVersion": "ASEANSTATS-DASHBOARD-2025-UPDATED-2026-08",
+          "sourceUrl": "https://data.aseanstats.org/",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-04-17T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:00:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "SEA-INDUSTRY-2026-001",
+          "sourceId": "SEA-ASEAN-UNCTAD-INVESTMENT-REPORT-2025",
+          "sourceVersion": "ASEAN-INVESTMENT-REPORT-2025",
+          "sourceUrl": "https://investmentpolicy.unctad.org/publications/1314/asean-investment-report-2025",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2025-10-01T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:00:00.000Z",
+          "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "SEA-INFRASTRUCTURE-2026-001",
+          "sourceId": "SEA-ASEAN-APG-FINANCING-2025",
+          "sourceVersion": "ASEAN-APG-FINANCING-INITIATIVE-20251015",
+          "sourceUrl": "https://asean.org/adb-and-world-bank-group-launch-the-asean-power-grid-financing-initiative-with-the-asean-secretariat-and-the-asean-centre-for-energy-ace/",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2025-10-15T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:00:00.000Z",
+          "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "SEA-TECHNOLOGY-2026-001",
+          "sourceId": "SEA-ASEAN-DEFA-CONCLUSION-2026",
+          "sourceVersion": "ASEAN-DEFA-SEOM-CONCLUSION-20260601",
+          "sourceUrl": "https://asean.org/statement-of-the-chairperson-of-the-asean-senior-economic-officials-seom-on-the-conclusion-of-asean-defa-negotiations/",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2026-06-01T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:00:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "SEA-EXTERNAL-DEPENDENCY-2026-001",
+          "sourceId": "SEA-IEA-ENERGY-OUTLOOK-2026",
+          "sourceVersion": "IEA-SOUTHEAST-ASIA-ENERGY-OUTLOOK-2026",
+          "sourceUrl": "https://www.iea.org/reports/southeast-asia-energy-outlook-2026/executive-summary",
+          "authorityClass": "ACADEMIC",
+          "publishedAt": "2026-06-16T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:00:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "SEA-CARRIER-STRUCTURE-2026-001",
+          "sourceId": "SEA-ASEAN-UNCTAD-INVESTMENT-REPORT-2025",
+          "sourceVersion": "ASEAN-INVESTMENT-REPORT-2025",
+          "sourceUrl": "https://investmentpolicy.unctad.org/publications/1314/asean-investment-report-2025",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publishedAt": "2025-10-01T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:00:00.000Z",
+          "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        },
+        {
+          "claimId": "SEA-PRESSURE-FIELD-2026-001",
+          "sourceId": "SEA-IEA-ENERGY-OUTLOOK-2026",
+          "sourceVersion": "IEA-SOUTHEAST-ASIA-ENERGY-OUTLOOK-2026",
+          "sourceUrl": "https://www.iea.org/reports/southeast-asia-energy-outlook-2026/executive-summary",
+          "authorityClass": "ACADEMIC",
+          "publishedAt": "2026-06-16T00:00:00.000Z",
+          "retrievedAt": "2026-10-08T06:00:00.000Z",
+          "recordedFreshness": "FRESH",
+          "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+          "admittedAsOf": "2026-10-08"
+        }
+      ],
+      "missingTimestampEvidence": [],
+      "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+      "acceptedPositionsUnchanged": true,
+      "timestampEvidence": "W31-DOSSIER-TIMESTAMP-AUDIT.json",
+      "currentEvidenceRefreshRequired": false
+    },
+    {
+      "dossierId": "DOSSIER-ME",
+      "sourceVersion": "PHI-OS-DOSSIER-ME-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+      "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+      "acceptedPositionCount": 3,
+      "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+      "runtimeState": "PASS",
+      "renderState": "PASS",
+      "mobileState": "PASS",
+      "wholeDossierPosition": "UNKNOWN",
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-ME-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "me2026b6b9c6c11c2b384de54bf6e9f17a81f4f1ce7ca2d3ce49d19cb8d75e1"
+      },
+      "sourceTimestamp": null,
+      "currentness": "CURRENTNESS_UNKNOWN",
+      "moomoo": [],
+      "renderStateEvidence": {
+        "textLength": 620,
+        "viewport": 1280
+      },
+      "mobileStateEvidence": {
+        "textLength": 620,
+        "viewport": 390
+      },
+      "sourceEvidence": [],
+      "missingTimestampEvidence": [
+        "ME-DEMOGRAPHY-2026-001",
+        "ME-INDUSTRY-2026-001",
+        "ME-INFRASTRUCTURE-2026-001",
+        "ME-TECHNOLOGY-2026-001",
+        "ME-EXTERNAL-DEPENDENCY-2026-001",
+        "ME-CARRIER-STRUCTURE-2026-001",
+        "ME-PRESSURE-FIELD-2026-001"
+      ],
+      "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+      "acceptedPositionsUnchanged": true,
+      "timestampEvidence": "W31-DOSSIER-TIMESTAMP-AUDIT.json",
+      "currentEvidenceRefreshRequired": true
+    },
+    {
+      "dossierId": "DOSSIER-AF",
+      "sourceVersion": "PHI-OS-DOSSIER-AF-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+      "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+      "acceptedPositionCount": 3,
+      "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+      "runtimeState": "PASS",
+      "renderState": "PASS",
+      "mobileState": "PASS",
+      "wholeDossierPosition": "UNKNOWN",
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-AF-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "af2026b6a1eac3c887d1da7e53af6eb848fa6fd96f87d07c3db7ab1fe823251"
+      },
+      "sourceTimestamp": null,
+      "currentness": "CURRENTNESS_UNKNOWN",
+      "moomoo": [],
+      "renderStateEvidence": {
+        "textLength": 642,
+        "viewport": 1280
+      },
+      "mobileStateEvidence": {
+        "textLength": 642,
+        "viewport": 390
+      },
+      "sourceEvidence": [],
+      "missingTimestampEvidence": [
+        "AF-DEMOGRAPHY-2026-001",
+        "AF-INDUSTRY-2026-001",
+        "AF-INFRASTRUCTURE-2026-001",
+        "AF-TECHNOLOGY-2026-001",
+        "AF-EXTERNAL-DEPENDENCY-2026-001",
+        "AF-CARRIER-STRUCTURE-2026-001",
+        "AF-PRESSURE-FIELD-2026-001"
+      ],
+      "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+      "acceptedPositionsUnchanged": true,
+      "timestampEvidence": "W31-DOSSIER-TIMESTAMP-AUDIT.json",
+      "currentEvidenceRefreshRequired": true
+    },
+    {
+      "dossierId": "DOSSIER-LATAM",
+      "sourceVersion": "PHI-OS-DOSSIER-LATAM-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+      "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+      "acceptedPositionCount": 3,
+      "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+      "runtimeState": "PASS",
+      "renderState": "PASS",
+      "mobileState": "PASS",
+      "wholeDossierPosition": "UNKNOWN",
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-LATAM-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "latam2026b6f7f4b87f6e9d4497b1fb55916c4a4e62937d72742dfb9cfced3f2d1"
+      },
+      "sourceTimestamp": null,
+      "currentness": "CURRENTNESS_UNKNOWN",
+      "moomoo": [],
+      "renderStateEvidence": {
+        "textLength": 642,
+        "viewport": 1280
+      },
+      "mobileStateEvidence": {
+        "textLength": 642,
+        "viewport": 390
+      },
+      "sourceEvidence": [],
+      "missingTimestampEvidence": [
+        "LATAM-DEMOGRAPHY-2026-001",
+        "LATAM-INDUSTRY-2026-001",
+        "LATAM-INFRASTRUCTURE-2026-001",
+        "LATAM-TECHNOLOGY-2026-001",
+        "LATAM-EXTERNAL-DEPENDENCY-2026-001",
+        "LATAM-CARRIER-STRUCTURE-2026-001",
+        "LATAM-PRESSURE-FIELD-2026-001"
+      ],
+      "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+      "acceptedPositionsUnchanged": true,
+      "timestampEvidence": "W31-DOSSIER-TIMESTAMP-AUDIT.json",
+      "currentEvidenceRefreshRequired": true
+    },
+    {
+      "dossierId": "DOSSIER-GLOBAL_PLATFORM",
+      "acceptedState": "NOT_ACCEPTED",
+      "wholeDossierPosition": "UNKNOWN",
+      "runtimeState": "NOT_RUN",
+      "renderState": "NOT_RUN",
+      "mobileState": "NOT_RUN",
+      "firstMissingRequirement": "No applicable W8-I acceptance; no automatic promotion"
+    }
+  ],
+  "contextBridge": {
+    "scope": "ACTUAL_RETRIEVER_LOCAL_REGISTRIES_NOT_PROVIDER_ANSWER",
+    "providerCalls": 0,
+    "bookVSnapshotCount": 15,
+    "dossiers": [
+      {
+        "dossierId": "DOSSIER-AF",
+        "state": "PASS",
+        "acceptedPositions": 3,
+        "currentProviderEvidence": 0
+      },
+      {
+        "dossierId": "DOSSIER-CN",
+        "state": "PASS",
+        "acceptedPositions": 2,
+        "currentProviderEvidence": 0
+      },
+      {
+        "dossierId": "DOSSIER-EU",
+        "state": "PASS",
+        "acceptedPositions": 3,
+        "currentProviderEvidence": 0
+      },
+      {
+        "dossierId": "DOSSIER-IN",
+        "state": "PASS",
+        "acceptedPositions": 3,
+        "currentProviderEvidence": 0
+      },
+      {
+        "dossierId": "DOSSIER-JP",
+        "state": "PASS",
+        "acceptedPositions": 3,
+        "currentProviderEvidence": 0
+      },
+      {
+        "dossierId": "DOSSIER-KR",
+        "state": "PASS",
+        "acceptedPositions": 3,
+        "currentProviderEvidence": 0
+      },
+      {
+        "dossierId": "DOSSIER-LATAM",
+        "state": "PASS",
+        "acceptedPositions": 3,
+        "currentProviderEvidence": 0
+      },
+      {
+        "dossierId": "DOSSIER-ME",
+        "state": "PASS",
+        "acceptedPositions": 3,
+        "currentProviderEvidence": 0
+      },
+      {
+        "dossierId": "DOSSIER-RU",
+        "state": "PASS",
+        "acceptedPositions": 3,
+        "currentProviderEvidence": 0
+      },
+      {
+        "dossierId": "DOSSIER-SEA",
+        "state": "PASS",
+        "acceptedPositions": 3,
+        "currentProviderEvidence": 0
+      },
+      {
+        "dossierId": "DOSSIER-US",
+        "state": "PASS",
+        "acceptedPositions": 2,
+        "currentProviderEvidence": 48
+      }
+    ]
+  },
+  "bookVIConsumerScope": "11 W8-I accepted dossiers; unaccepted regions remain UNKNOWN",
+  "moomoo": {
+    "scope": "US only; 56 historically validated/admitted claims, freshness evaluated by existing TTL",
+    "currentClaims": 48,
+    "staleClaims": 8,
+    "otherRegions": "NO_MOOMOO_BINDING_EVIDENCE"
+  },
+  "FIRST_STOP_NODE": {
+    "BOOK_V": "LIMITED_SNAPSHOT_ZH_LABEL_AND_CURRENT_CONSUMER_REVIEW_REQUIRED",
+    "BOOK_VI": "CURRENT_EVIDENCE_REFRESH_REQUIRED_FOR_SIX_DOSSIERS"
+  },
+  "remaining": [
+    "Scoped review of changed Chinese snapshot labels and current engineering consumer; accepted 120 cases/overlays do not require whole-content reacceptance",
+    "AF/JP/KR/LATAM/ME/RU lack admitted source retrieval timestamps; acquire legitimate source evidence, never substitute acceptance or filesystem time",
+    "Current freshness policy is not inferred from timestamps for any region",
+    "Other asset families remain under separate asset owner; this window verified 15 world images only",
+    "Persisted account Ask history / My Reality and full Navigation handoff are not proved by this public reading bridge",
+    "Deployment and live customer verification NOT_RUN",
+    "Moomoo US evidence now STALE=56/CURRENT=0 by actual existing TTL; fresh validated/admitted evidence is required before claiming current external-evidence closure"
+  ],
+  "rollback": "Restore only changed consumer modules from pre-change versions; accepted dossier/positions and source registries untouched. No storage writes/migration performed.",
+  "providerCalls": 0,
+  "providerSpendUSD": 0,
+  "DEPLOYED": "NOT_RUN",
+  "LIVE_CUSTOMER": "NOT_RUN",
+  "bookVAcceptance": {
+    "freeze": "content/civilization-atlas/freeze/book-v-civ-atlas-r1-production-freeze-v1.json",
+    "humanDecision": "tools/review/BOOK-V-CIV-ATLAS-R1-W15-HUMAN-DECISION.json",
+    "status": "HUMAN_ACCEPTED",
+    "historicalOpenBoundaries": {
+      "worldSnapshot2026": "PARTIAL",
+      "transitionWindow32": "PARTIAL_CONCEPTUAL_OPEN",
+      "computationalCivilizationScaleShift": "OPEN"
+    }
+  },
+  "sourceIdentity": [
+    {
+      "path": "functions/_lib/book6-current-source.js",
+      "sha256": "720e2cba48a4ec3d47975242e04a2438a0079896eebc653f3c8fb183fbe3e606"
+    },
+    {
+      "path": "functions/_lib/book6-accepted-current.js",
+      "sha256": "ab1dcc2f4f280192fe0c76854e7d55e351b5528e71f971008c4dbe496bd1e49a"
+    },
+    {
+      "path": "functions/api/book6-runtime-readout.js",
+      "sha256": "de43ccec42d1245c20008ab9f10b436986364ae242b4ac8ed682e4cdc3b4b94f"
+    },
+    {
+      "path": "functions/_lib/atlas-retrieval-scope.js",
+      "sha256": "84d33b3f2cc3438d31131ac47beeed6b435893c70730337a5d60a2c7ef2c99bb"
+    },
+    {
+      "path": "assets/js/pages/civilization-atlas/atlas-data.js",
+      "sha256": "f8f85d169281e4c234ef2b7f8f6aed8ee5233aa180a08a9984d43e0ddaba60b6"
+    },
+    {
+      "path": "assets/js/pages/civilization-atlas/reconfiguration-renderer.js",
+      "sha256": "12e5f1cb81612150abd8ced4b5a7849351bd923b9557408823588d83b2378861"
+    }
+  ],
+  "browserEvidenceReuse": {
+    "evidenceHead": "419db96d465023a47930cb2dc19f11b46208a4d9",
+    "currentHead": "af5a8d4fb42c0799eaf8e4759908ef2e010a6d31",
+    "affectedConsumerDifferences": "",
+    "scope": "Reuse unchanged browser consumers only; contextual bridge separately exercised after source changes"
+  },
+  "bookVIRenderScope": "11 accepted dossier text panels passed at 1280/390px; external visuals and unaccepted catalog regions not fully verified",
+  "acceptanceReconciliation": {
+    "currentHead": "64aab9ca0bc6577503cca2bb4da6c7f86f00941d",
+    "caseCount": 120,
+    "caseState": "CONTENT_ACCEPTANCE_PRESERVED",
+    "acceptanceRecord": "content/civilization-atlas/evidence/civ-atlas-fr5-g-human-review-v1.json",
+    "acceptanceScope": "content/civilization-atlas/evidence/civ-atlas-fr5-g-case-dossier-projection-v1.json",
+    "acceptanceCommit": "4f3f9f0610f55b9fc2b1d5f411bac3833cdf1721",
+    "sourceHash": "6291f76099bfa3f0747c2c29ced4f491045d221e64730ae710031d7f821c3d1a",
+    "overlays": [
+      {
+        "path": "content/civilization-atlas/cases/depth/fr5-f1-remaining-11-v1.json",
+        "acceptedContentUnchanged": true
+      },
+      {
+        "path": "content/civilization-atlas/cases/depth/fr5-f2-remaining-11-v1.json",
+        "acceptedContentUnchanged": true
+      },
+      {
+        "path": "content/civilization-atlas/cases/depth/fr5-f3-remaining-11-v1.json",
+        "acceptedContentUnchanged": true
+      },
+      {
+        "path": "content/civilization-atlas/cases/depth/fr5-f4-remaining-11-v1.json",
+        "acceptedContentUnchanged": true
+      },
+      {
+        "path": "content/civilization-atlas/cases/depth/fr5-f5-remaining-11-v1.json",
+        "acceptedContentUnchanged": true
+      }
+    ],
+    "snapshotCount": 15,
+    "snapshotSemanticState": "CONTENT_ACCEPTANCE_PRESERVED",
+    "snapshotLabelState": "LIMITED_CONSUMER_VISUAL_REVIEW_REQUIRED",
+    "snapshotSourceHash": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+    "snapshots": [
+      {
+        "snapshotId": "WS-M3000",
+        "semanticContentUnchanged": true,
+        "labels": [
+          {
+            "regionId": "EAST_ASIA",
+            "before": "Japanese archipelago",
+            "after": "日本列岛",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "SOUTH_ASIA",
+            "before": "Indus borderlands",
+            "after": "印度河边缘地区",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EUROPE",
+            "before": "Eastern Europe",
+            "after": "东欧",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "AMERICAS",
+            "before": "Peruvian coast",
+            "after": "秘鲁沿海",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "WEST_ASIA",
+            "before": "Southern Mesopotamia",
+            "after": "美索不达米亚南部",
+            "englishUnchanged": true
+          }
+        ],
+        "scope": "LIMITED_CHINESE_LABEL_CONSUMER_REVIEW_REQUIRED_NOT_WHOLE_BOOK_REACCEPTANCE"
+      },
+      {
+        "snapshotId": "WS-M1500",
+        "semanticContentUnchanged": true,
+        "labels": [
+          {
+            "regionId": "MEDITERRANEAN",
+            "before": "Aegean",
+            "after": "爱琴海地区",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EAST_ASIA",
+            "before": "Yellow River basin",
+            "after": "黄河流域",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "WEST_ASIA",
+            "before": "Anatolia",
+            "after": "安纳托利亚",
+            "englishUnchanged": true
+          }
+        ],
+        "scope": "LIMITED_CHINESE_LABEL_CONSUMER_REVIEW_REQUIRED_NOT_WHOLE_BOOK_REACCEPTANCE"
+      },
+      {
+        "snapshotId": "WS-M0500",
+        "semanticContentUnchanged": true,
+        "labels": [
+          {
+            "regionId": "AMERICAS",
+            "before": "Mesoamerica",
+            "after": "中部美洲",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "WEST_ASIA",
+            "before": "West Asia to Central Asia",
+            "after": "西亚至中亚",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "MEDITERRANEAN",
+            "before": "Aegean and eastern Mediterranean",
+            "after": "爱琴海与东地中海",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "SOUTH_ASIA",
+            "before": "Ganges basin",
+            "after": "恒河流域",
+            "englishUnchanged": true
+          }
+        ],
+        "scope": "LIMITED_CHINESE_LABEL_CONSUMER_REVIEW_REQUIRED_NOT_WHOLE_BOOK_REACCEPTANCE"
+      },
+      {
+        "snapshotId": "WS-0001",
+        "semanticContentUnchanged": true,
+        "labels": [
+          {
+            "regionId": "AMERICAS",
+            "before": "Oaxaca",
+            "after": "瓦哈卡",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EAST_ASIA",
+            "before": "East Asia",
+            "after": "东亚",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "MEDITERRANEAN",
+            "before": "Mediterranean world",
+            "after": "地中海世界",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "WEST_ASIA",
+            "before": "Iran and Mesopotamia",
+            "after": "伊朗与美索不达米亚",
+            "englishUnchanged": true
+          }
+        ],
+        "scope": "LIMITED_CHINESE_LABEL_CONSUMER_REVIEW_REQUIRED_NOT_WHOLE_BOOK_REACCEPTANCE"
+      },
+      {
+        "snapshotId": "WS-0500",
+        "semanticContentUnchanged": true,
+        "labels": [
+          {
+            "regionId": "AMERICAS",
+            "before": "Central Mexico",
+            "after": "墨西哥中部",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "SOUTH_ASIA",
+            "before": "North India",
+            "after": "印度北部",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "MEDITERRANEAN",
+            "before": "Eastern Mediterranean",
+            "after": "东地中海",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "WEST_ASIA",
+            "before": "Iran and Mesopotamia",
+            "after": "伊朗与美索不达米亚",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EAST_ASIA",
+            "before": "China",
+            "after": "中国",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EAST_AFRICA",
+            "before": "Horn of Africa",
+            "after": "非洲之角",
+            "englishUnchanged": true
+          }
+        ],
+        "scope": "LIMITED_CHINESE_LABEL_CONSUMER_REVIEW_REQUIRED_NOT_WHOLE_BOOK_REACCEPTANCE"
+      },
+      {
+        "snapshotId": "WS-1000",
+        "semanticContentUnchanged": true,
+        "labels": [
+          {
+            "regionId": "SOUTHEAST_ASIA",
+            "before": "Maritime Southeast Asia",
+            "after": "海洋东南亚",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EAST_ASIA",
+            "before": "Japanese archipelago",
+            "after": "日本列岛",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "WEST_ASIA",
+            "before": "West Asia and connected Islamic world",
+            "after": "西亚及其相连的伊斯兰世界",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "SOUTH_ASIA",
+            "before": "Indian Ocean",
+            "after": "印度洋",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "MEDITERRANEAN",
+            "before": "Eastern Mediterranean",
+            "after": "东地中海",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "CENTRAL_ASIA",
+            "before": "Central and South Asia",
+            "after": "中亚与南亚",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "WEST_AFRICA",
+            "before": "West Africa and Sahara",
+            "after": "西非与撒哈拉",
+            "englishUnchanged": true
+          }
+        ],
+        "scope": "LIMITED_CHINESE_LABEL_CONSUMER_REVIEW_REQUIRED_NOT_WHOLE_BOOK_REACCEPTANCE"
+      },
+      {
+        "snapshotId": "WS-1250",
+        "semanticContentUnchanged": true,
+        "labels": [
+          {
+            "regionId": "WEST_ASIA",
+            "before": "West Asia and connected Islamic world",
+            "after": "西亚及其相连的伊斯兰世界",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EAST_ASIA",
+            "before": "East Asia",
+            "after": "东亚",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "SOUTH_ASIA",
+            "before": "Indian Ocean",
+            "after": "印度洋",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "AMERICAS",
+            "before": "Mississippi basin",
+            "after": "密西西比河流域",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "CENTRAL_ASIA",
+            "before": "Eurasia",
+            "after": "欧亚大陆",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "NORTH_AFRICA",
+            "before": "Egypt and Levant",
+            "after": "埃及与黎凡特",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "WEST_AFRICA",
+            "before": "West Africa and Sahel",
+            "after": "西非与萨赫勒",
+            "englishUnchanged": true
+          }
+        ],
+        "scope": "LIMITED_CHINESE_LABEL_CONSUMER_REVIEW_REQUIRED_NOT_WHOLE_BOOK_REACCEPTANCE"
+      },
+      {
+        "snapshotId": "WS-1500",
+        "semanticContentUnchanged": true,
+        "labels": [
+          {
+            "regionId": "SOUTH_ASIA",
+            "before": "North India",
+            "after": "印度北部",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "NORTH_AFRICA",
+            "before": "Egypt and Levant",
+            "after": "埃及与黎凡特",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "SOUTHEAST_ASIA",
+            "before": "Maritime Southeast Asia",
+            "after": "海洋东南亚",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "WEST_AFRICA",
+            "before": "West Africa and Sahel",
+            "after": "西非与萨赫勒",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EAST_ASIA",
+            "before": "East Asia",
+            "after": "东亚",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "WEST_ASIA",
+            "before": "Eastern Mediterranean and Balkans",
+            "after": "东地中海与巴尔干",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "AMERICAS",
+            "before": "Central Mexico",
+            "after": "墨西哥中部",
+            "englishUnchanged": true
+          }
+        ],
+        "scope": "LIMITED_CHINESE_LABEL_CONSUMER_REVIEW_REQUIRED_NOT_WHOLE_BOOK_REACCEPTANCE"
+      },
+      {
+        "snapshotId": "WS-1750",
+        "semanticContentUnchanged": true,
+        "labels": [
+          {
+            "regionId": "EUROPE",
+            "before": "Atlantic world",
+            "after": "大西洋世界",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "SOUTH_ASIA",
+            "before": "South Asia",
+            "after": "南亚",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EAST_ASIA",
+            "before": "Japanese archipelago",
+            "after": "日本列岛",
+            "englishUnchanged": true
+          }
+        ],
+        "scope": "LIMITED_CHINESE_LABEL_CONSUMER_REVIEW_REQUIRED_NOT_WHOLE_BOOK_REACCEPTANCE"
+      },
+      {
+        "snapshotId": "WS-1850",
+        "semanticContentUnchanged": true,
+        "labels": [
+          {
+            "regionId": "SOUTH_ASIA",
+            "before": "South Asia",
+            "after": "南亚",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EAST_ASIA",
+            "before": "Japanese archipelago",
+            "after": "日本列岛",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EUROPE",
+            "before": "Britain and global networks",
+            "after": "英国与全球网络",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "AMERICAS",
+            "before": "North America",
+            "after": "北美洲",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "WEST_ASIA",
+            "before": "Ottoman domains",
+            "after": "奥斯曼统治区",
+            "englishUnchanged": true
+          }
+        ],
+        "scope": "LIMITED_CHINESE_LABEL_CONSUMER_REVIEW_REQUIRED_NOT_WHOLE_BOOK_REACCEPTANCE"
+      },
+      {
+        "snapshotId": "WS-1914",
+        "semanticContentUnchanged": true,
+        "labels": [
+          {
+            "regionId": "EUROPE",
+            "before": "Britain and global networks",
+            "after": "英国与全球网络",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "WEST_ASIA",
+            "before": "Ottoman domains",
+            "after": "奥斯曼统治区",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "SOUTH_ASIA",
+            "before": "South Asia",
+            "after": "南亚",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "AMERICAS",
+            "before": "Latin America",
+            "after": "拉丁美洲",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "AFRICA",
+            "before": "Africa",
+            "after": "非洲",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EAST_ASIA",
+            "before": "China",
+            "after": "中国",
+            "englishUnchanged": true
+          }
+        ],
+        "scope": "LIMITED_CHINESE_LABEL_CONSUMER_REVIEW_REQUIRED_NOT_WHOLE_BOOK_REACCEPTANCE"
+      },
+      {
+        "snapshotId": "WS-1945",
+        "semanticContentUnchanged": true,
+        "labels": [
+          {
+            "regionId": "EUROPE",
+            "before": "Eurasia",
+            "after": "欧亚大陆",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EAST_ASIA",
+            "before": "China",
+            "after": "中国",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "ASIA",
+            "before": "Asia and Africa",
+            "after": "亚洲与非洲",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "GLOBAL",
+            "before": "Global",
+            "after": "全球",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EURASIA",
+            "before": "Eurasia and Eastern Europe",
+            "after": "欧亚大陆与东欧",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "SOUTHEAST_ASIA",
+            "before": "Southeast Asia",
+            "after": "东南亚",
+            "englishUnchanged": true
+          }
+        ],
+        "scope": "LIMITED_CHINESE_LABEL_CONSUMER_REVIEW_REQUIRED_NOT_WHOLE_BOOK_REACCEPTANCE"
+      },
+      {
+        "snapshotId": "WS-1980",
+        "semanticContentUnchanged": true,
+        "labels": [
+          {
+            "regionId": "GLOBAL",
+            "before": "Global",
+            "after": "全球",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EURASIA",
+            "before": "Eurasia and Eastern Europe",
+            "after": "欧亚大陆与东欧",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EUROPE",
+            "before": "Western Europe",
+            "after": "西欧",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "SOUTH_ASIA",
+            "before": "India",
+            "after": "印度",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "SOUTHEAST_ASIA",
+            "before": "Southeast Asia",
+            "after": "东南亚",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EAST_ASIA",
+            "before": "East Asia",
+            "after": "东亚",
+            "englishUnchanged": true
+          }
+        ],
+        "scope": "LIMITED_CHINESE_LABEL_CONSUMER_REVIEW_REQUIRED_NOT_WHOLE_BOOK_REACCEPTANCE"
+      },
+      {
+        "snapshotId": "WS-2000",
+        "semanticContentUnchanged": true,
+        "labels": [
+          {
+            "regionId": "EAST_ASIA",
+            "before": "East Asia",
+            "after": "东亚",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EUROPE",
+            "before": "Europe",
+            "after": "欧洲",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "GLOBAL",
+            "before": "Global",
+            "after": "全球",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "EURASIA",
+            "before": "Eurasia",
+            "after": "欧亚大陆",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "SOUTH_ASIA",
+            "before": "India",
+            "after": "印度",
+            "englishUnchanged": true
+          },
+          {
+            "regionId": "WEST_ASIA",
+            "before": "Gulf",
+            "after": "海湾地区",
+            "englishUnchanged": true
+          }
+        ],
+        "scope": "LIMITED_CHINESE_LABEL_CONSUMER_REVIEW_REQUIRED_NOT_WHOLE_BOOK_REACCEPTANCE"
+      },
+      {
+        "snapshotId": "WS-2026",
+        "semanticContentUnchanged": true,
+        "labels": [
+          {
+            "regionId": "GLOBAL",
+            "before": "Global",
+            "after": "全球",
+            "englishUnchanged": true
+          }
+        ],
+        "scope": "LIMITED_CHINESE_LABEL_CONSUMER_REVIEW_REQUIRED_NOT_WHOLE_BOOK_REACCEPTANCE"
+      }
+    ],
+    "candidateId": "PHI-OS-W31-SNAPSHOT-ZH-LABEL-CONSUMER-REVIEW-v1",
+    "humanAccepted": false,
+    "existingEngineeringSuccessorState": "PENDING_RETAINED_NOT_AUTO_ACCEPTED",
+    "frozenHashesChanged": false,
+    "providerCalls": 0
+  },
+  "assetHandoff": {
+    "path": "docs/assets/r2-public/wiring-20261009/WORLD-CONSUMERS.json",
+    "sha256": "aae18cc5cb4a0499606b80fde80b423f4539b19c19ea0a1e44692069a26235e9",
+    "head": "64aab9ca0bc6577503cca2bb4da6c7f86f00941d",
+    "scope": "LOCAL_SOURCE_WITH_PUBLIC_R2_GET_ONLY"
+  },
+  "currentVisualEvidence": "W31-WORLD-VISUAL-HANDOFF-RECHECK.json",
+  "actualAskEvidence": "W31-ACTUAL-CONTEXTUAL-ASK-QA.json",
+  "readingBridgeEvidence": "W31-READING-BRIDGE-BROWSER-QA.json",
+  "timestampAudit": {
+    "scope": "EXISTING_ADMITTED_W8C_SOURCE_RECORDS_NO_REFRESH_OR_POSITION_REDERIVATION",
+    "dossiers": [
+      {
+        "dossierId": "DOSSIER-AF",
+        "sourceTimestamp": null,
+        "currentness": "CURRENTNESS_UNKNOWN",
+        "sourceEvidence": [],
+        "missingTimestampEvidence": [
+          "AF-DEMOGRAPHY-2026-001",
+          "AF-INDUSTRY-2026-001",
+          "AF-INFRASTRUCTURE-2026-001",
+          "AF-TECHNOLOGY-2026-001",
+          "AF-EXTERNAL-DEPENDENCY-2026-001",
+          "AF-CARRIER-STRUCTURE-2026-001",
+          "AF-PRESSURE-FIELD-2026-001"
+        ],
+        "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+        "acceptedPositionsUnchanged": true
+      },
+      {
+        "dossierId": "DOSSIER-CN",
+        "sourceTimestamp": "2026-10-08T04:20:00.000Z",
+        "currentness": "SOURCE_TIMESTAMPS_BOUND_CURRENT_FRESHNESS_NOT_INFERRED",
+        "sourceEvidence": [
+          {
+            "claimId": "CN-DEMOGRAPHY-2026-001",
+            "sourceId": "CN-NBS-1PCT-POP-2025",
+            "sourceVersion": "NBS-1PCT-POP-2025-20260522",
+            "sourceUrl": "https://www.stats.gov.cn/sj/zxfb/202605/t20260522_1963788.html",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-05-22T07:00:00.000Z",
+            "retrievedAt": "2026-10-08T04:20:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+          },
+          {
+            "claimId": "CN-INDUSTRY-2026-001",
+            "sourceId": "CN-NBS-INDUSTRY-AUG-2026",
+            "sourceVersion": "NBS-INDUSTRY-2026-08-20260915",
+            "sourceUrl": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202609/t20260915_1965308.html",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-09-15T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T04:20:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+          },
+          {
+            "claimId": "CN-INFRASTRUCTURE-2026-001",
+            "sourceId": "CN-MOT-LOGISTICS-20260921-27",
+            "sourceVersion": "MOT-LOGISTICS-20260921-27",
+            "sourceUrl": "https://www.mot.gov.cn/zhuanti/wuliubtbc/qingkuangtongbao_wuliu/202609/t20260928_4225051.html",
+            "authorityClass": "GOVERNMENT",
+            "publishedAt": "2026-09-28T07:26:00.000Z",
+            "retrievedAt": "2026-10-08T04:20:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+          },
+          {
+            "claimId": "CN-TECHNOLOGY-2026-001",
+            "sourceId": "CN-NBS-RD-2025-ACHIEVEMENT",
+            "sourceVersion": "NBS-RD-2025-ACHIEVEMENT-20260602",
+            "sourceUrl": "https://www.stats.gov.cn/sj/sjjd/202606/t20260602_1963863.html",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-06-02T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T04:20:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+          },
+          {
+            "claimId": "CN-EXTERNAL-DEPENDENCY-2026-001",
+            "sourceId": "CN-SAFE-TRADE-GS-AUG-2026",
+            "sourceVersion": "SAFE-TRADE-GS-2026-08-20260929",
+            "sourceUrl": "https://www.safe.gov.cn/en/2026/0929/2456.html",
+            "authorityClass": "REGULATOR",
+            "publishedAt": "2026-09-29T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T04:20:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+          },
+          {
+            "claimId": "CN-CARRIER-STRUCTURE-2026-001",
+            "sourceId": "CN-NBS-STAT-COMMUNIQUE-2025",
+            "sourceVersion": "NBS-STAT-COMMUNIQUE-2025-20260228",
+            "sourceUrl": "https://www.stats.gov.cn/sj/zxfbhjd/202602/t20260228_1962662.html",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-02-28T01:30:00.000Z",
+            "retrievedAt": "2026-10-08T04:20:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+          },
+          {
+            "claimId": "CN-PRESSURE-FIELD-2026-001",
+            "sourceId": "CN-GOV-WORK-REPORT-RISK-2026",
+            "sourceVersion": "STATE-COUNCIL-2026-GOV-WORK-RISK",
+            "sourceUrl": "https://english.www.gov.cn/2026special/2026npcandcpcc/202603/05/content_WS69a8f1dec6d00ca5f9a098ae.html",
+            "authorityClass": "GOVERNMENT",
+            "publishedAt": "2026-03-05T03:00:00.000Z",
+            "retrievedAt": "2026-10-08T04:20:00.000Z",
+            "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+          }
+        ],
+        "missingTimestampEvidence": [],
+        "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+        "acceptedPositionsUnchanged": true
+      },
+      {
+        "dossierId": "DOSSIER-EU",
+        "sourceTimestamp": "2026-10-08T06:58:00.000Z",
+        "currentness": "SOURCE_TIMESTAMPS_BOUND_CURRENT_FRESHNESS_NOT_INFERRED",
+        "sourceEvidence": [
+          {
+            "claimId": "EU-DEMOGRAPHY-2026-001",
+            "sourceId": "EU-EUROSTAT-POP-2026",
+            "sourceVersion": "EUROSTAT-POP-2026-20260710",
+            "sourceUrl": "https://ec.europa.eu/eurostat/en/web/products-eurostat-news/w/ddn-20260710-3",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-07-10T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:58:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "EU-INDUSTRY-2026-001",
+            "sourceId": "EU-EUROSTAT-IP-JUL-2026",
+            "sourceVersion": "EUROSTAT-IP-2026-07-20260916",
+            "sourceUrl": "https://ec.europa.eu/eurostat/de/web/products-euro-indicators/w/4-16092026-ap",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-09-16T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:58:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "EU-INFRASTRUCTURE-2026-001",
+            "sourceId": "EU-TENT-WORKPLANS-SEP-2026",
+            "sourceVersion": "TEN-T-WORKPLANS-20260930",
+            "sourceUrl": "https://transport.ec.europa.eu/news-events/news/work-plans-ten-t-european-coordinators-published-2026-09-30_en",
+            "authorityClass": "GOVERNMENT",
+            "publishedAt": "2026-09-30T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:58:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "EU-TECHNOLOGY-2026-001",
+            "sourceId": "EU-DIGITAL-DECADE-2026",
+            "sourceVersion": "DIGITAL-DECADE-2026-20260617",
+            "sourceUrl": "https://commission.europa.eu/news-and-media/news/state-digital-decade-report-progress-made-gaps-remain-2026-06-17_en",
+            "authorityClass": "GOVERNMENT",
+            "publishedAt": "2026-06-17T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:58:00.000Z",
+            "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "EU-EXTERNAL-DEPENDENCY-2026-001",
+            "sourceId": "EU-EUROSTAT-ENERGY-2026",
+            "sourceVersion": "EUROSTAT-ENERGY-DEPENDENCY-2026",
+            "sourceUrl": "https://ec.europa.eu/eurostat/en/web/products-eurostat-news/w/wdn-20260318-1",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-03-18T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:58:00.000Z",
+            "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "EU-CARRIER-STRUCTURE-2026-001",
+            "sourceId": "EU-ECB-TARGET-AR-2025",
+            "sourceVersion": "ECB-TARGET-SERVICES-AR-2025-20260612",
+            "sourceUrl": "https://www.ecb.europa.eu/press/targetservar/html/ecb.targetservar2025.en.html",
+            "authorityClass": "REGULATOR",
+            "publishedAt": "2026-06-12T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:58:00.000Z",
+            "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "EU-PRESSURE-FIELD-2026-001",
+            "sourceId": "EU-EUROSTAT-PPI-AUG-2026",
+            "sourceVersion": "EUROSTAT-PPI-2026-08-20261005",
+            "sourceUrl": "https://ec.europa.eu/eurostat/en/web/products-euro-indicators/w/4-05102026-ap",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-10-05T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:58:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          }
+        ],
+        "missingTimestampEvidence": [],
+        "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+        "acceptedPositionsUnchanged": true
+      },
+      {
+        "dossierId": "DOSSIER-IN",
+        "sourceTimestamp": "2026-10-08T06:25:00.000Z",
+        "currentness": "SOURCE_TIMESTAMPS_BOUND_CURRENT_FRESHNESS_NOT_INFERRED",
+        "sourceEvidence": [
+          {
+            "claimId": "IN-DEMOGRAPHY-2026-001",
+            "sourceId": "IN-ECONOMIC-SURVEY-DEMOGRAPHY-2025-26",
+            "sourceVersion": "ECONOMIC-SURVEY-2025-26-CH12",
+            "sourceUrl": "https://www.indiabudget.gov.in/economicsurvey/",
+            "authorityClass": "GOVERNMENT",
+            "publishedAt": "2026-01-29T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:25:00.000Z",
+            "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "IN-INDUSTRY-2026-001",
+            "sourceId": "IN-MOSPI-IIP-AUG-2026",
+            "sourceVersion": "MOSPI-IIP-2026-08-20260928",
+            "sourceUrl": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2315957&lang=1&reg=3",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-09-28T16:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:25:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "IN-INFRASTRUCTURE-2026-001",
+            "sourceId": "IN-RAILWAYS-GCT-JUL-2026",
+            "sourceVersion": "RAILWAYS-GCT-20260723",
+            "sourceUrl": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2288380&lang=1&reg=20",
+            "authorityClass": "GOVERNMENT",
+            "publishedAt": "2026-07-23T17:14:00.000Z",
+            "retrievedAt": "2026-10-08T06:25:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "IN-TECHNOLOGY-2026-001",
+            "sourceId": "IN-MEITY-DIGITAL-INFRA-AUG-2026",
+            "sourceVersion": "MEITY-DIGITAL-INFRA-20260806",
+            "sourceUrl": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2295635&lang=1&reg=48",
+            "authorityClass": "GOVERNMENT",
+            "publishedAt": "2026-08-06T18:07:00.000Z",
+            "retrievedAt": "2026-10-08T06:25:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "IN-EXTERNAL-DEPENDENCY-2026-001",
+            "sourceId": "IN-MOPNG-SAMUDRA-MANTHAN-2026",
+            "sourceVersion": "MOPNG-SAMUDRA-MANTHAN-20260803",
+            "sourceUrl": "https://www.pib.gov.in/PressNoteDetails.aspx?ModuleId=3&NoteId=159415&lang=2&reg=48",
+            "authorityClass": "GOVERNMENT",
+            "publishedAt": "2026-08-03T18:02:00.000Z",
+            "retrievedAt": "2026-10-08T06:25:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "IN-CARRIER-STRUCTURE-2026-001",
+            "sourceId": "IN-UPI-10Y-AUG-2026",
+            "sourceVersion": "UPI-10Y-20260824",
+            "sourceUrl": "https://www.pib.gov.in/PressReleseDetailm.aspx?PRID=2302657&lang=1&reg=3",
+            "authorityClass": "GOVERNMENT",
+            "publishedAt": "2026-08-24T13:57:00.000Z",
+            "retrievedAt": "2026-10-08T06:25:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "IN-PRESSURE-FIELD-2026-001",
+            "sourceId": "IN-WPI-AUG-2026",
+            "sourceVersion": "WPI-2026-08-20260914",
+            "sourceUrl": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2309977&lang=2&reg=48",
+            "authorityClass": "GOVERNMENT",
+            "publishedAt": "2026-09-14T12:01:00.000Z",
+            "retrievedAt": "2026-10-08T06:25:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          }
+        ],
+        "missingTimestampEvidence": [],
+        "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+        "acceptedPositionsUnchanged": true
+      },
+      {
+        "dossierId": "DOSSIER-JP",
+        "sourceTimestamp": null,
+        "currentness": "CURRENTNESS_UNKNOWN",
+        "sourceEvidence": [],
+        "missingTimestampEvidence": [
+          "JP-DEMOGRAPHY-2026-001",
+          "JP-INDUSTRY-2026-001",
+          "JP-INFRASTRUCTURE-2026-001",
+          "JP-TECHNOLOGY-2026-001",
+          "JP-EXTERNAL-DEPENDENCY-2026-001",
+          "JP-CARRIER-STRUCTURE-2026-001",
+          "JP-PRESSURE-FIELD-2026-001"
+        ],
+        "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+        "acceptedPositionsUnchanged": true
+      },
+      {
+        "dossierId": "DOSSIER-KR",
+        "sourceTimestamp": null,
+        "currentness": "CURRENTNESS_UNKNOWN",
+        "sourceEvidence": [],
+        "missingTimestampEvidence": [
+          "KR-DEMOGRAPHY-2026-001",
+          "KR-INDUSTRY-2026-001",
+          "KR-INFRASTRUCTURE-2026-001",
+          "KR-TECHNOLOGY-2026-001",
+          "KR-EXTERNAL-DEPENDENCY-2026-001",
+          "KR-CARRIER-STRUCTURE-2026-001",
+          "KR-PRESSURE-FIELD-2026-001"
+        ],
+        "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+        "acceptedPositionsUnchanged": true
+      },
+      {
+        "dossierId": "DOSSIER-LATAM",
+        "sourceTimestamp": null,
+        "currentness": "CURRENTNESS_UNKNOWN",
+        "sourceEvidence": [],
+        "missingTimestampEvidence": [
+          "LATAM-DEMOGRAPHY-2026-001",
+          "LATAM-INDUSTRY-2026-001",
+          "LATAM-INFRASTRUCTURE-2026-001",
+          "LATAM-TECHNOLOGY-2026-001",
+          "LATAM-EXTERNAL-DEPENDENCY-2026-001",
+          "LATAM-CARRIER-STRUCTURE-2026-001",
+          "LATAM-PRESSURE-FIELD-2026-001"
+        ],
+        "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+        "acceptedPositionsUnchanged": true
+      },
+      {
+        "dossierId": "DOSSIER-ME",
+        "sourceTimestamp": null,
+        "currentness": "CURRENTNESS_UNKNOWN",
+        "sourceEvidence": [],
+        "missingTimestampEvidence": [
+          "ME-DEMOGRAPHY-2026-001",
+          "ME-INDUSTRY-2026-001",
+          "ME-INFRASTRUCTURE-2026-001",
+          "ME-TECHNOLOGY-2026-001",
+          "ME-EXTERNAL-DEPENDENCY-2026-001",
+          "ME-CARRIER-STRUCTURE-2026-001",
+          "ME-PRESSURE-FIELD-2026-001"
+        ],
+        "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+        "acceptedPositionsUnchanged": true
+      },
+      {
+        "dossierId": "DOSSIER-RU",
+        "sourceTimestamp": null,
+        "currentness": "CURRENTNESS_UNKNOWN",
+        "sourceEvidence": [],
+        "missingTimestampEvidence": [
+          "RU-DEMOGRAPHY-2026-001",
+          "RU-INDUSTRY-2026-001",
+          "RU-INFRASTRUCTURE-2026-001",
+          "RU-TECHNOLOGY-2026-001",
+          "RU-EXTERNAL-DEPENDENCY-2026-001",
+          "RU-CARRIER-STRUCTURE-2026-001",
+          "RU-PRESSURE-FIELD-2026-001"
+        ],
+        "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+        "acceptedPositionsUnchanged": true
+      },
+      {
+        "dossierId": "DOSSIER-SEA",
+        "sourceTimestamp": "2026-10-08T06:00:00.000Z",
+        "currentness": "SOURCE_TIMESTAMPS_BOUND_CURRENT_FRESHNESS_NOT_INFERRED",
+        "sourceEvidence": [
+          {
+            "claimId": "SEA-DEMOGRAPHY-2026-001",
+            "sourceId": "SEA-ASEANSTATS-POP-2025",
+            "sourceVersion": "ASEANSTATS-DASHBOARD-2025-UPDATED-2026-08",
+            "sourceUrl": "https://data.aseanstats.org/",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-04-17T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:00:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "SEA-INDUSTRY-2026-001",
+            "sourceId": "SEA-ASEAN-UNCTAD-INVESTMENT-REPORT-2025",
+            "sourceVersion": "ASEAN-INVESTMENT-REPORT-2025",
+            "sourceUrl": "https://investmentpolicy.unctad.org/publications/1314/asean-investment-report-2025",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2025-10-01T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:00:00.000Z",
+            "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "SEA-INFRASTRUCTURE-2026-001",
+            "sourceId": "SEA-ASEAN-APG-FINANCING-2025",
+            "sourceVersion": "ASEAN-APG-FINANCING-INITIATIVE-20251015",
+            "sourceUrl": "https://asean.org/adb-and-world-bank-group-launch-the-asean-power-grid-financing-initiative-with-the-asean-secretariat-and-the-asean-centre-for-energy-ace/",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2025-10-15T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:00:00.000Z",
+            "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "SEA-TECHNOLOGY-2026-001",
+            "sourceId": "SEA-ASEAN-DEFA-CONCLUSION-2026",
+            "sourceVersion": "ASEAN-DEFA-SEOM-CONCLUSION-20260601",
+            "sourceUrl": "https://asean.org/statement-of-the-chairperson-of-the-asean-senior-economic-officials-seom-on-the-conclusion-of-asean-defa-negotiations/",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-06-01T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:00:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "SEA-EXTERNAL-DEPENDENCY-2026-001",
+            "sourceId": "SEA-IEA-ENERGY-OUTLOOK-2026",
+            "sourceVersion": "IEA-SOUTHEAST-ASIA-ENERGY-OUTLOOK-2026",
+            "sourceUrl": "https://www.iea.org/reports/southeast-asia-energy-outlook-2026/executive-summary",
+            "authorityClass": "ACADEMIC",
+            "publishedAt": "2026-06-16T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:00:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "SEA-CARRIER-STRUCTURE-2026-001",
+            "sourceId": "SEA-ASEAN-UNCTAD-INVESTMENT-REPORT-2025",
+            "sourceVersion": "ASEAN-INVESTMENT-REPORT-2025",
+            "sourceUrl": "https://investmentpolicy.unctad.org/publications/1314/asean-investment-report-2025",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2025-10-01T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:00:00.000Z",
+            "recordedFreshness": "FRESH_UNTIL_SUPERSEDED",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          },
+          {
+            "claimId": "SEA-PRESSURE-FIELD-2026-001",
+            "sourceId": "SEA-IEA-ENERGY-OUTLOOK-2026",
+            "sourceVersion": "IEA-SOUTHEAST-ASIA-ENERGY-OUTLOOK-2026",
+            "sourceUrl": "https://www.iea.org/reports/southeast-asia-energy-outlook-2026/executive-summary",
+            "authorityClass": "ACADEMIC",
+            "publishedAt": "2026-06-16T00:00:00.000Z",
+            "retrievedAt": "2026-10-08T06:00:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE",
+            "admittedAsOf": "2026-10-08"
+          }
+        ],
+        "missingTimestampEvidence": [],
+        "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+        "acceptedPositionsUnchanged": true
+      },
+      {
+        "dossierId": "DOSSIER-US",
+        "sourceTimestamp": "2026-10-02T02:47:00.000Z",
+        "currentness": "SOURCE_TIMESTAMPS_BOUND_CURRENT_FRESHNESS_NOT_INFERRED",
+        "sourceEvidence": [
+          {
+            "claimId": "US-DEMOGRAPHY-2026-001",
+            "sourceId": "US-CENSUS-VINTAGE-2025-NATIONAL-STATE",
+            "sourceVersion": "VINTAGE-2025-NATIONAL-STATE-20260127",
+            "sourceUrl": "https://www.census.gov/newsroom/press-kits/2026/national-state-population-estimates.html",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-01-27T00:00:00.000Z",
+            "retrievedAt": "2026-10-02T02:47:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+          },
+          {
+            "claimId": "US-INDUSTRY-2026-001",
+            "sourceId": "US-BEA-GDP-BY-INDUSTRY-2026Q2",
+            "sourceVersion": "2026Q2-THIRD-ESTIMATE-20260930",
+            "sourceUrl": "https://www.bea.gov/data/gdp/gdp-industry",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-09-30T00:00:00.000Z",
+            "retrievedAt": "2026-10-02T02:47:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+          },
+          {
+            "claimId": "US-INFRASTRUCTURE-2026-001",
+            "sourceId": "US-BTS-NTS-UPDATE-20260930",
+            "sourceVersion": "NTS-UPDATE-20260930",
+            "sourceUrl": "https://www.bts.gov/newsroom/bts-updates-national-transportation-statistics-93026",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-09-30T00:00:00.000Z",
+            "retrievedAt": "2026-10-02T02:47:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+          },
+          {
+            "claimId": "US-TECHNOLOGY-2026-001",
+            "sourceId": "US-NSF-NSB-SEP-2026-1",
+            "sourceVersion": "NSB-SEP-2026-1",
+            "sourceUrl": "https://ncses.nsf.gov/pubs/nsbsep20261/executive-summary",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-05-04T00:00:00.000Z",
+            "retrievedAt": "2026-10-02T02:47:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+          },
+          {
+            "claimId": "US-EXTERNAL-DEPENDENCY-2026-001",
+            "sourceId": "US-BEA-TRADE-GOODS-SERVICES-JULY-2026",
+            "sourceVersion": "BEA-26-40_CB-26-142_JULY-2026",
+            "sourceUrl": "https://www.bea.gov/news/2026/us-international-trade-goods-and-services-july-2026",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publishedAt": "2026-09-03T00:00:00.000Z",
+            "retrievedAt": "2026-10-02T02:47:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+          },
+          {
+            "claimId": "US-CARRIER-STRUCTURE-2026-001",
+            "sourceId": "US-SBA-FAQ-SMALL-BUSINESS-2026",
+            "sourceVersion": "SBA-ADVOCACY-FAQ-SMALL-BUSINESS-2026-02",
+            "sourceUrl": "https://advocacy.sba.gov/2026/02/03/frequently-asked-questions-about-small-business-2026/",
+            "authorityClass": "GOVERNMENT",
+            "publishedAt": "2026-02-03T00:00:00.000Z",
+            "retrievedAt": "2026-10-02T02:47:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+          },
+          {
+            "claimId": "US-PRESSURE-FIELD-2026-001",
+            "sourceId": "US-FED-FSR-MAY-2026",
+            "sourceVersion": "FED-FSR-MAY-2026",
+            "sourceUrl": "https://www.federalreserve.gov/publications/2026-may-financial-stability-report-overview.htm",
+            "authorityClass": "REGULATOR",
+            "publishedAt": null,
+            "retrievedAt": "2026-10-02T02:47:00.000Z",
+            "recordedFreshness": "FRESH",
+            "timestampKind": "SOURCE_RETRIEVAL_NOT_ACCEPTANCE"
+          }
+        ],
+        "missingTimestampEvidence": [],
+        "currentFreshnessAssessment": "UNKNOWN_UNLESS_SOURCE_SPECIFIC_CURRENT_POLICY_VERIFIED",
+        "acceptedPositionsUnchanged": true
+      }
+    ],
+    "providerCalls": 0
+  },
+  "stateScopes": {
+    "BOOK_V_CONTEXTUAL_ASK": "Actual local API: seven selected layers + absent source, en/zh; bounded partial answers preserve evidence limits",
+    "BOOK_V_ASSET_RESOLUTION": "15 accepted world objects only; 30 desktop/mobile actual response/decode/identity checks",
+    "BOOK_VI_CONTEXTUAL_ASK": "Actual local API US/CN/EU/SEA/unaccepted en/zh and customer browser JP",
+    "MOOMOO_EVIDENCE_BINDING": "US-only validated/admitted consumer wired; current TTL excludes all 56 historical records as STALE, current evidence refresh remains missing",
+    "BOOK_V_CUSTOMER_RENDER": "Registered public Atlas consumer text plus separate asset owner receipt: 223 assets / 892 en-zh desktop-mobile combinations, all decoded and accepted digest matched; not full-book prose, deployment or live customer certification"
+  },
+  "BOOK_V_LOCAL_SOURCE_CLOSED_LOOP": false,
+  "BOOK_V_DEPLOYED_CLOSED_LOOP": "NOT_RUN",
+  "BOOK_V_LIVE_CUSTOMER_CLOSED_LOOP": "NOT_RUN",
+  "BOOK_VI_LOCAL_SOURCE_CLOSED_LOOP": false,
+  "BOOK_VI_DEPLOYED_CLOSED_LOOP": "NOT_RUN",
+  "BOOK_VI_LIVE_CUSTOMER_CLOSED_LOOP": "NOT_RUN",
+  "moomooCurrentAudit": {
+    "asOf": "2026-10-09T09:51:14.945Z",
+    "scope": "US_ONLY_VALIDATED_ADMITTED_TTL_AT_CURRENT_TIME",
+    "counts": {
+      "STALE": 56
+    },
+    "positionAuthority": false,
+    "providerCalls": 0,
+    "currentEvidence": [],
+    "historicalEvidenceCount": 56
+  },
+  "coordinationEvidence": "W31-OWNER-COORDINATION-RESULT.json",
+  "deployed": "NOT_RUN",
+  "liveCustomer": "NOT_RUN",
+  "spendUSD": 0,
+  "worldDiscovery": {
+    "authority": "Book V / Book VI canonical owners; World is a shared consumer entry, no copied Atlas content or asset registry",
+    "route": "/world",
+    "TECHNICAL_CLOSED_LOOP": "PARTIAL",
+    "DISCOVERY_CLOSED_LOOP": "PASS",
+    "COMMERCIAL_OR_RUNTIME_CLOSED_LOOP": "PARTIAL",
+    "scope": "Eight actual local browser paths: homepage one action, desktop/mobile nav, en/zh, Civilization/Reconfiguration object, consented SQL save, actual Ask, History tab, same-object reopen",
+    "browserEvidence": "WORLD-DISCOVERY-BROWSER-QA.json",
+    "storageEvidence": "WORLD-SAVE-ZERO-COST-QA.json",
+    "migrationCandidate": "WORLD-SAVE-MIGRATION-CANDIDATE.json",
+    "bookOwnersRemainCanonical": true,
+    "bookOwnershipRequiredForDiscovery": false,
+    "entryWiring": [
+      "main navigation",
+      "homepage task",
+      "My PHI",
+      "Actual Ask Add-context selector → World object chooser → original Book context",
+      "Book V/VI",
+      "Financial",
+      "My Reality",
+      "Navigation Academy exploration"
+    ],
+    "remaining": [
+      "No real canonical Academy videos: lesson-specific Atlas object binding awaits actual teaching metadata; broad exploration link does not prove video handoff",
+      "Objects without source-registered cross-period relations show an explicit missing relation; no fabricated historical/current pairing",
+      "Account save candidate is QA/preview gated; production activation and migration are not authorized",
+      "Bookmarks save public source references and versions, not Ask answers or personal facts"
+    ],
+    "FIRST_STOP_NODE": "SOURCE_REGISTERED_RELATIONS_AND_LESSON_SPECIFIC_VIDEO_CONTEXT_GAPS",
+    "deployed": "NOT_RUN",
+    "liveCustomer": "NOT_RUN",
+    "providerCalls": 0,
+    "spendUSD": 0,
+    "preview": "http://127.0.0.1:55266/world?atlas=world&snapshot=WS-2026",
+    "previewIdentity": "CONTROLLED_LOCAL_QA_SYNTHETIC_ACCOUNT_IN_MEMORY_NOT_CUSTOMER_ACCOUNT"
+  },
+  "reusedEvidenceInheritance": [
+    {
+      "path": "assets/js/pages/civilization-atlas/atlas-reading-bridge.js",
+      "sha256": "192fbf03a5801ac8deccda2b3a1598c27bfc9804f9fac1498ee3b906786b8124",
+      "currentSHA256": "192fbf03a5801ac8deccda2b3a1598c27bfc9804f9fac1498ee3b906786b8124",
+      "unchanged": true
+    },
+    {
+      "path": "functions/_lib/book6-current-source.js",
+      "sha256": "ac712364838cad2ac3e7cf7e019edd235bd35396e60490f1ce8a4494b55d89e7",
+      "currentSHA256": "ac712364838cad2ac3e7cf7e019edd235bd35396e60490f1ce8a4494b55d89e7",
+      "unchanged": true
+    },
+    {
+      "path": "functions/_lib/book6-accepted-current.js",
+      "sha256": "d9b4f7e2974a11bfe8dd05b51c670a9c7f644b741272d995f618a0458cbe655d",
+      "currentSHA256": "d9b4f7e2974a11bfe8dd05b51c670a9c7f644b741272d995f618a0458cbe655d",
+      "unchanged": true
+    },
+    {
+      "path": "functions/_lib/atlas-retrieval-scope.js",
+      "sha256": "23479358067b6cc6a2f99fbec20aff0b3416c0950d542bf589e380dd8a3ee204",
+      "currentSHA256": "23479358067b6cc6a2f99fbec20aff0b3416c0950d542bf589e380dd8a3ee204",
+      "unchanged": true
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "sha256": "68e3d86be6eb09656b37f83faef4c3aa1c3c198eb569cfea63ce31a399832ccd",
+      "currentSHA256": "68e3d86be6eb09656b37f83faef4c3aa1c3c198eb569cfea63ce31a399832ccd",
+      "unchanged": true
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "sha256": "d42e53c230fccadb4d9c1d03bf3acdd54ce9e45f38b62fd3c66660c098c2f410",
+      "currentSHA256": "d42e53c230fccadb4d9c1d03bf3acdd54ce9e45f38b62fd3c66660c098c2f410",
+      "unchanged": true
+    },
+    {
+      "path": "functions/api/customer-contextual-ask.js",
+      "sha256": "6089914f17f940a9757f75e629e62b6fc3a6c1aa6431bd9f5e2e4be6029783e7",
+      "currentSHA256": "6089914f17f940a9757f75e629e62b6fc3a6c1aa6431bd9f5e2e4be6029783e7",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/check-w31-reading-bridge-browser.mjs",
+      "sha256": "3fd056f64ff99098b10818955ad3450fc679a4db86352a52dc49bd34fa470f2e",
+      "currentSHA256": "3fd056f64ff99098b10818955ad3450fc679a4db86352a52dc49bd34fa470f2e",
+      "unchanged": true
+    }
+  ],
+  "currentWorldEvidenceHead": "9a3473a114e643ae0742df35202f5413f7bee49a",
+  "latestAssetHandoffsConsumed": [
+    {
+      "path": "docs/assets/r2-public/wiring-20261009/BOOK-V-FIRST-COMPLETE.json",
+      "sha256": "358ba5bc7efaaad49cdb0eaa4033acf756d97a77d1cf2feb739dee36d7faf84a",
+      "scope": "LOCAL_SOURCE_WITH_PUBLIC_R2_GET_ONLY",
+      "status": null,
+      "head": "64aab9ca0bc6577503cca2bb4da6c7f86f00941d",
+      "endHead": "6e356807127de02a17f3246c67c743f6817b0894",
+      "targetCount": null,
+      "verifiedCount": null,
+      "rowCount": 892,
+      "states": {
+        "LOADED_DECODED_VISIBLE": 886,
+        "FAIL": 6
+      },
+      "deployed": "NOT_RUN",
+      "liveCustomer": "NOT_RUN"
+    },
+    {
+      "path": "docs/assets/r2-public/wiring-20261009/BOOK-V-CONSUMERS.json",
+      "sha256": "694258a8e6a80eddcf659f7b74fb3b4f6b746dc8f5aae1585ff9eaafa2c858e7",
+      "head": "9a3473a114e643ae0742df35202f5413f7bee49a",
+      "endHead": "9a3473a114e643ae0742df35202f5413f7bee49a",
+      "rowCount": 892,
+      "passed": 892,
+      "firstFailureResolution": [
+        {
+          "assetId": "VIS-CIV-CA-T11-02-SECONDARY",
+          "locale": "en",
+          "width": 1280,
+          "firstState": "FAIL",
+          "currentState": "LOADED_DECODED_VISIBLE"
+        },
+        {
+          "assetId": "VIS-CIV-CA-T11-02-SECONDARY",
+          "locale": "en",
+          "width": 390,
+          "firstState": "FAIL",
+          "currentState": "LOADED_DECODED_VISIBLE"
+        },
+        {
+          "assetId": "VIS-CIV-CA-T13-03-HERO",
+          "locale": "zh-Hans",
+          "width": 1280,
+          "firstState": "FAIL",
+          "currentState": "LOADED_DECODED_VISIBLE"
+        },
+        {
+          "assetId": "VIS-CIV-CA-T13-03-HERO",
+          "locale": "zh-Hans",
+          "width": 390,
+          "firstState": "FAIL",
+          "currentState": "LOADED_DECODED_VISIBLE"
+        },
+        {
+          "assetId": "VIS-CIV-TW-10",
+          "locale": "en",
+          "width": 1280,
+          "firstState": "FAIL",
+          "currentState": "LOADED_DECODED_VISIBLE"
+        },
+        {
+          "assetId": "VIS-CIV-SS-05",
+          "locale": "en",
+          "width": 1280,
+          "firstState": "FAIL",
+          "currentState": "LOADED_DECODED_VISIBLE"
+        }
+      ],
+      "scope": "OTHER_OWNER_RECEIPT_CONSUMED_NOT_REPEATED_SCAN"
+    }
+  ],
+  "bookVVisualHandoff": {
+    "path": "docs/assets/r2-public/wiring-20261009/BOOK-V-CONSUMERS.json",
+    "assets": 223,
+    "combinations": 892,
+    "passed": 892,
+    "acceptedDigestMatched": 892,
+    "initialSixFailuresResolved": true
+  },
+  "finalBuild": {
+    "result": "PASS",
+    "command": "node scripts/run-zero-cost-regression.mjs build:pages",
+    "currentHead": "6786cfa10068f3b85f90f56fd6c6314c0c240e47",
+    "evidenceCommit": "6786cfa10068f3b85f90f56fd6c6314c0c240e47",
+    "buildAt": "2026-10-09T10:15:33.207Z",
+    "startedAt": "2026-10-09T10:13:40.874Z",
+    "exitCode": 0,
+    "stale": false,
+    "inputBefore": "dfbc76b2e49848f01ffe4149ad42303cbd20d3ecc40fe3c6d52f349c2f5cb847",
+    "inputAfter": "dfbc76b2e49848f01ffe4149ad42303cbd20d3ecc40fe3c6d52f349c2f5cb847",
+    "inputScope": "BUILD_INPUT_SOURCE_AND_PUBLIC_FILES_EXCLUDING_INTERNAL_REVIEW_AND_GENERATED_GUARD_RECEIPTS",
+    "buildReceipt": "content/production-closure/live-customer-commercial-convergence/OWNER-CORRECTION-PAGES-BUILD.log",
+    "logSHA256": "e2fe28cdc7d2fd85ec536b1c68d57fce751a60f3bceeafed72565abd58cd8faf",
+    "workerBytes": 16525596,
+    "gzipBytes": 3071336,
+    "providerCalls": 0,
+    "deployed": false,
+    "liveCustomer": false
+  },
+  "zeroCostChecksExecuted": [
+    "check-w31-dossier-timestamps.mjs: PASS (5 bound / 6 unknown)",
+    "check-w31-actual-contextual-ask.mjs: PASS (26 actual handler cases)",
+    "check-w31-reading-bridge-browser.mjs: PASS (4 actual browser journeys)",
+    "check-w31-visual-handoff.mjs: PASS (30 selected image requests/decode/identity)",
+    "check-world-save-zero-cost.mjs: PASS (native SQLite / owner / consent / expiry)",
+    "check-world-discovery-browser.mjs: PASS (8 actual browser journeys, World visible in actual Ask selector)",
+    "check:book-v-atlas:r1:m1:w5-w6: PASS",
+    "check:book6-reconfiguration-atlas:ask: PASS",
+    "check-pages-output-concurrency.mjs: PASS after completed build; premature invocation retained as invalid prerequisite",
+    "check:book-w1-public-projection: machine PASS, human/payment NOT_RUN",
+    "build:pages: PASS current HEAD+working-tree digest, stale=false"
+  ]
+}

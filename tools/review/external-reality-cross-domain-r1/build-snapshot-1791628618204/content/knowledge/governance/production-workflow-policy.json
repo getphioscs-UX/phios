@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "PHI-OS-PJA-W3R1-PRODUCTION-WORKFLOW-POLICY-v1.0.0",
+  "status": "frozen",
+  "freezeLabel": "PJA-W3R1-v1.0.0-Frozen",
+  "canonicalAuthority": ["Canonical Registry", "Canonical Thesis", "Canonical Boundary", "Claim Boundary", "Source Registry", "Supporting Question Ownership"],
+  "productionAuthority": ["Production Readiness", "Human Production Approval", "Exportability", "Production Package"],
+  "editorialWorkingLayer": { "humanEditableFilesPerNode": 1, "humanEditable": ["draft.md"], "humanDecisions": ["Human Editorial Decision", "Publication Approval"] },
+  "dailyCommands": ["knowledge:prepare", "knowledge:draft", "knowledge:review", "knowledge:approve", "knowledge:export", "knowledge:status", "knowledge:wave"],
+  "derivedArtifacts": ["claim-bindings.json", "source-bindings.json", "boundary-report.json", "figure-bindings.json", "editorial-metadata.json", "review-status.json", "production-portfolio.json"],
+  "forbiddenReverseWrites": ["draft -> Canonical Thesis", "draft -> Canonical Boundary", "derived binding -> Canonical Authority", "Portfolio -> Canonical Registry", "Wave learning -> Style Bible without TL approval"],
+  "qualityThresholds": { "canonicalThesisCoverage": 100, "mustEstablishCoverage": 100, "requiredClaimCoverage": 100, "unknownSources": 0, "unsupportedFactualClaims": 0, "blockingBoundaryViolations": 0, "unresolvedRequiredFigures": 0, "humanEditorialApproval": "valid" },
+  "waveLimits": { "pilot": 1, "wave1": 8, "wave2": 12, "mature": 24 },
+  "waveStates": ["planned", "prepared", "drafting", "human_review", "approved", "exported", "closed"],
+  "exportContract": { "requiresHumanEditorialApproval": true, "requiresMatchingDraftHash": true, "requiresCoveragePass": true, "requiresNoBlockingFindings": true, "requiresRequiredFigureComplete": true, "publishes": false },
+  "publicationContract": { "separateApprovalRequired": true, "automaticAfterExport": false },
+  "figureBoundary": { "stages": ["Figure Decision", "Figure Brief", "Figure Asset", "Figure Review", "Figure Binding"], "bindingMeansAsset": false, "productionStage": "PJA-W3F" },
+  "commitPolicy": { "commit": ["Canonical Authority", "Human approvals", "Production Package", "draft.md", "review decisions"], "derivedReadOnly": ["bindings", "coverage", "metadata", "portfolio"], "releaseOnly": ["Production Export", "Publication package"], "neverCommit": ["delta ZIP", "cache", "logs", "node_modules"] },
+  "legacyCompatibility": { "deleteOldCommands": false, "w3aPilotMustPass": true }
+}

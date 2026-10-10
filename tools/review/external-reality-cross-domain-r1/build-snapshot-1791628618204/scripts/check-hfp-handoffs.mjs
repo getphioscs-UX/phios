@@ -1,0 +1,8 @@
+import assert from 'node:assert/strict';
+import {runHfpFixture,createHfpRrSubmission,createHfpJourneyHandoff,readJson} from './lib/hfp/hfp-check-lib.mjs';
+const est=await runHfpFixture('estate-heavy.json'); const dar=est.candidate.sections.find(s=>s.sectionCode==='ESTATE_SUCCESSION').statements.find(s=>s.sourceAuthority==='DAR'); assert.ok(dar); for(const bad of ['clauses','willInstructions','distributionInstructions','legalValidity','legalAdvice']) assert.equal(Object.hasOwn(dar.payload,bad),false,`HFP admitted DAR authority field ${bad}`);
+const rr=await createHfpRrSubmission(est.candidate,{submittedAt:'2026-08-23T00:00:00.000Z'}); assert.equal(rr.hfpCandidateDigest,est.candidate.candidateDigest); for(const f of ['released','approved','final','customerVisible','PDFProjection','workspaceProjection']) assert.equal(Object.hasOwn(rr,f),false,`HFP RR handoff leaked ${f}`);
+const jr=createHfpJourneyHandoff(est.candidate); assert.equal(jr.targetRuntime,'JR'); for(const f of ['stage','journeyId','progress']) assert.equal(Object.hasOwn(jr,f),false,`HFP created Journey authority field ${f}`);
+for(const v of est.candidate.visualSemanticReferences) for(const f of ['x','y','width','height','page','column','grid','fontSize','cssClass']) assert.equal(Object.hasOwn(v,f),false,`Visual semantic reference leaked layout ${f}`);
+const rrContract=readJson('content/financial/holistic-planning-product/contracts/hfp-rr-handoff-contract-v1.json'); assert.equal(rrContract.rules.hfpMayApprove,false); assert.equal(rrContract.rules.hfpMayRelease,false); assert.equal(rrContract.rules.cprCustRemainsPresentationAuthority,true);
+console.log('✓ HFP-W15/W22/W24/W25 DAR + Journey + RR + CPR-CUST boundaries passed.');

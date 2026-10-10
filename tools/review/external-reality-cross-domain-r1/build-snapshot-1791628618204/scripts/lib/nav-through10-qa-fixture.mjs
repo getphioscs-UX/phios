@@ -1,0 +1,9 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import {createHash} from 'node:crypto';import {NAV_BATCH_01_CONTRACT} from '../../functions/runtime/navigation/nav-accepted-batch-01-contract.js';import {NAV_BATCH_02_CONTRACT} from '../../functions/runtime/navigation/nav-accepted-batch-02-contract.js';import {evaluateAcceptedNavigationThrough10 as evaluate,projectAcceptedNavigationThrough10,projectAcceptedNavigationAcademyThrough10} from '../../functions/runtime/navigation/nav-accepted-batch-02-runtime.js';
+const contracts=[...NAV_BATCH_01_CONTRACT,...NAV_BATCH_02_CONTRACT],ownerId='qa-owner',personId='qa-person';const models={
+ 'NAV-06':{type:'REVERSIBLE_WITH_COST',dimensions:Object.fromEntries(['legal','financial','operational','relational','temporal','identityOrReputationResidue','optionSpace'].map(k=>[k,'ASSESSED_FROM_SYNTHETIC_SOURCE'])),exitRoutes:[],exitCosts:[],residualEffects:[],recoveryConditions:[],unknowns:[]},
+ 'NAV-07':{type:'NEAR_TERM',horizonConfirmedBy:ownerId},
+ 'NAV-08':{type:'USER_DECISION_OWNER',decisionOwners:[ownerId],systemRole:'NAVIGATION_SUPPORT_ONLY',consentRequirements:[],professionalRequirements:[],institutionalRequirements:[]},
+ 'NAV-09':{type:'LOCAL_CHANGE',previousDecisionBasisRef:'synthetic-prior-basis',affectedDecisionBasis:['commute']},
+ 'NAV-10':{type:'R0_OBSERVE'}
+};const base={ownerId,personId,decisionVersion:'d1',positionVersion:'p1',decision:{id:'decision1',text:'是否建立替代收入路径',confirmation:'USER_CONFIRMED',confirmedBy:ownerId},assessments:Object.fromEntries(contracts.map(c=>[c.moduleId,{decisionVersion:'d1',positionVersion:'p1',checks:Object.fromEntries(c.failClosedConditions.map(f=>[f,false])),inputs:Object.fromEntries(c.requiredInputs.map(k=>[k,[]])),items:[],model:models[c.moduleId]}]))};const opts={ownerId,personId};
+export {base,opts};

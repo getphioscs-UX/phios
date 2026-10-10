@@ -1,0 +1,63 @@
+import {visualModules} from './report-section-config.generated.js';
+// Read-only presentation adapter. All counts, ratios, ranks and relations are
+// copied from the admitted BZR reading; this module never calculates BaZi.
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const list=v=>Array.isArray(v)?v:[];
+const ELEMENTS={WOOD:['Wood','木','#3aa878'],FIRE:['Fire','火','#e66d52'],EARTH:['Earth','土','#c79b52'],METAL:['Metal','金','#9a9da3'],WATER:['Water','水','#438fc4']};
+const GROUPS={PEER:['Peer / self-position','同类／自我位置','#c87949'],OUTPUT:['Output / expression','输出／表达','#f0aa2f'],WEALTH:['Wealth / exchange','财星／资源交换','#3c8fd0'],OFFICER:['Officer / pressure','官杀／规则压力','#48c094'],RESOURCE:['Resource / support','印星／吸收支持','#e26d71']};
+const GODS={BI_JIAN:['Peer','比肩'],JIE_CAI:['Rob Wealth','劫财'],SHI_SHEN:['Eating God','食神'],SHANG_GUAN:['Hurting Officer','伤官'],PIAN_CAI:['Indirect Wealth','偏财'],ZHENG_CAI:['Direct Wealth','正财'],QI_SHA:['Seven Killings','七杀'],ZHENG_GUAN:['Direct Officer','正官'],PIAN_YIN:['Indirect Resource','偏印'],ZHENG_YIN:['Direct Resource','正印']};
+const POS={YEAR:['Year','年'],MONTH:['Month','月'],DAY:['Day','日'],HOUR:['Hour','时']};
+const SEASON={SAME_AS_MONTH_COMMAND:['Season anchor','与月令同气'],GENERATED_BY_MONTH_COMMAND:['Season can support it','受月令相生'],GENERATES_MONTH_COMMAND:['Feeds the month command','生助月令'],CONTROLLED_BY_MONTH_COMMAND:['Constrained by month command','受月令制约'],CONTROLS_MONTH_COMMAND:['Checks the month command','制约月令']};
+const REPEAT={ABSENT:['Absent in this inventory','清单未见'],SINGLE_TOUCH:['Single occurrence','单次出现'],REPEATED:['Repeated','重复出现'],NONE:['No concentration','无集中'],BALANCED:['Even distribution','分布均衡'],SPREAD:['Across pillars','跨柱分布'],CONCENTRATED:['Concentrated','集中']};
+const REL={STEM_COMBINATION:['Stem combination','天干合'],BRANCH_COMBINATION:['Branch combination','地支合'],BRANCH_CLASH:['Clash','冲'],BRANCH_HARM:['Harm','害'],BRANCH_PUNISHMENT:['Punishment','刑'],BRANCH_SELF_PUNISHMENT:['Self-punishment','自刑'],BRANCH_BREAK:['Break','破']};
+const LABELS={MONTH_COMMAND_RELATION_UNAVAILABLE:["Seasonal relation unavailable","季节关系未提供"],BRANCH_SIX_COMBINATION:["Six combination","六合"],...ELEMENTS,...GROUPS,...GODS,...POS,...SEASON,...REPEAT,...REL};
+const label=(v,l)=>LABELS[v]?.[l==='en'?0:1]||String(v??'').toLowerCase().replaceAll('_',' ');
+const val=(v)=>v===null||v===undefined?'—':v;
+const bar=(value,color)=>`<svg class="bzpub-bar" viewBox="0 0 100 8" role="img" aria-label="${esc(value)}%"><rect width="100" height="8" rx="4" fill="${color}" opacity=".12"/><rect width="${Math.max(0,Math.min(100,Number(value)||0))}" height="8" rx="4" fill="${color}"/></svg>`;
+export function publicationVisualModule(ref){const m=visualModules.modules.find(m=>m.id===ref);if(!m||m.publicationCreatesMeaning!==false)throw Error('BZR_VISUAL_REF_UNREGISTERED');return m;}
+export function buildBaziPublicationVisual({reading,primaryVisualRef,locale='en',topicCode=null,offset=0,limit=4}){
+ const module=publicationVisualModule(primaryVisualRef),m=reading?.professionalModules,t=(en,zh)=>locale==='en'?en:zh,l=v=>label(v,locale);
+ for(const ref of module.sourceRefs)if(ref.split('/').reduce((v,k)=>v?.[k],reading)===undefined)throw Error('BZR_VISUAL_SOURCE_MISSING:'+module.key);
+ let html='',boundary='';
+ const cards=(rows,columns=2)=>`<div class="bzpub-grid" style="--bzpub-columns:${columns}">${rows.join('')}</div>`;
+ const card=(name,value,body='',color='#986536',category='')=>`<article class="bzpub-card" style="--bzpub-color:${color}" ${category?`data-category="${esc(category)}"`:''}><h3>${esc(name)}</h3><strong>${esc(val(value))}</strong>${body}</article>`;
+ const groupRows=groups=>list(groups).map(g=>{const c=GROUPS[g.groupCode]?.[2]||'#986536';return card(l(g.groupCode),`${g.ratio}%`,bar(g.ratio,c)+`<p>${esc(t('Count','计数'))}: ${esc(g.count)}</p>`,c,g.groupCode);});
+ switch(module.key){
+ case 'FOUR_PILLARS':html=cards(list(reading.structuralModel.pillars).map(p=>card(l(p.position),p.stem.zh+p.branch.zh,`<p>${esc(l(p.stem.element))} · ${esc(l(p.branch.element))}</p><p>${esc(t('Hidden stems','藏干'))}: ${esc(list(p.hiddenStems).map(s=>s.zh||s.stem?.zh||s.stemZh).join(' · '))}</p>`,ELEMENTS[p.stem.element]?.[2],p.stem.element)),4);break;
+ case 'FIVE_ELEMENTS':html=`<div class="bzpub-elements">${list(m.fiveElements.items).map(i=>{const color=ELEMENTS[i.element][2];return `<article class="bzpub-element" data-element="${i.element}" style="--bzpub-color:${color}"><div class="bzpub-element-heading"><h3>${esc(l(i.element))}</h3><strong>${i.rawRatio}% <small>· ${i.rawCount}</small></strong></div>${bar(i.rawRatio,color)}<p>${esc(l(i.monthCommandRelation))} · ${esc(l(i.dayMasterFunction))}</p></article>`;}).join('')}</div>`;boundary=t('Raw ratio ≠ strength score. Counts include unweighted hidden stems. Seasonal and Day Master relations remain qualitative.','原始占比 ≠ 强弱评分。计数包含未加权藏干；季节与日主关系保留为定性关系。');break;
+ case 'TEN_GOD_OVERVIEW':html=`<div class="bzpub-ten-bars">${list(m.tenGods.items).map(i=>{const c=GROUPS[i.functionGroup]?.[2]||'#986536';return `<article data-function-group="${esc(i.functionGroup)}" style="--bzpub-color:${c}"><h3>${esc(l(i.tenGodCode))}</h3>${bar(i.ratio,c)}<strong>${i.ratio}%</strong><small>${esc(t('Count','计数'))} ${i.count}</small></article>`;}).join('')}</div>`;boundary=t('Source occurrences, not personality scores. Each category keeps its existing functional-group colour.','来源出现次数，不是人格评分；各类别保留既有功能组颜色。');break;
+ case 'TEN_GOD_FUNCTION_GROUPS':html=cards(groupRows(m.tenGods.functionGroups),2);boundary=t('Functional families describe the existing chart inventory. Their percentages do not measure life outcomes.','功能组描述既有命盘清单；比例不衡量人生结果。');break;
+ case 'TEN_GOD_DETAILS':html=cards(list(m.tenGods.items).slice(offset,offset+limit).map(i=>{const sources=[...list(i.sources?.visible),...list(i.sources?.hidden)].map(s=>`${l(s.pillar)} ${s.stemZh}${s.sourceType==='HIDDEN_STEM'?t(' (hidden)','（藏）'):t(' (visible)','（透）')}`);return card(l(i.tenGodCode),`${i.count} · ${i.ratio}%`,`<p>${esc(l(i.functionGroup))}</p><p>${esc(t('Visible / hidden','透干／藏干'))}: ${i.visibleCount} / ${i.hiddenCount}</p><p>${esc(sources.join(' · ')||t('No recorded source','未见来源'))}</p><p>${esc(l(i.repeatState))} · ${esc(l(i.concentration?.mode))}</p><p>${esc(l(i.monthCommandRelation))}</p>`,GROUPS[i.functionGroup]?.[2],i.functionGroup);}),2);break;
+ case 'DAY_MASTER_CARRYING':{const d=m.dayMasterStrength;html=cards([[t('Roots','根气'),d.roots.total],[t('Visible support','可见支持'),d.supportBalance.supportVisible],[t('Outward count','输出与消耗计数'),d.supportBalance.outwardVisible],[t('Pressure count','压力计数'),d.supportBalance.pressureVisible]].map(([k,v])=>card(k,v)),2);boundary=d.withheldVerdict.strongWeakLabelCreated===false?t('Final strong/weak judgment remains open. These are recorded conditions, not a strength score.','最终旺弱判断保持开放。这些是已记录的条件，不是强弱评分。'):t('Read the conditions together with the admitted method interpretation.','请将条件与已准入的方法解读一起阅读。');break;}
+ case 'PATTERN_PATHS':html=cards(list(m.pattern.candidates).map(c=>card(l(c.tenGodCode),c.hiddenStemZh,`<p>${esc(c.visibleStemMatch?t('Visible stem match','有透干对应'):t('No visible stem match','未见透干对应'))}</p><p>${esc(t('Visible / recorded paths','可见／已记录路径'))}: ${val(c.professionalReading?.formation?.visiblePathCount)} / ${list(c.professionalReading?.formation?.paths).length}</p><p>${esc(c.professionalReading?.formation?.formedPatternDeclared===false?t('Formation not declared','尚未宣告成格'):t('See admitted verdict','参阅已准入判断'))}</p>`,GROUPS[c.professionalReading?.tenGodContext?.functionGroup]?.[2])),2);boundary=t('A visible path is not a formed pattern. Open conditions remain open; reading priority is not a quality ranking.','路径可见不等于成格；未定条件保持开放，读取优先级不是质量排名。');break;
+ case 'PILLAR_RELATIONSHIPS':html=cards(list(m.relationships.items).map(r=>card(list(r.positions).map(l).join(' ↔ '),list(r.memberZh).join(' · '),`<p>${esc(l(r.type))}</p><p>${esc(r.transformationEstablished===false?t('Transformation not established','未建立化气判断'):t('See admitted relation','参阅既有关系判断'))}</p>`)),2);boundary=t('Each pair remains distinct. A structural relation does not establish an event or a relationship outcome.','每组配对保持独立。结构关系不证明事件或关系结果。');break;
+ case 'PROFESSIONAL_TOPICS':{
+  const topic=list(m.professionalTopics.topics).find(x=>x.topicCode===topicCode);if(!topic)throw Error('BZR_VISUAL_TOPIC_MISSING');
+  if(topicCode==='CAREER'){
+   const god=code=>list(m.tenGods?.items).find(x=>x.tenGodCode===code);
+   const qisha=god('QI_SHA'),zhengguan=god('ZHENG_GUAN'),zhengyin=god('ZHENG_YIN'),pianyin=god('PIAN_YIN'),piancai=god('PIAN_CAI'),zhengcai=god('ZHENG_CAI');
+   const current=m.professionalTimeline?.currentWindow?.currentDaYun,annual=m.professionalTimeline?.currentWindow?.annual;
+   const outputNatal=list(m.tenGods?.items).filter(x=>x.functionGroup==='OUTPUT').reduce((sum,x)=>sum+(x.count||0),0);
+   const fp=[
+    card(t('Responsibility distribution','责任分布'),t('Seven Killings across four pillars','七杀横跨四柱'),
+     `<p>${esc(t('Visible in Year; hidden repeats in Month, Day and Hour. Direct Officer is visible in Hour and also present in Year.','年柱透出；月、日、时藏干重复。正官在时柱透出，年支亦有对应。'))}</p>`,GROUPS.OFFICER[2],'OFFICER'),
+    card(t('Support path','支持路径'),t('Direct Resource visible · Indirect Resource hidden','正印显 · 偏印藏'),
+     `<p>${esc(t('Direct Resource is visible in Month and repeats in Year; Indirect Resource is held in the Day branch.','正印透月干并在年支重复；偏印藏于日支。'))}</p>`,GROUPS.RESOURCE[2],'RESOURCE'),
+    card(t('Resource visibility','资源显隐'),t('Indirect Wealth repeats but stays hidden','偏财重复 · 均藏'),
+     `<p>${esc(t('Indirect Wealth repeats in Month and Hour, both hidden; Direct Wealth is limited and also hidden in the natal chart.','偏财重复落在月支、时支但均未透；正财本命中出现较有限，也在藏干层。'))}</p>`,GROUPS.WEALTH[2],'WEALTH'),
+    card(t('Phase shift','阶段变化'),outputNatal===0?t('No natal Output → Hurting Officer visible now','本命无食伤 → 当前伤官透出'):t('Output emphasis changes in current cycle','当前周期输出重点改变'),
+     `<p>${esc(t(`Jia-Xu brings ${current?.stemTenGod?.en||'Hurting Officer'} to the visible stem; ${annual?.stem?.zh||''}${annual?.branch?.zh||''} brings ${annual?.stemTenGod?.en||'Direct Wealth'} forward.`,`甲戌大运由${current?.stemTenGod?.zh||'伤官'}透出；${annual?.stem?.zh||''}${annual?.branch?.zh||''}流年把${annual?.stemTenGod?.zh||'正财'}带到表层。`))}</p>`,GROUPS.OUTPUT[2],'OUTPUT')
+   ];
+   html=cards(fp,2);
+   boundary=t('These cards summarize admitted natal placement, visibility and current timing facts; they do not predict a career event.','这些卡片汇总已核准的本命落点、显隐与当前时间事实，不预测具体事业事件。');
+  }else{
+   html=cards(groupRows(topic.relevantGroups),2)+`<p class="bzpub-focus">${esc(t('Topic emphasis','本章重点'))}: ${esc(l(topic.leadGroup.groupCode))}</p>`;
+   boundary=t('Existing topic priorities are retained. A topic is a multi-factor reading, not a prediction.','保留既有主题优先级。主题是多因素读取，不是预测。');
+  }
+  break;
+ }
+ case 'TIMING_LAYERS':{const current=m.timing.currentDaYun,annual=m.timing.annual;html=cards([card(t('Current luck cycle','当前大运'),current?current.pillar.stem.zh+current.pillar.branch.zh:t('Not resolved','未解析')),card(t('Annual layer','流年层'),annual?.stem&&annual?.branch?annual.stem.zh+annual.branch.zh:t('Not resolved','未解析'))],2);html+=`<div class="bzpub-cycle-grid">${list(m.timing.allDaYun).map(c=>card(`${c.startAge}–${c.endAge}`,c.pillar.stem.zh+c.pillar.branch.zh,`<p>${esc(l(c.stemTenGod?.code))}</p>`,ELEMENTS[c.pillar.stem.element]?.[2])).join('')}</div>`;boundary=t('The existing timing owner supplies these layers. Named cycles do not predict events.','时间层来自既有时间模块；周期名称不预测事件。');break;}
+ default:throw Error('BZR_VISUAL_RENDERER_MISSING');
+ }
+ return {primaryVisualRef,primaryVisualHtml:`<div class="bzpub-module" data-publication-visual="${esc(module.key)}">${html}</div>`,boundary,sourceRefs:module.sourceRefs,publicationCreatesMeaning:false};
+}

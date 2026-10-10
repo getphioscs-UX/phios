@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/reading/mir-8-reading-outcome-v1.schema.json",
+  "title": "MIR-8 Reading Outcome",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["status", "stop", "nextQuestions", "handoff"],
+  "properties": {
+    "status": {"enum": ["ANSWER_SUFFICIENT", "MORE_CONTEXT_NEEDED", "REALITY_MODEL_REQUIRED"]},
+    "stop": {"type": "boolean"},
+    "nextQuestions": {"type": "array", "maxItems": 3},
+    "handoff": {"type": "object"}
+  }
+}

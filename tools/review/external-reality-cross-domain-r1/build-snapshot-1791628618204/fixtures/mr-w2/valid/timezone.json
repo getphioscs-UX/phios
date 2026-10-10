@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-SHARED-DATA-RECORD-v1.0.0",
+  "recordId": "SDA-TIMEZONE-0001",
+  "recordType": "TIMEZONE",
+  "authority": "SHARED_DATA_AUTHORITY",
+  "authorityVersion": "1.0.0",
+  "recordVersion": "1.0.0",
+  "status": "verified",
+  "methodOwner": null,
+  "pluginOwner": null,
+  "sourceClass": "governed_resolution",
+  "provenance": {
+    "sourceType": "iana_tzdb",
+    "sourceId": "Asia/Kuala_Lumpur",
+    "sourceVersion": "2026a",
+    "capturedAt": "2026-08-04T00:00:00Z",
+    "verificationStatus": "contract_fixture",
+    "licenseStatus": "not_required"
+  },
+  "normalization": {
+    "normalizedBy": "SHARED_DATA_AUTHORITY",
+    "normalizationVersion": "1.0.0",
+    "normalizedAt": "2026-08-04T00:00:00Z"
+  },
+  "lineage": {
+    "inputRecordIds": [
+      "SDA-BIRTH-0001",
+      "SDA-COORD-0001"
+    ],
+    "algorithmCode": "IANA_TIMEZONE_RESOLVER",
+    "algorithmVersion": "1.0.0",
+    "providerCode": null,
+    "deterministic": true,
+    "aiUsed": false
+  },
+  "payload": {
+    "ianaZoneId": "Asia/Kuala_Lumpur",
+    "tzdbVersion": "2026a",
+    "resolvedAt": "1990-01-15T10:30:00+08:00",
+    "utcOffsetMinutes": 480,
+    "resolutionStatus": "exact"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-ICHI-REALITY-JOURNEY-HANDOFF-CONTRACT-v1.0.0",
+  "phase": "ICHI",
+  "work": "ICHI-W9",
+  "baselineCommit": "ec0f8d4b9ba37599affda909a47d1e41a1033037",
+  "status": "ACTIVE_VALIDATION_ONLY_EXPLICIT_CONSENT",
+  "existingRjxAuthority": "content/runtime/journey-runtime/contracts/method-result-case-handoff-contract-v1.json",
+  "handoffLabel": "Send to Reality Journey",
+  "allowedPayload": [
+    "projection",
+    "interpretation",
+    "userSelectedRelevance"
+  ],
+  "interpretationBoundary": "SOURCE_BOUND_AND_PROVENANCE_PRESERVED",
+  "userSelectedRelevanceRequired": true,
+  "automaticSelectionAllowed": false,
+  "explicitConsentRequired": true,
+  "forbiddenPayload": [
+    "fateConclusion",
+    "guaranteedFuture",
+    "preCreatedRealityTruth",
+    "automaticRealityDiagnosis",
+    "professionalConclusion"
+  ],
+  "authority": {
+    "createsCanonicalCase": false,
+    "persistsRealityModel": false,
+    "journeyOwnsInterpretation": false,
+    "interpretationOwnsReality": false,
+    "userDecisionAuthorityPreserved": true
+  }
+}

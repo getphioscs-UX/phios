@@ -1,0 +1,140 @@
+{
+  "freezeCode": "PHI-OS-ORC-V2-FREEZE-v1",
+  "freezeVersion": "1.0.0",
+  "runtimeCode": "ORC",
+  "scope": "ORC-W0-W12",
+  "status": "ORC_V2_FROZEN",
+  "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+  "migration": {
+    "from": "ORC_V1 ORC-W0-W4",
+    "to": "ORC v2 ORC-W0-W12",
+    "legacyFreezeMutationAllowed": false
+  },
+  "authority": {
+    "coordinates": true,
+    "decides": false,
+    "domainAuthorityAcquired": false
+  },
+  "canonicalStateCount": 19,
+  "governedOptionalPaths": true,
+  "replayExternalSideEffects": false,
+  "idempotencyProtectedClasses": [
+    "CASE",
+    "REPORT",
+    "PAYMENT",
+    "PROJECTION",
+    "ACTION"
+  ],
+  "rgIntegration": {
+    "successorRegistry": "runtime-checker-alias-registry-v4.json",
+    "globalRgV3Mutated": false,
+    "globalCutoverDeferred": true
+  },
+  "pilotAcceptance": {
+    "status": "accepted",
+    "pilotRuntimeAuthorityActivated": false
+  },
+  "frozenArtifacts": [
+    {
+      "path": "content/runtime/cross-runtime-orchestration/contracts/orc-authority-boundary-v2.json",
+      "sha256": "0f788a29294fba1710f5914f3e6b421f22efd70c7610c7f854af69c2f7d54ee2"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/registries/orc-canonical-state-machine-v2.json",
+      "sha256": "07fbc399c3b312374b3f9092137be3feb7a3726fd0ea49e091e54b5557f1dbc3"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/registries/orc-event-registry-v2.json",
+      "sha256": "4f51282e25881b42b9da02c7c8f0a4c25c8dda5fae60704d6357de6407033852"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/contracts/orc-dependency-enforcement-v2.json",
+      "sha256": "ef910a7fa869d86b1a7efadd6639bf10bbfa198d1b01c14a666b2210e6958dfb"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/contracts/orc-failure-contract-v2.json",
+      "sha256": "b0d62b91584cae6d2a594e2c25f97616de31981ba46fa53569f1e3b1e3bde4d0"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/contracts/orc-recovery-contract-v2.json",
+      "sha256": "d6b8ba9c520e2f21915eda79a1670d869a9f0ac36b92789573acd5cf6cb9a64d"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/contracts/orc-idempotency-contract-v2.json",
+      "sha256": "70646f2017ced2d1914bf4081422a1013b816e2f92151225de60a3b77d25d6b9"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/contracts/orc-atomic-transition-contract-v2.json",
+      "sha256": "1537cc0dc9ee0c2f78451e02bd5c54118ad18bc377018f337a132b30f700a001"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/contracts/orc-audit-timeline-contract-v2.json",
+      "sha256": "737332ade5a80355f5ce59b65c602e03204d40e834de67280356e44d27186f09"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/contracts/orc-operational-replay-contract-v2.json",
+      "sha256": "f07934670d20a0af5ae040f43bf6ff0832f93abf0b7f97693b74ab27f9b5220c"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/schemas/orc-event-envelope-v2.schema.json",
+      "sha256": "25c027e7e425c2445121da05e1f077577ecef6a547dfda6057f7b68fd63ada7e"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/schemas/orc-transition-record-v2.schema.json",
+      "sha256": "07087614daa24d5a6bfdc22bdb50db7008b4f58c87525d863ffec7c9b62213df"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/schemas/orc-system-operation-record-v2.schema.json",
+      "sha256": "1c8a2354b48b7e59eaf2884962d3a4d2c7b4a971bb4dc0e481128037243e9467"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/fixtures/orc-pilot-vertical-slice-v2.json",
+      "sha256": "4be72a8a3ca5b965d620362ebb38e4d9e29b6fd70ea27233dd7eedbe99c5a6ec"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/fixtures/orc-optional-path-v2.json",
+      "sha256": "1754a03254cd7fcd5a1627aaa114856e99bb48354560e42494b2a3c3a9e6fbfc"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/acceptance/orc-v2-vertical-slice-acceptance-v1.json",
+      "sha256": "591dccc1172bb4d927d2db5598a7faefddff2aedc6be6af949c8285d2556388b"
+    },
+    {
+      "path": "content/runtime/cross-runtime-orchestration/audits/orc-v2-authority-reconciliation-v1.json",
+      "sha256": "bb603cfc215652e758c5767d5423531995d454df908f29414de40401b5842ba8"
+    },
+    {
+      "path": "content/governance/runtime-checker-governance/registries/runtime-checker-alias-registry-v4.json",
+      "sha256": "c0f251a9da1f5d5d2087b529c5c6462e3dc13d2c82d6936fa8c71ed918fb7325"
+    },
+    {
+      "path": "content/governance/runtime-checker-governance/registries/runtime-checker-group-registry-v2.json",
+      "sha256": "278076c60a6160dce71c11724b45521f765dfd4649029dec48b88c5000f620fe"
+    },
+    {
+      "path": "content/governance/runtime-checker-governance/registries/checker-successor-deprecation-registry-v2.json",
+      "sha256": "8d7bf738c70b6d62623ccd2d2b8dc61ae2f733c8a389b81e59101f9a30a65630"
+    },
+    {
+      "path": "content/governance/runtime-checker-governance/manifests/runtime-checker-manifest-v2.json",
+      "sha256": "f4c52358b6d6b1b5322bba98d30d584900fb1aac1b0743f738bafca320ae17bf"
+    },
+    {
+      "path": "docs/governance/reconciliation/orc-w9-rg-post-freeze-registration-v1.json",
+      "sha256": "6c18baf574027ea28b11b3e814d63a4e2f25ebafea5941cceb117f5915a6b89e"
+    },
+    {
+      "path": "scripts/lib/orc-v2-runtime.mjs",
+      "sha256": "d7f4dcbf981350772807d2ba1dcd02455e22d48c942da8368223b1a570c370a5"
+    },
+    {
+      "path": "scripts/run-runtime-checker-v4.mjs",
+      "sha256": "c067f0599b01843b1929f33f5963d20c74db1248569406b0cadff11f139b46b1"
+    },
+    {
+      "path": "scripts/check-orc-v2-w0-w12.mjs",
+      "sha256": "ae8c903969a368c2fb34b712cf93dbbdc92ff98670ca7d0c424da6a644d65ed7"
+    }
+  ],
+  "futureChangeRule": "Any ORC v2 semantic, authority, state-machine, dependency, replay, RG registration or frozen-artifact change requires a versioned successor reconciliation."
+}

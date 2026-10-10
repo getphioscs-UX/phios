@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const p11=j('content/product-visual-platform-r1/freeze/pvp-r1-vis-relationship-phase11-freeze-v1.json');
+const rec=j('content/integrated-master-work/phase12/p12-current-reconciliation-v1.json');
+const a29=j('content/product-visual-platform-r1/acceptance/successors/phase12/pvp-r1-vis-w29-static-selection-acceptance-v1.json');
+const a30=j('content/product-visual-platform-r1/acceptance/successors/phase12/pvp-r1-vis-w30-static-registry-acceptance-v1.json');
+const a31=j('content/product-visual-platform-r1/acceptance/successors/phase12/pvp-r1-vis-w31-remote-verification-acceptance-v1.json');
+const freeze=j('content/product-visual-platform-r1/freeze/pvp-r1-vis-static-assets-w29-w31-phase12-freeze-v1.json');
+assert.equal(p11.status,'PVP_R1_VIS_RELATIONSHIP_PHASE11_FROZEN');assert.equal(p11.frozenExit.phase12Authorized,true);
+assert.equal(a29.status,'MACHINE_ACCEPTED_STATIC_SELECTION');assert.equal(a29.selectedCount,12);
+assert.equal(a30.status,'MACHINE_ACCEPTED_OWNER_UPLOAD_REGISTRY_BINDING');assert.equal(a30.backgroundActivationFailClosedUntilW31,true);
+assert.equal(a31.status,'MACHINE_ACCEPTED_REMOTE_VERIFICATION');assert.equal(a31.verifiedCount,12);
+assert.equal(rec.status,'W29_W31_COMPLETE_PHASE12_FROZEN');assert.equal(rec.phase12Frozen,true);assert.equal(rec.phase13Authorized,true);
+assert.equal(freeze.status,'PVP_R1_VIS_STATIC_ASSETS_W29_W31_PHASE12_FROZEN');assert.equal(freeze.frozenExit.w31RemoteVerified,true);assert.equal(freeze.frozenExit.phase13Authorized,true);assert.equal(freeze.preservedBoundaries.phase13ExecutedByThisFreeze,false);
+console.log('✓ Integrated Phase 12 passed: W29 selection, W30 existing-authority R2 binding and W31 live remote verification are frozen; Phase 13 is authorized but not executed.');
