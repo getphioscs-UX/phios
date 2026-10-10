@@ -3,7 +3,7 @@ import {enhanceExplorerShell} from './explorer-shell.js';
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const BASE='/content/knowledge/structured/book-1/';
 export function formationAskHref(object,detail,locale='en'){
- const params=new URLSearchParams({contextType:'KNOWLEDGE',contextRef:`CONCEPT:${detail.conceptId.replaceAll('_','-')}`,contextLabel:locale==='zh-Hans'?object.title:detail.titleEn,contextRoute:'/books/reality-formation/',readingPath:`/books/reality-formation/?mechanism=${object.objectId}#explorer`,relatedKnowledgeRef:`CONCEPT:${detail.conceptId.replaceAll('_','-')}`});
+ const params=new URLSearchParams({contextType:'KNOWLEDGE',contextRef:`CONCEPT:${object.objectId.toLowerCase()}`,contextLabel:locale==='zh-Hans'?object.title:detail.titleEn,contextRoute:'/books/reality-formation/',readingPath:`/books/reality-formation/?mechanism=${object.objectId}#explorer`,relatedKnowledgeRef:`CONCEPT:${object.objectId.toLowerCase()}`,locale});
  return `/knowledge/ask/?${params}`;
 }
 export function renderFormationExplorer(host,{registry,chains,comparisons,locale='en',locationRef=window.location,historyRef=window.history,eventTarget=window}={}){

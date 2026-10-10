@@ -645,8 +645,8 @@ function renderHeader(documentRef, article, translate) {
   }
   if (article.publicationContext) {
     const locale = article.locale === 'zh-Hans' ? 'zh-Hans' : 'en';
-    const bookTitle = article.publicationContext.bookTitle?.[locale] || article.publicationContext.bookTitle?.en || '';
-    metadataParts.push(article.sourceReading?.path ? bookTitle : `Volume ${article.publicationContext.publicationVolume}${bookTitle ? ` · ${bookTitle}` : ''} · ${article.publicationContext.partCode}`);
+    const bookTitle = article.publicationContext.bookTitle?.[locale] || '';
+    metadataParts.push(article.sourceReading?.path ? bookTitle : `${locale==='zh-Hans'?'第 '+article.publicationContext.publicationVolume+' 册':'Volume '+article.publicationContext.publicationVolume}${bookTitle ? ` · ${bookTitle}` : ''} · ${article.publicationContext.partCode}`);
   }
   metadata.textContent = metadataParts.join(' · ');
   if (metadata.textContent) {

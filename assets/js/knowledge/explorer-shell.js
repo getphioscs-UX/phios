@@ -1,3 +1,5 @@
+import {structuredLoader} from './structured-loader.js';
+import {canAskStructuredObject} from './structured-ask-availability.js';
 import {renderStructuredFigure} from './structured-figure.js';
 // Shared presentation and keyboard behavior; book adapters retain source authority.
 export function enhanceExplorerShell(host,{layout,nav,inspector,locale='en'}){
@@ -9,10 +11,10 @@ export function enhanceExplorerShell(host,{layout,nav,inspector,locale='en'}){
  if(navigation)navigation.classList.add('structured-explorer-navigation');
  navigation?.setAttribute('aria-label',tr('Explore topics','探索主题'));
  if(detail){detail.setAttribute('aria-label',tr('Selected topic details','所选主题详情'));detail.setAttribute('aria-live','polite');detail.setAttribute('aria-atomic','true');}
- const action=host.ownerDocument.createElement('a');action.className='knowledge-action';action.dataset.explorerAsk='';action.textContent=tr('Ask about the selected topic','就选定主题提问');host.append(action);
+ const action=host.ownerDocument.createElement('a');action.className='knowledge-action';action.dataset.explorerAsk='';action.textContent=tr('Ask about the selected topic','就选定主题提问');
  const reading=host.ownerDocument.createElement('a');reading.className='knowledge-action';reading.href='#structured-sources';reading.textContent=tr('Browse source readings','浏览来源阅读');host.append(reading);
  const contextEntry=host.ownerDocument.createElement('a');contextEntry.className='knowledge-action';contextEntry.hidden=true;host.append(contextEntry);
- let map;
+ let map, askRevision=0, disposed=false;
  if(grid&&detail&&grid.children.length===2){
   map=host.ownerDocument.createElement('section');map.className='structured-reading-map';
   const heading=host.ownerDocument.createElement('h3');heading.textContent=tr('Reading map','阅读路径');map.append(heading);
@@ -31,8 +33,11 @@ export function enhanceExplorerShell(host,{layout,nav,inspector,locale='en'}){
   contextEntry.hidden=!destination;if(destination){contextEntry.href=destination[0];contextEntry.textContent=tr(destination[1],destination[2]);}
   if(id!==figureObject){figureObject=id;void renderStructuredFigure(figureHost,id,locale);}
   if(map)map.querySelector('[data-selected-topic]').textContent=selected?.querySelector('summary')?.textContent||selected?.textContent||tr('Choose a topic from the list.','请从列表选择主题。');
-  action.hidden=!/^SK-B[1-4]-[A-Z0-9-]+$/.test(id||'');
-  if(!action.hidden)action.setAttribute('href','/knowledge/ask/?'+new URLSearchParams({contextType:'KNOWLEDGE',contextRef:'CONCEPT:'+id.toLowerCase(),contextLabel:selected.querySelector('summary')?.textContent||selected.textContent}));else action.removeAttribute('href');
+  const ticket=++askRevision;action.hidden=true;action.removeAttribute('href');action.remove();
+  if(/^SK-B[1-4]-[A-Z0-9-]+$/.test(id||''))void structuredLoader.object(`BOOK-${id[4]}`,id).then(r=>{
+   if(disposed||ticket!==askRevision||!canAskStructuredObject(r.object,r.detail,locale))return;
+   action.setAttribute('href','/knowledge/ask/?'+new URLSearchParams({contextType:'KNOWLEDGE',contextRef:'CONCEPT:'+id.toLowerCase(),contextLabel:locale==='en'?(r.detail?.titleEn||r.object.titleEn||'Source topic'):r.object.title,locale}));host.append(action);action.hidden=false;
+  }).catch(()=>{});
  };
  const Observer=host.ownerDocument.defaultView?.MutationObserver;
  const observer=Observer?new Observer(update):null;
@@ -45,5 +50,5 @@ export function enhanceExplorerShell(host,{layout,nav,inspector,locale='en'}){
   if(next!==null){e.preventDefault();items[next]?.focus();}
  };
  host.addEventListener('keydown',keydown);
- return ()=>{observer?.disconnect();action.remove();reading.remove();contextEntry.remove();choice.removeEventListener('change',filterChange);filter.remove();host.removeEventListener('keydown',keydown);};
+ return ()=>{disposed=true;askRevision++;observer?.disconnect();action.remove();reading.remove();contextEntry.remove();choice.removeEventListener('change',filterChange);filter.remove();host.removeEventListener('keydown',keydown);};
 }

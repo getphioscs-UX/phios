@@ -110,7 +110,7 @@ function appendAskEntry(article) {
   const zh=getLocale()==='zh-Hans';
   copy.textContent = article.publicationContext?.bookCode==='BOOK-5'
     ? (zh?'带着这篇文章继续提问，了解其中的历史背景与联系。':'Ask about this article to explore its historical context and connections.')
-    : (zh?'Ask 用来理解这篇已发布文章；它不会改变文章权威，也不会建立 Reality 案例。':'Ask helps you understand this published article. It does not change article authority or create a Reality case.');
+    : (zh?'提问用来理解这篇已发布文章；它不会改变文章权威，也不会建立现实个案。':'Ask helps you understand this published article. It does not change article authority or create a Reality case.');
   const context = article.publicationContext || {};
   boundary.append(
     copy,

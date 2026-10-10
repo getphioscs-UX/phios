@@ -1,6 +1,6 @@
 # World Civilization Reading R1 · Closure
 
-Current HEAD: 7529691f8b1826554d7a27d2288cae69bc99ed02
+Current HEAD: fdfeb96e6a485939b4cda34baed2fa0576e5b4b1
 
 IMPLEMENTED: unified World reading, source-backed relations, native context and consent-based account bookmarks.
 VALIDATED_LOCAL: see exact browser, source-check and build identities in WORLD-R1-VALIDATION.json.
@@ -18,3 +18,5 @@ LIVE_VERIFIED: NOT_RUN.
 - Production deployment and real customer acceptance have not been performed.
 
 Provider calls, real payments, R2 deletions, production migrations and automatic commit/push/deploy: 0.
+
+W16 current engineering digest migration remains pending. See WORLD-R1-ENGINEERING-SUCCESSOR-CANDIDATE.json; candidate is not acceptance.

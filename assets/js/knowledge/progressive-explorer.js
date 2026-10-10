@@ -1,10 +1,11 @@
 import {structuredLoader} from './structured-loader.js';
 import {searchStructuredKnowledge} from './structured-search.js';
+import {canAskStructuredObject, structuredMeaning} from './structured-ask-availability.js';
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 export async function mountProgressiveExplorer(host,bookCode,locale,openFullReadingView){
  const tr=(en,zh)=>locale==='zh-Hans'?zh:en,param={'BOOK-1':'mechanism','BOOK-2':'pattern','BOOK-3':'topic','BOOK-4':'expansion'}[bookCode];
  let disposed=false,revision=0,activeFamily,items=[],selectedId,fullDispose,searchRevision=0,searchTimer;
- const title=o=>locale==='en'?(o.titleEn||o.title):o.title;
+ const title=o=>locale==='en'?(o.titleEn||'Source topic'):o.title;
  const familyNames={STATE:'状态',MECHANISM:'机制',PATTERN:'模式',CONDITION:'条件',FEEDBACK:'反馈',TRANSITION:'转换',CAPACITY:'承载能力',CARRIER:'载体',INDIVIDUAL:'个人',DYAD:'双人',GROUP:'群体',ORGANIZATION:'组织',COLLECTIVE:'集体',MAINTENANCE_SIGNAL:'维持讯号',LOAD:'负荷',DEGRADATION:'退化',FAILURE_MODE:'失效模式',RECOVERY_MODE:'恢复模式',ADAPTATION:'适应',CONTINUITY_STATE:'连续状态',EXPANSION_PRESSURE:'扩展压力',REPLICATION:'复制',DISTRIBUTION:'分布',AMPLIFICATION:'放大',NETWORK_EFFECT:'网络效应',SCALE_THRESHOLD:'尺度阈值',SCALE_SHIFT:'尺度转换',CARRIER_EXPANSION:'载体扩展',EXPANSION_CONSTRAINT:'扩展约束',INFRASTRUCTURE_REQUIREMENT:'基础设施需求',MAINTENANCE_COST:'维持成本',CIVILIZATION_THRESHOLD:'文明阈值'};
  const book=await structuredLoader.book(bookCode);if(!host.isConnected)return ()=>{};
  host.innerHTML=`<h2>${tr('Explore source topics','探索来源主题')}</h2><p>${tr('Structured preview awaiting review. Source chapters do not diagnose your situation.','结构化预览仍待审核，来源章节不用于诊断个人处境。')}</p><label>${tr('Topic group','主题组')} <select data-family>${Object.keys(book.families).map(f=>`<option>${esc(f)}</option>`).join('')}</select></label><label>${tr('Find in this group','在此组查找')} <input type="search"></label><div class="structured-explorer-layout"><nav data-topics></nav><aside data-detail aria-live="polite"></aside></div>`;
@@ -22,11 +23,11 @@ export async function mountProgressiveExplorer(host,bookCode,locale,openFullRead
    const f=await structuredLoader.family(bookCode,family);if(disposed||ticket!==revision)return;
    if(activeFamily!==family)search.value='';activeFamily=family;selectedId=id;items=f.items;select.value=family;list(id);
    const r=await structuredLoader.object(bookCode,id);if(disposed||ticket!==revision)return;
-   const o=r.object,d=r.detail,b=r.backlink,meaning=(locale==='en'?d?.summaryEn:null)||o.canonicalMeaning||o.definition;
+   const o=r.object,d=r.detail,b=r.backlink,meaning=structuredMeaning(o,d,locale);
    const articles=b.publishedArticles.filter(a=>a.locale===locale);
    const related=[...new Set([...(d?.relatedMechanisms||[]),...(o.sourceRefs?.relatedStructuredObjectIds||[])])].filter(ref=>book.objects[ref]);
-   detail.innerHTML=`<h3>${esc(title({...o,titleEn:d?.titleEn||o.titleEn}))}</h3><p>${esc(meaning||tr('Definition has not yet been extracted. Read the source chapter.','定义尚未提取，请阅读来源章节。'))}</p>${articles.map(a=>`<p><a href="${esc(a.href)}">${esc(a.title)}</a></p>`).join('')}<h4>${tr('Source pages','来源页码')}</h4><ul>${b.manuscriptSections.map(s=>`<li>${esc(s.sectionCode)} · ${s.startPage}–${s.endPage}</li>`).join('')}</ul><a href="${esc(b.bookSection.href)}">${tr('Read book section','阅读书籍章节')}</a><p><a href="/knowledge/ask/?${esc(new URLSearchParams({contextType:'KNOWLEDGE',contextRef:'CONCEPT:'+id.toLowerCase(),contextLabel:o.title,readingPath:b.explorerHref}).toString())}">${tr('Ask about this topic','就此主题提问')}</a></p>${related.map(ref=>`<button type="button" data-id="${esc(ref)}">${tr('Related topic','相关主题')} ${esc(ref)}</button>`).join('')}`;
-   if(r.reviewPreview){
+   detail.innerHTML=`<h3>${esc(title({...o,titleEn:d?.titleEn||o.titleEn}))}</h3><p>${esc(meaning||tr('Definition has not yet been extracted. Read the source chapter.','定义尚未提取，请阅读来源章节。'))}</p>${articles.map(a=>`<p><a href="${esc(a.href)}">${esc(a.title)}</a></p>`).join('')}<h4>${tr('Source pages','来源页码')}</h4><ul>${b.manuscriptSections.map(s=>`<li>${esc(s.sectionCode)} · ${s.startPage}–${s.endPage}</li>`).join('')}</ul><a href="${esc(b.bookSection.href)}">${tr('Read book section','阅读书籍章节')}</a>${canAskStructuredObject(o,d,locale)?`<p><a href="/knowledge/ask/?${esc(new URLSearchParams({contextType:'KNOWLEDGE',contextRef:'CONCEPT:'+id.toLowerCase(),contextLabel:title({...o,titleEn:d?.titleEn||o.titleEn}),readingPath:b.explorerHref,locale}).toString())}">${tr('Ask about this topic','就此主题提问')}</a></p>`:''}${related.map(ref=>`<button type="button" data-id="${esc(ref)}">${tr('Related topic','相关主题')} ${esc(ref)}</button>`).join('')}`;
+   if(r.reviewPreview && locale==='zh-Hans'){
     const notice=host.ownerDocument.createElement('p');notice.setAttribute('role','status');notice.textContent=tr('QA candidate only. Chinese definition awaits M8 review; English semantic parity is pending. Source pages: ','仅用于 QA 的候选内容，待 M8 审核；英文语义对齐待审。来源页码版本：')+(r.reviewPreview.sourceVersion==='DESKTOP_REVISION'?tr('desktop revision','桌面修订版'):tr('registered manuscript','已登记正文'));detail.prepend(notice);
     const fields=host.ownerDocument.createElement('section');fields.dataset.caCandidateFields='';
     const names={conditions:'条件',constraints:'约束',failureConditions:'失效条件',threshold:'阈值',sourceScaleToTargetScale:'起点与目标尺度',signals:'讯号',degradationConditions:'退化条件',recoveryConditions:'恢复条件',continuityConditions:'连续条件'};

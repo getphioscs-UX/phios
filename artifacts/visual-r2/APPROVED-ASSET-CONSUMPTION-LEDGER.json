@@ -79,9 +79,7 @@
         "/academy/",
         "/account/",
         "/membership.html",
-        "/figures/",
         "/articles/",
-        "/search/",
         "/about/",
         "/thesis.html",
         "/about/reality-navigation/",
@@ -90,7 +88,9 @@
         "/contact.html",
         "/academy/lesson/",
         "/privacy.html",
-        "/digital-product-policy.html"
+        "/digital-product-policy.html",
+        "/figures/",
+        "/search/"
       ],
       "componentConsumers": [
         "BROWSER_RENDER_PROOF"
@@ -256,13 +256,13 @@
         "/professional/",
         "/academy/",
         "/account/",
-        "/figures/",
         "/articles/",
-        "/search/",
         "/about/",
         "/professional/appointments/",
         "/knowledge/concepts/",
-        "/academy/lesson/"
+        "/academy/lesson/",
+        "/figures/",
+        "/search/"
       ],
       "componentConsumers": [
         "BROWSER_RENDER_PROOF"
@@ -717,8 +717,8 @@
       "zhVerified": false,
       "enVerified": false,
       "fallbackVerified": false,
-      "status": "VERIFICATION_INCOMPLETE",
-      "notes": "Source consumer exists; complete desktop/mobile/EN/ZH render evidence is still required. No PASS inferred from source.",
+      "status": "INTENTIONALLY_WITHHELD_WITH_REASON",
+      "notes": "Exact registered legacy object returned HTTP 404 in this session. Its existing consumer cannot be rendered; missing-object exception is retained and no substitute graphic is invented.",
       "bindingRoles": [
         "SECONDARY"
       ]
@@ -790,8 +790,8 @@
       "zhVerified": false,
       "enVerified": false,
       "fallbackVerified": false,
-      "status": "VERIFICATION_INCOMPLETE",
-      "notes": "Source consumer exists; complete desktop/mobile/EN/ZH render evidence is still required. No PASS inferred from source.",
+      "status": "INTENTIONALLY_WITHHELD_WITH_REASON",
+      "notes": "Exact registered legacy object returned HTTP 404 in this session. Its existing consumer cannot be rendered; missing-object exception is retained and no substitute graphic is invented.",
       "bindingRoles": [
         "SECONDARY"
       ]
@@ -819,8 +819,8 @@
       "zhVerified": false,
       "enVerified": false,
       "fallbackVerified": false,
-      "status": "VERIFICATION_INCOMPLETE",
-      "notes": "Source consumer exists; complete desktop/mobile/EN/ZH render evidence is still required. No PASS inferred from source.",
+      "status": "INTENTIONALLY_WITHHELD_WITH_REASON",
+      "notes": "Exact registered legacy object returned HTTP 404 in this session. Its existing consumer cannot be rendered; missing-object exception is retained and no substitute graphic is invented.",
       "bindingRoles": [
         "SECONDARY"
       ]
@@ -870,8 +870,8 @@
       "zhVerified": false,
       "enVerified": false,
       "fallbackVerified": false,
-      "status": "VERIFICATION_INCOMPLETE",
-      "notes": "Source consumer exists; complete desktop/mobile/EN/ZH render evidence is still required. No PASS inferred from source.",
+      "status": "INTENTIONALLY_WITHHELD_WITH_REASON",
+      "notes": "Exact registered legacy object returned HTTP 404 in this session. Its existing consumer cannot be rendered; missing-object exception is retained and no substitute graphic is invented.",
       "bindingRoles": [
         "SECONDARY"
       ]
@@ -6049,24 +6049,16 @@
         "content/web-production/registries/client-visual-asset-registry-v1.8.json",
         "content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json"
       ],
-      "routeConsumers": [
-        "/figures/",
-        "/search/"
-      ],
-      "componentConsumers": [
-        "customer-assets"
-      ],
-      "renderStatus": "SOURCE_BOUND_REQUIRES_RENDER_PROOF",
+      "routeConsumers": [],
+      "componentConsumers": [],
+      "renderStatus": "NOT_IN_CURRENT_RECOMPOSITION",
       "desktopVerified": false,
       "mobileVerified": false,
       "zhVerified": false,
       "enVerified": false,
       "fallbackVerified": false,
-      "status": "VERIFICATION_INCOMPLETE",
-      "notes": "Source consumer exists; complete desktop/mobile/EN/ZH render evidence is still required. No PASS inferred from source.",
-      "bindingRoles": [
-        "SECONDARY"
-      ]
+      "status": "INTENTIONALLY_WITHHELD_WITH_REASON",
+      "notes": "Retained historical/supporting asset; no new narrative insertion because the active page consumes the contextual successor or belongs to a dedicated workflow. Exact object identity remains in the ledger."
     },
     {
       "asset": "PHIOS-ILLUSTRATION-PERSONAL-REALITY-HERO-v1.webp",
@@ -7193,10 +7185,13 @@
         "content/web-production/registries/client-visual-asset-registry-v1.8.json"
       ],
       "routeConsumers": [
+        "/figures/",
         "/knowledge/",
+        "/search/",
         "/knowledge/concepts/"
       ],
       "componentConsumers": [
+        "customer-assets",
         "existing-public-renderer",
         "BROWSER_RENDER_PROOF"
       ],

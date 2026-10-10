@@ -1,11 +1,12 @@
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 await import('../../../scripts/build-world-reading-r1-review.mjs');
-const p='content/production-closure/live-customer-commercial-convergence/world-reading-r1/',file=p+'WORLD-R1-VALIDATION.json',j=JSON.parse(fs.readFileSync(file)),candidate=p+'WORLD-R1-ENGINEERING-SUCCESSOR-CANDIDATE-v4.json';
+const p='content/production-closure/live-customer-commercial-convergence/world-reading-r1/',file=p+'WORLD-R1-VALIDATION.json',j=JSON.parse(fs.readFileSync(file)),candidate=p+'WORLD-R1-ENGINEERING-SUCCESSOR-CANDIDATE-v5.json';
 const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 j.checks=JSON.parse(fs.readFileSync(p+'CHECKS.json'));j.currentSourceCheck={file:p+'CURRENT-SOURCE-CHECK.log',sha256:hash(p+'CURRENT-SOURCE-CHECK.log'),result:'PASS'};
 j.maintenanceCandidate={file:candidate,sha256:hash(candidate),status:'CANDIDATE_PENDING_HUMAN_REVIEW',productionAcceptance:false};
 j.STATE_CONTINUITY=JSON.parse(fs.readFileSync(p+'STATE-CONTINUITY-EVIDENCE.json'));
+j.FINAL_BINDING=JSON.parse(fs.readFileSync(p+'FINAL-BINDING-STATUS.json'));
 j.blockers.push('W16 independently fails the prior World engineering source digest. The exact versioned maintenance candidate is prepared; original hashes and checks remain unchanged.');
 j.sourceVersionReconciliation={fullBrowserRows:52,fullRunHadSharedVisualChange:true,currentFeatureRows:12,currentSharedVisualRows:8,currentFailureBoundaryRows:4,note:'Core implementation byte identities can be reused across HEAD movement; changed shared visual owners were separately exercised. This is bounded regression evidence, not 506 visually reviewed customer objects.'};
 fs.writeFileSync(file,JSON.stringify(j,null,2)+'\n');
