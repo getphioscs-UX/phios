@@ -241,7 +241,7 @@ async function loadSeededContexts(){
     if(node.querySelector('[data-context-type="KNOWLEDGE"]:checked')&&document.querySelector('[name="contextKnowledge"]'))document.querySelector('[name="contextKnowledge"]').checked=false;
   }catch(error){
     seedFailed=true;
-    if(visualSourceLoadFailure||error instanceof TypeError||['AbortError','TimeoutError'].includes(error?.name))node.dataset.r6SourceLoadFailure='true';
+    if(visualSourceLoadFailure||error instanceof TypeError||['AbortError','TimeoutError'].includes(error?.name)){node.dataset.r6SourceLoadFailure='true';const panel=node.closest('details');if(panel)panel.open=true;}
     node.innerHTML=`<div class="cx-p1-callout">${esc(tr('The selected source could not be loaded. Retry, or explicitly choose Knowledge only.','所选来源暂时无法载入。请重试，或明确选择只使用知识提问。'))}</div>`;
   }finally{seedLoading=false;queueMicrotask(()=>document.dispatchEvent(new Event('phios:ask-source-rendered')));}
 }

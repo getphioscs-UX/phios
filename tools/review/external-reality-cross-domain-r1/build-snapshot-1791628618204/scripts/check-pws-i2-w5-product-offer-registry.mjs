@@ -173,8 +173,12 @@ await assert.rejects(
 const htmlFiles = [];
 const collectHtml = async directory => {
   for (const entry of await fs.readdir(directory, { withFileTypes: true })) {
-    if (entry.name === 'node_modules' || entry.name === '.git') continue;
+    if (['node_modules','.git','.wrangler','.tmp','.cache'].includes(entry.name) || entry.name.startsWith('.pages-output')) continue;
     const target = path.join(directory, entry.name);
+    const relative = path.relative(process.cwd(), target).replaceAll(path.sep, '/');
+    // Browser QA snapshots duplicate the source tree; they are generated review
+    // evidence, not an independent customer HTML owner.
+    if (entry.isDirectory() && /^tools\/review\/[^/]+\/build-snapshot-\d+$/.test(relative)) continue;
     if (entry.isDirectory()) await collectHtml(target);
     if (entry.isFile() && entry.name.endsWith('.html')) htmlFiles.push(target);
   }

@@ -3,7 +3,7 @@ const path=location.pathname.replace(/index\.html$/,'');
 const targets={
  '/':[[1,'.cx-home-beginning:nth-child(1)',true],[2,'.cx-home-beginning:nth-child(2)',true],[3,'.cx-home-beginning:nth-child(3)',true],[4,'.cx-home-beginning:nth-child(4)',true],[5,'.cx-home-beginning:nth-child(5)',true],[6,'.cx-home-beginning:nth-child(6)',true]],
  '/reality/':[[9,'[data-cx-panel="overview"]'],[10,'[data-cx-panel="navigation"]'],[11,'[data-cx-panel="history"]'],[14,'[data-cx-panel="reading"]'],[15,'[data-cx-panel="navigation"]'],[16,'[data-cx-panel="current"]']],
- '/account/':[[18,'.cx-account-hero'],[19,'.cx-account-shortcuts .cx-card:last-child'],[20,'#account-reports'],[21,'#account-persons'],[22,'[data-released-reports]'],[23,'[data-cx-account-continuity]'],[24,'[data-r5-account-auth]'],[88,'[data-r6-account-permission-gate="true"]']],
+ '/account/':[[18,'.cx-account-hero'],[19,'.cx-account-shortcuts .cx-card:last-child'],[20,'#account-reports'],[21,'#account-persons'],[22,'#account-reports article'],[23,'[data-cx-account-continuity]'],[24,'[data-r5-account-auth]'],[88,'[data-r6-account-permission-gate="true"]']],
  '/perspectives/profile/':[[33,'#profile-modes .cx-container'],[34,'#profile-modes .cx-container'],[35,'[data-prf-results] .cx-container'],[36,'[data-prf-workbench] .prf-guide'],[37,'[data-prf-dossier-dialog]'],[38,'[data-prf-handoff-panel]'],[39,'[data-prf-boundaries]']],
  '/perspectives/tarot/':[[40,'[data-reading-step="question"]'],[41,'[data-reading-step="spread"]'],[42,'[data-reading-step="draw"]'],[43,'[data-customer-layer="INTERPRETATION"]'],[44,'[data-customer-layer="REALITY"]'],[45,'[data-customer-layer="NEXT"]']]
  ,'/perspectives/iching/':[[46,'.icx-entry-paths']]
