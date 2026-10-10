@@ -1,3 +1,4 @@
+import {pisCurrentSurfaceSuccessor,assertPisCurrentSurface} from './lib/pis-current-surface-successor.mjs';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
@@ -35,12 +36,15 @@ assert.equal(allocation.createsVisualAuthority,false);
 assert.deepEqual(allocation.assets.map(a=>a.assetCode).sort(),authority.assets.map(a=>a.assetCode).sort());
 assert.ok(allocation.assets.filter(a=>a.consumerState==='HISTORICAL_SEMANTIC_STALE').every(a=>a.sevenVolumeCompatibility==='HISTORICAL_ONLY'));
 const copy=read('content/web/index-surfaces/pis-r1-discovery-copy-v1.json');
+const successor=pisCurrentSurfaceSuccessor();
 assert.equal(Object.keys(copy.pages).length,29);
 for(const [file,sections] of Object.entries(copy.pages)){
  const source=fs.readFileSync(file,'utf8');
  const {document}=parseHTML(source);
  assert.equal(document.querySelectorAll('h1').length,1,`${file}: one h1`);
- assert.equal(document.querySelectorAll('.pis-editorial:not(.pis-visual-story)').length,sections.length);
+ const current=successor.surfaces.find(s=>s.file===file);
+ assertPisCurrentSurface(document,current);
+ assert.equal(document.querySelectorAll('.pis-editorial:not(.pis-visual-story)').length,current?.editorialReplaced?0:sections.length+(current?.additionalEditorial.length||0),file+': editorial scope');
  assert.ok(document.querySelector('script[src="/assets/customer-ui/js/public-index-copy.js"]'));
  for(const section of sections){
   assert.ok(section.body.en.length>120&&section.body.zh.length>40);
