@@ -1,3 +1,4 @@
+import {assertAskCurrentVisual} from './lib/ask-current-visual.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -112,7 +113,7 @@ assert.match(css,/@media\(prefers-reduced-motion:no-preference\)\{\.cx-ask-poste
 const client=text('assets/customer-ui/js/surfaces/contextual-ask.js');
 for(const state of ux.askStates)assert.match(client,new RegExp(`['\"]${state}['\"]`));
 assert.match(client,/window\.addEventListener\('offline'/);assert.match(client,/aria-busy/);
-assert.match(askHtml,/role="status" aria-live="polite"/);assert.match(askHtml,/<svg class="cx-ask-poster__network"/);
+assert.match(askHtml,/role="status" aria-live="polite"/);assertAskCurrentVisual(askHtml);
 
 // W7 — machine readiness can pass while human approval remains explicitly pending.
 const reviewHtml=text('tools/review/PTRC-W7-HUMAN-REVIEW.html');

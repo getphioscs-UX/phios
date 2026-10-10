@@ -1,3 +1,4 @@
+import {assertAskCurrentVisual} from './lib/ask-current-visual.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -41,7 +42,7 @@ const scoped=evaluateKapQuestionSourceRelevance({sources:[{text:atlas.sources[0]
 assert.equal(scoped.established,true);
 assert.match(askHtml,/data-cx-asset="LOGO-003"/);
 assert.doesNotMatch(askHtml,/PHIOS-LOGO-MARK-v1\.png/);
-assert.match(askHtml,/cx-ask-poster__network/);
+assertAskCurrentVisual(askHtml);
 assert.doesNotMatch(askHtml,/data-cx-asset="HERO-001"/);
 assert.match(askCss,/M1-W6 full-bleed reconstruction/);
 assert.match(askCss,/@media\(max-width:620px\)/);
