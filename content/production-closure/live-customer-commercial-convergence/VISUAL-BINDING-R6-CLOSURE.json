@@ -1,7 +1,7 @@
 {
   "authority": "Existing unique Master / R5 continuation; R6 evidence is not a new asset registry",
-  "head": "15052be3896c063a2a6feb88ed9e86b401b5e5b2",
-  "updatedAt": "2026-10-10T11:28:39.816Z",
+  "head": "036517853d98b3b94b2ce08aa67e85bdfe56c6c2",
+  "updatedAt": "2026-10-10T11:43:41.777Z",
   "SOURCE": "PARTIAL",
   "LOCAL_BROWSER": "PARTIAL",
   "DEPLOYED": "NOT_RUN",
@@ -9,9 +9,9 @@
   "explicitFilenames": 151,
   "counts": {
     "OWNER_CONFIRMED_FOUNDER_BOUND_SKIP": 8,
-    "LOCAL_BROWSER_VERIFIED": 61,
+    "LOCAL_BROWSER_VERIFIED": 56,
     "BLOCKED_ASSET": 1,
-    "SOURCE_IMPLEMENTED": 18,
+    "SOURCE_IMPLEMENTED": 23,
     "BLOCKED_DEPENDENCY": 32,
     "SOURCE_REFERENCE_PENDING_CONSUMER_VERIFICATION": 23,
     "RETAIN_EXISTING_FORMAL_BOOK_OWNER_PENDING_CURRENT_BROWSER": 8
@@ -34,27 +34,6 @@
       "state": "PARTIAL"
     },
     {
-      "file": "VISUAL-BINDING-R6-NEW-SLOTS-BROWSER-RESULTS.json",
-      "rows": 60,
-      "passed": 42,
-      "errors": [],
-      "state": "PARTIAL"
-    },
-    {
-      "file": "VISUAL-BINDING-R6-BUILT-BROWSER-RESULTS.json",
-      "rows": 306,
-      "passed": 276,
-      "errors": [],
-      "state": "PARTIAL"
-    },
-    {
-      "file": "VISUAL-BINDING-R6-USABILITY-BROWSER-RESULTS.json",
-      "rows": 18,
-      "passed": 18,
-      "errors": [],
-      "state": "PASS_BOUNDED_R6_GUIDES"
-    },
-    {
       "file": "VISUAL-BINDING-R6-FINANCIAL-BROWSER-RESULTS.json",
       "rows": 60,
       "passed": 60,
@@ -63,22 +42,22 @@
     }
   ],
   "buildReceipt": {
-    "result": "BUILD_PASS_INPUT_CHANGED",
+    "result": "FAIL",
     "command": "node scripts/run-zero-cost-regression.mjs build:pages",
-    "currentHead": "1ac62c58f4143eeda3e8c9263777c38643ee6f88",
-    "evidenceCommit": "414f0551ea6d74ad7c9fb4f156eb0110825c70da",
-    "buildAt": "2026-10-10T11:25:52.570Z",
-    "startedAt": "2026-10-10T11:20:40.589Z",
-    "exitCode": 0,
+    "currentHead": "036517853d98b3b94b2ce08aa67e85bdfe56c6c2",
+    "evidenceCommit": "15052be3896c063a2a6feb88ed9e86b401b5e5b2",
+    "buildAt": "2026-10-10T11:42:38.922Z",
+    "startedAt": "2026-10-10T11:41:57.801Z",
+    "exitCode": 1,
     "stale": true,
-    "inputBefore": "31687825a5bb78444b0394888d32dd3b2000997dcfaff1f6c5d166b40d5b4330",
-    "inputAfter": "8a80482a5a67cdc9a362108ca49e0b55e96476dfd7704242ae3bcc526e63a4ee",
+    "inputBefore": "759455ec3b4a49113c6a8419570a0e9872d15933453d9c324bf41c177ce908f3",
+    "inputAfter": "720a324e7d2e1f6dfb908ed23e2431da022c543948b3ad0902b94dc23ea4227a",
     "inputScope": "BUILD_INPUT_SOURCE_AND_PUBLIC_FILES_EXCLUDING_INTERNAL_REVIEW_AND_GENERATED_GUARD_RECEIPTS",
-    "inputFiles": 17035,
+    "inputFiles": 17036,
     "buildReceipt": "content/production-closure/live-customer-commercial-convergence/OWNER-CORRECTION-PAGES-BUILD.log",
-    "logSHA256": "ef196703e72dab9e5fcca9a98033019e6eb88a38f9bfce23ac948c99f3ab8d5a",
-    "workerBytes": 16699772,
-    "gzipBytes": 3110076,
+    "logSHA256": "e9f43701f5bdd40573101fcbe53d09d58e3d8314d92885c5f297345a4124636a",
+    "workerBytes": null,
+    "gzipBytes": null,
     "providerCalls": 0,
     "deployed": false,
     "liveCustomer": false,
