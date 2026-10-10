@@ -45,6 +45,13 @@ export function resolveCustomerAssetRoleFromRegistry(registry, roleId) {
 }
 
 export async function resolveCustomerAsset(assetId) {
+  // The historical journey Unknown object is now 404. The approved global
+  // Unknown identity is the verified exact-object successor (R2 receipt).
+  if (assetId === 'ICON-027') {
+    const {resolveApprovedVisual}=await import('../../js/runtime/web-production/asset-resolver.js');
+    const a=await resolveApprovedVisual('PIS-021');
+    return {...a,assetId,type:'ICON',publicUrl:a.src,width:48,height:48,delivery:{loading:'lazy',decoding:'async',fetchPriority:'auto'},sourceRegistry:'artifacts/visual-r2/ICON-PATH-SUCCESSOR.json'};
+  }
   try { return resolveCustomerAssetFromRegistry(await customerAssetRegistry(), assetId); }
   catch (originalError) {
     const {resolveApprovedVisual} = await import('../../js/runtime/web-production/asset-resolver.js');
@@ -83,6 +90,8 @@ function applyImageDelivery(node, asset) {
   if ('fetchPriority' in node) node.fetchPriority = delivery.fetchPriority || 'auto';
   if (asset.width && !node.hasAttribute('width')) node.width = Number(asset.width);
   if (asset.height && !node.hasAttribute('height')) node.height = Number(asset.height);
+  if (asset.type === 'ICON' && !node.hasAttribute('width')) node.width = 48;
+  if (asset.type === 'ICON' && !node.hasAttribute('height')) node.height = 48;
 }
 
 async function loadImage(node, asset) {

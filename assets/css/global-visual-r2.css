@@ -6,6 +6,11 @@
 .vr2-page main{background-image:var(--vr2-texture);background-size:1200px auto}
 .vr2-page .figure-editorial img{background:#f5f1e7}
 .vr2-page .vr2-hero-surface>.vr2-story[data-vr2-role="HERO"]{max-width:1280px;margin-block:24px}
+body.vr2-page .cx-personal-hero-visual{position:relative;overflow:visible;transform:none;background:transparent}
+body.vr2-page .cx-personal-hero-visual img{height:auto;min-height:0;object-fit:contain;filter:none}
+body.vr2-page .cx-personal-hero--r5::before{display:none}
+.vr2-page[data-vr2-density="WORKSPACE"] .vr2-hero{min-height:280px}.vr2-page[data-vr2-density="WORKSPACE"] .vr2-hero img{max-height:360px;object-fit:contain}
+@media(max-width:768px){body.vr2-page .cx-personal-hero .cx-p1-hero__grid{display:flex;flex-direction:column;gap:24px}body.vr2-page .cx-personal-hero-visual{order:-1;width:100%;margin:0}body.vr2-page .cx-personal-hero-visual img{width:100%;height:auto;min-height:0}}
 .vr2-story{width:min(1280px,calc(100% - 48px));margin:clamp(40px,6vw,96px) auto;color:var(--vr2-ink)}
 .vr2-story h2{font-size:clamp(1.7rem,3.4vw,3rem);line-height:1.22;max-width:28ch}
 .vr2-story>p{max-width:70ch;line-height:1.75}.vr2-kicker{letter-spacing:.12em;font-weight:700;color:var(--vr2-gold)}
@@ -23,3 +28,9 @@
 .vr2-page .r5-context-guide{max-width:1280px}.vr2-page .pis-landing-hero__image{object-position:center}.vr2-page .pm-product-thumb{max-height:none;height:auto;width:100%}
 @media(max-width:768px){.vr2-story{width:calc(100% - 32px);margin-block:36px}.vr2-hero{display:flex;flex-direction:column;min-height:0}.vr2-hero>figure{order:-1}.visual-entry-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.vr2-editorial-panels{grid-template-columns:minmax(0,1fr)}.book-identity-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.vr2-lenses{grid-template-columns:minmax(0,1fr)}.figure-editorial{margin-block:24px}.flagship-feature{padding:20px}.vr2-page .cx-home-hero__grid{grid-template-columns:minmax(0,1fr)}.vr2-page .cx-home-hero__visual{order:-1;min-height:0}.vr2-page .pm-hero{grid-template-columns:minmax(0,1fr)}.vr2-page .pm-grid{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){.vr2-page *{scroll-behavior:auto;animation:none!important;transition:none!important}}
+/* A composed page has one semantic hero; the legacy automatic masthead is redundant. */
+body.vr2-page:has(main [data-vr2-role="HERO"])>.client-visual-masthead{display:none}
+body.vr2-page .vr2-hero-surface{background:transparent;background-image:none;padding-block:32px}
+body.vr2-page .vr2-hero-surface::before,body.vr2-page .vr2-hero-surface::after{display:none}
+body.vr2-page .vr2-hero-surface [data-vr2-role="HERO"] img{width:100%;height:auto;min-height:0;object-fit:contain}
+@media(max-width:768px){body.vr2-page .vr2-hero-surface .cx-p1-hero__grid{display:flex;flex-direction:column}body.vr2-page .vr2-hero-surface [data-vr2-role="HERO"]{order:-1}}

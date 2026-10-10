@@ -3,6 +3,7 @@
 export function internalPublicationFile(rel) {
   const file = rel.replaceAll('\\', '/');
   return /^content\/.*\.html?$/i.test(file) ||
+    /^artifacts\/visual-r2\//.test(file) ||
     /^content\/production-closure\//.test(file) ||
     /(?:^|\/)[^/]+\.(?:fixture-backup|backup)-[^/]+$/.test(file);
 }

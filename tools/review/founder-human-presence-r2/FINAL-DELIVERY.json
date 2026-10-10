@@ -1,0 +1,290 @@
+{
+  "CURRENT_MAIN_SHA": "dd1823549366623a4f7edf1f9f4cb2d292f1f881",
+  "BASELINE_SHA": "9fc27308de45888bd1dffbf5d8e092de5bc4cc55",
+  "FILES_CHANGED": [
+    "about/founder/index.html",
+    "assets/css/founder-publication-r2.css",
+    "assets/js/pages/founder-publication-r1.js",
+    "assets/js/locales/en/public.js",
+    "assets/js/locales/zh-Hans/public.js",
+    "assets/js/client-visual-consumption.js",
+    "content/web-production/registries/client-visual-consumer-map-v1.json",
+    "content/registry/public-assets.json",
+    "content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json",
+    "content/web/index-surfaces/founder-human-presence-origin-successor-r2.json",
+    "scripts/lib/founder-human-presence-successor-r2.mjs",
+    "scripts/lib/page-consolidation-successor-r1.mjs",
+    "scripts/lib/pis-current-surface-successor.mjs",
+    "scripts/build-cloudflare-pages.mjs",
+    "scripts/check-founder-human-presence-r2.mjs",
+    "scripts/verify-founder-human-presence-r2.mjs",
+    "scripts/run-founder-r2-regression.mjs",
+    "scripts/build-founder-r2-pages-snapshot.mjs",
+    "scripts/refresh-founder-r2-pages-final.mjs",
+    "scripts/build-founder-r2-human-review.mjs",
+    "scripts/check-founder-r2-human-review.mjs",
+    "scripts/serve-founder-r2-review.mjs",
+    "scripts/verify-founder-r2-assets.mjs",
+    "package.json",
+    "config/reports/zero-cost-check-commands.json"
+  ],
+  "FOUNDER_HERO_KEY": "images/founder/PHIOS-FOUNDER-TERESA-LEE-HERO-v1.webp",
+  "FOUNDER_HERO_PUBLIC_URL": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/founder/PHIOS-FOUNDER-TERESA-LEE-HERO-v1.webp",
+  "FOUNDER_HERO_HTTP_STATE": 200,
+  "FOUNDER_HERO_DIMENSIONS": {
+    "width": 1672,
+    "height": 941
+  },
+  "FOUNDER_PORTRAIT_KEY": "images/founder/PHIOS-FOUNDER-TERESA-LEE-PORTRAIT-CROP-v1.webp",
+  "FOUNDER_PORTRAIT_PUBLIC_URL": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/founder/PHIOS-FOUNDER-TERESA-LEE-PORTRAIT-CROP-v1.webp",
+  "FOUNDER_PORTRAIT_HTTP_STATE": 200,
+  "FOUNDER_PORTRAIT_DIMENSIONS": {
+    "width": 1122,
+    "height": 1402
+  },
+  "FOUNDER_HERO_STATE": "ASSET_VERIFIED_WEB_REVIEW_PENDING",
+  "FOUNDER_ORIGIN_STATE": "ASSET_VERIFIED_WEB_REVIEW_PENDING",
+  "PORTRAIT_STATE": "USER_SELECTED_EXISTING_CANONICAL_FAMILY",
+  "OG_IMAGE_OLD": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/PHIOS-HERO-REALITY-NAVIGATION-v1.webp",
+  "OG_IMAGE_NEW": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/founder/PHIOS-FOUNDER-TERESA-LEE-HERO-v1.webp",
+  "OG_IMAGE_STATE": "PUBLIC_GET_AND_CURRENT_BROWSER_METADATA_VERIFIED",
+  "PERSON_SCHEMA_IMAGE": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/founder/PHIOS-FOUNDER-TERESA-LEE-PORTRAIT-CROP-v1.webp",
+  "PERSON_SCHEMA_STATE": "CURRENT_SOURCE_VERIFIED_NO_NEW_CREDENTIAL_CLAIMS",
+  "DESKTOP_EN": "PASS",
+  "DESKTOP_ZH": "PASS",
+  "MOBILE_EN": "PASS",
+  "MOBILE_ZH": "PASS",
+  "SOURCE_NOT_ATTACHED_REMOVED": true,
+  "ACCESSIBILITY_QA": "PASS semantic alt, keyboard focus, reduced motion; automated checks do not replace human review",
+  "I18N_QA": "PASS existing locale owners; accepted publication copy preserved",
+  "PUBLIC_SHELL_QA": "PASS no generic Founder masthead; other consumers unchanged",
+  "ASSET_QA": "PASS",
+  "ZERO_COST_REGRESSION": [
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:founder-human-presence:r2",
+      "exitCode": 0,
+      "state": "PASS",
+      "log": "tools/review/founder-human-presence-r2/check-founder-human-presence-r2.log"
+    },
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:i18n",
+      "exitCode": 0,
+      "state": "PASS",
+      "log": "tools/review/founder-human-presence-r2/check-i18n.log"
+    },
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:pis-r1",
+      "exitCode": 1,
+      "state": "SUPERSEDED_R1_LAYOUT_ASSERTION_FAILURE",
+      "log": "tools/review/founder-human-presence-r2/check-pis-r1.log",
+      "failedObject": "PLAN-HOME-07",
+      "assertion": "All Founder R1 ASSET-BINDINGS must remain in current HTML; scripts/check-founder-publication-r1.mjs:12",
+      "relatedChange": "Removed generic platform relationship summary from Founder per R2 narrative review; retained canonical object/registry and six other figures",
+      "baselineClassification": "INTENTIONAL_SUCCESSOR_LAYOUT_CHANGE, NOT A PRE_EXISTING_FAILURE"
+    },
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:m3a-public-experience",
+      "exitCode": 0,
+      "state": "PASS",
+      "log": "tools/review/founder-human-presence-r2/check-m3a-public-experience.log"
+    },
+    {
+      "command": "node scripts/check-founder-publication-r1.mjs",
+      "exitCode": 1,
+      "state": "HISTORICAL_LAYOUT_CONTRACT_SUPERSEDED_REVIEW_REQUIRED",
+      "log": "tools/review/founder-human-presence-r2/historical-founder-r1-check.log",
+      "reason": "Original R1 checker requires all prior ASSET-BINDINGS including PLAN-HOME-07. R2 instructions expressly review/remove irrelevant platform-summary figure. Checker remains unchanged; new R2 check preserves original accepted copy and required retained diagrams."
+    }
+  ],
+  "PAGES_BUILD": [
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs build:pages",
+      "cwd": "C:\\phios\\.tmp\\founder-r2-pages-1791640701568",
+      "head": "b64b1dd13a5633b30eea848688311ef762aa30c3",
+      "exitCode": 0,
+      "error": null,
+      "elapsedMs": 539218,
+      "log": "tools/review/founder-human-presence-r2/build-pages.log"
+    }
+  ],
+  "PUBLISHED_SOURCE_COMPARISON": {
+    "observedAt": "2026-10-10T14:31:41.763Z",
+    "allCurrentSourcesMatch": false,
+    "sources": [
+      {
+        "path": "assets/js/runtime/web-production/asset-resolver.js",
+        "current": "5cad119415ca8943804337585c89056138c4448ad6b7b53f9db76177b3a57cb0",
+        "snapshot": "58c527ff31eec3d3e1146e0982199b30a217e699eccfbe3ff64171ec360e73c6",
+        "published": "58c527ff31eec3d3e1146e0982199b30a217e699eccfbe3ff64171ec360e73c6"
+      },
+      {
+        "path": "assets/customer-ui/js/assets.js",
+        "current": "2bf59ed4a342b668ff6524c2439876580ddeb6399add456ff98830c7a991e1e9",
+        "snapshot": "2bf59ed4a342b668ff6524c2439876580ddeb6399add456ff98830c7a991e1e9",
+        "published": "2bf59ed4a342b668ff6524c2439876580ddeb6399add456ff98830c7a991e1e9"
+      },
+      {
+        "path": "about/founder/index.html",
+        "current": "43c59450a9af217f372403b62564447dc4237691a2beec3f543969c996cf2d16",
+        "snapshot": "43c59450a9af217f372403b62564447dc4237691a2beec3f543969c996cf2d16",
+        "published": "43c59450a9af217f372403b62564447dc4237691a2beec3f543969c996cf2d16"
+      },
+      {
+        "path": "assets/css/founder-publication-r2.css",
+        "current": "aed75c90ea330d2861553fef382bc8673a3bbe3ce047beabfbe17472896b7e1c",
+        "snapshot": "aed75c90ea330d2861553fef382bc8673a3bbe3ce047beabfbe17472896b7e1c",
+        "published": "aed75c90ea330d2861553fef382bc8673a3bbe3ce047beabfbe17472896b7e1c"
+      },
+      {
+        "path": "assets/js/pages/founder-publication-r1.js",
+        "current": "bdfe2bf6eba732fb470b76bcb3e0f0e9b494945d6edb48e2339f499f9a4a63e3",
+        "snapshot": "bdfe2bf6eba732fb470b76bcb3e0f0e9b494945d6edb48e2339f499f9a4a63e3",
+        "published": "bdfe2bf6eba732fb470b76bcb3e0f0e9b494945d6edb48e2339f499f9a4a63e3"
+      },
+      {
+        "path": "assets/js/client-visual-consumption.js",
+        "current": "7538e2f43cbf7b20918a708f03b02f9c6b04a3e548bb578ab34395981d8d77fa",
+        "snapshot": "7538e2f43cbf7b20918a708f03b02f9c6b04a3e548bb578ab34395981d8d77fa",
+        "published": "7538e2f43cbf7b20918a708f03b02f9c6b04a3e548bb578ab34395981d8d77fa"
+      },
+      {
+        "path": "assets/js/locales/en/public.js",
+        "current": "aa2d5e2ba60abf0ac85a26d8907b087df6e3a815a7f4dcbcc9c734168d77d3e5",
+        "snapshot": "aa2d5e2ba60abf0ac85a26d8907b087df6e3a815a7f4dcbcc9c734168d77d3e5",
+        "published": "aa2d5e2ba60abf0ac85a26d8907b087df6e3a815a7f4dcbcc9c734168d77d3e5"
+      },
+      {
+        "path": "assets/js/locales/zh-Hans/public.js",
+        "current": "c4ac2cf922da102828609506e2a6bb762ce33edf82159b89a941358d4aacd0a8",
+        "snapshot": "c4ac2cf922da102828609506e2a6bb762ce33edf82159b89a941358d4aacd0a8",
+        "published": "c4ac2cf922da102828609506e2a6bb762ce33edf82159b89a941358d4aacd0a8"
+      },
+      {
+        "path": "content/registry/public-assets.json",
+        "current": "00bff5455d2df2d6a7e267b7326d41d95ad6405b6d2ab1d7f7683d6381450101",
+        "snapshot": "00bff5455d2df2d6a7e267b7326d41d95ad6405b6d2ab1d7f7683d6381450101",
+        "published": "00bff5455d2df2d6a7e267b7326d41d95ad6405b6d2ab1d7f7683d6381450101"
+      },
+      {
+        "path": "content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json",
+        "current": "cd5dba7580f31aaeb187295612cc9cf1786985c29936aa1337eda5fec5e889d0",
+        "snapshot": "cd5dba7580f31aaeb187295612cc9cf1786985c29936aa1337eda5fec5e889d0",
+        "published": "cd5dba7580f31aaeb187295612cc9cf1786985c29936aa1337eda5fec5e889d0"
+      },
+      {
+        "path": "content/web-production/registries/client-visual-consumer-map-v1.json",
+        "current": "8bde0f9504996d47bf01dbdf8596cf2adacffc1298387bf08d8e4c415416fd0d",
+        "snapshot": "8bde0f9504996d47bf01dbdf8596cf2adacffc1298387bf08d8e4c415416fd0d",
+        "published": "8bde0f9504996d47bf01dbdf8596cf2adacffc1298387bf08d8e4c415416fd0d"
+      }
+    ]
+  },
+  "PROVIDER_CALLS": 0,
+  "PROVIDER_COST_USD": 0,
+  "R2_DELETIONS": 0,
+  "DEPLOYMENTS": 0,
+  "AGENT_COMMITS": 0,
+  "AGENT_PUSHES": 0,
+  "HUMAN_ACCEPT": false,
+  "SOURCE": "IMPLEMENTED_AND_LOCALLY_VERIFIED",
+  "DEPLOYED": "NOT_DEPLOYED_BY_THIS_TASK; RUNTIME_UNVERIFIED",
+  "LIVE_CUSTOMER": "RUNTIME_UNVERIFIED",
+  "SCREENSHOTS": [
+    {
+      "path": "tools/review/founder-human-presence-r2/hero-1440-en.png",
+      "bytes": 954260,
+      "sha256": "b83d3e98eee2dd500be510f4b98c52c962034846ae3da1ca1e739c697e2f5c07",
+      "role": "Representative final module"
+    },
+    {
+      "path": "tools/review/founder-human-presence-r2/origin-1440-en.png",
+      "bytes": 444064,
+      "sha256": "8d3df79938657eefeb022aab61797b7c21280120338a34e669f5b8e821b44a5e",
+      "role": "Representative final module"
+    },
+    {
+      "path": "tools/review/founder-human-presence-r2/hero-1440-zh-Hans.png",
+      "bytes": 900923,
+      "sha256": "16c5cdbebee028efa7f5824afaef87935003ba5354567a3872733c8e1fc91b00",
+      "role": "Representative final module"
+    },
+    {
+      "path": "tools/review/founder-human-presence-r2/hero-390-en.png",
+      "bytes": 236190,
+      "sha256": "1a9d69ec3ae8b7a6f8b2f62973317caf25fe4189554054fa194ec002917ac2b5",
+      "role": "Representative final module"
+    },
+    {
+      "path": "tools/review/founder-human-presence-r2/hero-390-zh-Hans.png",
+      "bytes": 228591,
+      "sha256": "43d23001bcfb2f8f5ed7cbef2ca8c3fb39775c9c0b29a21572782f7ee0a57ca3",
+      "role": "Representative final module"
+    },
+    {
+      "path": "tools/review/founder-human-presence-r2/origin-390-zh-Hans.png",
+      "bytes": 291369,
+      "sha256": "bda215d06eb8f24d334495a42a35bbe7140ce6ceb2abb38d13647eef706207e5",
+      "role": "Representative final module"
+    },
+    {
+      "path": "tools/review/founder-human-presence-r2/before-1440-en.png",
+      "bytes": 800595,
+      "sha256": "688b00c5f793ce1e31be3cf8d2f54bbe503f248e3812f58492c523c17f006a4e",
+      "role": "Reconstructed baseline comparison"
+    }
+  ],
+  "SCREENSHOT_POLICY": "Failure-only plus six representative final screenshots and one baseline; dependency/environment/screenshot/remote asset SHA incrementally verified",
+  "FIGURES": [
+    {
+      "id": "PLAN-HOME-07",
+      "state": "REMOVED_FROM_FOUNDER_ONLY",
+      "reason": "Generic platform relationship summary distracts from origin narrative; canonical R2 object and shared registry preserved",
+      "r2Deleted": false
+    },
+    {
+      "id": "PLAN-CROSS-05",
+      "state": "RETAINED",
+      "reason": "Retained original conceptual narrative / navigation illustration",
+      "r2Deleted": false
+    },
+    {
+      "id": "PLAN-CROSS-07",
+      "state": "RETAINED",
+      "reason": "Retained original conceptual narrative / navigation illustration",
+      "r2Deleted": false
+    },
+    {
+      "id": "PLAN-CROSS-06",
+      "state": "RETAINED",
+      "reason": "Retained original conceptual narrative / navigation illustration",
+      "r2Deleted": false
+    },
+    {
+      "id": "PLAN-REALITY-05",
+      "state": "RETAINED",
+      "reason": "Retained original conceptual narrative / navigation illustration",
+      "r2Deleted": false
+    },
+    {
+      "id": "PLAN-REALITY-09",
+      "state": "RETAINED",
+      "reason": "Retained original conceptual narrative / navigation illustration",
+      "r2Deleted": false
+    },
+    {
+      "id": "PLAN-HOME-08",
+      "state": "RETAINED",
+      "reason": "Retained original conceptual narrative / navigation illustration",
+      "r2Deleted": false
+    }
+  ],
+  "REVIEW_ARTIFACT": "tools/review/PHIOS-FOUNDER-HUMAN-PRESENCE-ORIGIN-R2-HUMAN-REVIEW.html",
+  "BROWSER_CURRENT_DEPENDENCIES_MATCH": true,
+  "UNRESOLVED": [
+    "Shared runtime snapshot/output does not match current source; see FINAL-PAGES-SOURCE-COMPARISON.json",
+    "Human review: crop, headline placement, portrait scale, mobile composition, S08, Chinese typography, full-page reading rhythm",
+    "Two unchanged historical checks require retired PLAN-HOME-07; explicit successor recorded, historical contract review still required",
+    "Other windows advanced HEAD and committed some source; task made no commits or pushes"
+  ],
+  "FINAL_STATE": "BLOCKED_WITH_EVIDENCE"
+}

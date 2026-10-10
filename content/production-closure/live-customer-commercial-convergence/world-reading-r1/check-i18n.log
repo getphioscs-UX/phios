@@ -1,2 +1,18 @@
-PHI OS i18n OK (4879 aligned keys; HTML and JavaScript references verified).
 
+node:internal/fs/promises:956
+  const result = await PromisePrototypeThen(
+                 ^
+
+Error: ENOENT: no such file or directory, scandir 'C:\phios\.tmp\pja-w2e-check-2GEeQj'
+    at async Object.readdir (node:internal/fs/promises:956:18)
+    at async walk (file:///C:/phios/scripts/check-i18n.mjs:21:23)
+    at async walk (file:///C:/phios/scripts/check-i18n.mjs:24:45)
+    at async walk (file:///C:/phios/scripts/check-i18n.mjs:24:45)
+    at async file:///C:/phios/scripts/check-i18n.mjs:54:15 {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: 'C:\\phios\\.tmp\\pja-w2e-check-2GEeQj'
+}
+
+Node.js v24.18.0

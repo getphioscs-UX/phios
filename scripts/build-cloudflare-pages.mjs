@@ -190,6 +190,9 @@ const admittedBookVii = await loadBookViiPublishedAdmission(async rel => {
   return fs.existsSync(source) ? JSON.parse(fs.readFileSync(source, 'utf8')) : null;
 });
 const publicationFiles = new Set(tracked.stdout.split('\0').filter(Boolean));
+// Explicit R2 runtime additions for uncommitted local builds. Review evidence
+// and captures remain excluded by the shared publication predicate.
+for(const file of ['assets/css/global-visual-r2.css','assets/js/global-visual-r2.js','data/visual/approved-r2-visual-assets.json'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
 // Founder R1 local source additions retain the existing static publication predicate.
 for(const file of ['assets/css/founder-publication-r1.css','assets/css/founder-publication-r2.css','assets/js/pages/founder-publication-r1.js'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
 // Explicit R5 source additions for uncommitted local preview. Every file still
