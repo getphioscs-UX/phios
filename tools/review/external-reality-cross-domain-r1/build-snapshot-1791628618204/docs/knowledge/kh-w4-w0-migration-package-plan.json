@@ -1,0 +1,118 @@
+{
+  "contract": "PHI-OS-KH-W4-W0-MIGRATION-PACKAGE-PLAN-v1.0.0",
+  "baselineSha": "cd0f17752f38c4a25552e786b65013d8dcf786e4",
+  "generatedAt": "2026-08-05T17:20:00+08:00",
+  "packages": [
+    {
+      "order": 1,
+      "code": "KH-W4A",
+      "name": "Existing v2 Foundation Reconciliation",
+      "dependsOn": [
+        "KH-W4-W0"
+      ],
+      "risk": "low"
+    },
+    {
+      "order": 2,
+      "code": "KH-W4B",
+      "name": "Canonical Registry Authority",
+      "dependsOn": [
+        "KH-W4A"
+      ],
+      "risk": "medium"
+    },
+    {
+      "order": 3,
+      "code": "KH-W4C",
+      "name": "Universal Blueprint Consumption",
+      "dependsOn": [
+        "KH-W4B"
+      ],
+      "risk": "high"
+    },
+    {
+      "order": 4,
+      "code": "KH-W4D",
+      "name": "Freeze Contract v2",
+      "dependsOn": [
+        "KH-W4C"
+      ],
+      "risk": "medium"
+    },
+    {
+      "order": 5,
+      "code": "KH-W4E",
+      "name": "Part 5 Publication Ownership Migration",
+      "dependsOn": [
+        "KH-W4B",
+        "KH-W4C"
+      ],
+      "risk": "high"
+    },
+    {
+      "order": 6,
+      "code": "KH-W4F",
+      "name": "PJA Registry Consumption Migration",
+      "dependsOn": [
+        "KH-W4C",
+        "KH-W4E"
+      ],
+      "risk": "high"
+    },
+    {
+      "order": 7,
+      "code": "KH-W4G",
+      "name": "KNR Registry Consumption Migration",
+      "dependsOn": [
+        "KH-W4C",
+        "KH-W4E"
+      ],
+      "risk": "high"
+    },
+    {
+      "order": 8,
+      "code": "KH-W4H",
+      "name": "Manuscript Runtime Generalization",
+      "dependsOn": [
+        "KH-W4E"
+      ],
+      "risk": "high"
+    },
+    {
+      "order": 9,
+      "code": "KH-W4I",
+      "name": "Published Knowledge Projection Foundation",
+      "dependsOn": [
+        "KH-W4F",
+        "KH-W4G"
+      ],
+      "risk": "medium"
+    },
+    {
+      "order": 10,
+      "code": "KH-W4J",
+      "name": "Checker Compatibility and Deprecation",
+      "dependsOn": [
+        "KH-W4B",
+        "KH-W4C",
+        "KH-W4D",
+        "KH-W4E",
+        "KH-W4F",
+        "KH-W4G",
+        "KH-W4H",
+        "KH-W4I"
+      ],
+      "risk": "medium"
+    },
+    {
+      "order": 11,
+      "code": "KH-W4K",
+      "name": "Full Acceptance and Freeze",
+      "dependsOn": [
+        "KH-W4J"
+      ],
+      "risk": "medium"
+    }
+  ],
+  "rollbackBoundary": "Each package is independently committed and must preserve Human Review, Approval, Publication, private manuscript boundary, and historical freeze evidence."
+}

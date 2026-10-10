@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R3-W19-W20-FINAL-CLOSURE-VALIDATION-v1.0.0",
+  "baselineCommit": "a06506cbbc9bf0bdd11ff1c740f7be65276d84d9",
+  "status": "R3_CERTIFIED_W19_ADMITTED_W20_EXACT_DEPLOYMENT_PENDING",
+  "r3": {
+    "directCheckerCommand": "npm run check:ast-fp-r3",
+    "directCheckerResult": "PASS",
+    "evidenceOrigin": "USER_ATTESTED_DIRECT_COMMAND_PASS",
+    "localFreezeIntegrityChecker": "PASS",
+    "independentEphemerisAccuracyCertificationEstablished": true
+  },
+  "r2": {
+    "w17": "MACHINE_ACCEPTED_241_OF_241",
+    "w18": "HUMAN_ACCEPTED_24_OF_24",
+    "w19": "AST_METHOD_SCOPED_PRODUCTION_ADMITTED",
+    "astMethodFlag": true,
+    "customerCutoverAllowedByW19": true,
+    "otherMethodProductionAdmissionRequired": false,
+    "legacySmr48GateRequired": false
+  },
+  "sharedSurfaceReconciliation": {
+    "astWorkspaceBindingRestored": true,
+    "astTargetContextRestored": true,
+    "astLegacyNarrativeOwnersSuppressedWhenWorkspaceActive": true,
+    "ziweiFullProductionBindingPreserved": true,
+    "ziweiTargetContextPreserved": true,
+    "singleZiweiFocusedApiProbe": "PASS"
+  },
+  "localChecks": {
+    "checkAstFpCurrent": "PASS",
+    "checkAstFpR2W13W16": "PASS_EFFECTIVE_R2_W19_CUTOVER_TRUE",
+    "checkAstR2W17W20": "PASS_W19_TRUE_W20_LIVE_GATES_PENDING",
+    "checkPackageAliases": "PASS",
+    "sharedSmrW0W11": "PASS",
+    "nodeSyntaxChangedJsMjs": "PASS",
+    "w20FinalizerSyntheticDryRun": "PASS_NOT_LIVE_EVIDENCE"
+  },
+  "w20": {
+    "status": "AST_ADMITTED_AWAITING_EXACT_DEPLOYMENT_AND_LIVE_SMOKE",
+    "deploymentPerformedByThisBuild": false,
+    "liveCloudflareSmokePerformedByThisBuild": false,
+    "astFullProductionFrozen": false,
+    "remainingRequiredGates": [
+      "DEPLOY_THIS_SUCCESSOR_TO_CLOUDFLARE",
+      "SERVER_REPORTED_DEPLOYED_COMMIT_MATCHES_EXPECTED",
+      "LIVE_CANONICAL_HTML_SMOKE",
+      "LIVE_CUSTOMER_ASSETS_SMOKE",
+      "LIVE_API_CONSENT_BOUNDARY_SMOKE",
+      "LIVE_AST_END_TO_END_API_SMOKE",
+      "FINALIZE_FREEZE_FROM_REAL_PASS_EVIDENCE"
+    ]
+  },
+  "baselineKnownIssueOutsideThisAstSuccessor": {
+    "checker": "npm run check:ziwei-cx-r1-w0-w4",
+    "state": "LATEST_MAIN_REFERENCES_MISSING_ZIWEI_W22_W23_AUTHORITY_V2_FILES",
+    "astSuccessorDidNotCreateThisGap": true,
+    "focusedZiweiCanonicalApiProbeAfterAstMerge": "PASS"
+  }
+}

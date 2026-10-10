@@ -1,0 +1,74 @@
+{
+  "campaign": "COM-8V-STRIPE-R1A",
+  "previewUrl": "https://ae325042.phios-github.pages.dev",
+  "deploymentId": "ae325042-43c3-42c1-92e4-013038e24113",
+  "commit": "58097bdf3d8377392f3cd3b9b61127c092e8f093",
+  "dirty": true,
+  "remoteHealth": {
+    "status": "PASS_WITH_EXPECTED_CONFIG_GATES",
+    "catalogParity": true,
+    "health": [
+      {
+        "method": "GET",
+        "path": "/",
+        "status": 200,
+        "redirect": null
+      },
+      {
+        "method": "GET",
+        "path": "/api/commerce-catalog",
+        "status": 200,
+        "redirect": null,
+        "products": 25,
+        "checkoutAvailable": false
+      },
+      {
+        "method": "POST",
+        "path": "/api/commerce-checkout",
+        "status": 401,
+        "redirect": null,
+        "code": "commerce_authentication_required"
+      },
+      {
+        "method": "GET",
+        "path": "/api/stripe-webhook",
+        "status": 405,
+        "redirect": null,
+        "code": "method_not_allowed"
+      },
+      {
+        "method": "POST",
+        "path": "/api/stripe-webhook",
+        "status": 503,
+        "redirect": null,
+        "code": "stripe_webhook_not_configured"
+      },
+      {
+        "method": "GET",
+        "path": "/books/reality-configuration/",
+        "status": 200,
+        "redirect": null
+      },
+      {
+        "method": "GET",
+        "path": "/content/registry/current-book-architecture.json",
+        "status": 200,
+        "redirect": null,
+        "architecture": "eight-volume"
+      }
+    ]
+  },
+  "missing": [
+    "Preview STRIPE_WEBHOOK_SECRET",
+    "Approved Commerce identity integration",
+    "QA enable gate after prerequisites",
+    "Private manuscript mappings and watermark delivery",
+    "Test Mode Customer Portal configuration"
+  ],
+  "realStripeE2E": "NOT_RUN",
+  "live": "NOT_ACTIVATED",
+  "humanReview": "PENDING",
+  "stripeAccount": "acct_1UFr0TBEKXJyHMkK",
+  "livemode": false,
+  "databaseEvidence": "eight-volume-qa-d1.json"
+}

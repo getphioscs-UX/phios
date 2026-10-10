@@ -1,0 +1,65 @@
+{
+  "contractId": "phi-os.pws.canonical-operations.v1",
+  "schemaVersion": "pws-v1",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "7a99bda47c7a32f7e490ca95e06e4fa4574443c7"
+  },
+  "prerequisiteContracts": [
+    "phi-os.pws.canonical-identifiers.v1",
+    "phi-os.pws.canonical-states.v1"
+  ],
+  "rules": {
+    "freeStringOperationsAllowed": false,
+    "oneOperationOneFormalStateChange": true,
+    "explicitSourceStatesRequired": true,
+    "singleTargetStateRequired": true,
+    "preconditionsRequired": true,
+    "authorityRequired": true,
+    "idempotencyRequired": true,
+    "illegalOperationRejected": true,
+    "illegalOperationHasSideEffects": false,
+    "uiMayInventOperation": false,
+    "apiMayInventOperation": false,
+    "aiMayInventOperation": false,
+    "providerMayInventOperation": false,
+    "eventMayExecuteOperation": false,
+    "paymentMayCreateJourney": false,
+    "providerOutputMayCreateFormalObject": false,
+    "legacyOperationWritesAllowed": false
+  },
+  "operations": [
+    {"operationId":"pws.operation.payment.confirm","operationCode":"payment.confirm","objectName":"Payment","sourceStates":["pending","processing"],"targetState":"succeeded","authority":"commercial.payment_verifier","preconditions":["verified_gateway_result","matching_order"],"idempotencyKeyRequired":true,"eventCode":"payment.confirmed"},
+    {"operationId":"pws.operation.payment.fail","operationCode":"payment.fail","objectName":"Payment","sourceStates":["pending","processing"],"targetState":"failed","authority":"commercial.payment_verifier","preconditions":["verified_gateway_result"],"idempotencyKeyRequired":true,"eventCode":"payment.failed"},
+    {"operationId":"pws.operation.payment.refund","operationCode":"payment.refund","objectName":"Payment","sourceStates":["succeeded","partially_refunded","disputed"],"targetState":"refunded","authority":"commercial.refund_authority","preconditions":["refund_authorised","payment_settled"],"idempotencyKeyRequired":true,"eventCode":"payment.refunded"},
+    {"operationId":"pws.operation.entitlement.activate","operationCode":"entitlement.activate","objectName":"Entitlement","sourceStates":["pending","suspended"],"targetState":"active","authority":"entitlement.service","preconditions":["qualifying_order_confirmed","entitlement_scope_valid"],"idempotencyKeyRequired":true,"eventCode":"entitlement.activated"},
+    {"operationId":"pws.operation.entitlement.revoke","operationCode":"entitlement.revoke","objectName":"Entitlement","sourceStates":["pending","active","suspended"],"targetState":"revoked","authority":"entitlement.service","preconditions":["revocation_reason_present"],"idempotencyKeyRequired":true,"eventCode":"entitlement.revoked"},
+    {"operationId":"pws.operation.consent.confirm","operationCode":"consent.confirm","objectName":"Consent","sourceStates":["draft"],"targetState":"granted","authority":"consent.subject","preconditions":["explicit_affirmative_action","scope_present","purpose_present","duration_present"],"idempotencyKeyRequired":true,"eventCode":"consent.confirmed"},
+    {"operationId":"pws.operation.consent.withdraw","operationCode":"consent.withdraw","objectName":"Consent","sourceStates":["draft","granted","partially_revoked"],"targetState":"revoked","authority":"consent.subject","preconditions":["withdrawal_request_verified"],"idempotencyKeyRequired":true,"eventCode":"consent.withdrawn"},
+    {"operationId":"pws.operation.journey.activate","operationCode":"journey.activate","objectName":"Journey","sourceStates":["draft"],"targetState":"active","authority":"journey.owner","preconditions":["journey_exists","activation_boundary_satisfied"],"idempotencyKeyRequired":true,"eventCode":"journey.activated"},
+    {"operationId":"pws.operation.journey.pause","operationCode":"journey.pause","objectName":"Journey","sourceStates":["active"],"targetState":"paused","authority":"journey.owner","preconditions":["journey_access_authorised"],"idempotencyKeyRequired":true,"eventCode":"journey.paused"},
+    {"operationId":"pws.operation.journey.resume","operationCode":"journey.resume","objectName":"Journey","sourceStates":["paused"],"targetState":"active","authority":"journey.owner","preconditions":["journey_access_authorised","recovery_state_valid"],"idempotencyKeyRequired":true,"eventCode":"journey.resumed"},
+    {"operationId":"pws.operation.assignment.create","operationCode":"assignment.create","objectName":"Assignment","sourceStates":["__absent__"],"targetState":"proposed","authority":"assignment.coordinator","preconditions":["professional_exists","journey_exists","purpose_present","scope_present"],"idempotencyKeyRequired":true,"eventCode":"assignment.created","createsObject":true},
+    {"operationId":"pws.operation.assignment.accept","operationCode":"assignment.accept","objectName":"Assignment","sourceStates":["proposed"],"targetState":"active","authority":"assigned_professional","preconditions":["professional_eligible","consent_valid","scope_valid","purpose_valid"],"idempotencyKeyRequired":true,"eventCode":"assignment.accepted"},
+    {"operationId":"pws.operation.assignment.cancel","operationCode":"assignment.cancel","objectName":"Assignment","sourceStates":["proposed","active","suspended"],"targetState":"revoked","authority":"assignment.coordinator","preconditions":["cancellation_reason_present"],"idempotencyKeyRequired":true,"eventCode":"assignment.cancelled"},
+    {"operationId":"pws.operation.assignment.complete","operationCode":"assignment.complete","objectName":"Assignment","sourceStates":["active","suspended"],"targetState":"closed","authority":"assignment.coordinator","preconditions":["completion_basis_present"],"idempotencyKeyRequired":true,"eventCode":"assignment.completed"},
+    {"operationId":"pws.operation.readiness.evaluate","operationCode":"readiness.evaluate","objectName":"Professional Readiness","sourceStates":["not_ready","ready","blocked"],"targetState":"evaluating","authority":"professional.readiness_service","preconditions":["professional_exists","service_context_present"],"idempotencyKeyRequired":true,"eventCode":"readiness.evaluation_started"},
+    {"operationId":"pws.operation.professionalResponse.confirm","operationCode":"professionalResponse.confirm","objectName":"Professional Response","sourceStates":["draft"],"targetState":"submitted","authority":"assigned_professional","preconditions":["assignment_active","response_kind_confirm","source_report_present"],"idempotencyKeyRequired":true,"eventCode":"professionalResponse.confirmed"},
+    {"operationId":"pws.operation.professionalResponse.refine","operationCode":"professionalResponse.refine","objectName":"Professional Response","sourceStates":["draft"],"targetState":"submitted","authority":"assigned_professional","preconditions":["assignment_active","response_kind_refine","source_report_present"],"idempotencyKeyRequired":true,"eventCode":"professionalResponse.refined"},
+    {"operationId":"pws.operation.professionalResponse.challenge","operationCode":"professionalResponse.challenge","objectName":"Professional Response","sourceStates":["draft"],"targetState":"submitted","authority":"assigned_professional","preconditions":["assignment_active","response_kind_challenge","source_report_present"],"idempotencyKeyRequired":true,"eventCode":"professionalResponse.challenged"},
+    {"operationId":"pws.operation.professionalResponse.extend","operationCode":"professionalResponse.extend","objectName":"Professional Response","sourceStates":["draft"],"targetState":"submitted","authority":"assigned_professional","preconditions":["assignment_active","response_kind_extend","source_report_present"],"idempotencyKeyRequired":true,"eventCode":"professionalResponse.extended"},
+    {"operationId":"pws.operation.deliverable.freeze","operationCode":"deliverable.freeze","objectName":"Deliverable","sourceStates":["review_required"],"targetState":"approved","authority":"deliverable.approver","preconditions":["content_complete","review_requirements_satisfied"],"idempotencyKeyRequired":true,"eventCode":"deliverable.frozen"},
+    {"operationId":"pws.operation.deliverable.sign","operationCode":"deliverable.sign","objectName":"Deliverable","sourceStates":["approved"],"targetState":"signed","authority":"authorised_signatory","preconditions":["signature_intent_explicit","signatory_authorised","frozen_content_unchanged"],"idempotencyKeyRequired":true,"eventCode":"deliverable.signed"},
+    {"operationId":"pws.operation.deliverable.release","operationCode":"deliverable.release","objectName":"Deliverable","sourceStates":["signed"],"targetState":"released","authority":"deliverable.release_authority","preconditions":["recipient_authorised","delivery_scope_valid"],"idempotencyKeyRequired":true,"eventCode":"deliverable.released"},
+    {"operationId":"pws.operation.capability.activate","operationCode":"capability.activate","objectName":"Capability","sourceStates":["suspended"],"targetState":"active","authority":"professional.governance","preconditions":["capability_requirements_valid","restrictions_cleared"],"idempotencyKeyRequired":true,"eventCode":"capability.activated"},
+    {"operationId":"pws.operation.capability.suspend","operationCode":"capability.suspend","objectName":"Capability","sourceStates":["active"],"targetState":"suspended","authority":"professional.governance","preconditions":["suspension_reason_present"],"idempotencyKeyRequired":true,"eventCode":"capability.suspended"},
+    {"operationId":"pws.operation.professional.verify","operationCode":"professional.verify","objectName":"Professional","sourceStates":["pending_verification"],"targetState":"active","authority":"professional.governance","preconditions":["identity_verified","credential_boundary_satisfied"],"idempotencyKeyRequired":true,"eventCode":"professional.verified"}
+  ],
+  "legacyCompatibility": [
+    {"scope":"Runtime operations","paths":["functions/runtime","assets/js/runtime"],"handling":"preserve_existing_owner_and_names; no PWS write-through"},
+    {"scope":"Book commerce operations","paths":["functions/api","functions/_lib","functions/commerce"],"handling":"preserve_gateway behavior; map only at an authorised boundary"},
+    {"scope":"Professional access decisions","paths":["functions/professional/access"],"handling":"remain read-authorisation decisions, not state-change operations"}
+  ]
+}

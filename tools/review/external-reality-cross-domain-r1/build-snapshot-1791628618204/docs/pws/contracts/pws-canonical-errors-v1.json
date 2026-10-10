@@ -1,0 +1,74 @@
+{
+  "contractId": "phi-os.pws.canonical-errors.v1",
+  "schemaVersion": "pws-v1",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "1a032cdf851d71060ddb2d0033b9d65b75e35254"
+  },
+  "rules": {
+    "freeStringErrorFamiliesAllowed": false,
+    "freeStringErrorCodesAllowed": false,
+    "errorCodePattern": "^PWS_[A-Z]+_[A-Z0-9_]+$",
+    "familyPrefixRequired": true,
+    "stableCodeRequired": true,
+    "customerMessageIsCodeAllowed": false,
+    "internalDetailExposedToCustomer": false,
+    "sensitiveDataAllowed": false,
+    "providerOutputAllowed": false,
+    "stackTraceAllowedAtPublicBoundary": false,
+    "retryabilityMustBeDeclared": true,
+    "httpStatusMustBeDeclared": true,
+    "correlationIdRequired": true,
+    "causeMayCrossTrustBoundary": false,
+    "legacyErrorWritesAllowed": false
+  },
+  "errorEnvelope": {
+    "requiredFields": [
+      "error_id",
+      "error_code",
+      "error_family",
+      "schema_version",
+      "occurred_at",
+      "correlation_id",
+      "retryable"
+    ],
+    "optionalSafeFields": ["operation_id","object_ref","field_refs"],
+    "forbiddenPublicFields": [
+      "stack",
+      "cause",
+      "payload",
+      "customer_data",
+      "provider_output",
+      "credential",
+      "token",
+      "secret"
+    ]
+  },
+  "families": [
+    {"family":"IDENTITY","prefix":"PWS_IDENTITY_","defaultHttpStatus":422,"defaultRetryable":false,"codes":["PWS_IDENTITY_REQUIRED","PWS_IDENTITY_INVALID","PWS_IDENTITY_NOT_VERIFIED"]},
+    {"family":"AUTHENTICATION","prefix":"PWS_AUTHENTICATION_","defaultHttpStatus":401,"defaultRetryable":false,"codes":["PWS_AUTHENTICATION_REQUIRED","PWS_AUTHENTICATION_FAILED","PWS_AUTHENTICATION_EXPIRED"]},
+    {"family":"AUTHORIZATION","prefix":"PWS_AUTHORIZATION_","defaultHttpStatus":403,"defaultRetryable":false,"codes":["PWS_AUTHORIZATION_DENIED","PWS_AUTHORIZATION_SCOPE_DENIED","PWS_AUTHORIZATION_PURPOSE_DENIED"]},
+    {"family":"CAPABILITY","prefix":"PWS_CAPABILITY_","defaultHttpStatus":403,"defaultRetryable":false,"codes":["PWS_CAPABILITY_REQUIRED","PWS_CAPABILITY_INACTIVE","PWS_CAPABILITY_RESTRICTED"]},
+    {"family":"CONSENT","prefix":"PWS_CONSENT_","defaultHttpStatus":403,"defaultRetryable":false,"codes":["PWS_CONSENT_REQUIRED","PWS_CONSENT_SCOPE_DENIED","PWS_CONSENT_REVOKED","PWS_CONSENT_EXPIRED"]},
+    {"family":"ENTITLEMENT","prefix":"PWS_ENTITLEMENT_","defaultHttpStatus":403,"defaultRetryable":false,"codes":["PWS_ENTITLEMENT_REQUIRED","PWS_ENTITLEMENT_INACTIVE","PWS_ENTITLEMENT_REVOKED","PWS_ENTITLEMENT_EXPIRED"]},
+    {"family":"PAYMENT","prefix":"PWS_PAYMENT_","defaultHttpStatus":409,"defaultRetryable":false,"codes":["PWS_PAYMENT_REQUIRED","PWS_PAYMENT_NOT_CONFIRMED","PWS_PAYMENT_FAILED","PWS_PAYMENT_REFUND_INVALID"]},
+    {"family":"ASSIGNMENT","prefix":"PWS_ASSIGNMENT_","defaultHttpStatus":403,"defaultRetryable":false,"codes":["PWS_ASSIGNMENT_REQUIRED","PWS_ASSIGNMENT_INACTIVE","PWS_ASSIGNMENT_SCOPE_DENIED","PWS_ASSIGNMENT_PURPOSE_DENIED"]},
+    {"family":"WORKSPACE","prefix":"PWS_WORKSPACE_","defaultHttpStatus":409,"defaultRetryable":false,"codes":["PWS_WORKSPACE_NOT_READY","PWS_WORKSPACE_ACCESS_REVOKED","PWS_WORKSPACE_READ_ONLY"]},
+    {"family":"EVIDENCE","prefix":"PWS_EVIDENCE_","defaultHttpStatus":422,"defaultRetryable":false,"codes":["PWS_EVIDENCE_REQUIRED","PWS_EVIDENCE_INVALID","PWS_EVIDENCE_LINEAGE_MISSING"]},
+    {"family":"METHOD","prefix":"PWS_METHOD_","defaultHttpStatus":422,"defaultRetryable":false,"codes":["PWS_METHOD_REQUIRED","PWS_METHOD_NOT_ALLOWED","PWS_METHOD_BOUNDARY_VIOLATION"]},
+    {"family":"DELIVERABLE","prefix":"PWS_DELIVERABLE_","defaultHttpStatus":409,"defaultRetryable":false,"codes":["PWS_DELIVERABLE_NOT_READY","PWS_DELIVERABLE_NOT_FROZEN","PWS_DELIVERABLE_SIGNATURE_REQUIRED","PWS_DELIVERABLE_RELEASE_DENIED"]},
+    {"family":"STATE","prefix":"PWS_STATE_","defaultHttpStatus":409,"defaultRetryable":false,"codes":["PWS_STATE_INVALID","PWS_STATE_TRANSITION_DENIED","PWS_STATE_CONFLICT"]},
+    {"family":"VERSION","prefix":"PWS_VERSION_","defaultHttpStatus":409,"defaultRetryable":false,"codes":["PWS_VERSION_REQUIRED","PWS_VERSION_UNSUPPORTED","PWS_VERSION_CONFLICT"]},
+    {"family":"PROVIDER","prefix":"PWS_PROVIDER_","defaultHttpStatus":502,"defaultRetryable":true,"codes":["PWS_PROVIDER_UNAVAILABLE","PWS_PROVIDER_FAILED","PWS_PROVIDER_TIMEOUT","PWS_PROVIDER_OUTPUT_REJECTED","PWS_PROVIDER_BUDGET_BLOCKED"]},
+    {"family":"SECURITY","prefix":"PWS_SECURITY_","defaultHttpStatus":403,"defaultRetryable":false,"codes":["PWS_SECURITY_POLICY_DENIED","PWS_SECURITY_INTEGRITY_FAILED","PWS_SECURITY_SENSITIVE_DATA_REJECTED"]},
+    {"family":"INTEGRATION","prefix":"PWS_INTEGRATION_","defaultHttpStatus":502,"defaultRetryable":true,"codes":["PWS_INTEGRATION_UNAVAILABLE","PWS_INTEGRATION_FAILED","PWS_INTEGRATION_RESPONSE_INVALID"]},
+    {"family":"SYSTEM","prefix":"PWS_SYSTEM_","defaultHttpStatus":500,"defaultRetryable":true,"codes":["PWS_SYSTEM_UNAVAILABLE","PWS_SYSTEM_FAILURE","PWS_SYSTEM_CAPACITY_EXCEEDED"]}
+  ],
+  "legacyCompatibility": [
+    {"scope":"Professional access denial reasons","paths":["functions/professional/access/professional-authorisation-decision.js","functions/professional/access/authorised-professional-data-loader.js"],"handling":"preserve existing codes; map only at a future authorised boundary"},
+    {"scope":"Runtime typed errors","paths":["functions/runtime/security/security-contract.js","functions/runtime/persistence/persistence-contract.js","functions/runtime/lineage/lineage-contract.js","functions/runtime/recovery/recovery-contract.js"],"handling":"preserve family ownership; no rename or replacement"},
+    {"scope":"Provider failures","paths":["functions/runtime/shared/provider-interface.js","functions/runtime/entry/providers","functions/runtime/reading/providers"],"handling":"preserve Provider boundary; never expose raw Provider detail"}
+  ]
+}

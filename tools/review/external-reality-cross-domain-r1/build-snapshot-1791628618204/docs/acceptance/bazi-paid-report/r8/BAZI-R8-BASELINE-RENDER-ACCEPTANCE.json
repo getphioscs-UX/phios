@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "BAZI_R8_BASELINE_RENDER_ACCEPTANCE_V1",
+  "decision": "PASS",
+  "acceptedAt": "2026-09-25T13:23:39+08:00",
+  "sourceHead": "1505cd7a7aed58370168526e48a4375e9fd4c668",
+  "workflow": {
+    "name": "BaZi R8 Baseline Render Audit",
+    "runId": 36098343055,
+    "artifactId": 10848237497,
+    "artifactDigest": "sha256:b3e966f05ee607c5c259c6125a1bf827edda96e3e77f6f3b8f05070e8cd6c402"
+  },
+  "baseline": "docs/guided-report-successor-r2/bazi-source.json",
+  "publicationAuthority": "STATIC_EDITORIAL + DETERMINISTIC_PERSONALIZED",
+  "t3Required": false,
+  "parity": {
+    "semanticStructureEqual": true,
+    "physicalPaginationEqual": true,
+    "enTotalPages": 62,
+    "zhHansTotalPages": 62
+  },
+  "locales": {
+    "en": {
+      "bodyPages": 56,
+      "emptyPages": 0,
+      "thinPages": 0,
+      "overBudgetPages": 0,
+      "badInsightItems": 0,
+      "exactDuplicateGroups": 0,
+      "continuations": 1
+    },
+    "zh-Hans": {
+      "bodyPages": 56,
+      "emptyPages": 0,
+      "thinPages": 0,
+      "overBudgetPages": 0,
+      "badInsightItems": 0,
+      "exactDuplicateGroups": 0,
+      "continuations": 1
+    }
+  },
+  "sectionPages": {
+    "S01_OVERVIEW": 4,
+    "S02_PERSONALITY": 8,
+    "S03_LIFE_STRUCTURE": 10,
+    "S04_CAREER": 6,
+    "S05_WEALTH": 6,
+    "S06_RELATIONSHIP": 6,
+    "S07_HEALTH": 3,
+    "S08_TIMING": 5,
+    "S09_GUIDANCE": 4,
+    "S10_APPENDIX": 4
+  },
+  "semanticOverlapAudit": {
+    "method": "5-token shingle overlap divided by smaller page shingle set",
+    "reviewThreshold": 0.45,
+    "enPairsAtOrAbove0_30": [
+      {
+        "a": "S02_EXPRESSION_CAPABILITY",
+        "b": "S02_FRICTION",
+        "score": 0.333
+      }
+    ],
+    "zhHansPairsAtOrAbove0_30": [],
+    "thresholdViolations": 0
+  },
+  "continuation": {
+    "countPerLocale": 1,
+    "pageKey": "S03_LIFE_STRUCTURE_TEN_GOD_DETAILS_CONT_2",
+    "reason": "Ten God detail visual is intentionally paginated 6 + 4 with no information loss."
+  },
+  "gates": {
+    "expandedSectionValidation": "PASS",
+    "pageBudgetValidation": "PASS",
+    "bilingualSemanticParity": "PASS",
+    "bilingualPhysicalPagination": "PASS",
+    "emptyPageGate": "PASS",
+    "thinPageGate": "PASS",
+    "duplicateContentGate": "PASS",
+    "t3Independence": "PASS"
+  },
+  "notes": [
+    "R8 acceptance covers deterministic baseline rendering and structural publication quality.",
+    "Browser/PDF visual human acceptance remains a separate downstream acceptance and is not implied by this record.",
+    "Historical T3 artifacts remain historical QA evidence only and do not gate publication."
+  ]
+}

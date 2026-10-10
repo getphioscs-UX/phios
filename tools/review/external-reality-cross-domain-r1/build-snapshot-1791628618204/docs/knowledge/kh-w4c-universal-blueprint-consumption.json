@@ -1,0 +1,29 @@
+{
+  "contract": "KH-W4C-UNIVERSAL-BLUEPRINT-CONSUMPTION-v1",
+  "stage": "KH-W4C",
+  "status": "implemented",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "fullCommitSha": "7906432"
+  },
+  "runtimeEntry": "scripts/lib/knowledge-blueprint/blueprint-registry-loader.mjs",
+  "publicConsumer": "assets/js/pages/free-explore.js",
+  "apis": [
+    "loadKnowledgeBlueprintRegistry",
+    "loadKnowledgeBlueprints",
+    "loadKnowledgeBlueprintByBook",
+    "resolveKnowledgeBlueprintForNode",
+    "resolveKnowledgeBlueprintForPart"
+  ],
+  "legacyAllowlist": [
+    "historical checkers",
+    "Book I manuscript ingestion tools",
+    "frozen editorial evidence",
+    "manuscript mapping records"
+  ],
+  "nextMigrationStages": {
+    "manuscriptRuntime": "KH-W4H",
+    "checkerGovernance": "KH-W4J"
+  }
+}

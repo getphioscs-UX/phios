@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "METHOD_REPORT_DELIVERY_DELTA_V1",
+  "methodCode": "FINANCIAL",
+  "sourceHead": "67254e3d039c842fca0cbd8edc392691ccd2166b",
+  "nativeOwnerRef": "functions/account/released-report-material-store.js",
+  "nativeOwnerSha256": "30019e137087cafaf314aa4c4593d4e263dca73c5bdd0c0052098d0840c51c8a",
+  "status": "BLOCKED",
+  "publicationProfileRef": "content/reports/method-publication-profiles-v1.json#FINANCIAL",
+  "generationVersion": null,
+  "semanticVersion": null,
+  "publicationVersion": null,
+  "rendererMode": null,
+  "rendererVersion": null,
+  "pagePlanMode": null,
+  "expectedPageRule": null,
+  "diagramRule": {
+    "nativeOwnerOnly": true,
+    "count": null
+  },
+  "localeRule": "BILINGUAL_ONLY",
+  "generationProviderRule": "NATIVE_OWNER_UNRESOLVED",
+  "publicationProviderRule": 0,
+  "rerenderProviderRule": 0,
+  "reopenProviderRule": 0,
+  "semanticReviewRule": null,
+  "releaseEligibilityRule": "ALL_APPLICABLE_NATIVE_AND_SHARED_GATES_REQUIRED",
+  "subjectBindingRule": "NATIVE_OWNER_REQUIRED",
+  "methodSpecificNegativeAccessCases": [
+    "AUTHORIZATION_ON_CACHE_HIT",
+    "WRONG_ACCOUNT_DENIED"
+  ],
+  "fullSharedE2ERepeated": false,
+  "localDeltaProof": null,
+  "deployedProof": null,
+  "blockers": [
+    {
+      "owner": "functions/account/released-report-material-store.js",
+      "reason": "Existing private RR/PDF owner must be reused; specialist completeness, bilingual publication and shared delivery delta remain open.",
+      "minimumNextAction": "Resolve native profile fields and method adapter; execute scoped method delta verification."
+    }
+  ],
+  "sharedDeliveryAuthorityEligible": false
+}

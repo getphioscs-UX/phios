@@ -1,0 +1,47 @@
+{
+  "reconciliationCode": "PHI-OS-PWS-ENTRY-W1-WPR-D-SERVICES-RECONCILIATION-v1",
+  "reconciliationVersion": "1.0.0",
+  "status": "ACCEPTED_SUCCESSOR_RECONCILIATION",
+  "purpose": "Preserve the frozen PWS-ENTRY-W1 authorised professional data-loader boundary while accepting the explicitly governed WPR-D public vocabulary and route migration of services.html.",
+  "protectedArtifact": {
+    "path": "services.html",
+    "baselineExpectedHash": "79d47c96c79e9947ceaac34b425e8aba2da33506c08349f2fde324b21f24ed25",
+    "baselineMeaning": "PWS-ENTRY-W1 historical public-page freeze digest",
+    "baselineRewritten": false
+  },
+  "successor": {
+    "runtime": "WPR",
+    "phase": "WPR-D_PUBLIC_PRODUCTION_SURFACES",
+    "works": [
+      "WPR-W14",
+      "WPR-W19"
+    ],
+    "sha256": "e1166802622c584e0ce9f04802c4aa5a2da625bff14a60c8d14d9e3f664561ca",
+    "reason": "Public vocabulary and canonical service-route projection migrated from the legacy public method label to the WPR-W13 controlled public vocabulary without changing professional authorisation or data loading.",
+    "authorityExpansionGranted": false
+  },
+  "wprAuthority": {
+    "publicVocabularyRegistry": "content/web-production/registries/wpr-public-vocabulary-registry-v1.json",
+    "canonicalPublicRoute": "/professional/personal-runtime",
+    "legacyCompatibilityRoute": "/professional/human-design",
+    "publicLabel": {
+      "en": "Personal Runtime Projection",
+      "zh-Hans": "个人运行投射"
+    }
+  },
+  "pwsBoundary": {
+    "authorisedDataLoaderChanged": false,
+    "professionalAuthorisationChanged": false,
+    "identityEligibilityAssignmentConsentPurposeScopeOrderChanged": false,
+    "deniedReadBoundaryChanged": false,
+    "payloadFreeAuditBoundaryChanged": false,
+    "publicSurfaceOnly": true
+  },
+  "rules": {
+    "allOtherPwsEntryW1ProtectedPageHashesRemainExact": true,
+    "servicesSuccessorMustMatchExactHash": true,
+    "futureServicesChangeRequiresNewVersionedReconciliation": true,
+    "legacyPublicVocabularyMayNotBeRestoredToSatisfyHistoricalDigest": true,
+    "wprDoesNotGainProfessionalAuthorisationAuthority": true
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "contract": "KH-W4A-FOUNDATION-GAP-REPORT-v1",
+  "stage": "KH-W4A",
+  "status": "reviewed",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "fullCommitSha": "46db2da328581cb03b8bbdd1dac035dc3a29e5e8",
+    "shortCommitSha": "46db2da",
+    "sourceArchive": "PHIOS(22).zip",
+    "userReportedNpmCheck": "passed",
+    "generatedAt": "2026-08-05T10:57:10.772884+00:00"
+  },
+  "gaps": [
+    {
+      "gapCode": "GAP-AUTHORITY-CONTRACT",
+      "description": "No single v2 authority contract formally assigns ownership among Book, Part, Node and Blueprint registries.",
+      "targetStage": "KH-W4B",
+      "severity": "high"
+    },
+    {
+      "gapCode": "GAP-CURRENT-CONSUMPTION",
+      "description": "Not every current consumer is registry-led; direct Book I blueprint references remain.",
+      "targetStage": "KH-W4C",
+      "severity": "high"
+    },
+    {
+      "gapCode": "GAP-FREEZE-V2",
+      "description": "Existing freeze evidence does not yet establish the final per-book and registry-manifest freeze contract.",
+      "targetStage": "KH-W4D",
+      "severity": "high"
+    },
+    {
+      "gapCode": "GAP-PART5-OWNERSHIP",
+      "description": "Legacy B1 identity and current Book II publication ownership are not consistently separated across projections.",
+      "targetStage": "KH-W4E",
+      "severity": "high"
+    },
+    {
+      "gapCode": "GAP-CHECKER-GOVERNANCE",
+      "description": "Current, compatibility and historical checkers are not yet governed by a single checker manifest.",
+      "targetStage": "KH-W4J",
+      "severity": "medium"
+    }
+  ]
+}

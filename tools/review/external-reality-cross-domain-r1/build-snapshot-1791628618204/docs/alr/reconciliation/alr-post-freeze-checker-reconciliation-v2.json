@@ -1,0 +1,65 @@
+{
+  "reconciliationCode": "PHI-OS-ALR-POST-FREEZE-CHECKER-RECONCILIATION-v2",
+  "reconciliationVersion": "2.0.0",
+  "status": "ACCEPTED_SUCCESSOR_RECONCILIATION",
+  "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+  "predecessorReconciliation": "docs/alr/reconciliation/alr-post-freeze-checker-reconciliation-v1.json",
+  "purpose": "Replace the ALR-W33 postcheck raw-string prefix assertion with command-token prefix validation and teach the ALR governance checker to verify a versioned checker-successor chain without reopening ALR runtime semantics or freeze.",
+  "frozenAliasRegistry": "content/academy/academy-learning-runtime/registries/alr-checker-alias-registry-v1.json",
+  "frozenAliasRegistryRewritten": false,
+  "alrFreezeRewritten": false,
+  "packageJsonMutatedByThisRepair": false,
+  "authorityExpansionGranted": false,
+  "entries": [
+    {
+      "implementationFile": "scripts/check-alr-w33-w35-access.mjs",
+      "affectedWorks": [
+        "ALR-W33",
+        "ALR-W34",
+        "ALR-W35"
+      ],
+      "predecessorDigest": "d38c77ffdcc60f97d5b292ae8fcb2c4e953f7dde01d961c234eb93fbe81324c4",
+      "successorDigest": "68bb47fcc2863f7f56ebe4f7b3030b1d11db3587acdde7b2b90d09ab6da11a20",
+      "changeScope": "REPLACE_WHITESPACE_SENSITIVE_POSTCHECK_PREFIX_STRING_WITH_NORMALIZED_COMMAND_TOKEN_PREFIX_VALIDATION",
+      "runtimeSemanticAuthorityChanged": false,
+      "academyAccessSemanticsChanged": false,
+      "entitlementAuthorityChanged": false,
+      "professionalBoundaryChanged": false,
+      "postcheckRequiredCommandOrderChanged": false,
+      "postcheckTailOwnershipClaimed": false,
+      "authorityExpansionGranted": false
+    },
+    {
+      "implementationFile": "scripts/check-alr-w42-w46-governance-production-freeze.mjs",
+      "affectedWorks": [
+        "ALR-W42",
+        "ALR-W43",
+        "ALR-W44",
+        "ALR-W45",
+        "ALR-W46"
+      ],
+      "predecessorDigest": "2e6e1a430de88303acabf6b0da3e915b57a7fdb7e7cba7f5475be59c08407e4d",
+      "successorDigest": "8d7dda1bdeea30f4d3e29460a178e9cb68a66c1a963e5364b379e8b8753d9d53",
+      "changeScope": "VERIFY_VERSIONED_POST_FREEZE_CHECKER_SUCCESSOR_CHAIN_V1_TO_V2",
+      "runtimeSemanticAuthorityChanged": false,
+      "alrGovernanceSemanticsChanged": false,
+      "freezeDecisionChanged": false,
+      "postcheckTailOwnershipClaimed": false,
+      "authorityExpansionGranted": false
+    }
+  ],
+  "rules": {
+    "frozenAliasRegistryDigestValuesRemainHistoricalAuthority": true,
+    "predecessorReconciliationRemainsImmutable": true,
+    "successorDigestMustMatchExactFileContent": true,
+    "onlyListedImplementationFilesMayUseSuccessorDigest": true,
+    "unlistedCheckerDigestDriftFailsClosed": true,
+    "postcheckWhitespaceIsNotSemanticAuthority": true,
+    "requiredPostcheckCommandOrderMustRemainExact": true,
+    "laterPostcheckTailExpansionAllowedWithoutAlrOwnership": true,
+    "futureSuccessorChangeRequiresNewVersionedReconciliation": true,
+    "alrDoesNotOwnFuturePostcheckTail": true,
+    "rrRuntimeAuthorityUnchanged": true,
+    "rreRuntimeAuthorityUnchanged": true
+  }
+}

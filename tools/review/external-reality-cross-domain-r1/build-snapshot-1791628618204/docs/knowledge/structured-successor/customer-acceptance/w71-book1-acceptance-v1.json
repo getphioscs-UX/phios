@@ -1,0 +1,41 @@
+{
+  "stage": "B14-SKS-W71",
+  "sourceDigest": "9601ece4b804ad6d21d5f47348559bb1843e56513b7f5f7a231cd045f90b8702",
+  "sourceDigests": {
+    "content/knowledge/structured/book-1/book-1-mechanism-registry-v1.json": "ac29ad4a0e79cb3fc269dd3937bbdec67f4e22e85540d74cb466ec4b8b0d67b8",
+    "assets/js/knowledge/progressive-explorer.js": "858c587afdead1338896227fdf484ae8201db47eee441ad16e4078e34f103128",
+    "assets/js/knowledge/structured-loader.js": "7f74a9c2ed90732d1b373e3dea99c2613896d3ac328f6674c3ffd1b52ec8a174",
+    "assets/js/knowledge/structured-search.js": "0987ea21cf321f7d74e279fb73a4c824e42bab535a6e2db0632c31d265ad3f95",
+    "functions/_lib/structured-ask-policy.js": "539034ff3a01d92d880ac74c02078deba18b34fbd12ea998a13bd7a9a8d0bb4d"
+  },
+  "timeBudgetSeconds": 300,
+  "tasks": [
+    {
+      "id": "FIND_MECHANISM",
+      "label": "找到一个 mechanism",
+      "evidence": "记录名称、objectId，以及你怎样找到它。"
+    },
+    {
+      "id": "EXPLAIN_MECHANISM",
+      "label": "理解它",
+      "evidence": "用自己的话解释它是什么，并说明一个限制；不要只复制页面定义。"
+    },
+    {
+      "id": "FIND_RELATED",
+      "label": "看到关联机制",
+      "evidence": "记录页面提供的关联对象及入口；找不到则标记 FAIL，不把相邻目录当作关联。"
+    },
+    {
+      "id": "READ_SOURCE",
+      "label": "进入原文",
+      "evidence": "记录实际打开的章节／页码和访问结果。只看到页码或访问提示不算已进入原文。"
+    },
+    {
+      "id": "CONTINUE_ASK",
+      "label": "继续 Ask",
+      "evidence": "记录提问、所携带主题与实际返回结果；仅存在 Ask 链接不算完成。"
+    }
+  ],
+  "humanAcceptanceComplete": false,
+  "status": "READY_FOR_DEFERRED_READER_TEST"
+}

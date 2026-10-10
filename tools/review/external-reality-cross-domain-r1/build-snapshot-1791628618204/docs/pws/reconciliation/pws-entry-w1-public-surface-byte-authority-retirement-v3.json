@@ -1,0 +1,50 @@
+{
+  "reconciliationCode": "PHI-OS-PWS-ENTRY-W1-PUBLIC-SURFACE-BYTE-AUTHORITY-RETIREMENT-v3",
+  "reconciliationVersion": "3.0.0",
+  "status": "CURRENT_PUBLIC_SURFACE_BYTE_AUTHORITY_RETIRED_FROM_PWS",
+  "baselineCommit": "203edecf98763e27897c35aae2768d1a69b674d2",
+  "purpose": "Preserve PWS-ENTRY-W1 historical page snapshots as evidence while ending PWS ownership of current public-page byte hashes. Current public presentation is governed by WPR/BFR/CPR/PDS; PWS continues to own only professional authorisation and authorised-loader behavior.",
+  "predecessors": [
+    "docs/pws/reconciliation/pws-entry-w1-wpr-d-services-reconciliation-v1.json",
+    "docs/pws/reconciliation/pws-entry-w1-bfr-h-services-reconciliation-v2.json",
+    "docs/pws/reconciliation/pws-entry-w1-mcd-8-professional-workspace-reconciliation-v1.json"
+  ],
+  "protectedHistoricalPages": [
+    "professional-workspace.html",
+    "professional-consent-sharing.html",
+    "professional-reports.html",
+    "professional-appointments.html",
+    "services.html",
+    "reality-entry.html",
+    "reality-navigation.html"
+  ],
+  "authorityBoundary": {
+    "pwsOwnsProfessionalAuthorisation": true,
+    "pwsOwnsAuthorisedDataLoader": true,
+    "pwsOwnsCurrentPublicPageBytes": false,
+    "pwsOwnsPresentationTokens": false,
+    "pwsOwnsPublicVocabulary": false,
+    "currentPageHashMismatchAloneIsPwsFailure": false,
+    "historicalHashesRemainEvidence": true,
+    "downstreamPresentationOwners": [
+      "WPR",
+      "BFR",
+      "CPR",
+      "PDS"
+    ]
+  },
+  "currentPwsInvariants": [
+    "identity -> eligibility -> assignment -> consent -> purpose -> scope",
+    "denied request performs no customer data read",
+    "audit remains customer-payload-free",
+    "payment/entitlement/provider output do not become permission",
+    "workspace remains read-only and cannot mutate runtime authority"
+  ],
+  "rules": {
+    "rewriteHistoricalPwsFreeze": false,
+    "rewriteHistoricalWprOrMcdReconciliation": false,
+    "requireNewPwsHashReconciliationForFuturePublicCopyOrStyleChange": false,
+    "publicSurfaceChangeMayExpandPwsAuthority": false,
+    "authorizationRuntimeChangeStillRequiresVersionedPwsSuccessor": true
+  }
+}

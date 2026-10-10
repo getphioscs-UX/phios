@@ -1,0 +1,713 @@
+{
+  "version": "BAZI_DIAGRAM_FIDELITY_R1_ACCEPTED_CANDIDATE",
+  "status": "MACHINE_CANDIDATE_HUMAN_PENDING",
+  "snapshotDigest": "2cc520d1e7f1eafb46e9f16e565b9f4793c756ad8ad7fabca44a130ede57c2c9",
+  "diagrams": [
+    {
+      "diagramId": "D01",
+      "visualGrammarId": "PILLAR_MATRIX",
+      "requiredFeatures": [
+        "hidden-stems",
+        "ten-god-labels"
+      ],
+      "nodes": [],
+      "edges": [],
+      "layers": [],
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "diagramId": "D02",
+      "visualGrammarId": "ELEMENT_BARS",
+      "requiredFeatures": [
+        "month-command"
+      ],
+      "nodes": [],
+      "edges": [],
+      "layers": [],
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "diagramId": "D03",
+      "visualGrammarId": "TEN_GOD_RING",
+      "requiredFeatures": [
+        "ring",
+        "visible-hidden",
+        "legend"
+      ],
+      "nodes": [],
+      "edges": [],
+      "layers": [],
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "diagramId": "D04",
+      "visualGrammarId": "SUPPORT_DIRECTION",
+      "requiredFeatures": [
+        "directed-edges",
+        "support",
+        "drain"
+      ],
+      "nodes": [
+        "month",
+        "day",
+        "peer",
+        "resource",
+        "support",
+        "output"
+      ],
+      "edges": [
+        {
+          "from": "month",
+          "to": "day",
+          "zh": "泄气",
+          "en": "Drain",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "peer",
+          "to": "day",
+          "zh": "同类支持",
+          "en": "Peer support",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "resource",
+          "to": "day",
+          "zh": "承载",
+          "en": "Carrying",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "support",
+          "to": "day",
+          "zh": "扶身",
+          "en": "Support",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "day",
+          "to": "output",
+          "zh": "表达",
+          "en": "Expression",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        }
+      ],
+      "layers": [],
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "diagramId": "D05",
+      "visualGrammarId": "NATAL_NETWORK",
+      "requiredFeatures": [
+        "relation-edges",
+        "legend"
+      ],
+      "nodes": [
+        "year",
+        "month",
+        "day",
+        "hour"
+      ],
+      "edges": [
+        {
+          "from": "year",
+          "to": "month",
+          "zh": "三合",
+          "en": "Combination",
+          "type": "三合",
+          "sourcePath": "natal.relationships",
+          "transformationEstablished": false
+        },
+        {
+          "from": "month",
+          "to": "day",
+          "zh": "三合",
+          "en": "Combination",
+          "type": "三合",
+          "sourcePath": "natal.relationships",
+          "transformationEstablished": false
+        },
+        {
+          "from": "year",
+          "to": "hour",
+          "zh": "冲",
+          "en": "Clash",
+          "type": "冲",
+          "sourcePath": "natal.relationships",
+          "transformationEstablished": false
+        }
+      ],
+      "layers": [],
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "diagramId": "D06",
+      "visualGrammarId": "CAPABILITY_CHAIN",
+      "requiredFeatures": [
+        "ordered-chain",
+        "wealth",
+        "resource"
+      ],
+      "nodes": [
+        "peer",
+        "output",
+        "wealth",
+        "resource"
+      ],
+      "edges": [
+        {
+          "from": "peer",
+          "to": "output",
+          "zh": "判断转为表达",
+          "en": "Judgment into expression",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "output",
+          "to": "wealth",
+          "zh": "输出转为价值",
+          "en": "Output into value",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "wealth",
+          "to": "resource",
+          "zh": "保留承载条件",
+          "en": "Retain carrying conditions",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        }
+      ],
+      "layers": [],
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "diagramId": "D07",
+      "visualGrammarId": "OPERATING_LOOP",
+      "requiredFeatures": [
+        "cycle"
+      ],
+      "nodes": [
+        "day",
+        "output",
+        "wealth",
+        "resource",
+        "peer"
+      ],
+      "edges": [
+        {
+          "from": "day",
+          "to": "output",
+          "zh": "功能循环",
+          "en": "Function cycle",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "output",
+          "to": "wealth",
+          "zh": "功能循环",
+          "en": "Function cycle",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "wealth",
+          "to": "resource",
+          "zh": "功能循环",
+          "en": "Function cycle",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "resource",
+          "to": "peer",
+          "zh": "功能循环",
+          "en": "Function cycle",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "peer",
+          "to": "day",
+          "zh": "功能循环",
+          "en": "Function cycle",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        }
+      ],
+      "layers": [],
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "diagramId": "D08",
+      "visualGrammarId": "CAREER_CHAIN",
+      "requiredFeatures": [
+        "ordered-chain",
+        "pressure",
+        "resource"
+      ],
+      "nodes": [
+        "output",
+        "wealth",
+        "adoption",
+        "resource",
+        "pressure"
+      ],
+      "edges": [
+        {
+          "from": "output",
+          "to": "wealth",
+          "zh": "运作路径",
+          "en": "Functional path",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "wealth",
+          "to": "adoption",
+          "zh": "运作路径",
+          "en": "Functional path",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "resource",
+          "to": "adoption",
+          "zh": "支持条件",
+          "en": "Support condition",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "pressure",
+          "to": "adoption",
+          "zh": "标准与责任",
+          "en": "Standards and responsibility",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        }
+      ],
+      "layers": [],
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "diagramId": "D09",
+      "visualGrammarId": "WEALTH_FUNNEL",
+      "requiredFeatures": [
+        "staged-flow",
+        "retention"
+      ],
+      "nodes": [
+        "output",
+        "wealth",
+        "cost",
+        "resource",
+        "retention"
+      ],
+      "edges": [
+        {
+          "from": "output",
+          "to": "wealth",
+          "zh": "运作路径",
+          "en": "Functional path",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "wealth",
+          "to": "cost",
+          "zh": "运作路径",
+          "en": "Functional path",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "cost",
+          "to": "resource",
+          "zh": "运作路径",
+          "en": "Functional path",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "resource",
+          "to": "retention",
+          "zh": "运作路径",
+          "en": "Functional path",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        }
+      ],
+      "layers": [],
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "diagramId": "D10",
+      "visualGrammarId": "DAY_BRANCH_INTERIOR",
+      "requiredFeatures": [
+        "enclosure",
+        "hidden-stems"
+      ],
+      "nodes": [
+        "day",
+        "hidden0",
+        "hidden1",
+        "hidden2"
+      ],
+      "edges": [
+        {
+          "from": "day",
+          "to": "hidden0",
+          "zh": "日支内藏",
+          "en": "Within day branch",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "day",
+          "to": "hidden1",
+          "zh": "日支内藏",
+          "en": "Within day branch",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "day",
+          "to": "hidden2",
+          "zh": "日支内藏",
+          "en": "Within day branch",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        }
+      ],
+      "layers": [
+        {
+          "id": "dayBranch",
+          "zh": "日支 辰",
+          "en": "Day branch 辰"
+        }
+      ],
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "diagramId": "D11",
+      "visualGrammarId": "FAMILY_NETWORK",
+      "requiredFeatures": [
+        "branches",
+        "shared-support"
+      ],
+      "nodes": [
+        "year",
+        "day",
+        "hour",
+        "resource",
+        "shared"
+      ],
+      "edges": [
+        {
+          "from": "year",
+          "to": "resource",
+          "zh": "支持脉络",
+          "en": "Support structure",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "day",
+          "to": "resource",
+          "zh": "支持脉络",
+          "en": "Support structure",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "hour",
+          "to": "resource",
+          "zh": "支持脉络",
+          "en": "Support structure",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "resource",
+          "to": "shared",
+          "zh": "实际分担",
+          "en": "Actual sharing",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        }
+      ],
+      "layers": [],
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "diagramId": "D12",
+      "visualGrammarId": "RECOVERY_PATH",
+      "requiredFeatures": [
+        "directed-edges",
+        "recovery"
+      ],
+      "nodes": [
+        "output",
+        "pressure",
+        "day",
+        "resource",
+        "recovery"
+      ],
+      "edges": [
+        {
+          "from": "output",
+          "to": "pressure",
+          "zh": "外部要求",
+          "en": "External demand",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "pressure",
+          "to": "day",
+          "zh": "承载压力",
+          "en": "Carrying pressure",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "day",
+          "to": "resource",
+          "zh": "支持介入",
+          "en": "Support",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "resource",
+          "to": "recovery",
+          "zh": "恢复路径",
+          "en": "Recovery path",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        }
+      ],
+      "layers": [],
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "diagramId": "D13",
+      "visualGrammarId": "FUNCTION_CYCLE",
+      "requiredFeatures": [
+        "cycle",
+        "five-functions"
+      ],
+      "nodes": [
+        "peer",
+        "output",
+        "wealth",
+        "pressure",
+        "resource"
+      ],
+      "edges": [
+        {
+          "from": "peer",
+          "to": "output",
+          "zh": "功能循环",
+          "en": "Function cycle",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "output",
+          "to": "wealth",
+          "zh": "功能循环",
+          "en": "Function cycle",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "wealth",
+          "to": "pressure",
+          "zh": "功能循环",
+          "en": "Function cycle",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "pressure",
+          "to": "resource",
+          "zh": "功能循环",
+          "en": "Function cycle",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "resource",
+          "to": "peer",
+          "zh": "功能循环",
+          "en": "Function cycle",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        }
+      ],
+      "layers": [],
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "diagramId": "D14",
+      "visualGrammarId": "TIMING_LAYERS",
+      "requiredFeatures": [
+        "natal",
+        "dayun",
+        "annual",
+        "relation-connectors"
+      ],
+      "nodes": [
+        "natal",
+        "dayun",
+        "annual"
+      ],
+      "edges": [
+        {
+          "from": "natal",
+          "to": "dayun",
+          "zh": "叠加读取",
+          "en": "Layered reading",
+          "type": "FUNCTIONAL",
+          "sourcePath": "timing"
+        },
+        {
+          "from": "dayun",
+          "to": "annual",
+          "zh": "当前激活",
+          "en": "Current activation",
+          "type": "FUNCTIONAL",
+          "sourcePath": "timing"
+        }
+      ],
+      "layers": [
+        {
+          "id": "natal",
+          "zh": "原局",
+          "en": "Natal",
+          "value": "庚申 · 甲子 · 庚辰 · 庚寅",
+          "sourcePath": "natal.pillars"
+        },
+        {
+          "id": "dayun",
+          "zh": "当前大运",
+          "en": "Current Da Yun",
+          "value": "己巳",
+          "sourcePath": "timing.daYun"
+        },
+        {
+          "id": "annual",
+          "zh": "年度层",
+          "en": "Annual layer",
+          "value": "丙寅",
+          "sourcePath": "timing.annual"
+        }
+      ],
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "diagramId": "D15",
+      "visualGrammarId": "INTEGRATED_RADIAL",
+      "requiredFeatures": [
+        "center",
+        "radial-connections"
+      ],
+      "nodes": [
+        "day",
+        "peer",
+        "output",
+        "wealth",
+        "pressure",
+        "resource",
+        "timing",
+        "relations"
+      ],
+      "edges": [
+        {
+          "from": "day",
+          "to": "peer",
+          "zh": "整体关联",
+          "en": "Integrated reading",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "day",
+          "to": "output",
+          "zh": "整体关联",
+          "en": "Integrated reading",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "day",
+          "to": "wealth",
+          "zh": "整体关联",
+          "en": "Integrated reading",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "day",
+          "to": "pressure",
+          "zh": "整体关联",
+          "en": "Integrated reading",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "day",
+          "to": "resource",
+          "zh": "整体关联",
+          "en": "Integrated reading",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "day",
+          "to": "timing",
+          "zh": "整体关联",
+          "en": "Integrated reading",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        },
+        {
+          "from": "day",
+          "to": "relations",
+          "zh": "整体关联",
+          "en": "Integrated reading",
+          "type": "FUNCTIONAL",
+          "sourcePath": "globalVerdict.primaryPattern"
+        }
+      ],
+      "layers": [],
+      "status": "PASS",
+      "errors": []
+    }
+  ],
+  "providerCalls": 0
+}

@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "bookCode": "BOOK-1",
+  "sourceSha256": "052c37192bd5fd78781491b119b1746a959f8cf762d3fa828936a51a9064a1da",
+  "status": "CANDIDATE_RECONCILIATION_REVIEW",
+  "humanAcceptanceComplete": false,
+  "mayReplaceCanonicalBindings": false,
+  "headingDisambiguations": [
+    {"historicalSectionCode":"CM-B1V2-FRONT-S000","candidatePage":1,"basis":"Front matter is a segmentation label, not a literal heading. Boundary requires segmentation review."},
+    {"historicalSectionCode":"CM-B1V2-P0-S001","candidatePage":2,"basis":"Page 2 contains the opening marker; page 9 repeats the phrase in closing prose."},
+    {"historicalSectionCode":"CM-B1V2-P2-S025","candidatePage":130,"basis":"Page 130 has the matching English-led heading; page 97 has an earlier distinct bilingual heading."},
+    {"historicalSectionCode":"CM-B1V2-P3-S015","candidatePage":186,"basis":"Page 218 is Figure 3A and repeats the label; the prose section starts at 186."},
+    {"historicalSectionCode":"CM-B1V2-P3-S026","candidatePage":190,"basis":"Revision text says Domain III Coexistence rather than historical Domain II; ordinal change must be reviewed, not normalized away."},
+    {"historicalSectionCode":"CM-B1V2-P3-S063","candidatePage":219,"basis":"Subtitle refers to initial state; keep distinct from the later current-state section."},
+    {"historicalSectionCode":"CM-B1V2-P3-S066","candidatePage":222,"basis":"Subtitle refers to current state; do not merge duplicate English headings."}
+  ],
+  "editorialFindings": [
+    {"id":"B1-REVISION-FIVE-VOLUME-LEGACY","pages":[9],"severity":"REQUIRES_CORRECTION","finding":"Revision still describes five continuous volumes in introductory prose, while later pages introduce the seven-volume system.","proposedAction":"Correct the source introduction to current seven-volume ownership before publication. Do not copy this paragraph into Explorer, Ask or public book descriptions."},
+    {"id":"B1-REVISION-DOMAIN-ORDINAL","pages":[190,218],"severity":"REQUIRES_REVIEW","finding":"Prose says Domain III Coexistence; Figure 3A uses Domain III Participation. Reconcile with current domain authority before source promotion.","proposedAction":"Retain as a source discrepancy; do not rename runtime enums or canonical nodes from this finding."}
+  ]
+}

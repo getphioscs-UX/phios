@@ -1,0 +1,100 @@
+{
+  "observedAt": "2026-09-23T01:50:30.775Z",
+  "origin": "https://qa.phios-github.pages.dev",
+  "deployment": "https://4f239f5a.phios-github.pages.dev",
+  "commit": "fd7f65b91ad44fec87bb23e3c5f27163b2fec235",
+  "previewOpenAIConfigured": true,
+  "anonymousShadowStatus": 401,
+  "realProviderAndSemanticVerifierReached": true,
+  "firstCandidateStatus": "SEMANTIC_REJECTED",
+  "privateR2ResultRetrieved": true,
+  "reopenCacheHit": true,
+  "regenerationOnReopen": false,
+  "authLogin": true,
+  "authenticatedRefresh": true,
+  "providerLogoutReturn": false,
+  "providerLogoutReason": "QA client still rejects exact https://qa.phios-github.pages.dev/account/ as an Allowed Logout URL",
+  "productionTouched": false,
+  "latestProbeDeployment": {
+    "commit": "4ca07b4e",
+    "url": "https://b72d8d8b.phios-github.pages.dev",
+    "observedAt": "2026-09-23T02:12:51.302Z",
+    "realProviderResults": [
+      {
+        "locale": "en",
+        "sectionKey": "S02_PERSONALITY",
+        "status": "FALLBACK",
+        "reason": "REPAIR_EXHAUSTED",
+        "evidenceHash": "b54339d2ee5f143666f4d21645ebd7db9fb425f284dc7d74518a503901278327",
+        "generatedAt": "2026-09-23T02:09:26.177Z",
+        "latencyMs": 125467,
+        "attempts": 2,
+        "privateR2Retrieved": true
+      },
+      {
+        "locale": "zh-Hans",
+        "sectionKey": "S02_PERSONALITY",
+        "status": "FALLBACK",
+        "reason": "SEMANTIC_REJECTED",
+        "evidenceHash": "672e4a26fd6b6cdc7c95013db811f7496349081e8080d44ddb2f58b555df8149",
+        "generatedAt": "2026-09-23T02:09:38.424Z",
+        "latencyMs": 74129,
+        "attempts": 1,
+        "privateR2Retrieved": true
+      }
+    ]
+  },
+  "currentAcceptance": {
+    "liveMatrixComplete": false,
+    "acceptedT3Sections": 0,
+    "bilingualParity": "BLOCKED_NO_ACCEPTED_PAIR",
+    "humanAccepted": false,
+    "productionActivated": false
+  },
+  "verification": {
+    "targeted": "PASS",
+    "pagesBuild": "PASS",
+    "browser": {
+      "status": "PASS",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "viewports": [
+        1440,
+        390
+      ],
+      "content": "T2_FALLBACK"
+    },
+    "pdf": {
+      "status": "PASS",
+      "pagesPerLocale": 36,
+      "all72PagesVisuallyInspected": true,
+      "content": "T2_FALLBACK"
+    },
+    "repositoryCheck": {
+      "status": "ALL_PHASES_PASS",
+      "precheck": "PASS",
+      "mainCheck": "PASS",
+      "postcheck": "PASS_AFTER_FIX_AND_RERUN",
+      "initialProcessExit": 1,
+      "initialProcessInterruption": "Stopped only the lifecycle fixture copier after it began copying ignored deployment scratch archives. No assertion failure. Added exact directory pruning and reran the complete postcheck phase successfully.",
+      "postcheckExit": 0,
+      "logs": {
+        "original": "9b25a85b21d8345ae52a69006665228fda13a3c0fec5dc399e2c202d29fec8ee",
+        "postcheck": "82c217538c6a91ddfa2751ce12a9d6b13a034ab922d6eda899d085648e8bfb77"
+      }
+    }
+  },
+  "finalQaDeployment": {
+    "commit": "49ed9d13",
+    "url": "https://12dcee8f.phios-github.pages.dev",
+    "origin": "https://qa.phios-github.pages.dev",
+    "authenticatedBilingualPairCheck": {
+      "httpStatus": 409,
+      "code": "BILINGUAL_ACCEPTED_PAIR_REQUIRED",
+      "providerCallMade": false
+    },
+    "productionTouched": false
+  }
+}

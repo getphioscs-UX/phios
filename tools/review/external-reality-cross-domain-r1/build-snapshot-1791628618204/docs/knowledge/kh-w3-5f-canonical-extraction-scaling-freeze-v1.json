@@ -1,0 +1,53 @@
+{
+  "freezeId": "KH-W3.5F-Frozen",
+  "version": "1.0.0",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "7dc7235"
+  },
+  "canonicalPolicy": {
+    "contract": "PHI-OS-PKR-Canonical-Extraction-Scaling-v1.2.0",
+    "path": "content/knowledge/registry/canonical-extraction-policy.json",
+    "sha256": "7622b079dd8bca187ffc723828586fef0bd3540fad482289262a8550843088f1"
+  },
+  "hierarchy": [
+    "Knowledge Domain",
+    "Knowledge Theme",
+    "Canonical Knowledge Node",
+    "Supporting Question",
+    "Search Alias"
+  ],
+  "unitOfRegistration": "independent_reusable_mechanism",
+  "partScalingBoundary": {
+    "softReviewAt": 18,
+    "softReviewAction": "flexible_granularity_review",
+    "mandatoryAuditAt": 24,
+    "mandatoryAuditAction": "duplication_relationship_boundary_audit",
+    "hardFreezeAt": 30,
+    "hardFreezeAction": "stop_registry_population"
+  },
+  "productionBoundary": {
+    "registryPresenceEqualsProductionRequirement": false,
+    "activeArticleMaximum": 8,
+    "scaleByMechanismNotPages": true
+  },
+  "frozenRules": [
+    "one_page_is_not_one_node",
+    "one_heading_is_not_one_node",
+    "one_question_is_not_one_node",
+    "reuse_existing_node_before_population",
+    "supporting_question_does_not_create_article",
+    "search_alias_does_not_create_content",
+    "hard_freeze_cannot_be_bypassed_by_raising_threshold"
+  ],
+  "impacts": {
+    "runtimeChanged": false,
+    "publicPageChanged": false,
+    "contentProductionStarted": false,
+    "newRegistryLayerAdded": false
+  },
+  "acceptanceCommand": "npm run check:kh-w3.5f",
+  "nextGate": "KH-W3.5G Book I Knowledge Blueprint"
+}

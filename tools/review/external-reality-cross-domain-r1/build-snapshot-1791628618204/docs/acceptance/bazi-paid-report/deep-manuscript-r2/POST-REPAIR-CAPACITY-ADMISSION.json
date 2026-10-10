@@ -1,0 +1,313 @@
+{
+  "version": "BDM-POST-REPAIR-CAPACITY-1",
+  "verifiedAt": "2026-10-06",
+  "modelManifestPath": "content/reports/bazi/deep-manuscript/gpt-5.6-sol-capacity-admission-v1.json",
+  "modelManifestSha256": "50aa668ef7627a053d5a8478386d728169eae6b48c16c1dd7e84af9d7f6b6ef3",
+  "oldBlocker": {
+    "source": "config/reports/bazi-deep-manuscript-r2/policy.json planningModelConstraints, spread by scripts/lib/bazi-deep-manuscript-review.mjs into budget.js",
+    "maxOutputTokens": 24000,
+    "contextTokens": 64000,
+    "constraintsVerified": false,
+    "otherLegacyLimits": "8000, VFR character/2, fixed section allowances and one-call assumptions were not the BDM blocker"
+  },
+  "model": {
+    "version": "GPT-5.6-SOL-CAPACITY-ADMISSION-V1",
+    "modelId": "gpt-5.6-sol",
+    "contextTokens": 1050000,
+    "maxOutputTokens": 128000,
+    "responsesApiSupported": true,
+    "structuredOutputSupported": true,
+    "reasoningSupported": true,
+    "constraintsVerified": true,
+    "pricingVerified": true,
+    "verifiedAt": "2026-10-06",
+    "reviewAfter": "2026-11-06",
+    "verificationSource": "CURRENT_OFFICIAL_OPENAI_DOCUMENTATION",
+    "sources": [
+      {
+        "url": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+        "retrievedAt": "2026-10-06",
+        "claims": [
+          "context/output limits",
+          "Responses",
+          "Structured Outputs",
+          "reasoning effort"
+        ]
+      },
+      {
+        "url": "https://developers.openai.com/api/docs/pricing",
+        "retrievedAt": "2026-10-06",
+        "claims": [
+          "short and long-context pricing"
+        ]
+      },
+      {
+        "url": "https://developers.openai.com/api/docs/guides/reasoning",
+        "retrievedAt": "2026-10-06",
+        "claims": [
+          "generated output includes reasoning and formatting",
+          "reasoning billed as output",
+          "incomplete max_output_tokens"
+        ]
+      },
+      {
+        "url": "https://developers.openai.com/api/docs/guides/token-counting",
+        "retrievedAt": "2026-10-06",
+        "claims": [
+          "local tokenizer cannot count all envelope overhead"
+        ]
+      },
+      {
+        "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+        "retrievedAt": "2026-10-06",
+        "claims": [
+          "simple JSON schema transport"
+        ]
+      }
+    ],
+    "pricing": {
+      "currency": "USD",
+      "perTokens": 1000000,
+      "longContextInputThresholdTokens": 272000,
+      "short": {
+        "input": 4,
+        "cachedInput": 0.4,
+        "output": 20
+      },
+      "long": {
+        "input": 8,
+        "cachedInput": 0.8,
+        "output": 30
+      },
+      "cacheWriteMultiplier": 1.25,
+      "scope": "Standard processing, no residency/FedRAMP uplift, no tools. Cached tokens assumed zero before telemetry.",
+      "promotionalPricingAvailableAtLeastThrough": "2026-11-21"
+    },
+    "outputAccounting": "Visible + reasoning + non-visible formatting share max_output_tokens; reasoning billed as output."
+  },
+  "batches": [
+    {
+      "batchId": "B01",
+      "sectionIds": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "reasoningEffort": "medium",
+      "model": "gpt-5.6-sol",
+      "authorityInputChars": 5813,
+      "estimatedInputTokens": 12510,
+      "plannedInputTokens": 12510,
+      "historicalVisibleTargetTokens": 26554,
+      "netUniqueVisibleTargetTokens": 26554,
+      "expectedVisibleTokens": 26554,
+      "expectedOutputTokens": 26554,
+      "reasoningReserveTokens": 25000,
+      "structuredOutputReserveTokens": 600,
+      "safetyFactor": 1.2,
+      "generatedBase": 52154,
+      "expectedGeneratedTokens": 52154,
+      "expectedGeneratedAssumption": "Visible target + full reasoning and structure reserve; not measured billed usage",
+      "plannedMaxOutputTokens": 62585,
+      "safetyHeadroom": 36031,
+      "modelMaxOutputTokens": 128000,
+      "contextWindowTokens": 1050000,
+      "projectedContextUse": 75095,
+      "capacityAdmission": "SAFE",
+      "truncationRisk": "LOW",
+      "allowed": true,
+      "reason": null,
+      "expectedCost": 1.09312,
+      "estimatedCost": 1.09312,
+      "configuredWorstCaseCost": 1.30174,
+      "configuredWorstCaseOutputCost": 1.2517,
+      "costWarning": false,
+      "costState": "WITHIN_CONFIGURED_TARGET_OR_UNSET",
+      "pricingState": "SHORT_CONTEXT_PRICING",
+      "authoritySizeAuditRequired": false,
+      "estimationMethod": "UTF8_BYTE_UPPER_BOUND_PLUS_ENVELOPE_256",
+      "estimator": "Conservative UTF-8 byte upper bound including actual prompt, schema and payload; 256 boundary tokens",
+      "TOKEN_ESTIMATE_CONFIDENCE": "CONSERVATIVE",
+      "constraintsVerified": true,
+      "pricingVerified": true
+    },
+    {
+      "batchId": "B02",
+      "sectionIds": [
+        "S05",
+        "S06",
+        "S07"
+      ],
+      "reasoningEffort": "medium",
+      "model": "gpt-5.6-sol",
+      "authorityInputChars": 5713,
+      "estimatedInputTokens": 12762,
+      "plannedInputTokens": 12762,
+      "historicalVisibleTargetTokens": 24797,
+      "netUniqueVisibleTargetTokens": 24764,
+      "expectedVisibleTokens": 24764,
+      "expectedOutputTokens": 24764,
+      "reasoningReserveTokens": 25000,
+      "structuredOutputReserveTokens": 600,
+      "safetyFactor": 1.2,
+      "generatedBase": 50364,
+      "expectedGeneratedTokens": 50364,
+      "expectedGeneratedAssumption": "Visible target + full reasoning and structure reserve; not measured billed usage",
+      "plannedMaxOutputTokens": 60437,
+      "safetyHeadroom": 35673,
+      "modelMaxOutputTokens": 128000,
+      "contextWindowTokens": 1050000,
+      "projectedContextUse": 73199,
+      "capacityAdmission": "SAFE",
+      "truncationRisk": "LOW",
+      "allowed": true,
+      "reason": null,
+      "expectedCost": 1.058328,
+      "estimatedCost": 1.058328,
+      "configuredWorstCaseCost": 1.259788,
+      "configuredWorstCaseOutputCost": 1.20874,
+      "costWarning": false,
+      "costState": "WITHIN_CONFIGURED_TARGET_OR_UNSET",
+      "pricingState": "SHORT_CONTEXT_PRICING",
+      "authoritySizeAuditRequired": false,
+      "estimationMethod": "UTF8_BYTE_UPPER_BOUND_PLUS_ENVELOPE_256",
+      "estimator": "Conservative UTF-8 byte upper bound including actual prompt, schema and payload; 256 boundary tokens",
+      "TOKEN_ESTIMATE_CONFIDENCE": "CONSERVATIVE",
+      "constraintsVerified": true,
+      "pricingVerified": true
+    },
+    {
+      "batchId": "B03",
+      "sectionIds": [
+        "S08",
+        "S09",
+        "S10"
+      ],
+      "reasoningEffort": "medium",
+      "model": "gpt-5.6-sol",
+      "authorityInputChars": 6458,
+      "estimatedInputTokens": 13835,
+      "plannedInputTokens": 13835,
+      "historicalVisibleTargetTokens": 22524,
+      "netUniqueVisibleTargetTokens": 22524,
+      "expectedVisibleTokens": 22524,
+      "expectedOutputTokens": 22524,
+      "reasoningReserveTokens": 30000,
+      "structuredOutputReserveTokens": 600,
+      "safetyFactor": 1.25,
+      "generatedBase": 53124,
+      "expectedGeneratedTokens": 53124,
+      "expectedGeneratedAssumption": "Visible target + full reasoning and structure reserve; not measured billed usage",
+      "plannedMaxOutputTokens": 66405,
+      "safetyHeadroom": 43881,
+      "modelMaxOutputTokens": 128000,
+      "contextWindowTokens": 1050000,
+      "projectedContextUse": 80240,
+      "capacityAdmission": "SAFE_WITH_ELEVATED_HEADROOM",
+      "truncationRisk": "LOW",
+      "allowed": true,
+      "reason": null,
+      "expectedCost": 1.11782,
+      "estimatedCost": 1.11782,
+      "configuredWorstCaseCost": 1.38344,
+      "configuredWorstCaseOutputCost": 1.3281,
+      "costWarning": false,
+      "costState": "WITHIN_CONFIGURED_TARGET_OR_UNSET",
+      "pricingState": "SHORT_CONTEXT_PRICING",
+      "authoritySizeAuditRequired": false,
+      "estimationMethod": "UTF8_BYTE_UPPER_BOUND_PLUS_ENVELOPE_256",
+      "estimator": "Conservative UTF-8 byte upper bound including actual prompt, schema and payload; 256 boundary tokens",
+      "TOKEN_ESTIMATE_CONFIDENCE": "CONSERVATIVE",
+      "constraintsVerified": true,
+      "pricingVerified": true
+    }
+  ],
+  "THREE_CALL_CAPACITY_ADMISSION": "PASS",
+  "totalExpectedNormalThreeCallCost": 3.2692680000000003,
+  "totalConfiguredWorstCaseCost": 3.9449680000000003,
+  "historyReceiptPath": "docs/acceptance/bazi-paid-report/deep-manuscript-r2/LOCAL-DEPTH-RECEIPT.json",
+  "preserved": [
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-contract.js",
+      "sha256": "f7a3cb4f7b0cdd2593641b1fa04ed27b615fef404adf53be66b744139eb47fcc",
+      "priorSha256": "f7a3cb4f7b0cdd2593641b1fa04ed27b615fef404adf53be66b744139eb47fcc",
+      "status": "UNCHANGED"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-checkpoint.js",
+      "sha256": "f1d38134f1669cfcbea96f160d55e681ae4310ac8f76ccb11366eba16b3eacf9",
+      "priorSha256": "f1d38134f1669cfcbea96f160d55e681ae4310ac8f76ccb11366eba16b3eacf9",
+      "status": "UNCHANGED"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-recovery.js",
+      "sha256": "555ef2ad876167fd7faa3fbe8ccef1cbdf35de979751e22cd11cb60a3595bbf8",
+      "priorSha256": "555ef2ad876167fd7faa3fbe8ccef1cbdf35de979751e22cd11cb60a3595bbf8",
+      "status": "UNCHANGED"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-cache.js",
+      "sha256": "5c4f9da8e93185bfda04592ec43f4125933b530c684d4188392ad29a118d40ee",
+      "priorSha256": "5c4f9da8e93185bfda04592ec43f4125933b530c684d4188392ad29a118d40ee",
+      "status": "UNCHANGED"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-publication.js",
+      "sha256": "961818d7f9a632c87e87fc12418c7bfe5dc4859e48643239d2d81c05a4c3381b",
+      "priorSha256": "961818d7f9a632c87e87fc12418c7bfe5dc4859e48643239d2d81c05a4c3381b",
+      "status": "UNCHANGED"
+    },
+    {
+      "path": "assets/customer-ui/js/personal-products/bazi-deep-manuscript-pages.js",
+      "sha256": "b10355974cbc3e5ffaf3217a56fe3872a796b5bad301cef1ea9fe69b6e0588b1",
+      "priorSha256": "b10355974cbc3e5ffaf3217a56fe3872a796b5bad301cef1ea9fe69b6e0588b1",
+      "status": "UNCHANGED"
+    },
+    {
+      "path": "assets/customer-ui/surfaces/bazi-deep-manuscript-r2.css",
+      "sha256": "f4278f7595201d6bd2f44cc02d9d417a46be9f6ab28a2d184047d5640e70e32f",
+      "priorSha256": "f4278f7595201d6bd2f44cc02d9d417a46be9f6ab28a2d184047d5640e70e32f",
+      "status": "UNCHANGED"
+    },
+    {
+      "path": "docs/acceptance/bazi-paid-report/deep-manuscript-r2/PAGE-PLAN.json",
+      "sha256": "3d0821c5852f3fd09e52387d913f215f3ed9c442c5001e8315099c0e03fc9066",
+      "priorSha256": "3d0821c5852f3fd09e52387d913f215f3ed9c442c5001e8315099c0e03fc9066",
+      "status": "UNCHANGED"
+    },
+    {
+      "path": "docs/acceptance/bazi-paid-report/deep-manuscript-r2/DIAGRAM-REGISTRY.json",
+      "sha256": "dc10763e534637ad6795114caa2b6db12cc257b5a1d8b19d72a06860c0934d23",
+      "priorSha256": "dc10763e534637ad6795114caa2b6db12cc257b5a1d8b19d72a06860c0934d23",
+      "status": "UNCHANGED"
+    }
+  ],
+  "semanticVerifier": "NONE",
+  "semanticReviewCalls": 0,
+  "providerCalls": 0,
+  "providerCostUsd": 0,
+  "REPORT_PROVIDER_LIVE_ALLOWED": false,
+  "productionActivated": false,
+  "policy": {
+    "normalCalls": 3,
+    "maxStandardRecoveryCalls": 2,
+    "deliveryRescue": true,
+    "paidDeliveryGuarantee": true,
+    "productionHumanReview": false,
+    "semanticVerifierCalls": 0,
+    "semanticReviewCalls": 0,
+    "editorialRewriteCalls": 0,
+    "transportRetryLimit": 2,
+    "backoffMs": [
+      2000,
+      10000,
+      30000
+    ],
+    "normalCostTarget": null,
+    "standardRecoveryWarning": null,
+    "highCostDeliveryThreshold": null
+  },
+  "currentDecision": "NO_NEW_PROVIDER_EXPERIMENT_AUTHORIZED",
+  "historicalCapacityReceiptPreserved": true,
+  "preservedScope": "Historical capacity-stage preservation receipt; current publication changes are intentional and separately reviewed"
+}

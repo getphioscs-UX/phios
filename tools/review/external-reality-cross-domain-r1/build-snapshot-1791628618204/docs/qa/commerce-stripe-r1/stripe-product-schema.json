@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "COM-STRIPE-R1 product",
+  "type": "object",
+  "required": [
+    "productId",
+    "category",
+    "billingType",
+    "currency",
+    "amountMinor",
+    "qaProductId",
+    "qaPriceId",
+    "liveProductId",
+    "livePriceId",
+    "entitlementPolicy",
+    "fulfillmentType",
+    "active"
+  ],
+  "properties": {
+    "productId": {
+      "type": "string",
+      "pattern": "^COM-"
+    },
+    "category": {
+      "enum": [
+        "REPORT",
+        "BOOK",
+        "MEMBERSHIP",
+        "HUMAN_SERVICE"
+      ]
+    },
+    "billingType": {
+      "enum": [
+        "ONE_TIME",
+        "RECURRING"
+      ]
+    },
+    "currency": {
+      "const": "MYR"
+    },
+    "amountMinor": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "qaProductId": {
+      "type": "string",
+      "pattern": "^prod_"
+    },
+    "qaPriceId": {
+      "type": "string",
+      "pattern": "^price_"
+    },
+    "liveProductId": {
+      "type": "null"
+    },
+    "livePriceId": {
+      "type": "null"
+    },
+    "entitlementPolicy": {
+      "type": "string"
+    },
+    "fulfillmentType": {
+      "enum": [
+        "DIGITAL_ACCESS",
+        "REPORT_ACCESS",
+        "SUBSCRIPTION_ACCESS",
+        "HUMAN_SERVICE"
+      ]
+    },
+    "active": {
+      "type": "boolean"
+    }
+  }
+}

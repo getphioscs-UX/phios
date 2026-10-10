@@ -1,0 +1,122 @@
+{
+  "scope": "LOCAL_CONTROLLED_ONLY",
+  "fixtureRef": "docs/reports/ziwei/production-admission/controlled-subject.json",
+  "commerceEvidence": "Seeded isolated SQLite rows; real ownedReportPresentation query. No Stripe payment/webhook E2E claimed.",
+  "privateStorage": "In-memory R2-compatible fixture; real runtime_artifacts SQL owner",
+  "ZIWEI_LOCAL_CALCULATION": "PASS",
+  "ZIWEI_LOCAL_SUBJECT_BINDING": "PASS",
+  "ZIWEI_LOCAL_ENTITLEMENT_NEGATIVE_TEST": "PASS",
+  "ZIWEI_LOCAL_IMMUTABLE_SNAPSHOT": "PASS",
+  "ZIWEI_LOCAL_RELEASED_MATERIAL": "PASS",
+  "ZIWEI_LOCAL_ACCOUNT_DELIVERY": "PASS",
+  "ZIWEI_QA_ACCOUNT_DELIVERY": "NOT_PROVEN",
+  "ZIWEI_PRODUCTION_DELIVERY": "NOT_RUN",
+  "results": [
+    {
+      "locale": "en",
+      "pageCount": 33,
+      "reportId": "zwr-18026e6c534812347deb06bc2fd8ac8669c9b7f8810348a1fa1b2f398fa171da",
+      "snapshotId": "RDS-FF2CBCB32803F44EB2FFC7458A5186ADE7E67D9EA064A2F59758416CDAF84305",
+      "refresh": "BYTE_EQUIVALENT_JSON_NO_GENERATION",
+      "accountLibrary": 1,
+      "sourceCalculationBuiltOnce": true,
+      "render": "tools/review/ZIWEI-CONTROLLED-DELIVERY-en.html"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageCount": 33,
+      "reportId": "zwr-6fafb62f7ff474a3eb086f1c0aa12f495ef77d07b53904ca094d24325a626d39",
+      "snapshotId": "RDS-84223799CB35B91A96EE2764F03EB7AB1636255871600431FE5CD18FE565EAD1",
+      "refresh": "BYTE_EQUIVALENT_JSON_NO_GENERATION",
+      "accountLibrary": 2,
+      "sourceCalculationBuiltOnce": true,
+      "render": "tools/review/ZIWEI-CONTROLLED-DELIVERY-zh-Hans.html"
+    }
+  ],
+  "negatives": [
+    {
+      "name": "anonymous",
+      "result": "DENIED"
+    },
+    {
+      "name": "client entitlement is not authority",
+      "result": "DENIED"
+    },
+    {
+      "name": "production stays closed",
+      "result": "DENIED"
+    },
+    {
+      "name": "canonical person owner absent",
+      "result": "DENIED"
+    },
+    {
+      "name": "wrong person",
+      "result": "DENIED"
+    },
+    {
+      "name": "mismatched birth input",
+      "result": "DENIED"
+    },
+    {
+      "name": "unpurchased locale",
+      "result": "DENIED"
+    },
+    {
+      "name": "wrong cover binding en",
+      "result": "DENIED"
+    },
+    {
+      "name": "release without render verification en",
+      "result": "DENIED"
+    },
+    {
+      "name": "cross-account read en",
+      "result": "DENIED"
+    },
+    {
+      "name": "wrong report person en",
+      "result": "DENIED"
+    },
+    {
+      "name": "revoked report consent en",
+      "result": "DENIED"
+    },
+    {
+      "name": "revoked entitlement on reopen en",
+      "result": "DENIED"
+    },
+    {
+      "name": "mutated released material en",
+      "result": "DENIED"
+    },
+    {
+      "name": "wrong cover binding zh-Hans",
+      "result": "DENIED"
+    },
+    {
+      "name": "release without render verification zh-Hans",
+      "result": "DENIED"
+    },
+    {
+      "name": "cross-account read zh-Hans",
+      "result": "DENIED"
+    },
+    {
+      "name": "wrong report person zh-Hans",
+      "result": "DENIED"
+    },
+    {
+      "name": "revoked report consent zh-Hans",
+      "result": "DENIED"
+    },
+    {
+      "name": "revoked entitlement on reopen zh-Hans",
+      "result": "DENIED"
+    },
+    {
+      "name": "mutated released material zh-Hans",
+      "result": "DENIED"
+    }
+  ]
+}

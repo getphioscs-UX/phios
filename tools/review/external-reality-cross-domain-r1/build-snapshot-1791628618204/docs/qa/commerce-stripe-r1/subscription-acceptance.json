@@ -1,0 +1,16 @@
+{
+  "work": "COM-STRIPE-R1",
+  "implementation": "IMPLEMENTED",
+  "machine": "MACHINE_TESTED",
+  "mockAcceptance": "MOCK_ACCEPTED",
+  "tests": [
+    {
+      "name": "subscription created is not entitlement; invoice activates; cancellation retains only paid interval; terminal status denies",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    }
+  ],
+  "realStripeE2E": "NOT_RUN — QA credential / deployment dependency",
+  "humanReview": "PENDING",
+  "live": "NOT_ACTIVATED"
+}

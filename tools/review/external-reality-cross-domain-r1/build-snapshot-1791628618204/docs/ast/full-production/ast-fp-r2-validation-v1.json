@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R2-VALIDATION-v1.0.0",
+  "sourceMainCommit": "31f0cb5dcf47c1e9419ef67ac89968d06834b35d",
+  "status": "R2_SCOPED_PASS_FULL_AST_AGGREGATE_ENV_DEPENDENCY_BLOCKED",
+  "commands": [
+    {
+      "command": "node scripts/check-ast-fp-current.mjs",
+      "exitCode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "npm run check:ast-fp-r2",
+      "exitCode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "node scripts/generate-ast-fp-review.mjs --check",
+      "exitCode": 1,
+      "status": "ENVIRONMENT_DEPENDENCY_BLOCKED",
+      "error": "ERR_MODULE_NOT_FOUND: astronomy-engine",
+      "codeChangeFailure": false
+    },
+    {
+      "command": "npm run check:ast-full-production",
+      "exitCode": 1,
+      "status": "ENVIRONMENT_DEPENDENCY_BLOCKED",
+      "completedThrough": "check-ast-fp-current.mjs",
+      "error": "ERR_MODULE_NOT_FOUND: node_modules/ajv/dist/2020.js",
+      "codeChangeFailure": false
+    },
+    {
+      "command": "npm ci --ignore-scripts --no-audit --no-fund --fetch-retries=1 --fetch-timeout=20000",
+      "exitCode": null,
+      "status": "EXECUTION_TIMEOUT",
+      "codeChangeFailure": false
+    }
+  ],
+  "humanAdmission": {
+    "reviewCases": 16,
+    "independentBirthInputs": 8,
+    "accepted": 16,
+    "rejected": 0,
+    "needsRevision": 0,
+    "pending": 0,
+    "exactDigestBound": true,
+    "batchDecisionDigest": "74a4f9c1d0f8cca1efcbc7f5ee9a5f2baeedcbdfa0cba5eb8b79d35d3c081a"
+  },
+  "currentBaseline": {
+    "currentReconciledMainCommit": "31f0cb5dcf47c1e9419ef67ac89968d06834b35d",
+    "protectedFileCount": 64,
+    "packageValidationMode": "AST_SCRIPT_PROJECTION",
+    "sourceMainPackageLfNormalizedSha256": "7aac00a9cb6564976c3e28b6d14d4e37c03f6fd61c9ad8b5beba4d4d53bbbc94",
+    "postR2PackageLfNormalizedSha256": "00d96b8b85b990d024b8c63973be1969aff0500c5b4185e4bdf735852bf1f83b",
+    "astScriptProjectionSha256": "20d11a01a98772fb771757e10b80e27a63d55804b03ed6f96729dc896e1ccfbf"
+  },
+  "preservedOpenGaps": [
+    "AST_FULL_PRODUCTION_GAP_PLANET_SIGN",
+    "AST_FULL_PRODUCTION_GAP_TENSION_SELECTION",
+    "SOURCE_USE_BASIS",
+    "WHOLE_CHART_SYNTHESIS_ACCEPTANCE",
+    "INDEPENDENT_EPHEMERIS_ACCURACY_CERTIFICATION",
+    "FINAL_CUSTOMER_REPORT_HUMAN_ACCEPTANCE",
+    "CUSTOMER_CUTOVER",
+    "DEPLOYMENT_AND_LIVE_SMOKE"
+  ],
+  "next": "AST-FP-R3"
+}

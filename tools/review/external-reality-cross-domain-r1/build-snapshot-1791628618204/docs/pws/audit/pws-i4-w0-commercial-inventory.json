@@ -1,0 +1,44 @@
+{
+  "auditId": "PWS-I4-W0-Commercial-Baseline-Audit",
+  "version": "1.0.0",
+  "status": "passed",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "fd402e6b0565430078707a588cc5ae63e675f483",
+    "productionUrl": "https://phios-github.pages.dev"
+  },
+  "counts": {
+    "canonicalProductTypes": 6,
+    "canonicalProducts": 2,
+    "canonicalApprovedOffers": 2,
+    "plannedCatalogOffers": 18,
+    "operationalCommerceFamilies": 1,
+    "operationalD1Tables": 10,
+    "paymentProvidersIntegrated": 1,
+    "genericOperationalOrderStores": 0,
+    "genericOperationalPaymentStores": 0,
+    "genericCreditStores": 0,
+    "genericSettlementStores": 0
+  },
+  "items": [
+    {"object":"Product","state":"canonical_definition_active","authority":"runtime/product","implementation":"functions/pws/registry/product-offer-registry.js","finding":"Two approved definitions; Book JSON and adapter are non-authoritative operational projections."},
+    {"object":"Offer","state":"canonical_definition_active","authority":"runtime/commercial","implementation":"functions/pws/registry/product-offer-registry.js","finding":"Two priced approved offers. The 18 W1A entries are planning catalog entries, not active offers."},
+    {"object":"Price","state":"embedded_definition_only","authority":"runtime/commercial","implementation":"Product definitions embed amount_minor and currency","finding":"No standalone versioned Price object or operational price history."},
+    {"object":"Order","state":"book_specific_partial","authority":"runtime/commercial","implementation":"commerce_checkout_attempts plus commerce_purchases","finding":"No generic canonical Order instance or order state service."},
+    {"object":"Payment","state":"book_specific_partial","authority":"runtime/commercial","implementation":"commerce_purchases and Stripe webhook facts","finding":"No generic Payment instance, attempt ledger or normalized provider event."},
+    {"object":"Payment Provider","state":"single_provider_coupled","authority":"external_provider_bounded_by_runtime_commercial","implementation":"functions/commerce/stripe-client.js","finding":"Stripe is the only integration and provider names are persisted in columns and errors."},
+    {"object":"Receipt","state":"book_specific_active","authority":"book_commerce_projection","implementation":"commerce_receipts","finding":"Immutable receipt JSON exists for Book purchases; no generic receipt authority."},
+    {"object":"Refund","state":"book_specific_webhook_active","authority":"verified_stripe_fact_then_book_commerce","implementation":"charge.refunded handling in functions/commerce/book-fulfillment.js and book-commerce-store.js","finding":"Full refunds revoke Book entitlement/tokens; partial amount is aggregated. No refund object or ledger."},
+    {"object":"Credit","state":"not_implemented","authority":"runtime/commercial_future","implementation":null,"finding":"Membership service credits appear only in planning language."},
+    {"object":"Entitlement","state":"book_specific_active_generic_contract_only","authority":"runtime/entitlement","implementation":"digital_entitlements for Book; canonical contract has no generic store","finding":"Book access is operational; membership entitlement is preview-only."},
+    {"object":"Activation","state":"book_active_journey_contract_only","authority":"product_specific_activation_policy","implementation":"Book webhook activation; nine-gate Journey boundary documents","finding":"Payment alone cannot activate a formal Journey or professional responsibility."},
+    {"object":"Settlement","state":"not_implemented","authority":"runtime/commercial_future","implementation":null,"finding":"No financial provider settlement record, reconciliation or payout ledger."},
+    {"object":"Checkout","state":"book_specific_active","authority":"book_commerce_api","implementation":"functions/api/book-one-checkout.js","finding":"Server-controlled Book price, policy acceptance and idempotency are implemented."},
+    {"object":"Webhook","state":"stripe_specific_active","authority":"book_commerce_api","implementation":"functions/api/stripe-webhook.js","finding":"Signature, timestamp, replay hash and event idempotency are enforced."},
+    {"object":"Legacy ServiceProduct","state":"mapped_read_compatibility","authority":"none_for_writes","implementation":"PWS-I2 migration reconciliation","finding":"Maps to Product plus Service; new writes prohibited."},
+    {"object":"Legacy ServiceEntitlement","state":"mapped_read_compatibility","authority":"none_for_writes","implementation":"PWS-I2 migration reconciliation","finding":"Maps to Entitlement plus Service; new writes prohibited."},
+    {"object":"Legacy Payment Configuration","state":"reference_or_preview_only","authority":"none_for_verified_payment_writes","implementation":"professional pricing, appointment payment and M4C membership registries","finding":"Professional checkout is unpublished/disabled; membership checkout and provider connection are false."}
+  ],
+  "boundaries": {"registryPresenceIsProductionRequirement":false,"paymentCreatesJourney":false,"paymentCreatesAssignment":false,"clientEntitlementIsAuthoritative":false}
+}

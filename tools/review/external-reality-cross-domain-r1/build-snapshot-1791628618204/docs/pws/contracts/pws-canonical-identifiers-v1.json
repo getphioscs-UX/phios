@@ -1,0 +1,109 @@
+{
+  "contractId": "phi-os.pws.canonical-identifiers.v1",
+  "schemaVersion": "1.0.0",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "25e7e22c8a067e7835d84ab43ec027a5ffb12faf"
+  },
+  "glossaryContractId": "phi-os.pws.canonical-glossary.v1",
+  "format": {
+    "separator": "_",
+    "randomComponent": "32 lowercase hexadecimal characters from 128 cryptographically secure random bits",
+    "canonicalPatternTemplate": "^{prefix}_[0-9a-f]{32}$",
+    "canonicalDomainFieldStyle": "snake_case",
+    "javascriptProjectionFieldStyle": "camelCase",
+    "caseSensitive": true
+  },
+  "rules": {
+    "immutableAfterCreation": true,
+    "globallyUniqueWithinType": true,
+    "semanticDataAllowed": false,
+    "personalDataAllowed": false,
+    "sequentialDatabaseIdsAllowed": false,
+    "externalIdsAsCanonicalIdsAllowed": false,
+    "aiGeneratedFormalIdsAllowed": false,
+    "browserGeneratedFormalPwsIdsAllowed": false,
+    "legacyIdReadsAllowed": true,
+    "legacyIdWritesAllowed": false,
+    "bulkLegacyRewriteAllowed": false,
+    "identifierReuseAllowed": false
+  },
+  "identifiers": [
+    {"term":"Professional","field":"professional_id","projectionField":"professionalId","prefix":"pro"},
+    {"term":"Capability","field":"capability_id","projectionField":"capabilityId","prefix":"cap"},
+    {"term":"Credential","field":"credential_id","projectionField":"credentialId","prefix":"cred"},
+    {"term":"Certification","field":"certification_id","projectionField":"certificationId","prefix":"cert"},
+    {"term":"Method","field":"method_id","projectionField":"methodId","prefix":"method"},
+    {"term":"Service","field":"service_id","projectionField":"serviceId","prefix":"svc"},
+    {"term":"Product","field":"product_id","projectionField":"productId","prefix":"prod"},
+    {"term":"Offer","field":"offer_id","projectionField":"offerId","prefix":"offer"},
+    {"term":"Price","field":"price_id","projectionField":"priceId","prefix":"price"},
+    {"term":"Order","field":"order_id","projectionField":"orderId","prefix":"order"},
+    {"term":"Payment","field":"payment_id","projectionField":"paymentId","prefix":"pay"},
+    {"term":"Entitlement","field":"entitlement_id","projectionField":"entitlementId","prefix":"ent"},
+    {"term":"Consent","field":"consent_id","projectionField":"consentId","prefix":"consent"},
+    {"term":"Assignment","field":"assignment_id","projectionField":"assignmentId","prefix":"assign"},
+    {"term":"Workspace","field":"workspace_id","projectionField":"workspaceId","prefix":"ws"},
+    {"term":"Evidence","field":"evidence_id","projectionField":"evidenceId","prefix":"ev"},
+    {"term":"Record","field":"record_id","projectionField":"recordId","prefix":"rec"},
+    {"term":"Candidate","field":"candidate_id","projectionField":"candidateId","prefix":"cand"},
+    {"term":"Journey Report","field":"journey_report_id","projectionField":"journeyReportId","prefix":"jrpt"},
+    {"term":"Professional Response","field":"professional_response_id","projectionField":"professionalResponseId","prefix":"presp"},
+    {"term":"Specialist Report","field":"specialist_report_id","projectionField":"specialistReportId","prefix":"srpt"},
+    {"term":"Deliverable","field":"deliverable_id","projectionField":"deliverableId","prefix":"dlv"},
+    {"term":"Signature","field":"signature_id","projectionField":"signatureId","prefix":"sig"},
+    {"term":"Follow-up","field":"follow_up_id","projectionField":"followUpId","prefix":"fup"},
+    {"term":"Complaint","field":"complaint_id","projectionField":"complaintId","prefix":"cmp"},
+    {"term":"Incident","field":"incident_id","projectionField":"incidentId","prefix":"inc"},
+    {"term":"Policy","field":"policy_id","projectionField":"policyId","prefix":"pol"},
+    {"term":"Organization","field":"organization_id","projectionField":"organizationId","prefix":"org"},
+    {"term":"Restriction","field":"restriction_id","projectionField":"restrictionId","prefix":"rst"},
+    {"term":"Governance","field":"governance_id","projectionField":"governanceId","prefix":"gov"},
+    {"term":"Knowledge Resource","field":"knowledge_resource_id","projectionField":"knowledgeResourceId","prefix":"kres"},
+    {"term":"Question Route","field":"question_route_id","projectionField":"questionRouteId","prefix":"qroute"},
+    {"term":"Observation","field":"observation_id","projectionField":"observationId","prefix":"obs"},
+    {"term":"Professional Readiness","field":"professional_readiness_id","projectionField":"professionalReadinessId","prefix":"prdy"},
+    {"term":"Provider Usage","field":"provider_usage_id","projectionField":"providerUsageId","prefix":"pusage"}
+  ],
+  "operationIdentifiers": [
+    {"name":"Request","field":"request_id","prefix":"req"},
+    {"name":"Decision","field":"decision_id","prefix":"decision"},
+    {"name":"Event","field":"event_id","prefix":"event"},
+    {"name":"Audit","field":"audit_id","prefix":"audit"},
+    {"name":"Revision","field":"revision_id","prefix":"revision"}
+  ],
+  "legacyFieldAliases": [
+    {"legacyField":"case_id","resolution":"context_required","canonicalFields":["candidate_id","assignment_id","workspace_id"]},
+    {"legacyField":"task_id","resolution":"context_required","canonicalFields":["assignment_id","follow_up_id"]},
+    {"legacyField":"job_id","resolution":"context_required","canonicalFields":["assignment_id","provider_usage_id"]},
+    {"legacyField":"project_id","resolution":"mapped","canonicalFields":["workspace_id"]},
+    {"legacyField":"ticket_id","resolution":"context_required","canonicalFields":["complaint_id","incident_id","follow_up_id"]},
+    {"legacyField":"service_product_id","resolution":"mapped","canonicalFields":["product_id"],"requiredReferenceFields":["service_id"]},
+    {"legacyField":"service_entitlement_id","resolution":"mapped","canonicalFields":["entitlement_id"],"requiredReferenceFields":["service_id"]},
+    {"legacyField":"professional_candidate_report_id","resolution":"mapped","canonicalFields":["candidate_id"]},
+    {"legacyField":"jpr_id","resolution":"mapped","canonicalFields":["journey_report_id"]},
+    {"legacyField":"public_journey_id","resolution":"external_canonical_reference","canonicalFields":["journey_id"],"owner":"runtime/journey"},
+    {"legacyField":"reality_demo_id","resolution":"presentation_only","canonicalFields":[]}
+  ],
+  "legacyCompatibility": [
+    {"scope":"Customer Runtime browser identifiers","paths":["assets/js/core/ids.js","assets/js/shared.js"],"handling":"preserve_read_and_write_until_owning_runtime_migration","newPwsDependencyAllowed":false},
+    {"scope":"Runtime D1 identifiers","paths":["db/migrations/0001_platform_foundation.sql","db/migrations/0002_initial_runtime.sql"],"handling":"immutable_existing_schema","newPwsDependencyAllowed":false},
+    {"scope":"Financial D1 identifiers","paths":["db/migrations/0003_financial_professional_infrastructure.sql"],"handling":"immutable_existing_schema","newPwsDependencyAllowed":false},
+    {"scope":"Book Commerce identifiers","paths":["db/migrations/0004_book_commerce.sql"],"handling":"preserve_gateway_and_commerce_ids","newPwsDependencyAllowed":false},
+    {"scope":"W1 Professional access identifiers","paths":["functions/professional/access"],"handling":"accept_legacy_values_at_boundary_without_reissuing","newPwsDependencyAllowed":true}
+  ],
+  "externalReferenceRule": {
+    "containerField": "external_ids",
+    "requiredFields": ["system","value"],
+    "canonicalPrimaryKeyAllowed": false,
+    "examples": ["stripe_checkout_session_id","stripe_payment_intent_id","provider_message_id"]
+  },
+  "draftIdentifierRule": {
+    "prefix": "draft",
+    "formalObjectAllowed": false,
+    "persistenceAllowed": false,
+    "promotionRequiresNewCanonicalId": true
+  }
+}

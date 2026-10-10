@@ -1,0 +1,113 @@
+{
+  "stage": "LAST_WITH_PIS_R1",
+  "predecessorDecisionRef": "predecessor-human-rejection.json",
+  "reports": [
+    {
+      "productId": "BAZI_FULL_REPORT",
+      "state": "PENDING",
+      "preview": "review.html?case=cases/BZR-01-zh-Hans.json&depth=paid",
+      "blockers": [
+        "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
+      ]
+    },
+    {
+      "productId": "ZIWEI_FULL_REPORT",
+      "state": "PENDING",
+      "preview": "review.html?case=cases/ZWR-01-zh-Hans.json&depth=paid",
+      "blockers": [
+        "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
+      ]
+    },
+    {
+      "productId": "ASTROLOGY_FULL_REPORT",
+      "state": "PENDING",
+      "preview": "review.html?case=cases/AST-01-zh-Hans.json&depth=paid",
+      "blockers": [
+        "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
+      ]
+    },
+    {
+      "productId": "NUMEROLOGY_FULL_REPORT",
+      "state": "PENDING",
+      "preview": "review.html?case=cases/NUM-01-zh-Hans.json&depth=paid",
+      "blockers": [
+        "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
+      ]
+    },
+    {
+      "productId": "PROFILE_FULL_REPORT",
+      "state": "PENDING",
+      "preview": "review.html?case=cases/PROFILE-01-zh-Hans.json&depth=paid",
+      "blockers": [
+        "SOURCE_DEPTH_LIMITED_FOR_SINGLE_ENTRY_MODES",
+        "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
+      ]
+    },
+    {
+      "productId": "ECR_FULL_REPORT",
+      "state": "PENDING",
+      "preview": "review.html?case=cases/ECR-01-zh-Hans.json&depth=paid",
+      "blockers": [
+        "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
+      ]
+    },
+    {
+      "productId": "HD_FULL_REPORT",
+      "state": "PENDING",
+      "preview": "review.html?case=cases/HD-01-zh-Hans.json&depth=paid",
+      "blockers": [
+        "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
+      ]
+    },
+    {
+      "productId": "CROSS_FULL_REPORT",
+      "state": "PENDING",
+      "preview": "review.html?case=cases/CROSS-01-zh-Hans.json&depth=paid",
+      "blockers": [
+        "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
+      ]
+    }
+  ],
+  "bundles": [
+    {
+      "productId": "BUNDLE_2",
+      "state": "PENDING",
+      "preview": "catalog.html",
+      "entitlementContract": "phi-os.pws.report-commerce-successor.v1"
+    },
+    {
+      "productId": "BUNDLE_3",
+      "state": "PENDING",
+      "preview": "catalog.html",
+      "entitlementContract": "phi-os.pws.report-commerce-successor.v1"
+    },
+    {
+      "productId": "BUNDLE_5PLUS",
+      "state": "PENDING",
+      "preview": "catalog.html",
+      "entitlementContract": "phi-os.pws.report-commerce-successor.v1"
+    }
+  ],
+  "crossSuccessor": {
+    "work": "CROSS_HD_PROFILE_SUCCESSOR",
+    "state": "PENDING",
+    "preview": "cross-successor/review.html",
+    "authorityAudit": "cross-successor/AUDIT.md",
+    "productionAdmission": false
+  },
+  "pis": {
+    "work": "PIS-R1",
+    "preview": "../public-index-successor/PIS-R1-HUMAN-REVIEW.html",
+    "historicalDecisionUnchanged": true
+  },
+  "acceptanceOwner": "HUMAN_ONLY",
+  "productionAdmission": false
+}

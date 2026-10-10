@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "ECR-V4.1A-SEMANTIC-SOURCE-READINESS-R5-v1",
+  "baselineCommit": "120f2968d55ecd245abc214ada40c964f9b479ac",
+  "repoFinding": {
+    "compositionPolicy": "content/embodied-configuration/v4-1/semantic-admission-r2/composition-policy.json",
+    "factorSlots": {
+      "gateBases": 64,
+      "lineModifiers": 6,
+      "planetaryDriverRoles": 12,
+      "layerRoles": 2
+    },
+    "currentMeaningRefs": "NULL",
+    "currentSemanticTags": "EMPTY",
+    "tagRules": 0,
+    "runtimeOwnerRules": 0,
+    "state": "NOT_ADMITTED"
+  },
+  "ownerSourceCandidate": {
+    "auditLogicalName": "PHI-OS-HDR-Gene-Keys-Interpretation-Source-Audit-v1.json",
+    "workStepLogicalName": "PHI-OS-MIR-HDR-Gene-Keys-Updated-Work-Step-v1.0.md",
+    "sourceWorkbook": "Human Design Summary.xlsx",
+    "authorityRole": "USER_CURATED_INTERPRETATION_SOURCE_CANDIDATE",
+    "coverage": [
+      {
+        "domain": "GENE_KEY_BASE_SPECTRUM",
+        "coverage": "64/64",
+        "readiness": "STRONG_SOURCE_CANDIDATE"
+      },
+      {
+        "domain": "GENE_KEY_LONG_FORM_SPECTRUM",
+        "coverage": "64/64",
+        "readiness": "SOURCE_COMPLETE_LOCALE_NORMALIZATION_REQUIRED"
+      },
+      {
+        "domain": "GATE_LINE_KEYWORDS",
+        "coverage": "64 x 6 = 384/384",
+        "readiness": "STRONG_SOURCE_CANDIDATE"
+      },
+      {
+        "domain": "SPHERE_ROLE_LINE_ARCHETYPES",
+        "coverage": "6 x 14",
+        "readiness": "NORMALIZATION_DECISION_REQUIRED"
+      }
+    ],
+    "mustNotBecomeWithoutAdmission": [
+      "CALCULATION_TRUTH",
+      "CANONICAL_MEANING_AUTHORITY",
+      "PUBLIC_CUSTOMER_COPY",
+      "MEDICAL_AUTHORITY"
+    ]
+  },
+  "requiredImportOutputs": [
+    "source-provenance-and-permission-manifest.json",
+    "gate-base-meaning-candidates-v1.json",
+    "line-modifier-candidates-v1.json",
+    "planetary-driver-role-candidates-v1.json",
+    "layer-role-candidates-v1.json",
+    "semantic-tag-canon-candidates-v1.json",
+    "runtime-owner-rule-candidates-v1.json"
+  ],
+  "humanDecisionsRequired": [
+    "permission/public-eligibility by source segment",
+    "bilingual canonicalization",
+    "two adjacent Purpose-like source columns role-id resolution",
+    "compositional Gate/Line authoring model",
+    "tag-to-runtime-owner meaning boundary"
+  ],
+  "productionRule": "No source candidate may be promoted merely because source coverage is complete."
+}

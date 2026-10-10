@@ -1,0 +1,29 @@
+{
+  "contract": "PHI-OS-PJA-R4A-BLUEPRINT-BINDING-FOUNDATION-v1.0.0",
+  "status": "accepted",
+  "package": "PJA-R4A",
+  "baseline": "adb76c25c21253f1095923f4211ce2f7c43594b9",
+  "runtimeEntry": [
+    "Blueprint Registry",
+    "Canonical Node Registry",
+    "Publication Context",
+    "Production State"
+  ],
+  "bookRole": "optional_scope_only",
+  "invariants": {
+    "registeredBooks": 4,
+    "canonicalNodes": 716,
+    "publicationContextResolver": "resolvePublicationContext",
+    "p5SourceBookCode": "BOOK-1",
+    "p5PublicationBookCode": "BOOK-2",
+    "automaticReadinessPromotion": false,
+    "articleCandidateGeneration": false,
+    "articlePublication": false,
+    "digestMismatchPolicy": "fail_closed"
+  },
+  "outOfScope": [
+    "PJA-R4B", "PJA-R4C", "PJA-R4D", "PJA-R4E", "PJA-R4F",
+    "KNR Migration", "Semantic Profile", "Manuscript Mapping",
+    "Article Production", "Multilingual Production", "Publication"
+  ]
+}

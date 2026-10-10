@@ -1,0 +1,171 @@
+{
+  "contractId": "phi-os.pws-entry.professional-handoff-boundary.v1",
+  "contractVersion": "1.0.0",
+  "displayStep": "PWS-ENTRY-W3",
+  "sequenceKey": "PWS-ENTRY-HANDOFF-W3",
+  "status": "professional-handoff-boundary-frozen",
+  "frozenAt": "2026-07-30",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "a6bfa5b3083596ce50b9e844608b917a2d9f5c9a"
+  },
+  "namingCompatibility": {
+    "legacyDisplayStep": "PWS-ENTRY-W3",
+    "legacyContractPurpose": "Implementation sequence and PWS-I1-T00 audit freeze",
+    "legacyCheck": "scripts/check-pws-entry-w3-implementation-sequence.mjs",
+    "replacementAllowed": false,
+    "uniqueSequenceKeyRequired": true
+  },
+  "handoffPolicy": {
+    "evaluation": "strictly-ordered-all-gates-required",
+    "defaultDecision": "not-ready",
+    "partialHandoffAllowed": false,
+    "automaticProfessionalSelectionAllowed": false,
+    "paymentMayCreateAssignment": false,
+    "entitlementMayCreateAssignment": false,
+    "journeyCompletionMayCreateAssignment": false,
+    "professionalResponsibilityStartsAt": "assignment.accepted",
+    "professionalResponsibilityStartsBeforeAcceptance": false,
+    "missingOrUnknownGateRemainsVisible": true
+  },
+  "requiredGates": [
+    {
+      "ordinal": 1,
+      "gate": "professional-service-selected",
+      "requiredState": "explicit-customer-selection",
+      "writeSource": "runtime/service"
+    },
+    {
+      "ordinal": 2,
+      "gate": "independent-product-and-offer-resolved",
+      "requiredState": "professional-product-and-offer-version-resolved",
+      "writeSource": "runtime/commercial"
+    },
+    {
+      "ordinal": 3,
+      "gate": "independent-payment-and-entitlement",
+      "requiredState": "professional-payment-verified-and-professional-entitlement-active",
+      "writeSource": "runtime/commercial-and-runtime/entitlement"
+    },
+    {
+      "ordinal": 4,
+      "gate": "service-specific-consent",
+      "requiredState": "explicit-active-purpose-and-resource-scope",
+      "writeSource": "runtime/consent"
+    },
+    {
+      "ordinal": 5,
+      "gate": "eligibility-and-required-intake",
+      "requiredState": "professional-eligible-and-required-intake-complete",
+      "writeSource": "runtime/professional-and-runtime/workspace"
+    },
+    {
+      "ordinal": 6,
+      "gate": "readiness-passed",
+      "requiredState": "ready",
+      "writeSource": "runtime/workspace/readiness"
+    },
+    {
+      "ordinal": 7,
+      "gate": "assignment-created",
+      "requiredState": "proposed",
+      "writeSource": "runtime/assignment"
+    },
+    {
+      "ordinal": 8,
+      "gate": "professional-accepts-responsibility",
+      "requiredState": "assignment-active-after-explicit-acceptance",
+      "writeSource": "runtime/assignment"
+    }
+  ],
+  "operationBoundary": {
+    "readinessOutcomeEvent": "readiness.passed",
+    "assignmentCreationOperation": "assignment.create",
+    "assignmentCreationEvent": "assignment.created",
+    "assignmentAcceptanceOperation": "assignment.accept",
+    "assignmentAcceptanceEvent": "assignment.accepted",
+    "assignmentProposalCreatesResponsibility": false,
+    "assignmentAcceptanceRequiresAssignedProfessional": true,
+    "handoffMayEnterProfessionalQueueBeforeAcceptance": false
+  },
+  "entitlementSeparation": {
+    "journeyEntitlement": {
+      "commercialLabel": "RM5 Reality Journey",
+      "currency": "MYR",
+      "price": 5,
+      "scope": "formal-reality-journey",
+      "professionalServiceAccess": false,
+      "professionalAssignmentAccess": false,
+      "professionalQueueAccess": false
+    },
+    "professionalEntitlement": {
+      "scope": "selected-professional-service",
+      "separateProductRequired": true,
+      "separateOfferRequired": true,
+      "separateOrderRequired": true,
+      "separatePaymentRequired": true,
+      "separateEntitlementRequired": true,
+      "serviceSpecificConsentRequired": true
+    },
+    "journeyEntitlementMayBeReusedAsProfessionalEntitlement": false,
+    "journeyEntitlementScopeMayBeMutatedToProfessional": false,
+    "journeyEntitlementMayBeSilentlyUpgraded": false,
+    "priceDifferenceMayAutoUpgradeEntitlement": false,
+    "journeyCompletionMayGrantProfessionalAccess": false,
+    "sharedEntitlementIdentifierAllowed": false,
+    "explicitProfessionalPurchaseRequired": true
+  },
+  "journeyDataHandoff": {
+    "journeyMayBeProfessionalInput": true,
+    "journeyDataMovesAutomatically": false,
+    "serviceSpecificConsentRequired": true,
+    "assignmentScopeRequired": true,
+    "minimumNecessaryDataOnly": true,
+    "sourceAndLineageRemainVisible": true,
+    "journeyReadingBecomesProfessionalConclusionAutomatically": false
+  },
+  "failureBehaviour": {
+    "handoffStateWhenBlocked": "not-ready",
+    "assignmentMayBeCreatedBeforeReadinessPassed": false,
+    "professionalWorkspaceMayLoadBeforeAcceptance": false,
+    "professionalQueueMayReceiveWorkBeforeAcceptance": false,
+    "professionalDeliveryClockMayStartBeforeAcceptance": false,
+    "customerMayContinueEntitledJourney": true,
+    "retryAfterCorrectableGateChangeAllowed": true,
+    "blockingReasonMustRemainVisible": true
+  },
+  "sourceContracts": [
+    "phi-os.pws-entry.payment-boundary.v1",
+    "phi-os.pws-entry.public-navigation-boundary.v1",
+    "phi-os.pws-entry.paid-journey-activation-boundary.v1",
+    "phi-os.pws.canonical-operations.v1",
+    "phi-os.pws.canonical-events.v1",
+    "phi-os.pws.canonical-states.v1"
+  ],
+  "acceptance": {
+    "requiredGateCount": 8,
+    "strictOrderRequired": true,
+    "rm5JourneyEntitlementIsProfessionalEntitlement": false,
+    "silentEntitlementUpgradeAllowed": false,
+    "professionalResponsibilityBeforeAcceptance": false,
+    "pageChangeInThisStep": false,
+    "visualAcceptance": {
+      "status": "not-applicable",
+      "reason": "Contract-only professional handoff freeze; no customer-visible page changed."
+    },
+    "languageAcceptance": {
+      "status": "not-applicable",
+      "reason": "No customer-facing copy changed."
+    },
+    "keyboardFocusAcceptance": {
+      "status": "not-applicable",
+      "reason": "No interactive surface changed."
+    },
+    "touchTargetAcceptance": {
+      "status": "not-applicable",
+      "reason": "No interactive surface changed."
+    },
+    "productionVerificationRequiredAfterImplementation": true
+  }
+}

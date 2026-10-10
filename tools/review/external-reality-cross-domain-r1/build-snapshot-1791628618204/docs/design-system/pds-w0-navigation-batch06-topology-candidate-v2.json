@@ -1,0 +1,30 @@
+{
+  "candidateID": "PHI-OS-PDS-W0-NAVIGATION-BATCH06-TOPOLOGY-CANDIDATE-v2",
+  "status": "PENDING_EXPLICIT_TOPOLOGY_ACCEPTANCE",
+  "changeClass": "explicit-contract-version-upgrade",
+  "predecessorSuccessor": "docs/design-system/pds-w0-navigation-topology-successor-v1.json",
+  "scope": "Only two new batch06 files; v1 Human ACCEPT is preserved and not expanded",
+  "doctrineReceipt": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-06-ACCEPTANCE.json",
+  "entries": [
+    {
+      "path": "functions/runtime/navigation/nav-accepted-batch-06-contract.js",
+      "sha256": "20a10a40c97fe0464c05af653852c9075843cb3a31f842effe9b8ded120066f5",
+      "gitBlobSha": "9cd17128f2a6addfcbe20986e684429dc97b81b9"
+    },
+    {
+      "path": "functions/runtime/navigation/nav-accepted-batch-06-runtime.js",
+      "sha256": "3664d067dad75785291b13e3abbb64a883aea2dcecc95ca66875da79730bcc34",
+      "gitBlobSha": "346797bb7eba46969486d5843c9cab671c0c6504"
+    }
+  ],
+  "ownerChanged": false,
+  "publicRoutesChanged": false,
+  "permissionsChanged": false,
+  "productionActivation": false,
+  "providerCalls": 0,
+  "databaseMigrationRequired": false,
+  "consumers": [
+    "scripts/check-nav-accepted-batch-06.mjs"
+  ],
+  "rollback": "Disable standalone batch06 QA consumption; preserve v1 admitted files and all canonical receipts. No physical deletion authorized."
+}

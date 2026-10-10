@@ -1,0 +1,58 @@
+{
+  "scope": "LOCAL_EXISTING_POLICY_AND_SQL_ONLY",
+  "canonicalPersonLoader": "SERVER_DEPENDENCY_NOT_BOUND_TO_DEPLOYED_OWNER",
+  "accessTests": [
+    {
+      "name": "anonymous",
+      "result": "DENIED"
+    },
+    {
+      "name": "client entitlement is not authority",
+      "result": "DENIED"
+    },
+    {
+      "name": "production stays closed",
+      "result": "DENIED"
+    },
+    {
+      "name": "canonical person owner absent",
+      "result": "DENIED"
+    },
+    {
+      "name": "wrong person",
+      "result": "DENIED"
+    },
+    {
+      "name": "mismatched birth input",
+      "result": "DENIED"
+    },
+    {
+      "name": "unpurchased locale",
+      "result": "DENIED"
+    },
+    {
+      "name": "other account owns requested person",
+      "result": "DENIED"
+    },
+    {
+      "name": "revoked method consent",
+      "result": "DENIED"
+    },
+    {
+      "name": "deleted person",
+      "result": "DENIED"
+    },
+    {
+      "name": "inaccessible person on open",
+      "result": "DENIED"
+    }
+  ],
+  "birthChange": {
+    "oldReleaseUnchanged": true,
+    "newSnapshotVersionRequired": true,
+    "oldVersion": "RDS-0E4930B85674020653FE50ECC00F91F1FE9887CBE1D55282989D1A1F1B3BB00F",
+    "newVersion": "RDS-1EF9C02AA29DABCD4468734CA3C842A13B88024A911224905D831BA4A546C2FD"
+  },
+  "qaAccountDelivery": "NOT_PROVEN",
+  "productionVerification": "NOT_RUN"
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "PHI-OS-PIS-BOOK6-CONTEXT-MARKER-REPAIR-v1.0.0",
+  "baselineCommit": "0a786028248b9dd54add22775916350f0793e4ae",
+  "status": "MARKER_ONLY_PRESENTATION_REPAIR",
+  "path": "books/reality-configuration/index.html",
+  "problem": "B6-WEB-B rewrote the Book VI shell with the PIS editorial section intact but omitted the historical PIS BOOK CONTEXT START/END sentinel comments required by the PIS presentation regression.",
+  "repair": {
+    "addStartMarker": "<!-- PIS BOOK CONTEXT START -->",
+    "addEndMarker": "<!-- PIS BOOK CONTEXT END -->",
+    "editorialContentChanged": false,
+    "bookRuntimeChanged": false,
+    "atlasRuntimeChanged": false,
+    "articleRuntimeChanged": false,
+    "knowledgeAuthorityChanged": false
+  },
+  "reason": "Restore the PIS ownership sentinel around the existing Book VI reading-orientation section rather than weakening the checker."
+}

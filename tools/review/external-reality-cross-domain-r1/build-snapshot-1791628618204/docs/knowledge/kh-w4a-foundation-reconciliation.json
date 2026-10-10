@@ -1,0 +1,105 @@
+{
+  "contract": "KH-W4A-FOUNDATION-RECONCILIATION-v1",
+  "stage": "KH-W4A",
+  "status": "reconciled",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "fullCommitSha": "46db2da328581cb03b8bbdd1dac035dc3a29e5e8",
+    "shortCommitSha": "46db2da",
+    "sourceArchive": "PHIOS(22).zip",
+    "userReportedNpmCheck": "passed",
+    "generatedAt": "2026-08-05T10:57:10.772884+00:00"
+  },
+  "summary": {
+    "foundationCount": 9,
+    "currentFoundationCount": 7,
+    "historicalFoundationCount": 1,
+    "registryCounts": {
+      "books": 4,
+      "parts": 15,
+      "blueprints": 4,
+      "canonicalNodes": 78
+    }
+  },
+  "foundations": [
+    {
+      "foundationCode": "FOUNDATION-BOOK-REGISTRY",
+      "path": "content/registry/books.json",
+      "currentRole": "book_identity_and_metadata_authority",
+      "classification": "current_foundation",
+      "retain": true,
+      "reconcileIn": "KH-W4B"
+    },
+    {
+      "foundationCode": "FOUNDATION-PART-REGISTRY",
+      "path": "content/registry/parts.json",
+      "currentRole": "part_identity_and_current_publication_ownership_authority",
+      "classification": "current_foundation",
+      "retain": true,
+      "reconcileIn": "KH-W4B"
+    },
+    {
+      "foundationCode": "FOUNDATION-CANONICAL-NODE-REGISTRY",
+      "path": "content/knowledge/registry/nodes.json",
+      "currentRole": "canonical_node_identity_and_meaning_authority",
+      "classification": "current_foundation",
+      "retain": true,
+      "reconcileIn": "KH-W4B"
+    },
+    {
+      "foundationCode": "FOUNDATION-BLUEPRINT-REGISTRY",
+      "path": "content/knowledge/blueprints/blueprint-registry.json",
+      "currentRole": "blueprint_discovery_and_binding_foundation",
+      "classification": "current_foundation_requires_authority_reconciliation",
+      "retain": true,
+      "reconcileIn": "KH-W4B"
+    },
+    {
+      "foundationCode": "FOUNDATION-BLUEPRINT-LOADER",
+      "path": "scripts/lib/knowledge-blueprint/blueprint-loader.mjs",
+      "currentRole": "shared_blueprint_loading_runtime",
+      "classification": "current_shared_runtime",
+      "retain": true,
+      "reconcileIn": "KH-W4C"
+    },
+    {
+      "foundationCode": "FOUNDATION-BLUEPRINT-REGISTRY-LOADER",
+      "path": "scripts/lib/knowledge-blueprint/blueprint-registry-loader.mjs",
+      "currentRole": "registry_led_blueprint_loading_runtime",
+      "classification": "current_shared_runtime",
+      "retain": true,
+      "reconcileIn": "KH-W4C"
+    },
+    {
+      "foundationCode": "FOUNDATION-KH-W3-5G-FREEZE",
+      "path": "docs/knowledge/kh-w3-5g-four-volume-knowledge-blueprint-migration-v1.json",
+      "currentRole": "four_volume_migration_historical_evidence",
+      "classification": "historical_freeze_evidence",
+      "retain": true,
+      "reconcileIn": "KH-W4D"
+    },
+    {
+      "foundationCode": "FOUNDATION-KH-W4A-FREEZE",
+      "path": "docs/knowledge/kh-w4a-knowledge-runtime-v2-freeze.json",
+      "currentRole": "existing_v2_foundation_freeze_evidence",
+      "classification": "current_foundation_evidence_not_runtime_authority",
+      "retain": true,
+      "reconcileIn": "KH-W4D"
+    },
+    {
+      "foundationCode": "FOUNDATION-PJA-R4",
+      "path": "docs/pja/pja-r4-four-volume-blueprint-binding-reconciliation-v1.json",
+      "currentRole": "pja_four_volume_binding_foundation",
+      "classification": "partial_runtime_foundation",
+      "retain": true,
+      "reconcileIn": "KH-W4F"
+    }
+  ],
+  "rules": [
+    "Do not create a second Book Registry, Part Registry, Canonical Node Registry, Blueprint Registry or universal loader.",
+    "A freeze document is evidence and governance, not a runtime authority.",
+    "Current runtime consumers must converge on registry-led loading in KH-W4C.",
+    "Historical evidence remains immutable unless a later migration contract explicitly allows a projection update."
+  ]
+}

@@ -1,0 +1,1385 @@
+{
+  "id": "BAZI-FULL-REPORT-VISUAL-FREEZE-R1",
+  "baseline": "a21d9ab23d4737849f1857af8fd55526cf407b80",
+  "status": "VISUAL_PROMISE_MISMATCH",
+  "auditComplete": true,
+  "humanReview": "PENDING",
+  "customerPublishable": false,
+  "checkoutEnabled": false,
+  "successorBaselineActivated": false,
+  "inspectionScope": "All 78 A4 page renders reviewed in contact sheets; individual P05/P06 desktop/mobile transitions and representative full-size pages inspected. Automated geometry covers all 156 responsive page captures. No pixel-by-pixel human acceptance claimed.",
+  "issues": [
+    {
+      "id": "VF-01",
+      "status": "VISUAL_PROMISE_MISMATCH",
+      "severity": "BLOCKS_VISUAL_FREEZE",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "locales": [
+        "zh-Hans",
+        "en",
+        "bilingual"
+      ],
+      "dimensions": [
+        "staticDynamicTransition",
+        "typography",
+        "color",
+        "panels",
+        "icons",
+        "footer"
+      ],
+      "observation": "P05→P06 从山水／纸感、金色徽章及书刊排版，转为纯象牙白圆角数据面板。标题重心、品牌字标、图标语汇及页脚均改变；P06–P26 延续同一动态样式，因此每页继承这一断层。",
+      "recommendation": "以已批准 P01–P05 与 M03–M08 为参考，统一动态页的标题、品牌区、装饰性图标／材质、面板边框和页脚；保留现有 Page IR 及有来源的数据，不从示例图复制个人结论。",
+      "evidence": [
+        "screenshots/zh-Hans-transition.png",
+        "screenshots/en-transition.png",
+        "screenshots/bilingual-transition.png"
+      ]
+    },
+    {
+      "id": "VF-02",
+      "status": "VISUAL_PROMISE_MISMATCH",
+      "severity": "BLOCKS_VISUAL_FREEZE",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "locales": [
+        "zh-Hans",
+        "en",
+        "bilingual"
+      ],
+      "dimensions": [
+        "visualDensity",
+        "whitespace"
+      ],
+      "observation": "主视觉区域占比通过机器检查，但面板占位不等于有效视觉密度。多个页面把少量数字／短标签放在大块空面板内；P07–P08、P11、P13–P15、P20–P26 尤其明显。P16–P19 使用重复的领域节点构图，尚未达到静态页的书刊层次。",
+      "recommendation": "逐页重调主图规模、模块比例和留白节奏，保留缺失资料的真实状态。不得以虚构内容填满空白，也不得只扩大容器满足占比。",
+      "evidence": [
+        "pdf-review/zh-Hans-contact.png",
+        "pdf-review/en-contact.png",
+        "pdf-review/bilingual-contact.png"
+      ]
+    },
+    {
+      "id": "VF-03",
+      "status": "MOBILE_READABILITY_REVIEW_REQUIRED",
+      "severity": "BLOCKS_WHOLE_BOOK_MOBILE_ACCEPTANCE",
+      "pages": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "locales": [
+        "zh-Hans",
+        "en",
+        "bilingual"
+      ],
+      "dimensions": [
+        "mobile",
+        "typography"
+      ],
+      "observation": "390px 下静态整页图按比例缩小，文字无法重排；尤其双语 P02–P05 的细字难以直接阅读。动态页会纵向重排，P05→P06 的阅读长度和字号体验突然改变。静态图片的既有用户批准状态保持不变。",
+      "recommendation": "在不改原图的前提下设计可放大阅读或可访问的文字伴读，并检查整本移动端阅读流程；不能以无横向溢出代替可读性验收。",
+      "evidence": [
+        "screenshots/zh-Hans-390-P05.png",
+        "screenshots/en-390-P05.png",
+        "screenshots/bilingual-390-P05.png"
+      ]
+    },
+    {
+      "id": "VF-04",
+      "status": "CHROME_CONTINUITY_REVIEW_REQUIRED",
+      "severity": "BLOCKS_VISUAL_FREEZE",
+      "pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "locales": [
+        "zh-Hans",
+        "en",
+        "bilingual"
+      ],
+      "dimensions": [
+        "pageNumbering",
+        "footer",
+        "A4"
+      ],
+      "observation": "逻辑页序 1–26 和三个 A4 26 页文件正确。单语言静态页页码／品牌页脚与动态 NN / 26 不统一；双语静态页自身也有不同页眉安排。静态原图保留全页比例，动态页沿用 15mm 页边距，印刷视觉框架变化明显。手机双语页脚的标语与页码紧贴，缺少明显间距；补充文字矩形测量未发现实际交叠，仍应改善视觉分隔。",
+      "recommendation": "确定全册统一的页码、品牌页脚及 A4 内容框；若涉及已批准静态图，只登记变更提案，不擅自重画原图。",
+      "evidence": [
+        "pdf-review/zh-Hans-contact-01-09.png",
+        "pdf-review/en-contact-01-09.png",
+        "pdf-review/bilingual-contact-01-09.png"
+      ]
+    },
+    {
+      "id": "VF-05",
+      "status": "LOCALE_REVIEW_NOTE",
+      "severity": "NOTE_USER_APPROVAL_RETAINED",
+      "pages": [
+        1
+      ],
+      "locales": [
+        "en"
+      ],
+      "dimensions": [
+        "en"
+      ],
+      "observation": "英文路径 P01 的已批准封面包含中文大标题与英文副标题；当前按英文 object key 正确绑定，没有跨语言回退。",
+      "recommendation": "在整本语言验收时明确这是刻意的双语品牌封面还是将来替换项；现有用户批准不被撤销。",
+      "evidence": [
+        "screenshots/en-1440-P01.png"
+      ]
+    },
+    {
+      "id": "VF-06",
+      "status": "BILINGUAL_DENSITY_REVIEW_REQUIRED",
+      "severity": "REVIEW_REQUIRED",
+      "pages": [
+        23,
+        24,
+        25
+      ],
+      "locales": [
+        "bilingual"
+      ],
+      "dimensions": [
+        "bilingual",
+        "visualDensity"
+      ],
+      "observation": "沿用原批次 Page IR 的保守文字密度 REVIEW_REQUIRED；浏览器区域占比与印刷不重叠检查通过，并不覆盖这一语义级文字预算状态。",
+      "recommendation": "人工阅读双语路由卡与提示后再调整文本组织；保留来源、条件和反例边界。",
+      "evidence": [
+        "pdf-review/bilingual-contact-19-26.png"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 1,
+      "kind": "APPROVED_STATIC",
+      "staticApproval": "USER_APPROVAL_RETAINED",
+      "visualStatus": "WHOLE_BOOK_CONTEXT_REVIEW_REQUIRED",
+      "issueIds": [
+        "VF-03",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P01.png",
+      "mobile": "screenshots/zh-Hans-390-P01.png",
+      "a4": "pdf-review/zh-Hans-01.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 2,
+      "kind": "APPROVED_STATIC",
+      "staticApproval": "USER_APPROVAL_RETAINED",
+      "visualStatus": "WHOLE_BOOK_CONTEXT_REVIEW_REQUIRED",
+      "issueIds": [
+        "VF-03",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P02.png",
+      "mobile": "screenshots/zh-Hans-390-P02.png",
+      "a4": "pdf-review/zh-Hans-02.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 3,
+      "kind": "APPROVED_STATIC",
+      "staticApproval": "USER_APPROVAL_RETAINED",
+      "visualStatus": "WHOLE_BOOK_CONTEXT_REVIEW_REQUIRED",
+      "issueIds": [
+        "VF-03",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P03.png",
+      "mobile": "screenshots/zh-Hans-390-P03.png",
+      "a4": "pdf-review/zh-Hans-03.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 4,
+      "kind": "APPROVED_STATIC",
+      "staticApproval": "USER_APPROVAL_RETAINED",
+      "visualStatus": "WHOLE_BOOK_CONTEXT_REVIEW_REQUIRED",
+      "issueIds": [
+        "VF-03",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P04.png",
+      "mobile": "screenshots/zh-Hans-390-P04.png",
+      "a4": "pdf-review/zh-Hans-04.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 5,
+      "kind": "APPROVED_STATIC",
+      "staticApproval": "USER_APPROVAL_RETAINED",
+      "visualStatus": "WHOLE_BOOK_CONTEXT_REVIEW_REQUIRED",
+      "issueIds": [
+        "VF-03",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P05.png",
+      "mobile": "screenshots/zh-Hans-390-P05.png",
+      "a4": "pdf-review/zh-Hans-05.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 6,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P06.png",
+      "mobile": "screenshots/zh-Hans-390-P06.png",
+      "a4": "pdf-review/zh-Hans-06.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 7,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P07.png",
+      "mobile": "screenshots/zh-Hans-390-P07.png",
+      "a4": "pdf-review/zh-Hans-07.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 8,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P08.png",
+      "mobile": "screenshots/zh-Hans-390-P08.png",
+      "a4": "pdf-review/zh-Hans-08.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 9,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P09.png",
+      "mobile": "screenshots/zh-Hans-390-P09.png",
+      "a4": "pdf-review/zh-Hans-09.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 10,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P10.png",
+      "mobile": "screenshots/zh-Hans-390-P10.png",
+      "a4": "pdf-review/zh-Hans-10.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 11,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P11.png",
+      "mobile": "screenshots/zh-Hans-390-P11.png",
+      "a4": "pdf-review/zh-Hans-11.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 12,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P12.png",
+      "mobile": "screenshots/zh-Hans-390-P12.png",
+      "a4": "pdf-review/zh-Hans-12.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 13,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P13.png",
+      "mobile": "screenshots/zh-Hans-390-P13.png",
+      "a4": "pdf-review/zh-Hans-13.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 14,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P14.png",
+      "mobile": "screenshots/zh-Hans-390-P14.png",
+      "a4": "pdf-review/zh-Hans-14.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 15,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P15.png",
+      "mobile": "screenshots/zh-Hans-390-P15.png",
+      "a4": "pdf-review/zh-Hans-15.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 16,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P16.png",
+      "mobile": "screenshots/zh-Hans-390-P16.png",
+      "a4": "pdf-review/zh-Hans-16.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 17,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P17.png",
+      "mobile": "screenshots/zh-Hans-390-P17.png",
+      "a4": "pdf-review/zh-Hans-17.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 18,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P18.png",
+      "mobile": "screenshots/zh-Hans-390-P18.png",
+      "a4": "pdf-review/zh-Hans-18.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 19,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P19.png",
+      "mobile": "screenshots/zh-Hans-390-P19.png",
+      "a4": "pdf-review/zh-Hans-19.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 20,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P20.png",
+      "mobile": "screenshots/zh-Hans-390-P20.png",
+      "a4": "pdf-review/zh-Hans-20.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 21,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P21.png",
+      "mobile": "screenshots/zh-Hans-390-P21.png",
+      "a4": "pdf-review/zh-Hans-21.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 22,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P22.png",
+      "mobile": "screenshots/zh-Hans-390-P22.png",
+      "a4": "pdf-review/zh-Hans-22.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 23,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P23.png",
+      "mobile": "screenshots/zh-Hans-390-P23.png",
+      "a4": "pdf-review/zh-Hans-23.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 24,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P24.png",
+      "mobile": "screenshots/zh-Hans-390-P24.png",
+      "a4": "pdf-review/zh-Hans-24.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 25,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P25.png",
+      "mobile": "screenshots/zh-Hans-390-P25.png",
+      "a4": "pdf-review/zh-Hans-25.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "pageNumber": 26,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/zh-Hans-1440-P26.png",
+      "mobile": "screenshots/zh-Hans-390-P26.png",
+      "a4": "pdf-review/zh-Hans-26.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 1,
+      "kind": "APPROVED_STATIC",
+      "staticApproval": "USER_APPROVAL_RETAINED",
+      "visualStatus": "WHOLE_BOOK_CONTEXT_REVIEW_REQUIRED",
+      "issueIds": [
+        "VF-03",
+        "VF-04",
+        "VF-05"
+      ],
+      "desktop": "screenshots/en-1440-P01.png",
+      "mobile": "screenshots/en-390-P01.png",
+      "a4": "pdf-review/en-01.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 2,
+      "kind": "APPROVED_STATIC",
+      "staticApproval": "USER_APPROVAL_RETAINED",
+      "visualStatus": "WHOLE_BOOK_CONTEXT_REVIEW_REQUIRED",
+      "issueIds": [
+        "VF-03",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P02.png",
+      "mobile": "screenshots/en-390-P02.png",
+      "a4": "pdf-review/en-02.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 3,
+      "kind": "APPROVED_STATIC",
+      "staticApproval": "USER_APPROVAL_RETAINED",
+      "visualStatus": "WHOLE_BOOK_CONTEXT_REVIEW_REQUIRED",
+      "issueIds": [
+        "VF-03",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P03.png",
+      "mobile": "screenshots/en-390-P03.png",
+      "a4": "pdf-review/en-03.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 4,
+      "kind": "APPROVED_STATIC",
+      "staticApproval": "USER_APPROVAL_RETAINED",
+      "visualStatus": "WHOLE_BOOK_CONTEXT_REVIEW_REQUIRED",
+      "issueIds": [
+        "VF-03",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P04.png",
+      "mobile": "screenshots/en-390-P04.png",
+      "a4": "pdf-review/en-04.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 5,
+      "kind": "APPROVED_STATIC",
+      "staticApproval": "USER_APPROVAL_RETAINED",
+      "visualStatus": "WHOLE_BOOK_CONTEXT_REVIEW_REQUIRED",
+      "issueIds": [
+        "VF-03",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P05.png",
+      "mobile": "screenshots/en-390-P05.png",
+      "a4": "pdf-review/en-05.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 6,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P06.png",
+      "mobile": "screenshots/en-390-P06.png",
+      "a4": "pdf-review/en-06.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 7,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P07.png",
+      "mobile": "screenshots/en-390-P07.png",
+      "a4": "pdf-review/en-07.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 8,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P08.png",
+      "mobile": "screenshots/en-390-P08.png",
+      "a4": "pdf-review/en-08.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 9,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P09.png",
+      "mobile": "screenshots/en-390-P09.png",
+      "a4": "pdf-review/en-09.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 10,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P10.png",
+      "mobile": "screenshots/en-390-P10.png",
+      "a4": "pdf-review/en-10.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 11,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P11.png",
+      "mobile": "screenshots/en-390-P11.png",
+      "a4": "pdf-review/en-11.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 12,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P12.png",
+      "mobile": "screenshots/en-390-P12.png",
+      "a4": "pdf-review/en-12.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 13,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P13.png",
+      "mobile": "screenshots/en-390-P13.png",
+      "a4": "pdf-review/en-13.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 14,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P14.png",
+      "mobile": "screenshots/en-390-P14.png",
+      "a4": "pdf-review/en-14.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 15,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P15.png",
+      "mobile": "screenshots/en-390-P15.png",
+      "a4": "pdf-review/en-15.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 16,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P16.png",
+      "mobile": "screenshots/en-390-P16.png",
+      "a4": "pdf-review/en-16.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 17,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P17.png",
+      "mobile": "screenshots/en-390-P17.png",
+      "a4": "pdf-review/en-17.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 18,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P18.png",
+      "mobile": "screenshots/en-390-P18.png",
+      "a4": "pdf-review/en-18.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 19,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P19.png",
+      "mobile": "screenshots/en-390-P19.png",
+      "a4": "pdf-review/en-19.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 20,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P20.png",
+      "mobile": "screenshots/en-390-P20.png",
+      "a4": "pdf-review/en-20.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 21,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P21.png",
+      "mobile": "screenshots/en-390-P21.png",
+      "a4": "pdf-review/en-21.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 22,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P22.png",
+      "mobile": "screenshots/en-390-P22.png",
+      "a4": "pdf-review/en-22.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 23,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P23.png",
+      "mobile": "screenshots/en-390-P23.png",
+      "a4": "pdf-review/en-23.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 24,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P24.png",
+      "mobile": "screenshots/en-390-P24.png",
+      "a4": "pdf-review/en-24.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 25,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P25.png",
+      "mobile": "screenshots/en-390-P25.png",
+      "a4": "pdf-review/en-25.png"
+    },
+    {
+      "locale": "en",
+      "pageNumber": 26,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/en-1440-P26.png",
+      "mobile": "screenshots/en-390-P26.png",
+      "a4": "pdf-review/en-26.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 1,
+      "kind": "APPROVED_STATIC",
+      "staticApproval": "USER_APPROVAL_RETAINED",
+      "visualStatus": "WHOLE_BOOK_CONTEXT_REVIEW_REQUIRED",
+      "issueIds": [
+        "VF-03",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P01.png",
+      "mobile": "screenshots/bilingual-390-P01.png",
+      "a4": "pdf-review/bilingual-01.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 2,
+      "kind": "APPROVED_STATIC",
+      "staticApproval": "USER_APPROVAL_RETAINED",
+      "visualStatus": "WHOLE_BOOK_CONTEXT_REVIEW_REQUIRED",
+      "issueIds": [
+        "VF-03",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P02.png",
+      "mobile": "screenshots/bilingual-390-P02.png",
+      "a4": "pdf-review/bilingual-02.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 3,
+      "kind": "APPROVED_STATIC",
+      "staticApproval": "USER_APPROVAL_RETAINED",
+      "visualStatus": "WHOLE_BOOK_CONTEXT_REVIEW_REQUIRED",
+      "issueIds": [
+        "VF-03",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P03.png",
+      "mobile": "screenshots/bilingual-390-P03.png",
+      "a4": "pdf-review/bilingual-03.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 4,
+      "kind": "APPROVED_STATIC",
+      "staticApproval": "USER_APPROVAL_RETAINED",
+      "visualStatus": "WHOLE_BOOK_CONTEXT_REVIEW_REQUIRED",
+      "issueIds": [
+        "VF-03",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P04.png",
+      "mobile": "screenshots/bilingual-390-P04.png",
+      "a4": "pdf-review/bilingual-04.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 5,
+      "kind": "APPROVED_STATIC",
+      "staticApproval": "USER_APPROVAL_RETAINED",
+      "visualStatus": "WHOLE_BOOK_CONTEXT_REVIEW_REQUIRED",
+      "issueIds": [
+        "VF-03",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P05.png",
+      "mobile": "screenshots/bilingual-390-P05.png",
+      "a4": "pdf-review/bilingual-05.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 6,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P06.png",
+      "mobile": "screenshots/bilingual-390-P06.png",
+      "a4": "pdf-review/bilingual-06.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 7,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P07.png",
+      "mobile": "screenshots/bilingual-390-P07.png",
+      "a4": "pdf-review/bilingual-07.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 8,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P08.png",
+      "mobile": "screenshots/bilingual-390-P08.png",
+      "a4": "pdf-review/bilingual-08.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 9,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P09.png",
+      "mobile": "screenshots/bilingual-390-P09.png",
+      "a4": "pdf-review/bilingual-09.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 10,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P10.png",
+      "mobile": "screenshots/bilingual-390-P10.png",
+      "a4": "pdf-review/bilingual-10.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 11,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P11.png",
+      "mobile": "screenshots/bilingual-390-P11.png",
+      "a4": "pdf-review/bilingual-11.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 12,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P12.png",
+      "mobile": "screenshots/bilingual-390-P12.png",
+      "a4": "pdf-review/bilingual-12.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 13,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P13.png",
+      "mobile": "screenshots/bilingual-390-P13.png",
+      "a4": "pdf-review/bilingual-13.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 14,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P14.png",
+      "mobile": "screenshots/bilingual-390-P14.png",
+      "a4": "pdf-review/bilingual-14.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 15,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P15.png",
+      "mobile": "screenshots/bilingual-390-P15.png",
+      "a4": "pdf-review/bilingual-15.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 16,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P16.png",
+      "mobile": "screenshots/bilingual-390-P16.png",
+      "a4": "pdf-review/bilingual-16.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 17,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P17.png",
+      "mobile": "screenshots/bilingual-390-P17.png",
+      "a4": "pdf-review/bilingual-17.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 18,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P18.png",
+      "mobile": "screenshots/bilingual-390-P18.png",
+      "a4": "pdf-review/bilingual-18.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 19,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P19.png",
+      "mobile": "screenshots/bilingual-390-P19.png",
+      "a4": "pdf-review/bilingual-19.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 20,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P20.png",
+      "mobile": "screenshots/bilingual-390-P20.png",
+      "a4": "pdf-review/bilingual-20.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 21,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P21.png",
+      "mobile": "screenshots/bilingual-390-P21.png",
+      "a4": "pdf-review/bilingual-21.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 22,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P22.png",
+      "mobile": "screenshots/bilingual-390-P22.png",
+      "a4": "pdf-review/bilingual-22.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 23,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04",
+        "VF-06"
+      ],
+      "desktop": "screenshots/bilingual-1440-P23.png",
+      "mobile": "screenshots/bilingual-390-P23.png",
+      "a4": "pdf-review/bilingual-23.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 24,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04",
+        "VF-06"
+      ],
+      "desktop": "screenshots/bilingual-1440-P24.png",
+      "mobile": "screenshots/bilingual-390-P24.png",
+      "a4": "pdf-review/bilingual-24.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 25,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04",
+        "VF-06"
+      ],
+      "desktop": "screenshots/bilingual-1440-P25.png",
+      "mobile": "screenshots/bilingual-390-P25.png",
+      "a4": "pdf-review/bilingual-25.png"
+    },
+    {
+      "locale": "bilingual",
+      "pageNumber": 26,
+      "kind": "EXISTING_DYNAMIC",
+      "staticApproval": null,
+      "visualStatus": "VISUAL_PROMISE_MISMATCH",
+      "issueIds": [
+        "VF-01",
+        "VF-02",
+        "VF-04"
+      ],
+      "desktop": "screenshots/bilingual-1440-P26.png",
+      "mobile": "screenshots/bilingual-390-P26.png",
+      "a4": "pdf-review/bilingual-26.png"
+    }
+  ]
+}

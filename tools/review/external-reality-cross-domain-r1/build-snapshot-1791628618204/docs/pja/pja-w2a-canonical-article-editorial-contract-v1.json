@@ -1,0 +1,456 @@
+{
+  "contractId": "PJA-W2A-v1.0.0-Canonical-Article-Editorial",
+  "programme": "PJA Public Knowledge Architecture",
+  "step": "PJA-W2A",
+  "version": "1.0.0",
+  "status": "editorial_contract_established",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "1c59299a64f7ddcd5dd2cbfe4ee56beff5f04d72",
+    "prerequisite": "PJA-W1-v1.1.0-Blueprint-led"
+  },
+  "currentStateAudit": {
+    "articleJsonFields": [
+      "contract",
+      "assetCode",
+      "nodeCode",
+      "locale",
+      "contentRole",
+      "localizationSourceLocale",
+      "localizationSourceVersion",
+      "terminologyReviewStatus",
+      "semanticParityStatus",
+      "version",
+      "contentStatus",
+      "reviewStatus",
+      "publicationStatus",
+      "publishedAt",
+      "publicationOrder",
+      "slug",
+      "title",
+      "displayQuestion",
+      "shortAnswer",
+      "summary",
+      "seo",
+      "keyConcepts",
+      "sections",
+      "knowledgeBoundary",
+      "sourceReferences",
+      "connections",
+      "masterMediaPost"
+    ],
+    "localizedArticleAdditionalFields": [
+      "localizationSourceLocale",
+      "localizationSourceVersion",
+      "terminologyReviewStatus",
+      "semanticParityStatus"
+    ],
+    "rendererSupport": {
+      "header": [
+        "title",
+        "shortAnswer",
+        "nodeCode"
+      ],
+      "legacyBody": [
+        "sections[].heading",
+        "sections[].paragraphs[]"
+      ],
+      "supportingContent": [
+        "keyConcepts",
+        "sourceReferences",
+        "knowledgeBoundary",
+        "connections.relatedArticles",
+        "connections.relatedBooks",
+        "connections.relatedAtlasEntries",
+        "connections.journeyEntryTopics"
+      ],
+      "documentMetadata": [
+        "seo.title",
+        "seo.description"
+      ],
+      "notRenderedAsArticleBody": [
+        "displayQuestion",
+        "summary",
+        "connections.relatedTopics",
+        "connections.relatedFigures",
+        "connections.relatedServices",
+        "masterMediaPost"
+      ]
+    },
+    "publicationGate": {
+      "node": {
+        "registryStatus": "frozen",
+        "requiredLanguageMustIncludeRequestedLocale": true
+      },
+      "localizedRecord": {
+        "contentStatus": "content_reviewed",
+        "reviewStatus": "approved",
+        "publicationStatus": "published"
+      },
+      "assetRecord": {
+        "assetType": "article",
+        "localeMustMatch": true,
+        "contentStatus": "content_reviewed",
+        "reviewStatus": "approved",
+        "publicationStatus": "published"
+      },
+      "articleJson": {
+        "nodeCodeMustMatch": true,
+        "localeMustMatch": true,
+        "assetCodeMustMatch": true,
+        "contentStatus": "content_reviewed",
+        "reviewStatus": "approved",
+        "publicationStatus": "published"
+      }
+    },
+    "localizationGate": {
+      "canonicalLanguage": "zh-Hans",
+      "englishRequiresCanonicalReviewedSource": true,
+      "localizationSourceLocale": "zh-Hans",
+      "englishTerminologyReviewStatus": "approved",
+      "englishSemanticParityStatus": "approved",
+      "englishPublicationStillUsesFullPublicationGate": true
+    },
+    "articleShell": {
+      "pattern": "static_slug_shell_shared_renderer",
+      "bodyStorage": "none",
+      "slugBinding": "main[data-article-slug]",
+      "renderer": "assets/js/pages/article.js",
+      "contentProjection": "assets/js/knowledge/published-content.js"
+    },
+    "unsupportedBeforePjaW2a": [
+      "paragraph block",
+      "lead block",
+      "question block",
+      "insight block",
+      "mechanism block",
+      "timeline block",
+      "comparison block",
+      "registered figure block",
+      "transition block",
+      "next-node block"
+    ]
+  },
+  "sourceAuthority": {
+    "canonicalNodeIdentity": "content/knowledge/registry/nodes.json",
+    "canonicalContent": "content/knowledge/articles/zh-Hans/*.json",
+    "localizedPublicationState": "content/knowledge/registry/localized-content.json",
+    "assetPublicationState": "content/knowledge/registry/assets.json",
+    "publicProjection": "assets/js/knowledge/published-content.js",
+    "editorialGovernance": "docs/pja/pja-w2a-canonical-article-editorial-contract-v1.json",
+    "articleSchema": "content/knowledge/editorial/schemas/canonical-article.schema.json",
+    "claimReviewSchema": "content/knowledge/editorial/schemas/claim-review-record.schema.json",
+    "publicBodyCompetitionAllowed": false,
+    "forbiddenCompetingSources": [
+      "Markdown body for the same article",
+      "independent HTML body",
+      "frontend-hardcoded article body",
+      "duplicate body in another CMS",
+      "article content embedded in the Renderer"
+    ],
+    "governanceRecordsArePublicBody": false
+  },
+  "editorialContract": {
+    "requiredFields": [
+      "Article Identity",
+      "Canonical Question",
+      "Public Question",
+      "Public Title",
+      "Search Title",
+      "Central Thesis",
+      "Reader Transformation",
+      "Required Mechanisms",
+      "Required Distinctions",
+      "Prohibited Claims",
+      "Article Boundary",
+      "Next Node Requirement",
+      "Source Requirement",
+      "Visual Requirement",
+      "Review Requirement",
+      "Publication Requirement"
+    ],
+    "definitions": {
+      "Article Identity": {
+        "purpose": "Binds the article to one frozen Canonical Node and its registered slug.",
+        "authority": "content/knowledge/registry/nodes.json",
+        "requiredValues": [
+          "nodeCode",
+          "canonicalQuestionKey",
+          "canonicalLanguage",
+          "slug"
+        ]
+      },
+      "Canonical Question": {
+        "purpose": "States the frozen question that defines the Node's knowledge identity.",
+        "authority": "Canonical Node Registry"
+      },
+      "Public Question": {
+        "purpose": "Expresses the Canonical Question for public readers without changing its identity.",
+        "authority": "reviewed canonical-language editorial record"
+      },
+      "Public Title": {
+        "purpose": "Names the public article and must remain semantically aligned with the Canonical Question.",
+        "authority": "reviewed canonical-language editorial record"
+      },
+      "Search Title": {
+        "purpose": "Provides a discoverable title without creating a second question or overstating the thesis.",
+        "authority": "reviewed canonical-language editorial record"
+      },
+      "Central Thesis": {
+        "purpose": "Freezes the single proposition the article will establish.",
+        "authority": "canonical editorial review"
+      },
+      "Reader Transformation": {
+        "purpose": "Defines the understanding readers should gain, not a personal outcome or recommendation.",
+        "authority": "canonical editorial review"
+      },
+      "Required Mechanisms": {
+        "purpose": "Lists causal or structural mechanisms the article must explain.",
+        "authority": "canonical editorial review"
+      },
+      "Required Distinctions": {
+        "purpose": "Lists concepts that must remain explicitly separate.",
+        "authority": "canonical editorial review"
+      },
+      "Prohibited Claims": {
+        "purpose": "Prevents unsupported, deterministic, anthropomorphic, universal, professional or personal claims.",
+        "authority": "claim and boundary review"
+      },
+      "Article Boundary": {
+        "purpose": "Defines what the public article does not determine, diagnose, recommend or replace.",
+        "authority": "boundary review"
+      },
+      "Next Node Requirement": {
+        "purpose": "Maintains registered knowledge continuity without linking to an unpublished Node.",
+        "authority": "Canonical Node Registry relationships plus published-only projection"
+      },
+      "Source Requirement": {
+        "purpose": "Defines evidence needed for each claim and prevents invented source codes.",
+        "authority": "source and claim review"
+      },
+      "Visual Requirement": {
+        "purpose": "Defines whether a governed visual materially improves understanding and how it enters through Asset Registry.",
+        "authority": "visual review and Asset Registry"
+      },
+      "Review Requirement": {
+        "purpose": "Lists all review domains required before publication state may advance.",
+        "authority": "human editorial governance"
+      },
+      "Publication Requirement": {
+        "purpose": "Preserves the PJA-W1 published-only Gate.",
+        "requiredState": {
+          "contentStatus": "content_reviewed",
+          "reviewStatus": "approved",
+          "publicationStatus": "published"
+        }
+      }
+    },
+    "frozenRules": {
+      "canonicalNodeDeterminesArticleIdentity": true,
+      "chineseArticleJsonIsCanonicalContent": true,
+      "englishOnlyFromReviewedChineseVersion": true,
+      "aiHasPublicationAuthority": false,
+      "contentCompletionEqualsReviewCompletion": false,
+      "registryPresenceEqualsProductionRequirement": false,
+      "blueprintPresenceCreatesCanonicalIdentity": false
+    }
+  },
+  "structuredArticleBlockModel": {
+    "location": "sections[].blocks[]",
+    "optional": true,
+    "legacyLocation": "sections[].paragraphs[]",
+    "legacyMigrationRequired": false,
+    "schema": "content/knowledge/editorial/schemas/canonical-article.schema.json",
+    "allowedTypes": [
+      "paragraph",
+      "lead",
+      "question",
+      "insight",
+      "mechanism",
+      "timeline",
+      "comparison",
+      "figure",
+      "transition",
+      "next_node"
+    ],
+    "forbiddenCapabilities": [
+      "rawHtml",
+      "script",
+      "style",
+      "arbitraryEmbed",
+      "externalIframe",
+      "runtimeForm",
+      "caseInput",
+      "providerInvocation",
+      "personalRecommendation"
+    ],
+    "renderingRules": {
+      "allTextEscaped": true,
+      "figureResolvesPublishedAssetRegistryRecord": true,
+      "nextNodeResolvesPublishedArticleProjection": true,
+      "unknownBlockRendered": false,
+      "thirdPartyFramework": false
+    }
+  },
+  "claimGovernance": {
+    "claimTypes": [
+      "externally_verifiable",
+      "phi_os_interpretation",
+      "editorial_inference",
+      "canonical_transition",
+      "boundary_statement"
+    ],
+    "requiredFields": [
+      "claimId",
+      "statement",
+      "claimType",
+      "sourceRequired",
+      "sourceCodes",
+      "qualification",
+      "articleSection",
+      "reviewStatus",
+      "reviewedBy",
+      "reviewedAt"
+    ],
+    "rules": {
+      "externallyVerifiableRequiresSource": true,
+      "phiOsInterpretationMustBeQualifiedAsTheory": true,
+      "editorialInferenceCannotMasqueradeAsFact": true,
+      "sourceCodeMayBeInvented": false,
+      "sourcePresenceEqualsClaimSupport": false,
+      "aiMaySetApproved": false
+    }
+  },
+  "reviewLayer": {
+    "reviewTypes": [
+      "Canonical Review",
+      "Factual Review",
+      "Source Review",
+      "Boundary Review",
+      "Language Review",
+      "Public Readability Review",
+      "Cross-node Duplication Review",
+      "Next-node Continuity Review",
+      "Visual Review",
+      "Localization Readiness Review"
+    ],
+    "allowedResults": [
+      "not_reviewed",
+      "changes_required",
+      "conditionally_approved",
+      "approved"
+    ],
+    "contentCompleteIsReviewComplete": false,
+    "publicationGateReduced": false
+  },
+  "productionLifecycle": {
+    "orderedStages": [
+      "node_selected",
+      "thesis_frozen",
+      "claims_prepared",
+      "outline_approved",
+      "canonical_draft_created",
+      "content_editing",
+      "fact_review",
+      "canonical_review",
+      "changes_required",
+      "content_reviewed",
+      "approved",
+      "published"
+    ],
+    "aiMayAdvanceWithoutHumanAuthorityThrough": "canonical_draft_created",
+    "aiMayApplyRequestedChanges": true,
+    "humanOnlyStages": [
+      "approved",
+      "published"
+    ],
+    "aiMaySelfAssignHumanOnlyStages": false
+  },
+  "visualAssetBoundary": {
+    "articleBodyMayBeConvertedToImage": false,
+    "allowedAssetTypes": {
+      "hero_illustration": [
+        "webp",
+        "avif"
+      ],
+      "mechanism_diagram": [
+        "svg"
+      ],
+      "timeline_diagram": [
+        "svg"
+      ],
+      "decorative_image": [
+        "webp"
+      ]
+    },
+    "requiredFields": [
+      "assetCode",
+      "assetType",
+      "nodeCode",
+      "localeDependency",
+      "altText",
+      "caption",
+      "sourceOrGenerationStatus",
+      "reviewStatus",
+      "publicationStatus"
+    ],
+    "entryAuthority": "content/knowledge/registry/assets.json",
+    "articleReference": "figure blocks may contain assetCode only",
+    "base64Allowed": false,
+    "externalImageUrlAllowed": false
+  },
+  "rendererExpansion": {
+    "implementation": [
+      "legacy section paragraphs remain supported",
+      "optional structured blocks are allowlisted",
+      "all block text is escaped",
+      "figure assetCode resolves only through approved published visual assets",
+      "next_node resolves only through the published article projection"
+    ],
+    "newCms": false,
+    "runtimeDependency": false,
+    "caseProvider": false,
+    "d1Migration": false,
+    "secondArticleBodySource": false
+  },
+  "preservation": {
+    "canonicalNodeCount": 13,
+    "canonicalThemeCount": 6,
+    "knowledgeRegistryFileCount": 12,
+    "knowledgeRegistrySchemaCount": 12,
+    "baselineHashes": {
+      "content/knowledge/registry/nodes.json": "c5950f5985119304de7a95f59f3bf1b37c21b1301f950781450e95674c9f9b2c",
+      "content/knowledge/registry/localized-content.json": "608a4175f3fc896418be0715fcf5f6968e0e65efbd3bb8586848a5e73fb549f9",
+      "content/knowledge/registry/assets.json": "d5bf0ed9374d9c22607ee427becde123578032b9059227e32721c5c991167b31",
+      "content/knowledge/articles/en/why-explanation-does-not-equal-understanding.json": "b7e9a25b78c67aefd976a36cd35f1865e413872fb589d29bced9b2f737402110",
+      "content/knowledge/articles/en/why-navigation-begins-with-reality-position.json": "da8b61afd3ac18254439371f75d3be48699c34e1d54c32f5e3d8d17a1cef5aef",
+      "content/knowledge/articles/en/why-phi-os-is-needed.json": "324764afa4e9c4bf9a86e44b0f91245cfd7d2572af9e6da3ec1cd11e60732169",
+      "content/knowledge/articles/zh-Hans/why-explanation-does-not-equal-understanding.json": "f0e5d6f422575770ce1291753cbd90ceebc88480268fc22d9ab9316bc426b6d1",
+      "content/knowledge/articles/zh-Hans/why-navigation-begins-with-reality-position.json": "229e4f4fca008df9ea9bcd95e59ae367f49c256ee09102aa494d13236b99d869",
+      "content/knowledge/articles/zh-Hans/why-phi-os-is-needed.json": "fae12d4d1356cf5a955d9087144de427020a93b47fc20207f674b5625995811b"
+    },
+    "existingArticleJsonChanged": false,
+    "canonicalRegistryChanged": false,
+    "localizedRegistryChanged": false,
+    "assetRegistryChanged": false,
+    "runtimeChanged": false,
+    "pwsChanged": false,
+    "paymentChanged": false,
+    "entitlementChanged": false,
+    "providerAuthorityChanged": false,
+    "d1MigrationAdded": false
+  },
+  "acceptance": {
+    "pjaW1ContinuesPassing": true,
+    "noSecondArticleSourceOfTruth": true,
+    "legacyArticlesRemainRenderable": true,
+    "blockTypesAllowlisted": true,
+    "rawHtmlProhibited": true,
+    "aiCannotApproveOrPublish": true,
+    "knPreface001NotPublished": true,
+    "englishLocalizationPending": true,
+    "runtimeProviderPaymentEntitlementDependency": false,
+    "command": "npm run check:pja-w2a"
+  }
+}

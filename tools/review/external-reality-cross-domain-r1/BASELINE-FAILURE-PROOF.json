@@ -1,0 +1,20 @@
+{
+  "head": "01cb1a15c9ec7d93c9c01038b757dbdec5373b69",
+  "rdg": {
+    "checker": "scripts/check-rdg-w21-w25-analytics-alr-research.mjs:94",
+    "assertion": "package alias equals direct historical node script",
+    "actual": "node scripts/run-zero-cost-regression.mjs check:rdg-w21-w25",
+    "expected": "node scripts/check-rdg-w21-w25-analytics-alr-research.mjs",
+    "baselinePackageCommand": "node scripts/run-zero-cost-regression.mjs check:rdg-w21-w25",
+    "preExistingProven": true
+  },
+  "realityWorkspace": {
+    "checker": "scripts/check-reality-workspace-canonical-current.mjs:36",
+    "assertion": "data-rw-stage=\"UNDERSTAND\" exists in current reality/index.html",
+    "actual": "current successor uses data-cx workspace",
+    "expected": "historical data-rw stage marker",
+    "baselineContainsLegacyMarker": false,
+    "preExistingProven": true
+  },
+  "state": "PRE_EXISTING_UNRELATED_BLOCKER"
+}

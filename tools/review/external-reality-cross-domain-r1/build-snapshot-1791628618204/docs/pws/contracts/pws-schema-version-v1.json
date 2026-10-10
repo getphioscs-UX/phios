@@ -1,0 +1,97 @@
+{
+  "contractId": "phi-os.pws.schema-version.v1",
+  "schemaVersion": "pws-v1",
+  "status": "frozen",
+  "baseline": "ada3dc9229af299573df02d0986c7d6ce6616b46",
+  "appliesTo": [
+    "phi-os.pws.canonical-glossary.v1",
+    "phi-os.pws.canonical-identifiers.v1",
+    "phi-os.pws.canonical-object-registry.v1",
+    "future PWS contracts introduced under pws-v1"
+  ],
+  "backwardCompatibility": {
+    "required": true,
+    "compatibleChanges": [
+      "add an optional field with a deterministic default",
+      "add documentation or translation without changing semantics",
+      "add a validator that accepts every previously valid pws-v1 payload",
+      "add a deprecated alias read adapter without enabling alias writes"
+    ],
+    "readRule": "Previously valid pws-v1 payloads remain readable.",
+    "writeRule": "New writes use canonical pws-v1 fields only.",
+    "unknownOptionalReadFields": "preserve_or_ignore_without_semantic_reinterpretation"
+  },
+  "breakingChange": {
+    "requiresNewVersion": "pws-v2",
+    "changes": [
+      "remove or rename a canonical field",
+      "change a field type, meaning, identifier or owner module",
+      "make an optional field required",
+      "remove an accepted pws-v1 read value or alias",
+      "change state transition, permission or authorisation semantics",
+      "change a canonical write source",
+      "reinterpret a persisted value"
+    ],
+    "approvalRequired": true,
+    "compatibilityAdapterRequired": true,
+    "migrationAssessmentRequired": true
+  },
+  "migration": {
+    "automaticMigrationAllowed": false,
+    "requiredWhen": [
+      "persisted data cannot be read correctly by the target schema",
+      "identifier, relationship, constraint or required field changes",
+      "a write-source ownership transfer affects stored data"
+    ],
+    "notRequiredWhen": [
+      "documentation-only clarification",
+      "optional additive metadata with a deterministic default",
+      "read-only alias adapter"
+    ],
+    "rules": [
+      "Migration is explicit, ordered, additive and checksum-verified.",
+      "An applied Migration is immutable.",
+      "Migration preserves identity, lineage, audit and rollback evidence.",
+      "Schema release and Migration execution are separate authorised actions."
+    ]
+  },
+  "deprecation": {
+    "minimumFields": [
+      "deprecatedName",
+      "canonicalReplacement",
+      "deprecatedSince",
+      "readAdapter",
+      "newWritesAllowed",
+      "removalVersion"
+    ],
+    "newWritesAllowed": false,
+    "readCompatibilityRequired": true,
+    "earliestRemovalVersion": "pws-v2",
+    "silentRemovalAllowed": false
+  },
+  "schemaValidation": {
+    "required": true,
+    "validationOrder": [
+      "schemaVersion",
+      "object registration",
+      "required fields",
+      "field types",
+      "identifier format",
+      "status and enum values",
+      "cross-object references",
+      "permission and ownership invariants"
+    ],
+    "readMode": "accept valid pws-v1 plus declared Legacy adapters",
+    "writeMode": "accept canonical pws-v1 only",
+    "failureMode": "reject without persistence or side effect",
+    "providerOutputMayBypassValidation": false,
+    "uiMayBypassValidation": false,
+    "apiMayInventSchemaVersion": false
+  },
+  "boundaries": {
+    "runtimeSchemaRegistryUnchanged": true,
+    "contentRegistryUnchanged": true,
+    "migrationRegistryUnchanged": true,
+    "pageBehaviorUnchanged": true
+  }
+}

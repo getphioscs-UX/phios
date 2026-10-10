@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W24-DELTA-MANIFEST-v1.0.0",
+  "work": "MPA-W24",
+  "baselineCommit": "d150a741231abe608a0d994e9e5787e6c71cfc3d",
+  "title": "HDR Restricted Boundary",
+  "status": "READY_FOR_REPOSITORY_APPLY_AND_GIT_AWARE_ACCEPTANCE",
+  "decision": "RESTRICTED_BOUNDARY_ESTABLISHED_NOT_ELIGIBLE_FOR_W26",
+  "changedFiles": [
+    "content/professional/method-production-activation/acceptance/mpa-w24-hdr-boundary-acceptance-v1.json",
+    "content/professional/method-production-activation/contracts/mpa-hdr-restricted-boundary-v1.json",
+    "content/professional/method-production-activation/registries/mpa-hdr-astronomy-authority-boundary-v1.json",
+    "content/professional/method-production-activation/registries/mpa-hdr-boundary-readiness-v1.json",
+    "content/professional/method-production-activation/registries/mpa-hdr-boundary-regression-freeze-v1.json",
+    "content/professional/method-production-activation/registries/mpa-hdr-mapping-authority-boundary-v1.json",
+    "content/professional/method-production-activation/registries/mpa-hdr-meaning-integration-boundary-v1.json",
+    "content/professional/method-production-activation/registries/mpa-hdr-professional-boundary-v1.json",
+    "content/professional/method-production-activation/registries/mpa-hdr-public-vocabulary-boundary-v1.json",
+    "content/professional/method-production-activation/registries/mpa-hdr-rights-license-boundary-v1.json",
+    "content/professional/method-production-activation/schemas/mpa-hdr-boundary-readiness-v1.schema.json",
+    "docs/mpa/MPA-W24-DELTA-MANIFEST.json",
+    "docs/runtime/MPA-W24-HDR-BOUNDARY.md",
+    "functions/method-production-activation/hdr-boundary-runtime.js",
+    "package.json",
+    "scripts/check-mpa-w24-hdr-boundary.mjs",
+    "scripts/lib/method-production-activation/mpa-hdr-boundary-v1.mjs"
+  ],
+  "packageJsonPreservation": {
+    "baselineLineCount": 810,
+    "finalLineCount": 812,
+    "unrelatedExistingLinesRemoved": 0,
+    "existingLinesReplaced": 1,
+    "replacementScope": "check:mpa aggregate line only",
+    "newLinesAdded": 2,
+    "globalJsonReserializationPerformed": false
+  },
+  "validationObserved": [
+    "npm run check:mpa-w24 PASS",
+    "npm run check:mpa PASS W0-W24",
+    "npm run check:wpr-w13 PASS",
+    "npm run check:wpr-w21 PASS",
+    "npm run check:cm-w7 PASS",
+    "npm run check:mr-w3 PASS",
+    "npm run check:mr-w4 PASS",
+    "npm run check:mr-w5 PASS",
+    "npm run check:mr-w6 PASS"
+  ],
+  "nonActivation": {
+    "productionEligibilityCreated": false,
+    "productionExecutionAuthorityCreated": false,
+    "professionalEligibilityCreated": false,
+    "professionalReleaseCreated": false,
+    "commercialLicenseCreated": false,
+    "gateMappingAuthorityCreated": false,
+    "bodyGraphStructureAuthorityCreated": false,
+    "publicRestrictedMethodIdentityCreated": false
+  },
+  "preservedAuthorities": [
+    "MR Frozen v1",
+    "IMR Frozen v1",
+    "HDR Frozen v1",
+    "MPA Method Registry v2",
+    "MPA Capability Matrix v1",
+    "MPA W4 Public Vocabulary Boundary v1",
+    "WPR Public Vocabulary Registry v2",
+    "CMR-W7 HDR Mapping Acceptance v1",
+    "W11 Historical Data Authority Registry",
+    "W15 Historical Comparison Registry"
+  ],
+  "nextWork": "MPA-W25_FUTURE_METHOD_HOLDING",
+  "fullCheckReplay": {
+    "attempted": true,
+    "passed": false,
+    "classification": "ARCHIVE_ENVIRONMENT_GIT_METADATA_UNAVAILABLE_NOT_W24_ASSERTION_FAILURE",
+    "failureAt": "scripts/check-pds-w0-baseline-boundary.mjs",
+    "message": "git rev-parse failed because the aligned ZIP replay has no .git directory",
+    "requiredFinalAcceptance": "Run npm run check in the real Git repository after applying the delta."
+  }
+}

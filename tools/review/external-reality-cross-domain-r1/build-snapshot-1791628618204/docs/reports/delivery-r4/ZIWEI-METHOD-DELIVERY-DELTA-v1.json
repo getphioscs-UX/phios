@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "METHOD_REPORT_DELIVERY_DELTA_V1",
+  "methodCode": "ZWR",
+  "sourceHead": "67254e3d039c842fca0cbd8edc392691ccd2166b",
+  "nativeOwnerRef": "docs/reports/ziwei/vfr-r1/PRODUCTION-CUTOVER.json",
+  "nativeOwnerSha256": "f4e2b428dc6ee06e39690c957f73cff39fac01985530568f9dcc5e6773d20fcd",
+  "status": "BLOCKED",
+  "publicationProfileRef": "content/reports/method-publication-profiles-v1.json#ZWR",
+  "generationVersion": "ZIWEI-VFR-R1-AUTO-DEEP-GENERATION-v3",
+  "semanticVersion": null,
+  "publicationVersion": "ZWR-VFR-R1-DEEP-PUBLICATION-IR-v1",
+  "rendererMode": "ZIWEI_VFR",
+  "rendererVersion": "ZWR-VFR-R1-DEEP-RENDERER-v6",
+  "pagePlanMode": "ADAPTIVE_REFLOW",
+  "expectedPageRule": "candidate.snapshot.semanticContent.vfrPagePlan.length",
+  "diagramRule": {
+    "nativeOwnerOnly": true,
+    "count": 15
+  },
+  "localeRule": "NATIVE_OWNER",
+  "generationProviderRule": "BOUNDED_WRITING_ALLOWED",
+  "publicationProviderRule": 0,
+  "rerenderProviderRule": 0,
+  "reopenProviderRule": 0,
+  "semanticReviewRule": 0,
+  "releaseEligibilityRule": "ALL_APPLICABLE_NATIVE_AND_SHARED_GATES_REQUIRED",
+  "subjectBindingRule": "NATIVE_OWNER_REQUIRED",
+  "methodSpecificNegativeAccessCases": [
+    "AUTHORIZATION_ON_CACHE_HIT",
+    "WRONG_ACCOUNT_DENIED"
+  ],
+  "fullSharedE2ERepeated": false,
+  "localDeltaProof": "docs/reports/delivery-r4/LOCAL-VERIFICATION-R4.json",
+  "deployedProof": null,
+  "blockers": [
+    {
+      "owner": "workers/method-report-renderer/index.js",
+      "reason": "Deployed browser and real-account proof not executed. Local synthetic receipts grant no live authority.",
+      "minimumNextAction": "Reconcile latest main, review and explicitly authorize deploy/live phases."
+    }
+  ],
+  "sharedDeliveryAuthorityEligible": false,
+  "contentAcceptanceExisting": true,
+  "contentAcceptanceDigest": "81e31ab108602135616965c0c92d838085ddb0f5561c02c02ceb09f8958dc611",
+  "snapshotVersion": "PHI-OS-CUSTOMER-DELIVERY-SNAPSHOT-v1.0.0",
+  "compositionVersion": "ZIWEI-VFR-R1-AUTO-DEEP-GENERATION-v3",
+  "publicationIrVersion": "ZWR-VFR-R1-DEEP-PUBLICATION-IR-v1",
+  "pagePlanVersion": "ZWR-VFR-R1-ADAPTIVE-LANGUAGE-SEQUENTIAL-v6",
+  "pagePlanDigest": {
+    "rule": "SHA256_STABLE_RECOMPUTED_NATIVE_PLAN",
+    "perCandidate": true
+  },
+  "diagramRegistryVersion": "ZWR-VFR-R1-DIAGRAM-DATA-v1",
+  "diagramDigest": {
+    "rule": "SOURCE_EVIDENCE_REBUILT_DIGEST",
+    "perCandidate": true
+  },
+  "rendererInputMode": "ZIWEI_VFR",
+  "materialSchemaVersion": "METHOD_PRIVATE_RELEASED_MATERIAL_V2",
+  "releaseAdapterVersion": "ZWR_CONTROLLED_RELEASE_MATERIAL_V1",
+  "semanticCacheStatus": "LOCAL_SYNTHETIC_PASS",
+  "publicationCacheStatus": "LOCAL_SYNTHETIC_PASS",
+  "firstGenerationIdempotencyStatus": "LOCAL_SYNTHETIC_PASS",
+  "reopenProviderCalls": 0,
+  "reopenRendererCalls": 0,
+  "localSyntheticPass": true,
+  "deployedRendererPass": false,
+  "realAccountReleasePass": false,
+  "libraryPass": false,
+  "differentSessionReopenPass": false,
+  "secondAccountIsolationPass": false,
+  "finalStatus": "BLOCKED"
+}

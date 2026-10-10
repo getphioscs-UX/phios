@@ -1,0 +1,61 @@
+{
+  "recordedAt": "2026-10-01T09:19:25.636Z",
+  "npmCheck": {
+    "command": "npm run check",
+    "exitCode": 0,
+    "lifecycles": [
+      "precheck",
+      "check",
+      "postcheck"
+    ],
+    "log": "docs/reports/ziwei/production-admission/cpa-v1/npm-check.log",
+    "sha256": "caf5101c02604e1ea84c9003baf9d929fc68e4d0ed44672b19046ebbf810e32a"
+  },
+  "focusedChecks": {
+    "canonicalPerson": "PASS_REAL_LOCAL_SQL_AND_CALCULATION",
+    "frozenProductionV1": "PASS_74_UNCHANGED_FILES",
+    "boundedPdfPageTree": "PASS_CHUNK_BOUNDARIES_TRUNCATION_AND_COUNT_MISMATCH",
+    "atlasSuccessorChain": "PASS"
+  },
+  "qa": {
+    "account": "AUTHENTICATED",
+    "person": "OWNED_AND_CANONICAL",
+    "realStripeTestEntitlement": "VERIFIED",
+    "privateRendererLatestFix": "REMOTE_NOT_PROVEN_QUOTA_429",
+    "accountDelivery": "NOT_PROVEN",
+    "releasedMaterialCount": 0
+  },
+  "productionDelivery": "NOT_RUN",
+  "productionAdmission": "NOT_GRANTED",
+  "cleanupManifest": "docs/reports/ziwei/production-admission/cpa-v1/cleanup-manifest.json",
+  "sourceDigests": [
+    {
+      "path": "functions/account/canonical-person-store.js",
+      "sha256": "683e686c9538194e800de30982809fb55f891f9afb320a2b77c1a4fa3b1029ac"
+    },
+    {
+      "path": "functions/account/ziwei-account-delivery.js",
+      "sha256": "316ba7633f79cd5dd2e08d8f700b967c091835ca5e186644176fcde43273f7e6"
+    },
+    {
+      "path": "functions/api/account-persons.js",
+      "sha256": "ccdeb6c8384fe97ce5133f2c63ff3276abd242b2f108713f9f95f15e7174e84f"
+    },
+    {
+      "path": "functions/api/account-method-reports.js",
+      "sha256": "47d51082922b018bb679a36ddde2ac0ef32516678f00fb31c65421f21520da2e"
+    },
+    {
+      "path": "functions/report-delivery/ziwei-canonical-person-binding.js",
+      "sha256": "cb215f0c09edeb9159349920476af32337bd0074f830be000b0ff34559f7f33e"
+    },
+    {
+      "path": "workers/method-report-renderer/index.js",
+      "sha256": "e008f61f37a8225f875bd5b3ebba31191a16c776299a36597bc07682884349ce"
+    },
+    {
+      "path": "workers/method-report-renderer/pdf-page-count.js",
+      "sha256": "1d37a31975682bec405446f2f8719896c4a3c69516d75d9c2ddc0e4f08ee64a6"
+    }
+  ]
+}

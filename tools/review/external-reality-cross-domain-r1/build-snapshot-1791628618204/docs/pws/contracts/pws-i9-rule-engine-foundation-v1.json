@@ -1,0 +1,99 @@
+{
+  "freezeId": "PWS-I9-Rule-Engine-Foundation-v1.0.0-Frozen",
+  "programme": "PHASE 4 Free Explore Foundation",
+  "step": "STEP 4.2",
+  "sequenceKey": "PWS-I9-RULE-FOUNDATION",
+  "version": "1.0.0",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "e52a1d154291d51737d837226439bd2ddd8cd9a2",
+    "prerequisite": "PWS-I8-Free-Observation-Privacy-Foundation-v1.0.0-Frozen"
+  },
+  "owner": "PWS-I9",
+  "engine": {
+    "mode": "deterministic_rule_first",
+    "module": "functions/pws/intelligence/rule-engine.js",
+    "providerInvoked": false,
+    "canonicalQuestionRoutePersisted": false,
+    "forcedClassificationAllowed": false
+  },
+  "responsibilities": [
+    "Question Topic Detection",
+    "Complexity Level 1-5",
+    "Knowledge Resource Matching",
+    "Scope Resolution",
+    "Boundary Check",
+    "Public Navigation",
+    "Individual Analysis Required",
+    "Professional Responsibility Required"
+  ],
+  "requiredOutputFields": [
+    "questionId",
+    "detectedThemes",
+    "complexityLevel",
+    "matchedConcepts",
+    "matchedResources",
+    "observationPrompts",
+    "individualAnalysisRequired",
+    "professionalResponsibilityRequired",
+    "routingBoundary",
+    "confidence"
+  ],
+  "routingBoundaries": [
+    "public_knowledge",
+    "free_observation",
+    "individual_analysis_required",
+    "professional_responsibility_required",
+    "unclassified"
+  ],
+  "knowledgeSources": [
+    "content/registry/concepts.json",
+    "content/knowledge/registry/themes.json",
+    "content/knowledge/registry/nodes.json",
+    "content/knowledge/registry/supporting-questions.json",
+    "content/knowledge/registry/search-aliases.json",
+    "content/knowledge/registry/localized-content.json",
+    "content/knowledge/registry/assets.json",
+    "content/knowledge/blueprints/book-1-knowledge-blueprint.json"
+  ],
+  "publicationBoundary": {
+    "registryPresenceCreatesProductionRequirement": false,
+    "blueprintPlanningCreatesPublication": false,
+    "matchedResourcesRequireContentReviewed": true,
+    "matchedResourcesRequireReviewApproved": true,
+    "matchedResourcesRequirePublishedLocaleAsset": true
+  },
+  "prohibitions": {
+    "defaultSpecificServiceRecommendation": false,
+    "caseJudgment": false,
+    "highCostCaseProviderInvocation": false,
+    "forcedClassification": false
+  },
+  "formalSystemSeparation": {
+    "formalQuestionRouteCreated": false,
+    "formalJourneyCreated": false,
+    "formalEvidenceCreated": false,
+    "professionalAssignmentCreated": false,
+    "professionalQueueWritten": false,
+    "providerUsageCreated": false,
+    "providerCostCreated": false
+  },
+  "preservation": {
+    "coreRuntimeChanged": false,
+    "runtimeSchemaChanged": false,
+    "d1MigrationAdded": false,
+    "apiEndpointAdded": false,
+    "productChanged": false,
+    "offerChanged": false,
+    "priceChanged": false,
+    "entitlementChanged": false,
+    "consentChanged": false,
+    "existingProviderAdaptersChanged": false
+  },
+  "acceptance": {
+    "fixtures": "tests/fixtures/pws-i9-rule-engine-scenarios.json",
+    "command": "npm run check:pws-i9-rule-engine"
+  }
+}

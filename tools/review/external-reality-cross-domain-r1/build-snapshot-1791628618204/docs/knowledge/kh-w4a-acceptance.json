@@ -1,0 +1,52 @@
+{
+  "contract": "KH-W4A-ACCEPTANCE-v1",
+  "stage": "KH-W4A",
+  "status": "passed",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "fullCommitSha": "46db2da328581cb03b8bbdd1dac035dc3a29e5e8",
+    "shortCommitSha": "46db2da",
+    "sourceArchive": "PHIOS(22).zip",
+    "userReportedNpmCheck": "passed",
+    "generatedAt": "2026-08-05T10:57:10.772884+00:00"
+  },
+  "acceptance": {
+    "existingFoundationInventoried": true,
+    "runtimeAuthoritiesIdentified": true,
+    "freezeEvidenceSeparatedFromRuntimeAuthority": true,
+    "duplicateFoundationsIdentified": true,
+    "foundationGapsAssignedToLaterStages": true,
+    "noSecondRegistryCreated": true,
+    "noSecondLoaderCreated": true,
+    "runtimeChanged": false,
+    "registryChanged": false,
+    "nodeIdentityChanged": false,
+    "reviewChanged": false,
+    "approvalChanged": false,
+    "publicationChanged": false
+  },
+  "nextStage": "KH-W4B",
+  "checks": {
+    "check:kh-w4a": {
+      "exitCode": 0,
+      "passed": true,
+      "outputTail": "> check:kh-w4a\n> node scripts/check-kh-w4a-knowledge-runtime-v2.mjs\n\n✓ KH-W4A Knowledge Runtime v2 Blueprint Registry and Loader passed.\n  Four registered Blueprints project 16 Parts and preserve all 78 Canonical Node identities.\n  P5 resolves to BOOK-2; P13 resolves to BOOK-4; architecture-only Parts create no Nodes.\n  Legacy single-Book authority is retired; digest mismatch fails closed."
+    },
+    "check:pja-r4": {
+      "exitCode": 1,
+      "passed": false,
+      "outputTail": "> check:pja-r4\n> node scripts/check-pja-r4-four-volume-blueprint-binding-reconciliation.mjs\n\nnode:internal/modules/package_json_reader:256\n  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);\n        ^\n\nError [ERR_MODULE_NOT_FOUND]: Cannot find package 'ajv' imported from /mnt/data/phios22-clean/scripts/lib/knowledge-production/readiness-system.mjs\n\u001b[90m    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:256:9)\u001b[39m\n\u001b[90m    at packageResolve (node:internal/modules/esm/resolve:768:81)\u001b[39m\n\u001b[90m    at moduleResolve (node:internal/modules/esm/resolve:854:18)\u001b[39m\n\u001b[90m    at defaultResolve (node:internal/modules/esm/resolve:984:11)\u001b[39m\n\u001b[90m    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)\u001b[39m\n\u001b[90m    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:25)\u001b[39m\n\u001b[90m    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)\u001b[39m\n\u001b[90m    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)\u001b[39m\n\u001b[90m    at ModuleJob._link (node:internal/modules/esm/module_job:137:49)\u001b[39m {\n  code: \u001b[32m'ERR_MODULE_NOT_FOUND'\u001b[39m\n}\n\nNode.js v22.16.0"
+    },
+    "check:knowledge-runtime": {
+      "exitCode": 0,
+      "passed": true,
+      "outputTail": "> check:knowledge-runtime\n> node scripts/check-knowledge-runtime.mjs\n\nKNR-W0-W2 Knowledge Runtime foundation checks passed.\nValidated: published-only index, public question boundary, no Provider/Runtime/Publication authority, deterministic rebuild contract.\nDeferred by scope: routing, ranking, coverage, projection, API, public UI, Provider projection."
+    }
+  },
+  "userReportedFullCheck": {
+    "command": "npm run check",
+    "status": "passed",
+    "source": "user-provided latest repository ZIP"
+  }
+}

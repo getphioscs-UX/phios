@@ -1,0 +1,138 @@
+{
+  "freezeId": "PWS-I2-v1.0.0-Frozen",
+  "programme": "PWS-I2 Universal Registry Foundation",
+  "version": "1.0.0",
+  "schemaVersion": "pws-v1",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "7dc7235",
+    "productionDeployment": "https://58674bd8.phios-github.pages.dev",
+    "productionUrl": "https://phios-github.pages.dev"
+  },
+  "scope": {
+    "from": "PWS-I2-W0",
+    "through": "PWS-I2-W7",
+    "knowledgeCompanionGates": [
+      "KH-W3.5F-Frozen",
+      "KH-W3.5G-Completed"
+    ],
+    "nextExecution": [
+      "PWS",
+      "PJA"
+    ]
+  },
+  "acceptanceConditions": [
+    {
+      "step": "W0",
+      "condition": "Registry baseline and source authorities audited",
+      "evidence": "docs/pws/audit/pws-i2-w0-registry-baseline-audit.json",
+      "command": "npm run check:pws-i2-w0"
+    },
+    {
+      "step": "W1",
+      "condition": "Universal Registry Core and D1 storage complete",
+      "evidence": "db/migrations/0005_pws_universal_registry.sql",
+      "command": "npm run check:pws-i2-w1"
+    },
+    {
+      "step": "W2",
+      "condition": "Professional Registry complete",
+      "evidence": "functions/pws/registry/professional-registry.js",
+      "command": "npm run check:pws-i2-w2"
+    },
+    {
+      "step": "W3",
+      "condition": "Capability and Credential Registry complete",
+      "evidence": "functions/pws/registry/capability-credential-registry.js",
+      "command": "npm run check:pws-i2-w3"
+    },
+    {
+      "step": "W4",
+      "condition": "Method and Service Registry complete",
+      "evidence": "functions/pws/registry/method-service-registry.js",
+      "command": "npm run check:pws-i2-w4"
+    },
+    {
+      "step": "W5",
+      "condition": "Product and Offer Registry complete",
+      "evidence": "functions/pws/registry/product-offer-registry.js",
+      "command": "npm run check:pws-i2-w5"
+    },
+    {
+      "step": "W6",
+      "condition": "Knowledge and Deliverable Type Registry complete",
+      "evidence": "functions/pws/registry/knowledge-deliverable-type-registry.js",
+      "command": "npm run check:pws-i2-w6"
+    },
+    {
+      "step": "W7",
+      "condition": "Legacy migration and reconciliation complete",
+      "evidence": "docs/pws/migrations/pws-i2-w7-migration-reconciliation-v1.json",
+      "command": "npm run check:pws-i2-w7"
+    },
+    {
+      "step": "KH-W3.5F",
+      "condition": "Canonical extraction and scaling frozen",
+      "evidence": "docs/knowledge/kh-w3-5f-canonical-extraction-scaling-freeze-v1.json",
+      "command": "npm run check:kh-w3.5f"
+    },
+    {
+      "step": "KH-W3.5G",
+      "condition": "Book I 78-node Knowledge Blueprint completed",
+      "evidence": "docs/knowledge/kh-w3-5g-book-i-knowledge-blueprint-freeze-v1.json",
+      "command": "npm run check:kh-w3.5g"
+    },
+    {
+      "step": "I2",
+      "condition": "Full repository lifecycle check passes",
+      "command": "npm run check"
+    }
+  ],
+  "canonicalAcceptanceSnapshot": {
+    "registryObjects": 71,
+    "registryRelationships": 70,
+    "professionalFoundationObjects": 11,
+    "capabilityDefinitions": 7,
+    "credentialDefinitions": 7,
+    "methodDefinitions": 6,
+    "serviceDefinitions": 18,
+    "productTypeDefinitions": 6,
+    "products": 2,
+    "offers": 2,
+    "publishedAssetTypes": 7,
+    "deliverableTypes": 5,
+    "legacyReportTypesReconciled": 14,
+    "bookICanonicalNodesPlanned": 78,
+    "activeArticleMaximum": 8
+  },
+  "frozenBoundaries": {
+    "coreRuntimeAuthorityPreserved": true,
+    "pkrKnowledgeAuthorityPreserved": true,
+    "legacyReadCompatibilityPreserved": true,
+    "legacyWriteAuthorityPreserved": false,
+    "secondSourceOfTruthAllowed": false,
+    "paymentCreatesProfessionalResponsibility": false,
+    "registryPresenceCreatesContentRequirement": false,
+    "unapprovedProfessionalPriceActivated": false,
+    "newD1MigrationAfter0005Added": false,
+    "pageBehaviourChanged": false
+  },
+  "changeControl": {
+    "silentBehaviouralChangeAllowed": false,
+    "directMutationAllowed": false,
+    "legacyAliasWriteAllowed": false,
+    "unmappedLegacyReadAllowed": false,
+    "identityConflictFailsClosed": true,
+    "relationshipConflictFailsClosed": true,
+    "changeRequires": [
+      "explicit_version",
+      "compatibility_decision",
+      "migration_decision",
+      "updated_automated_acceptance"
+    ]
+  },
+  "acceptanceCommand": "npm run check:pws-i2",
+  "fullAcceptanceCommand": "npm run check"
+}

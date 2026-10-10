@@ -1,0 +1,104 @@
+{
+  "workId": "BAZI-CONTROLLED-SUBJECT-BINDING-R1",
+  "status": "POSITIVE_AND_NEGATIVE_BINDING_PASS",
+  "historicalSubjectBindingVerified": false,
+  "controlledSubjectBindingVerified": true,
+  "calculationReceipt": {
+    "subjectReference": "CONTROLLED-BZR-SUBJECT-R1",
+    "canonicalBirthInputFingerprint": "f368021597651fdddbbc7f6d03201724c1344e03577e85c7401833104fdeaab2",
+    "inputSubjectFingerprint": "1dbd199eca939e785f1fad38d5547088e32c2ba20bd2acc1ebcd872a29a64376",
+    "requestDigest": "d02d7defb4fc98cfbab7351ce28b8e94e64456ac3f0319b52ed8e57c94581adf",
+    "projectionId": "CMP-1DA1AA1E6209C9B48F0453F5",
+    "calculationDigest": "fb798ea857e2cfd59bbb43a24d32ed47d5266e80554fdc2a6eb68700ecda6e68",
+    "engine": "CURRENT_MCD5_PRODUCTION_ADAPTER",
+    "mockAstronomyUsed": false
+  },
+  "artifacts": [
+    {
+      "locale": "zh-Hans",
+      "path": "tools/review/BAZI-CONTROLLED-SUBJECT-R1-zh-Hans.html",
+      "evidencePath": "docs/acceptance/bazi-paid-report/controlled-subject-r1/zh-Hans.json",
+      "subjectBindingVerified": true,
+      "snapshotDigest": "675151195626bcfbe9018949f236c6b7ce4d9c015e67f933caacacf01613201d",
+      "artifactDigest": "fff2f166d51275a4e231eca60150f5bb5b2ae9777bf7aa4b9bd3e8a12af2ded3",
+      "negativeTests": [
+        {
+          "name": "wrong-subject",
+          "result": "REJECTED",
+          "error": "COVER_SUBJECT_MISMATCH"
+        },
+        {
+          "name": "wrong-date",
+          "result": "REJECTED",
+          "error": "COVER_BIRTH_DATE_MISMATCH"
+        },
+        {
+          "name": "wrong-time",
+          "result": "REJECTED",
+          "error": "COVER_BIRTH_TIME_MISMATCH"
+        },
+        {
+          "name": "wrong-place",
+          "result": "REJECTED",
+          "error": "COVER_BIRTH_INPUT_MISMATCH"
+        },
+        {
+          "name": "wrong-timezone",
+          "result": "REJECTED",
+          "error": "COVER_BIRTH_INPUT_MISMATCH"
+        },
+        {
+          "name": "valid-overlay-from-different-birth-input",
+          "result": "REJECTED"
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "path": "tools/review/BAZI-CONTROLLED-SUBJECT-R1-en.html",
+      "evidencePath": "docs/acceptance/bazi-paid-report/controlled-subject-r1/en.json",
+      "subjectBindingVerified": true,
+      "snapshotDigest": "a3fdcdba7a09d9ed0cc0919156bcc369c5cc88b5b1602b8b21e752b00415e696",
+      "artifactDigest": "7845178315a1460d13dcaabe321a0443aba2e610f29d11cf22055e7be3135bc8",
+      "negativeTests": [
+        {
+          "name": "wrong-subject",
+          "result": "REJECTED",
+          "error": "COVER_SUBJECT_MISMATCH"
+        },
+        {
+          "name": "wrong-date",
+          "result": "REJECTED",
+          "error": "COVER_BIRTH_DATE_MISMATCH"
+        },
+        {
+          "name": "wrong-time",
+          "result": "REJECTED",
+          "error": "COVER_BIRTH_TIME_MISMATCH"
+        },
+        {
+          "name": "wrong-place",
+          "result": "REJECTED",
+          "error": "COVER_BIRTH_INPUT_MISMATCH"
+        },
+        {
+          "name": "wrong-timezone",
+          "result": "REJECTED",
+          "error": "COVER_BIRTH_INPUT_MISMATCH"
+        },
+        {
+          "name": "valid-overlay-from-different-birth-input",
+          "result": "REJECTED"
+        }
+      ]
+    }
+  ],
+  "release": {
+    "channel": "LOCAL_CONTROLLED_REVIEW",
+    "released": true,
+    "customerProductionRelease": false,
+    "authenticatedCommerceE2E": false
+  },
+  "limitation": "Uses existing 26-page source-bound projection for a different controlled chart. It neither replaces nor grants editorial acceptance to the frozen 38-page historical report.",
+  "productionAdmissionGranted": false
+}

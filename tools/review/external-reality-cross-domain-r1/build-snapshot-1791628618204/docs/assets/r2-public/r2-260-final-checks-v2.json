@@ -1,0 +1,79 @@
+{
+  "scope": "Executed local checks; no human/production/deployment promotion",
+  "baseline": "dc427746f91efd7d3680db617493bbe74caac7c5",
+  "recordedAt": "2026-09-19T09:53:57.719Z",
+  "commands": [
+    {
+      "command": "npm run check:pages-build",
+      "result": "PASS",
+      "exitCode": 0,
+      "log": ".tmp/r2-260-pages-build.log",
+      "logSha256": "0998a98d5981b2b277ba5149370e4a1ff103a988a1ff64182c5a92393a823e24"
+    },
+    {
+      "command": "npm run check:r2-260-display",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run check:package-aliases",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/check-book-one-summary-browser.mjs",
+      "result": "PASS: 12/12 figures and 407 publication pages in all four combinations",
+      "exitCode": 0,
+      "log": ".tmp/book-one-summary-browser-v2.log",
+      "logSha256": "ce4ea289e1c0b7c296c9fdcba557c728d0699a36a2872264165d511429a400a0"
+    },
+    {
+      "command": "node scripts/check-book-v-pka-r1.mjs",
+      "result": "PASS: current existing Book V publication aggregate; no live provider claim",
+      "exitCode": 0,
+      "log": ".tmp/book-v-pka-current.log",
+      "logSha256": "8158c01fef5bb34977374ab92db6aac5de028c7faccad660c24808c76006c98e"
+    },
+    {
+      "command": "node scripts/audit-book-v-pka-r1-visuals.mjs --remote",
+      "result": "PASS: 392 resolved, 15 representative families, 31 article objects",
+      "exitCode": 0,
+      "log": ".tmp/book-v-visuals-current.log",
+      "logSha256": "f96a3b667c5c601ca70b54eb542cb833428fb6a580cca3aefa485362ea349574"
+    },
+    {
+      "command": "node .tmp/check-r2-review-pages.mjs",
+      "result": "PASS: 390/1440 review UI, 260 rows, 11-item filter, evidence links, current Book 1 / Book V notices",
+      "exitCode": 0,
+      "log": ".tmp/r2-review-pages.log",
+      "logSha256": "661d3b105940f3d682843b1da0fa60724c751c5d10a0ab5695573ecae08b8de4"
+    },
+    {
+      "command": "npm run check",
+      "result": "PASS: precheck + check + postcheck, final working tree",
+      "exitCode": 0,
+      "log": ".tmp/r2-260-npm-check-final.log",
+      "logSha256": "cde28a0e8f1bb5e4981a057ab94946040ebdcd84fcebf543251ce76e4ff3969c"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS",
+      "exitCode": 0
+    }
+  ],
+  "initialInfrastructureRetry": {
+    "command": "npm run check:pages-build",
+    "error": "Wrangler child-process spawn EPERM in sandbox",
+    "resolution": "Rerun with permitted subprocess execution; exit 0; no checker skipped"
+  },
+  "browserEvidence": {
+    "staticViews": 92,
+    "phiViews": 40,
+    "phiCards": 37,
+    "phiMappingBlocked": 11,
+    "tarotObservations": 316,
+    "tarotAssets": 79,
+    "bookOneFigures": 12,
+    "bookOnePublicationPages": 407
+  }
+}

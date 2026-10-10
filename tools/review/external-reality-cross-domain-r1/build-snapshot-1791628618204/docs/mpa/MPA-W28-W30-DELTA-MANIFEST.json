@@ -1,0 +1,59 @@
+{
+  "manifestCode": "PHI-OS-MPA-W28-W30-DELTA-MANIFEST-v1",
+  "manifestVersion": "1.0.0",
+  "baselineCommit": "07391e717e64c2636ce22e3f97900ff97d9571d8",
+  "scope": [
+    "MPA-W28",
+    "MPA-W29",
+    "MPA-W30"
+  ],
+  "status": "DELTA_READY",
+  "includedFileCount": 18,
+  "includedFiles": [
+    "content/governance/reality-data-governance/extensions/mpa-rmo-method-projection/registries/rmo-method-projection-consumer-read-successor-v1.json",
+    "content/professional/method-production-activation/acceptance/mpa-w28-downstream-integration-acceptance-v1.json",
+    "content/professional/method-production-activation/acceptance/mpa-w29-full-acceptance-matrix-v1.json",
+    "content/professional/method-production-activation/acceptance/mpa-w29-full-acceptance-v1.json",
+    "content/professional/method-production-activation/acceptance/mpa-w30-freeze-acceptance-v1.json",
+    "content/professional/method-production-activation/contracts/mpa-downstream-integration-v1.json",
+    "content/professional/method-production-activation/freeze/mpa-production-activation-freeze-v1.json",
+    "content/professional/method-production-activation/freeze/mpa-w0-w29-content-preservation-manifest-v1.json",
+    "content/professional/method-production-activation/registries/mpa-downstream-integration-registry-v1.json",
+    "content/professional/method-production-activation/schemas/mpa-downstream-projection-reference-v1.schema.json",
+    "content/runtime/reality-model-runtime/extensions/mpa-method-projection/contracts/rmo-method-projection-reference-integration-v1.json",
+    "docs/mpa/MPA-W28-W30-DELTA-MANIFEST.json",
+    "docs/runtime/MPA-W28-W30-CLOSURE.md",
+    "functions/method-production-activation/downstream-integration-runtime.js",
+    "package.json",
+    "scripts/check-mpa-w28-downstream-integration.mjs",
+    "scripts/check-mpa-w29-full-acceptance.mjs",
+    "scripts/check-mpa-w30-freeze.mjs"
+  ],
+  "packagePreservation": {
+    "sourceLineCount": 840,
+    "finalLineCount": 848,
+    "existingLinesRemoved": 0,
+    "existingLinesReplaced": 3,
+    "newLinesAdded": 8,
+    "globalJsonReserializationPerformed": false,
+    "hdrBoundaryAggregateGapReconciled": true
+  },
+  "validation": {
+    "checkMpaW28": "PASS",
+    "checkMpaW29": "PASS",
+    "checkMpaW30": "PASS",
+    "checkMpa": "PASS_W0_W30",
+    "jr": "PASS",
+    "pr": "PASS",
+    "wprW30": "PASS",
+    "rmo": "NOT_REPLAYED_MISSING_AJV_IN_ARCHIVE",
+    "rre": "NOT_REPLAYED_MISSING_AJV_IN_ARCHIVE",
+    "rne": "NOT_REPLAYED_MISSING_AJV_IN_ARCHIVE",
+    "cpr": "BASELINE_PREEXISTING_FIGURE_HTML_DIGEST_DRIFT"
+  },
+  "notes": [
+    "RMO/RRE/RNE archive replay requires node_modules/ajv; the uploaded ZIP contains no node_modules.",
+    "CPR-W0 figure.html digest drift reproduces unchanged in the baseline attachment and is not introduced by this delta.",
+    "Run npm run check in the real Git checkout for final repository-wide acceptance."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-ENGINEERING-VALIDATION-v1.0.0",
+  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
+  "status": "SCOPED_ENGINEERING_PASS_GLOBAL_CHECK_PERMISSION_BLOCKED",
+  "dependencyInstall": {"command":"npm ci --ignore-scripts --no-audit --no-fund --fetch-retries=0 --fetch-timeout=20000","exitCode":0,"lockfileChanged":false},
+  "commands": [
+    {"command":"npm run check:ast-full-production","exitCode":0,"status":"PASS"},
+    {"command":"npm run check:cx-r12r3b","exitCode":0,"status":"PASS"},
+    {"command":"npm run check:cx-r12r4b:smr","exitCode":0,"status":"PASS"},
+    {"command":"npm run check:cx-r12r4b:smr-r2-w0-w5","exitCode":0,"status":"PASS"},
+    {"command":"git -c core.preloadIndex=false -c core.fsmonitor=false diff --check HEAD -- functions scripts package.json","exitCode":0,"status":"PASS"},
+    {"command":"npm run check","exitCode":1,"status":"BLOCKED_PERMISSION","stage":"precheck/PJA-W2E production tools security fixture cleanup","errorCode":"EACCES","operation":"unlink security fixture article.zh-Hans.json","mainCheckChainCompleted":false,"permissionOverrideAttempted":false,"protectedDirectoryDeleted":false}
+  ],
+  "baseline": {"gitTrackedFilesVerifiedBeforeEdits":10686,"historicalProtectedFilesReconciled":64,"historicalUnchanged":57,"preexistingMainSuccessors":4,"explicitAstSuccessorsWithinProtectedSet":3,"researchAndPriorPlanFilesPreserved":23},
+  "fidelity": {"originalRuntimeGitBlob":"b303b1295fc9962d1ec6862f9b3cdb6b7f618862","originalDigestVectors":16,"acceptedUnitsChecked":48,"themeDetailTransfers":46,"existingClaimIRSchema":"PASS","newAdmissionCreated":false},
+  "candidate": {"independentBirthInputs":8,"houseSystemProjections":16,"bilingualCandidates":32,"malformedGraphRejections":21,"partialInputVariants":3,"blockedInputVariants":2,"unitRange":[20,34],"allFiveAspectTypesTested":true,"missingMeaningFailsClosed":true,"oldAdmissionReuseBlocked":true,"inlineHumanReviewBlocked":true,"staleProjectionMeaningRejected":true,"deterministicWithPinnedFixtureExecutionTime":true},
+  "review": {"independentBirthInputs":8,"bilingualReviewSurfaces":16,"humanAccepted":0,"humanPending":16,"historical48Rewritten":false},
+  "notEstablished": ["PROFESSIONAL_PLATFORM_PARITY","WHOLE_CHART_SYNTHESIS_ACCEPTANCE","SOURCE_USE_BASIS","NEW_COMPOSITION_HUMAN_ACCEPTANCE","INDEPENDENT_EPHEMERIS_ACCURACY_CERTIFICATION","FULL_REPOSITORY_PASS","CUSTOMER_CUTOVER","DEPLOYMENT_AND_LIVE_SMOKE"],
+  "productionAllowedForNewCandidate": false
+}

@@ -1,0 +1,20 @@
+{
+  "contract": "KH-W4B.5-BOOK-3-R2-COMPATIBILITY-REPAIR-v1",
+  "status": "implementation-ready",
+  "baselineFullCommitSha": "7bca88e28a0da2930ef8e121fddd956d82c351e0",
+  "repairs": [
+    {
+      "checker": "KH-W4B/W4C",
+      "obsoleteAssertion": "4 books / 16 parts / 78 nodes",
+      "replacement": "derive totals from current Registry Authority"
+    },
+    {
+      "checker": "PJA-W2A",
+      "obsoleteAssertion": "global registry count equals historical Book 1 blueprint count",
+      "replacement": "all Book 1 blueprint nodes must be members of expanded registry"
+    }
+  ],
+  "expectedCurrentCanonicalNodes": 513,
+  "dataMutation": false,
+  "productionBoundaryChanged": false
+}

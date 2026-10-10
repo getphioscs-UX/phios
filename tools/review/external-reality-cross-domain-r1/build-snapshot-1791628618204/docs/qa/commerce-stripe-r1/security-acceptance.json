@@ -1,0 +1,36 @@
+{
+  "work": "COM-STRIPE-R1",
+  "implementation": "IMPLEMENTED",
+  "machine": "MACHINE_TESTED",
+  "mockAcceptance": "MOCK_ACCEPTED",
+  "tests": [
+    {
+      "name": "checkout authenticated, tamper rejected, live keys fail closed, origin protected",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "success poll creates no rights, another account cannot read order",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "invalid signature and live event do not mutate; RECEIVED replay recovers",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "provider price mismatch is review-required without grants; portal cannot select another customer",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "expiration/payment failure do not grant; protected book access is account-bound",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    }
+  ],
+  "realStripeE2E": "NOT_RUN — QA credential / deployment dependency",
+  "humanReview": "PENDING",
+  "live": "NOT_ACTIVATED"
+}

@@ -1,0 +1,52 @@
+{
+  "reconciliationCode": "PHI-OS-PWS-ENTRY-W1-BFR-H-SERVICES-RECONCILIATION-v2",
+  "reconciliationVersion": "2.0.0",
+  "status": "ACCEPTED_SUCCESSOR_RECONCILIATION",
+  "purpose": "Preserve the frozen PWS-ENTRY-W1 professional authorisation and data-loader boundary while accepting the BFR-H4 removal of inline presentation authority from services.html.",
+  "protectedArtifact": {
+    "path": "services.html",
+    "historicalBaselineExpectedHash": "79d47c96c79e9947ceaac34b425e8aba2da33506c08349f2fde324b21f24ed25",
+    "historicalBaselineRewritten": false
+  },
+  "predecessor": {
+    "reconciliationCode": "PHI-OS-PWS-ENTRY-W1-WPR-D-SERVICES-RECONCILIATION-v1",
+    "path": "docs/pws/reconciliation/pws-entry-w1-wpr-d-services-reconciliation-v1.json",
+    "sha256": "e1166802622c584e0ce9f04802c4aa5a2da625bff14a60c8d14d9e3f664561ca",
+    "rewritten": false
+  },
+  "successor": {
+    "program": "BFR-H",
+    "phase": "BFR-H_PART_A",
+    "works": [
+      "BFR-H4"
+    ],
+    "sourceCommit": "d62ae22e4a26da47ca03496074f8eb5585110143",
+    "sha256": "7f20e8b7fa84c13f390a0b9cbdb3f3e4ccd787d8613c911e4f6a56e88d0e543a",
+    "change": "REPLACE_INLINE_PRESENTATION_WITH_CONTROLLED_PDS_COMPONENT_CLASS",
+    "reason": "The Contact PHI OS link keeps its route, text and public action semantics while presentation moves from an inline style to the governed public-button--light-outline class.",
+    "authorityExpansionGranted": false
+  },
+  "bfrEvidence": {
+    "lineage": "content/web-production/bfr-pds-cpr-wpr-lineage-v1.json",
+    "pdsTokenStylesheet": "/assets/css/tokens.css",
+    "componentStylesheet": "/assets/css/public-experience.css",
+    "className": "public-button--light-outline",
+    "inlineStyleAuthorityLeak": false
+  },
+  "pwsBoundary": {
+    "authorisedDataLoaderChanged": false,
+    "professionalAuthorisationChanged": false,
+    "identityEligibilityAssignmentConsentPurposeScopeOrderChanged": false,
+    "deniedReadBoundaryChanged": false,
+    "payloadFreeAuditBoundaryChanged": false,
+    "publicSurfaceOnly": true
+  },
+  "rules": {
+    "historicalPwsEntryW1HashRewritten": false,
+    "wprDReconciliationRewritten": false,
+    "successorChainMustBeContinuous": true,
+    "latestSuccessorMustMatchExactHash": true,
+    "futureServicesChangeRequiresNewVersionedReconciliation": true,
+    "presentationHygieneDoesNotGrantProfessionalAuthority": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "BAZI_S03_OWNER_REVIEW_READINESS_V1",
+  "startingHead": "228594a13148c8e0bca655be5813392388a6cb29",
+  "sectionId": "S03_LIFE_STRUCTURE",
+  "status": "BLOCKED_BY_S02_V2",
+  "engineering": {
+    "baseline": "PASS_RECORDED",
+    "sectionRegistry": "PASS_RECORDED",
+    "methodCoverage": "PASS_RECORDED",
+    "richClaimIr": "PASS_RECORDED",
+    "explanationLayer": "PASS_RECORDED",
+    "predecessorAcceptance": "S02_V1_SUPERSEDED",
+    "canonicalAcceptedSnapshotLoader": "IMPLEMENTED",
+    "releaseEvidenceSync": "IMPLEMENTED",
+    "parityUiAction": "IMPLEMENTED_SOURCE_AND_BUNDLE"
+  },
+  "liveEvidence": {
+    "enSnapshot": "NOT_RUN",
+    "zhHansSnapshot": "NOT_RUN",
+    "bilingualParity": "NOT_RUN",
+    "renderedCandidate": "NOT_RUN"
+  },
+  "ownerGate": {
+    "status": "BLOCKED",
+    "reason": "S02 must be regenerated under BAZI_EXPLANATORY_AUTHORITY_V2 and explicitly accepted in both locales before S03 can resume.",
+    "accepted": false
+  },
+  "productionEligible": false,
+  "nextActions": [
+    "Complete S02 V2 engineering rebuild and local checks.",
+    "Generate only S02 English and zh-Hans in QA.",
+    "Run S02 bilingual parity.",
+    "Obtain explicit owner acceptance before reopening S03."
+  ]
+}

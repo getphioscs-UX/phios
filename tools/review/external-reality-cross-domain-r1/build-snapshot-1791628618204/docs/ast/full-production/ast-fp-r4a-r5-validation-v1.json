@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R4A-R5-VALIDATION-v1.0.0",
+  "sourceMainCommit": "0692037d3a3f522de9f0eb11d37f738df3a2bae6",
+  "work": [
+    "AST-FP-R4A",
+    "AST-FP-R5"
+  ],
+  "r4a": {
+    "claimCount": 21,
+    "claimBundleDigest": "c2a6b66709bc5f538c6c3b7a2991c1376aee8acf0f5d2f3e2c217288e0b7d3ef",
+    "humanAccepted": 0,
+    "pending": 21,
+    "reviewReadiness": "PASS",
+    "humanAdmission": "PENDING_EXPLICIT_USER_REVIEW",
+    "customerPublicationAllowed": false
+  },
+  "r5": {
+    "engineering": "PASS",
+    "schemaVersion": "PHI-OS-AST-WHOLE-CHART-SYNTHESIS-v1.0.0",
+    "fixtureDigests": {
+      "enPressure": "d531da2f31b4b9a26ec16ae2768c7aaa9dc0cc25196987f4cc8a09a5572cb2f3",
+      "zhExpression": "71f18cb038f1abeff954f31381b5efb13c0347bdd8c62ead8950e3cf4173529e"
+    },
+    "themeCount": 5,
+    "themeFamilies": [
+      "PATTERN_NETWORK",
+      "PATTERN_NETWORK",
+      "RULERSHIP_NETWORK",
+      "ASPECT_DYNAMICS",
+      "DISTRIBUTION_CONTEXT"
+    ],
+    "supportSignals": 3,
+    "tensionSignals": 3,
+    "intentReordersPriorityWithoutRewritingMeaning": true,
+    "r4aPendingFailsClosed": true,
+    "customerPublicationAllowed": false
+  },
+  "boundaries": {
+    "canonicalAstV2Mutated": false,
+    "r2HumanAcceptanceReused": false,
+    "humanAcceptanceInvented": false,
+    "rendererCreatesMeaning": false,
+    "productionAllowed": false,
+    "customerCutoverAllowed": false
+  },
+  "checks": [
+    {
+      "command": "node scripts/check-ast-fp-current.mjs",
+      "result": "PASS",
+      "currentReconciledMainCommit": "0692037d3a3f522de9f0eb11d37f738df3a2bae6",
+      "note": "Canonical SMR cleanup may retain manifest-only immutable historical evidence; current checker accepts only exact manifest digest when archived physical copy is absent."
+    },
+    {
+      "command": "npm run check:ast-fp-r2",
+      "result": "PASS",
+      "humanAccepted": 16,
+      "pending": 0
+    },
+    {
+      "command": "npm run check:ast-fp-r4",
+      "result": "PASS"
+    },
+    {
+      "command": "npm run check:ast-fp-r4a",
+      "result": "PASS_REVIEW_READINESS",
+      "humanAccepted": 0,
+      "pending": 21
+    },
+    {
+      "command": "npm run check:ast-fp-r5",
+      "result": "PASS_ENGINEERING",
+      "themeCount": 5,
+      "supportSignals": 3,
+      "tensionSignals": 3
+    },
+    {
+      "command": "npm run check:ast-fp-r3",
+      "result": "ENVIRONMENT_DEPENDENCY_INCOMPLETE",
+      "detail": "ERR_MODULE_NOT_FOUND: astronomy-engine; no calculation comparison failure was promoted to PASS"
+    }
+  ],
+  "aggregateStatus": "R4A_REVIEW_READY_R5_ENGINEERING_PASS_R3_RUNTIME_CERTIFICATION_STILL_EXTERNAL_GATE"
+}

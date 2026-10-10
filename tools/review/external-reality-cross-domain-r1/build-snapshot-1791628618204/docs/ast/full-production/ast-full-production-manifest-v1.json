@@ -1,0 +1,739 @@
+{
+  "schemaVersion": "PHI-OS-AST-FULL-PRODUCTION-PLAN-v1.0.0",
+  "documentRole": "PLANNING_MANIFEST_ONLY",
+  "work": "AST-FP-ADMISSION-BOUNDARY-AND-PHASE-PLAN",
+  "version": "1.0.0",
+  "recordedAt": "2026-08-28",
+  "baselineCommit": "07d01b39a98d07ff237f1516852f3b29d058a47e",
+  "baselineTree": "41920a6e6fc4d176ed42a54f2d06e88e6656ef3e",
+  "repository": "getphioscs-UX/phios",
+  "branch": "main",
+  "baselineUrl": "https://github.com/getphioscs-UX/phios/commit/07d01b39a98d07ff237f1516852f3b29d058a47e",
+  "status": "BOUNDARY_AND_PHASE_PLAN_READY_PRODUCTION_PHASES_DEFERRED",
+  "scope": "ast-W2",
+  "savedStopPoint": "ast-W2",
+  "newSavedArtifact": "AST-FP-ADMISSION-PLAN-v1",
+  "runtimeLoaded": false,
+  "implementedProductionPhases": [],
+  "allowedWriteScope": [
+    "docs/ast/full-production/"
+  ],
+  "changeClass": "DOCUMENTATION_ONLY_NO_RUNTIME_CONTRACT_UPGRADE",
+  "stageNames": {
+    "astW2": "This commit selected-source extraction checkpoint",
+    "legacyAstW2": "Historical planet-runtime milestone; not this checkpoint",
+    "smrR2W2": "Shared Customer Claim IR engineering milestone; not AST source admission",
+    "futurePhasePrefix": "AST-FP-P; planning labels only"
+  },
+  "currentState": {
+    "w0w1": "COMPLETED_HISTORICAL_AUDIT_AND_SOURCE_REGISTRATION",
+    "w2": "25_SELECTED_PASSAGES_PENDING_SPECIALIST_REVIEW",
+    "existingAstAvailability": "AVAILABLE_WITH_BOUND_SCOPE_NOT_FULL_NEW_ENRICHMENT",
+    "existingAstMeaningCount": 41,
+    "existingAstCompositionHumanAccepted": 24,
+    "existingAstCompositionHumanRequired": 24,
+    "existingApprovalTransferable": false,
+    "smrHumanAccepted": 0,
+    "smrHumanPending": 48,
+    "smrProductionAllowed": false,
+    "smrR2": "W0_W2_ENGINEERING_ACCEPTED_CUSTOMER_CUTOVER_FALSE",
+    "newSourceAdmittedCards": 0,
+    "newSourceProductionAllowed": false,
+    "newSourceCustomerCutoverAllowed": false,
+    "deployedThisTurn": false,
+    "liveProductionVerifiedThisTurn": false
+  },
+  "preservedAuthorities": [
+    {
+      "role": "GOVERNANCE",
+      "ref": "content/registry/master-governance.json",
+      "sha256": "d898f1445e8288454823ecfcfb3dc14a37c1b5b208a5de83c2fd5374859c6f43",
+      "note": "最高责任与冲突边界",
+      "mutated": false
+    },
+    {
+      "role": "CALCULATION",
+      "ref": "functions/ast-production/ast-structural-calculation-runtime.js",
+      "sha256": "72362d8792c27fea1b737a2b28cd82aa78b7935a963668e924d4ab9c50d3d244",
+      "note": "复用共享计算，禁止报告重算",
+      "mutated": false
+    },
+    {
+      "role": "HOUSE_POLICY",
+      "ref": "content/professional/ast-production/policies/ast-house-system-policy-v2.json",
+      "sha256": "c60c1005b80a9e76f586f85c2d8ee0db42e0ec6427bbb44cb4fc130f5ebd2661",
+      "note": "PLACIDUS_V1默认；WHOLE_SIGN_V1显式替代",
+      "mutated": false
+    },
+    {
+      "role": "ASPECT_POLICY",
+      "ref": "content/professional/ast-production/policies/ast-aspect-policy-v1.json",
+      "sha256": "db2cfde4bfbea4f93034441286ab520f36a5d43220c4606e94ed7a39f27264d2",
+      "note": "主相位/容许度/端点范围唯一权威",
+      "mutated": false
+    },
+    {
+      "role": "PROJECTION",
+      "ref": "functions/method-client-delivery/canonical-projection-runtime-ast-v2.js",
+      "sha256": "95343956f5b504764bbf3d58c3e7f92ee54fa2842b29c1096a2cd926f838f5eb",
+      "note": "CanonicalMethodProjection v2",
+      "mutated": false
+    },
+    {
+      "role": "MEANING",
+      "ref": "content/professional/canonical-meaning-production/successors/canonical-method-meaning-mapping-v4.json",
+      "sha256": "2ec274529ad50988f70f40395f485c6524f5c3271c49c8b0944db3ecb69169aa",
+      "note": "已有41条AST映射，不因外部书卡而自动扩充",
+      "mutated": false
+    },
+    {
+      "role": "MEANING_ADMISSION",
+      "ref": "content/professional/canonical-meaning-production/successors/canonical-meaning-admission-registry-v2.json",
+      "sha256": "b2856f407d9a5c0f2a21e4dce3f270abc9c787dd0cf0582c46a1063b2148cce2",
+      "note": "已有意义准入不授权新书卡",
+      "mutated": false
+    },
+    {
+      "role": "MEANING_LOCALE",
+      "ref": "content/professional/canonical-meaning-production/successors/canonical-meaning-locale-registry-v3.json",
+      "sha256": "f159c549fe2b476d1452cace78ad2c667b2d595c20ddde2b6734a0ee247c1b85",
+      "note": "版本化双语意义",
+      "mutated": false
+    },
+    {
+      "role": "MEANING_BUNDLE",
+      "ref": "functions/canonical-meaning-production/meaning-bundle-builder-ast-v2.js",
+      "sha256": "ae37fd4a0093cefa537e8da8b0643e27e054cf004416d5ce07c815d7fadffc2d",
+      "note": "现有meaning bundle builder",
+      "mutated": false
+    },
+    {
+      "role": "COMPOSITION_RULES",
+      "ref": "content/customer-experience-rebuild/registries/cx-r12r3b-composition-rule-registry-v2.json",
+      "sha256": "9cf7ee8841d3be5df728600d126898d947af002b068d872bd66ddb39fc0bebf8",
+      "note": "三条AST组合规则的现有登记",
+      "mutated": false
+    },
+    {
+      "role": "SHARED_COMPOSITION",
+      "ref": "functions/interpretation-runtime/cx-r12r3b-shared-runtime-v2.js",
+      "sha256": "c6b7adadeaa497685bad6d2e2cfc41dde340e223e3510d6f330d2bfd729f738d",
+      "note": "既有唯一组合链；书卡不是平行引擎",
+      "mutated": false
+    },
+    {
+      "role": "ADMITTED_COMPOSITION",
+      "ref": "functions/interpretation-runtime/admitted-customer-interpretation-runtime-v1.js",
+      "sha256": "79c438554440ae08464d61c8396b5b912160042efdde8a179349d9a9afd9fbfc",
+      "note": "只消费已准入组合",
+      "mutated": false
+    },
+    {
+      "role": "EXISTING_HUMAN_ADMISSION",
+      "ref": "content/customer-experience-rebuild/admission/cx-r12r3b-human-reviewed-composition-admission-v1.json",
+      "sha256": "e08b0c18085e9958fdab9fa0cba2a68a5314c8523115151588b723a91ef477b6",
+      "note": "AST24/24已通过仅适用于其绑定版本与案例",
+      "mutated": false
+    },
+    {
+      "role": "CUSTOMER_METHOD_RESULT",
+      "ref": "functions/customer-projection/method-customer-reading-v2.js",
+      "sha256": "4ff8036672cd66b9e809fbeb2477d216cba3c17a5ed11a11e890d832e0dd4ab2",
+      "note": "已接受解释的客户结果投射",
+      "mutated": false
+    },
+    {
+      "role": "NATIVE_AST_VIEW",
+      "ref": "functions/customer-projection/astrology-customer-projection.js",
+      "sha256": "9e6ee43b920b1603bf5032bb0ff524e2d386341d89939a96e720680933d074b8",
+      "note": "结构图/投射展示；不创造意义",
+      "mutated": false
+    },
+    {
+      "role": "SMR_GATE",
+      "ref": "content/customer-experience-rebuild/r12r4b/smr/admission/smr-production-admission-v1.json",
+      "sha256": "f88a83dabd9f3d01ef744d69ebbbc3c3cb4b9ddd7933c4a5e53e5cf50662c017",
+      "note": "48例待审的SMR新报告独立准入",
+      "mutated": false
+    },
+    {
+      "role": "SMR_HUMAN_RESULTSREVIEW",
+      "ref": "content/customer-experience-rebuild/r12r4b/smr/review/smr-human-review-results-v1.json",
+      "sha256": "341a02b0ce6792a84c7c9373e20705ca12592ba2c5c05cc40205415999b0eb6e",
+      "note": "历史48例待审记录，不伪造通过",
+      "mutated": false
+    },
+    {
+      "role": "R2_ADAPTER",
+      "ref": "functions/single-method-reading-r2/astrology-production-adapter.js",
+      "sha256": "105de585c02e6d2bd21b644249e8670ef810a1b7111a7ecd2fb012046e57f58c",
+      "note": "复用既有AcceptedMethodReadingEnvelope入口",
+      "mutated": false
+    },
+    {
+      "role": "R2_CLAIM_IR",
+      "ref": "functions/single-method-reading-r2/customer-claim-ir.js",
+      "sha256": "eaf833bb92113cb59ef107aa8f59fbcc771416f4b08109cd3ea5bf5f670cc39d",
+      "note": "复用既有Customer Claim IR，不另建AST Claim IR",
+      "mutated": false
+    },
+    {
+      "role": "R2_STOP_POINT",
+      "ref": "content/customer-experience-rebuild/r12r4b/smr-r2/smr-r2-w0-w2-acceptance-v1.json",
+      "sha256": "14bd90523823a862a73c9d9220992fb24dfe70fca482e7537940de9d78f180be",
+      "note": "R2-W3优先级尚未完成；R2客户切换关闭",
+      "mutated": false
+    },
+    {
+      "role": "EXTERNAL_SOURCE_REGISTRY",
+      "ref": "content/customer-experience-rebuild/r12r4b/smr/enrichment/w0-w2/w1-external-reference-manuscript-registry-v1.json",
+      "sha256": "90aa238980658f4ddd799f4a0848375bcf8571c726a06c16848fe514746d5b4a",
+      "note": "唯一五本研究登记，只按引用复用",
+      "mutated": false
+    },
+    {
+      "role": "EXTRACTION_CHECKPOINT",
+      "ref": "content/customer-experience-rebuild/r12r4b/smr/enrichment/w0-w2/w2-final-validation-v1.json",
+      "sha256": "fc0d96024f193fdc17fe998ce4295e40e166bd62459162d5ad180512bcb38609",
+      "note": "历史W2检查点，不改其abab6b3基线",
+      "mutated": false
+    },
+    {
+      "role": "TRANSIT_AUTHORITY",
+      "ref": "content/professional/ast-transit/freeze/ast-transit-production-freeze-v1.json",
+      "sha256": "ab08aee07fe8183911d5cf7755b0b8dbcf3f62b85b86c400dbfa49b9df370e51",
+      "note": "既有ASTT独立能力，不吸收到本命书卡权限",
+      "mutated": false
+    },
+    {
+      "role": "AST_ACCEPTANCE",
+      "ref": "content/professional/ast-production/acceptance/ast-production-acceptance-v1.json",
+      "sha256": "a8e15a8c07dc787f6df9ef299aec10a7fafc28a051984d46ba84905a83f533ae",
+      "note": "已有AST AVAILABLE；部署核验仍为false",
+      "mutated": false
+    },
+    {
+      "role": "PACKAGE_CHECKS",
+      "ref": "package.json",
+      "sha256": "a5a181e911f7231f4d60860ab70d83aa0ce4002026e68d5f0f98b54555ebd273",
+      "note": "只审计当前检查阻断；本轮不修改全局检查链",
+      "mutated": false
+    }
+  ],
+  "coverageBoundary": [
+    {
+      "featureId": "CORE_10_PLANETS_AND_SIGNS",
+      "state": "CALCULATED_PROJECTED_EXISTING_MEANING",
+      "note": "10功能＋12星座；这不是全书型深度报告。"
+    },
+    {
+      "featureId": "HOUSES",
+      "state": "CALCULATED_PROJECTED_EXISTING_MEANING",
+      "note": "12宫意义；默认PLACIDUS_V1，WHOLE_SIGN_V1显式替代。"
+    },
+    {
+      "featureId": "MAJOR_ASPECTS",
+      "state": "CALCULATED_PROJECTED_EXISTING_MEANING",
+      "note": "仅十行星的5类主相位；orb复用现有policy。"
+    },
+    {
+      "featureId": "TRUE_NORTH_SOUTH_NODES",
+      "state": "CALCULATED_PROJECTED_EXISTING_MEANING",
+      "note": "已有真交点及2条node意义；不能借此准入新书卡或交点相位。"
+    },
+    {
+      "featureId": "ASC_MC_DSC_IC",
+      "state": "CALCULATED_PROJECTED_DEDICATED_ENRICHMENT_MEANING_GAP",
+      "note": "角度已算；当前41映射不含独立角度意义，不等于没有角度计算。"
+    },
+    {
+      "featureId": "ELEMENTS_MODES_RULERS_DISPOSITORS",
+      "state": "NOT_ADMITTED_IN_CURRENT_ENRICHMENT_PATH",
+      "note": "本轮相关消费路径未发现专用实现；不作全仓库不存在的断言。"
+    },
+    {
+      "featureId": "STELLIA_PATTERNS_ASPECT_NETWORK_PRIORITY",
+      "state": "POLICY_AND_COMPOSITION_GAP",
+      "note": "有原始相位不等于图形识别或全盘主题已准入。"
+    },
+    {
+      "featureId": "APPLYING_SEPARATING",
+      "state": "UNDETERMINED_BY_CURRENT_POLICY",
+      "note": "现有policy明确NOT_COMPUTED_V1，结果保持UNDETERMINED。"
+    },
+    {
+      "featureId": "CHIRON_MINOR_ANGLE_NODE_ASPECTS",
+      "state": "OUTSIDE_BOUND_SCOPE",
+      "note": "Chiron、小相位、轴点/交点相位不自动纳入当前结构范围。"
+    },
+    {
+      "featureId": "TIMING_FEATURES",
+      "state": "SEPARATE_AUTHORITY_OUTSIDE_THIS_BATCH",
+      "note": "ASTT既有能力保留；本命摘录不赋予新推运/返照/时机权限，也不把既有ASTT误报为不存在。"
+    }
+  ],
+  "sourceBoundaryRef": "docs/ast/full-production/ast-selected-source-boundary-v1.json",
+  "sourceBoundarySha256": "cec77cf8c11eb9d5a813ca9325e4550545c4a4494709acaaf020ce1d9870d990",
+  "targetConsumption": {
+    "canonical": "MPA/shared calculation -> MCD projection v2 -> CMP admitted meaning -> versioned shared composition -> admitted customer interpretation",
+    "existingConsumers": "Current AST structural/meaning customer adapter and accepted method-customer result remain as implemented.",
+    "plannedR2Handoff": "Existing AST production adapter -> AcceptedMethodReadingEnvelope -> existing shared Customer Claim IR; downstream R2 priority/sections remain their own deferred work.",
+    "noSecondCalculationProjectionMeaningOrRendererAuthority": true,
+    "atomicMeaningIsNotCustomerInterpretation": true,
+    "fieldFidelityGapRemediationExecuted": false
+  },
+  "gates": [
+    {
+      "gateId": "G01",
+      "title": "基线与当前检查承接",
+      "state": "BLOCKED_CHECK_RECONCILIATION_REQUIRED",
+      "criterion": "指定提交和适用专项/全量检查一致；历史检查必须显式承接，不能改旧快照。",
+      "grantsAdmissionNow": false,
+      "evidenceRequired": true
+    },
+    {
+      "gateId": "G02",
+      "title": "来源身份与范围",
+      "state": "SELECTED_EXTRACT_REFS_VERIFIED",
+      "criterion": "五个来源、25张卡、版本/页码/提取哈希一致；此状态不等于本轮重读原PDF。",
+      "grantsAdmissionNow": false,
+      "evidenceRequired": true
+    },
+    {
+      "gateId": "G03",
+      "title": "来源用途依据",
+      "state": "PENDING",
+      "criterion": "逐项记录可用用途、许可或经审适用依据，不以持有PDF代替使用权。",
+      "grantsAdmissionNow": false,
+      "evidenceRequired": true
+    },
+    {
+      "gateId": "G04",
+      "title": "专家审阅与冲突",
+      "state": "PENDING",
+      "criterion": "逐卡审查，并解决该卡关联冲突；弃用卡也必须留下理由。",
+      "grantsAdmissionNow": false,
+      "evidenceRequired": true
+    },
+    {
+      "gateId": "G05",
+      "title": "计算/投射支持",
+      "state": "SCOPED_EXISTING_SUPPORT_ONLY",
+      "criterion": "只有实际投射中的结构可用；新增元素、守护、图形要有版本化上游规则与测试。",
+      "grantsAdmissionNow": false,
+      "evidenceRequired": true
+    },
+    {
+      "gateId": "G06",
+      "title": "Meaning及组合准入",
+      "state": "PENDING",
+      "criterion": "原子意义、关系规则及主题组合分别由现有owner批准；引用不是准入。",
+      "grantsAdmissionNow": false,
+      "evidenceRequired": true
+    },
+    {
+      "gateId": "G07",
+      "title": "双语与字段保真",
+      "state": "PENDING",
+      "criterion": "建设性、摩擦、条件、不确定性、反例等字段不丢失；zh-Hans/en分别审查。",
+      "grantsAdmissionNow": false,
+      "evidenceRequired": true
+    },
+    {
+      "gateId": "G08",
+      "title": "新范围机器回归",
+      "state": "NOT_STARTED",
+      "criterion": "真正不同结构与缺失输入、相位边界、宫制差异、反例、重复/意图测试；不能只复制旧64例。",
+      "grantsAdmissionNow": false,
+      "evidenceRequired": true
+    },
+    {
+      "gateId": "G09",
+      "title": "新版本人工验收",
+      "state": "NOT_STARTED",
+      "criterion": "新内容与新报告绑定投射/意义/规则/locale digest独立验收；不借用旧24/24或48-case数量。",
+      "grantsAdmissionNow": false,
+      "evidenceRequired": true
+    },
+    {
+      "gateId": "G10",
+      "title": "发布与现场验证",
+      "state": "NOT_STARTED",
+      "criterion": "聚合检查、人工准入、部署SHA与线上smoke、回退条件齐备；本轮不部署。",
+      "grantsAdmissionNow": false,
+      "evidenceRequired": true
+    }
+  ],
+  "phases": [
+    {
+      "phaseId": "AST-FP-P01",
+      "title": "当前检查器与基线承接",
+      "status": "DEFERRED_NOT_EXECUTED",
+      "implementationAuthorizedThisTurn": false,
+      "dependsOn": [],
+      "entryGateIds": [],
+      "exitGateIds": [
+        "G01"
+      ],
+      "entryRequirements": [
+        "单独授权该阶段范围",
+        "前一阶段的适用交付已保存，未解决项继续显式阻断"
+      ],
+      "work": "版本化解决npm空操作符、旧整宫假设及旧W2跨方法指纹阻断；保留历史检查点。",
+      "deliverables": [
+        "当前AST检查入口清单",
+        "失败原因与修复证据",
+        "新的基线验证记录"
+      ],
+      "ownerConstraint": "经另行授权的仓库检查维护；不得借此改计算或权限",
+      "stopPoint": "CHECKER_RECONCILIATION_SAVED",
+      "saveBeforeNext": true,
+      "automaticAdvance": false
+    },
+    {
+      "phaseId": "AST-FP-P02",
+      "title": "五来源用途与逐卡专家审阅",
+      "status": "DEFERRED_NOT_EXECUTED",
+      "implementationAuthorizedThisTurn": false,
+      "dependsOn": [
+        "AST-FP-P01"
+      ],
+      "entryGateIds": [
+        "G02"
+      ],
+      "exitGateIds": [
+        "G02",
+        "G03",
+        "G04"
+      ],
+      "entryRequirements": [
+        "单独授权该阶段范围",
+        "前一阶段的适用交付已保存，未解决项继续显式阻断"
+      ],
+      "work": "按S01→S05逐卡核验含义、范围、作者与用途；形成接受/修订/拒绝记录。",
+      "deliverables": [
+        "逐来源审阅决策",
+        "用途依据",
+        "冲突处置"
+      ],
+      "ownerConstraint": "现有source/meaning governance；每完成一本先保存增量",
+      "stopPoint": "SOURCE_REVIEW_PER_BOOK_SAVED",
+      "saveBeforeNext": true,
+      "automaticAdvance": false
+    },
+    {
+      "phaseId": "AST-FP-P03",
+      "title": "Coverage Gap与Canonical Meaning对照",
+      "status": "DEFERRED_NOT_EXECUTED",
+      "implementationAuthorizedThisTurn": false,
+      "dependsOn": [
+        "AST-FP-P02"
+      ],
+      "entryGateIds": [
+        "G03",
+        "G04"
+      ],
+      "exitGateIds": [
+        "G03",
+        "G04"
+      ],
+      "entryRequirements": [
+        "单独授权该阶段范围",
+        "前一阶段的适用交付已保存，未解决项继续显式阻断"
+      ],
+      "work": "将审过的卡与已有41条意义及三条AST规则对照；区分原子、关系、组合、UI问句和排除项。",
+      "deliverables": [
+        "覆盖矩阵",
+        "无重复meaning的逐卡决策",
+        "待补上游列表"
+      ],
+      "ownerConstraint": "CMP与现有composition registry owner；不得创建第二套canonical schema",
+      "stopPoint": "CLAIM_RECONCILIATION_SAVED",
+      "saveBeforeNext": true,
+      "automaticAdvance": false
+    },
+    {
+      "phaseId": "AST-FP-P04",
+      "title": "缺失结构与流派政策补齐",
+      "status": "DEFERRED_NOT_EXECUTED",
+      "implementationAuthorizedThisTurn": false,
+      "dependsOn": [
+        "AST-FP-P03"
+      ],
+      "entryGateIds": [
+        "G01",
+        "G03",
+        "G04"
+      ],
+      "exitGateIds": [
+        "G05"
+      ],
+      "entryRequirements": [
+        "单独授权该阶段范围",
+        "前一阶段的适用交付已保存，未解决项继续显式阻断"
+      ],
+      "work": "仅对已明确需求建立元素/模式、守护、图形等上游策略；依赖真实经度、orb、宫制和时间精度。",
+      "deliverables": [
+        "版本化school与计算契约",
+        "精度/缺失/混合模式负例",
+        "唯一投射引用"
+      ],
+      "ownerConstraint": "现有AST计算与MCD owner；没有批准的维度继续UNSUPPORTED",
+      "stopPoint": "UPSTREAM_SCOPE_REVIEW_SAVED",
+      "saveBeforeNext": true,
+      "automaticAdvance": false
+    },
+    {
+      "phaseId": "AST-FP-P05",
+      "title": "关系意义与相位网络",
+      "status": "DEFERRED_NOT_EXECUTED",
+      "implementationAuthorizedThisTurn": false,
+      "dependsOn": [
+        "AST-FP-P04"
+      ],
+      "entryGateIds": [
+        "G04",
+        "G05"
+      ],
+      "exitGateIds": [
+        "G06"
+      ],
+      "entryRequirements": [
+        "单独授权该阶段范围",
+        "前一阶段的适用交付已保存，未解决项继续显式阻断"
+      ],
+      "work": "行星×星座×宫位与真实相位端点组合；处理合相、多个联系和反向线索。",
+      "deliverables": [
+        "已审关系规则版本",
+        "端点/跨界/缺边负例",
+        "结构到规则的lineage"
+      ],
+      "ownerConstraint": "现有shared interpretation与composition owner；不是另建解释引擎",
+      "stopPoint": "RELATIONAL_CANDIDATES_SAVED",
+      "saveBeforeNext": true,
+      "automaticAdvance": false
+    },
+    {
+      "phaseId": "AST-FP-P06",
+      "title": "全盘主题与主次",
+      "status": "DEFERRED_NOT_EXECUTED",
+      "implementationAuthorizedThisTurn": false,
+      "dependsOn": [
+        "AST-FP-P05"
+      ],
+      "entryGateIds": [
+        "G05",
+        "G06"
+      ],
+      "exitGateIds": [
+        "G06"
+      ],
+      "entryRequirements": [
+        "单独授权该阶段范围",
+        "前一阶段的适用交付已保存，未解决项继续显式阻断"
+      ],
+      "work": "建立独立证据去重、主题支持/反向证据、权重、资料不足和省略政策；不固定取三条。",
+      "deliverables": [
+        "主题组合候选",
+        "可解释的排序与去重",
+        "无主题或不确定主题处理"
+      ],
+      "ownerConstraint": "既有AST组合层；向R2提供真实主题/优先级，不由renderer猜测",
+      "stopPoint": "WHOLE_CHART_CANDIDATES_SAVED",
+      "saveBeforeNext": true,
+      "automaticAdvance": false
+    },
+    {
+      "phaseId": "AST-FP-P07",
+      "title": "传递字段与双语语义保真",
+      "status": "DEFERRED_NOT_EXECUTED",
+      "implementationAuthorizedThisTurn": false,
+      "dependsOn": [
+        "AST-FP-P06"
+      ],
+      "entryGateIds": [
+        "G06"
+      ],
+      "exitGateIds": [
+        "G07"
+      ],
+      "entryRequirements": [
+        "单独授权该阶段范围",
+        "前一阶段的适用交付已保存，未解决项继续显式阻断"
+      ],
+      "work": "确保建设性/摩擦/条件/不确定性等通过admitted result与既有adapter保留，双语不新增断言。",
+      "deliverables": [
+        "版本化字段契约",
+        "逐层字段对照",
+        "双语审阅与缺词阻断"
+      ],
+      "ownerConstraint": "原有admitted customer链及SMR-R2 adapter/Claim IR共同承接",
+      "stopPoint": "FIELD_AND_LOCALE_REVIEW_SAVED",
+      "saveBeforeNext": true,
+      "automaticAdvance": false
+    },
+    {
+      "phaseId": "AST-FP-P08",
+      "title": "客户报告整合与意图差异",
+      "status": "DEFERRED_NOT_EXECUTED",
+      "implementationAuthorizedThisTurn": false,
+      "dependsOn": [
+        "AST-FP-P07"
+      ],
+      "entryGateIds": [
+        "G06",
+        "G07"
+      ],
+      "exitGateIds": [
+        "G06",
+        "G07"
+      ],
+      "entryRequirements": [
+        "单独授权该阶段范围",
+        "前一阶段的适用交付已保存，未解决项继续显式阻断"
+      ],
+      "work": "接入已有SMR-R2的priority/theme/section owner；按章节职责消费不同信息，保留读者纠正与来源。",
+      "deliverables": [
+        "章节/意图映射",
+        "非重复报告候选",
+        "与R2交接契约"
+      ],
+      "ownerConstraint": "依赖SMR-R2后续阶段；不在AST复制R2 priority、section或renderer authority",
+      "stopPoint": "REPORT_CANDIDATES_SAVED",
+      "saveBeforeNext": true,
+      "automaticAdvance": false
+    },
+    {
+      "phaseId": "AST-FP-P09",
+      "title": "新范围机器与语义回归",
+      "status": "DEFERRED_NOT_EXECUTED",
+      "implementationAuthorizedThisTurn": false,
+      "dependsOn": [
+        "AST-FP-P08"
+      ],
+      "entryGateIds": [
+        "G01",
+        "G05",
+        "G06",
+        "G07"
+      ],
+      "exitGateIds": [
+        "G08"
+      ],
+      "entryRequirements": [
+        "单独授权该阶段范围",
+        "前一阶段的适用交付已保存，未解决项继续显式阻断"
+      ],
+      "work": "真实不同输入、宫制和边界fixture；独立参考计算验证与报告语义价值检查分开。",
+      "deliverables": [
+        "新范围机器结果",
+        "反例/重复/意图差异证据",
+        "重放与确定性结果"
+      ],
+      "ownerConstraint": "复用现有测试体系；数量和阈值须显式冻结，不以旧样例数量抵扣",
+      "stopPoint": "MACHINE_REVIEW_PACK_SAVED",
+      "saveBeforeNext": true,
+      "automaticAdvance": false
+    },
+    {
+      "phaseId": "AST-FP-P10",
+      "title": "新版本人工审阅与准入",
+      "status": "DEFERRED_NOT_EXECUTED",
+      "implementationAuthorizedThisTurn": false,
+      "dependsOn": [
+        "AST-FP-P09"
+      ],
+      "entryGateIds": [
+        "G03",
+        "G04",
+        "G06",
+        "G07",
+        "G08"
+      ],
+      "exitGateIds": [
+        "G09"
+      ],
+      "entryRequirements": [
+        "单独授权该阶段范围",
+        "前一阶段的适用交付已保存，未解决项继续显式阻断"
+      ],
+      "work": "展示实际新报告、来源、推导、限制与反例；记录reviewer、版本和case digest。",
+      "deliverables": [
+        "逐例人工决策",
+        "语义缺陷回修",
+        "新范围准入记录"
+      ],
+      "ownerConstraint": "必须有用户/专家真实审阅；不得代填或继承旧批准",
+      "stopPoint": "HUMAN_ADMISSION_SAVED",
+      "saveBeforeNext": true,
+      "automaticAdvance": false
+    },
+    {
+      "phaseId": "AST-FP-P11",
+      "title": "发布冻结与线上验证",
+      "status": "DEFERRED_NOT_EXECUTED",
+      "implementationAuthorizedThisTurn": false,
+      "dependsOn": [
+        "AST-FP-P10"
+      ],
+      "entryGateIds": [
+        "G01",
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07",
+        "G08",
+        "G09"
+      ],
+      "exitGateIds": [
+        "G01",
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07",
+        "G08",
+        "G09",
+        "G10"
+      ],
+      "entryRequirements": [
+        "单独授权该阶段范围",
+        "前一阶段的适用交付已保存，未解决项继续显式阻断"
+      ],
+      "work": "全量与专项通过后，以显式批准的新scope发布，核对部署commit和线上真实入口。",
+      "deliverables": [
+        "版本化聚合gate",
+        "部署与smoke证据",
+        "停用/回退条件"
+      ],
+      "ownerConstraint": "既有MPA/CMP/customer release owner；当前未授权部署",
+      "stopPoint": "RELEASE_EVIDENCE_SAVED",
+      "saveBeforeNext": true,
+      "automaticAdvance": false
+    }
+  ],
+  "gateScopeRule": "Each gate is evaluated for an exact candidate version and feature scope. A planning milestone is not an admission; changed meanings/rules invalidate affected downstream evidence. Explicitly deferred features remain unavailable, not silently omitted from a claimed full scope.",
+  "deferred": [
+    "AST-W3及后续生产实现",
+    "新原子意义/关系规则/图形/守护/元素权重激活",
+    "扩展全章或全书提取",
+    "新英文报告改写",
+    "SMR-R2后续priority/theme/section与客户切换",
+    "timing/synastry/progression/return扩展",
+    "专业判断或诊断",
+    "GitHub提交、推送与部署"
+  ],
+  "noWriteZones": [
+    "functions/**",
+    "scripts/**",
+    "package.json",
+    "assets/**",
+    "content/**",
+    "existing human review/admission records",
+    "existing runtime registry/freeze/successor files"
+  ],
+  "stopRule": "Remain at ast-W2. No later production phase runs until explicit authorization plus its entry evidence is satisfied; phase-list order does not grant permission. Open blockers remain visible.",
+  "nextEligibleWork": "AST-FP-P01 checker/baseline reconciliation and AST-FP-P02 source-use/specialist review require a separately authorized next batch; no automatic advance.",
+  "validationRef": "docs/ast/full-production/ast-full-production-validation-v1.json"
+}

@@ -1,0 +1,60 @@
+{
+  "contract": "PHI-OS-KH-W4-W0-REGISTRY-AUTHORITY-MATRIX-v1.0.0",
+  "baselineSha": "cd0f17752f38c4a25552e786b65013d8dcf786e4",
+  "generatedAt": "2026-08-05T17:20:00+08:00",
+  "matrix": [
+    {
+      "field": "Book Identity / title / volume",
+      "canonicalAuthority": "content/registry/books.json",
+      "projectionLocations": [
+        "Blueprint Registry",
+        "Public Catalog",
+        "Locale/UI"
+      ]
+    },
+    {
+      "field": "Part Identity / current Book ownership",
+      "canonicalAuthority": "content/registry/parts.json",
+      "projectionLocations": [
+        "Book Registry parts",
+        "Blueprint partCodes",
+        "Publication Context"
+      ]
+    },
+    {
+      "field": "Canonical Node identity and meaning",
+      "canonicalAuthority": "content/knowledge/registry/nodes.json",
+      "projectionLocations": [
+        "Book Blueprints",
+        "PJA",
+        "KNR"
+      ]
+    },
+    {
+      "field": "Blueprint discovery / digest / eligibility",
+      "canonicalAuthority": "content/knowledge/blueprints/blueprint-registry.json",
+      "projectionLocations": [
+        "Loader output",
+        "Freeze manifest"
+      ]
+    },
+    {
+      "field": "Manuscript source identity",
+      "canonicalAuthority": "content/knowledge/manuscripts registry/manifest layer",
+      "projectionLocations": [
+        "Mapping",
+        "Extraction Candidate",
+        "PJA source dossier"
+      ]
+    },
+    {
+      "field": "Published article status per locale",
+      "canonicalAuthority": "Published Article / Publication Locale Registry",
+      "projectionLocations": [
+        "KNR public indexes",
+        "Public Catalog"
+      ]
+    }
+  ],
+  "finding": "Current repository already declares four authorities in blueprint-registry.json, but Blueprint Registry also duplicates partCodes and canonicalNodeCount projections that must be validated against Book/Part/Node registries."
+}

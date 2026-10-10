@@ -1,0 +1,89 @@
+{
+  "fixtureClass": "NEW_CONTROLLED_SYNTHETIC_LOCAL_ONLY",
+  "loginAccountCreated": false,
+  "source": "Reuses explicit controlled birth values from docs/reports/ziwei/full-report-r2/SUBJECT_A-en.json; creates a separate subject and simulated auth principal, not a recovered historical person.",
+  "fixtureMechanism": "scripts/check-fw-private-bindings.mjs: isolated SQLite + trusted identity fixture; scripts/build-bazi-controlled-subject-proof.mjs: governed controlled canonical input",
+  "person": {
+    "personId": "CONTROLLED-ZWR-DELIVERY-16659af5-4f83-4d30-ad0f-c2bd1b273d81",
+    "accountOwnerUserId": "LOCAL-QA-dc796fc6-6e13-432d-9077-fb65469cdff7",
+    "subjectClass": "SELF",
+    "displayName": "Controlled Zi Wei Delivery Subject",
+    "birthDate": "1989-11-15",
+    "birthTime": "22:50:00",
+    "birthPlace": {
+      "displayName": "Hong Kong",
+      "countryCode": "HK",
+      "latitude": 22.3193,
+      "longitude": 114.1694
+    }
+  },
+  "methodConsent": {
+    "personId": "CONTROLLED-ZWR-DELIVERY-16659af5-4f83-4d30-ad0f-c2bd1b273d81",
+    "grantingSubjectReference": "LOCAL-QA-dc796fc6-6e13-432d-9077-fb65469cdff7",
+    "purposeScope": "PERSONAL_METHOD",
+    "dataScopes": [
+      "personId",
+      "displayName",
+      "birthDate",
+      "birthTime",
+      "birthPlace"
+    ],
+    "grantedAt": "2026-09-01T00:00:00Z",
+    "expiresAt": "2027-10-01T00:00:00Z",
+    "revocationState": "ACTIVE",
+    "consentVersion": 1,
+    "authorityBasis": "EXPLICIT_CONTROLLED_FIXTURE",
+    "consentId": "CONSENT-f45e5e97-77af-47c6-9706-a5fe6f9520e3"
+  },
+  "reportConsent": {
+    "personId": "CONTROLLED-ZWR-DELIVERY-16659af5-4f83-4d30-ad0f-c2bd1b273d81",
+    "grantingSubjectReference": "LOCAL-QA-dc796fc6-6e13-432d-9077-fb65469cdff7",
+    "purposeScope": "REPORT",
+    "dataScopes": [
+      "personId",
+      "displayName"
+    ],
+    "grantedAt": "2026-09-01T00:00:00Z",
+    "expiresAt": "2027-10-01T00:00:00Z",
+    "revocationState": "ACTIVE",
+    "consentVersion": 1,
+    "authorityBasis": "EXPLICIT_CONTROLLED_FIXTURE",
+    "consentId": "CONSENT-f45e5e97-77af-47c6-9706-a5fe6f9520e3-REPORT"
+  },
+  "canonicalBirthInput": {
+    "birthDate": "1989-11-15",
+    "birthTime": "22:50:00",
+    "birthPlace": {
+      "displayName": "Hong Kong",
+      "countryCode": "HK",
+      "latitude": 22.3193,
+      "longitude": 114.1694
+    },
+    "timezone": {
+      "iana": "Asia/Hong_Kong",
+      "utcOffsetAtBirth": "+08:00",
+      "source": "GOVERNED_RESOLUTION",
+      "confidence": "HIGH"
+    },
+    "timeAccuracy": "EXACT",
+    "locale": "en",
+    "consent": {
+      "recordId": "CONSENT-f45e5e97-77af-47c6-9706-a5fe6f9520e3",
+      "granted": true,
+      "purposeCode": "PERSONAL_RUNTIME_METHOD_PROJECTION",
+      "persistence": "NONE"
+    },
+    "inputVersion": "MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0"
+  },
+  "traditionalCalculationSex": "MALE",
+  "targetContext": {
+    "targetDate": "2026-10-01",
+    "targetTime": "12:00:00",
+    "targetTimezone": {
+      "iana": "Asia/Kuala_Lumpur",
+      "utcOffsetAtTarget": "+08:00"
+    },
+    "source": "EXPLICIT_REQUEST"
+  },
+  "birthSourceRef": "docs/reports/ziwei/production-admission/controlled-subject.json#canonicalBirthInput"
+}

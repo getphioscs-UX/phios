@@ -1,0 +1,30 @@
+{
+  "scope": "Observed tool results; selected messages retained, not reconstructed full logs",
+  "failures": [
+    {
+      "check": "check:pages-build",
+      "initialExitCode": 1,
+      "error": "ERR_MODULE_NOT_FOUND",
+      "missingDependency": "node_modules/wrangler/bin/wrangler.js",
+      "resolution": "npm ci --ignore-scripts; rerun PASS"
+    },
+    {
+      "check": "check:vfr:shared-core / commerce checks",
+      "reason": "Old policy assertions no longer match explicit new price/cost contract",
+      "resolution": "Updated active assertions and retained negative tests; rerun PASS"
+    },
+    {
+      "check": "public live catalog retrieval",
+      "url": "https://getphios.com/api/commerce-catalog",
+      "result": "URL is not accessible via this tool",
+      "conclusion": "No live website parity claim"
+    },
+    {
+      "check": "main synchronization",
+      "initialHead": "538442cae861566956d203eae8cb053f02abf377",
+      "newHead": "951de416fb7cad11b82edc2d63d2e7c90f6a5e6b",
+      "conflicts": 6,
+      "resolution": "Preserved new main implementations and immutable migrations14/15, moved bindings migration to16, resolved economic fields explicitly"
+    }
+  ]
+}

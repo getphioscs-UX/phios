@@ -1,0 +1,141 @@
+{
+  "contractId": "phi-os.knowledge.kh-w3.5e.preface-canonical-consolidation.v1",
+  "contractVersion": "1.0.0",
+  "phase": "PHASE 2.5",
+  "step": "STEP 2.11",
+  "workstream": "KH-W3.5E",
+  "status": "KH-W3.5E-Passed",
+  "frozenAt": "2026-07-30",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "75e5bbf86679489c8156ab2eb0d829e4fecbf50e"
+  },
+  "consolidation": {
+    "sourcePrefaceQuestions": 36,
+    "canonicalKnowledgeNodes": 13,
+    "supportingQuestions": 23,
+    "preservedQuestionIdentities": 36,
+    "deletedQuestionIdentities": 0,
+    "duplicateCanonicalIdentities": 0,
+    "canonicalRepresentativePerNode": 1,
+    "mapping": "36 = 13 canonical representatives + 23 supporting questions"
+  },
+  "granularityRules": {
+    "onePageEqualsOneNode": false,
+    "oneHeadingEqualsOneNode": false,
+    "oneQuestionEqualsOneArticle": false,
+    "independentMechanismRequiredForCanonicalNode": true
+  },
+  "classificationBoundary": {
+    "canonicalNode": {
+      "requiresIndependentReusableMechanism": true,
+      "mayOwnCanonicalArticle": true,
+      "mustMaintainDistinctBoundary": true,
+      "mustJustifyLongTermBilingualMaintenance": true
+    },
+    "supportingQuestion": {
+      "requiresIndependentArticle": false,
+      "belongsToExactlyOneCanonicalNode": true,
+      "inheritsCanonicalBoundary": true,
+      "mayBeEmbeddedOrSearchEntry": true,
+      "mayCreateSecondKnowledgeCore": false
+    }
+  },
+  "relationshipIntegrity": {
+    "legacyQuestionIdentityUnique": true,
+    "canonicalNodeCodeUnique": true,
+    "supportingQuestionCodeUnique": true,
+    "supportingSourceIdentityUnique": true,
+    "canonicalReferenceMustResolve": true,
+    "nodeToQuestionReferenceMustBeBidirectional": true,
+    "orphanSupportingQuestionAllowed": false,
+    "unclassifiedLegacyQuestionAllowed": false
+  },
+  "supersession": {
+    "supersededContract": "PHI-OS-PKR-Preface-Registry-v1.0.1",
+    "supersededPopulation": "36 provisional canonical nodes",
+    "canonicalContract": "PHI-OS-PKR-Preface-Canonical-Registry-v1.1.0",
+    "historicalPopulationMayWrite": false,
+    "historicalPopulationMayActAsSecondSourceOfTruth": false,
+    "step2_10StatusPreserved": "completed",
+    "khW3_5GBookIBlueprintOwnershipPreserved": true
+  },
+  "phaseBoundary": {
+    "knowledgeRegistryFilesChangedByThisStep": 0,
+    "newKnowledgeRegistryLevelAllowed": false,
+    "newCanonicalNodeAllowed": false,
+    "newSupportingQuestionAllowed": false,
+    "newArticleAllowed": false,
+    "newPublicPageAllowed": false,
+    "runtimeChanged": false,
+    "migrationChanged": false,
+    "blocksProfessionalWorkspace": false,
+    "blocksPayment": false,
+    "blocksJourney": false,
+    "blocksCustomerDelivery": false
+  },
+  "frozenEvidence": [
+    {
+      "path": "content/knowledge/registry/nodes.json",
+      "sha256": "c5950f5985119304de7a95f59f3bf1b37c21b1301f950781450e95674c9f9b2c"
+    },
+    {
+      "path": "content/knowledge/registry/supporting-questions.json",
+      "sha256": "f3f4a39f1a1666a58b56fdf927469e40f5ed4fd14d7976868f76453b3b460484"
+    },
+    {
+      "path": "content/knowledge/registry/canonical-extraction-policy.json",
+      "sha256": "7622b079dd8bca187ffc723828586fef0bd3540fad482289262a8550843088f1"
+    },
+    {
+      "path": "docs/knowledge/PKR-preface-relationship-duplication-boundary-audit.md",
+      "sha256": "fe6cb500cebb7079dc093764e3e6f1c1ddabe0ba8e1812d532248df151d09536"
+    },
+    {
+      "path": "docs/knowledge/PKR-preface-canonical-node-consolidation.md",
+      "sha256": "d17d52c8afafc15b16133bf08dcc5d3ffd691eb87ac0d13160aec211fbb5c9e5"
+    },
+    {
+      "path": "docs/knowledge/phase-2-5-kh-w3-5a-d-pkr-foundation-freeze-v1.json",
+      "sha256": "cc7e6112c0c6ce94be1edf3e1130eb53e4dde50d338d5d95bccb6e66e58cc64c"
+    }
+  ],
+  "changeControl": {
+    "allowed": [
+      "bug-fix",
+      "security-fix",
+      "accessibility-fix",
+      "migration-fix",
+      "acceptance-fix",
+      "explicit-contract-version-upgrade"
+    ],
+    "silentReclassificationAllowed": false,
+    "silentRelationshipChangeAllowed": false
+  },
+  "acceptance": {
+    "status": "KH-W3.5E-Passed",
+    "mappingComplete": true,
+    "mappingNonDuplicative": true,
+    "allFourRulesEnforced": true,
+    "pageChangeInThisStep": false,
+    "visualAcceptance": {
+      "status": "not-applicable",
+      "reason": "Contract-only consolidation freeze; no customer-visible page changed."
+    },
+    "languageAcceptance": {
+      "status": "not-applicable",
+      "reason": "Existing bilingual Registry content is verified but no customer-facing copy changed."
+    },
+    "keyboardFocusAcceptance": {
+      "status": "not-applicable",
+      "reason": "No interactive surface changed."
+    },
+    "touchTargetAcceptance": {
+      "status": "not-applicable",
+      "reason": "No interactive surface changed."
+    },
+    "runtimeRegressionRequired": true,
+    "productionVerificationRequiredAfterImplementation": true
+  }
+}

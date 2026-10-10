@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W11-W16-DELTA-MANIFEST-v1.0.0",
+  "baselineCommit": "3dd903344945ecd3b585c8aafe48b93d7894caa9",
+  "phase": "MPA_VALIDATION_EVIDENCE_FOUNDATION",
+  "completedWorks": [
+    "MPA-W11",
+    "MPA-W12",
+    "MPA-W13",
+    "MPA-W14",
+    "MPA-W15",
+    "MPA-W16"
+  ],
+  "productionActivationGranted": false,
+  "professionalActivationGranted": false,
+  "globalPostcheckChanged": false,
+  "files": [
+    "package.json",
+    "scripts/check-mpa-w11-calculation-data-authority.mjs",
+    "scripts/check-mpa-w15-cross-implementation-comparison.mjs",
+    "scripts/check-mpa-w12-reference-fixture-corpus.mjs",
+    "scripts/check-mpa-w6-w10-input-calculation-foundation.mjs",
+    "scripts/check-mpa-w11-w16-validation-evidence-foundation.mjs",
+    "scripts/check-mpa-w14-regression-runtime.mjs",
+    "scripts/check-mpa-w0-w5-foundation.mjs",
+    "scripts/check-mpa-w13-method-validation-harness.mjs",
+    "scripts/check-mpa-w16-method-uncertainty-error-contract.mjs",
+    "scripts/lib/method-production-activation/mpa-validation-evidence-v1.mjs",
+    "docs/runtime/MPA-W11-W16-VALIDATION-EVIDENCE-FOUNDATION.md",
+    "content/professional/method-production-activation/acceptance/mpa-w11-w16-validation-evidence-foundation-acceptance-v1.json",
+    "content/professional/method-production-activation/fixtures/mpa-reference-fixture-corpus-v1.json",
+    "content/professional/method-production-activation/contracts/mpa-cross-implementation-comparison-v1.json",
+    "content/professional/method-production-activation/contracts/mpa-calculation-data-authority-v1.json",
+    "content/professional/method-production-activation/contracts/mpa-method-uncertainty-error-contract-v1.json",
+    "content/professional/method-production-activation/contracts/mpa-regression-runtime-v1.json",
+    "content/professional/method-production-activation/contracts/mpa-method-validation-harness-v1.json",
+    "content/professional/method-production-activation/schemas/mpa-validation-result-v1.schema.json",
+    "content/professional/method-production-activation/schemas/mpa-reference-fixture-corpus-v1.schema.json",
+    "content/professional/method-production-activation/registries/mpa-calculation-data-authority-registry-v1.json",
+    "content/professional/method-production-activation/registries/mpa-cross-implementation-comparison-registry-v1.json",
+    "content/professional/method-production-activation/registries/mpa-regression-trigger-registry-v1.json",
+    "functions/method-production-activation/validation-evidence-runtime.js"
+  ],
+  "validationCommands": [
+    "npm run check:mpa-w11-w16",
+    "npm run check:mpa",
+    "npm run check"
+  ],
+  "sandboxReplayNote": "MR-W2 requires ajv; the supplied archive replay has no node_modules, so full npm run check must be executed in the real repository installation."
+}

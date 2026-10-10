@@ -1,0 +1,273 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-PLAN-VALIDATION-v1.0.0",
+  "baselineCommit": "07d01b39a98d07ff237f1516852f3b29d058a47e",
+  "recordedAt": "2026-08-28",
+  "status": "DOCUMENTATION_PACKAGE_VALIDATED_PRODUCTION_BLOCKED",
+  "savedStopPoint": "ast-W2",
+  "baseline": {
+    "gitHead": "07d01b39a98d07ff237f1516852f3b29d058a47e",
+    "tree": "41920a6e6fc4d176ed42a54f2d06e88e6656ef3e",
+    "originalTrackedFilesVerified": 10639,
+    "originalTrackedFilesModified": 0,
+    "attachmentFilesVerified": 10617,
+    "attachmentSemanticMismatches": 0,
+    "lineEndingOnlyFilesRestored": 932,
+    "missingAuxiliaryFilesRestored": 22,
+    "verification": "Every original file matches the exact Git blob after local baseline restoration; uploaded archive unchanged."
+  },
+  "documentChecks": {
+    "status": "PASS",
+    "sources": 5,
+    "cards": 25,
+    "conflicts": 8,
+    "gates": 10,
+    "deferredPhases": 11,
+    "preservedAuthorityRefs": 25,
+    "negativeChecks": [
+      {
+        "name": "wrong baseline",
+        "status": "PASS"
+      },
+      {
+        "name": "silent W3 advance",
+        "status": "PASS"
+      },
+      {
+        "name": "runtime-loaded plan",
+        "status": "PASS"
+      },
+      {
+        "name": "production card count",
+        "status": "PASS"
+      },
+      {
+        "name": "new-source release",
+        "status": "PASS"
+      },
+      {
+        "name": "inherit prior human acceptance",
+        "status": "PASS"
+      },
+      {
+        "name": "pretend phase complete",
+        "status": "PASS"
+      },
+      {
+        "name": "phase execution authorized",
+        "status": "PASS"
+      },
+      {
+        "name": "automatic advance",
+        "status": "PASS"
+      },
+      {
+        "name": "cycle in phase plan",
+        "status": "PASS"
+      },
+      {
+        "name": "grant admission by gate",
+        "status": "PASS"
+      },
+      {
+        "name": "authority fingerprint drift",
+        "status": "PASS"
+      },
+      {
+        "name": "raw source redistribution",
+        "status": "PASS"
+      },
+      {
+        "name": "unreviewed source approval",
+        "status": "PASS"
+      },
+      {
+        "name": "unknown card",
+        "status": "PASS"
+      },
+      {
+        "name": "unknown conflict reference",
+        "status": "PASS"
+      },
+      {
+        "name": "silent conflict resolution",
+        "status": "PASS"
+      },
+      {
+        "name": "whole-book source scope",
+        "status": "PASS"
+      }
+    ],
+    "sourceCardSchemaChecks": [
+      {
+        "sourceId": "AST-S01",
+        "cards": 4,
+        "status": "PASS"
+      },
+      {
+        "sourceId": "AST-S02",
+        "cards": 5,
+        "status": "PASS"
+      },
+      {
+        "sourceId": "AST-S03",
+        "cards": 6,
+        "status": "PASS"
+      },
+      {
+        "sourceId": "AST-S04",
+        "cards": 4,
+        "status": "PASS"
+      },
+      {
+        "sourceId": "AST-S05",
+        "cards": 6,
+        "status": "PASS"
+      }
+    ],
+    "sourceCheckScope": "Uses existing pure validateW01/validateBook functions plus exact current Git/extract fingerprints; does not claim the historical W2 CLI passed or reverify raw PDFs."
+  },
+  "tests": [
+    {
+      "testId": "AST_CUSTOMER_CURRENT",
+      "command": "node scripts/check-cx-r12r3a-astrology-runtime-completion.mjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "signal": null,
+      "outputTail": "✓ CX-R12R3A Astrology Runtime Completion passed.\n  AST v2: 12 positions · 12 houses · 4 angles · 28 major aspects · 39 governed meanings.\n  Personal Reality now consumes AST structural successor → canonical meaning → AST customer adapter → natal structure visual.\n"
+    },
+    {
+      "testId": "HOUSE_POLICY_CURRENT",
+      "command": "node scripts/check-cx-r12r3a-house-system-reconciliation.mjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "signal": null,
+      "outputTail": "✓ CX-R12R3A House System Reconciliation passed: Placidus is the versioned customer default; Whole Sign remains supported; 12 independent reference cusps matched within 1e-8° and the comparison-chart planet house placements reconcile to the Placidus pattern.\n"
+    },
+    {
+      "testId": "AST_MEANING_READING",
+      "command": "node scripts/check-asta-w11-w24.mjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "signal": null,
+      "outputTail": "✓ ASTA-W11–W24 AST Production meaning/reading/frontend promotion passed.\n  AST v1.0.0 is Available with 41 governed meanings; fixture resolves 39 applicable meanings and preserves v1 execution compatibility while full AST uses v2 successor projection.\n"
+    },
+    {
+      "testId": "SMR_CAMPAIGN",
+      "command": "npm run check:cx-r12r4b:smr",
+      "exitCode": 0,
+      "status": "PASS",
+      "signal": null,
+      "outputTail": "\n> check:cx-r12r4b:smr\n> node scripts/generate-cx-r12r4b-smr-campaign.mjs --check && node scripts/check-cx-r12r4b-smr.mjs all\n\n✓ CX-R12R4B-SMR campaign is current: 64/64 machine accepted; 48 reports ready for human review.\n✓ CX-R12R4B-SMR authority passed.\n✓ CX-R12R4B-SMR priority passed.\n✓ CX-R12R4B-SMR theme-clustering passed.\n✓ CX-R12R4B-SMR ast passed.\n✓ CX-R12R4B-SMR bzr passed.\n✓ CX-R12R4B-SMR zwr passed.\n✓ CX-R12R4B-SMR num passed.\n✓ CX-R12R4B-SMR lineage passed.\n✓ CX-R12R4B-SMR no-generic-filler passed.\n✓ CX-R12R4B-SMR no-unsupported-timing passed.\n✓ CX-R12R4B-SMR customer-language passed.\n✓ CX-R12R4B-SMR e2e passed.\n  64/64 machine reports passed. 48/48 human reports are materialized and truthfully remain pending; production cutover stays blocked.\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\n"
+    },
+    {
+      "testId": "R2_METHOD_INPUT",
+      "command": "node scripts/check-cx-r12r4b-smr-r2-method-input.mjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "signal": null,
+      "outputTail": "✓ CX-R12R4B SMR-R2 W1 method production adapters passed for AST/BZR/ZWR/NUM/ECR.\n"
+    },
+    {
+      "testId": "R2_CLAIM_IR",
+      "command": "node scripts/check-cx-r12r4b-smr-r2-claim-ir.mjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "signal": null,
+      "outputTail": "✓ CX-R12R4B SMR-R2 W2 Customer Claim IR passed with accepted-authority lineage and fail-closed gaps.\n"
+    },
+    {
+      "testId": "AST_PRODUCTION_AGGREGATE",
+      "command": "npm run check:ast-production",
+      "exitCode": 1,
+      "status": "FAIL",
+      "signal": null,
+      "outputTail": "\n> check:ast-production\n> npm run check:ast-production-scope && npm run check:asta-w11-w24\n\n\n> check:ast-production-scope\n> node scripts/check-asta-w0-w10.mjs\n\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nnode:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 18.356794392457005\n- 0\n\n    at file://<repo>/scripts/check-asta-w0-w10.mjs:49:414 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: 18.356794392457005,\n  expected: 0,\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.19.0\n"
+    },
+    {
+      "testId": "W2_HISTORICAL_CLI",
+      "command": "node scripts/check-cx-smr-enrichment-w2.mjs --all",
+      "exitCode": 1,
+      "status": "FAIL",
+      "signal": null,
+      "outputTail": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Protected baseline changed: content/interpretation/bazi/authority/bzr-r1-source-strategy-v1.json\n+ actual - expected\n\n+ '1b47a6887907fbf1a4e8b72a9b4c6f1734af73ff72b7676adb9f59443bd5f026'\n- 'a06f56ba12dadcf0b170d6873d1e290a1212340ebff350d2aba0e80f85393e2d'\n\n    at checkW01 (file://<repo>/scripts/check-cx-smr-enrichment-w01.mjs:43:108)\n    at checkW2 (file://<repo>/scripts/check-cx-smr-enrichment-w2.mjs:38:19)\n    at file://<repo>/scripts/check-cx-smr-enrichment-w2.mjs:55:78\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: '1b47a6887907fbf1a4e8b72a9b4c6f1734af73ff72b7676adb9f59443bd5f026',\n  expected: 'a06f56ba12dadcf0b170d6873d1e290a1212340ebff350d2aba0e80f85393e2d',\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.19.0\n"
+    },
+    {
+      "testId": "FULL_NPM_CHECK",
+      "command": "npm run check",
+      "exitCode": 1,
+      "status": "FAIL",
+      "signal": null,
+      "outputTail": "ional, bilingual and non-duplicative.\n  Four mechanism-based granularity rules are frozen.\n✓ KH-W3.5F Canonical Extraction and Scaling Freeze passed.\n  Domain → Theme → Node → Question → Alias is the frozen hierarchy.\n  Part thresholds are 18 flexible review, 24 mandatory audit and 30 hard stop.\n  Registry presence creates no production requirement; active articles remain capped at 8.\n  State: KH-W3.5F-Frozen.\n✓ KH-W4A Knowledge Runtime v2 Blueprint Registry and Loader passed.\n  Five registered Blueprints project 16 Parts and 931 current Canonical Node identities.\n  P5 resolves to BOOK-2; P8 resolves to BOOK-3; P10 resolves to BOOK-4; P13 resolves to BOOK-5.\n  Legacy single-Book authority is retired; digest mismatch fails closed.\n✓ KH-W4B/W4C Canonical Registry Authority and Universal Consumption passed.\n  Book, Part, Canonical Node and Blueprint authorities are unique and fail closed.\n  Current public runtime consumes the Blueprint Registry; legacy direct reads are allowlisted for later migration.\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nnode:internal/modules/package_json_reader:301\n  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);\n        ^\n\nError [ERR_MODULE_NOT_FOUND]: Cannot find package 'ajv' imported from <repo>/scripts/check-pja-w2f-c0-book-i-registry-population.mjs\n    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:301:9)\n    at packageResolve (node:internal/modules/esm/resolve:768:81)\n    at moduleResolve (node:internal/modules/esm/resolve:859:18)\n    at defaultResolve (node:internal/modules/esm/resolve:992:11)\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)\n    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)\n    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)\n    at #resolve (node:internal/modules/esm/loader:683:17)\n    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)\n    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33) {\n  code: 'ERR_MODULE_NOT_FOUND'\n}\n\nNode.js v24.19.0\n"
+    }
+  ],
+  "additionalChecks": [
+    {
+      "testId": "CHECK_SCRIPT_SHELL_SYNTAX",
+      "command": "sh -n -c <package.scripts.check>",
+      "exitCode": 2,
+      "status": "FAIL",
+      "output": "sh: 1: Syntax error: \"&&\" unexpected\n",
+      "scriptExecuted": false
+    },
+    {
+      "testId": "GIT_DIFF_CHECK",
+      "command": "git diff --check",
+      "exitCode": 0,
+      "status": "PASS"
+    }
+  ],
+  "environment": {
+    "node": "v24.19.0",
+    "dependencyInstall": {
+      "command": "npm ci --ignore-scripts --offline --no-audit --no-fund",
+      "status": "FAILED_ENOTCACHED",
+      "detail": "astronomy-engine@2.1.19 is not available in the locally configured npm cache; no online install or dependency-version substitution was attempted."
+    }
+  },
+  "blockers": [
+    {
+      "id": "AST-FP-B01",
+      "kind": "BASELINE_CHECK_SCRIPT_SYNTAX",
+      "detail": "Empty && operators in package.scripts.check; shell parse exit 2."
+    },
+    {
+      "id": "AST-FP-B02",
+      "kind": "LEGACY_AST_CHECKER_POLICY_DRIFT",
+      "detail": "ASTA-W0–W10 assumes Whole Sign cusp multiples of 30 while the active customer default is Placidus."
+    },
+    {
+      "id": "AST-FP-B03",
+      "kind": "HISTORICAL_W2_CHECKER_BASELINE_DRIFT",
+      "detail": "The immutable abab6b3 checkpoint protects BaZi files changed by later commits; original CLI fails on bzr-r1-source-strategy."
+    },
+    {
+      "id": "AST-FP-B04",
+      "kind": "LOCAL_DEPENDENCY_AVAILABILITY",
+      "detail": "Full precheck cannot import ajv in this workspace; offline lockfile install failed."
+    },
+    {
+      "id": "AST-FP-B05",
+      "kind": "NEW_SOURCE_ADMISSION",
+      "detail": "Source-use basis, specialist review and conflict decisions remain pending; 0/25 new-source cards admitted."
+    }
+  ],
+  "recoveryNote": "The initial ZIP/CRLF checkout caused a PDS protected-path failure. Restoring exact baseline bytes resolved that issue; it is not treated as an outstanding production-code defect.",
+  "preservation": {
+    "runtimeOrRegistryChanged": false,
+    "packageJsonChanged": false,
+    "sourceExtractsChanged": false,
+    "humanAcceptanceChanged": false,
+    "astDefaultHouseSystemChanged": false,
+    "rawSourceFilesBundled": false,
+    "gitCommitCreated": false,
+    "githubPushed": false,
+    "deployed": false,
+    "newCustomerCutoverAllowed": false
+  },
+  "limits": [
+    "This is an independently stored documentation/manifest package, not a production runtime release.",
+    "Existing AST/CX-R12R3B approvals remain scoped to their original versions; none transfer to the 25 cards.",
+    "Tests use governed fixtures; they are not expert acceptance, scientific validation or live deployment verification.",
+    "All future AST-FP production phases remain deferred; the saved stop point stays ast-W2."
+  ]
+}
