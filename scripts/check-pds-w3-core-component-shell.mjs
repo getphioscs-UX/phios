@@ -47,8 +47,13 @@ const predecessorDigests=[predecessorText,predecessorText.replace(/\n/g,'\r\n')]
 assert.ok(predecessorDigests.includes(navigationSuccessor.predecessorContractSha256),'PDS-W3 predecessor content changed (LF/CRLF normalization allowed only)');
 assert.deepEqual(navigationSuccessor.primaryNavigation.map(x=>x.href),['/explore/','/reality/','/perspectives/','/knowledge/','/professional/']);
 assert.equal(navigationSuccessor.runtimeChanged,false);
-for(const item of navigationSuccessor.primaryNavigation)assert.ok(shell.includes(`id: '${item.id}', href: '${item.href}'`));
-const activeNavigationIds = navigationSuccessor.primaryNavigation.map(x=>x.id);
+const currentNavigation=await readJson('content/web/index-surfaces/pis-r1-world-about-navigation-successor-v2.json');
+assert.equal(currentNavigation.status,'ENGINEERING_RECONCILIATION');assert.equal(currentNavigation.predecessor.path,'content/web/index-surfaces/pis-r1-navigation-successor-v1.json');
+assert.equal(currentNavigation.predecessor.sha256,crypto.createHash('sha256').update(await fs.readFile(path.join(root,currentNavigation.predecessor.path))).digest('hex'));
+for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(currentNavigation[key],false);
+assert.deepEqual(currentNavigation.primaryNavigation.map(x=>x.href),['/world','/about/founder/','/reality/','/perspectives/','/knowledge/','/professional/']);
+for(const item of currentNavigation.primaryNavigation)assert.ok(shell.includes(`id: '${item.id}', href: '${item.href}'`));
+const activeNavigationIds = currentNavigation.primaryNavigation.map(x=>x.id);
 let cursor = shell.indexOf('const NAVIGATION');
 for (const id of activeNavigationIds) {
   const index = shell.indexOf(`id: '${id}'`, cursor + 1);
@@ -57,23 +62,24 @@ for (const id of activeNavigationIds) {
 }
 
 cursor = shell.indexOf('const FOOTER_LINKS');
-for (const href of [
-  '/library',
-  '/articles',
-  '/thesis',
-  '/book-one',
-  '/explore',
-  '/reality/',
-  '/services',
-  '/about',
-  '/privacy',
-  '/terms',
-  '/contact'
-]) {
+for (const href of currentNavigation.footerLinks) {
   const index = shell.indexOf(`href: '${href}'`, cursor + 1);
   assert.ok(index > cursor, `Footer order changed at ${href}`);
   cursor = index;
 }
+assert.deepEqual(currentNavigation.footerLinks,[
+  '/library',
+  '/articles',
+  '/thesis',
+  '/book-one',
+  '/world/',
+  '/reality/',
+  '/services',
+  '/about/founder/',
+  '/privacy',
+  '/terms',
+  '/contact'
+]);
 
 for (const behavior of [
   'aria-controls="public-navigation"',
@@ -99,6 +105,16 @@ const cxPages = new Set(['index.html', 'about/index.html', 'explore/index.html']
 const px2Pages = new Set(['library.html', 'services.html', 'books/index.html', 'professional/financial/index.html', 'reality/index.html']);
 for (const page of fixture.publicPages) {
   const source = await read(page);
+  if(page==='explore/index.html'){
+    assert.ok(source.includes('href="https://www.getphios.com/about/founder/"'));
+    assert.ok(source.includes('src="/assets/js/explore-about-compat.js"'));
+    const redirect=await read('assets/js/explore-about-compat.js');
+    assert.ok(redirect.includes("location.replace('/about/founder/'"));
+    const target=await read('about/founder/index.html');
+    assert.ok(target.includes('/assets/js/public-shell.js'),'About target shared shell missing');
+    for(const anchor of ['why','how','start','faq'])assert.ok(target.includes(`id="${anchor}"`),'About target missing '+anchor);
+    continue;
+  }
   if (cxPages.has(page)) {
     assert.ok(source.includes('/assets/customer-ui/tokens.css'), `${page} must consume the CX shared design tokens`);
     assert.ok(source.includes('/assets/customer-ui/base.css'), `${page} must consume the CX shared base stylesheet`);

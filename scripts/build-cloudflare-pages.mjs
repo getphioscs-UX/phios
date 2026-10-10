@@ -190,6 +190,9 @@ const admittedBookVii = await loadBookViiPublishedAdmission(async rel => {
   return fs.existsSync(source) ? JSON.parse(fs.readFileSync(source, 'utf8')) : null;
 });
 const publicationFiles = new Set(tracked.stdout.split('\0').filter(Boolean));
+// The recovery error page must be reviewable before committing it. Without a
+// top-level 404.html Pages serves the homepage for unknown static routes.
+if(fs.existsSync(path.join(root,'404.html')))publicationFiles.add('404.html');
 // Explicit R2 runtime additions for uncommitted local builds. Review evidence
 // and captures remain excluded by the shared publication predicate.
 for(const file of ['assets/css/global-visual-r2.css','assets/js/global-visual-r2.js','data/visual/approved-r2-visual-assets.json'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);

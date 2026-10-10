@@ -1,5 +1,6 @@
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
@@ -306,9 +307,17 @@ for (const retiredPage of retiredPresentationPages) {
   );
 }
 
+const notFound=await readJson('docs/pja/pja-not-found-capability-successor-v2.json');
+assert.equal(notFound.status,'ENGINEERING_RECONCILIATION');assert.equal(notFound.predecessor.path,pageCapabilityExtensionPath);
+assert.equal(notFound.predecessor.sha256,crypto.createHash('sha256').update(await fs.readFile(path.join(root,pageCapabilityExtensionPath))).digest('hex'));
+assert.equal(notFound.historicalFreezeMutated,false);assert.equal(notFound.runtimeWriteAuthorityCreated,false);assert.equal(notFound.page.path,'404.html');
+const notFoundSource=await fs.readFile(path.join(root,notFound.page.path),'utf8');assert.equal(crypto.createHash('sha256').update(notFoundSource).digest('hex'),notFound.page.sha256);
+assert.match(notFoundSource,/<meta name="robots" content="noindex">/);for(const href of ['/','/search/','/knowledge/','/contact.html'])assert(notFoundSource.includes(`href="${href}"`));
+assert.deepEqual(notFound.pageCapabilities.flatMap(c=>c.pages),['404.html']);
 const effectivePageCapabilities = [
   ...freeze.pageCapabilities,
-  ...pageCapabilityExtension.pageCapabilities
+  ...pageCapabilityExtension.pageCapabilities,
+  ...notFound.pageCapabilities
 ];
 const mappedPages = effectivePageCapabilities
   .flatMap(capability => capability.pages)

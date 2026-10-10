@@ -5,7 +5,9 @@ function currentFounderSourceDigest(entry,founder){
   const next=JSON.parse(fs.readFileSync('content/web/index-surfaces/founder-locale-bootstrap-successor-r4.json'));
   assert.equal(next.status,'ENGINEERING_RECONCILIATION');assert.equal(next.file,entry.path);assert.equal(next.predecessor.path,manifest);assert.equal(next.predecessor.sha256,sha(fs.readFileSync(manifest)));
   for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(next[key],false);
-  assert.equal(next.previousSha256,entry.sha256);assert.equal(sha(fs.readFileSync(next.previousPath)),entry.sha256);assert.equal(sha(fs.readFileSync(next.runtime.path)),next.runtime.sha256);return next.sha256;
+  assert.equal(next.previousSha256,entry.sha256);assert.equal(sha(fs.readFileSync(next.previousPath)),entry.sha256);assert.equal(sha(fs.readFileSync(next.runtime.path)),next.runtime.sha256);
+  const about=JSON.parse(fs.readFileSync('content/web/index-surfaces/founder-about-consolidation-successor-r7.json'));
+  assert.equal(about.status,'ENGINEERING_RECONCILIATION');assert.equal(about.file,entry.path);assert.equal(about.predecessor.path,'content/web/index-surfaces/founder-locale-bootstrap-successor-r4.json');assert.equal(about.predecessor.sha256,sha(fs.readFileSync(about.predecessor.path)));for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(about[key],false);assert.equal(about.previousSha256,next.sha256);assert.equal(sha(fs.readFileSync(about.previousPath)),next.sha256);return about.sha256;
  }
  if(entry.path!=='assets/js/client-visual-consumption.js')return entry.sha256;
  const next=JSON.parse(fs.readFileSync('content/web/index-surfaces/founder-visual-consumption-successor-r3.json'));

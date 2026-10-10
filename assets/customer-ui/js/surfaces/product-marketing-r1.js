@@ -1,4 +1,7 @@
 import {installPhiMandalaInteractions} from '../specialists/ecr/mandala-renderer.js';
+import {ASK_CAPABILITIES} from '../../../js/ask-entry-capabilities.js';
+const configurationMethod=ASK_CAPABILITIES.methods.find(m=>m.methodId==='ECR');
+if(location.pathname==='/perspectives/phi-configuration/')for(const link of document.querySelectorAll('a[href*="method="]')){if(configurationMethod?.formValue){const url=new URL('/perspectives/personal/',location.origin);url.searchParams.set('method',configurationMethod.formValue);url.hash='personal-input';link.href=url.pathname+url.search+url.hash;}else{link.removeAttribute('href');link.setAttribute('aria-disabled','true');}}
 let requestVersion=0;
 const metadata={
  '/perspectives/phi-configuration/':{en:['PHI Configuration — PHI OS','Explore a PHI OS configuration model through a real synthetic example and the existing Personal reading.'],'zh-Hans':['PHI 构型 — PHI OS','通过真实合成示例阅读 PHI OS 构型模型，并进入现有个人读取体验。']},

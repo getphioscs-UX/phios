@@ -87,11 +87,11 @@ export async function resolveSelectedArticle(env,slug,locale='en') {
   if(!row?.path?.startsWith('/content/knowledge/public/'))return null;
   const article=await read(row.path);
   if(article?.publicationStatus!=='published'||article?.reviewStatus!=='approved'||article?.locale!==locale||article?.slug!==row.slug)return null;
-  const paragraphs=(article.sections||[]).flatMap(s=>(s.blocks||[]).map(b=>b.text||b.statement||'')).filter(Boolean);
+  const paragraphs=(article.sections||[]).flatMap((s,sectionIndex)=>(s.blocks||[]).map(b=>({text:b.text||b.statement||'',anchor:/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s.anchor)?s.anchor:`article-section-${sectionIndex+1}`}))).filter(p=>p.text);
   if(!paragraphs.length)return null;
   const href=article.publicHref||row.href;
   if(!href?.startsWith('/articles/')||href.startsWith('//'))return null;
   const bookCode=article.publicationContext?.bookCode || (article.nodeCode?.match(/^KN-B([1-8])/i)?.[1]?'BOOK-'+article.nodeCode.match(/^KN-B([1-8])/i)[1]:null);
-  return {slug:article.slug,title:article.title,href,locale,nodeCode:article.nodeCode,bookCode,articleContext:article.askContext||null,sourceReading:article.sourceReading||null,atlasLinks:article.connections?.relatedAtlasEntries||[],sources:paragraphs.map((text,i)=>({sourceId:'ARTICLE:'+slug+':'+i,fragmentCode:slug+'-'+i,sourceType:'PUBLISHED_CANONICAL_ARTICLE',authorityClass:'PUBLISHED_ARTICLE_AUTHORITY',nodeCode:article.nodeCode,bookCode,title:article.title,href,locale,text,scopeMatch:true,selected:true,articleSlug:slug}))};
+  return {slug:article.slug,title:article.title,href,locale,sourceVersion:article.version||null,nodeCode:article.nodeCode,bookCode,articleContext:article.askContext||null,sourceReading:article.sourceReading||null,atlasLinks:article.connections?.relatedAtlasEntries||[],sources:paragraphs.map((p,i)=>({sourceId:'ARTICLE:'+slug+':'+i,fragmentCode:slug+'-'+i,sourceVersion:article.version||null,sourceType:'PUBLISHED_CANONICAL_ARTICLE',authorityClass:'PUBLISHED_ARTICLE_AUTHORITY',nodeCode:article.nodeCode,bookCode,title:article.title,href:href+'#'+p.anchor,locale,text:p.text,scopeMatch:true,selected:true,articleSlug:slug}))};
  }catch{return null;}
 }

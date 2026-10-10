@@ -18,6 +18,8 @@ export const ASK_CAPABILITIES={
         "PERSONAL_REALITY"
       ],
       "mappingGap": null,
+      "verifiedAt": "2026-10-10T20:20:53.376Z",
+      "canonicalDomainOwner": "PPR_CURRENT_SHARED_RUNTIME",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/customer-experience-rebuild/registries/cx-r12r4-method-availability-registry-v1.json",
       "inputRequirements": [
@@ -42,11 +44,13 @@ export const ASK_CAPABILITIES={
         "zh-Hans": "关系"
       },
       "canonicalRoute": "/perspectives/relationship/",
-      "routeOwner": "functions/relationship/",
+      "routeOwner": "functions/personal-reading/relationship/",
       "canonicalDomainRefs": [
         "RELATIONSHIP_REALITY"
       ],
       "mappingGap": null,
+      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "canonicalDomainOwner": "REL_W0_W8",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
       "inputRequirements": [
@@ -76,6 +80,8 @@ export const ASK_CAPABILITIES={
         "FINANCIAL_REALITY"
       ],
       "mappingGap": null,
+      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "canonicalDomainOwner": "FDR_FCR_FAR_HFP_PFR",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
       "inputRequirements": [
@@ -105,6 +111,8 @@ export const ASK_CAPABILITIES={
         "WORLD_REALITY"
       ],
       "mappingGap": null,
+      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "canonicalDomainOwner": "CURRENT_WEB_AUTHORITY",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
       "inputRequirements": [
@@ -132,6 +140,8 @@ export const ASK_CAPABILITIES={
       "routeOwner": "functions/health/health-reality-runtime.js",
       "canonicalDomainRefs": [],
       "mappingGap": "No product-domain owner with this exact name; customer group is not a new canonical domain.",
+      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "canonicalDomainOwner": "functions/health/health-reality-runtime.js",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
       "inputRequirements": [
@@ -161,6 +171,8 @@ export const ASK_CAPABILITIES={
         "PERSONAL_REALITY"
       ],
       "mappingGap": null,
+      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "canonicalDomainOwner": "PPR_CURRENT_SHARED_RUNTIME",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
       "inputRequirements": [
@@ -185,11 +197,13 @@ export const ASK_CAPABILITIES={
         "zh-Hans": "问题与反思"
       },
       "canonicalRoute": "/perspectives/tarot/",
-      "routeOwner": "functions/tarot/",
+      "routeOwner": "functions/core-method-runtime/tarot-runtime-v2.js",
       "canonicalDomainRefs": [
         "PERSONAL_REALITY"
       ],
       "mappingGap": null,
+      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "canonicalDomainOwner": "PPR_CURRENT_SHARED_RUNTIME",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
       "inputRequirements": [
@@ -219,6 +233,8 @@ export const ASK_CAPABILITIES={
         "PERSONAL_REALITY"
       ],
       "mappingGap": null,
+      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "canonicalDomainOwner": "PPR_CURRENT_SHARED_RUNTIME",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/customer-experience-rebuild/registries/cx-r12r4-method-availability-registry-v1.json",
       "inputRequirements": [
@@ -248,6 +264,8 @@ export const ASK_CAPABILITIES={
         "KNOWLEDGE"
       ],
       "mappingGap": null,
+      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "canonicalDomainOwner": "CANONICAL_KNOWLEDGE",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
       "inputRequirements": [
@@ -277,6 +295,8 @@ export const ASK_CAPABILITIES={
         "MY_REALITY"
       ],
       "mappingGap": null,
+      "verifiedAt": "2026-10-10T20:20:53.381Z",
+      "canonicalDomainOwner": "RMO",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
       "inputRequirements": [
@@ -306,6 +326,8 @@ export const ASK_CAPABILITIES={
         "PROFESSIONAL"
       ],
       "mappingGap": null,
+      "verifiedAt": "2026-10-10T20:20:53.381Z",
+      "canonicalDomainOwner": "PR_PFR",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
       "inputRequirements": [
@@ -335,6 +357,8 @@ export const ASK_CAPABILITIES={
         "MY_REALITY"
       ],
       "mappingGap": null,
+      "verifiedAt": "2026-10-10T20:20:53.381Z",
+      "canonicalDomainOwner": "RMO",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
       "inputRequirements": [

@@ -6,7 +6,7 @@ import {arr,esc,locale,postJson,reRenderOnLocale,setStatus,tr} from './runtime-u
 import {handoffToMyReality} from '../handoff.js';
 import {installCapabilityOverview,renderEntryResult} from '../../../js/ask-entry-ui.js';
 
-let view=null, seedLoading=false, seedFailed=false;
+let view=null, seedLoading=false, seedFailed=false, followUp=null;
 const empty=message=>`<div class="cx-p1-empty">${esc(message)}</div>`;
 const CX_R31_HANDOFF_ROUTES=Object.freeze({RELATIONSHIP:'/perspectives/relationship/',PROFILE:'/perspectives/profile/',FINANCIAL:'/professional/financial/',SPECIALIST:'/perspectives/',PROFESSIONAL:'/professional/'});
 const emitCxR31=(name,detail={})=>document.dispatchEvent(new CustomEvent('phi:cx-r31',{detail:{name,...detail}}));
@@ -57,7 +57,7 @@ function selectedKnowledgeContext(form){
   const input=form.querySelector('[data-cx-seeded-context][data-context-type="KNOWLEDGE"]:checked');
   if(!input)return null;
   let retrievalScope=null;try{retrievalScope=JSON.parse(input.dataset.retrievalScope||'null')}catch{}
-  return {contextRef:input.dataset.contextRef,contextLabel:input.dataset.contextLabel||tr('Selected knowledge source','已选择知识来源'),contextRoute:input.dataset.contextRoute||'/knowledge/',contextSummary:input.dataset.contextSummary||null,readingPath:input.dataset.readingPath||null,relatedKnowledgeRef:input.dataset.relatedKnowledgeRef||null,retrievalScope};
+  return {sourceVersion:input.dataset.sourceVersion||null,contextRef:input.dataset.contextRef,contextLabel:input.dataset.contextLabel||tr('Selected knowledge source','已选择知识来源'),contextRoute:input.dataset.contextRoute||'/knowledge/',contextSummary:input.dataset.contextSummary||null,readingPath:input.dataset.readingPath||null,relatedKnowledgeRef:input.dataset.relatedKnowledgeRef||null,retrievalScope};
 }
 
 function selectedRequest(form){
@@ -238,10 +238,10 @@ async function loadSeededContexts(){
     if(seeded.some(x=>x.requestedContextRef&&x.availability==='UNAVAILABLE')){seedFailed=true;const general=document.querySelector('[name="contextKnowledge"]');if(general)general.checked=false;const panel=node.closest('details');if(panel)panel.open=true;}
     node.innerHTML=seeded.map(x=>{
       const specificKnowledge=x.contextType==='KNOWLEDGE'&&x.requestedContextRef;
-      const label=specificKnowledge?(contextLabel||tr('Selected knowledge source','已选择知识来源')):x.label;
+      const label=specificKnowledge?(x.sourceLabel||contextLabel||tr('Selected knowledge source','已选择知识来源')):x.label;
       const available=x.availability==='AVAILABLE'||x.availability==='AVAILABLE_FROM_SOURCE';
       const checked=available&&(specificKnowledge||x.availability==='AVAILABLE_FROM_SOURCE');
-      return `<label class="cx-context-choice" data-availability="${esc(x.availability)}"><input type="checkbox" data-cx-seeded-context data-context-type="${esc(x.contextType)}" data-context-ref="${esc(x.requestedContextRef||'')}" data-context-label="${esc(label)}" data-context-route="${esc(contextRoute||'/knowledge/')}" data-context-summary="${esc(contextSummary||'')}" data-reading-path="${esc(readingPath||'')}" data-related-knowledge-ref="${esc(relatedKnowledgeRef||'')}" data-retrieval-scope="${esc(retrievalScope||'')}" ${checked?'checked':''} ${available?'':'disabled'}><span><strong>${esc(label)}</strong><small>${esc(availabilityHelp(x,specificKnowledge))}</small></span></label>`;
+      return `<label class="cx-context-choice" data-availability="${esc(x.availability)}"><input type="checkbox" data-cx-seeded-context data-context-type="${esc(x.contextType)}" data-context-ref="${esc(x.requestedContextRef||'')}" data-source-version="${esc(x.sourceVersion||'')}" data-context-label="${esc(label)}" data-context-route="${esc(contextRoute||'/knowledge/')}" data-context-summary="${esc(contextSummary||'')}" data-reading-path="${esc(readingPath||'')}" data-related-knowledge-ref="${esc(relatedKnowledgeRef||'')}" data-retrieval-scope="${esc(retrievalScope||'')}" ${checked?'checked':''} ${available?'':'disabled'}><span><strong>${esc(label)}</strong><small>${esc(availabilityHelp(x,specificKnowledge))}</small></span></label>`;
     }).join('');
     if(node.querySelector('[data-context-type="KNOWLEDGE"]:checked')&&document.querySelector('[name="contextKnowledge"]'))document.querySelector('[name="contextKnowledge"]').checked=false;
   }catch(error){
@@ -253,7 +253,7 @@ async function loadSeededContexts(){
 
 function errorMessage(code){
   const value=String(code||'');
-  if(value==='SELECTED_SOURCE_UNAVAILABLE')return tr('The selected source could not be loaded. Retry, open the original source, or explicitly choose Knowledge only.','所选来源暂时无法载入。请重试、打开原始来源，或明确选择只使用知识提问。');
+  if(value==='SELECTED_SOURCE_VERSION_CHANGED'||value==='SELECTED_SOURCE_SCOPE_INVALID'||value==='PRIVATE_DOCTRINE_NOT_PUBLIC_SOURCE')return tr('The selected source is unavailable or has changed. Reopen the original source and choose it again.','所选来源不可用或已变更。请重新打开原始来源后再选择。');if(value==='SELECTED_SOURCE_UNAVAILABLE')return tr('The selected source could not be loaded. Retry, open the original source, or explicitly choose Knowledge only.','所选来源暂时无法载入。请重试、打开原始来源，或明确选择只使用知识提问。');
   if(value.includes('CONSENT_REQUIRED'))return tr('Please confirm the consent box for the context you selected.','请先确认你所选择情境的同意选项。');
   if(value.includes('ENTITLEMENT_REQUIRED'))return tr('That saved source is not currently available for this Ask session. Open it again from its original page if access is available.','这份已保存来源目前无法用于本次提问。若仍有访问权限，请从原始页面重新打开。');
   if(value.includes('NOT_AUTHORIZED')||value.includes('SERVER_AUTHORIZATION_REQUIRED'))return tr('This source must be opened from its original reading, relationship or profile page before Ask can use it.','这项资料必须从原本的读取、关系或 侧写页面打开后，提问才能使用。');
@@ -269,6 +269,7 @@ function boot(){
   if(!form)return;
   const task=document.createElement('label');task.className='ask-r1-task';task.innerHTML='<span data-cx-en="What would you like to do?" data-cx-zh="你想怎样继续？">'+tr('What would you like to do?','你想怎样继续？')+'</span><select name="askTask"><option value="ENTRY" data-cx-en="Find an entrance" data-cx-zh="找到入口">'+tr('Find an entrance','找到入口')+'</option><option value="KNOWLEDGE_BASIC" data-cx-en="Understand knowledge" data-cx-zh="理解知识">'+tr('Understand knowledge','理解知识')+'</option><option value="REALITY_NAVIGATION" data-cx-en="Continue my reality" data-cx-zh="继续我的现实">'+tr('Continue my reality','继续我的现实')+'</option></select>';form.prepend(task);
   const taskParams=new URLSearchParams(location.search);form.elements.askTask.value=taskParams.has('contextRef')||taskParams.get('task')==='KNOWLEDGE_BASIC'?'KNOWLEDGE_BASIC':'ENTRY';
+  if(form.elements.askTask.value==='KNOWLEDGE_BASIC'&&!taskParams.has('contextRef')){form.elements.questionOnly.checked=false;form.elements.contextKnowledge.checked=true;}
   const entryResult=document.createElement('section');entryResult.dataset.askR1Result='';entryResult.hidden=true;form.after(entryResult);installCapabilityOverview(entryResult.parentElement);
   const routing=document.createElement('label');routing.innerHTML='<span data-routing-label>'+tr('How would you like to continue? ','你想如何继续？ ')+'</span><select name="guidedRoutingMode"><option value="AUTO">'+tr('Answer or clarify','回答或澄清')+'</option><option value="GUIDE">'+tr('Help me choose a method','帮助我选择方法')+'</option></select>';form.prepend(routing);
   form.dataset.askState=navigator.onLine===false?'OFFLINE':'IDLE';
@@ -277,6 +278,8 @@ function boot(){
   window.addEventListener('online',()=>{if(form.getAttribute('aria-busy')!=='true'){form.dataset.askState='IDLE';setStatus(status,'');}});
   form.addEventListener('change',event=>{
     const target=event.target;
+    if(target?.name==='askTask'||target?.name?.startsWith('context')||target?.name==='questionOnly'||target?.matches?.('[data-cx-seeded-context]'))followUp=null;
+    if(target?.name==='askTask'&&target.value==='KNOWLEDGE_BASIC'&&form.elements.questionOnly.checked){form.elements.questionOnly.checked=false;form.elements.contextKnowledge.checked=true;}
     if(target?.matches?.('[data-cx-seeded-context][data-context-type="KNOWLEDGE"]')&&target.checked){form.elements.contextKnowledge.checked=false;form.elements.questionOnly.checked=false;}
     if(target?.matches?.('[data-cx-seeded-context]')&&target.checked)form.elements.questionOnly.checked=false;
     syncSelection(form);
@@ -303,8 +306,8 @@ function boot(){
     form.dataset.askState='RETRIEVING';
     try{
       entryResult.hidden=true;
-      const payload=await postJson('/api/customer-contextual-ask',{question,task:form.elements.askTask.value,locale:locale(),guidedRouting:true,methodGuidanceRequested:form.elements.guidedRoutingMode.value==='GUIDE',...selection,guidedContext:guided,contextConsent:{CURRENT_REALITY:form.elements.currentRealityConsent.checked===true}},{timeoutMs:25000});
-      view=payload.view;
+      const payload=await postJson('/api/customer-contextual-ask',{question,task:form.elements.askTask.value,followUpContext:followUp?{parentAnswerId:followUp.answerContext?.answerId,groundingBundleId:followUp.knowledgeContext?.groundingBundleId,followUpDepth:followUp.depth+1}:null,locale:locale(),guidedRouting:true,methodGuidanceRequested:form.elements.guidedRoutingMode.value==='GUIDE',...selection,guidedContext:guided,contextConsent:{CURRENT_REALITY:form.elements.currentRealityConsent.checked===true}},{timeoutMs:25000});
+      view=payload.view;followUp=payload.followUp||null;
       form.dataset.askState=['SUFFICIENT','PARTIAL','INSUFFICIENT','AMBIGUOUS','CONTRADICTORY'].includes(view?.qualityOutcome)?view.qualityOutcome:(view?.state||'IDLE');
       render();
       setStatus(status,'','success');

@@ -525,10 +525,14 @@ function renderRelated(documentRef, article, publishedArticles, translate) {
 function appendConnectionLinks(
   documentRef,
   parent,
-  connections
+  connections,
+  locale = 'en'
 ) {
   for (const connection of connections) {
-    const link = createInternalLink(documentRef, connection);
+    const label = locale === 'zh-Hans' && typeof connection.label === 'string'
+      ? connection.label.replace(/^Case /, '案例 ').replace(/^Window /, '历史时间窗 ').replace(/^Snapshot /, '截面 ')
+      : connection.label;
+    const link = createInternalLink(documentRef, { ...connection, label });
     if (link) {
       parent.append(link);
     }
@@ -546,17 +550,20 @@ function renderExitNavigation(documentRef, article, translate) {
   appendConnectionLinks(
     documentRef,
     navigation,
-    article.connections.relatedBooks || []
+    article.connections.relatedBooks || [],
+    article.locale
   );
   appendConnectionLinks(
     documentRef,
     navigation,
-    article.connections.relatedAtlasEntries || []
+    article.connections.relatedAtlasEntries || [],
+    article.locale
   );
   appendConnectionLinks(
     documentRef,
     navigation,
-    article.connections.journeyEntryTopics || []
+    article.connections.journeyEntryTopics || [],
+    article.locale
   );
 
   const returnLink = createInternalLink(documentRef, {
