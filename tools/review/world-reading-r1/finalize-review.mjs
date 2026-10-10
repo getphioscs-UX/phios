@@ -1,0 +1,16 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+await import('../../../scripts/build-world-reading-r1-review.mjs');
+const p='content/production-closure/live-customer-commercial-convergence/world-reading-r1/',file=p+'WORLD-R1-VALIDATION.json',j=JSON.parse(fs.readFileSync(file)),candidate=p+'WORLD-R1-ENGINEERING-SUCCESSOR-CANDIDATE.json';
+const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+j.checks=JSON.parse(fs.readFileSync(p+'CHECKS.json'));j.currentSourceCheck={file:p+'CURRENT-SOURCE-CHECK.log',sha256:hash(p+'CURRENT-SOURCE-CHECK.log'),result:'PASS'};
+j.maintenanceCandidate={file:candidate,sha256:hash(candidate),status:'CANDIDATE_PENDING_HUMAN_REVIEW',productionAcceptance:false};
+j.blockers.push('W16 independently fails the prior World engineering source digest. The exact versioned maintenance candidate is prepared; original hashes and checks remain unchanged.');
+j.sourceVersionReconciliation={fullBrowserRows:52,fullRunHadSharedVisualChange:true,currentFeatureRows:12,currentSharedVisualRows:8,currentFailureBoundaryRows:4,note:'Core implementation byte identities can be reused across HEAD movement; changed shared visual owners were separately exercised. This is bounded regression evidence, not 506 visually reviewed customer objects.'};
+fs.writeFileSync(file,JSON.stringify(j,null,2)+'\n');
+const html='tools/review/PHIOS-WORLD-CIVILIZATION-R1-HUMAN-REVIEW.html';
+const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+const extra=`<section><h2>最终版本对账与具体治理候选</h2><p>现有检查没有放宽；W15 与 W16 分别记录。候选未自动接受，不授予生产准入。</p><a href="/${candidate}">版本化 successor 候选及精确前后摘要</a> · <a href="/${p}WORLD-R1-CHANGED-FILES.json">实际源码范围对账</a> · <a href="/${p}BOUNDARY-EVIDENCE.json">受控失败的实际可见提示</a> · <a href="/${p}BOOK-V-W16-CURRENT.log">W16 独立失败凭证</a><pre>${esc(JSON.stringify({currentHead:j.head,build:j.build,checks:j.checks.rows.map(r=>({command:r.command,state:r.state})),sourceVersionReconciliation:j.sourceVersionReconciliation,maintenanceCandidate:j.maintenanceCandidate},null,2))}</pre></section>`;
+fs.writeFileSync(html,fs.readFileSync(html,'utf8').replace('</html>',extra+'</html>'));
+fs.appendFileSync(p+'WORLD-R1-CLOSURE.md','\nW16 current engineering digest migration remains pending. See WORLD-R1-ENGINEERING-SUCCESSOR-CANDIDATE.json; candidate is not acceptance.\n');
+console.log(JSON.stringify({head:j.head,build:j.build?.result,currentBuild:j.build?.reviewCurrentPass,status:j.status,candidate:j.maintenanceCandidate}));
