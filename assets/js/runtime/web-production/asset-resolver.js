@@ -200,7 +200,8 @@ export async function resolveApprovedVisual(identity, options = {}) {
     .then(response => { if (!response.ok) throw new PublicAssetResolutionError('APPROVED_INVENTORY_UNAVAILABLE'); return response.json(); })
     .catch(error => { approvedInventoryPromise = null; throw error; });
   const inventory = await approvedInventoryPromise;
-  const candidates = inventory.assets.filter(a => a.canonicalFilename === identity || a.r2Path === identity || a.aliases.includes(identity));
+  const canonicalIdentity = inventory.identityOverrides?.[identity] || identity;
+  const candidates = inventory.assets.filter(a => a.canonicalFilename === canonicalIdentity || a.r2Path === canonicalIdentity || a.aliases.includes(canonicalIdentity));
   // Customer surface identities supersede historic book HERO-021/022/023 collisions.
   const entry = candidates.find(a => a.sources.includes('content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json')) || candidates[0];
   if (!entry) throw new PublicAssetResolutionError('APPROVED_VISUAL_NOT_FOUND', identity);

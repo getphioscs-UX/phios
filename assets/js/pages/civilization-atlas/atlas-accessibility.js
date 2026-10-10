@@ -17,8 +17,11 @@ export function wireAtlasKeyboardNavigation(root,{onLayerActivate=()=>{}}={}){
     else if(event.key==='End') next=entries.length-1;
     else return;
     event.preventDefault();
-    const entry=entries[next];entry?.focus();
+    const entry=entries[next],entryId=entry?.id;entry?.focus();
     if(entry?.dataset.atlasLayer) onLayerActivate(entry.dataset.atlasLayer,{source:'keyboard-layer-nav'});
+    // Activating a layer can synchronously replace the navigation. Restore
+    // focus to its same stable entry, rather than leaving it on the body.
+    if(entryId){const replacement=root.ownerDocument.getElementById(entryId);if(root.contains(replacement))replacement.focus();}
   };
   nav.addEventListener('keydown',handler);
   return ()=>nav.removeEventListener('keydown',handler);

@@ -1,4 +1,4 @@
-import { resolvePublicAssetForWeb, fetchPublicAssetConfig, resolvePublicAsset } from '../runtime/web-production/asset-resolver.js';
+import { resolvePublicAssetForWeb, fetchPublicAssetConfig, resolvePublicAsset, resolveApprovedVisual } from '../runtime/web-production/asset-resolver.js';
 
 const VISUAL_REGISTRY='/content/web-production/registries/client-visual-asset-registry-v1.7.json';
 const MAP={
@@ -10,6 +10,7 @@ const MAP={
 };
 
 async function resolveIllustration(code){
+  try{return await resolveApprovedVisual(code,{surface:document.body.dataset.brclSurface});}catch{}
   try{
     const [vr,config]=await Promise.all([fetch(VISUAL_REGISTRY,{headers:{Accept:'application/json'}}).then(r=>r.ok?r.json():Promise.reject()),fetchPublicAssetConfig()]);
     const a=(vr.assets||[]).find(x=>x.sequence===code||x.assetCode===code);
