@@ -12,23 +12,23 @@
     "D": "Profile presents the approved evidence scene and seven source figures as part of the narrative; existing seven-mode forms preserved.",
     "E": "Home introduces six illustrated entry points, a platform network, PHI Configuration / Profile previews and eight book identities with correct destinations.",
     "F": "Personal Reality prioritizes the native PHI Configuration example; Perspectives and Relationship retain separate roles, with Tarot / I Ching v2 heroes and inline reading figures.",
-    "G": "Knowledge, Books and Academy use reading-oriented visual hierarchy; all eight canonical book routes and identities are retained. Required eight-volume system hero is still HTTP 404.",
-    "H": "Professional hero introduces human participation; Financial places seven approved explanation figures before its existing staged intake and keeps calculation, finding and judgment separate. Required evidence-decision boundary figure is HTTP 404.",
+    "G": "Knowledge, Books and Academy use reading-oriented visual hierarchy; all eight canonical book routes and identities are retained. Eight-volume system hero is GET-decoded and bound on Home and Books.",
+    "H": "Professional hero introduces human participation; Financial places eight approved explanation figures before its existing staged intake and keeps calculation, finding and judgment separate. Evidence-decision boundary figure is bound from the owner-confirmed Entrance path.",
     "I": "Account and Membership introduce continuity, saved-versus-session and version structure; actual report-unavailable state uses an approved illustration.",
     "J": {
-      "approvedAssets": 461,
-      "boundPrimary": 71,
-      "boundSecondary": 78,
+      "approvedAssets": 462,
+      "boundPrimary": 72,
+      "boundSecondary": 83,
       "stateOnly": 4,
-      "intentionallyWithheld": 308,
-      "unresolved": 6,
+      "intentionallyWithheld": 302,
+      "unresolved": 1,
       "primaryDefinition": "Verified assets used as HERO, PRIMARY_FIGURE or BRAND_IDENTITY; all other verified assets are secondary."
     },
     "K": {
       "overall": "FAIL",
-      "passed": 11,
-      "failed": 2,
-      "browserCombinations": 412,
+      "passed": 10,
+      "failed": 3,
+      "browserCombinations": 452,
       "checks": [
         {
           "name": "check:approved-r2-visual-inventory",
@@ -36,16 +36,17 @@
         },
         {
           "name": "check:approved-r2-visual-resolution",
-          "status": "FAIL",
-          "reason": "PHIOS-FIGURE-EVIDENCE-DECISION-BOUNDARY-v2.webp: HTTP_404\n\n'FAIL' !== 'PASS'\n"
+          "status": "PASS"
         },
         {
           "name": "check:visual-route-consumption",
-          "status": "PASS"
+          "status": "FAIL",
+          "reason": "knowledge/ask/index.html"
         },
         {
           "name": "check:no-orphan-approved-visuals",
-          "status": "PASS"
+          "status": "FAIL",
+          "reason": "Bound objects still lack complete render evidence"
         },
         {
           "name": "check:no-production-visual-placeholders",
@@ -53,8 +54,7 @@
         },
         {
           "name": "check:hero-binding",
-          "status": "FAIL",
-          "reason": "books/index.html: required hero is not bound"
+          "status": "PASS"
         },
         {
           "name": "check:figure-binding",
@@ -78,7 +78,8 @@
         },
         {
           "name": "check:visual-route-role-contract",
-          "status": "PASS"
+          "status": "FAIL",
+          "reason": "knowledge/ask/index.html: current source drift\n+ actual - expected\n\n+ '29151c95ef27935b890dd15bc77ab7cbf5767ab184542d50878583265af5656e'\n- '764636a8693c1bfaf672f98233e1e42237f599266bdd2782654c9891ffba6d08'\n"
         },
         {
           "name": "check:visual-function-preservation",
@@ -122,15 +123,13 @@
       },
       "publication": {
         "status": "PASS",
-        "baseBuild": "Pages worker compiled and publication boundary passed in current session",
-        "staticDelta": [
-          "assets/customer-ui/js/assets.js",
-          "data/visual/approved-r2-visual-assets.json"
-        ],
-        "sha256": "db46ab4ff7bcecfca5d21f1508c0bd4d3daa18a20d9e859d0ef49e11356f902e",
+        "command": "npm run build:pages",
+        "workerBytes": 16705251,
+        "workerGzipBytes": 3111426,
+        "publishedFiles": 11600,
         "providerCalls": 0,
         "deployments": 0,
-        "checkedAt": "2026-10-10T15:15:53.436Z"
+        "checkedAt": "2026-10-10T15:42:58.189Z"
       }
     },
     "L": {
@@ -141,51 +140,11 @@
   },
   "unresolved": [
     {
-      "type": "LEGACY_REGISTERED_OBJECT_HTTP_FAILURE",
-      "code": "FIG-010",
-      "asset": "PHIOS-FIGURE-KNOWLEDGE-NODE-ARTICLE-FIGURE-v1.svg",
-      "r2Path": "images/figures/global/PHIOS-FIGURE-KNOWLEDGE-NODE-ARTICLE-FIGURE-v1.svg",
-      "status": "FAIL",
-      "error": "HTTP_404"
-    },
-    {
-      "type": "LEGACY_REGISTERED_OBJECT_HTTP_FAILURE",
-      "code": "FIG-011",
-      "asset": "PHIOS-FIGURE-KNOWLEDGE-DISCOVERY-MODEL-v1.svg",
-      "r2Path": "images/figures/global/PHIOS-FIGURE-KNOWLEDGE-DISCOVERY-MODEL-v1.svg",
-      "status": "FAIL",
-      "error": "HTTP_404"
-    },
-    {
-      "type": "LEGACY_REGISTERED_OBJECT_HTTP_FAILURE",
-      "code": "FIG-009",
-      "asset": "PHIOS-FIGURE-CROSS-VOLUME-READING-PATH-v1.svg",
-      "r2Path": "images/figures/global/PHIOS-FIGURE-CROSS-VOLUME-READING-PATH-v1.svg",
-      "status": "FAIL",
-      "error": "HTTP_404"
-    },
-    {
-      "type": "LEGACY_REGISTERED_OBJECT_HTTP_FAILURE",
-      "code": "FIG-008",
-      "asset": "PHIOS-FIGURE-P1-P15-ARCHITECTURE-v1.svg",
-      "r2Path": "images/figures/global/PHIOS-FIGURE-P1-P15-ARCHITECTURE-v1.svg",
-      "status": "FAIL",
-      "error": "HTTP_404"
-    },
-    {
-      "type": "REQUIRED_HERO_HTTP_FAILURE",
-      "asset": "PHIOS-HERO-EIGHT-VOLUME-SYSTEM-v1.webp",
-      "r2Path": "images/hero/PHIOS-HERO-EIGHT-VOLUME-SYSTEM-v1.webp",
-      "status": "FAIL",
-      "httpStatus": 404
-    },
-    {
-      "type": "OBJECT_RESOLUTION_FAILURE",
-      "asset": "PHIOS-FIGURE-EVIDENCE-DECISION-BOUNDARY-v2.webp",
-      "r2Path": "images/figures/financial/PHIOS-FIGURE-EVIDENCE-DECISION-BOUNDARY-v2.webp",
-      "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/financial/PHIOS-FIGURE-EVIDENCE-DECISION-BOUNDARY-v2.webp",
-      "status": "FAIL",
-      "error": "HTTP_404"
+      "type": "RENDER_PROOF_INCOMPLETE",
+      "asset": "PHIOS-HERO-BOOK-5-REALITY-NAVIGATION-v1.webp",
+      "routeConsumers": [
+        "/books/reality-navigation/"
+      ]
     }
   ]
 }
