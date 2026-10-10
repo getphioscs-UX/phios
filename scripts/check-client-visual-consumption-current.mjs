@@ -152,15 +152,21 @@ function routeFiles(route) {
   const candidates = [`${relative}.html`, `${relative}/index.html`];
   return candidates.filter(file => fs.existsSync(`${ROOT}/${file}`));
 }
-function htmlReachesH5Bootstrap(file) {
-  const source = text(file);
+function htmlReachesH5Bootstrap(file,seen=new Set()) {
+  if(seen.has(file))return false;seen.add(file);
+  const source=text(file);
+  const redirect=source.match(/data-consolidation-target=["']([^"']+)/);
+  if(redirect){const target=redirect[1].split('#')[0];return routeFiles(target).some(f=>htmlReachesH5Bootstrap(f,seen));}
   if (/assets\/js\/(?:public-shell|journey-shell|i18n)\.js/.test(source)) return true;
-  const scriptSources = [...source.matchAll(/<script[^>]+src=["']([^"']+)/gi)].map(match => match[1].split('?')[0].replace(/^\//, ''));
-  return scriptSources.some(scriptPath => {
-    if (!fs.existsSync(`${ROOT}/${scriptPath}`)) return false;
-    const js = text(scriptPath);
-    return /from\s+["'](?:\.\.\/)+i18n\.js["']|import\(["'](?:\.\.\/)+i18n\.js["']/.test(js);
-  });
+  function reaches(scriptPath,visited=new Set()) {
+    if(visited.has(scriptPath)||!fs.existsSync(`${ROOT}/${scriptPath}`))return false;visited.add(scriptPath);
+    if(scriptPath==='assets/js/client-visual-consumption.js'){assert.match(text(scriptPath),/scheduleClientVisualConsumption\(\)/);return true;}
+    const js=text(scriptPath);
+    if(/from\s+["'](?:\.\.\/)+i18n\.js["']|import\(["'](?:\.\.\/)+i18n\.js["']/.test(js))return true;
+    const imports=[...js.matchAll(/(?:from\s*|import\s*\(?)["']([^"']+\.js)["']/g)].map(x=>x[1]);
+    return imports.some(ref=>{if(!ref.startsWith('.'))return false;const normalized=new URL(ref,'file:///'+scriptPath).pathname.slice(1);return reaches(normalized,visited);});
+  }
+  return [...source.matchAll(/<script[^>]+src=["']([^"']+)/gi)].some(match=>reaches(match[1].split('?')[0].replace(/^\//,'')));
 }
 let bootstrapFileCount = 0;
 for (const record of map.records.filter(record => record.visualState === 'ACTIVE_REQUIRED')) {

@@ -23,7 +23,7 @@ function normalizeWorkspace(input){
 
 function setStateBadge(state){
   const node=document.querySelector('[data-cx-reality-state]');if(!node)return;
-  const value=state||'EMPTY';node.textContent=value.replaceAll('_',' ');node.className='cx-status '+(value==='READY'?'cx-status--available':'cx-status--unknown');
+  const value=state||'EMPTY';node.textContent=value==='EMPTY'?tr('Start with a situation','从一个处境开始'):value==='READY'?tr('Workspace ready','工作区已就绪'):tr('Workspace in progress','工作区正在形成');node.className='cx-status '+(value==='READY'?'cx-status--available':'cx-status--unknown');
 }
 
 function renderContextSummary(view){

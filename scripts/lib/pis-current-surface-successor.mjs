@@ -1,3 +1,4 @@
+import {historicalPisBytes,assertCurrentConsolidatedSurface} from './page-consolidation-successor-r1.mjs';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
@@ -39,9 +40,9 @@ export function pisCurrentSurfaceSuccessor(){
  assert.equal(cache.runtime.path,'assets/js/pages/founder-publication-r1.js');assert.equal(cache.runtime.sha256,sha(fs.readFileSync(cache.runtime.path)));
  for(const s of r.surfaces){
   const current=s.file===founder.file?founder:guides.surfaces.find(x=>x.file===s.file)||next.surfaces.find(x=>x.file===s.file);
-  if(current){assert.equal(current.predecessorSha256,s.sha256);if(current!==founder){const source=fs.readFileSync(s.file,'utf8');for(const ref of ['/assets/customer-ui/surfaces/visual-binding-r5.css','/assets/customer-ui/js/surfaces/visual-binding-r5-guides.js'])assert(source.includes(ref),s.file+': missing R5 consumer');}}
-  if(s.file===hero.file){const source=fs.readFileSync(s.file,'utf8');assert(source.includes('data-r6-perspectives-hero'));assert(source.includes('pv-hero-preserved'));}
-  assert.equal(sha(fs.readFileSync(s.file)),s.file===founder.file?cache.sha256:s.file===hero.file?hero.sha256:current?.sha256||s.sha256,'PIS current source drift: '+s.file);
+  if(current){assert.equal(current.predecessorSha256,s.sha256);if(current!==founder){const source=historicalPisBytes(s.file).toString('utf8');for(const ref of ['/assets/customer-ui/surfaces/visual-binding-r5.css','/assets/customer-ui/js/surfaces/visual-binding-r5-guides.js'])assert(source.includes(ref),s.file+': missing R5 consumer');}}
+  if(s.file===hero.file){const source=historicalPisBytes(s.file).toString('utf8');assert(source.includes('data-r6-perspectives-hero'));assert(source.includes('pv-hero-preserved'));}
+  assert.equal(sha(historicalPisBytes(s.file)),s.file===founder.file?cache.sha256:s.file===hero.file?hero.sha256:current?.sha256||s.sha256,'PIS current source drift: '+s.file);
  }
  r.surfaces[r.surfaces.findIndex(s=>s.file===founder.file)]={...founder,sha256:cache.sha256,copyRuntime:cache.copyRuntime};
  assert.deepEqual(next.additionalSurfaces.map(s=>s.file),['professional/financial/index.html']);
@@ -57,23 +58,24 @@ export function pisCurrentSurfaceSuccessor(){
  assert.equal(financial.predecessor.path,'content/web/index-surfaces/pis-r1-perspectives-hero-successor-v5.json');
  assert.equal(financial.predecessor.sha256,sha(fs.readFileSync(financial.predecessor.path)));
  assert.equal(financial.historicalRecordsRewritten,false);assert.equal(financial.humanAcceptanceGranted,false);
- for(const s of next.additionalSurfaces){let expected=s.sha256;for(const step of financial.steps){assert.equal(step.previousSha256,expected);expected=step.successorSha256;}assert.equal(sha(fs.readFileSync(s.file)),expected,'PIS current source drift: '+s.file);r.surfaces.push(s);}
+ for(const s of next.additionalSurfaces){let expected=s.sha256;for(const step of financial.steps){assert.equal(step.previousSha256,expected);expected=step.successorSha256;}assert.equal(sha(historicalPisBytes(s.file)),expected,'PIS current source drift: '+s.file);r.surfaces.push(s);}
  assert.deepEqual(guides.additionalSurfaces.map(s=>s.file),['professional/services/index.html']);
  const service=JSON.parse(fs.readFileSync('content/web/index-surfaces/pis-r1-service-scope-successor-v7.json'));
  assert.equal(service.status,'ENGINEERING_RECONCILIATION');assert.equal(service.surface.file,'professional/services/index.html');
  assert.equal(service.predecessor.path,'content/web/index-surfaces/pis-r1-financial-guide-successor-v6.json');assert.equal(service.predecessor.sha256,sha(fs.readFileSync(service.predecessor.path)));
  assert.equal(service.historicalRecordsRewritten,false);assert.equal(service.humanAcceptanceGranted,false);
- for(const s of guides.additionalSurfaces){assert.equal(service.previousSha256,s.sha256);assert.equal(sha(fs.readFileSync(s.file)),service.surface.sha256,'PIS current source drift: '+s.file);r.surfaces.push(service.surface);}
+ for(const s of guides.additionalSurfaces){assert.equal(service.previousSha256,s.sha256);assert.equal(sha(historicalPisBytes(s.file)),service.surface.sha256,'PIS current source drift: '+s.file);r.surfaces.push(service.surface);}
  const explore=JSON.parse(fs.readFileSync('content/web/index-surfaces/pis-r1-explore-gallery-successor-v8.json'));
  assert.equal(explore.status,'ENGINEERING_RECONCILIATION');assert.equal(explore.surface.file,'explore/how-it-works/index.html');
  assert.equal(explore.predecessor.path,'content/web/index-surfaces/pis-r1-service-scope-successor-v7.json');assert.equal(explore.predecessor.sha256,sha(fs.readFileSync(explore.predecessor.path)));
  assert.equal(explore.historicalRecordsRewritten,false);assert.equal(explore.humanAcceptanceGranted,false);
  assert.deepEqual(explore.surface.retiredContextFigures,['FIG-002','FIG-005','FIG-012']);
- assert.equal(sha(fs.readFileSync(explore.surface.file)),explore.surface.sha256,'PIS current source drift: '+explore.surface.file);r.surfaces.push(explore.surface);
+ assert.equal(sha(historicalPisBytes(explore.surface.file)),explore.surface.sha256,'PIS current source drift: '+explore.surface.file);r.surfaces.push(explore.surface);
  return r;
 }
 export function assertPisCurrentSurface(document,surface){
  if(!surface)return;
+ if(assertCurrentConsolidatedSurface(document,surface.file))return;
  for(const selector of surface.requiredSelectors)assert(document.querySelector(selector),surface.file+': missing current component '+selector);
  for(const extra of surface.additionalEditorial){
   const found=[...document.querySelectorAll('.pis-editorial:not(.pis-visual-story)')].filter(n=>n.querySelector('h2')?.getAttribute('data-cx-en')===extra.headingEn);

@@ -1,4 +1,5 @@
 import {knowledgeNavigationIntent} from './navigation-intent.js';
+import '../../js/client-visual-consumption.js';
 import { CX_NAVIGATION, installNavigationToggle } from './navigation.js';
 import { installLocaleControls } from './locale.js';
 import { hydrateCustomerAssets } from './assets.js';
@@ -23,7 +24,7 @@ export function presentedAccountState(scope = document) {
 }
 
 function navLinks(active, extraClass = '') {
-  return CX_NAVIGATION.primary.map(item => `<a class="cx-nav-link ${extraClass}" href="${item.href}" data-cx-nav-link ${item.id === active ? 'aria-current="page"' : ''} ${t(item.en, item.zh)}>${item.en}</a>`).join('');
+  return CX_NAVIGATION.primary.map(item => item.id==='PERSPECTIVES'?`<details class="cx-personal-menu"><summary ${t(item.en,item.zh)}>${item.en}</summary><div><a class="cx-nav-link ${extraClass}" href="/perspectives/phi-configuration/" data-cx-nav-link ${t('PHI Configuration','PHI 构型')}>PHI Configuration</a><a class="cx-nav-link ${extraClass}" href="/perspectives/profile/" data-cx-nav-link ${t('Profile','个人画像')}>Profile</a><a class="cx-nav-link ${extraClass}" href="${item.href}" data-cx-nav-link ${t('All perspectives','所有视角')}>All perspectives</a></div></details>`:`<a class="cx-nav-link ${extraClass}" href="${item.href}" data-cx-nav-link ${item.id === active ? 'aria-current="page"' : ''} ${t(item.en, item.zh)}>${item.en}</a>`).join('');
 }
 
 function accountStateBadge(state) {

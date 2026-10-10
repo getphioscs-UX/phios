@@ -16,9 +16,21 @@ assert.equal(contract.rules.homepageMethodButtonsAllowed,false);assert.equal(con
 assert.equal(intents.intents.length,6);assert.equal(new Set(intents.intents.map(x=>x.code)).size,6);assert.ok(intents.intents.every(x=>x.route==='/ask'));
 assert.equal(surfaces.surfaces.length,7);for(const route of ['/ask','/library','/personal-runtime','/financial-reality','/my-reality','/reality-journey'])assert.ok(surfaces.surfaces.some(x=>x.route===route));
 assert.deepEqual(surfaces.hiddenBehindOrchestration,['AST','BZR','ZI_WEI','NUM','HDR','CCR','CWA','RLR']);assert.equal(surfaces.realityJourneyIsFirstVisitDefault,false);
+const index=read('index.html');
+if(index.includes('data-page-consolidation="R1"')){
+ const {consolidationSuccessor,historicalPisBytes}=await import('./lib/page-consolidation-successor-r1.mjs');
+ assert(consolidationSuccessor());historicalPisBytes('index.html');
+ for(const selector of ['data-cir-root','data-cir-form','data-cir-question','data-cir-status','src="/assets/js/pages/client-intent-router.js"','id="start"'])assert(index.includes(selector));
+ const {parseHTML}=await import('linkedom');const {document}=parseHTML(index);
+ const form=document.querySelector('[data-cir-form]');assert.equal(form.getAttribute('action'),'/knowledge/ask/');assert.equal(form.getAttribute('method'),'get');
+ assert.equal(document.querySelectorAll('#start .pm-card').length,6);
+ for(const href of ['/knowledge/ask/','/perspectives/personal/','/perspectives/relationship/','/professional/financial/','/world','/knowledge/'])assert(document.querySelector(`#start a[href="${href}"]`));
+ for(const forbidden of ['data-method','ASTROLOGY_PROJECTION','BAZI_PROJECTION','ZI_WEI_PROJECTION','HDR.OPERATING_READING'])assert(!form.outerHTML.includes(forbidden));
+}else{
 const index=read('index.html');assert.ok(index.includes('data-cir-root'));assert.equal((index.match(/data-cir-intent=/g)||[]).length,6);assert.ok(index.includes('你不需要先选择 Astrology、BaZi、Zi Wei 或 Numerology'));assert.ok(index.includes('七个客户入口'));assert.ok(index.includes('href="/personal-runtime"'));assert.ok(index.includes('href="/financial-reality"'));assert.ok(index.includes('href="/my-reality"'));assert.ok(index.includes('href="/reality-journey"'));
 const cirBlock=index.slice(index.indexOf('data-cir-root'),index.indexOf('data-cir-status'));
 for(const forbidden of ['data-method','ASTROLOGY_PROJECTION','BAZI_PROJECTION','ZI_WEI_PROJECTION','HDR.OPERATING_READING'])assert.ok(!cirBlock.includes(forbidden),`homepage intent block leaked ${forbidden}`);
+}
 const shell=read('assets/js/public-shell-v2.js');for(const route of ['/ask','/library','/personal-runtime','/financial-reality','/my-reality','/reality-journey'])assert.ok(shell.includes(`href: '${route}'`));assert.ok(!shell.includes("href: '/readings/'"));assert.ok(!shell.includes("href: '/professional/financial/'"));
 const ux=read('assets/js/pages/ux-lens.js');assert.ok(ux.includes("params.get('intent')"));assert.ok(ux.includes("['CURRENT','DECISION','RELATIONSHIP','TIME','DOMAIN','STRUCTURE']"));
 assert.ok(read('assets/js/pages/ux-lens.js').includes('openRealityEntryWithBundle'));

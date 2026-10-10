@@ -1,7 +1,7 @@
 import {customerAssetRegistry,hydrateCustomerAssets} from '../assets.js';
 const path=location.pathname.replace(/index\.html$/,'');
 const targets={
- '/':[[1,'.cx-home-beginning:nth-child(1)',true],[2,'.cx-home-beginning:nth-child(2)',true],[3,'.cx-home-beginning:nth-child(3)',true],[4,'.cx-home-beginning:nth-child(4)',true],[5,'.cx-home-beginning:nth-child(5)',true],[6,'.cx-home-beginning:nth-child(6)',true]],
+ '/':[[1,'[data-cx-r31-home-ask]',true],[2,'#world-knowledge .pm-wrap',true],[3,'#start .pm-card:nth-child(4)',true],[4,'#start .pm-card:nth-child(2)',true],[5,'#continue .pm-wrap',true],[6,'#human-services .pm-wrap',true]],
  '/reality/':[[9,'[data-cx-panel="overview"]'],[10,'[data-cx-panel="navigation"]'],[11,'[data-cx-panel="history"]'],[14,'[data-cx-panel="reading"]'],[15,'[data-cx-panel="navigation"]'],[16,'[data-cx-panel="current"]']],
  '/account/':[[18,'.cx-account-hero'],[19,'.cx-account-shortcuts .cx-card:last-child'],[20,'#account-reports'],[21,'#account-persons'],[22,'#account-reports article'],[23,'[data-cx-account-continuity]'],[24,'[data-r5-account-auth]'],[88,'[data-r6-account-permission-gate="true"]']],
  '/perspectives/profile/':[[33,'#profile-modes .cx-container'],[34,'#profile-modes .cx-container'],[35,'[data-prf-results] .cx-container'],[36,'[data-prf-workbench] .prf-guide'],[37,'[data-prf-dossier-dialog]'],[38,'[data-prf-handoff-panel]'],[39,'[data-prf-boundaries]']],
@@ -30,7 +30,7 @@ const targets={
  ,'/checkout':[[81,'[data-r6-checkout-guide]']]
  ,'/knowledge/concepts/':[[67,'.pis-editorial']]
  ,'/perspectives/':[[72,'#perspectives-module-1'],[73,'#perspectives-module-2'],[78,'[data-r6-perspectives-hero]',true]]
- ,'/professional/':[[52,'#review-boundary']]
+ ,'/professional/':[[52,'#review-boundary'],[53,'.cx-system-state'],[60,'[data-r6-cash-flow-game-scope]'],[61,'[data-r6-natural-healer-scope]']]
  ,'/membership.html':[[80,'main .public-section .public-container']]
  ,'/membership':[[80,'main .public-section .public-container']]
  ,'/contact.html':[[82,'main .public-section .public-container']]
