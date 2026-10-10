@@ -5,7 +5,7 @@ export function renderRealityNavigationNetwork(host,graph,{locale='en'}={}){
  if(!host)return;host.replaceChildren();const zh=locale==='zh-Hans';
  const label=(en,cn)=>zh?cn:en;
  const heading=document.createElement('h2');heading.textContent=label('My Current Network','我的当前网络');host.append(heading);
- if(graph?.schemaVersion!=='PHI-OS-REALITY-NAVIGATION-GRAPH-PROJECTION-v1'||graph.governance?.readOnly!==true||graph.governance?.persisted!==false||['G1','G2','G3'].some(k=>graph[k]?.edges?.length)){
+ if(!['PHI-OS-REALITY-NAVIGATION-GRAPH-PROJECTION-v1','PHI-OS-REALITY-NAVIGATION-GRAPH-PROJECTION-v2'].includes(graph?.schemaVersion)||graph.governance?.readOnly!==true||graph.governance?.persisted!==false||['G1','G2','G3'].some(k=>graph[k]?.edges?.length)){
   const warning=document.createElement('p');warning.textContent=label('A source-validated network is not available.','目前没有可验证来源的网络。');host.append(warning);return;
  }
  const legend=document.createElement('p');legend.textContent=label('Dashed rounded nodes: customer statements. Solid square nodes: external current sources, not personal facts. Confirmed facts, professional findings, perspectives and unknowns keep their separate source boundaries. Nodes stay isolated without relationship evidence.','虚线圆角节点：客户自述。实线方角节点：外部当前来源，并非个人事实。已确认事实、专业发现、视角与未知保持各自来源边界。没有关系证据时，节点保持孤立。');host.append(legend);
