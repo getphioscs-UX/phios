@@ -1,4 +1,5 @@
 import {pisCurrentSurfaceSuccessor,assertPisCurrentSurface} from './lib/pis-current-surface-successor.mjs';
+import './check-founder-publication-r1.mjs';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
@@ -45,7 +46,7 @@ for(const [file,sections] of Object.entries(copy.pages)){
  const current=successor.surfaces.find(s=>s.file===file);
  assertPisCurrentSurface(document,current);
  assert.equal(document.querySelectorAll('.pis-editorial:not(.pis-visual-story)').length,current?.editorialReplaced?0:sections.length+(current?.additionalEditorial.length||0),file+': editorial scope');
- assert.ok(document.querySelector('script[src="/assets/customer-ui/js/public-index-copy.js"]'));
+ assert.ok(document.querySelector(`script[src="${current?.copyRuntime||'/assets/customer-ui/js/public-index-copy.js'}"]`));
  for(const section of sections){
   assert.ok(section.body.en.length>120&&section.body.zh.length>40);
   assert.ok(!/\b(registry|resolver|cutover|successor|fixture|checker|canonical)\b/i.test(section.body.en));

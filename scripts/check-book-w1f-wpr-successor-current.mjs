@@ -30,7 +30,13 @@ assert.equal(bookViAssets.predecessor,'content/web-production/client-visual-cons
 assert.equal(bookViAssets.predecessorSha256,sha256(bookViAssets.predecessor));
 assert.equal(bookViAssets.previousSha256,partH5ABrandingSuccessor.publicAssetRegistry.currentSha256);
 assert.equal(bookViAssets.registryPath,'content/registry/public-assets.json');
-assert.equal(bookViAssets.currentSha256,sha256(bookViAssets.registryPath));
+const bookOnePrefix=json('content/web-production/client-visual-consumption/successors/book-one-prefix-successor-v1.json');
+assert.equal(bookOnePrefix.status,'ENGINEERING_RECONCILIATION');
+assert.equal(bookOnePrefix.registryPath,bookViAssets.registryPath);
+assert.equal(bookOnePrefix.predecessorSha256,bookViAssets.currentSha256);
+assert.equal(bookOnePrefix.currentSha256,sha256(bookViAssets.registryPath));
+assert.equal(bookOnePrefix.remoteVerificationAdvanced,false);assert.equal(bookOnePrefix.productionAcceptanceGranted,false);
+assert.deepEqual(bookOnePrefix.changedAssetCodes,['BOOK-1-PREVIEW','BOOK-1-FIGURES']);
 assert.equal(bookViAssets.productionAdmissionChanged,false);
 assert.equal(bookViAssets.remoteVerificationPerformedByThisReconciliation,false);
 assert.deepEqual(bookViAssets.addedAssetCodes,'ABCDEFGH'.split('').map(x=>'FIG_13'+x));
@@ -43,7 +49,9 @@ for(const code of bookViAssets.addedAssetCodes){
   assert.equal(matches[0].source_registry,bookViAssets.source);
   assert.equal(matches[0].family,'BOOK_VI_CANONICAL_FIGURE');
 }
-const historicalAssets={...fullAssets,assets:fullAssets.assets.filter(a=>!bookViAssets.addedAssetCodes.includes(a.asset_code))};
+const priorFullAssets={...fullAssets,registry_version:bookOnePrefix.previousRegistryVersion,assets:fullAssets.assets.map(a=>bookOnePrefix.previousRecords.find(p=>p.asset_code===a.asset_code)||a)};
+assert.equal(crypto.createHash('sha256').update(JSON.stringify(priorFullAssets,null,2)+'\n').digest('hex'),bookViAssets.currentSha256,'Book I prefix predecessor reconstruction drift');
+const historicalAssets={...priorFullAssets,assets:priorFullAssets.assets.filter(a=>!bookViAssets.addedAssetCodes.includes(a.asset_code))};
 const historicalAssetSha=crypto.createHash('sha256').update(JSON.stringify(historicalAssets,null,2)+'\n').digest('hex');
 assert.equal(historicalAssetSha,bookViAssets.previousSha256,'Original 149 public asset records must remain exact');
 const historicalSourceSha=p=>p===bookViAssets.registryPath?historicalAssetSha:sha256(p);

@@ -526,6 +526,378 @@ const publicExperience = Object.freeze({
       "professionalEvidence": "Professional Evidence"
     },
     "founder": {
+      "publication": {
+  "S01": {
+    "eyebrow": {
+      "0": "Founder · PHI OS · Reality Navigation"
+    },
+    "h1": {
+      "0": "Answers are becoming easier to get. The harder question is which answer actually belongs to your reality."
+    },
+    "lead": {
+      "0": "Today, a person can search for information in seconds, ask an AI, watch expert commentary, read reports, compare perspectives, and draw on financial, relational, personal, symbolic, or professional frameworks.",
+      "1": "The problem is no longer simply whether an answer is available.",
+      "2": "The harder problem is that these answers come from different sources, use different methods, and describe different layers of reality. Some agree. Some conflict. Some remain relevant. Others have already been overtaken by events. Some are interpretations; others depend on facts that still need to be established.",
+      "3": "PHI OS begins at that point.",
+      "4": "It is not designed to become one more source of answers. It is designed to help a person bring information, interpretations, perspectives, and real-world conditions into one inspectable structure—so they can see what is happening now, what is actually known, what remains uncertain, and what any next step is based on."
+    }
+  },
+  "S02": {
+    "title": {
+      "0": "The problem is no longer access to information."
+    },
+    "display_statement": {
+      "0": "We have more answers than ever. Reality has not become easier to judge."
+    },
+    "body": {
+      "0": "For much of the past, many decisions were difficult because information was scarce.",
+      "1": "Today, difficulty can come from having too much of it.",
+      "2": "A person considering a career change may already have search results, AI conversations, industry news, personal reports, a partner’s opinion, financial numbers, past experience, and their own intuition. A relationship question may bring together psychological content, friends’ views, symbolic readings, social-media experiences, and professional advice.",
+      "3": "Each source may contribute something useful.",
+      "4": "But none of them automatically explains how all the pieces relate.",
+      "5": "A report may describe a long-term pattern without knowing that the person has just lost a job. A financial model may calculate cash flow without understanding what is changing inside a family. An AI conversation may synthesize large amounts of text while relying on information that is no longer current. A symbolic method may offer a valuable perspective without turning that interpretation into an established fact.",
+      "6": "The shortage is no longer perspectives.",
+      "7": "The shortage is a way to keep asking, over time:",
+      "8": "What is actually happening?",
+      "9": "Where did this information come from?",
+      "10": "Is it a fact, an interpretation, a projection, a lived experience, or a methodological perspective?",
+      "11": "Is it still current?",
+      "12": "Does it agree with other information, or is there a conflict?",
+      "13": "What remains unknown?",
+      "14": "And after a decision is made, what actually changed?"
+    },
+    "caption": {
+      "0": "Reality leaves traces. Traces become information. Information becomes useful knowledge only when its source, scope, and uncertainty remain visible."
+    }
+  },
+  "S03": {
+    "title": {
+      "0": "The real market pain is fragmentation."
+    },
+    "display_statement": {
+      "0": "We do not lack tools. Each tool simply sees a different part of reality."
+    },
+    "body": {
+      "0": "Modern life is distributed across many separate systems.",
+      "1": "Search engines retain queries.",
+      "2": "AI systems retain conversations.",
+      "3": "Financial tools hold numbers.",
+      "4": "Calendars hold schedules.",
+      "5": "Social platforms hold relationships and expression.",
+      "6": "Work and professional systems each hold their own domain-specific information.",
+      "7": "Personal reports and historical reading systems provide yet another layer of interpretation.",
+      "8": "None of these systems is necessarily the problem.",
+      "9": "The problem is that a person does not live inside ten separate systems when making one real decision.",
+      "10": "A career decision may involve income, family responsibility, location, time, personal tendencies, relationship pressure, industry conditions, and long-term direction at the same time.",
+      "11": "A relationship decision may involve events, needs, financial circumstances, family structure, prior experience, personal interpretation, and information that has not yet been established.",
+      "12": "Reality is connected.",
+      "13": "The tools we use to understand it are usually not.",
+      "14": "The result is a familiar burden: people accumulate information while carrying the entire integration problem in their own heads.",
+      "15": "They must remember which information is still current, which interpretation came from which framework, what belongs to their own experience, what came from somebody else, what has actually been confirmed, what remains provisional, and whether an earlier conclusion still holds after circumstances have changed.",
+      "16": "PHI OS is designed around this gap.",
+      "17": "It does not require every source to become the same kind of thing.",
+      "18": "It preserves the differences.",
+      "19": "Financial information remains financial information.",
+      "20": "Personal evidence retains its provenance.",
+      "21": "Symbolic and historical reading methods remain perspectives.",
+      "22": "Professional judgment retains its scope and responsibility.",
+      "23": "Public knowledge does not automatically become personal reality.",
+      "24": "And an AI-generated interpretation does not gain greater authority simply because it is fluent.",
+      "25": "The purpose is not to connect every piece of data.",
+      "26": "It is to connect the small amount of relevant information a person deliberately chooses to bring into a specific question.",
+      "27": "That distinction matters.",
+      "28": "Reality Navigation is not an attempt to know everything about a person.",
+      "29": "It is an attempt to know, at a particular moment:",
+      "30": "What do we actually need to know in order to understand this situation?",
+      "31": "",
+      "32": "",
+      "33": "",
+      "34": "",
+      "35": "",
+      "36": "",
+      "37": "",
+      "38": ""
+    },
+    "caption": {
+      "0": "Cross-domain context does not mean automatic data merging. Only information that is relevant to the current question, source-visible, and appropriately selected should enter the same Reality reading."
+    }
+  },
+  "S04": {
+    "title": {
+      "0": "PHI OS does not need other tools to fail in order to matter."
+    },
+    "lead": {
+      "0": "Search, artificial intelligence, social platforms, professional services, and different reading systems already solve important problems.",
+      "1": "The deeper issue is that they were not designed to jointly maintain one person’s changing reality."
+    },
+    "body": {
+      "0": "Search tools such as Google are highly effective at helping people find information, websites, news, services, and different sources.",
+      "1": "General AI systems such as ChatGPT and Meta AI can explain complex material, synthesize information, generate text, support research, and allow a person to continue exploring through conversation.",
+      "2": "YouTube and TikTok make experience, instruction, and commentary dramatically easier to discover.",
+      "3": "X and other public-discussion platforms make events, reactions, commentary, and public signals visible.",
+      "4": "Financial planners and other professionals contribute domain-specific human judgment within defined service scopes and responsibilities.",
+      "5": "BaZi, Zi Wei, Astrology, I Ching, Tarot, and other historical or symbolic reading systems offer another kind of value: they provide alternative structures through which people can reflect on patterns, timing, relationships, and experience.",
+      "6": "PHI OS does not need to replace any of these.",
+      "7": "Its usefulness depends on preserving the differences between them.",
+      "8": "A search result is not professional advice.",
+      "9": "A professional opinion does not automatically become an established fact.",
+      "10": "A social-media experience is not personal evidence.",
+      "11": "A symbolic interpretation is not the same thing as an event in the world.",
+      "12": "And the ability of an AI system to synthesize many sources does not mean that it should decide which source deserves the highest authority in a person’s life.",
+      "13": "Different tools answer different questions.",
+      "14": "PHI OS is concerned with what happens when those answers meet:",
+      "15": "How can they remain identifiable, sourced, and bounded instead of collapsing into one apparently complete answer?"
+    },
+    "caption": {
+      "0": "Different systems can contribute different capabilities. Their evidence, responsibility, and decision authority should not disappear simply because they appear in the same interface."
+    }
+  },
+  "S05": {
+    "title": {
+      "0": "PHI OS adds a layer for bringing answers back into reality."
+    },
+    "body": {
+      "0": "The core of PHI OS is not a larger database, nor an attempt to build a personal assistant that knows everything.",
+      "1": "What it adds is a persistent structure for reality.",
+      "2": "When information enters PHI OS, it should not be reduced to another piece of text.",
+      "3": "Where possible, the system keeps visible:",
+      "4": "Where it came from.",
+      "5": "Is it public knowledge, self-report, professional information, a calculation, a historical method, a symbolic reading, or an AI-generated interpretation?",
+      "6": "What kind of claim it is.",
+      "7": "Is it an established fact, an observation, an estimate, a calculation, an interpretation, a projection, an opinion, or something still unresolved?",
+      "8": "What it applies to.",
+      "9": "Does it concern a person, a relationship, a financial condition, a public context, or a specific moment in time?",
+      "10": "When it was true.",
+      "11": "Information that was valid earlier may no longer describe the present.",
+      "12": "Whether the person chose to bring it into this question.",
+      "13": "The fact that information exists in an account does not give a system permission to use it everywhere.",
+      "14": "What it is connected to.",
+      "15": "Only information that is relevant to the current question should enter the same Reality context.",
+      "16": "What remains unknown.",
+      "17": "An explicit unknown is not a failure. In many situations, knowing where the evidence ends is more useful than filling the gap with a plausible answer.",
+      "18": "What happened afterward.",
+      "19": "If an interpretation informs a choice, and the choice leads to action, what happens next should be able to revise the earlier understanding.",
+      "20": "That is why PHI OS should not become merely a conversation history.",
+      "21": "A good answer can still become outdated tomorrow.",
+      "22": "A Reality system must allow new information to enter, earlier conclusions to change, unknowns to be resolved, and directions to be reconsidered.",
+      "23": ""
+    },
+    "founder_quote": {
+      "0": "PHI OS does not need to know everything about a person. It needs to know what actually matters for the question being faced now."
+    }
+  },
+  "S06": {
+    "title": {
+      "0": "Finding an answer, understanding it, and knowing how to move are three different problems."
+    },
+    "body": {
+      "0": "A system can be extremely good at search without knowing which result actually changes a person’s situation.",
+      "1": "An AI can provide an excellent explanation without knowing whether the person acted on it, or what happened afterward.",
+      "2": "A report can be comprehensive while remaining a reading produced by a particular method at a particular point in time.",
+      "3": "A professional can give important advice within a defined domain, while the real decision still depends on conditions outside that domain.",
+      "4": "This is why PHI OS places Reality Navigation at the center of the system.",
+      "5": "Navigation does not mean the system telling a person what to do.",
+      "6": "It is not a ranking engine that assigns every option a score and selects the highest one.",
+      "7": "Navigation capability has to emerge from the reality itself.",
+      "8": "Reality first has structure.",
+      "9": "Elements within that structure begin to form connections.",
+      "10": "Some connections become better supported through repeated observation and evidence.",
+      "11": "Over time, certain directions may become clearer than others.",
+      "12": "But direction alone is not enough. A person also needs to understand where they are positioned within that structure.",
+      "13": "Only when structure, direction, and position are sufficiently established does it become meaningful to talk about bounded Navigation Potential.",
+      "14": "That is the deeper idea expressed in Figure 1B:",
+      "15": "Structure → Connectivity → Network → Structural Reinforcement → Direction → Position → Navigation Potential",
+      "16": "These are not seven website steps.",
+      "17": "They describe how navigation capability forms.",
+      "18": "And the process does not end when a decision is made.",
+      "19": "Reality Navigation continues through:",
+      "20": "Action → Observation → Outcome → Revision",
+      "21": "Because reality does not stop at the moment of choice.",
+      "22": "An interpretation remains useful only if it can be revised when new facts arrive.",
+      "23": "PHI OS therefore does not aim merely to become better at answering questions.",
+      "24": "Its longer-term purpose is to provide an infrastructure through which a person can repeatedly:",
+      "25": "see the reality they are currently facing, understand which information genuinely matters, compare possible directions while uncertainty remains, make a decision that remains their own, and return later to see what actually changed."
+    }
+  },
+  "S07": {
+    "title": {
+      "0": "The more a system can connect, the more clearly it must show what each source can—and cannot—support."
+    },
+    "body": {
+      "0": "PHI OS can connect information from different domains, but connection must not erase the differences between them.",
+      "1": "This is one of the most important constraints in the system.",
+      "2": "A fact may come from an observed event or record.",
+      "3": "A financial number may come from account information or a calculation.",
+      "4": "A Profile result may come from a defined assessment or questionnaire.",
+      "5": "A professional judgment may come from a person who accepts responsibility within a specific scope.",
+      "6": "BaZi, Zi Wei, Astrology, I Ching, Tarot, and other methods provide a different kind of interpretive structure.",
+      "7": "AI can help organize, compare, explain, and connect these materials.",
+      "8": "But they do not become the same kind of evidence simply because they appear in one interface.",
+      "9": "PHI OS therefore needs to keep several questions visible:",
+      "10": "Who provided this?",
+      "11": "What method produced it?",
+      "12": "What does it apply to?",
+      "13": "Is it presenting a fact or an interpretation?",
+      "14": "Was it reviewed by a person?",
+      "15": "Is it still current?",
+      "16": "Did the user choose to bring it into this question?",
+      "17": "And what is the system actually authorized to do with it?",
+      "18": "These boundaries become more important as AI becomes more capable.",
+      "19": "A fluent answer can combine established facts, inference, interpretation, general knowledge, model synthesis, and unresolved uncertainty in a single paragraph.",
+      "20": "If the interface no longer distinguishes those layers, the user may experience one highly confident voice where several different kinds of claims actually exist.",
+      "21": "PHI OS should not work that way.",
+      "22": "AI can participate in reading reality.",
+      "23": "But AI should not automatically become the highest authority over reality.",
+      "24": "The ability to summarize financial information does not make it a financial adviser.",
+      "25": "The ability to interpret a symbolic method does not turn that interpretation into an established personality fact.",
+      "26": "And the ability to see several sources at once does not authorize a system to make a decision for the person when consent, evidence, or responsibility is insufficient.",
+      "27": "Professional participation also needs clear boundaries.",
+      "28": "Professional responsibility belongs to a specific person, service scope, and point in time—not to a generic “Professional” label.",
+      "29": "PHI OS is designed to preserve those relationships of responsibility rather than absorb them into a vague system authority.",
+      "30": "The platform can organize and present.",
+      "31": "A professional can judge within an appropriate scope.",
+      "32": "A method can offer a perspective.",
+      "33": "AI can assist interpretation.",
+      "34": "But the person retains the decision."
+    },
+    "caption": {
+      "0": "The more capable the system becomes, the more important its boundaries become. Connecting sources does not mean merging their responsibilities."
+    }
+  },
+  "S08": {
+    "eyebrow": {
+      "0": "Founder & Research Origin"
+    },
+    "title": {
+      "0": "PHI OS did not begin as a technology idea. It began as a recurring problem in real decisions."
+    },
+    "body": {
+      "0": "In financial planning, a decision is rarely only about numbers.",
+      "1": "Cash flow, assets, liabilities, family responsibilities, risk, time, and future objectives often exist together.",
+      "2": "In resource allocation and organizational restructuring, a plan that appears logical on paper may fail if it ignores people, structure, authority, execution capacity, or the external environment.",
+      "3": "In systems analysis, a conclusion that looks correct locally can produce a very different outcome when placed inside a larger structure.",
+      "4": "Human reality makes the problem even more complex.",
+      "5": "A person can simultaneously hold professional advice, family views, personal intuition, historical experience, financial constraints, interpretive frameworks, and new changes in circumstance.",
+      "6": "None of these sources needs to be wrong.",
+      "7": "But they are often disconnected.",
+      "8": "The recurring question was never how to find one framework that would always be correct.",
+      "9": "It was:",
+      "10": "What does a framework actually see?",
+      "11": "What does it leave out?",
+      "12": "What is its interpretation based on?",
+      "13": "And when reality changes, does the interpretation still hold?",
+      "14": "This is why seemingly distant fields became relevant to the same inquiry.",
+      "15": "Finance and resource allocation deal with real constraints.",
+      "16": "Organizational and systems work deal with structure and connection.",
+      "17": "Historical reading systems deal with patterns, timing, and meaning.",
+      "18": "Observation science deals with how information, evidence, and knowledge are formed.",
+      "19": "Artificial intelligence pushes all of these questions into a new stage: when generating and synthesizing answers becomes extremely fast and inexpensive, what capability becomes more important?",
+      "20": "PHI OS emerged from the convergence of those questions.",
+      "21": "It is not an attempt to prove that one framework is more correct than every other framework.",
+      "22": "Nor is it an attempt to build a system that knows every answer about a person’s life.",
+      "23": "Its purpose is closer to this:",
+      "24": "to build an infrastructure in which different sources can be used without losing their identities;",
+      "25": "where interpretation can exist without automatically replacing fact;",
+      "26": "where unknowns can remain visible rather than being prematurely filled;",
+      "27": "where an earlier conclusion can be checked again as reality changes;",
+      "28": "and where a person can understand what their own decision is actually based on."
+    },
+    "short_intro": {
+      "0": "PHI OS did not begin with a decision to build an AI platform and then search for a problem to solve.",
+      "1": "It began with the same fracture appearing repeatedly across different areas of work and research."
+    },
+    "founder_quote": {
+      "0": "The problem I wanted to solve was not how to give people more answers. It was how to help them still see their reality clearly after they already have so many."
+    }
+  },
+  "S09": {
+    "title": {
+      "0": "Begin with the question you are actually facing."
+    },
+    "body": {
+      "0": "Reality Navigation does not require a person to understand the entire system before they begin.",
+      "1": "You do not need to purchase a report, complete every personal-data field, or choose a method first.",
+      "2": "Different people can enter from different points.",
+      "3": "If you simply have a question, begin with Ask PHI OS.",
+      "4": "If you prefer to read first, begin with Knowledge, published articles, or the public material from the eight-book series.",
+      "5": "If you want to examine yourself or a situation through another lens, explore Perspectives.",
+      "6": "If you are facing a complex real-world situation, bring the relevant facts, constraints, unknowns, and selected information into My Reality.",
+      "7": "If the question requires accountable human involvement in finance, professional review, or another defined service scope, continue into Professional.",
+      "8": "And if you already have a report, reading, Profile, Relationship, Financial context, or other established material, you can continue asking from what has already been built instead of starting from zero each time.",
+      "9": "The important thing is not which product you begin with.",
+      "10": "It is beginning with a real question and bringing in only the information needed to understand it.",
+      "11": "As reality becomes clearer, the next step can change.",
+      "12": "That is the difference between navigation and a one-time answer."
+    },
+    "final_closing": {
+      "0": "PHI OS does not try to own a person’s reality.",
+      "1": "It is designed to keep reality clear enough for a person to continue judging, choosing, acting, and understanding again after the world changes."
+    }
+  },
+  "navigation": {
+    "explore": "Explore Reality Navigation",
+    "why": "Why PHI OS",
+    "ask": "Ask a question",
+    "reality": "Open My Reality",
+    "perspectives": "Explore Perspectives",
+    "books": "Read PHI OS",
+    "professional": "Professional support",
+    "full": "View full figure",
+    "identity": "Teresa Lee",
+    "role": "Founder & Principal Architect, PHI OS"
+  },
+  "figures": {
+    "PLATFORM-RELATIONSHIP-NETWORK": {
+      "alt": "Conceptual illustration: platform relationship network"
+    },
+    "OBSERVATION-EVIDENCE-KNOWLEDGE": {
+      "alt": "Conceptual illustration: observation evidence knowledge"
+    },
+    "CROSS-DOMAIN-CONTEXT-LINKS": {
+      "alt": "Conceptual illustration: cross domain context links"
+    },
+    "HUMAN-SYSTEM-RESPONSIBILITY": {
+      "alt": "Conceptual illustration: human system responsibility"
+    },
+    "NAVIGATION-FORMATION-1B": {
+      "alt": "Conceptual illustration: navigation formation 1b"
+    },
+    "OBSERVATION-RETURN-LOOP": {
+      "alt": "Conceptual illustration: observation return loop"
+    },
+    "CUSTOMER-ENTRY-PATHS": {
+      "alt": "Conceptual illustration: customer entry paths"
+    }
+  },
+  "market": {
+    "0": {
+      "title": "Search / Google",
+      "body": "Discovery, retrieval, sources and public information."
+    },
+    "1": {
+      "title": "General AI / ChatGPT / Meta AI",
+      "body": "Dialogue, synthesis, explanation, generation and research assistance."
+    },
+    "2": {
+      "title": "X / YouTube / TikTok / Social & Video",
+      "body": "Public signals, commentary, experience, teaching and discovery."
+    },
+    "3": {
+      "title": "Historical / symbolic reading systems",
+      "body": "Alternative interpretive lenses, patterns, timing and reflection."
+    },
+    "4": {
+      "title": "Financial / professional services",
+      "body": "Domain-specific human judgment within defined service and responsibility boundaries."
+    },
+    "5": {
+      "title": "PHI OS",
+      "body": "Reality Navigation across deliberately selected sources while preserving provenance, uncertainty, responsibility and continuity."
+    }
+  },
+  "metaDescription": "Teresa Lee founded PHI OS after work across financial planning, resource allocation, organizational restructuring and systems analysis revealed a recurring problem: more answers do not automatically produce a clearer reality. PHI OS develops Reality Navigation as a way to connect sources, evidence, interpretation, action and review.",
+  "navigationFormation": "Structure → Connectivity → Network → Structural Reinforcement → Direction → Position → Navigation Potential"
+},
       "metaTitle": "Teresa Lee — Founder & Principal Architect of PHI OS",
       "skip": "Skip to Founder",
       "eyebrow": "Founder & Principal Architect",
