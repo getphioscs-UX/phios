@@ -8,7 +8,7 @@ export const CX_NAVIGATION = Object.freeze({
   ]),
   utilities: Object.freeze([
     Object.freeze({ id: 'SEARCH', mode: 'dialog', dialogId: 'cx-shell-search', en: 'Search', zh: '搜索' }),
-    Object.freeze({ id: 'ASK', mode: 'dialog', dialogId: 'cx-shell-ask', en: 'Ask PHI OS', zh: 'Ask PHI OS' }),
+    Object.freeze({ id: 'ASK', mode: 'dialog', dialogId: 'cx-shell-ask', en: 'Ask PHI OS', zh: '向 PHI OS 提问' }),
     Object.freeze({ id: 'ACCOUNT', mode: 'link', href: '/account/', en: 'Account', zh: '账户' })
   ])
 });

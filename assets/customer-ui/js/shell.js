@@ -87,13 +87,13 @@ function searchDrawerMarkup() {
 function askDrawerMarkup() {
   return `<dialog class="cx-shell-drawer cx-shell-drawer--utility" id="cx-shell-ask" aria-labelledby="cx-shell-ask-title">
     <div class="cx-shell-drawer__body">
-      <div class="cx-shell-drawer__bar"><div><p class="cx-eyebrow">ASK PHI OS</p><h2 class="cx-heading-2" id="cx-shell-ask-title" ${t('Start with one question.', '从一个问题开始。')}>Start with one question.</h2></div><button class="cx-button cx-button--icon cx-button--quiet" type="button" data-cx-dialog-close ${aria('Close Ask PHI OS', '关闭 Ask PHI OS')}>×</button></div>
+      <div class="cx-shell-drawer__bar"><div><p class="cx-eyebrow" ${t('ASK PHI OS', '向 PHI OS 提问')}>ASK PHI OS</p><h2 class="cx-heading-2" id="cx-shell-ask-title" ${t('Start with one question.', '从一个问题开始。')}>Start with one question.</h2></div><button class="cx-button cx-button--icon cx-button--quiet" type="button" data-cx-dialog-close ${aria('Close Ask PHI OS', '关闭提问')}>×</button></div>
       <p class="cx-body cx-muted" ${t('Ask one question, then choose which available knowledge or personal context may be used. You can review the selected context before sending.', '提出一个问题，再选择本次可以使用哪些知识或个人情境；送出前，你可以先确认所选情境。')}>Ask one question, then choose which available knowledge or personal context may be used. You can review the selected context before sending.</p>
       <form class="cx-shell-utility-form" action="/knowledge/ask/" method="get">
         <label class="cx-field"><span ${t('What are you trying to understand?', '你正在试图理解什么？')}>What are you trying to understand?</span><textarea class="cx-textarea" name="q" maxlength="500" required data-cx-en-placeholder="What feels uncertain, current, or important?" data-cx-zh-placeholder="现在有什么不确定、正在发生，或对你很重要？" placeholder="What feels uncertain, current, or important?"></textarea></label>
-        <button class="cx-button cx-button--primary" type="submit">Ask PHI OS</button>
+        <button class="cx-button cx-button--primary" type="submit" ${t('Ask PHI OS', '向 PHI OS 提问')}>Ask PHI OS</button>
       </form>
-      <a class="cx-button cx-button--text" href="/knowledge/ask/" data-cx-nav-link ${t('Open Ask PHI OS', '打开 Ask PHI OS')}>Open Ask PHI OS</a>
+      <a class="cx-button cx-button--text" href="/knowledge/ask/" data-cx-nav-link ${t('Open Ask PHI OS', '打开提问')}>Open Ask PHI OS</a>
     </div>
   </dialog>`;
 }
@@ -158,7 +158,7 @@ function footerMarkup() {
   return `<footer class="cx-shell-footer" data-cx-shell-region="footer"><div class="cx-container cx-shell-footer__grid">
     <div class="cx-stack"><a class="cx-brand" href="/" aria-label="PHI OS home"><img data-cx-asset="LOGO-006" alt="PHI OS"><span class="cx-visually-hidden" data-cx-asset-fallback>PHI OS</span></a><p class="cx-meta" ${t('Reality changes. Your understanding should be able to change with it.', '现实会继续变化，你的理解也应该能够随之更新。')}>Reality changes. Your understanding should be able to change with it.</p></div>
     <div><p class="cx-eyebrow" ${t('Navigate', '浏览')}>Navigate</p><p class="cx-meta">${footerLink('/explore/', 'Explore', '探索')}<br>${footerLink('/reality/', 'My Reality', '我的现实')}<br>${footerLink('/perspectives/', 'Perspectives', '视角')}</p></div>
-    <div><p class="cx-eyebrow" ${t('Knowledge', '知识')}>Knowledge</p><p class="cx-meta">${footerLink('/knowledge/', 'Knowledge home', '知识主页')}<br>${footerLink('/search/', 'Search', '搜索')}<br>${footerLink('/knowledge/ask/', 'Ask PHI OS', 'Ask PHI OS')}</p></div>
+    <div><p class="cx-eyebrow" ${t('Knowledge', '知识')}>Knowledge</p><p class="cx-meta">${footerLink('/knowledge/', 'Knowledge home', '知识主页')}<br>${footerLink('/search/', 'Search', '搜索')}<br>${footerLink('/knowledge/ask/', 'Ask PHI OS', '向 PHI OS 提问')}</p></div>
     <div><p class="cx-eyebrow" ${t('Continue', '继续')}>Continue</p><p class="cx-meta">${footerLink('/professional/', 'Professional', '专业')}<br>${footerLink('/account/', 'Account', '账户')}<br>${footerLink('/terms', 'Terms', '条款')} · ${footerLink('/privacy', 'Privacy', '隐私')}</p></div>
   </div></footer>`;
 }

@@ -45,6 +45,11 @@ export function resolveCustomerAssetRoleFromRegistry(registry, roleId) {
 }
 
 export async function resolveCustomerAsset(assetId) {
+  if (assetId === 'ILL-003') {
+    const {resolveApprovedVisual}=await import('../../js/runtime/web-production/asset-resolver.js');
+    const a=await resolveApprovedVisual('PIS-041');
+    return {...a,assetId,type:'ILLUSTRATION',available:true,publicUrl:a.src,delivery:{loading:'lazy',decoding:'async',fetchPriority:'auto'},sourceRegistry:'artifacts/visual-r2/LEGACY-SUPPORT-PATH-CORRECTION.json'};
+  }
   // The historical journey Unknown object is now 404. The approved global
   // Unknown identity is the verified exact-object successor (R2 receipt).
   if (assetId === 'ICON-027') {

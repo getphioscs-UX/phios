@@ -16,7 +16,7 @@ const sourceClassLabel=value=>({
   CURRENT_REALITY:tr('Current situation','当前处境'),
   SELF_REPORTED_CURRENT_REALITY:tr('Your current situation','你提供的当前处境'),
   SYMBOLIC_INTERPRETIVE:tr('Interpretive reading','解释性读取'),
-  EXTERNAL_PROFILE:tr('External profile result','外部 Profile 结果'),
+  EXTERNAL_PROFILE:tr('External profile result','外部侧写结果'),
   SELF_REPORTED:tr('Your self-assessment','你的自我评估'),
   MEASURED_TASK_BASED:tr('Task performance','任务表现'),
   CONTINUITY:tr('Continuity context','持续情境'),
@@ -32,7 +32,7 @@ const participantLabel=value=>({
 const scopeLabel=value=>{
   if(!value)return '';
   if(String(value).startsWith('RELATIONSHIP:'))return tr('This relationship','这段关系');
-  return ({QUESTION:tr('This question','这个问题'),SOURCE:tr('Selected source','所选来源'),READING:tr('This reading','这份读取'),RELATIONSHIP:tr('This relationship','这段关系'),PROFILE:tr('This profile','这份 Profile'),REALITY:tr('My Reality','My Reality'),PROFESSIONAL_CASE:tr('Professional case','专业个案'),NONE:''})[value]||value;
+  return ({QUESTION:tr('This question','这个问题'),SOURCE:tr('Selected source','所选来源'),READING:tr('This reading','这份读取'),RELATIONSHIP:tr('This relationship','这段关系'),PROFILE:tr('This profile','这份侧写'),REALITY:tr('My Reality','我的现实'),PROFESSIONAL_CASE:tr('Professional case','专业个案'),NONE:''})[value]||value;
 };
 
 const systemLabel=value=>({
@@ -79,6 +79,8 @@ function guidedContext(form){
 
 function syncLocalizedInputs(form){
   if(form?.elements?.question)form.elements.question.placeholder=tr('What feels uncertain, current, or important?','什么让你感到不确定、正在变化，或现在最重要？');
+  const routing=form?.querySelector('[data-routing-label]');if(routing)routing.textContent=tr('How would you like to continue? ','你想如何继续？ ');
+  const options=form?.elements?.guidedRoutingMode?.options;if(options){options[0].textContent=tr('Answer or clarify','回答或澄清');options[1].textContent=tr('Help me choose a method','帮助我选择方法');}
 }
 
 function syncSelection(form){
@@ -166,7 +168,7 @@ function renderNext(){
   if(!next)return;
   const steps=nextStepCandidates().slice(0,2);
   next.innerHTML=steps.length?`<div class="cx-contextual-ask__next-list">${steps.map((step,index)=>{
-    if(step.kind==='REALITY_ESCALATION'||step.kind==='REALITY')return `<button class="cx-button ${index===0?'cx-button--primary':''}" type="button" data-cx-ask-reality>${esc(step.label||tr('Continue with My Reality','在 My Reality 继续'))}</button>`;
+    if(step.kind==='REALITY_ESCALATION'||step.kind==='REALITY')return `<button class="cx-button ${index===0?'cx-button--primary':''}" type="button" data-cx-ask-reality>${esc(step.label||tr('Continue with My Reality','在 我的现实继续'))}</button>`;
     if(step.kind==='RELATED_KNOWLEDGE'&&view?.relatedKnowledge?.[0]?.href)return `<a class="cx-button" href="${esc(view.relatedKnowledge[0].href)}" data-cx-r31-handoff="RELATED_KNOWLEDGE">${esc(step.label||tr('Explore related knowledge','查看相关知识'))}</a>`;
     const destination=step.kind.replace('_HANDOFF','');
     const route=CX_R31_HANDOFF_ROUTES[destination];
@@ -208,12 +210,13 @@ function render(){
 }
 
 function availabilityHelp(item,specificKnowledge){
+  if(item.availability==='UNAVAILABLE')return tr('This topic has no usable explanation in this language yet. Read its sources or explicitly choose general Knowledge.','此主题尚无本语言可用的解释，请阅读来源，或明确选择通用知识提问。');
   if(specificKnowledge)return tr('Selected from the page you came from. You can remove it before asking.','来自你刚才选择的页面；提问前可以取消使用。');
   if(item.availability==='AVAILABLE_FROM_SOURCE'){
     const who=participantLabel(item.participant),scope=scopeLabel(item.caseScope);
     return [tr('Opened from the original source and ready to use.','已从原始来源带入，可以使用。'),who,scope].filter(Boolean).join(' · ');
   }
-  if(item.availability==='REQUIRES_SERVER_AUTHORIZED_CONTEXT')return tr('Open Ask from the original reading, relationship or profile to use this source securely.','请从原本的读取、关系或 Profile 页面打开 Ask，才能安全使用这项资料。');
+  if(item.availability==='REQUIRES_SERVER_AUTHORIZED_CONTEXT')return tr('This source is not connected to this question. It remains unavailable until the server resolves access and consent.','此来源尚未接入本次提问；服务端完成访问与同意验证前不可使用。');
   return tr('Available for this question.','可用于这个问题。');
 }
 
@@ -231,6 +234,7 @@ async function loadSeededContexts(){
     if(!response.ok)throw Error('SELECTED_SOURCE_UNAVAILABLE');
     const payload=await response.json();
     const seeded=arr(payload?.availability).filter(x=>x.requestedContextRef||x.contextType===contextType).filter(x=>x.contextType!=='CURRENT_REALITY');
+    if(seeded.some(x=>x.requestedContextRef&&x.availability==='UNAVAILABLE')){seedFailed=true;const general=document.querySelector('[name="contextKnowledge"]');if(general)general.checked=false;const panel=node.closest('details');if(panel)panel.open=true;}
     node.innerHTML=seeded.map(x=>{
       const specificKnowledge=x.contextType==='KNOWLEDGE'&&x.requestedContextRef;
       const label=specificKnowledge?(contextLabel||tr('Selected knowledge source','已选择知识来源')):x.label;
@@ -250,8 +254,8 @@ function errorMessage(code){
   const value=String(code||'');
   if(value==='SELECTED_SOURCE_UNAVAILABLE')return tr('The selected source could not be loaded. Retry, open the original source, or explicitly choose Knowledge only.','所选来源暂时无法载入。请重试、打开原始来源，或明确选择只使用知识提问。');
   if(value.includes('CONSENT_REQUIRED'))return tr('Please confirm the consent box for the context you selected.','请先确认你所选择情境的同意选项。');
-  if(value.includes('ENTITLEMENT_REQUIRED'))return tr('That saved source is not currently available for this Ask session. Open it again from its original page if access is available.','这份已保存来源目前无法用于本次 Ask。若仍有访问权限，请从原始页面重新打开。');
-  if(value.includes('NOT_AUTHORIZED')||value.includes('SERVER_AUTHORIZATION_REQUIRED'))return tr('This source must be opened from its original reading, relationship or profile page before Ask can use it.','这项资料必须从原本的读取、关系或 Profile 页面打开后，Ask 才能使用。');
+  if(value.includes('ENTITLEMENT_REQUIRED'))return tr('That saved source is not currently available for this Ask session. Open it again from its original page if access is available.','这份已保存来源目前无法用于本次提问。若仍有访问权限，请从原始页面重新打开。');
+  if(value.includes('NOT_AUTHORIZED')||value.includes('SERVER_AUTHORIZATION_REQUIRED'))return tr('This source must be opened from its original reading, relationship or profile page before Ask can use it.','这项资料必须从原本的读取、关系或 侧写页面打开后，提问才能使用。');
   if(value.includes('CURRENT_REALITY_CONTEXT_INPUT_REQUIRED'))return tr('Add a little about what is happening now, or turn off My current reality.','请补充一点现在正在发生什么，或取消「我的当前现实」。');
   return tr('This question could not be completed with the selected context. Try removing one source or asking with Knowledge only.','目前无法使用所选情境完成这个问题。你可以移除一个来源，或只使用知识再试一次。');
 }
@@ -262,7 +266,7 @@ function boot(){
  installAskReportHandoff(document.querySelector('[data-cx-contextual-ask-form]'),{request:accountRequest,locale});
   const form=document.querySelector('[data-cx-contextual-ask-form]'),status=document.querySelector('[data-cx-contextual-ask-status]');
   if(!form)return;
-  const routing=document.createElement('label');routing.innerHTML=tr('How would you like to continue? ','你想如何继续？ ')+'<select name="guidedRoutingMode"><option value="AUTO">'+tr('Answer or clarify','回答或澄清')+'</option><option value="GUIDE">'+tr('Help me choose a method','帮助我选择方法')+'</option></select>';form.prepend(routing);
+  const routing=document.createElement('label');routing.innerHTML='<span data-routing-label>'+tr('How would you like to continue? ','你想如何继续？ ')+'</span><select name="guidedRoutingMode"><option value="AUTO">'+tr('Answer or clarify','回答或澄清')+'</option><option value="GUIDE">'+tr('Help me choose a method','帮助我选择方法')+'</option></select>';form.prepend(routing);
   form.dataset.askState=navigator.onLine===false?'OFFLINE':'IDLE';
   form.elements.question.addEventListener('input',()=>{if(form.getAttribute('aria-busy')!=='true')form.dataset.askState=navigator.onLine===false?'OFFLINE':form.elements.question.value.trim()?'COMPOSING':'IDLE';});
   window.addEventListener('offline',()=>{form.dataset.askState='OFFLINE';setStatus(status,tr('You are offline. Reconnect and try again.','目前离线，请联网后重试。'),'error');});
@@ -302,11 +306,11 @@ function boot(){
   });
   document.querySelector('[data-cx-ask-handoff-confirm]')?.addEventListener('click',async()=>{
     const consent=document.querySelector('[data-cx-ask-handoff-consent]'),s=document.querySelector('[data-cx-ask-handoff-status]');
-    if(!consent?.checked){setStatus(s,tr('Confirm that you want to continue this question in My Reality.','请确认你要把这个问题带到 My Reality 继续。'),'error');return;}
+    if(!consent?.checked){setStatus(s,tr('Confirm that you want to continue this question in My Reality.','请确认你要把这个问题带到 我的现实继续。'),'error');return;}
     try{
-      setStatus(s,tr('Preparing My Reality…','正在准备 My Reality…'));
+      setStatus(s,tr('Preparing My Reality…','正在准备我的现实…'));
       await handoffToMyReality({sourceType:'ASK',viewModel:view,statusNode:s});
-      setStatus(s,tr('My Reality opened.','My Reality 已打开。'),'success');
+      setStatus(s,tr('My Reality opened.','我的现实已打开。'),'success');
     }catch{setStatus(s,tr('The handoff could not be completed right now.','目前无法完成带入。'),'error');}
   });
   document.querySelector('[data-cx-paid-continue-knowledge]')?.addEventListener('click',()=>{
