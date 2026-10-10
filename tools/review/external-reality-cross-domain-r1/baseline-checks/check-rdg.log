@@ -1,0 +1,34 @@
+→ RDG: 5 unique checker implementations
+→ RDG-W0 [RDG]
+  scripts/check-rdg-w0-w10-foundation.mjs
+✓ RDG-W0-W10 data foundation / purpose / consent / persistence passed.
+→ RDG-W11 [RDG]
+  scripts/check-rdg-w11-w15-evidence-inference.mjs
+✓ RDG-W11～W15 Evidence / Inference Foundation passed.
+✓ Evidence eligibility and promotion fail closed; sensitive inference is firewalled; Unknown and Disputed remain governed states.
+→ RDG-W16 [RDG]
+  scripts/check-rdg-w16-w20-access-privacy-rights.mjs
+✓ RDG-W16～W20 Access / Privacy / Rights passed.
+✓ Visibility is separate from CPR Audience; permission fails closed; professional isolation, subject rights and tombstoned deletion are governed.
+→ RDG-W21 [RDG]
+  scripts/check-rdg-w21-w25-analytics-alr-research.mjs
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'node scripts/run-zero-cost-regression.mjs check:rdg-w21-w25'
+- 'node scripts/check-rdg-w21-w25-analytics-alr-research.mjs'
+
+    at file:///C:/phios/scripts/check-rdg-w21-w25-analytics-alr-research.mjs:94:8 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'node scripts/run-zero-cost-regression.mjs check:rdg-w21-w25',
+  expected: 'node scripts/check-rdg-w21-w25-analytics-alr-research.mjs',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0
