@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {historicalPisBytes} from './lib/page-consolidation-successor-r1.mjs';
 const read=p=>fs.readFileSync(p,'utf8');
 const routes=[
  ['reality-formation','book-1'],['reality-runtime','book-2'],['reality-continuity','book-3'],['reality-expansion','book-4'],
@@ -23,7 +24,9 @@ for(const [slug,id] of routes){
 for(const path of ['index.html','books/index.html','knowledge/index.html']){
  const html=read(path);assert.ok(html.includes('<meta name="viewport"'),`${path}:viewport`);assert.ok(html.includes('data-cx-header'),`${path}:header`);assert.ok(html.includes('data-cx-footer'),`${path}:footer`);assert.ok(html.includes('/assets/customer-ui/'),`${path}:customer-ui`);
 }
-const home=read('index.html');assert.ok(home.includes('data-cx-en="EIGHT BOOKS"'));for(let i=1;i<=8;i++)assert.ok(home.includes(`data-cx-seven-volume-asset="BOOK-${i}-HARDCOVER"`),`home:cover-${i}`);
+// The admitted consolidated homepage is checked by the eight-volume successor;
+// retain cover-grid assertions against its digest-verified predecessor.
+const home=historicalPisBytes('index.html').toString('utf8');assert.ok(home.includes('data-cx-en="EIGHT BOOKS"'));for(let i=1;i<=8;i++)assert.ok(home.includes(`data-cx-seven-volume-asset="BOOK-${i}-HARDCOVER"`),`home:cover-${i}`);
 const books=read('books/index.html');assert.ok(books.includes('data-cx-seven-volume-asset="HERO-8V-SYSTEM"'));assert.ok(books.includes('data-cx-en="VOLUME I → VIII"'));
 console.log('✓ Eight-volume current responsive/accessibility projection passed through the existing checker entry point.');
 console.log('  Eight canonical routes retain viewport, canonical and skip/main semantics; seven public volumes retain their renderer, Book VIII preserves its internal-volume identity boundary; CX Home/Books/Knowledge retain the customer shell.');

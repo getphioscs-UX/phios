@@ -77,6 +77,12 @@ if(p1Deleted){
 assert.ok(navigationAuthority&&Array.isArray(navigationAuthority.primary)&&Array.isArray(navigationAuthority.utilities),'current CX navigation module does not export the expected semantic authority');
 for(const item of routes.primaryNavigation){
   const route=routes.routes.find(candidate=>candidate.routeId===item);assert.ok(route);
+  if(item==='EXPLORE'&&text('index.html').includes('data-page-consolidation="R1"')){
+    const {consolidationSuccessor}=await import('./lib/page-consolidation-successor-r1.mjs');assert(consolidationSuccessor());
+    assert(shell.includes("footerLink('/explore/',"),'Explore remains reachable in secondary navigation');
+    assert(shell.includes('/perspectives/phi-configuration/')&&shell.includes('/perspectives/profile/'),'Personal menu lost flagship links');
+    assert.deepEqual(navigationAuthority.primary.map(x=>x.id),['WORLD','MY_REALITY','PERSPECTIVES','KNOWLEDGE','PROFESSIONAL']);continue;
+  }
   const navItem=navigationAuthority.primary.find(candidate=>candidate.id===item);assert.ok(navItem,`current navigation authority missing primary item ${item}`);
   assert.equal(navItem.href,route.canonicalPath,`current navigation authority route mismatch for ${item}`);
 }
