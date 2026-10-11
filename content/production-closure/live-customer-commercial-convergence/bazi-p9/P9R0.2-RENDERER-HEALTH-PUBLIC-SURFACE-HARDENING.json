@@ -1,0 +1,125 @@
+{
+  "status": "PASS_LOCAL",
+  "rootCause": "RENDERER_HEALTH_PUBLIC_METADATA_EXPOSURE",
+  "classification": "P9_REQUIRED_SUCCESSOR_CHANGE",
+  "before": {
+    "rendererSha": "ac1a3296e7bad84434b4c5e096a394097224f83317c33df804488f24e6ce84fb",
+    "healthRouteSha": "8f5d2e9efd8b4e89e73c648b83dc7ef8cce312bd34b12ebbc3f60f69fe62a162",
+    "exposedFields": [
+      "service",
+      "environment",
+      "rendererEnabled",
+      "health"
+    ]
+  },
+  "after": {
+    "rendererSha": "f4a123f676861afdc00cca17cdd1c1d8d91e655df8dcaf62cf8112d53ad7de04",
+    "healthRouteSha": "7dc0b18f184b619c3c2d94bed43271b0758a47365d4881386e3d271caf27d2b7",
+    "publicFields": [
+      "ok",
+      "status"
+    ]
+  },
+  "successTests": [
+    {
+      "name": "sensitive upstream projection",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "real worker binding true",
+      "status": "PASS_LOCAL"
+    }
+  ],
+  "failureTests": [
+    {
+      "name": "disabled",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "missing binding",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "upstream 500",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "throw",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "malformed",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "unexpected schema",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "timeout",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "unsupported method",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "real worker binding false",
+      "status": "PASS_LOCAL"
+    }
+  ],
+  "securityScan": "PASS",
+  "verifyRegression": {
+    "sourceByteIdentical": true
+  },
+  "48Page15DiagramProof": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9R0.2-RENDERER-PROOF.json",
+    "SHA256": "0195bc37c4a3749f44062190c910206da5ea4f0bf24ef86b12cfa31af8cab03e"
+  },
+  "commands": [
+    {
+      "command": "node scripts/check-p9r02-health.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node node_modules/wrangler/bin/wrangler.js deploy --dry-run --config workers/method-report-renderer/wrangler.production.jsonc --outdir C:/phios/tmp/p9r02/worker-dry-run",
+      "exitCode": 0,
+      "note": "Bundle succeeded; user-directory log write EPERM; no deployment"
+    },
+    {
+      "command": "node scripts/check-p9r02-renderer.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "initialFailures": [
+    {
+      "stage": "Browser launch sandbox",
+      "exitCode": 1
+    },
+    {
+      "stage": "QA Playwright request adapter",
+      "exitCode": 1,
+      "correctedInQaOnly": true
+    },
+    {
+      "stage": "All network blocked including required public static images",
+      "exitCode": 1,
+      "corrected": "Read-only fixed-host report image GET allowed; no provider requests"
+    }
+  ],
+  "oldRcDigest": "0760ba6a678f0e3a28910f1240c444bbe9adc725908950439c5ccbe9c5ba0f26",
+  "oldRcStatus": "SUPERSEDED_HISTORICAL_PRESERVED",
+  "oldRcBytesUnchanged": true,
+  "newRcDigest": "2b27af1643b34c86a885ae3c79a744e88374f7828bbdcf1215f6072fb8a7dc26",
+  "dependencyCount": 516,
+  "unrelatedChangeCount": 31,
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "remainingBlocker": "G1_NOT_AUTHORIZED"
+}
