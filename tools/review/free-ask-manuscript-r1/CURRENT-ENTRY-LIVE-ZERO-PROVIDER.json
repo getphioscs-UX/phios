@@ -1,0 +1,372 @@
+{
+  "at": "2026-10-11T08:53:43.970Z",
+  "base": "https://getphios.com",
+  "results": [
+    {
+      "question": "PHIOS 是什么",
+      "locale": "zh-Hans",
+      "status": 200,
+      "response": {
+        "ok": true,
+        "route": {
+          "schemaVersion": "PHI-OS-CLIENT-INTENT-ROUTE-v2",
+          "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+          "task": "ENTRY",
+          "generationMode": "DETERMINISTIC",
+          "providerInvoked": false,
+          "providerCalls": 0,
+          "questionPresent": true,
+          "boundaries": {
+            "methodChosenByClientRouter": false,
+            "lensExecutionAllowed": false,
+            "modelCalculationAllowed": false,
+            "persistenceAllowed": false,
+            "automaticRealityCase": false,
+            "automaticJourneyActivation": false
+          },
+          "outcome": "PLATFORM_INTRODUCTION",
+          "candidates": [
+            {
+              "capabilityId": "ABOUT",
+              "displayLabels": {
+                "en": "About PHI OS",
+                "zh-Hans": "关于 PHI OS"
+              },
+              "canonicalRoute": "/about/founder/#how",
+              "routeOwner": "about/founder/index.html",
+              "canonicalDomainRefs": [
+                "KNOWLEDGE"
+              ],
+              "mappingGap": null,
+              "verifiedAt": "2026-10-11T02:19:12.523Z",
+              "canonicalDomainOwner": "CANONICAL_KNOWLEDGE",
+              "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+              "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+              "inputRequirements": [
+                "Public platform introduction"
+              ],
+              "sourceRequirements": [
+                "Existing registered owner; no client-provided authority"
+              ],
+              "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+              "entitlementRequirement": "EXISTING_SERVER_OWNER",
+              "executionClass": "ENTRY",
+              "outputKinds": [
+                "Existing platform/founder copy and real feature entrances"
+              ],
+              "capabilityVersion": "R1-v2",
+              "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+              "label": "关于 PHI OS",
+              "reason": "与你的问题中明确的主题或任务相关；由你选择继续。"
+            }
+          ],
+          "clarification": null,
+          "surface": "ABOUT",
+          "href": "/about/founder/#how",
+          "routeReason": "PLATFORM_INTRODUCTION",
+          "primaryAction": {
+            "href": "/about/founder/#how",
+            "label": "了解 PHI OS 与使用方式"
+          },
+          "auxiliaryActions": [
+            {
+              "href": "/knowledge/",
+              "label": "探索知识"
+            },
+            {
+              "href": "/reality/",
+              "label": "进入 My Reality"
+            }
+          ],
+          "ruleVersion": "ENTRY_TASK_DOMAIN_R1",
+          "axes": {
+            "task": "ENTRY",
+            "canonicalDomains": [
+              "KNOWLEDGE"
+            ],
+            "products": [
+              "ABOUT"
+            ],
+            "methodSelection": null
+          },
+          "handoff": {
+            "execution": "DISCOVERY_ONLY",
+            "originalQuestionTransport": "EXPLICIT_SAME_ORIGIN_EPHEMERAL_INPUT_ONLY",
+            "automaticGeneration": false,
+            "automaticPersistence": false,
+            "providerCalls": 0
+          }
+        }
+      }
+    },
+    {
+      "question": "人为什么不快乐",
+      "locale": "zh-Hans",
+      "status": 200,
+      "response": {
+        "ok": true,
+        "route": {
+          "schemaVersion": "PHI-OS-CLIENT-INTENT-ROUTE-v2",
+          "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+          "task": "KNOWLEDGE_BASIC",
+          "generationMode": "DETERMINISTIC",
+          "providerInvoked": false,
+          "providerCalls": 0,
+          "questionPresent": true,
+          "boundaries": {
+            "methodChosenByClientRouter": false,
+            "lensExecutionAllowed": false,
+            "modelCalculationAllowed": false,
+            "persistenceAllowed": false,
+            "automaticRealityCase": false,
+            "automaticJourneyActivation": false
+          },
+          "outcome": "KNOWLEDGE_SOURCE_INSUFFICIENT",
+          "candidates": [],
+          "clarification": "关于“不快乐”，你想了解概念含义、一般形成原因，还是某个具体情境？现有来源不足以给出可靠解释。",
+          "surface": "KNOWLEDGE",
+          "href": "/knowledge/",
+          "routeReason": "KNOWLEDGE_LOOKUP",
+          "query": "人为什么不快乐",
+          "retrievalQuery": "人为什么不快乐",
+          "generalExplanation": true,
+          "ruleVersion": "ENTRY_TASK_DOMAIN_R1",
+          "axes": {
+            "task": "KNOWLEDGE_BASIC",
+            "canonicalDomains": [
+              "KNOWLEDGE"
+            ],
+            "products": [
+              "KNOWLEDGE"
+            ],
+            "methodSelection": null
+          },
+          "handoff": {
+            "execution": "DISCOVERY_ONLY",
+            "originalQuestionTransport": "EXPLICIT_SAME_ORIGIN_EPHEMERAL_INPUT_ONLY",
+            "automaticGeneration": false,
+            "automaticPersistence": false,
+            "providerCalls": 0
+          },
+          "knowledge": {
+            "coverage": {
+              "level": "none",
+              "answerGenerationAllowed": false
+            },
+            "indexDigest": "5d678f48002e15911c29b3b6ffa42f54a9c5888e4859a00a108057276cd4bd83",
+            "results": []
+          },
+          "primaryAction": {
+            "kind": "CLARIFY",
+            "label": "补充问题"
+          },
+          "auxiliaryActions": [
+            {
+              "href": "/knowledge/",
+              "label": "浏览现有知识"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question": "How do I use PHI OS?",
+      "locale": "en",
+      "status": 200,
+      "response": {
+        "ok": true,
+        "route": {
+          "schemaVersion": "PHI-OS-CLIENT-INTENT-ROUTE-v2",
+          "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+          "task": "ENTRY",
+          "generationMode": "DETERMINISTIC",
+          "providerInvoked": false,
+          "providerCalls": 0,
+          "questionPresent": true,
+          "boundaries": {
+            "methodChosenByClientRouter": false,
+            "lensExecutionAllowed": false,
+            "modelCalculationAllowed": false,
+            "persistenceAllowed": false,
+            "automaticRealityCase": false,
+            "automaticJourneyActivation": false
+          },
+          "outcome": "PLATFORM_INTRODUCTION",
+          "candidates": [
+            {
+              "capabilityId": "ABOUT",
+              "displayLabels": {
+                "en": "About PHI OS",
+                "zh-Hans": "关于 PHI OS"
+              },
+              "canonicalRoute": "/about/founder/#how",
+              "routeOwner": "about/founder/index.html",
+              "canonicalDomainRefs": [
+                "KNOWLEDGE"
+              ],
+              "mappingGap": null,
+              "verifiedAt": "2026-10-11T02:19:12.523Z",
+              "canonicalDomainOwner": "CANONICAL_KNOWLEDGE",
+              "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+              "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+              "inputRequirements": [
+                "Public platform introduction"
+              ],
+              "sourceRequirements": [
+                "Existing registered owner; no client-provided authority"
+              ],
+              "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+              "entitlementRequirement": "EXISTING_SERVER_OWNER",
+              "executionClass": "ENTRY",
+              "outputKinds": [
+                "Existing platform/founder copy and real feature entrances"
+              ],
+              "capabilityVersion": "R1-v2",
+              "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+              "label": "About PHI OS",
+              "reason": "Matches an explicit topic or task; you choose whether to continue."
+            }
+          ],
+          "clarification": null,
+          "surface": "ABOUT",
+          "href": "/about/founder/#how",
+          "routeReason": "PLATFORM_INTRODUCTION",
+          "primaryAction": {
+            "href": "/about/founder/#how",
+            "label": "Learn about PHI OS and how to use it"
+          },
+          "auxiliaryActions": [
+            {
+              "href": "/knowledge/",
+              "label": "Explore knowledge"
+            },
+            {
+              "href": "/reality/",
+              "label": "Open My Reality"
+            }
+          ],
+          "ruleVersion": "ENTRY_TASK_DOMAIN_R1",
+          "axes": {
+            "task": "ENTRY",
+            "canonicalDomains": [
+              "KNOWLEDGE"
+            ],
+            "products": [
+              "ABOUT"
+            ],
+            "methodSelection": null
+          },
+          "handoff": {
+            "execution": "DISCOVERY_ONLY",
+            "originalQuestionTransport": "EXPLICIT_SAME_ORIGIN_EPHEMERAL_INPUT_ONLY",
+            "automaticGeneration": false,
+            "automaticPersistence": false,
+            "providerCalls": 0
+          }
+        }
+      }
+    },
+    {
+      "question": "Why does a shared reality need coordination?",
+      "locale": "en",
+      "status": 200,
+      "response": {
+        "ok": true,
+        "route": {
+          "schemaVersion": "PHI-OS-CLIENT-INTENT-ROUTE-v2",
+          "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+          "task": "KNOWLEDGE_BASIC",
+          "generationMode": "DETERMINISTIC",
+          "providerInvoked": false,
+          "providerCalls": 0,
+          "questionPresent": true,
+          "boundaries": {
+            "methodChosenByClientRouter": false,
+            "lensExecutionAllowed": false,
+            "modelCalculationAllowed": false,
+            "persistenceAllowed": false,
+            "automaticRealityCase": false,
+            "automaticJourneyActivation": false
+          },
+          "outcome": "KNOWLEDGE_RESULTS",
+          "candidates": [],
+          "clarification": null,
+          "surface": "KNOWLEDGE",
+          "href": "/knowledge/",
+          "routeReason": "KNOWLEDGE_LOOKUP",
+          "query": "Why does a shared reality need coordination?",
+          "retrievalQuery": "Why does a shared reality need coordination?",
+          "generalExplanation": true,
+          "ruleVersion": "ENTRY_TASK_DOMAIN_R1",
+          "axes": {
+            "task": "KNOWLEDGE_BASIC",
+            "canonicalDomains": [
+              "KNOWLEDGE"
+            ],
+            "products": [
+              "KNOWLEDGE"
+            ],
+            "methodSelection": null
+          },
+          "handoff": {
+            "execution": "DISCOVERY_ONLY",
+            "originalQuestionTransport": "EXPLICIT_SAME_ORIGIN_EPHEMERAL_INPUT_ONLY",
+            "automaticGeneration": false,
+            "automaticPersistence": false,
+            "providerCalls": 0
+          },
+          "knowledge": {
+            "coverage": {
+              "level": "strong",
+              "score": 395,
+              "answerGenerationAllowed": false
+            },
+            "indexDigest": "5d678f48002e15911c29b3b6ffa42f54a9c5888e4859a00a108057276cd4bd83",
+            "results": [
+              {
+                "nodeCode": "KN-PREFACE-008",
+                "locale": "en",
+                "title": "Why Reality Is Harder to Understand: Speed Mismatch, Operating Cost, and Reality Grammar",
+                "summary": "Pressure does not come only from a world becoming faster. It also comes from systems changing at incompatible speeds and from the attention, time, energy, and maintenance required to keep them operating. Understanding this complexity requires a language of formation, operation, position, and continuity.",
+                "href": "/articles/why-reality-is-harder-to-understand-speed-cost-and-reality-grammar",
+                "score": 395
+              },
+              {
+                "nodeCode": "KN-B1-P2-007",
+                "locale": "en",
+                "title": "Why the Same World Produces Different Realities: From Structure and Position to Shared Projection",
+                "summary": "People do not encounter a common world through identical entry points. Structure organizes what can connect, function determines what structures do, networks carry influence, and position determines what a system can see. Shared reality emerges when multiple projections become coordinated, stabilized, and repeatedly revised across institutions, history, civilization, and increasingly artificial systems.",
+                "href": "/articles/how-structure-position-and-shared-projection-create-different-realities",
+                "score": 390
+              },
+              {
+                "nodeCode": "KN-B1-P1-003",
+                "locale": "en",
+                "title": "Why Does Reality Need Structure?",
+                "summary": "Structure is not a fixed shape that exists before Difference. It forms when Constraint selects relations that can be maintained and Feedback helps those relations become durable enough to create Continuity, boundaries, and readable organization.",
+                "href": "/articles/structure-forms-from-sustainable-relations",
+                "score": 355
+              }
+            ],
+            "fragments": [
+              {
+                "text": "# Why Reality Is Harder to Understand: Speed Mismatch, Operating Cost, and Reality Grammar",
+                "fragmentCode": "FRAGMENT-KN-PREFACE-008-EN-001",
+                "digest": "11e05cab3ff2d0413070ba22b3b228fc7effa4c62e57d68d06f8b8da59805ee8"
+              },
+              {
+                "text": "It is common to say that the world is getting faster, but speed alone does not explain why reality can become difficult to carry. A deeper problem appears when different systems operate on clocks that no longer fit together. Technology may change within months. Organizational processes can take years to redesign. Human learning, trust, recovery, and judgment each move at still different rates. When these speeds stop coordinating, pressure is produced by mismatch rather than by speed in isolation.",
+                "fragmentCode": "FRAGMENT-KN-PREFACE-008-EN-002",
+                "digest": "2ed13e3480778e5b36db89a44c70d5f2c757e773da940cee4cf79a5071ce4cb5"
+              }
+            ]
+          },
+          "primaryAction": {
+            "href": "/articles/why-reality-is-harder-to-understand-speed-cost-and-reality-grammar",
+            "label": "Read the matching source"
+          }
+        }
+      }
+    }
+  ]
+}

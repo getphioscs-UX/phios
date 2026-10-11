@@ -102,6 +102,14 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
       if(digest!==source.scopeAdmissionSha256)throw Error('MANUSCRIPT_SCOPE_ADMISSION_IDENTITY_MISMATCH');
       const scope=JSON.parse(raw);
       const permitted=scope.records.filter(r=>r.bookCode===source.bookCode&&r.sourceSha256===source.sourceSha256&&r.corpusSha256===source.corpusSha256&&r.locale===locale&&r.scopeState==='LOCAL_QA_VERIFIED_PROSE_CANDIDATE');
+      // An explicitly named chapter subject must not fall back to an unrelated
+      // admitted chapter merely because both mention structure or control.
+      const normalizedQuery=String(query).normalize('NFKC').replace(/\s+/g,'');
+      const namedSubjects=corpus.records.filter(record=>{
+        const label=String(record.heading||'').normalize('NFKC').split(/[|｜]/u)[0].replace(/^[✦◈◆◇❖]+/u,'').replace(/^什么是/,'').replace(/\s+/g,'');
+        return label.length>=2&&normalizedQuery.includes(label);
+      });
+      if(namedSubjects.length&&!namedSubjects.some(record=>permitted.some(s=>s.sectionCode===record.sectionCode)))return [];
       corpus={...corpus,records:corpus.records.flatMap(record=>{const s=permitted.find(r=>r.sectionCode===record.sectionCode&&r.sectionSha256===record.textSha256);return s?[{...record,text:record.text.slice(s.startOffset,s.endOffset),supportRange:{startOffset:s.startOffset,endOffset:s.endOffset,sectionSha256:s.sectionSha256},admissionScope:'SERVER_VERIFIED_TEXT_SCOPE_CANDIDATE'}]:[];})};
     }
     return searchManuscriptCorpus({ corpus, source, bindings, corrections, query, profiles: semanticProfiles.profiles });

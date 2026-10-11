@@ -1,3 +1,4 @@
+import {customerSafeSyntheticBaziText,fixtureVisibleInternalTerms} from './lib/bazi-r2-customer-safe-synthetic-manuscript.mjs';
 import {startP7} from './lib/bazi-r2-p7-terminal-harness.mjs';
 
 import fs from 'node:fs';
@@ -113,7 +114,7 @@ for (const migration of loadRuntimeMigrations(process.cwd()).migrations) {
 
 const db = createSqliteD1Adapter(sql);
 
-const owner = process.env.P7R3F_MODE?'P7R3F-OWNER-A':'BAZI-R2-P7-OWNER-A';
+const owner = process.env.P7R3H_MODE?'P7R3H-OWNER-A':process.env.P7R3G_MODE?'P7R3G-OWNER-A':process.env.P7R3F_MODE?'P7R3F-OWNER-A':'BAZI-R2-P7-OWNER-A';
 const otherOwner = 'BAZI-R2-P7-OWNER-B';
 
 const productId = 'COM-REPORT-BAZI-FULL';
@@ -480,6 +481,8 @@ globalThis.fetch = async () => {
 const ownerContext = context();
 
 const auditUuid=crypto.randomUUID;
+if(process.env.P7R3H_MODE){let first=true;crypto.randomUUID=()=>first?(first=false,'73000000-0000-4000-8000-000000000008'):auditUuid.call(crypto);}
+if(process.env.P7R3G_MODE){let first=true;crypto.randomUUID=()=>first?(first=false,'73000000-0000-4000-8000-000000000007'):auditUuid.call(crypto);}
 if(process.env.P7R3F_MODE){let first=true;crypto.randomUUID=()=>first?(first=false,'73f00000-0000-4000-8000-000000000001'):auditUuid.call(crypto);}
 if(process.env.P7R3_AUDIT_ONLY==='1'){
  const old=JSON.parse(fs.readFileSync('content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/CUSTOMER-MATERIAL-METADATA.json','utf8'));
@@ -491,7 +494,7 @@ const person = await saveCanonicalPerson(
     action: 'save',
     expectedVersion: 0,
 
-    name: 'BaZi R2 P7 synthetic subject',
+    name: process.env.P7R3H_MODE?'Lin Mei':'BaZi R2 P7 synthetic subject',
 
     birth: {
       birthDate: '1991-08-17',
@@ -607,117 +610,8 @@ assert.equal(
   machinery against this synthetic person's native pack.
 */
 
-function zhText(sectionId) {
-  const p = native.pack.natal?.pillars || {};
-  const dayMaster =
-    native.pack.natal?.dayMaster ||
-    String(p.day || '').slice(0, 1) ||
-    '当前日主';
-
-  const marker = [
-    p.year,
-    p.month,
-    p.day,
-    p.hour
-  ].filter(Boolean).join('、');
-
-  const livedBySection = {
-    S02:
-      '在现实生活与日常选择中，这些结构只形成观察线索，不等同于已经发生的人生事实。',
-    S03:
-      '在现实生活、学习与做事方式中，可以观察这些结构怎样同时表现为能力与限制。',
-    S04:
-      '在现实工作、职业责任、标准与期限中，可以观察这些结构怎样形成实际承载。',
-    S05:
-      '在现实收入、成本、客户与资源安排中，可以观察这些结构怎样进入财富与资源管理。',
-    S06:
-      '在亲密关系、信任、情绪与伴侣互动中，可以观察自主与靠近之间的实际关系张力。',
-    S07:
-      '在家庭、照顾、实际分担与隐形责任中，可以观察支持网络怎样真实运作。',
-    S08:
-      '在现实生活与高负荷阶段，可以观察压力怎样进入节奏、判断与日常反应。',
-    S09:
-      '在长期生活节奏与不同阶段中，可以观察结构怎样持续、转向或重新组织。',
-    S10:
-      '在现实生活的节奏变化中，时序只提供观察背景，不直接等同于事件预测。'
-  };
-
-  const lines = [
-    `当前客户的日主为 ${dayMaster}，四柱为 ${marker}；本节的命理机制只绑定这份客户原生命盘中的日主、月令与已计算结构。`,
-    livedBySection[sectionId] ||
-      '在现实生活与日常选择中，可以观察这些结构如何表现，但不能把结构直接写成既成事实。',
-    '支持与承载条件会改变同一结构的实际表现，因此必须同时保留资源、支持、恢复与制衡条件。',
-    `本节只用于验证 ${sectionId} 的客户原生出版链，命盘主体始终为 ${person.personId}。`,
-    '任何没有进入当前 authority pack 的个人经历、事件、关系事实或现实结论都继续保持未知。',
-    '结构解释必须返回当前客户自己的命盘来源，不能用其他 reference subject 的文字或结论替代。'
-  ];
-
-  if (sectionId === 'S10') {
-    lines.splice(
-      2,
-      0,
-      '当前大运与流年构成不同尺度的时序层；本地 fixture 只承认当前 pack 已提供的时序事实，不补造特定干支或事件。'
-    );
-  }
-
-  return lines.join('\n\n');
-}
-
-function enText(sectionId) {
-  const p = native.pack.natal?.pillars || {};
-  const dayMaster =
-    native.pack.natal?.dayMaster ||
-    String(p.day || '').slice(0, 1) ||
-    'current Day Master';
-
-  const marker = [
-    p.year,
-    p.month,
-    p.day,
-    p.hour
-  ].filter(Boolean).join(', ');
-
-  const livedBySection = {
-    S02:
-      'In daily life and ordinary choices, these structures provide observation cues rather than proof of events that have already happened.',
-    S03:
-      'In daily life, learning and practical work, the same structure can be observed through both capacity and limitation.',
-    S04:
-      'In career, work responsibilities, standards and deadlines, the structure can be observed through actual carrying demands.',
-    S05:
-      'In daily work, income and costs show how resource choices operate in practice.',
-    S06:
-      'In intimacy, trust, emotional exchange and partner relationships, the structure can be observed through the tension between autonomy and closeness.',
-    S07:
-      'In family life, care, actual sharing and invisible responsibilities, the support network can be observed in practice.',
-    S08:
-      'In daily life and periods of heavy demand, pressure can be observed through pace, judgment and practical response.',
-    S09:
-      'In daily life, longer cycles show how structure persists, changes and reorganises in practice.',
-    S10:
-      'In the changing pace of daily life, timing provides context for observation and does not itself establish a predicted event.'
-  };
-
-  const lines = [
-    `The current customer's Day Master is ${dayMaster}, with four pillars ${marker}; the mechanism in this section is bound only to this customer-native chart and its calculated structure.`,
-    livedBySection[sectionId] ||
-      'In daily life and practical choices, the structure can be observed without converting it into an established personal fact.',
-    'Support and carrying conditions can change how the same structure is expressed, so resources, support, recovery and counterweights remain visible.',
-    `This section exists only to verify the customer-native publication chain for ${sectionId}, with subject ${person.personId}.`,
-    'Any lived event, relationship fact or reality conclusion that is absent from the current authority pack remains unknown.',
-    'The interpretation must return to this customer-native chart and must never substitute prose or conclusions from another reference subject.'
-  ];
-
-  if (sectionId === 'S10') {
-    lines.splice(
-      2,
-      0,
-      'The current Da Yun and annual layer form distinct timing scales; this fixture uses only timing facts present in the current pack and does not invent a specific stem-branch combination or event.'
-    );
-  }
-
-  return lines.join('\n\n');
-}
+function zhText(sectionId){return customerSafeSyntheticBaziText(native.pack,sectionId,'zh-Hans');}
+function enText(sectionId){return customerSafeSyntheticBaziText(native.pack,sectionId,'en');}
 
 const sections = [];
 
@@ -949,11 +843,13 @@ async function syntheticProducer(args) {
 
 
 
+const fixtureLeaks=sections.flatMap(s=>['zhHansManuscript','enManuscript'].flatMap(field=>fixtureVisibleInternalTerms(s[field])));assert.deepEqual(fixtureLeaks,[],'FIXTURE_VISIBLE_INTERNAL_LANGUAGE_BEFORE_RELEASE');
+if(process.env.P7R3H_MODE){const d='content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/p7r3h-continuation/';fs.mkdirSync(d,{recursive:true});fs.writeFileSync(d+'FIXTURE-HYGIENE-BEFORE-RELEASE.json',JSON.stringify({status:'PASS',fixtureVisibleInternalTerms:fixtureLeaks,owner,personId:person.personId,nativePackDigest:native.pack.digest,sections:sections.map(s=>({sectionId:s.sectionId,zh:s.zhHansManuscript,en:s.enManuscript,fixtureVisibleInternalTerms:[]}))},null,2)+'\n');}
 env.METHOD_REPORT_RENDERER=terminal.renderer;
 if(process.env.P7R3_TARGETED_ONLY==='1'){
  const publication=await compileBaziDeepPublication({snapshot:syntheticSnapshot,pack:native.pack,productionFrozen:true,presentationMode:'BILINGUAL'});
  await terminal.targeted(publication,native.pack);
-}else if(process.env.P7R1_RENDERER_ONLY==='1'||process.env.P7R3F_MODE==='targeted'){
+}else if(process.env.P7R1_RENDERER_ONLY==='1'||process.env.P7R3F_MODE==='targeted'||process.env.P7R3G_MODE==='targeted'){
  const publication=await compileBaziDeepPublication({snapshot:syntheticSnapshot,pack:native.pack,productionFrozen:true,presentationMode:'BILINGUAL'});
  const response=await terminal.renderer.fetch(new Request('https://local.invalid/verify',{method:'POST',body:JSON.stringify({method:'BZR',publication})}));
  const evidence=await response.json();

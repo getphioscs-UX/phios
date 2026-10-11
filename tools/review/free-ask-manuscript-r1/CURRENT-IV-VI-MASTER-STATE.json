@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-11T08:35:56.317Z",
+  "at": "2026-10-11T09:07:26.839Z",
   "head": "4bd65f35ca0c4062c94fb6147d1f1364ac5d2a65",
   "sourceIdentity": "HUMAN_ACCEPTED_CURRENT_BINARY",
   "sourceVersions": [
@@ -141,8 +141,8 @@
   },
   "LOCAL": "PASS_BOUNDED_FOUR_SCOPE_CANDIDATE_OVERALL_EXTRACTION_PARTIAL",
   "BUILD": "PASS_BUILD",
-  "DEPLOYMENT": "NOT_DEPLOYED_THIS_CHANGE",
-  "LIVE": "NOT_RUN_NEW_SOURCE_VERSIONS",
+  "DEPLOYMENT": "PASS_FOUR_SCOPES",
+  "LIVE": "PASS_BOUNDED_API_AND_ZH_EN_BROWSER",
   "productionAdmission": {
     "sourceRegistry": "manuscript-knowledge-source-registry-v4.json",
     "scopeRegistry": "manuscript-text-scope-candidates-v2.json",
@@ -189,16 +189,23 @@
       }
     ],
     "wholeBookAdmitted": false,
-    "realProductionEnabled": false,
+    "realProductionEnabled": true,
     "serverActivationFlag": "PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED",
     "qaFlagsRequiredForProductionAdapter": false,
-    "adapterEvidence": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-PRODUCTION-SCOPE-ADAPTER-QA.json"
+    "adapterEvidence": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-PRODUCTION-SCOPE-ADAPTER-QA.json",
+    "scopeOwnerAcceptance": "Explicit owner acceptance of four Chinese prose candidates; excludes whole books/OCR/figures/cross-book/English"
   },
   "providerCalls": 0,
   "providerCostUSD": 0,
   "originalOrHistoricalObjectWrites": 0,
   "r2Writes": "TWO_AUTHORIZED_NEW_PRIVATE_DERIVED_OBJECTS",
-  "commitPushDeploy": 0,
+  "commitPushDeploy": {
+    "commits": 0,
+    "pushes": 0,
+    "authorizedDeploymentAttempts": 3,
+    "automaticDeployments": 0,
+    "rollbacks": 2
+  },
   "relevantDependencies": [
     {
       "path": "functions/_lib/knowledge-access-api.js",
@@ -234,8 +241,7 @@
     "Full corrected OCR transcription beyond inspected titles/structures remains unverified and excluded from answers.",
     "Remaining chapters require content-specific answer/figure/note scope validation; no whole-book promotion.",
     "Cross-book substantive explanation units are not wired; insufficient evidence is shown explicitly rather than personal-context escalation.",
-    "English body and explanation correspondence awaits owner accepted chapter text; existing glossary is limited to registered concept IDs.",
-    "Authorized deployment and server scope activation, then actual production source/version/answer/provider-zero smoke."
+    "English body and explanation correspondence awaits owner accepted chapter text; existing glossary is limited to registered concept IDs."
   ],
   "FIRST_STOP_NODE": "REMAINING_CONTENT_SCOPE_VALIDATION_NOT_BLANKET_IMAGE_GATE",
   "answers": {
@@ -256,10 +262,10 @@
     "existingNodeTerminologySlots": 931
   },
   "buildIdentity": {
-    "relevantBuildInputDigest": "4392ee5895abf2a72740f320962e6ff92c968d827a6e0612f2965beb267d5fa4",
+    "relevantBuildInputDigest": "88fb16b4e7bab2e9d5d37a8d3e61b9061837fbd2fee99976a4f4b6a61af3530c",
     "currentInputMatch": true,
     "output": {
-      "workerSha256": "14060d773fe7cc4202977678f77e6b5395e946c6cc5f14818c86ccb1e1b05ee7",
+      "workerSha256": "8c625c21e7881907f9e339a4e4af7999c2261c6ffe00877dd519c3a3d44ae25c",
       "routesSha256": "d266398b90fe6d1ce4355a5a4c95cc30a41246d501c3fe0d97bd2854ea7f491e"
     },
     "receipt": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-BUILD-RECEIPT.json",
@@ -271,5 +277,34 @@
     "extractedTextItemPartition": "PASS",
     "fourBoundedProseScopes": "PASS_LOCAL_CANDIDATE",
     "fullImageOcrAndRemainingChapterAnswers": "PARTIAL"
-  }
+  },
+  "productionRelease": {
+    "id": "75453602-c650-4038-b04a-2ec896673e76",
+    "url": "https://75453602.phios-github.pages.dev",
+    "stage": {
+      "name": "deploy",
+      "started_on": null,
+      "ended_on": "2026-10-11T08:53:18.452493Z",
+      "status": "success"
+    },
+    "scopeEnabled": "",
+    "QAFlags": {
+      "PHIOS_MANUSCRIPT_DERIVATIVE_QA": "",
+      "PHIOS_MANUSCRIPT_TEXT_SCOPE_QA": ""
+    }
+  },
+  "productionReceipt": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-PRODUCTION-RELEASE.json",
+  "liveEvidence": {
+    "representativePassed": 13,
+    "representativeTotal": 13,
+    "newAfterRepairPassed": 3,
+    "newAfterRepairTotal": 3,
+    "browser": [
+      "LIVE-IV-ZH-SOURCE.png",
+      "LIVE-VI-EN-BOUNDARY.png"
+    ]
+  },
+  "overallSevenBookState": "PARTIAL_NOT_REPLACED_BY_FOUR_SCOPE_RELEASE",
+  "productionMigrations": 0,
+  "payments": 0
 }

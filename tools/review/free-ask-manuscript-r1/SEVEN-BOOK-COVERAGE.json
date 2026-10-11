@@ -679,5 +679,309 @@
       ],
       "productionRead": "LIVE_MANUSCRIPT_RESULT_RETURNS_OTHER_BOOKS; NO_THIS_BOOK_BODY_READ_PROVEN"
     }
-  ]
+  ],
+  "currentSevenBookTruth": {
+    "at": "2026-10-11T08:52:22.048Z",
+    "overall": "PARTIAL_SEVEN_CURRENT_CHINESE_MANUSCRIPTS",
+    "scope": "BOOKS_I_TO_VII_NOT_REPLACED_BY_FOUR_SCOPE_RELEASE",
+    "rows": [
+      {
+        "bookCode": "BOOK-1",
+        "currentSourceVersion": "v3",
+        "currentSourceSha256": "813481693e25bad9f35d6e13795eb51d0c35d80d9cbc62fe53a04d3cb622492e",
+        "sourceEvidence": "content/production-closure/live-customer-commercial-convergence/BOOK-I-CUTOVER-OWNER-AUTHORIZATION.json",
+        "extraction": {
+          "state": "VISUAL_OCR_FOOTNOTE_AND_SEMANTIC_ANSWER_GATES_PENDING",
+          "version": "v3",
+          "sourceSha256": "813481693e25bad9f35d6e13795eb51d0c35d80d9cbc62fe53a04d3cb622492e",
+          "records": 275,
+          "nativeMarkers": 274,
+          "partition": "LOSSLESS_PARTITION_OF_CURRENT_EXTRACTED_TEXT_ONLY",
+          "evidence": "tools/review/free-ask-manuscript-r1/BOOK-I-V-LOCAL-CANDIDATE-MATERIALIZATION.json"
+        },
+        "runtime": {
+          "registryVersion": "PHI-OS-MANUSCRIPT-KNOWLEDGE-SOURCE-REGISTRY-v4",
+          "sourceVersionConsumed": "v2_HISTORICAL",
+          "admission": "INHERITED_REVIEWED_SOURCE",
+          "objectKey": "books/book-1/materialized/v2/retrieval-corpus.json"
+        },
+        "answerAcceptance": "WHOLE_CURRENT_MANUSCRIPT_ANSWER_VALIDATION_NOT_COMPLETE",
+        "productionAdmission": "INHERITED_REVIEWED_SOURCE",
+        "live": {
+          "state": "covered",
+          "returnedVersions": [
+            "v2_HISTORICAL"
+          ],
+          "errors": [],
+          "answerSemanticAcceptance": "NOT_PROVEN_BY_RETRIEVAL",
+          "evidence": "tools/review/free-ask-manuscript-r1/SEVEN-CURRENT-BOOK-LIVE-INVENTORY.json"
+        },
+        "next": "Validate positioned v3 extraction against accepted chapter inventory, then versioned current corpus; do not inherit v2 answers",
+        "runtimeMismatch": "CURRENT_V3_NOT_WIRED_REGISTRY_STILL_HISTORICAL_V2",
+        "localRetrieval": {
+          "correct": 274,
+          "total": 274,
+          "meaning": "Chapter location only; not semantic answer acceptance; not deployed corpus"
+        }
+      },
+      {
+        "bookCode": "BOOK-2",
+        "currentSourceVersion": "v1 registered historical binary differs from desktop same-name",
+        "currentSourceSha256": "1ae413dbfddae604f65af3e9b16a28a923899e3ebe8f419d9b7f3ff10bfa41fe",
+        "sourceEvidence": "content/knowledge/review/ksar-r4-human-review-closure-v1.json",
+        "extraction": {
+          "state": "PARTIAL_NOT_FULL_PDF_LOSSLESS",
+          "evidence": "content/knowledge/manuscripts/materialization/book-2-materialization-v1.json",
+          "detail": {
+            "method": "searchable_pdf_text_layer",
+            "engine": "pdftotext-layout",
+            "ocrUsed": false,
+            "semanticRewrite": false,
+            "pageCount": 386,
+            "emptyTextPages": [],
+            "duplicatePageGroups": [
+              [
+                100,
+                101
+              ]
+            ],
+            "corpusCharCount": 477169,
+            "corpusSha256": "94a9c7d506078f1f975022d108058c19465eb883d523efc886648819d3392f63",
+            "pageHashChainSha256": "3aba0f2b7f7955939d360f2ecaf8cec5234997fb29ef4a2ea47a3b8b5a8587e9"
+          }
+        },
+        "runtime": {
+          "registryVersion": "PHI-OS-MANUSCRIPT-KNOWLEDGE-SOURCE-REGISTRY-v4",
+          "sourceVersionConsumed": "v1_REGISTERED",
+          "admission": "INHERITED_REVIEWED_SOURCE",
+          "objectKey": "books/book-2/materialized/v1/retrieval-corpus.json"
+        },
+        "answerAcceptance": "WHOLE_CURRENT_MANUSCRIPT_ANSWER_VALIDATION_NOT_COMPLETE",
+        "productionAdmission": "INHERITED_REVIEWED_SOURCE",
+        "live": {
+          "state": "covered",
+          "returnedVersions": [
+            "v1_REGISTERED"
+          ],
+          "errors": [],
+          "answerSemanticAcceptance": "NOT_PROVEN_BY_RETRIEVAL",
+          "evidence": "tools/review/free-ask-manuscript-r1/SEVEN-CURRENT-BOOK-LIVE-INVENTORY.json"
+        },
+        "next": "Reuse accepted reviewed corpus; verify book-specific answers and actual version",
+        "localRetrieval": {
+          "correct": 172,
+          "total": 172,
+          "actualExistingConsumer": true,
+          "answerAcceptance": false,
+          "evidence": "tools/review/free-ask-manuscript-r1/BOOK-II-CURRENT-LOCAL-RETRIEVAL.json"
+        }
+      },
+      {
+        "bookCode": "BOOK-3",
+        "currentSourceVersion": "v1 registered binary differs from desktop same-name",
+        "currentSourceSha256": "75a6b798a09c3e50467d3bb09421b8d6593869f795af79e6a8ff851f41d32f4b",
+        "sourceEvidence": "content/knowledge/manuscripts/review/kau-r6d-book3-readability-human-acceptance-v1.json",
+        "extraction": {
+          "state": "PARTIAL_NOT_FULL_PDF_LOSSLESS",
+          "evidence": "content/knowledge/manuscripts/materialization/book-3-materialization-v1.json",
+          "detail": {
+            "method": "searchable_pdf_text_layer",
+            "engine": "pdftotext-layout",
+            "ocrUsed": false,
+            "semanticRewrite": false,
+            "pageCount": 397,
+            "emptyTextPages": [
+              25,
+              122,
+              187,
+              234,
+              266,
+              290,
+              320,
+              343,
+              396,
+              397
+            ],
+            "duplicatePageGroups": [
+              [
+                25,
+                122,
+                187,
+                234,
+                266,
+                290,
+                320,
+                343,
+                396,
+                397
+              ]
+            ],
+            "corpusCharCount": 411937,
+            "corpusSha256": "c430ce84acdbacf4323710f771ceb1b49e879bb20e198a88de3bdf297bf44eb5",
+            "pageHashChainSha256": "c2e6b39af49812bb9443006c7de62c48505f9fa8aa0d381b04e7e5a32a91fabb",
+            "hashChainMethod": "sha256(newline_join(pageNumber:pageTextSha256))"
+          }
+        },
+        "runtime": {
+          "registryVersion": "PHI-OS-MANUSCRIPT-KNOWLEDGE-SOURCE-REGISTRY-v4",
+          "sourceVersionConsumed": "v1_REGISTERED",
+          "admission": "ADMITTED_READABILITY_SOURCE_PENDING_REMOTE_OBJECT",
+          "objectKey": "books/book-3/materialized/v1/reviewed/retrieval-corpus.json"
+        },
+        "answerAcceptance": "WHOLE_CURRENT_MANUSCRIPT_ANSWER_VALIDATION_NOT_COMPLETE",
+        "productionAdmission": "ADMITTED_READABILITY_SOURCE_PENDING_REMOTE_OBJECT",
+        "live": {
+          "state": "unavailable",
+          "returnedVersions": [],
+          "errors": [
+            "MANUSCRIPT_RETRIEVAL_CORPUS_NOT_FOUND"
+          ],
+          "answerSemanticAcceptance": "NOT_PROVEN_BY_RETRIEVAL",
+          "evidence": "tools/review/free-ask-manuscript-r1/SEVEN-CURRENT-BOOK-LIVE-INVENTORY.json"
+        },
+        "next": "Verify accepted reviewed private corpus exists and correct checksum, then book-specific answers",
+        "localRetrieval": {
+          "correct": 103,
+          "total": 103,
+          "actualExistingConsumer": true,
+          "answerAcceptance": false,
+          "evidence": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-LOCAL-RETRIEVAL.json"
+        }
+      },
+      {
+        "bookCode": "BOOK-4",
+        "currentSourceVersion": "owner-final-20261011-ab265b9004da",
+        "currentSourceSha256": "ab265b9004dafd286b8b58f536f81e6c30bf3deec27f6431b8224d5c1816e07c",
+        "sourceEvidence": "content/knowledge/manuscripts/review/book-4-owner-final-20261011-ab265b9004da-source-acceptance.json",
+        "extraction": {
+          "state": "TEXT_LAYER_VERIFIED_IMAGES_PARTIAL",
+          "nativeMarkers": 125,
+          "records": 126,
+          "evidence": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-EXTRACTION-QUALITY-AUDIT.json"
+        },
+        "runtime": {
+          "registryVersion": "PHI-OS-MANUSCRIPT-KNOWLEDGE-SOURCE-REGISTRY-v4",
+          "sourceVersionConsumed": "owner-final-20261011-ab265b9004da",
+          "admission": "SCOPED_TEXT_CANDIDATE_NOT_ACTIVATED",
+          "objectKey": "books/book-4/materialized/owner-final-20261011-ab265b9004da/retrieval-corpus.json"
+        },
+        "answerAcceptance": "FOUR_OPENING_PROSE_SCOPES_ONLY",
+        "productionAdmission": "PASS_TWO_BOUNDED_OPENING_PROSE_SCOPES",
+        "live": {
+          "state": "covered",
+          "returnedVersions": [
+            "owner-final-20261011-ab265b9004da"
+          ],
+          "errors": [],
+          "answerSemanticAcceptance": "FOUR_BOUNDED_PROSE_SCOPES_ONLY",
+          "evidence": "tools/review/free-ask-manuscript-r1/SEVEN-CURRENT-BOOK-LIVE-INVENTORY.json"
+        },
+        "next": "Continue remaining chapter, diagram/footnote, OCR and answer validation"
+      },
+      {
+        "bookCode": "BOOK-5",
+        "currentSourceVersion": "v1 desktop/source PDF digest matched",
+        "currentSourceSha256": "011996e36225e6ec1d7bba8b368d3b5d2c3b8c1567dab7ea5cd6f51f1ac069be",
+        "sourceEvidence": "content/knowledge/public/successors/book-v-article-review-v1",
+        "extraction": {
+          "state": "VISUAL_OCR_FOOTNOTE_AND_SEMANTIC_ANSWER_GATES_PENDING",
+          "version": "v1",
+          "sourceSha256": "011996e36225e6ec1d7bba8b368d3b5d2c3b8c1567dab7ea5cd6f51f1ac069be",
+          "records": 127,
+          "nativeMarkers": 126,
+          "partition": "LOSSLESS_PARTITION_OF_CURRENT_EXTRACTED_TEXT_ONLY",
+          "evidence": "tools/review/free-ask-manuscript-r1/BOOK-I-V-LOCAL-CANDIDATE-MATERIALIZATION.json"
+        },
+        "runtime": {
+          "registryVersion": "PHI-OS-MANUSCRIPT-KNOWLEDGE-SOURCE-REGISTRY-v4",
+          "sourceVersionConsumed": null,
+          "admission": "NOT_ADMITTED",
+          "objectKey": null
+        },
+        "answerAcceptance": "WHOLE_CURRENT_MANUSCRIPT_ANSWER_VALIDATION_NOT_COMPLETE",
+        "productionAdmission": "NOT_ADMITTED",
+        "live": {
+          "state": "source_not_admitted",
+          "returnedVersions": [],
+          "errors": [],
+          "answerSemanticAcceptance": "NOT_PROVEN_BY_RETRIEVAL",
+          "evidence": "tools/review/free-ask-manuscript-r1/SEVEN-CURRENT-BOOK-LIVE-INVENTORY.json"
+        },
+        "next": "Wire accepted manuscript derivative independently of 84 published articles; validate unique manuscript questions",
+        "localRetrieval": {
+          "correct": 126,
+          "total": 126,
+          "meaning": "Chapter location only; not semantic answer acceptance; not deployed corpus"
+        }
+      },
+      {
+        "bookCode": "BOOK-6",
+        "currentSourceVersion": "owner-final-20261011-15d80720d10c",
+        "currentSourceSha256": "15d80720d10c8a16115b06237043da5acc381f87f632175f40da99db9745c68a",
+        "sourceEvidence": "content/knowledge/manuscripts/review/book-6-owner-final-20261011-15d80720d10c-source-acceptance.json",
+        "extraction": {
+          "state": "TEXT_LAYER_VERIFIED_IMAGES_PARTIAL",
+          "nativeMarkers": 86,
+          "records": 87,
+          "evidence": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-EXTRACTION-QUALITY-AUDIT.json"
+        },
+        "runtime": {
+          "registryVersion": "PHI-OS-MANUSCRIPT-KNOWLEDGE-SOURCE-REGISTRY-v4",
+          "sourceVersionConsumed": "owner-final-20261011-15d80720d10c",
+          "admission": "SCOPED_TEXT_CANDIDATE_NOT_ACTIVATED",
+          "objectKey": "books/book-6/materialized/owner-final-20261011-15d80720d10c/retrieval-corpus.json"
+        },
+        "answerAcceptance": "FOUR_OPENING_PROSE_SCOPES_ONLY",
+        "productionAdmission": "PASS_TWO_BOUNDED_OPENING_PROSE_SCOPES",
+        "live": {
+          "state": "covered",
+          "returnedVersions": [
+            "owner-final-20261011-15d80720d10c"
+          ],
+          "errors": [],
+          "answerSemanticAcceptance": "FOUR_BOUNDED_PROSE_SCOPES_ONLY",
+          "evidence": "tools/review/free-ask-manuscript-r1/SEVEN-CURRENT-BOOK-LIVE-INVENTORY.json"
+        },
+        "next": "Continue remaining chapter, diagram/footnote, OCR and answer validation"
+      },
+      {
+        "bookCode": "BOOK-7",
+        "currentSourceVersion": "v2 accepted current source",
+        "currentSourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+        "sourceEvidence": "content/knowledge/book-vii/v2-cutover/human-acceptance-v1.json",
+        "extraction": {
+          "state": "VISUAL_OCR_FOOTNOTE_AND_SEMANTIC_ANSWER_GATES_PENDING",
+          "version": "v2",
+          "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+          "records": 102,
+          "nativeMarkers": 101,
+          "partition": "LOSSLESS_PARTITION_OF_CURRENT_EXTRACTED_TEXT_ONLY",
+          "evidence": "tools/review/free-ask-manuscript-r1/BOOK-I-V-LOCAL-CANDIDATE-MATERIALIZATION.json"
+        },
+        "runtime": {
+          "registryVersion": "PHI-OS-MANUSCRIPT-KNOWLEDGE-SOURCE-REGISTRY-v4",
+          "sourceVersionConsumed": null,
+          "admission": "NOT_ADMITTED",
+          "objectKey": null
+        },
+        "answerAcceptance": "EXISTING_ACCEPTED_PUBLISHED_PROJECTIONS_ONLY_NOT_WHOLE_MANUSCRIPT",
+        "productionAdmission": "NOT_ADMITTED",
+        "live": {
+          "state": "source_not_admitted",
+          "returnedVersions": [],
+          "errors": [],
+          "answerSemanticAcceptance": "NOT_PROVEN_BY_RETRIEVAL",
+          "evidence": "tools/review/free-ask-manuscript-r1/SEVEN-CURRENT-BOOK-LIVE-INVENTORY.json"
+        },
+        "next": "Admit bounded accepted knowledge units under existing protected-source policy; full text and extraction requests remain denied",
+        "localRetrieval": {
+          "correct": 100,
+          "total": 100,
+          "meaning": "Chapter location only; not semantic answer acceptance; not deployed corpus"
+        }
+      }
+    ],
+    "providerCalls": 0,
+    "EnglishBody": "OWNER_AUTHORED_SEPARATE_NOT_CHINESE_BLOCKER"
+  }
 }

@@ -1,0 +1,29 @@
+{"component":"commerce","event":"CHECKOUT_CREATED","order_id":"ord_5d564d5536224007b964b04515023d0c","checkout_session_id":"cs_test_bazir2p7","product_id":"COM-REPORT-BAZI-FULL","amount_minor":6900,"currency":"MYR"}
+{"component":"commerce","event":"STRIPE_EVENT_RECEIVED","stripe_event_id":"evt_bazir2p71"}
+{"component":"commerce","event":"STRIPE_EVENT_RECEIVED","stripe_event_id":"evt_bazir2p72"}
+{"component":"commerce","event":"ENTITLEMENT_GRANTED","order_id":"ord_5d564d5536224007b964b04515023d0c","product_id":"COM-REPORT-BAZI-FULL"}
+{"component":"commerce","event":"PAYMENT_CONFIRMED","order_id":"ord_5d564d5536224007b964b04515023d0c","stripe_event_id":"evt_bazir2p72","product_id":"COM-REPORT-BAZI-FULL"}
+P7 viewport 1920 1080 PASS
+P7 viewport 1440 900 PASS
+P7 viewport 1366 768 PASS
+{"category":"PDF_TEXT_CONTINUITY","error":"Expected values to be strictly equal:\n\n'FAIL' !== 'PASS'\n"}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'FAIL' !== 'PASS'
+
+    at Object.verify (file:///C:/phios/scripts/lib/bazi-r2-p7-terminal-harness.mjs:30:1531)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///C:/phios/scripts/check-bazi-r2-p7-terminal-publication.mjs:861:1 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'FAIL',
+  expected: 'PASS',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

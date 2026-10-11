@@ -1,0 +1,156 @@
+{
+  "status": "PASS_LOCAL",
+  "tests": {
+    "A": {
+      "status": "PASS",
+      "rendererStatus": 422,
+      "assetSettle": {
+        "status": "FAIL",
+        "imageCount": 1,
+        "completedCount": 1,
+        "decodedCount": 0,
+        "decodeFailures": [
+          {
+            "index": 0,
+            "src": "http://127.0.0.1:59864/invalid.webp",
+            "currentSrc": "http://127.0.0.1:59864/invalid.webp",
+            "complete": true,
+            "naturalWidth": 0,
+            "naturalHeight": 0,
+            "decodeState": "DECODE_FAILED:EncodingError"
+          }
+        ],
+        "unresolvedImages": [
+          {
+            "index": 0,
+            "src": "http://127.0.0.1:59864/invalid.webp",
+            "currentSrc": "http://127.0.0.1:59864/invalid.webp",
+            "complete": true,
+            "naturalWidth": 0,
+            "naturalHeight": 0,
+            "decodeState": "DECODE_FAILED:EncodingError"
+          }
+        ],
+        "timeoutUsed": 200,
+        "timedOut": false,
+        "arbitrarySleepUsed": false,
+        "images": [
+          {
+            "index": 0,
+            "src": "http://127.0.0.1:59864/invalid.webp",
+            "currentSrc": "http://127.0.0.1:59864/invalid.webp",
+            "complete": true,
+            "naturalWidth": 0,
+            "naturalHeight": 0,
+            "decodeState": "DECODE_FAILED:EncodingError"
+          }
+        ]
+      },
+      "httpResponses": [
+        {
+          "url": "http://127.0.0.1:59864/invalid.webp",
+          "status": 404
+        }
+      ],
+      "requestFailures": [],
+      "fixture": "Actual browser terminal response and native decode failure"
+    },
+    "B": {
+      "status": "PASS",
+      "rendererStatus": 422,
+      "assetSettle": {
+        "status": "FAIL",
+        "imageCount": 1,
+        "completedCount": 1,
+        "decodedCount": 0,
+        "decodeFailures": [
+          {
+            "index": 0,
+            "src": "http://127.0.0.1:59864/corrupt.webp",
+            "currentSrc": "http://127.0.0.1:59864/corrupt.webp",
+            "complete": true,
+            "naturalWidth": 0,
+            "naturalHeight": 0,
+            "decodeState": "DECODE_FAILED:EncodingError"
+          }
+        ],
+        "unresolvedImages": [
+          {
+            "index": 0,
+            "src": "http://127.0.0.1:59864/corrupt.webp",
+            "currentSrc": "http://127.0.0.1:59864/corrupt.webp",
+            "complete": true,
+            "naturalWidth": 0,
+            "naturalHeight": 0,
+            "decodeState": "DECODE_FAILED:EncodingError"
+          }
+        ],
+        "timeoutUsed": 200,
+        "timedOut": false,
+        "arbitrarySleepUsed": false,
+        "images": [
+          {
+            "index": 0,
+            "src": "http://127.0.0.1:59864/corrupt.webp",
+            "currentSrc": "http://127.0.0.1:59864/corrupt.webp",
+            "complete": true,
+            "naturalWidth": 0,
+            "naturalHeight": 0,
+            "decodeState": "DECODE_FAILED:EncodingError"
+          }
+        ]
+      },
+      "httpResponses": [
+        {
+          "url": "http://127.0.0.1:59864/corrupt.webp",
+          "status": 200
+        }
+      ],
+      "requestFailures": [],
+      "fixture": "Actual browser terminal response and native decode failure"
+    },
+    "C": {
+      "status": "PASS",
+      "rendererStatus": 422,
+      "assetSettle": {
+        "status": "FAIL",
+        "imageCount": 1,
+        "completedCount": 0,
+        "decodedCount": 0,
+        "decodeFailures": [],
+        "unresolvedImages": [
+          {
+            "index": 0,
+            "src": "",
+            "currentSrc": "",
+            "complete": false,
+            "naturalWidth": 0,
+            "naturalHeight": 0,
+            "decodeState": "PENDING"
+          }
+        ],
+        "timeoutUsed": 200,
+        "timedOut": true,
+        "arbitrarySleepUsed": false,
+        "images": [
+          {
+            "index": 0,
+            "src": "",
+            "currentSrc": "",
+            "complete": false,
+            "naturalWidth": 0,
+            "naturalHeight": 0,
+            "decodeState": "PENDING"
+          }
+        ]
+      },
+      "httpResponses": [],
+      "requestFailures": [],
+      "fixture": "Unresolved browser image state; bounded settle timeout 200ms"
+    }
+  },
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "providerNetworkCalls": 0,
+  "arbitrarySleepUsed": false
+}
