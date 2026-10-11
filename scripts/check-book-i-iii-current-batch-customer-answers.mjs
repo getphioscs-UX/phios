@@ -1,7 +1,7 @@
 import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';import {build} from 'esbuild';
 const root='tools/review/free-ask-manuscript-r1/',sha=x=>crypto.createHash('sha256').update(x).digest('hex');
 const productionMetadata=process.argv.includes('--production-metadata');
-const registry=JSON.parse(fs.readFileSync('content/knowledge/source-access/registries/manuscript-knowledge-source-registry-'+(productionMetadata?'v7.json':'v7-candidate.json')));
+const registry=JSON.parse(fs.readFileSync('content/knowledge/source-access/registries/manuscript-knowledge-source-registry-'+(process.argv.includes('--release-baseline')?'v10.json':process.argv.includes('--whole-batch')?'v9-candidate.json':productionMetadata?'v7.json':'v7-candidate.json')));
 if(process.argv.includes('--third-current')){
  const thirdCandidate=JSON.parse(fs.readFileSync('content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v6-candidate.json')).records.find(r=>r.bookCode==='BOOK-3');
  registry.records[registry.records.findIndex(r=>r.bookCode==='BOOK-3')]=thirdCandidate;
@@ -15,6 +15,7 @@ const customer=await load('customer-contextual-ask'),knowledge=await load('knowl
 const files=new Map();
 const first=JSON.parse(fs.readFileSync(root+'BOOK-I-V3-INCREMENTAL-PRIVATE-RECEIPT.json'));files.set(first.objectKey,fs.readFileSync(JSON.parse(fs.readFileSync(root+'BOOK-I-V3-INCREMENTAL-CORPUS.json')).corpusPath));
 const third=JSON.parse(fs.readFileSync(root+'BOOK-III-CURRENT-PRIVATE-CANDIDATE-RECEIPT.json'));files.set(third.objectKey,fs.readFileSync(JSON.parse(fs.readFileSync(root+'BOOK-III-CURRENT-COMPLETE-CORPUS-COMPARISON.json')).corpusPath));
+if(process.argv.includes('--release-baseline')){const legacy=registry.records.find(r=>r.bookCode==='BOOK-3');files.set(legacy.r2ObjectKey,fs.readFileSync('.tmp/free-ask-manuscripts/books/book-3/materialized/v1/reviewed/retrieval-corpus.json'));}
 let providerCalls=0;globalThis.fetch=()=>{providerCalls++;throw Error('ZERO_PROVIDER_BOUNDARY');};
 const env={PHIOS_ENVIRONMENT:'qa',PHIOS_MANUSCRIPT_RETRIEVAL_ENABLED:'true',PHIOS_MANUSCRIPT_DERIVATIVE_QA:'false',PHIOS_MANUSCRIPT_TEXT_SCOPE_QA:'false',PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED:'true',MANUSCRIPTS:{async get(k){return files.has(k)?{body:files.get(k)}:null;}},ASSETS:{async fetch(req){const p='.'+new URL(req.url).pathname;return fs.existsSync(p)?new Response(fs.readFileSync(p)):new Response('',{status:404});}}};
 const cases=[
@@ -71,7 +72,7 @@ for(const test of cases.filter(test=>(!process.argv.includes('--book-i-only')||!
  results.push({...test,pass,retrieval:top||null,actualAnswer:answer,customerState:body.view?.state,sourceReferences:body.view?.basedOn?.sources,providerCalls:body.execution?.providerCalls});
 }
 assert.equal(providerCalls,0);
-const path=root+(process.argv.includes('--third-holdout')?'BOOK-III-CURRENT-BATCH-INDEPENDENT-ANSWERS.json':process.argv.includes('--book-iii-only')?'BOOK-III-CURRENT-BATCH-ANSWER-REGRESSION.json':productionMetadata?'BOOK-I-CURRENT-PRODUCTION-METADATA-QA.json':finalHoldout?'BOOK-I-CURRENT-BATCH-FINAL-HOLDOUT.json':unseen?'BOOK-I-CURRENT-BATCH-UNSEEN-ANSWERS.json':fresh?'BOOK-I-III-CURRENT-BATCH-FRESH-ANSWERS.json':'BOOK-I-III-CURRENT-BATCH-REGRESSION.json');
+const path=root+(process.argv.includes('--release-baseline')?'BOOK-III-RESTORED-BASELINE-SOURCE-REGRESSION.json':process.argv.includes('--third-holdout')?'BOOK-III-CURRENT-BATCH-INDEPENDENT-ANSWERS.json':process.argv.includes('--book-iii-only')?'BOOK-III-CURRENT-BATCH-ANSWER-REGRESSION.json':productionMetadata?'BOOK-I-CURRENT-PRODUCTION-METADATA-QA.json':finalHoldout?'BOOK-I-CURRENT-BATCH-FINAL-HOLDOUT.json':unseen?'BOOK-I-CURRENT-BATCH-UNSEEN-ANSWERS.json':fresh?'BOOK-I-III-CURRENT-BATCH-FRESH-ANSWERS.json':'BOOK-I-III-CURRENT-BATCH-REGRESSION.json');
 if(fs.existsSync(path)){const previous=JSON.parse(fs.readFileSync(path));if(previous.results.some(r=>!r.pass)&&!fs.existsSync(path.replace('.json','-INITIAL-FAILURES.json')))fs.copyFileSync(path,path.replace('.json','-INITIAL-FAILURES.json'));}
 const initialFailureExists=fs.existsSync(path.replace('.json','-INITIAL-FAILURES.json'));
 fs.writeFileSync(path,JSON.stringify({at:new Date().toISOString(),candidateRegistrySha256:sha(JSON.stringify(registry)),testRole:initialFailureExists?'REGRESSION_AFTER_RETAINED_INITIAL_FAILURE':finalHoldout||unseen?'UNSEEN_FIRST_RUN':fresh?'NEW_QUESTIONS_FIRST_RUN_OR_REGRESSION_AFTER_INITIAL_FAILURE':'REGRESSION',productionEquivalentFlags:true,providerCalls,cases:results.length,passed:results.filter(r=>r.pass).length,wholeChapterCompletion:false,results},null,2)+'\n');

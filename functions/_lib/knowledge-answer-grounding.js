@@ -33,7 +33,7 @@ export function evaluateKapQuestionSourceRelevance(bundle = {}) {
   const terms = relevanceTerms(bundle?.normalization?.tokens || []);
   if (!sources.length) return Object.freeze({state:'NO_SOURCES',established:false,informativeTerms:terms,matchedTerms:[]});
   if (!terms.length) return Object.freeze({state:'NOT_ENOUGH_QUERY_TERMS_TO_GATE',established:false,informativeTerms:[],matchedTerms:[],matchRatio:0});
-  const corpus = sources.map(source => searchText(source?.text || '')).join('\n');
+  const corpus = sources.map(source => searchText((source?.text || '')+(source.sourceScopeAdmissionDigest?' '+(source.sourceConceptAliases||[]).join(' '):''))).join('\n');
   const matched = terms.filter(term => corpus.includes(term));
   const scoped = sources.some(source=>source?.scopeMatch===true);
   // Two independent lexical anchors are required outside an explicit retrieval scope.
@@ -239,7 +239,7 @@ export async function retrieveKapKnowledge({ request, env = {}, normalized, opti
   const url = new URL('/api/knowledge-access', baseUrl);
   url.search = new URLSearchParams(retrievalRequest.params).toString();
   if (/^BOOK-[1-7]$/.test(options.selectedBook || '')) url.searchParams.set('bookCode', options.selectedBook);
-  if (['BOOK-1','BOOK-2','BOOK-3','BOOK-4','BOOK-6'].includes(options.selectedBook) && !options.selectedArticle) url.searchParams.set('source','manuscript');
+  if (['BOOK-1','BOOK-2','BOOK-3','BOOK-4','BOOK-5','BOOK-6','BOOK-7'].includes(options.selectedBook) && !options.selectedArticle) url.searchParams.set('source','manuscript');
   const response = await handleKnowledgeAccessRequest(new Request(url, { method: 'GET' }), env, {retrievalScope:options.retrievalScope});
   const payload = await response.json();
   if(options.selectedArticle){
@@ -253,7 +253,10 @@ export async function retrieveKapKnowledge({ request, env = {}, normalized, opti
     payload.published={...(payload.published||{}),results:(payload.published?.results||[]).filter(r=>r.slug===selected.slug)};
     payload.manuscript={status:'not_requested',records:[],errors:[]};
   }
-  if (options.selectedBook === 'BOOK-5' && !options.selectedArticle && options.retrievalScope?.scopeType !== 'CIVILIZATION_ATLAS') {
+  // Explicit book context requests the admitted manuscript. An empty locale or
+  // scope must not silently fall through to another publication consumer.
+  // Published articles remain available through their actual article context.
+  if (options.selectedBook === 'BOOK-5' && options.allowPublishedBookFallback === true && !options.selectedArticle && options.retrievalScope?.scopeType !== 'CIVILIZATION_ATLAS' && !(payload.manuscript?.records?.length)) {
     const selected = await retrievePublishedBookSources({env,bookCode:'BOOK-5',locale:normalized.locale,question:normalized.originalQuestion||normalized.searchText});
     if (selected.sources.length) {
       payload.answerGrounding={...(payload.answerGrounding||{}),sources:[...selected.sources,...(payload.answerGrounding?.sources||[])]};
@@ -451,9 +454,9 @@ export function buildKnowledgeGroundingBundle({ intake, normalized, retrieval, n
     sourceId: groundingSourceId(source),
     ...source
   }));
-  const sources = filterPtrcSourcesByPolicy(rawSources, intake?.requestContract || null).filter(source => !(intake?.retrievalScope?.bookCode === 'BOOK-5' && source?.sourceType === 'COMPLETED_MANUSCRIPT' && source?.bookCode === 'BOOK-5'));
+  const sources = filterPtrcSourcesByPolicy(rawSources, intake?.requestContract || null).filter(source => !(intake?.retrievalScope?.scopeType === 'CIVILIZATION_ATLAS' && source?.sourceType === 'COMPLETED_MANUSCRIPT' && source?.bookCode === 'BOOK-5'));
   const unknowns = [];
-  if (intake?.retrievalScope?.bookCode === 'BOOK-5') {
+  if (intake?.retrievalScope?.bookCode === 'BOOK-5'&&!sources.some(s=>s.bookCode==='BOOK-5'&&s.sourceType==='COMPLETED_MANUSCRIPT')) {
     unknowns.push({ code: 'BOOK_V_MANUSCRIPT_SOURCE_UNAVAILABLE' });
     unknowns.push({ code: 'BOOK_V_PRODUCTION_ARTICLE_BODY_UNAVAILABLE' });
   }

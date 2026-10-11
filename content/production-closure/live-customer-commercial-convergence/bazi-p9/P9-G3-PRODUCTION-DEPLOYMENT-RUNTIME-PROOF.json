@@ -1,0 +1,278 @@
+{
+  "status": "BLOCKED_PREDEPLOY",
+  "acceptedCommit": "f1674d5a016881c58565677a19c4a372cae7b319",
+  "acceptedRcDigest": "2b27af1643b34c86a885ae3c79a744e88374f7828bbdcf1215f6072fb8a7dc26",
+  "sourceVerification": {
+    "remoteReachable": true,
+    "tree": "4624394fe5918555f6bae65adfd375bec560121c",
+    "all12FilesPresent": true,
+    "committedDependencies": 516,
+    "hashCheck": "PASS"
+  },
+  "preDeploySnapshot": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-PREDEPLOY-SNAPSHOT.json",
+    "SHA256": "c55098e7aa0d3652f7eeb7242f24d7c2a7b5c41dcaccb86204cb798fa44cdd3d"
+  },
+  "deploymentIds": {
+    "existingPages": "ddcd00ed-4c7e-4706-824d-2fe66c7dc2de",
+    "newPages": null,
+    "newRenderer": null,
+    "newWatchdog": null
+  },
+  "productionSourceSha": {
+    "pagesMetadata": "f1674d5a016881c58565677a19c4a372cae7b319",
+    "executedWorkerBytes": "RUNTIME_UNVERIFIED"
+  },
+  "migration0018": {
+    "status": "NOT_APPLIED_PREDECESSOR_MISMATCH",
+    "expectedPredecessor": 17,
+    "actualWranglerHistory": [
+      {
+        "id": 1,
+        "name": "0001_platform_foundation.sql",
+        "applied_at": "2026-07-23 05:22:26"
+      },
+      {
+        "id": 2,
+        "name": "0002_initial_runtime.sql",
+        "applied_at": "2026-07-23 05:22:26"
+      }
+    ],
+    "governedHistory": [],
+    "missingPredecessors": "0003–0017",
+    "schema": [
+      {
+        "name": "_cf_KV",
+        "type": "table"
+      },
+      {
+        "name": "d1_migrations",
+        "type": "table"
+      },
+      {
+        "name": "idx_entries_runtime",
+        "type": "index"
+      },
+      {
+        "name": "idx_readings_runtime",
+        "type": "index"
+      },
+      {
+        "name": "idx_reviews_runtime",
+        "type": "index"
+      },
+      {
+        "name": "idx_runtime_artifacts_runtime_id_created_at",
+        "type": "index"
+      },
+      {
+        "name": "idx_runtime_artifacts_type_created_at",
+        "type": "index"
+      },
+      {
+        "name": "idx_runtime_events_event_type_created_at",
+        "type": "index"
+      },
+      {
+        "name": "idx_runtime_events_runtime_id_created_at",
+        "type": "index"
+      },
+      {
+        "name": "idx_runtime_lineages_child_runtime_id",
+        "type": "index"
+      },
+      {
+        "name": "idx_runtime_lineages_parent_runtime_id",
+        "type": "index"
+      },
+      {
+        "name": "idx_runtime_revisions_parent_revision_id",
+        "type": "index"
+      },
+      {
+        "name": "idx_runtime_revisions_runtime_id_created_at",
+        "type": "index"
+      },
+      {
+        "name": "idx_runtime_snapshots_runtime_id_created_at",
+        "type": "index"
+      },
+      {
+        "name": "idx_runtime_snapshots_stage_created_at",
+        "type": "index"
+      },
+      {
+        "name": "idx_runtime_users_created_at",
+        "type": "index"
+      },
+      {
+        "name": "idx_runtimes_created_at",
+        "type": "index"
+      },
+      {
+        "name": "idx_runtimes_current_stage_updated_at",
+        "type": "index"
+      },
+      {
+        "name": "idx_runtimes_status_updated_at",
+        "type": "index"
+      },
+      {
+        "name": "idx_runtimes_user_id_created_at",
+        "type": "index"
+      },
+      {
+        "name": "reality_readings",
+        "type": "table"
+      },
+      {
+        "name": "runtime_artifacts",
+        "type": "table"
+      },
+      {
+        "name": "runtime_entities",
+        "type": "table"
+      },
+      {
+        "name": "runtime_entries",
+        "type": "table"
+      },
+      {
+        "name": "runtime_events",
+        "type": "table"
+      },
+      {
+        "name": "runtime_lineages",
+        "type": "table"
+      },
+      {
+        "name": "runtime_migration_history",
+        "type": "table"
+      },
+      {
+        "name": "runtime_reviews",
+        "type": "table"
+      },
+      {
+        "name": "runtime_revisions",
+        "type": "table"
+      },
+      {
+        "name": "runtime_snapshots",
+        "type": "table"
+      },
+      {
+        "name": "runtime_users",
+        "type": "table"
+      },
+      {
+        "name": "runtimes",
+        "type": "table"
+      },
+      {
+        "name": "users",
+        "type": "table"
+      }
+    ],
+    "remoteWrites": 0
+  },
+  "renderer": {
+    "deployedByThisRun": false,
+    "existing": true,
+    "health": {
+      "httpStatus": 503,
+      "fields": [
+        "ok",
+        "status"
+      ],
+      "allowedFieldsOnly": true,
+      "cacheControl": "no-store"
+    },
+    "synthetic48Page15DiagramProof": "NOT_RUN_PRODUCTION_PREDEPLOY_BLOCKED"
+  },
+  "pagesFunctions": {
+    "deployedByThisRun": false,
+    "existingDeployment": {
+      "deploymentId": "ddcd00ed-4c7e-4706-824d-2fe66c7dc2de",
+      "source": "f1674d5a016881c58565677a19c4a372cae7b319",
+      "environment": "production"
+    }
+  },
+  "watchdog": {
+    "deployed": false,
+    "triggerProof": "MISSING"
+  },
+  "refund": {
+    "wired": "RUNTIME_UNVERIFIED",
+    "armed": false,
+    "triggered": false
+  },
+  "bindings": {
+    "PHIOS_P9_CANARY_POLICY": "MISSING",
+    "PHIOS_P9_AUTHORIZATION_RECEIPTS": "MISSING",
+    "PHIOS_P9_RELEASE_DIGEST": "MISSING",
+    "STRIPE_SECRET_KEY": "CONFIGURED",
+    "STRIPE_WEBHOOK_SECRET": "MISSING",
+    "OPENAI_API_KEY": "CONFIGURED",
+    "CANONICAL_PERSON_ENCRYPTION_KEY": "MISSING",
+    "AUTH_SESSION_SECRET": "CONFIGURED"
+  },
+  "missingRequiredConfig": [
+    "PHIOS_P9_CANARY_POLICY",
+    "PHIOS_P9_AUTHORIZATION_RECEIPTS",
+    "PHIOS_P9_RELEASE_DIGEST",
+    "STRIPE_WEBHOOK_SECRET",
+    "CANONICAL_PERSON_ENCRYPTION_KEY"
+  ],
+  "stripeEnvironment": "LIVE",
+  "stripeLivePriceParity": "RUNTIME_UNVERIFIED_NOT_RUN",
+  "canary": {
+    "mechanism": "SOURCE_VERIFIED",
+    "ownerBound": false,
+    "expiry": null,
+    "readinessState": "G3_CANARY_ACCOUNT_RUNTIME_PROOF_PENDING"
+  },
+  "generalBzrSaleClosed": "RUNTIME_UNVERIFIED_PAYMENT_FLAG_FALSE",
+  "otherMethodsClosed": "RUNTIME_UNVERIFIED_NOT_EXERCISED",
+  "providerGateClosed": {
+    "configuration": "false",
+    "serverRequestProof": "NOT_RUN_PREDEPLOY_BLOCKED"
+  },
+  "paymentGateClosed": {
+    "configuration": "false",
+    "serverRequestProof": "NOT_RUN_PREDEPLOY_BLOCKED"
+  },
+  "publicHealthSafe": true,
+  "rollbackReady": {
+    "priorPagesDeploymentIdentified": true,
+    "priorRendererVersions": [
+      {
+        "id": "bfe8f53d-8874-422e-bf94-ee0137dc1442",
+        "createdOn": "2026-10-11T13:50:42.450463Z"
+      },
+      {
+        "id": "dc739790-cd10-42ac-94c7-b21136bc5457",
+        "createdOn": "2026-10-11T13:17:07.860186Z"
+      }
+    ],
+    "restorationNeeded": false,
+    "destructiveMigrationRollback": false
+  },
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "productionMutations": 0,
+  "G4": "NOT_AUTHORIZED",
+  "G5": "NOT_AUTHORIZED",
+  "G6": "NOT_AUTHORIZED",
+  "remainingBlocker": "PRODUCTION_D1_PREDECESSOR_MISMATCH",
+  "additionalBlockers": [
+    "MISSING_STRIPE_WEBHOOK_SECRET",
+    "MISSING_CANONICAL_PERSON_ENCRYPTION_KEY",
+    "MISSING_P9_PRIVATE_POLICY_AND_RECEIPTS",
+    "CANARY_OWNER_VALUE_REQUIRED",
+    "RENDERER_NOT_READY",
+    "WATCHDOG_NOT_DEPLOYED"
+  ]
+}

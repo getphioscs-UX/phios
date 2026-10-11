@@ -304,7 +304,7 @@
       "LIVE-VI-EN-BOUNDARY.png"
     ]
   },
-  "overallSevenBookState": "PARTIAL_NOT_REPLACED_BY_FOUR_SCOPE_RELEASE",
+  "overallSevenBookState": "PARTIAL",
   "productionMigrations": 0,
   "payments": 0,
   "sevenBookContinuation": {
@@ -600,65 +600,116 @@
     }
   },
   "currentSevenBookContinuation": {
-    "at": "2026-10-11T13:25:21.154Z",
-    "scope": "EXISTING_SEVEN_CHINESE_MANUSCRIPT_MASTER",
-    "chapterCounts": {
+    "at": "2026-10-11T14:15:32.228Z",
+    "head": "d29bc63cdc9b30af6cf4b6425c820409b31c403f",
+    "wholeWorktreeFreshnessUsed": false,
+    "firstBook": {
+      "sourceSha256": "33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a",
+      "sourceVersion": "v3-revision-20261011-33c91cd60d5f",
+      "DEPLOYMENT": "DEPLOYED_THREE_LIMITED_RANGES",
+      "LIVE": "VERIFIED_THREE_LIMITED_RANGES_NOT_WHOLE_BOOK",
+      "deploymentId": "110c0b70-fd8a-4647-be29-2b89b5eb16ed",
+      "validatedArtifact": {
+        "workerSha256": "d31f97eed27e5081e0cc55e69a408e8c882c8378c6d2fe1e5c6a8c3f35f98fe2",
+        "routesSha256": "d266398b90fe6d1ce4355a5a4c95cc30a41246d501c3fe0d97bd2854ea7f491e"
+      },
+      "relevantWorkspaceDigest": "eab9cbfc935071422c5950f970807b22d2665fd38ca36cf828a0887eb905afa3",
+      "evidence": "tools/review/free-ask-manuscript-r1/BOOK-I-442-CURRENT-LIVE-ANSWERS.json",
+      "regression": "10/10",
+      "independent": "1/2; unanswered capacity premise retained as failure",
+      "positions": "PDF 13–14, 57, 341–342; printed pagination is separate"
+    },
+    "renderer": {
+      "state": "ACTUAL_PAGES_SERVICE_BINDING_HEALTH_VERIFIED",
+      "evidence": "tools/review/free-ask-manuscript-r1/BOOK-I-442-CURRENT-LIVE-ANSWERS.json",
+      "enabled": false,
+      "browserInvoked": false,
+      "providerCalls": 0
+    },
+    "sharedConfig": {
+      "stripe": "LIVE",
+      "runtimeMutations": [],
+      "metadataChanges": [
+        {
+          "path": "production.wrangler_config_hash",
+          "before": "a1cc8849a23a5eb3260a940850c7cb13bd91b5dea2f9c83b67ef3b5b06207188",
+          "after": null
+        }
+      ],
+      "originalGuardResult": "PUBLICATION_FAILED_OR_CONFIG_CHANGED",
+      "evidence": "tools/review/free-ask-manuscript-r1/CURRENT-ASK-PRESERVED-CONFIG-PUBLICATION.json"
+    },
+    "fifth": {
+      "SOURCE": "CUSTOMER_API_QA_PRIVATE_CORPUS_CONSUMER_WIRED",
+      "actualAnswerState": "PARTIALLY_ANSWERED",
+      "productionAdmission": false,
+      "DEPLOYMENT": "NOT_DEPLOYED_MANUSCRIPT_CANDIDATE",
+      "LIVE": "NOT_RUN_CANDIDATE",
+      "evidence": "tools/review/free-ask-manuscript-r1/BOOK-V-CUSTOMER-CONSUMER-QA.json",
+      "firstStop": "CUSTOMER_ANSWER_ONLY_PARTIAL; CHAPTER_INTEGRITY_AND_SEMANTIC_ACCEPTANCE_PENDING"
+    },
+    "seventh": {
+      "SOURCE": "TEN_EXISTING_ACCEPTED_NONEMPTY_PROSE_UNITS_CUSTOMER_QA_WIRED",
+      "registeredIdentities": 100,
+      "nonemptyAcceptedProseUnits": 10,
+      "figureOnlyUnits": 1,
+      "emptyIdentityOnlyRecords": 89,
+      "rawManuscriptAdmission": false,
+      "DEPLOYMENT": "NOT_DEPLOYED_V8_CANDIDATE",
+      "LIVE": "NOT_RUN_CANDIDATE",
+      "evidence": "tools/review/free-ask-manuscript-r1/BOOK-V-VII-CONSUMER-CANDIDATE-QA.json",
+      "initialFailureEvidence": "tools/review/free-ask-manuscript-r1/BOOK-V-VII-CONSUMER-CANDIDATE-QA-INITIAL-FAILURES.json",
+      "firstStop": "NATIVE_CHAPTER_KNOWLEDGE_SCOPE_AND_SEMANTIC_ACCEPTANCE_PENDING"
+    },
+    "chapters": {
       "total": 982,
-      "structurallyChecked": 982,
-      "wholeChapterVerified": 0,
-      "wholeChapterAdmissionProven": 0,
-      "wholeChapterLiveVerified": 0
+      "newWholeQualified": 0,
+      "wholeContentVerified": 0,
+      "wholeAnswerVerified": 0,
+      "wholeLiveVerified": 0,
+      "existingIII_IV_VILimitedLiveRanges": 10,
+      "newILimitedLiveRanges": 3,
+      "registrationOrRetrievalNotChapterCompletion": true
     },
-    "localBoundedAnswers": {
-      "bookI": {
-        "passed": 10,
-        "cases": 10,
-        "receipt": "tools/review/free-ask-manuscript-r1/BOOK-I-CURRENT-PRODUCTION-METADATA-QA.json",
-        "sourceSha256": "33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a",
-        "deployed": false
-      },
-      "bookIII": {
-        "regression": {
-          "passed": 2,
-          "cases": 2
-        },
-        "holdoutRegression": {
-          "passed": 3,
-          "cases": 3
-        },
-        "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
-        "scope": "TWO_EXISTING_PROSE_CANDIDATE_RANGES_NOT_WHOLE_CHAPTER_ACCEPTANCE",
-        "remaining": "Capacity conceptual answer still shows NEEDS_CURRENT_AUTHORITY; projection and whole-chapter quality remain partial",
-        "deployed": false
-      }
-    },
-    "sharedSourceChanges": [
-      {
-        "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
-        "sha256": "925ae0f7db10eea295b7c713fb77a0a8e8899c9338f83d806c8ae7ed7bb66807"
-      },
-      {
-        "path": "functions/external-reality-impact/external-reality-impact-runtime.js",
-        "sha256": "bdbec1b8fe06723fe87d8a8134113bc6825fb8b2b3762d89297526143f7f00e3"
-      }
-    ],
-    "rendererReceipt": "content/production-closure/live-customer-commercial-convergence/bazi-p9/RENDERER-AUTHORIZED-ESTABLISHMENT.json",
-    "pagesConfigReceipt": "content/production-closure/live-customer-commercial-convergence/bazi-p9/PAGES-SHARED-CONFIG-READONLY-RECONCILIATION.json",
-    "pagesPublicationBlockers": [
-      "Full shared configuration: source omits PHIOS_COMMERCE_LIVE_ENABLED while current remote has false; do not overwrite another window configuration implicitly",
-      "Historical Stripe flag is redacted, cannot restore an unverified value",
-      "Binding runtime invocation not verified; service control-plane existence verified"
-    ],
-    "currentRemoteStripe": "LIVE",
-    "historicalStripe": "UNVERIFIED",
-    "providerCalls": 0,
-    "pagesDeploy": 0,
-    "wholeSevenBookState": "PARTIAL",
-    "build": {
+    "currentSourceBuild": {
       "state": "PASS_BUILD",
-      "relevantBuildInputDigest": "02bea3583c2d2a94475d2b2242ef6aa32f00030943c19785afe7bea335f51db1",
-      "workerSha256": "b594f0551c54ddbe26ed9c35b22dd45e54a5bf1fc8203e394f71904be43606cf",
-      "receipt": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-BUILD-RECEIPT.json"
-    }
+      "inputDigest": "22064036fc236775863c2f58241d0d4276102f773c297908749bc9fb4721902f",
+      "output": {
+        "workerSha256": "736d1248fd723f282c4f980316cef7da1f47a57e2fe1c13400995a769be18589",
+        "routesSha256": "d266398b90fe6d1ce4355a5a4c95cc30a41246d501c3fe0d97bd2854ea7f491e"
+      },
+      "DEPLOYMENT": "NOT_DEPLOYED_CURRENT_POST_PUBLICATION_CONSUMER_PATCHES",
+      "LIVE": "NOT_RUN_CURRENT_POST_PUBLICATION_CONSUMER_PATCHES"
+    },
+    "providerCalls": 0,
+    "payments": 0,
+    "refunds": 0,
+    "paidReportTests": 0
+  },
+  "currentWholeChapterBatch": {
+    "at": "2026-10-11T15:27:00.556Z",
+    "head": "f1674d5a016881c58565677a19c4a372cae7b319",
+    "totalChapters": 982,
+    "completeBodyReviewed": 3,
+    "qualified": 1,
+    "admitted": 0,
+    "live": 0,
+    "remainingQualification": 981,
+    "overall": "PARTIAL",
+    "LOCAL": "III_ONE_WHOLE_CHAPTER_QUALIFIED_I_V_INDEPENDENT_REVALIDATION_PENDING",
+    "BUILD": "PASS_BUILD",
+    "DEPLOYMENT": "BATCH_ROLLED_BACK",
+    "restoredDeployment": "ddcd00ed-4c7e-4706-824d-2fe66c7dc2de",
+    "LIVE": "NEW_WHOLE_CHAPTER_SCOPES_WITHDRAWN",
+    "relevantBuildInputDigest": "8585a33bbb4a85825f87e95b7ef9add208b5d760670f81ded08ada9e9c765892",
+    "workerSha256": "e48cd46eee6f2ae30429f886847b21b53e9040720082b0f08b429dccd475ad66",
+    "unrelatedWorktreeChangesInvalidateEvidence": false,
+    "providerCalls": 0,
+    "providerCostUSD": 0,
+    "commit": 0,
+    "push": 0,
+    "payments": 0,
+    "secretMutation": 0,
+    "p9Mutation": 0
   }
 }

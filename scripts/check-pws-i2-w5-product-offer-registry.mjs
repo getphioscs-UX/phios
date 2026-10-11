@@ -176,6 +176,9 @@ const collectHtml = async directory => {
     if (['node_modules','.git','.wrangler','.tmp','.cache'].includes(entry.name) || entry.name.startsWith('.pages-output')) continue;
     const target = path.join(directory, entry.name);
     const relative = path.relative(process.cwd(), target).replaceAll(path.sep, '/');
+    // The repository-root tmp directory holds isolated QA worktrees and
+    // release snapshots. Their duplicated HTML is not a customer source owner.
+    if (entry.isDirectory() && relative === 'tmp') continue;
     // Browser QA snapshots duplicate the source tree; they are generated review
     // evidence, not an independent customer HTML owner.
     if (entry.isDirectory() && /^tools\/review\/[^/]+\/build-snapshot-\d+$/.test(relative)) continue;

@@ -1,0 +1,97 @@
+{
+  "at": "2026-10-11T14:29:00.299Z",
+  "acceptedCommit": "f1674d5a016881c58565677a19c4a372cae7b319",
+  "acceptedRcDigest": "2b27af1643b34c86a885ae3c79a744e88374f7828bbdcf1215f6072fb8a7dc26",
+  "pages": {
+    "deploymentId": "ddcd00ed-4c7e-4706-824d-2fe66c7dc2de",
+    "source": "f1674d5a016881c58565677a19c4a372cae7b319",
+    "environment": "production"
+  },
+  "workers": {
+    "phios-method-report-renderer-production": {
+      "httpStatus": 200,
+      "exists": true,
+      "environment": "production",
+      "scriptTag": "621ee886df8d4090b80cca25fdc67265",
+      "bindingPresence": [
+        {
+          "name": "BAZI_RENDER_ASSET_ORIGIN",
+          "status": "CONFIGURED"
+        },
+        {
+          "name": "BROWSER",
+          "status": "CONFIGURED"
+        },
+        {
+          "name": "PHIOS_ENVIRONMENT",
+          "status": "CONFIGURED"
+        },
+        {
+          "name": "PHIOS_P9_RENDERER_ENABLED",
+          "status": "CONFIGURED"
+        }
+      ],
+      "versions": [
+        {
+          "id": "bfe8f53d-8874-422e-bf94-ee0137dc1442",
+          "createdOn": "2026-10-11T13:50:42.450463Z"
+        },
+        {
+          "id": "dc739790-cd10-42ac-94c7-b21136bc5457",
+          "createdOn": "2026-10-11T13:17:07.860186Z"
+        }
+      ],
+      "schedules": {
+        "schedules": []
+      }
+    },
+    "phios-paid-report-watchdog-production": {
+      "httpStatus": 404,
+      "exists": false
+    }
+  },
+  "rendererBinding": {
+    "METHOD_REPORT_RENDERER": {
+      "service": "phios-method-report-renderer-production",
+      "environment": ""
+    }
+  },
+  "dbBindings": {
+    "RUNTIME_DB": {
+      "id": "073639fa-01e4-4868-af10-6ed032637dab"
+    }
+  },
+  "r2Bindings": {
+    "MANUSCRIPTS": {
+      "name": "phios-private-manuscripts"
+    },
+    "PRIVATE_REPORTS": {
+      "name": "phios-private-reports"
+    }
+  },
+  "mode": "production",
+  "stripeEnvironment": "LIVE",
+  "canaryState": "false",
+  "checkoutState": "false",
+  "providerState": "false",
+  "generalBzrSale": "RUNTIME_UNVERIFIED",
+  "presence": {
+    "PHIOS_P9_CANARY_POLICY": "MISSING",
+    "PHIOS_P9_AUTHORIZATION_RECEIPTS": "MISSING",
+    "PHIOS_P9_RELEASE_DIGEST": "MISSING",
+    "STRIPE_SECRET_KEY": "CONFIGURED",
+    "STRIPE_WEBHOOK_SECRET": "MISSING",
+    "OPENAI_API_KEY": "CONFIGURED",
+    "CANONICAL_PERSON_ENCRYPTION_KEY": "MISSING",
+    "AUTH_SESSION_SECRET": "CONFIGURED"
+  },
+  "providerCalls": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "d1Migration": {
+    "httpStatus": 200,
+    "success": true,
+    "history": [],
+    "errors": []
+  }
+}

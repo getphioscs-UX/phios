@@ -212,7 +212,17 @@ const historicalWrangler=JSON.parse(execFileSync('git',['show',publicationDelta.
 const priorWrangler=JSON.parse(execFileSync('git',['show',publicationDelta.commit+'^:wrangler.jsonc'],{cwd:root,encoding:'utf8'}));
 assert.equal(priorWrangler.pages_build_output_dir,publicationDelta.predecessorOutputDirectory);
 assert.deepEqual({...historicalWrangler,pages_build_output_dir:publicationDelta.predecessorOutputDirectory},priorWrangler,'Pages publication commit must change only output directory');
-assert.deepEqual(wrangler,historicalWrangler,'Current Wrangler must match the pinned publication successor');
+const rendererDelta=wranglerReconciliation.allowedDelta.productionRendererPreparation;
+assert.equal(rendererDelta.commit,'d29bc63cdc9b30af6cf4b6425c820409b31c403f');
+assert.equal(rendererDelta.previewChanged,false);
+assert.equal(rendererDelta.productionActivationVerified,false);
+const rendererPredecessor=JSON.parse(execFileSync('git',['show',rendererDelta.commit+'^:wrangler.jsonc'],{cwd:root,encoding:'utf8'}));
+const rendererSuccessor=JSON.parse(execFileSync('git',['show',rendererDelta.commit+':wrangler.jsonc'],{cwd:root,encoding:'utf8'}));
+assert.deepEqual(rendererPredecessor,historicalWrangler,'Renderer preparation must inherit the pinned publication successor');
+assert.deepEqual(rendererSuccessor,{...historicalWrangler,services:rendererDelta.services,vars:rendererDelta.vars},'Only the recorded production renderer and preparation flags may change');
+assert.deepEqual(rendererDelta.services,[{binding:'METHOD_REPORT_RENDERER',service:'phios-method-report-renderer-production'}]);
+assert.deepEqual(rendererDelta.vars,{PHIOS_ENVIRONMENT:'production',STRIPE_ENVIRONMENT:'LIVE',PHIOS_SHARED_PAID_REPORT_ENABLED:'true',PHIOS_P9_CANARY_ENABLED:'false',PHIOS_P9_CHECKOUT_ENABLED:'false',PHIOS_P9_REFUND_ENABLED:'false',REPORT_PROVIDER_LIVE_ALLOWED:'false'});
+assert.deepEqual(wrangler,rendererSuccessor,'Current Wrangler must match the pinned renderer preparation successor');
 assert.equal(wrangler.ai.binding, wranglerReconciliation.preserved.aiBinding);
 assert.equal(wrangler.d1_databases.length, 1);
 assert.equal(wrangler.d1_databases[0].binding, wranglerReconciliation.preserved.d1Binding);

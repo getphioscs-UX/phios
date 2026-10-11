@@ -10,9 +10,9 @@
   "records": [
     {
       "bookCode": "BOOK-1",
-      "version": "v3 (current owner-authorized cutover; semantic technical gates pending), v2 (current Ask registry historical)",
+      "version": "v3-revision-20261011-33c91cd60d5f",
       "metadataPath": "content/knowledge/manuscripts/extraction/book-1-v3-section-integrity-v1.json",
-      "sourceSHA256": "813481693e25bad9f35d6e13795eb51d0c35d80d9cbc62fe53a04d3cb622492e",
+      "sourceSHA256": "33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a",
       "privateStorageObject": "books/book-1/source/PHI-OS-Book-I-v3.pdf",
       "chapterOrSectionCount": 274,
       "countUnit": "SOURCE_SECTION_NOT_ARTICLE",
@@ -68,7 +68,24 @@
           "answerActuallyAddressesQuestion": "NOT_ACCEPTED_BY_STATUS_FLAG; SEE_ACTUAL_RETURNED_TEXT"
         }
       ],
-      "productionRead": "LIVE_RESPONSE_CONTAINS_REGISTERED_SOURCE_IDENTITY; NO_PRIVATE_STORAGE_TRACE_AVAILABLE"
+      "productionRead": "LIVE_RESPONSE_CONTAINS_REGISTERED_SOURCE_IDENTITY; NO_PRIVATE_STORAGE_TRACE_AVAILABLE",
+      "previousVersionDescription": "v3 (current owner-authorized cutover; semantic technical gates pending), v2 (current Ask registry historical)",
+      "currentLimitedLiveEvidence": {
+        "sourceSha256": "33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a",
+        "sourceVersion": "v3-revision-20261011-33c91cd60d5f",
+        "DEPLOYMENT": "DEPLOYED_THREE_LIMITED_RANGES",
+        "LIVE": "VERIFIED_THREE_LIMITED_RANGES_NOT_WHOLE_BOOK",
+        "deploymentId": "110c0b70-fd8a-4647-be29-2b89b5eb16ed",
+        "validatedArtifact": {
+          "workerSha256": "d31f97eed27e5081e0cc55e69a408e8c882c8378c6d2fe1e5c6a8c3f35f98fe2",
+          "routesSha256": "d266398b90fe6d1ce4355a5a4c95cc30a41246d501c3fe0d97bd2854ea7f491e"
+        },
+        "relevantWorkspaceDigest": "eab9cbfc935071422c5950f970807b22d2665fd38ca36cf828a0887eb905afa3",
+        "evidence": "tools/review/free-ask-manuscript-r1/BOOK-I-442-CURRENT-LIVE-ANSWERS.json",
+        "regression": "10/10",
+        "independent": "1/2; unanswered capacity premise retained as failure",
+        "positions": "PDF 13–14, 57, 341–342; printed pagination is separate"
+      }
     },
     {
       "bookCode": "BOOK-2",
@@ -1928,5 +1945,119 @@
       }
     ],
     "buildIdentityScope": "Exact deployed validated artifact. Current free-path evidence preserved; unrelated paid-owner changes do not trigger another build or invalidate accepted content."
-  }
+  },
+  "currentSevenBookContinuation": {
+    "at": "2026-10-11T14:15:32.228Z",
+    "head": "d29bc63cdc9b30af6cf4b6425c820409b31c403f",
+    "wholeWorktreeFreshnessUsed": false,
+    "firstBook": {
+      "sourceSha256": "33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a",
+      "sourceVersion": "v3-revision-20261011-33c91cd60d5f",
+      "DEPLOYMENT": "DEPLOYED_THREE_LIMITED_RANGES",
+      "LIVE": "VERIFIED_THREE_LIMITED_RANGES_NOT_WHOLE_BOOK",
+      "deploymentId": "110c0b70-fd8a-4647-be29-2b89b5eb16ed",
+      "validatedArtifact": {
+        "workerSha256": "d31f97eed27e5081e0cc55e69a408e8c882c8378c6d2fe1e5c6a8c3f35f98fe2",
+        "routesSha256": "d266398b90fe6d1ce4355a5a4c95cc30a41246d501c3fe0d97bd2854ea7f491e"
+      },
+      "relevantWorkspaceDigest": "eab9cbfc935071422c5950f970807b22d2665fd38ca36cf828a0887eb905afa3",
+      "evidence": "tools/review/free-ask-manuscript-r1/BOOK-I-442-CURRENT-LIVE-ANSWERS.json",
+      "regression": "10/10",
+      "independent": "1/2; unanswered capacity premise retained as failure",
+      "positions": "PDF 13–14, 57, 341–342; printed pagination is separate"
+    },
+    "renderer": {
+      "state": "ACTUAL_PAGES_SERVICE_BINDING_HEALTH_VERIFIED",
+      "evidence": "tools/review/free-ask-manuscript-r1/BOOK-I-442-CURRENT-LIVE-ANSWERS.json",
+      "enabled": false,
+      "browserInvoked": false,
+      "providerCalls": 0
+    },
+    "sharedConfig": {
+      "stripe": "LIVE",
+      "runtimeMutations": [],
+      "metadataChanges": [
+        {
+          "path": "production.wrangler_config_hash",
+          "before": "a1cc8849a23a5eb3260a940850c7cb13bd91b5dea2f9c83b67ef3b5b06207188",
+          "after": null
+        }
+      ],
+      "originalGuardResult": "PUBLICATION_FAILED_OR_CONFIG_CHANGED",
+      "evidence": "tools/review/free-ask-manuscript-r1/CURRENT-ASK-PRESERVED-CONFIG-PUBLICATION.json"
+    },
+    "fifth": {
+      "SOURCE": "CUSTOMER_API_QA_PRIVATE_CORPUS_CONSUMER_WIRED",
+      "actualAnswerState": "PARTIALLY_ANSWERED",
+      "productionAdmission": false,
+      "DEPLOYMENT": "NOT_DEPLOYED_MANUSCRIPT_CANDIDATE",
+      "LIVE": "NOT_RUN_CANDIDATE",
+      "evidence": "tools/review/free-ask-manuscript-r1/BOOK-V-CUSTOMER-CONSUMER-QA.json",
+      "firstStop": "CUSTOMER_ANSWER_ONLY_PARTIAL; CHAPTER_INTEGRITY_AND_SEMANTIC_ACCEPTANCE_PENDING"
+    },
+    "seventh": {
+      "SOURCE": "TEN_EXISTING_ACCEPTED_NONEMPTY_PROSE_UNITS_CUSTOMER_QA_WIRED",
+      "registeredIdentities": 100,
+      "nonemptyAcceptedProseUnits": 10,
+      "figureOnlyUnits": 1,
+      "emptyIdentityOnlyRecords": 89,
+      "rawManuscriptAdmission": false,
+      "DEPLOYMENT": "NOT_DEPLOYED_V8_CANDIDATE",
+      "LIVE": "NOT_RUN_CANDIDATE",
+      "evidence": "tools/review/free-ask-manuscript-r1/BOOK-V-VII-CONSUMER-CANDIDATE-QA.json",
+      "initialFailureEvidence": "tools/review/free-ask-manuscript-r1/BOOK-V-VII-CONSUMER-CANDIDATE-QA-INITIAL-FAILURES.json",
+      "firstStop": "NATIVE_CHAPTER_KNOWLEDGE_SCOPE_AND_SEMANTIC_ACCEPTANCE_PENDING"
+    },
+    "chapters": {
+      "total": 982,
+      "newWholeQualified": 0,
+      "wholeContentVerified": 0,
+      "wholeAnswerVerified": 0,
+      "wholeLiveVerified": 0,
+      "existingIII_IV_VILimitedLiveRanges": 10,
+      "newILimitedLiveRanges": 3,
+      "registrationOrRetrievalNotChapterCompletion": true
+    },
+    "currentSourceBuild": {
+      "state": "PASS_BUILD",
+      "inputDigest": "22064036fc236775863c2f58241d0d4276102f773c297908749bc9fb4721902f",
+      "output": {
+        "workerSha256": "736d1248fd723f282c4f980316cef7da1f47a57e2fe1c13400995a769be18589",
+        "routesSha256": "d266398b90fe6d1ce4355a5a4c95cc30a41246d501c3fe0d97bd2854ea7f491e"
+      },
+      "DEPLOYMENT": "NOT_DEPLOYED_CURRENT_POST_PUBLICATION_CONSUMER_PATCHES",
+      "LIVE": "NOT_RUN_CURRENT_POST_PUBLICATION_CONSUMER_PATCHES"
+    },
+    "providerCalls": 0,
+    "payments": 0,
+    "refunds": 0,
+    "paidReportTests": 0
+  },
+  "currentWholeChapterBatch": {
+    "at": "2026-10-11T15:27:00.556Z",
+    "head": "f1674d5a016881c58565677a19c4a372cae7b319",
+    "totalChapters": 982,
+    "completeBodyReviewed": 3,
+    "qualified": 1,
+    "admitted": 0,
+    "live": 0,
+    "remainingQualification": 981,
+    "overall": "PARTIAL",
+    "LOCAL": "III_ONE_WHOLE_CHAPTER_QUALIFIED_I_V_INDEPENDENT_REVALIDATION_PENDING",
+    "BUILD": "PASS_BUILD",
+    "DEPLOYMENT": "BATCH_ROLLED_BACK",
+    "restoredDeployment": "ddcd00ed-4c7e-4706-824d-2fe66c7dc2de",
+    "LIVE": "NEW_WHOLE_CHAPTER_SCOPES_WITHDRAWN",
+    "relevantBuildInputDigest": "8585a33bbb4a85825f87e95b7ef9add208b5d760670f81ded08ada9e9c765892",
+    "workerSha256": "e48cd46eee6f2ae30429f886847b21b53e9040720082b0f08b429dccd475ad66",
+    "unrelatedWorktreeChangesInvalidateEvidence": false,
+    "providerCalls": 0,
+    "providerCostUSD": 0,
+    "commit": 0,
+    "push": 0,
+    "payments": 0,
+    "secretMutation": 0,
+    "p9Mutation": 0
+  },
+  "overallSevenBookState": "PARTIAL"
 }

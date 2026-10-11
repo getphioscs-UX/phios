@@ -1,10 +1,11 @@
 import fs from 'node:fs';
 import crypto from 'node:crypto';
-const registry='content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v7.json';
+const successor=fs.existsSync('content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v10.json')?'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v10.json':'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v9.json';
+const registry=fs.existsSync(successor)&&JSON.parse(fs.readFileSync(successor)).productionActivated===true?successor:'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v7.json';
 const records=JSON.parse(fs.readFileSync(registry)).records;
 const reviewedRegistry='content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json';
 const reviewed=JSON.parse(fs.readFileSync(reviewedRegistry));
-const paths=[...new Set([registry,reviewedRegistry,reviewed.humanReviewResolution,...records.flatMap(r=>[r.sourceAcceptancePath,r.acceptancePath,r.scopeAdmissionPath]).filter(Boolean)])];
+const paths=[...new Set([registry,reviewedRegistry,reviewed.humanReviewResolution,...records.flatMap(r=>[r.sourceAcceptancePath,r.acceptancePath,r.scopeAdmissionPath,r.sourceIdentityPath]).filter(Boolean)])];
 const raw=Object.fromEntries(paths.map(p=>[p,fs.readFileSync(p,'utf8')]));
 raw.ACTIVE_MANUSCRIPT_SOURCE_REGISTRY=registry;
 // Only bounded registry/acceptance metadata is bundled; no manuscript body.

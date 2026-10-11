@@ -17,6 +17,8 @@ const clean = value => String(value ?? '')
   .trim();
 
 const normalized = value => clean(value).toLocaleLowerCase();
+const conceptQuery=value=>normalized(value).replace(/垮台|倒台/gu,'终结');
+const conceptQueryMatch=(concept,query)=>concept.aliases?.some(alias=>conceptQuery(query).includes(normalized(alias)))||(concept.termSets||[]).some(set=>set.every(term=>conceptQuery(query).includes(normalized(term))));
 
 function unique(values) {
   return [...new Set(values.filter(Boolean))];
@@ -29,19 +31,34 @@ export function queryTerms(value) {
   const cjk = [];
   for (const run of cjkRuns) {
     if (run.length <= 8) cjk.push(run);
-    const max = Math.min(run.length - 1, 24);
+    // Questions often put the actual limitation near the end. Traverse the
+    // complete run; the bounded term budget is applied after deduplication.
+    const max = run.length - 1;
     for (let index = 0; index < max; index += 1) cjk.push(run.slice(index, index + 2));
   }
-  return unique([...latin, ...cjk]).slice(0, 40);
+  const terms=unique([...latin,...cjk]);
+  if(terms.length<=40)return terms;
+  // Keep deterministic coverage of beginning, middle and end rather than
+  // silently discarding the latter half of longer questions.
+  return Array.from({length:40},(_,i)=>terms[Math.round(i*(terms.length-1)/39)]);
 }
 
 export function manuscriptQueryTerms(value) {
   // Separate grammatical scaffolding before producing Chinese bigrams. A
   // comparison must not acquire high-specificity invented terms such as 和差.
   // This is shared query analysis, not a per-question answer table.
-  const input=String(value||'');
+  const input=String(value||'').replace(/第[一二三四五六七八九十\d]+册(?:中|里|的)?/gu,' ');
   const aliases=/(?:售卖|销售|出售|购买|不卖|卖不卖|卖吗|公开卖|卖的(?:书|商品))/u.test(input)?['出售']:[];
-  return unique([...queryTerms(input.replace(/为什么|为何|是什么意思|是什么|有什么区别|有何区别|什么关系|如何|怎样|怎么|请问|究竟|有没有|不一定|是否|一个|一种|这样|那样|这个|那个|以及|与|和|的|对|\b(?:why|what|how|does|do|is|are|the|a|an|of|in|to|and|can|could|would|please)\b/gi, ' ')),...aliases]).filter(term=>term.length>1);
+  // Do not delete single Chinese characters: 和平 and 面对 are concepts, not
+  // conjunction/preposition noise. Remove complete grammatical phrases only.
+  const stopwords = new Set(['为什么','为何','什么','如何','怎样','怎么','请问','究竟','一个','一种','这样','那样','这个','那个','以及','why','what','how','does','do','is','are','the','a','an','of','in','to','and','please']);
+  // Filtering is at word boundaries only. The original question remains
+  // intact for polarity, conditions, comparisons and temporal assessment.
+  // Never replace substrings inside Chinese words or across their boundaries.
+  const words = [...new Intl.Segmenter('zh', {granularity:'word'}).segment(normalized(input))]
+    .filter(part => part.isWordLike).map(part => part.segment)
+    .filter(word => !stopwords.has(word));
+  return unique([...words.flatMap(word => word.length > 4 ? [word,...queryTerms(word)] : [word]),...aliases]).filter(term=>term.length>1);
 }
 
 function correctionRows(sectionCode, corrections) {
@@ -109,8 +126,14 @@ function scoreRecord(record, query, terms, profile, specificity = null, prepared
   const durationActivity=q.match(/(?:永远|一直|长久|长期|持续)(?:维持|保持|继续)?(运行|存在|发展|增长)/u)?.[1];
   const durationActivityMatch=durationActivity&&new RegExp('(?:持续|长期|连续)'+durationActivity,'u').test(nativeHeader);
   if(durationActivityMatch)score+=1200;
+  const boundaryRemoval=/(?:限制|边界).*(?:消失|解除|不再存在)|(?:没有|不再有).*(?:限制|边界)/u.test(q);
+  const boundarySubjectMatch=boundaryRemoval&&terms.some(term=>term.length>=2&&nativeHeader.includes(term))&&/有限|限制|边界|瓶颈/u.test(compactText);
+  if(boundarySubjectMatch)score+=1200;
+  const matchedConceptAliases=(record.retrievalConcepts||[]).filter(c=>conceptQueryMatch(c,q)).flatMap(c=>[...(c.aliases||[]).filter(a=>conceptQuery(q).includes(normalized(a))),...(c.termSets||[]).filter(set=>set.every(t=>conceptQuery(q).includes(normalized(t)))).map(set=>set.join(''))]);
+  const chapterConceptMatch=matchedConceptAliases.length>0;
+  if(chapterConceptMatch)score+=1200+Math.max(...matchedConceptAliases.map(alias=>alias.length))*300;
   if (q && headingLabel === q) score += 4000;
-  const exactProfileQuestion = [...(profile?.naturalQuestions || []), ...(profile?.userLanguage || []), ...(profile?.aliases || [])].some(value => normalized(value) === q);
+  const exactProfileQuestion = [...(profile?.naturalQuestions || []), ...(profile?.userLanguage || []), ...(profile?.aliases || []),...(record.approvedQuestions||[])].some(value => normalized(value) === q);
   if (exactProfileQuestion) score += 1400;
   if (q && heading.includes(q)) score += 1200;
   if (q && text.includes(q)) score += 800;
@@ -158,7 +181,7 @@ function scoreRecord(record, query, terms, profile, specificity = null, prepared
   const conditionEvidence=conditionSubject&&conditionSubject.length>=4&&compactText.includes(conditionSubject);
   const namedBook=q.match(/第[一二三四五六七八九十\d]+册/u)?.[0]||q.match(/《([^》]+)》/u)?.[1];
   const namedStatusEvidence=namedBook&&compactText.includes(compact(namedBook))&&terms.includes('出售')&&compactText.includes('出售');
-  if(!exactProfileQuestion&&!nativeIntroductionMatch&&!temporalConditionMatch&&!(durationActivityMatch&&localMatches>=2)&&!perspectiveCompletenessMatch&&!divergentExperienceMatch&&!titlePhraseMatch&&sharedPhraseLength<6&&!explicitSubjectEvidence&&!conditionEvidence&&!namedStatusEvidence&&!(localMatches>=3&&matchedContentWeight>=6)&&!(nativeConceptLabel&&q.includes(nativeConceptLabel))&&!q.includes(headingLabel)&&matchedWeight/Math.max(1,totalWeight)<0.35)return 0;
+  if(!chapterConceptMatch&&!boundarySubjectMatch&&!exactProfileQuestion&&!nativeIntroductionMatch&&!temporalConditionMatch&&!(durationActivityMatch&&localMatches>=2)&&!perspectiveCompletenessMatch&&!divergentExperienceMatch&&!titlePhraseMatch&&sharedPhraseLength<6&&!explicitSubjectEvidence&&!conditionEvidence&&!namedStatusEvidence&&!(localMatches>=3&&matchedContentWeight>=6)&&!(nativeConceptLabel&&q.includes(nativeConceptLabel))&&!q.includes(headingLabel)&&matchedWeight/Math.max(1,totalWeight)<0.35)return 0;
     if (specificity) {
       const subtitle = heading.slice(headingLabel.length);
       const comparison = q.match(/^(.+?)(?:与|和)(.+?)(?:有什么区别|有何区别|的区别|区别)/);
@@ -177,9 +200,31 @@ function scoreRecord(record, query, terms, profile, specificity = null, prepared
   return specificMatches >= Math.min(2, meaningfulTerms.length) || score >= 800 ? score : 0;
 }
 
+function selectArgumentUnit(record,query,terms,maximum){
+    const pair=String(query).match(/^(.+?)(?:和|与)(.+?)(?:有什么区别|有何区别|的区别|区别)/u);
+    const subjects=pair?[pair[1],pair[2]].map(x=>normalized(x).replace(/^(?:请问|第[一二三四五六七八九十\d]+册(?:中|里|的)?)/u,'').trim()):[];
+    const contrastUnit=unit=>unit.type==='DISTINCTION'&&subjects.length===2&&subjects.every(s=>s.length>=2&&normalized(record.text.slice(unit.startOffset,unit.endOffset)).replace(/\s+/gu,'').includes(s));
+    if(record.argumentUnits?.length){
+      const informative=terms.filter(t=>!/^(?:维护|长期|文明|国家|为什么|如何|哪些|层次|才能|能够|之后|以后|仍然|已经|是否|是不是|不能|可以|不是|而不是|需要|讨论)$/u.test(t));
+      const definitions=/是什么意思|什么是|是什么|定义|指什么/u.test(query);
+      const necessity=/多此一举|没必要|用不着|是否必要|还需要/u.test(query);
+      const enumeration=/哪些|包括|层次|几种/u.test(query);
+      const guaranteeBoundary=/保证|一定|必然/u.test(query)&&/不能|不|吗|是否|是不是/u.test(query);
+      const ranked=record.argumentUnits.map(unit=>{const text=record.text.slice(unit.startOffset,unit.endOffset),body=normalized(text).replace(/\s+/gu,'');let matches=0;const necessaryMechanism=necessity&&unit.type==='MECHANISM'&&/需求|需要|根本原因|必然/u.test(body);const score=informative.reduce((n,t)=>{if(!body.includes(t))return n;matches++;const df=record.argumentUnits.filter(u=>normalized(record.text.slice(u.startOffset,u.endOffset)).replace(/\s+/gu,'').includes(t)).length;return n+t.length/(1+df);},0)+(definitions&&unit.type==='DEFINITION'?20:0)+(contrastUnit(unit)?100:0)+(necessaryMechanism?20:0)+(enumeration&&unit.type==='DEFINITION'&&/至少|包括|分别|分为|可以是/u.test(body)?20:0)+(guaranteeBoundary&&unit.type==='BOUNDARY'&&matches>=2?20:0);return{unit,text,score,matches,necessaryMechanism};}).filter(r=>r.matches>=2||(definitions&&r.unit.type==='DEFINITION')||contrastUnit(r.unit)||r.necessaryMechanism).sort((a,b)=>b.score-a.score);
+      if(ranked.length){const selected=ranked[0];if(selected.text.length<=maximum)return selected;}
+    }
+    return null;
+}
 function excerptFor(record, query, terms, maximum = MAX_EXCERPT_CHARS) {
-    const text = clean(record.text);
-    if (record.supportRange&&record.answerProjectionPolicy!=='QUESTION_ANCHORED_CONTIGUOUS') return text.length<=maximum?text:text.slice(0,maximum).replace(/[^。！？!?]*$/u,'')+'…';
+    const argument=selectArgumentUnit(record,query,terms,maximum);if(argument)return clean(argument.text);
+    const lines=String(record.text).split('\n'),compactHeading=value=>normalized(value).replace(/[\p{P}\p{S}\s]+/gu,'');
+    const exactHeader=/^[\s✦◈◆◇❖]+/u.test(lines[0])&&compactHeading(lines[0])===compactHeading(record.heading);
+    const text = clean(exactHeader?lines.slice(1).join('\n'):record.text);
+    if (record.supportRange&&record.answerProjectionPolicy!=='QUESTION_ANCHORED_CONTIGUOUS') {
+      if(text.length<=maximum)return text;
+      const complete=text.slice(0,maximum).replace(/[^。！？!?]*$/u,'');
+      return complete ? complete+'…' : '';
+    }
   if (text.length <= maximum) return text;
   let anchor = text.indexOf(clean(query));
   const concept = clean(record.heading).split(/[|｜]/u)[0].replace(/^[✦◈◆◇❖]\s*/u,'').trim();
@@ -194,7 +239,9 @@ function excerptFor(record, query, terms, maximum = MAX_EXCERPT_CHARS) {
       const namedSubject=clean(query).match(/第[一二三四五六七八九十\d]+册/u)?.[0];
       const literalSubject=clean(query).match(/^(?:既然|虽然|即使)?([\u3400-\u9fff]{1,8}?)(?:还在|仍然|正在|依然)/u)?.[1];
       const condition=clean(query).match(/^(.{2,20}?)(?:是不是|是否|就代表|就意味着)/u)?.[1]?.slice(-2);
-      const score=informativeTerms.reduce((sum,term)=>sum+(sentence.includes(term)?term.length:0),0)+(namedSubject&&sentence.includes(namedSubject)?20:0)+(literalSubject&&sentence.includes(literalSubject)?20:0)+(condition&&sentence.includes(condition)?12:0)+(terms.includes('出售')&&sentence.includes('出售')?15:0);
+      let score=informativeTerms.reduce((sum,term)=>sum+(sentence.includes(term)?term.length:0),0)+(namedSubject&&sentence.includes(namedSubject)?20:0)+(literalSubject&&sentence.includes(literalSubject)?20:0)+(condition&&sentence.includes(condition)?12:0)+(terms.includes('出售')&&sentence.includes('出售')?15:0);
+      if(score>0&&/哪些|包括|层次|几种/u.test(query)&&/至少|可以是|包括|分别|分为/u.test(sentence))score+=12;
+      if(!/如果|假如|假设/u.test(query)&&/^如果.*如果/u.test(sentence))score-=18;
       if(score>bestScore){bestScore=score;anchor=match.index;}
     }
   }
@@ -213,6 +260,7 @@ function excerptFor(record, query, terms, maximum = MAX_EXCERPT_CHARS) {
     const window = text.slice(start,end);
     const lastBoundary = Math.max(...['。','！','？','!','?'].map(mark=>window.lastIndexOf(mark)));
     if (lastBoundary >= 0) end = start + lastBoundary + 1;
+    else return ''; // A budget cannot turn an unfinished sentence into evidence.
   }
   const prefix = start > 0 ? '…' : '';
   const suffix = end < text.length ? '…' : '';
@@ -271,13 +319,21 @@ export function searchManuscriptCorpus({
     const allowance = Math.min(maximumExcerptChars, maximumTotalExcerptChars - totalChars);
     if (allowance <= 0) break;
     const excerpt = excerptFor(item.record, query, terms, allowance);
+    if(!excerpt)continue;
+    const selectedArgument=selectArgumentUnit(item.record,query,terms,allowance);
     totalChars += excerpt.length;
     results.push({
       sourceType: 'COMPLETED_MANUSCRIPT',
+      ...(source.contentKind==='ACCEPTED_PUBLIC_KNOWLEDGE_UNITS_ONLY'?{approvedPublicProjection:item.record.approvedPublicProjection,projectionKind:'ACCEPTED_KNOWLEDGE_UNIT_NOT_NATIVE_PDF_EXCERPT'}:{}),
       sourceCode: source.sourceCode,
       sourceVersion: source.version || source.sourceCode,
       sourceBinaryDigest: source.sourceSha256,
       sourceAcceptanceDigest: source.acceptanceSha256 || source.sourceAcceptanceSha256 || null,
+      sourceScopeAdmissionDigest: source.scopeAdmissionSha256 || null,
+      wholeChapterQualified:item.record.wholeChapterQualified===true,
+      sourceConceptAliases:(item.record.retrievalConcepts||[]).flatMap(c=>c.aliases||[]),
+      selectedArgumentUnit:selectedArgument?{argumentId:selectedArgument.unit.argumentId,type:selectedArgument.unit.type,startOffset:selectedArgument.unit.startOffset,endOffset:selectedArgument.unit.endOffset,textSha256:selectedArgument.unit.textSha256}:null,
+      scopeMatch:Boolean(selectedArgument&&(item.record.retrievalConcepts||[]).some(c=>conceptQueryMatch(c,query))),
       bookCode: source.bookCode,
       bookTitle: source.title,
       bookTitleEn: source.titleEn,

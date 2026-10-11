@@ -1,0 +1,104 @@
+{
+  "at": "2026-10-11T15:08:36.382Z",
+  "state": "FULL_CONFIGURATION_RECONCILED_PRESERVE_REMOTE",
+  "endpoint": "https://api.cloudflare.com/client/v4/accounts/0b9f36bdf56f38d7d09aebe388f15204/pages/projects/phios-github",
+  "canonicalDeployment": "030ab90a-71a5-4609-b1f5-7f7971fea777",
+  "configurationMetadataSha256": "913f8082c8aa089ee4b8e0d9b35e4a30d8cabb1997d90275e0efda17951b0d71",
+  "sourceConfigSha256": "a1cc8849a23a5eb3260a940850c7cb13bd91b5dea2f9c83b67ef3b5b06207188",
+  "p9ManifestSha256": "5062888aa90af51b5429cf94ad0d95e439475e0abaf9b889fab434fd587d6894",
+  "p9Targets": [
+    {
+      "component": "Pages / Functions + shared core",
+      "target": "phios-github"
+    },
+    {
+      "component": "Method report renderer",
+      "target": "phios-method-report-renderer-production"
+    },
+    {
+      "component": "Watchdog scheduler",
+      "target": "phios-paid-report-watchdog-production"
+    },
+    {
+      "component": "D1",
+      "target": "phios-runtime-production"
+    },
+    {
+      "component": "Private report storage",
+      "target": "phios-private-reports"
+    }
+  ],
+  "changes": [
+    {
+      "field": "vars.PHIOS_ENVIRONMENT",
+      "source": "production",
+      "remote": "production",
+      "decision": "MATCH_PRESERVE_REMOTE",
+      "necessaryMutation": false
+    },
+    {
+      "field": "vars.STRIPE_ENVIRONMENT",
+      "source": "LIVE",
+      "remote": "LIVE",
+      "decision": "MATCH_PRESERVE_REMOTE",
+      "necessaryMutation": false
+    },
+    {
+      "field": "vars.PHIOS_SHARED_PAID_REPORT_ENABLED",
+      "source": "true",
+      "remote": "true",
+      "decision": "MATCH_PRESERVE_REMOTE",
+      "necessaryMutation": false
+    },
+    {
+      "field": "vars.PHIOS_P9_CANARY_ENABLED",
+      "source": "false",
+      "remote": "false",
+      "decision": "MATCH_PRESERVE_REMOTE",
+      "necessaryMutation": false
+    },
+    {
+      "field": "vars.PHIOS_P9_CHECKOUT_ENABLED",
+      "source": "false",
+      "remote": "false",
+      "decision": "MATCH_PRESERVE_REMOTE",
+      "necessaryMutation": false
+    },
+    {
+      "field": "vars.PHIOS_P9_REFUND_ENABLED",
+      "source": "false",
+      "remote": "false",
+      "decision": "MATCH_PRESERVE_REMOTE",
+      "necessaryMutation": false
+    },
+    {
+      "field": "vars.REPORT_PROVIDER_LIVE_ALLOWED",
+      "source": "false",
+      "remote": "false",
+      "decision": "MATCH_PRESERVE_REMOTE",
+      "necessaryMutation": false
+    },
+    {
+      "field": "d1.RUNTIME_DB",
+      "source": "073639fa-01e4-4868-af10-6ed032637dab",
+      "remote": "073639fa-01e4-4868-af10-6ed032637dab",
+      "decision": "MATCH_PRESERVE_REMOTE"
+    },
+    {
+      "field": "r2.MANUSCRIPTS",
+      "source": "phios-private-manuscripts",
+      "remote": "phios-private-manuscripts",
+      "decision": "MATCH_PRESERVE_REMOTE"
+    },
+    {
+      "field": "r2.PRIVATE_REPORTS",
+      "source": "phios-private-reports",
+      "remote": "phios-private-reports",
+      "decision": "MATCH_PRESERVE_REMOTE"
+    }
+  ],
+  "stripe": "LIVE_PRESERVED",
+  "secretMutation": 0,
+  "publicationStrategy": "Wrangler Pages no-config invocation from isolated cwd; uses existing cloud deployment configuration and does not send config/vars bindings; --no-bundle uses verified Worker bytes",
+  "historicalStripeValue": "UNVERIFIED_NO_RESTORE"
+}

@@ -376,7 +376,8 @@ export async function runAskPhiosPipeline({ input, request, env = {}, depth = DE
     projection.answer = {...projection.answer, content:{...projection.answer.content, directAnswer: input?.locale === 'en' ? 'These sources cannot support a guaranteed prediction of a future event. Additional personal information would not establish that certainty.' : '这些来源不能支持对未来事件的确定预测。补充个人资料也不能使这种确定性成立。'}};
   }
   const sourceNativeAnswer = grounding.retrieval?.groundedAnswer;
-  const acceptedSourceNativeUnit = (retrievalOptions.source === 'manuscript' || env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' || env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true') && grounding.groundingBundle.sources.length > 0 && grounding.groundingBundle.sources.every(source => source.sourceType === 'COMPLETED_MANUSCRIPT' && /^[a-f0-9]{64}$/.test(source.sourceAcceptanceDigest || '')) && (grounding.coverageDecision.answerCompositionEligible === true || grounding.coverageDecision.shortSupportedAnswerEligible === true);
+  const serverIdentityQA=env.PHIOS_ENVIRONMENT==='qa'&&env.PHIOS_MANUSCRIPT_DERIVATIVE_QA==='true';
+  const acceptedSourceNativeUnit = (retrievalOptions.source === 'manuscript' || env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' || env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true') && grounding.groundingBundle.sources.length > 0 && grounding.groundingBundle.sources.every(source => source.sourceType === 'COMPLETED_MANUSCRIPT' && (/^[a-f0-9]{64}$/.test(source.sourceAcceptanceDigest || '') || /^[a-f0-9]{64}$/.test(source.sourceScopeAdmissionDigest || '') || (serverIdentityQA&&/^[a-f0-9]{64}$/.test(source.sourceBinaryDigest||'')))) && (grounding.coverageDecision.answerCompositionEligible === true || grounding.coverageDecision.shortSupportedAnswerEligible === true);
   if (acceptedSourceNativeUnit && sourceNativeAnswer?.generativeModelUsed === false && sourceNativeAnswer.text) {
     projection.answer = {...projection.answer, content: {...projection.answer.content, directAnswer: sourceNativeAnswer.text}, generation: {...projection.answer.generation, sourceNativeExtractiveUnitConsumed: true}};
     projection.governance = {...projection.governance, upstreamGroundedAnswerConsumed: true};
@@ -429,7 +430,7 @@ export async function runAskPhiosPipeline({ input, request, env = {}, depth = DE
     grounding: {
       answerAssessment: grounding.retrieval?.answerAssessment || null,
       manuscriptScope: retrievalOptions.source === 'manuscript' || env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' || env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true',
-      sourceEvidence: (grounding.retrieval?.answerGrounding?.sources || grounding.groundingBundle.sources || []).filter(s=>s.sourceType==='COMPLETED_MANUSCRIPT').map(s=>({sectionCode:s.sectionCode,heading:s.heading||null,bookCode:s.bookCode,sourceVersion:s.sourceVersion,sourceSha256:s.sourceBinaryDigest,sourceAcceptanceSha256:s.sourceAcceptanceDigest,pageRange:s.pageRange,supportRange:s.supportRange||null})),
+      sourceEvidence: (grounding.retrieval?.answerGrounding?.sources || grounding.groundingBundle.sources || []).filter(s=>s.sourceType==='COMPLETED_MANUSCRIPT'||s.projectionKind==='ACCEPTED_KNOWLEDGE_UNIT_NOT_NATIVE_PDF_EXCERPT').map(s=>({sectionCode:s.sectionCode,heading:s.heading||null,bookCode:s.bookCode,sourceVersion:s.sourceVersion,sourceSha256:s.sourceBinaryDigest,sourceAcceptanceSha256:s.sourceAcceptanceDigest,pageRange:s.pageRange,supportRange:s.supportRange||null,projectionKind:s.projectionKind||null})),
       bundleId: grounding.groundingBundle.bundleId,
       retrievalAuthority: grounding.retrieval?.authority || 'KSAR_KNOWLEDGE_ACCESS',
       sourceCount: grounding.groundingBundle.sources.length,

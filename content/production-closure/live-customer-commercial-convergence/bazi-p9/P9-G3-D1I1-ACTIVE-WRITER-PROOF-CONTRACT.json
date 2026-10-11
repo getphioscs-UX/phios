@@ -1,0 +1,31 @@
+{
+  "status": "PREPARED_NOT_DEPLOYED",
+  "productionIsolation": "NOT_YET_DEPLOYED",
+  "conditions": [
+    {
+      "id": "PAGES_MODE",
+      "require": "Server-side PHIOS_D1_MAINTENANCE_MODE is READ_ONLY on every active same-D1 Pages execution surface.",
+      "current": "NOT_ENABLED_BY_THIS_TASK"
+    },
+    {
+      "id": "ROOT_COVERAGE",
+      "require": "Accepted successor source with root middleware covers every active request, including custom domain, canonical URL and historical deployment aliases.",
+      "current": "LOCAL_COMPILED_PASS_ONLY"
+    },
+    {
+      "id": "BINDING_GUARD",
+      "require": "RUNTIME_DB is guard-owned before nested handlers; actual deployed GET-write and mutation probes fail closed without durable writes.",
+      "current": "LOCAL_PASS_ONLY"
+    },
+    {
+      "id": "EXTERNAL_WRITERS",
+      "require": "Fresh metadata proves no non-Pages same-D1 active writer, or each is independently isolated.",
+      "current": "READ_ONLY_METADATA_ZERO",
+      "evidence": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-EXTERNAL-WRITERS.json"
+    }
+  ],
+  "passRule": "All four conditions must be proven for the same maintenance interval. Unknown or inaccessible active alias = do not migrate.",
+  "historicalPagesAliasRequirement": "Inventory and independently block every old same-D1 deployment URL or prove it cannot write; switching only the canonical Pages URL is insufficient. Any production operation requires separate authorization.",
+  "migrationChannel": "Canonical Wrangler D1 migration tooling only; no HTTP bypass or app migration endpoint.",
+  "productionChangesApplied": false
+}

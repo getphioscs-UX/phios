@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "P9-G3-D1I1",
+  "status": "PASS_LOCAL_ISOLATION_READY",
+  "at": "2026-10-11T15:39:56.212Z",
+  "classification": "P9_REQUIRED_MIGRATION_SAFETY_SUCCESSOR",
+  "writerInventory": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-WRITER-INVENTORY.json",
+    "owners": 41,
+    "writeSites": 163,
+    "entrypoints": 125,
+    "unknownWriters": 0,
+    "classes": [
+      "ACCOUNT_PERSON_MATERIAL_FOLLOWUP",
+      "AUTHENTICATION_SESSION",
+      "COMMERCE_WEBHOOK_SUBSCRIPTION",
+      "CONTINUITY",
+      "GENERATION_STATE_LOCK",
+      "HEALTH_REALITY",
+      "NARRATIVE_REVIEW_CACHE",
+      "P8_PAID_REPORT_CORE",
+      "PROFESSIONAL_APPOINTMENT",
+      "PROVIDER_COST_LEDGER",
+      "QA_REVIEW_ADMISSION",
+      "REGISTRY_INTERNAL_TOOLING",
+      "REPORT_CONTEXT_ADMISSION",
+      "REPORT_DELIVERY",
+      "RUNTIME_STATE",
+      "SYMBOLIC_METHOD"
+    ],
+    "scope": "Exact accepted R1 Functions source. Conservative module import closure including nested API middleware; routes may overapproximate conditional/dead writes. Inventory counts storage-owner modules, not exclusive route counts."
+  },
+  "rootMiddleware": "functions/_middleware.js",
+  "guardOwner": "functions/_lib/d1-maintenance-guard.js",
+  "nestedApiMiddlewareByteUnchanged": true,
+  "maintenanceVariable": "PHIOS_D1_MAINTENANCE_MODE",
+  "allowedSqlClasses": [
+    "Conservative single SELECT, supported read-only functions; balanced literals/identifiers; no comments, non-ASCII, CTE or semicolons."
+  ],
+  "deniedSqlClasses": [
+    "All non-SELECT",
+    "Unproven functions",
+    "Comments/encoding tricks",
+    "WITH/CTE",
+    "Multi-statement",
+    "All PRAGMA",
+    "Transaction control",
+    "exec",
+    "batch",
+    "SELECT.run",
+    "withSession",
+    "dump"
+  ],
+  "httpMethodDefense": [
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE"
+  ],
+  "customerResponse": {
+    "status": 503,
+    "json": {
+      "ok": false,
+      "status": "temporarily_unavailable"
+    },
+    "cacheControl": "no-store"
+  },
+  "swallowedGuardErrorResponse": "503; monotonic violation count cannot be cleared by handlers.",
+  "sqlBypassTests": {
+    "rejected": 34,
+    "allowed": 5
+  },
+  "localChecks": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-LOCAL-TESTS.json",
+    "passed": 244
+  },
+  "authTests": "Real local signed OIDC callback rejects before user/session durable writes; all OIDC responses are in-memory mocks, no network.",
+  "accountTests": "Real save/update/revoke reach guard; no version added in READ_ONLY.",
+  "commerceTests": "Real create/bind/attach/webhook/fulfill/entitlement/subscription reach prepare barrier; OFF synthetic fulfillment unchanged; zero Stripe requests.",
+  "p8Tests": {
+    "blocked": [
+      "readiness",
+      "job",
+      "incident",
+      "lease claim",
+      "refund state",
+      "unclaim",
+      "resolve incident",
+      "generation lock/state callback",
+      "followup grant"
+    ],
+    "normalRegression": {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-P8-NORMAL-REGRESSION.json",
+      "passed": 11
+    }
+  },
+  "getWriteTrap": "PASS_LOCAL",
+  "indirectWriterTest": "PASS_LOCAL",
+  "normalModeRegression": {
+    "auth": "PASS_LOCAL",
+    "account": "PASS_LOCAL",
+    "commerce": "PASS_LOCAL",
+    "p8": "PASS_LOCAL",
+    "bazi": "PASS_LOCAL_REAL_ACCOUNT_REOPEN",
+    "originalBindingIdentity": "UNCHANGED_IN_OFF_OR_ABSENT"
+  },
+  "externalProductionWritersAudit": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-EXTERNAL-WRITERS.json",
+    "status": "PASS_READ_ONLY_DEPLOYED_METADATA",
+    "sameD1Writers": 0,
+    "activeWorkerVersions": 2
+  },
+  "functionsCompile": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-FUNCTIONS-COMPILE.json",
+    "exitCode": 0,
+    "compiledDispatcherChecks": 138
+  },
+  "historicalUnreachableImports": {
+    "status": "BASELINE_UNREACHABLE_IMPORT_GAPS_PRESERVED",
+    "count": 12,
+    "entries": [
+      {
+        "source": "functions/personal-reality-product/adapters/product-assembly.js",
+        "reference": "../ast-full-production/ast-customer-reading-production.js"
+      },
+      {
+        "source": "functions/personal-reality-product/adapters/product-assembly.js",
+        "reference": "../customer-projection/method-customer-reading-v2.js"
+      },
+      {
+        "source": "functions/personal-reality-product/adapters/product-assembly.js",
+        "reference": "./adapter-registry.js"
+      },
+      {
+        "source": "functions/personal-reality-product/adapters/product-assembly.js",
+        "reference": "./product-router.js"
+      },
+      {
+        "source": "functions/personal-reality-product/adapters/product-assembly.js",
+        "reference": "../ecr-phi-card/ecr-card-reading.js"
+      },
+      {
+        "source": "functions/personal-reality-product/adapters/product-assembly.js",
+        "reference": "../ecr-phi-card/ecr-card-runtime-authority.js"
+      },
+      {
+        "source": "functions/personal-reality-product/adapters/product-assembly.js",
+        "reference": "../ecr-full-report/ecr-customer-full-report.js"
+      },
+      {
+        "source": "functions/personal-reality-product/adapters/product-assembly.js",
+        "reference": "../embodied-configuration/ecr-customer-mandala-projection.js"
+      },
+      {
+        "source": "functions/personal-reality-product/adapters/product-assembly.js",
+        "reference": "../embodied-configuration/ecr-topic-projection-runtime.js"
+      },
+      {
+        "source": "functions/personal-reality-product/adapters/product-assembly.js",
+        "reference": "../customer-projection/numerology-customer-reading-envelope-v1.js"
+      },
+      {
+        "source": "functions/personal-reality-product/ast-production-adapter.js",
+        "reference": "../../ast-full-production/ast-r2-production-admission-authority.js"
+      },
+      {
+        "source": "functions/personal-reality-product/ast-production-adapter.js",
+        "reference": "../../ast-full-production/ast-customer-product-projection-v3.js"
+      }
+    ],
+    "impact": "No exported current Pages entrypoint reaches these modules; whole Functions compilation passes. No historical source changed."
+  },
+  "initialQaFailures": [
+    {
+      "stage": "Snapshot closure",
+      "cause": "Missing unreferenced historical module imports; classified by reachability without changing accepted source."
+    },
+    {
+      "stage": "Node QA",
+      "cause": "Pages JSON imports need QA-only JSON loader."
+    },
+    {
+      "stage": "QA fixture",
+      "cause": "Commerce missing stored price binding; fixture repaired with accepted registry price. Guard failure counter prevents false-positive 503 PASS."
+    },
+    {
+      "stage": "QA fixture",
+      "cause": "P8 missing FK readiness/purchase; seeded through real local owners."
+    },
+    {
+      "stage": "QA assertions",
+      "cause": "Compiled source comment path is relative; exact installed root route now checked."
+    }
+  ],
+  "productionChangesApplied": false,
+  "productionIsolation": "NOT_YET_DEPLOYED",
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "oldRcDigest": "2b27af1643b34c86a885ae3c79a744e88374f7828bbdcf1215f6072fb8a7dc26",
+  "newRcDigest": "7b52601b606db94164f112d35eddb2c226b9a09e8ea111328396e3659bd5fe08",
+  "parentRcBytesUnchanged": true,
+  "remainingBlocker": "R2_HUMAN_ACCEPT_THEN_SEPARATE_COMMIT_PUSH_DEPLOY_AUTHORIZATION",
+  "futureMigrationBlocker": "All active same-D1 Pages surfaces and historical aliases must satisfy the deployed four-condition proof before migration. Fresh backup/bookmark and existing D1M1 preconditions still required.",
+  "commit": "NOT_AUTHORIZED",
+  "push": "NOT_AUTHORIZED",
+  "deploy": "NOT_AUTHORIZED"
+}

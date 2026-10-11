@@ -8,6 +8,7 @@ import {
 } from '../knowledge-runtime/manuscript-source-runtime.js';
 import {retrieveAtlasScope} from './atlas-retrieval-scope.js';
 import {manuscriptMetadataRaw} from '../knowledge-runtime/current-manuscript-server-metadata.js';
+import {isBookViiManuscriptRequest} from './knowledge-epistemic-reading.js';
 
 const MODES = new Set(['auto', 'overview', 'focused', 'full_article', 'continuity']);
 const SOURCES = new Set(['auto', 'hybrid', 'published', 'manuscript']);
@@ -63,9 +64,12 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-editorial-correction-v1.json'),
     readAssetJson(env, 'content/knowledge/knowledge-intelligence-r2/semantic-profiles/successors/book4-a6/kir-r2-book-i-iv-semantic-retrieval-profiles-v2.json')
   ]);
+  const identityQa=env.PHIOS_ENVIRONMENT==='qa'&&env.PHIOS_MANUSCRIPT_DERIVATIVE_QA==='true';
   const sources = registry.records
-    .filter(source => source.locale === locale && (source.runtimeAdmission === 'SCOPED_TEXT_CANDIDATE_NOT_ACTIVATED' ? env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' || env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true' : source.runtimeAdmission !== 'NOT_ADMITTED' || (env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' && source.sourceAcceptancePath && source.version?.startsWith('owner-final-20261011-'))) && (!bookCode || source.bookCode === bookCode))
+    .filter(source => source.locale === locale && (source.runtimeAdmission === 'SCOPED_TEXT_CANDIDATE_NOT_ACTIVATED' ? env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' || env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true' : source.runtimeAdmission !== 'NOT_ADMITTED' || (identityQa&&source.qaOnly===true&&source.sourceIdentityPath) || (env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' && source.sourceAcceptancePath && source.version?.startsWith('owner-final-20261011-'))) && (!bookCode || source.bookCode === bookCode))
     .map(source => {
+      if(identityQa&&source.qaOnly===true&&source.sourceIdentityPath)return source;
+      if(env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED==='true'&&source.scopeAdmissionPath&&source.sourceIdentityPath)return source;
       if (source.runtimeAdmission === 'ADMITTED_READABILITY_SOURCE_PENDING_REMOTE_OBJECT') return source;
       if (env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' && source.sourceAcceptancePath) return source;
       if (env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true' && source.scopeAdmissionPath && source.sourceAcceptancePath) return source;
@@ -85,6 +89,13 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
   if (!env?.MANUSCRIPTS?.get) return { status: 'storage_unavailable', records: [], errors: ['MANUSCRIPT_SOURCE_STORAGE_UNAVAILABLE'] };
 
   const settled = await Promise.allSettled(sources.map(async source => {
+    if(source.sourceIdentityPath){
+      if(source.qaOnly===true&&!identityQa)throw Error('QA_SOURCE_FORBIDDEN_IN_PRODUCTION');
+      const provenance=await readAssetJson(env,source.sourceIdentityPath);
+      const raw=manuscriptMetadataRaw[source.sourceIdentityPath]||JSON.stringify(provenance);
+      const digest=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(raw)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+      if(digest!==source.sourceIdentitySha256||(provenance.sourcePdfSha256||provenance.sha256)!==source.sourceSha256)throw Error('MANUSCRIPT_SOURCE_IDENTITY_MISMATCH');
+    }
     if (source.sourceAcceptancePath) {
       const result = Object.hasOwn(manuscriptMetadataRaw,source.sourceAcceptancePath) ? new Response(manuscriptMetadataRaw[source.sourceAcceptancePath]) : await env.ASSETS.fetch(new Request(`https://assets.local/${source.sourceAcceptancePath}`));
       if (!result.ok) throw new Error('MANUSCRIPT_SOURCE_ACCEPTANCE_UNAVAILABLE');
@@ -121,11 +132,14 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
       const normalizedQuery=String(query).normalize('NFKC').replace(/\s+/g,'');
       const namedSubjects=corpus.records.filter(record=>{
         const label=String(record.heading||'').normalize('NFKC').split(/[|｜]/u)[0].replace(/^[✦◈◆◇❖]+/u,'').replace(/^什么是/,'').replace(/\s+/g,'');
+        const chinesePrimaryLabel=label.match(/^[\u3400-\u9fff]{2,}/u)?.[0];
         const definitions=[...String(record.text||'').normalize('NFKC').replace(/\s+/gu,'').matchAll(/(?:所谓|这就是|这便是|被称为)([\u3400-\u9fff]{3,12}?)(?:[，,。.:：]|并不是|不是|是)/gu)].map(m=>m[1]);
-        return (label.length>=2&&normalizedQuery.includes(label))||definitions.some(name=>normalizedQuery.includes(name));
+        return (label.length>=2&&normalizedQuery.includes(label))||(chinesePrimaryLabel&&normalizedQuery.includes(chinesePrimaryLabel))||definitions.some(name=>normalizedQuery.includes(name));
       });
-      if(namedSubjects.length&&!namedSubjects.some(record=>permitted.some(s=>s.sectionCode===record.sectionCode)))return [];
-      corpus={...corpus,records:corpus.records.flatMap(record=>{const s=permitted.find(r=>r.sectionCode===record.sectionCode&&r.sectionSha256===record.textSha256);return s?[{...record,text:record.text.slice(s.startOffset,s.endOffset),startPage:s.pdfPageRange?.start||record.startPage,endPage:s.pdfPageRange?.end||record.endPage,answerProjectionPolicy:s.answerProjectionPolicy||null,causalExplanationAvailable:s.causalExplanationAvailable,supportRange:{startOffset:s.startOffset,endOffset:s.endOffset,sectionSha256:s.sectionSha256},admissionScope:'SERVER_VERIFIED_TEXT_SCOPE_CANDIDATE'}]:[];})};
+      const conceptQuery=normalizedQuery.replace(/垮台|倒台/gu,'终结');
+      const declaredConceptCovered=permitted.some(s=>s.wholeChapterCandidate===true&&(s.retrievalConcepts||[]).some(concept=>concept.aliases?.some(alias=>conceptQuery.includes(alias))||concept.termSets?.some(set=>set.every(term=>conceptQuery.includes(term)))));
+      if(namedSubjects.length&&!declaredConceptCovered&&!namedSubjects.some(record=>permitted.some(s=>s.sectionCode===record.sectionCode)))return [];
+      corpus={...corpus,records:corpus.records.flatMap(record=>{const s=permitted.find(r=>r.sectionCode===record.sectionCode&&r.sectionSha256===record.textSha256);if(!s)return[];for(const concept of s.retrievalConcepts||[])if(!record.text.normalize('NFKC').replace(/\s+/gu,'').includes(concept.supportAnchor.normalize('NFKC').replace(/\s+/gu,'')))throw Error('MANUSCRIPT_CONCEPT_SOURCE_SUPPORT_MISMATCH');for(const unit of s.argumentUnits||[])if(unit.startOffset<0||unit.endOffset>record.text.length||unit.endOffset<=unit.startOffset)throw Error('MANUSCRIPT_ARGUMENT_RANGE_INVALID');return[{...record,text:record.text.slice(s.startOffset,s.endOffset),startPage:s.pdfPageRange?.start||record.startPage,endPage:s.pdfPageRange?.end||record.endPage,retrievalConcepts:s.retrievalConcepts||[],argumentUnits:s.argumentUnits||[],answerProjectionPolicy:s.answerProjectionPolicy||null,causalExplanationAvailable:s.causalExplanationAvailable,supportRange:{startOffset:s.startOffset,endOffset:s.endOffset,sectionSha256:s.sectionSha256},admissionScope:'SERVER_VERIFIED_TEXT_SCOPE_CANDIDATE'}];})};
     }
     return searchManuscriptCorpus({ corpus, source, bindings, corrections, query, profiles: semanticProfiles.profiles });
   }));
@@ -168,9 +182,16 @@ function groundingFrom(published, manuscript) {
       sourceVersion: record.sourceVersion,
       sourceBinaryDigest: record.sourceBinaryDigest,
       sourceAcceptanceDigest: record.sourceAcceptanceDigest,
+      sourceScopeAdmissionDigest: record.sourceScopeAdmissionDigest || null,
+      wholeChapterQualified:record.wholeChapterQualified===true,
+      sourceConceptAliases:record.sourceConceptAliases||[],
+      selectedArgumentUnit:record.selectedArgumentUnit||null,
+      scopeMatch:record.scopeMatch===true&&Boolean(record.sourceScopeAdmissionDigest),
       supportRange: record.supportRange || null,
       answerProjectionPolicy:record.answerProjectionPolicy||null,
       causalExplanationAvailable:record.causalExplanationAvailable,
+      projectionKind:record.projectionKind||null,
+      ...(record.approvedPublicProjection||{}),
       excerptBoundaryState: record.excerptBoundaryState,
       heading: record.heading,
       text: record.excerpt
@@ -233,6 +254,7 @@ export function deterministicGroundedAnswer(query, grounding, locale) {
     );
     let position = 0;
     let prose=source.text;
+    if(source.selectedArgumentUnit&&source.sourceScopeAdmissionDigest){return{present:true,projectionType:'DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER',generativeModelUsed:false,locale,text:splitSentences(prose).join(locale==='zh-Hans'?'\n\n':' '),sourceReferences:[sourceId],argumentUnit:source.selectedArgumentUnit,authorityNotice:'Exact chapter argument span from server-verified scope; source qualifiers retained. No generated answer or full-chapter publication.'};}
     if (!source.supportRange || source.bookCode === 'BOOK-3') prose = manuscriptAnswerProse(prose, source.heading);
     if (!source.supportRange && source.excerptBoundaryState === 'COMPLETE_SENTENCES_WITH_OMISSION_MARKERS') prose = String(prose).replace(/^…/u,'').replace(/…$/u,'');
     if(source.supportRange){const normalized=String(prose).replace(/([\u3400-\u9fff])\s+(?=[\u3400-\u9fff])/g,'$1').normalize('NFKC');const title=String(source.heading||'').normalize('NFKC');prose=normalized.startsWith('✦'+title)?normalized.slice(title.length+1):normalized;}
@@ -250,7 +272,9 @@ export function deterministicGroundedAnswer(query, grounding, locale) {
           const namedSubject=String(query).match(/第[一二三四五六七八九十\d]+册/u)?.[0];
           const literalSubject=String(query).match(/^(?:既然|虽然|即使)?([\u3400-\u9fff]{1,8}?)(?:还在|仍然|正在|依然)/u)?.[1];
           const condition=String(query).match(/^(.{2,20}?)(?:是不是|是否|就代表|就意味着)/u)?.[1]?.slice(-2);
-          const score=informativeTerms.reduce((sum,term)=>sum+(normalized.includes(term)?term.length:0),0)+(namedSubject&&normalized.includes(namedSubject)?20:0)+(literalSubject&&normalized.includes(literalSubject)?20:0)+(condition&&normalized.includes(condition)?12:0)+(terms.includes('出售')&&normalized.includes('出售')?15:0);
+          let score=informativeTerms.reduce((sum,term)=>sum+(normalized.includes(term)?term.length:0),0)+(namedSubject&&normalized.includes(namedSubject)?20:0)+(literalSubject&&normalized.includes(literalSubject)?20:0)+(condition&&normalized.includes(condition)?12:0)+(terms.includes('出售')&&normalized.includes('出售')?15:0);
+          if(score>0&&/哪些|包括|层次|几种/u.test(query)&&/至少|可以是|包括|分别|分为/u.test(normalized))score+=12;
+          if(!/如果|假如|假设/u.test(query)&&/^如果.*如果/u.test(normalized))score-=18;
           if(score>bestScore){bestScore=score;answerStart=index;}
         });
       }
@@ -312,6 +336,7 @@ export async function handleKnowledgeAccessRequest(request, env = {}, options = 
   const sourceMode = url.searchParams.get('source') || 'hybrid';
   const bookCode = url.searchParams.get('bookCode') || null;
   if (bookCode && !/^BOOK-[1-7]$/.test(bookCode)) return response({ ok: false, error: { code: 'BOOK_SCOPE_INVALID' } }, 400);
+  if(bookCode==='BOOK-7'&&isBookViiManuscriptRequest('第七册 '+query))return response({ok:true,providerCalls:0,providerCostUSD:0,manuscript:{status:'protected_full_manuscript',records:[],errors:[]},groundedAnswer:null,answerGrounding:{allowed:false,sources:[]},answerBoundary:{state:'PROTECTED_SOURCE_REQUEST',rawFullBookAvailable:false}});
   if (!query || query.length > MAX_QUERY_LENGTH) return response({ ok: false, error: { code: 'QUERY_INVALID' } }, 400);
   if (!LOCALES.has(locale)) return response({ ok: false, error: { code: 'LOCALE_UNSUPPORTED' } }, 400);
   if (!MODES.has(mode)) return response({ ok: false, error: { code: 'MODE_UNSUPPORTED' } }, 400);
@@ -351,8 +376,11 @@ export async function handleKnowledgeAccessRequest(request, env = {}, options = 
   // A comparison is not ambiguous merely because it asks for a distinction.
   // Only admit one when the retrieved prose itself states a contrast.
   const compared = query.match(/^(.+?)与(.+?)(?:有什么区别|有何区别|的区别|区别|之间)/) || query.match(/^(.+?)和(.+?)(?:有什么区别|有何区别|的区别|区别|之间)/);
-  const comparisonTerms = compared ? [compared[1],compared[2]].map(x=>x.replace(/^(?:请问|普通|一般)/,'').trim()) : [];
-  const comparisonSupported = requiresComparativeUnit && comparisonTerms.length===2 && answerGrounding.sources.some(s=>{const prose=String(s.text||'').replace(/([\u3400-\u9fff])\s+(?=[\u3400-\u9fff])/g,'$1');return comparisonTerms.includes(String(s.heading||'').split(/[|｜]/)[0].trim().replace(/^什么是/,'')) && comparisonTerms.every(term=>prose.includes(term)) && /区别|差异|不同|并不是|不是.*而是|前者|后者/.test(prose);});
+  const comparisonTerms = compared ? [compared[1],compared[2]].map(x=>x.replace(/^(?:请问|普通|一般|第[一二三四五六七八九十\d]+册(?:中|里|的)?)/,'').replace(/的$/u,'').trim()) : [];
+  // A contrast may be explicitly stated in the chapter body. Require both
+  // subjects and the distinguishing predicate in the same bounded passage;
+  // a title match or two scattered mentions are not a comparison authority.
+  const comparisonSupported = requiresComparativeUnit && comparisonTerms.length===2 && answerGrounding.sources.some(s=>{const prose=String(s.text||'').replace(/([\u3400-\u9fff])\s+(?=[\u3400-\u9fff])/g,'$1');for(let i=0;i<prose.length;i+=100){const passage=prose.slice(i,i+500);if(comparisonTerms.every(term=>passage.includes(term))&&/区别|差异|不同|并不是|不是.*而是|前者|后者|更宽|更深/.test(passage))return true;}return false;});
   const answerSources=bookCode&&sourceMode==='manuscript'?{...answerGrounding,sources:answerGrounding.sources.slice(0,1)}:answerGrounding;
   const groundedAnswer = (requiresComparativeUnit && !comparisonSupported) || unsupportedPrediction || ambiguous ? null : deterministicGroundedAnswer(query, answerSources, locale);
   answerGrounding.generatedAnswerPresent = Boolean(groundedAnswer);

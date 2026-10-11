@@ -1,3 +1,4 @@
+import {externalRealityQuestionNeed} from '../external-reality-impact/external-reality-impact-runtime.js';
 const clean = value => String(value ?? '').normalize('NFKC').trim().replace(/\s+/g, ' ');
 const optional = value => clean(value) || null;
 const unique = values => [...new Set((Array.isArray(values) ? values : []).map(clean).filter(Boolean))];
@@ -70,7 +71,7 @@ export function composeCkaContextualRetrievalQuestion(question, knowledgeContext
   return currentQuestion;
 }
 
-const currentAuthorityPattern = /(?:\b(?:today|current|currently|latest|now|live|price|rate|law|regulation|market|election|product availability)\b|今天|目前|现在|最新|即时|价格|利率|法律|法规|市场|选举|产品现况)/i;
+const currentAuthorityPattern = /(?:\b(?:price|rate|law|regulation|market|election|product availability)\b|价格|利率|法律|法规|市场|选举|产品现况)/i;
 const unstableDomainPattern = /(?:\b(?:medical|medicine|legal|financial|tax|regulatory|current affairs|product specification)\b|医疗|医学|法律|财务|金融|税务|监管|时事|产品规格)/i;
 const professionalJudgmentPattern = /(?:\b(?:diagnose|prescribe|legal advice|investment advice|should i (?:buy|sell)|medical emergency)\b|诊断|处方|法律意见|投资建议|我该(?:买|卖)|医疗急症)/i;
 const persistencePattern = /(?:\b(?:for years|for months|long[- ]?term|persistent|recurring|keeps happening|still unresolved)\b|多年|几个月|长期|持续|反复|一直没有解决)/i;
@@ -135,7 +136,8 @@ function sourceAuthorityClass(source = {}) {
 
 export function evaluateCkaExternalAuthority(question, payload = {}) {
   const text = clean(question);
-  const required = currentAuthorityPattern.test(text) || unstableDomainPattern.test(text);
+  // A temporal word in a conceptual question is not a request for a live fact.
+  const required = currentAuthorityPattern.test(text) || unstableDomainPattern.test(text) || externalRealityQuestionNeed(text);
   const professionalJudgmentRequested = professionalJudgmentPattern.test(text);
   const authoritySources = (Array.isArray(payload.sources) ? payload.sources : [])
     .filter(source => sourceAuthorityClass(source) === 'GOVERNED_EXTERNAL_AUTHORITY');

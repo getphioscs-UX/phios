@@ -1,0 +1,10 @@
+import{build}from'esbuild';import assert from'node:assert/strict';import fs from'node:fs';
+let browserCalls=0,providerCalls=0;globalThis.fetch=()=>{providerCalls++;throw Error('NETWORK_FORBIDDEN');};
+const result=await build({entryPoints:['workers/method-report-renderer/production.js'],bundle:true,format:'esm',platform:'node',write:false,plugins:[{name:'browser-forbidden',setup(b){b.onResolve({filter:/^@cloudflare\/puppeteer$/},()=>({path:'browser',namespace:'forbidden'}));b.onLoad({filter:/.*/,namespace:'forbidden'},()=>({contents:'export default {launch(){throw Error("BROWSER_FORBIDDEN")}}',loader:'js'}));}}]});
+const worker=(await import('data:text/javascript;base64,'+Buffer.from(result.outputFiles[0].text).toString('base64'))).default;
+const env={PHIOS_ENVIRONMENT:'production',PHIOS_P9_RENDERER_ENABLED:'false',BROWSER:{fetch(){browserCalls++;throw Error('BROWSER_FORBIDDEN');}}};
+const {onRequestGet}=await import('../functions/api/renderer-health.js');
+const response=await onRequestGet({env:{METHOD_REPORT_RENDERER:{fetch:request=>worker.fetch(request,env)}}});assert.equal(response.status,200);const health=await response.json();assert.equal(health.health.rendererEnabled,false);
+assert.equal((await worker.fetch(new Request('https://internal/verify',{method:'POST',body:'{}'}),env)).status,404);
+assert.equal((await onRequestGet({env:{}})).status,503);assert.equal(browserCalls,0);assert.equal(providerCalls,0);
+const proof={at:new Date().toISOString(),state:'PASS_LOCAL',health,disabledVerify:'DENIED',missingBinding:'503',browserCalls,providerCalls,realPayments:0,realRefunds:0};fs.writeFileSync('content/production-closure/live-customer-commercial-convergence/bazi-p9/RENDERER-HEALTH-LOCAL-QA.json',JSON.stringify(proof,null,2)+'\n');console.log(JSON.stringify(proof));

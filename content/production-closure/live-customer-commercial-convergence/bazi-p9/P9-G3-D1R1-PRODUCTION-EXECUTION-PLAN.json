@@ -1,0 +1,69 @@
+{
+  "status": "DRAFT_NOT_AUTHORIZED",
+  "acceptedCommit": "f1674d5a016881c58565677a19c4a372cae7b319",
+  "acceptedRcDigest": "2b27af1643b34c86a885ae3c79a744e88374f7828bbdcf1215f6072fb8a7dc26",
+  "databaseId": "073639fa-01e4-4868-af10-6ed032637dab",
+  "backupPlan": {
+    "status": "PREPARED_NOT_EXECUTED",
+    "requiredBeforeExecution": [
+      "Verified Time Travel bookmark and timestamp",
+      "Encrypted restricted offline export with checksum",
+      "Current schema fingerprint and all old table counts/digests",
+      "Restore rehearsal and explicit restore authority"
+    ],
+    "commands": [
+      "wrangler d1 time-travel info phios-runtime-production --json",
+      "wrangler d1 export phios-runtime-production --remote --output <private-backup.sql>",
+      "wrangler d1 time-travel restore phios-runtime-production --bookmark <verified-bookmark>"
+    ],
+    "restorePolicy": "Future separately authorized restore only; never down-migrate. Rehearsal never exported production data.",
+    "localSyntheticBackupRestoreProof": {
+      "status": "PASS_LOCAL",
+      "backupSHA256": "0bc2b058afb2b64a82fe3bce8d6729b1bea03abea8f9ae7022ab130225fc82ef",
+      "restoredSHA256": "0bc2b058afb2b64a82fe3bce8d6729b1bea03abea8f9ae7022ab130225fc82ef",
+      "countsAndContentDigestsMatch": true,
+      "productionRestoreTested": false
+    },
+    "passCondition": "Before execution, record verified current Time Travel bookmark plus backup checksum, prove restore access, and capture old table digests privately. Restore command is a future recovery plan, not authorized now."
+  },
+  "maintenancePlan": {
+    "status": "PLAN_REQUIRES_ENFORCED_WRITE_QUIESCENCE_BEFORE_EXECUTION",
+    "required": "Block every production D1 writer including account/auth, Commerce webhooks, report/generation APIs and schedulers; checkout/provider flags alone are insufficient.",
+    "sequence": [
+      "Acquire enforced maintenance/write exclusion; freeze other production deploys",
+      "Keep provider/payment/general sale closed",
+      "Capture and verify backup/bookmark",
+      "Reconfirm exact 0002 schema and existing row counts/digests",
+      "Sequentially apply 0003–0018 via Wrangler; stop on first failure",
+      "Verify ledger/schema/old data/FK/integrity",
+      "Verify read-only health; only then separately resume G3"
+    ],
+    "enforcement": "Must be implemented/verified before production authorization; not implemented under rehearsal.",
+    "passCondition": "Before future execution, demonstrate all D1 write entry points are blocked, including GET handlers, verified webhook routes, active/old deployment URLs and scheduled/internal consumers; obtain explicit maintenance mutation authorization. Absence of traffic is not evidence."
+  },
+  "rollbackPlan": {
+    "mechanism": "Verified D1 Time Travel restore / restricted backup restore, previous application deployment if required",
+    "destructiveReverseSql": false
+  },
+  "historyBehavior": {
+    "d1_migrations": "Wrangler detects 0001/0002 by filename; records each 0003–0018 in migration execution SQL after successful SQL.",
+    "runtime_migration_history": "Custom repository runner-owned; remains empty under Wrangler. Never manually populate. Do not use custom runner against empty history to infer production pending sequence."
+  },
+  "commandTemplate": "node <immutable-release>/node_modules/wrangler/bin/wrangler.js d1 migrations apply RUNTIME_DB --remote --config <immutable-release>/wrangler.jsonc",
+  "preExecutionGuards": [
+    "Explicit new Human migration execution authorization",
+    "Exact accepted commit and frozen registry/files",
+    "Pending filenames exactly 0003–0018, no other files",
+    "Live schema still matches 0002 and counts/digests stable",
+    "Verified backup/bookmark/restore readiness",
+    "Proven exclusion of every production D1 writer"
+  ],
+  "postExecutionGuards": [
+    "Wrangler history records 0001–0018 once; custom runtime history unchanged",
+    "Exact REFERENCE_0018 schema parity",
+    "All original row counts/PK/content digests unchanged",
+    "FK and integrity clean",
+    "Read-only application health"
+  ],
+  "productionWrites": 0
+}

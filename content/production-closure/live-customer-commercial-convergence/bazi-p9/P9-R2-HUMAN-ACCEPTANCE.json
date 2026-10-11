@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "P9-R2-HUMAN-ACCEPTANCE",
+  "recordedAt": "2026-10-11T15:57:37.116Z",
+  "authority": "Direct Human ACCEPT in this conversation; acceptance does not authorize commit or production actions.",
+  "status": "HUMAN_ACCEPTED",
+  "acceptedStatus": "PASS_LOCAL_ISOLATION_READY",
+  "acceptedDigest": "7b52601b606db94164f112d35eddb2c226b9a09e8ea111328396e3659bd5fe08",
+  "historicalR1Digest": "2b27af1643b34c86a885ae3c79a744e88374f7828bbdcf1215f6072fb8a7dc26",
+  "frozenR2Receipt": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-RELEASE-CANDIDATE-R2.json",
+    "SHA256": "7c483500cd65f9dee424832ecb4946ef5bd33b6e9250b67d62c460d92be3a59a"
+  },
+  "basis": {
+    "writerOwners": 41,
+    "sqlWriteLocations": 163,
+    "classifiedEntrypoints": 125,
+    "unknownWriters": 0,
+    "nonPagesSameProductionD1Writers": 0,
+    "qualification": "Accepted existing active Worker version evidence; must be refreshed for future production proof."
+  },
+  "productionIsolation": "NOT_YET_DEPLOYED",
+  "productionD1WriteIsolation": "NOT_PROVEN",
+  "P9": "PREPARED_NOT_DEPLOYED",
+  "DEPLOYED": "NOT_DEPLOYED",
+  "LIVE_CUSTOMER": "RUNTIME_UNVERIFIED",
+  "authorizations": {
+    "commit": "NOT_AUTHORIZED",
+    "push": "NOT_AUTHORIZED",
+    "deploy": "NOT_AUTHORIZED",
+    "activateReadOnly": "NOT_AUTHORIZED",
+    "migrateProductionD1": "NOT_AUTHORIZED",
+    "provider": "NOT_AUTHORIZED",
+    "payments": "NOT_AUTHORIZED",
+    "refunds": "NOT_AUTHORIZED"
+  },
+  "futureProductionProofRequired": [
+    "Accepted R2 code actually serves production",
+    "Every reachable production Pages deployment/alias guarded by R2 or proven unable to write production D1",
+    "READ_ONLY on every production Pages execution surface reaching RUNTIME_DB",
+    "Root middleware executes for all relevant Pages Functions",
+    "RUNTIME_DB actually wrapped by accepted guard",
+    "Representative writes fail closed",
+    "GET-write trap equivalent fails closed without production mutation",
+    "Auth/Account/Commerce/P8 mutations fail closed",
+    "Refresh metadata proving zero unisolated non-Pages same-D1 writers",
+    "Checkout/provider/canary/general BZR sale remain closed"
+  ],
+  "postIsolationPassRequirements": [
+    "Capture NEW D1 Time Travel restore bookmark; do not automatically reuse prior bookmark",
+    "Re-read schema and require REFERENCE_0002 and migrations 0003–0018 absent",
+    "Execute D1M1 only under separate authorization"
+  ],
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "nextBlocker": "P9_G1_R2_COMMIT_NOT_AUTHORIZED"
+}

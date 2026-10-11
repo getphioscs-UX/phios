@@ -70,10 +70,17 @@
         "change": "PAGES_BUILD_OUTPUT_DIRECTORY_PUBLICATION_BOUNDARY",
         "predecessorWranglerSha256": "b12d3a3a34ec627aa867f1db788451dde8c9be4b860faefb4c2e359a71ddecc9",
         "wranglerSha256": "696145ed9d60af5a9cb8f388d6b2bc69639908692449f942b73114c24081e83f"
+      },
+      {
+        "commit": "d29bc63cdc9b30af6cf4b6425c820409b31c403f",
+        "change": "EXISTING_PRODUCTION_RENDERER_BINDING_AND_FAIL_CLOSED_P9_PREPARATION_FLAGS",
+        "predecessorWranglerSha256": "696145ed9d60af5a9cb8f388d6b2bc69639908692449f942b73114c24081e83f",
+        "wranglerSha256": "a1cc8849a23a5eb3260a940850c7cb13bd91b5dea2f9c83b67ef3b5b06207188",
+        "productionActivationVerified": false
       }
     ],
     "reason": "knowledge-runtime authorized the private manuscript R2 binding, Cloudflare Node compatibility gate, and isolated QA preview commerce sandbox configuration without changing M3C-W3 entry presentation artifacts. The 2026-09-22 owner request authorizes exact private report bucket bindings, actual Pages project name reconciliation, and explicit manuscript retrieval disablement in isolated Preview.",
-    "wranglerSha256": "696145ed9d60af5a9cb8f388d6b2bc69639908692449f942b73114c24081e83f",
+    "wranglerSha256": "a1cc8849a23a5eb3260a940850c7cb13bd91b5dea2f9c83b67ef3b5b06207188",
     "currentAuthorization": {
       "basis": "EXISTING_OWNER_COMMIT_PAGES_DEPLOYMENT_REPAIR",
       "commit": "25226cd27f50c4b7197bd5a6f0371d56202861bf",
@@ -114,6 +121,26 @@
       "predecessorOutputDirectory": ".",
       "successorOutputDirectory": ".pages-output",
       "sourceBoundaryScript": "scripts/build-cloudflare-pages.mjs"
+    },
+    "productionRendererPreparation": {
+      "commit": "d29bc63cdc9b30af6cf4b6425c820409b31c403f",
+      "services": [
+        {
+          "binding": "METHOD_REPORT_RENDERER",
+          "service": "phios-method-report-renderer-production"
+        }
+      ],
+      "vars": {
+        "PHIOS_ENVIRONMENT": "production",
+        "STRIPE_ENVIRONMENT": "LIVE",
+        "PHIOS_SHARED_PAID_REPORT_ENABLED": "true",
+        "PHIOS_P9_CANARY_ENABLED": "false",
+        "PHIOS_P9_CHECKOUT_ENABLED": "false",
+        "PHIOS_P9_REFUND_ENABLED": "false",
+        "REPORT_PROVIDER_LIVE_ALLOWED": "false"
+      },
+      "previewChanged": false,
+      "productionActivationVerified": false
     }
   },
   "preserved": {
