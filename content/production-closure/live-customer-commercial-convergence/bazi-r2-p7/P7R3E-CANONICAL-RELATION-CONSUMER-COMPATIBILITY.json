@@ -1,0 +1,274 @@
+{
+  "status": "BLOCKED_EVIDENCE",
+  "diagramOwner": {
+    "beforeSha256": "700e29de1f9b5c06e577c16fe6facc6b5521c7574f617a8116625b5a07b96a5a",
+    "afterSha256": "e3bf19285c769d38446f82f563dc5fbce5c0b8928bdd56202702ddb74312694f"
+  },
+  "relationMatrix": {
+    "A": {
+      "status": "PASS",
+      "fixture": "SYNTHETIC_CONSUMER_CONTRACT_ONLY",
+      "edges": [
+        "day>hour"
+      ],
+      "label": "Stem combination",
+      "summary": "癸—戊 · 天干合",
+      "authorityUnchanged": true
+    },
+    "B": {
+      "status": "PASS",
+      "fixture": "SYNTHETIC_CONSUMER_CONTRACT_ONLY",
+      "edges": [
+        "month>day"
+      ],
+      "label": "Harm",
+      "summary": "子—卯 · 害",
+      "authorityUnchanged": true
+    },
+    "C": {
+      "status": "PASS",
+      "fixture": "SYNTHETIC_CONSUMER_CONTRACT_ONLY",
+      "edges": [
+        "month>hour"
+      ],
+      "label": "Self punishment",
+      "summary": "辰—辰 · 自刑",
+      "authorityUnchanged": true
+    },
+    "D": {
+      "status": "PASS",
+      "fixture": "SYNTHETIC_CONSUMER_CONTRACT_ONLY",
+      "edges": [
+        "hour>year"
+      ],
+      "label": "Clash",
+      "summary": "寅—申 · 冲",
+      "authorityUnchanged": true
+    },
+    "E": {
+      "status": "PASS",
+      "source": "EXISTING_GENG_LEGACY_AUTHORITY",
+      "graphs": "D05/D15 exact before/after"
+    },
+    "F": {
+      "status": "PASS",
+      "edges": [],
+      "summary": "—"
+    },
+    "G": {
+      "status": "PASS",
+      "expectedFailure": "BAZI_UNSUPPORTED_CANONICAL_RELATION_TYPE"
+    },
+    "H": {
+      "status": "PASS",
+      "expectedFailure": "BAZI_RELATION_POSITIONS_REQUIRED",
+      "legacyExceptionVerifiedBy": "E"
+    }
+  },
+  "gengBaselineV2": {
+    "BILINGUAL": {
+      "status": "PASS",
+      "pagesDigest": "d55794bf3de93f101d72c12806941d8579928faef714143eb4c8d3624dffa4a7",
+      "diagramsDigest": "6c65b4c94de6e466b7e8d454f05abb0b6c139214f3695b9df437d4391aebdb9e",
+      "allSelectedSpansUnchanged": true,
+      "D05Exact": true,
+      "D15Exact": true,
+      "pageCount": 48,
+      "diagramCount": 15
+    },
+    "EN": {
+      "status": "PASS",
+      "pagesDigest": "73c13f3966aeeea633b7a60df90b0817a7587f12a8b51aa096c2ed37cfc30c9c",
+      "diagramsDigest": "6c65b4c94de6e466b7e8d454f05abb0b6c139214f3695b9df437d4391aebdb9e",
+      "allSelectedSpansUnchanged": true,
+      "D05Exact": true,
+      "D15Exact": true,
+      "pageCount": 48,
+      "diagramCount": 15
+    },
+    "ZH_HANS": {
+      "status": "PASS",
+      "pagesDigest": "e169e8de5ef7e866b77b807a6130b547b53998f8a0b9cda7d4e9e00df2dfcfec",
+      "diagramsDigest": "6c65b4c94de6e466b7e8d454f05abb0b6c139214f3695b9df437d4391aebdb9e",
+      "allSelectedSpansUnchanged": true,
+      "D05Exact": true,
+      "D15Exact": true,
+      "pageCount": 48,
+      "diagramCount": 15
+    }
+  },
+  "selectorUnchanged": true,
+  "nativeAdapterUnchanged": true,
+  "baselineV2Unchanged": true,
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "providerNetworkCalls": 0,
+  "browserRuns": 0,
+  "fullP7Runs": 0,
+  "printRuns": 0,
+  "pdfRuns": 0,
+  "nextAction": "Reconcile attachment DAY/HOUR target with audited YEAR/MONTH customer identity; afterward separately authorize Authority-relative fidelity/gate successor. No browser or full P7 in this work.",
+  "canonicalRuntimeTypeCoverage": [
+    {
+      "type": "STEM_COMBINATION",
+      "status": "PASS"
+    },
+    {
+      "type": "BRANCH_SIX_COMBINATION",
+      "status": "PASS"
+    },
+    {
+      "type": "BRANCH_THREE_HARMONY",
+      "status": "PASS"
+    },
+    {
+      "type": "BRANCH_THREE_MEETING",
+      "status": "PASS"
+    },
+    {
+      "type": "BRANCH_CLASH",
+      "status": "PASS"
+    },
+    {
+      "type": "BRANCH_HARM",
+      "status": "PASS"
+    },
+    {
+      "type": "BRANCH_BREAK",
+      "status": "PASS"
+    },
+    {
+      "type": "BRANCH_PUNISHMENT_GROUP",
+      "status": "PASS"
+    },
+    {
+      "type": "BRANCH_PUNISHMENT_PAIR",
+      "status": "PASS"
+    },
+    {
+      "type": "BRANCH_SELF_PUNISHMENT",
+      "status": "PASS"
+    }
+  ],
+  "p7Customer": {
+    "personId": "7efd75bb-e5f5-44ff-8239-c30140d3d1cf",
+    "authorityRelationCount": 1,
+    "relationTypes": [
+      "STEM_COMBINATION"
+    ],
+    "canonicalRecords": [
+      {
+        "type": "STEM_COMBINATION",
+        "members": [
+          "XIN",
+          "BING"
+        ],
+        "memberZh": [
+          "辛",
+          "丙"
+        ],
+        "positions": [
+          "YEAR",
+          "MONTH"
+        ],
+        "transformationEstablished": false,
+        "sourceAuthorityState": "SOURCE_GATED"
+      }
+    ],
+    "authorityUnchanged": true
+  },
+  "D05": {
+    "expectedNodes": [
+      "year",
+      "month",
+      "day",
+      "hour"
+    ],
+    "expectedEdges": [
+      "year>month"
+    ],
+    "actualNodes": [
+      "year",
+      "month",
+      "day",
+      "hour"
+    ],
+    "actualEdges": [
+      "year>month"
+    ],
+    "relationType": "STEM_COMBINATION",
+    "transformationEstablished": false,
+    "status": "PASS_CURRENT_AUTHORITY"
+  },
+  "D10": {
+    "unchanged": true,
+    "nodes": [
+      "day",
+      "hidden0",
+      "hidden1",
+      "hidden2"
+    ],
+    "edges": [
+      "day>hidden0",
+      "day>hidden1",
+      "day>hidden2"
+    ]
+  },
+  "D15": {
+    "compileStatus": "PASS_COMPATIBILITY_PROBE",
+    "relationSummary": "辛—丙 · 天干合",
+    "undefinedVisible": false,
+    "nullVisible": false,
+    "radialTopologyUnchanged": true,
+    "probeScope": "V2 reference manuscript retained as labelled fixture; not a generated/accepted customer manuscript or delivered report."
+  },
+  "outsideD05D15Unchanged": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D06",
+    "D07",
+    "D08",
+    "D09",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14"
+  ],
+  "legacyTechnicalFidelity": [
+    {
+      "diagramId": "D05",
+      "errors": [
+        "REQUIRED_EDGE_TOPOLOGY",
+        "RELATION_SEMANTICS"
+      ]
+    },
+    {
+      "diagramId": "D14",
+      "errors": [
+        "TIMING_RELATIONS",
+        "LEGEND"
+      ]
+    }
+  ],
+  "currentCustomerTargetDiscrepancy": {
+    "attachmentPositions": [
+      "DAY",
+      "HOUR"
+    ],
+    "attachmentEdge": "day>hour",
+    "auditedCanonicalPositions": [
+      "YEAR",
+      "MONTH"
+    ],
+    "actualEdge": "year>month",
+    "source": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/P7R3-D05-D10-SOURCE-AUDIT.json",
+    "policy": "Canonical truth preserved; attachment target not rewritten into customer Authority.",
+    "dayHourUnitCase": "A PASS"
+  },
+  "compatibilityStatus": "PASS_LOCAL",
+  "protectedDrift": [],
+  "protectedEvidenceUnchanged": true
+}

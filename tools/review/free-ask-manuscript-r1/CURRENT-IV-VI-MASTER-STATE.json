@@ -1,6 +1,6 @@
 {
-  "at": "2026-10-11T07:33:33.837Z",
-  "head": "4485fda1b7a0ef0307425a35ce43dd93cd8f9fb1",
+  "at": "2026-10-11T08:35:56.317Z",
+  "head": "4bd65f35ca0c4062c94fb6147d1f1364ac5d2a65",
   "sourceIdentity": "HUMAN_ACCEPTED_CURRENT_BINARY",
   "sourceVersions": [
     {
@@ -34,7 +34,7 @@
         ],
         "scope": "FULL_TEXT_LAYER_EXTRACTION_NOT_VISUAL_OR_SEMANTIC_ACCEPTANCE"
       },
-      "partitionCoverage": "LOSSLESS_FULL_CORPUS",
+      "partitionCoverage": "LOSSLESS_PARTITION_OF_EXTRACTED_TEXT_ONLY",
       "runtimeAdmission": "NOT_ADMITTED",
       "firstMissingRequirement": "VISUAL_FIGURE_FOOTNOTE_AND_ANSWER_SEMANTIC_VALIDATION",
       "upload": "PRIVATE_DERIVED_OBJECT_BYTE_VERIFIED",
@@ -43,7 +43,10 @@
       "titleEn": "Reality Expansion",
       "bookRoute": "/books/reality-expansion/",
       "remoteSha256": "5e7d8d87dd54dc9c9f90df42a5b498f0971c5f996415c5dfaa7fb83067d1c3e5",
-      "remoteVerifiedAt": "2026-10-11T07:20:08.421Z"
+      "remoteVerifiedAt": "2026-10-11T07:20:08.421Z",
+      "nativeMarkerCount": 125,
+      "canonicalChapterCount": 125,
+      "additionalPartIntroductionCount": 0
     },
     {
       "bookCode": "BOOK-6",
@@ -73,7 +76,7 @@
         ],
         "scope": "FULL_TEXT_LAYER_EXTRACTION_NOT_VISUAL_OR_SEMANTIC_ACCEPTANCE"
       },
-      "partitionCoverage": "LOSSLESS_FULL_CORPUS",
+      "partitionCoverage": "LOSSLESS_PARTITION_OF_EXTRACTED_TEXT_ONLY",
       "runtimeAdmission": "NOT_ADMITTED",
       "firstMissingRequirement": "VISUAL_FIGURE_FOOTNOTE_AND_ANSWER_SEMANTIC_VALIDATION",
       "upload": "PRIVATE_DERIVED_OBJECT_BYTE_VERIFIED",
@@ -82,58 +85,115 @@
       "titleEn": "Reality Reconfiguration",
       "bookRoute": "/books/reality-reconfiguration/",
       "remoteSha256": "1a93b34e928e7d2586116bd682085f67553ae36b5f490281fd53cf2fe563ccb3",
-      "remoteVerifiedAt": "2026-10-11T07:20:13.363Z"
+      "remoteVerifiedAt": "2026-10-11T07:20:13.363Z",
+      "nativeMarkerCount": 86,
+      "canonicalChapterCount": 85,
+      "additionalPartIntroductionCount": 1
     }
   ],
-  "extraction": "PARTIAL_IMAGE_FIGURE_FOOTNOTE_VALIDATION_PENDING",
-  "retrieval": {
-    "chapterTests": 211,
-    "correct": 211,
-    "semanticAcceptedAnswers": 0
-  },
-  "customerApi": {
-    "environment": "INDEPENDENT_LOCAL_QA",
-    "records": [
+  "extraction": {
+    "state": "PARTIAL_FULL_IMAGE_TRANSCRIPTION_AND_REMAINING_BODY_VISUAL_REVIEW",
+    "emptyTextPages": 21,
+    "diagramPages": 18,
+    "coverOrDecorativePages": 3,
+    "blankPages": 0,
+    "textItemReconstructionPages": 775,
+    "partitionClaim": "LOSSLESS_PARTITION_OF_EXTRACTED_TEXT_ONLY",
+    "fullPdfLossless": false,
+    "chapterAlignment": [
       {
-        "book": "BOOK-4",
-        "question": "扩展为什么有尺度边界",
-        "status": 200,
-        "state": "PARTIALLY_ANSWERED",
-        "providerCalls": 0
+        "bookCode": "BOOK-4",
+        "currentNativeMarkers": 125,
+        "currentRecords": 126,
+        "historicalCanonicalChapters": 125,
+        "aligned": 125,
+        "extraFrontMatter": "CM-B4-owner-final-20261011-ab265b9004da-S000",
+        "extraPartIntroduction": null
       },
       {
-        "book": "BOOK-6",
-        "question": "为什么生活环境不是个人选择的简单结果",
-        "status": 200,
-        "state": "PARTIALLY_ANSWERED",
-        "providerCalls": 0
-      },
-      {
-        "book": "BOOK-6",
-        "question": "文明重组与普通变化有什么区别",
-        "status": 200,
-        "state": "NEEDS_CONTEXT",
-        "providerCalls": 0
-      },
-      {
-        "book": "BOOK-6",
-        "question": "预测明天战争一定发生在哪里",
-        "status": 200,
-        "state": "NEEDS_CONTEXT",
-        "providerCalls": 0
+        "bookCode": "BOOK-6",
+        "currentNativeMarkers": 86,
+        "currentRecords": 87,
+        "historicalCanonicalChapters": 85,
+        "aligned": 85,
+        "extraFrontMatter": "CM-B6-owner-final-20261011-15d80720d10c-S000",
+        "extraPartIntroduction": {
+          "sectionCode": "CM-B6-owner-final-20261011-15d80720d10c-S061",
+          "heading": "日常现实 |当文明结构最终进入普通人的一天",
+          "page": 234,
+          "classification": "PART_INTRODUCTION",
+          "historicalGroup": "第六编｜日常现实",
+          "chapterDeleted": false
+        }
       }
     ]
   },
+  "retrieval": {
+    "chapterTests": 211,
+    "correct": 211,
+    "doesNotProveAnswer": true
+  },
   "ocr": {
     "completedPages": 21,
-    "totalImageOnlyPages": 21,
+    "visualTitleAndStructureInspectedPages": 21,
+    "fullTranscriptionAccepted": false,
     "admittedToAnswers": false
   },
-  "LOCAL": "PARTIAL",
-  "BUILD": "BUILD_SUCCEEDED_CURRENT_RELEVANT_STATIC_INPUT_DIFFERS",
+  "LOCAL": "PASS_BOUNDED_FOUR_SCOPE_CANDIDATE_OVERALL_EXTRACTION_PARTIAL",
+  "BUILD": "PASS_BUILD",
   "DEPLOYMENT": "NOT_DEPLOYED_THIS_CHANGE",
   "LIVE": "NOT_RUN_NEW_SOURCE_VERSIONS",
-  "productionAdmission": "NOT_ADMITTED_QA_ONLY",
+  "productionAdmission": {
+    "sourceRegistry": "manuscript-knowledge-source-registry-v4.json",
+    "scopeRegistry": "manuscript-text-scope-candidates-v2.json",
+    "candidateScopes": [
+      {
+        "bookCode": "BOOK-4",
+        "sectionCode": "CM-B4-owner-final-20261011-ab265b9004da-S002",
+        "heading": "尺度边界 | 一个运行为什么不会天然拥有无限尺度",
+        "range": [
+          0,
+          1800
+        ],
+        "state": "LOCAL_QA_VERIFIED_PROSE_CANDIDATE"
+      },
+      {
+        "bookCode": "BOOK-4",
+        "sectionCode": "CM-B4-owner-final-20261011-ab265b9004da-S044",
+        "heading": "扩展饱和 | 为什么继续增加规模已经无法产生新的尺度能力",
+        "range": [
+          0,
+          1800
+        ],
+        "state": "LOCAL_QA_VERIFIED_PROSE_CANDIDATE"
+      },
+      {
+        "bookCode": "BOOK-6",
+        "sectionCode": "CM-B6-owner-final-20261011-15d80720d10c-S001",
+        "heading": "什么是文明重组",
+        "range": [
+          0,
+          1800
+        ],
+        "state": "LOCAL_QA_VERIFIED_PROSE_CANDIDATE"
+      },
+      {
+        "bookCode": "BOOK-6",
+        "sectionCode": "CM-B6-owner-final-20261011-15d80720d10c-S062",
+        "heading": "生活环境 | 一个人每天醒来的地方，已经包含整个文明结构",
+        "range": [
+          0,
+          1800
+        ],
+        "state": "LOCAL_QA_VERIFIED_PROSE_CANDIDATE"
+      }
+    ],
+    "wholeBookAdmitted": false,
+    "realProductionEnabled": false,
+    "serverActivationFlag": "PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED",
+    "qaFlagsRequiredForProductionAdapter": false,
+    "adapterEvidence": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-PRODUCTION-SCOPE-ADAPTER-QA.json"
+  },
   "providerCalls": 0,
   "providerCostUSD": 0,
   "originalOrHistoricalObjectWrites": 0,
@@ -170,35 +230,46 @@
     }
   ],
   "relevantRuntimeDependencyDigest": "767e31bec66ecc01ed74dacf1ea7f0f4e0e98418219b8af59599d85d29aaa0a8",
-  "buildAssets": [
-    {
-      "path": "content/knowledge/manuscripts/review/book-4-owner-final-20261011-ab265b9004da-source-acceptance.json",
-      "currentSha256": "f4c28ddb83c7d076cebe41311fa6af44c7408563294a5b0fdf6fbab16c5164ff",
-      "buildSha256": null
-    },
-    {
-      "path": "content/knowledge/manuscripts/review/book-6-owner-final-20261011-15d80720d10c-source-acceptance.json",
-      "currentSha256": "20a31e1f6a09db6bd2612f8a6cce93b647a45e130505d59ceafd38d07ac9aede",
-      "buildSha256": null
-    },
-    {
-      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v3.json",
-      "currentSha256": "3c196eaf8b46f9b6e9865370f1516c09279dfbea607d8b1e2a3297628aab1605",
-      "buildSha256": null
-    }
-  ],
   "remaining": [
-    "All image-only pages visual/OCR fidelity; no unverified OCR answer admission",
-    "Full chapter/footnote/figure acceptance and version alignment, including 86 Book VI markers versus historical 85",
-    "Answer semantic held-out matrix, comparisons and bilingual source-supported units",
-    "Production runtime admission and later authorized deployment/live retrieval"
+    "Full corrected OCR transcription beyond inspected titles/structures remains unverified and excluded from answers.",
+    "Remaining chapters require content-specific answer/figure/note scope validation; no whole-book promotion.",
+    "Cross-book substantive explanation units are not wired; insufficient evidence is shown explicitly rather than personal-context escalation.",
+    "English body and explanation correspondence awaits owner accepted chapter text; existing glossary is limited to registered concept IDs.",
+    "Authorized deployment and server scope activation, then actual production source/version/answer/provider-zero smoke."
   ],
-  "heldoutEvidence": {
-    "initialFailures": "CURRENT-IV-VI-HELDOUT-INITIAL-FAILURES.json",
-    "postRepairRegression": "CURRENT-IV-VI-HELDOUT-ANSWERS.json",
-    "remainingExactRetrievalFailure": "IV-CAPACITY",
-    "questionFitReview": "CURRENT-IV-VI-LOCAL-QUESTION-FIT-REVIEW.json",
-    "freshIndependentBilingualAcceptance": "NOT_RUN"
+  "FIRST_STOP_NODE": "REMAINING_CONTENT_SCOPE_VALIDATION_NOT_BLANKET_IMAGE_GATE",
+  "answers": {
+    "regressionPassed": 12,
+    "regressionTotal": 12,
+    "independentPassed": 9,
+    "independentTotal": 9,
+    "criteriaScope": "ACTUAL_CUSTOMER_API_BOUNDED_PROSE_AND_BOUNDARY_CASES_NOT_WHOLE_BOOK",
+    "firstFailuresPreserved": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-FRESH-SCOPE-INITIAL-FAILURES.json"
   },
-  "FIRST_STOP_NODE": "IMAGE_FIGURE_FOOTNOTE_EXTRACTION_QUALITY_AND_ANSWER_SEMANTIC_VALIDATION"
+  "english": {
+    "state": "PREPARATION_PARTIAL_AWAITING_OWNER_ACCEPTED_BODIES",
+    "existingConceptIds": 41,
+    "chapterOrSegmentInputs": 988,
+    "englishBodyAutomaticallyAccepted": false,
+    "chineseAdmissionIndependent": true,
+    "artifact": "tools/review/free-ask-manuscript-r1/SERIES-BILINGUAL-TERMINOLOGY-AND-ENGLISH-INPUTS.json",
+    "existingNodeTerminologySlots": 931
+  },
+  "buildIdentity": {
+    "relevantBuildInputDigest": "4392ee5895abf2a72740f320962e6ff92c968d827a6e0612f2965beb267d5fa4",
+    "currentInputMatch": true,
+    "output": {
+      "workerSha256": "14060d773fe7cc4202977678f77e6b5395e946c6cc5f14818c86ccb1e1b05ee7",
+      "routesSha256": "d266398b90fe6d1ce4355a5a4c95cc30a41246d501c3fe0d97bd2854ea7f491e"
+    },
+    "receipt": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-BUILD-RECEIPT.json",
+    "wholeWorktreeFreshnessUsed": false
+  },
+  "r2WritesThisContinuation": 0,
+  "SOURCE": {
+    "acceptedSourceIdentity": "PASS",
+    "extractedTextItemPartition": "PASS",
+    "fourBoundedProseScopes": "PASS_LOCAL_CANDIDATE",
+    "fullImageOcrAndRemainingChapterAnswers": "PARTIAL"
+  }
 }

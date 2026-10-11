@@ -53,6 +53,13 @@ for(const row of current.protectedFileReconciliation){
   assert.equal(projection.checkAstR2W20,'node scripts/check-ast-r2-w20-deployment-readiness.mjs');
   assert.equal(projection.checkAstR2W17W20,'npm run check:ast-r2-w17 && npm run check:ast-r2-w18 && npm run check:ast-r2-w19 && npm run check:ast-r2-w20');
   assert.equal(projection.smokeAstR2W20Live,'node scripts/smoke-ast-r2-w20-live.mjs');
+ }else if(row.path==='functions/knowledge-runtime/manuscript-source-runtime.js'){
+  const successor=read('content/professional/ast-full-production/acceptance/ast-shared-manuscript-runtime-successor-v2.json');
+  assert.equal(successor.status,'ENGINEERING_RECONCILIATION');assert.equal(successor.path,row.path);
+  for(const key of ['historicalFreezeRewritten','astMeaningAuthorityChanged','productionAcceptanceGranted'])assert.equal(successor[key],false);
+  assert.equal(successor.previousSha256,row.currentSha256);
+  assert.equal(hash(fs.readFileSync(successor.previousPath,'utf8').replace(/\r\n/g,'\n')),row.currentSha256);
+  assert.equal(hash(normalized),successor.sha256,`Current shared manuscript runtime changed: ${row.path}`);
  }else assert.equal(hash(normalized),row.currentSha256,`Current protected file changed: ${row.path}`);
  if(row.currentSha256!==row.main2211Sha256)assert.ok(['AST_FP_EXPLICIT_SUCCESSOR','SHARED_MAIN_SUCCESSOR'].includes(row.changeCategory),`Unsupported protected successor category: ${row.path}`);
 }

@@ -1,9 +1,38 @@
 import {FONT_MINIMUMS,layoutProfile} from './bazi-publication-layout-profiles.js';
 import {BAZI_DIAGRAM_FIDELITY_R1_ACCEPTED_CANDIDATE} from './bazi-diagram-fidelity.js';
+export function expectedBaziDiagramTopology(diagrams){
+ if(!Array.isArray(diagrams)||diagrams.length!==15||new Set(diagrams.map(d=>d.id)).size!==15)throw Error('EXPECTED_DIAGRAM_IR_INCOMPLETE');
+ return Object.fromEntries(diagrams.map(d=>{
+  if(!d.graph||!Array.isArray(d.graph.nodes)||!Array.isArray(d.graph.edges))throw Error('EXPECTED_DIAGRAM_IR_INCOMPLETE');
+  // D01–D03 represent inventory records in IR.nodes; their existing renderer
+  // contract assigns indexed identities before any DOM exists.
+  const prefix={D01:'pillar-',D02:'element-',D03:'god-'}[d.id];
+  const nodes=prefix?d.nodes.map((_,i)=>prefix+i):d.graph.nodes.map(n=>n.id),edges=d.graph.edges.map(e=>e.from+'>'+e.to);
+  if(new Set(nodes).size!==nodes.length||d.graph.edges.some(e=>!nodes.includes(e.from)||!nodes.includes(e.to)))throw Error('EXPECTED_DIAGRAM_IR_INVALID_TOPOLOGY');
+  return [d.id,{diagramId:d.id,visualGrammarId:d.visualGrammarId,nodes,edges,layers:(d.graph.layers||[]).map(n=>n.id),features:[...(d.features||[])]}];
+ }));
+}
+export function measureBaziDiagramTopology(root,{expectedDiagramTopology,topologyMode='PUBLICATION_IR'}={}){
+ const expected=expectedDiagramTopology||(topologyMode==='HISTORICAL_GENG_REFERENCE'?BAZI_DIAGRAM_FIDELITY_R1_ACCEPTED_CANDIDATE:null),violations=[],actual={};
+ if(!expected)return {status:'FAIL',violations:[{kind:'EXPECTED_DIAGRAM_TOPOLOGY_REQUIRED'}],actual};
+ const same=(a,b)=>a.length===b.length&&[...a].sort().every((v,i)=>v===[...b].sort()[i]);
+ const figures=[...root.querySelectorAll('figure[data-diagram-id]')];
+ const ids=figures.map(f=>f.dataset.diagramId);
+ if(topologyMode!=='HISTORICAL_GENG_REFERENCE'&&!same(ids,Object.keys(expected)))violations.push({kind:'DIAGRAM_ID_TOPOLOGY_MISMATCH'});
+ for(const figure of figures){const id=figure.dataset.diagramId,required=expected[id],svg=figure.querySelector('svg');if(!required){if(topologyMode!=='HISTORICAL_GENG_REFERENCE')violations.push({diagramId:id,kind:'UNSUPPORTED_DIAGRAM'});continue;}
+  const nodes=[...figure.querySelectorAll('[data-node-id]')].map(n=>n.dataset.nodeId),edges=[...figure.querySelectorAll('[data-edge-from][data-edge-to]')].map(e=>e.dataset.edgeFrom+'>'+e.dataset.edgeTo);
+  actual[id]={nodes,edges,visualGrammarId:figure.dataset.visualGrammar};
+  if(!svg||!same(nodes,required.nodes)||!same(edges,required.edges))violations.push({diagramId:id,kind:'RENDERED_TOPOLOGY_MISMATCH',expected:required,actual:actual[id]});
+  if(required.visualGrammarId&&required.visualGrammarId!==figure.dataset.visualGrammar)violations.push({diagramId:id,kind:'VISUAL_GRAMMAR_MISMATCH'});
+  if(edges.some(e=>e.split('>').some(n=>!nodes.includes(n))))violations.push({diagramId:id,kind:'DANGLING_EDGE'});
+ }
+ return {status:violations.length?'FAIL':'PASS',violations,actual,topologyMode};
+}
 // Measures rendered content, including SVG label extents; no clipping-as-fit.
-export function measureBaziPublication(root){
+export function measureBaziPublication(root,options={}){
  const report=root.querySelector('.bdm-report'),mode=report?.dataset.presentationMode||'BILINGUAL',profile=layoutProfile(mode);
  const pages=[...root.querySelectorAll('.bdm-page')],slots=[],overflowPages=[],clippedSlots=[],hiddenTextSlots=[],fontMinimumViolations=[],missingLocales=[],diagramLocaleViolations=[],diagramViolations=[];
+ const topology=measureBaziDiagramTopology(root,options);diagramViolations.push(...topology.violations);
  for(const page of pages){const pb=page.getBoundingClientRect(),footer=page.querySelector('footer').getBoundingClientRect(),pageId=Number(page.dataset.pageNumber);let failed=false;
   for(const el of page.querySelectorAll('.bdm-content p,.bdm-content figure,.bdm-insights>div,.pub-heading h2,.pub-footer,.bdm-content svg text')){
    const b=el.getBoundingClientRect(),style=getComputedStyle(el),kind=el.closest('figcaption')?'caption':el.closest('svg')?'diagram':el.closest('.bdm-insights')?'card':el.closest('.pub-heading')?'title':el.closest('footer')?'footer':'body';
@@ -17,7 +46,7 @@ export function measureBaziPublication(root){
    if(el.ownerSVGElement){const box=el.getBBox(),vb=el.ownerSVGElement.viewBox.baseVal;if(box.x<0||box.y<0||box.x+box.width>vb.width+1||box.y+box.height>vb.height+1){failed=true;clippedSlots.push(entry.slotId);}}
   }
   for(const svg of page.querySelectorAll('figure svg')){const vb=svg.viewBox.baseVal,diagramId=svg.closest('figure').dataset.diagramId;
-   for(const label of svg.querySelectorAll('text')){const t=label.textContent;if(mode==='EN'&&/支持|承载|责任|月令|泄气|日主|比肩|偏印|七杀|年柱|月柱|日柱|时柱|三合|原局|大运|年度|冲/.test(t)||mode==='ZH_HANS'&&/[A-Za-z]{2,}/.test(t)){diagramLocaleViolations.push({pageId,diagramId,text:t});failed=true;}}const required=BAZI_DIAGRAM_FIDELITY_R1_ACCEPTED_CANDIDATE[diagramId];if(required){const nodes=[...svg.querySelectorAll('[data-node-id]')].map(n=>n.dataset.nodeId),edges=[...svg.querySelectorAll('[data-edge-from]')].map(e=>e.dataset.edgeFrom+'>'+e.dataset.edgeTo);if(nodes.length!==required.nodes.length||required.nodes.some(n=>!nodes.includes(n))||edges.length!==required.edges.length||required.edges.some(e=>!edges.includes(e))){diagramViolations.push({pageId,diagramId,kind:'RENDERED_TOPOLOGY_MISSING'});failed=true;}}
+   for(const label of svg.querySelectorAll('text')){const t=label.textContent;if(mode==='EN'&&/支持|承载|责任|月令|泄气|日主|比肩|偏印|七杀|年柱|月柱|日柱|时柱|三合|原局|大运|年度|冲/.test(t)||mode==='ZH_HANS'&&/[A-Za-z]{2,}/.test(t)){diagramLocaleViolations.push({pageId,diagramId,text:t});failed=true;}}
    for(const element of svg.querySelectorAll('[data-node-id] rect,[data-edge-from] path,.bdm-enclosure')){const b=element.getBBox();if(b.x<-.5||b.y<-.5||b.x+b.width>vb.width+.5||b.y+b.height>vb.height+.5){diagramViolations.push({pageId,diagramId,kind:'SHAPE_OUTSIDE_VIEWBOX'});failed=true;}}
    for(const node of svg.querySelectorAll('[data-node-id]')){const rect=node.querySelector('rect.bdm-node');if(!rect)continue;const rb=rect.getBoundingClientRect();for(const t of node.querySelectorAll('text')){const tb=t.getBoundingClientRect();if(tb.left<rb.left-2||tb.right>rb.right+2||tb.top<rb.top-2||tb.bottom>rb.bottom+2){diagramViolations.push({pageId,diagramId,nodeId:node.dataset.nodeId,kind:'LABEL_OUTSIDE_NODE',text:t.textContent});failed=true;}}}
    const texts=[...svg.querySelectorAll('text')];for(let i=0;i<texts.length;i++)for(let j=i+1;j<texts.length;j++){const a=texts[i].getBoundingClientRect(),b=texts[j].getBoundingClientRect();if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>2&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>2){diagramViolations.push({pageId,diagramId,kind:'LABEL_OVERLAP',text:[texts[i].textContent,texts[j].textContent]});failed=true;}}
@@ -26,7 +55,7 @@ export function measureBaziPublication(root){
   if(failed)overflowPages.push(pageId);
  }
  const assetFailures=[...root.querySelectorAll('img')].filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src),diagrams=[...root.querySelectorAll('figure[data-diagram-id]')];
- const fail=pages.length!==48||diagrams.length!==15||new Set(diagrams.map(d=>d.dataset.diagramId)).size!==15||overflowPages.length||clippedSlots.length||hiddenTextSlots.length||fontMinimumViolations.length||assetFailures.length||missingLocales.length||root.querySelector('[data-missing-required]');
- return {presentationMode:mode,layoutProfileVersion:profile.id,pageCount:pages.length,diagramCount:diagrams.length,overflowPages,clippedSlots,hiddenTextSlots,fontMinimumViolations,assetFailures,missingLocales,diagramLocaleViolations,diagramViolations,slots,recomposePasses:[],fitStatus:fail?'FAIL':'PASS',providerCalls:0};
+ const fail=pages.length!==48||diagrams.length!==15||new Set(diagrams.map(d=>d.dataset.diagramId)).size!==15||overflowPages.length||clippedSlots.length||hiddenTextSlots.length||fontMinimumViolations.length||assetFailures.length||missingLocales.length||diagramViolations.length||diagramLocaleViolations.length||root.querySelector('[data-missing-required]');
+ return {presentationMode:mode,layoutProfileVersion:profile.id,pageCount:pages.length,diagramCount:diagrams.length,overflowPages,clippedSlots,hiddenTextSlots,fontMinimumViolations,assetFailures,missingLocales,diagramLocaleViolations,diagramViolations,topology,slots,recomposePasses:[],fitStatus:fail?'FAIL':'PASS',providerCalls:0};
 }
 export function assertBaziFitRelease(ir,receipt){if(receipt.presentationMode!==ir.presentationMode||!['PASS','PASS_AFTER_RECOMPOSE'].includes(receipt.fitStatus))throw Error('PUBLICATION_OVERFLOW_UNRESOLVED');if(ir.customerPublishable!==true)throw Error('HUMAN_REVIEW_OR_COVERAGE_PENDING');return true;}

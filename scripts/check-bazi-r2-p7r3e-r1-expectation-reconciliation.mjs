@@ -1,0 +1,41 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+import {projectBaziNativeChartFacts} from '../functions/report-delivery/bazi-customer-native-inputs.js';
+const dir='content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8').replace(/^\uFEFF/,'')),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const originalPath=dir+'P7R3E-CANONICAL-RELATION-CONSUMER-COMPATIBILITY.json',original=read(originalPath),freeze=read(dir+'P7R3C-FREEZE.json');
+const protectedPaths=new Set([...Object.keys(freeze.hashes),...Object.keys(read(dir+'P7R3D-CUSTOMER-NATIVE-AUTHORITY-TOPOLOGY.json').afterSha256),originalPath]);
+for(const name of fs.readdirSync(dir))if(/^P7R3E-(?!R1)/.test(name)&&fs.statSync(dir+name).isFile())protectedPaths.add(dir+name);
+const before=Object.fromEntries([...protectedPaths].map(p=>[p,sha(p)]));
+const receipt={status:'RUNNING',originalReceipt:originalPath,originalStatus:original.status,originalReceiptSha256:before[originalPath],productionFilesModified:[],providerCalls:0,providerCostUSD:0,providerNetworkCalls:0,P7:'FAILED / INCOMPLETE',nextAction:'P7R3F_AUTHORITY_RELATIVE_RENDERED_TOPOLOGY_GATE'};
+globalThis.fetch=async()=>{throw Error('P7R3E_R1_NETWORK_FORBIDDEN');};
+try{
+ assert.equal(original.status,'BLOCKED_EVIDENCE');
+ assert.equal(sha('functions/personal-reading/publication-fit/bazi-diagram-fidelity.js'),original.diagramOwner.afterSha256);
+ const audit=read(dir+'P7R3-D05-D10-SOURCE-AUDIT.json'),canonical=audit.canonicalRelationships.relations;
+ assert.equal(canonical.length,1);assert.deepEqual(canonical[0].positions,['YEAR','MONTH']);
+ const projection=projectBaziNativeChartFacts({chart:audit.chart,tenGods:audit.canonicalTenGods,relationships:audit.canonicalRelationships});assert.deepEqual(projection.relationships,canonical);
+ const fields=['relationId','type','layer','members','memberZh','positions','transformationEstablished','relationFamily','relationThemeCode','positionThemeCode','priorityBand','boundaries','provenance','source'];
+ receipt.canonicalRelationship=Object.fromEntries(fields.map(k=>[k,Object.hasOwn(canonical[0],k)?canonical[0][k]:null]));
+ receipt.canonicalRelationship.rawRecord=canonical[0];receipt.canonicalRelationship.absentFields=fields.filter(k=>!Object.hasOwn(canonical[0],k));
+ receipt.canonicalSource={path:dir+'P7R3-D05-D10-SOURCE-AUDIT.json',sha256:sha(dir+'P7R3-D05-D10-SOURCE-AUDIT.json'),personId:audit.exactPersonId,schemaVersion:audit.canonicalRelationships.schemaVersion,sourceChartDigest:audit.canonicalRelationships.sourceChartDigest,relationshipDigest:audit.canonicalRelationships.relationshipDigest,authorityState:audit.canonicalRelationships.authorityState,lineage:audit.canonicalRelationships.lineage,boundaries:audit.canonicalRelationships.boundaries,missingFieldPolicy:'Null means absent in canonical record; no layer, identity or theme inferred.'};
+ const command='node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-bazi-r2-p7r3e-canonical-relations.mjs --reconcile-expectation';
+ execFileSync(process.execPath,['--import','./scripts/lib/p6-node-json-compat.mjs','scripts/check-bazi-r2-p7r3e-canonical-relations.mjs','--reconcile-expectation'],{encoding:'utf8',stdio:['ignore','pipe','pipe']});
+ receipt.validation={command,exitCode:0};
+ const check=read(dir+'P7R3E-R1-RECHECK-P7R3E-CANONICAL-RELATION-CONSUMER-COMPATIBILITY.json');assert.equal(check.status,'PASS_LOCAL');assert.equal(check.compatibilityStatus,'PASS_LOCAL');
+ assert(Object.values(check.relationMatrix).every(t=>t.status==='PASS'));assert(Object.values(check.gengBaselineV2).every(t=>t.status==='PASS'));
+ const mapping={YEAR:'year',MONTH:'month',DAY:'day',HOUR:'hour'},expected=[canonical[0].positions.map(p=>mapping[p]).join('>')];assert.deepEqual(check.D05.actualEdges,expected);
+ assert.equal(check.D10.unchanged,true);assert.equal(check.D15.compileStatus,'PASS_COMPATIBILITY_PROBE');assert(/辛.*丙.*天干合/.test(check.D15.relationSummary));assert(!/undefined|null|\[object Object\]/.test(check.D15.relationSummary));
+ receipt.previousExpectation={positions:['DAY','HOUR'],edge:'day>hour',state:'SUPERSEDED_NOT_SOURCE_GROUNDED'};
+ receipt.correctExpectation={positions:canonical[0].positions,edge:expected[0],source:'Canonical positions only'};
+ receipt.authorityProjectionExact=true;receipt.d05={expectedEdges:expected,actualEdges:check.D05.actualEdges,status:'PASS'};receipt.d10={status:'PASS',unchanged:check.D10.unchanged};receipt.d15={expectedMeaning:['辛','丙','天干合'],actualDisplay:check.D15.relationSummary,status:'PASS',scope:'IR/compiler compatibility only; no rendered DOM proof'};
+ receipt.relationMatrixStatus=Object.fromEntries(Object.entries(check.relationMatrix).map(([k,v])=>[k,v.status]));receipt.gengBaselineV2Status=Object.fromEntries(Object.entries(check.gengBaselineV2).map(([k,v])=>[k,v.status]));
+ receipt.reconciliationClassification='SUPERSEDED_EXPECTATION_ERROR';receipt.reason='EXPECTED_DAY_HOUR_WAS_NOT_BOUND_TO_ACTUAL_P7_CANONICAL_RECORD';receipt.originalBlockedEvidence='SUPERSEDED_EXPECTATION_ERROR';receipt.P7R3E_CODE_STATUS='PASS_LOCAL';receipt.P7R3E_EVIDENCE_RECONCILIATION='PASS_LOCAL';receipt.status='PASS_LOCAL';
+ receipt.remainingP7Evidence=['Authority-relative browser gate','Negative rendered topology tests','Full browser viewport matrix','Print','48-page A4 PDF and text continuity','Immutable customer material reopen'];
+}catch(error){receipt.status='FAILED';receipt.failure={message:error.message,stack:error.stack};throw error;}finally{
+ receipt.protectedBeforeSha256=before;receipt.protectedAfterSha256=Object.fromEntries(Object.keys(before).map(p=>[p,sha(p)]));receipt.protectedDrift=Object.keys(before).filter(p=>before[p]!==receipt.protectedAfterSha256[p]);receipt.originalReceiptUnchanged=sha(originalPath)===before[originalPath];if(receipt.protectedDrift.length)receipt.status='FAILED_PROTECTED_DRIFT';
+ fs.writeFileSync(dir+'P7R3E-R1-CANONICAL-EXPECTATION-RECONCILIATION.json',JSON.stringify(receipt,null,2)+'\n');assert.equal(receipt.protectedDrift.length,0);
+}
+console.log('P7R3E code PASS_LOCAL; expectation reconciliation PASS_LOCAL; original receipt unchanged; production edits 0; provider 0. P7 remains FAILED / INCOMPLETE.');

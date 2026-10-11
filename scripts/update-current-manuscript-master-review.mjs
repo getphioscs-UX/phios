@@ -1,4 +1,7 @@
 import fs from'node:fs';import crypto from'node:crypto';import{execFileSync}from'node:child_process';
+// Preserve the historical updater, but continue through the current canonical
+// scoped-closure implementation once that successor exists.
+if(fs.existsSync('content/knowledge/source-access/registries/manuscript-text-scope-candidates-v2.json')){await import('./update-current-manuscript-closure-review.mjs');process.exit(0);}
 const dir='tools/review/free-ask-manuscript-r1/';const read=p=>JSON.parse(fs.readFileSync(p));const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');const manifest=read(dir+'CURRENT-IV-VI-CORPUS-MANIFEST.json');const qa=read(dir+'CURRENT-IV-VI-RETRIEVAL-QA.json');const customer=read(dir+'CURRENT-IV-VI-CUSTOMER-ASK-QA.json');const ocr=fs.existsSync(dir+'IMAGE-PAGE-OCR-EVIDENCE.json')?read(dir+'IMAGE-PAGE-OCR-EVIDENCE.json'):null;
 const dependencies=['functions/_lib/knowledge-access-api.js','functions/_lib/knowledge-answer-grounding.js','functions/_lib/knowledge-answer-composition.js','functions/knowledge-runtime/manuscript-source-runtime.js','content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v3.json',...manifest.records.map(r=>r.sourceAcceptancePath)].map(path=>({path,sha256:sha(path)}));
 const buildAssets=manifest.records.map(r=>r.sourceAcceptancePath).concat('content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v3.json').map(path=>({path,currentSha256:sha(path),buildSha256:fs.existsSync('.pages-output/'+path)?sha('.pages-output/'+path):null}));

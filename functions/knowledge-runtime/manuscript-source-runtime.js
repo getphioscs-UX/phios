@@ -32,7 +32,7 @@ export function queryTerms(value) {
 }
 
 export function manuscriptQueryTerms(value) {
-  return queryTerms(String(value || '').replace(/为什么|为何|是什么|是什么意思|如何|怎么|请问|这样|那样|这个|那个|\b(?:why|what|how|does|do|is|are|the|a|an|of|in|to|and|can|could|would|please)\b/gi, ' '));
+  return queryTerms(String(value || '').replace(/为什么|为何|是什么|是什么意思|如何|怎么|请问|这样|那样|这个|那个|\b(?:why|what|how|does|do|is|are|the|a|an|of|in|to|and|can|could|would|please)\b/gi, ' ')).filter(term=>term.length>1);
 }
 
 function correctionRows(sectionCode, corrections) {
@@ -87,8 +87,16 @@ function scoreRecord(record, query, terms, profile, specificity = null) {
     if ((specificity ? headingLabel : heading).includes(term)) score += 70 * weight;
     if (text.includes(term)) { score += 12 * weight; specificMatches++; }
   }
-  if (specificity) {
-    const sentences = text.split(/[。！？!?]/u);
+    if (specificity) {
+      const subtitle = heading.slice(headingLabel.length);
+      const comparison = q.match(/^(.+?)(?:与|和)(.+?)(?:有什么区别|有何区别|的区别|区别)/);
+      const definedConcept = headingLabel.replace(/^什么是/, '');
+      if (comparison && [comparison[1],comparison[2]].some(value=>value===definedConcept)) score += 900;
+      for (const term of meaningfulTerms) if (subtitle.includes(term)) score += 35 * (specificity.get(term) || 1);
+      // The question and the chapter subtitle must describe the same limitation,
+      // rather than merely sharing a broad noun such as scale or capacity.
+      if (/(?:不再|无法|不能).*(?:产生|带来|形成).*(?:能力|收益)/.test(q) && /(?:不再|无法|不能).*(?:产生|形成).*能力/.test(subtitle)) score += 220;
+      const sentences = text.split(/[。！？!?]/u);
     const bestSentence = Math.max(0,...sentences.map(sentence => meaningfulTerms.reduce((sum,term)=>sum+(sentence.includes(term)?specificity.get(term)||1:0),0)));
     score += 100 * bestSentence;
   }
@@ -96,7 +104,8 @@ function scoreRecord(record, query, terms, profile, specificity = null) {
 }
 
 function excerptFor(record, query, terms, maximum = MAX_EXCERPT_CHARS) {
-  const text = clean(record.text);
+    const text = clean(record.text);
+    if (record.supportRange) return text.length<=maximum?text:text.slice(0,maximum).replace(/[^。！？!?]*$/u,'')+'…';
   if (text.length <= maximum) return text;
   let anchor = text.indexOf(clean(query));
   if (anchor < 0) {
@@ -178,7 +187,9 @@ export function searchManuscriptCorpus({
       humanReadabilityStatus: item.record.reviewStatus || source.humanReadabilityStatus || 'UNKNOWN',
       corpusAuthority: source.activeCorpusAuthority || source.sourceAuthority,
       score: item.score,
-      excerpt,
+        excerpt,
+        supportRange: item.record.supportRange || null,
+        admissionScope: item.record.admissionScope || null,
       canonicalBinding: bindingFor(item.record.sectionCode, bindings),
       conceptBinding: item.profile ? { profileId: item.profile.profileId, nodeCode: item.profile.nodeCode, authorityRefs: item.profile.authorityRefs, createsCanonicalAuthority: false } : null,
       editorialCorrections: item.record.editorialCorrections,

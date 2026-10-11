@@ -24,7 +24,7 @@ const temporary = await fs.mkdtemp(path.join(temporaryParent, 'pja-w2e-check-'))
 async function removeOwnedTemporary(target) {
   const resolved=path.resolve(target);
   assert(resolved===temporary || resolved.startsWith(temporary+path.sep),'Cleanup must remain within this invocation\'s fixture directory');
-  await fs.rm(resolved,{recursive:true,force:true,maxRetries:5,retryDelay:100});
+  await fs.rm(resolved,{recursive:true,force:true,maxRetries:20,retryDelay:100});
 }
 const temporaryRelative = path.relative(root, temporary).split(path.sep).join('/');
 const fixtureSource = path.join(root, 'tests/fixtures/knowledge/production-tools');

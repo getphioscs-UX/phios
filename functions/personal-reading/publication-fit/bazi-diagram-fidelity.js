@@ -1,3 +1,4 @@
+import {STEMS,BRANCHES} from '../../bzr-full-production/bazi-structural-registry.js';
 // Approved visual semantics, not screenshot matching. No chart calculation.
 export const BAZI_DIAGRAM_FIDELITY_V1=Object.freeze({
  D01:{grammar:'PILLAR_MATRIX',features:['hidden-stems','ten-god-labels']},D02:{grammar:'ELEMENT_BARS',features:['month-command']},D03:{grammar:'TEN_GOD_RING',features:['ring','visible-hidden','legend']},
@@ -6,6 +7,29 @@ export const BAZI_DIAGRAM_FIDELITY_V1=Object.freeze({
 const names={'比肩':'Peer','劫财':'Rob Wealth','食神':'Eating God','伤官':'Hurting Officer','偏财':'Indirect Wealth','正财':'Direct Wealth','七杀':'Seven Killings','正官':'Direct Officer','偏印':'Indirect Resource','正印':'Direct Resource'};
 const displayPart=value=>typeof value==='string'?value.trim():Number.isFinite(value)?String(value):'';
 const joinedDisplay=(values,separator=' / ')=>{const parts=values.flat(Infinity).map(displayPart).filter(Boolean);return parts.length?parts.join(separator):'—';};
+const canonicalRelationLabels=Object.freeze({
+ STEM_COMBINATION:['天干合','Stem combination'],BRANCH_SIX_COMBINATION:['六合','Six combination'],
+ BRANCH_THREE_HARMONY:['三合','Three harmony'],BRANCH_THREE_MEETING:['三会','Three meeting'],
+ BRANCH_CLASH:['冲','Clash'],BRANCH_HARM:['害','Harm'],BRANCH_BREAK:['破','Break'],
+ BRANCH_PUNISHMENT_GROUP:['三刑','Punishment group'],BRANCH_PUNISHMENT_PAIR:['相刑','Punishment pair'],
+ BRANCH_SELF_PUNISHMENT:['自刑','Self punishment']
+});
+// Display/topology adaptation only. Canonical records remain untouched.
+function normalizeDiagramRelation(r,index,pillars){
+ const canonical=Object.hasOwn(r,'positions')||Object.hasOwn(r,'members')||Object.hasOwn(r,'memberZh')||Object.hasOwn(r,'layer')||/^(STEM|BRANCH)_/.test(r.type||'');
+ if(!canonical){
+  if(!Array.isArray(r.branches))throw Error('BAZI_RELATION_POSITIONS_REQUIRED');
+  return {canonical:false,layer:'BRANCH',type:r.type,positions:['year','month','day','hour'].filter(p=>r.branches.includes(pillars[p][1])),memberZh:r.branches,members:r.branches,transformationEstablished:r.transformationEstablished??false,sourcePath:'natal.relationships',zhLabel:r.type,enLabel:r.type==='冲'?'Clash':'Combination',summary:r.branches.join('')+r.type};
+ }
+ const labels=canonicalRelationLabels[r.type];if(!labels)throw Error('BAZI_UNSUPPORTED_CANONICAL_RELATION_TYPE');
+ if(!Array.isArray(r.positions)||r.positions.length<2)throw Error('BAZI_RELATION_POSITIONS_REQUIRED');
+ const positionIds={YEAR:'year',MONTH:'month',DAY:'day',HOUR:'hour'};
+ if(r.positions.some(p=>!Object.hasOwn(positionIds,p))||new Set(r.positions).size!==r.positions.length)throw Error('BAZI_UNSUPPORTED_CANONICAL_RELATION_POSITION');
+ const layer=r.type.startsWith('STEM_')?'STEM':'BRANCH';
+ if(r.layer!=null&&r.layer!==layer)throw Error('BAZI_CANONICAL_RELATION_LAYER_MISMATCH');
+ const members=r.members||[],memberZh=r.memberZh||members.map(code=>(layer==='STEM'?STEMS:BRANCHES)[code]?.zh||code);
+ return {canonical:true,layer,type:r.type,positions:r.positions.map(p=>positionIds[p]),memberZh,members,transformationEstablished:r.transformationEstablished??false,sourcePath:r.sourcePath||'natal.relationships.'+index,zhLabel:labels[0],enLabel:labels[1],summary:joinedDisplay([memberZh.join('—'),labels[0]],' · ')};
+}
 export function enrichBaziDiagram(d,pack){
  const spec=BAZI_DIAGRAM_FIDELITY_V1[d.id];if(!spec)throw Error('UNSUPPORTED_PRIMARY_DIAGRAM_GRAMMAR');
  const facts=pack.natal.tenGodFacts,positions=['year','month','day','hour'];
@@ -26,7 +50,7 @@ export function enrichBaziDiagram(d,pack){
  if(d.id==='D02')graph.legend=[{zh:'子月 · 冬令；清单数量不等于旺衰',en:'Zi month · winter; inventory counts are not strength scores'}];
  if(d.id==='D03')graph.legend=d.nodes.map(v=>({zh:v.label.split(' / ')[0],en:v.label.split(' / ')[1],visible:v.visible,hidden:v.hidden}));
  if(d.id==='D04')set([n('month','月令泄气','Month-command drain',pack.natal.monthBranch,'natal.monthBranch'),day,peer,resource,n('support','用神 · 辅助','Primary · Secondary',joinedDisplay([pack.globalVerdict?.usefulGod?.primary?.zh,displayPart((pack.globalVerdict?.usefulGod?.secondary||[]).map(x=>displayPart(x?.zh)).filter(Boolean).join('、'))]),'globalVerdict.usefulGod'),output],[edge('month','day','泄气','Drain'),edge('peer','day','同类支持','Peer support'),edge('resource','day','承载','Carrying'),edge('support','day','扶身','Support'),edge('day','output','表达','Expression')]);
- if(d.id==='D05'){graph.nodes=positions.map((p,i)=>n(p,['年柱','月柱','日柱','时柱'][i],['Year','Month','Day','Hour'][i],pack.natal.pillars[p],'natal.pillars.'+p));for(const r of pack.natal.relationships){const ids=positions.filter(p=>r.branches?.includes(pack.natal.pillars[p][1]));for(let i=1;i<ids.length;i++)graph.edges.push({...edge(ids[i-1],ids[i],r.type,r.type==='冲'?'Clash':'Combination',r.type),sourcePath:'natal.relationships',transformationEstablished:r.transformationEstablished??false});}graph.legend=[{zh:'三合成立，不判完全化水；寅申冲并存',en:'Combination established without full transformation; Yin–Shen clash coexists'}];}
+ if(d.id==='D05'){graph.nodes=positions.map((p,i)=>n(p,['年柱','月柱','日柱','时柱'][i],['Year','Month','Day','Hour'][i],pack.natal.pillars[p],'natal.pillars.'+p));const relations=pack.natal.relationships.map((r,i)=>normalizeDiagramRelation(r,i,pack.natal.pillars));for(const r of relations){const ids=r.positions;for(let i=1;i<ids.length;i++)graph.edges.push({...edge(ids[i-1],ids[i],r.zhLabel,r.enLabel,r.type),sourcePath:r.sourcePath,transformationEstablished:r.transformationEstablished});}graph.legend=relations.length&&relations.every(r=>!r.canonical)?[{zh:'三合成立，不判完全化水；寅申冲并存',en:'Combination established without full transformation; Yin–Shen clash coexists'}]:relations.map(r=>({zh:r.summary,en:joinedDisplay([r.members.join('—'),r.enLabel],' · '),sourcePath:r.sourcePath}));}
  if(d.id==='D06')chain([peer,output,wealth,resource],[['判断转为表达','Judgment into expression'],['输出转为价值','Output into value'],['保留承载条件','Retain carrying conditions']]);
  if(d.id==='D07')cycle([day,output,wealth,resource,peer]);
  if(d.id==='D08'){chain([output,wealth,n('adoption','专业采用','Professional adoption','伤官生财','globalVerdict.primaryPattern')]);graph.nodes.push(resource,pressure);graph.edges.push(edge('resource','adoption','支持条件','Support condition'),edge('pressure','adoption','标准与责任','Standards and responsibility'));}
@@ -36,7 +60,7 @@ export function enrichBaziDiagram(d,pack){
  if(d.id==='D12')chain([output,pressure,day,resource,n('recovery','恢复与收束','Recovery and closure','印比承载','globalVerdict.primaryPattern')],[['外部要求','External demand'],['承载压力','Carrying pressure'],['支持介入','Support'],['恢复路径','Recovery path']]);
  if(d.id==='D13')cycle([peer,output,wealth,pressure,resource]);
  if(d.id==='D14'){graph.layers=[n('natal','原局','Natal',Object.values(pack.natal.pillars).join(' · '),'natal.pillars'),n('dayun','当前大运','Current Da Yun',displayPart(pack.timing?.daYun)||'—','timing.daYun'),n('annual','年度层','Annual layer',displayPart(pack.timing?.annual)||'—','timing.annual')];graph.nodes=graph.layers;graph.edges=[{...edge('natal','dayun','叠加读取','Layered reading'),sourcePath:'timing'}, {...edge('dayun','annual','当前激活','Current activation'),sourcePath:'timing'}];graph.legend=(pack.timing?.relations||[]).map((r,i)=>({zh:r+(r==='甲己合'?'，不判化土':''),en:['Jia–Ji combination; no Earth transformation','Si–Shen combination and break','Si–Yin harm','Yin–Si–Shen punishment','Annual Yin repeats natal Yin','Annual Yin clashes with natal Shen','Annual Yin harms Da Yun Si'][i]||r,sourcePath:'timing.relations.'+i}));}
- if(d.id==='D15'){graph.nodes=[day,peer,output,wealth,pressure,resource,n('timing','大运 · 年度','Da Yun · Annual',joinedDisplay([pack.timing?.daYun,pack.timing?.annual]),'timing'),n('relations','原局关系','Natal relations',pack.natal.relationships.map(r=>r.branches.join('')+r.type).join(' · '),'natal.relationships')];graph.edges=graph.nodes.slice(1).map(v=>edge('day',v.id,'整体关联','Integrated reading'));}
+ if(d.id==='D15'){graph.nodes=[day,peer,output,wealth,pressure,resource,n('timing','大运 · 年度','Da Yun · Annual',joinedDisplay([pack.timing?.daYun,pack.timing?.annual]),'timing'),n('relations','原局关系','Natal relations',joinedDisplay(pack.natal.relationships.map((r,i)=>normalizeDiagramRelation(r,i,pack.natal.pillars).summary),' · '),'natal.relationships')];graph.edges=graph.nodes.slice(1).map(v=>edge('day',v.id,'整体关联','Integrated reading'));}
  return {...d,visualGrammarId:spec.grammar,features:spec.features,graph,caption:{zh:d.id==='D02'?graph.legend[0].zh:d.id==='D03'?'透干与藏干分列；记录数量不等于结构力量。':'连线表达结构或功能路径，不代表事件因果或必然结果。',en:d.id==='D02'?graph.legend[0].en:d.id==='D03'?'Visible and hidden records are separate; counts are not structural strength.':'Connectors describe structural or functional paths, not event causation or guaranteed outcomes.'}};
 }
 export const BAZI_DIAGRAM_FIDELITY_R1_ACCEPTED_CANDIDATE=Object.freeze({

@@ -7,6 +7,7 @@ import {
   searchManuscriptCorpus
 } from '../knowledge-runtime/manuscript-source-runtime.js';
 import {retrieveAtlasScope} from './atlas-retrieval-scope.js';
+import {manuscriptMetadataRaw} from '../knowledge-runtime/current-manuscript-server-metadata.js';
 
 const MODES = new Set(['auto', 'overview', 'focused', 'full_article', 'continuity']);
 const SOURCES = new Set(['auto', 'hybrid', 'published', 'manuscript']);
@@ -24,6 +25,7 @@ const response = (body, status = 200) => Response.json(body, {
 });
 
 async function readAssetJson(env, path) {
+  if (Object.hasOwn(manuscriptMetadataRaw,path)) return JSON.parse(manuscriptMetadataRaw[path]);
   if (!env?.ASSETS?.fetch) throw new Error('KNOWLEDGE_ACCESS_ASSETS_UNAVAILABLE');
   const result = await env.ASSETS.fetch(new Request(`https://assets.local/${path}`));
   if (!result.ok) throw new Error(`KNOWLEDGE_ACCESS_ASSET_UNAVAILABLE:${path}`);
@@ -55,17 +57,18 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
     return { status: 'disabled_in_preview', records: [], errors: [] };
   }
   const [registry, reviewedRegistry, bindings, corrections, semanticProfiles] = await Promise.all([
-    readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v3.json'),
+    readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v4.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-editorial-correction-v1.json'),
     readAssetJson(env, 'content/knowledge/knowledge-intelligence-r2/semantic-profiles/successors/book4-a6/kir-r2-book-i-iv-semantic-retrieval-profiles-v2.json')
   ]);
   const sources = registry.records
-    .filter(source => source.locale === locale && (source.runtimeAdmission !== 'NOT_ADMITTED' || (env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' && source.sourceAcceptancePath && source.version?.startsWith('owner-final-20261011-'))) && (!bookCode || source.bookCode === bookCode))
+    .filter(source => source.locale === locale && (source.runtimeAdmission === 'SCOPED_TEXT_CANDIDATE_NOT_ACTIVATED' ? env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' || env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true' : source.runtimeAdmission !== 'NOT_ADMITTED' || (env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' && source.sourceAcceptancePath && source.version?.startsWith('owner-final-20261011-'))) && (!bookCode || source.bookCode === bookCode))
     .map(source => {
       if (source.runtimeAdmission === 'ADMITTED_READABILITY_SOURCE_PENDING_REMOTE_OBJECT') return source;
       if (env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' && source.sourceAcceptancePath) return source;
+      if (env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true' && source.scopeAdmissionPath && source.sourceAcceptancePath) return source;
       const reviewed = reviewedRegistry.records.find(record => record.sourceCode === source.sourceCode && record.locale === source.locale);
       if (!reviewed || reviewed.humanReadabilityStatus !== 'HUMAN_REVIEW_COMPLETE') return null;
       return {
@@ -82,7 +85,7 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
 
   const settled = await Promise.allSettled(sources.map(async source => {
     if (source.sourceAcceptancePath) {
-      const result = await env.ASSETS.fetch(new Request(`https://assets.local/${source.sourceAcceptancePath}`));
+      const result = Object.hasOwn(manuscriptMetadataRaw,source.sourceAcceptancePath) ? new Response(manuscriptMetadataRaw[source.sourceAcceptancePath]) : await env.ASSETS.fetch(new Request(`https://assets.local/${source.sourceAcceptancePath}`));
       if (!result.ok) throw new Error('MANUSCRIPT_SOURCE_ACCEPTANCE_UNAVAILABLE');
       const bytes = await result.text();
       const actual = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(bytes)))].map(b=>b.toString(16).padStart(2,'0')).join('');
@@ -90,7 +93,17 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
       if (actual !== source.sourceAcceptanceSha256 || acceptance.sourceSha256 !== source.sourceSha256 || acceptance.status !== 'HUMAN_ACCEPTED_SOURCE_IDENTITY' || acceptance.scope !== 'CURRENT_CHINESE_SOURCE_BINARY_ONLY') throw new Error('MANUSCRIPT_SOURCE_ACCEPTANCE_IDENTITY_MISMATCH');
     }
     if (source.runtimeAdmission === 'ADMITTED_READABILITY_SOURCE_PENDING_REMOTE_OBJECT') await validateSourceAcceptance(env, source);
-    const corpus = await loadR2RetrievalCorpus(env.MANUSCRIPTS, source);
+    let corpus = await loadR2RetrievalCorpus(env.MANUSCRIPTS, source);
+    if ((env.PHIOS_MANUSCRIPT_TEXT_SCOPE_QA === 'true' || env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true') && source.sourceAcceptancePath) {
+      // Server-only candidate validation. This flag cannot be set by request input.
+      const raw=manuscriptMetadataRaw[source.scopeAdmissionPath];
+      if(!raw)throw Error('MANUSCRIPT_SCOPE_ADMISSION_UNAVAILABLE');
+      const digest=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(raw)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+      if(digest!==source.scopeAdmissionSha256)throw Error('MANUSCRIPT_SCOPE_ADMISSION_IDENTITY_MISMATCH');
+      const scope=JSON.parse(raw);
+      const permitted=scope.records.filter(r=>r.bookCode===source.bookCode&&r.sourceSha256===source.sourceSha256&&r.corpusSha256===source.corpusSha256&&r.locale===locale&&r.scopeState==='LOCAL_QA_VERIFIED_PROSE_CANDIDATE');
+      corpus={...corpus,records:corpus.records.flatMap(record=>{const s=permitted.find(r=>r.sectionCode===record.sectionCode&&r.sectionSha256===record.textSha256);return s?[{...record,text:record.text.slice(s.startOffset,s.endOffset),supportRange:{startOffset:s.startOffset,endOffset:s.endOffset,sectionSha256:s.sectionSha256},admissionScope:'SERVER_VERIFIED_TEXT_SCOPE_CANDIDATE'}]:[];})};
+    }
     return searchManuscriptCorpus({ corpus, source, bindings, corrections, query, profiles: semanticProfiles.profiles });
   }));
   const records = settled.flatMap(result => result.status === 'fulfilled' ? result.value : []);
@@ -132,6 +145,8 @@ function groundingFrom(published, manuscript) {
       sourceVersion: record.sourceVersion,
       sourceBinaryDigest: record.sourceBinaryDigest,
       sourceAcceptanceDigest: record.sourceAcceptanceDigest,
+      supportRange: record.supportRange || null,
+      heading: record.heading,
       text: record.excerpt
     });
   }
@@ -145,6 +160,7 @@ function groundingFrom(published, manuscript) {
 
 function splitSentences(text) {
   return String(text || '')
+    .replace(/([\u3400-\u9fff])\s+(?=[\u3400-\u9fff])/g, '$1')
     .replace(/\s+/g, ' ')
     .match(/[^。！？!?]+[。！？!?]?/g)
     ?.map(value => value.trim())
@@ -162,12 +178,17 @@ export function deterministicGroundedAnswer(query, grounding, locale) {
         ? `PUBLISHED:${source.nodeCode}:${source.fragmentCode}`
         : `MANUSCRIPT:${source.sectionCode}`
     );
-    for (const sentence of splitSentences(source.text)) {
+    let position = 0;
+    let prose=source.text;
+    if(source.supportRange){const normalized=String(prose).replace(/([\u3400-\u9fff])\s+(?=[\u3400-\u9fff])/g,'$1').normalize('NFKC');const title=String(source.heading||'').normalize('NFKC');prose=normalized.startsWith('✦'+title)?normalized.slice(title.length+1):normalized;}
+    for (const sentence of splitSentences(prose)) {
       if (/^…|…$/.test(sentence)) continue;
       const normalized = sentence.toLocaleLowerCase();
       let score = source.sourceType === 'PUBLISHED_CANONICAL_ARTICLE' ? 2 : 0;
+      if(source.supportRange&&position<4)score+=100-position;
       for (const term of terms) if (normalized.includes(term)) score += term.length > 2 ? 3 : 1;
-      candidates.push({ sentence, score, sourceId });
+      if (/为什么|为何|怎样|如何|机制/.test(query) && /因为|因此|如果|只要|取决于|并不是|不只是/.test(sentence)) score += 3;
+      candidates.push({ sentence, score, sourceId, position: position++ });
     }
   }
   candidates.sort((left, right) => right.score - left.score || left.sentence.length - right.sentence.length);
@@ -185,7 +206,7 @@ export function deterministicGroundedAnswer(query, grounding, locale) {
     projectionType: 'DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER',
     generativeModelUsed: false,
     locale,
-    text: selected.map(item => item.sentence).join(locale === 'zh-Hans' ? '\n\n' : ' '),
+    text: selected.sort((a,b)=>a.sourceId.localeCompare(b.sourceId)||a.position-b.position).map(item => item.sentence).join(locale === 'zh-Hans' ? '\n\n' : ' '),
     sourceReferences: [...new Set(selected.map(item => item.sourceId))],
     authorityNotice: 'This answer is a question-scoped extractive projection from returned governed sources. It does not create Canonical Node or Published Article authority.'
   };
@@ -235,7 +256,12 @@ export async function handleKnowledgeAccessRequest(request, env = {}, options = 
   const predictionCertainty = /肯定|保证|一定|guarantee|certainly|definitely/i.test(query) && !/不能保证|无法保证|不保证|不能确定|cannot guarantee|can.t guarantee|not guaranteed/i.test(query);
   const unsupportedPrediction = predictionCertainty && /明[天年]|将来|未来|下(?:周|星期|个?月|年)|tomorrow|future|next\s+(?:week|month|year)/i.test(query);
   const ambiguous = manuscriptQueryTerms(query).length === 0;
-  const groundedAnswer = requiresComparativeUnit || unsupportedPrediction || ambiguous ? null : deterministicGroundedAnswer(query, answerGrounding, locale);
+  // A comparison is not ambiguous merely because it asks for a distinction.
+  // Only admit one when the retrieved prose itself states a contrast.
+  const compared = query.match(/^(.+?)(?:与|和)(.+?)(?:有什么区别|有何区别|的区别|区别|之间)/);
+  const comparisonTerms = compared ? [compared[1],compared[2]].map(x=>x.replace(/^(?:请问|普通|一般)/,'').trim()) : [];
+  const comparisonSupported = requiresComparativeUnit && comparisonTerms.length===2 && answerGrounding.sources.some(s=>comparisonTerms.includes(String(s.heading||'').split(/[|｜]/)[0].trim().replace(/^什么是/,'')) && comparisonTerms.every(term=>s.text.includes(term)) && /区别|差异|不同|并不是|不是.*而是|前者|后者/.test(s.text));
+  const groundedAnswer = (requiresComparativeUnit && !comparisonSupported) || unsupportedPrediction || ambiguous ? null : deterministicGroundedAnswer(query, answerGrounding, locale);
   answerGrounding.generatedAnswerPresent = Boolean(groundedAnswer);
 
   return response({
@@ -243,7 +269,7 @@ export async function handleKnowledgeAccessRequest(request, env = {}, options = 
     providerCalls: 0,
     providerCostUSD: 0,
     retrievalAssessment: { retrievedContent: manuscriptCovered || Boolean(publishedCovered), correctBookScope: !bookCode || manuscript.records.every(record => record.bookCode === bookCode) },
-    answerAssessment: { state: unsupportedPrediction ? 'UNSUPPORTED_PREDICTION' : ambiguous ? 'NEEDS_CLARIFICATION' : requiresComparativeUnit ? 'COMPARATIVE_EXPLANATION_UNIT_REQUIRED' : groundedAnswer ? 'EXTRACTIVE_CANDIDATE_REQUIRES_QUESTION_FIT_VALIDATION' : 'NO_SUPPORTED_ANSWER', retrievalDoesNotProveAnswer: true },
+    answerAssessment: { state: unsupportedPrediction ? 'UNSUPPORTED_PREDICTION' : ambiguous ? 'NEEDS_CLARIFICATION' : requiresComparativeUnit && !comparisonSupported ? 'COMPARATIVE_EXPLANATION_UNIT_REQUIRED' : groundedAnswer ? 'EXTRACTIVE_CANDIDATE_REQUIRES_QUESTION_FIT_VALIDATION' : 'NO_SUPPORTED_ANSWER', retrievalDoesNotProveAnswer: true },
     query: { text: query, locale, mode, source: sourceMode },
     coverage: {
       level: coverage,

@@ -1,20 +1,24 @@
 {
-  "at": "2026-10-11T07:33:34.129Z",
+  "at": "2026-10-11T08:26:25.419Z",
+  "predecessor": "scripts/check-current-manuscript-entitlement-integrity.mjs",
+  "changedAssumption": "Source identity is now immutable Worker metadata; corrupt it in test bundle, rather than the unused public asset.",
   "providerCalls": 0,
   "results": [
     {
-      "kind": "QA_DISABLED",
+      "kind": "QA_DISABLED_CLIENT_OVERRIDE",
       "status": 200,
       "state": "source_not_admitted",
-      "errors": []
+      "errors": [],
+      "expectation": "FAIL_CLOSED"
     },
     {
-      "kind": "ACCEPTANCE_BYTES_TAMPERED",
+      "kind": "SERVER_ACCEPTANCE_BYTES_TAMPERED",
       "status": 200,
       "state": "unavailable",
       "errors": [
         "MANUSCRIPT_SOURCE_ACCEPTANCE_IDENTITY_MISMATCH"
-      ]
+      ],
+      "expectation": "FAIL_CLOSED"
     },
     {
       "kind": "CORPUS_BYTES_TAMPERED",
@@ -22,7 +26,8 @@
       "state": "unavailable",
       "errors": [
         "MANUSCRIPT_RETRIEVAL_CORPUS_BYTES_MISMATCH"
-      ]
+      ],
+      "expectation": "FAIL_CLOSED"
     },
     {
       "kind": "CORPUS_MISSING",
@@ -30,7 +35,15 @@
       "state": "unavailable",
       "errors": [
         "MANUSCRIPT_RETRIEVAL_CORPUS_NOT_FOUND"
-      ]
+      ],
+      "expectation": "FAIL_CLOSED"
+    },
+    {
+      "kind": "PUBLIC_ACCEPTANCE_ASSET_TAMPER_IGNORED",
+      "status": 200,
+      "state": "covered",
+      "errors": [],
+      "expectation": "IMMUTABLE_SERVER_IDENTITY_USED"
     }
   ]
 }

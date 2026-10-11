@@ -1,0 +1,37 @@
+{
+  "head": "4bd65f35ca0c4062c94fb6147d1f1364ac5d2a65",
+  "commands": [
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-bazi-r2-p7r3d-authority-topology.mjs --freeze",
+      "exitCode": 0,
+      "result": "PASS_LOCAL_FROZEN"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-bazi-r2-p7r3d-authority-topology.mjs",
+      "exitCode": 1,
+      "result": "BLOCKED_SCOPE",
+      "stdout": "{\n  \"status\": \"BLOCKED_SCOPE\",\n  \"authorityProjection\": {\n    \"status\": \"PASS_LOCAL\",\n    \"d05CanonicalCount\": 1,\n    \"d05ProjectedCount\": 1,\n    \"d10CanonicalHiddenCount\": 3,\n    \"d10ProjectedHiddenCount\": 3,\n    \"exactSourceEquivalence\": true\n  },\n  \"geng\": {\n    \"BILINGUAL\": \"PASS\",\n    \"EN\": \"PASS\",\n    \"ZH_HANS\": \"PASS\"\n  },\n  \"blocker\": {\n    \"code\": \"D15_CANONICAL_RELATION_CONSUMER_SCHEMA_INCOMPATIBLE\",\n    \"owner\": \"functions/personal-reading/publication-fit/bazi-diagram-fidelity.js\",\n    \"diagram\": \"D15\",\n    \"expression\": \"r.branches.join\",\n    \"canonicalRelationType\": \"STEM_COMBINATION\",\n    \"canonicalRecordHasBranches\": false,\n    \"requiredScope\": \"D15 canonical relationship display compatibility\",\n    \"authorizationBoundary\": \"Attachment section 11: Do not change other diagrams.\",\n    \"message\": \"Cannot read properties of undefined (reading 'join')\"\n  }\n}\n"
+    }
+  ],
+  "harnessCorrections": [
+    "Protected-file assertion initially included the expressly authorized adapter; corrected the scope and retained its before/after hashes.",
+    "In-memory undefined array entries versus stored JSON null entries caused a QA serialization mismatch; comparisons now use the same JSON representation as the V2 baseline. No production selector or baseline changed."
+  ],
+  "compileProbe": "Existing V2 manuscript text used in a labelled non-customer compiler compatibility fixture with audited customer-native Authority. No customer manuscript or material generated; this probe is not a completed P7 delivery test.",
+  "artifactsCreated": [
+    "P7R3C-FREEZE.json",
+    "P7R3D-BEFORE.json",
+    "P7R3D-CUSTOMER-NATIVE-AUTHORITY-TOPOLOGY.json",
+    "P7R3D-VALIDATION-LOG.json",
+    "scripts/check-bazi-r2-p7r3d-authority-topology.mjs"
+  ],
+  "browserRuns": 0,
+  "screenshots": 0,
+  "completeP7Runs": 0,
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "providerNetworkCalls": 0,
+  "commit": false,
+  "push": false,
+  "deploy": false
+}

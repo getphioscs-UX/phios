@@ -24,6 +24,8 @@ if (config.pages_build_output_dir !== '.pages-output') {
 }
 
 const output = path.join(root, '.pages-output');
+// Keep server metadata aligned even when source changes are not committed.
+await import('./build-manuscript-server-metadata.mjs');
 
 const workerBuild = path.join(
   root,

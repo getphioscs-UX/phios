@@ -113,7 +113,7 @@ for (const migration of loadRuntimeMigrations(process.cwd()).migrations) {
 
 const db = createSqliteD1Adapter(sql);
 
-const owner = 'BAZI-R2-P7-OWNER-A';
+const owner = process.env.P7R3F_MODE?'P7R3F-OWNER-A':'BAZI-R2-P7-OWNER-A';
 const otherOwner = 'BAZI-R2-P7-OWNER-B';
 
 const productId = 'COM-REPORT-BAZI-FULL';
@@ -480,6 +480,7 @@ globalThis.fetch = async () => {
 const ownerContext = context();
 
 const auditUuid=crypto.randomUUID;
+if(process.env.P7R3F_MODE){let first=true;crypto.randomUUID=()=>first?(first=false,'73f00000-0000-4000-8000-000000000001'):auditUuid.call(crypto);}
 if(process.env.P7R3_AUDIT_ONLY==='1'){
  const old=JSON.parse(fs.readFileSync('content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/CUSTOMER-MATERIAL-METADATA.json','utf8'));
  let first=true;crypto.randomUUID=()=>{if(first){first=false;return old.personId;}return auditUuid.call(crypto);};
@@ -952,7 +953,7 @@ env.METHOD_REPORT_RENDERER=terminal.renderer;
 if(process.env.P7R3_TARGETED_ONLY==='1'){
  const publication=await compileBaziDeepPublication({snapshot:syntheticSnapshot,pack:native.pack,productionFrozen:true,presentationMode:'BILINGUAL'});
  await terminal.targeted(publication,native.pack);
-}else if(process.env.P7R1_RENDERER_ONLY==='1'){
+}else if(process.env.P7R1_RENDERER_ONLY==='1'||process.env.P7R3F_MODE==='targeted'){
  const publication=await compileBaziDeepPublication({snapshot:syntheticSnapshot,pack:native.pack,productionFrozen:true,presentationMode:'BILINGUAL'});
  const response=await terminal.renderer.fetch(new Request('https://local.invalid/verify',{method:'POST',body:JSON.stringify({method:'BZR',publication})}));
  const evidence=await response.json();

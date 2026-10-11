@@ -1,0 +1,71 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+import {enrichBaziDiagram} from '../functions/personal-reading/publication-fit/bazi-diagram-fidelity.js';
+import {projectBaziNativeChartFacts} from '../functions/report-delivery/bazi-customer-native-inputs.js';
+import {compileBaziDeepPublication} from '../functions/personal-reading/deep-manuscript/bazi-deep-manuscript-publication.js';
+import {digest} from '../functions/personal-reading/deep-manuscript/bazi-deep-manuscript-contract.js';
+import {loadBaziReviewAuthority,ROOT} from './lib/bazi-deep-manuscript-review.mjs';
+const dir='content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/';
+const owner='functions/personal-reading/publication-fit/bazi-diagram-fidelity.js',adapter='functions/report-delivery/bazi-customer-native-inputs.js',selector='functions/personal-reading/publication-fit/bazi-publication-lead-selector.js';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8').replace(/^\uFEFF/,''));
+const hash=v=>crypto.createHash('sha256').update(v).digest('hex'),sha=p=>hash(fs.readFileSync(p));
+const reconciliationOnly=process.argv.includes('--reconcile-expectation');
+const write=(name,v)=>fs.writeFileSync(dir+(reconciliationOnly?'P7R3E-R1-RECHECK-'+name:name),JSON.stringify(v,null,2)+'\n'),json=v=>JSON.parse(JSON.stringify(v));
+globalThis.fetch=async()=>{throw Error('P7R3E_NETWORK_FORBIDDEN');};
+const d=read(dir+'P7R3D-CUSTOMER-NATIVE-AUTHORITY-TOPOLOGY.json'),freeze=read(dir+'P7R3C-FREEZE.json'),v2=read(dir+'BAZI-R2-CURRENT-PRODUCTION-PUBLICATION-BASELINE-V2.json');
+assert.equal(sha(selector),'0ffb2aa0815044f534734bbab9729eafc5c04768d3f353013df03310e1c10042');assert.equal(sha(adapter),d.afterSha256[adapter]);
+const original=execFileSync('git',['show','HEAD:'+owner]);assert.equal(hash(original),d.beforeSha256[owner],'DIAGRAM_BEFORE_SOURCE_MISMATCH');
+const old=await import('data:text/javascript;base64,'+original.toString('base64'));
+const protectedFiles=new Set([...Object.keys(freeze.hashes).filter(p=>p!==owner),dir+'P7R3C-FREEZE.json',dir+'P7R3D-CUSTOMER-NATIVE-AUTHORITY-TOPOLOGY.json',...Object.keys(d.afterSha256).filter(p=>p!==owner)]);
+const beforeHashes=Object.fromEntries([...protectedFiles].map(p=>[p,sha(p)]));
+assert(Object.entries(freeze.hashes).filter(([p])=>p!==owner&&p!==adapter).every(([p,h])=>sha(p)===h),'FROZEN_EVIDENCE_DRIFT_BEFORE_P7R3E');
+write('P7R3E-BEFORE.json',{head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),diagramOwnerBeforeSha256:hash(original),source:'HEAD blob verified against P7R3D before/after unchanged graph owner',protectedHashes:beforeHashes});
+if(!reconciliationOnly)fs.writeFileSync(dir+'P7R3E-DIAGRAM-OWNER-BEFORE.js',original);
+const receipt={status:'RUNNING',diagramOwner:{beforeSha256:hash(original),afterSha256:sha(owner)},relationMatrix:{},gengBaselineV2:{},selectorUnchanged:false,nativeAdapterUnchanged:false,baselineV2Unchanged:false,providerCalls:0,providerCostUSD:0,providerNetworkCalls:0,browserRuns:0,fullP7Runs:0,printRuns:0,pdfRuns:0,nextAction:null};
+let gengRegression=false;
+try{
+ const reference=await loadBaziReviewAuthority(),snapshot=read(ROOT+'LIVE-MANUSCRIPT-SNAPSHOT-R2-CLOSURE.json'),audit=read(dir+'P7R3-D05-D10-SOURCE-AUDIT.json');
+ const native=structuredClone(audit.pack);Object.assign(native.natal,projectBaziNativeChartFacts({chart:audit.chart,tenGods:audit.canonicalTenGods,relationships:audit.canonicalRelationships}));
+ const template=read(v2.modes.BILINGUAL.path),diagram=(pack,id,implementation=enrichBaziDiagram)=>implementation(structuredClone(template.technical.diagrams.find(x=>x.id===id)),pack);
+ const packFor=relations=>{const p=structuredClone(native);p.natal.relationships=structuredClone(relations);return p;};
+ const relation=(type,positions,memberZh=['子','卯'])=>({type,positions,members:memberZh,memberZh,transformationEstablished:false,sourcePath:'canonical.fixture.relations.0',sourceAuthorityState:'SOURCE_GATED'});
+ const positive=(name,record,expected,label)=>{const pack=packFor([record]),before=JSON.stringify(pack),g=diagram(pack,'D05'),summary=diagram(pack,'D15').graph.nodes.find(n=>n.id==='relations').value;assert.deepEqual(g.graph.edges.map(e=>e.from+'>'+e.to),[expected]);assert.equal(g.graph.edges[0].type,record.type);assert.equal(g.graph.edges[0].en,label);assert.equal(g.graph.edges[0].sourcePath,record.sourcePath);assert.equal(g.graph.edges[0].transformationEstablished,record.transformationEstablished);assert(!/undefined|null/.test(summary));assert.equal(JSON.stringify(pack),before);receipt.relationMatrix[name]={status:'PASS',fixture:'SYNTHETIC_CONSUMER_CONTRACT_ONLY',edges:[expected],label,summary,authorityUnchanged:true};};
+ positive('A',relation('STEM_COMBINATION',['DAY','HOUR'],['癸','戊']),'day>hour','Stem combination');
+ positive('B',relation('BRANCH_HARM',['MONTH','DAY']),'month>day','Harm');
+ positive('C',relation('BRANCH_SELF_PUNISHMENT',['MONTH','HOUR'],['辰','辰']),'month>hour','Self punishment');
+ positive('D',relation('BRANCH_CLASH',['HOUR','YEAR'],['寅','申']),'hour>year','Clash');
+ for(const id of ['D05','D15'])assert.deepEqual(diagram(reference,id),diagram(reference,id,old.enrichBaziDiagram));receipt.relationMatrix.E={status:'PASS',source:'EXISTING_GENG_LEGACY_AUTHORITY',graphs:'D05/D15 exact before/after'};
+ const empty=packFor([]);assert.deepEqual(diagram(empty,'D05').graph.nodes.map(n=>n.id),['year','month','day','hour']);assert.equal(diagram(empty,'D05').graph.edges.length,0);assert.equal(diagram(empty,'D15').graph.nodes.find(n=>n.id==='relations').value,'—');receipt.relationMatrix.F={status:'PASS',edges:[],summary:'—'};
+ for(const id of ['D05','D15'])assert.throws(()=>diagram(packFor([relation('BRANCH_UNSUPPORTED',['DAY','HOUR'])]),id),/BAZI_UNSUPPORTED_CANONICAL_RELATION_TYPE/);receipt.relationMatrix.G={status:'PASS',expectedFailure:'BAZI_UNSUPPORTED_CANONICAL_RELATION_TYPE'};
+ const missing=relation('STEM_COMBINATION',['DAY','HOUR']);delete missing.positions;for(const id of ['D05','D15'])assert.throws(()=>diagram(packFor([missing]),id),/BAZI_RELATION_POSITIONS_REQUIRED/);receipt.relationMatrix.H={status:'PASS',expectedFailure:'BAZI_RELATION_POSITIONS_REQUIRED',legacyExceptionVerifiedBy:'E'};
+ assert.throws(()=>diagram(packFor([relation('BRANCH_CLASH',['DAY','FUTURE'])]),'D05'),/BAZI_UNSUPPORTED_CANONICAL_RELATION_POSITION/);
+ const codes=['STEM_COMBINATION','BRANCH_SIX_COMBINATION','BRANCH_THREE_HARMONY','BRANCH_THREE_MEETING','BRANCH_CLASH','BRANCH_HARM','BRANCH_BREAK','BRANCH_PUNISHMENT_GROUP','BRANCH_PUNISHMENT_PAIR','BRANCH_SELF_PUNISHMENT'];
+ receipt.canonicalRuntimeTypeCoverage=[];
+ for(const type of codes){const g=diagram(packFor([relation(type,['YEAR','HOUR'])]),'D05');assert.equal(g.graph.edges[0].type,type);assert(g.graph.edges[0].zh&&g.graph.edges[0].en);receipt.canonicalRuntimeTypeCoverage.push({type,status:'PASS'});}
+ receipt.p7Customer={personId:audit.exactPersonId,authorityRelationCount:native.natal.relationships.length,relationTypes:native.natal.relationships.map(r=>r.type),canonicalRecords:native.natal.relationships,authorityUnchanged:true};
+ const d05=diagram(native,'D05'),d10=diagram(native,'D10'),d15=diagram(native,'D15');
+ assert.equal(native.natal.relationships.length,1);assert.deepEqual(native.natal.relationships,audit.canonicalRelationships.relations);assert.deepEqual(d05.graph.nodes.map(n=>n.id),['year','month','day','hour']);assert.deepEqual(d05.graph.edges.map(e=>e.from+'>'+e.to),['year>month']);
+ receipt.D05={expectedNodes:['year','month','day','hour'],expectedEdges:['year>month'],actualNodes:d05.graph.nodes.map(n=>n.id),actualEdges:d05.graph.edges.map(e=>e.from+'>'+e.to),relationType:d05.graph.edges[0].type,transformationEstablished:d05.graph.edges[0].transformationEstablished,status:'PASS_CURRENT_AUTHORITY'};
+ assert.deepEqual(d10,diagram(native,'D10',old.enrichBaziDiagram));assert.deepEqual(d10.graph.nodes.map(n=>n.id),['day','hidden0','hidden1','hidden2']);receipt.D10={unchanged:true,nodes:d10.graph.nodes.map(n=>n.id),edges:d10.graph.edges.map(e=>e.from+'>'+e.to)};
+ assert.deepEqual(d15.graph.edges,diagram(packFor([]),'D15',old.enrichBaziDiagram).graph.edges);assert.deepEqual(d15.graph.nodes.map(n=>n.id),['day','peer','output','wealth','pressure','resource','timing','relations']);
+ const summary=d15.graph.nodes.find(n=>n.id==='relations').value;assert(summary.includes('辛—丙')&&summary.includes('天干合'));
+ native.authorityDigest=await digest({natal:native.natal,globalVerdict:native.globalVerdict,sections:native.sections,boundaries:native.boundaries});delete native.digest;native.digest=await digest(native);
+ const probe=structuredClone(snapshot);probe.authorityDigest=native.authorityDigest;probe.timingDigest=native.timingDigest;probe.realityDigest=native.realityDigest;probe.fixture=true;probe.reviewSource='P7R3E_COMPILER_COMPATIBILITY_PROBE_NOT_CUSTOMER_MATERIAL';delete probe.digest;probe.digest=await digest(probe);
+ const ir=await compileBaziDeepPublication({snapshot:probe,pack:native,presentationMode:'BILINGUAL',recomposePass:0});assert.equal(ir.publication.pageCount,48);assert.equal(ir.technical.diagrams.length,15);assert.deepEqual(ir.technical.diagrams.find(x=>x.id==='D05').graph,d05.graph);assert.deepEqual(ir.technical.diagrams.find(x=>x.id==='D10').graph,d10.graph);assert.equal(ir.technical.diagrams.find(x=>x.id==='D15').graph.nodes.find(n=>n.id==='relations').value,summary);
+ receipt.D15={compileStatus:'PASS_COMPATIBILITY_PROBE',relationSummary:summary,undefinedVisible:false,nullVisible:false,radialTopologyUnchanged:true,probeScope:'V2 reference manuscript retained as labelled fixture; not a generated/accepted customer manuscript or delivered report.'};
+ receipt.outsideD05D15Unchanged=[];
+ for(const diag of ir.technical.diagrams.filter(x=>!['D05','D15'].includes(x.id))){assert.deepEqual(enrichBaziDiagram(structuredClone(diag),native),old.enrichBaziDiagram(structuredClone(diag),native));receipt.outsideD05D15Unchanged.push(diag.id);}
+ receipt.legacyTechnicalFidelity=ir.technical.fidelity.filter(x=>x.status==='FAIL').map(x=>({diagramId:x.diagramId,errors:x.errors}));
+ gengRegression=true;
+ for(const mode of ['BILINGUAL','EN','ZH_HANS']){const current=json(await compileBaziDeepPublication({snapshot,pack:reference,presentationMode:mode,recomposePass:v2.modes[mode].recomposePass})),baseline=read(v2.modes[mode].path);assert.deepEqual(current.publication.pages,baseline.publication.pages,'GENG_BASELINE_V2_PAGES_CHANGED');assert.deepEqual(current.editorial,baseline.editorial,'GENG_BASELINE_V2_SELECTED_SPANS_CHANGED');assert.deepEqual(current.technical.diagrams,baseline.technical.diagrams,'GENG_BASELINE_V2_DIAGRAMS_CHANGED');assert.equal(current.publication.pageCount,48);assert.equal(current.technical.diagrams.length,15);assert.equal(hash(JSON.stringify(current.publication.pages)),v2.modes[mode].pagesDigest);assert.equal(hash(JSON.stringify(current.technical.diagrams)),v2.modes[mode].diagramDigest);receipt.gengBaselineV2[mode]={status:'PASS',pagesDigest:hash(JSON.stringify(current.publication.pages)),diagramsDigest:hash(JSON.stringify(current.technical.diagrams)),allSelectedSpansUnchanged:true,D05Exact:true,D15Exact:true,pageCount:48,diagramCount:15};}
+ gengRegression=false;
+ receipt.currentCustomerTargetDiscrepancy={attachmentPositions:['DAY','HOUR'],attachmentEdge:'day>hour',auditedCanonicalPositions:audit.canonicalRelationships.relations[0].positions,actualEdge:'year>month',source:dir+'P7R3-D05-D10-SOURCE-AUDIT.json',policy:'Canonical truth preserved; attachment target not rewritten into customer Authority.',dayHourUnitCase:'A PASS'};
+ receipt.compatibilityStatus='PASS_LOCAL';receipt.status=reconciliationOnly?'PASS_LOCAL':'BLOCKED_EVIDENCE';receipt.nextAction=reconciliationOnly?'P7R3F_AUTHORITY_RELATIVE_RENDERED_TOPOLOGY_GATE':'Reconcile attachment DAY/HOUR target with audited YEAR/MONTH customer identity; afterward separately authorize Authority-relative fidelity/gate successor. No browser or full P7 in this work.';
+ if(reconciliationOnly)receipt.currentCustomerTargetDiscrepancy.state='SUPERSEDED_NOT_SOURCE_GROUNDED';
+}catch(error){receipt.status='FAILED';receipt.failure={message:error.message,stack:error.stack};if(gengRegression&&!reconciliationOnly){assert.equal(sha(owner),receipt.diagramOwner.afterSha256,'CONCURRENT_OWNER_CHANGE_NO_ROLLBACK');fs.writeFileSync(owner,original);receipt.status='FAIL_ROLLED_BACK';receipt.diagramOwner.afterSha256=sha(owner);}throw error;}finally{
+ receipt.selectorUnchanged=sha(selector)===freeze.selectorSha256;receipt.nativeAdapterUnchanged=sha(adapter)===d.afterSha256[adapter];receipt.baselineV2Unchanged=sha(dir+'BAZI-R2-CURRENT-PRODUCTION-PUBLICATION-BASELINE-V2.json')===freeze.baselineV2Sha256;receipt.protectedDrift=Object.entries(beforeHashes).filter(([p,h])=>sha(p)!==h).map(([p])=>p);receipt.protectedEvidenceUnchanged=receipt.protectedDrift.length===0;
+ write('P7R3E-CANONICAL-RELATION-CONSUMER-COMPATIBILITY.json',receipt);assert(receipt.protectedEvidenceUnchanged);
+}
+console.log(JSON.stringify({status:receipt.status,compatibilityStatus:receipt.compatibilityStatus,D05:receipt.D05,D10:receipt.D10,D15:receipt.D15,relationMatrix:receipt.relationMatrix,gengBaselineV2:receipt.gengBaselineV2,targetDiscrepancy:receipt.currentCustomerTargetDiscrepancy},null,2));

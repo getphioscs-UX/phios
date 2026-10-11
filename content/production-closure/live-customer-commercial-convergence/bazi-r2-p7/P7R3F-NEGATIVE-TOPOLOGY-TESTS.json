@@ -1,0 +1,745 @@
+{
+  "status": "PASS_LOCAL",
+  "tests": {
+    "positiveControl": {
+      "status": "PASS",
+      "observedTopologyStatus": "PASS",
+      "violations": []
+    },
+    "A": {
+      "status": "PASS",
+      "observedTopologyStatus": "FAIL",
+      "violations": [
+        {
+          "diagramId": "D05",
+          "kind": "RENDERED_TOPOLOGY_MISMATCH",
+          "expected": {
+            "diagramId": "D05",
+            "visualGrammarId": "NATAL_NETWORK",
+            "nodes": [
+              "year",
+              "month",
+              "day",
+              "hour"
+            ],
+            "edges": [
+              "year>month"
+            ],
+            "layers": [],
+            "features": [
+              "relation-edges",
+              "legend"
+            ]
+          },
+          "actual": {
+            "nodes": [
+              "year",
+              "month",
+              "day",
+              "hour"
+            ],
+            "edges": [],
+            "visualGrammarId": "NATAL_NETWORK"
+          }
+        }
+      ]
+    },
+    "B": {
+      "status": "PASS",
+      "observedTopologyStatus": "FAIL",
+      "violations": [
+        {
+          "diagramId": "D05",
+          "kind": "RENDERED_TOPOLOGY_MISMATCH",
+          "expected": {
+            "diagramId": "D05",
+            "visualGrammarId": "NATAL_NETWORK",
+            "nodes": [
+              "year",
+              "month",
+              "day",
+              "hour"
+            ],
+            "edges": [
+              "year>month"
+            ],
+            "layers": [],
+            "features": [
+              "relation-edges",
+              "legend"
+            ]
+          },
+          "actual": {
+            "nodes": [
+              "year",
+              "month",
+              "day",
+              "hour"
+            ],
+            "edges": [
+              "year>month",
+              "day>hour"
+            ],
+            "visualGrammarId": "NATAL_NETWORK"
+          }
+        }
+      ]
+    },
+    "C": {
+      "status": "PASS",
+      "observedTopologyStatus": "FAIL",
+      "violations": [
+        {
+          "diagramId": "D05",
+          "kind": "RENDERED_TOPOLOGY_MISMATCH",
+          "expected": {
+            "diagramId": "D05",
+            "visualGrammarId": "NATAL_NETWORK",
+            "nodes": [
+              "year",
+              "month",
+              "day",
+              "hour"
+            ],
+            "edges": [],
+            "layers": [],
+            "features": [
+              "relation-edges",
+              "legend"
+            ]
+          },
+          "actual": {
+            "nodes": [
+              "year",
+              "month",
+              "day",
+              "hour"
+            ],
+            "edges": [
+              "year>month"
+            ],
+            "visualGrammarId": "NATAL_NETWORK"
+          }
+        }
+      ]
+    },
+    "D": {
+      "status": "PASS",
+      "observedTopologyStatus": "FAIL",
+      "violations": [
+        {
+          "diagramId": "D10",
+          "kind": "RENDERED_TOPOLOGY_MISMATCH",
+          "expected": {
+            "diagramId": "D10",
+            "visualGrammarId": "DAY_BRANCH_INTERIOR",
+            "nodes": [
+              "day",
+              "hidden0",
+              "hidden1",
+              "hidden2"
+            ],
+            "edges": [
+              "day>hidden0",
+              "day>hidden1",
+              "day>hidden2"
+            ],
+            "layers": [
+              "dayBranch"
+            ],
+            "features": [
+              "enclosure",
+              "hidden-stems"
+            ]
+          },
+          "actual": {
+            "nodes": [
+              "day",
+              "hidden0",
+              "hidden1"
+            ],
+            "edges": [
+              "day>hidden0",
+              "day>hidden1",
+              "day>hidden2"
+            ],
+            "visualGrammarId": "DAY_BRANCH_INTERIOR"
+          }
+        },
+        {
+          "diagramId": "D10",
+          "kind": "DANGLING_EDGE"
+        }
+      ]
+    },
+    "E": {
+      "status": "PASS",
+      "observedTopologyStatus": "FAIL",
+      "violations": [
+        {
+          "diagramId": "D10",
+          "kind": "RENDERED_TOPOLOGY_MISMATCH",
+          "expected": {
+            "diagramId": "D10",
+            "visualGrammarId": "DAY_BRANCH_INTERIOR",
+            "nodes": [
+              "day",
+              "hidden0"
+            ],
+            "edges": [
+              "day>hidden0"
+            ],
+            "layers": [
+              "dayBranch"
+            ],
+            "features": [
+              "enclosure",
+              "hidden-stems"
+            ]
+          },
+          "actual": {
+            "nodes": [
+              "day",
+              "hidden0",
+              "hidden1",
+              "hidden2"
+            ],
+            "edges": [
+              "day>hidden0"
+            ],
+            "visualGrammarId": "DAY_BRANCH_INTERIOR"
+          }
+        }
+      ]
+    },
+    "F": {
+      "status": "PASS",
+      "observedTopologyStatus": "FAIL",
+      "violations": [
+        {
+          "diagramId": "D15",
+          "kind": "RENDERED_TOPOLOGY_MISMATCH",
+          "expected": {
+            "diagramId": "D15",
+            "visualGrammarId": "INTEGRATED_RADIAL",
+            "nodes": [
+              "day",
+              "peer",
+              "output",
+              "wealth",
+              "pressure",
+              "resource",
+              "timing",
+              "relations"
+            ],
+            "edges": [
+              "day>peer",
+              "day>output",
+              "day>wealth",
+              "day>pressure",
+              "day>resource",
+              "day>timing",
+              "day>relations"
+            ],
+            "layers": [],
+            "features": [
+              "center",
+              "radial-connections"
+            ]
+          },
+          "actual": {
+            "nodes": [
+              "day",
+              "peer",
+              "output",
+              "wealth",
+              "pressure",
+              "resource",
+              "timing",
+              "relations",
+              "unsupported"
+            ],
+            "edges": [
+              "day>peer",
+              "day>output",
+              "day>wealth",
+              "day>pressure",
+              "day>resource",
+              "day>timing",
+              "day>relations"
+            ],
+            "visualGrammarId": "INTEGRATED_RADIAL"
+          }
+        }
+      ]
+    },
+    "G": {
+      "status": "PASS",
+      "observedTopologyStatus": "FAIL",
+      "violations": [
+        {
+          "diagramId": "D15",
+          "kind": "RENDERED_TOPOLOGY_MISMATCH",
+          "expected": {
+            "diagramId": "D15",
+            "visualGrammarId": "INTEGRATED_RADIAL",
+            "nodes": [
+              "day",
+              "peer",
+              "output",
+              "wealth",
+              "pressure",
+              "resource",
+              "timing",
+              "relations"
+            ],
+            "edges": [
+              "day>peer",
+              "day>output",
+              "day>wealth",
+              "day>pressure",
+              "day>resource",
+              "day>timing",
+              "day>relations"
+            ],
+            "layers": [],
+            "features": [
+              "center",
+              "radial-connections"
+            ]
+          },
+          "actual": {
+            "nodes": [
+              "day",
+              "peer",
+              "output",
+              "wealth",
+              "pressure",
+              "resource",
+              "timing",
+              "relations"
+            ],
+            "edges": [
+              "day>peer",
+              "day>output",
+              "day>wealth",
+              "day>pressure",
+              "day>resource",
+              "day>timing",
+              "day>relations",
+              "peer>pressure"
+            ],
+            "visualGrammarId": "INTEGRATED_RADIAL"
+          }
+        }
+      ]
+    },
+    "H": {
+      "status": "PASS",
+      "observedTopologyStatus": "FAIL",
+      "violations": [
+        {
+          "diagramId": "D15",
+          "kind": "RENDERED_TOPOLOGY_MISMATCH",
+          "expected": {
+            "diagramId": "D15",
+            "visualGrammarId": "INTEGRATED_RADIAL",
+            "nodes": [
+              "day",
+              "peer",
+              "output",
+              "wealth",
+              "pressure",
+              "resource",
+              "timing",
+              "relations"
+            ],
+            "edges": [
+              "day>peer",
+              "day>output",
+              "day>wealth",
+              "day>pressure",
+              "day>resource",
+              "day>timing",
+              "day>relations"
+            ],
+            "layers": [],
+            "features": [
+              "center",
+              "radial-connections"
+            ]
+          },
+          "actual": {
+            "nodes": [
+              "day",
+              "peer",
+              "output",
+              "wealth",
+              "pressure",
+              "resource",
+              "timing",
+              "relations"
+            ],
+            "edges": [
+              "day>peer",
+              "day>output",
+              "day>wealth",
+              "day>pressure",
+              "day>resource",
+              "day>timing",
+              "day>relations",
+              "day>absent"
+            ],
+            "visualGrammarId": "INTEGRATED_RADIAL"
+          }
+        },
+        {
+          "diagramId": "D15",
+          "kind": "DANGLING_EDGE"
+        }
+      ]
+    },
+    "missingExpected": {
+      "status": "PASS",
+      "observedTopologyStatus": "FAIL",
+      "violations": [
+        {
+          "kind": "EXPECTED_DIAGRAM_TOPOLOGY_REQUIRED"
+        }
+      ]
+    }
+  },
+  "expectedTopology": {
+    "D01": {
+      "diagramId": "D01",
+      "visualGrammarId": "PILLAR_MATRIX",
+      "nodes": [
+        "pillar-0",
+        "pillar-1",
+        "pillar-2",
+        "pillar-3"
+      ],
+      "edges": [],
+      "layers": [],
+      "features": [
+        "hidden-stems",
+        "ten-god-labels"
+      ]
+    },
+    "D02": {
+      "diagramId": "D02",
+      "visualGrammarId": "ELEMENT_BARS",
+      "nodes": [
+        "element-0",
+        "element-1",
+        "element-2",
+        "element-3",
+        "element-4"
+      ],
+      "edges": [],
+      "layers": [],
+      "features": [
+        "month-command"
+      ]
+    },
+    "D03": {
+      "diagramId": "D03",
+      "visualGrammarId": "TEN_GOD_RING",
+      "nodes": [
+        "god-0",
+        "god-1",
+        "god-2",
+        "god-3",
+        "god-4",
+        "god-5",
+        "god-6",
+        "god-7",
+        "god-8",
+        "god-9"
+      ],
+      "edges": [],
+      "layers": [],
+      "features": [
+        "ring",
+        "visible-hidden",
+        "legend"
+      ]
+    },
+    "D04": {
+      "diagramId": "D04",
+      "visualGrammarId": "SUPPORT_DIRECTION",
+      "nodes": [
+        "month",
+        "day",
+        "peer",
+        "resource",
+        "support",
+        "output"
+      ],
+      "edges": [
+        "month>day",
+        "peer>day",
+        "resource>day",
+        "support>day",
+        "day>output"
+      ],
+      "layers": [],
+      "features": [
+        "directed-edges",
+        "support",
+        "drain"
+      ]
+    },
+    "D05": {
+      "diagramId": "D05",
+      "visualGrammarId": "NATAL_NETWORK",
+      "nodes": [
+        "year",
+        "month",
+        "day",
+        "hour"
+      ],
+      "edges": [
+        "year>month"
+      ],
+      "layers": [],
+      "features": [
+        "relation-edges",
+        "legend"
+      ]
+    },
+    "D06": {
+      "diagramId": "D06",
+      "visualGrammarId": "CAPABILITY_CHAIN",
+      "nodes": [
+        "peer",
+        "output",
+        "wealth",
+        "resource"
+      ],
+      "edges": [
+        "peer>output",
+        "output>wealth",
+        "wealth>resource"
+      ],
+      "layers": [],
+      "features": [
+        "ordered-chain",
+        "wealth",
+        "resource"
+      ]
+    },
+    "D07": {
+      "diagramId": "D07",
+      "visualGrammarId": "OPERATING_LOOP",
+      "nodes": [
+        "day",
+        "output",
+        "wealth",
+        "resource",
+        "peer"
+      ],
+      "edges": [
+        "day>output",
+        "output>wealth",
+        "wealth>resource",
+        "resource>peer",
+        "peer>day"
+      ],
+      "layers": [],
+      "features": [
+        "cycle"
+      ]
+    },
+    "D08": {
+      "diagramId": "D08",
+      "visualGrammarId": "CAREER_CHAIN",
+      "nodes": [
+        "output",
+        "wealth",
+        "adoption",
+        "resource",
+        "pressure"
+      ],
+      "edges": [
+        "output>wealth",
+        "wealth>adoption",
+        "resource>adoption",
+        "pressure>adoption"
+      ],
+      "layers": [],
+      "features": [
+        "ordered-chain",
+        "pressure",
+        "resource"
+      ]
+    },
+    "D09": {
+      "diagramId": "D09",
+      "visualGrammarId": "WEALTH_FUNNEL",
+      "nodes": [
+        "output",
+        "wealth",
+        "cost",
+        "resource",
+        "retention"
+      ],
+      "edges": [
+        "output>wealth",
+        "wealth>cost",
+        "cost>resource",
+        "resource>retention"
+      ],
+      "layers": [],
+      "features": [
+        "staged-flow",
+        "retention"
+      ]
+    },
+    "D10": {
+      "diagramId": "D10",
+      "visualGrammarId": "DAY_BRANCH_INTERIOR",
+      "nodes": [
+        "day",
+        "hidden0",
+        "hidden1",
+        "hidden2"
+      ],
+      "edges": [
+        "day>hidden0",
+        "day>hidden1",
+        "day>hidden2"
+      ],
+      "layers": [
+        "dayBranch"
+      ],
+      "features": [
+        "enclosure",
+        "hidden-stems"
+      ]
+    },
+    "D11": {
+      "diagramId": "D11",
+      "visualGrammarId": "FAMILY_NETWORK",
+      "nodes": [
+        "year",
+        "day",
+        "hour",
+        "resource",
+        "shared"
+      ],
+      "edges": [
+        "year>resource",
+        "day>resource",
+        "hour>resource",
+        "resource>shared"
+      ],
+      "layers": [],
+      "features": [
+        "branches",
+        "shared-support"
+      ]
+    },
+    "D12": {
+      "diagramId": "D12",
+      "visualGrammarId": "RECOVERY_PATH",
+      "nodes": [
+        "output",
+        "pressure",
+        "day",
+        "resource",
+        "recovery"
+      ],
+      "edges": [
+        "output>pressure",
+        "pressure>day",
+        "day>resource",
+        "resource>recovery"
+      ],
+      "layers": [],
+      "features": [
+        "directed-edges",
+        "recovery"
+      ]
+    },
+    "D13": {
+      "diagramId": "D13",
+      "visualGrammarId": "FUNCTION_CYCLE",
+      "nodes": [
+        "peer",
+        "output",
+        "wealth",
+        "pressure",
+        "resource"
+      ],
+      "edges": [
+        "peer>output",
+        "output>wealth",
+        "wealth>pressure",
+        "pressure>resource",
+        "resource>peer"
+      ],
+      "layers": [],
+      "features": [
+        "cycle",
+        "five-functions"
+      ]
+    },
+    "D14": {
+      "diagramId": "D14",
+      "visualGrammarId": "TIMING_LAYERS",
+      "nodes": [
+        "natal",
+        "dayun",
+        "annual"
+      ],
+      "edges": [
+        "natal>dayun",
+        "dayun>annual"
+      ],
+      "layers": [
+        "natal",
+        "dayun",
+        "annual"
+      ],
+      "features": [
+        "natal",
+        "dayun",
+        "annual",
+        "relation-connectors"
+      ]
+    },
+    "D15": {
+      "diagramId": "D15",
+      "visualGrammarId": "INTEGRATED_RADIAL",
+      "nodes": [
+        "day",
+        "peer",
+        "output",
+        "wealth",
+        "pressure",
+        "resource",
+        "timing",
+        "relations"
+      ],
+      "edges": [
+        "day>peer",
+        "day>output",
+        "day>wealth",
+        "day>pressure",
+        "day>resource",
+        "day>timing",
+        "day>relations"
+      ],
+      "layers": [],
+      "features": [
+        "center",
+        "radial-connections"
+      ]
+    }
+  },
+  "authorityAndIRUnchanged": true,
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "providerNetworkCalls": 0
+}
