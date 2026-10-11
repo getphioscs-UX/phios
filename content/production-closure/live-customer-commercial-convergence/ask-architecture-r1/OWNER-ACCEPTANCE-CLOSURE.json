@@ -1,0 +1,96 @@
+{
+  "head": "7bbf7fee0b3ed9548dc854420959803567155ad2",
+  "at": "2026-10-10T23:57:59.948Z",
+  "decision": "HUMAN_ACCEPTED",
+  "ownerStatement": "所有pending humsn review, 可以视为human accept，不要因此而成为ask断点",
+  "receipt": "../OWNER-PENDING-REVIEW-HUMAN-ACCEPT-v1.json",
+  "acceptedFileVersions": 584,
+  "book5AcceptedArticleVersions": 84,
+  "sourceGuardTests": [
+    "accepted version returns 200",
+    "missing receipt returns 422",
+    "changed manifest returns 422",
+    "changed article returns 422"
+  ],
+  "localBrowser": {
+    "passed": 28,
+    "total": 28,
+    "sourceCurrent": true
+  },
+  "actualSourceFiles": [
+    {
+      "file": "functions/contextual-ask/contextual-ask-runtime.js",
+      "sha256": "5f0ad783d4b12436cfad507f5a7e13b34d90eb1aec9866ff0b88cbb4998f66ad"
+    },
+    {
+      "file": "scripts/check-ask-architecture-r1.mjs",
+      "sha256": "ba8c35bf8c0009b265c41ba5fe8949497595fa6309f95c3d855b728d20bef919"
+    },
+    {
+      "file": "scripts/build-cloudflare-pages.mjs",
+      "sha256": "246292f0b19bb73fbb7897b85ba090edadb0a459cbf472d31c1943b3379659c7"
+    },
+    {
+      "file": "scripts/build-ask-architecture-r1-review.mjs",
+      "sha256": "2126777214a4265af48e4edee5dc14a0099cee2da333075236167ecd01b0adc5"
+    },
+    {
+      "file": "scripts/lib/master-owner-truth.mjs",
+      "sha256": "a8a21ef3fcbf15798254b73f75f72905502ffaa50cac5198a16d54fd8a161f18"
+    },
+    {
+      "file": "content/knowledge/public/successors/book5-publication-v1/human-acceptance-successor-v1.json",
+      "sha256": "f67643b7a44ff301830789d8faa4562191b5ddfc8bd21a13d01cc6e6cdfe015c"
+    }
+  ],
+  "providerCalls": 0,
+  "realPayments": 0,
+  "productionMigrations": 0,
+  "r2Deletion": 0,
+  "automaticCommitPushDeploy": 0,
+  "SOURCE": "PASS_BOUNDED_ACCEPTANCE_AND_ASK_ADMISSION",
+  "DEPLOYED": "NOT_RUN",
+  "LIVE_CUSTOMER": "NOT_RUN",
+  "remainingSourceGaps": "SOURCE-GAPS.json",
+  "build": {
+    "state": "BUILD_PASS_INPUT_CHANGED",
+    "head": "7bbf7fee0b3ed9548dc854420959803567155ad2",
+    "digest": "f7891d4b343a2e4b192f9dcbe69b92c5f201c066df1518fb8b85412424456732",
+    "stale": true,
+    "current": false,
+    "compileExitCode": 0,
+    "receipt": "../MASTER-PAGES-CURRENT-RECEIPT.json",
+    "note": "Other-window source changes during build are retained; whole-tree current-build identity is not established. Acceptance and zero-provider Ask verification remain distinct."
+  },
+  "book5AdmissionLedger": {
+    "bookCode": "BOOK-5",
+    "registeredPublishedRows": 84,
+    "admittedPublishedRows": 84,
+    "pendingOrUnadmittedRows": 0,
+    "locales": "zh-Hans|en",
+    "sourceRegistries": "content/knowledge/public/successors/book5-publication-v1/visual-article-release.json",
+    "access": "PUBLIC_APPROVED_ARTICLE_EXCERPTS_NOT_FULL_BOOK",
+    "nativeAdditionalConsumer": "Existing Civilization Atlas / World",
+    "missing": "Current owner acceptance is version-bound; existing published authority retained",
+    "manifestStates": "WORKTREE_PUBLICATION_CANDIDATE"
+  },
+  "postBuildSourceChange": {
+    "file": "scripts/build-bazi-t3-packs.mjs",
+    "sha256": "1ff4e1a411efa56cfffafd86ec98d5aa4819e340a273b48d6e31b512f0cde9a2",
+    "scope": "External shared-worktree modification retained; not an Ask acceptance blocker; current whole-tree build identity requires refresh"
+  },
+  "concurrentBuildChanges": [
+    {
+      "path": "content/civilization-atlas/search/world-search-index-v1.json",
+      "sha256": "9019fbba55056dbc13eade1c09dc34bfda607422f9c3a840f3e02a20095a3eaf"
+    },
+    {
+      "path": "scripts/build-full-release-continuation-review.mjs",
+      "sha256": "66ce8d536bf9ea6c52b3ea12b14d1e7a4bf553be9d01458eeb7c35bcd08ad681"
+    },
+    {
+      "path": "scripts/close-full-release-continuation.mjs",
+      "sha256": "1a7db493a2ccaa0f763b43d58acfcfacadd813fbb188779b6e0d5ab9c02aefee"
+    }
+  ]
+}

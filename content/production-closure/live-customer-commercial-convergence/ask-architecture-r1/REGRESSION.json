@@ -49,7 +49,62 @@
       "exitCode": 1,
       "state": "FAIL",
       "logfile": "content/production-closure/live-customer-commercial-convergence/ask-architecture-r1/check-cka-w18-w33.log"
+    },
+    {
+      "command": "check:pja-w1",
+      "exitCode": 0,
+      "state": "PASS",
+      "logfile": "content/production-closure/live-customer-commercial-convergence/ask-architecture-r1/check-pja-w1.log",
+      "head": "7bbf7fee0b3ed9548dc854420959803567155ad2"
+    },
+    {
+      "command": "check:cloudflare-function-import-compat",
+      "exitCode": 0,
+      "state": "PASS",
+      "logfile": "content/production-closure/live-customer-commercial-convergence/ask-architecture-r1/check-cloudflare-function-import-compat.log",
+      "head": "7bbf7fee0b3ed9548dc854420959803567155ad2"
+    },
+    {
+      "command": "check:report-provider-spend-protection",
+      "exitCode": 0,
+      "state": "PASS",
+      "logfile": "content/production-closure/live-customer-commercial-convergence/ask-architecture-r1/check-report-provider-spend-protection.log",
+      "head": "7bbf7fee0b3ed9548dc854420959803567155ad2"
+    },
+    {
+      "command": "check:i18n",
+      "exitCode": 0,
+      "state": "PASS",
+      "logfile": "content/production-closure/live-customer-commercial-convergence/ask-architecture-r1/check-i18n.log",
+      "head": "7bbf7fee0b3ed9548dc854420959803567155ad2"
     }
   ],
-  "providerCalls": 0
+  "providerCalls": 0,
+  "ownerAcceptanceVerification": {
+    "head": "7bbf7fee0b3ed9548dc854420959803567155ad2",
+    "at": "2026-10-10T23:59:17.345Z",
+    "checks": [
+      {
+        "command": "check:ask-architecture-r1",
+        "state": "PASS",
+        "receipt": "SOURCE-CHECKS.json",
+        "scope": "28 bilingual routes, 9 real endpoints, accepted Book5 plus absent/changed receipt guards",
+        "providerCalls": 0
+      },
+      {
+        "command": "check:i18n",
+        "state": "PASS",
+        "alignedKeys": 4879
+      },
+      {
+        "command": "check:cloudflare-function-import-compat",
+        "state": "PASS"
+      },
+      {
+        "command": "check-master-owner-truth",
+        "state": "PASS"
+      }
+    ],
+    "paidCalls": 0
+  }
 }

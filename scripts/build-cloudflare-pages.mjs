@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { gzipSync } from 'node:zlib';
+import {createHash} from 'node:crypto';
 import {acquirePagesOutputLock} from './lib/pages-output-lock.mjs';
 
 const root = path.resolve(
@@ -190,6 +191,15 @@ const admittedBookVii = await loadBookViiPublishedAdmission(async rel => {
   return fs.existsSync(source) ? JSON.parse(fs.readFileSync(source, 'utf8')) : null;
 });
 const publicationFiles = new Set(tracked.stdout.split('\0').filter(Boolean));
+// Version-bound public admission metadata; private owner review remains excluded.
+const book5AcceptancePath='content/knowledge/public/successors/book5-publication-v1/human-acceptance-successor-v1.json';
+if(fs.existsSync(path.join(root,book5AcceptancePath))){
+ const acceptance=JSON.parse(fs.readFileSync(path.join(root,book5AcceptancePath),'utf8'));
+ const digest=file=>createHash('sha256').update(fs.readFileSync(path.join(root,file))).digest('hex');
+ if(acceptance.decision!=='HUMAN_ACCEPTED'||acceptance.manifestPath!=='/content/knowledge/public/successors/book5-publication-v1/visual-article-release.json'||acceptance.manifestSHA256!==digest(acceptance.manifestPath.slice(1)))throw Error('BOOK5_ACCEPTANCE_MANIFEST_DRIFT');
+ for(const record of acceptance.records||[]){if(!record.path.startsWith('/content/knowledge/public/')||record.sha256!==digest(record.path.slice(1)))throw Error('BOOK5_ACCEPTANCE_ARTICLE_DRIFT');}
+ publicationFiles.add(book5AcceptancePath);
+}
 // The recovery error page must be reviewable before committing it. Without a
 // top-level 404.html Pages serves the homepage for unknown static routes.
 if(fs.existsSync(path.join(root,'404.html')))publicationFiles.add('404.html');

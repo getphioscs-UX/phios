@@ -3,6 +3,7 @@ import {assertCurrentMigrationBoundary,methodCacheSuccessor} from './lib/product
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import {usesGovernedArticleEntry} from './lib/article-shell-entry-contract.mjs';
 import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { loadPjaBlueprintContext } from './lib/knowledge-production/blueprint-context.mjs';
@@ -257,7 +258,12 @@ assert(px2Successor.preservesRuntimeAuthority.includes('published knowledge auth
 const pisNavigation=await readJson('content/web/index-surfaces/pis-r1-navigation-successor-v1.json');
 assert.deepEqual(pisNavigation.primaryNavigation.map(item=>item.href),['/explore/','/reality/','/perspectives/','/knowledge/','/professional/']);
 assert.equal(pisNavigation.runtimeChanged,false);
-const expectedMainNavigation = pisNavigation.primaryNavigation.map(item => [item.id,item.href]);
+const currentNavigation=await readJson('content/web/index-surfaces/pis-r1-world-about-navigation-successor-v2.json');
+assert.equal(currentNavigation.status,'ENGINEERING_RECONCILIATION');assert.equal(currentNavigation.predecessor.path,'content/web/index-surfaces/pis-r1-navigation-successor-v1.json');
+assert.equal(currentNavigation.predecessor.sha256,crypto.createHash('sha256').update(await fs.readFile(path.join(root,currentNavigation.predecessor.path))).digest('hex'));
+for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(currentNavigation[key],false);
+assert.deepEqual(currentNavigation.primaryNavigation.map(item=>item.href),['/world','/about/founder/','/reality/','/perspectives/','/knowledge/','/professional/']);
+const expectedMainNavigation = currentNavigation.primaryNavigation.map(item => [item.id,item.href]);
 for (const [id, href] of expectedMainNavigation) {
   assert(
     publicShell.includes(`{ id: '${id}', href: '${href}'`),
@@ -283,10 +289,17 @@ const currentPageByHistoricalPage = new Map([
 ]);
 const cxMigratedPjaPages = new Set(['index.html', 'articles/index.html', 'explore/index.html']);
 const px2MigratedPjaPages = new Set(['library.html']);
+async function assertExploreAboutRedirect(html){
+ assert(html.includes('href="https://www.getphios.com/about/founder/"'));
+ assert(html.includes('src="/assets/js/explore-about-compat.js"'));
+ const redirect=await read('assets/js/explore-about-compat.js');assert(redirect.includes("location.replace('/about/founder/'"));
+ const target=await read('about/founder/index.html');assert(target.includes('/assets/js/public-shell.js'));for(const anchor of ['why','how','start','faq'])assert(target.includes(`id="${anchor}"`));
+}
 for (const historicalPage of requiredPages) {
   const page = currentPageByHistoricalPage.get(historicalPage) || historicalPage;
   assert.equal(await exists(page), true, `Missing current PJA-W1 page: ${page}`);
   const html = await read(page);
+  if(page==='explore/index.html'){await assertExploreAboutRedirect(html);continue;}
   if (cxMigratedPjaPages.has(page)) {
     assert(
       html.includes('/assets/customer-ui/js/shell.js'),
@@ -335,6 +348,7 @@ for (const page of ['library.html', 'book-one.html', 'thesis.html']) {
 const currentKnowledgeHome = await read('knowledge/index.html');
 const currentExplore = await read('explore/index.html');
 for (const [page, html] of [['knowledge/index.html', currentKnowledgeHome], ['explore/index.html', currentExplore]]) {
+  if(page==='explore/index.html'){await assertExploreAboutRedirect(html);continue;}
   assert(html.includes('/assets/customer-ui/js/shell.js'), `${page} must consume the current CX shell`);
 }
 assert(currentKnowledgeHome.includes('/assets/customer-ui/js/surfaces/knowledge.js'));

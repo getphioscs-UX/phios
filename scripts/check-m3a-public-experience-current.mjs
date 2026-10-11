@@ -6,6 +6,20 @@ import {consolidationSuccessor,assertCurrentConsolidatedSurface} from './lib/pag
 const read = file => fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
 const json = file => JSON.parse(read(file));
 
+function exploreAboutDestination(source = read('explore/index.html')) {
+  assert(source.includes('href="https://www.getphios.com/about/founder/"'), 'Explore canonical About destination missing');
+  assert(source.includes('src="/assets/js/explore-about-compat.js"'), 'Explore compatibility runtime missing');
+  const runtime = read('assets/js/explore-about-compat.js');
+  assert(runtime.includes("location.replace('/about/founder/'"), 'Explore About routing missing');
+  assert(runtime.includes("new Set(['why','how','start','faq'])"));
+  assert(runtime.includes("allowed.has(id)?'#'+id:''"), 'Explore bounded anchor routing missing');
+  const target = read('about/founder/index.html');
+  assert(target.includes('/assets/js/public-shell.js'), 'About destination shell missing');
+  assert.equal(target.includes('/assets/js/public-shell-v2.js'), false);
+  for (const anchor of ['why', 'how', 'start', 'faq']) assert(target.includes(`id="${anchor}"`), `About destination anchor missing: ${anchor}`);
+  return target;
+}
+
 const deletePlan = json('content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json');
 const homepage = json('content/customer-experience-rebuild/authority/homepage-customer-composition-v1.json');
 const explore = json('content/customer-experience-rebuild/authority/explore-customer-experience-v1.json');
@@ -38,14 +52,19 @@ const currentPages = [
 for (const page of currentPages) {
   assert.equal(fs.existsSync(page), true, `Current customer surface missing: ${page}`);
   const source = read(page);
+  if (page === 'explore/index.html') {
+    exploreAboutDestination(source);
+    assert.equal(source.includes('/assets/js/public-shell-v2.js'), false);
+    continue;
+  }
   const successor=consolidationSuccessor()?.surfaces.find(s=>s.file===page);
   if(successor?.redirect){
     const {document}=parseHTML(source);
     assertCurrentConsolidatedSurface(document,page);
     assert(source.includes('/assets/customer-ui/js/surfaces/page-consolidation-redirect.js'),`${page}: redirect runtime missing`);
     const [route,anchor]=successor.redirect.split('#');
-    const target=read(route.slice(1)+'index.html');
-    assert(target.includes('/assets/customer-ui/js/shell.js'),`${page}: destination shell missing`);
+    const target=route==='/explore/'?exploreAboutDestination():read(route.slice(1)+'index.html');
+    if(route!=='/explore/')assert(target.includes('/assets/customer-ui/js/shell.js'),`${page}: destination shell missing`);
     assert(target.includes(`id="${anchor}"`),`${page}: destination anchor missing`);
     assert.equal(source.includes('/assets/js/public-shell-v2.js'),false);
     continue;
@@ -83,8 +102,13 @@ for (const file of new Set(retiredFiles)) {
 }
 
 for (const rule of [
-  '/about.html /about/ 308',
-  '/explore.html /explore/ 308',
+  '/about.html /about/founder/ 308',
+  '/explore.html /about/founder/ 308',
+  '/about/ /about/founder/ 308',
+  '/explore/ /about/founder/ 308',
+  '/explore/why-phios/ /about/founder/#why 308',
+  '/explore/how-it-works/ /about/founder/#how 308',
+  '/explore/start/ /about/founder/#start 308',
   '/articles.html /articles/ 308',
   '/figures.html /figures/ 308',
   '/glossary.html /knowledge/concepts/ 308',

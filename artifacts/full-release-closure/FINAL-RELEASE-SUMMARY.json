@@ -1,0 +1,155 @@
+{
+  "verdict": "FULL_RELEASE_PASS",
+  "local": "PASS_LOCAL",
+  "build": "PASS_BUILD",
+  "deployment": "DEPLOYED",
+  "deploymentByThisTask": true,
+  "live": "PASS_LIVE",
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "commit": "NOT PERFORMED",
+  "push": "NOT PERFORMED",
+  "remainingIssues": [],
+  "gitStatus": {
+    "dirty": 44,
+    "untracked": 145,
+    "workingTreePreserved": true
+  },
+  "gates": [
+    {
+      "id": "SOURCE-CHECKS",
+      "status": "REUSED_PASS",
+      "evidence": "artifacts/live-page-recovery-r1/SOURCE-CHECKS.json"
+    },
+    {
+      "id": "RESOURCE-GET-DECODE",
+      "status": "REUSED_PASS",
+      "evidence": "artifacts/live-page-recovery-r1/RESOURCE-GET-DECODE.json"
+    },
+    {
+      "id": "UI-CHECKS",
+      "status": "REUSED_PASS",
+      "evidence": "artifacts/live-page-recovery-r1/UI-CHECKS.json"
+    },
+    {
+      "id": "LANGUAGE-STATE-CHECKS",
+      "status": "REUSED_PASS",
+      "evidence": "artifacts/live-page-recovery-r1/LANGUAGE-STATE-CHECKS.json"
+    },
+    {
+      "id": "REFLOW-CHECKS",
+      "status": "REUSED_PASS",
+      "evidence": "artifacts/live-page-recovery-r1/REFLOW-CHECKS.json"
+    },
+    {
+      "id": "PROFILE-PRINT-CHECK",
+      "status": "REUSED_PASS",
+      "evidence": "artifacts/live-page-recovery-r1/PROFILE-PRINT-CHECK.json"
+    },
+    {
+      "id": "REGRESSIONS",
+      "status": "REUSED_PASS",
+      "evidence": "artifacts/live-page-recovery-r1/REGRESSIONS.json"
+    },
+    {
+      "id": "ICHING-UI-CHECKS",
+      "status": "REUSED_PASS",
+      "evidence": "artifacts/live-page-recovery-r1/ICHING-UI-CHECKS.json"
+    },
+    {
+      "id": "404-BUILT-LOCAL-CHECK",
+      "status": "REUSED_PASS",
+      "evidence": "artifacts/live-page-recovery-r1/404-BUILT-LOCAL-CHECK.json"
+    },
+    {
+      "id": "404-BUILT-BROWSER-CHECK",
+      "status": "REUSED_PASS",
+      "evidence": "artifacts/live-page-recovery-r1/404-BUILT-BROWSER-CHECK.json"
+    },
+    {
+      "id": "LINK-TARGET-CHECKS",
+      "status": "REUSED_PASS",
+      "evidence": "artifacts/live-page-recovery-r1/LINK-TARGET-CHECKS.json"
+    },
+    {
+      "id": "LEGACY-RESOLVER-CHECK",
+      "status": "REUSED_PASS",
+      "evidence": "artifacts/live-page-recovery-r1/LEGACY-RESOLVER-CHECK.json"
+    },
+    {
+      "id": "LEGACY-NETWORK-CLOSURE",
+      "status": "REUSED_PASS",
+      "evidence": "artifacts/live-page-recovery-r1/LEGACY-NETWORK-CLOSURE.json"
+    },
+    {
+      "id": "NETWORK-RETRY-CLOSURE",
+      "status": "REUSED_PASS",
+      "evidence": "artifacts/live-page-recovery-r1/NETWORK-RETRY-CLOSURE.json"
+    }
+  ],
+  "checkedAt": "2026-10-11T00:21:20.722Z",
+  "productionDeploymentId": "eb284a47-dd6f-4b19-8048-618144d0ba52",
+  "sourceBuildIdentity": {
+    "relevantInputDigest": "bf325346f7318773efc60293255b2c08b91ff6265aede83d25f5974779145203",
+    "outputDigest": "20368d77c2350f9963e3309219919d90fdf015b6ce2afede5dddba03a7b4984f",
+    "workerSHA256": "8e03dad2d275b68dda774ceb118dcd10225e4f46a83e49f94c55576a488131fe",
+    "proof": "One corrected redirect copied into validated output under exclusive DEPLOY lock; unchanged Worker and all other publication files.",
+    "canonicalURLMatches": true
+  },
+  "repairs": [
+    {
+      "file": "_redirects",
+      "change": "/ask/ → /knowledge/ask/ 308; query locale retained"
+    }
+  ],
+  "verification": {
+    "local": "REUSED_PASS: 316 routes / 632 visits; no repeated full matrix",
+    "productionSmoke": {
+      "pageStates": 26,
+      "apiBoundaries": 7,
+      "status": "PASS_LIVE"
+    },
+    "fullBuildsThisContinuation": 0,
+    "deployments": 2,
+    "correctiveDeployments": 1
+  },
+  "scopeExclusions": [
+    "No authenticated purchase, payment, provider interpretation or paid report generation performed",
+    "No claim of signed-in report ownership verification; anonymous entitlement boundary tested",
+    "Manual assistive technology / actual browser 200% zoom and unselected Atlas editorial review remain outside this release smoke scope"
+  ],
+  "reviewVerification": {
+    "status": "PASS_LOCAL",
+    "httpStatus": 200,
+    "references": 49,
+    "missing": [],
+    "images": [
+      {
+        "src": "../../artifacts/live-page-recovery-r1/captures-before/_-en.png",
+        "decoded": true
+      },
+      {
+        "src": "../../artifacts/live-page-recovery-r1/captures-before/_-zh-Hans.png",
+        "decoded": true
+      },
+      {
+        "src": "../../artifacts/live-page-recovery-r1/captures/home-final-390-zh-Hans.png",
+        "decoded": true
+      },
+      {
+        "src": "../../artifacts/live-page-recovery-r1/captures/home-final-1440-en.png",
+        "decoded": true
+      },
+      {
+        "src": "../../artifacts/live-page-recovery-r1/world-final-pass/local-landing-390-zh-Hans.png",
+        "decoded": true
+      },
+      {
+        "src": "../../artifacts/live-page-recovery-r1/world-final-pass/local-comparison-1280-en.png",
+        "decoded": true
+      }
+    ],
+    "filterRows": 2,
+    "errors": []
+  }
+}

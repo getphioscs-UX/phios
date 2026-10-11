@@ -1,8 +1,24 @@
 import fs from 'node:fs';
+import {randomUUID} from 'node:crypto';
+import {setTimeout as delay} from 'node:timers/promises';
 import {projectBaziSectionPublication} from '../functions/personal-reading/bazi-section-publication.js';
 import {buildBaziMethodNativeReading} from '../functions/personal-professional-reading/bazi-method-native-reading-adapter.js';
 import {buildInputs,generateCampaignCases} from './lib/bazi-fp-w17-campaign.mjs';
 import {T3_SECTIONS,buildSectionEvidencePack} from '../functions/personal-reading/narrative/bazi-editorial-contract.js';
+async function writeGenerated(file, content) {
+ try { if(fs.readFileSync(file,'utf8')===content)return; } catch(error) { if(error.code!=='ENOENT')throw error; }
+ const temporary=`${file}.${randomUUID()}.tmp`;
+ try {
+  fs.writeFileSync(temporary,content,{flag:'wx'});
+  for(let attempt=0;;attempt++){
+   try { fs.renameSync(temporary,file); break; }
+   catch(error){
+    if(attempt>=20||!['EPERM','EACCES','EBUSY','UNKNOWN'].includes(error.code))throw error;
+    await delay(100);
+   }
+  }
+ } finally { fs.rmSync(temporary,{force:true}); }
+}
 const source=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json'));
 const packs={},profiles=[{id:'BASELINE_NOW',...source}],matrix=[];
 const campaign=generateCampaignCases();
@@ -53,10 +69,10 @@ const evidenceStrata={
  canonicalProductionBlocked:false
 };
 const fixtureClass='SYNTHETIC_EXISTING_CANONICAL_BAZI_BENCHMARK';
-fs.writeFileSync('functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json',JSON.stringify({fixtureClass,stagedProfiles,profileIds:profiles.map(p=>p.id),packs})+'\n');
+await writeGenerated('functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json',JSON.stringify({fixtureClass,stagedProfiles,profileIds:profiles.map(p=>p.id),packs})+'\n');
 // Keep the offline multi-profile audit corpus out of the Worker. Addendum F
 // currently authorizes only sequential BASELINE_NOW editorial production.
-fs.writeFileSync('functions/personal-reading/narrative/bazi-t3-preview-baseline.generated.json',JSON.stringify({fixtureClass,stagedProfiles,profileIds:['BASELINE_NOW'],packs:Object.fromEntries(Object.entries(packs).filter(([key])=>key.startsWith('BASELINE_NOW:')))})+'\n');
+await writeGenerated('functions/personal-reading/narrative/bazi-t3-preview-baseline.generated.json',JSON.stringify({fixtureClass,stagedProfiles,profileIds:['BASELINE_NOW'],packs:Object.fromEntries(Object.entries(packs).filter(([key])=>key.startsWith('BASELINE_NOW:')))})+'\n');
 fs.mkdirSync('docs/guided-report-successor-r2/bazi-t3',{recursive:true});
-fs.writeFileSync('docs/guided-report-successor-r2/bazi-t3/shadow-matrix.json',JSON.stringify({fixtureClass,evidenceStrata,liveAccepted:false,profiles:profiles.length,locales:2,t3Sections:8,deterministicControls:1,matrix},null,2)+'\n');
+await writeGenerated('docs/guided-report-successor-r2/bazi-t3/shadow-matrix.json',JSON.stringify({fixtureClass,evidenceStrata,liveAccepted:false,profiles:profiles.length,locales:2,t3Sections:8,deterministicControls:1,matrix},null,2)+'\n');
 console.log(JSON.stringify({profiles:profiles.length,matrixChecks:matrix.length,packs:Object.keys(packs).length,sourceRejections:matrix.filter(x=>x.state==='SOURCE_REJECTED').length,liveProviderInvoked:false}));

@@ -82,8 +82,23 @@ export async function resolveSelectedArticle(env,slug,locale='en') {
  const read=async path=>{const r=await env.ASSETS.fetch(new Request('https://assets.local'+path));return r.ok?r.json():null;};
  try{
   const paths=['/content/knowledge/public/visual-article-release.json','/content/knowledge/public/abl-bilingual-release.json','/content/knowledge/public/successors/book4-publication-v1/visual-article-release.json','/content/knowledge/public/successors/book5-publication-v1/visual-article-release.json','/content/knowledge/public/successors/book6-publication-v1/visual-article-release.json'];
+  const digest=async path=>{const r=await env.ASSETS.fetch(new Request('https://assets.local'+path));if(!r.ok)return null;return [...new Uint8Array(await crypto.subtle.digest('SHA-256',await r.arrayBuffer()))].map(b=>b.toString(16).padStart(2,'0')).join('');};
   const manifests=await Promise.all(paths.map(read));
-  const row=manifests.flatMap(m=>m?.records||[]).find(r=>(r.slug===slug||r.nodeCode?.toLowerCase()===slug.toLowerCase())&&r.locale===locale&&r.status==='published');
+  const admitted=[];
+  for(let i=0;i<manifests.length;i++){
+   const m=manifests[i],state=String(m?.status||'')+' '+String(m?.humanDecision||'');
+   if(/WITHDRAWN|REVOKED|REJECTED/i.test(state))continue;
+   if(/PENDING|CANDIDATE/i.test(state)){
+    const receipt=await read(paths[i].replace(/visual-article-release\.json$/,'human-acceptance-successor-v1.json'));
+    if(receipt?.decision!=='HUMAN_ACCEPTED'||receipt.manifestPath!==paths[i]||receipt.manifestSHA256!==await digest(paths[i]))continue;
+    for(const r of m?.records||[]){
+     if(r.locale!==locale||(r.slug!==slug&&r.nodeCode?.toLowerCase()!==slug.toLowerCase()))continue;
+     const accepted=receipt.records?.find(a=>a.path===r.path&&a.slug===r.slug&&a.locale===r.locale);
+     if(accepted?.sha256===await digest(r.path))admitted.push(r);
+    }
+   }else admitted.push(...(m?.records||[]));
+  }
+  const row=admitted.find(r=>(r.slug===slug||r.nodeCode?.toLowerCase()===slug.toLowerCase())&&r.locale===locale&&r.status==='published');
   if(!row?.path?.startsWith('/content/knowledge/public/'))return null;
   const article=await read(row.path);
   if(article?.publicationStatus!=='published'||article?.reviewStatus!=='approved'||article?.locale!==locale||article?.slug!==row.slug)return null;

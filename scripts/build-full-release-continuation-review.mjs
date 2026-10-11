@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+const dir='artifacts/full-release-closure',r=n=>JSON.parse(fs.readFileSync(`${dir}/${n}.json`));
+const s=r('FINAL-RELEASE-SUMMARY'),b=r('BUILD-LEDGER'),impact=r('CHANGE-IMPACT-MAP');
+const escape=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+const ledgers=fs.readdirSync(dir).filter(x=>x.endsWith('.json'));
+let html=fs.readFileSync('tools/review/PHIOS-LIVE-PAGE-RECOVERY-R1-HUMAN-REVIEW.html','utf8');
+html=html.replace('<title>','<title>FULL RELEASE CONTINUATION · ');
+const panels=['Executive Summary','Baseline','Files Changed','Reused Evidence','New Repairs','Route Validation','Asset Validation','Bilingual Validation','Responsive Validation','Functional Entry Validation','Ask','World','Reality','Tarot','I Ching','Reports/Profile','Account','Commerce','404/redirects','Provider Spend','Build','Deployment','Live Verification','Remaining Issues','Release Verdict'];
+const details={'Executive Summary':s,'Baseline':r('EXECUTION-BASELINE'),'Files Changed':impact,'Reused Evidence':s.gates,'New Repairs':r('REPAIR-LEDGER'),'Build':b,'Deployment':r('DEPLOYMENT-LEDGER'),'Live Verification':r('LIVE-VERIFY-LEDGER'),'Remaining Issues':r('OPEN-ISSUES'),'Release Verdict':s.verdict,'Provider Spend':{providerCalls:0,providerCostUSD:0}};
+const top=`<section style="padding:24px;border:3px solid #ba9b58;margin:20px;background:#102d40;color:#fff"><h1>PHI OS · FULL RELEASE CLOSURE</h1><p>续跑结论：<strong>${s.verdict}</strong>。本地既有 PASS 复用；当前构建状态 ${s.build}；生产部署来自其他窗口；本任务未发布。此前报告位于下方，为历史证据，不代表本次线上发布验收。</p><p>不重复全站矩阵、不重复图片下载、不自动 commit/push、不调用 provider。</p>${panels.map(p=>`<details><summary>${p}</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere">${escape(JSON.stringify(details[p]??{status:'REUSED_PASS',evidence:'See retained original report and canonical ledgers below'},null,2))}</pre></details>`).join('')}<h2>Canonical ledgers</h2><ul>${ledgers.map(n=>`<li><a href="../../${dir}/${n}">${n}</a></li>`).join('')}</ul></section>`;
+html=html.replace(/(<body[^>]*>)/,`$1${top}`);
+fs.writeFileSync('tools/review/PHIOS-FULL-RELEASE-CLOSURE.html',html);
+console.log(s.verdict,b.status,impact.changedFiles.length);

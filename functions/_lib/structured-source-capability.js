@@ -2,7 +2,7 @@ import {resolveFormationEntry, retrieveFormationScope} from './formation-retriev
 export const isStructuredAskRef = ref => /^CONCEPT:sk-b[1-4]-[a-z0-9-]+$/.test(String(ref || ''));
 // No model or third-party calls: availability is based on actual bound content.
 export async function structuredSourceCapability(env, ref, locale = 'en') {
-  if (!isStructuredAskRef(ref)) return null;
+  if (!String(ref || '').startsWith('CONCEPT:')) return null;
   const entry = await resolveFormationEntry(ref, env);
   if (!entry?.retrievalScope) return {available: false, reason: 'SELECTED_SOURCE_UNAVAILABLE'};
   const bundle = await retrieveFormationScope({env, scope: entry.retrievalScope, locale});

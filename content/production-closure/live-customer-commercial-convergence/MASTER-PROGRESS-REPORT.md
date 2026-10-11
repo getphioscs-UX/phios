@@ -1,5 +1,5 @@
 # 唯一 Master W00–W40 当前进度
-HEAD: 5c7696e8821bcaee4ef5619a67e4e6b9d4272b34
+HEAD: 7bbf7fee0b3ed9548dc854420959803567155ad2
 
 |阶段|SOURCE|DEPLOYED|LIVE CUSTOMER|下一步|
 |---|---|---|---|---|
@@ -40,9 +40,9 @@ HEAD: 5c7696e8821bcaee4ef5619a67e4e6b9d4272b34
 |W34 Shared provider cost ledger|TARGETED_PASS_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|逐产品接入统一成本池；四问与双语共同计费，不用单次 QA 推断整单成本|
 |W35 Security / permissions|CURRENT_TARGETED_CHECK_ONLY_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|补充报告/视频跨账户、会员到期和客户端伪造的实际 handler 测试|
 |W36 Targeted regression|CURRENT_CHECK_FAIL|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|重跑当前受影响链；记录真实失败，禁止修改冻结哈希|
-|W37 Pages build|PASS|NOT_RUN|NOT_RUN|保留当前构建凭证；只有生产批准后才部署|
+|W37 Pages build|STALE_BUILD_EVIDENCE_REBUILD_REQUIRED|NOT_RUN|NOT_RUN|重新运行绑定 HEAD 和工作树摘要的本地构建|
 |W38 Customer journey preview|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|五条旅程逐节点执行本地受控预览；发布后再限定账户实付|
 |W39 Human review|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|逐项填充29类实际材料与差异，不把目录标题视为审阅完成|
-|W40 Production release|PARTIAL_CONCRETE_VISUAL_REVIEW_AVAILABLE|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Human ACCEPT / REJECT this visible Reality/footer source scope; full BaZi delivery and canonical NAV persistence remain source blockers.|
+|W40 Production release|PARTIAL_CONCRETE_VISUAL_REVIEW_AVAILABLE|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Captured pending-human-review versions accepted by owner; continue actual source blockers and current QA. Production activation remains unauthorized.|
 
 W13/W14/W15 layered states, W38 nodes and W39 counts: MASTER-OWNER-TRUTH.json.

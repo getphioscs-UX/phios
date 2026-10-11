@@ -1,0 +1,53 @@
+{
+  "status": "PASS_LIVE",
+  "releaseBlockingIssues": [],
+  "history": [
+    {
+      "id": "PRODUCTION_AUTHORIZATION",
+      "scope": "deployment",
+      "severity": "release boundary",
+      "source": "Attachment N/U",
+      "repairFiles": [],
+      "verification": [
+        "Explicit authorization before a new production deployment"
+      ],
+      "status": "CLOSED",
+      "resolution": "Explicit authorization in user continuation"
+    },
+    {
+      "id": "LIVE_BUILD_IDENTITY",
+      "scope": "release",
+      "severity": "release boundary",
+      "source": "Production exists from another window; HEAD alone does not establish build-byte identity",
+      "repairFiles": [],
+      "verification": [
+        "Compare representative live files with reusable build"
+      ],
+      "status": "CLOSED",
+      "resolution": "Locked direct deployment and canonical production confirmation"
+    },
+    {
+      "id": "EXTERNAL_BUILD_IN_PROGRESS",
+      "scope": ".pages-output/_worker.js",
+      "severity": "release boundary",
+      "source": ".wrangler/pages-publication-build-state.json",
+      "repairFiles": [],
+      "verification": [
+        "Wait for owner completed build receipt and match Worker identity; no repeated local matrix"
+      ],
+      "status": "CLOSED",
+      "resolution": "Existing owner completed build reused"
+    }
+  ],
+  "closedRepairs": [
+    {
+      "file": "_redirects",
+      "change": "/ask/ → /knowledge/ask/ 308; query locale retained"
+    }
+  ],
+  "scopeExclusions": [
+    "No authenticated purchase, payment, provider interpretation or paid report generation performed",
+    "No claim of signed-in report ownership verification; anonymous entitlement boundary tested",
+    "Manual assistive technology / actual browser 200% zoom and unselected Atlas editorial review remain outside this release smoke scope"
+  ]
+}

@@ -43,11 +43,21 @@ const ux=read('assets/js/pages/ux-lens.js');assert.ok(ux.includes("params.get('i
 assert.ok(read('assets/js/pages/ux-lens.js').includes('openRealityEntryWithBundle'));
 assert.ok(fs.existsSync(path.join(root,'functions/api/client-intent-route.js')));assert.ok(fs.existsSync(path.join(root,'functions/public/client-intent-router.js')));
 const {routeClientIntent}=await import(pathToFileURL(path.join(root,'functions/public/client-intent-router.js')).href+`?t=${Date.now()}`);
-let r=routeClientIntent({q:'为什么我最近想换工作？',intent:'CURRENT'});assert.equal(r.surface,'ASK');assert.equal(r.href,'/ask?q=%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E6%9C%80%E8%BF%91%E6%83%B3%E6%8D%A2%E5%B7%A5%E4%BD%9C%EF%BC%9F&intent=CURRENT');assert.equal(r.boundaries.methodChosenByClientRouter,false);
-r=routeClientIntent({q:'我想建立财务快照'});assert.equal(r.surface,'FINANCIAL');assert.ok(r.href.startsWith('/financial-reality'));
-r=routeClientIntent({q:'什么是 Reality Drift?'});assert.equal(r.surface,'ASK');assert.ok(r.href.startsWith('/ask'));
+// The frozen Stage 16 registry above remains historical evidence. Current Ask R1
+// returns bounded capability choices without sending the question to a destination.
+let r=routeClientIntent({q:'为什么我最近想换工作？',intent:'CURRENT'});
+assert.equal(r.outcome,'MULTI_DOMAIN_CLARIFY');assert.ok(r.clarification);
+assert.deepEqual(r.candidates.map(c=>c.capabilityId),['REALITY','PERSONAL_METHODS']);
+assert.equal(r.boundaries.methodChosenByClientRouter,false);
+r=routeClientIntent({q:'我想建立财务快照'});assert.equal(r.outcome,'MATCHED_CAPABILITY');assert.equal(r.surface,'FINANCIAL');assert.equal(r.href,'/professional/financial/');
+r=routeClientIntent({q:'什么是 Reality Drift?'});assert.equal(r.outcome,'KNOWLEDGE_LOOKUP');assert.equal(r.task,'KNOWLEDGE_BASIC');assert.equal(r.surface,'KNOWLEDGE');assert.equal(r.href,'/knowledge/');
+for(const question of ['为什么我最近想换工作？','我想建立财务快照','什么是 Reality Drift?']){
+ const route=routeClientIntent({q:question,intent:'CURRENT',depth:'DEEP',paid:true,entitlement:true});
+ assert.equal(route.providerCalls,0);assert.equal(route.providerInvoked,false);
+ for(const boundary of ['methodChosenByClientRouter','lensExecutionAllowed','modelCalculationAllowed','persistenceAllowed','automaticRealityCase','automaticJourneyActivation'])assert.equal(route.boundaries[boundary],false);
+ assert(route.candidates.length<=3);assert(!route.href.includes('q='));
+}
 assert.equal(acceptance.status,'STAGE16_CLIENT_INTENT_ROUTER_SOURCE_ACCEPTED_LIVE_BROWSER_PENDING');assert.equal(acceptance.notPromoted.liveBrowserAccepted,false);assert.equal(freeze.status,'STAGE16_CLIENT_INTENT_ROUTER_SOURCE_FROZEN');
 console.log('✓ STAGE 16 Client Intent Router / Public UX passed.');
-console.log('  Six question-led intents route through Ask without exposing Method taxonomy.');
-console.log('  Canonical public surfaces: Ask, Knowledge, Personal, Financial, My Reality, Journey, Learn/Work.');
+console.log('  Historical six-intent evidence is preserved; current Ask R1 clarifies capability choices and routes knowledge lookup without provider execution.');
 console.log('  Stage 15 Reality handoff remains explicit; no automatic case, Journey or persistence.');
