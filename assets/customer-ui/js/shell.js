@@ -1,4 +1,6 @@
 import {knowledgeNavigationIntent} from './navigation-intent.js';
+import {installEntryInputReceiver} from '../../js/entry-context-handoff.js';
+installEntryInputReceiver();
 import {renderEntryResult} from '../../js/ask-entry-ui.js';
 import '../../js/client-visual-consumption.js';
 import { CX_NAVIGATION, installNavigationToggle } from './navigation.js';
@@ -141,8 +143,8 @@ function installAskDrawerNavigation(scope = document) {
     if(form.getAttribute('aria-busy')==='true')return;
     let result=form.parentElement.querySelector('[data-ask-r1-result]');if(!result){result=document.createElement('section');result.dataset.askR1Result='';form.after(result);}
     form.setAttribute('aria-busy','true');
-    try{const response=await fetch('/api/client-intent-route',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({question:q,locale:document.documentElement.lang,entrySurface:'HEADER'})});const payload=await response.json();if(!response.ok||!payload.ok)throw Error('ENTRY_UNAVAILABLE');renderEntryResult(result,payload.route);}
-    catch{result.textContent=document.documentElement.lang==='zh-Hans'?'暂时无法取得入口，请重试。':'Unable to retrieve an entrance. Please retry.';}
+    try{const response=await fetch('/api/client-intent-route',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({question:q,locale:document.documentElement.lang,entrySurface:'HEADER'})});const payload=await response.json();if(!response.ok||!payload.ok)throw Error('ENTRY_UNAVAILABLE');renderEntryResult(result,payload.route,{retry:()=>form.requestSubmit(),clarify:()=>textarea?.focus()});}
+    catch{renderEntryResult(result,{outcome:'SERVICE_FAILURE',primaryAction:{kind:'RETRY',label:document.documentElement.lang==='zh-Hans'?'重试':'Retry'}},{retry:()=>form.requestSubmit(),clarify:()=>textarea?.focus()});}
     finally{form.setAttribute('aria-busy','false');}
   });
   syncOpenLink();

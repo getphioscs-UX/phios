@@ -1,0 +1,285 @@
+{
+  "at": "2026-10-11T02:34:47.481Z",
+  "results": [
+    {
+      "question": "PHIOS feature overview",
+      "outcome": "PLATFORM_INTRODUCTION",
+      "providerCalls": 0,
+      "kind": "POST_FAILURE_DEVELOPMENT_REGRESSION_NOT_HELDOUT"
+    },
+    {
+      "question": "请说明 phi-os 平台能用来做什么",
+      "outcome": "PLATFORM_INTRODUCTION",
+      "providerCalls": 0,
+      "kind": "POST_FAILURE_DEVELOPMENT_REGRESSION_NOT_HELDOUT"
+    },
+    {
+      "question": "PHI OS purpose",
+      "outcome": "PLATFORM_INTRODUCTION",
+      "providerCalls": 0,
+      "kind": "POST_FAILURE_DEVELOPMENT_REGRESSION_NOT_HELDOUT"
+    },
+    {
+      "question": "PHIOS 功能说明",
+      "outcome": "PLATFORM_INTRODUCTION",
+      "providerCalls": 0,
+      "kind": "POST_FAILURE_DEVELOPMENT_REGRESSION_NOT_HELDOUT"
+    },
+    {
+      "scope": "CLIENT_SELECTION_IS_DISCOVERY_NOT_ENTITLEMENT",
+      "body": {
+        "question": "八字",
+        "capabilityId": "NONEXISTENT",
+        "selectionConfirmed": true,
+        "entitlement": true,
+        "provider": true
+      },
+      "route": {
+        "schemaVersion": "PHI-OS-CLIENT-INTENT-ROUTE-v2",
+        "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+        "task": "ENTRY",
+        "generationMode": "DETERMINISTIC",
+        "providerInvoked": false,
+        "providerCalls": 0,
+        "questionPresent": true,
+        "boundaries": {
+          "methodChosenByClientRouter": false,
+          "lensExecutionAllowed": false,
+          "modelCalculationAllowed": false,
+          "persistenceAllowed": false,
+          "automaticRealityCase": false,
+          "automaticJourneyActivation": false
+        },
+        "outcome": "MATCHED_CAPABILITY",
+        "candidates": [
+          {
+            "capabilityId": "PERSONAL_METHODS",
+            "displayLabels": {
+              "en": "Personal methods",
+              "zh-Hans": "个人方法"
+            },
+            "canonicalRoute": "/perspectives/personal/?method=bazi#personal-input",
+            "routeOwner": "assets/customer-ui/js/surfaces/personal-reality.js",
+            "canonicalDomainRefs": [
+              "PERSONAL_REALITY"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.521Z",
+            "canonicalDomainOwner": "PPR_CURRENT_SHARED_RUNTIME",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/customer-experience-rebuild/registries/cx-r12r4-method-availability-registry-v1.json",
+            "inputRequirements": [
+              "Birth date; time and place as required; consent"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Deterministic method reading"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+            "label": "Personal methods",
+            "reason": "Matches an explicit topic or task; you choose whether to continue."
+          }
+        ],
+        "clarification": null,
+        "surface": "PERSONAL_METHODS",
+        "href": "/perspectives/personal/?method=bazi#personal-input",
+        "routeReason": "MATCHED_CAPABILITY",
+        "ruleVersion": "ENTRY_TASK_DOMAIN_R1",
+        "axes": {
+          "task": "ENTRY",
+          "canonicalDomains": [
+            "PERSONAL_REALITY"
+          ],
+          "products": [
+            "PERSONAL_METHODS"
+          ],
+          "methodSelection": "bazi"
+        },
+        "handoff": {
+          "execution": "DISCOVERY_ONLY",
+          "originalQuestionTransport": "EXPLICIT_SAME_ORIGIN_EPHEMERAL_INPUT_ONLY",
+          "automaticGeneration": false,
+          "automaticPersistence": false,
+          "providerCalls": 0
+        }
+      }
+    },
+    {
+      "scope": "CLIENT_SELECTION_IS_DISCOVERY_NOT_ENTITLEMENT",
+      "body": {
+        "question": "我想看收入",
+        "capabilityId": "FINANCIAL",
+        "selectionConfirmed": true,
+        "paid": true,
+        "automaticGenerate": true
+      },
+      "route": {
+        "schemaVersion": "PHI-OS-CLIENT-INTENT-ROUTE-v2",
+        "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+        "task": "ENTRY",
+        "generationMode": "DETERMINISTIC",
+        "providerInvoked": false,
+        "providerCalls": 0,
+        "questionPresent": true,
+        "boundaries": {
+          "methodChosenByClientRouter": false,
+          "lensExecutionAllowed": false,
+          "modelCalculationAllowed": false,
+          "persistenceAllowed": false,
+          "automaticRealityCase": false,
+          "automaticJourneyActivation": false
+        },
+        "outcome": "MATCHED_CAPABILITY",
+        "candidates": [
+          {
+            "capabilityId": "FINANCIAL",
+            "displayLabels": {
+              "en": "Financial reality",
+              "zh-Hans": "财务现实"
+            },
+            "canonicalRoute": "/professional/financial/",
+            "routeOwner": "functions/professional/financial/",
+            "canonicalDomainRefs": [
+              "FINANCIAL_REALITY"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "FDR_FCR_FAR_HFP_PFR",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Income, expenses and selected financial records; consent"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Financial organization and existing calculators"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+            "label": "Financial reality",
+            "reason": "Matches an explicit topic or task; you choose whether to continue."
+          }
+        ],
+        "clarification": null,
+        "surface": "FINANCIAL",
+        "href": "/professional/financial/",
+        "routeReason": "MATCHED_CAPABILITY",
+        "ruleVersion": "ENTRY_TASK_DOMAIN_R1",
+        "axes": {
+          "task": "ENTRY",
+          "canonicalDomains": [
+            "FINANCIAL_REALITY"
+          ],
+          "products": [
+            "FINANCIAL"
+          ],
+          "methodSelection": null
+        },
+        "handoff": {
+          "execution": "DISCOVERY_ONLY",
+          "originalQuestionTransport": "EXPLICIT_SAME_ORIGIN_EPHEMERAL_INPUT_ONLY",
+          "automaticGeneration": false,
+          "automaticPersistence": false,
+          "providerCalls": 0
+        }
+      }
+    },
+    {
+      "scope": "CLIENT_SELECTION_IS_DISCOVERY_NOT_ENTITLEMENT",
+      "body": {
+        "question": "unknown",
+        "capabilityId": "PRODUCT_HELP",
+        "selectionConfirmed": true,
+        "accountId": "another-account"
+      },
+      "route": {
+        "schemaVersion": "PHI-OS-CLIENT-INTENT-ROUTE-v2",
+        "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+        "task": "ENTRY",
+        "generationMode": "DETERMINISTIC",
+        "providerInvoked": false,
+        "providerCalls": 0,
+        "questionPresent": true,
+        "boundaries": {
+          "methodChosenByClientRouter": false,
+          "lensExecutionAllowed": false,
+          "modelCalculationAllowed": false,
+          "persistenceAllowed": false,
+          "automaticRealityCase": false,
+          "automaticJourneyActivation": false
+        },
+        "outcome": "MATCHED_CAPABILITY",
+        "candidates": [
+          {
+            "capabilityId": "PRODUCT_HELP",
+            "displayLabels": {
+              "en": "Account and report help",
+              "zh-Hans": "账户与报告帮助"
+            },
+            "canonicalRoute": "/account/",
+            "routeOwner": "functions/account/",
+            "canonicalDomainRefs": [
+              "MY_REALITY"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "RMO",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Sign in to retrieve private reports or orders"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Authorized account retrieval; no new report generation"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+            "label": "Account and report help",
+            "reason": "Matches an explicit topic or task; you choose whether to continue."
+          }
+        ],
+        "clarification": null,
+        "surface": "PRODUCT_HELP",
+        "href": "/account/",
+        "routeReason": "MATCHED_CAPABILITY",
+        "ruleVersion": "ENTRY_TASK_DOMAIN_R1",
+        "axes": {
+          "task": "ENTRY",
+          "canonicalDomains": [
+            "MY_REALITY"
+          ],
+          "products": [
+            "PRODUCT_HELP"
+          ],
+          "methodSelection": null
+        },
+        "handoff": {
+          "execution": "DISCOVERY_ONLY",
+          "originalQuestionTransport": "EXPLICIT_SAME_ORIGIN_EPHEMERAL_INPUT_ONLY",
+          "automaticGeneration": false,
+          "automaticPersistence": false,
+          "providerCalls": 0
+        }
+      }
+    }
+  ],
+  "originalBlindScoresRetained": true,
+  "claim": "Both observed paraphrase defects corrected; this is regression not an independent heldout score"
+}

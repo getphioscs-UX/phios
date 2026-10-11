@@ -46,8 +46,9 @@ const {routeClientIntent}=await import(pathToFileURL(path.join(root,'functions/p
 // The frozen Stage 16 registry above remains historical evidence. Current Ask R1
 // returns bounded capability choices without sending the question to a destination.
 let r=routeClientIntent({q:'为什么我最近想换工作？',intent:'CURRENT'});
-assert.equal(r.outcome,'MULTI_DOMAIN_CLARIFY');assert.ok(r.clarification);
-assert.deepEqual(r.candidates.map(c=>c.capabilityId),['REALITY','PERSONAL_METHODS']);
+assert.equal(r.outcome,'KNOWLEDGE_LOOKUP');assert.equal(r.task,'KNOWLEDGE_BASIC');
+assert.equal(r.generalExplanation,true);assert.equal(r.href,'/knowledge/');
+assert.deepEqual(r.candidates.map(c=>c.capabilityId),['KNOWLEDGE']);
 assert.equal(r.boundaries.methodChosenByClientRouter,false);
 r=routeClientIntent({q:'我想建立财务快照'});assert.equal(r.outcome,'MATCHED_CAPABILITY');assert.equal(r.surface,'FINANCIAL');assert.equal(r.href,'/professional/financial/');
 r=routeClientIntent({q:'什么是 Reality Drift?'});assert.equal(r.outcome,'KNOWLEDGE_LOOKUP');assert.equal(r.task,'KNOWLEDGE_BASIC');assert.equal(r.surface,'KNOWLEDGE');assert.equal(r.href,'/knowledge/');

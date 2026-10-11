@@ -1,0 +1,1433 @@
+{
+  "at": "2026-10-11T02:32:55.088Z",
+  "sources": [
+    {
+      "path": "content/public/client-intent-router/registries/client-capability-projection-r1.json",
+      "sha256": "e14b27c1e39ead09bff905308bbe232d4c4aa76add3803a332726b951da411dd",
+      "actualRegistry": {
+        "version": "PHI-OS-ASK-ENTRY-R1-v2",
+        "generatedFrom": [
+          "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+          "content/customer-experience-rebuild/registries/cx-r12r4-method-availability-registry-v1.json"
+        ],
+        "capabilities": [
+          {
+            "capabilityId": "PERSONAL_METHODS",
+            "displayLabels": {
+              "en": "Personal methods",
+              "zh-Hans": "个人方法"
+            },
+            "canonicalRoute": "/perspectives/personal/",
+            "routeOwner": "assets/customer-ui/js/surfaces/personal-reality.js",
+            "canonicalDomainRefs": [
+              "PERSONAL_REALITY"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.521Z",
+            "canonicalDomainOwner": "PPR_CURRENT_SHARED_RUNTIME",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/customer-experience-rebuild/registries/cx-r12r4-method-availability-registry-v1.json",
+            "inputRequirements": [
+              "Birth date; time and place as required; consent"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Deterministic method reading"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "RELATIONSHIP",
+            "displayLabels": {
+              "en": "Relationships",
+              "zh-Hans": "关系"
+            },
+            "canonicalRoute": "/perspectives/relationship/",
+            "routeOwner": "functions/personal-reading/relationship/",
+            "canonicalDomainRefs": [
+              "RELATIONSHIP_REALITY"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "REL_W0_W8",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Purpose; independently sourced participant information; applicable consent"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Bounded relationship reading"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "FINANCIAL",
+            "displayLabels": {
+              "en": "Financial reality",
+              "zh-Hans": "财务现实"
+            },
+            "canonicalRoute": "/professional/financial/",
+            "routeOwner": "functions/professional/financial/",
+            "canonicalDomainRefs": [
+              "FINANCIAL_REALITY"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "FDR_FCR_FAR_HFP_PFR",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Income, expenses and selected financial records; consent"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Financial organization and existing calculators"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "WORLD",
+            "displayLabels": {
+              "en": "World",
+              "zh-Hans": "世界"
+            },
+            "canonicalRoute": "/world/",
+            "routeOwner": "assets/js/pages/world.js",
+            "canonicalDomainRefs": [
+              "WORLD_REALITY"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "CURRENT_WEB_AUTHORITY",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Public object or region; dates for current questions"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Historical Atlas and scoped current dossiers"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "HEALTH_CARE",
+            "displayLabels": {
+              "en": "Health and care",
+              "zh-Hans": "健康与照护"
+            },
+            "canonicalRoute": "/health-reality.html",
+            "routeOwner": "functions/health/health-reality-runtime.js",
+            "canonicalDomainRefs": [],
+            "mappingGap": "No product-domain owner with this exact name; customer group is not a new canonical domain.",
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "functions/health/health-reality-runtime.js",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Situation, timing and changes; no diagnosis"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Health organization and safety-first care routing"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "PROFILE",
+            "displayLabels": {
+              "en": "Profile",
+              "zh-Hans": "个人画像"
+            },
+            "canonicalRoute": "/perspectives/profile/",
+            "routeOwner": "functions/profile/profile-production-authority.js",
+            "canonicalDomainRefs": [
+              "PERSONAL_REALITY"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "PPR_CURRENT_SHARED_RUNTIME",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Self-report or eligible external/task evidence; consent"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Personal Evidence; existing bilingual report entitlement"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "REFLECTION",
+            "displayLabels": {
+              "en": "Reflection",
+              "zh-Hans": "问题与反思"
+            },
+            "canonicalRoute": "/perspectives/tarot/",
+            "routeOwner": "functions/core-method-runtime/tarot-runtime-v2.js",
+            "canonicalDomainRefs": [
+              "PERSONAL_REALITY"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "PPR_CURRENT_SHARED_RUNTIME",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Question; explicit Tarot draw or I Ching cast"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Separate deterministic symbolic reading"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "PHI_CONFIGURATION",
+            "displayLabels": {
+              "en": "PHI Configuration",
+              "zh-Hans": "PHI 构型"
+            },
+            "canonicalRoute": "/perspectives/phi-configuration/",
+            "routeOwner": "assets/customer-ui/js/surfaces/personal-reality.js",
+            "canonicalDomainRefs": [
+              "PERSONAL_REALITY"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "PPR_CURRENT_SHARED_RUNTIME",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/customer-experience-rebuild/registries/cx-r12r4-method-availability-registry-v1.json",
+            "inputRequirements": [
+              "Birth date, confirmed time/place; consent"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Independent PHI configuration model"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "KNOWLEDGE",
+            "displayLabels": {
+              "en": "Read knowledge",
+              "zh-Hans": "阅读知识"
+            },
+            "canonicalRoute": "/knowledge/",
+            "routeOwner": "functions/_lib/knowledge-answer-composition.js",
+            "canonicalDomainRefs": [
+              "KNOWLEDGE"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "CANONICAL_KNOWLEDGE",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Question or public source reference"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Source-bound deterministic excerpts and reading paths"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "PRODUCT_HELP",
+            "displayLabels": {
+              "en": "Account and report help",
+              "zh-Hans": "账户与报告帮助"
+            },
+            "canonicalRoute": "/account/",
+            "routeOwner": "functions/account/",
+            "canonicalDomainRefs": [
+              "MY_REALITY"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "RMO",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Sign in to retrieve private reports or orders"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Authorized account retrieval; no new report generation"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "PROFESSIONAL",
+            "displayLabels": {
+              "en": "Professional assistance",
+              "zh-Hans": "专业协助"
+            },
+            "canonicalRoute": "/professional/",
+            "routeOwner": "functions/professional/",
+            "canonicalDomainRefs": [
+              "PROFESSIONAL"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "PR_PFR",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Selected service and explicit consent"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Existing service/application route"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "ACADEMY",
+            "displayLabels": {
+              "en": "Academy",
+              "zh-Hans": "学习课程"
+            },
+            "canonicalRoute": "/academy/",
+            "routeOwner": "functions/api/academy-navigation.js",
+            "canonicalDomainRefs": [
+              "KNOWLEDGE"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "CANONICAL_KNOWLEDGE",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Selected public topic; playback requires a real video asset"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Free public Navigation catalog; existing Method video access rules"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "BOOKS",
+            "displayLabels": {
+              "en": "Books",
+              "zh-Hans": "阅读书籍"
+            },
+            "canonicalRoute": "/books/",
+            "routeOwner": "functions/_lib/book-vii-published-admission.js",
+            "canonicalDomainRefs": [
+              "KNOWLEDGE"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "CANONICAL_KNOWLEDGE",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Published book/article identity; full books retain existing ownership rules"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Published reading and existing book catalog; Book VIII not for public sale"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "APPOINTMENT",
+            "displayLabels": {
+              "en": "Appointment requests",
+              "zh-Hans": "预约申请"
+            },
+            "canonicalRoute": "/professional/appointments/",
+            "routeOwner": "functions/professional/appointments/appointment-request-store.js",
+            "canonicalDomainRefs": [
+              "PROFESSIONAL"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "PR_PFR",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Selected service, necessary information and explicit consent"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Unscheduled REQUESTED application; no automatic confirmation"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "WILL",
+            "displayLabels": {
+              "en": "Will information draft",
+              "zh-Hans": "遗嘱资料整理"
+            },
+            "canonicalRoute": "/professional/financial/#estate-planning",
+            "routeOwner": "functions/account/will-information-delivery.js",
+            "canonicalDomainRefs": [
+              "FINANCIAL_REALITY"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "FDR_FCR_FAR_HFP_PFR",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Jurisdiction, information and save/delivery consent"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Existing informational draft; not a legally executed Will"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "CONTINUITY",
+            "displayLabels": {
+              "en": "Continuity membership",
+              "zh-Hans": "持续会员"
+            },
+            "canonicalRoute": "/membership.html",
+            "routeOwner": "functions/personal-reading/continuity/continuity-commercial-authority.js",
+            "canonicalDomainRefs": [
+              "MY_REALITY"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "RMO",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Established material; existing subscription and quota owner"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Ongoing follow-up; no monthly regeneration or automatic enrollment"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "ABOUT",
+            "displayLabels": {
+              "en": "About PHI OS",
+              "zh-Hans": "关于 PHI OS"
+            },
+            "canonicalRoute": "/about/founder/#how",
+            "routeOwner": "about/founder/index.html",
+            "canonicalDomainRefs": [
+              "KNOWLEDGE"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "CANONICAL_KNOWLEDGE",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Public platform introduction"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Existing platform/founder copy and real feature entrances"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "THESIS",
+            "displayLabels": {
+              "en": "Thesis",
+              "zh-Hans": "核心论述"
+            },
+            "canonicalRoute": "/thesis.html",
+            "routeOwner": "thesis.html",
+            "canonicalDomainRefs": [
+              "KNOWLEDGE"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "CANONICAL_KNOWLEDGE",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Published thesis and available PDF projection"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Existing research reading/download; no invented PDF"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          },
+          {
+            "capabilityId": "REALITY",
+            "displayLabels": {
+              "en": "Continue My Reality",
+              "zh-Hans": "继续我的现实"
+            },
+            "canonicalRoute": "/reality/",
+            "routeOwner": "functions/api/customer-contextual-ask.js",
+            "canonicalDomainRefs": [
+              "MY_REALITY"
+            ],
+            "mappingGap": null,
+            "verifiedAt": "2026-10-11T02:19:12.523Z",
+            "canonicalDomainOwner": "RMO",
+            "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+            "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+            "inputRequirements": [
+              "Explicitly selected authorized records or current self-report"
+            ],
+            "sourceRequirements": [
+              "Existing registered owner; no client-provided authority"
+            ],
+            "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+            "entitlementRequirement": "EXISTING_SERVER_OWNER",
+            "executionClass": "ENTRY",
+            "outputKinds": [
+              "Existing Reality and entitled contextual follow-up"
+            ],
+            "capabilityVersion": "R1-v2",
+            "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+          }
+        ],
+        "methods": [
+          {
+            "methodId": "ASTROLOGY",
+            "formValue": "astrology",
+            "inputMode": "BIRTH_BASED",
+            "experienceState": "AVAILABLE_IN_THIS_READING",
+            "label": {
+              "en": "Astrology",
+              "zh-Hans": "占星"
+            }
+          },
+          {
+            "methodId": "BAZI",
+            "formValue": "bazi",
+            "inputMode": "BIRTH_BASED",
+            "experienceState": "AVAILABLE_IN_THIS_READING",
+            "label": {
+              "en": "BaZi",
+              "zh-Hans": "八字"
+            }
+          },
+          {
+            "methodId": "NUMEROLOGY",
+            "formValue": "numeric",
+            "inputMode": "BIRTH_BASED",
+            "experienceState": "AVAILABLE_IN_THIS_READING",
+            "label": {
+              "en": "Numerology",
+              "zh-Hans": "数字学"
+            }
+          },
+          {
+            "methodId": "ZI_WEI_DOU_SHU",
+            "formValue": "ziwei",
+            "inputMode": "BIRTH_BASED",
+            "experienceState": "AVAILABLE_IN_THIS_READING",
+            "label": {
+              "en": "Zi Wei",
+              "zh-Hans": "紫微斗数"
+            }
+          },
+          {
+            "methodId": "HUMAN_DESIGN",
+            "inputMode": "BIRTH_BASED",
+            "experienceState": "NOT_CURRENTLY_AVAILABLE",
+            "label": {
+              "en": "Human Design",
+              "zh-Hans": "人类图"
+            }
+          },
+          {
+            "methodId": "I_CHING",
+            "inputMode": "QUESTION_CONTEXT",
+            "experienceState": "SEPARATE_EXPERIENCE",
+            "label": {
+              "en": "I Ching",
+              "zh-Hans": "易经"
+            }
+          },
+          {
+            "methodId": "TAROT",
+            "inputMode": "QUESTION_CONTEXT",
+            "experienceState": "SEPARATE_EXPERIENCE",
+            "label": {
+              "en": "Tarot",
+              "zh-Hans": "塔罗"
+            }
+          },
+          {
+            "methodId": "BZR",
+            "formValue": "bazi",
+            "label": {
+              "en": "BaZi",
+              "zh-Hans": "八字"
+            }
+          },
+          {
+            "methodId": "ZWR",
+            "formValue": "ziwei",
+            "label": {
+              "en": "Zi Wei",
+              "zh-Hans": "紫微斗数"
+            }
+          },
+          {
+            "methodId": "AST",
+            "formValue": "astrology",
+            "label": {
+              "en": "Astrology",
+              "zh-Hans": "占星"
+            }
+          },
+          {
+            "methodId": "NUM",
+            "formValue": "numeric",
+            "label": {
+              "en": "Numerology",
+              "zh-Hans": "数字学"
+            }
+          },
+          {
+            "methodId": "PROFILE",
+            "formValue": null,
+            "label": {
+              "en": "PHI OS Profile",
+              "zh-Hans": "PHI OS Profile"
+            }
+          },
+          {
+            "methodId": "ECR",
+            "formValue": "ecr",
+            "label": {
+              "en": "PHI Configuration",
+              "zh-Hans": "PHI 构型"
+            }
+          },
+          {
+            "methodId": "HD",
+            "formValue": null,
+            "label": {
+              "en": "Human Design",
+              "zh-Hans": "人类图"
+            }
+          },
+          {
+            "methodId": "CROSS",
+            "formValue": null,
+            "label": {
+              "en": "Cross Perspective",
+              "zh-Hans": "跨方法视角"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "sha256": "da0ed0099c67b64d1c3d96eca1e592d9e78688095bc3f536a5f6f17620b6ba6a",
+      "actualRegistry": {
+        "work": "PHI-OS-PRODUCT-CONVERGENCE-R1",
+        "baselineCommit": "8888f647bd85f21a45397690fb3479de9b339c17",
+        "status": "HUMAN_ACCEPTED_FIRST_BATCH",
+        "domains": [
+          {
+            "domain": "MY_REALITY",
+            "authorityOwner": "RMO",
+            "inputOwners": [
+              "RMO"
+            ],
+            "projectionOwner": "CX_R20",
+            "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+            "customerRoute": "/reality/",
+            "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+            "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+            "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+            "currentDataCapability": "EXISTING_CONTEXT_WHEN_EXPLICIT"
+          },
+          {
+            "domain": "PERSONAL_REALITY",
+            "authorityOwner": "PPR_CURRENT_SHARED_RUNTIME",
+            "inputOwners": [
+              "METHOD_AUTHORITIES",
+              "PROFILE_PPR",
+              "CURRENT_REALITY_RUNTIME"
+            ],
+            "projectionOwner": "CX_R12",
+            "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+            "customerRoute": "/perspectives/personal/",
+            "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+            "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+            "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+            "currentDataCapability": "EXISTING_CONTEXT_WHEN_EXPLICIT"
+          },
+          {
+            "domain": "RELATIONSHIP_REALITY",
+            "authorityOwner": "REL_W0_W8",
+            "inputOwners": [
+              "REL_W0_W8"
+            ],
+            "projectionOwner": "RELATIONSHIP_WORKSPACE",
+            "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+            "customerRoute": "/perspectives/relationship/",
+            "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+            "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+            "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+            "currentDataCapability": "EXISTING_CONTEXT_WHEN_EXPLICIT"
+          },
+          {
+            "domain": "FINANCIAL_REALITY",
+            "authorityOwner": "FDR_FCR_FAR_HFP_PFR",
+            "inputOwners": [
+              "FDR_FCR_FAR_HFP_PFR"
+            ],
+            "projectionOwner": "FINANCIAL_RUNTIME_PRODUCT",
+            "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+            "customerRoute": "/professional/financial/",
+            "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+            "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+            "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+            "currentDataCapability": "EXISTING_SOURCE_TIME_FRESHNESS_PROVENANCE_ONLY"
+          },
+          {
+            "domain": "WORLD_REALITY",
+            "authorityOwner": "CURRENT_WEB_AUTHORITY",
+            "inputOwners": [
+              "CURRENT_WEB_AUTHORITY"
+            ],
+            "projectionOwner": "CIVILIZATION_ATLAS",
+            "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+            "customerRoute": "/knowledge/",
+            "routeRole": "EXISTING_KNOWLEDGE_ENTRY_WORLD_CUTOVER_PENDING",
+            "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+            "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+            "currentDataCapability": "EXISTING_SOURCE_TIME_FRESHNESS_PROVENANCE_ONLY"
+          },
+          {
+            "domain": "KNOWLEDGE",
+            "authorityOwner": "CANONICAL_KNOWLEDGE",
+            "inputOwners": [
+              "CANONICAL_KNOWLEDGE"
+            ],
+            "projectionOwner": "KNOWLEDGE_CUSTOMER_PROJECTION",
+            "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+            "customerRoute": "/knowledge/",
+            "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+            "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+            "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+            "currentDataCapability": "EXISTING_CONTEXT_WHEN_EXPLICIT"
+          },
+          {
+            "domain": "SPECIALIST_PERSPECTIVE",
+            "authorityOwner": "EXISTING_METHOD_AUTHORITIES",
+            "inputOwners": [
+              "EXISTING_METHOD_AUTHORITIES"
+            ],
+            "projectionOwner": "SPECIALIST_READING",
+            "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+            "customerRoute": "/perspectives/",
+            "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+            "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+            "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+            "currentDataCapability": "EXISTING_CONTEXT_WHEN_EXPLICIT"
+          },
+          {
+            "domain": "PROFESSIONAL",
+            "authorityOwner": "PR_PFR",
+            "inputOwners": [
+              "PR_PFR"
+            ],
+            "projectionOwner": "PROFESSIONAL_WORKSPACE",
+            "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+            "customerRoute": "/professional/",
+            "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+            "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+            "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+            "currentDataCapability": "EXISTING_CONTEXT_WHEN_EXPLICIT"
+          },
+          {
+            "domain": "ASK",
+            "authorityOwner": "ASK_CONTEXT_BOUNDARY",
+            "inputOwners": [
+              "ASK_CONTEXT_BOUNDARY"
+            ],
+            "projectionOwner": "CX_R31",
+            "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+            "customerRoute": "/knowledge/ask/",
+            "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+            "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+            "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+            "currentDataCapability": "EXISTING_CONTEXT_WHEN_EXPLICIT"
+          }
+        ],
+        "ownerAcceptanceReceipt": "content/product-convergence-r1/audits/pc-w11-closure/OWNER-ACCEPTANCE-RECEIPT.json"
+      }
+    },
+    {
+      "path": "content/web-production/registries/wpr-surface-registry-v1.json",
+      "sha256": "84399fb47db1b5ca9c61c546cf0b3234629f09f00636c28c6a87a15f98dd61c5",
+      "actualRegistry": {
+        "registryCode": "PHI-OS-WPR-W3-SURFACE-REGISTRY-v1",
+        "registryVersion": "1.0.0",
+        "work": "WPR-W3",
+        "baselineCommit": "9c6ab5b198f6603a2e8ac3d95ef743b5b2694db9",
+        "status": "canonical_wpr_f_w22_w23_professional_financial_report_surfaces_active",
+        "audienceClasses": [
+          "PUBLIC",
+          "CUSTOMER",
+          "PROFESSIONAL"
+        ],
+        "entries": [
+          {
+            "surfaceCode": "HOME",
+            "audienceClass": "PUBLIC",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "PUBLISHED_KNOWLEDGE",
+              "BOOK_REGISTRY",
+              "PUBLIC_ASSET_REGISTRY"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "DISCOVER",
+            "audienceClass": "PUBLIC",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "PUBLISHED_KNOWLEDGE",
+              "BOOK_REGISTRY"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "LIBRARY",
+            "audienceClass": "PUBLIC",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "PUBLISHED_KNOWLEDGE",
+              "BOOK_REGISTRY",
+              "PART_REGISTRY"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "ARTICLE",
+            "audienceClass": "PUBLIC",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "PUBLISHED_KNOWLEDGE"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "FIGURE",
+            "audienceClass": "PUBLIC",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "PUBLISHED_ASSET_REGISTRY",
+              "PUBLIC_ASSET_REGISTRY"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "DIAGRAM",
+            "audienceClass": "PUBLIC",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "PUBLISHED_ASSET_REGISTRY",
+              "PUBLIC_ASSET_REGISTRY"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "BOOK",
+            "audienceClass": "PUBLIC",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "BOOK_REGISTRY",
+              "PART_REGISTRY",
+              "PUBLIC_ASSET_REGISTRY"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "ACADEMY_DISCOVERY",
+            "audienceClass": "PUBLIC",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "ALR"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "ACADEMY_LEARNING",
+            "audienceClass": "CUSTOMER",
+            "authRequired": true,
+            "entitlementRequired": true,
+            "sourceAuthorities": [
+              "ALR",
+              "RDG"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "REALITY_JOURNEY",
+            "audienceClass": "CUSTOMER",
+            "authRequired": true,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "JR",
+              "RDG"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "REALITY_ENTRY",
+            "audienceClass": "CUSTOMER",
+            "authRequired": true,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "RDG"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "REALITY_JOURNEY_OVERVIEW",
+            "audienceClass": "PUBLIC",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "JR",
+              "RDG"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL",
+            "wprW20Mode": "JR_V2_CANONICAL_AUTHORITY_OVERVIEW"
+          },
+          {
+            "surfaceCode": "REALITY_JOURNEY_LOCAL",
+            "audienceClass": "CUSTOMER",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "JR",
+              "RDG",
+              "M3C_BROWSER_LOCAL_COMPATIBILITY"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL",
+            "wprW20Mode": "BROWSER_LOCAL_JOURNEY_COMPATIBILITY",
+            "canonicalCustomerWorkspace": false
+          },
+          {
+            "surfaceCode": "PERSONAL_RUNTIME",
+            "audienceClass": "CUSTOMER",
+            "authRequired": true,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "MPA",
+              "RDG"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL",
+            "implementationState": "PENDING_AUTHENTICATED_EXECUTION_AFTER_MPA_W26_W27",
+            "methodExecutionAllowed": false
+          },
+          {
+            "surfaceCode": "CUSTOMER_WORKSPACE",
+            "audienceClass": "CUSTOMER",
+            "authRequired": true,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "RMO",
+              "RRE",
+              "JR",
+              "LRM",
+              "RDG"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "CUSTOMER_REPORT",
+            "audienceClass": "CUSTOMER",
+            "authRequired": true,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "RR",
+              "RDG"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "PROFESSIONAL",
+            "audienceClass": "PUBLIC",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "PR"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL",
+            "implementationState": "LIMITED_PRODUCTION_DISCOVERY",
+            "professionalJudgmentCreationAllowed": false
+          },
+          {
+            "surfaceCode": "PROFESSIONAL_WORKSPACE",
+            "audienceClass": "PROFESSIONAL",
+            "authRequired": true,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "PR",
+              "RDG",
+              "RR",
+              "FINANCIAL_RUNTIME"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL",
+            "implementationState": "LIMITED_PRODUCTION_AUTHORIZED_SHELL",
+            "authorizedPayloadRequired": true,
+            "wprPrivatePayloadFetchAllowed": false
+          },
+          {
+            "surfaceCode": "FINANCIAL",
+            "audienceClass": "PUBLIC",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "FINANCIAL_RUNTIME",
+              "PR"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL",
+            "implementationState": "LIMITED_PRODUCTION_DISCOVERY",
+            "financialCalculationExecutionAllowed": false,
+            "financialRecommendationCreationAllowed": false
+          },
+          {
+            "surfaceCode": "ACCOUNT",
+            "audienceClass": "CUSTOMER",
+            "authRequired": true,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "ACCOUNT_RUNTIME"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "CHECKOUT",
+            "audienceClass": "CUSTOMER",
+            "authRequired": true,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "COMMERCE_RUNTIME"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "ABOUT",
+            "audienceClass": "PUBLIC",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "LEGAL",
+            "audienceClass": "PUBLIC",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "RDG"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "CONTACT",
+            "audienceClass": "PUBLIC",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+          },
+          {
+            "surfaceCode": "PERSONAL_RUNTIME_SETUP",
+            "audienceClass": "PUBLIC",
+            "authRequired": false,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "MPA",
+              "RDG"
+            ],
+            "allowedPresentationAuthority": "STATIC_CUSTOMER_SHELL_TRANSITIONAL_UNTIL_CPR_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL",
+            "dataHandling": "EPHEMERAL_BROWSER_ONLY",
+            "methodExecutionAllowed": false,
+            "canonicalCustomerWorkspace": false
+          },
+          {
+            "surfaceCode": "PROFESSIONAL_REPORT_VIEWER",
+            "audienceClass": "PROFESSIONAL",
+            "authRequired": true,
+            "entitlementRequired": false,
+            "sourceAuthorities": [
+              "RR",
+              "PR",
+              "RDG"
+            ],
+            "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+            "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL",
+            "implementationState": "LIMITED_PRODUCTION_AUTHORIZED_SHELL",
+            "authorizedPayloadRequired": true,
+            "wprPrivatePayloadFetchAllowed": false,
+            "reportGenerationAllowed": false
+          }
+        ],
+        "rules": {
+          "surfaceDoesNotCreatePublicationEligibility": true,
+          "surfaceDoesNotCreateAccessEligibility": true,
+          "publicSurfaceCannotConsumeCustomerPrivateSource": true,
+          "customerSurfaceCannotConsumeProfessionalPrivateSourceWithoutExplicitAuthority": true
+        }
+      }
+    },
+    {
+      "path": "content/governance/full-method-availability/registries/canonical-method-production-scope-registry-v2.json",
+      "sha256": "203bd2945cbb06c72db663e8ba93ccfd6b2e5a4639bc40bbd160692ecf3a49cc",
+      "actualRegistry": {
+        "schemaVersion": "PHI-OS-CANONICAL-METHOD-PRODUCTION-SCOPE-REGISTRY-v2.0.0",
+        "work": "FMA-W13",
+        "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+        "status": "CURRENT_CANONICAL_V1_SCOPES_PRODUCTION_ACCEPTED",
+        "rules": {
+          "availableMeansDeclaredScopeComplete": true,
+          "scopeRegistrationDoesNotGrantAvailability": true,
+          "scopeExpansionRequiresVersionedSuccessor": true,
+          "allHistoricalSchoolsRequired": false
+        },
+        "methods": [
+          {
+            "methodCode": "NUMEROLOGY",
+            "pluginCode": "NUM",
+            "scopeCode": "NUMERIC_RUNTIME_V1",
+            "scopeVersion": "1.0.0",
+            "scopeStatus": "PRODUCTION_ACCEPTED",
+            "currentProductionScope": [
+              "BIRTH_NUMBER",
+              "NUMBER_STRUCTURE",
+              "EXPLICIT_DATE_CYCLE_PROJECTION"
+            ],
+            "includedFeatures": [
+              "BIRTH_NUMBER",
+              "LIFE_PATH_PRIMARY_NUMBER_STRUCTURE",
+              "CANONICAL_NUMBER_STRUCTURE",
+              "CANONICAL_CYCLES"
+            ],
+            "excludedFeatures": [
+              "UNBOUNDED_FORTUNE_NUMBER_CLAIMS",
+              "PROFESSIONAL_JUDGMENT"
+            ],
+            "deferredFeatures": [
+              "NAME_NUMEROLOGY",
+              "ADDITIONAL_HISTORICAL_NUMEROLOGY_SCHOOLS"
+            ],
+            "inputRequirements": [
+              "CANONICAL_BIRTH_DATE",
+              "TARGET_DATE_WHEN_CYCLE_REQUESTED",
+              "GOVERNED_TIMEZONE_CONTEXT_WHEN_REQUIRED"
+            ],
+            "calculationPolicy": "VERSIONED_NUM_AUTHORITY_REQUIRED",
+            "projectionPolicy": "CANONICAL_METHOD_PROJECTION_ONLY",
+            "meaningPolicy": "CMP_PRODUCTION_SUCCESSOR_ONLY",
+            "readingPolicy": "RRP_GOVERNED_COMPOSITION_ONLY"
+          },
+          {
+            "methodCode": "BAZI",
+            "pluginCode": "BZR",
+            "scopeCode": "BAZI_STRUCTURAL_RUNTIME_V1",
+            "scopeVersion": "1.0.0",
+            "scopeStatus": "PRODUCTION_ACCEPTED",
+            "currentProductionScope": [
+              "FOUR_PILLARS",
+              "GOVERNED_SOLAR_CONTEXT",
+              "CONDITIONAL_LUCK_CYCLE"
+            ],
+            "includedFeatures": [
+              "CANONICAL_CALENDAR_CONVERSION",
+              "TRUE_SOLAR_TIME_WHERE_AUTHORITY_REQUIRES",
+              "FOUR_PILLARS",
+              "HEAVENLY_STEMS",
+              "EARTHLY_BRANCHES",
+              "PILLAR_STRUCTURE",
+              "CONDITIONAL_LUCK_CYCLE"
+            ],
+            "excludedFeatures": [
+              "UNBOUNDED_DESTINY_CLAIMS",
+              "PROFESSIONAL_JUDGMENT"
+            ],
+            "deferredFeatures": [
+              "ALL_HISTORICAL_BAZI_SCHOOLS",
+              "UNFROZEN_ADVANCED_RELATIONAL_SYSTEMS"
+            ],
+            "inputRequirements": [
+              "CANONICAL_BIRTH_DATE",
+              "GOVERNED_TIMEZONE_CONTEXT",
+              "BIRTH_TIME_FOR_TIME_DEPENDENT_COMPONENTS",
+              "EXPLICIT_TRADITIONAL_CALCULATION_SEX_WHEN_LUCK_CYCLE_POLICY_REQUIRES"
+            ],
+            "calculationPolicy": "VERSIONED_BZR_AUTHORITY_REQUIRED",
+            "projectionPolicy": "CANONICAL_METHOD_PROJECTION_ONLY",
+            "meaningPolicy": "CMP_PRODUCTION_SUCCESSOR_ONLY",
+            "readingPolicy": "RRP_GOVERNED_COMPOSITION_ONLY"
+          },
+          {
+            "methodCode": "ASTROLOGY",
+            "pluginCode": "AST",
+            "scopeCode": "AST_STRUCTURAL_RUNTIME_V1",
+            "scopeVersion": "1.0.0",
+            "scopeStatus": "PRODUCTION_ACCEPTED",
+            "currentProductionScope": [
+              "CORE_10_PLANETS",
+              "TRUE_LUNAR_NODE",
+              "ASC_MC_DSC_IC",
+              "TWELVE_HOUSES",
+              "MAJOR_ASPECTS"
+            ],
+            "includedFeatures": [
+              "CORE_10_PLANETS",
+              "TRUE_LUNAR_NODE",
+              "ASC_MC_DSC_IC",
+              "TWELVE_HOUSES",
+              "MAJOR_ASPECTS"
+            ],
+            "excludedFeatures": [
+              "UNBOUNDED_FATE_PREDICTION",
+              "PROFESSIONAL_JUDGMENT"
+            ],
+            "deferredFeatures": [
+              "ASTEROIDS",
+              "FIXED_STARS",
+              "MINOR_ASPECTS",
+              "PROGRESSIONS",
+              "DIRECTIONS",
+              "ALL_ASTROLOGY_SCHOOLS"
+            ],
+            "inputRequirements": [
+              "CANONICAL_BIRTH_DATE",
+              "GOVERNED_TIMEZONE_CONTEXT",
+              "COORDINATES_FOR_TIME_LOCATION_DEPENDENT_COMPONENTS",
+              "BIRTH_TIME_FOR_ANGLES_AND_HOUSES"
+            ],
+            "calculationPolicy": "AST_PRODUCTION_POLICY_SUCCESSOR_REQUIRED",
+            "projectionPolicy": "CANONICAL_METHOD_PROJECTION_ONLY",
+            "meaningPolicy": "CMP_PRODUCTION_SUCCESSOR_ONLY",
+            "readingPolicy": "RRP_GOVERNED_COMPOSITION_ONLY"
+          }
+        ],
+        "predecessor": "content/governance/full-method-availability/registries/canonical-method-production-scope-registry-v1.json",
+        "predecessorMutated": false
+      }
+    },
+    {
+      "path": "content/product-activation/prx/registries/prx-client-experience-registry-v1.json",
+      "sha256": "5f9d3ae29a3e5b00eb97a94b61897dc9b1d6775c5d660b074bb4d844bb068d68",
+      "actualRegistry": {
+        "schemaVersion": "PHI-OS-PRX-CLIENT-EXPERIENCE-REGISTRY-v1.0.0",
+        "work": "PRX-W1",
+        "baselineCommit": "6f2b4c6791c552c065ac699b12e08ebe4aa1e7fe",
+        "status": "FROZEN_STAGE1_CLIENT_EXPERIENCE_TAXONOMY",
+        "experiences": [
+          {
+            "code": "UNDERSTAND",
+            "label": "Understand",
+            "publicMeaning": "Ask PHI OS + Search + Knowledge"
+          },
+          {
+            "code": "KNOW_MYSELF",
+            "label": "Know Myself",
+            "publicMeaning": "Personal Runtime"
+          },
+          {
+            "code": "UNDERSTAND_MY_REALITY",
+            "label": "Understand My Reality",
+            "publicMeaning": "Reality Reading / My Reality"
+          },
+          {
+            "code": "UNDERSTAND_MONEY",
+            "label": "Understand Money",
+            "publicMeaning": "Financial Reality"
+          },
+          {
+            "code": "NAVIGATE",
+            "label": "Navigate",
+            "publicMeaning": "Reality Journey / Navigation"
+          },
+          {
+            "code": "LEARN",
+            "label": "Learn",
+            "publicMeaning": "Books / Library / Academy"
+          },
+          {
+            "code": "WORK_WITH_PROFESSIONAL",
+            "label": "Work with Professional",
+            "publicMeaning": "Professional / Reports / Services"
+          },
+          {
+            "code": "NONE_BY_DESIGN",
+            "label": "None by design",
+            "publicMeaning": "Internal governance/infrastructure; never a standalone client menu item"
+          }
+        ],
+        "rules": {
+          "exactlyOnePrimaryClientExperiencePerCapability": true,
+          "secondaryExperiencesAllowed": true,
+          "internalInfrastructureMayUseNoneByDesign": true,
+          "runtimeFamiliesMustNotBecomePublicMenuItemsByDefault": true
+        }
+      }
+    }
+  ],
+  "scope": "Current index authorities reconciled; historical surface classifications do not imply a standalone discovery product",
+  "gaps": [
+    "Cross: no independent target proven; retain current registered method/runtime owner",
+    "Nature: no customer standalone target proven",
+    "Enhanced knowledge: not enabled by ENTRY; no provider escalation",
+    "Source-object contextual handoff beyond generic ephemeral question requires existing source resolver; not promoted by ENTRY"
+  ]
+}

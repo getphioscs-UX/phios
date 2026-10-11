@@ -1,9 +1,10 @@
-import {persistCustomerArtifactInHeldStore} from '../report-delivery/customer-artifact-store.js';
+﻿import {persistCustomerArtifactInHeldStore} from '../report-delivery/customer-artifact-store.js';
 import {buildCustomerNativeBaziInputs} from '../report-delivery/bazi-customer-native-inputs.js';
 import {createCustomerReportArtifact,verifyCustomerReportArtifact} from '../report-delivery/customer-report-artifact.js';
 import {personIdentity,loadCanonicalPersonSubject} from './canonical-person-store.js';
 import {prepareAccountBaziCandidate} from '../report-delivery/bazi-account-candidate.js';
 import {generatePaidBaziManuscript} from '../personal-reading/deep-manuscript/bazi-paid-generation.js';
+import {buildBaziProductionGenerationConfig} from '../personal-reading/deep-manuscript/bazi-production-generation-config.js';
 import {compileBaziDeepPublication} from '../personal-reading/deep-manuscript/bazi-deep-manuscript-publication.js';
 import {createReportGenerationStore} from '../personal-reading/report-generation-store.js';
 import {commerceEnvironment} from '../commerce/commerce-environment.js';
@@ -19,7 +20,19 @@ async function seal(env,value){if(!env.AUTH_SESSION_SECRET)fail('BAZI_MATERIAL_S
 // Never substitute a repository reference chart for a customer's calculation.
 async function loadInputs(context,prepared){
  const key=`bazi-inputs/${prepared.customerId}/${prepared.personId}/${prepared.personVersion}/${prepared.calculationDigest}.json`,object=await context.env.PRIVATE_REPORTS?.get(key);
- if(!object){const native=await buildCustomerNativeBaziInputs(context,prepared),config=context.env.BAZI_REPORT_GENERATION_CONFIG;if(!config?.model||!config?.policy||!config?.approval)fail('BAZI_SERVER_GENERATION_POLICY_NOT_CONFIGURED',503);return {...native,...config};}const {integritySeal,...body}=JSON.parse(await object.text());
+ if(!object){
+ const native=await buildCustomerNativeBaziInputs(context,prepared);
+ let config=context.env.BAZI_REPORT_GENERATION_CONFIG;
+ if(!config){
+  try{
+   config=buildBaziProductionGenerationConfig();
+  }catch(error){
+   fail('BAZI_SERVER_GENERATION_POLICY_NOT_CONFIGURED',503);
+  }
+ }
+ if(!config?.model||!config?.policy||!config?.approval)fail('BAZI_SERVER_GENERATION_POLICY_NOT_CONFIGURED',503);
+ return {...native,...config};
+}const {integritySeal,...body}=JSON.parse(await object.text());
  if(integritySeal!==await seal(context.env,body)||body.canonicalBirthInputFingerprint!==prepared.canonicalBirthInputFingerprint||body.calculationDigest!==prepared.calculationDigest||body.pack?.subject?.subjectId!==prepared.personId)fail('BAZI_SUBJECT_AUTHORITY_MISMATCH');
  return body;
 }
@@ -66,3 +79,5 @@ export async function openAccountBaziMaterial(context,reportId){
  const object=await context.env.PRIVATE_REPORTS.get(row.object_key);if(!object)fail('REPORT_UNAVAILABLE',404);const html=await object.text();if(await digest(html)!==row.output_digest)fail('REPORT_UNAVAILABLE',404);let artifact=null;if(body.artifactKey){const a=await context.env.PRIVATE_REPORTS.get(body.artifactKey);if(!a)fail('REPORT_UNAVAILABLE',404);artifact=await verifyCustomerReportArtifact(JSON.parse(await a.text()),{customerId:owner,reportArtifactId:reportId});if(artifact.artifactDigest!==body.artifactDigest||artifact.htmlSnapshotOrRenderState.outputDigest!==row.output_digest)fail('REPORT_UNAVAILABLE',404);}return {row,candidate,html,artifact,verification:body.verification};
 }
 export async function listAccountBaziMaterials(context){gate(context);const rows=(await context.env.RUNTIME_DB.prepare('SELECT report_id FROM account_method_report_materials WHERE owner_account_id=? AND method_code=\'BZR\' ORDER BY released_at DESC LIMIT 100').bind(personIdentity(context).userId).all()).results||[],out=[];for(const r of rows){const {row}=await openAccountBaziMaterial(context,r.report_id);out.push({reportId:row.report_id,method:'BZR',locale:row.locale,releasedAt:row.released_at,version:row.report_version,status:'RELEASED'});}return out;}
+
+

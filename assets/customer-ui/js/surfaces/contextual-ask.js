@@ -295,8 +295,8 @@ function boot(){
     if(!question||form.getAttribute('aria-busy')==='true')return;
     if(form.elements.askTask.value==='ENTRY'){
       form.setAttribute('aria-busy','true');
-      try{const p=await postJson('/api/client-intent-route',{question,locale:locale(),entrySurface:'ASK'});renderEntryResult(entryResult,p.route);setStatus(status,'');}
-      catch{setStatus(status,tr('Unable to find an entrance right now. Retry or browse knowledge.','暂时无法取得入口，请重试或直接浏览知识。'),'error');}
+      try{const p=await postJson('/api/client-intent-route',{question,locale:locale(),entrySurface:'ASK'});renderEntryResult(entryResult,p.route,{retry:()=>form.requestSubmit(),clarify:()=>form.elements.question.focus()});setStatus(status,'');}
+      catch{setStatus(status,'');renderEntryResult(entryResult,{outcome:'SERVICE_FAILURE',primaryAction:{kind:'RETRY',label:tr('Retry','重试')}},{retry:()=>form.requestSubmit(),clarify:()=>form.elements.question.focus()});}
       finally{form.setAttribute('aria-busy','false');}return;
     }
     if(navigator.onLine===false){form.dataset.askState='OFFLINE';setStatus(status,tr('You are offline. Reconnect and try again.','目前离线，请联网后重试。'),'error');return;}

@@ -1,0 +1,774 @@
+{
+  "split": "FINAL_UNTUNED_ACCEPTANCE",
+  "limitations": "Internal manually authored finite acceptance set; not an external statistical benchmark. Frozen before first evaluation; no subsequent rule tuning.",
+  "records": [
+    {
+      "id": "C0Z",
+      "category": "platform",
+      "locale": "zh-Hans",
+      "question": "请介绍 PHIOS 的使用方式",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "PLATFORM_INTRODUCTION"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C0E",
+      "category": "platform",
+      "locale": "en",
+      "question": "Tell me about the purpose of phi os",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "PLATFORM_INTRODUCTION"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C1Z",
+      "category": "personal",
+      "locale": "zh-Hans",
+      "question": "希望以四柱来了解个人倾向",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C1E",
+      "category": "personal",
+      "locale": "en",
+      "question": "Explore personal tendencies with Four Pillars",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C2Z",
+      "category": "relationship",
+      "locale": "zh-Hans",
+      "question": "想整理我和伴侣的关系处境",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C2E",
+      "category": "relationship",
+      "locale": "en",
+      "question": "Organize the situation between me and my spouse",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C3Z",
+      "category": "financial",
+      "locale": "zh-Hans",
+      "question": "建立家庭收入与支出的预算",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C3E",
+      "category": "financial",
+      "locale": "en",
+      "question": "Build a budget for household income and expenses",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C4Z",
+      "category": "world",
+      "locale": "zh-Hans",
+      "question": "浏览世界文明重组资料",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C4E",
+      "category": "world",
+      "locale": "en",
+      "question": "Browse civilization reconfiguration material",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C5Z",
+      "category": "health",
+      "locale": "zh-Hans",
+      "question": "整理健康照护资料",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C5E",
+      "category": "health",
+      "locale": "en",
+      "question": "Organize health and care information",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C6Z",
+      "category": "profile",
+      "locale": "zh-Hans",
+      "question": "看看个人画像与自陈资料",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C6E",
+      "category": "profile",
+      "locale": "en",
+      "question": "Explore Profile and self-report material",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C7Z",
+      "category": "reflection",
+      "locale": "zh-Hans",
+      "question": "我要体验易经",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C7E",
+      "category": "reflection",
+      "locale": "en",
+      "question": "I would like to explore I Ching",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C8Z",
+      "category": "configuration",
+      "locale": "zh-Hans",
+      "question": "先进入 PHI 构型",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C8E",
+      "category": "configuration",
+      "locale": "en",
+      "question": "Start with PHI Configuration",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C9Z",
+      "category": "academy",
+      "locale": "zh-Hans",
+      "question": "找学院的学习课程",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C9E",
+      "category": "academy",
+      "locale": "en",
+      "question": "Find courses in the Academy",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C10Z",
+      "category": "books",
+      "locale": "zh-Hans",
+      "question": "打开公开书籍目录",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C10E",
+      "category": "books",
+      "locale": "en",
+      "question": "Open the public book catalog",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C11Z",
+      "category": "appointment",
+      "locale": "zh-Hans",
+      "question": "我想提交预约申请",
+      "allowed": {
+        "task": "PRODUCT_HELP",
+        "outcomes": [
+          "PRODUCT_HELP"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C11E",
+      "category": "appointment",
+      "locale": "en",
+      "question": "I would like to request an appointment",
+      "allowed": {
+        "task": "PRODUCT_HELP",
+        "outcomes": [
+          "PRODUCT_HELP"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C12Z",
+      "category": "will",
+      "locale": "zh-Hans",
+      "question": "整理遗嘱资料",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C12E",
+      "category": "will",
+      "locale": "en",
+      "question": "Prepare will information",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C13Z",
+      "category": "continuity",
+      "locale": "zh-Hans",
+      "question": "查看订阅与额度说明",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C13E",
+      "category": "continuity",
+      "locale": "en",
+      "question": "Review subscription and quota information",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C14Z",
+      "category": "thesis",
+      "locale": "zh-Hans",
+      "question": "阅读研究论文",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C14E",
+      "category": "thesis",
+      "locale": "en",
+      "question": "Read the research paper",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C15Z",
+      "category": "reality",
+      "locale": "zh-Hans",
+      "question": "进入我的现实整理处境",
+      "allowed": {
+        "task": "REALITY_NAVIGATION",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C15E",
+      "category": "reality",
+      "locale": "en",
+      "question": "Open My Reality to organize a situation",
+      "allowed": {
+        "task": "REALITY_NAVIGATION",
+        "outcomes": [
+          "MATCHED_CAPABILITY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C16Z",
+      "category": "knowledge",
+      "locale": "zh-Hans",
+      "question": "为什么人会在改变前犹豫",
+      "allowed": {
+        "task": "KNOWLEDGE_BASIC",
+        "outcomes": [
+          "KNOWLEDGE_RESULTS",
+          "NEEDS_CLARIFICATION",
+          "KNOWLEDGE_SOURCE_INSUFFICIENT"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C16E",
+      "category": "knowledge",
+      "locale": "en",
+      "question": "Why do people hesitate before a change?",
+      "allowed": {
+        "task": "KNOWLEDGE_BASIC",
+        "outcomes": [
+          "KNOWLEDGE_RESULTS",
+          "NEEDS_CLARIFICATION",
+          "KNOWLEDGE_SOURCE_INSUFFICIENT"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C17Z",
+      "category": "negative",
+      "locale": "zh-Hans",
+      "question": "不要占星，我只想知道信任是什么意思",
+      "allowed": {
+        "task": "KNOWLEDGE_BASIC",
+        "outcomes": [
+          "KNOWLEDGE_RESULTS",
+          "NEEDS_CLARIFICATION",
+          "KNOWLEDGE_SOURCE_INSUFFICIENT"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C17E",
+      "category": "negative",
+      "locale": "en",
+      "question": "I do not want astrology. What is trust?",
+      "allowed": {
+        "task": "KNOWLEDGE_BASIC",
+        "outcomes": [
+          "KNOWLEDGE_RESULTS",
+          "NEEDS_CLARIFICATION",
+          "KNOWLEDGE_SOURCE_INSUFFICIENT"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C18Z",
+      "category": "multi",
+      "locale": "zh-Hans",
+      "question": "关系和现金流都想整理",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MULTI_DOMAIN_CLARIFY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C18E",
+      "category": "multi",
+      "locale": "en",
+      "question": "Organize both relationships and cash flow",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "MULTI_DOMAIN_CLARIFY"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C19Z",
+      "category": "no-match",
+      "locale": "zh-Hans",
+      "question": "购买火星飞船零件",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "NO_MATCH"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    },
+    {
+      "id": "C19E",
+      "category": "no-match",
+      "locale": "en",
+      "question": "Purchase Martian spacecraft components",
+      "allowed": {
+        "task": "ENTRY",
+        "outcomes": [
+          "NO_MATCH"
+        ]
+      },
+      "forbidden": [
+        "PROVIDER_CALL",
+        "AUTO_GENERATE",
+        "AUTO_PERSIST",
+        "PAYMENT",
+        "PERSONAL_FACT_INFERENCE"
+      ]
+    }
+  ]
+}

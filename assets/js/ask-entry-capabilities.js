@@ -1,6 +1,6 @@
 // Generated public projection; existing owners alone grant execution.
 export const ASK_CAPABILITIES={
-  "version": "PHI-OS-ASK-ENTRY-R1-v1",
+  "version": "PHI-OS-ASK-ENTRY-R1-v2",
   "generatedFrom": [
     "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
     "content/customer-experience-rebuild/registries/cx-r12r4-method-availability-registry-v1.json"
@@ -18,7 +18,7 @@ export const ASK_CAPABILITIES={
         "PERSONAL_REALITY"
       ],
       "mappingGap": null,
-      "verifiedAt": "2026-10-10T20:20:53.376Z",
+      "verifiedAt": "2026-10-11T02:19:12.521Z",
       "canonicalDomainOwner": "PPR_CURRENT_SHARED_RUNTIME",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/customer-experience-rebuild/registries/cx-r12r4-method-availability-registry-v1.json",
@@ -34,8 +34,8 @@ export const ASK_CAPABILITIES={
       "outputKinds": [
         "Deterministic method reading"
       ],
-      "capabilityVersion": "R1-v1",
-      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
     },
     {
       "capabilityId": "RELATIONSHIP",
@@ -49,7 +49,7 @@ export const ASK_CAPABILITIES={
         "RELATIONSHIP_REALITY"
       ],
       "mappingGap": null,
-      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
       "canonicalDomainOwner": "REL_W0_W8",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
@@ -65,8 +65,8 @@ export const ASK_CAPABILITIES={
       "outputKinds": [
         "Bounded relationship reading"
       ],
-      "capabilityVersion": "R1-v1",
-      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
     },
     {
       "capabilityId": "FINANCIAL",
@@ -80,7 +80,7 @@ export const ASK_CAPABILITIES={
         "FINANCIAL_REALITY"
       ],
       "mappingGap": null,
-      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
       "canonicalDomainOwner": "FDR_FCR_FAR_HFP_PFR",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
@@ -96,8 +96,8 @@ export const ASK_CAPABILITIES={
       "outputKinds": [
         "Financial organization and existing calculators"
       ],
-      "capabilityVersion": "R1-v1",
-      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
     },
     {
       "capabilityId": "WORLD",
@@ -111,7 +111,7 @@ export const ASK_CAPABILITIES={
         "WORLD_REALITY"
       ],
       "mappingGap": null,
-      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
       "canonicalDomainOwner": "CURRENT_WEB_AUTHORITY",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
@@ -127,8 +127,8 @@ export const ASK_CAPABILITIES={
       "outputKinds": [
         "Historical Atlas and scoped current dossiers"
       ],
-      "capabilityVersion": "R1-v1",
-      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
     },
     {
       "capabilityId": "HEALTH_CARE",
@@ -140,7 +140,7 @@ export const ASK_CAPABILITIES={
       "routeOwner": "functions/health/health-reality-runtime.js",
       "canonicalDomainRefs": [],
       "mappingGap": "No product-domain owner with this exact name; customer group is not a new canonical domain.",
-      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
       "canonicalDomainOwner": "functions/health/health-reality-runtime.js",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
@@ -156,8 +156,8 @@ export const ASK_CAPABILITIES={
       "outputKinds": [
         "Health organization and safety-first care routing"
       ],
-      "capabilityVersion": "R1-v1",
-      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
     },
     {
       "capabilityId": "PROFILE",
@@ -171,7 +171,7 @@ export const ASK_CAPABILITIES={
         "PERSONAL_REALITY"
       ],
       "mappingGap": null,
-      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
       "canonicalDomainOwner": "PPR_CURRENT_SHARED_RUNTIME",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
@@ -187,8 +187,8 @@ export const ASK_CAPABILITIES={
       "outputKinds": [
         "Personal Evidence; existing bilingual report entitlement"
       ],
-      "capabilityVersion": "R1-v1",
-      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
     },
     {
       "capabilityId": "REFLECTION",
@@ -202,7 +202,7 @@ export const ASK_CAPABILITIES={
         "PERSONAL_REALITY"
       ],
       "mappingGap": null,
-      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
       "canonicalDomainOwner": "PPR_CURRENT_SHARED_RUNTIME",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
@@ -218,8 +218,8 @@ export const ASK_CAPABILITIES={
       "outputKinds": [
         "Separate deterministic symbolic reading"
       ],
-      "capabilityVersion": "R1-v1",
-      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
     },
     {
       "capabilityId": "PHI_CONFIGURATION",
@@ -233,7 +233,7 @@ export const ASK_CAPABILITIES={
         "PERSONAL_REALITY"
       ],
       "mappingGap": null,
-      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
       "canonicalDomainOwner": "PPR_CURRENT_SHARED_RUNTIME",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/customer-experience-rebuild/registries/cx-r12r4-method-availability-registry-v1.json",
@@ -249,8 +249,8 @@ export const ASK_CAPABILITIES={
       "outputKinds": [
         "Independent PHI configuration model"
       ],
-      "capabilityVersion": "R1-v1",
-      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
     },
     {
       "capabilityId": "KNOWLEDGE",
@@ -264,7 +264,7 @@ export const ASK_CAPABILITIES={
         "KNOWLEDGE"
       ],
       "mappingGap": null,
-      "verifiedAt": "2026-10-10T20:20:53.380Z",
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
       "canonicalDomainOwner": "CANONICAL_KNOWLEDGE",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
@@ -280,8 +280,8 @@ export const ASK_CAPABILITIES={
       "outputKinds": [
         "Source-bound deterministic excerpts and reading paths"
       ],
-      "capabilityVersion": "R1-v1",
-      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
     },
     {
       "capabilityId": "PRODUCT_HELP",
@@ -295,7 +295,7 @@ export const ASK_CAPABILITIES={
         "MY_REALITY"
       ],
       "mappingGap": null,
-      "verifiedAt": "2026-10-10T20:20:53.381Z",
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
       "canonicalDomainOwner": "RMO",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
@@ -311,8 +311,8 @@ export const ASK_CAPABILITIES={
       "outputKinds": [
         "Authorized account retrieval; no new report generation"
       ],
-      "capabilityVersion": "R1-v1",
-      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
     },
     {
       "capabilityId": "PROFESSIONAL",
@@ -326,7 +326,7 @@ export const ASK_CAPABILITIES={
         "PROFESSIONAL"
       ],
       "mappingGap": null,
-      "verifiedAt": "2026-10-10T20:20:53.381Z",
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
       "canonicalDomainOwner": "PR_PFR",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
@@ -342,8 +342,225 @@ export const ASK_CAPABILITIES={
       "outputKinds": [
         "Existing service/application route"
       ],
-      "capabilityVersion": "R1-v1",
-      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+    },
+    {
+      "capabilityId": "ACADEMY",
+      "displayLabels": {
+        "en": "Academy",
+        "zh-Hans": "学习课程"
+      },
+      "canonicalRoute": "/academy/",
+      "routeOwner": "functions/api/academy-navigation.js",
+      "canonicalDomainRefs": [
+        "KNOWLEDGE"
+      ],
+      "mappingGap": null,
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
+      "canonicalDomainOwner": "CANONICAL_KNOWLEDGE",
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Selected public topic; playback requires a real video asset"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Free public Navigation catalog; existing Method video access rules"
+      ],
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+    },
+    {
+      "capabilityId": "BOOKS",
+      "displayLabels": {
+        "en": "Books",
+        "zh-Hans": "阅读书籍"
+      },
+      "canonicalRoute": "/books/",
+      "routeOwner": "functions/_lib/book-vii-published-admission.js",
+      "canonicalDomainRefs": [
+        "KNOWLEDGE"
+      ],
+      "mappingGap": null,
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
+      "canonicalDomainOwner": "CANONICAL_KNOWLEDGE",
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Published book/article identity; full books retain existing ownership rules"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Published reading and existing book catalog; Book VIII not for public sale"
+      ],
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+    },
+    {
+      "capabilityId": "APPOINTMENT",
+      "displayLabels": {
+        "en": "Appointment requests",
+        "zh-Hans": "预约申请"
+      },
+      "canonicalRoute": "/professional/appointments/",
+      "routeOwner": "functions/professional/appointments/appointment-request-store.js",
+      "canonicalDomainRefs": [
+        "PROFESSIONAL"
+      ],
+      "mappingGap": null,
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
+      "canonicalDomainOwner": "PR_PFR",
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Selected service, necessary information and explicit consent"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Unscheduled REQUESTED application; no automatic confirmation"
+      ],
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+    },
+    {
+      "capabilityId": "WILL",
+      "displayLabels": {
+        "en": "Will information draft",
+        "zh-Hans": "遗嘱资料整理"
+      },
+      "canonicalRoute": "/professional/financial/#estate-planning",
+      "routeOwner": "functions/account/will-information-delivery.js",
+      "canonicalDomainRefs": [
+        "FINANCIAL_REALITY"
+      ],
+      "mappingGap": null,
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
+      "canonicalDomainOwner": "FDR_FCR_FAR_HFP_PFR",
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Jurisdiction, information and save/delivery consent"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Existing informational draft; not a legally executed Will"
+      ],
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+    },
+    {
+      "capabilityId": "CONTINUITY",
+      "displayLabels": {
+        "en": "Continuity membership",
+        "zh-Hans": "持续会员"
+      },
+      "canonicalRoute": "/membership.html",
+      "routeOwner": "functions/personal-reading/continuity/continuity-commercial-authority.js",
+      "canonicalDomainRefs": [
+        "MY_REALITY"
+      ],
+      "mappingGap": null,
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
+      "canonicalDomainOwner": "RMO",
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Established material; existing subscription and quota owner"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Ongoing follow-up; no monthly regeneration or automatic enrollment"
+      ],
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+    },
+    {
+      "capabilityId": "ABOUT",
+      "displayLabels": {
+        "en": "About PHI OS",
+        "zh-Hans": "关于 PHI OS"
+      },
+      "canonicalRoute": "/about/founder/#how",
+      "routeOwner": "about/founder/index.html",
+      "canonicalDomainRefs": [
+        "KNOWLEDGE"
+      ],
+      "mappingGap": null,
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
+      "canonicalDomainOwner": "CANONICAL_KNOWLEDGE",
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Public platform introduction"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Existing platform/founder copy and real feature entrances"
+      ],
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
+    },
+    {
+      "capabilityId": "THESIS",
+      "displayLabels": {
+        "en": "Thesis",
+        "zh-Hans": "核心论述"
+      },
+      "canonicalRoute": "/thesis.html",
+      "routeOwner": "thesis.html",
+      "canonicalDomainRefs": [
+        "KNOWLEDGE"
+      ],
+      "mappingGap": null,
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
+      "canonicalDomainOwner": "CANONICAL_KNOWLEDGE",
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Published thesis and available PDF projection"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Existing research reading/download; no invented PDF"
+      ],
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
     },
     {
       "capabilityId": "REALITY",
@@ -357,7 +574,7 @@ export const ASK_CAPABILITIES={
         "MY_REALITY"
       ],
       "mappingGap": null,
-      "verifiedAt": "2026-10-10T20:20:53.381Z",
+      "verifiedAt": "2026-10-11T02:19:12.523Z",
       "canonicalDomainOwner": "RMO",
       "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
       "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
@@ -373,8 +590,8 @@ export const ASK_CAPABILITIES={
       "outputKinds": [
         "Existing Reality and entitled contextual follow-up"
       ],
-      "capabilityVersion": "R1-v1",
-      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+      "capabilityVersion": "R1-v2",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
     }
   ],
   "methods": [

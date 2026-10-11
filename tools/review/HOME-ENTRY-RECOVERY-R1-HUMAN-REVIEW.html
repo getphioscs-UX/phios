@@ -1,0 +1,377 @@
+<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Homepage ENTRY recovery R1</title><style>body{font:16px system-ui;background:#102b2d;color:#f5f1e8;max-width:1180px;margin:0 auto;padding:28px;line-height:1.65}a{color:#ead5a1}table{width:100%;border-collapse:collapse;font-size:14px}td,th{border:1px solid #557170;padding:9px;text-align:left;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere}img{max-width:100%;height:auto;border:1px solid #557170}section{padding:16px 0;border-top:1px solid #557170}.scroll{overflow:auto}</style><h1>首页 ENTRY · 完整分流能力验收 R1</h1><p>本地实现与构建通过；完整验收 PARTIAL。源码完成不等于部署或真实客户验证。没有 provider 调用、收费、生产迁移、R2 删除或自动提交。</p><section><h2>实际结果</h2><ul><li>PHIOS是什么 / What is PHIOS? → PLATFORM_INTRODUCTION → 现有 About 的 #how，以及 Knowledge / My Reality 真实入口。</li><li>人为什么不快乐 → KNOWLEDGE_BASIC → KNOWLEDGE_SOURCE_INSUFFICIENT → 针对“不快乐”的概念／一般原因／具体情境澄清。</li><li>Why are people unhappy? → KNOWLEDGE_BASIC → NEEDS_CLARIFICATION（低覆盖）；不把低覆盖片段显示为有依据答案。</li><li>已发布的双语现实形成问题 → KNOWLEDGE_RESULTS，展示真实来源原文和文章入口。</li><li>NO_MATCH、NEEDS_CLARIFICATION、KNOWLEDGE_SOURCE_INSUFFICIENT、INDEX_LOADING_FAILED、SERVICE_FAILURE 分开显示；后两项可实际重试。</li></ul></section><section><h2>实现与复用</h2><p>品牌及一般解释意图由公共 router 分类；ENTRY API 直接复用 handlePublicKnowledgeRequest 的公开索引、来源与版本，不建立第二套检索库，不进入 provider 编排。只在 exact/strong 覆盖且存在来源正文时显示知识结果。安全照护、明确预约／订单帮助及原有付费 Ask 分支保留。</p><p>结果移到真实首页表单后方、共用同一容器。紧凑深色卡片只保留一个主要动作；移除重复失败说明及固定账户／报告链接。首页、Header、Ask ENTRY 均复用同一结果组件与重试回调。</p></section><section><h2>34 个实际 API 样本</h2><div class="scroll"><table><tr><th>输入 / 故障</th><th>语言</th><th>实际分流</th><th>来源 / 操作</th></tr><tr><td>PHIOS是什么</td><td>zh-Hans</td><td>PLATFORM_INTRODUCTION</td><td>/about/founder/#how</td></tr><tr><td>PHI OS 是什么？</td><td>zh-Hans</td><td>PLATFORM_INTRODUCTION</td><td>/about/founder/#how</td></tr><tr><td>介绍一下phi os</td><td>zh-Hans</td><td>PLATFORM_INTRODUCTION</td><td>/about/founder/#how</td></tr><tr><td>PHIOS有什么功能</td><td>zh-Hans</td><td>PLATFORM_INTRODUCTION</td><td>/about/founder/#how</td></tr><tr><td>PHIOS如何使用</td><td>zh-Hans</td><td>PLATFORM_INTRODUCTION</td><td>/about/founder/#how</td></tr><tr><td>这个平台怎么用</td><td>zh-Hans</td><td>PLATFORM_INTRODUCTION</td><td>/about/founder/#how</td></tr><tr><td>What is PHIOS?</td><td>en</td><td>PLATFORM_INTRODUCTION</td><td>/about/founder/#how</td></tr><tr><td>Tell me about phi os</td><td>en</td><td>PLATFORM_INTRODUCTION</td><td>/about/founder/#how</td></tr><tr><td>How do I use PHI OS?</td><td>en</td><td>PLATFORM_INTRODUCTION</td><td>/about/founder/#how</td></tr><tr><td>What features does PHIOS offer?</td><td>en</td><td>PLATFORM_INTRODUCTION</td><td>/about/founder/#how</td></tr><tr><td>PHIOS</td><td>en</td><td>PLATFORM_INTRODUCTION</td><td>/about/founder/#how</td></tr><tr><td>人为什么不快乐</td><td>zh-Hans</td><td>KNOWLEDGE_SOURCE_INSUFFICIENT</td><td>关于“不快乐”，你想了解概念含义、一般形成原因，还是某个具体情境？现有来源不足以给出可靠解释。</td></tr><tr><td>人为何感到不快乐？</td><td>zh-Hans</td><td>KNOWLEDGE_SOURCE_INSUFFICIENT</td><td>关于“感到不快乐?”，你想了解概念含义、一般形成原因，还是某个具体情境？现有来源不足以给出可靠解释。</td></tr><tr><td>为什么人会不开心？</td><td>zh-Hans</td><td>KNOWLEDGE_SOURCE_INSUFFICIENT</td><td>关于“人会不开心?”，你想了解概念含义、一般形成原因，还是某个具体情境？现有来源不足以给出可靠解释。</td></tr><tr><td>Why are people unhappy?</td><td>en</td><td>NEEDS_CLARIFICATION</td><td>For “people unhappy?”, do you mean its definition, general causes, or a specific situation? The available sources do not yet support an explanation.</td></tr><tr><td>What causes unhappiness?</td><td>en</td><td>NEEDS_CLARIFICATION</td><td>For “What causes unhappiness?”, do you mean its definition, general causes, or a specific situation? The available sources do not yet support an explanation.</td></tr><tr><td>Why do people procrastinate?</td><td>en</td><td>KNOWLEDGE_RESULTS</td><td>/articles/why-more-capability-does-not-guarantee-direction-or-stability</td></tr><tr><td>为什么人会拖延？</td><td>zh-Hans</td><td>KNOWLEDGE_SOURCE_INSUFFICIENT</td><td>关于“人会拖延?”，你想了解概念含义、一般形成原因，还是某个具体情境？现有来源不足以给出可靠解释。</td></tr><tr><td>为何有些关系会让人疲惫？</td><td>zh-Hans</td><td>KNOWLEDGE_SOURCE_INSUFFICIENT</td><td>关于“有些关系会让人疲惫?”，你想了解概念含义、一般形成原因，还是某个具体情境？现有来源不足以给出可靠解释。</td></tr><tr><td>Why is work tiring?</td><td>en</td><td>KNOWLEDGE_RESULTS</td><td>/articles/why-reality-is-harder-to-understand-speed-cost-and-reality-grammar</td></tr><tr><td>不是问PHIOS，人为什么不快乐</td><td>zh-Hans</td><td>KNOWLEDGE_SOURCE_INSUFFICIENT</td><td>关于“,人不快乐”，你想了解概念含义、一般形成原因，还是某个具体情境？现有来源不足以给出可靠解释。</td></tr><tr><td>I am not asking about PHIOS. Why are people unhappy?</td><td>en</td><td>NEEDS_CLARIFICATION</td><td>For “I am .   people unhappy?”, do you mean its definition, general causes, or a specific situation? The available sources do not yet support an explanation.</td></tr><tr><td>我不要八字，为什么人不快乐</td><td>zh-Hans</td><td>KNOWLEDGE_SOURCE_INSUFFICIENT</td><td>关于“我,人不快乐”，你想了解概念含义、一般形成原因，还是某个具体情境？现有来源不足以给出可靠解释。</td></tr><tr><td>I don't want tarot. Why do people feel unhappy?</td><td>en</td><td>KNOWLEDGE_RESULTS</td><td>/articles/why-more-capability-does-not-guarantee-direction-or-stability</td></tr><tr><td>不要塔罗</td><td>zh-Hans</td><td>NO_MATCH</td><td>目前没有可靠的对应功能。请补充你想了解的主题，或直接浏览知识。</td></tr><tr><td>I don't want tarot</td><td>en</td><td>NO_MATCH</td><td>No supported capability matches yet. Clarify the topic or browse knowledge directly.</td></tr><tr><td>zxqvbnml</td><td>en</td><td>NO_MATCH</td><td>No supported capability matches yet. Clarify the topic or browse knowledge directly.</td></tr><tr><td>我想看八字</td><td>zh-Hans</td><td>MATCHED_CAPABILITY</td><td>providerCalls=0</td></tr><tr><td>收入与伴侣关系</td><td>zh-Hans</td><td>MULTI_DOMAIN_CLARIFY</td><td>先处理哪一部分：工作与生活、关系，还是收入与支出？</td></tr><tr><td>How Reality Moves from Difference to Navigable Structure</td><td>en</td><td>KNOWLEDGE_RESULTS</td><td>/articles/how-reality-moves-from-difference-to-navigable-structure</td></tr><tr><td>差异如何打开现实形成的可能</td><td>zh-Hans</td><td>KNOWLEDGE_RESULTS</td><td>/articles/how-reality-moves-from-difference-to-navigable-structure</td></tr><tr><td>INDEX_LOADING_FAILED</td><td>controlled fault</td><td>INDEX_LOADING_FAILED</td><td>RETRY</td></tr><tr><td>INDEX_LOADING_FAILED</td><td>controlled fault</td><td>INDEX_LOADING_FAILED</td><td>RETRY</td></tr><tr><td>SERVICE_FAILURE</td><td>controlled fault</td><td>SERVICE_FAILURE</td><td>RETRY</td></tr></table></div></section><section><h2>20 个真实首页浏览器验证项</h2><p>1440、1280、390、375px；中文／英文；无脚本错误、无页面／结果横向溢出、输入与结果宽度差小于 2px、主要动作恰为 1。知识成功结果另验；索引／服务故障分别验证实际重发并恢复。QA 使用匿名状态、本地 API 和真实源码，阻断外部资源，未模拟客户付款。</p><pre>[
+  {
+    &quot;width&quot;: 1440,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;question&quot;: &quot;What is PHIOS?&quot;,
+    &quot;expected&quot;: &quot;PLATFORM_INTRODUCTION&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 736,
+      &quot;inputWidth&quot;: 736,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;width&quot;: 1440,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;question&quot;: &quot;Why are people unhappy?&quot;,
+    &quot;expected&quot;: &quot;NEEDS_CLARIFICATION&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 736,
+      &quot;inputWidth&quot;: 736,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;width&quot;: 1440,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;question&quot;: &quot;PHIOS是什么&quot;,
+    &quot;expected&quot;: &quot;PLATFORM_INTRODUCTION&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 736,
+      &quot;inputWidth&quot;: 736,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;width&quot;: 1440,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;question&quot;: &quot;人为什么不快乐&quot;,
+    &quot;expected&quot;: &quot;KNOWLEDGE_SOURCE_INSUFFICIENT&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 736,
+      &quot;inputWidth&quot;: 736,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;width&quot;: 1280,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;question&quot;: &quot;What is PHIOS?&quot;,
+    &quot;expected&quot;: &quot;PLATFORM_INTRODUCTION&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 736,
+      &quot;inputWidth&quot;: 736,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;width&quot;: 1280,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;question&quot;: &quot;Why are people unhappy?&quot;,
+    &quot;expected&quot;: &quot;NEEDS_CLARIFICATION&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 736,
+      &quot;inputWidth&quot;: 736,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;width&quot;: 1280,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;question&quot;: &quot;PHIOS是什么&quot;,
+    &quot;expected&quot;: &quot;PLATFORM_INTRODUCTION&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 736,
+      &quot;inputWidth&quot;: 736,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;width&quot;: 1280,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;question&quot;: &quot;人为什么不快乐&quot;,
+    &quot;expected&quot;: &quot;KNOWLEDGE_SOURCE_INSUFFICIENT&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 736,
+      &quot;inputWidth&quot;: 736,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;width&quot;: 390,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;question&quot;: &quot;What is PHIOS?&quot;,
+    &quot;expected&quot;: &quot;PLATFORM_INTRODUCTION&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 358,
+      &quot;inputWidth&quot;: 358,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;width&quot;: 390,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;question&quot;: &quot;Why are people unhappy?&quot;,
+    &quot;expected&quot;: &quot;NEEDS_CLARIFICATION&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 358,
+      &quot;inputWidth&quot;: 358,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;width&quot;: 390,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;question&quot;: &quot;PHIOS是什么&quot;,
+    &quot;expected&quot;: &quot;PLATFORM_INTRODUCTION&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 358,
+      &quot;inputWidth&quot;: 358,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;width&quot;: 390,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;question&quot;: &quot;人为什么不快乐&quot;,
+    &quot;expected&quot;: &quot;KNOWLEDGE_SOURCE_INSUFFICIENT&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 358,
+      &quot;inputWidth&quot;: 358,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;width&quot;: 375,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;question&quot;: &quot;What is PHIOS?&quot;,
+    &quot;expected&quot;: &quot;PLATFORM_INTRODUCTION&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 343,
+      &quot;inputWidth&quot;: 343,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;width&quot;: 375,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;question&quot;: &quot;Why are people unhappy?&quot;,
+    &quot;expected&quot;: &quot;NEEDS_CLARIFICATION&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 343,
+      &quot;inputWidth&quot;: 343,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;width&quot;: 375,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;question&quot;: &quot;PHIOS是什么&quot;,
+    &quot;expected&quot;: &quot;PLATFORM_INTRODUCTION&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 343,
+      &quot;inputWidth&quot;: 343,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;width&quot;: 375,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;question&quot;: &quot;人为什么不快乐&quot;,
+    &quot;expected&quot;: &quot;KNOWLEDGE_SOURCE_INSUFFICIENT&quot;,
+    &quot;measurements&quot;: {
+      &quot;resultWidth&quot;: 343,
+      &quot;inputWidth&quot;: 343,
+      &quot;resultOverflow&quot;: false,
+      &quot;pageOverflow&quot;: false,
+      &quot;background&quot;: &quot;rgb(16, 43, 45)&quot;,
+      &quot;primaryCount&quot;: 1,
+      &quot;accountLinks&quot;: 0
+    },
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;pageErrors&quot;: []
+  },
+  {
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;scope&quot;: &quot;REAL_MATCHED_ACCEPTED_SOURCE_EXCERPT&quot;,
+    &quot;question&quot;: &quot;How Reality Moves from Difference to Navigable Structure&quot;,
+    &quot;source&quot;: &quot;/articles/how-reality-moves-from-difference-to-navigable-structure&quot;
+  },
+  {
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;scope&quot;: &quot;REAL_MATCHED_ACCEPTED_SOURCE_EXCERPT&quot;,
+    &quot;question&quot;: &quot;差异如何打开现实形成的可能&quot;,
+    &quot;source&quot;: &quot;/articles/how-reality-moves-from-difference-to-navigable-structure&quot;
+  },
+  {
+    &quot;fault&quot;: &quot;INDEX&quot;,
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;retry&quot;: &quot;ACTUAL_REQUEST_REEXECUTED&quot;,
+    &quot;recovered&quot;: &quot;NEEDS_CLARIFICATION&quot;
+  },
+  {
+    &quot;fault&quot;: &quot;SERVICE&quot;,
+    &quot;state&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+    &quot;retry&quot;: &quot;ACTUAL_REQUEST_REEXECUTED&quot;,
+    &quot;recovered&quot;: &quot;NEEDS_CLARIFICATION&quot;
+  }
+]</pre></section><section><h2>桌面与手机截图</h2><h3>home-zh-Hans-1440-general.png</h3><img src="entry-recovery-r1/home-zh-Hans-1440-general.png" alt="home-zh-Hans-1440-general.png"><h3>home-en-1280-brand.png</h3><img src="entry-recovery-r1/home-en-1280-brand.png" alt="home-en-1280-brand.png"><h3>home-zh-Hans-375-brand.png</h3><img src="entry-recovery-r1/home-zh-Hans-375-brand.png" alt="home-zh-Hans-375-brand.png"><h3>home-en-390-general.png</h3><img src="entry-recovery-r1/home-en-390-general.png" alt="home-en-390-general.png"><h3>home-source-zh-Hans.png</h3><img src="entry-recovery-r1/home-source-zh-Hans.png" alt="home-source-zh-Hans.png"><h3>home-fault-INDEX.png</h3><img src="entry-recovery-r1/home-fault-INDEX.png" alt="home-fault-INDEX.png"><h3>home-fault-SERVICE.png</h3><img src="entry-recovery-r1/home-fault-SERVICE.png" alt="home-fault-SERVICE.png"></section><section><h2>版本、文件与限制</h2><pre>{
+  &quot;currentHead&quot;: &quot;0adfffc79d3128d81d53acb6fe3ce217b6020617&quot;,
+  &quot;SOURCE&quot;: &quot;PASS_LOCAL&quot;,
+  &quot;LOCAL_BROWSER&quot;: &quot;PASS_LOCAL_BROWSER&quot;,
+  &quot;BUILD&quot;: &quot;RUNNING&quot;,
+  &quot;DEPLOYED&quot;: &quot;NOT_RUN&quot;,
+  &quot;LIVE_CUSTOMER&quot;: &quot;NOT_RUN&quot;,
+  &quot;apiCases&quot;: 34,
+  &quot;browserChecks&quot;: 20,
+  &quot;providerCalls&quot;: 0,
+  &quot;providerCostUSD&quot;: 0,
+  &quot;payments&quot;: 0,
+  &quot;automaticCommitPushDeploy&quot;: 0,
+  &quot;changedFiles&quot;: [
+    &quot;functions/public/client-intent-router.js&quot;,
+    &quot;functions/api/client-intent-route.js&quot;,
+    &quot;assets/js/ask-entry-ui.js&quot;,
+    &quot;assets/js/pages/client-intent-router.js&quot;,
+    &quot;assets/css/ask-architecture-r1.css&quot;,
+    &quot;assets/customer-ui/js/shell.js&quot;,
+    &quot;assets/customer-ui/js/surfaces/contextual-ask.js&quot;
+  ],
+  &quot;relevantInputDigest&quot;: &quot;0f3ece40fe42017029897f89abd45ffe8186d8887c48e4e7ab8149c60e0fba0c&quot;,
+  &quot;existingAcceptedRelease&quot;: &quot;CLOSED; not rerun or invalidated by unrelated concurrent edits&quot;,
+  &quot;scope&quot;: &quot;Homepage ENTRY brand/platform routing; deterministic basic knowledge retrieval; separate failures; compact result/retry UI&quot;,
+  &quot;limitations&quot;: [
+    &quot;Unhappiness questions lack sufficient admitted sources; clarification is expected, not a generated answer&quot;,
+    &quot;External visuals intentionally blocked in browser QA; screenshot proof covers actual ENTRY layout and interaction&quot;,
+    &quot;No production deployment/live validation&quot;
+  ],
+  &quot;review&quot;: &quot;tools/review/HOME-ENTRY-RECOVERY-R1-HUMAN-REVIEW.html&quot;
+}</pre><p>证据：<a href="entry-recovery-r1/API-EVIDENCE.json">API</a> · <a href="entry-recovery-r1/BROWSER-EVIDENCE.json">Browser</a> · <a href="entry-recovery-r1/BUILD-INPUT.json">相关构建输入</a> · <a href="entry-recovery-r1/STATE.json">逐层状态</a>。不将“来源不足”的正确边界处理宣称为该知识问题已有答案。</p></section><section id="full-entry-capability-acceptance"><h2>完整能力范围与版本化证据</h2><p><a href="http://127.0.0.1:55629/">打开当前零费用入口预览</a>。只验证 ENTRY、公开知识检索与现有目标页面；非已接入后端明确返回匿名/未挂载状态，不冒充保存或购买成功。</p><table><tr><th>能力</th><th>实际入口</th><th>已有 owner</th><th>验收范围</th></tr><tr><td>PERSONAL_METHODS</td><td>/perspectives/personal/</td><td>assets/customer-ui/js/surfaces/personal-reality.js</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>RELATIONSHIP</td><td>/perspectives/relationship/</td><td>functions/personal-reading/relationship/</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>FINANCIAL</td><td>/professional/financial/</td><td>functions/professional/financial/</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>WORLD</td><td>/world/</td><td>assets/js/pages/world.js</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>HEALTH_CARE</td><td>/health-reality.html</td><td>functions/health/health-reality-runtime.js</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>PROFILE</td><td>/perspectives/profile/</td><td>functions/profile/profile-production-authority.js</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>REFLECTION</td><td>/perspectives/tarot/</td><td>functions/core-method-runtime/tarot-runtime-v2.js</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>PHI_CONFIGURATION</td><td>/perspectives/phi-configuration/</td><td>assets/customer-ui/js/surfaces/personal-reality.js</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>KNOWLEDGE</td><td>/knowledge/</td><td>functions/_lib/knowledge-answer-composition.js</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>PRODUCT_HELP</td><td>/account/</td><td>functions/account/</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>PROFESSIONAL</td><td>/professional/</td><td>functions/professional/</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>ACADEMY</td><td>/academy/</td><td>functions/api/academy-navigation.js</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>BOOKS</td><td>/books/</td><td>functions/_lib/book-vii-published-admission.js</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>APPOINTMENT</td><td>/professional/appointments/</td><td>functions/professional/appointments/appointment-request-store.js</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>WILL</td><td>/professional/financial/#estate-planning</td><td>functions/account/will-information-delivery.js</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>CONTINUITY</td><td>/membership.html</td><td>functions/personal-reading/continuity/continuity-commercial-authority.js</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>ABOUT</td><td>/about/founder/#how</td><td>about/founder/index.html</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>THESIS</td><td>/thesis.html</td><td>thesis.html</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr><tr><td>REALITY</td><td>/reality/</td><td>functions/api/customer-contextual-ask.js</td><td>现有页面/owner；发现与输入交接。不是计算、账户持久化或交付完成。</td></tr></table><h3>开发与未调规则验收分开</h3><p>首次封存集 59/60；后续首次新集 23/24；完整 52 项首次 51/52。失败原记录均保留。最新 52/52 是修复后的已见回归，不是新的盲测成绩；当前最终规则不得以这些回归宣告覆盖所有新表达。每项允许任务/产品及禁止执行结果在 JSON 明列。</p><p>主要缺陷已实际修复：平台用途与 feature overview；原因理解意图；否定全部19功能；career/scared 不误认 care；论文/书籍/遗嘱下载不统一指向 Account；Tarot/I Ching 显式选择；输入改变及语言切换不恢复旧结果；同源临时输入交接。</p><h3>实际浏览器</h3><p>首页 24 项：四宽度双语结果、来源匹配、真实重试、Financial 点击/选择/目标/问题、显式 I Ching 选择与输入变更。另有 38 个真实目标页面加载及 38 个中英文临时问题接收记录。所有均为本地匿名；未证明客户保存、收费或生成。弹窗 HTTP 状态未采集，接收记录不编造 HTTP 200。</p><img src="entry-recovery-r1/selection-target-zh-Hans.png" alt="真实 Financial 目标页收到中文问题"><h3>构建与线上</h3><p>PASS_BUILD；158 个相关输入构建前后无变化。线上两个入口脚本字节不同，新交接模块 404，所以不采用现有部署为本次发布。线上只读截图和摘要存在；线上新分流未验收。</p><img src="entry-recovery-r1/live-home-390.png" alt="线上首页只读截图"><h3>未支持、未证明与可继续工作</h3><pre>{
+  &quot;currentHead&quot;: &quot;0adfffc79d3128d81d53acb6fe3ce217b6020617&quot;,
+  &quot;SOURCE&quot;: &quot;PASS_BOUNDED_IMPLEMENTATION&quot;,
+  &quot;FULL_CAPABILITY_ACCEPTANCE&quot;: &quot;PARTIAL&quot;,
+  &quot;BUILD&quot;: &quot;PASS_BUILD&quot;,
+  &quot;DEPLOYED&quot;: &quot;CURRENT_SOURCE_NOT_DEPLOYED_PUBLIC_BYTES_DIFFER&quot;,
+  &quot;LIVE&quot;: &quot;READ_ONLY_PAGE_AND_ASSET_IDENTITY_OBSERVED_ROUTING_NOT_VERIFIED&quot;,
+  &quot;relevantBuildInputDigest&quot;: &quot;1c1e60d5f482741afc9fec08e3fa7931814b7008946eb24239769b969d2a3092&quot;,
+  &quot;providerCalls&quot;: 0,
+  &quot;providerCostUSD&quot;: 0,
+  &quot;payments&quot;: 0,
+  &quot;R2Deletion&quot;: 0,
+  &quot;productionMigration&quot;: 0,
+  &quot;automaticCommitPushDeploy&quot;: 0,
+  &quot;apiRegressionCases&quot;: 34,
+  &quot;homepageBrowserChecks&quot;: 24,
+  &quot;targetLoads&quot;: 38,
+  &quot;targetQuestionReceipts&quot;: 38,
+  &quot;firstUntunedAcceptance&quot;: {
+    &quot;total&quot;: 52,
+    &quot;pass&quot;: 51,
+    &quot;fail&quot;: 1,
+    &quot;originalResultPreserved&quot;: true
+  },
+  &quot;postFixSeenRegression&quot;: {
+    &quot;total&quot;: 52,
+    &quot;pass&quot;: 52,
+    &quot;notBlind&quot;: true
+  },
+  &quot;scope&quot;: &quot;Existing 19 capability index; task vs canonical domain/product axes; zero-provider public knowledge; distinct failures; explicit method choices; input/result/question handoff binding&quot;,
+  &quot;preview&quot;: &quot;http://127.0.0.1:55629/&quot;,
+  &quot;previewLimits&quot;: &quot;ENTRY/public knowledge retrieval and actual target pages; anonymous; other backend APIs not mounted; no purchase, account persistence or calculation proof&quot;,
+  &quot;remainingSourceWork&quot;: [
+    &quot;Versioned current verifier must preserve predecessor full security/provider/admission assertions; candidate prepared, not automatically accepted&quot;,
+    &quot;Current final rule revision still needs a new untuned acceptance run; historical scores not rewritten&quot;,
+    &quot;Explicit source-object/owned report context handoff is inherited from existing owners, not proven by generic question receipt&quot;
+  ],
+  &quot;unsupported&quot;: [
+    &quot;Only configured en/zh-Hans paths tested; not universal natural-language coverage&quot;,
+    &quot;Cross/Nature independent customer discovery targets not proven&quot;,
+    &quot;Book VIII public sale/full private doctrine not available&quot;,
+    &quot;Diagnosis, legally effective signed Will and automatic provider enhancement unavailable&quot;,
+    &quot;No actual customer generation, payment or account persistence established by this task&quot;
+  ],
+  &quot;review&quot;: &quot;tools/review/HOME-ENTRY-RECOVERY-R1-HUMAN-REVIEW.html&quot;,
+  &quot;preserved&quot;: &quot;Existing Human ACCEPT/content remains closed; no frozen hashes changed; unrelated concurrent modifications preserved&quot;
+}</pre><h3>完整证据索引</h3><p><a href="entry-recovery-r1/FUNCTION-COVERAGE.json">FUNCTION-COVERAGE.json</a></p><p><a href="entry-recovery-r1/ALL-INDEX-RECONCILIATION.json">ALL-INDEX-RECONCILIATION.json</a></p><p><a href="entry-recovery-r1/DEVELOPMENT-SET.json">DEVELOPMENT-SET.json</a></p><p><a href="entry-recovery-r1/HOLDOUT-RESULTS.json">HOLDOUT-RESULTS.json</a></p><p><a href="entry-recovery-r1/MISROUTING.json">MISROUTING.json</a></p><p><a href="entry-recovery-r1/FRESH-ACCEPTANCE-RESULTS.json">FRESH-ACCEPTANCE-RESULTS.json</a></p><p><a href="entry-recovery-r1/RELEASE-ACCEPTANCE-SET.json">RELEASE-ACCEPTANCE-SET.json</a></p><p><a href="entry-recovery-r1/RELEASE-ACCEPTANCE-RESULTS.json">RELEASE-ACCEPTANCE-RESULTS.json</a></p><p><a href="entry-recovery-r1/RELEASE-REGRESSION-RESULTS.json">RELEASE-REGRESSION-RESULTS.json</a></p><p><a href="entry-recovery-r1/NEGATION-AND-FORBIDDEN-RESULTS.json">NEGATION-AND-FORBIDDEN-RESULTS.json</a></p><p><a href="entry-recovery-r1/PRODUCT-HELP-EVIDENCE.json">PRODUCT-HELP-EVIDENCE.json</a></p><p><a href="entry-recovery-r1/MULTI-DOMAIN-EVIDENCE.json">MULTI-DOMAIN-EVIDENCE.json</a></p><p><a href="entry-recovery-r1/LEGACY-ROUTING-COMPATIBILITY.json">LEGACY-ROUTING-COMPATIBILITY.json</a></p><p><a href="entry-recovery-r1/TARGET-BROWSER.json">TARGET-BROWSER.json</a></p><p><a href="entry-recovery-r1/TARGET-HANDOFF-BROWSER.json">TARGET-HANDOFF-BROWSER.json</a></p><p><a href="entry-recovery-r1/BUILD-RECEIPT.json">BUILD-RECEIPT.json</a></p><p><a href="entry-recovery-r1/LIVE-BROWSER.json">LIVE-BROWSER.json</a></p><p><a href="entry-recovery-r1/LIVE-ASSET-IDENTITY.json">LIVE-ASSET-IDENTITY.json</a></p><p><a href="entry-recovery-r1/VERIFIER-SUCCESSOR-CANDIDATE.json">VERIFIER-SUCCESSOR-CANDIDATE.json</a></p><p><a href="entry-recovery-r1/STATE.json">STATE.json</a></p></section></html>
