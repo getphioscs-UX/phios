@@ -1,4 +1,5 @@
 import {projectExternalRealityContext} from '../customer-projection/external-reality-customer-projection.js';
+import {listCanonicalNavigationHandoffs} from '../customer-projection/canonical-navigation-handoff.js';
 import {buildCurrentRealityBundle} from '../reality-orchestration/reality-orchestrator.js';
 import {projectRealityForCustomer} from '../customer-projection/reality-customer-projection.js';
 import {projectReadoutForCustomer} from '../customer-projection/readout-customer-projection.js';
@@ -35,6 +36,10 @@ export async function onRequestGet(context){
   const navigation=acceptedNavigationForCustomer(context,{reality,locale});
   const base=workspaceFromProjectedSources({reality,reading:sources.reading,navigation,journey:sources.journey,reports:sources.reports,locale});
   let workspace=await attachSavedSources(context,base);
+  if(context.env?.PHIOS_CANONICAL_NAVIGATION_HANDOFF_ENABLED==='true'){
+    try{workspace={...workspace,canonicalNavigationHandoffs:await listCanonicalNavigationHandoffs(context)};}
+    catch(error){workspace={...workspace,canonicalNavigationHandoffs:{items:[],state:error.status===401?'BLOCKED_AUTH':'BLOCKED_SOURCE',code:error.code||'NAVIGATION_UNAVAILABLE'}};}
+  }
   const externalReality=projectExternalRealityContext(context,{locale,realityRef:reality.overview.bundleId,realityVersion:context.data?.cxRealitySources?.bundle?.version});
   workspace={...workspace,externalReality,graphProjection:assertRealityNavigationGraph(projectRealityNavigationGraph({reality,navigation,externalReality})),currentReality:{...workspace.currentReality,evidence:[...workspace.currentReality.evidence,...externalReality.items]}};
   if(new URL(context.request.url).searchParams.get('externalContextRef')==='WORLD_PUBLIC_CONTEXT')workspace={...workspace,publicExternalReference:{sourceRef:'WORLD_PUBLIC_CONTEXT',href:'/world/',sourceAuthority:'WORLD',state:'SELECTED_PUBLIC_REFERENCE_NOT_CURRENT_EVIDENCE',selectedAt:new Date().toISOString(),publishedAt:null,jurisdiction:null,persisted:false}};

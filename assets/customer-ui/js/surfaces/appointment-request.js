@@ -1,3 +1,4 @@
+import {installNavigationHandoff} from '../navigation-handoff.js';
 const form=document.querySelector('[data-appointment-request-form]');
 if(form){
   const status=form.querySelector('[role="status"]'),list=document.querySelector('[data-appointment-request-list]');
@@ -13,6 +14,7 @@ if(form){
     const reopen=document.createElement('button');reopen.type='button';reopen.className='cx-button';reopen.textContent=zh()?'重新读取申请':'Reopen request';
     reopen.onclick=async()=>{const response=await fetch('/api/account-appointment-requests?id='+encodeURIComponent(request.appointmentRequestId));const body=await response.json();if(response.ok){note.textContent=body.request.question;message('Request retrieved from your account; a time has not been confirmed.','已从账户重新读取申请；时段尚未确认。');}else message(body.code,body.code);};
     article.append(title,detail,note,reopen);list.append(article);
+    installNavigationHandoff(article,{productFamily:'APPOINTMENT',objectId:request.appointmentRequestId});
   };
   form.addEventListener('submit',async event=>{
     event.preventDefault();if(!form.reportValidity())return;

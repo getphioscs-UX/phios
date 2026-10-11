@@ -1,0 +1,343 @@
+<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Canonical Navigation Handoff R1 — PARTIAL</title><style>body{font:17px system-ui;max-width:1100px;margin:32px auto;padding:20px;line-height:1.7}pre{white-space:pre-wrap;overflow-wrap:anywhere}img{max-width:100%}section{border-top:1px solid #ccc;padding:18px 0}</style><h1>Canonical Customer Navigation Handoff R1</h1><p>PARTIAL · provider calls 0 · 新功能未部署，未验证真实客户。既有接受与发布结论不重开。</p><p>HEAD 4b02439efc147a07de76f06dbed1275de3d09a59。新交接层复用既有 owner；方向、位置与缺失历史保持未建立。八项存储／边界测试通过；八个 Academy 组件中英尺寸测试仅为 bounded evidence。</p><section><h2>1. Shared layer</h2><p>Shared server projection now resolves selected sources and retains UNKNOWN direction/position. Source owner and account identities are never accepted from HTTP payloads.</p></section><section><h2>2. Owner reuse</h2><p>Reports: openOwnedMethodReport; Tarot: original symbolic reading API with account and retention admission; Financial: draftApi; Appointment: appointmentRequestApi; Books: resolveSelectedArticle; Academy: navigationPublicCatalog.</p></section><section><h2>3. Contract</h2><p>CANONICAL_CUSTOMER_NAVIGATION_HANDOFF_V1 contains source identity/version, object scope, customer scope, evidence states, persistence, targets and limitations.</p></section><section><h2>4. Unknown states</h2><p>Direction and position remain NOT_ESTABLISHED. Relations are not inferred. Source history remains NOT_SUPPLIED, including after a handoff save.</p></section><section><h2>5. Account authorization</h2><p>Eight scoped tests include anonymous-private rejection, cross-account encrypted record denial and injected authority rejection. Other private adapters still need their own owner integration tests.</p></section><section><h2>6. Persistence</h2><p>Existing migration 0012 and report-context AES-GCM object owner reused. ACCOUNT_CONTEXT is a metadata discriminator, not a fabricated canonical person. Save requires processing, retention and persistence consent.</p></section><section><h2>7. Contextual Ask</h2><p>Actual customer-contextual-ask API reads a same-account saved record and rejects a different account. Deterministic boundary retrieval only; personalized answering remains unimplemented. Evidence: ASK-API-CHECKS.json.</p></section><section><h2>8. Academy</h2><p>Actual accepted public catalog resolves NAV-01; missing video is explicitly unavailable. Existing Academy cards call the shared component. Eight bilingual width checks cover the actual component, not full Academy pages.</p></section><section><h2>9. BaZi</h2><p>Existing account BaZi released-report cards supply their real reportId. Server resolver reuses original entitlement/read adapter. Real BaZi source-owner integration and browser journey NOT_RUN.</p></section><section><h2>10. Tarot</h2><p>Saved My Reality Tarot entries expose their existing readingId. Resolver consumes the original account/retention API and preserves immutable draw. Current Tarot-owned source integration/browser journey NOT_RUN.</p></section><section><h2>11. Financial / Appointment</h2><p>Saved Financial panel supplies existing draftId; saved Appointment request supplies existing appointmentRequestId. Original encrypted owners are used. Actual complete browser journeys NOT_RUN.</p></section><section><h2>12. Books</h2><p>Existing article surface supplies its data-article-slug to the accepted article resolver. Public article does not grant full book access. Actual Book-to-Ask browser flow NOT_RUN.</p></section><section><h2>13. Targeted tests</h2><p>TARGETED-CHECKS.json: eight actual public-owner/storage/boundary checks. ASK-API-CHECKS.json adds actual API same-account retrieval, account denial and all-network-call interception.</p></section><section><h2>14. Browser evidence</h2><p>BROWSER-LEDGER.json: 1440,1280,390,375px, Chinese/English; actual shared widget, actual public Academy owner, existing SQLite/encrypted storage, controlled synthetic QA account. Other requested flows NOT_RUN.</p></section><section><h2>15. Zero-cost boundary</h2><p>Provider calls=0, cost=0, real payments=0, production migrations=0, R2 deletion=0, automatic commit/push/deploy=0. Local QA uses no production customer or credentials.</p></section><section><h2>16. Remaining source gaps</h2><p>Remaining local work: private source-owner integration, actual My Reality/Ask full page journeys, missing expired/withdrawn source test coverage and established direction/position owner discovery. These are not production-authorization blockers.</p></section><section><h2>17. Build identity</h2><p>Exactly one new Pages build requested. Relevant digest is scoped to actual consumed feature dependencies. Output identity and concurrency result recorded in BUILD-LEDGER.json; no second build loop.</p></section><section><h2>18. Master reconciliation</h2><p>Existing unique Master contains the R1 PARTIAL section and structured feature state. Existing closed release/Human ACCEPT results are preserved; new feature deployment/live remain NOT_RUN.</p></section><h2>Actual ledgers</h2><h3>CONTRACT</h3><pre>{
+  "currentHead": "4b02439efc147a07de76f06dbed1275de3d09a59",
+  "featureDependencyDigest": "dbbb06afe9e74853cbf36d432cc6a13890cca759fe5728a30b953a1f9503b0ff",
+  "schema": "CANONICAL_CUSTOMER_NAVIGATION_HANDOFF_V1",
+  "owner": "functions/customer-projection/canonical-navigation-handoff.js",
+  "sourceResolution": "SERVER_OWNER_ONLY",
+  "clientEvidenceInjection": "DENY",
+  "history": "NOT_SUPPLIED unless actual owner history exists; this implementation does not reconstruct it",
+  "direction": "NOT_ESTABLISHED",
+  "position": "NOT_ESTABLISHED",
+  "productionActivation": "DEFAULT_DISABLED",
+  "states": "PARTIAL; UNKNOWN; NOT_ESTABLISHED"
+}</pre><h3>ADAPTER-LEDGER</h3><pre>{
+  "currentHead": "4b02439efc147a07de76f06dbed1275de3d09a59",
+  "featureDependencyDigest": "dbbb06afe9e74853cbf36d432cc6a13890cca759fe5728a30b953a1f9503b0ff",
+  "items": [
+    {
+      "family": "BAZI",
+      "owner": "openOwnedMethodReport",
+      "consumer": "Account released BaZi report",
+      "source": "PARTIAL",
+      "browser": "NOT_RUN",
+      "firstMissingRequirement": "Complete current owned-source browser journey and source-owner integration test"
+    },
+    {
+      "family": "TAROT",
+      "owner": "symbolicReadingApi (original account/retention admission)",
+      "consumer": "My Reality saved Tarot source",
+      "source": "PARTIAL",
+      "browser": "NOT_RUN",
+      "firstMissingRequirement": "Complete current owned-source browser journey and source-owner integration test"
+    },
+    {
+      "family": "ACADEMY",
+      "owner": "navigationPublicCatalog",
+      "consumer": "Navigation Academy",
+      "source": "PARTIAL",
+      "browser": "PASS_BOUNDED",
+      "firstMissingRequirement": "Full Academy page journey, beyond isolated actual component"
+    },
+    {
+      "family": "FINANCIAL",
+      "owner": "draftApi",
+      "consumer": "saved Financial draft panel",
+      "source": "PARTIAL",
+      "browser": "NOT_RUN",
+      "firstMissingRequirement": "Complete current owned-source browser journey and source-owner integration test"
+    },
+    {
+      "family": "APPOINTMENT",
+      "owner": "appointmentRequestApi",
+      "consumer": "saved request card",
+      "source": "PARTIAL",
+      "browser": "NOT_RUN",
+      "firstMissingRequirement": "Complete current owned-source browser journey and source-owner integration test"
+    },
+    {
+      "family": "BOOKS",
+      "owner": "resolveSelectedArticle",
+      "consumer": "article surface",
+      "source": "PARTIAL",
+      "browser": "NOT_RUN",
+      "firstMissingRequirement": "Complete current owned-source browser journey and source-owner integration test"
+    }
+  ]
+}</pre><h3>AUTH-LEDGER</h3><pre>{
+  "currentHead": "4b02439efc147a07de76f06dbed1275de3d09a59",
+  "featureDependencyDigest": "dbbb06afe9e74853cbf36d432cc6a13890cca759fe5728a30b953a1f9503b0ff",
+  "state": "PASS_LOCAL",
+  "scope": "Eight checks; public Academy plus controlled SQLite accounts; not every private adapter",
+  "evidence": "TARGETED-CHECKS.json",
+  "crossAccount": "DENY",
+  "anonymousPrivate": "DENY",
+  "productionState": "NOT_RUN"
+}</pre><h3>PERSISTENCE-LEDGER</h3><pre>{
+  "currentHead": "4b02439efc147a07de76f06dbed1275de3d09a59",
+  "featureDependencyDigest": "dbbb06afe9e74853cbf36d432cc6a13890cca759fe5728a30b953a1f9503b0ff",
+  "state": "PASS_LOCAL",
+  "owner": "functions/report-context/report-context-store.js",
+  "migration": "Existing 0012; no new production migration executed",
+  "encryption": "AES-GCM existing owner, actual local SQLite migration",
+  "retentionDays": [
+    7,
+    30,
+    90,
+    365
+  ],
+  "accountContext": "Explicit ACCOUNT_CONTEXT metadata discriminator; not canonical person",
+  "sourceVersion": "Rechecked on reopen",
+  "gaps": [
+    "Expired-record negative test",
+    "Source withdrawal tests across all source owners",
+    "Real My Reality page reopening"
+  ],
+  "providerCalls": 0
+}</pre><h3>ASK-LEDGER</h3><pre>{
+  "currentHead": "4b02439efc147a07de76f06dbed1275de3d09a59",
+  "featureDependencyDigest": "dbbb06afe9e74853cbf36d432cc6a13890cca759fe5728a30b953a1f9503b0ff",
+  "state": "PARTIAL",
+  "consumer": "functions/api/customer-contextual-ask.js",
+  "browserSelector": "navigationRecordId",
+  "mode": "DETERMINISTIC_SOURCE_AND_BOUNDARY_RETRIEVAL",
+  "newQuestionPersonalizedAnswer": "NOT_IMPLEMENTED",
+  "paidAsk": "Existing branch retained",
+  "gaps": [
+    "Targeted API test of saved-record branch",
+    "Actual Books to Ask and saved source to Ask browser flows"
+  ]
+}</pre><h3>BROWSER-LEDGER</h3><pre>{
+  "results": [
+    {
+      "width": 1440,
+      "locale": "en",
+      "state": "PASS_BOUNDED",
+      "scope": "ACTUAL_WIDGET_REAL_ACADEMY_OWNER_EXISTING_ENCRYPTED_SQLITE_STORAGE_CONTROLLED_QA_ACCOUNT",
+      "errors": [],
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "zh",
+      "state": "PASS_BOUNDED",
+      "scope": "ACTUAL_WIDGET_REAL_ACADEMY_OWNER_EXISTING_ENCRYPTED_SQLITE_STORAGE_CONTROLLED_QA_ACCOUNT",
+      "errors": [],
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "locale": "en",
+      "state": "PASS_BOUNDED",
+      "scope": "ACTUAL_WIDGET_REAL_ACADEMY_OWNER_EXISTING_ENCRYPTED_SQLITE_STORAGE_CONTROLLED_QA_ACCOUNT",
+      "errors": [],
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "locale": "zh",
+      "state": "PASS_BOUNDED",
+      "scope": "ACTUAL_WIDGET_REAL_ACADEMY_OWNER_EXISTING_ENCRYPTED_SQLITE_STORAGE_CONTROLLED_QA_ACCOUNT",
+      "errors": [],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "locale": "en",
+      "state": "PASS_BOUNDED",
+      "scope": "ACTUAL_WIDGET_REAL_ACADEMY_OWNER_EXISTING_ENCRYPTED_SQLITE_STORAGE_CONTROLLED_QA_ACCOUNT",
+      "errors": [],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "locale": "zh",
+      "state": "PASS_BOUNDED",
+      "scope": "ACTUAL_WIDGET_REAL_ACADEMY_OWNER_EXISTING_ENCRYPTED_SQLITE_STORAGE_CONTROLLED_QA_ACCOUNT",
+      "errors": [],
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "en",
+      "state": "PASS_BOUNDED",
+      "scope": "ACTUAL_WIDGET_REAL_ACADEMY_OWNER_EXISTING_ENCRYPTED_SQLITE_STORAGE_CONTROLLED_QA_ACCOUNT",
+      "errors": [],
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "zh",
+      "state": "PASS_BOUNDED",
+      "scope": "ACTUAL_WIDGET_REAL_ACADEMY_OWNER_EXISTING_ENCRYPTED_SQLITE_STORAGE_CONTROLLED_QA_ACCOUNT",
+      "errors": [],
+      "overflow": false
+    }
+  ],
+  "otherFourCustomerFlows": "NOT_RUN",
+  "providerCalls": 0
+}</pre><h3>FINAL-SUMMARY</h3><pre>{
+  "currentHead": "4b02439efc147a07de76f06dbed1275de3d09a59",
+  "featureDependencyDigest": "dbbb06afe9e74853cbf36d432cc6a13890cca759fe5728a30b953a1f9503b0ff",
+  "verdict": "PARTIAL",
+  "local": "PARTIAL",
+  "build": "RUNNING",
+  "deployment": "NOT_DEPLOYED_NEW_FEATURE",
+  "live": "NOT_RUN_NEW_FEATURE",
+  "oldRelease": "CLOSED_UNCHANGED",
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "R2Deletion": 0,
+  "productionMigration": 0,
+  "automaticCommitPushDeploy": 0,
+  "tests": 8,
+  "browser": "8 PASS_BOUNDED isolated Academy widget; remaining product journeys NOT_RUN",
+  "nextExecutableWork": [
+    "Complete source-owner integration tests for BaZi, Tarot, Financial, Appointment and Books",
+    "Verify actual My Reality and contextual Ask consumers through browser",
+    "Review established direction/position owner availability; do not invent output"
+  ]
+}</pre><h2>Browser samples</h2><img src="navigation-handoff-r1/academy-zh-390.png" alt="Controlled Chinese mobile QA"><img src="navigation-handoff-r1/academy-en-1280.png" alt="Controlled English desktop QA"><h2>Actual Ask API receipt</h2><pre>{
+  "state": "PASS_LOCAL",
+  "scope": "ACTUAL_API_SAVED_ACADEMY_RECORD_CONTROLLED_ACCOUNT",
+  "sameAccountStatus": 200,
+  "crossAccountStatus": 404,
+  "networkCalls": 0,
+  "providerCalls": 0,
+  "personalizedAnswer": "NOT_IMPLEMENTED"
+}</pre><h2>Current local build receipt</h2><pre>{
+  "at": "2026-10-11T00:50:13.948Z",
+  "scope": "FEATURE_ACTUAL_ESBUILD_TRANSITIVE_DEPENDENCIES; LOCAL_PAGES_PUBLICATION_OUTPUT",
+  "buildAttempts": 1,
+  "state": "PASS_BUILD",
+  "FEATURE_DEPENDENCY_DIGEST": "dbbb06afe9e74853cbf36d432cc6a13890cca759fe5728a30b953a1f9503b0ff",
+  "relevantMutations": [],
+  "outputs": [
+    {
+      "path": ".pages-output/_worker.js",
+      "sha256": "d95f1468db94d929943b606d13c8474cb0963d07aad645bc36de2279f0163b1f",
+      "bytes": 16755828
+    },
+    {
+      "path": ".pages-output/_routes.json",
+      "sha256": "d266398b90fe6d1ce4355a5a4c95cc30a41246d501c3fe0d97bd2854ea7f491e",
+      "bytes": 289
+    }
+  ],
+  "publicationBoundary": "PASS; 11637 files; Worker gzip 3126398 bytes",
+  "newFeatureDeployed": false,
+  "wholeWorktreeFreshnessUsed": false,
+  "fullPagesInputDigest": "NOT_ESTABLISHED; feature dependency digest is narrower than all production build inputs"
+}</pre><h2>Additional actual source-owner integration evidence</h2><h3>BOOKS-ADAPTER-CHECKS.json</h3><pre>{
+  "scope": "TARGETED_NEW_HANDOFF_ADAPTER_SINGLE_REAL_ACCEPTED_BILINGUAL_BOOK_V_ARTICLE; PREVIOUS_84_ARTICLE_ACCEPTANCE_NOT_REOPENED",
+  "rows": [
+    {
+      "locale": "en",
+      "state": "PASS_LOCAL",
+      "sourceVersion": "1.0.0",
+      "sourceIdentity": "ARTICLE:book5-unequal-modernities",
+      "sourceClass": "PUBLIC_KNOWLEDGE",
+      "related": [
+        {
+          "kind": "RELATED_ACCEPTED_MAPPING",
+          "href": "/books/reality-differentiation/?atlas=cases&amp;case=CA-T14-04&amp;locale=en#atlas",
+          "label": "Civilization case: British India Raj"
+        },
+        {
+          "kind": "RELATED_ACCEPTED_MAPPING",
+          "href": "/books/reality-differentiation/?atlas=cases&amp;case=CA-T14-05&amp;locale=en#atlas",
+          "label": "Civilization case: Latin American Export Republics"
+        },
+        {
+          "kind": "RELATED_ACCEPTED_MAPPING",
+          "href": "/books/reality-differentiation/?atlas=cases&amp;case=CA-T14-06&amp;locale=en#atlas",
+          "label": "Civilization case: Scramble-for-Africa Colonial Systems"
+        }
+      ]
+    },
+    {
+      "locale": "zh-Hans",
+      "state": "PASS_LOCAL",
+      "sourceVersion": "1.0.0",
+      "sourceIdentity": "ARTICLE:book5-unequal-modernities",
+      "sourceClass": "PUBLIC_KNOWLEDGE",
+      "related": [
+        {
+          "kind": "RELATED_ACCEPTED_MAPPING",
+          "href": "/books/reality-differentiation/?atlas=cases&amp;case=CA-T14-04&amp;locale=zh-Hans#atlas",
+          "label": "文明案例：英属印度"
+        },
+        {
+          "kind": "RELATED_ACCEPTED_MAPPING",
+          "href": "/books/reality-differentiation/?atlas=cases&amp;case=CA-T14-05&amp;locale=zh-Hans#atlas",
+          "label": "文明案例：拉丁美洲出口共和国"
+        },
+        {
+          "kind": "RELATED_ACCEPTED_MAPPING",
+          "href": "/books/reality-differentiation/?atlas=cases&amp;case=CA-T14-06&amp;locale=zh-Hans#atlas",
+          "label": "文明案例：瓜分非洲殖民体系"
+        }
+      ]
+    }
+  ],
+  "providerCalls": 0
+}</pre><h3>FINANCIAL-ADAPTER-CHECKS.json</h3><pre>{
+  "state": "PASS_LOCAL",
+  "scope": "ACTUAL_FINANCIAL_ENCRYPTED_OWNER_CREATE_READ_TO_CANONICAL_HANDOFF_SAVE_REOPEN_CONTROLLED_QA_SQLITE",
+  "draftId": "9d61dcb6-f926-458a-8d0e-b092e6c6d6ca",
+  "sourceVersion": "5a4e660f90a4904d1e5f5ebded9bd7c18e7aabfa52158ed845413c539f0cff11",
+  "navigationRecordId": "6512db82-6467-4d9f-9300-f72e762811b3",
+  "crossAccount": "DENY",
+  "direction": "NOT_ESTABLISHED",
+  "providerCalls": 0
+}</pre><h3>APPOINTMENT-ADAPTER-CHECKS.json</h3><pre>{
+  "state": "PASS_LOCAL",
+  "scope": "ACTUAL_REQUEST_OWNER_CREATE_TO_HANDOFF_ENCRYPTED_SAVE_REOPEN_CONTROLLED_QA_SQLITE",
+  "appointmentRequestId": "APR-bfb8272238ef4387a2d59c6d9d9f97d8c62cbe820dd51f864a589c5b78c71b47",
+  "requestState": "REQUESTED",
+  "confirmed": false,
+  "crossAccount": "DENY",
+  "providerCalls": 0
+}</pre><h3>ASK-API-CHECKS.json</h3><pre>{
+  "state": "PASS_LOCAL",
+  "scope": "ACTUAL_API_SAVED_ACADEMY_RECORD_CONTROLLED_ACCOUNT",
+  "sameAccountStatus": 200,
+  "crossAccountStatus": 404,
+  "networkCalls": 0,
+  "providerCalls": 0,
+  "personalizedAnswer": "NOT_IMPLEMENTED"
+}</pre><h2>Latest summary</h2><pre>{
+  "currentHead": "4b02439efc147a07de76f06dbed1275de3d09a59",
+  "featureDependencyDigest": "dbbb06afe9e74853cbf36d432cc6a13890cca759fe5728a30b953a1f9503b0ff",
+  "verdict": "PARTIAL",
+  "local": "PARTIAL",
+  "build": "PASS_BUILD",
+  "deployment": "NOT_DEPLOYED_NEW_FEATURE",
+  "live": "NOT_RUN_NEW_FEATURE",
+  "oldRelease": "CLOSED_UNCHANGED",
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "R2Deletion": 0,
+  "productionMigration": 0,
+  "automaticCommitPushDeploy": 0,
+  "tests": 8,
+  "browser": "8 PASS_BOUNDED isolated Academy widget; remaining product journeys NOT_RUN",
+  "nextExecutableWork": [
+    "Complete source-owner integration tests for BaZi, Tarot, Financial, Appointment and Books",
+    "Verify actual My Reality and contextual Ask consumers through browser",
+    "Review established direction/position owner availability; do not invent output"
+  ],
+  "sourceBlockers": [
+    "BaZi and Tarot actual owned-source integration proofs remain missing",
+    "Four requested full product browser flows and full-page Academy flow remain NOT_RUN",
+    "Expiry/withdrawal coverage missing",
+    "No established direction/position producer wired; unknown is preserved"
+  ],
+  "additionalActualOwnerEvidence": [
+    "BOOKS-ADAPTER-CHECKS.json",
+    "FINANCIAL-ADAPTER-CHECKS.json",
+    "APPOINTMENT-ADAPTER-CHECKS.json",
+    "ASK-API-CHECKS.json"
+  ]
+}</pre></html>

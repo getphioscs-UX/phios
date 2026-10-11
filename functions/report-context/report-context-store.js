@@ -11,16 +11,19 @@ async function encryptionKey(env){const raw=env.REPORT_CONTEXT_ENCRYPTION_KEY;if
 const aad=(owner,person,id)=>enc.encode(JSON.stringify(['REPORT_CONTEXT_R1',owner,person,id]));
 export async function saveContextRecord(context,kind,payload){
  const owner=personIdentity(context).userId;if(payload.ownerAccountId!==owner)fail('REALITY_BRIEF_OWNER_MISMATCH',403);
+ // Navigation account context is explicitly not a canonical person. Preserve
+ // the existing encrypted owner and schema; no second database or person row.
+ const anchor=kind==='NAVIGATION'&&!payload.personId?'ACCOUNT_CONTEXT':payload.personId;
  const id=kind==='BRIEF'?payload.realityBriefId:kind==='INTENT'?payload.contextIntentId:crypto.randomUUID(),iv=crypto.getRandomValues(new Uint8Array(12)),raw=JSON.stringify(payload),key='private-report-context/'+id+'.json';
- const ciphertext=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:aad(owner,payload.personId,id)},await encryptionKey(context.env),enc.encode(raw));
+ const ciphertext=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:aad(owner,anchor,id)},await encryptionKey(context.env),enc.encode(raw));
  await context.env.PRIVATE_REPORTS.put(key,JSON.stringify({iv:b64(iv),ciphertext:b64(new Uint8Array(ciphertext))}),{httpMetadata:{contentType:'application/json',cacheControl:'private, no-store'}});
- await context.env.RUNTIME_DB.prepare('INSERT INTO report_context_records(record_id,owner_account_id,person_id,record_kind,object_key,payload_digest,created_at) VALUES(?,?,?,?,?,?,?)').bind(id,owner,payload.personId,kind,key,await digest(raw),new Date().toISOString()).run();return id;
+ await context.env.RUNTIME_DB.prepare('INSERT INTO report_context_records(record_id,owner_account_id,person_id,record_kind,object_key,payload_digest,created_at) VALUES(?,?,?,?,?,?,?)').bind(id,owner,anchor,kind,key,await digest(raw),new Date().toISOString()).run();return id;
 }
 export async function loadContextRecord(context,id,kind){
  const owner=personIdentity(context).userId,row=await context.env.RUNTIME_DB.prepare('SELECT * FROM report_context_records WHERE owner_account_id=? AND record_id=? AND record_kind=?').bind(owner,id,kind).first();if(!row)fail('REPORT_CONTEXT_UNAVAILABLE',404);
  const obj=await context.env.PRIVATE_REPORTS.get(row.object_key);if(!obj)fail('REPORT_CONTEXT_UNAVAILABLE',404);let raw;
  try{const cipher=JSON.parse(await obj.text());raw=dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(cipher.iv),additionalData:aad(owner,row.person_id,id)},await encryptionKey(context.env),unb64(cipher.ciphertext)));}catch(e){if(e.status===503)throw e;fail('REPORT_CONTEXT_INTEGRITY_FAILED',409);}
- const payload=JSON.parse(raw);if(await digest(raw)!==row.payload_digest||payload.ownerAccountId!==owner||payload.personId!==row.person_id)fail('REPORT_CONTEXT_INTEGRITY_FAILED',409);return payload;
+ const payload=JSON.parse(raw),anchor=kind==='NAVIGATION'&&!payload.personId?'ACCOUNT_CONTEXT':payload.personId;if(await digest(raw)!==row.payload_digest||payload.ownerAccountId!==owner||anchor!==row.person_id)fail('REPORT_CONTEXT_INTEGRITY_FAILED',409);return payload;
 }
 export async function listOwnedConfirmedRealityBriefs(context){
  const owner=personIdentity(context).userId;

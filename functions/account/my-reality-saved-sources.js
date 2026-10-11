@@ -37,7 +37,7 @@ export async function collectMyRealitySavedSources(context,{sourceReaders=reader
   lanes[`questions:${r.reportId}`]=q;
   for(const x of q.items)event(x.requestId,x.question,x.createdAt,x.sourceClass,x.sourceVersion,x.historyState,{reportId:r.reportId,question:x.question,answer:x.answer,completedAt:x.completedAt});
  }
- for(const r of lanes.readings?.items||[])event(r.readingId,`${r.methodCode}: ${r.question}`,r.createdAt,'ACCOUNT_EXPLICIT_SAVED_READING',r.schemaVersion||null,r.reviewState,{drawEvidenceRef:r.drawEvidenceId||null,href:`/api/symbolic-method-readings?readingId=${encodeURIComponent(r.readingId)}`});
+ for(const r of lanes.readings?.items||[])event(r.readingId,`${r.methodCode}: ${r.question}`,r.createdAt,'ACCOUNT_EXPLICIT_SAVED_READING',r.schemaVersion||null,r.reviewState,{methodCode:r.methodCode,readingId:r.readingId,drawEvidenceRef:r.drawEvidenceId||null,href:`/api/symbolic-method-readings?readingId=${encodeURIComponent(r.readingId)}`});
  for(const r of lanes.financialDrafts?.items||[])event(r.draftId,`${r.draftType} draft`,r.createdAt,'CUSTOMER_CONSENTED_INTAKE_DRAFT',r.version,'SAVED_CURRENT_VERSION',{expiresAt:r.expiresAt,priorDigest:r.priorDigest||null});
  for(const r of lanes.currentReality?.items||[])event(r.recordId,r.primaryQuestion,r.createdAt,r.sourceClass,r.sourceVersion,r.historyState,{asOf:r.asOf,observations:r.observations});
  for(const r of lanes.worldContexts?.items||[])event(r.contextId,'World · '+r.scope.bookCode+' · '+r.scope.activeLayer,r.createdAt,r.sourceClass,r.sourceVersion,'EXPLICIT_SAVED_PUBLIC_SOURCE_CONTEXT',{href:r.href,personalFact:false,expiresAt:r.expiresAt});

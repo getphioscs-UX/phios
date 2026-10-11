@@ -1,4 +1,5 @@
 import {externalConditionsHtml} from './external-reality.js';
+import {installNavigationHandoff} from '../navigation-handoff.js';
 import {arr,esc,installTabs,locale,postJson,reRenderOnLocale,setStatus,tr,valueText} from './runtime-ui.js';
 import {renderRealityNavigationNetwork,renderNavigationFormationConcept} from '../reality-navigation-network.js';
 let currentView=null;
@@ -118,6 +119,10 @@ function renderReview(view){
 }
 
 function renderHistory(view){
+  let handoffHost=document.querySelector('[data-canonical-navigation-handoffs]');
+  const historyHost=document.querySelector('[data-cx-reality-history]');
+  if(!handoffHost&&historyHost){handoffHost=document.createElement('section');handoffHost.dataset.canonicalNavigationHandoffs='';historyHost.after(handoffHost);}
+  if(handoffHost){handoffHost.replaceChildren();for(const record of arr(view.canonicalNavigationHandoffs?.items)){const card=document.createElement('article'),title=document.createElement('h3'),note=document.createElement('p');title.textContent=record.snapshot.source.title;note.textContent=record.sourceVersion+' · '+tr('Direction and position not established; source history not supplied','方向和位置尚未确定；来源历史未提供');card.append(title,note);for(const target of arr(record.handoffTargets)){const link=document.createElement('a');link.href=target.href;link.textContent=target.label;card.append(link);}handoffHost.append(card);}}
   const items=arr(view.history?.items);
   const sourceLabel=code=>({PROFESSIONAL_RELEASED_REPORT:tr('Released report','已交付报告'),PURCHASED_METHOD_REPORT:tr('Purchased report','已购报告'),PURCHASED_REPORT_CONTEXT:tr('Report question','报告提问'),ACCOUNT_EXPLICIT_SAVED_READING:tr('Saved reading','已保存读取'),CUSTOMER_CONSENTED_INTAKE_DRAFT:tr('Saved draft','已保存草稿'),CUSTOMER_SELF_REPORTED_REALITY_BRIEF:tr('Your confirmed situation','你确认的处境'),SYNTHETIC_QA_REPORT:tr('QA sample','QA 测试资料')}[code]||tr('Saved source','已保存来源'));
   const status=view.savedSources?.lanes||{};
@@ -126,6 +131,9 @@ function renderHistory(view){
   document.querySelector('[data-cx-reality-history]').innerHTML=note+(items.length?items.map(item=>`<article class="cx-p1-source"><strong>${esc(item.label||item.id||'')}</strong>${item.occurredAt?`<div class="cx-meta">${esc(item.occurredAt)}</div>`:''}${item.sourceClass?`<div class="cx-meta">${esc(sourceLabel(item.sourceClass))}</div>`:''}${item.answer?`<details><summary>${esc(tr('Saved answer','已保存答案'))}</summary><p>${esc(typeof item.answer==='string'?item.answer:item.answer.text||item.answer.directAnswer||JSON.stringify(item.answer))}</p></details>`:''}${item.sourceClass==='PUBLIC_WORLD_SOURCE_BOOKMARK'&&String(item.href||'').startsWith('/world?')?`<p><a href="${esc(item.href)}">${esc(tr('Open saved World source','打开已保存世界来源'))}</a> · ${esc(tr('Public source, not a personal fact','公共来源，不是个人事实'))}</p>`:''}${arr(item.observations).length?`<details><summary>${esc(tr('What you confirmed','你确认过的内容'))}</summary>${listHtml(item.observations.map(x=>x.statement))}<p>${esc(tr('This is your self report, not an independently verified fact.','这是你的自述，不是独立核实的事实。'))}</p></details>`:''}</article>`).join(''):empty(tr('No retained history is available here yet.','这里尚无已保留的历史。')));
 }
 function renderReports(view){
+  const readings=arr(view.history?.items).filter(r=>r.methodCode==='TAROT'&&r.readingId);
+  const target=document.querySelector('[data-canonical-navigation-handoffs]');
+  if(target)for(const reading of readings){const card=document.createElement('article'),title=document.createElement('h3');title.textContent=reading.label;card.append(title);target.append(card);installNavigationHandoff(card,{productFamily:'TAROT',objectId:reading.readingId});}
   const items=arr(view.reports?.items);
   document.querySelector('[data-cx-reality-reports]').innerHTML=items.length?items.map(r=>`<article class="cx-p1-source"><strong>${esc(r.title||r.label||tr('Report','报告'))}</strong>${r.state?`<div class="cx-meta">${esc(r.state)}</div>`:''}${r.downloadHref||r.href?`<a href="${esc(r.downloadHref||r.href)}">${esc(tr('Open report','打开报告'))}</a>`:''}</article>`).join(''):empty(tr('No released report is connected here yet.','这里尚未连接已发布报告。'));
 }

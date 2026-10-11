@@ -79,9 +79,14 @@ for(const item of routes.primaryNavigation){
   const route=routes.routes.find(candidate=>candidate.routeId===item);assert.ok(route);
   if(item==='EXPLORE'&&text('index.html').includes('data-page-consolidation="R1"')){
     const {consolidationSuccessor}=await import('./lib/page-consolidation-successor-r1.mjs');assert(consolidationSuccessor());
-    assert(shell.includes("footerLink('/explore/',"),'Explore remains reachable in secondary navigation');
+    const about=navigationAuthority.primary.find(candidate=>candidate.id==='ABOUT');
+    assert(about,'Consolidated About entry missing');assert.equal(about.href,'/about/founder/');
+    assert(shell.includes("footerLink('/about/founder/',"),'About remains reachable in secondary navigation');
+    for(const rule of ['/explore/ /about/founder/ 308','/explore.html /about/founder/ 308','/explore/why-phios/ /about/founder/#why 308','/explore/how-it-works/ /about/founder/#how 308','/explore/start/ /about/founder/#start 308'])assert(redirects.includes(rule),`Explore compatibility redirect missing: ${rule}`);
+    const destination=text('about/founder/index.html');assert(destination.includes('/assets/js/public-shell.js'),'About destination shell missing');
+    for(const anchor of ['why','how','start','faq'])assert(destination.includes(`id="${anchor}"`),`About destination anchor missing: ${anchor}`);
     assert(shell.includes('/perspectives/phi-configuration/')&&shell.includes('/perspectives/profile/'),'Personal menu lost flagship links');
-    assert.deepEqual(navigationAuthority.primary.map(x=>x.id),['WORLD','MY_REALITY','PERSPECTIVES','KNOWLEDGE','PROFESSIONAL']);continue;
+    assert.deepEqual(navigationAuthority.primary.map(x=>x.id),['WORLD','MY_REALITY','PERSPECTIVES','KNOWLEDGE','PROFESSIONAL','ABOUT']);continue;
   }
   const navItem=navigationAuthority.primary.find(candidate=>candidate.id===item);assert.ok(navItem,`current navigation authority missing primary item ${item}`);
   assert.equal(navItem.href,route.canonicalPath,`current navigation authority route mismatch for ${item}`);

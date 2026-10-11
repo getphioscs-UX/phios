@@ -61,6 +61,8 @@ function selectedKnowledgeContext(form){
 }
 
 function selectedRequest(form){
+  const navigationRecordId=new URL(location.href).searchParams.get('navigationRecordId');
+  if(navigationRecordId)return {navigationHandoff:{recordId:navigationRecordId},contexts:[],questionOnly:true};
   const contexts=[];
   if(form.elements.questionOnly.checked)return {questionOnly:true,contexts:[],knowledgeContext:null};
   if(form.elements.contextKnowledge.checked)contexts.push({contextType:'KNOWLEDGE'});
