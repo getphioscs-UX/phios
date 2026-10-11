@@ -1,0 +1,45 @@
+{
+  "previousDeployedSourceSHA": null,
+  "previousSHAState": "G3_DEPLOYMENT_PREFLIGHT_REQUIRED_BEFORE_ANY_MUTATION",
+  "newRCCommitSHA": null,
+  "newRCSHAState": "NOT_CREATED_G1_NOT_AUTHORIZED",
+  "newSourceDigest": "bad6b7df6fd5d4518613f6a77ebac7d86e6b33455eb3ac051625a2eb6a5e3cfb",
+  "migration": {
+    "version": 18,
+    "backwardCompatible": true,
+    "behavior": "Retain additive tables/indexes; never DROP or rewrite customer/payment data"
+  },
+  "steps": [
+    {
+      "order": 1,
+      "operation": "Set PHIOS_P9_CHECKOUT_ENABLED=false and PHIOS_P9_CANARY_ENABLED=false; preserves read/refund scope via durable private policy"
+    },
+    {
+      "order": 2,
+      "operation": "Set REPORT_PROVIDER_LIVE_ALLOWED=false; no new spend. Reconcile all reserved/unknown outcomes before source replacement."
+    },
+    {
+      "order": 3,
+      "operation": "Set PHIOS_P9_WATCHDOG_SAFE_MODE=true; stop new claims after identifying in-flight jobs. Keep conditional refunds processing through governed owner/verified webhook."
+    },
+    {
+      "order": 4,
+      "operation": "Preserve G3/G5 private receipts and private policy so authenticated historical reads and conditional refunds survive canary admission expiry/closure."
+    },
+    {
+      "order": 5,
+      "operation": "Disable PHIOS_P9_RENDERER_ENABLED after in-flight render reconciliation; restore only verified previous renderer revision if applicable."
+    },
+    {
+      "order": 6,
+      "operation": "Restore exact previous deployed Pages SHA only after it is identified and compatible with retained migration 18. No restoring arbitrary local HEAD or QA renderer to production."
+    }
+  ],
+  "refundOwner": "Retain signed webhook and idempotent conditional G5 transport; no discretionary successful-order refund",
+  "forbidden": [
+    "DROP migration tables",
+    "delete private report objects",
+    "reset worktree",
+    "erase paid jobs or financial receipts"
+  ]
+}

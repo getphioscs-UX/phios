@@ -1,0 +1,46 @@
+{
+  "file": "db/migrations/0018_shared_paid_report_delivery.sql",
+  "SHA256": "546f66d3b85ed5788e3f1ac92f1d62969dfe4ce2f7cda3a1d9335e6ab0fbc78c",
+  "registryEntry": {
+    "version": 18,
+    "name": "shared_paid_report_delivery",
+    "file": "db/migrations/0018_shared_paid_report_delivery.sql",
+    "checksum": "cae6b49b1e439194e945108a9756b0faf6d99c6b294982cc2b8343ffaf7ec215",
+    "schema_id": "phi-os.shared-paid-report-delivery.v1",
+    "immutable": true
+  },
+  "registry": {
+    "path": "content/registry/runtime-migrations.json",
+    "sha256": "11cbe8b1d57f8145f3c6c5cf1aeddb01d7f201ca7f562864feb6c54cfb3bb18c"
+  },
+  "requiredTables": [
+    "paid_report_readiness",
+    "paid_report_jobs",
+    "paid_report_incidents",
+    "paid_report_refunds"
+  ],
+  "requiredIndexes": [
+    "paid_report_readiness_owner",
+    "paid_report_jobs_due"
+  ],
+  "owners": [
+    "functions/report-delivery/bazi-account-candidate.js",
+    "functions/report-delivery/paid-report-delivery-core.js",
+    "functions/report-delivery/paid-report-readiness.js",
+    "functions/report-delivery/paid-report-refund-events.js",
+    "functions/report-delivery/paid-report-refund.js",
+    "functions/report-delivery/paid-report-watchdog.js",
+    "functions/report-delivery/p9-canary-admission.js"
+  ],
+  "additive": true,
+  "backwardCompatibleWithPreviousCode": true,
+  "reason": "Adds four tables and two indexes; no changes to preexisting tables/data. Old code ignores new tables.",
+  "localMigrationEvidence": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-LOCAL-PREFLIGHT.json",
+    "sha256": "defa2eb5027ae45d6be987dce7cc17c5d718da1970f52d786cc0103049ada464"
+  },
+  "remoteSchema": "G3_DEPLOYMENT_PREFLIGHT_REQUIRED",
+  "governedRunner": "scripts/run-runtime-migrations.mjs",
+  "remoteExecutionCommand": "Not selected until the governed runner and remote schema/version are verified under G3; no manual SQL fallback.",
+  "remoteMutations": 0
+}

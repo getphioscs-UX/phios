@@ -1,0 +1,46 @@
+{
+  "status": "BASELINE_FAILURE",
+  "rows": [
+    {
+      "name": "default-off and scheduler safe no-op",
+      "status": "PASS_LOCAL",
+      "details": {
+        "provider": false,
+        "payment": false,
+        "generalSale": false,
+        "scheduler": "SAFE_NO_OP"
+      }
+    },
+    {
+      "name": "private gate identity expiry RC budget scope negative matrix",
+      "status": "PASS_LOCAL",
+      "details": {
+        "negativeChecks": 14,
+        "clientReceiptAuthority": false,
+        "maximumWindowDays": 7
+      }
+    },
+    {
+      "name": "native production-bound readiness and actual Commerce gate before Stripe",
+      "status": "PASS_LOCAL",
+      "details": {
+        "readiness": "READY_TO_PAY",
+        "methodsDenied": 8,
+        "G6Missing": "BLOCKED_BEFORE_STRIPE",
+        "ordersCreated": 0
+      }
+    },
+    {
+      "name": "LIVE-mode refund source with synthetic transport and signed webhook",
+      "status": "BASELINE_FAILURE",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- 'REFUNDED'\n\n    at file:///C:/phios/scripts/check-p9r0-release-readiness.mjs:19:2782\n    at async check (file:///C:/phios/scripts/check-p9r0-release-readiness.mjs:15:50)\n    at async file:///C:/phios/scripts/check-p9r0-release-readiness.mjs:19:1"
+    }
+  ],
+  "networkCalls": 0,
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p9r0-release-readiness.mjs",
+  "exitCode": 1
+}

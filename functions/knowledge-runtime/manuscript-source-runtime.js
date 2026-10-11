@@ -39,7 +39,9 @@ export function manuscriptQueryTerms(value) {
   // Separate grammatical scaffolding before producing Chinese bigrams. A
   // comparison must not acquire high-specificity invented terms such as 和差.
   // This is shared query analysis, not a per-question answer table.
-  return queryTerms(String(value || '').replace(/为什么|为何|是什么意思|是什么|有什么区别|有何区别|什么关系|如何|怎样|怎么|请问|究竟|有没有|不一定|是否|一个|一种|这样|那样|这个|那个|以及|与|和|的|对|\b(?:why|what|how|does|do|is|are|the|a|an|of|in|to|and|can|could|would|please)\b/gi, ' ')).filter(term=>term.length>1);
+  const input=String(value||'');
+  const aliases=/(?:售卖|销售|出售|购买|不卖|卖不卖|卖吗|公开卖|卖的(?:书|商品))/u.test(input)?['出售']:[];
+  return unique([...queryTerms(input.replace(/为什么|为何|是什么意思|是什么|有什么区别|有何区别|什么关系|如何|怎样|怎么|请问|究竟|有没有|不一定|是否|一个|一种|这样|那样|这个|那个|以及|与|和|的|对|\b(?:why|what|how|does|do|is|are|the|a|an|of|in|to|and|can|could|would|please)\b/gi, ' ')),...aliases]).filter(term=>term.length>1);
 }
 
 function correctionRows(sectionCode, corrections) {
@@ -85,6 +87,8 @@ function scoreRecord(record, query, terms, profile, specificity = null, prepared
   const compact = value => normalized(value).replace(/[\p{P}\p{S}\s]+/gu,'');
   const compactQuestion = compact(query);
   const compactText = prepared?.compactText ?? compact(text);
+  const explicitSubject=q.match(/^(?:既然|虽然|即使)?([\u3400-\u9fff]{1,8}?)(?:还在|仍然|正在|依然)/u)?.[1];
+  if(explicitSubject&&!compactText.includes(explicitSubject))return 0;
   let score = 0;
   const headingLabel = heading.split(/[|｜]/u)[0].trim();
   const nativeConceptLabel = headingLabel.match(/^[\u3400-\u9fff]{2,}(?=\s*[a-z]|$)/u)?.[0];
@@ -99,6 +103,12 @@ function scoreRecord(record, query, terms, profile, specificity = null, prepared
   if (divergentExperienceMatch) score += 1200;
   const unlimitedBoundaryMatch = /无限|无穷/u.test(q) && /不能|无法|有限|边界|限制/u.test(q) && /无限|有限|边界|限制/u.test(nativeHeader);
   if (unlimitedBoundaryMatch) score += 1200;
+  // Duration questions concern the conditions of continuing an activity,
+  // rather than a generic capacity definition that happens to share a verb.
+  // Only boost an activity explicitly present in the source heading.
+  const durationActivity=q.match(/(?:永远|一直|长久|长期|持续)(?:维持|保持|继续)?(运行|存在|发展|增长)/u)?.[1];
+  const durationActivityMatch=durationActivity&&new RegExp('(?:持续|长期|连续)'+durationActivity,'u').test(nativeHeader);
+  if(durationActivityMatch)score+=1200;
   if (q && headingLabel === q) score += 4000;
   const exactProfileQuestion = [...(profile?.naturalQuestions || []), ...(profile?.userLanguage || []), ...(profile?.aliases || [])].some(value => normalized(value) === q);
   if (exactProfileQuestion) score += 1400;
@@ -112,11 +122,43 @@ function scoreRecord(record, query, terms, profile, specificity = null, prepared
   for (const term of meaningfulTerms) {
     const weight = specificity?.get(term) || 1;
     if ((specificity ? headingLabel : heading).includes(term)) score += 180 * weight;
-    if (text.includes(term)) { score += 12 * weight; specificMatches++; }
+    if (compactText.includes(compact(term))) { score += 12 * weight; specificMatches++; }
   }
   const totalWeight=meaningfulTerms.reduce((sum,term)=>sum+(specificity?.get(term)||1),0);
   const matchedWeight=meaningfulTerms.filter(term=>text.includes(term)||compactText.includes(compact(term))).reduce((sum,term)=>sum+(specificity?.get(term)||1),0);
-  if(!record.supportRange&&!exactProfileQuestion&&!nativeIntroductionMatch&&!temporalConditionMatch&&!perspectiveCompletenessMatch&&!divergentExperienceMatch&&!(nativeConceptLabel&&q.includes(nativeConceptLabel))&&!q.includes(headingLabel)&&matchedWeight/Math.max(1,totalWeight)<0.35)return 0;
+  // A natural question contains grammatical and cross-word bigrams that are
+  // absent from the source. Require concentrated evidence in a bounded
+  // passage before allowing that mismatch; scattered broad words are weaker.
+  const contentTerms=meaningfulTerms.filter(term=>!/^(?:不是|是不是|代表|没有|存在|任何|还能|还在|保持|是否|可以|就是|已经)$/u.test(term));
+  let localMatches=0;
+  for(let offset=0;offset<compactText.length;offset+=250){
+    const passage=compactText.slice(offset,offset+500);
+    localMatches=Math.max(localMatches,contentTerms.filter(term=>passage.includes(compact(term))).length);
+  }
+  const nativeTitle=compact(heading);
+  const contentQuestion=compactQuestion.replace(/有什么不同|有什么区别|什么关系|为什么|如何|怎样|是不是|是否|代表|没有|还会|还能|既然|究竟|任何/g,' ');
+  const titlePhraseMatch=(contentQuestion.match(/[\u3400-\u9fff]+/gu)||[]).some(run=>{
+    for(let n=0;n<=run.length-4;n++)if(nativeTitle.includes(run.slice(n,n+4)))return true;
+    return false;
+  });
+  if(titlePhraseMatch)score+=900;
+  const questionRuns=(q.replace(/为什么|为何|如何|怎样|是否|是不是/gu,' ').match(/[\u3400-\u9fff]+/gu)||[]);
+  let sharedPhraseLength=0;
+  for(const run of questionRuns)for(let length=Math.min(12,run.length);length>=6;length--){
+    if(sharedPhraseLength>=length)break;
+    for(let offset=0;offset<=run.length-length;offset++)if(compactText.includes(run.slice(offset,offset+length))){sharedPhraseLength=length;break;}
+  }
+  if(sharedPhraseLength>=6)score+=sharedPhraseLength*100;
+  const temporalPredicate=/(?:已经|已|以后|之后|仍然|还会)/u.test(q)?q.match(/结束|形成|增长|停止|恢复|改变/u)?.[0]:null;
+  if(temporalPredicate&&nativeTitle.includes(temporalPredicate))score+=800;
+  const matchedContentWeight=contentTerms.filter(term=>compactText.includes(compact(term))).reduce((sum,term)=>sum+(specificity?.get(term)||1),0);
+  if(explicitSubject&&localMatches>=3)score+=500;
+  const explicitSubjectEvidence=explicitSubject&&localMatches>=3;
+  const conditionSubject=q.match(/^(.{2,20}?)(?:是不是|是否|就代表|就意味着)/u)?.[1]?.replace(/\s+/gu,'');
+  const conditionEvidence=conditionSubject&&conditionSubject.length>=4&&compactText.includes(conditionSubject);
+  const namedBook=q.match(/第[一二三四五六七八九十\d]+册/u)?.[0]||q.match(/《([^》]+)》/u)?.[1];
+  const namedStatusEvidence=namedBook&&compactText.includes(compact(namedBook))&&terms.includes('出售')&&compactText.includes('出售');
+  if(!exactProfileQuestion&&!nativeIntroductionMatch&&!temporalConditionMatch&&!(durationActivityMatch&&localMatches>=2)&&!perspectiveCompletenessMatch&&!divergentExperienceMatch&&!titlePhraseMatch&&sharedPhraseLength<6&&!explicitSubjectEvidence&&!conditionEvidence&&!namedStatusEvidence&&!(localMatches>=3&&matchedContentWeight>=6)&&!(nativeConceptLabel&&q.includes(nativeConceptLabel))&&!q.includes(headingLabel)&&matchedWeight/Math.max(1,totalWeight)<0.35)return 0;
     if (specificity) {
       const subtitle = heading.slice(headingLabel.length);
       const comparison = q.match(/^(.+?)(?:与|和)(.+?)(?:有什么区别|有何区别|的区别|区别)/);
@@ -127,7 +169,7 @@ function scoreRecord(record, query, terms, profile, specificity = null, prepared
       // rather than merely sharing a broad noun such as scale or capacity.
       if (/(?:不再|无法|不能).*(?:产生|带来|形成).*(?:能力|收益)/.test(q) && /(?:不再|无法|不能).*(?:产生|形成).*能力/.test(subtitle)) score += 220;
       const sentences = text.split(/[。！？!?]/u);
-    const bestSentence = Math.max(0,...sentences.map(sentence => meaningfulTerms.reduce((sum,term)=>sum+(sentence.includes(term)?specificity.get(term)||1:0),0)));
+    const bestSentence = Math.max(0,...sentences.map(sentence => meaningfulTerms.reduce((sum,term)=>sum+(compact(sentence).includes(compact(term))?specificity.get(term)||1:0),0)));
     // A passing mention deep inside a chapter must not outweigh a chapter
     // whose stated subject directly matches the customer's question.
     score += 35 * bestSentence;
@@ -137,7 +179,7 @@ function scoreRecord(record, query, terms, profile, specificity = null, prepared
 
 function excerptFor(record, query, terms, maximum = MAX_EXCERPT_CHARS) {
     const text = clean(record.text);
-    if (record.supportRange) return text.length<=maximum?text:text.slice(0,maximum).replace(/[^。！？!?]*$/u,'')+'…';
+    if (record.supportRange&&record.answerProjectionPolicy!=='QUESTION_ANCHORED_CONTIGUOUS') return text.length<=maximum?text:text.slice(0,maximum).replace(/[^。！？!?]*$/u,'')+'…';
   if (text.length <= maximum) return text;
   let anchor = text.indexOf(clean(query));
   const concept = clean(record.heading).split(/[|｜]/u)[0].replace(/^[✦◈◆◇❖]\s*/u,'').trim();
@@ -145,9 +187,15 @@ function excerptFor(record, query, terms, maximum = MAX_EXCERPT_CHARS) {
   // incidental word happens to occur earliest in the query-term list.
   if (concept.length >= 2 && clean(query).includes(concept)) anchor = 0;
   if (anchor < 0) {
-    for (const term of terms) {
-      anchor = text.toLocaleLowerCase().indexOf(term);
-      if (anchor >= 0) break;
+    let bestScore=0;
+    for(const match of text.matchAll(/[^。！？!?]+[。！？!?]?/gu)){
+      const sentence=normalized(match[0]).replace(/\s+/gu,'');
+      const informativeTerms=terms.filter(term=>!/^(?:存在|不是|表示|已经|没有|代表|还在|还能|不是|保持)$/u.test(term));
+      const namedSubject=clean(query).match(/第[一二三四五六七八九十\d]+册/u)?.[0];
+      const literalSubject=clean(query).match(/^(?:既然|虽然|即使)?([\u3400-\u9fff]{1,8}?)(?:还在|仍然|正在|依然)/u)?.[1];
+      const condition=clean(query).match(/^(.{2,20}?)(?:是不是|是否|就代表|就意味着)/u)?.[1]?.slice(-2);
+      const score=informativeTerms.reduce((sum,term)=>sum+(sentence.includes(term)?term.length:0),0)+(namedSubject&&sentence.includes(namedSubject)?20:0)+(literalSubject&&sentence.includes(literalSubject)?20:0)+(condition&&sentence.includes(condition)?12:0)+(terms.includes('出售')&&sentence.includes('出售')?15:0);
+      if(score>bestScore){bestScore=score;anchor=match.index;}
     }
   }
   if (anchor < 0) anchor = 0;
@@ -246,6 +294,8 @@ export function searchManuscriptCorpus({
         excerpt,
         excerptBoundaryState: item.record.supportRange ? 'GOVERNED_FIXED_RANGE' : 'COMPLETE_SENTENCES_WITH_OMISSION_MARKERS',
         supportRange: item.record.supportRange || null,
+        answerProjectionPolicy:item.record.answerProjectionPolicy||null,
+        causalExplanationAvailable:item.record.causalExplanationAvailable,
         admissionScope: item.record.admissionScope || null,
       canonicalBinding: bindingFor(item.record.sectionCode, bindings),
       conceptBinding: item.profile ? { profileId: item.profile.profileId, nodeCode: item.profile.nodeCode, authorityRefs: item.profile.authorityRefs, createsCanonicalAuthority: false } : null,

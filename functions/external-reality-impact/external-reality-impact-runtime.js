@@ -51,5 +51,16 @@ export function routeExternalRealityImpact({event,jurisdictionContext={},caseCon
  const edges=refs.map(r=>({from:event.eventId,to:r,type:'POSSIBLE_RELATIONSHIP',sourceRefs:[event.eventId,r],causality:false}));return frozen({...empty('IMPACT_CANDIDATES_AVAILABLE'),relevanceState,items:[candidate],reviewTriggers:[trigger],edges,event,jurisdictionContext:jc});
 }
 export function compareExternalRealityEvents(previous,current){if(previous?.state!=='ADMITTED_EXTERNAL_REFERENCE'||!previous?.sourceReferences?.length)return 'UNKNOWN';if(current?.state==='SOURCE_CONFLICTED')return 'CONFLICTED';if(current?.state==='SOURCE_STALE')return 'EXPIRED';if(previous.eventId!==current?.eventId)return 'NEW';const meaningful=e=>({eventId:e.eventId,title:e.title,domain:e.domain,jurisdiction:e.jurisdiction,eventState:e.eventState,effectiveAt:e.effectiveAt,sourceReferences:e.sourceReferences});return JSON.stringify(meaningful(previous))===JSON.stringify(meaningful(current))?'UNCHANGED':'CHANGED';}
-export function externalRealityQuestionNeed(question=''){const q=String(question),material=/\b(tax|budget|haze|air quality|heat alert|public.health alert|flood|wildfire|regulation)\b|税|预算|烟霾|空气质量|热浪|公共卫生|洪水|野火|监管/i.test(q),current=/\b(today|current|currently|latest|now|recent|this week)\b|今天|目前|当前|最新|现在|最近/i.test(q),domain=/\b(weather|temperature|forecast|interest rate|market|stock|share price|company|industry|policy|technology|transport|geopolitical|environment|infrastructure)\b|天气|气温|预报|利率|市场|股价|公司|行业|政策|科技|交通|地缘|环境|基础设施/i.test(q);return material||(current&&domain);}
+export function externalRealityQuestionNeed(question=''){
+ const q=String(question);
+ const material=/\b(tax|budget|haze|air quality|heat alert|public.health alert|flood|wildfire|regulation)\b|税|预算|烟霾|空气质量|热浪|公共卫生|洪水|野火|监管/i.test(q);
+ const current=/\b(today|current|currently|latest|now|recent|this week)\b|今天|目前|当前|最新|现在|最近/i.test(q);
+ const domain=/\b(weather|temperature|forecast|interest rate|market|stock|share price|company|industry|policy|technology|transport|geopolitical|infrastructure)\b|天气|气温|预报|利率|市场|股价|公司|行业|政策|科技|交通|地缘|基础设施/i.test(q);
+ // Model/operating conditions are not observations about today's external
+ // environment. Concrete environmental events still require external sources.
+ const conceptualConditions=/恢复|承载|维持容量|运行条件|\b(recovery|carrying capacity|operating conditions)\b/i.test(q);
+ const concreteEnvironment=/污染|生态|环保|环境政策|环境数据|\b(pollution|ecolog\w*|environmental (?:policy|data|alert))\b/i.test(q);
+ const environment=/环境|\benvironment\b/i.test(q)&&(!conceptualConditions||concreteEnvironment);
+ return material||(current&&(domain||environment));
+}
 export function resolveExternalRealityInputs(inputs={},options={}){const event=inputs.eventInput?createExternalRealityEvent({...inputs.eventInput,now:options.now}):{state:'LIVE_SOURCE_UNAVAILABLE'};return routeExternalRealityImpact({event,jurisdictionContext:inputs.jurisdictionContext,caseContext:inputs.caseContext,processingConsent:inputs.processingConsent,now:options.now});}

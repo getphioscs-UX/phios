@@ -1,0 +1,79 @@
+{
+  "status": "NOT_RUN",
+  "proofs": [
+    {
+      "id": "PREDEPLOY_SOURCE_SHA",
+      "gate": "G3",
+      "operation": "Read-only identify previous deployment SHA and verify rollback version before mutation",
+      "state": "NOT_AUTHORIZED_NOT_RUN"
+    },
+    {
+      "id": "SECRET_BINDINGS",
+      "gate": "G3",
+      "operation": "Separately authorized metadata-only presence and correct target bindings",
+      "state": "NOT_AUTHORIZED_NOT_RUN"
+    },
+    {
+      "id": "STRIPE_LIVE_PRICE_EXTERNAL_VERIFICATION",
+      "gate": "G3",
+      "operation": "Read-only account/product/price verification against canonical RM59+RM10; no Checkout; prerequisite G6",
+      "state": "NOT_AUTHORIZED_NOT_RUN"
+    },
+    {
+      "id": "MIGRATION_18",
+      "gate": "G3",
+      "operation": "Verify pre-migration remote schema, governed additive apply exactly once and registry18",
+      "state": "NOT_AUTHORIZED_NOT_RUN"
+    },
+    {
+      "id": "RENDERER_RUNTIME_REACHABLE",
+      "gate": "G3",
+      "operation": "Private service + Browser binding safe governed synthetic 48/15 fixture; no customer release/provider",
+      "state": "NOT_AUTHORIZED_NOT_RUN"
+    },
+    {
+      "id": "WATCHDOG_EXECUTION",
+      "gate": "G3",
+      "operation": "Safe no-op scheduled receipt then bounded due-job scan; no provider while G4 closed",
+      "state": "NOT_AUTHORIZED_NOT_RUN"
+    },
+    {
+      "id": "CANARY_PRIVATE_SCOPE",
+      "gate": "G3",
+      "operation": "Private account/person/readiness/expiry and G3 receipt installed; record opaque refs only",
+      "state": "NOT_AUTHORIZED_NOT_RUN"
+    },
+    {
+      "id": "LIVE_READINESS",
+      "gate": "G3",
+      "operation": "Real customer login and canonical person READY_TO_PAY, no Checkout",
+      "state": "NOT_AUTHORIZED_NOT_RUN"
+    },
+    {
+      "id": "PROVIDER_TRANSPORT",
+      "gate": "G4",
+      "operation": "Only expressly authorized single-owner gpt-5.6-sol lifecycle within USD4",
+      "state": "NOT_AUTHORIZED_NOT_RUN"
+    },
+    {
+      "id": "PAYMENT_AND_WEBHOOK",
+      "gate": "G6",
+      "operation": "Only after G4/G5/G6 and runtime proofs, one verified paid webhook and job",
+      "state": "NOT_AUTHORIZED_NOT_RUN"
+    },
+    {
+      "id": "PRIVATE_MATERIAL_AND_ACCOUNT",
+      "gate": "G6",
+      "operation": "Actual immutable private R2/D1 release, 48/15, PDF, account reopen, four followup grants",
+      "state": "NOT_AUTHORIZED_NOT_RUN"
+    },
+    {
+      "id": "OPTIONAL_SUCCESSFUL_REFUND",
+      "gate": "G7",
+      "operation": "Separate explicit successful-order refund authorization; never implied by G5",
+      "state": "NOT_AUTHORIZED_NOT_RUN"
+    }
+  ],
+  "paidActions": 0,
+  "productionSecretReads": 0
+}

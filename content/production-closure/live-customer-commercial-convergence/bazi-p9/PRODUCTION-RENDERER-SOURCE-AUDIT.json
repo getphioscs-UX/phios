@@ -1,0 +1,97 @@
+{
+  "at": "2026-10-11T13:13:24.968Z",
+  "currentHead": "70956df9dab34be311d20e3ac12f958e3aa2f32e",
+  "bindingSource": "wrangler.jsonc",
+  "binding": {
+    "binding": "METHOD_REPORT_RENDERER",
+    "service": "phios-method-report-renderer-production"
+  },
+  "candidateServiceNames": [
+    "phios-method-report-renderer-production",
+    "phios-method-report-renderer-qa"
+  ],
+  "canonicalSourceEvidence": {
+    "name": "phios-method-report-renderer-production",
+    "configuration": "workers/method-report-renderer/wrangler.production.jsonc",
+    "entrypoint": "workers/method-report-renderer/production.js",
+    "manifest": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-DEPLOYMENT-TARGET-MANIFEST.json",
+    "productionDefinition": "SOURCE_DEFINED_NOT_DEPLOYED",
+    "entryEnabledByDefault": "false"
+  },
+  "files": [
+    {
+      "path": "wrangler.jsonc",
+      "sha256": "a1cc8849a23a5eb3260a940850c7cb13bd91b5dea2f9c83b67ef3b5b06207188"
+    },
+    {
+      "path": "workers/method-report-renderer/wrangler.production.jsonc",
+      "sha256": "92a35249b6399f16c49075ce01c1f6bcc32b54e5e61cfaabd022d35991fdf667"
+    },
+    {
+      "path": "workers/method-report-renderer/production.js",
+      "sha256": "21461b61c25f3edfb39a785c0c452a6372cfdbbce36d15de678726d372dca70f"
+    },
+    {
+      "path": "workers/method-report-renderer/wrangler.jsonc",
+      "sha256": "6cf03758f691bf95463ff13ee01fb69a2a700b09ef4ba590220fb651cfa94bc0"
+    },
+    {
+      "path": "workers/method-report-renderer/index.js",
+      "sha256": "3f88a1434189b9d22eea36405d6515d8d7208b9d1c4ccfe828c096096e663e8a"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-DEPLOYMENT-TARGET-MANIFEST.json",
+      "sha256": "5062888aa90af51b5429cf94ad0d95e439475e0abaf9b889fab434fd587d6894"
+    },
+    {
+      "path": "content/production-closure/shared-paid-report-delivery/P8-TO-P9-HANDOFF.json",
+      "sha256": "fe0807d0177423a14b94b409e9e176d812494befda71b6c78899a639c6c10444"
+    }
+  ],
+  "cloudEvidence": {
+    "receipt": "tools/review/free-ask-manuscript-r1/BOOK-I-V3-DEPLOYMENT-BINDING-FAILURE.json",
+    "observedAt": "2026-10-11T13:05:49.837Z",
+    "httpStatus": 404,
+    "serviceFound": false,
+    "notRequeried": true
+  },
+  "state": "PRODUCTION_RENDERER_SERVICE_ESTABLISHED",
+  "gate": "PAGES_CONFIGURATION_RECONCILIATION_PENDING",
+  "productionDeploymentDefinitionEstablished": true,
+  "productionServiceExistenceVerified": true,
+  "stripe": {
+    "productionExpected": "LIVE",
+    "currentSource": "LIVE",
+    "preview": "QA",
+    "historicalDeployedValue": "UNVERIFIED",
+    "remoteRestoration": "NOT_AUTHORIZED_NOT_RUN"
+  },
+  "configurationRecoveryRequired": [
+    "production.env_vars.STRIPE_ENVIRONMENT.type",
+    "production.env_vars.STRIPE_ENVIRONMENT.value",
+    "production.env_vars.PHIOS_COMMERCE_LIVE_ENABLED",
+    "production.env_vars.PHIOS_ENVIRONMENT",
+    "production.env_vars.PHIOS_P9_CANARY_ENABLED",
+    "production.env_vars.PHIOS_P9_CHECKOUT_ENABLED",
+    "production.env_vars.PHIOS_P9_REFUND_ENABLED",
+    "production.env_vars.PHIOS_SHARED_PAID_REPORT_ENABLED",
+    "production.env_vars.REPORT_PROVIDER_LIVE_ALLOWED",
+    "production.wrangler_config_hash",
+    "production.services"
+  ],
+  "sourceChecks": {
+    "receipt": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9R0-LOCAL-VALIDATION.json",
+    "status": "PASS_LOCAL"
+  },
+  "actions": {
+    "providerCalls": 0,
+    "realPayments": 0,
+    "realRefunds": 0,
+    "deploy": 0,
+    "remoteMutation": 0,
+    "commit": 0,
+    "push": 0
+  },
+  "priorAuditState": "PRODUCTION_RENDERER_BINDING_TARGET_UNVERIFIED",
+  "establishmentReceipt": "content/production-closure/live-customer-commercial-convergence/bazi-p9/RENDERER-AUTHORIZED-ESTABLISHMENT.json"
+}

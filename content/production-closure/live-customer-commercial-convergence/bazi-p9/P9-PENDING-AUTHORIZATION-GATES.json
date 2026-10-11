@@ -1,0 +1,13 @@
+{
+  "all": "NOT_AUTHORIZED",
+  "requests": {
+    "G1": "AUTHORIZE P9 G1: Commit only reviewed P9 release dependency manifest 9601fb56fc345eed485d4b23df29e51e25112e4712e70b71fb6f77a27e88ce43 to current main worktree. Do not include unrelated concurrent changes. (Blocked until production preparation gaps are closed; runtime dependencies already belong to 70956df9dab34be311d20e3ac12f958e3aa2f32e.)",
+    "G2": "AUTHORIZE P9 G2: Push the reviewed P9 release-candidate commit <reviewed SHA> to origin/main.",
+    "G3": "AUTHORIZE P9 G3: Deploy P9 release candidate <reviewed SHA / 9601fb56fc345eed485d4b23df29e51e25112e4712e70b71fb6f77a27e88ce43> to governed production targets and apply additive migration 0018 to production D1. Do not create payment, call OpenAI, or perform refund.",
+    "G4": "AUTHORIZE P9 G4: For one named canary owner/readiness/product/expiry only, authorize gpt-5.6-sol under frozen BZR policy: 3 normal calls, at most 2 standard technical recoveries, policy-permitted delivery rescue, semantic verifier/review 0, editorial retry 0, lifecycle hard cap USD4 including four followups. No other customer generation.",
+    "G5": "AUTHORIZE P9 G5: Only if this identified verified paid canary exhausts normal generation, bounded recovery and rescue without valid immutable report, refund that canary through governed LIVE refund owner. No discretionary, unrelated or successful-order refund.",
+    "G6": "AUTHORIZE P9 G6: Only after G3 runtime readiness, active watchdog, armed refund and G4/G5, create exactly one real LIVE checkout for approved canary account/person at canonical BILINGUAL quote (expected RM69 only if still canonical). Maximum paid attempts 1. No second checkout/payment after success or failure."
+  },
+  "G7": "Separate optional authorization for a deliberately refunded successful order; not implied by G5",
+  "stopAt": "G1; production gaps must be closed before commit is requested"
+}

@@ -57,7 +57,7 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
     return { status: 'disabled_in_preview', records: [], errors: [] };
   }
   const [registry, reviewedRegistry, bindings, corrections, semanticProfiles] = await Promise.all([
-    readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v5.json'),
+    readAssetJson(env, manuscriptMetadataRaw.ACTIVE_MANUSCRIPT_SOURCE_REGISTRY || 'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v5.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-editorial-correction-v1.json'),
@@ -121,10 +121,11 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
       const normalizedQuery=String(query).normalize('NFKC').replace(/\s+/g,'');
       const namedSubjects=corpus.records.filter(record=>{
         const label=String(record.heading||'').normalize('NFKC').split(/[|｜]/u)[0].replace(/^[✦◈◆◇❖]+/u,'').replace(/^什么是/,'').replace(/\s+/g,'');
-        return label.length>=2&&normalizedQuery.includes(label);
+        const definitions=[...String(record.text||'').normalize('NFKC').replace(/\s+/gu,'').matchAll(/(?:所谓|这就是|这便是|被称为)([\u3400-\u9fff]{3,12}?)(?:[，,。.:：]|并不是|不是|是)/gu)].map(m=>m[1]);
+        return (label.length>=2&&normalizedQuery.includes(label))||definitions.some(name=>normalizedQuery.includes(name));
       });
       if(namedSubjects.length&&!namedSubjects.some(record=>permitted.some(s=>s.sectionCode===record.sectionCode)))return [];
-      corpus={...corpus,records:corpus.records.flatMap(record=>{const s=permitted.find(r=>r.sectionCode===record.sectionCode&&r.sectionSha256===record.textSha256);return s?[{...record,text:record.text.slice(s.startOffset,s.endOffset),supportRange:{startOffset:s.startOffset,endOffset:s.endOffset,sectionSha256:s.sectionSha256},admissionScope:'SERVER_VERIFIED_TEXT_SCOPE_CANDIDATE'}]:[];})};
+      corpus={...corpus,records:corpus.records.flatMap(record=>{const s=permitted.find(r=>r.sectionCode===record.sectionCode&&r.sectionSha256===record.textSha256);return s?[{...record,text:record.text.slice(s.startOffset,s.endOffset),startPage:s.pdfPageRange?.start||record.startPage,endPage:s.pdfPageRange?.end||record.endPage,answerProjectionPolicy:s.answerProjectionPolicy||null,causalExplanationAvailable:s.causalExplanationAvailable,supportRange:{startOffset:s.startOffset,endOffset:s.endOffset,sectionSha256:s.sectionSha256},admissionScope:'SERVER_VERIFIED_TEXT_SCOPE_CANDIDATE'}]:[];})};
     }
     return searchManuscriptCorpus({ corpus, source, bindings, corrections, query, profiles: semanticProfiles.profiles });
   }));
@@ -168,6 +169,8 @@ function groundingFrom(published, manuscript) {
       sourceBinaryDigest: record.sourceBinaryDigest,
       sourceAcceptanceDigest: record.sourceAcceptanceDigest,
       supportRange: record.supportRange || null,
+      answerProjectionPolicy:record.answerProjectionPolicy||null,
+      causalExplanationAvailable:record.causalExplanationAvailable,
       excerptBoundaryState: record.excerptBoundaryState,
       heading: record.heading,
       text: record.excerpt
@@ -235,10 +238,23 @@ export function deterministicGroundedAnswer(query, grounding, locale) {
     if(source.supportRange){const normalized=String(prose).replace(/([\u3400-\u9fff])\s+(?=[\u3400-\u9fff])/g,'$1').normalize('NFKC');const title=String(source.heading||'').normalize('NFKC');prose=normalized.startsWith('✦'+title)?normalized.slice(title.length+1):normalized;}
     // Native manuscript prose must retain the definition and its adjacent
     // conditions. Isolated high-scoring sentences can lose their antecedent.
-    if (source.sourceType === 'COMPLETED_MANUSCRIPT' && (!source.supportRange || source.bookCode === 'BOOK-3')) {
+    if (source.sourceType === 'COMPLETED_MANUSCRIPT' && (!source.supportRange || source.bookCode === 'BOOK-3' || source.answerProjectionPolicy==='QUESTION_ANCHORED_CONTIGUOUS')) {
       const sentences = splitSentences(prose);
       const contiguous = []; let size = 0;
-      for (const sentence of sentences) {
+      let answerStart=0;
+      if(!source.supportRange||source.answerProjectionPolicy==='QUESTION_ANCHORED_CONTIGUOUS'){
+        let bestScore=0;
+        sentences.forEach((sentence,index)=>{
+          const normalized=sentence.normalize('NFKC').toLocaleLowerCase().replace(/\s+/gu,'');
+          const informativeTerms=terms.filter(term=>!/^(?:存在|不是|表示|已经|没有|代表|还在|还能|保持)$/u.test(term));
+          const namedSubject=String(query).match(/第[一二三四五六七八九十\d]+册/u)?.[0];
+          const literalSubject=String(query).match(/^(?:既然|虽然|即使)?([\u3400-\u9fff]{1,8}?)(?:还在|仍然|正在|依然)/u)?.[1];
+          const condition=String(query).match(/^(.{2,20}?)(?:是不是|是否|就代表|就意味着)/u)?.[1]?.slice(-2);
+          const score=informativeTerms.reduce((sum,term)=>sum+(normalized.includes(term)?term.length:0),0)+(namedSubject&&normalized.includes(namedSubject)?20:0)+(literalSubject&&normalized.includes(literalSubject)?20:0)+(condition&&normalized.includes(condition)?12:0)+(terms.includes('出售')&&normalized.includes('出售')?15:0);
+          if(score>bestScore){bestScore=score;answerStart=index;}
+        });
+      }
+      for (const sentence of sentences.slice(answerStart)) {
         if (/^…|…$/.test(sentence)) break;
         // Do not propagate an overprinted/repeated extraction run. Preserve the
         // stored source, but stop this projection before the suspect sentence.
@@ -252,7 +268,7 @@ export function deterministicGroundedAnswer(query, grounding, locale) {
       }
       if (contiguous.length) return {
         present:true, projectionType:'DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER',
-        generativeModelUsed:false, locale, text:contiguous.join(locale==='zh-Hans'?'\n\n':' '),
+        generativeModelUsed:false, locale, text:(source.causalExplanationAvailable===false&&/为什么|为何|原因/u.test(query)?(locale==='zh-Hans'?'以下来源说明了状态和用途，没有明确说明这一决定的原因。\n\n':'The source states the status and purpose, but does not explicitly explain the reason for this decision. '):'')+contiguous.join(locale==='zh-Hans'?'\n\n':' '),
         sourceReferences:[sourceId], authorityNotice:'Contiguous source prose; retrieval alone does not prove question fit.'
       };
     }
@@ -328,8 +344,9 @@ export async function handleKnowledgeAccessRequest(request, env = {}, options = 
   if(atlas.scope){published={...published,results:[]};manuscript={...manuscript,records:[]};}
   answerGrounding.allowed = answerGrounding.sources.length > 0;
   const requiresComparativeUnit = sourceMode === 'manuscript' && /区别|比较|关联|之间.*关系|compare|difference|relationship between/i.test(query);
-  const predictionCertainty = /肯定|保证|一定|确定|必然|guarantee|certainly|definitely|with certainty/i.test(query) && !/不能保证|无法保证|不保证|不能确定|无法确定|不确定|cannot guarantee|can.t guarantee|not guaranteed|not certain/i.test(query);
-  const unsupportedPrediction = predictionCertainty && /明[天年]|将来|未来|下(?:周|星期|个?月|年)|tomorrow|future|next\s+(?:week|month|year)/i.test(query);
+  const predictionCertainty = /肯定|保证|一定|确定|必然|必定|guarantee|certainly|definitely|with certainty/i.test(query) && !/不能保证|无法保证|不保证|不能确定|无法确定|不确定|不一定|未必|cannot guarantee|can.t guarantee|not guaranteed|not certain/i.test(query);
+  const personalGuaranteedOutcome=/(?:我|我的|我们|my|i\b).*(?:成功|失败|获利|康复|success|fail|profit|recover)/i.test(query);
+  const unsupportedPrediction = predictionCertainty && (personalGuaranteedOutcome || /明[天年]|将来|未来|下(?:周|星期|个?月|年)|tomorrow|future|next\s+(?:week|month|year)/i.test(query));
   const ambiguous = manuscriptQueryTerms(query).length === 0;
   // A comparison is not ambiguous merely because it asks for a distinction.
   // Only admit one when the retrieved prose itself states a contrast.

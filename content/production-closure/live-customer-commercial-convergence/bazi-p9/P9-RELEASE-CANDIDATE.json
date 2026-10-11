@@ -1,0 +1,127 @@
+{
+  "status": "PREPARATION_EVIDENCE_GAPS_OPEN",
+  "head": "70956df9dab34be311d20e3ac12f958e3aa2f32e",
+  "immutableSourceCommit": "70956df9dab34be311d20e3ac12f958e3aa2f32e",
+  "releaseReady": false,
+  "dependencyManifest": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-RELEASE-DEPENDENCY-MANIFEST.json",
+    "sha256": "86c1566ef671ac912e1267e6b21a012734a12ff93701eafb76ef5d32d33e1023"
+  },
+  "p7Baseline": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/BAZI-R2-CURRENT-PRODUCTION-PUBLICATION-BASELINE-V3.json",
+    "sha256": "1358ed1f245ec97d185f3d17f1845c4abad0ec79ead2dc3ef20870bcf480726b"
+  },
+  "p8Receipt": {
+    "path": "content/production-closure/shared-paid-report-delivery/P8-SHARED-PAID-REPORT-DELIVERY-CORE-R1.json",
+    "sha256": "ac30d4941dd28426eef5a24c9408d5a60f9d0a8a2d93d2c12bed2dee9bf1cb00"
+  },
+  "p8HumanAcceptance": {
+    "path": "content/production-closure/shared-paid-report-delivery/P8-R1-HUMAN-ACCEPTANCE.json",
+    "sha256": "370811b8a60998b7ac4eb6d8e0d688c118ff8148b19cbf7bda0038e967b0c16c"
+  },
+  "handoff": {
+    "path": "content/production-closure/shared-paid-report-delivery/P8-TO-P9-HANDOFF.json",
+    "sha256": "fe0807d0177423a14b94b409e9e176d812494befda71b6c78899a639c6c10444"
+  },
+  "migration0018": {
+    "path": "db/migrations/0018_shared_paid_report_delivery.sql",
+    "sha256": "546f66d3b85ed5788e3f1ac92f1d62969dfe4ce2f7cda3a1d9335e6ab0fbc78c"
+  },
+  "cloudflareConfig": {
+    "path": "wrangler.jsonc",
+    "sha256": "696145ed9d60af5a9cb8f388d6b2bc69639908692449f942b73114c24081e83f"
+  },
+  "rendererConfig": {
+    "path": "workers/method-report-renderer/wrangler.jsonc",
+    "sha256": "6cf03758f691bf95463ff13ee01fb69a2a700b09ef4ba590220fb651cfa94bc0"
+  },
+  "watchdog": {
+    "path": "functions/report-delivery/paid-report-watchdog.js",
+    "sha256": "d657c54a94a9fbb57163296235dc64c43a40916a38a89132c644812aecf5e9b0"
+  },
+  "commerceEconomics": {
+    "path": "functions/pws/commercial/commerce-economics-policy.js",
+    "sha256": "475938032b82450484d66b213ba155b82b6458528f57b16aefc721daf21b5307"
+  },
+  "generationPolicy": {
+    "path": "functions/personal-reading/deep-manuscript/bazi-production-generation-config.js",
+    "sha256": "cb01eda1a57ff2d1286c056b3b30e109e11ef6e01a0b522a9f6b54ae64bdf8db"
+  },
+  "gaps": [
+    {
+      "id": "PRODUCTION_RENDERER_BINDING_MISSING",
+      "owner": "wrangler.jsonc",
+      "evidence": "METHOD_REPORT_RENDERER exists only in preview and points to QA worker; production services absent"
+    },
+    {
+      "id": "PRODUCTION_RENDERER_TARGET_MISSING",
+      "owner": "workers/method-report-renderer/wrangler.jsonc",
+      "evidence": "Only QA worker target exists; no governed production renderer target defined"
+    },
+    {
+      "id": "WATCHDOG_PRODUCTION_TRIGGER_MISSING",
+      "owner": "functions/report-delivery/paid-report-watchdog.js",
+      "evidence": "Exports scheduler port only; no Cron/Queue handler or governed scheduler configuration found"
+    },
+    {
+      "id": "LIVE_SHARED_ADMISSION_NOT_IMPLEMENTED",
+      "owner": "functions/report-delivery/paid-report-readiness.js",
+      "evidence": "requireSharedPaidReportLocal allows local/qa/preview only; production denied"
+    },
+    {
+      "id": "LIVE_REFUND_NOT_ARMED",
+      "owner": "functions/commerce/paid-report-refund-transport.js",
+      "evidence": "Existing transport is QA-only; live transport/webhook financial proof not admitted"
+    },
+    {
+      "id": "CANARY_SERVER_ADMISSION_MISSING",
+      "owner": "functions/commerce/controlled-purchase-candidate.js",
+      "evidence": "Existing controlled purchase requires discounted coupons; does not implement canonical-price BZR P9 admission. No policy activated."
+    },
+    {
+      "id": "CANARY_IDENTITY_AND_EXPIRY_UNSELECTED",
+      "owner": "Human",
+      "evidence": "No authorized real account/person, readinessId or bounded expiry supplied"
+    },
+    {
+      "id": "LIVE_SECRET_PRESENCE_UNVERIFIED",
+      "owner": "Production configuration",
+      "evidence": "No secret values read; production presence must be checked through authorized metadata-only inspection"
+    },
+    {
+      "id": "DEPLOYED_SOURCE_UNVERIFIED",
+      "owner": "Deployment records",
+      "evidence": "Local handoff explicitly reports not deployed; no verified production source SHA obtained"
+    }
+  ],
+  "authorization": {
+    "G1": "NOT_AUTHORIZED",
+    "G2": "NOT_AUTHORIZED",
+    "G3": "NOT_AUTHORIZED",
+    "G4": "NOT_AUTHORIZED",
+    "G5": "NOT_AUTHORIZED",
+    "G6": "NOT_AUTHORIZED",
+    "G7": "NOT_AUTHORIZED"
+  },
+  "providerCalls": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "deploy": false,
+  "remoteMigration": false,
+  "sourceSnapshot": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-SOURCE-SNAPSHOT.json",
+    "sha256": "fece584ce55b6627dbabc8b0a96952323657f92d5a493f496c769f9693cd4dc6"
+  },
+  "localPreflight": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-LOCAL-PREFLIGHT.json",
+    "sha256": "defa2eb5027ae45d6be987dce7cc17c5d718da1970f52d786cc0103049ada464"
+  },
+  "importBuild": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-FROZEN-IMPORT-BUILD.json",
+    "sha256": "23e880644146054d3570c94a2798b5eefdac3f96dbe0c3a4271dd26f9d0283d8"
+  },
+  "workingTreeDrift": [],
+  "releaseSourceSelection": "Existing immutable HEAD, not concurrent working-tree changes",
+  "P9_RC_DIGEST": "9601fb56fc345eed485d4b23df29e51e25112e4712e70b71fb6f77a27e88ce43",
+  "digestAlgorithm": "SHA256 of JSON.stringify(candidate before P9_RC_DIGEST and digestAlgorithm fields)"
+}

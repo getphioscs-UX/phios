@@ -1,5 +1,6 @@
 import {personIdentity,loadCanonicalPersonSubject} from '../account/canonical-person-store.js';
 import {ownedReportPresentation} from '../commerce/book-commerce-store.js';
+import {requireP9Owner} from './p9-canary-admission.js';
 import {executeAndProjectMcd5CurrentRequest} from '../method-client-delivery/canonical-projection-runtime-current.js';
 import {reportBirthInputFingerprint} from '../canonical-presentation-runtime/report-cover-subject.js';
 import {sha256Stable} from '../interpretation-runtime/mir7-utils.js';
@@ -8,7 +9,7 @@ const fail=(code,status)=>{throw Object.assign(new Error(code),{code,status});};
 // registration is added. Existing Commerce and person owners remain mandatory.
 export async function prepareAccountBaziCandidate(context,selection){
  const owner=personIdentity(context).userId;
- if(!['local','qa','preview'].includes(context.env?.PHIOS_ENVIRONMENT))fail('BAZI_CANDIDATE_PRODUCTION_NOT_ADMITTED',403);
+ if(!['local','qa','preview'].includes(context.env?.PHIOS_ENVIRONMENT))requireP9Owner(context.env,owner,{allowExpired:true});
  if(!selection||Object.keys(selection).some(k=>k!=='personId')||typeof selection.personId!=='string'||!selection.personId)fail('BAZI_SUBJECT_SELECTION_REQUIRED',400);
  const right=await ownedReportPresentation(context.env,owner,'COM-REPORT-BAZI-FULL');
  if(!right)fail('BAZI_ENTITLEMENT_REQUIRED',403);

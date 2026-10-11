@@ -1,5 +1,6 @@
 import {personIdentity} from '../account/canonical-person-store.js';
 import {commerceEnvironment} from '../commerce/commerce-environment.js';
+import {requireP9Owner,requireP9Job} from './p9-canary-admission.js';
 import {PAID_REPORT_METHODS} from './paid-report-method-registry.js';
 import {paidReportStateStore} from './paid-report-state-store.js';
 import {PAID_REPORT_POLICY,TERMINAL_PAID_STATES,paidReportError,classifyReportFailure} from './paid-report-policy.js';
@@ -10,6 +11,7 @@ import {paidReportWorkerContext} from './paid-report-worker-fence.js';
 import {reconcilePaidReportDurableTruth} from './paid-report-reconciler.js';
 export async function ensureVerifiedPaidReportJob(env,order,{registry=PAID_REPORT_METHODS,clock=Date.now}={}){
  requireSharedPaidReportLocal(env);const store=paidReportStateStore(env,clock),db=store.db,intentId=JSON.parse(order.context_json||'{}').reportIntentId;
+ if(commerceEnvironment(env)==='LIVE'){const policy=requireP9Owner(env,order.customer_id,{clock,allowExpired:true});if(order.product_id!==policy.product||JSON.parse(order.context_json||'{}').p9Canary?.releaseCandidateDigest!==policy.releaseCandidateDigest)throw paidReportError('P9_PAYMENT_SCOPE_MISMATCH');}
  if(!intentId)return null;const r=await store.readiness(intentId,order.customer_id),adapter=registry[r?.methodCode];
  if(!r||!adapter?.p8Admitted||r.productId!==order.product_id||r.state!=='READY_TO_PAY')throw paidReportError('PAYMENT_READINESS_BINDING_REQUIRED');
  const p=await db.prepare("SELECT p.* FROM commerce_purchases p JOIN digital_entitlements e ON e.purchase_id=p.purchase_id JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=p.checkout_attempt_id WHERE p.checkout_attempt_id=? AND p.customer_id=? AND p.product_id=? AND p.purchase_state='purchased' AND e.entitlement_status='active' AND e.product_id=p.product_id AND e.customer_id=p.customer_id AND o.order_state='FULFILLED' AND o.review_required=0 AND o.environment=?").bind(order.checkout_attempt_id,order.customer_id,order.product_id,commerceEnvironment(env)).first();
@@ -21,9 +23,10 @@ export async function ensureVerifiedPaidReportJob(env,order,{registry=PAID_REPOR
 }
 export function sharedPaidReportCore(context,{registry=PAID_REPORT_METHODS,clock=Date.now,refundTransport,crashAfter,observe=()=>{}}={}){
  requireSharedPaidReportLocal(context.env);const owner=personIdentity(context).userId,store=paidReportStateStore(context.env,clock);
+ if(commerceEnvironment(context.env)==='LIVE')requireP9Owner(context.env,owner,{clock,allowExpired:true});
  const methods=['prepare','generate','validate','compile','render','release'],states=['DELIVERY_JOB_CREATED','GENERATING','VALIDATING_OUTPUT','COMPILING_PUBLICATION','RENDERING','RENDERING'];
  const event=(name,j)=>observe({event:name,jobId:j.jobId,methodCode:j.methodCode,productId:j.productId});
- async function owned(id){const j=await store.job(id,owner);if(!j)throw paidReportError('REPORT_JOB_UNAVAILABLE',404);return j;}
+ async function owned(id){const j=await store.job(id,owner);if(!j)throw paidReportError('REPORT_JOB_UNAVAILABLE',404);if(commerceEnvironment(context.env)==='LIVE')requireP9Job(context.env,j);return j;}
  async function execute(id){let j=await owned(id),adapter=registry[j.methodCode];if(!adapter?.p8Admitted)throw paidReportError('METHOD_DELIVERY_ADAPTER_NOT_ADMITTED');if(TERMINAL_PAID_STATES.includes(j.state)){if(j.state==='DELIVERED')await adapter.verifyDelivered(context,j,j.output);else await verifyPaidReportRefundTerminal(store,j);return j;}j=await store.claim(j);
   const workerContext=paidReportWorkerContext(context,j,clock);
   try{

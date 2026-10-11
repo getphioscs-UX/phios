@@ -1,0 +1,217 @@
+{
+  "status": "PASS_LOCAL_FINAL_FREEZE",
+  "head": "70956df9dab34be311d20e3ac12f958e3aa2f32e",
+  "P9_RC_FINAL_DIGEST": "0760ba6a678f0e3a28910f1240c444bbe9adc725908950439c5ccbe9c5ba0f26",
+  "sourceFilesVerified": 515,
+  "sourceChangedAfterFreeze": false,
+  "originalEvidencePreserved": true,
+  "reviewWidths": [
+    1440,
+    390
+  ],
+  "overflow": false,
+  "localLinks": "PASS",
+  "commands": [
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p9r0-release-readiness.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p9r0-existing-refund-webhooks.mjs",
+      "exitCode": 0,
+      "cases": 16
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8-shared-core.mjs (P8_RESULT_PATH=P9R0-QA-SHARED-CORE.json)",
+      "exitCode": 0,
+      "cases": 11
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8-checkout-api-negatives.mjs (P8_RESULT_PATH=P9R0-QA-CHECKOUT-NEGATIVES.json)",
+      "exitCode": 0,
+      "cases": 8
+    },
+    {
+      "command": "node scripts/build-p9-bazi-render-fit.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "Wrangler renderer/watchdog --dry-run (exact commands in target manifest)",
+      "exitCode": 0,
+      "components": 2
+    },
+    {
+      "command": "node scripts/check-p9r0-review-page.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "unrelatedChanges": [
+    {
+      "status": " M",
+      "path": "content/knowledge/answer-projection/maintenance/kap-m14-manuscript-source-access-v1.json"
+    },
+    {
+      "status": " M",
+      "path": "docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json"
+    },
+    {
+      "status": " M",
+      "path": "functions/_lib/knowledge-access-api.js"
+    },
+    {
+      "status": " M",
+      "path": "functions/knowledge-runtime/current-manuscript-server-metadata.js"
+    },
+    {
+      "status": " M",
+      "path": "functions/knowledge-runtime/manuscript-source-runtime.js"
+    },
+    {
+      "status": " M",
+      "path": "scripts/build-manuscript-server-metadata.mjs"
+    },
+    {
+      "status": " M",
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-V3-REVISION-INTRO-ANSWERS.json"
+    },
+    {
+      "status": " M",
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-V3-REVISION-NATURAL-REGRESSION.json"
+    },
+    {
+      "status": " M",
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-II-CUSTOMER-ANSWERS.json"
+    },
+    {
+      "status": " M",
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-III-CUSTOMER-ANSWERS.json"
+    },
+    {
+      "status": " M",
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-BUILD-RECEIPT.json"
+    },
+    {
+      "status": " M",
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-INDEPENDENT-SCOPE-RESULTS.json"
+    },
+    {
+      "status": " M",
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-LOCAL-RELEASE-REGRESSION.json"
+    },
+    {
+      "status": " M",
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-PRODUCTION-RELEASE-HISTORY.json"
+    },
+    {
+      "status": " M",
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-PRODUCTION-RELEASE.json"
+    },
+    {
+      "status": " M",
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-SCOPED-CUSTOMER-ANSWERS.json"
+    },
+    {
+      "status": " M",
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-SERVER-METADATA-IDENTITY.json"
+    },
+    {
+      "status": " M",
+      "path": "tools/review/free-ask-manuscript-r1/SEVEN-CURRENT-BOOK-LIVE-INVENTORY.json"
+    },
+    {
+      "status": "??",
+      "path": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-answer-fit.js"
+    },
+    {
+      "status": "??",
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v7-candidate.json"
+    },
+    {
+      "status": "??",
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v7.json"
+    },
+    {
+      "status": "??",
+      "path": "content/knowledge/source-access/registries/manuscript-text-scope-candidates-v5.json"
+    },
+    {
+      "status": "??",
+      "path": "scripts/activate-book-i-current-verified-source.mjs"
+    },
+    {
+      "status": "??",
+      "path": "scripts/check-book-i-iii-current-batch-customer-answers.mjs"
+    },
+    {
+      "status": "??",
+      "path": "scripts/prepare-book-i-iii-current-batch-candidate.mjs"
+    },
+    {
+      "status": "??",
+      "path": "scripts/reconcile-book-i-failed-deployment-binding.mjs"
+    },
+    {
+      "status": "??",
+      "path": "scripts/reconcile-production-renderer-source-audit.mjs"
+    },
+    {
+      "status": "??",
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-CURRENT-BATCH-FINAL-HOLDOUT-INITIAL-FAILURES.json"
+    },
+    {
+      "status": "??",
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-CURRENT-BATCH-FINAL-HOLDOUT.json"
+    },
+    {
+      "status": "??",
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-CURRENT-BATCH-UNSEEN-ANSWERS-INITIAL-FAILURES.json"
+    },
+    {
+      "status": "??",
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-CURRENT-BATCH-UNSEEN-ANSWERS.json"
+    },
+    {
+      "status": "??",
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-CURRENT-PRODUCTION-METADATA-QA.json"
+    },
+    {
+      "status": "??",
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-III-CURRENT-BATCH-FRESH-ANSWERS-INITIAL-FAILURES.json"
+    },
+    {
+      "status": "??",
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-III-CURRENT-BATCH-FRESH-ANSWERS.json"
+    },
+    {
+      "status": "??",
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-III-CURRENT-BATCH-REGRESSION-INITIAL-FAILURES.json"
+    },
+    {
+      "status": "??",
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-III-CURRENT-BATCH-REGRESSION.json"
+    },
+    {
+      "status": "??",
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-V3-DEPLOYMENT-BINDING-FAILURE.json"
+    }
+  ],
+  "newScreenshots": 0,
+  "ignoredArtifacts": [
+    "tmp/p9*",
+    "workers/method-report-renderer/tmp",
+    "workers/paid-report-watchdog/tmp"
+  ],
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "productionSecretReads": 0,
+  "commit": false,
+  "push": false,
+  "deploy": false,
+  "remoteMigration": false
+}

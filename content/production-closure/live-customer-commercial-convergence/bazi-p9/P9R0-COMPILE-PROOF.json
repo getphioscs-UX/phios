@@ -1,0 +1,50 @@
+{
+  "status": "PASS_LOCAL",
+  "frozenBundles": [
+    {
+      "entry": "functions/api/account-paid-report-setup.js",
+      "status": "PASS_LOCAL",
+      "outputBytes": 2191834
+    },
+    {
+      "entry": "functions/api/commerce-checkout.js",
+      "status": "PASS_LOCAL",
+      "outputBytes": 2230537
+    },
+    {
+      "entry": "functions/api/stripe-webhook.js",
+      "status": "PASS_LOCAL",
+      "outputBytes": 2277146
+    },
+    {
+      "entry": "functions/api/account-method-reports.js",
+      "status": "PASS_LOCAL",
+      "outputBytes": 2197254
+    },
+    {
+      "entry": "workers/method-report-renderer/production.js",
+      "status": "PASS_LOCAL",
+      "outputBytes": 895901
+    },
+    {
+      "entry": "workers/paid-report-watchdog/index.js",
+      "status": "PASS_LOCAL",
+      "outputBytes": 2217783
+    }
+  ],
+  "wranglerDryRuns": [
+    {
+      "command": "node scripts/build-p9-bazi-render-fit.mjs; node node_modules/wrangler/bin/wrangler.js deploy --config workers/method-report-renderer/wrangler.production.jsonc --dry-run --outdir <absolute ignored-output>",
+      "exitCode": 0,
+      "stdout": "--dry-run: exiting now."
+    },
+    {
+      "command": "node node_modules/wrangler/bin/wrangler.js deploy --config workers/paid-report-watchdog/wrangler.jsonc --dry-run --outdir <absolute ignored-output>",
+      "exitCode": 0,
+      "stdout": "--dry-run: exiting now."
+    }
+  ],
+  "snapshot": "tmp/p9r0-release-snapshot-bad6b7df6fd5d4518613f6a77ebac7d86e6b33455eb3ac051625a2eb6a5e3cfb",
+  "deploy": false,
+  "providerCalls": 0
+}

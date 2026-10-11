@@ -1,0 +1,87 @@
+{
+  "status": "SOURCE_DEFINED_NOT_DEPLOYED",
+  "sourceDigest": "bad6b7df6fd5d4518613f6a77ebac7d86e6b33455eb3ac051625a2eb6a5e3cfb",
+  "components": [
+    {
+      "component": "Pages / Functions + shared core",
+      "sourcePath": "wrangler.jsonc",
+      "buildCommand": "node scripts/build-cloudflare-pages.mjs (only in isolated exact release checkout; generates metadata and cleans its output)",
+      "compileCommand": "node node_modules/wrangler/bin/wrangler.js pages functions build functions --outdir <ignored-output> --compatibility-date 2026-07-14 --compatibility-flags nodejs_compat",
+      "deploymentTarget": "phios-github",
+      "environment": "production",
+      "bindings": [
+        "RUNTIME_DB",
+        "PRIVATE_REPORTS",
+        "MANUSCRIPTS",
+        "METHOD_REPORT_RENDERER"
+      ],
+      "migrationDependency": 18,
+      "rollbackTarget": "Previous verified deployed Pages SHA; resolve in G3 preflight"
+    },
+    {
+      "component": "Method report renderer",
+      "sourcePath": "workers/method-report-renderer/wrangler.production.jsonc",
+      "buildCommand": "node scripts/build-p9-bazi-render-fit.mjs; node node_modules/wrangler/bin/wrangler.js deploy --config workers/method-report-renderer/wrangler.production.jsonc --dry-run --outdir <absolute ignored-output>",
+      "deploymentTarget": "phios-method-report-renderer-production",
+      "environment": "production",
+      "bindings": [
+        "BROWSER"
+      ],
+      "migrationDependency": null,
+      "rollbackTarget": "Disable PHIOS_P9_RENDERER_ENABLED; retain private objects; restore previous accepted renderer revision when one exists"
+    },
+    {
+      "component": "Watchdog scheduler",
+      "sourcePath": "workers/paid-report-watchdog/wrangler.jsonc",
+      "buildCommand": "node node_modules/wrangler/bin/wrangler.js deploy --config workers/paid-report-watchdog/wrangler.jsonc --dry-run --outdir <absolute ignored-output>",
+      "deploymentTarget": "phios-paid-report-watchdog-production",
+      "environment": "production",
+      "bindings": [
+        "RUNTIME_DB",
+        "PRIVATE_REPORTS",
+        "METHOD_REPORT_RENDERER"
+      ],
+      "cron": [
+        "*/2 * * * *"
+      ],
+      "handler": "workers/paid-report-watchdog/index.js scheduled -> runP9Watchdog -> sweepPaidReports",
+      "fencing": "Existing lease/version/claim fence unchanged; scans filtered by private owner/product/person/readiness",
+      "migrationDependency": 18,
+      "rollbackTarget": "PHIOS_P9_WATCHDOG_SAFE_MODE=true; PHIOS_P9_WATCHDOG_ENABLED=false; do not erase jobs"
+    },
+    {
+      "component": "D1",
+      "sourcePath": "db/migrations/0018_shared_paid_report_delivery.sql",
+      "buildCommand": "Existing local governed migration checks",
+      "deploymentTarget": "phios-runtime-production",
+      "environment": "production",
+      "bindings": [
+        "RUNTIME_DB"
+      ],
+      "migrationDependency": 18,
+      "rollbackTarget": "Retain additive migration and tables; revert code only after in-flight reconciliation"
+    },
+    {
+      "component": "Private report storage",
+      "sourcePath": "wrangler.jsonc",
+      "buildCommand": "Binding configuration validation",
+      "deploymentTarget": "phios-private-reports",
+      "environment": "production",
+      "bindings": [
+        "PRIVATE_REPORTS"
+      ],
+      "migrationDependency": null,
+      "rollbackTarget": "Preserve all immutable customer objects and material receipts"
+    }
+  ],
+  "productionRendererVersion": "P9-BZR-RENDERER-1",
+  "acceptedBaziRendererVersion": "BDM-RENDERER-3",
+  "productionAssetOrigins": [
+    "https://phios-github.pages.dev",
+    "https://assets.getphios.com",
+    "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev"
+  ],
+  "verificationImport": "workers/method-report-renderer/bazi-verification.js",
+  "browserFit": "Existing accepted measurement owner bundled locally; no public Functions module dependency",
+  "runtimeBindings": "RUNTIME_UNVERIFIED"
+}

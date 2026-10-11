@@ -1,16 +1,18 @@
 import {personIdentity} from '../account/canonical-person-store.js';
 import {PAID_REPORT_POLICY,paidReportError} from './paid-report-policy.js';
+import {p9Policy,requireP9Owner} from './p9-canary-admission.js';
 import {paidReportStateStore} from './paid-report-state-store.js';
 import {PAID_REPORT_METHODS,paidReportMethodForProduct} from './paid-report-method-registry.js';
-export function requireSharedPaidReportLocal(env){if(!['local','qa','preview'].includes(env?.PHIOS_ENVIRONMENT))throw paidReportError('SHARED_PAID_REPORT_PRODUCTION_NOT_ADMITTED',403);}
+export function requireSharedPaidReportLocal(env){if(!['local','qa','preview'].includes(env?.PHIOS_ENVIRONMENT))p9Policy(env,{allowExpired:true});}
 const states={PHIOS_SYSTEM:'SYSTEM_AUTO_REPAIRING',CUSTOMER_INPUT:'CUSTOMER_INPUT_REQUIRED',EXTERNAL_TEMPORARY_SERVICE:'TEMPORARY_SERVICE_RECOVERY',METHOD_SCOPE:'METHOD_SCOPE_ALTERNATIVE'};
 export function readinessBlocker(error){const code=error.code||error.message;const responsibilityOwner=error.responsibilityOwner||(/PERSON_NOT_FOUND|BIRTH_|CONSENT|PLACE_|SUBJECT_SELECTION/.test(code)?'CUSTOMER_INPUT':/UNSUPPORTED|SCOPE/.test(code)?'METHOD_SCOPE':/TEMPORARY_PROVIDER|SERVICE_UNAVAILABLE/.test(code)?'EXTERNAL_TEMPORARY_SERVICE':'PHIOS_SYSTEM');return {blockerCode:code,blockerClass:responsibilityOwner,responsibilityOwner,state:states[responsibilityOwner]};}
 export async function evaluatePaidReportReadiness(context,selection,{registry=PAID_REPORT_METHODS,clock=Date.now}={}){
- requireSharedPaidReportLocal(context.env);const owner=personIdentity(context).userId,store=paidReportStateStore(context.env,clock),prior=selection.readinessId?await store.readiness(selection.readinessId,owner):null;
+ requireSharedPaidReportLocal(context.env);const owner=personIdentity(context).userId,store=paidReportStateStore(context.env,clock),policy=context.env.STRIPE_ENVIRONMENT==='LIVE'?requireP9Owner(context.env,owner,{clock}):null,prior=selection.readinessId?await store.readiness(selection.readinessId,owner):policy?await store.readiness(policy.readinessId,owner):null;
+ if(policy&&(selection.methodCode!=='BZR'||selection.personId!==policy.personId))throw paidReportError('P9_SUBJECT_OR_METHOD_DENIED',403);
  if(selection.readinessId&&!prior)throw paidReportError('REPORT_SETUP_UNAVAILABLE',404);
  const method=registry[selection.methodCode||prior?.methodCode];if(!method?.p8Admitted)throw paidReportError('METHOD_DELIVERY_ADAPTER_NOT_ADMITTED');
  if(prior&&(selection.methodCode&&selection.methodCode!==prior.methodCode||selection.presentation&&JSON.stringify(selection.presentation)!==JSON.stringify(prior.presentation)))throw paidReportError('REPORT_SETUP_IDENTITY_INVALID');
- const r=prior||{readinessId:'intent_'+crypto.randomUUID().replaceAll('-',''),ownerAccountId:owner,productId:method.productId,methodCode:method.methodCode,personId:selection.personId,presentation:selection.presentation,createdAt:clock(),attempts:0};
+ const r=prior||{readinessId:policy?.readinessId||'intent_'+crypto.randomUUID().replaceAll('-',''),ownerAccountId:owner,productId:method.productId,methodCode:method.methodCode,personId:selection.personId,presentation:selection.presentation,createdAt:clock(),attempts:0};
  if(!r.personId||r.personId!== (selection.personId||r.personId)||r.productId!==method.productId)throw paidReportError('REPORT_SETUP_IDENTITY_INVALID');
  if(!r.presentation||Object.keys(r.presentation).some(k=>!['reportLocale','reportLanguageMode'].includes(k)))throw paidReportError('REPORT_PRESENTATION_REQUIRED',422);
  if(!method.supportedPresentations.includes(r.presentation?.reportLocale)||r.presentation.reportLanguageMode!==(r.presentation.reportLocale==='bilingual'?'BILINGUAL':'SINGLE'))throw paidReportError('REPORT_PRESENTATION_REQUIRED',422);
@@ -19,7 +21,7 @@ export async function evaluatePaidReportReadiness(context,selection,{registry=PA
  await store.saveReadiness(r);return r;
 }
 export async function requirePaidReportCheckout(context,{productId,readinessId,presentation},{registry=PAID_REPORT_METHODS,clock=Date.now}={}){
- requireSharedPaidReportLocal(context.env);const owner=personIdentity(context).userId,r=await paidReportStateStore(context.env,clock).readiness(readinessId||'',owner),adapter=Object.values(registry).find(a=>a.productId===productId);
+ requireSharedPaidReportLocal(context.env);const owner=personIdentity(context).userId;if(context.env.STRIPE_ENVIRONMENT==='LIVE')requireP9Owner(context.env,owner,{clock});const r=await paidReportStateStore(context.env,clock).readiness(readinessId||'',owner),adapter=Object.values(registry).find(a=>a.productId===productId);
  if(!r||!adapter?.p8Admitted||r.state!=='READY_TO_PAY'||r.productId!==productId||r.methodCode!==adapter.methodCode||r.expiresAt<=clock()||r.presentation.reportLocale!==presentation.reportLocale||r.presentation.reportLanguageMode!==presentation.reportLanguageMode)throw paidReportError('PAID_REPORT_READINESS_REQUIRED',409);
  // Current server person/config is checked again; old READY bytes cannot admit a changed subject.
  const current=await adapter.readiness(context,r);if(current.personVersion!==r.personVersion||current.inputDigest!==r.inputDigest||current.authorityDigest!==r.authorityDigest||['inputValid','calculationReady','authorityReady','publicationPreflightReady','rendererReady','productionConfigReady','commercialProductReady'].some(k=>current[k]!==true))throw paidReportError('PAID_REPORT_READINESS_STALE');return r;

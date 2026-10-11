@@ -67,7 +67,7 @@ export async function onRequestPost({
       commerceLog('ENTITLEMENT_SKIPPED_DUPLICATE',{stripe_event_id:event.id});
       return json({ success: true, replay: true });
     }
-    const successor = event.data?.object?.metadata?.schema_version === 'COM-STRIPE-R1' || env.STRIPE_ENVIRONMENT === 'QA' && event.data?.object?.metadata?.product_id !== 'phios-book-one-zh-pdf';
+    const successor = event.data?.object?.metadata?.schema_version === 'COM-STRIPE-R1' || env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&/^refund\.(created|updated|failed)$/.test(event.type)&&typeof event.data?.object?.metadata?.paid_report_refund_key==='string' || env.STRIPE_ENVIRONMENT === 'QA' && event.data?.object?.metadata?.product_id !== 'phios-book-one-zh-pdf';
     const result = await (successor ? processCommerceStripeEvent : processStripeEvent)({
       env,
       event,

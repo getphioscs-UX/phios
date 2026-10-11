@@ -1,0 +1,172 @@
+{
+  "status": "PASS_LOCAL",
+  "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p9-local-preflight.mjs",
+  "head": "70956df9dab34be311d20e3ac12f958e3aa2f32e",
+  "startedAt": "2026-10-11T12:45:07.299Z",
+  "rows": [
+    {
+      "name": "accepted P7 and P8 dependency hashes",
+      "status": "PASS_LOCAL",
+      "elapsedMs": 55,
+      "details": {
+        "dependencies": 304,
+        "p8": "PASS_LOCAL",
+        "p7": "UNCHANGED",
+        "acceptance": "VALID"
+      }
+    },
+    {
+      "name": "governed fresh and upgrade migration 18",
+      "status": "PASS_LOCAL",
+      "elapsedMs": 88,
+      "details": [
+        {
+          "mode": "fresh",
+          "applied": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18
+          ],
+          "reapply": 0
+        },
+        {
+          "mode": "upgrade",
+          "applied": [
+            18
+          ],
+          "reapply": 0
+        }
+      ]
+    },
+    {
+      "name": "native BZR readiness and prepayment owner gates",
+      "status": "PASS_LOCAL",
+      "elapsedMs": 189,
+      "details": {
+        "fixture": "existing synthetic local encrypted canonical account",
+        "readiness": "READY_TO_PAY",
+        "forged": "BLOCKED",
+        "expired": "BLOCKED",
+        "live": "PRODUCTION_NOT_ADMITTED",
+        "rendererCalls": 0
+      }
+    },
+    {
+      "name": "other methods shared admission blocked",
+      "status": "PASS_LOCAL",
+      "elapsedMs": 0,
+      "details": {
+        "blocked": [
+          "ZWR",
+          "AST",
+          "PROFILE",
+          "NUM",
+          "FINANCIAL",
+          "ECR",
+          "HD",
+          "CROSS"
+        ],
+        "scope": "Shared P8 adapter admission only; independent existing LIVE admissions not assessed or altered"
+      }
+    },
+    {
+      "name": "stale watchdog and synthetic refund",
+      "status": "PASS_LOCAL",
+      "elapsedMs": 1636,
+      "details": {
+        "staleLease": "DELIVERED",
+        "terminalReplay": "PASS",
+        "syntheticRefund": "REFUNDED",
+        "syntheticRefundExecutions": 1,
+        "realRefunds": 0
+      }
+    },
+    {
+      "name": "frozen model, economics and canonical bilingual quote",
+      "status": "PASS_LOCAL",
+      "elapsedMs": 1,
+      "details": {
+        "model": "gpt-5.6-sol",
+        "providerPolicy": {
+          "modelId": "gpt-5.6-sol",
+          "normalCalls": 3,
+          "maxStandardRecoveryCalls": 2,
+          "deliveryRescue": true,
+          "paidDeliveryGuarantee": true,
+          "semanticVerifierCalls": 0,
+          "semanticReviewCalls": 0,
+          "editorialRewriteCalls": 0
+        },
+        "economics": {
+          "priceMYR": 59,
+          "lifecycleProviderCapUSD": 4,
+          "generationAndRepairCeilingUSD": 3.6,
+          "followupReserveUSD": 0.4,
+          "includedFollowupQuestions": 4,
+          "costScope": "REPORT_REPAIR_BILINGUAL_AND_FOUR_FOLLOWUPS"
+        },
+        "canonicalQuote": {
+          "reportLanguageMode": "BILINGUAL",
+          "reportLocale": "bilingual",
+          "productId": "BAZI_FULL_REPORT",
+          "currency": "MYR",
+          "baseAmountMinor": 5900,
+          "surchargeAmountMinor": 1000,
+          "amountMinor": 6900,
+          "pricingVersion": "PHIOS-COMMERCE-2026-10-09",
+          "modifierRule": "INDIVIDUAL_BILINGUAL",
+          "selectedProductIds": [
+            "BAZI_FULL_REPORT"
+          ]
+        },
+        "liveProductBound": true,
+        "livePriceBound": true,
+        "priceAuthority": "Current Commerce quote; Stripe LIVE parity remains unverified"
+      }
+    },
+    {
+      "name": "actual Commerce nonready checkout rejects before Stripe",
+      "status": "PASS_LOCAL",
+      "elapsedMs": 835,
+      "details": {
+        "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8-checkout-api-negatives.mjs (P8_RESULT_PATH=P9-CHECKOUT-NEGATIVES.json)",
+        "exitCode": 0,
+        "cases": 8,
+        "stripeCalls": 0
+      }
+    },
+    {
+      "name": "release dependency stability and imports",
+      "status": "PASS_LOCAL",
+      "elapsedMs": 315,
+      "details": {
+        "dependencies": 508,
+        "headStable": true,
+        "networkCalls": 0
+      }
+    }
+  ],
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "remoteMigrations": 0,
+  "exitCode": 0,
+  "networkCalls": 0,
+  "finishedAt": "2026-10-11T12:45:10.425Z"
+}

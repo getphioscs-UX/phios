@@ -1,11 +1,12 @@
 import {requireSameOrigin} from '../account/oidc-auth.js';
 import {personIdentity} from '../account/canonical-person-store.js';
+import {requireP9Owner} from '../report-delivery/p9-canary-admission.js';
 import {resolveMethodDeliveryAdapter,openOwnedMethodReport,listOwnedMethodReports} from '../account/method-report-delivery.js';
 const headers={'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Robots-Tag':'noindex, nofollow'};
 export async function onRequest(context){
  try{
   personIdentity(context);
-  if(!['local','qa','preview'].includes(context.env?.PHIOS_ENVIRONMENT))return Response.json({ok:false,code:'METHOD_REPORT_DELIVERY_NOT_ADMITTED'},{status:403,headers});
+  if(!['local','qa','preview'].includes(context.env?.PHIOS_ENVIRONMENT))requireP9Owner(context.env,personIdentity(context).userId,{allowExpired:true});
   if(context.request.method==='GET'){
    const id=new URL(context.request.url).searchParams.get('reportId');
    if(id){const {html}=await openOwnedMethodReport(context,id);const download=new URL(context.request.url).searchParams.get('download')==='1';return new Response(html,{headers:{...headers,...(download?{'Content-Disposition':'attachment; filename="PHI-OS-report.html"'}:{}),'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':"default-src 'none'; img-src 'self' data: https://assets.getphios.com https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'none'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'"}});}

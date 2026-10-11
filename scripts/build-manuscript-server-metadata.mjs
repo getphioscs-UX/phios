@@ -1,11 +1,12 @@
 import fs from 'node:fs';
 import crypto from 'node:crypto';
-const registry='content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v5.json';
+const registry='content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v7.json';
 const records=JSON.parse(fs.readFileSync(registry)).records;
 const reviewedRegistry='content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json';
 const reviewed=JSON.parse(fs.readFileSync(reviewedRegistry));
 const paths=[...new Set([registry,reviewedRegistry,reviewed.humanReviewResolution,...records.flatMap(r=>[r.sourceAcceptancePath,r.acceptancePath,r.scopeAdmissionPath]).filter(Boolean)])];
 const raw=Object.fromEntries(paths.map(p=>[p,fs.readFileSync(p,'utf8')]));
+raw.ACTIVE_MANUSCRIPT_SOURCE_REGISTRY=registry;
 // Only bounded registry/acceptance metadata is bundled; no manuscript body.
 for(const p of paths)if(!/^content\/knowledge\/(?:source-access\/registries|manuscripts\/review)\//.test(p)&&p!==reviewed.humanReviewResolution)throw Error('NON_METADATA_BUNDLE_INPUT');
 fs.writeFileSync('functions/knowledge-runtime/current-manuscript-server-metadata.js','// Generated bounded source identity metadata. Private corpus remains in MANUSCRIPTS R2.\nexport const manuscriptMetadataRaw = '+JSON.stringify(raw)+';\n');

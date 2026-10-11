@@ -1,0 +1,148 @@
+{
+  "status": "PASS_LOCAL_PREPARATION_WITH_PRODUCTION_GAPS",
+  "head": "70956df9dab34be311d20e3ac12f958e3aa2f32e",
+  "P9_RC_DIGEST": "9601fb56fc345eed485d4b23df29e51e25112e4712e70b71fb6f77a27e88ce43",
+  "candidateDigestVerified": true,
+  "snapshotFilesVerified": 508,
+  "protectedEvidencePreserved": true,
+  "commands": [
+    {
+      "command": "node scripts/prepare-p9-release.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p9-local-preflight.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/finalize-p9-preparation.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/check-p9-review-page.mjs",
+      "initialExitCode": 1,
+      "initialFailure": "Sandbox browser startup; second attempt 390px status text overflow",
+      "finalExitCode": 0
+    },
+    {
+      "status": "PASS_LOCAL_COMPILE_ONLY",
+      "command": "WRANGLER_SEND_METRICS=false WRANGLER_LOG_PATH=C:/phios/tmp/p9-functions-build/logs node node_modules/wrangler/bin/wrangler.js pages functions build functions --outdir tmp/p9-functions-build --compatibility-date 2026-07-14 --compatibility-flags nodejs_compat",
+      "exitCode": 0,
+      "initialAttempt": {
+        "exitCode": 0,
+        "warning": "EPERM while writing global Wrangler log; worker compilation succeeded"
+      },
+      "retry": {
+        "exitCode": 0,
+        "stdout": "Compiled Worker successfully"
+      },
+      "bundle": {
+        "path": "tmp/p9-functions-build/_worker.js",
+        "bytes": 15210453,
+        "sha256": "6166128da245ea1f9c9ed17f794a7cbbfc87684cfbcee557f8bf18b6cf36ccfd"
+      },
+      "scope": "Whole Pages Functions from current working tree; concurrent Knowledge changes excluded from immutable RC. Not production or deployed proof."
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "review": {
+    "path": "tools/review/P9-BAZI-LIVE-CANARY-HUMAN-REVIEW.html",
+    "sha256": "64780c795038aa364b96af782f85404994c8513f5e201718a32f41f7290fe9c3",
+    "widths": [
+      1440,
+      390
+    ],
+    "overflow": false,
+    "localLinks": "PASS",
+    "runtimeErrors": 0
+  },
+  "screenshots": {
+    "count": 1,
+    "totalBytes": 380508,
+    "files": [
+      {
+        "path": "tmp/p9-review-artifacts/P9-REVIEW-FAILURE-1791722923139.png",
+        "bytes": 380508,
+        "sha256": "4f30ae359eac979a4f7616c52c7ef6db8a57e945f62a8d39c3147e2cb5d76606",
+        "reason": "390px initial review overflow; fixed by wrapping long status strings",
+        "archive": "Ignored local folder; retain failure evidence; no deletion or automatic commit"
+      }
+    ],
+    "newSuccessfulScreenshots": 0
+  },
+  "archivePlan": {
+    "snapshot": "tmp/p9-release-snapshot-70956df9dab34be311d20e3ac12f958e3aa2f32e",
+    "build": "tmp/p9-functions-build",
+    "screenshots": "tmp/p9-review-artifacts",
+    "ignored": true,
+    "delete": false
+  },
+  "commitExclusions": [
+    "tmp/**",
+    "*.png",
+    "*.pdf",
+    "*.sqlite",
+    "QA private objects",
+    "large transient logs",
+    "all unrelated concurrent changes"
+  ],
+  "productionGaps": [
+    {
+      "id": "PRODUCTION_RENDERER_BINDING_MISSING",
+      "owner": "wrangler.jsonc",
+      "evidence": "METHOD_REPORT_RENDERER exists only in preview and points to QA worker; production services absent"
+    },
+    {
+      "id": "PRODUCTION_RENDERER_TARGET_MISSING",
+      "owner": "workers/method-report-renderer/wrangler.jsonc",
+      "evidence": "Only QA worker target exists; no governed production renderer target defined"
+    },
+    {
+      "id": "WATCHDOG_PRODUCTION_TRIGGER_MISSING",
+      "owner": "functions/report-delivery/paid-report-watchdog.js",
+      "evidence": "Exports scheduler port only; no Cron/Queue handler or governed scheduler configuration found"
+    },
+    {
+      "id": "LIVE_SHARED_ADMISSION_NOT_IMPLEMENTED",
+      "owner": "functions/report-delivery/paid-report-readiness.js",
+      "evidence": "requireSharedPaidReportLocal allows local/qa/preview only; production denied"
+    },
+    {
+      "id": "LIVE_REFUND_NOT_ARMED",
+      "owner": "functions/commerce/paid-report-refund-transport.js",
+      "evidence": "Existing transport is QA-only; live transport/webhook financial proof not admitted"
+    },
+    {
+      "id": "CANARY_SERVER_ADMISSION_MISSING",
+      "owner": "functions/commerce/controlled-purchase-candidate.js",
+      "evidence": "Existing controlled purchase requires discounted coupons; does not implement canonical-price BZR P9 admission. No policy activated."
+    },
+    {
+      "id": "CANARY_IDENTITY_AND_EXPIRY_UNSELECTED",
+      "owner": "Human",
+      "evidence": "No authorized real account/person, readinessId or bounded expiry supplied"
+    },
+    {
+      "id": "LIVE_SECRET_PRESENCE_UNVERIFIED",
+      "owner": "Production configuration",
+      "evidence": "No secret values read; production presence must be checked through authorized metadata-only inspection"
+    },
+    {
+      "id": "DEPLOYED_SOURCE_UNVERIFIED",
+      "owner": "Deployment records",
+      "evidence": "Local handoff explicitly reports not deployed; no verified production source SHA obtained"
+    }
+  ],
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "remoteMigrations": 0,
+  "commit": false,
+  "push": false,
+  "deploy": false,
+  "r2Deletions": 0
+}

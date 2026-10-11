@@ -1,0 +1,160 @@
+{
+  "status": "PREPARATION_EVIDENCE_GAPS_OPEN",
+  "source": "PASS_LOCAL_PREPARATION",
+  "deployed": "NOT_DEPLOYED",
+  "liveCustomer": "RUNTIME_UNVERIFIED",
+  "deployedCommitSha": null,
+  "releaseCandidateDigest": "9601fb56fc345eed485d4b23df29e51e25112e4712e70b71fb6f77a27e88ce43",
+  "sourceCommitSha": "70956df9dab34be311d20e3ac12f958e3aa2f32e",
+  "P7Baseline": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/BAZI-R2-CURRENT-PRODUCTION-PUBLICATION-BASELINE-V3.json",
+    "sha256": "1358ed1f245ec97d185f3d17f1845c4abad0ec79ead2dc3ef20870bcf480726b"
+  },
+  "P8CoreVersion": "P8-SHARED-PAID-REPORT-1-R1",
+  "P8HumanAcceptanceRef": {
+    "path": "content/production-closure/shared-paid-report-delivery/P8-R1-HUMAN-ACCEPTANCE.json",
+    "sha256": "370811b8a60998b7ac4eb6d8e0d688c118ff8148b19cbf7bda0038e967b0c16c"
+  },
+  "migrationVersion": 18,
+  "localPreflight": "PASS_LOCAL",
+  "productionReady": false,
+  "deployment": {
+    "pages": "phios-github: configuration only",
+    "renderer": "Production target missing; QA is phios-method-report-renderer-qa",
+    "watchdog": "Production trigger missing",
+    "database": "phios-runtime-production; remote schema unverified",
+    "privateStorage": "phios-private-reports; runtime unverified"
+  },
+  "canary": {
+    "ownerOpaqueRef": null,
+    "personOpaqueRef": null,
+    "readinessId": null,
+    "orderId": null,
+    "purchaseId": null,
+    "entitlementId": null,
+    "jobId": null,
+    "reportId": null,
+    "presentation": "BILINGUAL",
+    "canonicalAmountMinor": 6900,
+    "currency": "MYR",
+    "policyPlan": {
+      "environment": "LIVE",
+      "method": "BZR",
+      "product": "COM-REPORT-BAZI-FULL",
+      "maximumPurchases": 1,
+      "expiresAt": null,
+      "publicGeneralSale": false,
+      "authority": "Server-only; not activated"
+    }
+  },
+  "provider": {
+    "model": "gpt-5.6-sol",
+    "normalCalls": 0,
+    "recoveryCalls": 0,
+    "rescueCalls": 0,
+    "totalCalls": 0,
+    "actualCostUSD": 0,
+    "hardCapUSD": 4,
+    "generationCeilingUSD": 3.6,
+    "followupReserveUSD": 0.4,
+    "authorizationState": "NOT_AUTHORIZED"
+  },
+  "renderer": {
+    "pass": null,
+    "pageCount": null,
+    "diagramCount": null
+  },
+  "material": {
+    "outputDigest": null,
+    "artifactDigest": null,
+    "accountReopen": "RUNTIME_UNVERIFIED"
+  },
+  "pdf": {
+    "pageCount": null,
+    "a4": null,
+    "continuity": "RUNTIME_UNVERIFIED"
+  },
+  "visual": {
+    "whiteBackground": "P7 local acceptance retained; runtime unverified",
+    "pinkDetected": null
+  },
+  "languageHygiene": "RUNTIME_UNVERIFIED",
+  "followups": {
+    "granted": null,
+    "liveProviderCalls": 0
+  },
+  "watchdog": "LOCAL_PASS_PRODUCTION_TRIGGER_MISSING",
+  "incidents": "RUNTIME_UNVERIFIED",
+  "refund": {
+    "authorizationState": "NOT_AUTHORIZED",
+    "triggered": false,
+    "status": "QA_LOCAL_PASS_LIVE_NOT_ARMED"
+  },
+  "otherMethodsRemainBlocked": {
+    "localSharedAdmission": "PASS_LOCAL",
+    "live": "RUNTIME_UNVERIFIED"
+  },
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "commit": false,
+  "push": false,
+  "deploy": false,
+  "remoteMigration": false,
+  "r2Deletions": 0,
+  "newScreenshots": 0,
+  "remainingBlocker": [
+    {
+      "id": "PRODUCTION_RENDERER_BINDING_MISSING",
+      "owner": "wrangler.jsonc",
+      "evidence": "METHOD_REPORT_RENDERER exists only in preview and points to QA worker; production services absent"
+    },
+    {
+      "id": "PRODUCTION_RENDERER_TARGET_MISSING",
+      "owner": "workers/method-report-renderer/wrangler.jsonc",
+      "evidence": "Only QA worker target exists; no governed production renderer target defined"
+    },
+    {
+      "id": "WATCHDOG_PRODUCTION_TRIGGER_MISSING",
+      "owner": "functions/report-delivery/paid-report-watchdog.js",
+      "evidence": "Exports scheduler port only; no Cron/Queue handler or governed scheduler configuration found"
+    },
+    {
+      "id": "LIVE_SHARED_ADMISSION_NOT_IMPLEMENTED",
+      "owner": "functions/report-delivery/paid-report-readiness.js",
+      "evidence": "requireSharedPaidReportLocal allows local/qa/preview only; production denied"
+    },
+    {
+      "id": "LIVE_REFUND_NOT_ARMED",
+      "owner": "functions/commerce/paid-report-refund-transport.js",
+      "evidence": "Existing transport is QA-only; live transport/webhook financial proof not admitted"
+    },
+    {
+      "id": "CANARY_SERVER_ADMISSION_MISSING",
+      "owner": "functions/commerce/controlled-purchase-candidate.js",
+      "evidence": "Existing controlled purchase requires discounted coupons; does not implement canonical-price BZR P9 admission. No policy activated."
+    },
+    {
+      "id": "CANARY_IDENTITY_AND_EXPIRY_UNSELECTED",
+      "owner": "Human",
+      "evidence": "No authorized real account/person, readinessId or bounded expiry supplied"
+    },
+    {
+      "id": "LIVE_SECRET_PRESENCE_UNVERIFIED",
+      "owner": "Production configuration",
+      "evidence": "No secret values read; production presence must be checked through authorized metadata-only inspection"
+    },
+    {
+      "id": "DEPLOYED_SOURCE_UNVERIFIED",
+      "owner": "Deployment records",
+      "evidence": "Local handoff explicitly reports not deployed; no verified production source SHA obtained"
+    }
+  ],
+  "rollbackPlan": [
+    "Close new checkout and provider admission first; do not delete material or migrations.",
+    "Stop new worker claims; reconcile in-flight provider/refund outcomes before replacement.",
+    "Retain signed payment/refund processing and authenticated immutable account reads.",
+    "Restore code only with explicit acceptance, preserving jobs, private objects and current monetary authority."
+  ]
+}

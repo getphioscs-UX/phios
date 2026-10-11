@@ -1,0 +1,129 @@
+{
+  "status": "VALID_HANDOFF_WITH_PRODUCTION_GAPS",
+  "handoff": {
+    "path": "content/production-closure/shared-paid-report-delivery/P8-TO-P9-HANDOFF.json",
+    "sha256": "fe0807d0177423a14b94b409e9e176d812494befda71b6c78899a639c6c10444"
+  },
+  "handoffPreserved": true,
+  "sharedCoreVersion": "P8-SHARED-PAID-REPORT-1-R1",
+  "adapter": {
+    "path": "functions/report-delivery/paid-report-bazi-adapter.js",
+    "sha256": "46fcbfd1ff3a3da697017801a7d064dba29b5fc938adfd1309ec908438ceb4b5"
+  },
+  "migration": {
+    "version": 18,
+    "name": "shared_paid_report_delivery",
+    "file": "db/migrations/0018_shared_paid_report_delivery.sql",
+    "checksum": "cae6b49b1e439194e945108a9756b0faf6d99c6b294982cc2b8343ffaf7ec215",
+    "schema_id": "phi-os.shared-paid-report-delivery.v1",
+    "immutable": true
+  },
+  "actualTargets": {
+    "pages": "phios-github",
+    "database": [
+      {
+        "binding": "RUNTIME_DB",
+        "database_name": "phios-runtime-production",
+        "database_id": "073639fa-01e4-4868-af10-6ed032637dab",
+        "migrations_dir": "db/migrations"
+      }
+    ],
+    "privateReports": {
+      "binding": "PRIVATE_REPORTS",
+      "bucket_name": "phios-private-reports"
+    },
+    "productionRenderer": null,
+    "qaRenderer": "phios-method-report-renderer-qa",
+    "qaBrowser": {
+      "binding": "BROWSER"
+    },
+    "watchdog": null
+  },
+  "requiredBindings": [
+    "RUNTIME_DB via existing registered migration runner",
+    "PRIVATE_REPORTS private immutable material/artifact storage",
+    "CANONICAL_PERSON_ENCRYPTION_KEY and AUTH_SESSION_SECRET dedicated existing owners",
+    "METHOD_REPORT_RENDERER trusted browser + print + PDF verification service",
+    "PHIOS_SHARED_PAID_REPORT_ENABLED explicit controlled admission"
+  ],
+  "secretPresencePlan": [
+    {
+      "name": "OPENAI_API_KEY",
+      "state": "RUNTIME_UNVERIFIED",
+      "operation": "Metadata names/presence only; never values"
+    },
+    {
+      "name": "STRIPE_SECRET_KEY",
+      "state": "RUNTIME_UNVERIFIED",
+      "operation": "Metadata names/presence only; never values"
+    },
+    {
+      "name": "STRIPE_WEBHOOK_SECRET",
+      "state": "RUNTIME_UNVERIFIED",
+      "operation": "Metadata names/presence only; never values"
+    },
+    {
+      "name": "CANONICAL_PERSON_ENCRYPTION_KEY",
+      "state": "RUNTIME_UNVERIFIED",
+      "operation": "Metadata names/presence only; never values"
+    },
+    {
+      "name": "AUTH_SESSION_SECRET",
+      "state": "RUNTIME_UNVERIFIED",
+      "operation": "Metadata names/presence only; never values"
+    }
+  ],
+  "rollbackPlan": [
+    "Close new checkout and provider admission first; do not delete material or migrations.",
+    "Stop new worker claims; reconcile in-flight provider/refund outcomes before replacement.",
+    "Retain signed payment/refund processing and authenticated immutable account reads.",
+    "Restore code only with explicit acceptance, preserving jobs, private objects and current monetary authority."
+  ],
+  "gaps": [
+    {
+      "id": "PRODUCTION_RENDERER_BINDING_MISSING",
+      "owner": "wrangler.jsonc",
+      "evidence": "METHOD_REPORT_RENDERER exists only in preview and points to QA worker; production services absent"
+    },
+    {
+      "id": "PRODUCTION_RENDERER_TARGET_MISSING",
+      "owner": "workers/method-report-renderer/wrangler.jsonc",
+      "evidence": "Only QA worker target exists; no governed production renderer target defined"
+    },
+    {
+      "id": "WATCHDOG_PRODUCTION_TRIGGER_MISSING",
+      "owner": "functions/report-delivery/paid-report-watchdog.js",
+      "evidence": "Exports scheduler port only; no Cron/Queue handler or governed scheduler configuration found"
+    },
+    {
+      "id": "LIVE_SHARED_ADMISSION_NOT_IMPLEMENTED",
+      "owner": "functions/report-delivery/paid-report-readiness.js",
+      "evidence": "requireSharedPaidReportLocal allows local/qa/preview only; production denied"
+    },
+    {
+      "id": "LIVE_REFUND_NOT_ARMED",
+      "owner": "functions/commerce/paid-report-refund-transport.js",
+      "evidence": "Existing transport is QA-only; live transport/webhook financial proof not admitted"
+    },
+    {
+      "id": "CANARY_SERVER_ADMISSION_MISSING",
+      "owner": "functions/commerce/controlled-purchase-candidate.js",
+      "evidence": "Existing controlled purchase requires discounted coupons; does not implement canonical-price BZR P9 admission. No policy activated."
+    },
+    {
+      "id": "CANARY_IDENTITY_AND_EXPIRY_UNSELECTED",
+      "owner": "Human",
+      "evidence": "No authorized real account/person, readinessId or bounded expiry supplied"
+    },
+    {
+      "id": "LIVE_SECRET_PRESENCE_UNVERIFIED",
+      "owner": "Production configuration",
+      "evidence": "No secret values read; production presence must be checked through authorized metadata-only inspection"
+    },
+    {
+      "id": "DEPLOYED_SOURCE_UNVERIFIED",
+      "owner": "Deployment records",
+      "evidence": "Local handoff explicitly reports not deployed; no verified production source SHA obtained"
+    }
+  ]
+}

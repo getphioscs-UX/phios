@@ -1,0 +1,352 @@
+{
+  "status": "PASS_LOCAL_RELEASE_READY",
+  "originalPreparationStatus": "PREPARATION_EVIDENCE_GAPS_OPEN",
+  "p9Overall": "PREPARED_NOT_DEPLOYED",
+  "source": "PASS_LOCAL_RELEASE_READY",
+  "deployed": "NOT_DEPLOYED",
+  "liveCustomer": "RUNTIME_UNVERIFIED",
+  "allNineGaps": [
+    {
+      "gapId": "PRODUCTION_RENDERER_BINDING_MISSING",
+      "description": "METHOD_REPORT_RENDERER exists only in preview and points to QA worker; production services absent",
+      "owner": "wrangler.jsonc",
+      "currentEvidence": "P9R0 deployable source/config plus local proof",
+      "requiredEvidence": "Source wiring and local negative/compile proof; satisfied",
+      "requiresSourceChange": true,
+      "requiresCommit": true,
+      "requiresPush": true,
+      "requiresDeploy": false,
+      "requiresRemoteMutation": false,
+      "requiresLiveSecretRead": false,
+      "requiresLiveStripeRead": false,
+      "requiresCustomerLogin": false,
+      "canCloseBeforeG1": true,
+      "phaseToClose": "P9R0_SOURCE_CLOSURE",
+      "disposition": "PRE_G1_BLOCKER",
+      "closed": true,
+      "resolution": "Source/configuration definition closed; runtime reachability remains separately planned"
+    },
+    {
+      "gapId": "PRODUCTION_RENDERER_TARGET_MISSING",
+      "description": "Only QA worker target exists; no governed production renderer target defined",
+      "owner": "workers/method-report-renderer/wrangler.jsonc",
+      "currentEvidence": "P9R0 deployable source/config plus local proof",
+      "requiredEvidence": "Source wiring and local negative/compile proof; satisfied",
+      "requiresSourceChange": true,
+      "requiresCommit": true,
+      "requiresPush": true,
+      "requiresDeploy": false,
+      "requiresRemoteMutation": false,
+      "requiresLiveSecretRead": false,
+      "requiresLiveStripeRead": false,
+      "requiresCustomerLogin": false,
+      "canCloseBeforeG1": true,
+      "phaseToClose": "P9R0_SOURCE_CLOSURE",
+      "disposition": "PRE_G1_BLOCKER",
+      "closed": true,
+      "resolution": "Source/configuration definition closed; runtime reachability remains separately planned"
+    },
+    {
+      "gapId": "WATCHDOG_PRODUCTION_TRIGGER_MISSING",
+      "description": "Exports scheduler port only; no Cron/Queue handler or governed scheduler configuration found",
+      "owner": "functions/report-delivery/paid-report-watchdog.js",
+      "currentEvidence": "P9R0 deployable source/config plus local proof",
+      "requiredEvidence": "Source wiring and local negative/compile proof; satisfied",
+      "requiresSourceChange": true,
+      "requiresCommit": true,
+      "requiresPush": true,
+      "requiresDeploy": false,
+      "requiresRemoteMutation": false,
+      "requiresLiveSecretRead": false,
+      "requiresLiveStripeRead": false,
+      "requiresCustomerLogin": false,
+      "canCloseBeforeG1": true,
+      "phaseToClose": "P9R0_SOURCE_CLOSURE",
+      "disposition": "PRE_G1_BLOCKER",
+      "closed": true,
+      "resolution": "Source/configuration definition closed; runtime reachability remains separately planned"
+    },
+    {
+      "gapId": "LIVE_SHARED_ADMISSION_NOT_IMPLEMENTED",
+      "description": "requireSharedPaidReportLocal allows local/qa/preview only; production denied",
+      "owner": "functions/report-delivery/paid-report-readiness.js",
+      "currentEvidence": "P9R0 deployable source/config plus local proof",
+      "requiredEvidence": "Source wiring and local negative/compile proof; satisfied",
+      "requiresSourceChange": true,
+      "requiresCommit": true,
+      "requiresPush": true,
+      "requiresDeploy": false,
+      "requiresRemoteMutation": false,
+      "requiresLiveSecretRead": false,
+      "requiresLiveStripeRead": false,
+      "requiresCustomerLogin": false,
+      "canCloseBeforeG1": true,
+      "phaseToClose": "P9R0_SOURCE_CLOSURE",
+      "disposition": "PRE_G1_BLOCKER",
+      "closed": true,
+      "resolution": "Source/configuration definition closed; runtime reachability remains separately planned"
+    },
+    {
+      "gapId": "LIVE_REFUND_NOT_ARMED",
+      "description": "Existing transport is QA-only; live transport/webhook financial proof not admitted",
+      "owner": "functions/commerce/paid-report-refund-transport.js",
+      "currentEvidence": "P9R0 deployable source/config plus local proof",
+      "requiredEvidence": "Source wiring and local negative/compile proof; satisfied",
+      "requiresSourceChange": true,
+      "requiresCommit": true,
+      "requiresPush": true,
+      "requiresDeploy": false,
+      "requiresRemoteMutation": false,
+      "requiresLiveSecretRead": false,
+      "requiresLiveStripeRead": false,
+      "requiresCustomerLogin": false,
+      "canCloseBeforeG1": true,
+      "phaseToClose": "P9R0_SOURCE_CLOSURE",
+      "disposition": "PRE_G1_BLOCKER",
+      "closed": true,
+      "resolution": "Source/configuration definition closed; runtime reachability remains separately planned"
+    },
+    {
+      "gapId": "CANARY_SERVER_ADMISSION_MISSING",
+      "description": "Existing controlled purchase requires discounted coupons; does not implement canonical-price BZR P9 admission. No policy activated.",
+      "owner": "functions/commerce/controlled-purchase-candidate.js",
+      "currentEvidence": "P9R0 deployable source/config plus local proof",
+      "requiredEvidence": "Source wiring and local negative/compile proof; satisfied",
+      "requiresSourceChange": true,
+      "requiresCommit": true,
+      "requiresPush": true,
+      "requiresDeploy": false,
+      "requiresRemoteMutation": false,
+      "requiresLiveSecretRead": false,
+      "requiresLiveStripeRead": false,
+      "requiresCustomerLogin": false,
+      "canCloseBeforeG1": true,
+      "phaseToClose": "P9R0_SOURCE_CLOSURE",
+      "disposition": "PRE_G1_BLOCKER",
+      "closed": true,
+      "resolution": "Source/configuration definition closed; runtime reachability remains separately planned"
+    },
+    {
+      "gapId": "CANARY_IDENTITY_AND_EXPIRY_UNSELECTED",
+      "description": "No authorized real account/person, readinessId or bounded expiry supplied",
+      "owner": "Human",
+      "currentEvidence": "P9R0 deployable source/config plus local proof",
+      "requiredEvidence": "Source wiring and local negative/compile proof; satisfied",
+      "requiresSourceChange": true,
+      "requiresCommit": true,
+      "requiresPush": true,
+      "requiresDeploy": false,
+      "requiresRemoteMutation": false,
+      "requiresLiveSecretRead": false,
+      "requiresLiveStripeRead": false,
+      "requiresCustomerLogin": true,
+      "canCloseBeforeG1": true,
+      "phaseToClose": "P9R0_SOURCE_CLOSURE",
+      "disposition": "PRE_G1_BLOCKER",
+      "closed": true,
+      "resolution": "Private deployment-time owner/person/readiness binding and <=7-day bounded expiry mechanism implemented; actual values deferred to G3"
+    },
+    {
+      "gapId": "LIVE_SECRET_PRESENCE_UNVERIFIED",
+      "description": "No secret values read; production presence must be checked through authorized metadata-only inspection",
+      "owner": "Production configuration",
+      "currentEvidence": "Source requirements frozen; actual runtime not inspected",
+      "requiredEvidence": "Authorized production metadata/runtime observation",
+      "requiresSourceChange": false,
+      "requiresCommit": false,
+      "requiresPush": false,
+      "requiresDeploy": true,
+      "requiresRemoteMutation": false,
+      "requiresLiveSecretRead": true,
+      "requiresLiveStripeRead": false,
+      "requiresCustomerLogin": false,
+      "canCloseBeforeG1": false,
+      "phaseToClose": "G3_DEPLOYMENT_PREFLIGHT",
+      "disposition": "G3_POST_DEPLOY_PROOF",
+      "closed": false,
+      "resolution": "Actual production observation deferred; not a source defect"
+    },
+    {
+      "gapId": "DEPLOYED_SOURCE_UNVERIFIED",
+      "description": "Local handoff explicitly reports not deployed; no verified production source SHA obtained",
+      "owner": "Deployment records",
+      "currentEvidence": "Source requirements frozen; actual runtime not inspected",
+      "requiredEvidence": "Authorized production metadata/runtime observation",
+      "requiresSourceChange": false,
+      "requiresCommit": false,
+      "requiresPush": false,
+      "requiresDeploy": true,
+      "requiresRemoteMutation": false,
+      "requiresLiveSecretRead": false,
+      "requiresLiveStripeRead": false,
+      "requiresCustomerLogin": false,
+      "canCloseBeforeG1": false,
+      "phaseToClose": "G3_DEPLOYMENT_PREFLIGHT",
+      "disposition": "G3_POST_DEPLOY_PROOF",
+      "closed": false,
+      "resolution": "Actual production observation deferred; not a source defect"
+    }
+  ],
+  "classificationCounts": {
+    "PRE_G1_BLOCKER": 7,
+    "G3_POST_DEPLOY_PROOF": 2
+  },
+  "preG1Blockers": [],
+  "preG1BlockersClosed": [
+    "PRODUCTION_RENDERER_BINDING_MISSING",
+    "PRODUCTION_RENDERER_TARGET_MISSING",
+    "WATCHDOG_PRODUCTION_TRIGGER_MISSING",
+    "LIVE_SHARED_ADMISSION_NOT_IMPLEMENTED",
+    "LIVE_REFUND_NOT_ARMED",
+    "CANARY_SERVER_ADMISSION_MISSING",
+    "CANARY_IDENTITY_AND_EXPIRY_UNSELECTED"
+  ],
+  "postDeployProofs": [
+    [
+      "PREDEPLOY_SOURCE_SHA",
+      "G3",
+      "Read-only identify previous deployment SHA and verify rollback version before mutation"
+    ],
+    [
+      "SECRET_BINDINGS",
+      "G3",
+      "Separately authorized metadata-only presence and correct target bindings"
+    ],
+    [
+      "STRIPE_LIVE_PRICE_EXTERNAL_VERIFICATION",
+      "G3",
+      "Read-only account/product/price verification against canonical RM59+RM10; no Checkout; prerequisite G6"
+    ],
+    [
+      "MIGRATION_18",
+      "G3",
+      "Verify pre-migration remote schema, governed additive apply exactly once and registry18"
+    ],
+    [
+      "RENDERER_RUNTIME_REACHABLE",
+      "G3",
+      "Private service + Browser binding safe governed synthetic 48/15 fixture; no customer release/provider"
+    ],
+    [
+      "WATCHDOG_EXECUTION",
+      "G3",
+      "Safe no-op scheduled receipt then bounded due-job scan; no provider while G4 closed"
+    ],
+    [
+      "CANARY_PRIVATE_SCOPE",
+      "G3",
+      "Private account/person/readiness/expiry and G3 receipt installed; record opaque refs only"
+    ],
+    [
+      "LIVE_READINESS",
+      "G3",
+      "Real customer login and canonical person READY_TO_PAY, no Checkout"
+    ]
+  ],
+  "providerProofs": [
+    [
+      "PROVIDER_TRANSPORT",
+      "G4",
+      "Only expressly authorized single-owner gpt-5.6-sol lifecycle within USD4"
+    ]
+  ],
+  "paymentProofs": [
+    [
+      "PAYMENT_AND_WEBHOOK",
+      "G6",
+      "Only after G4/G5/G6 and runtime proofs, one verified paid webhook and job"
+    ],
+    [
+      "PRIVATE_MATERIAL_AND_ACCOUNT",
+      "G6",
+      "Actual immutable private R2/D1 release, 48/15, PDF, account reopen, four followup grants"
+    ]
+  ],
+  "stripeLivePriceVerificationState": "G3_DEPLOYMENT_PREFLIGHT_REQUIRED; local RM59+RM10=RM69 and canonical live IDs configured",
+  "secretPresenceVerificationState": "G3_DEPLOYMENT_PREFLIGHT_REQUIRED; no environment-audit authorization",
+  "rendererSourceReady": true,
+  "watchdogSourceReady": true,
+  "canaryAdmissionSourceReady": true,
+  "canaryOwnerBindingMechanismReady": true,
+  "canaryExpiryEnforced": true,
+  "canaryExpiryPolicy": "Explicit startsAt/expiresAt; maximum 7 days; payment/provider fail closed after expiry; retained policy permits owner reads/conditional refund",
+  "refundSourceReady": true,
+  "migrationManifest": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-MIGRATION-0018-DEPLOYMENT-MANIFEST.json",
+    "sha256": "c2e878344e4b15d77015e2411ea9b5551e257ff99f616d89ada3880e95d825d4"
+  },
+  "deploymentTargets": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-DEPLOYMENT-TARGET-MANIFEST.json",
+    "sha256": "5062888aa90af51b5429cf94ad0d95e439475e0abaf9b889fab434fd587d6894"
+  },
+  "rollbackPlan": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-ROLLBACK-PLAN.json",
+    "sha256": "165e663b215fb79cf5e28c27ea0fec18b1bb345e2849c765f65c8826688c62e7"
+  },
+  "generalSaleFailClosed": true,
+  "providerFailClosed": true,
+  "paymentFailClosed": true,
+  "P9_RC_FINAL_DIGEST": "0760ba6a678f0e3a28910f1240c444bbe9adc725908950439c5ccbe9c5ba0f26",
+  "currentSourceSuccessor": "Intentional guarded environment/transport wiring; accepted P7/P8 receipts and accepted source snapshots preserved. Current guarded successors verified by affected tests.",
+  "localEvidence": [
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9R0-RELEASE-DEPENDENCY-MANIFEST.json",
+      "sha256": "1b7c513aaf73085f3db0261777bd750a33ebb2f1bc3e4d762f045efe8f5dd0f4"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-MIGRATION-0018-DEPLOYMENT-MANIFEST.json",
+      "sha256": "c2e878344e4b15d77015e2411ea9b5551e257ff99f616d89ada3880e95d825d4"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-DEPLOYMENT-TARGET-MANIFEST.json",
+      "sha256": "5062888aa90af51b5429cf94ad0d95e439475e0abaf9b889fab434fd587d6894"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-SECRET-REQUIREMENT-MANIFEST.json",
+      "sha256": "4eb3cb410705caf0537b666abf3a83a75c8e5c419beae51d3f21f1bea05aa2b2"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-ROLLBACK-PLAN.json",
+      "sha256": "165e663b215fb79cf5e28c27ea0fec18b1bb345e2849c765f65c8826688c62e7"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-RUNTIME-PROOF-PLAN.json",
+      "sha256": "e524d080f31a3d93c7b4c1defb8db733456e4dff930961ecd90638280fe2c164"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9R0-LOCAL-VALIDATION.json",
+      "sha256": "8f66f5d032b277d78abe5c049e94605e2f85aa0f746fb5fa1b6efc99eaf317eb"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9R0-COMPILE-PROOF.json",
+      "sha256": "ed9ae99cc0da39cdb4dd12d314edd81430fb199fe47a2e9246f84f48eb2c3af1"
+    }
+  ],
+  "originalEvidencePreserved": {
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-PREPARATION-VALIDATION.json": "75b2bb8b2db4a71296fc260887e643dadb9fe6e0457321b5f303eeb0fddb75ad",
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-RELEASE-CANDIDATE.json": "3db42e4159335bb747e26df00586528e847691c9e62373da5ae184885a9db839",
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-RELEASE-DEPENDENCY-MANIFEST.json": "86c1566ef671ac912e1267e6b21a012734a12ff93701eafb76ef5d32d33e1023",
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-PENDING-AUTHORIZATION-GATES.json": "d8fea0f3cdfdb83f690b8a478af110446f31d510ee4644360f43a1a30d70dfb8",
+    "tools/review/P9-BAZI-LIVE-CANARY-HUMAN-REVIEW.html": "64780c795038aa364b96af782f85404994c8513f5e201718a32f41f7290fe9c3",
+    "content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/BAZI-R2-CURRENT-PRODUCTION-PUBLICATION-BASELINE-V3.json": "1358ed1f245ec97d185f3d17f1845c4abad0ec79ead2dc3ef20870bcf480726b",
+    "content/production-closure/shared-paid-report-delivery/P8-SHARED-PAID-REPORT-DELIVERY-CORE-R1.json": "ac30d4941dd28426eef5a24c9408d5a60f9d0a8a2d93d2c12bed2dee9bf1cb00",
+    "content/production-closure/shared-paid-report-delivery/P8-R1-HUMAN-ACCEPTANCE.json": "370811b8a60998b7ac4eb6d8e0d688c118ff8148b19cbf7bda0038e967b0c16c",
+    "content/production-closure/shared-paid-report-delivery/P8-TO-P9-HANDOFF.json": "fe0807d0177423a14b94b409e9e176d812494befda71b6c78899a639c6c10444"
+  },
+  "initialFailures": [
+    "New fixture evt ID incorrectly used an extra underscore; corrected to existing validator syntax",
+    "New test incorrectly read internal state from customer-safe status projection; corrected to assert store state and public status separately",
+    "LIVE dispatcher lacked shared-refund metadata routing; repaired production owner"
+  ],
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "productionSecretReads": 0,
+  "remoteMigrations": 0,
+  "commit": false,
+  "push": false,
+  "deploy": false,
+  "remainingBlocker": "G1_NOT_AUTHORIZED; no execution of G1-G6",
+  "G1Status": "READY_FOR_REVIEW_NOT_AUTHORIZED"
+}
