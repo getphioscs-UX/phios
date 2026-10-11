@@ -1,0 +1,107 @@
+{
+  "status": "AUDITED_BEFORE_REPAIR",
+  "head": "040c62ea102831bccf0c9761f6ed135529a923f5",
+  "worktree": " M docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json\n M functions/knowledge-runtime/manuscript-source-runtime.js\n M scripts/check-runtime-migrations.mjs\n M tools/review/free-ask-manuscript-r1/BOOK-I-V3-NATURAL-ANSWER-CANDIDATE.json\n M tools/review/free-ask-manuscript-r1/BOOK-II-FRESH-ANSWERS.json\n M tools/review/free-ask-manuscript-r1/BOOK-II-INDEPENDENT-ANSWERS.json\n M tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-WHOLE-CHAPTER-QA.json\n M tools/review/free-ask-manuscript-r1/BOOK-III-CUSTOMER-ANSWERS.json\n M tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-INDEPENDENT-SCOPE-RESULTS.json\n M tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-SCOPED-CUSTOMER-ANSWERS.json\n",
+  "lockTable": "report_generation_locks",
+  "fields": [
+    "namespace",
+    "lock_token",
+    "acquired_at"
+  ],
+  "namespace": "SHA256(JSON.stringify({environment,owner,order,report,product,scope}))",
+  "release": "Exact namespace/token compare-and-delete in finally; no timeout reclamation",
+  "crash": "OS death bypasses finally, retaining invocation token",
+  "scopes": {
+    "delivery": "bazi-account-delivery owns release; first observed orphan",
+    "manuscript": "bazi-paid-generation holds native manuscript requests/checkpoints",
+    "budget": "paid-report-context and report-delivery-budget hold financial projection"
+  },
+  "jobLease": "paid_report_jobs claimed_by + lease_expires_at + version; acquisition CAS; predecessor method owner not yet bound",
+  "owners": [
+    {
+      "path": "functions/personal-reading/report-generation-store.js",
+      "sha256": "12cf941203c5839536f588e88b993e00175b139b6f969e065a84e05fc29e7cb9"
+    },
+    {
+      "path": "functions/account/bazi-account-delivery.js",
+      "sha256": "dc927867059d8bfaf78d944a644114e43cb75f704330da13b550fd8e22fdf30b"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-bazi-adapter.js",
+      "sha256": "d95f85a96da968b895e842130340d907eb9154bb555e50231478e92a72002fee"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-delivery-core.js",
+      "sha256": "e55851fc18d1ce336947605c7d99afeb9e54f72d487d30887c5af508fbd15762"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-state-store.js",
+      "sha256": "331547faa3e73e8511c16866f16aabf10d1c60b29cfd1a0cfe10ab2a3f4b27eb"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-refund.js",
+      "sha256": "3596b4e52fd7bfc9b64b85c3df13bcbc5fb4ff556bfb4df84e77cc6f7b2eafb2"
+    },
+    {
+      "path": "functions/commerce/commerce-stripe-events.js",
+      "sha256": "3f1457890466d967a4c5d1fa55638a86b4f3e92facb8a9ef1c847d27fbb57ed4"
+    }
+  ],
+  "protectedPartial": {
+    "path": "content/production-closure/shared-paid-report-delivery/P8-SHARED-PAID-REPORT-DELIVERY-CORE.json",
+    "sha256": "683bbed96e13befb649b07da7b59876689524b3237c74030cda95861043c12ec"
+  },
+  "repair": "Generic token/witness primitive + job fence + sealed method checkpoints; no time-only lock deletion",
+  "additionalOwners": [
+    {
+      "path": "functions/commerce/commerce-stripe-events.js",
+      "sha256": "3f1457890466d967a4c5d1fa55638a86b4f3e92facb8a9ef1c847d27fbb57ed4"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-readiness.js",
+      "sha256": "04ee1407b20be143346f16071777558591c1158cbb51237828c69f2f095ed661"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-policy.js",
+      "sha256": "ee27ff44069e5dfc387827f2a9c79032a18212598dac72a948ffb06c65494746"
+    },
+    {
+      "path": "functions/commerce/commerce-stripe-api.js",
+      "sha256": "2943acdc742bcf0541cf78f21440b96321c60b4382c75b2c7206672493b5f480"
+    },
+    {
+      "path": "functions/account/report-followup-store.js",
+      "sha256": "67b6727dafed1cb7a2fe1f0549475b6f923b0a0038a74ed777406264161d040e"
+    },
+    {
+      "path": "functions/personal-reading/paid-report-context.js",
+      "sha256": "bd0aed01ce9e752250d641268ea7e7fb58cceb6ff7484cb8c250d703fce253a0"
+    },
+    {
+      "path": "functions/api/account-paid-report-setup.js",
+      "sha256": "08f23a0d425a4a96c3aaea7942d97edec118bd1d2b49f5c56c711d8f0c45f1bc"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/commerce-account.js",
+      "sha256": "443abc2d52a8d1ec6dcfd224127acc7aff8f39f21ff156c3745dac6f46f56ecf"
+    }
+  ],
+  "qaOwnersBefore": [
+    {
+      "path": "scripts/check-p8-shared-core.mjs",
+      "sha256": "51be0b7ed6ef3d7d4518f516d38751742e47ff1d217ae0e3432a04c0ae1a8d31"
+    },
+    {
+      "path": "scripts/check-p8-durable-matrix.mjs",
+      "sha256": "a716e25a7c6b8c97e0114e214c7e12a15e87b8c3c261946e5ac3a8f11b91753a"
+    },
+    {
+      "path": "scripts/check-p8-security-watchdog.mjs",
+      "sha256": "b62ddd3195f782c92357934087cc52591371bfab0978c2056cd21faac6766aa1"
+    },
+    {
+      "path": "scripts/check-p8-checkout-api-negatives.mjs",
+      "sha256": "0e031be190f71397e083494f6732d0096877901c40ddb9c5b0b2bdfd7969d1ed"
+    }
+  ]
+}

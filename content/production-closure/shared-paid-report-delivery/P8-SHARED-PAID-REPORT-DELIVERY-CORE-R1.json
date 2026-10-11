@@ -1,0 +1,1953 @@
+{
+  "reviewPageVerification": {
+    "path": "content/production-closure/shared-paid-report-delivery/P8R1-REVIEW-PAGE.json",
+    "status": "PASS_LOCAL",
+    "rows": [
+      {
+        "width": 1440,
+        "status": "PASS",
+        "imageDecoded": true,
+        "overflow": false,
+        "links": "PASS"
+      },
+      {
+        "width": 390,
+        "status": "PASS",
+        "imageDecoded": true,
+        "overflow": false,
+        "links": "PASS"
+      }
+    ],
+    "errors": [],
+    "newSuccessfulScreenshots": 0,
+    "providerCalls": 0
+  },
+  "artifactCommands": [
+    {
+      "command": "node scripts/finalize-p8r1-local-evidence.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/check-p8r1-review-page.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "originalStatus": "PARTIAL_EVIDENCE_GAPS_OPEN",
+  "originalReceipt": {
+    "path": "content/production-closure/shared-paid-report-delivery/P8-SHARED-PAID-REPORT-DELIVERY-CORE.json",
+    "sha256": "683bbed96e13befb649b07da7b59876689524b3237c74030cda95861043c12ec"
+  },
+  "successorStatus": "PASS_LOCAL",
+  "status": "PASS_LOCAL",
+  "coreVersion": "P8-SHARED-PAID-REPORT-1-R1",
+  "head": "040c62ea102831bccf0c9761f6ed135529a923f5",
+  "source": "PASS_LOCAL",
+  "deployed": "NOT_DEPLOYED",
+  "liveCustomer": "NOT_LIVE",
+  "runtimeEvidence": "RUNTIME_UNVERIFIED_P9_NOT_AUTHORIZED",
+  "implemented": [
+    "Exact-token witness CAS lock retirement tied to job lease",
+    "Fenced method state/material/followup/incident/refund writes",
+    "Sealed generation/publication/render journals with original completed manuscript cache recovery",
+    "Strong durable output precedence and storage-integrity hold",
+    "Signed existing Commerce refund webhook lifecycle + explicit delivery/refund race",
+    "Server-owned account setup/selection restore and readiness-bound checkout"
+  ],
+  "provenLocal": [
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8-shared-core.mjs",
+      "exitCode": 0,
+      "log": "content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8-shared-core.log"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8-durable-matrix.mjs",
+      "exitCode": 0,
+      "log": "content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8-durable-matrix.log"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8-security-watchdog.mjs",
+      "exitCode": 0,
+      "log": "content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8-security-watchdog.log"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8-checkout-api-negatives.mjs",
+      "exitCode": 0,
+      "log": "content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8-checkout-api-negatives.log"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8r1-orphan-locks.mjs",
+      "exitCode": 0,
+      "log": "content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-orphan-locks.log"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8r1-worker-fencing.mjs",
+      "exitCode": 0,
+      "log": "content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-worker-fencing.log"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8r1-stale-material-worker.mjs",
+      "exitCode": 0,
+      "log": "content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-stale-material-worker.log"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8r1-original-checkpoint.mjs",
+      "exitCode": 0,
+      "log": "content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-original-checkpoint.log"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8r1-refund-webhooks.mjs",
+      "exitCode": 0,
+      "log": "content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-refund-webhooks.log"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8r1-customer-entry.mjs",
+      "exitCode": 0,
+      "log": "content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-customer-entry.log"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8r1-native-diversity.mjs",
+      "exitCode": 0,
+      "log": "content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-native-diversity.log"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8r1-security.mjs",
+      "exitCode": 0,
+      "log": "content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-security.log"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8r1-watchdog-migrations.mjs",
+      "exitCode": 0,
+      "log": "content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-watchdog-migrations.log"
+    }
+  ],
+  "orphanLockReconciliation": {
+    "path": "content/production-closure/shared-paid-report-delivery/P8R1-ORPHANED-METHOD-LOCK-RECONCILIATION.json",
+    "status": "PASS_LOCAL_TARGETED",
+    "rows": [
+      {
+        "stage": "pre-provider",
+        "status": "PASS",
+        "pid": 43824,
+        "processAPid": 33832,
+        "state": "DELIVERED",
+        "counters": {
+          "provider": 0,
+          "producer": 1,
+          "compile": 1,
+          "renderer": 1
+        },
+        "accountReopen": true,
+        "locksRemaining": 0,
+        "followups": 4,
+        "root": "tmp/p8r1-orphans-1791721256210/pre-provider"
+      },
+      {
+        "stage": "material-existing",
+        "status": "PASS",
+        "pid": 40564,
+        "processAPid": 34692,
+        "state": "DELIVERED",
+        "counters": {
+          "provider": 0,
+          "producer": 0,
+          "compile": 0,
+          "renderer": 0
+        },
+        "accountReopen": true,
+        "locksRemaining": 0,
+        "followups": 4,
+        "root": "tmp/p8r1-orphans-1791721256210/material-existing"
+      },
+      {
+        "stage": "provider-unknown",
+        "status": "PASS",
+        "pid": 47468,
+        "processAPid": 21740,
+        "state": "PROVIDER_RECONCILIATION_REQUIRED",
+        "counters": {
+          "provider": 0,
+          "producer": 0,
+          "compile": 0,
+          "renderer": 0
+        },
+        "accountReopen": false,
+        "locksRemaining": 0,
+        "followups": 0,
+        "root": "tmp/p8r1-orphans-1791721256210/provider-unknown"
+      },
+      {
+        "stage": "P8_GENERATION_RESULT",
+        "status": "PASS",
+        "pid": 47552,
+        "processAPid": 29040,
+        "state": "DELIVERED",
+        "counters": {
+          "provider": 0,
+          "producer": 0,
+          "compile": 1,
+          "renderer": 1
+        },
+        "accountReopen": true,
+        "locksRemaining": 0,
+        "followups": 4,
+        "root": "tmp/p8r1-orphans-1791721256210/P8_GENERATION_RESULT"
+      },
+      {
+        "stage": "P8_PUBLICATION_RESULT",
+        "status": "PASS",
+        "pid": 15280,
+        "processAPid": 48136,
+        "state": "DELIVERED",
+        "counters": {
+          "provider": 0,
+          "producer": 0,
+          "compile": 0,
+          "renderer": 1
+        },
+        "accountReopen": true,
+        "locksRemaining": 0,
+        "followups": 4,
+        "root": "tmp/p8r1-orphans-1791721256210/P8_PUBLICATION_RESULT"
+      },
+      {
+        "stage": "P8_RENDER_RESULT",
+        "status": "PASS",
+        "pid": 44776,
+        "processAPid": 46704,
+        "state": "DELIVERED",
+        "counters": {
+          "provider": 0,
+          "producer": 0,
+          "compile": 0,
+          "renderer": 0
+        },
+        "accountReopen": true,
+        "locksRemaining": 0,
+        "followups": 4,
+        "root": "tmp/p8r1-orphans-1791721256210/P8_RENDER_RESULT"
+      },
+      {
+        "stage": "P8_MATERIAL_PERSISTED",
+        "status": "PASS",
+        "pid": 15992,
+        "processAPid": 1988,
+        "state": "DELIVERED",
+        "counters": {
+          "provider": 0,
+          "producer": 0,
+          "compile": 0,
+          "renderer": 0
+        },
+        "accountReopen": true,
+        "locksRemaining": 0,
+        "followups": 4,
+        "root": "tmp/p8r1-orphans-1791721256210/P8_MATERIAL_PERSISTED"
+      }
+    ],
+    "classificationCases": 8,
+    "realOSProcessDeath": true,
+    "actualBaziOwner": true,
+    "scope": "Existing verified renderer receipt replay transport; no P7 browser/PDF rerun",
+    "providerCalls": 0,
+    "root": "tmp/p8r1-orphans-1791721256210"
+  },
+  "workerFence": {
+    "mechanical": {
+      "path": "content/production-closure/shared-paid-report-delivery/P8R1-WORKER-FENCING.json",
+      "status": "PASS_LOCAL_TARGETED",
+      "rows": [
+        {
+          "name": "state",
+          "status": "PASS",
+          "oldWorkerRejected": true
+        },
+        {
+          "name": "method-state",
+          "status": "PASS",
+          "oldWorkerRejected": true
+        },
+        {
+          "name": "incident",
+          "status": "PASS",
+          "oldWorkerRejected": true
+        },
+        {
+          "name": "incident-resolution",
+          "status": "PASS",
+          "oldWorkerRejected": true
+        },
+        {
+          "name": "refund",
+          "status": "PASS",
+          "oldWorkerRejected": true
+        },
+        {
+          "name": "forged-serialized-witness",
+          "status": "PASS"
+        },
+        {
+          "name": "token-X-versus-token-Y",
+          "status": "PASS",
+          "newLockPreserved": true
+        }
+      ],
+      "materialWriteGate": "Production material INSERT uses atomic job-fence EXISTS; stale actual material-write scenario pending",
+      "providerCalls": 0,
+      "realRefunds": 0
+    },
+    "actualMaterialWrite": {
+      "path": "content/production-closure/shared-paid-report-delivery/P8R1-STALE-MATERIAL-WORKER.json",
+      "status": "PASS_LOCAL_TARGETED",
+      "realBaziOwner": true,
+      "processAPid": 43648,
+      "processBPid": 35104,
+      "oldWorkerMaterialWriteRejected": true,
+      "newWorkerClaimPreserved": true,
+      "materialRows": 0,
+      "followupGrants": 0,
+      "refundRows": 0,
+      "providerCalls": 0,
+      "root": "tmp/p8r1-stale-material-1791721280487"
+    }
+  },
+  "originalMethodCheckpoint": {
+    "path": "content/production-closure/shared-paid-report-delivery/P8R1-ORIGINAL-CHECKPOINT.json",
+    "status": "PASS_LOCAL_TARGETED",
+    "originalManuscriptStore": true,
+    "completedOriginalCheckpointRecovered": true,
+    "p8JournalAbsentInitially": true,
+    "producerCalls": 0,
+    "providerCalls": 0,
+    "renderBoundaryReached": 1,
+    "scope": "Actual original completed checkpoint/cache resumes through actual compiler to controlled renderer stop. No new visual or PDF pass is asserted."
+  },
+  "customerEntry": {
+    "path": "content/production-closure/shared-paid-report-delivery/P8R1-CUSTOMER-ENTRY.json",
+    "status": "PASS_LOCAL_TARGETED",
+    "rows": [
+      {
+        "name": "customer-entry-BIRTH_TIME_REQUIRED",
+        "status": "PASS",
+        "refreshPreserved": true,
+        "fixtureOnly": true
+      },
+      {
+        "name": "customer-entry-TEMPORARY_PROVIDER_UNAVAILABLE",
+        "status": "PASS",
+        "refreshPreserved": true,
+        "fixtureOnly": true
+      },
+      {
+        "name": "customer-entry-AUTHORITY_PROJECTION_ERROR",
+        "status": "PASS",
+        "refreshPreserved": true,
+        "fixtureOnly": true
+      },
+      {
+        "name": "ready-server-setup-reopen-to-one-fixture-checkout",
+        "status": "PASS",
+        "checkoutCalls": 1
+      }
+    ],
+    "errors": [],
+    "externalNetworkCalls": 0,
+    "checkoutFixtureCalls": 1,
+    "scope": "Actual /account/ HTML, shell and Commerce customer UI + actual setup/person/checkout APIs. Other account projections are controlled empty QA responses. Authenticated local identity and upstream failures are controlled QA fixtures; no OIDC or Stripe network."
+  },
+  "refundWebhook": {
+    "path": "content/production-closure/shared-paid-report-delivery/P8R1-REFUND-WEBHOOKS.json",
+    "status": "PASS_LOCAL_TARGETED",
+    "rows": [
+      {
+        "name": "signed-pending",
+        "status": "PASS"
+      },
+      {
+        "name": "signed-failed",
+        "status": "PASS"
+      },
+      {
+        "name": "signed-succeeded",
+        "status": "PASS"
+      },
+      {
+        "name": "out-of-order-after-success-pending",
+        "status": "PASS"
+      },
+      {
+        "name": "out-of-order-after-success-failed",
+        "status": "PASS"
+      },
+      {
+        "name": "out-of-order-after-success-succeeded",
+        "status": "PASS"
+      },
+      {
+        "name": "event-replay",
+        "status": "PASS"
+      },
+      {
+        "name": "wrong-payment-intent",
+        "status": "PASS",
+        "httpStatus": 503
+      },
+      {
+        "name": "wrong-amount",
+        "status": "PASS",
+        "httpStatus": 503
+      },
+      {
+        "name": "wrong-currency",
+        "status": "PASS",
+        "httpStatus": 503
+      },
+      {
+        "name": "wrong-environment",
+        "status": "PASS",
+        "httpStatus": 503
+      },
+      {
+        "name": "wrong-livemode",
+        "status": "PASS",
+        "httpStatus": 400
+      },
+      {
+        "name": "wrong-refund-id",
+        "status": "PASS",
+        "httpStatus": 503
+      },
+      {
+        "name": "forged-signature",
+        "status": "PASS"
+      },
+      {
+        "name": "delivery-refund-race-unsent",
+        "status": "PASS"
+      },
+      {
+        "name": "delivery-refund-race-submitted-unknown",
+        "status": "PASS"
+      }
+    ],
+    "networkCalls": 0,
+    "realPayments": 0,
+    "realRefunds": 0,
+    "signedExistingWebhook": true
+  },
+  "watchdogMatrix": [
+    {
+      "state": "DELIVERY_JOB_CREATED",
+      "status": "PASS",
+      "action": "DELIVERED",
+      "nextDueAt": 1300001,
+      "incidentCount": 0,
+      "providerCalls": 0,
+      "refundReconcileCalls": 0,
+      "refundExecuteCalls": 0
+    },
+    {
+      "state": "GENERATING",
+      "status": "PASS",
+      "action": "DELIVERED",
+      "nextDueAt": 1600002,
+      "incidentCount": 0,
+      "providerCalls": 0,
+      "refundReconcileCalls": 0,
+      "refundExecuteCalls": 0
+    },
+    {
+      "state": "VALIDATING_OUTPUT",
+      "status": "PASS",
+      "action": "DELIVERED",
+      "nextDueAt": 1900003,
+      "incidentCount": 0,
+      "providerCalls": 0,
+      "refundReconcileCalls": 0,
+      "refundExecuteCalls": 0
+    },
+    {
+      "state": "COMPILING_PUBLICATION",
+      "status": "PASS",
+      "action": "DELIVERED",
+      "nextDueAt": 2200004,
+      "incidentCount": 0,
+      "providerCalls": 0,
+      "refundReconcileCalls": 0,
+      "refundExecuteCalls": 0
+    },
+    {
+      "state": "RENDERING",
+      "status": "PASS",
+      "action": "DELIVERED",
+      "nextDueAt": 2500005,
+      "incidentCount": 0,
+      "providerCalls": 0,
+      "refundReconcileCalls": 0,
+      "refundExecuteCalls": 0
+    },
+    {
+      "state": "AUTOMATIC_RECOVERY",
+      "status": "PASS",
+      "action": "DELIVERED",
+      "nextDueAt": 2800006,
+      "incidentCount": 0,
+      "providerCalls": 0,
+      "refundReconcileCalls": 0,
+      "refundExecuteCalls": 0
+    },
+    {
+      "state": "DELIVERY_RESCUE",
+      "status": "PASS",
+      "action": "DELIVERED",
+      "nextDueAt": 3100007,
+      "incidentCount": 0,
+      "providerCalls": 0,
+      "refundReconcileCalls": 0,
+      "refundExecuteCalls": 0
+    },
+    {
+      "state": "REFUND_PENDING",
+      "status": "PASS",
+      "action": "REFUNDED",
+      "nextDueAt": 3400008,
+      "incidentCount": 0,
+      "providerCalls": 0,
+      "refundReconcileCalls": 1,
+      "refundExecuteCalls": 0
+    },
+    {
+      "state": "PROVIDER_RECONCILIATION_REQUIRED",
+      "status": "PASS",
+      "action": "PROVIDER_RECONCILIATION_REQUIRED",
+      "nextDueAt": 4000009,
+      "incidentCount": 1,
+      "providerCalls": 0,
+      "refundReconcileCalls": 0,
+      "refundExecuteCalls": 0
+    }
+  ],
+  "baziDiversity": {
+    "path": "content/production-closure/shared-paid-report-delivery/P8R1-NATIVE-DIVERSITY.json",
+    "status": "PASS_LOCAL_TARGETED",
+    "rows": [
+      {
+        "usefulGod": "FULL",
+        "timing": false,
+        "relationCount": 0,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "88c0edeaeaf81f43d0c2ed0f2a3867efc06d62e9462e5e28b06dd572afa94e86"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": false,
+        "relationCount": 0,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "530c7d089145aa32f422e33c941a72bfbe84573bc163e417c04ee3832a30ec9f"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": false,
+        "relationCount": 0,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "0114bdf1bcf0be4949ec08a68a34dce92b49418bf839c5f6c7cd3e04afaecb21"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": false,
+        "relationCount": 1,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "4e60afe1606b20577565ca692d02cf5ff450f7364fe616f13554deeeee0df9a1"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": false,
+        "relationCount": 1,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "a4f78eb8b82a95cd51b37bfc703643ccc58adcdf7e71ab505bd8a55e63b8cc25"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": false,
+        "relationCount": 1,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "70d8c3a6be1eed1daaad4e56881b42c5ed8e625fc53a1b27821712c52ac0eb1e"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": false,
+        "relationCount": 2,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "33d63f6613dfa7484784fab876958f126eb88a6f6603ca90698f7ea9fdf58c78"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": false,
+        "relationCount": 2,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "9a853ad29084a1f278da9e9c63e831ff1aa495a0697cc699c9f2fa6685dbc53a"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": false,
+        "relationCount": 2,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "b893654eab6dbb2c7efe7a74609619923a49d6162bc45070808f878dcc566453"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": true,
+        "relationCount": 0,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "88c0edeaeaf81f43d0c2ed0f2a3867efc06d62e9462e5e28b06dd572afa94e86"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": true,
+        "relationCount": 0,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "530c7d089145aa32f422e33c941a72bfbe84573bc163e417c04ee3832a30ec9f"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": true,
+        "relationCount": 0,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "0114bdf1bcf0be4949ec08a68a34dce92b49418bf839c5f6c7cd3e04afaecb21"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": true,
+        "relationCount": 1,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "4e60afe1606b20577565ca692d02cf5ff450f7364fe616f13554deeeee0df9a1"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": true,
+        "relationCount": 1,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "a4f78eb8b82a95cd51b37bfc703643ccc58adcdf7e71ab505bd8a55e63b8cc25"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": true,
+        "relationCount": 1,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "70d8c3a6be1eed1daaad4e56881b42c5ed8e625fc53a1b27821712c52ac0eb1e"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": true,
+        "relationCount": 2,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "33d63f6613dfa7484784fab876958f126eb88a6f6603ca90698f7ea9fdf58c78"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": true,
+        "relationCount": 2,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "9a853ad29084a1f278da9e9c63e831ff1aa495a0697cc699c9f2fa6685dbc53a"
+      },
+      {
+        "usefulGod": "FULL",
+        "timing": true,
+        "relationCount": 2,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "b893654eab6dbb2c7efe7a74609619923a49d6162bc45070808f878dcc566453"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": false,
+        "relationCount": 0,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "93add3f59187623e8d6291ae42c5d1a8bb6ed148338005feec4bb5e107a5049f"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": false,
+        "relationCount": 0,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "0c7a2fb9fefe954fb621521f14ad6e14742527b2e1bd2d9130e784ee4e1260c0"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": false,
+        "relationCount": 0,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "8b8b56bb5184b880a6aaf8cdca17e144b8487ccedf72b665ece724b6a5a982f5"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": false,
+        "relationCount": 1,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "a8d8342d882563e1903fab2c6808369c4443e7c59a0f2c79cc360a967ba53dbd"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": false,
+        "relationCount": 1,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "30c605a0aa41d6c80bacf8065b635c4f61d0abec4e3ceb964a97d73141f6afa2"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": false,
+        "relationCount": 1,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "90fdba1b7021d0415b1bab2d2a5653059036cbc03d47959ebdab66d7700a3ccb"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": false,
+        "relationCount": 2,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "b42e04273d3225c10e9231619224b883d07722ec3771731a7378064bf85710d7"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": false,
+        "relationCount": 2,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "e7c3754c5f7471dc7c679a495b2ab328b4b85d94af912ff3d1419ac8e03a1148"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": false,
+        "relationCount": 2,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "6e07a1826cdd2dea1b7804be2db77051bd84b1006f77f530024ce8b264c884b3"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": true,
+        "relationCount": 0,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "93add3f59187623e8d6291ae42c5d1a8bb6ed148338005feec4bb5e107a5049f"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": true,
+        "relationCount": 0,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "0c7a2fb9fefe954fb621521f14ad6e14742527b2e1bd2d9130e784ee4e1260c0"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": true,
+        "relationCount": 0,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "8b8b56bb5184b880a6aaf8cdca17e144b8487ccedf72b665ece724b6a5a982f5"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": true,
+        "relationCount": 1,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "a8d8342d882563e1903fab2c6808369c4443e7c59a0f2c79cc360a967ba53dbd"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": true,
+        "relationCount": 1,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "30c605a0aa41d6c80bacf8065b635c4f61d0abec4e3ceb964a97d73141f6afa2"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": true,
+        "relationCount": 1,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "90fdba1b7021d0415b1bab2d2a5653059036cbc03d47959ebdab66d7700a3ccb"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": true,
+        "relationCount": 2,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "b42e04273d3225c10e9231619224b883d07722ec3771731a7378064bf85710d7"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": true,
+        "relationCount": 2,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "e7c3754c5f7471dc7c679a495b2ab328b4b85d94af912ff3d1419ac8e03a1148"
+      },
+      {
+        "usefulGod": "ABSENT",
+        "timing": true,
+        "relationCount": 2,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "6e07a1826cdd2dea1b7804be2db77051bd84b1006f77f530024ce8b264c884b3"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": false,
+        "relationCount": 0,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "7c5088353d1369bb41089016a6e0c8c86b3e476333b3786d0a3089fe26066b75"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": false,
+        "relationCount": 0,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "8624ceffe2819cb31437929d877aa40fd48f1d7e23b8174f57321f6da0557949"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": false,
+        "relationCount": 0,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "72836a3d0d61624c375e9acfcf2b2a132b68cc1633d672509b2cde466f813da1"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": false,
+        "relationCount": 1,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "9f9817a8e2071ae24d89117b1aa2697c68ecb38714ecf9ab19d086d7152c7703"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": false,
+        "relationCount": 1,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "adee9b7d8017ca6b0ff3a19e1f2a6145faf104a7b952d0b0ded41f060353a870"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": false,
+        "relationCount": 1,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "bedd9d1babe37a3b26694eb00885bacc9045d2dce5470ab489758bc4433f7305"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": false,
+        "relationCount": 2,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "dd0db423a0e897a0f5e19135e9c29d82db8341ca985e6e381d347474de7c71d3"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": false,
+        "relationCount": 2,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "de78a7203015fd27a9f0b6c4fbcfc5f74ec2957393d82a93d256c19fd45a76a6"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": false,
+        "relationCount": 2,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "f5f8207ce264fcbcaf98f8d7f9443fce3eb242d8c9a29b5a9a71eaf51790874f"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": true,
+        "relationCount": 0,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "7c5088353d1369bb41089016a6e0c8c86b3e476333b3786d0a3089fe26066b75"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": true,
+        "relationCount": 0,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "8624ceffe2819cb31437929d877aa40fd48f1d7e23b8174f57321f6da0557949"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": true,
+        "relationCount": 0,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "72836a3d0d61624c375e9acfcf2b2a132b68cc1633d672509b2cde466f813da1"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": true,
+        "relationCount": 1,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "9f9817a8e2071ae24d89117b1aa2697c68ecb38714ecf9ab19d086d7152c7703"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": true,
+        "relationCount": 1,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "adee9b7d8017ca6b0ff3a19e1f2a6145faf104a7b952d0b0ded41f060353a870"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": true,
+        "relationCount": 1,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "bedd9d1babe37a3b26694eb00885bacc9045d2dce5470ab489758bc4433f7305"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": true,
+        "relationCount": 2,
+        "hiddenCount": 1,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "dd0db423a0e897a0f5e19135e9c29d82db8341ca985e6e381d347474de7c71d3"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": true,
+        "relationCount": 2,
+        "hiddenCount": 2,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "de78a7203015fd27a9f0b6c4fbcfc5f74ec2957393d82a93d256c19fd45a76a6"
+      },
+      {
+        "usefulGod": "PARTIAL",
+        "timing": true,
+        "relationCount": 2,
+        "hiddenCount": 3,
+        "status": "PASS",
+        "publicationPages": 48,
+        "diagrams": 15,
+        "publicationHardGate": true,
+        "sharedStructuralLifecycle": "DELIVERED",
+        "authorityDigest": "f5f8207ce264fcbcaf98f8d7f9443fce3eb242d8c9a29b5a9a71eaf51790874f"
+      }
+    ],
+    "providerCalls": 0,
+    "scope": "54 controlled synthetic adapter combinations using native customer authority shape, actual publication/diagram IR gates and shared QA structural lifecycle. No diverse browser/PDF rendering or customer publication is asserted; existing unchanged representative P8 terminal evidence retained."
+  },
+  "securityMatrix": {
+    "path": "content/production-closure/shared-paid-report-delivery/P8R1-SECURITY.json",
+    "status": "PASS_LOCAL_TARGETED",
+    "rows": [
+      {
+        "name": "forged-readiness",
+        "status": "PASS"
+      },
+      {
+        "name": "wrong-owner",
+        "status": "PASS"
+      },
+      {
+        "name": "wrong-product",
+        "status": "PASS"
+      },
+      {
+        "name": "wrong-locale",
+        "status": "PASS"
+      },
+      {
+        "name": "stale-readiness",
+        "status": "PASS"
+      },
+      {
+        "name": "method-admission-revoked",
+        "status": "PASS"
+      },
+      {
+        "name": "real-encrypted-consent-revoked-after-ready-before-payment",
+        "status": "PASS"
+      },
+      {
+        "name": "forged-delivered",
+        "status": "PASS"
+      },
+      {
+        "name": "forged-refunded",
+        "status": "PASS"
+      },
+      {
+        "name": "tampered-object",
+        "status": "PASS"
+      },
+      {
+        "name": "missing-object",
+        "status": "PASS"
+      },
+      {
+        "name": "tampered-artifact",
+        "status": "PASS"
+      },
+      {
+        "name": "tampered-receipt",
+        "status": "PASS"
+      },
+      {
+        "name": "wrong-entitlement",
+        "status": "PASS"
+      },
+      {
+        "name": "wrong-person",
+        "status": "PASS"
+      },
+      {
+        "name": "generic-PROVIDER_COMPOSED-delivery-duplicate-owner-incident-immutability",
+        "status": "PASS"
+      },
+      {
+        "name": "generic-DETERMINISTIC-delivery-duplicate-owner-incident-immutability",
+        "status": "PASS"
+      },
+      {
+        "name": "generic-EXTERNAL_DATA_COMPOSED-delivery-duplicate-owner-incident-immutability",
+        "status": "PASS"
+      },
+      {
+        "name": "generic-PROFESSIONAL_SERVICE-delivery-duplicate-owner-incident-immutability",
+        "status": "PASS"
+      }
+    ],
+    "providerCalls": 0,
+    "realPayments": 0,
+    "realRefunds": 0,
+    "scope": "Current server readiness revalidation, actual encrypted consent revocation, actual material tamper gates, terminal forgery and four shared mock classes. Lock/refund negatives are linked separately."
+  },
+  "migration0018": [
+    {
+      "mode": "fresh",
+      "status": "PASS",
+      "applied": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "reapply": 0,
+      "indexes": true,
+      "constraints": true
+    },
+    {
+      "mode": "upgrade",
+      "status": "PASS",
+      "applied": [
+        18
+      ],
+      "reapply": 0,
+      "indexes": true,
+      "constraints": true
+    }
+  ],
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "remoteMigrations": 0,
+  "r2Deletions": 0,
+  "commit": false,
+  "push": false,
+  "deploy": false,
+  "p9Executed": false,
+  "remainingBlockers": [],
+  "humanAcceptance": "PENDING_REVIEW_OF_R1_SOURCE_AND_LOCAL_EVIDENCE",
+  "protectedP7": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/BAZI-R2-CURRENT-PRODUCTION-PUBLICATION-BASELINE-V3.json",
+    "sha256": "1358ed1f245ec97d185f3d17f1845c4abad0ec79ead2dc3ef20870bcf480726b",
+    "status": "CLOSED_LOCAL_PRESERVED",
+    "compilerAuthoritySelectorRendererCssMutation": false,
+    "newPdfGenerated": 0
+  },
+  "retainedP8TerminalEvidence": {
+    "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/P7-TERMINAL-RESULT.json",
+    "sha256": "c10508a2f9d9c939a6b8ce2b3262cfb6222b25485fa3ba9f7dc3aa5dd1c42f3d",
+    "reason": "Accepted production compiler/authority/selector/renderer/CSS unchanged; existing representative 48-page / 15-diagram browser/print/PDF proof reused, no broad rerun."
+  },
+  "scopeLimits": [
+    "Authentication and upstream failure conditions in browser campaign are controlled local QA fixtures; actual account HTML/UI and setup/person/checkout APIs execute. No live OIDC/Stripe proof.",
+    "Recovery campaigns replay the unchanged previously verified renderer receipt as an explicit QA transport. They do not claim a newly rendered production/PDF pass.",
+    "Legacy locks without a verifiable P8 job owner witness are DO_NOT_RECLAIM; age alone never permits deletion. Unrelated invocation locks retain original semantics.",
+    "54 diversity combinations prove actual publication/diagram IR and shared structural lifecycle, not 54 rendered customer deliveries."
+  ],
+  "fullLocalMatrix": {
+    "path": "content/production-closure/shared-paid-report-delivery/P8R1-FULL-LOCAL-MATRIX.json",
+    "sha256": "95eaa11bad30bb7f2335803511f05e3f1839ad1624607bb1cb8e39ad0105fad5",
+    "runs": 1
+  },
+  "sourceHashManifest": {
+    "account/index.html": "a388467c64e8c658ad94cc6ae73a64c7eb7dd79b67d1f80fa6ba205b8f4a9d25",
+    "assets/customer-ui/base.css": "42987af1c57f7ce32f77573a7cb73085605131edcc5ea1643c256630353f32ef",
+    "assets/customer-ui/components.css": "15d5ec9b65d38c5c23e1cc891e1689acfef61afe9f8afeec981e25a8ac226ecb",
+    "assets/customer-ui/js/assets.js": "80f8f5630f969c137610341408f4f9318cf4141789ca22827931d5c87b05dab3",
+    "assets/customer-ui/js/personal-products/bazi-balance-visual-pages.js": "45931a1d7f0f747133e3a1846f8c0cadefdef5230c8d04086944744bc60c0032",
+    "assets/customer-ui/js/personal-products/bazi-domain-visual-pages.js": "14ce56357c530fdcdb04c791c31431ef7af964fcf18c21a4abf520d34492c3ad",
+    "assets/customer-ui/js/personal-products/bazi-structural-visual-pages.js": "a0c60fbcf360a9d2d49d13879290e1bd73509818cd2580a8f44e0df74dc25c38",
+    "assets/customer-ui/js/personal-products/bazi-timing-navigation-visual-pages.js": "7e99598b918e93a537247b35d77b1e80827cbb989186f6c9d09d806b6045c40e",
+    "assets/customer-ui/js/personal-products/bazi-vfr-r2-pages.js": "00150ae0c4dea9c5bf48ea9b5168e7d11558aba0c33c184f7c3c778b355d5e2b",
+    "assets/customer-ui/js/personal-products/publication-report-pages.js": "de097581563147bb8f4e0f354f0ec9ac2db1dac96454c74a369899cc25ebbf49",
+    "assets/customer-ui/js/personal-products/visual-first-report-pages.js": "5d637fa32277669bf5f12edab3880647777ffa8e2ba199736d617b3112f491c2",
+    "assets/customer-ui/js/personal-products/ziwei-vfr-r1-pages.js": "251321029171c2bbd7fd9fe2051dfdae7e9deccda796eb9b92fb5609b00978d2",
+    "assets/customer-ui/js/personal-products/ziwei-vfr-r1-styles.js": "0e59df6daef64fb85e8ded1f0eb9689bbf10aa739064969d9fad09e320aff149",
+    "assets/customer-ui/js/surfaces/commerce-account.js": "562904555698e188c146ac0e80e63d79e3c69d529b3883ead2e49c3bbba16cf9",
+    "assets/customer-ui/js/surfaces/commerce-product-visuals.js": "eba793cdffe979e2770c95b9543026783d4825bfc9ad4eeaf87ab02866144542",
+    "assets/customer-ui/js/surfaces/paid-report-setup.js": "92592d53070ba4b33e58ac507911304f9bb08c5d60bab9684ef0054b5b96fbee",
+    "assets/customer-ui/js/surfaces/runtime-ui.js": "cf9c4e7065b614eed481239ed985167b7acdbff483b1346e8cc88b9c98b02d55",
+    "assets/customer-ui/layout.css": "4ebbc2413695de7f20baac8f6275934d357b3d29c424949d1048a89069551cc0",
+    "assets/customer-ui/motion.css": "de531dc25e5f2985ed823ef65ed836bfb07e9e08954841dacf37ff7be4da9c90",
+    "assets/customer-ui/tokens.css": "e63345fcd77250f5c9482f03bef970359e0cead608347f6aff14292fb906bc89",
+    "assets/customer-ui/typography.css": "7c00b2861c92ca9251edee444f330fbcd931876a9afe33f0633745e5bc4231dd",
+    "assets/customer-ui/utilities.css": "9b4e93b877259c89f7b42412043108e05f580c1af0278ba8f6a5ac84b52693c5",
+    "assets/js/runtime/web-production/asset-resolver.js": "8617becc586871e3160314b5764b4a6dd379e92a8d016691b56de9d9ab0c3109",
+    "content/personal-reading/continuity/registries/continuity-subscription-product-registry-v2.json": "739f9d865c50146928db245917e1a61e0597a36d2ef6c95120b63b6c666cec1e",
+    "content/registry/runtime-migrations.json": "11cbe8b1d57f8145f3c6c5cf1aeddb01d7f201ca7f562864feb6c54cfb3bb18c",
+    "db/migrations/0001_platform_foundation.sql": "7f45b5572409ded3a22f3914ae881fcb13ea04e13a1ea2fc35086587ac88b0cb",
+    "db/migrations/0002_initial_runtime.sql": "4effec4fbe6f572151cecfc8d5683f5309f002df20b0f5f4441113ec68706d5a",
+    "db/migrations/0003_financial_professional_infrastructure.sql": "c06bc6498be1bcde3819d305e93289ff428fef33dfd06e5b2f8fe80d109d6016",
+    "db/migrations/0004_book_commerce.sql": "b82154e7a3c3b7267ded9bdc24162476c5441d9cca53c0390847c4f691217da1",
+    "db/migrations/0005_pws_universal_registry.sql": "2116170067cadf284285a98aebf43ddad0e19955cc0b9ddab1368fec52723edb",
+    "db/migrations/0006_commerce_stripe_r1.sql": "5c82e7a68f318a63f33016e9e7fb7b8632fd074f7a0573cf27602b196c920126",
+    "db/migrations/0007_account_oidc_sessions.sql": "af142f29f657435a7a1870e7b3f223e6a390d1b8d9adf18ebb7b60077fe634f6",
+    "db/migrations/0008_financial_will_encrypted_drafts.sql": "d5e1be17a608ed640c4f8a0fcecaa0cfb665455c2fbad15d72ff89fff45d504c",
+    "db/migrations/0009_canonical_account_person.sql": "40fb104c46f8cf08cc4b74b11d5795cf772c132657326eae9cf6dd97304e1026",
+    "db/migrations/0010_account_method_report_material.sql": "f0a90b8134a62858623afd4d688f074e3484fd7b406d3afed0e9d3a52bcd9c25",
+    "db/migrations/0011_report_context_sequence_reservation.sql": "f7c77e9c4b4ab734be3cd48b8b287ec63744e7ef64f8c9a6c349e84c4c580cca",
+    "db/migrations/0012_report_context_admission.sql": "0d1af5c7fa9cdaf2dcfc8e9c3191dbc78e81e40dc50d325656719e254f1663eb",
+    "db/migrations/0013_method_delivery_cache.sql": "13598878344efcf7f155c22b237e3494dfb6d8e55f02877dc7d9a0b884883bf0",
+    "db/migrations/0014_report_followup_history.sql": "f15bc5b30b7a84ab43c4ffba69d7f9b6dbc40255bd8a27c71063216c2e6cc321",
+    "db/migrations/0015_product_cost_envelopes.sql": "433496777921d5fc97384769ac907f84016331314fca1c11b17d934cbdf02958",
+    "db/migrations/0016_commerce_environment_bindings.sql": "08b007bffcd19431b1a66e34d822199aaef3b2f8112542a1d8dc9a57ae2ada82",
+    "db/migrations/0017_report_generation_state.sql": "85ce5d1af13e4ccfa4b3fab5b20afb6b9c79af42986e93bb01132f371c77e736",
+    "db/migrations/0018_shared_paid_report_delivery.sql": "546f66d3b85ed5788e3f1ac92f1d62969dfe4ce2f7cda3a1d9335e6ab0fbc78c",
+    "functions/_lib/pai-r1-economics.js": "1b880b92c41405c3f97665bc53ecea1999e622528b3cd27716d88a07087ba4a7",
+    "functions/account/bazi-account-delivery.js": "4f2494a5ea7e72712b613f1f5fab7b79014db3e7aec484044b657fbd80f7e0df",
+    "functions/account/canonical-person-store.js": "87f94ba6c79c6c349fe85b68bc634365c49004fec3cf54bf3723db0f45ef067a",
+    "functions/account/method-report-material.js": "e997fd50c6e6292d03a1445253ec46c2d95a412a26895c5ccf7a5573840adeb1",
+    "functions/account/oidc-auth.js": "f465f1f01fe86ccac89691dba4d966a69f240d82a7773b4860e5f72b29fe310b",
+    "functions/account/person-use-policy.js": "4de682f6ab1a2e8315ed86da2ad3b9f9506cf0043821b1f52550899b810b9600",
+    "functions/account/report-followup-store.js": "bb37bf16a5ff074ed12cdec851867759947ebcf35a2dd876c15ea25e964fe904",
+    "functions/account/ziwei-account-delivery.js": "1ae6c8446e7c61e9faf086a526dc70e859372cd77e30cc9fe9484333fb632acd",
+    "functions/account/ziwei-controlled-report-material.js": "494958d6505423a8a1d318ac2e7082248c86963f9715a3d3ffcfcd91ab13b331",
+    "functions/api/account-paid-report-setup.js": "653190f72097e26f204c28aedbf0ee4a59dfb7119e7b62e2e82913a1b18dbd0b",
+    "functions/api/stripe-webhook.js": "4aab230b50cfde9197df03058a5ab641c26d8a32e8e8f334dd0d9b00b06a9640",
+    "functions/bzr-full-production/bazi-chart-runtime.js": "5b746638fb1e67ed2734b20d4e77c3ed991c7fdb68be2820346aab896c8592ad",
+    "functions/bzr-full-production/bazi-final-structural-verdict-r2.js": "659fbf1ab91e53fb332a401ec8c9d392111d3b837447fcb049126d054ac0d50d",
+    "functions/bzr-full-production/bazi-pattern-runtime.js": "34102a599140a6592917563ddabaf865d2ae7fd675e1da4d3a1808205dc8105f",
+    "functions/bzr-full-production/bazi-relationship-runtime.js": "232abecbc6009591419c138c1f320a2d608dd4ece7d19732df8043862396ab7d",
+    "functions/bzr-full-production/bazi-strength-seasonal-runtime.js": "796cef9db7a5fc07963331903d6ccb7ea6c477010ef8b85cb4b2dc0258298bbf",
+    "functions/bzr-full-production/bazi-structural-registry.js": "8f3c3abadd3cf7277d7ef5dffbdceb05e69c9cd72dfffbb442c66b61d3ef8067",
+    "functions/bzr-full-production/bazi-ten-god-runtime.js": "509bae2a3d677290a598db014f7dbb9a62a6d95955854bdd5747ccd4d187692c",
+    "functions/canonical-presentation-runtime/physical-composition-contract.js": "6c256477d2917914bdd61a7daf85c10e2954a9e38f7dd19ead62352db5b1f418",
+    "functions/canonical-presentation-runtime/report-blueprint-reference.js": "a94001e435489d1d3e772ea4ae0f423287596544d829ebe143bb4456e31434e7",
+    "functions/canonical-presentation-runtime/report-cover-field-format-registry.js": "99875e059e0350e68926624d0a7cf978c0aa2ed823548a1206c5fd970c875688",
+    "functions/canonical-presentation-runtime/report-cover-overlay-registry.js": "2fd7a2ef7791259379e0d408c29c4911de1ea6a16b194c7c3e5b12dce7a10b7e",
+    "functions/canonical-presentation-runtime/report-cover-overlay.js": "aadb91a1a1dd0f6d377b1e6199f2ab7fbbf6731d7b54b6dadcf5f4238566fa6a",
+    "functions/canonical-presentation-runtime/report-cover-subject.js": "59fb3dfcd7c7db03be7d61d73c1447a99cd6e4fc1bf03fd779ebef6d9a59fd2b",
+    "functions/canonical-presentation-runtime/report-editorial-copy.js": "47559f0081c5245df41ce9c419e70f5a596913b92fa707f97dfc82ce64f68421",
+    "functions/canonical-presentation-runtime/report-editorial-registry.js": "7aab1d916a4a3cc5c3933422062a30212fe24093d85a5e3ab2dd29db88b2549d",
+    "functions/canonical-presentation-runtime/report-editorial-resolver.js": "e44582ee3f752f35e9f207e4bfd4a2c08eae2b488bcaf8ea408fb4e463b9d32f",
+    "functions/canonical-presentation-runtime/report-editorial-verification.js": "4c387c29f588392dffcf657a5322a0fe17f9df718e81a9ed6facf3ab442f094c",
+    "functions/canonical-presentation-runtime/report-publication-contract.js": "5976bf2f91c2731fa1dc1c7213b2b67d26773218340f26a5184c6424b43efa9f",
+    "functions/canonical-presentation-runtime/report-section-config.generated.js": "a5b2eb6645b2648d45c0e5ac3f4eb5eba3c7e02acd54bad641b5821cd27f41eb",
+    "functions/canonical-presentation-runtime/report-section-contract.js": "a253c2976ded45d54954594a25a2186d9c4239131ef1d233587091230c7af745",
+    "functions/canonical-presentation-runtime/vfr-trilayer-bilingual-contract.js": "0ea34f48d6cb10afc062e7bceefe376a3d0c135a045e0c981ee8d276e988cb18",
+    "functions/canonical-presentation-runtime/visual-first-report-contract.js": "cb3b3450c0cda0a698eebae6519444d3abe8806d5538bbd715afe2255b6b2da4",
+    "functions/canonical-presentation-runtime/visual-report-page-runtime.js": "b11cec6d6234095def75a54d16241959a189853576baef74c5d60f4c30cdcaf0",
+    "functions/canonical-presentation-runtime/visual-report-registry.js": "40eb885ae09b4d222a27547a66893bf27dc112757bb1e48544c6eb220d5ca5d0",
+    "functions/canonical-presentation-runtime/ziwei-navigation-finalization.js": "9a1c0d902a6dba530b8bd12f109044313c13f627fa1575b7e90e9192379337b2",
+    "functions/canonical-presentation-runtime/ziwei-report-visual-registry.generated.js": "2328f19a51c0b9d648bc6e833a1ec6b2d07585ccd99576984fd31586a0c64659",
+    "functions/canonical-presentation-runtime/ziwei-report-visuals.js": "88dda16e8c15805113390cc9e88f9babe5889f2e8191008caafd931b675f11c8",
+    "functions/canonical-presentation-runtime/ziwei-vfr-r1-visual-bindings.js": "5e34a05cd95b8e5d1a452d7e3fe827cecc2eb88fd7e52274c83adedd45613bdc",
+    "functions/commerce/book-commerce-store.js": "a1908faf4faebd9242db90807e4e95cc8c58655a78f241a0e2873989774b80f8",
+    "functions/commerce/book-delivery.js": "fe9f0d8ed27a0348675f10dc915f63cec17e8b2d9821265b307cd7e4849c6ca4",
+    "functions/commerce/book-fulfillment.js": "71cc59ccfd0009fac8efa1da8c6da4710fbf6bc219dcf10822d0a09426f3d7d2",
+    "functions/commerce/book-product-registry.js": "cd8e4eff58e0cee3a387699c0f390a44d6154cad355d942df0e27fd9bfcf6267",
+    "functions/commerce/commerce-crypto.js": "40703f655345e468f0b216026dfcf6072ad23700ba5e52cfbcd4ca103e46d6a7",
+    "functions/commerce/commerce-environment.js": "4abb437a3bed2e14692dae44d48467cb252a608c5491ab1843a46d75dfd773ec",
+    "functions/commerce/commerce-http.js": "6b81dce08de5d2b6fbe996b187d8fd9e477ece530b9f65c14899cbfb35c31e22",
+    "functions/commerce/commerce-observability.js": "ef10a16028c6f202be9edfb7973564862cd642d3fe54847e2b9f190aa182e846",
+    "functions/commerce/commerce-stripe-api.js": "35bb43403f642f1eb5f55e62e315922c779b1f3e64a3aad252b711bb3aebe3b4",
+    "functions/commerce/commerce-stripe-events.js": "dd20da53aa7893e3c1bbeecdda25664c96dff8ef6c8dc15291cd3149723ad812",
+    "functions/commerce/controlled-purchase-candidate.js": "238a9b11647bf0ae7712b16bc40b2ee8ef1f2e3bb466a9f4a956aea573cebf1c",
+    "functions/commerce/report-presentation.js": "48c50a07f1cee15a529a532b62ffe43f392f67bb6fed24c440f79da28040915e",
+    "functions/commerce/stripe-client.js": "d2b046a21bd0c85ee23d743c4c493dfdd317f39c53dce47c26ca0e147c741d42",
+    "functions/core-method-runtime/ast-astronomy-runtime.js": "8368bef2f0bc7290811de47005f24c389aff25d198d353b9c528061d11c4b444",
+    "functions/core-method-runtime/ast-planet-runtime.js": "ccae563a9a8e56a2dbedfd5e4cfa7b22139d6f2d9b033b2407e7b6e8984a9d26",
+    "functions/core-method-runtime/bzr-four-pillars-runtime.js": "70eeaf70469bfb4b6df2bb100ccef15312fe01aac0d4561455bbbd355f839a05",
+    "functions/core-method-runtime/bzr-luck-cycle-runtime.js": "bb00b015513683e63d0ccce15188aec154de9b85c89c5f0e484c00def0a24aa8",
+    "functions/core-method-runtime/bzr-projection-normalization-runtime.js": "967b6cc7bf61a9783e146066d1eb1d7885df25957216a4198ed09439d497fca5",
+    "functions/core-method-runtime/bzr-projection-runtime.js": "94d92257b0ff14e360ee59aae49b1eda70dedf4bde635d6b28de96d93b8eb4fd",
+    "functions/core-method-runtime/bzr-solar-calendar-runtime.js": "1a3bd6058e6e9ff2c8a8ce28744607e263a926a17a3d039ab88d81ec88fe5264",
+    "functions/core-method-runtime/hdr-astronomy-runtime.js": "0e15059c40bd29364eb011fccda2af1f4fb209225aa4e046d06cb4104421fcbf",
+    "functions/core-method-runtime/hdr-bodygraph-runtime.js": "3a0ece9f05e76d3fca9ac7cdea2ae7c913136c385981ce82afb06fd95f527473",
+    "functions/core-method-runtime/hdr-design-moment-runtime.js": "2d684ac53e2847d34094605f4dddb765566fb82e346643be9b8a46f3ef074e32",
+    "functions/core-method-runtime/hdr-gate-runtime.js": "54ca40d84e6598d7b56554e318232b8c52807ec80377e9957acc99aea4c6fafb",
+    "functions/core-method-runtime/hdr-projection-runtime.js": "632b1b2d5a9ad67924e0e63c7724c0716426775e59fc6b9225feb4bd35a5975a",
+    "functions/core-method-runtime/num-birth-number-runtime.js": "e7de5630c7b2e6faef419ba697da22a7bf979de135eb236713ea0fe4aec3e70d",
+    "functions/core-method-runtime/num-cycle-runtime.js": "9b1155a7b79b75c0d1ce89f78ca89a44208e283439fdea79b63cac6856a4de2c",
+    "functions/core-method-runtime/num-number-structure-runtime.js": "23cde80b9a2d2939ecac5cab6c782e4bbec4702f3a9e1d1e2ca178c4b76766b6",
+    "functions/core-method-runtime/num-projection-runtime.js": "7670fce9e12793026b94c67b22189ad2440358952e0404b0cf5105b1144f7b2d",
+    "functions/current-reality/personal-current-reality-runtime.js": "6a46e908b7483a95f2ef84b135500d08b447bdce0319778b08f74a82ad78225f",
+    "functions/interpretation-runtime/mir7-utils.js": "4da006324b24da525d19d8163f71e360c45bb38ef739fd1c3a69990b99d93695",
+    "functions/location/place-resolver.js": "6ae4d1fd2adf02ba7dfbda741fad6885024121dabdac50b788c192ee75ae3877",
+    "functions/location/timezone-resolver.js": "773aa0073da002d3d1519dd46191547025e972e61efafecaad562f92ff2a5b39",
+    "functions/method-client-delivery/adapter-registry-runtime.js": "a61bb9abb3a0792dad134d150786d056a03a94231d1c1c5360f0beb2f8c9acee",
+    "functions/method-client-delivery/adapters/ast-adapter.js": "ea4371c249d20f4c5697411eb0a5d860836c92ee746ce9d8d0910941c4572930",
+    "functions/method-client-delivery/adapters/bzr-adapter.js": "7575997056d8eba457d747dac60e3575f252e4f464e72d444640383fc4d02cb4",
+    "functions/method-client-delivery/adapters/hdr-adapter.js": "88e5b0de671712c5b579379c26b639e4e9910aa369d48cf5623f50578b98196b",
+    "functions/method-client-delivery/adapters/num-adapter.js": "c480cadaaec9f375b63c1706a38d4c3ee84e05a0594623bbaa95af7d4da914e4",
+    "functions/method-client-delivery/canonical-birth-input-runtime.js": "a80be668022504a1c571830e450a9a34226381c15b7b9c12e742a061d47a84c2",
+    "functions/method-client-delivery/canonical-projection-runtime-current.js": "4819d859750da671353397493834efc70171d7112a5d35f2bc8d5fb075ace662",
+    "functions/method-client-delivery/execution-runtime-current.js": "ea4e89c5f458afd610e756b19dffdf83923c2d3011ac302337bb9ae70ec03b50",
+    "functions/method-client-delivery/executors/ast-production-executor.js": "a83e0e5b7837de067f38b5786b50b5f96a9e7c0d3e68f7979c162d2f5c5f82cb",
+    "functions/method-client-delivery/executors/bzr-production-executor.js": "fd179c6cc978069c8f7b594262f0957bd424c7bfb56d3451b2557be7cc19710a",
+    "functions/method-client-delivery/executors/num-executor.js": "2486e4caaba691bda0de9a048e8fe90353378d2ec52322caf10198b2066fd366",
+    "functions/method-client-delivery/production-adapters/astronomy-engine-production-adapter.js": "f1d94976e11c04ecdf66c5ecfc9f990c6e1e54557620ef231b9cc4bc392a48c6",
+    "functions/method-client-delivery/production-adapters/bzr-governed-production-adapters.js": "f09a93dda5f9cad55431eadc3451210a1163a9ee1ca6fc4adaa7dd0e066a0040",
+    "functions/method-client-delivery/zwr-canonical-projection-runtime.js": "7e60924e6d4feb7016033e05a188c2dce963405277cf8e4510e355c46b3cf6fc",
+    "functions/method-production-activation/mcd1-production-authority-successor-runtime.js": "2581cf8b54e8a31c9e93ba8c9ef46961f853ee3af5f91e0635bb2d9dc9262bdf",
+    "functions/method-production-activation/zwr-production-authority-runtime.js": "d6de0b5f73e743c482ed55a3e14792fe853923925a58752607730bfbdeddf525",
+    "functions/method-runtime/shared-calculation-runtime.js": "733ea3ebf93d53e090a3dec84da1021069bf55c432599980e6a32461aa65470e",
+    "functions/method-runtime/shared-projection-runtime.js": "ff2ab39e55cd234bd1e7c4927de2c7eebcfd661150ae2a2e30fdfc3600044351",
+    "functions/personal-reading/continuity/continuity-commercial-authority.js": "c5c432d13aeb638619aed1c5d51abc5cdf7f4df9b43f48df7f0508710af48a83",
+    "functions/personal-reading/continuity/continuity-quota-d1.js": "f86d0471460e03af92833e1b6124e958165a01be0a2312c8069cb42c34345cf5",
+    "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-authority-pack.js": "cb6324f3bbc8bc84803825d4dedc756d4c264c46e9125d49de5ae28d09674196",
+    "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-batch-authority.js": "5ce010e2edff8d25166f88c64f3a6a9b49336e4d99f870fed001b854a591279e",
+    "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-budget.js": "3946be607e403c74196b2e1b2cfe04edeb14f60182bb841f568f2f457d62e3de",
+    "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-cache.js": "3ba1bd586169bd8d6a416511e45f77d64b9c08699ff6176da48fe69486d8f3cf",
+    "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-checkpoint.js": "315763fd77ccdb111c842efa0f004c0f0d8105d6f2adfda8c700207d0966d402",
+    "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-completeness.js": "5b8c938362e8a34aff7d8de508be70c05172c6f8aeb30f7010955bb4cbf10a29",
+    "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-contract.js": "2c205e7e9c332e933ecadb4e84c3d25c3e94f36f0774da5a26d2bfbddcc66be9",
+    "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-prompt.js": "967b9d5c969641c4e0e6dc3d6dc0351fcb85911ff4a57464dff29dffea05eb77",
+    "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-provider.js": "75e59574a37ddae96361d89c03c6862dbe0fb141e2a0929eb1bade3a132f59bc",
+    "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-publication.js": "81ab329b13c980c5acff81e05a009913f282ccaafdb235020468ce4fa9dd649e",
+    "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-recovery.js": "219e7866e43332021df208fa600d3dbd9aead4099e66c13ca2fd888e348f4b36",
+    "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-runtime.js": "4e2bd9b8688fc8deb7df422f05c34b549c54be738185937190191c70509b1a0d",
+    "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-schema.js": "ff36f317b67d3b64958b5cd1a3e0c4cbd58db6728aa637eff3fcb0ea0402c38c",
+    "functions/personal-reading/deep-manuscript/bazi-owner-cost-contract.js": "6c93a37a9a9fd0bab02199fdbb0afe200f30a60a53aafd8aaad9f3900a82fe79",
+    "functions/personal-reading/deep-manuscript/bazi-paid-generation.js": "2ba00d42e752263971c24cdc2233dd0c5c28765f46775b00749e9c0587a693d0",
+    "functions/personal-reading/deep-manuscript/bazi-production-generation-config.js": "cb01eda1a57ff2d1286c056b3b30e109e11ef6e01a0b522a9f6b54ae64bdf8db",
+    "functions/personal-reading/narrative/bazi-editorial-contract.js": "674f86141fe933b2b1c8dfcd25a72ee56ead838978568917170a3ac4a57ca891",
+    "functions/personal-reading/narrative/bazi-editorial-quality.js": "7c35ff3bb3abf2b050c7dc07ca64a292091d54b55a9bf346393f37668e8955ad",
+    "functions/personal-reading/narrative/bazi-explanatory-authority.js": "595adf7819089d5c83412ccdfe9b7ab6633171c660f97e1a9b39e5db97d59bf1",
+    "functions/personal-reading/narrative/bazi-s02-editorial-depth.js": "0beca5ea473a0b074929a14e19e1440679cb390c21ff63d2caf19e565b17b980",
+    "functions/personal-reading/narrative/bazi-s02-s03-reconciliation.js": "13372c4c024c9fa3aaa7fd59102c66e9f362db41fc9fb3a6d80e6084c15bb367",
+    "functions/personal-reading/narrative/bazi-s04-career-compression.js": "b106d91e5ab790c826eb51b3a4bd3d9cce6a69150d64b713579a04334d77121f",
+    "functions/personal-reading/narrative/bazi-s04-identity-quality.js": "3e56e5c106f1932de26eb4783111d66012089086bc7dd44302b7bcc2dfd9c5f8",
+    "functions/personal-reading/narrative/bazi-s04-market-reading.js": "3d14519da53bbd8a4855ac60b6b51be1bf215ff937ce33316cff41d2da21d7c2",
+    "functions/personal-reading/narrative/bazi-s05-market-reading.js": "47491bf6427fb89a9480be5ff3c878d81749da78a7552ce7c47c06b175277360",
+    "functions/personal-reading/narrative/bazi-t3-composition.js": "31d421344d7a127ead65152ddfbccbc3f3bdb40d83fa7458e20e24228dcd7685",
+    "functions/personal-reading/narrative/bazi-t3-release-gate.js": "2537141523fe2cef341f6bc02666304efdb2271e24bd2766b2737e1496ab28fa",
+    "functions/personal-reading/narrative/narrative-provider.js": "38855d13e8fa62be6f190c5c8a92ffaeddcded2e91b2796569943ea549a07212",
+    "functions/personal-reading/narrative/narrative-writer.js": "3910e5e2d9b571d1b0e8fa4259690f92781685f170b4754386e13e803f2ae808",
+    "functions/personal-reading/narrative/report-editorial-quality-r4.js": "f116d9561b19f26115489b6c643cd7637012d714a8e92ad642155a29910aed52",
+    "functions/personal-reading/narrative/report-narrative-governance.js": "7ed540891a9c6a7eb72e74d1aa78c104105e66b3bc67c70082c83173e87b12e0",
+    "functions/personal-reading/narrative/report-pro-composer-r1.js": "6e44bc4c1a456e7e2ab64a93a89935d278e7a5d830e9f02e0f3f3da55d426178",
+    "functions/personal-reading/narrative/report-pro-reference-registry.js": "9eb3eeee543582fdc5c9a5da3922bdecc9f2b5c500014f0e4172562d7f773bb2",
+    "functions/personal-reading/narrative/report-publication-ir-v2.js": "44d17542fbdd46a17234dc226392a18ed3fed742e18e4554d280d5896e5dc5dd",
+    "functions/personal-reading/narrative/report-section-brief.js": "d3618acd11d1455f9db6849c6120b1e7b080f46e906e6bd90a9ec3f6fbc28e73",
+    "functions/personal-reading/narrative/report-section-contract.js": "a61f714fa0701c10f97cdb745d8178727ae6edaaf6a764f1affb35009a52a034",
+    "functions/personal-reading/narrative/report-section-semantic-review.js": "421a42e1626c5241fcce05cba65742d91539ff81a84b9315aaee32a6bff40bf6",
+    "functions/personal-reading/narrative/report-section-semantic-verifier.js": "2b55a823f368cb1f02b69034fa388de9bcddac642429cf339ed6eb6e936573be",
+    "functions/personal-reading/narrative/report-section-snapshot.js": "8c3a7f391b26bba1fddd610ebf13c1e46e821f935522c84acd662565eca545b7",
+    "functions/personal-reading/narrative/report-section-t3-composer.js": "0f329764b9f55d1f3cc9382808599c54d7249e57f605bd04581e1f37626e2014",
+    "functions/personal-reading/narrative/ziwei-editorial-r2.js": "1eac524d0be451349e41ecc3b999b3cd6ad1e111ce8bc012d9b53ce132f20415",
+    "functions/personal-reading/narrative/ziwei-full-report-sections.js": "946ab71b76ceb5ef14331dc9cd56b64defe8cbf3a349ee896ea2d68b0fd2b65d",
+    "functions/personal-reading/narrative/ziwei-production-composer-r3.js": "e388cc43c4d6cc2ef0da4970bb38e328d5ccf63c05fcead4f93368d73297ac46",
+    "functions/personal-reading/narrative/ziwei-production-composer-v1.js": "d1c997e8d813f693009e3ba07a43396672e663214184be7247430d67bfe52cb2",
+    "functions/personal-reading/narrative/ziwei-professional-synthesis-r5.js": "88749656ea62b2f9c49fa18588559b4666a7caadf6850ccc559d5f6290d7851d",
+    "functions/personal-reading/narrative/ziwei-publication-adapter.js": "ccdcf2bb99482d1c73b85a5390b2ce089a03e22efc89b7c9e4143cf5e8109d91",
+    "functions/personal-reading/narrative/ziwei-r5-authoring-pack.js": "373d87264bd276c5410fd554eb8ea8ccd1dbf9ea0bc8f34684021aff57ced156",
+    "functions/personal-reading/narrative/ziwei-r5-provider-registry.js": "63077e03893125c0f24cf3e7cbf55adbdfbdda20203eae91d5838c586f6b6a04",
+    "functions/personal-reading/narrative/ziwei-semantic-canon.js": "3aec169b2a0ecca0c08de0acec5b0b5882140ce620bee7e088bfba56838aa5bc",
+    "functions/personal-reading/paid-product-cost-authority.js": "3f819c666eae74b2dad31310bb90a98035b34b9e274da56d4c7247182259424d",
+    "functions/personal-reading/paid-report-context.js": "777a7784d3e5d3501bc244314c3f06a8d50ec11fd4d6e9ee13d114af906ea083",
+    "functions/personal-reading/paid-report-transport.js": "f3bf93be13cdb32bdb2fed8b8845636c03911d74c8aa495be5686e7db814380d",
+    "functions/personal-reading/publication-fit/bazi-diagram-fidelity.js": "e3bf19285c769d38446f82f563dc5fbce5c0b8928bdd56202702ddb74312694f",
+    "functions/personal-reading/publication-fit/bazi-publication-fit-gate.js": "0b8361afbf19aa893674d132d30211ae6c3fe3ed1b1eaa39aa378c16a52f64f1",
+    "functions/personal-reading/publication-fit/bazi-publication-layout-profiles.js": "0200e3a23ff570ff4d051a3fe3b06fcc6d79d5e926fc09c5579a4bddd05cee28",
+    "functions/personal-reading/publication-fit/bazi-publication-lead-selector.js": "0ffb2aa0815044f534734bbab9729eafc5c04768d3f353013df03310e1c10042",
+    "functions/personal-reading/report-delivery-budget.js": "3ab32cb48d7334d459f3ec7d679f559f4a06c156ace2cf39c994682ae2edcbfa",
+    "functions/personal-reading/report-generation-budget.js": "09bb1e0d8468ffb132eeaaf174029093f9c729a3ce165ec70a1eaca9203eb104",
+    "functions/personal-reading/report-generation-store.js": "ad2d514cce3e36eda8db61216c108538b54614001d1f2f36ef4c3ca46908833c",
+    "functions/personal-reading/report-provider-access.js": "093935964fe71998ee5d1975ffc0e3ba30ebc4482a50e5934136455374ce7fee",
+    "functions/personal-reading/visual-first/report-provider-budget.js": "292737917337bbd8c4eecf8246bc39110a2695a553bf38f582317b6188c4a13d",
+    "functions/personal-reading/visual-first/ziwei-vfr-authoring-pack.js": "e8e694f26b4a094ebc81a35ea809f2ccbb2109e6040e324ba1ec0f60fa896e79",
+    "functions/personal-reading/visual-first/ziwei-vfr-deep-publication.js": "0879e56621faa21ddd8c281ccd29094368adbf00e3beae445567b7c64cfc4a08",
+    "functions/personal-reading/visual-first/ziwei-vfr-diagram-data.js": "fbcbfe19cd736abb0121f12a768065f05f50ad86f9cd8917dbf5fb58378f075a",
+    "functions/personal-reading/visual-first/ziwei-vfr-five-call-composer.js": "5a62468cbdee6cdd81ca5f8b5577d02c3a721f9b09699b3b4c7d46f8e1cc8116",
+    "functions/personal-reading/visual-first/ziwei-vfr-five-call-manuscript.js": "7bc9a1ab4c84e456d1e1ca3dea4820c95f2e2eb7aed705d7f593d35a11ad27e8",
+    "functions/personal-reading/visual-first/ziwei-vfr-page-plan.js": "dc769fa277f028b59de75fc496a78f56dff7d6caf27ecda93421e4ac3f3954e2",
+    "functions/personal-reading/visual-first/ziwei-vfr-production-completeness.js": "44dc4d6e018d247557c9a3f3d9c5a4f9947b677894066242cde05a321395fd44",
+    "functions/personal-reading/visual-first/ziwei-vfr-production-deep-composer.js": "b521ba9fb7f5da46435375599e1b22e3880c6af11a9c0502aabc863b6134920a",
+    "functions/personal-reading/visual-first/ziwei-vfr-targeted-repair.js": "529953abb694c42106aa916dc9f97772e9412706f20e9fcacb4dfe1f46525b65",
+    "functions/personal-reading/ziwei-customer-publication-r2.js": "b00bd48229b567caa0ebfab652818f6aa96b943c2a1320743df9f3c922dec477",
+    "functions/personal-reading/ziwei-customer-publication.js": "84b1307cbc5bf2dba5628e00b1e0c2ce2fc8cbc5ebb439bf4db751ef4c0a8dab",
+    "functions/personal-reading/ziwei-production-publication-v1.js": "e3214bd0d72d9c207c89beb64dbf386ab94c73eab0e6cea44718c1145ce0aa39",
+    "functions/provider-cost/product-cost-envelope.js": "3a109f8ffc0a517d9378132cdedaf031b75c0d4506b2aafabffd68591f55af52",
+    "functions/provider-cost/provider-cost-ledger.js": "5e4e5867d14ef395a703f73231edf8820fc71f36b300d34e1dddbaa19911b27d",
+    "functions/pws/commercial/commerce-economics-policy.js": "475938032b82450484d66b213ba155b82b6458528f57b16aefc721daf21b5307",
+    "functions/pws/commercial/commercial-runtime.js": "692f8870a219c919355dddb5678ebb2cf401328f1a8e736d6f3841c1480a0128",
+    "functions/pws/commercial/payment-provider-registry.js": "c507ab4acc44a5952f1fc324764fc78c60716c9ea71b8673f4341723a00cfcac",
+    "functions/pws/commercial/report-successor-contract-history.js": "43bea3fcb1bcf906fc7dc8673313a1f102864637e3f4137ed933173db21fed52",
+    "functions/pws/commercial/report-successor-contract.js": "1ac5bdf5a48820f602a9b15527b871d897b7ea88e397e990962c9ed957cdcb54",
+    "functions/pws/commercial/stripe-product-registry.js": "df13b4dc9665ee2310030395f128d4d1a447e00773ed6bf6664147a548dbeb77",
+    "functions/pws/product/product-runtime.js": "f9e35261647c66f20430b28ebe9cfb5431a1aee9ce791e38a44fcc82f1c8f36b",
+    "functions/pws/registry/product-offer-registry.js": "980210f8c207b77a7b048f51ea5180610b7123a8a601fb502f29ccd359124440",
+    "functions/pws/registry/universal-registry-schema.js": "f23a10f3da1fd66d1484977130c08d6cb7d33774ffb061ea171f5e96779089f9",
+    "functions/report-context/report-context-admission.js": "5d465725f50d6dc5c23fed66e84bd30d16d870fc9b5132c5a212578e191e1d89",
+    "functions/report-context/report-context-store.js": "ba40892a19a3260ff879e62d4d4d2269cfac1920e7cc435849455537ab8bd053",
+    "functions/report-context/ziwei-contextual-snapshot-contract.js": "f574f6bdee3b64b667646674f15e7359c0aa40fe4e18d5e3d6a37133f5a7e196",
+    "functions/report-delivery/bazi-account-candidate.js": "a82859b0b27add291b5effb978ed2e49a55b60d510bc23e93843974bea720781",
+    "functions/report-delivery/bazi-customer-native-inputs.js": "0f637cb618dbcc110a25504b006dc67ea313412e844a2c360b54c22d50d240a0",
+    "functions/report-delivery/customer-artifact-store.js": "56f9e9ce35c528610266f943828153edadeee55bf3b372ee5511da258729afeb",
+    "functions/report-delivery/customer-report-artifact.js": "d76e3cba2cecced1fbd67078954b0070285744236b6c43ffa1f8c40289efb1f1",
+    "functions/report-delivery/method-delivery-cache.js": "dbdb7f3faa49f7d4db1b40512228a752f2e00c752ccfec90f23471ff278c56c2",
+    "functions/report-delivery/method-render-contract.js": "de815be87dc4ac8841404f11c4b0d744c6becca6ca55958727961c370a53e98c",
+    "functions/report-delivery/paid-report-bazi-adapter.js": "46fcbfd1ff3a3da697017801a7d064dba29b5fc938adfd1309ec908438ceb4b5",
+    "functions/report-delivery/paid-report-delivery-core.js": "63cce18564546d3a277a90f4d5488f6bda2b79b11afee792cfa9d6d8e7a37121",
+    "functions/report-delivery/paid-report-method-registry.js": "a98035f6b900203f7cc38c470642dc208ae936416b4ae6b5ed71a939acabc5d7",
+    "functions/report-delivery/paid-report-policy.js": "dbb4a3112e74c26060e5a4a46fabc0167f11afeefbed35fb5656ee4ab1019315",
+    "functions/report-delivery/paid-report-readiness.js": "a67522ef65bd03bc69e4f2bcdf3036f4692ad8a263177a62f071bf1291ba5d1c",
+    "functions/report-delivery/paid-report-reconciler.js": "3f5280b104f908b06684542cc65d22b4b502c8c6e2768e0d7d5566764626ffae",
+    "functions/report-delivery/paid-report-refund-events.js": "a3e09f9048fc6391e96fd9da1cb6321d9c35cbd304c1e410bf3dbc8ccc74b39a",
+    "functions/report-delivery/paid-report-refund.js": "a053982c108616a942b978a5d926785dac86a74a2a944caa762d9c959768eae9",
+    "functions/report-delivery/paid-report-state-store.js": "a6c93037506a4f85a0d580a01c24094ca68c9def1789c5165f9f2bff4042e902",
+    "functions/report-delivery/paid-report-worker-fence.js": "d9958b5a90c490417e4e24ad82cdf804b5cf6391dc4cd84218056e5e7a1a61f8",
+    "functions/report-delivery/report-delivery-contract.js": "0f54f02703fab0ca687c62f8fcd28f9de27d32520d872da73b7976593e083120",
+    "functions/report-delivery/ziwei-canonical-person-binding.js": "75d7b63d03d6ed96a40dce0f26837cd91c91c13344d6a2cf0c36f1c3fed3e614",
+    "functions/report-delivery/ziwei-contextual-person-binding-r1.js": "92ecd38a4c32b20918b203e59dee3d646821cdc34ccf74c3be047a3e5d6b1839",
+    "functions/report-delivery/ziwei-controlled-generation.js": "151bb97a43f830123e83ff31f4f64cd77a1fdfb9c9cb7bfdad492834dea86d02",
+    "functions/report-delivery/ziwei-controlled-scope.generated.js": "46df2653e078cd17585a58adf6cb95b195817f2b1cf6032b40df2675e99dff5b",
+    "functions/report-delivery/ziwei-production-generation-v1.js": "04978a175dcbd07115af64aef3d6cdaa89381c0bf31681c516b88bd0290d57d4",
+    "functions/report-delivery/ziwei-vfr-method-profile.js": "b75eb1b5b5dbdeabac673e77ba0cf1112bb9dc728c3f8c5b33c1f145b4ba838a",
+    "functions/report-delivery/ziwei-vfr-profile-policy.js": "c49e473b7b4376f77b4b851b4a9a9e20d5a2531bdb2f79917b3f1d4cc2c13aa0",
+    "functions/report-delivery/ziwei-vfr-r1-generation.js": "7f2f16ff31d17450f2daabe73a794364c3c61511f527403294646aae209ec0d4",
+    "functions/report-delivery/ziwei-vfr-r1-version.js": "6ba1535843b5c9aa74a90b65bacc778c1f0dfd44b372dbfd67a1671cd3903068",
+    "functions/runtime/memory/runtime-memory-contract.js": "6b68f70247eb746b90d09309372d29248cea4c3810a00d429b18b40fdb9f0f19",
+    "functions/runtime/review/review-contract.js": "221e4e49ce112091f23d228d09c3e4047dd30e38cfb92a79bdd5dac71538229c",
+    "functions/runtime/shared/schema-registry.js": "517cbcde81ecd54f6c33bef0ab23233d704b71b9b354c948dc60a272f27e3c4c",
+    "functions/symbolic-method-persistence/symbolic-account-identity-v1.js": "18456c9dc5878e7a6eb2c5f727b9065c0cec0a8192e91ba978f6975dbf6de2b4",
+    "functions/zi-wei-dynamic/dynamic-policy-runtime.js": "52ec61a2c1ae937d48a7543d5b008888f9bfe175b2de090a3bae71b1128dec7a",
+    "functions/zi-wei-dynamic/dynamic-runtime.js": "e866124730de9c97f693052530379a4b14ced2f41caa7ebf28414bb9b224423d",
+    "functions/zi-wei-full-production/ziwei-admitted-pattern-runtime.js": "b3c61c391166ebd40e200d05e13e1c0a77d13b70d1957353fe3cef4a96ad1ce2",
+    "functions/zi-wei-full-production/ziwei-chart-runtime.js": "9347544609655141f3da2e3e3767a482e60baa241472f6a6ddde8eaa5b80246a",
+    "functions/zi-wei-full-production/ziwei-complete-star-placement-runtime.js": "ad10fb21af4c951affa80e0eadb09316cc8a34cb4cf192c9589dc4f8924bf52a",
+    "functions/zi-wei-full-production/ziwei-contradiction-resolver-runtime.js": "c42b70b46e8c053c5e2db3eea03896af7189cb64f9cf8317ff31611469e9d975",
+    "functions/zi-wei-full-production/ziwei-cross-finding-composition-runtime.js": "9447abee4e3e84ad3089db0217332921304c6e58e64f3da88319a927309394fe",
+    "functions/zi-wei-full-production/ziwei-current-publication-envelope-runtime.js": "8e1d87fd8a6e0fcf142279bcab52311372ae483801aa490ea0a9bc8e1f40f76a",
+    "functions/zi-wei-full-production/ziwei-customer-report-runtime.js": "2ba64d5b2fa5f7644c037237dff35d1a4fb95518df2c943d4f20f383d7fb4e62",
+    "functions/zi-wei-full-production/ziwei-da-xian-integration-runtime.js": "d52aead84ea16dd6e683e88d962c1557d2fe2c7a09a60a0c696fd0591eccb46f",
+    "functions/zi-wei-full-production/ziwei-four-transformation-matrix-runtime.js": "68a03bfa749160e33038b91b386ccafd4fe1835e06df23fffd95999e6ea02ad7",
+    "functions/zi-wei-full-production/ziwei-full-production-customer-runtime.js": "6a4a47f5496edf8eed9888165233fb1ed892713fa45dbcabb362419cccbedca9",
+    "functions/zi-wei-full-production/ziwei-interactive-chart-surface-runtime.js": "9b73a71f9035b67a680fc8758fc1089f0621f8acff25cfeb8f2c1d688e74c966",
+    "functions/zi-wei-full-production/ziwei-interpretation-evidence-graph-runtime.js": "3ad49d89466e2016a1dfc1e347b7d6fcf2359152d9776bf2e9f1186fbe378dc5",
+    "functions/zi-wei-full-production/ziwei-liu-nian-integration-runtime.js": "953b6c86d6ecaab695fd73fc9bb1b3f4702a31e0df799382a29407e85eacdceb",
+    "functions/zi-wei-full-production/ziwei-live-target-context-runtime.js": "6462c8820e51da2388f9584e6770840343e0c050e8b177d7256a8a1f12dcfa7b",
+    "functions/zi-wei-full-production/ziwei-meaning-authority-v1.js": "bacacbdeb5169f9ff2fde6165a43005421eff160c1a63b3dd8259a21c362995d",
+    "functions/zi-wei-full-production/ziwei-meaning-registry-runtime.js": "94cd7ef69f7c467199dae6d134b12be5743327a0f016b6e7bfeb8971b4370462",
+    "functions/zi-wei-full-production/ziwei-palace-relationship-engine.js": "8a7b0cb135a24a2519a4fdf7bd6891f7a9fb293663de2e3d10cbd93f975887e7",
+    "functions/zi-wei-full-production/ziwei-pattern-rule-authority-v1.js": "a1a7dc72d644e45a3da334023bff740c99847f38a0e52deb1abead459032ba03",
+    "functions/zi-wei-full-production/ziwei-pattern-runtime.js": "e8e22f6ce8bbfb909a119e846e425a518c0b2868270456621cdaa486d448b504",
+    "functions/zi-wei-full-production/ziwei-professional-chart-density-runtime.js": "2618164d3adf40e0ebbb2943149b85a3faf7fd96c0503f198b3e97f3160a410e",
+    "functions/zi-wei-full-production/ziwei-professional-reading-r2-authority-v1.js": "ec4417b03589bfb1814f6a6e821315f38d2ddd9639a62554225003c4aad6640a",
+    "functions/zi-wei-full-production/ziwei-professional-reading-r2-authority-v2.js": "41d17fd25b43ffd9ac23033b596a73ac2392cce7b61143cd3ccd6c3837914b94",
+    "functions/zi-wei-full-production/ziwei-professional-reading-r2-runtime-v2.js": "828145e37d3217a73c141914a0b9160e4bacf46081671e4905c37b0a503715df",
+    "functions/zi-wei-full-production/ziwei-professional-timing-navigation-runtime.js": "a76079374be53a19d2d434069473b9552f6dd82d7a708be59ee9c8ebea3569f5",
+    "functions/zi-wei-full-production/ziwei-reading-ir-runtime.js": "d8e87c1ed6a995627934da50a60c3160f275d415ee3300a2994f2ff1a8946359",
+    "functions/zi-wei-full-production/ziwei-semantic-dedup-runtime.js": "64f1765f30312a812cebf20a824f7e01f9b140f156a5949583242e2bf8214655",
+    "functions/zi-wei-full-production/ziwei-source-admission-authority-v1.js": "0a21129600a2b7818b200a95d79c085903a74e0f4257a339eb6f195125345feb",
+    "functions/zi-wei-full-production/ziwei-star-combination-runtime.js": "a5dd5d3daebe260de2c2b1cef9d08d1c0cce7be6d4bdf7d39af57d5cce284b5b",
+    "functions/zi-wei-full-production/ziwei-star-state-authority-v1.js": "271de6bf4e9d51c74b2125d7e0a406c85ff045aedf08a2815c158c59427ccf92",
+    "functions/zi-wei-full-production/ziwei-star-state-runtime.js": "f48523630148a1fe0baddfef0948156d00421d3abdec0b2ea6b95e451a659a68",
+    "functions/zi-wei-full-production/ziwei-structural-finding-runtime.js": "58ff0654cfdb0aaced4166224f3ea5104069fc3267708ee9263f9f4058aeeb17",
+    "functions/zi-wei-full-production/ziwei-structural-registry.js": "03f39371b616981e72a8c6255d343fc2834aadf9ebcffe922d8b7f273645c45c",
+    "functions/zi-wei-full-production/ziwei-topic-reading-runtime.js": "21edc08b4d7ae926aa34fabe3d5d4a5fb4a75cdc79405ea6998f576b68e1614e",
+    "functions/zi-wei-runtime/lunar-calendar-table-v1.js": "0891e0dcabb7f214049bd536b71c6ab734712d29d37b3160bd6220bd6f2cb356",
+    "functions/zi-wei-runtime/policy-gate.js": "67009c55246ad53909cfd0c53f9aea038fd3971002a87424c4c348638255f305",
+    "functions/zi-wei-runtime/runtime-activation-gate.js": "413c06e2c41bdc94f95685031c9b12633480e8e24f3be60cc17245f5a57dde65",
+    "functions/zi-wei-runtime/zi-wei-calculation-ir-runtime.js": "031d2fbb1d81c666f9055275edfb230f03f45aca4235dc17fa09973986043e5a",
+    "functions/zi-wei-runtime/zi-wei-calendar-conversion-runtime-v2.js": "d70b4c536949b07bb26db1eb3812ec391580bfd91807481e15392fa6c00988ff",
+    "functions/zi-wei-runtime/zi-wei-canonical-projection-runtime.js": "0ff08609bbf90d1fc73b14fa324b930d8a5daff8a557bf93ac9786d9535eca5c",
+    "functions/zi-wei-runtime/zi-wei-four-transformations-runtime.js": "36a81560920f6bd525257622117501c68b623f4280d9dd46fa851613196a1532",
+    "functions/zi-wei-runtime/zi-wei-main-star-runtime.js": "7ff4722750cfcd2bae81bbab66d5f1c12b8a99fe1b26d17bf1546c6a3a3cb433",
+    "functions/zi-wei-runtime/zi-wei-palace-construction-runtime-v2.js": "1e55fc585e70b17cd69923e983f28fb11e54b6a98cfa50fc3c8361034049d93f",
+    "functions/zi-wei-runtime/zi-wei-runtime-authorities.generated.js": "bd753f1706c34899349b354b8aa875e52d0fa9bb16629d857eeaef72d5492c58",
+    "functions/zi-wei-runtime/zi-wei-support-star-runtime.js": "61cda8ec0cf90ca94de9c087303a70a84bed2748505dc78aa41ff3575317bbff",
+    "functions/zi-wei-runtime/zwr-utils.js": "23c5a77077b5bea47f82f2cee6ebfc4a7f5acc0b40f6383201d821dc8a4afa70",
+    "scripts/check-p8r1-orphan-locks.mjs": "43cfcfb41262e3ea816e69b1d800cde47ce9fcc8995f42cd886fb6d15b43b105",
+    "scripts/lib/p8r1-bazi-qa.mjs": "97dc9d224790d35cd59255c196f3adbc8a799dd2821d6d900939c9f566313efd",
+    "scripts/lib/persistent-private-reports-qa.mjs": "cc3dac1a6fcf85da4d4a4075fe79c4236977ce98ad007259ab208d114fda6790",
+    "scripts/p8r1-bazi-process.mjs": "09ef612eb8fc35f90cd14c770b57615a910cdab44a2bb1a79b65e10cd4f7c3e8",
+    "scripts/runtime-migration-loader.mjs": "da9140ad472ed7450ba0af4d30d0baf97d49102d3123e26db76ec86ec6469448"
+  },
+  "filesModified": [
+    {
+      "path": "functions/personal-reading/report-generation-store.js",
+      "beforeSha256": "12cf941203c5839536f588e88b993e00175b139b6f969e065a84e05fc29e7cb9",
+      "afterSha256": "ad2d514cce3e36eda8db61216c108538b54614001d1f2f36ef4c3ca46908833c"
+    },
+    {
+      "path": "functions/account/bazi-account-delivery.js",
+      "beforeSha256": "dc927867059d8bfaf78d944a644114e43cb75f704330da13b550fd8e22fdf30b",
+      "afterSha256": "4f2494a5ea7e72712b613f1f5fab7b79014db3e7aec484044b657fbd80f7e0df"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-bazi-adapter.js",
+      "beforeSha256": "d95f85a96da968b895e842130340d907eb9154bb555e50231478e92a72002fee",
+      "afterSha256": "46fcbfd1ff3a3da697017801a7d064dba29b5fc938adfd1309ec908438ceb4b5"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-delivery-core.js",
+      "beforeSha256": "e55851fc18d1ce336947605c7d99afeb9e54f72d487d30887c5af508fbd15762",
+      "afterSha256": "63cce18564546d3a277a90f4d5488f6bda2b79b11afee792cfa9d6d8e7a37121"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-state-store.js",
+      "beforeSha256": "331547faa3e73e8511c16866f16aabf10d1c60b29cfd1a0cfe10ab2a3f4b27eb",
+      "afterSha256": "a6c93037506a4f85a0d580a01c24094ca68c9def1789c5165f9f2bff4042e902"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-refund.js",
+      "beforeSha256": "3596b4e52fd7bfc9b64b85c3df13bcbc5fb4ff556bfb4df84e77cc6f7b2eafb2",
+      "afterSha256": "a053982c108616a942b978a5d926785dac86a74a2a944caa762d9c959768eae9"
+    },
+    {
+      "path": "functions/commerce/commerce-stripe-events.js",
+      "beforeSha256": "3f1457890466d967a4c5d1fa55638a86b4f3e92facb8a9ef1c847d27fbb57ed4",
+      "afterSha256": "dd20da53aa7893e3c1bbeecdda25664c96dff8ef6c8dc15291cd3149723ad812"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-readiness.js",
+      "beforeSha256": "04ee1407b20be143346f16071777558591c1158cbb51237828c69f2f095ed661",
+      "afterSha256": "a67522ef65bd03bc69e4f2bcdf3036f4692ad8a263177a62f071bf1291ba5d1c"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-policy.js",
+      "beforeSha256": "ee27ff44069e5dfc387827f2a9c79032a18212598dac72a948ffb06c65494746",
+      "afterSha256": "dbb4a3112e74c26060e5a4a46fabc0167f11afeefbed35fb5656ee4ab1019315"
+    },
+    {
+      "path": "functions/commerce/commerce-stripe-api.js",
+      "beforeSha256": "2943acdc742bcf0541cf78f21440b96321c60b4382c75b2c7206672493b5f480",
+      "afterSha256": "35bb43403f642f1eb5f55e62e315922c779b1f3e64a3aad252b711bb3aebe3b4"
+    },
+    {
+      "path": "functions/account/report-followup-store.js",
+      "beforeSha256": "67b6727dafed1cb7a2fe1f0549475b6f923b0a0038a74ed777406264161d040e",
+      "afterSha256": "bb37bf16a5ff074ed12cdec851867759947ebcf35a2dd876c15ea25e964fe904"
+    },
+    {
+      "path": "functions/personal-reading/paid-report-context.js",
+      "beforeSha256": "bd0aed01ce9e752250d641268ea7e7fb58cceb6ff7484cb8c250d703fce253a0",
+      "afterSha256": "777a7784d3e5d3501bc244314c3f06a8d50ec11fd4d6e9ee13d114af906ea083"
+    },
+    {
+      "path": "functions/api/account-paid-report-setup.js",
+      "beforeSha256": "08f23a0d425a4a96c3aaea7942d97edec118bd1d2b49f5c56c711d8f0c45f1bc",
+      "afterSha256": "653190f72097e26f204c28aedbf0ee4a59dfb7119e7b62e2e82913a1b18dbd0b"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/commerce-account.js",
+      "beforeSha256": "443abc2d52a8d1ec6dcfd224127acc7aff8f39f21ff156c3745dac6f46f56ecf",
+      "afterSha256": "562904555698e188c146ac0e80e63d79e3c69d529b3883ead2e49c3bbba16cf9"
+    },
+    {
+      "path": "scripts/check-p8-shared-core.mjs",
+      "beforeSha256": "51be0b7ed6ef3d7d4518f516d38751742e47ff1d217ae0e3432a04c0ae1a8d31",
+      "afterSha256": "6dce8cbd92b4d9954cf1256982e8410ada0c570d8367f3b0b268e7b761e6ce8b"
+    },
+    {
+      "path": "scripts/check-p8-durable-matrix.mjs",
+      "beforeSha256": "a716e25a7c6b8c97e0114e214c7e12a15e87b8c3c261946e5ac3a8f11b91753a",
+      "afterSha256": "392bd6b1063e59c3a3a4a1ac2338bd15d938b1a2ff1c4924501ab7cb2670afc6"
+    },
+    {
+      "path": "scripts/check-p8-security-watchdog.mjs",
+      "beforeSha256": "b62ddd3195f782c92357934087cc52591371bfab0978c2056cd21faac6766aa1",
+      "afterSha256": "8702247c25ef4d736dc7e6e7af3be038df45b3536a8a02e67ac19caf6ce26001"
+    },
+    {
+      "path": "scripts/check-p8-checkout-api-negatives.mjs",
+      "beforeSha256": "0e031be190f71397e083494f6732d0096877901c40ddb9c5b0b2bdfd7969d1ed",
+      "afterSha256": "b8af0be65c2b07f60df5bc24b8979879fb232062f5f341daf06c805187c6d567"
+    }
+  ],
+  "filesCreated": [
+    {
+      "path": "functions/report-delivery/paid-report-worker-fence.js",
+      "sha256": "d9958b5a90c490417e4e24ad82cdf804b5cf6391dc4cd84218056e5e7a1a61f8"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-reconciler.js",
+      "sha256": "3f5280b104f908b06684542cc65d22b4b502c8c6e2768e0d7d5566764626ffae"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-refund-events.js",
+      "sha256": "a3e09f9048fc6391e96fd9da1cb6321d9c35cbd304c1e410bf3dbc8ccc74b39a"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/paid-report-setup.js",
+      "sha256": "92592d53070ba4b33e58ac507911304f9bb08c5d60bab9684ef0054b5b96fbee"
+    },
+    {
+      "path": "scripts/check-p8r1-customer-entry.mjs",
+      "sha256": "601cfaff1c01ab6edd3f7268da875739bea93b5ca744628d7bc1c28cfa0ef121"
+    },
+    {
+      "path": "scripts/check-p8r1-native-diversity.mjs",
+      "sha256": "1142e39d54ffe4c481eb5b08f44fe917c485a2a9b8aaf97d4e0e30bd4b0d692a"
+    },
+    {
+      "path": "scripts/check-p8r1-original-checkpoint.mjs",
+      "sha256": "0ca923b43eb79427794c067d1c0c2d3d2d3e1fe31352ac9d02b149ee6b1d0483"
+    },
+    {
+      "path": "scripts/check-p8r1-orphan-locks.mjs",
+      "sha256": "43cfcfb41262e3ea816e69b1d800cde47ce9fcc8995f42cd886fb6d15b43b105"
+    },
+    {
+      "path": "scripts/check-p8r1-refund-webhooks.mjs",
+      "sha256": "2b60dbdf3d6cbe9bf7732f2fb99bda5824271edfb7c1cc284625ef97af2daff0"
+    },
+    {
+      "path": "scripts/check-p8r1-review-page.mjs",
+      "sha256": "d663ea57c1ceb058fe513bcdfeaf51642488ba4fc6ca0f00683fb3cf99d8a9e8"
+    },
+    {
+      "path": "scripts/check-p8r1-security.mjs",
+      "sha256": "aae156037dd1dcd06b3af634eacaf9686f9c53867064b8fa1ee8fe43f7c1a5ba"
+    },
+    {
+      "path": "scripts/check-p8r1-stale-material-worker.mjs",
+      "sha256": "f888114b888bd4b3955d7d8299a4e47d75057ecbb21e77b4d0cd5e8010782cb0"
+    },
+    {
+      "path": "scripts/check-p8r1-watchdog-migrations.mjs",
+      "sha256": "de9bb48e45caf89589b98d920c6f22b9c5c5441d99ba0c31dcf1b8b97b013a03"
+    },
+    {
+      "path": "scripts/check-p8r1-worker-fencing.mjs",
+      "sha256": "a604df377a6b820ed3399b5be441411cb86ca40295dbdc56126f93e9b894be97"
+    },
+    {
+      "path": "scripts/finalize-p8r1-local-evidence.mjs",
+      "sha256": "fb76750a862cb17e64c0a9556f3048f80c1344c6535e6df3d170115626ca5bd5"
+    },
+    {
+      "path": "scripts/p8r1-bazi-process.mjs",
+      "sha256": "09ef612eb8fc35f90cd14c770b57615a910cdab44a2bb1a79b65e10cd4f7c3e8"
+    },
+    {
+      "path": "scripts/run-p8r1-final-local-matrix.mjs",
+      "sha256": "aad164c73a416ed3bd79cafe52161382d451d973115f30d06aeba3c65c5aebc4"
+    },
+    {
+      "path": "scripts/lib/p8r1-bazi-qa.mjs",
+      "sha256": "97dc9d224790d35cd59255c196f3adbc8a799dd2821d6d900939c9f566313efd"
+    }
+  ],
+  "screenshots": {
+    "count": 16,
+    "totalBytes": 11199103,
+    "rows": [
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p8/W0-P13-CURRENT.png",
+        "bytes": 824842,
+        "sha256": "18cfcba948cf86fe77672a885a1e3ffeb7e42a5266cadf6755437db21d49807d",
+        "role": "REPRESENTATIVE_OR_HISTORICAL_ACCEPTANCE",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p8/W0-P12-CURRENT.png",
+        "bytes": 734802,
+        "sha256": "5a381c22aba23fcf9401d7c72e87eb5ab466c99ee35a33e6ff42ea0078f98a26",
+        "role": "REPRESENTATIVE_OR_HISTORICAL_ACCEPTANCE",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p8/W0-P47-CURRENT.png",
+        "bytes": 717410,
+        "sha256": "c862083f035439533b54b2412cef461d5cb2d9407d535ed09b6dbd9b28f8db42",
+        "role": "REPRESENTATIVE_OR_HISTORICAL_ACCEPTANCE",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p8/W0-P45-CURRENT.png",
+        "bytes": 837488,
+        "sha256": "b897980ed0125c9e058d0fa741a9b206887a011339aa343347dfde35181c8eea",
+        "role": "REPRESENTATIVE_OR_HISTORICAL_ACCEPTANCE",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/P01-SCREEN.png",
+        "bytes": 1368497,
+        "sha256": "10e8af0f4fb6c3aabd8ec6b365cd4718e0df46384aa3c4610022b4ace380e303",
+        "role": "REPRESENTATIVE_OR_HISTORICAL_ACCEPTANCE",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/P13-SCREEN.png",
+        "bytes": 824842,
+        "sha256": "18cfcba948cf86fe77672a885a1e3ffeb7e42a5266cadf6755437db21d49807d",
+        "role": "REPRESENTATIVE_OR_HISTORICAL_ACCEPTANCE",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/P22-SCREEN.png",
+        "bytes": 731139,
+        "sha256": "7cc18f7ce4fc23d8290e707808e94ce4206d79e7f30b5fa3bc0e07f5683696d5",
+        "role": "REPRESENTATIVE_OR_HISTORICAL_ACCEPTANCE",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/P07-SCREEN.png",
+        "bytes": 637488,
+        "sha256": "4769fd0ce890d073b587b09ac5eb340bea646ebce7f30ffefcb099e6ad76bfd9",
+        "role": "REPRESENTATIVE_OR_HISTORICAL_ACCEPTANCE",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/P45-SCREEN.png",
+        "bytes": 837488,
+        "sha256": "b897980ed0125c9e058d0fa741a9b206887a011339aa343347dfde35181c8eea",
+        "role": "REPRESENTATIVE_OR_HISTORICAL_ACCEPTANCE",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/P48-SCREEN.png",
+        "bytes": 776198,
+        "sha256": "d0ee3ef422acfe63582d3884fa290719f79891ae240001161e6a82f46437dbd5",
+        "role": "REPRESENTATIVE_OR_HISTORICAL_ACCEPTANCE",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/PDF-COVER.png",
+        "bytes": 1798111,
+        "sha256": "fbeddb745ebdf7a0169bb2d115b53019e19c53a85cbb1584c6c40e60023b10d5",
+        "role": "REPRESENTATIVE_OR_HISTORICAL_ACCEPTANCE",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/PDF-DIAGRAM-47.png",
+        "bytes": 916445,
+        "sha256": "3e9e5b7da85b82cd4ca6e030fae18646eee5efbdcfe81512618d09f607811d65",
+        "role": "REPRESENTATIVE_OR_HISTORICAL_ACCEPTANCE",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/P8-REVIEW-FAILURE.png",
+        "bytes": 53265,
+        "sha256": "7151c41e89573b96c217b15c35959ba2fbb60160fb2c600cef9a688de1feb026",
+        "role": "FAILED_STAGE_DIAGNOSTIC",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/P8R1-CUSTOMER-ENTRY-FAILURE.png",
+        "bytes": 29798,
+        "sha256": "84213954f2bbace4be4914d4ae822a089a1fc045fb5a4b7a30dc4249ff3e8376",
+        "role": "FAILED_STAGE_DIAGNOSTIC",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/P8R1-CUSTOMER-ENTRY-FINAL.png",
+        "bytes": 64839,
+        "sha256": "1efb42892ff3ff9b81aaae0e86fa99e9f72ce52e656403a82327c8ae77b70fee",
+        "role": "REPRESENTATIVE_OR_HISTORICAL_ACCEPTANCE",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/P8R1-CUSTOMER-ENTRY-UNSTYLED-INITIAL.png",
+        "bytes": 46451,
+        "sha256": "126ba348c1c42d9fa979c7cd16a770d8bec38c51d7305b0acebd068910d83dbb",
+        "role": "SUPERSEDED_INITIAL_UI_DIAGNOSTIC",
+        "archive": "Keep immutable bytes + hash manifest and receipt links in this evidence directory. No move/delete of historical accepted screenshots."
+      }
+    ],
+    "policy": "Failed-only captures + one representative final account surface. Final full matrix suppresses redundant successful captures. No screenshot cleanup executed."
+  },
+  "initialFailures": [
+    {
+      "stage": "Customer-entry QA navigation",
+      "exitCode": 1,
+      "reason": "Aborting fixture checkout navigation removed the document; harness now locally fulfills the fixture checkout URL. Production checkout was already correctly created once."
+    },
+    {
+      "stage": "Watchdog REFUND_PENDING QA",
+      "exitCode": 1,
+      "reason": "Fixture built payment-intent ID from unsanitized owner while canonical seed uses sanitized ID. Fixture now reads actual purchase authority; only failed/unexecuted states were rerun before final matrix."
+    }
+  ],
+  "otherWindowChanges": "Knowledge/Book/runtime migration checker and unrelated acceptance modifications preserved; not adopted as this task evidence."
+}

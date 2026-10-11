@@ -1,10 +1,12 @@
 import {digest} from './oidc-auth.js';
 import {reportDeliveryMethod} from '../report-delivery/report-delivery-contract.js';
+import {assertPaidReportWorkerFence} from '../report-delivery/paid-report-worker-fence.js';
 const fail=(code,status=403)=>{throw Object.assign(new Error(code),{code,status});};
 const db=env=>{if(!env?.RUNTIME_DB?.prepare)fail('FOLLOWUP_DATABASE_REQUIRED',503);return env.RUNTIME_DB;};
 // Grant is minted only from existing paid Commerce and immutable delivered SQL
 // owners. A browser cannot supply an entitlement, allowance or material identity.
 export async function grantDeliveredReportFollowups(env,{reportId,ownerAccountId,purchaseId,methodCode},clock=Date.now){
+ const fence=await assertPaidReportWorkerFence(env);
  const productId=reportDeliveryMethod(methodCode)?.commerceProductId;
  if(!productId||!purchaseId||!ownerAccountId)fail('PAID_REPORT_FOLLOWUP_GRANT_REJECTED');
  await db(env).prepare(`INSERT INTO account_report_followup_grants
@@ -17,7 +19,9 @@ export async function grantDeliveredReportFollowups(env,{reportId,ownerAccountId
  AND e.entitlement_status='active' AND (e.expires_at IS NULL OR e.expires_at>?5)
  AND p.purchase_state='purchased' AND o.customer_id=m.owner_account_id
  AND o.order_state='FULFILLED' AND o.review_required=0
- ON CONFLICT DO NOTHING`).bind(reportId,ownerAccountId,purchaseId,productId,new Date(clock()).toISOString(),methodCode).run();
+ AND ${fence?"EXISTS(SELECT 1 FROM paid_report_jobs WHERE job_id=?7 AND owner_account_id=?8 AND claimed_by=?9 AND lease_expires_at>?10 AND state NOT IN ('DELIVERED','REFUNDED'))":'1=1'}
+ ON CONFLICT DO NOTHING`).bind(reportId,ownerAccountId,purchaseId,productId,new Date(clock()).toISOString(),methodCode,...(fence?[fence.jobId,fence.ownerAccountId,fence.claimToken,fence.clock()]:[])).run();
+ await assertPaidReportWorkerFence(env);
  const grant=await db(env).prepare('SELECT * FROM account_report_followup_grants WHERE report_id=? AND owner_account_id=? AND purchase_id=? AND product_id=?').bind(reportId,ownerAccountId,purchaseId,productId).first();
  if(!grant)fail('PAID_REPORT_FOLLOWUP_GRANT_REJECTED');return grant;
 }

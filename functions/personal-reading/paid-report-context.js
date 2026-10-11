@@ -2,9 +2,11 @@ import {commerceEnvironment} from '../commerce/commerce-environment.js';
 import {createReportGenerationStore} from './report-generation-store.js';
 import {createPaidProductCostAuthority} from './paid-product-cost-authority.js';
 import {createPaidReportTransport} from './paid-report-transport.js';
+import {assertPaidReportWorkerFence} from '../report-delivery/paid-report-worker-fence.js';
 // Server caller supplies identity from authentication and canonical report
 // ownership. SQL verifies purchase, environment and order before any transport.
 export async function createServerPaidReportContext({env,binding,request,model,validateProviderOutput}){
+ if(request.phase!=='FOLLOWUP')await assertPaidReportWorkerFence(env);
  if(env.REPORT_ACCESS_TIER==='FREE')throw Error('FREE_REPORT_PROVIDER_FORBIDDEN');
  const environment=commerceEnvironment(env);
  const row=await env.RUNTIME_DB.prepare(`SELECT p.purchase_id FROM commerce_purchases p

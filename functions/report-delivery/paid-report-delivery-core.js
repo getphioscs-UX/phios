@@ -4,8 +4,10 @@ import {PAID_REPORT_METHODS} from './paid-report-method-registry.js';
 import {paidReportStateStore} from './paid-report-state-store.js';
 import {PAID_REPORT_POLICY,TERMINAL_PAID_STATES,paidReportError,classifyReportFailure} from './paid-report-policy.js';
 import {requireSharedPaidReportLocal,customerReportStatus} from './paid-report-readiness.js';
-import {runPaidReportRefund} from './paid-report-refund.js';
+import {runPaidReportRefund,verifyPaidReportRefundTerminal} from './paid-report-refund.js';
 import {digest} from '../account/oidc-auth.js';
+import {paidReportWorkerContext} from './paid-report-worker-fence.js';
+import {reconcilePaidReportDurableTruth} from './paid-report-reconciler.js';
 export async function ensureVerifiedPaidReportJob(env,order,{registry=PAID_REPORT_METHODS,clock=Date.now}={}){
  requireSharedPaidReportLocal(env);const store=paidReportStateStore(env,clock),db=store.db,intentId=JSON.parse(order.context_json||'{}').reportIntentId;
  if(!intentId)return null;const r=await store.readiness(intentId,order.customer_id),adapter=registry[r?.methodCode];
@@ -22,15 +24,22 @@ export function sharedPaidReportCore(context,{registry=PAID_REPORT_METHODS,clock
  const methods=['prepare','generate','validate','compile','render','release'],states=['DELIVERY_JOB_CREATED','GENERATING','VALIDATING_OUTPUT','COMPILING_PUBLICATION','RENDERING','RENDERING'];
  const event=(name,j)=>observe({event:name,jobId:j.jobId,methodCode:j.methodCode,productId:j.productId});
  async function owned(id){const j=await store.job(id,owner);if(!j)throw paidReportError('REPORT_JOB_UNAVAILABLE',404);return j;}
- async function execute(id){let j=await owned(id),adapter=registry[j.methodCode];if(!adapter?.p8Admitted)throw paidReportError('METHOD_DELIVERY_ADAPTER_NOT_ADMITTED');if(TERMINAL_PAID_STATES.includes(j.state)){if(j.state==='DELIVERED')await adapter.verifyDelivered(context,j,j.output);return j;}j=await store.claim(j);
+ async function execute(id){let j=await owned(id),adapter=registry[j.methodCode];if(!adapter?.p8Admitted)throw paidReportError('METHOD_DELIVERY_ADAPTER_NOT_ADMITTED');if(TERMINAL_PAID_STATES.includes(j.state)){if(j.state==='DELIVERED')await adapter.verifyDelivered(context,j,j.output);else await verifyPaidReportRefundTerminal(store,j);return j;}j=await store.claim(j);
+  const workerContext=paidReportWorkerContext(context,j,clock);
   try{
-   const existing=await adapter.reconcile(context,j);
-   if(existing){await adapter.verifyDelivered(context,j,existing);j=await store.update(j,{state:'DELIVERED',output:existing,reportId:existing.reportId,dueAt:clock()});await store.resolveIncidents(j);event('DELIVERED',j);return j;}
-   if(/^REFUND/.test(j.state)){j=await runPaidReportRefund({store,job:j,adapter,context,transport:refundTransport});return j;}
+   const reconciliation=await reconcilePaidReportDurableTruth(workerContext,j,adapter);
+   if(reconciliation.decision==='DO_NOT_RECLAIM')throw paidReportError('REPORT_GENERATION_LOCK_BUSY');
+   if(reconciliation.decision==='STORAGE_INTEGRITY_FAILURE'){await store.incident(j,'STORAGE_INTEGRITY_FAILURE','STORAGE_INTEGRITY_FAILURE');return await store.update(j,{reconciliationHold:'STORAGE_INTEGRITY_FAILURE',dueAt:clock()+PAID_REPORT_POLICY.recoveryLease});}
+   if(reconciliation.decision==='PROVIDER_RECONCILIATION_REQUIRED'&&!/^REFUND/.test(j.state)){await store.incident(j,'PROVIDER_UNKNOWN','PROVIDER_OUTCOME_UNCERTAIN');if(clock()-j.createdAt>=PAID_REPORT_POLICY.maxLifecycleAge)j=await store.update(j,{state:'REFUND_REQUIRED',dueAt:clock()});else j=await store.update(j,{state:'PROVIDER_RECONCILIATION_REQUIRED',dueAt:clock()+PAID_REPORT_POLICY.recoveryLease});return j;}
+   if(!/^REFUND/.test(j.state)&&['RESUME_FROM_PERSISTED_PROVIDER_OUTPUT','RESUME_RENDER_ONLY','RESUME_RELEASE_ONLY'].includes(reconciliation.decision)){const output=await adapter.resumeFrom(workerContext,j,reconciliation.decision);j=await store.update(j,{output,stageIndex:2,inFlightStage:null,state:j.state==='PROVIDER_RECONCILIATION_REQUIRED'?'AUTOMATIC_RECOVERY':j.state});}
+   if(reconciliation.decision==='SAFE_TO_RECLAIM_PRE_PROVIDER_LOCK'&&j.inFlightStage==='generate')j=await store.update(j,{inFlightStage:null,state:j.state==='PROVIDER_RECONCILIATION_REQUIRED'?'AUTOMATIC_RECOVERY':j.state});
+   const existing=await adapter.reconcile(workerContext,j);
+   if(existing){const refund=await store.db.prepare('SELECT * FROM paid_report_refunds WHERE job_id=?').bind(j.jobId).first();if(refund){if(j.refundSubmitted||refund.stripe_refund_id||refund.state==='REFUNDED'){await store.incident(j,'REFUND_DELIVERY_CONFLICT','REFUND_DELIVERY_CONFLICT');j=await store.update(j,{state:'REFUND_RECONCILIATION_REQUIRED',refundDeliveryConflict:true,dueAt:clock()+PAID_REPORT_POLICY.refundLease});return j;}await store.assertCurrent(j);await store.db.prepare("UPDATE paid_report_refunds SET state='CANCELED_DELIVERED',updated_at=? WHERE job_id=? AND stripe_refund_id IS NULL").bind(clock(),j.jobId).run();}await adapter.verifyDelivered(workerContext,j,existing);j=await store.update(j,{state:'DELIVERED',output:existing,reportId:existing.reportId,dueAt:clock()});await store.resolveIncidents(j);event('DELIVERED',j);return j;}
+   if(/^REFUND/.test(j.state)){j=await runPaidReportRefund({store,job:j,adapter,context:workerContext,transport:refundTransport});return j;}
    if(j.state==='PROVIDER_RECONCILIATION_REQUIRED'){await store.incident(j,'PROVIDER_UNKNOWN','PROVIDER_RECONCILIATION_REQUIRED');if(clock()-j.createdAt>=PAID_REPORT_POLICY.maxLifecycleAge)j=await store.update(j,{state:'REFUND_REQUIRED',dueAt:clock()});else j=await store.update(j,{dueAt:clock()+PAID_REPORT_POLICY.recoveryLease});return j;}
    if(clock()-j.createdAt>=PAID_REPORT_POLICY.maxLifecycleAge){j=await store.update(j,{state:'REFUND_REQUIRED',dueAt:clock()});return j;}
    if(j.inFlightStage==='generate'){
-    const recovered=await adapter.recoverCheckpoint?.(context,j,'generate');
+    const recovered=await adapter.recoverCheckpoint?.(workerContext,j,'generate');
     if(recovered)j=await store.update(j,{output:recovered,stageIndex:2,inFlightStage:null});
     else{await store.incident(j,'PROVIDER_UNKNOWN','PROVIDER_OUTCOME_UNCERTAIN');j=await store.update(j,{state:'PROVIDER_RECONCILIATION_REQUIRED',dueAt:clock()+PAID_REPORT_POLICY.recoveryLease});return j;}
    }
@@ -38,7 +47,7 @@ export function sharedPaidReportCore(context,{registry=PAID_REPORT_METHODS,clock
    for(let i=j.stageIndex;i<methods.length;i++){
     if(j.state!==states[i])j=await store.update(j,{state:states[i]});event(i===1?'GENERATION_STARTED':i===4?'RENDER_STARTED':'DELIVERY_CHECKPOINT',j);
     j=await store.update(j,{inFlightStage:methods[i]});
-    const output=await adapter[methods[i]](context,j,j.output);
+    const output=await adapter[methods[i]](workerContext,j,j.output);
     // Lifecycle SQL carries references only. Content/authority remain in existing
     // method and immutable artifact stores, never duplicated in generic job rows.
     if(!output||Object.keys(output).some(k=>!['personId','locale','reportId','artifactRef','snapshotDigest','outputDigest','checkpointRef'].includes(k)))throw paidReportError('ADAPTER_OPAQUE_OUTPUT_REQUIRED');
@@ -48,7 +57,7 @@ export function sharedPaidReportCore(context,{registry=PAID_REPORT_METHODS,clock
     if(typeof crashAfter==='function')await crashAfter(methods[i],j);
     if(crashAfter===methods[i])throw Object.assign(Error('QA_PROCESS_CRASH'),{qaCrash:true});
    }
-   await adapter.verifyDelivered(context,j,j.output);j=await store.update(j,{state:'DELIVERED',reportId:j.output.reportId,dueAt:clock()});await store.resolveIncidents(j);event('DELIVERED',j);return j;
+   await adapter.verifyDelivered(workerContext,j,j.output);j=await store.update(j,{state:'DELIVERED',reportId:j.output.reportId,dueAt:clock()});await store.resolveIncidents(j);event('DELIVERED',j);return j;
   }catch(error){if(error.qaCrash)throw error;const f=classifyReportFailure(error);await store.incident(j,f.class,f.code);event('DELIVERY_FAILURE',j);
    if(/^REFUND/.test(j.state)){j=await store.update(j,{lastFailure:f,dueAt:clock()+PAID_REPORT_POLICY.refundLease});return j;}
    if(f.class==='PROVIDER_UNKNOWN')j=await store.update(j,{state:'PROVIDER_RECONCILIATION_REQUIRED',lastFailure:f,dueAt:clock()+PAID_REPORT_POLICY.recoveryLease});
@@ -58,5 +67,5 @@ export function sharedPaidReportCore(context,{registry=PAID_REPORT_METHODS,clock
    else j=await store.update(j,{state:'REFUND_REQUIRED',lastFailure:f,dueAt:clock()});return j;
   }finally{await store.unclaim(j);}
  }
- return {store,work:execute,async status(id){return customerReportStatus(await owned(id));},async scanDueJobs(){return (await store.due()).filter(j=>j.ownerAccountId===owner);},async claimDueJob(id){return store.claim(await owned(id));},async reconcileJob(id){return execute(id);},async advanceOrEscalate(){const out=[];for(const j of await this.scanDueJobs())out.push(await execute(j.jobId));await store.pruneReadiness();return out;}};
+ return {store,work:execute,async status(id){const j=await owned(id);if(j.state==='DELIVERED')await registry[j.methodCode].verifyDelivered(context,j,j.output);if(j.state==='REFUNDED')await verifyPaidReportRefundTerminal(store,j);return customerReportStatus(j);},async scanDueJobs(){return (await store.due()).filter(j=>j.ownerAccountId===owner);},async claimDueJob(id){return store.claim(await owned(id));},async reconcileJob(id){return execute(id);},async advanceOrEscalate(){const out=[];for(const j of await this.scanDueJobs())out.push(await execute(j.jobId));await store.pruneReadiness();return out;}};
 }

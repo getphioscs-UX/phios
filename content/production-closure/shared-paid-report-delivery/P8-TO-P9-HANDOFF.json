@@ -1,0 +1,75 @@
+{
+  "state": "DOCUMENT_ONLY_P9_NOT_AUTHORIZED_NOT_RUN",
+  "prerequisite": "P8_PASS_LOCAL",
+  "p8Receipt": "content/production-closure/shared-paid-report-delivery/P8-SHARED-PAID-REPORT-DELIVERY-CORE-R1.json",
+  "sharedCoreVersion": "P8-SHARED-PAID-REPORT-1-R1",
+  "migration0018": {
+    "version": 18,
+    "name": "shared_paid_report_delivery",
+    "file": "db/migrations/0018_shared_paid_report_delivery.sql",
+    "checksum": "cae6b49b1e439194e945108a9756b0faf6d99c6b294982cc2b8343ffaf7ec215",
+    "schema_id": "phi-os.shared-paid-report-delivery.v1",
+    "immutable": true
+  },
+  "requiredWorkerBindings": [
+    "RUNTIME_DB via existing registered migration runner",
+    "PRIVATE_REPORTS private immutable material/artifact storage",
+    "CANONICAL_PERSON_ENCRYPTION_KEY and AUTH_SESSION_SECRET dedicated existing owners",
+    "METHOD_REPORT_RENDERER trusted browser + print + PDF verification service",
+    "PHIOS_SHARED_PAID_REPORT_ENABLED explicit controlled admission"
+  ],
+  "scheduler": {
+    "owner": "functions/report-delivery/paid-report-watchdog.js",
+    "binding": "Authenticated server contextForOwner and bounded periodic due-job sweep; no browser-selected owners",
+    "deployed": false
+  },
+  "stripeRefundTransport": {
+    "owner": "functions/commerce/paid-report-refund-transport.js",
+    "webhook": "/api/stripe-webhook",
+    "canonicalMetadata": "paid_report_refund_key",
+    "liveAdmission": "Current transport is local QA only. Separate explicit live verification/admission required; no default fetch or switch."
+  },
+  "baziAdapter": "functions/report-delivery/paid-report-bazi-adapter.js",
+  "providerBudget": {
+    "normalCalls": 3,
+    "standardTechnicalRecoveryCalls": 2,
+    "semanticVerifierCalls": 0,
+    "editorialRewriteCalls": 0,
+    "generationCeilingUSD": 3.6,
+    "totalProductCeilingUSD": 4,
+    "includedFollowups": 4
+  },
+  "openaiRequirements": [
+    "Explicit P9 human authorization and remaining spend cap before any paid request",
+    "Existing frozen BaZi production generation config, pricing/model/constraints verification",
+    "OPENAI_API_KEY server secret plus REPORT_PROVIDER_LIVE_ALLOWED explicit opt-in; never emitted in evidence",
+    "Unknown provider outcome reconciled before any retry; persisted output reused"
+  ],
+  "livePaymentEntrypoint": {
+    "ui": "/account/?product=COM-REPORT-BAZI-FULL#commerce",
+    "checkout": "/api/commerce-checkout",
+    "prepayment": "/api/account-paid-report-setup",
+    "required": "Existing LIVE product/account bindings and signed payment confirmation; readiness and consent revalidated; no global LIVE checkout"
+  },
+  "rollbackPlan": [
+    "Close new checkout and provider admission first; do not delete material or migrations.",
+    "Stop new worker claims; reconcile in-flight provider/refund outcomes before replacement.",
+    "Retain signed payment/refund processing and authenticated immutable account reads.",
+    "Restore code only with explicit acceptance, preserving jobs, private objects and current monetary authority."
+  ],
+  "liveCanaryStopPoints": [
+    "Readiness/consent/admission mismatch",
+    "Duplicate paid job or owner/purchase mismatch",
+    "Fence or lock-token lost",
+    "Provider outcome unknown or budget cap reached",
+    "Publication/renderer verification failure",
+    "Private object/artifact integrity failure",
+    "Refund outcome unknown or delivery/refund conflict"
+  ],
+  "p9ActionsExecuted": 0,
+  "providerCalls": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "deploy": false,
+  "remoteMigration": false
+}

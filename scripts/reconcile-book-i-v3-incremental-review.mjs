@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+const root='tools/review/free-ask-manuscript-r1/';
+const revision=JSON.parse(fs.readFileSync(root+'BOOK-I-V3-INCREMENTAL-CORPUS.json'));
+if(fs.existsSync(root+'BOOK-I-V3-INCREMENTAL-PRIVATE-RECEIPT.json'))revision.privateDelivery=JSON.parse(fs.readFileSync(root+'BOOK-I-V3-INCREMENTAL-PRIVATE-RECEIPT.json'));
+revision.answerValidation={state:'FAILED_QUESTION_FIT_NOT_ADMITTED',evidence:root+'BOOK-I-V3-REVISION-INTRO-ANSWERS.json',reason:'Chapter located but the excerpt/answer does not directly establish the requested sale boundary; original natural-question failures retained.'};
+const p=root+'CURRENT-IV-VI-MASTER-STATE.json',state=JSON.parse(fs.readFileSync(p));
+state.bookIIncrementalRevision=revision;
+fs.writeFileSync(p,JSON.stringify(state,null,2)+'\n');
+const htmlPath='content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html';
+let html=fs.readFileSync(htmlPath,'utf8');
+const section=`<section id="book-i-v3-incremental-revision"><h2>第一册 v3 增量修订 / Incremental revision</h2><p>完整稿442页；SHA256 ${revision.sourceSha256}。9页附件已确认是替换片段，不是完整稿；先前9页核验结论保留为输入澄清历史。</p><p>旧PDF第13–19页替换为新第13–21页；包括第八册介绍及后续八册整体说明。旧第1–12页及第20–440页与对应新页提取文字逐字一致，包括空页。第20页起PDF引用加2；书内印刷页码与章节编号未改。</p><p>275条记录中274条原文本复用，仅 B1V3-P0-S001 更新。原章节ID及标题修复保留。文本一致不代表全部图表像素一致，图表视觉核对仍待完成。SOURCE: LOCAL_INCREMENTAL_CORPUS_MATERIALIZED；DEPLOYED: NOT_RUN；LIVE: NOT_RUN。</p><p>旧独立题失败（水流／容器形态、资源充足与承载上限）仍保留，不因换稿计为通过。982章整章闭环仍未完成；第二册来源准入、第三／四／六册10个限定线上范围保留。Provider calls = 0。</p><p>下一步：私有派生对象交付回读、替换说明检索与回答验收、原自然问法修复；通过后才切换第一册生产来源。</p></section>`;
+const deliveryNote='<p>私有派生对象已回读核验：'+(revision.privateDelivery?.objectKey||'NOT_RUN')+'。回答验收 FAILED_QUESTION_FIT_NOT_ADMITTED：定位到章节但没有直接回答出售边界，未切换生产。</p>';
+html=html.replace(/<section id="book-i-v3-incremental-revision">[\s\S]*?<\/section>/,section.replace('</section>',deliveryNote+'</section>'));
+fs.writeFileSync(htmlPath,html);

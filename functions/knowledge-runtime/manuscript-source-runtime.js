@@ -36,7 +36,10 @@ export function queryTerms(value) {
 }
 
 export function manuscriptQueryTerms(value) {
-  return queryTerms(String(value || '').replace(/为什么|为何|是什么|是什么意思|如何|怎么|请问|这样|那样|这个|那个|\b(?:why|what|how|does|do|is|are|the|a|an|of|in|to|and|can|could|would|please)\b/gi, ' ')).filter(term=>term.length>1);
+  // Separate grammatical scaffolding before producing Chinese bigrams. A
+  // comparison must not acquire high-specificity invented terms such as 和差.
+  // This is shared query analysis, not a per-question answer table.
+  return queryTerms(String(value || '').replace(/为什么|为何|是什么意思|是什么|有什么区别|有何区别|什么关系|如何|怎样|怎么|请问|究竟|有没有|不一定|是否|一个|一种|这样|那样|这个|那个|以及|与|和|的|对|\b(?:why|what|how|does|do|is|are|the|a|an|of|in|to|and|can|could|would|please)\b/gi, ' ')).filter(term=>term.length>1);
 }
 
 function correctionRows(sectionCode, corrections) {
@@ -84,11 +87,18 @@ function scoreRecord(record, query, terms, profile, specificity = null, prepared
   const compactText = prepared?.compactText ?? compact(text);
   let score = 0;
   const headingLabel = heading.split(/[|｜]/u)[0].trim();
+  const nativeConceptLabel = headingLabel.match(/^[\u3400-\u9fff]{2,}(?=\s*[a-z]|$)/u)?.[0];
+  if (nativeConceptLabel && q.includes(nativeConceptLabel)) score += 900;
+  if (nativeConceptLabel && q.startsWith(nativeConceptLabel)) score += 1000;
   const temporalSubject = q.match(/^([\u3400-\u9fff]{2,8}?)(?:是否|是不是|是|会|能)/u)?.[1];
   const temporalConditionMatch = temporalSubject && /瞬间|单次|一次性|固定|静止|永久/u.test(q) && nativeHeader.includes(temporalSubject) && /持续|过程|固定|静止|变化/u.test(nativeHeader);
   if (temporalConditionMatch) score += 1200;
   const perspectiveCompletenessMatch = /全部|完整|唯一/u.test(q) && /我(?:看到|看见|感受)|自己的(?:现实|世界)|个人(?:理解|经验)/u.test(q) && /全部|完整/u.test(nativeHeader) && /意识|理解|经验/u.test(nativeHeader);
   if (perspectiveCompletenessMatch) score += 1200;
+  const divergentExperienceMatch = /同一|同样|相同/u.test(q) && /不同|各人|每个人/u.test(q) && /感受|经验|体验|看法|理解/u.test(q) && /不同/u.test(nativeHeader) && /生命|意识|主观/u.test(nativeHeader) && /现实|经验|世界/u.test(nativeHeader);
+  if (divergentExperienceMatch) score += 1200;
+  const unlimitedBoundaryMatch = /无限|无穷/u.test(q) && /不能|无法|有限|边界|限制/u.test(q) && /无限|有限|边界|限制/u.test(nativeHeader);
+  if (unlimitedBoundaryMatch) score += 1200;
   if (q && headingLabel === q) score += 4000;
   const exactProfileQuestion = [...(profile?.naturalQuestions || []), ...(profile?.userLanguage || []), ...(profile?.aliases || [])].some(value => normalized(value) === q);
   if (exactProfileQuestion) score += 1400;
@@ -101,24 +111,26 @@ function scoreRecord(record, query, terms, profile, specificity = null, prepared
   let specificMatches = 0;
   for (const term of meaningfulTerms) {
     const weight = specificity?.get(term) || 1;
-    if ((specificity ? headingLabel : heading).includes(term)) score += 70 * weight;
+    if ((specificity ? headingLabel : heading).includes(term)) score += 180 * weight;
     if (text.includes(term)) { score += 12 * weight; specificMatches++; }
   }
   const totalWeight=meaningfulTerms.reduce((sum,term)=>sum+(specificity?.get(term)||1),0);
   const matchedWeight=meaningfulTerms.filter(term=>text.includes(term)||compactText.includes(compact(term))).reduce((sum,term)=>sum+(specificity?.get(term)||1),0);
-  if(!record.supportRange&&!exactProfileQuestion&&!nativeIntroductionMatch&&!temporalConditionMatch&&!perspectiveCompletenessMatch&&!q.includes(headingLabel)&&matchedWeight/Math.max(1,totalWeight)<0.35)return 0;
+  if(!record.supportRange&&!exactProfileQuestion&&!nativeIntroductionMatch&&!temporalConditionMatch&&!perspectiveCompletenessMatch&&!divergentExperienceMatch&&!(nativeConceptLabel&&q.includes(nativeConceptLabel))&&!q.includes(headingLabel)&&matchedWeight/Math.max(1,totalWeight)<0.35)return 0;
     if (specificity) {
       const subtitle = heading.slice(headingLabel.length);
       const comparison = q.match(/^(.+?)(?:与|和)(.+?)(?:有什么区别|有何区别|的区别|区别)/);
       const definedConcept = headingLabel.replace(/^什么是/, '');
       if (comparison && [comparison[1],comparison[2]].some(value=>value===definedConcept)) score += 900;
-      for (const term of meaningfulTerms) if (subtitle.includes(term)) score += 35 * (specificity.get(term) || 1);
+      for (const term of meaningfulTerms) if (subtitle.includes(term)) score += 180 * (specificity.get(term) || 1);
       // The question and the chapter subtitle must describe the same limitation,
       // rather than merely sharing a broad noun such as scale or capacity.
       if (/(?:不再|无法|不能).*(?:产生|带来|形成).*(?:能力|收益)/.test(q) && /(?:不再|无法|不能).*(?:产生|形成).*能力/.test(subtitle)) score += 220;
       const sentences = text.split(/[。！？!?]/u);
     const bestSentence = Math.max(0,...sentences.map(sentence => meaningfulTerms.reduce((sum,term)=>sum+(sentence.includes(term)?specificity.get(term)||1:0),0)));
-    score += 100 * bestSentence;
+    // A passing mention deep inside a chapter must not outweigh a chapter
+    // whose stated subject directly matches the customer's question.
+    score += 35 * bestSentence;
   }
   return specificMatches >= Math.min(2, meaningfulTerms.length) || score >= 800 ? score : 0;
 }
@@ -143,6 +155,17 @@ function excerptFor(record, query, terms, maximum = MAX_EXCERPT_CHARS) {
   let start = Math.max(0, anchor - before);
   let end = Math.min(text.length, start + maximum);
   start = Math.max(0, end - maximum);
+  // Avoid returning partial clauses. This also keeps nearby qualifications
+  // together instead of forcing the answer organizer into isolated sentences.
+  if (start > 0) {
+    const boundary = text.slice(start).search(/[。！？!?]/u);
+    if (boundary >= 0 && start + boundary + 1 < end) start += boundary + 1;
+  }
+  if (end < text.length) {
+    const window = text.slice(start,end);
+    const lastBoundary = Math.max(...['。','！','？','!','?'].map(mark=>window.lastIndexOf(mark)));
+    if (lastBoundary >= 0) end = start + lastBoundary + 1;
+  }
   const prefix = start > 0 ? '…' : '';
   const suffix = end < text.length ? '…' : '';
   return `${prefix}${text.slice(start, end).trim()}${suffix}`;
@@ -221,6 +244,7 @@ export function searchManuscriptCorpus({
       corpusAuthority: source.activeCorpusAuthority || source.sourceAuthority,
       score: item.score,
         excerpt,
+        excerptBoundaryState: item.record.supportRange ? 'GOVERNED_FIXED_RANGE' : 'COMPLETE_SENTENCES_WITH_OMISSION_MARKERS',
         supportRange: item.record.supportRange || null,
         admissionScope: item.record.admissionScope || null,
       canonicalBinding: bindingFor(item.record.sectionCode, bindings),

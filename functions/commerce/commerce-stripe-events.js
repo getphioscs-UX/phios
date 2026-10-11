@@ -1,4 +1,5 @@
 import {ensureVerifiedPaidReportJob} from '../report-delivery/paid-report-delivery-core.js';
+import {reconcilePaidReportRefundEvent} from '../report-delivery/paid-report-refund-events.js';
 import {requireStripeCommerce,commerceEnvironment} from './commerce-environment.js';
 import {validateOrderReportPresentation} from './report-presentation.js';
 // Successor dispatch of the existing /api/stripe-webhook, not a second endpoint.
@@ -92,6 +93,8 @@ export async function processCommerceStripeEvent({env,event,fetcher,origin,clock
       await recordCommerceSubscription({env,order,subscription,invoice,clock});
       if(invoice&&product.productId==='COM-SUBSCRIPTION-MONTHLY'&&env.PHIOS_CONTINUITY_QUOTA_ENABLED==='true')await grantContinuityQuota(env,{ownerAccountId:order.customer_id,subscriptionId:subscription.id,sourceId:invoice.id,kind:'INVOICE',purchaseId:'pur_'+order.checkout_attempt_id,periodStart:invoice.lines.data[0].period.start,periodEnd:invoice.lines.data[0].period.end},clock);
       commerceLog('SUBSCRIPTION_UPDATED',{order_id:orderId,stripe_event_id:event.id,status:subscription.status});
+    }else if(['refund.created','refund.updated','refund.failed'].includes(event.type)&&env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'){
+      await reconcilePaidReportRefundEvent(env,event,clock);
     }else if(event.type==='charge.refunded'){
       const refund=await refundCommerceOrder(env,object);
       assert(refund);orderId=refund.orderId;

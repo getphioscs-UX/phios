@@ -4,7 +4,7 @@ import {reportBirthInputFingerprint} from '../canonical-presentation-runtime/rep
 import {sha256Stable} from '../interpretation-runtime/mir7-utils.js';
 import {buildCustomerNativeBaziInputs} from './bazi-customer-native-inputs.js';
 import {buildBaziProductionGenerationConfig} from '../personal-reading/deep-manuscript/bazi-production-generation-config.js';
-import {generateAndReleaseAccountBazi,openAccountBaziMaterial} from '../account/bazi-account-delivery.js';
+import {generateAndReleaseAccountBazi,openAccountBaziMaterial,inspectAccountBaziDeliveryProgress} from '../account/bazi-account-delivery.js';
 import {reportEconomics,reportFollowupReserve,reportGenerationCeiling} from '../pws/commercial/commerce-economics-policy.js';
 import {commerceProduct} from '../pws/commercial/stripe-product-registry.js';
 import {closeReleasedReportBudget} from '../personal-reading/report-delivery-budget.js';
@@ -29,6 +29,8 @@ export const baziPaidReportAdapter=Object.freeze({
  // Subsequent shared checkpoints verify its persisted outputs, never recompute them.
  async prepare(context,job){const fresh=await this.readiness(context,{...job});if(fresh.personVersion!==job.personVersion||fresh.inputDigest!==job.inputDigest||fresh.authorityDigest!==job.authorityDigest)throw Error('SUBJECT_AUTHORITY_MISMATCH');return {personId:job.personId,locale:job.presentation.reportLocale};},
  async generate(context,job,selection){const released=await generateAndReleaseAccountBazi(context,selection,context.env.P8_BAZI_QA_OPTIONS||{});return {reportId:released.reportId};},
+ async inspectDurableProgress(context,job){try{const p=await inspectAccountBaziDeliveryProgress(context,job);if(p.material){await this.validate(context,job,{reportId:p.material.row.report_id});const e=await context.env.RUNTIME_DB.prepare("SELECT entitlement_id FROM digital_entitlements WHERE purchase_id=? AND customer_id=? AND product_id=? AND entitlement_status='active'").bind(job.purchaseId,job.ownerAccountId,job.productId).first();if(e?.entitlement_id!==p.material.artifact?.entitlementId)throw Error('ENTITLEMENT_MISMATCH');}return {...p,materialVerified:!!p.material,renderVerified:!!p.render,publicationVerified:!!p.publication,generationVerified:!!p.result?.snapshot};}catch(error){if(/INTEGRITY|REPORT_UNAVAILABLE|ARTIFACT/.test(error.code||error.message))return {materialInvalid:true,locks:[],stores:{},integrityError:error.code||error.message};throw error;}},
+ async resumeFrom(context,job){return this.generate(context,job,{personId:job.personId,locale:job.presentation.reportLocale});},
  async validate(context,job,output){const m=await openAccountBaziMaterial(context,output.reportId);if(m.row.person_id!==job.personId||m.candidate.purchaseId!==job.purchaseId||m.row.locale!==job.presentation.reportLocale)throw Error('SUBJECT_OR_PURCHASE_MISMATCH');return output;},
  async compile(context,job,output){const m=await openAccountBaziMaterial(context,output.reportId);if(!m.artifact?.publicationIR?.customerPublishable)throw Error('PUBLICATION_NOT_COMPLETE');return output;},
  async render(context,job,output){const m=await openAccountBaziMaterial(context,output.reportId);if(m.verification.passed!==true||m.verification.pageCount!==48||m.verification.diagramCount!==15)throw Error('RENDER_NOT_VERIFIED');return output;},

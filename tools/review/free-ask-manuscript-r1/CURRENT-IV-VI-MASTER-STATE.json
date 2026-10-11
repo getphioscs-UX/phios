@@ -416,7 +416,8 @@
     "payments": 0,
     "commit": false,
     "push": false,
-    "migration": false
+    "migration": false,
+    "disposition": "HISTORICAL_BATCH_RETAINED_NOT_CURRENT_PRODUCTION_STATE"
   },
   "currentChapterReconciliation": {
     "at": "2026-10-11T11:08:57.306Z",
@@ -445,6 +446,157 @@
     "deploymentId": "bce021a9-db0d-4c40-b1d3-28dc1223254d",
     "LIVE": "PREVIOUS_TEN_RANGES_ONLY_NEW_SOURCE_NOT_LIVE",
     "providerCalls": 0,
-    "providerCostUSD": 0
+    "providerCostUSD": 0,
+    "disposition": "HISTORICAL_LOCAL_BATCH_SUPERSEDED_BY_currentLiveRepair"
+  },
+  "chapterQualityAudit": {
+    "path": "tools/review/free-ask-manuscript-r1/SEVEN-BOOK-CHAPTER-QUALITY-AUDIT.json",
+    "totalChapters": 982,
+    "structurallyChecked": 982,
+    "wholeChapterVerified": 0,
+    "wholeChapterAdmissionProven": 0,
+    "wholeChapterLiveVerified": 0,
+    "remainingWholeChapterClosure": 982,
+    "existingPartialLiveRanges": 10
+  },
+  "currentLiveRepair": {
+    "at": "2026-10-11T12:11:44.950Z",
+    "LOCAL": "PARTIAL_SEVEN_BOOK_TASK",
+    "BUILD": "PASS_BUILD",
+    "relevantBuildInputDigest": "a8e8fbf491a34dcc9669d371cc86d47ca6cf45a51ca94fa771da5cc12368af4c",
+    "workerSha256": "27c61dc2b1cd4964ce74762841690d718efe73c0bbab0b040604dc7d5b76f11d",
+    "DEPLOYMENT": "DEPLOYED_EXISTING_AUTHORIZED_RANGES_AND_RESOURCE_REPAIR",
+    "deploymentId": "5018a03b-6238-4f65-8cfa-2e042a3d76c8",
+    "rollbackDeploymentId": "09a40247-1bd9-4a0b-89bc-0df7496bceb9",
+    "LIVE": {
+      "bookII": "10/10",
+      "bookIII": "14/14",
+      "bookIVVI": "13/13",
+      "scope": "Representative consumer/range regression, NOT whole chapters",
+      "resourceLimit1102ObservedInThisRun": false
+    },
+    "counts": {
+      "totalCurrentChapters": 982,
+      "wholeChapterCompletenessAndAnswerVerified": 0,
+      "wholeChapterAdmissionProven": 0,
+      "wholeChapterLiveVerified": 0,
+      "remainingWholeChapterClosure": 982,
+      "existingPartialLiveRanges": 10,
+      "existingBookIIReadabilitySourceAdmittedChapters": 172,
+      "sourceAdmissionIsNotWholeChapterAnswerAcceptance": true
+    },
+    "bookICurrentV3Cutover": false,
+    "bookIIINewAcceptedSourceCutover": false,
+    "bookIIINewSixScopeCandidateReceipt": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-SIX-SCOPE-QA.json",
+    "bookINewIndependentFailures": "tools/review/free-ask-manuscript-r1/BOOK-I-V3-INDEPENDENT-NATURAL-ANSWERS.json",
+    "evidence": [
+      {
+        "path": "tools/review/free-ask-manuscript-r1/BOOK-II-CURRENT-LIVE-ANSWERS.json",
+        "sha256": "ad94a997cc235881a4ab5436d45a275b669e8fc1e7a60bab874f78f576c6f4ad"
+      },
+      {
+        "path": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-LIVE-ANSWERS.json",
+        "sha256": "845e6c7ac0b18d3ee67d430e5da7152b1bd3416017ad8d98b3adbedeb1abebb5"
+      },
+      {
+        "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-LIVE-RESULTS.json",
+        "sha256": "06ba8cefc332f51408a221204e92b279eb159d65dff767c4d55f2ba9b2874362"
+      },
+      {
+        "path": "tools/review/free-ask-manuscript-r1/SEVEN-CURRENT-BOOK-LIVE-INVENTORY.json",
+        "sha256": "7df316fedc58231afb81d3598fc9b57684669c52a1bec91927024b6006ffa490"
+      }
+    ],
+    "providerCalls": 0,
+    "providerCostUSD": 0,
+    "commit": false,
+    "push": false,
+    "migration": false,
+    "concurrentChanges": [
+      {
+        "path": "functions/account/bazi-account-delivery.js",
+        "builtSha256": "6693209d6072cf72717aca4ddff7cbd81a2aed870542c1721e5287865bbbaa20",
+        "currentSha256": "04b930350911001e88cc5453087dcbc773e5a880b962ca80b53017d6ae7955a9",
+        "classification": "UNRELATED_CONCURRENT_CHANGE",
+        "scope": "Validated free manuscript KNOWLEDGE_BASIC execution; paid delivery/follow-up branches not exercised"
+      },
+      {
+        "path": "functions/account/report-followup-store.js",
+        "builtSha256": "67b6727dafed1cb7a2fe1f0549475b6f923b0a0038a74ed777406264161d040e",
+        "currentSha256": "bb37bf16a5ff074ed12cdec851867759947ebcf35a2dd876c15ea25e964fe904",
+        "classification": "UNRELATED_CONCURRENT_CHANGE",
+        "scope": "Validated free manuscript KNOWLEDGE_BASIC execution; paid delivery/follow-up branches not exercised"
+      },
+      {
+        "path": "functions/personal-reading/paid-report-context.js",
+        "builtSha256": "bd0aed01ce9e752250d641268ea7e7fb58cceb6ff7484cb8c250d703fce253a0",
+        "currentSha256": "777a7784d3e5d3501bc244314c3f06a8d50ec11fd4d6e9ee13d114af906ea083",
+        "classification": "UNRELATED_CONCURRENT_CHANGE",
+        "scope": "Validated free manuscript KNOWLEDGE_BASIC execution; paid delivery/follow-up branches not exercised"
+      },
+      {
+        "path": "functions/personal-reading/report-generation-store.js",
+        "builtSha256": "976638ff3807d5bf50f269e852fec7bc0191d951db19e231718e20067c70dc78",
+        "currentSha256": "722f93ba4272fa7eca8d0d786847a54252f57cfdc3c459b61f267c0a56ac2379",
+        "classification": "UNRELATED_CONCURRENT_CHANGE",
+        "scope": "Validated free manuscript KNOWLEDGE_BASIC execution; paid delivery/follow-up branches not exercised"
+      }
+    ],
+    "buildIdentityScope": "Exact deployed validated artifact. Current free-path evidence preserved; unrelated paid-owner changes do not trigger another build or invalidate accepted content."
+  },
+  "bookIIncrementalRevision": {
+    "at": "2026-10-11T12:38:10.093Z",
+    "state": "LOCAL_INCREMENTAL_CORPUS_MATERIALIZED_NOT_ANSWER_ACCEPTED",
+    "sourceSha256": "33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a",
+    "previousSourceSha256": "813481693e25bad9f35d6e13795eb51d0c35d80d9cbc62fe53a04d3cb622492e",
+    "sourceAcceptancePath": "content/knowledge/manuscripts/review/book-1-v3-revision-20261011-33c91cd60d5f-source-acceptance.json",
+    "corpusPath": ".tmp/knowledge-manuscripts/book-1-v3-revision-33c91cd60d5f/retrieval-corpus.json",
+    "corpusSha256": "4d1c4a0af77cd6af0f9ad3631df7baf3843661f0c196735de038db5eecea13c4",
+    "changedRecords": [
+      "B1V3-P0-S001"
+    ],
+    "unchangedRecordsReused": 274,
+    "chapterIdsPreserved": true,
+    "headingRepairsPreserved": true,
+    "exactTextPageCorrespondence": {
+      "old1To12": "same PDF page",
+      "old20To440": "new PDF page = old PDF page + 2, including empty pages"
+    },
+    "printedPageNumbers": "Original text unchanged outside replacement; not renumbered. PDF offsets are distinct from printed numbering.",
+    "replacement": {
+      "oldPdfPages": [
+        13,
+        19
+      ],
+      "newPdfPages": [
+        13,
+        21
+      ]
+    },
+    "oldFailuresPreserved": true,
+    "sourceBinaryAcceptedOnly": true,
+    "visualFiguresComparison": "PENDING_NOT_PROVEN_BY_TEXT_EQUALITY",
+    "providerCalls": 0,
+    "productionChanged": false,
+    "privateDelivery": {
+      "at": "2026-10-11T12:38:59.918Z",
+      "bookCode": "BOOK-1",
+      "bucket": "phios-private-manuscripts",
+      "objectKey": "books/book-1/materialized/v3-revision-20261011-33c91cd60d5f/incremental-v1/retrieval-corpus.json",
+      "sourceSha256": "33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a",
+      "corpusBytesSha256": "4a11137cfac7ae3eccca8bfc6d2fb0ff0b97df22bbc3db07eaad1760149ebe14",
+      "readbackBytesSha256": "4a11137cfac7ae3eccca8bfc6d2fb0ff0b97df22bbc3db07eaad1760149ebe14",
+      "created": true,
+      "overwritten": false,
+      "sourcePdfNotOverwritten": true,
+      "productionAdmission": false,
+      "answerAcceptance": false,
+      "providerCalls": 0
+    },
+    "answerValidation": {
+      "state": "FAILED_QUESTION_FIT_NOT_ADMITTED",
+      "evidence": "tools/review/free-ask-manuscript-r1/BOOK-I-V3-REVISION-INTRO-ANSWERS.json",
+      "reason": "Chapter located but the excerpt/answer does not directly establish the requested sale boundary; original natural-question failures retained."
+    }
   }
 }

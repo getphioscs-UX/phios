@@ -1,0 +1,27 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+const dir='tools/review/free-ask-manuscript-r1/';
+const read=p=>JSON.parse(fs.readFileSync(p));
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+const receipt=read(dir+'BOOK-III-CURRENT-PRIVATE-CANDIDATE-RECEIPT.json');
+const comparison=read(dir+'BOOK-III-CURRENT-COMPLETE-CORPUS-COMPARISON.json');
+const corpus=read(comparison.corpusPath);
+const previous='content/knowledge/source-access/registries/manuscript-text-scope-candidates-v3.json';
+const old=read(previous);
+const next={...old,schemaVersion:'PHI-OS-MANUSCRIPT-TEXT-SCOPE-CANDIDATES-v4',successorOf:previous,currentBookIIISourceReceipt:receipt.sourceAcceptancePath,productionActivated:false,records:old.records.map(r=>{
+ if(r.bookCode!=='BOOK-3')return r;
+ const current=corpus.records.find(c=>c.sectionCode===r.sectionCode);
+ if(!current)throw Error('MISSING_CURRENT_SECTION '+r.sectionCode);
+ return {...r,sourceSha256:corpus.sourceSha256,corpusSha256:corpus.corpusSha256,sectionSha256:current.textSha256,heading:current.heading,answerAcceptance:'CURRENT_SOURCE_SIX_SCOPE_REGRESSION_PENDING',validation:{...r.validation,currentComparison:dir+'BOOK-III-CURRENT-COMPLETE-CORPUS-COMPARISON.json',currentSourceAcceptance:receipt.sourceAcceptancePath,oldSourceSha256:r.sourceSha256,oldSectionSha256:r.sectionSha256},productionActivationDefault:false};
+})};
+const path='content/knowledge/source-access/registries/manuscript-text-scope-candidates-v4.json';
+fs.writeFileSync(path,JSON.stringify(next,null,2)+'\n');
+const registry=read('content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v5.json');
+registry.schemaVersion='PHI-OS-MANUSCRIPT-KNOWLEDGE-SOURCE-REGISTRY-v6-CANDIDATE';
+registry.successorOf='content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v5.json';
+registry.productionActivated=false;
+const source=registry.records.find(r=>r.bookCode==='BOOK-3');
+delete source.acceptancePath;delete source.acceptanceSha256;
+Object.assign(source,{sourceCode:'MKS-BOOK-3-OWNER-FINAL-EFBFDD21-ZH-HANS',version:'owner-final-20261011-efbfdd21fa21',sourceSha256:corpus.sourceSha256,corpusSha256:corpus.corpusSha256,retrievalCorpusSha256:receipt.readbackBytesSha256,r2ObjectKey:receipt.objectKey,recordCount:corpus.recordCount,sourceAcceptancePath:receipt.sourceAcceptancePath,sourceAcceptanceSha256:receipt.sourceAcceptanceSha256,scopeAdmissionPath:path,scopeAdmissionSha256:sha(fs.readFileSync(path)),runtimeAdmission:'SCOPED_TEXT_CANDIDATE_NOT_ACTIVATED'});
+fs.writeFileSync('content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v6-candidate.json',JSON.stringify(registry,null,2)+'\n');
+console.log('Prepared versioned successor candidate; existing production v5 and historical scopes unchanged.');

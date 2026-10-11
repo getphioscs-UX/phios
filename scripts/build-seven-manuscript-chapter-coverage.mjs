@@ -13,6 +13,8 @@ const paths = {
   'BOOK-5': '.tmp/knowledge-manuscripts/book-5-v1/positioned-candidate-r2/retrieval-corpus.json',
   'BOOK-7': '.tmp/knowledge-manuscripts/book-7-v2/positioned-candidate-r2/retrieval-corpus.json',
 };
+const revisionPath=dir+'BOOK-I-V3-INCREMENTAL-CORPUS.json';
+if(fs.existsSync(revisionPath))paths['BOOK-1']=read(revisionPath).corpusPath;
 const books = master.currentSevenBookTruth.rows.map(row => {
   const source = registry.records.find(r => r.bookCode === row.bookCode);
   const corpusPath = paths[row.bookCode] || source.localPath;

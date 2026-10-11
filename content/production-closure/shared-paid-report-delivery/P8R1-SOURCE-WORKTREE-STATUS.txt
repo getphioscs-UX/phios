@@ -1,0 +1,115 @@
+ M assets/customer-ui/js/surfaces/commerce-account.js
+ M content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html
+ M docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json
+ M functions/_lib/knowledge-access-api.js
+ M functions/account/bazi-account-delivery.js
+ M functions/account/report-followup-store.js
+ M functions/api/account-paid-report-setup.js
+ M functions/commerce/commerce-stripe-api.js
+ M functions/commerce/commerce-stripe-events.js
+ M functions/knowledge-runtime/manuscript-source-runtime.js
+ M functions/personal-reading/paid-report-context.js
+ M functions/personal-reading/report-generation-store.js
+ M functions/report-delivery/paid-report-bazi-adapter.js
+ M functions/report-delivery/paid-report-delivery-core.js
+ M functions/report-delivery/paid-report-policy.js
+ M functions/report-delivery/paid-report-readiness.js
+ M functions/report-delivery/paid-report-refund.js
+ M functions/report-delivery/paid-report-state-store.js
+ M scripts/check-book-i-v3-natural-answer-candidate.mjs
+ M scripts/check-book-iii-current-whole-chapter-qa.mjs
+ M scripts/check-p8-checkout-api-negatives.mjs
+ M scripts/check-p8-durable-matrix.mjs
+ M scripts/check-p8-security-watchdog.mjs
+ M scripts/check-p8-shared-core.mjs
+ M scripts/check-runtime-migrations.mjs
+ M tools/review/free-ask-manuscript-r1/BOOK-I-V3-HEADING-PROSE-BOUNDARY-QA.json
+ M tools/review/free-ask-manuscript-r1/BOOK-I-V3-NATURAL-ANSWER-CANDIDATE.json
+ M tools/review/free-ask-manuscript-r1/BOOK-II-CUSTOMER-ANSWERS.json
+ M tools/review/free-ask-manuscript-r1/BOOK-II-FRESH-ANSWERS.json
+ M tools/review/free-ask-manuscript-r1/BOOK-II-INDEPENDENT-ANSWERS.json
+ M tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-LIVE-ANSWERS.json
+ M tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-WHOLE-CHAPTER-QA.json
+ M tools/review/free-ask-manuscript-r1/BOOK-III-CUSTOMER-ANSWERS.json
+ M tools/review/free-ask-manuscript-r1/BOOK-III-FRESH-ANSWERS.json
+ M tools/review/free-ask-manuscript-r1/BOOK-SCOPED-KNOWLEDGE-ROUTING-QA.json
+ M tools/review/free-ask-manuscript-r1/CURRENT-ENTRY-LIVE-ZERO-PROVIDER.json
+ M tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-BUILD-RECEIPT.json
+ M tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-INDEPENDENT-SCOPE-RESULTS.json
+ M tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-LIVE-RESULTS.json
+ M tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-MASTER-STATE.json
+ M tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-PRODUCTION-RELEASE-HISTORY.json
+ M tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-PRODUCTION-RELEASE.json
+ M tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-SCOPED-CUSTOMER-ANSWERS.json
+ M tools/review/free-ask-manuscript-r1/MANUSCRIPT-BUILD-COMPACTION-EQUIVALENCE.json
+ M tools/review/free-ask-manuscript-r1/MANUSCRIPT-CORPUS-CACHE-SECURITY.json
+ M tools/review/free-ask-manuscript-r1/SEVEN-BOOK-COVERAGE.json
+ M tools/review/free-ask-manuscript-r1/SEVEN-CURRENT-BOOK-LIVE-INVENTORY.json
+?? assets/customer-ui/js/surfaces/paid-report-setup.js
+?? content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v6-candidate.json
+?? content/knowledge/source-access/registries/manuscript-text-scope-candidates-v4.json
+?? content/production-closure/shared-paid-report-delivery/P8-SHARED-PAID-REPORT-DELIVERY-CORE-R1.json
+?? content/production-closure/shared-paid-report-delivery/P8-TO-P9-HANDOFF.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-BAZI-LOCK-OWNER-AUDIT.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-CUSTOMER-ENTRY-FAILURE.png
+?? content/production-closure/shared-paid-report-delivery/P8R1-CUSTOMER-ENTRY-FINAL.png
+?? content/production-closure/shared-paid-report-delivery/P8R1-CUSTOMER-ENTRY-UNSTYLED-INITIAL.png
+?? content/production-closure/shared-paid-report-delivery/P8R1-CUSTOMER-ENTRY.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-CHECKOUT-NEGATIVES.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-DURABLE-MATRIX.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-GENERIC-CORE.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-LEGACY-SECURITY.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8-checkout-api-negatives.log
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8-durable-matrix.log
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8-security-watchdog.log
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8-shared-core.log
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-customer-entry.log
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-native-diversity.log
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-original-checkpoint.log
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-orphan-locks.log
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-refund-webhooks.log
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-security.log
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-stale-material-worker.log
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-watchdog-migrations.log
+?? content/production-closure/shared-paid-report-delivery/P8R1-FINAL-check-p8r1-worker-fencing.log
+?? content/production-closure/shared-paid-report-delivery/P8R1-FULL-LOCAL-MATRIX.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-NATIVE-DIVERSITY.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-ORIGINAL-CHECKPOINT.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-ORPHANED-METHOD-LOCK-RECONCILIATION.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-REFUND-WEBHOOKS.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-REVIEW-PAGE.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-SCREENSHOT-INVENTORY.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-SECURITY.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-SOURCE-WORKTREE-STATUS.txt
+?? content/production-closure/shared-paid-report-delivery/P8R1-STALE-MATERIAL-WORKER.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-WATCHDOG-MIGRATIONS.json
+?? content/production-closure/shared-paid-report-delivery/P8R1-WORKER-FENCING.json
+?? functions/report-delivery/paid-report-reconciler.js
+?? functions/report-delivery/paid-report-refund-events.js
+?? functions/report-delivery/paid-report-worker-fence.js
+?? scripts/audit-seven-manuscript-chapter-quality.mjs
+?? scripts/check-p8r1-customer-entry.mjs
+?? scripts/check-p8r1-native-diversity.mjs
+?? scripts/check-p8r1-original-checkpoint.mjs
+?? scripts/check-p8r1-orphan-locks.mjs
+?? scripts/check-p8r1-refund-webhooks.mjs
+?? scripts/check-p8r1-review-page.mjs
+?? scripts/check-p8r1-security.mjs
+?? scripts/check-p8r1-stale-material-worker.mjs
+?? scripts/check-p8r1-watchdog-migrations.mjs
+?? scripts/check-p8r1-worker-fencing.mjs
+?? scripts/finalize-p8r1-local-evidence.mjs
+?? scripts/lib/p8r1-bazi-qa.mjs
+?? scripts/p8r1-bazi-process.mjs
+?? scripts/prepare-book-iii-current-six-scope-successor.mjs
+?? scripts/run-p8r1-final-local-matrix.mjs
+?? scripts/update-seven-manuscript-live-repair-reconciliation.mjs
+?? tools/review/P8-SHARED-PAID-REPORT-DELIVERY-CORE-R1.html
+?? tools/review/free-ask-manuscript-r1/BOOK-I-V3-INDEPENDENT-NATURAL-ANSWERS.json
+?? tools/review/free-ask-manuscript-r1/BOOK-I-V3-STRUCTURE-054.png
+?? tools/review/free-ask-manuscript-r1/BOOK-I-V3-STRUCTURE-055.png
+?? tools/review/free-ask-manuscript-r1/BOOK-I-V3-STRUCTURE-056.png
+?? tools/review/free-ask-manuscript-r1/BOOK-II-CURRENT-LIVE-ANSWERS-PREVIOUS.json
+?? tools/review/free-ask-manuscript-r1/BOOK-II-CURRENT-LIVE-ANSWERS.json
+?? tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-SIX-SCOPE-QA.json
+?? tools/review/free-ask-manuscript-r1/SEVEN-BOOK-CHAPTER-QUALITY-AUDIT.json

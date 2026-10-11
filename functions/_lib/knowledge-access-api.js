@@ -168,6 +168,7 @@ function groundingFrom(published, manuscript) {
       sourceBinaryDigest: record.sourceBinaryDigest,
       sourceAcceptanceDigest: record.sourceAcceptanceDigest,
       supportRange: record.supportRange || null,
+      excerptBoundaryState: record.excerptBoundaryState,
       heading: record.heading,
       text: record.excerpt
     });
@@ -186,7 +187,9 @@ function splitSentences(text) {
     .replace(/\s+/g, ' ')
     .match(/[^。！？!?]+[。！？!?]?/g)
     ?.map(value => value.trim())
-    .filter(value => value.length >= 12) || [];
+    // Short source sentences may carry the decisive qualification (for
+    // example a negation). Length is not a basis for deleting them.
+    .filter(value => /[\p{L}\p{N}]/u.test(value) && /[。！？!?]$/u.test(value)) || [];
 }
 
 export function manuscriptAnswerProse(text, heading) {
@@ -228,6 +231,7 @@ export function deterministicGroundedAnswer(query, grounding, locale) {
     let position = 0;
     let prose=source.text;
     if (!source.supportRange || source.bookCode === 'BOOK-3') prose = manuscriptAnswerProse(prose, source.heading);
+    if (!source.supportRange && source.excerptBoundaryState === 'COMPLETE_SENTENCES_WITH_OMISSION_MARKERS') prose = String(prose).replace(/^…/u,'').replace(/…$/u,'');
     if(source.supportRange){const normalized=String(prose).replace(/([\u3400-\u9fff])\s+(?=[\u3400-\u9fff])/g,'$1').normalize('NFKC');const title=String(source.heading||'').normalize('NFKC');prose=normalized.startsWith('✦'+title)?normalized.slice(title.length+1):normalized;}
     // Native manuscript prose must retain the definition and its adjacent
     // conditions. Isolated high-scoring sentences can lose their antecedent.
