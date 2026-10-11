@@ -63,3 +63,6 @@
  .bdm-report .bdm-page:has(.bdm-locale) .pub-decoration::after{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
 }
 /* BDM_READABILITY_R4 END */
+
+/* P7R2: measured P10 footer clearance; recover 2px of D04 whitespace only. */
+.bdm-report .bdm-page[data-page-number="10"] .bdm-compact-diagram[data-diagram-id="D04"]{margin-bottom:calc(3mm - 2px)}

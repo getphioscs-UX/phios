@@ -31,6 +31,10 @@ export function queryTerms(value) {
   return unique([...latin, ...cjk]).slice(0, 40);
 }
 
+export function manuscriptQueryTerms(value) {
+  return queryTerms(String(value || '').replace(/为什么|为何|是什么|是什么意思|如何|怎么|请问|这样|那样|这个|那个|\b(?:why|what|how|does|do|is|are|the|a|an|of|in|to|and|can|could|would|please)\b/gi, ' '));
+}
+
 function correctionRows(sectionCode, corrections) {
   return (corrections?.records || []).filter(record =>
     record.sectionCode === sectionCode &&
@@ -63,19 +67,32 @@ function correctedRecord(record, corrections) {
   };
 }
 
-function scoreRecord(record, query, terms) {
+function scoreRecord(record, query, terms, profile, specificity = null) {
   if (record.retrievalEligible === false || record.segmentType === 'FRONT_MATTER') return 0;
   const heading = normalized(record.heading);
   const text = normalized(record.text);
   const q = normalized(query);
   let score = 0;
+  const headingLabel = heading.split(/[|｜]/u)[0].trim();
+  if (q && headingLabel === q) score += 4000;
+  const exactProfileQuestion = [...(profile?.naturalQuestions || []), ...(profile?.userLanguage || []), ...(profile?.aliases || [])].some(value => normalized(value) === q);
+  if (exactProfileQuestion) score += 1400;
   if (q && heading.includes(q)) score += 1200;
   if (q && text.includes(q)) score += 800;
-  for (const term of terms) {
-    if (heading.includes(term)) score += 70;
-    if (text.includes(term)) score += 12;
+  const meaningfulTerms = terms.filter(term => !/^(?:why|what|how|does|do|is|are|the|a|an|of|in|to|and|can|为什么|为何|什么|怎么|如何|请问|现实|运行|一个|以后|能够|需要|形成|持续|个人|people)$/i.test(term));
+  if (!meaningfulTerms.length) return 0;
+  let specificMatches = 0;
+  for (const term of meaningfulTerms) {
+    const weight = specificity?.get(term) || 1;
+    if ((specificity ? headingLabel : heading).includes(term)) score += 70 * weight;
+    if (text.includes(term)) { score += 12 * weight; specificMatches++; }
   }
-  return score;
+  if (specificity) {
+    const sentences = text.split(/[。！？!?]/u);
+    const bestSentence = Math.max(0,...sentences.map(sentence => meaningfulTerms.reduce((sum,term)=>sum+(sentence.includes(term)?specificity.get(term)||1:0),0)));
+    score += 100 * bestSentence;
+  }
+  return specificMatches >= Math.min(2, meaningfulTerms.length) || score >= 800 ? score : 0;
 }
 
 function excerptFor(record, query, terms, maximum = MAX_EXCERPT_CHARS) {
@@ -116,17 +133,20 @@ export function searchManuscriptCorpus({
   source,
   bindings = { records: [] },
   corrections = { records: [] },
+  profiles = [],
   query,
   maximumResults = MAX_RESULTS,
   maximumExcerptChars = MAX_EXCERPT_CHARS,
   maximumTotalExcerptChars = MAX_TOTAL_EXCERPT_CHARS
 }) {
   if (!corpus || !Array.isArray(corpus.records)) return [];
-  const terms = queryTerms(query);
+  const terms = manuscriptQueryTerms(query);
+  const specificity = source.version?.startsWith('owner-final-20261011-') ? new Map(terms.map(term => [term,Math.log(1 + corpus.records.length / (1 + corpus.records.filter(record => normalized(record.text).includes(term)).length))])) : null;
   const ranked = corpus.records
     .map(rawRecord => {
       const record = correctedRecord(rawRecord, corrections);
-      return { record, score: scoreRecord(record, query, terms) };
+      const profile = profiles.find(candidate => candidate.bookCode === source.bookCode && candidate.productionEligible === true && candidate.bookSources?.some(ref => ref.sectionCode === record.sectionCode));
+      return { record, score: scoreRecord(record, query, terms, profile, specificity), profile };
     })
     .filter(item => item.score > 0)
     .sort((a, b) => b.score - a.score || a.record.sequence - b.record.sequence);
@@ -142,6 +162,9 @@ export function searchManuscriptCorpus({
     results.push({
       sourceType: 'COMPLETED_MANUSCRIPT',
       sourceCode: source.sourceCode,
+      sourceVersion: source.version || source.sourceCode,
+      sourceBinaryDigest: source.sourceSha256,
+      sourceAcceptanceDigest: source.acceptanceSha256 || source.sourceAcceptanceSha256 || null,
       bookCode: source.bookCode,
       bookTitle: source.title,
       bookTitleEn: source.titleEn,
@@ -157,6 +180,7 @@ export function searchManuscriptCorpus({
       score: item.score,
       excerpt,
       canonicalBinding: bindingFor(item.record.sectionCode, bindings),
+      conceptBinding: item.profile ? { profileId: item.profile.profileId, nodeCode: item.profile.nodeCode, authorityRefs: item.profile.authorityRefs, createsCanonicalAuthority: false } : null,
       editorialCorrections: item.record.editorialCorrections,
       publicationState: 'SOURCE_NOT_CANONICAL_ARTICLE'
     });
@@ -203,6 +227,11 @@ export async function loadR2RetrievalCorpus(binding, source) {
   if (Number(corpus.recordCount) !== Number(source.recordCount)) {
     const error = new Error('MANUSCRIPT_RETRIEVAL_CORPUS_COUNT_MISMATCH');
     error.code = 'MANUSCRIPT_RETRIEVAL_CORPUS_COUNT_MISMATCH';
+    throw error;
+  }
+  if (!Array.isArray(corpus.records) || corpus.records.length !== Number(source.recordCount) || new Set(corpus.records.map(record => record.sectionCode)).size !== corpus.records.length) {
+    const error = new Error('MANUSCRIPT_RETRIEVAL_SECTION_STRUCTURE_MISMATCH');
+    error.code = 'MANUSCRIPT_RETRIEVAL_SECTION_STRUCTURE_MISMATCH';
     throw error;
   }
   return corpus;

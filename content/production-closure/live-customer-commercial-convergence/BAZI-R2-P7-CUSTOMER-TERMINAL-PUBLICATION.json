@@ -1,7 +1,7 @@
 {
   "status": "FAILED",
   "test": "BAZI_R2_P7_CUSTOMER_TERMINAL_PUBLICATION_ZERO_PROVIDER_LOCAL",
-  "head": "0adfffc79d3128d81d53acb6fe3ce217b6020617",
+  "head": "4485fda1b7a0ef0307425a35ce43dd93cd8f9fb1",
   "providerCalls": 0,
   "providerCostUSD": 0,
   "providerNetworkCalls": 0,
@@ -19,40 +19,65 @@
     "unchanged": true,
     "changed": []
   },
-  "rendererFailure": {
-    "passed": false,
-    "outputDigest": "26cd2740ae8c39a4a984cdb2ab9878ed4ae81d72c731367c0b8700d4ea7e2237",
-    "manuscriptDigest": "65c269e31411dc820c2968b90e9f0b4277492f80c620223ccc9c1c1434e3834a",
-    "publicationDigest": "ca7af8be1c4a834e2a5bf553202fad1c035ebfcd8a2336947e77ac3a9d666c90",
-    "pageCount": 48,
-    "diagramCount": 15,
-    "browserReady": false,
-    "pdfReady": true,
-    "printReady": false,
-    "pdfDerivative": {
-      "persisted": false,
-      "derivedFromManuscriptDigest": "65c269e31411dc820c2968b90e9f0b4277492f80c620223ccc9c1c1434e3834a",
-      "rendererVersion": "BDM-RENDERER-3",
-      "renderedAt": "2026-10-11T06:17:32.650Z",
-      "bytes": 35619565,
-      "pages": 48
-    },
-    "measured": {
-      "pageCount": 48,
-      "brokenImages": 0,
-      "overflowPages": [
-        "10"
-      ],
-      "diagramCount": 15,
-      "missingRequiredContent": 0,
-      "undefinedText": true
-    },
-    "errors": [],
-    "providerCalls": 0
-  },
+  "customerId": "BAZI-R2-P7-OWNER-A",
+  "personId": "7efd75bb-e5f5-44ff-8239-c30140d3d1cf",
+  "purchaseId": "pur_ord_9d2acc1996e74e0cb0d22c4a2c477c3b",
+  "reportId": "2047d3ab52ebf6f56a4d25f1e800405e8122d5711b6067383221b30d1b9615fd",
+  "customerNativeAuthority": "EXISTING_BZR_NATIVE_RUNTIME",
+  "referenceSubjectUsed": false,
+  "storedHtmlDigest": "327f0c17d109c17f3f98089f8d8d7ab03ce94fdcd884d92b43d792b898df3fc4",
+  "snapshotId": "ebf9846001e2acded1ffe1a146941f1e226f887a69f7c2c0b77b39a92bd30423",
+  "presentationMode": "BILINGUAL",
   "firstFailure": {
     "category": "BROWSER_LAYOUT",
-    "error": "REAL_BZR_RENDERER_VERIFICATION_FAILED"
+    "error": "CUSTOMER_NATIVE_D05_D10_RENDERED_TOPOLOGY_MISSING",
+    "objects": [
+      {
+        "diagramId": "D05",
+        "pageNumber": 10,
+        "actualNodes": [
+          "year",
+          "month",
+          "day",
+          "hour"
+        ],
+        "actualEdges": [],
+        "gateRequiredTopology": {
+          "nodes": [
+            "year",
+            "month",
+            "day",
+            "hour"
+          ],
+          "edges": [
+            "year>month",
+            "month>day",
+            "year>hour"
+          ]
+        }
+      },
+      {
+        "diagramId": "D10",
+        "pageNumber": 28,
+        "actualNodes": [
+          "day"
+        ],
+        "actualEdges": [],
+        "gateRequiredTopology": {
+          "nodes": [
+            "day",
+            "hidden0",
+            "hidden1",
+            "hidden2"
+          ],
+          "edges": [
+            "day>hidden0",
+            "day>hidden1",
+            "day>hidden2"
+          ]
+        }
+      }
+    ]
   },
   "assets": {
     "allowedHosts": [
@@ -63,5 +88,79 @@
     ],
     "unexpectedRequests": [],
     "failedAssets": []
+  },
+  "originalAssertion": {
+    "category": "BROWSER_LAYOUT",
+    "error": "{\"overflow\":[10,28],\"clipped\":[],\"hidden\":[],\"font\":[],\"diagrams\":[{\"pageId\":10,\"diagramId\":\"D05\",\"kind\":\"RENDERED_TOPOLOGY_MISSING\"},{\"pageId\":28,\"diagramId\":\"D10\",\"kind\":\"RENDERED_TOPOLOGY_MISSING\"}]}\n\n'FAIL' !== 'PASS'\n"
+  },
+  "p7r2": {
+    "status": "PASS_LOCAL",
+    "receipt": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/P7R2-P10-FOOTER-SPACING-REPAIR.json",
+    "targetedRendererHttpStatus": 200,
+    "targetedRendererPassed": true,
+    "fullP7Run": true,
+    "fullP7Status": "FAILED"
+  },
+  "terminalResults": {
+    "browser": [
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "status": "FAIL",
+        "diagramViolations": [
+          {
+            "pageId": 10,
+            "diagramId": "D05",
+            "kind": "RENDERED_TOPOLOGY_MISSING"
+          },
+          {
+            "pageId": 28,
+            "diagramId": "D10",
+            "kind": "RENDERED_TOPOLOGY_MISSING"
+          }
+        ],
+        "clippedSlots": [],
+        "hiddenTextSlots": [],
+        "fontMinimumViolations": [],
+        "missingLocales": []
+      }
+    ],
+    "remainingViewports": "NOT_RUN_AFTER_FIRST_FAILURE",
+    "print": "NOT_RUN_AFTER_FIRST_FAILURE",
+    "pdf": "NOT_CREATED_CUSTOMER_DERIVATIVE",
+    "textContinuity": "NOT_RUN",
+    "immutableMaterial": {
+      "status": "CREATED_AND_OPENED_IN_LOCAL_SYNTHETIC_ACCOUNT_FLOW",
+      "reportId": "2047d3ab52ebf6f56a4d25f1e800405e8122d5711b6067383221b30d1b9615fd",
+      "personId": "7efd75bb-e5f5-44ff-8239-c30140d3d1cf",
+      "snapshotId": "ebf9846001e2acded1ffe1a146941f1e226f887a69f7c2c0b77b39a92bd30423",
+      "htmlSha256": "327f0c17d109c17f3f98089f8d8d7ab03ce94fdcd884d92b43d792b898df3fc4"
+    },
+    "secondImmutableReopen": "NOT_RUN_AFTER_FIRST_FAILURE",
+    "languageHygiene": {
+      "internalVisibleTerms": [],
+      "undefinedText": false
+    },
+    "assets": {
+      "allowedHosts": [
+        "pub-1967bc5812ee4164b19a806fb1427021.r2.dev",
+        "assets.getphios.com",
+        "qa.phios-github.pages.dev",
+        "127.0.0.1"
+      ],
+      "unexpectedRequests": [],
+      "failedAssets": []
+    }
+  },
+  "nextStep": "Separate authorization required to investigate customer-native D05/D10 topology ownership versus accepted reference topology; no Authority invention, gate weakening or second production owner repair performed.",
+  "p7r3": {
+    "status": "FAIL_ROLLED_BACK",
+    "receipt": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/P7R3-CUSTOMER-NATIVE-DIAGRAM-APPLICABILITY.json",
+    "remainingBlocker": "GENG_CURRENT_PUBLICATION_BASELINE_MISMATCH",
+    "productionOwnersRestored": true,
+    "targeted1920": "NOT_RUN",
+    "fullP7": "NOT_RUN"
   }
 }

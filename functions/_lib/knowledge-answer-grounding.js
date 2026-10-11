@@ -238,6 +238,8 @@ export async function retrieveKapKnowledge({ request, env = {}, normalized, opti
   const baseUrl = request?.url || 'https://kap.local/';
   const url = new URL('/api/knowledge-access', baseUrl);
   url.search = new URLSearchParams(retrievalRequest.params).toString();
+  if (/^BOOK-[1-7]$/.test(options.selectedBook || '') && (options.source === 'manuscript' || ['BOOK-4','BOOK-6'].includes(options.selectedBook))) url.searchParams.set('bookCode', options.selectedBook);
+  if (env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' && ['BOOK-4','BOOK-6'].includes(options.selectedBook) && !options.selectedArticle) url.searchParams.set('source','manuscript');
   const response = await handleKnowledgeAccessRequest(new Request(url, { method: 'GET' }), env, {retrievalScope:options.retrievalScope});
   const payload = await response.json();
   if(options.selectedArticle){
@@ -301,6 +303,8 @@ export async function retrieveKapKnowledge({ request, env = {}, normalized, opti
     retrievalChain: payload.retrievalChain || [],
     authorityBoundary: payload.authorityBoundary || {},
     upstreamGroundedAnswerPresent: Boolean(payload.groundedAnswer),
+    groundedAnswer: payload.groundedAnswer || null,
+    answerAssessment: payload.answerAssessment || null,
     upstreamGroundedAnswerConsumed: false,
     governance: {
       rawFullBookAvailable: payload.manuscript?.exposure?.rawFullBookAvailable === true,

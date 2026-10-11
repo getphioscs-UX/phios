@@ -82,7 +82,7 @@ import {digest as outputDigest} from
   '../functions/account/oidc-auth.js';
 
 
-const terminal=await startP7();
+const terminal=process.env.P7R3_AUDIT_ONLY==='1'?{fail:async()=>{},close:async()=>{}}:await startP7();
 try{
 ﻿/*
   BaZi R2 P7
@@ -479,6 +479,11 @@ globalThis.fetch = async () => {
 
 const ownerContext = context();
 
+const auditUuid=crypto.randomUUID;
+if(process.env.P7R3_AUDIT_ONLY==='1'){
+ const old=JSON.parse(fs.readFileSync('content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/CUSTOMER-MATERIAL-METADATA.json','utf8'));
+ let first=true;crypto.randomUUID=()=>{if(first){first=false;return old.personId;}return auditUuid.call(crypto);};
+}
 const person = await saveCanonicalPerson(
   ownerContext,
   {
@@ -521,6 +526,7 @@ const person = await saveCanonicalPerson(
   }
 );
 
+crypto.randomUUID=auditUuid;
 const prepared =
   await prepareAccountBaziCandidate(
     ownerContext,
@@ -539,6 +545,11 @@ const native =
     ownerContext,
     prepared
   );
+if(process.env.P7R3_AUDIT_ONLY==='1'){
+ const {captureP7R3SourceAudit}=await import('./lib/bazi-r2-p7r3-source-audit.mjs');
+ await captureP7R3SourceAudit({native,prepared,person});
+ process.exit(0);
+}
 
 assert.equal(
   native.pack.subject.subjectId,
@@ -938,7 +949,18 @@ async function syntheticProducer(args) {
 
 
 env.METHOD_REPORT_RENDERER=terminal.renderer;
+if(process.env.P7R3_TARGETED_ONLY==='1'){
+ const publication=await compileBaziDeepPublication({snapshot:syntheticSnapshot,pack:native.pack,productionFrozen:true,presentationMode:'BILINGUAL'});
+ await terminal.targeted(publication,native.pack);
+}else if(process.env.P7R1_RENDERER_ONLY==='1'){
+ const publication=await compileBaziDeepPublication({snapshot:syntheticSnapshot,pack:native.pack,productionFrozen:true,presentationMode:'BILINGUAL'});
+ const response=await terminal.renderer.fetch(new Request('https://local.invalid/verify',{method:'POST',body:JSON.stringify({method:'BZR',publication})}));
+ const evidence=await response.json();
+ if(!response.ok)throw Error('P7R1_TARGETED_RENDERER_REJECTED');
+ console.log('P7R1 targeted renderer HTTP',response.status,JSON.stringify(evidence.verification));
+}else{
 const release=await generateAndReleaseAccountBazi(ownerContext,{personId:person.personId,locale:'bilingual'},{produce:syntheticProducer});
 const opened=await openAccountBaziMaterial(ownerContext,release.reportId);
 await terminal.verify({opened,release,owner,person,prepared,native,snapshot:syntheticSnapshot,producerInvocations:()=>producerCalls,reopen:()=>openAccountBaziMaterial(ownerContext,release.reportId),externalCalls:()=>forbiddenExternalCalls});
+}
 }catch(error){await terminal.fail(error);throw error;}finally{await terminal.close();}

@@ -1,3 +1,4 @@
+import {assertLocaleBootstrapCurrent} from './lib/locale-bootstrap-current-successor.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -37,7 +38,7 @@ for(const item of release.artifacts){
 const locale=read('content/production/symbolic-method/reconciliation/iching-release-locale-presentation-successor-v2.json');
 assert.equal(locale.status,'ENGINEERING_RECONCILIATION');assert.equal(locale.releaseId,current.releaseId);assert.equal(locale.path,presentation.path);
 assert.equal(locale.predecessor.path,'content/production/symbolic-method/reconciliation/iching-release-1.0.1-cx-presentation-successor-v1.json');assert.equal(locale.predecessor.sha256,sha(locale.predecessor.path));
-assert.equal(locale.historicalRecordsRewritten,false);assert.equal(locale.newProductionAcceptanceGranted,false);assert.equal(locale.previousSha256,presentation.currentSha256);assert.equal(sha(locale.previousPath),presentation.currentSha256);assert.equal(sha(locale.runtime.path),locale.runtime.sha256);
+assert.equal(locale.historicalRecordsRewritten,false);assert.equal(locale.newProductionAcceptanceGranted,false);assert.equal(locale.previousSha256,presentation.currentSha256);assert.equal(sha(locale.previousPath),presentation.currentSha256);assertLocaleBootstrapCurrent(locale.runtime);
 assert.equal(sha(presentation.path),locale.sha256,'ICHING_CURRENT_PRESENTATION_DRIFT');
 const html=text(presentation.path);
 for(const marker of presentation.requiredMarkers) assert.ok(html.includes(marker),`ICHING_CURRENT_PRESENTATION_MARKER_MISSING:${marker}`);

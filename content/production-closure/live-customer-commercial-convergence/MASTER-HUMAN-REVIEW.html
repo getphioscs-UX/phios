@@ -7546,4 +7546,316 @@ scripts/check-controlled-purchase-integration.mjs</td><td>五条旅程逐节点�
     &quot;evidence&quot;: &quot;FOUNDER-HOME-THESIS-CONTENT-DIFF.json&quot;,
     &quot;remaining&quot;: &quot;保留 shell/客户入口并补生活情境；旧三/五册与14Layers不直接恢复&quot;
   }
-]</pre></section><section id="history"><h2>保留历史证据</h2><a href="MASTER-CUSTOMER-CURRENT-IMPLEMENTATION.json">上轮客户接线 receipt</a> · <a href="MASTER-PAGES-CURRENT-RECEIPT.json">本轮构建 receipt</a> · <a href="OWNER-CORRECTION-ICHING-QA.log">I Ching 零费用检查链</a> · <a href="TAROT-COST-QUALITY-REVIEW.json">历史费用记录（非本轮准入）</a></section></details></main></html>
+]</pre></section><section id="history"><h2>保留历史证据</h2><a href="MASTER-CUSTOMER-CURRENT-IMPLEMENTATION.json">上轮客户接线 receipt</a> · <a href="MASTER-PAGES-CURRENT-RECEIPT.json">本轮构建 receipt</a> · <a href="OWNER-CORRECTION-ICHING-QA.log">I Ching 零费用检查链</a> · <a href="TAROT-COST-QUALITY-REVIEW.json">历史费用记录（非本轮准入）</a></section></details><section id="free-ask-manuscript-source-trace"><h2>历史追查：免费 Ask · IV–VI 私有原稿（已由本次新版本接受接续）</h2><p>LOCAL：PARTIAL。DEPLOYED：本轮源码未部署。LIVE：现有部署检索证据包含错册及服务错误，不能认定七册完整接入。ENTRY 既有接受范围保持独立。</p><p>已只读下载两份 R2 候选并核对实际字节；均不匹配接受摘要。未替换、未晋升，未调用 provider。</p><table><tr><th>册</th><th>接受原稿 SHA256</th><th>R2 候选 SHA256</th><th>第一缺口</th></tr><tr><td>BOOK-4</td><td>181cb98e54d0f2a2b5ad9dc00ab1d146f4ad41492e36b258e340f2104d29bd8e</td><td>f5dbf2bef2a25b1c88ed1daf7c35ba5b46df7e152fb4811e1af62e1e0d44fe2d</td><td>接受旧稿或有效继承凭证尚未定位</td></tr><tr><td>BOOK-6</td><td>23df5e1d7585129c4aadc0ac0f408131005e680b00c9b50e1f2f4b3a19b7f64a</td><td>ef79ba85faafcb79721afc2c830316b601bd01a9bcb8af92f56820a968c88a02</td><td>接受旧稿或有效继承凭证尚未定位</td></tr></table><p><a href="../../../tools/review/free-ask-manuscript-r1/BOOK-IV-VI-SOURCE-TRACE.json">完整追查与版本记录</a> · <a href="../../../tools/review/free-ask-manuscript-r1/SEVEN-BOOK-COVERAGE.json">逐册覆盖</a> · <a href="../../../tools/review/free-ask-manuscript-r1/LIVE-ACTUAL-FREE-PATHS.json">实际部署免费路径结果</a> · <a href="../../../tools/review/free-ask-manuscript-r1/LOCAL-ACTUAL-ASK-PIPELINE.json">本地现有 Ask 链结果</a></p><pre>{
+  "at": "2026-10-11T07:06:18.465Z",
+  "head": "4485fda1b7a0ef0307425a35ce43dd93cd8f9fb1",
+  "scope": "SOURCE_TRACING_NOT_ADMISSION",
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "r2Operations": [
+    "GET_LIST_TARGETED_PREFIX",
+    "GET_CANDIDATE_BYTES",
+    "OWNER_AUTHORIZED_GET_ALL_OBJECT_NAMES_AND_SIZES"
+  ],
+  "r2Writes": 0,
+  "rows": [
+    {
+      "bookCode": "BOOK-4",
+      "acceptedSha256": "181cb98e54d0f2a2b5ad9dc00ab1d146f4ad41492e36b258e340f2104d29bd8e",
+      "acceptedVersion": "v1; 127 occurrences, 125 authoritative sections after accepted dedup",
+      "references": [
+        {
+          "path": "content/knowledge/manuscripts/completed/book-4-completed-manuscript-v1.json",
+          "sha256": "273cd010099881a07578a3a2083678953cd0d5bac0468c4d6f5226470dc0962d"
+        },
+        {
+          "path": "content/knowledge/manuscripts/review/book4-source-dedup-human-acceptance-v1.json",
+          "sha256": "cd4cb743640428e902f5457f7ac486e1b3b33f45f493bfbe108f4667da35edb6"
+        },
+        {
+          "path": "content/knowledge/contracts/book-4-production-admission-authority-v1.json",
+          "sha256": "fa1325604c7bc76269b1cd724b586901d8992d10832d2afcd0965bb313b1177b"
+        },
+        {
+          "path": "content/knowledge/manuscripts/extraction/book-4-full-section-inventory-v1.json",
+          "sha256": "2f3ae3995d9a2f7c9c6c2109f2a2aef6b601c2e6048bb05a2a494ce00221a059"
+        }
+      ],
+      "historyCommit": "454a7d17",
+      "expectedBytes": 151149142,
+      "expectedPages": 433,
+      "candidate": {
+        "key": "books/book-4/source/PHI-OS-Book-4-v1.pdf",
+        "status": 200,
+        "path": ".tmp\\free-ask-manuscripts\\source-candidates\\books\\book-4\\source\\PHI-OS-Book-4-v1.pdf",
+        "byteSize": 149765421,
+        "sha256": "f5dbf2bef2a25b1c88ed1daf7c35ba5b46df7e152fb4811e1af62e1e0d44fe2d"
+      },
+      "binaryMatchesAccepted": false,
+      "inheritanceReceipt": "NOT_LOCATED_IN_SEARCHED_REPO_RECORDS",
+      "acceptedBody": "NOT_LOCATED",
+      "fullProseChapterFigureBoundaryComparison": "BLOCKED_MISSING_ACCEPTED_BINARY_OR_FULL_ACCEPTED_EXTRACTION",
+      "layoutOnlyDifference": "NOT_PROVEN",
+      "manuscriptAdmission": "BLOCKED_SOURCE_VERSION_IDENTITY",
+      "searched": [
+        "current source/version/acceptance/extraction registries",
+        "docs/knowledge/structured-successor/source-version-comparison-v1.json",
+        "Git history of source authority",
+        "private R2 standard book prefix; complete returned prefix result; candidates downloaded and byte-hashed",
+        "Owner-authorized entire private bucket name/size inventory: 52 objects, no additional relevant binary"
+      ],
+      "historicalExtraction": {
+        "path": "functions/_source-material/books/book-4-desktop-text-v1.json",
+        "declaredSourceSha256": "0836096a8d836f44efab67b41724d8ad7105cc431dcdb8f1b477e741b63dd487",
+        "pageCount": 428,
+        "canonicalAuthority": false,
+        "warning": "Third distinct binary identity; cannot compare it as accepted original or current R2 candidate"
+      }
+    },
+    {
+      "bookCode": "BOOK-6",
+      "acceptedSha256": "23df5e1d7585129c4aadc0ac0f408131005e680b00c9b50e1f2f4b3a19b7f64a",
+      "acceptedVersion": "v1 publication authority; 85 sections, 28 accepted bilingual articles",
+      "references": [
+        {
+          "path": "content/books/book-6/publication/book-vi-publication-successor-v1.json",
+          "sha256": "e053a01e06a5c5d53e7247ee9a2c2e3c46e04b31d900eef27d1fd5b53cf59a2b"
+        },
+        {
+          "path": "content/books/book-6/articles/article-production-map-v1.json",
+          "sha256": "0a7395154d2467b37682d085e51eea9bbb573107a8b95c33f42db2ac9ed68f2b"
+        },
+        {
+          "path": "content/books/book-6/review/b6-web-b-human-review-results-v1.json",
+          "sha256": "bbec99225473bf7d8d864506d428e07312f727a884b2afb8404cc628fb0908c0"
+        }
+      ],
+      "historyCommit": "93761b47",
+      "candidate": {
+        "key": "books/book-6/source/PHI-OS-Book-6-v1.pdf",
+        "status": 200,
+        "path": ".tmp\\free-ask-manuscripts\\source-candidates\\books\\book-6\\source\\PHI-OS-Book-6-v1.pdf",
+        "byteSize": 165636164,
+        "sha256": "ef79ba85faafcb79721afc2c830316b601bd01a9bcb8af92f56820a968c88a02"
+      },
+      "binaryMatchesAccepted": false,
+      "inheritanceReceipt": "NOT_LOCATED_IN_SEARCHED_REPO_RECORDS",
+      "acceptedBody": "NOT_LOCATED",
+      "fullProseChapterFigureBoundaryComparison": "BLOCKED_MISSING_ACCEPTED_BINARY_OR_FULL_ACCEPTED_EXTRACTION",
+      "layoutOnlyDifference": "NOT_PROVEN",
+      "manuscriptAdmission": "BLOCKED_SOURCE_VERSION_IDENTITY",
+      "searched": [
+        "current source/version/acceptance/extraction registries",
+        "docs/knowledge/structured-successor/source-version-comparison-v1.json",
+        "Git history of source authority",
+        "private R2 standard book prefix; complete returned prefix result; candidates downloaded and byte-hashed",
+        "Owner-authorized entire private bucket name/size inventory: 52 objects, no additional relevant binary"
+      ]
+    }
+  ],
+  "inventoryEvidence": "tools/review/free-ask-manuscript-r1/PRIVATE-R2-ALL-OBJECT-INVENTORY.json",
+  "remaining": "Accepted Book IV/VI binaries or valid old/new digest inheritance receipts not located. Entire configured private bucket inventoried: no other IV/VI PDF candidate. Full comparison cannot be completed from metadata alone. Existing accepted public articles remain separate from missing private manuscript body."
+}</pre></section><section id="current-manuscript-iv-vi-owner-acceptance"><h2>第四／六册当前原稿 · Owner 新版本接受与检索 QA</h2><p>来源身份 HUMAN_ACCEPTED；提取 PARTIAL；211/211 当前章节检索定位通过；答案质量不由检索通过推定。当前客户 API 为独立本地 QA，生产默认关闭新派生来源。图表 OCR 不作为已接受答案来源。</p><p>LOCAL：PARTIAL · BUILD：BUILD_SUCCEEDED_CURRENT_RELEVANT_STATIC_INPUT_DIFFERS · DEPLOYMENT：NOT_DEPLOYED_THIS_CHANGE · LIVE：NOT_RUN_NEW_SOURCE_VERSIONS</p><p><a href="../../../tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-MASTER-STATE.json">当前版本／验证台账</a> · <a href="../../../tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-CUSTOMER-ASK-QA.json">客户 API 串联收据</a> · <a href="../../../tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-RETRIEVAL-QA.json">211 个章节结果</a> · <a href="../../../tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-FAIL-CLOSED-QA.json">接受摘要及 corpus 防篡改验证</a> · <a href="../../../tools/review/free-ask-manuscript-r1/IMAGE-PAGE-OCR-EVIDENCE.json">图像页 OCR 证据</a></p><pre>{
+  "at": "2026-10-11T07:33:33.837Z",
+  "head": "4485fda1b7a0ef0307425a35ce43dd93cd8f9fb1",
+  "sourceIdentity": "HUMAN_ACCEPTED_CURRENT_BINARY",
+  "sourceVersions": [
+    {
+      "bookCode": "BOOK-4",
+      "version": "owner-final-20261011-ab265b9004da",
+      "sourceSha256": "ab265b9004dafd286b8b58f536f81e6c30bf3deec27f6431b8224d5c1816e07c",
+      "sourceAcceptancePath": "content/knowledge/manuscripts/review/book-4-owner-final-20261011-ab265b9004da-source-acceptance.json",
+      "sourceAcceptanceSha256": "f4c28ddb83c7d076cebe41311fa6af44c7408563294a5b0fdf6fbab16c5164ff",
+      "localPath": ".tmp/free-ask-manuscripts/book-4/owner-final-20261011-ab265b9004da/retrieval-corpus.json",
+      "r2ObjectKey": "books/book-4/materialized/owner-final-20261011-ab265b9004da/retrieval-corpus.json",
+      "retrievalCorpusSha256": "5e7d8d87dd54dc9c9f90df42a5b498f0971c5f996415c5dfaa7fb83067d1c3e5",
+      "corpusSha256": "c8aa16be1cf70c1c52c9f76708e480851d6207c721fa670ef576bbacfd17151b",
+      "recordCount": 126,
+      "chapterCount": 125,
+      "pageCount": 428,
+      "extractionQuality": {
+        "replacementCharacters": 0,
+        "emptyPages": [
+          20,
+          66,
+          98,
+          150,
+          231,
+          263,
+          288,
+          310,
+          337,
+          372,
+          427,
+          428
+        ],
+        "scope": "FULL_TEXT_LAYER_EXTRACTION_NOT_VISUAL_OR_SEMANTIC_ACCEPTANCE"
+      },
+      "partitionCoverage": "LOSSLESS_FULL_CORPUS",
+      "runtimeAdmission": "NOT_ADMITTED",
+      "firstMissingRequirement": "VISUAL_FIGURE_FOOTNOTE_AND_ANSWER_SEMANTIC_VALIDATION",
+      "upload": "PRIVATE_DERIVED_OBJECT_BYTE_VERIFIED",
+      "sourceCode": "MKS-BOOK-4-OWNER-FINAL-20261011-AB265B9004DA-ZH-HANS",
+      "title": "世界如何扩展",
+      "titleEn": "Reality Expansion",
+      "bookRoute": "/books/reality-expansion/",
+      "remoteSha256": "5e7d8d87dd54dc9c9f90df42a5b498f0971c5f996415c5dfaa7fb83067d1c3e5",
+      "remoteVerifiedAt": "2026-10-11T07:20:08.421Z"
+    },
+    {
+      "bookCode": "BOOK-6",
+      "version": "owner-final-20261011-15d80720d10c",
+      "sourceSha256": "15d80720d10c8a16115b06237043da5acc381f87f632175f40da99db9745c68a",
+      "sourceAcceptancePath": "content/knowledge/manuscripts/review/book-6-owner-final-20261011-15d80720d10c-source-acceptance.json",
+      "sourceAcceptanceSha256": "20a31e1f6a09db6bd2612f8a6cce93b647a45e130505d59ceafd38d07ac9aede",
+      "localPath": ".tmp/free-ask-manuscripts/book-6/owner-final-20261011-15d80720d10c/retrieval-corpus.json",
+      "r2ObjectKey": "books/book-6/materialized/owner-final-20261011-15d80720d10c/retrieval-corpus.json",
+      "retrievalCorpusSha256": "1a93b34e928e7d2586116bd682085f67553ae36b5f490281fd53cf2fe563ccb3",
+      "corpusSha256": "029be66914b488cb453723f9cb3b87f8a888f98588dd0522a27d04239d7a05fb",
+      "recordCount": 87,
+      "chapterCount": 86,
+      "pageCount": 343,
+      "extractionQuality": {
+        "replacementCharacters": 0,
+        "emptyPages": [
+          2,
+          38,
+          82,
+          129,
+          182,
+          286,
+          287,
+          342,
+          343
+        ],
+        "scope": "FULL_TEXT_LAYER_EXTRACTION_NOT_VISUAL_OR_SEMANTIC_ACCEPTANCE"
+      },
+      "partitionCoverage": "LOSSLESS_FULL_CORPUS",
+      "runtimeAdmission": "NOT_ADMITTED",
+      "firstMissingRequirement": "VISUAL_FIGURE_FOOTNOTE_AND_ANSWER_SEMANTIC_VALIDATION",
+      "upload": "PRIVATE_DERIVED_OBJECT_BYTE_VERIFIED",
+      "sourceCode": "MKS-BOOK-6-OWNER-FINAL-20261011-15D80720D10C-ZH-HANS",
+      "title": "世界如何重组",
+      "titleEn": "Reality Reconfiguration",
+      "bookRoute": "/books/reality-reconfiguration/",
+      "remoteSha256": "1a93b34e928e7d2586116bd682085f67553ae36b5f490281fd53cf2fe563ccb3",
+      "remoteVerifiedAt": "2026-10-11T07:20:13.363Z"
+    }
+  ],
+  "extraction": "PARTIAL_IMAGE_FIGURE_FOOTNOTE_VALIDATION_PENDING",
+  "retrieval": {
+    "chapterTests": 211,
+    "correct": 211,
+    "semanticAcceptedAnswers": 0
+  },
+  "customerApi": {
+    "environment": "INDEPENDENT_LOCAL_QA",
+    "records": [
+      {
+        "book": "BOOK-4",
+        "question": "扩展为什么有尺度边界",
+        "status": 200,
+        "state": "PARTIALLY_ANSWERED",
+        "providerCalls": 0
+      },
+      {
+        "book": "BOOK-6",
+        "question": "为什么生活环境不是个人选择的简单结果",
+        "status": 200,
+        "state": "PARTIALLY_ANSWERED",
+        "providerCalls": 0
+      },
+      {
+        "book": "BOOK-6",
+        "question": "文明重组与普通变化有什么区别",
+        "status": 200,
+        "state": "NEEDS_CONTEXT",
+        "providerCalls": 0
+      },
+      {
+        "book": "BOOK-6",
+        "question": "预测明天战争一定发生在哪里",
+        "status": 200,
+        "state": "NEEDS_CONTEXT",
+        "providerCalls": 0
+      }
+    ]
+  },
+  "ocr": {
+    "completedPages": 21,
+    "totalImageOnlyPages": 21,
+    "admittedToAnswers": false
+  },
+  "LOCAL": "PARTIAL",
+  "BUILD": "BUILD_SUCCEEDED_CURRENT_RELEVANT_STATIC_INPUT_DIFFERS",
+  "DEPLOYMENT": "NOT_DEPLOYED_THIS_CHANGE",
+  "LIVE": "NOT_RUN_NEW_SOURCE_VERSIONS",
+  "productionAdmission": "NOT_ADMITTED_QA_ONLY",
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "originalOrHistoricalObjectWrites": 0,
+  "r2Writes": "TWO_AUTHORIZED_NEW_PRIVATE_DERIVED_OBJECTS",
+  "commitPushDeploy": 0,
+  "relevantDependencies": [
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "sha256": "a7b6caeab73451e9b6db38fc5139c0df98d5139d53957e0f39c8a3f4017ad04f"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "sha256": "34bfe5acf36a2c7c4616e180fc00a07e07e8927b7f17b16a28f8abee9e6bcef7"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "sha256": "182aabd4bde0570f3f365f08bf194cd235a6d8ccc6f5e35fb4dbbef6663cb8bc"
+    },
+    {
+      "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
+      "sha256": "42e92c3d609a6beea519484ff47b16f3b4c79d372f5dcf587c1127532c28bd1d"
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v3.json",
+      "sha256": "3c196eaf8b46f9b6e9865370f1516c09279dfbea607d8b1e2a3297628aab1605"
+    },
+    {
+      "path": "content/knowledge/manuscripts/review/book-4-owner-final-20261011-ab265b9004da-source-acceptance.json",
+      "sha256": "f4c28ddb83c7d076cebe41311fa6af44c7408563294a5b0fdf6fbab16c5164ff"
+    },
+    {
+      "path": "content/knowledge/manuscripts/review/book-6-owner-final-20261011-15d80720d10c-source-acceptance.json",
+      "sha256": "20a31e1f6a09db6bd2612f8a6cce93b647a45e130505d59ceafd38d07ac9aede"
+    }
+  ],
+  "relevantRuntimeDependencyDigest": "767e31bec66ecc01ed74dacf1ea7f0f4e0e98418219b8af59599d85d29aaa0a8",
+  "buildAssets": [
+    {
+      "path": "content/knowledge/manuscripts/review/book-4-owner-final-20261011-ab265b9004da-source-acceptance.json",
+      "currentSha256": "f4c28ddb83c7d076cebe41311fa6af44c7408563294a5b0fdf6fbab16c5164ff",
+      "buildSha256": null
+    },
+    {
+      "path": "content/knowledge/manuscripts/review/book-6-owner-final-20261011-15d80720d10c-source-acceptance.json",
+      "currentSha256": "20a31e1f6a09db6bd2612f8a6cce93b647a45e130505d59ceafd38d07ac9aede",
+      "buildSha256": null
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v3.json",
+      "currentSha256": "3c196eaf8b46f9b6e9865370f1516c09279dfbea607d8b1e2a3297628aab1605",
+      "buildSha256": null
+    }
+  ],
+  "remaining": [
+    "All image-only pages visual/OCR fidelity; no unverified OCR answer admission",
+    "Full chapter/footnote/figure acceptance and version alignment, including 86 Book VI markers versus historical 85",
+    "Answer semantic held-out matrix, comparisons and bilingual source-supported units",
+    "Production runtime admission and later authorized deployment/live retrieval"
+  ],
+  "heldoutEvidence": {
+    "initialFailures": "CURRENT-IV-VI-HELDOUT-INITIAL-FAILURES.json",
+    "postRepairRegression": "CURRENT-IV-VI-HELDOUT-ANSWERS.json",
+    "remainingExactRetrievalFailure": "IV-CAPACITY",
+    "questionFitReview": "CURRENT-IV-VI-LOCAL-QUESTION-FIT-REVIEW.json",
+    "freshIndependentBilingualAcceptance": "NOT_RUN"
+  },
+  "FIRST_STOP_NODE": "IMAGE_FIGURE_FOOTNOTE_EXTRACTION_QUALITY_AND_ANSWER_SEMANTIC_VALIDATION"
+}</pre></section></main></html>

@@ -1,0 +1,37 @@
+{
+  "headBefore": "4485fda1b7a0ef0307425a35ce43dd93cd8f9fb1",
+  "headAfter": "4485fda1b7a0ef0307425a35ce43dd93cd8f9fb1",
+  "executions": [
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-bazi-r2-p7r2-p10-footer-spacing.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "$env:P7R1_RENDERER_ONLY='1'; node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-bazi-r2-p7-terminal-publication.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-bazi-r2-p7-terminal-publication.mjs",
+      "exitCode": 1,
+      "runCount": 1,
+      "reason": "CUSTOMER_NATIVE_D05_D10_RENDERED_TOPOLOGY_MISSING"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-bazi-r2-p7r2-terminal-failure-diagnostic.mjs",
+      "exitCode": 0,
+      "purpose": "One first-failure screenshot and actual DOM topology; no fit or matrix rerun"
+    }
+  ],
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "providerNetworkCalls": 0,
+  "protectedBaselineUnchanged": true,
+  "productionOwnersModified": [
+    "assets/customer-ui/surfaces/bazi-deep-manuscript-r2.css"
+  ],
+  "commit": false,
+  "push": false,
+  "deployed": false,
+  "realPayment": false,
+  "fullP7Runs": 1
+}

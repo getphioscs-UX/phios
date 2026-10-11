@@ -1,0 +1,117 @@
+{
+  "status": "PASS_LOCAL",
+  "productionOwner": "functions/personal-reading/publication-fit/bazi-diagram-fidelity.js",
+  "beforeSha256": "39b3230f77f62f0188b9b8c091d35877abf94e5d2dd237eae43f8e8cdb0ba920",
+  "afterSha256": "700e29de1f9b5c06e577c16fe6facc6b5521c7574f617a8116625b5a07b96a5a",
+  "authorizedScope": "Only D04/D14/D15 optional display values; no Authority/topology/version changes",
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "providerNetworkCalls": 0,
+  "targetedRendererStatus": "FAILED",
+  "targetedRendererHttpStatus": 422,
+  "remainingBlocker": "P10_FOOTER_SPACING",
+  "gengParity": {
+    "BILINGUAL": "PASS",
+    "EN": "PASS",
+    "ZH_HANS": "PASS"
+  },
+  "cases": [
+    {
+      "name": "A",
+      "d04": "土 / 金",
+      "d14DaYun": "己巳",
+      "d14Annual": "丙寅",
+      "d15": "己巳 / 丙寅",
+      "fidelityPass": 15
+    },
+    {
+      "name": "B",
+      "d04": "—",
+      "d14DaYun": "—",
+      "d14Annual": "—",
+      "d15": "—",
+      "fidelityPass": 15
+    },
+    {
+      "name": "C",
+      "d04": "土 / 金",
+      "d14DaYun": "己巳",
+      "d14Annual": "—",
+      "d15": "己巳",
+      "fidelityPass": 15
+    },
+    {
+      "name": "D",
+      "d04": "土",
+      "d14DaYun": "己巳",
+      "d14Annual": "丙寅",
+      "d15": "己巳 / 丙寅",
+      "fidelityPass": 15
+    }
+  ],
+  "d04": {
+    "suppliedParity": "PASS",
+    "missingValue": "—",
+    "partialValue": "土"
+  },
+  "d14": {
+    "suppliedParity": "PASS",
+    "missingDaYun": "—",
+    "missingAnnual": "—"
+  },
+  "d15": {
+    "suppliedParity": "PASS",
+    "missingValue": "—",
+    "partialValue": "己巳"
+  },
+  "undefinedVisibleTerms": 0,
+  "nullVisibleTerms": 0,
+  "diagramFidelityCount": 15,
+  "diagramFidelityPass": 15,
+  "protectedBaselineUnchanged": true,
+  "targetedRendererVerification": {
+    "status": 422,
+    "passed": false,
+    "outputDigest": "ebf28b97af66ca7fe40951090e32785aae5c782036c9b31ec8000a09e702bd41",
+    "manuscriptDigest": "8710c647aea2e3fb0e3721b5bec5fa0b17c680b61fedbda349cdf014f8f9169a",
+    "publicationDigest": "66d26cf827811f4f80d90f8f2c17bc4e77a485d0c0d6a9ca61eb7481f3947b98",
+    "pageCount": 48,
+    "diagramCount": 15,
+    "browserReady": false,
+    "pdfReady": true,
+    "printReady": false,
+    "pdfDerivative": {
+      "persisted": false,
+      "derivedFromManuscriptDigest": "8710c647aea2e3fb0e3721b5bec5fa0b17c680b61fedbda349cdf014f8f9169a",
+      "rendererVersion": "BDM-RENDERER-3",
+      "renderedAt": "2026-10-11T06:31:00.176Z",
+      "bytes": 35619374,
+      "pages": 48
+    },
+    "measured": {
+      "pageCount": 48,
+      "brokenImages": 0,
+      "overflowPages": [
+        "10"
+      ],
+      "diagramCount": 15,
+      "missingRequiredContent": 0,
+      "undefinedText": false
+    },
+    "errors": [],
+    "providerCalls": 0
+  },
+  "fullP7Status": "NOT_RUN_TARGETED_RENDERER_FAILED",
+  "headBefore": "4485fda1b7a0ef0307425a35ce43dd93cd8f9fb1",
+  "headAfter": "4485fda1b7a0ef0307425a35ce43dd93cd8f9fb1",
+  "execution": [
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-bazi-r2-p7r1-diagram-optional-values.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "$env:P7R1_RENDERER_ONLY='1'; node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-bazi-r2-p7-terminal-publication.mjs",
+      "exitCode": 1
+    }
+  ]
+}

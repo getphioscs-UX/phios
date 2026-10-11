@@ -1,0 +1,109 @@
+{
+  "status": "FAIL_ROLLED_BACK",
+  "sourceAudit": {
+    "d05Classification": "CANONICAL_RELATIONSHIPS_PRESENT_AUTHORITY_DROPPED",
+    "d10Classification": "CANONICAL_HIDDEN_STEMS_PRESENT_AUTHORITY_DROPPED"
+  },
+  "ownersChanged": [],
+  "beforeSha256": {
+    "functions/report-delivery/bazi-customer-native-inputs.js": "19ac22cd108bbdb0dd06e18af90f80dc7a65c9e0c2bb12b9b555add2831681d0",
+    "functions/personal-reading/publication-fit/bazi-diagram-fidelity.js": "700e29de1f9b5c06e577c16fe6facc6b5521c7574f617a8116625b5a07b96a5a",
+    "functions/personal-reading/publication-fit/bazi-publication-fit-gate.js": "4535651c5cad7f645d3f186feb9dac9b3a4a6804bc43baa3db6136f88fd2f3d3"
+  },
+  "afterSha256": {
+    "functions/report-delivery/bazi-customer-native-inputs.js": "19ac22cd108bbdb0dd06e18af90f80dc7a65c9e0c2bb12b9b555add2831681d0",
+    "functions/personal-reading/publication-fit/bazi-diagram-fidelity.js": "700e29de1f9b5c06e577c16fe6facc6b5521c7574f617a8116625b5a07b96a5a",
+    "functions/personal-reading/publication-fit/bazi-publication-fit-gate.js": "4535651c5cad7f645d3f186feb9dac9b3a4a6804bc43baa3db6136f88fd2f3d3"
+  },
+  "gengParity": {
+    "BILINGUAL": {
+      "diagramExactParity": "PASS",
+      "publicationTextParity": "BASELINE_FAILURE_PREEXISTING"
+    },
+    "EN": "NOT_RUN_AFTER_FIRST_FAILURE",
+    "ZH_HANS": "NOT_RUN_AFTER_FIRST_FAILURE"
+  },
+  "diversityMatrix": "NOT_RUN_PARITY_GATE_FAILED",
+  "targeted1920Status": "NOT_RUN_PARITY_GATE_FAILED",
+  "fullP7Status": "NOT_RUN_PARITY_GATE_FAILED",
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "providerNetworkCalls": 0,
+  "remainingBlocker": "GENG_CURRENT_PUBLICATION_BASELINE_MISMATCH",
+  "ownersAttempted": [
+    "functions/report-delivery/bazi-customer-native-inputs.js",
+    "functions/personal-reading/publication-fit/bazi-diagram-fidelity.js",
+    "functions/personal-reading/publication-fit/bazi-publication-fit-gate.js"
+  ],
+  "attemptedSuccessorSha256": {
+    "functions/report-delivery/bazi-customer-native-inputs.js": "9d9bde11df0e5a99836cf6e6dbd433c89179d45e21608f6af6906f4c1822ae20",
+    "functions/personal-reading/publication-fit/bazi-diagram-fidelity.js": "3738bf95a536e49fa787353e95db39039d7cb63476968b997f45fbbaa71308c3",
+    "functions/personal-reading/publication-fit/bazi-publication-fit-gate.js": "1d5aa7592b412f0b11fde4ef125b62b0e3a0f59ffbf8cfdcd47c2b131aab048e"
+  },
+  "protectedBaselineUnchanged": true,
+  "productionOwnersRestored": {
+    "functions/report-delivery/bazi-customer-native-inputs.js": true,
+    "functions/personal-reading/publication-fit/bazi-diagram-fidelity.js": true,
+    "functions/personal-reading/publication-fit/bazi-publication-fit-gate.js": true
+  },
+  "gengBaselineEvidence": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/P7R3-GENG-BASELINE-MISMATCH.json",
+  "d05": {
+    "authorityRelationshipCount": 0,
+    "canonicalRelationshipCount": 1,
+    "expectedNodes": [
+      "year",
+      "month",
+      "day",
+      "hour"
+    ],
+    "expectedEdges": [
+      "year>month"
+    ],
+    "actualNodes": [
+      "year",
+      "month",
+      "day",
+      "hour"
+    ],
+    "actualEdges": [],
+    "expectedBasis": "Canonical source; repair rolled back before publication/browser proof"
+  },
+  "d10": {
+    "dayBranch": "未",
+    "canonicalHiddenStemCount": 3,
+    "authorityHiddenStemCount": 0,
+    "expectedNodes": [
+      "day",
+      "hidden0",
+      "hidden1",
+      "hidden2"
+    ],
+    "expectedEdges": [
+      "day>hidden0",
+      "day>hidden1",
+      "day>hidden2"
+    ],
+    "actualNodes": [
+      "day"
+    ],
+    "actualEdges": [],
+    "expectedBasis": "Canonical source; repair rolled back before publication/browser proof"
+  },
+  "authorityCompleteness": "INCOMPLETE_NATIVE_PROJECTION_REPAIR_ROLLED_BACK",
+  "execution": [
+    {
+      "command": "$env:P7R3_AUDIT_ONLY='1'; node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-bazi-r2-p7-terminal-publication.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-bazi-r2-p7r3-customer-applicability.mjs",
+      "exitCode": 1,
+      "reason": "GENG publication pages differ from historical accepted IR; production successors rolled back"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/audit-bazi-r2-p7r3-geng-baseline.mjs",
+      "exitCode": 0,
+      "reason": "Verified the mismatch exists after restoring original production owners"
+    }
+  ]
+}

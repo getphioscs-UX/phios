@@ -3,6 +3,7 @@ import {
   MANUSCRIPT_SOURCE_LIMITS,
   loadR2RetrievalCorpus,
   queryTerms,
+  manuscriptQueryTerms,
   searchManuscriptCorpus
 } from '../knowledge-runtime/manuscript-source-runtime.js';
 import {retrieveAtlasScope} from './atlas-retrieval-scope.js';
@@ -29,6 +30,16 @@ async function readAssetJson(env, path) {
   return result.json();
 }
 
+async function validateSourceAcceptance(env, source) {
+  if (!source.acceptancePath || !source.acceptanceSha256) throw new Error('MANUSCRIPT_SOURCE_ACCEPTANCE_REQUIRED');
+  const response = await env.ASSETS.fetch(new Request(`https://assets.local/${source.acceptancePath}`));
+  if (!response.ok) throw new Error('MANUSCRIPT_SOURCE_ACCEPTANCE_UNAVAILABLE');
+  const bytes = await response.text();
+  const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(bytes)))].map(b => b.toString(16).padStart(2, '0')).join('');
+  const acceptance = JSON.parse(bytes);
+  if (digest !== source.acceptanceSha256 || acceptance.sourceSha256 !== source.sourceSha256 || acceptance.corpusSha256 !== source.corpusSha256 || acceptance.allRecordsHumanAccepted !== true || Number(acceptance.recordCount) !== Number(source.recordCount)) throw new Error('MANUSCRIPT_SOURCE_ACCEPTANCE_IDENTITY_MISMATCH');
+}
+
 async function publishedProjection({ request, env, query, locale, mode }) {
   const url = new URL(request.url);
   url.pathname = '/api/public-knowledge';
@@ -37,21 +48,24 @@ async function publishedProjection({ request, env, query, locale, mode }) {
   return result.json();
 }
 
-async function manuscriptProjection({ env, query, locale }) {
+async function manuscriptProjection({ env, query, locale, bookCode }) {
   // The Pages Preview checkpoint exercises public knowledge and private reports,
   // not production manuscript retrieval. R2 bindings are not inherited.
   if (env?.PHIOS_ENVIRONMENT === 'qa' && env.PHIOS_MANUSCRIPT_RETRIEVAL_ENABLED !== 'true') {
     return { status: 'disabled_in_preview', records: [], errors: [] };
   }
-  const [registry, reviewedRegistry, bindings, corrections] = await Promise.all([
-    readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v1.json'),
+  const [registry, reviewedRegistry, bindings, corrections, semanticProfiles] = await Promise.all([
+    readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v3.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json'),
-    readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-editorial-correction-v1.json')
+    readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-editorial-correction-v1.json'),
+    readAssetJson(env, 'content/knowledge/knowledge-intelligence-r2/semantic-profiles/successors/book4-a6/kir-r2-book-i-iv-semantic-retrieval-profiles-v2.json')
   ]);
   const sources = registry.records
-    .filter(source => source.locale === locale)
+    .filter(source => source.locale === locale && (source.runtimeAdmission !== 'NOT_ADMITTED' || (env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' && source.sourceAcceptancePath && source.version?.startsWith('owner-final-20261011-'))) && (!bookCode || source.bookCode === bookCode))
     .map(source => {
+      if (source.runtimeAdmission === 'ADMITTED_READABILITY_SOURCE_PENDING_REMOTE_OBJECT') return source;
+      if (env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' && source.sourceAcceptancePath) return source;
       const reviewed = reviewedRegistry.records.find(record => record.sourceCode === source.sourceCode && record.locale === source.locale);
       if (!reviewed || reviewed.humanReadabilityStatus !== 'HUMAN_REVIEW_COMPLETE') return null;
       return {
@@ -63,15 +77,24 @@ async function manuscriptProjection({ env, query, locale }) {
       };
     })
     .filter(Boolean);
-  if (!sources.length) return { status: 'locale_unavailable', records: [], errors: [] };
+  if (!sources.length) return { status: locale === 'en' ? 'locale_unavailable' : 'source_not_admitted', records: [], errors: [], bookCode: bookCode || null };
   if (!env?.MANUSCRIPTS?.get) return { status: 'storage_unavailable', records: [], errors: ['MANUSCRIPT_SOURCE_STORAGE_UNAVAILABLE'] };
 
   const settled = await Promise.allSettled(sources.map(async source => {
+    if (source.sourceAcceptancePath) {
+      const result = await env.ASSETS.fetch(new Request(`https://assets.local/${source.sourceAcceptancePath}`));
+      if (!result.ok) throw new Error('MANUSCRIPT_SOURCE_ACCEPTANCE_UNAVAILABLE');
+      const bytes = await result.text();
+      const actual = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(bytes)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+      const acceptance = JSON.parse(bytes);
+      if (actual !== source.sourceAcceptanceSha256 || acceptance.sourceSha256 !== source.sourceSha256 || acceptance.status !== 'HUMAN_ACCEPTED_SOURCE_IDENTITY' || acceptance.scope !== 'CURRENT_CHINESE_SOURCE_BINARY_ONLY') throw new Error('MANUSCRIPT_SOURCE_ACCEPTANCE_IDENTITY_MISMATCH');
+    }
+    if (source.runtimeAdmission === 'ADMITTED_READABILITY_SOURCE_PENDING_REMOTE_OBJECT') await validateSourceAcceptance(env, source);
     const corpus = await loadR2RetrievalCorpus(env.MANUSCRIPTS, source);
-    return searchManuscriptCorpus({ corpus, source, bindings, corrections, query });
+    return searchManuscriptCorpus({ corpus, source, bindings, corrections, query, profiles: semanticProfiles.profiles });
   }));
   const records = settled.flatMap(result => result.status === 'fulfilled' ? result.value : []);
-  const errors = settled.filter(result => result.status === 'rejected').map(result => result.reason?.code || 'MANUSCRIPT_SOURCE_QUERY_FAILED');
+  const errors = settled.filter(result => result.status === 'rejected').map(result => result.reason?.code || result.reason?.message || 'MANUSCRIPT_SOURCE_QUERY_FAILED');
   records.sort((a, b) => b.score - a.score || a.sectionCode.localeCompare(b.sectionCode));
   return {
     status: records.length ? 'covered' : (errors.length === sources.length ? 'unavailable' : 'no_match'),
@@ -94,6 +117,9 @@ function groundingFrom(published, manuscript) {
     });
   }
   for (const record of manuscript?.records || []) {
+    const topScore = manuscript.records[0]?.score || 0;
+    if (record.sourceVersion?.startsWith('owner-final-20261011-') && record !== manuscript.records[0]) continue;
+    if (topScore >= 800 && record.score < topScore * 0.8) continue;
     sources.push({
       sourceType: record.sourceType,
       bookCode: record.bookCode,
@@ -102,6 +128,10 @@ function groundingFrom(published, manuscript) {
       pageRange: record.pageRange,
       sourceDigest: record.sourceDigest,
       canonicalBinding: record.canonicalBinding,
+      sourceCode: record.sourceCode,
+      sourceVersion: record.sourceVersion,
+      sourceBinaryDigest: record.sourceBinaryDigest,
+      sourceAcceptanceDigest: record.sourceAcceptanceDigest,
       text: record.excerpt
     });
   }
@@ -123,7 +153,8 @@ function splitSentences(text) {
 
 export function deterministicGroundedAnswer(query, grounding, locale) {
   if (!grounding?.allowed) return null;
-  const terms = queryTerms(query);
+  const terms = manuscriptQueryTerms(query);
+  if (!terms.length) return null;
   const candidates = [];
   for (const source of grounding.sources || []) {
     const sourceId = source.sourceId || (
@@ -132,6 +163,7 @@ export function deterministicGroundedAnswer(query, grounding, locale) {
         : `MANUSCRIPT:${source.sectionCode}`
     );
     for (const sentence of splitSentences(source.text)) {
+      if (/^…|…$/.test(sentence)) continue;
       const normalized = sentence.toLocaleLowerCase();
       let score = source.sourceType === 'PUBLISHED_CANONICAL_ARTICLE' ? 2 : 0;
       for (const term of terms) if (normalized.includes(term)) score += term.length > 2 ? 3 : 1;
@@ -142,12 +174,11 @@ export function deterministicGroundedAnswer(query, grounding, locale) {
   const selected = []; const seen = new Set(); let characters = 0;
   for (const candidate of candidates) {
     const key = candidate.sentence.normalize('NFKC');
-    if (seen.has(key) || (selected.length && candidate.score <= 0)) continue;
-    if (characters + candidate.sentence.length > MAX_ANSWER_CHARS && selected.length) continue;
+    if (seen.has(key) || candidate.score <= 0) continue;
+    if (characters + candidate.sentence.length > MAX_ANSWER_CHARS) continue;
     seen.add(key); selected.push(candidate); characters += candidate.sentence.length;
     if (selected.length >= 4 || characters >= MAX_ANSWER_CHARS) break;
   }
-  if (!selected.length && candidates.length) selected.push(candidates[0]);
   if (!selected.length) return null;
   return {
     present: true,
@@ -167,6 +198,8 @@ export async function handleKnowledgeAccessRequest(request, env = {}, options = 
   const locale = url.searchParams.get('locale') || 'zh-Hans';
   const mode = url.searchParams.get('mode') || 'auto';
   const sourceMode = url.searchParams.get('source') || 'hybrid';
+  const bookCode = url.searchParams.get('bookCode') || null;
+  if (bookCode && !/^BOOK-[1-7]$/.test(bookCode)) return response({ ok: false, error: { code: 'BOOK_SCOPE_INVALID' } }, 400);
   if (!query || query.length > MAX_QUERY_LENGTH) return response({ ok: false, error: { code: 'QUERY_INVALID' } }, 400);
   if (!LOCALES.has(locale)) return response({ ok: false, error: { code: 'LOCALE_UNSUPPORTED' } }, 400);
   if (!MODES.has(mode)) return response({ ok: false, error: { code: 'MODE_UNSUPPORTED' } }, 400);
@@ -175,7 +208,7 @@ export async function handleKnowledgeAccessRequest(request, env = {}, options = 
   let published = null;
   let manuscript = { status: 'not_requested', records: [], errors: [] };
   if (sourceMode !== 'manuscript') published = await publishedProjection({ request, env, query, locale, mode });
-  if (sourceMode !== 'published') manuscript = await manuscriptProjection({ env, query, locale });
+  if (sourceMode !== 'published') manuscript = await manuscriptProjection({ env, query, locale, bookCode });
 
   const publishedCovered = published?.coverage?.level && published.coverage.level !== 'none';
   const manuscriptCovered = manuscript.records.length > 0;
@@ -198,11 +231,19 @@ export async function handleKnowledgeAccessRequest(request, env = {}, options = 
   // nodes or relationship expansion when the selected object has no evidence.
   if(atlas.scope){published={...published,results:[]};manuscript={...manuscript,records:[]};}
   answerGrounding.allowed = answerGrounding.sources.length > 0;
-  const groundedAnswer = deterministicGroundedAnswer(query, answerGrounding, locale);
+  const requiresComparativeUnit = sourceMode === 'manuscript' && /区别|比较|关联|之间.*关系|compare|difference|relationship between/i.test(query);
+  const predictionCertainty = /肯定|保证|一定|guarantee|certainly|definitely/i.test(query) && !/不能保证|无法保证|不保证|不能确定|cannot guarantee|can.t guarantee|not guaranteed/i.test(query);
+  const unsupportedPrediction = predictionCertainty && /明[天年]|将来|未来|下(?:周|星期|个?月|年)|tomorrow|future|next\s+(?:week|month|year)/i.test(query);
+  const ambiguous = manuscriptQueryTerms(query).length === 0;
+  const groundedAnswer = requiresComparativeUnit || unsupportedPrediction || ambiguous ? null : deterministicGroundedAnswer(query, answerGrounding, locale);
   answerGrounding.generatedAnswerPresent = Boolean(groundedAnswer);
 
   return response({
     ok: true,
+    providerCalls: 0,
+    providerCostUSD: 0,
+    retrievalAssessment: { retrievedContent: manuscriptCovered || Boolean(publishedCovered), correctBookScope: !bookCode || manuscript.records.every(record => record.bookCode === bookCode) },
+    answerAssessment: { state: unsupportedPrediction ? 'UNSUPPORTED_PREDICTION' : ambiguous ? 'NEEDS_CLARIFICATION' : requiresComparativeUnit ? 'COMPARATIVE_EXPLANATION_UNIT_REQUIRED' : groundedAnswer ? 'EXTRACTIVE_CANDIDATE_REQUIRES_QUESTION_FIT_VALIDATION' : 'NO_SUPPORTED_ANSWER', retrievalDoesNotProveAnswer: true },
     query: { text: query, locale, mode, source: sourceMode },
     coverage: {
       level: coverage,

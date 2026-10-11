@@ -364,12 +364,20 @@ export async function runAskPhiosPipeline({ input, request, env = {}, depth = DE
     return {...composeKapAnswerProjection({bundle,coverageDecision:{status:'INSUFFICIENT_COVERAGE',answerCompositionEligible:false,reasonCodes:['PROTECTED_MANUSCRIPT_ACCESS_DENIED']},depth,now}),kirR2:{status:'KIR_R2_NOT_APPLIED',applied:false}};
   }
   const grounding = await runKapGroundingPipeline({ input, request, env, retrievalOptions, scopeDisposition });
+  const manuscriptAnswerBlocked = (retrievalOptions.source === 'manuscript' || env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true') && ['UNSUPPORTED_PREDICTION', 'NEEDS_CLARIFICATION', 'COMPARATIVE_EXPLANATION_UNIT_REQUIRED', 'NO_SUPPORTED_ANSWER'].includes(grounding.retrieval?.answerAssessment?.state);
+  if (manuscriptAnswerBlocked) grounding.coverageDecision = {...grounding.coverageDecision, status: 'INSUFFICIENT_COVERAGE', answerCompositionEligible: false, shortSupportedAnswerEligible: false, reasonCodes: [...(grounding.coverageDecision.reasonCodes || []), grounding.retrieval.answerAssessment.state]};
   const projection = composeKapAnswerProjection({
     bundle: grounding.groundingBundle,
     coverageDecision: grounding.coverageDecision,
     depth,
     now
   });
+  const sourceNativeAnswer = grounding.retrieval?.groundedAnswer;
+  const acceptedSourceNativeUnit = (retrievalOptions.source === 'manuscript' || env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true') && grounding.groundingBundle.sources.length > 0 && grounding.groundingBundle.sources.every(source => source.sourceType === 'COMPLETED_MANUSCRIPT' && /^[a-f0-9]{64}$/.test(source.sourceAcceptanceDigest || '')) && (grounding.coverageDecision.answerCompositionEligible === true || grounding.coverageDecision.shortSupportedAnswerEligible === true);
+  if (acceptedSourceNativeUnit && sourceNativeAnswer?.generativeModelUsed === false && sourceNativeAnswer.text) {
+    projection.answer = {...projection.answer, content: {...projection.answer.content, directAnswer: sourceNativeAnswer.text}, generation: {...projection.answer.generation, sourceNativeExtractiveUnitConsumed: true}};
+    projection.governance = {...projection.governance, upstreamGroundedAnswerConsumed: true};
+  }
   const relevanceEstablished=grounding.coverageDecision?.answerCompositionEligible===true && !projection.answer?.epistemicReading && !grounding.groundingBundle?.sources?.some(s=>s.sourceType==='STRUCTURED_KNOWLEDGE_OBJECT'||s.bookId==='BOOK-7'||s.bookCode==='BOOK-7'||/^KN-B7-/.test(s.nodeCode||''));
   // Public knowledge retrieval never starts new synthesis, including DEEP requests.
   // Paid report and continuity products keep their independent entitlement/provider owners.
@@ -420,7 +428,7 @@ export async function runAskPhiosPipeline({ input, request, env = {}, depth = DE
       retrievalAuthority: grounding.retrieval?.authority || 'KSAR_KNOWLEDGE_ACCESS',
       sourceCount: grounding.groundingBundle.sources.length,
       upstreamGroundedAnswerPresent: grounding.groundingBundle.retrieval.upstreamGroundedAnswerPresent,
-      upstreamGroundedAnswerConsumed: kirApplied ? kir.result.answer.upstreamGroundedAnswerConsumed : false,
+      upstreamGroundedAnswerConsumed: projection.answer?.generation?.sourceNativeExtractiveUnitConsumed === true || (kirApplied ? kir.result.answer.upstreamGroundedAnswerConsumed : false),
       groundedEvidencePackConsumed: kirApplied ? kir.result.answer.knowledgeEvidencePackConsumed : false
     },
     governance: {

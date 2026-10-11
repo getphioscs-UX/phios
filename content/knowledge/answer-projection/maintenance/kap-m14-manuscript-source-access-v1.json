@@ -1,0 +1,63 @@
+{
+  "status": "ENGINEERING_RECONCILIATION",
+  "scope": "Existing manuscript retrieval gains source-acceptance digest checks, bounded book scope and semantic retrieval. Extractive retrieval is not promoted to validated comparative or predictive answers.",
+  "boundaries": {
+    "canonicalKnowledgeCreated": false,
+    "secondAskRuntimeCreated": false,
+    "historicalFreezeRewritten": false,
+    "checksumValidationRelaxed": false,
+    "humanAccepted": false,
+    "productionAccepted": false
+  },
+  "changes": [
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "68e3d86be6eb09656b37f83faef4c3aa1c3c198eb569cfea63ce31a399832ccd",
+      "successorSha256": "229da3c35678ca5ea788c02055fd52f65c5fceb27afb906a11fc38637c11b999",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-knowledge-access-before.js"
+    },
+    {
+      "path": "scripts/lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs",
+      "predecessorSha256": "a9951dc8582d98877013e00961f1f8bbfb7daa4cc45a6823a45389f91e45a0a3",
+      "successorSha256": "8efa170a37be5f99b82d4ca5e4f9477d99838cdb5018ccbd24479ebdc1720649"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "predecessorSha256": "01af76f0408d96088bbca8a4a13bdd714c863f6cc8a745097d5342a79f6b3336",
+      "successorSha256": "204936a922ca9c52888b007cb58314d1329bcb12277fac135e8e27a21dbd3548",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-grounding-before.js",
+      "changeClass": "Bound BOOK-1 through BOOK-7 selection and transport upstream answer assessment without automatic consumption"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "predecessorSha256": "29dc4fbbcb2e34a0bc45dc97fbbc7bc1dc540ca5011d07ab07251e80837b00fe",
+      "successorSha256": "ae5c90745800528f31543f16758ee03879280fe396ee59a9e606f340912dc06b",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-composition-before.js",
+      "changeClass": "Unsupported manuscript answers remain blocked; source-bound extractive unit requires accepted source digests and eligible coverage; provider prohibition unchanged"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "229da3c35678ca5ea788c02055fd52f65c5fceb27afb906a11fc38637c11b999",
+      "successorSha256": "a7b6caeab73451e9b6db38fc5139c0df98d5139d53957e0f39c8a3f4017ad04f",
+      "changeClass": "Registry v3 source identity verification; owner-final derivative retrieval requires explicit server QA flag, source acceptance identity and private storage. Production admission is not inferred from source acceptance.",
+      "dependencies": [
+        {
+          "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v3.json",
+          "sha256": "3c196eaf8b46f9b6e9865370f1516c09279dfbea607d8b1e2a3297628aab1605"
+        }
+      ]
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "predecessorSha256": "204936a922ca9c52888b007cb58314d1329bcb12277fac135e8e27a21dbd3548",
+      "successorSha256": "34bfe5acf36a2c7c4616e180fc00a07e07e8927b7f17b16a28f8abee9e6bcef7",
+      "changeClass": "Explicit BOOK-4/BOOK-6 scope; derivative manuscript QA only with server opt-in and without selected article"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "predecessorSha256": "ae5c90745800528f31543f16758ee03879280fe396ee59a9e606f340912dc06b",
+      "successorSha256": "182aabd4bde0570f3f365f08bf194cd235a6d8ccc6f5e35fb4dbbef6663cb8bc",
+      "changeClass": "Apply unsupported-answer stops and accepted-source extraction to server derivative QA; provider prohibition unchanged"
+    }
+  ]
+}
