@@ -1,0 +1,59 @@
+{
+  "at": "2026-10-11T11:07:20.320Z",
+  "results": [
+    {
+      "question": "第三册的“运行累积”具体指什么？",
+      "expected": "CKA",
+      "mode": "CKA",
+      "reason": "EXPLICIT_BOOK_KNOWLEDGE_SCOPE",
+      "pass": true
+    },
+    {
+      "question": "已经累积的运行如何逐渐离开当前载体",
+      "expected": "CKA",
+      "mode": "CKA",
+      "reason": "EXPLICIT_BOOK_KNOWLEDGE_SCOPE",
+      "pass": true
+    },
+    {
+      "question": "为什么共同运行必须压缩自己需要处理的关系数量",
+      "expected": "CKA",
+      "mode": "CKA",
+      "reason": "EXPLICIT_BOOK_KNOWLEDGE_SCOPE",
+      "pass": true
+    },
+    {
+      "question": "我现在胸痛而且呼吸困难",
+      "expected": "HEALTH",
+      "mode": "HEALTH",
+      "reason": "HEALTH_SAFETY_PRECEDENCE",
+      "pass": true
+    },
+    {
+      "question": "我的头痛应该怎样用药？",
+      "expected": "HEALTH",
+      "mode": "HEALTH",
+      "reason": "HEALTH_SAFETY_PRECEDENCE",
+      "pass": true
+    },
+    {
+      "question": "我应该如何调整与伴侣的关系？",
+      "forbidden": "CKA",
+      "mode": "ASK2",
+      "reason": "PERSONAL_CURRENT_ACTION_INTENT",
+      "pass": true
+    },
+    {
+      "question": "为什么共同运行需要协调？",
+      "body": {
+        "taxonomyHint": "RELATIONSHIP"
+      },
+      "expected": "ASK2",
+      "mode": "ASK2",
+      "reason": "EXPLICIT_RUNTIME_INPUT",
+      "pass": true
+    }
+  ],
+  "providerCalls": 0,
+  "scope": "Book-scoped abstract knowledge precedence; health safety and actual personal action retained"
+}

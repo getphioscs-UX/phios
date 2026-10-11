@@ -4,6 +4,10 @@ export const MANUSCRIPT_SOURCE_RUNTIME_VERSION = '1.1.0';
 const MAX_RESULTS = 4;
 const MAX_EXCERPT_CHARS = 1200;
 const MAX_TOTAL_EXCERPT_CHARS = 3600;
+const parsedCorpusCache = new Map();
+const MAX_PARSED_CORPUS_CACHE_BYTES = 3 * 1024 * 1024;
+let parsedCorpusCacheBytes = 0;
+const preparedCorpusCache = new WeakMap();
 
 const clean = value => String(value ?? '')
   .normalize('NFKC')
@@ -67,18 +71,31 @@ function correctedRecord(record, corrections) {
   };
 }
 
-function scoreRecord(record, query, terms, profile, specificity = null) {
+function scoreRecord(record, query, terms, profile, specificity = null, prepared = null) {
   if (record.retrievalEligible === false || record.segmentType === 'FRONT_MATTER') return 0;
-  const heading = normalized(record.heading);
-  const text = normalized(record.text);
+  const heading = prepared?.heading ?? normalized(record.heading);
+  const nativeHeaderBreak = String(record.text).indexOf('\n\n');
+  const nativeHeader = nativeHeaderBreak >= 0 && nativeHeaderBreak < 200 && !String(record.text).slice(0,nativeHeaderBreak).includes('\f')
+    ? normalized(String(record.text).slice(0,nativeHeaderBreak)).replace(/([\u3400-\u9fff])\s+(?=[\u3400-\u9fff])/g,'$1') : heading;
+  const text = prepared?.text ?? normalized(record.text);
   const q = normalized(query);
+  const compact = value => normalized(value).replace(/[\p{P}\p{S}\s]+/gu,'');
+  const compactQuestion = compact(query);
+  const compactText = prepared?.compactText ?? compact(text);
   let score = 0;
   const headingLabel = heading.split(/[|｜]/u)[0].trim();
+  const temporalSubject = q.match(/^([\u3400-\u9fff]{2,8}?)(?:是否|是不是|是|会|能)/u)?.[1];
+  const temporalConditionMatch = temporalSubject && /瞬间|单次|一次性|固定|静止|永久/u.test(q) && nativeHeader.includes(temporalSubject) && /持续|过程|固定|静止|变化/u.test(nativeHeader);
+  if (temporalConditionMatch) score += 1200;
+  const perspectiveCompletenessMatch = /全部|完整|唯一/u.test(q) && /我(?:看到|看见|感受)|自己的(?:现实|世界)|个人(?:理解|经验)/u.test(q) && /全部|完整/u.test(nativeHeader) && /意识|理解|经验/u.test(nativeHeader);
+  if (perspectiveCompletenessMatch) score += 1200;
   if (q && headingLabel === q) score += 4000;
   const exactProfileQuestion = [...(profile?.naturalQuestions || []), ...(profile?.userLanguage || []), ...(profile?.aliases || [])].some(value => normalized(value) === q);
   if (exactProfileQuestion) score += 1400;
   if (q && heading.includes(q)) score += 1200;
   if (q && text.includes(q)) score += 800;
+  const nativeIntroductionMatch=compactQuestion.length>=4&&compact(record.text.slice(0,350)).includes(compactQuestion);
+  if(nativeIntroductionMatch)score+=1600;
   const meaningfulTerms = terms.filter(term => !/^(?:why|what|how|does|do|is|are|the|a|an|of|in|to|and|can|为什么|为何|什么|怎么|如何|请问|现实|运行|一个|以后|能够|需要|形成|持续|个人|people)$/i.test(term));
   if (!meaningfulTerms.length) return 0;
   let specificMatches = 0;
@@ -87,6 +104,9 @@ function scoreRecord(record, query, terms, profile, specificity = null) {
     if ((specificity ? headingLabel : heading).includes(term)) score += 70 * weight;
     if (text.includes(term)) { score += 12 * weight; specificMatches++; }
   }
+  const totalWeight=meaningfulTerms.reduce((sum,term)=>sum+(specificity?.get(term)||1),0);
+  const matchedWeight=meaningfulTerms.filter(term=>text.includes(term)||compactText.includes(compact(term))).reduce((sum,term)=>sum+(specificity?.get(term)||1),0);
+  if(!record.supportRange&&!exactProfileQuestion&&!nativeIntroductionMatch&&!temporalConditionMatch&&!perspectiveCompletenessMatch&&!q.includes(headingLabel)&&matchedWeight/Math.max(1,totalWeight)<0.35)return 0;
     if (specificity) {
       const subtitle = heading.slice(headingLabel.length);
       const comparison = q.match(/^(.+?)(?:与|和)(.+?)(?:有什么区别|有何区别|的区别|区别)/);
@@ -108,6 +128,10 @@ function excerptFor(record, query, terms, maximum = MAX_EXCERPT_CHARS) {
     if (record.supportRange) return text.length<=maximum?text:text.slice(0,maximum).replace(/[^。！？!?]*$/u,'')+'…';
   if (text.length <= maximum) return text;
   let anchor = text.indexOf(clean(query));
+  const concept = clean(record.heading).split(/[|｜]/u)[0].replace(/^[✦◈◆◇❖]\s*/u,'').trim();
+  // A named concept question needs its introductory definition, not whichever
+  // incidental word happens to occur earliest in the query-term list.
+  if (concept.length >= 2 && clean(query).includes(concept)) anchor = 0;
   if (anchor < 0) {
     for (const term of terms) {
       anchor = text.toLocaleLowerCase().indexOf(term);
@@ -150,12 +174,21 @@ export function searchManuscriptCorpus({
 }) {
   if (!corpus || !Array.isArray(corpus.records)) return [];
   const terms = manuscriptQueryTerms(query);
-  const specificity = source.version?.startsWith('owner-final-20261011-') ? new Map(terms.map(term => [term,Math.log(1 + corpus.records.length / (1 + corpus.records.filter(record => normalized(record.text).includes(term)).length))])) : null;
-  const ranked = corpus.records
-    .map(rawRecord => {
-      const record = correctedRecord(rawRecord, corrections);
+  // Normalize each chapter once, rather than once per query term and again
+  // during every coverage check. No corpus text or ranking rule changes.
+  const correctionKey = JSON.stringify(corrections?.records || []);
+  const cachedPrepared = preparedCorpusCache.get(corpus);
+  const preparedRecords = cachedPrepared?.correctionKey === correctionKey ? cachedPrepared.records : corpus.records.map(rawRecord => {
+    const record = correctedRecord(rawRecord, corrections);
+    const text = normalized(record.text), heading = normalized(record.heading);
+    return {record, prepared:{text,heading,dfText:record.text === rawRecord.text ? text : normalized(rawRecord.text),compactText:text.replace(/[\p{P}\p{S}\s]+/gu,'')}};
+  });
+  if (cachedPrepared?.correctionKey !== correctionKey) preparedCorpusCache.set(corpus,{correctionKey,records:preparedRecords});
+  const specificity = new Map(terms.map(term => [term,Math.log(1 + corpus.records.length / (1 + preparedRecords.filter(item => item.prepared.dfText.includes(term)).length))]));
+  const ranked = preparedRecords
+    .map(({record, prepared}) => {
       const profile = profiles.find(candidate => candidate.bookCode === source.bookCode && candidate.productionEligible === true && candidate.bookSources?.some(ref => ref.sectionCode === record.sectionCode));
-      return { record, score: scoreRecord(record, query, terms, profile, specificity), profile };
+      return { record, score: scoreRecord(record, query, terms, profile, specificity, prepared), profile };
     })
     .filter(item => item.score > 0)
     .sort((a, b) => b.score - a.score || a.record.sequence - b.record.sequence);
@@ -224,7 +257,10 @@ export async function loadR2RetrievalCorpus(binding, source) {
     error.code = 'MANUSCRIPT_RETRIEVAL_CORPUS_BYTES_MISMATCH';
     throw error;
   }
-  const corpus = JSON.parse(text);
+  // Every request still reads R2 and verifies current bytes before any cache
+  // reuse. Missing objects or changed bytes cannot inherit an old PASS.
+  const cachedCorpus = parsedCorpusCache.get(actualBytesSha256);
+  const corpus = cachedCorpus?.corpus || JSON.parse(text);
   if (corpus.bookCode !== source.bookCode || corpus.locale !== source.locale) {
     const error = new Error('MANUSCRIPT_RETRIEVAL_CORPUS_IDENTITY_MISMATCH');
     error.code = 'MANUSCRIPT_RETRIEVAL_CORPUS_IDENTITY_MISMATCH';
@@ -244,6 +280,13 @@ export async function loadR2RetrievalCorpus(binding, source) {
     const error = new Error('MANUSCRIPT_RETRIEVAL_SECTION_STRUCTURE_MISMATCH');
     error.code = 'MANUSCRIPT_RETRIEVAL_SECTION_STRUCTURE_MISMATCH';
     throw error;
+  }
+  if (!cachedCorpus) {
+    const byteSize = new TextEncoder().encode(text).byteLength;
+    if (byteSize <= MAX_PARSED_CORPUS_CACHE_BYTES) {
+      while(parsedCorpusCacheBytes + byteSize > MAX_PARSED_CORPUS_CACHE_BYTES){const key=parsedCorpusCache.keys().next().value;parsedCorpusCacheBytes-=parsedCorpusCache.get(key).byteSize;parsedCorpusCache.delete(key);}
+      parsedCorpusCache.set(actualBytesSha256,{corpus,byteSize});parsedCorpusCacheBytes+=byteSize;
+    }
   }
   return corpus;
 }

@@ -34,7 +34,7 @@ async function readAssetJson(env, path) {
 
 async function validateSourceAcceptance(env, source) {
   if (!source.acceptancePath || !source.acceptanceSha256) throw new Error('MANUSCRIPT_SOURCE_ACCEPTANCE_REQUIRED');
-  const response = await env.ASSETS.fetch(new Request(`https://assets.local/${source.acceptancePath}`));
+  const response = Object.hasOwn(manuscriptMetadataRaw,source.acceptancePath) ? new Response(manuscriptMetadataRaw[source.acceptancePath]) : await env.ASSETS.fetch(new Request(`https://assets.local/${source.acceptancePath}`));
   if (!response.ok) throw new Error('MANUSCRIPT_SOURCE_ACCEPTANCE_UNAVAILABLE');
   const bytes = await response.text();
   const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(bytes)))].map(b => b.toString(16).padStart(2, '0')).join('');
@@ -57,7 +57,7 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
     return { status: 'disabled_in_preview', records: [], errors: [] };
   }
   const [registry, reviewedRegistry, bindings, corrections, semanticProfiles] = await Promise.all([
-    readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v4.json'),
+    readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v5.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-editorial-correction-v1.json'),
@@ -73,6 +73,7 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
       if (!reviewed || reviewed.humanReadabilityStatus !== 'HUMAN_REVIEW_COMPLETE') return null;
       return {
         ...source,
+        reviewedSourceRecord: reviewed,
         r2ObjectKey: reviewed.r2ObjectKey,
         retrievalCorpusSha256: reviewed.retrievalCorpusSha256,
         activeCorpusAuthority: reviewed.corpusAuthority,
@@ -94,7 +95,20 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
     }
     if (source.runtimeAdmission === 'ADMITTED_READABILITY_SOURCE_PENDING_REMOTE_OBJECT') await validateSourceAcceptance(env, source);
     let corpus = await loadR2RetrievalCorpus(env.MANUSCRIPTS, source);
-    if ((env.PHIOS_MANUSCRIPT_TEXT_SCOPE_QA === 'true' || env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true') && source.sourceAcceptancePath) {
+    // Reuse the existing closed KSAR human review for Book II. The original
+    // registry and accepted corpus remain unchanged; only the missing consumer
+    // provenance is restored. A label alone never grants answer eligibility.
+    if (source.bookCode === 'BOOK-2' && source.reviewedSourceRecord) {
+      const reviewed = source.reviewedSourceRecord;
+      const closurePath = reviewedRegistry.humanReviewResolution;
+      const raw = manuscriptMetadataRaw[closurePath];
+      if (!raw) throw Error('REVIEWED_MANUSCRIPT_ACCEPTANCE_METADATA_UNAVAILABLE');
+      const closure = JSON.parse(raw);
+      if (closure.status !== 'HUMAN_REVIEW_GATE_CLOSED' || closure.summary?.pendingHumanReview !== 0 || closure.authorityBoundaries?.reviewedCorpusMayGroundQuestionScopedKnowledgeAccess !== true || reviewed.sourceSha256 !== corpus.sourceSha256 || reviewed.corpusSha256 !== corpus.corpusSha256 || reviewed.reviewedRecordsSha256 !== corpus.reviewedRecordsSha256 || Number(reviewed.recordCount) !== corpus.records.length || corpus.humanReview?.allRecordsReviewed !== true || corpus.humanReview?.pendingCount !== 0 || !corpus.records.every(record => record.reviewStatus === 'HUMAN_APPROVED_FINAL')) throw Error('REVIEWED_MANUSCRIPT_ACCEPTANCE_IDENTITY_MISMATCH');
+      source.acceptanceSha256 = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+    if (source.scopeAdmissionPath && env.PHIOS_MANUSCRIPT_TEXT_SCOPE_QA !== 'true' && env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED !== 'true') throw Error('MANUSCRIPT_SCOPE_NOT_ACTIVATED');
+    if ((env.PHIOS_MANUSCRIPT_TEXT_SCOPE_QA === 'true' || env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true') && source.scopeAdmissionPath) {
       // Server-only candidate validation. This flag cannot be set by request input.
       const raw=manuscriptMetadataRaw[source.scopeAdmissionPath];
       if(!raw)throw Error('MANUSCRIPT_SCOPE_ADMISSION_UNAVAILABLE');
@@ -175,6 +189,31 @@ function splitSentences(text) {
     .filter(value => value.length >= 12) || [];
 }
 
+export function manuscriptAnswerProse(text, heading) {
+  const raw = String(text || '');
+  const marker = /^\s*[^\p{Script=Han}A-Za-z0-9\s]+/u;
+  if (!marker.test(raw)) return raw;
+  const compact = value => String(value).normalize('NFKC').replace(/\s+/gu, '');
+  const lines = raw.split('\n');
+  const title = compact(heading);
+  const reviewedHeader = raw.match(/^\s*[^\p{Script=Han}A-Za-z0-9\s]+[^\f]{0,200}?\n[ \t]*\n/u);
+  if (reviewedHeader && /[|｜]/u.test(lines[0])) return raw.slice(reviewedHeader[0].length);
+  let prefix = '';
+  for (let i = 0; i < Math.min(lines.length, 12); i++) {
+    // A page boundary is never a heading delimiter.
+    if (lines[i].includes('\f')) break;
+    const line = lines[i].replace(i === 0 ? marker : /^$/u, '');
+    if (i === 0 && /^第[一二三四五六七八九十]+部/u.test(line) && lines[1] && title.startsWith(compact(lines[1]))) continue;
+    prefix += line;
+    if (title && compact(prefix) === title) return lines.slice(i + 1).join('\n');
+    if (title && !title.startsWith(compact(prefix))) break;
+  }
+  // Legacy reviewed derivatives explicitly separate the heading with an
+  // empty line. Accept that separator only before a page break.
+  const separator = raw.match(/^\s*[✦◈◆◇❖][^\f]*?\n[ \t]*\n/u);
+  return separator ? raw.slice(separator[0].length) : raw;
+}
+
 export function deterministicGroundedAnswer(query, grounding, locale) {
   if (!grounding?.allowed) return null;
   const terms = manuscriptQueryTerms(query);
@@ -188,7 +227,31 @@ export function deterministicGroundedAnswer(query, grounding, locale) {
     );
     let position = 0;
     let prose=source.text;
+    if (!source.supportRange || source.bookCode === 'BOOK-3') prose = manuscriptAnswerProse(prose, source.heading);
     if(source.supportRange){const normalized=String(prose).replace(/([\u3400-\u9fff])\s+(?=[\u3400-\u9fff])/g,'$1').normalize('NFKC');const title=String(source.heading||'').normalize('NFKC');prose=normalized.startsWith('✦'+title)?normalized.slice(title.length+1):normalized;}
+    // Native manuscript prose must retain the definition and its adjacent
+    // conditions. Isolated high-scoring sentences can lose their antecedent.
+    if (source.sourceType === 'COMPLETED_MANUSCRIPT' && (!source.supportRange || source.bookCode === 'BOOK-3')) {
+      const sentences = splitSentences(prose);
+      const contiguous = []; let size = 0;
+      for (const sentence of sentences) {
+        if (/^…|…$/.test(sentence)) break;
+        // Do not propagate an overprinted/repeated extraction run. Preserve the
+        // stored source, but stop this projection before the suspect sentence.
+        const compact = sentence.replace(/\s+/g,'');
+        if (contiguous.some(previous=>{
+          const earlier=previous.replace(/\s+/g,'');
+          return earlier.length>=24 && compact.includes(earlier);
+        })) break;
+        if (size + sentence.length > MAX_ANSWER_CHARS) break;
+        contiguous.push(sentence); size += sentence.length;
+      }
+      if (contiguous.length) return {
+        present:true, projectionType:'DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER',
+        generativeModelUsed:false, locale, text:contiguous.join(locale==='zh-Hans'?'\n\n':' '),
+        sourceReferences:[sourceId], authorityNotice:'Contiguous source prose; retrieval alone does not prove question fit.'
+      };
+    }
     for (const sentence of splitSentences(prose)) {
       if (/^…|…$/.test(sentence)) continue;
       const normalized = sentence.toLocaleLowerCase();
@@ -261,15 +324,16 @@ export async function handleKnowledgeAccessRequest(request, env = {}, options = 
   if(atlas.scope){published={...published,results:[]};manuscript={...manuscript,records:[]};}
   answerGrounding.allowed = answerGrounding.sources.length > 0;
   const requiresComparativeUnit = sourceMode === 'manuscript' && /区别|比较|关联|之间.*关系|compare|difference|relationship between/i.test(query);
-  const predictionCertainty = /肯定|保证|一定|guarantee|certainly|definitely/i.test(query) && !/不能保证|无法保证|不保证|不能确定|cannot guarantee|can.t guarantee|not guaranteed/i.test(query);
+  const predictionCertainty = /肯定|保证|一定|确定|必然|guarantee|certainly|definitely|with certainty/i.test(query) && !/不能保证|无法保证|不保证|不能确定|无法确定|不确定|cannot guarantee|can.t guarantee|not guaranteed|not certain/i.test(query);
   const unsupportedPrediction = predictionCertainty && /明[天年]|将来|未来|下(?:周|星期|个?月|年)|tomorrow|future|next\s+(?:week|month|year)/i.test(query);
   const ambiguous = manuscriptQueryTerms(query).length === 0;
   // A comparison is not ambiguous merely because it asks for a distinction.
   // Only admit one when the retrieved prose itself states a contrast.
-  const compared = query.match(/^(.+?)(?:与|和)(.+?)(?:有什么区别|有何区别|的区别|区别|之间)/);
+  const compared = query.match(/^(.+?)与(.+?)(?:有什么区别|有何区别|的区别|区别|之间)/) || query.match(/^(.+?)和(.+?)(?:有什么区别|有何区别|的区别|区别|之间)/);
   const comparisonTerms = compared ? [compared[1],compared[2]].map(x=>x.replace(/^(?:请问|普通|一般)/,'').trim()) : [];
-  const comparisonSupported = requiresComparativeUnit && comparisonTerms.length===2 && answerGrounding.sources.some(s=>comparisonTerms.includes(String(s.heading||'').split(/[|｜]/)[0].trim().replace(/^什么是/,'')) && comparisonTerms.every(term=>s.text.includes(term)) && /区别|差异|不同|并不是|不是.*而是|前者|后者/.test(s.text));
-  const groundedAnswer = (requiresComparativeUnit && !comparisonSupported) || unsupportedPrediction || ambiguous ? null : deterministicGroundedAnswer(query, answerGrounding, locale);
+  const comparisonSupported = requiresComparativeUnit && comparisonTerms.length===2 && answerGrounding.sources.some(s=>{const prose=String(s.text||'').replace(/([\u3400-\u9fff])\s+(?=[\u3400-\u9fff])/g,'$1');return comparisonTerms.includes(String(s.heading||'').split(/[|｜]/)[0].trim().replace(/^什么是/,'')) && comparisonTerms.every(term=>prose.includes(term)) && /区别|差异|不同|并不是|不是.*而是|前者|后者/.test(prose);});
+  const answerSources=bookCode&&sourceMode==='manuscript'?{...answerGrounding,sources:answerGrounding.sources.slice(0,1)}:answerGrounding;
+  const groundedAnswer = (requiresComparativeUnit && !comparisonSupported) || unsupportedPrediction || ambiguous ? null : deterministicGroundedAnswer(query, answerSources, locale);
   answerGrounding.generatedAnswerPresent = Boolean(groundedAnswer);
 
   return response({

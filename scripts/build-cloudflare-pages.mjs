@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { gzipSync } from 'node:zlib';
+import { transformSync } from 'esbuild';
 import {createHash} from 'node:crypto';
 import {acquirePagesOutputLock} from './lib/pages-output-lock.mjs';
 
@@ -353,6 +354,14 @@ if (
   );
 }
 
+// Compact only generated whitespace. Keep identifiers, syntax and legal
+// comments; enforce the same publication budgets on the actual shipped bytes.
+const compiledWorker = fs.readFileSync(workerSource, 'utf8');
+const compactWorker = transformSync(compiledWorker, {
+  loader: 'js', target: 'esnext', minifyWhitespace: true,
+  minifyIdentifiers: false, minifySyntax: false, legalComments: 'inline'
+}).code;
+fs.writeFileSync(workerSource, compactWorker);
 const workerBytes = fs.readFileSync(
   workerSource
 );

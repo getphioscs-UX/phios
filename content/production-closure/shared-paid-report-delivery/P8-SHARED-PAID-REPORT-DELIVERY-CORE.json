@@ -1,0 +1,525 @@
+{
+  "status": "PARTIAL_EVIDENCE_GAPS_OPEN",
+  "coreVersion": "P8-SHARED-PAID-REPORT-1",
+  "head": "16db1180638a83c3c404a62bfda45c68c680c023",
+  "source": "LOCAL_SUCCESSOR_IN_PROGRESS",
+  "deployed": "NOT_RUN",
+  "liveCustomer": "RUNTIME_UNVERIFIED",
+  "w0": {
+    "status": "PASS_LOCAL",
+    "classification": "CURRENT_CUSTOMER_BACKGROUND_ALREADY_WHITE",
+    "actualPinkSource": null,
+    "productionColorChanges": 0,
+    "baselineV3": "PRESERVED",
+    "baselineV3_1": "NOT_CREATED_NO_PRODUCTION_CHANGE"
+  },
+  "existingOwnerAudit": "content/production-closure/shared-paid-report-delivery/P8-EXISTING-OWNER-AUDIT.json",
+  "filesModified": [
+    {
+      "path": "functions/account/method-report-delivery.js",
+      "beforeSha256": "18b6c0b80ec33dd494ee65274f20b89d7644909fc0c7c41a4bf967da4b5e149c",
+      "afterSha256": "7421362ed7a2498db5cfece19c4cacd9ed3b3bd92976b95e88a767235f28ed75",
+      "reason": "Reuse one method adapter registry"
+    },
+    {
+      "path": "functions/commerce/commerce-stripe-api.js",
+      "beforeSha256": "04cb26a0e60422cc1bdf101737d20c81652a0f8ea26c9a1040f8b5c962e7aa89",
+      "afterSha256": "2943acdc742bcf0541cf78f21440b96321c60b4382c75b2c7206672493b5f480",
+      "reason": "Server readiness gate before order/Stripe"
+    },
+    {
+      "path": "functions/commerce/commerce-stripe-events.js",
+      "beforeSha256": "8dc31dfc32232f12b52dd909b669f00fa69f75695af59f9c3568e75428397184",
+      "afterSha256": "3f1457890466d967a4c5d1fa55638a86b4f3e92facb8a9ef1c847d27fbb57ed4",
+      "reason": "One paid job after verified payment"
+    },
+    {
+      "path": "functions/personal-reading/paid-report-context.js",
+      "beforeSha256": "eaa2dc43989752429703f23187c3a844fee97438b5d4b683cf84e9004feca1a7",
+      "afterSha256": "bd0aed01ce9e752250d641268ea7e7fb58cceb6ff7484cb8c250d703fce253a0",
+      "reason": "Attach shared job refs to the existing cost owner"
+    },
+    {
+      "path": "functions/personal-reading/report-generation-budget.js",
+      "beforeSha256": "b6351fb273d7fed3f4064617aac2d1fb0919ac1db2e821bed7f66d917c73fcaa",
+      "afterSha256": "09bb1e0d8468ffb132eeaaf174029093f9c729a3ce165ec70a1eaca9203eb104",
+      "reason": "Persist job/stage/attempt refs without changing money policy"
+    },
+    {
+      "path": "functions/account/report-purchase-progress.js",
+      "beforeSha256": "7e9876a33710ca91c10ef3185b21deba660a9df585624853e0a9ac95c4e9f2a6",
+      "afterSha256": "30c22814246e10697a8bfaaefd382e602108f2977921770252d90be680d96105",
+      "reason": "Project server job status through the existing account owner"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/account-private-material.js",
+      "beforeSha256": "5dbed2de70ee97828edb09c91b64180bb88ef0f07c6be03c13d62db0cb912b50",
+      "afterSha256": "792d3f255cac32ff532342f80f2512619950478c9a8f409f2de69687cb1a49fc",
+      "reason": "Display safe bilingual server delivery status"
+    },
+    {
+      "path": "content/registry/runtime-migrations.json",
+      "beforeSha256": "9c6a0f2d4272c4655976260a1a1cc7c68e8d765ac9ac6e62730789005967e9da",
+      "afterSha256": "11cbe8b1d57f8145f3c6c5cf1aeddb01d7f201ca7f562864feb6c54cfb3bb18c",
+      "reason": "Register one additive local migration"
+    }
+  ],
+  "filesCreated": [
+    {
+      "path": "functions/report-delivery/paid-report-bazi-adapter.js",
+      "sha256": "d95f85a96da968b895e842130340d907eb9154bb555e50231478e92a72002fee"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-delivery-core.js",
+      "sha256": "e55851fc18d1ce336947605c7d99afeb9e54f72d487d30887c5af508fbd15762"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-method-registry.js",
+      "sha256": "a98035f6b900203f7cc38c470642dc208ae936416b4ae6b5ed71a939acabc5d7"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-policy.js",
+      "sha256": "ee27ff44069e5dfc387827f2a9c79032a18212598dac72a948ffb06c65494746"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-readiness.js",
+      "sha256": "04ee1407b20be143346f16071777558591c1158cbb51237828c69f2f095ed661"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-refund.js",
+      "sha256": "3596b4e52fd7bfc9b64b85c3df13bcbc5fb4ff556bfb4df84e77cc6f7b2eafb2"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-state-store.js",
+      "sha256": "331547faa3e73e8511c16866f16aabf10d1c60b29cfd1a0cfe10ab2a3f4b27eb"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-watchdog.js",
+      "sha256": "d657c54a94a9fbb57163296235dc64c43a40916a38a89132c644812aecf5e9b0"
+    },
+    {
+      "path": "functions/commerce/paid-report-refund-transport.js",
+      "sha256": "cc51d56b7f1f56eea8ac2ba5a64a525222b8d8430b7b01f8bb58484c11c664b0"
+    },
+    {
+      "path": "functions/api/account-paid-report-setup.js",
+      "sha256": "08f23a0d425a4a96c3aaea7942d97edec118bd1d2b49f5c56c711d8f0c45f1bc"
+    },
+    {
+      "path": "functions/api/account-paid-report-status.js",
+      "sha256": "9c2e2fcae1a37487a4fb87c89f92b91cd62c09deb51a649a9dd83226618f0348"
+    },
+    {
+      "path": "db/migrations/0018_shared_paid_report_delivery.sql",
+      "sha256": "546f66d3b85ed5788e3f1ac92f1d62969dfe4ce2f7cda3a1d9335e6ab0fbc78c"
+    }
+  ],
+  "qaFiles": [
+    "scripts/check-p8-bazi-account-reopen.mjs",
+    "scripts/check-p8-bazi-adapter-conformance.mjs",
+    "scripts/check-p8-bazi-background.mjs",
+    "scripts/check-p8-bazi-recovery-boundary.mjs",
+    "scripts/check-p8-checkout-api-negatives.mjs",
+    "scripts/check-p8-durable-matrix.mjs",
+    "scripts/check-p8-review-browser.mjs",
+    "scripts/check-p8-security-watchdog.mjs",
+    "scripts/check-p8-shared-core.mjs",
+    "scripts/finalize-p8-local-evidence.mjs",
+    "scripts/p8-crash-process.mjs",
+    "scripts/lib/p8-shared-core-qa.mjs",
+    "scripts/lib/bazi-r2-p7-terminal-harness.mjs",
+    "scripts/lib/persistent-private-reports-qa.mjs"
+  ],
+  "sourceHashManifest": {
+    "functions/report-delivery/paid-report-bazi-adapter.js": "d95f85a96da968b895e842130340d907eb9154bb555e50231478e92a72002fee",
+    "functions/report-delivery/paid-report-delivery-core.js": "e55851fc18d1ce336947605c7d99afeb9e54f72d487d30887c5af508fbd15762",
+    "functions/report-delivery/paid-report-method-registry.js": "a98035f6b900203f7cc38c470642dc208ae936416b4ae6b5ed71a939acabc5d7",
+    "functions/report-delivery/paid-report-policy.js": "ee27ff44069e5dfc387827f2a9c79032a18212598dac72a948ffb06c65494746",
+    "functions/report-delivery/paid-report-readiness.js": "04ee1407b20be143346f16071777558591c1158cbb51237828c69f2f095ed661",
+    "functions/report-delivery/paid-report-refund.js": "3596b4e52fd7bfc9b64b85c3df13bcbc5fb4ff556bfb4df84e77cc6f7b2eafb2",
+    "functions/report-delivery/paid-report-state-store.js": "331547faa3e73e8511c16866f16aabf10d1c60b29cfd1a0cfe10ab2a3f4b27eb",
+    "functions/report-delivery/paid-report-watchdog.js": "d657c54a94a9fbb57163296235dc64c43a40916a38a89132c644812aecf5e9b0",
+    "functions/commerce/paid-report-refund-transport.js": "cc51d56b7f1f56eea8ac2ba5a64a525222b8d8430b7b01f8bb58484c11c664b0",
+    "functions/api/account-paid-report-setup.js": "08f23a0d425a4a96c3aaea7942d97edec118bd1d2b49f5c56c711d8f0c45f1bc",
+    "functions/api/account-paid-report-status.js": "9c2e2fcae1a37487a4fb87c89f92b91cd62c09deb51a649a9dd83226618f0348",
+    "db/migrations/0018_shared_paid_report_delivery.sql": "546f66d3b85ed5788e3f1ac92f1d62969dfe4ce2f7cda3a1d9335e6ab0fbc78c",
+    "functions/account/method-report-delivery.js": "7421362ed7a2498db5cfece19c4cacd9ed3b3bd92976b95e88a767235f28ed75",
+    "functions/commerce/commerce-stripe-api.js": "2943acdc742bcf0541cf78f21440b96321c60b4382c75b2c7206672493b5f480",
+    "functions/commerce/commerce-stripe-events.js": "3f1457890466d967a4c5d1fa55638a86b4f3e92facb8a9ef1c847d27fbb57ed4",
+    "functions/personal-reading/paid-report-context.js": "bd0aed01ce9e752250d641268ea7e7fb58cceb6ff7484cb8c250d703fce253a0",
+    "functions/personal-reading/report-generation-budget.js": "09bb1e0d8468ffb132eeaaf174029093f9c729a3ce165ec70a1eaca9203eb104",
+    "functions/account/report-purchase-progress.js": "30c22814246e10697a8bfaaefd382e602108f2977921770252d90be680d96105",
+    "assets/customer-ui/js/surfaces/account-private-material.js": "792d3f255cac32ff532342f80f2512619950478c9a8f409f2de69687cb1a49fc",
+    "content/registry/runtime-migrations.json": "11cbe8b1d57f8145f3c6c5cf1aeddb01d7f201ca7f562864feb6c54cfb3bb18c",
+    "scripts/check-p8-bazi-account-reopen.mjs": "4b1f5b0d672e7da396981a53bed83956c496b5133de4540f6842ce8012e48753",
+    "scripts/check-p8-bazi-adapter-conformance.mjs": "88d7f7e93f4451561addedb89016022c6958e29532de2dee80306951e8857ffe",
+    "scripts/check-p8-bazi-background.mjs": "6de35b7f53f94b81b17a3d2c5f7f97d6b789318236d11af1d1023d06c4c6f7a7",
+    "scripts/check-p8-bazi-recovery-boundary.mjs": "80297c191c04d86ec7a1f0a3495087f2b0f03d5076dc1292677991a5cd191ce9",
+    "scripts/check-p8-checkout-api-negatives.mjs": "0e031be190f71397e083494f6732d0096877901c40ddb9c5b0b2bdfd7969d1ed",
+    "scripts/check-p8-durable-matrix.mjs": "a716e25a7c6b8c97e0114e214c7e12a15e87b8c3c261946e5ac3a8f11b91753a",
+    "scripts/check-p8-review-browser.mjs": "0f16feab08bcfee2b1f5e7a02da30ab95b5793422be0ef458d22d3642f669049",
+    "scripts/check-p8-security-watchdog.mjs": "b62ddd3195f782c92357934087cc52591371bfab0978c2056cd21faac6766aa1",
+    "scripts/check-p8-shared-core.mjs": "51be0b7ed6ef3d7d4518f516d38751742e47ff1d217ae0e3432a04c0ae1a8d31",
+    "scripts/finalize-p8-local-evidence.mjs": "cefe2dc3b6309627519e03e4611cd1def9a506e7735a25518a58faea0ab1ce11",
+    "scripts/p8-crash-process.mjs": "d0eba61e4c1ab90f567f6dea95965faf82dfd3dd79bce8a9e945e7635c2ce853",
+    "scripts/lib/p8-shared-core-qa.mjs": "b8ba0b7f56210ee8944a2f8f83e4552f239e0bf822dada3de3c7e9de2f4cdf5d",
+    "scripts/lib/bazi-r2-p7-terminal-harness.mjs": "f0fd589705d543076c8b071db8464648e915596171d399547bd72b8a82a7ea53",
+    "scripts/lib/persistent-private-reports-qa.mjs": "cc3dac1a6fcf85da4d4a4075fe79c4236977ce98ad007259ab208d114fda6790"
+  },
+  "reviewBrowser": {
+    "status": "PASS_LOCAL",
+    "desktop": {
+      "status": "PASS_LOCAL",
+      "results": [
+        {
+          "width": 1440,
+          "status": "PASS",
+          "imagesDecoded": true,
+          "navigationLinks": 11,
+          "customerPreview": {
+            "pages": 48,
+            "diagrams": 15
+          }
+        }
+      ],
+      "errors": [],
+      "blockedRequests": [],
+      "screenshotsCreated": 0,
+      "reason": "No new failure; representative final captures already retained",
+      "providerCalls": 0
+    },
+    "mobile": {
+      "status": "PASS_LOCAL",
+      "results": [
+        {
+          "width": 390,
+          "status": "PASS",
+          "imagesDecoded": true,
+          "navigationLinks": 11,
+          "customerPreview": {
+            "pages": 48,
+            "diagrams": 15
+          }
+        }
+      ],
+      "errors": [],
+      "blockedRequests": [],
+      "screenshotsCreated": 0,
+      "reason": "No new failure; representative final captures already retained",
+      "providerCalls": 0
+    },
+    "initialFailure": "content/production-closure/shared-paid-report-delivery/P8-REVIEW-BROWSER-INITIAL-FAILURE.json",
+    "failureCapture": "content/production-closure/shared-paid-report-delivery/P8-REVIEW-FAILURE.png",
+    "providerCalls": 0
+  },
+  "pdfVisualReview": {
+    "status": "REVIEWED_REPRESENTATIVE_PAGES",
+    "pages": [
+      1,
+      47
+    ],
+    "scope": "Two actual Poppler-rendered pages visually inspected; not whole-document Human ACCEPT",
+    "cover": "Customer name, date and time legible and separated; title and accepted art preserved",
+    "diagram": "Native subject nodes legible; no observed line overlap or clipping in representative page",
+    "humanAcceptance": "NOT_CREATED"
+  },
+  "staticGates": {
+    "syntax": "PASS",
+    "sharedSemanticLiterals": "PASS",
+    "old17Migrations": "UNCHANGED",
+    "migration18Checksum": "PASS",
+    "localMigrations": "APPLIED_TO_ISOLATED_QA_ONLY"
+  },
+  "localNamedChecksPassed": 55,
+  "readiness": "FOUR_RESPONSIBILITY_CLASSES_AND_BOUNDED_ESCALATION_TESTED",
+  "checkout": {
+    "eightApiNegatives": "PASS",
+    "stripeCalls": 0,
+    "ordersCreated": 0
+  },
+  "paymentJob": "ONE_PER_VERIFIED_PURCHASE_AND_DUPLICATE_TESTED",
+  "durableCrashMatrix": {
+    "checkpoints": 11,
+    "scope": "Shared core + durable QA adapter; not production BaZi crash matrix",
+    "unknownReservation": "NO_BLIND_RETRY"
+  },
+  "recovery": "BOUNDED_RECOVERY_AND_RESCUE_SYNTHETIC_PASS",
+  "watchdog": "ORPHAN_PAYMENT_AND_DUE_JOB_SYNTHETIC_PASS",
+  "incidents": "DEDUPLICATION_AND_REFUND_FAILURE_TESTED",
+  "refunds": "SYNTHETIC_IDEMPOTENCY_AND_UNKNOWN_RECONCILIATION_PASS; SIGNED_JOB_REFUND_GATE_OPEN",
+  "budget": "EXISTING_OWNER_3_PLUS_2; USD3.60_GENERATION_CEILING; USD4_TOTAL; FOUR_FOLLOWUPS_TESTED",
+  "bzr": {
+    "productionOwnersReused": true,
+    "status": "HAPPY_PATH_LOCAL_PASS_WITH_RECOVERY_GAPS",
+    "reportId": "1c17b4e78ea586a735cb371f294eae5ecff18a34e7be28ef51d95184c2315ddc",
+    "pages": 48,
+    "diagrams": 15,
+    "viewports": [
+      {
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "width": 1366,
+        "height": 768
+      }
+    ],
+    "print": "PASS",
+    "pdf": "PASS",
+    "immutableReopen": "PASS_LOCAL",
+    "processAPid": 32608,
+    "processBPid": 18220,
+    "zeroReopenCounters": {
+      "provider": 0,
+      "generation": 0,
+      "renderer": 0,
+      "compile": 0
+    },
+    "securityNegatives": [
+      {
+        "case": "A_HTML_OBJECT_MISSING",
+        "status": "PASS",
+        "code": "REPORT_UNAVAILABLE",
+        "httpStatus": 404
+      },
+      {
+        "case": "B_HTML_BYTES_CHANGED",
+        "status": "PASS",
+        "code": "REPORT_UNAVAILABLE",
+        "httpStatus": 404
+      },
+      {
+        "case": "D_WRONG_OWNER",
+        "status": "PASS",
+        "code": "REPORT_UNAVAILABLE",
+        "httpStatus": 404
+      },
+      {
+        "case": "C_MATERIAL_SEAL_CHANGED",
+        "status": "PASS",
+        "code": "REPORT_UNAVAILABLE",
+        "httpStatus": 404
+      },
+      {
+        "case": "E_PERSON_UNAVAILABLE",
+        "status": "PASS",
+        "code": "PERSON_NOT_FOUND",
+        "httpStatus": 404
+      },
+      {
+        "case": "F_ENTITLEMENT_UNAVAILABLE",
+        "status": "PASS",
+        "code": "REPORT_UNAVAILABLE",
+        "httpStatus": 404
+      }
+    ],
+    "referenceSubjectUsed": false
+  },
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "productionMigrations": 0,
+  "commit": false,
+  "push": false,
+  "deploy": false,
+  "p9Handoff": "NOT_CREATED_ACCEPTANCE_GAPS",
+  "firstRemainingBlocker": {
+    "id": "METHOD_OWNER_CRASH_RECONCILIATION",
+    "evidence": "content/production-closure/shared-paid-report-delivery/P8-BZR-RECOVERY-BOUNDARY.json",
+    "actual": "PROVIDER_RECONCILIATION_REQUIRED",
+    "required": "Reconcile demonstrably persisted method output and invocation-held lock without weakening exclusion or repeating a provider request."
+  },
+  "remainingGaps": [
+    {
+      "id": "METHOD_OWNER_CRASH_RECONCILIATION",
+      "evidence": "content/production-closure/shared-paid-report-delivery/P8-BZR-RECOVERY-BOUNDARY.json",
+      "actual": "PROVIDER_RECONCILIATION_REQUIRED",
+      "required": "Reconcile demonstrably persisted method output and invocation-held lock without weakening exclusion or repeating a provider request."
+    },
+    {
+      "id": "PRODUCTION_BOUNDARY_FENCING",
+      "required": "Prove method artifact/material writes cannot continue from an expired shared job worker while watchdog advances refund."
+    },
+    {
+      "id": "REFUND_SIGNED_WEBHOOK_RECONCILIATION",
+      "required": "Complete paid job reconciliation from existing signed Commerce refund events, including replay, pending and unknown outcomes."
+    },
+    {
+      "id": "DIVERSE_NATIVE_ADAPTER_MATRIX",
+      "required": "P8-specific useful-god known/unknown, timing contexts, relationship and hidden-stem fixture matrix. Single current-customer positive and shared QA mocks are not this proof."
+    },
+    {
+      "id": "CUSTOMER_ENTRY_BROWSER",
+      "required": "Actual account setup/checkout/status interaction and bilingual browser evidence. Account status source/API and server tests are present, end-to-end browser proof is pending."
+    }
+  ],
+  "screenshots": {
+    "count": 13,
+    "totalBytes": 11058015,
+    "rows": [
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p8/W0-P13-CURRENT.png",
+        "bytes": 824842,
+        "sha256": "18cfcba948cf86fe77672a885a1e3ffeb7e42a5266cadf6755437db21d49807d",
+        "reason": "Requested four-page background audit"
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p8/W0-P12-CURRENT.png",
+        "bytes": 734802,
+        "sha256": "5a381c22aba23fcf9401d7c72e87eb5ab466c99ee35a33e6ff42ea0078f98a26",
+        "reason": "Requested four-page background audit"
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p8/W0-P47-CURRENT.png",
+        "bytes": 717410,
+        "sha256": "c862083f035439533b54b2412cef461d5cb2d9407d535ed09b6dbd9b28f8db42",
+        "reason": "Requested four-page background audit"
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p8/W0-P45-CURRENT.png",
+        "bytes": 837488,
+        "sha256": "b897980ed0125c9e058d0fa741a9b206887a011339aa343347dfde35181c8eea",
+        "reason": "Requested four-page background audit"
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/P01-SCREEN.png",
+        "bytes": 1368497,
+        "sha256": "10e8af0f4fb6c3aabd8ec6b365cd4718e0df46384aa3c4610022b4ace380e303",
+        "reason": "Representative final customer page"
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/P13-SCREEN.png",
+        "bytes": 824842,
+        "sha256": "18cfcba948cf86fe77672a885a1e3ffeb7e42a5266cadf6755437db21d49807d",
+        "reason": "Representative final customer page"
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/P22-SCREEN.png",
+        "bytes": 731139,
+        "sha256": "7cc18f7ce4fc23d8290e707808e94ce4206d79e7f30b5fa3bc0e07f5683696d5",
+        "reason": "Representative final customer page"
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/P07-SCREEN.png",
+        "bytes": 637488,
+        "sha256": "4769fd0ce890d073b587b09ac5eb340bea646ebce7f30ffefcb099e6ad76bfd9",
+        "reason": "Representative final customer page"
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/P45-SCREEN.png",
+        "bytes": 837488,
+        "sha256": "b897980ed0125c9e058d0fa741a9b206887a011339aa343347dfde35181c8eea",
+        "reason": "Representative final customer page"
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/P48-SCREEN.png",
+        "bytes": 776198,
+        "sha256": "d0ee3ef422acfe63582d3884fa290719f79891ae240001161e6a82f46437dbd5",
+        "reason": "Representative final customer page"
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/PDF-COVER.png",
+        "bytes": 1798111,
+        "sha256": "fbeddb745ebdf7a0169bb2d115b53019e19c53a85cbb1584c6c40e60023b10d5",
+        "reason": "Representative final PDF visual review"
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/bzr-conformance/PDF-DIAGRAM-47.png",
+        "bytes": 916445,
+        "sha256": "3e9e5b7da85b82cd4ca6e030fae18646eee5efbdcfe81512618d09f607811d65",
+        "reason": "Representative final PDF visual review"
+      },
+      {
+        "path": "content/production-closure/shared-paid-report-delivery/P8-REVIEW-FAILURE.png",
+        "bytes": 53265,
+        "sha256": "7151c41e89573b96c217b15c35959ba2fbb60160fb2c600cef9a688de1feb026",
+        "reason": "Failed mobile review overflow; retained for audit"
+      }
+    ],
+    "policy": "Failure only + representative final; no screenshots deleted. Preserve by immutable run folder and hash; cleanup requires a separate itemized approval."
+  },
+  "commands": [
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/finalize-p8-local-evidence.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "P8_REVIEW_WIDTHS=390 node scripts/check-p8-review-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "P8_REVIEW_WIDTHS=1440 node scripts/check-p8-review-browser.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8-shared-core.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8-durable-matrix.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "P8_MODE=conformance node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8-bazi-adapter-conformance.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8-bazi-account-reopen.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8-bazi-recovery-boundary.mjs",
+      "exitCode": 0,
+      "scope": "Acceptance blocker explicitly observed; exit 0 does not close P8"
+    },
+    {
+      "command": "node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8-checkout-api-negatives.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "P8_TEST_FILTER=wrong-product|forged-payment|review-required|delivered-material|refund-response|customer-copy node --import ./scripts/lib/p6-node-json-compat.mjs scripts/check-p8-security-watchdog.mjs",
+      "exitCode": 0
+    }
+  ],
+  "initialFailures": [
+    {
+      "command": "finalize-p8-local-evidence",
+      "exitCode": 1,
+      "reason": "QA initially compared raw file SHA against sha256-sql-canonical-v1. Corrected to invoke the existing canonical migration checksum owner; no SQL or registered checksum changed."
+    },
+    {
+      "command": "check-p8-review-browser",
+      "exitCode": 1,
+      "reason": "Long audit identifiers overflowed the 390px review page. Review CSS now wraps long text; final mobile and desktop checks passed. Customer report CSS unchanged."
+    },
+    {
+      "command": "check-p8-shared-core",
+      "exitCode": 1,
+      "reason": "Expected SYSTEM label differed from governed PHIOS_SYSTEM; QA expectation reconciled"
+    },
+    {
+      "command": "check-p8-shared-core",
+      "exitCode": 1,
+      "reason": "Generating → delivery rescue transition missing; production policy fixed"
+    },
+    {
+      "command": "check-p8-security-watchdog",
+      "exitCode": 1,
+      "reason": "Wrong-product fixture violated FK before reaching refund guard; seeded a valid alternative product and reran only failed/unexecuted cases"
+    }
+  ],
+  "protectedP7": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/BAZI-R2-CURRENT-PRODUCTION-PUBLICATION-BASELINE-V3.json",
+    "sha256": "1358ed1f245ec97d185f3d17f1845c4abad0ec79ead2dc3ef20870bcf480726b"
+  },
+  "unrelatedOtherWindowChanges": "PRESERVED; excluded from P8 modification ownership; current git status retained separately"
+}

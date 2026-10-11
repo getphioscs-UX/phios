@@ -1,3 +1,4 @@
+import {p7r3jStorage} from './lib/persistent-private-reports-qa.mjs';
 import {customerSafeSyntheticBaziText,fixtureVisibleInternalTerms} from './lib/bazi-r2-customer-safe-synthetic-manuscript.mjs';
 import {startP7} from './lib/bazi-r2-p7-terminal-harness.mjs';
 
@@ -84,6 +85,7 @@ import {digest as outputDigest} from
 
 
 const terminal=process.env.P7R3_AUDIT_ONLY==='1'?{fail:async()=>{},close:async()=>{}}:await startP7();
+let persistentSql;
 try{
 ﻿/*
   BaZi R2 P7
@@ -106,7 +108,8 @@ try{
 /* DATABASE / COMMERCE                                */
 /* -------------------------------------------------- */
 
-const sql = new DatabaseSync(':memory:');
+const durable=process.env.P7R3J_MODE?p7r3jStorage({create:true}):null;
+const sql = new DatabaseSync(durable?.databasePath||':memory:');if(durable)persistentSql=sql;
 
 for (const migration of loadRuntimeMigrations(process.cwd()).migrations) {
   sql.exec(migration.sql);
@@ -114,7 +117,7 @@ for (const migration of loadRuntimeMigrations(process.cwd()).migrations) {
 
 const db = createSqliteD1Adapter(sql);
 
-const owner = process.env.P7R3H_MODE?'P7R3H-OWNER-A':process.env.P7R3G_MODE?'P7R3G-OWNER-A':process.env.P7R3F_MODE?'P7R3F-OWNER-A':'BAZI-R2-P7-OWNER-A';
+const owner = process.env.P7R3J_MODE?'P7R3J-OWNER-A':process.env.P7R3H_MODE?'P7R3H-OWNER-A':process.env.P7R3G_MODE?'P7R3G-OWNER-A':process.env.P7R3F_MODE?'P7R3F-OWNER-A':'BAZI-R2-P7-OWNER-A';
 const otherOwner = 'BAZI-R2-P7-OWNER-B';
 
 const productId = 'COM-REPORT-BAZI-FULL';
@@ -188,7 +191,7 @@ const env = {
     }
   }
 };
-
+if(durable){env.PRIVATE_REPORTS=durable.privateReports;Object.assign(env,durable.config);}
 
 /* -------------------------------------------------- */
 /* EXTERNAL NETWORK MUST NEVER BE USED                */
@@ -481,6 +484,7 @@ globalThis.fetch = async () => {
 const ownerContext = context();
 
 const auditUuid=crypto.randomUUID;
+if(process.env.P7R3J_MODE){let first=true;crypto.randomUUID=()=>first?(first=false,'73000000-0000-4000-8000-000000000010'):auditUuid.call(crypto);}
 if(process.env.P7R3H_MODE){let first=true;crypto.randomUUID=()=>first?(first=false,'73000000-0000-4000-8000-000000000008'):auditUuid.call(crypto);}
 if(process.env.P7R3G_MODE){let first=true;crypto.randomUUID=()=>first?(first=false,'73000000-0000-4000-8000-000000000007'):auditUuid.call(crypto);}
 if(process.env.P7R3F_MODE){let first=true;crypto.randomUUID=()=>first?(first=false,'73f00000-0000-4000-8000-000000000001'):auditUuid.call(crypto);}
@@ -494,7 +498,7 @@ const person = await saveCanonicalPerson(
     action: 'save',
     expectedVersion: 0,
 
-    name: process.env.P7R3H_MODE?'Lin Mei':'BaZi R2 P7 synthetic subject',
+    name: process.env.P7R3J_MODE?'Lin Mei':process.env.P7R3H_MODE?'Lin Mei':'BaZi R2 P7 synthetic subject',
 
     birth: {
       birthDate: '1991-08-17',
@@ -844,7 +848,7 @@ async function syntheticProducer(args) {
 
 
 const fixtureLeaks=sections.flatMap(s=>['zhHansManuscript','enManuscript'].flatMap(field=>fixtureVisibleInternalTerms(s[field])));assert.deepEqual(fixtureLeaks,[],'FIXTURE_VISIBLE_INTERNAL_LANGUAGE_BEFORE_RELEASE');
-if(process.env.P7R3H_MODE){const d='content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/p7r3h-continuation/';fs.mkdirSync(d,{recursive:true});fs.writeFileSync(d+'FIXTURE-HYGIENE-BEFORE-RELEASE.json',JSON.stringify({status:'PASS',fixtureVisibleInternalTerms:fixtureLeaks,owner,personId:person.personId,nativePackDigest:native.pack.digest,sections:sections.map(s=>({sectionId:s.sectionId,zh:s.zhHansManuscript,en:s.enManuscript,fixtureVisibleInternalTerms:[]}))},null,2)+'\n');}
+if(process.env.P7R3H_MODE||process.env.P7R3J_MODE){const d='content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/'+(process.env.P7R3J_MODE?'p7r3j-terminal-r1/':'p7r3h-continuation/');fs.mkdirSync(d,{recursive:true});fs.writeFileSync(d+'FIXTURE-HYGIENE-BEFORE-RELEASE.json',JSON.stringify({status:'PASS',fixtureVisibleInternalTerms:fixtureLeaks,owner,personId:person.personId,nativePackDigest:native.pack.digest,sections:sections.map(s=>({sectionId:s.sectionId,zh:s.zhHansManuscript,en:s.enManuscript,fixtureVisibleInternalTerms:[]}))},null,2)+'\n');}
 env.METHOD_REPORT_RENDERER=terminal.renderer;
 if(process.env.P7R3_TARGETED_ONLY==='1'){
  const publication=await compileBaziDeepPublication({snapshot:syntheticSnapshot,pack:native.pack,productionFrozen:true,presentationMode:'BILINGUAL'});
@@ -857,7 +861,10 @@ if(process.env.P7R3_TARGETED_ONLY==='1'){
  console.log('P7R1 targeted renderer HTTP',response.status,JSON.stringify(evidence.verification));
 }else{
 const release=await generateAndReleaseAccountBazi(ownerContext,{personId:person.personId,locale:'bilingual'},{produce:syntheticProducer});
+const firstReopenCounts={producerCalls,...terminal.counts()};
 const opened=await openAccountBaziMaterial(ownerContext,release.reportId);
+assert.deepEqual({producerCalls,...terminal.counts()},firstReopenCounts);
+if(durable){assert.equal(release.cacheHit,false);assert(opened.artifact);assert.equal(opened.row.owner_account_id,owner);assert.equal(opened.row.person_id,person.personId);assert.equal(opened.row.output_digest,await outputDigest(opened.html));const handoff={processAPid:process.pid,ownerId:owner,personId:person.personId,purchaseId:prepared.purchaseId,reportId:release.reportId,snapshotDigest:opened.row.snapshot_id,outputDigest:opened.row.output_digest,htmlSha256:await outputDigest(opened.html),databasePath:durable.databasePath,privateReportsRoot:durable.privateReportsRoot,firstReopen:'PASS',cacheHit:false};fs.writeFileSync('content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/P7R3J-HANDOFF.json',JSON.stringify(handoff,null,2));}
 await terminal.verify({opened,release,owner,person,prepared,native,snapshot:syntheticSnapshot,producerInvocations:()=>producerCalls,reopen:()=>openAccountBaziMaterial(ownerContext,release.reportId),externalCalls:()=>forbiddenExternalCalls});
 }
-}catch(error){await terminal.fail(error);throw error;}finally{await terminal.close();}
+}catch(error){await terminal.fail(error);throw error;}finally{await terminal.close();persistentSql?.close();}

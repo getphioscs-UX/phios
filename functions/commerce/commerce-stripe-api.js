@@ -1,3 +1,4 @@
+import {requirePaidReportCheckout} from '../report-delivery/paid-report-readiness.js';
 import {commerceEnvironment,commerceCheckoutAvailable,requireStripeCommerce} from './commerce-environment.js';
 import {isLanguageReport,commerceReportQuote,orderReportPresentation} from './report-presentation.js';
 import { normalizeVerifiedSymbolicAccountIdentity } from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
@@ -81,7 +82,7 @@ export async function commerceApi(context,action){
     if(!/^[A-Za-z0-9._:-]{16,120}$/.test(supplied)) throw Object.assign(new Error('Idempotency key required.'),{status:422,code:'idempotency_key_required'});
     // Context stores only an opaque existing report reference, never raw intake.
     const reference=body.context?.readingId;
-    if(body.context&&(Object.keys(body.context).some(k=>k!=='readingId')||typeof reference!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(reference))) throw Object.assign(new Error('Invalid report reference.'),{status:422,code:'checkout_context_invalid'});
+    if(body.context&&(Object.keys(body.context).some(k=>!['readingId','reportIntentId'].includes(k))||(reference!==undefined&&(typeof reference!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(reference)))||(body.context.reportIntentId!==undefined&&(typeof body.context.reportIntentId!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(body.context.reportIntentId))))) throw Object.assign(new Error('Invalid report reference.'),{status:422,code:'checkout_context_invalid'});
     const contextSnapshot=reference?{readingId:reference}:{};
     if(body.purchaseKind!==undefined){
       if(env.PHIOS_CONTINUITY_QUOTA_ENABLED!=='true'||commerceEnvironment(env)!=='QA')throw Object.assign(Error('CONTINUITY_REFILL_NOT_ACTIVATED'),{status:403});
@@ -94,6 +95,7 @@ export async function commerceApi(context,action){
     }else if(body.subscriptionId!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_KIND_REQUIRED'),{status:422});
     if(isLanguageReport(product))contextSnapshot.reportPresentation=commerceReportQuote(product,body,selected);
     else if(body.reportLanguageMode||body.reportLocale)throw Object.assign(new Error('Report language is not applicable.'),{status:422,code:'REPORT_PRESENTATION_NOT_APPLICABLE'});
+    if(env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(product)&&!product.productId.includes('BUNDLE')){const readiness=await requirePaidReportCheckout(context,{productId:product.productId,readinessId:body.context?.reportIntentId,presentation:contextSnapshot.reportPresentation});contextSnapshot.reportIntentId=readiness.readinessId;}
     const controlled=controlledPurchaseOffer(env,{ownerId:customerId,productId:product.productId,originalAmountMinor:contextSnapshot.reportPresentation?.amountMinor??product.amountMinor});
     if(controlled){
       if(product.billingType==='RECURRING'||!isLanguageReport(product))throw Object.assign(Error('Controlled report purchase only.'),{status:403,code:'controlled_product_denied'});

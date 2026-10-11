@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+const sha=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
+const digest='efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7';
+const remoteBytes=fs.readFileSync('.tmp/free-ask-manuscripts/BOOK-III-ACCEPTED-SOURCE.pdf');
+const desktopBytes=fs.readFileSync('C:/Users/Guest Account/Desktop/PHI-OS-Book-3-v1.pdf');
+assert.equal(sha(remoteBytes),digest);assert.equal(sha(desktopBytes),digest);
+const record={schemaVersion:'PHI-OS-MANUSCRIPT-SOURCE-VERSION-ACCEPTANCE-v1',bookCode:'BOOK-3',version:'owner-final-20261011-efbfdd21fa21',status:'HUMAN_ACCEPTED_SOURCE_IDENTITY',scope:'CURRENT_CHINESE_SOURCE_BINARY_ONLY',sourceSha256:digest,bucket:'phios-private-manuscripts',objectKey:'books/book-3/source/PHI-OS-Book-3-v1.pdf',byteSize:remoteBytes.length,desktopByteIdentityVerified:true,remoteByteIdentityVerified:true,verifiedAt:new Date().toISOString(),ownerStatement:'我确认并接受第三册当前标准私有 R2 对象、与 desktop 同名 PDF 一致的文件为当前最终中文原稿，完整 SHA256：efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7。本次接受仅确认原稿版本，不自动接受提取质量和答案。',historicalSha256:'75a6b798a09c3e50467d3bb09421b8d6593869f795af79e6a8ff851f41d32f4b',historicalAcceptancePath:'content/knowledge/manuscripts/review/kau-r6d-book3-readability-human-acceptance-v1.json',historicalCorpusPreserved:true,extractionAcceptance:false,retrievalAcceptance:false,answerAcceptance:false,fullPublicReadAuthorized:false};
+const path='content/knowledge/manuscripts/review/book-3-owner-final-20261011-efbfdd21fa21-source-acceptance.json';
+if(fs.existsSync(path)){const previous=JSON.parse(fs.readFileSync(path));assert.equal(previous.sourceSha256,digest);}else fs.writeFileSync(path,JSON.stringify(record,null,2)+'\n');
+const tablePath='tools/review/free-ask-manuscript-r1/SEVEN-BOOK-COVERAGE.json';
+const table=JSON.parse(fs.readFileSync(tablePath));const row=table.currentSevenBookTruth.rows.find(r=>r.bookCode==='BOOK-3');
+row.currentSourceVersion=record.version;row.currentSourceSha256=digest;row.currentSourceAcceptance=path;
+row.historicalLiveSource={sourceSha256:record.historicalSha256,version:'v1_REGISTERED',scope:'SIX_BOUNDED_RANGES_RETAINED_PENDING_CURRENT_SOURCE_COMPARISON'};
+row.next='Re-extract complete accepted current PDF; compare every existing live range, repair derivative boundaries and validate remaining chapters. Old PDF search is no longer a prerequisite.';
+fs.writeFileSync(tablePath,JSON.stringify(table,null,2)+'\n');
+console.log('Recorded current Book III source acceptance; original acceptance and corpus retained. No production admission change.');

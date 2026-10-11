@@ -1,3 +1,4 @@
+import {ensureVerifiedPaidReportJob} from '../report-delivery/paid-report-delivery-core.js';
 import {requireStripeCommerce,commerceEnvironment} from './commerce-environment.js';
 import {validateOrderReportPresentation} from './report-presentation.js';
 // Successor dispatch of the existing /api/stripe-webhook, not a second endpoint.
@@ -57,6 +58,7 @@ export async function processCommerceStripeEvent({env,event,fetcher,origin,clock
         else{
           // Membership access still requires invoice.paid plus current valid status.
           await fulfillCommerceOrder({env,order,session,clock});
+          if(env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&JSON.parse(order.context_json||'{}').reportIntentId)await ensureVerifiedPaidReportJob(env,order,{clock});
           if(product.fulfillmentType==='CONTINUITY_QUOTA_REFILL'){
             const target=JSON.parse(order.context_json).continuityRefill;
             await grantContinuityQuota(env,{ownerAccountId:order.customer_id,subscriptionId:target.subscriptionId,sourceId:'pur_'+order.checkout_attempt_id,kind:'REFILL',purchaseId:'pur_'+order.checkout_attempt_id,periodStart:target.periodStart,periodEnd:target.periodEnd},clock);

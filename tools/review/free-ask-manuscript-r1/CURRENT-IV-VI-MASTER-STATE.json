@@ -306,5 +306,145 @@
   },
   "overallSevenBookState": "PARTIAL_NOT_REPLACED_BY_FOUR_SCOPE_RELEASE",
   "productionMigrations": 0,
-  "payments": 0
+  "payments": 0,
+  "sevenBookContinuation": {
+    "at": "2026-10-11T10:16:42.052Z",
+    "head": "16db1180638a83c3c404a62bfda45c68c680c023",
+    "relevantRuntimeDependencyDigest": "a345110dbed7a02397c3f4ea7e0247c1b2e118187800f56a311ec122cc05992c",
+    "relevantInputs": [
+      {
+        "path": "functions/_lib/knowledge-access-api.js",
+        "sha256": "f32fd2233b8ebd0dc2a76f8f1d033c6ddea45ad6b77c1cc2840410cd435144a5"
+      },
+      {
+        "path": "functions/_lib/knowledge-answer-grounding.js",
+        "sha256": "1bd7566a79184c342e65619c7a3b9a1f6743161e2b5e4f2a796b680042593bc8"
+      },
+      {
+        "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
+        "sha256": "fdb726559de12695a2231675e9580db7a31bf8cd29c67f5842ec991346816e6c"
+      },
+      {
+        "path": "functions/knowledge-runtime/current-manuscript-server-metadata.js",
+        "sha256": "6ef8b0753264f50f5e75623bbac96fa765838f199efc69d9e2cab7f49b6aa474"
+      },
+      {
+        "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v5.json",
+        "sha256": "17c8f8984a5a63d201dda4244082e557a9aa936b4b0135229d7392ff4bf36f7e"
+      },
+      {
+        "path": "content/knowledge/source-access/registries/manuscript-text-scope-candidates-v3.json",
+        "sha256": "868f71165d5901e1c468c68eecf44fc482c1deb6fd27825824e215177043ca0d"
+      }
+    ],
+    "registry": "PHI-OS-MANUSCRIPT-KNOWLEDGE-SOURCE-REGISTRY-v5",
+    "LOCAL": "PARTIAL_SIX_BOOK_III_SCOPES_VERIFIED_BOOK_II_ANSWER_FAILURES",
+    "BUILD": "PASS_BUILD",
+    "DEPLOYMENT": "PASS_LIMITED_TEN_CHINESE_SCOPES",
+    "LIVE": "BOOK_III_14_OF_14_IV_VI_13_OF_13_ZERO_PROVIDER",
+    "providerCalls": 0,
+    "commit": false,
+    "push": false,
+    "migration": false,
+    "deployment": {
+      "id": "bce021a9-db0d-4c40-b1d3-28dc1223254d",
+      "url": "https://bce021a9.phios-github.pages.dev",
+      "stage": {
+        "name": "deploy",
+        "started_on": null,
+        "ended_on": "2026-10-11T10:04:10.31772Z",
+        "status": "success"
+      },
+      "scopeEnabled": "",
+      "QAFlags": {
+        "PHIOS_MANUSCRIPT_DERIVATIVE_QA": "",
+        "PHIOS_MANUSCRIPT_TEXT_SCOPE_QA": ""
+      }
+    },
+    "buildIdentity": {
+      "workerSha256": "c2b2029d47defd1cfd446ce0594e60efb396c5858538fc4b41cc32a3e8143a37",
+      "routesSha256": "d266398b90fe6d1ce4355a5a4c95cc30a41246d501c3fe0d97bd2854ea7f491e"
+    },
+    "relevantBuildInputDigest": "585b9fe7b329c81918e12eaac67dfabc302170d6dcb8d628dbe5083b1a0713a7"
+  },
+  "currentChapterWork": {
+    "at": "2026-10-11T10:33:40.549Z",
+    "unit": "COMPLETE_CHAPTER_COVERAGE_PER_BOOK",
+    "LOCAL": "PARTIAL",
+    "BUILD": "NOT_RUN_AFTER_RELEVANT_RUNTIME_CHANGE",
+    "DEPLOYMENT": "NO_NEW_DEPLOYMENT_THIS_BATCH_EXISTING_ACCEPTED_RELEASE_RETAINED",
+    "LIVE": "EXISTING_LIMITED_SCOPE_RECEIPTS_RETAINED_NEW_SOURCE_NOT_LIVE",
+    "relevantRuntimeDependencyDigest": "9481b19483d308d4911d28ae3564a82356694021dbafd700d329889d4480ecf4",
+    "dependencies": [
+      {
+        "path": "functions/_lib/knowledge-access-api.js",
+        "sha256": "490ef6fcf0ab48fe3a6af0fda4a353d7c66f6fe3e3dfc69831bb1d12334e80f3"
+      },
+      {
+        "path": "functions/_lib/knowledge-answer-grounding.js",
+        "sha256": "1bd7566a79184c342e65619c7a3b9a1f6743161e2b5e4f2a796b680042593bc8"
+      },
+      {
+        "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
+        "sha256": "fdb726559de12695a2231675e9580db7a31bf8cd29c67f5842ec991346816e6c"
+      },
+      {
+        "path": "functions/knowledge-runtime/current-manuscript-server-metadata.js",
+        "sha256": "6ef8b0753264f50f5e75623bbac96fa765838f199efc69d9e2cab7f49b6aa474"
+      }
+    ],
+    "currentChapterCoverage": "tools/review/free-ask-manuscript-r1/SEVEN-BOOK-CHAPTER-COVERAGE.json",
+    "bookI": {
+      "headingBoundaryReceipt": "tools/review/free-ask-manuscript-r1/BOOK-I-V3-HEADING-PROSE-BOUNDARY-QA.json",
+      "naturalAnswerFailures": "tools/review/free-ask-manuscript-r1/BOOK-I-V3-INITIAL-NATURAL-ANSWER-FAILURES.json",
+      "cutover": false
+    },
+    "bookIII": {
+      "sourceAcceptance": "content/knowledge/manuscripts/review/book-3-owner-final-20261011-efbfdd21fa21-source-acceptance.json",
+      "completeCorpusComparison": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-COMPLETE-CORPUS-COMPARISON.json",
+      "changedSpanVisualVerification": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-CHANGED-SPAN-VISUAL-VERIFICATION.json",
+      "chapters": 103,
+      "normalizedEquivalentChapters": 101,
+      "sixRangesTextEquivalent": 5,
+      "sixRangesRequiringDifferenceReview": 1,
+      "currentSourceCutover": false
+    },
+    "compactionEquivalence": "tools/review/free-ask-manuscript-r1/MANUSCRIPT-BUILD-COMPACTION-EQUIVALENCE.json",
+    "bookIIExistingReadabilityAuthority": "content/knowledge/review/ksar-r4-human-review-closure-v1.json",
+    "providerCalls": 0,
+    "providerCostUSD": 0,
+    "payments": 0,
+    "commit": false,
+    "push": false,
+    "migration": false
+  },
+  "currentChapterReconciliation": {
+    "at": "2026-10-11T11:08:57.306Z",
+    "sourceAcceptance": "content/knowledge/manuscripts/review/book-3-owner-final-20261011-efbfdd21fa21-source-acceptance.json",
+    "bookIII": {
+      "chapters": 103,
+      "records": 106,
+      "locationPass": 206,
+      "answerPresent": 206,
+      "cases": 206,
+      "semanticAcceptedChapters": 0,
+      "productionSourceCutover": false,
+      "firstFailureReceipt": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-FIRST-ROUTING-FAILURES.json",
+      "currentReceipt": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-WHOLE-CHAPTER-QA.json"
+    },
+    "bookII": {
+      "localIndependentReceipt": "tools/review/free-ask-manuscript-r1/BOOK-II-INDEPENDENT-ANSWERS.json",
+      "localIndependentPass": 4,
+      "liveState": "FAILED_CANDIDATE_ROLLED_BACK_RESOURCE_LIMIT_1102",
+      "performanceRepair": "LOCAL_VERIFIED_NOT_LIVE_VERIFIED"
+    },
+    "LOCAL": "PARTIAL",
+    "BUILD": "PASS_BUILD",
+    "buildReceipt": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-BUILD-RECEIPT.json",
+    "DEPLOYMENT": "STABLE_PREVIOUS_RELEASE_RESTORED",
+    "deploymentId": "bce021a9-db0d-4c40-b1d3-28dc1223254d",
+    "LIVE": "PREVIOUS_TEN_RANGES_ONLY_NEW_SOURCE_NOT_LIVE",
+    "providerCalls": 0,
+    "providerCostUSD": 0
+  }
 }

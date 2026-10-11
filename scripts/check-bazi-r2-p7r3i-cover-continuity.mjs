@@ -1,0 +1,38 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import {getDocument} from 'pdfjs-dist/legacy/build/pdf.mjs';
+import {PDFDocument} from 'pdf-lib';
+import {formatReportCoverFields} from '../functions/canonical-presentation-runtime/report-cover-overlay.js';
+import {fixtureVisibleInternalTerms} from './lib/bazi-r2-customer-safe-synthetic-manuscript.mjs';
+const base='content/production-closure/live-customer-commercial-convergence/bazi-r2-p7/',dir=base+'p7r3h-continuation/';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const pdfPath=dir+'BAZI-R2-P7-CUSTOMER.pdf',htmlPath=dir+'CUSTOMER-MATERIAL.html';
+const pdfBefore=sha(pdfPath),htmlBefore=sha(htmlPath),metadata=read(dir+'CUSTOMER-MATERIAL-METADATA.json'),publication=read(dir+'RENDERER-INPUT-PUBLICATION.json');
+const expected=formatReportCoverFields({methodId:'BZR',subject:publication.identity});
+const aliases=read('config/reports/bazi-deep-manuscript-r2/pdf-cjk-glyph-aliases.json').aliases;
+const normalize=t=>[...t].map(c=>aliases[c]||c).join('').normalize('NFKC').replace(/―/g,'—').replace(/\s/g,'');
+const task=getDocument({data:new Uint8Array(fs.readFileSync(pdfPath)),useSystemFonts:true}),doc=await task.promise,texts=[],items=[];
+for(let i=1;i<=doc.numPages;i++){const t=await(await doc.getPage(i)).getTextContent();texts.push(t.items.map(x=>x.str||'').join(''));if(i===1)items.push(...t.items.map((x,index)=>({index,text:x.str,transform:x.transform,x:x.transform?.[4],y:x.transform?.[5]})));}
+const html=fs.readFileSync(htmlPath,'utf8'),domValues={};
+for(const field of Object.keys(expected)){const match=html.match(new RegExp('data-cover-field="'+field+'"[^>]*>([^<]*)<'));assert(match,'COVER_DOM_FIELD_MISSING');domValues[field]=match[1];assert.equal(domValues[field],expected[field]);}
+const fields=Object.fromEntries(Object.entries(expected).map(([k,v])=>[k,{expected:v,normalized:normalize(v),present:normalize(texts[0]).includes(normalize(v)),contract:'AT_LEAST_ONCE'}]));
+const anchors=structuredClone(read(dir+'TEXT-CONTINUITY.json').sampledAnchors);
+for(const a of anchors)a.status=a.sectionId==='COVER_IDENTITY'?(Object.values(fields).every(f=>f.present)?'PASS':'FAIL'):(normalize(texts[a.pageNumber-1]).includes(normalize(a.text))?'PASS':'FAIL');
+const negativeCases=[];
+const check=(name,fn)=>{fn();negativeCases.push({name,status:'PASS'});};
+check('EXACT_TIME',()=>assert.equal(expected.birthTime,'09 : 20'));
+check('APPROXIMATE_MARKER_REQUIRED',()=>{const e=formatReportCoverFields({methodId:'BZR',subject:{...publication.identity,timeAccuracy:'APPROXIMATE'}});assert.equal(e.birthTime,'≈ 09 : 20');assert(!normalize('09 : 20').includes(normalize(e.birthTime)));});
+check('UNKNOWN_NO_FABRICATED_TIME',()=>{assert.equal(formatReportCoverFields({methodId:'BZR',subject:{...publication.identity,timeAccuracy:'UNKNOWN',birthTime:null}}).birthTime,'—');assert.throws(()=>formatReportCoverFields({methodId:'BZR',subject:{...publication.identity,timeAccuracy:'UNKNOWN'}}),/FABRICATED/);});
+for(const wrong of ['1991 / 17 / 08','17 / 08 / 1991','1991 / 08 / 18'])check('WRONG_DATE_'+wrong,()=>assert(!normalize(wrong).includes(normalize(expected.birthDate))));
+check('WRONG_NAME',()=>assert(!normalize('customer subject test person').includes(normalize(expected.name))));
+const dimensions=(await PDFDocument.load(fs.readFileSync(pdfPath))).getPages().map(p=>p.getSize());
+const hygiene=fixtureVisibleInternalTerms(texts.join(' '));
+await task.destroy();
+const productionChanged=Object.entries(read(base+'P7R3H-BEFORE.json').hashes).filter(([p,h])=>!fs.existsSync(p)||sha(p)!==h).map(([p])=>p);
+const pass=anchors.every(a=>a.status==='PASS')&&anchors.length===16&&hygiene.length===0&&doc.numPages===48&&dimensions.every(p=>Math.abs(p.width-595.28)<1&&Math.abs(p.height-841.89)<1)&&pdfBefore===sha(pdfPath)&&htmlBefore===sha(htmlPath);
+const receipt={status:pass?'PASS_CONTINUITY_BLOCKED_FINAL_REOPEN':'FAILED',rootCause:Object.values(fields).every(f=>f.present)?'PDF_EXTRACTION_ORDER_ONLY':'PDF_COVER_FIELD_MISSING',existingPdf:{path:pdfPath,sha256:pdfBefore,sha256After:sha(pdfPath),pageCount:doc.numPages,a4:dimensions.every(p=>Math.abs(p.width-595.28)<1&&Math.abs(p.height-841.89)<1)},coverExpected:expected,coverBrowserDOM:domValues,coverExtracted:{rawItems:items,normalizedValues:fields},oldAssertion:{model:'CONCATENATED_ORDER',result:'FAIL'},newAssertion:{model:'GOVERNED_FIELD_PRESENCE',...fields,result:Object.values(fields).every(f=>f.present)?'PASS':'FAIL'},bodyContinuity:{passed:anchors.filter(a=>a.sectionId!=='COVER_IDENTITY'&&a.status==='PASS').length,total:15,assertionUnchanged:true},overallContinuity:{passed:anchors.filter(a=>a.status==='PASS').length,total:16,anchors},languageHygiene:{status:hygiene.length?'FAIL':'PASS',terms:hygiene},negativeCases,finalImmutableReopen:{status:'BLOCKED_ORIGINAL_RUNTIME_STATE_NOT_PERSISTED',fileBytesUnchanged:htmlBefore===sha(htmlPath),reportId:metadata.reportId,owner:metadata.customerId,personId:metadata.personId,snapshotId:metadata.snapshotId,outputDigest:metadata.storedHtmlDigest,accountApiReopen:false,reason:'P7R3H DatabaseSync(:memory:) and PRIVATE_REPORTS Map ended with that process. No persisted D1 state, encrypted person key or complete artifact object was exported. A reconstructed store or file read would not prove original account reopen.'},productionFilesModified:[],protectedProductionSourceDrift:productionChanged,qaFilesModified:['scripts/check-bazi-r2-p7r3i-cover-continuity.mjs'],baselineV3:'NOT_CREATED',providerCalls:0,providerCostUSD:0,providerNetworkCalls:0,P7:'INCOMPLETE',remainingBlocker:pass?'FINAL_IMMUTABLE_REOPEN_ORIGINAL_STATE_UNAVAILABLE':'PDF_TEXT_CONTINUITY',execution:{command:'node scripts/check-bazi-r2-p7r3i-cover-continuity.mjs',fullMatrixRerun:false,pdfRegenerated:false,htmlRegenerated:false},stop:'NO_P8'};
+fs.writeFileSync(base+'P7R3I-COVER-PDF-TEXT-CONTINUITY.json',JSON.stringify(receipt,null,2)+'\n');
+console.log(JSON.stringify({status:receipt.status,continuity:receipt.overallContinuity.passed,total:16,hygiene:receipt.languageHygiene.status,productionChanged,remainingBlocker:receipt.remainingBlocker}));
+assert(pass,'CONTINUITY_FAILED');

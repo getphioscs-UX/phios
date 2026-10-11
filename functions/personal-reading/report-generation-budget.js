@@ -21,11 +21,11 @@ export function inspectReportBudget(ledger) {
  }
  return {spentUsd,reservedUsd,totalCommittedUsd:spentUsd+reservedUsd,generationUsd,followupUsd,unknownUsage:requests.some(r=>r.state==='UNKNOWN'),inFlight:requests.some(r=>r.state==='RESERVED'),followupsUsed:requests.filter(r=>r.phase==='FOLLOWUP'&&(r.state!=='RECORDED'||r.output!==undefined)).length};
 }
-export function reserveReportCall(ledger,{requestId,phase,projectedMaximumUsd,repairUnit=null}) {
+export function reserveReportCall(ledger,{requestId,phase,projectedMaximumUsd,repairUnit=null,jobId=null,methodCode=null,stage=null,attempt=null,unitScope=null}) {
  if(!['PRIMARY','REPAIR','FOLLOWUP'].includes(phase)||typeof requestId!=='string'||!requestId||!validAmount(projectedMaximumUsd))fail('REPORT_BUDGET_REQUEST_INVALID');
  if(ledger.requests?.[requestId]){
   const prior=ledger.requests[requestId];
-  if(prior.phase!==phase||prior.reservedUsd!==projectedMaximumUsd||prior.repairUnit!==repairUnit)fail('REPORT_BUDGET_REQUEST_CONFLICT');
+  if(prior.phase!==phase||prior.reservedUsd!==projectedMaximumUsd||prior.repairUnit!==repairUnit||jobId!==null&&prior.jobId!==jobId)fail('REPORT_BUDGET_REQUEST_CONFLICT');
   return {replay:true,request:prior};
  }
  const state=inspectReportBudget(ledger);
@@ -44,7 +44,7 @@ export function reserveReportCall(ledger,{requestId,phase,projectedMaximumUsd,re
   }
  }
  if(state.totalCommittedUsd+projectedMaximumUsd>ledger.hardCapUsd+1e-10)fail('REPORT_TOTAL_COST_CAP_EXCEEDED');
- const request={requestId,phase,repairUnit,reservedUsd:projectedMaximumUsd,state:'RESERVED'};ledger.requests[requestId]=request;return {replay:false,request};
+ const request={requestId,phase,repairUnit,reservedUsd:projectedMaximumUsd,state:'RESERVED',...(jobId?{jobId,methodCode,stage,attempt,unitScope}:{})};ledger.requests[requestId]=request;return {replay:false,request};
 }
 export function settleReportCall(ledger,requestId,actualUsd) {
  const request=ledger.requests?.[requestId];if(!request||request.state!=='RESERVED')fail('REPORT_CALL_RESERVATION_REQUIRED');

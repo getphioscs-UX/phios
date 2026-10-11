@@ -1,0 +1,2 @@
+import {sharedPaidReportCore} from '../report-delivery/paid-report-delivery-core.js';
+export async function onRequest(context){const headers={'Cache-Control':'private, no-store'};try{if(context.request.method!=='GET')return Response.json({ok:false},{status:405,headers});return Response.json({ok:true,report:await sharedPaidReportCore(context).status(new URL(context.request.url).searchParams.get('id'))},{headers});}catch(error){return Response.json({ok:false,message:'This report is not available in your account.'},{status:error.status||404,headers});}}

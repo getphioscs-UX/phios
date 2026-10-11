@@ -697,7 +697,14 @@
           "records": 275,
           "nativeMarkers": 274,
           "partition": "LOSSLESS_PARTITION_OF_CURRENT_EXTRACTED_TEXT_ONLY",
-          "evidence": "tools/review/free-ask-manuscript-r1/BOOK-I-V-LOCAL-CANDIDATE-MATERIALIZATION.json"
+          "evidence": "tools/review/free-ask-manuscript-r1/BOOK-I-V-LOCAL-CANDIDATE-MATERIALIZATION.json",
+          "currentStructureSuccessor": {
+            "evidence": "tools/review/free-ask-manuscript-r1/CURRENT-I-V-VII-STRUCTURE-REPAIR.json",
+            "candidatePath": ".tmp/knowledge-manuscripts/book-1-v3/positioned-candidate-r2/retrieval-corpus.json",
+            "headingChanges": 20,
+            "textChanged": 0,
+            "state": "STRUCTURE_REPAIRED_ANSWER_QA_NOT_RUN"
+          }
         },
         "runtime": {
           "registryVersion": "PHI-OS-MANUSCRIPT-KNOWLEDGE-SOURCE-REGISTRY-v4",
@@ -716,12 +723,19 @@
           "answerSemanticAcceptance": "NOT_PROVEN_BY_RETRIEVAL",
           "evidence": "tools/review/free-ask-manuscript-r1/SEVEN-CURRENT-BOOK-LIVE-INVENTORY.json"
         },
-        "next": "Validate positioned v3 extraction against accepted chapter inventory, then versioned current corpus; do not inherit v2 answers",
+        "next": "Complete r2 title/part classification and v3 prose answer validation, then controlled versioned source cutover; preserve public canonical reconciliation gate and historical v2.",
         "runtimeMismatch": "CURRENT_V3_NOT_WIRED_REGISTRY_STILL_HISTORICAL_V2",
         "localRetrieval": {
           "correct": 274,
           "total": 274,
           "meaning": "Chapter location only; not semantic answer acceptance; not deployed corpus"
+        },
+        "headingBoundaryRepair": {
+          "state": "LOCAL_SUCCESSOR_CANDIDATE_NOT_DEPLOYED",
+          "candidatePath": ".tmp/knowledge-manuscripts/book-1-v3/positioned-candidate-r2/retrieval-corpus.json",
+          "predecessorPath": ".tmp/knowledge-manuscripts/book-1-v3/positioned-candidate/retrieval-corpus.json",
+          "finding": "Same-font continuation merged following native markers and question prose into headings; stop at a new native marker or completed question.",
+          "productionReadsV3": false
         }
       },
       {
@@ -767,19 +781,25 @@
           "answerSemanticAcceptance": "NOT_PROVEN_BY_RETRIEVAL",
           "evidence": "tools/review/free-ask-manuscript-r1/SEVEN-CURRENT-BOOK-LIVE-INVENTORY.json"
         },
-        "next": "Reuse accepted reviewed corpus; verify book-specific answers and actual version",
+        "next": "Fix native accepted-source consumer and definition/mechanism organization; keep failed answers; validate fresh questions.",
         "localRetrieval": {
           "correct": 172,
           "total": 172,
           "actualExistingConsumer": true,
           "answerAcceptance": false,
           "evidence": "tools/review/free-ask-manuscript-r1/BOOK-II-CURRENT-LOCAL-RETRIEVAL.json"
+        },
+        "localAnswerEvidence": {
+          "receipt": "tools/review/free-ask-manuscript-r1/BOOK-II-CUSTOMER-ANSWERS.json",
+          "passed": 2,
+          "total": 5,
+          "state": "FAILED_ANSWER_FIT_NOT_RETRIEVAL"
         }
       },
       {
         "bookCode": "BOOK-3",
-        "currentSourceVersion": "v1 registered binary differs from desktop same-name",
-        "currentSourceSha256": "75a6b798a09c3e50467d3bb09421b8d6593869f795af79e6a8ff851f41d32f4b",
+        "currentSourceVersion": "owner-final-20261011-efbfdd21fa21",
+        "currentSourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
         "sourceEvidence": "content/knowledge/manuscripts/review/kau-r6d-book3-readability-human-acceptance-v1.json",
         "extraction": {
           "state": "PARTIAL_NOT_FULL_PDF_LOSSLESS",
@@ -823,29 +843,606 @@
           }
         },
         "runtime": {
-          "registryVersion": "PHI-OS-MANUSCRIPT-KNOWLEDGE-SOURCE-REGISTRY-v4",
+          "registryVersion": "PHI-OS-MANUSCRIPT-KNOWLEDGE-SOURCE-REGISTRY-v5",
           "sourceVersionConsumed": "v1_REGISTERED",
-          "admission": "ADMITTED_READABILITY_SOURCE_PENDING_REMOTE_OBJECT",
+          "admission": "SIX_OPENING_PROSE_SCOPES_ONLY",
           "objectKey": "books/book-3/materialized/v1/reviewed/retrieval-corpus.json"
         },
         "answerAcceptance": "WHOLE_CURRENT_MANUSCRIPT_ANSWER_VALIDATION_NOT_COMPLETE",
-        "productionAdmission": "ADMITTED_READABILITY_SOURCE_PENDING_REMOTE_OBJECT",
+        "productionAdmission": "PASS_SIX_BOUNDED_PROSE_SCOPES_NOT_WHOLE_BOOK",
         "live": {
-          "state": "unavailable",
-          "returnedVersions": [],
-          "errors": [
-            "MANUSCRIPT_RETRIEVAL_CORPUS_NOT_FOUND"
+          "state": "PASS_LIMITED_LIVE_RANGE",
+          "returnedVersions": [
+            "v1_REGISTERED"
           ],
-          "answerSemanticAcceptance": "NOT_PROVEN_BY_RETRIEVAL",
-          "evidence": "tools/review/free-ask-manuscript-r1/SEVEN-CURRENT-BOOK-LIVE-INVENTORY.json"
+          "evidence": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-LIVE-ANSWERS.json",
+          "passed": 14,
+          "total": 14
         },
-        "next": "Verify accepted reviewed private corpus exists and correct checksum, then book-specific answers",
+        "next": "Re-extract complete accepted current PDF; compare every existing live range, repair derivative boundaries and validate remaining chapters. Old PDF search is no longer a prerequisite.",
         "localRetrieval": {
           "correct": 103,
           "total": 103,
           "actualExistingConsumer": true,
           "answerAcceptance": false,
           "evidence": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-LOCAL-RETRIEVAL.json"
+        },
+        "localAnswerEvidence": {
+          "regression": "tools/review/free-ask-manuscript-r1/BOOK-III-CUSTOMER-ANSWERS.json",
+          "heldoutRegression": "tools/review/free-ask-manuscript-r1/BOOK-III-HELDOUT-ANSWERS.json",
+          "independentFresh": "tools/review/free-ask-manuscript-r1/BOOK-III-FRESH-ANSWERS.json",
+          "scope": "SIX_OPENING_PROSE_SCOPES_NOT_WHOLE_BOOK",
+          "firstFailuresPreserved": true
+        },
+        "openedProductionChapters": [
+          {
+            "sectionCode": "CM-B3V1-P8-S001",
+            "heading": "维持出现",
+            "startOffset": 0,
+            "endOffset": 900
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S008",
+            "heading": "残余负荷",
+            "startOffset": 0,
+            "endOffset": 1800
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S006",
+            "heading": "维持容量",
+            "startOffset": 0,
+            "endOffset": 1800
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S004",
+            "heading": "共享资源",
+            "startOffset": 0,
+            "endOffset": 1800
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S059",
+            "heading": "可持续连续",
+            "startOffset": 0,
+            "endOffset": 1800
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S015",
+            "heading": "运行饱和",
+            "startOffset": 0,
+            "endOffset": 1800
+          }
+        ],
+        "localCandidateChapters": [
+          {
+            "sectionCode": "CM-B3V1-P8-S001",
+            "heading": "维持出现",
+            "startOffset": 0,
+            "endOffset": 900
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S008",
+            "heading": "残余负荷",
+            "startOffset": 0,
+            "endOffset": 1800
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S006",
+            "heading": "维持容量",
+            "startOffset": 0,
+            "endOffset": 1800
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S004",
+            "heading": "共享资源",
+            "startOffset": 0,
+            "endOffset": 1800
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S059",
+            "heading": "可持续连续",
+            "startOffset": 0,
+            "endOffset": 1800
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S015",
+            "heading": "运行饱和",
+            "startOffset": 0,
+            "endOffset": 1800
+          }
+        ],
+        "unopenedReason": "Remaining chapters lack question-fit acceptance; suspect repeated extraction runs, figures and notes are not admitted by the six opening scopes.",
+        "unopenedChapters": [
+          {
+            "sectionCode": "CM-B3V1-P8-S002",
+            "heading": "载体漂移",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S003",
+            "heading": "载体失效架构",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S004",
+            "heading": "生命与共同载体失效",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S005",
+            "heading": "人工载体失效",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S007",
+            "heading": "维持边界",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S009",
+            "heading": "运行累积",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S010",
+            "heading": "运行持续",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S011",
+            "heading": "运行漂移",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S012",
+            "heading": "运行扭曲",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S013",
+            "heading": "慢性运行",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S014",
+            "heading": "运行碎裂",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S016",
+            "heading": "摩擦讯号",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S017",
+            "heading": "重复模式",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S018",
+            "heading": "慢性噪声",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S019",
+            "heading": "运行升级",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S020",
+            "heading": "阈值穿越",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S021",
+            "heading": "讯号失读",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S022",
+            "heading": "崩溃前窗口",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S023",
+            "heading": "接口占用",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S024",
+            "heading": "接口饱和",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S025",
+            "heading": "结构成本转移",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S026",
+            "heading": "责任负荷",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S027",
+            "heading": "载体限制",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S028",
+            "heading": "软性中断",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S029",
+            "heading": "慢性运行状态",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S030",
+            "heading": "接口架构",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S031",
+            "heading": "跨尺度成本转移",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S032",
+            "heading": "医疗运行边界",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S033",
+            "heading": "安全检测",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S034",
+            "heading": "恢复许可",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S035",
+            "heading": "恢复阻抗",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S036",
+            "heading": "恢复窗口",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S037",
+            "heading": "负荷释放",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S038",
+            "heading": "重新整合",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S039",
+            "heading": "重新进入运行",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S040",
+            "heading": "运行监测",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S041",
+            "heading": "恢复排程",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S042",
+            "heading": "恢复债务",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S043",
+            "heading": "结构修复",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S044",
+            "heading": "运行再平衡",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S045",
+            "heading": "运行重构",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S046",
+            "heading": "维护校准",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S047",
+            "heading": "适应性维护",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S048",
+            "heading": "维护学习",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S049",
+            "heading": "维护架构",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S050",
+            "heading": "神经恢复",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S051",
+            "heading": "内分泌恢复",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S052",
+            "heading": "免疫恢复",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S053",
+            "heading": "代谢恢复",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S054",
+            "heading": "心理恢复",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S055",
+            "heading": "关系恢复",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S056",
+            "heading": "组织恢复",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S057",
+            "heading": "人工智能辅助恢复",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S058",
+            "heading": "人工运行维护",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P8-S060",
+            "heading": "协调阈值",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S001",
+            "heading": "协调出现",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S002",
+            "heading": "协调压力",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S003",
+            "heading": "共同限制",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S005",
+            "heading": "共同目标",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S006",
+            "heading": "共同责任",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S007",
+            "heading": "协调为何被接受",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S008",
+            "heading": "协调如何持续存在",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S009",
+            "heading": "市场协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S010",
+            "heading": "计划协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S011",
+            "heading": "制度协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S012",
+            "heading": "文化协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S013",
+            "heading": "信仰协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S014",
+            "heading": "网络协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S015",
+            "heading": "混合协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S016",
+            "heading": "资源协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S017",
+            "heading": "信息协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S018",
+            "heading": "意义协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S019",
+            "heading": "注意协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S020",
+            "heading": "激励协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S021",
+            "heading": "权力协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S022",
+            "heading": "风险协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S023",
+            "heading": "复杂度协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S024",
+            "heading": "协调漂移",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S025",
+            "heading": "协调饱和",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S026",
+            "heading": "协调碎裂",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S027",
+            "heading": "协调合法性崩塌",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S028",
+            "heading": "协调被俘获",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S029",
+            "heading": "协调崩塌",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S030",
+            "heading": "算法协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S031",
+            "heading": "人工协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S032",
+            "heading": "人工智能辅助协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S033",
+            "heading": "人机协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S034",
+            "heading": "自主协调",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S035",
+            "heading": "没有人类还能协调吗",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S036",
+            "heading": "协调韧性",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S037",
+            "heading": "协调适应",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S038",
+            "heading": "协调学习",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S039",
+            "heading": "协调连续",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S040",
+            "heading": "共同维持",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S041",
+            "heading": "连续性形成",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S042",
+            "heading": "扩展准备",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          },
+          {
+            "sectionCode": "CM-B3V1-P9-S043",
+            "heading": "扩展阈值",
+            "reason": "QUESTION_FIT_AND_DEPENDENCY_ACCEPTANCE_PENDING"
+          }
+        ],
+        "currentSourceAcceptance": "content/knowledge/manuscripts/review/book-3-owner-final-20261011-efbfdd21fa21-source-acceptance.json",
+        "historicalLiveSource": {
+          "sourceSha256": "75a6b798a09c3e50467d3bb09421b8d6593869f795af79e6a8ff851f41d32f4b",
+          "version": "v1_REGISTERED",
+          "scope": "SIX_BOUNDED_RANGES_RETAINED_PENDING_CURRENT_SOURCE_COMPARISON"
         }
       },
       {
@@ -890,7 +1487,14 @@
           "records": 127,
           "nativeMarkers": 126,
           "partition": "LOSSLESS_PARTITION_OF_CURRENT_EXTRACTED_TEXT_ONLY",
-          "evidence": "tools/review/free-ask-manuscript-r1/BOOK-I-V-LOCAL-CANDIDATE-MATERIALIZATION.json"
+          "evidence": "tools/review/free-ask-manuscript-r1/BOOK-I-V-LOCAL-CANDIDATE-MATERIALIZATION.json",
+          "currentStructureSuccessor": {
+            "evidence": "tools/review/free-ask-manuscript-r1/CURRENT-I-V-VII-STRUCTURE-REPAIR.json",
+            "candidatePath": ".tmp/knowledge-manuscripts/book-5-v1/positioned-candidate-r2/retrieval-corpus.json",
+            "headingChanges": 73,
+            "textChanged": 0,
+            "state": "STRUCTURE_REPAIRED_ANSWER_QA_NOT_RUN"
+          }
         },
         "runtime": {
           "registryVersion": "PHI-OS-MANUSCRIPT-KNOWLEDGE-SOURCE-REGISTRY-v4",
@@ -956,7 +1560,14 @@
           "records": 102,
           "nativeMarkers": 101,
           "partition": "LOSSLESS_PARTITION_OF_CURRENT_EXTRACTED_TEXT_ONLY",
-          "evidence": "tools/review/free-ask-manuscript-r1/BOOK-I-V-LOCAL-CANDIDATE-MATERIALIZATION.json"
+          "evidence": "tools/review/free-ask-manuscript-r1/BOOK-I-V-LOCAL-CANDIDATE-MATERIALIZATION.json",
+          "currentStructureSuccessor": {
+            "evidence": "tools/review/free-ask-manuscript-r1/CURRENT-I-V-VII-STRUCTURE-REPAIR.json",
+            "candidatePath": ".tmp/knowledge-manuscripts/book-7-v2/positioned-candidate-r2/retrieval-corpus.json",
+            "headingChanges": 0,
+            "textChanged": 0,
+            "state": "STRUCTURE_REPAIRED_ANSWER_QA_NOT_RUN"
+          }
         },
         "runtime": {
           "registryVersion": "PHI-OS-MANUSCRIPT-KNOWLEDGE-SOURCE-REGISTRY-v4",
@@ -982,6 +1593,236 @@
       }
     ],
     "providerCalls": 0,
-    "EnglishBody": "OWNER_AUTHORED_SEPARATE_NOT_CHINESE_BLOCKER"
+    "EnglishBody": "OWNER_AUTHORED_SEPARATE_NOT_CHINESE_BLOCKER",
+    "currentContinuation": {
+      "at": "2026-10-11T10:16:42.052Z",
+      "head": "16db1180638a83c3c404a62bfda45c68c680c023",
+      "relevantRuntimeDependencyDigest": "a345110dbed7a02397c3f4ea7e0247c1b2e118187800f56a311ec122cc05992c",
+      "relevantInputs": [
+        {
+          "path": "functions/_lib/knowledge-access-api.js",
+          "sha256": "f32fd2233b8ebd0dc2a76f8f1d033c6ddea45ad6b77c1cc2840410cd435144a5"
+        },
+        {
+          "path": "functions/_lib/knowledge-answer-grounding.js",
+          "sha256": "1bd7566a79184c342e65619c7a3b9a1f6743161e2b5e4f2a796b680042593bc8"
+        },
+        {
+          "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
+          "sha256": "fdb726559de12695a2231675e9580db7a31bf8cd29c67f5842ec991346816e6c"
+        },
+        {
+          "path": "functions/knowledge-runtime/current-manuscript-server-metadata.js",
+          "sha256": "6ef8b0753264f50f5e75623bbac96fa765838f199efc69d9e2cab7f49b6aa474"
+        },
+        {
+          "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v5.json",
+          "sha256": "17c8f8984a5a63d201dda4244082e557a9aa936b4b0135229d7392ff4bf36f7e"
+        },
+        {
+          "path": "content/knowledge/source-access/registries/manuscript-text-scope-candidates-v3.json",
+          "sha256": "868f71165d5901e1c468c68eecf44fc482c1deb6fd27825824e215177043ca0d"
+        }
+      ],
+      "registry": "PHI-OS-MANUSCRIPT-KNOWLEDGE-SOURCE-REGISTRY-v5",
+      "LOCAL": "PARTIAL_SIX_BOOK_III_SCOPES_VERIFIED_BOOK_II_ANSWER_FAILURES",
+      "BUILD": "PASS_BUILD",
+      "DEPLOYMENT": "PASS_LIMITED_TEN_CHINESE_SCOPES",
+      "LIVE": "BOOK_III_14_OF_14_IV_VI_13_OF_13_ZERO_PROVIDER",
+      "providerCalls": 0,
+      "commit": false,
+      "push": false,
+      "migration": false,
+      "deployment": {
+        "id": "bce021a9-db0d-4c40-b1d3-28dc1223254d",
+        "url": "https://bce021a9.phios-github.pages.dev",
+        "stage": {
+          "name": "deploy",
+          "started_on": null,
+          "ended_on": "2026-10-11T10:04:10.31772Z",
+          "status": "success"
+        },
+        "scopeEnabled": "",
+        "QAFlags": {
+          "PHIOS_MANUSCRIPT_DERIVATIVE_QA": "",
+          "PHIOS_MANUSCRIPT_TEXT_SCOPE_QA": ""
+        }
+      },
+      "buildIdentity": {
+        "workerSha256": "c2b2029d47defd1cfd446ce0594e60efb396c5858538fc4b41cc32a3e8143a37",
+        "routesSha256": "d266398b90fe6d1ce4355a5a4c95cc30a41246d501c3fe0d97bd2854ea7f491e"
+      },
+      "relevantBuildInputDigest": "585b9fe7b329c81918e12eaac67dfabc302170d6dcb8d628dbe5083b1a0713a7"
+    },
+    "chapterCoverage": {
+      "path": "tools/review/free-ask-manuscript-r1/SEVEN-BOOK-CHAPTER-COVERAGE.json",
+      "at": "2026-10-11T11:07:07.971Z",
+      "books": [
+        {
+          "bookCode": "BOOK-1",
+          "currentSourceVersion": "v3",
+          "sourceSha256": "813481693e25bad9f35d6e13795eb51d0c35d80d9cbc62fe53a04d3cb622492e",
+          "corpusPath": ".tmp/knowledge-manuscripts/book-1-v3/positioned-candidate-r2/retrieval-corpus.json",
+          "corpusBytesSha256": "275c3cc8a31646b816c7dad746d59ea7fea201ea4e54f7d620af2f1f8f0f960a",
+          "records": 275,
+          "chapterRecords": 271,
+          "partialLiveChapterRecords": 0,
+          "historicalLiveChapterRecords": 0,
+          "wholeChapterAnswerVerified": 0
+        },
+        {
+          "bookCode": "BOOK-2",
+          "currentSourceVersion": "v1 registered historical binary differs from desktop same-name",
+          "sourceSha256": "1ae413dbfddae604f65af3e9b16a28a923899e3ebe8f419d9b7f3ff10bfa41fe",
+          "corpusPath": "functions/_source-material/books/book-2-registered-reviewed-corpus.json",
+          "corpusBytesSha256": "cb843896992792db44e98795ed8a4fa8edbb057f59148d4d20f42321557cc3ef",
+          "records": 173,
+          "chapterRecords": 172,
+          "partialLiveChapterRecords": 0,
+          "historicalLiveChapterRecords": 0,
+          "wholeChapterAnswerVerified": 0
+        },
+        {
+          "bookCode": "BOOK-3",
+          "currentSourceVersion": "owner-final-20261011-efbfdd21fa21",
+          "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+          "corpusPath": ".tmp/knowledge-manuscripts/book-3-owner-final-20261011-efbfdd21fa21/positioned-candidate/retrieval-corpus.json",
+          "corpusBytesSha256": "8595492ad210ea3cd1191bf4dd4c57ac3e24e6e53446916a56a2b439e1d45c36",
+          "records": 106,
+          "chapterRecords": 103,
+          "partialLiveChapterRecords": 0,
+          "historicalLiveChapterRecords": 6,
+          "wholeChapterAnswerVerified": 0
+        },
+        {
+          "bookCode": "BOOK-4",
+          "currentSourceVersion": "owner-final-20261011-ab265b9004da",
+          "sourceSha256": "ab265b9004dafd286b8b58f536f81e6c30bf3deec27f6431b8224d5c1816e07c",
+          "corpusPath": ".tmp/free-ask-manuscripts/book-4/owner-final-20261011-ab265b9004da/retrieval-corpus.json",
+          "corpusBytesSha256": "5e7d8d87dd54dc9c9f90df42a5b498f0971c5f996415c5dfaa7fb83067d1c3e5",
+          "records": 126,
+          "chapterRecords": 125,
+          "partialLiveChapterRecords": 2,
+          "historicalLiveChapterRecords": 0,
+          "wholeChapterAnswerVerified": 0
+        },
+        {
+          "bookCode": "BOOK-5",
+          "currentSourceVersion": "v1 desktop/source PDF digest matched",
+          "sourceSha256": "011996e36225e6ec1d7bba8b368d3b5d2c3b8c1567dab7ea5cd6f51f1ac069be",
+          "corpusPath": ".tmp/knowledge-manuscripts/book-5-v1/positioned-candidate-r2/retrieval-corpus.json",
+          "corpusBytesSha256": "a1039a5c1e6395deb37301a7dd489da7ff924206845dab361dc9111248abbdca",
+          "records": 127,
+          "chapterRecords": 126,
+          "partialLiveChapterRecords": 0,
+          "historicalLiveChapterRecords": 0,
+          "wholeChapterAnswerVerified": 0
+        },
+        {
+          "bookCode": "BOOK-6",
+          "currentSourceVersion": "owner-final-20261011-15d80720d10c",
+          "sourceSha256": "15d80720d10c8a16115b06237043da5acc381f87f632175f40da99db9745c68a",
+          "corpusPath": ".tmp/free-ask-manuscripts/book-6/owner-final-20261011-15d80720d10c/retrieval-corpus.json",
+          "corpusBytesSha256": "1a93b34e928e7d2586116bd682085f67553ae36b5f490281fd53cf2fe563ccb3",
+          "records": 87,
+          "chapterRecords": 85,
+          "partialLiveChapterRecords": 2,
+          "historicalLiveChapterRecords": 0,
+          "wholeChapterAnswerVerified": 0
+        },
+        {
+          "bookCode": "BOOK-7",
+          "currentSourceVersion": "v2 accepted current source",
+          "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+          "corpusPath": ".tmp/knowledge-manuscripts/book-7-v2/positioned-candidate-r2/retrieval-corpus.json",
+          "corpusBytesSha256": "3392bd9696be30056c114ca74bd2926dea8fedfd032737c721ae7e0b3dbb1f9f",
+          "records": 102,
+          "chapterRecords": 100,
+          "partialLiveChapterRecords": 0,
+          "historicalLiveChapterRecords": 0,
+          "wholeChapterAnswerVerified": 0
+        }
+      ]
+    }
+  },
+  "currentChapterWork": {
+    "at": "2026-10-11T10:33:40.549Z",
+    "unit": "COMPLETE_CHAPTER_COVERAGE_PER_BOOK",
+    "LOCAL": "PARTIAL",
+    "BUILD": "NOT_RUN_AFTER_RELEVANT_RUNTIME_CHANGE",
+    "DEPLOYMENT": "NO_NEW_DEPLOYMENT_THIS_BATCH_EXISTING_ACCEPTED_RELEASE_RETAINED",
+    "LIVE": "EXISTING_LIMITED_SCOPE_RECEIPTS_RETAINED_NEW_SOURCE_NOT_LIVE",
+    "relevantRuntimeDependencyDigest": "9481b19483d308d4911d28ae3564a82356694021dbafd700d329889d4480ecf4",
+    "dependencies": [
+      {
+        "path": "functions/_lib/knowledge-access-api.js",
+        "sha256": "490ef6fcf0ab48fe3a6af0fda4a353d7c66f6fe3e3dfc69831bb1d12334e80f3"
+      },
+      {
+        "path": "functions/_lib/knowledge-answer-grounding.js",
+        "sha256": "1bd7566a79184c342e65619c7a3b9a1f6743161e2b5e4f2a796b680042593bc8"
+      },
+      {
+        "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
+        "sha256": "fdb726559de12695a2231675e9580db7a31bf8cd29c67f5842ec991346816e6c"
+      },
+      {
+        "path": "functions/knowledge-runtime/current-manuscript-server-metadata.js",
+        "sha256": "6ef8b0753264f50f5e75623bbac96fa765838f199efc69d9e2cab7f49b6aa474"
+      }
+    ],
+    "currentChapterCoverage": "tools/review/free-ask-manuscript-r1/SEVEN-BOOK-CHAPTER-COVERAGE.json",
+    "bookI": {
+      "headingBoundaryReceipt": "tools/review/free-ask-manuscript-r1/BOOK-I-V3-HEADING-PROSE-BOUNDARY-QA.json",
+      "naturalAnswerFailures": "tools/review/free-ask-manuscript-r1/BOOK-I-V3-INITIAL-NATURAL-ANSWER-FAILURES.json",
+      "cutover": false
+    },
+    "bookIII": {
+      "sourceAcceptance": "content/knowledge/manuscripts/review/book-3-owner-final-20261011-efbfdd21fa21-source-acceptance.json",
+      "completeCorpusComparison": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-COMPLETE-CORPUS-COMPARISON.json",
+      "changedSpanVisualVerification": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-CHANGED-SPAN-VISUAL-VERIFICATION.json",
+      "chapters": 103,
+      "normalizedEquivalentChapters": 101,
+      "sixRangesTextEquivalent": 5,
+      "sixRangesRequiringDifferenceReview": 1,
+      "currentSourceCutover": false
+    },
+    "compactionEquivalence": "tools/review/free-ask-manuscript-r1/MANUSCRIPT-BUILD-COMPACTION-EQUIVALENCE.json",
+    "bookIIExistingReadabilityAuthority": "content/knowledge/review/ksar-r4-human-review-closure-v1.json",
+    "providerCalls": 0,
+    "providerCostUSD": 0,
+    "payments": 0,
+    "commit": false,
+    "push": false,
+    "migration": false
+  },
+  "currentChapterReconciliation": {
+    "at": "2026-10-11T11:08:57.306Z",
+    "sourceAcceptance": "content/knowledge/manuscripts/review/book-3-owner-final-20261011-efbfdd21fa21-source-acceptance.json",
+    "bookIII": {
+      "chapters": 103,
+      "records": 106,
+      "locationPass": 206,
+      "answerPresent": 206,
+      "cases": 206,
+      "semanticAcceptedChapters": 0,
+      "productionSourceCutover": false,
+      "firstFailureReceipt": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-FIRST-ROUTING-FAILURES.json",
+      "currentReceipt": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-WHOLE-CHAPTER-QA.json"
+    },
+    "bookII": {
+      "localIndependentReceipt": "tools/review/free-ask-manuscript-r1/BOOK-II-INDEPENDENT-ANSWERS.json",
+      "localIndependentPass": 4,
+      "liveState": "FAILED_CANDIDATE_ROLLED_BACK_RESOURCE_LIMIT_1102",
+      "performanceRepair": "LOCAL_VERIFIED_NOT_LIVE_VERIFIED"
+    },
+    "LOCAL": "PARTIAL",
+    "BUILD": "PASS_BUILD",
+    "buildReceipt": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-BUILD-RECEIPT.json",
+    "DEPLOYMENT": "STABLE_PREVIOUS_RELEASE_RESTORED",
+    "deploymentId": "bce021a9-db0d-4c40-b1d3-28dc1223254d",
+    "LIVE": "PREVIOUS_TEN_RANGES_ONLY_NEW_SOURCE_NOT_LIVE",
+    "providerCalls": 0,
+    "providerCostUSD": 0
   }
 }

@@ -238,8 +238,8 @@ export async function retrieveKapKnowledge({ request, env = {}, normalized, opti
   const baseUrl = request?.url || 'https://kap.local/';
   const url = new URL('/api/knowledge-access', baseUrl);
   url.search = new URLSearchParams(retrievalRequest.params).toString();
-  if (/^BOOK-[1-7]$/.test(options.selectedBook || '') && (options.source === 'manuscript' || ['BOOK-4','BOOK-6'].includes(options.selectedBook))) url.searchParams.set('bookCode', options.selectedBook);
-  if ((env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' || env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true') && ['BOOK-4','BOOK-6'].includes(options.selectedBook) && !options.selectedArticle) url.searchParams.set('source','manuscript');
+  if (/^BOOK-[1-7]$/.test(options.selectedBook || '')) url.searchParams.set('bookCode', options.selectedBook);
+  if (['BOOK-1','BOOK-2','BOOK-3','BOOK-4','BOOK-6'].includes(options.selectedBook) && !options.selectedArticle) url.searchParams.set('source','manuscript');
   const response = await handleKnowledgeAccessRequest(new Request(url, { method: 'GET' }), env, {retrievalScope:options.retrievalScope});
   const payload = await response.json();
   if(options.selectedArticle){

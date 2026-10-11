@@ -15,6 +15,13 @@ const HEALTH_K1_SIGNAL = /(rash|redness|itch|itching|hives|swelling|blister|ecze
 export function classifyAsk2Consumption({ question, body = {}, env = {} } = {}) {
   const q = String(question || '').trim();
   const safetyFirst=routeHealthSafety({question:q});
+  const explicitRuntime=Boolean(body?.taxonomyHint||Object.keys(body?.runtimeInputs||{}).length||Object.keys(body?.runtimeResults||{}).length||body?.currentContextSnapshot);
+  const bookKnowledge = body.contextualAsk === true && /^BOOK-[1-7]$/.test(body.entryContext?.bookCode || '');
+  const clinicalRequest = HEALTH_K1_SIGNAL.test(q) || /推荐.*(?:药|治疗)|(?:怎样|如何|怎么|how to).*(?:治疗|诊断|用药|treat|diagnos)|prescription|dosage/i.test(q) || /(?:我|我的|我们|my|i\s).*(?:症状|疾病|诊断|治疗|用药|药物|疲劳|疼痛|symptom|disease|diagnos|treatment|medication|pain|fatigue)/i.test(q);
+  const personalActionRequest = /(?:我|我的|我们).*(?:应该|怎么办|调整|选择|决定)|(?:what should i|how should i|my (?:relationship|partner|work|career|cash flow|decision))/i.test(q);
+  if (bookKnowledge && !explicitRuntime && !clinicalRequest && !personalActionRequest && !['EMERGENCY','URGENT_EVALUATION'].includes(safetyFirst.careState)) {
+    return Object.freeze({mode:'CKA',reasonCode:'EXPLICIT_BOOK_KNOWLEDGE_SCOPE'});
+  }
   let health = ['EMERGENCY','URGENT_EVALUATION'].includes(safetyFirst.careState) ? {route:'HRX_SAFETY_FIRST',healthIntent:true,safety:safetyFirst} : STRONG_FINANCIAL_SIGNAL.test(q) ? { route: 'CKA_STANDARD', healthIntent: false } : planAskHealthBridge({ question: q }, env);
   if (!health.healthIntent && HEALTH_K1_SIGNAL.test(q)) {
     const safety = routeHealthSafety({ question: q });
@@ -29,7 +36,6 @@ export function classifyAsk2Consumption({ question, body = {}, env = {} } = {}) 
     };
   }
   if (health.healthIntent) return Object.freeze({ mode: 'HEALTH', reasonCode:'HEALTH_SAFETY_PRECEDENCE',health });
-  const explicitRuntime=Boolean(body?.taxonomyHint||Object.keys(body?.runtimeInputs||{}).length||Object.keys(body?.runtimeResults||{}).length||body?.currentContextSnapshot);
   const atlasType=String(body?.entryContext?.retrievalScope?.scopeType||'').toUpperCase();
   const atlasBook=String(body?.entryContext?.bookCode||body?.entryContext?.retrievalScope?.bookCode||'').toUpperCase();
   const atlasScope=['CIVILIZATION_ATLAS','CIVILIZATION_RECONFIGURATION_ATLAS'].includes(atlasType)||['BOOK-5','BOOK-6'].includes(atlasBook);

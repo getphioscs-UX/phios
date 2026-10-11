@@ -1,0 +1,25 @@
+{"component":"commerce","event":"CHECKOUT_CREATED","order_id":"ord_375418c185bb44a0b25f37c2e594befa","checkout_session_id":"cs_test_bazir2p7","product_id":"COM-REPORT-BAZI-FULL","amount_minor":6900,"currency":"MYR"}
+{"component":"commerce","event":"STRIPE_EVENT_RECEIVED","stripe_event_id":"evt_bazir2p71"}
+{"component":"commerce","event":"STRIPE_EVENT_RECEIVED","stripe_event_id":"evt_bazir2p72"}
+{"component":"commerce","event":"ENTITLEMENT_GRANTED","order_id":"ord_375418c185bb44a0b25f37c2e594befa","product_id":"COM-REPORT-BAZI-FULL"}
+{"component":"commerce","event":"PAYMENT_CONFIRMED","order_id":"ord_375418c185bb44a0b25f37c2e594befa","stripe_event_id":"evt_bazir2p72","product_id":"COM-REPORT-BAZI-FULL"}
+{"category":"CUSTOMER_HTML_INTEGRITY","error":"ENOENT: no such file or directory, open 'C:\\phios\\tmp\\bazi-r2-p7r3j\\private-reports\\637573746f6d65722d6172746966616374732f333534356363646435633330626466396637343166633234666565636135616138653336646330316130616464623039643731636263343766646639646663352f396266306535323065646264616637636637393464643439613438343832343339343431636136356538613535346630326130343864386366613334656164332e6a736f6e.object'"}
+node:fs:561
+  return binding.open(
+                 ^
+
+Error: ENOENT: no such file or directory, open 'C:\phios\tmp\bazi-r2-p7r3j\private-reports\637573746f6d65722d6172746966616374732f333534356363646435633330626466396637343166633234666565636135616138653336646330316130616464623039643731636263343766646639646663352f396266306535323065646264616637636637393464643439613438343832343339343431636136356538613535346630326130343864386366613334656164332e6a736f6e.object'
+    at Object.openSync (node:fs:561:18)
+    at Object.writeFileSync (node:fs:2436:35)
+    at Object.put (file:///C:/phios/scripts/lib/persistent-private-reports-qa.mjs:9:413)
+    at persistCustomerArtifactInHeldStore (file:///C:/phios/functions/report-delivery/customer-artifact-store.js:8:28)
+    at async file:///C:/phios/functions/account/bazi-account-delivery.js:66:21
+    at async Object.withLock (file:///C:/phios/functions/personal-reading/report-generation-store.js:26:15)
+    at async file:///C:/phios/scripts/check-bazi-r2-p7-terminal-publication.mjs:863:15 {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\phios\\tmp\\bazi-r2-p7r3j\\private-reports\\637573746f6d65722d6172746966616374732f333534356363646435633330626466396637343166633234666565636135616138653336646330316130616464623039643731636263343766646639646663352f396266306535323065646264616637636637393464643439613438343832343339343431636136356538613535346630326130343864386366613334656164332e6a736f6e.object'
+}
+
+Node.js v24.18.0

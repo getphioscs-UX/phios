@@ -281,7 +281,8 @@ assert.deepEqual(migrations.migrations.slice(13).map(item => [item.version,item.
  [14,'db/migrations/0014_report_followup_history.sql'],
  [15,'db/migrations/0015_product_cost_envelopes.sql'],
  [16,'db/migrations/0016_commerce_environment_bindings.sql'],
- [17,'db/migrations/0017_report_generation_state.sql']
+ [17,'db/migrations/0017_report_generation_state.sql'],
+ [18,'db/migrations/0018_shared_paid_report_delivery.sql']
 ]);
 assert.ok(migrations.migrations.every(item=>item.immutable===true));
 const {hydrateRuntimeMigrations}=await import('./runtime-migration-loader.mjs');

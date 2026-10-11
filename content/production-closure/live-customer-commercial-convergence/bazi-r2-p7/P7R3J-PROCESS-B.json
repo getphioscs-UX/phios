@@ -1,0 +1,98 @@
+{
+  "freshRuntime": true,
+  "processBPid": 44504,
+  "processAPid": 45720,
+  "instrumentedBoundaries": [
+    {
+      "name": "generateAndReleaseAccountBazi",
+      "boundary": "generationCalls",
+      "url": "file:///C:/phios/functions/account/bazi-account-delivery.js"
+    },
+    {
+      "name": "generatePaidBaziManuscript",
+      "boundary": "generationCalls",
+      "url": "file:///C:/phios/functions/personal-reading/deep-manuscript/bazi-paid-generation.js"
+    },
+    {
+      "name": "invokeBaziDeepManuscript",
+      "boundary": "providerCalls",
+      "url": "file:///C:/phios/functions/personal-reading/deep-manuscript/bazi-deep-manuscript-provider.js"
+    },
+    {
+      "name": "compileBaziDeepPublication",
+      "boundary": "publicationCompileCalls",
+      "url": "file:///C:/phios/functions/personal-reading/deep-manuscript/bazi-deep-manuscript-publication.js"
+    }
+  ],
+  "directFileReadUsedForPassAssertion": false,
+  "accountReopen": {
+    "status": "PASS",
+    "reportId": "669c6ce8345378c02d396523363c28d86f7130ae9f75fdf6d0ba36bd53d3748c",
+    "owner": "P7R3J-OWNER-A",
+    "personId": "73000000-0000-4000-8000-000000000010",
+    "snapshotDigest": "1455612eb709b35823373393755d7f4964cc811d5f8ffc5370dba2a7551f0af1",
+    "outputDigest": "dc220fa185ec6f8a7b760af3018f6494e2f51b8efd24c3e331a385c54fee809b",
+    "htmlSha256": "dc220fa185ec6f8a7b760af3018f6494e2f51b8efd24c3e331a385c54fee809b",
+    "artifactDigest": "0e52a0a930e8325eb6c90b8b0c60f2435a6db39e757b90967bb385d0f8a6eae9",
+    "personDecryption": "PASS_THROUGH_PRODUCTION_API",
+    "entitlement": "PASS_THROUGH_PRODUCTION_API",
+    "materialSeal": "PASS_THROUGH_PRODUCTION_API"
+  },
+  "listResult": {
+    "status": "PASS",
+    "rows": [
+      {
+        "reportId": "669c6ce8345378c02d396523363c28d86f7130ae9f75fdf6d0ba36bd53d3748c",
+        "method": "BZR",
+        "locale": "bilingual",
+        "releasedAt": "2026-10-11T09:29:07.932Z",
+        "version": 1,
+        "status": "RELEASED"
+      }
+    ]
+  },
+  "positiveStoreUnchangedAfterNegatives": true,
+  "status": "PASS_LOCAL",
+  "tamperNegatives": [
+    {
+      "case": "A_HTML_OBJECT_MISSING",
+      "status": "PASS",
+      "code": "REPORT_UNAVAILABLE",
+      "httpStatus": 404
+    },
+    {
+      "case": "B_HTML_BYTES_CHANGED",
+      "status": "PASS",
+      "code": "REPORT_UNAVAILABLE",
+      "httpStatus": 404
+    },
+    {
+      "case": "D_WRONG_OWNER",
+      "status": "PASS",
+      "code": "REPORT_UNAVAILABLE",
+      "httpStatus": 404
+    },
+    {
+      "case": "C_MATERIAL_SEAL_CHANGED",
+      "status": "PASS",
+      "code": "REPORT_UNAVAILABLE",
+      "httpStatus": 404
+    },
+    {
+      "case": "E_PERSON_UNAVAILABLE",
+      "status": "PASS",
+      "code": "PERSON_NOT_FOUND",
+      "httpStatus": 404
+    },
+    {
+      "case": "F_ENTITLEMENT_UNAVAILABLE",
+      "status": "PASS",
+      "code": "REPORT_UNAVAILABLE",
+      "httpStatus": 404
+    }
+  ],
+  "providerCalls": 0,
+  "generationCalls": 0,
+  "rendererCalls": 0,
+  "publicationCompileCalls": 0
+}

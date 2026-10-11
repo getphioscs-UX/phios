@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {loadR2RetrievalCorpus} from '../functions/knowledge-runtime/manuscript-source-runtime.js';
+const bytes=fs.readFileSync('functions/_source-material/books/book-2-registered-reviewed-corpus.json');
+const registry=JSON.parse(fs.readFileSync('content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json'));
+const source=registry.records.find(r=>r.bookCode==='BOOK-2');
+let reads=0,current=bytes,missing=false;
+const binding={async get(key){reads++;assert.equal(key,source.r2ObjectKey);return missing?null:{body:current};}};
+const first=await loadR2RetrievalCorpus(binding,source),second=await loadR2RetrievalCorpus(binding,source);
+assert.equal(first,second);assert.equal(reads,2,'CACHE_MUST_NOT_SKIP_R2_BYTE_VALIDATION');
+current=Buffer.from(bytes);current[current.length-2]^=1;
+await assert.rejects(()=>loadR2RetrievalCorpus(binding,source),error=>error.code==='MANUSCRIPT_RETRIEVAL_CORPUS_BYTES_MISMATCH');
+missing=true;
+await assert.rejects(()=>loadR2RetrievalCorpus(binding,source),error=>error.code==='MANUSCRIPT_RETRIEVAL_CORPUS_NOT_FOUND');
+current=bytes;missing=false;
+await assert.rejects(()=>loadR2RetrievalCorpus(binding,{...source,sourceSha256:'0'.repeat(64)}),error=>error.code==='MANUSCRIPT_RETRIEVAL_CORPUS_SOURCE_MISMATCH');
+fs.writeFileSync('tools/review/free-ask-manuscript-r1/MANUSCRIPT-CORPUS-CACHE-SECURITY.json',JSON.stringify({at:new Date().toISOString(),bookCode:'BOOK-2',readCount:reads,reuseAfterRevalidatedBytes:true,changedBytesRejected:true,missingObjectRejected:true,incorrectSourceRejected:true,providerCalls:0,state:'PASS'},null,2)+'\n');
+console.log('PASS: bounded cache still revalidates R2 bytes and source on every request; changed/missing/unaccepted identity rejected.');
