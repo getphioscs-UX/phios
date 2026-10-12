@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-12T14:46:22.810Z",
+  "checks": [
+    "unchanged content does not write",
+    "UNKNOWN reproduced by fault injection; bounded atomic retry succeeds",
+    "permanent failure stops at three attempts and preserves prior bytes",
+    "second writer refused, lock not stolen"
+  ],
+  "providerCalls": 0,
+  "originalFailure": {
+    "code": "UNKNOWN",
+    "errno": -4094,
+    "path": "C:/phios/content/civilization-atlas/search/world-search-index-v1.json",
+    "phase": "build-world-recovery-index direct destination write before STATIC_COPY"
+  },
+  "actualReproduction": "Standalone original generator succeeded; original triggering OS handle/process is UNVERIFIED, not claimed as proven concurrency",
+  "provenDefects": [
+    "unconditional unchanged destination rewrite",
+    "standalone generator had no shared writer lock",
+    "direct write exposed partial bytes on failure"
+  ],
+  "repair": "unchanged no-op + per-generator lease + atomic replace + finite transient retry + consumed input change check"
+}

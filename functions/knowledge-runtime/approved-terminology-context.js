@@ -16,12 +16,11 @@ export function bindTerminologyToEvidence(matches,sources,locale){
  });
 }
 export function approvedTerminologyForSourcePack(question,locale,sources){
- return matchApprovedTerminology(question,locale).flatMap(match=>{
-  const term=approved.find(t=>t.termCode===match.termCode);
-  const sourceLabel=term?.['zh-Hans'];
-  const support=sources.filter(s=>[match.label,sourceLabel].filter(Boolean).some(label=>normalize(s.text).replace(/\s+/gu,'').includes(normalize(label).replace(/\s+/gu,''))));
-  return support.length?[{...match,sourceLabel,sourceLocale:'zh-Hans',sourceIds:support.map(s=>s.id),createsAnswerEvidence:false}]:[];
- });
+ const queryMatches=matchApprovedTerminology(question,locale),queryIds=new Set(queryMatches.map(m=>m.termCode));
+ // Only existing approved/locked names, anchored in the retrieved source. This
+ // may add related terms but neither a glossary definition nor answer authority.
+ const compact=x=>normalize(x).replace(/\s+/gu,'');
+ return approved.flatMap(term=>{const sourceLabel=term['zh-Hans'],support=sources.filter(s=>[sourceLabel,term.en].some(label=>label&&compact(s.text).includes(compact(label))));return support.length?[{termCode:term.termCode,key:term.key,label:term[locale],locale,authority:'EXISTING_FROZEN_HUMAN_TERMINOLOGY',sourceLabel,sourceLocale:'zh-Hans',sourceIds:support.map(s=>s.id),queryMatched:queryIds.has(term.termCode),createsAnswerEvidence:false}]:[];}).sort((a,b)=>Number(b.queryMatched)-Number(a.queryMatched)||a.termCode.localeCompare(b.termCode)).slice(0,6);
 }
 // Search expansion only; the customer's original question and authority are unchanged.
 export function approvedCrossLocaleSearch(question,fromLocale,toLocale){

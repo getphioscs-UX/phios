@@ -1,7 +1,10 @@
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import {acquireGeneratedWriter,writeGeneratedFile} from './lib/generated-file-writer.mjs';
+const generationLease=acquireGeneratedWriter(process.cwd(),'world-recovery-index');
+const consumedInputs=new Map();
 import {resolveAtlasVisualById,resolveAtlasVisualDeepLink} from '../assets/js/pages/civilization-atlas/atlas-static-visual.js';
-const base='content/civilization-atlas',read=p=>JSON.parse(fs.readFileSync(p,'utf8').replace(/^\uFEFF/,''));
+const base='content/civilization-atlas',read=p=>{const bytes=fs.readFileSync(p);const hash=crypto.createHash('sha256').update(bytes).digest('hex');if(consumedInputs.has(p)&&consumedInputs.get(p)!==hash)throw Error('WORLD_GENERATION_INPUT_CHANGED:'+p);consumedInputs.set(p,hash);return JSON.parse(bytes.toString('utf8').replace(/^\uFEFF/,''));};
 const bindings=read(base+'/visuals/civilization-visual-approved-bindings-v2.json');
 const rows=[],sources=[];const positionRegistry=read('content/registry/runtime-position-48-v1.json');
 const configs=[
@@ -54,9 +57,13 @@ if(fs.existsSync(indexPath)){
  const {generatedAt:ignoredGeneratedAt,...currentContent}=out;
  if(JSON.stringify(priorContent)===JSON.stringify(currentContent))out.generatedAt=priorGeneratedAt;
 }
-fs.mkdirSync(base+'/search',{recursive:true});fs.writeFileSync(base+'/search/world-search-index-v1.json',JSON.stringify(out)+'\n');
+for(const [input,hash] of consumedInputs)if(crypto.createHash('sha256').update(fs.readFileSync(input)).digest('hex')!==hash)throw Error('WORLD_GENERATION_INPUT_CHANGED:'+input);
+const indexWrite=writeGeneratedFile(indexPath,JSON.stringify(out)+'\n');
 const previousLedger=fs.existsSync('docs/acceptance/world-recovery/visual-coverage-ledger.json')?read('docs/acceptance/world-recovery/visual-coverage-ledger.json').rows:[];
 const coverage=bindings.assets.map(a=>({assetId:a.assetId,family:a.family,subjectId:a.subjectId,reviewState:a.reviewState,bindingState:a.bindingState,bucketKey:a.bucketKey,publicUrl:a.publicUrl,actualConsumer:visualRows.some(x=>x.id===a.assetId)?'world-semantic-visual-atlas':null,consumerRoute:'/world?explore=visuals',discoverable:visualRows.some(x=>x.id===a.assetId),requestedInBrowser:'NOT_RUN',decoded:'NOT_RUN',visible:'NOT_RUN',desktopState:'NOT_RUN',mobileState:'NOT_RUN',localeState:'NOT_RUN',decision:visualRows.some(x=>x.id===a.assetId)?'ACTIVE_VISUAL_ATLAS':'BROKEN_CONSUMER'})).map(row=>{const previous=previousLedger.find(p=>p.assetId===row.assetId&&p.publicUrl===row.publicUrl&&p.bucketKey===row.bucketKey);return previous?{...previous,...row,requestedInBrowser:previous.requestedInBrowser,decoded:previous.decoded,visible:previous.visible,desktopState:previous.desktopState,mobileState:previous.mobileState,localeState:previous.localeState}:row;});
-fs.mkdirSync('docs/acceptance/world-recovery',{recursive:true});fs.writeFileSync('docs/acceptance/world-recovery/visual-coverage-ledger.json',JSON.stringify({registeredVisuals:read(base+'/visuals/civilization-visual-asset-registry-v2.json').assets.length,boundVisuals:bindings.assets.length,acceptedVisuals:bindings.assets.filter(a=>a.reviewState==='ACCEPTED').length,rows:coverage},null,2)+'\n');
-fs.writeFileSync('docs/acceptance/world-recovery/orphan-report.json',JSON.stringify({unexplainedAcceptedOrphans:coverage.filter(a=>a.reviewState==='ACCEPTED'&&!a.discoverable),pending:coverage.filter(a=>a.reviewState!=='ACCEPTED')},null,2)+'\n');
+writeGeneratedFile('docs/acceptance/world-recovery/visual-coverage-ledger.json',JSON.stringify({registeredVisuals:read(base+'/visuals/civilization-visual-asset-registry-v2.json').assets.length,boundVisuals:bindings.assets.length,acceptedVisuals:bindings.assets.filter(a=>a.reviewState==='ACCEPTED').length,rows:coverage},null,2)+'\n');
+writeGeneratedFile('docs/acceptance/world-recovery/orphan-report.json',JSON.stringify({unexplainedAcceptedOrphans:coverage.filter(a=>a.reviewState==='ACCEPTED'&&!a.discoverable),pending:coverage.filter(a=>a.reviewState!=='ACCEPTED')},null,2)+'\n');
 console.log(JSON.stringify({entities:rows.length,visuals:visualRows.length,counts:Object.fromEntries([...new Set(rows.map(x=>x.type))].map(t=>[t,rows.filter(x=>x.type===t).length]))}));
+
+fs.writeFileSync('.tmp/world-generation-last-receipt.json',JSON.stringify({at:new Date().toISOString(),inputs:[...consumedInputs].map(([path,sha256])=>({path,sha256})),indexWrite}));
+generationLease.release();

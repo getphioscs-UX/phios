@@ -1,0 +1,227 @@
+{
+  "state": "PROPOSAL_ONLY_NOT_REGISTERED_NOT_EXECUTED",
+  "binding": "RUNTIME_DB",
+  "account": "0b9f36bdf56f38d7d09aebe388f15204",
+  "production": {
+    "id": "073639fa-01e4-4868-af10-6ed032637dab",
+    "name": "phios-runtime-production",
+    "tables": [
+      "_cf_KV",
+      "d1_migrations",
+      "reality_readings",
+      "runtime_artifacts",
+      "runtime_entities",
+      "runtime_entries",
+      "runtime_events",
+      "runtime_lineages",
+      "runtime_migration_history",
+      "runtime_reviews",
+      "runtime_revisions",
+      "runtime_snapshots",
+      "runtime_users",
+      "runtimes",
+      "sqlite_sequence",
+      "users"
+    ],
+    "counts": {},
+    "migrationTables": [
+      "d1_migrations",
+      "runtime_migration_history"
+    ],
+    "appliedMigrations": [
+      {
+        "name": "0001_platform_foundation.sql"
+      },
+      {
+        "name": "0002_initial_runtime.sql"
+      }
+    ],
+    "artifactTypes": [
+      {
+        "artifact_type": "system_capability_authority",
+        "rows": 2
+      }
+    ]
+  },
+  "preview": {
+    "id": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+    "name": "phios-runtime-sandbox",
+    "tables": [
+      "_cf_KV",
+      "account_financial_will_drafts",
+      "account_fw_rights_audit",
+      "account_method_report_materials",
+      "account_person_versions",
+      "account_provider_subjects",
+      "account_verified_sessions",
+      "asset_item",
+      "bank_account_summary",
+      "client_household",
+      "commerce_checkout_attempts",
+      "commerce_customer_bindings",
+      "commerce_delivery_messages",
+      "commerce_download_events",
+      "commerce_download_tokens",
+      "commerce_products",
+      "commerce_purchases",
+      "commerce_receipts",
+      "commerce_service_fulfillments",
+      "commerce_subscriptions",
+      "commerce_watermark_jobs",
+      "commerce_webhook_events",
+      "d1_migrations",
+      "digital_entitlements",
+      "education_plan",
+      "estate_profile",
+      "expense_item",
+      "financial_action",
+      "financial_objective",
+      "financial_ratio",
+      "financial_recommendation",
+      "financial_review",
+      "financial_risk",
+      "income_item",
+      "insurance_policy",
+      "investment_item",
+      "liability_item",
+      "method_delivery_cache",
+      "property_item",
+      "pws_registry_audit",
+      "pws_registry_objects",
+      "pws_registry_outbox",
+      "pws_registry_relationships",
+      "pws_registry_restrictions",
+      "pws_registry_versions",
+      "reality_readings",
+      "report_context_records",
+      "report_context_uses",
+      "retirement_plan",
+      "runtime_artifacts",
+      "runtime_entities",
+      "runtime_entries",
+      "runtime_events",
+      "runtime_lineages",
+      "runtime_migration_history",
+      "runtime_reviews",
+      "runtime_revisions",
+      "runtime_snapshots",
+      "runtime_users",
+      "runtimes",
+      "sqlite_sequence",
+      "tax_profile",
+      "users"
+    ],
+    "counts": {
+      "commerce_subscriptions": 0,
+      "commerce_purchases": 1,
+      "commerce_checkout_attempts": 2
+    },
+    "migrationTables": [
+      "d1_migrations",
+      "runtime_migration_history"
+    ],
+    "appliedMigrations": [
+      {
+        "name": "0001_platform_foundation.sql"
+      },
+      {
+        "name": "0002_initial_runtime.sql"
+      },
+      {
+        "name": "0003_financial_professional_infrastructure.sql"
+      },
+      {
+        "name": "0004_book_commerce.sql"
+      },
+      {
+        "name": "0005_pws_universal_registry.sql"
+      },
+      {
+        "name": "0006_commerce_stripe_r1.sql"
+      },
+      {
+        "name": "0007_account_oidc_sessions.sql"
+      },
+      {
+        "name": "0008_financial_will_encrypted_drafts.sql"
+      }
+    ],
+    "artifactTypes": [
+      {
+        "artifact_type": "BAZI_T3_SHADOW_V1",
+        "rows": 19
+      },
+      {
+        "artifact_type": "RNT2_CSD_REVIEW_AUDIT",
+        "rows": 20
+      },
+      {
+        "artifact_type": "RNT2_S02_REVIEW",
+        "rows": 2
+      },
+      {
+        "artifact_type": "RNT2_S03_REVIEW",
+        "rows": 2
+      },
+      {
+        "artifact_type": "RNT2_S04_REVIEW",
+        "rows": 17
+      },
+      {
+        "artifact_type": "RNT2_S05_REVIEW",
+        "rows": 2
+      },
+      {
+        "artifact_type": "ZWR_CONTROLLED_RELEASE_MATERIAL_V1",
+        "rows": 6
+      }
+    ]
+  },
+  "conclusion": "Correct cloud/local binding; expected schema not applied in either inspected database. This does not prove historical credits absent in all owners.",
+  "owners": {
+    "membershipAndPayment": "Existing Commerce subscriptions/purchases/checkout attempts, migration 0006",
+    "credits": "Existing Continuity quota units with integer cost allocations; no second wallet",
+    "platformCosts": "Existing provider product envelopes/entries, migration 0015",
+    "oldContinuity": "runtimes/runtime_artifacts; classification required, not blanket credit conversion",
+    "answers": "continuity_ask_tasks.answer_json and zero-call outcomes",
+    "profile": "Existing encrypted runtime_artifacts PROFILE_PERSONAL_EVIDENCE_OBJECT",
+    "financial": "Existing encrypted account_financial_will_drafts",
+    "reports": "Existing account_method_report_materials / private reports",
+    "includedQuestions": "Existing account_report_followup_questions; preserve four-question benefit"
+  },
+  "numberConflict": {
+    "active18": "db/migrations/0018_shared_paid_report_delivery.sql",
+    "candidate18": "db/migration-candidates/0018_continuity_quota_units.sql",
+    "resolution": "Preserve both originals. Prepare governed successor registration after dependency review; proposed next versions 19/20/21, not yet reserved or accepted.",
+    "proposed": [
+      {
+        "version": 19,
+        "predecessor": "0018_continuity_quota_units.sql"
+      },
+      {
+        "version": 20,
+        "predecessor": "0019_continuity_ask_credit_allocations.sql"
+      },
+      {
+        "version": 21,
+        "predecessor": "0020_continuity_zero_call_outcomes.sql"
+      }
+    ]
+  },
+  "steps": [
+    "Keep both dispatchers and grants disabled; snapshot actual bound database schema and migration histories before any mutation",
+    "Inventory verified purchase grants, settled customer spend, unknown provider costs and pending reservations across current owners; do not infer zero from missing tables",
+    "Review sequential canonical migration 0003–0018 prerequisites and schema already present; no selective unregistered SQL or automatic bulk migration",
+    "Register non-conflicting versioned successor SQL and exact checksums through existing runtime-migrations governance; preserve P9 0018",
+    "Offline/QA rehearse unique purchase-event grant identity, FIFO merged reservations, idempotent answer settlement and explicit legacy/new dispatcher fence",
+    "After separate authorization back up data; apply accepted migrations once, reconcile totals before enabling any dispatcher",
+    "Deploy one validated Worker/registry/configuration set with activation still off; only activate after separately authorized smoke and balance reconciliation"
+  ],
+  "rollback": [
+    "Disable new and old execution/grant dispatchers before rollback",
+    "Restore matching prior Worker/registry/config flags without changing Stripe or Secrets",
+    "Retain additive schema and purchase/cost/task evidence; do not DROP tables, refund or regrant automatically",
+    "Resolve pending reservations and unknown costs before either dispatcher resumes"
+  ],
+  "productionWrites": 0
+}

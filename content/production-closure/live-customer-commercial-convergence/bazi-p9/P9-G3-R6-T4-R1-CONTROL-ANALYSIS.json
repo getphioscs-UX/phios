@@ -1,0 +1,359 @@
+{
+  "status": "BLOCKED_ZONE_LOAD_BALANCER_READ_SCOPE",
+  "tokenValueRecorded": false,
+  "expiresAt": "2026-10-14",
+  "readMatrix": [
+    {
+      "name": "Load Balancers",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/load_balancers?per_page=100",
+      "httpStatus": 403,
+      "readable": "NO",
+      "complete": false,
+      "count": "UNKNOWN_NOT_ZERO",
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error",
+          "documentation_url": "https://developers.cloudflare.com/api/resources/load_balancers/methods/list"
+        }
+      ]
+    },
+    {
+      "name": "Monitors",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/load_balancers/monitors?per_page=100",
+      "httpStatus": 200,
+      "readable": "YES",
+      "complete": true,
+      "count": 0,
+      "errors": []
+    },
+    {
+      "name": "Pools",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/load_balancers/pools?per_page=100",
+      "httpStatus": 200,
+      "readable": "YES",
+      "complete": true,
+      "count": 0,
+      "errors": []
+    },
+    {
+      "name": "DNS",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/dns_records?per_page=100",
+      "httpStatus": 200,
+      "readable": "YES",
+      "complete": true,
+      "count": 3,
+      "errors": []
+    },
+    {
+      "name": "Account Rulesets",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets",
+      "httpStatus": 200,
+      "readable": "YES",
+      "complete": true,
+      "count": 2,
+      "errors": []
+    },
+    {
+      "name": "Request Header Transforms",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_request_late_transform/entrypoint",
+      "httpStatus": 404,
+      "readable": "NO",
+      "complete": false,
+      "count": "UNKNOWN_NOT_ZERO",
+      "errors": [
+        {
+          "code": 10003,
+          "message": "could not find entrypoint ruleset in the http_request_late_transform phase"
+        }
+      ]
+    },
+    {
+      "name": "URL Transforms",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_request_transform/entrypoint",
+      "httpStatus": 404,
+      "readable": "NO",
+      "complete": false,
+      "count": "UNKNOWN_NOT_ZERO",
+      "errors": [
+        {
+          "code": 10003,
+          "message": "could not find entrypoint ruleset in the http_request_transform phase"
+        }
+      ]
+    },
+    {
+      "name": "Bulk entrypoint",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/phases/http_request_redirect/entrypoint",
+      "httpStatus": 200,
+      "readable": "YES",
+      "complete": true,
+      "count": null,
+      "id": "e4920e8f14574ec9abce2fbe9d764056",
+      "errors": []
+    },
+    {
+      "name": "Filter Lists",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists?per_page=100",
+      "httpStatus": 200,
+      "readable": "YES",
+      "complete": true,
+      "count": 2,
+      "errors": []
+    },
+    {
+      "name": "Zone Rulesets",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets",
+      "httpStatus": 200,
+      "readable": "YES",
+      "complete": true,
+      "count": 3,
+      "errors": []
+    },
+    {
+      "name": "Dynamic Redirects",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_request_dynamic_redirect/entrypoint",
+      "httpStatus": 404,
+      "readable": "NO",
+      "complete": false,
+      "count": "UNKNOWN_NOT_ZERO",
+      "errors": [
+        {
+          "code": 10003,
+          "message": "could not find entrypoint ruleset in the http_request_dynamic_redirect phase"
+        }
+      ]
+    },
+    {
+      "name": "Response Header Transforms",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_response_headers_transform/entrypoint",
+      "httpStatus": 404,
+      "readable": "NO",
+      "complete": false,
+      "count": "UNKNOWN_NOT_ZERO",
+      "errors": [
+        {
+          "code": 10003,
+          "message": "could not find entrypoint ruleset in the http_response_headers_transform phase"
+        }
+      ]
+    },
+    {
+      "name": "Account Load Balancers",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/load_balancers?per_page=100",
+      "httpStatus": 200,
+      "readable": "YES",
+      "complete": true,
+      "count": 0,
+      "errors": []
+    },
+    {
+      "name": "List items getphios_pagesdev_canonical",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/9d06d0169ea948e8ba640bb1fab48cde/items?per_page=100",
+      "httpStatus": 200,
+      "readable": "YES",
+      "complete": true,
+      "count": 1,
+      "errors": []
+    },
+    {
+      "name": "List items getphios_www_canonical",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/3cddd65c75a24866b759eff4fde8ee63/items?per_page=100",
+      "httpStatus": 200,
+      "readable": "YES",
+      "complete": true,
+      "count": 1,
+      "errors": []
+    },
+    {
+      "name": "Ruleset e4920e8f14574ec9abce2fbe9d764056",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/e4920e8f14574ec9abce2fbe9d764056",
+      "httpStatus": 200,
+      "readable": "YES",
+      "complete": true,
+      "count": null,
+      "id": "e4920e8f14574ec9abce2fbe9d764056",
+      "errors": []
+    }
+  ],
+  "phaseAbsence": [
+    {
+      "name": "Dynamic Redirects",
+      "phase": "http_request_dynamic_redirect",
+      "httpStatus": 404,
+      "permissionAvailable": true,
+      "absenceProven": true,
+      "basis": "Exact phase error10003 + complete zone rulesets GET200, no entrypoint for phase; token includes explicit corresponding Read permission",
+      "count": 0
+    },
+    {
+      "name": "URL Transforms",
+      "phase": "http_request_transform",
+      "httpStatus": 404,
+      "permissionAvailable": true,
+      "absenceProven": true,
+      "basis": "Exact phase error10003 + complete zone rulesets GET200, no entrypoint for phase; token includes explicit corresponding Read permission",
+      "count": 0
+    },
+    {
+      "name": "Request Header Transforms",
+      "phase": "http_request_late_transform",
+      "httpStatus": 404,
+      "permissionAvailable": true,
+      "absenceProven": true,
+      "basis": "Exact phase error10003 + complete zone rulesets GET200, no entrypoint for phase; token includes explicit corresponding Read permission",
+      "count": 0
+    },
+    {
+      "name": "Response Header Transforms",
+      "phase": "http_response_headers_transform",
+      "httpStatus": 404,
+      "permissionAvailable": true,
+      "absenceProven": true,
+      "basis": "Exact phase error10003 + complete zone rulesets GET200, no entrypoint for phase; token includes explicit corresponding Read permission",
+      "count": 0
+    }
+  ],
+  "bulkRules": [
+    {
+      "position": 1,
+      "action": "redirect",
+      "action_parameters": {
+        "from_list": {
+          "key": "http.request.full_uri",
+          "name": "getphios_www_canonical"
+        }
+      },
+      "description": "poc-b4-www-to-canonical",
+      "enabled": true,
+      "expression": "http.request.full_uri in $getphios_www_canonical",
+      "id": "635f3e11b273436bba9615274561471b",
+      "last_updated": "2026-09-14T09:54:56.088239Z",
+      "ref": "635f3e11b273436bba9615274561471b",
+      "version": "1"
+    },
+    {
+      "position": 2,
+      "action": "redirect",
+      "action_parameters": {
+        "from_list": {
+          "key": "http.request.full_uri",
+          "name": "getphios_pagesdev_canonical"
+        }
+      },
+      "description": "poc-b6-pagesdev-to-canonical",
+      "enabled": true,
+      "expression": "http.request.full_uri in $getphios_pagesdev_canonical",
+      "id": "24d6cca9d501477886de2a85fa51bf32",
+      "last_updated": "2026-09-14T11:35:09.76747Z",
+      "ref": "24d6cca9d501477886de2a85fa51bf32",
+      "version": "1"
+    }
+  ],
+  "bulkLists": [
+    {
+      "id": "9d06d0169ea948e8ba640bb1fab48cde",
+      "name": "getphios_pagesdev_canonical",
+      "description": "POC-B6 — Redirect phios-github.pages.dev production hostname to canonical https://getphios.com.",
+      "kind": "redirect",
+      "num_items": 1,
+      "num_referencing_filters": 0,
+      "created_on": "2026-09-14T11:34:30Z",
+      "modified_on": "2026-09-18T08:14:02Z"
+    },
+    {
+      "id": "3cddd65c75a24866b759eff4fde8ee63",
+      "name": "getphios_www_canonical",
+      "description": "POC-B4 — Redirect www.getphios.com to canonical https://getphios.com while preserving path and query string.",
+      "kind": "redirect",
+      "num_items": 1,
+      "num_referencing_filters": 0,
+      "created_on": "2026-09-14T09:50:12Z",
+      "modified_on": "2026-09-14T09:52:25Z"
+    }
+  ],
+  "bulkItems": [
+    {
+      "name": "List items getphios_pagesdev_canonical",
+      "items": [
+        {
+          "id": "b2fffac44073440fa64bc64d0d3446e2",
+          "redirect": {
+            "source_url": "https://phios-github.pages.dev/",
+            "include_subdomains": false,
+            "target_url": "https://getphios.com/",
+            "status_code": 301,
+            "preserve_query_string": true,
+            "subpath_matching": true,
+            "preserve_path_suffix": true
+          },
+          "created_on": "2026-09-14T11:34:54Z",
+          "modified_on": "2026-09-18T08:14:02Z"
+        }
+      ]
+    },
+    {
+      "name": "List items getphios_www_canonical",
+      "items": [
+        {
+          "id": "efe241a0622b409fadfdf4214338ebd5",
+          "redirect": {
+            "source_url": "https://www.getphios.com/",
+            "target_url": "https://getphios.com/",
+            "status_code": 301,
+            "preserve_query_string": true,
+            "subpath_matching": true,
+            "preserve_path_suffix": true
+          },
+          "created_on": "2026-09-14T09:50:57Z",
+          "modified_on": "2026-09-14T09:52:25Z"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "projectRoot": "HTTPS all subpaths/query via B6",
+    "wildcardHashHosts": "NOT_COVERED: B6 include_subdomains=false",
+    "canary2": "NOT_COVERED",
+    "getphiosCom": "No source match in existing two lists; destination only"
+  },
+  "conflicts": {
+    "bulk": "NONE_FOR_EXACT_CANARY_HOST",
+    "zoneRedirectTransforms": "NONE_CONFIGURED",
+    "dns": "No relevant conflict observed; apex and www proxied, auth DNS-only",
+    "accountLoadBalancers": 0,
+    "pools": 0,
+    "monitors": 0,
+    "zoneLoadBalancers": "UNKNOWN_403; cannot infer zero from account-scoped inventory or empty pools"
+  },
+  "missingRead": {
+    "endpoint": "/zones/86dbea6c11ed5fa37a92003037b25f87/load_balancers?per_page=100",
+    "status": 403,
+    "code": 10000,
+    "minimumScope": "Zone getphios.com / Load Balancers Read",
+    "currentTokenScope": "Account Load Balancers Read succeeds on account endpoint, fails on zone endpoint",
+    "confidence": "Scope-specific failure observed; legacy zone permission documented in Zone Details; consolidated LB list reference documents only Account Read. Zone Read must be verified rather than presumed sufficient.",
+    "writeRequested": false
+  },
+  "proxy": {
+    "transport": "Cloudflare addresses + server cloudflare + CF-Ray observed for exact hash hostname",
+    "ownerDNS": "pages.dev provider-managed, not getphios.com zone record",
+    "mechanismEligibility": "DOCUMENTED_DESIGN_SUPPORTED; exact historical hash execution not runtime-proven",
+    "basis": "Official Pages recipe enables Include subdomains for project.pages.dev, covering deployment hash subdomains. URL matcher permits exact host and schemeless source. This is architectural inference, not observed canary rule execution."
+  },
+  "preHandler": {
+    "architecture": "Bulk redirect terminates processing immediately when matching; documented Pages integration supports pages.dev subdomains",
+    "exactHistoricalFunctions": "RUNTIME_UNVERIFIED",
+    "proofRequired": [
+      "Before any later authorized mutation: working correlated edge/Pages trace collector must be demonstrated; silence alone is not proof",
+      "After separately authorized surgical rule creation: capture edge matching rule ID and terminating redirect for exact canary GET and bounded non-mutating POST, auto-follow OFF",
+      "Correlate requests with serving execution identity; prove historical Pages handler not invoked; no sensitive/body data in trace",
+      "Verify current authority exempt on canonical, www, root pages.dev and b07d86bf hash; compare control-plane baseline",
+      "Zero production data mutation proof needs separate authorized read-only D1 verification; no D1 operations in this task",
+      "Test HTTPS and HTTP, representative paths/query/encoded paths, no unintended subdomains or authority hosts; do not forward POST to canonical"
+    ]
+  },
+  "productionIsolation": "NOT_PROVEN",
+  "canaryID": "41b1c458-c79d-40e8-b47c-c2e5f4dba452",
+  "canaryMutated": false
+}

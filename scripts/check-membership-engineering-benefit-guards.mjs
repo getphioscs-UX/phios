@@ -1,0 +1,5 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {build} from 'esbuild';
+await build({entryPoints:['functions/personal-reading/continuity/membership-ask-execution.js'],bundle:true,platform:'node',format:'esm',outfile:'.tmp/engineering-benefit-guard.mjs'});const {executeMembershipAsk}=await import('../.tmp/engineering-benefit-guard.mjs');
+const result=await executeMembershipAsk({env:{},pack:{accessBasis:'EXISTING_INCLUDED_REPORT_FOLLOWUP',existingBenefitEndpoint:'/api/account-report-questions'}});assert.equal(result.state,'USE_EXISTING_INCLUDED_REPORT_BENEFIT');assert.equal(result.providerCalls,0);
+await assert.rejects(()=>executeMembershipAsk({env:{PHIOS_ENVIRONMENT:'production'},pack:{sources:[]},offlineReplay:true}),/MEMBERSHIP_PROVIDER_NOT_AUTHORIZED/);
+fs.writeFileSync('tools/review/membership-ask-credit-r1/ENGINEERING-PRODUCTION-AND-BENEFIT-GUARDS.json',JSON.stringify({includedQuestions:result,productionClientReplayFlag:'DENIED',providerCalls:0,creditReservationInvoked:false},null,2));console.log('PASS included benefit preserved before credit reservation; production replay denied');

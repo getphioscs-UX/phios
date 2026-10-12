@@ -3593,4 +3593,1252 @@
     &quot;customerDebit&quot;: &quot;SYNTHETIC_FIXTURE_ONLY_NOT_ORIGINAL_TASK&quot;,
     &quot;classificationCandidate&quot;: &quot;PARTIAL_WITHIN_THIS_ADMITTED_PACK&quot;
   }
-]</pre></details><h3>拒绝与风险检查</h3><ul><li>substance plus explicit gap classified PARTIAL not SOURCE_INSUFFICIENT</li><li>wrong citation identity</li><li>cross-package review</li><li>unmapped prose still requires independent check</li><li>duplicate unit check</li><li>qualifier weakening flagged by reviewer refuses delivery</li><li>unsupported causal inference refuses delivery</li><li>complete with disclosed missing scope contradiction</li><li>unit from another document rejected</li><li>valid negative review stays rejected</li></ul><p>错误引用、跨包scope、正文遗漏、重复ID、矛盾结果严格拒绝。限定词弱化及因果外推测试仅证明服务器处理复核标记正确，不证明新模型能识别所有语义错误。ID合法、提示词和关键词均不是语义保证；没有逐客户人审流程。</p><h3>检索及零调用保存</h3><p>推断问法中，不存在于本包的语法词曾取得最高IDF，稀释真实证据；现按推断句结构降低这类词的排名权重，原问题、否定、条件及权限保留。未对具体问题／章节建立映射。开发中的宽泛调权曾误召回预测背景，已收窄；该中间失败保留在本次修补记录，不写PASS。</p><ul><li>NEW_AFTER_V2_RULE_FREEZE：一次观测没有发现目标，这是否足以认定目标不存在？ → PASS_RETRIEVAL_ONLY 14.86, 14.65</li><li>NEW_AFTER_V2_RULE_FREEZE：某物未出现在观测记录里，是否就能断言它不存在？ → PASS_RETRIEVAL_ONLY 14.86, 14.65</li><li>NEW_AFTER_V2_RULE_FREEZE：可以保证今晚某个国家一定发生战争吗？ → PASS_SOURCE_INSUFFICIENT </li><li>NEW_AFTER_V2_RULE_FREEZE：明天苹果股价具体是多少？ → PASS_SOURCE_INSUFFICIENT </li></ul><p>零调用保存10项通过，零预留、零扣额、零平台费用；服务故障不写来源不足。候选schema仍未生产迁移。七册982章台账不变，本轮片段与接口验证不增加整章完成数。</p><h3>下一轮最小付费候选 · 尚未授权</h3><p>3题生成＋复核及2个故意错误答案复核：最多8次Luna，1400tokens／次，retry0。最大预留USD0.142462，拟申请硬上限USD0.15。包含新的中英文问法、恢复回归、否定／确定性和恢复定义／因果外推负面样例。负面样例明确是合成QA，不伪称模型输出。授权后重新核价和权限，每次持续预留全部未调用最大费用。</p><a href="REVIEW-V2-NEXT-QA-REQUESTS.json">确切请求、包、提示词及预算</a> · <a href="REVIEW-V2-OFFLINE-STATE.json">当前源、产物身份及证据</a></section></main></html>
+]</pre></details><h3>拒绝与风险检查</h3><ul><li>substance plus explicit gap classified PARTIAL not SOURCE_INSUFFICIENT</li><li>wrong citation identity</li><li>cross-package review</li><li>unmapped prose still requires independent check</li><li>duplicate unit check</li><li>qualifier weakening flagged by reviewer refuses delivery</li><li>unsupported causal inference refuses delivery</li><li>complete with disclosed missing scope contradiction</li><li>unit from another document rejected</li><li>valid negative review stays rejected</li></ul><p>错误引用、跨包scope、正文遗漏、重复ID、矛盾结果严格拒绝。限定词弱化及因果外推测试仅证明服务器处理复核标记正确，不证明新模型能识别所有语义错误。ID合法、提示词和关键词均不是语义保证；没有逐客户人审流程。</p><h3>检索及零调用保存</h3><p>推断问法中，不存在于本包的语法词曾取得最高IDF，稀释真实证据；现按推断句结构降低这类词的排名权重，原问题、否定、条件及权限保留。未对具体问题／章节建立映射。开发中的宽泛调权曾误召回预测背景，已收窄；该中间失败保留在本次修补记录，不写PASS。</p><ul><li>NEW_AFTER_V2_RULE_FREEZE：一次观测没有发现目标，这是否足以认定目标不存在？ → PASS_RETRIEVAL_ONLY 14.86, 14.65</li><li>NEW_AFTER_V2_RULE_FREEZE：某物未出现在观测记录里，是否就能断言它不存在？ → PASS_RETRIEVAL_ONLY 14.86, 14.65</li><li>NEW_AFTER_V2_RULE_FREEZE：可以保证今晚某个国家一定发生战争吗？ → PASS_SOURCE_INSUFFICIENT </li><li>NEW_AFTER_V2_RULE_FREEZE：明天苹果股价具体是多少？ → PASS_SOURCE_INSUFFICIENT </li></ul><p>零调用保存10项通过，零预留、零扣额、零平台费用；服务故障不写来源不足。候选schema仍未生产迁移。七册982章台账不变，本轮片段与接口验证不增加整章完成数。</p><h3>下一轮最小付费候选 · 尚未授权</h3><p>3题生成＋复核及2个故意错误答案复核：最多8次Luna，1400tokens／次，retry0。最大预留USD0.142462，拟申请硬上限USD0.15。包含新的中英文问法、恢复回归、否定／确定性和恢复定义／因果外推负面样例。负面样例明确是合成QA，不伪称模型输出。授权后重新核价和权限，每次持续预留全部未调用最大费用。</p><a href="REVIEW-V2-NEXT-QA-REQUESTS.json">确切请求、包、提示词及预算</a> · <a href="REVIEW-V2-OFFLINE-STATE.json">当前源、产物身份及证据</a></section><section id="review-v2-paid-qa"><h2>自动交付 QA · 8次实际调用收尾</h2><p>平台实际费用 USD 0.00884475 / 0.15；重试0，真实客户扣额0；合成 QA 扣额0.2665 Credits。原8次历史实验与扣额字节未变。后续停止重复同题付费试验。</p><p>LOCAL = PARTIAL；BUILD = PASS_BUILD（相关输入未变化，复用）；DEPLOYMENT / LIVE = NOT_RUN。不构成生产激活或七册完成。</p><table><thead><tr><th>任务</th><th>执行 / 交付 / 完整度</th><th>实际USD</th><th>Provider总延迟</th><th>QA扣额 / 预留释放</th></tr></thead><tbody><tr><td>V2-VII-ZH</td><td>COMPLETE / true / COMPLETE</td><td>0.00169315</td><td>13614 ms</td><td>1694 microUSD / 27891 microUSD</td></tr><tr><td>V2-VII-EN</td><td>COMPLETE / true / COMPLETE</td><td>0.0009706</td><td>10456 ms</td><td>971 microUSD / 28254 microUSD</td></tr><tr><td>V2-RECOVERY</td><td>FAILED / false / FAILED</td><td>0.004043</td><td>31322 ms</td><td>0 microUSD / 30036 microUSD</td></tr><tr><td>V2-NEGATION-NEGATIVE（合成错误答案）</td><td>COMPLETE / false / FAILED</td><td>0.0010542</td><td>8258 ms</td><td>0 microUSD / 26808 microUSD</td></tr><tr><td>V2-RECOVERY-NEGATIVE（合成错误答案）</td><td>COMPLETE / false / SOURCE_INSUFFICIENT</td><td>0.0010838</td><td>8017 ms</td><td>0 microUSD / 26808 microUSD</td></tr></tbody></table><h3>实际答案、来源及自动复核原文</h3><details><summary>V2-VII-ZH — 一次观测没有发现目标，这是否足以认定目标不存在？</summary><p>保存ID：review-v2-paid-V2-VII-ZH；重开200，重复提交providerCalls=0。合成答案不纳入生成质量统计。</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{
+  &quot;generation&quot;: &quot;SUPPORTED_COMPLETE_WITH_QUALIFICATIONS&quot;,
+  &quot;review&quot;: &quot;CORRECT_RELEASE_THIS_SAMPLE_ONLY&quot;,
+  &quot;semanticGuarantee&quot;: false
+}</pre><h4>V2-VII-ZH / call 1 / completed</h4><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;answer&quot;: &quot;不足以。一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。未观察不等于不存在，未知也不等于零。作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。&quot;,
+  &quot;supportMap&quot;: [
+    {
+      &quot;statement&quot;: &quot;不足以。&quot;,
+      &quot;sourceIds&quot;: [&quot;S1&quot;],
+      &quot;relation&quot;: &quot;DIRECT_SUPPORT&quot;
+    },
+    {
+      &quot;statement&quot;: &quot;一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。&quot;,
+      &quot;sourceIds&quot;: [&quot;S1&quot;],
+      &quot;relation&quot;: &quot;DIRECT_SUPPORT&quot;
+    },
+    {
+      &quot;statement&quot;: &quot;未观察不等于不存在，未知也不等于零。&quot;,
+      &quot;sourceIds&quot;: [&quot;S1&quot;],
+      &quot;relation&quot;: &quot;DIRECT_SUPPORT&quot;
+    },
+    {
+      &quot;statement&quot;: &quot;作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。&quot;,
+      &quot;sourceIds&quot;: [&quot;S2&quot;],
+      &quot;relation&quot;: &quot;DIRECT_SUPPORT&quot;
+    }
+  ]
+}</pre><p>原始输出：tools/review/membership-ask-credit-r1/review-v2-paid-response-V2-VII-ZH-1.json；d2654487327a6efc0145aebba4a185a1b069618c8898a8b90972dd4afc5cbf34；input 858, cached 0, cache-write 0, output 550。</p><h4>V2-VII-ZH / call 2 / completed</h4><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{&quot;scopeId&quot;:&quot;R-b345c22b332ca1d8&quot;,&quot;verdict&quot;:&quot;DELIVER&quot;,&quot;answerCompleteness&quot;:&quot;COMPLETE&quot;,&quot;substantiveAnsweredUnitIds&quot;:[&quot;U1&quot;,&quot;U2&quot;,&quot;U3&quot;,&quot;U4&quot;],&quot;issues&quot;:[],&quot;checks&quot;:[{&quot;unitId&quot;:&quot;U1&quot;,&quot;sourceIds&quot;:[&quot;S1&quot;],&quot;assessment&quot;:&quot;SUPPORTED&quot;,&quot;reason&quot;:&quot;S1说明未观察到只代表当前证据未能可靠分辨目标，并明确区分未观察与不存在，支持“不足以”的结论。&quot;},{&quot;unitId&quot;:&quot;U2&quot;,&quot;sourceIds&quot;:[&quot;S1&quot;],&quot;assessment&quot;:&quot;SUPPORTED&quot;,&quot;reason&quot;:&quot;S1直接支持当前证据无法可靠分辨目标，以及低解析度、观察范围和时间窗口可能留下未知。&quot;},{&quot;unitId&quot;:&quot;U3&quot;,&quot;sourceIds&quot;:[&quot;S1&quot;],&quot;assessment&quot;:&quot;SUPPORTED&quot;,&quot;reason&quot;:&quot;S1明确支持未观察不等于不存在、未知不等于零。&quot;},{&quot;unitId&quot;:&quot;U4&quot;,&quot;sourceIds&quot;:[&quot;S2&quot;],&quot;assessment&quot;:&quot;SUPPORTED&quot;,&quot;reason&quot;:&quot;S2要求核对证据与主张是否匹配，并核对对象、时间、尺度和观察窗口等条件，支持该判断前的核对要求。&quot;}],&quot;missingScope&quot;:&quot;&quot;}</pre><p>原始输出：tools/review/membership-ask-credit-r1/review-v2-paid-response-V2-VII-ZH-2.json；4154d4ff20db6ee6e83a6f30373692e7b527b9f0172536c4ef30e3cc65811920；input 1306, cached 0, cache-write 1303, output 446。</p><h4>实际检索及来源包</h4><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{
+  &quot;retrievalQuery&quot;: &quot;一次观测没有发现目标，这是否足以认定目标不存在？&quot;,
+  &quot;httpStatus&quot;: 200,
+  &quot;permissionMode&quot;: &quot;IN_PROCESS_ISOLATED_FRAGMENT_ONLY_NOT_CLIENT_QA&quot;,
+  &quot;candidates&quot;: [
+    {
+      &quot;chapter&quot;: &quot;14.86&quot;,
+      &quot;score&quot;: 709.7586130984494,
+      &quot;argument&quot;: {
+        &quot;argumentId&quot;: &quot;ACCEPTED_KNOWLEDGE_PROJECTION&quot;,
+        &quot;type&quot;: &quot;BOUNDARY&quot;,
+        &quot;startOffset&quot;: 0,
+        &quot;endOffset&quot;: 59,
+        &quot;textSha256&quot;: &quot;c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d&quot;,
+        &quot;comparisonSubjects&quot;: null
+      },
+      &quot;sourceSha256&quot;: &quot;e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d&quot;
+    },
+    {
+      &quot;chapter&quot;: &quot;14.65&quot;,
+      &quot;score&quot;: 126.4799480415701,
+      &quot;argument&quot;: {
+        &quot;argumentId&quot;: &quot;ACCEPTED_KNOWLEDGE_PROJECTION&quot;,
+        &quot;type&quot;: &quot;BOUNDARY&quot;,
+        &quot;startOffset&quot;: 0,
+        &quot;endOffset&quot;: 382,
+        &quot;textSha256&quot;: &quot;f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d&quot;,
+        &quot;comparisonSubjects&quot;: null
+      },
+      &quot;sourceSha256&quot;: &quot;e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d&quot;
+    }
+  ],
+  &quot;errors&quot;: [],
+  &quot;pack&quot;: {
+    &quot;question&quot;: &quot;一次观测没有发现目标，这是否足以认定目标不存在？&quot;,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;sources&quot;: [
+      {
+        &quot;id&quot;: &quot;S1&quot;,
+        &quot;sourceCode&quot;: &quot;MKS-BOOK-7-V2-ACCEPTED-KNOWLEDGE-UNITS-ZH&quot;,
+        &quot;sourceVersion&quot;: &quot;v2-accepted-knowledge-projection&quot;,
+        &quot;sourceSha256&quot;: &quot;e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d&quot;,
+        &quot;sourceAcceptanceDigest&quot;: &quot;fcf3fcd3ef7d7115c105799a0bb5a75f561d774a7043acfe3228840d31e2de3b&quot;,
+        &quot;chapterId&quot;: &quot;14.86&quot;,
+        &quot;heading&quot;: &quot;未观察不等于不存在&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;pdfPages&quot;: {
+          &quot;start&quot;: 324,
+          &quot;end&quot;: 324
+        },
+        &quot;support&quot;: {
+          &quot;startOffset&quot;: 0,
+          &quot;endOffset&quot;: 59,
+          &quot;textSha256&quot;: &quot;c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d&quot;
+        },
+        &quot;text&quot;: &quot;没有观察到只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能留下未知。未观察不等于不存在，未知不等于零。&quot;,
+        &quot;readingHref&quot;: null,
+        &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-7&amp;chapter=14.86&amp;q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&amp;locale=zh-Hans&quot;,
+        &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+        &quot;purchaseHref&quot;: null,
+        &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+        &quot;permissions&quot;: {
+          &quot;knowledgeExcerpt&quot;: true,
+          &quot;fullTextDownload&quot;: false,
+          &quot;reconstructBook&quot;: false
+        }
+      },
+      {
+        &quot;id&quot;: &quot;S2&quot;,
+        &quot;sourceCode&quot;: &quot;MKS-BOOK-7-V2-ACCEPTED-KNOWLEDGE-UNITS-ZH&quot;,
+        &quot;sourceVersion&quot;: &quot;v2-accepted-knowledge-projection&quot;,
+        &quot;sourceSha256&quot;: &quot;e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d&quot;,
+        &quot;sourceAcceptanceDigest&quot;: &quot;fcf3fcd3ef7d7115c105799a0bb5a75f561d774a7043acfe3228840d31e2de3b&quot;,
+        &quot;chapterId&quot;: &quot;14.65&quot;,
+        &quot;heading&quot;: &quot;证据权威、排序与冲突&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;pdfPages&quot;: {
+          &quot;start&quot;: 242,
+          &quot;end&quot;: 242
+        },
+        &quot;support&quot;: {
+          &quot;startOffset&quot;: 0,
+          &quot;endOffset&quot;: 382,
+          &quot;textSha256&quot;: &quot;f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d&quot;
+        },
+        &quot;text&quot;: &quot;先核对证据的对象、范围、时间和主张权威；若条件对齐后高质量解释仍然冲突，就保留争议与有资格的替代读取，不强迫选出赢家。\n关于“日本已经进入重组”的主张，Book VII 要求核对证据与主张是否匹配，而不能直接把这个主张当作事实。结构重组需要关系、载体、路径或约束变化的重复证据；当下讯号和短期数据不足以支持这种主张。判断前应核对来源权威、观察窗口、尺度和反证；证据不足时保留 UNKNOWN。\n八字和占星的说法一致，首先可能是模型解释的汇聚，不等于独立证据已经确认。它们可能共享输入、上游假设或相近语义；即使模型确实不同，也要看现实记录是否独立支持这个主题，不能用同意次数代替证据。\n不同说法可能观察不同范围、层次或时间条件，不能在没有证据时强迫选出赢家。先核对对象、时间、尺度和解释步骤；若条件对齐后仍有冲突，就保留有资格的候选与争议，等待能区分它们的现实证据。&quot;,
+        &quot;readingHref&quot;: null,
+        &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-7&amp;chapter=14.65&amp;q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&amp;locale=zh-Hans&quot;,
+        &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+        &quot;purchaseHref&quot;: null,
+        &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+        &quot;permissions&quot;: {
+          &quot;knowledgeExcerpt&quot;: true,
+          &quot;fullTextDownload&quot;: false,
+          &quot;reconstructBook&quot;: false
+        }
+      }
+    ],
+    &quot;glossary&quot;: [],
+    &quot;customerContext&quot;: null,
+    &quot;constraints&quot;: {
+      &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+      &quot;sourceLanguagesDisclosed&quot;: true,
+      &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+      &quot;sourceOnly&quot;: true,
+      &quot;noGeneralKnowledgeFallback&quot;: true,
+      &quot;preserveConditions&quot;: true,
+      &quot;directAnswerWhenSupported&quot;: true,
+      &quot;claimCitationsRequired&quot;: true,
+      &quot;compareBothSides&quot;: true,
+      &quot;untrustedSourceInstructions&quot;: true,
+      &quot;noPrivateTextReconstruction&quot;: true,
+      &quot;noOCRPromotion&quot;: true,
+      &quot;noGlossaryPromotion&quot;: true,
+      &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+      &quot;purchaseMustNotReplaceAnswer&quot;: true
+    },
+    &quot;state&quot;: &quot;SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED&quot;,
+    &quot;tokenEstimate&quot;: {
+      &quot;estimated&quot;: 2123,
+      &quot;conservativeInputTokenCeiling&quot;: 4758,
+      &quot;actualTokens&quot;: null,
+      &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+    },
+    &quot;packDigest&quot;: &quot;57e89f5bc133bc351047a0ac89480e78d1312cf2201c89aab2375757c767f245&quot;
+  },
+  &quot;requestCandidate&quot;: {
+    &quot;contract&quot;: &quot;MEMBERSHIP_FRAGMENT_CANDIDATE_OFFLINE_ONLY&quot;,
+    &quot;question&quot;: &quot;一次观测没有发现目标，这是否足以认定目标不存在？&quot;,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;packDigest&quot;: &quot;57e89f5bc133bc351047a0ac89480e78d1312cf2201c89aab2375757c767f245&quot;,
+    &quot;glossary&quot;: [],
+    &quot;coverage&quot;: {
+      &quot;requestedGroups&quot;: [],
+      &quot;missingGroups&quot;: [],
+      &quot;comparison&quot;: false,
+      &quot;comparisonRelation&quot;: &quot;REQUIRES_ARGUMENT_LEVEL_SUPPORT_NOT_KEYWORD_PRESENCE&quot;,
+      &quot;state&quot;: &quot;CANDIDATE_COVERAGE_REQUIRES_SEMANTIC_REVIEW&quot;,
+      &quot;semanticPass&quot;: false
+    },
+    &quot;sources&quot;: [
+      {
+        &quot;fragmentId&quot;: &quot;F-8c2993097f7fdc9ab3a3e2c3210ad29ec14a3a13af67c4fa3943b8eba197e642&quot;,
+        &quot;chapterId&quot;: &quot;14.86&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;text&quot;: &quot;没有观察到只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能留下未知。未观察不等于不存在，未知不等于零。&quot;
+      },
+      {
+        &quot;fragmentId&quot;: &quot;F-7e9ece8e30e7d8b344dd4a12f79cb5b17ff3e2877298f163c276437ecb9a56ec&quot;,
+        &quot;chapterId&quot;: &quot;14.65&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;text&quot;: &quot;先核对证据的对象、范围、时间和主张权威；若条件对齐后高质量解释仍然冲突，就保留争议与有资格的替代读取，不强迫选出赢家。\n关于“日本已经进入重组”的主张，Book VII 要求核对证据与主张是否匹配，而不能直接把这个主张当作事实。结构重组需要关系、载体、路径或约束变化的重复证据；当下讯号和短期数据不足以支持这种主张。判断前应核对来源权威、观察窗口、尺度和反证；证据不足时保留 UNKNOWN。\n八字和占星的说法一致，首先可能是模型解释的汇聚，不等于独立证据已经确认。它们可能共享输入、上游假设或相近语义；即使模型确实不同，也要看现实记录是否独立支持这个主题，不能用同意次数代替证据。\n不同说法可能观察不同范围、层次或时间条件，不能在没有证据时强迫选出赢家。先核对对象、时间、尺度和解释步骤；若条件对齐后仍有冲突，就保留有资格的候选与争议，等待能区分它们的现实证据。&quot;
+      }
+    ],
+    &quot;constraints&quot;: {
+      &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+      &quot;sourceLanguagesDisclosed&quot;: true,
+      &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+      &quot;sourceOnly&quot;: true,
+      &quot;noGeneralKnowledgeFallback&quot;: true,
+      &quot;preserveConditions&quot;: true,
+      &quot;directAnswerWhenSupported&quot;: true,
+      &quot;claimCitationsRequired&quot;: true,
+      &quot;compareBothSides&quot;: true,
+      &quot;untrustedSourceInstructions&quot;: true,
+      &quot;noPrivateTextReconstruction&quot;: true,
+      &quot;noOCRPromotion&quot;: true,
+      &quot;noGlossaryPromotion&quot;: true,
+      &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+      &quot;purchaseMustNotReplaceAnswer&quot;: true,
+      &quot;answerSchema&quot;: {
+        &quot;locale&quot;: &quot;zh-Hans&quot;,
+        &quot;claims&quot;: [
+          {
+            &quot;text&quot;: &quot;Faithful paraphrase&quot;,
+            &quot;supportFragmentIds&quot;: [
+              &quot;fragment ID&quot;
+            ]
+          }
+        ],
+        &quot;boundary&quot;: &quot;State specific missing evidence&quot;
+      },
+      &quot;directQuotes&quot;: &quot;DO_NOT_GENERATE; SERVER_RENDERS_EXACT_SOURCE&quot;,
+      &quot;qualifiers&quot;: &quot;Preserve uncertainty, conditions and scope; general running conditions do not prove component replacement conditions&quot;,
+      &quot;semanticReview&quot;: &quot;FRAGMENT_ID_EXISTENCE_IS_NOT_ENTAILMENT&quot;,
+      &quot;knownMissingEvidence&quot;: [],
+      &quot;providerAuthorization&quot;: false
+    },
+    &quot;catalog&quot;: {
+      &quot;packDigest&quot;: &quot;57e89f5bc133bc351047a0ac89480e78d1312cf2201c89aab2375757c767f245&quot;,
+      &quot;fragments&quot;: [
+        {
+          &quot;fragmentId&quot;: &quot;F-8c2993097f7fdc9ab3a3e2c3210ad29ec14a3a13af67c4fa3943b8eba197e642&quot;,
+          &quot;sourceId&quot;: &quot;S1&quot;,
+          &quot;textSha256&quot;: &quot;c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d&quot;,
+          &quot;sourceVersion&quot;: &quot;v2-accepted-knowledge-projection&quot;,
+          &quot;sourceSha256&quot;: &quot;e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d&quot;,
+          &quot;chapterId&quot;: &quot;14.86&quot;,
+          &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+          &quot;text&quot;: &quot;没有观察到只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能留下未知。未观察不等于不存在，未知不等于零。&quot;,
+          &quot;support&quot;: {
+            &quot;startOffset&quot;: 0,
+            &quot;endOffset&quot;: 59,
+            &quot;textSha256&quot;: &quot;c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d&quot;
+          },
+          &quot;pdfPages&quot;: {
+            &quot;start&quot;: 324,
+            &quot;end&quot;: 324
+          },
+          &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-7&amp;chapter=14.86&amp;q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&amp;locale=zh-Hans&quot;
+        },
+        {
+          &quot;fragmentId&quot;: &quot;F-7e9ece8e30e7d8b344dd4a12f79cb5b17ff3e2877298f163c276437ecb9a56ec&quot;,
+          &quot;sourceId&quot;: &quot;S2&quot;,
+          &quot;textSha256&quot;: &quot;f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d&quot;,
+          &quot;sourceVersion&quot;: &quot;v2-accepted-knowledge-projection&quot;,
+          &quot;sourceSha256&quot;: &quot;e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d&quot;,
+          &quot;chapterId&quot;: &quot;14.65&quot;,
+          &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+          &quot;text&quot;: &quot;先核对证据的对象、范围、时间和主张权威；若条件对齐后高质量解释仍然冲突，就保留争议与有资格的替代读取，不强迫选出赢家。\n关于“日本已经进入重组”的主张，Book VII 要求核对证据与主张是否匹配，而不能直接把这个主张当作事实。结构重组需要关系、载体、路径或约束变化的重复证据；当下讯号和短期数据不足以支持这种主张。判断前应核对来源权威、观察窗口、尺度和反证；证据不足时保留 UNKNOWN。\n八字和占星的说法一致，首先可能是模型解释的汇聚，不等于独立证据已经确认。它们可能共享输入、上游假设或相近语义；即使模型确实不同，也要看现实记录是否独立支持这个主题，不能用同意次数代替证据。\n不同说法可能观察不同范围、层次或时间条件，不能在没有证据时强迫选出赢家。先核对对象、时间、尺度和解释步骤；若条件对齐后仍有冲突，就保留有资格的候选与争议，等待能区分它们的现实证据。&quot;,
+          &quot;support&quot;: {
+            &quot;startOffset&quot;: 0,
+            &quot;endOffset&quot;: 382,
+            &quot;textSha256&quot;: &quot;f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d&quot;
+          },
+          &quot;pdfPages&quot;: {
+            &quot;start&quot;: 242,
+            &quot;end&quot;: 242
+          },
+          &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-7&amp;chapter=14.65&amp;q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&amp;locale=zh-Hans&quot;
+        }
+      ],
+      &quot;semanticAcceptance&quot;: false
+    }
+  },
+  &quot;answerQuality&quot;: &quot;NOT_RUN_NO_PROVIDER_CALL&quot;,
+  &quot;storageReads&quot;: [
+    &quot;books/book-7/materialized/v2-e19b662d8928/approved-knowledge-units-v2/retrieval-corpus.json&quot;
+  ]
+}</pre></details><details><summary>V2-VII-EN — Does failing to observe an object prove that it does not exist?</summary><p>保存ID：review-v2-paid-V2-VII-EN；重开200，重复提交providerCalls=0。合成答案不纳入生成质量统计。</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{
+  &quot;generation&quot;: &quot;SUPPORTED_COMPLETE_WITH_QUALIFICATIONS&quot;,
+  &quot;review&quot;: &quot;CORRECT_RELEASE_THIS_SAMPLE_ONLY&quot;,
+  &quot;semanticGuarantee&quot;: false
+}</pre><h4>V2-VII-EN / call 1 / completed</h4><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{&quot;locale&quot;:&quot;en&quot;,&quot;answer&quot;:&quot;No. Failing to observe an object does not prove that it does not exist: the available evidence may be unable to reliably distinguish the object, and limited resolution, observation range, or time window may leave its existence unknown.&quot;,&quot;supportMap&quot;:[{&quot;statement&quot;:&quot;Failing to observe an object does not prove that it does not exist: the available evidence may be unable to reliably distinguish the object, and limited resolution, observation range, or time window may leave its existence unknown.&quot;,&quot;sourceIds&quot;:[&quot;S1&quot;],&quot;relation&quot;:&quot;DIRECT_SUPPORT&quot;}]}</pre><p>原始输出：tools/review/membership-ask-credit-r1/review-v2-paid-response-V2-VII-EN-1.json；514d6571717585fc5b10dac83a9ceaf58ca8a8b5fb7f39421b1d11a1c8540955；input 473, cached 0, cache-write 0, output 196。</p><h4>V2-VII-EN / call 2 / completed</h4><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{&quot;scopeId&quot;:&quot;R-8c6975574e9bc0d8&quot;,&quot;verdict&quot;:&quot;DELIVER&quot;,&quot;answerCompleteness&quot;:&quot;COMPLETE&quot;,&quot;substantiveAnsweredUnitIds&quot;:[&quot;U1&quot;,&quot;U2&quot;],&quot;issues&quot;:[],&quot;checks&quot;:[{&quot;unitId&quot;:&quot;U1&quot;,&quot;sourceIds&quot;:[&quot;S1&quot;],&quot;assessment&quot;:&quot;SUPPORTED&quot;,&quot;reason&quot;:&quot;S1 states that not observing an object does not mean it does not exist.&quot;},{&quot;unitId&quot;:&quot;U2&quot;,&quot;sourceIds&quot;:[&quot;S1&quot;],&quot;assessment&quot;:&quot;SUPPORTED&quot;,&quot;reason&quot;:&quot;S1 supports unreliable distinction by current evidence and identifies limited resolution, observation range, and time window as factors that may leave existence unknown.&quot;}],&quot;missingScope&quot;:&quot;&quot;}</pre><p>原始输出：tools/review/membership-ask-credit-r1/review-v2-paid-response-V2-VII-EN-2.json；60de60e2f6a1575f617708bb0c1caddfe1d6852a3c7fe5e5a2a7ce25a8e1189e；input 762, cached 0, cache-write 0, output 407。</p><h4>实际检索及来源包</h4><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{
+  &quot;retrievalQuery&quot;: &quot;不 观察 存在 证据&quot;,
+  &quot;httpStatus&quot;: 200,
+  &quot;permissionMode&quot;: &quot;IN_PROCESS_ISOLATED_FRAGMENT_ONLY_NOT_CLIENT_QA&quot;,
+  &quot;candidates&quot;: [
+    {
+      &quot;chapter&quot;: &quot;14.86&quot;,
+      &quot;score&quot;: 637.1371659275311,
+      &quot;argument&quot;: {
+        &quot;argumentId&quot;: &quot;ACCEPTED_KNOWLEDGE_PROJECTION&quot;,
+        &quot;type&quot;: &quot;BOUNDARY&quot;,
+        &quot;startOffset&quot;: 0,
+        &quot;endOffset&quot;: 59,
+        &quot;textSha256&quot;: &quot;c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d&quot;,
+        &quot;comparisonSubjects&quot;: null
+      },
+      &quot;sourceSha256&quot;: &quot;e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d&quot;
+    }
+  ],
+  &quot;errors&quot;: [],
+  &quot;pack&quot;: {
+    &quot;question&quot;: &quot;Does failing to observe an object prove that it does not exist?&quot;,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;sources&quot;: [
+      {
+        &quot;id&quot;: &quot;S1&quot;,
+        &quot;sourceCode&quot;: &quot;MKS-BOOK-7-V2-ACCEPTED-KNOWLEDGE-UNITS-ZH&quot;,
+        &quot;sourceVersion&quot;: &quot;v2-accepted-knowledge-projection&quot;,
+        &quot;sourceSha256&quot;: &quot;e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d&quot;,
+        &quot;sourceAcceptanceDigest&quot;: &quot;fcf3fcd3ef7d7115c105799a0bb5a75f561d774a7043acfe3228840d31e2de3b&quot;,
+        &quot;chapterId&quot;: &quot;14.86&quot;,
+        &quot;heading&quot;: &quot;未观察不等于不存在&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;pdfPages&quot;: {
+          &quot;start&quot;: 324,
+          &quot;end&quot;: 324
+        },
+        &quot;support&quot;: {
+          &quot;startOffset&quot;: 0,
+          &quot;endOffset&quot;: 59,
+          &quot;textSha256&quot;: &quot;c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d&quot;
+        },
+        &quot;text&quot;: &quot;没有观察到只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能留下未知。未观察不等于不存在，未知不等于零。&quot;,
+        &quot;readingHref&quot;: null,
+        &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-7&amp;chapter=14.86&amp;q=Does+failing+to+observe+an+object+prove+that+it+does+not+exist%3F&amp;locale=en&quot;,
+        &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+        &quot;purchaseHref&quot;: null,
+        &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+        &quot;permissions&quot;: {
+          &quot;knowledgeExcerpt&quot;: true,
+          &quot;fullTextDownload&quot;: false,
+          &quot;reconstructBook&quot;: false
+        }
+      }
+    ],
+    &quot;glossary&quot;: [],
+    &quot;customerContext&quot;: null,
+    &quot;constraints&quot;: {
+      &quot;answerLocale&quot;: &quot;en&quot;,
+      &quot;sourceLanguagesDisclosed&quot;: true,
+      &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+      &quot;sourceOnly&quot;: true,
+      &quot;noGeneralKnowledgeFallback&quot;: true,
+      &quot;preserveConditions&quot;: true,
+      &quot;directAnswerWhenSupported&quot;: true,
+      &quot;claimCitationsRequired&quot;: true,
+      &quot;compareBothSides&quot;: true,
+      &quot;untrustedSourceInstructions&quot;: true,
+      &quot;noPrivateTextReconstruction&quot;: true,
+      &quot;noOCRPromotion&quot;: true,
+      &quot;noGlossaryPromotion&quot;: true,
+      &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+      &quot;purchaseMustNotReplaceAnswer&quot;: true
+    },
+    &quot;state&quot;: &quot;SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED&quot;,
+    &quot;tokenEstimate&quot;: {
+      &quot;estimated&quot;: 918,
+      &quot;conservativeInputTokenCeiling&quot;: 2347,
+      &quot;actualTokens&quot;: null,
+      &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+    },
+    &quot;packDigest&quot;: &quot;cf79928e1a23ff862400c4d3f8c66c4a10486689dc1fd71fda1546ca006073b7&quot;
+  },
+  &quot;requestCandidate&quot;: {
+    &quot;contract&quot;: &quot;MEMBERSHIP_FRAGMENT_CANDIDATE_OFFLINE_ONLY&quot;,
+    &quot;question&quot;: &quot;Does failing to observe an object prove that it does not exist?&quot;,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;packDigest&quot;: &quot;cf79928e1a23ff862400c4d3f8c66c4a10486689dc1fd71fda1546ca006073b7&quot;,
+    &quot;glossary&quot;: [],
+    &quot;coverage&quot;: {
+      &quot;requestedGroups&quot;: [],
+      &quot;missingGroups&quot;: [],
+      &quot;comparison&quot;: false,
+      &quot;comparisonRelation&quot;: &quot;REQUIRES_ARGUMENT_LEVEL_SUPPORT_NOT_KEYWORD_PRESENCE&quot;,
+      &quot;state&quot;: &quot;CANDIDATE_COVERAGE_REQUIRES_SEMANTIC_REVIEW&quot;,
+      &quot;semanticPass&quot;: false
+    },
+    &quot;sources&quot;: [
+      {
+        &quot;fragmentId&quot;: &quot;F-8c2993097f7fdc9ab3a3e2c3210ad29ec14a3a13af67c4fa3943b8eba197e642&quot;,
+        &quot;chapterId&quot;: &quot;14.86&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;text&quot;: &quot;没有观察到只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能留下未知。未观察不等于不存在，未知不等于零。&quot;
+      }
+    ],
+    &quot;constraints&quot;: {
+      &quot;answerLocale&quot;: &quot;en&quot;,
+      &quot;sourceLanguagesDisclosed&quot;: true,
+      &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+      &quot;sourceOnly&quot;: true,
+      &quot;noGeneralKnowledgeFallback&quot;: true,
+      &quot;preserveConditions&quot;: true,
+      &quot;directAnswerWhenSupported&quot;: true,
+      &quot;claimCitationsRequired&quot;: true,
+      &quot;compareBothSides&quot;: true,
+      &quot;untrustedSourceInstructions&quot;: true,
+      &quot;noPrivateTextReconstruction&quot;: true,
+      &quot;noOCRPromotion&quot;: true,
+      &quot;noGlossaryPromotion&quot;: true,
+      &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+      &quot;purchaseMustNotReplaceAnswer&quot;: true,
+      &quot;answerSchema&quot;: {
+        &quot;locale&quot;: &quot;en&quot;,
+        &quot;claims&quot;: [
+          {
+            &quot;text&quot;: &quot;Faithful paraphrase&quot;,
+            &quot;supportFragmentIds&quot;: [
+              &quot;fragment ID&quot;
+            ]
+          }
+        ],
+        &quot;boundary&quot;: &quot;State specific missing evidence&quot;
+      },
+      &quot;directQuotes&quot;: &quot;DO_NOT_GENERATE; SERVER_RENDERS_EXACT_SOURCE&quot;,
+      &quot;qualifiers&quot;: &quot;Preserve uncertainty, conditions and scope; general running conditions do not prove component replacement conditions&quot;,
+      &quot;semanticReview&quot;: &quot;FRAGMENT_ID_EXISTENCE_IS_NOT_ENTAILMENT&quot;,
+      &quot;knownMissingEvidence&quot;: [],
+      &quot;providerAuthorization&quot;: false
+    },
+    &quot;catalog&quot;: {
+      &quot;packDigest&quot;: &quot;cf79928e1a23ff862400c4d3f8c66c4a10486689dc1fd71fda1546ca006073b7&quot;,
+      &quot;fragments&quot;: [
+        {
+          &quot;fragmentId&quot;: &quot;F-8c2993097f7fdc9ab3a3e2c3210ad29ec14a3a13af67c4fa3943b8eba197e642&quot;,
+          &quot;sourceId&quot;: &quot;S1&quot;,
+          &quot;textSha256&quot;: &quot;c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d&quot;,
+          &quot;sourceVersion&quot;: &quot;v2-accepted-knowledge-projection&quot;,
+          &quot;sourceSha256&quot;: &quot;e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d&quot;,
+          &quot;chapterId&quot;: &quot;14.86&quot;,
+          &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+          &quot;text&quot;: &quot;没有观察到只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能留下未知。未观察不等于不存在，未知不等于零。&quot;,
+          &quot;support&quot;: {
+            &quot;startOffset&quot;: 0,
+            &quot;endOffset&quot;: 59,
+            &quot;textSha256&quot;: &quot;c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d&quot;
+          },
+          &quot;pdfPages&quot;: {
+            &quot;start&quot;: 324,
+            &quot;end&quot;: 324
+          },
+          &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-7&amp;chapter=14.86&amp;q=Does+failing+to+observe+an+object+prove+that+it+does+not+exist%3F&amp;locale=en&quot;
+        }
+      ],
+      &quot;semanticAcceptance&quot;: false
+    }
+  },
+  &quot;answerQuality&quot;: &quot;NOT_RUN_NO_PROVIDER_CALL&quot;,
+  &quot;storageReads&quot;: [
+    &quot;books/book-7/materialized/v2-e19b662d8928/approved-knowledge-units-v2/retrieval-corpus.json&quot;
+  ]
+}</pre></details><details><summary>V2-RECOVERY — 正常维持与发生损坏后恢复有什么区别？</summary><p>保存ID：review-v2-paid-V2-RECOVERY；重开200，重复提交providerCalls=0。合成答案不纳入生成质量统计。</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{
+  &quot;generation&quot;: &quot;UNSUPPORTED_ATTRIBUTION_GENERAL_OPERATION_TO_DAMAGE_RECOVERY&quot;,
+  &quot;review&quot;: &quot;INCOMPLETE_1400_TOKENS_AND_PARTIAL_STREAM_DELIVER_WITH_ISSUES_CONFLICT&quot;,
+  &quot;delivery&quot;: &quot;CORRECT_FAIL_CLOSED_TECHNICALLY_NOT_PROVEN_SEMANTIC_REJECTION&quot;,
+  &quot;partialDelivery&quot;: false,
+  &quot;limitations&quot;: &quot;本资料 wording is broader than this admitted source pack; not delivered&quot;
+}</pre><h4>V2-RECOVERY / call 1 / completed</h4><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;answer&quot;: &quot;材料能明确支持的区别是：正常维持是在持续运行中处理已经产生的历史、责任、依赖等后果，并不以运行失败为前提，也不只是发生故障后的修理。对于发生损坏后的恢复，材料只提到需要保留恢复空间、释放负荷，并让结构能够修正、经验进入下一轮。因此，本资料没有对损坏后的恢复过程作专门定义，也没有建立它与日常维护之间的完整边界。&quot;,
+  &quot;supportMap&quot;: [
+    {
+      &quot;statement&quot;: &quot;材料能明确支持的区别是：正常维持是在持续运行中处理已经产生的历史、责任、依赖等后果，并不以运行失败为前提，也不只是发生故障后的修理。&quot;,
+      &quot;sourceIds&quot;: [
+        &quot;S1&quot;
+      ],
+      &quot;relation&quot;: &quot;DIRECT_SUPPORT&quot;
+    },
+    {
+      &quot;statement&quot;: &quot;对于发生损坏后的恢复，材料只提到需要保留恢复空间、释放负荷，并让结构能够修正、经验进入下一轮。&quot;,
+      &quot;sourceIds&quot;: [
+        &quot;S2&quot;
+      ],
+      &quot;relation&quot;: &quot;DIRECT_SUPPORT&quot;
+    }
+  ],
+  &quot;limitations&quot;: &quot;本资料未专门定义“发生损坏后的恢复”的具体过程，也未充分说明恢复是否属于维护的一部分。&quot;
+}</pre><p>原始输出：tools/review/membership-ask-credit-r1/review-v2-paid-response-V2-RECOVERY-1.json；8425ab9a27ea3ab8e4ae28e462900996df29b99475e366a5644ef22fc7fe56b1；input 1235, cached 0, cache-write 1232, output 1339。</p><h4>V2-RECOVERY / call 2 / incomplete</h4><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{&quot;scopeId&quot;:&quot;R-15a97e00b43e1b0b&quot;,&quot;verdict&quot;:&quot;DELIVER&quot;,&quot;answerCompleteness&quot;:&quot;PARTIAL&quot;,&quot;substantiveAnsweredUnitIds&quot;:[&quot;U1&quot;],&quot;issues&quot;:[{&quot;unitId&quot;:&quot;U2&quot;,&quot;kind&quot;:&quot;UNSUPPORTED_INFERENCE&quot;,&quot;reason&quot;:&quot;S2讨论的是持续运行所需的恢复空间、负荷释放、结构修正和经验进入下一轮，并未具体讨论“发生损坏后的恢复”；将这些一般性的持续条件直接归属于损坏后的恢复，超出了来源支持范围。&quot;}],&quot;checks&quot;:[{&quot;unitId&quot;:&quot;U1&quot;,&quot;sourceIds&quot;:[&quot;S1&quot;],&quot;assessment&quot;:&quot;SUPPORTED&quot;,&quot;reason&quot;:&quot;S1明确说明维护并非因运行失败才出现，首先是处理持续运行产生的历史、责任、依赖等后果，并明确维护首先不是修理。&quot;},{&quot;unitId&quot;:&quot;U2&quot;,&quot;sourceIds&quot;:[&quot;S2&quot;],&quot;assessment&quot;:&quot;UNSUPPORTED&quot;,&quot;reason&quot;:&quot;S2支持关于持续运行中保留后续条件、释放负荷、结构修正和经验进入下一轮的表述，但未将其定义为发生损坏后的恢复过程。&quot;},{&quot;unitId&quot;:&quot;U3&quot;,&quot;sourceIds&quot;:[&quot;S1&quot;,&quot;S2&quot;],&quot;assessment&quot;:&quot;SUPPORTED&quot;,&quot;reason&quot;:&quot;S1说明维护的性质，S2说明持续关系，但两者均未专门定义发生损坏后的恢复，也未建立其与日常维护之间的完整边界。&quot;},{&quot;unitId&quot;:&quot;U4&quot;,&quot;sourceIds&quot;:[&quot;S1&quot;,&quot;S2&quot;],&quot;assessment&quot;:&quot;SUPPORTED&quot;,&quot;reason&quot;:&quot;来源分别讨论维护和持续运行条件，没有充分说明恢复是否属于维护的一部分，也没有给出损坏后恢复的具体过程。&quot;}],&quot;missingScope&quot;:&quot;来源未具体</pre><p>原始输出：tools/review/membership-ask-credit-r1/review-v2-paid-response-V2-RECOVERY-2.json；8efd360ab65cd6b92ca5e7560751a196f72fca6fc073dafe38637ae01d9cbc50；input 1791, cached 0, cache-write 1788, output 1400。</p><h4>实际检索及来源包</h4><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{
+  &quot;retrievalQuery&quot;: &quot;正常维持与发生损坏后恢复有什么区别？&quot;,
+  &quot;httpStatus&quot;: 200,
+  &quot;permissionMode&quot;: &quot;IN_PROCESS_ISOLATED_FRAGMENT_ONLY_NOT_CLIENT_QA&quot;,
+  &quot;candidates&quot;: [
+    {
+      &quot;chapter&quot;: &quot;CM-B3V1-P8-S001&quot;,
+      &quot;score&quot;: 1172.9639536865986,
+      &quot;argument&quot;: {
+        &quot;argumentId&quot;: &quot;HISTORY_CREATES_MAINTENANCE&quot;,
+        &quot;type&quot;: &quot;DEFINITION&quot;,
+        &quot;startOffset&quot;: 266,
+        &quot;endOffset&quot;: 938,
+        &quot;textSha256&quot;: &quot;7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3&quot;,
+        &quot;comparisonSubjects&quot;: null
+      },
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;
+    },
+    {
+      &quot;chapter&quot;: &quot;CM-B3V1-P8-S059&quot;,
+      &quot;score&quot;: 1055.4474333991182,
+      &quot;argument&quot;: {
+        &quot;argumentId&quot;: &quot;CONTINUATION_V_SUSTAINABILITY&quot;,
+        &quot;type&quot;: &quot;DISTINCTION&quot;,
+        &quot;startOffset&quot;: 33,
+        &quot;endOffset&quot;: 398,
+        &quot;textSha256&quot;: &quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;,
+        &quot;comparisonSubjects&quot;: null
+      },
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;
+    },
+    {
+      &quot;chapter&quot;: &quot;CM-B3V1-P8-S006&quot;,
+      &quot;score&quot;: 252.10509833543477,
+      &quot;argument&quot;: null,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;
+    },
+    {
+      &quot;chapter&quot;: &quot;CM-B3V1-P8-S008&quot;,
+      &quot;score&quot;: 56.6419203206308,
+      &quot;argument&quot;: null,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;
+    }
+  ],
+  &quot;errors&quot;: [],
+  &quot;pack&quot;: {
+    &quot;question&quot;: &quot;正常维持与发生损坏后恢复有什么区别？&quot;,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;sources&quot;: [
+      {
+        &quot;id&quot;: &quot;S1&quot;,
+        &quot;sourceCode&quot;: &quot;MKS-BOOK-3-OWNER-FINAL-EFBFDD21-ZH-HANS&quot;,
+        &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+        &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+        &quot;sourceAcceptanceDigest&quot;: &quot;2567043c746a447202fc6df3197f23df2758b55ee49008d4acbf27907c8912a8&quot;,
+        &quot;chapterId&quot;: &quot;CM-B3V1-P8-S001&quot;,
+        &quot;heading&quot;: &quot;维持出现 | 为什么持续运行必然产生维护需求&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;pdfPages&quot;: {
+          &quot;start&quot;: 3,
+          &quot;end&quot;: 6
+        },
+        &quot;support&quot;: {
+          &quot;startOffset&quot;: 266,
+          &quot;endOffset&quot;: 938,
+          &quot;textSha256&quot;: &quot;7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3&quot;
+        },
+        &quot;text&quot;: &quot;因此，持续本身具有成本。这并不意味着运行是一种需要被避免的\n消耗，也不意味着越少运行越好。生命之所以能够发展，关系之所以能够\n深化，组织之所以能够扩大能力，本来就依赖持续运行。真正需要理解的\n是，任何持续都不可能完全没有代价，运行每向前一步，都会同时改变承\n载它的条件。人完成一项工作以后，时间已经被使用，注意已经经历转\n换，身体也已经参与其中；关系经历一次重要事件以后，即使问题已经处\n理，彼此对对方的理解也可能发生变化；组织完成一个项目以后，会留下\n新的经验、流程、资料与责任关系；人工系统每一次扩展功能，也会增加\n新的依赖、接口与维护要求。于是，运行并不是在一个永远不变的背景上\n重复发生。每一次运行都会修改下一次运行的起点。这正是维护需求出现\n的根本原因。如果载体每一轮运行以后都能够完全恢复到原来位置，如果\n资源可以无限补充，如果所有责任都能够自然结束，如果任何结构都不会\n随着时间变化，那么维护或许真的可以被理解成偶尔发生的附加工作。然\n而，真实世界并不是如此。身体会疲劳，关系会积累历史，组织会形成路\n径依赖，人工结构会产生版本、依赖与兼容问题；过去发生的运行会持续\n参与未来。\n\f\n因此，维护并不是因为运行失败才出现。恰恰相反，只要运行成功\n地持续足够久，维护就一定会出现。一辆从未被使用的机器几乎没有运行\n损耗，一个从未建立的组织也不存在内部协调成本；真正需要维护的，总\n是那些已经进入时间、反复承担现实并形成连续的结构。越是长期存在的\n运行，越需要处理它过去留下的历史。这说明，维护首先不是修理，而是\n处理持续所产生的后果。&quot;,
+        &quot;readingHref&quot;: &quot;/books/reality-continuity/&quot;,
+        &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-3&amp;chapter=CM-B3V1-P8-S001&amp;q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&amp;locale=zh-Hans&quot;,
+        &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+        &quot;purchaseHref&quot;: &quot;/books/reality-continuity/&quot;,
+        &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+        &quot;permissions&quot;: {
+          &quot;knowledgeExcerpt&quot;: true,
+          &quot;fullTextDownload&quot;: false,
+          &quot;reconstructBook&quot;: false
+        }
+      },
+      {
+        &quot;id&quot;: &quot;S2&quot;,
+        &quot;sourceCode&quot;: &quot;MKS-BOOK-3-OWNER-FINAL-EFBFDD21-ZH-HANS&quot;,
+        &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+        &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+        &quot;sourceAcceptanceDigest&quot;: &quot;2567043c746a447202fc6df3197f23df2758b55ee49008d4acbf27907c8912a8&quot;,
+        &quot;chapterId&quot;: &quot;CM-B3V1-P8-S059&quot;,
+        &quot;heading&quot;: &quot;可持续连续 | 为什么真正能够长期存在的运行必须能够改变自己&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;pdfPages&quot;: {
+          &quot;start&quot;: 226,
+          &quot;end&quot;: 231
+        },
+        &quot;support&quot;: {
+          &quot;startOffset&quot;: 33,
+          &quot;endOffset&quot;: 398,
+          &quot;textSha256&quot;: &quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;
+        },
+        &quot;text&quot;: &quot;运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。&quot;,
+        &quot;readingHref&quot;: &quot;/books/reality-continuity/&quot;,
+        &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-3&amp;chapter=CM-B3V1-P8-S059&amp;q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&amp;locale=zh-Hans&quot;,
+        &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+        &quot;purchaseHref&quot;: &quot;/books/reality-continuity/&quot;,
+        &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+        &quot;permissions&quot;: {
+          &quot;knowledgeExcerpt&quot;: true,
+          &quot;fullTextDownload&quot;: false,
+          &quot;reconstructBook&quot;: false
+        }
+      }
+    ],
+    &quot;glossary&quot;: [],
+    &quot;customerContext&quot;: null,
+    &quot;constraints&quot;: {
+      &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+      &quot;sourceLanguagesDisclosed&quot;: true,
+      &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+      &quot;sourceOnly&quot;: true,
+      &quot;noGeneralKnowledgeFallback&quot;: true,
+      &quot;preserveConditions&quot;: true,
+      &quot;directAnswerWhenSupported&quot;: true,
+      &quot;claimCitationsRequired&quot;: true,
+      &quot;compareBothSides&quot;: true,
+      &quot;untrustedSourceInstructions&quot;: true,
+      &quot;noPrivateTextReconstruction&quot;: true,
+      &quot;noOCRPromotion&quot;: true,
+      &quot;noGlossaryPromotion&quot;: true,
+      &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+      &quot;purchaseMustNotReplaceAnswer&quot;: true
+    },
+    &quot;state&quot;: &quot;SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED&quot;,
+    &quot;tokenEstimate&quot;: {
+      &quot;estimated&quot;: 3065,
+      &quot;conservativeInputTokenCeiling&quot;: 6642,
+      &quot;actualTokens&quot;: null,
+      &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+    },
+    &quot;packDigest&quot;: &quot;d9eefbce44ad9c7a0667cfe54558d2c1b26314cfa94b2ae4bf2c469761801d2b&quot;
+  },
+  &quot;requestCandidate&quot;: {
+    &quot;contract&quot;: &quot;MEMBERSHIP_FRAGMENT_CANDIDATE_OFFLINE_ONLY&quot;,
+    &quot;question&quot;: &quot;正常维持与发生损坏后恢复有什么区别？&quot;,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;packDigest&quot;: &quot;d9eefbce44ad9c7a0667cfe54558d2c1b26314cfa94b2ae4bf2c469761801d2b&quot;,
+    &quot;glossary&quot;: [],
+    &quot;coverage&quot;: {
+      &quot;requestedGroups&quot;: [
+        &quot;maintenance&quot;,
+        &quot;recovery&quot;
+      ],
+      &quot;missingGroups&quot;: [],
+      &quot;comparison&quot;: true,
+      &quot;comparisonRelation&quot;: &quot;REQUIRES_ARGUMENT_LEVEL_SUPPORT_NOT_KEYWORD_PRESENCE&quot;,
+      &quot;state&quot;: &quot;CANDIDATE_COVERAGE_REQUIRES_SEMANTIC_REVIEW&quot;,
+      &quot;semanticPass&quot;: false
+    },
+    &quot;sources&quot;: [
+      {
+        &quot;fragmentId&quot;: &quot;F-8c1bdea46e93d08811f233ab30dcdea5eeab42aafe67879696bbf1c207d6592a&quot;,
+        &quot;chapterId&quot;: &quot;CM-B3V1-P8-S001&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;text&quot;: &quot;因此，持续本身具有成本。这并不意味着运行是一种需要被避免的\n消耗，也不意味着越少运行越好。生命之所以能够发展，关系之所以能够\n深化，组织之所以能够扩大能力，本来就依赖持续运行。真正需要理解的\n是，任何持续都不可能完全没有代价，运行每向前一步，都会同时改变承\n载它的条件。人完成一项工作以后，时间已经被使用，注意已经经历转\n换，身体也已经参与其中；关系经历一次重要事件以后，即使问题已经处\n理，彼此对对方的理解也可能发生变化；组织完成一个项目以后，会留下\n新的经验、流程、资料与责任关系；人工系统每一次扩展功能，也会增加\n新的依赖、接口与维护要求。于是，运行并不是在一个永远不变的背景上\n重复发生。每一次运行都会修改下一次运行的起点。这正是维护需求出现\n的根本原因。如果载体每一轮运行以后都能够完全恢复到原来位置，如果\n资源可以无限补充，如果所有责任都能够自然结束，如果任何结构都不会\n随着时间变化，那么维护或许真的可以被理解成偶尔发生的附加工作。然\n而，真实世界并不是如此。身体会疲劳，关系会积累历史，组织会形成路\n径依赖，人工结构会产生版本、依赖与兼容问题；过去发生的运行会持续\n参与未来。\n\f\n因此，维护并不是因为运行失败才出现。恰恰相反，只要运行成功\n地持续足够久，维护就一定会出现。一辆从未被使用的机器几乎没有运行\n损耗，一个从未建立的组织也不存在内部协调成本；真正需要维护的，总\n是那些已经进入时间、反复承担现实并形成连续的结构。越是长期存在的\n运行，越需要处理它过去留下的历史。这说明，维护首先不是修理，而是\n处理持续所产生的后果。&quot;
+      },
+      {
+        &quot;fragmentId&quot;: &quot;F-ebb6043df46c213571580cbf64914e0bdced10965da83aa75968d3befde5a41a&quot;,
+        &quot;chapterId&quot;: &quot;CM-B3V1-P8-S059&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;text&quot;: &quot;运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。&quot;
+      }
+    ],
+    &quot;constraints&quot;: {
+      &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+      &quot;sourceLanguagesDisclosed&quot;: true,
+      &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+      &quot;sourceOnly&quot;: true,
+      &quot;noGeneralKnowledgeFallback&quot;: true,
+      &quot;preserveConditions&quot;: true,
+      &quot;directAnswerWhenSupported&quot;: true,
+      &quot;claimCitationsRequired&quot;: true,
+      &quot;compareBothSides&quot;: true,
+      &quot;untrustedSourceInstructions&quot;: true,
+      &quot;noPrivateTextReconstruction&quot;: true,
+      &quot;noOCRPromotion&quot;: true,
+      &quot;noGlossaryPromotion&quot;: true,
+      &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+      &quot;purchaseMustNotReplaceAnswer&quot;: true,
+      &quot;answerSchema&quot;: {
+        &quot;locale&quot;: &quot;zh-Hans&quot;,
+        &quot;claims&quot;: [
+          {
+            &quot;text&quot;: &quot;Faithful paraphrase&quot;,
+            &quot;supportFragmentIds&quot;: [
+              &quot;fragment ID&quot;
+            ]
+          }
+        ],
+        &quot;boundary&quot;: &quot;State specific missing evidence&quot;
+      },
+      &quot;directQuotes&quot;: &quot;DO_NOT_GENERATE; SERVER_RENDERS_EXACT_SOURCE&quot;,
+      &quot;qualifiers&quot;: &quot;Preserve uncertainty, conditions and scope; general running conditions do not prove component replacement conditions&quot;,
+      &quot;semanticReview&quot;: &quot;FRAGMENT_ID_EXISTENCE_IS_NOT_ENTAILMENT&quot;,
+      &quot;knownMissingEvidence&quot;: [],
+      &quot;providerAuthorization&quot;: false
+    },
+    &quot;catalog&quot;: {
+      &quot;packDigest&quot;: &quot;d9eefbce44ad9c7a0667cfe54558d2c1b26314cfa94b2ae4bf2c469761801d2b&quot;,
+      &quot;fragments&quot;: [
+        {
+          &quot;fragmentId&quot;: &quot;F-8c1bdea46e93d08811f233ab30dcdea5eeab42aafe67879696bbf1c207d6592a&quot;,
+          &quot;sourceId&quot;: &quot;S1&quot;,
+          &quot;textSha256&quot;: &quot;7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3&quot;,
+          &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+          &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+          &quot;chapterId&quot;: &quot;CM-B3V1-P8-S001&quot;,
+          &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+          &quot;text&quot;: &quot;因此，持续本身具有成本。这并不意味着运行是一种需要被避免的\n消耗，也不意味着越少运行越好。生命之所以能够发展，关系之所以能够\n深化，组织之所以能够扩大能力，本来就依赖持续运行。真正需要理解的\n是，任何持续都不可能完全没有代价，运行每向前一步，都会同时改变承\n载它的条件。人完成一项工作以后，时间已经被使用，注意已经经历转\n换，身体也已经参与其中；关系经历一次重要事件以后，即使问题已经处\n理，彼此对对方的理解也可能发生变化；组织完成一个项目以后，会留下\n新的经验、流程、资料与责任关系；人工系统每一次扩展功能，也会增加\n新的依赖、接口与维护要求。于是，运行并不是在一个永远不变的背景上\n重复发生。每一次运行都会修改下一次运行的起点。这正是维护需求出现\n的根本原因。如果载体每一轮运行以后都能够完全恢复到原来位置，如果\n资源可以无限补充，如果所有责任都能够自然结束，如果任何结构都不会\n随着时间变化，那么维护或许真的可以被理解成偶尔发生的附加工作。然\n而，真实世界并不是如此。身体会疲劳，关系会积累历史，组织会形成路\n径依赖，人工结构会产生版本、依赖与兼容问题；过去发生的运行会持续\n参与未来。\n\f\n因此，维护并不是因为运行失败才出现。恰恰相反，只要运行成功\n地持续足够久，维护就一定会出现。一辆从未被使用的机器几乎没有运行\n损耗，一个从未建立的组织也不存在内部协调成本；真正需要维护的，总\n是那些已经进入时间、反复承担现实并形成连续的结构。越是长期存在的\n运行，越需要处理它过去留下的历史。这说明，维护首先不是修理，而是\n处理持续所产生的后果。&quot;,
+          &quot;support&quot;: {
+            &quot;startOffset&quot;: 266,
+            &quot;endOffset&quot;: 938,
+            &quot;textSha256&quot;: &quot;7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3&quot;
+          },
+          &quot;pdfPages&quot;: {
+            &quot;start&quot;: 3,
+            &quot;end&quot;: 6
+          },
+          &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-3&amp;chapter=CM-B3V1-P8-S001&amp;q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&amp;locale=zh-Hans&quot;
+        },
+        {
+          &quot;fragmentId&quot;: &quot;F-ebb6043df46c213571580cbf64914e0bdced10965da83aa75968d3befde5a41a&quot;,
+          &quot;sourceId&quot;: &quot;S2&quot;,
+          &quot;textSha256&quot;: &quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;,
+          &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+          &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+          &quot;chapterId&quot;: &quot;CM-B3V1-P8-S059&quot;,
+          &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+          &quot;text&quot;: &quot;运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。&quot;,
+          &quot;support&quot;: {
+            &quot;startOffset&quot;: 33,
+            &quot;endOffset&quot;: 398,
+            &quot;textSha256&quot;: &quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;
+          },
+          &quot;pdfPages&quot;: {
+            &quot;start&quot;: 226,
+            &quot;end&quot;: 231
+          },
+          &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-3&amp;chapter=CM-B3V1-P8-S059&amp;q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&amp;locale=zh-Hans&quot;
+        }
+      ],
+      &quot;semanticAcceptance&quot;: false
+    }
+  },
+  &quot;answerQuality&quot;: &quot;NOT_RUN_NO_PROVIDER_CALL&quot;,
+  &quot;storageReads&quot;: [
+    &quot;books/book-3/materialized/owner-final-20261011-efbfdd21fa21/positioned-v1/retrieval-corpus.json&quot;
+  ]
+}</pre></details><details><summary>V2-NEGATION-NEGATIVE — 一次观测没有发现目标，这是否足以认定目标不存在？</summary><p>保存ID：review-v2-paid-V2-NEGATION-NEGATIVE；重开200，重复提交providerCalls=0。合成答案不纳入生成质量统计。</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{
+  &quot;generation&quot;: &quot;NOT_APPLICABLE_SYNTHETIC&quot;,
+  &quot;review&quot;: &quot;CORRECT_REJECTION&quot;,
+  &quot;caveat&quot;: &quot;No invented repair or automatic correction&quot;
+}</pre><h4>合成错误输入（非模型生成）</h4><pre>{
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;answer&quot;: &quot;只要没有观察到一个对象，就能确定它不存在。&quot;,
+  &quot;supportMap&quot;: [
+    {
+      &quot;statement&quot;: &quot;只要没有观察到一个对象，就能确定它不存在。&quot;,
+      &quot;sourceIds&quot;: [
+        &quot;S1&quot;
+      ],
+      &quot;relation&quot;: &quot;DIRECT_SUPPORT&quot;
+    }
+  ]
+}</pre><h4>V2-NEGATION-NEGATIVE / call 1 / completed</h4><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{&quot;scopeId&quot;:&quot;R-7501507560060ce1&quot;,&quot;verdict&quot;:&quot;REJECT&quot;,&quot;answerCompleteness&quot;:&quot;FAILED&quot;,&quot;substantiveAnsweredUnitIds&quot;:[],&quot;issues&quot;:[{&quot;unitId&quot;:&quot;U1&quot;,&quot;kind&quot;:&quot;CONTRADICTED_AND_UNSUPPORTED&quot;,&quot;reason&quot;:&quot;该断言把未观察到直接等同于不存在，忽略了观察范围、分辨率和时间窗口等限制；S1明确指出未观察不等于不存在，S2也要求证据不足时保留UNKNOWN。&quot;}],&quot;checks&quot;:[{&quot;unitId&quot;:&quot;U1&quot;,&quot;sourceIds&quot;:[&quot;S1&quot;,&quot;S2&quot;],&quot;assessment&quot;:&quot;UNSUPPORTED&quot;,&quot;reason&quot;:&quot;S1直接否定该断言；S2仅支持在证据不足时保留未知，不能支持“只要没有观察到就能确定不存在”。&quot;}],&quot;missingScope&quot;:&quot;需要说明一次未发现目标通常只能表明当前证据不足，不能据此认定目标不存在，并考虑观察范围、分辨率和时间窗口等限制。&quot;}</pre><p>原始输出：tools/review/membership-ask-credit-r1/review-v2-paid-response-V2-NEGATION-NEGATIVE-1.json；030360155042bc20af5bae4cdfe518f2e739e545e5f2b0d8d89975c15d8d08c4；input 1017, cached 0, cache-write 0, output 709。</p><h4>实际检索及来源包</h4><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{
+  &quot;retrievalQuery&quot;: &quot;一次观测没有发现目标，这是否足以认定目标不存在？&quot;,
+  &quot;httpStatus&quot;: 200,
+  &quot;permissionMode&quot;: &quot;IN_PROCESS_ISOLATED_FRAGMENT_ONLY_NOT_CLIENT_QA&quot;,
+  &quot;candidates&quot;: [
+    {
+      &quot;chapter&quot;: &quot;14.86&quot;,
+      &quot;score&quot;: 709.7586130984494,
+      &quot;argument&quot;: {
+        &quot;argumentId&quot;: &quot;ACCEPTED_KNOWLEDGE_PROJECTION&quot;,
+        &quot;type&quot;: &quot;BOUNDARY&quot;,
+        &quot;startOffset&quot;: 0,
+        &quot;endOffset&quot;: 59,
+        &quot;textSha256&quot;: &quot;c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d&quot;,
+        &quot;comparisonSubjects&quot;: null
+      },
+      &quot;sourceSha256&quot;: &quot;e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d&quot;
+    },
+    {
+      &quot;chapter&quot;: &quot;14.65&quot;,
+      &quot;score&quot;: 126.4799480415701,
+      &quot;argument&quot;: {
+        &quot;argumentId&quot;: &quot;ACCEPTED_KNOWLEDGE_PROJECTION&quot;,
+        &quot;type&quot;: &quot;BOUNDARY&quot;,
+        &quot;startOffset&quot;: 0,
+        &quot;endOffset&quot;: 382,
+        &quot;textSha256&quot;: &quot;f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d&quot;,
+        &quot;comparisonSubjects&quot;: null
+      },
+      &quot;sourceSha256&quot;: &quot;e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d&quot;
+    }
+  ],
+  &quot;errors&quot;: [],
+  &quot;pack&quot;: {
+    &quot;question&quot;: &quot;一次观测没有发现目标，这是否足以认定目标不存在？&quot;,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;sources&quot;: [
+      {
+        &quot;id&quot;: &quot;S1&quot;,
+        &quot;sourceCode&quot;: &quot;MKS-BOOK-7-V2-ACCEPTED-KNOWLEDGE-UNITS-ZH&quot;,
+        &quot;sourceVersion&quot;: &quot;v2-accepted-knowledge-projection&quot;,
+        &quot;sourceSha256&quot;: &quot;e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d&quot;,
+        &quot;sourceAcceptanceDigest&quot;: &quot;fcf3fcd3ef7d7115c105799a0bb5a75f561d774a7043acfe3228840d31e2de3b&quot;,
+        &quot;chapterId&quot;: &quot;14.86&quot;,
+        &quot;heading&quot;: &quot;未观察不等于不存在&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;pdfPages&quot;: {
+          &quot;start&quot;: 324,
+          &quot;end&quot;: 324
+        },
+        &quot;support&quot;: {
+          &quot;startOffset&quot;: 0,
+          &quot;endOffset&quot;: 59,
+          &quot;textSha256&quot;: &quot;c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d&quot;
+        },
+        &quot;text&quot;: &quot;没有观察到只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能留下未知。未观察不等于不存在，未知不等于零。&quot;,
+        &quot;readingHref&quot;: null,
+        &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-7&amp;chapter=14.86&amp;q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&amp;locale=zh-Hans&quot;,
+        &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+        &quot;purchaseHref&quot;: null,
+        &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+        &quot;permissions&quot;: {
+          &quot;knowledgeExcerpt&quot;: true,
+          &quot;fullTextDownload&quot;: false,
+          &quot;reconstructBook&quot;: false
+        }
+      },
+      {
+        &quot;id&quot;: &quot;S2&quot;,
+        &quot;sourceCode&quot;: &quot;MKS-BOOK-7-V2-ACCEPTED-KNOWLEDGE-UNITS-ZH&quot;,
+        &quot;sourceVersion&quot;: &quot;v2-accepted-knowledge-projection&quot;,
+        &quot;sourceSha256&quot;: &quot;e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d&quot;,
+        &quot;sourceAcceptanceDigest&quot;: &quot;fcf3fcd3ef7d7115c105799a0bb5a75f561d774a7043acfe3228840d31e2de3b&quot;,
+        &quot;chapterId&quot;: &quot;14.65&quot;,
+        &quot;heading&quot;: &quot;证据权威、排序与冲突&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;pdfPages&quot;: {
+          &quot;start&quot;: 242,
+          &quot;end&quot;: 242
+        },
+        &quot;support&quot;: {
+          &quot;startOffset&quot;: 0,
+          &quot;endOffset&quot;: 382,
+          &quot;textSha256&quot;: &quot;f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d&quot;
+        },
+        &quot;text&quot;: &quot;先核对证据的对象、范围、时间和主张权威；若条件对齐后高质量解释仍然冲突，就保留争议与有资格的替代读取，不强迫选出赢家。\n关于“日本已经进入重组”的主张，Book VII 要求核对证据与主张是否匹配，而不能直接把这个主张当作事实。结构重组需要关系、载体、路径或约束变化的重复证据；当下讯号和短期数据不足以支持这种主张。判断前应核对来源权威、观察窗口、尺度和反证；证据不足时保留 UNKNOWN。\n八字和占星的说法一致，首先可能是模型解释的汇聚，不等于独立证据已经确认。它们可能共享输入、上游假设或相近语义；即使模型确实不同，也要看现实记录是否独立支持这个主题，不能用同意次数代替证据。\n不同说法可能观察不同范围、层次或时间条件，不能在没有证据时强迫选出赢家。先核对对象、时间、尺度和解释步骤；若条件对齐后仍有冲突，就保留有资格的候选与争议，等待能区分它们的现实证据。&quot;,
+        &quot;readingHref&quot;: null,
+        &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-7&amp;chapter=14.65&amp;q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&amp;locale=zh-Hans&quot;,
+        &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+        &quot;purchaseHref&quot;: null,
+        &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+        &quot;permissions&quot;: {
+          &quot;knowledgeExcerpt&quot;: true,
+          &quot;fullTextDownload&quot;: false,
+          &quot;reconstructBook&quot;: false
+        }
+      }
+    ],
+    &quot;glossary&quot;: [],
+    &quot;customerContext&quot;: null,
+    &quot;constraints&quot;: {
+      &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+      &quot;sourceLanguagesDisclosed&quot;: true,
+      &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+      &quot;sourceOnly&quot;: true,
+      &quot;noGeneralKnowledgeFallback&quot;: true,
+      &quot;preserveConditions&quot;: true,
+      &quot;directAnswerWhenSupported&quot;: true,
+      &quot;claimCitationsRequired&quot;: true,
+      &quot;compareBothSides&quot;: true,
+      &quot;untrustedSourceInstructions&quot;: true,
+      &quot;noPrivateTextReconstruction&quot;: true,
+      &quot;noOCRPromotion&quot;: true,
+      &quot;noGlossaryPromotion&quot;: true,
+      &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+      &quot;purchaseMustNotReplaceAnswer&quot;: true
+    },
+    &quot;state&quot;: &quot;SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED&quot;,
+    &quot;tokenEstimate&quot;: {
+      &quot;estimated&quot;: 2123,
+      &quot;conservativeInputTokenCeiling&quot;: 4758,
+      &quot;actualTokens&quot;: null,
+      &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+    },
+    &quot;packDigest&quot;: &quot;57e89f5bc133bc351047a0ac89480e78d1312cf2201c89aab2375757c767f245&quot;
+  },
+  &quot;requestCandidate&quot;: {
+    &quot;contract&quot;: &quot;MEMBERSHIP_FRAGMENT_CANDIDATE_OFFLINE_ONLY&quot;,
+    &quot;question&quot;: &quot;一次观测没有发现目标，这是否足以认定目标不存在？&quot;,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;packDigest&quot;: &quot;57e89f5bc133bc351047a0ac89480e78d1312cf2201c89aab2375757c767f245&quot;,
+    &quot;glossary&quot;: [],
+    &quot;coverage&quot;: {
+      &quot;requestedGroups&quot;: [],
+      &quot;missingGroups&quot;: [],
+      &quot;comparison&quot;: false,
+      &quot;comparisonRelation&quot;: &quot;REQUIRES_ARGUMENT_LEVEL_SUPPORT_NOT_KEYWORD_PRESENCE&quot;,
+      &quot;state&quot;: &quot;CANDIDATE_COVERAGE_REQUIRES_SEMANTIC_REVIEW&quot;,
+      &quot;semanticPass&quot;: false
+    },
+    &quot;sources&quot;: [
+      {
+        &quot;fragmentId&quot;: &quot;F-8c2993097f7fdc9ab3a3e2c3210ad29ec14a3a13af67c4fa3943b8eba197e642&quot;,
+        &quot;chapterId&quot;: &quot;14.86&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;text&quot;: &quot;没有观察到只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能留下未知。未观察不等于不存在，未知不等于零。&quot;
+      },
+      {
+        &quot;fragmentId&quot;: &quot;F-7e9ece8e30e7d8b344dd4a12f79cb5b17ff3e2877298f163c276437ecb9a56ec&quot;,
+        &quot;chapterId&quot;: &quot;14.65&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;text&quot;: &quot;先核对证据的对象、范围、时间和主张权威；若条件对齐后高质量解释仍然冲突，就保留争议与有资格的替代读取，不强迫选出赢家。\n关于“日本已经进入重组”的主张，Book VII 要求核对证据与主张是否匹配，而不能直接把这个主张当作事实。结构重组需要关系、载体、路径或约束变化的重复证据；当下讯号和短期数据不足以支持这种主张。判断前应核对来源权威、观察窗口、尺度和反证；证据不足时保留 UNKNOWN。\n八字和占星的说法一致，首先可能是模型解释的汇聚，不等于独立证据已经确认。它们可能共享输入、上游假设或相近语义；即使模型确实不同，也要看现实记录是否独立支持这个主题，不能用同意次数代替证据。\n不同说法可能观察不同范围、层次或时间条件，不能在没有证据时强迫选出赢家。先核对对象、时间、尺度和解释步骤；若条件对齐后仍有冲突，就保留有资格的候选与争议，等待能区分它们的现实证据。&quot;
+      }
+    ],
+    &quot;constraints&quot;: {
+      &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+      &quot;sourceLanguagesDisclosed&quot;: true,
+      &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+      &quot;sourceOnly&quot;: true,
+      &quot;noGeneralKnowledgeFallback&quot;: true,
+      &quot;preserveConditions&quot;: true,
+      &quot;directAnswerWhenSupported&quot;: true,
+      &quot;claimCitationsRequired&quot;: true,
+      &quot;compareBothSides&quot;: true,
+      &quot;untrustedSourceInstructions&quot;: true,
+      &quot;noPrivateTextReconstruction&quot;: true,
+      &quot;noOCRPromotion&quot;: true,
+      &quot;noGlossaryPromotion&quot;: true,
+      &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+      &quot;purchaseMustNotReplaceAnswer&quot;: true,
+      &quot;answerSchema&quot;: {
+        &quot;locale&quot;: &quot;zh-Hans&quot;,
+        &quot;claims&quot;: [
+          {
+            &quot;text&quot;: &quot;Faithful paraphrase&quot;,
+            &quot;supportFragmentIds&quot;: [
+              &quot;fragment ID&quot;
+            ]
+          }
+        ],
+        &quot;boundary&quot;: &quot;State specific missing evidence&quot;
+      },
+      &quot;directQuotes&quot;: &quot;DO_NOT_GENERATE; SERVER_RENDERS_EXACT_SOURCE&quot;,
+      &quot;qualifiers&quot;: &quot;Preserve uncertainty, conditions and scope; general running conditions do not prove component replacement conditions&quot;,
+      &quot;semanticReview&quot;: &quot;FRAGMENT_ID_EXISTENCE_IS_NOT_ENTAILMENT&quot;,
+      &quot;knownMissingEvidence&quot;: [],
+      &quot;providerAuthorization&quot;: false
+    },
+    &quot;catalog&quot;: {
+      &quot;packDigest&quot;: &quot;57e89f5bc133bc351047a0ac89480e78d1312cf2201c89aab2375757c767f245&quot;,
+      &quot;fragments&quot;: [
+        {
+          &quot;fragmentId&quot;: &quot;F-8c2993097f7fdc9ab3a3e2c3210ad29ec14a3a13af67c4fa3943b8eba197e642&quot;,
+          &quot;sourceId&quot;: &quot;S1&quot;,
+          &quot;textSha256&quot;: &quot;c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d&quot;,
+          &quot;sourceVersion&quot;: &quot;v2-accepted-knowledge-projection&quot;,
+          &quot;sourceSha256&quot;: &quot;e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d&quot;,
+          &quot;chapterId&quot;: &quot;14.86&quot;,
+          &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+          &quot;text&quot;: &quot;没有观察到只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能留下未知。未观察不等于不存在，未知不等于零。&quot;,
+          &quot;support&quot;: {
+            &quot;startOffset&quot;: 0,
+            &quot;endOffset&quot;: 59,
+            &quot;textSha256&quot;: &quot;c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d&quot;
+          },
+          &quot;pdfPages&quot;: {
+            &quot;start&quot;: 324,
+            &quot;end&quot;: 324
+          },
+          &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-7&amp;chapter=14.86&amp;q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&amp;locale=zh-Hans&quot;
+        },
+        {
+          &quot;fragmentId&quot;: &quot;F-7e9ece8e30e7d8b344dd4a12f79cb5b17ff3e2877298f163c276437ecb9a56ec&quot;,
+          &quot;sourceId&quot;: &quot;S2&quot;,
+          &quot;textSha256&quot;: &quot;f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d&quot;,
+          &quot;sourceVersion&quot;: &quot;v2-accepted-knowledge-projection&quot;,
+          &quot;sourceSha256&quot;: &quot;e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d&quot;,
+          &quot;chapterId&quot;: &quot;14.65&quot;,
+          &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+          &quot;text&quot;: &quot;先核对证据的对象、范围、时间和主张权威；若条件对齐后高质量解释仍然冲突，就保留争议与有资格的替代读取，不强迫选出赢家。\n关于“日本已经进入重组”的主张，Book VII 要求核对证据与主张是否匹配，而不能直接把这个主张当作事实。结构重组需要关系、载体、路径或约束变化的重复证据；当下讯号和短期数据不足以支持这种主张。判断前应核对来源权威、观察窗口、尺度和反证；证据不足时保留 UNKNOWN。\n八字和占星的说法一致，首先可能是模型解释的汇聚，不等于独立证据已经确认。它们可能共享输入、上游假设或相近语义；即使模型确实不同，也要看现实记录是否独立支持这个主题，不能用同意次数代替证据。\n不同说法可能观察不同范围、层次或时间条件，不能在没有证据时强迫选出赢家。先核对对象、时间、尺度和解释步骤；若条件对齐后仍有冲突，就保留有资格的候选与争议，等待能区分它们的现实证据。&quot;,
+          &quot;support&quot;: {
+            &quot;startOffset&quot;: 0,
+            &quot;endOffset&quot;: 382,
+            &quot;textSha256&quot;: &quot;f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d&quot;
+          },
+          &quot;pdfPages&quot;: {
+            &quot;start&quot;: 242,
+            &quot;end&quot;: 242
+          },
+          &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-7&amp;chapter=14.65&amp;q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&amp;locale=zh-Hans&quot;
+        }
+      ],
+      &quot;semanticAcceptance&quot;: false
+    }
+  },
+  &quot;answerQuality&quot;: &quot;NOT_RUN_NO_PROVIDER_CALL&quot;,
+  &quot;storageReads&quot;: [
+    &quot;books/book-7/materialized/v2-e19b662d8928/approved-knowledge-units-v2/retrieval-corpus.json&quot;
+  ]
+}</pre></details><details><summary>V2-RECOVERY-NEGATIVE — 正常维持与发生损坏后恢复有什么区别？</summary><p>保存ID：review-v2-paid-V2-RECOVERY-NEGATIVE；重开200，重复提交providerCalls=0。合成答案不纳入生成质量统计。</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{
+  &quot;generation&quot;: &quot;NOT_APPLICABLE_SYNTHETIC&quot;,
+  &quot;review&quot;: &quot;CORRECT_REJECTION&quot;,
+  &quot;caveat&quot;: &quot;missingScope wider than current admitted pack; server did not expose reviewer prose&quot;
+}</pre><h4>合成错误输入（非模型生成）</h4><pre>{
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;answer&quot;: &quot;损坏后的恢复就是更换损坏部件，正常维持必然保证恢复成功。&quot;,
+  &quot;supportMap&quot;: [
+    {
+      &quot;statement&quot;: &quot;损坏后的恢复就是更换损坏部件，正常维持必然保证恢复成功。&quot;,
+      &quot;sourceIds&quot;: [
+        &quot;S1&quot;
+      ],
+      &quot;relation&quot;: &quot;DIRECT_SUPPORT&quot;
+    }
+  ]
+}</pre><h4>V2-RECOVERY-NEGATIVE / call 1 / completed</h4><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{&quot;scopeId&quot;:&quot;R-7fe7baccbbb64da3&quot;,&quot;verdict&quot;:&quot;REJECT&quot;,&quot;answerCompleteness&quot;:&quot;SOURCE_INSUFFICIENT&quot;,&quot;substantiveAnsweredUnitIds&quot;:[],&quot;issues&quot;:[{&quot;unitId&quot;:&quot;U1&quot;,&quot;kind&quot;:&quot;unsupported_claim&quot;,&quot;reason&quot;:&quot;来源未支持恢复必然等同于更换损坏部件，也未支持正常维持必然保证恢复成功。&quot;},{&quot;unitId&quot;:&quot;U1&quot;,&quot;kind&quot;:&quot;missing_distinction&quot;,&quot;reason&quot;:&quot;来源虽涉及维护与运行持续、损坏修理之间的关系，但答案未据此形成受支持的两者区别。&quot;}],&quot;checks&quot;:[{&quot;unitId&quot;:&quot;U1&quot;,&quot;sourceIds&quot;:[&quot;S1&quot;,&quot;S2&quot;],&quot;assessment&quot;:&quot;UNSUPPORTED&quot;,&quot;reason&quot;:&quot;来源说明维护源于持续运行及其后果，并指出维护不等同于因运行失败而出现的修理，但不足以支持答案中的部件更换和必然成功断言。&quot;}],&quot;missingScope&quot;:&quot;缺少关于正常维持与损坏后恢复的明确定义、操作差异及成功条件的直接证据。&quot;}</pre><p>原始输出：tools/review/membership-ask-credit-r1/review-v2-paid-response-V2-RECOVERY-NEGATIVE-1.json；87708a3437c14597546da6b7a88b5352e7d5e062594174e2d6975c79de8f5a10；input 1427, cached 0, cache-write 1424, output 606。</p><h4>实际检索及来源包</h4><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{
+  &quot;retrievalQuery&quot;: &quot;正常维持与发生损坏后恢复有什么区别？&quot;,
+  &quot;httpStatus&quot;: 200,
+  &quot;permissionMode&quot;: &quot;IN_PROCESS_ISOLATED_FRAGMENT_ONLY_NOT_CLIENT_QA&quot;,
+  &quot;candidates&quot;: [
+    {
+      &quot;chapter&quot;: &quot;CM-B3V1-P8-S001&quot;,
+      &quot;score&quot;: 1172.9639536865986,
+      &quot;argument&quot;: {
+        &quot;argumentId&quot;: &quot;HISTORY_CREATES_MAINTENANCE&quot;,
+        &quot;type&quot;: &quot;DEFINITION&quot;,
+        &quot;startOffset&quot;: 266,
+        &quot;endOffset&quot;: 938,
+        &quot;textSha256&quot;: &quot;7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3&quot;,
+        &quot;comparisonSubjects&quot;: null
+      },
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;
+    },
+    {
+      &quot;chapter&quot;: &quot;CM-B3V1-P8-S059&quot;,
+      &quot;score&quot;: 1055.4474333991182,
+      &quot;argument&quot;: {
+        &quot;argumentId&quot;: &quot;CONTINUATION_V_SUSTAINABILITY&quot;,
+        &quot;type&quot;: &quot;DISTINCTION&quot;,
+        &quot;startOffset&quot;: 33,
+        &quot;endOffset&quot;: 398,
+        &quot;textSha256&quot;: &quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;,
+        &quot;comparisonSubjects&quot;: null
+      },
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;
+    },
+    {
+      &quot;chapter&quot;: &quot;CM-B3V1-P8-S006&quot;,
+      &quot;score&quot;: 252.10509833543477,
+      &quot;argument&quot;: null,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;
+    },
+    {
+      &quot;chapter&quot;: &quot;CM-B3V1-P8-S008&quot;,
+      &quot;score&quot;: 56.6419203206308,
+      &quot;argument&quot;: null,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;
+    }
+  ],
+  &quot;errors&quot;: [],
+  &quot;pack&quot;: {
+    &quot;question&quot;: &quot;正常维持与发生损坏后恢复有什么区别？&quot;,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;sources&quot;: [
+      {
+        &quot;id&quot;: &quot;S1&quot;,
+        &quot;sourceCode&quot;: &quot;MKS-BOOK-3-OWNER-FINAL-EFBFDD21-ZH-HANS&quot;,
+        &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+        &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+        &quot;sourceAcceptanceDigest&quot;: &quot;2567043c746a447202fc6df3197f23df2758b55ee49008d4acbf27907c8912a8&quot;,
+        &quot;chapterId&quot;: &quot;CM-B3V1-P8-S001&quot;,
+        &quot;heading&quot;: &quot;维持出现 | 为什么持续运行必然产生维护需求&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;pdfPages&quot;: {
+          &quot;start&quot;: 3,
+          &quot;end&quot;: 6
+        },
+        &quot;support&quot;: {
+          &quot;startOffset&quot;: 266,
+          &quot;endOffset&quot;: 938,
+          &quot;textSha256&quot;: &quot;7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3&quot;
+        },
+        &quot;text&quot;: &quot;因此，持续本身具有成本。这并不意味着运行是一种需要被避免的\n消耗，也不意味着越少运行越好。生命之所以能够发展，关系之所以能够\n深化，组织之所以能够扩大能力，本来就依赖持续运行。真正需要理解的\n是，任何持续都不可能完全没有代价，运行每向前一步，都会同时改变承\n载它的条件。人完成一项工作以后，时间已经被使用，注意已经经历转\n换，身体也已经参与其中；关系经历一次重要事件以后，即使问题已经处\n理，彼此对对方的理解也可能发生变化；组织完成一个项目以后，会留下\n新的经验、流程、资料与责任关系；人工系统每一次扩展功能，也会增加\n新的依赖、接口与维护要求。于是，运行并不是在一个永远不变的背景上\n重复发生。每一次运行都会修改下一次运行的起点。这正是维护需求出现\n的根本原因。如果载体每一轮运行以后都能够完全恢复到原来位置，如果\n资源可以无限补充，如果所有责任都能够自然结束，如果任何结构都不会\n随着时间变化，那么维护或许真的可以被理解成偶尔发生的附加工作。然\n而，真实世界并不是如此。身体会疲劳，关系会积累历史，组织会形成路\n径依赖，人工结构会产生版本、依赖与兼容问题；过去发生的运行会持续\n参与未来。\n\f\n因此，维护并不是因为运行失败才出现。恰恰相反，只要运行成功\n地持续足够久，维护就一定会出现。一辆从未被使用的机器几乎没有运行\n损耗，一个从未建立的组织也不存在内部协调成本；真正需要维护的，总\n是那些已经进入时间、反复承担现实并形成连续的结构。越是长期存在的\n运行，越需要处理它过去留下的历史。这说明，维护首先不是修理，而是\n处理持续所产生的后果。&quot;,
+        &quot;readingHref&quot;: &quot;/books/reality-continuity/&quot;,
+        &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-3&amp;chapter=CM-B3V1-P8-S001&amp;q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&amp;locale=zh-Hans&quot;,
+        &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+        &quot;purchaseHref&quot;: &quot;/books/reality-continuity/&quot;,
+        &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+        &quot;permissions&quot;: {
+          &quot;knowledgeExcerpt&quot;: true,
+          &quot;fullTextDownload&quot;: false,
+          &quot;reconstructBook&quot;: false
+        }
+      },
+      {
+        &quot;id&quot;: &quot;S2&quot;,
+        &quot;sourceCode&quot;: &quot;MKS-BOOK-3-OWNER-FINAL-EFBFDD21-ZH-HANS&quot;,
+        &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+        &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+        &quot;sourceAcceptanceDigest&quot;: &quot;2567043c746a447202fc6df3197f23df2758b55ee49008d4acbf27907c8912a8&quot;,
+        &quot;chapterId&quot;: &quot;CM-B3V1-P8-S059&quot;,
+        &quot;heading&quot;: &quot;可持续连续 | 为什么真正能够长期存在的运行必须能够改变自己&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;pdfPages&quot;: {
+          &quot;start&quot;: 226,
+          &quot;end&quot;: 231
+        },
+        &quot;support&quot;: {
+          &quot;startOffset&quot;: 33,
+          &quot;endOffset&quot;: 398,
+          &quot;textSha256&quot;: &quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;
+        },
+        &quot;text&quot;: &quot;运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。&quot;,
+        &quot;readingHref&quot;: &quot;/books/reality-continuity/&quot;,
+        &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-3&amp;chapter=CM-B3V1-P8-S059&amp;q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&amp;locale=zh-Hans&quot;,
+        &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+        &quot;purchaseHref&quot;: &quot;/books/reality-continuity/&quot;,
+        &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+        &quot;permissions&quot;: {
+          &quot;knowledgeExcerpt&quot;: true,
+          &quot;fullTextDownload&quot;: false,
+          &quot;reconstructBook&quot;: false
+        }
+      }
+    ],
+    &quot;glossary&quot;: [],
+    &quot;customerContext&quot;: null,
+    &quot;constraints&quot;: {
+      &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+      &quot;sourceLanguagesDisclosed&quot;: true,
+      &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+      &quot;sourceOnly&quot;: true,
+      &quot;noGeneralKnowledgeFallback&quot;: true,
+      &quot;preserveConditions&quot;: true,
+      &quot;directAnswerWhenSupported&quot;: true,
+      &quot;claimCitationsRequired&quot;: true,
+      &quot;compareBothSides&quot;: true,
+      &quot;untrustedSourceInstructions&quot;: true,
+      &quot;noPrivateTextReconstruction&quot;: true,
+      &quot;noOCRPromotion&quot;: true,
+      &quot;noGlossaryPromotion&quot;: true,
+      &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+      &quot;purchaseMustNotReplaceAnswer&quot;: true
+    },
+    &quot;state&quot;: &quot;SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED&quot;,
+    &quot;tokenEstimate&quot;: {
+      &quot;estimated&quot;: 3065,
+      &quot;conservativeInputTokenCeiling&quot;: 6642,
+      &quot;actualTokens&quot;: null,
+      &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+    },
+    &quot;packDigest&quot;: &quot;d9eefbce44ad9c7a0667cfe54558d2c1b26314cfa94b2ae4bf2c469761801d2b&quot;
+  },
+  &quot;requestCandidate&quot;: {
+    &quot;contract&quot;: &quot;MEMBERSHIP_FRAGMENT_CANDIDATE_OFFLINE_ONLY&quot;,
+    &quot;question&quot;: &quot;正常维持与发生损坏后恢复有什么区别？&quot;,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;packDigest&quot;: &quot;d9eefbce44ad9c7a0667cfe54558d2c1b26314cfa94b2ae4bf2c469761801d2b&quot;,
+    &quot;glossary&quot;: [],
+    &quot;coverage&quot;: {
+      &quot;requestedGroups&quot;: [
+        &quot;maintenance&quot;,
+        &quot;recovery&quot;
+      ],
+      &quot;missingGroups&quot;: [],
+      &quot;comparison&quot;: true,
+      &quot;comparisonRelation&quot;: &quot;REQUIRES_ARGUMENT_LEVEL_SUPPORT_NOT_KEYWORD_PRESENCE&quot;,
+      &quot;state&quot;: &quot;CANDIDATE_COVERAGE_REQUIRES_SEMANTIC_REVIEW&quot;,
+      &quot;semanticPass&quot;: false
+    },
+    &quot;sources&quot;: [
+      {
+        &quot;fragmentId&quot;: &quot;F-8c1bdea46e93d08811f233ab30dcdea5eeab42aafe67879696bbf1c207d6592a&quot;,
+        &quot;chapterId&quot;: &quot;CM-B3V1-P8-S001&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;text&quot;: &quot;因此，持续本身具有成本。这并不意味着运行是一种需要被避免的\n消耗，也不意味着越少运行越好。生命之所以能够发展，关系之所以能够\n深化，组织之所以能够扩大能力，本来就依赖持续运行。真正需要理解的\n是，任何持续都不可能完全没有代价，运行每向前一步，都会同时改变承\n载它的条件。人完成一项工作以后，时间已经被使用，注意已经经历转\n换，身体也已经参与其中；关系经历一次重要事件以后，即使问题已经处\n理，彼此对对方的理解也可能发生变化；组织完成一个项目以后，会留下\n新的经验、流程、资料与责任关系；人工系统每一次扩展功能，也会增加\n新的依赖、接口与维护要求。于是，运行并不是在一个永远不变的背景上\n重复发生。每一次运行都会修改下一次运行的起点。这正是维护需求出现\n的根本原因。如果载体每一轮运行以后都能够完全恢复到原来位置，如果\n资源可以无限补充，如果所有责任都能够自然结束，如果任何结构都不会\n随着时间变化，那么维护或许真的可以被理解成偶尔发生的附加工作。然\n而，真实世界并不是如此。身体会疲劳，关系会积累历史，组织会形成路\n径依赖，人工结构会产生版本、依赖与兼容问题；过去发生的运行会持续\n参与未来。\n\f\n因此，维护并不是因为运行失败才出现。恰恰相反，只要运行成功\n地持续足够久，维护就一定会出现。一辆从未被使用的机器几乎没有运行\n损耗，一个从未建立的组织也不存在内部协调成本；真正需要维护的，总\n是那些已经进入时间、反复承担现实并形成连续的结构。越是长期存在的\n运行，越需要处理它过去留下的历史。这说明，维护首先不是修理，而是\n处理持续所产生的后果。&quot;
+      },
+      {
+        &quot;fragmentId&quot;: &quot;F-ebb6043df46c213571580cbf64914e0bdced10965da83aa75968d3befde5a41a&quot;,
+        &quot;chapterId&quot;: &quot;CM-B3V1-P8-S059&quot;,
+        &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+        &quot;text&quot;: &quot;运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。&quot;
+      }
+    ],
+    &quot;constraints&quot;: {
+      &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+      &quot;sourceLanguagesDisclosed&quot;: true,
+      &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+      &quot;sourceOnly&quot;: true,
+      &quot;noGeneralKnowledgeFallback&quot;: true,
+      &quot;preserveConditions&quot;: true,
+      &quot;directAnswerWhenSupported&quot;: true,
+      &quot;claimCitationsRequired&quot;: true,
+      &quot;compareBothSides&quot;: true,
+      &quot;untrustedSourceInstructions&quot;: true,
+      &quot;noPrivateTextReconstruction&quot;: true,
+      &quot;noOCRPromotion&quot;: true,
+      &quot;noGlossaryPromotion&quot;: true,
+      &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+      &quot;purchaseMustNotReplaceAnswer&quot;: true,
+      &quot;answerSchema&quot;: {
+        &quot;locale&quot;: &quot;zh-Hans&quot;,
+        &quot;claims&quot;: [
+          {
+            &quot;text&quot;: &quot;Faithful paraphrase&quot;,
+            &quot;supportFragmentIds&quot;: [
+              &quot;fragment ID&quot;
+            ]
+          }
+        ],
+        &quot;boundary&quot;: &quot;State specific missing evidence&quot;
+      },
+      &quot;directQuotes&quot;: &quot;DO_NOT_GENERATE; SERVER_RENDERS_EXACT_SOURCE&quot;,
+      &quot;qualifiers&quot;: &quot;Preserve uncertainty, conditions and scope; general running conditions do not prove component replacement conditions&quot;,
+      &quot;semanticReview&quot;: &quot;FRAGMENT_ID_EXISTENCE_IS_NOT_ENTAILMENT&quot;,
+      &quot;knownMissingEvidence&quot;: [],
+      &quot;providerAuthorization&quot;: false
+    },
+    &quot;catalog&quot;: {
+      &quot;packDigest&quot;: &quot;d9eefbce44ad9c7a0667cfe54558d2c1b26314cfa94b2ae4bf2c469761801d2b&quot;,
+      &quot;fragments&quot;: [
+        {
+          &quot;fragmentId&quot;: &quot;F-8c1bdea46e93d08811f233ab30dcdea5eeab42aafe67879696bbf1c207d6592a&quot;,
+          &quot;sourceId&quot;: &quot;S1&quot;,
+          &quot;textSha256&quot;: &quot;7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3&quot;,
+          &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+          &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+          &quot;chapterId&quot;: &quot;CM-B3V1-P8-S001&quot;,
+          &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+          &quot;text&quot;: &quot;因此，持续本身具有成本。这并不意味着运行是一种需要被避免的\n消耗，也不意味着越少运行越好。生命之所以能够发展，关系之所以能够\n深化，组织之所以能够扩大能力，本来就依赖持续运行。真正需要理解的\n是，任何持续都不可能完全没有代价，运行每向前一步，都会同时改变承\n载它的条件。人完成一项工作以后，时间已经被使用，注意已经经历转\n换，身体也已经参与其中；关系经历一次重要事件以后，即使问题已经处\n理，彼此对对方的理解也可能发生变化；组织完成一个项目以后，会留下\n新的经验、流程、资料与责任关系；人工系统每一次扩展功能，也会增加\n新的依赖、接口与维护要求。于是，运行并不是在一个永远不变的背景上\n重复发生。每一次运行都会修改下一次运行的起点。这正是维护需求出现\n的根本原因。如果载体每一轮运行以后都能够完全恢复到原来位置，如果\n资源可以无限补充，如果所有责任都能够自然结束，如果任何结构都不会\n随着时间变化，那么维护或许真的可以被理解成偶尔发生的附加工作。然\n而，真实世界并不是如此。身体会疲劳，关系会积累历史，组织会形成路\n径依赖，人工结构会产生版本、依赖与兼容问题；过去发生的运行会持续\n参与未来。\n\f\n因此，维护并不是因为运行失败才出现。恰恰相反，只要运行成功\n地持续足够久，维护就一定会出现。一辆从未被使用的机器几乎没有运行\n损耗，一个从未建立的组织也不存在内部协调成本；真正需要维护的，总\n是那些已经进入时间、反复承担现实并形成连续的结构。越是长期存在的\n运行，越需要处理它过去留下的历史。这说明，维护首先不是修理，而是\n处理持续所产生的后果。&quot;,
+          &quot;support&quot;: {
+            &quot;startOffset&quot;: 266,
+            &quot;endOffset&quot;: 938,
+            &quot;textSha256&quot;: &quot;7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3&quot;
+          },
+          &quot;pdfPages&quot;: {
+            &quot;start&quot;: 3,
+            &quot;end&quot;: 6
+          },
+          &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-3&amp;chapter=CM-B3V1-P8-S001&amp;q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&amp;locale=zh-Hans&quot;
+        },
+        {
+          &quot;fragmentId&quot;: &quot;F-ebb6043df46c213571580cbf64914e0bdced10965da83aa75968d3befde5a41a&quot;,
+          &quot;sourceId&quot;: &quot;S2&quot;,
+          &quot;textSha256&quot;: &quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;,
+          &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+          &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+          &quot;chapterId&quot;: &quot;CM-B3V1-P8-S059&quot;,
+          &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+          &quot;text&quot;: &quot;运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。&quot;,
+          &quot;support&quot;: {
+            &quot;startOffset&quot;: 33,
+            &quot;endOffset&quot;: 398,
+            &quot;textSha256&quot;: &quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;
+          },
+          &quot;pdfPages&quot;: {
+            &quot;start&quot;: 226,
+            &quot;end&quot;: 231
+          },
+          &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-3&amp;chapter=CM-B3V1-P8-S059&amp;q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&amp;locale=zh-Hans&quot;
+        }
+      ],
+      &quot;semanticAcceptance&quot;: false
+    }
+  },
+  &quot;answerQuality&quot;: &quot;NOT_RUN_NO_PROVIDER_CALL&quot;,
+  &quot;storageReads&quot;: [
+    &quot;books/book-3/materialized/owner-final-20261011-efbfdd21fa21/positioned-v1/retrieval-corpus.json&quot;
+  ]
+}</pre></details><h3>下一阶段结论</h3><p>中英观测/不存在问题在此样本通过自动交付与正文覆盖；恢复题未得到准确PARTIAL交付，保持关闭。截断复核虽指出外推，不能视为有效拒绝。两项合成错误均被拒绝，不证明自动复核普遍可靠。</p><ul><li>Recovery source attribution and missingScope must remain bounded to admitted pack</li><li>Reviewer output budget consumed by reasoning: truncated verdict cannot be semantic success</li><li>Incomplete stream also contains DELIVER with unsupported issue: decision consistency requires calibration</li><li>No more same-question paid tests; offline defect repair next</li><li>Production dispatcher disabled; balance cutover purchase/reservation reconciliation and governed migration not executed</li><li>Report included four questions preserved; Profile/Financial preview only; Relationship reader unavailable and closed</li><li>Longform/research/current-fact tools and seven-book whole-chapter coverage remain incomplete</li></ul><p>完整机器证据：REVIEW-V2-PAID-SUMMARY.json、LEDGER、REOPEN-REPLAY、SECURITY、冻结请求和COMPILE-MANIFEST。无部署、迁移、付款、commit/push及P9/Stripe/Secrets修改。</p></section>
+<section id="membership-delivery-closure"><h2>会员 Ask · 工程闭环核对</h2><p>HEAD def55d22ecf96e48141914772b0c58d6d8171161；SOURCE PARTIAL；BUILD PASS_BUILD_RELEVANT_INPUTS_STABLE；DEPLOYMENT NOT_RUN；LIVE NOT_RUN。本轮 provider=0，实际费用=0；无部署、迁移、激活、提交或推送。</p><h3>存储归属</h3><p>账号 0b9f36bdf56f38d7d09aebe388f15204。production RUNTIME_DB → phios-runtime-production / 073639fa-01e4-4868-af10-6ed032637dab；preview → phios-runtime-sandbox / c2c6e313-9bc8-4fd4-89b1-36f3d764dad8。云端与源码绑定一致。生产仅登记0001–0002，未建立Commerce／cost／credit预期表。表不存在不能证明所有历史客户余额为空。沿用Commerce、Continuity及平台成本owner，不建立第二钱包。</p><p>迁移候选0018与P9正式0018冲突；两者保留，提出19–21 successor方案，尚未登记或执行。</p><h3>实际隔离链路</h3><p>14项服务重放：真实API检索→合并预留→历史生成／合成复核适配器→决策→结算→保存→重开。覆盖完整、部分、零费用来源不足、契约失败、余额不足、并发及账户隔离；加购重放不重复授予、续费日期不变、FIFO跨份消费。历史费用与原失败保留，不追扣。</p><p>4组浏览器：1280／390，中英实际会员页面→答案→重开→有权限来源入口，截图与请求可查。它们是工程重放，不是新模型质量证据。英文来源页仍有双语控件，工程面板仍展示长篇诊断JSON；客户呈现PARTIAL，不能将浏览器链路通过视为正式客户UI完成。原报告四问优先进入既有endpoint，不预留会员余额；production伪造offlineReplay仍拒绝，另有守卫测试回执。</p><h3>构建与来源</h3><p>World原始UNKNOWN保留；具体占用进程未复现。已修复无变化仍重写、无独立写锁及直接写入问题：相同字节不写、独占lease、临时文件原子替换、最多3次瞬态重试。故障注入与并发拒绝检查通过。本次相关输入前后不变。</p><p>输入摘要 a8f30d6ca95b8e4fcbe4934d7f1b7a26a3df85fa705fc7abfed859cccfa9ea3d；Worker a4d1fadbae021299145466fcab46ac74ce15b7c4b90090a5a8aca750407df987；routes 3a87caf0402e11632cb4fd51c8a081aa4a848bd78cd3b0c8cee11199d65f3381。</p><p>七册显式选择不跨册回退；第二册探针来源不足，其余六册能形成获准包。片段接线不等于整章回答验收，982章台账本轮新增合格章=0。</p><h3>消费者与剩余门槛</h3><p>Knowledge：隔离重放已接通，生产关闭。已拥有报告：授权预览／原报告四问入口保留，尚未开放会员执行。Profile／Financial：既有加密owner读取、跨账户拒绝及版本校验通过，仍为材料预览。Relationship：没有已确认私有报告读取owner，保持关闭。长文／研究／个人导航未准入。</p><p>先完成迁移编号治理、旧余额／未结算成本对账、真实生产dispatcher关闭态接线及英文呈现；之后才需最小新模型验证。当前不申请新调用、不商业激活。</p><p><a href="/tools/review/membership-ask-credit-r1/DELIVERY-CLOSURE-RELEASE-CANDIDATE.json">具体候选与阻塞</a> · <a href="/tools/review/membership-ask-credit-r1/DELIVERY-CLOSURE-STORAGE-AND-MIGRATION-PLAN.json">存储／迁移／回滚</a> · <a href="/tools/review/membership-ask-credit-r1/ENGINEERING-SERVICE-REPLAY.json">14项服务证据</a> · <a href="/tools/review/membership-ask-credit-r1/ENGINEERING-BROWSER-REPLAY.json">浏览器截图和请求</a> · <a href="/tools/review/membership-ask-credit-r1/ENGINEERING-SEVEN-BOOK-SOURCE-PROBES.json">七册实际探针</a></p></section></main></html>

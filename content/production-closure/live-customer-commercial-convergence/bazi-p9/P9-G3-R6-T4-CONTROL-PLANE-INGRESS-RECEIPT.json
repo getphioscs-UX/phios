@@ -1,0 +1,639 @@
+{
+  "at": "2026-10-12T14:22:51.984Z",
+  "status": "BLOCKED_CONTROL_PLANE_VISIBILITY",
+  "historicalAcceptance": "CLOSED; no semantic review reopened",
+  "currentAuthority": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+  "controls": [
+    {
+      "name": "Access applications",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/access/apps?per_page=100",
+      "permission": "Access: Apps and Policies Read",
+      "scope": "ACCOUNT",
+      "at": "2026-10-12T14:21:05.183Z",
+      "httpStatus": 200,
+      "readable": "YES",
+      "errors": [],
+      "pagination": {
+        "page": 1,
+        "per_page": 100,
+        "count": 0,
+        "total_count": 0,
+        "total_pages": 0
+      },
+      "records": [],
+      "configured": false,
+      "absenceProven": true,
+      "gapClassification": "RESOURCE_NOT_PRESENT_AND_ABSENCE_PROVEN"
+    },
+    {
+      "name": "Bulk Redirect lists",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists",
+      "permission": "Account Filter Lists Read",
+      "scope": "ACCOUNT",
+      "at": "2026-10-12T14:21:04.548Z",
+      "httpStatus": 403,
+      "readable": "NO",
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error"
+        }
+      ],
+      "pagination": null,
+      "configured": "UNREADABLE_NOT_NONE",
+      "absenceProven": false,
+      "gapClassification": "CURRENT_TOKEN_PERMISSION_INSUFFICIENT",
+      "classificationBasis": "Correct account and zone GET200, Pages project accessible; documented endpoint returns403 code10000. No credential introspection or permission mutation."
+    },
+    {
+      "name": "Bulk Redirect rulesets",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/phases/http_request_redirect/entrypoint",
+      "permission": "Mass URL Redirects Read",
+      "scope": "ACCOUNT",
+      "at": "2026-10-12T14:21:04.605Z",
+      "httpStatus": 403,
+      "readable": "NO",
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error"
+        }
+      ],
+      "pagination": null,
+      "configured": "UNREADABLE_NOT_NONE",
+      "absenceProven": false,
+      "gapClassification": "CURRENT_TOKEN_PERMISSION_INSUFFICIENT",
+      "classificationBasis": "Correct account and zone GET200, Pages project accessible; documented endpoint returns403 code10000. No credential introspection or permission mutation."
+    },
+    {
+      "name": "Account Rulesets",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets",
+      "permission": "Account Rulesets Read",
+      "scope": "ACCOUNT",
+      "at": "2026-10-12T14:21:04.558Z",
+      "httpStatus": 403,
+      "readable": "NO",
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error"
+        }
+      ],
+      "pagination": null,
+      "configured": "UNREADABLE_NOT_NONE",
+      "absenceProven": false,
+      "gapClassification": "CURRENT_TOKEN_PERMISSION_INSUFFICIENT",
+      "classificationBasis": "Correct account and zone GET200, Pages project accessible; documented endpoint returns403 code10000. No credential introspection or permission mutation."
+    },
+    {
+      "name": "Zone Rulesets",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets",
+      "permission": "Any one documented accepted narrow ruleset read scope; selected Transform Rules Read / Dynamic URL Redirects Read",
+      "scope": "ZONE",
+      "at": "2026-10-12T14:21:05.601Z",
+      "httpStatus": 403,
+      "readable": "NO",
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error"
+        }
+      ],
+      "pagination": null,
+      "configured": "UNREADABLE_NOT_NONE",
+      "absenceProven": false,
+      "gapClassification": "CURRENT_TOKEN_PERMISSION_INSUFFICIENT",
+      "classificationBasis": "Correct account and zone GET200, Pages project accessible; documented endpoint returns403 code10000. No credential introspection or permission mutation."
+    },
+    {
+      "name": "Redirect Rules",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_request_dynamic_redirect/entrypoint",
+      "permission": "Dynamic URL Redirects Read",
+      "scope": "ZONE",
+      "at": "2026-10-12T14:21:05.605Z",
+      "httpStatus": 403,
+      "readable": "NO",
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error"
+        }
+      ],
+      "pagination": null,
+      "configured": "UNREADABLE_NOT_NONE",
+      "absenceProven": false,
+      "gapClassification": "CURRENT_TOKEN_PERMISSION_INSUFFICIENT",
+      "classificationBasis": "Correct account and zone GET200, Pages project accessible; documented endpoint returns403 code10000. No credential introspection or permission mutation."
+    },
+    {
+      "name": "URL Transform Rules",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_request_transform/entrypoint",
+      "permission": "Transform Rules Read",
+      "scope": "ZONE",
+      "at": "2026-10-12T14:21:05.605Z",
+      "httpStatus": 403,
+      "readable": "NO",
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error"
+        }
+      ],
+      "pagination": null,
+      "configured": "UNREADABLE_NOT_NONE",
+      "absenceProven": false,
+      "gapClassification": "CURRENT_TOKEN_PERMISSION_INSUFFICIENT",
+      "classificationBasis": "Correct account and zone GET200, Pages project accessible; documented endpoint returns403 code10000. No credential introspection or permission mutation."
+    },
+    {
+      "name": "Request Header Transform Rules",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_request_late_transform/entrypoint",
+      "permission": "Transform Rules Read",
+      "scope": "ZONE",
+      "at": "2026-10-12T14:21:05.593Z",
+      "httpStatus": 403,
+      "readable": "NO",
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error"
+        }
+      ],
+      "pagination": null,
+      "configured": "UNREADABLE_NOT_NONE",
+      "absenceProven": false,
+      "gapClassification": "CURRENT_TOKEN_PERMISSION_INSUFFICIENT",
+      "classificationBasis": "Correct account and zone GET200, Pages project accessible; documented endpoint returns403 code10000. No credential introspection or permission mutation."
+    },
+    {
+      "name": "Response Header Transform Rules",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_response_headers_transform/entrypoint",
+      "permission": "Transform Rules Read",
+      "scope": "ZONE",
+      "at": "2026-10-12T14:21:06.016Z",
+      "httpStatus": 403,
+      "readable": "NO",
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error"
+        }
+      ],
+      "pagination": null,
+      "configured": "UNREADABLE_NOT_NONE",
+      "absenceProven": false,
+      "gapClassification": "CURRENT_TOKEN_PERMISSION_INSUFFICIENT",
+      "classificationBasis": "Correct account and zone GET200, Pages project accessible; documented endpoint returns403 code10000. No credential introspection or permission mutation."
+    },
+    {
+      "name": "Load Balancers",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/load_balancers",
+      "permission": "Load Balancers Account Read",
+      "scope": "ZONE",
+      "at": "2026-10-12T14:21:06.012Z",
+      "httpStatus": 403,
+      "readable": "NO",
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error"
+        }
+      ],
+      "pagination": null,
+      "configured": "UNREADABLE_NOT_NONE",
+      "absenceProven": false,
+      "gapClassification": "CURRENT_TOKEN_PERMISSION_INSUFFICIENT",
+      "classificationBasis": "Correct account and zone GET200, Pages project accessible; documented endpoint returns403 code10000. No credential introspection or permission mutation."
+    },
+    {
+      "name": "Pools / Origins",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/load_balancers/pools",
+      "permission": "Load Balancing: Monitors and Pools Read",
+      "scope": "ACCOUNT",
+      "at": "2026-10-12T14:21:06.020Z",
+      "httpStatus": 403,
+      "readable": "NO",
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error"
+        }
+      ],
+      "pagination": null,
+      "configured": "UNREADABLE_NOT_NONE",
+      "absenceProven": false,
+      "gapClassification": "CURRENT_TOKEN_PERMISSION_INSUFFICIENT",
+      "classificationBasis": "Correct account and zone GET200, Pages project accessible; documented endpoint returns403 code10000. No credential introspection or permission mutation."
+    },
+    {
+      "name": "DNS apex",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/dns_records?name=getphios.com",
+      "permission": "DNS Read",
+      "scope": "ZONE",
+      "at": "2026-10-12T14:21:06.016Z",
+      "httpStatus": 403,
+      "readable": "NO",
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error"
+        }
+      ],
+      "pagination": null,
+      "configured": "UNREADABLE_NOT_NONE",
+      "absenceProven": false,
+      "gapClassification": "CURRENT_TOKEN_PERMISSION_INSUFFICIENT",
+      "classificationBasis": "Correct account and zone GET200, Pages project accessible; documented endpoint returns403 code10000. No credential introspection or permission mutation."
+    },
+    {
+      "name": "DNS www",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/dns_records?name=www.getphios.com",
+      "permission": "DNS Read",
+      "scope": "ZONE",
+      "at": "2026-10-12T14:21:06.448Z",
+      "httpStatus": 403,
+      "readable": "NO",
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error"
+        }
+      ],
+      "pagination": null,
+      "configured": "UNREADABLE_NOT_NONE",
+      "absenceProven": false,
+      "gapClassification": "CURRENT_TOKEN_PERMISSION_INSUFFICIENT",
+      "classificationBasis": "Correct account and zone GET200, Pages project accessible; documented endpoint returns403 code10000. No credential introspection or permission mutation."
+    },
+    {
+      "name": "Pages custom domains",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/pages/projects/phios-github/domains",
+      "permission": "Pages Read",
+      "scope": "ACCOUNT_PROJECT",
+      "at": "2026-10-12T14:21:13.080Z",
+      "httpStatus": 200,
+      "readable": "YES",
+      "errors": [],
+      "pagination": {
+        "page": 1,
+        "per_page": 20,
+        "count": 2,
+        "total_count": 2,
+        "total_pages": 1
+      },
+      "records": [
+        {
+          "id": "f21e2d7b-e11b-41e5-b2d5-86444d52b1d2",
+          "name": "getphios.com",
+          "status": "active",
+          "created_on": "2026-09-14T07:11:41.371386Z"
+        },
+        {
+          "id": "eda53be0-1404-4852-b2b5-423371d6b928",
+          "name": "www.getphios.com",
+          "status": "deactivated",
+          "created_on": "2026-09-03T08:36:31.636541Z"
+        }
+      ],
+      "configured": true,
+      "absenceProven": false,
+      "gapClassification": "NONE"
+    },
+    {
+      "name": "Pages project configuration",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/pages/projects/phios-github",
+      "permission": "Pages Read",
+      "scope": "ACCOUNT_PROJECT",
+      "at": "2026-10-12T14:21:07.450Z",
+      "httpStatus": 200,
+      "readable": "YES",
+      "errors": [],
+      "pagination": null,
+      "records": {
+        "id": "64a12fc7-7bd0-4d84-bb17-6741b6970e7b",
+        "name": "phios-github",
+        "subdomain": "phios-github.pages.dev",
+        "domains": [
+          "phios-github.pages.dev",
+          "getphios.com"
+        ],
+        "activeDeployment": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+        "productionBindings": [
+          "env_vars",
+          "d1_databases",
+          "r2_buckets",
+          "services",
+          "ai_bindings",
+          "fail_open",
+          "always_use_latest_compatibility_date",
+          "compatibility_date",
+          "compatibility_flags",
+          "build_image_major_version",
+          "usage_model",
+          "wrangler_config_hash"
+        ]
+      },
+      "configured": true,
+      "absenceProven": false,
+      "gapClassification": "NONE"
+    },
+    {
+      "name": "Workers routes",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/workers/routes",
+      "permission": "Workers Routes Read",
+      "scope": "ZONE",
+      "at": "2026-10-12T14:21:07.281Z",
+      "httpStatus": 200,
+      "readable": "YES",
+      "errors": [],
+      "pagination": null,
+      "records": [],
+      "configured": false,
+      "absenceProven": true,
+      "gapClassification": "RESOURCE_NOT_PRESENT_AND_ABSENCE_PROVEN"
+    },
+    {
+      "name": "Account scope",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204",
+      "permission": "Account Settings Read",
+      "scope": "ACCOUNT",
+      "at": "2026-10-12T14:21:13.695Z",
+      "httpStatus": 200,
+      "readable": "YES",
+      "errors": [],
+      "pagination": null,
+      "records": {
+        "id": "0b9f36bdf56f38d7d09aebe388f15204",
+        "name": "Getphios.cs@gmail.com's Account",
+        "type": "standard",
+        "created_on": "2026-07-18T00:35:39.218424Z"
+      },
+      "configured": true,
+      "absenceProven": false,
+      "gapClassification": "NONE"
+    },
+    {
+      "name": "Zone scope",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87",
+      "permission": "Zone Read",
+      "scope": "ZONE",
+      "at": "2026-10-12T14:21:13.656Z",
+      "httpStatus": 200,
+      "readable": "YES",
+      "errors": [],
+      "pagination": null,
+      "records": {
+        "id": "86dbea6c11ed5fa37a92003037b25f87",
+        "name": "getphios.com",
+        "type": "full",
+        "status": "active",
+        "created_on": "2026-09-08T10:28:12.733515Z",
+        "modified_on": "2026-09-14T06:14:05.174476Z"
+      },
+      "configured": true,
+      "absenceProven": false,
+      "gapClassification": "NONE"
+    },
+    {
+      "name": "Access policies",
+      "readable": "YES_VIA_COMPLETE_EMPTY_APPLICATION_PARENT",
+      "httpStatus": 200,
+      "configured": false,
+      "absenceProven": true,
+      "gapClassification": "RESOURCE_NOT_PRESENT_AND_ABSENCE_PROVEN"
+    }
+  ],
+  "controlPlaneUnknown": 0,
+  "unknownMeaning": "Unknown configuration behind known permission gaps remains unknown; UNKNOWN=0 refers to cause classification only, not control configuration or isolation proof",
+  "visibility": "PARTIAL_PERMISSION_GAPS_CLASSIFIED",
+  "minimumAdditionalPermissions": {
+    "chosenMechanismReadOnly": [
+      {
+        "permission": "Account Filter Lists Read",
+        "scope": "Only account 0b9f36bdf56f38d7d09aebe388f15204",
+        "purpose": "Existing redirect lists and items"
+      },
+      {
+        "permission": "Mass URL Redirects Read",
+        "scope": "Only account 0b9f36bdf56f38d7d09aebe388f15204",
+        "purpose": "Account http_request_redirect entrypoint, rule ordering and conflicts"
+      }
+    ],
+    "remainingRequestedAuditReadOnly": [
+      {
+        "permission": "Dynamic URL Redirects Read",
+        "scope": "Only getphios.com zone 86dbea6c11ed5fa37a92003037b25f87",
+        "purpose": "Zone single redirect rules"
+      },
+      {
+        "permission": "Transform Rules Read",
+        "scope": "Only getphios.com zone 86dbea6c11ed5fa37a92003037b25f87",
+        "purpose": "URL/request/response transform phases; one accepted zone-list scope suffices for list endpoint, phase readability must be verified"
+      },
+      {
+        "permission": "DNS Read",
+        "scope": "Only getphios.com zone 86dbea6c11ed5fa37a92003037b25f87",
+        "purpose": "Relevant DNS apex/www records"
+      },
+      {
+        "permission": "Load Balancers Account Read",
+        "scope": "Only account 0b9f36bdf56f38d7d09aebe388f15204 with target-zone query",
+        "purpose": "Load balancer list; exact documented accepted permission, no write"
+      },
+      {
+        "permission": "Load Balancing: Monitors and Pools Read",
+        "scope": "Only account 0b9f36bdf56f38d7d09aebe388f15204",
+        "purpose": "Pools and embedded origins"
+      }
+    ],
+    "notRequested": [
+      "Account admin",
+      "Any Write/Edit permission at this read-plan stage",
+      "Provider-managed pages.dev zone ownership"
+    ],
+    "note": "Account Rulesets Read is a broader alternative, not additionally requested when Mass URL Redirects Read suffices for selected account ingress phase. Existing Access/Pages/Workers read permissions need no addition."
+  },
+  "evidence": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T4-CONTROL-PLANE-READ-EVIDENCE.json",
+  "evidenceSHA256": "d53fb408da8b5aee86c8f35b89cefc4b0a93ba3aa940cfc309022738158dccfc",
+  "options": [
+    {
+      "option": "Access exact/wildcard application",
+      "canMatchHashSubdomains": "YES_DOCUMENTED_HOST_PATTERN; production-hash attachment unproven",
+      "beforeHistoricalHandler": "UNPROVEN",
+      "preserveGetphios": "UNPROVEN_RUNTIME; exact-host separation possible; Pages docs custom-domain authentication caveat must be resolved",
+      "reversible": "YES",
+      "customerImpact": "Old URL may require login; avoid exposing authenticated old API writes to historical reviewers",
+      "strength": "Conditional ingress boundary only; bypass/allow policies must not leave old mutation paths available",
+      "decision": "Not selected; although app list readable empty, full production-hash onboarding and custom-domain caveat remain unproven"
+    },
+    {
+      "option": "Bulk Redirect exact canary / project include_subdomains",
+      "canMatchHashSubdomains": "YES_DOCUMENTED_DESIGN; current account attachment/order unproven",
+      "beforeHistoricalHandler": "UNPROVEN_MACHINE_PROOF_REQUIRED",
+      "preserveGetphios": "YES_EXACT_MATCH_SYNTAX; runtime UNPROVEN",
+      "reversible": "YES",
+      "customerImpact": "Exact canary URL redirects to current domain; no customer host match",
+      "strength": "Conditional positive terminating edge-rule proof and complete scope needed",
+      "decision": "SELECTED_CONDITIONAL_DRAFT_BLOCKED_READ_PERMISSIONS"
+    },
+    {
+      "option": "Existing project-root pages.dev redirect",
+      "canMatchHashSubdomains": "NO_COVERAGE_PROVEN_FOR_CANARY2",
+      "beforeHistoricalHandler": "UNPROVEN",
+      "preserveGetphios": "Current GET200",
+      "reversible": "UNVERIFIED_EXISTING_CONTROL_UNREADABLE",
+      "customerImpact": "Root301 exists while historical hash still returns200; no security equivalence",
+      "strength": "Insufficient current observed coverage"
+    },
+    {
+      "option": "getphios.com zone hostname/redirect rules",
+      "canMatchHashSubdomains": "NO_WITH_ONLY_OWNER_GETPHIOS_ZONE_SCOPE",
+      "beforeHistoricalHandler": "NO_FOR_PROVIDER_MANAGED_PAGES_DEV_HOST",
+      "preserveGetphios": "Changes could affect current customer domain",
+      "reversible": "YES_CONFIG_DESIGN",
+      "customerImpact": "Wrong scope for historical pages.dev containment",
+      "strength": "Not candidate"
+    }
+  ],
+  "candidateFile": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T4-INGRESS-CANARY-CANDIDATE.json",
+  "freshRuntimeFindings": [
+    {
+      "kind": "DNS_RESOLUTION",
+      "host": "getphios.com",
+      "at": "2026-10-12T14:21:13.695Z",
+      "addresses": [
+        {
+          "address": "2606:4700:3034::ac43:d827",
+          "family": 6
+        },
+        {
+          "address": "2606:4700:3033::6815:3307",
+          "family": 6
+        },
+        {
+          "address": "104.21.51.7",
+          "family": 4
+        },
+        {
+          "address": "172.67.216.39",
+          "family": 4
+        }
+      ],
+      "managedDNSRecords": "SEE_CONTROL_MATRIX"
+    },
+    {
+      "kind": "GET",
+      "host": "getphios.com",
+      "path": "/",
+      "at": "2026-10-12T14:21:15.263Z",
+      "status": 200,
+      "location": null,
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "cfRay": "a496bff30dee09bc-HKG",
+      "bodyBytes": 23687,
+      "bodySHA256": "23e5f171361af49ba197250ac8457ba4e8df46db09b1d9786552f2cf671fe724",
+      "bodyStored": false
+    },
+    {
+      "kind": "DNS_RESOLUTION",
+      "host": "phios-github.pages.dev",
+      "at": "2026-10-12T14:21:15.264Z",
+      "addresses": [
+        {
+          "address": "2606:4700:310c::ac42:2f95",
+          "family": 6
+        },
+        {
+          "address": "2606:4700:310c::ac42:2c6b",
+          "family": 6
+        },
+        {
+          "address": "172.66.47.149",
+          "family": 4
+        },
+        {
+          "address": "172.66.44.107",
+          "family": 4
+        }
+      ],
+      "managedDNSRecords": "PROVIDER_MANAGED_NOT_OWNER_ZONE; no owner pages.dev DNS write/read authority assumed"
+    },
+    {
+      "kind": "GET",
+      "host": "phios-github.pages.dev",
+      "path": "/",
+      "at": "2026-10-12T14:21:15.469Z",
+      "status": 301,
+      "location": "https://getphios.com/?p9_t4=edce2748-caa8-4aba-940e-20bb60f6b4d2",
+      "cacheControl": null,
+      "cfRay": "a496bffce9848532-HKG",
+      "bodyBytes": 167,
+      "bodySHA256": "446a6087825fa73eadb045e5a2e9e2adf7df241b571228187728191d961dda1f",
+      "bodyStored": false
+    },
+    {
+      "kind": "DNS_RESOLUTION",
+      "host": "41b1c458.phios-github.pages.dev",
+      "at": "2026-10-12T14:21:15.469Z",
+      "addresses": [
+        {
+          "address": "2606:4700:310c::ac42:2c6b",
+          "family": 6
+        },
+        {
+          "address": "2606:4700:310c::ac42:2f95",
+          "family": 6
+        },
+        {
+          "address": "172.66.44.107",
+          "family": 4
+        },
+        {
+          "address": "172.66.47.149",
+          "family": 4
+        }
+      ],
+      "managedDNSRecords": "PROVIDER_MANAGED_NOT_OWNER_ZONE; no owner pages.dev DNS write/read authority assumed"
+    },
+    {
+      "kind": "GET",
+      "host": "41b1c458.phios-github.pages.dev",
+      "path": "/api/auth/session",
+      "at": "2026-10-12T14:21:16.919Z",
+      "status": 200,
+      "location": null,
+      "cacheControl": "private, no-store",
+      "cfRay": "a496bffe3b03ddc2-HKG",
+      "bodyBytes": 77,
+      "bodySHA256": "b71b0f31773379c546509f2f8a1ad6b96b8f8af78479d5598e94ad1e1d73af57",
+      "bodyStored": false
+    }
+  ],
+  "identityGap": "Deleted canary1 remains UNVERIFIED; no new identity instrumentation authorized",
+  "longTermCapability": "Future current write service/release only; historical direct D1 capability target revoked; not implemented",
+  "productionMutations": 0,
+  "D1Mutations": 0,
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "payments": 0,
+  "refunds": 0,
+  "migrations": 0,
+  "commits": 0,
+  "pushes": 0,
+  "firstRemainingBlocker": "P9_T4_SELECTED_INGRESS_CONTROL_READ_PERMISSION_GAP",
+  "previousEvidence": [
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/PHIOS-HISTORICAL-DEPLOYMENT-ACCEPTANCE-POLICY-R1.json",
+      "sha256": "a1319c6bb310d8985db20ed04dfb699efca483e6a0e0a07e2e8c25258d5f7837"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T3-DEPLOYMENT-AUTHORITY-MODEL.json",
+      "sha256": "e1e20ebbb9434676e6002289ad834bc7a54683fc1e045c5a060ad10e265e3341"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T2-R1-DELETED-SURFACE-RESIDUAL-EXECUTION.json",
+      "sha256": "e5701d3ce5c53fa8814ffeacdb3907b0cd0d1dde1e48fd82cbe5acf3778f35ae"
+    }
+  ],
+  "STOP": true
+}

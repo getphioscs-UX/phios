@@ -1,14 +1,17 @@
 import {approvedTerminologyForSourcePack} from '../../knowledge-runtime/approved-terminology-context.js';
+import publicBooks from '../../../content/knowledge/public/successors/eight-volume-v1/public-book-metadata.json';
 import {digest} from '../../account/oidc-auth.js';
 export async function buildMembershipAuthorityPack({question,locale,records,customerContext=null}){
  if(typeof question!=='string'||!question.trim()||question.length>2000||!['en','zh-Hans'].includes(locale))throw Error('ASK_INPUT_INVALID');
  const sources=[];
- for(const r of (records||[]).slice(0,4)){
+ for(const r of (records||[])){
+  if(sources.length>=4)break;
   const u=r.explanationUnit;
   if(r.sourceType!=='COMPLETED_MANUSCRIPT'||!r.sourceAcceptanceDigest||!u?.mainArgument||!r.sourceBinaryDigest||!r.sourceVersion||u.sourceSectionId!==r.sectionCode||u.support?.textSha256!==await digest(u.mainArgument))continue;
   const bookCode=/BOOK-\d/.exec(r.sourceCode||'')?.[0]||r.bookCode||'';
+  const publicBook=publicBooks.records.find(b=>b.bookCode===bookCode&&b.volume<=7),bookRoute=r.bookRoute||publicBook?.canonicalRoute||null;
   const chapterDeepLink='/membership-source.html?'+new URLSearchParams({bookCode,chapter:r.sectionCode,q:question,locale}).toString();
-  sources.push({id:'S'+(sources.length+1),sourceCode:r.sourceCode,sourceVersion:r.sourceVersion,sourceSha256:r.sourceBinaryDigest,sourceAcceptanceDigest:r.sourceAcceptanceDigest,chapterId:r.sectionCode,heading:r.heading,sourceLanguage:u.locale||'zh-Hans',pdfPages:r.pageRange,support:u.support,text:u.mainArgument,readingHref:r.bookRoute||null,chapterDeepLink,chapterDeepLinkState:'SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION',purchaseHref:r.bookRoute||null,purchaseLinkRole:'BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS',permissions:{knowledgeExcerpt:true,fullTextDownload:false,reconstructBook:false}});
+  sources.push({id:'S'+(sources.length+1),sourceCode:r.sourceCode,sourceVersion:r.sourceVersion,sourceSha256:r.sourceBinaryDigest,sourceAcceptanceDigest:r.sourceAcceptanceDigest,chapterId:r.sectionCode,heading:r.heading,sourceLanguage:u.locale||'zh-Hans',pdfPages:r.pageRange,support:u.support,text:u.mainArgument,readingHref:bookRoute,chapterDeepLink,chapterDeepLinkState:'SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION',purchaseHref:bookRoute,purchaseLinkRole:'BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS',permissions:{knowledgeExcerpt:true,fullTextDownload:false,reconstructBook:false}});
  }
  const glossary=approvedTerminologyForSourcePack(question,locale,sources);
  const constraints={answerLocale:locale,sourceLanguagesDisclosed:true,translationDoesNotAcceptEnglishManuscript:true,sourceOnly:true,noGeneralKnowledgeFallback:true,preserveConditions:true,directAnswerWhenSupported:true,claimCitationsRequired:true,compareBothSides:true,untrustedSourceInstructions:true,noPrivateTextReconstruction:true,noOCRPromotion:true,noGlossaryPromotion:true,customerContextIsCustomerSuppliedNotEstablishedFact:true,purchaseMustNotReplaceAnswer:true};

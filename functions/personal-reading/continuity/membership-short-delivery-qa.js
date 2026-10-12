@@ -7,7 +7,7 @@ import {activeContinuitySubscription} from './continuity-quota-d1.js';
 const grants=new WeakMap();
 export async function prepareShortDeliveryRequest(pack,{depth='ORDINARY',confirmed=false}={}){
  if(depth==='DEEP'&&!confirmed||!['ORDINARY','DEEP'].includes(depth))throw Error('EXPLICIT_TASK_SCOPE_REQUIRED');
- const candidate=await createShortFragmentRequest(pack),body={model:depth==='ORDINARY'?'gpt-5.6-luna':'gpt-5.6-terra',store:false,max_output_tokens:1400,input:[{role:'system',content:'Use only supplied source evidence and exact pack-local IDs. Answer the actual question naturally. Preserve conditions, uncertainty and negation. Reviewed scope annotations restrict assertions; background is not a definition or causal proof. If a relation is not established, give the supported part and state the specific gap. Do not add editorial acceptance/workflow messages or language labels: the server displays source language. Return the declared JSON schema with an internal statement-to-source map. Do not generate quotations, hashes or purchase recommendations.'},{role:'user',content:JSON.stringify(candidate.modelPayload)}]};
+ const candidate=await createShortFragmentRequest(pack),body={model:depth==='ORDINARY'?'gpt-5.6-luna':'gpt-5.6-terra',store:false,max_output_tokens:1400,input:[{role:'system',content:'Use only supplied source evidence and exact pack-local IDs. Answer the actual question naturally. Preserve conditions, uncertainty and negation. Reviewed scope annotations restrict assertions; background is not a definition or causal proof. If a relation is not established, give the supported part and state the specific gap. Do not add editorial acceptance/workflow messages or language labels: the server displays source language. Comparison sides require their own definitions/conditions and an established comparison relationship; keyword recall is not support. Gaps apply only to THIS admitted source pack. Keep answer and limitations to at most 8 complete sentence units in total; do not drop needed qualifiers to fit, state a supported partial answer instead. Return the declared JSON schema with an internal statement-to-source map. Do not generate quotations, hashes or purchase recommendations.'},{role:'user',content:JSON.stringify(candidate.modelPayload)}]};
  return {body,serverBinding:candidate.serverBinding,maximumMicroUSD:shortDeliveryMaximum(body),automaticRetry:0,paidAuthorization:false};
 }
 export async function runMembershipDeliveryQA(context,input,{prepare,capability,...options}){
@@ -25,8 +25,8 @@ export function createMembershipDeliveryQACapability(env,grant){
 }
 export function shortDeliveryMaximum(body){
  const rates={'gpt-5.6-luna':[250,1200],'gpt-5.6-terra':[2500,12000]},p=rates[body.model];
- if(!p||body.max_output_tokens!==1400||body.tools?.length)throw Error('QA_REQUEST_NOT_ADMITTED');
- return Math.ceil(((new TextEncoder().encode(JSON.stringify(body)).length+512)*p[0]+1400*p[1])/1000);
+ if(!p||!Number.isSafeInteger(body.max_output_tokens)||body.max_output_tokens<1||body.max_output_tokens>1400||body.tools?.length)throw Error('QA_REQUEST_NOT_ADMITTED');
+ return Math.ceil(((new TextEncoder().encode(JSON.stringify(body)).length+512)*p[0]+body.max_output_tokens*p[1])/1000);
 }
 export function meterShortDeliveryUsage(model,usage){
  const rates={'gpt-5.6-luna':[200,20,50,1200],'gpt-5.6-terra':[2000,200,500,12000]},p=rates[model],input=usage?.input_tokens,cached=usage?.input_tokens_details?.cached_tokens,writes=usage?.input_tokens_details?.cache_write_tokens??usage?.input_tokens_details?.cache_creation_tokens,output=usage?.output_tokens;

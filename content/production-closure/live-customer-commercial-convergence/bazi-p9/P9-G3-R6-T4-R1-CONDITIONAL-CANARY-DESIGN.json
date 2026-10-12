@@ -1,0 +1,116 @@
+{
+  "status": "FROZEN_CONDITIONAL_DESIGN_NOT_EXECUTABLE",
+  "authorization": "NOT_AUTHORIZED",
+  "controlPlaneVisibilityComplete": false,
+  "blockingGap": {
+    "endpoint": "/zones/86dbea6c11ed5fa37a92003037b25f87/load_balancers?per_page=100",
+    "status": 403,
+    "code": 10000,
+    "minimumScope": "Zone getphios.com / Load Balancers Read",
+    "currentTokenScope": "Account Load Balancers Read succeeds on account endpoint, fails on zone endpoint",
+    "confidence": "Scope-specific failure observed; legacy zone permission documented in Zone Details; consolidated LB list reference documents only Account Read. Zone Read must be verified rather than presumed sufficient.",
+    "writeRequested": false
+  },
+  "account": "0b9f36bdf56f38d7d09aebe388f15204",
+  "zoneMutation": false,
+  "resourceType": "Account Bulk Redirect list + one surgical rule",
+  "existingRuleset": {
+    "id": "e4920e8f14574ec9abce2fbe9d764056",
+    "version": "2",
+    "phase": "http_request_redirect"
+  },
+  "existingListsReused": false,
+  "newListRequired": true,
+  "newRuleRequired": true,
+  "operations": [
+    {
+      "method": "POST",
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists",
+      "body": {
+        "name": "p9_t4_canary2_ingress",
+        "kind": "redirect",
+        "description": "P9 exact Canary 2 ingress containment; separately authorized only"
+      }
+    },
+    {
+      "method": "POST",
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/{NEW_LIST_ID}/items",
+      "body": [
+        {
+          "redirect": {
+            "source_url": "41b1c458.phios-github.pages.dev/",
+            "target_url": "https://getphios.com/",
+            "status_code": 307,
+            "include_subdomains": false,
+            "subpath_matching": true,
+            "preserve_path_suffix": true,
+            "preserve_query_string": true
+          }
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/e4920e8f14574ec9abce2fbe9d764056/rules",
+      "body": {
+        "action": "redirect",
+        "action_parameters": {
+          "from_list": {
+            "name": "p9_t4_canary2_ingress",
+            "key": "http.request.full_uri"
+          }
+        },
+        "expression": "(http.host eq \"41b1c458.phios-github.pages.dev\") and (http.request.full_uri in $p9_t4_canary2_ingress)",
+        "description": "P9 Canary 2 only; no wildcard historical retirement",
+        "enabled": true,
+        "position": {
+          "after": "24d6cca9d501477886de2a85fa51bf32"
+        }
+      }
+    }
+  ],
+  "sourceSchemes": "Schemaless source matches HTTP and HTTPS; target HTTPS",
+  "rulePosition": 3,
+  "existingRuleOrderPreserved": [
+    "635f3e11b273436bba9615274561471b",
+    "24d6cca9d501477886de2a85fa51bf32"
+  ],
+  "entireRulesetPUTForbidden": true,
+  "statusCodeReview": "307 is a proposal only, NOT HUMAN_ACCEPTED. It preserves POST method/body; clients following could reach current canonical handler. Future probes must disable following; current destination isolation separately proven before broad use.",
+  "currentProductionExemption": {
+    "authorityDeployment": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+    "excludedHosts": [
+      "getphios.com",
+      "www.getphios.com",
+      "phios-github.pages.dev",
+      "b07d86bf.phios-github.pages.dev"
+    ],
+    "basis": "Exact http.host equality + exact list hostname with include_subdomains=false",
+    "runtimeVerified": false
+  },
+  "customerImpact": "Only requests to exact superseded canary hostname redirect to canonical, preserving path/query; no other source hosts matched. Canonical response may differ from historical material; no overall topology isolation asserted.",
+  "rollback": [
+    {
+      "method": "DELETE",
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/e4920e8f14574ec9abce2fbe9d764056/rules/{NEW_RULE_ID}",
+      "condition": "Delete only newly returned rule ID; preserve both original rules and ordering"
+    },
+    {
+      "method": "DELETE",
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/{NEW_LIST_ID}",
+      "condition": "Only newly returned list ID after checking no other rule references it; if unexpected reference STOP"
+    }
+  ],
+  "executionPreconditions": [
+    "Complete zone LB visibility or prove relevant zone scope cannot conflict",
+    "Separate Human acceptance of exact 307 design and mutation authorization",
+    "Fresh rule/list/version baseline identical to frozen evidence; stop on drift",
+    "Confirm name unused, capacity available and async list operation complete before rule enabling",
+    "Collector readiness and bounded non-mutating runtime test plan explicitly authorized"
+  ],
+  "providerCalls": 0,
+  "costUSD": 0,
+  "productionMutations": 0,
+  "d1Mutations": 0,
+  "designSHA256": "14dea945b73dd8390f1a3aeaf35235c3572454c0cf8d4e4409491a61edfd70cb"
+}

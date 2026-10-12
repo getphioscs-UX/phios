@@ -1,6 +1,6 @@
 {
-  "at": "2026-10-12T13:26:52.114Z",
-  "head": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+  "at": "2026-10-12T13:29:21.258Z",
+  "head": "def55d22ecf96e48141914772b0c58d6d8171161",
   "requestSha256": "2b6e7a159d19f08f19f39634000726ead1304ff99de2bbda9a41b93be07ff71e",
   "calls": 8,
   "retries": 0,
@@ -115,6 +115,7 @@
     {
       "id": "V2-VII-ZH",
       "question": "一次观测没有发现目标，这是否足以认定目标不存在？",
+      "syntheticInput": null,
       "syntheticNegative": false,
       "executionState": "COMPLETE",
       "deliverable": true,
@@ -553,6 +554,7 @@
     {
       "id": "V2-VII-EN",
       "question": "Does failing to observe an object prove that it does not exist?",
+      "syntheticInput": null,
       "syntheticNegative": false,
       "executionState": "COMPLETE",
       "deliverable": true,
@@ -881,8 +883,10 @@
     {
       "id": "V2-RECOVERY",
       "question": "正常维持与发生损坏后恢复有什么区别？",
+      "syntheticInput": null,
       "syntheticNegative": false,
       "executionState": "FAILED",
+      "deliverable": false,
       "answerCompleteness": "FAILED",
       "error": "INCOMPLETE_OR_OVER_BUDGET_NO_RETRY",
       "costNanoUSD": 4043000,
@@ -1254,6 +1258,20 @@
     },
     {
       "id": "V2-NEGATION-NEGATIVE",
+      "question": "一次观测没有发现目标，这是否足以认定目标不存在？",
+      "syntheticInput": {
+        "locale": "zh-Hans",
+        "answer": "只要没有观察到一个对象，就能确定它不存在。",
+        "supportMap": [
+          {
+            "statement": "只要没有观察到一个对象，就能确定它不存在。",
+            "sourceIds": [
+              "S1"
+            ],
+            "relation": "DIRECT_SUPPORT"
+          }
+        ]
+      },
       "syntheticNegative": true,
       "executionState": "COMPLETE",
       "deliverable": false,
@@ -1585,6 +1603,20 @@
     },
     {
       "id": "V2-RECOVERY-NEGATIVE",
+      "question": "正常维持与发生损坏后恢复有什么区别？",
+      "syntheticInput": {
+        "locale": "zh-Hans",
+        "answer": "损坏后的恢复就是更换损坏部件，正常维持必然保证恢复成功。",
+        "supportMap": [
+          {
+            "statement": "损坏后的恢复就是更换损坏部件，正常维持必然保证恢复成功。",
+            "sourceIds": [
+              "S1"
+            ],
+            "relation": "DIRECT_SUPPORT"
+          }
+        ]
+      },
       "syntheticNegative": true,
       "executionState": "COMPLETE",
       "deliverable": false,

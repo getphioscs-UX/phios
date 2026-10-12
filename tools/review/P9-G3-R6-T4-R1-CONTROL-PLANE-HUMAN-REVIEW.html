@@ -1,0 +1,262 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P9 T4-R1 Read Closure</title><style>body{max-width:1100px;margin:36px auto;padding:0 20px;font:16px/1.6 system-ui;color:#172c36;background:#fafaf7}h1,h2{line-height:1.3}table{width:100%;border-collapse:collapse}td,th{padding:9px;border:1px solid #ccd6d6;text-align:left;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eef2f2;padding:20px}.warn{border-left:5px solid #a55d22;padding:15px;background:#fff1df}</style><h1>P9 G3-R6-T4-R1 · Read-only control-plane closure</h1><p class="warn">BLOCKED_ZONE_LOAD_BALANCER_READ_SCOPE. No canary mutation authorized or executed. Conditional 307 design is frozen for review, not executable. PRODUCTION_D1_WRITE_ISOLATION remains unproven.</p><p>Local-file credential only; tokenValueRecorded=false; expiry 2026-10-14. Prior T4 and historical evidence preserved. All cloud calls in this continuation are GET; no D1/provider/payment/commit/push.</p><h2>Actual machine evidence</h2><table><tr><th>Resource</th><th>HTTP</th><th>Read / complete</th><th>Count</th></tr><tr><td>Load Balancers<br>/zones/86dbea6c11ed5fa37a92003037b25f87/load_balancers?per_page=100</td><td>403</td><td>NO / false</td><td>UNKNOWN_NOT_ZERO</td></tr><tr><td>Monitors<br>/accounts/0b9f36bdf56f38d7d09aebe388f15204/load_balancers/monitors?per_page=100</td><td>200</td><td>YES / true</td><td>0</td></tr><tr><td>Pools<br>/accounts/0b9f36bdf56f38d7d09aebe388f15204/load_balancers/pools?per_page=100</td><td>200</td><td>YES / true</td><td>0</td></tr><tr><td>DNS<br>/zones/86dbea6c11ed5fa37a92003037b25f87/dns_records?per_page=100</td><td>200</td><td>YES / true</td><td>3</td></tr><tr><td>Account Rulesets<br>/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets</td><td>200</td><td>YES / true</td><td>2</td></tr><tr><td>Request Header Transforms<br>/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_request_late_transform/entrypoint</td><td>404</td><td>NO / false</td><td>UNKNOWN_NOT_ZERO</td></tr><tr><td>URL Transforms<br>/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_request_transform/entrypoint</td><td>404</td><td>NO / false</td><td>UNKNOWN_NOT_ZERO</td></tr><tr><td>Bulk entrypoint<br>/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/phases/http_request_redirect/entrypoint</td><td>200</td><td>YES / true</td><td>null</td></tr><tr><td>Filter Lists<br>/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists?per_page=100</td><td>200</td><td>YES / true</td><td>2</td></tr><tr><td>Zone Rulesets<br>/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets</td><td>200</td><td>YES / true</td><td>3</td></tr><tr><td>Dynamic Redirects<br>/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_request_dynamic_redirect/entrypoint</td><td>404</td><td>NO / false</td><td>UNKNOWN_NOT_ZERO</td></tr><tr><td>Response Header Transforms<br>/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_response_headers_transform/entrypoint</td><td>404</td><td>NO / false</td><td>UNKNOWN_NOT_ZERO</td></tr><tr><td>Account Load Balancers<br>/accounts/0b9f36bdf56f38d7d09aebe388f15204/load_balancers?per_page=100</td><td>200</td><td>YES / true</td><td>0</td></tr><tr><td>List items getphios_pagesdev_canonical<br>/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/9d06d0169ea948e8ba640bb1fab48cde/items?per_page=100</td><td>200</td><td>YES / true</td><td>1</td></tr><tr><td>List items getphios_www_canonical<br>/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/3cddd65c75a24866b759eff4fde8ee63/items?per_page=100</td><td>200</td><td>YES / true</td><td>1</td></tr><tr><td>Ruleset e4920e8f14574ec9abce2fbe9d764056<br>/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/e4920e8f14574ec9abce2fbe9d764056</td><td>200</td><td>YES / true</td><td>null</td></tr></table><h2>404 absence corroboration</h2><pre>[
+  {
+    &quot;name&quot;: &quot;Dynamic Redirects&quot;,
+    &quot;phase&quot;: &quot;http_request_dynamic_redirect&quot;,
+    &quot;httpStatus&quot;: 404,
+    &quot;permissionAvailable&quot;: true,
+    &quot;absenceProven&quot;: true,
+    &quot;basis&quot;: &quot;Exact phase error10003 + complete zone rulesets GET200, no entrypoint for phase; token includes explicit corresponding Read permission&quot;,
+    &quot;count&quot;: 0
+  },
+  {
+    &quot;name&quot;: &quot;URL Transforms&quot;,
+    &quot;phase&quot;: &quot;http_request_transform&quot;,
+    &quot;httpStatus&quot;: 404,
+    &quot;permissionAvailable&quot;: true,
+    &quot;absenceProven&quot;: true,
+    &quot;basis&quot;: &quot;Exact phase error10003 + complete zone rulesets GET200, no entrypoint for phase; token includes explicit corresponding Read permission&quot;,
+    &quot;count&quot;: 0
+  },
+  {
+    &quot;name&quot;: &quot;Request Header Transforms&quot;,
+    &quot;phase&quot;: &quot;http_request_late_transform&quot;,
+    &quot;httpStatus&quot;: 404,
+    &quot;permissionAvailable&quot;: true,
+    &quot;absenceProven&quot;: true,
+    &quot;basis&quot;: &quot;Exact phase error10003 + complete zone rulesets GET200, no entrypoint for phase; token includes explicit corresponding Read permission&quot;,
+    &quot;count&quot;: 0
+  },
+  {
+    &quot;name&quot;: &quot;Response Header Transforms&quot;,
+    &quot;phase&quot;: &quot;http_response_headers_transform&quot;,
+    &quot;httpStatus&quot;: 404,
+    &quot;permissionAvailable&quot;: true,
+    &quot;absenceProven&quot;: true,
+    &quot;basis&quot;: &quot;Exact phase error10003 + complete zone rulesets GET200, no entrypoint for phase; token includes explicit corresponding Read permission&quot;,
+    &quot;count&quot;: 0
+  }
+]</pre><h2>Scope-specific 403 remains</h2><pre>{
+  &quot;endpoint&quot;: &quot;/zones/86dbea6c11ed5fa37a92003037b25f87/load_balancers?per_page=100&quot;,
+  &quot;status&quot;: 403,
+  &quot;code&quot;: 10000,
+  &quot;minimumScope&quot;: &quot;Zone getphios.com / Load Balancers Read&quot;,
+  &quot;currentTokenScope&quot;: &quot;Account Load Balancers Read succeeds on account endpoint, fails on zone endpoint&quot;,
+  &quot;confidence&quot;: &quot;Scope-specific failure observed; legacy zone permission documented in Zone Details; consolidated LB list reference documents only Account Read. Zone Read must be verified rather than presumed sufficient.&quot;,
+  &quot;writeRequested&quot;: false
+}</pre><p>Account LB=0, Pools=0 and Monitors=0 are proven. Zone LB remains UNKNOWN. This is not an empty zone LB inventory.</p><h2>Existing Bulk rules and source coverage</h2><pre>{
+  &quot;rules&quot;: [
+    {
+      &quot;position&quot;: 1,
+      &quot;action&quot;: &quot;redirect&quot;,
+      &quot;action_parameters&quot;: {
+        &quot;from_list&quot;: {
+          &quot;key&quot;: &quot;http.request.full_uri&quot;,
+          &quot;name&quot;: &quot;getphios_www_canonical&quot;
+        }
+      },
+      &quot;description&quot;: &quot;poc-b4-www-to-canonical&quot;,
+      &quot;enabled&quot;: true,
+      &quot;expression&quot;: &quot;http.request.full_uri in $getphios_www_canonical&quot;,
+      &quot;id&quot;: &quot;635f3e11b273436bba9615274561471b&quot;,
+      &quot;last_updated&quot;: &quot;2026-09-14T09:54:56.088239Z&quot;,
+      &quot;ref&quot;: &quot;635f3e11b273436bba9615274561471b&quot;,
+      &quot;version&quot;: &quot;1&quot;
+    },
+    {
+      &quot;position&quot;: 2,
+      &quot;action&quot;: &quot;redirect&quot;,
+      &quot;action_parameters&quot;: {
+        &quot;from_list&quot;: {
+          &quot;key&quot;: &quot;http.request.full_uri&quot;,
+          &quot;name&quot;: &quot;getphios_pagesdev_canonical&quot;
+        }
+      },
+      &quot;description&quot;: &quot;poc-b6-pagesdev-to-canonical&quot;,
+      &quot;enabled&quot;: true,
+      &quot;expression&quot;: &quot;http.request.full_uri in $getphios_pagesdev_canonical&quot;,
+      &quot;id&quot;: &quot;24d6cca9d501477886de2a85fa51bf32&quot;,
+      &quot;last_updated&quot;: &quot;2026-09-14T11:35:09.76747Z&quot;,
+      &quot;ref&quot;: &quot;24d6cca9d501477886de2a85fa51bf32&quot;,
+      &quot;version&quot;: &quot;1&quot;
+    }
+  ],
+  &quot;items&quot;: [
+    {
+      &quot;name&quot;: &quot;List items getphios_pagesdev_canonical&quot;,
+      &quot;items&quot;: [
+        {
+          &quot;id&quot;: &quot;b2fffac44073440fa64bc64d0d3446e2&quot;,
+          &quot;redirect&quot;: {
+            &quot;source_url&quot;: &quot;https://phios-github.pages.dev/&quot;,
+            &quot;include_subdomains&quot;: false,
+            &quot;target_url&quot;: &quot;https://getphios.com/&quot;,
+            &quot;status_code&quot;: 301,
+            &quot;preserve_query_string&quot;: true,
+            &quot;subpath_matching&quot;: true,
+            &quot;preserve_path_suffix&quot;: true
+          },
+          &quot;created_on&quot;: &quot;2026-09-14T11:34:54Z&quot;,
+          &quot;modified_on&quot;: &quot;2026-09-18T08:14:02Z&quot;
+        }
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;List items getphios_www_canonical&quot;,
+      &quot;items&quot;: [
+        {
+          &quot;id&quot;: &quot;efe241a0622b409fadfdf4214338ebd5&quot;,
+          &quot;redirect&quot;: {
+            &quot;source_url&quot;: &quot;https://www.getphios.com/&quot;,
+            &quot;target_url&quot;: &quot;https://getphios.com/&quot;,
+            &quot;status_code&quot;: 301,
+            &quot;preserve_query_string&quot;: true,
+            &quot;subpath_matching&quot;: true,
+            &quot;preserve_path_suffix&quot;: true
+          },
+          &quot;created_on&quot;: &quot;2026-09-14T09:50:57Z&quot;,
+          &quot;modified_on&quot;: &quot;2026-09-14T09:52:25Z&quot;
+        }
+      ]
+    }
+  ],
+  &quot;coverage&quot;: {
+    &quot;projectRoot&quot;: &quot;HTTPS all subpaths/query via B6&quot;,
+    &quot;wildcardHashHosts&quot;: &quot;NOT_COVERED: B6 include_subdomains=false&quot;,
+    &quot;canary2&quot;: &quot;NOT_COVERED&quot;,
+    &quot;getphiosCom&quot;: &quot;No source match in existing two lists; destination only&quot;
+  }
+}</pre><h2>Proxy eligibility and pre-handler evidence limits</h2><pre>{
+  &quot;proxy&quot;: {
+    &quot;transport&quot;: &quot;Cloudflare addresses + server cloudflare + CF-Ray observed for exact hash hostname&quot;,
+    &quot;ownerDNS&quot;: &quot;pages.dev provider-managed, not getphios.com zone record&quot;,
+    &quot;mechanismEligibility&quot;: &quot;DOCUMENTED_DESIGN_SUPPORTED; exact historical hash execution not runtime-proven&quot;,
+    &quot;basis&quot;: &quot;Official Pages recipe enables Include subdomains for project.pages.dev, covering deployment hash subdomains. URL matcher permits exact host and schemeless source. This is architectural inference, not observed canary rule execution.&quot;
+  },
+  &quot;preHandler&quot;: {
+    &quot;architecture&quot;: &quot;Bulk redirect terminates processing immediately when matching; documented Pages integration supports pages.dev subdomains&quot;,
+    &quot;exactHistoricalFunctions&quot;: &quot;RUNTIME_UNVERIFIED&quot;,
+    &quot;proofRequired&quot;: [
+      &quot;Before any later authorized mutation: working correlated edge/Pages trace collector must be demonstrated; silence alone is not proof&quot;,
+      &quot;After separately authorized surgical rule creation: capture edge matching rule ID and terminating redirect for exact canary GET and bounded non-mutating POST, auto-follow OFF&quot;,
+      &quot;Correlate requests with serving execution identity; prove historical Pages handler not invoked; no sensitive/body data in trace&quot;,
+      &quot;Verify current authority exempt on canonical, www, root pages.dev and b07d86bf hash; compare control-plane baseline&quot;,
+      &quot;Zero production data mutation proof needs separate authorized read-only D1 verification; no D1 operations in this task&quot;,
+      &quot;Test HTTPS and HTTP, representative paths/query/encoded paths, no unintended subdomains or authority hosts; do not forward POST to canonical&quot;
+    ]
+  }
+}</pre><h2>Exact conditional design and rollback</h2><pre>{
+  &quot;status&quot;: &quot;FROZEN_CONDITIONAL_DESIGN_NOT_EXECUTABLE&quot;,
+  &quot;authorization&quot;: &quot;NOT_AUTHORIZED&quot;,
+  &quot;controlPlaneVisibilityComplete&quot;: false,
+  &quot;blockingGap&quot;: {
+    &quot;endpoint&quot;: &quot;/zones/86dbea6c11ed5fa37a92003037b25f87/load_balancers?per_page=100&quot;,
+    &quot;status&quot;: 403,
+    &quot;code&quot;: 10000,
+    &quot;minimumScope&quot;: &quot;Zone getphios.com / Load Balancers Read&quot;,
+    &quot;currentTokenScope&quot;: &quot;Account Load Balancers Read succeeds on account endpoint, fails on zone endpoint&quot;,
+    &quot;confidence&quot;: &quot;Scope-specific failure observed; legacy zone permission documented in Zone Details; consolidated LB list reference documents only Account Read. Zone Read must be verified rather than presumed sufficient.&quot;,
+    &quot;writeRequested&quot;: false
+  },
+  &quot;account&quot;: &quot;0b9f36bdf56f38d7d09aebe388f15204&quot;,
+  &quot;zoneMutation&quot;: false,
+  &quot;resourceType&quot;: &quot;Account Bulk Redirect list + one surgical rule&quot;,
+  &quot;existingRuleset&quot;: {
+    &quot;id&quot;: &quot;e4920e8f14574ec9abce2fbe9d764056&quot;,
+    &quot;version&quot;: &quot;2&quot;,
+    &quot;phase&quot;: &quot;http_request_redirect&quot;
+  },
+  &quot;existingListsReused&quot;: false,
+  &quot;newListRequired&quot;: true,
+  &quot;newRuleRequired&quot;: true,
+  &quot;operations&quot;: [
+    {
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;endpoint&quot;: &quot;/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists&quot;,
+      &quot;body&quot;: {
+        &quot;name&quot;: &quot;p9_t4_canary2_ingress&quot;,
+        &quot;kind&quot;: &quot;redirect&quot;,
+        &quot;description&quot;: &quot;P9 exact Canary 2 ingress containment; separately authorized only&quot;
+      }
+    },
+    {
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;endpoint&quot;: &quot;/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/{NEW_LIST_ID}/items&quot;,
+      &quot;body&quot;: [
+        {
+          &quot;redirect&quot;: {
+            &quot;source_url&quot;: &quot;41b1c458.phios-github.pages.dev/&quot;,
+            &quot;target_url&quot;: &quot;https://getphios.com/&quot;,
+            &quot;status_code&quot;: 307,
+            &quot;include_subdomains&quot;: false,
+            &quot;subpath_matching&quot;: true,
+            &quot;preserve_path_suffix&quot;: true,
+            &quot;preserve_query_string&quot;: true
+          }
+        }
+      ]
+    },
+    {
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;endpoint&quot;: &quot;/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/e4920e8f14574ec9abce2fbe9d764056/rules&quot;,
+      &quot;body&quot;: {
+        &quot;action&quot;: &quot;redirect&quot;,
+        &quot;action_parameters&quot;: {
+          &quot;from_list&quot;: {
+            &quot;name&quot;: &quot;p9_t4_canary2_ingress&quot;,
+            &quot;key&quot;: &quot;http.request.full_uri&quot;
+          }
+        },
+        &quot;expression&quot;: &quot;(http.host eq \&quot;41b1c458.phios-github.pages.dev\&quot;) and (http.request.full_uri in $p9_t4_canary2_ingress)&quot;,
+        &quot;description&quot;: &quot;P9 Canary 2 only; no wildcard historical retirement&quot;,
+        &quot;enabled&quot;: true,
+        &quot;position&quot;: {
+          &quot;after&quot;: &quot;24d6cca9d501477886de2a85fa51bf32&quot;
+        }
+      }
+    }
+  ],
+  &quot;sourceSchemes&quot;: &quot;Schemaless source matches HTTP and HTTPS; target HTTPS&quot;,
+  &quot;rulePosition&quot;: 3,
+  &quot;existingRuleOrderPreserved&quot;: [
+    &quot;635f3e11b273436bba9615274561471b&quot;,
+    &quot;24d6cca9d501477886de2a85fa51bf32&quot;
+  ],
+  &quot;entireRulesetPUTForbidden&quot;: true,
+  &quot;statusCodeReview&quot;: &quot;307 is a proposal only, NOT HUMAN_ACCEPTED. It preserves POST method/body; clients following could reach current canonical handler. Future probes must disable following; current destination isolation separately proven before broad use.&quot;,
+  &quot;currentProductionExemption&quot;: {
+    &quot;authorityDeployment&quot;: &quot;b07d86bf-2447-4fe8-8ded-66d9fe676c81&quot;,
+    &quot;excludedHosts&quot;: [
+      &quot;getphios.com&quot;,
+      &quot;www.getphios.com&quot;,
+      &quot;phios-github.pages.dev&quot;,
+      &quot;b07d86bf.phios-github.pages.dev&quot;
+    ],
+    &quot;basis&quot;: &quot;Exact http.host equality + exact list hostname with include_subdomains=false&quot;,
+    &quot;runtimeVerified&quot;: false
+  },
+  &quot;customerImpact&quot;: &quot;Only requests to exact superseded canary hostname redirect to canonical, preserving path/query; no other source hosts matched. Canonical response may differ from historical material; no overall topology isolation asserted.&quot;,
+  &quot;rollback&quot;: [
+    {
+      &quot;method&quot;: &quot;DELETE&quot;,
+      &quot;endpoint&quot;: &quot;/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/e4920e8f14574ec9abce2fbe9d764056/rules/{NEW_RULE_ID}&quot;,
+      &quot;condition&quot;: &quot;Delete only newly returned rule ID; preserve both original rules and ordering&quot;
+    },
+    {
+      &quot;method&quot;: &quot;DELETE&quot;,
+      &quot;endpoint&quot;: &quot;/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/{NEW_LIST_ID}&quot;,
+      &quot;condition&quot;: &quot;Only newly returned list ID after checking no other rule references it; if unexpected reference STOP&quot;
+    }
+  ],
+  &quot;executionPreconditions&quot;: [
+    &quot;Complete zone LB visibility or prove relevant zone scope cannot conflict&quot;,
+    &quot;Separate Human acceptance of exact 307 design and mutation authorization&quot;,
+    &quot;Fresh rule/list/version baseline identical to frozen evidence; stop on drift&quot;,
+    &quot;Confirm name unused, capacity available and async list operation complete before rule enabling&quot;,
+    &quot;Collector readiness and bounded non-mutating runtime test plan explicitly authorized&quot;
+  ],
+  &quot;providerCalls&quot;: 0,
+  &quot;costUSD&quot;: 0,
+  &quot;productionMutations&quot;: 0,
+  &quot;d1Mutations&quot;: 0,
+  &quot;designSHA256&quot;: &quot;14dea945b73dd8390f1a3aeaf35235c3572454c0cf8d4e4409491a61edfd70cb&quot;
+}</pre><h2>Evidence files</h2><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T4-R1-MACHINE-CONTROL-EVIDENCE.json">P9-G3-R6-T4-R1-MACHINE-CONTROL-EVIDENCE.json</a></p><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T4-R1-CONTROL-ANALYSIS.json">P9-G3-R6-T4-R1-CONTROL-ANALYSIS.json</a></p><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T4-R1-CONDITIONAL-CANARY-DESIGN.json">P9-G3-R6-T4-R1-CONDITIONAL-CANARY-DESIGN.json</a></p><h2>Official references (architectural basis, not production proof)</h2><p><a href="https://developers.cloudflare.com/pages/how-to/redirect-to-custom-domain/">https://developers.cloudflare.com/pages/how-to/redirect-to-custom-domain/</a></p><p><a href="https://developers.cloudflare.com/rules/url-forwarding/bulk-redirects/how-it-works/">https://developers.cloudflare.com/rules/url-forwarding/bulk-redirects/how-it-works/</a></p><p><a href="https://developers.cloudflare.com/rules/url-forwarding/bulk-redirects/reference/parameters/">https://developers.cloudflare.com/rules/url-forwarding/bulk-redirects/reference/parameters/</a></p><p><a href="https://developers.cloudflare.com/ruleset-engine/rulesets-api/add-rule/">https://developers.cloudflare.com/ruleset-engine/rulesets-api/add-rule/</a></p><p><a href="https://developers.cloudflare.com/api/resources/load_balancers/methods/list/">https://developers.cloudflare.com/api/resources/load_balancers/methods/list/</a></p><p><a href="https://developers.cloudflare.com/api/resources/zones/methods/get/">https://developers.cloudflare.com/api/resources/zones/methods/get/</a></p><p>Production mutations=0; D1 mutations=0; write permissions used=0; provider=0/USD0; real payments/refunds=0/0; migration NOT_AUTHORIZED. STOP.</p></html>

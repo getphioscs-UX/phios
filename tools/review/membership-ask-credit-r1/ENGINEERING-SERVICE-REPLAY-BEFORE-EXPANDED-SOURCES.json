@@ -1,0 +1,2868 @@
+{
+  "at": "2026-10-12T14:53:12.886Z",
+  "state": "PASS_OFFLINE_SERVICE_REPLAY",
+  "url": "http://127.0.0.1:53187",
+  "databasePath": "tools/review/membership-ask-credit-r1/ENGINEERING-REPLAY-1791816792780.sqlite",
+  "kind": "OFFLINE_ENGINEERING_REPLAY_NOT_NEW_MODEL_VERIFICATION",
+  "providerCalls": 0,
+  "newActualPlatformSpendUSD": 0,
+  "results": [
+    {
+      "name": "Chinese complete historical generation through current service/review fixture/settlement/reopen",
+      "state": "PASS",
+      "result": {
+        "taskId": "engineering-complete",
+        "completeness": "COMPLETE",
+        "syntheticChargeMicroUSD": 1152
+      }
+    },
+    {
+      "name": "English complete historical generation with Chinese evidence",
+      "state": "PASS",
+      "result": {
+        "taskId": "engineering-english"
+      }
+    },
+    {
+      "name": "Accurate partial synthetic contract fixture delivered and explicitly saved PARTIAL",
+      "state": "PASS",
+      "result": {
+        "taskId": "engineering-partial",
+        "completeness": "PARTIAL"
+      }
+    },
+    {
+      "name": "Historical truncated review remains technical failure, customer refunded",
+      "state": "PASS",
+      "result": {
+        "taskId": "engineering-contract",
+        "reason": "INCOMPLETE_OR_OVER_BUDGET_NO_RETRY"
+      }
+    },
+    {
+      "name": "Successful empty retrieval persists without positive reservation or provider adapter",
+      "state": "PASS",
+      "result": {
+        "taskId": "ZERO-engineering-empty",
+        "reserved": 0
+      }
+    },
+    {
+      "name": "Same-task concurrent requests and refresh invoke only once",
+      "state": "PASS",
+      "result": {
+        "taskId": "engineering-concurrent",
+        "adapterInvocations": 2
+      }
+    },
+    {
+      "name": "Saved reference and answer cross-owner denial",
+      "state": "PASS",
+      "result": {
+        "excerptsExposed": 0
+      }
+    },
+    {
+      "name": "Nonmember cannot retrieve or invoke",
+      "state": "PASS",
+      "result": {
+        "code": "CONTINUITY_ACTIVE_SUBSCRIPTION_REQUIRED"
+      }
+    },
+    {
+      "name": "Insufficient balance refuses before adapter",
+      "state": "PASS",
+      "result": {
+        "code": "ACTIVE_MEMBERSHIP_OR_BALANCE_REQUIRED"
+      }
+    },
+    {
+      "name": "Expiry preserves saved answer and balance, new execute denied",
+      "state": "PASS",
+      "result": {
+        "saved": true
+      }
+    },
+    {
+      "name": "Source retrieval fault is not persisted as source insufficiency",
+      "state": "PASS",
+      "result": {
+        "code": "SOURCE_RETRIEVAL_UNAVAILABLE"
+      }
+    },
+    {
+      "name": "Second member settles only against its own existing envelope",
+      "state": "PASS",
+      "result": {
+        "owner": "qa-bob"
+      }
+    }
+  ],
+  "requests": [
+    {
+      "url": "/api/membership-ask",
+      "method": "POST",
+      "status": 200,
+      "owner": "qa-alice",
+      "body": {
+        "ok": true,
+        "executionState": "COMPLETE",
+        "deliverable": true,
+        "answerCompleteness": "COMPLETE",
+        "answer": {
+          "locale": "zh-Hans",
+          "answer": "不足以。一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。未观察不等于不存在，未知也不等于零。作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。",
+          "limitations": "",
+          "supportMap": [
+            {
+              "statement": "不足以。",
+              "sourceIds": [
+                "S1"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            },
+            {
+              "statement": "一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。",
+              "sourceIds": [
+                "S1"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            },
+            {
+              "statement": "未观察不等于不存在，未知也不等于零。",
+              "sourceIds": [
+                "S1"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            },
+            {
+              "statement": "作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。",
+              "sourceIds": [
+                "S2"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            }
+          ],
+          "answerCompleteness": "COMPLETE",
+          "sourceBinding": {
+            "packDigest": "cf3fcaffb741af12030919b07f3deb86949f0209d6468c1e40dc41d023d6fcaf",
+            "bindings": [
+              {
+                "shortId": "S1",
+                "fragmentId": "F-8c2993097f7fdc9ab3a3e2c3210ad29ec14a3a13af67c4fa3943b8eba197e642",
+                "sourceId": "S1",
+                "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d",
+                "sourceVersion": "v2-accepted-knowledge-projection",
+                "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+                "chapterId": "14.86",
+                "sourceLanguage": "zh-Hans",
+                "support": {
+                  "startOffset": 0,
+                  "endOffset": 59,
+                  "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d"
+                },
+                "pdfPages": {
+                  "start": 324,
+                  "end": 324
+                },
+                "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.86&q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans",
+                "readingHref": null,
+                "purchaseHref": null
+              },
+              {
+                "shortId": "S2",
+                "fragmentId": "F-7e9ece8e30e7d8b344dd4a12f79cb5b17ff3e2877298f163c276437ecb9a56ec",
+                "sourceId": "S2",
+                "textSha256": "f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d",
+                "sourceVersion": "v2-accepted-knowledge-projection",
+                "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+                "chapterId": "14.65",
+                "sourceLanguage": "zh-Hans",
+                "support": {
+                  "startOffset": 0,
+                  "endOffset": 382,
+                  "textSha256": "f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d"
+                },
+                "pdfPages": {
+                  "start": 242,
+                  "end": 242
+                },
+                "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.65&q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans",
+                "readingHref": null,
+                "purchaseHref": null
+              }
+            ]
+          }
+        },
+        "providerCalls": 0,
+        "taskId": "engineering-complete",
+        "offlineAdapterInvocations": 2,
+        "validation": "OFFLINE_SERVICE_FIXTURE_NOT_NEW_MODEL_EVIDENCE"
+      }
+    },
+    {
+      "url": "/api/membership-ask?taskId=engineering-complete",
+      "method": "GET",
+      "status": 200,
+      "owner": "qa-alice",
+      "body": {
+        "ok": true,
+        "task": {
+          "taskId": "engineering-complete",
+          "state": "COMPLETE",
+          "answerCompleteness": "COMPLETE",
+          "customerChargeMicroUSD": 1152,
+          "answer": {
+            "locale": "zh-Hans",
+            "answer": "不足以。一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。未观察不等于不存在，未知也不等于零。作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。",
+            "limitations": "",
+            "supportMap": [
+              {
+                "statement": "不足以。",
+                "sourceIds": [
+                  "S1"
+                ],
+                "relation": "DIRECT_SUPPORT"
+              },
+              {
+                "statement": "一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。",
+                "sourceIds": [
+                  "S1"
+                ],
+                "relation": "DIRECT_SUPPORT"
+              },
+              {
+                "statement": "未观察不等于不存在，未知也不等于零。",
+                "sourceIds": [
+                  "S1"
+                ],
+                "relation": "DIRECT_SUPPORT"
+              },
+              {
+                "statement": "作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。",
+                "sourceIds": [
+                  "S2"
+                ],
+                "relation": "DIRECT_SUPPORT"
+              }
+            ],
+            "answerCompleteness": "COMPLETE",
+            "sourceBinding": {
+              "packDigest": "cf3fcaffb741af12030919b07f3deb86949f0209d6468c1e40dc41d023d6fcaf",
+              "bindings": [
+                {
+                  "shortId": "S1",
+                  "fragmentId": "F-8c2993097f7fdc9ab3a3e2c3210ad29ec14a3a13af67c4fa3943b8eba197e642",
+                  "sourceId": "S1",
+                  "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d",
+                  "sourceVersion": "v2-accepted-knowledge-projection",
+                  "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+                  "chapterId": "14.86",
+                  "sourceLanguage": "zh-Hans",
+                  "support": {
+                    "startOffset": 0,
+                    "endOffset": 59,
+                    "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d"
+                  },
+                  "pdfPages": {
+                    "start": 324,
+                    "end": 324
+                  },
+                  "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.86&q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans",
+                  "readingHref": null,
+                  "purchaseHref": null
+                },
+                {
+                  "shortId": "S2",
+                  "fragmentId": "F-7e9ece8e30e7d8b344dd4a12f79cb5b17ff3e2877298f163c276437ecb9a56ec",
+                  "sourceId": "S2",
+                  "textSha256": "f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d",
+                  "sourceVersion": "v2-accepted-knowledge-projection",
+                  "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+                  "chapterId": "14.65",
+                  "sourceLanguage": "zh-Hans",
+                  "support": {
+                    "startOffset": 0,
+                    "endOffset": 382,
+                    "textSha256": "f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d"
+                  },
+                  "pdfPages": {
+                    "start": 242,
+                    "end": 242
+                  },
+                  "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.65&q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans",
+                  "readingHref": null,
+                  "purchaseHref": null
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "url": "/api/membership-ask",
+      "method": "POST",
+      "status": 200,
+      "owner": "qa-alice",
+      "body": {
+        "ok": true,
+        "executionState": "COMPLETE",
+        "deliverable": true,
+        "answerCompleteness": "COMPLETE",
+        "answer": {
+          "locale": "en",
+          "answer": "No. Failing to observe an object does not prove that it does not exist: the available evidence may be unable to reliably distinguish the object, and limited resolution, observation range, or time window may leave its existence unknown.",
+          "limitations": "",
+          "supportMap": [
+            {
+              "statement": "Failing to observe an object does not prove that it does not exist: the available evidence may be unable to reliably distinguish the object, and limited resolution, observation range, or time window may leave its existence unknown.",
+              "sourceIds": [
+                "S1"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            }
+          ],
+          "answerCompleteness": "COMPLETE",
+          "sourceBinding": {
+            "packDigest": "fe3627c417a8d5233e4cb437cfd7baacf30ef95389310a93b8aa5c99e993e801",
+            "bindings": [
+              {
+                "shortId": "S1",
+                "fragmentId": "F-8c2993097f7fdc9ab3a3e2c3210ad29ec14a3a13af67c4fa3943b8eba197e642",
+                "sourceId": "S1",
+                "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d",
+                "sourceVersion": "v2-accepted-knowledge-projection",
+                "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+                "chapterId": "14.86",
+                "sourceLanguage": "zh-Hans",
+                "support": {
+                  "startOffset": 0,
+                  "endOffset": 59,
+                  "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d"
+                },
+                "pdfPages": {
+                  "start": 324,
+                  "end": 324
+                },
+                "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.86&q=Does+a+lack+of+observation+prove+that+something+does+not+exist%3F&locale=en",
+                "readingHref": null,
+                "purchaseHref": null
+              }
+            ]
+          }
+        },
+        "providerCalls": 0,
+        "taskId": "engineering-english",
+        "offlineAdapterInvocations": 2,
+        "validation": "OFFLINE_SERVICE_FIXTURE_NOT_NEW_MODEL_EVIDENCE"
+      }
+    },
+    {
+      "url": "/api/membership-ask",
+      "method": "POST",
+      "status": 200,
+      "owner": "qa-alice",
+      "body": {
+        "ok": true,
+        "executionState": "COMPLETE",
+        "deliverable": true,
+        "answerCompleteness": "PARTIAL",
+        "answer": {
+          "locale": "zh-Hans",
+          "answer": "正常维持首先处理持续运行产生的后果，并不以运行失败为前提。",
+          "limitations": "本次获准来源包没有建立损坏后恢复的专门定义及其与正常维持的完整比较关系。",
+          "supportMap": [
+            {
+              "statement": "正常维持首先处理持续运行产生的后果，并不以运行失败为前提。",
+              "sourceIds": [
+                "S1"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            }
+          ],
+          "answerCompleteness": "PARTIAL",
+          "sourceBinding": {
+            "packDigest": "6398c85df035b2e35256b3904bffb54e4ec49f4257a4e2cf5670af99b0a1ef4c",
+            "bindings": [
+              {
+                "shortId": "S1",
+                "fragmentId": "F-8c1bdea46e93d08811f233ab30dcdea5eeab42aafe67879696bbf1c207d6592a",
+                "sourceId": "S1",
+                "textSha256": "7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3",
+                "sourceVersion": "owner-final-20261011-efbfdd21fa21",
+                "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+                "chapterId": "CM-B3V1-P8-S001",
+                "sourceLanguage": "zh-Hans",
+                "support": {
+                  "startOffset": 266,
+                  "endOffset": 938,
+                  "textSha256": "7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3"
+                },
+                "pdfPages": {
+                  "start": 3,
+                  "end": 6
+                },
+                "chapterDeepLink": "/membership-source.html?bookCode=BOOK-3&chapter=CM-B3V1-P8-S001&q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&locale=zh-Hans",
+                "readingHref": "/books/reality-continuity/",
+                "purchaseHref": "/books/reality-continuity/"
+              },
+              {
+                "shortId": "S2",
+                "fragmentId": "F-ebb6043df46c213571580cbf64914e0bdced10965da83aa75968d3befde5a41a",
+                "sourceId": "S2",
+                "textSha256": "253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15",
+                "sourceVersion": "owner-final-20261011-efbfdd21fa21",
+                "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+                "chapterId": "CM-B3V1-P8-S059",
+                "sourceLanguage": "zh-Hans",
+                "support": {
+                  "startOffset": 33,
+                  "endOffset": 398,
+                  "textSha256": "253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15"
+                },
+                "pdfPages": {
+                  "start": 226,
+                  "end": 231
+                },
+                "chapterDeepLink": "/membership-source.html?bookCode=BOOK-3&chapter=CM-B3V1-P8-S059&q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&locale=zh-Hans",
+                "readingHref": "/books/reality-continuity/",
+                "purchaseHref": "/books/reality-continuity/"
+              }
+            ]
+          }
+        },
+        "providerCalls": 0,
+        "taskId": "engineering-partial",
+        "offlineAdapterInvocations": 2,
+        "validation": "OFFLINE_SERVICE_FIXTURE_NOT_NEW_MODEL_EVIDENCE"
+      }
+    },
+    {
+      "url": "/api/membership-ask",
+      "method": "POST",
+      "status": 200,
+      "owner": "qa-alice",
+      "body": {
+        "ok": true,
+        "executionState": "FAILED",
+        "answerCompleteness": "FAILED",
+        "providerCalls": 0,
+        "error": "INCOMPLETE_OR_OVER_BUDGET_NO_RETRY",
+        "failureClass": "TECHNICAL_OR_CONTRACT_FAILURE",
+        "customerChargeMicroUSD": 0,
+        "taskId": "engineering-contract",
+        "offlineAdapterInvocations": 2,
+        "validation": "OFFLINE_SERVICE_FIXTURE_NOT_NEW_MODEL_EVIDENCE"
+      }
+    },
+    {
+      "url": "/api/membership-ask?taskId=engineering-contract",
+      "method": "GET",
+      "status": 200,
+      "owner": "qa-alice",
+      "body": {
+        "ok": true,
+        "task": {
+          "taskId": "engineering-contract",
+          "state": "FAILED",
+          "answerCompleteness": "FAILED",
+          "customerChargeMicroUSD": 0,
+          "answer": null
+        }
+      }
+    },
+    {
+      "url": "/api/membership-ask",
+      "method": "POST",
+      "status": 200,
+      "owner": "qa-alice",
+      "body": {
+        "ok": true,
+        "executionState": "COMPLETE",
+        "answerCompleteness": "SOURCE_INSUFFICIENT",
+        "taskId": "ZERO-engineering-empty",
+        "answer": {
+          "locale": "zh-Hans",
+          "answer": "尚未找到能够支持回答这个问题的获准来源。",
+          "limitations": "",
+          "supportMap": [],
+          "answerCompleteness": "SOURCE_INSUFFICIENT",
+          "sourceBinding": {
+            "packDigest": "867814f9065d1dbef0288548f69c86e0fcb53a176f899a11830f446aec35aeb6",
+            "bindings": []
+          }
+        },
+        "providerCalls": 0,
+        "customerChargeMicroUSD": 0,
+        "offlineAdapterInvocations": 0,
+        "validation": "OFFLINE_SERVICE_FIXTURE_NOT_NEW_MODEL_EVIDENCE"
+      }
+    },
+    {
+      "url": "/api/membership-ask?taskId=ZERO-engineering-empty",
+      "method": "GET",
+      "status": 200,
+      "owner": "qa-alice",
+      "body": {
+        "ok": true,
+        "task": {
+          "taskId": "ZERO-engineering-empty",
+          "state": "COMPLETE",
+          "answerCompleteness": "SOURCE_INSUFFICIENT",
+          "customerChargeMicroUSD": 0,
+          "answer": {
+            "locale": "zh-Hans",
+            "answer": "尚未找到能够支持回答这个问题的获准来源。",
+            "limitations": "",
+            "supportMap": [],
+            "answerCompleteness": "SOURCE_INSUFFICIENT",
+            "sourceBinding": {
+              "packDigest": "867814f9065d1dbef0288548f69c86e0fcb53a176f899a11830f446aec35aeb6",
+              "bindings": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "url": "/api/membership-ask",
+      "method": "POST",
+      "status": 200,
+      "owner": "qa-alice",
+      "body": {
+        "ok": true,
+        "executionState": "RUNNING",
+        "deliverable": false,
+        "answerCompleteness": null,
+        "answer": null,
+        "replayed": true,
+        "providerCalls": 0,
+        "taskId": "engineering-concurrent",
+        "offlineAdapterInvocations": 0,
+        "validation": "OFFLINE_SERVICE_FIXTURE_NOT_NEW_MODEL_EVIDENCE"
+      }
+    },
+    {
+      "url": "/api/membership-ask",
+      "method": "POST",
+      "status": 200,
+      "owner": "qa-alice",
+      "body": {
+        "ok": true,
+        "executionState": "COMPLETE",
+        "deliverable": true,
+        "answerCompleteness": "COMPLETE",
+        "answer": {
+          "locale": "zh-Hans",
+          "answer": "不足以。一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。未观察不等于不存在，未知也不等于零。作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。",
+          "limitations": "",
+          "supportMap": [
+            {
+              "statement": "不足以。",
+              "sourceIds": [
+                "S1"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            },
+            {
+              "statement": "一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。",
+              "sourceIds": [
+                "S1"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            },
+            {
+              "statement": "未观察不等于不存在，未知也不等于零。",
+              "sourceIds": [
+                "S1"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            },
+            {
+              "statement": "作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。",
+              "sourceIds": [
+                "S2"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            }
+          ],
+          "answerCompleteness": "COMPLETE",
+          "sourceBinding": {
+            "packDigest": "cf3fcaffb741af12030919b07f3deb86949f0209d6468c1e40dc41d023d6fcaf",
+            "bindings": [
+              {
+                "shortId": "S1",
+                "fragmentId": "F-8c2993097f7fdc9ab3a3e2c3210ad29ec14a3a13af67c4fa3943b8eba197e642",
+                "sourceId": "S1",
+                "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d",
+                "sourceVersion": "v2-accepted-knowledge-projection",
+                "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+                "chapterId": "14.86",
+                "sourceLanguage": "zh-Hans",
+                "support": {
+                  "startOffset": 0,
+                  "endOffset": 59,
+                  "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d"
+                },
+                "pdfPages": {
+                  "start": 324,
+                  "end": 324
+                },
+                "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.86&q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans",
+                "readingHref": null,
+                "purchaseHref": null
+              },
+              {
+                "shortId": "S2",
+                "fragmentId": "F-7e9ece8e30e7d8b344dd4a12f79cb5b17ff3e2877298f163c276437ecb9a56ec",
+                "sourceId": "S2",
+                "textSha256": "f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d",
+                "sourceVersion": "v2-accepted-knowledge-projection",
+                "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+                "chapterId": "14.65",
+                "sourceLanguage": "zh-Hans",
+                "support": {
+                  "startOffset": 0,
+                  "endOffset": 382,
+                  "textSha256": "f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d"
+                },
+                "pdfPages": {
+                  "start": 242,
+                  "end": 242
+                },
+                "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.65&q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans",
+                "readingHref": null,
+                "purchaseHref": null
+              }
+            ]
+          }
+        },
+        "providerCalls": 0,
+        "taskId": "engineering-concurrent",
+        "offlineAdapterInvocations": 2,
+        "validation": "OFFLINE_SERVICE_FIXTURE_NOT_NEW_MODEL_EVIDENCE"
+      }
+    },
+    {
+      "url": "/api/membership-ask",
+      "method": "POST",
+      "status": 200,
+      "owner": "qa-alice",
+      "body": {
+        "ok": true,
+        "executionState": "COMPLETE",
+        "deliverable": true,
+        "answerCompleteness": "COMPLETE",
+        "answer": {
+          "locale": "zh-Hans",
+          "answer": "不足以。一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。未观察不等于不存在，未知也不等于零。作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。",
+          "limitations": "",
+          "supportMap": [
+            {
+              "statement": "不足以。",
+              "sourceIds": [
+                "S1"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            },
+            {
+              "statement": "一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。",
+              "sourceIds": [
+                "S1"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            },
+            {
+              "statement": "未观察不等于不存在，未知也不等于零。",
+              "sourceIds": [
+                "S1"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            },
+            {
+              "statement": "作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。",
+              "sourceIds": [
+                "S2"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            }
+          ],
+          "answerCompleteness": "COMPLETE",
+          "sourceBinding": {
+            "packDigest": "cf3fcaffb741af12030919b07f3deb86949f0209d6468c1e40dc41d023d6fcaf",
+            "bindings": [
+              {
+                "shortId": "S1",
+                "fragmentId": "F-8c2993097f7fdc9ab3a3e2c3210ad29ec14a3a13af67c4fa3943b8eba197e642",
+                "sourceId": "S1",
+                "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d",
+                "sourceVersion": "v2-accepted-knowledge-projection",
+                "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+                "chapterId": "14.86",
+                "sourceLanguage": "zh-Hans",
+                "support": {
+                  "startOffset": 0,
+                  "endOffset": 59,
+                  "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d"
+                },
+                "pdfPages": {
+                  "start": 324,
+                  "end": 324
+                },
+                "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.86&q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans",
+                "readingHref": null,
+                "purchaseHref": null
+              },
+              {
+                "shortId": "S2",
+                "fragmentId": "F-7e9ece8e30e7d8b344dd4a12f79cb5b17ff3e2877298f163c276437ecb9a56ec",
+                "sourceId": "S2",
+                "textSha256": "f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d",
+                "sourceVersion": "v2-accepted-knowledge-projection",
+                "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+                "chapterId": "14.65",
+                "sourceLanguage": "zh-Hans",
+                "support": {
+                  "startOffset": 0,
+                  "endOffset": 382,
+                  "textSha256": "f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d"
+                },
+                "pdfPages": {
+                  "start": 242,
+                  "end": 242
+                },
+                "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.65&q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans",
+                "readingHref": null,
+                "purchaseHref": null
+              }
+            ]
+          }
+        },
+        "replayed": true,
+        "providerCalls": 0,
+        "taskId": "engineering-concurrent",
+        "offlineAdapterInvocations": 0,
+        "validation": "OFFLINE_SERVICE_FIXTURE_NOT_NEW_MODEL_EVIDENCE"
+      }
+    },
+    {
+      "url": "/api/membership-ask?taskId=engineering-complete",
+      "method": "GET",
+      "status": 409,
+      "owner": "qa-bob",
+      "body": {
+        "ok": false,
+        "code": "TASK_NOT_FOUND",
+        "providerCalls": 0
+      }
+    },
+    {
+      "url": "/api/membership-ask?taskId=engineering-complete&sourceId=S1",
+      "method": "GET",
+      "status": 409,
+      "owner": "qa-bob",
+      "body": {
+        "ok": false,
+        "code": "TASK_NOT_FOUND",
+        "providerCalls": 0
+      }
+    },
+    {
+      "url": "/api/membership-ask?taskId=engineering-complete&sourceId=S1",
+      "method": "GET",
+      "status": 200,
+      "owner": "qa-alice",
+      "body": {
+        "ok": true,
+        "source": {
+          "shortId": "S1",
+          "fragmentId": "F-8c2993097f7fdc9ab3a3e2c3210ad29ec14a3a13af67c4fa3943b8eba197e642",
+          "sourceId": "S1",
+          "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d",
+          "sourceVersion": "v2-accepted-knowledge-projection",
+          "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+          "chapterId": "14.86",
+          "sourceLanguage": "zh-Hans",
+          "support": {
+            "startOffset": 0,
+            "endOffset": 59,
+            "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d"
+          },
+          "pdfPages": {
+            "start": 324,
+            "end": 324
+          },
+          "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.86&q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans",
+          "readingHref": null,
+          "purchaseHref": null
+        },
+        "sourceState": "SAVED_PERMISSION_BOUND_REFERENCE_NOT_FULL_TEXT",
+        "providerCalls": 0
+      }
+    },
+    {
+      "url": "/api/membership-ask",
+      "method": "POST",
+      "status": 409,
+      "owner": "qa-nonmember",
+      "body": {
+        "ok": false,
+        "code": "CONTINUITY_ACTIVE_SUBSCRIPTION_REQUIRED",
+        "providerCalls": 0
+      }
+    },
+    {
+      "url": "/api/membership-ask",
+      "method": "POST",
+      "status": 409,
+      "owner": "qa-low",
+      "body": {
+        "ok": false,
+        "code": "ACTIVE_MEMBERSHIP_OR_BALANCE_REQUIRED",
+        "providerCalls": 0
+      }
+    },
+    {
+      "url": "/api/membership-ask?taskId=engineering-complete",
+      "method": "GET",
+      "status": 200,
+      "owner": "qa-alice",
+      "body": {
+        "ok": true,
+        "task": {
+          "taskId": "engineering-complete",
+          "state": "COMPLETE",
+          "answerCompleteness": "COMPLETE",
+          "customerChargeMicroUSD": 1152,
+          "answer": {
+            "locale": "zh-Hans",
+            "answer": "不足以。一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。未观察不等于不存在，未知也不等于零。作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。",
+            "limitations": "",
+            "supportMap": [
+              {
+                "statement": "不足以。",
+                "sourceIds": [
+                  "S1"
+                ],
+                "relation": "DIRECT_SUPPORT"
+              },
+              {
+                "statement": "一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。",
+                "sourceIds": [
+                  "S1"
+                ],
+                "relation": "DIRECT_SUPPORT"
+              },
+              {
+                "statement": "未观察不等于不存在，未知也不等于零。",
+                "sourceIds": [
+                  "S1"
+                ],
+                "relation": "DIRECT_SUPPORT"
+              },
+              {
+                "statement": "作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。",
+                "sourceIds": [
+                  "S2"
+                ],
+                "relation": "DIRECT_SUPPORT"
+              }
+            ],
+            "answerCompleteness": "COMPLETE",
+            "sourceBinding": {
+              "packDigest": "cf3fcaffb741af12030919b07f3deb86949f0209d6468c1e40dc41d023d6fcaf",
+              "bindings": [
+                {
+                  "shortId": "S1",
+                  "fragmentId": "F-8c2993097f7fdc9ab3a3e2c3210ad29ec14a3a13af67c4fa3943b8eba197e642",
+                  "sourceId": "S1",
+                  "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d",
+                  "sourceVersion": "v2-accepted-knowledge-projection",
+                  "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+                  "chapterId": "14.86",
+                  "sourceLanguage": "zh-Hans",
+                  "support": {
+                    "startOffset": 0,
+                    "endOffset": 59,
+                    "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d"
+                  },
+                  "pdfPages": {
+                    "start": 324,
+                    "end": 324
+                  },
+                  "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.86&q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans",
+                  "readingHref": null,
+                  "purchaseHref": null
+                },
+                {
+                  "shortId": "S2",
+                  "fragmentId": "F-7e9ece8e30e7d8b344dd4a12f79cb5b17ff3e2877298f163c276437ecb9a56ec",
+                  "sourceId": "S2",
+                  "textSha256": "f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d",
+                  "sourceVersion": "v2-accepted-knowledge-projection",
+                  "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+                  "chapterId": "14.65",
+                  "sourceLanguage": "zh-Hans",
+                  "support": {
+                    "startOffset": 0,
+                    "endOffset": 382,
+                    "textSha256": "f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d"
+                  },
+                  "pdfPages": {
+                    "start": 242,
+                    "end": 242
+                  },
+                  "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.65&q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans",
+                  "readingHref": null,
+                  "purchaseHref": null
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "url": "/api/membership-ask?taskId=engineering-complete",
+      "method": "GET",
+      "status": 200,
+      "owner": "qa-alice",
+      "body": {
+        "ok": true,
+        "task": {
+          "taskId": "engineering-complete",
+          "state": "COMPLETE",
+          "answerCompleteness": "COMPLETE",
+          "customerChargeMicroUSD": 1152,
+          "answer": {
+            "locale": "zh-Hans",
+            "answer": "不足以。一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。未观察不等于不存在，未知也不等于零。作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。",
+            "limitations": "",
+            "supportMap": [
+              {
+                "statement": "不足以。",
+                "sourceIds": [
+                  "S1"
+                ],
+                "relation": "DIRECT_SUPPORT"
+              },
+              {
+                "statement": "一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。",
+                "sourceIds": [
+                  "S1"
+                ],
+                "relation": "DIRECT_SUPPORT"
+              },
+              {
+                "statement": "未观察不等于不存在，未知也不等于零。",
+                "sourceIds": [
+                  "S1"
+                ],
+                "relation": "DIRECT_SUPPORT"
+              },
+              {
+                "statement": "作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。",
+                "sourceIds": [
+                  "S2"
+                ],
+                "relation": "DIRECT_SUPPORT"
+              }
+            ],
+            "answerCompleteness": "COMPLETE",
+            "sourceBinding": {
+              "packDigest": "cf3fcaffb741af12030919b07f3deb86949f0209d6468c1e40dc41d023d6fcaf",
+              "bindings": [
+                {
+                  "shortId": "S1",
+                  "fragmentId": "F-8c2993097f7fdc9ab3a3e2c3210ad29ec14a3a13af67c4fa3943b8eba197e642",
+                  "sourceId": "S1",
+                  "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d",
+                  "sourceVersion": "v2-accepted-knowledge-projection",
+                  "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+                  "chapterId": "14.86",
+                  "sourceLanguage": "zh-Hans",
+                  "support": {
+                    "startOffset": 0,
+                    "endOffset": 59,
+                    "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d"
+                  },
+                  "pdfPages": {
+                    "start": 324,
+                    "end": 324
+                  },
+                  "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.86&q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans",
+                  "readingHref": null,
+                  "purchaseHref": null
+                },
+                {
+                  "shortId": "S2",
+                  "fragmentId": "F-7e9ece8e30e7d8b344dd4a12f79cb5b17ff3e2877298f163c276437ecb9a56ec",
+                  "sourceId": "S2",
+                  "textSha256": "f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d",
+                  "sourceVersion": "v2-accepted-knowledge-projection",
+                  "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+                  "chapterId": "14.65",
+                  "sourceLanguage": "zh-Hans",
+                  "support": {
+                    "startOffset": 0,
+                    "endOffset": 382,
+                    "textSha256": "f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d"
+                  },
+                  "pdfPages": {
+                    "start": 242,
+                    "end": 242
+                  },
+                  "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.65&q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans",
+                  "readingHref": null,
+                  "purchaseHref": null
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "url": "/api/membership-ask",
+      "method": "POST",
+      "status": 409,
+      "owner": "qa-alice",
+      "body": {
+        "ok": false,
+        "code": "CONTINUITY_ACTIVE_SUBSCRIPTION_REQUIRED",
+        "providerCalls": 0
+      }
+    },
+    {
+      "url": "/api/membership-ask",
+      "method": "POST",
+      "status": 503,
+      "owner": "qa-alice",
+      "body": {
+        "ok": false,
+        "code": "SOURCE_RETRIEVAL_UNAVAILABLE",
+        "providerCalls": 0
+      }
+    },
+    {
+      "url": "/api/membership-ask",
+      "method": "POST",
+      "status": 200,
+      "owner": "qa-bob",
+      "body": {
+        "ok": true,
+        "executionState": "COMPLETE",
+        "deliverable": true,
+        "answerCompleteness": "COMPLETE",
+        "answer": {
+          "locale": "zh-Hans",
+          "answer": "不足以。一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。未观察不等于不存在，未知也不等于零。作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。",
+          "limitations": "",
+          "supportMap": [
+            {
+              "statement": "不足以。",
+              "sourceIds": [
+                "S1"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            },
+            {
+              "statement": "一次观测未发现目标，只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能仍留下未知。",
+              "sourceIds": [
+                "S1"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            },
+            {
+              "statement": "未观察不等于不存在，未知也不等于零。",
+              "sourceIds": [
+                "S1"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            },
+            {
+              "statement": "作出“不存在”的判断前，还需要核对证据的对象、范围、时间和主张是否匹配。",
+              "sourceIds": [
+                "S2"
+              ],
+              "relation": "DIRECT_SUPPORT"
+            }
+          ],
+          "answerCompleteness": "COMPLETE",
+          "sourceBinding": {
+            "packDigest": "cf3fcaffb741af12030919b07f3deb86949f0209d6468c1e40dc41d023d6fcaf",
+            "bindings": [
+              {
+                "shortId": "S1",
+                "fragmentId": "F-8c2993097f7fdc9ab3a3e2c3210ad29ec14a3a13af67c4fa3943b8eba197e642",
+                "sourceId": "S1",
+                "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d",
+                "sourceVersion": "v2-accepted-knowledge-projection",
+                "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+                "chapterId": "14.86",
+                "sourceLanguage": "zh-Hans",
+                "support": {
+                  "startOffset": 0,
+                  "endOffset": 59,
+                  "textSha256": "c87ef5cd20ef78c46c516a331dfbe7d6fe70e14114c869909668ec1b33d1b89d"
+                },
+                "pdfPages": {
+                  "start": 324,
+                  "end": 324
+                },
+                "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.86&q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans",
+                "readingHref": null,
+                "purchaseHref": null
+              },
+              {
+                "shortId": "S2",
+                "fragmentId": "F-7e9ece8e30e7d8b344dd4a12f79cb5b17ff3e2877298f163c276437ecb9a56ec",
+                "sourceId": "S2",
+                "textSha256": "f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d",
+                "sourceVersion": "v2-accepted-knowledge-projection",
+                "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+                "chapterId": "14.65",
+                "sourceLanguage": "zh-Hans",
+                "support": {
+                  "startOffset": 0,
+                  "endOffset": 382,
+                  "textSha256": "f86fb583892fee16ef47b608705cde727384d37855ee05b6e958d5114c2a585d"
+                },
+                "pdfPages": {
+                  "start": 242,
+                  "end": 242
+                },
+                "chapterDeepLink": "/membership-source.html?bookCode=BOOK-7&chapter=14.65&q=%E4%B8%80%E6%AC%A1%E8%A7%82%E6%B5%8B%E6%B2%A1%E6%9C%89%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%EF%BC%8C%E8%BF%99%E6%98%AF%E5%90%A6%E8%B6%B3%E4%BB%A5%E8%AE%A4%E5%AE%9A%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans",
+                "readingHref": null,
+                "purchaseHref": null
+              }
+            ]
+          }
+        },
+        "providerCalls": 0,
+        "taskId": "engineering-bob",
+        "offlineAdapterInvocations": 2,
+        "validation": "OFFLINE_SERVICE_FIXTURE_NOT_NEW_MODEL_EVIDENCE"
+      }
+    },
+    {
+      "url": "/api/membership-ask?taskId=engineering-bob",
+      "method": "GET",
+      "status": 409,
+      "owner": "qa-alice",
+      "body": {
+        "ok": false,
+        "code": "TASK_NOT_FOUND",
+        "providerCalls": 0
+      }
+    }
+  ],
+  "storageReads": [
+    "books/book-7/materialized/v2-e19b662d8928/approved-knowledge-units-v2/retrieval-corpus.json",
+    "books/book-7/materialized/v2-e19b662d8928/approved-knowledge-units-v2/retrieval-corpus.json",
+    "books/book-3/materialized/owner-final-20261011-efbfdd21fa21/positioned-v1/retrieval-corpus.json",
+    "books/book-7/materialized/v2-e19b662d8928/approved-knowledge-units-v2/retrieval-corpus.json",
+    "books/book-7/materialized/v2-e19b662d8928/approved-knowledge-units-v2/retrieval-corpus.json",
+    "books/book-7/materialized/v2-e19b662d8928/approved-knowledge-units-v2/retrieval-corpus.json",
+    "books/book-7/materialized/v2-e19b662d8928/approved-knowledge-units-v2/retrieval-corpus.json",
+    "books/book-7/materialized/v2-e19b662d8928/approved-knowledge-units-v2/retrieval-corpus.json",
+    "books/book-7/materialized/v2-e19b662d8928/approved-knowledge-units-v2/retrieval-corpus.json",
+    "books/book-7/materialized/v2-e19b662d8928/approved-knowledge-units-v2/retrieval-corpus.json"
+  ],
+  "adapterInvocations": [
+    {
+      "taskId": "engineering-complete",
+      "callIndex": 1,
+      "bodyDigest": "8742d06236b364470f3ee167264e431372a99f4d148a5165d37711b51fa00aaa",
+      "maximumTokens": 1400,
+      "kind": "OFFLINE_ADAPTER_FIXTURE_NOT_PROVIDER"
+    },
+    {
+      "taskId": "engineering-complete",
+      "callIndex": 2,
+      "bodyDigest": "616e4c9515dc41ca7ca77eb37d1d8637e8a2dd027e8e7c26d088bcd9cac02547",
+      "maximumTokens": 700,
+      "kind": "OFFLINE_ADAPTER_FIXTURE_NOT_PROVIDER"
+    },
+    {
+      "taskId": "engineering-english",
+      "callIndex": 1,
+      "bodyDigest": "3558ab0c74d94a54d6bd3b1c724285f41a85e0808ef3df85384da5e5a957d69d",
+      "maximumTokens": 1400,
+      "kind": "OFFLINE_ADAPTER_FIXTURE_NOT_PROVIDER"
+    },
+    {
+      "taskId": "engineering-english",
+      "callIndex": 2,
+      "bodyDigest": "d55100b1171632886bc9f8a71b0e0c6672a14f89cd5fb11a0f82c98d32bc4010",
+      "maximumTokens": 600,
+      "kind": "OFFLINE_ADAPTER_FIXTURE_NOT_PROVIDER"
+    },
+    {
+      "taskId": "engineering-partial",
+      "callIndex": 1,
+      "bodyDigest": "6a201d27fd78b184fa96e1a0a64589f44500e3d52e6c373cdc4eeaa3e5e89c6a",
+      "maximumTokens": 1400,
+      "kind": "OFFLINE_ADAPTER_FIXTURE_NOT_PROVIDER"
+    },
+    {
+      "taskId": "engineering-partial",
+      "callIndex": 2,
+      "bodyDigest": "a05305a5d9a73f0d5b0a18d177e42b8a5a54c05faa0b151f91c0cac4bf276e38",
+      "maximumTokens": 600,
+      "kind": "OFFLINE_ADAPTER_FIXTURE_NOT_PROVIDER"
+    },
+    {
+      "taskId": "engineering-contract",
+      "callIndex": 1,
+      "bodyDigest": "8742d06236b364470f3ee167264e431372a99f4d148a5165d37711b51fa00aaa",
+      "maximumTokens": 1400,
+      "kind": "OFFLINE_ADAPTER_FIXTURE_NOT_PROVIDER"
+    },
+    {
+      "taskId": "engineering-contract",
+      "callIndex": 2,
+      "bodyDigest": "616e4c9515dc41ca7ca77eb37d1d8637e8a2dd027e8e7c26d088bcd9cac02547",
+      "maximumTokens": 700,
+      "kind": "OFFLINE_ADAPTER_FIXTURE_NOT_PROVIDER"
+    },
+    {
+      "taskId": "engineering-concurrent",
+      "callIndex": 1,
+      "bodyDigest": "8742d06236b364470f3ee167264e431372a99f4d148a5165d37711b51fa00aaa",
+      "maximumTokens": 1400,
+      "kind": "OFFLINE_ADAPTER_FIXTURE_NOT_PROVIDER"
+    },
+    {
+      "taskId": "engineering-concurrent",
+      "callIndex": 2,
+      "bodyDigest": "616e4c9515dc41ca7ca77eb37d1d8637e8a2dd027e8e7c26d088bcd9cac02547",
+      "maximumTokens": 700,
+      "kind": "OFFLINE_ADAPTER_FIXTURE_NOT_PROVIDER"
+    },
+    {
+      "taskId": "engineering-bob",
+      "callIndex": 1,
+      "bodyDigest": "8742d06236b364470f3ee167264e431372a99f4d148a5165d37711b51fa00aaa",
+      "maximumTokens": 1400,
+      "kind": "OFFLINE_ADAPTER_FIXTURE_NOT_PROVIDER"
+    },
+    {
+      "taskId": "engineering-bob",
+      "callIndex": 2,
+      "bodyDigest": "616e4c9515dc41ca7ca77eb37d1d8637e8a2dd027e8e7c26d088bcd9cac02547",
+      "maximumTokens": 700,
+      "kind": "OFFLINE_ADAPTER_FIXTURE_NOT_PROVIDER"
+    }
+  ],
+  "historicalArtifacts": [
+    {
+      "path": "tools/review/membership-ask-credit-r1/REVIEW-V2-PAID-LEDGER.json",
+      "sha256": "9e0f57d29c5ad912735e360b7cbe274fd9a6bf3b6fe4ddd9482774b91844e091"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/REVIEW-V2-PAID-QA.sqlite",
+      "sha256": "07c0e2c2abb8b47644a721f15cbad3053ec8bb270270c9de3888a7036f17d490"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/REVIEW-V2-PAID-REQUESTS-FROZEN.json",
+      "sha256": "2b6e7a159d19f08f19f39634000726ead1304ff99de2bbda9a41b93be07ff71e"
+    }
+  ],
+  "sourcePermissionManifestDigest": "bf93f5e34b0ca120714d401d1a3553a7d511b2a13675afff1f5e47aea8f471fe",
+  "compileInputs": [
+    {
+      "path": "functions/symbolic-method-persistence/symbolic-account-identity-v1.js",
+      "sha256": "18456c9dc5878e7a6eb2c5f727b9065c0cec0a8192e91ba978f6975dbf6de2b4"
+    },
+    {
+      "path": "functions/method-client-delivery/canonical-birth-input-runtime.js",
+      "sha256": "a80be668022504a1c571830e450a9a34226381c15b7b9c12e742a061d47a84c2"
+    },
+    {
+      "path": "functions/account/person-use-policy.js",
+      "sha256": "4de682f6ab1a2e8315ed86da2ad3b9f9506cf0043821b1f52550899b810b9600"
+    },
+    {
+      "path": "functions/account/oidc-auth.js",
+      "sha256": "f465f1f01fe86ccac89691dba4d966a69f240d82a7773b4860e5f72b29fe310b"
+    },
+    {
+      "path": "functions/location/timezone-resolver.js",
+      "sha256": "773aa0073da002d3d1519dd46191547025e972e61efafecaad562f92ff2a5b39"
+    },
+    {
+      "path": "functions/location/place-resolver.js",
+      "sha256": "6ae4d1fd2adf02ba7dfbda741fad6885024121dabdac50b788c192ee75ae3877"
+    },
+    {
+      "path": "functions/account/canonical-person-store.js",
+      "sha256": "87f94ba6c79c6c349fe85b68bc634365c49004fec3cf54bf3723db0f45ef067a"
+    },
+    {
+      "path": "functions/commerce/commerce-environment.js",
+      "sha256": "4abb437a3bed2e14692dae44d48467cb252a608c5491ab1843a46d75dfd773ec"
+    },
+    {
+      "path": "functions/pws/commercial/commerce-economics-policy.js",
+      "sha256": "475938032b82450484d66b213ba155b82b6458528f57b16aefc721daf21b5307"
+    },
+    {
+      "path": "functions/provider-cost/product-cost-envelope.js",
+      "sha256": "3a109f8ffc0a517d9378132cdedaf031b75c0d4506b2aafabffd68591f55af52"
+    },
+    {
+      "path": "functions/provider-cost/provider-cost-ledger.js",
+      "sha256": "5e4e5867d14ef395a703f73231edf8820fc71f36b300d34e1dddbaa19911b27d"
+    },
+    {
+      "path": "content/personal-reading/continuity/registries/continuity-subscription-product-registry-v2.json",
+      "sha256": "739f9d865c50146928db245917e1a61e0597a36d2ef6c95120b63b6c666cec1e"
+    },
+    {
+      "path": "functions/interpretation-runtime/mir7-utils.js",
+      "sha256": "4da006324b24da525d19d8163f71e360c45bb38ef739fd1c3a69990b99d93695"
+    },
+    {
+      "path": "functions/personal-reading/continuity/continuity-commercial-authority.js",
+      "sha256": "c5c432d13aeb638619aed1c5d51abc5cdf7f4df9b43f48df7f0508710af48a83"
+    },
+    {
+      "path": "functions/personal-reading/continuity/continuity-quota-d1.js",
+      "sha256": "f86d0471460e03af92833e1b6124e958165a01be0a2312c8069cb42c34345cf5"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-zero-call-outcome.js",
+      "sha256": "31061106374e6a787e7efa328b6eac9817e15719984946952e65879e0b7ac381"
+    },
+    {
+      "path": "content/personal-reading/continuity/registries/continuity-subscription-product-registry-v3-candidate.json",
+      "sha256": "a40e1263d86a7ea21e43beb9c42009a57456aa46c9ab1a8751fbc5c956faa68f"
+    },
+    {
+      "path": "functions/personal-reading/continuity/continuity-credit-policy.js",
+      "sha256": "f45a5f22066a50f35cf6832ec38817ab7b12a4fb8c27b7575a996a0a49734730"
+    },
+    {
+      "path": "functions/personal-reading/continuity/continuity-credit-d1.js",
+      "sha256": "053fe369e4736823127a077d5fc591929711d008755fbd19926b365ee2a75ab6"
+    },
+    {
+      "path": "content/knowledge/l10n/bilingual-terminology-registry.json",
+      "sha256": "89f4a1ef14fcce7039ea96a21fe78665ce1378043ab91f46a7157aa96eae8c68"
+    },
+    {
+      "path": "functions/knowledge-runtime/approved-terminology-context.js",
+      "sha256": "9a37483292e3d93541b0cf744822b02f5705ad59200d6661af936f8e36f882bb"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-authority-pack.js",
+      "sha256": "c8494bfc4deb13f160160edc393c008b43ae834dd673457086109540982399d0"
+    },
+    {
+      "path": "functions/_lib/book-vii-published-admission.js",
+      "sha256": "bd3f84cb3fdbe21c9949802adefe3e374e05687547d67922c7492e86029ca738"
+    },
+    {
+      "path": "functions/_lib/public-knowledge-api.js",
+      "sha256": "04ebb5484c4f82a3965c1a0da80ea69a231fc35b129c177e0e906be1833fe462"
+    },
+    {
+      "path": "functions/knowledge-runtime/current-manuscript-server-metadata.js",
+      "sha256": "6aaadbb6a23bdbd87845e6c0e48914609a19c9b1d925f53d423c0716ae6aad40"
+    },
+    {
+      "path": "functions/knowledge-runtime/manuscript-experiment-access.js",
+      "sha256": "4e546c39df4b327af8ae891e8c52b55fe16c5af81acbf38014a8a807d45432cf"
+    },
+    {
+      "path": "functions/_lib/manuscript-current-admission.js",
+      "sha256": "40f4b9ef67a8f623c99ea0d7acb7c1eec6221650912f3948640d935ecc8cfb0f"
+    },
+    {
+      "path": "functions/_lib/knowledge-source-eligibility.js",
+      "sha256": "54d8a685ace3c78148c88b554ba92d000d1f2795ecc521e4a9cdab6080aca733"
+    },
+    {
+      "path": "functions/knowledge-runtime/source-bound-explanation-units.js",
+      "sha256": "b85e3f2af13b99c20b2d9b12fd7cff02b53f888728cd69fe77c196ca9aecc9c1"
+    },
+    {
+      "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
+      "sha256": "79cd6e86cb33ff5acf6f44950460b0226ddd6129c6431e254a0b6045fc16cec0"
+    },
+    {
+      "path": "content/registry/runtime-position-48-v1.json",
+      "sha256": "89aaff534c62312f7031b395e746e49176f9f1dac908caf5ab3555537833ed60"
+    },
+    {
+      "path": "assets/js/pages/civilization-atlas/atlas-state.js",
+      "sha256": "2fe28f1db39930b20ff0d7a4cd2583fea42cf844103bd312a84764e3f3206d7c"
+    },
+    {
+      "path": "assets/js/pages/civilization-atlas/atlas-url-state.js",
+      "sha256": "db5b5245fb55e493fa9ccea43ad65426f6658317714ac8de486a600547e15b02"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/runtime-position-w8c-current-evidence-ir-v1.json",
+      "sha256": "8ea0a6acf041c41e6d9051cc5a116409ab4cd1edd82d00826aced722741a2db7"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-af-w8c-current-authority-admission-v1.json",
+      "sha256": "1ee32bce3b183800da8d4d09d72e4f6ebfac21de845fcad2435b30914dce519c"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-eu-w8c-current-authority-admission-v1.json",
+      "sha256": "2fa7ebf0da2f7c7e74e7ce1576cc5654eda3eca21de4f9ae201a235e41d47cd2"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-in-w8c-current-authority-admission-v1.json",
+      "sha256": "15d35e2d5276d46fd402b5e07198188f4475380d0fa3bfb27113c34c4c4de4df"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-jp-w8c-current-authority-admission-v1.json",
+      "sha256": "09b5290e34a64a7e8371005785d1d95a219e4a0dd2f8e51316b5b1af78787082"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-kr-w8c-current-authority-admission-v1.json",
+      "sha256": "202ffde2970f5c37e6887e8f5b8f9a6b1a5f32ba8bb45e55640361c00c032d9e"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-latam-w8c-current-authority-admission-v1.json",
+      "sha256": "3bf47ca97eee7ff234b78b13fb1449da7eebe2445fe83d7e2b5ecfc20dadf80f"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-me-w8c-current-authority-admission-v1.json",
+      "sha256": "2b7bd1dedde6ce5a83b48a9cffa22c524a8a44b61683c5f8f2290563284ca226"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-ru-w8c-current-authority-admission-v1.json",
+      "sha256": "7f58170e6aa048a4814f5945308679c97e9ab5a33d2ee9f9afcc7b5a4c0514d3"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-sea-w8c-current-authority-admission-v1.json",
+      "sha256": "5f450c8b7228bafd3bb6bb09a0d8616800f193d351d207ab2de2595860920df9"
+    },
+    {
+      "path": "functions/_lib/book6-accepted-current.js",
+      "sha256": "d9b4f7e2974a11bfe8dd05b51c670a9c7f644b741272d995f618a0458cbe655d"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/runtime-position-w8d-rre-readouts-v1.json",
+      "sha256": "91d8885b79d1837def3d82d636577fef1424cc7022886d9de93900991911047a"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/moomoo-provider-validated-claims-v1.json",
+      "sha256": "deb8044aa735ae9ca40fe7c51d7ead35e2e7b797ab88e1bde681ac787e9f18c8"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/moomoo-provider-w8c-admission-results-v1.json",
+      "sha256": "420a6a831c349339536a5fee8166de2e3065783ea2922783afabab426ab2fc2a"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/moomoo-provider-rre-eligible-handoff-v1.json",
+      "sha256": "92d779798676fc4184a9abf084310f9d33e5e75c14a10d8ada565264996e7345"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-af-w8i-accepted-current-dossier-v1.json",
+      "sha256": "1ef23dfb6a896319ee7f88ecf102992dafade4ec5e284677cb3ec55de6c88d0f"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-af-w8h-human-decisions-v1.json",
+      "sha256": "52eba969aa5e7eed7326ced61505521ef147296423cb78f25f7050f38c6bb902"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-af-w8d-rre-readout-v1.json",
+      "sha256": "ad6827a15acb8015a72a17a4b1cb21fdb71c145d9e16a9c8897cded35cb76b6d"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-cn-w8i-accepted-current-dossier-v1.json",
+      "sha256": "975392007d4cdb240c1e24994c7acfd8dc3fc74bcdf380552c720971369eabee"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-cn-w8h-human-decisions-v1.json",
+      "sha256": "361aa13f588d2dfd70907cc64701d2defb98e402cded002b71c5589ddf1e18cc"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-eu-w8i-accepted-current-dossier-v1.json",
+      "sha256": "46dfc98d9aec1a27aa3ac6379f929c8980dcc005feb2e31daf3a1321d048e603"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-eu-w8h-human-decisions-v1.json",
+      "sha256": "67952a9b8e6bba6dc03d479fa9359959665a2dc766fcc9251e1a0695ae4163b8"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-eu-w8d-rre-readout-v1.json",
+      "sha256": "7b6856f09f32d75fa3255fcce7b03b4b778635b04540170b9d7112964464b398"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-in-w8i-accepted-current-dossier-v1.json",
+      "sha256": "16f74282b6caa88b51b17aed2a6985a330cb3c3ca0e31d90327d2df6638d72c4"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-in-w8h-human-decisions-v1.json",
+      "sha256": "0c4279100e29d1ad8524bdf92dc71f7b55fc59ec10a603e78a618674eb946d24"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-in-w8d-rre-readout-v1.json",
+      "sha256": "429ddd158e5d7bb0da23db5d2b329fb8f9cfb4552f563f343caaf61d85953404"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-jp-w8i-accepted-current-dossier-v1.json",
+      "sha256": "119ea99053ea26a327a0af77b91acacbdcff7fcf0807f0dfbd60d14e0787b920"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-jp-w8h-human-decisions-v1.json",
+      "sha256": "5d768dbfe957918e10d451b0b2b4c4e25a84e5ecc91ddbb296ad9e6982f47004"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-jp-w8d-rre-readout-v1.json",
+      "sha256": "f7e5bbbf997069a00befe817e0d70b9dd9ed3d1463ec5dfa027537b2a6d5862d"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-kr-w8i-accepted-current-dossier-v1.json",
+      "sha256": "40edd93bb916739b454b2d176575d8ca882135d28994f31ec1cb0c3bca9e7b63"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-kr-w8h-human-decisions-v1.json",
+      "sha256": "a5099cc82d749fb33432a773fdda7862e192204891dd868fd6c229f210a8c6b7"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-kr-w8d-rre-readout-v1.json",
+      "sha256": "5db0181a8e9ce94c08b938a5c035fefd1f2d84eefa8265402727a73d2c4a2ba3"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-latam-w8i-accepted-current-dossier-v1.json",
+      "sha256": "042dd5f9d3069d657b32a43c06f3c46ea87ae1e2374f3cd89aeb74a2a5a3c05f"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-latam-w8h-human-decisions-v1.json",
+      "sha256": "b3e8c40fec2bb3c19c024a1426197278e48f8d25f6df6752842e0afa471541e2"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-latam-w8d-rre-readout-v1.json",
+      "sha256": "929665b8b1e7e61de4d5e9fb164df657ffecf08dbd49a5c24345abd8a31e8ffa"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-me-w8i-accepted-current-dossier-v1.json",
+      "sha256": "b4c9d9a43b8c46c32200c3c14b46cfd5d83b5781c17ca4b9f8ba6539dac0645c"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-me-w8h-human-decisions-v1.json",
+      "sha256": "f4936812280c3ab0bd6fc28e5c8b9b0f6630d351f94048b06cae6448e7ce8851"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-me-w8d-rre-readout-v1.json",
+      "sha256": "f4b282cc67a6c87b2d7713fdeed106248b88eeee882ed5608922622640c41c5a"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-ru-w8i-accepted-current-dossier-v1.json",
+      "sha256": "b7bcad5a6292bbb578b3c58e4859955152bd7b05abdc053b3a451866a7bd04dd"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-ru-w8h-human-decisions-v1.json",
+      "sha256": "2ab063b5411ad9f4141328f1bfff6b5fad236964a3e37a9f08c7047f1437f74e"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-ru-w8d-rre-readout-v1.json",
+      "sha256": "5c365f23db39ea80a6a81bc143020f1e7f47220e0d293757195ebcf314329913"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-sea-w8i-accepted-current-dossier-v1.json",
+      "sha256": "b87e1ac75162e61692f4ffd5f8a25cbc61ffb45024268981c3057f0fc808224d"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-sea-w8h-human-decisions-v1.json",
+      "sha256": "93c62a996fbe5d3fb0a881a0d6dca421f514349bca2b0154c1a738059a624e48"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-sea-w8d-rre-readout-v1.json",
+      "sha256": "06de4e5a11b67decb8abf06c11a016e5d63956c186aad47c4f6df924c4269c48"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-us-w8i-accepted-current-dossier-v1.json",
+      "sha256": "978a24e75e6dc066a26a10d5893f8cc6e86ccfccb7aa8e3d8d377e9c4b112bfe"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-us-w8h-human-decisions-v1.json",
+      "sha256": "6742ba9c49210698e1dee2ef2b296a0ef40e37125db26d503df68f7816024d0b"
+    },
+    {
+      "path": "functions/_lib/book6-current-source.js",
+      "sha256": "ac712364838cad2ac3e7cf7e019edd235bd35396e60490f1ce8a4494b55d89e7"
+    },
+    {
+      "path": "functions/_lib/atlas-retrieval-scope.js",
+      "sha256": "23479358067b6cc6a2f99fbec20aff0b3416c0950d542bf589e380dd8a3ee204"
+    },
+    {
+      "path": "functions/_lib/knowledge-epistemic-reading.js",
+      "sha256": "5d1bd14e27100320a74498b4aac95d909a7c9bbfa2ea81c5cbb72dba7837002e"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "sha256": "5a52c5519ba22b3fecff9845a736866c651d0277c820c22f4b540c10284ce0c5"
+    },
+    {
+      "path": "functions/provider-cost/knowledge-llm-experiment-budget.js",
+      "sha256": "6bc53f81b82c56921c198c43e6cf9e0f79be7d1ff97783ee2560e7d8fde587c3"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-model-request.js",
+      "sha256": "2a942c8ae554063d1959d831d1c3a1969574bd48a5b68d30b7eb4736f501ba1d"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-ask-execution.js",
+      "sha256": "4997d8494c6e6842d8b279b1a88470e495c64b9f8903d75d7c66bc7b8feeb75b"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-knowledge-service.js",
+      "sha256": "1c1256b8f38643e7b500554affe647ccb80eb054f85aafa635fd5d76c46d0bab"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-worker-fence.js",
+      "sha256": "d9958b5a90c490417e4e24ad82cdf804b5cf6391dc4cd84218056e5e7a1a61f8"
+    },
+    {
+      "path": "functions/personal-reading/report-generation-store.js",
+      "sha256": "ad2d514cce3e36eda8db61216c108538b54614001d1f2f36ef4c3ca46908833c"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-contract.js",
+      "sha256": "2c205e7e9c332e933ecadb4e84c3d25c3e94f36f0774da5a26d2bfbddcc66be9"
+    },
+    {
+      "path": "functions/report-delivery/customer-report-artifact.js",
+      "sha256": "d76e3cba2cecced1fbd67078954b0070285744236b6c43ffa1f8c40289efb1f1"
+    },
+    {
+      "path": "functions/report-delivery/customer-artifact-store.js",
+      "sha256": "56f9e9ce35c528610266f943828153edadeee55bf3b372ee5511da258729afeb"
+    },
+    {
+      "path": "functions/method-runtime/shared-calculation-runtime.js",
+      "sha256": "733ea3ebf93d53e090a3dec84da1021069bf55c432599980e6a32461aa65470e"
+    },
+    {
+      "path": "functions/bzr-full-production/bazi-structural-registry.js",
+      "sha256": "8f3c3abadd3cf7277d7ef5dffbdceb05e69c9cd72dfffbb442c66b61d3ef8067"
+    },
+    {
+      "path": "functions/bzr-full-production/bazi-chart-runtime.js",
+      "sha256": "5b746638fb1e67ed2734b20d4e77c3ed991c7fdb68be2820346aab896c8592ad"
+    },
+    {
+      "path": "functions/bzr-full-production/bazi-strength-seasonal-runtime.js",
+      "sha256": "796cef9db7a5fc07963331903d6ccb7ea6c477010ef8b85cb4b2dc0258298bbf"
+    },
+    {
+      "path": "functions/bzr-full-production/bazi-relationship-runtime.js",
+      "sha256": "232abecbc6009591419c138c1f320a2d608dd4ece7d19732df8043862396ab7d"
+    },
+    {
+      "path": "functions/bzr-full-production/bazi-ten-god-runtime.js",
+      "sha256": "509bae2a3d677290a598db014f7dbb9a62a6d95955854bdd5747ccd4d187692c"
+    },
+    {
+      "path": "functions/bzr-full-production/bazi-pattern-runtime.js",
+      "sha256": "34102a599140a6592917563ddabaf865d2ae7fd675e1da4d3a1808205dc8105f"
+    },
+    {
+      "path": "functions/bzr-full-production/bazi-final-structural-verdict-r2.js",
+      "sha256": "659fbf1ab91e53fb332a401ec8c9d392111d3b837447fcb049126d054ac0d50d"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-authority-pack.js",
+      "sha256": "cb6324f3bbc8bc84803825d4dedc756d4c264c46e9125d49de5ae28d09674196"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-cover-subject.js",
+      "sha256": "59fb3dfcd7c7db03be7d61d73c1447a99cd6e4fc1bf03fd779ebef6d9a59fd2b"
+    },
+    {
+      "path": "functions/report-delivery/bazi-customer-native-inputs.js",
+      "sha256": "0f637cb618dbcc110a25504b006dc67ea313412e844a2c360b54c22d50d240a0"
+    },
+    {
+      "path": "functions/report-delivery/p9-canary-admission.js",
+      "sha256": "06b3d763369d5050ac7fccf3e72a1ded0e96c34c31f53f4a885c7206e2488a84"
+    },
+    {
+      "path": "functions/commerce/controlled-purchase-candidate.js",
+      "sha256": "238a9b11647bf0ae7712b16bc40b2ee8ef1f2e3bb466a9f4a956aea573cebf1c"
+    },
+    {
+      "path": "functions/pws/commercial/report-successor-contract-history.js",
+      "sha256": "43bea3fcb1bcf906fc7dc8673313a1f102864637e3f4137ed933173db21fed52"
+    },
+    {
+      "path": "functions/pws/commercial/report-successor-contract.js",
+      "sha256": "1ac5bdf5a48820f602a9b15527b871d897b7ea88e397e990962c9ed957cdcb54"
+    },
+    {
+      "path": "functions/commerce/report-presentation.js",
+      "sha256": "48c50a07f1cee15a529a532b62ffe43f392f67bb6fed24c440f79da28040915e"
+    },
+    {
+      "path": "functions/pws/registry/universal-registry-schema.js",
+      "sha256": "f23a10f3da1fd66d1484977130c08d6cb7d33774ffb061ea171f5e96779089f9"
+    },
+    {
+      "path": "functions/pws/product/product-runtime.js",
+      "sha256": "f9e35261647c66f20430b28ebe9cfb5431a1aee9ce791e38a44fcc82f1c8f36b"
+    },
+    {
+      "path": "functions/pws/registry/product-offer-registry.js",
+      "sha256": "980210f8c207b77a7b048f51ea5180610b7123a8a601fb502f29ccd359124440"
+    },
+    {
+      "path": "functions/commerce/book-product-registry.js",
+      "sha256": "cd8e4eff58e0cee3a387699c0f390a44d6154cad355d942df0e27fd9bfcf6267"
+    },
+    {
+      "path": "functions/pws/commercial/stripe-product-registry.js",
+      "sha256": "df13b4dc9665ee2310030395f128d4d1a447e00773ed6bf6664147a548dbeb77"
+    },
+    {
+      "path": "functions/commerce/commerce-observability.js",
+      "sha256": "ef10a16028c6f202be9edfb7973564862cd642d3fe54847e2b9f190aa182e846"
+    },
+    {
+      "path": "functions/commerce/commerce-crypto.js",
+      "sha256": "40703f655345e468f0b216026dfcf6072ad23700ba5e52cfbcd4ca103e46d6a7"
+    },
+    {
+      "path": "functions/commerce/book-commerce-store.js",
+      "sha256": "a1908faf4faebd9242db90807e4e95cc8c58655a78f241a0e2873989774b80f8"
+    },
+    {
+      "path": "functions/method-production-activation/mcd1-production-authority-successor-runtime.js",
+      "sha256": "2581cf8b54e8a31c9e93ba8c9ef46961f853ee3af5f91e0635bb2d9dc9262bdf"
+    },
+    {
+      "path": "functions/core-method-runtime/ast-astronomy-runtime.js",
+      "sha256": "8368bef2f0bc7290811de47005f24c389aff25d198d353b9c528061d11c4b444"
+    },
+    {
+      "path": "functions/core-method-runtime/ast-planet-runtime.js",
+      "sha256": "ccae563a9a8e56a2dbedfd5e4cfa7b22139d6f2d9b033b2407e7b6e8984a9d26"
+    },
+    {
+      "path": "functions/method-client-delivery/adapters/ast-adapter.js",
+      "sha256": "ea4371c249d20f4c5697411eb0a5d860836c92ee746ce9d8d0910941c4572930"
+    },
+    {
+      "path": "functions/core-method-runtime/bzr-solar-calendar-runtime.js",
+      "sha256": "1a3bd6058e6e9ff2c8a8ce28744607e263a926a17a3d039ab88d81ec88fe5264"
+    },
+    {
+      "path": "functions/core-method-runtime/bzr-four-pillars-runtime.js",
+      "sha256": "70eeaf70469bfb4b6df2bb100ccef15312fe01aac0d4561455bbbd355f839a05"
+    },
+    {
+      "path": "functions/core-method-runtime/bzr-luck-cycle-runtime.js",
+      "sha256": "bb00b015513683e63d0ccce15188aec154de9b85c89c5f0e484c00def0a24aa8"
+    },
+    {
+      "path": "functions/core-method-runtime/bzr-projection-normalization-runtime.js",
+      "sha256": "967b6cc7bf61a9783e146066d1eb1d7885df25957216a4198ed09439d497fca5"
+    },
+    {
+      "path": "functions/method-runtime/shared-projection-runtime.js",
+      "sha256": "ff2ab39e55cd234bd1e7c4927de2c7eebcfd661150ae2a2e30fdfc3600044351"
+    },
+    {
+      "path": "functions/core-method-runtime/bzr-projection-runtime.js",
+      "sha256": "94d92257b0ff14e360ee59aae49b1eda70dedf4bde635d6b28de96d93b8eb4fd"
+    },
+    {
+      "path": "functions/method-client-delivery/adapters/bzr-adapter.js",
+      "sha256": "7575997056d8eba457d747dac60e3575f252e4f464e72d444640383fc4d02cb4"
+    },
+    {
+      "path": "functions/core-method-runtime/num-birth-number-runtime.js",
+      "sha256": "e7de5630c7b2e6faef419ba697da22a7bf979de135eb236713ea0fe4aec3e70d"
+    },
+    {
+      "path": "functions/core-method-runtime/num-number-structure-runtime.js",
+      "sha256": "23cde80b9a2d2939ecac5cab6c782e4bbec4702f3a9e1d1e2ca178c4b76766b6"
+    },
+    {
+      "path": "functions/core-method-runtime/num-cycle-runtime.js",
+      "sha256": "9b1155a7b79b75c0d1ce89f78ca89a44208e283439fdea79b63cac6856a4de2c"
+    },
+    {
+      "path": "functions/core-method-runtime/num-projection-runtime.js",
+      "sha256": "7670fce9e12793026b94c67b22189ad2440358952e0404b0cf5105b1144f7b2d"
+    },
+    {
+      "path": "functions/method-client-delivery/adapters/num-adapter.js",
+      "sha256": "c480cadaaec9f375b63c1706a38d4c3ee84e05a0594623bbaa95af7d4da914e4"
+    },
+    {
+      "path": "functions/core-method-runtime/hdr-astronomy-runtime.js",
+      "sha256": "0e15059c40bd29364eb011fccda2af1f4fb209225aa4e046d06cb4104421fcbf"
+    },
+    {
+      "path": "functions/core-method-runtime/hdr-design-moment-runtime.js",
+      "sha256": "2d684ac53e2847d34094605f4dddb765566fb82e346643be9b8a46f3ef074e32"
+    },
+    {
+      "path": "functions/core-method-runtime/hdr-gate-runtime.js",
+      "sha256": "54ca40d84e6598d7b56554e318232b8c52807ec80377e9957acc99aea4c6fafb"
+    },
+    {
+      "path": "functions/core-method-runtime/hdr-bodygraph-runtime.js",
+      "sha256": "3a0ece9f05e76d3fca9ac7cdea2ae7c913136c385981ce82afb06fd95f527473"
+    },
+    {
+      "path": "functions/core-method-runtime/hdr-projection-runtime.js",
+      "sha256": "632b1b2d5a9ad67924e0e63c7724c0716426775e59fc6b9225feb4bd35a5975a"
+    },
+    {
+      "path": "functions/method-client-delivery/adapters/hdr-adapter.js",
+      "sha256": "88e5b0de671712c5b579379c26b639e4e9910aa369d48cf5623f50578b98196b"
+    },
+    {
+      "path": "functions/method-client-delivery/adapter-registry-runtime.js",
+      "sha256": "a61bb9abb3a0792dad134d150786d056a03a94231d1c1c5360f0beb2f8c9acee"
+    },
+    {
+      "path": "functions/method-client-delivery/executors/num-executor.js",
+      "sha256": "2486e4caaba691bda0de9a048e8fe90353378d2ec52322caf10198b2066fd366"
+    },
+    {
+      "path": "functions/method-client-delivery/production-adapters/astronomy-engine-production-adapter.js",
+      "sha256": "f1d94976e11c04ecdf66c5ecfc9f990c6e1e54557620ef231b9cc4bc392a48c6"
+    },
+    {
+      "path": "functions/method-client-delivery/executors/ast-production-executor.js",
+      "sha256": "a83e0e5b7837de067f38b5786b50b5f96a9e7c0d3e68f7979c162d2f5c5f82cb"
+    },
+    {
+      "path": "functions/method-client-delivery/production-adapters/bzr-governed-production-adapters.js",
+      "sha256": "f09a93dda5f9cad55431eadc3451210a1163a9ee1ca6fc4adaa7dd0e066a0040"
+    },
+    {
+      "path": "functions/method-client-delivery/executors/bzr-production-executor.js",
+      "sha256": "fd179c6cc978069c8f7b594262f0957bd424c7bfb56d3451b2557be7cc19710a"
+    },
+    {
+      "path": "functions/method-client-delivery/execution-runtime-current.js",
+      "sha256": "ea4e89c5f458afd610e756b19dffdf83923c2d3011ac302337bb9ae70ec03b50"
+    },
+    {
+      "path": "functions/method-client-delivery/canonical-projection-runtime-current.js",
+      "sha256": "4819d859750da671353397493834efc70171d7112a5d35f2bc8d5fb075ace662"
+    },
+    {
+      "path": "functions/report-delivery/bazi-account-candidate.js",
+      "sha256": "a753f149a760fefaea63e19a28a06e98d0a4a9be298eb29300b398c6e952673b"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-batch-authority.js",
+      "sha256": "5ce010e2edff8d25166f88c64f3a6a9b49336e4d99f870fed001b854a591279e"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-schema.js",
+      "sha256": "ff36f317b67d3b64958b5cd1a3e0c4cbd58db6728aa637eff3fcb0ea0402c38c"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-prompt.js",
+      "sha256": "967b9d5c969641c4e0e6dc3d6dc0351fcb85911ff4a57464dff29dffea05eb77"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-budget.js",
+      "sha256": "3946be607e403c74196b2e1b2cfe04edeb14f60182bb841f568f2f457d62e3de"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-checkpoint.js",
+      "sha256": "315763fd77ccdb111c842efa0f004c0f0d8105d6f2adfda8c700207d0966d402"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-recovery.js",
+      "sha256": "219e7866e43332021df208fa600d3dbd9aead4099e66c13ca2fd888e348f4b36"
+    },
+    {
+      "path": "functions/personal-reading/report-provider-access.js",
+      "sha256": "093935964fe71998ee5d1975ffc0e3ba30ebc4482a50e5934136455374ce7fee"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-provider.js",
+      "sha256": "75e59574a37ddae96361d89c03c6862dbe0fb141e2a0929eb1bade3a132f59bc"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-completeness.js",
+      "sha256": "5b8c938362e8a34aff7d8de508be70c05172c6f8aeb30f7010955bb4cbf10a29"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-cache.js",
+      "sha256": "3ba1bd586169bd8d6a416511e45f77d64b9c08699ff6176da48fe69486d8f3cf"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-owner-cost-contract.js",
+      "sha256": "6c93a37a9a9fd0bab02199fdbb0afe200f30a60a53aafd8aaad9f3900a82fe79"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-runtime.js",
+      "sha256": "4e2bd9b8688fc8deb7df422f05c34b549c54be738185937190191c70509b1a0d"
+    },
+    {
+      "path": "functions/personal-reading/paid-product-cost-authority.js",
+      "sha256": "3f819c666eae74b2dad31310bb90a98035b34b9e274da56d4c7247182259424d"
+    },
+    {
+      "path": "functions/personal-reading/report-generation-budget.js",
+      "sha256": "09bb1e0d8468ffb132eeaaf174029093f9c729a3ce165ec70a1eaca9203eb104"
+    },
+    {
+      "path": "functions/personal-reading/paid-report-transport.js",
+      "sha256": "f3bf93be13cdb32bdb2fed8b8845636c03911d74c8aa495be5686e7db814380d"
+    },
+    {
+      "path": "functions/personal-reading/paid-report-context.js",
+      "sha256": "777a7784d3e5d3501bc244314c3f06a8d50ec11fd4d6e9ee13d114af906ea083"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-paid-generation.js",
+      "sha256": "adfb07cb03c588001f68128cd07c9d9fe596522973849b2b38813d1495152fb2"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-production-generation-config.js",
+      "sha256": "cb01eda1a57ff2d1286c056b3b30e109e11ef6e01a0b522a9f6b54ae64bdf8db"
+    },
+    {
+      "path": "functions/personal-reading/publication-fit/bazi-diagram-fidelity.js",
+      "sha256": "e3bf19285c769d38446f82f563dc5fbce5c0b8928bdd56202702ddb74312694f"
+    },
+    {
+      "path": "functions/personal-reading/publication-fit/bazi-publication-layout-profiles.js",
+      "sha256": "0200e3a23ff570ff4d051a3fe3b06fcc6d79d5e926fc09c5579a4bddd05cee28"
+    },
+    {
+      "path": "functions/personal-reading/publication-fit/bazi-publication-lead-selector.js",
+      "sha256": "0ffb2aa0815044f534734bbab9729eafc5c04768d3f353013df03310e1c10042"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-blueprint-reference.js",
+      "sha256": "a94001e435489d1d3e772ea4ae0f423287596544d829ebe143bb4456e31434e7"
+    },
+    {
+      "path": "functions/pws/commercial/payment-provider-registry.js",
+      "sha256": "c507ab4acc44a5952f1fc324764fc78c60716c9ea71b8673f4341723a00cfcac"
+    },
+    {
+      "path": "functions/pws/commercial/commercial-runtime.js",
+      "sha256": "692f8870a219c919355dddb5678ebb2cf401328f1a8e736d6f3841c1480a0128"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/visual-report-registry.js",
+      "sha256": "40eb885ae09b4d222a27547a66893bf27dc112757bb1e48544c6eb220d5ca5d0"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-editorial-verification.js",
+      "sha256": "4c387c29f588392dffcf657a5322a0fe17f9df718e81a9ed6facf3ab442f094c"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-editorial-registry.js",
+      "sha256": "7aab1d916a4a3cc5c3933422062a30212fe24093d85a5e3ab2dd29db88b2549d"
+    },
+    {
+      "path": "assets/customer-ui/js/assets.js",
+      "sha256": "80f8f5630f969c137610341408f4f9318cf4141789ca22827931d5c87b05dab3"
+    },
+    {
+      "path": "assets/js/runtime/web-production/asset-resolver.js",
+      "sha256": "8617becc586871e3160314b5764b4a6dd379e92a8d016691b56de9d9ab0c3109"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-editorial-resolver.js",
+      "sha256": "e44582ee3f752f35e9f207e4bfd4a2c08eae2b488bcaf8ea408fb4e463b9d32f"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-section-config.generated.js",
+      "sha256": "a5b2eb6645b2648d45c0e5ac3f4eb5eba3c7e02acd54bad641b5821cd27f41eb"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-section-contract.js",
+      "sha256": "a253c2976ded45d54954594a25a2186d9c4239131ef1d233587091230c7af745"
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-publication.js",
+      "sha256": "81ab329b13c980c5acff81e05a009913f282ccaafdb235020468ce4fa9dd649e"
+    },
+    {
+      "path": "functions/report-delivery/report-delivery-contract.js",
+      "sha256": "0f54f02703fab0ca687c62f8fcd28f9de27d32520d872da73b7976593e083120"
+    },
+    {
+      "path": "functions/account/report-followup-store.js",
+      "sha256": "bb37bf16a5ff074ed12cdec851867759947ebcf35a2dd876c15ea25e964fe904"
+    },
+    {
+      "path": "functions/personal-reading/report-delivery-budget.js",
+      "sha256": "3ab32cb48d7334d459f3ec7d679f559f4a06c156ace2cf39c994682ae2edcbfa"
+    },
+    {
+      "path": "functions/account/bazi-account-delivery.js",
+      "sha256": "6202c7ca07cca90a6e965cafa4d7110a9748acd347a30e35f9ea51309ca033c2"
+    },
+    {
+      "path": "functions/report-delivery/method-delivery-cache.js",
+      "sha256": "dbdb7f3faa49f7d4db1b40512228a752f2e00c752ccfec90f23471ff278c56c2"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/ziwei-report-visual-registry.generated.js",
+      "sha256": "2328f19a51c0b9d648bc6e833a1ec6b2d07585ccd99576984fd31586a0c64659"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/ziwei-vfr-r1-visual-bindings.js",
+      "sha256": "5e34a05cd95b8e5d1a452d7e3fe827cecc2eb88fd7e52274c83adedd45613bdc"
+    },
+    {
+      "path": "assets/customer-ui/js/personal-products/ziwei-vfr-r1-pages.js",
+      "sha256": "251321029171c2bbd7fd9fe2051dfdae7e9deccda796eb9b92fb5609b00978d2"
+    },
+    {
+      "path": "assets/customer-ui/js/personal-products/ziwei-vfr-r1-styles.js",
+      "sha256": "0e59df6daef64fb85e8ded1f0eb9689bbf10aa739064969d9fad09e320aff149"
+    },
+    {
+      "path": "functions/personal-reading/visual-first/ziwei-vfr-page-plan.js",
+      "sha256": "dc769fa277f028b59de75fc496a78f56dff7d6caf27ecda93421e4ac3f3954e2"
+    },
+    {
+      "path": "functions/report-delivery/ziwei-vfr-r1-version.js",
+      "sha256": "6ba1535843b5c9aa74a90b65bacc778c1f0dfd44b372dbfd67a1671cd3903068"
+    },
+    {
+      "path": "functions/report-delivery/ziwei-vfr-profile-policy.js",
+      "sha256": "c49e473b7b4376f77b4b851b4a9a9e20d5a2531bdb2f79917b3f1d4cc2c13aa0"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-structural-registry.js",
+      "sha256": "03f39371b616981e72a8c6255d343fc2834aadf9ebcffe922d8b7f273645c45c"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-star-state-authority-v1.js",
+      "sha256": "271de6bf4e9d51c74b2125d7e0a406c85ff045aedf08a2815c158c59427ccf92"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-professional-reading-r2-authority-v1.js",
+      "sha256": "ec4417b03589bfb1814f6a6e821315f38d2ddd9639a62554225003c4aad6640a"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-professional-reading-r2-authority-v2.js",
+      "sha256": "41d17fd25b43ffd9ac23033b596a73ac2392cce7b61143cd3ccd6c3837914b94"
+    },
+    {
+      "path": "functions/personal-reading/narrative/ziwei-semantic-canon.js",
+      "sha256": "3aec169b2a0ecca0c08de0acec5b0b5882140ce620bee7e088bfba56838aa5bc"
+    },
+    {
+      "path": "functions/personal-reading/narrative/report-publication-ir-v2.js",
+      "sha256": "44d17542fbdd46a17234dc226392a18ed3fed742e18e4554d280d5896e5dc5dd"
+    },
+    {
+      "path": "functions/personal-reading/narrative/ziwei-production-composer-r3.js",
+      "sha256": "e388cc43c4d6cc2ef0da4970bb38e328d5ccf63c05fcead4f93368d73297ac46"
+    },
+    {
+      "path": "functions/personal-reading/visual-first/ziwei-vfr-diagram-data.js",
+      "sha256": "fbcbfe19cd736abb0121f12a768065f05f50ad86f9cd8917dbf5fb58378f075a"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/runtime-ui.js",
+      "sha256": "cf9c4e7065b614eed481239ed985167b7acdbff483b1346e8cc88b9c98b02d55"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/visual-first-report-contract.js",
+      "sha256": "cb3b3450c0cda0a698eebae6519444d3abe8806d5538bbd715afe2255b6b2da4"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-cover-field-format-registry.js",
+      "sha256": "99875e059e0350e68926624d0a7cf978c0aa2ed823548a1206c5fd970c875688"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-cover-overlay-registry.js",
+      "sha256": "2fd7a2ef7791259379e0d408c29c4911de1ea6a16b194c7c3e5b12dce7a10b7e"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-cover-overlay.js",
+      "sha256": "aadb91a1a1dd0f6d377b1e6199f2ab7fbbf6731d7b54b6dadcf5f4238566fa6a"
+    },
+    {
+      "path": "assets/customer-ui/js/personal-products/visual-first-report-pages.js",
+      "sha256": "5d637fa32277669bf5f12edab3880647777ffa8e2ba199736d617b3112f491c2"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/vfr-trilayer-bilingual-contract.js",
+      "sha256": "0ea34f48d6cb10afc062e7bceefe376a3d0c135a045e0c981ee8d276e988cb18"
+    },
+    {
+      "path": "assets/customer-ui/js/personal-products/bazi-vfr-r2-pages.js",
+      "sha256": "00150ae0c4dea9c5bf48ea9b5168e7d11558aba0c33c184f7c3c778b355d5e2b"
+    },
+    {
+      "path": "assets/customer-ui/js/personal-products/bazi-balance-visual-pages.js",
+      "sha256": "45931a1d7f0f747133e3a1846f8c0cadefdef5230c8d04086944744bc60c0032"
+    },
+    {
+      "path": "assets/customer-ui/js/personal-products/bazi-domain-visual-pages.js",
+      "sha256": "14ce56357c530fdcdb04c791c31431ef7af964fcf18c21a4abf520d34492c3ad"
+    },
+    {
+      "path": "assets/customer-ui/js/personal-products/bazi-timing-navigation-visual-pages.js",
+      "sha256": "7e99598b918e93a537247b35d77b1e80827cbb989186f6c9d09d806b6045c40e"
+    },
+    {
+      "path": "assets/customer-ui/js/personal-products/bazi-structural-visual-pages.js",
+      "sha256": "a0c60fbcf360a9d2d49d13879290e1bd73509818cd2580a8f44e0df74dc25c38"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-publication-contract.js",
+      "sha256": "5976bf2f91c2731fa1dc1c7213b2b67d26773218340f26a5184c6424b43efa9f"
+    },
+    {
+      "path": "assets/customer-ui/js/personal-products/publication-report-pages.js",
+      "sha256": "de097581563147bb8f4e0f354f0ec9ac2db1dac96454c74a369899cc25ebbf49"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/ziwei-navigation-finalization.js",
+      "sha256": "9a1c0d902a6dba530b8bd12f109044313c13f627fa1575b7e90e9192379337b2"
+    },
+    {
+      "path": "functions/personal-reading/narrative/report-section-snapshot.js",
+      "sha256": "8c3a7f391b26bba1fddd610ebf13c1e46e821f935522c84acd662565eca545b7"
+    },
+    {
+      "path": "functions/report-delivery/ziwei-vfr-method-profile.js",
+      "sha256": "b75eb1b5b5dbdeabac673e77ba0cf1112bb9dc728c3f8c5b33c1f145b4ba838a"
+    },
+    {
+      "path": "functions/report-delivery/method-render-contract.js",
+      "sha256": "de815be87dc4ac8841404f11c4b0d744c6becca6ca55958727961c370a53e98c"
+    },
+    {
+      "path": "functions/account/method-report-material.js",
+      "sha256": "e997fd50c6e6292d03a1445253ec46c2d95a412a26895c5ccf7a5573840adeb1"
+    },
+    {
+      "path": "functions/personal-reading/narrative/narrative-provider.js",
+      "sha256": "38855d13e8fa62be6f190c5c8a92ffaeddcded2e91b2796569943ea549a07212"
+    },
+    {
+      "path": "functions/personal-reading/narrative/ziwei-r5-provider-registry.js",
+      "sha256": "63077e03893125c0f24cf3e7cbf55adbdfbdda20203eae91d5838c586f6b6a04"
+    },
+    {
+      "path": "functions/_lib/pai-r1-economics.js",
+      "sha256": "1b880b92c41405c3f97665bc53ecea1999e622528b3cd27716d88a07087ba4a7"
+    },
+    {
+      "path": "functions/personal-reading/visual-first/report-provider-budget.js",
+      "sha256": "292737917337bbd8c4eecf8246bc39110a2695a553bf38f582317b6188c4a13d"
+    },
+    {
+      "path": "functions/personal-reading/visual-first/ziwei-vfr-five-call-manuscript.js",
+      "sha256": "7bc9a1ab4c84e456d1e1ca3dea4820c95f2e2eb7aed705d7f593d35a11ad27e8"
+    },
+    {
+      "path": "functions/personal-reading/visual-first/ziwei-vfr-five-call-composer.js",
+      "sha256": "5a62468cbdee6cdd81ca5f8b5577d02c3a721f9b09699b3b4c7d46f8e1cc8116"
+    },
+    {
+      "path": "functions/zi-wei-runtime/zi-wei-runtime-authorities.generated.js",
+      "sha256": "bd753f1706c34899349b354b8aa875e52d0fa9bb16629d857eeaef72d5492c58"
+    },
+    {
+      "path": "functions/method-production-activation/zwr-production-authority-runtime.js",
+      "sha256": "d6de0b5f73e743c482ed55a3e14792fe853923925a58752607730bfbdeddf525"
+    },
+    {
+      "path": "functions/zi-wei-runtime/policy-gate.js",
+      "sha256": "67009c55246ad53909cfd0c53f9aea038fd3971002a87424c4c348638255f305"
+    },
+    {
+      "path": "functions/zi-wei-runtime/lunar-calendar-table-v1.js",
+      "sha256": "0891e0dcabb7f214049bd536b71c6ab734712d29d37b3160bd6220bd6f2cb356"
+    },
+    {
+      "path": "functions/zi-wei-runtime/zwr-utils.js",
+      "sha256": "23c5a77077b5bea47f82f2cee6ebfc4a7f5acc0b40f6383201d821dc8a4afa70"
+    },
+    {
+      "path": "functions/zi-wei-runtime/zi-wei-calendar-conversion-runtime-v2.js",
+      "sha256": "d70b4c536949b07bb26db1eb3812ec391580bfd91807481e15392fa6c00988ff"
+    },
+    {
+      "path": "functions/zi-wei-runtime/zi-wei-palace-construction-runtime-v2.js",
+      "sha256": "1e55fc585e70b17cd69923e983f28fb11e54b6a98cfa50fc3c8361034049d93f"
+    },
+    {
+      "path": "functions/zi-wei-runtime/zi-wei-main-star-runtime.js",
+      "sha256": "7ff4722750cfcd2bae81bbab66d5f1c12b8a99fe1b26d17bf1546c6a3a3cb433"
+    },
+    {
+      "path": "functions/zi-wei-runtime/zi-wei-support-star-runtime.js",
+      "sha256": "61cda8ec0cf90ca94de9c087303a70a84bed2748505dc78aa41ff3575317bbff"
+    },
+    {
+      "path": "functions/zi-wei-runtime/zi-wei-four-transformations-runtime.js",
+      "sha256": "36a81560920f6bd525257622117501c68b623f4280d9dd46fa851613196a1532"
+    },
+    {
+      "path": "functions/zi-wei-runtime/runtime-activation-gate.js",
+      "sha256": "413c06e2c41bdc94f95685031c9b12633480e8e24f3be60cc17245f5a57dde65"
+    },
+    {
+      "path": "functions/zi-wei-runtime/zi-wei-calculation-ir-runtime.js",
+      "sha256": "031d2fbb1d81c666f9055275edfb230f03f45aca4235dc17fa09973986043e5a"
+    },
+    {
+      "path": "functions/zi-wei-runtime/zi-wei-canonical-projection-runtime.js",
+      "sha256": "0ff08609bbf90d1fc73b14fa324b930d8a5daff8a557bf93ac9786d9535eca5c"
+    },
+    {
+      "path": "functions/method-client-delivery/zwr-canonical-projection-runtime.js",
+      "sha256": "7e60924e6d4feb7016033e05a188c2dce963405277cf8e4510e355c46b3cf6fc"
+    },
+    {
+      "path": "functions/zi-wei-dynamic/dynamic-policy-runtime.js",
+      "sha256": "52ec61a2c1ae937d48a7543d5b008888f9bfe175b2de090a3bae71b1128dec7a"
+    },
+    {
+      "path": "functions/zi-wei-dynamic/dynamic-runtime.js",
+      "sha256": "e866124730de9c97f693052530379a4b14ced2f41caa7ebf28414bb9b224423d"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-chart-runtime.js",
+      "sha256": "9347544609655141f3da2e3e3767a482e60baa241472f6a6ddde8eaa5b80246a"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-complete-star-placement-runtime.js",
+      "sha256": "ad10fb21af4c951affa80e0eadb09316cc8a34cb4cf192c9589dc4f8924bf52a"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-star-state-runtime.js",
+      "sha256": "f48523630148a1fe0baddfef0948156d00421d3abdec0b2ea6b95e451a659a68"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-source-admission-authority-v1.js",
+      "sha256": "0a21129600a2b7818b200a95d79c085903a74e0f4257a339eb6f195125345feb"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-four-transformation-matrix-runtime.js",
+      "sha256": "68a03bfa749160e33038b91b386ccafd4fe1835e06df23fffd95999e6ea02ad7"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-palace-relationship-engine.js",
+      "sha256": "8a7b0cb135a24a2519a4fdf7bd6891f7a9fb293663de2e3d10cbd93f975887e7"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-star-combination-runtime.js",
+      "sha256": "a5dd5d3daebe260de2c2b1cef9d08d1c0cce7be6d4bdf7d39af57d5cce284b5b"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-pattern-runtime.js",
+      "sha256": "e8e22f6ce8bbfb909a119e846e425a518c0b2868270456621cdaa486d448b504"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-pattern-rule-authority-v1.js",
+      "sha256": "a1a7dc72d644e45a3da334023bff740c99847f38a0e52deb1abead459032ba03"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-admitted-pattern-runtime.js",
+      "sha256": "b3c61c391166ebd40e200d05e13e1c0a77d13b70d1957353fe3cef4a96ad1ce2"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-da-xian-integration-runtime.js",
+      "sha256": "d52aead84ea16dd6e683e88d962c1557d2fe2c7a09a60a0c696fd0591eccb46f"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-liu-nian-integration-runtime.js",
+      "sha256": "953b6c86d6ecaab695fd73fc9bb1b3f4702a31e0df799382a29407e85eacdceb"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-meaning-authority-v1.js",
+      "sha256": "bacacbdeb5169f9ff2fde6165a43005421eff160c1a63b3dd8259a21c362995d"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-meaning-registry-runtime.js",
+      "sha256": "94cd7ef69f7c467199dae6d134b12be5743327a0f016b6e7bfeb8971b4370462"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-structural-finding-runtime.js",
+      "sha256": "58ff0654cfdb0aaced4166224f3ea5104069fc3267708ee9263f9f4058aeeb17"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-interpretation-evidence-graph-runtime.js",
+      "sha256": "3ad49d89466e2016a1dfc1e347b7d6fcf2359152d9776bf2e9f1186fbe378dc5"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-cross-finding-composition-runtime.js",
+      "sha256": "9447abee4e3e84ad3089db0217332921304c6e58e64f3da88319a927309394fe"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-contradiction-resolver-runtime.js",
+      "sha256": "c42b70b46e8c053c5e2db3eea03896af7189cb64f9cf8317ff31611469e9d975"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-semantic-dedup-runtime.js",
+      "sha256": "64f1765f30312a812cebf20a824f7e01f9b140f156a5949583242e2bf8214655"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-reading-ir-runtime.js",
+      "sha256": "d8e87c1ed6a995627934da50a60c3160f275d415ee3300a2994f2ff1a8946359"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-customer-report-runtime.js",
+      "sha256": "2ba64d5b2fa5f7644c037237dff35d1a4fb95518df2c943d4f20f383d7fb4e62"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-interactive-chart-surface-runtime.js",
+      "sha256": "9b73a71f9035b67a680fc8758fc1089f0621f8acff25cfeb8f2c1d688e74c966"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-topic-reading-runtime.js",
+      "sha256": "21edc08b4d7ae926aa34fabe3d5d4a5fb4a75cdc79405ea6998f576b68e1614e"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-live-target-context-runtime.js",
+      "sha256": "6462c8820e51da2388f9584e6770840343e0c050e8b177d7256a8a1f12dcfa7b"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-current-publication-envelope-runtime.js",
+      "sha256": "8e1d87fd8a6e0fcf142279bcab52311372ae483801aa490ea0a9bc8e1f40f76a"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-professional-timing-navigation-runtime.js",
+      "sha256": "a76079374be53a19d2d434069473b9552f6dd82d7a708be59ee9c8ebea3569f5"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-professional-chart-density-runtime.js",
+      "sha256": "2618164d3adf40e0ebbb2943149b85a3faf7fd96c0503f198b3e97f3160a410e"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-full-production-customer-runtime.js",
+      "sha256": "6a4a47f5496edf8eed9888165233fb1ed892713fa45dbcabb362419cccbedca9"
+    },
+    {
+      "path": "functions/zi-wei-full-production/ziwei-professional-reading-r2-runtime-v2.js",
+      "sha256": "828145e37d3217a73c141914a0b9160e4bacf46081671e4905c37b0a503715df"
+    },
+    {
+      "path": "functions/personal-reading/narrative/ziwei-publication-adapter.js",
+      "sha256": "ccdcf2bb99482d1c73b85a5390b2ce089a03e22efc89b7c9e4143cf5e8109d91"
+    },
+    {
+      "path": "functions/personal-reading/narrative/ziwei-production-composer-v1.js",
+      "sha256": "d1c997e8d813f693009e3ba07a43396672e663214184be7247430d67bfe52cb2"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/ziwei-report-visuals.js",
+      "sha256": "88dda16e8c15805113390cc9e88f9babe5889f2e8191008caafd931b675f11c8"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-editorial-copy.js",
+      "sha256": "47559f0081c5245df41ce9c419e70f5a596913b92fa707f97dfc82ce64f68421"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/physical-composition-contract.js",
+      "sha256": "6c256477d2917914bdd61a7daf85c10e2954a9e38f7dd19ead62352db5b1f418"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/visual-report-page-runtime.js",
+      "sha256": "b11cec6d6234095def75a54d16241959a189853576baef74c5d60f4c30cdcaf0"
+    },
+    {
+      "path": "functions/personal-reading/ziwei-production-publication-v1.js",
+      "sha256": "e3214bd0d72d9c207c89beb64dbf386ab94c73eab0e6cea44718c1145ce0aa39"
+    },
+    {
+      "path": "functions/report-delivery/ziwei-production-generation-v1.js",
+      "sha256": "04978a175dcbd07115af64aef3d6cdaa89381c0bf31681c516b88bd0290d57d4"
+    },
+    {
+      "path": "functions/personal-reading/narrative/report-section-contract.js",
+      "sha256": "a61f714fa0701c10f97cdb745d8178727ae6edaaf6a764f1affb35009a52a034"
+    },
+    {
+      "path": "functions/personal-reading/narrative/report-section-brief.js",
+      "sha256": "d3618acd11d1455f9db6849c6120b1e7b080f46e906e6bd90a9ec3f6fbc28e73"
+    },
+    {
+      "path": "functions/personal-reading/narrative/bazi-s04-career-compression.js",
+      "sha256": "b106d91e5ab790c826eb51b3a4bd3d9cce6a69150d64b713579a04334d77121f"
+    },
+    {
+      "path": "functions/personal-reading/narrative/bazi-explanatory-authority.js",
+      "sha256": "595adf7819089d5c83412ccdfe9b7ab6633171c660f97e1a9b39e5db97d59bf1"
+    },
+    {
+      "path": "functions/personal-reading/narrative/bazi-editorial-quality.js",
+      "sha256": "7c35ff3bb3abf2b050c7dc07ca64a292091d54b55a9bf346393f37668e8955ad"
+    },
+    {
+      "path": "functions/personal-reading/narrative/bazi-s02-editorial-depth.js",
+      "sha256": "0beca5ea473a0b074929a14e19e1440679cb390c21ff63d2caf19e565b17b980"
+    },
+    {
+      "path": "functions/personal-reading/narrative/bazi-editorial-contract.js",
+      "sha256": "674f86141fe933b2b1c8dfcd25a72ee56ead838978568917170a3ac4a57ca891"
+    },
+    {
+      "path": "functions/personal-reading/narrative/bazi-t3-release-gate.js",
+      "sha256": "2537141523fe2cef341f6bc02666304efdb2271e24bd2766b2737e1496ab28fa"
+    },
+    {
+      "path": "functions/personal-reading/narrative/bazi-t3-composition.js",
+      "sha256": "31d421344d7a127ead65152ddfbccbc3f3bdb40d83fa7458e20e24228dcd7685"
+    },
+    {
+      "path": "functions/personal-reading/narrative/bazi-s04-identity-quality.js",
+      "sha256": "3e56e5c106f1932de26eb4783111d66012089086bc7dd44302b7bcc2dfd9c5f8"
+    },
+    {
+      "path": "functions/personal-reading/narrative/report-editorial-quality-r4.js",
+      "sha256": "f116d9561b19f26115489b6c643cd7637012d714a8e92ad642155a29910aed52"
+    },
+    {
+      "path": "functions/personal-reading/narrative/bazi-s04-market-reading.js",
+      "sha256": "3d14519da53bbd8a4855ac60b6b51be1bf215ff937ce33316cff41d2da21d7c2"
+    },
+    {
+      "path": "functions/personal-reading/narrative/report-section-semantic-verifier.js",
+      "sha256": "2b55a823f368cb1f02b69034fa388de9bcddac642429cf339ed6eb6e936573be"
+    },
+    {
+      "path": "functions/personal-reading/narrative/report-narrative-governance.js",
+      "sha256": "7ed540891a9c6a7eb72e74d1aa78c104105e66b3bc67c70082c83173e87b12e0"
+    },
+    {
+      "path": "functions/personal-reading/narrative/report-section-semantic-review.js",
+      "sha256": "421a42e1626c5241fcce05cba65742d91539ff81a84b9315aaee32a6bff40bf6"
+    },
+    {
+      "path": "functions/personal-reading/narrative/bazi-s05-market-reading.js",
+      "sha256": "47491bf6427fb89a9480be5ff3c878d81749da78a7552ce7c47c06b175277360"
+    },
+    {
+      "path": "functions/personal-reading/narrative/bazi-s02-s03-reconciliation.js",
+      "sha256": "13372c4c024c9fa3aaa7fd59102c66e9f362db41fc9fb3a6d80e6084c15bb367"
+    },
+    {
+      "path": "functions/personal-reading/narrative/narrative-writer.js",
+      "sha256": "3910e5e2d9b571d1b0e8fa4259690f92781685f170b4754386e13e803f2ae808"
+    },
+    {
+      "path": "functions/personal-reading/narrative/report-section-t3-composer.js",
+      "sha256": "0f329764b9f55d1f3cc9382808599c54d7249e57f605bd04581e1f37626e2014"
+    },
+    {
+      "path": "functions/personal-reading/narrative/report-pro-reference-registry.js",
+      "sha256": "9eb3eeee543582fdc5c9a5da3922bdecc9f2b5c500014f0e4172562d7f773bb2"
+    },
+    {
+      "path": "functions/personal-reading/narrative/report-pro-composer-r1.js",
+      "sha256": "6e44bc4c1a456e7e2ab64a93a89935d278e7a5d830e9f02e0f3f3da55d426178"
+    },
+    {
+      "path": "functions/personal-reading/narrative/ziwei-professional-synthesis-r5.js",
+      "sha256": "88749656ea62b2f9c49fa18588559b4666a7caadf6850ccc559d5f6290d7851d"
+    },
+    {
+      "path": "functions/personal-reading/narrative/ziwei-r5-authoring-pack.js",
+      "sha256": "373d87264bd276c5410fd554eb8ea8ccd1dbf9ea0bc8f34684021aff57ced156"
+    },
+    {
+      "path": "functions/personal-reading/visual-first/ziwei-vfr-authoring-pack.js",
+      "sha256": "e8e694f26b4a094ebc81a35ea809f2ccbb2109e6040e324ba1ec0f60fa896e79"
+    },
+    {
+      "path": "functions/personal-reading/visual-first/ziwei-vfr-targeted-repair.js",
+      "sha256": "529953abb694c42106aa916dc9f97772e9412706f20e9fcacb4dfe1f46525b65"
+    },
+    {
+      "path": "functions/personal-reading/visual-first/ziwei-vfr-production-completeness.js",
+      "sha256": "44dc4d6e018d247557c9a3f3d9c5a4f9947b677894066242cde05a321395fd44"
+    },
+    {
+      "path": "functions/personal-reading/visual-first/ziwei-vfr-production-deep-composer.js",
+      "sha256": "b521ba9fb7f5da46435375599e1b22e3880c6af11a9c0502aabc863b6134920a"
+    },
+    {
+      "path": "functions/personal-reading/visual-first/ziwei-vfr-deep-publication.js",
+      "sha256": "0879e56621faa21ddd8c281ccd29094368adbf00e3beae445567b7c64cfc4a08"
+    },
+    {
+      "path": "functions/report-delivery/ziwei-vfr-r1-generation.js",
+      "sha256": "7f2f16ff31d17450f2daabe73a794364c3c61511f527403294646aae209ec0d4"
+    },
+    {
+      "path": "functions/report-delivery/ziwei-canonical-person-binding.js",
+      "sha256": "75d7b63d03d6ed96a40dce0f26837cd91c91c13344d6a2cf0c36f1c3fed3e614"
+    },
+    {
+      "path": "functions/personal-reading/narrative/ziwei-full-report-sections.js",
+      "sha256": "946ab71b76ceb5ef14331dc9cd56b64defe8cbf3a349ee896ea2d68b0fd2b65d"
+    },
+    {
+      "path": "functions/personal-reading/narrative/ziwei-editorial-r2.js",
+      "sha256": "1eac524d0be451349e41ecc3b999b3cd6ad1e111ce8bc012d9b53ce132f20415"
+    },
+    {
+      "path": "functions/personal-reading/ziwei-customer-publication.js",
+      "sha256": "84b1307cbc5bf2dba5628e00b1e0c2ce2fc8cbc5ebb439bf4db751ef4c0a8dab"
+    },
+    {
+      "path": "functions/personal-reading/ziwei-customer-publication-r2.js",
+      "sha256": "b00bd48229b567caa0ebfab652818f6aa96b943c2a1320743df9f3c922dec477"
+    },
+    {
+      "path": "functions/report-delivery/ziwei-controlled-scope.generated.js",
+      "sha256": "46df2653e078cd17585a58adf6cb95b195817f2b1cf6032b40df2675e99dff5b"
+    },
+    {
+      "path": "functions/report-delivery/ziwei-controlled-generation.js",
+      "sha256": "151bb97a43f830123e83ff31f4f64cd77a1fdfb9c9cb7bfdad492834dea86d02"
+    },
+    {
+      "path": "functions/account/ziwei-controlled-report-material.js",
+      "sha256": "494958d6505423a8a1d318ac2e7082248c86963f9715a3d3ffcfcd91ab13b331"
+    },
+    {
+      "path": "functions/current-reality/personal-current-reality-runtime.js",
+      "sha256": "6a46e908b7483a95f2ef84b135500d08b447bdce0319778b08f74a82ad78225f"
+    },
+    {
+      "path": "functions/runtime/shared/schema-registry.js",
+      "sha256": "517cbcde81ecd54f6c33bef0ab23233d704b71b9b354c948dc60a272f27e3c4c"
+    },
+    {
+      "path": "functions/runtime/review/review-contract.js",
+      "sha256": "221e4e49ce112091f23d228d09c3e4047dd30e38cfb92a79bdd5dac71538229c"
+    },
+    {
+      "path": "functions/runtime/memory/runtime-memory-contract.js",
+      "sha256": "6b68f70247eb746b90d09309372d29248cea4c3810a00d429b18b40fdb9f0f19"
+    },
+    {
+      "path": "functions/report-context/report-context-admission.js",
+      "sha256": "5d465725f50d6dc5c23fed66e84bd30d16d870fc9b5132c5a212578e191e1d89"
+    },
+    {
+      "path": "functions/report-context/report-context-store.js",
+      "sha256": "ba40892a19a3260ff879e62d4d4d2269cfac1920e7cc435849455537ab8bd053"
+    },
+    {
+      "path": "functions/report-context/ziwei-contextual-snapshot-contract.js",
+      "sha256": "f574f6bdee3b64b667646674f15e7359c0aa40fe4e18d5e3d6a37133f5a7e196"
+    },
+    {
+      "path": "functions/report-delivery/ziwei-contextual-person-binding-r1.js",
+      "sha256": "92ecd38a4c32b20918b203e59dee3d646821cdc34ccf74c3be047a3e5d6b1839"
+    },
+    {
+      "path": "functions/account/ziwei-account-delivery.js",
+      "sha256": "1ae6c8446e7c61e9faf086a526dc70e859372cd77e30cc9fe9484333fb632acd"
+    },
+    {
+      "path": "functions/personal-reading/publication-fit/bazi-publication-fit-gate.js",
+      "sha256": "0b8361afbf19aa893674d132d30211ae6c3fe3ed1b1eaa39aa378c16a52f64f1"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-bazi-adapter.js",
+      "sha256": "46fcbfd1ff3a3da697017801a7d064dba29b5fc938adfd1309ec908438ceb4b5"
+    },
+    {
+      "path": "functions/report-delivery/paid-report-method-registry.js",
+      "sha256": "a98035f6b900203f7cc38c470642dc208ae936416b4ae6b5ed71a939acabc5d7"
+    },
+    {
+      "path": "functions/account/method-report-delivery.js",
+      "sha256": "ed17257c3ea31adededddcded02aaa89ee9cb7f2278f79686b5cd1cf4b0eea33"
+    },
+    {
+      "path": "functions/_lib/client-knowledge-ask-c.js",
+      "sha256": "33f97043305c31f5d6f66219f009bd8f4f4b5f1610c6d120a4241b51cc54a2c5"
+    },
+    {
+      "path": "functions/symbolic-method-persistence/symbolic-reading-envelope-v1.js",
+      "sha256": "ae486a2330c8fddf8bc4bbd6c7d414c1eefe55289e5c5911c4939ba5af6d0fa2"
+    },
+    {
+      "path": "functions/symbolic-method-persistence/symbolic-reading-store-d1-v1.js",
+      "sha256": "f37a4229050c878dbbc95374f03b9405aa60fee4373eab048513a9481aaaa6f9"
+    },
+    {
+      "path": "functions/api/symbolic-method-readings.js",
+      "sha256": "f73dc8df6fabd506ebc78300fc15e7295b0210f07837ce8fd84d96598f8f1a97"
+    },
+    {
+      "path": "functions/account/financial-will-draft-schema.js",
+      "sha256": "79c81a1275fadcfb5f8d85c042f8007e11b9c0e742f2c85187a512d1d15bf04d"
+    },
+    {
+      "path": "functions/account/financial-will-draft-store.js",
+      "sha256": "17c8c7fcb82a4c1f17ddc56c7360488e6bdb625a7c97753bd68dbf452c305c94"
+    },
+    {
+      "path": "functions/professional/appointments/professional-appointment-constants.js",
+      "sha256": "479af47757cd48585b2acfb1b4b5e379c976d5149ce80e538300f15200fe9528"
+    },
+    {
+      "path": "functions/professional/appointments/appointment-request-store.js",
+      "sha256": "fb653029e5580a3949b241ece6971c1d35cbc3e8bf27eacb02ba92c95bdef2c1"
+    },
+    {
+      "path": "functions/runtime/navigation/nav-contract-freeze.js",
+      "sha256": "4594281067d1be6f7d4173ad44bb0e2c20346e52b90a281be7a51bfce85d6b63"
+    },
+    {
+      "path": "functions/runtime/navigation/nav-accepted-batch-01-contract.js",
+      "sha256": "ed12911f64b040ba543e95663d4b2a61d694c401c03616e768ae6c674c8c5c38"
+    },
+    {
+      "path": "functions/runtime/navigation/nav-accepted-batch-02-contract.js",
+      "sha256": "245a75c2eea42d78e997dedcf8a3ec9247b7e73eb7f1cee0d2dcfff85063fbb7"
+    },
+    {
+      "path": "functions/runtime/navigation/nav-accepted-batch-03-contract.js",
+      "sha256": "7e2d988acb488e95706b66311b2e19c33c8d22d976b3384170d2b32005bdc326"
+    },
+    {
+      "path": "functions/runtime/navigation/nav-accepted-batch-04-contract.js",
+      "sha256": "5850cf26671316decdfc9169ba1a6f24161a7e2265363689b65b74683f9fa07e"
+    },
+    {
+      "path": "functions/runtime/navigation/nav-accepted-batch-05-contract.js",
+      "sha256": "04117fc5cb90e95340094c9277a08587817e38468621d27ad035f97dea0c134f"
+    },
+    {
+      "path": "functions/runtime/navigation/nav-accepted-batch-06-contract.js",
+      "sha256": "20a10a40c97fe0464c05af653852c9075843cb3a31f842effe9b8ded120066f5"
+    },
+    {
+      "path": "functions/academy/navigation-public-video-registry.js",
+      "sha256": "be13a9774dcdcbf1d79e19c588e8ac6a60bede54dc356c9e505270df58671122"
+    },
+    {
+      "path": "functions/academy/navigation-public-catalog.js",
+      "sha256": "18bcfd3c16f87917ea7d026960e98d6b24c4129d46cfa4e486f7cd7aeb0ac5b7"
+    },
+    {
+      "path": "functions/contextual-ask/context-source-registry.js",
+      "sha256": "978dfbcf853f84564d99808372a76c403b6143a45f18cd214f661cd03cc4444f"
+    },
+    {
+      "path": "functions/contextual-ask/contextual-ask-runtime.js",
+      "sha256": "5f0ad783d4b12436cfad507f5a7e13b34d90eb1aec9866ff0b88cbb4998f66ad"
+    },
+    {
+      "path": "functions/runtime/navigation/nav-accepted-batch-01-runtime.js",
+      "sha256": "cf4cb6e1537d787d135f6bed0420f9587818db041ea2b0a29408bde7a0e57558"
+    },
+    {
+      "path": "functions/runtime/navigation/nav-accepted-batch-02-runtime.js",
+      "sha256": "1cfe0c9f85cda5ff7017f6540f9a353956033489fc6ffd9c5e922afb8041f6ec"
+    },
+    {
+      "path": "functions/runtime/navigation/nav-accepted-batch-03-runtime.js",
+      "sha256": "fbf07f80b59af4b04822bfed7001d501f1c3621cab91d54bf37962d466a610af"
+    },
+    {
+      "path": "functions/runtime/navigation/nav-accepted-batch-04-runtime.js",
+      "sha256": "8832175d6bbfd8dc4f3be019ecf17552d9f9a8fe616502d04032c3ad55d49cf5"
+    },
+    {
+      "path": "functions/runtime/navigation/nav-accepted-batch-05-runtime.js",
+      "sha256": "19a1ae460e693539b1317dcc81d4b3060565c2709fd5e6c970672b8a677aca02"
+    },
+    {
+      "path": "functions/runtime/navigation/nav-accepted-batch-06-runtime.js",
+      "sha256": "a449c563b9a90de165194d9ed3b4a07118d42a90bfbe2cc12eae3be8b3c39b44"
+    },
+    {
+      "path": "functions/customer-projection/projection-common.js",
+      "sha256": "368ffa2350f674388015733063a4f6097926e612231ae82d9786a4b946677aab"
+    },
+    {
+      "path": "functions/customer-projection/accepted-navigation-customer.js",
+      "sha256": "2403bbfb48bf3d4e7e4684d124fffb4abd6703c7f5fd9a4feef138f67bb342b6"
+    },
+    {
+      "path": "functions/customer-projection/reality-customer-projection.js",
+      "sha256": "62b4d6a02c9c92901ce07b4ed529248427c1dba92e43a6b66c15156880e24fc4"
+    },
+    {
+      "path": "functions/customer-projection/canonical-navigation-handoff.js",
+      "sha256": "095d76cd3876ffc8a1955d7555c56fcff9ba52d11dc3138cd513b96c4a11dae7"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-navigation-pack.js",
+      "sha256": "8c2990a57eebe027ccb00c22d471fbab23dbcd8b89b259bd5dbab4f5ee8741ab"
+    },
+    {
+      "path": "content/professional/profile/assessment/self-assessment-instrument-v2.json",
+      "sha256": "0a33a7bfac4dc059c5c3303f89daee6191039b2e659a43c461e52a7756c1e8bd"
+    },
+    {
+      "path": "content/professional/profile/registries/external-profile-provider-registry-v1.json",
+      "sha256": "9bd7348cf5edd8a781a8eb3b9776b70aeb7ff196cf9c36fdd9520569032e72c2"
+    },
+    {
+      "path": "content/profile/academic/reasoning/original-reasoning-task-bank-v1.json",
+      "sha256": "eb18cbd33c8dcc08171dcc5f21f6bdd0899564b22ca44bf76f277468138a31ec"
+    },
+    {
+      "path": "content/profile/academic/ipip/ipip-big-five-50-v1.json",
+      "sha256": "1d225df52b0b549fdc5ca4bb6c2e072c9f19287d691ec4d0170bd8dc0629138a"
+    },
+    {
+      "path": "content/profile/academic/ipip/ipip-neo-120-v1.json",
+      "sha256": "e1e9292bbf5cb991198c968f44c1540d67de022fbd7cc0a4ad5042222841774e"
+    },
+    {
+      "path": "content/profile/academic/financial/phi-financial-capability-instrument-v1.json",
+      "sha256": "c88f9bb503783d92f28769bad5d303df922616eae1fb72a531113a9f44f9e894"
+    },
+    {
+      "path": "content/profile/academic/reasoning/reasoning-bank-authority-v1.json",
+      "sha256": "3116c00e470ca66883d6b5b95e56964ddc94c29cc76388193e69acdea695b2af"
+    },
+    {
+      "path": "content/profile/ux/profile-quick-profile-selection-v1.json",
+      "sha256": "cbeaacdde7bdfef5330645f02cfc9db7d998fe6c66ad26388bfed2166f73f142"
+    },
+    {
+      "path": "content/profile/ux/profile-reasoning-review-set-v1.json",
+      "sha256": "e61285b4b62f9fe429bac5d3f34dda5419626913f3231278af681b166e5c8661"
+    },
+    {
+      "path": "functions/profile/profile-foundation-runtime.js",
+      "sha256": "0889b58720569a3393e1a4339c14a444f96f718e2d3fb9527e643b4b67519aa4"
+    },
+    {
+      "path": "functions/profile/academic-bridge-runtime.js",
+      "sha256": "e2eda162bb2aec17dea83e4fdabecc8ddf573556181791f8156b2b03bd75c4a9"
+    },
+    {
+      "path": "functions/profile/profile-context-runtime.js",
+      "sha256": "96bdf06a808611fe857208b0d251f41cf955cf1f802f3b67b0deaa1d59f95230"
+    },
+    {
+      "path": "functions/profile/profile-progressive-ux-runtime.js",
+      "sha256": "0ea5be88c7e7a03f2a2bf38947f9adfbecdd5082876731a40511b2f2fd8cf3fd"
+    },
+    {
+      "path": "functions/profile/profile-production-authority.js",
+      "sha256": "25aeaf4746a0e38945a80c8dd2ed491dd27b95ae09afabd2fd7ec122f0bf2d50"
+    },
+    {
+      "path": "functions/profile/profile-customer-output-successor.js",
+      "sha256": "8d8f8248fc963992cdebada9428377a5e4adc75054072399bc05842067c6a841"
+    },
+    {
+      "path": "functions/profile/profile-customer-visual-projection.js",
+      "sha256": "c22edc3d05fb6e97b49b33c53717ab3db0dc996dce1ffc8e6dd605d5a4464087"
+    },
+    {
+      "path": "functions/profile/profile-visual-depth-projection.js",
+      "sha256": "aef80e49668bdf663e09ef25ef574970e921b5bfbbd1fa83009d572b8aeb38da"
+    },
+    {
+      "path": "functions/profile/personal-evidence-visual-assets.js",
+      "sha256": "74b336fbc1ecedc43db597401ba416b02ae1733027e79c3b99ca854103bfb062"
+    },
+    {
+      "path": "functions/profile/personal-evidence-dossier-projection.js",
+      "sha256": "cc863464a7240b627d0a12e0591cacda842088986b964aa9a1ac5ffe49812b70"
+    },
+    {
+      "path": "functions/profile/personal-evidence-publication-projection.js",
+      "sha256": "444b645a05764a4002e42a66566bbc365d27830544483fc7b4d48554417996eb"
+    },
+    {
+      "path": "scripts/lib/customer-report-runtime/report-runtime-v2.mjs",
+      "sha256": "ad9a2aa1350b094a52624dc7cd0fbcc1ad857332dae222f9ace23ccbc81b75a2"
+    },
+    {
+      "path": "content/runtime/customer-report-runtime/registries/canonical-report-section-registry-v2.json",
+      "sha256": "13bda1cdd4a6829699f846a52d5ef1db36e7407281cad5521bc89ab57d65bfa4"
+    },
+    {
+      "path": "content/profile/successors/personal-evidence-r1/contracts/personal-evidence-rr-consumer-extension-v1.json",
+      "sha256": "03d58329b80a3634dc432ee0310cde9dacfa153cf6670b5df2668c00770df7e4"
+    },
+    {
+      "path": "functions/profile/personal-evidence-report-adapter.js",
+      "sha256": "417bc1084da8decd9b8c20e36ccb88b6bfdad3a8552d9b7bcc2156c04c85e52c"
+    },
+    {
+      "path": "functions/profile/personal-evidence-publication-ir-adapter.js",
+      "sha256": "5e2f73c318d7ee22ebf089253ae36543b3da8f37cddc09428c21d173b87aa3dc"
+    },
+    {
+      "path": "functions/profile/profile-person-evidence-adapter.js",
+      "sha256": "c47f98a2055106986dc9475aad2b11dcf56211f677c664b5224c1509e4cd6be6"
+    },
+    {
+      "path": "functions/profile/personal-evidence-handoffs.js",
+      "sha256": "81e619ff7acb5c89e29b48e1729b2085f1b3377c9bbdb4cea4811e440a85b365"
+    },
+    {
+      "path": "functions/api/profile-progressive.js",
+      "sha256": "e24e9219d3e021708201868ee9ee701cc92cff8cf87a304634eb7d72920e6bb2"
+    },
+    {
+      "path": "functions/account/profile-evidence-store.js",
+      "sha256": "e5fe51c0a3d5a46366445c147b10883f1899d0f83eed5e24a57e6d63ac4cdd72"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-owned-material-adapter.js",
+      "sha256": "c2d72b77765834337da092cc18a6c2d96d6685e6ee6aae36b7eb68f7c9477417"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-answer-outcome.js",
+      "sha256": "2de36e411eb11b89b8399df7a165be64d22afa7c8596a70012c07704eec502e0"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-source-coverage.js",
+      "sha256": "a10d8a2db590258ef8f29efdf402cf4b5520eca3e0632804eee0d5cd7407ce26"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-fragment-contract.js",
+      "sha256": "57968f2d2490e4956ab2e0f57b2c529c53f85af1e741294e5e6642b950f20909"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-short-fragment-contract.js",
+      "sha256": "64947c111bf9abf1add8fd0d8b2a18714947c3b7b4e8649a0926534a6530623d"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-short-delivery-qa.js",
+      "sha256": "46dbbb3f32204c32f1d4107de9bb234d89688283421855a486c111056a69f96f"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-review-contract-v2.js",
+      "sha256": "8303c199dc99a87104a2eef76483d3f5046e9961dd590d8190065bdddddc7199"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-auto-delivery-candidate.js",
+      "sha256": "ad468edb20f15db50d992c800122b3c57e5b21aef65866db4b8d89fb9808637d"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-storage-contract.js",
+      "sha256": "aa09ebc64fac5b7a5ab63a89b3c258a29f54e6ddf25d4951b7a59c9d2c1af4df"
+    },
+    {
+      "path": "functions/api/membership-ask.js",
+      "sha256": "099e5682b103f547bb3cce21dc4c04ae9815bb98abbd97089fb4ad2f1c05e8b9"
+    },
+    {
+      "path": ".tmp/engineering-membership-entry.mjs",
+      "sha256": "240d701c3045cd28fa2340cdae39e22daa9e5772b41a1cb31ae3913fc28c9c55"
+    }
+  ]
+}

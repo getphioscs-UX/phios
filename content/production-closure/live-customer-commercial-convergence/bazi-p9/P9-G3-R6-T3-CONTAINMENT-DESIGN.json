@@ -1,0 +1,151 @@
+{
+  "at": "2026-10-12T14:16:38.877Z",
+  "status": "READY_FOR_CONTAINMENT_DESIGN_HUMAN_REVIEW",
+  "ownerPolicy": "PHIOS-HISTORICAL-DEPLOYMENT-ACCEPTANCE-POLICY-R1",
+  "options": [
+    {
+      "rank": "PREFERRED",
+      "mechanism": "Project-wide upstream ingress containment: explicit historical hash/base/branch hostname policy; evaluate documented Bulk Redirect including subdomains and/or explicit Access restriction",
+      "scope": "All historical production and preview execution hosts, API-deleted residual host, aliases/custom domains that could route to historical runtimes; current customer domain preserved",
+      "historicalURLs": "May remain resolvable; redirect/block or authenticated archival read only",
+      "historicalFunctions": "Must not execute for untrusted mutation-capable requests; archival static reader must not forward API to old runtime",
+      "productionD1": "Not reachable through contained old ingress; capability binding may remain, so internal invocation/bypass inventory also required",
+      "blastRadius": "Direct pages.dev previews, review links, private diagnostics; customer custom domain should remain available",
+      "reversibility": "Versioned ingress rules reversible, but removing restriction reopens risk and invalidates migration gate",
+      "requiredPermissions": "Account Rulesets/Bulk Redirect lists read+edit if chosen; Access apps/policies read+edit if chosen; Pages read; zone rules read for routing audit; exact least-privilege policy reviewed before change",
+      "productionMutationRequired": "YES_CONFIG_ONLY_AFTER_SEPARATE_AUTHORIZATION",
+      "customerImpact": "Old direct links redirect or require authorized archive access; current custom domain preserved; method/path/query handling tested",
+      "migrationBoundaryStrength": "Strong only with proof upstream interception before old Functions and complete entrypoint coverage; redirect status alone insufficient",
+      "dependencies": [
+        "CONTROL_PLANE_VISIBILITY_GAP: current Rulesets/Bulk lists/LB reads403",
+        "Preview Access toggle alone does not prove historical production hash coverage",
+        "Actual old/residual/control host probes and serving destination identity required"
+      ]
+    },
+    {
+      "rank": "SECONDARY",
+      "mechanism": "Current controlled write service owns production D1; Pages uses service binding/API admission with explicit CURRENT_RELEASE_ID and READ_ONLY gate; eliminate legacy direct D1 capability",
+      "scope": "All current write owners and all legacy direct-bound runtime entrypoints",
+      "historicalURLs": "May remain readable",
+      "historicalFunctions": "May execute only if unable to mutate authoritative production D1",
+      "productionD1": "Only current write service bound directly; historical direct bindings must be effectively revoked/isolated or replaced by non-authoritative archive database",
+      "blastRadius": "Auth/Account/Commerce/P8 writes and release admission; source/config/binding changes",
+      "reversibility": "Versioned service and config rollback possible, but never restore uncontrolled old binding",
+      "requiredPermissions": "Workers Scripts edit/service bindings; Pages project configuration edit; D1 metadata/binding permissions; no D1 schema/data authorization in T3",
+      "productionMutationRequired": "YES_SOURCE_DEPLOY_CONFIG_BINDINGS_AFTER_SEPARATE_AUTHORIZATION",
+      "customerImpact": "Changes write delivery architecture; full relevant zero-provider regressions and controlled runtime proof required",
+      "migrationBoundaryStrength": "Strong capability boundary AFTER legacy binding revocation proven; gateway/allowlist in new source alone does not contain historical direct D1 clients",
+      "dependencies": [
+        "No documented per-deployment SQL read-only D1 binding or CURRENT_RELEASE_ID ACL established here",
+        "API credential restriction does not demonstrate bound-runtime capability revocation",
+        "Changing latest project bindings is not assumed to retroactively alter immutable old deployments",
+        "Self-declared release header/string is not authentication; require trusted caller admission and server-held current allowlist"
+      ]
+    },
+    {
+      "rank": "LAST_RESORT",
+      "mechanism": "Provider-supported project/capability relocation to a separately governed current release authority, old project restricted/archive-only",
+      "scope": "Project/domain/service/database-binding authority; historical archive retained independently",
+      "historicalURLs": "May persist as archive or blocked old endpoints",
+      "historicalFunctions": "Must lose authoritative production D1 capability or be upstream-contained",
+      "productionD1": "Relocation/revocation must be provider-proven; old database must not remain authoritative writable target",
+      "blastRadius": "Largest: custom domains, customer delivery, auth, service bindings, rollback and possibly separately authorized database relocation",
+      "reversibility": "Requires rehearsed authority cutover/rollback; no automatic project deletion or database recreation",
+      "requiredPermissions": "Pages project/domain edit, Workers/service edit, D1 capability administration; provider-supported teardown/revoke mechanism must be identified",
+      "productionMutationRequired": "YES_BROAD_SEPARATE_AUTHORIZATION",
+      "customerImpact": "Possible cutover/availability impact; requires explicit maintenance plan",
+      "migrationBoundaryStrength": "Strong only after old authoritative capability eliminated; new project alone does not revoke old source bindings",
+      "dependencies": [
+        "Provider serving-identity/deletion semantics unresolved",
+        "No relocation, schema write, data copy or project recreation authorized in this step"
+      ]
+    }
+  ],
+  "currentReleaseAuthorityModel": {
+    "CURRENT_RELEASE_ID": {
+      "deploymentID": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+      "releaseSource": "Bound immutable release manifest and deployment evidence; no new RC invented",
+      "writeAdmission": "READ_ONLY denies all business writes during migration; later separately authorized allowlisted current service only",
+      "authorityStore": "Server-controlled admission policy, not public caller parameter",
+      "historical": "Accepted/superseded/NO governance write authority; actual capability must independently be removed or intercepted"
+    },
+    "stateNow": "Current serving READ_ONLY evidence partial; complete current+historical topology isolation NOT_PROVEN"
+  },
+  "migrationGate": {
+    "supersededUncontrolledProdD1WriterCount": 0,
+    "currentProductionRuntimeIsolation": "PASS",
+    "unknownRelevantWriterEvidence": "BLOCKS_PASS",
+    "historicalDeploymentCountZeroRequired": false,
+    "oldHashURLsUnreachableRequired": false
+  },
+  "controlPlaneVisibility": {
+    "status": "CONTROL_PLANE_VISIBILITY_GAP",
+    "evidence": {
+      "Access": "Account applications GET200 total0",
+      "Workers": "getphios.com routes GET200 empty; pages.dev managed routing not attested",
+      "Rules": "Account/zone Rulesets, Bulk lists and Load Balancers GET403 Authentication error; exact authorization gaps, not absent controls",
+      "redirects": "No Location observed; redirect-following disabled",
+      "aliases": "Pre-delete canary aliases empty; deleted detail now unavailable"
+    },
+    "credentialsUsed": "Existing authorized Wrangler OAuth; values not read into reports",
+    "automaticPermissionChange": false
+  },
+  "servingIdentity": {
+    "id": "UNVERIFIED",
+    "source": "UNVERIFIED",
+    "worker": "UNVERIFIED",
+    "environment": "UNVERIFIED",
+    "reason": "No serving identity header or attachable tail. Deleted homepage matches pre-delete historical bytes, differs from active. Anonymous API fingerprints identical across active/deleted/control; mixed caching or rebind cannot be excluded."
+  },
+  "canary2": "PRESERVED_READ_ONLY_CONTROL_FOR_LATER_APPROVED_CONTAINMENT_PROOF",
+  "recommended": "Option1 first for immediate all-hash upstream containment; Option2 strategic authority boundary only after proven legacy capability revocation; Option3 last resort",
+  "proofContract": [
+    "Complete host/alias/internal-call inventory includes deleted residual Canary1 and preserved Canary2",
+    "Non-mutating probes show upstream interception before historical handler; no D1 write experiment",
+    "All relevant methods including GET-write trap fail closed, without weakening current defense",
+    "Current destination deployment/source verified and current RUNTIME_DB wrapped READ_ONLY",
+    "Non-Pages same-D1 writers audited and separately isolated",
+    "Unknown relevant surfaces cannot be counted zero",
+    "Only after full gate PASS capture new Time Travel bookmark and reconfirm schema; migrations need separate authorization"
+  ],
+  "requiredChanges": {
+    "source": "Option1 generally none; Option2/3 yes, separately reviewed",
+    "configuration": "YES for selected ingress/authority strategy, not authorized now",
+    "topology": "Option1 ingress authority only; Option2 service; Option3 project/capability relocation",
+    "D1Binding": "Not required for Option1 if complete interception proven; required for Option2/3 effective legacy direct-capability elimination",
+    "productionMutation": "REQUIRED_FOR_FUTURE_IMPLEMENTATION; THIS_STEP_ZERO"
+  },
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "payments": 0,
+  "refunds": 0,
+  "productionMutations": 0,
+  "D1Mutations": 0,
+  "migrations": 0,
+  "commits": 0,
+  "pushes": 0,
+  "firstRemainingBlocker": "P9_T3_CONTAINMENT_DESIGN_HUMAN_REVIEW_AND_CONTROL_PLANE_VISIBILITY_GAP",
+  "references": [
+    {
+      "url": "https://developers.cloudflare.com/pages/how-to/redirect-to-custom-domain/",
+      "claim": "Bulk Redirect including subdomains is documented; current security interception still requires proof"
+    },
+    {
+      "url": "https://developers.cloudflare.com/pages/configuration/preview-deployments/",
+      "claim": "Atomic preview URLs may remain; preview-only Access scope is narrower than full deployment coverage"
+    },
+    {
+      "url": "https://developers.cloudflare.com/workers/runtime-apis/bindings/",
+      "claim": "Binding grants runtime capability; dashboard/API roles alone are not runtime SQL authorization"
+    },
+    {
+      "url": "https://developers.cloudflare.com/workers/runtime-apis/bindings/service-bindings/",
+      "claim": "Internal controlled service is supported; this does not revoke old direct bindings"
+    }
+  ],
+  "sourceControl": {
+    "HEAD": "def55d22ecf96e48141914772b0c58d6d8171161",
+    "indexUnchanged": true
+  },
+  "STOP": true
+}

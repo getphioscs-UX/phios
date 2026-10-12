@@ -1,0 +1,76 @@
+{
+  "status": "BLOCKED_READ_TOKEN_SECURE_LOCAL_CONFIGURATION",
+  "historicalEvidencePreserved": true,
+  "tokenCreated": true,
+  "tokenCandidate": {
+    "expiry": "2026-10-14",
+    "accountOnly": "0b9f36bdf56f38d7d09aebe388f15204",
+    "zoneOnly": "getphios.com",
+    "name": "P9 T4 R1 control-plane read only",
+    "permissions": [
+      "Account Filter Lists Read",
+      "Bulk URL Redirects Read",
+      "Load Balancing Account Load Balancers Read",
+      "Load Balancing Monitors And Pools Read",
+      "Single Redirect Read",
+      "Transform Rules Read",
+      "DNS Read"
+    ]
+  },
+  "dashboardInventory": {
+    "rules": [
+      {
+        "list": "getphios_www_canonical",
+        "id": "635f3e11b273436bba9615274561471b",
+        "name": "poc-b4-www-to-canonical",
+        "enabled": true
+      },
+      {
+        "list": "getphios_pagesdev_canonical",
+        "id": "24d6cca9d501477886de2a85fa51bf32",
+        "name": "poc-b6-pagesdev-to-canonical",
+        "enabled": true,
+        "expression": "http.request.full_uri in $getphios_pagesdev_canonical"
+      }
+    ],
+    "dnsRecordCount": 3,
+    "apexProxied": true,
+    "lists": [
+      {
+        "includeSubdomains": false,
+        "name": "getphios_www_canonical",
+        "status": 301,
+        "id": "3cddd65c75a24866b759eff4fde8ee63",
+        "target": "https://getphios.com/",
+        "source": "https://www.getphios.com/"
+      },
+      {
+        "includeSubdomains": false,
+        "name": "getphios_pagesdev_canonical",
+        "status": 301,
+        "id": "9d06d0169ea948e8ba640bb1fab48cde",
+        "target": "https://getphios.com/",
+        "source": "https://phios-github.pages.dev/"
+      }
+    ],
+    "bulkListCount": 2,
+    "bulkRuleCount": 2,
+    "wwwProxied": true
+  },
+  "gaps": [
+    "Account entrypoint ruleset ID and API ordering",
+    "B4 exact expression",
+    "Complete zone redirect and transform phases",
+    "Load balancer and pool inventory",
+    "Target hash proxy eligibility and exact containment coverage"
+  ],
+  "futureCanaryMutationFrozen": false,
+  "writePermissionsUsed": 0,
+  "productionMutations": 0,
+  "d1Mutations": 0,
+  "providerCalls": 0,
+  "costUSD": 0,
+  "migrations": "NOT_AUTHORIZED",
+  "tokenCreationProof": "Dashboard heading: P9 T4 R1 control-plane read only API token was successfully created",
+  "credentialValuePrinted": false
+}

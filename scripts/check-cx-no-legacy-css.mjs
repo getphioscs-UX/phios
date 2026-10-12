@@ -1,10 +1,21 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { root, base, readJson, cxImplementationFiles, cxHtmlSurfaces, normalizedLocalAsset, stylesheetRefs } from './lib/customer-experience-rebuild/cx-r1-guards.mjs';
 
 const freeze = readJson(`${base}/legacy/legacy-css-freeze-v2.json`);
 const frozen = new Set(freeze.entries.map((x) => x.stylesheet));
+const successor = readJson(`${base}/legacy/current-shared-stylesheet-successor-v1.json`);
+assert.equal(successor.status, 'ENGINEERING_RECONCILIATION');
+for (const key of ['historicalFreezeRewritten', 'humanAcceptanceGranted', 'productionAcceptanceGranted']) assert.equal(successor[key], false);
+assert.deepEqual(successor.stylesheets.map(item => item.path), ['assets/css/global-visual-r2.css', 'assets/css/ask-architecture-r1.css']);
+const currentSharedStylesheets = new Set();
+for (const item of successor.stylesheets) {
+  assert.ok(!frozen.has(item.path), 'Frozen legacy stylesheet cannot receive a current exception');
+  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, item.path))).digest('hex'), item.sha256, `Current stylesheet successor drift: ${item.path}`);
+  currentSharedStylesheets.add(item.path);
+}
 
 function inspect(rel, text) {
   const hits = [];
@@ -30,7 +41,7 @@ for (const rel of cxHtmlSurfaces()) {
   for (const href of stylesheetRefs(html)) {
     const local = normalizedLocalAsset(href);
     if (!local) continue;
-    if (!local.startsWith('assets/customer-ui/')) violations.push({ file: rel, stylesheet: local, reason: 'LOCAL_CSS_OUTSIDE_CUSTOMER_UI' });
+    if (!local.startsWith('assets/customer-ui/') && !currentSharedStylesheets.has(local)) violations.push({ file: rel, stylesheet: local, reason: 'LOCAL_CSS_OUTSIDE_CUSTOMER_UI' });
   }
 }
 

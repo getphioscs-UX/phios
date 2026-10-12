@@ -1,0 +1,39 @@
+{
+  "id": "PHIOS-HISTORICAL-DEPLOYMENT-ACCEPTANCE-POLICY-R1",
+  "at": "2026-10-12T14:16:38.877Z",
+  "authority": "Direct human Owner Decision in this turn; retroactive historical semantic classification only",
+  "status": "OWNER_DECISION_RECORDED",
+  "historicalAcceptance": "CLOSED",
+  "defaultHistoricalClassification": "HUMAN_ACCEPTED_HISTORICAL_SNAPSHOT",
+  "scope": "All historical Pages deployments produced through ordinary owner PHI OS development/review workflow; explicit historical REJECT overrides",
+  "supersession": "All non-current accepted historical snapshots are SUPERSEDED",
+  "semanticReviewOf3500Deployments": "NOT_REQUIRED",
+  "noGrantedAuthorities": [
+    "CURRENT_PRODUCTION_AUTHORITY",
+    "PRODUCTION_D1_WRITE_AUTHORITY",
+    "CURRENT_COMMERCIAL_AUTHORITY",
+    "PROVIDER_AUTHORITY",
+    "PAYMENT_AUTHORITY",
+    "MIGRATION_AUTHORITY",
+    "SECURITY_ISOLATION_PASS"
+  ],
+  "explicitRejectHandling": "Preserve and reference any explicit human historical semantic REJECT; technical HTTP/guard reject, deployment failure, old version or supersession is not semantic REJECT",
+  "exceptionRecordsKnownInThisPackage": [],
+  "exceptionSearchScope": "Existing P9 governance records only; no global assertion that REJECT records never exist; no per-deployment semantic investigation reopened",
+  "currentProductionAuthority": {
+    "authorizedDeploymentIDs": [
+      "b07d86bf-2447-4fe8-8ded-66d9fe676c81"
+    ],
+    "basis": "Current Owner Decision",
+    "productionWritePermission": "NOT_GRANTED_BY_HISTORICAL_POLICY; governed by current runtime isolation and separate admission"
+  },
+  "deploymentDeletion": "Not required merely because old; historical records may remain",
+  "migrationGate": {
+    "supersededUncontrolledProdD1WriterCount": 0,
+    "currentProductionRuntimeIsolation": "PASS",
+    "unknownRelevantWriterEvidence": "BLOCKS_PASS",
+    "historicalDeploymentCountZeroRequired": false,
+    "oldHashURLsUnreachableRequired": false
+  },
+  "implementationAuthorized": false
+}

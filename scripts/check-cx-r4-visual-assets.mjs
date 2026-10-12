@@ -1,3 +1,4 @@
+import {parseHTML} from 'linkedom';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -179,7 +180,22 @@ const personal=read('perspectives/personal/index.html');
 assert.match(personal,/data-cx-asset="ILL-004"/,'PPR-owned Personal Reality direct asset identity changed during CX-R4');
 assert.equal(personal.includes('data-cx-asset-role="ILL-005"'),false,'CX-R4 must not rewrite the frozen PPR Personal owner to a new role attribute');
 const financial=read('professional/financial/index.html');
-assert.match(financial,/data-cx-asset-role="ILL-006"/,'Financial Reality must consume the R4 Financial semantic role');
+if(financial.includes('data-approved-visual=')){
+ const document=parseHTML(financial).document;
+ for(const id of ['PLAN-FIN-031','PLAN-FIN-032','PLAN-FIN-033','PLAN-FIN-034','PLAN-FIN-035']){
+  const asset=currentBy.get(id);assert.ok(asset?.available&&asset.remoteVerified,'Current financial asset unavailable: '+id);
+  const filename=asset.objectKey.split('/').at(-1);
+  const images=[...document.querySelectorAll('main img[data-approved-visual]')].filter(image=>image.getAttribute('data-approved-visual')===filename);
+  assert.equal(images.length,1,'Financial semantic figure must be consumed exactly once: '+id);
+  assert.equal(images[0].getAttribute('src'),asset.publicUrl,'Financial figure URL must match current asset owner: '+id);
+  assert.equal(images[0].closest('figure')?.getAttribute('data-vr2-role'),'PRIMARY_FIGURE','Financial figure role missing: '+id);
+  const proof=currentRemoteProof.find(row=>row.planId===id);
+  assert.equal(proof?.decoded,true,'Financial figure lacks recorded decoded proof: '+id);
+  assert.equal(proof.httpStatus,200);assert.equal(proof.requestedURL,asset.publicUrl);assert.equal(proof.sha256,asset.contentHash);
+ }
+}else{
+ assert.match(financial,/data-cx-asset-role="ILL-006"/,'Financial Reality must consume the R4 Financial semantic role');
+}
 assert.equal(financial.includes('data-cx-asset="ILL-006"'),false,'Financial Reality still treats the semantic role number as an upstream asset identity');
 
 // R0 repair — historical freeze checking is separate from live current-tree census.

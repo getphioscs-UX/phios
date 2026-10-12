@@ -1,4 +1,5 @@
 import {digest} from '../../account/oidc-auth.js';
+import {comparisonArgumentCoverage} from './membership-source-coverage.js';
 // Candidate interface. This does not grant access or replace the legacy paid
 // experiment contract. The caller must supply a permission-verified pack.
 export async function createMembershipFragmentCatalog(pack){
@@ -6,7 +7,7 @@ export async function createMembershipFragmentCatalog(pack){
  for(const source of pack.sources){
   const textSha256=await digest(source.text);
   const fragmentId='F-'+await digest(JSON.stringify([source.sourceCode,source.sourceVersion,source.sourceSha256,source.chapterId,source.support?.startOffset,source.support?.endOffset,textSha256]));
-  fragments.push({fragmentId,sourceId:source.id,textSha256,sourceVersion:source.sourceVersion,sourceSha256:source.sourceSha256,chapterId:source.chapterId,sourceLanguage:source.sourceLanguage,text:source.text,support:source.support,pdfPages:source.pdfPages,chapterDeepLink:source.chapterDeepLink});
+  fragments.push({fragmentId,sourceId:source.id,textSha256,sourceVersion:source.sourceVersion,sourceSha256:source.sourceSha256,chapterId:source.chapterId,heading:source.heading||source.chapterId,sourceLanguage:source.sourceLanguage,text:source.text,support:source.support,pdfPages:source.pdfPages,chapterDeepLink:source.chapterDeepLink,readingHref:source.readingHref||null,purchaseHref:source.purchaseHref||null});
  }
  return {packDigest:pack.packDigest,fragments,semanticAcceptance:false};
 }
@@ -31,5 +32,6 @@ export function assessMembershipSourceCoverage(pack){
  const requested=groups.filter(([,query])=>query.test(pack.question));
  const missingGroups=requested.filter(([,query,evidence])=>!evidence.test(text)).map(([name])=>name);
  const comparison=/区别|差别|差异|不同|比较|相同|differ|distinguish|compare|versus/iu.test(pack.question);
- return {requestedGroups:requested.map(([name])=>name),missingGroups,comparison,comparisonRelation:'REQUIRES_ARGUMENT_LEVEL_SUPPORT_NOT_KEYWORD_PRESENCE',state:!pack.sources.length?'SOURCE_INSUFFICIENT':missingGroups.length?'PARTIAL_SOURCE_SCOPE':'CANDIDATE_COVERAGE_REQUIRES_SEMANTIC_REVIEW',semanticPass:false};
+ const bindings=pack.sources.map(s=>({...s,shortId:s.id,textSha256:s.support?.textSha256}));
+ return {requestedGroups:requested.map(([name])=>name),missingGroups,comparison,lexicalRecallOnly:true,argumentCoverage:comparisonArgumentCoverage(pack.question,{bindings}),comparisonRelation:'REQUIRES_ARGUMENT_LEVEL_SUPPORT_NOT_KEYWORD_PRESENCE',state:!pack.sources.length?'SOURCE_INSUFFICIENT':'CANDIDATE_COVERAGE_REQUIRES_SEMANTIC_REVIEW',semanticPass:false};
 }

@@ -4,6 +4,9 @@ import {handleKnowledgeAccessRequest} from '../../_lib/knowledge-access-api.js';
 import {approvedCrossLocaleSearch} from '../../knowledge-runtime/approved-terminology-context.js';
 import {buildMembershipAuthorityPack} from './membership-authority-pack.js';
 import {createMembershipModelRequest} from './membership-model-request.js';
+import {createIsolatedManuscriptExperimentAccess} from '../../knowledge-runtime/manuscript-experiment-access.js';
+const isolatedSourcePermissions=new WeakMap();
+export function registerIsolatedMembershipSources(env,manifest){const token=createIsolatedManuscriptExperimentAccess(env,manifest);isolatedSourcePermissions.set(env,token);}
 import {executeMembershipAsk} from './membership-ask-execution.js';
 // Server-side orchestration candidate. No customer-supplied pack, cost or owner.
 // Production model dispatch remains closed until an independently authorized adapter.
@@ -11,10 +14,11 @@ export async function prepareKnowledgeMembershipAsk(context,{question,locale='zh
  const ownerAccountId=personIdentity(context).userId;await activeContinuitySubscription(context.env,ownerAccountId);
  const search=locale==='en'?approvedCrossLocaleSearch(question,'en','zh-Hans'):{retrievalQuery:question};
  const url=new URL('/api/knowledge-access',context.request.url);url.search=new URLSearchParams({q:search.retrievalQuery,locale:'zh-Hans',source:'manuscript',bookCode}).toString();
- const response=await handleKnowledgeAccessRequest(new Request(url),context.env);if(!response.ok)throw Error('SOURCE_RETRIEVAL_SERVICE_FAILURE');const result=await response.json();
+ const response=await handleKnowledgeAccessRequest(new Request(url),context.env,{experimentAccess:isolatedSourcePermissions.get(context.env)});if(!response.ok)throw Error('SOURCE_RETRIEVAL_SERVICE_FAILURE');const result=await response.json();
+ const errors=result.manuscript?.errors||[];if(errors.length)throw Object.assign(Error('SOURCE_RETRIEVAL_UNAVAILABLE'),{code:'SOURCE_RETRIEVAL_UNAVAILABLE',status:503});
  const pack=await buildMembershipAuthorityPack({question,locale,records:result.manuscript?.records||[]});
- if(!pack.sources.length)return {state:'SOURCE_INSUFFICIENT',providerCalls:0,pack,ownerAccountId};
- return {state:'SOURCE_PACK_READY',pack,ownerAccountId,request:createMembershipModelRequest(pack,'gpt-5.6-luna')};
+ if(!pack.sources.length)return {state:'SOURCE_INSUFFICIENT',providerCalls:0,pack,ownerAccountId,errors};
+ return {state:'SOURCE_PACK_READY',pack,ownerAccountId,errors,request:createMembershipModelRequest(pack,'gpt-5.6-luna')};
 }
 export async function runOfflineKnowledgeMembershipAsk(context,input,{taskId,platformEnvelopeId,invoke}){
  if(context.env.PHIOS_ENVIRONMENT!=='local')throw Error('OFFLINE_QA_ONLY');

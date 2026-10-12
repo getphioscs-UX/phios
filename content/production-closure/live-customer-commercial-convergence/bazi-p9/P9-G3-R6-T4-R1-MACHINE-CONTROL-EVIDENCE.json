@@ -1,0 +1,722 @@
+{
+  "startedAt": "2026-10-12T14:52:14.920Z",
+  "credentialSource": "LOCAL_FILE",
+  "credentialPath": "REDACTED",
+  "tokenValueRecorded": false,
+  "expiresAt": "2026-10-14",
+  "HEAD": "def55d22ecf96e48141914772b0c58d6d8171161",
+  "controls": [
+    {
+      "name": "Load Balancers",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/load_balancers?per_page=100",
+      "requiredRead": "Load Balancing Account Load Balancers Read",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/load_balancers?per_page=100",
+          "httpStatus": 403,
+          "success": false,
+          "result_info": null,
+          "errors": [
+            {
+              "code": 10000,
+              "message": "Authentication error",
+              "documentation_url": "https://developers.cloudflare.com/api/resources/load_balancers/methods/list"
+            }
+          ]
+        }
+      ],
+      "records": [],
+      "httpStatus": 403,
+      "readable": "NO",
+      "absenceProven": false,
+      "gap": "MISSING_READ_PERMISSION_OR_SCOPE",
+      "count": 0,
+      "complete": false
+    },
+    {
+      "name": "Monitors",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/load_balancers/monitors?per_page=100",
+      "requiredRead": "Load Balancing Monitors And Pools Read",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/load_balancers/monitors?per_page=100",
+          "httpStatus": 200,
+          "success": true,
+          "result_info": {
+            "page": 1,
+            "per_page": 100,
+            "count": 0,
+            "total_count": 0,
+            "total_pages": 0
+          },
+          "errors": []
+        }
+      ],
+      "records": [],
+      "httpStatus": 200,
+      "readable": "YES",
+      "count": 0,
+      "complete": true,
+      "absenceProven": true
+    },
+    {
+      "name": "Pools",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/load_balancers/pools?per_page=100",
+      "requiredRead": "Load Balancing Monitors And Pools Read",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/load_balancers/pools?per_page=100",
+          "httpStatus": 200,
+          "success": true,
+          "result_info": {
+            "page": 1,
+            "per_page": 100,
+            "count": 0,
+            "total_count": 0,
+            "total_pages": 0
+          },
+          "errors": []
+        }
+      ],
+      "records": [],
+      "httpStatus": 200,
+      "readable": "YES",
+      "count": 0,
+      "complete": true,
+      "absenceProven": true
+    },
+    {
+      "name": "DNS",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/dns_records?per_page=100",
+      "requiredRead": "DNS Read",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/dns_records?per_page=100",
+          "httpStatus": 200,
+          "success": true,
+          "result_info": {
+            "page": 1,
+            "per_page": 100,
+            "count": 3,
+            "total_count": 3,
+            "total_pages": 1
+          },
+          "errors": []
+        }
+      ],
+      "records": [
+        {
+          "id": "72d5e21b140e61c02711ed92b821f143",
+          "name": "www.getphios.com",
+          "type": "A",
+          "content": "192.0.2.1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-09-14T20:30:21.988082Z",
+          "modified_on": "2026-09-14T20:30:21.988082Z"
+        },
+        {
+          "id": "764d21c1d278697d2ec6a0af6b841b1d",
+          "name": "auth.getphios.com",
+          "type": "CNAME",
+          "content": "dev-2g55joboofph0ax7-cd-8aiizm67mlylikeo.edge.tenants.us.auth0.com",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-09-21T06:44:53.314791Z",
+          "modified_on": "2026-09-21T06:46:44.568526Z"
+        },
+        {
+          "id": "94f0b27a91b56c15fd3ecc7d6cf9ea13",
+          "name": "getphios.com",
+          "type": "CNAME",
+          "content": "phios-github.pages.dev",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-09-14T07:11:39.968627Z",
+          "modified_on": "2026-09-14T07:11:39.968627Z"
+        }
+      ],
+      "httpStatus": 200,
+      "readable": "YES",
+      "count": 3,
+      "complete": true,
+      "absenceProven": false
+    },
+    {
+      "name": "Account Rulesets",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets",
+      "requiredRead": "Bulk URL Redirects Read (list endpoint accepted scope)",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets",
+          "httpStatus": 200,
+          "success": true,
+          "result_info": null,
+          "errors": []
+        }
+      ],
+      "records": [
+        {
+          "description": "Created by the Cloudflare security team, this ruleset is designed to provide protection for free zones",
+          "id": "77454fe2d30c4220b5701f6fdfb893ba",
+          "kind": "managed",
+          "last_updated": "2026-08-17T16:24:51.912839Z",
+          "name": "Cloudflare Managed Free Ruleset",
+          "phase": "http_request_firewall_managed",
+          "source": "firewall_managed",
+          "version": "74"
+        },
+        {
+          "description": "",
+          "id": "e4920e8f14574ec9abce2fbe9d764056",
+          "kind": "root",
+          "last_updated": "2026-09-14T11:35:09.76747Z",
+          "name": "default",
+          "phase": "http_request_redirect",
+          "version": "2"
+        }
+      ],
+      "httpStatus": 200,
+      "readable": "YES",
+      "count": 2,
+      "complete": true,
+      "absenceProven": false
+    },
+    {
+      "name": "Request Header Transforms",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_request_late_transform/entrypoint",
+      "requiredRead": "Transform Rules Read",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_request_late_transform/entrypoint",
+          "httpStatus": 404,
+          "success": false,
+          "result_info": null,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_late_transform phase"
+            }
+          ]
+        }
+      ],
+      "records": [],
+      "httpStatus": 404,
+      "readable": "NO",
+      "absenceProven": false,
+      "gap": "RESOURCE_NOT_FOUND_PERMISSION_REQUIRES_CORROBORATION",
+      "count": 0,
+      "complete": false
+    },
+    {
+      "name": "URL Transforms",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_request_transform/entrypoint",
+      "requiredRead": "Transform Rules Read",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_request_transform/entrypoint",
+          "httpStatus": 404,
+          "success": false,
+          "result_info": null,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_transform phase"
+            }
+          ]
+        }
+      ],
+      "records": [],
+      "httpStatus": 404,
+      "readable": "NO",
+      "absenceProven": false,
+      "gap": "RESOURCE_NOT_FOUND_PERMISSION_REQUIRES_CORROBORATION",
+      "count": 0,
+      "complete": false
+    },
+    {
+      "name": "Bulk entrypoint",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/phases/http_request_redirect/entrypoint",
+      "requiredRead": "Bulk URL Redirects Read",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/phases/http_request_redirect/entrypoint",
+          "httpStatus": 200,
+          "success": true,
+          "result_info": null,
+          "errors": []
+        }
+      ],
+      "records": [],
+      "httpStatus": 200,
+      "readable": "YES",
+      "object": {
+        "description": "",
+        "id": "e4920e8f14574ec9abce2fbe9d764056",
+        "kind": "root",
+        "last_updated": "2026-09-14T11:35:09.76747Z",
+        "name": "default",
+        "phase": "http_request_redirect",
+        "rules": [
+          {
+            "action": "redirect",
+            "action_parameters": {
+              "from_list": {
+                "key": "http.request.full_uri",
+                "name": "getphios_www_canonical"
+              }
+            },
+            "description": "poc-b4-www-to-canonical",
+            "enabled": true,
+            "expression": "http.request.full_uri in $getphios_www_canonical",
+            "id": "635f3e11b273436bba9615274561471b",
+            "last_updated": "2026-09-14T09:54:56.088239Z",
+            "ref": "635f3e11b273436bba9615274561471b",
+            "version": "1"
+          },
+          {
+            "action": "redirect",
+            "action_parameters": {
+              "from_list": {
+                "key": "http.request.full_uri",
+                "name": "getphios_pagesdev_canonical"
+              }
+            },
+            "description": "poc-b6-pagesdev-to-canonical",
+            "enabled": true,
+            "expression": "http.request.full_uri in $getphios_pagesdev_canonical",
+            "id": "24d6cca9d501477886de2a85fa51bf32",
+            "last_updated": "2026-09-14T11:35:09.76747Z",
+            "ref": "24d6cca9d501477886de2a85fa51bf32",
+            "version": "1"
+          }
+        ],
+        "version": "2"
+      },
+      "count": null,
+      "complete": true,
+      "absenceProven": false
+    },
+    {
+      "name": "Filter Lists",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists?per_page=100",
+      "requiredRead": "Account Filter Lists Read",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists?per_page=100",
+          "httpStatus": 200,
+          "success": true,
+          "result_info": null,
+          "errors": []
+        }
+      ],
+      "records": [
+        {
+          "id": "9d06d0169ea948e8ba640bb1fab48cde",
+          "name": "getphios_pagesdev_canonical",
+          "description": "POC-B6 — Redirect phios-github.pages.dev production hostname to canonical https://getphios.com.",
+          "kind": "redirect",
+          "num_items": 1,
+          "num_referencing_filters": 0,
+          "created_on": "2026-09-14T11:34:30Z",
+          "modified_on": "2026-09-18T08:14:02Z"
+        },
+        {
+          "id": "3cddd65c75a24866b759eff4fde8ee63",
+          "name": "getphios_www_canonical",
+          "description": "POC-B4 — Redirect www.getphios.com to canonical https://getphios.com while preserving path and query string.",
+          "kind": "redirect",
+          "num_items": 1,
+          "num_referencing_filters": 0,
+          "created_on": "2026-09-14T09:50:12Z",
+          "modified_on": "2026-09-14T09:52:25Z"
+        }
+      ],
+      "httpStatus": 200,
+      "readable": "YES",
+      "count": 2,
+      "complete": true,
+      "absenceProven": false
+    },
+    {
+      "name": "Zone Rulesets",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets",
+      "requiredRead": "Transform Rules Read / Single Redirect Read",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets",
+          "httpStatus": 200,
+          "success": true,
+          "result_info": null,
+          "errors": []
+        }
+      ],
+      "records": [
+        {
+          "description": "Created by the Cloudflare security team, this ruleset provides normalization on the URL path",
+          "id": "70339d97bdb34195bbf054b1ebe81f76",
+          "kind": "managed",
+          "last_updated": "2024-08-01T17:37:11.538019Z",
+          "name": "Cloudflare Normalization Ruleset",
+          "phase": "http_request_sanitize",
+          "version": "6"
+        },
+        {
+          "description": "Created by the Cloudflare security team, this ruleset is designed to provide protection for free zones",
+          "id": "77454fe2d30c4220b5701f6fdfb893ba",
+          "kind": "managed",
+          "last_updated": "2026-08-17T16:24:51.912839Z",
+          "name": "Cloudflare Managed Free Ruleset",
+          "phase": "http_request_firewall_managed",
+          "source": "firewall_managed",
+          "version": "74"
+        },
+        {
+          "description": "Automatic mitigation of HTTP-based DDoS attacks. Cloudflare routinely adds signatures to address new attack vectors. Additional configuration allows you to customize the sensitivity of each rule and the performed mitigation action.",
+          "id": "4d21379b4f9f4bb088e0729962c8b3cf",
+          "kind": "managed",
+          "last_updated": "2026-10-09T18:34:32.120081Z",
+          "name": "DDoS L7 ruleset",
+          "phase": "ddos_l7",
+          "version": "3449"
+        }
+      ],
+      "httpStatus": 200,
+      "readable": "YES",
+      "count": 3,
+      "complete": true,
+      "absenceProven": false
+    },
+    {
+      "name": "Dynamic Redirects",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_request_dynamic_redirect/entrypoint",
+      "requiredRead": "Single Redirect Read",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_request_dynamic_redirect/entrypoint",
+          "httpStatus": 404,
+          "success": false,
+          "result_info": null,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_dynamic_redirect phase"
+            }
+          ]
+        }
+      ],
+      "records": [],
+      "httpStatus": 404,
+      "readable": "NO",
+      "absenceProven": false,
+      "gap": "RESOURCE_NOT_FOUND_PERMISSION_REQUIRES_CORROBORATION",
+      "count": 0,
+      "complete": false
+    },
+    {
+      "name": "Response Header Transforms",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_response_headers_transform/entrypoint",
+      "requiredRead": "Transform Rules Read",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets/phases/http_response_headers_transform/entrypoint",
+          "httpStatus": 404,
+          "success": false,
+          "result_info": null,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_response_headers_transform phase"
+            }
+          ]
+        }
+      ],
+      "records": [],
+      "httpStatus": 404,
+      "readable": "NO",
+      "absenceProven": false,
+      "gap": "RESOURCE_NOT_FOUND_PERMISSION_REQUIRES_CORROBORATION",
+      "count": 0,
+      "complete": false
+    },
+    {
+      "name": "Account Load Balancers",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/load_balancers?per_page=100",
+      "requiredRead": "Load Balancers Account Read",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/load_balancers?per_page=100",
+          "httpStatus": 200,
+          "success": true,
+          "result_info": {
+            "page": 1,
+            "per_page": 100,
+            "count": 0,
+            "total_count": 0,
+            "total_pages": 0
+          },
+          "errors": []
+        }
+      ],
+      "records": [],
+      "httpStatus": 200,
+      "readable": "YES",
+      "count": 0,
+      "complete": true,
+      "absenceProven": true
+    },
+    {
+      "name": "List items getphios_pagesdev_canonical",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/9d06d0169ea948e8ba640bb1fab48cde/items?per_page=100",
+      "requiredRead": "Account Filter Lists Read",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/9d06d0169ea948e8ba640bb1fab48cde/items?per_page=100",
+          "httpStatus": 200,
+          "success": true,
+          "result_info": null,
+          "errors": []
+        }
+      ],
+      "records": [
+        {
+          "id": "b2fffac44073440fa64bc64d0d3446e2",
+          "redirect": {
+            "source_url": "https://phios-github.pages.dev/",
+            "include_subdomains": false,
+            "target_url": "https://getphios.com/",
+            "status_code": 301,
+            "preserve_query_string": true,
+            "subpath_matching": true,
+            "preserve_path_suffix": true
+          },
+          "created_on": "2026-09-14T11:34:54Z",
+          "modified_on": "2026-09-18T08:14:02Z"
+        }
+      ],
+      "httpStatus": 200,
+      "readable": "YES",
+      "count": 1,
+      "complete": true,
+      "absenceProven": false
+    },
+    {
+      "name": "List items getphios_www_canonical",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/3cddd65c75a24866b759eff4fde8ee63/items?per_page=100",
+      "requiredRead": "Account Filter Lists Read",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/3cddd65c75a24866b759eff4fde8ee63/items?per_page=100",
+          "httpStatus": 200,
+          "success": true,
+          "result_info": null,
+          "errors": []
+        }
+      ],
+      "records": [
+        {
+          "id": "efe241a0622b409fadfdf4214338ebd5",
+          "redirect": {
+            "source_url": "https://www.getphios.com/",
+            "target_url": "https://getphios.com/",
+            "status_code": 301,
+            "preserve_query_string": true,
+            "subpath_matching": true,
+            "preserve_path_suffix": true
+          },
+          "created_on": "2026-09-14T09:50:57Z",
+          "modified_on": "2026-09-14T09:52:25Z"
+        }
+      ],
+      "httpStatus": 200,
+      "readable": "YES",
+      "count": 1,
+      "complete": true,
+      "absenceProven": false
+    },
+    {
+      "name": "Ruleset e4920e8f14574ec9abce2fbe9d764056",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/e4920e8f14574ec9abce2fbe9d764056",
+      "requiredRead": "Bulk URL Redirects Read",
+      "method": "GET",
+      "pages": [
+        {
+          "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/e4920e8f14574ec9abce2fbe9d764056",
+          "httpStatus": 200,
+          "success": true,
+          "result_info": null,
+          "errors": []
+        }
+      ],
+      "records": [],
+      "httpStatus": 200,
+      "readable": "YES",
+      "object": {
+        "description": "",
+        "id": "e4920e8f14574ec9abce2fbe9d764056",
+        "kind": "root",
+        "last_updated": "2026-09-14T11:35:09.76747Z",
+        "name": "default",
+        "phase": "http_request_redirect",
+        "rules": [
+          {
+            "action": "redirect",
+            "action_parameters": {
+              "from_list": {
+                "key": "http.request.full_uri",
+                "name": "getphios_www_canonical"
+              }
+            },
+            "description": "poc-b4-www-to-canonical",
+            "enabled": true,
+            "expression": "http.request.full_uri in $getphios_www_canonical",
+            "id": "635f3e11b273436bba9615274561471b",
+            "last_updated": "2026-09-14T09:54:56.088239Z",
+            "ref": "635f3e11b273436bba9615274561471b",
+            "version": "1"
+          },
+          {
+            "action": "redirect",
+            "action_parameters": {
+              "from_list": {
+                "key": "http.request.full_uri",
+                "name": "getphios_pagesdev_canonical"
+              }
+            },
+            "description": "poc-b6-pagesdev-to-canonical",
+            "enabled": true,
+            "expression": "http.request.full_uri in $getphios_pagesdev_canonical",
+            "id": "24d6cca9d501477886de2a85fa51bf32",
+            "last_updated": "2026-09-14T11:35:09.76747Z",
+            "ref": "24d6cca9d501477886de2a85fa51bf32",
+            "version": "1"
+          }
+        ],
+        "version": "2"
+      },
+      "count": null,
+      "complete": true,
+      "absenceProven": false
+    }
+  ],
+  "observations": [
+    {
+      "host": "41b1c458.phios-github.pages.dev",
+      "addresses": [
+        {
+          "address": "2606:4700:310c::ac42:2c6b",
+          "family": 6
+        },
+        {
+          "address": "2606:4700:310c::ac42:2f95",
+          "family": 6
+        },
+        {
+          "address": "172.66.47.149",
+          "family": 4
+        },
+        {
+          "address": "172.66.44.107",
+          "family": 4
+        }
+      ],
+      "status": 200,
+      "location": null,
+      "server": "cloudflare",
+      "cfRay": "a496ed830f06e2f5-HKG",
+      "bodyRecorded": false
+    },
+    {
+      "host": "phios-github.pages.dev",
+      "addresses": [
+        {
+          "address": "2606:4700:310c::ac42:2c6b",
+          "family": 6
+        },
+        {
+          "address": "2606:4700:310c::ac42:2f95",
+          "family": 6
+        },
+        {
+          "address": "172.66.44.107",
+          "family": 4
+        },
+        {
+          "address": "172.66.47.149",
+          "family": 4
+        }
+      ],
+      "status": 301,
+      "location": "https://getphios.com/",
+      "server": "cloudflare",
+      "cfRay": "a496ed8cacfd1faa-HKG",
+      "bodyRecorded": false
+    },
+    {
+      "host": "getphios.com",
+      "addresses": [
+        {
+          "address": "2606:4700:3033::6815:3307",
+          "family": 6
+        },
+        {
+          "address": "2606:4700:3034::ac43:d827",
+          "family": 6
+        },
+        {
+          "address": "104.21.51.7",
+          "family": 4
+        },
+        {
+          "address": "172.67.216.39",
+          "family": 4
+        }
+      ],
+      "status": 200,
+      "location": null,
+      "server": "cloudflare",
+      "cfRay": "a496ed8dc866e6f4-HKG",
+      "bodyRecorded": false
+    }
+  ],
+  "writePermissionsUsed": 0,
+  "productionMutations": 0,
+  "d1Mutations": 0,
+  "providerCalls": 0,
+  "costUSD": 0,
+  "finishedAt": "2026-10-12T14:52:22.584Z"
+}

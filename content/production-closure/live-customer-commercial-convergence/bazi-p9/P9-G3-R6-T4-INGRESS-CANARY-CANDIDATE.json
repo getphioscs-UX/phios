@@ -1,0 +1,95 @@
+{
+  "at": "2026-10-12T14:22:51.983Z",
+  "status": "BLOCKED_CONTROL_PLANE_VISIBILITY",
+  "selectedMechanism": "Account Bulk Redirect EXACT_CANARY_HOST only; conditional draft, not executable/authorized",
+  "reason": "Documented project pages.dev include-subdomains strategy supports host matching, but current lists/rules/order unreadable. Single-host canary minimizes blast radius. Do not change broad project ingress in this canary.",
+  "resourceType": "Account redirect list + rule in http_request_redirect entrypoint",
+  "account": "0b9f36bdf56f38d7d09aebe388f15204",
+  "zone": "ACCOUNT_LEVEL; not a getphios.com zone rule",
+  "targetDeploymentID": "41b1c458-c79d-40e8-b47c-c2e5f4dba452",
+  "resourceIdentity": {
+    "proposedListName": "p9_t4_canary2_ingress",
+    "listID": "NOT_CREATED_SERVER_ASSIGNED",
+    "ruleRef": "p9_t4_canary2_ingress",
+    "ruleID": "NOT_CREATED_SERVER_ASSIGNED",
+    "entrypointRulesetID": "UNREADABLE_MUST_READ_BEFORE_AUTHORIZATION"
+  },
+  "proposedMatch": "http.host eq \"41b1c458.phios-github.pages.dev\"",
+  "action": "redirect",
+  "listItemDraft": {
+    "redirect": {
+      "source_url": "https://41b1c458.phios-github.pages.dev/",
+      "target_url": "https://getphios.com/",
+      "status_code": 307,
+      "include_subdomains": false,
+      "subpath_matching": true,
+      "preserve_path_suffix": true,
+      "preserve_query_string": true
+    }
+  },
+  "ruleDraft": {
+    "ref": "p9_t4_canary2_ingress",
+    "description": "P9 exact historical canary ingress; no current/customer host match",
+    "expression": "http.host eq \"41b1c458.phios-github.pages.dev\"",
+    "action": "redirect",
+    "action_parameters": {
+      "from_list": {
+        "name": "p9_t4_canary2_ingress",
+        "key": "http.request.full_uri"
+      }
+    },
+    "enabled": true
+  },
+  "methodPolicy": "Draft uses307 to avoid silently converting mutation methods to GET; target current READ_ONLY must fail closed. All-method behavior and paths require engine trace first; no application write request authorized in T4.",
+  "priority": "NOT_FINALIZABLE_UNTIL_ENTRYPOINT_READ; propose first matching canary-host rule only after proving no conflicts; preserve every existing rule/order",
+  "futureOperations": [
+    "GET full entrypoint/lists/items and bind immutable baseline IDs/hash",
+    "Abort on existing conflicting name/ref, priority ambiguity, configuration drift or active production change",
+    "Create new one-item redirect list (server IDs recorded)",
+    "Insert one scoped rule preserving existing rules and their order; requires separate explicit Human authorization"
+  ],
+  "rollback": {
+    "action": "Disable/remove ONLY newly created rule ID/ref; remove ONLY newly created list after reference check; never replace full ruleset with stale copy",
+    "baseline": "Capture fresh rule/list contents, order, hash and IDs immediately before implementation",
+    "verify": "Canary returns prechange read-only behavior; getphios.com and current active unchanged; no unrelated configuration drift",
+    "reversible": "YES_CONFIG_DESIGN; effective engine state requires later proof"
+  },
+  "blastRadius": "Only exact HTTPS canary2 hostname; no subdomains, no broad wildcard, no getphios.com, www, current hash, branch aliases or deleted canary1 match",
+  "currentProductionExemption": {
+    "hosts": [
+      "getphios.com",
+      "www.getphios.com",
+      "b07d86bf.phios-github.pages.dev",
+      "phios-github.pages.dev"
+    ],
+    "syntacticProof": "All four differ from exact canary match",
+    "runtimeExemption": "UNPROVEN_UNTIL_AUTHORIZED_CANARY_TEST",
+    "activeMustRemain": "b07d86bf-2447-4fe8-8ded-66d9fe676c81"
+  },
+  "canarySuccessContract": {
+    "before": [
+      "Current target detail confirms same ID, source, project, aliases and non-current authority",
+      "Nonce GET shows historical application route reachable; baseline live evidence in read receipt",
+      "Current production GET available and active deployment bound metadata unchanged"
+    ],
+    "after": [
+      "Positive ingress rule trace matches exact rule ID and list item",
+      "Proven terminating redirect action before historical handler; working canary tail collector must correlate successful prechange baseline invocation and postchange absence, plus engine trace; absence alone not proof",
+      "No historical handler/D1 path reached from changed ingress",
+      "GET/HEAD runtime observations manual redirects; other methods engine trace/simulation first, not production write probes",
+      "Current getphios.com remains200; active production unchanged; current/custom hosts do not match",
+      "No D1 mutation, no provider/payment activity, no unrelated routing/config change",
+      "Rollback scoped and tested"
+    ],
+    "limitations": [
+      "301/307 or final destination alone not containment proof",
+      "Failed/unready tail cannot prove non-execution",
+      "Canary PASS would prove only one host; does not close residual canary1 or all 3.5K surfaces",
+      "No actual mutation-method probes without safe interception proof and separate authorization"
+    ]
+  },
+  "preHandlerInterception": "UNPROVEN_CURRENT_RUNTIME; documented redirect termination is design basis only",
+  "hashScope": "EXACT_HOST_MATCH_BY_DESIGN; runtime rule creation/attachment not proven",
+  "implementationAuthorized": false,
+  "STOP": true
+}

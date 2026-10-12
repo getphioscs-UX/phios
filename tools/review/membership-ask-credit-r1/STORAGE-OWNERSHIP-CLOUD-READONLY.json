@@ -1,0 +1,259 @@
+{
+  "at": "2026-10-12T14:43:05.991Z",
+  "account": "0b9f36bdf56f38d7d09aebe388f15204",
+  "project": "phios-github",
+  "cloudBindings": {
+    "preview": {
+      "d1": {
+        "RUNTIME_DB": {
+          "id": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8"
+        }
+      },
+      "activation": {
+        "PHIOS_ENVIRONMENT": "qa"
+      }
+    },
+    "production": {
+      "d1": {
+        "RUNTIME_DB": {
+          "id": "073639fa-01e4-4868-af10-6ed032637dab"
+        }
+      },
+      "activation": {
+        "PHIOS_ENVIRONMENT": "production"
+      }
+    }
+  },
+  "localBinding": {
+    "production": [
+      {
+        "binding": "RUNTIME_DB",
+        "database_name": "phios-runtime-production",
+        "database_id": "073639fa-01e4-4868-af10-6ed032637dab",
+        "migrations_dir": "db/migrations"
+      }
+    ],
+    "preview": [
+      {
+        "binding": "RUNTIME_DB",
+        "database_name": "phios-runtime-sandbox",
+        "database_id": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+        "migrations_dir": "db/migrations"
+      }
+    ]
+  },
+  "databaseInventory": [
+    {
+      "id": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+      "name": "phios-runtime-sandbox"
+    },
+    {
+      "id": "073639fa-01e4-4868-af10-6ed032637dab",
+      "name": "phios-runtime-production"
+    }
+  ],
+  "inspections": [
+    {
+      "id": "073639fa-01e4-4868-af10-6ed032637dab",
+      "name": "phios-runtime-production",
+      "tables": [
+        "_cf_KV",
+        "d1_migrations",
+        "reality_readings",
+        "runtime_artifacts",
+        "runtime_entities",
+        "runtime_entries",
+        "runtime_events",
+        "runtime_lineages",
+        "runtime_migration_history",
+        "runtime_reviews",
+        "runtime_revisions",
+        "runtime_snapshots",
+        "runtime_users",
+        "runtimes",
+        "sqlite_sequence",
+        "users"
+      ],
+      "counts": {},
+      "migrationTables": [
+        "d1_migrations",
+        "runtime_migration_history"
+      ],
+      "appliedMigrations": [
+        {
+          "name": "0001_platform_foundation.sql"
+        },
+        {
+          "name": "0002_initial_runtime.sql"
+        }
+      ],
+      "artifactTypes": [
+        {
+          "artifact_type": "system_capability_authority",
+          "rows": 2
+        }
+      ]
+    },
+    {
+      "id": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+      "name": "phios-runtime-sandbox",
+      "tables": [
+        "_cf_KV",
+        "account_financial_will_drafts",
+        "account_fw_rights_audit",
+        "account_method_report_materials",
+        "account_person_versions",
+        "account_provider_subjects",
+        "account_verified_sessions",
+        "asset_item",
+        "bank_account_summary",
+        "client_household",
+        "commerce_checkout_attempts",
+        "commerce_customer_bindings",
+        "commerce_delivery_messages",
+        "commerce_download_events",
+        "commerce_download_tokens",
+        "commerce_products",
+        "commerce_purchases",
+        "commerce_receipts",
+        "commerce_service_fulfillments",
+        "commerce_subscriptions",
+        "commerce_watermark_jobs",
+        "commerce_webhook_events",
+        "d1_migrations",
+        "digital_entitlements",
+        "education_plan",
+        "estate_profile",
+        "expense_item",
+        "financial_action",
+        "financial_objective",
+        "financial_ratio",
+        "financial_recommendation",
+        "financial_review",
+        "financial_risk",
+        "income_item",
+        "insurance_policy",
+        "investment_item",
+        "liability_item",
+        "method_delivery_cache",
+        "property_item",
+        "pws_registry_audit",
+        "pws_registry_objects",
+        "pws_registry_outbox",
+        "pws_registry_relationships",
+        "pws_registry_restrictions",
+        "pws_registry_versions",
+        "reality_readings",
+        "report_context_records",
+        "report_context_uses",
+        "retirement_plan",
+        "runtime_artifacts",
+        "runtime_entities",
+        "runtime_entries",
+        "runtime_events",
+        "runtime_lineages",
+        "runtime_migration_history",
+        "runtime_reviews",
+        "runtime_revisions",
+        "runtime_snapshots",
+        "runtime_users",
+        "runtimes",
+        "sqlite_sequence",
+        "tax_profile",
+        "users"
+      ],
+      "counts": {
+        "commerce_subscriptions": 0,
+        "commerce_purchases": 1,
+        "commerce_checkout_attempts": 2
+      },
+      "migrationTables": [
+        "d1_migrations",
+        "runtime_migration_history"
+      ],
+      "appliedMigrations": [
+        {
+          "name": "0001_platform_foundation.sql"
+        },
+        {
+          "name": "0002_initial_runtime.sql"
+        },
+        {
+          "name": "0003_financial_professional_infrastructure.sql"
+        },
+        {
+          "name": "0004_book_commerce.sql"
+        },
+        {
+          "name": "0005_pws_universal_registry.sql"
+        },
+        {
+          "name": "0006_commerce_stripe_r1.sql"
+        },
+        {
+          "name": "0007_account_oidc_sessions.sql"
+        },
+        {
+          "name": "0008_financial_will_encrypted_drafts.sql"
+        }
+      ],
+      "artifactTypes": [
+        {
+          "artifact_type": "BAZI_T3_SHADOW_V1",
+          "rows": 19
+        },
+        {
+          "artifact_type": "RNT2_CSD_REVIEW_AUDIT",
+          "rows": 20
+        },
+        {
+          "artifact_type": "RNT2_S02_REVIEW",
+          "rows": 2
+        },
+        {
+          "artifact_type": "RNT2_S03_REVIEW",
+          "rows": 2
+        },
+        {
+          "artifact_type": "RNT2_S04_REVIEW",
+          "rows": 17
+        },
+        {
+          "artifact_type": "RNT2_S05_REVIEW",
+          "rows": 2
+        },
+        {
+          "artifact_type": "ZWR_CONTROLLED_RELEASE_MATERIAL_V1",
+          "rows": 6
+        }
+      ]
+    }
+  ],
+  "definitions": [
+    {
+      "path": "db/migrations/0015_product_cost_envelopes.sql",
+      "sha256": "433496777921d5fc97384769ac907f84016331314fca1c11b17d934cbdf02958",
+      "candidateOnly": false
+    },
+    {
+      "path": "db/migration-candidates/0018_continuity_quota_units.sql",
+      "sha256": "0963a4c4d471a6dcf3b3d0386a32795aa4188c6aca40a9214262d8f356e63b67",
+      "candidateOnly": true
+    },
+    {
+      "path": "db/migration-candidates/0019_continuity_ask_credit_allocations.sql",
+      "sha256": "80b9b94d50b6f9b1979c0fa5f86f66548910538b2e11f04781340edbf81503af",
+      "candidateOnly": true
+    },
+    {
+      "path": "db/migration-candidates/0020_continuity_zero_call_outcomes.sql",
+      "sha256": "e4233314d1556861129f98da6c9b2539fac07cbc9182e62d8d30b7cb7c8211e0",
+      "candidateOnly": true
+    }
+  ],
+  "readRequests": 11,
+  "writes": 0,
+  "secretsRead": 0,
+  "privateAnswerRowsRead": 0,
+  "conclusion": "Must reconcile cloud-bound storage and actual schema; missing selected tables is not proof that historical customer credits are empty."
+}

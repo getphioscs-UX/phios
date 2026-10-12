@@ -442,11 +442,23 @@
           "secretHeadersUsed": false
         }
       ]
+    },
+    {
+      "from": "2026-10-12T13:22:25.193Z",
+      "to": "2026-10-12T13:26:56.327Z",
+      "ageSeconds": 1899.214,
+      "source": "R1 receipt requests"
     }
   ],
   "sourceControl": {
     "HEAD": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
-    "index": ""
+    "index": "",
+    "afterHEAD": "def55d22ecf96e48141914772b0c58d6d8171161",
+    "afterIndex": "",
+    "concurrentHEADChangeObserved": true,
+    "commitsByThisTask": 0,
+    "pushesByThisTask": 0,
+    "note": "Concurrent HEAD movement preserved; this investigation depends on immutable prior source and runtime observations, not new HEAD"
   },
   "activeProduction": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
   "project": {
@@ -588,5 +600,83 @@
       "usesFunctions": true
     }
   ],
-  "lastObservationAt": "2026-10-12T13:26:56.327Z"
+  "lastObservationAt": "2026-10-12T13:26:56.327Z",
+  "status": "READY_FOR_CONTAINMENT_STRATEGY_HUMAN_REVIEW",
+  "deleteAgeAtFinalCheckSeconds": 1899.214,
+  "directHostnameReachability": "REACHABLE_AFTER_T_PLUS_31m39s",
+  "staticCacheOnly": "NOT_ESTABLISHED",
+  "functionsExecutionAfterDelete": "UNPROVEN",
+  "servingDeploymentIdentity": {
+    "id": "UNVERIFIED",
+    "source": "UNVERIFIED",
+    "worker": "UNVERIFIED",
+    "environment": "UNVERIFIED",
+    "reason": "No serving identity header or attachable tail. Deleted homepage matches pre-delete historical bytes, differs from active. Anonymous API fingerprints identical across active/deleted/control; mixed caching or rebind cannot be excluded."
+  },
+  "residualD1BindingState": "UNVERIFIED",
+  "ordinaryDeleteContainmentClassification": "PROVIDER_BEHAVIOR_UNRESOLVED",
+  "propagationResult": "NO_CONTAINMENT_OBSERVED_THROUGH_31m39s; T+5/+15 not measured, T+60 not performed; bounded window closed",
+  "canary2State": "PRESERVED_LISTED_DETAIL200_REACHABLE",
+  "recommendedNextContainmentStrategy": "Prepare explicit upstream project-wide historical-hash restriction; first resolve serving identity and ruleset-read gaps. Evaluate Access production-hash coverage and documented Bulk Redirect include-subdomains; require interception before old Functions and guarded custom-domain destination. Do not execute.",
+  "payments": 0,
+  "refunds": 0,
+  "productionD1WriteIsolation": "NOT_PROVEN",
+  "D1MigrationStatus": "NOT_EXECUTED",
+  "nextBlocker": "P9_T2_R1_RESIDUAL_SERVING_IDENTITY_AND_PROJECT_CONTROL_EVIDENCE_GAPS",
+  "functionsEvidence": {
+    "strength": "STRONG_DYNAMIC_ROUTE_EVIDENCE_NOT_RUNTIME_ATTESTATION",
+    "basis": [
+      "Nonce/no-cache Functions-route GET200 private,no-store with fresh Date and CF-Ray",
+      "Separate Node process Connection-close GET200 versus HEAD405 matches method-defense source",
+      "account-persons GET401 ACCOUNT_REQUIRED"
+    ],
+    "limitation": "CF-Ray/Date attest edge request only; no handler-specific changing field, trace or tail. Do not assert live historical execution solely from these HTTP observations."
+  },
+  "cacheEvidence": {
+    "colos": [
+      "KUL prior T2",
+      "HKG current R1"
+    ],
+    "dynamic": "No Age/CF-Cache-Status/ETag; private,no-store",
+    "static": "Homepage weak ETag and must-revalidate; historical byte fingerprint unchanged",
+    "scope": "Two observed colos at distinct times, not global proof"
+  },
+  "routingFindings": {
+    "Access": "Account applications GET200 total0",
+    "Workers": "getphios.com routes GET200 empty; pages.dev managed routing not attested",
+    "Rules": "Account/zone Rulesets, Bulk lists and Load Balancers GET403 Authentication error; exact authorization gaps, not absent controls",
+    "redirects": "No Location observed; redirect-following disabled",
+    "aliases": "Pre-delete canary aliases empty; deleted detail now unavailable"
+  },
+  "options": [
+    {
+      "name": "Access",
+      "assessment": "Prepare explicit all historical production-hash host coverage; preview toggle alone not proven sufficient. Test unauthenticated upstream rejection and preserve customer custom domain."
+    },
+    {
+      "name": "Bulk Redirect",
+      "assessment": "Official documented pages.dev to custom-domain option with include-subdomains; require all methods/path/query handling and proof no source Functions execution. Redirect HTTP status alone insufficient."
+    },
+    {
+      "name": "Custom-domain-only",
+      "assessment": "Desired model requires supported verified upstream controls; no assumed global disable switch."
+    },
+    {
+      "name": "Provider project routing",
+      "assessment": "Resolve deleted-runtime identity and supported teardown/control; no provider message sent."
+    },
+    {
+      "name": "Project recreation/migration",
+      "assessment": "Last resort; separate source/domain/binding/rollback review and authorization required."
+    }
+  ],
+  "tailCreationAttempts": 1,
+  "tailSubscriptionsCreated": 0,
+  "applicationWriteRequests": 0,
+  "references": [
+    "https://developers.cloudflare.com/pages/how-to/redirect-to-custom-domain/",
+    "https://developers.cloudflare.com/pages/configuration/serving-pages/",
+    "https://developers.cloudflare.com/pages/configuration/preview-deployments/"
+  ],
+  "finishedAt": "2026-10-12T13:47:13.379Z"
 }

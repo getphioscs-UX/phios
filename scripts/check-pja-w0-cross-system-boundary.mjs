@@ -321,7 +321,16 @@ assert.equal(membershipSource.predecessor.sha256,crypto.createHash('sha256').upd
 assert.equal(membershipSource.historicalFreezeMutated,false);
 assert.equal(membershipSource.runtimeWriteAuthorityCreated,false);
 assert.deepEqual(membershipSource.files.map(f=>f.path),['membership-source.html','assets/js/pages/membership-source.js']);
-for(const file of membershipSource.files)assert.equal(crypto.createHash('sha256').update(await fs.readFile(path.join(root,file.path))).digest('hex'),file.sha256,`Membership source presentation drift: ${file.path}`);
+const membershipNext=await readJson('docs/pja/pja-membership-source-capability-successor-v4.json');
+assert.equal(membershipNext.status,'ENGINEERING_RECONCILIATION');assert.equal(membershipNext.predecessor.path,'docs/pja/pja-membership-source-capability-successor-v3.json');
+assert.equal(membershipNext.predecessor.sha256,crypto.createHash('sha256').update(await fs.readFile(path.join(root,membershipNext.predecessor.path))).digest('hex'));
+assert.equal(membershipNext.historicalFreezeMutated,false);assert.equal(membershipNext.runtimeWriteAuthorityCreated,false);
+assert.equal(membershipNext.path,'assets/js/pages/membership-source.js');assert.equal(membershipNext.previousPath,'docs/pja/membership-source-before-v4.js');
+for(const file of membershipSource.files){
+ let expected=file.sha256;
+ if(file.path===membershipNext.path){assert.equal(membershipNext.previousSha256,expected);assert.equal(crypto.createHash('sha256').update(await fs.readFile(path.join(root,membershipNext.previousPath))).digest('hex'),expected);expected=membershipNext.sha256;}
+ assert.equal(crypto.createHash('sha256').update(await fs.readFile(path.join(root,file.path))).digest('hex'),expected,'Membership source presentation drift: '+file.path);
+}
 assert.deepEqual(membershipSource.pageCapabilities.flatMap(c=>c.pages),['membership-source.html']);
 const effectivePageCapabilities = [
   ...freeze.pageCapabilities,
