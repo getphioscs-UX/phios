@@ -1,0 +1,251 @@
+{
+  "baseCommit": "890587f9cc830c1a4be80283618212266c70ae5b",
+  "R4Digest": "abacbc2e730a172d4caff22607c7bdc97369c843ec6516ce53495b6373de2b96",
+  "changedFiles": [
+    {
+      "path": "functions/_lib/client-knowledge-ask-b.js",
+      "baseBlob": "7c8653ef9a10cad2a5e592661a8d511e1135b921c1afe3e0dfcc1e6318189f1a",
+      "successorSHA256": "24536712bd8dc47a9bc36ff3b9885fbdce688909f6e762e1a19871b7e4579b84",
+      "bytes": 14472,
+      "worktreeSHA256": "24536712bd8dc47a9bc36ff3b9885fbdce688909f6e762e1a19871b7e4579b84",
+      "worktreeMatchesSuccessor": true,
+      "authority": "ISOLATED_RELEASE_SNAPSHOT",
+      "concurrentHunksExcluded": false
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "baseBlob": "39f94eca6bfd3afdfa8ce47789138258ec51a43af201e147750c8e4dcb4f724c",
+      "successorSHA256": "3de96383d13c1d13e77f20b43c13c76f7a9314bf50a766d6b095ca0cd2231bb5",
+      "bytes": 27651,
+      "worktreeSHA256": "3de96383d13c1d13e77f20b43c13c76f7a9314bf50a766d6b095ca0cd2231bb5",
+      "worktreeMatchesSuccessor": true,
+      "authority": "ISOLATED_RELEASE_SNAPSHOT",
+      "concurrentHunksExcluded": false
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "baseBlob": "fee92913657c6954f8834c403c4245a11aeef366eb0950407f67423a018b22b1",
+      "successorSHA256": "6e65105f421ce97d6a34ebf61c23dae496dc6b4bb065946f9fc45a9dcbf4b156",
+      "bytes": 33499,
+      "worktreeSHA256": "f29d60933ca030bbba3b625ce84f228ba0f45fe157c4899d1e6c7a4aa1eac595",
+      "worktreeMatchesSuccessor": false,
+      "authority": "ISOLATED_RELEASE_SNAPSHOT",
+      "concurrentHunksExcluded": true
+    },
+    {
+      "path": "functions/customer-projection/knowledge-customer-projection.js",
+      "baseBlob": "47067c53581a97b7275cfa7e2a7e9ee93d714e310c44774ed147816d471064cc",
+      "successorSHA256": "437b53a235e805975ea025c9a2cac023673129dcab789998e42f81130a8538b7",
+      "bytes": 5936,
+      "worktreeSHA256": "437b53a235e805975ea025c9a2cac023673129dcab789998e42f81130a8538b7",
+      "worktreeMatchesSuccessor": true,
+      "authority": "ISOLATED_RELEASE_SNAPSHOT",
+      "concurrentHunksExcluded": false
+    },
+    {
+      "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
+      "baseBlob": "24be395744ae4d1bf0c709b159cefd9e59bafc67b92a13b41c2c67a2b01321fa",
+      "successorSHA256": "d266156975b036187a614487025178b7ceef7a2a9eeffb74d278806cd2857d3f",
+      "bytes": 28656,
+      "worktreeSHA256": "db533d869e42cd3cd6aed0876ac0ed9a9abeccd11b9c55771564450208b20a64",
+      "worktreeMatchesSuccessor": false,
+      "authority": "ISOLATED_RELEASE_SNAPSHOT",
+      "concurrentHunksExcluded": true
+    },
+    {
+      "path": "functions/_lib/knowledge-source-eligibility.js",
+      "baseBlob": null,
+      "successorSHA256": "22f5f0c414a847b4c0b6e28588e28c78e65c6b2d1d21f5d7f3b1d3fdbda9798f",
+      "bytes": 5853,
+      "worktreeSHA256": "22f5f0c414a847b4c0b6e28588e28c78e65c6b2d1d21f5d7f3b1d3fdbda9798f",
+      "worktreeMatchesSuccessor": true,
+      "authority": "ISOLATED_RELEASE_SNAPSHOT",
+      "concurrentHunksExcluded": false
+    }
+  ],
+  "changedRuntimeFileCount": 6,
+  "sharedHelper": {
+    "path": "functions/_lib/knowledge-source-eligibility.js",
+    "necessary": true,
+    "reason": "One shared current-source validation/deduplication and localized public contract consumed by all five owners; reuses the existing R4 manuscript admission owner.",
+    "newRegistry": false,
+    "newAdmissionLedger": false
+  },
+  "testCounts": {
+    "previous": {
+      "total": 60,
+      "pass": 17,
+      "fail": 43
+    },
+    "successor": {
+      "total": 60,
+      "pass": 60,
+      "fail": 0
+    },
+    "expanded": {
+      "total": 230,
+      "pass": 230,
+      "fail": 0
+    },
+    "terminal": {
+      "total": 22,
+      "pass": 22,
+      "fail": 0
+    },
+    "R4Historical": {
+      "total": 22,
+      "pass": 20,
+      "fail": 2,
+      "status": "BASELINE_FAILURE"
+    },
+    "R4AuthorizedSuccessor": {
+      "total": 22,
+      "pass": 22,
+      "fail": 0
+    },
+    "customerAPI": {
+      "total": 13,
+      "pass": 13,
+      "fail": 0
+    },
+    "compiledD1": {
+      "total": 138,
+      "pass": 138,
+      "fail": 0
+    }
+  },
+  "previousFailCount": 43,
+  "currentFailCount": 0,
+  "staleObjectResult": "PASS",
+  "BookIResult": "PASS",
+  "BookVResult": "PASS",
+  "groundingResult": "BYPASS_BLOCKED",
+  "compositionResult": "PASS",
+  "projectionResult": "PASS",
+  "externalAuthorityResult": "PASS",
+  "duplicateResult": "PASS",
+  "orderingResult": "PASS_120_PERMUTATIONS",
+  "malformedResult": "PASS_LOCAL_MODULE_MATRIX_AND_8_HTTP_NEGATIVES",
+  "zhPurity": "PASS_MEASURED_CONTRACTS",
+  "enPurity": "PASS_MEASURED_CONTRACTS",
+  "internalLeakCount": 0,
+  "pathLeakCount": 0,
+  "sideEffects": {
+    "providerCalls": 0,
+    "costUSD": 0,
+    "D1Writes": 0,
+    "networkCalls": 0,
+    "networkMutations": 0,
+    "productionMutations": 0,
+    "payments": 0,
+    "refunds": 0
+  },
+  "D1Interference": 0,
+  "FunctionsCompile": "PASS_LOCAL",
+  "providerCalls": 0,
+  "productionMutations": 0,
+  "perFileStatus": [
+    {
+      "path": "functions/_lib/client-knowledge-ask-b.js",
+      "status": "PASS_LOCAL",
+      "recommendation": "HUMAN_ACCEPT_RECOMMENDED"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "status": "PASS_LOCAL",
+      "recommendation": "HUMAN_ACCEPT_RECOMMENDED"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "status": "PASS_LOCAL",
+      "recommendation": "HUMAN_ACCEPT_RECOMMENDED"
+    },
+    {
+      "path": "functions/customer-projection/knowledge-customer-projection.js",
+      "status": "PASS_LOCAL",
+      "recommendation": "HUMAN_ACCEPT_RECOMMENDED"
+    },
+    {
+      "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
+      "status": "PASS_LOCAL",
+      "recommendation": "HUMAN_ACCEPT_RECOMMENDED"
+    }
+  ],
+  "R5Digest": "a95f1892c7c32df76b6afd6dd16d10510389a021f24135feacc882af57cc7bd2",
+  "overallStatus": "READY_FOR_HUMAN_REVIEW",
+  "HumanAccept": "NOT_GRANTED",
+  "noSupportContract": {
+    "state": "SOURCE_INSUFFICIENT",
+    "sources": [],
+    "citations": [],
+    "internalReasonHidden": true,
+    "en": "There is not enough source material to answer this question.",
+    "zh": "目前没有足够的来源资料来回答这个问题。"
+  },
+  "publicSchema": {
+    "root": [
+      "surface",
+      "locale",
+      "state",
+      "question",
+      "answer",
+      "basedOn",
+      "limits",
+      "relatedKnowledge",
+      "possibleNextStep",
+      "currentFacts",
+      "handoff",
+      "atlas"
+    ],
+    "answer": [
+      "text",
+      "supporting",
+      "structuredAnswer (only supported; explicit sanitized fields)"
+    ],
+    "source": [
+      "label",
+      "excerpt",
+      "href",
+      "sectionCode (opaque public citation reference)",
+      "pageRange (numeric)",
+      "supportRange (numeric offsets)"
+    ],
+    "internalExcluded": [
+      "governance",
+      "registry version",
+      "source version/hash",
+      "raw internal ID",
+      "admission/qualification state",
+      "coverage metadata",
+      "stack/error internals"
+    ],
+    "atlas": [
+      "deepLink",
+      "evidenceCount (validated Atlas sources only)"
+    ],
+    "facts": [
+      "state",
+      "evidence: claim/source/sourceUrl"
+    ],
+    "handoff": [
+      "available",
+      "question",
+      "externalEvidence: statement/sourceUrl",
+      "unknown (empty)"
+    ]
+  },
+  "dedupePolicy": "Manuscript: type/book/section; others: type/public URL or identity; filter first, stable key/body ordering, first unique only.",
+  "cacheSemantics": "Raw cache never authorizes use: current eligibility checked before private read; prepared derived cache rechecks source + record admission each search. State transition to denial suppresses output.",
+  "worktreeReleaseDifferences": [
+    "functions/_lib/knowledge-answer-grounding.js",
+    "functions/knowledge-runtime/manuscript-source-runtime.js"
+  ],
+  "firstRemainingBlocker": "P9_RC_R5_HUMAN_ACCEPT_NOT_GRANTED",
+  "production": "NOT_DEPLOYED",
+  "READ_ONLY": "NOT_ACTIVATED",
+  "D1Migration": "NOT_EXECUTED",
+  "runtime": "RUNTIME_UNVERIFIED",
+  "commit": "NOT_AUTHORIZED_NOT_EXECUTED",
+  "push": "NOT_AUTHORIZED_NOT_EXECUTED",
+  "humanReview": "tools/review/P9-RC-R5-5FILE-RUNTIME-HUMAN-REVIEW.html"
+}

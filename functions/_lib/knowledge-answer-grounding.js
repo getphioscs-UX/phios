@@ -1,3 +1,4 @@
+import {safeSources,safeGroundingBundle,customerSourceLabel,customerText,NO_SUPPORT_COPY} from './knowledge-source-eligibility.js';
 import {resolveSelectedArticle} from '../contextual-ask/contextual-ask-runtime.js';
 import { handleKnowledgeAccessRequest } from './knowledge-access-api.js';
 import { queryTerms } from '../knowledge-runtime/manuscript-source-runtime.js';
@@ -449,8 +450,11 @@ function groundingSourceId(source) {
   return `MANUSCRIPT:${source.sectionCode}`;
 }
 
-export function buildKnowledgeGroundingBundle({ intake, normalized, retrieval, nodeMatches, expansion }) {
-  const rawSources = (retrieval?.groundingSources || []).map(source => ({
+export function buildKnowledgeGroundingBundle(options = {}) {
+  let {intake,normalized,retrieval,nodeMatches,expansion}=options&&typeof options==='object'?options:{};
+  intake=intake&&typeof intake==='object'?intake:{};
+  normalized=normalized&&typeof normalized==='object'?normalized:{locale:'en',canonicalText:'',tokens:[],hints:{}};
+  const rawSources = safeSources(retrieval?.groundingSources).map(source => ({
     sourceId: groundingSourceId(source),
     ...source
   }));

@@ -1,0 +1,2563 @@
+<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>P9 RC R5 · Human Review</title><style>body{font:16px/1.65 system-ui;margin:0;background:#f6f4ee;color:#183a39}main{max-width:1100px;margin:auto;padding:32px}h1{font-size:30px}section{background:white;padding:24px;margin:20px 0;border:1px solid #d9dfd5;border-radius:10px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.6 ui-monospace}a{color:#176c69}</style><main><h1>P9 RC R5 · 五文件运行时加固</h1><p>READY_FOR_HUMAN_REVIEW · 尚未 Human ACCEPT。SOURCE 本地通过；生产未部署，客户运行证据 RUNTIME_UNVERIFIED。</p><p>R5 digest: a95f1892c7c32df76b6afd6dd16d10510389a021f24135feacc882af57cc7bd2</p><p>候选仅来自不可变 R4 加最小 successor patch。grounding 和 manuscript runtime 的另一窗口修改保留在工作区，未纳入此候选；禁止将脏工作区整体作为发布源码。</p><p>旧 60 项 17 PASS / 43 FAIL → successor 60/60。旧 R4 22 项在 R5 中 20/22：两项 metadata-only 引用要求与零信任合同冲突，原断言及失败保留；Human 回复“1”批准有效来源 successor，22/22。</p><section><h2>修复前后与五文件决策</h2><pre>[
+  {
+    &quot;path&quot;: &quot;functions/_lib/client-knowledge-ask-b.js&quot;,
+    &quot;status&quot;: &quot;PASS_LOCAL&quot;,
+    &quot;recommendation&quot;: &quot;HUMAN_ACCEPT_RECOMMENDED&quot;,
+    &quot;before&quot;: {
+      &quot;path&quot;: &quot;functions/_lib/client-knowledge-ask-b.js&quot;,
+      &quot;recommendation&quot;: &quot;SAFE_BUT_REQUIRES_SMALL_REMEDIATION&quot;,
+      &quot;function&quot;: &quot;evaluateCkaExternalAuthority / resolveCkaAnswerState / projectCkaW5W17Envelope&quot;,
+      &quot;behavior&quot;: &quot;EXTERNAL_AUTHORITY source with eligible:false / NOT_ACTIVATED is counted as available; registry-derived stale sources are grouped without eligibility revalidation.&quot;,
+      &quot;consequence&quot;: &quot;An unavailable external source can satisfy the current-authority boundary.&quot;,
+      &quot;remediation&quot;: &quot;Consume only server-verified eligible authority/source sets; exclude denied residue from authority groups, cards and refs; localize presentation labels.&quot;,
+      &quot;line&quot;: 137,
+      &quot;sourceChangesPerformed&quot;: false
+    },
+    &quot;after&quot;: &quot;Ask 只统计有效且 eligible 的外部来源&quot;
+  },
+  {
+    &quot;path&quot;: &quot;functions/_lib/knowledge-answer-composition.js&quot;,
+    &quot;status&quot;: &quot;PASS_LOCAL&quot;,
+    &quot;recommendation&quot;: &quot;HUMAN_ACCEPT_RECOMMENDED&quot;,
+    &quot;before&quot;: {
+      &quot;path&quot;: &quot;functions/_lib/knowledge-answer-composition.js&quot;,
+      &quot;recommendation&quot;: &quot;BLOCKED_RUNTIME_BEHAVIOR&quot;,
+      &quot;function&quot;: &quot;composeDeterministicKapAnswer / composeKapAnswerProjection / projectKapSources&quot;,
+      &quot;behavior&quot;: &quot;Trusts incoming bundle.sources and coverage flag; stale denied Book I/V material can become answer and citation. Raw authority category codes are projected.&quot;,
+      &quot;consequence&quot;: &quot;A stale intermediate bundle can support a denied-source answer; source labels expose implementation classes.&quot;,
+      &quot;remediation&quot;: &quot;Revalidate source provenance against the existing admission owner before composition/citation; derive coverage from surviving evidence, deduplicate identities, reject unusable evidence and use localized customer labels.&quot;,
+      &quot;line&quot;: 227,
+      &quot;sourceChangesPerformed&quot;: false
+    },
+    &quot;after&quot;: &quot;组合前重新过滤来源；空支持不能由 coverage 标志恢复&quot;
+  },
+  {
+    &quot;path&quot;: &quot;functions/_lib/knowledge-answer-grounding.js&quot;,
+    &quot;status&quot;: &quot;PASS_LOCAL&quot;,
+    &quot;recommendation&quot;: &quot;HUMAN_ACCEPT_RECOMMENDED&quot;,
+    &quot;before&quot;: {
+      &quot;path&quot;: &quot;functions/_lib/knowledge-answer-grounding.js&quot;,
+      &quot;recommendation&quot;: &quot;BLOCKED_RUNTIME_BEHAVIOR&quot;,
+      &quot;function&quot;: &quot;buildKnowledgeGroundingBundle / retrieveKapKnowledge / retrievePublishedBookSources&quot;,
+      &quot;behavior&quot;: &quot;Broader-knowledge policy leaves supplied sources unchanged; ignores current admission on stale objects, retains duplicate/malformed/unusable sources.&quot;,
+      &quot;consequence&quot;: &quot;Denied or unusable objects enter the grounding bundle. Published Book V source-reading fallback is a separately owned bounded publication path, not proof of whole-chapter qualification.&quot;,
+      &quot;remediation&quot;: &quot;Filter and validate trusted source identity/provenance before grounding, preserve public-publication authority separately from private whole-chapter admission, deduplicate and fail safely on malformed inputs.&quot;,
+      &quot;line&quot;: 452,
+      &quot;sourceChangesPerformed&quot;: false
+    },
+    &quot;after&quot;: &quot;grounding 前验证、过滤并去重&quot;
+  },
+  {
+    &quot;path&quot;: &quot;functions/customer-projection/knowledge-customer-projection.js&quot;,
+    &quot;status&quot;: &quot;PASS_LOCAL&quot;,
+    &quot;recommendation&quot;: &quot;HUMAN_ACCEPT_RECOMMENDED&quot;,
+    &quot;before&quot;: {
+      &quot;path&quot;: &quot;functions/customer-projection/knowledge-customer-projection.js&quot;,
+      &quot;recommendation&quot;: &quot;BLOCKED_RUNTIME_BEHAVIOR&quot;,
+      &quot;function&quot;: &quot;projectKnowledgeAnswerForCustomer / authoritySources / atlasSources&quot;,
+      &quot;behavior&quot;: &quot;Retains sourceEvidence even with NO_SUPPORTED_ANSWER; returns governance lineage, internal source IDs/hashes/version fields, raw unknown strings and source-class labels. Atlas ZH copy contains Registry evidence. Synthetic local path in excerpt survives.&quot;,
+      &quot;consequence&quot;: &quot;Denied metadata and internal wording reach the response; provenance/body residue can be displayed.&quot;,
+      &quot;remediation&quot;: &quot;Explicit public allowlist; suppress denied/unusable sources including no-supported-answer residue; sanitize client-facing unknown/error text and localize Book/Article/Figure/Concept/World/external/no-source labels without changing canonical titles.&quot;,
+      &quot;line&quot;: 7,
+      &quot;sourceChangesPerformed&quot;: false
+    },
+    &quot;after&quot;: &quot;显式公开 allowlist；不输出内部 lineage，未支持的来源列表为空&quot;
+  },
+  {
+    &quot;path&quot;: &quot;functions/knowledge-runtime/manuscript-source-runtime.js&quot;,
+    &quot;status&quot;: &quot;PASS_LOCAL&quot;,
+    &quot;recommendation&quot;: &quot;HUMAN_ACCEPT_RECOMMENDED&quot;,
+    &quot;before&quot;: {
+      &quot;path&quot;: &quot;functions/knowledge-runtime/manuscript-source-runtime.js&quot;,
+      &quot;recommendation&quot;: &quot;SAFE_BUT_REQUIRES_SMALL_REMEDIATION&quot;,
+      &quot;function&quot;: &quot;loadR2RetrievalCorpus / searchManuscriptCorpus&quot;,
+      &quot;behavior&quot;: &quot;Verifies corpus byte/source identity but assumes upstream admission; standalone loader/search does not consult current closure and can materialize a denied stale candidate.&quot;,
+      &quot;consequence&quot;: &quot;Normal R4 API stays gated; downstream reuse is not independently fail-closed. No remote client injection exploit is demonstrated.&quot;,
+      &quot;remediation&quot;: &quot;Require server-verified admitted scopes/provenance for whole-chapter materialization and search, using existing R4 owner/gate; preserve identity checks and bounded public knowledge units.&quot;,
+      &quot;line&quot;: 365,
+      &quot;sourceChangesPerformed&quot;: false
+    },
+    &quot;after&quot;: &quot;当前准入每次重新判断；缓存不持有准入授权&quot;
+  }
+]</pre></section><section><h2>实际 stale-object 完整路径与输出</h2><pre>[
+  {
+    &quot;case&quot;: &quot;BOOK-1 complete five-file stale-chain zh-Hans&quot;,
+    &quot;question&quot;: &quot;石英证据边界&quot;,
+    &quot;runtimeRecords&quot;: 0,
+    &quot;groundedSources&quot;: 0,
+    &quot;answer&quot;: &quot;目前没有足够的来源资料来回答这个问题。&quot;,
+    &quot;sourceLabels&quot;: []
+  },
+  {
+    &quot;case&quot;: &quot;BOOK-5 complete five-file stale-chain zh-Hans&quot;,
+    &quot;question&quot;: &quot;石英证据边界&quot;,
+    &quot;runtimeRecords&quot;: 0,
+    &quot;groundedSources&quot;: 0,
+    &quot;answer&quot;: &quot;目前没有足够的来源资料来回答这个问题。&quot;,
+    &quot;sourceLabels&quot;: []
+  },
+  {
+    &quot;case&quot;: &quot;BOOK-1 complete five-file stale-chain en&quot;,
+    &quot;question&quot;: &quot;quartz evidence boundary&quot;,
+    &quot;runtimeRecords&quot;: 0,
+    &quot;groundedSources&quot;: 0,
+    &quot;answer&quot;: &quot;There is not enough source material to answer this question.&quot;,
+    &quot;sourceLabels&quot;: []
+  },
+  {
+    &quot;case&quot;: &quot;BOOK-5 complete five-file stale-chain en&quot;,
+    &quot;question&quot;: &quot;quartz evidence boundary&quot;,
+    &quot;runtimeRecords&quot;: 0,
+    &quot;groundedSources&quot;: 0,
+    &quot;answer&quot;: &quot;There is not enough source material to answer this question.&quot;,
+    &quot;sourceLabels&quot;: []
+  }
+]</pre></section><section><h2>公开 allowlist、空支持及缓存语义</h2><pre>{
+  &quot;publicSchema&quot;: {
+    &quot;root&quot;: [
+      &quot;surface&quot;,
+      &quot;locale&quot;,
+      &quot;state&quot;,
+      &quot;question&quot;,
+      &quot;answer&quot;,
+      &quot;basedOn&quot;,
+      &quot;limits&quot;,
+      &quot;relatedKnowledge&quot;,
+      &quot;possibleNextStep&quot;,
+      &quot;currentFacts&quot;,
+      &quot;handoff&quot;,
+      &quot;atlas&quot;
+    ],
+    &quot;answer&quot;: [
+      &quot;text&quot;,
+      &quot;supporting&quot;,
+      &quot;structuredAnswer (only supported; explicit sanitized fields)&quot;
+    ],
+    &quot;source&quot;: [
+      &quot;label&quot;,
+      &quot;excerpt&quot;,
+      &quot;href&quot;,
+      &quot;sectionCode (opaque public citation reference)&quot;,
+      &quot;pageRange (numeric)&quot;,
+      &quot;supportRange (numeric offsets)&quot;
+    ],
+    &quot;internalExcluded&quot;: [
+      &quot;governance&quot;,
+      &quot;registry version&quot;,
+      &quot;source version/hash&quot;,
+      &quot;raw internal ID&quot;,
+      &quot;admission/qualification state&quot;,
+      &quot;coverage metadata&quot;,
+      &quot;stack/error internals&quot;
+    ],
+    &quot;atlas&quot;: [
+      &quot;deepLink&quot;,
+      &quot;evidenceCount (validated Atlas sources only)&quot;
+    ],
+    &quot;facts&quot;: [
+      &quot;state&quot;,
+      &quot;evidence: claim/source/sourceUrl&quot;
+    ],
+    &quot;handoff&quot;: [
+      &quot;available&quot;,
+      &quot;question&quot;,
+      &quot;externalEvidence: statement/sourceUrl&quot;,
+      &quot;unknown (empty)&quot;
+    ]
+  },
+  &quot;noSupport&quot;: {
+    &quot;state&quot;: &quot;SOURCE_INSUFFICIENT&quot;,
+    &quot;sources&quot;: [],
+    &quot;citations&quot;: [],
+    &quot;internalReasonHidden&quot;: true,
+    &quot;en&quot;: &quot;There is not enough source material to answer this question.&quot;,
+    &quot;zh&quot;: &quot;目前没有足够的来源资料来回答这个问题。&quot;
+  },
+  &quot;cache&quot;: &quot;Raw cache never authorizes use: current eligibility checked before private read; prepared derived cache rechecks source + record admission each search. State transition to denial suppresses output.&quot;,
+  &quot;dedupe&quot;: &quot;Manuscript: type/book/section; others: type/public URL or identity; filter first, stable key/body ordering, first unique only.&quot;
+}</pre></section><section><h2>双语正例、类别名称及保留的 Atlas / structured answer</h2><pre>[
+  {
+    &quot;type&quot;: &quot;PUBLISHED_CANONICAL_ARTICLE&quot;,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;view&quot;: {
+      &quot;surface&quot;: &quot;ASK&quot;,
+      &quot;locale&quot;: &quot;zh-Hans&quot;,
+      &quot;state&quot;: &quot;ANSWERED&quot;,
+      &quot;question&quot;: null,
+      &quot;answer&quot;: {
+        &quot;text&quot;: &quot;观察资料支持有边界的理解。&quot;,
+        &quot;supporting&quot;: []
+      },
+      &quot;basedOn&quot;: {
+        &quot;sources&quot;: [
+          {
+            &quot;label&quot;: &quot;文章&quot;,
+            &quot;excerpt&quot;: &quot;观察资料支持有边界的理解。&quot;,
+            &quot;href&quot;: &quot;/knowledge/&quot;
+          }
+        ],
+        &quot;statement&quot;: &quot;本次回答使用的来源。&quot;
+      },
+      &quot;limits&quot;: {
+        &quot;items&quot;: []
+      },
+      &quot;relatedKnowledge&quot;: [],
+      &quot;possibleNextStep&quot;: {
+        &quot;kind&quot;: &quot;OBSERVE&quot;,
+        &quot;label&quot;: &quot;浏览现有资料&quot;
+      },
+      &quot;currentFacts&quot;: {
+        &quot;state&quot;: &quot;NOT_USED&quot;,
+        &quot;evidence&quot;: []
+      },
+      &quot;handoff&quot;: {
+        &quot;available&quot;: true,
+        &quot;question&quot;: null,
+        &quot;externalEvidence&quot;: [],
+        &quot;unknown&quot;: []
+      },
+      &quot;atlas&quot;: null
+    }
+  },
+  {
+    &quot;type&quot;: &quot;PUBLISHED_CANONICAL_ARTICLE&quot;,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;view&quot;: {
+      &quot;surface&quot;: &quot;ASK&quot;,
+      &quot;locale&quot;: &quot;en&quot;,
+      &quot;state&quot;: &quot;ANSWERED&quot;,
+      &quot;question&quot;: null,
+      &quot;answer&quot;: {
+        &quot;text&quot;: &quot;Observation supports a bounded explanation.&quot;,
+        &quot;supporting&quot;: []
+      },
+      &quot;basedOn&quot;: {
+        &quot;sources&quot;: [
+          {
+            &quot;label&quot;: &quot;Article&quot;,
+            &quot;excerpt&quot;: &quot;Observation supports a bounded explanation.&quot;,
+            &quot;href&quot;: &quot;/knowledge/&quot;
+          }
+        ],
+        &quot;statement&quot;: &quot;Sources used for this answer.&quot;
+      },
+      &quot;limits&quot;: {
+        &quot;items&quot;: []
+      },
+      &quot;relatedKnowledge&quot;: [],
+      &quot;possibleNextStep&quot;: {
+        &quot;kind&quot;: &quot;OBSERVE&quot;,
+        &quot;label&quot;: &quot;Explore available material&quot;
+      },
+      &quot;currentFacts&quot;: {
+        &quot;state&quot;: &quot;NOT_USED&quot;,
+        &quot;evidence&quot;: []
+      },
+      &quot;handoff&quot;: {
+        &quot;available&quot;: true,
+        &quot;question&quot;: null,
+        &quot;externalEvidence&quot;: [],
+        &quot;unknown&quot;: []
+      },
+      &quot;atlas&quot;: null
+    }
+  },
+  {
+    &quot;type&quot;: &quot;REGISTERED_FIGURE_SEMANTICS&quot;,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;view&quot;: {
+      &quot;surface&quot;: &quot;ASK&quot;,
+      &quot;locale&quot;: &quot;zh-Hans&quot;,
+      &quot;state&quot;: &quot;ANSWERED&quot;,
+      &quot;question&quot;: null,
+      &quot;answer&quot;: {
+        &quot;text&quot;: &quot;观察资料支持有边界的理解。&quot;,
+        &quot;supporting&quot;: []
+      },
+      &quot;basedOn&quot;: {
+        &quot;sources&quot;: [
+          {
+            &quot;label&quot;: &quot;图示&quot;,
+            &quot;excerpt&quot;: &quot;观察资料支持有边界的理解。&quot;,
+            &quot;href&quot;: &quot;/knowledge/&quot;
+          }
+        ],
+        &quot;statement&quot;: &quot;本次回答使用的来源。&quot;
+      },
+      &quot;limits&quot;: {
+        &quot;items&quot;: []
+      },
+      &quot;relatedKnowledge&quot;: [],
+      &quot;possibleNextStep&quot;: {
+        &quot;kind&quot;: &quot;OBSERVE&quot;,
+        &quot;label&quot;: &quot;浏览现有资料&quot;
+      },
+      &quot;currentFacts&quot;: {
+        &quot;state&quot;: &quot;NOT_USED&quot;,
+        &quot;evidence&quot;: []
+      },
+      &quot;handoff&quot;: {
+        &quot;available&quot;: true,
+        &quot;question&quot;: null,
+        &quot;externalEvidence&quot;: [],
+        &quot;unknown&quot;: []
+      },
+      &quot;atlas&quot;: null
+    }
+  },
+  {
+    &quot;type&quot;: &quot;REGISTERED_FIGURE_SEMANTICS&quot;,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;view&quot;: {
+      &quot;surface&quot;: &quot;ASK&quot;,
+      &quot;locale&quot;: &quot;en&quot;,
+      &quot;state&quot;: &quot;ANSWERED&quot;,
+      &quot;question&quot;: null,
+      &quot;answer&quot;: {
+        &quot;text&quot;: &quot;Observation supports a bounded explanation.&quot;,
+        &quot;supporting&quot;: []
+      },
+      &quot;basedOn&quot;: {
+        &quot;sources&quot;: [
+          {
+            &quot;label&quot;: &quot;Figure&quot;,
+            &quot;excerpt&quot;: &quot;Observation supports a bounded explanation.&quot;,
+            &quot;href&quot;: &quot;/knowledge/&quot;
+          }
+        ],
+        &quot;statement&quot;: &quot;Sources used for this answer.&quot;
+      },
+      &quot;limits&quot;: {
+        &quot;items&quot;: []
+      },
+      &quot;relatedKnowledge&quot;: [],
+      &quot;possibleNextStep&quot;: {
+        &quot;kind&quot;: &quot;OBSERVE&quot;,
+        &quot;label&quot;: &quot;Explore available material&quot;
+      },
+      &quot;currentFacts&quot;: {
+        &quot;state&quot;: &quot;NOT_USED&quot;,
+        &quot;evidence&quot;: []
+      },
+      &quot;handoff&quot;: {
+        &quot;available&quot;: true,
+        &quot;question&quot;: null,
+        &quot;externalEvidence&quot;: [],
+        &quot;unknown&quot;: []
+      },
+      &quot;atlas&quot;: null
+    }
+  },
+  {
+    &quot;type&quot;: &quot;REGISTERED_CONCEPT&quot;,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;view&quot;: {
+      &quot;surface&quot;: &quot;ASK&quot;,
+      &quot;locale&quot;: &quot;zh-Hans&quot;,
+      &quot;state&quot;: &quot;ANSWERED&quot;,
+      &quot;question&quot;: null,
+      &quot;answer&quot;: {
+        &quot;text&quot;: &quot;观察资料支持有边界的理解。&quot;,
+        &quot;supporting&quot;: []
+      },
+      &quot;basedOn&quot;: {
+        &quot;sources&quot;: [
+          {
+            &quot;label&quot;: &quot;概念&quot;,
+            &quot;excerpt&quot;: &quot;观察资料支持有边界的理解。&quot;,
+            &quot;href&quot;: &quot;/knowledge/&quot;
+          }
+        ],
+        &quot;statement&quot;: &quot;本次回答使用的来源。&quot;
+      },
+      &quot;limits&quot;: {
+        &quot;items&quot;: []
+      },
+      &quot;relatedKnowledge&quot;: [],
+      &quot;possibleNextStep&quot;: {
+        &quot;kind&quot;: &quot;OBSERVE&quot;,
+        &quot;label&quot;: &quot;浏览现有资料&quot;
+      },
+      &quot;currentFacts&quot;: {
+        &quot;state&quot;: &quot;NOT_USED&quot;,
+        &quot;evidence&quot;: []
+      },
+      &quot;handoff&quot;: {
+        &quot;available&quot;: true,
+        &quot;question&quot;: null,
+        &quot;externalEvidence&quot;: [],
+        &quot;unknown&quot;: []
+      },
+      &quot;atlas&quot;: null
+    }
+  },
+  {
+    &quot;type&quot;: &quot;REGISTERED_CONCEPT&quot;,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;view&quot;: {
+      &quot;surface&quot;: &quot;ASK&quot;,
+      &quot;locale&quot;: &quot;en&quot;,
+      &quot;state&quot;: &quot;ANSWERED&quot;,
+      &quot;question&quot;: null,
+      &quot;answer&quot;: {
+        &quot;text&quot;: &quot;Observation supports a bounded explanation.&quot;,
+        &quot;supporting&quot;: []
+      },
+      &quot;basedOn&quot;: {
+        &quot;sources&quot;: [
+          {
+            &quot;label&quot;: &quot;Concept&quot;,
+            &quot;excerpt&quot;: &quot;Observation supports a bounded explanation.&quot;,
+            &quot;href&quot;: &quot;/knowledge/&quot;
+          }
+        ],
+        &quot;statement&quot;: &quot;Sources used for this answer.&quot;
+      },
+      &quot;limits&quot;: {
+        &quot;items&quot;: []
+      },
+      &quot;relatedKnowledge&quot;: [],
+      &quot;possibleNextStep&quot;: {
+        &quot;kind&quot;: &quot;OBSERVE&quot;,
+        &quot;label&quot;: &quot;Explore available material&quot;
+      },
+      &quot;currentFacts&quot;: {
+        &quot;state&quot;: &quot;NOT_USED&quot;,
+        &quot;evidence&quot;: []
+      },
+      &quot;handoff&quot;: {
+        &quot;available&quot;: true,
+        &quot;question&quot;: null,
+        &quot;externalEvidence&quot;: [],
+        &quot;unknown&quot;: []
+      },
+      &quot;atlas&quot;: null
+    }
+  },
+  {
+    &quot;type&quot;: &quot;PUBLIC_CONTEXT&quot;,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;view&quot;: {
+      &quot;surface&quot;: &quot;ASK&quot;,
+      &quot;locale&quot;: &quot;zh-Hans&quot;,
+      &quot;state&quot;: &quot;ANSWERED&quot;,
+      &quot;question&quot;: null,
+      &quot;answer&quot;: {
+        &quot;text&quot;: &quot;观察资料支持有边界的理解。&quot;,
+        &quot;supporting&quot;: []
+      },
+      &quot;basedOn&quot;: {
+        &quot;sources&quot;: [
+          {
+            &quot;label&quot;: &quot;世界参考&quot;,
+            &quot;excerpt&quot;: &quot;观察资料支持有边界的理解。&quot;,
+            &quot;href&quot;: &quot;/knowledge/&quot;
+          }
+        ],
+        &quot;statement&quot;: &quot;本次回答使用的来源。&quot;
+      },
+      &quot;limits&quot;: {
+        &quot;items&quot;: []
+      },
+      &quot;relatedKnowledge&quot;: [],
+      &quot;possibleNextStep&quot;: {
+        &quot;kind&quot;: &quot;OBSERVE&quot;,
+        &quot;label&quot;: &quot;浏览现有资料&quot;
+      },
+      &quot;currentFacts&quot;: {
+        &quot;state&quot;: &quot;NOT_USED&quot;,
+        &quot;evidence&quot;: []
+      },
+      &quot;handoff&quot;: {
+        &quot;available&quot;: true,
+        &quot;question&quot;: null,
+        &quot;externalEvidence&quot;: [],
+        &quot;unknown&quot;: []
+      },
+      &quot;atlas&quot;: null
+    }
+  },
+  {
+    &quot;type&quot;: &quot;PUBLIC_CONTEXT&quot;,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;view&quot;: {
+      &quot;surface&quot;: &quot;ASK&quot;,
+      &quot;locale&quot;: &quot;en&quot;,
+      &quot;state&quot;: &quot;ANSWERED&quot;,
+      &quot;question&quot;: null,
+      &quot;answer&quot;: {
+        &quot;text&quot;: &quot;Observation supports a bounded explanation.&quot;,
+        &quot;supporting&quot;: []
+      },
+      &quot;basedOn&quot;: {
+        &quot;sources&quot;: [
+          {
+            &quot;label&quot;: &quot;World context&quot;,
+            &quot;excerpt&quot;: &quot;Observation supports a bounded explanation.&quot;,
+            &quot;href&quot;: &quot;/knowledge/&quot;
+          }
+        ],
+        &quot;statement&quot;: &quot;Sources used for this answer.&quot;
+      },
+      &quot;limits&quot;: {
+        &quot;items&quot;: []
+      },
+      &quot;relatedKnowledge&quot;: [],
+      &quot;possibleNextStep&quot;: {
+        &quot;kind&quot;: &quot;OBSERVE&quot;,
+        &quot;label&quot;: &quot;Explore available material&quot;
+      },
+      &quot;currentFacts&quot;: {
+        &quot;state&quot;: &quot;NOT_USED&quot;,
+        &quot;evidence&quot;: []
+      },
+      &quot;handoff&quot;: {
+        &quot;available&quot;: true,
+        &quot;question&quot;: null,
+        &quot;externalEvidence&quot;: [],
+        &quot;unknown&quot;: []
+      },
+      &quot;atlas&quot;: null
+    }
+  },
+  {
+    &quot;type&quot;: &quot;EXTERNAL_AUTHORITY&quot;,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;view&quot;: {
+      &quot;surface&quot;: &quot;ASK&quot;,
+      &quot;locale&quot;: &quot;zh-Hans&quot;,
+      &quot;state&quot;: &quot;ANSWERED&quot;,
+      &quot;question&quot;: null,
+      &quot;answer&quot;: {
+        &quot;text&quot;: &quot;观察资料支持有边界的理解。&quot;,
+        &quot;supporting&quot;: []
+      },
+      &quot;basedOn&quot;: {
+        &quot;sources&quot;: [
+          {
+            &quot;label&quot;: &quot;外部来源&quot;,
+            &quot;excerpt&quot;: &quot;观察资料支持有边界的理解。&quot;,
+            &quot;href&quot;: &quot;/knowledge/&quot;
+          }
+        ],
+        &quot;statement&quot;: &quot;本次回答使用的来源。&quot;
+      },
+      &quot;limits&quot;: {
+        &quot;items&quot;: []
+      },
+      &quot;relatedKnowledge&quot;: [],
+      &quot;possibleNextStep&quot;: {
+        &quot;kind&quot;: &quot;OBSERVE&quot;,
+        &quot;label&quot;: &quot;浏览现有资料&quot;
+      },
+      &quot;currentFacts&quot;: {
+        &quot;state&quot;: &quot;NOT_USED&quot;,
+        &quot;evidence&quot;: []
+      },
+      &quot;handoff&quot;: {
+        &quot;available&quot;: true,
+        &quot;question&quot;: null,
+        &quot;externalEvidence&quot;: [],
+        &quot;unknown&quot;: []
+      },
+      &quot;atlas&quot;: null
+    }
+  },
+  {
+    &quot;type&quot;: &quot;EXTERNAL_AUTHORITY&quot;,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;view&quot;: {
+      &quot;surface&quot;: &quot;ASK&quot;,
+      &quot;locale&quot;: &quot;en&quot;,
+      &quot;state&quot;: &quot;ANSWERED&quot;,
+      &quot;question&quot;: null,
+      &quot;answer&quot;: {
+        &quot;text&quot;: &quot;Observation supports a bounded explanation.&quot;,
+        &quot;supporting&quot;: []
+      },
+      &quot;basedOn&quot;: {
+        &quot;sources&quot;: [
+          {
+            &quot;label&quot;: &quot;External source&quot;,
+            &quot;excerpt&quot;: &quot;Observation supports a bounded explanation.&quot;,
+            &quot;href&quot;: &quot;/knowledge/&quot;
+          }
+        ],
+        &quot;statement&quot;: &quot;Sources used for this answer.&quot;
+      },
+      &quot;limits&quot;: {
+        &quot;items&quot;: []
+      },
+      &quot;relatedKnowledge&quot;: [],
+      &quot;possibleNextStep&quot;: {
+        &quot;kind&quot;: &quot;OBSERVE&quot;,
+        &quot;label&quot;: &quot;Explore available material&quot;
+      },
+      &quot;currentFacts&quot;: {
+        &quot;state&quot;: &quot;NOT_USED&quot;,
+        &quot;evidence&quot;: []
+      },
+      &quot;handoff&quot;: {
+        &quot;available&quot;: true,
+        &quot;question&quot;: null,
+        &quot;externalEvidence&quot;: [],
+        &quot;unknown&quot;: []
+      },
+      &quot;atlas&quot;: null
+    }
+  },
+  {
+    &quot;type&quot;: &quot;COMPLETED_MANUSCRIPT&quot;,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;view&quot;: {
+      &quot;surface&quot;: &quot;ASK&quot;,
+      &quot;locale&quot;: &quot;zh-Hans&quot;,
+      &quot;state&quot;: &quot;ANSWERED&quot;,
+      &quot;question&quot;: null,
+      &quot;answer&quot;: {
+        &quot;text&quot;: &quot;观察资料支持有边界的理解。&quot;,
+        &quot;supporting&quot;: []
+      },
+      &quot;basedOn&quot;: {
+        &quot;sources&quot;: [
+          {
+            &quot;label&quot;: &quot;参考手稿&quot;,
+            &quot;excerpt&quot;: &quot;观察资料支持有边界的理解。&quot;,
+            &quot;href&quot;: &quot;/knowledge/&quot;,
+            &quot;sectionCode&quot;: &quot;ref-8ea69235&quot;,
+            &quot;pageRange&quot;: null,
+            &quot;supportRange&quot;: null
+          }
+        ],
+        &quot;statement&quot;: &quot;本次回答使用的来源。&quot;
+      },
+      &quot;limits&quot;: {
+        &quot;items&quot;: []
+      },
+      &quot;relatedKnowledge&quot;: [],
+      &quot;possibleNextStep&quot;: {
+        &quot;kind&quot;: &quot;OBSERVE&quot;,
+        &quot;label&quot;: &quot;浏览现有资料&quot;
+      },
+      &quot;currentFacts&quot;: {
+        &quot;state&quot;: &quot;NOT_USED&quot;,
+        &quot;evidence&quot;: []
+      },
+      &quot;handoff&quot;: {
+        &quot;available&quot;: true,
+        &quot;question&quot;: null,
+        &quot;externalEvidence&quot;: [],
+        &quot;unknown&quot;: []
+      },
+      &quot;atlas&quot;: null
+    }
+  },
+  {
+    &quot;type&quot;: &quot;COMPLETED_MANUSCRIPT&quot;,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;view&quot;: {
+      &quot;surface&quot;: &quot;ASK&quot;,
+      &quot;locale&quot;: &quot;en&quot;,
+      &quot;state&quot;: &quot;ANSWERED&quot;,
+      &quot;question&quot;: null,
+      &quot;answer&quot;: {
+        &quot;text&quot;: &quot;Observation supports a bounded explanation.&quot;,
+        &quot;supporting&quot;: []
+      },
+      &quot;basedOn&quot;: {
+        &quot;sources&quot;: [
+          {
+            &quot;label&quot;: &quot;Manuscript&quot;,
+            &quot;excerpt&quot;: &quot;Observation supports a bounded explanation.&quot;,
+            &quot;href&quot;: &quot;/knowledge/&quot;,
+            &quot;sectionCode&quot;: &quot;ref-8ea69235&quot;,
+            &quot;pageRange&quot;: null,
+            &quot;supportRange&quot;: null
+          }
+        ],
+        &quot;statement&quot;: &quot;Sources used for this answer.&quot;
+      },
+      &quot;limits&quot;: {
+        &quot;items&quot;: []
+      },
+      &quot;relatedKnowledge&quot;: [],
+      &quot;possibleNextStep&quot;: {
+        &quot;kind&quot;: &quot;OBSERVE&quot;,
+        &quot;label&quot;: &quot;Explore available material&quot;
+      },
+      &quot;currentFacts&quot;: {
+        &quot;state&quot;: &quot;NOT_USED&quot;,
+        &quot;evidence&quot;: []
+      },
+      &quot;handoff&quot;: {
+        &quot;available&quot;: true,
+        &quot;question&quot;: null,
+        &quot;externalEvidence&quot;: [],
+        &quot;unknown&quot;: []
+      },
+      &quot;atlas&quot;: null
+    }
+  },
+  {
+    &quot;type&quot;: &quot;validated-atlas-structured&quot;,
+    &quot;locale&quot;: &quot;en&quot;,
+    &quot;view&quot;: {
+      &quot;surface&quot;: &quot;ASK&quot;,
+      &quot;locale&quot;: &quot;en&quot;,
+      &quot;state&quot;: &quot;ANSWERED&quot;,
+      &quot;question&quot;: null,
+      &quot;answer&quot;: {
+        &quot;text&quot;: &quot;Observation supports a bounded explanation.&quot;,
+        &quot;supporting&quot;: [],
+        &quot;structuredAnswer&quot;: {
+          &quot;mechanismOrState&quot;: &quot;Observation supports a bounded explanation.&quot;,
+          &quot;conditions&quot;: [
+            &quot;Observation supports a bounded explanation.&quot;
+          ],
+          &quot;relatedFactors&quot;: [
+            &quot;Observation supports a bounded explanation.&quot;
+          ],
+          &quot;possibleTransition&quot;: null,
+          &quot;boundaryUnknown&quot;: &quot;Observation supports a bounded explanation.&quot;,
+          &quot;exploreInBook&quot;: &quot;/books/reality-differentiation/&quot;
+        }
+      },
+      &quot;basedOn&quot;: {
+        &quot;sources&quot;: [
+          {
+            &quot;label&quot;: &quot;World context&quot;,
+            &quot;excerpt&quot;: &quot;Observation supports a bounded explanation.&quot;,
+            &quot;href&quot;: &quot;/books/reality-differentiation/&quot;
+          }
+        ],
+        &quot;statement&quot;: &quot;Sources used for this answer.&quot;
+      },
+      &quot;limits&quot;: {
+        &quot;items&quot;: []
+      },
+      &quot;relatedKnowledge&quot;: [
+        {
+          &quot;title&quot;: &quot;Explore Civilization Atlas&quot;,
+          &quot;description&quot;: null,
+          &quot;href&quot;: &quot;/books/reality-differentiation/?atlas=cases&quot;
+        }
+      ],
+      &quot;possibleNextStep&quot;: {
+        &quot;kind&quot;: &quot;RELATED_KNOWLEDGE&quot;,
+        &quot;label&quot;: &quot;Explore available material&quot;
+      },
+      &quot;currentFacts&quot;: {
+        &quot;state&quot;: &quot;NOT_USED&quot;,
+        &quot;evidence&quot;: []
+      },
+      &quot;handoff&quot;: {
+        &quot;available&quot;: true,
+        &quot;question&quot;: null,
+        &quot;externalEvidence&quot;: [],
+        &quot;unknown&quot;: []
+      },
+      &quot;atlas&quot;: {
+        &quot;deepLink&quot;: &quot;/books/reality-differentiation/?atlas=cases&quot;,
+        &quot;evidenceCount&quot;: 1
+      }
+    }
+  },
+  {
+    &quot;type&quot;: &quot;validated-atlas-structured&quot;,
+    &quot;locale&quot;: &quot;zh-Hans&quot;,
+    &quot;view&quot;: {
+      &quot;surface&quot;: &quot;ASK&quot;,
+      &quot;locale&quot;: &quot;zh-Hans&quot;,
+      &quot;state&quot;: &quot;ANSWERED&quot;,
+      &quot;question&quot;: null,
+      &quot;answer&quot;: {
+        &quot;text&quot;: &quot;观察资料支持有边界的理解。&quot;,
+        &quot;supporting&quot;: [],
+        &quot;structuredAnswer&quot;: {
+          &quot;mechanismOrState&quot;: &quot;观察资料支持有边界的理解。&quot;,
+          &quot;conditions&quot;: [
+            &quot;观察资料支持有边界的理解。&quot;
+          ],
+          &quot;relatedFactors&quot;: [
+            &quot;观察资料支持有边界的理解。&quot;
+          ],
+          &quot;possibleTransition&quot;: null,
+          &quot;boundaryUnknown&quot;: &quot;观察资料支持有边界的理解。&quot;,
+          &quot;exploreInBook&quot;: &quot;/books/reality-differentiation/&quot;
+        }
+      },
+      &quot;basedOn&quot;: {
+        &quot;sources&quot;: [
+          {
+            &quot;label&quot;: &quot;世界参考&quot;,
+            &quot;excerpt&quot;: &quot;观察资料支持有边界的理解。&quot;,
+            &quot;href&quot;: &quot;/books/reality-differentiation/&quot;
+          }
+        ],
+        &quot;statement&quot;: &quot;本次回答使用的来源。&quot;
+      },
+      &quot;limits&quot;: {
+        &quot;items&quot;: []
+      },
+      &quot;relatedKnowledge&quot;: [
+        {
+          &quot;title&quot;: &quot;浏览文明图谱&quot;,
+          &quot;description&quot;: null,
+          &quot;href&quot;: &quot;/books/reality-differentiation/?atlas=cases&quot;
+        }
+      ],
+      &quot;possibleNextStep&quot;: {
+        &quot;kind&quot;: &quot;RELATED_KNOWLEDGE&quot;,
+        &quot;label&quot;: &quot;浏览现有资料&quot;
+      },
+      &quot;currentFacts&quot;: {
+        &quot;state&quot;: &quot;NOT_USED&quot;,
+        &quot;evidence&quot;: []
+      },
+      &quot;handoff&quot;: {
+        &quot;available&quot;: true,
+        &quot;question&quot;: null,
+        &quot;externalEvidence&quot;: [],
+        &quot;unknown&quot;: []
+      },
+      &quot;atlas&quot;: {
+        &quot;deepLink&quot;: &quot;/books/reality-differentiation/?atlas=cases&quot;,
+        &quot;evidenceCount&quot;: 1
+      }
+    }
+  }
+]</pre></section><section><h2>HTTP malformed 负例</h2><pre>[
+  {
+    &quot;body&quot;: &quot;{&quot;,
+    &quot;status&quot;: 400,
+    &quot;output&quot;: {
+      &quot;ok&quot;: false,
+      &quot;error&quot;: &quot;INVALID_JSON&quot;
+    }
+  },
+  {
+    &quot;body&quot;: &quot;null&quot;,
+    &quot;status&quot;: 400,
+    &quot;output&quot;: {
+      &quot;ok&quot;: false,
+      &quot;error&quot;: &quot;ASK_QUESTION_REQUIRED&quot;
+    }
+  },
+  {
+    &quot;body&quot;: &quot;[]&quot;,
+    &quot;status&quot;: 400,
+    &quot;output&quot;: {
+      &quot;ok&quot;: false,
+      &quot;error&quot;: &quot;ASK_QUESTION_REQUIRED&quot;
+    }
+  },
+  {
+    &quot;body&quot;: &quot;{}&quot;,
+    &quot;status&quot;: 400,
+    &quot;output&quot;: {
+      &quot;ok&quot;: false,
+      &quot;error&quot;: &quot;ASK_QUESTION_REQUIRED&quot;
+    }
+  },
+  {
+    &quot;body&quot;: &quot;\&quot;text\&quot;&quot;,
+    &quot;status&quot;: 400,
+    &quot;output&quot;: {
+      &quot;ok&quot;: false,
+      &quot;error&quot;: &quot;ASK_QUESTION_REQUIRED&quot;
+    }
+  },
+  {
+    &quot;body&quot;: &quot;123&quot;,
+    &quot;status&quot;: 400,
+    &quot;output&quot;: {
+      &quot;ok&quot;: false,
+      &quot;error&quot;: &quot;ASK_QUESTION_REQUIRED&quot;
+    }
+  },
+  {
+    &quot;body&quot;: &quot;{\&quot;locale\&quot;:\&quot;invalid\&quot;,\&quot;contexts\&quot;:\&quot;not-an-array\&quot;}&quot;,
+    &quot;status&quot;: 400,
+    &quot;output&quot;: {
+      &quot;ok&quot;: false,
+      &quot;error&quot;: &quot;ASK_QUESTION_REQUIRED&quot;
+    }
+  },
+  {
+    &quot;body&quot;: &quot;{\&quot;question\&quot;:\&quot;\&quot;}&quot;,
+    &quot;status&quot;: 400,
+    &quot;output&quot;: {
+      &quot;ok&quot;: false,
+      &quot;error&quot;: &quot;ASK_QUESTION_REQUIRED&quot;
+    }
+  }
+]</pre></section><section><h2>27 个历史内部语言位置：逐项分类与处理</h2><pre>[
+  {
+    &quot;position&quot;: 1,
+    &quot;path&quot;: &quot;.basedOn.sources[0].sourceId&quot;,
+    &quot;value&quot;: &quot;MANUSCRIPT:B1V3-P1-S006&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Raw ID omitted; bounded citation gets opaque public ref&quot;
+  },
+  {
+    &quot;position&quot;: 2,
+    &quot;path&quot;: &quot;.limits.items[0]&quot;,
+    &quot;value&quot;: &quot;NOT_ACTIVATED registry QA ledger runtime&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Internal prose omitted or replaced by bounded locale-correct message&quot;
+  },
+  {
+    &quot;position&quot;: 3,
+    &quot;path&quot;: &quot;.handoff.unknown[0]&quot;,
+    &quot;value&quot;: &quot;NOT_ACTIVATED registry QA ledger runtime&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Internal prose omitted or replaced by bounded locale-correct message&quot;
+  },
+  {
+    &quot;position&quot;: 4,
+    &quot;path&quot;: &quot;.governance.sourceAuthorities[0]&quot;,
+    &quot;value&quot;: &quot;CKA&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Entire internal governance field omitted&quot;
+  },
+  {
+    &quot;position&quot;: 5,
+    &quot;path&quot;: &quot;.governance.sourceAuthorities[1]&quot;,
+    &quot;value&quot;: &quot;KAP&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Entire internal governance field omitted&quot;
+  },
+  {
+    &quot;position&quot;: 6,
+    &quot;path&quot;: &quot;.governance.sourceAuthorities[3]&quot;,
+    &quot;value&quot;: &quot;CURRENT_FACTS_GATEWAY&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Entire internal governance field omitted&quot;
+  },
+  {
+    &quot;position&quot;: 7,
+    &quot;case&quot;: &quot;no source en&quot;,
+    &quot;field&quot;: &quot;limits&quot;,
+    &quot;value&quot;: &quot;No additional limitation was supplied by the runtime.&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Internal prose omitted or replaced by bounded locale-correct message&quot;
+  },
+  {
+    &quot;position&quot;: 8,
+    &quot;case&quot;: &quot;PUBLISHED_CANONICAL_ARTICLE zh-Hans&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;PUBLISHED_CANONICAL_KNOWLEDGE&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 9,
+    &quot;case&quot;: &quot;PUBLISHED_CANONICAL_ARTICLE en&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;PUBLISHED_CANONICAL_KNOWLEDGE&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 10,
+    &quot;case&quot;: &quot;REGISTERED_FIGURE_SEMANTICS zh-Hans&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;GOVERNED_PUBLICATION_FIGURE_SEMANTICS&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 11,
+    &quot;case&quot;: &quot;REGISTERED_FIGURE_SEMANTICS en&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;GOVERNED_PUBLICATION_FIGURE_SEMANTICS&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 12,
+    &quot;case&quot;: &quot;CIVILIZATION_ATLAS_CASE zh-Hans&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;STRUCTURED_ATLAS_KNOWLEDGE&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 13,
+    &quot;case&quot;: &quot;CIVILIZATION_ATLAS_CASE en&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;STRUCTURED_ATLAS_KNOWLEDGE&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 14,
+    &quot;case&quot;: &quot;COMPLETED_MANUSCRIPT zh-Hans&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;REVIEWED_MANUSCRIPT_KNOWLEDGE&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 15,
+    &quot;case&quot;: &quot;COMPLETED_MANUSCRIPT en&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;REVIEWED_MANUSCRIPT_KNOWLEDGE&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 16,
+    &quot;case&quot;: &quot;BOOK-1 complete five-file stale-chain zh-Hans&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;REVIEWED_MANUSCRIPT_KNOWLEDGE&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 17,
+    &quot;case&quot;: &quot;BOOK-1 complete five-file stale-chain zh-Hans&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;REVIEWED_MANUSCRIPT_KNOWLEDGE&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 18,
+    &quot;case&quot;: &quot;BOOK-5 complete five-file stale-chain zh-Hans&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;REVIEWED_MANUSCRIPT_KNOWLEDGE&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 19,
+    &quot;case&quot;: &quot;BOOK-5 complete five-file stale-chain zh-Hans&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;REVIEWED_MANUSCRIPT_KNOWLEDGE&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 20,
+    &quot;case&quot;: &quot;BOOK-1 complete five-file stale-chain en&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;REVIEWED_MANUSCRIPT_KNOWLEDGE&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 21,
+    &quot;case&quot;: &quot;BOOK-1 complete five-file stale-chain en&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;REVIEWED_MANUSCRIPT_KNOWLEDGE&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 22,
+    &quot;case&quot;: &quot;BOOK-5 complete five-file stale-chain en&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;REVIEWED_MANUSCRIPT_KNOWLEDGE&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 23,
+    &quot;case&quot;: &quot;BOOK-5 complete five-file stale-chain en&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;REVIEWED_MANUSCRIPT_KNOWLEDGE&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 24,
+    &quot;case&quot;: &quot;Atlas zh-Hans&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;文明案例 Registry · 参考案例&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 25,
+    &quot;case&quot;: &quot;Atlas zh-Hans&quot;,
+    &quot;field&quot;: &quot;statement&quot;,
+    &quot;value&quot;: &quot;文明图谱 Registry evidence 会优先于更广泛的 PHI OS 知识显示；当前公共信息仍然分开。&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Internal prose omitted or replaced by bounded locale-correct message&quot;
+  },
+  {
+    &quot;position&quot;: 26,
+    &quot;case&quot;: &quot;Atlas en&quot;,
+    &quot;field&quot;: &quot;sourceLabels&quot;,
+    &quot;value&quot;: &quot;Civilization case registry · Reference case&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Validated source gets localized category label; denied source gets no citation&quot;
+  },
+  {
+    &quot;position&quot;: 27,
+    &quot;case&quot;: &quot;Atlas en&quot;,
+    &quot;field&quot;: &quot;statement&quot;,
+    &quot;value&quot;: &quot;Civilization Atlas registry evidence is shown before broader PHI OS knowledge; current public information remains separate.&quot;,
+    &quot;classification&quot;: &quot;B_CUSTOMER_REACHABLE_MUST_REMOVE&quot;,
+    &quot;origin&quot;: &quot;Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.&quot;,
+    &quot;currentCustomerOccurrences&quot;: 0,
+    &quot;evidence&quot;: &quot;R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.&quot;,
+    &quot;treatment&quot;: &quot;Internal prose omitted or replaced by bounded locale-correct message&quot;
+  }
+]</pre></section><section><h2>全部实际 QA 命令与退出码</h2><pre>[
+  {
+    &quot;command&quot;: &quot;node scripts/check-p9-r5-five-file-runtime.mjs&quot;,
+    &quot;exitCode&quot;: 0,
+    &quot;passed&quot;: 60,
+    &quot;total&quot;: 60
+  },
+  {
+    &quot;command&quot;: &quot;node scripts/check-p9-r5-expanded.mjs&quot;,
+    &quot;exitCode&quot;: 0,
+    &quot;passed&quot;: 230,
+    &quot;total&quot;: 230
+  },
+  {
+    &quot;command&quot;: &quot;node scripts/check-p9-r5-terminal-matrix.mjs&quot;,
+    &quot;exitCode&quot;: 0,
+    &quot;passed&quot;: 22,
+    &quot;total&quot;: 22
+  },
+  {
+    &quot;command&quot;: &quot;node scripts/check-p9-r5-r4-historical-assertions.mjs&quot;,
+    &quot;exitCode&quot;: 1,
+    &quot;passed&quot;: 20,
+    &quot;total&quot;: 22,
+    &quot;status&quot;: &quot;BASELINE_FAILURE&quot;,
+    &quot;reason&quot;: &quot;Two metadata-only citation fixtures are unsupported under the R5 contract. Original assertions and failure evidence retained.&quot;
+  },
+  {
+    &quot;command&quot;: &quot;node scripts/check-p9-r5-r4-successor.mjs&quot;,
+    &quot;exitCode&quot;: 0,
+    &quot;passed&quot;: 22,
+    &quot;total&quot;: 22
+  },
+  {
+    &quot;command&quot;: &quot;node scripts/check-manuscript-current-local-release-regression.mjs&quot;,
+    &quot;cwd&quot;: &quot;C:/phios/tmp/p9-r5/source&quot;,
+    &quot;exitCode&quot;: 0,
+    &quot;passed&quot;: 13,
+    &quot;total&quot;: 13
+  },
+  {
+    &quot;command&quot;: &quot;node node_modules/wrangler/bin/wrangler.js pages functions build functions --outdir C:/phios/tmp/p9-r5/compiled --compatibility-date 2026-07-14 --compatibility-flags nodejs_compat&quot;,
+    &quot;cwd&quot;: &quot;C:/phios/tmp/p9-r5/source&quot;,
+    &quot;exitCode&quot;: 0
+  },
+  {
+    &quot;command&quot;: &quot;node scripts/check-p9-r5-compiled-isolation.mjs&quot;,
+    &quot;exitCode&quot;: 0,
+    &quot;passed&quot;: 138,
+    &quot;total&quot;: 138
+  }
+]</pre></section><section><h2>测试汇总与原失败证据</h2><pre>{
+  &quot;previous&quot;: {
+    &quot;total&quot;: 60,
+    &quot;pass&quot;: 17,
+    &quot;fail&quot;: 43
+  },
+  &quot;successor&quot;: {
+    &quot;total&quot;: 60,
+    &quot;pass&quot;: 60,
+    &quot;fail&quot;: 0
+  },
+  &quot;expanded&quot;: {
+    &quot;total&quot;: 230,
+    &quot;pass&quot;: 230,
+    &quot;fail&quot;: 0
+  },
+  &quot;terminal&quot;: {
+    &quot;total&quot;: 22,
+    &quot;pass&quot;: 22,
+    &quot;fail&quot;: 0
+  },
+  &quot;R4Historical&quot;: {
+    &quot;total&quot;: 22,
+    &quot;pass&quot;: 20,
+    &quot;fail&quot;: 2,
+    &quot;status&quot;: &quot;BASELINE_FAILURE&quot;
+  },
+  &quot;R4AuthorizedSuccessor&quot;: {
+    &quot;total&quot;: 22,
+    &quot;pass&quot;: 22,
+    &quot;fail&quot;: 0
+  },
+  &quot;customerAPI&quot;: {
+    &quot;total&quot;: 13,
+    &quot;pass&quot;: 13,
+    &quot;fail&quot;: 0
+  },
+  &quot;compiledD1&quot;: {
+    &quot;total&quot;: 138,
+    &quot;pass&quot;: 138,
+    &quot;fail&quot;: 0
+  }
+}</pre></section><section><h2>精确源码哈希及并发修改隔离</h2><pre>{
+  &quot;baseCommit&quot;: &quot;890587f9cc830c1a4be80283618212266c70ae5b&quot;,
+  &quot;R4Digest&quot;: &quot;abacbc2e730a172d4caff22607c7bdc97369c843ec6516ce53495b6373de2b96&quot;,
+  &quot;sourceFiles&quot;: [
+    {
+      &quot;path&quot;: &quot;functions/_lib/client-knowledge-ask-b.js&quot;,
+      &quot;baseBlob&quot;: &quot;7c8653ef9a10cad2a5e592661a8d511e1135b921c1afe3e0dfcc1e6318189f1a&quot;,
+      &quot;successorSHA256&quot;: &quot;24536712bd8dc47a9bc36ff3b9885fbdce688909f6e762e1a19871b7e4579b84&quot;,
+      &quot;bytes&quot;: 14472,
+      &quot;worktreeSHA256&quot;: &quot;24536712bd8dc47a9bc36ff3b9885fbdce688909f6e762e1a19871b7e4579b84&quot;,
+      &quot;worktreeMatchesSuccessor&quot;: true,
+      &quot;authority&quot;: &quot;ISOLATED_RELEASE_SNAPSHOT&quot;,
+      &quot;concurrentHunksExcluded&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/knowledge-answer-composition.js&quot;,
+      &quot;baseBlob&quot;: &quot;39f94eca6bfd3afdfa8ce47789138258ec51a43af201e147750c8e4dcb4f724c&quot;,
+      &quot;successorSHA256&quot;: &quot;3de96383d13c1d13e77f20b43c13c76f7a9314bf50a766d6b095ca0cd2231bb5&quot;,
+      &quot;bytes&quot;: 27651,
+      &quot;worktreeSHA256&quot;: &quot;3de96383d13c1d13e77f20b43c13c76f7a9314bf50a766d6b095ca0cd2231bb5&quot;,
+      &quot;worktreeMatchesSuccessor&quot;: true,
+      &quot;authority&quot;: &quot;ISOLATED_RELEASE_SNAPSHOT&quot;,
+      &quot;concurrentHunksExcluded&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/knowledge-answer-grounding.js&quot;,
+      &quot;baseBlob&quot;: &quot;fee92913657c6954f8834c403c4245a11aeef366eb0950407f67423a018b22b1&quot;,
+      &quot;successorSHA256&quot;: &quot;6e65105f421ce97d6a34ebf61c23dae496dc6b4bb065946f9fc45a9dcbf4b156&quot;,
+      &quot;bytes&quot;: 33499,
+      &quot;worktreeSHA256&quot;: &quot;f29d60933ca030bbba3b625ce84f228ba0f45fe157c4899d1e6c7a4aa1eac595&quot;,
+      &quot;worktreeMatchesSuccessor&quot;: false,
+      &quot;authority&quot;: &quot;ISOLATED_RELEASE_SNAPSHOT&quot;,
+      &quot;concurrentHunksExcluded&quot;: true
+    },
+    {
+      &quot;path&quot;: &quot;functions/customer-projection/knowledge-customer-projection.js&quot;,
+      &quot;baseBlob&quot;: &quot;47067c53581a97b7275cfa7e2a7e9ee93d714e310c44774ed147816d471064cc&quot;,
+      &quot;successorSHA256&quot;: &quot;437b53a235e805975ea025c9a2cac023673129dcab789998e42f81130a8538b7&quot;,
+      &quot;bytes&quot;: 5936,
+      &quot;worktreeSHA256&quot;: &quot;437b53a235e805975ea025c9a2cac023673129dcab789998e42f81130a8538b7&quot;,
+      &quot;worktreeMatchesSuccessor&quot;: true,
+      &quot;authority&quot;: &quot;ISOLATED_RELEASE_SNAPSHOT&quot;,
+      &quot;concurrentHunksExcluded&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/knowledge-runtime/manuscript-source-runtime.js&quot;,
+      &quot;baseBlob&quot;: &quot;24be395744ae4d1bf0c709b159cefd9e59bafc67b92a13b41c2c67a2b01321fa&quot;,
+      &quot;successorSHA256&quot;: &quot;d266156975b036187a614487025178b7ceef7a2a9eeffb74d278806cd2857d3f&quot;,
+      &quot;bytes&quot;: 28656,
+      &quot;worktreeSHA256&quot;: &quot;db533d869e42cd3cd6aed0876ac0ed9a9abeccd11b9c55771564450208b20a64&quot;,
+      &quot;worktreeMatchesSuccessor&quot;: false,
+      &quot;authority&quot;: &quot;ISOLATED_RELEASE_SNAPSHOT&quot;,
+      &quot;concurrentHunksExcluded&quot;: true
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/knowledge-source-eligibility.js&quot;,
+      &quot;baseBlob&quot;: null,
+      &quot;successorSHA256&quot;: &quot;22f5f0c414a847b4c0b6e28588e28c78e65c6b2d1d21f5d7f3b1d3fdbda9798f&quot;,
+      &quot;bytes&quot;: 5853,
+      &quot;worktreeSHA256&quot;: &quot;22f5f0c414a847b4c0b6e28588e28c78e65c6b2d1d21f5d7f3b1d3fdbda9798f&quot;,
+      &quot;worktreeMatchesSuccessor&quot;: true,
+      &quot;authority&quot;: &quot;ISOLATED_RELEASE_SNAPSHOT&quot;,
+      &quot;concurrentHunksExcluded&quot;: false
+    }
+  ],
+  &quot;sharedHelper&quot;: {
+    &quot;path&quot;: &quot;functions/_lib/knowledge-source-eligibility.js&quot;,
+    &quot;necessary&quot;: true,
+    &quot;reason&quot;: &quot;One shared current-source validation/deduplication and localized public contract consumed by all five owners; reuses the existing R4 manuscript admission owner.&quot;,
+    &quot;newRegistry&quot;: false,
+    &quot;newAdmissionLedger&quot;: false
+  },
+  &quot;qaScripts&quot;: [
+    {
+      &quot;path&quot;: &quot;scripts/check-p9-r5-five-file-runtime.mjs&quot;,
+      &quot;SHA256&quot;: &quot;3def5ddc0d4cc3d2a63966ae8a4714b0e873fad29e39b24d693db9577bf8d8dc&quot;
+    },
+    {
+      &quot;path&quot;: &quot;scripts/check-p9-r5-expanded.mjs&quot;,
+      &quot;SHA256&quot;: &quot;9b1fd81eba32b111aaf72d64155c3345114a32c53e0273491ea94e7d8d82b4db&quot;
+    },
+    {
+      &quot;path&quot;: &quot;scripts/check-p9-r5-terminal-matrix.mjs&quot;,
+      &quot;SHA256&quot;: &quot;28b2335f5e89e4d40ea2245fcc2dbb1cef757d5e1fec6995fbd4e5d35b91b19a&quot;
+    },
+    {
+      &quot;path&quot;: &quot;scripts/check-p9-r5-r4-successor.mjs&quot;,
+      &quot;SHA256&quot;: &quot;de8c44532a3569bb970fa3adb96d8a0d7d7f10438ad421a6bdf27595a29236aa&quot;
+    },
+    {
+      &quot;path&quot;: &quot;scripts/check-p9-r5-r4-historical-assertions.mjs&quot;,
+      &quot;SHA256&quot;: &quot;77e111b01c64b393dfc4879f01463d511c6c93c00627bdb280c6bcfe2140b9bc&quot;
+    },
+    {
+      &quot;path&quot;: &quot;scripts/check-p9-r5-compiled-isolation.mjs&quot;,
+      &quot;SHA256&quot;: &quot;fbfbeda92c8b8d38dddf93572d33103a55ac02981f6602c89d0f709b8ca51ac5&quot;
+    }
+  ],
+  &quot;hashBoundDependencies&quot;: [
+    {
+      &quot;path&quot;: &quot;assets/js/pages/civilization-atlas/atlas-state.js&quot;,
+      &quot;SHA256&quot;: &quot;2fe28f1db39930b20ff0d7a4cd2583fea42cf844103bd312a84764e3f3206d7c&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;assets/js/pages/civilization-atlas/atlas-url-state.js&quot;,
+      &quot;SHA256&quot;: &quot;db5b5245fb55e493fa9ccea43ad65426f6658317714ac8de486a600547e15b02&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-af-w8c-current-authority-admission-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;1ee32bce3b183800da8d4d09d72e4f6ebfac21de845fcad2435b30914dce519c&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-af-w8d-rre-readout-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;ad6827a15acb8015a72a17a4b1cb21fdb71c145d9e16a9c8897cded35cb76b6d&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-af-w8h-human-decisions-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;52eba969aa5e7eed7326ced61505521ef147296423cb78f25f7050f38c6bb902&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-af-w8i-accepted-current-dossier-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;1ef23dfb6a896319ee7f88ecf102992dafade4ec5e284677cb3ec55de6c88d0f&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-cn-w8h-human-decisions-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;361aa13f588d2dfd70907cc64701d2defb98e402cded002b71c5589ddf1e18cc&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-cn-w8i-accepted-current-dossier-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;975392007d4cdb240c1e24994c7acfd8dc3fc74bcdf380552c720971369eabee&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-eu-w8c-current-authority-admission-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;2fa7ebf0da2f7c7e74e7ce1576cc5654eda3eca21de4f9ae201a235e41d47cd2&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-eu-w8d-rre-readout-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;7b6856f09f32d75fa3255fcce7b03b4b778635b04540170b9d7112964464b398&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-eu-w8h-human-decisions-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;67952a9b8e6bba6dc03d479fa9359959665a2dc766fcc9251e1a0695ae4163b8&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-eu-w8i-accepted-current-dossier-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;46dfc98d9aec1a27aa3ac6379f929c8980dcc005feb2e31daf3a1321d048e603&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-in-w8c-current-authority-admission-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;15d35e2d5276d46fd402b5e07198188f4475380d0fa3bfb27113c34c4c4de4df&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-in-w8d-rre-readout-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;429ddd158e5d7bb0da23db5d2b329fb8f9cfb4552f563f343caaf61d85953404&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-in-w8h-human-decisions-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;0c4279100e29d1ad8524bdf92dc71f7b55fc59ec10a603e78a618674eb946d24&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-in-w8i-accepted-current-dossier-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;16f74282b6caa88b51b17aed2a6985a330cb3c3ca0e31d90327d2df6638d72c4&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-jp-w8c-current-authority-admission-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;09b5290e34a64a7e8371005785d1d95a219e4a0dd2f8e51316b5b1af78787082&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-jp-w8d-rre-readout-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;f7e5bbbf997069a00befe817e0d70b9dd9ed3d1463ec5dfa027537b2a6d5862d&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-jp-w8h-human-decisions-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;5d768dbfe957918e10d451b0b2b4c4e25a84e5ecc91ddbb296ad9e6982f47004&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-jp-w8i-accepted-current-dossier-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;119ea99053ea26a327a0af77b91acacbdcff7fcf0807f0dfbd60d14e0787b920&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-kr-w8c-current-authority-admission-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;202ffde2970f5c37e6887e8f5b8f9a6b1a5f32ba8bb45e55640361c00c032d9e&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-kr-w8d-rre-readout-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;5db0181a8e9ce94c08b938a5c035fefd1f2d84eefa8265402727a73d2c4a2ba3&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-kr-w8h-human-decisions-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;a5099cc82d749fb33432a773fdda7862e192204891dd868fd6c229f210a8c6b7&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-kr-w8i-accepted-current-dossier-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;40edd93bb916739b454b2d176575d8ca882135d28994f31ec1cb0c3bca9e7b63&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-latam-w8c-current-authority-admission-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;3bf47ca97eee7ff234b78b13fb1449da7eebe2445fe83d7e2b5ecfc20dadf80f&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-latam-w8d-rre-readout-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;929665b8b1e7e61de4d5e9fb164df657ffecf08dbd49a5c24345abd8a31e8ffa&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-latam-w8h-human-decisions-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;b3e8c40fec2bb3c19c024a1426197278e48f8d25f6df6752842e0afa471541e2&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-latam-w8i-accepted-current-dossier-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;042dd5f9d3069d657b32a43c06f3c46ea87ae1e2374f3cd89aeb74a2a5a3c05f&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-me-w8c-current-authority-admission-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;2b7bd1dedde6ce5a83b48a9cffa22c524a8a44b61683c5f8f2290563284ca226&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-me-w8d-rre-readout-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;f4b282cc67a6c87b2d7713fdeed106248b88eeee882ed5608922622640c41c5a&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-me-w8h-human-decisions-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;f4936812280c3ab0bd6fc28e5c8b9b0f6630d351f94048b06cae6448e7ce8851&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-me-w8i-accepted-current-dossier-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;b4c9d9a43b8c46c32200c3c14b46cfd5d83b5781c17ca4b9f8ba6539dac0645c&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-ru-w8c-current-authority-admission-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;7f58170e6aa048a4814f5945308679c97e9ab5a33d2ee9f9afcc7b5a4c0514d3&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-ru-w8d-rre-readout-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;5c365f23db39ea80a6a81bc143020f1e7f47220e0d293757195ebcf314329913&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-ru-w8h-human-decisions-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;2ab063b5411ad9f4141328f1bfff6b5fad236964a3e37a9f08c7047f1437f74e&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-ru-w8i-accepted-current-dossier-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;b7bcad5a6292bbb578b3c58e4859955152bd7b05abdc053b3a451866a7bd04dd&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-sea-w8c-current-authority-admission-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;5f450c8b7228bafd3bb6bb09a0d8616800f193d351d207ab2de2595860920df9&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-sea-w8d-rre-readout-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;06de4e5a11b67decb8abf06c11a016e5d63956c186aad47c4f6df924c4269c48&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-sea-w8h-human-decisions-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;93c62a996fbe5d3fb0a881a0d6dca421f514349bca2b0154c1a738059a624e48&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-sea-w8i-accepted-current-dossier-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;b87e1ac75162e61692f4ffd5f8a25cbc61ffb45024268981c3057f0fc808224d&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-us-w8h-human-decisions-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;6742ba9c49210698e1dee2ef2b296a0ef40e37125db26d503df68f7816024d0b&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/dossier-us-w8i-accepted-current-dossier-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;978a24e75e6dc066a26a10d5893f8cc6e86ccfccb7aa8e3d8d377e9c4b112bfe&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-rre-eligible-handoff-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;92d779798676fc4184a9abf084310f9d33e5e75c14a10d8ada565264996e7345&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-validated-claims-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;deb8044aa735ae9ca40fe7c51d7ead35e2e7b797ab88e1bde681ac787e9f18c8&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/moomoo-provider-w8c-admission-results-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;420a6a831c349339536a5fee8166de2e3065783ea2922783afabab426ab2fc2a&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/runtime-position-w8c-current-evidence-ir-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;8ea0a6acf041c41e6d9051cc5a116409ab4cd1edd82d00826aced722741a2db7&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/civilization-atlas/reconfiguration/runtime-position-w8d-rre-readouts-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;91d8885b79d1837def3d82d636577fef1424cc7022886d9de93900991911047a&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;content/registry/runtime-position-48-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;89aaff534c62312f7031b395e746e49176f9f1dac908caf5ab3555537833ed60&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/atlas-retrieval-scope.js&quot;,
+      &quot;SHA256&quot;: &quot;23479358067b6cc6a2f99fbec20aff0b3416c0950d542bf589e380dd8a3ee204&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/book-vii-published-admission.js&quot;,
+      &quot;SHA256&quot;: &quot;bd3f84cb3fdbe21c9949802adefe3e374e05687547d67922c7492e86029ca738&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/book6-accepted-current.js&quot;,
+      &quot;SHA256&quot;: &quot;d9b4f7e2974a11bfe8dd05b51c670a9c7f644b741272d995f618a0458cbe655d&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/book6-current-source.js&quot;,
+      &quot;SHA256&quot;: &quot;ac712364838cad2ac3e7cf7e019edd235bd35396e60490f1ce8a4494b55d89e7&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/client-knowledge-ask-b.js&quot;,
+      &quot;SHA256&quot;: &quot;24536712bd8dc47a9bc36ff3b9885fbdce688909f6e762e1a19871b7e4579b84&quot;,
+      &quot;runtimeSuccessor&quot;: true
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/formation-retrieval-scope.js&quot;,
+      &quot;SHA256&quot;: &quot;4e26c699d590a60d15c00b693d53e5c9f11b34d28ee6241a46fe18cdb8d949e5&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/kir-r2-answer-intelligence.js&quot;,
+      &quot;SHA256&quot;: &quot;30d01f6f038929b0596783a88f9dab27bb18880980700d7f88dc0e327fd59bd3&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/kir-r2-intelligence.js&quot;,
+      &quot;SHA256&quot;: &quot;5af46874ec7d61a9f518b642d0a59ee5c4b7f9f4ecf6f39db6b6cc011d4681bf&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/kir-r2-model-gateway.js&quot;,
+      &quot;SHA256&quot;: &quot;6638959194c6b273edb2b2205ab38621d5cdf12cc9c79d7ff6ab592b213b8731&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/kir-r2-production-admission.js&quot;,
+      &quot;SHA256&quot;: &quot;4e9ac29ecff02c9faa9b0f4222f8facfa3ce96f8ed262262c829cc4b7a2e3c70&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/kir-r2-production.js&quot;,
+      &quot;SHA256&quot;: &quot;8c2e9d076992f981f7c0148db4ccd2529901579802f618fee1034cbdc25e7ca5&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/kir-r2-w16r2-successor.js&quot;,
+      &quot;SHA256&quot;: &quot;f1428d2e4d10ca0423075a3ce566d288cf4901f3e09e101fac794729857051e6&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/knowledge-access-api.js&quot;,
+      &quot;SHA256&quot;: &quot;89381dec0d63c9434dd61cc972542a872897f10c14048f25a2008fa4f7bb04db&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/knowledge-answer-composition.js&quot;,
+      &quot;SHA256&quot;: &quot;3de96383d13c1d13e77f20b43c13c76f7a9314bf50a766d6b095ca0cd2231bb5&quot;,
+      &quot;runtimeSuccessor&quot;: true
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/knowledge-answer-grounding.js&quot;,
+      &quot;SHA256&quot;: &quot;6e65105f421ce97d6a34ebf61c23dae496dc6b4bb065946f9fc45a9dcbf4b156&quot;,
+      &quot;runtimeSuccessor&quot;: true
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/knowledge-epistemic-reading.js&quot;,
+      &quot;SHA256&quot;: &quot;5d1bd14e27100320a74498b4aac95d909a7c9bbfa2ea81c5cbb72dba7837002e&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/knowledge-source-eligibility.js&quot;,
+      &quot;SHA256&quot;: &quot;22f5f0c414a847b4c0b6e28588e28c78e65c6b2d1d21f5d7f3b1d3fdbda9798f&quot;,
+      &quot;runtimeSuccessor&quot;: true
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/manuscript-current-admission.js&quot;,
+      &quot;SHA256&quot;: &quot;f2832f9d5e966e860e948b19a68305637ff981942b348aca006fe3ad6cf0af3c&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/pai-r1-economics.js&quot;,
+      &quot;SHA256&quot;: &quot;1b880b92c41405c3f97665bc53ecea1999e622528b3cd27716d88a07087ba4a7&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/ptrc-ask-contract.js&quot;,
+      &quot;SHA256&quot;: &quot;26fb2c953d0266a3ec98065cda77c49f6a34f23b3050094c9e7b6e5b140540a0&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/ptrc-knowledge-quality.js&quot;,
+      &quot;SHA256&quot;: &quot;485fec39543d833477e70e841d24c2f825ddcbfcc676217a437ff9d4448f0090&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/public-knowledge-api.js&quot;,
+      &quot;SHA256&quot;: &quot;04ebb5484c4f82a3965c1a0da80ea69a231fc35b129c177e0e906be1833fe462&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/_lib/structured-ask-policy.js&quot;,
+      &quot;SHA256&quot;: &quot;3eacb2f30a66d8c2e4b92d11b213e87b6a5f3ecb44e823cf38f93b2bef03bbb8&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/contextual-ask/context-source-registry.js&quot;,
+      &quot;SHA256&quot;: &quot;978dfbcf853f84564d99808372a76c403b6143a45f18cd214f661cd03cc4444f&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/contextual-ask/contextual-ask-runtime.js&quot;,
+      &quot;SHA256&quot;: &quot;5f0ad783d4b12436cfad507f5a7e13b34d90eb1aec9866ff0b88cbb4998f66ad&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/current-web-authority/current-web-authority-runtime.js&quot;,
+      &quot;SHA256&quot;: &quot;7215dadcaf2630572d268cfb1411b6f6057f2441fcc5d1c4bf8455d4375ee580&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/customer-projection/knowledge-customer-projection.js&quot;,
+      &quot;SHA256&quot;: &quot;437b53a235e805975ea025c9a2cac023673129dcab789998e42f81130a8538b7&quot;,
+      &quot;runtimeSuccessor&quot;: true
+    },
+    {
+      &quot;path&quot;: &quot;functions/customer-projection/projection-common.js&quot;,
+      &quot;SHA256&quot;: &quot;368ffa2350f674388015733063a4f6097926e612231ae82d9786a4b946677aab&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/external-reality-impact/external-reality-impact-runtime.js&quot;,
+      &quot;SHA256&quot;: &quot;bdbec1b8fe06723fe87d8a8134113bc6825fb8b2b3762d89297526143f7f00e3&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/knowledge-runtime/current-manuscript-server-metadata.js&quot;,
+      &quot;SHA256&quot;: &quot;184b0a87fa7a4a4954247484b8b09ebda9da9e1a33c88c55ebfb2777793c4527&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;functions/knowledge-runtime/manuscript-source-runtime.js&quot;,
+      &quot;SHA256&quot;: &quot;d266156975b036187a614487025178b7ceef7a2a9eeffb74d278806cd2857d3f&quot;,
+      &quot;runtimeSuccessor&quot;: true
+    },
+    {
+      &quot;path&quot;: &quot;functions/public/ask-task-policy.js&quot;,
+      &quot;SHA256&quot;: &quot;ea5f3a6d87cd2f93d708091762a44f46ea2d0e1549919f05d12646b7b8cdb3c4&quot;,
+      &quot;runtimeSuccessor&quot;: false
+    }
+  ],
+  &quot;patch&quot;: {
+    &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R5-REMEDIATION.patch&quot;,
+    &quot;SHA256&quot;: &quot;9c8b8e1ef131575381d4ebff5383290178d9d93002d1e568b4ac3c90b5cb1b25&quot;,
+    &quot;applyCheck&quot;: &quot;PASS_ON_IMMUTABLE_BASE_FILES&quot;
+  },
+  &quot;excludedWorktreeChanges&quot;: [
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;.gitignore&quot;,
+      &quot;SHA256&quot;: &quot;16a52263a05164961408cf1cef081eafede8a4709fffec6a0c62f611875d80b0&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;content/knowledge/answer-projection/maintenance/kap-m14-manuscript-source-access-v1.json&quot;,
+      &quot;SHA256&quot;: &quot;47c8cc9137a31b3d58fb908f1a3990cb8fbd95b223b584c89cd8340bcac6b6ae&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/CONTINUITY-MONTHLY-COMMERCIAL-QA.json&quot;,
+      &quot;SHA256&quot;: &quot;054081dfdb792a44a9e221e60f5afdf8efa5f74acf075f7a8bf9e0f0c25b2172&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/MASTER-BLOCKERS.json&quot;,
+      &quot;SHA256&quot;: &quot;be5452ceda94f774c973eca23b6ea261666854747c423869e5448d1e52f9e0d3&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/MASTER-WORK-STATE.json&quot;,
+      &quot;SHA256&quot;: &quot;fe8e12f8682c92c4622ba998ede061bae330186136f092c9f84d73853cc7a33b&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json&quot;,
+      &quot;SHA256&quot;: &quot;a6f22f87d3aba4d0239c255d5b008d79e648f55b5590de19cd26c514122a08ba&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;functions/_lib/knowledge-access-api.js&quot;,
+      &quot;SHA256&quot;: &quot;b9fa37d5b4831c952c67eae56e503d598a9a6216e734531edcf998d05f886ce3&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;functions/knowledge-runtime/current-manuscript-server-metadata.js&quot;,
+      &quot;SHA256&quot;: &quot;c20382b6160f661ac5fc99a5353f591e28ea3f31c81b805a6b9a5a6a1373ff0a&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;membership.html&quot;,
+      &quot;SHA256&quot;: &quot;b6184d03b023008669bdb108e6f03912690d928c6e2d00c0db8d996a57f88fb3&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;scripts/build-cloudflare-pages.mjs&quot;,
+      &quot;SHA256&quot;: &quot;33ced66520baeb92fb8ca14e7d8f8a5e01304588e8f0798fd53705e51c86ac89&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;scripts/build-manuscript-server-metadata.mjs&quot;,
+      &quot;SHA256&quot;: &quot;ac9ab70ca4d23b5926282bbff12f0adbc99f0369eafe0dffeb3e47f16e4f5fef&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;scripts/check-book-i-iii-current-batch-customer-answers.mjs&quot;,
+      &quot;SHA256&quot;: &quot;d1651549914434edd75c5db2ddc35e1c905a0ded7e01a08a30d4d153754246e5&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;scripts/check-manuscript-whole-chapter-batch-r1.mjs&quot;,
+      &quot;SHA256&quot;: &quot;521483451a7cf3ea6474d1efcb72917348ce9af5b561539400f471e611312bd2&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;scripts/check-schema-references.mjs&quot;,
+      &quot;SHA256&quot;: &quot;17542d2023ff3c84502ad2c536ac5bc024dc700961ffc2cf7a470e7ced163fcf&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-BATCH-ANSWER-REGRESSION.json&quot;,
+      &quot;SHA256&quot;: &quot;a085da977b371e4f7e120249bdf3df83d5b098a9139883c609c92b33c8ed493d&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-BUILD-RECEIPT.json&quot;,
+      &quot;SHA256&quot;: &quot;c65111150f11ee05de90369219a5c0ff1e7be147433ea437de97ba4f719c620a&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-MASTER-STATE.json&quot;,
+      &quot;SHA256&quot;: &quot;651cbffad8f8fcd41b331a066b065f987289d1178271390b8bcf12359efe4db8&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-SERVER-METADATA-IDENTITY.json&quot;,
+      &quot;SHA256&quot;: &quot;2e8877968432a6f18ee708168c489b5725f39ed978cac19d5fe311cac461b258&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/BOUNDARY-ANSWERS.json&quot;,
+      &quot;SHA256&quot;: &quot;c83d60ea16cdd8e4eb29d61923b611e0ce8a3ddeb4d03a8f226aded166ab8c64&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS.json&quot;,
+      &quot;SHA256&quot;: &quot;bfcbd9e8d4440049779dec35e5e9319372ef03916b8dcc3626c1ba33839c5bc3&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FAILURE-REGRESSION.json&quot;,
+      &quot;SHA256&quot;: &quot;0ac0e33f994ce53b1caa211022858d22b9c5ca337fc85ec7a8086d7a10643cfb&quot;
+    },
+    {
+      &quot;status&quot;: &quot; M&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/MECHANISM-INDEPENDENT-ANSWERS.json&quot;,
+      &quot;SHA256&quot;: &quot;c0edfbf4a6cc175ce9e521de0a711c6f9c3d5500e8195cb7ed869e0d28030e95&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;assets/js/pages/membership-ask-credit-r1.js&quot;,
+      &quot;SHA256&quot;: &quot;94d6d99e1bb600c69bd35fdc8089b691200e8e9dd545a9bca35c2061d3c81241&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;assets/js/pages/membership-source.js&quot;,
+      &quot;SHA256&quot;: &quot;3e814e5d68aaf5a35f8fbe7cd81da90b1e4914299b9eaf1aa45495d6c25c1619&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/knowledge/answer-projection/maintenance/kap-m14-access-before-concept-termsets.js&quot;,
+      &quot;SHA256&quot;: &quot;7fa7172cc06d68386152560f4980a72948a53bea380689338b61655ae3979591&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/knowledge/answer-projection/maintenance/kap-m14-access-before-current-admission.js&quot;,
+      &quot;SHA256&quot;: &quot;f0c2159d11fd76532d82ac5f8dcef2c6992e6cfd45be80a1d4b29f15ea0f41d2&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/knowledge/answer-projection/maintenance/kap-m14-access-before-source-explanations.js&quot;,
+      &quot;SHA256&quot;: &quot;1b13a66c2bd37ada80e10c168772bc3f13f48c82b65948890e2cfed552c43580&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/knowledge/answer-projection/maintenance/kap-m14-grounding-before-approved-terminology.js&quot;,
+      &quot;SHA256&quot;: &quot;fee92913657c6954f8834c403c4245a11aeef366eb0950407f67423a018b22b1&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/knowledge/answer-projection/maintenance/kap-m14-grounding-before-explicit-book-fallback.js&quot;,
+      &quot;SHA256&quot;: &quot;06fdf3fd447d2732928f630d1f82c226feb2d4160b883dbf178843ed995002a5&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v12-candidate.json&quot;,
+      &quot;SHA256&quot;: &quot;7e507e001b90a0df7ccd71c4c262e1422c8ffb5e19843a37fb32cade08d30578&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/knowledge/source-access/registries/manuscript-text-scope-candidates-v9.json&quot;,
+      &quot;SHA256&quot;: &quot;6ee50466dd8d4dafe1dde3db96eccee469102a794ec0a767e9fda7eebb512f12&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/personal-reading/continuity/registries/continuity-subscription-product-registry-v3-candidate.json&quot;,
+      &quot;SHA256&quot;: &quot;a40e1263d86a7ea21e43beb9c42009a57456aa46c9ab1a8751fbc5c956faa68f&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G1-R4-COMMIT-RECEIPT.json&quot;,
+      &quot;SHA256&quot;: &quot;93d036779c6616b3933b0be530da88703f1caa12bb539332d7b20edc7d230223&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G1-R4-EXACT-CANDIDATE-PROOF.json&quot;,
+      &quot;SHA256&quot;: &quot;89ee50f18075f0a48d41cfc3bfd4d9dba6d2a77f0799ade311ba5a6865889674&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G2-R4-PUSH-RECEIPT.json&quot;,
+      &quot;SHA256&quot;: &quot;4fc64ce8d127beaa5b10216d1a3c952bcbd7a63837452674a217a15f058e033d&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R3-COMPILED-DISPATCHER.json&quot;,
+      &quot;SHA256&quot;: &quot;1ae8daaf584714b270b36aa17a138ae484ed989213fa4d427e44e7aa2bd0e8d2&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R3-FINAL-RUNTIME-REVIEW.json&quot;,
+      &quot;SHA256&quot;: &quot;852e0d846dbe24e340511a86acabf2f0ac0d487a7929024613837842e6b31deb&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R3-LOCAL-ISOLATION-TESTS.json&quot;,
+      &quot;SHA256&quot;: &quot;0ad8e08ab9dae875711c468c37358c9f497136edd1ffbf0642efbbc759800e70&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R3-MIXED-COMMIT-MANIFEST.json&quot;,
+      &quot;SHA256&quot;: &quot;eebe7077963e87e906cf8f9f9571c01f999a98fd13cf6517552aeea09c8a62b8&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R3-WRITER-INVENTORY.json&quot;,
+      &quot;SHA256&quot;: &quot;019b6d35dfa83bbe9cc76b03db1f86e72d4df3f3f3f42110b812af8f508f3f4d&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R4-5FILE-PROPOSED-REMEDIATION.json&quot;,
+      &quot;SHA256&quot;: &quot;2e39ffa73f68505d32cf752f4fd5f6e02c6f82acb3da0c4f31f1407dd1716465&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R4-5FILE-RUNTIME-CONTRACT-QA.json&quot;,
+      &quot;SHA256&quot;: &quot;03d94e2eb5140c677514f0b8c7eb809bdd21108091e80d8f620e90a462b3beeb&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R4-5FILE-RUNTIME-REVIEW.json&quot;,
+      &quot;SHA256&quot;: &quot;e58d2f8dbca39637a37689d68d337b188d258615298c7bae5f171847ffbb3619&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R4-5FILE-RUNTIME-SOURCE-MANIFEST.json&quot;,
+      &quot;SHA256&quot;: &quot;4aa991ffc7f3e63fbf293a04466f85ed8bce17776924550f84b3fb3a894b4fb6&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-RELEASE-CANDIDATE-R3.json&quot;,
+      &quot;SHA256&quot;: &quot;96c771f90582a486a138970a5a714631e1a26049b962740528c16ca815bcfb84&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;db/migration-candidates/0019_continuity_ask_credit_allocations.sql&quot;,
+      &quot;SHA256&quot;: &quot;80b9b94d50b6f9b1979c0fa5f86f66548910538b2e11f04781340edbf81503af&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;functions/api/membership-ask.js&quot;,
+      &quot;SHA256&quot;: &quot;b8e91af6cf189f4da9ec73e8c26b5d6438f169569d4ccaa0121d34130969d72a&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;functions/knowledge-runtime/approved-terminology-context.js&quot;,
+      &quot;SHA256&quot;: &quot;4418815a5f52d64b5adb5a3cc9f70907f6241068f8b936a49b8fe1e5407f99cb&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;functions/knowledge-runtime/source-bound-explanation-units.js&quot;,
+      &quot;SHA256&quot;: &quot;22accd9e58c14651feb29133b50825a3b61e438f6a2e8f41e91ac2de7451bc5f&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;functions/personal-reading/continuity/continuity-credit-cutover.js&quot;,
+      &quot;SHA256&quot;: &quot;3b23206e86cda5b991339acc29bdb9d93d327443cc8a40d22a63bb64ca92d51a&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;functions/personal-reading/continuity/continuity-credit-d1.js&quot;,
+      &quot;SHA256&quot;: &quot;7d60e11a6514c6543ef62ec9ac86f146cde3ae17bb9cdf1dfe64449b05034b5b&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;functions/personal-reading/continuity/continuity-credit-policy.js&quot;,
+      &quot;SHA256&quot;: &quot;f45a5f22066a50f35cf6832ec38817ab7b12a4fb8c27b7575a996a0a49734730&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;functions/personal-reading/continuity/membership-ask-execution.js&quot;,
+      &quot;SHA256&quot;: &quot;4997d8494c6e6842d8b279b1a88470e495c64b9f8903d75d7c66bc7b8feeb75b&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;functions/personal-reading/continuity/membership-authority-pack.js&quot;,
+      &quot;SHA256&quot;: &quot;227165b1471cb0e2efaa4d4225e18e924d0270bd9f6d7f19150d037d82b76b1f&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;functions/personal-reading/continuity/membership-knowledge-service.js&quot;,
+      &quot;SHA256&quot;: &quot;975413683060e3305ab0751d316619d74157e6f50e2b044d03259b881b0efd9e&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;functions/personal-reading/continuity/membership-model-request.js&quot;,
+      &quot;SHA256&quot;: &quot;2a942c8ae554063d1959d831d1c3a1969574bd48a5b68d30b7eb4736f501ba1d&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;functions/personal-reading/continuity/membership-navigation-pack.js&quot;,
+      &quot;SHA256&quot;: &quot;8c2990a57eebe027ccb00c22d471fbab23dbcd8b89b259bd5dbab4f5ee8741ab&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;functions/provider-cost/knowledge-llm-experiment-budget.js&quot;,
+      &quot;SHA256&quot;: &quot;6bc53f81b82c56921c198c43e6cf9e0f79be7d1ff97783ee2560e7d8fde587c3&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;membership-source.html&quot;,
+      &quot;SHA256&quot;: &quot;63f5a4c0d4d718d43ef9735065ee7800687251d1d4aa6666dd96b29767c14228&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/audit-eight-book-master-glossary-r2.mjs&quot;,
+      &quot;SHA256&quot;: &quot;54f31e61a1eb00f00dcb3a623609fb9d276e05b45253ec12b4e56f42800fb572&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/build-knowledge-source-llm-prototype.mjs&quot;,
+      &quot;SHA256&quot;: &quot;57e1ce8f9dbad6de00c6f3927ec6cd8bc241791a44522291140ada05445993a0&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/build-manuscript-explanation-review-evidence.mjs&quot;,
+      &quot;SHA256&quot;: &quot;eb59106e7e7a9de03ece9f3975c8fe2c9f1ad527725becd30a99bab5dc5836eb&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/build-membership-ask-credit-candidate.mjs&quot;,
+      &quot;SHA256&quot;: &quot;b2b6c1d6fa67cf3e8594d467d222a355ec28b959c8d7657bbe2b06dd8afe1185&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/build-membership-ask-credit-review-r1.mjs&quot;,
+      &quot;SHA256&quot;: &quot;c464beb97f3c5b2af5b7a3c52f0f2b9d5705a67eb889544f9d63abe7363a89cf&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/check-eight-book-glossary-r2-boundaries.mjs&quot;,
+      &quot;SHA256&quot;: &quot;1e09ca92fdd2936215e3d6b14df939fc214a0e64ab55359f91a8ae591031544e&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/check-knowledge-experiment-budget-r1.mjs&quot;,
+      &quot;SHA256&quot;: &quot;b9ee587eb94511fe1936ac4ebceb34459959a2f4b84faf610399935ce1dffc66&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/check-membership-ask-browser-r1.mjs&quot;,
+      &quot;SHA256&quot;: &quot;ea1e6a3ea4c50c122dc9c964ef38d954a589520869f545863e0700cff9d98391&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/check-membership-ask-credit-r1.mjs&quot;,
+      &quot;SHA256&quot;: &quot;3a8bfe66e2e8c354d477fd4b14371a44301f1707065763efac17b8b750ddb922&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/check-membership-ask-execution-r1.mjs&quot;,
+      &quot;SHA256&quot;: &quot;e92247925fd461803acc076cb34ed58fb04978db0ab4eee4af711939f6c3215d&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/check-membership-ask-source-boundaries-r1.mjs&quot;,
+      &quot;SHA256&quot;: &quot;278d50645eb6e4ea83303a94c97048780d475aa302e2d9f79cf448a542e9460d&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/check-membership-credit-cutover-r1.mjs&quot;,
+      &quot;SHA256&quot;: &quot;2d5a0859a716b8372cc627fb9c83fea0423ae566d2eedbb24096181927c89fbe&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/check-membership-knowledge-chain-r1.mjs&quot;,
+      &quot;SHA256&quot;: &quot;88808c6dcd6d69b63a5c9f6bd12efec7d3a4169608cc5eb9e2c11280d4b874a9&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/check-p9-r4-five-file-runtime-review.mjs&quot;,
+      &quot;SHA256&quot;: &quot;232ae8352ae4b850d9fabb48449bd74d0d71d2815328c578fd5ad2c7a08c90dc&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/prepare-membership-ask-delivery-r1.mjs&quot;,
+      &quot;SHA256&quot;: &quot;c25e815604dd8a9fcec12830f53b3aca7b4ad321e71114d51687697113ed53c7&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/prepare-third-book-bounded-explanation-units.mjs&quot;,
+      &quot;SHA256&quot;: &quot;51663d5bf175fe4e77f87d0900227dd1170ef047b7c339836b0e247b37a9c042&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/run-membership-knowledge-experiment-r1.mjs&quot;,
+      &quot;SHA256&quot;: &quot;749ecd87b217f9dc3fc3b5b16215558bbee810a1efa781479118b674b32f0e57&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;scripts/update-membership-credit-candidate-page.mjs&quot;,
+      &quot;SHA256&quot;: &quot;176204250b2644181bed35957f091c1378bcbe63bafe995027ff433e9354effe&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/P9-POST-G2-R4-WORKTREE-HYGIENE.json&quot;,
+      &quot;SHA256&quot;: &quot;0ada96628324fcb4fc92000f253b137bc80f71895c8617b0ab6fc7c8a4424028&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/P9-R4-5FILE-RUNTIME-HUMAN-REVIEW.html&quot;,
+      &quot;SHA256&quot;: &quot;d5db1027ee126967a33c1b921502e9248aeb6ad694cfb84452567455ee168edc&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/P9-RC-R3-MIXED-COMMIT-HUMAN-REVIEW.html&quot;,
+      &quot;SHA256&quot;: &quot;ab0e43040d0857726a393a17fe4eec9760e443cb52ea467b8cf62db1a84c3fa0&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/eight-book-master-glossary-r2/BOUNDARY-TESTS.json&quot;,
+      &quot;SHA256&quot;: &quot;644f9c00c5894783ccb165976ae1ce7bcc4dfdc0db03d3d5fda2a0d77680f7da&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/eight-book-master-glossary-r2/HUMAN-REVIEW.html&quot;,
+      &quot;SHA256&quot;: &quot;b7cda7688d106c0ab6f936c693dfc60584036500c5d1d6a4c61077fefc89027a&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/eight-book-master-glossary-r2/LEGACY-PART-CROSSWALK.json&quot;,
+      &quot;SHA256&quot;: &quot;b6de00fbcc234406c73b9a20768c91c77594aad4468971f8a5e68fefe47e1cbe&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/eight-book-master-glossary-r2/RECONCILIATION.json&quot;,
+      &quot;SHA256&quot;: &quot;09f4112693b8d1fce85d6684b4d69808924ecbb9add81d27fe01d596a22c7133&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/KNOWLEDGE-SOURCE-LLM-PROTOTYPE-HUMAN-REVIEW.html&quot;,
+      &quot;SHA256&quot;: &quot;8739d9a7fc17459657f0e51ca15210af2b84a97a2d50214287019f38379334d9&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/KNOWLEDGE-SOURCE-LLM-PROTOTYPE.json&quot;,
+      &quot;SHA256&quot;: &quot;f32d80daaf66fbec0ba5d739e601e8af93877aaf56dc9ec30b1ecfcdfe8c65e0&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/source-llm-prototype.mjs&quot;,
+      &quot;SHA256&quot;: &quot;4ae17ba55ef6860e0764bf5b70d14250e47fb924aa56d351edf3b5e44e394b97&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-12415bd1d36379dc.json&quot;,
+      &quot;SHA256&quot;: &quot;12415bd1d36379dcd8809de491be5148af50ecef766afac7114f9d0f189915c4&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-73d43041d006950a.json&quot;,
+      &quot;SHA256&quot;: &quot;73d43041d006950acbbabe156973a33e8fcdd834d27f9873322fc88c4d0d41dd&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-7c17dcb2d229a17d.json&quot;,
+      &quot;SHA256&quot;: &quot;7c17dcb2d229a17d6e1445630f4c1e4452f3f308cf624728ce834ac9093fd130&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-9b2fcdeceb28cbce.json&quot;,
+      &quot;SHA256&quot;: &quot;9b2fcdeceb28cbce442f542e6dc391040349b841d18df22824fe05fc72832ade&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-e63420fd4456eb83.json&quot;,
+      &quot;SHA256&quot;: &quot;e63420fd4456eb839125158c1ab6690322f87440653455835e9532b271aba8a7&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-f0456c145a7f0795.json&quot;,
+      &quot;SHA256&quot;: &quot;f0456c145a7f0795ff41a667c5789b3b1ac55bea0255663ce6702022551c959e&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/EXPLANATION-UNSEEN-ANSWERS-HISTORY-0a6dcb995fa31cb6.json&quot;,
+      &quot;SHA256&quot;: &quot;0a6dcb995fa31cb6254043438e64d52e25a129a4468dce2203a4a552f0275fb4&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/EXPLANATION-UNSEEN-ANSWERS-HISTORY-2b94928c3c8e70ab.json&quot;,
+      &quot;SHA256&quot;: &quot;2b94928c3c8e70ab9594c089293011f7ef929daeea9fd249eae32cd222cebd94&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/EXPLANATION-UNSEEN-ANSWERS-HISTORY-31ce9da891f89693.json&quot;,
+      &quot;SHA256&quot;: &quot;31ce9da891f89693ba57c8af14773623581f82b11a5b034be42aeb30bb3fb9a1&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/EXPLANATION-UNSEEN-ANSWERS-HISTORY-d872ed254d0808f4.json&quot;,
+      &quot;SHA256&quot;: &quot;d872ed254d0808f4a19560756ae47febf8f66a0d874497ecdf9200b9bb91feab&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/EXPLANATION-UNSEEN-ANSWERS.json&quot;,
+      &quot;SHA256&quot;: &quot;e0165e5080b28fd8e354fb6eaed7847ddc69db251eefdef12df67de7bb938442&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/EXPLANATION-UNSEEN-QUESTIONS.json&quot;,
+      &quot;SHA256&quot;: &quot;a47a2d3d6d9eb3c4664e943ea2c52b10e781e1f770f4391a2d81414447f9e0ae&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/FAILURE-TO-EXPLANATION-TRACE.json&quot;,
+      &quot;SHA256&quot;: &quot;da3221efa3a047d3f2960b6c63429d9100841ebfd20b33fab8c865d0491406d0&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/GLOSSARY-CUSTOMER-ANSWERS-HISTORY-83437264721db43d.json&quot;,
+      &quot;SHA256&quot;: &quot;83437264721db43d00c857380102479a1d13253a3f21249bb6343f1f85dbd706&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/GLOSSARY-CUSTOMER-ANSWERS-HISTORY-f1524e982231d519.json&quot;,
+      &quot;SHA256&quot;: &quot;f1524e982231d51956bfd09053f4a3ff2c6e37527d68a7791c8d882be228cda5&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/GLOSSARY-CUSTOMER-ANSWERS-INITIAL-FAILURES.json&quot;,
+      &quot;SHA256&quot;: &quot;f1524e982231d51956bfd09053f4a3ff2c6e37527d68a7791c8d882be228cda5&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/GLOSSARY-CUSTOMER-ANSWERS.json&quot;,
+      &quot;SHA256&quot;: &quot;374dc797b4d436efe2cf65e5befe33c7bbbbb7b0ab7d1d1c98afa1bc0e8cd63e&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/GLOSSARY-CUSTOMER-QUESTIONS.json&quot;,
+      &quot;SHA256&quot;: &quot;92b357a211cbd39b37c0ed24596afa8139452a973e52acd18be2648e64a6834e&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FAILURE-REGRESSION-HISTORY-8f35d2e4c62f9044.json&quot;,
+      &quot;SHA256&quot;: &quot;8f35d2e4c62f9044eedaa73cd507abafe3235d738d5bac7c4333fba2be89097d&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FAILURE-REGRESSION-HISTORY-a0d69afda893e02a.json&quot;,
+      &quot;SHA256&quot;: &quot;a0d69afda893e02a75e83d07110932bfc5764991ff9a085eb7a05d03a2dab765&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FAILURE-REGRESSION-HISTORY-ef879f80e62fd5a5.json&quot;,
+      &quot;SHA256&quot;: &quot;ef879f80e62fd5a569ef40b4045f8d552619112fc66cb438a9f806211ea29865&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/MECHANISM-INDEPENDENT-ANSWERS-HISTORY-0daa8d50a8cdec2b.json&quot;,
+      &quot;SHA256&quot;: &quot;0daa8d50a8cdec2b3761cd946dee7fb5342b6c92cd0d5c32b06f24e3e1131428&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/MECHANISM-INDEPENDENT-ANSWERS-HISTORY-fdf438fdce009342.json&quot;,
+      &quot;SHA256&quot;: &quot;fdf438fdce009342a784c1410e2dd148baf86eaf552ff2ce1db15c5cfd031338&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/SOURCE-BOUND-EXPLANATION-UNITS.json&quot;,
+      &quot;SHA256&quot;: &quot;d98ac9300364ea620f6e0d04dd092c686ddd9b8cd7bda68ca06a0d186b127f81&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/TRANSFER-HOLDOUT-ANSWERS-HISTORY-800d8b28df597030.json&quot;,
+      &quot;SHA256&quot;: &quot;800d8b28df597030d90300f105a3cff940a09ac16a9a16ef1d5d29695fb43810&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/TRANSFER-HOLDOUT-ANSWERS-INITIAL-FAILURES.json&quot;,
+      &quot;SHA256&quot;: &quot;800d8b28df597030d90300f105a3cff940a09ac16a9a16ef1d5d29695fb43810&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/TRANSFER-HOLDOUT-ANSWERS.json&quot;,
+      &quot;SHA256&quot;: &quot;1468231be8a5733ce06f8a3b1dccdeabb3b54f172750b35cf273ae7c1fe40fe4&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/TRANSFER-HOLDOUT-QUESTIONS.json&quot;,
+      &quot;SHA256&quot;: &quot;4cff7cc028cc72b7c3054601d522f7a0d797878783ebe86b08a969c2f2d26fe5&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/BROWSER-EVIDENCE.json&quot;,
+      &quot;SHA256&quot;: &quot;2d25f2cf294dc28687d777e8825ddf8530e023d8d228a8a6687284e2feaafae4&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/BROWSER-HARNESS-FAILURE-HISTORY.json&quot;,
+      &quot;SHA256&quot;: &quot;38113b1736a9d292e992f43d0306ac383a10e8eefd529830d2d779c9c541f8a4&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/BROWSER-HISTORY-17cfaa468906c8d7.json&quot;,
+      &quot;SHA256&quot;: &quot;17cfaa468906c8d7a87a5868362bb0c46a63a60764722cecf61b468906077820&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/BROWSER-HISTORY-6da54d4adb6364e3.json&quot;,
+      &quot;SHA256&quot;: &quot;6da54d4adb6364e3e45881976317b4304b1e75dbd61fc0432c9228b59e645465&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/BROWSER-HISTORY-b6b955240b83b3f3.json&quot;,
+      &quot;SHA256&quot;: &quot;b6b955240b83b3f34a8aee2ff1667b21677ca99308f02de776ee2fb3437509bf&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/BROWSER-HISTORY-cc41ba2af98258da.json&quot;,
+      &quot;SHA256&quot;: &quot;cc41ba2af98258daa8cb4cc1aa114e449ef26db53916c9e7460ffaada9d22cd4&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/BROWSER-HISTORY-ebbe1367766a57f4.json&quot;,
+      &quot;SHA256&quot;: &quot;ebbe1367766a57f4d3516c95ad27752fcf1b1828dcfd4a3776d1d45a9e1b566f&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/BUILD-RECEIPT.json&quot;,
+      &quot;SHA256&quot;: &quot;4a614f4e0b7acbc9db6289cfde4ea9392a8c6396cd54de626c470e3008058f32&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/CHINESE-KNOWLEDGE-CHAIN.json&quot;,
+      &quot;SHA256&quot;: &quot;b3b0198b3c7dc650f14838b0f7397567eecc527e82d84521e610b0ec8dc9e6dd&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/CONTINUATION-FAILURE-HISTORY.json&quot;,
+      &quot;SHA256&quot;: &quot;660d936ac84b0237ed258a9275521d7fd4561f2e12e334fdfd58d7bc23c3165a&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/CUTOVER-COMPATIBILITY-TESTS.json&quot;,
+      &quot;SHA256&quot;: &quot;16b390023dd80aca88f94a4e4352a35c6720f217b435477cecbe5ada5f6918fe&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/CUTOVER-RECONCILIATION-QA.json&quot;,
+      &quot;SHA256&quot;: &quot;30bd043315c43eac06a50958f54f2e76d1541a6d74b689c22423b77b0f2d955f&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/DYNAMIC-PACKS-AND-EXPERIMENT.json&quot;,
+      &quot;SHA256&quot;: &quot;d0fbef76d2b2e5d785e10273e64936ba12b1b43546e9daf8c03136c12cf9c06b&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/EXECUTABLE-REQUESTS.json&quot;,
+      &quot;SHA256&quot;: &quot;e65fdc3a8de5f70ca2c7c341ca10bcbe5bf400561abcfe8814fa9b2b34a01e45&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/EXECUTION-TESTS.json&quot;,
+      &quot;SHA256&quot;: &quot;eaf65952bf86c7dfe391e487601362ae18576ec5694ed58c4b16b138f29d41a9&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/EXPERIMENT-AUTHORIZATION-GATE.json&quot;,
+      &quot;SHA256&quot;: &quot;24451a3a93d0af82805ca3f7edde097ce6c736f750d7c887c9476cfcada6a60d&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/EXPERIMENT-PREFLIGHT.json&quot;,
+      &quot;SHA256&quot;: &quot;1440b1206777b6a7934a0f6b9eb3b791a81eec03daaf53899ec4914acc5569ff&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/HUMAN-REVIEW.html&quot;,
+      &quot;SHA256&quot;: &quot;0f389f4d907c96b7dab8be883b036a01176ed424777c22faaf947a9dcd7e7d7b&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/SHARED-CONFIG-AUDIT.json&quot;,
+      &quot;SHA256&quot;: &quot;cfe1c973b3851878dc03edf9b183014298046a20d0260014e55dc73629476dd7&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/SOURCE-AND-ENTITLEMENT-TESTS.json&quot;,
+      &quot;SHA256&quot;: &quot;6453d50715fe9c1c0307294c3620c53181f4b1231cb41c58dfafb8bfb494efd4&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/STATE.json&quot;,
+      &quot;SHA256&quot;: &quot;2fd4c47e0c8db2088cb7060055d50750b86ae3fb006a248c966ded2aab593e61&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/ZERO-COST-TESTS.json&quot;,
+      &quot;SHA256&quot;: &quot;37ef2848c9b94a3820a259594e242426ce7ad6be672861e787cc84d55591f5cb&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/browser-en-1280.png&quot;,
+      &quot;SHA256&quot;: &quot;662c864c3c1527e61ca4e634748955e69a90e2bbfc75a8d0fded9dfd06478141&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/browser-en-375.png&quot;,
+      &quot;SHA256&quot;: &quot;cc3deddadb6b65edd9725171086cb6fc19fdecebecd69c8dfdbe1d1677db9348&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/browser-en-390.png&quot;,
+      &quot;SHA256&quot;: &quot;322059fb9f0173fae8fe7a36a2a9a3657bad9db7a8dc7f1b6759916fefc8783b&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/browser-zh-Hans-1280.png&quot;,
+      &quot;SHA256&quot;: &quot;6eda2cf36c3be4b5fb08dde98bf7cd9a92ea341927e1f448c4bae064b7796fec&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/browser-zh-Hans-375.png&quot;,
+      &quot;SHA256&quot;: &quot;7381026a3a7e0b3e9bbabafc895d6087e5b570a90a73d697a92787b44d328aa3&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/browser-zh-Hans-390.png&quot;,
+      &quot;SHA256&quot;: &quot;82e853ed102597cbd7b3e7208c09c0e1e7a0d0c8925ae7e2817eeb2c2617e9a0&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/membership-before.html&quot;,
+      &quot;SHA256&quot;: &quot;b32a3f112bf3ff900c9be403ef0c3aa1424f5ca68f218cfb0a8cd0cd4217d245&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/source-en-1280.png&quot;,
+      &quot;SHA256&quot;: &quot;1b6f00f377fb4e83322c0a7dd781307dc661b4d1ddd0764cfdf6b2b58fdee392&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/source-en-375.png&quot;,
+      &quot;SHA256&quot;: &quot;e0862dfae5697b0200d8a01531924d0e6bd9cd53dee18f788279e38e08b0140f&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/source-en-390.png&quot;,
+      &quot;SHA256&quot;: &quot;841d2a03298a12ddb6edc6c5a104f88481b81a22ae907ffce50b9da799db4303&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/source-zh-Hans-1280.png&quot;,
+      &quot;SHA256&quot;: &quot;37dee0e9e6df53c75f080d72a33fc0a1a4fd3cf951526767c32f01d6b3f9b9e6&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/source-zh-Hans-375.png&quot;,
+      &quot;SHA256&quot;: &quot;ffda51644c005792a77e137d743ca712c747b1b7ea4f7746f6f5286383b7f4e2&quot;
+    },
+    {
+      &quot;status&quot;: &quot;??&quot;,
+      &quot;path&quot;: &quot;tools/review/membership-ask-credit-r1/source-zh-Hans-390.png&quot;,
+      &quot;SHA256&quot;: &quot;2cbb0bceab82128aa15861d63aadb48b094b48b1ae601ca3454489556d691a45&quot;
+    }
+  ],
+  &quot;indexState&quot;: &quot;EMPTY_UNTOUCHED&quot;,
+  &quot;sourceCandidateWarning&quot;: &quot;Two runtime owners retain concurrent worktree hunks; release candidate is the isolated snapshot / exact patch, not wholesale worktree files.&quot;,
+  &quot;historicalRecords&quot;: [
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-RELEASE-CANDIDATE-R2.json&quot;,
+      &quot;SHA256&quot;: &quot;7c483500cd65f9dee424832ecb4946ef5bd33b6e9250b67d62c460d92be3a59a&quot;,
+      &quot;recheckedSHA256&quot;: &quot;7c483500cd65f9dee424832ecb4946ef5bd33b6e9250b67d62c460d92be3a59a&quot;,
+      &quot;unchanged&quot;: true
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-RELEASE-CANDIDATE-R3.json&quot;,
+      &quot;SHA256&quot;: &quot;96c771f90582a486a138970a5a714631e1a26049b962740528c16ca815bcfb84&quot;,
+      &quot;recheckedSHA256&quot;: &quot;96c771f90582a486a138970a5a714631e1a26049b962740528c16ca815bcfb84&quot;,
+      &quot;unchanged&quot;: true
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-RELEASE-CANDIDATE-R4.json&quot;,
+      &quot;SHA256&quot;: &quot;930804840317f760b83534be471ae5905d95a4915d098488c4dca399ace19a6b&quot;,
+      &quot;recheckedSHA256&quot;: &quot;930804840317f760b83534be471ae5905d95a4915d098488c4dca399ace19a6b&quot;,
+      &quot;unchanged&quot;: true
+    }
+  ],
+  &quot;temporaryArtifactsIncluded&quot;: false
+}</pre></section><section><h2>边界和仍需 Human 判断的内容</h2><pre>[
+  &quot;All runtime evidence is local. Production source availability and delivery remain RUNTIME_UNVERIFIED.&quot;,
+  &quot;Machine tests establish the measured contracts; Human review must judge bilingual wording and preserved UI semantics.&quot;,
+  &quot;Historical original R4 checker is 20/22 on R5, not claimed 22/22. The explicitly authorized valid-support successor is 22/22.&quot;
+]</pre></section><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R5-5FILE-RUNTIME-REMEDIATION.json">机器 receipt</a> · <a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-RELEASE-CANDIDATE-R5.json">RC R5</a> · <a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R5-REMEDIATION.patch">最小源码 patch</a></p><p>0 R2 删除；0 Provider / USD0；0 网络 mutation；0 生产 mutation；0 付款 / 退款；0 commit / push / deploy / READ_ONLY activation / D1 migration。禁止将历史 R4 改写为 R5。请仅审阅，不自动发布。</p></main></html>

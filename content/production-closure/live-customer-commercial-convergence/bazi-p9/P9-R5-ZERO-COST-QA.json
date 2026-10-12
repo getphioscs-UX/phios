@@ -1,0 +1,3685 @@
+{
+  "baseCommit": "890587f9cc830c1a4be80283618212266c70ae5b",
+  "environment": "LOCAL_ISOLATED_R4_PLUS_R5_NOT_PRODUCTION",
+  "commands": [
+    {
+      "command": "node scripts/check-p9-r5-five-file-runtime.mjs",
+      "exitCode": 0,
+      "passed": 60,
+      "total": 60
+    },
+    {
+      "command": "node scripts/check-p9-r5-expanded.mjs",
+      "exitCode": 0,
+      "passed": 230,
+      "total": 230
+    },
+    {
+      "command": "node scripts/check-p9-r5-terminal-matrix.mjs",
+      "exitCode": 0,
+      "passed": 22,
+      "total": 22
+    },
+    {
+      "command": "node scripts/check-p9-r5-r4-historical-assertions.mjs",
+      "exitCode": 1,
+      "passed": 20,
+      "total": 22,
+      "status": "BASELINE_FAILURE",
+      "reason": "Two metadata-only citation fixtures are unsupported under the R5 contract. Original assertions and failure evidence retained."
+    },
+    {
+      "command": "node scripts/check-p9-r5-r4-successor.mjs",
+      "exitCode": 0,
+      "passed": 22,
+      "total": 22
+    },
+    {
+      "command": "node scripts/check-manuscript-current-local-release-regression.mjs",
+      "cwd": "C:/phios/tmp/p9-r5/source",
+      "exitCode": 0,
+      "passed": 13,
+      "total": 13
+    },
+    {
+      "command": "node node_modules/wrangler/bin/wrangler.js pages functions build functions --outdir C:/phios/tmp/p9-r5/compiled --compatibility-date 2026-07-14 --compatibility-flags nodejs_compat",
+      "cwd": "C:/phios/tmp/p9-r5/source",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/check-p9-r5-compiled-isolation.mjs",
+      "exitCode": 0,
+      "passed": 138,
+      "total": 138
+    }
+  ],
+  "fixtureSuccessorAuthorization": {
+    "humanReply": "1",
+    "scope": "Only two QA-only positive fixtures gain real valid supporting source bodies/identity and localized public labels. Original test and failures unchanged; metadata-only remains unsupported.",
+    "historicalAssertionsPassed": 20,
+    "historicalAssertionsFailed": 2,
+    "successorPassed": 22
+  },
+  "sixty": {
+    "status": "PASS_LOCAL",
+    "total": 60,
+    "passed": 60,
+    "failed": 0,
+    "results": [
+      {
+        "name": "BOOK-1 zh-Hans stale grounding denial",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-1 zh-Hans stale composition denial",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-1 zh-Hans stale citation denial",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-1 zh-Hans denied projection after no-supported-answer",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-5 zh-Hans stale grounding denial",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-5 zh-Hans stale composition denial",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-5 zh-Hans stale citation denial",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-5 zh-Hans denied projection after no-supported-answer",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-1 en stale grounding denial",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-1 en stale composition denial",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-1 en stale citation denial",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-1 en denied projection after no-supported-answer",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-5 en stale grounding denial",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-5 en stale composition denial",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-5 en stale citation denial",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-5 en denied projection after no-supported-answer",
+        "status": "PASS"
+      },
+      {
+        "name": "grounding empty",
+        "status": "PASS"
+      },
+      {
+        "name": "grounding ordinary published",
+        "status": "PASS"
+      },
+      {
+        "name": "grounding mixed",
+        "status": "PASS"
+      },
+      {
+        "name": "grounding duplicate",
+        "status": "PASS"
+      },
+      {
+        "name": "grounding missing identity",
+        "status": "PASS"
+      },
+      {
+        "name": "grounding missing text",
+        "status": "PASS"
+      },
+      {
+        "name": "grounding stale version",
+        "status": "PASS"
+      },
+      {
+        "name": "zh-Hans no-source prose free of internal language",
+        "status": "PASS"
+      },
+      {
+        "name": "zh-Hans empty projection sources",
+        "status": "PASS"
+      },
+      {
+        "name": "en no-source prose free of internal language",
+        "status": "PASS"
+      },
+      {
+        "name": "en empty projection sources",
+        "status": "PASS"
+      },
+      {
+        "name": "external available",
+        "status": "PASS"
+      },
+      {
+        "name": "external unavailable",
+        "status": "PASS"
+      },
+      {
+        "name": "external denied",
+        "status": "PASS"
+      },
+      {
+        "name": "external manuscript denied plus external",
+        "status": "PASS"
+      },
+      {
+        "name": "external both unavailable",
+        "status": "PASS"
+      },
+      {
+        "name": "PUBLISHED_CANONICAL_ARTICLE zh-Hans localized labels",
+        "status": "PASS"
+      },
+      {
+        "name": "PUBLISHED_CANONICAL_ARTICLE en localized labels",
+        "status": "PASS"
+      },
+      {
+        "name": "REGISTERED_FIGURE_SEMANTICS zh-Hans localized labels",
+        "status": "PASS"
+      },
+      {
+        "name": "REGISTERED_FIGURE_SEMANTICS en localized labels",
+        "status": "PASS"
+      },
+      {
+        "name": "CIVILIZATION_ATLAS_CASE zh-Hans localized labels",
+        "status": "PASS"
+      },
+      {
+        "name": "CIVILIZATION_ATLAS_CASE en localized labels",
+        "status": "PASS"
+      },
+      {
+        "name": "COMPLETED_MANUSCRIPT zh-Hans localized labels",
+        "status": "PASS"
+      },
+      {
+        "name": "COMPLETED_MANUSCRIPT en localized labels",
+        "status": "PASS"
+      },
+      {
+        "name": "ordering cannot promote denied source",
+        "status": "PASS"
+      },
+      {
+        "name": "ordering support-set invariance",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed projection null",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed projection empty",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed projection invalid locale",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding null collection",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding null item",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed composition null bundle",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed CKA null",
+        "status": "PASS"
+      },
+      {
+        "name": "customer allowlist excludes governance lineage",
+        "status": "PASS"
+      },
+      {
+        "name": "synthetic filesystem residue suppressed",
+        "status": "PASS"
+      },
+      {
+        "name": "standalone corpus loader denies before private read",
+        "status": "PASS"
+      },
+      {
+        "name": "corpus identity mismatch rejected",
+        "status": "PASS"
+      },
+      {
+        "name": "provider/network intercept unused",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-1 zh-Hans complete five-file stale-chain denial",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-5 zh-Hans complete five-file stale-chain denial",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-1 en complete five-file stale-chain denial",
+        "status": "PASS"
+      },
+      {
+        "name": "BOOK-5 en complete five-file stale-chain denial",
+        "status": "PASS"
+      },
+      {
+        "name": "zh-Hans atlas customer prose free of internal Registry wording",
+        "status": "PASS"
+      },
+      {
+        "name": "en atlas customer prose free of internal Registry wording",
+        "status": "PASS"
+      }
+    ],
+    "examples": [
+      {
+        "case": "BOOK-1 stale zh-Hans",
+        "question": "石英证据边界是什么?",
+        "answer": "目前没有足够的来源资料来回答这个问题。",
+        "projectedAnswer": "目前没有足够的来源资料来回答这个问题。",
+        "sourceLabels": []
+      },
+      {
+        "case": "BOOK-5 stale zh-Hans",
+        "question": "石英证据边界是什么?",
+        "answer": "目前没有足够的来源资料来回答这个问题。",
+        "projectedAnswer": "目前没有足够的来源资料来回答这个问题。",
+        "sourceLabels": []
+      },
+      {
+        "case": "BOOK-1 stale en",
+        "question": "What is the quartz evidence boundary?",
+        "answer": "There is not enough source material to answer this question.",
+        "projectedAnswer": "There is not enough source material to answer this question.",
+        "sourceLabels": []
+      },
+      {
+        "case": "BOOK-5 stale en",
+        "question": "What is the quartz evidence boundary?",
+        "answer": "There is not enough source material to answer this question.",
+        "projectedAnswer": "There is not enough source material to answer this question.",
+        "sourceLabels": []
+      },
+      {
+        "case": "no source zh-Hans",
+        "answer": "目前没有足够的来源资料来回答这个问题。",
+        "limits": []
+      },
+      {
+        "case": "no source en",
+        "answer": "There is not enough source material to answer this question.",
+        "limits": []
+      },
+      {
+        "case": "PUBLISHED_CANONICAL_ARTICLE zh-Hans",
+        "answer": "一个有边界的参考回答。",
+        "sourceLabels": [
+          "文章 · Published reference"
+        ]
+      },
+      {
+        "case": "PUBLISHED_CANONICAL_ARTICLE en",
+        "answer": "A bounded reference answer.",
+        "sourceLabels": [
+          "Article · Published reference"
+        ]
+      },
+      {
+        "case": "REGISTERED_FIGURE_SEMANTICS zh-Hans",
+        "answer": "一个有边界的参考回答。",
+        "sourceLabels": [
+          "图示 · Published reference"
+        ]
+      },
+      {
+        "case": "REGISTERED_FIGURE_SEMANTICS en",
+        "answer": "A bounded reference answer.",
+        "sourceLabels": [
+          "Figure · Published reference"
+        ]
+      },
+      {
+        "case": "CIVILIZATION_ATLAS_CASE zh-Hans",
+        "answer": "一个有边界的参考回答。",
+        "sourceLabels": [
+          "世界参考 · Published reference"
+        ]
+      },
+      {
+        "case": "CIVILIZATION_ATLAS_CASE en",
+        "answer": "A bounded reference answer.",
+        "sourceLabels": [
+          "World context · Published reference"
+        ]
+      },
+      {
+        "case": "COMPLETED_MANUSCRIPT zh-Hans",
+        "answer": "一个有边界的参考回答。",
+        "sourceLabels": [
+          "参考手稿 · Published reference"
+        ]
+      },
+      {
+        "case": "COMPLETED_MANUSCRIPT en",
+        "answer": "A bounded reference answer.",
+        "sourceLabels": [
+          "Manuscript · Published reference"
+        ]
+      },
+      {
+        "case": "BOOK-1 complete five-file stale-chain zh-Hans",
+        "question": "石英证据边界",
+        "runtimeRecords": 0,
+        "groundedSources": 0,
+        "answer": "目前没有足够的来源资料来回答这个问题。",
+        "sourceLabels": []
+      },
+      {
+        "case": "BOOK-5 complete five-file stale-chain zh-Hans",
+        "question": "石英证据边界",
+        "runtimeRecords": 0,
+        "groundedSources": 0,
+        "answer": "目前没有足够的来源资料来回答这个问题。",
+        "sourceLabels": []
+      },
+      {
+        "case": "BOOK-1 complete five-file stale-chain en",
+        "question": "quartz evidence boundary",
+        "runtimeRecords": 0,
+        "groundedSources": 0,
+        "answer": "There is not enough source material to answer this question.",
+        "sourceLabels": []
+      },
+      {
+        "case": "BOOK-5 complete five-file stale-chain en",
+        "question": "quartz evidence boundary",
+        "runtimeRecords": 0,
+        "groundedSources": 0,
+        "answer": "There is not enough source material to answer this question.",
+        "sourceLabels": []
+      },
+      {
+        "case": "Atlas zh-Hans",
+        "answer": "目前没有足够的来源资料来回答这个问题。",
+        "sourceLabels": [],
+        "statement": "本次回答使用的来源。"
+      },
+      {
+        "case": "Atlas en",
+        "answer": "There is not enough source material to answer this question.",
+        "sourceLabels": [],
+        "statement": "Sources used for this answer."
+      }
+    ],
+    "verifiedDependencyPaths": [
+      "functions/knowledge-runtime/current-manuscript-server-metadata.js",
+      "functions/_lib/manuscript-current-admission.js",
+      "functions/_lib/knowledge-source-eligibility.js",
+      "functions/current-web-authority/current-web-authority-runtime.js",
+      "functions/external-reality-impact/external-reality-impact-runtime.js",
+      "functions/_lib/client-knowledge-ask-b.js",
+      "functions/_lib/knowledge-epistemic-reading.js",
+      "functions/_lib/kir-r2-answer-intelligence.js",
+      "functions/_lib/kir-r2-intelligence.js",
+      "functions/_lib/pai-r1-economics.js",
+      "functions/_lib/kir-r2-model-gateway.js",
+      "functions/_lib/kir-r2-production-admission.js",
+      "functions/_lib/kir-r2-w16r2-successor.js",
+      "functions/_lib/kir-r2-production.js",
+      "functions/public/ask-task-policy.js",
+      "functions/_lib/structured-ask-policy.js",
+      "functions/contextual-ask/context-source-registry.js",
+      "functions/contextual-ask/contextual-ask-runtime.js",
+      "functions/_lib/book-vii-published-admission.js",
+      "functions/_lib/public-knowledge-api.js",
+      "functions/knowledge-runtime/manuscript-source-runtime.js",
+      "content/registry/runtime-position-48-v1.json",
+      "assets/js/pages/civilization-atlas/atlas-state.js",
+      "assets/js/pages/civilization-atlas/atlas-url-state.js",
+      "content/civilization-atlas/reconfiguration/runtime-position-w8c-current-evidence-ir-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-af-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-eu-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-in-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-jp-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-kr-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-latam-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-me-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-ru-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-sea-w8c-current-authority-admission-v1.json",
+      "functions/_lib/book6-accepted-current.js",
+      "content/civilization-atlas/reconfiguration/runtime-position-w8d-rre-readouts-v1.json",
+      "content/civilization-atlas/reconfiguration/moomoo-provider-validated-claims-v1.json",
+      "content/civilization-atlas/reconfiguration/moomoo-provider-w8c-admission-results-v1.json",
+      "content/civilization-atlas/reconfiguration/moomoo-provider-rre-eligible-handoff-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-af-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-af-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-af-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-cn-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-cn-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-eu-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-eu-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-eu-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-in-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-in-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-in-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-jp-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-jp-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-jp-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-kr-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-kr-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-kr-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-latam-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-latam-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-latam-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-me-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-me-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-me-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-ru-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-ru-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-ru-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-sea-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-sea-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-sea-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-us-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-us-w8h-human-decisions-v1.json",
+      "functions/_lib/book6-current-source.js",
+      "functions/_lib/atlas-retrieval-scope.js",
+      "functions/_lib/knowledge-access-api.js",
+      "functions/_lib/formation-retrieval-scope.js",
+      "functions/_lib/ptrc-knowledge-quality.js",
+      "functions/_lib/knowledge-answer-grounding.js",
+      "functions/_lib/ptrc-ask-contract.js",
+      "functions/_lib/knowledge-answer-composition.js",
+      "functions/customer-projection/projection-common.js",
+      "functions/customer-projection/knowledge-customer-projection.js"
+    ],
+    "internalLeakInventory": [],
+    "syntheticSensitiveLeakCount": 0,
+    "actualCredentialExposureFound": false,
+    "networkCalls": 0,
+    "providerCalls": 0,
+    "productionMutations": 0,
+    "runtimeSourceChanges": 6
+  },
+  "expanded": {
+    "total": 230,
+    "passed": 230,
+    "failed": 0,
+    "results": [
+      {
+        "name": "invalid source #0 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #1 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #2 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #3 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #4 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #5 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #6 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #7 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #8 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #9 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #10 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #11 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #12 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #13 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #14 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #15 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #16 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #17 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source #18 zero support",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid collection null",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid collection undefined",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid collection []",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid collection {}",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid collection \"sources\"",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid collection 123",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid state \"NOT_ACTIVATED\" denies",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid state \"UNKNOWN\" denies",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid state \"WITHHELD\" denies",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid state \"DENIED\" denies",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid state \"STALE\" denies",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid state \"REJECTED\" denies",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid state null denies",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid state false denies",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid state [] denies",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid state {} denies",
+        "status": "PASS"
+      },
+      {
+        "name": "duplicate/support inflation [\"PUBLISHED:QA\",\"PUBLISHED:QA\"]",
+        "status": "PASS"
+      },
+      {
+        "name": "duplicate/support inflation [\"PUBLISHED:QA\",\"DIFFERENT_WRAPPER\"]",
+        "status": "PASS"
+      },
+      {
+        "name": "duplicate/support inflation [\"PUBLISHED:QA\",\"DENIED\"]",
+        "status": "PASS"
+      },
+      {
+        "name": "denied duplicate-only contributes zero",
+        "status": "PASS"
+      },
+      {
+        "name": "local/internal path C:\\Users\\QA_ONLY\\secret.txt zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "local/internal path C:\\Users\\QA_ONLY\\secret.txt en",
+        "status": "PASS"
+      },
+      {
+        "name": "local/internal path /home/qa/private.txt zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "local/internal path /home/qa/private.txt en",
+        "status": "PASS"
+      },
+      {
+        "name": "local/internal path tmp/review/output.txt zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "local/internal path tmp/review/output.txt en",
+        "status": "PASS"
+      },
+      {
+        "name": "local/internal path functions/_lib/internal.js zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "local/internal path functions/_lib/internal.js en",
+        "status": "PASS"
+      },
+      {
+        "name": "local/internal path content/production-closure/private.json zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "local/internal path content/production-closure/private.json en",
+        "status": "PASS"
+      },
+      {
+        "name": "local/internal path NOT_ACTIVATED registry ledger runtime zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "local/internal path NOT_ACTIVATED registry ledger runtime en",
+        "status": "PASS"
+      },
+      {
+        "name": "internal URL /api/secret stripped",
+        "status": "PASS"
+      },
+      {
+        "name": "internal URL /tmp/report.pdf stripped",
+        "status": "PASS"
+      },
+      {
+        "name": "internal URL /tools/review/x.html stripped",
+        "status": "PASS"
+      },
+      {
+        "name": "internal URL file:///home/x stripped",
+        "status": "PASS"
+      },
+      {
+        "name": "internal URL javascript:alert(1) stripped",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 0",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 1",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 2",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 3",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 4",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 5",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 6",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 7",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 8",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 9",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 10",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 11",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 12",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 13",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 14",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 15",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 16",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 17",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 18",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 19",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 20",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 21",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 22",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 23",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 24",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 25",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 26",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 27",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 28",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 29",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 30",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 31",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 32",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 33",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 34",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 35",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 36",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 37",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 38",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 39",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 40",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 41",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 42",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 43",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 44",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 45",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 46",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 47",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 48",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 49",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 50",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 51",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 52",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 53",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 54",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 55",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 56",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 57",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 58",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 59",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 60",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 61",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 62",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 63",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 64",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 65",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 66",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 67",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 68",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 69",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 70",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 71",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 72",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 73",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 74",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 75",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 76",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 77",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 78",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 79",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 80",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 81",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 82",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 83",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 84",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 85",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 86",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 87",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 88",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 89",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 90",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 91",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 92",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 93",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 94",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 95",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 96",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 97",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 98",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 99",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 100",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 101",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 102",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 103",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 104",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 105",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 106",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 107",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 108",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 109",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 110",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 111",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 112",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 113",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 114",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 115",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 116",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 117",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 118",
+        "status": "PASS"
+      },
+      {
+        "name": "source-order permutation 119",
+        "status": "PASS"
+      },
+      {
+        "name": "positive localized label PUBLISHED_CANONICAL_ARTICLE zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "positive localized label PUBLISHED_CANONICAL_ARTICLE en",
+        "status": "PASS"
+      },
+      {
+        "name": "positive localized label COMPLETED_MANUSCRIPT zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "positive localized label COMPLETED_MANUSCRIPT en",
+        "status": "PASS"
+      },
+      {
+        "name": "positive localized label REGISTERED_FIGURE_SEMANTICS zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "positive localized label REGISTERED_FIGURE_SEMANTICS en",
+        "status": "PASS"
+      },
+      {
+        "name": "positive localized label REGISTERED_CONCEPT zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "positive localized label REGISTERED_CONCEPT en",
+        "status": "PASS"
+      },
+      {
+        "name": "positive localized label PUBLIC_CONTEXT zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "positive localized label PUBLIC_CONTEXT en",
+        "status": "PASS"
+      },
+      {
+        "name": "positive localized label EXTERNAL_AUTHORITY zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "positive localized label EXTERNAL_AUTHORITY en",
+        "status": "PASS"
+      },
+      {
+        "name": "no-support output zh-Hans null",
+        "status": "PASS"
+      },
+      {
+        "name": "no-support output zh-Hans undefined",
+        "status": "PASS"
+      },
+      {
+        "name": "no-support output zh-Hans {}",
+        "status": "PASS"
+      },
+      {
+        "name": "no-support output zh-Hans []",
+        "status": "PASS"
+      },
+      {
+        "name": "no-support output zh-Hans {\"sources\":[{\"sourceId\":\"DENIED\",\"sourceType\":\"PUBLISHED_CANONICAL_ARTICLE\",\"href\":\"/articles/qa\",\"text\":\"Quartz evidence is bounded by observation.\",\"title\":\"Quartz evidence\",\"currentAdmission\":\"NOT_ACTIVATED\"}]}",
+        "status": "PASS"
+      },
+      {
+        "name": "no-support output zh-Hans {\"sources\":[{\"sourceId\":\"PUBLISHED:QA\",\"sourceType\":\"PUBLISHED_CANONICAL_ARTICLE\",\"href\":\"/articles/qa\",\"text\":\"Quartz evidence is bounded by observation.\",\"title\":\"Quartz evidence\"}],\"cka\":{\"clientAnswer\":{\"directAnswer\":\"NOT_ACTIVATED runtime\"}}}",
+        "status": "PASS"
+      },
+      {
+        "name": "no-support output en null",
+        "status": "PASS"
+      },
+      {
+        "name": "no-support output en undefined",
+        "status": "PASS"
+      },
+      {
+        "name": "no-support output en {}",
+        "status": "PASS"
+      },
+      {
+        "name": "no-support output en []",
+        "status": "PASS"
+      },
+      {
+        "name": "no-support output en {\"sources\":[{\"sourceId\":\"DENIED\",\"sourceType\":\"PUBLISHED_CANONICAL_ARTICLE\",\"href\":\"/articles/qa\",\"text\":\"Quartz evidence is bounded by observation.\",\"title\":\"Quartz evidence\",\"currentAdmission\":\"NOT_ACTIVATED\"}]}",
+        "status": "PASS"
+      },
+      {
+        "name": "no-support output en {\"sources\":[{\"sourceId\":\"PUBLISHED:QA\",\"sourceType\":\"PUBLISHED_CANONICAL_ARTICLE\",\"href\":\"/articles/qa\",\"text\":\"Quartz evidence is bounded by observation.\",\"title\":\"Quartz evidence\"}],\"cka\":{\"clientAnswer\":{\"directAnswer\":\"NOT_ACTIVATED runtime\"}}}",
+        "status": "PASS"
+      },
+      {
+        "name": "wrong language prose en fails safely",
+        "status": "PASS"
+      },
+      {
+        "name": "wrong language prose zh-Hans fails safely",
+        "status": "PASS"
+      },
+      {
+        "name": "external valid",
+        "status": "PASS"
+      },
+      {
+        "name": "external denied",
+        "status": "PASS"
+      },
+      {
+        "name": "external not activated",
+        "status": "PASS"
+      },
+      {
+        "name": "external malformed",
+        "status": "PASS"
+      },
+      {
+        "name": "external absent",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection null",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection undefined",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection []",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection {}",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection \"\"",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection \"object-list\"",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection 42",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection {\"sourceId\":\"PUBLISHED:QA\",\"href\":\"/articles/qa\",\"text\":\"Quartz evidence is bounded by observation.\",\"title\":\"Quartz evidence\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection {\"sourceId\":\"PUBLISHED:QA\",\"sourceType\":\"UNKNOWN\",\"href\":\"/articles/qa\",\"text\":\"Quartz evidence is bounded by observation.\",\"title\":\"Quartz evidence\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection {\"sourceType\":\"PUBLISHED_CANONICAL_ARTICLE\",\"text\":\"Quartz evidence is bounded by observation.\",\"title\":\"Quartz evidence\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection {\"sourceId\":\"PUBLISHED:QA\",\"sourceType\":\"PUBLISHED_CANONICAL_ARTICLE\",\"href\":\"/articles/qa\",\"title\":\"Quartz evidence\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection {\"sourceId\":\"PUBLISHED:QA\",\"sourceType\":\"PUBLISHED_CANONICAL_ARTICLE\",\"href\":\"/articles/qa\",\"text\":\"\",\"title\":\"Quartz evidence\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection {\"sourceId\":\"PUBLISHED:QA\",\"sourceType\":\"PUBLISHED_CANONICAL_ARTICLE\",\"href\":\"/articles/qa\",\"text\":\"Quartz evidence is bounded by observation.\",\"title\":\"Quartz evidence\",\"eligible\":false}",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection {\"sourceId\":\"PUBLISHED:QA\",\"sourceType\":\"PUBLISHED_CANONICAL_ARTICLE\",\"href\":\"/articles/qa\",\"text\":\"Quartz evidence is bounded by observation.\",\"title\":\"Quartz evidence\",\"eligible\":\"true\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection {\"sourceId\":\"PUBLISHED:QA\",\"sourceType\":\"PUBLISHED_CANONICAL_ARTICLE\",\"href\":\"/articles/qa\",\"text\":\"Quartz evidence is bounded by observation.\",\"title\":\"Quartz evidence\",\"currentAdmission\":\"UNKNOWN\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection {\"sourceId\":\"PUBLISHED:QA\",\"sourceType\":\"PUBLISHED_CANONICAL_ARTICLE\",\"href\":\"/articles/qa\",\"text\":\"Quartz evidence is bounded by observation.\",\"title\":\"Quartz evidence\",\"currentAdmission\":null}",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection {\"sourceId\":\"PUBLISHED:QA\",\"sourceType\":\"PUBLISHED_CANONICAL_ARTICLE\",\"href\":\"/articles/qa\",\"text\":\"Quartz evidence is bounded by observation.\",\"title\":\"Quartz evidence\",\"stale\":true}",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection {\"sourceId\":\"PUBLISHED:QA\",\"sourceType\":\"PUBLISHED_CANONICAL_ARTICLE\",\"href\":\"/articles/qa\",\"text\":\"Quartz evidence is bounded by observation.\",\"title\":\"Quartz evidence\",\"sourceVersion\":\"unknown-v0\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed grounding collection {\"sourceId\":\"PUBLISHED:QA\",\"sourceType\":\"PUBLISHED_CANONICAL_ARTICLE\",\"href\":\"/articles/qa\",\"text\":\"Quartz evidence is bounded by observation.\",\"title\":\"Quartz evidence\",\"denied\":true}",
+        "status": "PASS"
+      },
+      {
+        "name": "raw corpus cache cannot serve denied state",
+        "status": "PASS"
+      },
+      {
+        "name": "prepared cache cannot serve invalidated source",
+        "status": "PASS"
+      },
+      {
+        "name": "coverage flag cannot revive empty support",
+        "status": "PASS"
+      },
+      {
+        "name": "network, D1, provider, payment writes zero",
+        "status": "PASS"
+      }
+    ],
+    "networkCalls": 0,
+    "providerCalls": 0,
+    "D1Writes": 0,
+    "productionMutations": 0,
+    "permutationCount": 120,
+    "sourceDependencies": [
+      "functions/knowledge-runtime/current-manuscript-server-metadata.js",
+      "functions/_lib/manuscript-current-admission.js",
+      "functions/_lib/knowledge-source-eligibility.js",
+      "functions/customer-projection/projection-common.js",
+      "functions/customer-projection/knowledge-customer-projection.js",
+      "functions/contextual-ask/context-source-registry.js",
+      "functions/contextual-ask/contextual-ask-runtime.js",
+      "functions/_lib/book-vii-published-admission.js",
+      "functions/_lib/public-knowledge-api.js",
+      "functions/knowledge-runtime/manuscript-source-runtime.js",
+      "content/registry/runtime-position-48-v1.json",
+      "assets/js/pages/civilization-atlas/atlas-state.js",
+      "assets/js/pages/civilization-atlas/atlas-url-state.js",
+      "content/civilization-atlas/reconfiguration/runtime-position-w8c-current-evidence-ir-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-af-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-eu-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-in-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-jp-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-kr-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-latam-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-me-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-ru-w8c-current-authority-admission-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-sea-w8c-current-authority-admission-v1.json",
+      "functions/_lib/book6-accepted-current.js",
+      "content/civilization-atlas/reconfiguration/runtime-position-w8d-rre-readouts-v1.json",
+      "content/civilization-atlas/reconfiguration/moomoo-provider-validated-claims-v1.json",
+      "content/civilization-atlas/reconfiguration/moomoo-provider-w8c-admission-results-v1.json",
+      "content/civilization-atlas/reconfiguration/moomoo-provider-rre-eligible-handoff-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-af-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-af-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-af-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-cn-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-cn-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-eu-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-eu-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-eu-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-in-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-in-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-in-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-jp-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-jp-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-jp-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-kr-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-kr-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-kr-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-latam-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-latam-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-latam-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-me-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-me-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-me-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-ru-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-ru-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-ru-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-sea-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-sea-w8h-human-decisions-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-sea-w8d-rre-readout-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-us-w8i-accepted-current-dossier-v1.json",
+      "content/civilization-atlas/reconfiguration/dossier-us-w8h-human-decisions-v1.json",
+      "functions/_lib/book6-current-source.js",
+      "functions/_lib/atlas-retrieval-scope.js",
+      "functions/_lib/knowledge-epistemic-reading.js",
+      "functions/_lib/knowledge-access-api.js",
+      "functions/_lib/structured-ask-policy.js",
+      "functions/_lib/formation-retrieval-scope.js",
+      "functions/_lib/ptrc-knowledge-quality.js",
+      "functions/_lib/knowledge-answer-grounding.js",
+      "functions/_lib/kir-r2-answer-intelligence.js",
+      "functions/_lib/kir-r2-intelligence.js",
+      "functions/_lib/pai-r1-economics.js",
+      "functions/_lib/kir-r2-model-gateway.js",
+      "functions/_lib/kir-r2-production-admission.js",
+      "functions/_lib/kir-r2-w16r2-successor.js",
+      "functions/_lib/kir-r2-production.js",
+      "functions/public/ask-task-policy.js",
+      "functions/_lib/ptrc-ask-contract.js",
+      "functions/_lib/knowledge-answer-composition.js",
+      "functions/current-web-authority/current-web-authority-runtime.js",
+      "functions/external-reality-impact/external-reality-impact-runtime.js",
+      "functions/_lib/client-knowledge-ask-b.js",
+      "<stdin>"
+    ]
+  },
+  "terminal": {
+    "status": "PASS_LOCAL",
+    "total": 22,
+    "passed": 22,
+    "failed": 0,
+    "results": [
+      {
+        "name": "HTTP malformed {",
+        "status": "PASS"
+      },
+      {
+        "name": "HTTP malformed null",
+        "status": "PASS"
+      },
+      {
+        "name": "HTTP malformed []",
+        "status": "PASS"
+      },
+      {
+        "name": "HTTP malformed {}",
+        "status": "PASS"
+      },
+      {
+        "name": "HTTP malformed \"text\"",
+        "status": "PASS"
+      },
+      {
+        "name": "HTTP malformed 123",
+        "status": "PASS"
+      },
+      {
+        "name": "HTTP malformed {\"locale\":\"invalid\",\"contexts\":\"not-an-array\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "HTTP malformed {\"question\":\"\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "public positive PUBLISHED_CANONICAL_ARTICLE zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "public positive PUBLISHED_CANONICAL_ARTICLE en",
+        "status": "PASS"
+      },
+      {
+        "name": "public positive REGISTERED_FIGURE_SEMANTICS zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "public positive REGISTERED_FIGURE_SEMANTICS en",
+        "status": "PASS"
+      },
+      {
+        "name": "public positive REGISTERED_CONCEPT zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "public positive REGISTERED_CONCEPT en",
+        "status": "PASS"
+      },
+      {
+        "name": "public positive PUBLIC_CONTEXT zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "public positive PUBLIC_CONTEXT en",
+        "status": "PASS"
+      },
+      {
+        "name": "public positive EXTERNAL_AUTHORITY zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "public positive EXTERNAL_AUTHORITY en",
+        "status": "PASS"
+      },
+      {
+        "name": "public positive COMPLETED_MANUSCRIPT zh-Hans",
+        "status": "PASS"
+      },
+      {
+        "name": "public positive COMPLETED_MANUSCRIPT en",
+        "status": "PASS"
+      },
+      {
+        "name": "supported Atlas and structured answer remain available en",
+        "status": "PASS"
+      },
+      {
+        "name": "supported Atlas and structured answer remain available zh-Hans",
+        "status": "PASS"
+      }
+    ],
+    "examples": [
+      {
+        "body": "{",
+        "status": 400,
+        "output": {
+          "ok": false,
+          "error": "INVALID_JSON"
+        }
+      },
+      {
+        "body": "null",
+        "status": 400,
+        "output": {
+          "ok": false,
+          "error": "ASK_QUESTION_REQUIRED"
+        }
+      },
+      {
+        "body": "[]",
+        "status": 400,
+        "output": {
+          "ok": false,
+          "error": "ASK_QUESTION_REQUIRED"
+        }
+      },
+      {
+        "body": "{}",
+        "status": 400,
+        "output": {
+          "ok": false,
+          "error": "ASK_QUESTION_REQUIRED"
+        }
+      },
+      {
+        "body": "\"text\"",
+        "status": 400,
+        "output": {
+          "ok": false,
+          "error": "ASK_QUESTION_REQUIRED"
+        }
+      },
+      {
+        "body": "123",
+        "status": 400,
+        "output": {
+          "ok": false,
+          "error": "ASK_QUESTION_REQUIRED"
+        }
+      },
+      {
+        "body": "{\"locale\":\"invalid\",\"contexts\":\"not-an-array\"}",
+        "status": 400,
+        "output": {
+          "ok": false,
+          "error": "ASK_QUESTION_REQUIRED"
+        }
+      },
+      {
+        "body": "{\"question\":\"\"}",
+        "status": 400,
+        "output": {
+          "ok": false,
+          "error": "ASK_QUESTION_REQUIRED"
+        }
+      },
+      {
+        "type": "PUBLISHED_CANONICAL_ARTICLE",
+        "locale": "zh-Hans",
+        "view": {
+          "surface": "ASK",
+          "locale": "zh-Hans",
+          "state": "ANSWERED",
+          "question": null,
+          "answer": {
+            "text": "观察资料支持有边界的理解。",
+            "supporting": []
+          },
+          "basedOn": {
+            "sources": [
+              {
+                "label": "文章",
+                "excerpt": "观察资料支持有边界的理解。",
+                "href": "/knowledge/"
+              }
+            ],
+            "statement": "本次回答使用的来源。"
+          },
+          "limits": {
+            "items": []
+          },
+          "relatedKnowledge": [],
+          "possibleNextStep": {
+            "kind": "OBSERVE",
+            "label": "浏览现有资料"
+          },
+          "currentFacts": {
+            "state": "NOT_USED",
+            "evidence": []
+          },
+          "handoff": {
+            "available": true,
+            "question": null,
+            "externalEvidence": [],
+            "unknown": []
+          },
+          "atlas": null
+        }
+      },
+      {
+        "type": "PUBLISHED_CANONICAL_ARTICLE",
+        "locale": "en",
+        "view": {
+          "surface": "ASK",
+          "locale": "en",
+          "state": "ANSWERED",
+          "question": null,
+          "answer": {
+            "text": "Observation supports a bounded explanation.",
+            "supporting": []
+          },
+          "basedOn": {
+            "sources": [
+              {
+                "label": "Article",
+                "excerpt": "Observation supports a bounded explanation.",
+                "href": "/knowledge/"
+              }
+            ],
+            "statement": "Sources used for this answer."
+          },
+          "limits": {
+            "items": []
+          },
+          "relatedKnowledge": [],
+          "possibleNextStep": {
+            "kind": "OBSERVE",
+            "label": "Explore available material"
+          },
+          "currentFacts": {
+            "state": "NOT_USED",
+            "evidence": []
+          },
+          "handoff": {
+            "available": true,
+            "question": null,
+            "externalEvidence": [],
+            "unknown": []
+          },
+          "atlas": null
+        }
+      },
+      {
+        "type": "REGISTERED_FIGURE_SEMANTICS",
+        "locale": "zh-Hans",
+        "view": {
+          "surface": "ASK",
+          "locale": "zh-Hans",
+          "state": "ANSWERED",
+          "question": null,
+          "answer": {
+            "text": "观察资料支持有边界的理解。",
+            "supporting": []
+          },
+          "basedOn": {
+            "sources": [
+              {
+                "label": "图示",
+                "excerpt": "观察资料支持有边界的理解。",
+                "href": "/knowledge/"
+              }
+            ],
+            "statement": "本次回答使用的来源。"
+          },
+          "limits": {
+            "items": []
+          },
+          "relatedKnowledge": [],
+          "possibleNextStep": {
+            "kind": "OBSERVE",
+            "label": "浏览现有资料"
+          },
+          "currentFacts": {
+            "state": "NOT_USED",
+            "evidence": []
+          },
+          "handoff": {
+            "available": true,
+            "question": null,
+            "externalEvidence": [],
+            "unknown": []
+          },
+          "atlas": null
+        }
+      },
+      {
+        "type": "REGISTERED_FIGURE_SEMANTICS",
+        "locale": "en",
+        "view": {
+          "surface": "ASK",
+          "locale": "en",
+          "state": "ANSWERED",
+          "question": null,
+          "answer": {
+            "text": "Observation supports a bounded explanation.",
+            "supporting": []
+          },
+          "basedOn": {
+            "sources": [
+              {
+                "label": "Figure",
+                "excerpt": "Observation supports a bounded explanation.",
+                "href": "/knowledge/"
+              }
+            ],
+            "statement": "Sources used for this answer."
+          },
+          "limits": {
+            "items": []
+          },
+          "relatedKnowledge": [],
+          "possibleNextStep": {
+            "kind": "OBSERVE",
+            "label": "Explore available material"
+          },
+          "currentFacts": {
+            "state": "NOT_USED",
+            "evidence": []
+          },
+          "handoff": {
+            "available": true,
+            "question": null,
+            "externalEvidence": [],
+            "unknown": []
+          },
+          "atlas": null
+        }
+      },
+      {
+        "type": "REGISTERED_CONCEPT",
+        "locale": "zh-Hans",
+        "view": {
+          "surface": "ASK",
+          "locale": "zh-Hans",
+          "state": "ANSWERED",
+          "question": null,
+          "answer": {
+            "text": "观察资料支持有边界的理解。",
+            "supporting": []
+          },
+          "basedOn": {
+            "sources": [
+              {
+                "label": "概念",
+                "excerpt": "观察资料支持有边界的理解。",
+                "href": "/knowledge/"
+              }
+            ],
+            "statement": "本次回答使用的来源。"
+          },
+          "limits": {
+            "items": []
+          },
+          "relatedKnowledge": [],
+          "possibleNextStep": {
+            "kind": "OBSERVE",
+            "label": "浏览现有资料"
+          },
+          "currentFacts": {
+            "state": "NOT_USED",
+            "evidence": []
+          },
+          "handoff": {
+            "available": true,
+            "question": null,
+            "externalEvidence": [],
+            "unknown": []
+          },
+          "atlas": null
+        }
+      },
+      {
+        "type": "REGISTERED_CONCEPT",
+        "locale": "en",
+        "view": {
+          "surface": "ASK",
+          "locale": "en",
+          "state": "ANSWERED",
+          "question": null,
+          "answer": {
+            "text": "Observation supports a bounded explanation.",
+            "supporting": []
+          },
+          "basedOn": {
+            "sources": [
+              {
+                "label": "Concept",
+                "excerpt": "Observation supports a bounded explanation.",
+                "href": "/knowledge/"
+              }
+            ],
+            "statement": "Sources used for this answer."
+          },
+          "limits": {
+            "items": []
+          },
+          "relatedKnowledge": [],
+          "possibleNextStep": {
+            "kind": "OBSERVE",
+            "label": "Explore available material"
+          },
+          "currentFacts": {
+            "state": "NOT_USED",
+            "evidence": []
+          },
+          "handoff": {
+            "available": true,
+            "question": null,
+            "externalEvidence": [],
+            "unknown": []
+          },
+          "atlas": null
+        }
+      },
+      {
+        "type": "PUBLIC_CONTEXT",
+        "locale": "zh-Hans",
+        "view": {
+          "surface": "ASK",
+          "locale": "zh-Hans",
+          "state": "ANSWERED",
+          "question": null,
+          "answer": {
+            "text": "观察资料支持有边界的理解。",
+            "supporting": []
+          },
+          "basedOn": {
+            "sources": [
+              {
+                "label": "世界参考",
+                "excerpt": "观察资料支持有边界的理解。",
+                "href": "/knowledge/"
+              }
+            ],
+            "statement": "本次回答使用的来源。"
+          },
+          "limits": {
+            "items": []
+          },
+          "relatedKnowledge": [],
+          "possibleNextStep": {
+            "kind": "OBSERVE",
+            "label": "浏览现有资料"
+          },
+          "currentFacts": {
+            "state": "NOT_USED",
+            "evidence": []
+          },
+          "handoff": {
+            "available": true,
+            "question": null,
+            "externalEvidence": [],
+            "unknown": []
+          },
+          "atlas": null
+        }
+      },
+      {
+        "type": "PUBLIC_CONTEXT",
+        "locale": "en",
+        "view": {
+          "surface": "ASK",
+          "locale": "en",
+          "state": "ANSWERED",
+          "question": null,
+          "answer": {
+            "text": "Observation supports a bounded explanation.",
+            "supporting": []
+          },
+          "basedOn": {
+            "sources": [
+              {
+                "label": "World context",
+                "excerpt": "Observation supports a bounded explanation.",
+                "href": "/knowledge/"
+              }
+            ],
+            "statement": "Sources used for this answer."
+          },
+          "limits": {
+            "items": []
+          },
+          "relatedKnowledge": [],
+          "possibleNextStep": {
+            "kind": "OBSERVE",
+            "label": "Explore available material"
+          },
+          "currentFacts": {
+            "state": "NOT_USED",
+            "evidence": []
+          },
+          "handoff": {
+            "available": true,
+            "question": null,
+            "externalEvidence": [],
+            "unknown": []
+          },
+          "atlas": null
+        }
+      },
+      {
+        "type": "EXTERNAL_AUTHORITY",
+        "locale": "zh-Hans",
+        "view": {
+          "surface": "ASK",
+          "locale": "zh-Hans",
+          "state": "ANSWERED",
+          "question": null,
+          "answer": {
+            "text": "观察资料支持有边界的理解。",
+            "supporting": []
+          },
+          "basedOn": {
+            "sources": [
+              {
+                "label": "外部来源",
+                "excerpt": "观察资料支持有边界的理解。",
+                "href": "/knowledge/"
+              }
+            ],
+            "statement": "本次回答使用的来源。"
+          },
+          "limits": {
+            "items": []
+          },
+          "relatedKnowledge": [],
+          "possibleNextStep": {
+            "kind": "OBSERVE",
+            "label": "浏览现有资料"
+          },
+          "currentFacts": {
+            "state": "NOT_USED",
+            "evidence": []
+          },
+          "handoff": {
+            "available": true,
+            "question": null,
+            "externalEvidence": [],
+            "unknown": []
+          },
+          "atlas": null
+        }
+      },
+      {
+        "type": "EXTERNAL_AUTHORITY",
+        "locale": "en",
+        "view": {
+          "surface": "ASK",
+          "locale": "en",
+          "state": "ANSWERED",
+          "question": null,
+          "answer": {
+            "text": "Observation supports a bounded explanation.",
+            "supporting": []
+          },
+          "basedOn": {
+            "sources": [
+              {
+                "label": "External source",
+                "excerpt": "Observation supports a bounded explanation.",
+                "href": "/knowledge/"
+              }
+            ],
+            "statement": "Sources used for this answer."
+          },
+          "limits": {
+            "items": []
+          },
+          "relatedKnowledge": [],
+          "possibleNextStep": {
+            "kind": "OBSERVE",
+            "label": "Explore available material"
+          },
+          "currentFacts": {
+            "state": "NOT_USED",
+            "evidence": []
+          },
+          "handoff": {
+            "available": true,
+            "question": null,
+            "externalEvidence": [],
+            "unknown": []
+          },
+          "atlas": null
+        }
+      },
+      {
+        "type": "COMPLETED_MANUSCRIPT",
+        "locale": "zh-Hans",
+        "view": {
+          "surface": "ASK",
+          "locale": "zh-Hans",
+          "state": "ANSWERED",
+          "question": null,
+          "answer": {
+            "text": "观察资料支持有边界的理解。",
+            "supporting": []
+          },
+          "basedOn": {
+            "sources": [
+              {
+                "label": "参考手稿",
+                "excerpt": "观察资料支持有边界的理解。",
+                "href": "/knowledge/",
+                "sectionCode": "ref-8ea69235",
+                "pageRange": null,
+                "supportRange": null
+              }
+            ],
+            "statement": "本次回答使用的来源。"
+          },
+          "limits": {
+            "items": []
+          },
+          "relatedKnowledge": [],
+          "possibleNextStep": {
+            "kind": "OBSERVE",
+            "label": "浏览现有资料"
+          },
+          "currentFacts": {
+            "state": "NOT_USED",
+            "evidence": []
+          },
+          "handoff": {
+            "available": true,
+            "question": null,
+            "externalEvidence": [],
+            "unknown": []
+          },
+          "atlas": null
+        }
+      },
+      {
+        "type": "COMPLETED_MANUSCRIPT",
+        "locale": "en",
+        "view": {
+          "surface": "ASK",
+          "locale": "en",
+          "state": "ANSWERED",
+          "question": null,
+          "answer": {
+            "text": "Observation supports a bounded explanation.",
+            "supporting": []
+          },
+          "basedOn": {
+            "sources": [
+              {
+                "label": "Manuscript",
+                "excerpt": "Observation supports a bounded explanation.",
+                "href": "/knowledge/",
+                "sectionCode": "ref-8ea69235",
+                "pageRange": null,
+                "supportRange": null
+              }
+            ],
+            "statement": "Sources used for this answer."
+          },
+          "limits": {
+            "items": []
+          },
+          "relatedKnowledge": [],
+          "possibleNextStep": {
+            "kind": "OBSERVE",
+            "label": "Explore available material"
+          },
+          "currentFacts": {
+            "state": "NOT_USED",
+            "evidence": []
+          },
+          "handoff": {
+            "available": true,
+            "question": null,
+            "externalEvidence": [],
+            "unknown": []
+          },
+          "atlas": null
+        }
+      },
+      {
+        "type": "validated-atlas-structured",
+        "locale": "en",
+        "view": {
+          "surface": "ASK",
+          "locale": "en",
+          "state": "ANSWERED",
+          "question": null,
+          "answer": {
+            "text": "Observation supports a bounded explanation.",
+            "supporting": [],
+            "structuredAnswer": {
+              "mechanismOrState": "Observation supports a bounded explanation.",
+              "conditions": [
+                "Observation supports a bounded explanation."
+              ],
+              "relatedFactors": [
+                "Observation supports a bounded explanation."
+              ],
+              "possibleTransition": null,
+              "boundaryUnknown": "Observation supports a bounded explanation.",
+              "exploreInBook": "/books/reality-differentiation/"
+            }
+          },
+          "basedOn": {
+            "sources": [
+              {
+                "label": "World context",
+                "excerpt": "Observation supports a bounded explanation.",
+                "href": "/books/reality-differentiation/"
+              }
+            ],
+            "statement": "Sources used for this answer."
+          },
+          "limits": {
+            "items": []
+          },
+          "relatedKnowledge": [
+            {
+              "title": "Explore Civilization Atlas",
+              "description": null,
+              "href": "/books/reality-differentiation/?atlas=cases"
+            }
+          ],
+          "possibleNextStep": {
+            "kind": "RELATED_KNOWLEDGE",
+            "label": "Explore available material"
+          },
+          "currentFacts": {
+            "state": "NOT_USED",
+            "evidence": []
+          },
+          "handoff": {
+            "available": true,
+            "question": null,
+            "externalEvidence": [],
+            "unknown": []
+          },
+          "atlas": {
+            "deepLink": "/books/reality-differentiation/?atlas=cases",
+            "evidenceCount": 1
+          }
+        }
+      },
+      {
+        "type": "validated-atlas-structured",
+        "locale": "zh-Hans",
+        "view": {
+          "surface": "ASK",
+          "locale": "zh-Hans",
+          "state": "ANSWERED",
+          "question": null,
+          "answer": {
+            "text": "观察资料支持有边界的理解。",
+            "supporting": [],
+            "structuredAnswer": {
+              "mechanismOrState": "观察资料支持有边界的理解。",
+              "conditions": [
+                "观察资料支持有边界的理解。"
+              ],
+              "relatedFactors": [
+                "观察资料支持有边界的理解。"
+              ],
+              "possibleTransition": null,
+              "boundaryUnknown": "观察资料支持有边界的理解。",
+              "exploreInBook": "/books/reality-differentiation/"
+            }
+          },
+          "basedOn": {
+            "sources": [
+              {
+                "label": "世界参考",
+                "excerpt": "观察资料支持有边界的理解。",
+                "href": "/books/reality-differentiation/"
+              }
+            ],
+            "statement": "本次回答使用的来源。"
+          },
+          "limits": {
+            "items": []
+          },
+          "relatedKnowledge": [
+            {
+              "title": "浏览文明图谱",
+              "description": null,
+              "href": "/books/reality-differentiation/?atlas=cases"
+            }
+          ],
+          "possibleNextStep": {
+            "kind": "RELATED_KNOWLEDGE",
+            "label": "浏览现有资料"
+          },
+          "currentFacts": {
+            "state": "NOT_USED",
+            "evidence": []
+          },
+          "handoff": {
+            "available": true,
+            "question": null,
+            "externalEvidence": [],
+            "unknown": []
+          },
+          "atlas": {
+            "deepLink": "/books/reality-differentiation/?atlas=cases",
+            "evidenceCount": 1
+          }
+        }
+      }
+    ],
+    "networkCalls": 0,
+    "providerCalls": 0,
+    "productionMutations": 0
+  },
+  "historical": {
+    "status": "BASELINE_FAILURE",
+    "results": [
+      {
+        "name": "whole chapter deny undefined",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "whole chapter deny UNKNOWN",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "whole chapter deny NOT_ACTIVATED",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "whole chapter deny WITHHELD",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "missing ledger deny",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "unqualified activated deny",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "flag OFF denies qualified activated",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "source identity mismatch deny",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "duplicate authority deny",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "QA-only qualified activated fixture admits",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "BOOK-1 zh-Hans denied before private read, grounding, composition/citation and projection",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "BOOK-1 en denied before private read, grounding, composition/citation and projection",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "BOOK-5 zh-Hans denied before private read, grounding, composition/citation and projection",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "BOOK-5 en denied before private read, grounding, composition/citation and projection",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "fallback cannot admit denied whole chapter even in mixed corpus",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "QA-only positive real API retrieval",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "conceptual question retains reference routing",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "current market question retains external authority boundary",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "customer citation label zh-Hans",
+        "status": "BASELINE_FAILURE",
+        "error": "Cannot read properties of undefined (reading 'label')"
+      },
+      {
+        "name": "customer citation label en",
+        "status": "BASELINE_FAILURE",
+        "error": "Cannot read properties of undefined (reading 'label')"
+      },
+      {
+        "name": "operator import/build/no-opt-in safe; explicit intent reaches stub only",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "current Book I/V authority not changed",
+        "status": "PASS_LOCAL"
+      }
+    ],
+    "providerCalls": 0,
+    "providerCostUSD": 0,
+    "networkCalls": 0,
+    "productionDeployments": 0,
+    "realPayments": 0,
+    "realRefunds": 0
+  },
+  "successor": {
+    "status": "PASS_LOCAL",
+    "results": [
+      {
+        "name": "whole chapter deny undefined",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "whole chapter deny UNKNOWN",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "whole chapter deny NOT_ACTIVATED",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "whole chapter deny WITHHELD",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "missing ledger deny",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "unqualified activated deny",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "flag OFF denies qualified activated",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "source identity mismatch deny",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "duplicate authority deny",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "QA-only qualified activated fixture admits",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "BOOK-1 zh-Hans denied before private read, grounding, composition/citation and projection",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "BOOK-1 en denied before private read, grounding, composition/citation and projection",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "BOOK-5 zh-Hans denied before private read, grounding, composition/citation and projection",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "BOOK-5 en denied before private read, grounding, composition/citation and projection",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "fallback cannot admit denied whole chapter even in mixed corpus",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "QA-only positive real API retrieval",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "conceptual question retains reference routing",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "current market question retains external authority boundary",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "customer citation label zh-Hans",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "customer citation label en",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "operator import/build/no-opt-in safe; explicit intent reaches stub only",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "current Book I/V authority not changed",
+        "status": "PASS_LOCAL"
+      }
+    ],
+    "providerCalls": 0,
+    "providerCostUSD": 0,
+    "networkCalls": 0,
+    "productionDeployments": 0,
+    "realPayments": 0,
+    "realRefunds": 0
+  },
+  "customer": {
+    "at": "2026-10-12T02:13:06.265Z",
+    "environment": "LOCAL_CURRENT_SERVER_RUNTIME_NOT_LIVE",
+    "results": [
+      {
+        "id": "REG-BOUNDARY",
+        "pass": true,
+        "answer": "任何运行都存在尺度。 这个尺度并不只是它占据了多大的空间、 拥有多少成员、控制多少资源,也不只是外部能够看见的规模,而是它在某一个时期之内,究竟能够同时处理多少关系、辨认多少差异、 维持多少连接、吸收多少变化,并在这些变化持续发生的情况下,仍然让整体保持足够一致的运行能力。 只要一种现实必须通过有限的载体存在,它就不可能天然拥有无限尺度,因为任何载体都有速度、容量、距离、能量、注意、记忆与协调上的限制;运行能够达到哪里, 首先取决于这些限制能够把多少现实稳定地纳入自身。 尺度边界因此并不是后来才出现的外部障碍,而是在运行形成的同时就已经存在。",
+        "citations": [
+          {
+            "label": "参考手稿 · 尺度边界 | 一个运行为什么不会天然拥有无限尺度",
+            "excerpt": "任何运行都存在尺度。这个尺度并不只是它占据了多大的空间、 拥有多少成员、控制多少资源,也不只是外部能够看见的规模,而是 它在某一个时期之内,究竟能够同时处理多少关系、辨认多少差异、 维持多少连接、吸收多少变化,并在这些变化持续发生的情况下,仍 然让整体保持足够一致的运行能力。只要一种现实必须通过有限的载 体存在,它就不可能天然拥有无限尺度,因为任何载体都有速度、容 量、距离、能量、注意、记忆与协调上的限制;运行能够达到哪里, 首先取决于这些限制能够把多少现实稳定地纳入自身。 尺度边界因此并不是后来才出现的外部障碍,而是在运行形成的 同时就已经存在。一个生命拥有感知范围,能够同时注意的事物有 限,能够维持的关系有限,身体可以承担的负荷有限;一个家庭能够 持续照顾的人数有限,能够共享的空间、时间与资源有限;一个组织 可以处理的任务、决策、沟通与冲突也存在上限,即使成员数量继续 增加,只要信息仍然沿着有限路径传递,决定仍然集中在有限位置, 所有新增复杂度最终都会重新压回原来的协调结构。 所谓尺度,并不是“理论上可以拥有多少”,而是“当前结构实 际上可以稳定承载多少”。这也是为什么许多运行在最初形成时,看 起来几乎没有明显边界。规模很小的时候,许多问题可以依靠直接接 触解决,信息不必被压缩,关系不必被分类,责任不必被正式定义, 成员之间可以通过共同经验理解彼此,甚至大量规则都不需要被说出 来。一个很小的团队可以依靠几个人的记忆工作,一个家庭可以通过 熟悉彼此的习惯进行协调,一个早期社群可以依靠共同信任处理资源 分配;这些结构之所以显得灵活,并不是因为它们没有尺度限制,而 是因为当前规模尚未触及这些限制。大量复杂度仍然可以被参与者直 接吸收,所以边界暂时没有显现。 当运行扩大,原来隐藏的限制便会逐渐出现。成员增加以后,并 不是每个人都能够认识每个人;距离扩大以后,不是所有信息都能够 即时传递;任务增加以后,不是所有决定都能够由同一个位置持续处 理;知识增加以后,也不再可能依赖少数人的记忆保存整个运行。此 时,过去那些依靠接近、熟悉与直接反应完成的协调方式,会逐渐暴 露出自己的尺度条件。一个结构可能仍然能够继续运行,却需要越来 越多时间用于传递信息,越来越多资源用于确认责任,越来越多程序 用于修正误解,越来越多管理层用于处理原本可以直接解决的问题。 边界往往不是以突然停止的形式出现,而是首先表现为运行成本不断 上升。 因此,尺度边界最常见的形态并不是“不能再增加一个节点”, 而是新增一个节点所带来的复杂度开始超过过去。规模较小时,增加 一名成员可能只增加一份能力;规模扩大以后,一名新成员同时也会 增加沟通关系、权限问题、信息需求、训练成本、责任界面与协调不 确定性。节点本身只是新增的一部分,真正迅速增长的是节点之间可 能形成的关系数量。...",
+            "href": null,
+            "sectionCode": "ref-94d2b638",
+            "pageRange": {
+              "start": 7,
+              "end": 11
+            },
+            "supportRange": {
+              "startOffset": 0,
+              "endOffset": 1800
+            }
+          }
+        ],
+        "state": "PARTIALLY_ANSWERED"
+      },
+      {
+        "id": "REG-CAPACITY",
+        "pass": true,
+        "answer": "一个运行能够继续扩大,并不意味着它仍然拥有真正的扩展能力。 节点可以继续增加,资源可以继续投入,市场可以继续扩大,基础设施也可以继续延伸,但如果这些新增规模只是重复已有结构,而没有形成新的承载能力、协调方式与组织层级,扩展就会逐渐进入一种特殊状态:规模仍然增长,尺度能力却不再同步增长。 扩展饱和便发生在这个位置,它不是运行已经停止,也不是系统已经无法维持, 而是“更多”开始失去把运行推向“更高尺度”的能力。 这与运行饱和具有根本区别。",
+        "citations": [
+          {
+            "label": "参考手稿 · 扩展饱和 | 为什么继续增加规模已经无法产生新的尺度能力",
+            "excerpt": "✦扩展饱和 | 为什么继续增加规模已经无法产生新的 尺度能力 一个运行能够继续扩大,并不意味着它仍然拥有真正的扩展能 力。节点可以继续增加,资源可以继续投入,市场可以继续扩大,基 础设施也可以继续延伸,但如果这些新增规模只是重复已有结构,而 没有形成新的承载能力、协调方式与组织层级,扩展就会逐渐进入一 种特殊状态:规模仍然增长,尺度能力却不再同步增长。扩展饱和便 发生在这个位置,它不是运行已经停止,也不是系统已经无法维持, 而是“更多”开始失去把运行推向“更高尺度”的能力。 这与运行饱和具有根本区别。运行饱和关注的是当前结构已经承 担了多少负载,系统是否还能继续维持自身;扩展饱和则关注另一个 问题,即使系统仍然能够正常运作,继续增加规模是否还能够产生新 的现实能力。前者的核心是维持边界,后者的核心是尺度边界。一个 组织可以仍然盈利、仍然稳定、仍然拥有大量资源,却已经无法通过 继续增加部门、人员与市场获得新的组织能力;一个城市可以继续增 长人口,却如果交通、住房、能源与治理方式没有改变,新增人口只 会让原有结构更加拥挤,而不会自然形成新的城市尺度能力。扩展饱 和最早表现为边际收益下降。扩展早期,每增加一个节点都可能显著 扩大覆盖范围,每增加一套基础设施都能打开新的空间,每增加一项 技术都可能降低明显成本;随着系统逐渐成熟,最容易获得的扩展空 间已经被占据,后续新增投入需要面对更复杂环境、更高协调成本与 更强进入阻力。规模继续增加,新增能力却越来越少,越来越多资源 被用于维持扩展本身。 这种变化会让系统逐渐依赖数量掩盖结构停滞。因为节点仍然增 加,收入仍然增长,覆盖范围仍然扩大,外部很容易判断扩展仍然健 康;然而,内部可能已经出现另一个趋势,新节点进入以后只是复制 既有角色,新市场只是延长旧模式,新技术只是提高旧流程效率。表 面上不断扩大,实际上系统对现实的处理方式并没有产生新的层级。 扩展饱和因此常常伴随着“重复扩张”。系统已经知道怎样建立更多 相同结构,于是继续复制最熟悉的路径,一个地区成功以后复制到另 一个地区,一个部门有效以后继续建立类似部门,一种产品获得市场 以后不断推出相似变体。这种复制可以长期创造数量增长,却未必创 造新的尺度能力。扩展从探索未知逐渐变成重复已知。 资源使用也会发生变化。扩展早期,新增资源主要用于建立新能 力;饱和以后,越来越多资源被投入维持既有规模、保护市场位置、 管理复杂度与处理基础设施负担。系统看起来仍然拥有巨大资源,真 正可以用于下一尺度探索的比例却持续下降。这种现象会让规模本身 逐渐变成负担。一个小系统改变方向,只需要调整有限结构;大规模 系统拥有大量合同、人员、设施与制度,任何改变都要考虑更多既有 关系。扩展越成功,未来改变路径所需要协调的结构越多,于是继续 沿旧路径增长反而显得更容易,真正改变扩展方式却越来越困难。...",
+            "href": null,
+            "sectionCode": "ref-1ac8fbce",
+            "pageRange": {
+              "start": 119,
+              "end": 122
+            },
+            "supportRange": {
+              "startOffset": 0,
+              "endOffset": 1800
+            }
+          }
+        ],
+        "state": "PARTIALLY_ANSWERED"
+      },
+      {
+        "id": "REG-LIVING",
+        "pass": true,
+        "answer": "生活环境看起来最接近日常,因此也最容易被低估。 人们往往把住房、街道、噪音、空气、绿地、交通和公共空间当成生活背景,好像它们只是个人选择以后得到的结果;实际上,一个人能够居住在哪里、附近有什么设施、每天需要移动多远、能否安全步行、是否持续受到噪音和污染影响,都来自土地制度、城市规划、交通投资、产业布局、收入结构和公共治理长期叠加。 生活环境不是社会系统之外的空间,而是社会系统被建造成物质现实以后留下的表面。 最直接的一层是住房本身。",
+        "citations": [
+          {
+            "label": "参考手稿 · 生活环境 | 一个人每天醒来的地方,已经包含整个文明结构",
+            "excerpt": "✦生活环境 | 一个人每天醒来的地方,已经包含整个文 明结构 生活环境看起来最接近日常,因此也最容易被低估。人们往往把住 房、街道、噪音、空气、绿地、交通和公共空间当成生活背景,好像它们 只是个人选择以后得到的结果;实际上,一个人能够居住在哪里、附近有 什么设施、每天需要移动多远、能否安全步行、是否持续受到噪音和污染 影响,都来自土地制度、城市规划、交通投资、产业布局、收入结构和公 共治理长期叠加。生活环境不是社会系统之外的空间,而是社会系统被建 造成物质现实以后留下的表面。最直接的一层是住房本身。房屋提供遮 蔽,但真正影响生活的并不只是有没有屋顶,而是空间大小、通风、采 光、温度控制、隐私、维护状态和与工作地点之间的距离。一个家庭拥有 住房,并不意味着居住质量已经稳定;如果房屋长期潮湿、过热、拥挤或 距离工作过远,住房仍然可能成为持续负载。生活环境的第一项能力,不 是“是否拥有一个地址”,而是这个地址是否支持身体恢复、家庭关系和 长期生活。 空间不足尤其容易进入家庭关系。一间过度拥挤的住宅会减少个人隐 私,让儿童学习、成年人工作和老人休息彼此冲突;家庭成员数量没有改 变,空间结构却会提高摩擦频率。文明压力很多时候并不是以巨大事件出 现,而是每天重复的小摩擦不断消耗耐心和注意力。一个家庭长期没有足 够私人空间,其心理负载很可能来自建筑条件,却最终被误解成个体性格 问题。住房位置又把家庭连接到整个城市。所谓“便宜住房”如果距离就 业、学校和医院很远,真正成本就不能只看租金或房贷。家庭可能需要支 付更多交通费用,也要用更多时间换取较低房价。住房成本因此至少包含 金钱成本与时间成本两部分。一个每天往返工作需要三小时的人,即使房 租较低,也实际上用大量生命时间补贴住房价格。 这也是为什么城市交通不是单纯工程问题,而是生活环境的一部 分。公共交通是否可靠、道路是否拥堵、步行环境是否安全,都会直接决 定个人一天还剩多少可支配时间。交通系统越差,工作和住房之间的距离 越像一种隐形税收。人没有向政府缴纳这笔税,却每天用时间支付。儿童 受到的影响更长远。如果学校距离很远、通勤不稳定或者附近缺乏安全公 共空间,家庭必须投入更多接送和监督时间,儿童独立活动空间也会减 少。城市设计因此会改变家庭分工。所谓“父母很忙”,有一部分其实可 能来自城市要求家庭自己承担本可以由公共交通、学校布局和安全街区吸 收的协调成本。 老人面临的则是另一套空间问题。年轻人可以开车、换乘和长距离 移动,身体机能下降以后,台阶、道路、医院距离和公共交通缺口都会突 然变得重要。一个原本对年轻居民非常便利的城市,未必适合老年人口。 随着人口老龄化,生活环境是否具有无障碍设计、社区医疗和日常服务可 达性,会越来越决定一个人能否继续独立生活。空气质量是另一种几乎看 不见的生活环境。...",
+            "href": null,
+            "sectionCode": "ref-c82a3b8f",
+            "pageRange": {
+              "start": 234,
+              "end": 238
+            },
+            "supportRange": {
+              "startOffset": 0,
+              "endOffset": 1800
+            }
+          }
+        ],
+        "state": "PARTIALLY_ANSWERED"
+      },
+      {
+        "id": "REG-COMPARE",
+        "pass": true,
+        "answer": "文明从来不会因为进入某种稳定状态便停止改变。 人口持续出生与死亡,城市不断扩张与收缩,技术进入生产和生活,企业兴起又衰退,教育制度修改课程,政府调整财政,家庭改变组织方式,新的职业取代旧的职业;如果把这一切都称为“文明重组”,那么重组便失去分析意义,因为只要时间继续,任何社会都可以被描述成正在重组。 真正需要辨认的,并不是现实有没有变化,而是组织这些变化的深层关系是否仍然保持原来的排列方式,一个社会究竟只是改变了若干数值、增加了若干能力,还是已经开始以另一套关系来分配权力、资源、责任、风险与未来。 人口增加并不自动意味着文明重组,城市扩张、铁路增加、大学增加、财富增长,同样可能只是既有运行结构在更大尺度上的延伸。",
+        "citations": [
+          {
+            "label": "参考手稿 · 什么是文明重组",
+            "excerpt": "文明从来不会因为进入某种稳定状态便停止改变。人口持续出生与死 亡,城市不断扩张与收缩,技术进入生产和生活,企业兴起又衰退,教育 制度修改课程,政府调整财政,家庭改变组织方式,新的职业取代旧的职 业;如果把这一切都称为“文明重组”,那么重组便失去分析意义,因为 只要时间继续,任何社会都可以被描述成正在重组。真正需要辨认的,并 不是现实有没有变化,而是组织这些变化的深层关系是否仍然保持原来的 排列方式,一个社会究竟只是改变了若干数值、增加了若干能力,还是已 经开始以另一套关系来分配权力、资源、责任、风险与未来。 人口增加并不自动意味着文明重组,城市扩张、铁路增加、大学增 加、财富增长,同样可能只是既有运行结构在更大尺度上的延伸。如果中 央与地方仍然按照原来的方式分配权力,资本与劳动仍然通过相似接口组 织,家庭、教育、市场与国家之间的关系没有发生根本改变,那么一个社 会即使在几十年内变得更富、更大、更复杂,它仍然可能属于同一个运行 版本。真正的重组发生在另一个层次:同样的机构也许还在,同样的土地 和城市也没有消失,法律名称甚至可以保持不变,但权力来源、边界定 义、资源流向、责任承担与功能载体已经重新排列;过去由王室承担的权 力转向议会,过去由地方共同体处理的事务进入中央行政,过去由家庭承 担的照护进入市场,过去由国家控制的信息入口转向平台,过去主要服务 军事与原料运输的铁路后来成为全国市场和日常通勤网络。 元件可能大量保留,真正改变的却是元件之间的关系,而关系一旦改 变,现实便已经进入另一个结构。因此,文明重组首先不是“旧东西消 失、新东西出现”,而是既有要素在新的关系中获得新的位置。历史中的 重大转型几乎从来不是把过去完全清空以后再重新开始,罗马帝国终止以 后,道路、城市、法律观念、宗教网络与行政记忆仍然继续存在;殖民统 治结束以后,新国家往往继续使用过去形成的边界、铁路、法律、语言与 官僚体系;革命推翻旧政权以后,新的政治载体仍然必须面对原有的人 口、债务、技术人员、城市、生产体系、土地分布和社会习惯。即使一个 政权宣称自己与过去彻底断裂,它真正能够重新组织的,也只能是已经存 在的现实。文明重组因此更接近一种“在旧世界仍然运行时重新编排旧世 界”的过程,过去不是被删除,而是被重新接线。这也是为什么重组往往 表现为混合状态。旧规则并没有完全失效,新规则却已经开始生效;旧身 份依然具有社会重量,新身份却正在扩张;中央已经采用新的行政方法, 地方仍按照旧逻辑运行;老一代人的教育、职业和社会地位来自上一套制 度,年轻一代却已经在新的机会结构中规划未来。 文明在这种阶段并不是一个整齐一致的整体,而是多个历史层同时存 在、彼此摩擦。...",
+            "href": null,
+            "sectionCode": "ref-bd25ad10",
+            "pageRange": {
+              "start": 3,
+              "end": 6
+            },
+            "supportRange": {
+              "startOffset": 0,
+              "endOffset": 1800
+            }
+          }
+        ],
+        "state": "PARTIALLY_ANSWERED"
+      },
+      {
+        "id": "NEW-BOUNDARY",
+        "pass": true,
+        "answer": "任何运行都存在尺度。 这个尺度并不只是它占据了多大的空间、 拥有多少成员、控制多少资源,也不只是外部能够看见的规模,而是它在某一个时期之内,究竟能够同时处理多少关系、辨认多少差异、 维持多少连接、吸收多少变化,并在这些变化持续发生的情况下,仍然让整体保持足够一致的运行能力。 只要一种现实必须通过有限的载体存在,它就不可能天然拥有无限尺度,因为任何载体都有速度、容量、距离、能量、注意、记忆与协调上的限制;运行能够达到哪里, 首先取决于这些限制能够把多少现实稳定地纳入自身。 尺度边界因此并不是后来才出现的外部障碍,而是在运行形成的同时就已经存在。",
+        "citations": [
+          {
+            "label": "参考手稿 · 尺度边界 | 一个运行为什么不会天然拥有无限尺度",
+            "excerpt": "任何运行都存在尺度。这个尺度并不只是它占据了多大的空间、 拥有多少成员、控制多少资源,也不只是外部能够看见的规模,而是 它在某一个时期之内,究竟能够同时处理多少关系、辨认多少差异、 维持多少连接、吸收多少变化,并在这些变化持续发生的情况下,仍 然让整体保持足够一致的运行能力。只要一种现实必须通过有限的载 体存在,它就不可能天然拥有无限尺度,因为任何载体都有速度、容 量、距离、能量、注意、记忆与协调上的限制;运行能够达到哪里, 首先取决于这些限制能够把多少现实稳定地纳入自身。 尺度边界因此并不是后来才出现的外部障碍,而是在运行形成的 同时就已经存在。一个生命拥有感知范围,能够同时注意的事物有 限,能够维持的关系有限,身体可以承担的负荷有限;一个家庭能够 持续照顾的人数有限,能够共享的空间、时间与资源有限;一个组织 可以处理的任务、决策、沟通与冲突也存在上限,即使成员数量继续 增加,只要信息仍然沿着有限路径传递,决定仍然集中在有限位置, 所有新增复杂度最终都会重新压回原来的协调结构。 所谓尺度,并不是“理论上可以拥有多少”,而是“当前结构实 际上可以稳定承载多少”。这也是为什么许多运行在最初形成时,看 起来几乎没有明显边界。规模很小的时候,许多问题可以依靠直接接 触解决,信息不必被压缩,关系不必被分类,责任不必被正式定义, 成员之间可以通过共同经验理解彼此,甚至大量规则都不需要被说出 来。一个很小的团队可以依靠几个人的记忆工作,一个家庭可以通过 熟悉彼此的习惯进行协调,一个早期社群可以依靠共同信任处理资源 分配;这些结构之所以显得灵活,并不是因为它们没有尺度限制,而 是因为当前规模尚未触及这些限制。大量复杂度仍然可以被参与者直 接吸收,所以边界暂时没有显现。 当运行扩大,原来隐藏的限制便会逐渐出现。成员增加以后,并 不是每个人都能够认识每个人;距离扩大以后,不是所有信息都能够 即时传递;任务增加以后,不是所有决定都能够由同一个位置持续处 理;知识增加以后,也不再可能依赖少数人的记忆保存整个运行。此 时,过去那些依靠接近、熟悉与直接反应完成的协调方式,会逐渐暴 露出自己的尺度条件。一个结构可能仍然能够继续运行,却需要越来 越多时间用于传递信息,越来越多资源用于确认责任,越来越多程序 用于修正误解,越来越多管理层用于处理原本可以直接解决的问题。 边界往往不是以突然停止的形式出现,而是首先表现为运行成本不断 上升。 因此,尺度边界最常见的形态并不是“不能再增加一个节点”, 而是新增一个节点所带来的复杂度开始超过过去。规模较小时,增加 一名成员可能只增加一份能力;规模扩大以后,一名新成员同时也会 增加沟通关系、权限问题、信息需求、训练成本、责任界面与协调不 确定性。节点本身只是新增的一部分,真正迅速增长的是节点之间可 能形成的关系数量。...",
+            "href": null,
+            "sectionCode": "ref-94d2b638",
+            "pageRange": {
+              "start": 7,
+              "end": 11
+            },
+            "supportRange": {
+              "startOffset": 0,
+              "endOffset": 1800
+            }
+          }
+        ],
+        "state": "PARTIALLY_ANSWERED"
+      },
+      {
+        "id": "NEW-LIVING",
+        "pass": true,
+        "answer": "生活环境看起来最接近日常,因此也最容易被低估。 人们往往把住房、街道、噪音、空气、绿地、交通和公共空间当成生活背景,好像它们只是个人选择以后得到的结果;实际上,一个人能够居住在哪里、附近有什么设施、每天需要移动多远、能否安全步行、是否持续受到噪音和污染影响,都来自土地制度、城市规划、交通投资、产业布局、收入结构和公共治理长期叠加。 生活环境不是社会系统之外的空间,而是社会系统被建造成物质现实以后留下的表面。 最直接的一层是住房本身。",
+        "citations": [
+          {
+            "label": "参考手稿 · 生活环境 | 一个人每天醒来的地方,已经包含整个文明结构",
+            "excerpt": "✦生活环境 | 一个人每天醒来的地方,已经包含整个文 明结构 生活环境看起来最接近日常,因此也最容易被低估。人们往往把住 房、街道、噪音、空气、绿地、交通和公共空间当成生活背景,好像它们 只是个人选择以后得到的结果;实际上,一个人能够居住在哪里、附近有 什么设施、每天需要移动多远、能否安全步行、是否持续受到噪音和污染 影响,都来自土地制度、城市规划、交通投资、产业布局、收入结构和公 共治理长期叠加。生活环境不是社会系统之外的空间,而是社会系统被建 造成物质现实以后留下的表面。最直接的一层是住房本身。房屋提供遮 蔽,但真正影响生活的并不只是有没有屋顶,而是空间大小、通风、采 光、温度控制、隐私、维护状态和与工作地点之间的距离。一个家庭拥有 住房,并不意味着居住质量已经稳定;如果房屋长期潮湿、过热、拥挤或 距离工作过远,住房仍然可能成为持续负载。生活环境的第一项能力,不 是“是否拥有一个地址”,而是这个地址是否支持身体恢复、家庭关系和 长期生活。 空间不足尤其容易进入家庭关系。一间过度拥挤的住宅会减少个人隐 私,让儿童学习、成年人工作和老人休息彼此冲突;家庭成员数量没有改 变,空间结构却会提高摩擦频率。文明压力很多时候并不是以巨大事件出 现,而是每天重复的小摩擦不断消耗耐心和注意力。一个家庭长期没有足 够私人空间,其心理负载很可能来自建筑条件,却最终被误解成个体性格 问题。住房位置又把家庭连接到整个城市。所谓“便宜住房”如果距离就 业、学校和医院很远,真正成本就不能只看租金或房贷。家庭可能需要支 付更多交通费用,也要用更多时间换取较低房价。住房成本因此至少包含 金钱成本与时间成本两部分。一个每天往返工作需要三小时的人,即使房 租较低,也实际上用大量生命时间补贴住房价格。 这也是为什么城市交通不是单纯工程问题,而是生活环境的一部 分。公共交通是否可靠、道路是否拥堵、步行环境是否安全,都会直接决 定个人一天还剩多少可支配时间。交通系统越差,工作和住房之间的距离 越像一种隐形税收。人没有向政府缴纳这笔税,却每天用时间支付。儿童 受到的影响更长远。如果学校距离很远、通勤不稳定或者附近缺乏安全公 共空间,家庭必须投入更多接送和监督时间,儿童独立活动空间也会减 少。城市设计因此会改变家庭分工。所谓“父母很忙”,有一部分其实可 能来自城市要求家庭自己承担本可以由公共交通、学校布局和安全街区吸 收的协调成本。 老人面临的则是另一套空间问题。年轻人可以开车、换乘和长距离 移动,身体机能下降以后,台阶、道路、医院距离和公共交通缺口都会突 然变得重要。一个原本对年轻居民非常便利的城市,未必适合老年人口。 随着人口老龄化,生活环境是否具有无障碍设计、社区医疗和日常服务可 达性,会越来越决定一个人能否继续独立生活。空气质量是另一种几乎看 不见的生活环境。...",
+            "href": null,
+            "sectionCode": "ref-c82a3b8f",
+            "pageRange": {
+              "start": 234,
+              "end": 238
+            },
+            "supportRange": {
+              "startOffset": 0,
+              "endOffset": 1800
+            }
+          }
+        ],
+        "state": "PARTIALLY_ANSWERED"
+      },
+      {
+        "id": "FALSE-PREMISE",
+        "pass": true,
+        "answer": "一个运行能够继续扩大,并不意味着它仍然拥有真正的扩展能力。 节点可以继续增加,资源可以继续投入,市场可以继续扩大,基础设施也可以继续延伸,但如果这些新增规模只是重复已有结构,而没有形成新的承载能力、协调方式与组织层级,扩展就会逐渐进入一种特殊状态:规模仍然增长,尺度能力却不再同步增长。 扩展饱和便发生在这个位置,它不是运行已经停止,也不是系统已经无法维持, 而是“更多”开始失去把运行推向“更高尺度”的能力。 这与运行饱和具有根本区别。",
+        "citations": [
+          {
+            "label": "参考手稿 · 扩展饱和 | 为什么继续增加规模已经无法产生新的尺度能力",
+            "excerpt": "✦扩展饱和 | 为什么继续增加规模已经无法产生新的 尺度能力 一个运行能够继续扩大,并不意味着它仍然拥有真正的扩展能 力。节点可以继续增加,资源可以继续投入,市场可以继续扩大,基 础设施也可以继续延伸,但如果这些新增规模只是重复已有结构,而 没有形成新的承载能力、协调方式与组织层级,扩展就会逐渐进入一 种特殊状态:规模仍然增长,尺度能力却不再同步增长。扩展饱和便 发生在这个位置,它不是运行已经停止,也不是系统已经无法维持, 而是“更多”开始失去把运行推向“更高尺度”的能力。 这与运行饱和具有根本区别。运行饱和关注的是当前结构已经承 担了多少负载,系统是否还能继续维持自身;扩展饱和则关注另一个 问题,即使系统仍然能够正常运作,继续增加规模是否还能够产生新 的现实能力。前者的核心是维持边界,后者的核心是尺度边界。一个 组织可以仍然盈利、仍然稳定、仍然拥有大量资源,却已经无法通过 继续增加部门、人员与市场获得新的组织能力;一个城市可以继续增 长人口,却如果交通、住房、能源与治理方式没有改变,新增人口只 会让原有结构更加拥挤,而不会自然形成新的城市尺度能力。扩展饱 和最早表现为边际收益下降。扩展早期,每增加一个节点都可能显著 扩大覆盖范围,每增加一套基础设施都能打开新的空间,每增加一项 技术都可能降低明显成本;随着系统逐渐成熟,最容易获得的扩展空 间已经被占据,后续新增投入需要面对更复杂环境、更高协调成本与 更强进入阻力。规模继续增加,新增能力却越来越少,越来越多资源 被用于维持扩展本身。 这种变化会让系统逐渐依赖数量掩盖结构停滞。因为节点仍然增 加,收入仍然增长,覆盖范围仍然扩大,外部很容易判断扩展仍然健 康;然而,内部可能已经出现另一个趋势,新节点进入以后只是复制 既有角色,新市场只是延长旧模式,新技术只是提高旧流程效率。表 面上不断扩大,实际上系统对现实的处理方式并没有产生新的层级。 扩展饱和因此常常伴随着“重复扩张”。系统已经知道怎样建立更多 相同结构,于是继续复制最熟悉的路径,一个地区成功以后复制到另 一个地区,一个部门有效以后继续建立类似部门,一种产品获得市场 以后不断推出相似变体。这种复制可以长期创造数量增长,却未必创 造新的尺度能力。扩展从探索未知逐渐变成重复已知。 资源使用也会发生变化。扩展早期,新增资源主要用于建立新能 力;饱和以后,越来越多资源被投入维持既有规模、保护市场位置、 管理复杂度与处理基础设施负担。系统看起来仍然拥有巨大资源,真 正可以用于下一尺度探索的比例却持续下降。这种现象会让规模本身 逐渐变成负担。一个小系统改变方向,只需要调整有限结构;大规模 系统拥有大量合同、人员、设施与制度,任何改变都要考虑更多既有 关系。扩展越成功,未来改变路径所需要协调的结构越多,于是继续 沿旧路径增长反而显得更容易,真正改变扩展方式却越来越困难。...",
+            "href": null,
+            "sectionCode": "ref-1ac8fbce",
+            "pageRange": {
+              "start": 119,
+              "end": 122
+            },
+            "supportRange": {
+              "startOffset": 0,
+              "endOffset": 1800
+            }
+          }
+        ],
+        "state": "PARTIALLY_ANSWERED"
+      },
+      {
+        "id": "OUTSIDE",
+        "pass": true,
+        "answer": "目前没有足够的来源资料来回答这个问题。",
+        "citations": [],
+        "state": "SOURCE_INSUFFICIENT"
+      },
+      {
+        "id": "FIGURE",
+        "pass": true,
+        "answer": "目前没有足够的来源资料来回答这个问题。",
+        "citations": [],
+        "state": "SOURCE_INSUFFICIENT"
+      },
+      {
+        "id": "PREDICTION",
+        "pass": true,
+        "answer": "这些来源不能支持确定预测。",
+        "citations": [],
+        "state": "SOURCE_LIMIT"
+      },
+      {
+        "id": "NO-SOURCE",
+        "pass": true,
+        "answer": "目前没有足够的来源资料来回答这个问题。",
+        "citations": [],
+        "state": "SOURCE_INSUFFICIENT"
+      },
+      {
+        "id": "ENGLISH",
+        "pass": true,
+        "answer": "There is not enough source material to answer this question.",
+        "citations": [],
+        "state": "SOURCE_INSUFFICIENT"
+      },
+      {
+        "id": "CLIENT-QA-ESCALATION",
+        "pass": true,
+        "answer": "目前没有足够的来源资料来回答这个问题。",
+        "citations": [],
+        "state": "SOURCE_INSUFFICIENT"
+      }
+    ],
+    "passed": 13,
+    "total": 13,
+    "providerCalls": 0
+  },
+  "compiled": {
+    "status": "PASS_LOCAL_COMPILED_DISPATCHER",
+    "command": "node node_modules/wrangler/bin/wrangler.js pages functions build functions --outdir C:/phios/tmp/p9-r5/compiled --compatibility-date 2026-07-14 --compatibility-flags nodejs_compat",
+    "compileExitCode": 0,
+    "bundle": {
+      "path": "tmp/p9-r5/compiled/index.js",
+      "bytes": 17033818,
+      "SHA256": "6ac8e0833af42d9d0000567e407a38e975c9a750ad59ab0d7261f4449384ee89"
+    },
+    "rows": [
+      {
+        "name": "compiled root POST",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root PUT",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root PATCH",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root DELETE",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/academy-navigation.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/account-appointment-requests.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/account-financial-will-drafts.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/account-method-reports.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/account-paid-report-setup.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/account-paid-report-status.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/account-persons.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/account-profile-evidence.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/account-report-download-grant.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/account-report-download.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/account-report-navigation.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/account-report-questions.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/account-reports.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/account-will-information-report.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/account-world-contexts.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/ask-phios-consumption.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/ask-phios-health.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/ask-phios-orchestrated.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/ask-phios.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/ask2-runtime-status.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/ast-full-production-status.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/ast-structural-execute.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/ast-transit-execute.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/ast-transit-meaning.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/auth/[[action]].js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/bazi-full-reading-r2.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/bazi-full-reading.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/book-one-access.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/book-one-checkout.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/book-one-download-token.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/book-one-download.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/book-one-payment-status.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/book-one-product.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/book-one-receipt.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/book-one-watermark-complete.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/book6-runtime-readout.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/bzr-temporal-execute.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/bzr-temporal-meaning.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/cka-account.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/cka-reality-context.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/client-intent-route.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/commerce-account.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/commerce-book-download.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/commerce-catalog.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/commerce-checkout.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/commerce-order-status.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/commerce-portal.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/current-facts.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/customer-ask.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/customer-contextual-ask.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/customer-current-reality.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/customer-estate-planning.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/customer-external-profile-confirm.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/customer-external-profile-intake.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/customer-external-profile-shadow-check.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/customer-financial-reality.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/customer-my-reality.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/customer-navigation-handoff.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/customer-personal-reality.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/customer-reality-handoff.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/customer-relationship-intake.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/ecr-execute.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/financial-runtime-preview.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/generate-reading.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/guided-reading-v2.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/guided-reading.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/health-authority-retrieve.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/health-runtime-status.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/health.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/iching-full-cast.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/iching-full-context.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/iching-full-execute.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/iching-full-production-status.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/iching-full-readings.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/iching-full-save.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/iching-limited-production-diagnostics.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/iching-limited-session-v2.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/iching-limited-session.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/iching-runtime-status.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/knowledge-access.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/location-resolve.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/location-search.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/method-execute.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/method-meaning.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/navigate-runtime.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/platform-status.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/profile-progressive.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/public-asset-config.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/public-knowledge.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/qa-bazi-t3.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/qa-fw-acceptance.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/read-runtime.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/reality-complexity.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/reality-escalation-v1.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/reality-handoff.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/reality-orchestrate.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/reconstruct-reality.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/reconstruct-runtime.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/renderer-health.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/review/iching-execute.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/runtime-infrastructure-health.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/shared-report-e2e-proof.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/shared-report-renderer-stability.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/stripe-webhook.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/symbolic-method-context.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/symbolic-method-execute-v2.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/symbolic-method-execute-v3.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/symbolic-method-execute-v4.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/symbolic-method-execute.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/symbolic-method-readings.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/symbolic-method-save.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/target-location-resolve.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/tarot-production-status.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/thesis-download.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/zi-wei-dynamic-execute.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/zi-wei-dynamic-meaning.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/zi-wei-execute.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/api/zwr-native-renderer-acceptance.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/canonical-meaning-production/api-method-meaning-handler.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/explore/how-it-works.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/explore/start.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/explore/why-phios.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/personal-reading/narrative/ziwei-publication-adapter.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/professional/financial/financial-workspace-contract.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root coverage functions/professional/services.js",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root GET write /root-get-write-probe",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled root GET write /api/root-get-write-probe",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled actual auth/session OFF",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled static fallback OFF",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled actual auth/session ABSENT",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled static fallback ABSENT",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled actual auth/session READ_ONLY",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled static fallback READ_ONLY",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "compiled invalid mode",
+        "status": "PASS_LOCAL"
+      }
+    ],
+    "originalWrites": 0,
+    "assetCalls": 5,
+    "networkCalls": 0,
+    "productionDeployment": false,
+    "providerCalls": 0,
+    "providerCostUSD": 0,
+    "realPayments": 0,
+    "realRefunds": 0
+  },
+  "internalLanguageInventory": [
+    {
+      "position": 1,
+      "path": ".basedOn.sources[0].sourceId",
+      "value": "MANUSCRIPT:B1V3-P1-S006",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Raw ID omitted; bounded citation gets opaque public ref"
+    },
+    {
+      "position": 2,
+      "path": ".limits.items[0]",
+      "value": "NOT_ACTIVATED registry QA ledger runtime",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Internal prose omitted or replaced by bounded locale-correct message"
+    },
+    {
+      "position": 3,
+      "path": ".handoff.unknown[0]",
+      "value": "NOT_ACTIVATED registry QA ledger runtime",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Internal prose omitted or replaced by bounded locale-correct message"
+    },
+    {
+      "position": 4,
+      "path": ".governance.sourceAuthorities[0]",
+      "value": "CKA",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Entire internal governance field omitted"
+    },
+    {
+      "position": 5,
+      "path": ".governance.sourceAuthorities[1]",
+      "value": "KAP",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Entire internal governance field omitted"
+    },
+    {
+      "position": 6,
+      "path": ".governance.sourceAuthorities[3]",
+      "value": "CURRENT_FACTS_GATEWAY",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Entire internal governance field omitted"
+    },
+    {
+      "position": 7,
+      "case": "no source en",
+      "field": "limits",
+      "value": "No additional limitation was supplied by the runtime.",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Internal prose omitted or replaced by bounded locale-correct message"
+    },
+    {
+      "position": 8,
+      "case": "PUBLISHED_CANONICAL_ARTICLE zh-Hans",
+      "field": "sourceLabels",
+      "value": "PUBLISHED_CANONICAL_KNOWLEDGE",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 9,
+      "case": "PUBLISHED_CANONICAL_ARTICLE en",
+      "field": "sourceLabels",
+      "value": "PUBLISHED_CANONICAL_KNOWLEDGE",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 10,
+      "case": "REGISTERED_FIGURE_SEMANTICS zh-Hans",
+      "field": "sourceLabels",
+      "value": "GOVERNED_PUBLICATION_FIGURE_SEMANTICS",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 11,
+      "case": "REGISTERED_FIGURE_SEMANTICS en",
+      "field": "sourceLabels",
+      "value": "GOVERNED_PUBLICATION_FIGURE_SEMANTICS",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 12,
+      "case": "CIVILIZATION_ATLAS_CASE zh-Hans",
+      "field": "sourceLabels",
+      "value": "STRUCTURED_ATLAS_KNOWLEDGE",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 13,
+      "case": "CIVILIZATION_ATLAS_CASE en",
+      "field": "sourceLabels",
+      "value": "STRUCTURED_ATLAS_KNOWLEDGE",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 14,
+      "case": "COMPLETED_MANUSCRIPT zh-Hans",
+      "field": "sourceLabels",
+      "value": "REVIEWED_MANUSCRIPT_KNOWLEDGE",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 15,
+      "case": "COMPLETED_MANUSCRIPT en",
+      "field": "sourceLabels",
+      "value": "REVIEWED_MANUSCRIPT_KNOWLEDGE",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 16,
+      "case": "BOOK-1 complete five-file stale-chain zh-Hans",
+      "field": "sourceLabels",
+      "value": "REVIEWED_MANUSCRIPT_KNOWLEDGE",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 17,
+      "case": "BOOK-1 complete five-file stale-chain zh-Hans",
+      "field": "sourceLabels",
+      "value": "REVIEWED_MANUSCRIPT_KNOWLEDGE",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 18,
+      "case": "BOOK-5 complete five-file stale-chain zh-Hans",
+      "field": "sourceLabels",
+      "value": "REVIEWED_MANUSCRIPT_KNOWLEDGE",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 19,
+      "case": "BOOK-5 complete five-file stale-chain zh-Hans",
+      "field": "sourceLabels",
+      "value": "REVIEWED_MANUSCRIPT_KNOWLEDGE",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 20,
+      "case": "BOOK-1 complete five-file stale-chain en",
+      "field": "sourceLabels",
+      "value": "REVIEWED_MANUSCRIPT_KNOWLEDGE",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 21,
+      "case": "BOOK-1 complete five-file stale-chain en",
+      "field": "sourceLabels",
+      "value": "REVIEWED_MANUSCRIPT_KNOWLEDGE",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 22,
+      "case": "BOOK-5 complete five-file stale-chain en",
+      "field": "sourceLabels",
+      "value": "REVIEWED_MANUSCRIPT_KNOWLEDGE",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 23,
+      "case": "BOOK-5 complete five-file stale-chain en",
+      "field": "sourceLabels",
+      "value": "REVIEWED_MANUSCRIPT_KNOWLEDGE",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 24,
+      "case": "Atlas zh-Hans",
+      "field": "sourceLabels",
+      "value": "文明案例 Registry · 参考案例",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 25,
+      "case": "Atlas zh-Hans",
+      "field": "statement",
+      "value": "文明图谱 Registry evidence 会优先于更广泛的 PHI OS 知识显示；当前公共信息仍然分开。",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Internal prose omitted or replaced by bounded locale-correct message"
+    },
+    {
+      "position": 26,
+      "case": "Atlas en",
+      "field": "sourceLabels",
+      "value": "Civilization case registry · Reference case",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Validated source gets localized category label; denied source gets no citation"
+    },
+    {
+      "position": 27,
+      "case": "Atlas en",
+      "field": "statement",
+      "value": "Civilization Atlas registry evidence is shown before broader PHI OS knowledge; current public information remains separate.",
+      "classification": "B_CUSTOMER_REACHABLE_MUST_REMOVE",
+      "origin": "Synthetic QA fixture; the historical projection emitted these values on a customer-reachable path.",
+      "currentCustomerOccurrences": 0,
+      "evidence": "R5 repeated same negative fixtures, public allowlist and localized positive terminal matrix.",
+      "treatment": "Internal prose omitted or replaced by bounded locale-correct message"
+    }
+  ],
+  "sourceFixtures": [
+    {
+      "name": "FIVE-FILE-CONTRACT-QA.json",
+      "SHA256": "0460bded24472a53f0f29585fa4c9a7045a761b034ac3994b34f612d19663f0b"
+    },
+    {
+      "name": "EXPANDED-CONTRACT-QA.json",
+      "SHA256": "96382e6826f39835288052da2a2ad1a75bc6249d37b36789a644f2146d4dbf82"
+    },
+    {
+      "name": "TERMINAL-MATRIX-QA.json",
+      "SHA256": "02978038a95eb73c10150c01c9407e6f7fe38d85f2dd835f02cfc17f4397500f"
+    },
+    {
+      "name": "R4-UNCHANGED-ASSERTIONS.json",
+      "SHA256": "b24c2631d2b19ee42bfda154731e672ee92521efb36b1236aadd1e1fef2f3016"
+    },
+    {
+      "name": "R4-SUCCESSOR-FIXTURES.json",
+      "SHA256": "639480fbbcd0849e6f2453a123333904bc662fe13e3d8eaa2fc4f87928003bfb"
+    },
+    {
+      "name": "CUSTOMER-API-REGRESSION.json",
+      "SHA256": "7bb2d2a5ec0ae2fe3c757811eb8948217e6d8db654d5ed229976d9f6495bc33b"
+    },
+    {
+      "name": "COMPILED-ISOLATION.json",
+      "SHA256": "b5eb4e22ba0471d3056ab64fd0cbf78889996889ed1ab130b4f03d5891ee6676"
+    }
+  ],
+  "sideEffects": {
+    "providerCalls": 0,
+    "costUSD": 0,
+    "D1Writes": 0,
+    "networkCalls": 0,
+    "networkMutations": 0,
+    "productionMutations": 0,
+    "payments": 0,
+    "refunds": 0
+  },
+  "limitations": [
+    "All runtime evidence is local. Production source availability and delivery remain RUNTIME_UNVERIFIED.",
+    "Machine tests establish the measured contracts; Human review must judge bilingual wording and preserved UI semantics.",
+    "Historical original R4 checker is 20/22 on R5, not claimed 22/22. The explicitly authorized valid-support successor is 22/22."
+  ]
+}

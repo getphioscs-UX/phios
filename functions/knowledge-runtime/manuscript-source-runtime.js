@@ -1,3 +1,4 @@
+import {corpusSourceAllowed,manuscriptSourceAllowed} from '../_lib/knowledge-source-eligibility.js';
 export const MANUSCRIPT_SOURCE_RUNTIME_CODE = 'MANUSCRIPT_KNOWLEDGE_SOURCE_RUNTIME';
 export const MANUSCRIPT_SOURCE_RUNTIME_VERSION = '1.1.0';
 
@@ -293,6 +294,7 @@ export function searchManuscriptCorpus({
 }) {
   if (!corpus || !Array.isArray(corpus.records)) return [];
   const terms = manuscriptQueryTerms(query);
+  corpus={...corpus,records:corpus.records.filter(r=>manuscriptSourceAllowed({...source,...r,sourceSha256:source.sourceSha256,sectionSha256:r.sourceTextSha256||r.textSha256}))};
   // Normalize each chapter once, rather than once per query term and again
   // during every coverage check. No corpus text or ranking rule changes.
   const correctionKey = JSON.stringify(corrections?.records || []);
@@ -363,6 +365,7 @@ export function searchManuscriptCorpus({
 }
 
 export async function loadR2RetrievalCorpus(binding, source) {
+  if(!corpusSourceAllowed(source))return null;
   if (!binding?.get) {
     const error = new Error('MANUSCRIPT_SOURCE_STORAGE_UNAVAILABLE');
     error.code = 'MANUSCRIPT_SOURCE_STORAGE_UNAVAILABLE';

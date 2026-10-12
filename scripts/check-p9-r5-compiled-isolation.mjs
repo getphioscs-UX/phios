@@ -1,0 +1,23 @@
+process.chdir('C:/phios');
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';import {pathToFileURL} from 'node:url';
+const consoleBefore=globalThis.console;
+const file='tmp/p9-r5/compiled/index.js',source=fs.readFileSync(file,'utf8'),worker=(await import(pathToFileURL(process.cwd()+'/'+file).href)).default;
+globalThis.console=consoleBefore;
+globalThis.fetch=()=>{throw Error('NETWORK_FORBIDDEN');};let originalWrites=0,assetCalls=0;
+const database={prepare(sql){if(!/^SELECT/i.test(sql))originalWrites++;return {bind(){return this;},async first(){return {n:2};},async all(){return {results:[]};},async run(){originalWrites++;return {meta:{changes:1}};}};},exec(){originalWrites++;},batch(){originalWrites++;}};
+const rows=[];const context={waitUntil(){},passThroughOnException(){throw Error('FAIL_OPEN_FORBIDDEN');}};
+function env(mode,trap=false){const value={RUNTIME_DB:database,PHIOS_D1_MAINTENANCE_MODE:mode,AUTH_PROVIDER:'auth0',AUTH_ISSUER:'https://oidc.local.invalid/',AUTH_CLIENT_ID:'local-qa',AUTH_CLIENT_SECRET:'local-qa',AUTH_SESSION_SECRET:'x'.repeat(64)};value.ASSETS={fetch:async request=>{assetCalls++;if(trap){try{value.RUNTIME_DB.prepare('INSERT INTO probe VALUES(1)');}catch{}return Response.json({ok:true});}return new Response('static QA');}};return value;}
+async function safe(r){assert.equal(r.status,503);assert.deepEqual(await r.json(),{ok:false,status:'temporarily_unavailable'});assert.equal(r.headers.get('cache-control'),'no-store');}
+for(const method of ['POST','PUT','PATCH','DELETE']){await safe(await worker.fetch(new Request('https://local.invalid/api/commerce/stripe-webhook',{method}),env('READ_ONLY'),context));rows.push({name:'compiled root '+method,status:'PASS_LOCAL'});}
+const inventory=JSON.parse(fs.readFileSync('tmp/p9-r5/receipts/P9-G3-D1I1-WRITER-INVENTORY.json'));
+for(const route of inventory.routes){const pathname=route.route.replace(/\[\[?[^\]]+\]\]?/g,'local-probe');await safe(await worker.fetch(new Request('https://local.invalid'+pathname,{method:'POST'}),env('READ_ONLY'),context));rows.push({name:'compiled root coverage '+route.entrypoint,status:'PASS_LOCAL'});}
+for(const route of ['/root-get-write-probe','/api/root-get-write-probe']){await safe(await worker.fetch(new Request('https://local.invalid'+route),env('READ_ONLY',true),context));rows.push({name:'compiled root GET write '+route,status:'PASS_LOCAL'});}
+for(const mode of ['OFF',undefined,'READ_ONLY']){const r=await worker.fetch(new Request('https://local.invalid/api/auth/session'),env(mode),context);assert.equal(r.status,200);const body=await r.json();assert.equal(body.authenticated,false);assert.equal(body.providerConfigured,true);rows.push({name:'compiled actual auth/session '+(mode||'ABSENT'),status:'PASS_LOCAL'});const staticResult=await worker.fetch(new Request('https://local.invalid/static-isolation-qa'),env(mode),context);assert.equal(staticResult.status,200);assert.equal(await staticResult.text(),'static QA');rows.push({name:'compiled static fallback '+(mode||'ABSENT'),status:'PASS_LOCAL'});}
+await safe(await worker.fetch(new Request('https://local.invalid/api/auth/session'),env('INVALID'),context));rows.push({name:'compiled invalid mode',status:'PASS_LOCAL'});assert.equal(originalWrites,0);
+// This is the real installed Wrangler dispatcher and real compiled route table,
+// not a hand-written next() simulation. Root middleware's catch-all route is
+// inspected together with actual invocation through nested API and fallback.
+assert(source.includes('d1-maintenance-guard.js'));assert(source.includes('// _middleware.js'));assert(source.includes('function* executeRequest'));
+const marker=source.indexOf('routePath: "/",');const evidence=source.slice(marker,marker+190);assert(/mountPath: "\/"/.test(evidence));assert(/method: ""/.test(evidence));assert(/middlewares: \[onRequest\d+\]/.test(evidence));fs.writeFileSync('tmp/p9-r5/compiled-root-route-evidence.txt',evidence);
+const result={status:'PASS_LOCAL_COMPILED_DISPATCHER',command:'node node_modules/wrangler/bin/wrangler.js pages functions build functions --outdir C:/phios/tmp/p9-r5/compiled --compatibility-date 2026-07-14 --compatibility-flags nodejs_compat',compileExitCode:0,bundle:{path:file,bytes:fs.statSync(file).size,SHA256:createHash('sha256').update(source).digest('hex')},rows,originalWrites,assetCalls,networkCalls:0,productionDeployment:false,providerCalls:0,providerCostUSD:0,realPayments:0,realRefunds:0};fs.writeFileSync('tmp/p9-r5/receipts/P9-G3-D1I1-FUNCTIONS-COMPILE.json',JSON.stringify(result,null,2)+'\n');console.log('PASS_LOCAL compiled dispatcher '+rows.length+' checks; no original writes');
+

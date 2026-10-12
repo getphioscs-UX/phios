@@ -1,36 +1,55 @@
-import {CX_PROJECTION_VERSION,boundary,clean,deepFreeze,list,localeOf,safeUrl,sourceLineage,text} from './projection-common.js';
-function normalizedCka(payload){return payload?.cka?.clientAnswer?payload.cka:payload?.clientAnswer?payload:payload?.cka||{};}
-function authoritySources(payload){const cka=normalizedCka(payload), direct=list(cka?.clientAnswer?.sourcesGrounding).map(s=>({label:clean(s?.authorityLabel),excerpt:clean(s?.excerpt),href:safeUrl(s?.href)}));const groups=list(cka?.w5w17?.record?.retrievalContext?.authorityGroups).flatMap(g=>list(g?.sources).map(s=>({label:clean(s?.authorityLabel||s?.publisher||g?.authorityClass),excerpt:clean(s?.description||s?.claimText),href:safeUrl(s?.href||s?.sourceUrl),sourceId:clean(s?.sourceId)||null})));return [...direct,...groups].filter(s=>s.label||s.href)}
-const atlasLabel=(lang,kind)=>({loss:text(lang,'Civilization loss registry','文明损失 Registry'),cases:text(lang,'Civilization case registry','文明案例 Registry'),transitions:text(lang,'Transition window registry','文明转型窗口 Registry'),snapshots:text(lang,'World snapshot registry','世界横切面 Registry'),comparison:text(lang,'Comparison family registry','比较家族 Registry'),trajectories:text(lang,'Long-duration trajectory registry','长时段轨迹 Registry'),timeline:text(lang,'Timeline registry','历史脊柱 Registry')})[kind]||text(lang,'Civilization Atlas registry','文明图谱 Registry');
-function atlasSources(atlas,lang){return list(atlas?.evidence).slice(0,8).map(e=>deepFreeze({label:`${atlasLabel(lang,e.kind)} · ${clean(e.title||e.id)}`,excerpt:clean(e.summary)||null,href:safeUrl(atlas?.deepLink),sourceClass:'GOVERNED_KNOWLEDGE',sourceAuthority:'BOOK_V_CIVILIZATION_ATLAS_REGISTRY',participant:'PUBLIC',caseScope:'QUESTION',limitations:[clean(e.authorityClass)].filter(Boolean)}))}
-function atlasSupporting(atlas,lang){if(!atlas)return[];const s=atlas.sections||{},out=[];const add=(label,items)=>list(items).filter(Boolean).slice(0,4).forEach(x=>out.push(`${label}: ${clean(x)}`));add(text(lang,'What changed','发生了什么变化'),s.whatChanged);add(text(lang,'Loss dimensions','损失维度'),s.lossDimensions);add(text(lang,'Examples','案例'),s.examples);add(text(lang,'What continued','什么继续存在'),s.whatContinued);add(text(lang,'Evidence / unknown','证据／未知'),s.evidenceUnknown);return out.slice(0,12)}
+import {deepFreeze,list,localeOf,safeUrl,text} from './projection-common.js';
+import {safeSources,publicSourceUrl,customerText,customerSourceLabel,NO_SUPPORT_COPY} from '../_lib/knowledge-source-eligibility.js';
+
+// PUBLIC schema: no raw runtime result, governance, hashes or source versions.
+// sectionCode is a backward-compatible opaque public citation reference; never an internal section ID.
+export const KNOWLEDGE_CUSTOMER_PUBLIC_FIELDS=Object.freeze(['surface','locale','state','question','answer','basedOn','limits','relatedKnowledge','possibleNextStep','currentFacts','handoff','atlas']);
+const ref=value=>{let n=2166136261;for(const c of String(value))n=Math.imul(n^c.charCodeAt(0),16777619)>>>0;return 'ref-'+n.toString(16).padStart(8,'0');};
+const finite=value=>Number.isFinite(value)?value:null;
+const range=value=>value&&typeof value==='object'?{start:finite(value.start),end:finite(value.end)}:null;
 export function projectKnowledgeAnswerForCustomer(payload={}, {locale='en',currentFacts=null}={}){
- const lang=localeOf(locale), cka=normalizedCka(payload), answer=cka?.clientAnswer||payload?.ask2?.client||{}, answerState=clean(cka?.w5w17?.answerState||payload?.ask2?.client?.answerState)||'UNKNOWN', atlas=cka?.atlas||null, qualityOutcome=clean(payload?.ptrc?.quality?.outcome)||null;
- const runtimeRelated=list(answer?.relatedKnowledgeCards||cka?.w5w17?.relatedKnowledgeCards).map(card=>deepFreeze({title:clean(card?.concept||card?.title)||text(lang,'Related knowledge','相关知识'),description:clean(card?.description)||null,href:safeUrl(card?.href),contentType:clean(card?.contentType)||null}));
- const atlasCard=atlas?.deepLink?deepFreeze({title:text(lang,'Explore this position in Civilization Atlas','在文明图谱查看这个位置'),description:text(lang,'Open the Atlas with the current layer and selected entities preserved.','打开文明图谱，并保留当前图层与所选对象。'),href:safeUrl(atlas.deepLink),contentType:'ATLAS'}):null;
- const related=[...(atlasCard?[atlasCard]:[]),...runtimeRelated];
- const facts=list(currentFacts?.evidence).map(item=>deepFreeze({claim:clean(item?.claimText),source:clean(item?.publisher||item?.title),sourceUrl:safeUrl(item?.sourceUrl),retrievedAt:clean(item?.retrievedAt)||null,freshness:clean(item?.freshnessState)||null,authorityClass:clean(item?.authorityClass)||null})).filter(x=>x.claim);
- const manuscriptEvidence=list(payload?.grounding?.sourceEvidence).map(s=>({label:`${clean(s.bookCode)} · ${clean(s.heading||s.sectionCode).split(/[|｜]/)[0]} · ${clean(s.sourceVersion)}${s.projectionKind==='ACCEPTED_KNOWLEDGE_UNIT_NOT_NATIVE_PDF_EXCERPT'?text(lang,' · Accepted knowledge projection',' · 已接受知识投影'):''}`,sourceId:`MANUSCRIPT:${clean(s.sectionCode)}`,sectionCode:clean(s.sectionCode),sourceVersion:clean(s.sourceVersion),sourceSha256:clean(s.sourceSha256),sourceAcceptanceSha256:clean(s.sourceAcceptanceSha256),pageRange:s.pageRange||null,supportRange:s.supportRange||null,projectionKind:s.projectionKind||null,href:null}));
- const sources=[...manuscriptEvidence,...atlasSources(atlas,lang),...authoritySources(payload),...facts.map(f=>({label:f.source,excerpt:f.claim,href:f.sourceUrl,retrievedAt:f.retrievedAt,freshness:f.freshness}))];
- const unknown=list(answer?.unknown?.details).map(clean).filter(Boolean);
- const unsupportedPrediction=payload?.grounding?.answerAssessment?.state==='UNSUPPORTED_PREDICTION';
- const assessment=payload?.grounding?.manuscriptScope?payload?.grounding?.answerAssessment?.state:null;
- const sourceInsufficient=['NO_SUPPORTED_ANSWER','COMPARATIVE_EXPLANATION_UNIT_REQUIRED'].includes(assessment);
- const ambiguous=assessment==='NEEDS_CLARIFICATION';
- const needsReality=!unsupportedPrediction&&!sourceInsufficient&&!ambiguous&&(['NEEDS_CONTEXT','CURRENT_CONTEXT_REQUIRED'].includes(answerState)||payload?.ask2?.plan?.orchestrationState==='CURRENT_CONTEXT_REQUIRED');
- const runtimeDirect=clean(answer?.directAnswer)||text(lang,'A bounded answer is not available yet.','目前还没有可用的边界化回答。');
- const needsClarification=!unsupportedPrediction&&!sourceInsufficient&&sources.length===0&&(qualityOutcome==='INSUFFICIENT'||/没有足够的受治理|not enough governed|insufficient governed/i.test(runtimeDirect));
- const direct=sourceInsufficient?text(lang,'The currently admitted sources do not support an answer to this question. You can browse the available source material; additional personal information does not supply missing source evidence.','当前已准入来源不足以支持这个问题的答案。可以浏览现有来源；补充个人资料不能代替缺少的来源依据。'):needsClarification?text(lang,'Which topic would you like to explore? Add a little detail, or browse the articles below.','你想了解哪个主题？可以补充一点具体信息，或先浏览下方文章。'):atlas?.directFraming?`${clean(atlas.directFraming)}${runtimeDirect&&runtimeDirect!==clean(atlas.directFraming)?(lang==='zh-Hans'?'\n\n':' ')+runtimeDirect:''}`:runtimeDirect;
- const supporting=[...atlasSupporting(atlas,lang),...list(answer?.whyThisMayHappen).map(clean).filter(Boolean)];
- const atlasLimits=list(atlas?.sections?.evidenceUnknown).map(clean).filter(Boolean);
- const limits=[...unknown,...atlasLimits].map(value=>/canonical binding/i.test(value)?text(lang,'Some source material does not yet support a further conclusion.','部分来源尚不能支持进一步结论。'):/受治理.*knowledge|governed.*knowledge.*projection/i.test(value)?text(lang,'This is a reference explanation, not an assessment of your personal situation.','这是参考解释，不是对你个人处境的判断。'):value);
- return deepFreeze({schemaVersion:`${CX_PROJECTION_VERSION}:ASK`,surface:'ASK',locale:lang,state:unsupportedPrediction?'SOURCE_LIMIT':sourceInsufficient?'SOURCE_INSUFFICIENT':ambiguous?'NEEDS_CLARIFICATION':answerState,qualityOutcome,question:clean(answer?.question||payload?.ask2?.client?.question)||null,
- answer:{text:direct,supporting:needsClarification?[]:supporting,...(!needsClarification&&answer.structuredAnswer?{structuredAnswer:{mechanismOrState:clean(answer.structuredAnswer.mechanismOrState),conditions:list(answer.structuredAnswer.conditions).map(clean),relatedFactors:list(answer.structuredAnswer.relatedFactors).map(clean),possibleTransition:clean(answer.structuredAnswer.possibleTransition)||null,boundaryUnknown:clean(answer.structuredAnswer.boundaryUnknown),exploreInBook:safeUrl(answer.structuredAnswer.exploreInBook)}}:{})},
- basedOn:{sources:needsClarification?[]:sources,statement:atlas?text(lang,'Civilization Atlas registry evidence is shown before broader PHI OS knowledge; current public information remains separate.','文明图谱 Registry evidence 会优先于更广泛的 PHI OS 知识显示；当前公共信息仍然分开。'):facts.length?text(lang,'Current public information is shown separately from PHI OS reference knowledge.','当前公共信息会与 PHI OS 的参考知识分开显示。'):text(lang,'This answer uses only the PHI OS sources available for this question.','这个回答只使用当前问题可用的 PHI OS 来源。')},
- limits:{items:needsClarification?[text(lang,'A more specific question will help me find the right source.','更具体的问题有助于找到合适的来源。')]:limits.length?limits:[text(lang,'No additional limitation was supplied by the runtime.','运行时没有提供额外限制。')]},relatedKnowledge:needsClarification?[{title:text(lang,'Browse articles','浏览文章'),href:'/articles'}]:related,
- possibleNextStep:needsClarification?{kind:'RELATED_KNOWLEDGE',label:text(lang,'Browse articles','浏览文章')}:atlasCard?{kind:'RELATED_KNOWLEDGE',label:text(lang,'Explore in Civilization Atlas','在文明图谱继续探索')}:{kind:needsReality?'REALITY_ESCALATION':related.length?'RELATED_KNOWLEDGE':'OBSERVE',label:needsReality?text(lang,'Continue in My Reality','在 My Reality 继续'):related.length?text(lang,'Explore related knowledge','查看相关知识'):text(lang,'Observe what changes next','继续观察下一步变化')},
- currentFacts:{state:clean(currentFacts?.state)||'NOT_USED',retrievedAt:clean(currentFacts?.retrievedAt)||null,freshness:clean(currentFacts?.freshness)||null,limitations:list(currentFacts?.limitations).map(clean).filter(Boolean),evidence:facts},
- handoff:{available:true,question:clean(answer?.question||payload?.ask2?.client?.question)||null,externalEvidence:facts.map(f=>deepFreeze({sourceId:f.sourceUrl||f.source,statement:f.claim,sourceUrl:f.sourceUrl,authorityClass:f.authorityClass})),unknown},
- atlas:atlas?deepFreeze({intent:atlas.intent,deepLink:atlas.deepLink,retrievalPriority:atlas.retrievalPriority,evidenceCount:list(atlas.evidence).length}):null,
- governance:{currentFactsAreCanonicalKnowledge:false,aiPersonalityIsProductIdentity:false,atlasRegistryPromotedToCanonicalKnowledge:false,secondAskRuntimeCreated:false,secondRetrievalRuntimeCreated:false,...sourceLineage(['CKA','KAP','CIVILIZATION_ATLAS_REGISTRY','CURRENT_FACTS_GATEWAY']),...boundary()}});
+ payload=payload&&typeof payload==='object'&&!Array.isArray(payload)?payload:{};
+ const lang=localeOf(locale),cka=payload.cka||payload,answer=cka.clientAnswer||payload.ask2?.client||{};
+ const denied=['NO_SUPPORTED_ANSWER','COMPARATIVE_EXPLANATION_UNIT_REQUIRED'].includes(payload.grounding?.answerAssessment?.state);
+ const prediction=payload.grounding?.answerAssessment?.state==='UNSUPPORTED_PREDICTION';
+ let evidence=safeSources(payload.sources||payload.groundingBundle?.sources||[]);
+ // Only bounded source bodies/identities are support. Metadata alone cannot support a claim.
+ const sourceEvidence=list(payload.grounding?.sourceEvidence);
+ if(!evidence.length){
+  evidence=safeSources(list(answer.sourcesGrounding).map(s=>({...s,sourceType:s.sourceType,sourceId:s.sourceId,text:s.excerpt})));
+ }
+ if(denied||prediction)evidence=[];
+ let candidate=customerText(answer.directAnswer||payload.answer?.content?.directAnswer);
+ if(lang==='en'&&/[\u3400-\u9fff]/u.test(candidate))candidate='';
+ if(lang==='zh-Hans'&&!/[\u3400-\u9fff]/u.test(candidate)&&/[a-z]{3}/i.test(candidate))candidate='';
+ const supported=evidence.length>0&&Boolean(candidate);
+ if(!supported)evidence=[];
+ const sources=evidence.map(s=>{
+  const meta=sourceEvidence.find(m=>m.sectionCode===s.sectionCode)||s;
+  const heading=customerText(meta.heading||s.title);
+  const title=lang==='en'&&/[\u3400-\u9fff]/u.test(heading)?'':heading;
+  return {label:customerSourceLabel(s.sourceType,lang)+(title?' · '+title:''),excerpt:customerText(s.text)||null,href:publicSourceUrl(s.href),...(s.sectionCode?{sectionCode:ref(s.sourceId||s.sectionCode),pageRange:range(meta.pageRange),supportRange:meta.supportRange?{startOffset:finite(meta.supportRange.startOffset),endOffset:finite(meta.supportRange.endOffset)}:null}:{})};
+ });
+ let direct=supported?candidate:'';
+ if(lang==='en'&&/[\u3400-\u9fff]/u.test(direct))direct='';
+ if(lang==='zh-Hans'&&!/[\u3400-\u9fff]/u.test(direct)&&/[a-z]{3}/i.test(direct))direct='';
+ const content=prediction?text(lang,'These sources cannot support a certain prediction.','这些来源不能支持确定预测。'):(direct||NO_SUPPORT_COPY[lang]);
+ const localized=value=>{const s=customerText(value);return lang==='en'&&/[\u3400-\u9fff]/u.test(s)||lang==='zh-Hans'&&!/[\u3400-\u9fff]/u.test(s)&&/[a-z]{3}/i.test(s)?'':s;};
+ const related=supported?list(answer.relatedKnowledgeCards).map(c=>({title:localized(c.concept||c.title),description:localized(c.description)||null,href:publicSourceUrl(c.href)})).filter(c=>c.title&&c.href):[];
+ const atlasHref=supported&&evidence.some(s=>/ATLAS/.test(s.sourceType))?publicSourceUrl(cka.atlas?.deepLink):null;
+ if(atlasHref)related.unshift({title:text(lang,'Explore Civilization Atlas','浏览文明图谱'),description:null,href:atlasHref});
+ const structured=supported&&answer.structuredAnswer&&typeof answer.structuredAnswer==='object'?{mechanismOrState:localized(answer.structuredAnswer.mechanismOrState),conditions:list(answer.structuredAnswer.conditions).map(localized).filter(Boolean),relatedFactors:list(answer.structuredAnswer.relatedFactors).map(localized).filter(Boolean),possibleTransition:localized(answer.structuredAnswer.possibleTransition)||null,boundaryUnknown:localized(answer.structuredAnswer.boundaryUnknown),exploreInBook:publicSourceUrl(answer.structuredAnswer.exploreInBook)}:null;
+ const facts=currentFacts?.state==='AVAILABLE'?safeSources(list(currentFacts.evidence).map(f=>({...f,sourceType:'EXTERNAL_AUTHORITY',sourceId:f.sourceId||f.sourceUrl,text:f.claimText,eligible:f.eligible===false?false:true}))):[];
+ return deepFreeze({
+  surface:'ASK',locale:lang,state:prediction?'SOURCE_LIMIT':supported?(cka.w5w17?.answerState==='PARTIALLY_ANSWERED'?'PARTIALLY_ANSWERED':'ANSWERED'):'SOURCE_INSUFFICIENT',
+  question:customerText(answer.question||payload.answer?.question)||null,
+  answer:{text:content,supporting:supported?list(answer.whyThisMayHappen).map(localized).filter(Boolean):[],...(structured?{structuredAnswer:structured}:{})},
+  basedOn:{sources,statement:text(lang,'Sources used for this answer.','本次回答使用的来源。')},
+  limits:{items:supported?list(answer.unknown?.details).map(localized).filter(Boolean):[]},
+  relatedKnowledge:related,
+  possibleNextStep:{kind:related.length?'RELATED_KNOWLEDGE':'OBSERVE',label:text(lang,'Explore available material','浏览现有资料')},
+  currentFacts:{state:facts.length?'AVAILABLE':'NOT_USED',evidence:facts.map(f=>({claim:customerText(f.text),source:customerText(f.publisher||f.title)||customerSourceLabel('EXTERNAL_AUTHORITY',lang),sourceUrl:publicSourceUrl(f.sourceUrl)}))},
+  handoff:{available:supported,question:customerText(answer.question)||null,externalEvidence:facts.map(f=>({statement:customerText(f.text),sourceUrl:publicSourceUrl(f.sourceUrl)})),unknown:[]},
+  atlas:atlasHref?{deepLink:atlasHref,evidenceCount:evidence.filter(s=>/ATLAS/.test(s.sourceType)).length}:null
+ });
 }

@@ -1,3 +1,4 @@
+import {safeSources,safeGroundingBundle,customerSourceLabel,customerText,NO_SUPPORT_COPY} from './knowledge-source-eligibility.js';
 import {deriveEpistemicReading,isBookViiManuscriptRequest,excludeProtectedBookViiSources} from './knowledge-epistemic-reading.js';
 import {runKirR2ProductionProjection} from './kir-r2-production.js';
 import {publicAskExecutionPolicy} from '../public/ask-task-policy.js';
@@ -35,7 +36,7 @@ function splitSentences(text) {
 function localeCopy(locale) {
   if (locale === 'zh-Hans') {
     return Object.freeze({
-      insufficient: 'PHI OS 目前没有足够的受治理知识来可靠回答这个问题。',
+      insufficient: NO_SUPPORT_COPY['zh-Hans'],
       outOfScope: '这个问题目前超出 PHI OS 已治理的知识范围。',
       questionScopedBoundary: '这是基于受治理 PHI OS Knowledge 的问题范围回答，不是 Published Article，也不是 Reality Reading。',
       personalBoundary: '一般知识机制不能证明这就是你现实里正在发生的情况；个人结论需要额外证据。',
@@ -49,7 +50,7 @@ function localeCopy(locale) {
     });
   }
   return Object.freeze({
-    insufficient: 'PHI OS does not currently have enough governed knowledge to answer this question reliably.',
+    insufficient: NO_SUPPORT_COPY.en,
     outOfScope: 'This question is currently outside the governed PHI OS knowledge scope.',
     questionScopedBoundary: 'This is a question-scoped answer grounded in governed PHI OS Knowledge; it is not a Published Article or a Reality Reading.',
     personalBoundary: 'A general knowledge mechanism does not establish that it is what is happening in your reality; a personal conclusion requires additional evidence.',
@@ -163,6 +164,7 @@ export function routeKapAiCost({ eligibility }) {
 }
 
 export function projectKapSources(bundle, depth = DEFAULT_DEPTH) {
+  bundle=safeGroundingBundle(bundle);
   const profile = DEPTHS[normalizeAnswerDepth(depth)];
   const hrefByNode = new Map();
   for (const node of [...(bundle?.nodeMatches?.primaryNodes || []), ...(bundle?.nodeMatches?.supportingNodes || [])]) {
@@ -172,20 +174,13 @@ export function projectKapSources(bundle, depth = DEFAULT_DEPTH) {
   return (bundle?.sources || []).slice(0, profile.sourceItems).map(source => Object.freeze({
     sourceId: source.sourceId,
     sourceType: source.sourceType,
+    sourceBinaryDigest: source.sourceBinaryDigest,
+    sourceSha256: source.sourceSha256,
+    sourceDigest: source.sourceDigest,
+    supportRange: source.supportRange,
+    projectionKind: source.projectionKind,
     title: source.title || null,
-    authorityLabel: source.sourceType === 'PUBLISHED_CANONICAL_ARTICLE'
-      ? 'PUBLISHED_CANONICAL_KNOWLEDGE'
-      : source.sourceType==='REGISTERED_FIGURE_SEMANTICS'
-        ? 'GOVERNED_PUBLICATION_FIGURE_SEMANTICS'
-      : source.sourceType==='BOOK6_ACCEPTED_CURRENT_DOSSIER'
-        ? 'HUMAN_ACCEPTED_SUBSYSTEM_DOSSIER'
-      : source.sourceType==='BOOK6_UNACCEPTED_DOSSIER_UNKNOWN'
-        ? 'UNACCEPTED_DOSSIER_UNKNOWN'
-      : source.sourceType==='BOOK6_VALIDATED_ADMITTED_PROVIDER_EVIDENCE'
-        ? 'VALIDATED_ADMITTED_EXTERNAL_EVIDENCE'
-      : source.sourceType?.startsWith('CIVILIZATION_ATLAS_')
-        ? 'STRUCTURED_ATLAS_KNOWLEDGE'
-        : 'REVIEWED_MANUSCRIPT_KNOWLEDGE',
+    authorityLabel: customerSourceLabel(source.sourceType,bundle.question?.locale),
     nodeCode: source.nodeCode || null,
     fragmentCode: source.fragmentCode || null,
     sectionCode: source.sectionCode || null,
@@ -225,6 +220,9 @@ export function projectKapUnknownBoundary({ bundle, coverageDecision, locale }) 
 }
 
 export function composeDeterministicKapAnswer({ bundle, coverageDecision, depth = DEFAULT_DEPTH, now = new Date() }) {
+  bundle=safeGroundingBundle(bundle);
+  coverageDecision=coverageDecision&&typeof coverageDecision==='object'?coverageDecision:{status:'INSUFFICIENT_COVERAGE',answerCompositionEligible:false};
+  if(!bundle.sources.length)coverageDecision={...coverageDecision,status:'INSUFFICIENT_COVERAGE',answerCompositionEligible:false,shortSupportedAnswerEligible:false};
   if (!bundle?.bundleId) throw new Error('KAP_GROUNDING_BUNDLE_REQUIRED');
   bundle=excludeProtectedBookViiSources(bundle);
   if(isBookViiManuscriptRequest(bundle.question?.text)) bundle={bundleId:bundle.bundleId,question:bundle.question,sources:[],unknowns:[{code:'PROTECTED_MANUSCRIPT_ACCESS_DENIED'}]};
@@ -247,7 +245,7 @@ export function composeDeterministicKapAnswer({ bundle, coverageDecision, depth 
   const unknowns = mapUnknowns(bundle, locale);
   const boundaries = [copy.questionScopedBoundary];
   if (bundle?.normalization?.hints?.containsPersonalContextHint) boundaries.push(copy.personalBoundary);
-  const eligible = !manuscriptDenied && (!bundle.bookViiProtectedSourceRejected || bundle.sources.length>0) && coverageDecision?.answerCompositionEligible === true;
+  const eligible = bundle.sources.length>0 && !manuscriptDenied && (!bundle.bookViiProtectedSourceRejected || bundle.sources.length>0) && coverageDecision?.answerCompositionEligible === true;
   const ptrcOutcome = coverageDecision?.ptrcQuality?.outcome || null;
   const partialSupported = !manuscriptDenied && ptrcOutcome === 'PARTIAL' && coverageDecision?.shortSupportedAnswerEligible === true && direct.length > 0;
   const relevanceRejected = (coverageDecision?.reasonCodes || []).includes('QUESTION_SOURCE_RELEVANCE_NOT_ESTABLISHED');
@@ -314,6 +312,9 @@ export function composeDeterministicKapAnswer({ bundle, coverageDecision, depth 
 }
 
 export function composeKapAnswerProjection({ bundle, coverageDecision, depth = DEFAULT_DEPTH, now = new Date() }) {
+  bundle=safeGroundingBundle(bundle);
+  coverageDecision=coverageDecision&&typeof coverageDecision==='object'?coverageDecision:{status:'INSUFFICIENT_COVERAGE',answerCompositionEligible:false};
+  if(!bundle.sources.length)coverageDecision={...coverageDecision,status:'INSUFFICIENT_COVERAGE',answerCompositionEligible:false,shortSupportedAnswerEligible:false};
   bundle=excludeProtectedBookViiSources(bundle);
   if(bundle.bookViiProtectedSourceRejected && !bundle.sources.length) coverageDecision={...coverageDecision,status:'INSUFFICIENT_COVERAGE',answerCompositionEligible:false,shortSupportedAnswerEligible:false,reasonCodes:[...(coverageDecision?.reasonCodes||[]),'PROTECTED_BOOK_VII_SOURCE_REJECTED']};
   if(isBookViiManuscriptRequest(bundle.question?.text)) {

@@ -1,3 +1,4 @@
+import {safeSources,safeGroundingBundle,customerSourceLabel,customerText,NO_SUPPORT_COPY} from './knowledge-source-eligibility.js';
 import {externalRealityQuestionNeed} from '../external-reality-impact/external-reality-impact-runtime.js';
 const clean = value => String(value ?? '').normalize('NFKC').trim().replace(/\s+/g, ' ');
 const optional = value => clean(value) || null;
@@ -135,11 +136,12 @@ function sourceAuthorityClass(source = {}) {
 }
 
 export function evaluateCkaExternalAuthority(question, payload = {}) {
+  payload=payload&&typeof payload==='object'?payload:{};
   const text = clean(question);
   // A temporal word in a conceptual question is not a request for a live fact.
   const required = currentAuthorityPattern.test(text) || unstableDomainPattern.test(text) || externalRealityQuestionNeed(text);
   const professionalJudgmentRequested = professionalJudgmentPattern.test(text);
-  const authoritySources = (Array.isArray(payload.sources) ? payload.sources : [])
+  const authoritySources = safeSources(payload?.sources)
     .filter(source => sourceAuthorityClass(source) === 'GOVERNED_EXTERNAL_AUTHORITY');
   return Object.freeze({
     required,
@@ -187,8 +189,10 @@ export function projectCkaW5W17Envelope(payload = {}, {
   guidedContext,
   knowledgeContext
 } = {}) {
+  payload=payload&&typeof payload==='object'?payload:{};
+  payload={...payload,sources:safeSources(payload.sources)};
   const answer = payload?.answer || {};
-  if (!clean(answer.answerId)) throw new Error('CKA_UPSTREAM_ANSWER_ID_REQUIRED');
+  if (!clean(answer.answerId)) payload={...payload,answer:{...answer,answerId:'NO-SUPPORT'}};
   const question = clean(displayQuestion || answer.question);
   const authorityDecision = evaluateCkaExternalAuthority(question, payload);
   const answerState = resolveCkaAnswerState(payload, { guidedContext, authorityDecision });
