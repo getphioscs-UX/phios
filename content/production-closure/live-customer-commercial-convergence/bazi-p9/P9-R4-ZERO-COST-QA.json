@@ -1,0 +1,208 @@
+{
+  "status": "PASS_LOCAL",
+  "admissionAndExecution": {
+    "status": "PASS_LOCAL",
+    "results": [
+      {
+        "name": "whole chapter deny undefined",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "whole chapter deny UNKNOWN",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "whole chapter deny NOT_ACTIVATED",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "whole chapter deny WITHHELD",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "missing ledger deny",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "unqualified activated deny",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "flag OFF denies qualified activated",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "source identity mismatch deny",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "duplicate authority deny",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "QA-only qualified activated fixture admits",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "BOOK-1 zh-Hans denied before private read, grounding, composition/citation and projection",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "BOOK-1 en denied before private read, grounding, composition/citation and projection",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "BOOK-5 zh-Hans denied before private read, grounding, composition/citation and projection",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "BOOK-5 en denied before private read, grounding, composition/citation and projection",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "fallback cannot admit denied whole chapter even in mixed corpus",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "QA-only positive real API retrieval",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "conceptual question retains reference routing",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "current market question retains external authority boundary",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "customer citation label zh-Hans",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "customer citation label en",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "operator import/build/no-opt-in safe; explicit intent reaches stub only",
+        "status": "PASS_LOCAL"
+      },
+      {
+        "name": "current Book I/V authority not changed",
+        "status": "PASS_LOCAL"
+      }
+    ],
+    "providerCalls": 0,
+    "providerCostUSD": 0,
+    "networkCalls": 0,
+    "productionDeployments": 0,
+    "realPayments": 0,
+    "realRefunds": 0
+  },
+  "customerRegression": {
+    "status": "PASS_LOCAL",
+    "cases": 13,
+    "results": [
+      {
+        "id": "REG-BOUNDARY",
+        "pass": true,
+        "state": "PARTIALLY_ANSWERED"
+      },
+      {
+        "id": "REG-CAPACITY",
+        "pass": true,
+        "state": "PARTIALLY_ANSWERED"
+      },
+      {
+        "id": "REG-LIVING",
+        "pass": true,
+        "state": "PARTIALLY_ANSWERED"
+      },
+      {
+        "id": "REG-COMPARE",
+        "pass": true,
+        "state": "PARTIALLY_ANSWERED"
+      },
+      {
+        "id": "NEW-BOUNDARY",
+        "pass": true,
+        "state": "PARTIALLY_ANSWERED"
+      },
+      {
+        "id": "NEW-LIVING",
+        "pass": true,
+        "state": "PARTIALLY_ANSWERED"
+      },
+      {
+        "id": "FALSE-PREMISE",
+        "pass": true,
+        "state": "PARTIALLY_ANSWERED"
+      },
+      {
+        "id": "OUTSIDE",
+        "pass": true,
+        "state": "SOURCE_INSUFFICIENT"
+      },
+      {
+        "id": "FIGURE",
+        "pass": true,
+        "state": "SOURCE_INSUFFICIENT"
+      },
+      {
+        "id": "PREDICTION",
+        "pass": true,
+        "state": "SOURCE_LIMIT"
+      },
+      {
+        "id": "NO-SOURCE",
+        "pass": true,
+        "state": "SOURCE_INSUFFICIENT"
+      },
+      {
+        "id": "ENGLISH",
+        "pass": true,
+        "state": "SOURCE_INSUFFICIENT"
+      },
+      {
+        "id": "CLIENT-QA-ESCALATION",
+        "pass": true,
+        "state": "SOURCE_INSUFFICIENT"
+      }
+    ]
+  },
+  "KSAR": {
+    "status": "PASS",
+    "oldExpectation": "node scripts/check-ksar-manuscript-knowledge-access.mjs",
+    "newExpectation": "node scripts/run-zero-cost-regression.mjs check:ksar",
+    "substantiveCommand": "node scripts/check-ksar-manuscript-knowledge-access.mjs",
+    "assertionsPreserved": true
+  },
+  "D1I1": {
+    "localCases": 244,
+    "compiledCases": 138,
+    "writerOwners": 41,
+    "SQLWriteLocations": 163,
+    "entrypoints": 125,
+    "unknownWriters": 0,
+    "originalWrites": 0
+  },
+  "compile": {
+    "exitCode": 0,
+    "bundle": {
+      "path": "tmp/p9-r4/compiled/index.js",
+      "bytes": 17031530,
+      "SHA256": "e103d31a34f55758fa0084962bfb718c05ccb4b34be3cd79ef1a989be897e87a"
+    },
+    "cwd": "C:/phios/tmp/p9-r4/source"
+  },
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "productionMutations": 0,
+  "limitations": [
+    "No npm install or production deployment executed. Absence of install/build/CI deploy hooks plus safe imports/build and no-opt-in subprocess proof establish dormant publisher safety.",
+    "All customer/provider calls are local deterministic fixtures.",
+    "Earlier QA errors were snapshot fixture omissions or overly broad mixed-corpus read assertions. Final fixtures isolate whole-chapter denial and preserve ordinary bounded-source regression. No real qualification status changed."
+  ]
+}

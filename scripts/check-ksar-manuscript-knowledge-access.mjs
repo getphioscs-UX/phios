@@ -79,7 +79,8 @@ assert.equal(corrected[0].sourceDigest, 'c'.repeat(64), 'Editorial projection mu
 const wrangler = json('wrangler.jsonc');
 assert(wrangler.r2_buckets.some(binding => binding.binding === 'MANUSCRIPTS' && binding.bucket_name === 'phios-private-manuscripts'));
 const pkg = json('package.json');
-assert.equal(pkg.scripts['check:ksar'], 'node scripts/check-ksar-manuscript-knowledge-access.mjs');
+assert.equal(pkg.scripts['check:ksar'], 'node scripts/run-zero-cost-regression.mjs check:ksar');
+assert.equal(json('config/reports/zero-cost-check-commands.json')['check:ksar'], 'node scripts/check-ksar-manuscript-knowledge-access.mjs', 'Canonical zero-cost runner must still execute the substantive KSAR checker.');
 
 for (const forbidden of [
   'content/knowledge/source-access/retrieval-corpus.json',

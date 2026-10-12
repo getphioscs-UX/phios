@@ -9,6 +9,7 @@ import {
 import {retrieveAtlasScope} from './atlas-retrieval-scope.js';
 import {manuscriptMetadataRaw} from '../knowledge-runtime/current-manuscript-server-metadata.js';
 import {isBookViiManuscriptRequest} from './knowledge-epistemic-reading.js';
+import {admittedManuscriptScopes} from './manuscript-current-admission.js';
 
 const MODES = new Set(['auto', 'overview', 'focused', 'full_article', 'continuity']);
 const SOURCES = new Set(['auto', 'hybrid', 'published', 'manuscript']);
@@ -105,6 +106,19 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
       if (actual !== source.sourceAcceptanceSha256 || acceptance.sourceSha256 !== source.sourceSha256 || acceptance.status !== 'HUMAN_ACCEPTED_SOURCE_IDENTITY' || acceptance.scope !== 'CURRENT_CHINESE_SOURCE_BINARY_ONLY') throw new Error('MANUSCRIPT_SOURCE_ACCEPTANCE_IDENTITY_MISMATCH');
     }
     if (source.runtimeAdmission === 'ADMITTED_READABILITY_SOURCE_PENDING_REMOTE_OBJECT') await validateSourceAcceptance(env, source);
+    let currentPermittedScopes = null;
+    if (source.scopeAdmissionPath) {
+      const raw = manuscriptMetadataRaw[source.scopeAdmissionPath];
+      if (!raw) throw Error('MANUSCRIPT_SCOPE_ADMISSION_UNAVAILABLE');
+      const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw)))].map(b => b.toString(16).padStart(2, '0')).join('');
+      if (digest !== source.scopeAdmissionSha256) throw Error('MANUSCRIPT_SCOPE_ADMISSION_IDENTITY_MISMATCH');
+      const scope = JSON.parse(raw);
+      currentPermittedScopes = admittedManuscriptScopes(scope.records.filter(r => r.bookCode === source.bookCode && r.sourceSha256 === source.sourceSha256 && r.corpusSha256 === source.corpusSha256 && r.locale === locale && r.scopeState === 'LOCAL_QA_VERIFIED_PROSE_CANDIDATE'), source, manuscriptMetadataRaw, {
+        textScopeEnabled: env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true',
+        declaredWholeSections: registry.activationScope?.wholeChapterCandidates || []
+      });
+      if (!currentPermittedScopes.length) return [];
+    }
     let corpus = await loadR2RetrievalCorpus(env.MANUSCRIPTS, source);
     // Reuse the existing closed KSAR human review for Book II. The original
     // registry and accepted corpus remain unchanged; only the missing consumer
@@ -126,7 +140,7 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
       const digest=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(raw)))].map(b=>b.toString(16).padStart(2,'0')).join('');
       if(digest!==source.scopeAdmissionSha256)throw Error('MANUSCRIPT_SCOPE_ADMISSION_IDENTITY_MISMATCH');
       const scope=JSON.parse(raw);
-      const permitted=scope.records.filter(r=>r.bookCode===source.bookCode&&r.sourceSha256===source.sourceSha256&&r.corpusSha256===source.corpusSha256&&r.locale===locale&&r.scopeState==='LOCAL_QA_VERIFIED_PROSE_CANDIDATE');
+      const permitted=currentPermittedScopes;
       // An explicitly named chapter subject must not fall back to an unrelated
       // admitted chapter merely because both mention structure or control.
       const normalizedQuery=String(query).normalize('NFKC').replace(/\s+/g,'');

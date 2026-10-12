@@ -1,4 +1,19 @@
 import fs from'node:fs';import path from'node:path';import assert from'node:assert/strict';import{createHash}from'node:crypto';import{execFileSync,spawnSync}from'node:child_process';
+import {fileURLToPath} from 'node:url';
+
+export function assertPublicationIntent(argv = []) {
+  const required = ['--execute-production-deploy', '--target=phios-github', '--branch=main'];
+  if (argv.length !== required.length || required.some(flag => !argv.includes(flag))) {
+    throw Error('EXPLICIT_PRODUCTION_PUBLICATION_INTENT_REQUIRED');
+  }
+}
+
+export async function main({argv = process.argv.slice(2), run = performPublication} = {}) {
+  assertPublicationIntent(argv);
+  return run();
+}
+
+async function performPublication() {
 const root=process.cwd(),dir='tools/review/free-ask-manuscript-r1/',sha=x=>createHash('sha256').update(x).digest('hex'),read=p=>JSON.parse(fs.readFileSync(p));
 const stable=x=>JSON.stringify(x&&typeof x==='object'?(Array.isArray(x)?x.map(v=>JSON.parse(stable(v))):Object.fromEntries(Object.keys(x).sort().map(k=>[k,JSON.parse(stable(x[k]))]))):x);
 const build=read(dir+'CURRENT-IV-VI-BUILD-RECEIPT.json');assert.equal(build.buildState,'PASS_BUILD');for(const row of build.inputs)assert.equal(sha(fs.readFileSync(row.path)),row.sha256,'RELEVANT_INPUT_CHANGED '+row.path);assert.equal(sha(fs.readFileSync('.pages-output/_worker.js')),build.output.workerSha256);assert.equal(sha(fs.readFileSync('.pages-output/_routes.json')),build.output.routesSha256);
@@ -16,3 +31,8 @@ fs.writeFileSync('.tmp/ask-current-paired-rollback-private.json',JSON.stringify(
 fs.writeFileSync(dir+'CURRENT-ASK-PRESERVED-CONFIG-PUBLICATION.json',JSON.stringify({...receipt,state:'PREFLIGHT_VERIFIED'},null,2)+'\n');
 const result=spawnSync(process.execPath,[path.resolve('node_modules/wrangler/bin/wrangler.js'),'pages','deploy',path.resolve('.pages-output'),'--project-name','phios-github','--branch','main','--no-bundle','--commit-message','Verified Chinese Ask scopes '+build.output.workerSha256],{cwd,encoding:'utf8',env:{...process.env,CLOUDFLARE_ACCOUNT_ID:'0b9f36bdf56f38d7d09aebe388f15204',WRANGLER_LOG_PATH:path.resolve('.tmp/ask-preserved-config-publication.log'),WRANGLER_SEND_METRICS:'false'},maxBuffer:8*1024*1024});process.stdout.write(result.stdout||'');process.stderr.write(result.stderr||'');
 const after=await project();receipt.exitCode=result.status;receipt.deploymentId=after.canonical_deployment.id;receipt.configurationUnchanged=stable(before.deployment_configs.production)===stable(after.deployment_configs.production);receipt.state=result.status===0&&receipt.configurationUnchanged?'DEPLOYED_PENDING_BINDING_AND_ANSWER_LIVE':'PUBLICATION_FAILED_OR_CONFIG_CHANGED';receipt.deploymentUrl=after.canonical_deployment.url;receipt.stripeFlag=after.deployment_configs.production.env_vars.STRIPE_ENVIRONMENT?.type==='plain_text'?after.deployment_configs.production.env_vars.STRIPE_ENVIRONMENT.value:'UNVERIFIED';fs.writeFileSync(dir+'CURRENT-ASK-PRESERVED-CONFIG-PUBLICATION.json',JSON.stringify(receipt,null,2)+'\n');assert.equal(result.status,0);assert(receipt.configurationUnchanged,'SHARED_CONFIG_MUTATED');console.log(JSON.stringify(receipt));
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch(error => { console.error(error.message); process.exitCode = 1; });
+}
