@@ -1,0 +1,118 @@
+{
+  "rows": [
+    {
+      "owner": "qa-non-member",
+      "id": "DELIVERY-V-ZH-ORDINARY",
+      "status": 400,
+      "response": {
+        "error": "CONTINUITY_ACTIVE_SUBSCRIPTION_REQUIRED"
+      }
+    },
+    {
+      "owner": "qa-member",
+      "id": "DELIVERY-RECOVERY-REGRESSION-ORDINARY",
+      "status": 200,
+      "response": {
+        "taskId": "full-delivery-DELIVERY-RECOVERY-REGRESSION-ORDINARY",
+        "state": "FAILED",
+        "replayed": true,
+        "providerCalls": 0
+      }
+    }
+  ],
+  "calls": 5,
+  "additionalCalls": 0,
+  "database": {
+    "tasks": [
+      {
+        "task_id": "full-delivery-DELIVERY-V-ZH-ORDINARY",
+        "state": "COMPLETE",
+        "reserved_micro_usd": 3124,
+        "customer_charge_micro_usd": 1457
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-VII-NEW-ZH-ORDINARY",
+        "state": "COMPLETE",
+        "reserved_micro_usd": 2754,
+        "customer_charge_micro_usd": 512
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-VII-NEW-EN-ORDINARY",
+        "state": "COMPLETE",
+        "reserved_micro_usd": 2400,
+        "customer_charge_micro_usd": 619
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-RECOVERY-REGRESSION-ORDINARY",
+        "state": "FAILED",
+        "reserved_micro_usd": 3211,
+        "customer_charge_micro_usd": 0
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-RECOVERY-REGRESSION-DEEP",
+        "state": "COMPLETE",
+        "reserved_micro_usd": 32110,
+        "customer_charge_micro_usd": 6692
+      }
+    ],
+    "allocations": [
+      {
+        "task_id": "full-delivery-DELIVERY-V-ZH-ORDINARY",
+        "quota_unit_id": "CONTQUOTA-INVOICE-isolated-qa-invoice",
+        "reserved_micro_usd": 3124,
+        "charged_micro_usd": 1457
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-VII-NEW-ZH-ORDINARY",
+        "quota_unit_id": "CONTQUOTA-INVOICE-isolated-qa-invoice",
+        "reserved_micro_usd": 2754,
+        "charged_micro_usd": 512
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-VII-NEW-EN-ORDINARY",
+        "quota_unit_id": "CONTQUOTA-INVOICE-isolated-qa-invoice",
+        "reserved_micro_usd": 2400,
+        "charged_micro_usd": 619
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-RECOVERY-REGRESSION-ORDINARY",
+        "quota_unit_id": "CONTQUOTA-INVOICE-isolated-qa-invoice",
+        "reserved_micro_usd": 3211,
+        "charged_micro_usd": 0
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-RECOVERY-REGRESSION-DEEP",
+        "quota_unit_id": "CONTQUOTA-INVOICE-isolated-qa-invoice",
+        "reserved_micro_usd": 32110,
+        "charged_micro_usd": 6692
+      }
+    ],
+    "platformEntries": [
+      {
+        "request_id": "full-delivery-DELIVERY-V-ZH-ORDINARY",
+        "measured_micro_usd": 1457,
+        "state": "METERED"
+      },
+      {
+        "request_id": "full-delivery-DELIVERY-VII-NEW-ZH-ORDINARY",
+        "measured_micro_usd": 512,
+        "state": "METERED"
+      },
+      {
+        "request_id": "full-delivery-DELIVERY-VII-NEW-EN-ORDINARY",
+        "measured_micro_usd": 619,
+        "state": "METERED"
+      },
+      {
+        "request_id": "full-delivery-DELIVERY-RECOVERY-REGRESSION-ORDINARY",
+        "measured_micro_usd": 1590,
+        "state": "METERED"
+      },
+      {
+        "request_id": "full-delivery-DELIVERY-RECOVERY-REGRESSION-DEEP",
+        "measured_micro_usd": 6692,
+        "state": "METERED"
+      }
+    ]
+  }
+}

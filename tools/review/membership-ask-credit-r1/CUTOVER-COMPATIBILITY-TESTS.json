@@ -1,0 +1,27 @@
+{
+  "results": [
+    {
+      "case": "old metered spend represented exactly once by both readers",
+      "state": "PASS"
+    },
+    {
+      "case": "pending legacy reservation deducted, cutover denied, not treated as zero",
+      "state": "PASS"
+    },
+    {
+      "case": "reconciliation never creates or replays purchase grants",
+      "state": "PASS"
+    },
+    {
+      "case": "mixed dispatch explicitly blocked by cutover policy; production enforcement still required",
+      "state": "PASS_POLICY_NOT_ACTIVATED"
+    }
+  ],
+  "fixtureOnly": true,
+  "legacyNetSpendDelta": 10000,
+  "newNetSpendDelta": 10000,
+  "pendingReserveDelta": 50000,
+  "productionWrite": 0,
+  "rollback": "BOTH_DISPATCHERS_OFF; KEEP_LEDGER_AND_GRANTS",
+  "liveBalance": "NOT_READ"
+}

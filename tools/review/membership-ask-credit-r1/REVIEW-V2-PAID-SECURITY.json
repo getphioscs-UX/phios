@@ -1,0 +1,16 @@
+{
+  "afterCalls": 8,
+  "checks": [
+    {
+      "body": "\r\n{\r\n  \"error\": \"CONTINUITY_ACTIVE_SUBSCRIPTION_REQUIRED\"\r\n}",
+      "case": "NONMEMBER_NO_CALL",
+      "status": 400
+    },
+    {
+      "body": "\r\n{\r\n  \"ok\": false,\r\n  \"code\": \"TASK_NOT_FOUND\",\r\n  \"providerCalls\": 0\r\n}",
+      "case": "CROSS_OWNER_READ_DENIED",
+      "status": 409
+    }
+  ],
+  "beforeCalls": 8
+}

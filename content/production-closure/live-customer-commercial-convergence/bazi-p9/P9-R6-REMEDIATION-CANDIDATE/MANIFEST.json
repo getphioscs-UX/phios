@@ -1,0 +1,65 @@
+{
+  "status": "DRAFT_NOT_HUMAN_ACCEPTED_NOT_DEPLOYABLE",
+  "baseCommit": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+  "reason": "PRODUCTION_READ_ONLY_EFFECTIVENESS_REMEDIATION",
+  "files": [
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R6-REMEDIATION-CANDIDATE/wrangler.jsonc",
+      "intendedPath": "wrangler.jsonc",
+      "sha256": "468092ba45d6c21e8fa7f3442b5321ced85fd4e0a47fda014ed9932c9cdb8c59"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R6-REMEDIATION-CANDIDATE/functions/_middleware.js",
+      "intendedPath": "functions/_middleware.js",
+      "sha256": "4adc5ae7f9911798dae83443eacdf76259ba6ac9caefe9a09622d88536fc612f"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R6-REMEDIATION-CANDIDATE/functions/_lib/d1-maintenance-guard.js",
+      "intendedPath": "functions/_lib/d1-maintenance-guard.js",
+      "sha256": "6beafe96ea21d4514b40bd9a8335ba42991467eeccf512fa28dc7949bdb01e85"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R6-REMEDIATION-CANDIDATE/functions/_lib/d1-private-isolation-probe.js",
+      "intendedPath": "functions/_lib/d1-private-isolation-probe.js",
+      "sha256": "169f52bfa921cba60d9335d490c8327aa7ccdfb87ed875584a5493a955d13e01"
+    }
+  ],
+  "localProof": {
+    "status": "PASS_LOCAL_CANDIDATE_ONLY",
+    "GET": "GUARD_BLOCKED",
+    "POST": "GUARD_BLOCKED",
+    "unauthorizedDiagnostics": 0,
+    "rawPrepareCalls": 0,
+    "logs": [
+      {
+        "kind": "P9_PRIVATE_D1_ISOLATION",
+        "middlewareExecuted": true,
+        "handlerReached": true,
+        "mode": "READ_ONLY",
+        "bindingWrapped": true,
+        "method": "GET",
+        "guardRejectedWrite": true,
+        "D1MutationAttemptForwarded": false
+      },
+      {
+        "kind": "P9_PRIVATE_D1_ISOLATION",
+        "middlewareExecuted": true,
+        "handlerReached": true,
+        "mode": "READ_ONLY",
+        "bindingWrapped": true,
+        "method": "POST",
+        "guardRejectedWrite": true,
+        "D1MutationAttemptForwarded": false
+      }
+    ]
+  },
+  "constraints": [
+    "Not applied to active source",
+    "No deployment, commit, push or new production secret",
+    "Private diagnostics must be disabled by missing token and never report SQL or credentials",
+    "Exact route identity and token hardening require further review",
+    "Topology retirement is separate and requires provider-supported per-deployment review"
+  ],
+  "runtimeProof": "NOT_AVAILABLE_NO_SUCCESSOR_DEPLOYMENT_AUTHORIZED",
+  "releaseDigest": "NOT_FROZEN"
+}

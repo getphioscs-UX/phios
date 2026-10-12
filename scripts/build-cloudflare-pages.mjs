@@ -206,6 +206,9 @@ if(fs.existsSync(path.join(root,book5AcceptancePath))){
 // The recovery error page must be reviewable before committing it. Without a
 // top-level 404.html Pages serves the homepage for unknown static routes.
 if(fs.existsSync(path.join(root,'404.html')))publicationFiles.add('404.html');
+// Reviewable membership source-description runtime, without private manuscript
+// payloads. Uncommitted additions still pass the existing publication predicate.
+for(const file of ['membership-source.html','assets/js/pages/membership-source.js','assets/js/pages/membership-ask-credit-r1.js'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
 // Explicit R2 runtime additions for uncommitted local builds. Review evidence
 // and captures remain excluded by the shared publication predicate.
 for(const file of ['assets/css/global-visual-r2.css','assets/js/global-visual-r2.js','data/visual/approved-r2-visual-assets.json'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);

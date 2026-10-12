@@ -1,0 +1,656 @@
+{
+  "taskId": "full-delivery-DELIVERY-RECOVERY-REGRESSION-DEEP",
+  "state": "COMPLETE",
+  "id": "DELIVERY-RECOVERY-REGRESSION-DEEP",
+  "balanceBefore": {
+    "availableMicroUSD": 2997412,
+    "credits": "299.7412",
+    "active": true,
+    "modelCallsAllowed": true,
+    "units": [
+      {
+        "quota_unit_id": "CONTQUOTA-INVOICE-isolated-qa-invoice",
+        "envelope_id": "CONTINUITY-isolated-qa-sub",
+        "owner_account_id": "qa-member",
+        "stripe_subscription_id": "isolated-qa-sub",
+        "billing_period_start": 1791792072,
+        "billing_period_end": 1791878473,
+        "grant_source_id": "isolated-qa-invoice",
+        "grant_kind": "INVOICE",
+        "purchase_id": "isolated-qa-purchase",
+        "maximum_micro_usd": 3000000,
+        "created_at": "2026-10-12T08:01:13.930Z",
+        "available": 2997412
+      }
+    ]
+  },
+  "retrieval": {
+    "retrievalQuery": "正常维持与发生损坏后恢复有什么区别？",
+    "httpStatus": 200,
+    "permissionMode": "IN_PROCESS_ISOLATED_FRAGMENT_ONLY_NOT_CLIENT_QA",
+    "candidates": [
+      {
+        "chapter": "CM-B3V1-P8-S001",
+        "score": 1172.9639536865986,
+        "argument": {
+          "argumentId": "HISTORY_CREATES_MAINTENANCE",
+          "type": "DEFINITION",
+          "startOffset": 266,
+          "endOffset": 938,
+          "textSha256": "7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3",
+          "comparisonSubjects": null
+        },
+        "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7"
+      },
+      {
+        "chapter": "CM-B3V1-P8-S059",
+        "score": 1055.4474333991182,
+        "argument": {
+          "argumentId": "CONTINUATION_V_SUSTAINABILITY",
+          "type": "DISTINCTION",
+          "startOffset": 33,
+          "endOffset": 398,
+          "textSha256": "253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15",
+          "comparisonSubjects": null
+        },
+        "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7"
+      },
+      {
+        "chapter": "CM-B3V1-P8-S006",
+        "score": 252.10509833543477,
+        "argument": null,
+        "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7"
+      },
+      {
+        "chapter": "CM-B3V1-P8-S008",
+        "score": 56.6419203206308,
+        "argument": null,
+        "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7"
+      }
+    ],
+    "errors": [],
+    "pack": {
+      "question": "正常维持与发生损坏后恢复有什么区别？",
+      "locale": "zh-Hans",
+      "sources": [
+        {
+          "id": "S1",
+          "sourceCode": "MKS-BOOK-3-OWNER-FINAL-EFBFDD21-ZH-HANS",
+          "sourceVersion": "owner-final-20261011-efbfdd21fa21",
+          "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+          "sourceAcceptanceDigest": "2567043c746a447202fc6df3197f23df2758b55ee49008d4acbf27907c8912a8",
+          "chapterId": "CM-B3V1-P8-S001",
+          "heading": "维持出现 | 为什么持续运行必然产生维护需求",
+          "sourceLanguage": "zh-Hans",
+          "pdfPages": {
+            "start": 3,
+            "end": 6
+          },
+          "support": {
+            "startOffset": 266,
+            "endOffset": 938,
+            "textSha256": "7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3"
+          },
+          "text": "因此，持续本身具有成本。这并不意味着运行是一种需要被避免的\n消耗，也不意味着越少运行越好。生命之所以能够发展，关系之所以能够\n深化，组织之所以能够扩大能力，本来就依赖持续运行。真正需要理解的\n是，任何持续都不可能完全没有代价，运行每向前一步，都会同时改变承\n载它的条件。人完成一项工作以后，时间已经被使用，注意已经经历转\n换，身体也已经参与其中；关系经历一次重要事件以后，即使问题已经处\n理，彼此对对方的理解也可能发生变化；组织完成一个项目以后，会留下\n新的经验、流程、资料与责任关系；人工系统每一次扩展功能，也会增加\n新的依赖、接口与维护要求。于是，运行并不是在一个永远不变的背景上\n重复发生。每一次运行都会修改下一次运行的起点。这正是维护需求出现\n的根本原因。如果载体每一轮运行以后都能够完全恢复到原来位置，如果\n资源可以无限补充，如果所有责任都能够自然结束，如果任何结构都不会\n随着时间变化，那么维护或许真的可以被理解成偶尔发生的附加工作。然\n而，真实世界并不是如此。身体会疲劳，关系会积累历史，组织会形成路\n径依赖，人工结构会产生版本、依赖与兼容问题；过去发生的运行会持续\n参与未来。\n\f\n因此，维护并不是因为运行失败才出现。恰恰相反，只要运行成功\n地持续足够久，维护就一定会出现。一辆从未被使用的机器几乎没有运行\n损耗，一个从未建立的组织也不存在内部协调成本；真正需要维护的，总\n是那些已经进入时间、反复承担现实并形成连续的结构。越是长期存在的\n运行，越需要处理它过去留下的历史。这说明，维护首先不是修理，而是\n处理持续所产生的后果。",
+          "readingHref": "/books/reality-continuity/",
+          "chapterDeepLink": "/membership-source.html?bookCode=BOOK-3&chapter=CM-B3V1-P8-S001&q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&locale=zh-Hans",
+          "chapterDeepLinkState": "SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION",
+          "purchaseHref": "/books/reality-continuity/",
+          "purchaseLinkRole": "BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS",
+          "permissions": {
+            "knowledgeExcerpt": true,
+            "fullTextDownload": false,
+            "reconstructBook": false
+          }
+        },
+        {
+          "id": "S2",
+          "sourceCode": "MKS-BOOK-3-OWNER-FINAL-EFBFDD21-ZH-HANS",
+          "sourceVersion": "owner-final-20261011-efbfdd21fa21",
+          "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+          "sourceAcceptanceDigest": "2567043c746a447202fc6df3197f23df2758b55ee49008d4acbf27907c8912a8",
+          "chapterId": "CM-B3V1-P8-S059",
+          "heading": "可持续连续 | 为什么真正能够长期存在的运行必须能够改变自己",
+          "sourceLanguage": "zh-Hans",
+          "pdfPages": {
+            "start": 226,
+            "end": 231
+          },
+          "support": {
+            "startOffset": 33,
+            "endOffset": 398,
+            "textSha256": "253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15"
+          },
+          "text": "运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。",
+          "readingHref": "/books/reality-continuity/",
+          "chapterDeepLink": "/membership-source.html?bookCode=BOOK-3&chapter=CM-B3V1-P8-S059&q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&locale=zh-Hans",
+          "chapterDeepLinkState": "SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION",
+          "purchaseHref": "/books/reality-continuity/",
+          "purchaseLinkRole": "BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS",
+          "permissions": {
+            "knowledgeExcerpt": true,
+            "fullTextDownload": false,
+            "reconstructBook": false
+          }
+        }
+      ],
+      "glossary": [],
+      "customerContext": null,
+      "constraints": {
+        "answerLocale": "zh-Hans",
+        "sourceLanguagesDisclosed": true,
+        "translationDoesNotAcceptEnglishManuscript": true,
+        "sourceOnly": true,
+        "noGeneralKnowledgeFallback": true,
+        "preserveConditions": true,
+        "directAnswerWhenSupported": true,
+        "claimCitationsRequired": true,
+        "compareBothSides": true,
+        "untrustedSourceInstructions": true,
+        "noPrivateTextReconstruction": true,
+        "noOCRPromotion": true,
+        "noGlossaryPromotion": true,
+        "customerContextIsCustomerSuppliedNotEstablishedFact": true,
+        "purchaseMustNotReplaceAnswer": true
+      },
+      "state": "SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED",
+      "tokenEstimate": {
+        "estimated": 3065,
+        "conservativeInputTokenCeiling": 6642,
+        "actualTokens": null,
+        "method": "UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE"
+      },
+      "packDigest": "d9eefbce44ad9c7a0667cfe54558d2c1b26314cfa94b2ae4bf2c469761801d2b"
+    },
+    "requestCandidate": {
+      "contract": "MEMBERSHIP_FRAGMENT_CANDIDATE_OFFLINE_ONLY",
+      "question": "正常维持与发生损坏后恢复有什么区别？",
+      "locale": "zh-Hans",
+      "packDigest": "d9eefbce44ad9c7a0667cfe54558d2c1b26314cfa94b2ae4bf2c469761801d2b",
+      "glossary": [],
+      "coverage": {
+        "requestedGroups": [
+          "maintenance",
+          "recovery"
+        ],
+        "missingGroups": [],
+        "comparison": true,
+        "comparisonRelation": "REQUIRES_ARGUMENT_LEVEL_SUPPORT_NOT_KEYWORD_PRESENCE",
+        "state": "CANDIDATE_COVERAGE_REQUIRES_SEMANTIC_REVIEW",
+        "semanticPass": false
+      },
+      "sources": [
+        {
+          "fragmentId": "F-8c1bdea46e93d08811f233ab30dcdea5eeab42aafe67879696bbf1c207d6592a",
+          "chapterId": "CM-B3V1-P8-S001",
+          "sourceLanguage": "zh-Hans",
+          "text": "因此，持续本身具有成本。这并不意味着运行是一种需要被避免的\n消耗，也不意味着越少运行越好。生命之所以能够发展，关系之所以能够\n深化，组织之所以能够扩大能力，本来就依赖持续运行。真正需要理解的\n是，任何持续都不可能完全没有代价，运行每向前一步，都会同时改变承\n载它的条件。人完成一项工作以后，时间已经被使用，注意已经经历转\n换，身体也已经参与其中；关系经历一次重要事件以后，即使问题已经处\n理，彼此对对方的理解也可能发生变化；组织完成一个项目以后，会留下\n新的经验、流程、资料与责任关系；人工系统每一次扩展功能，也会增加\n新的依赖、接口与维护要求。于是，运行并不是在一个永远不变的背景上\n重复发生。每一次运行都会修改下一次运行的起点。这正是维护需求出现\n的根本原因。如果载体每一轮运行以后都能够完全恢复到原来位置，如果\n资源可以无限补充，如果所有责任都能够自然结束，如果任何结构都不会\n随着时间变化，那么维护或许真的可以被理解成偶尔发生的附加工作。然\n而，真实世界并不是如此。身体会疲劳，关系会积累历史，组织会形成路\n径依赖，人工结构会产生版本、依赖与兼容问题；过去发生的运行会持续\n参与未来。\n\f\n因此，维护并不是因为运行失败才出现。恰恰相反，只要运行成功\n地持续足够久，维护就一定会出现。一辆从未被使用的机器几乎没有运行\n损耗，一个从未建立的组织也不存在内部协调成本；真正需要维护的，总\n是那些已经进入时间、反复承担现实并形成连续的结构。越是长期存在的\n运行，越需要处理它过去留下的历史。这说明，维护首先不是修理，而是\n处理持续所产生的后果。"
+        },
+        {
+          "fragmentId": "F-ebb6043df46c213571580cbf64914e0bdced10965da83aa75968d3befde5a41a",
+          "chapterId": "CM-B3V1-P8-S059",
+          "sourceLanguage": "zh-Hans",
+          "text": "运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。"
+        }
+      ],
+      "constraints": {
+        "answerLocale": "zh-Hans",
+        "sourceLanguagesDisclosed": true,
+        "translationDoesNotAcceptEnglishManuscript": true,
+        "sourceOnly": true,
+        "noGeneralKnowledgeFallback": true,
+        "preserveConditions": true,
+        "directAnswerWhenSupported": true,
+        "claimCitationsRequired": true,
+        "compareBothSides": true,
+        "untrustedSourceInstructions": true,
+        "noPrivateTextReconstruction": true,
+        "noOCRPromotion": true,
+        "noGlossaryPromotion": true,
+        "customerContextIsCustomerSuppliedNotEstablishedFact": true,
+        "purchaseMustNotReplaceAnswer": true,
+        "answerSchema": {
+          "locale": "zh-Hans",
+          "claims": [
+            {
+              "text": "Faithful paraphrase",
+              "supportFragmentIds": [
+                "fragment ID"
+              ]
+            }
+          ],
+          "boundary": "State specific missing evidence"
+        },
+        "directQuotes": "DO_NOT_GENERATE; SERVER_RENDERS_EXACT_SOURCE",
+        "qualifiers": "Preserve uncertainty, conditions and scope; general running conditions do not prove component replacement conditions",
+        "semanticReview": "FRAGMENT_ID_EXISTENCE_IS_NOT_ENTAILMENT",
+        "knownMissingEvidence": [],
+        "providerAuthorization": false
+      },
+      "catalog": {
+        "packDigest": "d9eefbce44ad9c7a0667cfe54558d2c1b26314cfa94b2ae4bf2c469761801d2b",
+        "fragments": [
+          {
+            "fragmentId": "F-8c1bdea46e93d08811f233ab30dcdea5eeab42aafe67879696bbf1c207d6592a",
+            "sourceId": "S1",
+            "textSha256": "7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3",
+            "sourceVersion": "owner-final-20261011-efbfdd21fa21",
+            "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+            "chapterId": "CM-B3V1-P8-S001",
+            "sourceLanguage": "zh-Hans",
+            "text": "因此，持续本身具有成本。这并不意味着运行是一种需要被避免的\n消耗，也不意味着越少运行越好。生命之所以能够发展，关系之所以能够\n深化，组织之所以能够扩大能力，本来就依赖持续运行。真正需要理解的\n是，任何持续都不可能完全没有代价，运行每向前一步，都会同时改变承\n载它的条件。人完成一项工作以后，时间已经被使用，注意已经经历转\n换，身体也已经参与其中；关系经历一次重要事件以后，即使问题已经处\n理，彼此对对方的理解也可能发生变化；组织完成一个项目以后，会留下\n新的经验、流程、资料与责任关系；人工系统每一次扩展功能，也会增加\n新的依赖、接口与维护要求。于是，运行并不是在一个永远不变的背景上\n重复发生。每一次运行都会修改下一次运行的起点。这正是维护需求出现\n的根本原因。如果载体每一轮运行以后都能够完全恢复到原来位置，如果\n资源可以无限补充，如果所有责任都能够自然结束，如果任何结构都不会\n随着时间变化，那么维护或许真的可以被理解成偶尔发生的附加工作。然\n而，真实世界并不是如此。身体会疲劳，关系会积累历史，组织会形成路\n径依赖，人工结构会产生版本、依赖与兼容问题；过去发生的运行会持续\n参与未来。\n\f\n因此，维护并不是因为运行失败才出现。恰恰相反，只要运行成功\n地持续足够久，维护就一定会出现。一辆从未被使用的机器几乎没有运行\n损耗，一个从未建立的组织也不存在内部协调成本；真正需要维护的，总\n是那些已经进入时间、反复承担现实并形成连续的结构。越是长期存在的\n运行，越需要处理它过去留下的历史。这说明，维护首先不是修理，而是\n处理持续所产生的后果。",
+            "support": {
+              "startOffset": 266,
+              "endOffset": 938,
+              "textSha256": "7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3"
+            },
+            "pdfPages": {
+              "start": 3,
+              "end": 6
+            },
+            "chapterDeepLink": "/membership-source.html?bookCode=BOOK-3&chapter=CM-B3V1-P8-S001&q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&locale=zh-Hans"
+          },
+          {
+            "fragmentId": "F-ebb6043df46c213571580cbf64914e0bdced10965da83aa75968d3befde5a41a",
+            "sourceId": "S2",
+            "textSha256": "253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15",
+            "sourceVersion": "owner-final-20261011-efbfdd21fa21",
+            "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+            "chapterId": "CM-B3V1-P8-S059",
+            "sourceLanguage": "zh-Hans",
+            "text": "运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。",
+            "support": {
+              "startOffset": 33,
+              "endOffset": 398,
+              "textSha256": "253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15"
+            },
+            "pdfPages": {
+              "start": 226,
+              "end": 231
+            },
+            "chapterDeepLink": "/membership-source.html?bookCode=BOOK-3&chapter=CM-B3V1-P8-S059&q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&locale=zh-Hans"
+          }
+        ],
+        "semanticAcceptance": false
+      }
+    },
+    "answerQuality": "NOT_RUN_NO_PROVIDER_CALL",
+    "storageReads": [
+      "books/book-3/materialized/owner-final-20261011-efbfdd21fa21/positioned-v1/retrieval-corpus.json"
+    ]
+  },
+  "rawText": "{\"locale\":\"zh-Hans\",\"answer\":\"正常维持是为处理持续运行不断留下的后果，并保留下一轮继续所需的条件；它不以运行失败为前提，也不等同于修理。发生损坏后的恢复，则涉及损坏状态如何被修复或恢复，但所给材料没有界定其具体过程、标准，也没有说明它与正常维持之间的完整关系。\",\"supportMap\":[{\"statement\":\"正常维持是为处理持续运行不断留下的后果，并保留下一轮继续所需的条件；它不以运行失败为前提，也不等同于修理。\",\"sourceIds\":[\"S1\",\"S2\"],\"relation\":\"DIRECT_SUPPORT\"},{\"statement\":\"发生损坏后的恢复，则涉及损坏状态如何被修复或恢复，但所给材料没有界定其具体过程、标准，也没有说明它与正常维持之间的完整关系。\",\"sourceIds\":[\"S1\"],\"relation\":\"DIRECT_SUPPORT\"}],\"limitations\":\"材料明确区分维护与修理，但未提供“损坏后恢复”的定义或机制；因此不能据此断言恢复的步骤、结果标准，或其是否属于维护的一部分。\"}",
+  "evidence": {
+    "answer": {
+      "locale": "zh-Hans",
+      "answer": "正常维持是为处理持续运行不断留下的后果，并保留下一轮继续所需的条件；它不以运行失败为前提，也不等同于修理。发生损坏后的恢复，则涉及损坏状态如何被修复或恢复，但所给材料没有界定其具体过程、标准，也没有说明它与正常维持之间的完整关系。",
+      "supportMap": [
+        {
+          "statement": "正常维持是为处理持续运行不断留下的后果，并保留下一轮继续所需的条件；它不以运行失败为前提，也不等同于修理。",
+          "sourceIds": [
+            "S1",
+            "S2"
+          ],
+          "relation": "DIRECT_SUPPORT"
+        },
+        {
+          "statement": "发生损坏后的恢复，则涉及损坏状态如何被修复或恢复，但所给材料没有界定其具体过程、标准，也没有说明它与正常维持之间的完整关系。",
+          "sourceIds": [
+            "S1"
+          ],
+          "relation": "DIRECT_SUPPORT"
+        }
+      ],
+      "limitations": "材料明确区分维护与修理，但未提供“损坏后恢复”的定义或机制；因此不能据此断言恢复的步骤、结果标准，或其是否属于维护的一部分。"
+    },
+    "pack": {
+      "question": "正常维持与发生损坏后恢复有什么区别？",
+      "locale": "zh-Hans",
+      "sources": [
+        {
+          "id": "S1",
+          "sourceCode": "MKS-BOOK-3-OWNER-FINAL-EFBFDD21-ZH-HANS",
+          "sourceVersion": "owner-final-20261011-efbfdd21fa21",
+          "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+          "sourceAcceptanceDigest": "2567043c746a447202fc6df3197f23df2758b55ee49008d4acbf27907c8912a8",
+          "chapterId": "CM-B3V1-P8-S001",
+          "heading": "维持出现 | 为什么持续运行必然产生维护需求",
+          "sourceLanguage": "zh-Hans",
+          "pdfPages": {
+            "start": 3,
+            "end": 6
+          },
+          "support": {
+            "startOffset": 266,
+            "endOffset": 938,
+            "textSha256": "7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3"
+          },
+          "text": "因此，持续本身具有成本。这并不意味着运行是一种需要被避免的\n消耗，也不意味着越少运行越好。生命之所以能够发展，关系之所以能够\n深化，组织之所以能够扩大能力，本来就依赖持续运行。真正需要理解的\n是，任何持续都不可能完全没有代价，运行每向前一步，都会同时改变承\n载它的条件。人完成一项工作以后，时间已经被使用，注意已经经历转\n换，身体也已经参与其中；关系经历一次重要事件以后，即使问题已经处\n理，彼此对对方的理解也可能发生变化；组织完成一个项目以后，会留下\n新的经验、流程、资料与责任关系；人工系统每一次扩展功能，也会增加\n新的依赖、接口与维护要求。于是，运行并不是在一个永远不变的背景上\n重复发生。每一次运行都会修改下一次运行的起点。这正是维护需求出现\n的根本原因。如果载体每一轮运行以后都能够完全恢复到原来位置，如果\n资源可以无限补充，如果所有责任都能够自然结束，如果任何结构都不会\n随着时间变化，那么维护或许真的可以被理解成偶尔发生的附加工作。然\n而，真实世界并不是如此。身体会疲劳，关系会积累历史，组织会形成路\n径依赖，人工结构会产生版本、依赖与兼容问题；过去发生的运行会持续\n参与未来。\n\f\n因此，维护并不是因为运行失败才出现。恰恰相反，只要运行成功\n地持续足够久，维护就一定会出现。一辆从未被使用的机器几乎没有运行\n损耗，一个从未建立的组织也不存在内部协调成本；真正需要维护的，总\n是那些已经进入时间、反复承担现实并形成连续的结构。越是长期存在的\n运行，越需要处理它过去留下的历史。这说明，维护首先不是修理，而是\n处理持续所产生的后果。",
+          "readingHref": "/books/reality-continuity/",
+          "chapterDeepLink": "/membership-source.html?bookCode=BOOK-3&chapter=CM-B3V1-P8-S001&q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&locale=zh-Hans",
+          "chapterDeepLinkState": "SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION",
+          "purchaseHref": "/books/reality-continuity/",
+          "purchaseLinkRole": "BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS",
+          "permissions": {
+            "knowledgeExcerpt": true,
+            "fullTextDownload": false,
+            "reconstructBook": false
+          }
+        },
+        {
+          "id": "S2",
+          "sourceCode": "MKS-BOOK-3-OWNER-FINAL-EFBFDD21-ZH-HANS",
+          "sourceVersion": "owner-final-20261011-efbfdd21fa21",
+          "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+          "sourceAcceptanceDigest": "2567043c746a447202fc6df3197f23df2758b55ee49008d4acbf27907c8912a8",
+          "chapterId": "CM-B3V1-P8-S059",
+          "heading": "可持续连续 | 为什么真正能够长期存在的运行必须能够改变自己",
+          "sourceLanguage": "zh-Hans",
+          "pdfPages": {
+            "start": 226,
+            "end": 231
+          },
+          "support": {
+            "startOffset": 33,
+            "endOffset": 398,
+            "textSha256": "253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15"
+          },
+          "text": "运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。",
+          "readingHref": "/books/reality-continuity/",
+          "chapterDeepLink": "/membership-source.html?bookCode=BOOK-3&chapter=CM-B3V1-P8-S059&q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&locale=zh-Hans",
+          "chapterDeepLinkState": "SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION",
+          "purchaseHref": "/books/reality-continuity/",
+          "purchaseLinkRole": "BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS",
+          "permissions": {
+            "knowledgeExcerpt": true,
+            "fullTextDownload": false,
+            "reconstructBook": false
+          }
+        }
+      ],
+      "glossary": [],
+      "customerContext": null,
+      "constraints": {
+        "answerLocale": "zh-Hans",
+        "sourceLanguagesDisclosed": true,
+        "translationDoesNotAcceptEnglishManuscript": true,
+        "sourceOnly": true,
+        "noGeneralKnowledgeFallback": true,
+        "preserveConditions": true,
+        "directAnswerWhenSupported": true,
+        "claimCitationsRequired": true,
+        "compareBothSides": true,
+        "untrustedSourceInstructions": true,
+        "noPrivateTextReconstruction": true,
+        "noOCRPromotion": true,
+        "noGlossaryPromotion": true,
+        "customerContextIsCustomerSuppliedNotEstablishedFact": true,
+        "purchaseMustNotReplaceAnswer": true
+      },
+      "state": "SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED",
+      "tokenEstimate": {
+        "estimated": 3065,
+        "conservativeInputTokenCeiling": 6642,
+        "actualTokens": null,
+        "method": "UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE"
+      },
+      "packDigest": "d9eefbce44ad9c7a0667cfe54558d2c1b26314cfa94b2ae4bf2c469761801d2b"
+    },
+    "binding": {
+      "packDigest": "d9eefbce44ad9c7a0667cfe54558d2c1b26314cfa94b2ae4bf2c469761801d2b",
+      "bindingDigest": "e946eaaaad0a4ab9d151b1884c8685d172cfb0c2855a2ec2c2c4763c28ebea15",
+      "bindings": [
+        {
+          "shortId": "S1",
+          "fragmentId": "F-8c1bdea46e93d08811f233ab30dcdea5eeab42aafe67879696bbf1c207d6592a",
+          "sourceId": "S1",
+          "textSha256": "7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3",
+          "sourceVersion": "owner-final-20261011-efbfdd21fa21",
+          "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+          "chapterId": "CM-B3V1-P8-S001",
+          "sourceLanguage": "zh-Hans",
+          "text": "因此，持续本身具有成本。这并不意味着运行是一种需要被避免的\n消耗，也不意味着越少运行越好。生命之所以能够发展，关系之所以能够\n深化，组织之所以能够扩大能力，本来就依赖持续运行。真正需要理解的\n是，任何持续都不可能完全没有代价，运行每向前一步，都会同时改变承\n载它的条件。人完成一项工作以后，时间已经被使用，注意已经经历转\n换，身体也已经参与其中；关系经历一次重要事件以后，即使问题已经处\n理，彼此对对方的理解也可能发生变化；组织完成一个项目以后，会留下\n新的经验、流程、资料与责任关系；人工系统每一次扩展功能，也会增加\n新的依赖、接口与维护要求。于是，运行并不是在一个永远不变的背景上\n重复发生。每一次运行都会修改下一次运行的起点。这正是维护需求出现\n的根本原因。如果载体每一轮运行以后都能够完全恢复到原来位置，如果\n资源可以无限补充，如果所有责任都能够自然结束，如果任何结构都不会\n随着时间变化，那么维护或许真的可以被理解成偶尔发生的附加工作。然\n而，真实世界并不是如此。身体会疲劳，关系会积累历史，组织会形成路\n径依赖，人工结构会产生版本、依赖与兼容问题；过去发生的运行会持续\n参与未来。\n\f\n因此，维护并不是因为运行失败才出现。恰恰相反，只要运行成功\n地持续足够久，维护就一定会出现。一辆从未被使用的机器几乎没有运行\n损耗，一个从未建立的组织也不存在内部协调成本；真正需要维护的，总\n是那些已经进入时间、反复承担现实并形成连续的结构。越是长期存在的\n运行，越需要处理它过去留下的历史。这说明，维护首先不是修理，而是\n处理持续所产生的后果。",
+          "support": {
+            "startOffset": 266,
+            "endOffset": 938,
+            "textSha256": "7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3"
+          },
+          "pdfPages": {
+            "start": 3,
+            "end": 6
+          },
+          "chapterDeepLink": "/membership-source.html?bookCode=BOOK-3&chapter=CM-B3V1-P8-S001&q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&locale=zh-Hans"
+        },
+        {
+          "shortId": "S2",
+          "fragmentId": "F-ebb6043df46c213571580cbf64914e0bdced10965da83aa75968d3befde5a41a",
+          "sourceId": "S2",
+          "textSha256": "253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15",
+          "sourceVersion": "owner-final-20261011-efbfdd21fa21",
+          "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+          "chapterId": "CM-B3V1-P8-S059",
+          "sourceLanguage": "zh-Hans",
+          "text": "运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。",
+          "support": {
+            "startOffset": 33,
+            "endOffset": 398,
+            "textSha256": "253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15"
+          },
+          "pdfPages": {
+            "start": 226,
+            "end": 231
+          },
+          "chapterDeepLink": "/membership-source.html?bookCode=BOOK-3&chapter=CM-B3V1-P8-S059&q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&locale=zh-Hans"
+        }
+      ]
+    }
+  },
+  "assessment": {
+    "deliverable": true,
+    "quality": "PARTIAL_DELIVERY_NOT_FULL_RECOVERY_EXPLANATION",
+    "rationale": "Supported maintenance explanation from S1/S2. Explicitly states damage-recovery definition/process/standard and complete relation are not supplied. Damage wording restates question scope without inventing mechanism; tautological phrase minor clarity defect. Does not establish recovery=repair. Partial only, no automatic escalation policy.",
+    "semantic": "PASS_SUPPORTED_PORTION",
+    "citations": "VALID_EXACT_IDS_SUPPORT_MAINTENANCE_AND_PACKET_GAP",
+    "completeness": "PARTIAL_SOURCE_COVERAGE",
+    "language": "MINOR_TAUTOLOGICAL_PHRASE"
+  },
+  "result": {
+    "state": "COMPLETE",
+    "answer": {
+      "locale": "zh-Hans",
+      "answer": "正常维持是为处理持续运行不断留下的后果，并保留下一轮继续所需的条件；它不以运行失败为前提，也不等同于修理。发生损坏后的恢复，则涉及损坏状态如何被修复或恢复，但所给材料没有界定其具体过程、标准，也没有说明它与正常维持之间的完整关系。",
+      "limitations": "材料明确区分维护与修理，但未提供“损坏后恢复”的定义或机制；因此不能据此断言恢复的步骤、结果标准，或其是否属于维护的一部分。",
+      "supportMap": [
+        {
+          "statement": "正常维持是为处理持续运行不断留下的后果，并保留下一轮继续所需的条件；它不以运行失败为前提，也不等同于修理。",
+          "sourceIds": [
+            "S1",
+            "S2"
+          ],
+          "relation": "DIRECT_SUPPORT"
+        },
+        {
+          "statement": "发生损坏后的恢复，则涉及损坏状态如何被修复或恢复，但所给材料没有界定其具体过程、标准，也没有说明它与正常维持之间的完整关系。",
+          "sourceIds": [
+            "S1"
+          ],
+          "relation": "DIRECT_SUPPORT"
+        }
+      ],
+      "sourceBinding": {
+        "packDigest": "d9eefbce44ad9c7a0667cfe54558d2c1b26314cfa94b2ae4bf2c469761801d2b",
+        "bindingDigest": "e946eaaaad0a4ab9d151b1884c8685d172cfb0c2855a2ec2c2c4763c28ebea15",
+        "bindings": [
+          {
+            "shortId": "S1",
+            "fragmentId": "F-8c1bdea46e93d08811f233ab30dcdea5eeab42aafe67879696bbf1c207d6592a",
+            "sourceId": "S1",
+            "textSha256": "7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3",
+            "sourceVersion": "owner-final-20261011-efbfdd21fa21",
+            "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+            "chapterId": "CM-B3V1-P8-S001",
+            "sourceLanguage": "zh-Hans",
+            "text": "因此，持续本身具有成本。这并不意味着运行是一种需要被避免的\n消耗，也不意味着越少运行越好。生命之所以能够发展，关系之所以能够\n深化，组织之所以能够扩大能力，本来就依赖持续运行。真正需要理解的\n是，任何持续都不可能完全没有代价，运行每向前一步，都会同时改变承\n载它的条件。人完成一项工作以后，时间已经被使用，注意已经经历转\n换，身体也已经参与其中；关系经历一次重要事件以后，即使问题已经处\n理，彼此对对方的理解也可能发生变化；组织完成一个项目以后，会留下\n新的经验、流程、资料与责任关系；人工系统每一次扩展功能，也会增加\n新的依赖、接口与维护要求。于是，运行并不是在一个永远不变的背景上\n重复发生。每一次运行都会修改下一次运行的起点。这正是维护需求出现\n的根本原因。如果载体每一轮运行以后都能够完全恢复到原来位置，如果\n资源可以无限补充，如果所有责任都能够自然结束，如果任何结构都不会\n随着时间变化，那么维护或许真的可以被理解成偶尔发生的附加工作。然\n而，真实世界并不是如此。身体会疲劳，关系会积累历史，组织会形成路\n径依赖，人工结构会产生版本、依赖与兼容问题；过去发生的运行会持续\n参与未来。\n\f\n因此，维护并不是因为运行失败才出现。恰恰相反，只要运行成功\n地持续足够久，维护就一定会出现。一辆从未被使用的机器几乎没有运行\n损耗，一个从未建立的组织也不存在内部协调成本；真正需要维护的，总\n是那些已经进入时间、反复承担现实并形成连续的结构。越是长期存在的\n运行，越需要处理它过去留下的历史。这说明，维护首先不是修理，而是\n处理持续所产生的后果。",
+            "support": {
+              "startOffset": 266,
+              "endOffset": 938,
+              "textSha256": "7b9fe243a4669c64cfd06d8035cf68f07d8a2cb575622dbdeda0158c7adfb4a3"
+            },
+            "pdfPages": {
+              "start": 3,
+              "end": 6
+            },
+            "chapterDeepLink": "/membership-source.html?bookCode=BOOK-3&chapter=CM-B3V1-P8-S001&q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&locale=zh-Hans"
+          },
+          {
+            "shortId": "S2",
+            "fragmentId": "F-ebb6043df46c213571580cbf64914e0bdced10965da83aa75968d3befde5a41a",
+            "sourceId": "S2",
+            "textSha256": "253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15",
+            "sourceVersion": "owner-final-20261011-efbfdd21fa21",
+            "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+            "chapterId": "CM-B3V1-P8-S059",
+            "sourceLanguage": "zh-Hans",
+            "text": "运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。",
+            "support": {
+              "startOffset": 33,
+              "endOffset": 398,
+              "textSha256": "253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15"
+            },
+            "pdfPages": {
+              "start": 226,
+              "end": 231
+            },
+            "chapterDeepLink": "/membership-source.html?bookCode=BOOK-3&chapter=CM-B3V1-P8-S059&q=%E6%AD%A3%E5%B8%B8%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%8F%91%E7%94%9F%E6%8D%9F%E5%9D%8F%E5%90%8E%E6%81%A2%E5%A4%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F&locale=zh-Hans"
+          }
+        ]
+      },
+      "semanticAssessment": {
+        "deliverable": true,
+        "quality": "PARTIAL_DELIVERY_NOT_FULL_RECOVERY_EXPLANATION",
+        "rationale": "Supported maintenance explanation from S1/S2. Explicitly states damage-recovery definition/process/standard and complete relation are not supplied. Damage wording restates question scope without inventing mechanism; tautological phrase minor clarity defect. Does not establish recovery=repair. Partial only, no automatic escalation policy.",
+        "semantic": "PASS_SUPPORTED_PORTION",
+        "citations": "VALID_EXACT_IDS_SUPPORT_MAINTENANCE_AND_PACKET_GAP",
+        "completeness": "PARTIAL_SOURCE_COVERAGE",
+        "language": "MINOR_TAUTOLOGICAL_PHRASE"
+      }
+    },
+    "providerCalls": 1,
+    "qaOnly": true
+  },
+  "balanceAfter": {
+    "availableMicroUSD": 2990720,
+    "credits": "299.072",
+    "active": true,
+    "modelCallsAllowed": true,
+    "units": [
+      {
+        "quota_unit_id": "CONTQUOTA-INVOICE-isolated-qa-invoice",
+        "envelope_id": "CONTINUITY-isolated-qa-sub",
+        "owner_account_id": "qa-member",
+        "stripe_subscription_id": "isolated-qa-sub",
+        "billing_period_start": 1791792072,
+        "billing_period_end": 1791878473,
+        "grant_source_id": "isolated-qa-invoice",
+        "grant_kind": "INVOICE",
+        "purchase_id": "isolated-qa-purchase",
+        "maximum_micro_usd": 3000000,
+        "created_at": "2026-10-12T08:01:13.930Z",
+        "available": 2990720
+      }
+    ]
+  },
+  "database": {
+    "tasks": [
+      {
+        "task_id": "full-delivery-DELIVERY-V-ZH-ORDINARY",
+        "state": "COMPLETE",
+        "reserved_micro_usd": 3124,
+        "customer_charge_micro_usd": 1457
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-VII-NEW-ZH-ORDINARY",
+        "state": "COMPLETE",
+        "reserved_micro_usd": 2754,
+        "customer_charge_micro_usd": 512
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-VII-NEW-EN-ORDINARY",
+        "state": "COMPLETE",
+        "reserved_micro_usd": 2400,
+        "customer_charge_micro_usd": 619
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-RECOVERY-REGRESSION-ORDINARY",
+        "state": "FAILED",
+        "reserved_micro_usd": 3211,
+        "customer_charge_micro_usd": 0
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-RECOVERY-REGRESSION-DEEP",
+        "state": "COMPLETE",
+        "reserved_micro_usd": 32110,
+        "customer_charge_micro_usd": 6692
+      }
+    ],
+    "allocations": [
+      {
+        "task_id": "full-delivery-DELIVERY-V-ZH-ORDINARY",
+        "quota_unit_id": "CONTQUOTA-INVOICE-isolated-qa-invoice",
+        "reserved_micro_usd": 3124,
+        "charged_micro_usd": 1457
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-VII-NEW-ZH-ORDINARY",
+        "quota_unit_id": "CONTQUOTA-INVOICE-isolated-qa-invoice",
+        "reserved_micro_usd": 2754,
+        "charged_micro_usd": 512
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-VII-NEW-EN-ORDINARY",
+        "quota_unit_id": "CONTQUOTA-INVOICE-isolated-qa-invoice",
+        "reserved_micro_usd": 2400,
+        "charged_micro_usd": 619
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-RECOVERY-REGRESSION-ORDINARY",
+        "quota_unit_id": "CONTQUOTA-INVOICE-isolated-qa-invoice",
+        "reserved_micro_usd": 3211,
+        "charged_micro_usd": 0
+      },
+      {
+        "task_id": "full-delivery-DELIVERY-RECOVERY-REGRESSION-DEEP",
+        "quota_unit_id": "CONTQUOTA-INVOICE-isolated-qa-invoice",
+        "reserved_micro_usd": 32110,
+        "charged_micro_usd": 6692
+      }
+    ],
+    "platformEntries": [
+      {
+        "request_id": "full-delivery-DELIVERY-V-ZH-ORDINARY",
+        "measured_micro_usd": 1457,
+        "state": "METERED"
+      },
+      {
+        "request_id": "full-delivery-DELIVERY-VII-NEW-ZH-ORDINARY",
+        "measured_micro_usd": 512,
+        "state": "METERED"
+      },
+      {
+        "request_id": "full-delivery-DELIVERY-VII-NEW-EN-ORDINARY",
+        "measured_micro_usd": 619,
+        "state": "METERED"
+      },
+      {
+        "request_id": "full-delivery-DELIVERY-RECOVERY-REGRESSION-ORDINARY",
+        "measured_micro_usd": 1590,
+        "state": "METERED"
+      },
+      {
+        "request_id": "full-delivery-DELIVERY-RECOVERY-REGRESSION-DEEP",
+        "measured_micro_usd": 6692,
+        "state": "METERED"
+      }
+    ]
+  }
+}

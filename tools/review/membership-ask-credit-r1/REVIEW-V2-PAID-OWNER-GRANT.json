@@ -1,0 +1,506 @@
+{
+  "status": "OWNER_AUTHORIZED",
+  "ownerEvidence": "Current explicit grant: 3 generation/review tasks plus 2 labelled synthetic negative reviews, Luna max8 output1400 no retry, USD0.15 platform funding, isolated QA automatic decision; no production operations.",
+  "requestSha256": "2b6e7a159d19f08f19f39634000726ead1304ff99de2bbda9a41b93be07ff71e",
+  "slots": [
+    {
+      "id": "V2-VII-ZH",
+      "callIndex": 1,
+      "kind": "GENERATION",
+      "maximumMicroUSD": 2777
+    },
+    {
+      "id": "V2-VII-ZH",
+      "callIndex": 2,
+      "kind": "REVIEW",
+      "maximumMicroUSD": 26808
+    },
+    {
+      "id": "V2-VII-EN",
+      "callIndex": 1,
+      "kind": "GENERATION",
+      "maximumMicroUSD": 2417
+    },
+    {
+      "id": "V2-VII-EN",
+      "callIndex": 2,
+      "kind": "REVIEW",
+      "maximumMicroUSD": 26808
+    },
+    {
+      "id": "V2-RECOVERY",
+      "callIndex": 1,
+      "kind": "GENERATION",
+      "maximumMicroUSD": 3228
+    },
+    {
+      "id": "V2-RECOVERY",
+      "callIndex": 2,
+      "kind": "REVIEW",
+      "maximumMicroUSD": 26808
+    },
+    {
+      "id": "V2-NEGATION-NEGATIVE",
+      "callIndex": 1,
+      "kind": "SYNTHETIC_NEGATIVE_REVIEW",
+      "maximumMicroUSD": 26808
+    },
+    {
+      "id": "V2-RECOVERY-NEGATIVE",
+      "callIndex": 1,
+      "kind": "SYNTHETIC_NEGATIVE_REVIEW",
+      "maximumMicroUSD": 26808
+    }
+  ],
+  "maxCalls": 8,
+  "maximumReservedMicroUSD": 142462,
+  "totalMicroUSD": 150000,
+  "model": "gpt-5.6-luna",
+  "outputTokens": 1400,
+  "automaticRetry": 0,
+  "prices": {
+    "inputNanoUSD": 200,
+    "cachedInputNanoUSD": 20,
+    "cacheWritePremiumNanoUSD": 50,
+    "outputNanoUSD": 1200
+  },
+  "priceEvidence": {
+    "url": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+    "inputPerMillion": 0.2,
+    "cachedPerMillion": 0.02,
+    "outputPerMillion": 1.2,
+    "cacheWriteMultiplier": 1.25,
+    "verifiedAt": "2026-10-12T13:17:32.426Z"
+  },
+  "modelPermission": {
+    "status": 200,
+    "id": "gpt-5.6-luna"
+  },
+  "verifiedAt": "2026-10-12T13:17:32.428Z",
+  "platformFunded": true,
+  "realCustomerCharge": 0,
+  "preservedHistoricalEvidence": [
+    {
+      "path": "tools/review/membership-ask-credit-r1/AUTO-DELIVERY-PAID-LEDGER.json",
+      "sha256": "bd5127f2af5a94da1858b3d098684e903bd6ee957a196b7ceb82b3e9012fb59a"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/AUTO-DELIVERY-QA.sqlite",
+      "sha256": "71a24e524dd727db0c6910c5570fd8828211c11657f206fb02750062d739e2e9"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/auto-paid-response-AUTO-RECOVERY-1.json",
+      "sha256": "7411ca9a3c5055361377b14a860378e3ca247c80b7a3706977a0587ecd3a2e2d"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/auto-paid-response-AUTO-RECOVERY-2.json",
+      "sha256": "d9f4f440bcda5d2be5a8a99e9a696541c45fc29486c254db8d7713ab10e8ccd9"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/auto-paid-response-AUTO-V-1.json",
+      "sha256": "40a24f1ecd1545e0a88272399e75e6f0cf9f4193c5b9dc3cf1a102d47e8c19a8"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/auto-paid-response-AUTO-V-2.json",
+      "sha256": "13b676116c0bcc66c0d8c415b0492af9d9d4126e916565798b744eeb28905114"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/auto-paid-response-AUTO-VII-EN-1.json",
+      "sha256": "027ff7cc9b9c0456e71959683d72f0247a56a026598e46124a6ce2d70124d8ab"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/auto-paid-response-AUTO-VII-EN-2.json",
+      "sha256": "d66f1b5e0edb91f02310d16de37d19d721cccd1cd4121ef99721392ae0b9d50e"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/auto-paid-response-AUTO-VII-RECALL-1.json",
+      "sha256": "d3ce055490872d6bb00b522a05de946d9b32e273320d635bac07c55922e26193"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/auto-paid-response-AUTO-VII-RECALL-2.json",
+      "sha256": "508da38fc2d6f38116b3df7e49c57765d95d229d2511961c8daa6c16907d6fcf"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/auto-paid-result-AUTO-RECOVERY.json",
+      "sha256": "e4cb6bc48506cc3c818e348ba5a33da3941896d94deae28b371a3473efa768fa"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/auto-paid-result-AUTO-V.json",
+      "sha256": "4b90b0a8061e8e465959cf5118df9973f14b7350a80db90166a9d4a5ba33a7aa"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/auto-paid-result-AUTO-VII-EN.json",
+      "sha256": "19e45c417cc4fec5b02817d2fd4efa4568495049764ef7f6757b7a249eedfc6f"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/auto-paid-result-AUTO-VII-RECALL.json",
+      "sha256": "e3d3c72fcefeee0f74625e5c3e8aafa50d587a37cda2877f79f5db87248c5c99"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "functions/account/oidc-auth.js",
+      "sha256": "f465f1f01fe86ccac89691dba4d966a69f240d82a7773b4860e5f72b29fe310b"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-fragment-contract.js",
+      "sha256": "a860a478a1979250957a210c28a40d516838dfe48babb8368d16d5fb16fd92ac"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-source-coverage.js",
+      "sha256": "0a87d035c0d7c964efde17a45d081979b19653a66e303e6a304f3d1783bc4b58"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-short-fragment-contract.js",
+      "sha256": "2a5e322bd1f1d969c41e5ab1add3015de29e7c654c8ef263014745b49dcb3180"
+    },
+    {
+      "path": "functions/commerce/commerce-environment.js",
+      "sha256": "4abb437a3bed2e14692dae44d48467cb252a608c5491ab1843a46d75dfd773ec"
+    },
+    {
+      "path": "functions/pws/commercial/commerce-economics-policy.js",
+      "sha256": "475938032b82450484d66b213ba155b82b6458528f57b16aefc721daf21b5307"
+    },
+    {
+      "path": "functions/provider-cost/product-cost-envelope.js",
+      "sha256": "3a109f8ffc0a517d9378132cdedaf031b75c0d4506b2aafabffd68591f55af52"
+    },
+    {
+      "path": "functions/provider-cost/provider-cost-ledger.js",
+      "sha256": "5e4e5867d14ef395a703f73231edf8820fc71f36b300d34e1dddbaa19911b27d"
+    },
+    {
+      "path": "content/personal-reading/continuity/registries/continuity-subscription-product-registry-v2.json",
+      "sha256": "739f9d865c50146928db245917e1a61e0597a36d2ef6c95120b63b6c666cec1e"
+    },
+    {
+      "path": "functions/interpretation-runtime/mir7-utils.js",
+      "sha256": "4da006324b24da525d19d8163f71e360c45bb38ef739fd1c3a69990b99d93695"
+    },
+    {
+      "path": "functions/personal-reading/continuity/continuity-commercial-authority.js",
+      "sha256": "c5c432d13aeb638619aed1c5d51abc5cdf7f4df9b43f48df7f0508710af48a83"
+    },
+    {
+      "path": "functions/personal-reading/continuity/continuity-quota-d1.js",
+      "sha256": "f86d0471460e03af92833e1b6124e958165a01be0a2312c8069cb42c34345cf5"
+    },
+    {
+      "path": "functions/symbolic-method-persistence/symbolic-account-identity-v1.js",
+      "sha256": "18456c9dc5878e7a6eb2c5f727b9065c0cec0a8192e91ba978f6975dbf6de2b4"
+    },
+    {
+      "path": "functions/method-client-delivery/canonical-birth-input-runtime.js",
+      "sha256": "a80be668022504a1c571830e450a9a34226381c15b7b9c12e742a061d47a84c2"
+    },
+    {
+      "path": "functions/account/person-use-policy.js",
+      "sha256": "4de682f6ab1a2e8315ed86da2ad3b9f9506cf0043821b1f52550899b810b9600"
+    },
+    {
+      "path": "functions/location/timezone-resolver.js",
+      "sha256": "773aa0073da002d3d1519dd46191547025e972e61efafecaad562f92ff2a5b39"
+    },
+    {
+      "path": "functions/location/place-resolver.js",
+      "sha256": "6ae4d1fd2adf02ba7dfbda741fad6885024121dabdac50b788c192ee75ae3877"
+    },
+    {
+      "path": "functions/account/canonical-person-store.js",
+      "sha256": "87f94ba6c79c6c349fe85b68bc634365c49004fec3cf54bf3723db0f45ef067a"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-zero-call-outcome.js",
+      "sha256": "31061106374e6a787e7efa328b6eac9817e15719984946952e65879e0b7ac381"
+    },
+    {
+      "path": "content/personal-reading/continuity/registries/continuity-subscription-product-registry-v3-candidate.json",
+      "sha256": "a40e1263d86a7ea21e43beb9c42009a57456aa46c9ab1a8751fbc5c956faa68f"
+    },
+    {
+      "path": "functions/personal-reading/continuity/continuity-credit-policy.js",
+      "sha256": "f45a5f22066a50f35cf6832ec38817ab7b12a4fb8c27b7575a996a0a49734730"
+    },
+    {
+      "path": "functions/personal-reading/continuity/continuity-credit-d1.js",
+      "sha256": "053fe369e4736823127a077d5fc591929711d008755fbd19926b365ee2a75ab6"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-short-delivery-qa.js",
+      "sha256": "4ba7ad8f3ff755f98a2c05845d9fd269f6238c95b9c62b8e9e7ca397dc021506"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-review-contract-v2.js",
+      "sha256": "f8d5e0dba7724cd7d9f15a2b4c9abfb18531b9bb972ee932ce5cc100e8912ec0"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-auto-delivery-candidate.js",
+      "sha256": "7b52a19056615c2ac776868e98a5aab60974124867a1ffc5e1db7e2cd3250528"
+    },
+    {
+      "path": "functions/_lib/book-vii-published-admission.js",
+      "sha256": "bd3f84cb3fdbe21c9949802adefe3e374e05687547d67922c7492e86029ca738"
+    },
+    {
+      "path": "functions/_lib/public-knowledge-api.js",
+      "sha256": "04ebb5484c4f82a3965c1a0da80ea69a231fc35b129c177e0e906be1833fe462"
+    },
+    {
+      "path": "functions/knowledge-runtime/current-manuscript-server-metadata.js",
+      "sha256": "6aaadbb6a23bdbd87845e6c0e48914609a19c9b1d925f53d423c0716ae6aad40"
+    },
+    {
+      "path": "functions/knowledge-runtime/manuscript-experiment-access.js",
+      "sha256": "4e546c39df4b327af8ae891e8c52b55fe16c5af81acbf38014a8a807d45432cf"
+    },
+    {
+      "path": "functions/_lib/manuscript-current-admission.js",
+      "sha256": "40f4b9ef67a8f623c99ea0d7acb7c1eec6221650912f3948640d935ecc8cfb0f"
+    },
+    {
+      "path": "functions/_lib/knowledge-source-eligibility.js",
+      "sha256": "54d8a685ace3c78148c88b554ba92d000d1f2795ecc521e4a9cdab6080aca733"
+    },
+    {
+      "path": "functions/knowledge-runtime/source-bound-explanation-units.js",
+      "sha256": "b85e3f2af13b99c20b2d9b12fd7cff02b53f888728cd69fe77c196ca9aecc9c1"
+    },
+    {
+      "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
+      "sha256": "79cd6e86cb33ff5acf6f44950460b0226ddd6129c6431e254a0b6045fc16cec0"
+    },
+    {
+      "path": "content/registry/runtime-position-48-v1.json",
+      "sha256": "89aaff534c62312f7031b395e746e49176f9f1dac908caf5ab3555537833ed60"
+    },
+    {
+      "path": "assets/js/pages/civilization-atlas/atlas-state.js",
+      "sha256": "2fe28f1db39930b20ff0d7a4cd2583fea42cf844103bd312a84764e3f3206d7c"
+    },
+    {
+      "path": "assets/js/pages/civilization-atlas/atlas-url-state.js",
+      "sha256": "db5b5245fb55e493fa9ccea43ad65426f6658317714ac8de486a600547e15b02"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/runtime-position-w8c-current-evidence-ir-v1.json",
+      "sha256": "8ea0a6acf041c41e6d9051cc5a116409ab4cd1edd82d00826aced722741a2db7"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-af-w8c-current-authority-admission-v1.json",
+      "sha256": "1ee32bce3b183800da8d4d09d72e4f6ebfac21de845fcad2435b30914dce519c"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-eu-w8c-current-authority-admission-v1.json",
+      "sha256": "2fa7ebf0da2f7c7e74e7ce1576cc5654eda3eca21de4f9ae201a235e41d47cd2"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-in-w8c-current-authority-admission-v1.json",
+      "sha256": "15d35e2d5276d46fd402b5e07198188f4475380d0fa3bfb27113c34c4c4de4df"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-jp-w8c-current-authority-admission-v1.json",
+      "sha256": "09b5290e34a64a7e8371005785d1d95a219e4a0dd2f8e51316b5b1af78787082"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-kr-w8c-current-authority-admission-v1.json",
+      "sha256": "202ffde2970f5c37e6887e8f5b8f9a6b1a5f32ba8bb45e55640361c00c032d9e"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-latam-w8c-current-authority-admission-v1.json",
+      "sha256": "3bf47ca97eee7ff234b78b13fb1449da7eebe2445fe83d7e2b5ecfc20dadf80f"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-me-w8c-current-authority-admission-v1.json",
+      "sha256": "2b7bd1dedde6ce5a83b48a9cffa22c524a8a44b61683c5f8f2290563284ca226"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-ru-w8c-current-authority-admission-v1.json",
+      "sha256": "7f58170e6aa048a4814f5945308679c97e9ab5a33d2ee9f9afcc7b5a4c0514d3"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-sea-w8c-current-authority-admission-v1.json",
+      "sha256": "5f450c8b7228bafd3bb6bb09a0d8616800f193d351d207ab2de2595860920df9"
+    },
+    {
+      "path": "functions/_lib/book6-accepted-current.js",
+      "sha256": "d9b4f7e2974a11bfe8dd05b51c670a9c7f644b741272d995f618a0458cbe655d"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/runtime-position-w8d-rre-readouts-v1.json",
+      "sha256": "91d8885b79d1837def3d82d636577fef1424cc7022886d9de93900991911047a"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/moomoo-provider-validated-claims-v1.json",
+      "sha256": "deb8044aa735ae9ca40fe7c51d7ead35e2e7b797ab88e1bde681ac787e9f18c8"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/moomoo-provider-w8c-admission-results-v1.json",
+      "sha256": "420a6a831c349339536a5fee8166de2e3065783ea2922783afabab426ab2fc2a"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/moomoo-provider-rre-eligible-handoff-v1.json",
+      "sha256": "92d779798676fc4184a9abf084310f9d33e5e75c14a10d8ada565264996e7345"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-af-w8i-accepted-current-dossier-v1.json",
+      "sha256": "1ef23dfb6a896319ee7f88ecf102992dafade4ec5e284677cb3ec55de6c88d0f"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-af-w8h-human-decisions-v1.json",
+      "sha256": "52eba969aa5e7eed7326ced61505521ef147296423cb78f25f7050f38c6bb902"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-af-w8d-rre-readout-v1.json",
+      "sha256": "ad6827a15acb8015a72a17a4b1cb21fdb71c145d9e16a9c8897cded35cb76b6d"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-cn-w8i-accepted-current-dossier-v1.json",
+      "sha256": "975392007d4cdb240c1e24994c7acfd8dc3fc74bcdf380552c720971369eabee"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-cn-w8h-human-decisions-v1.json",
+      "sha256": "361aa13f588d2dfd70907cc64701d2defb98e402cded002b71c5589ddf1e18cc"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-eu-w8i-accepted-current-dossier-v1.json",
+      "sha256": "46dfc98d9aec1a27aa3ac6379f929c8980dcc005feb2e31daf3a1321d048e603"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-eu-w8h-human-decisions-v1.json",
+      "sha256": "67952a9b8e6bba6dc03d479fa9359959665a2dc766fcc9251e1a0695ae4163b8"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-eu-w8d-rre-readout-v1.json",
+      "sha256": "7b6856f09f32d75fa3255fcce7b03b4b778635b04540170b9d7112964464b398"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-in-w8i-accepted-current-dossier-v1.json",
+      "sha256": "16f74282b6caa88b51b17aed2a6985a330cb3c3ca0e31d90327d2df6638d72c4"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-in-w8h-human-decisions-v1.json",
+      "sha256": "0c4279100e29d1ad8524bdf92dc71f7b55fc59ec10a603e78a618674eb946d24"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-in-w8d-rre-readout-v1.json",
+      "sha256": "429ddd158e5d7bb0da23db5d2b329fb8f9cfb4552f563f343caaf61d85953404"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-jp-w8i-accepted-current-dossier-v1.json",
+      "sha256": "119ea99053ea26a327a0af77b91acacbdcff7fcf0807f0dfbd60d14e0787b920"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-jp-w8h-human-decisions-v1.json",
+      "sha256": "5d768dbfe957918e10d451b0b2b4c4e25a84e5ecc91ddbb296ad9e6982f47004"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-jp-w8d-rre-readout-v1.json",
+      "sha256": "f7e5bbbf997069a00befe817e0d70b9dd9ed3d1463ec5dfa027537b2a6d5862d"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-kr-w8i-accepted-current-dossier-v1.json",
+      "sha256": "40edd93bb916739b454b2d176575d8ca882135d28994f31ec1cb0c3bca9e7b63"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-kr-w8h-human-decisions-v1.json",
+      "sha256": "a5099cc82d749fb33432a773fdda7862e192204891dd868fd6c229f210a8c6b7"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-kr-w8d-rre-readout-v1.json",
+      "sha256": "5db0181a8e9ce94c08b938a5c035fefd1f2d84eefa8265402727a73d2c4a2ba3"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-latam-w8i-accepted-current-dossier-v1.json",
+      "sha256": "042dd5f9d3069d657b32a43c06f3c46ea87ae1e2374f3cd89aeb74a2a5a3c05f"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-latam-w8h-human-decisions-v1.json",
+      "sha256": "b3e8c40fec2bb3c19c024a1426197278e48f8d25f6df6752842e0afa471541e2"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-latam-w8d-rre-readout-v1.json",
+      "sha256": "929665b8b1e7e61de4d5e9fb164df657ffecf08dbd49a5c24345abd8a31e8ffa"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-me-w8i-accepted-current-dossier-v1.json",
+      "sha256": "b4c9d9a43b8c46c32200c3c14b46cfd5d83b5781c17ca4b9f8ba6539dac0645c"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-me-w8h-human-decisions-v1.json",
+      "sha256": "f4936812280c3ab0bd6fc28e5c8b9b0f6630d351f94048b06cae6448e7ce8851"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-me-w8d-rre-readout-v1.json",
+      "sha256": "f4b282cc67a6c87b2d7713fdeed106248b88eeee882ed5608922622640c41c5a"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-ru-w8i-accepted-current-dossier-v1.json",
+      "sha256": "b7bcad5a6292bbb578b3c58e4859955152bd7b05abdc053b3a451866a7bd04dd"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-ru-w8h-human-decisions-v1.json",
+      "sha256": "2ab063b5411ad9f4141328f1bfff6b5fad236964a3e37a9f08c7047f1437f74e"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-ru-w8d-rre-readout-v1.json",
+      "sha256": "5c365f23db39ea80a6a81bc143020f1e7f47220e0d293757195ebcf314329913"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-sea-w8i-accepted-current-dossier-v1.json",
+      "sha256": "b87e1ac75162e61692f4ffd5f8a25cbc61ffb45024268981c3057f0fc808224d"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-sea-w8h-human-decisions-v1.json",
+      "sha256": "93c62a996fbe5d3fb0a881a0d6dca421f514349bca2b0154c1a738059a624e48"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-sea-w8d-rre-readout-v1.json",
+      "sha256": "06de4e5a11b67decb8abf06c11a016e5d63956c186aad47c4f6df924c4269c48"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-us-w8i-accepted-current-dossier-v1.json",
+      "sha256": "978a24e75e6dc066a26a10d5893f8cc6e86ccfccb7aa8e3d8d377e9c4b112bfe"
+    },
+    {
+      "path": "content/civilization-atlas/reconfiguration/dossier-us-w8h-human-decisions-v1.json",
+      "sha256": "6742ba9c49210698e1dee2ef2b296a0ef40e37125db26d503df68f7816024d0b"
+    },
+    {
+      "path": "functions/_lib/book6-current-source.js",
+      "sha256": "ac712364838cad2ac3e7cf7e019edd235bd35396e60490f1ce8a4494b55d89e7"
+    },
+    {
+      "path": "functions/_lib/atlas-retrieval-scope.js",
+      "sha256": "23479358067b6cc6a2f99fbec20aff0b3416c0950d542bf589e380dd8a3ee204"
+    },
+    {
+      "path": "functions/_lib/knowledge-epistemic-reading.js",
+      "sha256": "5d1bd14e27100320a74498b4aac95d909a7c9bbfa2ea81c5cbb72dba7837002e"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "sha256": "5a52c5519ba22b3fecff9845a736866c651d0277c820c22f4b540c10284ce0c5"
+    },
+    {
+      "path": "functions/api/knowledge-access.js",
+      "sha256": "8bc200c64e656d1e26ae562358af3990250cfbbdc167661dcb1666dcd3bb7cb9"
+    },
+    {
+      "path": "scripts/serve-membership-review-v2-paid.mjs",
+      "sha256": "c71e197a9c9ea42ff5d6a1b465b93a21352c64a79ca204be44a042dad62a6f18"
+    },
+    {
+      "path": "scripts/lib/membership-fragment-experiment-api.mjs",
+      "sha256": "9482b9ece011580b5188d2e127119b02e1842ecb6d12137708d330bf394987f2"
+    },
+    {
+      "path": "scripts/prepare-membership-delivery-source-extension.mjs",
+      "sha256": "2acf4cc21f11c9b242397cde2519d99d18115aba0a510e13f7412d46712473fa"
+    },
+    {
+      "path": "functions/api/membership-ask.js",
+      "sha256": "004372df30507271d6d5e1c3e65df3a192c5f241c4922b1ab67d1976036296b3"
+    }
+  ]
+}

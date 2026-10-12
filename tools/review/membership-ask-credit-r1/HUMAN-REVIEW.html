@@ -1,0 +1,963 @@
+<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Membership Ask + Credits · Master 候选审阅</title><style>body{font:16px/1.7 system-ui;max-width:1120px;margin:30px auto;padding:20px;background:#111b28;color:#e9eef4}table{border-collapse:collapse;width:100%}td,th{border:1px solid #43516a;padding:10px;text-align:left;vertical-align:top}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#1b2a3d;padding:16px}a{color:#94caff}details{border:1px solid #43516a;margin:14px 0;padding:12px}img{max-width:100%;height:auto}button,select,input,textarea{font:inherit}</style><h1>会员 Ask＋PHI Credits＋来源约束 LLM</h1><p>唯一 Master 的候选材料。整体 PARTIAL；不等于生产或模型答案已完成。890587f9cc830c1a4be80283618212266c70ae5b</p><p>RM19/month，成功续费或一次性 RM19 加购增加300 Credits；余额结转、到期暂停模型、复订恢复同账户余额。复用原 quota、会员和平台成本账，没有新钱包／订阅。普通／深入／研究初始最高成本为 USD0.05／0.30／1.00，尚不是成本实验的性能结论。</p><h2>各层真实状态</h2><pre>{
+  &quot;SOURCE&quot;: &quot;PARTIAL; CREDIT_PRIMITIVES_PASS_BOUNDED_LOCAL&quot;,
+  &quot;RETRIEVAL&quot;: &quot;PARTIAL; 7_PROVENANCE_GATED_CANDIDATE_PACKS&quot;,
+  &quot;MODEL_ANSWER_QUALITY&quot;: &quot;NOT_RUN&quot;,
+  &quot;BALANCE_AND_COMMERCIAL&quot;: &quot;PASS_BOUNDED_LOCAL_SQL; REAL_CUSTOMER_NOT_RUN&quot;,
+  &quot;BUILD&quot;: &quot;BLOCKED_BY_CONCURRENT_RELEVANT_MUTATION&quot;,
+  &quot;DEPLOYMENT&quot;: &quot;NOT_RUN_FOR_THIS_CANDIDATE&quot;,
+  &quot;LIVE_CUSTOMER&quot;: &quot;NOT_RUN_FOR_THIS_CANDIDATE&quot;,
+  &quot;CHINESE_KNOWLEDGE_CHAIN&quot;: &quot;PASS_OFFLINE_ORCHESTRATION_NOT_MODEL_ANSWER_QUALITY&quot;,
+  &quot;EN_RETRIEVAL&quot;: &quot;PASS_BOUNDED_BROWSER; 2_CHINESE_SOURCES; MODEL_LANGUAGE_QUALITY_NOT_RUN&quot;,
+  &quot;CHAPTER_SOURCE_ENTRY&quot;: &quot;PASS_BOUNDED_BROWSER_PERMISSION_CHECKED_DESCRIPTION_NOT_FULL_TEXT&quot;
+}</pre><h2>当前可操作前台候选</h2><p>以下组件调用服务器 PREVIEW；本站候选未生产启用时应返回关闭状态。不会执行模型、扣 Credits 或发起 Checkout。</p><div data-membership-credit-preview></div><h2>实际验证证据</h2><ul><li><a href="ZERO-COST-TESTS.json">ZERO-COST-TESTS.json</a>：18项离线检查。</li><li><a href="SOURCE-AND-ENTITLEMENT-TESTS.json">SOURCE-AND-ENTITLEMENT-TESTS.json</a>：12项离线检查。</li><li><a href="EXECUTION-TESTS.json">EXECUTION-TESTS.json</a>：7项离线检查。</li><li><a href="EXPERIMENT-PREFLIGHT.json">EXPERIMENT-PREFLIGHT.json</a>：7项离线检查。</li><li><a href="BROWSER-EVIDENCE.json">6个中英／桌面／手机浏览器 UI 回归</a>；合成会员，非真实付款／OIDC／模型交付。</li><li><a href="BUILD-RECEIPT.json">BLOCKED_BY_CONCURRENT_RELEVANT_MUTATION</a>。</li></ul><h2>来源、检索和模型质量分开</h2><p>982章历史计数仍为：整章核验1，整章准入0，整章线上0；已有10个限定线上范围按历史证据保留。原14题／12包保留。严格接受凭证门禁当前7包，不将实验包自动变成可回答来源。</p><p>N7意识运行定义：检索／解释覆盖缺口，不能宣称原稿没有定义。N8确定战争预测：来源不支持，不能暗示提供个人资料后能确定。第五册5包由接受凭证门禁隔离，不是问法被判错。</p><h2>同题同包模型试验</h2><pre>{
+  &quot;entries&quot;: [
+    {
+      &quot;requestId&quot;: &quot;M-I-1-gpt-5.6-luna&quot;,
+      &quot;packDigest&quot;: &quot;7c4a16e238113244a47ce3c25c087d138d056755ab632c15b7846bed95852c8c&quot;,
+      &quot;model&quot;: &quot;gpt-5.6-luna&quot;,
+      &quot;maximumMicroUSD&quot;: 5160,
+      &quot;state&quot;: &quot;OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND&quot;
+    },
+    {
+      &quot;requestId&quot;: &quot;M-I-1-gpt-5.6-terra&quot;,
+      &quot;packDigest&quot;: &quot;7c4a16e238113244a47ce3c25c087d138d056755ab632c15b7846bed95852c8c&quot;,
+      &quot;model&quot;: &quot;gpt-5.6-terra&quot;,
+      &quot;maximumMicroUSD&quot;: 51600,
+      &quot;state&quot;: &quot;OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND&quot;
+    },
+    {
+      &quot;requestId&quot;: &quot;M-I-2-gpt-5.6-luna&quot;,
+      &quot;packDigest&quot;: &quot;35eabbc471d43e102e68ca261e949e5ec577aa62c0ca09afefa9851a96e0ab3d&quot;,
+      &quot;model&quot;: &quot;gpt-5.6-luna&quot;,
+      &quot;maximumMicroUSD&quot;: 5160,
+      &quot;state&quot;: &quot;OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND&quot;
+    },
+    {
+      &quot;requestId&quot;: &quot;M-I-2-gpt-5.6-terra&quot;,
+      &quot;packDigest&quot;: &quot;35eabbc471d43e102e68ca261e949e5ec577aa62c0ca09afefa9851a96e0ab3d&quot;,
+      &quot;model&quot;: &quot;gpt-5.6-terra&quot;,
+      &quot;maximumMicroUSD&quot;: 51600,
+      &quot;state&quot;: &quot;OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND&quot;
+    },
+    {
+      &quot;requestId&quot;: &quot;M-III-1-gpt-5.6-luna&quot;,
+      &quot;packDigest&quot;: &quot;c242b4c8a1883d3d2acd1410d5444a37df6e695bf71a6caba47afba8d66706f7&quot;,
+      &quot;model&quot;: &quot;gpt-5.6-luna&quot;,
+      &quot;maximumMicroUSD&quot;: 5160,
+      &quot;state&quot;: &quot;OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND&quot;
+    },
+    {
+      &quot;requestId&quot;: &quot;M-III-1-gpt-5.6-terra&quot;,
+      &quot;packDigest&quot;: &quot;c242b4c8a1883d3d2acd1410d5444a37df6e695bf71a6caba47afba8d66706f7&quot;,
+      &quot;model&quot;: &quot;gpt-5.6-terra&quot;,
+      &quot;maximumMicroUSD&quot;: 51600,
+      &quot;state&quot;: &quot;OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND&quot;
+    },
+    {
+      &quot;requestId&quot;: &quot;N1-gpt-5.6-luna&quot;,
+      &quot;packDigest&quot;: &quot;5eb6a92ad98b27798ea75b1dfafe3ac7b38aab920b4fcd78deaaee57e9384e2c&quot;,
+      &quot;model&quot;: &quot;gpt-5.6-luna&quot;,
+      &quot;maximumMicroUSD&quot;: 5160,
+      &quot;state&quot;: &quot;OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND&quot;
+    },
+    {
+      &quot;requestId&quot;: &quot;N1-gpt-5.6-terra&quot;,
+      &quot;packDigest&quot;: &quot;5eb6a92ad98b27798ea75b1dfafe3ac7b38aab920b4fcd78deaaee57e9384e2c&quot;,
+      &quot;model&quot;: &quot;gpt-5.6-terra&quot;,
+      &quot;maximumMicroUSD&quot;: 51600,
+      &quot;state&quot;: &quot;OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND&quot;
+    },
+    {
+      &quot;requestId&quot;: &quot;N2-gpt-5.6-luna&quot;,
+      &quot;packDigest&quot;: &quot;893bafca80a222986226b9d1289da30a33977b86225e99ed7ccd721b9c2616a4&quot;,
+      &quot;model&quot;: &quot;gpt-5.6-luna&quot;,
+      &quot;maximumMicroUSD&quot;: 5160,
+      &quot;state&quot;: &quot;OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND&quot;
+    },
+    {
+      &quot;requestId&quot;: &quot;N2-gpt-5.6-terra&quot;,
+      &quot;packDigest&quot;: &quot;893bafca80a222986226b9d1289da30a33977b86225e99ed7ccd721b9c2616a4&quot;,
+      &quot;model&quot;: &quot;gpt-5.6-terra&quot;,
+      &quot;maximumMicroUSD&quot;: 51600,
+      &quot;state&quot;: &quot;OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND&quot;
+    },
+    {
+      &quot;requestId&quot;: &quot;N3-gpt-5.6-luna&quot;,
+      &quot;packDigest&quot;: &quot;6f90f28d9e0d22e5bd4fe3305ef46d15a4a272b7875e61e436a2beaa9d30f16c&quot;,
+      &quot;model&quot;: &quot;gpt-5.6-luna&quot;,
+      &quot;maximumMicroUSD&quot;: 5160,
+      &quot;state&quot;: &quot;OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND&quot;
+    },
+    {
+      &quot;requestId&quot;: &quot;N3-gpt-5.6-terra&quot;,
+      &quot;packDigest&quot;: &quot;6f90f28d9e0d22e5bd4fe3305ef46d15a4a272b7875e61e436a2beaa9d30f16c&quot;,
+      &quot;model&quot;: &quot;gpt-5.6-terra&quot;,
+      &quot;maximumMicroUSD&quot;: 51600,
+      &quot;state&quot;: &quot;OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND&quot;
+    },
+    {
+      &quot;requestId&quot;: &quot;N4-gpt-5.6-luna&quot;,
+      &quot;packDigest&quot;: &quot;add212e2f04b22cdddb3810e466d7ba4932583d0948e31930b5cf39e187b818e&quot;,
+      &quot;model&quot;: &quot;gpt-5.6-luna&quot;,
+      &quot;maximumMicroUSD&quot;: 5160,
+      &quot;state&quot;: &quot;OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND&quot;
+    },
+    {
+      &quot;requestId&quot;: &quot;N4-gpt-5.6-terra&quot;,
+      &quot;packDigest&quot;: &quot;add212e2f04b22cdddb3810e466d7ba4932583d0948e31930b5cf39e187b818e&quot;,
+      &quot;model&quot;: &quot;gpt-5.6-terra&quot;,
+      &quot;maximumMicroUSD&quot;: 51600,
+      &quot;state&quot;: &quot;OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND&quot;
+    }
+  ],
+  &quot;maximumAllocatedMicroUSD&quot;: 397320,
+  &quot;hardBudgetMicroUSD&quot;: 600000,
+  &quot;actualProviderCalls&quot;: 0,
+  &quot;actualCostMicroUSD&quot;: 0,
+  &quot;automaticRetry&quot;: 0,
+  &quot;paidAuthorization&quot;: false,
+  &quot;memberCreditsCharged&quot;: false
+}</pre><p>原计划7对／14次；本轮扩展请求见下方；总上限20次、每模型10次、USD0.60、自动重试0。价格核验日期2026-10-12。历史准备阶段调用0；本轮已执行20次。Luna输入／缓存／输出每百万USD0.20／0.02／1.20，Terra为2.00／0.20／12.00。模型权限和答案质量未验证。<a href="https://developers.openai.com/api/docs/models/gpt-5.6-luna">Luna官方定价</a> · <a href="https://developers.openai.com/api/docs/models/gpt-5.6-terra">Terra官方定价</a>。</p><details><summary>M-I-1 · 一个系统的部件一直换新，为什么整体仍可延续？ · SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED</summary><p>HISTORICAL_FAILURE_REGRESSION；LLM答案 NOT_RUN。</p><pre>{
+  &quot;question&quot;: &quot;一个系统的部件一直换新，为什么整体仍可延续？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;sources&quot;: [
+    {
+      &quot;id&quot;: &quot;S1&quot;,
+      &quot;sourceCode&quot;: &quot;MKS-BOOK-1-V3-REVISION-33C91CD6-ZH-HANS&quot;,
+      &quot;sourceVersion&quot;: &quot;v3-revision-20261011-33c91cd60d5f&quot;,
+      &quot;sourceSha256&quot;: &quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,
+      &quot;sourceAcceptanceDigest&quot;: &quot;c93245e3154fa3460660ba049984ddffe6be1b19dac708147a3e7967d4b9f7a4&quot;,
+      &quot;chapterId&quot;: &quot;B1V3-P1-S006&quot;,
+      &quot;heading&quot;: &quot;Structural Continuity | 结构如何持续存在&quot;,
+      &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 61,
+        &quot;end&quot;: 62
+      },
+      &quot;support&quot;: {
+        &quot;startOffset&quot;: 363,
+        &quot;endOffset&quot;: 977,
+        &quot;textSha256&quot;: &quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;
+      },
+      &quot;text&quot;: &quot;真正持续存\n在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这\n些元素，并持续维持自身的运行方式。\n因此，持续 Continuity 并不是一种静态结果，而是一种动态能\n力。任何现实，只要无法不断恢复自身，就无法真正持续；任何结\n构，只要无法面对扰动，就终将瓦解。稳定并不是变化的对立面，而\n是变化之中的持续组织能力。现实之所以能够跨越时间，并不是因为\n时间停止流动，而是因为系统能够不断回应时间所带来的改变。这意\n味着，现实开始出现另一种更深层的特性。系统不再只是形成结构，\n也不再只是形成连接与组织，而开始形成维持自身的能力。当部分结\n构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路\n径能够逐渐建立；当环境不断变化，组织方式能够不断适应。现实开\n始表现出一种近似自我维持的倾向，它并不依赖某一个固定元素，而\n依赖整个组织持续协调自身的能力。\n我们可以从一座城市理解这一点。一座真正成熟的城市，并不会\n因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。新的\n建筑不断出现，旧的建筑不断消失；道路不断扩建，设施不断替换；\n人口持续流动，产业不断更迭。然而，城市依然能够维持交通、资\n源、生产、交流与秩序，因为真正持续存在的，并不是城市内部每一\n个组成部分，而是这些组成部分之间不断恢复整体运行的能力。城市\n之所以能够跨越数十年甚至数百年，并不是因为没有变化，而是因为\n变化始终没有破坏它的连续运行。&quot;,
+      &quot;readingHref&quot;: &quot;/books/reality-formation/&quot;,
+      &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-1&amp;chapter=B1V3-P1-S006&amp;q=%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%83%A8%E4%BB%B6%E4%B8%80%E7%9B%B4%E6%8D%A2%E6%96%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%95%B4%E4%BD%93%E4%BB%8D%E5%8F%AF%E5%BB%B6%E7%BB%AD%EF%BC%9F&amp;locale=zh-Hans&quot;,
+      &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+      &quot;purchaseHref&quot;: &quot;/books/reality-formation/&quot;,
+      &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+      &quot;permissions&quot;: {
+        &quot;knowledgeExcerpt&quot;: true,
+        &quot;fullTextDownload&quot;: false,
+        &quot;reconstructBook&quot;: false
+      }
+    }
+  ],
+  &quot;glossary&quot;: [],
+  &quot;customerContext&quot;: null,
+  &quot;constraints&quot;: {
+    &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+    &quot;sourceLanguagesDisclosed&quot;: true,
+    &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;preserveConditions&quot;: true,
+    &quot;directAnswerWhenSupported&quot;: true,
+    &quot;claimCitationsRequired&quot;: true,
+    &quot;compareBothSides&quot;: true,
+    &quot;untrustedSourceInstructions&quot;: true,
+    &quot;noPrivateTextReconstruction&quot;: true,
+    &quot;noOCRPromotion&quot;: true,
+    &quot;noGlossaryPromotion&quot;: true,
+    &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+    &quot;purchaseMustNotReplaceAnswer&quot;: true
+  },
+  &quot;state&quot;: &quot;SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED&quot;,
+  &quot;tokenEstimate&quot;: {
+    &quot;estimated&quot;: 1844,
+    &quot;conservativeInputTokenCeiling&quot;: 4199,
+    &quot;actualTokens&quot;: null,
+    &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+  },
+  &quot;packDigest&quot;: &quot;7c4a16e238113244a47ce3c25c087d138d056755ab632c15b7846bed95852c8c&quot;
+}</pre></details><details><summary>M-I-2 · 结构遭遇扰动之后，要靠什么才能保持连续？ · SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED</summary><p>HISTORICAL_FAILURE_REGRESSION；LLM答案 NOT_RUN。</p><pre>{
+  &quot;question&quot;: &quot;结构遭遇扰动之后，要靠什么才能保持连续？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;sources&quot;: [
+    {
+      &quot;id&quot;: &quot;S1&quot;,
+      &quot;sourceCode&quot;: &quot;MKS-BOOK-1-V3-REVISION-33C91CD6-ZH-HANS&quot;,
+      &quot;sourceVersion&quot;: &quot;v3-revision-20261011-33c91cd60d5f&quot;,
+      &quot;sourceSha256&quot;: &quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,
+      &quot;sourceAcceptanceDigest&quot;: &quot;c93245e3154fa3460660ba049984ddffe6be1b19dac708147a3e7967d4b9f7a4&quot;,
+      &quot;chapterId&quot;: &quot;B1V3-P1-S006&quot;,
+      &quot;heading&quot;: &quot;Structural Continuity | 结构如何持续存在&quot;,
+      &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 61,
+        &quot;end&quot;: 62
+      },
+      &quot;support&quot;: {
+        &quot;startOffset&quot;: 363,
+        &quot;endOffset&quot;: 977,
+        &quot;textSha256&quot;: &quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;
+      },
+      &quot;text&quot;: &quot;真正持续存\n在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这\n些元素，并持续维持自身的运行方式。\n因此，持续 Continuity 并不是一种静态结果，而是一种动态能\n力。任何现实，只要无法不断恢复自身，就无法真正持续；任何结\n构，只要无法面对扰动，就终将瓦解。稳定并不是变化的对立面，而\n是变化之中的持续组织能力。现实之所以能够跨越时间，并不是因为\n时间停止流动，而是因为系统能够不断回应时间所带来的改变。这意\n味着，现实开始出现另一种更深层的特性。系统不再只是形成结构，\n也不再只是形成连接与组织，而开始形成维持自身的能力。当部分结\n构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路\n径能够逐渐建立；当环境不断变化，组织方式能够不断适应。现实开\n始表现出一种近似自我维持的倾向，它并不依赖某一个固定元素，而\n依赖整个组织持续协调自身的能力。\n我们可以从一座城市理解这一点。一座真正成熟的城市，并不会\n因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。新的\n建筑不断出现，旧的建筑不断消失；道路不断扩建，设施不断替换；\n人口持续流动，产业不断更迭。然而，城市依然能够维持交通、资\n源、生产、交流与秩序，因为真正持续存在的，并不是城市内部每一\n个组成部分，而是这些组成部分之间不断恢复整体运行的能力。城市\n之所以能够跨越数十年甚至数百年，并不是因为没有变化，而是因为\n变化始终没有破坏它的连续运行。&quot;,
+      &quot;readingHref&quot;: &quot;/books/reality-formation/&quot;,
+      &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-1&amp;chapter=B1V3-P1-S006&amp;q=%E7%BB%93%E6%9E%84%E9%81%AD%E9%81%87%E6%89%B0%E5%8A%A8%E4%B9%8B%E5%90%8E%EF%BC%8C%E8%A6%81%E9%9D%A0%E4%BB%80%E4%B9%88%E6%89%8D%E8%83%BD%E4%BF%9D%E6%8C%81%E8%BF%9E%E7%BB%AD%EF%BC%9F&amp;locale=zh-Hans&quot;,
+      &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+      &quot;purchaseHref&quot;: &quot;/books/reality-formation/&quot;,
+      &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+      &quot;permissions&quot;: {
+        &quot;knowledgeExcerpt&quot;: true,
+        &quot;fullTextDownload&quot;: false,
+        &quot;reconstructBook&quot;: false
+      }
+    }
+  ],
+  &quot;glossary&quot;: [
+    {
+      &quot;termCode&quot;: &quot;TERM-039&quot;,
+      &quot;key&quot;: &quot;structure&quot;,
+      &quot;label&quot;: &quot;结构&quot;,
+      &quot;locale&quot;: &quot;zh-Hans&quot;,
+      &quot;authority&quot;: &quot;EXISTING_FROZEN_HUMAN_TERMINOLOGY&quot;,
+      &quot;createsAnswerEvidence&quot;: false
+    }
+  ],
+  &quot;customerContext&quot;: null,
+  &quot;constraints&quot;: {
+    &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+    &quot;sourceLanguagesDisclosed&quot;: true,
+    &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;preserveConditions&quot;: true,
+    &quot;directAnswerWhenSupported&quot;: true,
+    &quot;claimCitationsRequired&quot;: true,
+    &quot;compareBothSides&quot;: true,
+    &quot;untrustedSourceInstructions&quot;: true,
+    &quot;noPrivateTextReconstruction&quot;: true,
+    &quot;noOCRPromotion&quot;: true,
+    &quot;noGlossaryPromotion&quot;: true,
+    &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+    &quot;purchaseMustNotReplaceAnswer&quot;: true
+  },
+  &quot;state&quot;: &quot;SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED&quot;,
+  &quot;tokenEstimate&quot;: {
+    &quot;estimated&quot;: 1909,
+    &quot;conservativeInputTokenCeiling&quot;: 4330,
+    &quot;actualTokens&quot;: null,
+    &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+  },
+  &quot;packDigest&quot;: &quot;35eabbc471d43e102e68ca261e949e5ec577aa62c0ca09afefa9851a96e0ab3d&quot;
+}</pre></details><details><summary>M-III-1 · 运行并没有损坏，维护为什么也不能等到故障以后才开始？ · SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED</summary><p>HISTORICAL_FAILURE_REGRESSION；LLM答案 NOT_RUN。</p><pre>{
+  &quot;question&quot;: &quot;运行并没有损坏，维护为什么也不能等到故障以后才开始？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;sources&quot;: [
+    {
+      &quot;id&quot;: &quot;S1&quot;,
+      &quot;sourceCode&quot;: &quot;MKS-BOOK-3-OWNER-FINAL-EFBFDD21-ZH-HANS&quot;,
+      &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+      &quot;sourceAcceptanceDigest&quot;: &quot;2567043c746a447202fc6df3197f23df2758b55ee49008d4acbf27907c8912a8&quot;,
+      &quot;chapterId&quot;: &quot;CM-B3V1-P8-S001&quot;,
+      &quot;heading&quot;: &quot;维持出现 | 为什么持续运行必然产生维护需求&quot;,
+      &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 3,
+        &quot;end&quot;: 6
+      },
+      &quot;support&quot;: {
+        &quot;startOffset&quot;: 915,
+        &quot;endOffset&quot;: 999,
+        &quot;textSha256&quot;: &quot;5bd6e6732ecfa1d37a6c8510d066922343496225e6e6a97b86afe7824380c3d9&quot;
+      },
+      &quot;text&quot;: &quot;维护首先不是修理，而是\n处理持续所产生的后果。修理通常发生在某个结构已经明显损坏之后，维\n护则更早，它关注的是一个仍然能够运行的现实，是否正在逐渐改变自己\n的承载条件。&quot;,
+      &quot;readingHref&quot;: &quot;/books/reality-continuity/&quot;,
+      &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-3&amp;chapter=CM-B3V1-P8-S001&amp;q=%E8%BF%90%E8%A1%8C%E5%B9%B6%E6%B2%A1%E6%9C%89%E6%8D%9F%E5%9D%8F%EF%BC%8C%E7%BB%B4%E6%8A%A4%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E4%B8%8D%E8%83%BD%E7%AD%89%E5%88%B0%E6%95%85%E9%9A%9C%E4%BB%A5%E5%90%8E%E6%89%8D%E5%BC%80%E5%A7%8B%EF%BC%9F&amp;locale=zh-Hans&quot;,
+      &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+      &quot;purchaseHref&quot;: &quot;/books/reality-continuity/&quot;,
+      &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+      &quot;permissions&quot;: {
+        &quot;knowledgeExcerpt&quot;: true,
+        &quot;fullTextDownload&quot;: false,
+        &quot;reconstructBook&quot;: false
+      }
+    },
+    {
+      &quot;id&quot;: &quot;S2&quot;,
+      &quot;sourceCode&quot;: &quot;MKS-BOOK-3-OWNER-FINAL-EFBFDD21-ZH-HANS&quot;,
+      &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+      &quot;sourceAcceptanceDigest&quot;: &quot;2567043c746a447202fc6df3197f23df2758b55ee49008d4acbf27907c8912a8&quot;,
+      &quot;chapterId&quot;: &quot;CM-B3V1-P9-S004&quot;,
+      &quot;heading&quot;: &quot;共享资源 | 为什么资源开始共同管理&quot;,
+      &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 249,
+        &quot;end&quot;: 252
+      },
+      &quot;support&quot;: {
+        &quot;startOffset&quot;: 20,
+        &quot;endOffset&quot;: 361,
+        &quot;textSha256&quot;: &quot;a25b3bdff9dd9e22a8217be6dccbd88db2d41100b602b720c45352659e61840e&quot;
+      },
+      &quot;text&quot;: &quot;资源之所以开始需要共同管理，不是因为它们天然属于共同，也不是\n因为多个运行一旦相遇就必须放弃各自边界。真正变化发生在资源开始同\n时进入多个运行的条件以后。一项资源原本只由一个位置使用时，它可以\n按照局部需要被安排；一旦多个运行都依赖同一时间、空间、资金、设\n备、信息、注意或其他承载条件，任何一个位置对资源的使用，就会改变\n其他位置能够使用的范围。资源从这里开始不再只是“我的资源”或“你\n的资源”。它逐渐成为共享现实的一部分。所谓共享，并不意味着所有资\n源必须平均分配，也不意味着所有参与者拥有完全相同的权利与需要。\n它真正指向的是一种关系：多个运行的持续开始依赖同一有限条件，而且\n这些运行彼此无法完全忽略。当这种关系出现以后，资源管理便不再只是\n个体选择。它开始承担协调功能。&quot;,
+      &quot;readingHref&quot;: &quot;/books/reality-continuity/&quot;,
+      &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-3&amp;chapter=CM-B3V1-P9-S004&amp;q=%E8%BF%90%E8%A1%8C%E5%B9%B6%E6%B2%A1%E6%9C%89%E6%8D%9F%E5%9D%8F%EF%BC%8C%E7%BB%B4%E6%8A%A4%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E4%B8%8D%E8%83%BD%E7%AD%89%E5%88%B0%E6%95%85%E9%9A%9C%E4%BB%A5%E5%90%8E%E6%89%8D%E5%BC%80%E5%A7%8B%EF%BC%9F&amp;locale=zh-Hans&quot;,
+      &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+      &quot;purchaseHref&quot;: &quot;/books/reality-continuity/&quot;,
+      &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+      &quot;permissions&quot;: {
+        &quot;knowledgeExcerpt&quot;: true,
+        &quot;fullTextDownload&quot;: false,
+        &quot;reconstructBook&quot;: false
+      }
+    },
+    {
+      &quot;id&quot;: &quot;S3&quot;,
+      &quot;sourceCode&quot;: &quot;MKS-BOOK-3-OWNER-FINAL-EFBFDD21-ZH-HANS&quot;,
+      &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+      &quot;sourceAcceptanceDigest&quot;: &quot;2567043c746a447202fc6df3197f23df2758b55ee49008d4acbf27907c8912a8&quot;,
+      &quot;chapterId&quot;: &quot;CM-B3V1-P8-S059&quot;,
+      &quot;heading&quot;: &quot;可持续连续 | 为什么真正能够长期存在的运行必须能够改变自己&quot;,
+      &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 226,
+        &quot;end&quot;: 231
+      },
+      &quot;support&quot;: {
+        &quot;startOffset&quot;: 33,
+        &quot;endOffset&quot;: 398,
+        &quot;textSha256&quot;: &quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;
+      },
+      &quot;text&quot;: &quot;运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。&quot;,
+      &quot;readingHref&quot;: &quot;/books/reality-continuity/&quot;,
+      &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-3&amp;chapter=CM-B3V1-P8-S059&amp;q=%E8%BF%90%E8%A1%8C%E5%B9%B6%E6%B2%A1%E6%9C%89%E6%8D%9F%E5%9D%8F%EF%BC%8C%E7%BB%B4%E6%8A%A4%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E4%B8%8D%E8%83%BD%E7%AD%89%E5%88%B0%E6%95%85%E9%9A%9C%E4%BB%A5%E5%90%8E%E6%89%8D%E5%BC%80%E5%A7%8B%EF%BC%9F&amp;locale=zh-Hans&quot;,
+      &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+      &quot;purchaseHref&quot;: &quot;/books/reality-continuity/&quot;,
+      &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+      &quot;permissions&quot;: {
+        &quot;knowledgeExcerpt&quot;: true,
+        &quot;fullTextDownload&quot;: false,
+        &quot;reconstructBook&quot;: false
+      }
+    }
+  ],
+  &quot;glossary&quot;: [
+    {
+      &quot;termCode&quot;: &quot;TERM-029&quot;,
+      &quot;key&quot;: &quot;runtime&quot;,
+      &quot;label&quot;: &quot;运行&quot;,
+      &quot;locale&quot;: &quot;zh-Hans&quot;,
+      &quot;authority&quot;: &quot;EXISTING_FROZEN_HUMAN_TERMINOLOGY&quot;,
+      &quot;createsAnswerEvidence&quot;: false
+    }
+  ],
+  &quot;customerContext&quot;: null,
+  &quot;constraints&quot;: {
+    &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+    &quot;sourceLanguagesDisclosed&quot;: true,
+    &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;preserveConditions&quot;: true,
+    &quot;directAnswerWhenSupported&quot;: true,
+    &quot;claimCitationsRequired&quot;: true,
+    &quot;compareBothSides&quot;: true,
+    &quot;untrustedSourceInstructions&quot;: true,
+    &quot;noPrivateTextReconstruction&quot;: true,
+    &quot;noOCRPromotion&quot;: true,
+    &quot;noGlossaryPromotion&quot;: true,
+    &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+    &quot;purchaseMustNotReplaceAnswer&quot;: true
+  },
+  &quot;state&quot;: &quot;SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED&quot;,
+  &quot;tokenEstimate&quot;: {
+    &quot;estimated&quot;: 3476,
+    &quot;conservativeInputTokenCeiling&quot;: 7463,
+    &quot;actualTokens&quot;: null,
+    &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+  },
+  &quot;packDigest&quot;: &quot;c242b4c8a1883d3d2acd1410d5444a37df6e695bf71a6caba47afba8d66706f7&quot;
+}</pre></details><details><summary>M-V-1 · 国家换了边界，为什么语言和生活习惯未必跟着立刻改变？ · SOURCE_INSUFFICIENT</summary><p>HISTORICAL_FAILURE_REGRESSION；LLM答案 NOT_RUN。</p><pre>{
+  &quot;question&quot;: &quot;国家换了边界，为什么语言和生活习惯未必跟着立刻改变？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;sources&quot;: [],
+  &quot;glossary&quot;: [],
+  &quot;customerContext&quot;: null,
+  &quot;constraints&quot;: {
+    &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+    &quot;sourceLanguagesDisclosed&quot;: true,
+    &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;preserveConditions&quot;: true,
+    &quot;directAnswerWhenSupported&quot;: true,
+    &quot;claimCitationsRequired&quot;: true,
+    &quot;compareBothSides&quot;: true,
+    &quot;untrustedSourceInstructions&quot;: true,
+    &quot;noPrivateTextReconstruction&quot;: true,
+    &quot;noOCRPromotion&quot;: true,
+    &quot;noGlossaryPromotion&quot;: true,
+    &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+    &quot;purchaseMustNotReplaceAnswer&quot;: true
+  },
+  &quot;state&quot;: &quot;SOURCE_INSUFFICIENT&quot;,
+  &quot;tokenEstimate&quot;: {
+    &quot;estimated&quot;: 347,
+    &quot;conservativeInputTokenCeiling&quot;: 1205,
+    &quot;actualTokens&quot;: null,
+    &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+  },
+  &quot;packDigest&quot;: &quot;e61c0df23683e27222614cad040bb4a6b3f8a532aecebdd1fe1af4e79eee363f&quot;
+}</pre></details><details><summary>M-V-3 · 讨论文明的边界时，应区分哪些层次而不是只看领土？ · SOURCE_INSUFFICIENT</summary><p>HISTORICAL_FAILURE_REGRESSION；LLM答案 NOT_RUN。</p><pre>{
+  &quot;question&quot;: &quot;讨论文明的边界时，应区分哪些层次而不是只看领土？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;sources&quot;: [],
+  &quot;glossary&quot;: [],
+  &quot;customerContext&quot;: null,
+  &quot;constraints&quot;: {
+    &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+    &quot;sourceLanguagesDisclosed&quot;: true,
+    &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;preserveConditions&quot;: true,
+    &quot;directAnswerWhenSupported&quot;: true,
+    &quot;claimCitationsRequired&quot;: true,
+    &quot;compareBothSides&quot;: true,
+    &quot;untrustedSourceInstructions&quot;: true,
+    &quot;noPrivateTextReconstruction&quot;: true,
+    &quot;noOCRPromotion&quot;: true,
+    &quot;noGlossaryPromotion&quot;: true,
+    &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+    &quot;purchaseMustNotReplaceAnswer&quot;: true
+  },
+  &quot;state&quot;: &quot;SOURCE_INSUFFICIENT&quot;,
+  &quot;tokenEstimate&quot;: {
+    &quot;estimated&quot;: 344,
+    &quot;conservativeInputTokenCeiling&quot;: 1199,
+    &quot;actualTokens&quot;: null,
+    &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+  },
+  &quot;packDigest&quot;: &quot;fb0ce0eea8ced497f4ae5fc3f7a05852c39f947fa2a6ac0aefe23c127511e81f&quot;
+}</pre></details><details><summary>M-V-UNSUPPORTED · 依据文明差异，确定预测下周战争会发生在哪里？ · SOURCE_INSUFFICIENT</summary><p>HISTORICAL_FAILURE_REGRESSION；LLM答案 NOT_RUN。</p><pre>{
+  &quot;question&quot;: &quot;依据文明差异，确定预测下周战争会发生在哪里？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;sources&quot;: [],
+  &quot;glossary&quot;: [],
+  &quot;customerContext&quot;: null,
+  &quot;constraints&quot;: {
+    &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+    &quot;sourceLanguagesDisclosed&quot;: true,
+    &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;preserveConditions&quot;: true,
+    &quot;directAnswerWhenSupported&quot;: true,
+    &quot;claimCitationsRequired&quot;: true,
+    &quot;compareBothSides&quot;: true,
+    &quot;untrustedSourceInstructions&quot;: true,
+    &quot;noPrivateTextReconstruction&quot;: true,
+    &quot;noOCRPromotion&quot;: true,
+    &quot;noGlossaryPromotion&quot;: true,
+    &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+    &quot;purchaseMustNotReplaceAnswer&quot;: true
+  },
+  &quot;state&quot;: &quot;SOURCE_INSUFFICIENT&quot;,
+  &quot;tokenEstimate&quot;: {
+    &quot;estimated&quot;: 341,
+    &quot;conservativeInputTokenCeiling&quot;: 1193,
+    &quot;actualTokens&quot;: null,
+    &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+  },
+  &quot;packDigest&quot;: &quot;152780e3c45b6a8ff9ced7582742b707b61d09337f819812ef1f12a68691e025&quot;
+}</pre></details><details><summary>N1 · 更换了许多组成元素，持续的究竟是什么？ · SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED</summary><p>FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING；LLM答案 NOT_RUN。</p><pre>{
+  &quot;question&quot;: &quot;更换了许多组成元素，持续的究竟是什么？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;sources&quot;: [
+    {
+      &quot;id&quot;: &quot;S1&quot;,
+      &quot;sourceCode&quot;: &quot;MKS-BOOK-1-V3-REVISION-33C91CD6-ZH-HANS&quot;,
+      &quot;sourceVersion&quot;: &quot;v3-revision-20261011-33c91cd60d5f&quot;,
+      &quot;sourceSha256&quot;: &quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,
+      &quot;sourceAcceptanceDigest&quot;: &quot;c93245e3154fa3460660ba049984ddffe6be1b19dac708147a3e7967d4b9f7a4&quot;,
+      &quot;chapterId&quot;: &quot;B1V3-P1-S006&quot;,
+      &quot;heading&quot;: &quot;Structural Continuity | 结构如何持续存在&quot;,
+      &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 61,
+        &quot;end&quot;: 62
+      },
+      &quot;support&quot;: {
+        &quot;startOffset&quot;: 363,
+        &quot;endOffset&quot;: 977,
+        &quot;textSha256&quot;: &quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;
+      },
+      &quot;text&quot;: &quot;真正持续存\n在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这\n些元素，并持续维持自身的运行方式。\n因此，持续 Continuity 并不是一种静态结果，而是一种动态能\n力。任何现实，只要无法不断恢复自身，就无法真正持续；任何结\n构，只要无法面对扰动，就终将瓦解。稳定并不是变化的对立面，而\n是变化之中的持续组织能力。现实之所以能够跨越时间，并不是因为\n时间停止流动，而是因为系统能够不断回应时间所带来的改变。这意\n味着，现实开始出现另一种更深层的特性。系统不再只是形成结构，\n也不再只是形成连接与组织，而开始形成维持自身的能力。当部分结\n构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路\n径能够逐渐建立；当环境不断变化，组织方式能够不断适应。现实开\n始表现出一种近似自我维持的倾向，它并不依赖某一个固定元素，而\n依赖整个组织持续协调自身的能力。\n我们可以从一座城市理解这一点。一座真正成熟的城市，并不会\n因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。新的\n建筑不断出现，旧的建筑不断消失；道路不断扩建，设施不断替换；\n人口持续流动，产业不断更迭。然而，城市依然能够维持交通、资\n源、生产、交流与秩序，因为真正持续存在的，并不是城市内部每一\n个组成部分，而是这些组成部分之间不断恢复整体运行的能力。城市\n之所以能够跨越数十年甚至数百年，并不是因为没有变化，而是因为\n变化始终没有破坏它的连续运行。&quot;,
+      &quot;readingHref&quot;: &quot;/books/reality-formation/&quot;,
+      &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-1&amp;chapter=B1V3-P1-S006&amp;q=%E6%9B%B4%E6%8D%A2%E4%BA%86%E8%AE%B8%E5%A4%9A%E7%BB%84%E6%88%90%E5%85%83%E7%B4%A0%EF%BC%8C%E6%8C%81%E7%BB%AD%E7%9A%84%E7%A9%B6%E7%AB%9F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F&amp;locale=zh-Hans&quot;,
+      &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+      &quot;purchaseHref&quot;: &quot;/books/reality-formation/&quot;,
+      &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+      &quot;permissions&quot;: {
+        &quot;knowledgeExcerpt&quot;: true,
+        &quot;fullTextDownload&quot;: false,
+        &quot;reconstructBook&quot;: false
+      }
+    }
+  ],
+  &quot;glossary&quot;: [
+    {
+      &quot;termCode&quot;: &quot;TERM-009&quot;,
+      &quot;key&quot;: &quot;continuity&quot;,
+      &quot;label&quot;: &quot;持续&quot;,
+      &quot;locale&quot;: &quot;zh-Hans&quot;,
+      &quot;authority&quot;: &quot;EXISTING_FROZEN_HUMAN_TERMINOLOGY&quot;,
+      &quot;createsAnswerEvidence&quot;: false
+    }
+  ],
+  &quot;customerContext&quot;: null,
+  &quot;constraints&quot;: {
+    &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+    &quot;sourceLanguagesDisclosed&quot;: true,
+    &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;preserveConditions&quot;: true,
+    &quot;directAnswerWhenSupported&quot;: true,
+    &quot;claimCitationsRequired&quot;: true,
+    &quot;compareBothSides&quot;: true,
+    &quot;untrustedSourceInstructions&quot;: true,
+    &quot;noPrivateTextReconstruction&quot;: true,
+    &quot;noOCRPromotion&quot;: true,
+    &quot;noGlossaryPromotion&quot;: true,
+    &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+    &quot;purchaseMustNotReplaceAnswer&quot;: true
+  },
+  &quot;state&quot;: &quot;SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED&quot;,
+  &quot;tokenEstimate&quot;: {
+    &quot;estimated&quot;: 1904,
+    &quot;conservativeInputTokenCeiling&quot;: 4319,
+    &quot;actualTokens&quot;: null,
+    &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+  },
+  &quot;packDigest&quot;: &quot;5eb6a92ad98b27798ea75b1dfafe3ac7b38aab920b4fcd78deaaee57e9384e2c&quot;
+}</pre></details><details><summary>N2 · 系统保持稳定是不是要求所有部分保持原样？ · SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED</summary><p>FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING；LLM答案 NOT_RUN。</p><pre>{
+  &quot;question&quot;: &quot;系统保持稳定是不是要求所有部分保持原样？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;sources&quot;: [
+    {
+      &quot;id&quot;: &quot;S1&quot;,
+      &quot;sourceCode&quot;: &quot;MKS-BOOK-1-V3-REVISION-33C91CD6-ZH-HANS&quot;,
+      &quot;sourceVersion&quot;: &quot;v3-revision-20261011-33c91cd60d5f&quot;,
+      &quot;sourceSha256&quot;: &quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,
+      &quot;sourceAcceptanceDigest&quot;: &quot;c93245e3154fa3460660ba049984ddffe6be1b19dac708147a3e7967d4b9f7a4&quot;,
+      &quot;chapterId&quot;: &quot;B1V3-P1-S006&quot;,
+      &quot;heading&quot;: &quot;Structural Continuity | 结构如何持续存在&quot;,
+      &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 61,
+        &quot;end&quot;: 62
+      },
+      &quot;support&quot;: {
+        &quot;startOffset&quot;: 363,
+        &quot;endOffset&quot;: 977,
+        &quot;textSha256&quot;: &quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;
+      },
+      &quot;text&quot;: &quot;真正持续存\n在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这\n些元素，并持续维持自身的运行方式。\n因此，持续 Continuity 并不是一种静态结果，而是一种动态能\n力。任何现实，只要无法不断恢复自身，就无法真正持续；任何结\n构，只要无法面对扰动，就终将瓦解。稳定并不是变化的对立面，而\n是变化之中的持续组织能力。现实之所以能够跨越时间，并不是因为\n时间停止流动，而是因为系统能够不断回应时间所带来的改变。这意\n味着，现实开始出现另一种更深层的特性。系统不再只是形成结构，\n也不再只是形成连接与组织，而开始形成维持自身的能力。当部分结\n构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路\n径能够逐渐建立；当环境不断变化，组织方式能够不断适应。现实开\n始表现出一种近似自我维持的倾向，它并不依赖某一个固定元素，而\n依赖整个组织持续协调自身的能力。\n我们可以从一座城市理解这一点。一座真正成熟的城市，并不会\n因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。新的\n建筑不断出现，旧的建筑不断消失；道路不断扩建，设施不断替换；\n人口持续流动，产业不断更迭。然而，城市依然能够维持交通、资\n源、生产、交流与秩序，因为真正持续存在的，并不是城市内部每一\n个组成部分，而是这些组成部分之间不断恢复整体运行的能力。城市\n之所以能够跨越数十年甚至数百年，并不是因为没有变化，而是因为\n变化始终没有破坏它的连续运行。&quot;,
+      &quot;readingHref&quot;: &quot;/books/reality-formation/&quot;,
+      &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-1&amp;chapter=B1V3-P1-S006&amp;q=%E7%B3%BB%E7%BB%9F%E4%BF%9D%E6%8C%81%E7%A8%B3%E5%AE%9A%E6%98%AF%E4%B8%8D%E6%98%AF%E8%A6%81%E6%B1%82%E6%89%80%E6%9C%89%E9%83%A8%E5%88%86%E4%BF%9D%E6%8C%81%E5%8E%9F%E6%A0%B7%EF%BC%9F&amp;locale=zh-Hans&quot;,
+      &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+      &quot;purchaseHref&quot;: &quot;/books/reality-formation/&quot;,
+      &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+      &quot;permissions&quot;: {
+        &quot;knowledgeExcerpt&quot;: true,
+        &quot;fullTextDownload&quot;: false,
+        &quot;reconstructBook&quot;: false
+      }
+    }
+  ],
+  &quot;glossary&quot;: [],
+  &quot;customerContext&quot;: null,
+  &quot;constraints&quot;: {
+    &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+    &quot;sourceLanguagesDisclosed&quot;: true,
+    &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;preserveConditions&quot;: true,
+    &quot;directAnswerWhenSupported&quot;: true,
+    &quot;claimCitationsRequired&quot;: true,
+    &quot;compareBothSides&quot;: true,
+    &quot;untrustedSourceInstructions&quot;: true,
+    &quot;noPrivateTextReconstruction&quot;: true,
+    &quot;noOCRPromotion&quot;: true,
+    &quot;noGlossaryPromotion&quot;: true,
+    &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+    &quot;purchaseMustNotReplaceAnswer&quot;: true
+  },
+  &quot;state&quot;: &quot;SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED&quot;,
+  &quot;tokenEstimate&quot;: {
+    &quot;estimated&quot;: 1832,
+    &quot;conservativeInputTokenCeiling&quot;: 4175,
+    &quot;actualTokens&quot;: null,
+    &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+  },
+  &quot;packDigest&quot;: &quot;893bafca80a222986226b9d1289da30a33977b86225e99ed7ccd721b9c2616a4&quot;
+}</pre></details><details><summary>N3 · 为什么还没损坏的系统也需要维持？ · SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED</summary><p>FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING；LLM答案 NOT_RUN。</p><pre>{
+  &quot;question&quot;: &quot;为什么还没损坏的系统也需要维持？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;sources&quot;: [
+    {
+      &quot;id&quot;: &quot;S1&quot;,
+      &quot;sourceCode&quot;: &quot;MKS-BOOK-3-OWNER-FINAL-EFBFDD21-ZH-HANS&quot;,
+      &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+      &quot;sourceAcceptanceDigest&quot;: &quot;2567043c746a447202fc6df3197f23df2758b55ee49008d4acbf27907c8912a8&quot;,
+      &quot;chapterId&quot;: &quot;CM-B3V1-P8-S001&quot;,
+      &quot;heading&quot;: &quot;维持出现 | 为什么持续运行必然产生维护需求&quot;,
+      &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 3,
+        &quot;end&quot;: 6
+      },
+      &quot;support&quot;: {
+        &quot;startOffset&quot;: 915,
+        &quot;endOffset&quot;: 999,
+        &quot;textSha256&quot;: &quot;5bd6e6732ecfa1d37a6c8510d066922343496225e6e6a97b86afe7824380c3d9&quot;
+      },
+      &quot;text&quot;: &quot;维护首先不是修理，而是\n处理持续所产生的后果。修理通常发生在某个结构已经明显损坏之后，维\n护则更早，它关注的是一个仍然能够运行的现实，是否正在逐渐改变自己\n的承载条件。&quot;,
+      &quot;readingHref&quot;: &quot;/books/reality-continuity/&quot;,
+      &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-3&amp;chapter=CM-B3V1-P8-S001&amp;q=%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%B2%A1%E6%8D%9F%E5%9D%8F%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%B9%9F%E9%9C%80%E8%A6%81%E7%BB%B4%E6%8C%81%EF%BC%9F&amp;locale=zh-Hans&quot;,
+      &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+      &quot;purchaseHref&quot;: &quot;/books/reality-continuity/&quot;,
+      &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+      &quot;permissions&quot;: {
+        &quot;knowledgeExcerpt&quot;: true,
+        &quot;fullTextDownload&quot;: false,
+        &quot;reconstructBook&quot;: false
+      }
+    }
+  ],
+  &quot;glossary&quot;: [],
+  &quot;customerContext&quot;: null,
+  &quot;constraints&quot;: {
+    &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+    &quot;sourceLanguagesDisclosed&quot;: true,
+    &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;preserveConditions&quot;: true,
+    &quot;directAnswerWhenSupported&quot;: true,
+    &quot;claimCitationsRequired&quot;: true,
+    &quot;compareBothSides&quot;: true,
+    &quot;untrustedSourceInstructions&quot;: true,
+    &quot;noPrivateTextReconstruction&quot;: true,
+    &quot;noOCRPromotion&quot;: true,
+    &quot;noGlossaryPromotion&quot;: true,
+    &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+    &quot;purchaseMustNotReplaceAnswer&quot;: true
+  },
+  &quot;state&quot;: &quot;SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED&quot;,
+  &quot;tokenEstimate&quot;: {
+    &quot;estimated&quot;: 1043,
+    &quot;conservativeInputTokenCeiling&quot;: 2597,
+    &quot;actualTokens&quot;: null,
+    &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+  },
+  &quot;packDigest&quot;: &quot;6f90f28d9e0d22e5bd4fe3305ef46d15a4a272b7875e61e436a2beaa9d30f16c&quot;
+}</pre></details><details><summary>N4 · 修理和维持分别面对怎样的条件？ · SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED</summary><p>FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING；LLM答案 NOT_RUN。</p><pre>{
+  &quot;question&quot;: &quot;修理和维持分别面对怎样的条件？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;sources&quot;: [
+    {
+      &quot;id&quot;: &quot;S1&quot;,
+      &quot;sourceCode&quot;: &quot;MKS-BOOK-3-OWNER-FINAL-EFBFDD21-ZH-HANS&quot;,
+      &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+      &quot;sourceAcceptanceDigest&quot;: &quot;2567043c746a447202fc6df3197f23df2758b55ee49008d4acbf27907c8912a8&quot;,
+      &quot;chapterId&quot;: &quot;CM-B3V1-P8-S001&quot;,
+      &quot;heading&quot;: &quot;维持出现 | 为什么持续运行必然产生维护需求&quot;,
+      &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 3,
+        &quot;end&quot;: 6
+      },
+      &quot;support&quot;: {
+        &quot;startOffset&quot;: 915,
+        &quot;endOffset&quot;: 999,
+        &quot;textSha256&quot;: &quot;5bd6e6732ecfa1d37a6c8510d066922343496225e6e6a97b86afe7824380c3d9&quot;
+      },
+      &quot;text&quot;: &quot;维护首先不是修理，而是\n处理持续所产生的后果。修理通常发生在某个结构已经明显损坏之后，维\n护则更早，它关注的是一个仍然能够运行的现实，是否正在逐渐改变自己\n的承载条件。&quot;,
+      &quot;readingHref&quot;: &quot;/books/reality-continuity/&quot;,
+      &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-3&amp;chapter=CM-B3V1-P8-S001&amp;q=%E4%BF%AE%E7%90%86%E5%92%8C%E7%BB%B4%E6%8C%81%E5%88%86%E5%88%AB%E9%9D%A2%E5%AF%B9%E6%80%8E%E6%A0%B7%E7%9A%84%E6%9D%A1%E4%BB%B6%EF%BC%9F&amp;locale=zh-Hans&quot;,
+      &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+      &quot;purchaseHref&quot;: &quot;/books/reality-continuity/&quot;,
+      &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+      &quot;permissions&quot;: {
+        &quot;knowledgeExcerpt&quot;: true,
+        &quot;fullTextDownload&quot;: false,
+        &quot;reconstructBook&quot;: false
+      }
+    },
+    {
+      &quot;id&quot;: &quot;S2&quot;,
+      &quot;sourceCode&quot;: &quot;MKS-BOOK-3-OWNER-FINAL-EFBFDD21-ZH-HANS&quot;,
+      &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+      &quot;sourceAcceptanceDigest&quot;: &quot;2567043c746a447202fc6df3197f23df2758b55ee49008d4acbf27907c8912a8&quot;,
+      &quot;chapterId&quot;: &quot;CM-B3V1-P8-S059&quot;,
+      &quot;heading&quot;: &quot;可持续连续 | 为什么真正能够长期存在的运行必须能够改变自己&quot;,
+      &quot;sourceLanguage&quot;: &quot;zh-Hans&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 226,
+        &quot;end&quot;: 231
+      },
+      &quot;support&quot;: {
+        &quot;startOffset&quot;: 33,
+        &quot;endOffset&quot;: 398,
+        &quot;textSha256&quot;: &quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;
+      },
+      &quot;text&quot;: &quot;运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。&quot;,
+      &quot;readingHref&quot;: &quot;/books/reality-continuity/&quot;,
+      &quot;chapterDeepLink&quot;: &quot;/membership-source.html?bookCode=BOOK-3&amp;chapter=CM-B3V1-P8-S059&amp;q=%E4%BF%AE%E7%90%86%E5%92%8C%E7%BB%B4%E6%8C%81%E5%88%86%E5%88%AB%E9%9D%A2%E5%AF%B9%E6%80%8E%E6%A0%B7%E7%9A%84%E6%9D%A1%E4%BB%B6%EF%BC%9F&amp;locale=zh-Hans&quot;,
+      &quot;chapterDeepLinkState&quot;: &quot;SERVER_PERMISSION_CHECKED_CHAPTER_DESCRIPTION&quot;,
+      &quot;purchaseHref&quot;: &quot;/books/reality-continuity/&quot;,
+      &quot;purchaseLinkRole&quot;: &quot;BOOK_PRODUCT_INFORMATION_NOT_FULL_TEXT_ACCESS&quot;,
+      &quot;permissions&quot;: {
+        &quot;knowledgeExcerpt&quot;: true,
+        &quot;fullTextDownload&quot;: false,
+        &quot;reconstructBook&quot;: false
+      }
+    }
+  ],
+  &quot;glossary&quot;: [],
+  &quot;customerContext&quot;: null,
+  &quot;constraints&quot;: {
+    &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+    &quot;sourceLanguagesDisclosed&quot;: true,
+    &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;preserveConditions&quot;: true,
+    &quot;directAnswerWhenSupported&quot;: true,
+    &quot;claimCitationsRequired&quot;: true,
+    &quot;compareBothSides&quot;: true,
+    &quot;untrustedSourceInstructions&quot;: true,
+    &quot;noPrivateTextReconstruction&quot;: true,
+    &quot;noOCRPromotion&quot;: true,
+    &quot;noGlossaryPromotion&quot;: true,
+    &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+    &quot;purchaseMustNotReplaceAnswer&quot;: true
+  },
+  &quot;state&quot;: &quot;SOURCE_PACK_READY_RELEVANCE_REVIEW_REQUIRED&quot;,
+  &quot;tokenEstimate&quot;: {
+    &quot;estimated&quot;: 2162,
+    &quot;conservativeInputTokenCeiling&quot;: 4835,
+    &quot;actualTokens&quot;: null,
+    &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+  },
+  &quot;packDigest&quot;: &quot;add212e2f04b22cdddb3810e466d7ba4932583d0948e31930b5cf39e187b818e&quot;
+}</pre></details><details><summary>N5 · 一个国家的终结为什么不能证明文明全部归零？ · SOURCE_INSUFFICIENT</summary><p>FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING；LLM答案 NOT_RUN。</p><pre>{
+  &quot;question&quot;: &quot;一个国家的终结为什么不能证明文明全部归零？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;sources&quot;: [],
+  &quot;glossary&quot;: [],
+  &quot;customerContext&quot;: null,
+  &quot;constraints&quot;: {
+    &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+    &quot;sourceLanguagesDisclosed&quot;: true,
+    &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;preserveConditions&quot;: true,
+    &quot;directAnswerWhenSupported&quot;: true,
+    &quot;claimCitationsRequired&quot;: true,
+    &quot;compareBothSides&quot;: true,
+    &quot;untrustedSourceInstructions&quot;: true,
+    &quot;noPrivateTextReconstruction&quot;: true,
+    &quot;noOCRPromotion&quot;: true,
+    &quot;noGlossaryPromotion&quot;: true,
+    &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+    &quot;purchaseMustNotReplaceAnswer&quot;: true
+  },
+  &quot;state&quot;: &quot;SOURCE_INSUFFICIENT&quot;,
+  &quot;tokenEstimate&quot;: {
+    &quot;estimated&quot;: 339,
+    &quot;conservativeInputTokenCeiling&quot;: 1190,
+    &quot;actualTokens&quot;: null,
+    &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+  },
+  &quot;packDigest&quot;: &quot;fd7c88e0e0ae513c7ef6d5bafe59e500a9eeef572a82bdf5c86bb8d06d9f4c95&quot;
+}</pre></details><details><summary>N6 · 文明传统相近能保证两个国家没有冲突吗？ · SOURCE_INSUFFICIENT</summary><p>FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING；LLM答案 NOT_RUN。</p><pre>{
+  &quot;question&quot;: &quot;文明传统相近能保证两个国家没有冲突吗？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;sources&quot;: [],
+  &quot;glossary&quot;: [],
+  &quot;customerContext&quot;: null,
+  &quot;constraints&quot;: {
+    &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+    &quot;sourceLanguagesDisclosed&quot;: true,
+    &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;preserveConditions&quot;: true,
+    &quot;directAnswerWhenSupported&quot;: true,
+    &quot;claimCitationsRequired&quot;: true,
+    &quot;compareBothSides&quot;: true,
+    &quot;untrustedSourceInstructions&quot;: true,
+    &quot;noPrivateTextReconstruction&quot;: true,
+    &quot;noOCRPromotion&quot;: true,
+    &quot;noGlossaryPromotion&quot;: true,
+    &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+    &quot;purchaseMustNotReplaceAnswer&quot;: true
+  },
+  &quot;state&quot;: &quot;SOURCE_INSUFFICIENT&quot;,
+  &quot;tokenEstimate&quot;: {
+    &quot;estimated&quot;: 336,
+    &quot;conservativeInputTokenCeiling&quot;: 1184,
+    &quot;actualTokens&quot;: null,
+    &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+  },
+  &quot;packDigest&quot;: &quot;393f444796747c1b49195dc1e42dfca6be7e962ea693599a087df6858b5956b6&quot;
+}</pre></details><details><summary>N7 · 意识运行到底指什么？ · SOURCE_INSUFFICIENT</summary><p>FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING；LLM答案 NOT_RUN。</p><pre>{
+  &quot;question&quot;: &quot;意识运行到底指什么？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;sources&quot;: [],
+  &quot;glossary&quot;: [],
+  &quot;customerContext&quot;: null,
+  &quot;constraints&quot;: {
+    &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+    &quot;sourceLanguagesDisclosed&quot;: true,
+    &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;preserveConditions&quot;: true,
+    &quot;directAnswerWhenSupported&quot;: true,
+    &quot;claimCitationsRequired&quot;: true,
+    &quot;compareBothSides&quot;: true,
+    &quot;untrustedSourceInstructions&quot;: true,
+    &quot;noPrivateTextReconstruction&quot;: true,
+    &quot;noOCRPromotion&quot;: true,
+    &quot;noGlossaryPromotion&quot;: true,
+    &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+    &quot;purchaseMustNotReplaceAnswer&quot;: true
+  },
+  &quot;state&quot;: &quot;SOURCE_INSUFFICIENT&quot;,
+  &quot;tokenEstimate&quot;: {
+    &quot;estimated&quot;: 323,
+    &quot;conservativeInputTokenCeiling&quot;: 1157,
+    &quot;actualTokens&quot;: null,
+    &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+  },
+  &quot;packDigest&quot;: &quot;49d08e4e0d5b853c0e473f8e81244804eb106165934c3fd01febf857fd605bb6&quot;
+}</pre></details><details><summary>N8 · 请确定明天哪座城市必定爆发战争。 · SOURCE_INSUFFICIENT</summary><p>FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING；LLM答案 NOT_RUN。</p><pre>{
+  &quot;question&quot;: &quot;请确定明天哪座城市必定爆发战争。&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;sources&quot;: [],
+  &quot;glossary&quot;: [],
+  &quot;customerContext&quot;: null,
+  &quot;constraints&quot;: {
+    &quot;answerLocale&quot;: &quot;zh-Hans&quot;,
+    &quot;sourceLanguagesDisclosed&quot;: true,
+    &quot;translationDoesNotAcceptEnglishManuscript&quot;: true,
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;preserveConditions&quot;: true,
+    &quot;directAnswerWhenSupported&quot;: true,
+    &quot;claimCitationsRequired&quot;: true,
+    &quot;compareBothSides&quot;: true,
+    &quot;untrustedSourceInstructions&quot;: true,
+    &quot;noPrivateTextReconstruction&quot;: true,
+    &quot;noOCRPromotion&quot;: true,
+    &quot;noGlossaryPromotion&quot;: true,
+    &quot;customerContextIsCustomerSuppliedNotEstablishedFact&quot;: true,
+    &quot;purchaseMustNotReplaceAnswer&quot;: true
+  },
+  &quot;state&quot;: &quot;SOURCE_INSUFFICIENT&quot;,
+  &quot;tokenEstimate&quot;: {
+    &quot;estimated&quot;: 332,
+    &quot;conservativeInputTokenCeiling&quot;: 1175,
+    &quot;actualTokens&quot;: null,
+    &quot;method&quot;: &quot;UTF8_BYTE_CONSERVATIVE_BOUND_NOT_PROVIDER_USAGE&quot;
+  },
+  &quot;packDigest&quot;: &quot;da4d59c461242bfcbedfa50707cada69946f3ed46d951daddc7476cd1d436474&quot;
+}</pre></details><h2>源码／授权剩余项</h2><table><tr><th>项</th><th>缺少什么</th><th>下一步</th></tr><tr><td>CURRENT_BUILD_IDENTITY · BLOCKED · LOCAL_BUILD</td><td>Compiled output exists but build input identity must match the current relevant dependency manifest; changed files are listed below.</td><td>Preserve concurrent source changes; rerun only affected consumers before a stable build. Do not use old output identity as PASS.</td></tr><tr><td>CREDIT_CUTOVER_AND_MIGRATION · PARTIAL · SOURCE_AND_GOVERNANCE</td><td>Read-only old/new spend and pending-reservation reconciliation passed QA; resubscription preserves old units. Production balances were not read. A unique migration sequence and dispatch fencing must be approved and applied before switching; no concurrent dispatch allowed.</td><td>Register additive schema and reconcile a read-only production snapshot when authorized; drain unknown/pending usage, preserve grants, then enable exactly one dispatcher. Rollback disables both while retaining all ledger rows.</td></tr><tr><td>NAVIGATION_SOURCE_CONSUMERS · PARTIAL · SOURCE</td><td>BaZi saved Navigation owner/consent/version/report/included-benefit bridge tested with synthetic fixtures. Real saved-context browser delivery is not proved. Relationship/Profile/Financial prose adapters are not wired. My Reality saved-source projection remains QA-gated.</td><td>Reuse each actual owner and approved native projection; add adapters and test the same persisted-object chain. Do not fabricate completed Navigation.</td></tr><tr><td>CURRENT_FACTS_RESEARCH · BLOCKED · SOURCE_AND_RUNTIME</td><td>Repo has gateway and source admission, but current endpoint/host configuration is unverified, tool cost is not recorded into this task workflow, jurisdiction and freshness customer cases are unproved; gateway also lacks a bounded request timeout.</td><td>Validate the existing service configuration, priced tool receipts, timeouts, freshness/jurisdiction and failure states before enabling research. Research remains denied.</td></tr><tr><td>EN_MODEL_ANSWER_QUALITY · NOT_RUN · SOURCE</td><td>English question recognition, approved glossary hints, search-only cross-language expansion and Chinese-source permissions now return 2 sources in all 3 browser widths. Actual English model answers remain unevaluated.</td><td>Run the separately authorized paired model experiment; disclose Chinese source language without accepting English manuscript text.</td></tr><tr><td>MODEL_DELIVERY_AND_PURCHASE_SCOPE · NOT_RUN · SOURCE</td><td>Permission-checked chapter description is implemented and browser-tested; PDF support positions do not create a PDF link. Related book information is separate from the answer. Model delivery and actual book checkout are not activated or proved.</td><td>Validate actual model answers under independent experiment authorization; do not treat source descriptions as full-text access or checkout completion.</td></tr><tr><td>EXPERIMENT_AUTHORIZATION_AND_MODEL_ACCESS · NOT_RUN · PAID_AUTHORIZATION</td><td>Owner has not issued independent paid authorization. Server model whitelist/account access and live usage capture are unverified. The preflight is an offline simulation.</td><td>Review same-question/same-pack plan, obtain independent authorization within USD0.60/20 calls/10 per model/no retry, verify model access and metering, then run first-call inspection. Do not deduct member Credits.</td></tr><tr><td>SEVEN_BOOK_SOURCE_SCOPE · PARTIAL · SOURCE_AND_CONTENT</td><td>982-chapter whole closure remains incomplete. Original 12 packs retained, but five Book V packs lack accepted derivative provenance in the stricter member candidate. OCR/cross-book/other unaccepted content remain isolated.</td><td>Complete source-dependent quality scopes and provenance without re-extracting unchanged sources; do not equate an experiment with all-seven-book completion.</td></tr></table><h2>共享配置及构建差异</h2><pre>{
+  &quot;shared&quot;: {
+    &quot;files&quot;: [
+      {
+        &quot;path&quot;: &quot;wrangler.jsonc&quot;,
+        &quot;sha256&quot;: &quot;a1cc8849a23a5eb3260a940850c7cb13bd91b5dea2f9c83b67ef3b5b06207188&quot;,
+        &quot;changedByThisTask&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;functions/commerce/commerce-stripe-api.js&quot;,
+        &quot;sha256&quot;: &quot;82bbf13b57990d9b28e960da0aab532d41e8f4f49e3aa0c25b64dd122903f682&quot;,
+        &quot;changedByThisTask&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;functions/commerce/commerce-stripe-events.js&quot;,
+        &quot;sha256&quot;: &quot;dd20da53aa7893e3c1bbeecdda25664c96dff8ef6c8dc15291cd3149723ad812&quot;,
+        &quot;changedByThisTask&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;functions/pws/commercial/stripe-product-registry.js&quot;,
+        &quot;sha256&quot;: &quot;df13b4dc9665ee2310030395f128d4d1a447e00773ed6bf6664147a548dbeb77&quot;,
+        &quot;changedByThisTask&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;functions/account/paid-report-question-generation.js&quot;,
+        &quot;sha256&quot;: &quot;d56f727c2e3ae24583842eee1e2096cef4fc0cc90fd928c689ed78643baecd2a&quot;,
+        &quot;changedByThisTask&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;functions/personal-reading/continuity/continuity-quota-d1.js&quot;,
+        &quot;sha256&quot;: &quot;f86d0471460e03af92833e1b6124e958165a01be0a2312c8069cb42c34345cf5&quot;,
+        &quot;changedByThisTask&quot;: false
+      }
+    ],
+    &quot;headAdvance&quot;: {
+      &quot;from&quot;: &quot;8ecbea951c8d50af29fe47d8448aaa987e7644a7&quot;,
+      &quot;to&quot;: &quot;890587f9cc830c1a4be80283618212266c70ae5b&quot;,
+      &quot;classification&quot;: &quot;UNRELATED_CONCURRENT_CHANGE_OF_GIT_REF; FILE_DIGESTS_DEFINE_FRESHNESS&quot;
+    },
+    &quot;productionSource&quot;: {
+      &quot;stripeEnvironment&quot;: &quot;LIVE&quot;,
+      &quot;renderer&quot;: [
+        {
+          &quot;binding&quot;: &quot;METHOD_REPORT_RENDERER&quot;,
+          &quot;service&quot;: &quot;phios-method-report-renderer-production&quot;
+        }
+      ],
+      &quot;providerEnabled&quot;: &quot;false&quot;,
+      &quot;p9&quot;: {
+        &quot;PHIOS_P9_CANARY_ENABLED&quot;: &quot;false&quot;,
+        &quot;PHIOS_P9_CHECKOUT_ENABLED&quot;: &quot;false&quot;,
+        &quot;PHIOS_P9_REFUND_ENABLED&quot;: &quot;false&quot;
+      }
+    },
+    &quot;previewSource&quot;: {
+      &quot;stripeEnvironment&quot;: &quot;QA&quot;
+    },
+    &quot;cloudConfiguration&quot;: &quot;NOT_READ_THIS_TURN; PRIOR_VERIFIED_LIVE_FLAG_NOT_OVERWRITTEN&quot;,
+    &quot;secretRead&quot;: false,
+    &quot;remoteMutation&quot;: false
+  },
+  &quot;changedBuildInputs&quot;: [
+    {
+      &quot;path&quot;: &quot;functions/_lib/knowledge-source-eligibility.js&quot;,
+      &quot;buildStartSha&quot;: &quot;59d4249935561616e7b76d8776e91e2b3b757656dd6f7dc52e7d19445b3a0043&quot;,
+      &quot;currentSha&quot;: &quot;a505d956d3a80c2b4ee7b8980640e7e2722268427aaaa4195bab5f6daa23e9c4&quot;,
+      &quot;classification&quot;: &quot;CONCURRENT_RELEVANT_CHANGE&quot;
+    },
+    {
+      &quot;path&quot;: &quot;scripts/build-cloudflare-pages.mjs&quot;,
+      &quot;buildStartSha&quot;: &quot;a50a87e0e8b9269535f68ea2cfec33a6f23e8ea0670c1d664bb517d60650cf3b&quot;,
+      &quot;currentSha&quot;: &quot;33ced66520baeb92fb8ca14e7d8f8a5e01304588e8f0798fd53705e51c86ac89&quot;,
+      &quot;classification&quot;: &quot;CONCURRENT_RELEVANT_CHANGE&quot;
+    }
+  ]
+}</pre><h2>真实浏览器截图</h2><details><summary>1280px · en</summary><img src="browser-en-1280.png" alt="Controlled local membership preview"><p>来源包数量 2；模型未执行。</p></details><details><summary>1280px · zh-Hans</summary><img src="browser-zh-Hans-1280.png" alt="Controlled local membership preview"><p>来源包数量 2；模型未执行。</p></details><details><summary>390px · en</summary><img src="browser-en-390.png" alt="Controlled local membership preview"><p>来源包数量 2；模型未执行。</p></details><details><summary>390px · zh-Hans</summary><img src="browser-zh-Hans-390.png" alt="Controlled local membership preview"><p>来源包数量 2；模型未执行。</p></details><details><summary>375px · en</summary><img src="browser-en-375.png" alt="Controlled local membership preview"><p>来源包数量 2；模型未执行。</p></details><details><summary>375px · zh-Hans</summary><img src="browser-zh-Hans-375.png" alt="Controlled local membership preview"><p>来源包数量 2；模型未执行。</p></details><p><a href="STATE.json">完整实现／版本／阻塞台账</a></p><p>本页离线检查Provider 0；独立实验已运行20次，实际USD0.08938570；真实付款／退款0；R2删除0；生产D1迁移0；commit／push／deploy0；P9／Stripe／Secrets未修改。历史接受、失败与回滚不删除，不用本候选扩大整体完成范围。</p><script type="module" src="../../../assets/js/pages/membership-ask-credit-r1.js"></script></html>

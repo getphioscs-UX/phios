@@ -1,0 +1,351 @@
+{
+  "status": "BLOCKED_OLD_DEPLOYMENT_WRITE_PATH_REMAINS",
+  "acceptedCommit": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+  "acceptedTree": "44ff79ccb5885846ad6bfdd1cb1c9cd56b60b318",
+  "R5Digest": "a95f1892c7c32df76b6afd6dd16d10510389a021f24135feacc882af57cc7bd2",
+  "sourceIdentityGate": "PASS_LOCAL_AND_REMOTE_TRACKING_ACCEPTED_SHA",
+  "deploymentIdentity": {
+    "id": "b7858e3c-da3e-4edb-9432-62c0f2aab087",
+    "url": "https://b7858e3c.phios-github.pages.dev",
+    "environment": "production",
+    "sourceCommit": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+    "sourceTree": "44ff79ccb5885846ad6bfdd1cb1c9cd56b60b318",
+    "sourceTreeProof": "Immutable Git commit tree verified locally; Cloudflare Git deployment metadata binds this exact clean commit.",
+    "commitDirty": false,
+    "createdOn": "2026-10-12T03:09:35.675393Z",
+    "deployedAt": "2026-10-12T03:13:16.583832Z",
+    "deployedAtAsiaKualaLumpur": "12/10/2026, 11:13:16",
+    "stage": {
+      "name": "deploy",
+      "started_on": "2026-10-12T03:12:57.948447Z",
+      "ended_on": "2026-10-12T03:13:16.583832Z",
+      "status": "success"
+    },
+    "origin": "EXISTING_GITHUB_INTEGRATION_DEPLOYMENT_OBSERVED_DURING_G3",
+    "explicitDeploymentsPerformedThisRun": 0,
+    "providerSourceIdentityProven": true,
+    "liveRuntimeSourceAttestationBeyondProviderMetadata": "UNVERIFIED"
+  },
+  "productionAliases": {
+    "canonicalProjectDomains": [
+      "phios-github.pages.dev",
+      "getphios.com"
+    ],
+    "canonicalAliases": [
+      "https://getphios.com"
+    ],
+    "registeredDeploymentHostnameCount": 3570,
+    "actualAllHostnameReachabilityCount": "UNVERIFIED",
+    "confirmedReachableOldDeploymentCount": 1,
+    "inventoryPath": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R5-PAGES-DEPLOYMENT-INVENTORY.json",
+    "SHA256": "963616f4396e0dbd4dadb3e981bcae32405b5bed78cfddeb81017e9ff8563c97"
+  },
+  "oldDeploymentAudit": {
+    "metadataComplete": true,
+    "total": 3555,
+    "production": 3234,
+    "preview": 321,
+    "successfulDeployments": 2331,
+    "sameProductionD1Bindings": 3174,
+    "potentialUnisolatedExecutionSurfaces": 2137,
+    "potentialOldUnisolatedExecutionSurfaces": 2136,
+    "confirmedOldUnisolatedSurface": {
+      "id": "d96beed8-bb42-4bb7-9a18-688951adabb8",
+      "environment": "production",
+      "url": "https://d96beed8.phios-github.pages.dev",
+      "aliases": [],
+      "createdOn": "2026-10-12T01:01:47.592523Z",
+      "stage": {
+        "name": "deploy",
+        "started_on": "2026-10-12T01:06:21.187143Z",
+        "ended_on": "2026-10-12T01:06:40.371102Z",
+        "status": "success"
+      },
+      "source": {
+        "branch": "main",
+        "commit_hash": "890587f9cc830c1a4be80283618212266c70ae5b",
+        "commit_message": "P9 G1-R4: close knowledge admission and operational execution safety",
+        "commit_dirty": false
+      },
+      "usesFunctions": true,
+      "D1": [
+        {
+          "name": "RUNTIME_DB",
+          "id": "073639fa-01e4-4868-af10-6ed032637dab",
+          "sameProductionD1": true
+        }
+      ],
+      "flags": {
+        "PHIOS_D1_MAINTENANCE_MODE": null,
+        "PHIOS_P9_CANARY_ENABLED": "false",
+        "PHIOS_P9_CHECKOUT_ENABLED": "false",
+        "PHIOS_P9_REFUND_ENABLED": "false",
+        "REPORT_PROVIDER_LIVE_ALLOWED": "false"
+      },
+      "hasProductionD1": true,
+      "exactR5Source": false,
+      "modeMetadata": "ABSENT",
+      "maintenanceIsolatedByMetadata": false,
+      "possibleUnisolatedExecutionSurface": true
+    },
+    "reachabilityProof": [
+      {
+        "deploymentId": "d96beed8-bb42-4bb7-9a18-688951adabb8",
+        "url": "https://d96beed8.phios-github.pages.dev/",
+        "method": "GET",
+        "status": 200,
+        "location": null,
+        "bodyBytes": 23687,
+        "anonymousSession": null,
+        "customerDataUsed": false,
+        "writeProbe": false
+      },
+      {
+        "deploymentId": "d96beed8-bb42-4bb7-9a18-688951adabb8",
+        "url": "https://d96beed8.phios-github.pages.dev/api/auth/session",
+        "method": "GET",
+        "status": 200,
+        "location": null,
+        "bodyBytes": 77,
+        "anonymousSession": {
+          "authenticated": false,
+          "providerConfigured": false
+        },
+        "customerDataUsed": false,
+        "writeProbe": false
+      }
+    ],
+    "allOldPublicHostnamesRuntimeProbed": false,
+    "rootGuardPolicy": {
+      "sourceCommit": "890587f9cc830c1a4be80283618212266c70ae5b",
+      "middlewareSHA256": "3fdf18e61c655d3627e936b0d046b39aa9ed4d8b2166d109138bf5322f1a6f3d",
+      "guardSHA256": "8bd2aad62308f36a7548738da533ccd28d84e39c6192ebbbb57fc56901145546",
+      "absentServerMaintenanceMode": "OFF",
+      "OFFBehavior": "Pass-through; original production D1 binding is not wrapped.",
+      "claimBoundary": "Shows an exposed, unisolated execution surface and D1 capability. No unauthorized client exploit or successful production write was attempted."
+    }
+  },
+  "maintenanceMode": {
+    "currentCanonical": "ABSENT",
+    "oldConfirmedDeployment": "ABSENT",
+    "activationThisRun": false,
+    "reason": "Stopped at section 5 before section 6. Changing latest project configuration alone would not prove isolation of immutable old deployments."
+  },
+  "rootMiddlewareProof": {
+    "status": "NOT_PROVEN_PRODUCTION_ISOLATED",
+    "sourcePresentInAcceptedR5": true,
+    "READ_ONLYModeActive": false
+  },
+  "runtimeDbGuardProof": {
+    "status": "NOT_PROVEN_PRODUCTION",
+    "exec": {
+      "status": "NOT_RUN",
+      "reason": "Mandatory section 5 STOP: reachable old deployment has raw production D1 capability and no maintenance configuration. No unsafe write was attempted."
+    },
+    "batch": {
+      "status": "NOT_RUN",
+      "reason": "Mandatory section 5 STOP: reachable old deployment has raw production D1 capability and no maintenance configuration. No unsafe write was attempted."
+    },
+    "unknownSQL": {
+      "status": "NOT_RUN",
+      "reason": "Mandatory section 5 STOP: reachable old deployment has raw production D1 capability and no maintenance configuration. No unsafe write was attempted."
+    }
+  },
+  "writeDenialProbes": {
+    "status": "NOT_RUN",
+    "reason": "Mandatory section 5 STOP: reachable old deployment has raw production D1 capability and no maintenance configuration. No unsafe write was attempted."
+  },
+  "getWriteTrap": {
+    "status": "NOT_RUN",
+    "reason": "Mandatory section 5 STOP: reachable old deployment has raw production D1 capability and no maintenance configuration. No unsafe write was attempted."
+  },
+  "authWriteProbe": {
+    "status": "NOT_RUN",
+    "reason": "Mandatory section 5 STOP: reachable old deployment has raw production D1 capability and no maintenance configuration. No unsafe write was attempted."
+  },
+  "accountWriteProbe": {
+    "status": "NOT_RUN",
+    "reason": "Mandatory section 5 STOP: reachable old deployment has raw production D1 capability and no maintenance configuration. No unsafe write was attempted."
+  },
+  "commerceWriteProbe": {
+    "status": "NOT_RUN",
+    "reason": "Mandatory section 5 STOP: reachable old deployment has raw production D1 capability and no maintenance configuration. No unsafe write was attempted."
+  },
+  "p8WriteProbe": {
+    "status": "NOT_RUN",
+    "reason": "Mandatory section 5 STOP: reachable old deployment has raw production D1 capability and no maintenance configuration. No unsafe write was attempted."
+  },
+  "probeMutationCount": 0,
+  "probeMutationCountMeaning": "No write-denial probes or D1 requests executed; only 2 anonymous GET reachability requests against known R4 route behavior. No post-probe database row-count assertion claimed.",
+  "nonPagesWriterAudit": {
+    "status": "PASS_READ_ONLY_DEPLOYED_METADATA",
+    "externalSameD1Count": 0,
+    "workers": 2,
+    "activeVersions": 2,
+    "method": "GET_ONLY_CURRENT_DEPLOYED_VERSIONS_AND_BINDINGS",
+    "requests": 11,
+    "workerDetails": [
+      {
+        "service": "phios-method-report-renderer-production",
+        "category": "renderer",
+        "hasSameProductionDatabase": false,
+        "bindingNames": [],
+        "canWrite": "NO_SAME_D1_BINDING",
+        "triggerTypes": [
+          "fetch"
+        ],
+        "currentDeploymentId": "574e075a-8248-4ca9-a837-93b8417f490c",
+        "versions": [
+          {
+            "versionId": "bfe8f53d-8874-422e-bf94-ee0137dc1442",
+            "percentage": 100,
+            "bindingsReadable": true,
+            "hasSameProductionDatabase": false,
+            "bindingNames": []
+          }
+        ],
+        "serviceBindings": [],
+        "durableObjectBindings": [],
+        "queueBindings": []
+      },
+      {
+        "service": "phios-method-report-renderer-qa",
+        "category": "renderer",
+        "hasSameProductionDatabase": false,
+        "bindingNames": [],
+        "canWrite": "NO_SAME_D1_BINDING",
+        "triggerTypes": [
+          "fetch"
+        ],
+        "currentDeploymentId": "2c5b6186-11df-4b3f-ad4b-391249439995",
+        "versions": [
+          {
+            "versionId": "ca723be5-bb76-4e81-9a2b-37e404139456",
+            "percentage": 100,
+            "bindingsReadable": true,
+            "hasSameProductionDatabase": false,
+            "bindingNames": []
+          }
+        ],
+        "serviceBindings": [],
+        "durableObjectBindings": [],
+        "queueBindings": []
+      }
+    ],
+    "pagesProjects": [
+      {
+        "service": "phios-github",
+        "environment": "preview",
+        "hasSameProductionDatabase": false,
+        "bindingNames": [],
+        "canonicalDeploymentId": "b7858e3c-da3e-4edb-9432-62c0f2aab087"
+      },
+      {
+        "service": "phios-github",
+        "environment": "production",
+        "hasSameProductionDatabase": true,
+        "bindingNames": [
+          "RUNTIME_DB"
+        ],
+        "canonicalDeploymentId": "b7858e3c-da3e-4edb-9432-62c0f2aab087"
+      }
+    ]
+  },
+  "providerGateState": {
+    "status": "CLOSED_FOR_P9",
+    "source": "Actual project and canonical deployment env metadata",
+    "REPORT_PROVIDER_LIVE_ALLOWED": "false",
+    "canary": "false"
+  },
+  "paymentGateState": {
+    "status": "CLOSED_FOR_P9",
+    "checkout": "false",
+    "refund": "false",
+    "STRIPE_ENVIRONMENT": "LIVE",
+    "realCheckoutRequests": 0,
+    "stripeNetworkCalls": 0
+  },
+  "generalSaleGateState": {
+    "status": "P9_BZR_CLOSED_BY_CANARY_AND_CHECKOUT_GATES",
+    "canonicalCanary": "false",
+    "canonicalCheckout": "false",
+    "scope": "P9/BZR activation boundary; no general sale enabled by this run."
+  },
+  "productionIsolation": "NOT_PASS_OLD_EXECUTION_SURFACE_UNISOLATED",
+  "newRestorePoint": {
+    "status": "NOT_CAPTURED",
+    "reason": "Isolation PASS prerequisite not met; no prior bookmark reused."
+  },
+  "schemaFingerprint": "NOT_READ_STOPPED_BEFORE_ISOLATION_PASS",
+  "migrationHistory": "NOT_READ_STOPPED_BEFORE_ISOLATION_PASS",
+  "preMigrationBaseline": "NOT_READ_STOPPED_BEFORE_ISOLATION_PASS",
+  "runtimeSmoke": {
+    "R5CustomerPaths": "NOT_RUN_STOPPED_AT_OLD_ALIAS_GATE",
+    "sampledOldReadPaths": [
+      {
+        "deploymentId": "d96beed8-bb42-4bb7-9a18-688951adabb8",
+        "url": "https://d96beed8.phios-github.pages.dev/",
+        "method": "GET",
+        "status": 200,
+        "location": null,
+        "bodyBytes": 23687,
+        "anonymousSession": null,
+        "customerDataUsed": false,
+        "writeProbe": false
+      },
+      {
+        "deploymentId": "d96beed8-bb42-4bb7-9a18-688951adabb8",
+        "url": "https://d96beed8.phios-github.pages.dev/api/auth/session",
+        "method": "GET",
+        "status": 200,
+        "location": null,
+        "bodyBytes": 77,
+        "anonymousSession": {
+          "authenticated": false,
+          "providerConfigured": false
+        },
+        "customerDataUsed": false,
+        "writeProbe": false
+      }
+    ],
+    "fullLiveCustomerValidation": "RUNTIME_UNVERIFIED"
+  },
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "productionMutationsCausedByProbes": 0,
+  "productionConfigMutationsThisRun": 0,
+  "productionD1QueriesThisRun": 0,
+  "D1Migration": "NOT_EXECUTED",
+  "sourceEditsThisRun": 0,
+  "commitThisRun": 0,
+  "pushThisRun": 0,
+  "remainingBlocker": "P9_G3_R5_OLD_DEPLOYMENT_WRITE_PATH_REMAINS",
+  "stopAuthority": "User authorization section 5: If any old alias/deployment remains reachable and can write production D1: STOP.",
+  "requiredNextAuthority": "Separately govern removal of production-D1 capability/reachability for historical deployments. Do not assume current-project READ_ONLY changes retrofit old snapshots; no deployment deletions performed.",
+  "evidenceFiles": [
+    {
+      "path": "tmp/p9-g3-r5/PREDEPLOY-METADATA.json",
+      "SHA256": "791fa95dc47bd684e31f8d451000b20c09e572a5f9d3fb5a89cc5f23ba6ed7a3"
+    },
+    {
+      "path": "tmp/p9-g3-r5/PROJECT-GATE-CHECK.json",
+      "SHA256": "276c792756a414e4e3bef744e85b155a16670eb46d316ca08d892ea7422e2181"
+    },
+    {
+      "path": "tmp/p9-g3-r5/ALL-DEPLOYMENTS-BINDING-AUDIT.json",
+      "SHA256": "963616f4396e0dbd4dadb3e981bcae32405b5bed78cfddeb81017e9ff8563c97"
+    },
+    {
+      "path": "tmp/p9-g3-r5/NON-PAGES-WRITERS.json",
+      "SHA256": "948d33b6a31550c59b6085ea736ad091878d8a0c153ff876b525e5583e3f8212"
+    },
+    {
+      "path": "tmp/p9-g3-r5/NON-PAGES-WRITERS-PRIVATE.json",
+      "SHA256": "15b3f88e117acc5875ac0a5da8e391f6c2366c3e33d19188aa92b4b4feb8e3e4"
+    }
+  ],
+  "mainIndex": "EMPTY",
+  "historicalRecordsUnchanged": true
+}

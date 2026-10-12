@@ -314,10 +314,20 @@ assert.equal(notFound.historicalFreezeMutated,false);assert.equal(notFound.runti
 const notFoundSource=await fs.readFile(path.join(root,notFound.page.path),'utf8');assert.equal(crypto.createHash('sha256').update(notFoundSource).digest('hex'),notFound.page.sha256);
 assert.match(notFoundSource,/<meta name="robots" content="noindex">/);for(const href of ['/','/search/','/knowledge/','/contact.html'])assert(notFoundSource.includes(`href="${href}"`));
 assert.deepEqual(notFound.pageCapabilities.flatMap(c=>c.pages),['404.html']);
+const membershipSource=await readJson('docs/pja/pja-membership-source-capability-successor-v3.json');
+assert.equal(membershipSource.status,'ENGINEERING_RECONCILIATION');
+assert.equal(membershipSource.predecessor.path,'docs/pja/pja-not-found-capability-successor-v2.json');
+assert.equal(membershipSource.predecessor.sha256,crypto.createHash('sha256').update(await fs.readFile(path.join(root,membershipSource.predecessor.path))).digest('hex'));
+assert.equal(membershipSource.historicalFreezeMutated,false);
+assert.equal(membershipSource.runtimeWriteAuthorityCreated,false);
+assert.deepEqual(membershipSource.files.map(f=>f.path),['membership-source.html','assets/js/pages/membership-source.js']);
+for(const file of membershipSource.files)assert.equal(crypto.createHash('sha256').update(await fs.readFile(path.join(root,file.path))).digest('hex'),file.sha256,`Membership source presentation drift: ${file.path}`);
+assert.deepEqual(membershipSource.pageCapabilities.flatMap(c=>c.pages),['membership-source.html']);
 const effectivePageCapabilities = [
   ...freeze.pageCapabilities,
   ...pageCapabilityExtension.pageCapabilities,
-  ...notFound.pageCapabilities
+  ...notFound.pageCapabilities,
+  ...membershipSource.pageCapabilities
 ];
 const mappedPages = effectivePageCapabilities
   .flatMap(capability => capability.pages)

@@ -1,4 +1,5 @@
 import {corpusSourceAllowed,manuscriptSourceAllowed} from '../_lib/knowledge-source-eligibility.js';
+import {selectSourceBoundExplanation,explanationQueryTerms} from './source-bound-explanation-units.js';
 export const MANUSCRIPT_SOURCE_RUNTIME_CODE = 'MANUSCRIPT_KNOWLEDGE_SOURCE_RUNTIME';
 export const MANUSCRIPT_SOURCE_RUNTIME_VERSION = '1.1.0';
 
@@ -20,6 +21,7 @@ const clean = value => String(value ?? '')
 const normalized = value => clean(value).toLocaleLowerCase();
 const conceptQuery=value=>normalized(value).replace(/垮台|倒台/gu,'终结');
 const conceptQueryMatch=(concept,query)=>concept.aliases?.some(alias=>conceptQuery(query).includes(normalized(alias)))||(concept.termSets||[]).some(set=>set.every(term=>conceptQuery(query).includes(normalized(term))));
+const inferenceConstruction=q=>/(?:是否|能否|可以|能够|据此|仅凭|凭|从|就能|就可以).*(?:推断|断定|断言|认定|得出|判定)/u.test(q);
 
 function unique(values) {
   return [...new Set(values.filter(Boolean))];
@@ -108,7 +110,7 @@ function scoreRecord(record, query, terms, profile, specificity = null, prepared
   const explicitSubject=q.match(/^(?:既然|虽然|即使)?([\u3400-\u9fff]{1,8}?)(?:还在|仍然|正在|依然)/u)?.[1];
   if(explicitSubject&&!compactText.includes(explicitSubject))return 0;
   let score = 0;
-  const headingLabel = heading.split(/[|｜]/u)[0].trim();
+  const headingLabel = heading.split(/[|｜]/u)[0].replace(/^[✦◈◆◇❖]+\s*/u,'').trim();
   const nativeConceptLabel = headingLabel.match(/^[\u3400-\u9fff]{2,}(?=\s*[a-z]|$)/u)?.[0];
   if (nativeConceptLabel && q.includes(nativeConceptLabel)) score += 900;
   if (nativeConceptLabel && q.startsWith(nativeConceptLabel)) score += 1000;
@@ -132,6 +134,8 @@ function scoreRecord(record, query, terms, profile, specificity = null, prepared
   if(boundarySubjectMatch)score+=1200;
   const matchedConceptAliases=(record.retrievalConcepts||[]).filter(c=>conceptQueryMatch(c,q)).flatMap(c=>[...(c.aliases||[]).filter(a=>conceptQuery(q).includes(normalized(a))),...(c.termSets||[]).filter(set=>set.every(t=>conceptQuery(q).includes(normalized(t)))).map(set=>set.join(''))]);
   const chapterConceptMatch=matchedConceptAliases.length>0;
+  const supportedExplanation=selectSourceBoundExplanation(record,query,terms,MAX_EXCERPT_CHARS);
+  if(supportedExplanation)score+=500+supportedExplanation.score*15;
   if(chapterConceptMatch)score+=1200+Math.max(...matchedConceptAliases.map(alias=>alias.length))*300;
   if (q && headingLabel === q) score += 4000;
   const exactProfileQuestion = [...(profile?.naturalQuestions || []), ...(profile?.userLanguage || []), ...(profile?.aliases || []),...(record.approvedQuestions||[])].some(value => normalized(value) === q);
@@ -140,7 +144,12 @@ function scoreRecord(record, query, terms, profile, specificity = null, prepared
   if (q && text.includes(q)) score += 800;
   const nativeIntroductionMatch=compactQuestion.length>=4&&compact(record.text.slice(0,350)).includes(compactQuestion);
   if(nativeIntroductionMatch)score+=1600;
-  const meaningfulTerms = terms.filter(term => !/^(?:why|what|how|does|do|is|are|the|a|an|of|in|to|and|can|为什么|为何|什么|怎么|如何|请问|现实|运行|一个|以后|能够|需要|形成|持续|个人|people)$/i.test(term));
+  // Inference scaffolding must not dilute content relevance. Keep the original
+  // question unchanged (including negation); this affects recall, not entailment.
+  // In an inference question these are grammatical operators, not its topic.
+  // In a definition question (e.g. 推断是什么) they remain searchable content.
+  const inferenceQuestion=inferenceConstruction(q);
+  const meaningfulTerms = terms.filter(term => !(inferenceQuestion&&/^(?:从未|直接|推断)$/u.test(term))&&!/^(?:why|what|how|does|do|is|are|the|a|an|of|in|to|and|can|为什么|为何|什么|怎么|如何|请问|现实|运行|一个|以后|能够|需要|形成|持续|个人|people|可以|据此|断定|断言|认定|判定|认为|证明|足以|得出|结论|某个|某种|不到|仅凭|就能)$/i.test(term));
   if (!meaningfulTerms.length) return 0;
   let specificMatches = 0;
   for (const term of meaningfulTerms) {
@@ -182,7 +191,7 @@ function scoreRecord(record, query, terms, profile, specificity = null, prepared
   const conditionEvidence=conditionSubject&&conditionSubject.length>=4&&compactText.includes(conditionSubject);
   const namedBook=q.match(/第[一二三四五六七八九十\d]+册/u)?.[0]||q.match(/《([^》]+)》/u)?.[1];
   const namedStatusEvidence=namedBook&&compactText.includes(compact(namedBook))&&terms.includes('出售')&&compactText.includes('出售');
-  if(!chapterConceptMatch&&!boundarySubjectMatch&&!exactProfileQuestion&&!nativeIntroductionMatch&&!temporalConditionMatch&&!(durationActivityMatch&&localMatches>=2)&&!perspectiveCompletenessMatch&&!divergentExperienceMatch&&!titlePhraseMatch&&sharedPhraseLength<6&&!explicitSubjectEvidence&&!conditionEvidence&&!namedStatusEvidence&&!(localMatches>=3&&matchedContentWeight>=6)&&!(nativeConceptLabel&&q.includes(nativeConceptLabel))&&!q.includes(headingLabel)&&matchedWeight/Math.max(1,totalWeight)<0.35)return 0;
+  if(!supportedExplanation&&!chapterConceptMatch&&!boundarySubjectMatch&&!exactProfileQuestion&&!nativeIntroductionMatch&&!temporalConditionMatch&&!(durationActivityMatch&&localMatches>=2)&&!perspectiveCompletenessMatch&&!divergentExperienceMatch&&!titlePhraseMatch&&sharedPhraseLength<6&&!explicitSubjectEvidence&&!conditionEvidence&&!namedStatusEvidence&&!(localMatches>=3&&matchedContentWeight>=6)&&!(nativeConceptLabel&&q.includes(nativeConceptLabel))&&!q.includes(headingLabel)&&matchedWeight/Math.max(1,totalWeight)<0.35)return 0;
     if (specificity) {
       const subtitle = heading.slice(headingLabel.length);
       const comparison = q.match(/^(.+?)(?:与|和)(.+?)(?:有什么区别|有何区别|的区别|区别)/);
@@ -202,6 +211,8 @@ function scoreRecord(record, query, terms, profile, specificity = null, prepared
 }
 
 function selectArgumentUnit(record,query,terms,maximum){
+    const explained=selectSourceBoundExplanation(record,query,terms,maximum);
+    if(explained)return explained;
     const pair=String(query).match(/^(.+?)(?:和|与)(.+?)(?:有什么区别|有何区别|的区别|区别)/u);
     const subjects=pair?[pair[1],pair[2]].map(x=>normalized(x).replace(/^(?:请问|第[一二三四五六七八九十\d]+册(?:中|里|的)?)/u,'').trim()):[];
     const contrastUnit=unit=>unit.type==='DISTINCTION'&&subjects.length===2&&subjects.every(s=>s.length>=2&&normalized(record.text.slice(unit.startOffset,unit.endOffset)).replace(/\s+/gu,'').includes(s));
@@ -290,11 +301,14 @@ export function searchManuscriptCorpus({
   query,
   maximumResults = MAX_RESULTS,
   maximumExcerptChars = MAX_EXCERPT_CHARS,
-  maximumTotalExcerptChars = MAX_TOTAL_EXCERPT_CHARS
+  maximumTotalExcerptChars = MAX_TOTAL_EXCERPT_CHARS,
+  experimentAccess = null
 }) {
   if (!corpus || !Array.isArray(corpus.records)) return [];
-  const terms = manuscriptQueryTerms(query);
-  corpus={...corpus,records:corpus.records.filter(r=>manuscriptSourceAllowed({...source,...r,sourceSha256:source.sourceSha256,sectionSha256:r.sourceTextSha256||r.textSha256}))};
+  // Apply the same recall vocabulary before chapter ranking, not only after
+  // a chapter has survived selection. Original query remains unchanged.
+  const terms = explanationQueryTerms(query,manuscriptQueryTerms(query));
+  corpus={...corpus,records:corpus.records.filter(r=>manuscriptSourceAllowed({...source,...r,sourceSha256:source.sourceSha256,sectionSha256:r.reviewStatus==='HUMAN_APPROVED_FINAL'?r.textSha256:(r.sourceTextSha256||r.textSha256)},experimentAccess))};
   // Normalize each chapter once, rather than once per query term and again
   // during every coverage check. No corpus text or ranking rule changes.
   const correctionKey = JSON.stringify(corrections?.records || []);
@@ -305,7 +319,11 @@ export function searchManuscriptCorpus({
     return {record, prepared:{text,heading,dfText:record.text === rawRecord.text ? text : normalized(rawRecord.text),compactText:text.replace(/[\p{P}\p{S}\s]+/gu,'')}};
   });
   if (cachedPrepared?.correctionKey !== correctionKey) preparedCorpusCache.set(corpus,{correctionKey,records:preparedRecords});
-  const specificity = new Map(terms.map(term => [term,Math.log(1 + corpus.records.length / (1 + preparedRecords.filter(item => item.prepared.dfText.includes(term)).length))]));
+  // Out-of-vocabulary query words are not rare evidence. Giving an absent
+  // grammatical noun the highest IDF used to suppress the actual source.
+  // Keep a nonzero mismatch weight; do not discard the original query or
+  // weaken the minimum evidence / passage checks below.
+  const specificity = new Map(terms.map(term => {const frequency=preparedRecords.filter(item => item.prepared.dfText.includes(term)).length;return [term,!frequency&&inferenceConstruction(normalized(query))?0.25:Math.log(1+corpus.records.length/(1+frequency))];}));
   const ranked = preparedRecords
     .map(({record, prepared}) => {
       const profile = profiles.find(candidate => candidate.bookCode === source.bookCode && candidate.productionEligible === true && candidate.bookSources?.some(ref => ref.sectionCode === record.sectionCode));
@@ -320,9 +338,16 @@ export function searchManuscriptCorpus({
     if (results.length >= maximumResults || totalChars >= maximumTotalExcerptChars) break;
     const allowance = Math.min(maximumExcerptChars, maximumTotalExcerptChars - totalChars);
     if (allowance <= 0) break;
-    const excerpt = excerptFor(item.record, query, terms, allowance);
+    const isolatedArgument=item.record.experimentFragmentsOnly?selectArgumentUnit(item.record,query,terms,allowance):null;
+    if(item.record.experimentFragmentsOnly&&!isolatedArgument)continue;
+    const excerpt = isolatedArgument?clean(isolatedArgument.text):excerptFor(item.record, query, terms, allowance);
     if(!excerpt)continue;
-    const selectedArgument=selectArgumentUnit(item.record,query,terms,allowance);
+    let selectedArgument=selectArgumentUnit(item.record,query,terms,allowance);
+    // Accepted knowledge projections are bounded explanation units already;
+    // this does not expose the protected native manuscript or accept a new text.
+    if(!selectedArgument&&source.contentKind==='ACCEPTED_PUBLIC_KNOWLEDGE_UNITS_ONLY'&&item.record.reviewStatus==='HUMAN_APPROVED_FINAL'&&item.record.text.length<=allowance){
+      selectedArgument={unit:{argumentId:'ACCEPTED_KNOWLEDGE_PROJECTION',type:'BOUNDARY',startOffset:0,endOffset:item.record.text.length,textSha256:item.record.textSha256},explanationUnit:{sourceSectionId:item.record.sectionCode,locale:source.locale,mainArgument:item.record.text,support:{startOffset:0,endOffset:item.record.text.length,textSha256:item.record.textSha256},sourceTextKind:'ACCEPTED_KNOWLEDGE_PROJECTION_NOT_NATIVE_PDF_EXCERPT'}};
+    }
     totalChars += excerpt.length;
     results.push({
       sourceType: 'COMPLETED_MANUSCRIPT',
@@ -330,12 +355,14 @@ export function searchManuscriptCorpus({
       sourceCode: source.sourceCode,
       sourceVersion: source.version || source.sourceCode,
       sourceBinaryDigest: source.sourceSha256,
-      sourceAcceptanceDigest: source.acceptanceSha256 || source.sourceAcceptanceSha256 || null,
+      sourceAcceptanceDigest: source.acceptanceSha256 || source.sourceAcceptanceSha256 || source.sourceIdentitySha256 || null,
+      sourceAcceptanceBasis:source.sourceIdentitySha256&&!source.acceptanceSha256&&!source.sourceAcceptanceSha256?'VERIFIED_CURRENT_SOURCE_IDENTITY_INHERITANCE_NOT_NEW_TEXT_ACCEPTANCE':'EXISTING_SOURCE_ACCEPTANCE',
       sourceScopeAdmissionDigest: source.scopeAdmissionSha256 || null,
       wholeChapterQualified:item.record.wholeChapterQualified===true,
       sourceConceptAliases:(item.record.retrievalConcepts||[]).flatMap(c=>c.aliases||[]),
-      selectedArgumentUnit:selectedArgument?{argumentId:selectedArgument.unit.argumentId,type:selectedArgument.unit.type,startOffset:selectedArgument.unit.startOffset,endOffset:selectedArgument.unit.endOffset,textSha256:selectedArgument.unit.textSha256}:null,
-      scopeMatch:Boolean(selectedArgument&&(item.record.retrievalConcepts||[]).some(c=>conceptQueryMatch(c,query))),
+      selectedArgumentUnit:selectedArgument?{argumentId:selectedArgument.unit.argumentId,type:selectedArgument.unit.type,startOffset:selectedArgument.unit.startOffset,endOffset:selectedArgument.unit.endOffset,textSha256:selectedArgument.unit.textSha256,comparisonSubjects:selectedArgument.unit.comparisonSubjects||null}:null,
+      explanationUnit:selectedArgument?.explanationUnit||null,
+      scopeMatch:Boolean(selectedArgument&&((item.record.retrievalConcepts||[]).some(c=>conceptQueryMatch(c,query))||selectedArgument.evidenceMatch?.distinctiveAnchors?.length)),
       bookCode: source.bookCode,
       bookTitle: source.title,
       bookTitleEn: source.titleEn,
@@ -364,8 +391,8 @@ export function searchManuscriptCorpus({
   return results;
 }
 
-export async function loadR2RetrievalCorpus(binding, source) {
-  if(!corpusSourceAllowed(source))return null;
+export async function loadR2RetrievalCorpus(binding, source, experimentAccess=null) {
+  if(!corpusSourceAllowed(source,experimentAccess))return null;
   if (!binding?.get) {
     const error = new Error('MANUSCRIPT_SOURCE_STORAGE_UNAVAILABLE');
     error.code = 'MANUSCRIPT_SOURCE_STORAGE_UNAVAILABLE';

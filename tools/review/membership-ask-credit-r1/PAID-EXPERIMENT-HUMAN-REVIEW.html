@@ -1,0 +1,599 @@
+<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Knowledge Ask · Actual Luna / Terra experiment</title><style>body{font:16px/1.6 system-ui;background:#111b28;color:#eef3fa;margin:30px auto;max-width:1180px;padding:20px}a{color:#a5cffd}section,article{border:1px solid #526074;padding:16px;margin:14px 0}.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#1d2939;padding:14px}article{min-width:0}@media(max-width:800px){.pair{grid-template-columns:1fr}}body{overflow-wrap:anywhere;box-sizing:border-box}.pair{grid-template-columns:repeat(2,minmax(0,1fr))}@media(max-width:800px){.pair{grid-template-columns:minmax(0,1fr)}}</style><h1>会员 Knowledge Ask · 20次真实实验</h1><p>平台承担，无客户额度扣费。USD0.08938570，按实际usage含缓存写入计价，账单对账未执行。20次全部完整返回；不代表客户交付完成。</p><p>中文20次，英文0次。新题没有完整闭环成功，现行严格引用交付答案通过0。拒答不能计为成功答案。</p><pre>{
+  &quot;at&quot;: &quot;2026-10-12T02:27:05.121Z&quot;,
+  &quot;calls&quot;: 20,
+  &quot;models&quot;: {
+    &quot;gpt-5.6-luna&quot;: {
+      &quot;calls&quot;: 10,
+      &quot;totalNanoUSD&quot;: 9886700,
+      &quot;maxCostUSD&quot;: 0.0017565,
+      &quot;meanCostUSD&quot;: 0.00098867,
+      &quot;latencyMs&quot;: {
+        &quot;p50&quot;: 4133,
+        &quot;p90&quot;: 8972,
+        &quot;p95&quot;: 9437,
+        &quot;max&quot;: 9437
+      },
+      &quot;strictValidatorPass&quot;: 1,
+      &quot;allQuotesMatchIgnoringLayout&quot;: 6
+    },
+    &quot;gpt-5.6-terra&quot;: {
+      &quot;calls&quot;: 10,
+      &quot;totalNanoUSD&quot;: 79499000,
+      &quot;maxCostUSD&quot;: 0.014445,
+      &quot;meanCostUSD&quot;: 0.0079499,
+      &quot;latencyMs&quot;: {
+        &quot;p50&quot;: 3853,
+        &quot;p90&quot;: 4855,
+        &quot;p95&quot;: 5369,
+        &quot;max&quot;: 5369
+      },
+      &quot;strictValidatorPass&quot;: 2,
+      &quot;allQuotesMatchIgnoringLayout&quot;: 8
+    }
+  },
+  &quot;actualTotalNanoUSD&quot;: 89385700,
+  &quot;actualCostUSD&quot;: 0.0893857,
+  &quot;budgetRoundedMicroUSD&quot;: 89394,
+  &quot;costBasis&quot;: &quot;RETURNED_USAGE_WITH_CACHE_WRITES_AT_VERIFIED_PRICES; BILLING_INVOICE_NOT_RECONCILED&quot;,
+  &quot;automaticRetry&quot;: 0,
+  &quot;memberCreditsCharged&quot;: false,
+  &quot;technicalFailures&quot;: 0,
+  &quot;questionSourceCoverage&quot;: &quot;BOOK_I_AND_III_BOUNDED_ARGUMENTS_ONLY_NOT_SEVEN_BOOK_CLOSURE&quot;,
+  &quot;english&quot;: &quot;NOT_TESTED_0_CALLS; NO_ACCEPTED_ENGLISH_MANUSCRIPT_CLAIM&quot;,
+  &quot;relevance&quot;: {
+    &quot;historicalQuestions&quot;: 7,
+    &quot;freshQuestions&quot;: 3,
+    &quot;freshFullAnswerSuccess&quot;: 0
+  },
+  &quot;citation&quot;: {
+    &quot;strictDeliveryAnswersPass&quot;: 0,
+    &quot;strictSchemaPassesIncludingRefusals&quot;: 3,
+    &quot;compoundQuoteFailures&quot;: [
+      &quot;M-I-2-gpt-5.6-luna&quot;,
+      &quot;N2-gpt-5.6-luna&quot;,
+      &quot;FRESH-1-gpt-5.6-luna&quot;
+    ],
+    &quot;normalizationObservationsAreNotNewPASS&quot;: true
+  },
+  &quot;recommendation&quot;: {
+    &quot;default&quot;: &quot;LUNA_CANDIDATE_ONLY_AFTER_RETRIEVAL_CITATION_AND_BOUNDARY_FIXES&quot;,
+    &quot;upgrade&quot;: &quot;TERRA_EXPLICIT_CUSTOMER_CHOICE_AND_GOVERNED_POLICY_ONLY; NOT_AUTO_ENABLED&quot;,
+    &quot;rationale&quot;: &quot;这批中文简单知识题，Luna价格较低且多数直接论点成立；Terra连续引用质量更稳、延迟更低，但费用约8倍且不能修复缺失来源。两者尚未满足现行引用交付契约。&quot;,
+    &quot;notValidated&quot;: [
+      &quot;English answers&quot;,
+      &quot;cross-book comparison&quot;,
+      &quot;long essays&quot;,
+      &quot;current facts/research/tool costs&quot;,
+      &quot;personal navigation&quot;,
+      &quot;customer entitlement/commercial delivery&quot;
+    ]
+  },
+  &quot;credits&quot;: {
+    &quot;candidateCredits&quot;: 300,
+    &quot;candidateCostAllowanceMicroUSD&quot;: 3000000,
+    &quot;arithmetic&quot;: &quot;300×10000microUSD=USD3; decimals from integer units&quot;,
+    &quot;validatedCommercialPromise&quot;: false,
+    &quot;noQuestionCountGuarantee&quot;: true,
+    &quot;ordinaryCapUSD&quot;: 0.05,
+    &quot;observedLunaMaxUSD&quot;: 0.0017565,
+    &quot;observedTerraMaxUSD&quot;: 0.014445,
+    &quot;ordinary&quot;: &quot;SAMPLE_COSTS_BELOW_CAP_NOT_GENERAL_PROOF&quot;,
+    &quot;deep&quot;: &quot;NOT_VALIDATED&quot;,
+    &quot;research&quot;: &quot;NOT_VALIDATED&quot;
+  },
+  &quot;build&quot;: &quot;BLOCKED_SHARED_DEPENDENCIES_STILL_MUTATING; NO_BUILD_THIS_EXPERIMENT&quot;,
+  &quot;productionActivation&quot;: false,
+  &quot;DEPLOYMENT&quot;: &quot;NOT_RUN&quot;,
+  &quot;LIVE_CUSTOMER&quot;: &quot;NOT_RUN&quot;
+}</pre><p><a href="PAID-EXPERIMENT-LEDGER.json">实际成本及输出账</a> · <a href="PAID-EXPERIMENT-QUALITY-REVIEW.json">逐项质量评估</a> · <a href="EXECUTABLE-REQUESTS-FROZEN.json">原始冻结请求</a> · <a href="HUMAN-REVIEW.html">返回同一候选审阅</a></p><section><h2>M-I-1 · 一个系统的部件一直换新，为什么整体仍可延续？</h2><p>HISTORICAL_FAILURE_REGRESSION · pack 7c4a16e238113244a47ce3c25c087d138d056755ab632c15b7846bed95852c8c</p><div class="pair"><article><h3>gpt-5.6-luna</h3><p>USD 0.00091085 · 6266ms · input 1244 / cache 0 / writes 1241 / output 500</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[{&quot;text&quot;:&quot;因为整体持续存在的并不是每一个固定部件，而是系统不断重新组织部件、恢复整体运行并维持自身运行方式的能力。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,&quot;sourceVersion&quot;:&quot;v3-revision-20261011-33c91cd60d5f&quot;,&quot;quote&quot;:&quot;真正持续存在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这些元素，并持续维持自身的运行方式。&quot;}]},{&quot;text&quot;:&quot;因此，部件更替本身不必然破坏整体；只要其余结构能够重新调整、新的路径能够建立，并且变化没有破坏连续运行，系统就可以延续。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,&quot;sourceVersion&quot;:&quot;v3-revision-20261011-33c91cd60d5f&quot;,&quot;quote&quot;:&quot;当部分结构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路径能够逐渐建立；当环境不断变化，组织方式能够不断适应。&quot;},{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,&quot;sourceVersion&quot;:&quot;v3-revision-20261011-33c91cd60d5f&quot;,&quot;quote&quot;:&quot;城市之所以能够跨越数十年甚至数百年，并不是因为没有变化，而是因为变化始终没有破坏它的连续运行。&quot;}]}],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;answered&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;argument&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;conditions&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;completeness&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;reason&quot;: &quot;直接解释元素更替与重新组织／运行维持；必要条件在原文调整、路径重建、连续运行段得到支持。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article><article><h3>gpt-5.6-terra</h3><p>USD 0.00774050 · 3853ms · input 1244 / cache 0 / writes 1241 / output 386</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[{&quot;text&quot;:&quot;整体之所以能在部件持续换新时仍可延续，不是因为每个组成元素保持不变，而是因为系统能不断重新组织元素、维持其运行方式，并在部分结构改变、路径失效或环境变化时持续调整和适应。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,&quot;sourceVersion&quot;:&quot;v3-revision-20261011-33c91cd60d5f&quot;,&quot;quote&quot;:&quot;真正持续存在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这些元素，并持续维持自身的运行方式。&quot;},{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,&quot;sourceVersion&quot;:&quot;v3-revision-20261011-33c91cd60d5f&quot;,&quot;quote&quot;:&quot;当部分结构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路径能够逐渐建立；当环境不断变化，组织方式能够不断适应。&quot;},{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,&quot;sourceVersion&quot;:&quot;v3-revision-20261011-33c91cd60d5f&quot;,&quot;quote&quot;:&quot;稳定并不是变化的对立面，而是变化之中的持续组织能力。&quot;}]}],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;supported&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;argument&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;conditions&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;completeness&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;reason&quot;: &quot;直接解释元素更替与重新组织／运行维持；必要条件在原文调整、路径重建、连续运行段得到支持。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article></div><details><summary>实际冻结的来源论述及支持位置</summary><h3>B1V3-P1-S006 · v3-revision-20261011-33c91cd60d5f</h3><p>33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a · {&quot;start&quot;:61,&quot;end&quot;:62} · {&quot;startOffset&quot;:363,&quot;endOffset&quot;:977,&quot;textSha256&quot;:&quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;}</p><pre>真正持续存
+在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这
+些元素，并持续维持自身的运行方式。
+因此，持续 Continuity 并不是一种静态结果，而是一种动态能
+力。任何现实，只要无法不断恢复自身，就无法真正持续；任何结
+构，只要无法面对扰动，就终将瓦解。稳定并不是变化的对立面，而
+是变化之中的持续组织能力。现实之所以能够跨越时间，并不是因为
+时间停止流动，而是因为系统能够不断回应时间所带来的改变。这意
+味着，现实开始出现另一种更深层的特性。系统不再只是形成结构，
+也不再只是形成连接与组织，而开始形成维持自身的能力。当部分结
+构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路
+径能够逐渐建立；当环境不断变化，组织方式能够不断适应。现实开
+始表现出一种近似自我维持的倾向，它并不依赖某一个固定元素，而
+依赖整个组织持续协调自身的能力。
+我们可以从一座城市理解这一点。一座真正成熟的城市，并不会
+因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。新的
+建筑不断出现，旧的建筑不断消失；道路不断扩建，设施不断替换；
+人口持续流动，产业不断更迭。然而，城市依然能够维持交通、资
+源、生产、交流与秩序，因为真正持续存在的，并不是城市内部每一
+个组成部分，而是这些组成部分之间不断恢复整体运行的能力。城市
+之所以能够跨越数十年甚至数百年，并不是因为没有变化，而是因为
+变化始终没有破坏它的连续运行。</pre></details></section><section><h2>M-I-2 · 结构遭遇扰动之后，要靠什么才能保持连续？</h2><p>HISTORICAL_FAILURE_REGRESSION · pack 35eabbc471d43e102e68ca261e949e5ec577aa62c0ca09afefa9851a96e0ab3d</p><div class="pair"><article><h3>gpt-5.6-luna</h3><p>USD 0.00063710 · 4133ms · input 1277 / cache 0 / writes 1274 / output 265</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[{&quot;text&quot;:&quot;结构遭遇扰动之后，要靠系统不断重新组织其元素、恢复自身运行，并持续协调和适应变化的动态能力，才能保持连续。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,&quot;sourceVersion&quot;:&quot;v3-revision-20261011-33c91cd60d5f&quot;,&quot;quote&quot;:&quot;真正持续存在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这些元素，并持续维持自身的运行方式。因此，持续 Continuity 并不是一种静态结果，而是一种动态能力。任何结构，只要无法面对扰动，就终将瓦解。&quot;}]}],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;answered&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;argument&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;conditions&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;completeness&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;reason&quot;: &quot;两者说明扰动后调整、适应、组织协调。Luna 引用把隔开的句子拼成一个连续引文，不能作为有效引用交付。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;FAIL_COMPOSITE_OR_NONCONTIGUOUS_QUOTE&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article><article><h3>gpt-5.6-terra</h3><p>USD 0.00722300 · 3969ms · input 1277 / cache 0 / writes 1274 / output 336</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[{&quot;text&quot;:&quot;结构在遭遇扰动后，要保持连续，依靠的不是每个固定元素不变，而是整个组织能够持续协调自身：在部分结构改变时重新调整、在原有路径失效时逐渐建立新路径，并适应环境变化，以不断恢复整体运行。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,&quot;sourceVersion&quot;:&quot;v3-revision-20261011-33c91cd60d5f&quot;,&quot;quote&quot;:&quot;真正持续存在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这些元素，并持续维持自身的运行方式。&quot;},{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,&quot;sourceVersion&quot;:&quot;v3-revision-20261011-33c91cd60d5f&quot;,&quot;quote&quot;:&quot;当部分结构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路径能够逐渐建立；当环境不断变化，组织方式能够不断适应。现实开始表现出一种近似自我维持的倾向，它并不依赖某一个固定元素，而依赖整个组织持续协调自身的能力。&quot;}]}],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;supported&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;argument&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;conditions&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;completeness&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;reason&quot;: &quot;两者说明扰动后调整、适应、组织协调。Luna 引用把隔开的句子拼成一个连续引文，不能作为有效引用交付。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article></div><details><summary>实际冻结的来源论述及支持位置</summary><h3>B1V3-P1-S006 · v3-revision-20261011-33c91cd60d5f</h3><p>33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a · {&quot;start&quot;:61,&quot;end&quot;:62} · {&quot;startOffset&quot;:363,&quot;endOffset&quot;:977,&quot;textSha256&quot;:&quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;}</p><pre>真正持续存
+在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这
+些元素，并持续维持自身的运行方式。
+因此，持续 Continuity 并不是一种静态结果，而是一种动态能
+力。任何现实，只要无法不断恢复自身，就无法真正持续；任何结
+构，只要无法面对扰动，就终将瓦解。稳定并不是变化的对立面，而
+是变化之中的持续组织能力。现实之所以能够跨越时间，并不是因为
+时间停止流动，而是因为系统能够不断回应时间所带来的改变。这意
+味着，现实开始出现另一种更深层的特性。系统不再只是形成结构，
+也不再只是形成连接与组织，而开始形成维持自身的能力。当部分结
+构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路
+径能够逐渐建立；当环境不断变化，组织方式能够不断适应。现实开
+始表现出一种近似自我维持的倾向，它并不依赖某一个固定元素，而
+依赖整个组织持续协调自身的能力。
+我们可以从一座城市理解这一点。一座真正成熟的城市，并不会
+因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。新的
+建筑不断出现，旧的建筑不断消失；道路不断扩建，设施不断替换；
+人口持续流动，产业不断更迭。然而，城市依然能够维持交通、资
+源、生产、交流与秩序，因为真正持续存在的，并不是城市内部每一
+个组成部分，而是这些组成部分之间不断恢复整体运行的能力。城市
+之所以能够跨越数十年甚至数百年，并不是因为没有变化，而是因为
+变化始终没有破坏它的连续运行。</pre></details></section><section><h2>M-III-1 · 运行并没有损坏，维护为什么也不能等到故障以后才开始？</h2><p>HISTORICAL_FAILURE_REGRESSION · pack c242b4c8a1883d3d2acd1410d5444a37df6e695bf71a6caba47afba8d66706f7</p><div class="pair"><article><h3>gpt-5.6-luna</h3><p>USD 0.00154520 · 7900ms · input 2471 / cache 0 / writes 2468 / output 773</p><pre>{
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;claims&quot;: [
+    {
+      &quot;text&quot;: &quot;因为维护和修理处理的时间点不同：修理通常发生在结构已经明显损坏之后，而维护更早关注的是，仍能运行的现实是否正在逐渐改变其承载条件。因此，即使运行尚未损坏，也可能已经出现需要维护的变化。&quot;,
+      &quot;support&quot;: [
+        {
+          &quot;sourceId&quot;: &quot;S1&quot;,
+          &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+          &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+          &quot;quote&quot;: &quot;维护首先不是修理，而是处理持续所产生的后果。修理通常发生在某个结构已经明显损坏之后，维护则更早，它关注的是一个仍然能够运行的现实，是否正在逐渐改变自己的承载条件。&quot;
+        }
+      ]
+    },
+    {
+      &quot;text&quot;: &quot;不能等到故障以后，是因为“现在还能继续”不等于继续的方式仍然保留未来继续所需的条件。持续运行可能依赖不断投入更多时间、注意、资源、责任和载体能力；如果继续消耗恢复空间或依靠额外补偿，运行虽未停止，却可能正在削弱自己的未来。维护因此需要在故障显现前关注和调整这些条件。&quot;,
+      &quot;support&quot;: [
+        {
+          &quot;sourceId&quot;: &quot;S3&quot;,
+          &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+          &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+          &quot;quote&quot;: &quot;运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；只要这些投入还没有完全耗尽，表面的连续就可以维持很久。&quot;
+        },
+        {
+          &quot;sourceId&quot;: &quot;S3&quot;,
+          &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+          &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+          &quot;quote&quot;: &quot;真正的问题从来不是“现在还能不能继续”，而是当前继续的方式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。&quot;
+        }
+      ]
+    }
+  ],
+  &quot;sourceLanguages&quot;: [
+    &quot;zh-Hans&quot;
+  ],
+  &quot;status&quot;: &quot;answered&quot;
+}</pre><pre>{
+  &quot;direct&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;argument&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;conditions&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;completeness&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;reason&quot;: &quot;回答维护早于故障的原因，区分运行持续与可持续，保留恢复空间和补偿条件；不是只报相关章节。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article><article><h3>gpt-5.6-terra</h3><p>USD 0.01278800 · 4855ms · input 2471 / cache 0 / writes 2468 / output 551</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[{&quot;text&quot;:&quot;因为维护与修理的对象和时点不同：修理通常在结构已经明显损坏后发生；维护则是在仍能运行时，处理持续运行所产生的后果，并关注其承载条件是否正逐渐改变。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;修理通常发生在某个结构已经明显损坏之后，维护则更早，它关注的是一个仍然能够运行的现实，是否正在逐渐改变自己的承载条件。&quot;}]},{&quot;text&quot;:&quot;“现在还能运行”不等于这种运行能可持续地继续；表面的稳定可能依赖时间、注意、资源、责任与载体能力的持续投入。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S3&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；只要这些投入还没有完全耗尽，表面的连续就可以维持很久。&quot;}]},{&quot;text&quot;:&quot;若每次推进都消耗恢复空间、稳定依赖少数位置超额承担，或变化只能靠增加补偿吸收，运行即使尚未停止，也会削弱未来继续的条件；因此，维护不能只等故障显现后才开始。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S3&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;如果每一次推进都持续消耗恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。&quot;}]}],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;supported&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;argument&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;conditions&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;completeness&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;reason&quot;: &quot;回答维护早于故障的原因，区分运行持续与可持续，保留恢复空间和补偿条件；不是只报相关章节。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article></div><details><summary>实际冻结的来源论述及支持位置</summary><h3>CM-B3V1-P8-S001 · owner-final-20261011-efbfdd21fa21</h3><p>efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7 · {&quot;start&quot;:3,&quot;end&quot;:6} · {&quot;startOffset&quot;:915,&quot;endOffset&quot;:999,&quot;textSha256&quot;:&quot;5bd6e6732ecfa1d37a6c8510d066922343496225e6e6a97b86afe7824380c3d9&quot;}</p><pre>维护首先不是修理，而是
+处理持续所产生的后果。修理通常发生在某个结构已经明显损坏之后，维
+护则更早，它关注的是一个仍然能够运行的现实，是否正在逐渐改变自己
+的承载条件。</pre><h3>CM-B3V1-P9-S004 · owner-final-20261011-efbfdd21fa21</h3><p>efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7 · {&quot;start&quot;:249,&quot;end&quot;:252} · {&quot;startOffset&quot;:20,&quot;endOffset&quot;:361,&quot;textSha256&quot;:&quot;a25b3bdff9dd9e22a8217be6dccbd88db2d41100b602b720c45352659e61840e&quot;}</p><pre>资源之所以开始需要共同管理，不是因为它们天然属于共同，也不是
+因为多个运行一旦相遇就必须放弃各自边界。真正变化发生在资源开始同
+时进入多个运行的条件以后。一项资源原本只由一个位置使用时，它可以
+按照局部需要被安排；一旦多个运行都依赖同一时间、空间、资金、设
+备、信息、注意或其他承载条件，任何一个位置对资源的使用，就会改变
+其他位置能够使用的范围。资源从这里开始不再只是“我的资源”或“你
+的资源”。它逐渐成为共享现实的一部分。所谓共享，并不意味着所有资
+源必须平均分配，也不意味着所有参与者拥有完全相同的权利与需要。
+它真正指向的是一种关系：多个运行的持续开始依赖同一有限条件，而且
+这些运行彼此无法完全忽略。当这种关系出现以后，资源管理便不再只是
+个体选择。它开始承担协调功能。</pre><h3>CM-B3V1-P8-S059 · owner-final-20261011-efbfdd21fa21</h3><p>efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7 · {&quot;start&quot;:226,&quot;end&quot;:231} · {&quot;startOffset&quot;:33,&quot;endOffset&quot;:398,&quot;textSha256&quot;:&quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;}</p><pre>运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳
+定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；
+只要这些投入还没有完全耗尽，表面的连续就可以维持很久。
+
+真正的问题从来不是“现在还能不能继续”，而是当前继续的方
+式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗
+恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过
+增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。
+因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关
+系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能
+否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进
+入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它
+开始拥有更新自己的能力。</pre></details></section><section><h2>N1 · 更换了许多组成元素，持续的究竟是什么？</h2><p>FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING · pack 5eb6a92ad98b27798ea75b1dfafe3ac7b38aab920b4fcd78deaaee57e9384e2c</p><div class="pair"><article><h3>gpt-5.6-luna</h3><p>USD 0.00059050 · 4037ms · input 1273 / cache 0 / writes 1270 / output 227</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[{&quot;text&quot;:&quot;持续的不是组成系统的每一个元素，而是系统不断重新组织这些元素、维持自身运行方式并持续协调整体运行的能力。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,&quot;sourceVersion&quot;:&quot;v3-revision-20261011-33c91cd60d5f&quot;,&quot;quote&quot;:&quot;真正持续存在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这些元素，并持续维持自身的运行方式。&quot;}]}],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;supported&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;argument&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;conditions&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;completeness&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;reason&quot;: &quot;明确持续的是组织与运行能力，不是固定元素。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article><article><h3>gpt-5.6-terra</h3><p>USD 0.00632500 · 3426ms · input 1273 / cache 0 / writes 1270 / output 262</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[{&quot;text&quot;:&quot;更换许多组成元素后，持续的不是每一个固定元素，而是系统不断重新组织这些元素、维持并恢复整体运行方式的动态能力。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,&quot;sourceVersion&quot;:&quot;v3-revision-20261011-33c91cd60d5f&quot;,&quot;quote&quot;:&quot;真正持续存在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这些元素，并持续维持自身的运行方式。&quot;},{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,&quot;sourceVersion&quot;:&quot;v3-revision-20261011-33c91cd60d5f&quot;,&quot;quote&quot;:&quot;真正持续存在的，并不是城市内部每一个组成部分，而是这些组成部分之间不断恢复整体运行的能力。&quot;}]}],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;supported&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;argument&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;conditions&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;completeness&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;reason&quot;: &quot;明确持续的是组织与运行能力，不是固定元素。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article></div><details><summary>实际冻结的来源论述及支持位置</summary><h3>B1V3-P1-S006 · v3-revision-20261011-33c91cd60d5f</h3><p>33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a · {&quot;start&quot;:61,&quot;end&quot;:62} · {&quot;startOffset&quot;:363,&quot;endOffset&quot;:977,&quot;textSha256&quot;:&quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;}</p><pre>真正持续存
+在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这
+些元素，并持续维持自身的运行方式。
+因此，持续 Continuity 并不是一种静态结果，而是一种动态能
+力。任何现实，只要无法不断恢复自身，就无法真正持续；任何结
+构，只要无法面对扰动，就终将瓦解。稳定并不是变化的对立面，而
+是变化之中的持续组织能力。现实之所以能够跨越时间，并不是因为
+时间停止流动，而是因为系统能够不断回应时间所带来的改变。这意
+味着，现实开始出现另一种更深层的特性。系统不再只是形成结构，
+也不再只是形成连接与组织，而开始形成维持自身的能力。当部分结
+构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路
+径能够逐渐建立；当环境不断变化，组织方式能够不断适应。现实开
+始表现出一种近似自我维持的倾向，它并不依赖某一个固定元素，而
+依赖整个组织持续协调自身的能力。
+我们可以从一座城市理解这一点。一座真正成熟的城市，并不会
+因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。新的
+建筑不断出现，旧的建筑不断消失；道路不断扩建，设施不断替换；
+人口持续流动，产业不断更迭。然而，城市依然能够维持交通、资
+源、生产、交流与秩序，因为真正持续存在的，并不是城市内部每一
+个组成部分，而是这些组成部分之间不断恢复整体运行的能力。城市
+之所以能够跨越数十年甚至数百年，并不是因为没有变化，而是因为
+变化始终没有破坏它的连续运行。</pre></details></section><section><h2>N2 · 系统保持稳定是不是要求所有部分保持原样？</h2><p>FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING · pack 893bafca80a222986226b9d1289da30a33977b86225e99ed7ccd721b9c2616a4</p><div class="pair"><article><h3>gpt-5.6-luna</h3><p>USD 0.00069735 · 4040ms · input 1230 / cache 0 / writes 1227 / output 325</p><pre>{
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;claims&quot;: [
+    {
+      &quot;text&quot;: &quot;不是。系统保持稳定并不要求所有部分保持原样；稳定是系统在变化中持续组织、恢复和适应自身的能力。部分结构可以改变，其他结构能够重新调整，新的路径也可以建立。&quot;,
+      &quot;support&quot;: [
+        {
+          &quot;sourceId&quot;: &quot;S1&quot;,
+          &quot;sourceSha256&quot;: &quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,
+          &quot;sourceVersion&quot;: &quot;v3-revision-20261011-33c91cd60d5f&quot;,
+          &quot;quote&quot;: &quot;稳定并不是变化的对立面，而是变化之中的持续组织能力。……当部分结构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路径能够逐渐建立；当环境不断变化，组织方式能够不断适应。&quot;
+        }
+      ]
+    }
+  ],
+  &quot;sourceLanguages&quot;: [
+    &quot;zh-Hans&quot;
+  ],
+  &quot;status&quot;: &quot;supported&quot;
+}</pre><pre>{
+  &quot;direct&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;argument&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;conditions&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;completeness&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;reason&quot;: &quot;直接否定所有部分原样不变的要求；Luna 用省略号合并引文，保持语义但违反逐段引用约束。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;FAIL_COMPOSITE_OR_NONCONTIGUOUS_QUOTE&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article><article><h3>gpt-5.6-terra</h3><p>USD 0.00759750 · 3932ms · input 1230 / cache 0 / writes 1227 / output 377</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[{&quot;text&quot;:&quot;不是。系统的稳定并不要求所有部分保持原样；稳定是在变化中持续组织、恢复整体运行的能力。部分结构改变时，其余结构可以重新调整；旧路径失效时，新路径可以逐渐建立。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,&quot;sourceVersion&quot;:&quot;v3-revision-20261011-33c91cd60d5f&quot;,&quot;quote&quot;:&quot;真正持续存在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这些元素，并持续维持自身的运行方式。&quot;},{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,&quot;sourceVersion&quot;:&quot;v3-revision-20261011-33c91cd60d5f&quot;,&quot;quote&quot;:&quot;稳定并不是变化的对立面，而是变化之中的持续组织能力。&quot;},{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,&quot;sourceVersion&quot;:&quot;v3-revision-20261011-33c91cd60d5f&quot;,&quot;quote&quot;:&quot;当部分结构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路径能够逐渐建立；当环境不断变化，组织方式能够不断适应。&quot;}]}],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;supported&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;argument&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;conditions&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;completeness&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;reason&quot;: &quot;直接否定所有部分原样不变的要求；Luna 用省略号合并引文，保持语义但违反逐段引用约束。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article></div><details><summary>实际冻结的来源论述及支持位置</summary><h3>B1V3-P1-S006 · v3-revision-20261011-33c91cd60d5f</h3><p>33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a · {&quot;start&quot;:61,&quot;end&quot;:62} · {&quot;startOffset&quot;:363,&quot;endOffset&quot;:977,&quot;textSha256&quot;:&quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;}</p><pre>真正持续存
+在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这
+些元素，并持续维持自身的运行方式。
+因此，持续 Continuity 并不是一种静态结果，而是一种动态能
+力。任何现实，只要无法不断恢复自身，就无法真正持续；任何结
+构，只要无法面对扰动，就终将瓦解。稳定并不是变化的对立面，而
+是变化之中的持续组织能力。现实之所以能够跨越时间，并不是因为
+时间停止流动，而是因为系统能够不断回应时间所带来的改变。这意
+味着，现实开始出现另一种更深层的特性。系统不再只是形成结构，
+也不再只是形成连接与组织，而开始形成维持自身的能力。当部分结
+构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路
+径能够逐渐建立；当环境不断变化，组织方式能够不断适应。现实开
+始表现出一种近似自我维持的倾向，它并不依赖某一个固定元素，而
+依赖整个组织持续协调自身的能力。
+我们可以从一座城市理解这一点。一座真正成熟的城市，并不会
+因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。新的
+建筑不断出现，旧的建筑不断消失；道路不断扩建，设施不断替换；
+人口持续流动，产业不断更迭。然而，城市依然能够维持交通、资
+源、生产、交流与秩序，因为真正持续存在的，并不是城市内部每一
+个组成部分，而是这些组成部分之间不断恢复整体运行的能力。城市
+之所以能够跨越数十年甚至数百年，并不是因为没有变化，而是因为
+变化始终没有破坏它的连续运行。</pre></details></section><section><h2>N3 · 为什么还没损坏的系统也需要维持？</h2><p>FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING · pack 6f90f28d9e0d22e5bd4fe3305ef46d15a4a272b7875e61e436a2beaa9d30f16c</p><div class="pair"><article><h3>gpt-5.6-luna</h3><p>USD 0.00052540 · 3731ms · input 875 / cache 0 / writes 0 / output 292</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[{&quot;text&quot;:&quot;还没损坏的系统也需要维持，因为持续运行本身会产生后果，并可能逐渐改变系统的承载条件。维护早于修理，关注的是系统仍能运行但其运行条件正在变化的状态。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;维护首先不是修理，而是处理持续所产生的后果。修理通常发生在某个结构已经明显损坏之后，维护则更早，它关注的是一个仍然能够运行的现实，是否正在逐渐改变自己的承载条件。&quot;}]}],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;supported&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;argument&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;conditions&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;completeness&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;reason&quot;: &quot;解释持续运行产生后果，承载条件可能变化，尚未损坏也需关注。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article><article><h3>gpt-5.6-terra</h3><p>USD 0.00418600 · 2796ms · input 875 / cache 0 / writes 0 / output 203</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[{&quot;text&quot;:&quot;因为维护并非只是在明显损坏后进行修理，而是处理系统持续运行所产生的后果。即使系统仍能运行，其承载条件也可能正在逐渐改变，因此需要维持。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;维护首先不是修理，而是处理持续所产生的后果。修理通常发生在某个结构已经明显损坏之后，维护则更早，它关注的是一个仍然能够运行的现实，是否正在逐渐改变自己的承载条件。&quot;}]}],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;supported&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;argument&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;conditions&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;completeness&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;reason&quot;: &quot;解释持续运行产生后果，承载条件可能变化，尚未损坏也需关注。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article></div><details><summary>实际冻结的来源论述及支持位置</summary><h3>CM-B3V1-P8-S001 · owner-final-20261011-efbfdd21fa21</h3><p>efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7 · {&quot;start&quot;:3,&quot;end&quot;:6} · {&quot;startOffset&quot;:915,&quot;endOffset&quot;:999,&quot;textSha256&quot;:&quot;5bd6e6732ecfa1d37a6c8510d066922343496225e6e6a97b86afe7824380c3d9&quot;}</p><pre>维护首先不是修理，而是
+处理持续所产生的后果。修理通常发生在某个结构已经明显损坏之后，维
+护则更早，它关注的是一个仍然能够运行的现实，是否正在逐渐改变自己
+的承载条件。</pre></details></section><section><h2>N4 · 修理和维持分别面对怎样的条件？</h2><p>FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING · pack add212e2f04b22cdddb3810e466d7ba4932583d0948e31930b5cf39e187b818e</p><div class="pair"><article><h3>gpt-5.6-luna</h3><p>USD 0.00100835 · 6365ms · input 1538 / cache 0 / writes 1535 / output 520</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[{&quot;text&quot;:&quot;修理通常面对的是某个结构已经明显损坏之后的条件。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;修理通常发生在某个结构已经明显损坏之后&quot;}]},{&quot;text&quot;:&quot;维持（维护）面对的则是系统仍然能够运行、但其承载条件正在逐渐改变的条件；它发生得更早，处理持续运行所产生的后果。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;维护首先不是修理，而是处理持续所产生的后果。修理通常发生在某个结构已经明显损坏之后，维护则更早，它关注的是一个仍然能够运行的现实，是否正在逐渐改变自己的承载条件。&quot;}]},{&quot;text&quot;:&quot;从可持续性看，维持还要求当前的运行方式保留下一轮继续所需要的条件，而不能只是依靠不断增加投入或补偿来延长表面的连续。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S2&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;真正的问题从来不是“现在还能不能继续”，而是当前继续的方式，是否仍然保留下一轮继续所需要的条件。&quot;}]}],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;answered&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;argument&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;conditions&quot;: &quot;PARTIAL_LUNA_QUALIFIER&quot;,
+  &quot;completeness&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;reason&quot;: &quot;两者比较修理与维护时点及对象。Terra 明确保留“可能／是否”，Luna 第二条更接近断言条件正在改变，需保留原文限定。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article><article><h3>gpt-5.6-terra</h3><p>USD 0.00638750 · 2799ms · input 1538 / cache 0 / writes 1535 / output 212</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[{&quot;text&quot;:&quot;修理通常面对的是某个结构已经明显损坏之后的情形；维持（原文作“维护”）则面对仍然能够运行、但其承载条件可能正在逐渐改变的现实，并处理持续所产生的后果。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;维护首先不是修理，而是处理持续所产生的后果。修理通常发生在某个结构已经明显损坏之后，维护则更早，它关注的是一个仍然能够运行的现实，是否正在逐渐改变自己的承载条件。&quot;}]}],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;supported&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;argument&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;conditions&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;completeness&quot;: &quot;PASS_BOUNDED&quot;,
+  &quot;reason&quot;: &quot;两者比较修理与维护时点及对象。Terra 明确保留“可能／是否”，Luna 第二条更接近断言条件正在改变，需保留原文限定。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article></div><details><summary>实际冻结的来源论述及支持位置</summary><h3>CM-B3V1-P8-S001 · owner-final-20261011-efbfdd21fa21</h3><p>efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7 · {&quot;start&quot;:3,&quot;end&quot;:6} · {&quot;startOffset&quot;:915,&quot;endOffset&quot;:999,&quot;textSha256&quot;:&quot;5bd6e6732ecfa1d37a6c8510d066922343496225e6e6a97b86afe7824380c3d9&quot;}</p><pre>维护首先不是修理，而是
+处理持续所产生的后果。修理通常发生在某个结构已经明显损坏之后，维
+护则更早，它关注的是一个仍然能够运行的现实，是否正在逐渐改变自己
+的承载条件。</pre><h3>CM-B3V1-P8-S059 · owner-final-20261011-efbfdd21fa21</h3><p>efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7 · {&quot;start&quot;:226,&quot;end&quot;:231} · {&quot;startOffset&quot;:33,&quot;endOffset&quot;:398,&quot;textSha256&quot;:&quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;}</p><pre>运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳
+定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；
+只要这些投入还没有完全耗尽，表面的连续就可以维持很久。
+
+真正的问题从来不是“现在还能不能继续”，而是当前继续的方
+式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗
+恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过
+增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。
+因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关
+系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能
+否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进
+入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它
+开始拥有更新自己的能力。</pre></details></section><section><h2>FRESH-1 · 系统更换组成部分后，持续与原样不变有什么区别？</h2><p>NEW_MODEL_EVALUATION_CASE_NOT_USED_TO_TUNE_RULES; RETRIEVAL_ONLY_NOT_ANSWER_PASS · pack 7ca9904ff40bacaa7989570a0c893f59e06be438ae2e172701ef0e25f4b4b048</p><div class="pair"><article><h3>gpt-5.6-luna</h3><p>USD 0.00164330 · 9437ms · input 1841 / cache 0 / writes 1838 / output 986</p><pre>{
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;claims&quot;: [
+    {
+      &quot;text&quot;: &quot;从所给材料看，“持续”不等于把系统原样延长；关键在于当前运行方式是否保留了下一轮继续所需的条件。&quot;,
+      &quot;support&quot;: [
+        {
+          &quot;sourceId&quot;: &quot;S2&quot;,
+          &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+          &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+          &quot;quote&quot;: &quot;运行能够持续，并不代表它正在可持续地继续。真正的问题从来不是“现在还能不能继续”，而是当前继续的方式，是否仍然保留下一轮继续所需要的条件。&quot;
+        }
+      ]
+    },
+    {
+      &quot;text&quot;: &quot;与“原样不变”相比，材料所说的可持续持续包含主动调整：能够释放负荷、退出已经结束的责任、在面对变化后修正结构，并把经验带入下一轮。&quot;,
+      &quot;support&quot;: [
+        {
+          &quot;sourceId&quot;: &quot;S2&quot;,
+          &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+          &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+          &quot;quote&quot;: &quot;持续是一种关系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进入下一轮。&quot;
+        }
+      ]
+    },
+    {
+      &quot;text&quot;: &quot;因此，系统更换组成部分本身不能直接等同于“持续”；只有当这种变化使系统获得更新自己的能力，而不是靠不断增加补偿来维持表面连续时，才符合材料对可持续持续的描述。&quot;,
+      &quot;support&quot;: [
+        {
+          &quot;sourceId&quot;: &quot;S2&quot;,
+          &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+          &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+          &quot;quote&quot;: &quot;如果每一次推进都持续消耗恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。&quot;
+        },
+        {
+          &quot;sourceId&quot;: &quot;S2&quot;,
+          &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+          &quot;sourceVersion&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+          &quot;quote&quot;: &quot;只有这些关系同时存在，连续才不只是把现在往未来延长。它开始拥有更新自己的能力。&quot;
+        }
+      ]
+    }
+  ],
+  &quot;sourceLanguages&quot;: [
+    &quot;zh-Hans&quot;
+  ],
+  &quot;status&quot;: &quot;partial_boundary&quot;
+}</pre><pre>{
+  &quot;direct&quot;: &quot;PARTIAL_LUNA; NO_ANSWER_TERRA&quot;,
+  &quot;argument&quot;: &quot;PARTIAL_SOURCE_PACK&quot;,
+  &quot;conditions&quot;: &quot;PARTIAL&quot;,
+  &quot;completeness&quot;: &quot;FAIL_RETRIEVAL_COVERAGE&quot;,
+  &quot;reason&quot;: &quot;包只有第三册负荷／可持续性，不含第一册组成元素更替的直接论述。Luna 给一般性部分解释且合并不连续引用；Terra准确限制当前包，但客户问题仍未解决。应修检索，而不是奖励拒答。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;FAIL_COMPOSITE_OR_NONCONTIGUOUS_QUOTE&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article><article><h3>gpt-5.6-terra</h3><p>USD 0.00796100 · 4669ms · input 1841 / cache 0 / writes 1838 / output 280</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;证据不足：所提供摘录说明了“可持续连续”需要在变化后修正结构、让经验进入下一轮，并区分其与依赖额外投入维持的表面连续；但未具体讨论“更换组成部分”，也未界定其与“原样不变”的直接区别，因此不能据此作出该比较。&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;PARTIAL_LUNA; NO_ANSWER_TERRA&quot;,
+  &quot;argument&quot;: &quot;PARTIAL_SOURCE_PACK&quot;,
+  &quot;conditions&quot;: &quot;PARTIAL&quot;,
+  &quot;completeness&quot;: &quot;FAIL_RETRIEVAL_COVERAGE&quot;,
+  &quot;reason&quot;: &quot;包只有第三册负荷／可持续性，不含第一册组成元素更替的直接论述。Luna 给一般性部分解释且合并不连续引用；Terra准确限制当前包，但客户问题仍未解决。应修检索，而不是奖励拒答。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:true,&quot;errors&quot;:[],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article></div><details><summary>实际冻结的来源论述及支持位置</summary><h3>CM-B3V1-P8-S015 · owner-final-20261011-efbfdd21fa21</h3><p>efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7 · {&quot;start&quot;:53,&quot;end&quot;:57} · {&quot;startOffset&quot;:31,&quot;endOffset&quot;:310,&quot;textSha256&quot;:&quot;61db65026c64b2ad01e32a5bd9c01b6e8b365c7104131492353e32abe7ff0219&quot;}</p><pre>运行饱和并不一定表现为彻底停止。很多时候，它首先表现为一种
+更加微妙的变化：现实仍然可以进入，却越来越难被顺利吸收。一项新的
+任务到来，需要比过去更多准备；一个普通要求出现，就让人立即感到负
+担；组织仍然可以接受新的项目，却必须不断延迟其他工作；关系中只是
+增加一项现实需要，就迅速触发明显摩擦。外部输入本身未必异常，真正
+发生变化的是承载它的余量已经大幅减少。这便是饱和。所谓饱和，并不
+是所有容量都已经被完全使用，而是当前运行的大部分可用空间已经被持
+续输入、历史残余、责任占用、接口摩擦与协调需求共同占据，使新的现
+实难以在不挤压其他部分的情况下进入。</pre><h3>CM-B3V1-P8-S059 · owner-final-20261011-efbfdd21fa21</h3><p>efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7 · {&quot;start&quot;:226,&quot;end&quot;:231} · {&quot;startOffset&quot;:33,&quot;endOffset&quot;:398,&quot;textSha256&quot;:&quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;}</p><pre>运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳
+定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；
+只要这些投入还没有完全耗尽，表面的连续就可以维持很久。
+
+真正的问题从来不是“现在还能不能继续”，而是当前继续的方
+式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗
+恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过
+增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。
+因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关
+系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能
+否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进
+入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它
+开始拥有更新自己的能力。</pre></details></section><section><h2>FRESH-2 · 如果部件不断更新，整体的持续依赖哪些条件？</h2><p>NEW_MODEL_EVALUATION_CASE_NOT_USED_TO_TUNE_RULES; RETRIEVAL_ONLY_NOT_ANSWER_PASS · pack 14cba2fa914dc178a8d45caa989e5e5a2dd8a6bd8ae22ac76301ba2c07fb873b</p><div class="pair"><article><h3>gpt-5.6-luna</h3><p>USD 0.00175650 · 8972ms · input 2505 / cache 0 / writes 2502 / output 942</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[{&quot;text&quot;:&quot;部件不断更新并不自动保证整体持续；关键在于当前的运行方式是否保留了下一轮继续所需要的条件。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;真正的问题从来不是“现在还能不能继续”，而是当前继续的方式，是否仍然保留下一轮继续所需要的条件。&quot;}]},{&quot;text&quot;:&quot;整体的持续依赖于：资源消耗后仍能释放相应负荷与恢复空间；承担现实后能够退出已经结束的责任；面对变化时结构能够修正；并且经验能够进入下一轮。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进入下一轮。&quot;},{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;如果每一次推进都持续消耗恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。&quot;}]},{&quot;text&quot;:&quot;当多个运行共同依赖有限的时间、空间、资金、设备、信息、注意或其他承载条件时，整体持续还依赖对这些共享条件进行协调；否则承载余量减少，新的现实就难以进入而不挤压其他部分。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S2&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;多个运行的持续开始依赖同一有限条件，而且这些运行彼此无法完全忽略。当这种关系出现以后，资源管理便不再只是个体选择。它开始承担协调功能。&quot;},{&quot;sourceId&quot;:&quot;S3&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;当前运行的大部分可用空间已经被持续输入、历史残余、责任占用、接口摩擦与协调需求共同占据，使新的现实难以在不挤压其他部分的情况下进入。&quot;}]}],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;answered&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;PARTIAL&quot;,
+  &quot;argument&quot;: &quot;PASS_GENERAL_CONDITIONS_ONLY&quot;,
+  &quot;conditions&quot;: &quot;PARTIAL_COMPONENT_TO_RUNTIME_MAPPING&quot;,
+  &quot;completeness&quot;: &quot;PARTIAL_SOURCE_PACK&quot;,
+  &quot;reason&quot;: &quot;资源、负荷释放、责任退出、结构修正和共享协调在包中有支持；但包未建立组成部件更替与这些运行关系的精确对应，两者未充分声明该范围限制。不能当作完整的新题通过。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article><article><h3>gpt-5.6-terra</h3><p>USD 0.01444500 · 5369ms · input 2505 / cache 0 / writes 2502 / output 682</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[{&quot;text&quot;:&quot;如果部件不断更新，整体的持续不只是时间延长，而取决于当前运行是否仍保留下一轮继续所需的条件：资源使用与负荷释放之间的关系、对现实的承担与退出已结束责任的能力、面对变化时结构修正的能力，以及经验进入下一轮的能力；这些关系需要同时存在，整体才具有更新自身的能力。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S1&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它开始拥有更新自己的能力。&quot;}]},{&quot;text&quot;:&quot;持续还依赖承载余量不被持续输入、历史残余、责任占用、接口摩擦和协调需求共同挤占；否则新的现实会难以在不挤压其他部分的情况下进入。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S3&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;当前运行的大部分可用空间已经被持续输入、历史残余、责任占用、接口摩擦与协调需求共同占据，使新的现实难以在不挤压其他部分的情况下进入。&quot;}]},{&quot;text&quot;:&quot;当多个部件或运行依赖同一有限条件时，整体的持续还依赖对这些共享资源的协调；共享并不意味着平均分配或完全相同的权利与需要。&quot;,&quot;support&quot;:[{&quot;sourceId&quot;:&quot;S2&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;多个运行的持续开始依赖同一有限条件，而且这些运行彼此无法完全忽略。当这种关系出现以后，资源管理便不再只是个体选择。它开始承担协调功能。&quot;},{&quot;sourceId&quot;:&quot;S2&quot;,&quot;sourceSha256&quot;:&quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,&quot;sourceVersion&quot;:&quot;owner-final-20261011-efbfdd21fa21&quot;,&quot;quote&quot;:&quot;所谓共享，并不意味着所有资源必须平均分配，也不意味着所有参与者拥有完全相同的权利与需要。&quot;}]}],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;supported&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;PARTIAL&quot;,
+  &quot;argument&quot;: &quot;PASS_GENERAL_CONDITIONS_ONLY&quot;,
+  &quot;conditions&quot;: &quot;PARTIAL_COMPONENT_TO_RUNTIME_MAPPING&quot;,
+  &quot;completeness&quot;: &quot;PARTIAL_SOURCE_PACK&quot;,
+  &quot;reason&quot;: &quot;资源、负荷释放、责任退出、结构修正和共享协调在包中有支持；但包未建立组成部件更替与这些运行关系的精确对应，两者未充分声明该范围限制。不能当作完整的新题通过。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:false,&quot;errors&quot;:[&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;,&quot;INVALID_SOURCE_CITATION&quot;],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article></div><details><summary>实际冻结的来源论述及支持位置</summary><h3>CM-B3V1-P8-S059 · owner-final-20261011-efbfdd21fa21</h3><p>efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7 · {&quot;start&quot;:226,&quot;end&quot;:231} · {&quot;startOffset&quot;:33,&quot;endOffset&quot;:398,&quot;textSha256&quot;:&quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;}</p><pre>运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳
+定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；
+只要这些投入还没有完全耗尽，表面的连续就可以维持很久。
+
+真正的问题从来不是“现在还能不能继续”，而是当前继续的方
+式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗
+恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过
+增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。
+因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关
+系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能
+否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进
+入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它
+开始拥有更新自己的能力。</pre><h3>CM-B3V1-P9-S004 · owner-final-20261011-efbfdd21fa21</h3><p>efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7 · {&quot;start&quot;:249,&quot;end&quot;:252} · {&quot;startOffset&quot;:20,&quot;endOffset&quot;:361,&quot;textSha256&quot;:&quot;a25b3bdff9dd9e22a8217be6dccbd88db2d41100b602b720c45352659e61840e&quot;}</p><pre>资源之所以开始需要共同管理，不是因为它们天然属于共同，也不是
+因为多个运行一旦相遇就必须放弃各自边界。真正变化发生在资源开始同
+时进入多个运行的条件以后。一项资源原本只由一个位置使用时，它可以
+按照局部需要被安排；一旦多个运行都依赖同一时间、空间、资金、设
+备、信息、注意或其他承载条件，任何一个位置对资源的使用，就会改变
+其他位置能够使用的范围。资源从这里开始不再只是“我的资源”或“你
+的资源”。它逐渐成为共享现实的一部分。所谓共享，并不意味着所有资
+源必须平均分配，也不意味着所有参与者拥有完全相同的权利与需要。
+它真正指向的是一种关系：多个运行的持续开始依赖同一有限条件，而且
+这些运行彼此无法完全忽略。当这种关系出现以后，资源管理便不再只是
+个体选择。它开始承担协调功能。</pre><h3>CM-B3V1-P8-S015 · owner-final-20261011-efbfdd21fa21</h3><p>efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7 · {&quot;start&quot;:53,&quot;end&quot;:57} · {&quot;startOffset&quot;:31,&quot;endOffset&quot;:310,&quot;textSha256&quot;:&quot;61db65026c64b2ad01e32a5bd9c01b6e8b365c7104131492353e32abe7ff0219&quot;}</p><pre>运行饱和并不一定表现为彻底停止。很多时候，它首先表现为一种
+更加微妙的变化：现实仍然可以进入，却越来越难被顺利吸收。一项新的
+任务到来，需要比过去更多准备；一个普通要求出现，就让人立即感到负
+担；组织仍然可以接受新的项目，却必须不断延迟其他工作；关系中只是
+增加一项现实需要，就迅速触发明显摩擦。外部输入本身未必异常，真正
+发生变化的是承载它的余量已经大幅减少。这便是饱和。所谓饱和，并不
+是所有容量都已经被完全使用，而是当前运行的大部分可用空间已经被持
+续输入、历史残余、责任占用、接口摩擦与协调需求共同占据，使新的现
+实难以在不挤压其他部分的情况下进入。</pre></details></section><section><h2>FRESH-3 · 正常维持与发生损坏后恢复有什么区别？</h2><p>NEW_MODEL_EVALUATION_CASE_NOT_USED_TO_TUNE_RULES; RETRIEVAL_ONLY_NOT_ANSWER_PASS · pack b5ccbbaca527c5e40f5c3f6e697e1c94ecd4cea027603e74bd30cc74427dd847</p><div class="pair"><article><h3>gpt-5.6-luna</h3><p>USD 0.00057215 · 4037ms · input 1070 / cache 0 / writes 1067 / output 254</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;资料不足：所提供片段只说明可持续运行需要保留下一轮继续的条件，并提到面对变化时结构能否修正、经验能否进入下一轮；未分别定义“正常维持”和“发生损坏后的恢复”，因此无法据此严谨比较二者的区别。&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;NO_ANSWER&quot;,
+  &quot;argument&quot;: &quot;SOURCE_INSUFFICIENT_IN_PACK&quot;,
+  &quot;conditions&quot;: &quot;PASS_NO_INVENTION&quot;,
+  &quot;completeness&quot;: &quot;FAIL_RETRIEVAL_COMPARISON_SIDES&quot;,
+  &quot;reason&quot;: &quot;包仅可持续性论点，未检索出维护／损坏后恢复的双方定义；拒答符合本次包边界，但不算回答原问题成功。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:true,&quot;errors&quot;:[],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article><article><h3>gpt-5.6-terra</h3><p>USD 0.00484550 · 3101ms · input 1070 / cache 0 / writes 1067 / output 181</p><pre>{&quot;locale&quot;:&quot;zh-Hans&quot;,&quot;claims&quot;:[],&quot;sourceLanguages&quot;:[&quot;zh-Hans&quot;],&quot;status&quot;:&quot;证据不足：所给摘录讨论了运行表面连续可依赖持续投入，以及可持续运行需保留“恢复空间”和修正结构的能力；但未界定“正常维持”或“发生损坏后恢复”，也未直接比较两者。因此无法仅据本来源作出该比较。&quot;}</pre><pre>{
+  &quot;direct&quot;: &quot;NO_ANSWER&quot;,
+  &quot;argument&quot;: &quot;SOURCE_INSUFFICIENT_IN_PACK&quot;,
+  &quot;conditions&quot;: &quot;PASS_NO_INVENTION&quot;,
+  &quot;completeness&quot;: &quot;FAIL_RETRIEVAL_COMPARISON_SIDES&quot;,
+  &quot;reason&quot;: &quot;包仅可持续性论点，未检索出维护／损坏后恢复的双方定义；拒答符合本次包边界，但不算回答原问题成功。&quot;,
+  &quot;language&quot;: &quot;PASS_ZH_HANS; SOURCE_TITLES_AND_APPROVED_TERMS_EXCEPTED&quot;,
+  &quot;support&quot;: &quot;CONTENT_LOCATABLE_AFTER_LAYOUT_NORMALIZATION; STRICT_MATCH_MAY_FAIL&quot;,
+  &quot;method&quot;: &quot;EDITORIAL_ASSESSMENT_OF_ACTUAL_CLAIMS_AGAINST_FULL_FROZEN_NATIVE_ARGUMENT; NOT_AUTOMATED_ENTAILMENT_OR_HUMAN_ACCEPT&quot;,
+  &quot;delivery&quot;: &quot;HOLD_NOT_ACTIVATED&quot;,
+  &quot;english&quot;: &quot;NOT_RUN&quot;
+}</pre><p>现行严格校验：{&quot;ok&quot;:true,&quot;errors&quot;:[],&quot;semanticSupport&quot;:&quot;REQUIRES_EXECUTED_ENTAILMENT_AND_ANSWER_QUALITY_REVIEW&quot;}</p></article></div><details><summary>实际冻结的来源论述及支持位置</summary><h3>CM-B3V1-P8-S059 · owner-final-20261011-efbfdd21fa21</h3><p>efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7 · {&quot;start&quot;:226,&quot;end&quot;:231} · {&quot;startOffset&quot;:33,&quot;endOffset&quot;:398,&quot;textSha256&quot;:&quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;}</p><pre>运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳
+定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；
+只要这些投入还没有完全耗尽，表面的连续就可以维持很久。
+
+真正的问题从来不是“现在还能不能继续”，而是当前继续的方
+式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗
+恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过
+增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。
+因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关
+系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能
+否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进
+入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它
+开始拥有更新自己的能力。</pre></details></section></html>

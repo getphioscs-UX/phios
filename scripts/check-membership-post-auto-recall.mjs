@@ -1,0 +1,5 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {pathToFileURL} from 'node:url';
+const dir='tools/review/membership-ask-credit-r1';const prior=JSON.parse(fs.readFileSync(dir+'/AUTO-DELIVERY-RECALL-CURRENT.json'));for(const r of prior.results)r.role=r.id==='HOLDOUT-C'?'UNSUPPORTED_PREDICTION_CONTROL':'POST_REPAIR_REGRESSION';fs.writeFileSync(dir+'/AUTO-DELIVERY-RECALL-CURRENT.json',JSON.stringify(prior,null,2));
+const {api,env,manifest}=await import(pathToFileURL(process.cwd()+'/.tmp/member-auto-source-setup.mjs'));
+const rows=[];for(const q of ['若始终没有观测到目标，是否足以判定它并不存在？','缺少观察记录就能得出对象不存在的结论吗？']){const r=await api.prepare(env,manifest,{q,locale:'zh-Hans',bookCode:'BOOK-7'});rows.push({q,role:'NEW_AFTER_REPAIR_FREEZE',chapters:r.pack.sources.map(s=>s.chapterId),state:r.pack.sources.some(s=>s.chapterId==='14.86')?'PASS_RETRIEVAL_ONLY':'FAIL',errors:r.errors});}
+fs.writeFileSync(dir+'/AUTO-DELIVERY-RECALL-NEW-EXPRESSIONS.json',JSON.stringify({results:rows,providerCalls:0,answerQuality:'NOT_MODEL_TESTED'},null,2));console.log(JSON.stringify(rows));

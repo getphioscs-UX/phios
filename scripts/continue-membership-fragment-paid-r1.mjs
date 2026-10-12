@@ -1,0 +1,6 @@
+import fs from 'node:fs';import {spawnSync} from 'node:child_process';
+const dir='tools/review/membership-ask-credit-r1',ledger=JSON.parse(fs.readFileSync(dir+'/FRAGMENT-PAID-LEDGER.json'));
+if(ledger.entries.length!==2||!ledger.entries.every(e=>e.state==='METERED_AWAITING_SEMANTIC_REVIEW'&&e.providerStatus==='completed'&&e.rendered?.identityCheck==='PASS_THIS_PACK_FRAGMENT_ID'))throw Error('FIRST_PAIR_NOT_TECHNICALLY_READY');
+const review={role:'FIRST_PAIR_OPERATOR_TECHNICAL_AND_COST_REVIEW_NOT_FULL_SEMANTIC_ACCEPTANCE',requestIds:ledger.entries.map(e=>e.requestId),requestUnchanged:true,outputComplete:true,usageKnown:true,cacheWritesIncluded:true,fragmentIdentityAndServerExcerpt:'PASS',actualNanoUSD:ledger.entries.reduce((n,e)=>n+e.actualNanoUSD,0),semanticQuality:'REQUIRES_FULL_PER_CLAIM_REVIEW; FIRST_LUNA_ADDITIONAL_MAINTENANCE_INFERENCE_TO_ASSESS',permissionToContinue:'SAME_OWNER_GRANT_MAX14_USD0.30_RETRY0'};
+fs.writeFileSync(dir+'/FRAGMENT-PAID-FIRST-PAIR-REVIEW.json',JSON.stringify(review,null,2)+'\n',{flag:'wx'});
+for(let i=2;i<14;i++){const result=spawnSync(process.execPath,['scripts/run-membership-fragment-paid-r1.mjs',String(i)],{encoding:'utf8'});process.stdout.write(result.stdout||'');if(result.status!==0){process.stderr.write(result.stderr||'');process.exit(result.status||1);}}

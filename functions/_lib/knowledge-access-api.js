@@ -10,6 +10,7 @@ import {retrieveAtlasScope} from './atlas-retrieval-scope.js';
 import {manuscriptMetadataRaw} from '../knowledge-runtime/current-manuscript-server-metadata.js';
 import {isBookViiManuscriptRequest} from './knowledge-epistemic-reading.js';
 import {admittedManuscriptScopes} from './manuscript-current-admission.js';
+import {selectSourceBoundExplanation} from '../knowledge-runtime/source-bound-explanation-units.js';
 
 const MODES = new Set(['auto', 'overview', 'focused', 'full_article', 'continuity']);
 const SOURCES = new Set(['auto', 'hybrid', 'published', 'manuscript']);
@@ -52,7 +53,7 @@ async function publishedProjection({ request, env, query, locale, mode }) {
   return result.json();
 }
 
-async function manuscriptProjection({ env, query, locale, bookCode }) {
+async function manuscriptProjection({ env, query, locale, bookCode, experimentAccess=null }) {
   // The Pages Preview checkpoint exercises public knowledge and private reports,
   // not production manuscript retrieval. R2 bindings are not inherited.
   if (env?.PHIOS_ENVIRONMENT === 'qa' && env.PHIOS_MANUSCRIPT_RETRIEVAL_ENABLED !== 'true') {
@@ -115,11 +116,13 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
       const scope = JSON.parse(raw);
       currentPermittedScopes = admittedManuscriptScopes(scope.records.filter(r => r.bookCode === source.bookCode && r.sourceSha256 === source.sourceSha256 && r.corpusSha256 === source.corpusSha256 && r.locale === locale && r.scopeState === 'LOCAL_QA_VERIFIED_PROSE_CANDIDATE'), source, manuscriptMetadataRaw, {
         textScopeEnabled: env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true',
+        experimentAccess,
         declaredWholeSections: registry.activationScope?.wholeChapterCandidates || []
       });
       if (!currentPermittedScopes.length) return [];
     }
-    let corpus = await loadR2RetrievalCorpus(env.MANUSCRIPTS, source);
+    let corpus = await loadR2RetrievalCorpus(env.MANUSCRIPTS, source, experimentAccess);
+    if (!corpus) throw Error('MANUSCRIPT_CORPUS_PERMISSION_DENIED');
     // Reuse the existing closed KSAR human review for Book II. The original
     // registry and accepted corpus remain unchanged; only the missing consumer
     // provenance is restored. A label alone never grants answer eligibility.
@@ -141,6 +144,15 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
       if(digest!==source.scopeAdmissionSha256)throw Error('MANUSCRIPT_SCOPE_ADMISSION_IDENTITY_MISMATCH');
       const scope=JSON.parse(raw);
       const permitted=currentPermittedScopes;
+      for(const admitted of permitted){
+        const record=corpus.records.find(r=>r.sectionCode===admitted.sectionCode&&r.textSha256===admitted.sectionSha256);
+        if(!record)throw Error('MANUSCRIPT_SCOPE_SECTION_IDENTITY_MISMATCH');
+        for(const unit of admitted.argumentUnits||[]){
+          const bytes=new TextEncoder().encode(record.text.slice(unit.startOffset,unit.endOffset));
+          const actual=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(b=>b.toString(16).padStart(2,'0')).join('');
+          if(actual!==unit.textSha256)throw Error('MANUSCRIPT_ARGUMENT_SUPPORT_BYTES_MISMATCH');
+        }
+      }
       // An explicitly named chapter subject must not fall back to an unrelated
       // admitted chapter merely because both mention structure or control.
       const normalizedQuery=String(query).normalize('NFKC').replace(/\s+/g,'');
@@ -152,10 +164,18 @@ async function manuscriptProjection({ env, query, locale, bookCode }) {
       });
       const conceptQuery=normalizedQuery.replace(/垮台|倒台/gu,'终结');
       const declaredConceptCovered=permitted.some(s=>s.wholeChapterCandidate===true&&(s.retrievalConcepts||[]).some(concept=>concept.aliases?.some(alias=>conceptQuery.includes(alias))||concept.termSets?.some(set=>set.every(term=>conceptQuery.includes(term)))));
-      if(namedSubjects.length&&!declaredConceptCovered&&!namedSubjects.some(record=>permitted.some(s=>s.sectionCode===record.sectionCode)))return [];
-      corpus={...corpus,records:corpus.records.flatMap(record=>{const s=permitted.find(r=>r.sectionCode===record.sectionCode&&r.sectionSha256===record.textSha256);if(!s)return[];for(const concept of s.retrievalConcepts||[])if(!record.text.normalize('NFKC').replace(/\s+/gu,'').includes(concept.supportAnchor.normalize('NFKC').replace(/\s+/gu,'')))throw Error('MANUSCRIPT_CONCEPT_SOURCE_SUPPORT_MISMATCH');for(const unit of s.argumentUnits||[])if(unit.startOffset<0||unit.endOffset>record.text.length||unit.endOffset<=unit.startOffset)throw Error('MANUSCRIPT_ARGUMENT_RANGE_INVALID');return[{...record,text:record.text.slice(s.startOffset,s.endOffset),startPage:s.pdfPageRange?.start||record.startPage,endPage:s.pdfPageRange?.end||record.endPage,retrievalConcepts:s.retrievalConcepts||[],argumentUnits:s.argumentUnits||[],answerProjectionPolicy:s.answerProjectionPolicy||null,causalExplanationAvailable:s.causalExplanationAvailable,supportRange:{startOffset:s.startOffset,endOffset:s.endOffset,sectionSha256:s.sectionSha256},admissionScope:'SERVER_VERIFIED_TEXT_SCOPE_CANDIDATE'}];})};
+      const supportedExplanation=corpus.records.some(record=>{
+        const scope=permitted.find(s=>s.sectionCode===record.sectionCode&&s.startOffset===0);
+        return scope&&selectSourceBoundExplanation({...record,argumentUnits:scope.argumentUnits||[],retrievalConcepts:scope.retrievalConcepts||[]},query,manuscriptQueryTerms(query),1200);
+      });
+      // A normal question can mention a chapter label without requesting that
+      // chapter. Explicit title selection is retained; supported native units
+      // may resolve ordinary questions without an unrelated title veto.
+      const explicitlyNamed=/(?:第[^，。？?]{1,12}章|《[^》]+》)/u.test(normalizedQuery);
+      if(namedSubjects.length&&!declaredConceptCovered&&!namedSubjects.some(record=>permitted.some(s=>s.sectionCode===record.sectionCode))&&(explicitlyNamed||!supportedExplanation))return [];
+      corpus={...corpus,records:corpus.records.flatMap(record=>{const s=permitted.find(r=>r.sectionCode===record.sectionCode&&r.sectionSha256===record.textSha256);if(!s)return[];for(const concept of s.retrievalConcepts||[])if(!record.text.normalize('NFKC').replace(/\s+/gu,'').includes(concept.supportAnchor.normalize('NFKC').replace(/\s+/gu,'')))throw Error('MANUSCRIPT_CONCEPT_SOURCE_SUPPORT_MISMATCH');for(const unit of s.argumentUnits||[])if(unit.startOffset<0||unit.endOffset>record.text.length||unit.endOffset<=unit.startOffset)throw Error('MANUSCRIPT_ARGUMENT_RANGE_INVALID');return[{...record,text:record.text.slice(s.startOffset,s.endOffset),startPage:s.pdfPageRange?.start||record.startPage,endPage:s.pdfPageRange?.end||record.endPage,retrievalConcepts:s.retrievalConcepts||[],argumentUnits:s.argumentUnits||[],experimentFragmentsOnly:s.experimentFragmentsOnly===true,answerProjectionPolicy:s.answerProjectionPolicy||null,causalExplanationAvailable:s.causalExplanationAvailable,supportRange:{startOffset:s.startOffset,endOffset:s.endOffset,sectionSha256:s.sectionSha256},admissionScope:'SERVER_VERIFIED_TEXT_SCOPE_CANDIDATE'}];})};
     }
-    return searchManuscriptCorpus({ corpus, source, bindings, corrections, query, profiles: semanticProfiles.profiles });
+    return searchManuscriptCorpus({ corpus, source, bindings, corrections, query, profiles: semanticProfiles.profiles,experimentAccess });
   }));
   const records = settled.flatMap(result => result.status === 'fulfilled' ? result.value : []);
   const errors = settled.filter(result => result.status === 'rejected').map(result => result.reason?.code || result.reason?.message || 'MANUSCRIPT_SOURCE_QUERY_FAILED');
@@ -200,6 +220,7 @@ function groundingFrom(published, manuscript) {
       wholeChapterQualified:record.wholeChapterQualified===true,
       sourceConceptAliases:record.sourceConceptAliases||[],
       selectedArgumentUnit:record.selectedArgumentUnit||null,
+      explanationUnit:record.explanationUnit||null,
       scopeMatch:record.scopeMatch===true&&Boolean(record.sourceScopeAdmissionDigest),
       supportRange: record.supportRange || null,
       answerProjectionPolicy:record.answerProjectionPolicy||null,
@@ -359,7 +380,7 @@ export async function handleKnowledgeAccessRequest(request, env = {}, options = 
   let published = null;
   let manuscript = { status: 'not_requested', records: [], errors: [] };
   if (sourceMode !== 'manuscript') published = await publishedProjection({ request, env, query, locale, mode });
-  if (sourceMode !== 'published') manuscript = await manuscriptProjection({ env, query, locale, bookCode });
+  if (sourceMode !== 'published') manuscript = await manuscriptProjection({ env, query, locale, bookCode,experimentAccess:env.PHIOS_ENVIRONMENT==='local'&&env.PHIOS_ISOLATED_OPERATOR===true?options.experimentAccess:null });
 
   const publishedCovered = published?.coverage?.level && published.coverage.level !== 'none';
   const manuscriptCovered = manuscript.records.length > 0;
@@ -390,13 +411,15 @@ export async function handleKnowledgeAccessRequest(request, env = {}, options = 
   // A comparison is not ambiguous merely because it asks for a distinction.
   // Only admit one when the retrieved prose itself states a contrast.
   const compared = query.match(/^(.+?)与(.+?)(?:有什么区别|有何区别|的区别|区别|之间)/) || query.match(/^(.+?)和(.+?)(?:有什么区别|有何区别|的区别|区别|之间)/);
-  const comparisonTerms = compared ? [compared[1],compared[2]].map(x=>x.replace(/^(?:请问|普通|一般|第[一二三四五六七八九十\d]+册(?:中|里|的)?)/,'').replace(/的$/u,'').trim()) : [];
+  const comparisonTerms = compared ? [compared[1],compared[2]].map(x=>x.replace(/^(?:请问|普通|一般|第[一二三四五六七八九十\d]+册(?:中|里|的)?)/,'').replace(/的(?:时间|关注点|条件)(?:和|与|、)(?:时间|关注点|条件)$/u,'').replace(/的$/u,'').trim()) : [];
   // A contrast may be explicitly stated in the chapter body. Require both
   // subjects and the distinguishing predicate in the same bounded passage;
   // a title match or two scattered mentions are not a comparison authority.
-  const comparisonSupported = requiresComparativeUnit && comparisonTerms.length===2 && answerGrounding.sources.some(s=>{const prose=String(s.text||'').replace(/([\u3400-\u9fff])\s+(?=[\u3400-\u9fff])/g,'$1');for(let i=0;i<prose.length;i+=100){const passage=prose.slice(i,i+500);if(comparisonTerms.every(term=>passage.includes(term))&&/区别|差异|不同|并不是|不是.*而是|前者|后者|更宽|更深/.test(passage))return true;}return false;});
+  const comparisonSupported = requiresComparativeUnit && comparisonTerms.length===2 && answerGrounding.sources.some(s=>{const prose=String(s.text||'').replace(/([\u3400-\u9fff])\s+(?=[\u3400-\u9fff])/g,'$1');const subjects=s.selectedArgumentUnit?.comparisonSubjects;if(s.sourceScopeAdmissionDigest&&subjects?.length===2&&subjects.every(subject=>prose.includes(subject.sourceLabel))&&comparisonTerms.every(term=>subjects.some(subject=>[subject.sourceLabel,...(subject.aliases||[])].includes(term))))return true;for(let i=0;i<prose.length;i+=100){const passage=prose.slice(i,i+500);if(comparisonTerms.every(term=>passage.includes(term))&&/区别|差异|不同|并不是|不是.*而是|前者|后者|更宽|更深/.test(passage))return true;}return false;});
   const answerSources=bookCode&&sourceMode==='manuscript'?{...answerGrounding,sources:answerGrounding.sources.slice(0,1)}:answerGrounding;
-  const groundedAnswer = (requiresComparativeUnit && !comparisonSupported) || unsupportedPrediction || ambiguous ? null : deterministicGroundedAnswer(query, answerSources, locale);
+  const definitionSubject=locale==='zh-Hans'?query.replace(/^第[一二三四五六七八九十\d]+册(?:中|里|的)?/u,'').match(/^(?:请问|什么是)?([^，。？！?]{2,20}?)(?:是什么|是什么意思|指什么)[？?]?$/u)?.[1]:null;
+  const definitionSupported=!definitionSubject||answerSources.sources.some(s=>s.selectedArgumentUnit||new RegExp(definitionSubject.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?:是|指|并不是|并不只是|不只是)','u').test(manuscriptAnswerProse(s.text,s.heading).replace(/\s+/gu,'')));
+  const groundedAnswer = (requiresComparativeUnit && !comparisonSupported) || unsupportedPrediction || ambiguous || !definitionSupported ? null : deterministicGroundedAnswer(query, answerSources, locale);
   answerGrounding.generatedAnswerPresent = Boolean(groundedAnswer);
 
   return response({

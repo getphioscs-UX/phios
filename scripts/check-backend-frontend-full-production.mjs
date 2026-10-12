@@ -28,7 +28,14 @@ for(const mode of ['QUICK_PROFILE','FULL_SELF_ASSESSMENT','REASONING_TASKS','IMP
 for(const token of ['IPIP_BIG_FIVE_50','IPIP_NEO_120','MINI_30','SHORT_60','Financial capability · Adapted','O*NET® RIASEC'])assert.ok(profileClient.includes(token),`Profile live consumer token missing: ${token}`);
 for(const token of ['scoreIpipAssessment','scoreFinancialCapabilityAssessment','fetchOnetInterestProfilerQuestionSet','buildAcademicProfileSignalBundle'])assert.ok(profileApi.includes(token),`Profile API backend consumer missing: ${token}`);
 assert.ok(!profileClient.includes('ONET_WEB_SERVICES_API_KEY'),'O*NET secret name must stay server-side');
-const perspectives=t('perspectives/index.html');assert.ok(!perspectives.includes('/perspectives/profile/'),'Personal Evidence must remain outside the primary Perspectives product grid');assert.ok(personal.includes('/perspectives/profile/'),'Optional Personal Evidence must remain reachable from Personal Reality');assert.ok(profilePage.includes('Personal Evidence is optional'));
+const perspectives=t('perspectives/index.html');
+for(const id of ['perspectives-module-2','perspectives-methods']){
+ const section=perspectives.match(new RegExp('<section\\b[^>]*\\bid="'+id+'"[^>]*>[\\s\\S]*?</section>'))?.[0];
+ assert.ok(section,'Perspectives product section missing: '+id);
+ assert.ok(!section.includes('/perspectives/profile/'),'Personal Evidence must remain outside the primary Perspectives product grid');
+}
+assert.ok(personal.includes('/perspectives/profile/'),'Optional Personal Evidence must remain reachable from Personal Reality');assert.ok(profilePage.includes('Profile is optional and can be used on its own.'),'Profile must disclose optional participation and independent use');
+assert.ok(profilePage.includes('Skip Personal Evidence'),'Profile must offer an explicit skip action');
 const readings=t('assets/js/pages/readings-v3.js'),catalog=j('content/web-production/px2/successors/public-method-catalog-v6.json');
 assert.ok(readings.includes('public-method-catalog-v6.json'));for(const code of ['ECR','ASTROLOGY','BAZI','ZI_WEI_DOU_SHU','NUMEROLOGY','HUMAN_DESIGN','I_CHING','TAROT'])assert.ok(catalog.methods.some(m=>m.methodCode===code),`method catalog missing ${code}`);
 const finalExperience=t('assets/customer-ui/js/personal-products/final-personal-reading-experience.js');for(const token of ['renderProfile','renderRelationship','renderNarrative','renderCrossGroups'])assert.ok(finalExperience.includes(token),`governed frontend projection missing ${token}`);

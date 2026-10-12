@@ -1,0 +1,995 @@
+{
+  "status": "PASS_LOCAL",
+  "at": "2026-10-11T16:13:56.418Z",
+  "rows": [
+    {
+      "name": "SQL reject:  INSERT INTO isolation_probe VALUES(1)",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: /*comment*/ INSERT INTO isolation_probe VALUES(1)",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: iNsErT INTO isolation_probe VALUES(1)",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: WITH x AS(SELECT 1) INSERT INTO isolation_probe SELECT * FROM x",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: WITH x AS(SELECT 1) DELETE FROM isolation_probe",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: PRAGMA user_version=2",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: PRAGMA table_info(isolation_probe)",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: CREATE TABLE unsafe(x)",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: DROP TABLE isolation_probe",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: ALTER TABLE isolation_probe ADD COLUMN z",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: REPLACE INTO isolation_probe VALUES(1)",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: UPDATE isolation_probe SET id=2",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: DELETE FROM isolation_probe",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: VACUUM",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: REINDEX",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: ATTACH DATABASE :x AS q",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: DETACH q",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: ANALYZE",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: BEGIN",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: COMMIT",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: ROLLBACK",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: SAVEPOINT x",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: RELEASE x",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: SELECT 1; INSERT INTO isolation_probe VALUES(1)",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: SELECT 1;",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: -- comment\nSELECT 1",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: ﻿SELECT 1",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: SELECT load_extension(?)",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: SELECT \"writefile\"(?)",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: SELECT [writefile](?)",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: SELECT unknown_function(?)",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: SELECT 1 /* tail */",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: EXPLAIN SELECT 1",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL reject: SELECT 'unterminated",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL read: SELECT 1",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL read:  \nselect COUNT(*) AS n FROM isolation_probe",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL read: SELECT * FROM isolation_probe WHERE id=?",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL read: SELECT COALESCE(MAX(id),0) AS n FROM isolation_probe",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "SQL read: SELECT 1 WHERE EXISTS(SELECT 1 FROM isolation_probe)",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "read statement methods + null prototype + no original capability",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "batch SELECT + INSERT denied",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "exec SELECT + INSERT denied",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "HTTP POST defense including webhook",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "HTTP PUT defense including webhook",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "HTTP PATCH defense including webhook",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "HTTP DELETE defense including webhook",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "unknown server config fails closed",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "customer query/header cannot disable maintenance",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "GET write trap",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "indirect helper A -> B -> write",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "swallowed guard error cannot return fake success",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "binding immutable + waitUntil remains guarded",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "OFF and absent original binding identity",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual auth callback establishment READ_ONLY blocked with zero rows",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual auth callback OFF + session read + logout",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual account save OFF",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual account save READ_ONLY",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual account update READ_ONLY",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual account revoke READ_ONLY",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual Commerce create order READ_ONLY prepare-time",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual Commerce customer binding READ_ONLY prepare-time",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual Commerce checkout attach READ_ONLY prepare-time",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual Commerce webhook durable registration READ_ONLY prepare-time",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual Commerce fulfillment purchase/entitlement batch READ_ONLY prepare-time",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual Commerce subscription READ_ONLY prepare-time",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual Commerce order OFF",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual P8 readiness READ_ONLY",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual P8 paid job READ_ONLY",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual P8 incident READ_ONLY",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual P8 prune READ_ONLY",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual followup grant READ_ONLY",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual generation lock READ_ONLY prevents state callback",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual generation lock + state OFF unchanged",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual P8 refund state READ_ONLY",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual P8 lease claim READ_ONLY",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual P8 unclaim READ_ONLY",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual P8 owned incident READ_ONLY",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "actual P8 resolve incident READ_ONLY",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/bazi-account-delivery.js:81",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/canonical-person-store.js:90",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/financial-will-draft-store.js:43",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/financial-will-draft-store.js:44",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/financial-will-draft-store.js:58",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/method-report-material.js:38",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/oidc-auth.js:66",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/oidc-auth.js:67",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/oidc-auth.js:107",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/oidc-auth.js:114",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/profile-evidence-store.js:43",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/profile-evidence-store.js:44",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/profile-evidence-store.js:45",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/released-report-material-store.js:28",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/released-report-material-store.js:29",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/released-report-material-store.js:30",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/released-report-material-store.js:32",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/released-report-material-store.js:58",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/released-report-material-store.js:63",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/report-followup-store.js:12",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/report-followup-store.js:45",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/report-followup-store.js:69",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/report-followup-store.js:73",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/ziwei-controlled-report-material.js:37",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/ziwei-controlled-report-material.js:38",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/account/ziwei-controlled-report-material.js:39",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/api/account-world-contexts.js:17",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/api/iching-full-readings.js:9",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/api/iching-full-readings.js:9",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/api/iching-full-readings.js:9",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/api/iching-full-readings.js:11",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/api/qa-bazi-t3.js:103",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/api/qa-bazi-t3.js:107",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/api/qa-bazi-t3.js:112",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:32",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:41",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:68",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:75",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:80",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:85",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:93",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:109",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:113",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:114",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:118",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:123",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:127",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:137",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:143",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:155",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:156",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:193",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:235",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:261",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:288",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:383",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:390",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:429",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:442",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:453",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:466",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:541",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:569",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:588",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:619",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:630",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:637",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:663",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:714",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:732",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:815",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:824",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:844",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:853",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:862",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:876",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:883",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/book-commerce-store.js:903",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/commerce/commerce-stripe-events.js:109",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/health/health-persistence.js:9",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/iching-limited-production/iching-limited-production-v1.js:94",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/iching-limited-production/iching-limited-production-v1.js:99",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/continuity/continuity-persistence-d1.js:7",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/continuity/continuity-persistence-d1.js:8",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/continuity/continuity-persistence-d1.js:9",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/continuity/continuity-quota-d1.js:25",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/continuity/continuity-quota-d1.js:26",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/continuity/continuity-quota-d1.js:27",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/narrative/bazi-s04-private-review.js:63",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/narrative/bazi-s04-private-review.js:64",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/narrative/bazi-s04-private-review.js:72",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/narrative/bazi-s04-review-audit.js:31",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/narrative/bazi-s04-review-audit.js:52",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/narrative/narrative-generation-cache-d1.js:6",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/narrative/narrative-generation-cache-d1.js:7",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/narrative/narrative-generation-cache-d1.js:8",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/report-generation-store.js:25",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/report-generation-store.js:31",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/report-generation-store.js:37",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/report-generation-store.js:41",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/personal-reading/report-generation-store.js:44",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/professional/appointments/appointment-request-store.js:54",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/professional/appointments/appointment-request-store.js:55",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/professional/appointments/appointment-request-store.js:56",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/provider-cost/product-cost-envelope.js:13",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/provider-cost/product-cost-envelope.js:34",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/provider-cost/product-cost-envelope.js:61",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/pws/registry/audit-store.js:21",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/pws/registry/event-outbox.js:21",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/pws/registry/event-outbox.js:39",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/pws/registry/event-outbox.js:44",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/pws/registry/relationship-store.js:29",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/pws/registry/restriction-store.js:30",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/pws/registry/universal-registry.js:27",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/pws/registry/universal-registry.js:57",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/pws/registry/version-store.js:32",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-context/report-context-store.js:20",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-context/report-context-store.js:72",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/method-delivery-cache.js:23",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/method-delivery-cache.js:29",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/method-delivery-cache.js:32",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-delivery-core.js:40",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-refund-events.js:23",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-refund-events.js:24",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-refund-events.js:24",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-refund.js:13",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-refund.js:25",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-refund.js:28",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-refund.js:28",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-refund.js:28",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-state-store.js:11",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-state-store.js:14",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-state-store.js:15",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-state-store.js:16",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-state-store.js:17",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-state-store.js:18",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-state-store.js:19",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/report-delivery/paid-report-state-store.js:20",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/runtime/lineage/stores/d1-lineage-store.js:93",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/runtime/lineage/stores/d1-lineage-store.js:138",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/runtime/lineage/stores/d1-lineage-store.js:208",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/runtime/lineage/stores/d1-lineage-store.js:216",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/runtime/migrations/migration-runner.js:7",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/runtime/migrations/migration-runner.js:207",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/runtime/persistence/drivers/d1-driver.js:104",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/runtime/persistence/drivers/d1-driver.js:158",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/runtime/persistence/drivers/d1-driver.js:183",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/runtime/persistence/drivers/d1-driver.js:233",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/runtime/persistence/drivers/d1-driver.js:292",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/symbolic-method-persistence/symbolic-reading-store-d1-v1.js:65",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/symbolic-method-persistence/symbolic-reading-store-d1-v1.js:66",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/symbolic-method-persistence/symbolic-reading-store-d1-v1.js:67",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/symbolic-method-persistence/symbolic-reading-store-d1-v1.js:68",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/symbolic-method-persistence/symbolic-reading-store-d1-v1.js:99",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/symbolic-method-persistence/symbolic-reading-store-d1-v1.js:100",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/symbolic-method-persistence/symbolic-reading-store-d1-v1.js:101",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/symbolic-method-persistence/symbolic-reading-store-d1-v2.js:65",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/symbolic-method-persistence/symbolic-reading-store-d1-v2.js:66",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/symbolic-method-persistence/symbolic-reading-store-d1-v2.js:67",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/symbolic-method-persistence/symbolic-reading-store-d1-v2.js:68",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/symbolic-method-persistence/symbolic-reading-store-d1-v2.js:99",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/symbolic-method-persistence/symbolic-reading-store-d1-v2.js:100",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "inventory prepare barrier functions/symbolic-method-persistence/symbolic-reading-store-d1-v2.js:101",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "all inventory writes rejected before original prepare",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "probe no maintenance writes",
+      "status": "PASS_LOCAL"
+    },
+    {
+      "name": "network/provider/payment/refund calls zero",
+      "status": "PASS_LOCAL"
+    }
+  ],
+  "failures": [],
+  "sqlBypassMatrix": {
+    "rejected": 34,
+    "allowed": 5
+  },
+  "writerPrepareBarrierCases": 163,
+  "originalWritePrepares": 0,
+  "mockOidcCalls": 4,
+  "networkCalls": 0,
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0
+}

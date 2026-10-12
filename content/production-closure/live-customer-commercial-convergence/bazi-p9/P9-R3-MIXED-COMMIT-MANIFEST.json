@@ -1,0 +1,3065 @@
+{
+  "schemaVersion": "P9-R3-MIXED-COMMIT-MANIFEST",
+  "actualCommit": "8ecbea951c8d50af29fe47d8448aaa987e7644a7",
+  "actualTree": "7f75bf2eb665e643dd84edd67c85e18ae6868fbd",
+  "parent": "f1674d5a016881c58565677a19c4a372cae7b319",
+  "totalChangedFiles": 167,
+  "acceptedR2Paths": [
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-ACTIVE-WRITER-PROOF-CONTRACT.json",
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-BAZI-REOPEN.json",
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-EXTERNAL-WRITERS.json",
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-FUNCTIONS-COMPILE.json",
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-GLOBAL-WRITE-ISOLATION-GATE.json",
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-LOCAL-TESTS.json",
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-P8-NORMAL-REGRESSION.json",
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-RELEASE-DEPENDENCY-MANIFEST.json",
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-WORKTREE-PARTITION.json",
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-WRITER-INVENTORY.json",
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R2-HUMAN-ACCEPTANCE.json",
+    "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-RELEASE-CANDIDATE-R2.json",
+    "functions/_lib/d1-maintenance-guard.js",
+    "functions/_middleware.js",
+    "scripts/audit-p9-d1i1-external-writers.mjs",
+    "scripts/audit-p9-d1i1-writers.mjs",
+    "scripts/check-p9-d1i1-bazi-reopen.mjs",
+    "scripts/check-p9-d1i1-compiled.mjs",
+    "scripts/check-p9-d1i1-isolation.mjs",
+    "scripts/freeze-p9-d1i1-successor.mjs",
+    "scripts/p9-d1i1-json-loader.mjs",
+    "scripts/prepare-p9-d1i1-snapshot.mjs",
+    "tools/review/P9-BAZI-LIVE-CANARY-HUMAN-REVIEW.html",
+    "tools/review/P9-G3-D1I1-HUMAN-REVIEW.html"
+  ],
+  "allChangedFiles": [
+    {
+      "path": ".gitignore",
+      "SHA256": "f07c176df29f5807ea05ee34ec7ed86ee063ddb20e1a558a5b1efaa8d33f4082",
+      "bytes": 991
+    },
+    {
+      "path": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-bounded-comparison.js",
+      "SHA256": "c6cb355ba5a893c92695b376072b03206371f5e363de2625c7dad2e754405028",
+      "bytes": 29206
+    },
+    {
+      "path": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-chapter-arguments.js",
+      "SHA256": "8db23133afdb770a4ad4f0fd55556a0c06d68cd8c483dd13193bca7fd582721f",
+      "bytes": 29595
+    },
+    {
+      "path": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-qa-identity.js",
+      "SHA256": "f72ddce2a48713c9b41e5999bf55e79d8e7f373b43c933b0146048d45ebda285",
+      "bytes": 27850
+    },
+    {
+      "path": "content/knowledge/answer-projection/maintenance/kap-m14-composition-before-book-v-vii.js",
+      "SHA256": "8b176a0a03f68cc0528c50fda2f7456240ffd5cd7ec06abfe867a5c192286798",
+      "bytes": 26906
+    },
+    {
+      "path": "content/knowledge/answer-projection/maintenance/kap-m14-grounding-before-book-v-vii.js",
+      "SHA256": "1bd7566a79184c342e65619c7a3b9a1f6743161e2b5e4f2a796b680042593bc8",
+      "bytes": 32610
+    },
+    {
+      "path": "content/knowledge/answer-projection/maintenance/kap-m14-manuscript-source-access-v1.json",
+      "SHA256": "fe0cfaf64165978f0af12846c489425953c2cbdae7ba5b72e125a5ee0188df7f",
+      "bytes": 11247
+    },
+    {
+      "path": "content/knowledge/manuscripts/review/book-v-v1-current-source-identity-inheritance-v1.json",
+      "SHA256": "699a1d2cb66d253d5bc986210cd9ce98c7fa012f31fe60f8330f6799fc5a7467",
+      "bytes": 660
+    },
+    {
+      "path": "content/knowledge/manuscripts/review/book-vii-v2-approved-knowledge-unit-inheritance-v1.json",
+      "SHA256": "99716241ce054c9d8d40d4c3cee9f18e47760fbf48f0374376af634327b8eb92",
+      "bytes": 817
+    },
+    {
+      "path": "content/knowledge/manuscripts/review/book-vii-v2-approved-knowledge-unit-inheritance-v2.json",
+      "SHA256": "fcf3fcd3ef7d7115c105799a0bb5a75f561d774a7043acfe3228840d31e2de3b",
+      "bytes": 2653
+    },
+    {
+      "path": "content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v1.json",
+      "SHA256": "4a38a336b4a3a9511e6dbcac5db53e825043efb922df4f93190e6416753481df",
+      "bytes": 7160
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v10-candidate.json",
+      "SHA256": "20626e2bba60aa17988588cbac432157b72c66f625bf6ee965472ab2f53bc887",
+      "bytes": 12795
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v10.json",
+      "SHA256": "5780d25ec85a83773086fbba35f89806d1ec1147425c660876a9e58d42fe245f",
+      "bytes": 12214
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v11-candidate.json",
+      "SHA256": "739ebdb6585bf2aab8804178ad2f84e11383c5105743f14570f531e542cb9e14",
+      "bytes": 12796
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v8-candidate.json",
+      "SHA256": "376235bcbea73e618ba339ccf6ce292155591f9b2cdce3b0f8955f54675b6dfa",
+      "bytes": 12029
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v9-candidate.json",
+      "SHA256": "86146b4d7470e16a85ef388fa26fe33f810e239f79ce1b0dace23789912cf7fe",
+      "bytes": 12489
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v9.json",
+      "SHA256": "97c73f846ead17f6397822b336d0d054825927f44d8bb8695712e59f385fd974",
+      "bytes": 11918
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-text-scope-candidates-v6.json",
+      "SHA256": "74c7fdc3f84c70cab7aea458f8a8e9fe0fe728edf8500810e55ded1a6b27be2c",
+      "bytes": 32739
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-text-scope-candidates-v7.json",
+      "SHA256": "65a605425b5dfa0a075cfc6839e3bf5627853ae42b168658d0845684905188fe",
+      "bytes": 33191
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-text-scope-candidates-v8.json",
+      "SHA256": "c802a84b41ad85ad0d31f354f6d4fa7115edd5d1c43a63a2e2d6c382f9c0f806",
+      "bytes": 33490
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html",
+      "SHA256": "f54da2d1849f8f4abe4f107d8a952ab4d4db1b195024b940059971b2d287f12c",
+      "bytes": 543796
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/ASK-PAGES-PRESERVED-CONFIG-RELEASE.json",
+      "SHA256": "df45aa989ba7ad2fa230beae028c9e2a75c4d2f11f3ed48e816282b6f451c1a1",
+      "bytes": 3290
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G1-R2-COMMIT-CANDIDATE-PROOF.json",
+      "SHA256": "464b37e3fb0a6d795a8ea0c6e35037cad59eaabcc090acd32aca6dc7b2736315",
+      "bytes": 41551
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-ACTIVE-WRITER-PROOF-CONTRACT.json",
+      "SHA256": "65a007cc668a8da2aeb3fd99ea51f33a5ae3d8236721a2612a991bc71ad3f9d3",
+      "bytes": 1661
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-BAZI-REOPEN.json",
+      "SHA256": "dd174ee48cdfdd15a122f1aa27784d74c916ea31ce43e6855c6f51b63eaaa3a2",
+      "bytes": 1100
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-EXTERNAL-WRITERS.json",
+      "SHA256": "1d4e4137657f9058af668ef31697dd80007a6ac4fb822998431c3cac759b1efd",
+      "bytes": 1347
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-FUNCTIONS-COMPILE.json",
+      "SHA256": "05338c8c68eb7f10b6a0fe72974d34c372c0a6cbbb2a558474a682f19d4d0255",
+      "bytes": 16925
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-GLOBAL-WRITE-ISOLATION-GATE.json",
+      "SHA256": "8c1c07ebdbd661ded1e72d22ef1e5f3711466977fea21bb78357a7d2055c8d3c",
+      "bytes": 7895
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-LOCAL-TESTS.json",
+      "SHA256": "85e4a15805381d700a60a350667726d05d34442aa2d5efb5214ad773be4cd69b",
+      "bytes": 30812
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-P8-NORMAL-REGRESSION.json",
+      "SHA256": "bdcafd17444b31bc947cc8dd5496f56777dd8f94b129fd93dd7da75081149fc9",
+      "bytes": 1112
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-RELEASE-DEPENDENCY-MANIFEST.json",
+      "SHA256": "99b303f32254d417697ab10da3ac62a694b8a792f2f4f371bb0b53f4e33a0fdc",
+      "bytes": 180634
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-WORKTREE-PARTITION.json",
+      "SHA256": "664a3fb7911f6357743b86284db59d5f93406d8d8eff3a8096223c49d45c1e6c",
+      "bytes": 115451
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1I1-WRITER-INVENTORY.json",
+      "SHA256": "0a49426723c3d0f44d9e0b51f3389fc7d49c63c83f1468aeba16e96c68b845dd",
+      "bytes": 298805
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1M1-PREFLIGHT-LINEAGE.json",
+      "SHA256": "35efe93c8dfee5bf0e8776752b5d5cae736c352a7067305e6872536fa034f060",
+      "bytes": 183430
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1M1-PRODUCTION-MIGRATION-0003-0018.json",
+      "SHA256": "f42c860734623f92ef71c2fb0d98c21227060dee902a9d77c668d2b02c10efa9",
+      "bytes": 10369
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1R0-PRODUCTION-LINEAGE-FORENSIC.json",
+      "SHA256": "7bb2d615d489527799282bd512da0f79ff6622e93bd9464c593349fe5bd23cf9",
+      "bytes": 184211
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1R1-0003-0018-CATCHUP-REHEARSAL.json",
+      "SHA256": "1a1b55ef9782877d6420686f009b8eb44ae59c1bca5d02e78d48f1b3051b5384",
+      "bytes": 149436
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1R1-MIGRATION-AUTHORIZATION-TEMPLATE.json",
+      "SHA256": "0e2ecfc81e3a1a1dbc9624bd5ee1c5c69f0c0fa4b273d902f32a414c5dc97cfe",
+      "bytes": 6531
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1R1-PRODUCTION-EXECUTION-PLAN.json",
+      "SHA256": "6744eb10c9dd50560b8f392aa3fbdaaa318d1d5c4a88f5002da30f63b86fad5e",
+      "bytes": 4155
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-PREDEPLOY-SNAPSHOT.json",
+      "SHA256": "c55098e7aa0d3652f7eeb7242f24d7c2a7b5c41dcaccb86204cb798fa44cdd3d",
+      "bytes": 2544
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-PRODUCTION-DEPLOYMENT-RUNTIME-PROOF.json",
+      "SHA256": "d434483d93d320d1fed8f8e77f1d8a68a65177cbad1f59f277118dc616ad9b9a",
+      "bytes": 7130
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R2-HUMAN-ACCEPTANCE.json",
+      "SHA256": "484ee5c66eb4a4762fbdf7cebd5f5a9c7863dc4780adcc17855b161cd479b8f3",
+      "bytes": 2611
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-RELEASE-CANDIDATE-R2.json",
+      "SHA256": "7c483500cd65f9dee424832ecb4946ef5bd33b6e9250b67d62c460d92be3a59a",
+      "bytes": 2114
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/RENDERER-HEALTH-LOCAL-QA.json",
+      "SHA256": "8e119619607d03a4504c5e14909c8f56906e4c91b2b29b0273cec8203e486b92",
+      "bytes": 550
+    },
+    {
+      "path": "docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json",
+      "SHA256": "8a6fb6ee13ef0e5e66123916d3a94f58aa6685249cea4863812565b5f5f6a597",
+      "bytes": 482
+    },
+    {
+      "path": "functions/_lib/client-knowledge-ask-b.js",
+      "SHA256": "7c8653ef9a10cad2a5e592661a8d511e1135b921c1afe3e0dfcc1e6318189f1a",
+      "bytes": 14180
+    },
+    {
+      "path": "functions/_lib/d1-maintenance-guard.js",
+      "SHA256": "8bd2aad62308f36a7548738da533ccd28d84e39c6192ebbbb57fc56901145546",
+      "bytes": 3837
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "SHA256": "1b13a66c2bd37ada80e10c168772bc3f13f48c82b65948890e2cfed552c43580",
+      "bytes": 31732
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "SHA256": "39f94eca6bfd3afdfa8ce47789138258ec51a43af201e147750c8e4dcb4f724c",
+      "bytes": 27257
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "SHA256": "fee92913657c6954f8834c403c4245a11aeef366eb0950407f67423a018b22b1",
+      "bytes": 33133
+    },
+    {
+      "path": "functions/_middleware.js",
+      "SHA256": "3fdf18e61c655d3627e936b0d046b39aa9ed4d8b2166d109138bf5322f1a6f3d",
+      "bytes": 1479
+    },
+    {
+      "path": "functions/customer-projection/knowledge-customer-projection.js",
+      "SHA256": "47067c53581a97b7275cfa7e2a7e9ee93d714e310c44774ed147816d471064cc",
+      "bytes": 10560
+    },
+    {
+      "path": "functions/knowledge-runtime/current-manuscript-server-metadata.js",
+      "SHA256": "73762410b0d9542a6c99856e44fee82cf9f3ac3f65a7cf07061c6193e8a0db3b",
+      "bytes": 71607
+    },
+    {
+      "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
+      "SHA256": "24be395744ae4d1bf0c709b159cefd9e59bafc67b92a13b41c2c67a2b01321fa",
+      "bytes": 28330
+    },
+    {
+      "path": "scripts/activate-manuscript-whole-chapter-qualified-successor-r1.mjs",
+      "SHA256": "df2310aca32394530ade4fa7922eee05d77eabe27adf9d4874a55655244ec0ec",
+      "bytes": 1785
+    },
+    {
+      "path": "scripts/audit-p9-d1i1-external-writers.mjs",
+      "SHA256": "58c2bdd30056c7298cecd665ae0a8b0ba4e6484789884029fa07c679fdf222f8",
+      "bytes": 5207
+    },
+    {
+      "path": "scripts/audit-p9-d1i1-writers.mjs",
+      "SHA256": "c5c71fec5e2739185b1c5ea23998e1ef0c317d8a226f002c73d0617d4e045709",
+      "bytes": 7104
+    },
+    {
+      "path": "scripts/audit-p9-g3-d1r0-lineage.mjs",
+      "SHA256": "fd01d95e96ab6b5cb45ccd5a42d3ae61e9f8bf88e562b7c7e0414747401f9b5e",
+      "bytes": 11306
+    },
+    {
+      "path": "scripts/build-current-manuscript-release-evidence.mjs",
+      "SHA256": "a401c534a9b7693253addf1fffd93ab15685db56bbe1da8dd2753010161610e0",
+      "bytes": 2806
+    },
+    {
+      "path": "scripts/build-manuscript-server-metadata.mjs",
+      "SHA256": "f91638c4e43fd865fda85db0ddd8792a4577602aedfb9e61c8cd7fa920ab5cd3",
+      "bytes": 1971
+    },
+    {
+      "path": "scripts/check-book-i-current-live-answers.mjs",
+      "SHA256": "abb61c3e326b4618d60de98ceeb4a7fe3e0f637b7a4cc8a25239b21c77a0f2ec",
+      "bytes": 3542
+    },
+    {
+      "path": "scripts/check-book-i-iii-current-batch-customer-answers.mjs",
+      "SHA256": "34eacb8f220e141b3c0c6cb3a7d7a0f79d264a97b315dc89130e07a46114359a",
+      "bytes": 11803
+    },
+    {
+      "path": "scripts/check-book-v-vii-consumer-candidate.mjs",
+      "SHA256": "b989de3c68d5e8e9df8f1de19ee8c8bde1145081b9bf6edfb27d11f779d5ab00",
+      "bytes": 7656
+    },
+    {
+      "path": "scripts/check-m3c-entry-visual-alignment.mjs",
+      "SHA256": "fddcd237b00c371dd3f00079d6c940f59511f3a088ee77e911e6f2af03e9f36b",
+      "bytes": 11452
+    },
+    {
+      "path": "scripts/check-manuscript-whole-chapter-batch-r1.mjs",
+      "SHA256": "0a67fe91e9d0ec94f14e116b6393a0b803ccb8d786ec4b9e72f404403ca71eef",
+      "bytes": 12880
+    },
+    {
+      "path": "scripts/check-manuscript-whole-chapter-review-links-r1.mjs",
+      "SHA256": "802876b5b93ef957a159e9b59117167dc03b4b4c556754dc59c8273005bbdfb3",
+      "bytes": 636
+    },
+    {
+      "path": "scripts/check-p9-d1i1-bazi-reopen.mjs",
+      "SHA256": "c56cf881d01ee0211d9e6c5094fc6199d355afb35cd7a116d1de014f3a0e8ce9",
+      "bytes": 3374
+    },
+    {
+      "path": "scripts/check-p9-d1i1-compiled.mjs",
+      "SHA256": "3b39e646f5def771acb3234027feb4a35e6684f774a96e63d2e045c86dc0bdc2",
+      "bytes": 4763
+    },
+    {
+      "path": "scripts/check-p9-d1i1-isolation.mjs",
+      "SHA256": "e8aa349990a5fb14eca53fde6235811786bf51f58a4d2d78d2f5258be838a301",
+      "bytes": 19728
+    },
+    {
+      "path": "scripts/check-p9-d1m1-preflight.mjs",
+      "SHA256": "20c9f444a3abc4b08b1c68179389102f128ae53603885b35943f06dd8e9d5251",
+      "bytes": 11172
+    },
+    {
+      "path": "scripts/check-pages-preview-commerce.mjs",
+      "SHA256": "329b377b42fab20c8191365dafeb2dd9c723bcab2b986c9c703e2b0869656813",
+      "bytes": 4068
+    },
+    {
+      "path": "scripts/check-pws-i2-w5-product-offer-registry.mjs",
+      "SHA256": "e42d2438b735d2f31411eb812020ec61660f8d69662bab13816124a9ad4090d0",
+      "bytes": 8276
+    },
+    {
+      "path": "scripts/check-renderer-health-zero-cost.mjs",
+      "SHA256": "33bb3c6bd638e044e3c9e59506aad91148c2e3a2b71f103f08ec8f896fb49ef6",
+      "bytes": 1793
+    },
+    {
+      "path": "scripts/classify-book-vii-existing-chapter-knowledge-scope-r1.mjs",
+      "SHA256": "48fb2ffcb5f5cdd60b9de3f6a99e0f9170351f32c9b0bc2692b29be79075b4a3",
+      "bytes": 3574
+    },
+    {
+      "path": "scripts/deliver-book-v-vii-private-consumer-candidates.mjs",
+      "SHA256": "4207cd94f4d4ba2eb4a4461af8e00bff489bd2abf6857d7707026655d6c40ae5",
+      "bytes": 2021
+    },
+    {
+      "path": "scripts/finalize-manuscript-whole-chapter-batch-r1.mjs",
+      "SHA256": "3e3fdeb5d7af5bace61d75745cd90db48e8a910b433a1fa47647a9d6d65abe5d",
+      "bytes": 8747
+    },
+    {
+      "path": "scripts/freeze-p9-d1i1-successor.mjs",
+      "SHA256": "86c8b0a169430cf1ac21246c07177bc3b331f1e9b762498aba8657afbdc79763",
+      "bytes": 16078
+    },
+    {
+      "path": "scripts/p9-d1i1-json-loader.mjs",
+      "SHA256": "a028554202aef7ba32ab3a2f79b3c6968d2ec8188b5c0003f7b3af99338772c1",
+      "bytes": 412
+    },
+    {
+      "path": "scripts/prepare-ask-pages-preserved-config-release.mjs",
+      "SHA256": "1e108b1904985a113d85693b7dc510875acb9d45a4be8cec8bb1b5089c0cc27b",
+      "bytes": 3702
+    },
+    {
+      "path": "scripts/prepare-book-v-vii-consumer-successor.mjs",
+      "SHA256": "ed0426b333f31cd53259779c9ce9d4462fd63574c7282fc766faebbf4a4f5a99",
+      "bytes": 5818
+    },
+    {
+      "path": "scripts/prepare-manuscript-argument-context-r1.mjs",
+      "SHA256": "256d2643bdee4e242318f8b74cf08b15e4fc8d4ec9daa818f109fd8e5a2ee774",
+      "bytes": 2124
+    },
+    {
+      "path": "scripts/prepare-manuscript-whole-chapter-batch-r1.mjs",
+      "SHA256": "a409465fd12d3322bb61e2942ac163569a4001b49f2536711d65233683a0eeb4",
+      "bytes": 10632
+    },
+    {
+      "path": "scripts/prepare-manuscript-whole-chapter-boundary-successor-r1.mjs",
+      "SHA256": "a8dcfb09e27e6731e418ce514b4d5d16de1557f9ebebb84c44b909588ef17a9d",
+      "bytes": 2157
+    },
+    {
+      "path": "scripts/prepare-manuscript-whole-chapter-independent-r1.mjs",
+      "SHA256": "18d78eed606a17aae6a1c2f950642895c12b878d30beeebb247b9699ee7703ec",
+      "bytes": 1650
+    },
+    {
+      "path": "scripts/prepare-p9-d1i1-snapshot.mjs",
+      "SHA256": "8497bc2e26e82d5099cb505df62693c326a6b03ab345fc4d65acbeca7b1f83ba",
+      "bytes": 3717
+    },
+    {
+      "path": "scripts/publish-verified-ask-preserving-cloud-config.mjs",
+      "SHA256": "e10efed2afbf704e5a5364ab30a62abdf18a6a22f6fbe19ac6c261b730d71bde",
+      "bytes": 5415
+    },
+    {
+      "path": "scripts/reconcile-ask-publication-config-result.mjs",
+      "SHA256": "d6adfb223ab527d15ed54b3a6aa4fd378577f5b59b3b913f35d5f603e7c85341",
+      "bytes": 2082
+    },
+    {
+      "path": "scripts/reconcile-manuscript-whole-chapter-batch-r1-live.mjs",
+      "SHA256": "5eadc49d57023cdda5d421e62ad04762e71745f7cbc0aa6a65fc9b2848bab8fe",
+      "bytes": 7529
+    },
+    {
+      "path": "scripts/reconcile-manuscript-whole-chapter-batch-r1-rollback.mjs",
+      "SHA256": "60897dcbf1fe11c8e835f7b2c2622f6a4b6ae81f48869490ce8e62558b952def",
+      "bytes": 8379
+    },
+    {
+      "path": "scripts/reconcile-seven-book-current-consumer-evidence.mjs",
+      "SHA256": "a70b3be01ec25533535032cc040312956b6d088583b5a83e9c98ce72a6507f19",
+      "bytes": 8145
+    },
+    {
+      "path": "scripts/record-manuscript-shared-mechanism-progress-r1.mjs",
+      "SHA256": "bbeb74b414b7057071cc9a011cb0ce1a3cb906d504950d49d2229899ffc1c2af",
+      "bytes": 4052
+    },
+    {
+      "path": "scripts/rehearse-p9-g3-d1r1.mjs",
+      "SHA256": "d8916416ad9decfd052ea0ef78ee04d39b3b474c26af77d73c7400d6b1f8bed4",
+      "bytes": 17861
+    },
+    {
+      "path": "scripts/review-manuscript-whole-chapter-batch-r1.py",
+      "SHA256": "d5b40b0a70be28220248bbbf122eaec397c84ca414615e82cec714caae18572e",
+      "bytes": 3504
+    },
+    {
+      "path": "scripts/rollback-manuscript-whole-chapter-batch-r1.mjs",
+      "SHA256": "05f5f752311e3ad33cfc5e9bedc296e7813fa892e3bfee4a25e5c3816b54f2ea",
+      "bytes": 2637
+    },
+    {
+      "path": "scripts/verify-manuscript-whole-chapter-batch-r1-live.mjs",
+      "SHA256": "f04404f3519c025acc6ce2974aa89172c3a2eed42f8fdaa4f27eb6065ae6e9cc",
+      "bytes": 5194
+    },
+    {
+      "path": "tools/review/P9-BAZI-LIVE-CANARY-HUMAN-REVIEW.html",
+      "SHA256": "4da81891745fb10500acd09eab9bd6e8d6404029ec390c4b7a3633b1cd76b495",
+      "bytes": 11676
+    },
+    {
+      "path": "tools/review/P9-G3-D1I1-HUMAN-REVIEW.html",
+      "SHA256": "dc9d6ca485bf8b21ddf2c630d94671299f97dd16690cf87a4aaf7487de27d876",
+      "bytes": 3836
+    },
+    {
+      "path": "tools/review/external-reality-cross-domain-r1/R1-CHECK-RESULTS.json",
+      "SHA256": "e90e0707a8d5649b364666d469c33a02f049173ff94f835c3072ba058b267b5c",
+      "bytes": 67905
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/ASK-PUBLICATION-HISTORY-948666c525740d2e.json",
+      "SHA256": "948666c525740d2e165ebfa81ae9548684090b0db0810330701718fdbdf890be",
+      "bytes": 1624
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/ASK-PUBLICATION-HISTORY-aa4689b0aff4aef9.json",
+      "SHA256": "aa4689b0aff4aef99c23c39090148e497dcffce0cd8c2261350559850cf4c275",
+      "bytes": 1488
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-442-CURRENT-LIVE-ANSWERS.json",
+      "SHA256": "b47fd198693336d854fd202ccbc82b2a69037aa3ea4054deaaee7746eb4d7422",
+      "bytes": 32168
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-CURRENT-PRODUCTION-METADATA-QA-INITIAL-FAILURES.json",
+      "SHA256": "f632e97fe4c21da9e795bc6e9995fb9ee251c290c8d4616e80baf36a855b4155",
+      "bytes": 84933
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-CURRENT-PRODUCTION-METADATA-QA.json",
+      "SHA256": "c081c3b8f0fba76d8847602986ed3ccb8d3bfb4319b8d8af0a057858e00cb719",
+      "bytes": 82232
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-BATCH-ANSWER-REGRESSION-INITIAL-FAILURES.json",
+      "SHA256": "1c262bca837dc3edf5acec737b6b57d6e3edc25fc7b5fb0c1c59beb871eafbbc",
+      "bytes": 76693
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-BATCH-ANSWER-REGRESSION.json",
+      "SHA256": "8baa73dc42d486f5f35000556d722491b24a67122cdcf624d4f428b3ab11aeb7",
+      "bytes": 85756
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-BATCH-INDEPENDENT-ANSWERS.json",
+      "SHA256": "1e127c89ad00ac6c87bf2c02e9f0455391af573dc6dd7dbda0abe349e215ab8d",
+      "bytes": 31913
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-III-RESTORED-BASELINE-SOURCE-REGRESSION.json",
+      "SHA256": "e795695a70aa690f6f90e47c1847325aebe0e5e8ad1d66eae879d495da18812f",
+      "bytes": 33017
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-V-CUSTOMER-CONSUMER-QA.json",
+      "SHA256": "d1449410d27bdd259607bd6b7a066ab881dc316f7f6e5e4fa25ea56f69f14a8b",
+      "bytes": 7220
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-V-VII-CONSUMER-CANDIDATE-QA-INITIAL-FAILURES.json",
+      "SHA256": "43a3e078fa9cba6a1872afd5d731a7301a60b34dd32b37f98db8f0152fb5b932",
+      "bytes": 256910
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-V-VII-CONSUMER-CANDIDATE-QA.json",
+      "SHA256": "829cf34184b009f809da818c3e1aff589ebcf84f10a5dd0ee4de8ea52352cabc",
+      "bytes": 53292
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-V-VII-PRIVATE-CONSUMER-CANDIDATES.json",
+      "SHA256": "7972e5c3c324ae0f81198b398dd9c85a1d854fe77501f4a136e7512691e46443",
+      "bytes": 1379
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-ASK-PRESERVED-CONFIG-PUBLICATION.json",
+      "SHA256": "e15f3d683c770a453283551458dd82c8ad695fb15fa623b150ba3e73cf234975",
+      "bytes": 1134
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-BUILD-RECEIPT.json",
+      "SHA256": "cd4884d65610d38bb4197c2cf4a3cae5ec32f3b417ba661cd44509fe28a1b4ff",
+      "bytes": 78735
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-LOCAL-RELEASE-REGRESSION.json",
+      "SHA256": "268eeced7b28d4a989eb849a38204cd3853ff3991daa7935348b480595122d55",
+      "bytes": 13666
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-MASTER-STATE.json",
+      "SHA256": "5924de255b833c63a866b78df8b502e8a5b9d38fef1d7d27d37699aa8519d1e9",
+      "bytes": 30888
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-SCOPED-CUSTOMER-ANSWERS.json",
+      "SHA256": "72972ad3d21298526e9ccb58474e346c1c01b7d590635a41b5fa55668b8a2662",
+      "bytes": 103421
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-SERVER-METADATA-IDENTITY.json",
+      "SHA256": "1646d6730af8ef038116d767aec9af27250ac4f6af2c26952b7e3ffd9b8e2574",
+      "bytes": 2151
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/SEVEN-BOOK-CHAPTER-COVERAGE.json",
+      "SHA256": "42a3f096619e06e9b32158a76bc7fc584862030e168a5a5c4efbe521e90218e6",
+      "bytes": 1018377
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/SEVEN-BOOK-CHAPTER-QUALITY-AUDIT.json",
+      "SHA256": "2fba5fb89c337fcc2a5525fd525e56cb7f368334ba74e401bcef760e1bed6b4b",
+      "bytes": 2172902
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/SEVEN-BOOK-COVERAGE.json",
+      "SHA256": "5c082fe8b777706a1ab33abc31b9d5727897443289e8f84613b68cb25ab6dec1",
+      "bytes": 88778
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/BOOK-1-source-pages.png",
+      "SHA256": "7fb6b6f23393231c47804a6d3eed2b7d8bdac7ed1acd1f643c3b077dbeb847b8",
+      "bytes": 670964
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/BOOK-3-source-pages.png",
+      "SHA256": "5cbf868b2bbe99fe744da307e799caac5d6675076b7813bbe609d299b63fb22e",
+      "bytes": 1880481
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/BOOK-5-source-pages.png",
+      "SHA256": "dbbc29db4a9365c57c34e8af4c7d3a9c2d895f88de06f716f97080933584ff1b",
+      "bytes": 1801722
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/BOUNDARY-ANSWERS-INITIAL-FAILURE.json",
+      "SHA256": "ebc3afc3532357f2472d78b6b896d92719d475b566a640c217ccca63538adc56",
+      "bytes": 13308
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/BOUNDARY-ANSWERS.json",
+      "SHA256": "66563d83b88f45d5684f518580c8a29fa4faa0f9a3737cb05049c9479eedf457",
+      "bytes": 1531
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/CHAPTER-CURRENT-CLOSURE.json",
+      "SHA256": "642872185bdaa9aba923a4cacd8aed1de6cd3eb92c0a4dfa1b926a5b5452fad3",
+      "bytes": 13282
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/CHAPTER-QUALIFICATION.json",
+      "SHA256": "9382d2f5d8314dd6d0f696ed3fb1686f0ee8c0fb40e50e39be587bfa16cd9b15",
+      "bytes": 20359
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-08bfed6dc0aa9518.json",
+      "SHA256": "08bfed6dc0aa951893aac3530556c94fd6f5d760d83fbe29fca6ce44a551a3b5",
+      "bytes": 58209
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-0eeb48c527c5042d.json",
+      "SHA256": "0eeb48c527c5042d91bf5b4cd028fa8bccab4cdc0e11368a59d16914821a329e",
+      "bytes": 40201
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-70cf470f0bf18e8a.json",
+      "SHA256": "70cf470f0bf18e8ad1537f2c8b519bdc1d450d06eef1b778d11f47cae997a58d",
+      "bytes": 85966
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-7384652aa37565d8.json",
+      "SHA256": "7384652aa37565d873b6f8a8838b79f38e3996f5f0efc289dac323917fe18668",
+      "bytes": 39391
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-cb87b7af5b33b8ea.json",
+      "SHA256": "cb87b7af5b33b8ea28d04d217d4f63ec069c8e10313bff6f3e71838252d67556",
+      "bytes": 48227
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-d57b5f0c8c8d0535.json",
+      "SHA256": "d57b5f0c8c8d0535144babf8c3c27826cb14de2be25de1e832d546e843eac2ca",
+      "bytes": 39481
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-INITIAL-FAILURES.json",
+      "SHA256": "a014d9d317a873855ffc9c3f2548fb9a95b5746659a237021f62742848890b9e",
+      "bytes": 27433
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS.json",
+      "SHA256": "7c17dcb2d229a17d6e1445630f4c1e4452f3f308cf624728ce834ac9093fd130",
+      "bytes": 39391
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-QUESTIONS.json",
+      "SHA256": "7deda5c85b0063ef7de2f76cee823882c1e650afde55d1eeb469dfb079c3703a",
+      "bytes": 5995
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/FRESH-INDEPENDENT-ANSWERS-HISTORY-af3418910511468d.json",
+      "SHA256": "af3418910511468d4c92b0c5665421fe3b5762cf75084d696ca1406201178da6",
+      "bytes": 13418
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/FRESH-INDEPENDENT-ANSWERS.json",
+      "SHA256": "3e44737482d1eadc42f28d2ded4bb5b7497d19b5b679a4944d7fdfa089bcece7",
+      "bytes": 13454
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/FRESH-INDEPENDENT-QUESTIONS.json",
+      "SHA256": "2229fc8ffbf775b5e3d4c8b0db54d6255b926990a364e66c0330b87bb1f39139",
+      "bytes": 1781
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/INDEPENDENT-ANSWERS-INITIAL-FAILURES.json",
+      "SHA256": "948031a05025cd9c0f639f89d9b50548516483968745f24393925686f1c5ace6",
+      "bytes": 9641
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/INDEPENDENT-ANSWERS.json",
+      "SHA256": "f7c27321929fdb86c8866a99c95767905dd30e8a73a25dac411b6ab087ea2cff",
+      "bytes": 14322
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/INDEPENDENT-QUESTIONS.json",
+      "SHA256": "5e55aa0346d32d9258f7ff7e5eae3d44c9a0660d2d30808dbc89fd3f21f9e8e0",
+      "bytes": 1810
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-ANSWERS-HISTORY-298a26edfccc946e.json",
+      "SHA256": "298a26edfccc946ea74fdaef90e52a3595817370c3d93c95cda4665cf69d2164",
+      "bytes": 32366
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-ANSWERS.json",
+      "SHA256": "46b2e9d9ebdb2c89d3f2f03dbf2cfd0ac20510443217d831ce3b40a10a5929cb",
+      "bytes": 39784
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FAILURE-REGRESSION-HISTORY-9fb71622f46e2b78.json",
+      "SHA256": "9fb71622f46e2b78fcc890124cfb6a9024130fe7f58a6fade4d0a57bb1cbfd39",
+      "bytes": 11025
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FAILURE-REGRESSION-HISTORY-c64c0c50f15e422c.json",
+      "SHA256": "c64c0c50f15e422c3c5394dd0144ab1d4d407ea3973d00994ba61151123f88d1",
+      "bytes": 9729
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FAILURE-REGRESSION-HISTORY-fa48a007726c261b.json",
+      "SHA256": "fa48a007726c261b0acb1beffac182b1a26eebc1b22eded322334c9b254336f0",
+      "bytes": 20056
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FAILURE-REGRESSION-INITIAL-FAILURES.json",
+      "SHA256": "fa48a007726c261b0acb1beffac182b1a26eebc1b22eded322334c9b254336f0",
+      "bytes": 20056
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FAILURE-REGRESSION.json",
+      "SHA256": "ef879f80e62fd5a569ef40b4045f8d552619112fc66cb438a9f806211ea29865",
+      "bytes": 11025
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FOLLOWUP-UNSEEN-QUESTIONS.json",
+      "SHA256": "9620d6c5dcf7a0ffd4ecb5f64269fd42094335f143364962c3bb1e90564ec811",
+      "bytes": 614
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-UNSEEN-QUESTIONS.json",
+      "SHA256": "ea247b4a408b0249dfeefc09dad501d575136d0899622ed230183bf8ae295f94",
+      "bytes": 594
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/MECHANISM-INDEPENDENT-ANSWERS-HISTORY-7efa49bf3674ad7c.json",
+      "SHA256": "7efa49bf3674ad7cf40fef035d76535beabac589a42ad784027164682f0cfe87",
+      "bytes": 65481
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/MECHANISM-INDEPENDENT-ANSWERS-INITIAL-FAILURES.json",
+      "SHA256": "7efa49bf3674ad7cf40fef035d76535beabac589a42ad784027164682f0cfe87",
+      "bytes": 65481
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/MECHANISM-INDEPENDENT-ANSWERS.json",
+      "SHA256": "0daa8d50a8cdec2b3761cd946dee7fb5342b6c92cd0d5c32b06f24e3e1131428",
+      "bytes": 20909
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/MECHANISM-INDEPENDENT-QUESTIONS.json",
+      "SHA256": "196be3dc0ec3b334ceab333511d7cf7ed93b7e73ab94b38dffe1003ebd714ab2",
+      "bytes": 1582
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-DEVELOPMENT-ANSWERS-HISTORY-5e46655477b23484.json",
+      "SHA256": "5e46655477b23484a498bcc4bcc07de9100e736f83511ed240707a06c14b25da",
+      "bytes": 24995
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-DEVELOPMENT-ANSWERS.json",
+      "SHA256": "58bdba0da54aad6b44a96a858cd55590e9da2dfe3c96a235314a990694bd5215",
+      "bytes": 25021
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-FRESH-INDEPENDENT-ANSWERS.json",
+      "SHA256": "2f796d8237ed06c49df64303cd23cb6acc7832ccac07351dbd998bff103accff",
+      "bytes": 9165
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-LIVE-FAILURE-REGRESSION-HISTORY-0eba58e48ea059f9.json",
+      "SHA256": "0eba58e48ea059f9bef283370469da56ee1bc1fedd7b25e482fb0e96c9b74218",
+      "bytes": 43257
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-LIVE-FAILURE-REGRESSION-HISTORY-26d6c0501ebd43a2.json",
+      "SHA256": "26d6c0501ebd43a28f331e574efc16b86adb7561f1ebb8a04b906915163e93c4",
+      "bytes": 5471
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-LIVE-FAILURE-REGRESSION-HISTORY-49e16e3fdf83cb4d.json",
+      "SHA256": "49e16e3fdf83cb4d96b709ac517ed41260cc8811d8136a053100d10e87bbdec8",
+      "bytes": 9893
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-LIVE-FAILURE-REGRESSION-HISTORY-f3148f004f341f0f.json",
+      "SHA256": "f3148f004f341f0f49804c145db1f453d6b698ba6655badbf856baea46ea0860",
+      "bytes": 9887
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-LIVE-FAILURE-REGRESSION-INITIAL-FAILURES.json",
+      "SHA256": "49e16e3fdf83cb4d96b709ac517ed41260cc8811d8136a053100d10e87bbdec8",
+      "bytes": 9893
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-LIVE-FAILURE-REGRESSION.json",
+      "SHA256": "5a7ebf22542b7ed388213bee6b2d3cd2e1c33ce5a5c41a716ccec5f47db8c85d",
+      "bytes": 9729
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RESTORED-III-BASELINE-ANSWERS.json",
+      "SHA256": "fac87a35885c69d63a6966b598cf0933f350402892d896c8674fabd4eeb57c95",
+      "bytes": 19866
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/ROLLBACK-RECEIPT.json",
+      "SHA256": "0b2576c596360692489cc27636bc4184e88e91d12d84bedbe37f005e9b83669c",
+      "bytes": 653
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/SOURCE-PAGE-COMPARISON.json",
+      "SHA256": "fe6ba25a279fd507db43a2c37cdfaeabdaf06748e3ebde76dbdd1e42f72bd291",
+      "bytes": 8077
+    }
+  ],
+  "extraFileCount": 143,
+  "extraClassificationCounts": {
+    "GOVERNANCE_EVIDENCE": 13,
+    "KNOWLEDGE_BOOK_CONTENT_CHANGE": 19,
+    "QA_ARTIFACT": 71,
+    "SOURCE_CHANGE": 33,
+    "GENERATED_ARTIFACT": 1,
+    "P9_RELATED_BUT_NOT_IN_R2_CANDIDATE": 4,
+    "PRODUCTION_BEHAVIOR_RISK": 2
+  },
+  "unknownCount": 0,
+  "impactMatrix": [
+    {
+      "path": ".gitignore",
+      "classification": "GOVERNANCE_EVIDENCE",
+      "SHA256": "f07c176df29f5807ea05ee34ec7ed86ee063ddb20e1a558a5b1efaa8d33f4082",
+      "bytes": 991,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "NO",
+      "reason": "Adds five explicit temporary P9 artifact exclusions; not executable.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-bounded-comparison.js",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "c6cb355ba5a893c92695b376072b03206371f5e363de2625c7dad2e754405028",
+      "bytes": 29206,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Historical before-state source snapshot, stored as content evidence; not imported as live runtime code.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-chapter-arguments.js",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "8db23133afdb770a4ad4f0fd55556a0c06d68cd8c483dd13193bca7fd582721f",
+      "bytes": 29595,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Historical before-state source snapshot, stored as content evidence; not imported as live runtime code.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-qa-identity.js",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "f72ddce2a48713c9b41e5999bf55e79d8e7f373b43c933b0146048d45ebda285",
+      "bytes": 27850,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Historical before-state source snapshot, stored as content evidence; not imported as live runtime code.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/answer-projection/maintenance/kap-m14-composition-before-book-v-vii.js",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "8b176a0a03f68cc0528c50fda2f7456240ffd5cd7ec06abfe867a5c192286798",
+      "bytes": 26906,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Historical before-state source snapshot, stored as content evidence; not imported as live runtime code.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/answer-projection/maintenance/kap-m14-grounding-before-book-v-vii.js",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "1bd7566a79184c342e65619c7a3b9a1f6743161e2b5e4f2a796b680042593bc8",
+      "bytes": 32610,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Historical before-state source snapshot, stored as content evidence; not imported as live runtime code.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/answer-projection/maintenance/kap-m14-manuscript-source-access-v1.json",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "fe0cfaf64165978f0af12846c489425953c2cbdae7ba5b72e125a5ee0188df7f",
+      "bytes": 11247,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge source/identity/scope/build-input or acceptance evidence, independent of P9 release acceptance.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/manuscripts/review/book-v-v1-current-source-identity-inheritance-v1.json",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "699a1d2cb66d253d5bc986210cd9ce98c7fa012f31fe60f8330f6799fc5a7467",
+      "bytes": 660,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge source/identity/scope/build-input or acceptance evidence, independent of P9 release acceptance.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/manuscripts/review/book-vii-v2-approved-knowledge-unit-inheritance-v1.json",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "99716241ce054c9d8d40d4c3cee9f18e47760fbf48f0374376af634327b8eb92",
+      "bytes": 817,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge source/identity/scope/build-input or acceptance evidence, independent of P9 release acceptance.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/manuscripts/review/book-vii-v2-approved-knowledge-unit-inheritance-v2.json",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "fcf3fcd3ef7d7115c105799a0bb5a75f561d774a7043acfe3228840d31e2de3b",
+      "bytes": 2653,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge source/identity/scope/build-input or acceptance evidence, independent of P9 release acceptance.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v1.json",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "4a38a336b4a3a9511e6dbcac5db53e825043efb922df4f93190e6416753481df",
+      "bytes": 7160,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge source/identity/scope/build-input or acceptance evidence, independent of P9 release acceptance.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v10-candidate.json",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "20626e2bba60aa17988588cbac432157b72c66f625bf6ee965472ab2f53bc887",
+      "bytes": 12795,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge source/identity/scope/build-input or acceptance evidence, independent of P9 release acceptance. Registry v10/v9 are stored in the generated server metadata; runtime flag/active-registry selection governs consumption, not mere file existence.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v10.json",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "5780d25ec85a83773086fbba35f89806d1ec1147425c660876a9e58d42fe245f",
+      "bytes": 12214,
+      "runtimeReachable": "YES",
+      "productionBehaviorChange": "YES",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "YES",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge source/identity/scope/build-input or acceptance evidence, independent of P9 release acceptance. Registry v10/v9 are stored in the generated server metadata; runtime flag/active-registry selection governs consumption, not mere file existence.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v11-candidate.json",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "739ebdb6585bf2aab8804178ad2f84e11383c5105743f14570f531e542cb9e14",
+      "bytes": 12796,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge source/identity/scope/build-input or acceptance evidence, independent of P9 release acceptance. Registry v10/v9 are stored in the generated server metadata; runtime flag/active-registry selection governs consumption, not mere file existence.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v8-candidate.json",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "376235bcbea73e618ba339ccf6ce292155591f9b2cdce3b0f8955f54675b6dfa",
+      "bytes": 12029,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge source/identity/scope/build-input or acceptance evidence, independent of P9 release acceptance. Registry v10/v9 are stored in the generated server metadata; runtime flag/active-registry selection governs consumption, not mere file existence.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v9-candidate.json",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "86146b4d7470e16a85ef388fa26fe33f810e239f79ce1b0dace23789912cf7fe",
+      "bytes": 12489,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge source/identity/scope/build-input or acceptance evidence, independent of P9 release acceptance. Registry v10/v9 are stored in the generated server metadata; runtime flag/active-registry selection governs consumption, not mere file existence.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v9.json",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "97c73f846ead17f6397822b336d0d054825927f44d8bb8695712e59f385fd974",
+      "bytes": 11918,
+      "runtimeReachable": "YES",
+      "productionBehaviorChange": "YES",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "YES",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge source/identity/scope/build-input or acceptance evidence, independent of P9 release acceptance. Registry v10/v9 are stored in the generated server metadata; runtime flag/active-registry selection governs consumption, not mere file existence.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-text-scope-candidates-v6.json",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "74c7fdc3f84c70cab7aea458f8a8e9fe0fe728edf8500810e55ded1a6b27be2c",
+      "bytes": 32739,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge source/identity/scope/build-input or acceptance evidence, independent of P9 release acceptance. Registry v10/v9 are stored in the generated server metadata; runtime flag/active-registry selection governs consumption, not mere file existence.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-text-scope-candidates-v7.json",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "65a605425b5dfa0a075cfc6839e3bf5627853ae42b168658d0845684905188fe",
+      "bytes": 33191,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge source/identity/scope/build-input or acceptance evidence, independent of P9 release acceptance. Registry v10/v9 are stored in the generated server metadata; runtime flag/active-registry selection governs consumption, not mere file existence.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-text-scope-candidates-v8.json",
+      "classification": "KNOWLEDGE_BOOK_CONTENT_CHANGE",
+      "SHA256": "c802a84b41ad85ad0d31f354f6d4fa7115edd5d1c43a63a2e2d6c382f9c0f806",
+      "bytes": 33490,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge source/identity/scope/build-input or acceptance evidence, independent of P9 release acceptance. Registry v10/v9 are stored in the generated server metadata; runtime flag/active-registry selection governs consumption, not mere file existence.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html",
+      "classification": "GOVERNANCE_EVIDENCE",
+      "SHA256": "f54da2d1849f8f4abe4f107d8a952ab4d4db1b195024b940059971b2d287f12c",
+      "bytes": 543796,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "YES",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Shared review document, not P9 runtime implementation; related links/status require own review.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/ASK-PAGES-PRESERVED-CONFIG-RELEASE.json",
+      "classification": "GOVERNANCE_EVIDENCE",
+      "SHA256": "df45aa989ba7ad2fa230beae028c9e2a75c4d2f11f3ed48e816282b6f451c1a1",
+      "bytes": 3290,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "P9 historical receipt/plan or unrelated Ask configuration record; factual history only, does not authorize deployment or prove current isolation.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G1-R2-COMMIT-CANDIDATE-PROOF.json",
+      "classification": "GOVERNANCE_EVIDENCE",
+      "SHA256": "464b37e3fb0a6d795a8ea0c6e35037cad59eaabcc090acd32aca6dc7b2736315",
+      "bytes": 41551,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "P9 historical receipt/plan or unrelated Ask configuration record; factual history only, does not authorize deployment or prove current isolation.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1M1-PREFLIGHT-LINEAGE.json",
+      "classification": "GOVERNANCE_EVIDENCE",
+      "SHA256": "35efe93c8dfee5bf0e8776752b5d5cae736c352a7067305e6872536fa034f060",
+      "bytes": 183430,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "P9 historical receipt/plan or unrelated Ask configuration record; factual history only, does not authorize deployment or prove current isolation.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1M1-PRODUCTION-MIGRATION-0003-0018.json",
+      "classification": "GOVERNANCE_EVIDENCE",
+      "SHA256": "f42c860734623f92ef71c2fb0d98c21227060dee902a9d77c668d2b02c10efa9",
+      "bytes": 10369,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "P9 historical receipt/plan or unrelated Ask configuration record; factual history only, does not authorize deployment or prove current isolation.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1R0-PRODUCTION-LINEAGE-FORENSIC.json",
+      "classification": "GOVERNANCE_EVIDENCE",
+      "SHA256": "7bb2d615d489527799282bd512da0f79ff6622e93bd9464c593349fe5bd23cf9",
+      "bytes": 184211,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "P9 historical receipt/plan or unrelated Ask configuration record; factual history only, does not authorize deployment or prove current isolation.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1R1-0003-0018-CATCHUP-REHEARSAL.json",
+      "classification": "GOVERNANCE_EVIDENCE",
+      "SHA256": "1a1b55ef9782877d6420686f009b8eb44ae59c1bca5d02e78d48f1b3051b5384",
+      "bytes": 149436,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "P9 historical receipt/plan or unrelated Ask configuration record; factual history only, does not authorize deployment or prove current isolation.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1R1-MIGRATION-AUTHORIZATION-TEMPLATE.json",
+      "classification": "GOVERNANCE_EVIDENCE",
+      "SHA256": "0e2ecfc81e3a1a1dbc9624bd5ee1c5c69f0c0fa4b273d902f32a414c5dc97cfe",
+      "bytes": 6531,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "P9 historical receipt/plan or unrelated Ask configuration record; factual history only, does not authorize deployment or prove current isolation.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-D1R1-PRODUCTION-EXECUTION-PLAN.json",
+      "classification": "GOVERNANCE_EVIDENCE",
+      "SHA256": "6744eb10c9dd50560b8f392aa3fbdaaa318d1d5c4a88f5002da30f63b86fad5e",
+      "bytes": 4155,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "P9 historical receipt/plan or unrelated Ask configuration record; factual history only, does not authorize deployment or prove current isolation.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-PREDEPLOY-SNAPSHOT.json",
+      "classification": "GOVERNANCE_EVIDENCE",
+      "SHA256": "c55098e7aa0d3652f7eeb7242f24d7c2a7b5c41dcaccb86204cb798fa44cdd3d",
+      "bytes": 2544,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "P9 historical receipt/plan or unrelated Ask configuration record; factual history only, does not authorize deployment or prove current isolation.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-PRODUCTION-DEPLOYMENT-RUNTIME-PROOF.json",
+      "classification": "GOVERNANCE_EVIDENCE",
+      "SHA256": "d434483d93d320d1fed8f8e77f1d8a68a65177cbad1f59f277118dc616ad9b9a",
+      "bytes": 7130,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "P9 historical receipt/plan or unrelated Ask configuration record; factual history only, does not authorize deployment or prove current isolation.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/RENDERER-HEALTH-LOCAL-QA.json",
+      "classification": "GOVERNANCE_EVIDENCE",
+      "SHA256": "8e119619607d03a4504c5e14909c8f56906e4c91b2b29b0273cec8203e486b92",
+      "bytes": 550,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "P9 historical receipt/plan or unrelated Ask configuration record; factual history only, does not authorize deployment or prove current isolation.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "8a6fb6ee13ef0e5e66123916d3a94f58aa6685249cea4863812565b5f5f6a597",
+      "bytes": 482,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "functions/_lib/client-knowledge-ask-b.js",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "7c8653ef9a10cad2a5e592661a8d511e1135b921c1afe3e0dfcc1e6318189f1a",
+      "bytes": 14180,
+      "runtimeReachable": "YES",
+      "productionBehaviorChange": "YES",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "YES",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge/Ask projection or manuscript retrieval successor. Operational isolation owners remain byte-identical; actual imports/write inventory separately re-audited.",
+      "interferenceEvidence": "Actual immutable source closure inventory unchanged; root guard sources byte-identical; fresh 244 local + 138 compiled dispatcher checks PASS. Knowledge semantics require own review."
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "1b13a66c2bd37ada80e10c168772bc3f13f48c82b65948890e2cfed552c43580",
+      "bytes": 31732,
+      "runtimeReachable": "YES",
+      "productionBehaviorChange": "YES",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "YES",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge/Ask projection or manuscript retrieval successor. Operational isolation owners remain byte-identical; actual imports/write inventory separately re-audited.",
+      "interferenceEvidence": "Actual immutable source closure inventory unchanged; root guard sources byte-identical; fresh 244 local + 138 compiled dispatcher checks PASS. Knowledge semantics require own review."
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "39f94eca6bfd3afdfa8ce47789138258ec51a43af201e147750c8e4dcb4f724c",
+      "bytes": 27257,
+      "runtimeReachable": "YES",
+      "productionBehaviorChange": "YES",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "YES",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge/Ask projection or manuscript retrieval successor. Operational isolation owners remain byte-identical; actual imports/write inventory separately re-audited.",
+      "interferenceEvidence": "Actual immutable source closure inventory unchanged; root guard sources byte-identical; fresh 244 local + 138 compiled dispatcher checks PASS. Knowledge semantics require own review."
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "fee92913657c6954f8834c403c4245a11aeef366eb0950407f67423a018b22b1",
+      "bytes": 33133,
+      "runtimeReachable": "YES",
+      "productionBehaviorChange": "YES",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "YES",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge/Ask projection or manuscript retrieval successor. Operational isolation owners remain byte-identical; actual imports/write inventory separately re-audited.",
+      "interferenceEvidence": "Actual immutable source closure inventory unchanged; root guard sources byte-identical; fresh 244 local + 138 compiled dispatcher checks PASS. Knowledge semantics require own review."
+    },
+    {
+      "path": "functions/customer-projection/knowledge-customer-projection.js",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "47067c53581a97b7275cfa7e2a7e9ee93d714e310c44774ed147816d471064cc",
+      "bytes": 10560,
+      "runtimeReachable": "YES",
+      "productionBehaviorChange": "YES",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "YES",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge/Ask projection or manuscript retrieval successor. Operational isolation owners remain byte-identical; actual imports/write inventory separately re-audited.",
+      "interferenceEvidence": "Actual immutable source closure inventory unchanged; root guard sources byte-identical; fresh 244 local + 138 compiled dispatcher checks PASS. Knowledge semantics require own review."
+    },
+    {
+      "path": "functions/knowledge-runtime/current-manuscript-server-metadata.js",
+      "classification": "GENERATED_ARTIFACT",
+      "SHA256": "73762410b0d9542a6c99856e44fee82cf9f3ac3f65a7cf07061c6193e8a0db3b",
+      "bytes": 71607,
+      "runtimeReachable": "YES",
+      "productionBehaviorChange": "YES",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "YES",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge/Ask projection or manuscript retrieval successor. Operational isolation owners remain byte-identical; actual imports/write inventory separately re-audited.",
+      "interferenceEvidence": "Actual immutable source closure inventory unchanged; root guard sources byte-identical; fresh 244 local + 138 compiled dispatcher checks PASS. Knowledge semantics require own review."
+    },
+    {
+      "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "24be395744ae4d1bf0c709b159cefd9e59bafc67b92a13b41c2c67a2b01321fa",
+      "bytes": 28330,
+      "runtimeReachable": "YES",
+      "productionBehaviorChange": "YES",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "YES",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Knowledge/Ask projection or manuscript retrieval successor. Operational isolation owners remain byte-identical; actual imports/write inventory separately re-audited.",
+      "interferenceEvidence": "Actual immutable source closure inventory unchanged; root guard sources byte-identical; fresh 244 local + 138 compiled dispatcher checks PASS. Knowledge semantics require own review."
+    },
+    {
+      "path": "scripts/activate-manuscript-whole-chapter-qualified-successor-r1.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "df2310aca32394530ade4fa7922eee05d77eabe27adf9d4874a55655244ec0ec",
+      "bytes": 1785,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked build/publication/rollback tooling; not imported by Pages Functions, not executed in this run; invocation can alter outputs or deploy.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/audit-p9-g3-d1r0-lineage.mjs",
+      "classification": "P9_RELATED_BUT_NOT_IN_R2_CANDIDATE",
+      "SHA256": "fd01d95e96ab6b5cb45ccd5a42d3ae61e9f8bf88e562b7c7e0414747401f9b5e",
+      "bytes": 11306,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/build-current-manuscript-release-evidence.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "a401c534a9b7693253addf1fffd93ab15685db56bbe1da8dd2753010161610e0",
+      "bytes": 2806,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/build-manuscript-server-metadata.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "f91638c4e43fd865fda85db0ddd8792a4577602aedfb9e61c8cd7fa920ab5cd3",
+      "bytes": 1971,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/check-book-i-current-live-answers.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "abb61c3e326b4618d60de98ceeb4a7fe3e0f637b7a4cc8a25239b21c77a0f2ec",
+      "bytes": 3542,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/check-book-i-iii-current-batch-customer-answers.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "34eacb8f220e141b3c0c6cb3a7d7a0f79d264a97b315dc89130e07a46114359a",
+      "bytes": 11803,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/check-book-v-vii-consumer-candidate.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "b989de3c68d5e8e9df8f1de19ee8c8bde1145081b9bf6edfb27d11f779d5ab00",
+      "bytes": 7656,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/check-m3c-entry-visual-alignment.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "fddcd237b00c371dd3f00079d6c940f59511f3a088ee77e911e6f2af03e9f36b",
+      "bytes": 11452,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/check-manuscript-whole-chapter-batch-r1.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "0a67fe91e9d0ec94f14e116b6393a0b803ccb8d786ec4b9e72f404403ca71eef",
+      "bytes": 12880,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/check-manuscript-whole-chapter-review-links-r1.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "802876b5b93ef957a159e9b59117167dc03b4b4c556754dc59c8273005bbdfb3",
+      "bytes": 636,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/check-p9-d1m1-preflight.mjs",
+      "classification": "P9_RELATED_BUT_NOT_IN_R2_CANDIDATE",
+      "SHA256": "20c9f444a3abc4b08b1c68179389102f128ae53603885b35943f06dd8e9d5251",
+      "bytes": 11172,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/check-pages-preview-commerce.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "329b377b42fab20c8191365dafeb2dd9c723bcab2b986c9c703e2b0869656813",
+      "bytes": 4068,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/check-pws-i2-w5-product-offer-registry.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "e42d2438b735d2f31411eb812020ec61660f8d69662bab13816124a9ad4090d0",
+      "bytes": 8276,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/check-renderer-health-zero-cost.mjs",
+      "classification": "P9_RELATED_BUT_NOT_IN_R2_CANDIDATE",
+      "SHA256": "33bb3c6bd638e044e3c9e59506aad91148c2e3a2b71f103f08ec8f896fb49ef6",
+      "bytes": 1793,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/classify-book-vii-existing-chapter-knowledge-scope-r1.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "48fb2ffcb5f5cdd60b9de3f6a99e0f9170351f32c9b0bc2692b29be79075b4a3",
+      "bytes": 3574,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/deliver-book-v-vii-private-consumer-candidates.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "4207cd94f4d4ba2eb4a4461af8e00bff489bd2abf6857d7707026655d6c40ae5",
+      "bytes": 2021,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/finalize-manuscript-whole-chapter-batch-r1.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "3e3fdeb5d7af5bace61d75745cd90db48e8a910b433a1fa47647a9d6d65abe5d",
+      "bytes": 8747,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/prepare-ask-pages-preserved-config-release.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "1e108b1904985a113d85693b7dc510875acb9d45a4be8cec8bb1b5089c0cc27b",
+      "bytes": 3702,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/prepare-book-v-vii-consumer-successor.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "ed0426b333f31cd53259779c9ce9d4462fd63574c7282fc766faebbf4a4f5a99",
+      "bytes": 5818,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/prepare-manuscript-argument-context-r1.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "256d2643bdee4e242318f8b74cf08b15e4fc8d4ec9daa818f109fd8e5a2ee774",
+      "bytes": 2124,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/prepare-manuscript-whole-chapter-batch-r1.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "a409465fd12d3322bb61e2942ac163569a4001b49f2536711d65233683a0eeb4",
+      "bytes": 10632,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/prepare-manuscript-whole-chapter-boundary-successor-r1.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "a8dcfb09e27e6731e418ce514b4d5d16de1557f9ebebb84c44b909588ef17a9d",
+      "bytes": 2157,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/prepare-manuscript-whole-chapter-independent-r1.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "18d78eed606a17aae6a1c2f950642895c12b878d30beeebb247b9699ee7703ec",
+      "bytes": 1650,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/publish-verified-ask-preserving-cloud-config.mjs",
+      "classification": "PRODUCTION_BEHAVIOR_RISK",
+      "SHA256": "e10efed2afbf704e5a5364ab30a62abdf18a6a22f6fbe19ac6c261b730d71bde",
+      "bytes": 5415,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Contains operator-invoked production deployment/rollback action. Not a Pages runtime import, not invoked by this audit; requires separate operational authorization. Local D1 isolation does not authorize executing it.",
+      "canMutateProductionIfInvoked": true,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/reconcile-ask-publication-config-result.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "d6adfb223ab527d15ed54b3a6aa4fd378577f5b59b3b913f35d5f603e7c85341",
+      "bytes": 2082,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/reconcile-manuscript-whole-chapter-batch-r1-live.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "5eadc49d57023cdda5d421e62ad04762e71745f7cbc0aa6a65fc9b2848bab8fe",
+      "bytes": 7529,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/reconcile-manuscript-whole-chapter-batch-r1-rollback.mjs",
+      "classification": "PRODUCTION_BEHAVIOR_RISK",
+      "SHA256": "60897dcbf1fe11c8e835f7b2c2622f6a4b6ae81f48869490ce8e62558b952def",
+      "bytes": 8379,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Contains operator-invoked production deployment/rollback action. Not a Pages runtime import, not invoked by this audit; requires separate operational authorization. Local D1 isolation does not authorize executing it.",
+      "canMutateProductionIfInvoked": true,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/reconcile-seven-book-current-consumer-evidence.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "a70b3be01ec25533535032cc040312956b6d088583b5a83e9c98ce72a6507f19",
+      "bytes": 8145,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/record-manuscript-shared-mechanism-progress-r1.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "bbeb74b414b7057071cc9a011cb0ce1a3cb906d504950d49d2229899ffc1c2af",
+      "bytes": 4052,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/rehearse-p9-g3-d1r1.mjs",
+      "classification": "P9_RELATED_BUT_NOT_IN_R2_CANDIDATE",
+      "SHA256": "d8916416ad9decfd052ea0ef78ee04d39b3b474c26af77d73c7400d6b1f8bed4",
+      "bytes": 17861,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/review-manuscript-whole-chapter-batch-r1.py",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "d5b40b0a70be28220248bbbf122eaec397c84ca414615e82cec714caae18572e",
+      "bytes": 3504,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/rollback-manuscript-whole-chapter-batch-r1.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "05f5f752311e3ad33cfc5e9bedc296e7813fa892e3bfee4a25e5c3816b54f2ea",
+      "bytes": 2637,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked build/publication/rollback tooling; not imported by Pages Functions, not executed in this run; invocation can alter outputs or deploy.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "scripts/verify-manuscript-whole-chapter-batch-r1-live.mjs",
+      "classification": "SOURCE_CHANGE",
+      "SHA256": "f04404f3519c025acc6ce2974aa89172c3a2eed42f8fdaa4f27eb6065ae6e9cc",
+      "bytes": 5194,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Operator-invoked QA/build/reconciliation tooling, not a production Pages entrypoint and not executed in this run.",
+      "canMutateProductionIfInvoked": false,
+      "interferenceEvidence": "Not deployed Functions runtime; operational scripts were inspected as text and not executed."
+    },
+    {
+      "path": "tools/review/external-reality-cross-domain-r1/R1-CHECK-RESULTS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "e90e0707a8d5649b364666d469c33a02f049173ff94f835c3072ba058b267b5c",
+      "bytes": 67905,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/ASK-PUBLICATION-HISTORY-948666c525740d2e.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "948666c525740d2e165ebfa81ae9548684090b0db0810330701718fdbdf890be",
+      "bytes": 1624,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/ASK-PUBLICATION-HISTORY-aa4689b0aff4aef9.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "aa4689b0aff4aef99c23c39090148e497dcffce0cd8c2261350559850cf4c275",
+      "bytes": 1488,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-442-CURRENT-LIVE-ANSWERS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "b47fd198693336d854fd202ccbc82b2a69037aa3ea4054deaaee7746eb4d7422",
+      "bytes": 32168,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-CURRENT-PRODUCTION-METADATA-QA-INITIAL-FAILURES.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "f632e97fe4c21da9e795bc6e9995fb9ee251c290c8d4616e80baf36a855b4155",
+      "bytes": 84933,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-I-CURRENT-PRODUCTION-METADATA-QA.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "c081c3b8f0fba76d8847602986ed3ccb8d3bfb4319b8d8af0a057858e00cb719",
+      "bytes": 82232,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-BATCH-ANSWER-REGRESSION-INITIAL-FAILURES.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "1c262bca837dc3edf5acec737b6b57d6e3edc25fc7b5fb0c1c59beb871eafbbc",
+      "bytes": 76693,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-BATCH-ANSWER-REGRESSION.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "8baa73dc42d486f5f35000556d722491b24a67122cdcf624d4f428b3ab11aeb7",
+      "bytes": 85756,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-III-CURRENT-BATCH-INDEPENDENT-ANSWERS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "1e127c89ad00ac6c87bf2c02e9f0455391af573dc6dd7dbda0abe349e215ab8d",
+      "bytes": 31913,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-III-RESTORED-BASELINE-SOURCE-REGRESSION.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "e795695a70aa690f6f90e47c1847325aebe0e5e8ad1d66eae879d495da18812f",
+      "bytes": 33017,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-V-CUSTOMER-CONSUMER-QA.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "d1449410d27bdd259607bd6b7a066ab881dc316f7f6e5e4fa25ea56f69f14a8b",
+      "bytes": 7220,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-V-VII-CONSUMER-CANDIDATE-QA-INITIAL-FAILURES.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "43a3e078fa9cba6a1872afd5d731a7301a60b34dd32b37f98db8f0152fb5b932",
+      "bytes": 256910,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-V-VII-CONSUMER-CANDIDATE-QA.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "829cf34184b009f809da818c3e1aff589ebcf84f10a5dd0ee4de8ea52352cabc",
+      "bytes": 53292,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/BOOK-V-VII-PRIVATE-CONSUMER-CANDIDATES.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "7972e5c3c324ae0f81198b398dd9c85a1d854fe77501f4a136e7512691e46443",
+      "bytes": 1379,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-ASK-PRESERVED-CONFIG-PUBLICATION.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "e15f3d683c770a453283551458dd82c8ad695fb15fa623b150ba3e73cf234975",
+      "bytes": 1134,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-BUILD-RECEIPT.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "cd4884d65610d38bb4197c2cf4a3cae5ec32f3b417ba661cd44509fe28a1b4ff",
+      "bytes": 78735,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-LOCAL-RELEASE-REGRESSION.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "268eeced7b28d4a989eb849a38204cd3853ff3991daa7935348b480595122d55",
+      "bytes": 13666,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-MASTER-STATE.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "5924de255b833c63a866b78df8b502e8a5b9d38fef1d7d27d37699aa8519d1e9",
+      "bytes": 30888,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-SCOPED-CUSTOMER-ANSWERS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "72972ad3d21298526e9ccb58474e346c1c01b7d590635a41b5fa55668b8a2662",
+      "bytes": 103421,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/CURRENT-IV-VI-SERVER-METADATA-IDENTITY.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "1646d6730af8ef038116d767aec9af27250ac4f6af2c26952b7e3ffd9b8e2574",
+      "bytes": 2151,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/SEVEN-BOOK-CHAPTER-COVERAGE.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "42a3f096619e06e9b32158a76bc7fc584862030e168a5a5c4efbe521e90218e6",
+      "bytes": 1018377,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/SEVEN-BOOK-CHAPTER-QUALITY-AUDIT.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "2fba5fb89c337fcc2a5525fd525e56cb7f368334ba74e401bcef760e1bed6b4b",
+      "bytes": 2172902,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/SEVEN-BOOK-COVERAGE.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "5c082fe8b777706a1ab33abc31b9d5727897443289e8f84613b68cb25ab6dec1",
+      "bytes": 88778,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/BOOK-1-source-pages.png",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "7fb6b6f23393231c47804a6d3eed2b7d8bdac7ed1acd1f643c3b077dbeb847b8",
+      "bytes": 670964,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Intentional source-page comparison evidence, generated by committed Python reviewer and referenced in SOURCE-PAGE-COMPARISON.json; outside R2 scope, non-runtime retention for separate Human review.",
+      "disposition": "INTENTIONAL_NON_RUNTIME_EVIDENCE_SHOULD_HAVE_BEEN_EXCLUDED_FROM_EXACT_R2_SCOPE",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/BOOK-3-source-pages.png",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "5cbf868b2bbe99fe744da307e799caac5d6675076b7813bbe609d299b63fb22e",
+      "bytes": 1880481,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Intentional source-page comparison evidence, generated by committed Python reviewer and referenced in SOURCE-PAGE-COMPARISON.json; outside R2 scope, non-runtime retention for separate Human review.",
+      "disposition": "INTENTIONAL_NON_RUNTIME_EVIDENCE_SHOULD_HAVE_BEEN_EXCLUDED_FROM_EXACT_R2_SCOPE",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/BOOK-5-source-pages.png",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "dbbc29db4a9365c57c34e8af4c7d3a9c2d895f88de06f716f97080933584ff1b",
+      "bytes": 1801722,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Intentional source-page comparison evidence, generated by committed Python reviewer and referenced in SOURCE-PAGE-COMPARISON.json; outside R2 scope, non-runtime retention for separate Human review.",
+      "disposition": "INTENTIONAL_NON_RUNTIME_EVIDENCE_SHOULD_HAVE_BEEN_EXCLUDED_FROM_EXACT_R2_SCOPE",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/BOUNDARY-ANSWERS-INITIAL-FAILURE.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "ebc3afc3532357f2472d78b6b896d92719d475b566a640c217ccca63538adc56",
+      "bytes": 13308,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/BOUNDARY-ANSWERS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "66563d83b88f45d5684f518580c8a29fa4faa0f9a3737cb05049c9479eedf457",
+      "bytes": 1531,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/CHAPTER-CURRENT-CLOSURE.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "642872185bdaa9aba923a4cacd8aed1de6cd3eb92c0a4dfa1b926a5b5452fad3",
+      "bytes": 13282,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/CHAPTER-QUALIFICATION.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "9382d2f5d8314dd6d0f696ed3fb1686f0ee8c0fb40e50e39be587bfa16cd9b15",
+      "bytes": 20359,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-08bfed6dc0aa9518.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "08bfed6dc0aa951893aac3530556c94fd6f5d760d83fbe29fca6ce44a551a3b5",
+      "bytes": 58209,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-0eeb48c527c5042d.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "0eeb48c527c5042d91bf5b4cd028fa8bccab4cdc0e11368a59d16914821a329e",
+      "bytes": 40201,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-70cf470f0bf18e8a.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "70cf470f0bf18e8ad1537f2c8b519bdc1d450d06eef1b778d11f47cae997a58d",
+      "bytes": 85966,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-7384652aa37565d8.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "7384652aa37565d873b6f8a8838b79f38e3996f5f0efc289dac323917fe18668",
+      "bytes": 39391,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-cb87b7af5b33b8ea.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "cb87b7af5b33b8ea28d04d217d4f63ec069c8e10313bff6f3e71838252d67556",
+      "bytes": 48227,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-HISTORY-d57b5f0c8c8d0535.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "d57b5f0c8c8d0535144babf8c3c27826cb14de2be25de1e832d546e843eac2ca",
+      "bytes": 39481,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS-INITIAL-FAILURES.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "a014d9d317a873855ffc9c3f2548fb9a95b5746659a237021f62742848890b9e",
+      "bytes": 27433,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-ANSWERS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "7c17dcb2d229a17d6e1445630f4c1e4452f3f308cf624728ce834ac9093fd130",
+      "bytes": 39391,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/DEVELOPMENT-QUESTIONS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "7deda5c85b0063ef7de2f76cee823882c1e650afde55d1eeb469dfb079c3703a",
+      "bytes": 5995,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/FRESH-INDEPENDENT-ANSWERS-HISTORY-af3418910511468d.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "af3418910511468d4c92b0c5665421fe3b5762cf75084d696ca1406201178da6",
+      "bytes": 13418,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/FRESH-INDEPENDENT-ANSWERS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "3e44737482d1eadc42f28d2ded4bb5b7497d19b5b679a4944d7fdfa089bcece7",
+      "bytes": 13454,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/FRESH-INDEPENDENT-QUESTIONS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "2229fc8ffbf775b5e3d4c8b0db54d6255b926990a364e66c0330b87bb1f39139",
+      "bytes": 1781,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/INDEPENDENT-ANSWERS-INITIAL-FAILURES.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "948031a05025cd9c0f639f89d9b50548516483968745f24393925686f1c5ace6",
+      "bytes": 9641,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/INDEPENDENT-ANSWERS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "f7c27321929fdb86c8866a99c95767905dd30e8a73a25dac411b6ab087ea2cff",
+      "bytes": 14322,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/INDEPENDENT-QUESTIONS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "5e55aa0346d32d9258f7ff7e5eae3d44c9a0660d2d30808dbc89fd3f21f9e8e0",
+      "bytes": 1810,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-ANSWERS-HISTORY-298a26edfccc946e.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "298a26edfccc946ea74fdaef90e52a3595817370c3d93c95cda4665cf69d2164",
+      "bytes": 32366,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-ANSWERS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "46b2e9d9ebdb2c89d3f2f03dbf2cfd0ac20510443217d831ce3b40a10a5929cb",
+      "bytes": 39784,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FAILURE-REGRESSION-HISTORY-9fb71622f46e2b78.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "9fb71622f46e2b78fcc890124cfb6a9024130fe7f58a6fade4d0a57bb1cbfd39",
+      "bytes": 11025,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FAILURE-REGRESSION-HISTORY-c64c0c50f15e422c.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "c64c0c50f15e422c3c5394dd0144ab1d4d407ea3973d00994ba61151123f88d1",
+      "bytes": 9729,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FAILURE-REGRESSION-HISTORY-fa48a007726c261b.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "fa48a007726c261b0acb1beffac182b1a26eebc1b22eded322334c9b254336f0",
+      "bytes": 20056,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FAILURE-REGRESSION-INITIAL-FAILURES.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "fa48a007726c261b0acb1beffac182b1a26eebc1b22eded322334c9b254336f0",
+      "bytes": 20056,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FAILURE-REGRESSION.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "ef879f80e62fd5a569ef40b4045f8d552619112fc66cb438a9f806211ea29865",
+      "bytes": 11025,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-FOLLOWUP-UNSEEN-QUESTIONS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "9620d6c5dcf7a0ffd4ecb5f64269fd42094335f143364962c3bb1e90564ec811",
+      "bytes": 614,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/LIVE-UNSEEN-QUESTIONS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "ea247b4a408b0249dfeefc09dad501d575136d0899622ed230183bf8ae295f94",
+      "bytes": 594,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/MECHANISM-INDEPENDENT-ANSWERS-HISTORY-7efa49bf3674ad7c.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "7efa49bf3674ad7cf40fef035d76535beabac589a42ad784027164682f0cfe87",
+      "bytes": 65481,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/MECHANISM-INDEPENDENT-ANSWERS-INITIAL-FAILURES.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "7efa49bf3674ad7cf40fef035d76535beabac589a42ad784027164682f0cfe87",
+      "bytes": 65481,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/MECHANISM-INDEPENDENT-ANSWERS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "0daa8d50a8cdec2b3761cd946dee7fb5342b6c92cd0d5c32b06f24e3e1131428",
+      "bytes": 20909,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/MECHANISM-INDEPENDENT-QUESTIONS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "196be3dc0ec3b334ceab333511d7cf7ed93b7e73ab94b38dffe1003ebd714ab2",
+      "bytes": 1582,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-DEVELOPMENT-ANSWERS-HISTORY-5e46655477b23484.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "5e46655477b23484a498bcc4bcc07de9100e736f83511ed240707a06c14b25da",
+      "bytes": 24995,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-DEVELOPMENT-ANSWERS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "58bdba0da54aad6b44a96a858cd55590e9da2dfe3c96a235314a990694bd5215",
+      "bytes": 25021,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-FRESH-INDEPENDENT-ANSWERS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "2f796d8237ed06c49df64303cd23cb6acc7832ccac07351dbd998bff103accff",
+      "bytes": 9165,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-LIVE-FAILURE-REGRESSION-HISTORY-0eba58e48ea059f9.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "0eba58e48ea059f9bef283370469da56ee1bc1fedd7b25e482fb0e96c9b74218",
+      "bytes": 43257,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-LIVE-FAILURE-REGRESSION-HISTORY-26d6c0501ebd43a2.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "26d6c0501ebd43a28f331e574efc16b86adb7561f1ebb8a04b906915163e93c4",
+      "bytes": 5471,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-LIVE-FAILURE-REGRESSION-HISTORY-49e16e3fdf83cb4d.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "49e16e3fdf83cb4d96b709ac517ed41260cc8811d8136a053100d10e87bbdec8",
+      "bytes": 9893,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-LIVE-FAILURE-REGRESSION-HISTORY-f3148f004f341f0f.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "f3148f004f341f0f49804c145db1f453d6b698ba6655badbf856baea46ea0860",
+      "bytes": 9887,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-LIVE-FAILURE-REGRESSION-INITIAL-FAILURES.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "49e16e3fdf83cb4d96b709ac517ed41260cc8811d8136a053100d10e87bbdec8",
+      "bytes": 9893,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RELEASE-LIVE-FAILURE-REGRESSION.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "5a7ebf22542b7ed388213bee6b2d3cd2e1c33ce5a5c41a716ccec5f47db8c85d",
+      "bytes": 9729,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/RESTORED-III-BASELINE-ANSWERS.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "fac87a35885c69d63a6966b598cf0933f350402892d896c8674fabd4eeb57c95",
+      "bytes": 19866,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/ROLLBACK-RECEIPT.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "0b2576c596360692489cc27636bc4184e88e91d12d84bedbe37f005e9b83669c",
+      "bytes": 653,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    },
+    {
+      "path": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/SOURCE-PAGE-COMPARISON.json",
+      "classification": "QA_ARTIFACT",
+      "SHA256": "fe6ba25a279fd507db43a2c37cdfaeabdaf06748e3ebde76dbdd1e42f72bd291",
+      "bytes": 8077,
+      "runtimeReachable": "NO",
+      "productionBehaviorChange": "NO",
+      "D1WriteEffect": "NO",
+      "P9IsolationEffect": "NO",
+      "customerVisibleEffect": "NO",
+      "requiresSeparateHumanReview": "YES",
+      "reason": "Machine QA/build/answer/publication history evidence; not a new P9 acceptance grant.",
+      "interferenceEvidence": "Non-executable evidence/content/build-input; no alteration of the accepted isolation owners."
+    }
+  ],
+  "sharedHumanReviewDelta": {
+    "status": "R2_SECTION_BYTE_IDENTICAL_HISTORICAL_APPEND_ONLY",
+    "candidateSHA256": "472e7c3d562c5bbdc20526d41a4323a8c7e03a858fc29300429d46ab6c073808",
+    "actualSHA256": "4da81891745fb10500acd09eab9bd6e8d6404029ec390c4b7a3633b1cd76b495",
+    "acceptedSectionSHA256": "e4dbbf917911ac4d85a4ebfa0655dfbada7d1264c109d7d5a8a49a93d44cd581",
+    "acceptedSectionBytesIdentical": true,
+    "candidateEntireContentPreservedAsPrefix": true,
+    "appendedSectionIds": [
+      "p9-g3-predeploy-blocked",
+      "p9-d1r1-catchup"
+    ],
+    "appendedBytes": 2161,
+    "meaning": "Historical G3 and D1R1 sections appended; R2 accepted section unaltered. Historical headings are not fresh production-isolation acceptance."
+  },
+  "securityScan": {
+    "status": "PASS_SCOPED_SCAN_NO_SECRET_EXPOSURE_IDENTIFIED",
+    "scope": "All 143 historical extra blobs, including >2MB text; three PNGs visually reviewed as book source-page comparisons.",
+    "strongSecretPatternHits": 0,
+    "piiFieldFindings": [
+      {
+        "path": "scripts/rehearse-p9-g3-d1r1.mjs",
+        "emailCount": 1,
+        "domains": [
+          "example.invalid"
+        ]
+      }
+    ],
+    "emailFindingReview": "Only synthetic rehearsal email with example.invalid domain; no actual customer PII identified.",
+    "imageReview": "BOOK-1 pp61–62; BOOK-3 pp3–6; BOOK-5 pp6–10; manuscript prose/illustration, no account records or credentials observed.",
+    "checks": [
+      "Private-key headers",
+      "Provider/access key prefixes",
+      "JWT literals",
+      "Secret/password/access-token assignments",
+      "Personal-data field names",
+      "Email contexts",
+      "QA screenshot visual content",
+      "Raw production receipt content versus synthetic fixture context"
+    ],
+    "limitations": "Pattern/context and visual review is scoped assurance, not proof that no possible secret encoding exists. Existing account/database/deployment identifiers and local paths are metadata, not credentials; no values printed."
+  },
+  "qaPngDisposition": {
+    "count": 3,
+    "bytes": 4353167,
+    "intentionalEvidence": true,
+    "excludedFromExactR2Scope": true,
+    "accidentalNonRuntimeArtifactCount": 0,
+    "retentionAuthority": "Book source-page verification workflow; R3 Human review required to accept retaining them in mixed release. No deletion authorized."
+  },
+  "runtimeAffectingExtraCount": 9,
+  "D1AffectingExtraCount": 0,
+  "operationalRiskScripts": [
+    "scripts/publish-verified-ask-preserving-cloud-config.mjs",
+    "scripts/reconcile-manuscript-whole-chapter-batch-r1-rollback.mjs"
+  ],
+  "knowledgeScope": "Seven modified Functions modules and two retained/active server-metadata registries affect Ask projection/retrieval/build inputs. Historical before-state JS under content is not a live Functions module. No substantive book acceptance performed.",
+  "coreProof": {
+    "R2Digest": "7b52601b606db94164f112d35eddb2c226b9a09e8ea111328396e3659bd5fe08",
+    "dependenciesVerified": 518,
+    "qaEvidenceVerified": 14,
+    "rootMiddlewareAndGuardByteIdentical": true,
+    "accepted24PathHashMatchExceptSharedHistoricalAppend": true,
+    "localCases": 244,
+    "compiledCases": 138,
+    "writerOwners": 41,
+    "sqlWrites": 163,
+    "entrypoints": 125,
+    "networkCalls": 0,
+    "D1I1_CORE_STILL_VALID": "YES"
+  },
+  "testAttempts": [
+    {
+      "command": "node tmp/p9-r3-reconciliation/check-p9-d1i1-isolation.mjs",
+      "exitCode": 1,
+      "reason": "Initial snapshot omitted committed runtime-migration-loader QA dependency; no assertion result."
+    },
+    {
+      "command": "node tmp/p9-r3-reconciliation/check-p9-d1i1-isolation.mjs",
+      "exitCode": 1,
+      "reason": "Snapshot omitted committed controlled-subject fixture; no completed result."
+    },
+    {
+      "command": "node tmp/p9-r3-reconciliation/check-p9-d1i1-isolation.mjs",
+      "exitCode": 0,
+      "reason": "All 244 cases PASS after materializing exact committed QA dependencies; no test/expectation changes."
+    },
+    {
+      "command": "Wrangler pages functions build functions --outdir C:/phios/tmp/p9-r3-reconciliation/compiled --compatibility-date 2026-07-14 --compatibility-flags nodejs_compat",
+      "cwd": "C:/phios/tmp/p9-r3-reconciliation/source",
+      "exitCode": 0,
+      "reason": "Compiled successfully; default external Wrangler log path denied by sandbox; compilation result independently checked."
+    },
+    {
+      "command": "node tmp/p9-r3-reconciliation/check-compiled.mjs",
+      "exitCode": 0,
+      "reason": "138 compiled dispatcher cases PASS; originalWrites=0, networkCalls=0."
+    }
+  ],
+  "freshEvidence": [
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R3-WRITER-INVENTORY.json",
+      "SHA256": "019b6d35dfa83bbe9cc76b03db1f86e72d4df3f3f3f42110b812af8f508f3f4d"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R3-LOCAL-ISOLATION-TESTS.json",
+      "SHA256": "0ad8e08ab9dae875711c468c37358c9f497136edd1ffbf0642efbbc759800e70"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R3-COMPILED-DISPATCHER.json",
+      "SHA256": "1ae8daaf584714b270b36aa17a138ae484ed989213fa4d427e44e7aa2bd0e8d2"
+    }
+  ],
+  "historicalStatus": {
+    "G1_R2": "NOT_EXACTLY_COMPLETED",
+    "G2_R2": "MIXED_COMMIT_PUSHED",
+    "actualPush": "PASS_FACTUAL_FROM_PRIOR_REMOTE_QUERY",
+    "RC_R2_EXACT_COMMIT": "NO",
+    "RC_R2_EXACT_PUSH": "NO"
+  },
+  "boundaries": {
+    "commit": false,
+    "push": false,
+    "deploy": false,
+    "READ_ONLY": false,
+    "migration": false,
+    "providerCalls": 0,
+    "providerCostUSD": 0,
+    "payments": 0,
+    "refunds": 0
+  },
+  "currentWorktree": {
+    "HEAD": "8ecbea951c8d50af29fe47d8448aaa987e7644a7",
+    "preExistingModifiedFiles": [
+      {
+        "path": "docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json",
+        "SHA256": "df17ad56d7ec1a6f9313eff804b0c906693ad4dd624741efc0042083d6f217f0"
+      },
+      {
+        "path": "scripts/check-schema-references.mjs",
+        "SHA256": "17542d2023ff3c84502ad2c536ac5bc024dc700961ffc2cf7a470e7ced163fcf"
+      }
+    ],
+    "indexSHA256": "281205a6095017fe4f2433f2c672362cc6aface0cc5d8be830b82a0404741aa7"
+  }
+}

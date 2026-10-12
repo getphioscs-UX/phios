@@ -1,0 +1,18 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+import {matchApprovedTerminology,bindTerminologyToEvidence} from '../functions/knowledge-runtime/approved-terminology-context.js';
+const read=p=>JSON.parse(fs.readFileSync(p)),root='tools/review/eight-book-master-glossary-r2/';
+const audit=read(root+'RECONCILIATION.json'),crosswalk=read(root+'LEGACY-PART-CROSSWALK.json');
+const tests=[];const check=(id,fn)=>{try{fn();tests.push({id,state:'PASS'});}catch(e){tests.push({id,state:'FAIL',error:e.message});}};
+check('NO_PACKAGE_AUTHORITY_ELEVATION',()=>assert(audit.rows.every(r=>!r.publicationEligible&&!r.askAnswerEligible&&!r.runtimeActivated)));
+check('CSV_ROW_IDENTITIES',()=>assert(audit.csvRowIdentityMatches));
+check('OLD_PART_COLLISION_NO_NUMERAL_GUESS',()=>assert(crosswalk.records.every(r=>r.inferenceFromNumeral===false&&r.status.startsWith('BLOCKED'))));
+check('POLYSEMY_RELATIONAL_FORMATION_HOLD',()=>assert(audit.rows.filter(r=>r.zhHans==='关系形成').every(r=>r.decision==='HOLD')));
+check('SHARED_FIELD_AND_RECONFIGURATION_NOT_BULK_MERGED',()=>assert(audit.rows.filter(r=>['共同场','共同场域','运行重构','运行重组'].includes(r.zhHans)).every(r=>r.decision==='HOLD')));
+check('GLOSSARY_WITHOUT_SOURCE_CANNOT_ANSWER',()=>assert.deepEqual(bindTerminologyToEvidence(matchApprovedTerminology('意识连续性','zh-Hans'),[],'zh-Hans'),[]));
+check('EN_TERM_IDENTITIES_NO_CHINESE_TEXT',()=>assert(matchApprovedTerminology('What is Conscious Continuity?','en').every(t=>!/[\u3400-\u9fff]/u.test(t.label))));
+check('ZH_TERM_IDENTITIES_NO_ENGLISH_PROSE',()=>assert(matchApprovedTerminology('意识连续性是什么？','zh-Hans').every(t=>!/[a-z]/iu.test(t.label))));
+check('CONSCIOUS_TERM_EXACT_FROZEN_IDENTITY',()=>assert(matchApprovedTerminology('意识连续性','zh-Hans').some(t=>t.termCode==='TERM-007')));
+check('RELATIONAL_COLLECTIVE_RECOVERY_COORDINATION_NO_CANDIDATE_APPROVAL',()=>assert(audit.rows.filter(r=>/relational|collective|recovery|coordination|maintenance/i.test(r.preferredEnglish)).every(r=>r.humanDecision==='NOT_RECORDED_FOR_R2')));
+check('EVIDENCE_FRESHNESS_DIGEST',()=>{for(const r of audit.inputFiles)assert.equal(createHash('sha256').update(fs.readFileSync(r.path)).digest('hex'),r.sha256);});
+check('SOURCE_BOUND_TERM_CITATION',()=>{const matches=matchApprovedTerminology('意识连续性','zh-Hans');const bound=bindTerminologyToEvidence(matches,[{sourceType:'COMPLETED_MANUSCRIPT',text:'意识连续性',sectionCode:'TEST-BOUNDARY-ONLY',sourceBinaryDigest:'controlled-fixture-not-customer-evidence'}],'zh-Hans');assert(bound.length);assert(bound.every(t=>t.supportingSources[0].sectionCode==='TEST-BOUNDARY-ONLY'&&t.glossaryOnlyAnswerAllowed===false));});
+const proof={at:new Date().toISOString(),scope:'TERM_AND_GOVERNANCE_BOUNDARIES_NOT_CUSTOMER_SEMANTIC_COMPLETION',tests,providerCalls:0,providerCostUSD:0,productionWrites:0,realPayments:0};fs.writeFileSync(root+'BOUNDARY-TESTS.json',JSON.stringify(proof,null,2)+'\n');console.log(JSON.stringify({passed:tests.filter(t=>t.state==='PASS').length,total:tests.length,providerCalls:0}));if(tests.some(t=>t.state==='FAIL'))process.exitCode=1;

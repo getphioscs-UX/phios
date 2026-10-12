@@ -1,0 +1,62 @@
+{
+  "status": "PROPOSED_NOT_APPLIED",
+  "exactRuntimeFileCount": 5,
+  "files": [
+    {
+      "path": "functions/_lib/client-knowledge-ask-b.js",
+      "recommendation": "SAFE_BUT_REQUIRES_SMALL_REMEDIATION",
+      "function": "evaluateCkaExternalAuthority / resolveCkaAnswerState / projectCkaW5W17Envelope",
+      "behavior": "EXTERNAL_AUTHORITY source with eligible:false / NOT_ACTIVATED is counted as available; registry-derived stale sources are grouped without eligibility revalidation.",
+      "consequence": "An unavailable external source can satisfy the current-authority boundary.",
+      "remediation": "Consume only server-verified eligible authority/source sets; exclude denied residue from authority groups, cards and refs; localize presentation labels.",
+      "line": 137,
+      "sourceChangesPerformed": false
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "recommendation": "BLOCKED_RUNTIME_BEHAVIOR",
+      "function": "composeDeterministicKapAnswer / composeKapAnswerProjection / projectKapSources",
+      "behavior": "Trusts incoming bundle.sources and coverage flag; stale denied Book I/V material can become answer and citation. Raw authority category codes are projected.",
+      "consequence": "A stale intermediate bundle can support a denied-source answer; source labels expose implementation classes.",
+      "remediation": "Revalidate source provenance against the existing admission owner before composition/citation; derive coverage from surviving evidence, deduplicate identities, reject unusable evidence and use localized customer labels.",
+      "line": 227,
+      "sourceChangesPerformed": false
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "recommendation": "BLOCKED_RUNTIME_BEHAVIOR",
+      "function": "buildKnowledgeGroundingBundle / retrieveKapKnowledge / retrievePublishedBookSources",
+      "behavior": "Broader-knowledge policy leaves supplied sources unchanged; ignores current admission on stale objects, retains duplicate/malformed/unusable sources.",
+      "consequence": "Denied or unusable objects enter the grounding bundle. Published Book V source-reading fallback is a separately owned bounded publication path, not proof of whole-chapter qualification.",
+      "remediation": "Filter and validate trusted source identity/provenance before grounding, preserve public-publication authority separately from private whole-chapter admission, deduplicate and fail safely on malformed inputs.",
+      "line": 452,
+      "sourceChangesPerformed": false
+    },
+    {
+      "path": "functions/customer-projection/knowledge-customer-projection.js",
+      "recommendation": "BLOCKED_RUNTIME_BEHAVIOR",
+      "function": "projectKnowledgeAnswerForCustomer / authoritySources / atlasSources",
+      "behavior": "Retains sourceEvidence even with NO_SUPPORTED_ANSWER; returns governance lineage, internal source IDs/hashes/version fields, raw unknown strings and source-class labels. Atlas ZH copy contains Registry evidence. Synthetic local path in excerpt survives.",
+      "consequence": "Denied metadata and internal wording reach the response; provenance/body residue can be displayed.",
+      "remediation": "Explicit public allowlist; suppress denied/unusable sources including no-supported-answer residue; sanitize client-facing unknown/error text and localize Book/Article/Figure/Concept/World/external/no-source labels without changing canonical titles.",
+      "line": 7,
+      "sourceChangesPerformed": false
+    },
+    {
+      "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
+      "recommendation": "SAFE_BUT_REQUIRES_SMALL_REMEDIATION",
+      "function": "loadR2RetrievalCorpus / searchManuscriptCorpus",
+      "behavior": "Verifies corpus byte/source identity but assumes upstream admission; standalone loader/search does not consult current closure and can materialize a denied stale candidate.",
+      "consequence": "Normal R4 API stays gated; downstream reuse is not independently fail-closed. No remote client injection exploit is demonstrated.",
+      "remediation": "Require server-verified admitted scopes/provenance for whole-chapter materialization and search, using existing R4 owner/gate; preserve identity checks and bounded public knowledge units.",
+      "line": 365,
+      "sourceChangesPerformed": false
+    }
+  ],
+  "sharedAuthority": "Reuse functions/_lib/manuscript-current-admission.js and CHAPTER-CURRENT-CLOSURE.json; no second ledger.",
+  "newRegistry": false,
+  "newAcceptance": false,
+  "sourceChangesPerformed": 0,
+  "authorizationRequiredBeforeSemanticRemediation": true,
+  "R4HistoricalDigestUnchanged": true
+}

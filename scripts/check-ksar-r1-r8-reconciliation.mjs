@@ -50,12 +50,19 @@ const corrections=json('content/knowledge/source-access/registries/manuscript-ed
 assert.equal(corrections.status,'ACTIVE_HUMAN_CONFIRMED_CORRECTIONS');
 assert.equal(corrections.records.length,1);
 
-const fixtureSource={sourceCode:'FIXTURE',bookCode:'BOOK-1',locale:'zh-Hans',sourceSha256:'s'.repeat(64),corpusSha256:'c'.repeat(64),recordCount:1};
+const fixtureSource={sourceCode:'FIXTURE',bookCode:'BOOK-1',locale:'zh-Hans',sectionCode:'FIX-1',wholeChapterCandidate:false,sourceSha256:'s'.repeat(64),corpusSha256:'c'.repeat(64),recordCount:1};
 const fixtureCorpus={bookCode:'BOOK-1',locale:'zh-Hans',sourceSha256:fixtureSource.sourceSha256,corpusSha256:fixtureSource.corpusSha256,recordCount:1,records:[{sectionCode:'FIX-1',segmentType:'SECTION',partCode:'P1',sequence:1,heading:'现实如何形成',startPage:1,endPage:2,textSha256:'a'.repeat(64),text:'现实形成需要区分差异、约束与结构。结构稳定之后，运行才有可以持续的载体。'}]};
 const fixtureText=JSON.stringify(fixtureCorpus);
 fixtureSource.retrievalCorpusSha256=crypto.createHash('sha256').update(fixtureText).digest('hex');
 fixtureSource.r2ObjectKey='books/fixture/retrieval-corpus.json';
+// The transport fixture is a bounded single-section sample, never a whole-book
+// or whole-chapter admission. Missing source scope must stop before storage.
+const unscopedFixture={...fixtureSource};delete unscopedFixture.sectionCode;
+let deniedStorageReads=0;
+assert.equal(await loadR2RetrievalCorpus({get:async()=>{deniedStorageReads++;return {body:fixtureText};}},unscopedFixture),null);
+assert.equal(deniedStorageReads,0);
 const loaded=await loadR2RetrievalCorpus({get:async key=>({body:fixtureText,key})},fixtureSource);
+assert.ok(loaded,'Bounded single-section transport fixture must load');
 assert.equal(loaded.bookCode,fixtureCorpus.bookCode);
 assert.equal(loaded.sourceSha256,fixtureCorpus.sourceSha256);
 assert.equal(loaded.records.length,fixtureCorpus.recordCount);

@@ -1,3 +1,5 @@
+import {parseHTML} from 'linkedom';
+import {consolidationSuccessor,assertCurrentConsolidatedSurface} from './lib/page-consolidation-successor-r1.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
@@ -92,8 +94,14 @@ const homeAuthority = read(paths.homeAuthority);
 assert.equal(baseline.currentCustomerAuthority.homepageStatus,'HOMEPAGE_TOTAL_REBUILD_IMPLEMENTED');
 assert.equal(homeAuthority.status,'HOMEPAGE_EIGHT_VOLUME_IDENTITY_ALIGNED');
 const home = text(paths.home);
+if(consolidationSuccessor()?.surfaces.some(s=>s.file===paths.home)){
+ assertCurrentConsolidatedSurface(parseHTML(home).document,paths.home);
+ for(const marker of ['data-cx-surface="HOME"','data-cx-home-section="H01"','/assets/customer-ui/js/shell.js','href="/knowledge/ask/"'])assert.ok(home.includes(marker),'CURRENT_HOME_MARKER_MISSING:'+marker);
+ for(const retired of ['href="/ask"','href="/personal-runtime"','href="/financial-reality"','href="/my-reality"'])assert.ok(!home.includes(retired),'RETIRED_HOME_PRESENTATION_RESTORED:'+retired);
+}else{
 for (const marker of ['data-cx-surface="HOME"','data-cx-home-section="H01"','data-cx-home-section="H09"','/assets/customer-ui/js/shell.js','/assets/customer-ui/js/surfaces/home.js','href="/knowledge/ask/"']) assert.ok(home.includes(marker),`CURRENT_HOME_MARKER_MISSING:${marker}`);
 for (const retired of ['data-cir-root','/assets/js/client-intent-router.js','href="/ask"','href="/personal-runtime"','href="/financial-reality"','href="/my-reality"']) assert.ok(!home.includes(retired),`RETIRED_HOME_PRESENTATION_RESTORED:${retired}`);
+}
 
 const p1 = read(paths.p1);
 assert.equal(p1.status,baseline.currentCustomerAuthority.p1CurrentStatus);

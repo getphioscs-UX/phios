@@ -1,0 +1,376 @@
+{
+  "startedAt": "2026-10-12T12:53:51.949Z",
+  "status": "P9_R6_T2_DELETE_API_DID_NOT_CONTAIN_EXECUTION_SURFACE",
+  "authorizedDeploymentIDs": [
+    "a1f8a3ba-803d-4a0b-8234-22c4ad4459f2",
+    "41b1c458-c79d-40e8-b47c-c2e5f4dba452"
+  ],
+  "deleteMethod": "Ordinary Pages Deployment DELETE; no query parameters",
+  "forceUsed": false,
+  "preDeleteActiveProduction": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+  "canary1": {
+    "id": "a1f8a3ba-803d-4a0b-8234-22c4ad4459f2",
+    "status": "DELETE_ACCEPTED_CONTAINMENT_FAILED",
+    "precheck": {
+      "at": "2026-10-12T12:54:51.855Z",
+      "status": "PASS",
+      "deployment": {
+        "id": "a1f8a3ba-803d-4a0b-8234-22c4ad4459f2",
+        "environment": "production",
+        "url": "https://a1f8a3ba.phios-github.pages.dev",
+        "aliases": [],
+        "createdAt": "2026-10-10T13:22:48.583775Z",
+        "modifiedAt": "2026-10-10T13:25:44.900997Z",
+        "source": {
+          "branch": "main",
+          "commit_hash": "62871df1fce4729f9be73e78df6d6129c8c3fba5",
+          "commit_message": "profile",
+          "commit_dirty": false
+        },
+        "usesFunctions": true,
+        "status": "success",
+        "D1": [
+          {
+            "binding": "RUNTIME_DB",
+            "id": "073639fa-01e4-4868-af10-6ed032637dab",
+            "sameProductionD1": true
+          }
+        ],
+        "productionD1Bound": true,
+        "maintenanceMetadata": "ABSENT"
+      },
+      "activeProduction": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+      "protected": false,
+      "latestBranch": false,
+      "operationalHold": false,
+      "writeCapableSource": true,
+      "rootGuardPresent": false,
+      "ordinaryDeletionBlocker": "NONE_KNOWN_NO_ALIAS_NOT_CURRENT_OR_LATEST; API_ACCEPTANCE_NOT_ASSUMED",
+      "HEAD": {
+        "at": "2026-10-12T12:54:50.555Z",
+        "url": "https://a1f8a3ba.phios-github.pages.dev/",
+        "method": "HEAD",
+        "status": 200,
+        "location": null,
+        "contentType": "text/html; charset=utf-8",
+        "bodyBytes": 0,
+        "bodySHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "anonymousSession": false,
+        "historicalApplicationResponse": false,
+        "providerMarker": false,
+        "bodyStored": false,
+        "secretHeadersUsed": false
+      },
+      "Functions": {
+        "at": "2026-10-12T12:54:50.366Z",
+        "url": "https://a1f8a3ba.phios-github.pages.dev/api/auth/session",
+        "method": "GET",
+        "status": 200,
+        "location": null,
+        "contentType": "application/json",
+        "bodyBytes": 77,
+        "bodySHA256": "b71b0f31773379c546509f2f8a1ad6b96b8f8af78479d5598e94ad1e1d73af57",
+        "anonymousSession": true,
+        "historicalApplicationResponse": true,
+        "providerMarker": false,
+        "bodyStored": false,
+        "secretHeadersUsed": false
+      },
+      "rootMiddlewareFilePresent": true,
+      "rootGuardPresenceCheck": "Source inspected: presentation redirects only; no maintenance mode or D1 guard",
+      "rootMiddlewareSHA256": "32bac0ad30c989e8f33d99f44841a4a472f3a4e4a4ebf20f8dd413b692f69a65",
+      "sourceRouteSHA256": "ccdeb6c8384fe97ce5133f2c63ff3276abd242b2f108713f9f95f15e7174e84f",
+      "sourceStoreSHA256": "87f94ba6c79c6c349fe85b68bc634365c49004fec3cf54bf3723db0f45ef067a"
+    },
+    "deleteAttemptStartedAt": "2026-10-12T12:54:51.857Z",
+    "deleteResult": {
+      "startedAt": "2026-10-12T12:54:51.857Z",
+      "finishedAt": "2026-10-12T12:55:17.113Z",
+      "method": "DELETE",
+      "path": "/deployments/a1f8a3ba-803d-4a0b-8234-22c4ad4459f2",
+      "httpStatus": 200,
+      "success": true,
+      "requestId": "a496416f6c32fc5d-KUL",
+      "errors": []
+    },
+    "postDelete": {
+      "inventory": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T2-EVIDENCE/AFTER-CANARY-1-LIVE-INVENTORY.json",
+      "count": 3557,
+      "apiListAbsent": true,
+      "targetAPI": {
+        "startedAt": "2026-10-12T12:56:08.348Z",
+        "finishedAt": "2026-10-12T12:56:09.433Z",
+        "method": "GET",
+        "path": "/deployments/a1f8a3ba-803d-4a0b-8234-22c4ad4459f2",
+        "httpStatus": 404,
+        "success": false,
+        "requestId": "a496434d8cd1fc5d-KUL",
+        "errors": [
+          {
+            "code": 8000009,
+            "message": "The deployment ID you have specified does not exist. Update the deployment ID and try again. "
+          }
+        ]
+      },
+      "directURLResults": [
+        {
+          "at": "2026-10-12T12:56:10.425Z",
+          "url": "https://a1f8a3ba.phios-github.pages.dev/",
+          "method": "GET",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 12202,
+          "bodySHA256": "dce0ce90c5ef416b6dd8375200731725de2298c8f446e3bb5441eefd82499903",
+          "anonymousSession": false,
+          "historicalApplicationResponse": false,
+          "providerMarker": false,
+          "bodyStored": false,
+          "secretHeadersUsed": false
+        },
+        {
+          "at": "2026-10-12T12:56:09.646Z",
+          "url": "https://a1f8a3ba.phios-github.pages.dev/api/auth/session",
+          "method": "GET",
+          "status": 200,
+          "location": null,
+          "contentType": "application/json",
+          "bodyBytes": 77,
+          "bodySHA256": "b71b0f31773379c546509f2f8a1ad6b96b8f8af78479d5598e94ad1e1d73af57",
+          "anonymousSession": true,
+          "historicalApplicationResponse": true,
+          "providerMarker": false,
+          "bodyStored": false,
+          "secretHeadersUsed": false
+        },
+        {
+          "at": "2026-10-12T12:56:10.703Z",
+          "url": "https://a1f8a3ba.phios-github.pages.dev/api/account-persons",
+          "method": "GET",
+          "status": 401,
+          "location": null,
+          "contentType": "application/json",
+          "bodyBytes": 38,
+          "bodySHA256": "9b843b8bcbcc0c554e0f6825f71fa4a7881690f2cdb18c2b8b9956959145b2e3",
+          "anonymousSession": false,
+          "historicalApplicationResponse": true,
+          "providerMarker": false,
+          "bodyStored": false,
+          "secretHeadersUsed": false
+        }
+      ],
+      "directURLContained": false
+    },
+    "functionsContainment": "FAIL_HISTORICAL_APPLICATION_FUNCTION_RESPONSES_STILL_AVAILABLE",
+    "productionD1ExposureRemoved": false,
+    "productionD1ExposureStatus": "NOT_PROVEN"
+  },
+  "canary2": {
+    "id": "41b1c458-c79d-40e8-b47c-c2e5f4dba452",
+    "status": "NOT_EXECUTED_CANARY1_CONTAINMENT_FAILED"
+  },
+  "apiResults": [
+    {
+      "startedAt": "2026-10-12T12:54:51.857Z",
+      "finishedAt": "2026-10-12T12:55:17.113Z",
+      "method": "DELETE",
+      "path": "/deployments/a1f8a3ba-803d-4a0b-8234-22c4ad4459f2",
+      "httpStatus": 200,
+      "success": true,
+      "requestId": "a496416f6c32fc5d-KUL",
+      "errors": []
+    }
+  ],
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "payments": 0,
+  "refunds": 0,
+  "D1Mutations": 0,
+  "D1Operations": 0,
+  "productionMutations": 1,
+  "otherProductionMutations": 0,
+  "aliasChanges": 0,
+  "customDomainChanges": 0,
+  "AccessChanges": 0,
+  "deployments": 0,
+  "secretRotations": 0,
+  "migrations": 0,
+  "commits": 0,
+  "pushes": 0,
+  "topologyCountsBefore": {
+    "live": 3558,
+    "risk": 1122,
+    "A": 1121,
+    "B": 1405,
+    "C": 24,
+    "D": 1008,
+    "evidenceGaps": 1017,
+    "protectedRisk": 1
+  },
+  "nextBlocker": "P9_R6_T2_DELETE_API_DID_NOT_CONTAIN_EXECUTION_SURFACE",
+  "T1History": {
+    "planSHA256": "e06ea25f53d2248d1d46bedae398ade8241d5d29a92e6fe9266f19fa8ea7df0d",
+    "reviewSHA256": "a24a4c6990e3615e255aef562e8946c590cfa93374d8066dc5f2921d7ebd1372",
+    "appendOnlyReviewPreserved": true
+  },
+  "baselineLiveCount": 3558,
+  "baselineAvailability": [
+    {
+      "at": "2026-10-12T12:54:46.206Z",
+      "url": "https://getphios.com/",
+      "method": "HEAD",
+      "status": 200,
+      "location": null,
+      "contentType": "text/html; charset=utf-8",
+      "bodyBytes": 0,
+      "bodySHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "anonymousSession": false,
+      "historicalApplicationResponse": false,
+      "providerMarker": false,
+      "bodyStored": false,
+      "secretHeadersUsed": false
+    },
+    {
+      "at": "2026-10-12T12:54:46.465Z",
+      "url": "https://b07d86bf.phios-github.pages.dev/",
+      "method": "HEAD",
+      "status": 200,
+      "location": null,
+      "contentType": "text/html; charset=utf-8",
+      "bodyBytes": 0,
+      "bodySHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "anonymousSession": false,
+      "historicalApplicationResponse": false,
+      "providerMarker": false,
+      "bodyStored": false,
+      "secretHeadersUsed": false
+    },
+    {
+      "at": "2026-10-12T12:54:46.320Z",
+      "url": "https://b7ff50ff.phios-github.pages.dev/",
+      "method": "HEAD",
+      "status": 200,
+      "location": null,
+      "contentType": "text/html; charset=utf-8",
+      "bodyBytes": 0,
+      "bodySHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "anonymousSession": false,
+      "historicalApplicationResponse": false,
+      "providerMarker": false,
+      "bodyStored": false,
+      "secretHeadersUsed": false
+    },
+    {
+      "at": "2026-10-12T12:54:46.501Z",
+      "url": "https://333178e5.phios-github.pages.dev/",
+      "method": "HEAD",
+      "status": 200,
+      "location": null,
+      "contentType": "text/html; charset=utf-8",
+      "bodyBytes": 0,
+      "bodySHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "anonymousSession": false,
+      "historicalApplicationResponse": false,
+      "providerMarker": false,
+      "bodyStored": false,
+      "secretHeadersUsed": false
+    },
+    {
+      "at": "2026-10-12T12:54:46.698Z",
+      "url": "https://b7858e3c.phios-github.pages.dev/",
+      "method": "HEAD",
+      "status": 200,
+      "location": null,
+      "contentType": "text/html; charset=utf-8",
+      "bodyBytes": 0,
+      "bodySHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "anonymousSession": false,
+      "historicalApplicationResponse": false,
+      "providerMarker": false,
+      "bodyStored": false,
+      "secretHeadersUsed": false
+    }
+  ],
+  "failureAt": "2026-10-12T12:56:10.706Z",
+  "postDeleteInventory": {
+    "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T2-EVIDENCE/AFTER-CANARY-1-LIVE-INVENTORY.json",
+    "count": 3557,
+    "complete": true,
+    "canary1Present": false,
+    "canary2Present": true,
+    "addedIDs": [],
+    "removedIDs": [
+      "a1f8a3ba-803d-4a0b-8234-22c4ad4459f2"
+    ]
+  },
+  "activeProductionAfter": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+  "protectedSetAfter": {
+    "count": 24,
+    "changed": false,
+    "ids": [
+      "030ab90a-71a5-4609-b1f5-7f7971fea777",
+      "110c0b70-fd8a-4647-be29-2b89b5eb16ed",
+      "1c01137e-c86d-46ae-8ea5-4315edf7a27d",
+      "330f1ed4-95ad-4bdb-918b-fa99b4fbcdc1",
+      "333178e5-1ed9-4435-b385-ea5139c41057",
+      "4cb87c26-d088-4496-ba16-68012ffdd4a6",
+      "5850746b-d81b-4b34-8a63-dadc7e9896d1",
+      "618d5c09-6c3d-4646-a887-b85904cd1bfd",
+      "8867a323-1997-4076-b5fb-95bf563434a8",
+      "94777680-c10f-4959-b8e3-ce92aebf51cd",
+      "9f458c1c-1542-40cf-8b1f-814b9632c6b1",
+      "a0f9915e-38de-4b61-8d3e-32981f01e4ce",
+      "afa7cccc-6ad9-4f99-aebc-fd58a59f24a6",
+      "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+      "b7858e3c-da3e-4edb-9432-62c0f2aab087",
+      "b7ff50ff-b675-4884-a58f-4903eafe6edb",
+      "b9dc7070-8756-4407-b4f2-d6eedbd3dd8e",
+      "bd84bbb6-a0e1-4c02-9eae-a1e94feba24b",
+      "c22c0f6f-3db3-411e-a754-6b4c6fcbe8b6",
+      "cc50548c-a5c9-433f-9116-9f2d239b0f0f",
+      "d96beed8-bb42-4bb7-9a18-688951adabb8",
+      "ddcd00ed-4c7e-4706-824d-2fe66c7dc2de",
+      "f4d6f890-2c6d-4681-963d-eb86d21f48cb",
+      "fe339d4d-b894-4178-b0c7-ee4aaf80b484"
+    ]
+  },
+  "topologyCountsAfter": {
+    "live": 3557,
+    "risk": 1121,
+    "A": 1120,
+    "B": 1405,
+    "C": 24,
+    "D": 1008,
+    "protectedRisk": 1,
+    "evidenceGaps": 1017,
+    "metadataDriftIDs": [],
+    "scope": "API_LISTED_DEPLOYMENTS_ONLY; see accountingReconciliation for surviving removed execution surface"
+  },
+  "finishedAt": "2026-10-12T12:56:10.985Z",
+  "productionD1WriteIsolation": "STILL_NOT_PROVEN",
+  "D1MigrationStatus": "NOT_EXECUTED",
+  "sourceControl": {
+    "HEAD": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+    "indexEmpty": true
+  },
+  "functionsContainment": "FAIL_HISTORICAL_APPLICATION_FUNCTION_RESPONSES_STILL_AVAILABLE",
+  "productionD1ExposureRemoved": false,
+  "accountingReconciliation": {
+    "at": "2026-10-12T13:04:27.426Z",
+    "basis": "Existing post-delete observations only; no further production request or mutation",
+    "apiListedRiskCount": 1121,
+    "apiListedSetACount": 1120,
+    "removedButStillExecutableCount": 1,
+    "removedButStillExecutableIDs": [
+      "a1f8a3ba-803d-4a0b-8234-22c4ad4459f2"
+    ],
+    "knownExposureRiskCountIncludingRemovedSurface": 1122,
+    "remainingNonProtectedContainmentWork": 1121,
+    "originalEvidenceGaps": 1017,
+    "additionalRemovalContainmentGap": 1,
+    "totalEvidenceGaps": 1018,
+    "currentBindingOfRemovedSurface": "RUNTIME_UNVERIFIED; historical D1-bound write-capable source and surviving application responses; no real write attempted",
+    "note": "API removal does not prove execution removal. Inventory-only arithmetic is retained as historical observation, not accepted security risk reduction."
+  },
+  "postDeleteAvailability": "NOT_RUN_AFTER_CONTAINMENT_FAILURE_STOP"
+}

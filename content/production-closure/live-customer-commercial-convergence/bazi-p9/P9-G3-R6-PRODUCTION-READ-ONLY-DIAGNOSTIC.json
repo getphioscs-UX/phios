@@ -1,0 +1,418 @@
+{
+  "status": "EVIDENCE_GAPS_OPEN",
+  "at": "2026-10-12T04:15:25.141Z",
+  "currentR5Deployment": "333178e5-1ed9-4435-b385-ea5139c41057",
+  "acceptedSource": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+  "runtimeMaintenanceValue": "RUNTIME_UNVERIFIED",
+  "middlewareExecutionProof": "RUNTIME_UNVERIFIED",
+  "bindingWrapProof": "RUNTIME_UNVERIFIED",
+  "directMutationProbeResults": [
+    {
+      "host": "https://getphios.com",
+      "path": "/api/auth/login",
+      "method": "POST",
+      "status": 405,
+      "cache": "private, no-store",
+      "body": "{\"ok\":false,\"code\":\"METHOD_NOT_ALLOWED\"}",
+      "pass": false,
+      "failureClass": "GUARD_DENIAL_FAILED_ROUTE_REACHED",
+      "guardProof": false
+    },
+    {
+      "host": "https://getphios.com",
+      "path": "/api/account-persons",
+      "method": "POST",
+      "status": 401,
+      "cache": "private, no-store",
+      "body": "{\"ok\":false,\"code\":\"ACCOUNT_REQUIRED\"}",
+      "pass": false,
+      "failureClass": "GUARD_DENIAL_FAILED_ROUTE_REACHED",
+      "guardProof": false
+    },
+    {
+      "host": "https://getphios.com",
+      "path": "/api/account-persons",
+      "method": "PUT",
+      "status": 401,
+      "cache": "private, no-store",
+      "body": "{\"ok\":false,\"code\":\"ACCOUNT_REQUIRED\"}",
+      "pass": false,
+      "failureClass": "GUARD_DENIAL_FAILED_ROUTE_REACHED",
+      "guardProof": false
+    },
+    {
+      "host": "https://getphios.com",
+      "path": "/api/account-profile-evidence",
+      "method": "PATCH",
+      "status": 401,
+      "cache": "private, no-store",
+      "body": "{\"ok\":false,\"code\":\"ACCOUNT_REQUIRED\"}",
+      "pass": false,
+      "failureClass": "GUARD_DENIAL_FAILED_ROUTE_REACHED",
+      "guardProof": false
+    },
+    {
+      "host": "https://getphios.com",
+      "path": "/api/account-method-reports",
+      "method": "DELETE",
+      "status": 401,
+      "cache": "private, no-store",
+      "body": "{\"ok\":false,\"code\":\"METHOD_REPORT_UNAVAILABLE\"}",
+      "pass": false,
+      "failureClass": "GUARD_DENIAL_FAILED_ROUTE_REACHED",
+      "guardProof": false
+    },
+    {
+      "host": "https://getphios.com",
+      "path": "/api/stripe-webhook",
+      "method": "POST",
+      "status": 503,
+      "cache": "private, no-store",
+      "body": "{\"success\":false,\"error\":\"stripe_webhook_not_configured\",\"message\":\"The commerce service could not complete this request.\"}",
+      "pass": false,
+      "failureClass": "GUARD_DENIAL_FAILED_ROUTE_REACHED",
+      "guardProof": false
+    },
+    {
+      "host": "https://getphios.com",
+      "path": "/api/account-paid-report-setup",
+      "method": "POST",
+      "status": 403,
+      "cache": "private, no-store",
+      "body": "{\"ok\":false,\"message\":\"Your report setup could not be opened. Please sign in and check your selected details.\"}",
+      "pass": false,
+      "failureClass": "GUARD_DENIAL_FAILED_ROUTE_REACHED",
+      "guardProof": false
+    },
+    {
+      "host": "https://getphios.com",
+      "path": "/api/knowledge/ask",
+      "method": "POST",
+      "status": 405,
+      "cache": null,
+      "body": "",
+      "pass": false,
+      "failureClass": "PROBE_INVALID",
+      "guardProof": false
+    },
+    {
+      "host": "https://phios-github.pages.dev",
+      "path": "/api/auth/login",
+      "method": "POST",
+      "status": 301,
+      "cache": null,
+      "body": "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>cloudflare</center>\r\n</body>\r\n</html>\r\n",
+      "pass": false,
+      "failureClass": "REDIRECT_MASKING",
+      "guardProof": false
+    },
+    {
+      "host": "https://phios-github.pages.dev",
+      "path": "/api/account-persons",
+      "method": "POST",
+      "status": 301,
+      "cache": null,
+      "body": "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>cloudflare</center>\r\n</body>\r\n</html>\r\n",
+      "pass": false,
+      "failureClass": "REDIRECT_MASKING",
+      "guardProof": false
+    },
+    {
+      "host": "https://phios-github.pages.dev",
+      "path": "/api/account-persons",
+      "method": "PUT",
+      "status": 301,
+      "cache": null,
+      "body": "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>cloudflare</center>\r\n</body>\r\n</html>\r\n",
+      "pass": false,
+      "failureClass": "REDIRECT_MASKING",
+      "guardProof": false
+    },
+    {
+      "host": "https://phios-github.pages.dev",
+      "path": "/api/account-profile-evidence",
+      "method": "PATCH",
+      "status": 301,
+      "cache": null,
+      "body": "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>cloudflare</center>\r\n</body>\r\n</html>\r\n",
+      "pass": false,
+      "failureClass": "REDIRECT_MASKING",
+      "guardProof": false
+    },
+    {
+      "host": "https://phios-github.pages.dev",
+      "path": "/api/account-method-reports",
+      "method": "DELETE",
+      "status": 301,
+      "cache": null,
+      "body": "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>cloudflare</center>\r\n</body>\r\n</html>\r\n",
+      "pass": false,
+      "failureClass": "REDIRECT_MASKING",
+      "guardProof": false
+    },
+    {
+      "host": "https://phios-github.pages.dev",
+      "path": "/api/stripe-webhook",
+      "method": "POST",
+      "status": 301,
+      "cache": null,
+      "body": "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>cloudflare</center>\r\n</body>\r\n</html>\r\n",
+      "pass": false,
+      "failureClass": "REDIRECT_MASKING",
+      "guardProof": false
+    },
+    {
+      "host": "https://phios-github.pages.dev",
+      "path": "/api/account-paid-report-setup",
+      "method": "POST",
+      "status": 301,
+      "cache": null,
+      "body": "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>cloudflare</center>\r\n</body>\r\n</html>\r\n",
+      "pass": false,
+      "failureClass": "REDIRECT_MASKING",
+      "guardProof": false
+    },
+    {
+      "host": "https://phios-github.pages.dev",
+      "path": "/api/knowledge/ask",
+      "method": "POST",
+      "status": 301,
+      "cache": null,
+      "body": "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>cloudflare</center>\r\n</body>\r\n</html>\r\n",
+      "pass": false,
+      "failureClass": "REDIRECT_MASKING",
+      "guardProof": false
+    },
+    {
+      "host": "https://333178e5.phios-github.pages.dev",
+      "path": "/api/auth/login",
+      "method": "POST",
+      "status": 405,
+      "cache": "private, no-store",
+      "body": "{\"ok\":false,\"code\":\"METHOD_NOT_ALLOWED\"}",
+      "pass": false,
+      "failureClass": "GUARD_DENIAL_FAILED_ROUTE_REACHED",
+      "guardProof": false
+    },
+    {
+      "host": "https://333178e5.phios-github.pages.dev",
+      "path": "/api/account-persons",
+      "method": "POST",
+      "status": 401,
+      "cache": "private, no-store",
+      "body": "{\"ok\":false,\"code\":\"ACCOUNT_REQUIRED\"}",
+      "pass": false,
+      "failureClass": "GUARD_DENIAL_FAILED_ROUTE_REACHED",
+      "guardProof": false
+    },
+    {
+      "host": "https://333178e5.phios-github.pages.dev",
+      "path": "/api/account-persons",
+      "method": "PUT",
+      "status": 401,
+      "cache": "private, no-store",
+      "body": "{\"ok\":false,\"code\":\"ACCOUNT_REQUIRED\"}",
+      "pass": false,
+      "failureClass": "GUARD_DENIAL_FAILED_ROUTE_REACHED",
+      "guardProof": false
+    },
+    {
+      "host": "https://333178e5.phios-github.pages.dev",
+      "path": "/api/account-profile-evidence",
+      "method": "PATCH",
+      "status": 401,
+      "cache": "private, no-store",
+      "body": "{\"ok\":false,\"code\":\"ACCOUNT_REQUIRED\"}",
+      "pass": false,
+      "failureClass": "GUARD_DENIAL_FAILED_ROUTE_REACHED",
+      "guardProof": false
+    },
+    {
+      "host": "https://333178e5.phios-github.pages.dev",
+      "path": "/api/account-method-reports",
+      "method": "DELETE",
+      "status": 401,
+      "cache": "private, no-store",
+      "body": "{\"ok\":false,\"code\":\"METHOD_REPORT_UNAVAILABLE\"}",
+      "pass": false,
+      "failureClass": "GUARD_DENIAL_FAILED_ROUTE_REACHED",
+      "guardProof": false
+    },
+    {
+      "host": "https://333178e5.phios-github.pages.dev",
+      "path": "/api/stripe-webhook",
+      "method": "POST",
+      "status": 503,
+      "cache": "private, no-store",
+      "body": "{\"success\":false,\"error\":\"stripe_webhook_not_configured\",\"message\":\"The commerce service could not complete this request.\"}",
+      "pass": false,
+      "failureClass": "GUARD_DENIAL_FAILED_ROUTE_REACHED",
+      "guardProof": false
+    },
+    {
+      "host": "https://333178e5.phios-github.pages.dev",
+      "path": "/api/account-paid-report-setup",
+      "method": "POST",
+      "status": 403,
+      "cache": "private, no-store",
+      "body": "{\"ok\":false,\"message\":\"Your report setup could not be opened. Please sign in and check your selected details.\"}",
+      "pass": false,
+      "failureClass": "GUARD_DENIAL_FAILED_ROUTE_REACHED",
+      "guardProof": false
+    },
+    {
+      "host": "https://333178e5.phios-github.pages.dev",
+      "path": "/api/knowledge/ask",
+      "method": "POST",
+      "status": 405,
+      "cache": null,
+      "body": "",
+      "pass": false,
+      "failureClass": "PROBE_INVALID",
+      "guardProof": false
+    }
+  ],
+  "redirectAnalysis": {
+    "at": "2026-10-12T04:09:59.224Z",
+    "records": [
+      {
+        "source": "https://phios-github.pages.dev/api/auth/login",
+        "status": 301,
+        "location": "https://getphios.com/api/auth/login",
+        "method": "HEAD",
+        "classification": "REDIRECT_MASKING",
+        "finalHostname": "getphios.com",
+        "finalDeployment": "Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay"
+      },
+      {
+        "source": "https://phios-github.pages.dev/api/account-persons",
+        "status": 301,
+        "location": "https://getphios.com/api/account-persons",
+        "method": "HEAD",
+        "classification": "REDIRECT_MASKING",
+        "finalHostname": "getphios.com",
+        "finalDeployment": "Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay"
+      },
+      {
+        "source": "https://phios-github.pages.dev/api/account-profile-evidence",
+        "status": 301,
+        "location": "https://getphios.com/api/account-profile-evidence",
+        "method": "HEAD",
+        "classification": "REDIRECT_MASKING",
+        "finalHostname": "getphios.com",
+        "finalDeployment": "Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay"
+      },
+      {
+        "source": "https://phios-github.pages.dev/api/account-method-reports",
+        "status": 301,
+        "location": "https://getphios.com/api/account-method-reports",
+        "method": "HEAD",
+        "classification": "REDIRECT_MASKING",
+        "finalHostname": "getphios.com",
+        "finalDeployment": "Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay"
+      },
+      {
+        "source": "https://phios-github.pages.dev/api/stripe-webhook",
+        "status": 301,
+        "location": "https://getphios.com/api/stripe-webhook",
+        "method": "HEAD",
+        "classification": "REDIRECT_MASKING",
+        "finalHostname": "getphios.com",
+        "finalDeployment": "Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay"
+      },
+      {
+        "source": "https://phios-github.pages.dev/api/account-paid-report-setup",
+        "status": 301,
+        "location": "https://getphios.com/api/account-paid-report-setup",
+        "method": "HEAD",
+        "classification": "REDIRECT_MASKING",
+        "finalHostname": "getphios.com",
+        "finalDeployment": "Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay"
+      },
+      {
+        "source": "https://phios-github.pages.dev/api/knowledge/ask",
+        "status": 301,
+        "location": "https://getphios.com/api/knowledge/ask",
+        "method": "HEAD",
+        "classification": "REDIRECT_MASKING",
+        "finalHostname": "getphios.com",
+        "finalDeployment": "Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay"
+      },
+      {
+        "source": "https://www.getphios.com/",
+        "status": 301,
+        "location": "https://getphios.com/",
+        "method": "HEAD",
+        "classification": "REDIRECT_MASKING",
+        "finalHostname": "getphios.com",
+        "finalDeployment": "Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay"
+      }
+    ],
+    "priorPOSTRedirectCount": 8,
+    "scope": "Safe HEAD redirect topology. Exact prior eight mutation-method Location headers were not recorded; HEAD is successor evidence, not identical POST replay."
+  },
+  "deploymentCount": 3556,
+  "reachableOldSurfaceCount": 2331,
+  "oldProductionD1CapableCount": 2137,
+  "executionSurfaceMatrix": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-PAGES-EXECUTION-SURFACE-MATRIX.json",
+  "unknownDeploymentClassifications": 1037,
+  "unknownRuntimeProofs": [
+    "maintenance value",
+    "root execution",
+    "downstream guarded binding",
+    "per-surface runtime identity"
+  ],
+  "failureClassification": {
+    "primary": "CONFIG_NOT_PROPAGATED_SUSPECTED_NOT_INTERNAL_RUNTIME_PROVEN",
+    "secondary": [
+      "OLD_DEPLOYMENT_BYPASS_CAPABILITY_CONFIRMED",
+      "REDIRECT_MASKING_CONFIRMED_HEAD_SUCCESSOR",
+      "PROBE_INVALID_KNOWLEDGE_ROUTE",
+      "MIDDLEWARE_NOT_COVERING_OR_BINDING_NOT_GUARDED_NOT_RULED_OUT"
+    ]
+  },
+  "requiredRemediation": {
+    "current": "Prepare source-controlled READ_ONLY variable plus private safe trace successor. Review exact source before commit/push/deploy.",
+    "old": "Select confirmed publicly reachable production-D1 Functions surface with no production alias; separately approve a single supported retirement trial; record immutable metadata/source recovery reference; after operation HEAD/GET recheck all URLs and aliases and fresh topology.",
+    "massDeletion": false,
+    "perDeploymentD1UnbindingSupported": "NOT_VERIFIED_DO_NOT_USE",
+    "aliasRemovalAloneSufficient": false,
+    "restoration": "Source commit plus prior binding metadata permits reviewed redeployment; does not promise restoration of the exact immutable deployment URL.",
+    "rollout": "Only after trial semantics proved review remaining itemized list. Never delete canonical or active production aliases."
+  },
+  "sourceChangeRequired": "YES_FOR_PRIVATE_TRACE_CANDIDATE; GUARD_REPAIR_NOT_YET_ESTABLISHED",
+  "configChangeRequired": true,
+  "topologyChangeRequired": true,
+  "candidateManifest": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R6-REMEDIATION-CANDIDATE/MANIFEST.json",
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "productionMutations": 0,
+  "D1Migrations": 0,
+  "payments": 0,
+  "refunds": 0,
+  "commit": 0,
+  "push": 0,
+  "deploy": 0,
+  "restorePoint": "NOT_CAPTURED",
+  "schemaGate": "NOT_RECHECKED",
+  "nonPagesSameD1Writers": 0,
+  "remainingBlocker": "P9_R6_PRIVATE_RUNTIME_TRACE_REQUIRES_REVIEWED_SUCCESSOR_AND_SEPARATE_DEPLOY_AUTHORIZATION",
+  "readyForRemediationHumanReview": false,
+  "reason": "UNKNOWN=0 and actual runtime trace acceptance conditions not met. Local source and zero-network mock proof cannot substitute for production trace.",
+  "documentation": [
+    "https://developers.cloudflare.com/pages/functions/wrangler-configuration/",
+    "https://developers.cloudflare.com/api/resources/pages/subresources/projects/subresources/deployments/methods/delete/"
+  ],
+  "oldGuardSourceCounts": {
+    "relevant": 2137,
+    "guardSourceAbsent": 2,
+    "guardSourcePresent": 3,
+    "guardSourceUnknown": 2132,
+    "httpStatuses": {
+      "200": 2332,
+      "404": 1224
+    }
+  },
+  "oldUnguardedWriteCapableCount": "NOT_PROVEN_EXACT; 2 reachable old surfaces have source-proven absent root guard and production D1 metadata; 2132 source identities unresolved; no durable write performed",
+  "classificationUnknownSemantics": "1037 deployment classifications unresolved, plus 2132 reachable production-D1 root-source checks unresolved. HTTP 404 is not proof of permanent retirement."
+}

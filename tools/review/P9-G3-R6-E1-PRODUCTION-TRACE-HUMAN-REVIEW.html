@@ -1,0 +1,287 @@
+<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P9 G3-R6-E1 Production Trace Evidence</title><style>body{max-width:1100px;margin:40px auto;padding:20px;font:16px/1.6 system-ui;color:#182837}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eef2f5;padding:20px}</style><h1>P9 G3-R6-E1 · Production trace</h1><p>EVIDENCE_GAPS_OPEN。真实生产 GET trace 已证明 READ_ONLY、根中间件、包装身份及 prepare 阶段拒绝，未向原始 D1 转发。POST 仅标准 503，尚缺内部 trace，不能宣称完成。</p><p>四文件独立候选与 Worker 身份已冻结；主 HEAD 和索引未变。历史 1037 个 UNKNOWN 已根据失败部署状态及两条 404 路由关闭当前可执行性分类；其余深层运行时/守卫核查仍有 2205 项缺口，未归零。静态 200 未被等同为 D1 写入者。</p><p>追加部署/诊断 secret 轮换被自动审批拒绝，未执行。审阅对象仍为同一候选树、同一 digest、零新源码变化的单次全量日志重放。需单独明确批准；不迁移、不开 provider、不改旧拓扑。</p><pre>{
+  "at": "2026-10-12T05:08:31.810Z",
+  "status": "EVIDENCE_GAPS_OPEN_PRIVATE_GET_TRACE_PROVEN",
+  "currentDeployment": "b7ff50ff-b675-4884-a58f-4903eafe6edb",
+  "acceptedR5Base": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+  "diagnosticCandidateTree": "6b91c4be7005c6ef7545081c7a47d6338e7347be",
+  "diagnosticCandidateDigest": "684e7d3baef6f587e9dfd88d06035c2704d686536e42bc0d6223c505df0ed57a",
+  "workerSHA256": "a54377a53988b5cb86c7d8c9ab94c2b5aeeb88380617491ab8178d9881a905a4",
+  "sourceScope": "Four authorized diagnostic overlays only; immutable archive and independent index; no main worktree source used or modified",
+  "runtimeTrace": {
+    "deployment": "b7ff50ff-b675-4884-a58f-4903eafe6edb",
+    "trace": [
+      {
+        "tailDeploymentId": "b7ff50ff-b675-4884-a58f-4903eafe6edb",
+        "eventTimestamp": 1791781391869,
+        "method": "GET",
+        "path": "/__ops/d1-isolation",
+        "trace": {
+          "kind": "P9_PRIVATE_D1_ISOLATION",
+          "middlewareExecuted": true,
+          "handlerReached": true,
+          "mode": "READ_ONLY",
+          "bindingWrapped": true,
+          "method": "GET",
+          "guardRejectedWrite": true,
+          "D1MutationAttemptForwarded": false
+        }
+      }
+    ],
+    "headersStored": false,
+    "secretsReported": false
+  },
+  "effectiveMaintenanceValue": "READ_ONLY_PROVEN_ON_DIAGNOSTIC_GET",
+  "originalR5RuntimeMaintenanceValue": "UNVERIFIED_NO_PREEXISTING_TRACE",
+  "middlewareTrace": "ENTERED_PROVEN_ON_DIAGNOSTIC_GET",
+  "bindingTrace": "INSTALLED_AND_PRIVATE_DOWNSTREAM_IDENTITY_PROVEN_ON_DIAGNOSTIC_GET",
+  "writeProbe": {
+    "GET": "GUARD_REACHED_REJECTED_BEFORE_FORWARDING_PROVEN",
+    "POST": "STANDARD_503_OBSERVED_PRIVATE_INTERNAL_TRACE_NOT_CAPTURED",
+    "durableD1MutationCount": 0,
+    "evidenceBasis": "GET wrapper identity and rejection counter; candidate private path refuses any SQL on an unguarded binding. No raw-binding mutation API is executed."
+  },
+  "redirects": {
+    "originalMethodLocationCaptured": 8,
+    "records": [
+      {
+        "method": "POST",
+        "url": "https://phios-github.pages.dev/api/auth/login",
+        "status": 301,
+        "location": "https://getphios.com/api/auth/login",
+        "destinationHost": "getphios.com",
+        "methodSemantics": "Client-dependent POST to GET rewrite possible; PUT/PATCH/DELETE not assumed transformed",
+        "followedMutation": false,
+        "finalDeployment": "b7ff50ff-b675-4884-a58f-4903eafe6edb",
+        "finalGuardStatus": "PRIVATE_GET_TRACE_PROVEN_POST_TRACE_UNVERIFIED",
+        "followedSafely": "GET-only private diagnostic tested independently; no redirected mutation replay"
+      },
+      {
+        "method": "POST",
+        "url": "https://phios-github.pages.dev/api/account-persons",
+        "status": 301,
+        "location": "https://getphios.com/api/account-persons",
+        "destinationHost": "getphios.com",
+        "methodSemantics": "Client-dependent POST to GET rewrite possible; PUT/PATCH/DELETE not assumed transformed",
+        "followedMutation": false,
+        "finalDeployment": "b7ff50ff-b675-4884-a58f-4903eafe6edb",
+        "finalGuardStatus": "PRIVATE_GET_TRACE_PROVEN_POST_TRACE_UNVERIFIED",
+        "followedSafely": "GET-only private diagnostic tested independently; no redirected mutation replay"
+      },
+      {
+        "method": "PUT",
+        "url": "https://phios-github.pages.dev/api/account-persons",
+        "status": 301,
+        "location": "https://getphios.com/api/account-persons",
+        "destinationHost": "getphios.com",
+        "methodSemantics": "Client-dependent POST to GET rewrite possible; PUT/PATCH/DELETE not assumed transformed",
+        "followedMutation": false,
+        "finalDeployment": "b7ff50ff-b675-4884-a58f-4903eafe6edb",
+        "finalGuardStatus": "PRIVATE_GET_TRACE_PROVEN_POST_TRACE_UNVERIFIED",
+        "followedSafely": "GET-only private diagnostic tested independently; no redirected mutation replay"
+      },
+      {
+        "method": "PATCH",
+        "url": "https://phios-github.pages.dev/api/account-profile-evidence",
+        "status": 301,
+        "location": "https://getphios.com/api/account-profile-evidence",
+        "destinationHost": "getphios.com",
+        "methodSemantics": "Client-dependent POST to GET rewrite possible; PUT/PATCH/DELETE not assumed transformed",
+        "followedMutation": false,
+        "finalDeployment": "b7ff50ff-b675-4884-a58f-4903eafe6edb",
+        "finalGuardStatus": "PRIVATE_GET_TRACE_PROVEN_POST_TRACE_UNVERIFIED",
+        "followedSafely": "GET-only private diagnostic tested independently; no redirected mutation replay"
+      },
+      {
+        "method": "DELETE",
+        "url": "https://phios-github.pages.dev/api/account-method-reports",
+        "status": 301,
+        "location": "https://getphios.com/api/account-method-reports",
+        "destinationHost": "getphios.com",
+        "methodSemantics": "Client-dependent POST to GET rewrite possible; PUT/PATCH/DELETE not assumed transformed",
+        "followedMutation": false,
+        "finalDeployment": "b7ff50ff-b675-4884-a58f-4903eafe6edb",
+        "finalGuardStatus": "PRIVATE_GET_TRACE_PROVEN_POST_TRACE_UNVERIFIED",
+        "followedSafely": "GET-only private diagnostic tested independently; no redirected mutation replay"
+      },
+      {
+        "method": "POST",
+        "url": "https://phios-github.pages.dev/api/stripe-webhook",
+        "status": 301,
+        "location": "https://getphios.com/api/stripe-webhook",
+        "destinationHost": "getphios.com",
+        "methodSemantics": "Client-dependent POST to GET rewrite possible; PUT/PATCH/DELETE not assumed transformed",
+        "followedMutation": false,
+        "finalDeployment": "b7ff50ff-b675-4884-a58f-4903eafe6edb",
+        "finalGuardStatus": "PRIVATE_GET_TRACE_PROVEN_POST_TRACE_UNVERIFIED",
+        "followedSafely": "GET-only private diagnostic tested independently; no redirected mutation replay"
+      },
+      {
+        "method": "POST",
+        "url": "https://phios-github.pages.dev/api/account-paid-report-setup",
+        "status": 301,
+        "location": "https://getphios.com/api/account-paid-report-setup",
+        "destinationHost": "getphios.com",
+        "methodSemantics": "Client-dependent POST to GET rewrite possible; PUT/PATCH/DELETE not assumed transformed",
+        "followedMutation": false,
+        "finalDeployment": "b7ff50ff-b675-4884-a58f-4903eafe6edb",
+        "finalGuardStatus": "PRIVATE_GET_TRACE_PROVEN_POST_TRACE_UNVERIFIED",
+        "followedSafely": "GET-only private diagnostic tested independently; no redirected mutation replay"
+      },
+      {
+        "method": "POST",
+        "url": "https://phios-github.pages.dev/api/knowledge/ask",
+        "status": 301,
+        "location": "https://getphios.com/api/knowledge/ask",
+        "destinationHost": "getphios.com",
+        "methodSemantics": "Client-dependent POST to GET rewrite possible; PUT/PATCH/DELETE not assumed transformed",
+        "followedMutation": false,
+        "finalDeployment": "b7ff50ff-b675-4884-a58f-4903eafe6edb",
+        "finalGuardStatus": "PRIVATE_GET_TRACE_PROVEN_POST_TRACE_UNVERIFIED",
+        "followedSafely": "GET-only private diagnostic tested independently; no redirected mutation replay"
+      }
+    ]
+  },
+  "configAuthority": {
+    "dashboardBeforeProduction": "READ_ONLY",
+    "dashboardAfterProduction": "READ_ONLY",
+    "dashboardPreviewBefore": "ABSENT",
+    "dashboardPreviewAfter": "ABSENT",
+    "acceptedR5WranglerMode": "ABSENT",
+    "diagnosticWranglerMode": "READ_ONLY",
+    "deploymentMethod": "AD_HOC_FROZEN_ARTIFACT_UPLOAD",
+    "effectiveDiagnosticRuntime": "READ_ONLY",
+    "originalGitDeploymentEffectiveRuntime": "UNVERIFIED",
+    "secretsReported": false
+  },
+  "deploymentClassificationCounts": {
+    "UNKNOWN_GUARD_RUNTIME": 1127,
+    "FUNCTIONS_EXECUTION_NOT_REACHABLE": 1224,
+    "FUNCTIONS_PRODUCTION_D1_UNGUARDED": 2,
+    "FUNCTIONS_NO_PRODUCTION_D1": 125,
+    "UNKNOWN_EXECUTION_REACHABILITY": 1078
+  },
+  "oldDeploymentsAudited": 3556,
+  "totalDeploymentsNow": 3557,
+  "original1037UnknownRemaining": 0,
+  "unknownCount": 2205,
+  "reachableFunctionsResponseEvidence": 1253,
+  "reachableProductionD1MetadataResponseEvidence": 1128,
+  "sourceRootGuardAbsentResponseCount": 2,
+  "unguardedProductionD1Count": null,
+  "previewAccessState": {
+    "registeredAccountAccessApplications": 0,
+    "matchingApplications": 0,
+    "policyChanged": false,
+    "scope": "Account Access inventory empty. Individual preview observations retained; not universal public-access proof."
+  },
+  "primaryFailureClass": "UNDETERMINED_ORIGINAL_R5_RUNTIME_TRACE_MISSING",
+  "secondaryFailureClasses": [
+    "PROBE_INVALID_KNOWLEDGE_ROUTE",
+    "REDIRECT_MASKING",
+    "OLD_PRODUCTION_D1_EXECUTION_RISK",
+    "POST_TRACE_COLLECTION_INCOMPLETE"
+  ],
+  "sourceChangeRequired": "NOT_PROVEN_FOR_BUSINESS_GUARD",
+  "configChangeRequired": "SOURCE_CONTROLLED_READ_ONLY_DIAGNOSTIC_PROVEN_EFFECTIVE; ORIGINAL_CAUSE_UNPROVEN",
+  "topologyChangeRequired": true,
+  "probeChangeRequired": true,
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "payments": 0,
+  "refunds": 0,
+  "productionMutations": {
+    "diagnosticDeployments": 1,
+    "privateDiagnosticSecretAdditions": 1,
+    "maintenanceSourceConfigInAuthorizedDiagnostic": 1,
+    "customerDataWrites": 0,
+    "D1Migrations": 0,
+    "topologyChanges": 0,
+    "providerSecretChanges": 0,
+    "StripeConfigChanges": 0
+  },
+  "gitHead": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+  "mainIndexEmpty": true,
+  "commits": 0,
+  "pushes": 0,
+  "globalIsolation": "NOT_PROVEN_OLD_SURFACES_OPEN",
+  "restorePoint": "NOT_CAPTURED",
+  "schemaGate": "NOT_ADVANCED",
+  "automaticApprovalBlock": {
+    "action": "Second exact diagnostic deployment plus diagnostic secret rotation/full sampling replay",
+    "executed": false,
+    "reason": "Original narrow authorization did not clearly approve additional deployment; reviewer preferred read-only tail",
+    "required": "Explicit additional replay authorization"
+  },
+  "nextRemediationCandidate": {
+    "tree": "6b91c4be7005c6ef7545081c7a47d6338e7347be",
+    "digest": "684e7d3baef6f587e9dfd88d06035c2704d686536e42bc0d6223c505df0ed57a",
+    "changedFiles": [
+      "functions/_lib/d1-maintenance-guard.js",
+      "functions/_lib/d1-private-isolation-probe.js",
+      "functions/_middleware.js",
+      "wrangler.jsonc"
+    ],
+    "additionalSourceChanges": 0,
+    "proposedOperation": "At most one exact artifact replay, private token rotation, full-rate tail; no business/source/topology changes",
+    "authorization": "PENDING"
+  },
+  "firstRemainingBlocker": "P9_R6_E1_POST_PRIVATE_TRACE_INCOMPLETE_REPLAY_AUTHORIZATION_REQUIRED",
+  "evidence": [
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-EVIDENCE/EXACT-DIAGNOSTIC-CANDIDATE.json",
+      "sha256": "cb75d36c37e6bc69b01c026c4a4513d3d2e00a184e20b759f98c538610ae1415"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-EVIDENCE/DEPLOYMENT-ARTIFACT-IDENTITY.json",
+      "sha256": "a839d8e9d3bc034493620d4f96a636bbb7342d61ecbaeda215021ba2ec691f48"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-EVIDENCE/COMPILED-CANDIDATE-PROOF.json",
+      "sha256": "b5ada1284843719bc680c81f75d9664733afa526f3f0e908ddb86b89ff9149f0"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-EVIDENCE/BUILD-GENERATED-SOURCE-RECONCILIATION.json",
+      "sha256": "e5a2d57547aa0e1859dd9a2676023c26d844f699ad64761b9711fea01a45d7c5"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-EVIDENCE/PRIVATE-CONFIG-RECEIPT.json",
+      "sha256": "1599bd31b1f32d3263f6f6752366df4f82fce3787627db3293ef38021f87a50d"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-EVIDENCE/DIAGNOSTIC-DEPLOYMENT.json",
+      "sha256": "a5d9a6554c3b9f780d4fc4e9aa2f168e3813a5565b43b0c20bfc2334b012db01"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-EVIDENCE/PRIVATE-PRODUCTION-TRACE.json",
+      "sha256": "63fbb03cb18d4a279851f3de5e35dadf072b071e3c9248e16c07f5b61bb6b0d7"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-EVIDENCE/PRIVATE-PROBE-RESPONSES.json",
+      "sha256": "de91312d4ebff0ff44a0eb464c6e45aa17863fd9765140f9561ff38d78165e2a"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-EVIDENCE/TRACE-RESULT.json",
+      "sha256": "e0c8a7aee158486e796680ab27db42071e30f2f845d484f8fa348eca0116d3b9"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-EVIDENCE/EXACT-METHOD-REDIRECTS.json",
+      "sha256": "2c06912945162d9bd3102fb6ab58904c15d4ce8a87085a7453f0f4b7570875ad"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-EVIDENCE/CONFIG-ACCESS-STATE.json",
+      "sha256": "14fe2dd11dd59ef07b44fb6521358196aeefe8607a47a1bb58fe80877bf6449e"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-EVIDENCE/POST-TRACE-STATE.json",
+      "sha256": "c87765ee57160d30bb871a71f7e564b82d2cc13c29c14843db61e3bb6f689c32"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-EVIDENCE/FUNCTION-EXECUTION-OBSERVATIONS.json",
+      "sha256": "17d7c566f5a3b1c992cecd85ee3883518cf2004e54181ca18f40bb1f621f4a81"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-EVIDENCE/EXECUTION-SURFACE-CLOSURE-MATRIX.json",
+      "sha256": "bddccbd773b50dcece2d8869bdaf24e0828d218d9e9aaa73416d2dea22bccc9c"
+    }
+  ]
+}</pre><section id="post-replay-successor" style="border:2px solid #9b642b;padding:24px;margin:24px"><h2>Additional authorized POST replay — successor evidence</h2><p><strong>P9_G3_R6_E1_POST_TRACE_STILL_INCOMPLETE — STOP</strong></p><p>Deployment b07d86bf-2447-4fe8-8ded-66d9fe676c81; frozen candidate tree 6b91c4be7005c6ef7545081c7a47d6338e7347be; digest 684e7d3baef6f587e9dfd88d06035c2704d686536e42bc0d6223c505df0ed57a. Source and compiled Worker identity match.</p><p>Exactly one additional deployment and one required diagnostic-secret rotation completed. Tail connection was not confirmed within 20 seconds; zero POST requests were sent. No POST middleware, method-defense, handler, wrapper or guard trace was captured. Generic HTTP status is not used as proof. No further deployment or rotation attempted.</p><p>READ_ONLY remains present in deployment metadata; effective runtime on this new deployment remains RUNTIME_UNVERIFIED. The earlier GET binding-level trace remains preserved and valid for its earlier deployment.</p><p>Raw D1 forwarded: NO; mutation count: 0 because this replay issued no POST and no D1 operation. This does not establish POST runtime isolation. Provider: 0 / USD0. Payments/refunds: 0 / 0. Other production mutations: 0. Migrations: 0. Topology remains OPEN; global production isolation NOT_PROVEN.</p><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-POST-REPLAY-EVIDENCE.json">Full successor receipt</a>. Earlier evidence is retained below unchanged.</p></section><section id="e2-trace-topology-successor" style="padding:24px;border:2px solid #9b642b;margin:24px"><h2>E2 read-only / local-QA successor</h2><p>EVIDENCE_GAPS_OPEN — NOT migration-ready.</p><p>Current deployment-specific tail OPEN and initialization succeeded in 634 ms; filtered operational subscription closed. No app request, D1 operation, deployment or secret rotation.</p><p>Historical collector flaws: JSON mode suppresses Connected banner; sampling-rate=1 is invalid. Actual earlier raw exit/stderr is unavailable; no historical guard failure inferred.</p><p>10 local fail-closed collector gate cases PASS. Harmless private no-D1 roundtrip remains unavailable, so future POST remains blocked.</p><p>2176 source commit objects reread. 671 source-confirmed unguarded production-D1 write-path exposures; 1536 remaining classification gaps. Successful current database writing is not asserted. Prior GET remains scoped to its original deployment; original R5 configuration root cause remains unresolved.</p><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E2-TRACE-TOPOLOGY-DIAGNOSTIC.json">E2 receipt</a> · <a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E2-OLD-SURFACE-CLASSIFICATION.json">Per-surface classification/action matrix</a></p></section></html>

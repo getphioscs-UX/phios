@@ -711,5 +711,41 @@
     "payments": 0,
     "secretMutation": 0,
     "p9Mutation": 0
+  },
+  "knowledgeSourceLLMPrototype": {
+    "state": "ZERO_CALL_LOCAL_PROTOTYPE; SEMANTIC_LLM_NOT_RUN",
+    "receipt": "tools/review/free-ask-manuscript-r1/KNOWLEDGE-SOURCE-LLM-PROTOTYPE.json",
+    "review": "tools/review/free-ask-manuscript-r1/KNOWLEDGE-SOURCE-LLM-PROTOTYPE-HUMAN-REVIEW.html",
+    "calls": 0,
+    "costUSD": 0,
+    "productionActivation": false,
+    "paidAuthorization": false,
+    "remaining": [
+      "Exact chapter reading links and optional commerce resolution",
+      "English source coverage and zh unexplained-English validator",
+      "Per-case retrieval support review",
+      "Account/model whitelist and hard budget preflight before any call",
+      "LLM semantic and citation acceptance after explicit authorization"
+    ],
+    "historicalCoveragePreserved": true
+  },
+  "membershipAskCreditR1": {
+    "state": "PARTIAL_REVIEWABLE_SOURCE_CANDIDATE",
+    "head": "890587f9cc830c1a4be80283618212266c70ae5b",
+    "receipt": "tools/review/membership-ask-credit-r1/STATE.json",
+    "review": "tools/review/membership-ask-credit-r1/HUMAN-REVIEW.html",
+    "gates": {
+      "SOURCE": "PARTIAL; CREDIT_PRIMITIVES_PASS_BOUNDED_LOCAL",
+      "RETRIEVAL": "PARTIAL; 7_PROVENANCE_GATED_CANDIDATE_PACKS",
+      "MODEL_ANSWER_QUALITY": "NOT_RUN",
+      "BALANCE_AND_COMMERCIAL": "PASS_BOUNDED_LOCAL_SQL; REAL_CUSTOMER_NOT_RUN",
+      "BUILD": "BLOCKED_BY_CONCURRENT_RELEVANT_MUTATION",
+      "DEPLOYMENT": "NOT_RUN_FOR_THIS_CANDIDATE",
+      "LIVE_CUSTOMER": "NOT_RUN_FOR_THIS_CANDIDATE",
+      "CHINESE_KNOWLEDGE_CHAIN": "PASS_OFFLINE_ORCHESTRATION_NOT_MODEL_ANSWER_QUALITY",
+      "EN_RETRIEVAL": "PASS_BOUNDED_BROWSER; 2_CHINESE_SOURCES; MODEL_LANGUAGE_QUALITY_NOT_RUN",
+      "CHAPTER_SOURCE_ENTRY": "PASS_BOUNDED_BROWSER_PERMISSION_CHECKED_DESCRIPTION_NOT_FULL_TEXT"
+    },
+    "productionActivation": false
   }
 }

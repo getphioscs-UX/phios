@@ -1,4 +1,5 @@
 import {manuscriptMetadataRaw} from '../knowledge-runtime/current-manuscript-server-metadata.js';
+import {experimentAllows} from '../knowledge-runtime/manuscript-experiment-access.js';
 import {CURRENT_CHAPTER_ADMISSION_OWNER,admittedManuscriptScopes} from './manuscript-current-admission.js';
 
 const denyStates=new Set(['NOT_ACTIVATED','WITHHELD','DENIED','UNKNOWN','REJECTED','STALE']);
@@ -17,8 +18,9 @@ export function stateAllowsSource(source){
  if(/unknown|stale|^v0(?:-|$)/i.test(clean(source.sourceVersion)))return false;
  return true;
 }
-export function manuscriptSourceAllowed(source){
+export function manuscriptSourceAllowed(source,experimentAccess=null){
  if(!stateAllowsSource(source))return false;
+ if(experimentAllows(experimentAccess,source))return true;
  const rows=authorityRows().filter(r=>r.bookCode===source.bookCode&&r.sectionCode===source.sectionCode);
  const digest=source.sourceSha256||source.sourceBinaryDigest;
  const sectionDigest=source.sectionSha256||source.sourceDigest||source.supportRange?.sectionSha256;
@@ -27,8 +29,9 @@ export function manuscriptSourceAllowed(source){
  if(rows.length!==1)return false;
  const r=rows[0];return r.currentWholeChapterQualified===true&&r.currentAdmission==='ACTIVATED'&&digest===r.sourceSha256&&sectionDigest===r.sectionSha256;
 }
-export function corpusSourceAllowed(source){
+export function corpusSourceAllowed(source,experimentAccess=null){
  if(!stateAllowsSource(source)||!clean(source.bookCode)||!clean(source.sourceSha256))return false;
+ if(experimentAllows(experimentAccess,source))return true;
  if(source.wholeChapterCandidate===true||source.sectionCode)return manuscriptSourceAllowed(source);
  if(!source.scopeAdmissionPath)return false;
  try{const scope=JSON.parse(manuscriptMetadataRaw[source.scopeAdmissionPath]);const records=(scope.records||[]).filter(r=>r.bookCode===source.bookCode&&r.sourceSha256===source.sourceSha256&&r.locale===source.locale);return admittedManuscriptScopes(records,source,manuscriptMetadataRaw,{textScopeEnabled:true}).length>0;}catch{return false;}

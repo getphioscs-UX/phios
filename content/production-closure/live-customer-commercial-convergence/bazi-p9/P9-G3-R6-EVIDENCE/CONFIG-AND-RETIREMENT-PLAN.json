@@ -1,0 +1,36 @@
+{
+  "baseCommit": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+  "wranglerSourceOfTruth": true,
+  "productionMaintenancePresent": false,
+  "previewMaintenancePresent": false,
+  "noSecretValuesIncluded": true,
+  "documentation": [
+    {
+      "url": "https://developers.cloudflare.com/pages/functions/wrangler-configuration/",
+      "claim": "Wrangler file is source of truth; production/preview vars require environment-specific handling"
+    },
+    {
+      "url": "https://developers.cloudflare.com/api/resources/pages/subresources/projects/subresources/deployments/methods/delete/",
+      "claim": "Supported single-deployment DELETE API; force only permits deletion of nonproduction active-alias deployment, not blanket safety proof"
+    }
+  ],
+  "strategy": {
+    "current": "Prepare source-controlled READ_ONLY variable plus private safe trace successor. Review exact source before commit/push/deploy.",
+    "old": "Select confirmed publicly reachable production-D1 Functions surface with no production alias; separately approve a single supported retirement trial; record immutable metadata/source recovery reference; after operation HEAD/GET recheck all URLs and aliases and fresh topology.",
+    "massDeletion": false,
+    "perDeploymentD1UnbindingSupported": "NOT_VERIFIED_DO_NOT_USE",
+    "aliasRemovalAloneSufficient": false,
+    "restoration": "Source commit plus prior binding metadata permits reviewed redeployment; does not promise restoration of the exact immutable deployment URL.",
+    "rollout": "Only after trial semantics proved review remaining itemized list. Never delete canonical or active production aliases."
+  },
+  "runtimeTrace": {
+    "host": "getphios.com",
+    "deployment": "333178e5-1ed9-4435-b385-ea5139c41057",
+    "source": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+    "rootMiddleware": "UNVERIFIED_IN_ACTUAL_RUNTIME",
+    "observedMode": "UNVERIFIED_IN_ACTUAL_RUNTIME",
+    "downstreamBinding": "UNVERIFIED_IN_ACTUAL_RUNTIME",
+    "SQLAttempt": "NOT_EXECUTED_IN_PRODUCTION",
+    "response": "Prior anonymous synthetic requests reached route-specific responses; no maintenance denial proof"
+  }
+}

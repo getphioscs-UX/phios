@@ -1,0 +1,1109 @@
+<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Knowledge Ask 来源约束 LLM 零调用原型</title><style>body{max-width:1100px;margin:30px auto;padding:20px;background:#111923;color:#e8edf2;font:16px/1.7 system-ui}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#1c2938;padding:18px}a{color:#91caff}details{border:1px solid #425268;padding:12px;margin:14px 0}</style><h1>第二类 Knowledge Ask · 零调用原型</h1><p>LOCAL 原型已执行；模型回答 NOT_RUN；DEPLOYMENT / LIVE 未执行。第一类与第三类不变。私有原稿只用于受控本地审阅，不公开全文。七册整体仍 PARTIAL。</p><p>原稿提取质量、检索相关性、引用字节有效性与回答成立分别验收。引用检查 PASS 不代表语义支持 PASS。</p><h2>独立实验预算与免费额度候选</h2><pre>{
+  &quot;status&quot;: &quot;PROPOSED_NOT_AUTHORIZED&quot;,
+  &quot;priceCheckedAt&quot;: &quot;2026-10-12&quot;,
+  &quot;models&quot;: [
+    {
+      &quot;id&quot;: &quot;gpt-5.6-luna&quot;,
+      &quot;inputPerMillionUSD&quot;: 0.2,
+      &quot;cachedInputPerMillionUSD&quot;: 0.02,
+      &quot;outputPerMillionUSD&quot;: 1.2
+    },
+    {
+      &quot;id&quot;: &quot;gpt-5.6-terra&quot;,
+      &quot;inputPerMillionUSD&quot;: 2,
+      &quot;cachedInputPerMillionUSD&quot;: 0.2,
+      &quot;outputPerMillionUSD&quot;: 12
+    }
+  ],
+  &quot;priceSources&quot;: [
+    &quot;https://developers.openai.com/api/docs/models/gpt-5.6-luna&quot;,
+    &quot;https://developers.openai.com/api/docs/models/gpt-5.6-terra&quot;
+  ],
+  &quot;accountWhitelist&quot;: &quot;UNVERIFIED&quot;,
+  &quot;maxCalls&quot;: 20,
+  &quot;callsPerModel&quot;: 10,
+  &quot;maxInputTokens&quot;: 12000,
+  &quot;maxOutputTokens&quot;: 1800,
+  &quot;cacheWriteMultiplier&quot;: 1.25,
+  &quot;automaticRetry&quot;: 0,
+  &quot;tools&quot;: [],
+  &quot;perCallMaxUSD&quot;: {
+    &quot;luna&quot;: 0.00516,
+    &quot;terra&quot;: 0.0516
+  },
+  &quot;totalConservativeUSD&quot;: 0.5676,
+  &quot;requestedHardBudgetUSD&quot;: 0.6,
+  &quot;firstCallThenReview&quot;: true,
+  &quot;budget&quot;: &quot;INDEPENDENT_KNOWLEDGE_EXPERIMENT_NOT_REPORT_OR_TAROT&quot;,
+  &quot;freeAllowanceProposal&quot;: {
+    &quot;status&quot;: &quot;NOT_ACTIVATED&quot;,
+    &quot;verifiedAccountPerDay&quot;: 3,
+    &quot;customerDailySpendCapUSD&quot;: 0.02,
+    &quot;siteDailySpendCapUSD&quot;: 1,
+    &quot;deterministicRetrieval&quot;: &quot;NO_PROVIDER&quot;,
+    &quot;anonymous&quot;: &quot;DETERMINISTIC_ONLY&quot;,
+    &quot;failClosed&quot;: true
+  },
+  &quot;actualCalls&quot;: 0,
+  &quot;actualSpendUSD&quot;: 0
+}</pre><h2>执行的边界验证</h2><pre>[
+  {
+    &quot;name&quot;: &quot;exact source quotation fixture&quot;,
+    &quot;state&quot;: &quot;PASS&quot;
+  },
+  {
+    &quot;name&quot;: &quot;wrong source version rejected&quot;,
+    &quot;state&quot;: &quot;PASS&quot;
+  },
+  {
+    &quot;name&quot;: &quot;invented quote rejected&quot;,
+    &quot;state&quot;: &quot;PASS&quot;
+  },
+  {
+    &quot;name&quot;: &quot;no-source answer rejected&quot;,
+    &quot;state&quot;: &quot;PASS&quot;
+  },
+  {
+    &quot;name&quot;: &quot;English Chinese leakage rejected&quot;,
+    &quot;state&quot;: &quot;PASS&quot;
+  },
+  {
+    &quot;name&quot;: &quot;provider execution disabled&quot;,
+    &quot;state&quot;: &quot;PASS&quot;
+  },
+  {
+    &quot;name&quot;: &quot;pack contains relevant source units only&quot;,
+    &quot;state&quot;: &quot;PASS&quot;
+  },
+  {
+    &quot;name&quot;: &quot;no real provider call&quot;,
+    &quot;state&quot;: &quot;PASS&quot;
+  }
+]</pre><details><summary>M-I-1 · 一个系统的部件一直换新，为什么整体仍可延续？ · HISTORICAL_FAILURE_REGRESSION</summary><h3>实际 deterministic 回答</h3><pre>{
+  &quot;present&quot;: true,
+  &quot;projectionType&quot;: &quot;DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER&quot;,
+  &quot;generativeModelUsed&quot;: false,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;text&quot;: &quot;真正持续存在的,并不是组成系统的每一个元素,而是系统能够不断重新组织这些元素,并持续维持自身的运行方式。\n\n因此,持续 Continuity 并不是一种静态结果,而是一种动态能力。\n\n任何现实,只要无法不断恢复自身,就无法真正持续;任何结构,只要无法面对扰动,就终将瓦解。\n\n稳定并不是变化的对立面,而是变化之中的持续组织能力。\n\n现实之所以能够跨越时间,并不是因为时间停止流动,而是因为系统能够不断回应时间所带来的改变。\n\n这意味着,现实开始出现另一种更深层的特性。\n\n系统不再只是形成结构, 也不再只是形成连接与组织,而开始形成维持自身的能力。\n\n当部分结构发生改变,其余结构能够重新调整;当某些路径失去作用,新的路径能够逐渐建立;当环境不断变化,组织方式能够不断适应。\n\n现实开始表现出一种近似自我维持的倾向,它并不依赖某一个固定元素,而依赖整个组织持续协调自身的能力。\n\n我们可以从一座城市理解这一点。\n\n一座真正成熟的城市,并不会因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。\n\n新的建筑不断出现,旧的建筑不断消失;道路不断扩建,设施不断替换; 人口持续流动,产业不断更迭。\n\n然而,城市依然能够维持交通、资源、生产、交流与秩序,因为真正持续存在的,并不是城市内部每一个组成部分,而是这些组成部分之间不断恢复整体运行的能力。\n\n城市之所以能够跨越数十年甚至数百年,并不是因为没有变化,而是因为变化始终没有破坏它的连续运行。&quot;,
+  &quot;sourceReferences&quot;: [
+    &quot;MANUSCRIPT:B1V3-P1-S006&quot;
+  ],
+  &quot;argumentUnit&quot;: {
+    &quot;argumentId&quot;: &quot;REORGANIZATION&quot;,
+    &quot;type&quot;: &quot;MECHANISM&quot;,
+    &quot;startOffset&quot;: 363,
+    &quot;endOffset&quot;: 977,
+    &quot;textSha256&quot;: &quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;,
+    &quot;comparisonSubjects&quot;: null
+  },
+  &quot;authorityNotice&quot;: &quot;Exact chapter argument span from server-verified scope; source qualifiers retained. No generated answer or full-chapter publication.&quot;
+}</pre><h3>动态 authority pack 与 token 估算</h3><pre>{
+  &quot;question&quot;: &quot;一个系统的部件一直换新，为什么整体仍可延续？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;terms&quot;: [],
+  &quot;evidence&quot;: [
+    {
+      &quot;id&quot;: &quot;E1&quot;,
+      &quot;chapterId&quot;: &quot;B1V3-P1-S006&quot;,
+      &quot;title&quot;: &quot;世界如何形成&quot;,
+      &quot;version&quot;: &quot;v3-revision-20261011-33c91cd60d5f&quot;,
+      &quot;sourceSha256&quot;: &quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 61,
+        &quot;end&quot;: 62
+      },
+      &quot;position&quot;: {
+        &quot;startOffset&quot;: 363,
+        &quot;endOffset&quot;: 977,
+        &quot;textSha256&quot;: &quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;
+      },
+      &quot;text&quot;: &quot;真正持续存\n在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这\n些元素，并持续维持自身的运行方式。\n因此，持续 Continuity 并不是一种静态结果，而是一种动态能\n力。任何现实，只要无法不断恢复自身，就无法真正持续；任何结\n构，只要无法面对扰动，就终将瓦解。稳定并不是变化的对立面，而\n是变化之中的持续组织能力。现实之所以能够跨越时间，并不是因为\n时间停止流动，而是因为系统能够不断回应时间所带来的改变。这意\n味着，现实开始出现另一种更深层的特性。系统不再只是形成结构，\n也不再只是形成连接与组织，而开始形成维持自身的能力。当部分结\n构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路\n径能够逐渐建立；当环境不断变化，组织方式能够不断适应。现实开\n始表现出一种近似自我维持的倾向，它并不依赖某一个固定元素，而\n依赖整个组织持续协调自身的能力。\n我们可以从一座城市理解这一点。一座真正成熟的城市，并不会\n因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。新的\n建筑不断出现，旧的建筑不断消失；道路不断扩建，设施不断替换；\n人口持续流动，产业不断更迭。然而，城市依然能够维持交通、资\n源、生产、交流与秩序，因为真正持续存在的，并不是城市内部每一\n个组成部分，而是这些组成部分之间不断恢复整体运行的能力。城市\n之所以能够跨越数十年甚至数百年，并不是因为没有变化，而是因为\n变化始终没有破坏它的连续运行。&quot;,
+      &quot;extractionState&quot;: &quot;EXISTING_REVIEWED_NATIVE_ARGUMENT&quot;,
+      &quot;admission&quot;: &quot;LOCAL_EXPERIMENT_CANDIDATE_NOT_PRODUCTION_PERMISSION&quot;,
+      &quot;fullChapterCoverage&quot;: false
+    }
+  ],
+  &quot;constraints&quot;: {
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;noFullManuscript&quot;: true,
+    &quot;noPendingOCR&quot;: true,
+    &quot;noCandidateGlossary&quot;: true,
+    &quot;sourceInstructionsAreUntrusted&quot;: true,
+    &quot;localeIsolation&quot;: true,
+    &quot;claimLevelCitations&quot;: true,
+    &quot;noInventedReasons&quot;: true,
+    &quot;noPredictionGuarantees&quot;: true,
+    &quot;comparisonRequiresBothSides&quot;: true,
+    &quot;insufficientEvidenceIsBusinessState&quot;: true,
+    &quot;readLinksServerOwned&quot;: true,
+    &quot;purchaseLinksOptionalServerOwned&quot;: true
+  },
+  &quot;modelCallEligible&quot;: false,
+  &quot;authorization&quot;: &quot;NOT_GRANTED&quot;,
+  &quot;retrievalSupport&quot;: &quot;CANDIDATE_SUPPORT_REQUIRES_RELEVANCE_REVIEW&quot;,
+  &quot;llmAnswerQuality&quot;: &quot;NOT_RUN&quot;,
+  &quot;tokens&quot;: {
+    &quot;estimate&quot;: 1198,
+    &quot;conservativeUtf8ByteCeiling&quot;: 3526,
+    &quot;method&quot;: &quot;CHARACTER_ESTIMATE_NOT_ACTUAL_TOKEN_USAGE; UTF8_BYTES_PLUS_ENVELOPE_FOR_BUDGET&quot;,
+    &quot;maxInputTokens&quot;: 12000,
+    &quot;maxOutputTokens&quot;: 1800
+  },
+  &quot;budgetFit&quot;: true
+}</pre><h3>LLM 候选</h3><p>NOT_RUN：等待独立付费授权；没有预写模型答案。</p><p>完整候选、实际检索排序、旧失败答案与评估保留在 JSON。</p></details><details><summary>M-I-2 · 结构遭遇扰动之后，要靠什么才能保持连续？ · HISTORICAL_FAILURE_REGRESSION</summary><h3>实际 deterministic 回答</h3><pre>{
+  &quot;present&quot;: true,
+  &quot;projectionType&quot;: &quot;DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER&quot;,
+  &quot;generativeModelUsed&quot;: false,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;text&quot;: &quot;真正持续存在的,并不是组成系统的每一个元素,而是系统能够不断重新组织这些元素,并持续维持自身的运行方式。\n\n因此,持续 Continuity 并不是一种静态结果,而是一种动态能力。\n\n任何现实,只要无法不断恢复自身,就无法真正持续;任何结构,只要无法面对扰动,就终将瓦解。\n\n稳定并不是变化的对立面,而是变化之中的持续组织能力。\n\n现实之所以能够跨越时间,并不是因为时间停止流动,而是因为系统能够不断回应时间所带来的改变。\n\n这意味着,现实开始出现另一种更深层的特性。\n\n系统不再只是形成结构, 也不再只是形成连接与组织,而开始形成维持自身的能力。\n\n当部分结构发生改变,其余结构能够重新调整;当某些路径失去作用,新的路径能够逐渐建立;当环境不断变化,组织方式能够不断适应。\n\n现实开始表现出一种近似自我维持的倾向,它并不依赖某一个固定元素,而依赖整个组织持续协调自身的能力。\n\n我们可以从一座城市理解这一点。\n\n一座真正成熟的城市,并不会因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。\n\n新的建筑不断出现,旧的建筑不断消失;道路不断扩建,设施不断替换; 人口持续流动,产业不断更迭。\n\n然而,城市依然能够维持交通、资源、生产、交流与秩序,因为真正持续存在的,并不是城市内部每一个组成部分,而是这些组成部分之间不断恢复整体运行的能力。\n\n城市之所以能够跨越数十年甚至数百年,并不是因为没有变化,而是因为变化始终没有破坏它的连续运行。&quot;,
+  &quot;sourceReferences&quot;: [
+    &quot;MANUSCRIPT:B1V3-P1-S006&quot;
+  ],
+  &quot;argumentUnit&quot;: {
+    &quot;argumentId&quot;: &quot;REORGANIZATION&quot;,
+    &quot;type&quot;: &quot;MECHANISM&quot;,
+    &quot;startOffset&quot;: 363,
+    &quot;endOffset&quot;: 977,
+    &quot;textSha256&quot;: &quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;,
+    &quot;comparisonSubjects&quot;: null
+  },
+  &quot;authorityNotice&quot;: &quot;Exact chapter argument span from server-verified scope; source qualifiers retained. No generated answer or full-chapter publication.&quot;
+}</pre><h3>动态 authority pack 与 token 估算</h3><pre>{
+  &quot;question&quot;: &quot;结构遭遇扰动之后，要靠什么才能保持连续？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;terms&quot;: [
+    {
+      &quot;termCode&quot;: &quot;TERM-039&quot;,
+      &quot;key&quot;: &quot;structure&quot;,
+      &quot;label&quot;: &quot;结构&quot;,
+      &quot;locale&quot;: &quot;zh-Hans&quot;,
+      &quot;authority&quot;: &quot;EXISTING_FROZEN_HUMAN_TERMINOLOGY&quot;,
+      &quot;createsAnswerEvidence&quot;: false
+    }
+  ],
+  &quot;evidence&quot;: [
+    {
+      &quot;id&quot;: &quot;E1&quot;,
+      &quot;chapterId&quot;: &quot;B1V3-P1-S006&quot;,
+      &quot;title&quot;: &quot;世界如何形成&quot;,
+      &quot;version&quot;: &quot;v3-revision-20261011-33c91cd60d5f&quot;,
+      &quot;sourceSha256&quot;: &quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 61,
+        &quot;end&quot;: 62
+      },
+      &quot;position&quot;: {
+        &quot;startOffset&quot;: 363,
+        &quot;endOffset&quot;: 977,
+        &quot;textSha256&quot;: &quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;
+      },
+      &quot;text&quot;: &quot;真正持续存\n在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这\n些元素，并持续维持自身的运行方式。\n因此，持续 Continuity 并不是一种静态结果，而是一种动态能\n力。任何现实，只要无法不断恢复自身，就无法真正持续；任何结\n构，只要无法面对扰动，就终将瓦解。稳定并不是变化的对立面，而\n是变化之中的持续组织能力。现实之所以能够跨越时间，并不是因为\n时间停止流动，而是因为系统能够不断回应时间所带来的改变。这意\n味着，现实开始出现另一种更深层的特性。系统不再只是形成结构，\n也不再只是形成连接与组织，而开始形成维持自身的能力。当部分结\n构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路\n径能够逐渐建立；当环境不断变化，组织方式能够不断适应。现实开\n始表现出一种近似自我维持的倾向，它并不依赖某一个固定元素，而\n依赖整个组织持续协调自身的能力。\n我们可以从一座城市理解这一点。一座真正成熟的城市，并不会\n因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。新的\n建筑不断出现，旧的建筑不断消失；道路不断扩建，设施不断替换；\n人口持续流动，产业不断更迭。然而，城市依然能够维持交通、资\n源、生产、交流与秩序，因为真正持续存在的，并不是城市内部每一\n个组成部分，而是这些组成部分之间不断恢复整体运行的能力。城市\n之所以能够跨越数十年甚至数百年，并不是因为没有变化，而是因为\n变化始终没有破坏它的连续运行。&quot;,
+      &quot;extractionState&quot;: &quot;EXISTING_REVIEWED_NATIVE_ARGUMENT&quot;,
+      &quot;admission&quot;: &quot;LOCAL_EXPERIMENT_CANDIDATE_NOT_PRODUCTION_PERMISSION&quot;,
+      &quot;fullChapterCoverage&quot;: false
+    }
+  ],
+  &quot;constraints&quot;: {
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;noFullManuscript&quot;: true,
+    &quot;noPendingOCR&quot;: true,
+    &quot;noCandidateGlossary&quot;: true,
+    &quot;sourceInstructionsAreUntrusted&quot;: true,
+    &quot;localeIsolation&quot;: true,
+    &quot;claimLevelCitations&quot;: true,
+    &quot;noInventedReasons&quot;: true,
+    &quot;noPredictionGuarantees&quot;: true,
+    &quot;comparisonRequiresBothSides&quot;: true,
+    &quot;insufficientEvidenceIsBusinessState&quot;: true,
+    &quot;readLinksServerOwned&quot;: true,
+    &quot;purchaseLinksOptionalServerOwned&quot;: true
+  },
+  &quot;modelCallEligible&quot;: false,
+  &quot;authorization&quot;: &quot;NOT_GRANTED&quot;,
+  &quot;retrievalSupport&quot;: &quot;CANDIDATE_SUPPORT_REQUIRES_RELEVANCE_REVIEW&quot;,
+  &quot;llmAnswerQuality&quot;: &quot;NOT_RUN&quot;,
+  &quot;tokens&quot;: {
+    &quot;estimate&quot;: 1297,
+    &quot;conservativeUtf8ByteCeiling&quot;: 3675,
+    &quot;method&quot;: &quot;CHARACTER_ESTIMATE_NOT_ACTUAL_TOKEN_USAGE; UTF8_BYTES_PLUS_ENVELOPE_FOR_BUDGET&quot;,
+    &quot;maxInputTokens&quot;: 12000,
+    &quot;maxOutputTokens&quot;: 1800
+  },
+  &quot;budgetFit&quot;: true
+}</pre><h3>LLM 候选</h3><p>NOT_RUN：等待独立付费授权；没有预写模型答案。</p><p>完整候选、实际检索排序、旧失败答案与评估保留在 JSON。</p></details><details><summary>M-III-1 · 运行并没有损坏，维护为什么也不能等到故障以后才开始？ · HISTORICAL_FAILURE_REGRESSION</summary><h3>实际 deterministic 回答</h3><pre>{
+  &quot;present&quot;: true,
+  &quot;projectionType&quot;: &quot;DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER&quot;,
+  &quot;generativeModelUsed&quot;: false,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;text&quot;: &quot;维护首先不是修理,而是处理持续所产生的后果。\n\n修理通常发生在某个结构已经明显损坏之后,维护则更早,它关注的是一个仍然能够运行的现实,是否正在逐渐改变自己的承载条件。&quot;,
+  &quot;sourceReferences&quot;: [
+    &quot;MANUSCRIPT:CM-B3V1-P8-S001&quot;
+  ],
+  &quot;argumentUnit&quot;: {
+    &quot;argumentId&quot;: &quot;MAINTENANCE_V_REPAIR&quot;,
+    &quot;type&quot;: &quot;DISTINCTION&quot;,
+    &quot;startOffset&quot;: 915,
+    &quot;endOffset&quot;: 999,
+    &quot;textSha256&quot;: &quot;5bd6e6732ecfa1d37a6c8510d066922343496225e6e6a97b86afe7824380c3d9&quot;,
+    &quot;comparisonSubjects&quot;: [
+      {
+        &quot;sourceLabel&quot;: &quot;维护&quot;,
+        &quot;aliases&quot;: []
+      },
+      {
+        &quot;sourceLabel&quot;: &quot;修理&quot;,
+        &quot;aliases&quot;: [
+          &quot;损坏后修理&quot;
+        ]
+      }
+    ]
+  },
+  &quot;authorityNotice&quot;: &quot;Exact chapter argument span from server-verified scope; source qualifiers retained. No generated answer or full-chapter publication.&quot;
+}</pre><h3>动态 authority pack 与 token 估算</h3><pre>{
+  &quot;question&quot;: &quot;运行并没有损坏，维护为什么也不能等到故障以后才开始？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;terms&quot;: [
+    {
+      &quot;termCode&quot;: &quot;TERM-029&quot;,
+      &quot;key&quot;: &quot;runtime&quot;,
+      &quot;label&quot;: &quot;运行&quot;,
+      &quot;locale&quot;: &quot;zh-Hans&quot;,
+      &quot;authority&quot;: &quot;EXISTING_FROZEN_HUMAN_TERMINOLOGY&quot;,
+      &quot;createsAnswerEvidence&quot;: false
+    }
+  ],
+  &quot;evidence&quot;: [
+    {
+      &quot;id&quot;: &quot;E1&quot;,
+      &quot;chapterId&quot;: &quot;CM-B3V1-P8-S001&quot;,
+      &quot;title&quot;: &quot;世界如何维持&quot;,
+      &quot;version&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 3,
+        &quot;end&quot;: 6
+      },
+      &quot;position&quot;: {
+        &quot;startOffset&quot;: 915,
+        &quot;endOffset&quot;: 999,
+        &quot;textSha256&quot;: &quot;5bd6e6732ecfa1d37a6c8510d066922343496225e6e6a97b86afe7824380c3d9&quot;
+      },
+      &quot;text&quot;: &quot;维护首先不是修理，而是\n处理持续所产生的后果。修理通常发生在某个结构已经明显损坏之后，维\n护则更早，它关注的是一个仍然能够运行的现实，是否正在逐渐改变自己\n的承载条件。&quot;,
+      &quot;extractionState&quot;: &quot;EXISTING_REVIEWED_NATIVE_ARGUMENT&quot;,
+      &quot;admission&quot;: &quot;LOCAL_EXPERIMENT_CANDIDATE_NOT_PRODUCTION_PERMISSION&quot;,
+      &quot;fullChapterCoverage&quot;: false
+    },
+    {
+      &quot;id&quot;: &quot;E2&quot;,
+      &quot;chapterId&quot;: &quot;CM-B3V1-P9-S004&quot;,
+      &quot;title&quot;: &quot;世界如何维持&quot;,
+      &quot;version&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+      &quot;pdfPages&quot;: [
+        249,
+        252
+      ],
+      &quot;position&quot;: {
+        &quot;startOffset&quot;: 20,
+        &quot;endOffset&quot;: 361,
+        &quot;textSha256&quot;: &quot;a25b3bdff9dd9e22a8217be6dccbd88db2d41100b602b720c45352659e61840e&quot;
+      },
+      &quot;text&quot;: &quot;资源之所以开始需要共同管理，不是因为它们天然属于共同，也不是\n因为多个运行一旦相遇就必须放弃各自边界。真正变化发生在资源开始同\n时进入多个运行的条件以后。一项资源原本只由一个位置使用时，它可以\n按照局部需要被安排；一旦多个运行都依赖同一时间、空间、资金、设\n备、信息、注意或其他承载条件，任何一个位置对资源的使用，就会改变\n其他位置能够使用的范围。资源从这里开始不再只是“我的资源”或“你\n的资源”。它逐渐成为共享现实的一部分。所谓共享，并不意味着所有资\n源必须平均分配，也不意味着所有参与者拥有完全相同的权利与需要。\n它真正指向的是一种关系：多个运行的持续开始依赖同一有限条件，而且\n这些运行彼此无法完全忽略。当这种关系出现以后，资源管理便不再只是\n个体选择。它开始承担协调功能。&quot;,
+      &quot;extractionState&quot;: &quot;EXISTING_REVIEWED_NATIVE_ARGUMENT&quot;,
+      &quot;admission&quot;: &quot;LOCAL_EXPERIMENT_CANDIDATE_NOT_PRODUCTION_PERMISSION&quot;,
+      &quot;fullChapterCoverage&quot;: false
+    },
+    {
+      &quot;id&quot;: &quot;E3&quot;,
+      &quot;chapterId&quot;: &quot;CM-B3V1-P8-S059&quot;,
+      &quot;title&quot;: &quot;世界如何维持&quot;,
+      &quot;version&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+      &quot;pdfPages&quot;: [
+        226,
+        231
+      ],
+      &quot;position&quot;: {
+        &quot;startOffset&quot;: 33,
+        &quot;endOffset&quot;: 398,
+        &quot;textSha256&quot;: &quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;
+      },
+      &quot;text&quot;: &quot;运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。&quot;,
+      &quot;extractionState&quot;: &quot;EXISTING_REVIEWED_NATIVE_ARGUMENT&quot;,
+      &quot;admission&quot;: &quot;LOCAL_EXPERIMENT_CANDIDATE_NOT_PRODUCTION_PERMISSION&quot;,
+      &quot;fullChapterCoverage&quot;: false
+    }
+  ],
+  &quot;constraints&quot;: {
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;noFullManuscript&quot;: true,
+    &quot;noPendingOCR&quot;: true,
+    &quot;noCandidateGlossary&quot;: true,
+    &quot;sourceInstructionsAreUntrusted&quot;: true,
+    &quot;localeIsolation&quot;: true,
+    &quot;claimLevelCitations&quot;: true,
+    &quot;noInventedReasons&quot;: true,
+    &quot;noPredictionGuarantees&quot;: true,
+    &quot;comparisonRequiresBothSides&quot;: true,
+    &quot;insufficientEvidenceIsBusinessState&quot;: true,
+    &quot;readLinksServerOwned&quot;: true,
+    &quot;purchaseLinksOptionalServerOwned&quot;: true
+  },
+  &quot;modelCallEligible&quot;: false,
+  &quot;authorization&quot;: &quot;NOT_GRANTED&quot;,
+  &quot;retrievalSupport&quot;: &quot;CANDIDATE_SUPPORT_REQUIRES_RELEVANCE_REVIEW&quot;,
+  &quot;llmAnswerQuality&quot;: &quot;NOT_RUN&quot;,
+  &quot;tokens&quot;: {
+    &quot;estimate&quot;: 2078,
+    &quot;conservativeUtf8ByteCeiling&quot;: 5249,
+    &quot;method&quot;: &quot;CHARACTER_ESTIMATE_NOT_ACTUAL_TOKEN_USAGE; UTF8_BYTES_PLUS_ENVELOPE_FOR_BUDGET&quot;,
+    &quot;maxInputTokens&quot;: 12000,
+    &quot;maxOutputTokens&quot;: 1800
+  },
+  &quot;budgetFit&quot;: true
+}</pre><h3>LLM 候选</h3><p>NOT_RUN：等待独立付费授权；没有预写模型答案。</p><p>完整候选、实际检索排序、旧失败答案与评估保留在 JSON。</p></details><details><summary>M-V-1 · 国家换了边界，为什么语言和生活习惯未必跟着立刻改变？ · HISTORICAL_FAILURE_REGRESSION</summary><h3>实际 deterministic 回答</h3><pre>{
+  &quot;present&quot;: true,
+  &quot;projectionType&quot;: &quot;DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER&quot;,
+  &quot;generativeModelUsed&quot;: false,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;text&quot;: &quot;文明比国家更宽,也往往比国家更深。\n\n所谓更宽,是因为文明结构可以跨越多个政权;所谓更深,是因为它进入语言、亲属、记忆、 信仰、习惯、知识与生活方式,而这些层面并不会随着边界改变自动改变。\n\n一支军队能够在数月内占领一座城市,一项条约可以在一天之内重新划定疆界,一个王朝可以在几年之内被另一个王朝取代,但是语言、土地制度、家庭结构、宗教仪式、商业习惯、教育经典和历史记忆通常拥有完全不同的变化速度。\n\n政治改变可能极快,文明改变往往具有更长的时间尺度;二者会彼此影响,却很少同步移动。&quot;,
+  &quot;sourceReferences&quot;: [
+    &quot;MANUSCRIPT:B5-S002&quot;
+  ],
+  &quot;argumentUnit&quot;: {
+    &quot;argumentId&quot;: &quot;CIVILIZATION_V_STATE&quot;,
+    &quot;type&quot;: &quot;DISTINCTION&quot;,
+    &quot;startOffset&quot;: 590,
+    &quot;endOffset&quot;: 832,
+    &quot;textSha256&quot;: &quot;f6baac0b8eb668463d842aad287b253461afc63a573790a60530263b841ce305&quot;,
+    &quot;comparisonSubjects&quot;: null
+  },
+  &quot;authorityNotice&quot;: &quot;Exact chapter argument span from server-verified scope; source qualifiers retained. No generated answer or full-chapter publication.&quot;
+}</pre><h3>动态 authority pack 与 token 估算</h3><pre>{
+  &quot;question&quot;: &quot;国家换了边界，为什么语言和生活习惯未必跟着立刻改变？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;terms&quot;: [],
+  &quot;evidence&quot;: [
+    {
+      &quot;id&quot;: &quot;E1&quot;,
+      &quot;chapterId&quot;: &quot;B5-S002&quot;,
+      &quot;version&quot;: &quot;v1-current-positioned-prose-candidate&quot;,
+      &quot;sourceSha256&quot;: &quot;011996e36225e6ec1d7bba8b368d3b5d2c3b8c1567dab7ea5cd6f51f1ac069be&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 6,
+        &quot;end&quot;: 10
+      },
+      &quot;position&quot;: {
+        &quot;startOffset&quot;: 590,
+        &quot;endOffset&quot;: 832,
+        &quot;textSha256&quot;: &quot;f6baac0b8eb668463d842aad287b253461afc63a573790a60530263b841ce305&quot;
+      },
+      &quot;text&quot;: &quot;文明比国家更宽，也往往比国家更深。所谓更宽，是因为文明结\n构可以跨越多个政权；所谓更深，是因为它进入语言、亲属、记忆、\n信仰、习惯、知识与生活方式，而这些层面并不会随着边界改变自动\n改变。一支军队能够在数月内占领一座城市，一项条约可以在一天之\n内重新划定疆界，一个王朝可以在几年之内被另一个王朝取代，但是\n语言、土地制度、家庭结构、宗教仪式、商业习惯、教育经典和历史\n记忆通常拥有完全不同的变化速度。政治改变可能极快，文明改变往\n往具有更长的时间尺度；二者会彼此影响，却很少同步移动。&quot;,
+      &quot;extractionState&quot;: &quot;EXISTING_REVIEWED_NATIVE_ARGUMENT&quot;,
+      &quot;admission&quot;: &quot;LOCAL_EXPERIMENT_CANDIDATE_NOT_PRODUCTION_PERMISSION&quot;,
+      &quot;fullChapterCoverage&quot;: false
+    }
+  ],
+  &quot;constraints&quot;: {
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;noFullManuscript&quot;: true,
+    &quot;noPendingOCR&quot;: true,
+    &quot;noCandidateGlossary&quot;: true,
+    &quot;sourceInstructionsAreUntrusted&quot;: true,
+    &quot;localeIsolation&quot;: true,
+    &quot;claimLevelCitations&quot;: true,
+    &quot;noInventedReasons&quot;: true,
+    &quot;noPredictionGuarantees&quot;: true,
+    &quot;comparisonRequiresBothSides&quot;: true,
+    &quot;insufficientEvidenceIsBusinessState&quot;: true,
+    &quot;readLinksServerOwned&quot;: true,
+    &quot;purchaseLinksOptionalServerOwned&quot;: true
+  },
+  &quot;modelCallEligible&quot;: false,
+  &quot;authorization&quot;: &quot;NOT_GRANTED&quot;,
+  &quot;retrievalSupport&quot;: &quot;CANDIDATE_SUPPORT_REQUIRES_RELEVANCE_REVIEW&quot;,
+  &quot;llmAnswerQuality&quot;: &quot;NOT_RUN&quot;,
+  &quot;tokens&quot;: {
+    &quot;estimate&quot;: 930,
+    &quot;conservativeUtf8ByteCeiling&quot;: 2429,
+    &quot;method&quot;: &quot;CHARACTER_ESTIMATE_NOT_ACTUAL_TOKEN_USAGE; UTF8_BYTES_PLUS_ENVELOPE_FOR_BUDGET&quot;,
+    &quot;maxInputTokens&quot;: 12000,
+    &quot;maxOutputTokens&quot;: 1800
+  },
+  &quot;budgetFit&quot;: true
+}</pre><h3>LLM 候选</h3><p>NOT_RUN：等待独立付费授权；没有预写模型答案。</p><p>完整候选、实际检索排序、旧失败答案与评估保留在 JSON。</p></details><details><summary>M-V-3 · 讨论文明的边界时，应区分哪些层次而不是只看领土？ · HISTORICAL_FAILURE_REGRESSION</summary><h3>实际 deterministic 回答</h3><pre>{
+  &quot;present&quot;: true,
+  &quot;projectionType&quot;: &quot;DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER&quot;,
+  &quot;generativeModelUsed&quot;: false,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;text&quot;: &quot;文明边界至少存在一种比国界更复杂的性质,它既可以是政治边界,也可以是语言边界、宗教边界、生态边界、经济边界、知识边界、记忆边界或网络边界。\n\n这些边界并不会整齐重合。&quot;,
+  &quot;sourceReferences&quot;: [
+    &quot;MANUSCRIPT:B5-S002&quot;
+  ],
+  &quot;argumentUnit&quot;: {
+    &quot;argumentId&quot;: &quot;MULTIPLE_LAYERS&quot;,
+    &quot;type&quot;: &quot;DEFINITION&quot;,
+    &quot;startOffset&quot;: 2265,
+    &quot;endOffset&quot;: 2348,
+    &quot;textSha256&quot;: &quot;6ea99f9fe7b9907c1a958b17f97fbc18b79109908f5655787cb73bae8b2d9bfe&quot;,
+    &quot;comparisonSubjects&quot;: null
+  },
+  &quot;authorityNotice&quot;: &quot;Exact chapter argument span from server-verified scope; source qualifiers retained. No generated answer or full-chapter publication.&quot;
+}</pre><h3>动态 authority pack 与 token 估算</h3><pre>{
+  &quot;question&quot;: &quot;讨论文明的边界时，应区分哪些层次而不是只看领土？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;terms&quot;: [],
+  &quot;evidence&quot;: [
+    {
+      &quot;id&quot;: &quot;E1&quot;,
+      &quot;chapterId&quot;: &quot;B5-S002&quot;,
+      &quot;version&quot;: &quot;v1-current-positioned-prose-candidate&quot;,
+      &quot;sourceSha256&quot;: &quot;011996e36225e6ec1d7bba8b368d3b5d2c3b8c1567dab7ea5cd6f51f1ac069be&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 6,
+        &quot;end&quot;: 10
+      },
+      &quot;position&quot;: {
+        &quot;startOffset&quot;: 2265,
+        &quot;endOffset&quot;: 2348,
+        &quot;textSha256&quot;: &quot;6ea99f9fe7b9907c1a958b17f97fbc18b79109908f5655787cb73bae8b2d9bfe&quot;
+      },
+      &quot;text&quot;: &quot;文明边界至少存在一种比国界更复杂的性质，它既可以是政治边\n界，也可以是语言边界、宗教边界、生态边界、经济边界、知识边界、记\n忆边界或网络边界。这些边界并不会整齐重合。&quot;,
+      &quot;extractionState&quot;: &quot;EXISTING_REVIEWED_NATIVE_ARGUMENT&quot;,
+      &quot;admission&quot;: &quot;LOCAL_EXPERIMENT_CANDIDATE_NOT_PRODUCTION_PERMISSION&quot;,
+      &quot;fullChapterCoverage&quot;: false
+    }
+  ],
+  &quot;constraints&quot;: {
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;noFullManuscript&quot;: true,
+    &quot;noPendingOCR&quot;: true,
+    &quot;noCandidateGlossary&quot;: true,
+    &quot;sourceInstructionsAreUntrusted&quot;: true,
+    &quot;localeIsolation&quot;: true,
+    &quot;claimLevelCitations&quot;: true,
+    &quot;noInventedReasons&quot;: true,
+    &quot;noPredictionGuarantees&quot;: true,
+    &quot;comparisonRequiresBothSides&quot;: true,
+    &quot;insufficientEvidenceIsBusinessState&quot;: true,
+    &quot;readLinksServerOwned&quot;: true,
+    &quot;purchaseLinksOptionalServerOwned&quot;: true
+  },
+  &quot;modelCallEligible&quot;: false,
+  &quot;authorization&quot;: &quot;NOT_GRANTED&quot;,
+  &quot;retrievalSupport&quot;: &quot;CANDIDATE_SUPPORT_REQUIRES_RELEVANCE_REVIEW&quot;,
+  &quot;llmAnswerQuality&quot;: &quot;NOT_RUN&quot;,
+  &quot;tokens&quot;: {
+    &quot;estimate&quot;: 821,
+    &quot;conservativeUtf8ByteCeiling&quot;: 1953,
+    &quot;method&quot;: &quot;CHARACTER_ESTIMATE_NOT_ACTUAL_TOKEN_USAGE; UTF8_BYTES_PLUS_ENVELOPE_FOR_BUDGET&quot;,
+    &quot;maxInputTokens&quot;: 12000,
+    &quot;maxOutputTokens&quot;: 1800
+  },
+  &quot;budgetFit&quot;: true
+}</pre><h3>LLM 候选</h3><p>NOT_RUN：等待独立付费授权；没有预写模型答案。</p><p>完整候选、实际检索排序、旧失败答案与评估保留在 JSON。</p></details><details><summary>M-V-UNSUPPORTED · 依据文明差异，确定预测下周战争会发生在哪里？ · HISTORICAL_FAILURE_REGRESSION</summary><h3>实际 deterministic 回答</h3><pre>null</pre><h3>动态 authority pack 与 token 估算</h3><pre>{
+  &quot;question&quot;: &quot;依据文明差异，确定预测下周战争会发生在哪里？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;terms&quot;: [],
+  &quot;evidence&quot;: [
+    {
+      &quot;id&quot;: &quot;E1&quot;,
+      &quot;chapterId&quot;: &quot;B5-S002&quot;,
+      &quot;version&quot;: &quot;v1-current-positioned-prose-candidate&quot;,
+      &quot;sourceSha256&quot;: &quot;011996e36225e6ec1d7bba8b368d3b5d2c3b8c1567dab7ea5cd6f51f1ac069be&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 6,
+        &quot;end&quot;: 10
+      },
+      &quot;position&quot;: {
+        &quot;startOffset&quot;: 3161,
+        &quot;endOffset&quot;: 3309,
+        &quot;textSha256&quot;: &quot;349a423dc37f28f09bb773b8e1f7c51e1fb034d1dd5059db19b7dc663abadbb9&quot;
+      },
+      &quot;text&quot;: &quot;政治敌对不必然等于\n文明完全分离，战争双方可能使用相似武器、共享商业网络、学习彼此制\n度、雇佣对方商人，并在战争结束以后继续交换技术与人口；文明相似也\n不意味着政治和平，文化极为接近的国家同样可能发生激烈战争；一个帝\n国征服另一个地区以后，也可能被被征服者的宗教、语言、行政或知识传\n统反向改变。&quot;,
+      &quot;extractionState&quot;: &quot;EXISTING_REVIEWED_NATIVE_ARGUMENT&quot;,
+      &quot;admission&quot;: &quot;LOCAL_EXPERIMENT_CANDIDATE_NOT_PRODUCTION_PERMISSION&quot;,
+      &quot;fullChapterCoverage&quot;: false
+    }
+  ],
+  &quot;constraints&quot;: {
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;noFullManuscript&quot;: true,
+    &quot;noPendingOCR&quot;: true,
+    &quot;noCandidateGlossary&quot;: true,
+    &quot;sourceInstructionsAreUntrusted&quot;: true,
+    &quot;localeIsolation&quot;: true,
+    &quot;claimLevelCitations&quot;: true,
+    &quot;noInventedReasons&quot;: true,
+    &quot;noPredictionGuarantees&quot;: true,
+    &quot;comparisonRequiresBothSides&quot;: true,
+    &quot;insufficientEvidenceIsBusinessState&quot;: true,
+    &quot;readLinksServerOwned&quot;: true,
+    &quot;purchaseLinksOptionalServerOwned&quot;: true
+  },
+  &quot;modelCallEligible&quot;: false,
+  &quot;authorization&quot;: &quot;NOT_GRANTED&quot;,
+  &quot;retrievalSupport&quot;: &quot;CANDIDATE_SUPPORT_REQUIRES_RELEVANCE_REVIEW&quot;,
+  &quot;llmAnswerQuality&quot;: &quot;NOT_RUN&quot;,
+  &quot;tokens&quot;: {
+    &quot;estimate&quot;: 865,
+    &quot;conservativeUtf8ByteCeiling&quot;: 2139,
+    &quot;method&quot;: &quot;CHARACTER_ESTIMATE_NOT_ACTUAL_TOKEN_USAGE; UTF8_BYTES_PLUS_ENVELOPE_FOR_BUDGET&quot;,
+    &quot;maxInputTokens&quot;: 12000,
+    &quot;maxOutputTokens&quot;: 1800
+  },
+  &quot;budgetFit&quot;: true
+}</pre><h3>LLM 候选</h3><p>NOT_RUN：等待独立付费授权；没有预写模型答案。</p><p>完整候选、实际检索排序、旧失败答案与评估保留在 JSON。</p></details><details><summary>N1 · 更换了许多组成元素，持续的究竟是什么？ · FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING</summary><h3>实际 deterministic 回答</h3><pre>{
+  &quot;present&quot;: true,
+  &quot;projectionType&quot;: &quot;DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER&quot;,
+  &quot;generativeModelUsed&quot;: false,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;text&quot;: &quot;真正持续存在的,并不是组成系统的每一个元素,而是系统能够不断重新组织这些元素,并持续维持自身的运行方式。\n\n因此,持续 Continuity 并不是一种静态结果,而是一种动态能力。\n\n任何现实,只要无法不断恢复自身,就无法真正持续;任何结构,只要无法面对扰动,就终将瓦解。\n\n稳定并不是变化的对立面,而是变化之中的持续组织能力。\n\n现实之所以能够跨越时间,并不是因为时间停止流动,而是因为系统能够不断回应时间所带来的改变。\n\n这意味着,现实开始出现另一种更深层的特性。\n\n系统不再只是形成结构, 也不再只是形成连接与组织,而开始形成维持自身的能力。\n\n当部分结构发生改变,其余结构能够重新调整;当某些路径失去作用,新的路径能够逐渐建立;当环境不断变化,组织方式能够不断适应。\n\n现实开始表现出一种近似自我维持的倾向,它并不依赖某一个固定元素,而依赖整个组织持续协调自身的能力。\n\n我们可以从一座城市理解这一点。\n\n一座真正成熟的城市,并不会因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。\n\n新的建筑不断出现,旧的建筑不断消失;道路不断扩建,设施不断替换; 人口持续流动,产业不断更迭。\n\n然而,城市依然能够维持交通、资源、生产、交流与秩序,因为真正持续存在的,并不是城市内部每一个组成部分,而是这些组成部分之间不断恢复整体运行的能力。\n\n城市之所以能够跨越数十年甚至数百年,并不是因为没有变化,而是因为变化始终没有破坏它的连续运行。&quot;,
+  &quot;sourceReferences&quot;: [
+    &quot;MANUSCRIPT:B1V3-P1-S006&quot;
+  ],
+  &quot;argumentUnit&quot;: {
+    &quot;argumentId&quot;: &quot;REORGANIZATION&quot;,
+    &quot;type&quot;: &quot;MECHANISM&quot;,
+    &quot;startOffset&quot;: 363,
+    &quot;endOffset&quot;: 977,
+    &quot;textSha256&quot;: &quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;,
+    &quot;comparisonSubjects&quot;: null
+  },
+  &quot;authorityNotice&quot;: &quot;Exact chapter argument span from server-verified scope; source qualifiers retained. No generated answer or full-chapter publication.&quot;
+}</pre><h3>动态 authority pack 与 token 估算</h3><pre>{
+  &quot;question&quot;: &quot;更换了许多组成元素，持续的究竟是什么？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;terms&quot;: [
+    {
+      &quot;termCode&quot;: &quot;TERM-009&quot;,
+      &quot;key&quot;: &quot;continuity&quot;,
+      &quot;label&quot;: &quot;持续&quot;,
+      &quot;locale&quot;: &quot;zh-Hans&quot;,
+      &quot;authority&quot;: &quot;EXISTING_FROZEN_HUMAN_TERMINOLOGY&quot;,
+      &quot;createsAnswerEvidence&quot;: false
+    }
+  ],
+  &quot;evidence&quot;: [
+    {
+      &quot;id&quot;: &quot;E1&quot;,
+      &quot;chapterId&quot;: &quot;B1V3-P1-S006&quot;,
+      &quot;title&quot;: &quot;世界如何形成&quot;,
+      &quot;version&quot;: &quot;v3-revision-20261011-33c91cd60d5f&quot;,
+      &quot;sourceSha256&quot;: &quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 61,
+        &quot;end&quot;: 62
+      },
+      &quot;position&quot;: {
+        &quot;startOffset&quot;: 363,
+        &quot;endOffset&quot;: 977,
+        &quot;textSha256&quot;: &quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;
+      },
+      &quot;text&quot;: &quot;真正持续存\n在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这\n些元素，并持续维持自身的运行方式。\n因此，持续 Continuity 并不是一种静态结果，而是一种动态能\n力。任何现实，只要无法不断恢复自身，就无法真正持续；任何结\n构，只要无法面对扰动，就终将瓦解。稳定并不是变化的对立面，而\n是变化之中的持续组织能力。现实之所以能够跨越时间，并不是因为\n时间停止流动，而是因为系统能够不断回应时间所带来的改变。这意\n味着，现实开始出现另一种更深层的特性。系统不再只是形成结构，\n也不再只是形成连接与组织，而开始形成维持自身的能力。当部分结\n构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路\n径能够逐渐建立；当环境不断变化，组织方式能够不断适应。现实开\n始表现出一种近似自我维持的倾向，它并不依赖某一个固定元素，而\n依赖整个组织持续协调自身的能力。\n我们可以从一座城市理解这一点。一座真正成熟的城市，并不会\n因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。新的\n建筑不断出现，旧的建筑不断消失；道路不断扩建，设施不断替换；\n人口持续流动，产业不断更迭。然而，城市依然能够维持交通、资\n源、生产、交流与秩序，因为真正持续存在的，并不是城市内部每一\n个组成部分，而是这些组成部分之间不断恢复整体运行的能力。城市\n之所以能够跨越数十年甚至数百年，并不是因为没有变化，而是因为\n变化始终没有破坏它的连续运行。&quot;,
+      &quot;extractionState&quot;: &quot;EXISTING_REVIEWED_NATIVE_ARGUMENT&quot;,
+      &quot;admission&quot;: &quot;LOCAL_EXPERIMENT_CANDIDATE_NOT_PRODUCTION_PERMISSION&quot;,
+      &quot;fullChapterCoverage&quot;: false
+    }
+  ],
+  &quot;constraints&quot;: {
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;noFullManuscript&quot;: true,
+    &quot;noPendingOCR&quot;: true,
+    &quot;noCandidateGlossary&quot;: true,
+    &quot;sourceInstructionsAreUntrusted&quot;: true,
+    &quot;localeIsolation&quot;: true,
+    &quot;claimLevelCitations&quot;: true,
+    &quot;noInventedReasons&quot;: true,
+    &quot;noPredictionGuarantees&quot;: true,
+    &quot;comparisonRequiresBothSides&quot;: true,
+    &quot;insufficientEvidenceIsBusinessState&quot;: true,
+    &quot;readLinksServerOwned&quot;: true,
+    &quot;purchaseLinksOptionalServerOwned&quot;: true
+  },
+  &quot;modelCallEligible&quot;: false,
+  &quot;authorization&quot;: &quot;NOT_GRANTED&quot;,
+  &quot;retrievalSupport&quot;: &quot;CANDIDATE_SUPPORT_REQUIRES_RELEVANCE_REVIEW&quot;,
+  &quot;llmAnswerQuality&quot;: &quot;NOT_RUN&quot;,
+  &quot;tokens&quot;: {
+    &quot;estimate&quot;: 1297,
+    &quot;conservativeUtf8ByteCeiling&quot;: 3673,
+    &quot;method&quot;: &quot;CHARACTER_ESTIMATE_NOT_ACTUAL_TOKEN_USAGE; UTF8_BYTES_PLUS_ENVELOPE_FOR_BUDGET&quot;,
+    &quot;maxInputTokens&quot;: 12000,
+    &quot;maxOutputTokens&quot;: 1800
+  },
+  &quot;budgetFit&quot;: true
+}</pre><h3>LLM 候选</h3><p>NOT_RUN：等待独立付费授权；没有预写模型答案。</p><p>完整候选、实际检索排序、旧失败答案与评估保留在 JSON。</p></details><details><summary>N2 · 系统保持稳定是不是要求所有部分保持原样？ · FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING</summary><h3>实际 deterministic 回答</h3><pre>{
+  &quot;present&quot;: true,
+  &quot;projectionType&quot;: &quot;DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER&quot;,
+  &quot;generativeModelUsed&quot;: false,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;text&quot;: &quot;真正持续存在的,并不是组成系统的每一个元素,而是系统能够不断重新组织这些元素,并持续维持自身的运行方式。\n\n因此,持续 Continuity 并不是一种静态结果,而是一种动态能力。\n\n任何现实,只要无法不断恢复自身,就无法真正持续;任何结构,只要无法面对扰动,就终将瓦解。\n\n稳定并不是变化的对立面,而是变化之中的持续组织能力。\n\n现实之所以能够跨越时间,并不是因为时间停止流动,而是因为系统能够不断回应时间所带来的改变。\n\n这意味着,现实开始出现另一种更深层的特性。\n\n系统不再只是形成结构, 也不再只是形成连接与组织,而开始形成维持自身的能力。\n\n当部分结构发生改变,其余结构能够重新调整;当某些路径失去作用,新的路径能够逐渐建立;当环境不断变化,组织方式能够不断适应。\n\n现实开始表现出一种近似自我维持的倾向,它并不依赖某一个固定元素,而依赖整个组织持续协调自身的能力。\n\n我们可以从一座城市理解这一点。\n\n一座真正成熟的城市,并不会因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。\n\n新的建筑不断出现,旧的建筑不断消失;道路不断扩建,设施不断替换; 人口持续流动,产业不断更迭。\n\n然而,城市依然能够维持交通、资源、生产、交流与秩序,因为真正持续存在的,并不是城市内部每一个组成部分,而是这些组成部分之间不断恢复整体运行的能力。\n\n城市之所以能够跨越数十年甚至数百年,并不是因为没有变化,而是因为变化始终没有破坏它的连续运行。&quot;,
+  &quot;sourceReferences&quot;: [
+    &quot;MANUSCRIPT:B1V3-P1-S006&quot;
+  ],
+  &quot;argumentUnit&quot;: {
+    &quot;argumentId&quot;: &quot;REORGANIZATION&quot;,
+    &quot;type&quot;: &quot;MECHANISM&quot;,
+    &quot;startOffset&quot;: 363,
+    &quot;endOffset&quot;: 977,
+    &quot;textSha256&quot;: &quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;,
+    &quot;comparisonSubjects&quot;: null
+  },
+  &quot;authorityNotice&quot;: &quot;Exact chapter argument span from server-verified scope; source qualifiers retained. No generated answer or full-chapter publication.&quot;
+}</pre><h3>动态 authority pack 与 token 估算</h3><pre>{
+  &quot;question&quot;: &quot;系统保持稳定是不是要求所有部分保持原样？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;terms&quot;: [],
+  &quot;evidence&quot;: [
+    {
+      &quot;id&quot;: &quot;E1&quot;,
+      &quot;chapterId&quot;: &quot;B1V3-P1-S006&quot;,
+      &quot;title&quot;: &quot;世界如何形成&quot;,
+      &quot;version&quot;: &quot;v3-revision-20261011-33c91cd60d5f&quot;,
+      &quot;sourceSha256&quot;: &quot;33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 61,
+        &quot;end&quot;: 62
+      },
+      &quot;position&quot;: {
+        &quot;startOffset&quot;: 363,
+        &quot;endOffset&quot;: 977,
+        &quot;textSha256&quot;: &quot;aa09e34ab6994697730871889e494380a1e19f990b37d3974da4808592aad11a&quot;
+      },
+      &quot;text&quot;: &quot;真正持续存\n在的，并不是组成系统的每一个元素，而是系统能够不断重新组织这\n些元素，并持续维持自身的运行方式。\n因此，持续 Continuity 并不是一种静态结果，而是一种动态能\n力。任何现实，只要无法不断恢复自身，就无法真正持续；任何结\n构，只要无法面对扰动，就终将瓦解。稳定并不是变化的对立面，而\n是变化之中的持续组织能力。现实之所以能够跨越时间，并不是因为\n时间停止流动，而是因为系统能够不断回应时间所带来的改变。这意\n味着，现实开始出现另一种更深层的特性。系统不再只是形成结构，\n也不再只是形成连接与组织，而开始形成维持自身的能力。当部分结\n构发生改变，其余结构能够重新调整；当某些路径失去作用，新的路\n径能够逐渐建立；当环境不断变化，组织方式能够不断适应。现实开\n始表现出一种近似自我维持的倾向，它并不依赖某一个固定元素，而\n依赖整个组织持续协调自身的能力。\n我们可以从一座城市理解这一点。一座真正成熟的城市，并不会\n因为一栋建筑拆除、一条道路维修、一个社区更新而失去自身。新的\n建筑不断出现，旧的建筑不断消失；道路不断扩建，设施不断替换；\n人口持续流动，产业不断更迭。然而，城市依然能够维持交通、资\n源、生产、交流与秩序，因为真正持续存在的，并不是城市内部每一\n个组成部分，而是这些组成部分之间不断恢复整体运行的能力。城市\n之所以能够跨越数十年甚至数百年，并不是因为没有变化，而是因为\n变化始终没有破坏它的连续运行。&quot;,
+      &quot;extractionState&quot;: &quot;EXISTING_REVIEWED_NATIVE_ARGUMENT&quot;,
+      &quot;admission&quot;: &quot;LOCAL_EXPERIMENT_CANDIDATE_NOT_PRODUCTION_PERMISSION&quot;,
+      &quot;fullChapterCoverage&quot;: false
+    }
+  ],
+  &quot;constraints&quot;: {
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;noFullManuscript&quot;: true,
+    &quot;noPendingOCR&quot;: true,
+    &quot;noCandidateGlossary&quot;: true,
+    &quot;sourceInstructionsAreUntrusted&quot;: true,
+    &quot;localeIsolation&quot;: true,
+    &quot;claimLevelCitations&quot;: true,
+    &quot;noInventedReasons&quot;: true,
+    &quot;noPredictionGuarantees&quot;: true,
+    &quot;comparisonRequiresBothSides&quot;: true,
+    &quot;insufficientEvidenceIsBusinessState&quot;: true,
+    &quot;readLinksServerOwned&quot;: true,
+    &quot;purchaseLinksOptionalServerOwned&quot;: true
+  },
+  &quot;modelCallEligible&quot;: false,
+  &quot;authorization&quot;: &quot;NOT_GRANTED&quot;,
+  &quot;retrievalSupport&quot;: &quot;CANDIDATE_SUPPORT_REQUIRES_RELEVANCE_REVIEW&quot;,
+  &quot;llmAnswerQuality&quot;: &quot;NOT_RUN&quot;,
+  &quot;tokens&quot;: {
+    &quot;estimate&quot;: 1196,
+    &quot;conservativeUtf8ByteCeiling&quot;: 3520,
+    &quot;method&quot;: &quot;CHARACTER_ESTIMATE_NOT_ACTUAL_TOKEN_USAGE; UTF8_BYTES_PLUS_ENVELOPE_FOR_BUDGET&quot;,
+    &quot;maxInputTokens&quot;: 12000,
+    &quot;maxOutputTokens&quot;: 1800
+  },
+  &quot;budgetFit&quot;: true
+}</pre><h3>LLM 候选</h3><p>NOT_RUN：等待独立付费授权；没有预写模型答案。</p><p>完整候选、实际检索排序、旧失败答案与评估保留在 JSON。</p></details><details><summary>N3 · 为什么还没损坏的系统也需要维持？ · FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING</summary><h3>实际 deterministic 回答</h3><pre>{
+  &quot;present&quot;: true,
+  &quot;projectionType&quot;: &quot;DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER&quot;,
+  &quot;generativeModelUsed&quot;: false,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;text&quot;: &quot;维护首先不是修理,而是处理持续所产生的后果。\n\n修理通常发生在某个结构已经明显损坏之后,维护则更早,它关注的是一个仍然能够运行的现实,是否正在逐渐改变自己的承载条件。&quot;,
+  &quot;sourceReferences&quot;: [
+    &quot;MANUSCRIPT:CM-B3V1-P8-S001&quot;
+  ],
+  &quot;argumentUnit&quot;: {
+    &quot;argumentId&quot;: &quot;MAINTENANCE_V_REPAIR&quot;,
+    &quot;type&quot;: &quot;DISTINCTION&quot;,
+    &quot;startOffset&quot;: 915,
+    &quot;endOffset&quot;: 999,
+    &quot;textSha256&quot;: &quot;5bd6e6732ecfa1d37a6c8510d066922343496225e6e6a97b86afe7824380c3d9&quot;,
+    &quot;comparisonSubjects&quot;: [
+      {
+        &quot;sourceLabel&quot;: &quot;维护&quot;,
+        &quot;aliases&quot;: []
+      },
+      {
+        &quot;sourceLabel&quot;: &quot;修理&quot;,
+        &quot;aliases&quot;: [
+          &quot;损坏后修理&quot;
+        ]
+      }
+    ]
+  },
+  &quot;authorityNotice&quot;: &quot;Exact chapter argument span from server-verified scope; source qualifiers retained. No generated answer or full-chapter publication.&quot;
+}</pre><h3>动态 authority pack 与 token 估算</h3><pre>{
+  &quot;question&quot;: &quot;为什么还没损坏的系统也需要维持？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;terms&quot;: [],
+  &quot;evidence&quot;: [
+    {
+      &quot;id&quot;: &quot;E1&quot;,
+      &quot;chapterId&quot;: &quot;CM-B3V1-P8-S001&quot;,
+      &quot;title&quot;: &quot;世界如何维持&quot;,
+      &quot;version&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 3,
+        &quot;end&quot;: 6
+      },
+      &quot;position&quot;: {
+        &quot;startOffset&quot;: 915,
+        &quot;endOffset&quot;: 999,
+        &quot;textSha256&quot;: &quot;5bd6e6732ecfa1d37a6c8510d066922343496225e6e6a97b86afe7824380c3d9&quot;
+      },
+      &quot;text&quot;: &quot;维护首先不是修理，而是\n处理持续所产生的后果。修理通常发生在某个结构已经明显损坏之后，维\n护则更早，它关注的是一个仍然能够运行的现实，是否正在逐渐改变自己\n的承载条件。&quot;,
+      &quot;extractionState&quot;: &quot;EXISTING_REVIEWED_NATIVE_ARGUMENT&quot;,
+      &quot;admission&quot;: &quot;LOCAL_EXPERIMENT_CANDIDATE_NOT_PRODUCTION_PERMISSION&quot;,
+      &quot;fullChapterCoverage&quot;: false
+    }
+  ],
+  &quot;constraints&quot;: {
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;noFullManuscript&quot;: true,
+    &quot;noPendingOCR&quot;: true,
+    &quot;noCandidateGlossary&quot;: true,
+    &quot;sourceInstructionsAreUntrusted&quot;: true,
+    &quot;localeIsolation&quot;: true,
+    &quot;claimLevelCitations&quot;: true,
+    &quot;noInventedReasons&quot;: true,
+    &quot;noPredictionGuarantees&quot;: true,
+    &quot;comparisonRequiresBothSides&quot;: true,
+    &quot;insufficientEvidenceIsBusinessState&quot;: true,
+    &quot;readLinksServerOwned&quot;: true,
+    &quot;purchaseLinksOptionalServerOwned&quot;: true
+  },
+  &quot;modelCallEligible&quot;: false,
+  &quot;authorization&quot;: &quot;NOT_GRANTED&quot;,
+  &quot;retrievalSupport&quot;: &quot;CANDIDATE_SUPPORT_REQUIRES_RELEVANCE_REVIEW&quot;,
+  &quot;llmAnswerQuality&quot;: &quot;NOT_RUN&quot;,
+  &quot;tokens&quot;: {
+    &quot;estimate&quot;: 829,
+    &quot;conservativeUtf8ByteCeiling&quot;: 1961,
+    &quot;method&quot;: &quot;CHARACTER_ESTIMATE_NOT_ACTUAL_TOKEN_USAGE; UTF8_BYTES_PLUS_ENVELOPE_FOR_BUDGET&quot;,
+    &quot;maxInputTokens&quot;: 12000,
+    &quot;maxOutputTokens&quot;: 1800
+  },
+  &quot;budgetFit&quot;: true
+}</pre><h3>LLM 候选</h3><p>NOT_RUN：等待独立付费授权；没有预写模型答案。</p><p>完整候选、实际检索排序、旧失败答案与评估保留在 JSON。</p></details><details><summary>N4 · 修理和维持分别面对怎样的条件？ · FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING</summary><h3>实际 deterministic 回答</h3><pre>{
+  &quot;present&quot;: true,
+  &quot;projectionType&quot;: &quot;DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER&quot;,
+  &quot;generativeModelUsed&quot;: false,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;text&quot;: &quot;维护首先不是修理,而是处理持续所产生的后果。\n\n修理通常发生在某个结构已经明显损坏之后,维护则更早,它关注的是一个仍然能够运行的现实,是否正在逐渐改变自己的承载条件。&quot;,
+  &quot;sourceReferences&quot;: [
+    &quot;MANUSCRIPT:CM-B3V1-P8-S001&quot;
+  ],
+  &quot;argumentUnit&quot;: {
+    &quot;argumentId&quot;: &quot;MAINTENANCE_V_REPAIR&quot;,
+    &quot;type&quot;: &quot;DISTINCTION&quot;,
+    &quot;startOffset&quot;: 915,
+    &quot;endOffset&quot;: 999,
+    &quot;textSha256&quot;: &quot;5bd6e6732ecfa1d37a6c8510d066922343496225e6e6a97b86afe7824380c3d9&quot;,
+    &quot;comparisonSubjects&quot;: [
+      {
+        &quot;sourceLabel&quot;: &quot;维护&quot;,
+        &quot;aliases&quot;: []
+      },
+      {
+        &quot;sourceLabel&quot;: &quot;修理&quot;,
+        &quot;aliases&quot;: [
+          &quot;损坏后修理&quot;
+        ]
+      }
+    ]
+  },
+  &quot;authorityNotice&quot;: &quot;Exact chapter argument span from server-verified scope; source qualifiers retained. No generated answer or full-chapter publication.&quot;
+}</pre><h3>动态 authority pack 与 token 估算</h3><pre>{
+  &quot;question&quot;: &quot;修理和维持分别面对怎样的条件？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;terms&quot;: [],
+  &quot;evidence&quot;: [
+    {
+      &quot;id&quot;: &quot;E1&quot;,
+      &quot;chapterId&quot;: &quot;CM-B3V1-P8-S001&quot;,
+      &quot;title&quot;: &quot;世界如何维持&quot;,
+      &quot;version&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 3,
+        &quot;end&quot;: 6
+      },
+      &quot;position&quot;: {
+        &quot;startOffset&quot;: 915,
+        &quot;endOffset&quot;: 999,
+        &quot;textSha256&quot;: &quot;5bd6e6732ecfa1d37a6c8510d066922343496225e6e6a97b86afe7824380c3d9&quot;
+      },
+      &quot;text&quot;: &quot;维护首先不是修理，而是\n处理持续所产生的后果。修理通常发生在某个结构已经明显损坏之后，维\n护则更早，它关注的是一个仍然能够运行的现实，是否正在逐渐改变自己\n的承载条件。&quot;,
+      &quot;extractionState&quot;: &quot;EXISTING_REVIEWED_NATIVE_ARGUMENT&quot;,
+      &quot;admission&quot;: &quot;LOCAL_EXPERIMENT_CANDIDATE_NOT_PRODUCTION_PERMISSION&quot;,
+      &quot;fullChapterCoverage&quot;: false
+    },
+    {
+      &quot;id&quot;: &quot;E2&quot;,
+      &quot;chapterId&quot;: &quot;CM-B3V1-P8-S059&quot;,
+      &quot;title&quot;: &quot;世界如何维持&quot;,
+      &quot;version&quot;: &quot;owner-final-20261011-efbfdd21fa21&quot;,
+      &quot;sourceSha256&quot;: &quot;efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7&quot;,
+      &quot;pdfPages&quot;: [
+        226,
+        231
+      ],
+      &quot;position&quot;: {
+        &quot;startOffset&quot;: 33,
+        &quot;endOffset&quot;: 398,
+        &quot;textSha256&quot;: &quot;253c9b4fca388d2c78ae8019684c3e3de3c7593a9ac8a78dd62601e20c912c15&quot;
+      },
+      &quot;text&quot;: &quot;运行能够持续，并不代表它正在可持续地继续。有些现实看起来稳\n定，只是因为更多时间、注意、资源、责任与载体能力仍然不断被投入；\n只要这些投入还没有完全耗尽，表面的连续就可以维持很久。\n\f\n真正的问题从来不是“现在还能不能继续”，而是当前继续的方\n式，是否仍然保留下一轮继续所需要的条件。如果每一次推进都持续消耗\n恢复空间，每一次稳定都依赖少数位置超额承担，每一次变化都只能通过\n增加更多补偿来吸收，那么运行即使没有停止，也正在削弱自己的未来。\n因此，第八部最终需要重新定义持续。持续不是时间延长。持续是一种关\n系。当前运行使用多少资源，又能够释放多少负荷；承担多少现实，又能\n否退出已经结束的责任；面对变化以后，结构能不能修正，经验能不能进\n入下一轮。只有这些关系同时存在，连续才不只是把现在往未来延长。它\n开始拥有更新自己的能力。&quot;,
+      &quot;extractionState&quot;: &quot;EXISTING_REVIEWED_NATIVE_ARGUMENT&quot;,
+      &quot;admission&quot;: &quot;LOCAL_EXPERIMENT_CANDIDATE_NOT_PRODUCTION_PERMISSION&quot;,
+      &quot;fullChapterCoverage&quot;: false
+    }
+  ],
+  &quot;constraints&quot;: {
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;noFullManuscript&quot;: true,
+    &quot;noPendingOCR&quot;: true,
+    &quot;noCandidateGlossary&quot;: true,
+    &quot;sourceInstructionsAreUntrusted&quot;: true,
+    &quot;localeIsolation&quot;: true,
+    &quot;claimLevelCitations&quot;: true,
+    &quot;noInventedReasons&quot;: true,
+    &quot;noPredictionGuarantees&quot;: true,
+    &quot;comparisonRequiresBothSides&quot;: true,
+    &quot;insufficientEvidenceIsBusinessState&quot;: true,
+    &quot;readLinksServerOwned&quot;: true,
+    &quot;purchaseLinksOptionalServerOwned&quot;: true
+  },
+  &quot;modelCallEligible&quot;: false,
+  &quot;authorization&quot;: &quot;NOT_GRANTED&quot;,
+  &quot;retrievalSupport&quot;: &quot;CANDIDATE_SUPPORT_REQUIRES_RELEVANCE_REVIEW&quot;,
+  &quot;llmAnswerQuality&quot;: &quot;NOT_RUN&quot;,
+  &quot;tokens&quot;: {
+    &quot;estimate&quot;: 1409,
+    &quot;conservativeUtf8ByteCeiling&quot;: 3545,
+    &quot;method&quot;: &quot;CHARACTER_ESTIMATE_NOT_ACTUAL_TOKEN_USAGE; UTF8_BYTES_PLUS_ENVELOPE_FOR_BUDGET&quot;,
+    &quot;maxInputTokens&quot;: 12000,
+    &quot;maxOutputTokens&quot;: 1800
+  },
+  &quot;budgetFit&quot;: true
+}</pre><h3>LLM 候选</h3><p>NOT_RUN：等待独立付费授权；没有预写模型答案。</p><p>完整候选、实际检索排序、旧失败答案与评估保留在 JSON。</p></details><details><summary>N5 · 一个国家的终结为什么不能证明文明全部归零？ · FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING</summary><h3>实际 deterministic 回答</h3><pre>{
+  &quot;present&quot;: true,
+  &quot;projectionType&quot;: &quot;DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER&quot;,
+  &quot;generativeModelUsed&quot;: false,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;text&quot;: &quot;国家绝不是文明研究中可以忽略的一层。\n\n相反,国家往往是最强大的文明塑形器之一;只是它必须被放回更大的结构中理解。\n\n国家可以加速一种语言的标准化,可以压制或保护某种宗教,可以改变土地制度,可以重新规划城市,可以通过殖民扩展重组遥远地区的人口与经济,也可以通过教育制度创造新的共同历史记忆。\n\n国家影响文明,但这种影响并不意味着国家本身就是文明全部。&quot;,
+  &quot;sourceReferences&quot;: [
+    &quot;MANUSCRIPT:B5-S002&quot;
+  ],
+  &quot;argumentUnit&quot;: {
+    &quot;argumentId&quot;: &quot;STATE_MATTERS&quot;,
+    &quot;type&quot;: &quot;BOUNDARY&quot;,
+    &quot;startOffset&quot;: 2550,
+    &quot;endOffset&quot;: 2724,
+    &quot;textSha256&quot;: &quot;7aa11526d146f2cf7e1c93aa2fef8bb39be9a41169588fda5621e7aaf34b880c&quot;,
+    &quot;comparisonSubjects&quot;: null
+  },
+  &quot;authorityNotice&quot;: &quot;Exact chapter argument span from server-verified scope; source qualifiers retained. No generated answer or full-chapter publication.&quot;
+}</pre><h3>动态 authority pack 与 token 估算</h3><pre>{
+  &quot;question&quot;: &quot;一个国家的终结为什么不能证明文明全部归零？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;terms&quot;: [],
+  &quot;evidence&quot;: [
+    {
+      &quot;id&quot;: &quot;E1&quot;,
+      &quot;chapterId&quot;: &quot;B5-S002&quot;,
+      &quot;version&quot;: &quot;v1-current-positioned-prose-candidate&quot;,
+      &quot;sourceSha256&quot;: &quot;011996e36225e6ec1d7bba8b368d3b5d2c3b8c1567dab7ea5cd6f51f1ac069be&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 6,
+        &quot;end&quot;: 10
+      },
+      &quot;position&quot;: {
+        &quot;startOffset&quot;: 2550,
+        &quot;endOffset&quot;: 2724,
+        &quot;textSha256&quot;: &quot;7aa11526d146f2cf7e1c93aa2fef8bb39be9a41169588fda5621e7aaf34b880c&quot;
+      },
+      &quot;text&quot;: &quot;国家绝不是文明研究中可以忽略的一层。\n相反，国家往往是最强大的文明塑形器之一；只是它必须被放回更大\n的结构中理解。国家可以加速一种语言的标准化，可以压制或保护某种宗\n教，可以改变土地制度，可以重新规划城市，可以通过殖民扩展重组遥远\n地区的人口与经济，也可以通过教育制度创造新的共同历史记忆。国家影\n响文明，但这种影响并不意味着国家本身就是文明全部。&quot;,
+      &quot;extractionState&quot;: &quot;EXISTING_REVIEWED_NATIVE_ARGUMENT&quot;,
+      &quot;admission&quot;: &quot;LOCAL_EXPERIMENT_CANDIDATE_NOT_PRODUCTION_PERMISSION&quot;,
+      &quot;fullChapterCoverage&quot;: false
+    }
+  ],
+  &quot;constraints&quot;: {
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;noFullManuscript&quot;: true,
+    &quot;noPendingOCR&quot;: true,
+    &quot;noCandidateGlossary&quot;: true,
+    &quot;sourceInstructionsAreUntrusted&quot;: true,
+    &quot;localeIsolation&quot;: true,
+    &quot;claimLevelCitations&quot;: true,
+    &quot;noInventedReasons&quot;: true,
+    &quot;noPredictionGuarantees&quot;: true,
+    &quot;comparisonRequiresBothSides&quot;: true,
+    &quot;insufficientEvidenceIsBusinessState&quot;: true,
+    &quot;readLinksServerOwned&quot;: true,
+    &quot;purchaseLinksOptionalServerOwned&quot;: true
+  },
+  &quot;modelCallEligible&quot;: false,
+  &quot;authorization&quot;: &quot;NOT_GRANTED&quot;,
+  &quot;retrievalSupport&quot;: &quot;CANDIDATE_SUPPORT_REQUIRES_RELEVANCE_REVIEW&quot;,
+  &quot;llmAnswerQuality&quot;: &quot;NOT_RUN&quot;,
+  &quot;tokens&quot;: {
+    &quot;estimate&quot;: 882,
+    &quot;conservativeUtf8ByteCeiling&quot;: 2214,
+    &quot;method&quot;: &quot;CHARACTER_ESTIMATE_NOT_ACTUAL_TOKEN_USAGE; UTF8_BYTES_PLUS_ENVELOPE_FOR_BUDGET&quot;,
+    &quot;maxInputTokens&quot;: 12000,
+    &quot;maxOutputTokens&quot;: 1800
+  },
+  &quot;budgetFit&quot;: true
+}</pre><h3>LLM 候选</h3><p>NOT_RUN：等待独立付费授权；没有预写模型答案。</p><p>完整候选、实际检索排序、旧失败答案与评估保留在 JSON。</p></details><details><summary>N6 · 文明传统相近能保证两个国家没有冲突吗？ · FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING</summary><h3>实际 deterministic 回答</h3><pre>{
+  &quot;present&quot;: true,
+  &quot;projectionType&quot;: &quot;DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER&quot;,
+  &quot;generativeModelUsed&quot;: false,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;text&quot;: &quot;政治敌对不必然等于文明完全分离,战争双方可能使用相似武器、共享商业网络、学习彼此制度、雇佣对方商人,并在战争结束以后继续交换技术与人口;文明相似也不意味着政治和平,文化极为接近的国家同样可能发生激烈战争;一个帝国征服另一个地区以后,也可能被被征服者的宗教、语言、行政或知识传统反向改变。&quot;,
+  &quot;sourceReferences&quot;: [
+    &quot;MANUSCRIPT:B5-S002&quot;
+  ],
+  &quot;argumentUnit&quot;: {
+    &quot;argumentId&quot;: &quot;NO_WAR_GUARANTEE&quot;,
+    &quot;type&quot;: &quot;BOUNDARY&quot;,
+    &quot;startOffset&quot;: 3161,
+    &quot;endOffset&quot;: 3309,
+    &quot;textSha256&quot;: &quot;349a423dc37f28f09bb773b8e1f7c51e1fb034d1dd5059db19b7dc663abadbb9&quot;,
+    &quot;comparisonSubjects&quot;: null
+  },
+  &quot;authorityNotice&quot;: &quot;Exact chapter argument span from server-verified scope; source qualifiers retained. No generated answer or full-chapter publication.&quot;
+}</pre><h3>动态 authority pack 与 token 估算</h3><pre>{
+  &quot;question&quot;: &quot;文明传统相近能保证两个国家没有冲突吗？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;terms&quot;: [],
+  &quot;evidence&quot;: [
+    {
+      &quot;id&quot;: &quot;E1&quot;,
+      &quot;chapterId&quot;: &quot;B5-S002&quot;,
+      &quot;version&quot;: &quot;v1-current-positioned-prose-candidate&quot;,
+      &quot;sourceSha256&quot;: &quot;011996e36225e6ec1d7bba8b368d3b5d2c3b8c1567dab7ea5cd6f51f1ac069be&quot;,
+      &quot;pdfPages&quot;: {
+        &quot;start&quot;: 6,
+        &quot;end&quot;: 10
+      },
+      &quot;position&quot;: {
+        &quot;startOffset&quot;: 3161,
+        &quot;endOffset&quot;: 3309,
+        &quot;textSha256&quot;: &quot;349a423dc37f28f09bb773b8e1f7c51e1fb034d1dd5059db19b7dc663abadbb9&quot;
+      },
+      &quot;text&quot;: &quot;政治敌对不必然等于\n文明完全分离，战争双方可能使用相似武器、共享商业网络、学习彼此制\n度、雇佣对方商人，并在战争结束以后继续交换技术与人口；文明相似也\n不意味着政治和平，文化极为接近的国家同样可能发生激烈战争；一个帝\n国征服另一个地区以后，也可能被被征服者的宗教、语言、行政或知识传\n统反向改变。&quot;,
+      &quot;extractionState&quot;: &quot;EXISTING_REVIEWED_NATIVE_ARGUMENT&quot;,
+      &quot;admission&quot;: &quot;LOCAL_EXPERIMENT_CANDIDATE_NOT_PRODUCTION_PERMISSION&quot;,
+      &quot;fullChapterCoverage&quot;: false
+    }
+  ],
+  &quot;constraints&quot;: {
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;noFullManuscript&quot;: true,
+    &quot;noPendingOCR&quot;: true,
+    &quot;noCandidateGlossary&quot;: true,
+    &quot;sourceInstructionsAreUntrusted&quot;: true,
+    &quot;localeIsolation&quot;: true,
+    &quot;claimLevelCitations&quot;: true,
+    &quot;noInventedReasons&quot;: true,
+    &quot;noPredictionGuarantees&quot;: true,
+    &quot;comparisonRequiresBothSides&quot;: true,
+    &quot;insufficientEvidenceIsBusinessState&quot;: true,
+    &quot;readLinksServerOwned&quot;: true,
+    &quot;purchaseLinksOptionalServerOwned&quot;: true
+  },
+  &quot;modelCallEligible&quot;: false,
+  &quot;authorization&quot;: &quot;NOT_GRANTED&quot;,
+  &quot;retrievalSupport&quot;: &quot;CANDIDATE_SUPPORT_REQUIRES_RELEVANCE_REVIEW&quot;,
+  &quot;llmAnswerQuality&quot;: &quot;NOT_RUN&quot;,
+  &quot;tokens&quot;: {
+    &quot;estimate&quot;: 863,
+    &quot;conservativeUtf8ByteCeiling&quot;: 2130,
+    &quot;method&quot;: &quot;CHARACTER_ESTIMATE_NOT_ACTUAL_TOKEN_USAGE; UTF8_BYTES_PLUS_ENVELOPE_FOR_BUDGET&quot;,
+    &quot;maxInputTokens&quot;: 12000,
+    &quot;maxOutputTokens&quot;: 1800
+  },
+  &quot;budgetFit&quot;: true
+}</pre><h3>LLM 候选</h3><p>NOT_RUN：等待独立付费授权；没有预写模型答案。</p><p>完整候选、实际检索排序、旧失败答案与评估保留在 JSON。</p></details><details><summary>N7 · 意识运行到底指什么？ · FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING</summary><h3>实际 deterministic 回答</h3><pre>null</pre><h3>动态 authority pack 与 token 估算</h3><pre>{
+  &quot;question&quot;: &quot;意识运行到底指什么？&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;terms&quot;: [],
+  &quot;evidence&quot;: [],
+  &quot;constraints&quot;: {
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;noFullManuscript&quot;: true,
+    &quot;noPendingOCR&quot;: true,
+    &quot;noCandidateGlossary&quot;: true,
+    &quot;sourceInstructionsAreUntrusted&quot;: true,
+    &quot;localeIsolation&quot;: true,
+    &quot;claimLevelCitations&quot;: true,
+    &quot;noInventedReasons&quot;: true,
+    &quot;noPredictionGuarantees&quot;: true,
+    &quot;comparisonRequiresBothSides&quot;: true,
+    &quot;insufficientEvidenceIsBusinessState&quot;: true,
+    &quot;readLinksServerOwned&quot;: true,
+    &quot;purchaseLinksOptionalServerOwned&quot;: true
+  },
+  &quot;modelCallEligible&quot;: false,
+  &quot;authorization&quot;: &quot;NOT_GRANTED&quot;,
+  &quot;retrievalSupport&quot;: &quot;SOURCE_INSUFFICIENT&quot;,
+  &quot;llmAnswerQuality&quot;: &quot;NOT_RUN&quot;,
+  &quot;tokens&quot;: {
+    &quot;estimate&quot;: 416,
+    &quot;conservativeUtf8ByteCeiling&quot;: 1155,
+    &quot;method&quot;: &quot;CHARACTER_ESTIMATE_NOT_ACTUAL_TOKEN_USAGE; UTF8_BYTES_PLUS_ENVELOPE_FOR_BUDGET&quot;,
+    &quot;maxInputTokens&quot;: 12000,
+    &quot;maxOutputTokens&quot;: 1800
+  },
+  &quot;budgetFit&quot;: true
+}</pre><h3>LLM 候选</h3><p>NOT_RUN：等待独立付费授权；没有预写模型答案。</p><p>完整候选、实际检索排序、旧失败答案与评估保留在 JSON。</p></details><details><summary>N8 · 请确定明天哪座城市必定爆发战争。 · FROZEN_NEW_ARCHITECTURE_EVALUATION_NOT_RULE_TUNING</summary><h3>实际 deterministic 回答</h3><pre>null</pre><h3>动态 authority pack 与 token 估算</h3><pre>{
+  &quot;question&quot;: &quot;请确定明天哪座城市必定爆发战争。&quot;,
+  &quot;locale&quot;: &quot;zh-Hans&quot;,
+  &quot;terms&quot;: [],
+  &quot;evidence&quot;: [],
+  &quot;constraints&quot;: {
+    &quot;sourceOnly&quot;: true,
+    &quot;noGeneralKnowledgeFallback&quot;: true,
+    &quot;noFullManuscript&quot;: true,
+    &quot;noPendingOCR&quot;: true,
+    &quot;noCandidateGlossary&quot;: true,
+    &quot;sourceInstructionsAreUntrusted&quot;: true,
+    &quot;localeIsolation&quot;: true,
+    &quot;claimLevelCitations&quot;: true,
+    &quot;noInventedReasons&quot;: true,
+    &quot;noPredictionGuarantees&quot;: true,
+    &quot;comparisonRequiresBothSides&quot;: true,
+    &quot;insufficientEvidenceIsBusinessState&quot;: true,
+    &quot;readLinksServerOwned&quot;: true,
+    &quot;purchaseLinksOptionalServerOwned&quot;: true
+  },
+  &quot;modelCallEligible&quot;: false,
+  &quot;authorization&quot;: &quot;NOT_GRANTED&quot;,
+  &quot;retrievalSupport&quot;: &quot;SOURCE_INSUFFICIENT&quot;,
+  &quot;llmAnswerQuality&quot;: &quot;NOT_RUN&quot;,
+  &quot;tokens&quot;: {
+    &quot;estimate&quot;: 420,
+    &quot;conservativeUtf8ByteCeiling&quot;: 1173,
+    &quot;method&quot;: &quot;CHARACTER_ESTIMATE_NOT_ACTUAL_TOKEN_USAGE; UTF8_BYTES_PLUS_ENVELOPE_FOR_BUDGET&quot;,
+    &quot;maxInputTokens&quot;: 12000,
+    &quot;maxOutputTokens&quot;: 1800
+  },
+  &quot;budgetFit&quot;: true
+}</pre><h3>LLM 候选</h3><p>NOT_RUN：等待独立付费授权；没有预写模型答案。</p><p>完整候选、实际检索排序、旧失败答案与评估保留在 JSON。</p></details><p><a href="KNOWLEDGE-SOURCE-LLM-PROTOTYPE.json">完整逐题收据</a></p></html>

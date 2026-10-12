@@ -1,0 +1,116 @@
+{
+  "status": "OWNER_AUTHORIZED",
+  "requestManifestSha256": "9e7dbe60e19839b75f1637cc7b7278343771ed7d9a70c7a951cec9447623a586",
+  "totalMicroUSD": 60000,
+  "maxCalls": 5,
+  "modelLimits": {
+    "gpt-5.6-luna": 4,
+    "gpt-5.6-terra": 1
+  },
+  "outputTokens": 1400,
+  "automaticRetry": 0,
+  "platformFunded": true,
+  "realCustomerCharge": 0,
+  "scope": "ACTUAL_LOCAL_QA_SERVICE_SYNTHETIC_MEMBER_ONLY",
+  "ownerAuthorization": "Current explicit owner authorization: Luna4 Terra1 total5; USD0.06 inclusive cache writes and failures; API retrieval/model/settle/save/reopen. No production operation.",
+  "dependencies": [
+    {
+      "path": "functions/personal-reading/continuity/membership-short-delivery-qa.js",
+      "sha256": "4ba7ad8f3ff755f98a2c05845d9fd269f6238c95b9c62b8e9e7ca397dc021506"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-short-fragment-contract.js",
+      "sha256": "efb2fc599fb01eff0362be73e63f93bdb547f00433f5c1cdec5a866315552c2f"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-source-coverage.js",
+      "sha256": "0a87d035c0d7c964efde17a45d081979b19653a66e303e6a304f3d1783bc4b58"
+    },
+    {
+      "path": "functions/personal-reading/continuity/continuity-credit-d1.js",
+      "sha256": "7d60e11a6514c6543ef62ec9ac86f146cde3ae17bb9cdf1dfe64449b05034b5b"
+    },
+    {
+      "path": "functions/personal-reading/continuity/continuity-quota-d1.js",
+      "sha256": "f86d0471460e03af92833e1b6124e958165a01be0a2312c8069cb42c34345cf5"
+    },
+    {
+      "path": "functions/api/membership-ask.js",
+      "sha256": "a63d33c5e5d1112c44eba17fabf51b0db81954ab463fb84363e753f762a7f88e"
+    },
+    {
+      "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
+      "sha256": "2204a103e6e79aa716d701d94c25e870fed9997a275bb4a76733391b6439bbba"
+    },
+    {
+      "path": "functions/knowledge-runtime/approved-terminology-context.js",
+      "sha256": "96f2f82842d2a84daf94d8022ed272ba71944b00c272b7b6236a8361081d8690"
+    },
+    {
+      "path": "assets/js/pages/membership-answer-presenter.js",
+      "sha256": "84b47fe3a9e08b4d52cff07f9809d27db54480359e811ed8ef915ee3249b4695"
+    },
+    {
+      "path": "assets/js/pages/membership-ask-credit-r1.js",
+      "sha256": "5f8c6dc171d2bcc24deed0ffed74e03c93632308962f0c00920f374e10ae2d4b"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/DELIVERY-SOURCE-EXTENSION.json",
+      "sha256": "625bfe443d5ad1a4cbfe4edaca09b938825abd9e841238f916b1fc5ad8fc9df3"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/BOOK5-FRAGMENT-TEXT-PROOF.json",
+      "sha256": "ee1c4503c0bf2622eaa891710e6fbbf580bb3f41a18ac44c147b2b2bb50a9bdf"
+    },
+    {
+      "path": "scripts/serve-membership-full-delivery-qa.mjs",
+      "sha256": "a1addd46d6f4b220e257d3c288cbacede4c7b59d0ada424a7525411a59fdf67d"
+    },
+    {
+      "path": "scripts/prepare-membership-delivery-source-extension.mjs",
+      "sha256": "2acf4cc21f11c9b242397cde2519d99d18115aba0a510e13f7412d46712473fa"
+    },
+    {
+      "path": "scripts/lib/membership-fragment-experiment-api.mjs",
+      "sha256": "9482b9ece011580b5188d2e127119b02e1842ecb6d12137708d330bf394987f2"
+    }
+  ],
+  "permissions": [
+    {
+      "model": "gpt-5.6-luna",
+      "httpStatus": 200,
+      "returnedId": "gpt-5.6-luna"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "httpStatus": 200,
+      "returnedId": "gpt-5.6-terra"
+    }
+  ],
+  "prices": {
+    "gpt-5.6-luna": {
+      "inputPerMillion": 0.2,
+      "cachedPerMillion": 0.02,
+      "outputPerMillion": 1.2,
+      "cacheWriteMultiplier": 1.25
+    },
+    "gpt-5.6-terra": {
+      "inputPerMillion": 2,
+      "cachedPerMillion": 0.2,
+      "outputPerMillion": 12,
+      "cacheWriteMultiplier": 1.25
+    }
+  },
+  "priceEvidence": [
+    "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+    "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
+  ],
+  "verifiedAt": "2026-10-12T08:00:27.861Z",
+  "maximumReservedMicroUSD": 43599,
+  "preCallRepair": {
+    "reason": "esbuild multi-directory entryNames output path correction; no model calls executed",
+    "old": "4d413452432add84c2e29ee2ab0571e43f71b034f082f49db09a4d8df58f007f",
+    "new": "a1addd46d6f4b220e257d3c288cbacede4c7b59d0ada424a7525411a59fdf67d",
+    "at": "2026-10-12T08:01:07.639Z"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "at": "2026-10-12T02:19:20.225Z",
+  "scope": "ISOLATED_OPERATOR_QA_NO_CUSTOMER_D1_NO_STRIPE_NO_MEMBER_DEBIT",
+  "manifestSha256": "e65fdc3a8de5f70ca2c7c341ca10bcbe5bf400561abcfe8814fa9b2b34a01e45",
+  "providerCalls": 0,
+  "modelPermissionChecks": [
+    {
+      "model": "gpt-5.6-luna",
+      "status": 200,
+      "returnedId": "gpt-5.6-luna",
+      "ok": true,
+      "errorCode": null
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "status": 200,
+      "returnedId": "gpt-5.6-terra",
+      "ok": true,
+      "errorCode": null
+    }
+  ],
+  "paidAuthorization": "OWNER_MESSAGE_2026-10-12_MAX20_MAX10_EACH_USD0.60_RETRY0",
+  "sourcePackAndPromptChangesAllowed": false,
+  "languageCoverage": [
+    "zh-Hans"
+  ],
+  "englishCoverage": "NOT_TESTED; FROZEN_MANIFEST_HAS_NO_ENGLISH_QUESTIONS",
+  "dependencies": [
+    {
+      "path": "functions/personal-reading/continuity/membership-model-request.js",
+      "sha256": "2a942c8ae554063d1959d831d1c3a1969574bd48a5b68d30b7eb4736f501ba1d"
+    },
+    {
+      "path": "functions/provider-cost/knowledge-llm-experiment-budget.js",
+      "sha256": "6bc53f81b82c56921c198c43e6cf9e0f79be7d1ff97783ee2560e7d8fde587c3"
+    },
+    {
+      "path": "scripts/run-membership-knowledge-experiment-r1.mjs",
+      "sha256": "86e1bf545727aecdd9a786775dc80490c7d71d82a5a02afa2da6911709c364f7"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-authority-pack.js",
+      "sha256": "227165b1471cb0e2efaa4d4225e18e924d0270bd9f6d7f19150d037d82b76b1f"
+    },
+    {
+      "path": "functions/_lib/knowledge-source-eligibility.js",
+      "sha256": "22f5f0c414a847b4c0b6e28588e28c78e65c6b2d1d21f5d7f3b1d3fdbda9798f"
+    },
+    {
+      "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
+      "sha256": "db533d869e42cd3cd6aed0876ac0ed9a9abeccd11b9c55771564450208b20a64"
+    }
+  ],
+  "priceEvidence": {
+    "date": "2026-10-12",
+    "urls": [
+      "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+      "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
+    ],
+    "perMillion": {
+      "luna": {
+        "input": 0.2,
+        "cached": 0.02,
+        "cacheWrite": 0.25,
+        "output": 1.2
+      },
+      "terra": {
+        "input": 2,
+        "cached": 0.2,
+        "cacheWrite": 2.5,
+        "output": 12
+      }
+    }
+  },
+  "plannedMaximumMicroUSD": 422056,
+  "state": "PASS_READ_ONLY_MODEL_PERMISSION_PREFLIGHT"
+}

@@ -1,0 +1,93 @@
+{
+  "fixtureOnly": true,
+  "productionRead": false,
+  "audit": {
+    "ownerAccountId": "alice",
+    "balance": {
+      "availableMicroUSD": 3000000,
+      "credits": "300",
+      "active": true,
+      "modelCallsAllowed": true,
+      "units": [
+        {
+          "quota_unit_id": "CONTQUOTA-INVOICE-in_1",
+          "envelope_id": "CONTINUITY-sub_test",
+          "owner_account_id": "alice",
+          "stripe_subscription_id": "sub_test",
+          "billing_period_start": 1000,
+          "billing_period_end": 9000,
+          "grant_source_id": "in_1",
+          "grant_kind": "INVOICE",
+          "purchase_id": "pur_base",
+          "maximum_micro_usd": 3000000,
+          "created_at": "1970-01-01T00:33:20.000Z",
+          "available": 0
+        },
+        {
+          "quota_unit_id": "CONTQUOTA-INVOICE-in_2",
+          "envelope_id": "CONTINUITY-sub_test",
+          "owner_account_id": "alice",
+          "stripe_subscription_id": "sub_test",
+          "billing_period_start": 9000,
+          "billing_period_end": 18000,
+          "grant_source_id": "in_2",
+          "grant_kind": "INVOICE",
+          "purchase_id": "pur_base",
+          "maximum_micro_usd": 3000000,
+          "created_at": "1970-01-01T00:33:20.000Z",
+          "available": 3000000
+        },
+        {
+          "quota_unit_id": "CONTQUOTA-REFILL-pur_refill",
+          "envelope_id": "CONTINUITY-sub_test",
+          "owner_account_id": "alice",
+          "stripe_subscription_id": "sub_test",
+          "billing_period_start": 1000,
+          "billing_period_end": 9000,
+          "grant_source_id": "pur_refill",
+          "grant_kind": "REFILL",
+          "purchase_id": "pur_refill",
+          "maximum_micro_usd": 3000000,
+          "created_at": "1970-01-01T00:33:20.000Z",
+          "available": 0
+        }
+      ]
+    },
+    "legacyCosts": [
+      {
+        "requestId": "deplete0",
+        "quotaUnit": "CONTQUOTA-INVOICE-in_1",
+        "measuredMicroUSD": 3000000,
+        "reservedMicroUSD": 3000000,
+        "state": "METERED"
+      },
+      {
+        "requestId": "deplete1",
+        "quotaUnit": "CONTQUOTA-REFILL-pur_refill",
+        "measuredMicroUSD": 2700000,
+        "reservedMicroUSD": 2700000,
+        "state": "METERED"
+      }
+    ],
+    "representedTaskIds": [
+      "race1"
+    ],
+    "blockers": [],
+    "cutoverReady": true,
+    "grantsCreated": 0,
+    "mixedMode": "FORBIDDEN_UNTIL_OLD_DISPATCH_FENCED",
+    "rollback": "DISABLE_BOTH_DISPATCHERS; RETAIN_ALL_GRANTS_COSTS_TASKS_ALLOCATIONS; NEVER_REGRANT; RECONCILE_BEFORE_REENABLING"
+  },
+  "migrationCandidate": "db/migration-candidates/0019_continuity_ask_credit_allocations.sql",
+  "activeMigrationSequenceConflict": "CANDIDATE_0018_IS_NOT_ACTIVE_P9_0018; REGISTER_NEW_SEQUENCE_BEFORE_PRODUCTION",
+  "steps": [
+    "freeze legacy dispatch, not renewal webhook",
+    "snapshot grants/purchase IDs/actual costs/unknown usage/reservations",
+    "reconcile or drain unresolved calls; never assume zero cost",
+    "apply registered additive schema in QA",
+    "verify old and new readers produce same net spend; no grant replay",
+    "enable exactly one dispatcher after explicit production authorization"
+  ],
+  "rollback": "DISABLE_BOTH_DISPATCHERS; RETAIN_ALL_GRANTS_COSTS_TASKS_ALLOCATIONS; NEVER_REGRANT; RECONCILE_BEFORE_REENABLING",
+  "productionMigration": 0
+}

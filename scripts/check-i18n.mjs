@@ -16,15 +16,13 @@ function flatten(value, prefix = '', output = new Set()) {
   return output;
 }
 
-async function walk(directory) {
-  const output = [];
+async function* walk(directory) {
   for (const entry of await fs.readdir(directory, { withFileTypes: true })) {
     if (ignoredDirectories.has(entry.name)) continue;
     const absolute = path.join(directory, entry.name);
-    if (entry.isDirectory()) output.push(...await walk(absolute));
-    else output.push(absolute);
+    if (entry.isDirectory()) yield* walk(absolute);
+    else yield absolute;
   }
-  return output;
 }
 
 function collectMatches(source, expression) {
@@ -51,8 +49,7 @@ const errors = [];
 for (const key of enKeys) if (!zhKeys.has(key)) errors.push(`Missing in zh-Hans: ${key}`);
 for (const key of zhKeys) if (!enKeys.has(key)) errors.push(`Missing in en: ${key}`);
 
-const files = await walk(root);
-for (const file of files) {
+for await (const file of walk(root)) {
   const relative = path.relative(root, file).replaceAll(path.sep, '/');
   const extension = path.extname(file);
   if (extension !== '.html' && extension !== '.js') continue;

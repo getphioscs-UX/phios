@@ -1,0 +1,613 @@
+{
+  "at": "2026-10-12T02:05:16.084Z",
+  "userDate": "2026-10-12",
+  "currentHead": "890587f9cc830c1a4be80283618212266c70ae5b",
+  "authority": "EXISTING_MASTER_OWNER_MEMBERSHIP_ASK_CREDIT_ADDENDUM",
+  "overall": "PARTIAL_REVIEWABLE_SOURCE_CANDIDATE",
+  "states": {
+    "SOURCE": "PARTIAL; CREDIT_PRIMITIVES_PASS_BOUNDED_LOCAL",
+    "RETRIEVAL": "PARTIAL; 7_PROVENANCE_GATED_CANDIDATE_PACKS",
+    "MODEL_ANSWER_QUALITY": "PARTIAL; CHINESE_BOUNDED_SEMANTIC_ASSESSMENT; STRICT_DELIVERY_ANSWERS_PASS=0; EN_NOT_RUN",
+    "BALANCE_AND_COMMERCIAL": "PASS_BOUNDED_LOCAL_SQL; REAL_CUSTOMER_NOT_RUN",
+    "BUILD": "BLOCKED_BY_CONCURRENT_RELEVANT_MUTATION",
+    "DEPLOYMENT": "NOT_RUN_FOR_THIS_CANDIDATE",
+    "LIVE_CUSTOMER": "NOT_RUN_FOR_THIS_CANDIDATE",
+    "CHINESE_KNOWLEDGE_CHAIN": "PASS_OFFLINE_ORCHESTRATION_NOT_MODEL_ANSWER_QUALITY",
+    "EN_RETRIEVAL": "PASS_BOUNDED_BROWSER; 2_CHINESE_SOURCES; MODEL_LANGUAGE_QUALITY_NOT_RUN",
+    "CHAPTER_SOURCE_ENTRY": "PASS_BOUNDED_BROWSER_PERMISSION_CHECKED_DESCRIPTION_NOT_FULL_TEXT"
+  },
+  "implementation": {
+    "registry": "content/personal-reading/continuity/registries/continuity-subscription-product-registry-v3-candidate.json",
+    "existingQuotaOwner": "functions/personal-reading/continuity/continuity-quota-d1.js",
+    "allocator": "functions/personal-reading/continuity/continuity-credit-d1.js",
+    "platformCostOwner": "functions/provider-cost/product-cost-envelope.js",
+    "api": "functions/api/membership-ask.js",
+    "sourcePack": "functions/personal-reading/continuity/membership-authority-pack.js",
+    "navigationPack": "functions/personal-reading/continuity/membership-navigation-pack.js",
+    "offlineExecution": "functions/personal-reading/continuity/membership-ask-execution.js",
+    "customerPage": "membership.html",
+    "customerWidget": "assets/js/pages/membership-ask-credit-r1.js"
+  },
+  "sourceSnapshots": {
+    "files": [
+      {
+        "path": "functions/personal-reading/continuity/continuity-credit-policy.js",
+        "sha256": "f45a5f22066a50f35cf6832ec38817ab7b12a4fb8c27b7575a996a0a49734730"
+      },
+      {
+        "path": "functions/personal-reading/continuity/continuity-credit-d1.js",
+        "sha256": "7d60e11a6514c6543ef62ec9ac86f146cde3ae17bb9cdf1dfe64449b05034b5b"
+      },
+      {
+        "path": "functions/personal-reading/continuity/membership-authority-pack.js",
+        "sha256": "227165b1471cb0e2efaa4d4225e18e924d0270bd9f6d7f19150d037d82b76b1f"
+      },
+      {
+        "path": "functions/personal-reading/continuity/membership-navigation-pack.js",
+        "sha256": "8c2990a57eebe027ccb00c22d471fbab23dbcd8b89b259bd5dbab4f5ee8741ab"
+      },
+      {
+        "path": "functions/personal-reading/continuity/membership-ask-execution.js",
+        "sha256": "4997d8494c6e6842d8b279b1a88470e495c64b9f8903d75d7c66bc7b8feeb75b"
+      },
+      {
+        "path": "functions/api/membership-ask.js",
+        "sha256": "b8e91af6cf189f4da9ec73e8c26b5d6438f169569d4ccaa0121d34130969d72a"
+      },
+      {
+        "path": "functions/provider-cost/knowledge-llm-experiment-budget.js",
+        "sha256": "6bc53f81b82c56921c198c43e6cf9e0f79be7d1ff97783ee2560e7d8fde587c3"
+      },
+      {
+        "path": "assets/js/pages/membership-ask-credit-r1.js",
+        "sha256": "94d6d99e1bb600c69bd35fdc8089b691200e8e9dd545a9bca35c2061d3c81241"
+      },
+      {
+        "path": "membership.html",
+        "sha256": "b6184d03b023008669bdb108e6f03912690d928c6e2d00c0db8d996a57f88fb3"
+      },
+      {
+        "path": "content/personal-reading/continuity/registries/continuity-subscription-product-registry-v3-candidate.json",
+        "sha256": "a40e1263d86a7ea21e43beb9c42009a57456aa46c9ab1a8751fbc5c956faa68f"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "path": "tools/review/membership-ask-credit-r1/ZERO-COST-TESTS.json",
+      "executedChecks": 18,
+      "scope": "SYNTHETIC_SQLITE_SQL_EXECUTION_NOT_REAL_CUSTOMER"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/SOURCE-AND-ENTITLEMENT-TESTS.json",
+      "executedChecks": 12,
+      "scope": "CONTROLLED_LOCAL_NOT_PRODUCTION"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/EXECUTION-TESTS.json",
+      "executedChecks": 7,
+      "scope": "OFFLINE_EXECUTION_STUB_NOT_MODEL_QUALITY"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/EXPERIMENT-PREFLIGHT.json",
+      "executedChecks": 7,
+      "scope": "OFFLINE_NOT_PROVIDER"
+    }
+  ],
+  "browser": {
+    "cases": 6,
+    "scope": "REAL_HEADLESS_BROWSER; SYNTHETIC_SERVER_MEMBER; ACTUAL_SOURCE_PREVIEW; NOT_LIVE_OIDC_OR_MODEL_DELIVERY",
+    "artifact": "tools/review/membership-ask-credit-r1/BROWSER-EVIDENCE.json",
+    "englishWithSources": 3
+  },
+  "sourceCoverageInherited": {
+    "totalChapters": 982,
+    "wholeChapterVerified": 1,
+    "wholeChapterAdmitted": 0,
+    "wholeChapterLive": 0,
+    "existingPartialLiveRanges": 10,
+    "notRecounted": true
+  },
+  "originalPrototype": {
+    "questions": 14,
+    "packs": 12,
+    "preserved": true,
+    "newProvenanceGatePacks": 7,
+    "missingTwo": [
+      {
+        "id": "N7",
+        "classification": "RETRIEVAL_OR_EXPLANATION_COVERAGE_GAP; ORIGINAL_SOURCE_INSUFFICIENCY_NOT_PROVEN"
+      },
+      {
+        "id": "N8",
+        "classification": "SOURCE_CANNOT_SUPPORT_CERTAIN_FUTURE_WAR_PREDICTION"
+      }
+    ],
+    "fiveAdditionalGateExclusions": "BOOK_V_DERIVATIVE_ACCEPTANCE_NOT_PROVEN; NO_SEMANTIC_REJECTION_CLAIM"
+  },
+  "experiment": {
+    "tests": [
+      {
+        "name": "exact Luna maximum 5160 micro USD",
+        "state": "PASS"
+      },
+      {
+        "name": "exact Terra maximum 51600 micro USD",
+        "state": "PASS"
+      },
+      {
+        "name": "paired eligible source packs share identity",
+        "state": "PASS"
+      },
+      {
+        "name": "sum remains inside independent 600000 micro USD budget",
+        "state": "PASS"
+      },
+      {
+        "name": "paid dispatch forbidden",
+        "state": "PASS"
+      },
+      {
+        "name": "per-model 10 call limit",
+        "state": "PASS"
+      },
+      {
+        "name": "changed replay cannot reuse a reservation",
+        "state": "PASS"
+      }
+    ],
+    "snapshot": {
+      "entries": [
+        {
+          "requestId": "M-I-1-gpt-5.6-luna",
+          "packDigest": "7c4a16e238113244a47ce3c25c087d138d056755ab632c15b7846bed95852c8c",
+          "model": "gpt-5.6-luna",
+          "maximumMicroUSD": 5160,
+          "state": "OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND"
+        },
+        {
+          "requestId": "M-I-1-gpt-5.6-terra",
+          "packDigest": "7c4a16e238113244a47ce3c25c087d138d056755ab632c15b7846bed95852c8c",
+          "model": "gpt-5.6-terra",
+          "maximumMicroUSD": 51600,
+          "state": "OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND"
+        },
+        {
+          "requestId": "M-I-2-gpt-5.6-luna",
+          "packDigest": "35eabbc471d43e102e68ca261e949e5ec577aa62c0ca09afefa9851a96e0ab3d",
+          "model": "gpt-5.6-luna",
+          "maximumMicroUSD": 5160,
+          "state": "OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND"
+        },
+        {
+          "requestId": "M-I-2-gpt-5.6-terra",
+          "packDigest": "35eabbc471d43e102e68ca261e949e5ec577aa62c0ca09afefa9851a96e0ab3d",
+          "model": "gpt-5.6-terra",
+          "maximumMicroUSD": 51600,
+          "state": "OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND"
+        },
+        {
+          "requestId": "M-III-1-gpt-5.6-luna",
+          "packDigest": "c242b4c8a1883d3d2acd1410d5444a37df6e695bf71a6caba47afba8d66706f7",
+          "model": "gpt-5.6-luna",
+          "maximumMicroUSD": 5160,
+          "state": "OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND"
+        },
+        {
+          "requestId": "M-III-1-gpt-5.6-terra",
+          "packDigest": "c242b4c8a1883d3d2acd1410d5444a37df6e695bf71a6caba47afba8d66706f7",
+          "model": "gpt-5.6-terra",
+          "maximumMicroUSD": 51600,
+          "state": "OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND"
+        },
+        {
+          "requestId": "N1-gpt-5.6-luna",
+          "packDigest": "5eb6a92ad98b27798ea75b1dfafe3ac7b38aab920b4fcd78deaaee57e9384e2c",
+          "model": "gpt-5.6-luna",
+          "maximumMicroUSD": 5160,
+          "state": "OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND"
+        },
+        {
+          "requestId": "N1-gpt-5.6-terra",
+          "packDigest": "5eb6a92ad98b27798ea75b1dfafe3ac7b38aab920b4fcd78deaaee57e9384e2c",
+          "model": "gpt-5.6-terra",
+          "maximumMicroUSD": 51600,
+          "state": "OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND"
+        },
+        {
+          "requestId": "N2-gpt-5.6-luna",
+          "packDigest": "893bafca80a222986226b9d1289da30a33977b86225e99ed7ccd721b9c2616a4",
+          "model": "gpt-5.6-luna",
+          "maximumMicroUSD": 5160,
+          "state": "OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND"
+        },
+        {
+          "requestId": "N2-gpt-5.6-terra",
+          "packDigest": "893bafca80a222986226b9d1289da30a33977b86225e99ed7ccd721b9c2616a4",
+          "model": "gpt-5.6-terra",
+          "maximumMicroUSD": 51600,
+          "state": "OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND"
+        },
+        {
+          "requestId": "N3-gpt-5.6-luna",
+          "packDigest": "6f90f28d9e0d22e5bd4fe3305ef46d15a4a272b7875e61e436a2beaa9d30f16c",
+          "model": "gpt-5.6-luna",
+          "maximumMicroUSD": 5160,
+          "state": "OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND"
+        },
+        {
+          "requestId": "N3-gpt-5.6-terra",
+          "packDigest": "6f90f28d9e0d22e5bd4fe3305ef46d15a4a272b7875e61e436a2beaa9d30f16c",
+          "model": "gpt-5.6-terra",
+          "maximumMicroUSD": 51600,
+          "state": "OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND"
+        },
+        {
+          "requestId": "N4-gpt-5.6-luna",
+          "packDigest": "add212e2f04b22cdddb3810e466d7ba4932583d0948e31930b5cf39e187b818e",
+          "model": "gpt-5.6-luna",
+          "maximumMicroUSD": 5160,
+          "state": "OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND"
+        },
+        {
+          "requestId": "N4-gpt-5.6-terra",
+          "packDigest": "add212e2f04b22cdddb3810e466d7ba4932583d0948e31930b5cf39e187b818e",
+          "model": "gpt-5.6-terra",
+          "maximumMicroUSD": 51600,
+          "state": "OFFLINE_RESERVATION_SIMULATION_NOT_REAL_SPEND"
+        }
+      ],
+      "maximumAllocatedMicroUSD": 397320,
+      "hardBudgetMicroUSD": 600000,
+      "actualProviderCalls": 0,
+      "actualCostMicroUSD": 0,
+      "automaticRetry": 0,
+      "paidAuthorization": false,
+      "memberCreditsCharged": false
+    },
+    "officialPriceCheckedAt": "2026-10-12",
+    "sourceUrls": [
+      "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+      "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
+    ],
+    "pricePerMillionUSD": {
+      "luna": {
+        "input": 0.2,
+        "cached": 0.02,
+        "output": 1.2
+      },
+      "terra": {
+        "input": 2,
+        "cached": 0.2,
+        "output": 12
+      }
+    },
+    "accountModelAccess": "UNVERIFIED",
+    "quality": "NOT_RUN"
+  },
+  "sharedConfig": {
+    "files": [
+      {
+        "path": "wrangler.jsonc",
+        "sha256": "a1cc8849a23a5eb3260a940850c7cb13bd91b5dea2f9c83b67ef3b5b06207188",
+        "changedByThisTask": false
+      },
+      {
+        "path": "functions/commerce/commerce-stripe-api.js",
+        "sha256": "82bbf13b57990d9b28e960da0aab532d41e8f4f49e3aa0c25b64dd122903f682",
+        "changedByThisTask": false
+      },
+      {
+        "path": "functions/commerce/commerce-stripe-events.js",
+        "sha256": "dd20da53aa7893e3c1bbeecdda25664c96dff8ef6c8dc15291cd3149723ad812",
+        "changedByThisTask": false
+      },
+      {
+        "path": "functions/pws/commercial/stripe-product-registry.js",
+        "sha256": "df13b4dc9665ee2310030395f128d4d1a447e00773ed6bf6664147a548dbeb77",
+        "changedByThisTask": false
+      },
+      {
+        "path": "functions/account/paid-report-question-generation.js",
+        "sha256": "d56f727c2e3ae24583842eee1e2096cef4fc0cc90fd928c689ed78643baecd2a",
+        "changedByThisTask": false
+      },
+      {
+        "path": "functions/personal-reading/continuity/continuity-quota-d1.js",
+        "sha256": "f86d0471460e03af92833e1b6124e958165a01be0a2312c8069cb42c34345cf5",
+        "changedByThisTask": false
+      }
+    ],
+    "headAdvance": {
+      "from": "8ecbea951c8d50af29fe47d8448aaa987e7644a7",
+      "to": "890587f9cc830c1a4be80283618212266c70ae5b",
+      "classification": "UNRELATED_CONCURRENT_CHANGE_OF_GIT_REF; FILE_DIGESTS_DEFINE_FRESHNESS"
+    },
+    "productionSource": {
+      "stripeEnvironment": "LIVE",
+      "renderer": [
+        {
+          "binding": "METHOD_REPORT_RENDERER",
+          "service": "phios-method-report-renderer-production"
+        }
+      ],
+      "providerEnabled": "false",
+      "p9": {
+        "PHIOS_P9_CANARY_ENABLED": "false",
+        "PHIOS_P9_CHECKOUT_ENABLED": "false",
+        "PHIOS_P9_REFUND_ENABLED": "false"
+      }
+    },
+    "previewSource": {
+      "stripeEnvironment": "QA"
+    },
+    "cloudConfiguration": "NOT_READ_THIS_TURN; PRIOR_VERIFIED_LIVE_FLAG_NOT_OVERWRITTEN",
+    "secretRead": false,
+    "remoteMutation": false
+  },
+  "changedBuildInputs": [
+    {
+      "path": "functions/_lib/knowledge-source-eligibility.js",
+      "buildStartSha": "59d4249935561616e7b76d8776e91e2b3b757656dd6f7dc52e7d19445b3a0043",
+      "currentSha": "22f5f0c414a847b4c0b6e28588e28c78e65c6b2d1d21f5d7f3b1d3fdbda9798f",
+      "classification": "CONCURRENT_RELEVANT_CHANGE"
+    },
+    {
+      "path": "functions/api/membership-ask.js",
+      "buildStartSha": "bf625c341768c48577970394459dd406e1726125c9b2028c3db9b2887327eadd",
+      "currentSha": "b8e91af6cf189f4da9ec73e8c26b5d6438f169569d4ccaa0121d34130969d72a",
+      "classification": "INTENTIONAL_THIS_TASK_RUNTIME_CHANGE"
+    },
+    {
+      "path": "scripts/build-cloudflare-pages.mjs",
+      "buildStartSha": "a50a87e0e8b9269535f68ea2cfec33a6f23e8ea0670c1d664bb517d60650cf3b",
+      "currentSha": "33ced66520baeb92fb8ca14e7d8f8a5e01304588e8f0798fd53705e51c86ac89",
+      "classification": "CONCURRENT_RELEVANT_CHANGE"
+    }
+  ],
+  "blockers": [
+    {
+      "id": "CURRENT_BUILD_IDENTITY",
+      "state": "BLOCKED",
+      "kind": "LOCAL_BUILD",
+      "evidence": "tools/review/membership-ask-credit-r1/BUILD-RECEIPT.json",
+      "missing": "Compiled output exists but build input identity must match the current relevant dependency manifest; changed files are listed below.",
+      "next": "Preserve concurrent source changes; rerun only affected consumers before a stable build. Do not use old output identity as PASS."
+    },
+    {
+      "id": "CREDIT_CUTOVER_AND_MIGRATION",
+      "state": "PARTIAL",
+      "kind": "SOURCE_AND_GOVERNANCE",
+      "evidence": "tools/review/membership-ask-credit-r1/CUTOVER-COMPATIBILITY-TESTS.json",
+      "missing": "Read-only old/new spend and pending-reservation reconciliation passed QA; resubscription preserves old units. Production balances were not read. A unique migration sequence and dispatch fencing must be approved and applied before switching; no concurrent dispatch allowed.",
+      "next": "Register additive schema and reconcile a read-only production snapshot when authorized; drain unknown/pending usage, preserve grants, then enable exactly one dispatcher. Rollback disables both while retaining all ledger rows."
+    },
+    {
+      "id": "NAVIGATION_SOURCE_CONSUMERS",
+      "state": "PARTIAL",
+      "kind": "SOURCE",
+      "evidence": "functions/personal-reading/continuity/membership-navigation-pack.js",
+      "missing": "BaZi saved Navigation owner/consent/version/report/included-benefit bridge tested with synthetic fixtures. Real saved-context browser delivery is not proved. Relationship/Profile/Financial prose adapters are not wired. My Reality saved-source projection remains QA-gated.",
+      "next": "Reuse each actual owner and approved native projection; add adapters and test the same persisted-object chain. Do not fabricate completed Navigation."
+    },
+    {
+      "id": "CURRENT_FACTS_RESEARCH",
+      "state": "BLOCKED",
+      "kind": "SOURCE_AND_RUNTIME",
+      "evidence": "functions/current-facts-gateway/current-facts-gateway.js",
+      "missing": "Repo has gateway and source admission, but current endpoint/host configuration is unverified, tool cost is not recorded into this task workflow, jurisdiction and freshness customer cases are unproved; gateway also lacks a bounded request timeout.",
+      "next": "Validate the existing service configuration, priced tool receipts, timeouts, freshness/jurisdiction and failure states before enabling research. Research remains denied."
+    },
+    {
+      "id": "EN_MODEL_ANSWER_QUALITY",
+      "state": "NOT_RUN",
+      "kind": "SOURCE",
+      "evidence": "tools/review/membership-ask-credit-r1/BROWSER-EVIDENCE.json",
+      "missing": "English question recognition, approved glossary hints, search-only cross-language expansion and Chinese-source permissions now return 2 sources in all 3 browser widths. Actual English model answers remain unevaluated.",
+      "next": "Run the separately authorized paired model experiment; disclose Chinese source language without accepting English manuscript text."
+    },
+    {
+      "id": "MODEL_DELIVERY_AND_PURCHASE_SCOPE",
+      "state": "NOT_RUN",
+      "kind": "SOURCE",
+      "evidence": "functions/personal-reading/continuity/membership-authority-pack.js",
+      "missing": "Permission-checked chapter description is implemented and browser-tested; PDF support positions do not create a PDF link. Related book information is separate from the answer. Model delivery and actual book checkout are not activated or proved.",
+      "next": "Validate actual model answers under independent experiment authorization; do not treat source descriptions as full-text access or checkout completion."
+    },
+    {
+      "id": "EXPERIMENT_AUTHORIZATION_AND_MODEL_ACCESS",
+      "state": "NOT_RUN",
+      "kind": "PAID_AUTHORIZATION",
+      "evidence": "tools/review/membership-ask-credit-r1/EXPERIMENT-PREFLIGHT.json",
+      "missing": "Owner has not issued independent paid authorization. Server model whitelist/account access and live usage capture are unverified. The preflight is an offline simulation.",
+      "next": "Review same-question/same-pack plan, obtain independent authorization within USD0.60/20 calls/10 per model/no retry, verify model access and metering, then run first-call inspection. Do not deduct member Credits."
+    },
+    {
+      "id": "SEVEN_BOOK_SOURCE_SCOPE",
+      "state": "PARTIAL",
+      "kind": "SOURCE_AND_CONTENT",
+      "evidence": "tools/review/free-ask-manuscript-r1/SEVEN-BOOK-CHAPTER-QUALITY-AUDIT.json",
+      "missing": "982-chapter whole closure remains incomplete. Original 12 packs retained, but five Book V packs lack accepted derivative provenance in the stricter member candidate. OCR/cross-book/other unaccepted content remain isolated.",
+      "next": "Complete source-dependent quality scopes and provenance without re-extracting unchanged sources; do not equate an experiment with all-seven-book completion."
+    }
+  ],
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "payments": 0,
+  "refunds": 0,
+  "productionMigrations": 0,
+  "productionActivation": false,
+  "commitPushDeploy": false,
+  "secretMutation": false,
+  "p9SourceMutation": false,
+  "priorFailuresAndRollbacksRetained": true,
+  "cutoverReconciliation": {
+    "results": [
+      {
+        "case": "old metered spend represented exactly once by both readers",
+        "state": "PASS"
+      },
+      {
+        "case": "pending legacy reservation deducted, cutover denied, not treated as zero",
+        "state": "PASS"
+      },
+      {
+        "case": "reconciliation never creates or replays purchase grants",
+        "state": "PASS"
+      },
+      {
+        "case": "mixed dispatch explicitly blocked by cutover policy; production enforcement still required",
+        "state": "PASS_POLICY_NOT_ACTIVATED"
+      }
+    ],
+    "fixtureOnly": true,
+    "legacyNetSpendDelta": 10000,
+    "newNetSpendDelta": 10000,
+    "pendingReserveDelta": 50000,
+    "productionWrite": 0,
+    "rollback": "BOTH_DISPATCHERS_OFF; KEEP_LEDGER_AND_GRANTS",
+    "liveBalance": "NOT_READ"
+  },
+  "executableExperiment": {
+    "path": "tools/review/membership-ask-credit-r1/EXECUTABLE-REQUESTS.json",
+    "runner": "scripts/run-membership-knowledge-experiment-r1.mjs",
+    "requests": 20,
+    "maximumReservedMicroUSD": 422056,
+    "memberCreditsCharged": false,
+    "actualCalls": 20,
+    "automaticRetry": 0,
+    "actualCostUSD": 0.0893857
+  },
+  "chineseKnowledgeChain": {
+    "state": "PASS_OFFLINE_ORCHESTRATION_NOT_MODEL_ANSWER_QUALITY",
+    "nodes": [
+      "server member",
+      "accepted source retrieval",
+      "dynamic native authority pack",
+      "offline adapter",
+      "citation validation",
+      "actual-receipt integer settlement fixture",
+      "saved answer replay"
+    ],
+    "sourceVersions": [
+      {
+        "version": "owner-final-20261011-efbfdd21fa21",
+        "sha": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+        "chapter": "CM-B3V1-P8-S015",
+        "href": "/membership-source.html?bookCode=BOOK-3&chapter=CM-B3V1-P8-S015&q=%E7%BB%93%E6%9E%84%E6%8C%81%E7%BB%AD%E6%80%A7%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A6%81%E6%B1%82%E6%89%80%E6%9C%89%E5%85%83%E7%B4%A0%E4%BF%9D%E6%8C%81%E5%8E%9F%E6%A0%B7%EF%BC%9F&locale=zh-Hans"
+      },
+      {
+        "version": "owner-final-20261011-efbfdd21fa21",
+        "sha": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+        "chapter": "CM-B3V1-P8-S059",
+        "href": "/membership-source.html?bookCode=BOOK-3&chapter=CM-B3V1-P8-S059&q=%E7%BB%93%E6%9E%84%E6%8C%81%E7%BB%AD%E6%80%A7%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A6%81%E6%B1%82%E6%89%80%E6%9C%89%E5%85%83%E7%B4%A0%E4%BF%9D%E6%8C%81%E5%8E%9F%E6%A0%B7%EF%BC%9F&locale=zh-Hans"
+      }
+    ],
+    "settledMicroUSD": 12345,
+    "offlineStubCalls": 1,
+    "providerCalls": 0,
+    "modelQuality": "NOT_RUN",
+    "publicExecuteEndpoint": "CLOSED_PENDING_PAID_EXPERIMENT_AND_CUTOVER",
+    "productionD1": false
+  },
+  "sharedBuildCoordination": {
+    "ownerReply": "1 = still modifying, preserve build blocker",
+    "state": "BLOCKED_BY_CONCURRENT_RELEVANT_MUTATION",
+    "changedSharedInputs": [
+      "functions/knowledge-runtime/manuscript-source-runtime.js",
+      "functions/_lib/knowledge-source-eligibility.js"
+    ],
+    "buildsThisContinuation": 2,
+    "additionalBuildAttempt": false,
+    "sourceDescriptionPublication": "Explicit uncommitted-publication entries added after last build; final output must prove these are included",
+    "next": "After shared source edits finish, rerun changed dependency consumers only and bind one stable build input/output identity"
+  },
+  "paidExperiment": {
+    "at": "2026-10-12T02:27:05.121Z",
+    "calls": 20,
+    "models": {
+      "gpt-5.6-luna": {
+        "calls": 10,
+        "totalNanoUSD": 9886700,
+        "maxCostUSD": 0.0017565,
+        "meanCostUSD": 0.00098867,
+        "latencyMs": {
+          "p50": 4133,
+          "p90": 8972,
+          "p95": 9437,
+          "max": 9437
+        },
+        "strictValidatorPass": 1,
+        "allQuotesMatchIgnoringLayout": 6
+      },
+      "gpt-5.6-terra": {
+        "calls": 10,
+        "totalNanoUSD": 79499000,
+        "maxCostUSD": 0.014445,
+        "meanCostUSD": 0.0079499,
+        "latencyMs": {
+          "p50": 3853,
+          "p90": 4855,
+          "p95": 5369,
+          "max": 5369
+        },
+        "strictValidatorPass": 2,
+        "allQuotesMatchIgnoringLayout": 8
+      }
+    },
+    "actualTotalNanoUSD": 89385700,
+    "actualCostUSD": 0.0893857,
+    "budgetRoundedMicroUSD": 89394,
+    "costBasis": "RETURNED_USAGE_WITH_CACHE_WRITES_AT_VERIFIED_PRICES; BILLING_INVOICE_NOT_RECONCILED",
+    "automaticRetry": 0,
+    "memberCreditsCharged": false,
+    "technicalFailures": 0,
+    "questionSourceCoverage": "BOOK_I_AND_III_BOUNDED_ARGUMENTS_ONLY_NOT_SEVEN_BOOK_CLOSURE",
+    "english": "NOT_TESTED_0_CALLS; NO_ACCEPTED_ENGLISH_MANUSCRIPT_CLAIM",
+    "relevance": {
+      "historicalQuestions": 7,
+      "freshQuestions": 3,
+      "freshFullAnswerSuccess": 0
+    },
+    "citation": {
+      "strictDeliveryAnswersPass": 0,
+      "strictSchemaPassesIncludingRefusals": 3,
+      "compoundQuoteFailures": [
+        "M-I-2-gpt-5.6-luna",
+        "N2-gpt-5.6-luna",
+        "FRESH-1-gpt-5.6-luna"
+      ],
+      "normalizationObservationsAreNotNewPASS": true
+    },
+    "recommendation": {
+      "default": "LUNA_CANDIDATE_ONLY_AFTER_RETRIEVAL_CITATION_AND_BOUNDARY_FIXES",
+      "upgrade": "TERRA_EXPLICIT_CUSTOMER_CHOICE_AND_GOVERNED_POLICY_ONLY; NOT_AUTO_ENABLED",
+      "rationale": "这批中文简单知识题，Luna价格较低且多数直接论点成立；Terra连续引用质量更稳、延迟更低，但费用约8倍且不能修复缺失来源。两者尚未满足现行引用交付契约。",
+      "notValidated": [
+        "English answers",
+        "cross-book comparison",
+        "long essays",
+        "current facts/research/tool costs",
+        "personal navigation",
+        "customer entitlement/commercial delivery"
+      ]
+    },
+    "credits": {
+      "candidateCredits": 300,
+      "candidateCostAllowanceMicroUSD": 3000000,
+      "arithmetic": "300×10000microUSD=USD3; decimals from integer units",
+      "validatedCommercialPromise": false,
+      "noQuestionCountGuarantee": true,
+      "ordinaryCapUSD": 0.05,
+      "observedLunaMaxUSD": 0.0017565,
+      "observedTerraMaxUSD": 0.014445,
+      "ordinary": "SAMPLE_COSTS_BELOW_CAP_NOT_GENERAL_PROOF",
+      "deep": "NOT_VALIDATED",
+      "research": "NOT_VALIDATED"
+    },
+    "build": "BLOCKED_SHARED_DEPENDENCIES_STILL_MUTATING; NO_BUILD_THIS_EXPERIMENT",
+    "productionActivation": false,
+    "DEPLOYMENT": "NOT_RUN",
+    "LIVE_CUSTOMER": "NOT_RUN"
+  }
+}

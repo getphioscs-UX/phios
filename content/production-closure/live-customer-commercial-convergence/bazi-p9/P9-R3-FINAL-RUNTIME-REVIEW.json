@@ -1,0 +1,454 @@
+{
+  "schemaVersion": "P9-R3-FINAL-RUNTIME-REVIEW",
+  "actualCommit": "8ecbea951c8d50af29fe47d8448aaa987e7644a7",
+  "status": "BLOCKED_RUNTIME_ADMISSION",
+  "firstRemainingBlocker": "P9_R3_RUNTIME_EXTRA_NOT_DEPLOYABLE",
+  "frozenR3Digest": "d3e8fefb810d1937bf4828c190a38d9889cbcd1006a843284bc553e0b0775bd6",
+  "R2Digest": "7b52601b606db94164f112d35eddb2c226b9a09e8ea111328396e3659bd5fe08",
+  "governedBytesChanged": false,
+  "UNKNOWN": 0,
+  "files": [
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v10.json",
+      "type": "E_SOURCE_SCOPE_CHANGE",
+      "before": "Parent active metadata did not select this new registry.",
+      "after": "Active registry v10 selects v7 scope metadata for Book I/V with wholeChapterCandidates; retained initial qualification conflicts with current withdrawal/unqualified evidence.",
+      "classification": "UNSAFE_FOR_R3_DEPLOYMENT",
+      "owner": "/api/knowledge-access -> manuscriptProjection / server metadata",
+      "customerVisible": "YES",
+      "AskAffecting": "YES",
+      "KnowledgeAffecting": "YES",
+      "buildLoaded": "YES",
+      "runtimeLoaded": "YES",
+      "productionReachable": "YES_IF_DEPLOYED_WITH_ADMISSION_FLAGS",
+      "P9_D1_ISOLATION_INTERFERENCE": "NO",
+      "nonInterference": {
+        "rootMiddleware": "NO",
+        "guardWrapping": "NO",
+        "maintenanceInterpretation": "NO",
+        "SQLAdmission": "NO",
+        "accountAuthWrites": "NO",
+        "commerceWebhookWrites": "NO",
+        "P8Writes": "NO",
+        "generationStateWrites": "NO",
+        "routingAroundRoot": "NO",
+        "productionD1BindingIdentity": "NO"
+      },
+      "proof": "No reviewed delta changes root/guard/config/binding/write owners. Fresh immutable source: 41 owners/163 SQL/125 routes, 244 isolation +138 compiled dispatcher cases PASS. This says nothing about safe content admission."
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v9.json",
+      "type": "E_SOURCE_SCOPE_CHANGE",
+      "before": "Not present in parent.",
+      "after": "Historical v9 registry contains previous v6 whole-chapter scopes. Retained in server metadata but not current active selection.",
+      "classification": "SAFE_INDEPENDENT_RUNTIME_CHANGE",
+      "owner": "Server metadata resolver, historical registry retention",
+      "customerVisible": "NO_CURRENT_SELECTION",
+      "AskAffecting": "YES",
+      "KnowledgeAffecting": "YES",
+      "buildLoaded": "YES",
+      "runtimeLoaded": "RETAINED_NOT_ACTIVE",
+      "productionReachable": "NO_CURRENT_SELECTION",
+      "P9_D1_ISOLATION_INTERFERENCE": "NO",
+      "nonInterference": {
+        "rootMiddleware": "NO",
+        "guardWrapping": "NO",
+        "maintenanceInterpretation": "NO",
+        "SQLAdmission": "NO",
+        "accountAuthWrites": "NO",
+        "commerceWebhookWrites": "NO",
+        "P8Writes": "NO",
+        "generationStateWrites": "NO",
+        "routingAroundRoot": "NO",
+        "productionD1BindingIdentity": "NO"
+      },
+      "proof": "No reviewed delta changes root/guard/config/binding/write owners. Fresh immutable source: 41 owners/163 SQL/125 routes, 244 isolation +138 compiled dispatcher cases PASS. This says nothing about safe content admission."
+    },
+    {
+      "path": "functions/_lib/client-knowledge-ask-b.js",
+      "type": "B_ROUTING_CHANGE",
+      "before": "Broad temporal words treated as need for current external authority.",
+      "after": "Uses shared externalRealityQuestionNeed; conceptual temporal wording no longer automatically requires external authority.",
+      "classification": "REQUIRES_SEPARATE_HUMAN_ACCEPT",
+      "owner": "Ask/contextual authority assessment",
+      "customerVisible": "YES",
+      "AskAffecting": "YES",
+      "KnowledgeAffecting": "YES",
+      "buildLoaded": "YES",
+      "runtimeLoaded": "YES",
+      "productionReachable": "YES_IF_DEPLOYED_WITH_ADMISSION_FLAGS",
+      "P9_D1_ISOLATION_INTERFERENCE": "NO",
+      "nonInterference": {
+        "rootMiddleware": "NO",
+        "guardWrapping": "NO",
+        "maintenanceInterpretation": "NO",
+        "SQLAdmission": "NO",
+        "accountAuthWrites": "NO",
+        "commerceWebhookWrites": "NO",
+        "P8Writes": "NO",
+        "generationStateWrites": "NO",
+        "routingAroundRoot": "NO",
+        "productionD1BindingIdentity": "NO"
+      },
+      "proof": "No reviewed delta changes root/guard/config/binding/write owners. Fresh immutable source: 41 owners/163 SQL/125 routes, 244 isolation +138 compiled dispatcher cases PASS. This says nothing about safe content admission."
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "type": "E_SOURCE_SCOPE_CHANGE",
+      "before": "Narrower source-identity/Book scope selection and prior excerpt projection.",
+      "after": "Adds QA identity checks, v7 argument/concept support, accepted VII unit projection and protected full-book handling; production text-scope flag admits active candidate scopes without checking current withdrawal ledger.",
+      "classification": "UNSAFE_FOR_R3_DEPLOYMENT",
+      "owner": "/api/knowledge-access; Ask internal retrieval",
+      "customerVisible": "YES",
+      "AskAffecting": "YES",
+      "KnowledgeAffecting": "YES",
+      "buildLoaded": "YES",
+      "runtimeLoaded": "YES",
+      "productionReachable": "YES_IF_DEPLOYED_WITH_ADMISSION_FLAGS",
+      "P9_D1_ISOLATION_INTERFERENCE": "NO",
+      "nonInterference": {
+        "rootMiddleware": "NO",
+        "guardWrapping": "NO",
+        "maintenanceInterpretation": "NO",
+        "SQLAdmission": "NO",
+        "accountAuthWrites": "NO",
+        "commerceWebhookWrites": "NO",
+        "P8Writes": "NO",
+        "generationStateWrites": "NO",
+        "routingAroundRoot": "NO",
+        "productionD1BindingIdentity": "NO"
+      },
+      "proof": "No reviewed delta changes root/guard/config/binding/write owners. Fresh immutable source: 41 owners/163 SQL/125 routes, 244 isolation +138 compiled dispatcher cases PASS. This says nothing about safe content admission."
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "type": "D_ANSWER_SELECTION_CHANGE",
+      "before": "Native answer consumer restricted to COMPLETED_MANUSCRIPT.",
+      "after": "Recognizes accepted knowledge-unit projection plus corresponding source evidence; no paid/provider authority expansion.",
+      "classification": "REQUIRES_SEPARATE_HUMAN_ACCEPT",
+      "owner": "runAskPhiosPipeline / Ask customer routes",
+      "customerVisible": "YES",
+      "AskAffecting": "YES",
+      "KnowledgeAffecting": "YES",
+      "buildLoaded": "YES",
+      "runtimeLoaded": "YES",
+      "productionReachable": "YES_IF_DEPLOYED_WITH_ADMISSION_FLAGS",
+      "P9_D1_ISOLATION_INTERFERENCE": "NO",
+      "nonInterference": {
+        "rootMiddleware": "NO",
+        "guardWrapping": "NO",
+        "maintenanceInterpretation": "NO",
+        "SQLAdmission": "NO",
+        "accountAuthWrites": "NO",
+        "commerceWebhookWrites": "NO",
+        "P8Writes": "NO",
+        "generationStateWrites": "NO",
+        "routingAroundRoot": "NO",
+        "productionD1BindingIdentity": "NO"
+      },
+      "proof": "No reviewed delta changes root/guard/config/binding/write owners. Fresh immutable source: 41 owners/163 SQL/125 routes, 244 isolation +138 compiled dispatcher cases PASS. This says nothing about safe content admission."
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "type": "C_RETRIEVAL_CHANGE",
+      "before": "Book V/VII less directly routed to manuscript; automatic V published fallback and broad exclusion.",
+      "after": "Adds V/VII manuscript context, requires explicit allowPublishedBookFallback, limits manuscript exclusion to CIVILIZATION_ATLAS; concept aliases participate only under admitted scope digest.",
+      "classification": "REQUIRES_SEPARATE_HUMAN_ACCEPT",
+      "owner": "retrieveKapKnowledge / buildKnowledgeGroundingBundle",
+      "customerVisible": "YES",
+      "AskAffecting": "YES",
+      "KnowledgeAffecting": "YES",
+      "buildLoaded": "YES",
+      "runtimeLoaded": "YES",
+      "productionReachable": "YES_IF_DEPLOYED_WITH_ADMISSION_FLAGS",
+      "P9_D1_ISOLATION_INTERFERENCE": "NO",
+      "nonInterference": {
+        "rootMiddleware": "NO",
+        "guardWrapping": "NO",
+        "maintenanceInterpretation": "NO",
+        "SQLAdmission": "NO",
+        "accountAuthWrites": "NO",
+        "commerceWebhookWrites": "NO",
+        "P8Writes": "NO",
+        "generationStateWrites": "NO",
+        "routingAroundRoot": "NO",
+        "productionD1BindingIdentity": "NO"
+      },
+      "proof": "No reviewed delta changes root/guard/config/binding/write owners. Fresh immutable source: 41 owners/163 SQL/125 routes, 244 isolation +138 compiled dispatcher cases PASS. This says nothing about safe content admission."
+    },
+    {
+      "path": "functions/customer-projection/knowledge-customer-projection.js",
+      "type": "F_LANGUAGE_BEHAVIOR_CHANGE",
+      "before": "Customer citations did not label accepted-unit projection separately.",
+      "after": "Adds localized accepted knowledge-projection label and projectionKind; locale selection remains unchanged.",
+      "classification": "REQUIRES_SEPARATE_HUMAN_ACCEPT",
+      "owner": "customer-contextual-ask / customer-ask view projection",
+      "customerVisible": "YES",
+      "AskAffecting": "YES",
+      "KnowledgeAffecting": "YES",
+      "buildLoaded": "YES",
+      "runtimeLoaded": "YES",
+      "productionReachable": "YES_IF_DEPLOYED_WITH_ADMISSION_FLAGS",
+      "P9_D1_ISOLATION_INTERFERENCE": "NO",
+      "nonInterference": {
+        "rootMiddleware": "NO",
+        "guardWrapping": "NO",
+        "maintenanceInterpretation": "NO",
+        "SQLAdmission": "NO",
+        "accountAuthWrites": "NO",
+        "commerceWebhookWrites": "NO",
+        "P8Writes": "NO",
+        "generationStateWrites": "NO",
+        "routingAroundRoot": "NO",
+        "productionD1BindingIdentity": "NO"
+      },
+      "proof": "No reviewed delta changes root/guard/config/binding/write owners. Fresh immutable source: 41 owners/163 SQL/125 routes, 244 isolation +138 compiled dispatcher cases PASS. This says nothing about safe content admission."
+    },
+    {
+      "path": "functions/knowledge-runtime/current-manuscript-server-metadata.js",
+      "type": "E_SOURCE_SCOPE_CHANGE",
+      "before": "Parent metadata selected older source registry.",
+      "after": "Generated server metadata selects v10 and embeds source/scope provenance, including the unsafe current I/V whole-chapter activation dependency.",
+      "classification": "UNSAFE_FOR_R3_DEPLOYMENT",
+      "owner": "Bundled server-side metadata -> readAssetJson",
+      "customerVisible": "YES",
+      "AskAffecting": "YES",
+      "KnowledgeAffecting": "YES",
+      "buildLoaded": "YES",
+      "runtimeLoaded": "YES",
+      "productionReachable": "YES_IF_DEPLOYED_WITH_ADMISSION_FLAGS",
+      "P9_D1_ISOLATION_INTERFERENCE": "NO",
+      "nonInterference": {
+        "rootMiddleware": "NO",
+        "guardWrapping": "NO",
+        "maintenanceInterpretation": "NO",
+        "SQLAdmission": "NO",
+        "accountAuthWrites": "NO",
+        "commerceWebhookWrites": "NO",
+        "P8Writes": "NO",
+        "generationStateWrites": "NO",
+        "routingAroundRoot": "NO",
+        "productionD1BindingIdentity": "NO"
+      },
+      "proof": "No reviewed delta changes root/guard/config/binding/write owners. Fresh immutable source: 41 owners/163 SQL/125 routes, 244 isolation +138 compiled dispatcher cases PASS. This says nothing about safe content admission."
+    },
+    {
+      "path": "functions/knowledge-runtime/manuscript-source-runtime.js",
+      "type": "D_ANSWER_SELECTION_CHANGE",
+      "before": "Chinese bigram/scaffolding removal and fixed excerpt window could damage concepts/clauses.",
+      "after": "Intl.Segmenter whole-word stopwords, distributed long-question budget, concept/argument scoring, contiguous complete sentences, approved-unit projection. No storage/write API added.",
+      "classification": "REQUIRES_SEPARATE_HUMAN_ACCEPT",
+      "owner": "searchManuscriptCorpus / manuscriptProjection",
+      "customerVisible": "YES",
+      "AskAffecting": "YES",
+      "KnowledgeAffecting": "YES",
+      "buildLoaded": "YES",
+      "runtimeLoaded": "YES",
+      "productionReachable": "YES_IF_DEPLOYED_WITH_ADMISSION_FLAGS",
+      "P9_D1_ISOLATION_INTERFERENCE": "NO",
+      "nonInterference": {
+        "rootMiddleware": "NO",
+        "guardWrapping": "NO",
+        "maintenanceInterpretation": "NO",
+        "SQLAdmission": "NO",
+        "accountAuthWrites": "NO",
+        "commerceWebhookWrites": "NO",
+        "P8Writes": "NO",
+        "generationStateWrites": "NO",
+        "routingAroundRoot": "NO",
+        "productionD1BindingIdentity": "NO"
+      },
+      "proof": "No reviewed delta changes root/guard/config/binding/write owners. Fresh immutable source: 41 owners/163 SQL/125 routes, 244 isolation +138 compiled dispatcher cases PASS. This says nothing about safe content admission."
+    }
+  ],
+  "customerVisibleChangeCount": 8,
+  "P9IsolationInterferenceCount": 0,
+  "unsafeRuntimeFileCount": 3,
+  "blockingEvidence": {
+    "activeRegistry": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v10.json",
+    "activeScope": "content/knowledge/source-access/registries/manuscript-text-scope-candidates-v7.json",
+    "withdrawalPath": "tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/CHAPTER-CURRENT-CLOSURE.json",
+    "withdrawalSHA256": "642872185bdaa9aba923a4cacd8aed1de6cd3eb92c0a4dfa1b926a5b5452fad3",
+    "currentI_V": [
+      {
+        "book": "BOOK-1",
+        "section": "B1V3-P1-S006",
+        "currentWholeChapterQualified": false,
+        "currentAdmission": "NOT_ACTIVATED",
+        "currentQuality": "PARTIAL_PENDING_NEW_INDEPENDENT_REVALIDATION_AFTER_SOURCE_FIX"
+      },
+      {
+        "book": "BOOK-5",
+        "section": "B5-S002",
+        "currentWholeChapterQualified": false,
+        "currentAdmission": "NOT_ACTIVATED",
+        "currentQuality": "PARTIAL_PENDING_NEW_INDEPENDENT_REVALIDATION_AFTER_SOURCE_FIX"
+      }
+    ],
+    "runtimeGate": "PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === true admits SCOPED_TEXT_CANDIDATE_NOT_ACTIVATED; no current CHAPTER-CURRENT-CLOSURE check in runtime API.",
+    "qualificationGap": "Both I/V unqualified/not activated in the same immutable commit. Must resolve source-scope authorization and independent revalidation before this actual tree can be deployed as R3. Not a D1 guard failure.",
+    "recovery": "Audit-only: do not edit frozen R3/manifest. Prepare separately authorized successor bytes/RC after content-scope reconciliation and operational guard repair; fresh Human ACCEPT required."
+  },
+  "operationalScripts": [
+    {
+      "path": "scripts/publish-verified-ask-preserving-cloud-config.mjs",
+      "classification": "PRODUCTION_EXECUTION_RISK_REQUIRES_FIX",
+      "packageLifecycle": false,
+      "buildHook": false,
+      "PagesDeploymentHook": false,
+      "CIHook": false,
+      "inboundImportReference": false,
+      "requiresExplicitOperatorInvocationInCurrentGraph": true,
+      "embeddedCredential": false,
+      "credentialAccess": "Reads existing Wrangler token at invocation; token is not embedded.",
+      "productionTarget": "Hardcoded phios-github / main with technical build/config/current-closure preconditions; lacks explicit execution opt-in/main guard.",
+      "importSideEffectSafe": false,
+      "productionMutationFromPresence": false,
+      "reason": "Top-level executable module fetches Cloudflare config and invokes Pages deploy. Importing it runs actions. No current import/build/CI path found, but it fails requested import-side-effect and explicit operational authorization gate requirements. Do not execute."
+    },
+    {
+      "path": "scripts/reconcile-manuscript-whole-chapter-batch-r1-rollback.mjs",
+      "classification": "SAFE_DORMANT_OPERATIONAL_TOOL",
+      "packageLifecycle": false,
+      "buildHook": false,
+      "PagesDeploymentHook": false,
+      "CIHook": false,
+      "inboundImportReference": false,
+      "requiresExplicitOperatorInvocationInCurrentGraph": true,
+      "embeddedCredential": false,
+      "productionTarget": "NONE; reads an existing rollback receipt and changes local governance files.",
+      "importSideEffectSafe": false,
+      "productionMutationFromPresence": false,
+      "reason": "Correction to previous R3 matrix: this is rollback evidence reconciliation, not a production rollback script. Has top-level local file-write side effects if imported, but no production network/deploy operation. Keep operator-only; do not import as library."
+    }
+  ],
+  "automaticExecutionRisk": "NO_CURRENT_HOOK_OR_IMPORT_REFERENCE; publisher import-side-effect/explicit-opt-in risk remains",
+  "hookAudit": {
+    "scope": "Exact committed package.json, .github workflows, scripts, functions, config, wrangler.jsonc",
+    "command": "git grep -l -F operational-script-names <commit> -- package.json .github scripts functions config wrangler.jsonc",
+    "result": "No name references found; no current automatic hook/import execution identified. Same-directory shared review links are not executable hooks."
+  },
+  "targetedQA": [
+    {
+      "command": "node scripts/check-manuscript-current-local-release-regression.mjs",
+      "cwd": "immutable actual-commit snapshot",
+      "exitCode": 0,
+      "passed": 13,
+      "total": 13,
+      "networkCalls": 0,
+      "cases": [
+        {
+          "id": "REG-BOUNDARY",
+          "pass": true,
+          "state": "PARTIALLY_ANSWERED"
+        },
+        {
+          "id": "REG-CAPACITY",
+          "pass": true,
+          "state": "PARTIALLY_ANSWERED"
+        },
+        {
+          "id": "REG-LIVING",
+          "pass": true,
+          "state": "PARTIALLY_ANSWERED"
+        },
+        {
+          "id": "REG-COMPARE",
+          "pass": true,
+          "state": "PARTIALLY_ANSWERED"
+        },
+        {
+          "id": "NEW-BOUNDARY",
+          "pass": true,
+          "state": "PARTIALLY_ANSWERED"
+        },
+        {
+          "id": "NEW-LIVING",
+          "pass": true,
+          "state": "PARTIALLY_ANSWERED"
+        },
+        {
+          "id": "FALSE-PREMISE",
+          "pass": true,
+          "state": "PARTIALLY_ANSWERED"
+        },
+        {
+          "id": "OUTSIDE",
+          "pass": true,
+          "state": "SOURCE_INSUFFICIENT"
+        },
+        {
+          "id": "FIGURE",
+          "pass": true,
+          "state": "SOURCE_INSUFFICIENT"
+        },
+        {
+          "id": "PREDICTION",
+          "pass": true,
+          "state": "SOURCE_LIMIT"
+        },
+        {
+          "id": "NO-SOURCE",
+          "pass": true,
+          "state": "SOURCE_INSUFFICIENT"
+        },
+        {
+          "id": "ENGLISH",
+          "pass": true,
+          "state": "SOURCE_INSUFFICIENT"
+        },
+        {
+          "id": "CLIENT-QA-ESCALATION",
+          "pass": true,
+          "state": "SOURCE_INSUFFICIENT"
+        }
+      ],
+      "scope": "13 Book IV/VI + unsupported/prediction/English/QA-escalation regressions; NOT qualification of current Book I/V whole chapters."
+    },
+    {
+      "command": "node scripts/check-ksar-manuscript-knowledge-access.mjs",
+      "cwd": "immutable actual-commit snapshot",
+      "exitCode": 1,
+      "status": "BASELINE_FAILURE",
+      "object": "package.json scripts[check:ksar]",
+      "assertion": "actual zero-cost runner command vs expected direct check script command at line 82",
+      "reason": "Command-wrapping contract mismatch; prior retrieval/excerpt assertions passed. No assertion/test/hash rewritten."
+    },
+    {
+      "command": "Wrangler pages functions build functions",
+      "cwd": "immutable actual-commit snapshot",
+      "exitCode": 0,
+      "status": "PASS_COMPILE",
+      "bundleSHA256": "060bc48e1732aee28449d89e216bfa1d4e2d734988daad2ec95711078db2139e"
+    },
+    {
+      "command": "node tmp/p9-r3-reconciliation/check-p9-d1i1-isolation.mjs",
+      "exitCode": 0,
+      "passed": 244,
+      "networkCalls": 0
+    },
+    {
+      "command": "node tmp/p9-r3-reconciliation/check-compiled.mjs",
+      "exitCode": 0,
+      "passed": 138,
+      "networkCalls": 0,
+      "originalWrites": 0
+    }
+  ],
+  "fixtureFailureHistory": "First local regression failed because snapshot omitted committed semantic-profile asset. Diagnostic identified exact missing file; materialized the committed asset and reran unchanged existing test to 13/13. No fallback/test expectation change.",
+  "languageReview": "API locale filter retained; English no-source fixture fails closed. Source projection uses localized accepted-unit labels. Existing tests do not prove arbitrary bilingual response quality. No automatic language/content Human ACCEPT.",
+  "internalLanguageReview": "No new internal/governance labels added to customer projection; API includes diagnostic errors on absent internal assets, a pre-existing boundary outside this limited delta. No new write/state behavior.",
+  "unfinishedContentDependency": "Confirmed current I/V qualification/admission conflict; cannot be silently accepted under valid D1 isolation.",
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "productionMutations": 0,
+  "commit": false,
+  "push": false,
+  "deploy": false,
+  "READ_ONLY": false,
+  "migration": false,
+  "R3FinalState": "BLOCKED_NOT_READY_FOR_FINAL_HUMAN_ACCEPT",
+  "productionIsolation": "NOT_YET_DEPLOYED"
+}

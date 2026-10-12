@@ -1,0 +1,104 @@
+{
+  "at": "2026-10-12T03:40:12.252Z",
+  "status": "BLOCKED_PRODUCTION_READ_ONLY_NOT_EFFECTIVE",
+  "acceptedCommit": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+  "acceptedTree": "44ff79ccb5885846ad6bfdd1cb1c9cd56b60b318",
+  "R5Digest": "a95f1892c7c32df76b6afd6dd16d10510389a021f24135feacc882af57cc7bd2",
+  "digestMatch": true,
+  "deployment": {
+    "id": "333178e5-1ed9-4435-b385-ea5139c41057",
+    "source": {
+      "branch": "main",
+      "commit_hash": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+      "commit_message": "P9 G1-R5: harden five-file knowledge runtime chain",
+      "commit_dirty": false
+    },
+    "success": true,
+    "canonical": "333178e5-1ed9-4435-b385-ea5139c41057",
+    "modeMetadata": "READ_ONLY"
+  },
+  "READ_ONLY": "CONFIGURED_BUT_RUNTIME_NOT_PROVEN_EFFECTIVE",
+  "PRODUCTION_D1_WRITE_ISOLATION": "FAIL",
+  "rootWriteDenialProbes": {
+    "expected": 24,
+    "passed": 0,
+    "directExecutionExpected": 16,
+    "directExecutionPassed": 0,
+    "redirectObservations": 8,
+    "actualStatuses": [
+      401,
+      403,
+      405,
+      503,
+      301
+    ],
+    "webhook503IsRouteErrorNotMaintenanceDenial": true
+  },
+  "GETWriteTrap": "RUNTIME_UNVERIFIED",
+  "bindingWrapper": "RUNTIME_UNVERIFIED",
+  "runtimeCause": "UNCONFIRMED; build log reads Wrangler config whose committed vars omit maintenance mode; deployment metadata alone does not establish runtime binding.",
+  "topology": {
+    "total": 3556,
+    "production": 3235,
+    "preview": 321,
+    "potentialUnisolatedOlderSurfaces": 2137,
+    "fullMetadataComplete": true,
+    "snapshotCanonicalWasCapturedDuringDeployment": true,
+    "currentCanonicalSeparatelyVerified": "333178e5-1ed9-4435-b385-ea5139c41057",
+    "allHostnameReachability": "UNVERIFIED",
+    "confirmedOldReachable": "d96beed8-bb42-4bb7-9a18-688951adabb8"
+  },
+  "nonPagesSameD1ActiveWriters": 0,
+  "newTimeTravelRestorePoint": "NOT_CAPTURED_ISOLATION_GATE_FAILED",
+  "productionSchema": "NOT_RECONFIRMED_ISOLATION_GATE_FAILED",
+  "D1M1": "NOT_EXECUTED_NOT_AUTHORIZED",
+  "productionChanges": {
+    "maintenanceConfigMutations": 1,
+    "deploymentRequests": 1,
+    "D1Migrations": 0,
+    "productionSecretMutations": 0,
+    "oldDeploymentDeletes": 0
+  },
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "sourceEdits": 0,
+  "newCommits": 0,
+  "pushes": 0,
+  "indexEmpty": true,
+  "unrelatedWorktreeChanges": "NOT_STAGED_OR_EDITED_BY_THIS_OPERATION",
+  "firstBlocker": "P9_G3_R5_PRODUCTION_READ_ONLY_RUNTIME_GATE_FAILED",
+  "additionalBlocker": "P9_G3_R5_OLD_DEPLOYMENT_WRITE_PATH_REMAINS",
+  "priorHistoricalReceiptPreserved": true,
+  "evidence": [
+    {
+      "path": "tmp/p9-g3-r5/READ_ONLY-CONFIG-APPLICATION.json",
+      "sha256": "2a80f3e02ce3d7433410815a1e81afe9a7a244e73681c7ff0aac03dee2c5d317"
+    },
+    {
+      "path": "tmp/p9-g3-r5/READ_ONLY-DEPLOYMENT-REQUEST.json",
+      "sha256": "428ef649b06b0da373f4e260f17f0982943f6b868bc9cacf2e3c7c9b226ae733"
+    },
+    {
+      "path": "tmp/p9-g3-r5/READ_ONLY-DEPLOYMENT-STATUS.json",
+      "sha256": "6b341276398bd23008394d50fb7d2a152791c66c5b7b4c31d6d2533fc16615ab"
+    },
+    {
+      "path": "tmp/p9-g3-r5/READ_ONLY-RUNTIME-PROBES.json",
+      "sha256": "5baf21a195e7e3fd3b82bdbb2129065b7cef9b08db0e7673bd412947e6f384ad"
+    },
+    {
+      "path": "tmp/p9-g3-r5/READONLY-ALL-DEPLOYMENTS-BINDING-AUDIT.json",
+      "sha256": "d5fad77872d3e5be8ba70e5bbb1f1d736009a9e125ac74ff5167d3de762af145"
+    },
+    {
+      "path": "tmp/p9-g3-r5/READONLY-NON-PAGES-WRITERS.json",
+      "sha256": "e0c0dcb6f7fefb228a41b66b9d5bea85cef4f179ef4e148f996600ec727d74c5"
+    },
+    {
+      "path": "tmp/p9-g3-r5/READ_ONLY-BUILD-LOG-EXCERPTS.json",
+      "sha256": "6782b64ddec8fe756e2e2548f2445c3170dd7894a5aebf76e78474e0fc759039"
+    }
+  ]
+}

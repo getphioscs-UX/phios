@@ -1,0 +1,406 @@
+<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P9 G3-R6 Production READ_ONLY Human Review</title><style>body{max-width:1100px;margin:40px auto;padding:20px;font:16px/1.6 system-ui;color:#172636}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eef2f5;padding:20px}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccd;padding:8px}strong{color:#973512}</style><h1>P9 G3-R6 · 诊断与最小修复审阅</h1><p><strong>EVIDENCE_GAPS_OPEN — 未满足 UNKNOWN=0；未自动 Human ACCEPT。</strong></p><p>R5 部署成功仅证明源码身份和发布状态。运行时 READ_ONLY、根中间件执行及 D1 包装均缺内部 trace。现有 401/403/405 是原路由响应，Webhook 的 503 是配置错误，均不是守卫拒绝证据。</p><p>最可能原因：生产构建采用 Wrangler 配置，其 vars 未包含维护变量。Cloudflare 官方将该文件定义为配置权威。该解释是有来源支持的推断，仍需私有运行时证明。</p><p>逐 URL HEAD 检查完成：3556 项；旧 Functions 可达观察 2331；其中生产 D1 绑定 2137；分类 UNKNOWN 1037。HEAD 静态结果不能证明 Function 被执行；绑定元数据不能证明实际写能力已封闭。</p><p>独立候选含生产 READ_ONLY 配置、私有认证诊断、守卫身份函数及根接线。GET/POST 本地诊断与 20 项路由测试通过，原始 D1 SQL 调用为 0。候选未应用到当前源码，也未提交、推送或部署。生产诊断 token 配置及诊断部署需单独授权。</p><p>支持的单部署 DELETE API 已核实，但撤除后的不可达语义尚未在本项目试验。建议先审阅一个无当前生产别名的确认旧入口；保存元数据与源提交，再单独批准退休试验。不能承诺恢复原 immutable URL，不进行批量删除。</p><p>不捕获最终迁移恢复点，不复核 schema 以推进 D1M1，不迁移。零生产 mutation、零 provider、零付款退款。</p><p>旧生产 D1 候选中：2 个源码确认无根守卫，3 个包含守卫，2132 个守卫源码尚未核实。精确的旧 unguarded 写能力数量仍未证实，未执行任何持久写入。</p><h2>运行记录与逐项证据</h2><pre>{
+  &quot;status&quot;: &quot;EVIDENCE_GAPS_OPEN&quot;,
+  &quot;at&quot;: &quot;2026-10-12T04:15:25.141Z&quot;,
+  &quot;currentR5Deployment&quot;: &quot;333178e5-1ed9-4435-b385-ea5139c41057&quot;,
+  &quot;acceptedSource&quot;: &quot;d49b8bc92cf53e302a6c281294a8c87a7bc04b10&quot;,
+  &quot;runtimeMaintenanceValue&quot;: &quot;RUNTIME_UNVERIFIED&quot;,
+  &quot;middlewareExecutionProof&quot;: &quot;RUNTIME_UNVERIFIED&quot;,
+  &quot;bindingWrapProof&quot;: &quot;RUNTIME_UNVERIFIED&quot;,
+  &quot;directMutationProbeResults&quot;: [
+    {
+      &quot;host&quot;: &quot;https://getphios.com&quot;,
+      &quot;path&quot;: &quot;/api/auth/login&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;status&quot;: 405,
+      &quot;cache&quot;: &quot;private, no-store&quot;,
+      &quot;body&quot;: &quot;{\&quot;ok\&quot;:false,\&quot;code\&quot;:\&quot;METHOD_NOT_ALLOWED\&quot;}&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;GUARD_DENIAL_FAILED_ROUTE_REACHED&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://getphios.com&quot;,
+      &quot;path&quot;: &quot;/api/account-persons&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;status&quot;: 401,
+      &quot;cache&quot;: &quot;private, no-store&quot;,
+      &quot;body&quot;: &quot;{\&quot;ok\&quot;:false,\&quot;code\&quot;:\&quot;ACCOUNT_REQUIRED\&quot;}&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;GUARD_DENIAL_FAILED_ROUTE_REACHED&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://getphios.com&quot;,
+      &quot;path&quot;: &quot;/api/account-persons&quot;,
+      &quot;method&quot;: &quot;PUT&quot;,
+      &quot;status&quot;: 401,
+      &quot;cache&quot;: &quot;private, no-store&quot;,
+      &quot;body&quot;: &quot;{\&quot;ok\&quot;:false,\&quot;code\&quot;:\&quot;ACCOUNT_REQUIRED\&quot;}&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;GUARD_DENIAL_FAILED_ROUTE_REACHED&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://getphios.com&quot;,
+      &quot;path&quot;: &quot;/api/account-profile-evidence&quot;,
+      &quot;method&quot;: &quot;PATCH&quot;,
+      &quot;status&quot;: 401,
+      &quot;cache&quot;: &quot;private, no-store&quot;,
+      &quot;body&quot;: &quot;{\&quot;ok\&quot;:false,\&quot;code\&quot;:\&quot;ACCOUNT_REQUIRED\&quot;}&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;GUARD_DENIAL_FAILED_ROUTE_REACHED&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://getphios.com&quot;,
+      &quot;path&quot;: &quot;/api/account-method-reports&quot;,
+      &quot;method&quot;: &quot;DELETE&quot;,
+      &quot;status&quot;: 401,
+      &quot;cache&quot;: &quot;private, no-store&quot;,
+      &quot;body&quot;: &quot;{\&quot;ok\&quot;:false,\&quot;code\&quot;:\&quot;METHOD_REPORT_UNAVAILABLE\&quot;}&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;GUARD_DENIAL_FAILED_ROUTE_REACHED&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://getphios.com&quot;,
+      &quot;path&quot;: &quot;/api/stripe-webhook&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;status&quot;: 503,
+      &quot;cache&quot;: &quot;private, no-store&quot;,
+      &quot;body&quot;: &quot;{\&quot;success\&quot;:false,\&quot;error\&quot;:\&quot;stripe_webhook_not_configured\&quot;,\&quot;message\&quot;:\&quot;The commerce service could not complete this request.\&quot;}&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;GUARD_DENIAL_FAILED_ROUTE_REACHED&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://getphios.com&quot;,
+      &quot;path&quot;: &quot;/api/account-paid-report-setup&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;status&quot;: 403,
+      &quot;cache&quot;: &quot;private, no-store&quot;,
+      &quot;body&quot;: &quot;{\&quot;ok\&quot;:false,\&quot;message\&quot;:\&quot;Your report setup could not be opened. Please sign in and check your selected details.\&quot;}&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;GUARD_DENIAL_FAILED_ROUTE_REACHED&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://getphios.com&quot;,
+      &quot;path&quot;: &quot;/api/knowledge/ask&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;status&quot;: 405,
+      &quot;cache&quot;: null,
+      &quot;body&quot;: &quot;&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;PROBE_INVALID&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/auth/login&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;status&quot;: 301,
+      &quot;cache&quot;: null,
+      &quot;body&quot;: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;301 Moved Permanently&lt;/title&gt;&lt;/head&gt;\r\n&lt;body&gt;\r\n&lt;center&gt;&lt;h1&gt;301 Moved Permanently&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;cloudflare&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;REDIRECT_MASKING&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/account-persons&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;status&quot;: 301,
+      &quot;cache&quot;: null,
+      &quot;body&quot;: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;301 Moved Permanently&lt;/title&gt;&lt;/head&gt;\r\n&lt;body&gt;\r\n&lt;center&gt;&lt;h1&gt;301 Moved Permanently&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;cloudflare&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;REDIRECT_MASKING&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/account-persons&quot;,
+      &quot;method&quot;: &quot;PUT&quot;,
+      &quot;status&quot;: 301,
+      &quot;cache&quot;: null,
+      &quot;body&quot;: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;301 Moved Permanently&lt;/title&gt;&lt;/head&gt;\r\n&lt;body&gt;\r\n&lt;center&gt;&lt;h1&gt;301 Moved Permanently&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;cloudflare&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;REDIRECT_MASKING&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/account-profile-evidence&quot;,
+      &quot;method&quot;: &quot;PATCH&quot;,
+      &quot;status&quot;: 301,
+      &quot;cache&quot;: null,
+      &quot;body&quot;: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;301 Moved Permanently&lt;/title&gt;&lt;/head&gt;\r\n&lt;body&gt;\r\n&lt;center&gt;&lt;h1&gt;301 Moved Permanently&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;cloudflare&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;REDIRECT_MASKING&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/account-method-reports&quot;,
+      &quot;method&quot;: &quot;DELETE&quot;,
+      &quot;status&quot;: 301,
+      &quot;cache&quot;: null,
+      &quot;body&quot;: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;301 Moved Permanently&lt;/title&gt;&lt;/head&gt;\r\n&lt;body&gt;\r\n&lt;center&gt;&lt;h1&gt;301 Moved Permanently&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;cloudflare&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;REDIRECT_MASKING&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/stripe-webhook&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;status&quot;: 301,
+      &quot;cache&quot;: null,
+      &quot;body&quot;: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;301 Moved Permanently&lt;/title&gt;&lt;/head&gt;\r\n&lt;body&gt;\r\n&lt;center&gt;&lt;h1&gt;301 Moved Permanently&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;cloudflare&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;REDIRECT_MASKING&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/account-paid-report-setup&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;status&quot;: 301,
+      &quot;cache&quot;: null,
+      &quot;body&quot;: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;301 Moved Permanently&lt;/title&gt;&lt;/head&gt;\r\n&lt;body&gt;\r\n&lt;center&gt;&lt;h1&gt;301 Moved Permanently&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;cloudflare&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;REDIRECT_MASKING&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/knowledge/ask&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;status&quot;: 301,
+      &quot;cache&quot;: null,
+      &quot;body&quot;: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;301 Moved Permanently&lt;/title&gt;&lt;/head&gt;\r\n&lt;body&gt;\r\n&lt;center&gt;&lt;h1&gt;301 Moved Permanently&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;cloudflare&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;REDIRECT_MASKING&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://333178e5.phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/auth/login&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;status&quot;: 405,
+      &quot;cache&quot;: &quot;private, no-store&quot;,
+      &quot;body&quot;: &quot;{\&quot;ok\&quot;:false,\&quot;code\&quot;:\&quot;METHOD_NOT_ALLOWED\&quot;}&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;GUARD_DENIAL_FAILED_ROUTE_REACHED&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://333178e5.phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/account-persons&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;status&quot;: 401,
+      &quot;cache&quot;: &quot;private, no-store&quot;,
+      &quot;body&quot;: &quot;{\&quot;ok\&quot;:false,\&quot;code\&quot;:\&quot;ACCOUNT_REQUIRED\&quot;}&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;GUARD_DENIAL_FAILED_ROUTE_REACHED&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://333178e5.phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/account-persons&quot;,
+      &quot;method&quot;: &quot;PUT&quot;,
+      &quot;status&quot;: 401,
+      &quot;cache&quot;: &quot;private, no-store&quot;,
+      &quot;body&quot;: &quot;{\&quot;ok\&quot;:false,\&quot;code\&quot;:\&quot;ACCOUNT_REQUIRED\&quot;}&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;GUARD_DENIAL_FAILED_ROUTE_REACHED&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://333178e5.phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/account-profile-evidence&quot;,
+      &quot;method&quot;: &quot;PATCH&quot;,
+      &quot;status&quot;: 401,
+      &quot;cache&quot;: &quot;private, no-store&quot;,
+      &quot;body&quot;: &quot;{\&quot;ok\&quot;:false,\&quot;code\&quot;:\&quot;ACCOUNT_REQUIRED\&quot;}&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;GUARD_DENIAL_FAILED_ROUTE_REACHED&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://333178e5.phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/account-method-reports&quot;,
+      &quot;method&quot;: &quot;DELETE&quot;,
+      &quot;status&quot;: 401,
+      &quot;cache&quot;: &quot;private, no-store&quot;,
+      &quot;body&quot;: &quot;{\&quot;ok\&quot;:false,\&quot;code\&quot;:\&quot;METHOD_REPORT_UNAVAILABLE\&quot;}&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;GUARD_DENIAL_FAILED_ROUTE_REACHED&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://333178e5.phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/stripe-webhook&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;status&quot;: 503,
+      &quot;cache&quot;: &quot;private, no-store&quot;,
+      &quot;body&quot;: &quot;{\&quot;success\&quot;:false,\&quot;error\&quot;:\&quot;stripe_webhook_not_configured\&quot;,\&quot;message\&quot;:\&quot;The commerce service could not complete this request.\&quot;}&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;GUARD_DENIAL_FAILED_ROUTE_REACHED&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://333178e5.phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/account-paid-report-setup&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;status&quot;: 403,
+      &quot;cache&quot;: &quot;private, no-store&quot;,
+      &quot;body&quot;: &quot;{\&quot;ok\&quot;:false,\&quot;message\&quot;:\&quot;Your report setup could not be opened. Please sign in and check your selected details.\&quot;}&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;GUARD_DENIAL_FAILED_ROUTE_REACHED&quot;,
+      &quot;guardProof&quot;: false
+    },
+    {
+      &quot;host&quot;: &quot;https://333178e5.phios-github.pages.dev&quot;,
+      &quot;path&quot;: &quot;/api/knowledge/ask&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;status&quot;: 405,
+      &quot;cache&quot;: null,
+      &quot;body&quot;: &quot;&quot;,
+      &quot;pass&quot;: false,
+      &quot;failureClass&quot;: &quot;PROBE_INVALID&quot;,
+      &quot;guardProof&quot;: false
+    }
+  ],
+  &quot;redirectAnalysis&quot;: {
+    &quot;at&quot;: &quot;2026-10-12T04:09:59.224Z&quot;,
+    &quot;records&quot;: [
+      {
+        &quot;source&quot;: &quot;https://phios-github.pages.dev/api/auth/login&quot;,
+        &quot;status&quot;: 301,
+        &quot;location&quot;: &quot;https://getphios.com/api/auth/login&quot;,
+        &quot;method&quot;: &quot;HEAD&quot;,
+        &quot;classification&quot;: &quot;REDIRECT_MASKING&quot;,
+        &quot;finalHostname&quot;: &quot;getphios.com&quot;,
+        &quot;finalDeployment&quot;: &quot;Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay&quot;
+      },
+      {
+        &quot;source&quot;: &quot;https://phios-github.pages.dev/api/account-persons&quot;,
+        &quot;status&quot;: 301,
+        &quot;location&quot;: &quot;https://getphios.com/api/account-persons&quot;,
+        &quot;method&quot;: &quot;HEAD&quot;,
+        &quot;classification&quot;: &quot;REDIRECT_MASKING&quot;,
+        &quot;finalHostname&quot;: &quot;getphios.com&quot;,
+        &quot;finalDeployment&quot;: &quot;Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay&quot;
+      },
+      {
+        &quot;source&quot;: &quot;https://phios-github.pages.dev/api/account-profile-evidence&quot;,
+        &quot;status&quot;: 301,
+        &quot;location&quot;: &quot;https://getphios.com/api/account-profile-evidence&quot;,
+        &quot;method&quot;: &quot;HEAD&quot;,
+        &quot;classification&quot;: &quot;REDIRECT_MASKING&quot;,
+        &quot;finalHostname&quot;: &quot;getphios.com&quot;,
+        &quot;finalDeployment&quot;: &quot;Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay&quot;
+      },
+      {
+        &quot;source&quot;: &quot;https://phios-github.pages.dev/api/account-method-reports&quot;,
+        &quot;status&quot;: 301,
+        &quot;location&quot;: &quot;https://getphios.com/api/account-method-reports&quot;,
+        &quot;method&quot;: &quot;HEAD&quot;,
+        &quot;classification&quot;: &quot;REDIRECT_MASKING&quot;,
+        &quot;finalHostname&quot;: &quot;getphios.com&quot;,
+        &quot;finalDeployment&quot;: &quot;Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay&quot;
+      },
+      {
+        &quot;source&quot;: &quot;https://phios-github.pages.dev/api/stripe-webhook&quot;,
+        &quot;status&quot;: 301,
+        &quot;location&quot;: &quot;https://getphios.com/api/stripe-webhook&quot;,
+        &quot;method&quot;: &quot;HEAD&quot;,
+        &quot;classification&quot;: &quot;REDIRECT_MASKING&quot;,
+        &quot;finalHostname&quot;: &quot;getphios.com&quot;,
+        &quot;finalDeployment&quot;: &quot;Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay&quot;
+      },
+      {
+        &quot;source&quot;: &quot;https://phios-github.pages.dev/api/account-paid-report-setup&quot;,
+        &quot;status&quot;: 301,
+        &quot;location&quot;: &quot;https://getphios.com/api/account-paid-report-setup&quot;,
+        &quot;method&quot;: &quot;HEAD&quot;,
+        &quot;classification&quot;: &quot;REDIRECT_MASKING&quot;,
+        &quot;finalHostname&quot;: &quot;getphios.com&quot;,
+        &quot;finalDeployment&quot;: &quot;Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay&quot;
+      },
+      {
+        &quot;source&quot;: &quot;https://phios-github.pages.dev/api/knowledge/ask&quot;,
+        &quot;status&quot;: 301,
+        &quot;location&quot;: &quot;https://getphios.com/api/knowledge/ask&quot;,
+        &quot;method&quot;: &quot;HEAD&quot;,
+        &quot;classification&quot;: &quot;REDIRECT_MASKING&quot;,
+        &quot;finalHostname&quot;: &quot;getphios.com&quot;,
+        &quot;finalDeployment&quot;: &quot;Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay&quot;
+      },
+      {
+        &quot;source&quot;: &quot;https://www.getphios.com/&quot;,
+        &quot;status&quot;: 301,
+        &quot;location&quot;: &quot;https://getphios.com/&quot;,
+        &quot;method&quot;: &quot;HEAD&quot;,
+        &quot;classification&quot;: &quot;REDIRECT_MASKING&quot;,
+        &quot;finalHostname&quot;: &quot;getphios.com&quot;,
+        &quot;finalDeployment&quot;: &quot;Canonical mapping requires provider metadata; no automatic unsafe redirected mutation replay&quot;
+      }
+    ],
+    &quot;priorPOSTRedirectCount&quot;: 8,
+    &quot;scope&quot;: &quot;Safe HEAD redirect topology. Exact prior eight mutation-method Location headers were not recorded; HEAD is successor evidence, not identical POST replay.&quot;
+  },
+  &quot;deploymentCount&quot;: 3556,
+  &quot;reachableOldSurfaceCount&quot;: 2331,
+  &quot;oldProductionD1CapableCount&quot;: 2137,
+  &quot;executionSurfaceMatrix&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-PAGES-EXECUTION-SURFACE-MATRIX.json&quot;,
+  &quot;unknownDeploymentClassifications&quot;: 1037,
+  &quot;unknownRuntimeProofs&quot;: [
+    &quot;maintenance value&quot;,
+    &quot;root execution&quot;,
+    &quot;downstream guarded binding&quot;,
+    &quot;per-surface runtime identity&quot;
+  ],
+  &quot;failureClassification&quot;: {
+    &quot;primary&quot;: &quot;CONFIG_NOT_PROPAGATED_SUSPECTED_NOT_INTERNAL_RUNTIME_PROVEN&quot;,
+    &quot;secondary&quot;: [
+      &quot;OLD_DEPLOYMENT_BYPASS_CAPABILITY_CONFIRMED&quot;,
+      &quot;REDIRECT_MASKING_CONFIRMED_HEAD_SUCCESSOR&quot;,
+      &quot;PROBE_INVALID_KNOWLEDGE_ROUTE&quot;,
+      &quot;MIDDLEWARE_NOT_COVERING_OR_BINDING_NOT_GUARDED_NOT_RULED_OUT&quot;
+    ]
+  },
+  &quot;requiredRemediation&quot;: {
+    &quot;current&quot;: &quot;Prepare source-controlled READ_ONLY variable plus private safe trace successor. Review exact source before commit/push/deploy.&quot;,
+    &quot;old&quot;: &quot;Select confirmed publicly reachable production-D1 Functions surface with no production alias; separately approve a single supported retirement trial; record immutable metadata/source recovery reference; after operation HEAD/GET recheck all URLs and aliases and fresh topology.&quot;,
+    &quot;massDeletion&quot;: false,
+    &quot;perDeploymentD1UnbindingSupported&quot;: &quot;NOT_VERIFIED_DO_NOT_USE&quot;,
+    &quot;aliasRemovalAloneSufficient&quot;: false,
+    &quot;restoration&quot;: &quot;Source commit plus prior binding metadata permits reviewed redeployment; does not promise restoration of the exact immutable deployment URL.&quot;,
+    &quot;rollout&quot;: &quot;Only after trial semantics proved review remaining itemized list. Never delete canonical or active production aliases.&quot;
+  },
+  &quot;sourceChangeRequired&quot;: &quot;YES_FOR_PRIVATE_TRACE_CANDIDATE; GUARD_REPAIR_NOT_YET_ESTABLISHED&quot;,
+  &quot;configChangeRequired&quot;: true,
+  &quot;topologyChangeRequired&quot;: true,
+  &quot;candidateManifest&quot;: &quot;content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-R6-REMEDIATION-CANDIDATE/MANIFEST.json&quot;,
+  &quot;providerCalls&quot;: 0,
+  &quot;providerCostUSD&quot;: 0,
+  &quot;productionMutations&quot;: 0,
+  &quot;D1Migrations&quot;: 0,
+  &quot;payments&quot;: 0,
+  &quot;refunds&quot;: 0,
+  &quot;commit&quot;: 0,
+  &quot;push&quot;: 0,
+  &quot;deploy&quot;: 0,
+  &quot;restorePoint&quot;: &quot;NOT_CAPTURED&quot;,
+  &quot;schemaGate&quot;: &quot;NOT_RECHECKED&quot;,
+  &quot;nonPagesSameD1Writers&quot;: 0,
+  &quot;remainingBlocker&quot;: &quot;P9_R6_PRIVATE_RUNTIME_TRACE_REQUIRES_REVIEWED_SUCCESSOR_AND_SEPARATE_DEPLOY_AUTHORIZATION&quot;,
+  &quot;readyForRemediationHumanReview&quot;: false,
+  &quot;reason&quot;: &quot;UNKNOWN=0 and actual runtime trace acceptance conditions not met. Local source and zero-network mock proof cannot substitute for production trace.&quot;,
+  &quot;documentation&quot;: [
+    &quot;https://developers.cloudflare.com/pages/functions/wrangler-configuration/&quot;,
+    &quot;https://developers.cloudflare.com/api/resources/pages/subresources/projects/subresources/deployments/methods/delete/&quot;
+  ]
+}</pre></html>

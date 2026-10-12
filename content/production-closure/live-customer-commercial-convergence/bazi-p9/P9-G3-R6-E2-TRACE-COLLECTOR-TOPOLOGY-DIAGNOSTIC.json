@@ -1,0 +1,206 @@
+{
+  "at": "2026-10-12T06:11:16.011Z",
+  "status": "P9_R6_E2_TRACE_TRANSPORT_NOT_PROVEN",
+  "latestPOSTClassification": "NOT_EXECUTED_DUE_TO_TRACE_COLLECTOR_NOT_READY",
+  "tailFailureCause": {
+    "proven": "Readiness predicate waits for Connected banner while Wrangler JSON format suppresses it",
+    "toolVersion": "4.120.0",
+    "source": "node_modules/wrangler/wrangler-dist/cli.js:372779",
+    "exactCommand": "node wrangler.js pages deployment tail b07d86bf-2447-4fe8-8ded-66d9fe676c81 --project-name phios-github --format json --sampling-rate 1",
+    "target": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+    "sampling": 1,
+    "searchFilter": null,
+    "immutableTarget": true,
+    "api": "/accounts/{account}/pages/projects/phios-github/deployments/{deploymentId}/tails",
+    "lastRecordedStage": "Deployment-list GET began at 05:40:19.222Z; no response/open recorded before caller killed tail",
+    "commandExit": "Tail kill requested at timeout; child exit code/signal and stderr were not persisted; UNKNOWN",
+    "authPermission": "Existing OAuth worked for project/deploy, but tail API permission success NOT_PROVEN",
+    "startupLatency": "Actual WebSocket startup latency UNKNOWN",
+    "deploymentReady": "Deployment metadata success 05:40:10.748Z; does not prove log propagation readiness",
+    "propagationRace": "POSSIBLE_UNPROVEN",
+    "publicGuardFailure": false
+  },
+  "collectorReadyContract": {
+    "transport": "Deployment-specific Pages tail API plus WebSocket trace-v1",
+    "ready": "Exact deployment ID verified; tail creation succeeds; WebSocket open event; trace-v1 debug=false initialization send callback succeeds; emit TAIL_CONNECTED for that exact ID",
+    "dispatchRule": "NO request until positive ready and harmless correlation handshake both pass",
+    "timeout": "Bounded configurable startup deadline; timeout/close/error abort dispatch; never infer readiness from alive process",
+    "alternative": "Wrangler pretty explicit Connected to deployment <exact ID> banner after OPEN; JSON mode has no banner",
+    "futureNotExecuted": true
+  },
+  "dryRunTraceResult": {
+    "status": "NOT_PROVEN_NO_HARMLESS_PRIVATE_EVENT_AVAILABLE",
+    "requestsSent": 0,
+    "handlerReached": "NOT_EXERCISED",
+    "traceEmitted": false,
+    "matchingTraceReceived": false,
+    "D1Operations": 0,
+    "reason": "Frozen private GET performs a guarded INSERT prepare; prohibited by E2 no-D1-operation handshake. No secret retained and rotation forbidden. Anonymous 503 emits no authorized private marker. No endpoint/source added."
+  },
+  "futureReplayPlan": [
+    "Verify immutable target identity and hash-bound artifact",
+    "Attach deployment-specific WebSocket collector",
+    "Require explicit OPEN and initialization send success",
+    "Send separately approved private harmless no-D1 event with correlation ID",
+    "Require matching event and deployment ID",
+    "Only with separate authorization send one bounded POST probe",
+    "Capture method defense/handler/wrapper/guard/raw forwarding",
+    "Verify zero durable mutation via precise evidence",
+    "Stop; no automatic deployment/secret retry"
+  ],
+  "GETProofPreserved": {
+    "deployment": "b7ff50ff-b675-4884-a58f-4903eafe6edb",
+    "status": "PASS_PRIOR_DEPLOYMENT_ONLY",
+    "laterDeploymentNotProven": true,
+    "earlierReceiptHashes": [
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-PRODUCTION-TRACE-EVIDENCE.json",
+        "sha256": "131c4cec9dc037261a36159ddc6fbbd5d5e903728b0ca46f171e56be625c9449"
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E1-POST-REPLAY-EVIDENCE.json",
+        "sha256": "8e5fca7b1af8bf6dbc82238c18a772f2dbe855288848396196465e1dad582142"
+      }
+    ]
+  },
+  "originalR5ConfigConclusion": "UNRESOLVED; CONFIG_NOT_PROPAGATED is not a proven primary cause",
+  "confirmedOldUnguardedSurfaces": [
+    {
+      "deploymentId": "a1f8a3ba-803d-4a0b-8234-22c4ad4459f2",
+      "url": "https://a1f8a3ba.phios-github.pages.dev",
+      "sourceRef": "62871df1fce4729f9be73e78df6d6129c8c3fba5",
+      "A_reachable": "YES_FRESH_ANONYMOUS_GET",
+      "B_functionsExecutable": "YES_ANONYMOUS_SESSION_RESPONSE",
+      "C_productionD1Bound": "YES_HISTORICAL_DEPLOYMENT_METADATA",
+      "D_rootGuardPresent": "NO_SOURCE_PROVEN",
+      "E_readOnlyEffective": "RUNTIME_UNVERIFIED",
+      "F_writePathPossible": "YES_SOURCE_POST_TO_INSERT; RUNTIME_ADMISSION_UNVERIFIED",
+      "writeCapableRoute": "/api/account-persons POST",
+      "writePrerequisites": [
+        "verified account identity",
+        "same-origin request",
+        "valid encrypted-person key",
+        "account_person_versions schema",
+        "valid payload/version"
+      ],
+      "schemaBoundary": "Existing REFERENCE_0002 evidence does not establish account_person_versions availability; do not assume INSERT can succeed",
+      "classification": "CONFIRMED_ROOT_GUARD_ABSENT_PRODUCTION_D1_BOUND_SOURCE_WRITE_PATH",
+      "strictConfirmedUnguardedRuntimeWriter": false,
+      "routeSHA256": "ccdeb6c8384fe97ce5133f2c63ff3276abd242b2f108713f9f95f15e7174e84f",
+      "consumerSHA256": "87f94ba6c79c6c349fe85b68bc634365c49004fec3cf54bf3723db0f45ef067a",
+      "freshObservation": {
+        "id": "a1f8a3ba-803d-4a0b-8234-22c4ad4459f2",
+        "url": "https://a1f8a3ba.phios-github.pages.dev",
+        "at": "2026-10-12T06:09:52.701Z",
+        "method": "GET",
+        "route": "/api/auth/session",
+        "status": 200,
+        "anonymousSessionShape": true,
+        "bodyStored": false,
+        "POSTSent": false
+      },
+      "intendedAction": "NO_ACTION",
+      "actionReason": "Hold until supported non-current production deployment retirement control is separately reviewed; preview-only Access/deletion terminology must not be assumed to cover historical production deployments",
+      "proposedControl": "Individually review Pages deployment DELETE API for this non-current production ID; never delete active/latest branch deployment; capture recovery artifact and aliases first",
+      "authority": "https://developers.cloudflare.com/api/resources/pages/subresources/projects/subresources/deployments/methods/delete/"
+    },
+    {
+      "deploymentId": "41b1c458-c79d-40e8-b47c-c2e5f4dba452",
+      "url": "https://41b1c458.phios-github.pages.dev",
+      "sourceRef": "b046b206138526ca94bb81e2ae82a7abead9c17c",
+      "A_reachable": "YES_FRESH_ANONYMOUS_GET",
+      "B_functionsExecutable": "YES_ANONYMOUS_SESSION_RESPONSE",
+      "C_productionD1Bound": "YES_HISTORICAL_DEPLOYMENT_METADATA",
+      "D_rootGuardPresent": "NO_SOURCE_PROVEN",
+      "E_readOnlyEffective": "RUNTIME_UNVERIFIED",
+      "F_writePathPossible": "YES_SOURCE_POST_TO_INSERT; RUNTIME_ADMISSION_UNVERIFIED",
+      "writeCapableRoute": "/api/account-persons POST",
+      "writePrerequisites": [
+        "verified account identity",
+        "same-origin request",
+        "valid encrypted-person key",
+        "account_person_versions schema",
+        "valid payload/version"
+      ],
+      "schemaBoundary": "Existing REFERENCE_0002 evidence does not establish account_person_versions availability; do not assume INSERT can succeed",
+      "classification": "CONFIRMED_ROOT_GUARD_ABSENT_PRODUCTION_D1_BOUND_SOURCE_WRITE_PATH",
+      "strictConfirmedUnguardedRuntimeWriter": false,
+      "routeSHA256": "ccdeb6c8384fe97ce5133f2c63ff3276abd242b2f108713f9f95f15e7174e84f",
+      "consumerSHA256": "87f94ba6c79c6c349fe85b68bc634365c49004fec3cf54bf3723db0f45ef067a",
+      "freshObservation": {
+        "id": "41b1c458-c79d-40e8-b47c-c2e5f4dba452",
+        "url": "https://41b1c458.phios-github.pages.dev",
+        "at": "2026-10-12T06:09:54.083Z",
+        "method": "GET",
+        "route": "/api/auth/session",
+        "status": 200,
+        "anonymousSessionShape": true,
+        "bodyStored": false,
+        "POSTSent": false
+      },
+      "intendedAction": "NO_ACTION",
+      "actionReason": "Hold until supported non-current production deployment retirement control is separately reviewed; preview-only Access/deletion terminology must not be assumed to cover historical production deployments",
+      "proposedControl": "Individually review Pages deployment DELETE API for this non-current production ID; never delete active/latest branch deployment; capture recovery artifact and aliases first",
+      "authority": "https://developers.cloudflare.com/api/resources/pages/subresources/projects/subresources/deployments/methods/delete/"
+    }
+  ],
+  "confirmedSourceGuardAbsentCount": 2,
+  "confirmedRuntimeWriteCapableCount": null,
+  "remainingTopologyUnknowns": {
+    "historicalDeepUnknown": 2205,
+    "unknownGuardRuntime": 1127,
+    "unknownExecutionReachability": 1078,
+    "priorityWriteAdmissionStillUnknown": 2,
+    "additionalDiagnosticDeploymentsOutside3556HistoricalMatrix": 2,
+    "currentTotalNotRequeried": true
+  },
+  "topologyPriorityList": [
+    "a1f8a3ba-803d-4a0b-8234-22c4ad4459f2",
+    "41b1c458-c79d-40e8-b47c-c2e5f4dba452"
+  ],
+  "proposedActions": {
+    "matrix": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-E2-TOPOLOGY-PRIORITY-MATRIX.json",
+    "previewAccess": {
+      "supported": true,
+      "productionHistoryCoverage": "NOT_PROVEN",
+      "source": "https://developers.cloudflare.com/pages/configuration/preview-deployments/"
+    },
+    "removeAlias": {
+      "effect": "Does not remove direct hash URL; not a closure by itself",
+      "supportedIndependentMutation": "NOT_ESTABLISHED"
+    },
+    "removeHistoricalD1Binding": {
+      "supported": "NOT_ESTABLISHED; project config change not proof old immutable deployments changed"
+    },
+    "redeployGuardedCompatibility": {
+      "effect": "Does not remove old direct URL by itself"
+    },
+    "deploymentDelete": {
+      "supportedAPI": true,
+      "individualApprovalRequired": true,
+      "activeAndLatestBranchExclusion": true,
+      "noneExecuted": true
+    }
+  },
+  "sourceChangeRequired": "Operational collector successor required; harmless private no-D1 event requires separately reviewed instrumentation unless existing equivalent is found; frozen candidate unchanged",
+  "configChangeRequired": "NOT_PROVEN_NECESSARY; no rotation performed",
+  "topologyChangeRequired": "Separate authorized closure likely required; exact risky write-admission set still open",
+  "futurePOSTReplayReady": false,
+  "traceBlocker": "No harmless private no-D1 roundtrip; collector JSON readiness predicate invalid; tail API permission/open unproven",
+  "topologyBlocker": "2 root-guard-absent source-write-path priority surfaces with runtime admission unresolved; 2205 historical deep gaps",
+  "firstRemainingBlocker": "P9_R6_E2_TRACE_TRANSPORT_NOT_PROVEN",
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "productionMutations": 0,
+  "deployments": 0,
+  "secretRotations": 0,
+  "POSTMutationProbes": 0,
+  "migrations": 0,
+  "payments": 0,
+  "refunds": 0,
+  "commits": 0,
+  "pushes": 0,
+  "frozenCandidateTree": "6b91c4be7005c6ef7545081c7a47d6338e7347be",
+  "frozenCandidateDigest": "684e7d3baef6f587e9dfd88d06035c2704d686536e42bc0d6223c505df0ed57a",
+  "STOP": true
+}

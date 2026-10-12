@@ -2,6 +2,7 @@ import {safeSources,safeGroundingBundle,customerSourceLabel,customerText,NO_SUPP
 import {resolveSelectedArticle} from '../contextual-ask/contextual-ask-runtime.js';
 import { handleKnowledgeAccessRequest } from './knowledge-access-api.js';
 import { queryTerms } from '../knowledge-runtime/manuscript-source-runtime.js';
+import {matchApprovedTerminology,bindTerminologyToEvidence} from '../knowledge-runtime/approved-terminology-context.js';
 import {normalizeAtlasRetrievalScope,retrieveAtlasScope} from './atlas-retrieval-scope.js';
 import {atlasUrlFromState} from '../../assets/js/pages/civilization-atlas/atlas-url-state.js';
 import {normalizeFormationScope,retrieveFormationScope} from './formation-retrieval-scope.js';
@@ -149,6 +150,7 @@ export function normalizeKapQuestion(intake) {
     canonicalText: text,
     searchText: searchText(text),
     tokens: queryTerms(text),
+    approvedTerminology:matchApprovedTerminology(text,intake.locale),
     hints: {
       intent: 'UNDERSTAND_KNOWLEDGE',
       questionType: questionTypeFor(text, intake.locale),
@@ -173,6 +175,7 @@ export function buildKapRetrievalRequest(normalized, options = {}) {
     authority: 'KSAR_KNOWLEDGE_ACCESS',
     endpoint: '/api/knowledge-access',
     method: 'GET',
+    approvedTerminology:normalized.approvedTerminology||[],
     params: {
       q: normalized.canonicalText,
       locale: normalized.locale,
@@ -454,10 +457,11 @@ export function buildKnowledgeGroundingBundle(options = {}) {
   let {intake,normalized,retrieval,nodeMatches,expansion}=options&&typeof options==='object'?options:{};
   intake=intake&&typeof intake==='object'?intake:{};
   normalized=normalized&&typeof normalized==='object'?normalized:{locale:'en',canonicalText:'',tokens:[],hints:{}};
-  const rawSources = safeSources(retrieval?.groundingSources).map(source => ({
-    sourceId: groundingSourceId(source),
-    ...source
+  const candidates = (Array.isArray(retrieval?.groundingSources) ? retrieval.groundingSources : []).map(source => ({
+    ...source, sourceId: groundingSourceId(source || {})
   }));
+  const sourceOrder = new Map(candidates.map((source, index) => [source.sourceId, index]));
+  const rawSources = safeSources(candidates).sort((a, b) => sourceOrder.get(a.sourceId) - sourceOrder.get(b.sourceId));
   const sources = filterPtrcSourcesByPolicy(rawSources, intake?.requestContract || null).filter(source => !(intake?.retrievalScope?.scopeType === 'CIVILIZATION_ATLAS' && source?.sourceType === 'COMPLETED_MANUSCRIPT' && source?.bookCode === 'BOOK-5'));
   const unknowns = [];
   if (intake?.retrievalScope?.bookCode === 'BOOK-5'&&!sources.some(s=>s.bookCode==='BOOK-5'&&s.sourceType==='COMPLETED_MANUSCRIPT')) {
@@ -582,6 +586,7 @@ export async function runKapGroundingPipeline({ input, request, env = {}, retrie
   const normalized = normalizeKapQuestion(intake);
   const retrieval = await retrieveKapKnowledge({ request, env, normalized, options: {...retrievalOptions,retrievalScope:intake.retrievalScope,selectedArticle:intake.surfaceContext?.articleSlug,selectedBook:intake.surfaceContext?.bookCode} });
   const nodeMatches = deriveKapNodeMatches(retrieval);
+  retrieval.sourceBoundTerminology=bindTerminologyToEvidence(normalized.approvedTerminology||[],retrieval.groundingSources||[],normalized.locale);
   const relationshipAuthority = await loadKapRelationshipAuthority(env);
   const expansion = expandKapRelationships({ nodeMatches, locale: normalized.locale, ...relationshipAuthority });
   const groundingBundle = buildKnowledgeGroundingBundle({ intake, normalized, retrieval, nodeMatches, expansion });

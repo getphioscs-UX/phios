@@ -1,0 +1,179 @@
+{
+  "startedAt": "2026-10-12T13:19:58.179Z",
+  "deletedCanaryId": "a1f8a3ba-803d-4a0b-8234-22c4ad4459f2",
+  "deleteTimestamp": "2026-10-12T12:55:17.113Z",
+  "residualClass": "DELETED_METADATA_BUT_EXECUTION_SURFACE_REACHABLE",
+  "priorRiskClassification": "CONFIRMED_UNGUARDED_PROD_D1_SURFACE",
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "productionMutations": 0,
+  "D1Mutations": 0,
+  "requests": [
+    {
+      "at": "2026-10-12T13:19:58.562Z",
+      "host": "a1f8a3ba.phios-github.pages.dev",
+      "path": "/",
+      "method": "GET",
+      "error": "TypeError"
+    },
+    {
+      "at": "2026-10-12T13:19:58.568Z",
+      "host": "a1f8a3ba.phios-github.pages.dev",
+      "path": "/api/auth/session",
+      "method": "GET",
+      "error": "TypeError"
+    },
+    {
+      "at": "2026-10-12T13:19:58.573Z",
+      "host": "a1f8a3ba.phios-github.pages.dev",
+      "path": "/api/account-persons",
+      "method": "GET",
+      "error": "TypeError"
+    },
+    {
+      "at": "2026-10-12T13:19:58.584Z",
+      "host": "41b1c458.phios-github.pages.dev",
+      "path": "/",
+      "method": "GET",
+      "error": "TypeError"
+    },
+    {
+      "at": "2026-10-12T13:19:58.590Z",
+      "host": "41b1c458.phios-github.pages.dev",
+      "path": "/api/auth/session",
+      "method": "GET",
+      "error": "TypeError"
+    },
+    {
+      "at": "2026-10-12T13:19:58.597Z",
+      "host": "41b1c458.phios-github.pages.dev",
+      "path": "/api/account-persons",
+      "method": "GET",
+      "error": "TypeError"
+    },
+    {
+      "at": "2026-10-12T13:19:58.605Z",
+      "host": "b07d86bf.phios-github.pages.dev",
+      "path": "/",
+      "method": "GET",
+      "error": "TypeError"
+    },
+    {
+      "at": "2026-10-12T13:19:58.611Z",
+      "host": "b07d86bf.phios-github.pages.dev",
+      "path": "/api/auth/session",
+      "method": "GET",
+      "error": "TypeError"
+    },
+    {
+      "at": "2026-10-12T13:19:58.617Z",
+      "host": "b07d86bf.phios-github.pages.dev",
+      "path": "/api/account-persons",
+      "method": "GET",
+      "error": "TypeError"
+    }
+  ],
+  "routingRulesAudit": [
+    {
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/access/apps?per_page=100",
+      "records": []
+    },
+    {
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets",
+      "records": []
+    },
+    {
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists",
+      "records": []
+    },
+    {
+      "path": "/zones?name=getphios.com",
+      "records": []
+    }
+  ],
+  "observationTimeline": [
+    {
+      "at": "2026-10-12T12:56:10.706Z",
+      "source": "Immutable T2 receipt",
+      "observations": [
+        {
+          "at": "2026-10-12T12:56:10.425Z",
+          "url": "https://a1f8a3ba.phios-github.pages.dev/",
+          "method": "GET",
+          "status": 200,
+          "location": null,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 12202,
+          "bodySHA256": "dce0ce90c5ef416b6dd8375200731725de2298c8f446e3bb5441eefd82499903",
+          "anonymousSession": false,
+          "historicalApplicationResponse": false,
+          "providerMarker": false,
+          "bodyStored": false,
+          "secretHeadersUsed": false
+        },
+        {
+          "at": "2026-10-12T12:56:09.646Z",
+          "url": "https://a1f8a3ba.phios-github.pages.dev/api/auth/session",
+          "method": "GET",
+          "status": 200,
+          "location": null,
+          "contentType": "application/json",
+          "bodyBytes": 77,
+          "bodySHA256": "b71b0f31773379c546509f2f8a1ad6b96b8f8af78479d5598e94ad1e1d73af57",
+          "anonymousSession": true,
+          "historicalApplicationResponse": true,
+          "providerMarker": false,
+          "bodyStored": false,
+          "secretHeadersUsed": false
+        },
+        {
+          "at": "2026-10-12T12:56:10.703Z",
+          "url": "https://a1f8a3ba.phios-github.pages.dev/api/account-persons",
+          "method": "GET",
+          "status": 401,
+          "location": null,
+          "contentType": "application/json",
+          "bodyBytes": 38,
+          "bodySHA256": "9b843b8bcbcc0c554e0f6825f71fa4a7881690f2cdb18c2b8b9956959145b2e3",
+          "anonymousSession": false,
+          "historicalApplicationResponse": true,
+          "providerMarker": false,
+          "bodyStored": false,
+          "secretHeadersUsed": false
+        }
+      ]
+    }
+  ],
+  "sourceControl": {
+    "HEAD": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+    "index": ""
+  },
+  "project": {},
+  "inventory": {
+    "count": 0,
+    "complete": false,
+    "canary1Present": false,
+    "canary2Present": false
+  },
+  "apiListAbsent": false,
+  "detailAPI": {},
+  "detail404": false,
+  "tailHistoryAvailability": {
+    "history": {},
+    "tail": "NOT_CREATED: no production POST or operational subscription mutation in this read-only investigation; exact attachability remains gap"
+  },
+  "dns": [
+    {
+      "host": "a1f8a3ba.phios-github.pages.dev",
+      "error": "ENOTFOUND"
+    },
+    {
+      "host": "41b1c458.phios-github.pages.dev",
+      "error": "ENOTFOUND"
+    },
+    {
+      "host": "b07d86bf.phios-github.pages.dev",
+      "error": "ENOTFOUND"
+    }
+  ]
+}

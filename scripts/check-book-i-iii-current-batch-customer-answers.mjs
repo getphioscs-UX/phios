@@ -1,7 +1,7 @@
 import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';import {build} from 'esbuild';
 const root='tools/review/free-ask-manuscript-r1/',sha=x=>crypto.createHash('sha256').update(x).digest('hex');
 const productionMetadata=process.argv.includes('--production-metadata');
-const registry=JSON.parse(fs.readFileSync('content/knowledge/source-access/registries/manuscript-knowledge-source-registry-'+(process.argv.includes('--release-baseline')?'v10.json':process.argv.includes('--whole-batch')?'v9-candidate.json':productionMetadata?'v7.json':'v7-candidate.json')));
+const registry=JSON.parse(fs.readFileSync('content/knowledge/source-access/registries/manuscript-knowledge-source-registry-'+(process.argv.includes('--bounded-explanation')?'v12-candidate.json':process.argv.includes('--release-baseline')?'v10.json':process.argv.includes('--whole-batch')?'v9-candidate.json':productionMetadata?'v7.json':'v7-candidate.json')));
 if(process.argv.includes('--third-current')){
  const thirdCandidate=JSON.parse(fs.readFileSync('content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v6-candidate.json')).records.find(r=>r.bookCode==='BOOK-3');
  registry.records[registry.records.findIndex(r=>r.bookCode==='BOOK-3')]=thirdCandidate;

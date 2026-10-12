@@ -54,6 +54,12 @@ function jsonFiles(directory) {
     }
 
     const absolutePath = path.join(directory, entry.name);
+    const relativePath = path.relative(root, absolutePath).replaceAll(path.sep, '/');
+    // Isolated P9 QA snapshots have intentionally partial source closures.
+    // Match only the precise local-artifact roots excluded by .gitignore.
+    if (entry.isDirectory() && /^tmp\/(?:p9-d1i1|p9-d1m1|p9-d1r1-[^/]*|p9g3|p9r02)$/.test(relativePath)) {
+      continue;
+    }
 
     if (entry.isDirectory()) {
       output.push(...jsonFiles(absolutePath));

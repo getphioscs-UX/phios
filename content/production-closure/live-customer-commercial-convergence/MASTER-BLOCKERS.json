@@ -2759,5 +2759,113 @@
       "evidence": "tools/review/entry-recovery-r1/FINAL-UNTUNED-RESULTS.json",
       "scope": "Internal finite bilingual acceptance, not universal coverage"
     }
+  },
+  "membershipAskCreditR1": [
+    {
+      "id": "CURRENT_BUILD_IDENTITY",
+      "state": "BLOCKED",
+      "kind": "LOCAL_BUILD",
+      "evidence": "tools/review/membership-ask-credit-r1/BUILD-RECEIPT.json",
+      "missing": "Compiled output exists but build input identity must match the current relevant dependency manifest; changed files are listed below.",
+      "next": "Preserve concurrent source changes; rerun only affected consumers before a stable build. Do not use old output identity as PASS."
+    },
+    {
+      "id": "CREDIT_CUTOVER_AND_MIGRATION",
+      "state": "PARTIAL",
+      "kind": "SOURCE_AND_GOVERNANCE",
+      "evidence": "tools/review/membership-ask-credit-r1/CUTOVER-COMPATIBILITY-TESTS.json",
+      "missing": "Read-only old/new spend and pending-reservation reconciliation passed QA; resubscription preserves old units. Production balances were not read. A unique migration sequence and dispatch fencing must be approved and applied before switching; no concurrent dispatch allowed.",
+      "next": "Register additive schema and reconcile a read-only production snapshot when authorized; drain unknown/pending usage, preserve grants, then enable exactly one dispatcher. Rollback disables both while retaining all ledger rows."
+    },
+    {
+      "id": "NAVIGATION_SOURCE_CONSUMERS",
+      "state": "PARTIAL",
+      "kind": "SOURCE",
+      "evidence": "functions/personal-reading/continuity/membership-navigation-pack.js",
+      "missing": "BaZi saved Navigation owner/consent/version/report/included-benefit bridge tested with synthetic fixtures. Real saved-context browser delivery is not proved. Relationship/Profile/Financial prose adapters are not wired. My Reality saved-source projection remains QA-gated.",
+      "next": "Reuse each actual owner and approved native projection; add adapters and test the same persisted-object chain. Do not fabricate completed Navigation."
+    },
+    {
+      "id": "CURRENT_FACTS_RESEARCH",
+      "state": "BLOCKED",
+      "kind": "SOURCE_AND_RUNTIME",
+      "evidence": "functions/current-facts-gateway/current-facts-gateway.js",
+      "missing": "Repo has gateway and source admission, but current endpoint/host configuration is unverified, tool cost is not recorded into this task workflow, jurisdiction and freshness customer cases are unproved; gateway also lacks a bounded request timeout.",
+      "next": "Validate the existing service configuration, priced tool receipts, timeouts, freshness/jurisdiction and failure states before enabling research. Research remains denied."
+    },
+    {
+      "id": "EN_MODEL_ANSWER_QUALITY",
+      "state": "PARTIAL",
+      "kind": "SOURCE",
+      "evidence": "tools/review/membership-ask-credit-r1/FRAGMENT-PAID-QUALITY-REVIEW.json",
+      "missing": "Four real English outputs now reviewed: two limited passes, one minor grammar partial, one invalid-reference failure. English manuscript acceptance and broad English coverage not established.",
+      "next": "Preserve Chinese-source disclosure, failed Terra IDs and Luna grammar output; further English cases need separate model authorization.",
+      "historicalEvidence": "tools/review/membership-ask-credit-r1/BROWSER-EVIDENCE.json"
+    },
+    {
+      "id": "MODEL_DELIVERY_AND_PURCHASE_SCOPE",
+      "state": "NOT_RUN",
+      "kind": "SOURCE",
+      "evidence": "functions/personal-reading/continuity/membership-authority-pack.js",
+      "missing": "Permission-checked chapter description is implemented and browser-tested; PDF support positions do not create a PDF link. Related book information is separate from the answer. Model delivery and actual book checkout are not activated or proved.",
+      "next": "Use actual14-call semantic/citation failures to repair candidate offline; production member execution, credit settlement and checkout still require independent admission and activation evidence."
+    },
+    {
+      "id": "EXPERIMENT_RETRIEVAL_AND_CITATION_DELIVERY",
+      "state": "PARTIAL",
+      "kind": "SOURCE_AND_ANSWER_QUALITY",
+      "evidence": "tools/review/membership-ask-credit-r1/FRAGMENT-PAID-QUALITY-REVIEW.json",
+      "missing": "Original20 preserved, original contract0 deliverable. New fragment experiment14 calls completed at USD0.0679152 including cache writes; 8 limited agent-reviewed passes, 2 partial, 4 failures. Luna qualifier weakening/unsupported extrapolation and Terra two long-ID failures remain. Model experiment is not customer commercial delivery.",
+      "next": "Prepare short pack-local source IDs and qualifier/inference review offline; retain all failures. Fourteen-call authorization exhausted; any new call needs independent authorization.",
+      "historicalEvidence": "tools/review/membership-ask-credit-r1/PAID-EXPERIMENT-QUALITY-REVIEW.json"
+    },
+    {
+      "id": "SEVEN_BOOK_SOURCE_SCOPE",
+      "state": "PARTIAL",
+      "kind": "SOURCE_AND_CONTENT",
+      "evidence": "tools/review/free-ask-manuscript-r1/SEVEN-BOOK-CHAPTER-QUALITY-AUDIT.json",
+      "missing": "982-chapter whole closure remains incomplete. Original 12 packs retained, but five Book V packs lack accepted derivative provenance in the stricter member candidate. OCR/cross-book/other unaccepted content remain isolated.",
+      "next": "Complete source-dependent quality scopes and provenance without re-extracting unchanged sources; do not equate an experiment with all-seven-book completion."
+    }
+  ],
+  "membershipMergedShortPaidExperimentR1": {
+    "evidence": "tools/review/membership-ask-credit-r1/MERGED-PAID-QUALITY-REVIEW.json",
+    "experiment": "COMPLETE_14_CALLS_USD0.0505054; NOT_PRODUCTION_ACTIVATION",
+    "remaining": [
+      {
+        "id": "DAMAGE_RECOVERY_SOURCE_SCOPE",
+        "state": "PARTIAL_SOURCE_COVERAGE",
+        "reason": "Permitted manuscript pack supports maintenance/repair and general adaptive recovery, not a universal post-damage recovery definition; Book IV S120 not promoted"
+      },
+      {
+        "id": "SEMANTIC_DELIVERY_GATE",
+        "state": "CANDIDATE_NOT_PRODUCTION_VERIFIED",
+        "reason": "Luna damage-recovery extrapolation remains; exact IDs alone do not establish semantic support"
+      },
+      {
+        "id": "SHORT_ANSWER_CREDIT_DISPATCH",
+        "state": "PARTIAL_LOCAL_STORAGE_QA",
+        "reason": "Existing balance owner stores/reopens natural answer and binding in synthetic QA; automatic model dispatch not activated"
+      },
+      {
+        "id": "RELATIONSHIP_AND_OTHER_REPORT_OWNERS",
+        "state": "PARTIAL",
+        "reason": "Profile/Financial existing encrypted-owner QA retained; Relationship private narrative owner and non-BaZi report adapters pending"
+      },
+      {
+        "id": "COMMERCIAL_CUTOVER",
+        "state": "NOT_AUTHORIZED",
+        "reason": "No production migration, membership activation or deployment"
+      }
+    ]
+  },
+  "membershipFullDeliveryQA": {
+    "sourceEvidence": "tools/review/membership-ask-credit-r1/FULL-DELIVERY-QA-STATE.json",
+    "zeroCallChecks": 10,
+    "actualModelDelivery": "NOT_RUN_NEW_GRANT_REQUIRED",
+    "semanticGate": "DIAGNOSTICS_ONLY_NO_ENTAILMENT_GUARANTEE",
+    "sourceGap": "BOOK7_INITIAL_CHINESE_NATURAL_EXPRESSION_NOT_RECALLED",
+    "consumerGap": "PROFILE_FINANCIAL_PREVIEW_ONLY; RELATIONSHIP_OWNER_MISSING",
+    "production": "NO_DEPLOYMENT_MIGRATION_OR_ACTIVATION"
   }
 }
