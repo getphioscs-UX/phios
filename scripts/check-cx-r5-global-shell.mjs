@@ -1,3 +1,6 @@
+import {walk as walkCustomerSources} from './lib/customer-experience-rebuild/cx-r1-guards.mjs';
+import crypto from 'node:crypto';
+import {CX_NAVIGATION} from '../assets/customer-ui/js/navigation.js';
 import {currentFooterLogo} from './lib/branding-footer-successor.mjs';
 const footerLogo=currentFooterLogo();
 import assert from 'node:assert/strict';
@@ -50,8 +53,22 @@ assert.equal(acceptance.rules.readyForCxR6Homepage, true);
 // W0/W1 — one shared implementation and the R2-frozen global IA.
 assert.deepEqual(authority.primaryNavigation, ia.primaryNavigation);
 assert.deepEqual(authority.utilities, ia.utilities);
+const currentNavigationPath='content/web/index-surfaces/pis-r1-world-about-navigation-successor-v2.json';
+if(exists(currentNavigationPath)){
+ const current=readJson(currentNavigationPath);assert.equal(current.status,'ENGINEERING_RECONCILIATION');
+ for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(current[key],false);
+ assert.equal(current.predecessor.path,'content/web/index-surfaces/pis-r1-navigation-successor-v1.json');
+ assert.equal(crypto.createHash('sha256').update(fs.readFileSync(current.predecessor.path)).digest('hex'),current.predecessor.sha256);
+ const ids={world:'WORLD',about:'ABOUT',reality:'MY_REALITY',perspectives:'PERSPECTIVES',knowledge:'KNOWLEDGE',professional:'PROFESSIONAL'};
+ const expected=current.primaryNavigation.map(item=>({id:ids[item.id],href:item.href}));
+ assert.ok(expected.every(item=>item.id),'Unknown current navigation authority item');
+ const sort=items=>items.toSorted((a,b)=>a.id.localeCompare(b.id));
+ assert.deepEqual(sort(CX_NAVIGATION.primary.map(({id,href})=>({id,href}))),sort(expected));
+ for(const item of CX_NAVIGATION.primary)assert.ok(item.en&&item.zh,'Navigation requires bilingual labels: '+item.id);
+}else{
 for (const label of ['Explore', 'My Reality', 'Perspectives', 'Knowledge', 'Professional']) {
   assert.ok(navigation.includes(label), `primary navigation missing ${label}`);
+}
 }
 for (const label of ['Search', 'Ask PHI OS', 'Account']) assert.ok(navigation.includes(label), `utility navigation missing ${label}`);
 for (const forbidden of ['REALITY_JOURNEY', 'READINGS', 'SERVICES', 'ACADEMY', 'REPORTS', 'FINANCIAL', 'BOOKS']) {
@@ -102,7 +119,7 @@ assert.equal(contract.rules.accountStateIsPresentationOnly, true);
 
 // W6 — one meaningful footer uses the R4 footer logo and continuation destinations.
 assert.match(shell, /data-cx-shell-region=\"footer\"/);
-for (const href of ['/explore/', '/reality/', '/perspectives/', '/knowledge/', '/search/', currentAskPath, '/professional/', '/account/']) {
+for (const href of [exists(currentNavigationPath)?'/about/founder/':'/explore/', '/reality/', '/perspectives/', '/knowledge/', '/search/', currentAskPath, '/professional/', '/account/']) {
   const literalHref = `href=\"${href}\"`;
   const footerBinding = `footerLink('${href}'`;
   assert.ok(shell.includes(literalHref) || shell.includes(footerBinding), `shared footer/shell missing continuation destination ${href}`);
@@ -117,16 +134,7 @@ assert.equal(shell.includes('data-cx-locale=\"en\"'), true);
 assert.equal(shell.includes('data-cx-locale=\"zh-Hans\"'), true);
 
 // W8 — every current clean-room shell consumer uses the same placeholders/module and no predecessor shell.
-const htmlFiles = [];
-const walk = dir => {
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (['node_modules', '.git', '.wrangler', '.cache'].includes(entry.name)) continue;
-    const abs = path.join(dir, entry.name);
-    if (entry.isDirectory()) walk(abs);
-    else if (entry.name.endsWith('.html')) htmlFiles.push(path.relative(root, abs).replaceAll(path.sep, '/'));
-  }
-};
-walk(root);
+const htmlFiles = walkCustomerSources('.', rel => rel.endsWith('.html'));
 const consumers = htmlFiles.filter(rel => readText(rel).includes('/assets/customer-ui/js/shell.js'));
 assert.ok(consumers.length >= 10, `unexpectedly small CX shell consumer set: ${consumers.length}`);
 for (const rel of consumers) {

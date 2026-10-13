@@ -255,6 +255,19 @@
       "successorSha256": "5a52c5519ba22b3fecff9845a736866c651d0277c820c22f4b540c10284ce0c5",
       "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-corpus-permission-denial.js",
       "changeClass": "Explicit MANUSCRIPT_CORPUS_PERMISSION_DENIED when admission-gated R2 retrieval returns null; avoids null corpus access and preserves fail-closed source denial, existing authority and provider boundaries"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "5a52c5519ba22b3fecff9845a736866c651d0277c820c22f4b540c10284ce0c5",
+      "successorSha256": "ba31968b32ca732ef078e3d7201dfa7dec05d1ef4e647822a60e0838883fb583",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-reviewed-experiment-fragments.js",
+      "changeClass": "Reviewed corpora without scope adapters gain local isolated capability-bound fragments; exact section digest, offset and fragment-byte hash checks required; fragments-only retrieval and existing human review retained; no production activation or provider dispatch",
+      "dependencies": [
+        {
+          "path": "functions/knowledge-runtime/manuscript-experiment-access.js",
+          "sha256": "4e546c39df4b327af8ae891e8c52b55fe16c5af81acbf38014a8a807d45432cf"
+        }
+      ]
     }
   ]
 }

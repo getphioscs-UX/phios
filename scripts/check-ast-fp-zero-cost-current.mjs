@@ -94,7 +94,14 @@ for(const row of current.protectedFileReconciliation){
   assert.equal(v7.previousSha256,v6.sha256);
   assert.equal(hash(fs.readFileSync(v7.previousPath,'utf8').replace(/\r\n/g,'\n')),v7.previousSha256);
   for(const key of ['historicalFreezeRewritten','astMeaningAuthorityChanged','productionAcceptanceGranted'])assert.equal(v7[key],false);
-  assert.equal(hash(normalized),v7.sha256,`Current shared manuscript runtime changed: ${row.path}`);
+  const v8=read('content/professional/ast-full-production/acceptance/ast-shared-manuscript-runtime-successor-v8.json');
+  assert.equal(v8.status,'ENGINEERING_RECONCILIATION');assert.equal(v8.path,row.path);
+  assert.equal(v8.predecessorPath,'content/professional/ast-full-production/acceptance/ast-shared-manuscript-runtime-successor-v7.json');
+  assert.equal(hash(fs.readFileSync(v8.predecessorPath,'utf8').replace(/\r\n/g,'\n')),v8.predecessorSha256);
+  assert.equal(v8.previousSha256,v7.sha256);
+  assert.equal(hash(fs.readFileSync(v8.previousPath,'utf8').replace(/\r\n/g,'\n')),v8.previousSha256);
+  for(const key of ['historicalFreezeRewritten','astMeaningAuthorityChanged','productionAcceptanceGranted'])assert.equal(v8[key],false);
+  assert.equal(hash(normalized),v8.sha256,`Current shared manuscript runtime changed: ${row.path}`);
  }else assert.equal(hash(normalized),row.currentSha256,`Current protected file changed: ${row.path}`);
  if(row.currentSha256!==row.main2211Sha256)assert.ok(['AST_FP_EXPLICIT_SUCCESSOR','SHARED_MAIN_SUCCESSOR'].includes(row.changeCategory),`Unsupported protected successor category: ${row.path}`);
 }

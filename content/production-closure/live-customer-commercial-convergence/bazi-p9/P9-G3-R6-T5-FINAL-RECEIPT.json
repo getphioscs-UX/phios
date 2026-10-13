@@ -1,0 +1,60 @@
+{
+  "status": "REDIRECT_VISIBLE_BUT_PRE_HANDLER_CONTAINMENT_UNPROVEN",
+  "canary2ID": "41b1c458-c79d-40e8-b47c-c2e5f4dba452",
+  "canary2Host": "41b1c458.phios-github.pages.dev",
+  "activeProductionBefore": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+  "rulesetID": "e4920e8f14574ec9abce2fbe9d764056",
+  "newListID": "d049cc55bb5f4c1a9223619886c3745b",
+  "newItemID": "2c54f18d5bcd419ebafaff613a5807aa",
+  "newRuleID": "66f4b7cbcabe40b38a4b8fab0b1eb697",
+  "rulesetVersion": "3",
+  "rulePosition": 3,
+  "exactHostScopeConfirmed": true,
+  "redirectObserved": "6/6 post-propagation GET/HEAD 307; paths/query preserved; redirect following disabled",
+  "traceMatchConfirmed": false,
+  "preHandlerContainment": "UNPROVEN",
+  "oldFunctionsExecutionObserved": "UNVERIFIED_NO_HANDLER_TRACE",
+  "getphiosHealthy": true,
+  "activeProductionAfter": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+  "otherHashHostsAffected": "NO_IN_TWO_TESTED_CONTROLS; exact expression excludes every other hostname",
+  "rollbackRequired": false,
+  "rollbackResult": "NOT_EXECUTED_NO_UNEXPECTED_EFFECT_OBSERVED",
+  "newRuleEnabled": true,
+  "rollback": {
+    "first": {
+      "method": "DELETE",
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/e4920e8f14574ec9abce2fbe9d764056/rules/66f4b7cbcabe40b38a4b8fab0b1eb697",
+      "scope": "Only new rule, no full ruleset replacement"
+    },
+    "verify": "Canary returns pre-test behavior, original two rules/order and canonical availability retained",
+    "then": {
+      "method": "DELETE",
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/d049cc55bb5f4c1a9223619886c3745b",
+      "condition": "Only after fresh read proves no remaining rule references dedicated list; STOP on unexpected reference"
+    }
+  },
+  "zoneLBVisibility": "OPEN_NON_BLOCKING_SINGLE_CANARY_ONLY",
+  "writePermissionsUsed": [
+    "Account Filter Lists Edit",
+    "Bulk URL Redirects Edit"
+  ],
+  "productionMutations": 3,
+  "mutationBreakdown": [
+    "Create one list",
+    "Create one item",
+    "Add one rule"
+  ],
+  "D1Mutations": 0,
+  "D1MutationBasis": "No D1 API or SQL operation performed; this is operation accounting, not a database-wide write audit",
+  "providerCalls": 0,
+  "costUSD": 0,
+  "payments": 0,
+  "refunds": 0,
+  "D1MigrationStatus": "NOT_AUTHORIZED_NOT_EXECUTED",
+  "tokenValueRecorded": false,
+  "productionD1WriteIsolation": "UNPROVEN",
+  "wildcardRollout": "NOT_AUTHORIZED",
+  "firstRemainingBlocker": "EXACT_PAGES_DEV_HASH_RULE_EXECUTION_TRACE_IDENTITY_UNAVAILABLE",
+  "indexEmpty": true,
+  "HEAD": "9f25c5da3ae69db27023cc661febe8f7bdaaeedc"
+}

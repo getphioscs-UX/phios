@@ -1,0 +1,209 @@
+{
+  "at": "2026-10-12T15:28:38.582Z",
+  "state": "PREPARED_UNRESOLVED_HISTORY_NOT_READY_FOR_PRODUCTION",
+  "cloudSnapshotAt": "2026-10-12T14:43:05.991Z",
+  "binding": "RUNTIME_DB",
+  "account": "0b9f36bdf56f38d7d09aebe388f15204",
+  "observedDatabases": [
+    {
+      "name": "phios-runtime-production",
+      "id": "073639fa-01e4-4868-af10-6ed032637dab",
+      "tableCount": 16,
+      "observedCounts": {},
+      "artifactTypes": [
+        {
+          "artifact_type": "system_capability_authority",
+          "rows": 2
+        }
+      ],
+      "appliedMigrations": [
+        {
+          "name": "0001_platform_foundation.sql"
+        },
+        {
+          "name": "0002_initial_runtime.sql"
+        }
+      ]
+    },
+    {
+      "name": "phios-runtime-sandbox",
+      "id": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+      "tableCount": 63,
+      "observedCounts": {
+        "commerce_subscriptions": 0,
+        "commerce_purchases": 1,
+        "commerce_checkout_attempts": 2
+      },
+      "artifactTypes": [
+        {
+          "artifact_type": "BAZI_T3_SHADOW_V1",
+          "rows": 19
+        },
+        {
+          "artifact_type": "RNT2_CSD_REVIEW_AUDIT",
+          "rows": 20
+        },
+        {
+          "artifact_type": "RNT2_S02_REVIEW",
+          "rows": 2
+        },
+        {
+          "artifact_type": "RNT2_S03_REVIEW",
+          "rows": 2
+        },
+        {
+          "artifact_type": "RNT2_S04_REVIEW",
+          "rows": 17
+        },
+        {
+          "artifact_type": "RNT2_S05_REVIEW",
+          "rows": 2
+        },
+        {
+          "artifact_type": "ZWR_CONTROLLED_RELEASE_MATERIAL_V1",
+          "rows": 6
+        }
+      ],
+      "appliedMigrations": [
+        {
+          "name": "0001_platform_foundation.sql"
+        },
+        {
+          "name": "0002_initial_runtime.sql"
+        },
+        {
+          "name": "0003_financial_professional_infrastructure.sql"
+        },
+        {
+          "name": "0004_book_commerce.sql"
+        },
+        {
+          "name": "0005_pws_universal_registry.sql"
+        },
+        {
+          "name": "0006_commerce_stripe_r1.sql"
+        },
+        {
+          "name": "0007_account_oidc_sessions.sql"
+        },
+        {
+          "name": "0008_financial_will_encrypted_drafts.sql"
+        }
+      ]
+    }
+  ],
+  "conclusion": "Correct binding; absent production Commerce/cost/quota/task tables are a missing schema observation, not proof of empty historical customer entitlement.",
+  "historicalOwners": [
+    {
+      "owner": "commerce_subscriptions/commerce_purchases/commerce_checkout_attempts",
+      "source": "functions/commerce/commerce-stripe-events.js",
+      "state": "PRODUCTION_SCHEMA_ABSENT_RECORD_LINKAGE_UNVERIFIED",
+      "next": "Identify verified customer purchase/invoice/refill provenance before granting"
+    },
+    {
+      "owner": "provider_product_cost_entries",
+      "source": "functions/provider-cost/product-cost-envelope.js",
+      "state": "PRODUCTION_SCHEMA_ABSENT_SPEND_AND_PENDING_UNVERIFIED",
+      "next": "Resolve settled and unknown usage before switch; never treat unmetered as zero"
+    },
+    {
+      "owner": "runtimes/runtime_artifacts",
+      "source": "functions/personal-reading/continuity/continuity-persistence-d1.js",
+      "state": "OBSERVED_TYPES_NOT_CREDIT_GRANTS",
+      "next": "Observed production artifact types only system_capability_authority; do not convert these into customer balances. Any additional historical source requires explicit type/provenance classification"
+    },
+    {
+      "owner": "functions/membership/membership-contract.js",
+      "state": "INFORMATIONAL_TIERS_NOT_AUTHORITATIVE_WALLET",
+      "next": "Do not issue Credits from tier journey_quota fields"
+    },
+    {
+      "owner": "account_report_followup_questions",
+      "state": "EXISTING_REPORT_BENEFIT_KEEP_SEPARATE",
+      "next": "Use original report follow-up endpoint before reserving membership Credits"
+    }
+  ],
+  "unknownRecords": "NO_RECORD_LEVEL_COUNT_ASSERTED_WHERE_SCHEMA_IS_ABSENT; do not clear/regrant",
+  "implementation": {
+    "readOnlyInventory": "functions/personal-reading/continuity/continuity-legacy-credit-inventory.js",
+    "ownerAudit": "functions/personal-reading/continuity/continuity-credit-cutover.js",
+    "newRoute": "/api/membership-ask POST EXECUTE KNOWLEDGE ORDINARY",
+    "fence": "PHIOS_CONTINUITY_DISPATCHER=CREDIT_V1 rejects old invokeContinuityProvider; new readiness rejects legacy provider enabled",
+    "purchaseIdempotency": "continuity_quota_units.grant_source_id UNIQUE + verified purchase identity",
+    "taskIdempotency": "continuity_ask_tasks task primary key, exact request/context binding + atomic claim",
+    "money": "integer microUSD, FIFO multi-unit allocations, actual charged spend, zero charge nondelivery",
+    "expiry": "Active subscription required for new calls; grants and saved answers retained; no period-reset SQL"
+  },
+  "migrationRegistry": "content/registry/runtime-migrations.json",
+  "activeMax": 18,
+  "candidates": [
+    {
+      "version": 19,
+      "name": "continuity_quota_units",
+      "file": "db/migration-candidates/0019_continuity_quota_units_successor.sql",
+      "status": "PREPARED_NOT_ACCEPTED_NOT_ACTIVE",
+      "predecessor": "db/migration-candidates/0018_continuity_quota_units.sql",
+      "predecessorSha256": "0963a4c4d471a6dcf3b3d0386a32795aa4188c6aca40a9214262d8f356e63b67",
+      "checksum": "18c75d03d8fee693d1ed8c64117b37ecbe4d4af252170b43d556617a6536fe3c",
+      "byteSha256": "ef15a3959f4f41838b780c8fd53115938dcf7f4571064df878216ea1d0c2dfb2",
+      "dependsOn": [
+        18
+      ],
+      "activationRequires": "SCHEMA_DEPENDENCY_RECONCILIATION_AND_EXPLICIT_PRODUCTION_MIGRATION_AUTHORIZATION"
+    },
+    {
+      "version": 20,
+      "name": "continuity_ask_credit_allocations",
+      "file": "db/migration-candidates/0020_continuity_ask_credit_allocations_successor.sql",
+      "status": "PREPARED_NOT_ACCEPTED_NOT_ACTIVE",
+      "predecessor": "db/migration-candidates/0019_continuity_ask_credit_allocations.sql",
+      "predecessorSha256": "80b9b94d50b6f9b1979c0fa5f86f66548910538b2e11f04781340edbf81503af",
+      "checksum": "cf228d322c06620b9e39262c3ce855e0798dd25feadb02f8636745356d72f63a",
+      "byteSha256": "e344964f8077bfc9d8f331215d6d9c64cee15addd2da2d04fa002ac4630489f0",
+      "dependsOn": [
+        19
+      ],
+      "activationRequires": "SCHEMA_DEPENDENCY_RECONCILIATION_AND_EXPLICIT_PRODUCTION_MIGRATION_AUTHORIZATION"
+    },
+    {
+      "version": 21,
+      "name": "continuity_zero_call_outcomes",
+      "file": "db/migration-candidates/0021_continuity_zero_call_outcomes_successor.sql",
+      "status": "PREPARED_NOT_ACCEPTED_NOT_ACTIVE",
+      "predecessor": "db/migration-candidates/0020_continuity_zero_call_outcomes.sql",
+      "predecessorSha256": "e4233314d1556861129f98da6c9b2539fac07cbc9182e62d8d30b7cb7c8211e0",
+      "checksum": "0cedacd4dc0b3b752b863c6d4d11b9fdefc258ea9e0462001b89a184b69a903c",
+      "byteSha256": "a7924d623695a7414785ab75ecf7d2910780c23b23201bbcd704725be088f619",
+      "dependsOn": [
+        20
+      ],
+      "activationRequires": "SCHEMA_DEPENDENCY_RECONCILIATION_AND_EXPLICIT_PRODUCTION_MIGRATION_AUTHORIZATION"
+    }
+  ],
+  "executionOrder": "Reconcile current applied/schema history for formal 0003–0018 first; then promote accepted candidates 19→20→21. No bypass of sequential migration runner.",
+  "configCandidate": {
+    "PHIOS_MEMBERSHIP_ASK_CREDIT_ENABLED": "false",
+    "PHIOS_MEMBERSHIP_KNOWLEDGE_EXECUTION_ENABLED": "false",
+    "PHIOS_CONTINUITY_DISPATCHER": "CLOSED",
+    "PHIOS_CONTINUITY_PROVIDER_ENABLED": "false",
+    "PHIOS_MEMBERSHIP_MODEL_CALIBRATION": "UNVALIDATED",
+    "PHIOS_MEMBERSHIP_COST_PROFILE": "UNVALIDATED"
+  },
+  "steps": [
+    "Record actual bound database, source/config and data backup identities",
+    "Classify verified purchases/renewals, settled fees, pending reservations and legacy artifacts; unresolved liabilities block switch",
+    "Review candidate checksums and sequential prerequisite schema; promote candidates only after human governance and production authorization",
+    "Rehearse cutover on copied synthetic/authorized QA data; compare grant identities, spend and pending totals; do not regrant",
+    "Deploy one validated Worker + source registry + unchanged shared P9 configuration with all execution/grant activation off",
+    "Explicit approval activates only Knowledge scope and CREDIT_V1 route after live membership/source/storage smoke"
+  ],
+  "rollback": [
+    "If saved customers exist, keep the storage/read feature on while switching execution and old provider flags off; do not disable GET saved-answer access",
+    "Disable both execution routes first; preserve all grants, settled costs, reservations and answers",
+    "Use read-only mode on the current credit-aware artifact as the immediate rollback; do not restore old quota calculations or old balance snapshots",
+    "Only restore an earlier Worker after proving it reads current credit/task records or maintain the current reader; compatibility is an explicit rollback gate",
+    "Never DROP quota/task tables, replay grants or erase platform incurred costs; unknown usage is reconciled before resuming"
+  ],
+  "providerCalls": 0,
+  "productionWrites": 0
+}

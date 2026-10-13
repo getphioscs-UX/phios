@@ -343,6 +343,7 @@ export function searchManuscriptCorpus({
     const excerpt = isolatedArgument?clean(isolatedArgument.text):excerptFor(item.record, query, terms, allowance);
     if(!excerpt)continue;
     let selectedArgument=selectArgumentUnit(item.record,query,terms,allowance);
+    if(selectedArgument&&!selectedArgument.explanationUnit&&item.record.experimentFragmentsOnly){const text=item.record.text.slice(selectedArgument.unit.startOffset,selectedArgument.unit.endOffset);selectedArgument={...selectedArgument,explanationUnit:{sourceSectionId:item.record.sectionCode,locale:source.locale,mainArgument:text,support:{startOffset:selectedArgument.unit.startOffset,endOffset:selectedArgument.unit.endOffset,textSha256:selectedArgument.unit.textSha256},sourceTextKind:'VERIFIED_EXPERIMENT_FRAGMENT_NOT_WHOLE_CHAPTER'}};}
     // Accepted knowledge projections are bounded explanation units already;
     // this does not expose the protected native manuscript or accept a new text.
     if(!selectedArgument&&source.contentKind==='ACCEPTED_PUBLIC_KNOWLEDGE_UNITS_ONLY'&&item.record.reviewStatus==='HUMAN_APPROVED_FINAL'&&item.record.text.length<=allowance){

@@ -1,0 +1,99 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>P9 T8-R2 source gate</title><style>body{font:16px system-ui;max-width:1100px;margin:32px auto;padding:20px;color:#183a42}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>P9 G3-R6-T8-R2 — source / credential gate</h1><p>No deployment, credential generation, overwrite, rotation or guarded probe executed.</p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T8-R2-SOURCE-CREDENTIAL-GATE.json">Machine proof</a><h2>Exact accepted R5 middleware</h2><pre>import { maintenanceMode, guardD1Binding, d1ViolationCount, maintenanceResponse } from './_lib/d1-maintenance-guard.js';
+
+export async function onRequest(context) {
+  const mode = maintenanceMode(context.env.PHIOS_D1_MAINTENANCE_MODE);
+  if (mode === 'OFF') return context.next();
+  if (mode !== 'READ_ONLY') return maintenanceResponse();
+  if (['POST','PUT','PATCH','DELETE'].includes(context.request.method)) return maintenanceResponse();
+  try {
+    // Pages next() captures this env object. Replacing context.env would NOT
+    // propagate. Seal only the binding in that object before nested handlers.
+    // Do not restore it after next(): waitUntil and concurrent requests must
+    // never regain a write capability during this deployment's READ_ONLY mode.
+    const guarded = guardD1Binding(context.env.RUNTIME_DB, mode);
+    Object.defineProperty(context.env, 'RUNTIME_DB', {value:guarded,writable:false,configurable:false,enumerable:true});
+    const before = d1ViolationCount(guarded);
+    const response = await context.next();
+    // Route-owned catches cannot turn a rejected write into success or leak
+    // their diagnostics. A concurrent rejection may conservatively deny a read.
+    return d1ViolationCount(guarded) === before ? response : maintenanceResponse();
+  } catch {
+    // Existing handlers may translate a guard error themselves; neither path
+    // exposes SQL, topology or an original binding to a customer.
+    return maintenanceResponse();
+  }
+}
+</pre><h2>Gate decision</h2><pre>{
+  "at": "2026-10-13T02:59:23.797Z",
+  "status": "P9_T8_R2_SOURCE_DIAGNOSTIC_MECHANISM_MISMATCH",
+  "oldActiveProduction": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+  "actualActive": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+  "activeMatch": true,
+  "newDeploymentID": null,
+  "newDeploymentActive": false,
+  "sourceCommit": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+  "sourceTree": "44ff79ccb5885846ad6bfdd1cb1c9cd56b60b318",
+  "sourceTreeMatch": true,
+  "currentMetadataSource": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+  "currentMetadataMessage": "P9 G3-R6-E1 private diagnostic overlay 684e7d3baef6f587e9dfd88d06035c2704d686536e42bc0d6223c505df0ed57a",
+  "sourceProof": {
+    "privateDiagnosticFilePresent": false,
+    "middlewareDiagnosticHook": false,
+    "middlewareRejectsWriteMethods": true,
+    "exactR5CannotSatisfyPrivateTrace": true,
+    "priorDiagnosticOverlay": {
+      "tree": "6b91c4be7005c6ef7545081c7a47d6338e7347be",
+      "digest": "684e7d3baef6f587e9dfd88d06035c2704d686536e42bc0d6223c505df0ed57a",
+      "files": [
+        "wrangler.jsonc",
+        "functions/_middleware.js",
+        "functions/_lib/d1-maintenance-guard.js",
+        "functions/_lib/d1-private-isolation-probe.js"
+      ]
+    },
+    "priorOverlayIsNotExactR5Tree": true,
+    "handshakeGap": "Existing overlay private authenticated endpoint directly attempts guarded synthetic SQL; it has no harmless non-D1 event branch. T8-R2 requires non-D1 roundtrip before guarded probe."
+  },
+  "READ_ONLY_Metadata": "READ_ONLY",
+  "environment": "production",
+  "diagnosticSecretFileFound": true,
+  "diagnosticSecretFileNonempty": true,
+  "diagnosticSecretFormatValid": true,
+  "diagnosticCredentialAcceptedByRuntime": "NOT_TESTED",
+  "credentialSource": "LOCAL_FILE",
+  "localSecretPath": "C:/Users/Guest Account/.phios-secrets/cloudflare/P9-T8-R2-DIAGNOSTIC-TOKEN.txt",
+  "secretValueRecorded": false,
+  "secretGenerated": false,
+  "secretFileOverwritten": false,
+  "secretRotated": false,
+  "secondRotationPerformed": false,
+  "binding": "PHIOS_D1_ISOLATION_PROBE_TOKEN",
+  "productionSecretPresent": true,
+  "secretAlignment": "UNVERIFIABLE_WITH_READ_API_AND_AVAILABLE_RECORDS; encrypted value cannot be read; no prior T8-R2 write receipt found. No blind PATCH performed.",
+  "collectorReady": "NOT_STARTED_SOURCE_GATE_FAILED",
+  "nonD1Roundtrip": "NOT_SUPPORTED_BY_EXISTING_PRIVATE_PROBE",
+  "middlewareExecuted": "UNPROVEN_CURRENT",
+  "runtimeMode": "UNPROVEN_CURRENT",
+  "guardInstalled": "UNPROVEN_CURRENT",
+  "guardReached": "NOT_EXERCISED",
+  "writeRejected": "NOT_EXERCISED",
+  "D1MutationForwarded": "NO_PROBE_SENT_NOT_RUNTIME_PROOF",
+  "durableD1Mutations": 0,
+  "getphiosHealthy": "NOT_RETESTED_NO_DEPLOYMENT; prior GET200 retained as historical",
+  "customerFacingDrift": "NO_SOURCE_OR_DEPLOYMENT_CHANGE_BY_T8_R2; full runtime comparison not exercised",
+  "currentProductionAuthorityAfter": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+  "currentRuntimeIsolation": "UNPROVEN",
+  "stage1Eligibility": "NOT_READY_NOT_AUTHORIZED",
+  "productionMutations": 0,
+  "deploymentsCreated": 0,
+  "guardProbes": 0,
+  "providerCalls": 0,
+  "costUSD": 0,
+  "payments": 0,
+  "refunds": 0,
+  "migrations": 0,
+  "commits": 0,
+  "pushes": 0,
+  "firstRemainingBlocker": "Exact accepted R5 tree lacks required diagnostic endpoint. Diagnostic overlay plus harmless non-D1 handshake would change that tree and is excluded by current no-source-modification authorization.",
+  "nextAction": "Resolve source scope explicitly: either admit a separately frozen diagnostic-only successor based on R5 with the permitted overlay and non-D1 handshake, or keep exact R5 identity and revise proof expectations. Also provide non-secret evidence that the local file has/has not been written to project binding, or explicitly authorize one idempotent alignment despite unobservable encrypted equality; do not reveal value."
+}</pre></html>

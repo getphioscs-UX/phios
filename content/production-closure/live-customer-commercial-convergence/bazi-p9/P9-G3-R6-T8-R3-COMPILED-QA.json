@@ -1,0 +1,30 @@
+{
+  "status": "PASS_LOCAL_COMPILED",
+  "rawD1Accesses": 0,
+  "logs": [
+    {
+      "kind": "P9_PRIVATE_NON_D1_HANDSHAKE",
+      "candidateMarker": "P9_T8_R3_DIAGNOSTIC_V1",
+      "requestHost": "local.invalid",
+      "correlation": "compiled_trace_123456",
+      "credentialAccepted": true,
+      "middlewareExecuted": true,
+      "mode": "READ_ONLY",
+      "D1Accesses": 0
+    },
+    {
+      "candidateMarker": "P9_T8_R3_DIAGNOSTIC_V1",
+      "requestHost": "local.invalid",
+      "correlation": "compiled_trace_123456",
+      "guardReached": true,
+      "kind": "P9_PRIVATE_D1_ISOLATION",
+      "middlewareExecuted": true,
+      "handlerReached": true,
+      "mode": "READ_ONLY",
+      "bindingWrapped": true,
+      "method": "GET",
+      "guardRejectedWrite": true,
+      "D1MutationAttemptForwarded": false
+    }
+  ]
+}

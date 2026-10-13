@@ -1,3 +1,4 @@
+import {isProductionKnowledgeCapability} from './membership-production-gate.js';
 import {personIdentity} from '../../account/canonical-person-store.js';
 import {activeContinuitySubscription} from './continuity-quota-d1.js';
 import {digest} from '../../account/oidc-auth.js';
@@ -6,7 +7,7 @@ export function createZeroCallOutcomeCapability(env){
  if(env.PHIOS_ENVIRONMENT!=='local'||env.PHIOS_ISOLATED_OPERATOR!==true)throw Error('ZERO_OUTCOME_LOCAL_CANDIDATE_ONLY');const c=Object.freeze({});capabilities.add(c);return c;
 }
 export async function saveZeroCallOutcome(context,{taskId,pack,retrievalErrors=[]},{capability}){
- if(!capabilities.has(capability)||context.env.PHIOS_ENVIRONMENT!=='local'||context.env.PHIOS_ISOLATED_OPERATOR!==true)throw Error('ZERO_OUTCOME_NOT_AUTHORIZED');
+ if(!isProductionKnowledgeCapability(context.env,capability)&&(!capabilities.has(capability)||context.env.PHIOS_ENVIRONMENT!=='local'||context.env.PHIOS_ISOLATED_OPERATOR!==true))throw Error('ZERO_OUTCOME_NOT_AUTHORIZED');
  const owner=personIdentity(context).userId;await activeContinuitySubscription(context.env,owner);
  if(!taskId?.startsWith('ZERO-')||!pack?.packDigest||pack.sources?.length!==0||retrievalErrors.length||!['zh-Hans','en'].includes(pack.locale))throw Error('ZERO_OUTCOME_REQUIRES_SUCCESSFUL_EMPTY_RETRIEVAL');
  const db=context.env.RUNTIME_DB,requestDigest=await digest(JSON.stringify({question:pack.question,locale:pack.locale,packDigest:pack.packDigest})),answer={locale:pack.locale,answer:pack.locale==='en'?'No admitted source was found that supports an answer to this question.':'尚未找到能够支持回答这个问题的获准来源。',answerCompleteness:'SOURCE_INSUFFICIENT',reasonCode:'NO_ADMITTED_RELEVANT_SOURCE',supportMap:[],sourceBinding:{packDigest:pack.packDigest,bindings:[]},providerCalls:0};

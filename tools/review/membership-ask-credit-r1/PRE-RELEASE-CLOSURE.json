@@ -1,0 +1,502 @@
+{
+  "at": "2026-10-13T02:22:37.400Z",
+  "state": "PRE_RELEASE_CANDIDATE_CLOSED_EXECUTION",
+  "build": {
+    "state": "PASS_BUILD_REUSED_RELEVANT_INPUTS_UNCHANGED",
+    "relevantInputDigest": "bf4aa8d72b12060ca43d1a3b54b750cc4493f159bc194a64d5701f4cd9623d1e",
+    "workerSha256": "c707aabf11a9d6f868e69aadf9f0a923f73f782cdc9b7872215b53c0871a3e70",
+    "routesSha256": "3a87caf0402e11632cb4fd51c8a081aa4a848bd78cd3b0c8cee11199d65f3381",
+    "changedInputs": []
+  },
+  "balance": {
+    "source": "tools/review/membership-ask-credit-r1/HISTORICAL-BALANCE-ROW-RECONCILIATION.json",
+    "productionRowsObserved": 0,
+    "productionMissingOwnerTables": 7,
+    "qaRows": 3,
+    "productionHistoricalEntitlements": "UNRESOLVED_NOT_ZERO",
+    "externalInvoiceRefillRefundHistory": "NEEDS_VERIFIED_EXPORT_OR_CANONICAL_OWNER"
+  },
+  "migration": {
+    "source": "tools/review/membership-ask-credit-r1/MIGRATION-19-21-ISOLATED-REHEARSAL.json",
+    "state": "PASS_LIMITED_SCHEMA_AND_DATA_PRESERVATION_REHEARSAL",
+    "paths": [
+      {
+        "path": "db/migration-candidates/0019_continuity_quota_units_successor.sql",
+        "sha256": "ef15a3959f4f41838b780c8fd53115938dcf7f4571064df878216ea1d0c2dfb2",
+        "registry": "EXISTING_UNIQUE_CANDIDATE_LIST",
+        "version": 19,
+        "canonicalChecksum": "18c75d03d8fee693d1ed8c64117b37ecbe4d4af252170b43d556617a6536fe3c",
+        "dependsOn": [
+          18
+        ],
+        "purpose": "Verified recurring/refill entitlement allocation; unique grant source, no second spend ledger",
+        "apply": "PASS_ISOLATED",
+        "repeat": "PASS_SCHEMA_IDEMPOTENT",
+        "preconditions": [
+          "Both dispatchers OFF; immutable active migrations 1–18 reconciled first",
+          "Commerce subscription owner and 0015 cost tables present",
+          "No historical entitlement imported without row linkage"
+        ],
+        "postchecks": [
+          "foreign_key_check empty",
+          "Exact schema and candidate checksum verified",
+          "Grant/task identities remain unique"
+        ],
+        "failureRecovery": [
+          "Keep both execution routes OFF",
+          "Retain additive tables, purchase/grant, allocations, costs and saved answers",
+          "Resume missing candidate only after checksum/schema audit; never restore old balances or drop tables"
+        ]
+      },
+      {
+        "path": "db/migration-candidates/0020_continuity_ask_credit_allocations_successor.sql",
+        "sha256": "e344964f8077bfc9d8f331215d6d9c64cee15addd2da2d04fa002ac4630489f0",
+        "registry": "EXISTING_UNIQUE_CANDIDATE_LIST",
+        "version": 20,
+        "canonicalChecksum": "cf228d322c06620b9e39262c3ce855e0798dd25feadb02f8636745356d72f63a",
+        "dependsOn": [
+          19
+        ],
+        "purpose": "Idempotent tasks and FIFO multi-quota allocations; persistent answer and measured charge",
+        "apply": "PASS_ISOLATED",
+        "repeat": "PASS_SCHEMA_IDEMPOTENT",
+        "preconditions": [
+          "Both dispatchers OFF; immutable active migrations 1–18 reconciled first",
+          "Commerce subscription owner and 0015 cost tables present",
+          "No historical entitlement imported without row linkage"
+        ],
+        "postchecks": [
+          "foreign_key_check empty",
+          "Exact schema and candidate checksum verified",
+          "Grant/task identities remain unique"
+        ],
+        "failureRecovery": [
+          "Keep both execution routes OFF",
+          "Retain additive tables, purchase/grant, allocations, costs and saved answers",
+          "Resume missing candidate only after checksum/schema audit; never restore old balances or drop tables"
+        ]
+      },
+      {
+        "path": "db/migration-candidates/0021_continuity_zero_call_outcomes_successor.sql",
+        "sha256": "a7924d623695a7414785ab75ecf7d2910780c23b23201bbcd704725be088f619",
+        "registry": "EXISTING_UNIQUE_CANDIDATE_LIST",
+        "version": 21,
+        "canonicalChecksum": "0cedacd4dc0b3b752b863c6d4d11b9fdefc258ea9e0462001b89a184b69a903c",
+        "dependsOn": [
+          20
+        ],
+        "purpose": "Source-insufficient saved results with zero provider/reservation/charge",
+        "apply": "PASS_ISOLATED",
+        "repeat": "PASS_SCHEMA_IDEMPOTENT",
+        "preconditions": [
+          "Both dispatchers OFF; immutable active migrations 1–18 reconciled first",
+          "Commerce subscription owner and 0015 cost tables present",
+          "No historical entitlement imported without row linkage"
+        ],
+        "postchecks": [
+          "foreign_key_check empty",
+          "Exact schema and candidate checksum verified",
+          "Grant/task identities remain unique"
+        ],
+        "failureRecovery": [
+          "Keep both execution routes OFF",
+          "Retain additive tables, purchase/grant, allocations, costs and saved answers",
+          "Resume missing candidate only after checksum/schema audit; never restore old balances or drop tables"
+        ]
+      }
+    ]
+  },
+  "model": {
+    "state": "REQUEST_SOURCE_PROMPT_FROZEN_PRICE_AND_PERMISSION_PREFLIGHT_PENDING",
+    "requestPath": "tools/review/membership-ask-credit-r1/FINAL-MINIMAL-MODEL-QA-REQUESTS.json",
+    "requestSha256": "36eb43b3a45534a753047a9450ea02b08f7541863ccac546883d9e64ab54ea82",
+    "maximumCalls": 7,
+    "maxOutputTokens": 1400,
+    "automaticRetry": 0,
+    "uncachedCandidateMaximumMicroUSD": 34866,
+    "proposedHardBudgetUSD": 0.04,
+    "priceState": "CANDIDATE_PROFILE_NOT_REVERIFIED_CURRENT_PRICE",
+    "providerCalls": 0,
+    "limitations": "Not executable until current pricing/permission are independently verified and a new owner grant binds this package"
+  },
+  "done": [
+    "Current dispatcher remains closed; prior scoped UI and isolated service evidence inherited",
+    "Row-level metadata read and per-record disposition for currently accessible D1 records",
+    "19→20→21 synthetic isolated schema/data-preservation rehearsal",
+    "Actual API source packs and generation/review contract frozen; provider calls zero",
+    "Relevant build identity rechecked without unrelated rebuild"
+  ],
+  "needsImplementation": [
+    "Resolve historical purchase/invoice/refill/refund and cost/reservation lineage before any credit import",
+    "Promote checksum-bound migration candidates only after active prerequisite mapping and governance acceptance",
+    "Prove prior binary credit-reader compatibility before allowing rollback execution; safe immediate rollback is read-only",
+    "Profile/Financial complete released report material binding; Relationship accepted private report producer/reader remains absent"
+  ],
+  "needsModelValidation": [
+    "Current prompts + auto-review: repaired Book II Chinese, Book VII English, new supported partial task, one synthetic inference reject",
+    "Current permission/rates must be reverified; candidate USD0.04 cap is not yet a reserved authorization"
+  ],
+  "needsProductionAuthorization": [
+    "Exact prerequisite migrations and candidates19–21",
+    "Same validated Worker plus complete shared configuration after P9 compatibility audit",
+    "Legacy/new routing cutover and limited commercial activation after all gates"
+  ],
+  "releaseSteps": [
+    "Keep legacy and credit model execution OFF; capture read-only purchase/cost/reservation baseline and source-linked import mapping",
+    "Accept unique registry candidates and reconcile immutable active migration prerequisites; do not replace P9 18",
+    "Execute separately authorized prerequisites/19/20/21 in order with checksums, schema and foreign-key postchecks",
+    "Import only proven entitlement remainders with unique source identities; hold unresolved records; reconcile totals and pending reserves",
+    "Deploy the exact approved Worker/static/config identity retaining P9 and Stripe/Secrets unchanged",
+    "Run separately authorized current prompt QA, then enable only ordinary source-grounded Knowledge for approved scope; report four questions retain priority"
+  ],
+  "rollback": [
+    "Turn both model dispatchers OFF; keep current authorized read/save endpoints",
+    "Do not drop additive schema, restore old balance snapshots, reissue grants or reverse settled usage",
+    "Preserve purchases/refunds, platform measured cost, all allocations, pending reserves and saved answers",
+    "Reconcile unknown costs/pending leases before resume; old binary execution only after current credit state compatibility proven"
+  ],
+  "scope": {
+    "at": "2026-10-12T15:28:38.588Z",
+    "rows": [
+      {
+        "bookCode": "BOOK-1",
+        "isolatedVerifiedFragments": [
+          {
+            "chapter": "B1V3-P1-S006",
+            "sourceSha256": "33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a",
+            "startOffset": 421,
+            "endOffset": 527,
+            "pdfPages": [
+              61,
+              62
+            ]
+          },
+          {
+            "chapter": "B1V3-P1-S006",
+            "sourceSha256": "33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a",
+            "startOffset": 363,
+            "endOffset": 977,
+            "pdfPages": [
+              61,
+              62
+            ]
+          },
+          {
+            "chapter": "B1V3-P1-S006",
+            "sourceSha256": "33c91cd60d5fe560688038608571a7f385072dad245b4e65a648b70f7a97764a",
+            "startOffset": 1104,
+            "endOffset": 1136,
+            "pdfPages": [
+              61,
+              62
+            ]
+          }
+        ],
+        "state": "EXISTING_PERMITTED_ISOLATED_FRAGMENTS_REUSED",
+        "productionActivation": "NOT_EXPANDED_BY_THIS_WORK",
+        "fullChapterCompletionAdded": 0
+      },
+      {
+        "bookCode": "BOOK-2",
+        "isolatedVerifiedFragments": [
+          {
+            "chapter": "CM-B2V1-P5-S002",
+            "sourceSha256": "1ae413dbfddae604f65af3e9b16a28a923899e3ebe8f419d9b7f3ff10bfa41fe",
+            "startOffset": 281,
+            "endOffset": 512,
+            "pdfPages": [
+              4,
+              7
+            ]
+          }
+        ],
+        "state": "VERIFIED_FRAGMENT_ADAPTER_REGRESSION_PACK_READY_MODEL_NOT_RUN",
+        "productionActivation": "NOT_EXPANDED_BY_THIS_WORK",
+        "fullChapterCompletionAdded": 0
+      },
+      {
+        "bookCode": "BOOK-3",
+        "isolatedVerifiedFragments": [
+          {
+            "chapter": "CM-B3V1-P8-S001",
+            "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+            "startOffset": 266,
+            "endOffset": 938,
+            "pdfPages": [
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "chapter": "CM-B3V1-P8-S001",
+            "sourceSha256": "efbfdd21fa21c7e482bbe73ab6559eea8d2e9cb0610663b09f3a19df46f521b7",
+            "startOffset": 915,
+            "endOffset": 999,
+            "pdfPages": [
+              3,
+              4,
+              5,
+              6
+            ]
+          }
+        ],
+        "state": "EXISTING_PERMITTED_ISOLATED_FRAGMENTS_REUSED",
+        "productionActivation": "NOT_EXPANDED_BY_THIS_WORK",
+        "fullChapterCompletionAdded": 0
+      },
+      {
+        "bookCode": "BOOK-4",
+        "isolatedVerifiedFragments": [
+          {
+            "chapter": "CM-B4-owner-final-20261011-ab265b9004da-S002",
+            "sourceSha256": "ab265b9004dafd286b8b58f536f81e6c30bf3deec27f6431b8224d5c1816e07c",
+            "startOffset": 0,
+            "endOffset": 303,
+            "pdfPages": [
+              7,
+              8
+            ]
+          }
+        ],
+        "state": "EXISTING_PERMITTED_ISOLATED_FRAGMENTS_REUSED",
+        "productionActivation": "NOT_EXPANDED_BY_THIS_WORK",
+        "fullChapterCompletionAdded": 0
+      },
+      {
+        "bookCode": "BOOK-5",
+        "isolatedVerifiedFragments": [
+          {
+            "chapter": "B5-S001",
+            "sourceSha256": "011996e36225e6ec1d7bba8b368d3b5d2c3b8c1567dab7ea5cd6f51f1ac069be",
+            "startOffset": 0,
+            "endOffset": 1021,
+            "pdfPages": [
+              3
+            ]
+          }
+        ],
+        "state": "EXISTING_PERMITTED_ISOLATED_FRAGMENTS_REUSED",
+        "productionActivation": "NOT_EXPANDED_BY_THIS_WORK",
+        "fullChapterCompletionAdded": 0
+      },
+      {
+        "bookCode": "BOOK-6",
+        "isolatedVerifiedFragments": [
+          {
+            "chapter": "CM-B6-owner-final-20261011-15d80720d10c-S001",
+            "sourceSha256": "15d80720d10c8a16115b06237043da5acc381f87f632175f40da99db9745c68a",
+            "startOffset": 0,
+            "endOffset": 325,
+            "pdfPages": [
+              3,
+              4
+            ]
+          }
+        ],
+        "state": "EXISTING_PERMITTED_ISOLATED_FRAGMENTS_REUSED",
+        "productionActivation": "NOT_EXPANDED_BY_THIS_WORK",
+        "fullChapterCompletionAdded": 0
+      },
+      {
+        "bookCode": "BOOK-7",
+        "isolatedVerifiedFragments": [
+          {
+            "chapter": "14.86",
+            "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+            "startOffset": 0,
+            "endOffset": 59,
+            "pdfPages": [
+              324,
+              324
+            ]
+          },
+          {
+            "chapter": "14.57",
+            "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+            "startOffset": 0,
+            "endOffset": 78,
+            "pdfPages": [
+              207,
+              207
+            ]
+          },
+          {
+            "chapter": "14.65",
+            "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+            "startOffset": 0,
+            "endOffset": 382,
+            "pdfPages": [
+              242,
+              242
+            ]
+          },
+          {
+            "chapter": "14.90",
+            "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+            "startOffset": 0,
+            "endOffset": 61,
+            "pdfPages": [
+              337,
+              337
+            ]
+          },
+          {
+            "chapter": "14.92",
+            "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+            "startOffset": 0,
+            "endOffset": 49,
+            "pdfPages": [
+              343,
+              343
+            ]
+          },
+          {
+            "chapter": "14.99",
+            "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+            "startOffset": 0,
+            "endOffset": 224,
+            "pdfPages": [
+              369,
+              369
+            ]
+          },
+          {
+            "chapter": "14.100",
+            "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+            "startOffset": 0,
+            "endOffset": 88,
+            "pdfPages": [
+              372,
+              372
+            ]
+          },
+          {
+            "chapter": "14.42",
+            "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+            "startOffset": 0,
+            "endOffset": 64,
+            "pdfPages": [
+              150,
+              150
+            ]
+          },
+          {
+            "chapter": "14.63",
+            "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+            "startOffset": 0,
+            "endOffset": 133,
+            "pdfPages": [
+              234,
+              234
+            ]
+          },
+          {
+            "chapter": "14.71",
+            "sourceSha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d",
+            "startOffset": 0,
+            "endOffset": 337,
+            "pdfPages": [
+              267,
+              267
+            ]
+          }
+        ],
+        "state": "EXISTING_PERMITTED_ISOLATED_FRAGMENTS_REUSED",
+        "productionActivation": "NOT_EXPANDED_BY_THIS_WORK",
+        "fullChapterCompletionAdded": 0
+      }
+    ],
+    "book7": "Accepted 10 knowledge projections, not protected 100-chapter manuscript",
+    "glossaryOwner": "functions/knowledge-runtime/approved-terminology-context.js; only approved source-anchored query-relevant entries consumed; R2 candidates not promoted",
+    "providerCalls": 0
+  },
+  "consumers": {
+    "knowledge": {
+      "route": "/api/membership-ask",
+      "state": "PRODUCTION_SOURCE_WIRED_EXECUTION_CLOSED",
+      "source": "functions/personal-reading/continuity/membership-production-dispatcher.js",
+      "allowedCandidate": "Source-supported ordinary Knowledge only; real calibration and scope activation still required"
+    },
+    "profile": {
+      "state": "AUTHORIZED_EVIDENCE_PREVIEW_ONLY",
+      "owner": "Encrypted runtime_artifacts PROFILE_PERSONAL_EVIDENCE_OBJECT",
+      "source": "functions/personal-reading/continuity/membership-owned-material-adapter.js",
+      "implemented": "Owner/digest/version/consent bounded projection; private fragment identity; sourceMeaning passed to short request",
+      "missing": [
+        "Released full dossier owner/producer handoff remains unconnected",
+        "New private-material generation/review semantic QA and privacy authorization",
+        "Not available through production Knowledge EXECUTE"
+      ]
+    },
+    "financial": {
+      "state": "AUTHORIZED_INTAKE_PREVIEW_ONLY",
+      "owner": "Encrypted account_financial_will_drafts",
+      "source": "functions/personal-reading/continuity/membership-owned-material-adapter.js",
+      "implemented": "Existing encrypted reader + exact digest/version/account checks; bounded fragment request can identify supplied material, not established personal facts",
+      "missing": [
+        "Released Financial full-report consumption not established",
+        "Current facts/jurisdiction/source freshness and consumer answer QA",
+        "Not available through production Knowledge EXECUTE"
+      ]
+    },
+    "relationship": {
+      "state": "CLOSED",
+      "ownersChecked": [
+        "functions/personal-reading/relationship/paid-relationship-narrative.js",
+        "functions/api/customer-relationship-intake.js",
+        "functions/pws/registry/relationship-store.js",
+        "functions/account/released-report-material-store.js",
+        "functions/report-delivery/paid-report-method-registry.js"
+      ],
+      "conclusion": "Narrative cache/intake and graph metadata are not private paid-report persistence. Generic released-report owner exists, but no accepted Relationship producer/registry identity links it. Do not create duplicate store.",
+      "next": "Bind a verified released Relationship report and participant permissions to the existing released-material owner; retain closed route until that handoff exists"
+    },
+    "ownedReport": {
+      "state": "PREVIEW_WITH_INCLUDED_BENEFIT_HANDOFF",
+      "fourQuestions": "/api/account-report-questions; USE_EXISTING_INCLUDED_REPORT_BENEFIT occurs before member credit reservation",
+      "missing": "Member model execution for owned reports remains outside the Knowledge release"
+    },
+    "deep": "NOT_ADMITTED",
+    "research": "NOT_ADMITTED",
+    "personalNavigation": "PREVIEW_ONLY"
+  },
+  "providerCalls": 0,
+  "productionWrites": 0,
+  "deployments": 0,
+  "evidence": [
+    {
+      "path": "tools/review/membership-ask-credit-r1/HISTORICAL-BALANCE-ROW-RECONCILIATION.json",
+      "sha256": "297367f4a55ccc786a20f5a9bc0f9d5e129a389a8baf9b9d5aa17eb74756c632"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/MIGRATION-19-21-ISOLATED-REHEARSAL.json",
+      "sha256": "852582f0a14abe2c7d9d0228e33d2b20844b54896231dcaa62cce90238802bc0"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/FINAL-MINIMAL-MODEL-QA-REQUESTS.json",
+      "sha256": "36eb43b3a45534a753047a9450ea02b08f7541863ccac546883d9e64ab54ea82"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/CONSUMER-RELEASE-SCOPE.json",
+      "sha256": "998a24ae2a4ebbdc61f5eabc9846e96b09fc139dad0b63f7e290db020c6dc185"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/SEVEN-BOOK-RELEASE-SCOPE.json",
+      "sha256": "2dfa3d2cc7c54be2d0c1a73fdb38772545851f5be0aa0fd20d7e4bbc18b3536d"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/ENGINEERING-BROWSER-REPLAY.json",
+      "sha256": "e4a1c994573057718109da0e066ad1a6f1d60a4b9587b9511d721081a644ccfb"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/CUSTOMER-UI-OUTCOME-QA.json",
+      "sha256": "e6bd66f6d95c1df19a5f52e9899133bdda88d8304b731632e2a14d348c8dcaae"
+    },
+    {
+      "path": "tools/review/membership-ask-credit-r1/DELIVERY-CLOSURE-BUILD-RECEIPT.json",
+      "sha256": "227100dfe6016eb0517ff71035e99da20b29721a0f1eb39a691fc505bf82f32f"
+    }
+  ]
+}

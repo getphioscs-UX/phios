@@ -1,3 +1,4 @@
+import {requireLegacyContinuityRoute} from './membership-production-gate.js';
 import {commerceEnvironment} from '../../commerce/commerce-environment.js';
 import {reserveProductCost,settleProductCost} from '../../provider-cost/product-cost-envelope.js';
 import {settleProviderUsage} from '../../provider-cost/provider-cost-ledger.js';
@@ -37,6 +38,7 @@ export async function readContinuityQuota(env,ownerAccountId,clock=Date.now){
  return {subscriptionId:sub.stripe_subscription_id,billingPeriodStart:currentPeriod?.billing_period_start??null,billingPeriodEnd:sub.current_period_end,units:result.results.map(q=>({...q,remainingMicroUSD:Math.max(0,q.maximum_micro_usd-q.allocated_micro_usd)})),refillLabel:authority.refill.labelEn,refillAmountMinor:1900};
 }
 export async function invokeContinuityProvider({env,ownerAccountId,requestId,contextId,model,payload,invoke,clock=Date.now}){
+ requireLegacyContinuityRoute(env);
  const bound=continuityModelPreflight(model,payload),quota=await readContinuityQuota(env,ownerAccountId,clock);
  if(!requestId||!contextId||typeof invoke!=='function')fail('CONTINUITY_REQUEST_REQUIRED');
  const unit=quota.units.find(q=>q.remainingMicroUSD>=Math.ceil(bound.maximumUSD*1e6));

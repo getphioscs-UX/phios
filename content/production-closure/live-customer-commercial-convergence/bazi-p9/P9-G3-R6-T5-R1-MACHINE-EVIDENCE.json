@@ -1,0 +1,576 @@
+{
+  "at": "2026-10-12T15:24:09.533Z",
+  "tokenValueRecorded": false,
+  "controls": [
+    {
+      "name": "ruleset",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/e4920e8f14574ec9abce2fbe9d764056",
+      "credentialAuthority": "LOCAL_MINIMUM_READ",
+      "httpStatus": 200,
+      "success": true,
+      "errors": [],
+      "result": {
+        "description": "",
+        "id": "e4920e8f14574ec9abce2fbe9d764056",
+        "kind": "root",
+        "last_updated": "2026-10-12T15:11:36.261713Z",
+        "name": "default",
+        "phase": "http_request_redirect",
+        "rules": [
+          {
+            "action": "redirect",
+            "action_parameters": {
+              "from_list": {
+                "key": "http.request.full_uri",
+                "name": "getphios_www_canonical"
+              }
+            },
+            "description": "poc-b4-www-to-canonical",
+            "enabled": true,
+            "expression": "http.request.full_uri in $getphios_www_canonical",
+            "id": "635f3e11b273436bba9615274561471b",
+            "last_updated": "2026-09-14T09:54:56.088239Z",
+            "ref": "635f3e11b273436bba9615274561471b",
+            "version": "1"
+          },
+          {
+            "action": "redirect",
+            "action_parameters": {
+              "from_list": {
+                "key": "http.request.full_uri",
+                "name": "getphios_pagesdev_canonical"
+              }
+            },
+            "description": "poc-b6-pagesdev-to-canonical",
+            "enabled": true,
+            "expression": "http.request.full_uri in $getphios_pagesdev_canonical",
+            "id": "24d6cca9d501477886de2a85fa51bf32",
+            "last_updated": "2026-09-14T11:35:09.76747Z",
+            "ref": "24d6cca9d501477886de2a85fa51bf32",
+            "version": "1"
+          },
+          {
+            "action": "redirect",
+            "action_parameters": {
+              "from_list": {
+                "key": "http.request.full_uri",
+                "name": "p9_t4_canary2_ingress"
+              }
+            },
+            "description": "P9 Canary 2 only; no wildcard historical retirement",
+            "enabled": true,
+            "expression": "(http.host eq \"41b1c458.phios-github.pages.dev\") and (http.request.full_uri in $p9_t4_canary2_ingress)",
+            "id": "66f4b7cbcabe40b38a4b8fab0b1eb697",
+            "last_updated": "2026-10-12T15:11:36.261713Z",
+            "ref": "66f4b7cbcabe40b38a4b8fab0b1eb697",
+            "version": "1"
+          }
+        ],
+        "version": "3"
+      },
+      "result_info": null
+    },
+    {
+      "name": "lists",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists",
+      "credentialAuthority": "LOCAL_MINIMUM_READ",
+      "httpStatus": 200,
+      "success": true,
+      "errors": [],
+      "result": [
+        {
+          "id": "9d06d0169ea948e8ba640bb1fab48cde",
+          "name": "getphios_pagesdev_canonical",
+          "description": "POC-B6 — Redirect phios-github.pages.dev production hostname to canonical https://getphios.com.",
+          "kind": "redirect",
+          "num_items": 1,
+          "num_referencing_filters": 0,
+          "created_on": "2026-09-14T11:34:30Z",
+          "modified_on": "2026-09-18T08:14:02Z"
+        },
+        {
+          "id": "3cddd65c75a24866b759eff4fde8ee63",
+          "name": "getphios_www_canonical",
+          "description": "POC-B4 — Redirect www.getphios.com to canonical https://getphios.com while preserving path and query string.",
+          "kind": "redirect",
+          "num_items": 1,
+          "num_referencing_filters": 0,
+          "created_on": "2026-09-14T09:50:12Z",
+          "modified_on": "2026-09-14T09:52:25Z"
+        },
+        {
+          "id": "d049cc55bb5f4c1a9223619886c3745b",
+          "name": "p9_t4_canary2_ingress",
+          "description": "P9 exact Canary 2 ingress containment; authorized T5 only",
+          "kind": "redirect",
+          "num_items": 1,
+          "num_referencing_filters": 0,
+          "created_on": "2026-10-12T15:11:32Z",
+          "modified_on": "2026-10-12T15:11:33Z"
+        }
+      ],
+      "result_info": null
+    },
+    {
+      "name": "account rulesets",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets",
+      "credentialAuthority": "LOCAL_MINIMUM_READ",
+      "httpStatus": 200,
+      "success": true,
+      "errors": [],
+      "result": [
+        {
+          "description": "Created by the Cloudflare security team, this ruleset is designed to provide protection for free zones",
+          "id": "77454fe2d30c4220b5701f6fdfb893ba",
+          "kind": "managed",
+          "last_updated": "2026-08-17T16:24:51.912839Z",
+          "name": "Cloudflare Managed Free Ruleset",
+          "phase": "http_request_firewall_managed",
+          "source": "firewall_managed",
+          "version": "74"
+        },
+        {
+          "description": "",
+          "id": "e4920e8f14574ec9abce2fbe9d764056",
+          "kind": "root",
+          "last_updated": "2026-10-12T15:11:36.261713Z",
+          "name": "default",
+          "phase": "http_request_redirect",
+          "version": "3"
+        }
+      ],
+      "result_info": null
+    },
+    {
+      "name": "zone rulesets",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/rulesets",
+      "credentialAuthority": "LOCAL_MINIMUM_READ",
+      "httpStatus": 200,
+      "success": true,
+      "errors": [],
+      "result": [
+        {
+          "description": "Created by the Cloudflare security team, this ruleset provides normalization on the URL path",
+          "id": "70339d97bdb34195bbf054b1ebe81f76",
+          "kind": "managed",
+          "last_updated": "2024-08-01T17:37:11.538019Z",
+          "name": "Cloudflare Normalization Ruleset",
+          "phase": "http_request_sanitize",
+          "version": "6"
+        },
+        {
+          "description": "Created by the Cloudflare security team, this ruleset is designed to provide protection for free zones",
+          "id": "77454fe2d30c4220b5701f6fdfb893ba",
+          "kind": "managed",
+          "last_updated": "2026-08-17T16:24:51.912839Z",
+          "name": "Cloudflare Managed Free Ruleset",
+          "phase": "http_request_firewall_managed",
+          "source": "firewall_managed",
+          "version": "74"
+        },
+        {
+          "description": "Automatic mitigation of HTTP-based DDoS attacks. Cloudflare routinely adds signatures to address new attack vectors. Additional configuration allows you to customize the sensitivity of each rule and the performed mitigation action.",
+          "id": "4d21379b4f9f4bb088e0729962c8b3cf",
+          "kind": "managed",
+          "last_updated": "2026-10-09T18:34:32.120081Z",
+          "name": "DDoS L7 ruleset",
+          "phase": "ddos_l7",
+          "version": "3449"
+        }
+      ],
+      "result_info": null
+    },
+    {
+      "name": "items getphios_pagesdev_canonical",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/9d06d0169ea948e8ba640bb1fab48cde/items",
+      "credentialAuthority": "LOCAL_MINIMUM_READ",
+      "httpStatus": 200,
+      "success": true,
+      "errors": [],
+      "result": [
+        {
+          "id": "b2fffac44073440fa64bc64d0d3446e2",
+          "redirect": {
+            "source_url": "https://phios-github.pages.dev/",
+            "include_subdomains": false,
+            "target_url": "https://getphios.com/",
+            "status_code": 301,
+            "preserve_query_string": true,
+            "subpath_matching": true,
+            "preserve_path_suffix": true
+          },
+          "created_on": "2026-09-14T11:34:54Z",
+          "modified_on": "2026-09-18T08:14:02Z"
+        }
+      ],
+      "result_info": null
+    },
+    {
+      "name": "items getphios_www_canonical",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/3cddd65c75a24866b759eff4fde8ee63/items",
+      "credentialAuthority": "LOCAL_MINIMUM_READ",
+      "httpStatus": 200,
+      "success": true,
+      "errors": [],
+      "result": [
+        {
+          "id": "efe241a0622b409fadfdf4214338ebd5",
+          "redirect": {
+            "source_url": "https://www.getphios.com/",
+            "target_url": "https://getphios.com/",
+            "status_code": 301,
+            "preserve_query_string": true,
+            "subpath_matching": true,
+            "preserve_path_suffix": true
+          },
+          "created_on": "2026-09-14T09:50:57Z",
+          "modified_on": "2026-09-14T09:52:25Z"
+        }
+      ],
+      "result_info": null
+    },
+    {
+      "name": "items p9_t4_canary2_ingress",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/d049cc55bb5f4c1a9223619886c3745b/items",
+      "credentialAuthority": "LOCAL_MINIMUM_READ",
+      "httpStatus": 200,
+      "success": true,
+      "errors": [],
+      "result": [
+        {
+          "id": "2c54f18d5bcd419ebafaff613a5807aa",
+          "redirect": {
+            "source_url": "41b1c458.phios-github.pages.dev/",
+            "include_subdomains": false,
+            "target_url": "https://getphios.com/",
+            "status_code": 307,
+            "preserve_query_string": true,
+            "subpath_matching": true,
+            "preserve_path_suffix": true
+          },
+          "created_on": "2026-10-12T15:11:33Z",
+          "modified_on": "2026-10-12T15:11:33Z"
+        }
+      ],
+      "result_info": null
+    },
+    {
+      "name": "project",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/pages/projects/phios-github",
+      "credentialAuthority": "EXISTING_WRANGLER",
+      "httpStatus": 200,
+      "success": true,
+      "errors": [],
+      "result": {
+        "active": "b07d86bf-2447-4fe8-8ded-66d9fe676c81"
+      },
+      "result_info": null
+    },
+    {
+      "name": "canary",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/pages/projects/phios-github/deployments/41b1c458-c79d-40e8-b47c-c2e5f4dba452",
+      "credentialAuthority": "EXISTING_WRANGLER",
+      "httpStatus": 200,
+      "success": true,
+      "errors": [],
+      "result": {
+        "id": "41b1c458-c79d-40e8-b47c-c2e5f4dba452",
+        "created_on": "2026-10-10T13:12:36.421955Z",
+        "url": "https://41b1c458.phios-github.pages.dev"
+      },
+      "result_info": null
+    }
+  ],
+  "traceAttempts": [
+    {
+      "name": "Account Trace exact /session",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/request-tracer/trace",
+      "credentialAuthority": "LOCAL_MINIMUM_READ",
+      "httpStatus": 403,
+      "success": false,
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error",
+          "documentation_url": "https://developers.cloudflare.com/api/resources/request_tracers/subresources/traces/methods/create"
+        }
+      ],
+      "result": null,
+      "result_info": null
+    },
+    {
+      "name": "Account Trace exact /session",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/request-tracer/trace",
+      "credentialAuthority": "LOCAL_T5_BULK_ONLY",
+      "httpStatus": 403,
+      "success": false,
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error",
+          "documentation_url": "https://developers.cloudflare.com/api/resources/request_tracers/subresources/traces/methods/create"
+        }
+      ],
+      "result": null,
+      "result_info": null
+    },
+    {
+      "name": "Account Trace exact /session",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/request-tracer/trace",
+      "credentialAuthority": "EXISTING_WRANGLER",
+      "httpStatus": 403,
+      "success": false,
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error",
+          "documentation_url": "https://developers.cloudflare.com/api/resources/request_tracers/subresources/traces/methods/create"
+        }
+      ],
+      "result": null,
+      "result_info": null
+    }
+  ],
+  "alternatives": [
+    {
+      "name": "Audit config history",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/audit_logs?since=2026-10-12T15%3A10%3A00Z&before=2026-10-12T15%3A13%3A00Z&per_page=100",
+      "credentialAuthority": "EXISTING_WRANGLER",
+      "httpStatus": 403,
+      "success": false,
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error",
+          "documentation_url": "https://developers.cloudflare.com/api/resources/audit_logs/methods/list"
+        }
+      ],
+      "result": null,
+      "result_info": null
+    },
+    {
+      "name": "Existing account Logpush jobs",
+      "path": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/logpush/jobs",
+      "credentialAuthority": "EXISTING_WRANGLER",
+      "httpStatus": 403,
+      "success": false,
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error",
+          "documentation_url": "https://developers.cloudflare.com/api/resources/logpush/subresources/jobs/methods/list"
+        }
+      ],
+      "result": null,
+      "result_info": null
+    },
+    {
+      "name": "Existing zone Logpush jobs",
+      "path": "/zones/86dbea6c11ed5fa37a92003037b25f87/logpush/jobs",
+      "credentialAuthority": "EXISTING_WRANGLER",
+      "httpStatus": 403,
+      "success": false,
+      "errors": [
+        {
+          "code": 10000,
+          "message": "Authentication error",
+          "documentation_url": "https://developers.cloudflare.com/api/resources/logpush/subresources/jobs/methods/list"
+        }
+      ],
+      "result": null,
+      "result_info": null
+    }
+  ],
+  "AB": [
+    {
+      "round": 1,
+      "host": "41b1c458.phios-github.pages.dev",
+      "path": "/",
+      "nonce": "e1167730-a1bf-4b89-9dda-49cf856fcb91",
+      "url": "https://41b1c458.phios-github.pages.dev/?p9_t5_r1=e1167730-a1bf-4b89-9dda-49cf856fcb91",
+      "status": 307,
+      "location": "https://getphios.com/?p9_t5_r1=e1167730-a1bf-4b89-9dda-49cf856fcb91",
+      "headers": {
+        "server": "cloudflare",
+        "cfRay": "a4971c4d0e2fd8fd-HKG",
+        "cacheControl": null
+      },
+      "ruleIDHeader": "NOT_PRESENT_NO_RULE_ID_METADATA_OBSERVED"
+    },
+    {
+      "round": 1,
+      "host": "a1f8a3ba.phios-github.pages.dev",
+      "path": "/",
+      "nonce": "e1167730-a1bf-4b89-9dda-49cf856fcb91",
+      "url": "https://a1f8a3ba.phios-github.pages.dev/?p9_t5_r1=e1167730-a1bf-4b89-9dda-49cf856fcb91",
+      "status": 200,
+      "location": null,
+      "headers": {
+        "server": "cloudflare",
+        "cfRay": "a4971c4e1fcd5098-HKG",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      "ruleIDHeader": "NOT_PRESENT_NO_RULE_ID_METADATA_OBSERVED"
+    },
+    {
+      "round": 1,
+      "host": "41b1c458.phios-github.pages.dev",
+      "path": "/session",
+      "nonce": "551c7490-ff24-4d35-94ce-a74297397199",
+      "url": "https://41b1c458.phios-github.pages.dev/session?p9_t5_r1=551c7490-ff24-4d35-94ce-a74297397199",
+      "status": 307,
+      "location": "https://getphios.com/session?p9_t5_r1=551c7490-ff24-4d35-94ce-a74297397199",
+      "headers": {
+        "server": "cloudflare",
+        "cfRay": "a4971c573d33c896-HKG",
+        "cacheControl": null
+      },
+      "ruleIDHeader": "NOT_PRESENT_NO_RULE_ID_METADATA_OBSERVED"
+    },
+    {
+      "round": 1,
+      "host": "a1f8a3ba.phios-github.pages.dev",
+      "path": "/session",
+      "nonce": "551c7490-ff24-4d35-94ce-a74297397199",
+      "url": "https://a1f8a3ba.phios-github.pages.dev/session?p9_t5_r1=551c7490-ff24-4d35-94ce-a74297397199",
+      "status": 200,
+      "location": null,
+      "headers": {
+        "server": "cloudflare",
+        "cfRay": "a4971c584eb47a53-HKG",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      "ruleIDHeader": "NOT_PRESENT_NO_RULE_ID_METADATA_OBSERVED"
+    },
+    {
+      "round": 1,
+      "host": "41b1c458.phios-github.pages.dev",
+      "path": "/api/auth/session",
+      "nonce": "e9d9b91d-064c-40e3-abe6-a1c578df859b",
+      "url": "https://41b1c458.phios-github.pages.dev/api/auth/session?p9_t5_r1=e9d9b91d-064c-40e3-abe6-a1c578df859b",
+      "status": 307,
+      "location": "https://getphios.com/api/auth/session?p9_t5_r1=e9d9b91d-064c-40e3-abe6-a1c578df859b",
+      "headers": {
+        "server": "cloudflare",
+        "cfRay": "a4971c5e2e6a1f05-HKG",
+        "cacheControl": null
+      },
+      "ruleIDHeader": "NOT_PRESENT_NO_RULE_ID_METADATA_OBSERVED"
+    },
+    {
+      "round": 1,
+      "host": "a1f8a3ba.phios-github.pages.dev",
+      "path": "/api/auth/session",
+      "nonce": "e9d9b91d-064c-40e3-abe6-a1c578df859b",
+      "url": "https://a1f8a3ba.phios-github.pages.dev/api/auth/session?p9_t5_r1=e9d9b91d-064c-40e3-abe6-a1c578df859b",
+      "status": 200,
+      "location": null,
+      "headers": {
+        "server": "cloudflare",
+        "cfRay": "a4971c5f5bf30725-HKG",
+        "cacheControl": "private, no-store"
+      },
+      "ruleIDHeader": "NOT_PRESENT_NO_RULE_ID_METADATA_OBSERVED"
+    },
+    {
+      "round": 2,
+      "host": "41b1c458.phios-github.pages.dev",
+      "path": "/",
+      "nonce": "cdf9981a-ad5f-42c7-973f-89d4b881b9c7",
+      "url": "https://41b1c458.phios-github.pages.dev/?p9_t5_r1=cdf9981a-ad5f-42c7-973f-89d4b881b9c7",
+      "status": 307,
+      "location": "https://getphios.com/?p9_t5_r1=cdf9981a-ad5f-42c7-973f-89d4b881b9c7",
+      "headers": {
+        "server": "cloudflare",
+        "cfRay": "a4971c653b981076-HKG",
+        "cacheControl": null
+      },
+      "ruleIDHeader": "NOT_PRESENT_NO_RULE_ID_METADATA_OBSERVED"
+    },
+    {
+      "round": 2,
+      "host": "a1f8a3ba.phios-github.pages.dev",
+      "path": "/",
+      "nonce": "cdf9981a-ad5f-42c7-973f-89d4b881b9c7",
+      "url": "https://a1f8a3ba.phios-github.pages.dev/?p9_t5_r1=cdf9981a-ad5f-42c7-973f-89d4b881b9c7",
+      "status": 200,
+      "location": null,
+      "headers": {
+        "server": "cloudflare",
+        "cfRay": "a4971c66397b85d5-HKG",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      "ruleIDHeader": "NOT_PRESENT_NO_RULE_ID_METADATA_OBSERVED"
+    },
+    {
+      "round": 2,
+      "host": "41b1c458.phios-github.pages.dev",
+      "path": "/session",
+      "nonce": "2aadf119-132a-4b2a-a64b-2dd1aa560850",
+      "url": "https://41b1c458.phios-github.pages.dev/session?p9_t5_r1=2aadf119-132a-4b2a-a64b-2dd1aa560850",
+      "status": 307,
+      "location": "https://getphios.com/session?p9_t5_r1=2aadf119-132a-4b2a-a64b-2dd1aa560850",
+      "headers": {
+        "server": "cloudflare",
+        "cfRay": "a4971c67ddaa704b-HKG",
+        "cacheControl": null
+      },
+      "ruleIDHeader": "NOT_PRESENT_NO_RULE_ID_METADATA_OBSERVED"
+    },
+    {
+      "round": 2,
+      "host": "a1f8a3ba.phios-github.pages.dev",
+      "path": "/session",
+      "nonce": "2aadf119-132a-4b2a-a64b-2dd1aa560850",
+      "url": "https://a1f8a3ba.phios-github.pages.dev/session?p9_t5_r1=2aadf119-132a-4b2a-a64b-2dd1aa560850",
+      "status": 200,
+      "location": null,
+      "headers": {
+        "server": "cloudflare",
+        "cfRay": "a4971c68fb6b8b32-HKG",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      "ruleIDHeader": "NOT_PRESENT_NO_RULE_ID_METADATA_OBSERVED"
+    },
+    {
+      "round": 2,
+      "host": "41b1c458.phios-github.pages.dev",
+      "path": "/api/auth/session",
+      "nonce": "532b745b-3529-40f1-8911-9a553442f6aa",
+      "url": "https://41b1c458.phios-github.pages.dev/api/auth/session?p9_t5_r1=532b745b-3529-40f1-8911-9a553442f6aa",
+      "status": 307,
+      "location": "https://getphios.com/api/auth/session?p9_t5_r1=532b745b-3529-40f1-8911-9a553442f6aa",
+      "headers": {
+        "server": "cloudflare",
+        "cfRay": "a4971c6fed9c0982-HKG",
+        "cacheControl": null
+      },
+      "ruleIDHeader": "NOT_PRESENT_NO_RULE_ID_METADATA_OBSERVED"
+    },
+    {
+      "round": 2,
+      "host": "a1f8a3ba.phios-github.pages.dev",
+      "path": "/api/auth/session",
+      "nonce": "532b745b-3529-40f1-8911-9a553442f6aa",
+      "url": "https://a1f8a3ba.phios-github.pages.dev/api/auth/session?p9_t5_r1=532b745b-3529-40f1-8911-9a553442f6aa",
+      "status": 200,
+      "location": null,
+      "headers": {
+        "server": "cloudflare",
+        "cfRay": "a4971c718cabf4fc-HKG",
+        "cacheControl": "private, no-store"
+      },
+      "ruleIDHeader": "NOT_PRESENT_NO_RULE_ID_METADATA_OBSERVED"
+    }
+  ],
+  "productionMutations": 0,
+  "d1Mutations": 0,
+  "providerCalls": 0,
+  "costUSD": 0,
+  "canonical": {
+    "url": "https://getphios.com/?p9_t5_r1=ab713cb2-0821-4280-9f99-32204d9cb351",
+    "status": 200,
+    "location": null
+  },
+  "finishedAt": "2026-10-12T15:24:28.691Z"
+}

@@ -1,0 +1,113 @@
+{
+  "at": "2026-10-13T02:22:35.876Z",
+  "state": "PASS_LIMITED_SCHEMA_AND_DATA_PRESERVATION_REHEARSAL",
+  "environment": "IN_MEMORY_SYNTHETIC_EXISTING_OWNER_PREREQUISITES",
+  "candidates": [
+    {
+      "path": "db/migration-candidates/0019_continuity_quota_units_successor.sql",
+      "sha256": "ef15a3959f4f41838b780c8fd53115938dcf7f4571064df878216ea1d0c2dfb2",
+      "registry": "EXISTING_UNIQUE_CANDIDATE_LIST",
+      "version": 19,
+      "canonicalChecksum": "18c75d03d8fee693d1ed8c64117b37ecbe4d4af252170b43d556617a6536fe3c",
+      "dependsOn": [
+        18
+      ],
+      "purpose": "Verified recurring/refill entitlement allocation; unique grant source, no second spend ledger",
+      "apply": "PASS_ISOLATED",
+      "repeat": "PASS_SCHEMA_IDEMPOTENT",
+      "preconditions": [
+        "Both dispatchers OFF; immutable active migrations 1–18 reconciled first",
+        "Commerce subscription owner and 0015 cost tables present",
+        "No historical entitlement imported without row linkage"
+      ],
+      "postchecks": [
+        "foreign_key_check empty",
+        "Exact schema and candidate checksum verified",
+        "Grant/task identities remain unique"
+      ],
+      "failureRecovery": [
+        "Keep both execution routes OFF",
+        "Retain additive tables, purchase/grant, allocations, costs and saved answers",
+        "Resume missing candidate only after checksum/schema audit; never restore old balances or drop tables"
+      ]
+    },
+    {
+      "path": "db/migration-candidates/0020_continuity_ask_credit_allocations_successor.sql",
+      "sha256": "e344964f8077bfc9d8f331215d6d9c64cee15addd2da2d04fa002ac4630489f0",
+      "registry": "EXISTING_UNIQUE_CANDIDATE_LIST",
+      "version": 20,
+      "canonicalChecksum": "cf228d322c06620b9e39262c3ce855e0798dd25feadb02f8636745356d72f63a",
+      "dependsOn": [
+        19
+      ],
+      "purpose": "Idempotent tasks and FIFO multi-quota allocations; persistent answer and measured charge",
+      "apply": "PASS_ISOLATED",
+      "repeat": "PASS_SCHEMA_IDEMPOTENT",
+      "preconditions": [
+        "Both dispatchers OFF; immutable active migrations 1–18 reconciled first",
+        "Commerce subscription owner and 0015 cost tables present",
+        "No historical entitlement imported without row linkage"
+      ],
+      "postchecks": [
+        "foreign_key_check empty",
+        "Exact schema and candidate checksum verified",
+        "Grant/task identities remain unique"
+      ],
+      "failureRecovery": [
+        "Keep both execution routes OFF",
+        "Retain additive tables, purchase/grant, allocations, costs and saved answers",
+        "Resume missing candidate only after checksum/schema audit; never restore old balances or drop tables"
+      ]
+    },
+    {
+      "path": "db/migration-candidates/0021_continuity_zero_call_outcomes_successor.sql",
+      "sha256": "a7924d623695a7414785ab75ecf7d2910780c23b23201bbcd704725be088f619",
+      "registry": "EXISTING_UNIQUE_CANDIDATE_LIST",
+      "version": 21,
+      "canonicalChecksum": "0cedacd4dc0b3b752b863c6d4d11b9fdefc258ea9e0462001b89a184b69a903c",
+      "dependsOn": [
+        20
+      ],
+      "purpose": "Source-insufficient saved results with zero provider/reservation/charge",
+      "apply": "PASS_ISOLATED",
+      "repeat": "PASS_SCHEMA_IDEMPOTENT",
+      "preconditions": [
+        "Both dispatchers OFF; immutable active migrations 1–18 reconciled first",
+        "Commerce subscription owner and 0015 cost tables present",
+        "No historical entitlement imported without row linkage"
+      ],
+      "postchecks": [
+        "foreign_key_check empty",
+        "Exact schema and candidate checksum verified",
+        "Grant/task identities remain unique"
+      ],
+      "failureRecovery": [
+        "Keep both execution routes OFF",
+        "Retain additive tables, purchase/grant, allocations, costs and saved answers",
+        "Resume missing candidate only after checksum/schema audit; never restore old balances or drop tables"
+      ]
+    }
+  ],
+  "checks": {
+    "schemaRepeat": true,
+    "grantReplayDenied": true,
+    "taskReplayDenied": true,
+    "missingTaskDenied": true,
+    "pendingReservationRetained": true,
+    "settledActualCostRetained": true,
+    "zeroOutcomeNoReserve": true,
+    "readOnlyRollbackStateIdentical": true
+  },
+  "rolledBackRouting": {
+    "creditExecution": false,
+    "legacyExecution": false,
+    "creditReader": true
+  },
+  "limits": [
+    "Not a production migration or full active 1–18 rehearsal",
+    "Refund policy/import linkage requires actual historical records; no synthetic refund is claimed as historical proof",
+    "P9 deployment/SQL remain untouched"
+  ],
+  "providerCalls": 0,
+  "productionWrites": 0
+}

@@ -1,0 +1,226 @@
+{
+  "at": "2026-10-13T00:34:25.056Z",
+  "account": "0b9f36bdf56f38d7d09aebe388f15204",
+  "binding": "RUNTIME_DB",
+  "databases": [
+    {
+      "name": "phios-runtime-production",
+      "id": "073639fa-01e4-4868-af10-6ed032637dab",
+      "rows": [],
+      "gaps": [
+        {
+          "table": "commerce_purchases",
+          "state": "SOURCE_TABLE_ABSENT",
+          "result": "UNRESOLVED_NOT_ZERO",
+          "next": "Locate historical owner/export or approved prerequisite migration; never infer absent entitlements."
+        },
+        {
+          "table": "commerce_subscriptions",
+          "state": "SOURCE_TABLE_ABSENT",
+          "result": "UNRESOLVED_NOT_ZERO",
+          "next": "Locate historical owner/export or approved prerequisite migration; never infer absent entitlements."
+        },
+        {
+          "table": "commerce_checkout_attempts",
+          "state": "SOURCE_TABLE_ABSENT",
+          "result": "UNRESOLVED_NOT_ZERO",
+          "next": "Locate historical owner/export or approved prerequisite migration; never infer absent entitlements."
+        },
+        {
+          "table": "continuity_quota_units",
+          "state": "SOURCE_TABLE_ABSENT",
+          "result": "UNRESOLVED_NOT_ZERO",
+          "next": "Locate historical owner/export or approved prerequisite migration; never infer absent entitlements."
+        },
+        {
+          "table": "provider_product_cost_entries",
+          "state": "SOURCE_TABLE_ABSENT",
+          "result": "UNRESOLVED_NOT_ZERO",
+          "next": "Locate historical owner/export or approved prerequisite migration; never infer absent entitlements."
+        },
+        {
+          "table": "continuity_ask_tasks",
+          "state": "SOURCE_TABLE_ABSENT",
+          "result": "UNRESOLVED_NOT_ZERO",
+          "next": "Locate historical owner/export or approved prerequisite migration; never infer absent entitlements."
+        },
+        {
+          "table": "continuity_ask_allocations",
+          "state": "SOURCE_TABLE_ABSENT",
+          "result": "UNRESOLVED_NOT_ZERO",
+          "next": "Locate historical owner/export or approved prerequisite migration; never infer absent entitlements."
+        }
+      ]
+    },
+    {
+      "name": "phios-runtime-sandbox",
+      "id": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+      "rows": [
+        {
+          "table": "commerce_purchases",
+          "source": {
+            "databaseId": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+            "primaryKey": "pur_ord_ac119350dd7a40c3875313d1c2fd8c3a",
+            "selectedColumns": [
+              "purchase_id",
+              "checkout_attempt_id",
+              "purchase_state",
+              "currency",
+              "amount_minor",
+              "refunded_amount_minor",
+              "paid_at",
+              "refunded_at"
+            ]
+          },
+          "record": {
+            "purchase_id": "pur_ord_ac119350dd7a40c3875313d1c2fd8c3a",
+            "checkout_attempt_id": "ord_ac119350dd7a40c3875313d1c2fd8c3a",
+            "purchase_state": "purchased",
+            "currency": "MYR",
+            "amount_minor": 4900,
+            "refunded_amount_minor": 0,
+            "paid_at": "2026-10-01T09:08:19.078Z",
+            "refunded_at": null
+          },
+          "processing": "NON_MEMBERSHIP_PURCHASE_EXCLUDED_FROM_CREDIT_IMPORT",
+          "migrationBefore": {
+            "purchase_id": "pur_ord_ac119350dd7a40c3875313d1c2fd8c3a",
+            "checkout_attempt_id": "ord_ac119350dd7a40c3875313d1c2fd8c3a",
+            "purchase_state": "purchased",
+            "currency": "MYR",
+            "amount_minor": 4900,
+            "refunded_amount_minor": 0,
+            "paid_at": "2026-10-01T09:08:19.078Z",
+            "refunded_at": null
+          },
+          "migrationAfter": null,
+          "state": "EXCLUDED_NON_MEMBERSHIP",
+          "order": {
+            "checkout_attempt_id": "ord_ac119350dd7a40c3875313d1c2fd8c3a",
+            "product_id": "COM-REPORT-ZIWEI-FULL",
+            "environment": "QA",
+            "order_state": "FULFILLED",
+            "review_required": 0
+          },
+          "membershipProduct": false
+        },
+        {
+          "table": "commerce_checkout_attempts",
+          "source": {
+            "databaseId": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+            "primaryKey": "ord_301d2c107ed544ad8cefd1edb32255ce",
+            "selectedColumns": [
+              "checkout_attempt_id",
+              "product_id",
+              "environment",
+              "order_state",
+              "review_required"
+            ]
+          },
+          "record": {
+            "checkout_attempt_id": "ord_301d2c107ed544ad8cefd1edb32255ce",
+            "product_id": "COM-REPORT-BAZI-FULL",
+            "environment": "QA",
+            "order_state": "CHECKOUT_CREATED",
+            "review_required": 0
+          },
+          "processing": "PAYMENT_PENDING_DOES_NOT_GRANT_CREDIT",
+          "migrationBefore": {
+            "checkout_attempt_id": "ord_301d2c107ed544ad8cefd1edb32255ce",
+            "product_id": "COM-REPORT-BAZI-FULL",
+            "environment": "QA",
+            "order_state": "CHECKOUT_CREATED",
+            "review_required": 0
+          },
+          "migrationAfter": null,
+          "state": "HELD_NOT_IMPORTED"
+        },
+        {
+          "table": "commerce_checkout_attempts",
+          "source": {
+            "databaseId": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+            "primaryKey": "ord_ac119350dd7a40c3875313d1c2fd8c3a",
+            "selectedColumns": [
+              "checkout_attempt_id",
+              "product_id",
+              "environment",
+              "order_state",
+              "review_required"
+            ]
+          },
+          "record": {
+            "checkout_attempt_id": "ord_ac119350dd7a40c3875313d1c2fd8c3a",
+            "product_id": "COM-REPORT-ZIWEI-FULL",
+            "environment": "QA",
+            "order_state": "FULFILLED",
+            "review_required": 0
+          },
+          "processing": "PAYMENT_PENDING_DOES_NOT_GRANT_CREDIT",
+          "migrationBefore": {
+            "checkout_attempt_id": "ord_ac119350dd7a40c3875313d1c2fd8c3a",
+            "product_id": "COM-REPORT-ZIWEI-FULL",
+            "environment": "QA",
+            "order_state": "FULFILLED",
+            "review_required": 0
+          },
+          "migrationAfter": null,
+          "state": "HELD_NOT_IMPORTED"
+        }
+      ],
+      "gaps": [
+        {
+          "table": "continuity_quota_units",
+          "state": "SOURCE_TABLE_ABSENT",
+          "result": "UNRESOLVED_NOT_ZERO",
+          "next": "Locate historical owner/export or approved prerequisite migration; never infer absent entitlements."
+        },
+        {
+          "table": "provider_product_cost_entries",
+          "state": "SOURCE_TABLE_ABSENT",
+          "result": "UNRESOLVED_NOT_ZERO",
+          "next": "Locate historical owner/export or approved prerequisite migration; never infer absent entitlements."
+        },
+        {
+          "table": "continuity_ask_tasks",
+          "state": "SOURCE_TABLE_ABSENT",
+          "result": "UNRESOLVED_NOT_ZERO",
+          "next": "Locate historical owner/export or approved prerequisite migration; never infer absent entitlements."
+        },
+        {
+          "table": "continuity_ask_allocations",
+          "state": "SOURCE_TABLE_ABSENT",
+          "result": "UNRESOLVED_NOT_ZERO",
+          "next": "Locate historical owner/export or approved prerequisite migration; never infer absent entitlements."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "path": "functions/commerce/commerce-stripe-events.js",
+      "sha256": "dd20da53aa7893e3c1bbeecdda25664c96dff8ef6c8dc15291cd3149723ad812"
+    },
+    {
+      "path": "functions/commerce/book-commerce-store.js",
+      "sha256": "a1908faf4faebd9242db90807e4e95cc8c58655a78f241a0e2873989774b80f8"
+    },
+    {
+      "path": "functions/personal-reading/continuity/continuity-quota-d1.js",
+      "sha256": "aaee10acdd050c6b12c74f8737784ac35a7c96bb8722d38010ba68e32f07b957"
+    },
+    {
+      "path": "functions/personal-reading/continuity/continuity-credit-cutover.js",
+      "sha256": "ba17615da6f15f3daa9b42215c925ded2346b96efc434d36066950ca6152f83c"
+    },
+    {
+      "path": "functions/personal-reading/continuity/membership-production-gate.js",
+      "sha256": "4acd121694d977c83f1f551a9650bbc9c87fb16ea25683597a928f43cd8490c0"
+    }
+  ],
+  "externalPaymentHistory": "UNRESOLVED_NO_COMPLETE_INVOICE_REFILL_REFUND_EXPORT",
+  "decision": "NO_PRODUCTION_IMPORT_OR_GRANT_UNTIL_SOURCE_LINKAGE_COMPLETE",
+  "productionWrites": 0,
+  "providerCalls": 0,
+  "secretsDisplayed": 0,
+  "customerPrivateAnswersRead": 0
+}

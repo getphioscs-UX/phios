@@ -1,0 +1,218 @@
+{
+  "at": "2026-10-13T00:36:04.567Z",
+  "httpMethod": "POST_READ_QUERY_TRANSPORT_ONLY",
+  "sql": "SELECT type,name,tbl_name,sql FROM sqlite_master WHERE name NOT LIKE 'sqlite_%' ORDER BY type,name",
+  "status": 200,
+  "success": true,
+  "errors": [],
+  "results": [
+    {
+      "rows": [
+        {
+          "type": "index",
+          "name": "idx_entries_runtime",
+          "tbl_name": "runtime_entries",
+          "sql": "CREATE INDEX idx_entries_runtime ON runtime_entries(runtime_entity_id, created_at)"
+        },
+        {
+          "type": "index",
+          "name": "idx_readings_runtime",
+          "tbl_name": "reality_readings",
+          "sql": "CREATE INDEX idx_readings_runtime ON reality_readings(runtime_entity_id, reading_version)"
+        },
+        {
+          "type": "index",
+          "name": "idx_reviews_runtime",
+          "tbl_name": "runtime_reviews",
+          "sql": "CREATE INDEX idx_reviews_runtime ON runtime_reviews(runtime_entity_id, created_at)"
+        },
+        {
+          "type": "index",
+          "name": "idx_runtime_artifacts_runtime_id_created_at",
+          "tbl_name": "runtime_artifacts",
+          "sql": "CREATE INDEX idx_runtime_artifacts_runtime_id_created_at\n  ON runtime_artifacts(runtime_id, created_at DESC)"
+        },
+        {
+          "type": "index",
+          "name": "idx_runtime_artifacts_type_created_at",
+          "tbl_name": "runtime_artifacts",
+          "sql": "CREATE INDEX idx_runtime_artifacts_type_created_at\n  ON runtime_artifacts(artifact_type, created_at DESC)"
+        },
+        {
+          "type": "index",
+          "name": "idx_runtime_events_event_type_created_at",
+          "tbl_name": "runtime_events",
+          "sql": "CREATE INDEX idx_runtime_events_event_type_created_at\n  ON runtime_events(event_type, created_at DESC)"
+        },
+        {
+          "type": "index",
+          "name": "idx_runtime_events_runtime_id_created_at",
+          "tbl_name": "runtime_events",
+          "sql": "CREATE INDEX idx_runtime_events_runtime_id_created_at\n  ON runtime_events(runtime_id, created_at DESC)"
+        },
+        {
+          "type": "index",
+          "name": "idx_runtime_lineages_child_runtime_id",
+          "tbl_name": "runtime_lineages",
+          "sql": "CREATE INDEX idx_runtime_lineages_child_runtime_id\n  ON runtime_lineages(child_runtime_id, created_at DESC)"
+        },
+        {
+          "type": "index",
+          "name": "idx_runtime_lineages_parent_runtime_id",
+          "tbl_name": "runtime_lineages",
+          "sql": "CREATE INDEX idx_runtime_lineages_parent_runtime_id\n  ON runtime_lineages(parent_runtime_id, created_at DESC)"
+        },
+        {
+          "type": "index",
+          "name": "idx_runtime_revisions_parent_revision_id",
+          "tbl_name": "runtime_revisions",
+          "sql": "CREATE INDEX idx_runtime_revisions_parent_revision_id\n  ON runtime_revisions(parent_revision_id)"
+        },
+        {
+          "type": "index",
+          "name": "idx_runtime_revisions_runtime_id_created_at",
+          "tbl_name": "runtime_revisions",
+          "sql": "CREATE INDEX idx_runtime_revisions_runtime_id_created_at\n  ON runtime_revisions(runtime_id, created_at DESC)"
+        },
+        {
+          "type": "index",
+          "name": "idx_runtime_snapshots_runtime_id_created_at",
+          "tbl_name": "runtime_snapshots",
+          "sql": "CREATE INDEX idx_runtime_snapshots_runtime_id_created_at\n  ON runtime_snapshots(runtime_id, created_at DESC)"
+        },
+        {
+          "type": "index",
+          "name": "idx_runtime_snapshots_stage_created_at",
+          "tbl_name": "runtime_snapshots",
+          "sql": "CREATE INDEX idx_runtime_snapshots_stage_created_at\n  ON runtime_snapshots(stage, created_at DESC)"
+        },
+        {
+          "type": "index",
+          "name": "idx_runtime_users_created_at",
+          "tbl_name": "runtime_users",
+          "sql": "CREATE INDEX idx_runtime_users_created_at\n  ON runtime_users(created_at)"
+        },
+        {
+          "type": "index",
+          "name": "idx_runtimes_created_at",
+          "tbl_name": "runtimes",
+          "sql": "CREATE INDEX idx_runtimes_created_at\n  ON runtimes(created_at DESC)"
+        },
+        {
+          "type": "index",
+          "name": "idx_runtimes_current_stage_updated_at",
+          "tbl_name": "runtimes",
+          "sql": "CREATE INDEX idx_runtimes_current_stage_updated_at\n  ON runtimes(current_stage, updated_at DESC)"
+        },
+        {
+          "type": "index",
+          "name": "idx_runtimes_status_updated_at",
+          "tbl_name": "runtimes",
+          "sql": "CREATE INDEX idx_runtimes_status_updated_at\n  ON runtimes(status, updated_at DESC)"
+        },
+        {
+          "type": "index",
+          "name": "idx_runtimes_user_id_created_at",
+          "tbl_name": "runtimes",
+          "sql": "CREATE INDEX idx_runtimes_user_id_created_at\n  ON runtimes(user_id, created_at DESC)"
+        },
+        {
+          "type": "table",
+          "name": "_cf_KV",
+          "tbl_name": "_cf_KV",
+          "sql": "CREATE TABLE _cf_KV (\n        key TEXT PRIMARY KEY,\n        value BLOB\n      ) WITHOUT ROWID"
+        },
+        {
+          "type": "table",
+          "name": "d1_migrations",
+          "tbl_name": "d1_migrations",
+          "sql": "CREATE TABLE \"d1_migrations\"(\n\t\tid         INTEGER PRIMARY KEY AUTOINCREMENT,\n\t\tname       TEXT UNIQUE,\n\t\tapplied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL\n)"
+        },
+        {
+          "type": "table",
+          "name": "reality_readings",
+          "tbl_name": "reality_readings",
+          "sql": "CREATE TABLE reality_readings (\r\n  reading_id TEXT PRIMARY KEY,\r\n  runtime_entity_id TEXT NOT NULL,\r\n  reading_version INTEGER NOT NULL,\r\n  status TEXT NOT NULL,\r\n  reading_json TEXT NOT NULL,\r\n  created_at TEXT NOT NULL,\r\n  FOREIGN KEY(runtime_entity_id) REFERENCES runtime_entities(runtime_entity_id)\r\n)"
+        },
+        {
+          "type": "table",
+          "name": "runtime_artifacts",
+          "tbl_name": "runtime_artifacts",
+          "sql": "CREATE TABLE runtime_artifacts (\n  artifact_id TEXT PRIMARY KEY,\n  runtime_id TEXT NOT NULL,\n  artifact_type TEXT NOT NULL,\n  stage TEXT NOT NULL,\n  payload TEXT NOT NULL DEFAULT '{}',\n  schema_version TEXT NOT NULL DEFAULT 'phi-os.runtime-artifact.v1',\n  created_at TEXT NOT NULL,\n  updated_at TEXT NOT NULL,\n  CHECK (length(trim(artifact_id)) > 0),\n  CHECK (length(trim(runtime_id)) > 0),\n  CHECK (length(trim(artifact_type)) > 0),\n  CHECK (length(trim(stage)) > 0),\n  CHECK (length(trim(schema_version)) > 0),\n  CHECK (json_valid(payload)),\n  FOREIGN KEY (runtime_id)\n    REFERENCES runtimes(runtime_id)\n    ON UPDATE CASCADE\n    ON DELETE CASCADE\n)"
+        },
+        {
+          "type": "table",
+          "name": "runtime_entities",
+          "tbl_name": "runtime_entities",
+          "sql": "CREATE TABLE runtime_entities (\r\n  runtime_entity_id TEXT PRIMARY KEY,\r\n  owner_user_id TEXT,\r\n  entity_type TEXT NOT NULL DEFAULT 'personal',\r\n  status TEXT NOT NULL DEFAULT 'active',\r\n  canonical_version INTEGER NOT NULL DEFAULT 1,\r\n  consent_json TEXT NOT NULL,\r\n  created_at TEXT NOT NULL,\r\n  updated_at TEXT NOT NULL,\r\n  FOREIGN KEY(owner_user_id) REFERENCES users(user_id)\r\n)"
+        },
+        {
+          "type": "table",
+          "name": "runtime_entries",
+          "tbl_name": "runtime_entries",
+          "sql": "CREATE TABLE runtime_entries (\r\n  runtime_entry_id TEXT PRIMARY KEY,\r\n  runtime_entity_id TEXT NOT NULL,\r\n  schema_version TEXT NOT NULL DEFAULT '1.0',\r\n  status TEXT NOT NULL,\r\n  entry_json TEXT NOT NULL,\r\n  created_at TEXT NOT NULL,\r\n  updated_at TEXT NOT NULL,\r\n  FOREIGN KEY(runtime_entity_id) REFERENCES runtime_entities(runtime_entity_id)\r\n)"
+        },
+        {
+          "type": "table",
+          "name": "runtime_events",
+          "tbl_name": "runtime_events",
+          "sql": "CREATE TABLE runtime_events (\n  event_id TEXT PRIMARY KEY,\n  runtime_id TEXT NOT NULL,\n  event_type TEXT NOT NULL,\n  payload TEXT NOT NULL DEFAULT '{}',\n  event_version TEXT NOT NULL DEFAULT '1.0.0',\n  created_at TEXT NOT NULL,\n  CHECK (length(trim(event_id)) > 0),\n  CHECK (length(trim(runtime_id)) > 0),\n  CHECK (length(trim(event_type)) > 0),\n  CHECK (length(trim(event_version)) > 0),\n  CHECK (json_valid(payload)),\n  FOREIGN KEY (runtime_id)\n    REFERENCES runtimes(runtime_id)\n    ON UPDATE CASCADE\n    ON DELETE CASCADE\n)"
+        },
+        {
+          "type": "table",
+          "name": "runtime_lineages",
+          "tbl_name": "runtime_lineages",
+          "sql": "CREATE TABLE runtime_lineages (\n  lineage_id TEXT PRIMARY KEY,\n  parent_runtime_id TEXT NOT NULL,\n  child_runtime_id TEXT NOT NULL,\n  relationship_type TEXT NOT NULL DEFAULT 'branch',\n  metadata TEXT NOT NULL DEFAULT '{}',\n  created_at TEXT NOT NULL,\n  CHECK (length(trim(lineage_id)) > 0),\n  CHECK (length(trim(parent_runtime_id)) > 0),\n  CHECK (length(trim(child_runtime_id)) > 0),\n  CHECK (length(trim(relationship_type)) > 0),\n  CHECK (parent_runtime_id <> child_runtime_id),\n  CHECK (json_valid(metadata)),\n  UNIQUE (parent_runtime_id, child_runtime_id, relationship_type),\n  FOREIGN KEY (parent_runtime_id)\n    REFERENCES runtimes(runtime_id)\n    ON UPDATE CASCADE\n    ON DELETE CASCADE,\n  FOREIGN KEY (child_runtime_id)\n    REFERENCES runtimes(runtime_id)\n    ON UPDATE CASCADE\n    ON DELETE CASCADE\n)"
+        },
+        {
+          "type": "table",
+          "name": "runtime_migration_history",
+          "tbl_name": "runtime_migration_history",
+          "sql": "CREATE TABLE runtime_migration_history (\n  version INTEGER PRIMARY KEY,\n  name TEXT NOT NULL UNIQUE,\n  file_name TEXT NOT NULL UNIQUE,\n  checksum TEXT NOT NULL,\n  schema_id TEXT,\n  applied_at TEXT NOT NULL,\n  execution_ms INTEGER NOT NULL DEFAULT 0,\n  CHECK (version > 0),\n  CHECK (length(trim(name)) > 0),\n  CHECK (length(trim(file_name)) > 0),\n  CHECK (length(checksum) = 64),\n  CHECK (execution_ms >= 0)\n)"
+        },
+        {
+          "type": "table",
+          "name": "runtime_reviews",
+          "tbl_name": "runtime_reviews",
+          "sql": "CREATE TABLE runtime_reviews (\r\n  review_id TEXT PRIMARY KEY,\r\n  runtime_entity_id TEXT NOT NULL,\r\n  reading_id TEXT,\r\n  review_json TEXT NOT NULL,\r\n  created_at TEXT NOT NULL,\r\n  FOREIGN KEY(runtime_entity_id) REFERENCES runtime_entities(runtime_entity_id),\r\n  FOREIGN KEY(reading_id) REFERENCES reality_readings(reading_id)\r\n)"
+        },
+        {
+          "type": "table",
+          "name": "runtime_revisions",
+          "tbl_name": "runtime_revisions",
+          "sql": "CREATE TABLE runtime_revisions (\n  revision_id TEXT PRIMARY KEY,\n  runtime_id TEXT NOT NULL,\n  parent_revision_id TEXT,\n  reason TEXT NOT NULL,\n  changes TEXT NOT NULL DEFAULT '{}',\n  schema_version TEXT NOT NULL DEFAULT 'phi-os.runtime-revision.v1',\n  created_at TEXT NOT NULL,\n  CHECK (length(trim(revision_id)) > 0),\n  CHECK (length(trim(runtime_id)) > 0),\n  CHECK (length(trim(reason)) > 0),\n  CHECK (length(trim(schema_version)) > 0),\n  CHECK (json_valid(changes)),\n  CHECK (parent_revision_id IS NULL OR parent_revision_id <> revision_id),\n  FOREIGN KEY (runtime_id)\n    REFERENCES runtimes(runtime_id)\n    ON UPDATE CASCADE\n    ON DELETE CASCADE,\n  FOREIGN KEY (parent_revision_id)\n    REFERENCES runtime_revisions(revision_id)\n    ON UPDATE CASCADE\n    ON DELETE SET NULL\n)"
+        },
+        {
+          "type": "table",
+          "name": "runtime_snapshots",
+          "tbl_name": "runtime_snapshots",
+          "sql": "CREATE TABLE runtime_snapshots (\n  snapshot_id TEXT PRIMARY KEY,\n  runtime_id TEXT NOT NULL,\n  stage TEXT NOT NULL,\n  state TEXT NOT NULL DEFAULT '{}',\n  schema_version TEXT NOT NULL DEFAULT 'phi-os.runtime-snapshot.v1',\n  created_at TEXT NOT NULL,\n  CHECK (length(trim(snapshot_id)) > 0),\n  CHECK (length(trim(runtime_id)) > 0),\n  CHECK (length(trim(stage)) > 0),\n  CHECK (length(trim(schema_version)) > 0),\n  CHECK (json_valid(state)),\n  FOREIGN KEY (runtime_id)\n    REFERENCES runtimes(runtime_id)\n    ON UPDATE CASCADE\n    ON DELETE CASCADE\n)"
+        },
+        {
+          "type": "table",
+          "name": "runtime_users",
+          "tbl_name": "runtime_users",
+          "sql": "CREATE TABLE runtime_users (\n  user_id TEXT PRIMARY KEY,\n  status TEXT NOT NULL DEFAULT 'active',\n  created_at TEXT NOT NULL,\n  updated_at TEXT NOT NULL,\n  CHECK (length(trim(user_id)) > 0),\n  CHECK (length(trim(status)) > 0)\n)"
+        },
+        {
+          "type": "table",
+          "name": "runtimes",
+          "tbl_name": "runtimes",
+          "sql": "CREATE TABLE runtimes (\n  runtime_id TEXT PRIMARY KEY,\n  user_id TEXT,\n  status TEXT NOT NULL DEFAULT 'active',\n  current_stage TEXT NOT NULL DEFAULT 'entry_collecting',\n  schema_version TEXT NOT NULL DEFAULT 'phi-os.runtime-persistence.v1',\n  state TEXT NOT NULL DEFAULT '{}',\n  created_at TEXT NOT NULL,\n  updated_at TEXT NOT NULL,\n  CHECK (length(trim(runtime_id)) > 0),\n  CHECK (length(trim(status)) > 0),\n  CHECK (length(trim(current_stage)) > 0),\n  CHECK (length(trim(schema_version)) > 0),\n  CHECK (json_valid(state)),\n  FOREIGN KEY (user_id)\n    REFERENCES runtime_users(user_id)\n    ON UPDATE CASCADE\n    ON DELETE CASCADE\n)"
+        },
+        {
+          "type": "table",
+          "name": "users",
+          "tbl_name": "users",
+          "sql": "CREATE TABLE users (\r\n  user_id TEXT PRIMARY KEY,\r\n  email TEXT UNIQUE,\r\n  display_name TEXT,\r\n  role TEXT NOT NULL DEFAULT 'explorer',\r\n  status TEXT NOT NULL DEFAULT 'active',\r\n  created_at TEXT NOT NULL,\r\n  updated_at TEXT NOT NULL\r\n)"
+        }
+      ],
+      "success": true,
+      "changes": 0,
+      "rowsRead": 84,
+      "rowsWritten": 0
+    }
+  ],
+  "productionMutations": 0,
+  "providerCalls": 0
+}

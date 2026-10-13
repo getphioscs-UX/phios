@@ -1,0 +1,27 @@
+{
+  "status": "TRACE_IDENTITY_NOT_PROVEN",
+  "api": {
+    "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/request-tracer/trace",
+    "httpStatus": 403,
+    "credential": "EXISTING_WRANGLER_OAUTH",
+    "missingRead": "Allow Request Tracer Read",
+    "errors": [
+      {
+        "code": 10000,
+        "message": "Authentication error",
+        "documentation_url": "https://developers.cloudflare.com/api/resources/request_tracers/subresources/traces/methods/create"
+      }
+    ]
+  },
+  "dashboard": {
+    "type": "RULE_SIMULATOR_NOT_LIVE_TRAFFIC_TRACE",
+    "requestURL": "https://41b1c458.phios-github.pages.dev/api/auth/session?p9_t5_trace=canary-only",
+    "method": "GET",
+    "result": "There was an error and your simulation could not be performed. Try another URL or amend your configurations: hostname does not belong to your account",
+    "ruleIDReturned": false,
+    "screenshot": "tmp/p9-t5-trace-host-scope-failure.jpg"
+  },
+  "canaryMatchedRuleIdentity": "UNPROVEN",
+  "historicalHandlerExecution": "NOT_OBSERVED_BUT_NO_USABLE_HANDLER_TRACE_COLLECTED; absence not proven",
+  "basis": "307 live response + unique configured rule is circumstantial; cannot substitute for requested trace identity"
+}

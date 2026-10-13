@@ -1,0 +1,121 @@
+{
+  "at": "2026-10-12T15:22:11.445Z",
+  "rows": [
+    "All provider calls denied with production flags off",
+    "New/old dispatchers cannot both be ready",
+    "Unique candidate IDs 19–21; active P9 and historical migrations unchanged; checksums verified",
+    "Missing schema produces unknown historical entitlement, not zero credits"
+  ],
+  "providerCalls": 0,
+  "productionActivation": false,
+  "migrationsExecuted": 0,
+  "inventory": {
+    "binding": "RUNTIME_DB",
+    "records": [
+      {
+        "table": "commerce_purchases",
+        "purpose": "purchase/renewal/refill provenance",
+        "state": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "count": null
+      },
+      {
+        "table": "commerce_subscriptions",
+        "purpose": "paid membership state and periods",
+        "state": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "count": null
+      },
+      {
+        "table": "commerce_checkout_attempts",
+        "purpose": "verified paid orders and environment",
+        "state": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "count": null
+      },
+      {
+        "table": "continuity_quota_units",
+        "purpose": "existing quota grants",
+        "state": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "count": null
+      },
+      {
+        "table": "provider_product_cost_entries",
+        "purpose": "settled spend, unknown usage and legacy reservations",
+        "state": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "count": null
+      },
+      {
+        "table": "continuity_ask_tasks",
+        "purpose": "new execution and settlements",
+        "state": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "count": null
+      },
+      {
+        "table": "continuity_ask_allocations",
+        "purpose": "FIFO task allocation",
+        "state": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "count": null
+      },
+      {
+        "table": "runtime_artifacts",
+        "purpose": "legacy Continuity saved artifacts; requires type-specific provenance",
+        "state": "PRESENT_REQUIRES_PROVENANCE_RECONCILIATION",
+        "count": 1
+      },
+      {
+        "table": "account_report_followup_questions",
+        "purpose": "included report benefit; not interchangeable with credits",
+        "state": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "count": null
+      }
+    ],
+    "unresolved": [
+      {
+        "owner": "commerce_purchases",
+        "reason": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "nextAction": "Read verified owner-specific purchase/spend/reservation linkage in separately controlled reconciliation; do not regrant"
+      },
+      {
+        "owner": "commerce_subscriptions",
+        "reason": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "nextAction": "Read verified owner-specific purchase/spend/reservation linkage in separately controlled reconciliation; do not regrant"
+      },
+      {
+        "owner": "commerce_checkout_attempts",
+        "reason": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "nextAction": "Read verified owner-specific purchase/spend/reservation linkage in separately controlled reconciliation; do not regrant"
+      },
+      {
+        "owner": "continuity_quota_units",
+        "reason": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "nextAction": "Read verified owner-specific purchase/spend/reservation linkage in separately controlled reconciliation; do not regrant"
+      },
+      {
+        "owner": "provider_product_cost_entries",
+        "reason": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "nextAction": "Read verified owner-specific purchase/spend/reservation linkage in separately controlled reconciliation; do not regrant"
+      },
+      {
+        "owner": "continuity_ask_tasks",
+        "reason": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "nextAction": "Read verified owner-specific purchase/spend/reservation linkage in separately controlled reconciliation; do not regrant"
+      },
+      {
+        "owner": "continuity_ask_allocations",
+        "reason": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "nextAction": "Read verified owner-specific purchase/spend/reservation linkage in separately controlled reconciliation; do not regrant"
+      },
+      {
+        "owner": "runtime_artifacts",
+        "reason": "PRESENT_REQUIRES_PROVENANCE_RECONCILIATION",
+        "nextAction": "Classify historical artifact types, versions and signed purchase linkage; do not translate informational allowance fields blindly"
+      },
+      {
+        "owner": "account_report_followup_questions",
+        "reason": "STORAGE_ABSENT_ENTITLEMENT_UNVERIFIED",
+        "nextAction": "Read verified owner-specific purchase/spend/reservation linkage in separately controlled reconciliation; do not regrant"
+      }
+    ],
+    "grantsCreated": 0,
+    "creditsCleared": 0,
+    "cutoverReady": false
+  }
+}

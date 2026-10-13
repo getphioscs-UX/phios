@@ -1,0 +1,92 @@
+{
+  "at": "2026-10-13T00:32:32.879Z",
+  "status": "PASS_LOCAL_FROZEN_DIAGNOSTIC_ONLY",
+  "checks": [
+    {
+      "path": "wrangler.jsonc",
+      "match": true
+    },
+    {
+      "path": "functions/_middleware.js",
+      "match": true
+    },
+    {
+      "path": "functions/_lib/d1-maintenance-guard.js",
+      "match": true
+    },
+    {
+      "path": "functions/_lib/d1-private-isolation-probe.js",
+      "match": true
+    }
+  ],
+  "cases": [
+    {
+      "method": "POST",
+      "path": "/api/account-persons",
+      "privateAuth": false,
+      "status": 503,
+      "nextReached": false,
+      "rawForwarded": 0,
+      "trace": [],
+      "scope": "LOCAL_ONLY_NOT_RUNTIME"
+    },
+    {
+      "method": "GET",
+      "path": "/__ops/d1-isolation",
+      "privateAuth": true,
+      "status": 503,
+      "nextReached": false,
+      "rawForwarded": 0,
+      "trace": [
+        {
+          "kind": "P9_PRIVATE_D1_ISOLATION",
+          "middlewareExecuted": true,
+          "handlerReached": true,
+          "mode": "READ_ONLY",
+          "bindingWrapped": true,
+          "method": "GET",
+          "guardRejectedWrite": true,
+          "D1MutationAttemptForwarded": false
+        }
+      ],
+      "scope": "LOCAL_ONLY_NOT_RUNTIME"
+    },
+    {
+      "method": "POST",
+      "path": "/__ops/d1-isolation",
+      "privateAuth": true,
+      "status": 503,
+      "nextReached": false,
+      "rawForwarded": 0,
+      "trace": [
+        {
+          "kind": "P9_PRIVATE_D1_ISOLATION",
+          "middlewareExecuted": true,
+          "handlerReached": true,
+          "mode": "READ_ONLY",
+          "bindingWrapped": true,
+          "method": "POST",
+          "guardRejectedWrite": true,
+          "D1MutationAttemptForwarded": false
+        }
+      ],
+      "scope": "LOCAL_ONLY_NOT_RUNTIME"
+    },
+    {
+      "method": "GET",
+      "path": "/fake-get-write-trap",
+      "privateAuth": false,
+      "status": 503,
+      "nextReached": true,
+      "rawForwarded": 0,
+      "trace": [],
+      "scope": "LOCAL_ONLY_NOT_RUNTIME"
+    }
+  ],
+  "productionRuntimeIsolation": "UNPROVEN",
+  "blocker": "CURRENT_DEPLOYMENT_PRIVATE_TRACE_NOT_CAPTURED; current diagnostic credential not available from established saved credential files; do not rotate or bypass auth under T7.",
+  "minimumProof": "Use existing current deployment unchanged, make private credential securely available or separately authorize diagnostic-only rotation/config propagation if required; establish exact-deployment tail OPEN with full sampling before bounded GET guard probe, capture actual mode/middleware/wrapped binding/guard rejection/no raw forwarding. Preserve auth controls. No new source needed if credential/current deployment support it.",
+  "providerCalls": 0,
+  "d1Operations": 0,
+  "productionMutations": 0
+}

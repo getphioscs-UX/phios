@@ -1,3 +1,4 @@
+import {executeProductionKnowledge,productionKnowledgeReady} from '../personal-reading/continuity/membership-production-dispatcher.js';
 import {personIdentity} from '../account/canonical-person-store.js';
 import {requireSameOrigin} from '../account/oidc-auth.js';
 import {activeContinuitySubscription} from '../personal-reading/continuity/continuity-quota-d1.js';
@@ -28,12 +29,14 @@ export async function onRequest(context){
     const sourceId=new URL(context.request.url).searchParams.get('sourceId');
     if(sourceId){const source=customerAnswer?.sourceBinding?.bindings.find(b=>b.shortId===sourceId);if(!source)return Response.json({ok:false,code:'SAVED_SOURCE_NOT_FOUND',providerCalls:0},{status:404,headers});return Response.json({ok:true,source,sourceState:'SAVED_PERMISSION_BOUND_REFERENCE_NOT_FULL_TEXT',providerCalls:0},{headers});}
     return Response.json({ok:true,task:{taskId:row.task_id,state:row.state,answerCompleteness:answerOutcome(answer,row.state),customerChargeMicroUSD:row.customer_charge_micro_usd,answer:customerAnswer}},{headers});}
-   return Response.json({ok:true,balance:await readCreditBalance(context.env,owner),executionAvailable:offlineAutomaticDeliveryAvailable(context.env),executionScope:offlineAutomaticDeliveryAvailable(context.env)?'OFFLINE_REPLAY_ONLY':'CLOSED'},{headers});
+   return Response.json({ok:true,balance:await readCreditBalance(context.env,owner),executionAvailable:offlineAutomaticDeliveryAvailable(context.env)||productionKnowledgeReady(context.env),executionScope:offlineAutomaticDeliveryAvailable(context.env)?'OFFLINE_REPLAY_ONLY':productionKnowledgeReady(context.env)?'KNOWLEDGE_ONLY':'CLOSED'},{headers});
   }
   if(context.request.method!=='POST')return Response.json({ok:false,code:'METHOD_NOT_ALLOWED'},{status:405,headers});
   requireSameOrigin(context.request);await activeContinuitySubscription(context.env,owner);
   const raw=await context.request.text();if(raw.length>5000)return Response.json({ok:false,code:'INPUT_TOO_LARGE'},{status:413,headers});const body=JSON.parse(raw);
-  if(body.action==='EXECUTE'&&offlineAutomaticDeliveryAvailable(context.env)){
+  if(body.action==='EXECUTE'){
+   if(body.mode!=='KNOWLEDGE'||body.depth&&body.depth!=='ORDINARY'||typeof body.question!=='string'||!body.question.trim()||body.question.length>2000||!['zh-Hans','en'].includes(body.locale||'zh-Hans')||typeof body.taskId!=='string'||!/^[-A-Za-z0-9_]{8,160}$/.test(body.taskId))return Response.json({ok:false,code:'ASK_TASK_INPUT_INVALID',providerCalls:0},{status:400,headers});
+   if(!offlineAutomaticDeliveryAvailable(context.env)){if(body.confirmed!==true)return Response.json({ok:false,code:'TASK_BUDGET_CONFIRMATION_REQUIRED',providerCalls:0},{status:400,headers});const result=await executeProductionKnowledge(context,{taskId:body.taskId,question:body.question,locale:body.locale||'zh-Hans',bookCode:body.bookCode||''});return Response.json({ok:true,...result,answer:customerProjection(result.answer,result.executionState)},{headers});}
    if(body.mode!=='KNOWLEDGE'||body.depth&&body.depth!=='ORDINARY'||typeof body.taskId!=='string'||!/^[-A-Za-z0-9_]{8,160}$/.test(body.taskId))return Response.json({ok:false,code:'OFFLINE_TASK_SCOPE_INVALID',providerCalls:0},{status:400,headers});
    const result=await executeOfflineAutomaticDelivery(context,{taskId:body.taskId,question:body.question,locale:body.locale||'zh-Hans',bookCode:body.bookCode||''},async(ctx,input)=>prepareKnowledgeMembershipAsk(ctx,input));
    return Response.json({ok:true,...result,answer:customerProjection(result.answer,result.executionState)},{headers});

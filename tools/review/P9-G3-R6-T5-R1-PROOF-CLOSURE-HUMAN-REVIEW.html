@@ -1,0 +1,173 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P9 T5-R1 proof closure</title><style>body{max-width:1100px;margin:35px auto;padding:20px;font:16px/1.6 system-ui;color:#17313b;background:#fafaf7}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#edf2f2;padding:18px}img{max-width:100%;height:auto}td,th{padding:9px;border:1px solid #bbc9ca;overflow-wrap:anywhere}table{border-collapse:collapse;width:100%}.limit{background:#fff0db;padding:18px}</style><h1>P9 G3-R6-T5-R1 · Single canary proof closure</h1><p>PASS_SINGLE_CANARY_INGRESS_CONTAINMENT — branch B: architecturally proven by bounded runtime causal attribution and documented terminating pre-origin semantics.</p><p class="limit">Direct runtime rule ID remains unproven. Trace unavailable for provider-managed hash; audit/Logpush APIs403. Global production D1 isolation remains UNPROVEN; zone LB visibility OPEN; no broader rollout authorization.</p><h2>Matched scope A/B</h2><table><tr><th>Round / host</th><th>Path / nonce</th><th>Status / Location</th></tr><tr><td>1 / 41b1c458.phios-github.pages.dev</td><td>/<br>e1167730-a1bf-4b89-9dda-49cf856fcb91</td><td>307<br>https://getphios.com/?p9_t5_r1=e1167730-a1bf-4b89-9dda-49cf856fcb91</td></tr><tr><td>1 / a1f8a3ba.phios-github.pages.dev</td><td>/<br>e1167730-a1bf-4b89-9dda-49cf856fcb91</td><td>200<br>none</td></tr><tr><td>1 / 41b1c458.phios-github.pages.dev</td><td>/session<br>551c7490-ff24-4d35-94ce-a74297397199</td><td>307<br>https://getphios.com/session?p9_t5_r1=551c7490-ff24-4d35-94ce-a74297397199</td></tr><tr><td>1 / a1f8a3ba.phios-github.pages.dev</td><td>/session<br>551c7490-ff24-4d35-94ce-a74297397199</td><td>200<br>none</td></tr><tr><td>1 / 41b1c458.phios-github.pages.dev</td><td>/api/auth/session<br>e9d9b91d-064c-40e3-abe6-a1c578df859b</td><td>307<br>https://getphios.com/api/auth/session?p9_t5_r1=e9d9b91d-064c-40e3-abe6-a1c578df859b</td></tr><tr><td>1 / a1f8a3ba.phios-github.pages.dev</td><td>/api/auth/session<br>e9d9b91d-064c-40e3-abe6-a1c578df859b</td><td>200<br>none</td></tr><tr><td>2 / 41b1c458.phios-github.pages.dev</td><td>/<br>cdf9981a-ad5f-42c7-973f-89d4b881b9c7</td><td>307<br>https://getphios.com/?p9_t5_r1=cdf9981a-ad5f-42c7-973f-89d4b881b9c7</td></tr><tr><td>2 / a1f8a3ba.phios-github.pages.dev</td><td>/<br>cdf9981a-ad5f-42c7-973f-89d4b881b9c7</td><td>200<br>none</td></tr><tr><td>2 / 41b1c458.phios-github.pages.dev</td><td>/session<br>2aadf119-132a-4b2a-a64b-2dd1aa560850</td><td>307<br>https://getphios.com/session?p9_t5_r1=2aadf119-132a-4b2a-a64b-2dd1aa560850</td></tr><tr><td>2 / a1f8a3ba.phios-github.pages.dev</td><td>/session<br>2aadf119-132a-4b2a-a64b-2dd1aa560850</td><td>200<br>none</td></tr><tr><td>2 / 41b1c458.phios-github.pages.dev</td><td>/api/auth/session<br>532b745b-3529-40f1-8911-9a553442f6aa</td><td>307<br>https://getphios.com/api/auth/session?p9_t5_r1=532b745b-3529-40f1-8911-9a553442f6aa</td></tr><tr><td>2 / a1f8a3ba.phios-github.pages.dev</td><td>/api/auth/session<br>532b745b-3529-40f1-8911-9a553442f6aa</td><td>200<br>none</td></tr></table><h2>Frozen actual configuration, causal reasoning and limits</h2><pre>{
+  &quot;status&quot;: &quot;PASS_SINGLE_CANARY_INGRESS_CONTAINMENT&quot;,
+  &quot;decisionBranch&quot;: &quot;B_TRACE_UNAVAILABLE_BUT_TERMINATING_REDIRECT_SEMANTICS_SUFFICIENT_FOR_CANARY&quot;,
+  &quot;canaryRuleID&quot;: &quot;66f4b7cbcabe40b38a4b8fab0b1eb697&quot;,
+  &quot;rulesetVersion&quot;: &quot;3&quot;,
+  &quot;ruleEnabled&quot;: true,
+  &quot;rulePosition&quot;: 3,
+  &quot;listID&quot;: &quot;d049cc55bb5f4c1a9223619886c3745b&quot;,
+  &quot;itemID&quot;: &quot;2c54f18d5bcd419ebafaff613a5807aa&quot;,
+  &quot;actualItem&quot;: {
+    &quot;source_url&quot;: &quot;41b1c458.phios-github.pages.dev/&quot;,
+    &quot;include_subdomains&quot;: false,
+    &quot;target_url&quot;: &quot;https://getphios.com/&quot;,
+    &quot;status_code&quot;: 307,
+    &quot;preserve_query_string&quot;: true,
+    &quot;subpath_matching&quot;: true,
+    &quot;preserve_path_suffix&quot;: true
+  },
+  &quot;actualRule&quot;: {
+    &quot;action&quot;: &quot;redirect&quot;,
+    &quot;action_parameters&quot;: {
+      &quot;from_list&quot;: {
+        &quot;key&quot;: &quot;http.request.full_uri&quot;,
+        &quot;name&quot;: &quot;p9_t4_canary2_ingress&quot;
+      }
+    },
+    &quot;description&quot;: &quot;P9 Canary 2 only; no wildcard historical retirement&quot;,
+    &quot;enabled&quot;: true,
+    &quot;expression&quot;: &quot;(http.host eq \&quot;41b1c458.phios-github.pages.dev\&quot;) and (http.request.full_uri in $p9_t4_canary2_ingress)&quot;,
+    &quot;id&quot;: &quot;66f4b7cbcabe40b38a4b8fab0b1eb697&quot;,
+    &quot;last_updated&quot;: &quot;2026-10-12T15:11:36.261713Z&quot;,
+    &quot;ref&quot;: &quot;66f4b7cbcabe40b38a4b8fab0b1eb697&quot;,
+    &quot;version&quot;: &quot;1&quot;
+  },
+  &quot;traceAvailable&quot;: false,
+  &quot;runtimeRuleIdentityDirectlyProven&quot;: false,
+  &quot;traceFailureClass&quot;: &quot;TRACE_UNAVAILABLE_FOR_PROVIDER_MANAGED_PAGES_HASH_HOST&quot;,
+  &quot;traceResults&quot;: {
+    &quot;accountAPI&quot;: [
+      {
+        &quot;endpoint&quot;: &quot;/accounts/0b9f36bdf56f38d7d09aebe388f15204/request-tracer/trace&quot;,
+        &quot;scope&quot;: &quot;LOCAL_MINIMUM_READ&quot;,
+        &quot;status&quot;: 403,
+        &quot;errors&quot;: [
+          {
+            &quot;code&quot;: 10000,
+            &quot;message&quot;: &quot;Authentication error&quot;,
+            &quot;documentation_url&quot;: &quot;https://developers.cloudflare.com/api/resources/request_tracers/subresources/traces/methods/create&quot;
+          }
+        ]
+      },
+      {
+        &quot;endpoint&quot;: &quot;/accounts/0b9f36bdf56f38d7d09aebe388f15204/request-tracer/trace&quot;,
+        &quot;scope&quot;: &quot;LOCAL_T5_BULK_ONLY&quot;,
+        &quot;status&quot;: 403,
+        &quot;errors&quot;: [
+          {
+            &quot;code&quot;: 10000,
+            &quot;message&quot;: &quot;Authentication error&quot;,
+            &quot;documentation_url&quot;: &quot;https://developers.cloudflare.com/api/resources/request_tracers/subresources/traces/methods/create&quot;
+          }
+        ]
+      },
+      {
+        &quot;endpoint&quot;: &quot;/accounts/0b9f36bdf56f38d7d09aebe388f15204/request-tracer/trace&quot;,
+        &quot;scope&quot;: &quot;EXISTING_WRANGLER&quot;,
+        &quot;status&quot;: 403,
+        &quot;errors&quot;: [
+          {
+            &quot;code&quot;: 10000,
+            &quot;message&quot;: &quot;Authentication error&quot;,
+            &quot;documentation_url&quot;: &quot;https://developers.cloudflare.com/api/resources/request_tracers/subresources/traces/methods/create&quot;
+          }
+        ]
+      }
+    ],
+    &quot;dashboard&quot;: {
+      &quot;scope&quot;: &quot;Account simulator redirected to getphios.com zone context&quot;,
+      &quot;endpoint&quot;: &quot;/request-tracer/tracer&quot;,
+      &quot;target&quot;: &quot;Exact historical pages.dev /session GET with nonce&quot;,
+      &quot;httpStatus&quot;: &quot;NOT_CAPTURED_BY_UI&quot;,
+      &quot;errorCode&quot;: &quot;NOT_EXPOSED_BY_UI&quot;,
+      &quot;message&quot;: &quot;hostname does not belong to your account&quot;,
+      &quot;screenshot&quot;: &quot;tmp/p9-t5-r1-trace-host-scope-failure.jpg&quot;
+    }
+  },
+  &quot;alternatives&quot;: [
+    {
+      &quot;resource&quot;: &quot;Audit config history&quot;,
+      &quot;endpoint&quot;: &quot;/accounts/0b9f36bdf56f38d7d09aebe388f15204/audit_logs?since=2026-10-12T15%3A10%3A00Z&amp;before=2026-10-12T15%3A13%3A00Z&amp;per_page=100&quot;,
+      &quot;status&quot;: 403,
+      &quot;errors&quot;: [
+        {
+          &quot;code&quot;: 10000,
+          &quot;message&quot;: &quot;Authentication error&quot;,
+          &quot;documentation_url&quot;: &quot;https://developers.cloudflare.com/api/resources/audit_logs/methods/list&quot;
+        }
+      ]
+    },
+    {
+      &quot;resource&quot;: &quot;Existing account Logpush jobs&quot;,
+      &quot;endpoint&quot;: &quot;/accounts/0b9f36bdf56f38d7d09aebe388f15204/logpush/jobs&quot;,
+      &quot;status&quot;: 403,
+      &quot;errors&quot;: [
+        {
+          &quot;code&quot;: 10000,
+          &quot;message&quot;: &quot;Authentication error&quot;,
+          &quot;documentation_url&quot;: &quot;https://developers.cloudflare.com/api/resources/logpush/subresources/jobs/methods/list&quot;
+        }
+      ]
+    },
+    {
+      &quot;resource&quot;: &quot;Existing zone Logpush jobs&quot;,
+      &quot;endpoint&quot;: &quot;/zones/86dbea6c11ed5fa37a92003037b25f87/logpush/jobs&quot;,
+      &quot;status&quot;: 403,
+      &quot;errors&quot;: [
+        {
+          &quot;code&quot;: 10000,
+          &quot;message&quot;: &quot;Authentication error&quot;,
+          &quot;documentation_url&quot;: &quot;https://developers.cloudflare.com/api/resources/logpush/subresources/jobs/methods/list&quot;
+        }
+      ]
+    }
+  ],
+  &quot;securityEventsScope&quot;: &quot;Owner getphios.com zone cannot establish provider-managed pages.dev request identity; no new logging enabled&quot;,
+  &quot;responseRuleIdentity&quot;: &quot;No rule-ID header returned; CF-Ray is correlation metadata, not rule identity&quot;,
+  &quot;exactScopeRuntimeProof&quot;: &quot;PASS; two rounds x three paths x A/B =12 GETs&quot;,
+  &quot;preT5CanaryResponse&quot;: &quot;Root and /api/auth/session GET200 immediately before new rule; no 307. /session path lacks pre-T5 baseline, excluded from before/after causal claim.&quot;,
+  &quot;postT5CanaryResponse&quot;: &quot;Root, /session and /api/auth/session GET307 with exact target/path/query; auto-follow disabled&quot;,
+  &quot;preExistingExactMatch&quot;: &quot;NONE; all original list items re-read unchanged and include_subdomains absent/false&quot;,
+  &quot;otherRuleCapableOfSameRedirect&quot;: &quot;NONE_IN_COMPLETE_SELECTED_ACCOUNT_BULK_RULESET; only 3 rules, original2 do not match exact canary&quot;,
+  &quot;causalAttributionToNewCanaryRule&quot;: &quot;PASS_FOR_REVIEWED_CANARY_CONFIGURATION&quot;,
+  &quot;causalBasis&quot;: [
+    &quot;Root/session API response changed 200 to307 only after recorded addition of dedicated exact-host rule&quot;,
+    &quot;All original list/item/rule bytes and ordering match pre-T5 baseline; complete Bulk root phase has only original2 + new rule&quot;,
+    &quot;New rule/list uniquely specify exact host +307 +getphios.com target +preserved path/query; originals cannot match hash because include_subdomains=false&quot;,
+    &quot;Both rounds A/B preserve historical control behavior, excluding broad source match&quot;,
+    &quot;Canary immutable deployment ID remains API-listed; current active production unchanged; no deployment/DNS/Access/Pages/LB/D1 mutation performed in experiment&quot;
+  ],
+  &quot;causalLimits&quot;: &quot;Causal attribution is the bounded inference explicitly allowed by T5-R1. Global audit/event records unavailable; provider internal state and unsampled handler telemetry are not claimed fully observed. No direct edge rule-ID trace exists.&quot;,
+  &quot;documentedPreOriginTerminatingAction&quot;: &quot;YES&quot;,
+  &quot;documentation&quot;: [
+    {
+      &quot;url&quot;: &quot;https://developers.cloudflare.com/rules/url-forwarding/bulk-redirects/how-it-works/&quot;,
+      &quot;finding&quot;: &quot;Bulk redirect is evaluated before origin dispatch; matching redirect action is performed immediately and terminates further request processing.&quot;
+    },
+    {
+      &quot;url&quot;: &quot;https://developers.cloudflare.com/pages/how-to/redirect-to-custom-domain/&quot;,
+      &quot;finding&quot;: &quot;Official Pages integration supports account Bulk Redirects for project.pages.dev and its subdomains.&quot;
+    }
+  ],
+  &quot;oldFunctionsExecutionAfterMatchedRedirect&quot;: &quot;NOT_OBSERVED&quot;,
+  &quot;observationLimit&quot;: &quot;No post307 contradictory handler evidence found in accessible records. Handler-specific telemetry unavailable; NOT_OBSERVED is not an independent proof of log absence.&quot;,
+  &quot;preHandlerContainment&quot;: &quot;ARCHITECTURALLY_PROVEN_FOR_SINGLE_CANARY_BY_CAUSAL_ATTRIBUTION&quot;,
+  &quot;technicalFinding&quot;: &quot;Once the attributed Bulk Redirect action terminates a request before origin dispatch, that request cannot subsequently reach the historical Pages handler under documented execution semantics. This finding applies to matched canary requests with redirect following disabled; destination requests, other hosts and global D1 authority are separate.&quot;,
+  &quot;getphiosHealthy&quot;: true,
+  &quot;activeProduction&quot;: &quot;b07d86bf-2447-4fe8-8ded-66d9fe676c81&quot;,
+  &quot;otherHashControlResult&quot;: &quot;PASS; a1f8a3ba root,/session,/api/auth/session GET200 in both rounds&quot;,
+  &quot;productionMutations&quot;: 0,
+  &quot;d1Mutations&quot;: 0,
+  &quot;D1MutationBasis&quot;: &quot;No D1 operations or write probes; operation accounting only&quot;,
+  &quot;providerCalls&quot;: 0,
+  &quot;costUSD&quot;: 0,
+  &quot;tokenValueRecorded&quot;: false,
+  &quot;migrations&quot;: &quot;NOT_AUTHORIZED_NOT_EXECUTED&quot;,
+  &quot;zoneLBVisibility&quot;: &quot;OPEN_BLOCKING_FOR_BROADER_ROLLOUT&quot;,
+  &quot;globalProductionD1WriteIsolation&quot;: &quot;UNPROVEN&quot;,
+  &quot;wildcardRollout&quot;: &quot;NOT_AUTHORIZED&quot;,
+  &quot;firstRemainingBlocker&quot;: &quot;BROADER_ROLLOUT_NOT_AUTHORIZED; ZONE_LB_VISIBILITY_OPEN&quot;,
+  &quot;historicalT5Receipts&quot;: &quot;PRESERVED_UNCHANGED&quot;,
+  &quot;HEAD&quot;: &quot;9f25c5da3ae69db27023cc661febe8f7bdaaeedc&quot;,
+  &quot;indexEmpty&quot;: true
+}</pre><h2>Actual Trace refusal</h2><img src="../../tmp/p9-t5-r1-trace-host-scope-failure.jpg" alt="Trace refused provider-managed hash; not a redirect rule failure"><h2>Evidence</h2><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T5-R1-MACHINE-EVIDENCE.json">Fresh read-only machine evidence</a></p><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T5-R1-PROOF-CLOSURE-RECEIPT.json">Successor proof receipt</a></p><p><a href="P9-G3-R6-T5-SINGLE-CANARY-HUMAN-REVIEW.html">Historical T5 evidence unchanged</a></p><p><a href="https://developers.cloudflare.com/rules/url-forwarding/bulk-redirects/how-it-works/">Official terminating pre-origin semantics</a> · <a href="https://developers.cloudflare.com/pages/how-to/redirect-to-custom-domain/">Official Pages Bulk Redirect integration</a></p><p>Original T5 unproven classification is preserved historically; this successor applies the newly authorized causal evidence threshold. Production changes0, D1 operations0, provider0/USD0; no commit/push/deploy/logging changes. STOP.</p><section id="authorization-supplement"><h2>Latest authorization evidence supplement</h2><p>Fresh safety/configuration recheck PASS, no drift. Owner-zone Dynamic Redirect and three Transform phases return404, corroborated by complete zone rulesets200. Provider-managed zone configuration is not claimed inspected. Prior Trace failures and two-round A/B evidence reused. Architecturally proven single-canary classification remains; direct runtime rule identity remains unproven.</p><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T5-R1-AUTHORIZATION-CLOSURE-SUPPLEMENT.json">Authority closure supplement</a> · <a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T5-R1-AUTHORIZATION-SAFETY-RECHECK.json">Fresh safety evidence</a> · <a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T5-R1-OWNER-ZONE-PHASE-RECHECK.json">Owner-zone phase evidence</a></p></section></html>

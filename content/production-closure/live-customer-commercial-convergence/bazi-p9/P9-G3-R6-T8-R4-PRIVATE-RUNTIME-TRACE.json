@@ -1,0 +1,46 @@
+{
+  "deployment": {
+    "id": "8ceb88f8-27bc-432a-80d4-775765a41e0e",
+    "url": "https://8ceb88f8.phios-github.pages.dev",
+    "created": "2026-10-13T03:56:55.655285Z",
+    "active": true,
+    "mode": "READ_ONLY",
+    "baseCommit": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+    "workerHash": "8a1655162a019426645c13a0e2027040e4993aa80c40ed8220936b958be6b464"
+  },
+  "identityProofBasis": "Exact deployment API metadata + deployment-specific tail subscription + correlated trace requestHost matching deployment URL; trace does not expose or invent a runtime environment deployment ID",
+  "handshake": {
+    "deploymentIdentity": "8ceb88f8-27bc-432a-80d4-775765a41e0e",
+    "eventTimestamp": 1791863833300,
+    "trace": {
+      "kind": "P9_PRIVATE_NON_D1_HANDSHAKE",
+      "candidateMarker": "P9_T8_R3_DIAGNOSTIC_V1",
+      "requestHost": "8ceb88f8.phios-github.pages.dev",
+      "correlation": "24b89151_ae64_4bf2_a3e4_d63c63786b0c",
+      "credentialAccepted": true,
+      "middlewareExecuted": true,
+      "mode": "READ_ONLY",
+      "D1Accesses": 0
+    }
+  },
+  "guard": {
+    "deploymentIdentity": "8ceb88f8-27bc-432a-80d4-775765a41e0e",
+    "eventTimestamp": 1791863835295,
+    "trace": {
+      "candidateMarker": "P9_T8_R3_DIAGNOSTIC_V1",
+      "requestHost": "8ceb88f8.phios-github.pages.dev",
+      "correlation": "24b89151_ae64_4bf2_a3e4_d63c63786b0c",
+      "guardReached": true,
+      "kind": "P9_PRIVATE_D1_ISOLATION",
+      "middlewareExecuted": true,
+      "handlerReached": true,
+      "mode": "READ_ONLY",
+      "bindingWrapped": true,
+      "method": "GET",
+      "guardRejectedWrite": true,
+      "D1MutationAttemptForwarded": false
+    }
+  },
+  "headersStored": false,
+  "secretValueRecorded": false
+}

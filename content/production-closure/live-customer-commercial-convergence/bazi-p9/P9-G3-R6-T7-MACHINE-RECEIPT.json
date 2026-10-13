@@ -1,0 +1,357 @@
+{
+  "at": "2026-10-13T02:32:15.334Z",
+  "status": "EVIDENCE_GAPS_OPEN_NOT_READY_FOR_STAGE1",
+  "t6HumanAcceptance": "HUMAN_ACCEPTED_DRY_RUN_DESIGN_EVIDENCE_GAPS_OPEN; e2f4c87c-24ce-4c09-95d4-f2e549838aa5",
+  "totalLive": 3559,
+  "unknownBefore": 1228,
+  "unknownAfter": 1,
+  "unknownClasses": {
+    "A": 0,
+    "B": 0,
+    "C": 2,
+    "D": 1,
+    "E": 0,
+    "F": 1221,
+    "G": 3,
+    "H": 1
+  },
+  "roleReviewResidual": [
+    {
+      "id": "94777680-c10f-4959-b8e3-ce92aebf51cd",
+      "host": "94777680.phios-github.pages.dev",
+      "reason": "PRIOR_EXPLICIT_OPERATIONAL_HOLD; Human role decision required"
+    },
+    {
+      "id": "030ab90a-71a5-4609-b1f5-7f7971fea777",
+      "host": "030ab90a.phios-github.pages.dev",
+      "reason": "PRIOR_EXPLICIT_OPERATIONAL_HOLD; Human role decision required"
+    },
+    {
+      "id": "110c0b70-fd8a-4647-be29-2b89b5eb16ed",
+      "host": "110c0b70.phios-github.pages.dev",
+      "reason": "PRIOR_EXPLICIT_OPERATIONAL_HOLD; Human role decision required"
+    }
+  ],
+  "smallestResidual": [
+    {
+      "id": "eed55715-76f1-4278-8ffe-c49aea6fc6e6",
+      "host": "eed55715.phios-github.pages.dev",
+      "reason": "IMMUTABLE_FUNCTIONS_NULL; idle/failed metadata does not prove non-execution",
+      "minimumEvidence": "Build succeeded but deployment failed, Functions null. Need immutable upload/worker attachment status or exact-hash execution capability read; HEAD404 is only snapshot availability, not proof of permanent absence."
+    }
+  ],
+  "knownProductionD1PotentialTargets": 2130,
+  "targetCountReconciliation": "T6 2310 was a wider potential-Functions set. T7 2130 requires explicit production-D1 binding, no alias/protected/role hold; source metadata does not prove live uncontrolled writer count.",
+  "currentProduction": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+  "currentRuntimeIsolation": "UNPROVEN",
+  "READ_ONLY": {
+    "metadata": "READ_ONLY",
+    "effectiveRuntime": "UNPROVEN_CURRENT_DEPLOYMENT",
+    "historicalGETDeployment": "b7ff50ff-b675-4884-a58f-4903eafe6edb",
+    "localFrozenCandidateProof": "PASS_LOCAL_FROZEN_DIAGNOSTIC_ONLY",
+    "privateCredential": "NOT_AVAILABLE_FROM_ESTABLISHED_LOCAL_CREDENTIAL_FILES; rotation/production configuration not authorized by T7",
+    "minimumProof": "Use existing current deployment unchanged, make private credential securely available or separately authorize diagnostic-only rotation/config propagation if required; establish exact-deployment tail OPEN with full sampling before bounded GET guard probe, capture actual mode/middleware/wrapped binding/guard rejection/no raw forwarding. Preserve auth controls. No new source needed if credential/current deployment support it."
+  },
+  "canonical307Safety": "NOT_ACCEPTABLE_FOR_BLIND_ALL_PATHS; GET observations plus immutable-source/local QA only, authenticated end-to-end not proven",
+  "methodBodyRisk": "307 preserves method/body. Redirected mutation may reach canonical; token/cookie/Origin differs; service callbacks or historical path mismatch cannot be treated as successfully migrated.",
+  "recommendedStrategy": "USE_ROUTE-SPECIFIC_CONTAINMENT",
+  "proposedRouteStrategy": {
+    "safePublicGETHEAD": "Only verified existing canonical public/static mappings can use307; preserve path/query where semantics checked",
+    "authAndPrivate": "Do not blindly redirect OAuth callback/session/private report APIs; explicit reviewed mapping, origin/cookie/grant compatibility required",
+    "writeMethods": "Do not redirect write-capable methods to canonical. Separately authorize viable pre-handler deny/capability containment. Do not leave historical writer accessible merely by adding GET-only redirects.",
+    "canary2": "UNCHANGED; no modification executed"
+  },
+  "canonicalHealth": [
+    {
+      "host": "getphios.com",
+      "path": "/",
+      "method": "GET",
+      "status": 200,
+      "location": null,
+      "cache": "public, max-age=0, must-revalidate"
+    },
+    {
+      "host": "b07d86bf.phios-github.pages.dev",
+      "path": "/",
+      "method": "GET",
+      "status": 200,
+      "location": null,
+      "cache": "public, max-age=0, must-revalidate"
+    },
+    {
+      "host": "getphios.com",
+      "path": "/api/auth/session",
+      "method": "GET",
+      "status": 200,
+      "location": null,
+      "cache": "private, no-store"
+    },
+    {
+      "host": "getphios.com",
+      "path": "/api/account/persons",
+      "method": "GET",
+      "status": 404,
+      "location": null,
+      "cache": "no-store"
+    },
+    {
+      "host": "getphios.com",
+      "path": "/assets/customer-ui/js/surfaces/personal-reality.js",
+      "method": "GET",
+      "status": 200,
+      "location": null,
+      "cache": "public, max-age=14400, must-revalidate"
+    }
+  ],
+  "canonicalRouteObservations": [
+    {
+      "path": "/api/account-persons",
+      "method": "GET",
+      "status": 401,
+      "location": null,
+      "cache": "private, no-store",
+      "authenticated": false,
+      "bodyStored": false
+    },
+    {
+      "path": "/api/account-reports",
+      "method": "GET",
+      "status": 401,
+      "location": null,
+      "cache": "private, no-store",
+      "authenticated": false,
+      "bodyStored": false
+    },
+    {
+      "path": "/api/account-report-download",
+      "method": "GET",
+      "status": 401,
+      "location": null,
+      "cache": "private, no-store",
+      "authenticated": false,
+      "bodyStored": false
+    },
+    {
+      "path": "/api/account-paid-report-status",
+      "method": "GET",
+      "status": 403,
+      "location": null,
+      "cache": "private, no-store",
+      "authenticated": false,
+      "bodyStored": false
+    },
+    {
+      "path": "/api/account-paid-report-setup",
+      "method": "GET",
+      "status": 403,
+      "location": null,
+      "cache": "private, no-store",
+      "authenticated": false,
+      "bodyStored": false
+    },
+    {
+      "path": "/api/commerce/checkout",
+      "method": "GET",
+      "status": 404,
+      "location": null,
+      "cache": "no-store",
+      "authenticated": false,
+      "bodyStored": false
+    },
+    {
+      "path": "/api/stripe/checkout",
+      "method": "GET",
+      "status": 404,
+      "location": null,
+      "cache": "no-store",
+      "authenticated": false,
+      "bodyStored": false
+    },
+    {
+      "path": "/reports/",
+      "method": "GET",
+      "status": 404,
+      "location": null,
+      "cache": "no-store",
+      "authenticated": false,
+      "bodyStored": false
+    },
+    {
+      "path": "/personal/",
+      "method": "GET",
+      "status": 404,
+      "location": null,
+      "cache": "no-store",
+      "authenticated": false,
+      "bodyStored": false
+    }
+  ],
+  "routeSourceEvidence": [
+    "functions/api/account-persons.js",
+    "functions/account/account-reports-api.js",
+    "functions/_middleware.js",
+    "frozen diagnostic functions/_middleware.js"
+  ],
+  "zoneLB": {
+    "status": 403,
+    "sourceSide": "ARCHITECTURALLY_IRRELEVANT_TO_DIRECT_PROVIDER_PAGES_HASH_INTERCEPTION",
+    "canonicalDestination": "Root and active hash GET200 observed; full routing identity/health and private compatibility not proven",
+    "absence": "NOT_CLAIMED",
+    "basis": "https://developers.cloudflare.com/load-balancing/load-balancers/"
+  },
+  "effectiveLimits": {
+    "actual": "UNVERIFIED; existing read credential no entitlement/config scope, no added permission",
+    "documented": {
+      "Free": {
+        "entries": 10000,
+        "lists": 5,
+        "rules": 15
+      },
+      "Pro": {
+        "entries": 25000,
+        "lists": 5,
+        "rules": 15
+      },
+      "Business": {
+        "entries": 50000,
+        "lists": 5,
+        "rules": 15
+      },
+      "Enterprise": {
+        "entries": 1000000,
+        "lists": 25,
+        "rules": 50
+      }
+    },
+    "current": [
+      {
+        "id": "9d06d0169ea948e8ba640bb1fab48cde",
+        "name": "getphios_pagesdev_canonical",
+        "num_items": 1
+      },
+      {
+        "id": "3cddd65c75a24866b759eff4fde8ee63",
+        "name": "getphios_www_canonical",
+        "num_items": 1
+      },
+      {
+        "id": "d049cc55bb5f4c1a9223619886c3745b",
+        "name": "p9_t4_canary2_ingress",
+        "num_items": 1
+      }
+    ],
+    "publicMinimum": {
+      "entries": 10000,
+      "lists": 5,
+      "rules": 15
+    },
+    "futureT6Usage": {
+      "entries": 2312,
+      "lists": 4,
+      "rules": 4
+    },
+    "scope": "Public minimum sufficient; no invented custom account limit"
+  },
+  "stage1": {
+    "valid": true,
+    "exactTargets": [
+      {
+        "id": "0022cd02-45bc-44f1-a544-29de60b350a6",
+        "live": true,
+        "functions": true,
+        "productionD1": true,
+        "aliases": [],
+        "excluded": false
+      },
+      {
+        "id": "002d9570-fbb8-4ca6-94eb-cdd57cfb1b3c",
+        "live": true,
+        "functions": true,
+        "productionD1": true,
+        "aliases": [],
+        "excluded": false
+      },
+      {
+        "id": "004db7fb-f930-4e83-986a-f0ce848c932f",
+        "live": true,
+        "functions": true,
+        "productionD1": true,
+        "aliases": [],
+        "excluded": false
+      },
+      {
+        "id": "00d9bc8a-317e-49ef-b851-12ab6490585f",
+        "live": true,
+        "functions": true,
+        "productionD1": true,
+        "aliases": [],
+        "excluded": false
+      },
+      {
+        "id": "00e0892f-82d1-45b0-b44f-e846ceb147bf",
+        "live": true,
+        "functions": true,
+        "productionD1": true,
+        "aliases": [],
+        "excluded": false
+      }
+    ],
+    "ready": false,
+    "reason": "CURRENT_RUNTIME_ISOLATION_UNPROVEN + canonical route/method compatibility strategy not accepted; existing targets/exclusions valid at live snapshot"
+  },
+  "migrationRequired": "PARTIAL",
+  "requiredMigrationIDs": [
+    "0004",
+    "0006",
+    "0007",
+    "0009",
+    "0010",
+    "0011",
+    "0012",
+    "0013",
+    "0014",
+    "0015",
+    "0016",
+    "0017",
+    "0018"
+  ],
+  "retiredMigrationIDs": [],
+  "optionalMigrationIDs": [
+    "0003",
+    "0005",
+    "0008"
+  ],
+  "candidates0019_0020": "CANDIDATE_ONLY; duplicate version/object variants require reconciliation; not production admitted",
+  "productionSchema": {
+    "at": "2026-10-13T02:22:35.685Z",
+    "comparison": "SQL normalized for whitespace/identifier quoting/IF NOT EXISTS; no production application data read",
+    "expectedCount": 31,
+    "actualApplicationObjects": 31,
+    "differences": [],
+    "extras": [],
+    "matchesReference0002": true,
+    "localDatabase": ":memory:",
+    "productionWrites": 0
+  },
+  "productionMutations": 0,
+  "d1Mutations": 0,
+  "d1ReadQueries": 1,
+  "providerCalls": 0,
+  "costUSD": 0,
+  "payments": 0,
+  "refunds": 0,
+  "migrationsExecuted": 0,
+  "commits": 0,
+  "pushes": 0,
+  "broaderRedirectMutations": 0,
+  "globalContainmentComplete": false,
+  "firstRemainingBlocker": "CURRENT_DEPLOYMENT_AUTHENTICATED_PRIVATE_GUARD_TRACE_UNAVAILABLE; runtime mode/wrapper/rejection not proven",
+  "secondaryBlockers": [
+    "Route-specific containment strategy and private compatibility review",
+    "One exact Functions/upload residual + three operational-role reviews",
+    "Actual account-effective quota not independently confirmed",
+    "Minimal migration plan not yet admitted under sequential registry"
+  ],
+  "HEAD": "9f25c5da3ae69db27023cc661febe8f7bdaaeedc",
+  "indexEmpty": true
+}

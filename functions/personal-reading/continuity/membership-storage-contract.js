@@ -6,10 +6,10 @@ export const MEMBERSHIP_STORAGE_TABLES=Object.freeze({
  commerce_purchases:'db/migrations/0006_commerce_stripe_r1.sql',
  provider_product_cost_envelopes:'db/migrations/0015_product_cost_envelopes.sql',
  provider_product_cost_entries:'db/migrations/0015_product_cost_envelopes.sql',
- continuity_quota_units:'db/migration-candidates/0018_continuity_quota_units.sql',
- continuity_ask_tasks:'db/migration-candidates/0019_continuity_ask_credit_allocations.sql',
+ continuity_quota_units:'db/migration-candidates/0019_continuity_quota_units_successor.sql',
+ continuity_ask_tasks:'db/migration-candidates/0020_continuity_ask_credit_allocations_successor.sql',
  continuity_ask_allocations:'db/migration-candidates/0019_continuity_ask_credit_allocations.sql',
- continuity_ask_zero_call_outcomes:'db/migration-candidates/0020_continuity_zero_call_outcomes.sql'
+ continuity_ask_zero_call_outcomes:'db/migration-candidates/0021_continuity_zero_call_outcomes_successor.sql'
 });
 export async function inspectMembershipStorage(env){
  if(!env.RUNTIME_DB?.prepare)return {state:'STORAGE_BINDING_UNAVAILABLE',binding:'RUNTIME_DB',missing:Object.keys(MEMBERSHIP_STORAGE_TABLES),balanceState:'UNVERIFIED'};

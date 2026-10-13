@@ -1,3 +1,4 @@
+import {isProductionKnowledgeCapability} from './membership-production-gate.js';
 import {prepareShortDeliveryRequest,meterShortDeliveryUsage,shortDeliveryMaximum} from './membership-short-delivery-qa.js';
 import {validateShortFragmentAnswer} from './membership-short-fragment-contract.js';
 import {inspectShortAnswerRisks} from './membership-source-coverage.js';
@@ -34,10 +35,10 @@ export async function prepareAutomaticReview(answer,pack,binding){
 }
 export function reviewDecision(answer,binding,review,document){if(review?.contract!==COMPACT_REVIEW_CONTRACT)throw Error('REVIEW_CONTRACT_VERSION_INVALID');return decideUnitReview(answer,binding,document,review);}
 export async function runAutomaticDeliveryCandidate(context,input,{capability,prepare,invoke,platformEnvelopeId,reviewModel='gpt-5.6-luna',evidenceKind='ISOLATED_PROVIDER_EXECUTION'}){
- if(!capabilities.has(capability)||context.env.PHIOS_ENVIRONMENT!=='local'||context.env.PHIOS_ISOLATED_OPERATOR!==true)throw Error('CANDIDATE_NOT_AUTHORIZED');
+ if(!isProductionKnowledgeCapability(context.env,capability)&&(!capabilities.has(capability)||context.env.PHIOS_ENVIRONMENT!=='local'||context.env.PHIOS_ISOLATED_OPERATOR!==true))throw Error('CANDIDATE_NOT_AUTHORIZED');
  const owner=personIdentity(context).userId;await activeContinuitySubscription(context.env,owner);
  if(reviewModel!=='gpt-5.6-luna')throw Error('REVIEW_MODEL_NOT_ADMITTED');
- const {pack,errors=[]}=await prepare(context,input);if(!pack.sources?.length)return saveZeroCallOutcome(context,{taskId:input.taskId,pack,retrievalErrors:errors},{capability:createZeroCallOutcomeCapability(context.env)});
+ const {pack,errors=[]}=await prepare(context,input);if(!pack.sources?.length)return saveZeroCallOutcome(context,{taskId:input.taskId,pack,retrievalErrors:errors},{capability:isProductionKnowledgeCapability(context.env,capability)?capability:createZeroCallOutcomeCapability(context.env)});
  const r=await prepareShortDeliveryRequest(pack,{depth:'ORDINARY'});
  // Worst-case review input includes the maximum generated answer bytes. The
  // reserve covers both calls and cache writes; no hidden repair or retry.

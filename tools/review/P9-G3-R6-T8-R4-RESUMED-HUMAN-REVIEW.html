@@ -1,0 +1,313 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>P9 T8-R4 resumed runtime isolation proof</title><style>body{max-width:1100px;margin:40px auto;padding:20px;font:16px system-ui;line-height:1.6;color:#193943}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f2f5f6;padding:20px}</style><h1>T8-R4 · PASS_CURRENT_PRODUCTION_RUNTIME_ISOLATION</h1><p>One authorized secret alignment, one exact accepted-source deployment, one non-D1 handshake, one GET guard proof. New active production: 8ceb88f8-27bc-432a-80d4-775765a41e0e. Previous b07d86bf retained as HUMAN_ACCEPTED_HISTORICAL + SUPERSEDED + ROLLBACK_HOLD.</p><p>Proof comes from the exact deployment-specific tail plus correlated private events. HTTP 503 alone is not proof. Handshake D1Accesses=0; guard bindingWrapped=true, guardReached=true, guardRejectedWrite=true, D1MutationAttemptForwarded=false. Bounded probe durable mutations=0.</p><p>Ordinary root, zh/en public page, static asset and safe session GET remain byte-identical to pre-deploy baseline. Canary 2 remains 307. Historical 404 control has no new redirect; its changing raw error-page digest is recorded without claiming historical isolation.</p><p>Historical topology remains open. GLOBAL PRODUCTION D1 WRITE ISOLATION is NOT PROVEN. Stage 1 needs separate Human authorization and was not executed. No migrations, provider calls, payments/refunds, commit or push. Secret value not recorded; recommendation KEEP_TEMPORARILY.</p><pre>{
+  "at": "2026-10-13T03:58:12.486Z",
+  "status": "PASS_CURRENT_PRODUCTION_RUNTIME_ISOLATION",
+  "execution": {
+    "stage": "PASS_CURRENT_PRODUCTION_RUNTIME_ISOLATION",
+    "productionMutations": 2,
+    "secretAlignments": 1,
+    "deploymentInvocations": 1,
+    "handshakes": 1,
+    "guardProbes": 1,
+    "secretValueRecorded": false,
+    "providerCalls": 0,
+    "costUSD": 0,
+    "payments": 0,
+    "refunds": 0,
+    "migrations": 0,
+    "artifactHash": "ed36e600f546663a98b1293a950e27c3629b27163827d5ab33c20dfc8aa52eb1",
+    "sourceDirectoryHash": "98365ce3b9023ac00da9481d6e192847e5159329b4242cd22a149c9d07a19cfe",
+    "buildStatus": "PASS_BUILD",
+    "workerHash": "8a1655162a019426645c13a0e2027040e4993aa80c40ed8220936b958be6b464",
+    "identityProofBasis": "Exact deployment API metadata + deployment-specific tail subscription + correlated trace requestHost matching deployment URL; trace does not expose or invent a runtime environment deployment ID",
+    "tree": "bfbe56e02b33ed10219ff673306f43ca4da19da4",
+    "digest": "cb60cb3371a813435a0ffe4decaed15c0a461306ba6b39d3925060d4d831140f",
+    "secretFileFound": true,
+    "secretFileNonempty": true,
+    "secretAlignment": "YES",
+    "deployExit": 0,
+    "deployment": {
+      "id": "8ceb88f8-27bc-432a-80d4-775765a41e0e",
+      "url": "https://8ceb88f8.phios-github.pages.dev",
+      "created": "2026-10-13T03:56:55.655285Z",
+      "active": true,
+      "mode": "READ_ONLY",
+      "baseCommit": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+      "workerHash": "8a1655162a019426645c13a0e2027040e4993aa80c40ed8220936b958be6b464"
+    },
+    "oldDeploymentRole": "HUMAN_ACCEPTED_HISTORICAL + SUPERSEDED + ROLLBACK_HOLD",
+    "preProofHealth": [
+      {
+        "url": "https://getphios.com/",
+        "status": 200,
+        "location": null,
+        "sha256": "23e5f171361af49ba197250ac8457ba4e8df46db09b1d9786552f2cf671fe724",
+        "bytes": 23687
+      },
+      {
+        "url": "https://getphios.com/perspectives/?lang=zh-Hans",
+        "status": 200,
+        "location": null,
+        "sha256": "643b0358f6ae1c0335e8c01efb6ccb9165a3b0aec711ce2c8eea5ccbae82aace",
+        "bytes": 30252
+      },
+      {
+        "url": "https://getphios.com/perspectives/?lang=en",
+        "status": 200,
+        "location": null,
+        "sha256": "643b0358f6ae1c0335e8c01efb6ccb9165a3b0aec711ce2c8eea5ccbae82aace",
+        "bytes": 30252
+      },
+      {
+        "url": "https://getphios.com/assets/customer-ui/js/public-index-copy.js",
+        "status": 200,
+        "location": null,
+        "sha256": "ef4b491a7df67c0d8ccdac9ef24ffa93155541a82abb5a1278fc9f7e82b20d01",
+        "bytes": 2008
+      },
+      {
+        "url": "https://getphios.com/api/auth/session",
+        "status": 200,
+        "location": null,
+        "sha256": "b71b0f31773379c546509f2f8a1ad6b96b8f8af78479d5598e94ad1e1d73af57",
+        "bytes": 77
+      },
+      {
+        "url": "https://41b1c458.phios-github.pages.dev/",
+        "status": 307,
+        "location": "https://getphios.com/",
+        "sha256": "7108fef32b066dcb8e074d4114e8614cfb6f1efeb9497c0b0268b7b4039f22bc",
+        "bytes": 169
+      },
+      {
+        "url": "https://eed55715.phios-github.pages.dev/",
+        "status": 404,
+        "location": null,
+        "sha256": "14aa2e01184d6f74e6af748fd59ad52177b61cdf42a87ba68a23315d7ceb7bdd",
+        "bytes": 16165
+      }
+    ],
+    "tailIdentity": "8ceb88f8-27bc-432a-80d4-775765a41e0e",
+    "collectorOpen": true,
+    "collectorInitialized": true,
+    "handshakeHTTP": 503,
+    "handshake": {
+      "deploymentIdentity": "8ceb88f8-27bc-432a-80d4-775765a41e0e",
+      "eventTimestamp": 1791863833300,
+      "trace": {
+        "kind": "P9_PRIVATE_NON_D1_HANDSHAKE",
+        "candidateMarker": "P9_T8_R3_DIAGNOSTIC_V1",
+        "requestHost": "8ceb88f8.phios-github.pages.dev",
+        "correlation": "24b89151_ae64_4bf2_a3e4_d63c63786b0c",
+        "credentialAccepted": true,
+        "middlewareExecuted": true,
+        "mode": "READ_ONLY",
+        "D1Accesses": 0
+      }
+    },
+    "collectorReady": true,
+    "guardHTTP": 503,
+    "guard": {
+      "deploymentIdentity": "8ceb88f8-27bc-432a-80d4-775765a41e0e",
+      "eventTimestamp": 1791863835295,
+      "trace": {
+        "candidateMarker": "P9_T8_R3_DIAGNOSTIC_V1",
+        "requestHost": "8ceb88f8.phios-github.pages.dev",
+        "correlation": "24b89151_ae64_4bf2_a3e4_d63c63786b0c",
+        "guardReached": true,
+        "kind": "P9_PRIVATE_D1_ISOLATION",
+        "middlewareExecuted": true,
+        "handlerReached": true,
+        "mode": "READ_ONLY",
+        "bindingWrapped": true,
+        "method": "GET",
+        "guardRejectedWrite": true,
+        "D1MutationAttemptForwarded": false
+      }
+    },
+    "durableD1Mutations": 0,
+    "zeroMutationBasis": "Exact frozen guard denies at prepare; real deployment tail proves guardRejectedWrite and no raw forwarding. Applies to this bounded diagnostic proof, not all concurrent traffic.",
+    "postProofHealth": [
+      {
+        "url": "https://getphios.com/",
+        "status": 200,
+        "location": null,
+        "sha256": "23e5f171361af49ba197250ac8457ba4e8df46db09b1d9786552f2cf671fe724",
+        "bytes": 23687
+      },
+      {
+        "url": "https://getphios.com/perspectives/?lang=zh-Hans",
+        "status": 200,
+        "location": null,
+        "sha256": "643b0358f6ae1c0335e8c01efb6ccb9165a3b0aec711ce2c8eea5ccbae82aace",
+        "bytes": 30252
+      },
+      {
+        "url": "https://getphios.com/perspectives/?lang=en",
+        "status": 200,
+        "location": null,
+        "sha256": "643b0358f6ae1c0335e8c01efb6ccb9165a3b0aec711ce2c8eea5ccbae82aace",
+        "bytes": 30252
+      },
+      {
+        "url": "https://getphios.com/assets/customer-ui/js/public-index-copy.js",
+        "status": 200,
+        "location": null,
+        "sha256": "ef4b491a7df67c0d8ccdac9ef24ffa93155541a82abb5a1278fc9f7e82b20d01",
+        "bytes": 2008
+      },
+      {
+        "url": "https://getphios.com/api/auth/session",
+        "status": 200,
+        "location": null,
+        "sha256": "b71b0f31773379c546509f2f8a1ad6b96b8f8af78479d5598e94ad1e1d73af57",
+        "bytes": 77
+      },
+      {
+        "url": "https://41b1c458.phios-github.pages.dev/",
+        "status": 307,
+        "location": "https://getphios.com/",
+        "sha256": "7108fef32b066dcb8e074d4114e8614cfb6f1efeb9497c0b0268b7b4039f22bc",
+        "bytes": 169
+      },
+      {
+        "url": "https://eed55715.phios-github.pages.dev/",
+        "status": 404,
+        "location": null,
+        "sha256": "7ab46630de38171ada3eb84b59230b6d892d9f86fb3e60f73307973f0afe1337",
+        "bytes": 16165
+      }
+    ],
+    "historicalControl": "404 unchanged; no redirect added; raw body digest recorded, not used as execution-isolation proof",
+    "currentRuntimeIsolation": "PASS",
+    "stage1": "READY_FOR_SEPARATE_HUMAN_AUTHORIZATION",
+    "firstBlocker": "STAGE_1_BROADER_CONTAINMENT_NOT_AUTHORIZED",
+    "secretRecommendation": "KEEP_TEMPORARILY",
+    "tailClosed": true
+  },
+  "build": {
+    "status": "PASS_BUILD",
+    "sourcePath": "C:\\phios/tmp/p9-t8-r4a/source-blob",
+    "sourceDirectoryHash": "98365ce3b9023ac00da9481d6e192847e5159329b4242cd22a149c9d07a19cfe",
+    "sourceTree": "bfbe56e02b33ed10219ff673306f43ca4da19da4",
+    "sourceDigest": "cb60cb3371a813435a0ffe4decaed15c0a461306ba6b39d3925060d4d831140f",
+    "buildCommand": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\phios/node_modules/wrangler/bin/wrangler.js",
+      "pages",
+      "functions",
+      "build",
+      "C:\\phios/tmp/p9-t8-r4a/source-blob/functions",
+      "--project-directory",
+      "C:\\phios/tmp/p9-t8-r4a/source-blob",
+      "--build-metadata-path",
+      "C:\\phios/tmp/p9-t8-r4-resume/worker-build/metadata.json",
+      "--build-output-directory",
+      "C:\\phios/tmp/p9-t8-r4-resume/worker-build/empty-assets",
+      "--outdir",
+      "C:\\phios/tmp/p9-t8-r4-resume/worker-build",
+      "--output-routes-path",
+      "C:\\phios/tmp/p9-t8-r4-resume/worker-build/_routes.json",
+      "--compatibility-date",
+      "2026-07-14",
+      "--compatibility-flags",
+      "nodejs_compat"
+    ],
+    "buildCwd": "C:\\phios/tmp/p9-t8-r4-resume",
+    "buildExit": 0,
+    "outputPath": "C:\\phios/tmp/p9-t8-r4-resume/.pages-output",
+    "artifactHash": "ed36e600f546663a98b1293a950e27c3629b27163827d5ab33c20dfc8aa52eb1",
+    "workerHash": "8a1655162a019426645c13a0e2027040e4993aa80c40ed8220936b958be6b464",
+    "workerHashScope": "Exact local compiled deployment input; no raw Cloudflare Worker script download claimed",
+    "workerBytes": 14459018,
+    "gzipBytes": 3000716,
+    "staticFiles": 11679,
+    "sourceModified": false
+  },
+  "localQA": {
+    "status": "PASS_LOCAL",
+    "ordinaryBehaviorComparisons": 36,
+    "ordinaryDiagnosticLogs": 0,
+    "authentication": "PASS_FAIL_CLOSED",
+    "handshake": "PASS_NO_D1_ACCESS",
+    "guard": "PASS",
+    "POST": "NO_BY_DESIGN_ROOT_METHOD_DEFENSE",
+    "trace": [
+      {
+        "kind": "P9_PRIVATE_NON_D1_HANDSHAKE",
+        "candidateMarker": "P9_T8_R3_DIAGNOSTIC_V1",
+        "requestHost": "local.invalid",
+        "correlation": "local_trace_12345678",
+        "credentialAccepted": true,
+        "middlewareExecuted": true,
+        "mode": "READ_ONLY",
+        "D1Accesses": 0
+      },
+      {
+        "candidateMarker": "P9_T8_R3_DIAGNOSTIC_V1",
+        "requestHost": "local.invalid",
+        "correlation": "local_trace_12345678",
+        "guardReached": true,
+        "kind": "P9_PRIVATE_D1_ISOLATION",
+        "middlewareExecuted": true,
+        "handlerReached": true,
+        "mode": "READ_ONLY",
+        "bindingWrapped": true,
+        "method": "GET",
+        "guardRejectedWrite": true,
+        "D1MutationAttemptForwarded": false
+      }
+    ],
+    "durableD1Mutations": 0,
+    "networkCalls": 0,
+    "providerCalls": 0,
+    "payments": 0,
+    "refunds": 0
+  },
+  "compiledQA": {
+    "status": "PASS_LOCAL_COMPILED",
+    "rawD1Accesses": 0,
+    "logs": [
+      {
+        "kind": "P9_PRIVATE_NON_D1_HANDSHAKE",
+        "candidateMarker": "P9_T8_R3_DIAGNOSTIC_V1",
+        "requestHost": "local.invalid",
+        "correlation": "compiled_trace_123456",
+        "credentialAccepted": true,
+        "middlewareExecuted": true,
+        "mode": "READ_ONLY",
+        "D1Accesses": 0
+      },
+      {
+        "candidateMarker": "P9_T8_R3_DIAGNOSTIC_V1",
+        "requestHost": "local.invalid",
+        "correlation": "compiled_trace_123456",
+        "guardReached": true,
+        "kind": "P9_PRIVATE_D1_ISOLATION",
+        "middlewareExecuted": true,
+        "handlerReached": true,
+        "mode": "READ_ONLY",
+        "bindingWrapped": true,
+        "method": "GET",
+        "guardRejectedWrite": true,
+        "D1MutationAttemptForwarded": false
+      }
+    ]
+  },
+  "globalProductionD1WriteIsolation": "NOT_PROVEN_HISTORICAL_TOPOLOGY_OPEN",
+  "stage1Executed": false,
+  "secretPostProofRecommendation": "KEEP_TEMPORARILY",
+  "commits": 0,
+  "pushes": 0,
+  "indexEmpty": true,
+  "mainDiagnosticPathsUntouched": true,
+  "productionMutationAccounting": {
+    "secretAlignment": 1,
+    "PagesDeployment": 1,
+    "operationalTailSubscriptionsCreated": 1,
+    "operationalTailSubscriptionsClosed": 1,
+    "businessDataMutations": 0,
+    "topologyMutations": 0
+  },
+  "historicalControlLimit": "eed55715 remains 404/no Location/16165 bytes. Its raw body hash varies; this is ingress control evidence only, not proof its historical runtime is isolated.",
+  "stop": true
+}</pre></html>

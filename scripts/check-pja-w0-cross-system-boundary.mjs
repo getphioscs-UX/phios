@@ -326,9 +326,16 @@ assert.equal(membershipNext.status,'ENGINEERING_RECONCILIATION');assert.equal(me
 assert.equal(membershipNext.predecessor.sha256,crypto.createHash('sha256').update(await fs.readFile(path.join(root,membershipNext.predecessor.path))).digest('hex'));
 assert.equal(membershipNext.historicalFreezeMutated,false);assert.equal(membershipNext.runtimeWriteAuthorityCreated,false);
 assert.equal(membershipNext.path,'assets/js/pages/membership-source.js');assert.equal(membershipNext.previousPath,'docs/pja/membership-source-before-v4.js');
+const membershipLatest=await readJson('docs/pja/pja-membership-source-capability-successor-v5.json');
+assert.equal(membershipLatest.status,'ENGINEERING_RECONCILIATION');assert.equal(membershipLatest.predecessor.path,'docs/pja/pja-membership-source-capability-successor-v4.json');
+assert.equal(membershipLatest.predecessor.sha256,crypto.createHash('sha256').update(await fs.readFile(path.join(root,membershipLatest.predecessor.path))).digest('hex'));
+assert.equal(membershipLatest.historicalFreezeMutated,false);assert.equal(membershipLatest.runtimeWriteAuthorityCreated,false);
+assert.equal(membershipLatest.path,membershipNext.path);assert.equal(membershipLatest.previousPath,'docs/pja/membership-source-before-v5.js');
+assert.equal(membershipLatest.previousSha256,membershipNext.sha256);
+assert.equal(crypto.createHash('sha256').update(await fs.readFile(path.join(root,membershipLatest.previousPath))).digest('hex'),membershipLatest.previousSha256);
 for(const file of membershipSource.files){
  let expected=file.sha256;
- if(file.path===membershipNext.path){assert.equal(membershipNext.previousSha256,expected);assert.equal(crypto.createHash('sha256').update(await fs.readFile(path.join(root,membershipNext.previousPath))).digest('hex'),expected);expected=membershipNext.sha256;}
+ if(file.path===membershipNext.path){assert.equal(membershipNext.previousSha256,expected);assert.equal(crypto.createHash('sha256').update(await fs.readFile(path.join(root,membershipNext.previousPath))).digest('hex'),expected);expected=membershipLatest.sha256;}
  assert.equal(crypto.createHash('sha256').update(await fs.readFile(path.join(root,file.path))).digest('hex'),expected,'Membership source presentation drift: '+file.path);
 }
 assert.deepEqual(membershipSource.pageCapabilities.flatMap(c=>c.pages),['membership-source.html']);

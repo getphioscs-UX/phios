@@ -1,3 +1,4 @@
+import {experimentFragments} from '../knowledge-runtime/manuscript-experiment-access.js';
 import { handlePublicKnowledgeRequest } from './public-knowledge-api.js';
 import {
   MANUSCRIPT_SOURCE_LIMITS,
@@ -134,6 +135,16 @@ async function manuscriptProjection({ env, query, locale, bookCode, experimentAc
       const closure = JSON.parse(raw);
       if (closure.status !== 'HUMAN_REVIEW_GATE_CLOSED' || closure.summary?.pendingHumanReview !== 0 || closure.authorityBoundaries?.reviewedCorpusMayGroundQuestionScopedKnowledgeAccess !== true || reviewed.sourceSha256 !== corpus.sourceSha256 || reviewed.corpusSha256 !== corpus.corpusSha256 || reviewed.reviewedRecordsSha256 !== corpus.reviewedRecordsSha256 || Number(reviewed.recordCount) !== corpus.records.length || corpus.humanReview?.allRecordsReviewed !== true || corpus.humanReview?.pendingCount !== 0 || !corpus.records.every(record => record.reviewStatus === 'HUMAN_APPROVED_FINAL')) throw Error('REVIEWED_MANUSCRIPT_ACCEPTANCE_IDENTITY_MISMATCH');
       source.acceptanceSha256 = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+    // Reviewed corpora without a scope adapter still need verified fragment argument
+    // identities for isolated LLM packs. A private capability never activates production.
+    if(!source.scopeAdmissionPath&&experimentAccess){
+      const fragments=experimentFragments(experimentAccess,source);
+      if(fragments.length){const records=[];for(const record of corpus.records){const allowed=fragments.filter(f=>f.sectionCode===record.sectionCode&&f.sectionSha256===record.textSha256);if(!allowed.length)continue;
+        const units=[];for(const f of allowed){const text=record.text.slice(f.startOffset,f.endOffset);if(f.startOffset<0||f.endOffset>record.text.length||f.endOffset<=f.startOffset)throw Error('EXPERIMENT_FRAGMENT_RANGE_INVALID');const sha=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text)))].map(b=>b.toString(16).padStart(2,'0')).join('');if(sha!==f.textSha256)throw Error('EXPERIMENT_FRAGMENT_BYTES_MISMATCH');units.push({argumentId:f.argumentId,type:'DEFINITION',startOffset:f.startOffset,endOffset:f.endOffset,textSha256:f.textSha256});}
+        records.push({...record,argumentUnits:units,experimentFragmentsOnly:true});}
+        corpus={...corpus,records};
+      }
     }
     if (source.scopeAdmissionPath && env.PHIOS_MANUSCRIPT_TEXT_SCOPE_QA !== 'true' && env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED !== 'true') throw Error('MANUSCRIPT_SCOPE_NOT_ACTIVATED');
     if ((env.PHIOS_MANUSCRIPT_TEXT_SCOPE_QA === 'true' || env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true') && source.scopeAdmissionPath) {

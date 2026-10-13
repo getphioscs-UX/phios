@@ -1,9 +1,86 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P9 T5 Single Canary Preparation</title><style>body{max-width:1000px;margin:40px auto;padding:20px;font:16px/1.6 system-ui;color:#17313b;background:#fafaf7}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#edf2f2;padding:20px}</style><h1>P9 G3-R6-T5 · Single Canary preparation</h1><p>PRE_MUTATION_BASELINE_PASS_CREDENTIAL_LOCAL_CONFIGURATION_PENDING</p><p>Human accepted T4-R1 evidence. Zone LB visibility remains OPEN and non-blocking for this exact canary only; no broader rollout or global isolation acceptance.</p><h2>Fresh machine baseline</h2><p>Active production b07d86bf-2447-4fe8-8ded-66d9fe676c81; Canary 2 still exists; exact hash GET200; canonical GET200; current production hash and residual historical hash GET200. Two existing lists, items and rule bodies/order match T4-R1 exactly.</p><h2>Credential preparation</h2><p>Created with final human confirmation: P9 T5 exact canary bulk redirect only. Account Filter Lists Edit + Bulk URL Redirects Edit only. Current account only. Expiry 2026-10-14. Value never read or recorded. Secure local file pending; no canary mutations yet.</p><h2>Authorized experiment</h2><pre>host: 41b1c458.phios-github.pages.dev
-source: schemeless exact host, both HTTP/HTTPS
-target: https://getphios.com/
-status: 307
-include_subdomains: false
-subpath_matching / preserve_path_suffix / preserve_query_string: true
-new rule: exact http.host equality AND dedicated list membership
-position: after 24d6cca9d501477886de2a85fa51bf32
-No existing list/rule edits. No full ruleset PUT.</pre><p>Executor prepared and syntax checked, not run. Before any mutation it re-reads full original list/items/rules and Pages identity. Runtime path tests GET/HEAD only, no following redirects. 307 alone cannot close containment; named rule trace must be obtained.</p><h2>Rollback</h2><p>If unexpected effects occur, disable/delete only returned new rule ID; verify pre-test behavior; delete dedicated list only after no other rule references it. No rollback or mutation performed at preparation stage.</p><h2>Evidence</h2><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T5-PREFLIGHT.json">Fresh preflight</a></p><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T5-PREPARATION-RECEIPT.json">Preparation receipt</a></p><p>Ingress mutations 0; D1 mutations 0; provider 0/USD0; payments/refunds 0/0; migrations NOT_AUTHORIZED; no commit/push.</p></html>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P9 T5 single canary actual result</title><style>body{max-width:1100px;margin:35px auto;padding:20px;font:16px/1.6 system-ui;color:#17313b;background:#fafaf7}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#edf2f2;padding:18px}img{max-width:100%;height:auto}td,th{padding:9px;border:1px solid #bbc9ca;overflow-wrap:anywhere}table{border-collapse:collapse;width:100%}.warn{padding:15px;background:#fff0db;border-left:5px solid #a75d24}</style><h1>P9 G3-R6-T5 · Single exact-host ingress result</h1><p class="warn">REDIRECT_VISIBLE_BUT_PRE_HANDLER_CONTAINMENT_UNPROVEN. No wildcard rollout, migration or global production isolation PASS.</p><p>Three explicitly authorized ingress mutations completed. One list, one item, one surgical rule at position 3. Original two rule bodies/order unchanged. Canary deployment not deleted or modified. Token read from local file; value not recorded.</p><h2>Actual post-propagation requests</h2><table><tr><th>Request</th><th>Method/status</th><th>Location</th></tr><tr><td>https://41b1c458.phios-github.pages.dev/?p9_t5=2eed05c8-0180-48e5-ab8b-3afaff30c783&amp;check=path-query</td><td>GET 307</td><td>https://getphios.com/?p9_t5=2eed05c8-0180-48e5-ab8b-3afaff30c783&amp;check=path-query</td></tr><tr><td>https://41b1c458.phios-github.pages.dev/?p9_t5=1434d50b-8c79-446a-9b19-284938b0d904&amp;check=path-query</td><td>HEAD 307</td><td>https://getphios.com/?p9_t5=1434d50b-8c79-446a-9b19-284938b0d904&amp;check=path-query</td></tr><tr><td>https://41b1c458.phios-github.pages.dev/api/auth/session?p9_t5=51346ad9-efa5-4225-b25c-b919e8f6eb39&amp;check=path-query</td><td>GET 307</td><td>https://getphios.com/api/auth/session?p9_t5=51346ad9-efa5-4225-b25c-b919e8f6eb39&amp;check=path-query</td></tr><tr><td>https://41b1c458.phios-github.pages.dev/api/auth/session?p9_t5=c8ff156a-13cf-4d30-b7da-2822b05deee5&amp;check=path-query</td><td>HEAD 307</td><td>https://getphios.com/api/auth/session?p9_t5=c8ff156a-13cf-4d30-b7da-2822b05deee5&amp;check=path-query</td></tr><tr><td>https://41b1c458.phios-github.pages.dev/api/account/persons?p9_t5=6440ea3b-95af-4317-a440-33604fcd9e9b&amp;check=path-query</td><td>GET 307</td><td>https://getphios.com/api/account/persons?p9_t5=6440ea3b-95af-4317-a440-33604fcd9e9b&amp;check=path-query</td></tr><tr><td>https://41b1c458.phios-github.pages.dev/api/account/persons?p9_t5=1a72e67c-6815-4659-b1fb-d80d86620f27&amp;check=path-query</td><td>HEAD 307</td><td>https://getphios.com/api/account/persons?p9_t5=1a72e67c-6815-4659-b1fb-d80d86620f27&amp;check=path-query</td></tr><tr><td>https://getphios.com/?p9_t5=a602c7ef-31a1-4f52-8b91-3ce3bbf72c55&amp;check=path-query</td><td>GET 200</td><td>none</td></tr><tr><td>https://b07d86bf.phios-github.pages.dev/?p9_t5=c377909a-0e23-4577-b146-8d585a60c933&amp;check=path-query</td><td>GET 200</td><td>none</td></tr><tr><td>https://a1f8a3ba.phios-github.pages.dev/?p9_t5=c4425d01-d21b-4388-9ae0-ae5ef3a31fb9&amp;check=path-query</td><td>GET 200</td><td>none</td></tr></table><p>Early propagation responses are preserved separately in execution evidence; they are not rewritten as PASS. Six later canary GET/HEAD requests returned 307 with matching path/query. Automatic redirect following disabled; no customer POST/PUT/PATCH/DELETE.</p><h2>Trace gap</h2><pre>{
+  &quot;status&quot;: &quot;TRACE_IDENTITY_NOT_PROVEN&quot;,
+  &quot;api&quot;: {
+    &quot;endpoint&quot;: &quot;/accounts/0b9f36bdf56f38d7d09aebe388f15204/request-tracer/trace&quot;,
+    &quot;httpStatus&quot;: 403,
+    &quot;credential&quot;: &quot;EXISTING_WRANGLER_OAUTH&quot;,
+    &quot;missingRead&quot;: &quot;Allow Request Tracer Read&quot;,
+    &quot;errors&quot;: [
+      {
+        &quot;code&quot;: 10000,
+        &quot;message&quot;: &quot;Authentication error&quot;,
+        &quot;documentation_url&quot;: &quot;https://developers.cloudflare.com/api/resources/request_tracers/subresources/traces/methods/create&quot;
+      }
+    ]
+  },
+  &quot;dashboard&quot;: {
+    &quot;type&quot;: &quot;RULE_SIMULATOR_NOT_LIVE_TRAFFIC_TRACE&quot;,
+    &quot;requestURL&quot;: &quot;https://41b1c458.phios-github.pages.dev/api/auth/session?p9_t5_trace=canary-only&quot;,
+    &quot;method&quot;: &quot;GET&quot;,
+    &quot;result&quot;: &quot;There was an error and your simulation could not be performed. Try another URL or amend your configurations: hostname does not belong to your account&quot;,
+    &quot;ruleIDReturned&quot;: false,
+    &quot;screenshot&quot;: &quot;tmp/p9-t5-trace-host-scope-failure.jpg&quot;
+  },
+  &quot;canaryMatchedRuleIdentity&quot;: &quot;UNPROVEN&quot;,
+  &quot;historicalHandlerExecution&quot;: &quot;NOT_OBSERVED_BUT_NO_USABLE_HANDLER_TRACE_COLLECTED; absence not proven&quot;,
+  &quot;basis&quot;: &quot;307 live response + unique configured rule is circumstantial; cannot substitute for requested trace identity&quot;
+}</pre><img alt="Cloudflare simulator refuses provider-managed historical hash" src="../../tmp/p9-t5-trace-host-scope-failure.jpg"><h2>Receipt and exact rollback</h2><pre>{
+  &quot;status&quot;: &quot;REDIRECT_VISIBLE_BUT_PRE_HANDLER_CONTAINMENT_UNPROVEN&quot;,
+  &quot;canary2ID&quot;: &quot;41b1c458-c79d-40e8-b47c-c2e5f4dba452&quot;,
+  &quot;canary2Host&quot;: &quot;41b1c458.phios-github.pages.dev&quot;,
+  &quot;activeProductionBefore&quot;: &quot;b07d86bf-2447-4fe8-8ded-66d9fe676c81&quot;,
+  &quot;rulesetID&quot;: &quot;e4920e8f14574ec9abce2fbe9d764056&quot;,
+  &quot;newListID&quot;: &quot;d049cc55bb5f4c1a9223619886c3745b&quot;,
+  &quot;newItemID&quot;: &quot;2c54f18d5bcd419ebafaff613a5807aa&quot;,
+  &quot;newRuleID&quot;: &quot;66f4b7cbcabe40b38a4b8fab0b1eb697&quot;,
+  &quot;rulesetVersion&quot;: &quot;3&quot;,
+  &quot;rulePosition&quot;: 3,
+  &quot;exactHostScopeConfirmed&quot;: true,
+  &quot;redirectObserved&quot;: &quot;6/6 post-propagation GET/HEAD 307; paths/query preserved; redirect following disabled&quot;,
+  &quot;traceMatchConfirmed&quot;: false,
+  &quot;preHandlerContainment&quot;: &quot;UNPROVEN&quot;,
+  &quot;oldFunctionsExecutionObserved&quot;: &quot;UNVERIFIED_NO_HANDLER_TRACE&quot;,
+  &quot;getphiosHealthy&quot;: true,
+  &quot;activeProductionAfter&quot;: &quot;b07d86bf-2447-4fe8-8ded-66d9fe676c81&quot;,
+  &quot;otherHashHostsAffected&quot;: &quot;NO_IN_TWO_TESTED_CONTROLS; exact expression excludes every other hostname&quot;,
+  &quot;rollbackRequired&quot;: false,
+  &quot;rollbackResult&quot;: &quot;NOT_EXECUTED_NO_UNEXPECTED_EFFECT_OBSERVED&quot;,
+  &quot;newRuleEnabled&quot;: true,
+  &quot;rollback&quot;: {
+    &quot;first&quot;: {
+      &quot;method&quot;: &quot;DELETE&quot;,
+      &quot;endpoint&quot;: &quot;/accounts/0b9f36bdf56f38d7d09aebe388f15204/rulesets/e4920e8f14574ec9abce2fbe9d764056/rules/66f4b7cbcabe40b38a4b8fab0b1eb697&quot;,
+      &quot;scope&quot;: &quot;Only new rule, no full ruleset replacement&quot;
+    },
+    &quot;verify&quot;: &quot;Canary returns pre-test behavior, original two rules/order and canonical availability retained&quot;,
+    &quot;then&quot;: {
+      &quot;method&quot;: &quot;DELETE&quot;,
+      &quot;endpoint&quot;: &quot;/accounts/0b9f36bdf56f38d7d09aebe388f15204/rules/lists/d049cc55bb5f4c1a9223619886c3745b&quot;,
+      &quot;condition&quot;: &quot;Only after fresh read proves no remaining rule references dedicated list; STOP on unexpected reference&quot;
+    }
+  },
+  &quot;zoneLBVisibility&quot;: &quot;OPEN_NON_BLOCKING_SINGLE_CANARY_ONLY&quot;,
+  &quot;writePermissionsUsed&quot;: [
+    &quot;Account Filter Lists Edit&quot;,
+    &quot;Bulk URL Redirects Edit&quot;
+  ],
+  &quot;productionMutations&quot;: 3,
+  &quot;mutationBreakdown&quot;: [
+    &quot;Create one list&quot;,
+    &quot;Create one item&quot;,
+    &quot;Add one rule&quot;
+  ],
+  &quot;D1Mutations&quot;: 0,
+  &quot;D1MutationBasis&quot;: &quot;No D1 API or SQL operation performed; this is operation accounting, not a database-wide write audit&quot;,
+  &quot;providerCalls&quot;: 0,
+  &quot;costUSD&quot;: 0,
+  &quot;payments&quot;: 0,
+  &quot;refunds&quot;: 0,
+  &quot;D1MigrationStatus&quot;: &quot;NOT_AUTHORIZED_NOT_EXECUTED&quot;,
+  &quot;tokenValueRecorded&quot;: false,
+  &quot;productionD1WriteIsolation&quot;: &quot;UNPROVEN&quot;,
+  &quot;wildcardRollout&quot;: &quot;NOT_AUTHORIZED&quot;,
+  &quot;firstRemainingBlocker&quot;: &quot;EXACT_PAGES_DEV_HASH_RULE_EXECUTION_TRACE_IDENTITY_UNAVAILABLE&quot;,
+  &quot;indexEmpty&quot;: true,
+  &quot;HEAD&quot;: &quot;9f25c5da3ae69db27023cc661febe8f7bdaaeedc&quot;
+}</pre><h2>Evidence</h2><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T5-PREFLIGHT.json">P9-G3-R6-T5-PREFLIGHT.json</a></p><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T5-EXECUTION.json">P9-G3-R6-T5-EXECUTION.json</a></p><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T5-POST-PROPAGATION-EVIDENCE.json">P9-G3-R6-T5-POST-PROPAGATION-EVIDENCE.json</a></p><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T5-TRACE-GAP-EVIDENCE.json">P9-G3-R6-T5-TRACE-GAP-EVIDENCE.json</a></p><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T5-FINAL-RECEIPT.json">P9-G3-R6-T5-FINAL-RECEIPT.json</a></p><p>Cloudflare Trace simulation is configuration evaluation, not direct handler telemetry. <a href="https://developers.cloudflare.com/rules/trace-request/">Official Trace definition</a>. No further rules/config/deployments changed to manufacture trace evidence. New rule remains enabled within exact authorized scope; rollback fully defined, not needed for observed behavior.</p><p>Provider 0/USD0; payment/refund 0/0; D1 operations 0; no commit/push. STOP.</p><section id="reauthorization-recheck"><h2>Successor authorization: read-only recheck</h2><p>PASS_EXISTING_SINGLE_CANARY_NO_DRIFT. Same list/item/rule and original rules unchanged; canary root/session GET307 preserves path/query. Canonical, current hash and historical control GET200. Canary still API-listed; active production b07d86bf unchanged. New mutations 0; index empty. Trace gap remains open.</p><p><a href="../../content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T5-HUMAN-REAUTHORIZATION-RECHECK.json">Fresh successor machine evidence</a></p></section></html>

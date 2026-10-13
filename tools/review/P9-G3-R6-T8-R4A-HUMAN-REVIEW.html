@@ -1,0 +1,85 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>P9 T8-R4A byte-preserving export proof</title><style>body{max-width:1000px;margin:40px auto;padding:20px;font:16px system-ui;line-height:1.6}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>T8-R4A · Byte-preserving export repair</h1><p>Every frozen-tree file exported directly from Git blobs and independently read back. No line-ending conversion, source edit, new candidate identity, secret alignment, deployment or production mutation.</p><p>The artifact hash binds the complete exported source directory through a path-sorted file manifest with mode, blob identity, size and SHA256. It is not a compiled Pages package hash; future T8-R4 build/deployment remains outside R4A.</p><pre>{
+  "status": "READY_TO_RESUME_T8_R4_DEPLOYMENT",
+  "artifactPath": "C:\\phios/tmp/p9-t8-r4a/source-blob",
+  "artifactHash": "98365ce3b9023ac00da9481d6e192847e5159329b4242cd22a149c9d07a19cfe",
+  "artifactHashAlgorithm": "SHA256 of canonical JSON array sorted by path; entries path/mode/oid/bytes/sha256",
+  "tree": "bfbe56e02b33ed10219ff673306f43ca4da19da4",
+  "digest": "cb60cb3371a813435a0ffe4decaed15c0a461306ba6b39d3925060d4d831140f",
+  "fileCount": 48118,
+  "fileCountMatch": true,
+  "pathSetMatch": true,
+  "allFileBlobMatch": true,
+  "missing": 0,
+  "extra": 0,
+  "byteDrift": 0,
+  "nonOverlayR5BytesUnchanged": true,
+  "overlayHashes": [
+    {
+      "path": "wrangler.jsonc",
+      "sha256": "468092ba45d6c21e8fa7f3442b5321ced85fd4e0a47fda014ed9932c9cdb8c59",
+      "byteIdenticalReuse": true
+    },
+    {
+      "path": "functions/_middleware.js",
+      "sha256": "a155495f40e5ab4467155bb417822532ed4275fc1c18e0ce33ad541039864f5a",
+      "byteIdenticalReuse": false
+    },
+    {
+      "path": "functions/_lib/d1-maintenance-guard.js",
+      "sha256": "6beafe96ea21d4514b40bd9a8335ba42991467eeccf512fa28dc7949bdb01e85",
+      "byteIdenticalReuse": true
+    },
+    {
+      "path": "functions/_lib/d1-private-isolation-probe.js",
+      "sha256": "247537cd3f98533ff660da919360c6d0cc74e51ba7cd13ad94cbba66443950ef",
+      "byteIdenticalReuse": false
+    }
+  ],
+  "exportMethod": "git cat-file --batch streamed binary blob bytes into fs.writeSync; no checkout/archive/filter/text conversion",
+  "targetFile": {
+    "path": "functions/professional/financial/financial-calculation-layer.js",
+    "mode": "100644",
+    "oid": "d18d9f346b506320e534d33e3c0f9495785aca53",
+    "bytes": 4889,
+    "sha256": "cd58aaa1433fb404129808d70d4d830bf8f0a525a0842f001f8f075b15e07c53"
+  },
+  "sourceEdits": 0,
+  "secretAlignmentPerformed": false,
+  "productionMutations": 0,
+  "D1Mutations": 0,
+  "providerCalls": 0,
+  "costUSD": 0,
+  "commit": 0,
+  "push": 0,
+  "deployment": 0,
+  "firstRemainingBlocker": "T8_R4_RESUMPTION_OUTSIDE_R4A_SCOPE_STOP",
+  "rootCause": {
+    "frozenBlob": "d18d9f346b506320e534d33e3c0f9495785aca53",
+    "archivePayloadBlob": "db5c78fe127ef41cb29cd7dc2961b6ceab915e99",
+    "extractedBlob": "db5c78fe127ef41cb29cd7dc2961b6ceab915e99",
+    "archivePayloadEqualsExtracted": true,
+    "archivePayloadAlreadyCRLF": true,
+    "coreAutocrlf": "false",
+    "coreEol": "UNSET",
+    "attributes": "# Preserve the byte format recorded by the immutable FCR predecessor freeze.\nfunctions/professional/financial/financial-calculation-layer.js text eol=crlf\n",
+    "cause": "git archive applies frozen .gitattributes text eol=crlf during export; tar payload already differs before extraction. tar extraction preserves that payload. PowerShell writes only orchestration scripts; Node/fs Buffer writes introduce no text conversion.",
+    "productionMutations": 0
+  },
+  "gitConfig": {
+    "isolatedExport": {
+      "coreAutocrlf": false,
+      "coreEol": "UNSET"
+    },
+    "mainWorktree": {
+      "coreAutocrlf": false,
+      "coreEol": "lf"
+    },
+    "globalGitConfigurationChanged": false
+  },
+  "fullManifestPath": "C:/phios/tmp/p9-t8-r4a/ARTIFACT-FILE-MANIFEST.json",
+  "historicalFailedExportPreserved": true,
+  "orchestrationRepair": "Initial direct exporter path-safety assertion rejected mixed slash spelling before writing any blob; resolved absolute-path comparison corrected. No source bytes or production state changed.",
+  "gitIndexEmpty": true,
+  "mainDiagnosticFilesUnchanged": true,
+  "scope": "R4A byte-preserving export repair only; not a Pages build, secret alignment or deployment"
+}</pre></html>

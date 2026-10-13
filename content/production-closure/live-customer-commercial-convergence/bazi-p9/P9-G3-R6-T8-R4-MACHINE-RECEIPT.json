@@ -1,0 +1,133 @@
+{
+  "at": "2026-10-13T03:22:06.306Z",
+  "status": "P9_T8_R4_EXPORTED_BLOB_IDENTITY_DRIFT_STOP",
+  "humanAccept": {
+    "stage": "T8-R3",
+    "tree": "bfbe56e02b33ed10219ff673306f43ca4da19da4",
+    "digest": "cb60cb3371a813435a0ffe4decaed15c0a461306ba6b39d3925060d4d831140f",
+    "source": "C:/Users/Guest Account/.codex/attachments/e70c94fc-b47a-4742-a119-ea1270b25195/Pasted text.txt"
+  },
+  "authorizedStage": "T8-R4_ONE_CONTROLLED_DIAGNOSTIC_SUCCESSOR_DEPLOYMENT",
+  "failure": {
+    "path": "functions/professional/financial/financial-calculation-layer.js",
+    "expectedBlob": "d18d9f346b506320e534d33e3c0f9495785aca53",
+    "actualExportedBlob": "db5c78fe127ef41cb29cd7dc2961b6ceab915e99",
+    "expectedBytes": 4889,
+    "actualBytes": 4996,
+    "expectedCRLF": 0,
+    "actualCRLF": 107,
+    "equalAfterCRLFNormalization": true,
+    "attributes": "text eol=crlf",
+    "candidateTree": "bfbe56e02b33ed10219ff673306f43ca4da19da4",
+    "candidateDigest": "cb60cb3371a813435a0ffe4decaed15c0a461306ba6b39d3925060d4d831140f",
+    "status": "P9_T8_R4_EXPORTED_BLOB_IDENTITY_DRIFT_STOP",
+    "productionMutations": 0,
+    "secretAlignmentPerformed": false,
+    "deploymentInvocations": 0,
+    "handshakeRequests": 0,
+    "guardProbes": 0
+  },
+  "preflight": {
+    "active": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+    "commit": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+    "mode": "READ_ONLY",
+    "environment": "production",
+    "gates": {
+      "REPORT_PROVIDER_LIVE_ALLOWED": "false",
+      "PHIOS_P9_CANARY_ENABLED": "false",
+      "PHIOS_P9_CHECKOUT_ENABLED": "false",
+      "PHIOS_P9_REFUND_ENABLED": "false"
+    },
+    "secretPresent": true,
+    "canaryRule": {
+      "action": "redirect",
+      "action_parameters": {
+        "from_list": {
+          "key": "http.request.full_uri",
+          "name": "p9_t4_canary2_ingress"
+        }
+      },
+      "description": "P9 Canary 2 only; no wildcard historical retirement",
+      "enabled": true,
+      "expression": "(http.host eq \"41b1c458.phios-github.pages.dev\") and (http.request.full_uri in $p9_t4_canary2_ingress)",
+      "id": "66f4b7cbcabe40b38a4b8fab0b1eb697",
+      "last_updated": "2026-10-12T15:11:36.261713Z",
+      "ref": "66f4b7cbcabe40b38a4b8fab0b1eb697",
+      "version": "1"
+    },
+    "productionMutations": 0,
+    "secretValueRecorded": false,
+    "canaryItemUnchanged": true,
+    "health": [
+      {
+        "url": "https://getphios.com/",
+        "status": 200,
+        "location": null,
+        "bytes": 23687,
+        "sha256": "23e5f171361af49ba197250ac8457ba4e8df46db09b1d9786552f2cf671fe724"
+      },
+      {
+        "url": "https://getphios.com/perspectives/?lang=zh-Hans",
+        "status": 200,
+        "location": null,
+        "bytes": 30252,
+        "sha256": "643b0358f6ae1c0335e8c01efb6ccb9165a3b0aec711ce2c8eea5ccbae82aace"
+      },
+      {
+        "url": "https://getphios.com/perspectives/?lang=en",
+        "status": 200,
+        "location": null,
+        "bytes": 30252,
+        "sha256": "643b0358f6ae1c0335e8c01efb6ccb9165a3b0aec711ce2c8eea5ccbae82aace"
+      },
+      {
+        "url": "https://getphios.com/assets/customer-ui/js/public-index-copy.js",
+        "status": 200,
+        "location": null,
+        "bytes": 2008,
+        "sha256": "ef4b491a7df67c0d8ccdac9ef24ffa93155541a82abb5a1278fc9f7e82b20d01"
+      },
+      {
+        "url": "https://getphios.com/api/auth/session",
+        "status": 200,
+        "location": null,
+        "bytes": 77,
+        "sha256": "b71b0f31773379c546509f2f8a1ad6b96b8f8af78479d5598e94ad1e1d73af57"
+      },
+      {
+        "url": "https://41b1c458.phios-github.pages.dev/",
+        "status": 307,
+        "location": "https://getphios.com/",
+        "bytes": 169,
+        "sha256": "7108fef32b066dcb8e074d4114e8614cfb6f1efeb9497c0b0268b7b4039f22bc"
+      },
+      {
+        "url": "https://eed55715.phios-github.pages.dev/",
+        "status": 404,
+        "location": null,
+        "bytes": 16165,
+        "sha256": "691c4d3a793d128db54f464cd0fccf912c3787b1cea94f570c75e728e35ff52b"
+      }
+    ],
+    "status": "PASS_PRE_DEPLOY_SAFETY"
+  },
+  "secret": {
+    "fileFound": true,
+    "nonempty": true,
+    "valueRecorded": false,
+    "alignmentPerformed": false
+  },
+  "deploymentInvocations": 0,
+  "productionMutations": 0,
+  "providerCalls": 0,
+  "costUSD": 0,
+  "payments": 0,
+  "refunds": 0,
+  "migrations": 0,
+  "runtimeIsolation": "UNPROVEN",
+  "stage1": "NOT_READY_NOT_AUTHORIZED",
+  "firstRemainingBlocker": "P9_T8_R4_EXPORTED_BLOB_IDENTITY_DRIFT_STOP",
+  "indexEmpty": true,
+  "activeSourceFilesUntouched": true,
+  "recommendation": "Exact Git-object byte materialization is required; stop instruction honored, no corrective rewrite or production mutation performed. Financial exported line endings differ although normalized text equals. Frozen candidate identity itself remains accepted; exported artifact did not pass."
+}

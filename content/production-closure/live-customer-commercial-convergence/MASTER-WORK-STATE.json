@@ -22338,17 +22338,26 @@
     "evidence": "tools/review/membership-ask-credit-r1/REVIEW-V2-PAID-SUMMARY.json"
   },
   "membershipDeliveryClosure": {
-    "at": "2026-10-12T15:07:56.659Z",
-    "source": "PARTIAL",
-    "local": "14 service engineering replays + 4 browser cases; not new model validation",
+    "at": "2026-10-12T15:34:47.802Z",
+    "head": "9f25c5da3ae69db27023cc661febe8f7bdaaeedc",
+    "source": "LIMITED_CANDIDATE_EXECUTION_CLOSED",
+    "local": "Production closed gate + current customer UI + inherited relevant isolated QA",
     "build": "PASS_BUILD_RELEVANT_INPUTS_STABLE",
-    "relevantBuildInputDigest": "a8f30d6ca95b8e4fcbe4934d7f1b7a26a3df85fa705fc7abfed859cccfa9ea3d",
-    "workerSha256": "a4d1fadbae021299145466fcab46ac74ce15b7c4b90090a5a8aca750407df987",
+    "relevantBuildInputDigest": "bf4aa8d72b12060ca43d1a3b54b750cc4493f159bc194a64d5701f4cd9623d1e",
+    "workerSha256": "c707aabf11a9d6f868e69aadf9f0a923f73f782cdc9b7872215b53c0871a3e70",
     "deployment": "NOT_RUN",
     "live": "NOT_RUN",
     "providerCalls": 0,
     "wholeChapterAcceptanceAdded": 0,
+    "firstBlocker": "HISTORICAL_BALANCE_RECONCILIATION_AND_GOVERNED_SCHEMA_PROMOTION",
     "candidate": "tools/review/membership-ask-credit-r1/DELIVERY-CLOSURE-RELEASE-CANDIDATE.json",
-    "firstBlocker": "CANONICAL_MIGRATION_NUMBER_COLLISION_AND_UNAPPLIED_OWNER_SCHEMA"
+    "preReleaseClosure": {
+      "at": "2026-10-13T02:22:37.400Z",
+      "evidence": "tools/review/membership-ask-credit-r1/PRE-RELEASE-CLOSURE.json",
+      "build": "PASS_BUILD_REUSED_RELEVANT_INPUTS_UNCHANGED",
+      "firstBlocker": "UNRESOLVED_HISTORICAL_ENTITLEMENT_LINEAGE",
+      "activation": "CLOSED",
+      "modelValidation": "FROZEN_NOT_AUTHORIZED_PRICE_PREFLIGHT_PENDING"
+    }
   }
 }

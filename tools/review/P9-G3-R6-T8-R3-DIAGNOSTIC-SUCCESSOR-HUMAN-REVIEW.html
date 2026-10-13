@@ -1,0 +1,138 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>P9 T8-R3 diagnostic successor review</title><style>body{max-width:1050px;margin:40px auto;padding:20px;font:16px system-ui;line-height:1.6}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f5f7;padding:20px}h1{color:#153d48}</style><h1>P9 G3-R6-T8-R3 · Human Review</h1><p>Source admission and local QA only. Production runtime isolation remains UNPROVEN; historical topology remains OPEN.</p><p>Historical four-file overlay reconstructed from its Git tree and every SHA256 matched. Guard and READ_ONLY configuration are byte-identical reuse. Middleware now preserves the R5 POST method defense and handles authenticated handshake before any D1 binding access. Private probe adds bounded correlation and trace identity, with no diagnostics in responses.</p><p>QA: 36 ordinary route/mode/method/write comparisons against R5; missing/wrong credential fails closed; handshake tested against a throwing D1 getter; GET guard rejects mutation without raw forwarding; SQL/write capabilities reject; POST cannot reach probe. Synthetic credential only, network disabled.</p><p>Candidate snapshot: C:/phios/tmp/p9-t8-r3/source. Full candidate Git tree is frozen in isolated temporary index/object store; only the listed four paths differ from R5. Current workspace business files unchanged.</p><pre>{
+  "status": "READY_FOR_DIAGNOSTIC_SUCCESSOR_DEPLOYMENT_HUMAN_AUTHORIZATION",
+  "previous": {
+    "acceptedBase": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+    "candidateTree": "6b91c4be7005c6ef7545081c7a47d6338e7347be",
+    "files": [
+      {
+        "path": "wrangler.jsonc",
+        "sha256": "468092ba45d6c21e8fa7f3442b5321ced85fd4e0a47fda014ed9932c9cdb8c59"
+      },
+      {
+        "path": "functions/_middleware.js",
+        "sha256": "4adc5ae7f9911798dae83443eacdf76259ba6ac9caefe9a09622d88536fc612f"
+      },
+      {
+        "path": "functions/_lib/d1-maintenance-guard.js",
+        "sha256": "6beafe96ea21d4514b40bd9a8335ba42991467eeccf512fa28dc7949bdb01e85"
+      },
+      {
+        "path": "functions/_lib/d1-private-isolation-probe.js",
+        "sha256": "169f52bfa921cba60d9335d490c8327aa7ccdfb87ed875584a5493a955d13e01"
+      }
+    ],
+    "changedPaths": [
+      "functions/_lib/d1-maintenance-guard.js",
+      "functions/_lib/d1-private-isolation-probe.js",
+      "functions/_middleware.js",
+      "wrangler.jsonc"
+    ],
+    "noCommitCreated": true,
+    "activeWorktreeEdited": false,
+    "candidateDigest": "684e7d3baef6f587e9dfd88d06035c2704d686536e42bc0d6223c505df0ed57a"
+  },
+  "manifest": {
+    "acceptedBase": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+    "baseTree": "44ff79ccb5885846ad6bfdd1cb1c9cd56b60b318",
+    "candidateTree": "bfbe56e02b33ed10219ff673306f43ca4da19da4",
+    "files": [
+      {
+        "path": "wrangler.jsonc",
+        "sha256": "468092ba45d6c21e8fa7f3442b5321ced85fd4e0a47fda014ed9932c9cdb8c59",
+        "byteIdenticalReuse": true
+      },
+      {
+        "path": "functions/_middleware.js",
+        "sha256": "a155495f40e5ab4467155bb417822532ed4275fc1c18e0ce33ad541039864f5a",
+        "byteIdenticalReuse": false
+      },
+      {
+        "path": "functions/_lib/d1-maintenance-guard.js",
+        "sha256": "6beafe96ea21d4514b40bd9a8335ba42991467eeccf512fa28dc7949bdb01e85",
+        "byteIdenticalReuse": true
+      },
+      {
+        "path": "functions/_lib/d1-private-isolation-probe.js",
+        "sha256": "247537cd3f98533ff660da919360c6d0cc74e51ba7cd13ad94cbba66443950ef",
+        "byteIdenticalReuse": false
+      }
+    ],
+    "changedPaths": [
+      "functions/_lib/d1-maintenance-guard.js",
+      "functions/_lib/d1-private-isolation-probe.js",
+      "functions/_middleware.js",
+      "wrangler.jsonc"
+    ],
+    "nonOverlayUnchanged": true,
+    "candidateDigest": "cb60cb3371a813435a0ffe4decaed15c0a461306ba6b39d3925060d4d831140f"
+  },
+  "qa": {
+    "status": "PASS_LOCAL",
+    "ordinaryBehaviorComparisons": 36,
+    "ordinaryDiagnosticLogs": 0,
+    "authentication": "PASS_FAIL_CLOSED",
+    "handshake": "PASS_NO_D1_ACCESS",
+    "guard": "PASS",
+    "POST": "NO_BY_DESIGN_ROOT_METHOD_DEFENSE",
+    "trace": [
+      {
+        "kind": "P9_PRIVATE_NON_D1_HANDSHAKE",
+        "candidateMarker": "P9_T8_R3_DIAGNOSTIC_V1",
+        "requestHost": "local.invalid",
+        "correlation": "local_trace_12345678",
+        "credentialAccepted": true,
+        "middlewareExecuted": true,
+        "mode": "READ_ONLY",
+        "D1Accesses": 0
+      },
+      {
+        "candidateMarker": "P9_T8_R3_DIAGNOSTIC_V1",
+        "requestHost": "local.invalid",
+        "correlation": "local_trace_12345678",
+        "guardReached": true,
+        "kind": "P9_PRIVATE_D1_ISOLATION",
+        "middlewareExecuted": true,
+        "handlerReached": true,
+        "mode": "READ_ONLY",
+        "bindingWrapped": true,
+        "method": "GET",
+        "guardRejectedWrite": true,
+        "D1MutationAttemptForwarded": false
+      }
+    ],
+    "durableD1Mutations": 0,
+    "networkCalls": 0,
+    "providerCalls": 0,
+    "payments": 0,
+    "refunds": 0
+  },
+  "secret": {
+    "source": "LOCAL_FILE",
+    "path": "C:/Users/Guest Account/.phios-secrets/cloudflare/P9-T8-R2-DIAGNOSTIC-TOKEN.txt",
+    "foundNonempty": true,
+    "valueRecorded": false,
+    "productionSecretUpdated": false
+  },
+  "productionMutations": 0,
+  "deployments": 0,
+  "providerCalls": 0,
+  "costUSD": 0,
+  "payments": 0,
+  "refunds": 0,
+  "index": "",
+  "deploymentIdentityModel": "Private marker + correlation + requestHost bound to exact deployment-specific tail identity; host alone is not deployment proof.",
+  "futurePlan": "Separate Human ACCEPT and T8-R4 authorization: one alignment from existing credential, one isolated deployment, exact deployment-specific collector identity/open/init then authenticated non-D1 correlated handshake then one GET guard proof. POST remains blocked by root method defense. No retries. Stop on missing trace or drift.",
+  "rollback": "Preserve b07d86bf-2447-4fe8-8ded-66d9fe676c81 as historical rollback hold. No rollback executed or automatically authorized here.",
+  "firstBlocker": "T8_R3_HUMAN_ACCEPT_AND_T8_R4_DEPLOYMENT_NOT_AUTHORIZED"
+}</pre><p>No deploy, secret update, production mutation, migration, commit or push. Future release requires separate authorization.</p><h2>Final compiled proof</h2><p>Functions compile exit 0. Extracted actual Worker module handshake and GET guard replay PASS; raw D1 accesses 0. Earlier incomplete export and multipart-import failures retained as preparation/test-harness failures, not runtime PASS evidence.</p><p>Executable R5 dependency projection plus four overlay files. Full candidate tree is frozen separately in isolated index/object store; future deployment requires complete exact-tree export, not this partial snapshot.</p><pre>{
+  "command": "node C:/phios/node_modules/wrangler/bin/wrangler.js pages functions build functions --outfile ../compiled-worker.mjs --compatibility-flags=nodejs_compat",
+  "cwd": "C:/phios/tmp/p9-t8-r3/source",
+  "exitCode": 0,
+  "output": "tmp/p9-t8-r3/compile-final-output.txt",
+  "initialFailures": [
+    "incomplete isolated dependency export: missing R5 content/assets",
+    "support archive stdout ENOBUFS; replaced by exact base import dependency extraction",
+    "multipart output imported as JS; extracted actual worker module before replay"
+  ],
+  "workerSHA256": "a7cf617c7edf8924ec8b4b5f025d3441eddb12776a54103132e4c8b4b7a30fcd"
+}</pre></html>
