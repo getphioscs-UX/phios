@@ -210,7 +210,7 @@ async function render() {
     }).catch(()=>{});
     fetch('/content/web-production/registries/book-public-samples-v1.json').then(r=>{if(!r.ok)throw new Error('SAMPLES_UNAVAILABLE');return r.json();}).then(registry=>{
       if(generation!==renderGeneration)return;const sample=registry.books.find(b=>b.bookId===bookId);if(!sample)return;
-      const section=document.createElement('section');section.id='free-samples';section.className='knowledge-section';const shell=document.createElement('div');shell.className='knowledge-shell';section.append(shell);root.append(section);renderBookPublicSamples(shell,sample,locale);
+      const section=document.createElement('section');section.id='free-samples';section.className='knowledge-section';const shell=document.createElement('div');shell.className='knowledge-shell';section.append(shell);root.append(section);renderBookPublicSamples(shell,{...sample,figures:[]},locale);
       const link=document.createElement('a');link.className='knowledge-action';link.href='#free-samples';link.textContent=locale==='zh-Hans'?'免费预览与总结图':'Free previews and summary figures';root.querySelector('.knowledge-actions')?.append(link);
     }).catch(()=>{});
 

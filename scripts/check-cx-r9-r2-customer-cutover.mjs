@@ -91,7 +91,8 @@ for(const marker of [
   'scopeLabel',
   'systemLabel',
   "item.availability==='AVAILABLE_FROM_SOURCE'",
-  'Open Ask from the original reading, relationship or profile',
+  'This source is not connected to this question. It remains unavailable until the server resolves access and consent.',
+  '此来源尚未接入本次提问；服务端完成访问与同意验证前不可使用。',
   'errorMessage',
   'selectedKnowledgeContext',
   'knowledgeContext',
@@ -99,6 +100,8 @@ for(const marker of [
 ])assert.ok(client.includes(marker),`refined Ask client missing ${marker}`);
 assert.equal(client.includes('<dt>${esc(tr(\'Authority\''),false,'raw Authority label must not be rendered by default');
 assert.equal(client.includes('s.sourceAuthority'),false,'raw sourceAuthority must not be rendered by customer client');
+assert.ok(client.includes("item.availability==='REQUIRES_SERVER_AUTHORIZED_CONTEXT'"),'Protected context must retain an explicit unavailable state');
+assert.ok(client.includes("${available?'':'disabled'}"),'Unavailable context selections must remain disabled');
 
 // Protected context: client-supplied ref remains unavailable; server-resolved source becomes available.
 const unauthResponse=await onRequestGet({request:new Request('https://phios.test/api/customer-contextual-ask?locale=en&contextType=RELATIONSHIP_GOVERNED_READING&contextRef=REL-1'),data:{}});

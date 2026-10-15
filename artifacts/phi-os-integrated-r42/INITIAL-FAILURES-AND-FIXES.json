@@ -1,0 +1,25 @@
+{
+  "rows": [
+    {
+      "node": "LOCAL_COMPARE_ENTRY",
+      "initial": "TIMEOUT_COMPARE_PANEL",
+      "cause": "Original World default condition ignored explicit intent and rewrote compare to current",
+      "fix": "Default only when no intent parameter supplied",
+      "regression": "WORLD-ENRICHED-BROWSER.json"
+    },
+    {
+      "node": "COMPARISON_STATE_ASSERTION",
+      "initial": "ASSERTION_FALSE",
+      "cause": "Existing presentation terminology transformed visible PARTIALLY_COMPARABLE into lower-case words; internal state was correct",
+      "fix": "Explicit semantic data attribute tested; visible wording remains customer readable"
+    },
+    {
+      "node": "BOOK_GALLERY",
+      "initial": "TIMEOUT_GALLERY_DETAILS",
+      "cause": "Existing book renderer replaces its entire main root",
+      "fix": "Independent gallery outside that dynamic root, using sole existing summary registry",
+      "regression": "LOCAL-BROWSER-EVIDENCE.json"
+    }
+  ],
+  "historyRetained": true
+}

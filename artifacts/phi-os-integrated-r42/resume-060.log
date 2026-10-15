@@ -1,0 +1,25 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: perspectives/index.html: consolidation source drift
++ actual - expected
+
++ '643b0358f6ae1c0335e8c01efb6ccb9165a3b0aec711ce2c8eea5ccbae82aace'
+- 'bfef9e847a3e5277bf093eb3c133f5733bed01f289b8e3f8c4c730006ecd2421'
+
+    at historicalPisBytes (file:///C:/phios/scripts/lib/page-consolidation-successor-r1.mjs:20:9)
+    at pisCurrentSurfaceSuccessor (file:///C:/phios/scripts/lib/pis-current-surface-successor.mjs:44:99)
+    at file:///C:/phios/scripts/check-pis-r1-presentation.mjs:12:17
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '643b0358f6ae1c0335e8c01efb6ccb9165a3b0aec711ce2c8eea5ccbae82aace',
+  expected: 'bfef9e847a3e5277bf093eb3c133f5733bed01f289b8e3f8c4c730006ecd2421',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

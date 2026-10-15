@@ -7,7 +7,7 @@ import { projectReadoutForCustomer } from '../functions/customer-projection/read
 import { projectNavigationForCustomer } from '../functions/customer-projection/navigation-customer-projection.js';
 import { projectMethodsForCustomer } from '../functions/customer-projection/method-customer-projection.js';
 import { projectFinancialForCustomer } from '../functions/customer-projection/financial-customer-projection.js';
-import { projectKnowledgeAnswerForCustomer } from '../functions/customer-projection/knowledge-customer-projection.js';
+import { KNOWLEDGE_CUSTOMER_PUBLIC_FIELDS, projectKnowledgeAnswerForCustomer } from '../functions/customer-projection/knowledge-customer-projection.js';
 import { projectReportForCustomer } from '../functions/customer-projection/report-customer-projection.js';
 import { projectContinuityForCustomer } from '../functions/customer-projection/continuity-customer-projection.js';
 import { projectProfessionalReviewForCustomer } from '../functions/customer-projection/professional-customer-projection.js';
@@ -62,8 +62,13 @@ for(const adapter of registry.adapters){
   assert.ok(fs.existsSync(path.join(root,relative)),`missing ${relative}`);
   const source=read(relative);
   for(const forbidden of ['fetch(', 'localStorage', 'sessionStorage', 'indexedDB', 'WebSocket'])assert.equal(source.includes(forbidden),false,`${adapter.file} may not perform ${forbidden}`);
+  if(adapter.adapterId==='KNOWLEDGE_ANSWER'){
+    assert.ok(source.includes('safeSources('),'Public knowledge projection must filter current eligible evidence');
+    assert.ok(source.includes('deepFreeze('),'Public knowledge projection must remain immutable');
+  }else{
   assert.ok(source.includes('boundary()'),`${adapter.file} must project common authority boundary`);
   assert.ok(source.includes('sourceLineage('),`${adapter.file} must preserve upstream authority lineage`);
+  }
 }
 for(const required of ['REALITY','READOUT','NAVIGATION','METHODS','FINANCIAL','KNOWLEDGE_ANSWER','REPORT','CONTINUITY','PROFESSIONAL_REVIEW'])assert.ok(ids.has(required),required);
 
@@ -135,9 +140,19 @@ assert.equal(financial.unknowns[0].value,'One value is missing');
 assert.deepEqual(financial.priorities,{state:'NOT_CREATED_BY_ADAPTER',items:[]});
 assert.deepEqual(financial.options,{state:'NOT_CREATED_BY_ADAPTER',items:[]});
 
-const knowledge=projectKnowledgeAnswerForCustomer({clientAnswer:{directAnswer:'Bounded answer',question:'What changed?',unknown:{details:['Current outcome is unknown']},relatedKnowledgeCards:[{title:'Related',href:'/articles/related'}]}},{currentFacts:{state:'AVAILABLE',evidence:[{claimText:'Current fact',publisher:'Authority',sourceUrl:'https://example.com/fact',authorityClass:'PRIMARY'}]}});
-assertProjection(knowledge,'ASK',['CKA','KAP','CURRENT_FACTS_GATEWAY']);
-assert.equal(knowledge.governance.currentFactsAreCanonicalKnowledge,false);
+const knowledgeInput={clientAnswer:{directAnswer:'Bounded answer',question:'What changed?',unknown:{details:['Current outcome is unknown']},relatedKnowledgeCards:[{title:'Related',href:'/articles/related'}]}};
+const currentFacts={state:'AVAILABLE',evidence:[{sourceId:'fixture-current-fact',claimText:'Current fact',publisher:'Authority',sourceUrl:'https://example.com/fact',authorityClass:'PRIMARY'}]};
+const insufficientKnowledge=projectKnowledgeAnswerForCustomer(knowledgeInput,{currentFacts});
+assert.equal(insufficientKnowledge.state,'SOURCE_INSUFFICIENT','An answer without eligible supporting sources must fail closed');
+assert.equal(insufficientKnowledge.handoff.available,false);
+assert.deepEqual(insufficientKnowledge.basedOn.sources,[]);
+const knowledge=projectKnowledgeAnswerForCustomer({...knowledgeInput,sources:[{sourceType:'PUBLISHED_CANONICAL_ARTICLE',sourceId:'fixture-public-article',text:'Bounded source evidence explains the change.',href:'/articles/related'}]},{currentFacts});
+assert.ok(Object.isFrozen(knowledge));assert.ok(Object.isFrozen(knowledge.basedOn.sources));
+assert.deepEqual(KNOWLEDGE_CUSTOMER_PUBLIC_FIELDS,['surface','locale','state','question','answer','basedOn','limits','relatedKnowledge','possibleNextStep','currentFacts','handoff','atlas']);
+assert.deepEqual(Object.keys(knowledge),KNOWLEDGE_CUSTOMER_PUBLIC_FIELDS);
+assert.equal(knowledge.surface,'ASK');assert.equal(knowledge.state,'ANSWERED');
+assert.equal(knowledge.answer.text,'Bounded answer');
+for(const internal of ['governance','sourceLineage','schemaVersion'])assert.equal(Object.hasOwn(knowledge,internal),false,'Internal metadata must not leak into public knowledge projection');
 assert.equal(knowledge.currentFacts.evidence[0].claim,'Current fact');
 assert.deepEqual(knowledge.limits.items,['Current outcome is unknown']);
 

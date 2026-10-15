@@ -16,6 +16,19 @@ for (const item of successor.stylesheets) {
   assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, item.path))).digest('hex'), item.sha256, `Current stylesheet successor drift: ${item.path}`);
   currentSharedStylesheets.add(item.path);
 }
+const scopedSuccessor = readJson(`${base}/legacy/current-shared-stylesheet-successor-v2.json`);
+assert.equal(scopedSuccessor.status, 'ENGINEERING_RECONCILIATION');
+assert.equal(scopedSuccessor.predecessor.path, `${base}/legacy/current-shared-stylesheet-successor-v1.json`);
+assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, scopedSuccessor.predecessor.path))).digest('hex'), scopedSuccessor.predecessor.sha256);
+for (const key of ['historicalFreezeRewritten', 'humanAcceptanceGranted', 'productionAcceptanceGranted']) assert.equal(scopedSuccessor[key], false);
+assert.deepEqual(scopedSuccessor.stylesheets.map(item => item.path), ['assets/css/integrated-r42.css']);
+const scopedStylesheets = new Map();
+for (const item of scopedSuccessor.stylesheets) {
+  assert.ok(!frozen.has(item.path), 'Frozen legacy stylesheet cannot receive a current exception');
+  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, item.path))).digest('hex'), item.sha256, `Current stylesheet successor drift: ${item.path}`);
+  assert.deepEqual(item.consumers, ['academy/index.html', 'books/index.html', 'knowledge/ask/index.html', 'search/index.html']);
+  scopedStylesheets.set(item.path, new Set(item.consumers));
+}
 
 function inspect(rel, text) {
   const hits = [];
@@ -41,7 +54,7 @@ for (const rel of cxHtmlSurfaces()) {
   for (const href of stylesheetRefs(html)) {
     const local = normalizedLocalAsset(href);
     if (!local) continue;
-    if (!local.startsWith('assets/customer-ui/') && !currentSharedStylesheets.has(local)) violations.push({ file: rel, stylesheet: local, reason: 'LOCAL_CSS_OUTSIDE_CUSTOMER_UI' });
+    if (!local.startsWith('assets/customer-ui/') && !currentSharedStylesheets.has(local) && !scopedStylesheets.get(local)?.has(rel)) violations.push({ file: rel, stylesheet: local, reason: 'LOCAL_CSS_OUTSIDE_CUSTOMER_UI' });
   }
 }
 

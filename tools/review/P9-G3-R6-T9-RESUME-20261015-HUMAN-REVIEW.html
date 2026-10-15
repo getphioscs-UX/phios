@@ -1,0 +1,258 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>P9 T9 resume stopped before mutation</title><style>body{font:16px system-ui;max-width:1050px;margin:40px auto;padding:20px;line-height:1.6}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>T9 resume · STOP before mutation</h1><p>Current production and five exact target identities unchanged. Live count is now 3561, including new idle production deployment 4e0ecbeb. Both prior Cloudflare tokens are expired; current rules/list conflict verification returns 401. Existing rule/list absence is not inferred.</p><p>No Stage-1 list/rule/items created. No secret mutation, deployment, D1 write/test/migration, provider/payment, commit or push. Canary 2 remains 307; current, rollback-hold and historical control remain 200 with their baseline body hashes.</p><pre>{
+  "at": "2026-10-15T01:54:55.899Z",
+  "clientDate": "2026-10-15",
+  "priorCompleteInventory": 3560,
+  "current": "8ceb88f8-27bc-432a-80d4-775765a41e0e",
+  "totalLive": 3561,
+  "mode": "READ_ONLY",
+  "targets": [
+    {
+      "id": "0022cd02-45bc-44f1-a544-29de60b350a6",
+      "host": "0022cd02.phios-github.pages.dev",
+      "readSuccess": true,
+      "exists": true,
+      "actualHost": "0022cd02.phios-github.pages.dev",
+      "aliases": [],
+      "status": "success",
+      "functions": true,
+      "current": false
+    },
+    {
+      "id": "002d9570-fbb8-4ca6-94eb-cdd57cfb1b3c",
+      "host": "002d9570.phios-github.pages.dev",
+      "readSuccess": true,
+      "exists": true,
+      "actualHost": "002d9570.phios-github.pages.dev",
+      "aliases": [],
+      "status": "success",
+      "functions": true,
+      "current": false
+    },
+    {
+      "id": "004db7fb-f930-4e83-986a-f0ce848c932f",
+      "host": "004db7fb.phios-github.pages.dev",
+      "readSuccess": true,
+      "exists": true,
+      "actualHost": "004db7fb.phios-github.pages.dev",
+      "aliases": [],
+      "status": "success",
+      "functions": true,
+      "current": false
+    },
+    {
+      "id": "00d9bc8a-317e-49ef-b851-12ab6490585f",
+      "host": "00d9bc8a.phios-github.pages.dev",
+      "readSuccess": true,
+      "exists": true,
+      "actualHost": "00d9bc8a.phios-github.pages.dev",
+      "aliases": [],
+      "status": "success",
+      "functions": true,
+      "current": false
+    },
+    {
+      "id": "00e0892f-82d1-45b0-b44f-e846ceb147bf",
+      "host": "00e0892f.phios-github.pages.dev",
+      "readSuccess": true,
+      "exists": true,
+      "actualHost": "00e0892f.phios-github.pages.dev",
+      "aliases": [],
+      "status": "success",
+      "functions": true,
+      "current": false
+    }
+  ],
+  "credentialChecks": {
+    "readCredential": {
+      "http": 200,
+      "success": true,
+      "codes": [],
+      "status": "expired",
+      "expiresOn": "2026-10-14T15:59:59Z",
+      "valueRecorded": false
+    },
+    "writeCredential": {
+      "http": 200,
+      "success": true,
+      "codes": [],
+      "status": "expired",
+      "expiresOn": "2026-10-14T15:59:59Z",
+      "valueRecorded": false
+    }
+  },
+  "controlReads": {
+    "rules": {
+      "http": 401,
+      "success": false,
+      "codes": [
+        10000
+      ]
+    },
+    "lists": {
+      "http": 401,
+      "success": false,
+      "codes": [
+        10000
+      ]
+    }
+  },
+  "productionMutations": 0,
+  "D1Mutations": 0,
+  "providerCalls": 0,
+  "payments": 0,
+  "refunds": 0,
+  "currentIdentityMatch": true,
+  "targetIdentityProtectionPass": true,
+  "readyForConflictCheck": false,
+  "newlyObservedDeployments": [
+    {
+      "id": "4e0ecbeb-0755-4676-96ba-778bdccb3dce",
+      "url": "https://4e0ecbeb.phios-github.pages.dev",
+      "environment": "production",
+      "aliases": [],
+      "status": "idle",
+      "created": "2026-10-13T04:39:25.368529Z",
+      "sourceCommit": "292c3ff396f195b1c0102084e44c9313b2b11e15",
+      "classification": "NEW_SINCE_PRIOR_INVENTORY_NOT_A_STAGE1_TARGET"
+    }
+  ],
+  "rollbackHold": {
+    "id": "b07d86bf-2447-4fe8-8ded-66d9fe676c81",
+    "url": "https://b07d86bf.phios-github.pages.dev",
+    "exists": true,
+    "governance": "ROLLBACK_HOLD_RETAINED"
+  },
+  "health": [
+    {
+      "host": "getphios.com",
+      "status": 200,
+      "location": null,
+      "bytes": 23687,
+      "sha256": "23e5f171361af49ba197250ac8457ba4e8df46db09b1d9786552f2cf671fe724"
+    },
+    {
+      "host": "8ceb88f8.phios-github.pages.dev",
+      "status": 200,
+      "location": null,
+      "bytes": 23687,
+      "sha256": "23e5f171361af49ba197250ac8457ba4e8df46db09b1d9786552f2cf671fe724"
+    },
+    {
+      "host": "41b1c458.phios-github.pages.dev",
+      "status": 307,
+      "location": "https://getphios.com/",
+      "bytes": 169,
+      "sha256": "7108fef32b066dcb8e074d4114e8614cfb6f1efeb9497c0b0268b7b4039f22bc"
+    },
+    {
+      "host": "b07d86bf.phios-github.pages.dev",
+      "status": 200,
+      "location": null,
+      "bytes": 23687,
+      "sha256": "23e5f171361af49ba197250ac8457ba4e8df46db09b1d9786552f2cf671fe724"
+    },
+    {
+      "host": "00e24ac5.phios-github.pages.dev",
+      "status": 200,
+      "location": null,
+      "bytes": 28815,
+      "sha256": "7ce45678466d8d38bc9c59ee97f2f9625f6b542e5f00e101fe40f42c55451791"
+    }
+  ],
+  "status": "STOP_T9_FRESH_DRIFT_AND_EXPIRED_CREDENTIALS",
+  "firstRemainingBlocker": "LIVE_INVENTORY_DRIFT_3560_TO_3561; RULE_CONFLICT_CHECK_BLOCKED_BY_EXPIRED_READ_AND_BULK_TOKENS",
+  "noMutationLedgerCreated": true,
+  "approvedCandidate": {
+    "current": "8ceb88f8-27bc-432a-80d4-775765a41e0e",
+    "hosts": [
+      {
+        "id": "0022cd02-45bc-44f1-a544-29de60b350a6",
+        "host": "0022cd02.phios-github.pages.dev"
+      },
+      {
+        "id": "002d9570-fbb8-4ca6-94eb-cdd57cfb1b3c",
+        "host": "002d9570.phios-github.pages.dev"
+      },
+      {
+        "id": "004db7fb-f930-4e83-986a-f0ce848c932f",
+        "host": "004db7fb.phios-github.pages.dev"
+      },
+      {
+        "id": "00d9bc8a-317e-49ef-b851-12ab6490585f",
+        "host": "00d9bc8a.phios-github.pages.dev"
+      },
+      {
+        "id": "00e0892f-82d1-45b0-b44f-e846ceb147bf",
+        "host": "00e0892f.phios-github.pages.dev"
+      }
+    ],
+    "listName": "p9_t6_historical_exact",
+    "expression": "(http.request.method in {\"GET\" \"HEAD\"}) and (http.request.uri.path in {\"/\" \"/perspectives/\" \"/assets/customer-ui/js/public-index-copy.js\"}) and (http.request.full_uri in $p9_t6_historical_exact)",
+    "methodRouteStrategy": {
+      "GET": "307 only exact validated public paths /, /perspectives/, /assets/customer-ui/js/public-index-copy.js; preserve path/query; no private/API routes",
+      "HEAD": "Same public path scope only",
+      "POST": "NOT_MATCHED_NOT_FORWARDED; historical write authority remains unresolved",
+      "PUT": "NOT_MATCHED_NOT_FORWARDED",
+      "PATCH": "NOT_MATCHED_NOT_FORWARDED",
+      "DELETE": "NOT_MATCHED_NOT_FORWARDED",
+      "OPTIONS": "NOT_MATCHED_NOT_FORWARDED",
+      "privateRoutes": "Not matched; no claim of historical write isolation"
+    },
+    "position": {
+      "after": "66f4b7cbcabe40b38a4b8fab0b1eb697"
+    },
+    "rollback": "DELETE only recorded item IDs from the newly created Stage-1 list; retain existing Canary and all unrelated rules/lists. Empty Stage-1 rule/list may remain as evidence.",
+    "batchPlan": "One host at a time; stop on any unexpected result and roll back only added Stage-1 items if needed",
+    "sourceChanges": 0
+  },
+  "stage1TargetCount": 5,
+  "stage1Executed": 0,
+  "newListID": null,
+  "newRuleID": null,
+  "newItemIDs": [],
+  "hostResults": [
+    {
+      "id": "0022cd02-45bc-44f1-a544-29de60b350a6",
+      "host": "0022cd02.phios-github.pages.dev",
+      "identityProtectionCheck": "PASS",
+      "containment": "NOT_EXECUTED"
+    },
+    {
+      "id": "002d9570-fbb8-4ca6-94eb-cdd57cfb1b3c",
+      "host": "002d9570.phios-github.pages.dev",
+      "identityProtectionCheck": "PASS",
+      "containment": "NOT_EXECUTED"
+    },
+    {
+      "id": "004db7fb-f930-4e83-986a-f0ce848c932f",
+      "host": "004db7fb.phios-github.pages.dev",
+      "identityProtectionCheck": "PASS",
+      "containment": "NOT_EXECUTED"
+    },
+    {
+      "id": "00d9bc8a-317e-49ef-b851-12ab6490585f",
+      "host": "00d9bc8a.phios-github.pages.dev",
+      "identityProtectionCheck": "PASS",
+      "containment": "NOT_EXECUTED"
+    },
+    {
+      "id": "00e0892f-82d1-45b0-b44f-e846ceb147bf",
+      "host": "00e0892f.phios-github.pages.dev",
+      "identityProtectionCheck": "PASS",
+      "containment": "NOT_EXECUTED"
+    }
+  ],
+  "nonMatchProof": "Approved method/path expression excludes writes and private/API paths; no live Stage-1 rule exists, so no deployed-rule non-match claim.",
+  "rollbackRequired": false,
+  "rollbackResult": "NOT_REQUIRED_NO_MUTATION",
+  "stage1Result": "NOT_EXECUTED_STOP_BEFORE_MUTATION",
+  "stage2Eligibility": "NOT_READY_STAGE1_NOT_EXECUTED",
+  "globalHistoricalContainment": "NOT_COMPLETE",
+  "D1Migration": "NOT_EXECUTED",
+  "providerCostUSD": 0,
+  "commit": 0,
+  "push": 0,
+  "indexEmpty": true,
+  "credentialRefreshRequirement": "Both existing read and Bulk-edit token files refer to tokens expired at 2026-10-14T15:59:59Z. No token created, renewed, overwritten or exposed. Valid equivalent credentials are required before conflict verification and any mutation.",
+  "inventoryScope": "Reuse prior complete 3560-record classification; live API count 3561, latest page and five target details only. No full reclassification performed."
+}</pre></html>

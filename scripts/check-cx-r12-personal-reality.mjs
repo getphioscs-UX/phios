@@ -1,3 +1,4 @@
+import {stylesheetRefs,normalizedLocalAsset} from './lib/customer-experience-rebuild/cx-r1-guards.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -113,7 +114,18 @@ assert.match(client,/customerSelected:true/);
 
 // W8 / P1 boundary: legacy route is compatibility-only; canonical route has zero legacy CSS.
 for(const route of ['/personal-runtime','/personal-runtime.html','/professional/personal-runtime','/professional/personal-runtime/'])assert.ok(redirects.includes(`${route} /perspectives/personal/ 308`),`missing Personal compatibility redirect ${route}`);
-for(const bad of ['public-shell-v2','wpr-personal-runtime.css','runtime-spine.css','ast-production-meaning.css','bzr-production-meaning.css','num-production-meaning.css','zi-wei-dynamic-runtime.css','/assets/css/'])assert.equal(html.includes(bad),false,`canonical Personal route has legacy presentation dependency: ${bad}`);
+for(const bad of ['public-shell-v2','wpr-personal-runtime.css','runtime-spine.css','ast-production-meaning.css','bzr-production-meaning.css','num-production-meaning.css','zi-wei-dynamic-runtime.css'])assert.equal(html.includes(bad),false,`canonical Personal route has legacy presentation dependency: ${bad}`);
+const sharedStyle=json(base+'/legacy/current-shared-stylesheet-successor-v1.json');
+assert.equal(sharedStyle.status,'ENGINEERING_RECONCILIATION');
+for(const key of ['historicalFreezeRewritten','humanAcceptanceGranted','productionAcceptanceGranted'])assert.equal(sharedStyle[key],false);
+const visualStyle=sharedStyle.stylesheets.find(item=>item.path==='assets/css/global-visual-r2.css');
+assert.ok(visualStyle,'Personal shared visual stylesheet successor missing');assert.equal(sha(visualStyle.path),visualStyle.sha256,'Personal shared visual stylesheet digest drift');
+const frozenStyles=new Set(json(base+'/legacy/legacy-css-freeze-v2.json').entries.map(item=>item.stylesheet));
+for(const href of stylesheetRefs(html)){
+ const local=normalizedLocalAsset(href);if(!local)continue;
+ assert.ok(!frozenStyles.has(local),'Personal imports frozen legacy stylesheet: '+local);
+ assert.ok(local.startsWith('assets/customer-ui/')||local===visualStyle.path,'Unregistered Personal stylesheet: '+local);
+}
 assert.ok(legacyDelete.candidates.some(item=>item.path==='personal-runtime.html'));
 if(legacyDelete.status==='PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE'){assert.equal(fs.existsSync(path.join(root,'personal-runtime.html')),false,'P1 physical delete must remove Personal legacy presentation');assert.equal(fs.existsSync(path.join(root,'professional/personal-runtime/index.html')),false,'P1 physical delete must remove PX2 Personal legacy presentation');}else{assert.equal(fs.existsSync(path.join(root,'personal-runtime.html')),true,'physical legacy file remains until P1 browser acceptance');}
 

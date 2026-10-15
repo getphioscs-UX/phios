@@ -1,0 +1,189 @@
+{
+  "at": "2026-10-15T04:19:25.445Z",
+  "schemaVersion": "EXTERNAL_REALITY_CONSUMER_SCAM_AUDIT_R42",
+  "rows": [
+    {
+      "capability": "Live web search",
+      "state": "PARTIALLY_IMPLEMENTED",
+      "path": "functions/current-facts-gateway/current-facts-gateway.js",
+      "sourceSha256": "cfbb51e12abd8bb6c08d20a10ec51b3c2d26d75834873e1486a422539e3b9c61",
+      "evidence": "retrieveCurrentFacts requires PHIOS_CURRENT_FACTS_ENDPOINT; no live scam API configured or queried in this task",
+      "relevantTest": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+      "liveCaseRetrieval": "NOT_PERFORMED"
+    },
+    {
+      "capability": "Source-specific API retrieval",
+      "state": "EXISTING_BUT_NOT_CONNECTED",
+      "path": "functions/current-facts-gateway/current-facts-gateway.js",
+      "sourceSha256": "cfbb51e12abd8bb6c08d20a10ec51b3c2d26d75834873e1486a422539e3b9c61",
+      "evidence": "Existing safe server adapter + CWA admission; scam lookup permissions/provider absent",
+      "relevantTest": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+      "liveCaseRetrieval": "NOT_PERFORMED"
+    },
+    {
+      "capability": "Consumer complaint ingestion",
+      "state": "NOT_IMPLEMENTED",
+      "path": "functions/current-web-authority/current-web-authority-runtime.js",
+      "sourceSha256": "7215dadcaf2630572d268cfb1411b6f6057f2441fcc5d1c4bf8455d4375ee580",
+      "evidence": "CWA classes do not admit complaint records as official current facts; no complaint ingestion added",
+      "relevantTest": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+      "liveCaseRetrieval": "NOT_PERFORMED"
+    },
+    {
+      "capability": "Duplicate detection",
+      "state": "NOT_IMPLEMENTED",
+      "path": "functions/external-reality-impact/consumer-scam-navigation.js",
+      "sourceSha256": "a7bfae51ffb624a1066cef42fb1cf025012d7928d52552e0d25c8447542b7c08",
+      "evidence": "No connected case dataset or canonical case dedup owner",
+      "relevantTest": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+      "liveCaseRetrieval": "NOT_PERFORMED"
+    },
+    {
+      "capability": "Image similarity",
+      "state": "NOT_IMPLEMENTED",
+      "path": "functions/external-reality-impact/consumer-scam-navigation.js",
+      "sourceSha256": "a7bfae51ffb624a1066cef42fb1cf025012d7928d52552e0d25c8447542b7c08",
+      "evidence": "No existing safe image submission/similarity pipeline found; no fabricated adapter",
+      "relevantTest": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+      "liveCaseRetrieval": "NOT_PERFORMED"
+    },
+    {
+      "capability": "Phone / URL lookup",
+      "state": "EXISTING_BUT_NOT_CONNECTED",
+      "path": "functions/external-reality-impact/consumer-scam-navigation.js",
+      "sourceSha256": "a7bfae51ffb624a1066cef42fb1cf025012d7928d52552e0d25c8447542b7c08",
+      "evidence": "Safe origin extraction and phone count work; Semak Mule remains direct official link, automated permission unverified",
+      "relevantTest": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+      "liveCaseRetrieval": "NOT_PERFORMED"
+    },
+    {
+      "capability": "Safe user submission",
+      "state": "EXISTING_VERIFIED",
+      "path": "functions/api/customer-contextual-ask.js",
+      "sourceSha256": "1f7873e0bf375c0bf1944342edd555d3818bce40027ec923ac1d02218c6e158a",
+      "evidence": "Executed synthetic zh/en API handler checks; session-only, no DB write, phone raw value not returned, URL secrets discarded",
+      "relevantTest": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+      "liveCaseRetrieval": "NOT_PERFORMED"
+    },
+    {
+      "capability": "Moderation / accusation boundary",
+      "state": "PARTIALLY_IMPLEMENTED",
+      "path": "functions/external-reality-impact/consumer-scam-navigation.js",
+      "sourceSha256": "a7bfae51ffb624a1066cef42fb1cf025012d7928d52552e0d25c8447542b7c08",
+      "evidence": "Pattern hypothesis only, no identity/guilt conclusion or public case posting; broad moderation not implemented",
+      "relevantTest": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+      "liveCaseRetrieval": "NOT_PERFORMED"
+    },
+    {
+      "capability": "Official reporting handoff",
+      "state": "EXISTING_VERIFIED",
+      "path": "functions/external-reality-impact/consumer-scam-navigation.js",
+      "sourceSha256": "a7bfae51ffb624a1066cef42fb1cf025012d7928d52552e0d25c8447542b7c08",
+      "evidence": "Official bank/997 links verified on official pages; direct handoff only, not automated report filing",
+      "relevantTest": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+      "liveCaseRetrieval": "NOT_PERFORMED"
+    },
+    {
+      "capability": "Evidence source admission",
+      "state": "EXISTING_VERIFIED",
+      "path": "functions/current-web-authority/current-web-authority-runtime.js",
+      "sourceSha256": "7215dadcaf2630572d268cfb1411b6f6057f2441fcc5d1c4bf8455d4375ee580",
+      "evidence": "Existing currentness/classes/provenance; unchanged relevant existing regression executed",
+      "relevantTest": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+      "liveCaseRetrieval": "NOT_PERFORMED"
+    },
+    {
+      "capability": "External Reality public/private boundary",
+      "state": "EXISTING_VERIFIED",
+      "path": "functions/external-reality-impact/external-reality-impact-runtime.js",
+      "sourceSha256": "bdbec1b8fe06723fe87d8a8134113bc6825fb8b2b3762d89297526143f7f00e3",
+      "evidence": "Existing consent/jurisdiction/fact separation preserved; new projection never writes user facts",
+      "relevantTest": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+      "liveCaseRetrieval": "NOT_PERFORMED"
+    },
+    {
+      "capability": "Ask UI / World projection",
+      "state": "PARTIALLY_IMPLEMENTED",
+      "path": "functions/api/customer-contextual-ask.js",
+      "sourceSha256": "1f7873e0bf375c0bf1944342edd555d3818bce40027ec923ac1d02218c6e158a",
+      "evidence": "Same existing Ask handler deterministic branch, World and Ask forms; local browser outcome separately recorded",
+      "relevantTest": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+      "liveCaseRetrieval": "NOT_PERFORMED"
+    },
+    {
+      "capability": "My Reality private retention",
+      "state": "EXISTING_BUT_NOT_CONNECTED",
+      "path": "functions/api/customer-my-reality.js",
+      "sourceSha256": "401f7a0b9b9d48b319c884b097214a28a9bccbf2384c59efb4c3157d0736204f",
+      "evidence": "Existing canonical owner retained; scam projection does not fabricate save or consent provenance",
+      "relevantTest": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+      "liveCaseRetrieval": "NOT_PERFORMED"
+    },
+    {
+      "capability": "Academy / Search figures",
+      "state": "PARTIALLY_IMPLEMENTED",
+      "path": "assets/js/knowledge/eight-volume-summary-catalog.js",
+      "sourceSha256": "23c306d18bc77e1da7aec0fe89e77d0aca86bafcae6c9f39c586eae0bb67a8c5",
+      "evidence": "Existing surfaces consume sole summary manifest; no invented video course",
+      "relevantTest": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+      "liveCaseRetrieval": "NOT_PERFORMED"
+    },
+    {
+      "capability": "Orchestrated Ask provider route",
+      "state": "PARTIALLY_IMPLEMENTED",
+      "path": "functions/api/ask-phios-orchestrated.js",
+      "sourceSha256": "1e0936d5c96fb4ef5253edfc12be0068b15b05c8fcb2652ef9e594bf5e077eee",
+      "evidence": "Existing paid/runtime logic preserved; scam intercepted by deterministic projection before any provider",
+      "relevantTest": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+      "liveCaseRetrieval": "NOT_PERFORMED"
+    }
+  ],
+  "sources": [
+    {
+      "sourceId": "BNM-MOBILE-SCAM",
+      "url": "https://www.bnm.gov.my/smsscam",
+      "publisher": "Bank Negara Malaysia",
+      "sourceClass": "REGULATOR",
+      "jurisdiction": "MY",
+      "permission": "DIRECT_LINK_ONLY",
+      "connection": "CURATED_REFERENCE_NOT_LIVE_LOOKUP",
+      "verifiedAt": "2026-10-15",
+      "purpose": "Suspicious third-party applications and credential exposure"
+    },
+    {
+      "sourceId": "BNM-SCAM-RESPONSE",
+      "url": "https://www.bnm.gov.my/faqs/scams",
+      "publisher": "Bank Negara Malaysia",
+      "sourceClass": "REGULATOR",
+      "jurisdiction": "MY",
+      "permission": "DIRECT_LINK_ONLY",
+      "connection": "CURATED_REFERENCE_NOT_LIVE_LOOKUP",
+      "verifiedAt": "2026-10-15",
+      "purpose": "Contact bank scam hotline / NSRC 997 promptly"
+    },
+    {
+      "sourceId": "PAYNET-NSRC",
+      "url": "https://paynet.my/digital-initiatives/national-fraud-portal.html",
+      "publisher": "PayNet",
+      "sourceClass": "OFFICIAL_PRIMARY",
+      "jurisdiction": "MY",
+      "permission": "DIRECT_LINK_ONLY",
+      "connection": "CURATED_REFERENCE_NOT_LIVE_LOOKUP",
+      "verifiedAt": "2026-10-15",
+      "purpose": "NSRC 997 reporting and coordinated response"
+    },
+    {
+      "sourceId": "PDRM-SEMAK-MULE",
+      "url": "https://semakmule.rmp.gov.my/",
+      "publisher": "Royal Malaysia Police",
+      "sourceClass": "OFFICIAL_PRIMARY",
+      "jurisdiction": "MY",
+      "permission": "PERMISSION_NOT_VERIFIED_AUTOMATION_DISABLED",
+      "connection": "DIRECT_OFFICIAL_PORTAL_ONLY",
+      "verifiedAt": "2026-10-15",
+      "purpose": "User-initiated official lookup; a complaint or empty result is not guilt or safety proof"
+    }
+  ],
+  "sourceRegistryOwner": "functions/current-web-authority; versioned consumer projection under existing External Reality owner",
+  "providerCalls": 0
+}

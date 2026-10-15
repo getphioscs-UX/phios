@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-15T04:12:02.273Z",
+  "method": "Read-only web source inspection; not runtime incident queries",
+  "sources": [
+    {
+      "url": "https://www.bnm.gov.my/smsscam",
+      "state": "CONTENT_READ",
+      "supported": "Suspicious third-party applications may expose transaction alerts/OTP; official application platforms recommended",
+      "automatedDatasetPermission": "NOT_VERIFIED"
+    },
+    {
+      "url": "https://www.bnm.gov.my/faqs/scams",
+      "state": "CONTENT_READ",
+      "supported": "Contact bank scam hotline or NSRC 997 promptly",
+      "hoursText": "8am–8pm on this page",
+      "automatedDatasetPermission": "NOT_VERIFIED"
+    },
+    {
+      "url": "https://paynet.my/digital-initiatives/national-fraud-portal.html",
+      "state": "CONTENT_READ",
+      "supported": "Official coordinated response and 997 reporting",
+      "hoursText": "24 hours / 7 days on this page",
+      "automatedDatasetPermission": "NOT_VERIFIED"
+    },
+    {
+      "url": "https://semakmule.rmp.gov.my/",
+      "state": "DIRECT_OPEN_ACCESS_ERROR_OFFICIAL_URL_CORROBORATED_BY_PDRM_LINKS",
+      "incidentLookup": "NOT_PERFORMED",
+      "automatedDatasetPermission": "NOT_VERIFIED"
+    }
+  ],
+  "conflicts": [
+    {
+      "field": "NSRC operating hours",
+      "state": "OFFICIAL_SOURCE_CONFLICT_NOT_COLLAPSED",
+      "action": "No operating-hours claim in customer guidance; retain both references, no voting or invented resolution"
+    }
+  ],
+  "runtimeLiveLookupConnected": false
+}

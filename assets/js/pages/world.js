@@ -4,7 +4,7 @@ import {getLocale,onLocaleChange} from '../i18n.js';
 import {mountWorldExplorer} from './civilization-atlas/world-explorer.js';
 import {loadAcceptedDossier} from './civilization-atlas/atlas-data.js';
 import {activeWorldObject,worldObjectRelations,sameObjectDirection,worldAskContext,askURL,stableWorldURL,currentProjectionState,local,esc} from './civilization-atlas/world-reading-context.js';
-const root=document.querySelector('[data-civilization-atlas-root]'),params=new URLSearchParams(location.search),current=params.get('intent')==='current'||(!params.has('atlas')&&!params.has('view')&&!params.has('q')&&!params.has('explore'));
+const root=document.querySelector('[data-civilization-atlas-root]'),params=new URLSearchParams(location.search),current=params.get('intent')==='current'||(!params.has('intent')&&!params.has('atlas')&&!params.has('view')&&!params.has('q')&&!params.has('explore'));
 if(current&&!params.has('atlas')){const u=new URL(location.href);u.searchParams.set('view','reconfiguration');u.searchParams.set('atlas','dossiers');u.searchParams.set('intent','current');history.replaceState(history.state,'',u);}
 if(current&&!params.has('atlas')){const u=new URL(location.href);u.searchParams.set('view','reconfiguration');u.searchParams.set('atlas','dossiers');u.searchParams.set('intent','current');history.replaceState(history.state,'',u);}
 const reconfig=current||params.get('view')==='reconfiguration';root.dataset.bookId=reconfig?'book-6':'book-5';if(reconfig)root.dataset.atlasMode='reconfiguration';
