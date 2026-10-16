@@ -1,0 +1,44 @@
+{
+  "at": "2026-10-15T05:10:02.799Z",
+  "providerCalls": 0,
+  "externalCustomerQueries": 0,
+  "scope": "Official source discovery only; no scraping or automated case query",
+  "sources": [
+    {
+      "sourceId": "PAYNET-NSRC",
+      "documentation": "https://docs.paynet.my/api-reference/paynet-trust-intelligence-services-ptis/pre-transaction-screening-api",
+      "mechanism": "Pre-Transaction Screening API; financial institution account-to-account screening; Bearer JWT issued by PayNet",
+      "permission": "NO_PHI_OS_PERMISSION_ESTABLISHED",
+      "state": "ACCESS_NOT_VERIFIED",
+      "adapter": "NOT_CONNECTED",
+      "reason": "Documentation availability does not grant financial-institution credentials or redistribution rights"
+    },
+    {
+      "sourceId": "PDRM-SEMAK-MULE",
+      "documentation": "https://semakmule.rmp.gov.my/",
+      "mechanism": "Official user portal; no authorized public automated API established in this audit",
+      "state": "ACCESS_NOT_VERIFIED",
+      "adapter": "NOT_CONNECTED",
+      "observedAccess": "Research reader 502; not proof portal universally down"
+    },
+    {
+      "sourceId": "BNM-MOBILE-SCAM",
+      "documentation": "https://www.bnm.gov.my/fraud-and-scam-notices",
+      "mechanism": "Published official notices; no case/phone lookup endpoint established",
+      "state": "DIRECT_LINK_ONLY",
+      "adapter": "NOT_CONNECTED"
+    },
+    {
+      "sourceId": "BNM-SCAM-RESPONSE",
+      "documentation": "https://apikijangportal.bnm.gov.my/",
+      "mechanism": "BNM API portal exists; this does not establish a permitted scam lookup dataset",
+      "state": "ACCESS_NOT_VERIFIED_FOR_SCAM_QUERY",
+      "adapter": "NOT_CONNECTED"
+    }
+  ],
+  "limitations": [
+    "No documented permitted PHI OS live adapter established; no live claims",
+    "No-match cannot mean safe; complaint is not official finding; similarity is not guilt",
+    "No secrets, user phone lookup, account registration, production mutation or contact operation performed"
+  ]
+}

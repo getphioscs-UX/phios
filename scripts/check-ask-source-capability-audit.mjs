@@ -1,3 +1,4 @@
+ck
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {structuredSourceCapability} from '../functions/_lib/structured-source-capability.js';

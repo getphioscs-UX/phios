@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-16T02:54:07.726Z",
+  "node": "22.16.0",
+  "rows": [
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:b6-web-e",
+      "exitCode": 0,
+      "checks": [
+        "translation imports and actual translated render",
+        "Book VI snapshot visual contract",
+        "23-core-visual inventory"
+      ]
+    },
+    {
+      "command": "node --import ./scripts/lib/pages-json-import-preload.mjs --import ./scripts/lib/report-zero-cost-preload.mjs scripts/check-integrated-r42.mjs",
+      "exitCode": 0,
+      "checks": 33
+    }
+  ],
+  "initialFailure": {
+    "type": "DOM_TEST_HARNESS_INCOMPLETE",
+    "error": "TypeError: globalThis.dispatchEvent is not a function",
+    "preserved": true
+  },
+  "providerCalls": 0
+}

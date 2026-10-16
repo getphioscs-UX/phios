@@ -1,0 +1,189 @@
+diff --git a/artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json b/artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json
+index d7b8c36d..75856b35 100644
+--- a/artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json
++++ b/artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json
+@@ -1,5 +1,5 @@
+ {
+-  "at": "2026-10-15T03:53:01.560Z",
++  "at": "2026-10-16T02:53:16.558Z",
+   "rows": [
+     {
+       "id": "79_LOGICAL_UNIQUE",
+@@ -34,7 +34,7 @@
+       "state": "PASS"
+     },
+     {
+-      "id": "12E_PENDING_NOT_PROMOTED",
++      "id": "12E_OWNER_CORRECTION_VERIFIED",
+       "state": "PASS"
+     },
+     {
+diff --git a/assets/js/knowledge/book-public-samples.js b/assets/js/knowledge/book-public-samples.js
+index c6e8d824..234de3ae 100644
+--- a/assets/js/knowledge/book-public-samples.js
++++ b/assets/js/knowledge/book-public-samples.js
+@@ -16,6 +16,6 @@ export function renderBookPublicSamples(host,book,locale='en'){
+  controls.append(prev,select,next);host.append(controls,status,image);show();
+  }
+  if(book.figures?.length){const title=doc.createElement('h3');title.textContent=zh?'各部分总结图 · 免费预览':'Part summary figures · Free preview';host.append(title);
+- for(const f of book.figures){const rendition=f.variants?.[locale], url=f.variants?rendition?.publicUrl:f.url;const details=doc.createElement('details'),summary=doc.createElement('summary');summary.textContent=`${zh?'部分':'Part'} ${f.part} · FIG ${f.number}${f.title?.[locale]?' · '+f.title[locale]:''}`;details.id='summary-'+f.number;details.append(summary);if(f.number==='12E'){const pending=doc.createElement('p');pending.textContent=zh?'中文原图保留“第十编”字样，归属仍为第五册；编次说明待本轮审阅。':'The updated English image removes the former Volume X label. Replacement is a verified review candidate, not a new volume assignment.';details.append(pending);}if(!url||f.deliveryState==='MISSING_BUCKET_OBJECT'){const unavailable=doc.createElement('p');unavailable.textContent=zh?'此总结图暂时无法显示，请参阅本册正文。':'This summary figure is temporarily unavailable. Please consult the book text.';details.append(unavailable);host.append(details);continue;}details.addEventListener('toggle',()=>{if(!details.open||details.querySelector('img'))return;const img=doc.createElement('img');img.src=url;img.alt=summary.textContent;img.loading='lazy';img.style.cssText='width:100%;height:auto';const a=doc.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';a.textContent=zh?'查看原图':'Open full image';img.onerror=()=>{img.hidden=true};details.append(img,a);});host.append(details);}
++ for(const f of book.figures){const rendition=f.variants?.[locale], url=f.variants?rendition?.publicUrl:f.url;const details=doc.createElement('details'),summary=doc.createElement('summary');summary.textContent=`${zh?'部分':'Part'} ${f.part} · FIG ${f.number}${f.title?.[locale]?' · '+f.title[locale]:''}`;details.id='summary-'+f.number;details.append(summary);if(f.number==='12E'){const pending=doc.createElement('p');pending.textContent=zh?'中文原图的“第十编”为原有编次，归属为第五册。':'This figure belongs to Book V. The owner-corrected English image is shown.';details.append(pending);}if(!url||f.deliveryState==='MISSING_BUCKET_OBJECT'){const unavailable=doc.createElement('p');unavailable.textContent=zh?'此总结图暂时无法显示，请参阅本册正文。':'This summary figure is temporarily unavailable. Please consult the book text.';details.append(unavailable);host.append(details);continue;}details.addEventListener('toggle',()=>{if(!details.open||details.querySelector('img'))return;const img=doc.createElement('img');img.src=url;img.alt=summary.textContent;img.loading='lazy';img.style.cssText='width:100%;height:auto';const a=doc.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';a.textContent=zh?'查看原图':'Open full image';img.onerror=()=>{img.hidden=true};details.append(img,a);});host.append(details);}
+  }
+ }
+diff --git a/content/web-production/registries/book-public-samples-v1.json b/content/web-production/registries/book-public-samples-v1.json
+index 38174741..f8d467b1 100644
+--- a/content/web-production/registries/book-public-samples-v1.json
++++ b/content/web-production/registries/book-public-samples-v1.json
+@@ -757,9 +757,16 @@
+               ]
+             }
+           },
+-          "editorialState": "PENDING_RENDITION_VISUAL_REVIEW",
++          "editorialState": "OWNER_CORRECTION_VERIFIED",
+           "deliveryState": "ACCESS_VERIFIED_EDITORIAL_REVIEW_PENDING",
+-          "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/books/book-2/5B.webp"
++          "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/books/book-2/5B.webp",
++          "ownerCorrection": {
++            "authority": "53d986ec-7a49-4f28-a86e-04c9b5fa79a0/Pasted text.txt",
++            "scope": "CURRENT_OWNER_PROVIDED_EN_RENDITION",
++            "at": "2026-10-15T05:08:32.719Z",
++            "sha256": "209e22e69f5596d8420e55f7237522f8f96285a34de688f68b99a6e11161ed2c",
++            "historicalRecordsPreserved": true
++          }
+         },
+         {
+           "number": "5C",
+@@ -2325,9 +2332,17 @@
+               "embeddedLanguage": "EN_VISUALLY_OBSERVED"
+             }
+           },
+-          "editorialState": "EN_CORRECTION_VERIFIED_ZH_SECTION_LABEL_REVIEW",
++          "editorialState": "OWNER_CORRECTION_VERIFIED",
+           "deliveryState": "UNCHANGED_CHINESE_SECTION_LABEL_REVIEW",
+-          "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/books/book-5/12E.webp"
++          "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/books/book-5/12E.webp",
++          "ownerCorrection": {
++            "authority": "53d986ec-7a49-4f28-a86e-04c9b5fa79a0/Pasted text.txt",
++            "scope": "ZH_SECTION_INTENTIONAL_EN_CORRECTED_BOOK_V",
++            "at": "2026-10-15T05:08:32.719Z",
++            "sha256": "14c4f1ad8b693d56664dff96e13a1a70bf9cc03ee3601cd73e9c937bea1783aa",
++            "historicalRecordsPreserved": true,
++            "priorEnglishBytesRestoration": "UNAVAILABLE_NON_BLOCKING"
++          }
+         },
+         {
+           "number": "12F",
+@@ -4338,7 +4353,7 @@
+           "deliveryState": "VERIFIED_PUBLIC_IMAGE"
+         },
+         "sourcePackage": "Authenticated public R2 listing; owner supplied R4.2 mapping",
+-        "editorialState": "PENDING_RENDITION_VISUAL_REVIEW",
++        "editorialState": "OWNER_CORRECTION_VERIFIED",
+         "visibility": "PUBLIC_SUMMARY",
+         "conceptTags": [],
+         "relatedArticles": [],
+@@ -4347,7 +4362,14 @@
+           "KNOWLEDGE"
+         ],
+         "academyPath": "/academy/?topic=evidence",
+-        "displayPriority": 14
++        "displayPriority": 14,
++        "ownerCorrection": {
++          "authority": "53d986ec-7a49-4f28-a86e-04c9b5fa79a0/Pasted text.txt",
++          "scope": "CURRENT_OWNER_PROVIDED_EN_RENDITION",
++          "at": "2026-10-15T05:08:32.719Z",
++          "sha256": "209e22e69f5596d8420e55f7237522f8f96285a34de688f68b99a6e11161ed2c",
++          "historicalRecordsPreserved": true
++        }
+       },
+       {
+         "figureId": "5C",
+@@ -6316,7 +6338,7 @@
+           "deliveryState": "VERIFIED_PUBLIC_IMAGE"
+         },
+         "sourcePackage": "Authenticated public R2 listing; owner supplied R4.2 mapping",
+-        "editorialState": "EN_CORRECTION_VERIFIED_ZH_SECTION_LABEL_REVIEW",
++        "editorialState": "OWNER_CORRECTION_VERIFIED",
+         "visibility": "PUBLIC_SUMMARY",
+         "conceptTags": [],
+         "relatedArticles": [],
+@@ -6333,6 +6355,14 @@
+         "correctionNote": {
+           "en": "Volume X label removed in new English bytes; awaiting scoped human review",
+           "zh": "Chinese bytes unchanged and read 第十编, not 第十册. Section label is not canonical volume ownership; no image modified."
++        },
++        "ownerCorrection": {
++          "authority": "53d986ec-7a49-4f28-a86e-04c9b5fa79a0/Pasted text.txt",
++          "scope": "ZH_SECTION_INTENTIONAL_EN_CORRECTED_BOOK_V",
++          "at": "2026-10-15T05:08:32.719Z",
++          "sha256": "14c4f1ad8b693d56664dff96e13a1a70bf9cc03ee3601cd73e9c937bea1783aa",
++          "historicalRecordsPreserved": true,
++          "priorEnglishBytesRestoration": "UNAVAILABLE_NON_BLOCKING"
+         }
+       },
+       {
+diff --git a/scripts/check-b6-web-e.mjs b/scripts/check-b6-web-e.mjs
+index 6e5ec3f7..bc5ecd5d 100644
+--- a/scripts/check-b6-web-e.mjs
++++ b/scripts/check-b6-web-e.mjs
+@@ -15,7 +15,12 @@ const zhRoot=fs.readFileSync('assets/js/locales/zh-Hans.js','utf8');
+ 
+ for(const token of ['book6Atlas','resultType','knowledgeState','caseType','entityType','region','field','layer','change','value']){assert.match(en,new RegExp(token));assert.match(zh,new RegExp(token));}
+ assert.match(enRoot,/book6ReconfigurationAtlas/);assert.match(zhRoot,/book6ReconfigurationAtlas/);
+-assert.match(renderer,/import \{t\} from '\.\.\/\.\.\/i18n\.js'/);
++const translationImport=renderer.match(/import\s*\{([^}]+)\}\s*from\s*['"]\.\.\/\.\.\/i18n\.js['"]/);
++assert.ok(translationImport,'renderer must import translations from the existing locale owner');
++const translationBinding=translationImport[1].split(',').map(x=>x.trim().match(/^t(?:\s+as\s+([A-Za-z_$][\w$]*))?$/)).find(Boolean);
++assert.ok(translationBinding,'renderer must import t, independently of other named imports');
++const translationName=translationBinding[1]||'t';
++assert.match(renderer,new RegExp('\\b'+translationName+'\\s*\\('),'imported translation function must actually be called');
+ for(const helper of ['resultTypeLabel','entityTypeLabel','regionLabel','fieldLabel','layerLabel','changeLabel','valueLabel'])assert.match(renderer,new RegExp(helper));
+ for(const raw of ['<small>\$\{esc\(row\.type\)\}<\/small>','<dt>Prior Runtime<\/dt>','<dt>External Dependency<\/dt>','s\\.asset\\.publicUrl'])assert.doesNotMatch(renderer,new RegExp(raw));
+ assert.match(renderer,/const PAGE=12,SEARCH_PAGE=24/);
+@@ -40,6 +45,11 @@ const data={
+ };
+ const {document}=parseHTML('<html><head></head><body><main data-civilization-atlas-root data-atlas-mode="reconfiguration"></main></body></html>');
+ globalThis.document=document;globalThis.window=document.defaultView;
++// Supply the browser event surface in this Node-only DOM harness.
++const previousDispatch=globalThis.dispatchEvent,previousCustomEvent=globalThis.CustomEvent;
++globalThis.dispatchEvent=document.defaultView.dispatchEvent.bind(document.defaultView);
++globalThis.CustomEvent=document.defaultView.CustomEvent;
++let contextEvent=null;document.defaultView.addEventListener('phios:world-reading-context',event=>{contextEvent=event.detail;});
+ setLocale('zh-Hans',{persist:false,translate:false,emit:false});
+ const root=document.querySelector('main');
+ const store=createReconfigurationAtlasState({locale:'zh-Hans'});
+@@ -52,5 +62,8 @@ assert.match(renderer,/const visual=declaredStatus==='PRESENT'\?resolveAtlasVisu
+ assert.match(renderer,/const visualState=visual\?'PRESENT':declaredStatus==='PRESENT'\?'MISSING':declaredStatus/);
+ assert.match(renderer,/data-resolver-state="'\+esc\(visualState\)\+'"/);
+ assert.match(renderer,/visualState==='MISSING'\?c\.missing:c\.unverified/);
++assert.equal(contextEvent?.book,'BOOK-6','actual render must emit its existing World context handoff');
+ off?.();
++if(previousDispatch===undefined)delete globalThis.dispatchEvent;else globalThis.dispatchEvent=previousDispatch;
++globalThis.CustomEvent=previousCustomEvent;
+ console.log('PASS: B6-WEB-E canonical EN/zh-Hans labels, no tested raw enums, mobile-safe bounded rendering, keyboard semantics, lazy visuals and resolver gate.');
+diff --git a/scripts/check-integrated-r42.mjs b/scripts/check-integrated-r42.mjs
+index 03ed4454..c7e4bd9d 100644
+--- a/scripts/check-integrated-r42.mjs
++++ b/scripts/check-integrated-r42.mjs
+@@ -1,7 +1,7 @@
+ import fs from 'node:fs';import assert from 'node:assert/strict';import {investigateScam,safeIndicatorURL,classifyScamQuestion} from '../functions/external-reality-impact/consumer-scam-navigation.js';import {compareWorldObjects,timelineInterval} from '../assets/js/pages/civilization-atlas/world-r42-contract.js';import {onRequestPost} from '../functions/api/customer-contextual-ask.js';
+ const rows=[];const check=(id,fn)=>{fn();rows.push({id,state:'PASS'});};
+ const registry=JSON.parse(fs.readFileSync('content/web-production/registries/book-public-samples-v1.json')),figs=registry.summaryFigureAuthority.records;
+-check('79_LOGICAL_UNIQUE',()=>{assert.equal(figs.length,79);assert.equal(new Set(figs.map(f=>f.figureId)).size,79);});for(const [id,book]of [['4F','BOOK-1'],['11F','BOOK-4'],['12E','BOOK-5'],['13F','BOOK-6']])check('OWNER_'+id,()=>assert.equal(figs.find(f=>f.figureId===id).volumeId,book));check('DERIVED_BOOK_PROJECTIONS',()=>{for(const b of registry.books)assert.deepEqual(b.figures.map(f=>f.number),figs.filter(f=>f.volumeId.toLowerCase()===b.bookId).map(f=>f.figureId));});check('158_CURRENT_RENDITIONS',()=>assert.equal(figs.flatMap(f=>Object.values(f.variants)).filter(v=>v.sha256).length,158));check('NO_13D1',()=>assert(!figs.some(f=>f.figureId==='13D1')));check('12E_PENDING_NOT_PROMOTED',()=>assert.equal(figs.find(f=>f.figureId==='12E').editorialState,'EN_CORRECTION_VERIFIED_ZH_SECTION_LABEL_REVIEW'));
++check('79_LOGICAL_UNIQUE',()=>{assert.equal(figs.length,79);assert.equal(new Set(figs.map(f=>f.figureId)).size,79);});for(const [id,book]of [['4F','BOOK-1'],['11F','BOOK-4'],['12E','BOOK-5'],['13F','BOOK-6']])check('OWNER_'+id,()=>assert.equal(figs.find(f=>f.figureId===id).volumeId,book));check('DERIVED_BOOK_PROJECTIONS',()=>{for(const b of registry.books)assert.deepEqual(b.figures.map(f=>f.number),figs.filter(f=>f.volumeId.toLowerCase()===b.bookId).map(f=>f.figureId));});check('158_CURRENT_RENDITIONS',()=>assert.equal(figs.flatMap(f=>Object.values(f.variants)).filter(v=>v.sha256).length,158));check('NO_13D1',()=>assert(!figs.some(f=>f.figureId==='13D1')));check('12E_OWNER_CORRECTION_VERIFIED',()=>assert.equal(figs.find(f=>f.figureId==='12E').editorialState,'OWNER_CORRECTION_VERIFIED'));
+ check('INCOMPATIBLE_UNITS',()=>assert.equal(compareWorldObjects({id:'a',unit:'USD'},{id:'b',unit:'MYR'}).state,'NOT_COMPARABLE'));check('COMPATIBLE_BASIS',()=>assert.equal(compareWorldObjects({id:'a',type:'x',source:'s',time:{},comparisonBasis:'same'},{id:'b',type:'x',source:'s',time:{},comparisonBasis:'same'}).state,'COMPARABLE'));check('PARTIAL_DESCRIPTIVE',()=>assert.equal(compareWorldObjects({id:'a',type:'x',source:'s',time:{}},{id:'b',type:'x',source:'s',time:{}}).state,'PARTIALLY_COMPARABLE'));check('UNKNOWN_NOT_ZERO',()=>assert.equal(timelineInterval({id:'a',time:{start:null}}).start,null));check('APPROXIMATE_PRESERVED',()=>assert.equal(timelineInterval({id:'a',time:{start:-1000,end:-900,precision:'APPROXIMATE'}}).boundary,'APPROXIMATE'));
+ for(const q of ['Food order ad asks me to share my screen','餐饮广告要求屏幕共享','Someone wants my OTP','退款要先支付费用'])check('ROUTE_'+q,()=>assert(classifyScamQuestion(q)));check('NO_UNRELATED_ROUTE',()=>assert.equal(classifyScamQuestion('How do civilizations compare?'),null));
+ for(const url of ['http://bad.example','https://127.0.0.1/','https://[::1]/','https://user:pass@example.com/','https://a.local/'])check('UNSAFE_'+url,()=>assert.equal(safeIndicatorURL(url),null));check('URL_SECRET_STRIPPED',()=>assert.equal(safeIndicatorURL('https://merchant.example/private?password=123#otp'),'https://merchant.example'));
+diff --git a/wrangler.jsonc b/wrangler.jsonc
+index 5b238d67..7012bdf3 100644
+--- a/wrangler.jsonc
++++ b/wrangler.jsonc
+@@ -28,7 +28,7 @@
+     "nodejs_compat"
+   ],
+   "services": [{"binding":"METHOD_REPORT_RENDERER","service":"phios-method-report-renderer-production"}],
+-  "vars": {"PHIOS_ENVIRONMENT":"production","STRIPE_ENVIRONMENT":"LIVE","PHIOS_SHARED_PAID_REPORT_ENABLED":"true","PHIOS_P9_CANARY_ENABLED":"false","PHIOS_P9_CHECKOUT_ENABLED":"false","PHIOS_P9_REFUND_ENABLED":"false","REPORT_PROVIDER_LIVE_ALLOWED":"false"},
++  "vars": {"PHIOS_D1_MAINTENANCE_MODE":"READ_ONLY","PHIOS_ENVIRONMENT":"production","STRIPE_ENVIRONMENT":"LIVE","PHIOS_SHARED_PAID_REPORT_ENABLED":"true","PHIOS_P9_CANARY_ENABLED":"false","PHIOS_P9_CHECKOUT_ENABLED":"false","PHIOS_P9_REFUND_ENABLED":"false","REPORT_PROVIDER_LIVE_ALLOWED":"false"},
+   "env": {
+     "preview": {
+       "services": [{"binding":"METHOD_REPORT_RENDERER","service":"phios-method-report-renderer-qa"}],

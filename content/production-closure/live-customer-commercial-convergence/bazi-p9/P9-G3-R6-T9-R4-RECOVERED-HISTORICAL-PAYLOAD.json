@@ -1,0 +1,102 @@
+{
+  "status": "RECOVERED_LOCAL_HISTORICAL_EVIDENCE_NOT_APPLIED",
+  "list": {
+    "name": "p9_t6_historical_exact",
+    "kind": "redirect"
+  },
+  "items": [
+    {
+      "deploymentID": "0022cd02-45bc-44f1-a544-29de60b350a6",
+      "redirect": {
+        "source_url": "0022cd02.phios-github.pages.dev/",
+        "target_url": "https://getphios.com/",
+        "status_code": 307,
+        "include_subdomains": false,
+        "subpath_matching": true,
+        "preserve_path_suffix": true,
+        "preserve_query_string": true
+      }
+    },
+    {
+      "deploymentID": "002d9570-fbb8-4ca6-94eb-cdd57cfb1b3c",
+      "redirect": {
+        "source_url": "002d9570.phios-github.pages.dev/",
+        "target_url": "https://getphios.com/",
+        "status_code": 307,
+        "include_subdomains": false,
+        "subpath_matching": true,
+        "preserve_path_suffix": true,
+        "preserve_query_string": true
+      }
+    },
+    {
+      "deploymentID": "004db7fb-f930-4e83-986a-f0ce848c932f",
+      "redirect": {
+        "source_url": "004db7fb.phios-github.pages.dev/",
+        "target_url": "https://getphios.com/",
+        "status_code": 307,
+        "include_subdomains": false,
+        "subpath_matching": true,
+        "preserve_path_suffix": true,
+        "preserve_query_string": true
+      }
+    },
+    {
+      "deploymentID": "00d9bc8a-317e-49ef-b851-12ab6490585f",
+      "redirect": {
+        "source_url": "00d9bc8a.phios-github.pages.dev/",
+        "target_url": "https://getphios.com/",
+        "status_code": 307,
+        "include_subdomains": false,
+        "subpath_matching": true,
+        "preserve_path_suffix": true,
+        "preserve_query_string": true
+      }
+    },
+    {
+      "deploymentID": "00e0892f-82d1-45b0-b44f-e846ceb147bf",
+      "redirect": {
+        "source_url": "00e0892f.phios-github.pages.dev/",
+        "target_url": "https://getphios.com/",
+        "status_code": 307,
+        "include_subdomains": false,
+        "subpath_matching": true,
+        "preserve_path_suffix": true,
+        "preserve_query_string": true
+      }
+    }
+  ],
+  "rule": {
+    "action": "redirect",
+    "action_parameters": {
+      "from_list": {
+        "name": "p9_t6_historical_exact",
+        "key": "http.request.full_uri"
+      }
+    },
+    "expression": "(http.request.method in {\"GET\" \"HEAD\"}) and (http.request.uri.path in {\"/\" \"/perspectives/\" \"/assets/customer-ui/js/public-index-copy.js\"}) and (http.request.full_uri in $p9_t6_historical_exact)",
+    "position": {
+      "after": "66f4b7cbcabe40b38a4b8fab0b1eb697"
+    },
+    "enabled": true
+  },
+  "scope": {
+    "methods": [
+      "GET",
+      "HEAD"
+    ],
+    "paths": [
+      "/",
+      "/perspectives/",
+      "/assets/customer-ui/js/public-index-copy.js"
+    ],
+    "hostCount": 5
+  },
+  "format": "Five root-prefix redirect records with subpath_matching=true, combined with the exact three-path and GET/HEAD rule. Not a separately accepted 15-item exact-URL list.",
+  "provenance": {
+    "items": "content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T6-MACHINE-RECEIPT.json#items selected by frozen Stage1 IDs",
+    "rule": "tmp/p9-t9/EXACT-MUTATION-CANDIDATE.json",
+    "candidateSourceSHA256": "8ed87a5e54a87b1a7e38065656e993449e9f58719feff5f0da4e0b081f016fe9"
+  },
+  "execute": false
+}

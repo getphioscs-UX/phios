@@ -1,9 +1,9 @@
 {
-  "at": "2026-10-15T04:19:27.732Z",
+  "at": "2026-10-15T05:16:38.889Z",
   "repository": "getphioscs-UX/phios",
   "branch": "main",
   "startingHead": "292c3ff396f195b1c0102084e44c9313b2b11e15",
-  "endingHead": "292c3ff396f195b1c0102084e44c9313b2b11e15",
+  "endingHead": "df56c57b9272365d2e221406fd9cc9cdd8407235",
   "state": "PARTIAL_IMPLEMENTATION_READY_FOR_SCOPED_REVIEW_NOT_FULL_R42_HUMAN_REVIEW_READY",
   "canonicalOwner": "content/web-production/registries/book-public-samples-v1.json",
   "logicalFigureCount": 79,
@@ -179,7 +179,7 @@
     "providerCalls": 0
   },
   "tests": {
-    "at": "2026-10-15T03:53:01.560Z",
+    "at": "2026-10-15T05:09:33.002Z",
     "rows": [
       {
         "id": "79_LOGICAL_UNIQUE",
@@ -214,7 +214,7 @@
         "state": "PASS"
       },
       {
-        "id": "12E_PENDING_NOT_PROMOTED",
+        "id": "12E_OWNER_CORRECTION_VERIFIED",
         "state": "PASS"
       },
       {
@@ -333,7 +333,7 @@
     }
   ],
   "build": {
-    "at": "2026-10-15T04:14:30.360Z",
+    "at": "2026-10-15T05:16:26.524Z",
     "state": "PASS_BUILD_RELEVANT_INPUTS_STABLE",
     "results": [
       {
@@ -760,7 +760,7 @@
       },
       {
         "path": "assets/js/knowledge/book-public-samples.js",
-        "sha256": "cf557a1b63dd28dbb379b87e6238426441929a476010511a3bfd797a2946f526"
+        "sha256": "7a5fe551104ae052378fff247cc1b8a39ecf9b5342a4a418aeaef23a99eb5c7c"
       },
       {
         "path": "assets/js/knowledge/catalog.js",
@@ -1344,7 +1344,7 @@
       },
       {
         "path": "content/web-production/registries/book-public-samples-v1.json",
-        "sha256": "8043f8758ecb45bc8a0f43f1612dc49de5bd096da67e9c8efd9926c2bd94ee06"
+        "sha256": "a8ccddf26247ea92f9696e2cc23fc16c60563fe0124fee77c5761b0e51a84fcd"
       },
       {
         "path": "functions/api/customer-contextual-ask.js",
@@ -1379,9 +1379,9 @@
         "sha256": "a1cc8849a23a5eb3260a940850c7cb13bd91b5dea2f9c83b67ef3b5b06207188"
       }
     ],
-    "relevantInputDigest": "4c5200451e89fde3a74b88a583358b780ad3d5438827c5d516adc05d3a147586",
+    "relevantInputDigest": "c8d0e4d4b6eed61ae4f7bd9187e3b5c919280d77fec8a117e7fe970bfc7e9776",
     "changed": [],
-    "workerSha256": "6093cc5d3114cbabb37002158bbea9daf0d6f70b0b1d08c69506615b29ea2e2f",
+    "workerSha256": "1ca8d36af500d4955eee36cc0b41086f8437a57a2b6142345db4ad7fe553985f",
     "routesSha256": "3a87caf0402e11632cb4fd51c8a081aa4a848bd78cd3b0c8cee11199d65f3381",
     "providerCalls": 0,
     "deployed": false,
@@ -1896,8 +1896,217 @@
     "noFrozenExpectedHashesUpdated": true,
     "noUnrelatedSourceFixed": true
   },
+  "currentFailureReconciliation": {
+    "at": "2026-10-15T05:09:00.820Z",
+    "currentHead": "df56c57b9272365d2e221406fd9cc9cdd8407235",
+    "evidenceHead": "292c3ff396f195b1c0102084e44c9313b2b11e15",
+    "rows": [
+      {
+        "command": "node scripts/check-cx-r12-personal-reality.mjs",
+        "exitCode": 1,
+        "log": "artifacts/phi-os-integrated-r42/correction-current-0.log",
+        "historicalLog": "artifacts/phi-os-integrated-r42/resume-011.log",
+        "currentExitCode": 0,
+        "error": "✓ CX-R12 Personal Reality current-main successor passed at 74fba1c: five-stage customer input, customer-first overview, five method-hidden result tabs, returned-perspective disclosure and explicit My Reality handoff are active.\n  PPR/method meaning remains upstream; profile scoring is not recreated; method availability is not hard-coded; missing overview areas remain open rather than inferred.\n  Legacy Personal Runtime presentation files are physically deleted after browser acceptance; compatibility routes remain redirects to canonical Personal Reality.\n✓ CX-R12 shared-surface successor: Personal Reality now uses a 3-priority customer overview, one-method-at-a-time detail, nested technical provenance and explicit Reality return without changing method/commerce truth.\n✓ CX-R12 ACCEPTED: PERSONAL_REALITY_REPLACEMENT_READY_FOR_PRIORITY_TRANCHE · READY_FOR_CX_R13 · NO_NEW_P1_ROUTE_CUTOVER\n",
+        "owner": "Personal Reality",
+        "classification": "RESOLVED_CURRENT_SOURCE",
+        "affectedSource": "perspectives/personal/index.html",
+        "directR42Impact": false,
+        "nextAction": "Preserve current corrected route; no further fix",
+        "requiredRegression": "node scripts/check-cx-r12-personal-reality.mjs",
+        "predatesR42": true,
+        "sourceSha256": "e8b8ae81b02e3ad69a6f73e14013a20dfe9a999ce0782ac57775e8b9d094abb5",
+        "historicalFailurePreserved": true,
+        "preR42SourceSha256": "e8b8ae81b02e3ad69a6f73e14013a20dfe9a999ce0782ac57775e8b9d094abb5",
+        "sourceUnchangedFromPreR42": true,
+        "predatesR42Basis": "Same source bytes as pre-R4.2 baseline; historical failure retained"
+      },
+      {
+        "command": "node scripts/check-cx-r9-r2-customer-cutover.mjs",
+        "exitCode": 1,
+        "log": "artifacts/phi-os-integrated-r42/correction-current-1.log",
+        "historicalLog": "artifacts/phi-os-integrated-r42/resume-018.log",
+        "currentExitCode": 0,
+        "error": "✓ CX-R9-R2 customer cutover reconciliation passed.\n  /knowledge/ask/ is the accepted current route via P1; historical W0-W15 evidence remains byte-preserved and is not rewritten after the fact.\n  Customer copy is humanized, public Knowledge context remains direct, and protected Reading / Relationship / Profile context remains server-resolved and fail-closed.\n",
+        "owner": "Ask cutover",
+        "classification": "RESOLVED_CURRENT_SOURCE",
+        "affectedSource": "assets/customer-ui/js/surfaces/contextual-ask.js",
+        "directR42Impact": true,
+        "nextAction": "Preserve current contract successor; no further fix",
+        "requiredRegression": "node scripts/check-cx-r9-r2-customer-cutover.mjs",
+        "predatesR42": true,
+        "sourceSha256": "bf98af5357488e8a49728f901bf625991ad7f9fd88a645e8acb77b2d434d5300",
+        "historicalFailurePreserved": true,
+        "preR42SourceSha256": "bf98af5357488e8a49728f901bf625991ad7f9fd88a645e8acb77b2d434d5300",
+        "sourceUnchangedFromPreR42": true,
+        "predatesR42Basis": "Same source bytes as pre-R4.2 baseline; historical failure retained"
+      },
+      {
+        "command": "node scripts/check-cx-r10-r30-current.mjs ALL",
+        "exitCode": 1,
+        "log": "artifacts/phi-os-integrated-r42/correction-current-2.log",
+        "historicalLog": "artifacts/phi-os-integrated-r42/resume-019.log",
+        "currentExitCode": 1,
+        "error": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Personal Evidence stays outside the primary product grid\r\n    at file:///C:/phios/scripts/check-cx-r10-r30-current.mjs:34:2\r\n    at check (file:///C:/phios/scripts/check-cx-r10-r30-current.mjs:10:59)\r\n    at file:///C:/phios/scripts/check-cx-r10-r30-current.mjs:17:1\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\r\n    at async node:internal/modules/esm/loader:643:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n",
+        "owner": "Personal consolidation",
+        "classification": "OBSOLETE_ASSERTION_PENDING_GOVERNED_SUCCESSOR",
+        "affectedSource": "perspectives/index.html",
+        "directR42Impact": false,
+        "nextAction": "Reconcile accepted Profile primary-entry consolidation with older exclusion assertion; versioned successor, not blanket removal",
+        "requiredRegression": "node scripts/check-cx-r10-r30-current.mjs ALL",
+        "predatesR42": true,
+        "sourceSha256": "643b0358f6ae1c0335e8c01efb6ccb9165a3b0aec711ce2c8eea5ccbae82aace",
+        "historicalFailurePreserved": true,
+        "preR42SourceSha256": "643b0358f6ae1c0335e8c01efb6ccb9165a3b0aec711ce2c8eea5ccbae82aace",
+        "sourceUnchangedFromPreR42": true,
+        "predatesR42Basis": "Same source bytes as pre-R4.2 baseline; historical failure retained"
+      },
+      {
+        "command": "node scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs",
+        "exitCode": 1,
+        "log": "artifacts/phi-os-integrated-r42/correction-current-3.log",
+        "historicalLog": "artifacts/phi-os-integrated-r42/resume-055.log",
+        "currentExitCode": 1,
+        "error": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: World recovery source evidence drift: world/index.html\r\n+ actual - expected\r\n\r\n+ '43e8f318128683e10aeb6d67d97fba387b64baceef4a5ae788382fd7759c501e'\r\n- 'd4ebc61cec2b62fbbeb06d0cf01522751bfb2f0d7bafe0b328c6e83377b6323b'\r\n\r\n    at file:///C:/phios/scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs:109:9\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\r\n    at async node:internal/modules/esm/loader:643:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: '43e8f318128683e10aeb6d67d97fba387b64baceef4a5ae788382fd7759c501e',\r\n  expected: 'd4ebc61cec2b62fbbeb06d0cf01522751bfb2f0d7bafe0b328c6e83377b6323b',\r\n  operator: 'strictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n",
+        "owner": "Book V World governance",
+        "classification": "STALE_RECEIPT_WITH_PENDING_SUCCESSOR",
+        "affectedSource": "world/index.html",
+        "directR42Impact": true,
+        "nextAction": "Review existing world-integrated-r42-successor-candidate-v1.json; retain frozen predecessor and pending acceptance",
+        "requiredRegression": "node scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs",
+        "predatesR42": true,
+        "sourceSha256": "43e8f318128683e10aeb6d67d97fba387b64baceef4a5ae788382fd7759c501e",
+        "historicalFailurePreserved": true,
+        "preR42SourceSha256": "dc9dac575d5958c6a6c68636f9ff3d32bc3ce57b73f3d03c17281656ddd663be",
+        "sourceUnchangedFromPreR42": false,
+        "predatesR42Basis": "Existing World successor baseline already drifted before R4.2; R4.2 adds governed source changes"
+      },
+      {
+        "command": "node scripts/check-pis-r1-foundation.mjs",
+        "exitCode": 1,
+        "log": "artifacts/phi-os-integrated-r42/correction-current-4.log",
+        "historicalLog": "artifacts/phi-os-integrated-r42/resume-059.log",
+        "currentExitCode": 1,
+        "error": "到答案、理解答案，与知道下一步怎么走，是三件不同的事。' },\r\n      body: {\r\n        '0': '一个系统可以拥有非常强的搜索能力，却不知道哪个结果真正改变了你的处境。',\r\n        '1': '一个 AI 可以给出非常好的解释，却不知道你最终是否采取了行动，以及行动之后发生了什么。',\r\n        '2': '一份报告可以非常完整，却仍然只是一个特定时间、特定方法下对你的读取。',\r\n        '3': '一个专业人士可以给出领域内的重要建议，但现实中的决定往往还涉及这个专业范围之外的条件。',\r\n        '4': '这就是 PHI OS 把 Reality Navigation 放在系统中心的原因。',\r\n        '5': 'Navigation 不是「系统告诉用户应该怎么做」。',\r\n        '6': '也不是给每一个问题计算一个最高分选项。',\r\n        '7': '真正的导航能力需要慢慢形成。',\r\n        '8': '现实首先具有结构。',\r\n        '9': '结构中的要素开始形成联系。',\r\n        '10': '一些联系得到持续资料支持。',\r\n        '11': '随着时间与证据增加，一些方向开始比其他方向更清楚。',\r\n        '12': '但即使存在方向，一个人仍然需要知道自己现在处在什么位置。',\r\n        '13': '只有当结构、方向与位置同时具有足够依据，系统才有资格讨论有限的 Navigation Potential。',\r\n        '14': '这也是 Figure 1B 所表达的核心：',\r\n        '15': 'Structure → Connectivity → Network → Structural Reinforcement → Direction → Position → Navigation Potential',\r\n        '16': '它描述的不是七个网页步骤。',\r\n        '17': '它描述的是导航能力如何从现实中形成。',\r\n        '18': '而行动之后，过程也没有结束。',\r\n        '19': 'Reality Navigation 必须继续进入：',\r\n        '20': 'Action → Observation → Outcome → Revision',\r\n        '21': '因为真正的现实不会停在决定发生的那一刻。',\r\n        '22': '一份判断只有在之后仍然能够面对新的事实，才具有持续价值。',\r\n        '23': '所以 PHI OS 的长期目标不是成为一个更会回答问题的系统。',\r\n        '24': '而是建立一种基础设施，让一个人可以反复完成这件事：',\r\n        '25': '看见自己现在面对的现实， 理解哪些资料真正有关， 在不确定性仍然存在时比较可能方向， 作出属于自己的决定， 然后回来看看现实究竟发生了什么变化。'\r\n      }\r\n    },\r\n    S07: {\r\n      title: { '0': '一个系统越能连接不同来源， 就越需要明确：什么可以说，什么不能说。' },\r\n      body: {\r\n        '0': 'PHI OS 会连接来自不同领域的资料，但连接本身不能消除来源之间的差异。',\r\n        '1': '这是系统设计中最重要的限制之一。',\r\n        '2': '一个事实可以来自现实记录。',\r\n        '3': '一个财务数字可以来自账户资料或计算。',\r\n        '4': '一个 Profile 结果可以来自明确的问卷或评估。',\r\n        '5': '一个专业判断可以来自在具体范围内承担责任的人。',\r\n        '6': '八字、紫微、占星、易经、塔罗等方法则提供另一种解释结构。',\r\n        '7': 'AI 可以帮助整理、比较、解释和组织这些内容。',\r\n        '8': '但它们不能因为进入同一个界面，就变成同一种证据。',\r\n        '9': 'PHI OS 因此必须持续保留至少几个问题：',\r\n        '10': '这项内容是谁提供的？',\r\n        '11': '它使用了什么方法？',\r\n        '12': '它描述的是什么范围？',\r\n        '13': '它是在陈述事实，还是在提供解释？',\r\n        '14': '它是否经过人工复核？',\r\n        '15': '它现在仍然适用吗？',\r\n        '16': '用户是否同意把它带入当前问题？',\r\n        '17': '系统究竟有权做到哪一步？',\r\n        '18': '这种边界尤其重要，因为越强的 AI 越容易让不同来源之间的区别看起来消失。',\r\n        '19': '一段语言流畅的回答，可以同时包含已确认事实、推断、解释、常识、模型综合和未知内容。',\r\n        '20': '如果界面没有继续显示这些差别，用户看到的就可能只是一个非常确定的声音。',\r\n        '21': 'PHI OS 不应该这样工作。',\r\n        '22': 'AI 可以参与读取现实。',\r\n        '23': '但 AI 不应该自动成为现实的最高权威。',\r\n        '24': '它不能因为能够总结财务资料，就自动成为财务顾问。',\r\n        '25': '不能因为能够读取命盘，就把象征解释升级成已证实的人格事实。',\r\n        '26': '也不能因为能够同时看到多种资料，就在没有用户授权和足够依据的情况下替用户作出决定。',\r\n        '27': '同样，专业人士的参与也必须有边界。',\r\n        '28': '专业责任来自具体的人、具体服务范围和具体时间，而不是来自一个「Professional」标签。',\r\n        '29': 'PHI OS 希望保留这些责任关系，而不是把它们吸收进一个模糊的系统权威。',\r\n        '30': '最终，平台可以帮助组织和呈现。',\r\n        '31': '专业人士可以在其范围内判断。',\r\n        '32': '方法可以提供视角。',\r\n        '33': 'AI 可以协助解释。',\r\n        '34': '但个人仍然保留决定权。'\r\n      },\r\n      caption: { '0': '能力越强，边界越重要。把来源连接起来，不等于把责任混在一起。' }\r\n    },\r\n    S08: {\r\n      eyebrow: { '0': '创办人与研究起点' },\r\n      title: { '0': 'PHI OS 不是从一个技术概念开始， 而是从反复出现的现实问题开始。' },\r\n      body: {\r\n        '0': '在财务规划中，一个决定很少只关于数字。',\r\n        '1': '现金流、资产、负债、家庭责任、风险、时间与未来目标往往同时存在。',\r\n        '2': '在资源配置与组织重整中，一个看起来合理的方案，如果忽略了人、结构、权力、执行能力与外部环境，也可能完全无法运行。',\r\n        '3': '在系统分析中，局部看起来正确的判断，放进更大的结构后可能出现完全不同的结果。',\r\n        '4': '而在人与人的现实中，问题变得更加复杂。',\r\n        '5': '一个人可以同时拥有专业建议、家庭意见、个人直觉、历史经验、财务限制、方法解读与新的现实变化。',\r\n        '6': '这些内容不一定错误。',\r\n        '7': '但它们往往彼此分离。',\r\n        '8': 'Teresa 长期关注的不是如何找到一个永远正确的框架，而是：',\r\n        '9': '怎样知道一个框架究竟看见了什么？',\r\n        '10': '它遗漏了什么？',\r\n        '11': '它的解释建立在什么之上？',\r\n        '12': '现实改变以后，这个解释是否仍然成立？',\r\n        '13': '这也是为什么她会研究看似相距很远的领域。',\r\n        '14': '金融和资源配置关心现实约束。',\r\n        '15': '组织和系统研究关心结构与连接。',\r\n        '16': '传统读取体系关心人的模式、时间和意义。',\r\n        '17': '观察科学关心资料、证据与知识如何形成。',\r\n        '18': '人工智能则把这些问题推到了一个新的阶段：当生成和综合答案的能力变得非常快速、非常便宜时，人真正需要的能力是什么？',\r\n        '19': 'PHI OS 是这些问题逐渐交汇后的结果。',\r\n        '20': '它不是试图证明一种方法比另一种方法更正确。',\r\n        '21': '也不是试图建立一个知道所有人生答案的系统。',\r\n        '22': '更接近的目标是：',\r\n        '23': '建立一种基础设施，让不同来源可以被使用，却不必失去身份；',\r\n        '24': '让解释可以存在，却不会自动取代事实；',\r\n        '25': '让未知可以被保留，而不是急着填满；',\r\n        '26': '让一个判断可以随着现实变化被重新检查；',\r\n        '27': '并让一个人最终知道，自己的决定究竟建立在什么之上。',\r\n        '28': ''\r\n      },\r\n      short_intro: {\r\n        '0': 'Teresa Lee 并不是先决定建立一个 AI 平台，再寻找一个可以解决的问题。',\r\n        '1': 'PHI OS 的起点，是她在不同工作与研究领域中反复看见同一种断裂。'\r\n      },\r\n      founder_quote: { '0': '我真正想解决的，不是「怎样给人更多答案」， 而是「怎样让一个人在拥有这么多答案以后，仍然看得清自己的现实」。' }\r\n    },\r\n    S09: {\r\n      title: { '0': '从你现在真正面对的问题开始。' },\r\n      body: {\r\n        '0': 'Reality Navigation 并不要求一个人在开始之前先理解整个系统。',\r\n        '1': '你也不需要先购买报告、填写所有个人资料，或选择一种方法。',\r\n        '2': '不同的人可以从不同的位置进入。',\r\n        '3': '如果你只是有一个问题，可以先从 Ask PHI OS 开始。',\r\n        '4': '如果你想先阅读，可以从 Knowledge、文章或八册书中的公开内容开始。',\r\n        '5': '如果你想从另一种角度重新观察自己或某个处境，可以进入 Perspectives。',\r\n        '6': '如果你正在面对一个真实而复杂的问题，可以把当前事实、限制、未知和相关资料带进 My Reality。',\r\n        '7': '如果问题涉及需要真人承担责任的财务、专业复核或其他明确服务范围，可以进入 Professional。',\r\n        '8': '如果你已经拥有报告、Reading、Profile、Relationship、Financial context 或其他已建立内容，也可以从它们继续提出新的问题，而不需要每一次重新开始。',\r\n        '9': '重要的不是从哪一个产品开始。',\r\n        '10': '而是从一个真实问题开始，然后只加入足以帮助理解这个问题的资料。',\r\n        '11': '随着现实变得更清楚，下一步也可以改变。',\r\n        '12': '这正是 Navigation 与一次性答案之间的区别。'\r\n      },\r\n      final_closing: {\r\n        '0': 'PHI OS 不试图替一个人拥有现实。',\r\n        '1': '它试图让现实保持足够清楚，使人能够继续判断、选择、行动，并在世界改变以后重新理解。'\r\n      }\r\n    },\r\n    navigation: {\r\n      explore: '了解 Reality Navigation',\r\n      why: '为什么需要 PHI OS',\r\n      ask: '提出一个问题',\r\n      reality: '打开我的现实',\r\n      perspectives: '探索不同视角',\r\n      books: '阅读 PHI OS',\r\n      professional: '专业协助',\r\n      full: '查看完整图示',\r\n      identity: 'Teresa Lee',\r\n      role: '创办人及首席架构师，PHI OS'\r\n    },\r\n    figures: {\r\n      'PLATFORM-RELATIONSHIP-NETWORK': { alt: '概念图示：PHI OS 平台联系总图' },\r\n      'OBSERVATION-EVIDENCE-KNOWLEDGE': { alt: '概念图示：观察、证据与知识状态' },\r\n      'CROSS-DOMAIN-CONTEXT-LINKS': { alt: '概念图示：跨领域资料联系与传递边界' },\r\n      'HUMAN-SYSTEM-RESPONSIBILITY': { alt: '概念图示：人与系统的责任区别' },\r\n      'NAVIGATION-FORMATION-1B': { alt: '概念图示：Figure 1B 七层导航形成图' },\r\n      'OBSERVATION-RETURN-LOOP': { alt: '概念图示：行动、观察与回看网络' },\r\n      'CUSTOMER-ENTRY-PATHS': { alt: '概念图示：任务入口网络｜四个核心入口与学习支路' }\r\n    },\r\n    market: {\r\n      '0': { title: '搜索 / Google', body: '发现、检索、来源与公共信息。' },\r\n      '1': { title: '通用 AI / ChatGPT / Meta AI', body: '对话、综合、解释、生成与研究协助。' },\r\n      '2': {\r\n        title: 'X / YouTube / TikTok / 社交与视频',\r\n        body: '公共讯号、评论、经验、教学与发现。'\r\n      },\r\n      '3': { title: '传统／象征性读取体系', body: '不同解释视角、模式、时间与反思。' },\r\n      '4': { title: '财务／专业服务', body: '在明确服务和责任范围内提供领域真人判断。' },\r\n      '5': {\r\n        title: 'PHI OS',\r\n        body: '在保留来源、不确定性、责任与连续性的前提下，通过主动选择的来源进行 Reality Navigation。'\r\n      }\r\n    },\r\n    metaDescription: 'Teresa Lee 创立 PHI OS，源于财务规划、资源配置、组织重整与系统分析中反复出现的问题：更多答案并不会自动带来更清楚的现实。PHI OS 以 Reality Navigation 连接来源、证据、解释、行动与复盘。',\r\n    navigationFormation: '结构 → 连接性 → 网络 → 结构强化 → 方向 → 位置 → 导航潜能'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n",
+        "owner": "Founder publication",
+        "classification": "UNRESOLVED_ACCEPTANCE_COPY_DRIFT",
+        "affectedSource": "assets/js/locales/zh-Hans.js",
+        "directR42Impact": false,
+        "nextAction": "Founder owner compare current locale publication with exact accepted copy and establish applicable successor; do not replace accepted copy automatically",
+        "requiredRegression": "node scripts/check-pis-r1-foundation.mjs",
+        "predatesR42": true,
+        "sourceSha256": "961818215962149639feede231384c4828a4b0eae73e0bd9a5c8ed4d4737abdb",
+        "historicalFailurePreserved": true,
+        "preR42SourceSha256": "961818215962149639feede231384c4828a4b0eae73e0bd9a5c8ed4d4737abdb",
+        "sourceUnchangedFromPreR42": true,
+        "predatesR42Basis": "Same source bytes as pre-R4.2 baseline; historical failure retained"
+      },
+      {
+        "command": "node scripts/check-pis-r1-presentation.mjs",
+        "exitCode": 1,
+        "log": "artifacts/phi-os-integrated-r42/correction-current-5.log",
+        "historicalLog": "artifacts/phi-os-integrated-r42/resume-060.log",
+        "currentExitCode": 1,
+        "error": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: perspectives/index.html: consolidation source drift\r\n+ actual - expected\r\n\r\n+ '643b0358f6ae1c0335e8c01efb6ccb9165a3b0aec711ce2c8eea5ccbae82aace'\r\n- 'bfef9e847a3e5277bf093eb3c133f5733bed01f289b8e3f8c4c730006ecd2421'\r\n\r\n    at historicalPisBytes (file:///C:/phios/scripts/lib/page-consolidation-successor-r1.mjs:20:9)\r\n    at pisCurrentSurfaceSuccessor (file:///C:/phios/scripts/lib/pis-current-surface-successor.mjs:44:99)\r\n    at file:///C:/phios/scripts/check-pis-r1-presentation.mjs:12:17\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\r\n    at async node:internal/modules/esm/loader:643:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: '643b0358f6ae1c0335e8c01efb6ccb9165a3b0aec711ce2c8eea5ccbae82aace',\r\n  expected: 'bfef9e847a3e5277bf093eb3c133f5733bed01f289b8e3f8c4c730006ecd2421',\r\n  operator: 'strictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n",
+        "owner": "Personal consolidation governance",
+        "classification": "STALE_RECEIPT",
+        "affectedSource": "perspectives/index.html",
+        "directR42Impact": false,
+        "nextAction": "Validate current consolidation against accepted successor; bind new evidence only through existing governance",
+        "requiredRegression": "node scripts/check-pis-r1-presentation.mjs",
+        "predatesR42": true,
+        "sourceSha256": "643b0358f6ae1c0335e8c01efb6ccb9165a3b0aec711ce2c8eea5ccbae82aace",
+        "historicalFailurePreserved": true,
+        "preR42SourceSha256": "643b0358f6ae1c0335e8c01efb6ccb9165a3b0aec711ce2c8eea5ccbae82aace",
+        "sourceUnchangedFromPreR42": true,
+        "predatesR42Basis": "Same source bytes as pre-R4.2 baseline; historical failure retained"
+      },
+      {
+        "command": "node scripts/check-bazi-final-closure.mjs",
+        "exitCode": 1,
+        "log": "artifacts/phi-os-integrated-r42/correction-current-6.log",
+        "historicalLog": "artifacts/phi-os-integrated-r42/resume-072.log",
+        "currentExitCode": 1,
+        "error": "{\"status\":\"FAIL\",\"results\":[{\"name\":\"architecture\",\"status\":\"PASS\"},{\"name\":\"s04-seven-killings\",\"status\":\"PASS\"},{\"name\":\"timing-consistency\",\"status\":\"PASS\"},{\"name\":\"diagram-fidelity\",\"status\":\"PASS\"},{\"name\":\"semantic-coverage\",\"status\":\"PASS\"},{\"name\":\"zero-provider\",\"status\":\"FAIL\",\"error\":\"PROTECTED_RECEIPT_CHANGED config/reports/bazi-deep-manuscript-r2/policy.json\\n+ actual - expected\\n\\n+ 'ffe9db4ae520776c196f2a042c8593ab10a85ccb6ac69742b3a49d191826eb53'\\n- '54dcec66bd64172ffe36dd489710879f773bec31e0813d9b6f1efe590226c8c3'\\n\"},{\"name\":\"fit-BILINGUAL\",\"status\":\"FAIL\",\"error\":\"RENDERER_CHANGED\\n+ actual - expected\\n\\n+ 'c580ac951a8f96279e968246e86e27b76fc7ca5a2e8d6815e342a9a2c4234f5b'\\n- '6c0f377cacfa94c938a8adb51031920ec16f895d91ff75200e8afb058dc29d13'\\n\"},{\"name\":\"fit-EN\",\"status\":\"FAIL\",\"error\":\"RENDERER_CHANGED\\n+ actual - expected\\n\\n+ 'c580ac951a8f96279e968246e86e27b76fc7ca5a2e8d6815e342a9a2c4234f5b'\\n- '6c0f377cacfa94c938a8adb51031920ec16f895d91ff75200e8afb058dc29d13'\\n\"},{\"name\":\"fit-ZH_HANS\",\"status\":\"FAIL\",\"error\":\"RENDERER_CHANGED\\n+ actual - expected\\n\\n+ 'c580ac951a8f96279e968246e86e27b76fc7ca5a2e8d6815e342a9a2c4234f5b'\\n- '6c0f377cacfa94c938a8adb51031920ec16f895d91ff75200e8afb058dc29d13'\\n\"}],\"providerCalls\":0}\n",
+        "owner": "BaZi report closure",
+        "classification": "UNRELATED_WORKFLOW_FAILURE",
+        "affectedSource": "config/reports/bazi-deep-manuscript-r2/policy.json",
+        "directR42Impact": false,
+        "nextAction": "BaZi owner reconcile protected policy/renderer receipts with current accepted implementation; preserve P9",
+        "requiredRegression": "node scripts/check-bazi-final-closure.mjs",
+        "predatesR42": true,
+        "sourceSha256": "ffe9db4ae520776c196f2a042c8593ab10a85ccb6ac69742b3a49d191826eb53",
+        "historicalFailurePreserved": true,
+        "preR42SourceSha256": "ffe9db4ae520776c196f2a042c8593ab10a85ccb6ac69742b3a49d191826eb53",
+        "sourceUnchangedFromPreR42": true,
+        "predatesR42Basis": "Same source bytes as pre-R4.2 baseline; historical failure retained"
+      },
+      {
+        "command": "node scripts/check-bazi-deep-manuscript-r2.mjs",
+        "exitCode": 1,
+        "log": "artifacts/phi-os-integrated-r42/correction-current-7.log",
+        "historicalLog": "artifacts/phi-os-integrated-r42/resume-073.log",
+        "currentExitCode": 1,
+        "error": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\r\n\r\n  assert(publication.editorial.sections.every(s=>LOCALES.every(l=>s[l].insightCards.length===3)))\r\n\r\n    at file:///C:/phios/scripts/check-bazi-deep-manuscript-r2.mjs:63:362\r\n    at async check (file:///C:/phios/scripts/check-bazi-deep-manuscript-r2.mjs:19:45)\r\n    at async file:///C:/phios/scripts/check-bazi-deep-manuscript-r2.mjs:63:1 {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n",
+        "owner": "BaZi deep manuscript",
+        "classification": "UNRELATED_WORKFLOW_FAILURE",
+        "affectedSource": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-publication.js",
+        "directR42Impact": false,
+        "nextAction": "BaZi owner inspect actual insight card counts and accepted publication contract; correct source or governed successor without weakening cardinality assertion",
+        "requiredRegression": "node scripts/check-bazi-deep-manuscript-r2.mjs",
+        "predatesR42": true,
+        "sourceSha256": "81ab329b13c980c5acff81e05a009913f282ccaafdb235020468ce4fa9dd649e",
+        "historicalFailurePreserved": true,
+        "preR42SourceSha256": "81ab329b13c980c5acff81e05a009913f282ccaafdb235020468ce4fa9dd649e",
+        "sourceUnchangedFromPreR42": true,
+        "predatesR42Basis": "Same source bytes as pre-R4.2 baseline; historical failure retained"
+      }
+    ],
+    "providerCalls": 0,
+    "currentPass": 2,
+    "currentFail": 6,
+    "releaseBlockersNotEquivalentToAllFailures": true
+  },
+  "ownerCorrections": {
+    "at": "2026-10-15T05:08:32.719Z",
+    "rows": [
+      {
+        "id": "5B",
+        "locale": "en",
+        "objectKey": "images/figures/books/book-2/en/5B.webp",
+        "priorSha256": "209e22e69f5596d8420e55f7237522f8f96285a34de688f68b99a6e11161ed2c",
+        "sha256": "209e22e69f5596d8420e55f7237522f8f96285a34de688f68b99a6e11161ed2c",
+        "changed": false,
+        "publicUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/books/book-2/en/5B.webp?v=209e22e69f5596d8",
+        "bytes": 409660,
+        "width": 1122,
+        "height": 1402,
+        "format": "webp",
+        "localPath": ".tmp/integrated-r42-source-history/209e22e69f5596d8420e55f7237522f8f96285a34de688f68b99a6e11161ed2c.webp",
+        "originPublicMatch": true,
+        "decoded": true
+      },
+      {
+        "id": "12E",
+        "locale": "en",
+        "objectKey": "images/figures/books/book-5/en/12E.webp",
+        "priorSha256": "14c4f1ad8b693d56664dff96e13a1a70bf9cc03ee3601cd73e9c937bea1783aa",
+        "sha256": "14c4f1ad8b693d56664dff96e13a1a70bf9cc03ee3601cd73e9c937bea1783aa",
+        "changed": false,
+        "publicUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/books/book-5/en/12E.webp?v=14c4f1ad8b693d56",
+        "bytes": 590856,
+        "width": 1484,
+        "height": 1060,
+        "format": "webp",
+        "localPath": ".tmp/integrated-r42-source-history/14c4f1ad8b693d56664dff96e13a1a70bf9cc03ee3601cd73e9c937bea1783aa.webp",
+        "originPublicMatch": true,
+        "decoded": true
+      }
+    ],
+    "R2Writes": 0
+  },
   "finalSurfaceBrowser": {
-    "at": "2026-10-15T03:55:21.043Z",
+    "at": "2026-10-15T05:11:41.860Z",
     "rows": [
       {
         "surface": "ASK_ACTUAL_HANDLER",
@@ -3373,80 +3582,48 @@
   "capabilityMatrix": "artifacts/phi-os-integrated-r42/SCAM-CAPABILITY-MATRIX.json",
   "blockers": [
     {
-      "id": "12E_ZH_SECTION_LABEL_REVIEW",
-      "impact": "New English bytes remove Volume X; Chinese bytes unchanged and say 第十编, not 第十册. Canonical ownership stays Book V.",
-      "next": "Review whether Chinese section wording should remain; never infer volume ownership from it"
-    },
-    {
-      "id": "5B_EDITORIAL_TITLE_ALIGNMENT",
-      "impact": "Visible English/Chinese headings differ; both source renditions preserved, no image editing",
-      "next": "Owner review of supplied wording"
-    },
-    {
       "id": "SCAM_LOOKUP_PERMISSION",
       "impact": "Source-specific incident/phone/complaint lookup is not connected; user sees explicit unavailable state and verified official resource links",
       "next": "Separate source permission + validated canonical adapter if live lookup is desired"
     },
     {
       "id": "GLOBAL_REGRESSION_AND_WORLD_GOVERNANCE",
-      "impact": "Original full check failed CSS guard, fixed; resumed 75 leaves retain 8 failures including pre-existing Personal/Ask/Founder/PIS/BaZi issues and World predecessor drift",
+      "impact": "Original full check failed CSS guard, fixed; historical 75 leaves retained 8 failures; current rerun resolves 2 and retains 6, including World predecessor drift and other-workstream contracts",
       "next": "Use exact failure classification and pending World successor candidate; do not modify frozen hashes"
-    },
-    {
-      "id": "HISTORICAL_12E_RAW_BLOB_RETENTION_GAP",
-      "impact": "Old English digest and pre-update contact sheet remain; original downloaded temporary path was reused during delta and raw old blob is no longer available",
-      "next": "Current 158 renditions now have hash-addressed immutable local snapshots; supply old raw image only if exact historical restoration is required"
     }
   ],
   "worktree": [
-    "M academy/index.html",
+    "M artifacts/phi-os-integrated-r42/BUILD-RESULTS.json",
+    " M artifacts/phi-os-integrated-r42/DELIVERY-STATE.json",
+    " M artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+    " M artifacts/phi-os-integrated-r42/EIGHT-VOLUME-ASSET-INVENTORY.json",
+    " M artifacts/phi-os-integrated-r42/FINAL-SURFACE-INTEGRATION-BROWSER.json",
+    " M artifacts/phi-os-integrated-r42/HUMAN-REVIEW.html",
+    " M artifacts/phi-os-integrated-r42/SCAM-CAPABILITY-MATRIX.json",
+    " M artifacts/phi-os-integrated-r42/build-pages.log",
+    " M artifacts/phi-os-integrated-r42/check-pages-build.log",
     " M assets/js/knowledge/book-public-samples.js",
-    " M assets/js/pages/book-volume-seven.js",
-    " M assets/js/pages/world.js",
-    " M books/index.html",
-    " M books/reality-continuity/index.html",
-    " M books/reality-differentiation/index.html",
-    " M books/reality-expansion/index.html",
-    " M books/reality-formation/index.html",
-    " M books/reality-navigation/index.html",
-    " M books/reality-observation/index.html",
-    " M books/reality-reconfiguration/index.html",
-    " M books/reality-runtime/index.html",
-    " M content/production-closure/live-customer-commercial-convergence/MASTER-WORK-STATE.json",
+    " M content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html",
     " M content/web-production/registries/book-public-samples-v1.json",
-    " M docs/acceptance/bazi-paid-report/deep-manuscript-r2/FINAL-CLOSURE-CHECK-all.json",
-    " M docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json",
-    " M functions/api/customer-contextual-ask.js",
-    " M knowledge/ask/index.html",
-    " M scripts/check-cx-no-legacy-css.mjs",
-    " M scripts/check-cx-r20-runtime-projection-adapters.mjs",
-    " M scripts/lib/publication-boundary.mjs",
-    " M search/index.html",
-    " M tools/review/external-reality-cross-domain-r1/R1-CHECK-RESULTS.json",
-    " M world/index.html",
-    "?? artifacts/phi-os-integrated-r42/",
-    "?? assets/css/integrated-r42.css",
-    "?? assets/customer-ui/surfaces/integrated-r42.css",
-    "?? assets/js/knowledge/eight-volume-summary-catalog.js",
-    "?? assets/js/pages/civilization-atlas/world-integrated-r42.js",
-    "?? assets/js/pages/civilization-atlas/world-r42-contract.js",
-    "?? assets/js/pages/scam-intelligence-projection.js",
-    "?? content/civilization-atlas/maintenance/world-integrated-r42-successor-candidate-v1.json",
-    "?? content/customer-experience-rebuild/legacy/current-shared-stylesheet-successor-v2.json",
-    "?? content/production-closure/live-customer-commercial-convergence/bazi-p9/P9-G3-R6-T9-RESUME-20261015-STOP-RECEIPT.json",
-    "?? functions/external-reality-impact/consumer-scam-navigation.js",
-    "?? scripts/audit-integrated-r42-asset-delta.mjs",
-    "?? scripts/audit-integrated-r42-assets.mjs",
-    "?? scripts/audit-integrated-r42-live-browser.mjs",
-    "?? scripts/build-integrated-r42-bound.mjs",
-    "?? scripts/build-integrated-r42-review.mjs",
-    "?? scripts/check-integrated-r42-browser.mjs",
-    "?? scripts/check-integrated-r42-final-surfaces.mjs",
-    "?? scripts/check-integrated-r42.mjs",
-    "?? scripts/resume-integrated-r42-regression.mjs",
-    "?? scripts/serve-integrated-r42-review.mjs",
-    "?? tmp/p9-t9-r1-wrangler-help.log",
-    "?? tools/review/P9-G3-R6-T9-RESUME-20261015-HUMAN-REVIEW.html"
+    " M scripts/build-integrated-r42-review.mjs",
+    " M scripts/check-integrated-r42.mjs",
+    "?? artifacts/phi-os-integrated-r42/CANONICAL-REVIEW-BROWSER.json",
+    "?? artifacts/phi-os-integrated-r42/CORRECTION-RECONCILIATION.json",
+    "?? artifacts/phi-os-integrated-r42/CURRENT-EIGHT-FAILURES.json",
+    "?? artifacts/phi-os-integrated-r42/INTERRUPTED-BUILD-LOCK.json",
+    "?? artifacts/phi-os-integrated-r42/OWNER-CORRECTION-CURRENT-BYTES.json",
+    "?? artifacts/phi-os-integrated-r42/PRE-OWNER-CORRECTION-MANIFEST.json",
+    "?? artifacts/phi-os-integrated-r42/SCAM-SOURCE-ACCESS-RECONCILIATION.json",
+    "?? artifacts/phi-os-integrated-r42/correction-current-0.log",
+    "?? artifacts/phi-os-integrated-r42/correction-current-1.log",
+    "?? artifacts/phi-os-integrated-r42/correction-current-2.log",
+    "?? artifacts/phi-os-integrated-r42/correction-current-3.log",
+    "?? artifacts/phi-os-integrated-r42/correction-current-4.log",
+    "?? artifacts/phi-os-integrated-r42/correction-current-5.log",
+    "?? artifacts/phi-os-integrated-r42/correction-current-6.log",
+    "?? artifacts/phi-os-integrated-r42/correction-current-7.log",
+    "?? scripts/audit-integrated-r42-current-failures.mjs",
+    "?? scripts/audit-integrated-r42-owner-corrections.mjs"
   ],
   "providerCalls": 0,
   "productionDatabaseWrites": 0,

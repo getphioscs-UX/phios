@@ -1,0 +1,92 @@
+{
+  "at": "2026-10-16T03:01:29.468Z",
+  "verdict": "BUILD_READY_FOR_ONE_RELEASE_AUTHORIZATION",
+  "baseCommit": "df56c57b9272365d2e221406fd9cc9cdd8407235",
+  "sourceIdentity": "3bb4619dc2d7272a495baeb4daa139ae3ca0f50af602d6043842bda386a92cde",
+  "sourceWorktree": "C:\\Users\\Guest Account\\.codex\\worktrees\\pages-final-candidate\\phios",
+  "output": "C:\\Users\\Guest Account\\.codex\\worktrees\\pages-final-candidate\\phios/.pages-output",
+  "outputFiles": 11725,
+  "workerSha256": "eb2d310e4f90265afcdd6a7d137e5165ccc3ab376dfad219ceac126d17b2929a",
+  "routesSha256": "3a87caf0402e11632cb4fd51c8a081aa4a848bd78cd3b0c8cee11199d65f3381",
+  "configSha256": "468092ba45d6c21e8fa7f3442b5321ced85fd4e0a47fda014ed9932c9cdb8c59",
+  "outputManifestSha256": "fbe00167ee3bfe3fb59d642dba50a20f268d6b02268f5b0cf0b45e1324246f4a",
+  "node": "22.16.0",
+  "npm": "10.9.2",
+  "lockfileSha256": "51a2c52b8cb18f4e1b8254659d3bc1fbbd03b91ba8e1360ded610b15e9eddd9f",
+  "steps": [
+    {
+      "at": "2026-10-16T02:53:08.664Z",
+      "step": "ci",
+      "command": "npm ci --include=dev --include=optional --no-audit --no-fund",
+      "exitCode": 0,
+      "node": "v22.16.0",
+      "npm": "10.9.2",
+      "productionSecretsProvided": false
+    },
+    {
+      "at": "2026-10-16T02:54:40.025Z",
+      "step": "build:pages",
+      "command": "npm run build:pages",
+      "exitCode": 0,
+      "node": "v22.16.0",
+      "npm": "10.9.2",
+      "productionSecretsProvided": false
+    },
+    {
+      "at": "2026-10-16T02:56:05.126Z",
+      "step": "check:pages-build",
+      "command": "npm run check:pages-build",
+      "exitCode": 0,
+      "node": "v22.16.0",
+      "npm": "10.9.2",
+      "productionSecretsProvided": false
+    }
+  ],
+  "sourceMockChecks": 8,
+  "compiledArtifactChecks": 8,
+  "browserPages": {
+    "en": 4,
+    "zhHans": 4,
+    "state": "PASS_CRITICAL_LOCAL_RESOURCES"
+  },
+  "relevantInputsStable": true,
+  "configSidecar": "RELEASE-wrangler.jsonc",
+  "productionBindingsPreserved": true,
+  "productionConnections": 0,
+  "providerCalls": 0,
+  "payments": 0,
+  "deployment": "NOT_RUN",
+  "live": "NOT_RUN",
+  "businessClosed": [
+    "PHIOS_P9_CANARY_ENABLED=false",
+    "PHIOS_P9_CHECKOUT_ENABLED=false",
+    "PHIOS_P9_REFUND_ENABLED=false",
+    "REPORT_PROVIDER_LIVE_ALLOWED=false",
+    "PHIOS_D1_MAINTENANCE_MODE=READ_ONLY; mutation methods and D1 writes rejected, including Ask/current-reality POST, save, checkout and refund"
+  ],
+  "nonBlockingVisual": [
+    {
+      "issue": "Some public/lazy image loads not verified in short preview",
+      "count": 74,
+      "state": "NOT_VERIFIED_NOT_MISSING"
+    },
+    {
+      "issue": "Existing Book VI mobile label 当前 Runtime mixes languages",
+      "state": "FOLLOWUP_NOT_A_BUILD_BLOCKER"
+    }
+  ],
+  "remainingReleasePreconditions": [
+    "Explicit one-release authorization",
+    "Verify current Cloudflare shared production configuration before publishing, preserve bindings and existing non-secret public asset base",
+    "Confirm paired historical rollback target 8ceb88f8-27bc-432a-80d4-775765a41e0e remains available and compatible; no availability claim made",
+    "No checkout, model, D1 migration or commercial activation authorization included"
+  ],
+  "localNonSecretPreviewOverrides": {
+    "PHIOS_PUBLIC_ASSET_BASE_URL": "Existing registered public origin only; no API Token sent"
+  },
+  "initialFailuresPreserved": [
+    "SOURCE-CHECKS.json",
+    "BROWSER-ARTIFACT-INITIAL.json"
+  ],
+  "commitPushDeployDelete": 0
+}

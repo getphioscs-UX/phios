@@ -1,0 +1,20 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(publication.editorial.sections.every(s=>LOCALES.every(l=>s[l].insightCards.length===3)))
+
+    at file:///C:/phios/scripts/check-bazi-deep-manuscript-r2.mjs:63:362
+    at async check (file:///C:/phios/scripts/check-bazi-deep-manuscript-r2.mjs:19:45)
+    at async file:///C:/phios/scripts/check-bazi-deep-manuscript-r2.mjs:63:1 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.18.0
