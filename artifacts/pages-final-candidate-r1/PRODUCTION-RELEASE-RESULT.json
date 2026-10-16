@@ -1,0 +1,145 @@
+{
+  "at": "2026-10-16T03:39:39.537Z",
+  "status": "RELEASED_READONLY_PENDING_VISUAL_REVIEW",
+  "actualRelease": true,
+  "account": "0b9f36bdf56f38d7d09aebe388f15204",
+  "project": "phios-github",
+  "deploymentId": "48daeac7-ee93-4edf-8c9d-dae89d7ef7d1",
+  "canonicalId": "48daeac7-ee93-4edf-8c9d-dae89d7ef7d1",
+  "url": "https://getphios.com",
+  "newProductionDeploymentCount": 1,
+  "baseCommit": "df56c57b9272365d2e221406fd9cc9cdd8407235",
+  "commitDirty": true,
+  "sourceIdentity": "3bb4619dc2d7272a495baeb4daa139ae3ca0f50af602d6043842bda386a92cde",
+  "workerSha256": "eb2d310e4f90265afcdd6a7d137e5165ccc3ab376dfad219ceac126d17b2929a",
+  "configSha256": "468092ba45d6c21e8fa7f3442b5321ced85fd4e0a47fda014ed9932c9cdb8c59",
+  "outputManifestSha256": "fbe00167ee3bfe3fb59d642dba50a20f268d6b02268f5b0cf0b45e1324246f4a",
+  "sourceDiff": "CANDIDATE.diff",
+  "sourceWorktree": "C:\\Users\\Guest Account\\.codex\\worktrees\\pages-final-candidate\\phios",
+  "output": "C:\\Users\\Guest Account\\.codex\\worktrees\\pages-final-candidate\\phios/.pages-output",
+  "uploadExitCode": 0,
+  "pages": {
+    "tested": 10,
+    "locales": [
+      "en",
+      "zh-Hans"
+    ],
+    "widths": [
+      1280,
+      390
+    ],
+    "criticalPagePass": true,
+    "scriptErrors": 0,
+    "criticalAssetErrors": 0,
+    "overflowCount": 0,
+    "staticBytesMatch": 6,
+    "privateBoundaryChecks": [
+      {
+        "path": "/wrangler.jsonc",
+        "status": 404,
+        "contentType": "text/html; charset=utf-8",
+        "rawConfigOrSourceExposed": false,
+        "bodyRecorded": false
+      },
+      {
+        "path": "/.git/config",
+        "status": 404,
+        "contentType": "text/html; charset=utf-8",
+        "rawConfigOrSourceExposed": false,
+        "bodyRecorded": false
+      },
+      {
+        "path": "/functions/_middleware.js",
+        "status": 404,
+        "contentType": "text/html; charset=utf-8",
+        "rawConfigOrSourceExposed": false,
+        "bodyRecorded": false
+      },
+      {
+        "path": "/_worker.js",
+        "status": 404,
+        "contentType": "text/html; charset=utf-8",
+        "rawConfigOrSourceExposed": false,
+        "bodyRecorded": false
+      }
+    ]
+  },
+  "navigation": [
+    {
+      "locale": "en",
+      "width": 1280,
+      "url": "https://getphios.com/world/?view=reconfiguration&atlas=dossiers&intent=current&locale=en",
+      "title": "World — PHI OS",
+      "state": "PASS_ACTUAL_NAVIGATION"
+    },
+    {
+      "locale": "zh-Hans",
+      "width": 390,
+      "menuCandidates": 1,
+      "url": "https://getphios.com/world/?view=reconfiguration&atlas=dossiers&intent=current",
+      "title": "世界 — PHI OS",
+      "state": "PASS_ACTUAL_NAVIGATION"
+    }
+  ],
+  "protection": {
+    "flags": {
+      "PHIOS_D1_MAINTENANCE_MODE": "READ_ONLY",
+      "PHIOS_P9_CANARY_ENABLED": "false",
+      "PHIOS_P9_CHECKOUT_ENABLED": "false",
+      "PHIOS_P9_REFUND_ENABLED": "false",
+      "REPORT_PROVIDER_LIVE_ALLOWED": "false"
+    },
+    "flagPass": true,
+    "bindingsPreserved": true,
+    "autoProductionDeploymentEnabled": false,
+    "autoDeploySettingsUnchanged": true
+  },
+  "publicImages": {
+    "directHashDecodeVerified": 3,
+    "browserRendered": 13,
+    "worldHeroReadAndFullDecode": "HTTP_200_VERIFIED",
+    "real404Observed": 0,
+    "pendingCounts": {
+      "BROWSER_RENDERED": 13,
+      "NOT_VERIFIED": 55,
+      "NOT_TESTED_BOUNDED_SCOPE": 14,
+      "HTTP_200_RENDER_UNVERIFIED": 3,
+      "VERIFIED_BYTES_AND_DECODE": 3
+    },
+    "scope": "Limited reads only; untested/lazy/budget-blocked images are not declared missing or rendered"
+  },
+  "nonblocking": [
+    {
+      "id": "PUBLIC_ASSET_BASE_URL_UNAVAILABLE",
+      "impact": "public-asset-config returns503; some resolver-based visuals cannot be proven working",
+      "baseline": "Same503 observed on confirmed rollback deployment 8ceb88f8",
+      "action": "Separate configuration review; no Secret read or mutation performed"
+    },
+    {
+      "id": "AUTH_PROVIDER_CONFIGURED_FALSE",
+      "impact": "Unauthenticated session reports providerConfigured=false; no account flow acceptance claimed",
+      "baseline": "Same state on rollback deployment",
+      "action": "Preserve closed commercial/account scope; no Secret changes"
+    },
+    {
+      "id": "BOUNDED_REMOTE_IMAGE_REVIEW",
+      "impact": "remaining listed URLs not verified or render not proven",
+      "action": "Use LIVE-IMAGE-OUTCOMES.json; no automatic rollback for minor visuals"
+    }
+  ],
+  "rollback": {
+    "performed": false,
+    "reason": "No authorized severe regression observed",
+    "confirmedTarget": "8ceb88f8-27bc-432a-80d4-775765a41e0e",
+    "pairedProtectionVerified": true
+  },
+  "providerCalls": 0,
+  "paymentRefunds": 0,
+  "productionDataWrites": 0,
+  "migrations": 0,
+  "remoteDeletes": 0,
+  "commitPushMerge": 0,
+  "secretMutations": 0,
+  "automaticDeploySettingChanges": 0,
+  "stopAfterVerification": true
+}

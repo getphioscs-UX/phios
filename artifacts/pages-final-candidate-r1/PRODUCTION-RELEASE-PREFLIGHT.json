@@ -1,0 +1,120 @@
+{
+  "at": "2026-10-16T03:32:03.717Z",
+  "account": "0b9f36bdf56f38d7d09aebe388f15204",
+  "project": "phios-github",
+  "productionBranch": "main",
+  "canonical": {
+    "id": "8ceb88f8-27bc-432a-80d4-775765a41e0e",
+    "environment": "production",
+    "stage": {
+      "name": "deploy",
+      "started_on": null,
+      "ended_on": "2026-10-13T03:57:03.978259Z",
+      "status": "success"
+    }
+  },
+  "target": {
+    "id": "8ceb88f8-27bc-432a-80d4-775765a41e0e",
+    "environment": "production",
+    "stage": {
+      "name": "deploy",
+      "started_on": null,
+      "ended_on": "2026-10-13T03:57:03.978259Z",
+      "status": "success"
+    },
+    "createdOn": "2026-10-13T03:56:55.655285Z"
+  },
+  "currentProtection": {
+    "flags": {
+      "PHIOS_D1_MAINTENANCE_MODE": {
+        "type": "plain_text",
+        "value": "READ_ONLY"
+      },
+      "PHIOS_P9_CANARY_ENABLED": {
+        "type": "plain_text",
+        "value": "false"
+      },
+      "PHIOS_P9_CHECKOUT_ENABLED": {
+        "type": "plain_text",
+        "value": "false"
+      },
+      "PHIOS_P9_REFUND_ENABLED": {
+        "type": "plain_text",
+        "value": "false"
+      },
+      "REPORT_PROVIDER_LIVE_ALLOWED": {
+        "type": "plain_text",
+        "value": "false"
+      }
+    },
+    "d1": {
+      "RUNTIME_DB": {
+        "id": "073639fa-01e4-4868-af10-6ed032637dab"
+      }
+    },
+    "r2": {
+      "MANUSCRIPTS": {
+        "name": "phios-private-manuscripts"
+      },
+      "PRIVATE_REPORTS": {
+        "name": "phios-private-reports"
+      }
+    },
+    "services": {
+      "METHOD_REPORT_RENDERER": {
+        "service": "phios-method-report-renderer-production",
+        "environment": ""
+      }
+    },
+    "secretNamesOnly": [
+      "AUTH_CALLBACK_URL",
+      "AUTH_CLIENT_ID",
+      "AUTH_CLIENT_SECRET",
+      "AUTH_ISSUER",
+      "AUTH_LOGOUT_URL",
+      "AUTH_POST_LOGIN_URL",
+      "AUTH_PROVIDER",
+      "AUTH_SESSION_SECRET",
+      "AUTH_SESSION_SECRET_QA_RANDOM",
+      "DEEPSEEK_API_KEY",
+      "FINANCIAL_WILL_DRAFT_ENCRYPTION_KEY",
+      "ICHING_FULL_PRODUCTION_GUEST_SESSION_SECRET",
+      "ONET_WEB_SERVICES_API_KEY",
+      "OPENAI_API_KEY",
+      "PHIOS_ACCESS_AUD",
+      "PHIOS_ACCESS_TEAM_DOMAIN",
+      "PHIOS_D1_ISOLATION_PROBE_TOKEN",
+      "PHIOS_MANUSCRIPT_DERIVATIVE_QA",
+      "PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED",
+      "PHIOS_MANUSCRIPT_TEXT_SCOPE_QA",
+      "PHIOS_PUBLIC_ASSET_BASE_URL",
+      "STRIPE_SECRET_KEY"
+    ]
+  },
+  "rollbackProtection": {
+    "flags": {
+      "PHIOS_D1_MAINTENANCE_MODE": null,
+      "PHIOS_P9_CANARY_ENABLED": null,
+      "PHIOS_P9_CHECKOUT_ENABLED": null,
+      "PHIOS_P9_REFUND_ENABLED": null,
+      "REPORT_PROVIDER_LIVE_ALLOWED": null
+    },
+    "secretNamesOnly": []
+  },
+  "automaticDeploymentSettings": {
+    "production_branch": "main",
+    "deployments_enabled": true,
+    "production_deployments_enabled": false,
+    "preview_deployment_setting": "all",
+    "preview_branch_includes": [
+      "*"
+    ],
+    "preview_branch_excludes": []
+  },
+  "permissionOutput": "\n ⛅️ wrangler 4.120.0 (update available 4.151.0)\n───────────────────────────────────────────────\nGetting User settings...\n👋 You are logged in with an OAuth Token, associated with the email getphios.cs@gmail.com.\n🔐 Credentials are stored in: C:\\Users\\Guest Account\\AppData\\Roaming\\xdg.config\\.wrangler\\config\\default.toml\n┌─────────────────────────────────┬──────────────────────────────────┐\n│ Account Name                    │ Account ID                       │\n├─────────────────────────────────┼──────────────────────────────────┤\n│ Getphios.cs@gmail.com's Account │ 0b9f36bdf56f38d7d09aebe388f15204 │\n└─────────────────────────────────┴──────────────────────────────────┘\n🔓 Token Permissions:\nScope (Access)\n- user (read)\n- offline_access \n- account (read)\n- workers (write)\n- workers_kv (write)\n- workers_routes (write)\n- workers_scripts (write)\n- workers_tail (read)\n- d1 (write)\n- pages (write)\n- zone (read)\n- ssl_certs (write)\n- ai (write)\n- ai-search (write)\n- ai-search (run)\n- websearch.run \n- agent-memory (write)\n- queues (write)\n- pipelines (write)\n- secrets_store (write)\n- artifacts (write)\n- flagship (write)\n- containers (write)\n- cloudchamber (write)\n- connectivity (admin)\n- email_routing (write)\n- email_sending (write)\n- browser (write)\n- challenge-widgets.write \n",
+  "hashVerification": {
+    "files": 11725,
+    "changed": []
+  },
+  "mutation": 0
+}

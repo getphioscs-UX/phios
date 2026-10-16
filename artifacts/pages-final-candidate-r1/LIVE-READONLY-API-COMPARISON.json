@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-16T03:36:58.433Z",
+  "scope": "Only observed API symptoms compared with confirmed rollback deployment; not a historical audit",
+  "rows": [
+    {
+      "origin": "https://8ceb88f8.phios-github.pages.dev",
+      "path": "/api/public-asset-config",
+      "status": 503,
+      "summary": {
+        "code": "PUBLIC_ASSET_BASE_URL_UNAVAILABLE",
+        "deliveryState": "FAIL_CLOSED"
+      }
+    },
+    {
+      "origin": "https://8ceb88f8.phios-github.pages.dev",
+      "path": "/api/auth/session",
+      "status": 200,
+      "summary": {
+        "authenticated": false,
+        "providerConfigured": false
+      }
+    },
+    {
+      "origin": "https://getphios.com",
+      "path": "/api/public-asset-config",
+      "status": 503,
+      "summary": {
+        "code": "PUBLIC_ASSET_BASE_URL_UNAVAILABLE",
+        "deliveryState": "FAIL_CLOSED"
+      }
+    },
+    {
+      "origin": "https://getphios.com",
+      "path": "/api/auth/session",
+      "status": 200,
+      "summary": {
+        "authenticated": false,
+        "providerConfigured": false
+      }
+    }
+  ],
+  "writeRequests": 0
+}

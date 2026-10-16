@@ -1,3 +1,6 @@
+import crypto from 'node:crypto';
+import {assertCurrentConsolidatedSurface,consolidationSuccessor} from './lib/page-consolidation-successor-r1.mjs';
+import {parseHTML} from 'linkedom';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -11,7 +14,7 @@ const check=(id,fn)=>{if(phase!=='ALL'&&phase!==id)return;fn();console.log(`✓ 
 const redirects=read('_redirects').split(/\r?\n/).map(x=>x.trim()).filter(x=>x&&!x.startsWith('#')).map(x=>x.split(/\s+/));
 const redirectMap=new Map(redirects.map(([from,to,status])=>[from,{to,status}]));
 const routeFile=r=>r==='/'?'index.html':`${r.replace(/^\//,'').replace(/\/$/,'')}/index.html`;
-const cxPage=p=>{assert(exists(p),`${p} missing`);const h=read(p);assert.match(h,/data-cx-surface=/);assert.match(h,/data-cx-header/);assert.match(h,/data-cx-footer/);assert.match(h,/\/assets\/customer-ui\/js\/shell\.js/);assert.doesNotMatch(h,/\/assets\/css\/(?:public-experience|design\/|tokens\.css)/);assert.doesNotMatch(h,/data-public-header-placeholder|data-public-footer-placeholder|class="public-page"|puxr-/);return h};
+const cxPage=p=>{assert(exists(p),`${p} missing`);const h=read(p);if(h.includes('data-consolidation-target=')){const document=parseHTML(h).document;assert(assertCurrentConsolidatedSurface(document,p),'Unregistered consolidated redirect: '+p);const target=document.querySelector('[data-consolidation-target]').getAttribute('data-consolidation-target');assert(target.startsWith('/')&&!target.startsWith('//'),'Invalid consolidation destination: '+p);const successor=routeFile(target.split('#')[0].split('?')[0]);assert.notEqual(successor,p,'Consolidation redirect cycle: '+p);return cxPage(successor);}assert.match(h,/data-cx-surface=/);assert.match(h,/data-cx-header/);assert.match(h,/data-cx-footer/);assert.match(h,/\/assets\/customer-ui\/js\/shell\.js/);assert.doesNotMatch(h,/\/assets\/css\/(?:public-experience|design\/|tokens\.css)/);assert.doesNotMatch(h,/data-public-header-placeholder|data-public-footer-placeholder|class="public-page"|puxr-/);return h};
 const bilingual=h=>{assert.match(h,/data-cx-en=/);assert.match(h,/data-cx-zh=/)};
 
 check('R11',()=>{
@@ -31,7 +34,11 @@ check('R11',()=>{
   assert(hub.includes(`href="/perspectives/${method}/"`),`R11 reflective route missing ${method}`);
  }
  for(const diagram of ['diagram-01','diagram-02','diagram-03'])assert(hub.includes(`data-pv-diagram="${diagram}"`),`R11 reading diagram missing ${diagram}`);
- assert(!hub.includes('href="/perspectives/profile/"'),'Personal Evidence stays outside the primary product grid');
+ const hubDocument=parseHTML(hub).document;
+ for(const id of ['perspectives-module-2','perspectives-methods']){
+  const section=hubDocument.getElementById(id);assert(section,'R11 product section missing: '+id);
+  assert(!section.querySelector('a[href="/perspectives/profile/"]'),'Personal Evidence stays outside the primary product grid');
+ }
  assert(read('perspectives/personal/index.html').includes('href="/perspectives/profile/"'));
  for(const s of ['Measured / task-based','Self-reported','External profile','Symbolic / interpretive','Current Reality','Professional evidence'])assert(hub.includes(s)||rel.includes(s),`R11 source legend missing ${s}`);
  assert.match(rel,/Person A/);assert.match(rel,/Person B/);assert.doesNotMatch(rel,/compatibility\s*\d+%/i);assert.equal(a.boundaries.relationshipMeaningCreated,false);assert.equal(a.boundaries.profileScoringCreated,false);bilingual(hub);bilingual(rel);bilingual(prof);
@@ -74,7 +81,13 @@ check('R24',()=>{
  for(const p of ['perspectives/index.html','perspectives/relationship/index.html','professional/index.html','professional/authority/index.html','professional/reports/index.html','professional/services/index.html','professional/appointments/index.html','account/index.html','academy/index.html','academy/lesson/index.html'])assert.doesNotMatch(read(p),/fonts\.googleapis\.com|fonts\.gstatic\.com/);
 });
 check('R25',()=>{
- const a=json('content/customer-experience-rebuild/migration/customer-route-cutover-registry-v1.json');assert.equal(a.status,'CURRENT_CUTOVER_RECONCILED');for(const e of a.entries){const r=redirectMap.get(e.legacyPath);assert(r,`missing redirect ${e.legacyPath}`);assert.equal(r.status,'308',`${e.legacyPath} must be 308`);assert.equal(r.to,e.newPath,`${e.legacyPath} target drift`);assert(exists(e.successorFile),`successor missing ${e.successorFile}`)}
+ const a=json('content/customer-experience-rebuild/migration/customer-route-cutover-registry-v1.json');assert.equal(a.status,'CURRENT_CUTOVER_RECONCILED');for(const e of a.entries){const r=redirectMap.get(e.legacyPath);assert(r,`missing redirect ${e.legacyPath}`);assert.equal(r.status,'308',`${e.legacyPath} must be 308`);const consolidated=consolidationSuccessor()?.surfaces.find(item=>item.file===e.successorFile&&item.redirect);if(consolidated)assert(assertCurrentConsolidatedSurface(parseHTML(read(e.successorFile)).document,e.successorFile),'Consolidated route evidence missing: '+e.successorFile);let expectedTarget=consolidated?.redirect||e.newPath;if(['/explore.html','/about.html'].includes(e.legacyPath)){
+ const n=json('content/web/index-surfaces/pis-r1-world-about-navigation-successor-v2.json');assert.equal(n.status,'ENGINEERING_RECONCILIATION');
+ for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(n[key],false);
+ assert.equal(crypto.createHash('sha256').update(fs.readFileSync(n.predecessor.path)).digest('hex'),n.predecessor.sha256);
+ assert(n.primaryNavigation.some(item=>item.id==='about'&&item.href==='/about/founder/'));expectedTarget='/about/founder/';
+ assert(exists('about/founder/index.html'));assert.equal(redirectMap.get(e.newPath)?.to,expectedTarget);
+ }assert.equal(r.to,expectedTarget,`${e.legacyPath} target drift`);assert(exists(e.successorFile),`successor missing ${e.successorFile}`)}
 });
 check('R26',()=>{
  const a=json('content/customer-experience-rebuild/migration/cx-r26-legacy-presentation-retirement-successor-v1.json');for(const p of a.physicallyDeletedInBaseline)assert.equal(exists(p),false,`retired presentation restored: ${p}`);for(const p of a.compatibilityOnlyButMayStillExist){const legacy='/'+p;const r=redirectMap.get(legacy);assert(r&&r.status==='308',`compatibility page missing 308: ${legacy}`)}

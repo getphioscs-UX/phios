@@ -103,13 +103,25 @@ assert.equal(worldHandoff.predecessorSha256,digest(worldHandoff.predecessor));
 assert.equal(worldHandoff.humanDecision,'PENDING');
 for(const field of ['productionAdmissionChanged','acceptedBindingsChanged','canonicalTheoryChanged'])assert.equal(worldHandoff[field],false);
 assert.equal(worldHandoff.change.path,'world/index.html');
+const worldCurrent=json('content/civilization-atlas/maintenance/book-v-world-public-recovery-successor-v3.json');
+assert.equal(worldCurrent.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');assert.equal(worldCurrent.predecessor,'content/civilization-atlas/maintenance/book-v-world-public-recovery-successor-v2.json');assert.equal(worldCurrent.predecessorSha256,digest(worldCurrent.predecessor));
+assert.equal(worldCurrent.humanDecision,'PENDING');for(const field of ['productionAdmissionChanged','acceptedBindingsChanged','canonicalTheoryChanged'])assert.equal(worldCurrent[field],false);
+assert.equal(worldCurrent.change.path,worldHandoff.change.path);assert.equal(worldCurrent.change.previousPath,'content/civilization-atlas/maintenance/world-before-integrated-r42.html');
+assert.equal(worldCurrent.change.previousSha256,worldHandoff.change.successorSha256);assert.equal(digest(worldCurrent.change.previousPath),worldCurrent.change.previousSha256);
+assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(worldCurrent.change.changeClass));
 for(const entry of recovery.sourceEvidence){
  const change=worldHandoff.change.path===entry.path?worldHandoff.change:null;
  if(change)assert.equal(change.previousSha256,entry.sha256);
- assert.equal(digest(entry.path),change?.successorSha256||entry.sha256,'World recovery source evidence drift: '+entry.path);
+ const sourceChange=worldCurrent.sourceChanges.find(item=>item.path===entry.path);
+ if(sourceChange){assert.equal(sourceChange.previousSha256,entry.sha256);assert.equal(digest(sourceChange.previousPath),entry.sha256);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(sourceChange.changeClass));}
+ assert.equal(digest(entry.path),change?worldCurrent.change.successorSha256:sourceChange?.successorSha256||entry.sha256,'World recovery source evidence drift: '+entry.path);
 }
-const recoveryDigest=(p,prior)=>{const c=recovery.changes.find(c=>c.path===p);if(!c)return prior;assert.equal(c.previousSha256,prior,'World recovery predecessor drift: '+p);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(c.changeClass));return c.successorSha256;};
-const currentVisualDigest=c=>recoveryDigest(c.path,c.path===fr4.change.path?fr4.change.successorSha256:c.successorSha256);
+const recoveryDigest=(p,prior)=>{const c=recovery.changes.find(c=>c.path===p);let expected=prior;if(c){assert.equal(c.previousSha256,prior,'World recovery predecessor drift: '+p);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(c.changeClass));expected=c.successorSha256;}const next=worldCurrent.loaderChange;if(next.path===p){assert.equal(next.previousSha256,expected);assert.equal(digest(next.previousPath),expected);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(next.changeClass));expected=next.successorSha256;}return expected;};
+const currentVisualDigest=c=>{
+ const previous=recoveryDigest(c.path,c.path===fr4.change.path?fr4.change.successorSha256:c.successorSha256);
+ const change=worldCurrent.visualChange;if(change.path!==c.path)return previous;
+ assert.equal(change.previousSha256,previous);assert.equal(digest(change.previousPath),previous);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(change.changeClass));return change.successorSha256;
+};
 for(const change of ownerSuccessor.changes){
  const previous=change.path===activation.bindingSuccessor?activation.bindingSuccessorSha256:activation.changes.find(c=>c.path===change.path)?.successorSha256;
  assert.equal(change.previousSha256,previous);

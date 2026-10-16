@@ -1,0 +1,155 @@
+{
+  "at": "2026-10-16T03:32:36.056Z",
+  "deploymentKeys": [
+    "id",
+    "short_id",
+    "project_id",
+    "project_name",
+    "environment",
+    "url",
+    "created_on",
+    "modified_on",
+    "latest_stage",
+    "deployment_trigger",
+    "stages",
+    "build_config",
+    "source",
+    "env_vars",
+    "d1_databases",
+    "r2_buckets",
+    "services",
+    "ai_bindings",
+    "compatibility_date",
+    "compatibility_flags",
+    "build_image_major_version",
+    "usage_model",
+    "aliases",
+    "is_skipped",
+    "production_branch",
+    "files",
+    "uses_functions"
+  ],
+  "targetConfigLocation": "deployment top level",
+  "target": {
+    "plainFlags": {
+      "PHIOS_D1_MAINTENANCE_MODE": "READ_ONLY",
+      "PHIOS_ENVIRONMENT": "production",
+      "PHIOS_P9_CANARY_ENABLED": "false",
+      "PHIOS_P9_CHECKOUT_ENABLED": "false",
+      "PHIOS_P9_REFUND_ENABLED": "false",
+      "PHIOS_SHARED_PAID_REPORT_ENABLED": "true",
+      "REPORT_PROVIDER_LIVE_ALLOWED": "false",
+      "STRIPE_ENVIRONMENT": "LIVE"
+    },
+    "secretNamesOnly": [
+      "AUTH_CALLBACK_URL",
+      "AUTH_CLIENT_ID",
+      "AUTH_CLIENT_SECRET",
+      "AUTH_ISSUER",
+      "AUTH_LOGOUT_URL",
+      "AUTH_POST_LOGIN_URL",
+      "AUTH_PROVIDER",
+      "AUTH_SESSION_SECRET",
+      "AUTH_SESSION_SECRET_QA_RANDOM",
+      "DEEPSEEK_API_KEY",
+      "FINANCIAL_WILL_DRAFT_ENCRYPTION_KEY",
+      "ICHING_FULL_PRODUCTION_GUEST_SESSION_SECRET",
+      "ONET_WEB_SERVICES_API_KEY",
+      "OPENAI_API_KEY",
+      "PHIOS_ACCESS_AUD",
+      "PHIOS_ACCESS_TEAM_DOMAIN",
+      "PHIOS_D1_ISOLATION_PROBE_TOKEN",
+      "PHIOS_MANUSCRIPT_DERIVATIVE_QA",
+      "PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED",
+      "PHIOS_MANUSCRIPT_TEXT_SCOPE_QA",
+      "PHIOS_PUBLIC_ASSET_BASE_URL",
+      "STRIPE_SECRET_KEY"
+    ],
+    "d1": {
+      "RUNTIME_DB": {
+        "id": "073639fa-01e4-4868-af10-6ed032637dab"
+      }
+    },
+    "r2": {
+      "MANUSCRIPTS": {
+        "name": "phios-private-manuscripts"
+      },
+      "PRIVATE_REPORTS": {
+        "name": "phios-private-reports"
+      }
+    },
+    "services": {
+      "METHOD_REPORT_RENDERER": {
+        "service": "phios-method-report-renderer-production",
+        "environment": ""
+      }
+    },
+    "ai": {
+      "AI": {}
+    }
+  },
+  "current": {
+    "plainFlags": {
+      "PHIOS_D1_MAINTENANCE_MODE": "READ_ONLY",
+      "PHIOS_ENVIRONMENT": "production",
+      "PHIOS_P9_CANARY_ENABLED": "false",
+      "PHIOS_P9_CHECKOUT_ENABLED": "false",
+      "PHIOS_P9_REFUND_ENABLED": "false",
+      "PHIOS_SHARED_PAID_REPORT_ENABLED": "true",
+      "REPORT_PROVIDER_LIVE_ALLOWED": "false",
+      "STRIPE_ENVIRONMENT": "LIVE"
+    },
+    "secretNamesOnly": [
+      "AUTH_CALLBACK_URL",
+      "AUTH_CLIENT_ID",
+      "AUTH_CLIENT_SECRET",
+      "AUTH_ISSUER",
+      "AUTH_LOGOUT_URL",
+      "AUTH_POST_LOGIN_URL",
+      "AUTH_PROVIDER",
+      "AUTH_SESSION_SECRET",
+      "AUTH_SESSION_SECRET_QA_RANDOM",
+      "DEEPSEEK_API_KEY",
+      "FINANCIAL_WILL_DRAFT_ENCRYPTION_KEY",
+      "ICHING_FULL_PRODUCTION_GUEST_SESSION_SECRET",
+      "ONET_WEB_SERVICES_API_KEY",
+      "OPENAI_API_KEY",
+      "PHIOS_ACCESS_AUD",
+      "PHIOS_ACCESS_TEAM_DOMAIN",
+      "PHIOS_D1_ISOLATION_PROBE_TOKEN",
+      "PHIOS_MANUSCRIPT_DERIVATIVE_QA",
+      "PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED",
+      "PHIOS_MANUSCRIPT_TEXT_SCOPE_QA",
+      "PHIOS_PUBLIC_ASSET_BASE_URL",
+      "STRIPE_SECRET_KEY"
+    ],
+    "d1": {
+      "RUNTIME_DB": {
+        "id": "073639fa-01e4-4868-af10-6ed032637dab"
+      }
+    },
+    "r2": {
+      "MANUSCRIPTS": {
+        "name": "phios-private-manuscripts"
+      },
+      "PRIVATE_REPORTS": {
+        "name": "phios-private-reports"
+      }
+    },
+    "services": {
+      "METHOD_REPORT_RENDERER": {
+        "service": "phios-method-report-renderer-production",
+        "environment": ""
+      }
+    },
+    "ai": {
+      "AI": {}
+    }
+  },
+  "rollbackFieldKeys": [
+    "aliases",
+    "production_branch"
+  ],
+  "rollbackEligibility": "CURRENT_SUCCESSFUL_PRODUCTION_CANONICAL_TARGET",
+  "productionBranch": "main"
+}
