@@ -28,7 +28,18 @@ for(const method of ['PROFILE','FINANCIAL','WILL']){
  for(const mode of ['EN','ZH_HANS'])assert.throws(()=>assertMethodPresentationMode(method,mode));
 }
 const protectedBaseline=json('docs/reports/delivery-r4/ACCEPTED-SOURCE-BASELINE.json');
-for(const [path,hash] of Object.entries(protectedBaseline.files))assert.equal(createHash('sha256').update(fs.readFileSync(path)).digest('hex'),hash,'Accepted/historical source changed: '+path);
+const preserved=json('docs/reports/delivery-r4/accepted-source-output-preservation-v1.json');
+const digest=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+assert.equal(preserved.status,'ENGINEERING_EVIDENCE_PRESERVATION');
+assert.equal(preserved.predecessor.path,'docs/reports/delivery-r4/ACCEPTED-SOURCE-BASELINE.json');
+assert.equal(digest(preserved.predecessor.path),preserved.predecessor.sha256);
+for(const key of ['historicalBaselineRewritten','currentFailurePromotedToPass','productionAdmissionGranted'])assert.equal(preserved[key],false);
+assert.deepEqual(preserved.entries.map(e=>e.path),['docs/acceptance/bazi-paid-report/deep-manuscript-r2/FINAL-CLOSURE-CHECK-all.json']);
+for(const [path,hash] of Object.entries(protectedBaseline.files)){
+ const entry=preserved.entries.find(e=>e.path===path);
+ if(entry){assert.equal(entry.sha256,hash);assert.equal(entry.historicalPath,'docs/reports/delivery-r4/history/FINAL-CLOSURE-CHECK-all.accepted-baseline.json');}
+ assert.equal(digest(entry?.historicalPath||path),hash,'Accepted/historical source changed: '+path);
+}
 for(const entry of registry.methods){
  const delta=json(entry.receiptRef);
  assert.equal(delta.methodCode,entry.methodCode);assert.equal(delta.fullSharedE2ERepeated,false);

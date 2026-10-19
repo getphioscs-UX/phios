@@ -142,6 +142,19 @@ const w4Hashes = {
   'scripts/check-exp-w4-reconstruction-customer-projection.mjs': 'bdcc9b5076ec920430a6054cecabd865f779ddc6910f129eee50980e0283a091'
 };
 for (const [file, expected] of Object.entries(w4Hashes)) {
+  if (file === 'reality-reconstruction.html') {
+    const source = (await read(file)).replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
+    const bootstrap = '<head><script src="/assets/js/locale-bootstrap.js"></script>';
+    if (source.includes(bootstrap)) {
+      // d94bd482 adds only the shared locale bootstrap to the frozen W4 page.
+      // Reconstruct and verify the predecessor so unrelated edits still fail.
+      assert.equal(source.split(bootstrap).length, 2, 'EXP-W4 locale bootstrap must occur once');
+      assert.equal(await exists('assets/js/locale-bootstrap.js'), true);
+      assert.equal(crypto.createHash('sha256').update(source.replace(bootstrap, '<head>')).digest('hex'),
+        expected, `EXP-W4 regression beyond locale bootstrap: ${file}`);
+      continue;
+    }
+  }
   assert.equal(await sha256(file), expected, `EXP-W4 regression detected: ${file}`);
 }
 

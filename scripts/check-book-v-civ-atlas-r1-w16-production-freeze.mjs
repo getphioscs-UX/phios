@@ -326,14 +326,25 @@ assert.equal(currentEngineering.predecessorFreezeSha256,digest(currentEngineerin
 assert.equal(currentEngineering.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');
 assert.equal(currentEngineering.productionAdmissionChanged,false);
 assert.equal(currentEngineering.humanDecision,'PENDING');
+const engineeringNext=json('content/civilization-atlas/maintenance/book-v-civ-atlas-current-engineering-successor-v2.json');
+assert.equal(engineeringNext.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');
+assert.equal(engineeringNext.predecessor,'content/civilization-atlas/maintenance/book-v-civ-atlas-current-engineering-successor-v1.json');
+assert.equal(engineeringNext.predecessorSha256,digest(engineeringNext.predecessor));
+assert.equal(engineeringNext.humanDecision,'PENDING');
+for(const key of ['productionAdmissionChanged','historicalFreezeRewritten','canonicalTheoryChanged'])assert.equal(engineeringNext[key],false);
+assert.equal(new Set(engineeringNext.changes.map(c=>c.path)).size,engineeringNext.changes.length);
+for(const change of engineeringNext.changes)assert(currentEngineering.changes.some(c=>c.path===change.path),'Engineering extension outside predecessor scope: '+change.path);
 for(const change of currentEngineering.changes){
   const original=freeze.frozenFiles.find(f=>f.path===change.path);
   assert.ok(original,`Engineering successor outside frozen scope: ${change.path}`);
   assert.equal(change.frozenSha256,original.sha256);
   assert.equal(change.previousSha256,authorizedMaintenance.get(change.path)?.successorSha256||original.sha256);
   assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(change.changeClass));
-  assert.equal(digest(change.path),recoveryDigest(change.path,change.successorSha256),`Current Atlas engineering drift: ${change.path}`);
-  authorizedMaintenance.set(change.path,{...change,previousSha256:original.sha256,successorSha256:recoveryDigest(change.path,change.successorSha256)});
+  let expected=recoveryDigest(change.path,change.successorSha256);
+  const next=engineeringNext.changes.find(c=>c.path===change.path);
+  if(next){assert.equal(next.previousSha256,expected);assert.equal(digest(next.previousPath),expected);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(next.changeClass));expected=next.successorSha256;}
+  assert.equal(digest(change.path),expected,`Current Atlas engineering drift: ${change.path}`);
+  authorizedMaintenance.set(change.path,{...change,previousSha256:original.sha256,successorSha256:expected});
 }
 await import('./check-civilization-atlas-fr4-visual-utilization.mjs');
 await import('./check-civilization-atlas-fr5-core-case-semantics.mjs');

@@ -1,0 +1,35 @@
+{
+  "status": "ENGINEERING_HISTORICAL_EVIDENCE_RECONCILIATION",
+  "predecessor": {
+    "path": "docs/acceptance/bazi-paid-report/deep-manuscript-r2/FINAL-CLOSURE-PROTECTED-BASELINE.json",
+    "sha256": "006836ab5b06d5837f3fad91e4b7d5f06c71dd6a6048ab6be8a9352738c5b672"
+  },
+  "historicalEvidenceRewritten": false,
+  "productionAdmissionGranted": false,
+  "currentRendererFitGranted": false,
+  "providerCallsAuthorized": false,
+  "entries": [
+    {
+      "path": "config/reports/bazi-deep-manuscript-r2/policy.json",
+      "historicalPath": "docs/acceptance/bazi-paid-report/deep-manuscript-r2/history-final-closure/policy.json",
+      "historicalSha256": "54dcec66bd64172ffe36dd489710879f773bec31e0813d9b6f1efe590226c8c3",
+      "currentSha256": "ffe9db4ae520776c196f2a042c8593ab10a85ccb6ac69742b3a49d191826eb53",
+      "scope": "Human acceptance receipt and production admission pointers; all policy values and disabled live/production flags preserved"
+    },
+    {
+      "path": "assets/customer-ui/surfaces/bazi-deep-manuscript-r2.css",
+      "historicalPath": "docs/acceptance/bazi-paid-report/deep-manuscript-r2/history-final-closure/renderer.css",
+      "historicalSha256": "6c0f377cacfa94c938a8adb51031920ec16f895d91ff75200e8afb058dc29d13",
+      "currentSha256": "c580ac951a8f96279e968246e86e27b76fc7ca5a2e8d6815e342a9a2c4234f5b",
+      "cssDelta": "\n/* P7R2: measured P10 footer clearance; recover 2px of D04 whitespace only. */\n.bdm-report .bdm-page[data-page-number=\"10\"] .bdm-compact-diagram[data-diagram-id=\"D04\"]{margin-bottom:calc(3mm - 2px)}\n",
+      "scope": "P7R2 page 10 D04 bottom margin reduces whitespace by 2px; fit receipts prove exact historical CSS only"
+    },
+    {
+      "path": "functions/personal-reading/publication-fit/bazi-publication-fit-gate.js",
+      "historicalPath": "docs/acceptance/bazi-paid-report/deep-manuscript-r2/history-final-closure/fit-gate.js",
+      "historicalSha256": "4535651c5cad7f645d3f186feb9dac9b3a4a6804bc43baa3db6136f88fd2f3d3",
+      "currentSha256": "0b8361afbf19aa893674d132d30211ae6c3fe3ed1b1eaa39aa378c16a52f64f1",
+      "scope": "P7R3F publication-IR-relative topology checks replace fixed Geng reference; historical fit receipts retain exact original fit-gate version; current browser acceptance not granted"
+    }
+  ]
+}

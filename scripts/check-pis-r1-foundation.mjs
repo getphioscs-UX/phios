@@ -1,3 +1,4 @@
+import {consolidationSuccessor,assertCurrentConsolidatedSurface} from './lib/page-consolidation-successor-r1.mjs';
 import {pisCurrentSurfaceSuccessor,assertPisCurrentSurface} from './lib/pis-current-surface-successor.mjs';
 import './check-founder-publication-r1.mjs';
 import fs from 'node:fs';
@@ -12,14 +13,20 @@ assert.equal(baseline.sourceZip.sha256,null);
 assert.equal(sha(baseline.plan.path),baseline.plan.sha256);
 for(const authority of baseline.routeAuthorities){
   if(authority.path==='_redirects'){
-    // Existing Book VI route migration (8dc34301), independent of PIS copy.
-    // Reconstruct exact predecessor bytes; no other redirect drift is allowed.
-    let current=fs.readFileSync(authority.path,'utf8');
-    for(const line of ['/books/reality-configuration/ /books/reality-reconfiguration/ 308','/books/reality-configuration /books/reality-reconfiguration/ 308']){
-      assert.equal(current.split(line+'\n').length,2,'Expected one governed Book VI redirect');
-      current=current.replace(line+'\n','');
+    const routeSuccessor=read('content/web/index-surfaces/pis-r1-current-route-successor-v2.json');
+    assert.equal(routeSuccessor.status,'ENGINEERING_RECONCILIATION');assert.equal(routeSuccessor.path,authority.path);
+    assert.equal(routeSuccessor.predecessor.path,'docs/public-index-successor/pis-r1-w0-baseline-audit-v1.json');assert.equal(sha(routeSuccessor.predecessor.path),routeSuccessor.predecessor.sha256);
+    for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(routeSuccessor[key],false);
+    assert.equal(routeSuccessor.previousSha256,authority.sha256);assert.equal(sha(routeSuccessor.previousPath),authority.sha256);
+    assert.equal(sha(authority.path),routeSuccessor.sha256,'PIS current registered route digest drift');
+    const parseRoutes=source=>new Map(source.split(/\r?\n/).map(line=>line.trim()).filter(line=>line&&!line.startsWith('#')).map(line=>{const [from,to,status]=line.split(/\s+/);return [from,{to,status}];}));
+    const before=parseRoutes(fs.readFileSync(routeSuccessor.previousPath,'utf8')),current=parseRoutes(fs.readFileSync(authority.path,'utf8'));
+    const delta=[...new Set([...before.keys(),...current.keys()])].filter(from=>JSON.stringify(before.get(from))!==JSON.stringify(current.get(from))).map(from=>({from,previous:before.get(from)||null,current:current.get(from)||null}));
+    assert.deepEqual(delta,routeSuccessor.changes,'PIS redirect changes exceed registered migration');assert.equal(delta.length,23);
+    for(const change of delta){assert.equal(change.current?.status,'308');const [destination,anchor]=change.current.to.split('#');assert.ok(destination.startsWith('/')&&!destination.startsWith('//'));
+      const file=destination.endsWith('/')?destination.slice(1)+'index.html':destination.slice(1);assert.ok(fs.existsSync(file),'Redirect destination missing: '+destination);
+      if(anchor)assert.ok(parseHTML(fs.readFileSync(file,'utf8')).document.getElementById(anchor),'Redirect fragment missing: '+change.current.to);
     }
-    assert.equal(crypto.createHash('sha256').update(current).digest('hex'),authority.sha256,'PIS route predecessor drift beyond Book VI aliases');
     assert.ok(fs.existsSync('books/reality-reconfiguration/index.html'));
   }else assert.equal(sha(authority.path),authority.sha256,'PIS must not silently change route authority');
 }
@@ -42,11 +49,21 @@ assert.equal(Object.keys(copy.pages).length,29);
 for(const [file,sections] of Object.entries(copy.pages)){
  const source=fs.readFileSync(file,'utf8');
  const {document}=parseHTML(source);
+ if(file==='explore/index.html'&&source.includes('/assets/js/explore-about-compat.js')){
+  const {historicalPisBytes}=await import('./lib/page-consolidation-successor-r1.mjs');historicalPisBytes(file);
+  assert.equal(document.querySelector('link[rel="canonical"]')?.getAttribute('href'),'https://www.getphios.com/about/founder/');
+  assert.equal(document.querySelector('a')?.getAttribute('href'),'/about/founder/');
+  const destination=parseHTML(fs.readFileSync('about/founder/index.html','utf8')).document;
+  for(const anchor of ['why','how','start','faq'])assert(destination.getElementById(anchor),'About destination anchor missing: '+anchor);
+  continue;
+ }
+ if(document.querySelector('[data-consolidation-target]')){assert(assertCurrentConsolidatedSurface(document,file),'Unregistered redirect surface: '+file);continue;}
  assert.equal(document.querySelectorAll('h1').length,1,`${file}: one h1`);
  const current=successor.surfaces.find(s=>s.file===file);
  assertPisCurrentSurface(document,current);
- assert.equal(document.querySelectorAll('.pis-editorial:not(.pis-visual-story)').length,current?.editorialReplaced?0:sections.length+(current?.additionalEditorial.length||0),file+': editorial scope');
- assert.ok(document.querySelector(`script[src="${current?.copyRuntime||'/assets/customer-ui/js/public-index-copy.js'}"]`));
+ const consolidated=consolidationSuccessor()?.surfaces.some(item=>item.file===file);
+ if(!consolidated)assert.equal(document.querySelectorAll('.pis-editorial:not(.pis-visual-story)').length,current?.editorialReplaced?0:sections.length+(current?.additionalEditorial.length||0),file+': editorial scope');
+ if(!consolidated)assert.ok(document.querySelector(`script[src="${current?.copyRuntime||'/assets/customer-ui/js/public-index-copy.js'}"]`));
  for(const section of sections){
   assert.ok(section.body.en.length>120&&section.body.zh.length>40);
   assert.ok(!/\b(registry|resolver|cutover|successor|fixture|checker|canonical)\b/i.test(section.body.en));

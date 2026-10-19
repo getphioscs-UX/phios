@@ -52,10 +52,26 @@ assert.equal(subscription.checkout_enabled, false);
 assert.equal(subscription.payment_credentials_collected, false);
 assert.equal(proposeSubscriptionChange(subscription, 'upgrade', 'navigator').applied, false);
 
+const membershipAsk = membershipPage.includes('data-membership-credit-preview');
+if (membershipAsk) {
+  // Current Ask/Credits presentation does not advertise the historical four-tier preview.
+  // Keep the contract assertions above; verify the current consumer independently.
+  for (const key of ['monthly', 'cancel', 'failed', 'entitlements', 'boundary']) {
+    assert.ok(membershipPage.includes(`membershipPublic.${key}`), `Membership boundary key missing: ${key}`);
+  }
+  assert.ok(membershipPage.includes('src="/assets/js/pages/membership-ask-credit-r1.js"'));
+  assert.ok(membershipPage.includes('href="/account/"'));
+  const client = await read('assets/js/pages/membership-ask-credit-r1.js');
+  assert.ok(client.includes("let scope='CLOSED'"), 'Membership execution defaults closed');
+  assert.ok(client.includes('execute.disabled=true'), 'Membership execution starts disabled');
+  assert.ok(client.includes("scope=b.executionScope||'CLOSED'"), 'Execution scope comes from server');
+  assert.ok(client.includes('!lastPreview||!confirm.checked'), 'Execution requires preview and explicit confirmation');
+  assert.ok(client.includes("fetcher('/api/membership-ask'"), 'Membership uses server access checks');
+}
 for (const [page, keys] of [
   [accountPage, ['registration', 'login', 'verification', 'reset', 'profile', 'privacy', 'deletion']],
   [realityPage, ['current', 'past', 'reports', 'books', 'progress', 'appointments', 'shared']],
-  [membershipPage, ['explorer', 'reader', 'navigator', 'professional', 'monthly', 'annual']]
+  [membershipPage, membershipAsk ? [] : ['explorer', 'reader', 'navigator', 'professional', 'monthly', 'annual']]
 ]) {
   for (const key of keys) assert.ok(page.includes(`.${key}`), `Page key missing: ${key}`);
   assert.equal(/\bfetch\s*\(/.test(page), false);
