@@ -1,11 +1,13 @@
+import {buildFinancialPreparationPackage,PREPARATION_SCOPES} from '../../financial/professional-review/financial-preparation-package.js';
 import {grantOwner,requireFinancialGrant} from '../consent/financial-purpose-grants.js';
 import {loadOwnedDraft} from '../../account/financial-will-draft-store.js';
 import {loadAuthorisedProfessionalWorkspace} from './authorised-professional-data-loader.js';
 import {sha256Hex} from '../../document-assembly/digest.js';
 const fail=code=>{throw Object.assign(new Error(code),{code,status:403});};
-export async function customerFinancialPacket(context,{savedDraftRef,scopes}){
- const owner=grantOwner(context);if(savedDraftRef?.ownerRef!==owner||!Array.isArray(scopes)||!scopes.length||scopes.some(s=>!['assets','liabilities','guarantees'].includes(s)))fail('HANDOFF_SCOPE_INVALID');
+export async function customerFinancialPacket(context,{savedDraftRef,scopes,packetOptions}){
+ const owner=grantOwner(context);if(savedDraftRef?.ownerRef!==owner||!Array.isArray(scopes)||!scopes.length||scopes.some(s=>!['assets','liabilities','guarantees',...PREPARATION_SCOPES].includes(s)))fail('HANDOFF_SCOPE_INVALID');
  const source=await loadOwnedDraft(context,{draftId:savedDraftRef.draftId,version:savedDraftRef.version,expectedRef:savedDraftRef,kind:'FINANCIAL'});
+ if(scopes.some(s=>PREPARATION_SCOPES.includes(s))){const preparation=await buildFinancialPreparationPackage(context,{source,scopes,packetOptions});return {source:source.savedDraftRef,scopes,preparation,packetDigest:preparation.packageDigest,state:'CUSTOMER_PREVIEW_ONLY',externalSend:false};}
  const packet={source:source.savedDraftRef,scopes,sections:Object.fromEntries(scopes.map(s=>[s,source.payload.inventory?.[s]||[]])),state:'CUSTOMER_PREVIEW_ONLY',appointmentState:'NOT_REQUESTED',assignmentCreated:false,externalSend:false};return {...packet,packetDigest:sha256Hex(packet)};
 }
 // The caller supplies no identity, eligibility or assignment decision. Those must
@@ -23,7 +25,10 @@ export async function readProfessionalFinancialPacket(context,{savedDraftRef,gra
   // Revocation is re-read immediately before any payload is decrypted.
   await requireFinancialGrant(delegated,{grantId,source:savedDraftRef,purpose:'PROFESSIONAL_REVIEW',scopes});
   const source=await loadOwnedDraft(delegated,{draftId:savedDraftRef.draftId,version:savedDraftRef.version,expectedRef:savedDraftRef,kind:'FINANCIAL'});
-  context.data.assertProfessionalSubjectScopes?.(source.payload.inventory,scopes);
-  return {client:{reference:source.savedDraftRef.subjectRef},resources:{previous_reports:{source:source.savedDraftRef,sections:Object.fromEntries(scopes.map(s=>[s,source.payload.inventory?.[s]||[]]))}}};
+  let preparation=null;if(scopes.some(s=>PREPARATION_SCOPES.includes(s))){
+   const bindingRow=await context.env.RUNTIME_DB.prepare('SELECT binding_json,binding_digest FROM financial_preparation_grant_bindings WHERE grant_id=?').bind(grantId).first();if(!bindingRow)fail('PREPARATION_BINDING_REQUIRED');const binding=JSON.parse(bindingRow.binding_json);if(sha256Hex(binding)!==bindingRow.binding_digest||binding.savedDraftRef.contentDigest!==savedDraftRef.contentDigest||binding.recipientRef!==authorized.professional_id||binding.jurisdictionScope!==jurisdictionScope||binding.serviceScope!==serviceScope||JSON.stringify(binding.scopes)!==JSON.stringify(scopes))fail('PREPARATION_BINDING_MISMATCH');
+   preparation=await buildFinancialPreparationPackage(delegated,{source,scopes,packetOptions:binding.packetOptions,subjectGuard:context.data.assertProfessionalSubjectScopes});if(preparation.packageDigest!==binding.packageDigest)fail('PREPARATION_PACKAGE_DRIFT');
+  }else context.data.assertProfessionalSubjectScopes?.(source.payload.inventory,scopes);
+  return {client:{reference:source.savedDraftRef.subjectRef},resources:{previous_reports:{source:source.savedDraftRef,sections:Object.fromEntries(scopes.filter(s=>!PREPARATION_SCOPES.includes(s)).map(s=>[s,source.payload.inventory?.[s]||[]])),...(preparation?{preparation}:{})}}};
  }},{now:new Date().toISOString()});
 }

@@ -266,7 +266,36 @@ for (const protectedPath of fixture.protectedPaths) {
         const pending = read('docs/design-system/pds-w0-navigation-batch06-topology-candidate-v2.json');
         assert.equal(pending.status, 'PENDING_EXPLICIT_TOPOLOGY_ACCEPTANCE');
         assert.equal(pending.productionActivation, false);
-        assert.deepEqual(pendingPaths.sort(), pending.entries.map(entry => entry.path).sort(), 'PDS_W0_UNREGISTERED_RUNTIME_ADDITION');
+        const financialCandidatePath='docs/design-system/pds-w0-financial-factual-transport-topology-candidate-v1.json';
+        const financialCandidate=read(financialCandidatePath);
+        const financialAdmission=read('docs/design-system/pds-w0-financial-factual-transport-successor-v1.json');
+        const financialCandidateHash=crypto.createHash('sha256').update(fs.readFileSync(path.join(root,financialCandidatePath))).digest('hex');
+        assert.equal(financialCandidateHash,'60f2c4bb2806d0fabc45dee16f7aa880cb5637ecd26b2b81ab73a4476939f5bc');
+        assert.equal(financialCandidate.status,'PENDING_EXPLICIT_TOPOLOGY_ACCEPTANCE');
+        assert.equal(financialCandidate.changeClass,'explicit-contract-version-upgrade');
+        assert.equal(financialAdmission.status,'EXPLICIT_OWNER_ACCEPTED_ADDITIVE_SOURCE_TOPOLOGY');
+        assert.equal(financialAdmission.predecessorSuccessor,'docs/design-system/pds-w0-navigation-batch06-successor-v2.json');
+        assert.equal(financialAdmission.candidatePath,financialCandidatePath);
+        assert.equal(financialAdmission.candidateSHA256,financialCandidateHash);
+        assert.deepEqual(financialCandidate.entries.map(entry=>entry.path),['functions/runtime/reading/providers/financial-factual-transport.js']);
+        assert.equal(financialAdmission.receiptPath,'docs/design-system/pds-w0-financial-factual-transport-human-accept-v1.json');
+        assert.equal(canonicalTextSha256(financialAdmission.receiptPath),financialAdmission.receiptSHA256);
+        const financialReceipt=read(financialAdmission.receiptPath);
+        assert.equal(financialReceipt.authority,'DIRECT_OWNER_MESSAGE');
+        assert.equal(financialReceipt.verbatim,'接受 financial-factual-transport 单文件拓扑候选，不授权 provider 调用、付费或部署');
+        assert.equal(financialReceipt.candidateID,financialCandidate.candidateID);
+        assert.equal(financialReceipt.candidatePath,financialCandidatePath);
+        assert.equal(financialReceipt.candidateSHA256,financialCandidateHash);
+        for(const record of [financialAdmission,financialReceipt]){
+          assert.deepEqual(record.acceptedEntries||record.entries,financialCandidate.entries);
+          for(const flag of ['productionActivation','providerCallsAuthorized','paymentsAuthorized','deploymentAuthorized'])assert.equal(record[flag],false);
+        }
+        for(const flag of ['remoteMigrationAuthorized','commitOrPushAuthorized'])assert.equal(financialReceipt[flag],false);
+        for(const entry of financialCandidate.entries){
+          assert.equal(canonicalTextSha256(entry.path),entry.sha256,`PDS_W0_FINANCIAL_SOURCE_DRIFT:${entry.path}`);
+          assert.equal(canonicalTextGitBlobSha(entry.path),entry.gitBlobSha,`PDS_W0_FINANCIAL_BLOB_DRIFT:${entry.path}`);
+        }
+        assert.deepEqual(pendingPaths.sort(), [...pending.entries,...financialCandidate.entries].map(entry => entry.path).sort(), 'PDS_W0_UNREGISTERED_RUNTIME_ADDITION');
         for (const entry of pending.entries) {
           assert.equal(canonicalTextSha256(entry.path), entry.sha256, `PDS_W0_PENDING_RUNTIME_SOURCE_DRIFT:${entry.path}`);
           assert.equal(canonicalTextGitBlobSha(entry.path), entry.gitBlobSha, `PDS_W0_PENDING_RUNTIME_BLOB_DRIFT:${entry.path}`);

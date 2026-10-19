@@ -20,10 +20,10 @@ const freeze=read('content/health/health-reality-runtime/freeze/hrx-w35-health-r
 assert.equal(acceptance.baselineCommit,'cf87fbffa44cf41fa25681c560b49963d204b82d');
 assert.equal(acceptance.completed.length,13);
 const now=Date.parse('2026-08-24T02:00:00Z');
-const mockFetch=async()=>new Response('<html><body>Official health topic</body></html>',{status:200,headers:{'content-type':'text/html','etag':'"v1"','last-modified':'Sun, 23 Aug 2026 00:00:00 GMT'}});
-const live=await retrieveApprovedHealthSource({sourceId:'WHO-TEST-1',authorityId:'WHO',url:'https://www.who.int/health-topics',title:'Health topics',locale:'en',claimTypes:['PUBLIC_HEALTH']},{fetchImpl:mockFetch,registry,now});
+const mockFetch=async()=>new Response('<html><body><p>Official health topic with supported public information.</p></body></html>',{status:200,headers:{'content-type':'text/html','etag':'"v1"','last-modified':'Sun, 23 Aug 2026 00:00:00 GMT'}});
+const live=await retrieveApprovedHealthSource({sourceId:'WHO-TEST-1',authorityId:'WHO',url:'https://www.who.int/health-topics',title:'Health topics',locale:'en',claimTypes:['PUBLIC_HEALTH']},{enabled:true,fetchImpl:mockFetch,registry,now});
 assert.equal(live.ok,true);assert.equal(live.state,'ADMITTED_LIVE_SOURCE');assert.match(live.source.contentDigest,/^sha256:[a-f0-9]{64}$/);assert.equal(live.governance.rawSourceBodyPersisted,false);
-await assert.rejects(()=>retrieveApprovedHealthSource({sourceId:'BAD',authorityId:'WHO',url:'http://www.who.int/health-topics',title:'x',locale:'en',claimTypes:['PUBLIC_HEALTH']},{fetchImpl:mockFetch,registry,now}),/HTTPS_REQUIRED/);
+await assert.rejects(()=>retrieveApprovedHealthSource({sourceId:'BAD',authorityId:'WHO',url:'http://www.who.int/health-topics',title:'x',locale:'en',claimTypes:['PUBLIC_HEALTH']},{enabled:true,fetchImpl:mockFetch,registry,now}),/HTTPS_REQUIRED/);
 const fresh=evaluateHealthSourceFreshness({...live.source,retrievedAt:'2026-08-23T00:00:00Z'},now);assert.equal(fresh.fresh,true);const stale=evaluateHealthSourceFreshness({...live.source,retrievedAt:'2025-01-01T00:00:00Z'},now);assert.equal(stale.fresh,false);
 assert.equal(versionHealthSource(live.source,{...live.source,contentDigest:'sha256:'+'a'.repeat(64)}).contentChanged,true);
 assert.equal(evaluateMedicalDocumentUpload({name:'lab.pdf',type:'application/pdf',size:2000,consentState:'GRANTED'}).accepted,true);
@@ -32,7 +32,7 @@ const hba1c=normalizeLabObservation({label:'A1C',value:5.9,unit:'%'},lab);assert
 const unknownLab=normalizeLabObservation({label:'Custom marker',value:1},lab);assert.equal(unknownLab.matched,false);
 const guided=buildHealthGuidedContext({question:'I have been tired for several months'});assert.equal(guided.mode,'GUIDED_HEALTH_CONTEXT');assert.equal(guided.governance.differentialDiagnosisGenerated,false);
 const urgent=buildHealthGuidedContext({question:'sudden severe chest pain and difficulty breathing'});assert.equal(urgent.mode,'SAFETY_ONLY');assert.equal(urgent.prompts.length,0);
-const route=await routeAskHealthLive({question:'What is HbA1c?',sourceRequests:[{sourceId:'WHO-HBA1C',authorityId:'WHO',url:'https://www.who.int/health-topics',title:'Health topics',locale:'en',claimTypes:['PUBLIC_HEALTH']}]},{PHIOS_HEALTH_AUTHORITY_ENABLED:'1'},registry,{fetchImpl:mockFetch,now});assert.equal(route.route,'HRX_GROUNDED_HEALTH');assert.equal(route.governance.generalModelFallback,false);
+const route=await routeAskHealthLive({question:'What is HbA1c?',sourceRequests:[{sourceId:'WHO-HBA1C',authorityId:'WHO',url:'https://www.who.int/health-topics',title:'Health topics',locale:'en',claimTypes:['PUBLIC_HEALTH']}]},{PHIOS_HEALTH_AUTHORITY_ENABLED:'1'},registry,{fetchImpl:mockFetch,now,supportRequests:[{sourceId:'WHO-HBA1C',quote:'Official health topic with supported public information.'}]});assert.equal(route.route,'HRX_GROUNDED_SOURCE_EXCERPTS');assert.equal(route.support.length,1);assert.equal(route.governance.generalModelFallback,false);
 const noSource=await routeAskHealthLive({question:'What is HbA1c?'},{PHIOS_HEALTH_AUTHORITY_ENABLED:'1'},registry,{fetchImpl:mockFetch,now});assert.equal(noSource.route,'HRX_AUTHORITY_REQUIRED');
 const g=evaluateHealthDataGovernance({dataClasses:['LAB_RESULT'],consentState:'GRANTED',purpose:'USER_REQUESTED_CONTINUITY'});assert.equal(g.persistAllowed,true);assert.equal(g.analyticsAllowed,false);
 const reality=buildHealthReality({caseRef:'HRX-CASE-1',question:'I feel tired',concerns:['fatigue'],unknowns:['cause']});
@@ -41,7 +41,7 @@ assert.throws(()=>createClinicianHandoff({reality,consentState:'REQUIRED'}),/CON
 await assert.rejects(()=>persistHealthReality({db:null,secret:'x',accountRef:'A',reality,consentState:'GRANTED'}),/DB_BINDING_REQUIRED/);
 let sql='';const db={prepare(q){sql=q;return{bind(){return{run:async()=>({success:true})}}}}};const persisted=await persistHealthReality({db,secret:'test-secret',accountRef:'A',reality,consentState:'GRANTED'});assert.equal(persisted.persisted,true);assert.match(sql,/health_reality_records/);
 assert.match(text('content/health/health-reality-runtime/contracts/health-persistence-schema-v1.sql'),/encrypted_payload/);
-assert.match(text('functions/api/ask-phios-health.js'),/cache-control.*no-store/s);assert.match(text('functions/api/health-authority-retrieve.js'),/PHIOS_HEALTH_AUTHORITY_ENABLED/);
+assert.match(text('functions/api/ask-phios-health.js'),/cache-control.*no-store/s);assert.match(text('functions/api/health-authority-retrieve.js'),/healthAuthorityEnabled/);assert.match(text('functions/health/health-source-policy.js'),/PHIOS_HEALTH_AUTHORITY_ENABLED/);
 assert.equal(read('content/health/health-reality-runtime/acceptance/hrx-w33-browser-cloudflare-acceptance-v1.json').liveEvidenceObserved,false);
 assert.equal(promotion.promotionState,'BLOCKED_BY_LIVE_EVIDENCE');assert.equal(promotion.current.publicHealthExecutionAllowed,false);
 assert.equal(freeze.freeze.liveBrowserVerified,false);assert.equal(freeze.freeze.limitedProductionPromoted,false);

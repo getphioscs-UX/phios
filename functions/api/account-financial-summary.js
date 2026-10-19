@@ -1,3 +1,4 @@
+import {calculateLoan,calculateRental,calculateRentalPortfolio} from '../financial/calculation-runtime/customer-finance-tools.js';
 import {loadOwnedDraft} from '../account/financial-will-draft-store.js';
 import {requireSameOrigin} from '../account/oidc-auth.js';
 import {runFinancialProduct} from '../financial/product-activation/financial-product-runtime.js';
@@ -13,7 +14,8 @@ export async function onRequestPost(context){
   const policyResponse=await context.env.ASSETS.fetch(new Request(new URL('/content/financial/analysis-runtime/policies/financial-analysis-policy-set-base-v1.json',context.request.url)));
   if(!policyResponse.ok)return reply({ok:false,code:'FAR_POLICY_UNAVAILABLE'},503);
   const result=await runFinancialProduct({input:source.payload,calculationPolicy:'CUSTOMER_NET_DEBT_V2',analysisPolicySet:await policyResponse.json()});
-  return reply({ok:true,savedDraftRef:source.savedDraftRef,view:projectFinancialForCustomer(result,{intake:source.payload,locale:body.locale}),lineage:{snapshot:result.snapshot,calculation:result.calculation,sourceKind:'SAVED_INTAKE'},governance:{providerCalls:0,canonicalFdrWrite:false,exactSavedRevision:true}});
+  const toolResults=Object.fromEntries(Object.entries(source.payload.toolScenarios||{}).filter(([k])=>k!=='rental'||!source.payload.toolScenarios.rentalPortfolio).map(([k,v])=>[k,k==='loan'?calculateLoan(v):k==='rentalPortfolio'?calculateRentalPortfolio(v.properties):calculateRental(v)]));
+  return reply({ok:true,toolResults,savedDraftRef:source.savedDraftRef,view:projectFinancialForCustomer(result,{intake:source.payload,locale:body.locale}),lineage:{snapshot:result.snapshot,calculation:result.calculation,sourceKind:'SAVED_INTAKE'},governance:{providerCalls:0,canonicalFdrWrite:false,exactSavedRevision:true}});
  }catch(e){return reply({ok:false,code:e.code||'FINANCIAL_SUMMARY_FAILED'},e.status||422);}
 }
 export const onRequestGet=()=>reply({ok:false,code:'METHOD_NOT_ALLOWED'},405);

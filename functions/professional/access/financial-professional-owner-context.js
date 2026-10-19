@@ -18,15 +18,15 @@ export async function resolveFinancialProfessionalOwnerContext(context,accessId)
  const eligibility=evaluateProfessionalEligibility({professional_id:value.identity.professional_id,required_capability_codes:value.assignment?.required_capability_codes,credentials:value.credentials,capabilities:value.capabilities},{now});
  const access={identity:value.identity,assignment:value.assignment,consent:value.consent,request:{...value.request,request_id:crypto.randomUUID(),requested_at:now},eligibility,verifiedJurisdictionScopes:value.verifiedJurisdictionScopes,verifiedServiceScopes:value.verifiedServiceScopes};
  if(!evaluateProfessionalAuthorisation(access,{now}).allowed)fail('PROFESSIONAL_OWNER_AUTHORISATION_DENIED');
- const assertSubjectScopes=(inventory,scopes)=>{
+ const assertSubjectScopes=(inventory,scopes,scopeOverride,sourceRef)=>{
   const scopeMap={assets:'properties',liabilities:'liabilities',guarantees:'liabilities',incomeStreams:'income',expenses:'expenses',policies:'insurance',people:'previous_financial_reports',goals:'previous_financial_reports',assumptions:'previous_financial_reports'};
   for(const scope of scopes)for(const item of inventory?.[scope]||[])for(const personId of new Set([...(item.ownerReferences||[]),...(scope==='people'&&item.personId?[item.personId]:[])])){
-   const link=value.householdLinks?.find(x=>x.personId===personId&&x.clientId===access.assignment.client_id);
+   const link=value.householdLinks?.find(x=>x.personId===personId&&x.clientId===access.assignment.client_id&&(!sourceRef||x.sourceRef===sourceRef));
    if(!link||!link.dataSubjectId||!link.receiptRef)fail('HOUSEHOLD_SUBJECT_AUTHORITY_REQUIRED');
    if(link.dataSubjectId===access.assignment.client_id)continue;
    const consent=value.householdConsents?.find(x=>x.data_subject_id===link.dataSubjectId);
    if(!consent||!Number.isFinite(Date.parse(consent.expires_at))||Date.parse(consent.expires_at)<=Date.now()||!Number.isFinite(Date.parse(consent.granted_at))||Date.parse(consent.granted_at)>Date.now()||!consent.authorised_by||consent.is_adult&&consent.authorised_by!==link.dataSubjectId||!consent.is_adult&&consent.authority_basis!=='guardian')fail('HOUSEHOLD_SUBJECT_CONSENT_REQUIRED');
-   const financialScope=scope==='assets'?({BANK_ACCOUNT:'bank_balances',INVESTMENT:'investments',PROPERTY:'properties',REAL_ESTATE:'properties',CASH:'bank_balances'})[item.type]:scopeMap[scope];
+   const financialScope=scopeOverride||(scope==='assets'?({BANK_ACCOUNT:'bank_balances',INVESTMENT:'investments',PROPERTY:'properties',REAL_ESTATE:'properties',CASH:'bank_balances'})[item.type]:scopeMap[scope]);
    if(!financialScope)fail('HOUSEHOLD_ASSET_SCOPE_UNRESOLVED');
    try{authorizeHouseholdFinancialAccess([consent],{data_subject_id:link.dataSubjectId,scope:financialScope});}catch{fail('HOUSEHOLD_SUBJECT_CONSENT_REQUIRED');}
   }

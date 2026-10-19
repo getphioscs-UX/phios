@@ -1,0 +1,8 @@
+{
+  "state": "FAILED",
+  "expected": "MYS after reader refresh and return",
+  "actual": "GLOBAL",
+  "cause": "Hidden native Atlas mounted URL sync and replaced public #v=2 state with #atlas after guide creation. Reading reload then lost its original context.",
+  "fix": "Native Atlas mounts lazily only when More material is explicitly opened on reading routes; ordinary map routes retain existing mount behavior. No native URL contracts weakened.",
+  "additionalFinding": "The same hidden native URL sync could overwrite the public map URL after return. Native tools now mount on explicit More material opening or an actual legacy deep link, not ordinary R2 mode."
+}

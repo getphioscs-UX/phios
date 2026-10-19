@@ -9,3 +9,11 @@ export function reviewOfficialSource(record,review,{now=new Date().toISOString()
  if(review.action==='APPROVE_EFFECTIVE'&&(!review.jurisdiction||!review.effectiveFrom||!review.reviewValidUntil||review.reviewValidUntil<now.slice(0,10)))throw Error('SOURCE_REVIEW_SCOPE_REQUIRED');
  return {...record,state:review.action==='WITHDRAW'?'WITHDRAWN':'VERIFIED_EFFECTIVE',review:structuredClone(review),reviewedAt:now,effectiveApproval:review.action==='APPROVE_EFFECTIVE'};
 }
+// Retrieval failure does not invent a successful verification timestamp.
+export function recordOfficialSourceFailure(record,{now=new Date().toISOString(),reason='TEMPORARILY_UNAVAILABLE'}={}){return {...structuredClone(record),lastAttemptAt:now,lastAttemptFailure:reason};}
+export function ruleMaintenanceState(bundle,{now=new Date().toISOString(),policy}={}){
+ if(bundle.withdrawnAt)return 'WITHDRAWN';
+ if(!bundle.reviewValidUntil||bundle.reviewValidUntil<now.slice(0,10))return 'EXPIRED';
+ if(bundle.lastAttemptFailure){if(!policy?.receiptRef||policy.allowCachedWithinReview!==true)return 'SOURCE_UNAVAILABLE';return 'CURRENT_REVIEWED_CACHE';}
+ return 'CURRENT';
+}

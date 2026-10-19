@@ -10,3 +10,11 @@ Executed targeted tests cover exact/evil hosts, default-off counts, emergency, r
 
 Remaining: versioned adoption of the strengthened grounding contract by historical fixture consumers; full Health frontend/source claim semantics; independent production enablement/deployment/live verification. No production configuration changes were made.
 
+
+Actual inventory confirmed:72 concepts,14 minimum packets,9 registered sources. Three public source bodies read in this batch; only the reviewed A1C excerpts enter C. Inventory is not full concept/source answer coverage.
+
+## Current fixture-consumer closure
+
+The initial failure above is historical evidence. Two versioned engineering fixture successors now use retrieved mock body plus server-owned continuous support; unsafe metadata-only success is not reinstated. Direct retrieval fixtures explicitly enable the isolated adapter, and the route asserts SOURCE_EXCERPTS with actual proof rather than declaring generic health-answer grounding. Prior checker bytes and hashes are preserved in integrated-r1/legacy-health-checker-*.mjs.txt and HEALTH-CHECKER-SUCCESSOR.json. No acceptance/freeze hash or production activation record changed.
+
+Executed check:health-knowledge-current now PASS (exit0), including Health Reality, corpus, source admission and reflective clinical firewall. See integrated-r1/HEALTH-CURRENT-SUCCESSOR.log. Source identity/excerpt checks are not clinical semantic validation. Remaining production activation, broader source/answer coverage and live verification stay separate.

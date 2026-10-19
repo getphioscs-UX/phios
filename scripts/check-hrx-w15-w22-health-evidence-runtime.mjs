@@ -1,3 +1,5 @@
+import {retrieveApprovedHealthSource} from '../functions/health/health-live-authority-retrieval.js';
+import {locateHealthSupport} from '../functions/health/health-source-policy.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -65,7 +67,9 @@ assert.equal(diff.governance.describesChangeNotCause,true); assert.equal(diff.go
 // W20 Ask grounding must fail closed without admitted source.
 const noSource = groundAskHealthEvidence({question:'What does HbA1c mean?',claims:[{text:'A factual health claim'}]}, {}, authorities);
 assert.equal(noSource.answerState,'AUTHORITY_REQUIRED'); assert.equal(noSource.governance.generalModelMaySubstituteForMissingHealthAuthority,false);
-const grounded = groundAskHealthEvidence({question:'What does HbA1c mean?',sources:[fixtureSource],claims:[{text:'Source-bound test claim',sourceId:fixtureSource.sourceId}]}, {PHIOS_HEALTH_AUTHORITY_ENABLED:'1'}, authorities);
+const verifiedFixture=await retrieveApprovedHealthSource(fixtureSource,{enabled:true,registry:authorities,fetchImpl:async()=>new Response('<p>Source-bound test claim with a verified continuous support position.</p>',{headers:{'content-type':'text/html'}})});
+const verifiedQuote='Source-bound test claim with a verified continuous support position.';const fixtureProof=locateHealthSupport(verifiedFixture.source,verifiedQuote);assert.ok(fixtureProof);
+const grounded = groundAskHealthEvidence({question:'What does HbA1c mean?',sources:[verifiedFixture.source],supports:[fixtureProof],claims:[{text:verifiedQuote,sourceId:fixtureSource.sourceId}]}, {PHIOS_HEALTH_AUTHORITY_ENABLED:'1'}, authorities);
 assert.equal(grounded.answerState,'GROUNDED_HEALTH_INFORMATION'); assert.equal(grounded.sources.length,1);
 
 // W21 Client candidate exists but does not mutate current production surface authority.

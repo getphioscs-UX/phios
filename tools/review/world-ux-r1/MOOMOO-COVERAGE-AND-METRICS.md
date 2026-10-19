@@ -23,3 +23,17 @@ Provider field Equity Ratio exists but its definition is unconfirmed. The intern
 
 Source inventory includes fields, units, periods, accounting standards, retrieval times and raw digests. Announcement date absent in a snapshot stays unknown. No new Moomoo calls, credentials, account actions or storage writes were made. Rights/refresh/history gaps remain open; public sample uses explicit issuer disclosure instead.
 
+
+## Internal-only measured values (not public display permission)
+
+Valuation observations2026-10-02 09:35:49–09:36:02UTC, unit multiple. Ratio period is separately listed; it is not a same-time comparison to valuation. Original timestamp, snapshotId, field path, currency and inputs remain in [recomputed audit](integrated-r1/MOOMOO-RECOMPUTED.json); [all56 field inventories](integrated-r1/MOOMOO-SNAPSHOT-INVENTORY.json).
+
+|Symbol|PE|PB|PS|Derived Total Equity/Assets|Balance period|
+|---|---:|---:|---:|---:|---|
+|US.AAPL|37.88|44.837|10.326|28.0536%|2026/Q3|
+|US.MSFT|28.568|8.607|11.474|58.3335%|2026/FY|
+|US.AMZN|19.97|4.853|3.451|50.3446%|2026/Q2|
+|US.NVDA|29.185|24.298|18.363|71.4967%|2027/Q2|
+|US.JPM|14.275|2.504|4.441|7.4694%|2026/Q2|
+
+These dates and values belong to historical internal provider snapshots. No public rights or current quote freshness is inferred. Provider Equity Ratio field50 remains semantically unverified; this explicit independent ratio does not approve that field or ROI.

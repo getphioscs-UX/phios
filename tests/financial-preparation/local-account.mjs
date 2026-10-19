@@ -7,6 +7,7 @@ export function localAccount({databasePath=':memory:',privateDirectory=null}={})
  sql.exec(fs.readFileSync('db/migrations/0008_financial_will_encrypted_drafts.sql','utf8'));
  sql.exec(fs.readFileSync('db/migration-candidates/0019_financial_purpose_grants.sql','utf8'));
  sql.exec(fs.readFileSync('db/migrations/0017_report_generation_state.sql','utf8'));
+ sql.exec(fs.readFileSync('db/migration-candidates/financial_preparation_grant_bindings.sql','utf8'));
  const db={prepare(query){return {bind(...args){const statement=sql.prepare(query);return {async first(){return statement.get(...args)||null;},async all(){return {results:statement.all(...args)};},async run(){const result=statement.run(...args);return {meta:{changes:Number(result.changes)}};}};}};},async batch(statements){sql.exec('BEGIN');try{const values=[];for(const statement of statements)values.push(await statement.run());sql.exec('COMMIT');return values;}catch(e){sql.exec('ROLLBACK');throw e;}}};
  const env={RUNTIME_DB:db,FINANCIAL_WILL_DRAFT_ENCRYPTION_KEY:'a'.repeat(64),ASSETS:{async fetch(request){const path=new URL(request.url).pathname;if(!path.startsWith('/content/')||path.includes('..'))return new Response(null,{status:404});return new Response(fs.readFileSync('.'+path),{headers:{'content-type':'application/json'}});}}};
  const objects=new Map();env.PHIOS_ENVIRONMENT='local-test';env.PRIVATE_REPORTS={async put(k,v){objects.set(k,String(v));},async get(k){return objects.has(k)?{text:async()=>objects.get(k)}:null;}};

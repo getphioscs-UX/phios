@@ -20,3 +20,21 @@ This is a local improvement of `/world/`, not a replacement product or content a
 - Existing reviewed bodies and images are reused; no new manuscript acceptance or full-book coverage is claimed.
 - No independent R2 runtime HTML is maintained; review links point to the actual `/world/` route.
 - No production changes, account saves, paid Ask calls, R2 writes or production database writes were performed.
+
+## Books II–VII / Moomoo / Health batch (2026-10-19)
+
+| Gap / user impact | Kind | Reused evidence | Next action and acceptance | Sample blocked? |
+|---|---|---|---|---|
+| Moomoo history ends2024-12-23; not current2026 | Data |56 existing snapshots, new exact-plan validator and bounded paging | Explicit future free/rights-approved import, audit end window and gaps; no automatic refresh now | No; public B uses issuer history |
+| Moomoo public display rights unverified | Permission | Internal snapshots and field inventory | Supply actual licence/permission before public provider display; static/API boundaries now withhold raw values | No; B clearly issuer sourced |
+| One-period revenue breakdown; no historical mix claim | Data | Five company breakdown snapshots | Obtain admissible multi-period same-category data; no mixed geography/product dimension | No |
+| ROI undefined; provider Equity Ratio semantics not verified | Definition | Original field names, explicit derived formula guards | Confirm source formula; no ROE/ROA substitution or guessed ratio | No; ROI stays not computed |
+| Modern port employment/life effects unmeasured | Data | Historical Malacca, public II–VII explanations, World Bank national2023 | Add same-place/time local sources before making causal outcome claims | No; bounded A explains gap |
+| Historical Malacca registry has no independent evidence URLs | Source |Accepted reconstructed case and illustration | Add historical bibliography through existing owner, do not imply present-day observation | A remains bounded historical explanation |
+| VII approved projection Chinese-only; new EN guide is editorial candidate | Content / acceptance |Existing zh projection and source identity | Review this bounded translation separately; no full English manuscript claim | No; explicit Chinese-source link |
+| Historical Health metadata-only fixture conflict — RESOLVED LOCALLY | Governance / consumer | Old checker bytes/failure preserved; current two fixture successors require actual body proof | Current check:health-knowledge-current PASS; review versioned fixture changes, keep production inactive | No local sample blocker; no clinical/live completion implied |
+| Health is not production enabled or private clinical workflow | Activation / live |Default-off API/router/status and no personal data |Separate production authorization and independent live verification | No local sample; LIVE not run |
+| Prior raw maintenance/completed-manuscript metadata publication risk | Publication |New static exclusion + artifact absence assertions |Keep strict publication boundary; review other unadmitted metadata before any release | Local identified paths fixed; not whole-site audit |
+| All new samples are local editorial candidates, not deployed | Deployment / review |Current build and browser evidence |Human content review; no automatic acceptance or deploy | Local review available |
+
+Health closure update: check:health-knowledge-current executed PASS after versioned, stronger body-proof fixtures; initial failure remains in HEALTH-CURRENT-INITIAL-FAILURE.json. This resolves the source test-consumer conflict only, not production activation or medical answer completeness.

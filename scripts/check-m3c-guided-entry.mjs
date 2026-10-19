@@ -237,7 +237,21 @@ for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
   if (file === 'wrangler.jsonc') {
     const reconciliation = await readJson('content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v1.json');
     assert.equal(reconciliation.predecessor.wranglerSha256, expectedHash);
-    assert.equal(await sha256(file), reconciliation.successor.wranglerSha256);
+    const successor = await readJson('content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v2.json');
+    assert.equal(successor.status, 'ENGINEERING_RECONCILIATION');
+    assert.equal(successor.predecessor, 'content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v1.json');
+    assert.equal(await sha256(successor.predecessor), successor.predecessorSha256);
+    assert.equal(successor.previousPath, 'content/knowledge/registry/m3c-w3-wrangler-before-read-only-v2.jsonc');
+    assert.equal(successor.previousSha256, reconciliation.successor.wranglerSha256);
+    assert.equal(await sha256(successor.previousPath), successor.previousSha256);
+    assert.deepEqual(successor.allowedVars, { PHIOS_D1_MAINTENANCE_MODE: 'READ_ONLY' });
+    for (const flag of ['productionActivationVerified', 'deploymentExecuted', 'd1MutationExecuted']) assert.equal(successor[flag], false);
+    assert.equal(await sha256(file), successor.successorSha256);
+    const previousConfig = await readJson(successor.previousPath);
+    assert.deepEqual(await readJson(file), {
+      ...previousConfig,
+      vars: { ...previousConfig.vars, ...successor.allowedVars }
+    }, 'Guided Entry only recognizes the exact read-only maintenance configuration successor');
     continue;
   }
   assert.equal(

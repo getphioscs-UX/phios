@@ -205,7 +205,7 @@ const readOnlyReconciliation=await readJson('content/knowledge/registry/m3c-w3-w
 assert.equal(readOnlyReconciliation.status,'ENGINEERING_RECONCILIATION');
 assert.equal(readOnlyReconciliation.predecessor,'content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v1.json');
 assert.equal(await sha256(readOnlyReconciliation.predecessor),readOnlyReconciliation.predecessorSha256);
-assert.equal(readOnlyReconciliation.previousPath,'content/knowledge/registry/m3c-w3-wrangler-before-read-only-v2.json');
+assert.equal(readOnlyReconciliation.previousPath,'content/knowledge/registry/m3c-w3-wrangler-before-read-only-v2.jsonc');
 assert.equal(readOnlyReconciliation.previousSha256,wranglerReconciliation.successor.wranglerSha256);
 assert.equal(await sha256(readOnlyReconciliation.previousPath),readOnlyReconciliation.previousSha256);
 assert.deepEqual(readOnlyReconciliation.allowedVars,{PHIOS_D1_MAINTENANCE_MODE:'READ_ONLY'});
