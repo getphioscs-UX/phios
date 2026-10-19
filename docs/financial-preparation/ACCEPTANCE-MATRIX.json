@@ -1,0 +1,826 @@
+{
+  "updatedAt": "2026-10-19T07:09:50.073Z",
+  "head": "2a9b2574dff3024c46f216a87da4d947dcd93311",
+  "dependencyDigest": "f854924c01a2e7a9cc01f20efdd7a7ee8296b18b190f0fbf4dccb21c6564975c",
+  "status": "PARTIAL_EVIDENCE_GAPS_OPEN",
+  "environment": "LOCAL_SYNTHETIC_ONLY",
+  "cases": [
+    {
+      "id": "A01",
+      "scenario": "P1/P2/P3 删除 P2、保存恢复、新增",
+      "expected": "新 ID 唯一，原 P3 与资产/角色关联不变",
+      "status": "PASS",
+      "evidence": [
+        "M1-BROWSER-EVIDENCE.json"
+      ],
+      "limit": "Local test-only server identity, 360/768/1440 × en/zh-Hans; existing remote illustrations blocked, not visually accepted. Production account OAuth not exercised."
+    },
+    {
+      "id": "A02",
+      "scenario": "删除仍被引用的人物或资产",
+      "expected": "明确引用影响，不改指另一个对象，历史可追溯",
+      "status": "PASS",
+      "evidence": [
+        "M1-BROWSER-EVIDENCE.json"
+      ],
+      "limit": "Local test-only server identity, 360/768/1440 × en/zh-Hans; existing remote illustrations blocked, not visually accepted. Production account OAuth not exercised."
+    },
+    {
+      "id": "A03",
+      "scenario": "v1 合成加密草稿读取",
+      "expected": "原 schema/AAD 成功，未隐式写回/延长保留",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local SQLite/AES, typed corruption, retention/hold and exact-version checks; no production data. CAS backend proof; separate two-browser editing UI not exercised."
+    },
+    {
+      "id": "A04",
+      "scenario": "v1 明确保存升级 v2",
+      "expected": "新版本完整，旧版本独立可读",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local SQLite/AES, typed corruption, retention/hold and exact-version checks; no production data. CAS backend proof; separate two-browser editing UI not exercised."
+    },
+    {
+      "id": "A05",
+      "scenario": "两窗口并发保存",
+      "expected": "原子 CAS 拒绝旧版本覆盖，保留本地编辑",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local SQLite/AES, typed corruption, retention/hold and exact-version checks; no production data. CAS backend proof; separate two-browser editing UI not exercised."
+    },
+    {
+      "id": "A06",
+      "scenario": "更改未保存表单后请求导入/报告",
+      "expected": "不把新字段冒充旧 SavedDraftRef",
+      "status": "PASS",
+      "evidence": [
+        "M1-BROWSER-EVIDENCE.json"
+      ],
+      "limit": "Local test-only server identity, 360/768/1440 × en/zh-Hans; existing remote illustrations blocked, not visually accepted. Production account OAuth not exercised."
+    },
+    {
+      "id": "A07",
+      "scenario": "请求指定 version/digest",
+      "expected": "只读精确版，缺失不退 latest",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local SQLite/AES, typed corruption, retention/hold and exact-version checks; no production data. CAS backend proof; separate two-browser editing UI not exercised."
+    },
+    {
+      "id": "A08",
+      "scenario": "跨账户 draft ID/owner 伪造",
+      "expected": "取源内容前拒绝，不泄漏私人信息或存在性",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local SQLite/AES, typed corruption, retention/hold and exact-version checks; no production data. CAS backend proof; separate two-browser editing UI not exercised."
+    },
+    {
+      "id": "A09",
+      "scenario": "密文/AAD/schema/digest 损坏",
+      "expected": "有类型失败，不能变成空稿成功",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local SQLite/AES, typed corruption, retention/hold and exact-version checks; no production data. CAS backend proof; separate two-browser editing UI not exercised."
+    },
+    {
+      "id": "A10",
+      "scenario": "到期、删除请求、legal hold",
+      "expected": "各按既有权利/保留政策处理，状态不混淆",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local SQLite/AES, typed corruption, retention/hold and exact-version checks; no production data. CAS backend proof; separate two-browser editing UI not exercised."
+    },
+    {
+      "id": "A11",
+      "scenario": "restore 利率/币种/precision/relatedAssetRefs",
+      "expected": "全字段从 UI 到持久化再到 adapter 一致",
+      "status": "PASS",
+      "evidence": [
+        "M1-BROWSER-EVIDENCE.json"
+      ],
+      "limit": "Local test-only server identity, 360/768/1440 × en/zh-Hans; existing remote illustrations blocked, not visually accepted. Production account OAuth not exercised."
+    },
+    {
+      "id": "A12",
+      "scenario": "预览 ephemeral 与已保存/FDR 来源混用",
+      "expected": "无法绕过 admission 或伪造来源",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local SQLite/AES, typed corruption, retention/hold and exact-version checks; no production data. CAS backend proof; separate two-browser editing UI not exercised."
+    },
+    {
+      "id": "LOOP01",
+      "scenario": "现有入口填写→保存→重开→摘要",
+      "expected": "同一真实保存版本贯穿，刷新/重新登录仍可恢复",
+      "status": "PASS",
+      "evidence": [
+        "M1-BROWSER-EVIDENCE.json",
+        "VALIDATION.json"
+      ],
+      "limit": "Refresh and independent-process persistence pass. Production logout/re-login identity provider remains runtime-unverified."
+    },
+    {
+      "id": "LOOP02",
+      "scenario": "Will 导入提案→确认→重开",
+      "expected": "精确源、用途、proposal digest、WILL CAS 均有效",
+      "status": "PASS",
+      "evidence": [
+        "M1-BROWSER-EVIDENCE.json"
+      ],
+      "limit": "Local test-only server identity, 360/768/1440 × en/zh-Hans; existing remote illustrations blocked, not visually accepted. Production account OAuth not exercised."
+    },
+    {
+      "id": "LOOP03",
+      "scenario": "financial v3→v4",
+      "expected": "显示差异；Will v3 意愿和文件保持；明确接受后新 WILL 版",
+      "status": "PASS",
+      "evidence": [
+        "M1-BROWSER-EVIDENCE.json"
+      ],
+      "limit": "Local test-only server identity, 360/768/1440 × en/zh-Hans; existing remote illustrations blocked, not visually accepted. Production account OAuth not exercised."
+    },
+    {
+      "id": "LOOP04A",
+      "scenario": "proposal 后绑定源不可读/digest或映射不符、grant撤回或到期、目标WILL CAS改变",
+      "expected": "确认写入前再次核验并拒绝旧确认",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Stale mapping, target CAS, source deletion, grant expiry/revoke; chosen older source remains valid. Role mappings are not inferred."
+    },
+    {
+      "id": "LOOP04B",
+      "scenario": "proposal 绑定 v3，latest 新增 v4",
+      "expected": "不自动改绑；客户明确选 v3 或选择 v4 后重新提案",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Stale mapping, target CAS, source deletion, grant expiry/revoke; chosen older source remains valid. Role mappings are not inferred."
+    },
+    {
+      "id": "LOOP05",
+      "scenario": "dependant/nominee/beneficiary/executor",
+      "expected": "不自动互推，允许获准范围内显式多角色",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Stale mapping, target CAS, source deletion, grant expiry/revoke; chosen older source remains valid. Role mappings are not inferred."
+    },
+    {
+      "id": "B01",
+      "scenario": "gross 10,000、已扣税 2,000、其他收入 500、含月供支出 5,000",
+      "expected": "gross/net 两路径都得到结余 3,500，税/月供不重复",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "B02",
+      "scenario": "上例支出明确不含月供 1,500",
+      "expected": "结余 2,000，差异来自记录的包含关系",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "B03",
+      "scenario": "现金 20,000、全额持有房产 300,000、债务 200,000，同币种/日期",
+      "expected": "总资产 320,000、负债 200,000、净值 120,000；租金不加进估值",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "B04",
+      "scenario": "已确认空清单与未填写资产",
+      "expected": "分别为真实零和未知，不产生全部类别 100%",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "B05",
+      "scenario": "EXACT/APPROXIMATE/RANGE/UNKNOWN",
+      "expected": "全程保留，不以中点/零冒充 exact",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "B06",
+      "scenario": "外币且缺或不支持 FX pair",
+      "expected": "原币种小计可用，依赖换汇的汇总不可伪造",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "B07",
+      "scenario": "0–1 比率、0–100 百分数、月数/年数",
+      "expected": "按各 registry 正确显示，零分母无 Infinity",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json",
+        "M1-BROWSER-EVIDENCE.json"
+      ],
+      "limit": "Ratio/frequency metadata and zero-denominator checks; full visual unit review remains limited to changed surfaces."
+    },
+    {
+      "id": "B08",
+      "scenario": "多教育目标/多 insured person/不同风险事件",
+      "expected": "独立结果/缺项，不合并成一个虚构缺口",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "L01",
+      "scenario": "L-G01–L-G06 合成金样",
+      "expected": "每期、总额、结清期、extra 应用与守恒正确",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "L02",
+      "scenario": "原表 E13、失效名称和 cached errors",
+      "expected": "已知缺陷独立登记，网页使用正确 opening balance",
+      "status": "PASS",
+      "evidence": [
+        "INPUT-WORKBOOK-AUDIT.json",
+        "VALIDATION.json"
+      ],
+      "limit": "Original workbook read-only: E13 text opening-balance reference, 14 invalid defined names and 428 cached errors recorded; master 419 is a subset, not the complete workbook count. No original recalculation or edits."
+    },
+    {
+      "id": "L03",
+      "scenario": "月供不足/实际月供与期限推导不同",
+      "expected": "不假造清偿或把 CUMIPMT 差误称 extra 节省",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "L04",
+      "scenario": "请求 extra 超余额/重复/结清后",
+      "expected": "只应用可还本金，无负余额及后续虚构利息",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "L05",
+      "scenario": "最后一期舍入/剩余余额",
+      "expected": "依 final policy；实际月供不自动 balloon",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "L06",
+      "scenario": "月末/闰年/超最大期/非法期数",
+      "expected": "统一 date convention，超范围不截表假结清",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "L07",
+      "scenario": "页面→试算→保存关联贷款→重开→导出",
+      "expected": "同 result/model/version，不重复新增负债",
+      "status": "PASS",
+      "evidence": [
+        "M1-BROWSER-EVIDENCE.json"
+      ],
+      "limit": "Local test-only server identity, 360/768/1440 × en/zh-Hans; existing remote illustrations blocked, not visually accepted. Production account OAuth not exercised."
+    },
+    {
+      "id": "R01",
+      "scenario": "原表 24,600/14,900 算术样例",
+      "expected": "净额 9,700，只是该 fixture 算术结论",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "R02",
+      "scenario": "明确现金费用 5,900、还款 18,000、资本支出 3,000",
+      "expected": "营运 18,700、偿债后 700、资本后 −2,300 分别正确",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "R03",
+      "scenario": "实际租金 20,000 已有空置影响",
+      "expected": "不再扣一次 4,000；预测模式单独计算",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "R04",
+      "scenario": "面积 unknown/0/超范围/真实零",
+      "expected": "unknown/invalid/0% 分别处理，不 IFERROR 掩盖",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "R05",
+      "scenario": "ratio 0.25 与错误输入 25",
+      "expected": "只接受符合尺度/确认转换的值",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "R06",
+      "scenario": "sinking fund/维修等资格不明",
+      "expected": "不因原表标签直接全部可扣，不把未知 allowed 变 0",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "R07",
+      "scenario": "多物业有正负净额",
+      "expected": "按批准来源分组和亏损顺序，不能逐物业先 clamp",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Negative property results aggregate before any tax-loss treatment; no approved tax grouping/loss-order calculation is claimed."
+    },
+    {
+      "id": "R08",
+      "scenario": "税包缺/过期/年度不匹配",
+      "expected": "只阻断相应税务输出，营运与贷款继续",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "R09",
+      "scenario": "贷款利息已含在 debt service",
+      "expected": "不在现金流重复扣；预测/实际状态明确",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Synthetic deterministic values and explicit unknowns; no tax approval inferred. B08 reports independent education goals and missing insured-event authority, not a combined household gap."
+    },
+    {
+      "id": "C01",
+      "scenario": "仅 Malaysia/华人/中文",
+      "expected": "可整理；不推断宗教、domicile 或法律语言资格",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Server ignores client readiness/asOf claims, all current legal approvals remain absent. Reference engine 48 tests are separate evidence, not substitute full application acceptance."
+    },
+    {
+      "id": "C02",
+      "scenario": "Peninsula/Sabah/Sarawak/Labuan/SG/EW/其他地区",
+      "expected": "不错误归并，未覆盖信息可保存但不批准签署",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Server ignores client readiness/asOf claims, all current legal approvals remain absent. Reference engine 48 tests are separate evidence, not substitute full application acceptance."
+    },
+    {
+      "id": "C03",
+      "scenario": "多包冲突/未生效/撤回/过期",
+      "expected": "全部原因可追溯，批准选择不能 first-match-wins",
+      "status": "BLOCKED",
+      "evidence": [
+        "source-monitor/LAST-RUN.json",
+        "VALIDATION.json"
+      ],
+      "limit": "Current production rule packages/approval receipts are absent. Reference conflict/withdrawal/effective-time cases pass in isolation; approved-package application acceptance awaits a real owner-approved successor, including maintenance policy."
+    },
+    {
+      "id": "C04",
+      "scenario": "生产实际批准数 0",
+      "expected": "完整事实仍不能 signing READY，测试夹具不渗入",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Server ignores client readiness/asOf claims, all current legal approvals remain absent. Reference engine 48 tests are separate evidence, not substitute full application acceptance."
+    },
+    {
+      "id": "C05",
+      "scenario": "字符串子串 scope、空/重复/稀疏数组、sentinel IDs",
+      "expected": "严格拒绝，不能扩权",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local synthetic job/closed narrative grammar only; no paid dispatch. Three processes recover candidate, persist artifact and reopen the same version; access expiry/revocation is rechecked."
+    },
+    {
+      "id": "C06",
+      "scenario": "READY 后撤回、到期、改 bundle/事实",
+      "expected": "实际动作再次核验，旧决定不是通行凭据",
+      "status": "BLOCKED",
+      "evidence": [
+        "source-monitor/LAST-RUN.json",
+        "VALIDATION.json"
+      ],
+      "limit": "Current production rule packages/approval receipts are absent. Reference conflict/withdrawal/effective-time cases pass in isolation; approved-package application acceptance awaits a real owner-approved successor, including maintenance policy."
+    },
+    {
+      "id": "C07",
+      "scenario": "客户提交过去 asOfInstant",
+      "expected": "不能绕过当前授权和当前服务器状态",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Server ignores client readiness/asOf claims, all current legal approvals remain absent. Reference engine 48 tests are separate evidence, not substitute full application acceptance."
+    },
+    {
+      "id": "C08",
+      "scenario": "当前规则过期但有旧报告",
+      "expected": "历史按访问/保留政策可查看，不静默重写",
+      "status": "BLOCKED",
+      "evidence": [
+        "source-monitor/LAST-RUN.json",
+        "VALIDATION.json"
+      ],
+      "limit": "Current production rule packages/approval receipts are absent. Reference conflict/withdrawal/effective-time cases pass in isolation; approved-package application acceptance awaits a real owner-approved successor, including maintenance policy."
+    },
+    {
+      "id": "C09",
+      "scenario": "来源暂时失联、仍在核验期",
+      "expected": "按明确维护政策处理，不伪造新核验日期",
+      "status": "BLOCKED",
+      "evidence": [
+        "source-monitor/LAST-RUN.json",
+        "VALIDATION.json"
+      ],
+      "limit": "Current production rule packages/approval receipts are absent. Reference conflict/withdrawal/effective-time cases pass in isolation; approved-package application acceptance awaits a real owner-approved successor, including maintenance policy."
+    },
+    {
+      "id": "D01",
+      "scenario": "只有财务处理 consent、缺 REPORT",
+      "expected": "不调用模型，原财务用途仍可用",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local synthetic job/closed narrative grammar only; no paid dispatch. Three processes recover candidate, persist artifact and reopen the same version; access expiry/revocation is rechecked."
+    },
+    {
+      "id": "D02",
+      "scenario": "篡改来源值但沿用原 digest",
+      "expected": "按原契约重算失败，不建证据包",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local synthetic job/closed narrative grammar only; no paid dispatch. Three processes recover candidate, persist artifact and reopen the same version; access expiry/revocation is rechecked."
+    },
+    {
+      "id": "D03",
+      "scenario": "AI 伪造 source/metric、错版本/客户/情景",
+      "expected": "候选失败，不发布",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local synthetic job/closed narrative grammar only; no paid dispatch. Three processes recover candidate, persist artifact and reopen the same version; access expiry/revocation is rechecked."
+    },
+    {
+      "id": "D04",
+      "scenario": "AI 数字、单位、尺度或确定性错误",
+      "expected": "检查失败，不允许模型改写 FCR 来匹配",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local synthetic job/closed narrative grammar only; no paid dispatch. Three processes recover candidate, persist artifact and reopen the same version; access expiry/revocation is rechecked."
+    },
+    {
+      "id": "D05",
+      "scenario": "AI 添加未算情景、保证或超范围个人行动",
+      "expected": "按真实内容契约拒绝或进入适当审阅",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local synthetic job/closed narrative grammar only; no paid dispatch. Three processes recover candidate, persist artifact and reopen the same version; access expiry/revocation is rechecked."
+    },
+    {
+      "id": "D06",
+      "scenario": "附件/自由文字中提示注入、HTML/秘密回显",
+      "expected": "当数据处理，无越权工具/资料访问或脚本执行",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local synthetic job/closed narrative grammar only; no paid dispatch. Three processes recover candidate, persist artifact and reopen the same version; access expiry/revocation is rechecked."
+    },
+    {
+      "id": "D07",
+      "scenario": "模型响应不明",
+      "expected": "先查 job/结果/用量，再按预算恢复",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local synthetic job/closed narrative grammar only; no paid dispatch. Three processes recover candidate, persist artifact and reopen the same version; access expiry/revocation is rechecked."
+    },
+    {
+      "id": "D08",
+      "scenario": "重复点击、刷新、打开旧报告、PDF 重渲染",
+      "expected": "不重复付费调用；使用已有正文和版本",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local synthetic job/closed narrative grammar only; no paid dispatch. Three processes recover candidate, persist artifact and reopen the same version; access expiry/revocation is rechecked."
+    },
+    {
+      "id": "D09",
+      "scenario": "RR normalizeSource / financial section",
+      "expected": "正式来源字段/locator 全程保留并验证",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local synthetic job/closed narrative grammar only; no paid dispatch. Three processes recover candidate, persist artifact and reopen the same version; access expiry/revocation is rechecked."
+    },
+    {
+      "id": "D10",
+      "scenario": "release 成功但账户列表无报告",
+      "expected": "交付仍失败，修复持久化与账户读取",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local synthetic job/closed narrative grammar only; no paid dispatch. Three processes recover candidate, persist artifact and reopen the same version; access expiry/revocation is rechecked."
+    },
+    {
+      "id": "D11",
+      "scenario": "原稿到期",
+      "expected": "有独立授权投影或诚实标记源稿不可读，不延长草稿",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local synthetic job/closed narrative grammar only; no paid dispatch. Three processes recover candidate, persist artifact and reopen the same version; access expiry/revocation is rechecked."
+    },
+    {
+      "id": "D12",
+      "scenario": "模型/预算/权益借用其他产品",
+      "expected": "财务 contract 校验拒绝错误 admission",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Local synthetic job/closed narrative grammar only; no paid dispatch. Three processes recover candidate, persist artifact and reopen the same version; access expiry/revocation is rechecked."
+    },
+    {
+      "id": "D13",
+      "scenario": "HTML/PDF/图表/下载",
+      "expected": "同一正文和 metric 版本，中文英文内容可核对",
+      "status": "NOT_RUN",
+      "evidence": [
+        "M1-BROWSER-EVIDENCE.json"
+      ],
+      "limit": "Stored HTML download is exercised. Bilingual PDF print/text/page review is tracked separately and must be reconciled before marking this compound case PASS."
+    },
+    {
+      "id": "E01",
+      "scenario": "已批准标准个案",
+      "expected": "确定性自动组装，不额外逐案重写固定条款",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Positive assembly uses an isolated TEST_ONLY package. Actual production clause/jurisdiction registry still closed; no legal or execution approval inferred."
+    },
+    {
+      "id": "E02",
+      "scenario": "未批准模板/自由条款/跨境未覆盖",
+      "expected": "准备继续；签署输出不伪装开放",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Positive assembly uses an isolated TEST_ONLY package. Actual production clause/jurisdiction registry still closed; no legal or execution approval inferred."
+    },
+    {
+      "id": "E03",
+      "scenario": "确认后改身份/意愿/条款/语言/日期",
+      "expected": "新 assembly 不沿用旧确认",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Positive assembly uses an isolated TEST_ONLY package. Actual production clause/jurisdiction registry still closed; no legal or execution approval inferred."
+    },
+    {
+      "id": "E04",
+      "scenario": "英文正文中文姓名、长段落、多页签署区",
+      "expected": "实际 PDF/DOCX 字形、分页、内容与母版相符",
+      "status": "PASS",
+      "evidence": [
+        "DOCUMENT-RENDER-EVIDENCE.json"
+      ],
+      "limit": "Synthetic English paragraphs + Chinese name: Edge PDF 5 pages, native Word DOCX reopen/export 6 pages, 80 paragraphs reconcile. Codex page inspection only; not legal template Human ACCEPT or production renderer acceptance."
+    },
+    {
+      "id": "E05",
+      "scenario": "下载/已阅读/声明签署",
+      "expected": "只记录实际事件，不写法律有效",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Positive assembly uses an isolated TEST_ONLY package. Actual production clause/jurisdiction registry still closed; no legal or execution approval inferred."
+    },
+    {
+      "id": "E06",
+      "scenario": "TEST_ONLY bundle",
+      "expected": "仅隔离测试可成功；生产 loader/构建拒绝",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Positive assembly uses an isolated TEST_ONLY package. Actual production clause/jurisdiction registry still closed; no legal or execution approval inferred."
+    },
+    {
+      "id": "E07",
+      "scenario": "获准个案尚无 assembly 确认",
+      "expected": "可生成核对预览，不能导出最终签署版；确认同一 assembly 后按当前条件导出",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Positive assembly uses an isolated TEST_ONLY package. Actual production clause/jurisdiction registry still closed; no legal or execution approval inferred."
+    },
+    {
+      "id": "F01",
+      "scenario": "预约 REQUESTED 无 shareGrant",
+      "expected": "无资料读取、虚假指派或专业结论",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Existing professional identity/eligibility/assignment/consent owner runs before private source read; exact recipient/scope/version/revocation and independent note persistence verified with synthetic authority. No direct download token issued."
+    },
+    {
+      "id": "F02",
+      "scenario": "recipient/服务/地区/资格不匹配",
+      "expected": "取源前拒绝，无隐式同国扩权",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Existing professional identity/eligibility/assignment/consent owner runs before private source read; exact recipient/scope/version/revocation and independent note persistence verified with synthetic authority. No direct download token issued."
+    },
+    {
+      "id": "F03",
+      "scenario": "授权仅允许 v3、所选对象",
+      "expected": "v4/未选证据/全家庭数据不可读",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Existing professional identity/eligibility/assignment/consent owner runs before private source read; exact recipient/scope/version/revocation and independent note persistence verified with synthetic authority. No direct download token issued."
+    },
+    {
+      "id": "F04",
+      "scenario": "先取得专业下载入口/token，再撤回 grant 并用原 token 新请求",
+      "expected": "owner 拒绝新读取，未发送任务阻断；不能只测试页面按钮消失",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Existing professional identity/eligibility/assignment/consent owner runs before private source read; exact recipient/scope/version/revocation and independent note persistence verified with synthetic authority. No direct download token issued."
+    },
+    {
+      "id": "F05",
+      "scenario": "发送结果不明/重复操作",
+      "expected": "先对账并幂等，不重复外发",
+      "status": "BLOCKED",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "No external dispatch adapter or authorized real recipient; no send occurred. Independent professional note retry is idempotent but is not proof of external-send reconciliation."
+    },
+    {
+      "id": "F06",
+      "scenario": "专业人员核实/提出修正",
+      "expected": "独立作者与来源记录，客户/AI 原版不覆盖",
+      "status": "PASS",
+      "evidence": [
+        "VALIDATION.json"
+      ],
+      "limit": "Existing professional identity/eligibility/assignment/consent owner runs before private source read; exact recipient/scope/version/revocation and independent note persistence verified with synthetic authority. No direct download token issued."
+    },
+    {
+      "id": "F07",
+      "scenario": "家庭成员第三方资料",
+      "expected": "各成年人/共同资料范围依既有 consent owner",
+      "status": "BLOCKED",
+      "evidence": [
+        "RELEASE-AND-RECOVERY.md"
+      ],
+      "limit": "Real third-party/joint-adult subject consent must be supplied through existing household consent owner before a real wider handoff. Current customer preview includes selected assets/liabilities/guarantees only."
+    },
+    {
+      "id": "U01",
+      "scenario": "正常站点/账户进入财务区",
+      "expected": "工具、资料、报告、Will、专业入口真实可达",
+      "status": "PASS",
+      "evidence": [
+        "M1-BROWSER-EVIDENCE.json"
+      ],
+      "limit": "Existing professional hub links to financial entry; six task links reach actual tools, intake, report library, Will and support. Production navigation runtime unverified."
+    },
+    {
+      "id": "U02",
+      "scenario": "360/768/1440，中英，键盘/触控",
+      "expected": "本次改动页面通过实际检查，金额和操作不裁切",
+      "status": "PASS",
+      "evidence": [
+        "M1-BROWSER-EVIDENCE.json"
+      ],
+      "limit": "Local test-only server identity, 360/768/1440 × en/zh-Hans; existing remote illustrations blocked, not visually accepted. Production account OAuth not exercised."
+    },
+    {
+      "id": "U03",
+      "scenario": "登出/换账户/回退缓存/权限失效",
+      "expected": "私人视图清理，不显示上一账户数据",
+      "status": "NOT_RUN",
+      "evidence": [
+        "M1-BROWSER-EVIDENCE.json"
+      ],
+      "limit": "Logout clears private views, account-owner change/401/pageshow code is wired; full two-account browser/back-cache/expired-auth compound case still needs independent browser evidence."
+    }
+  ]
+}

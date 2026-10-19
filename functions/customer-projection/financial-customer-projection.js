@@ -15,7 +15,7 @@ export function projectFinancialForCustomer(result={}, {intake={},locale='en'}={
  const input=key=>intake[key]===undefined||intake[key]===''?null:intake[key];
  const item=(label,value,state='REPORTED')=>deepFreeze({label,value:value??null,evidenceState:value===null?'MISSING':evidenceLabel(state)});
  const findings=list(r.findings).map(f=>deepFreeze({findingCode:clean(f?.findingCode),findingType:findingType(f?.findingType),domain:clean(f?.domain)||null,summary:clean(f?.summary),confidence:clean(f?.confidence)||null,evidenceState:evidenceLabel(f?.evidenceState),limitations:list(f?.limitations).map(clean).filter(Boolean)})).filter(x=>x.findingCode||x.summary);
- const calculations=calculationDefs.map(([code,en,zh,unit])=>{const value=metric(metrics,code);return deepFreeze({code,label:text(lang,en,zh),value,unit:unit==='currency'?currency:unit,sourceAuthority:'FCR',evidenceState:value===null?'MISSING':evidenceLabel(snap.evidenceState)})});
+ const calculations=calculationDefs.map(([code,en,zh,unit])=>{const value=metric(metrics,code);return deepFreeze({code,label:text(lang,en,zh),value,unit:unit==='currency'?currency:unit,sourceAuthority:'FCR',representation:r.calculation?.typedMetrics?.[code]?.value?.kind||null,evidenceState:value===null?'MISSING':evidenceLabel(snap.evidenceState)})});
  const planningSource=object(r.planning),planningPresent=Boolean(clean(planningSource.state)||list(planningSource.priorities).length||list(planningSource.options).length||list(planningSource.actionSequence).length||list(planningSource.assumptions).length);
  const priorities=planningPresent?deepFreeze({state:clean(planningSource.state)||'AVAILABLE',items:projectTextItems(planningSource.priorities)}):deepFreeze({state:'NOT_CREATED_BY_ADAPTER',items:[]});
  const options=planningPresent?deepFreeze({state:clean(planningSource.state)||'AVAILABLE',items:projectTextItems(planningSource.options)}):deepFreeze({state:'NOT_CREATED_BY_ADAPTER',items:[]});
@@ -32,8 +32,9 @@ export function projectFinancialForCustomer(result={}, {intake={},locale='en'}={
  const constraints=[item(text(lang,'Constraints','限制'),clean(input('constraints'))||null)];allInputGroups.push(...constraints);
  const documents=[item(text(lang,'Documents / evidence notes','文件／证据说明'),clean(input('documents'))||null)];allInputGroups.push(...documents);
  const unknowns=[item(text(lang,'Unknowns','未知项'),clean(input('unknowns'))||null)];
- const currentPosition=[item(text(lang,'Net worth','净资产'),metric(metrics,'netWorth'),evidenceLabel(snap.evidenceState)),item(text(lang,'Gross assets','总资产'),metric(metrics,'grossAssets'),evidenceLabel(snap.evidenceState)),item(text(lang,'Total liabilities','总负债'),metric(metrics,'totalLiabilities'),evidenceLabel(snap.evidenceState))];
- const cashflow=[item(text(lang,'Monthly income','每月收入'),metric(metrics,'monthlyIncome'),evidenceLabel(snap.evidenceState)),item(text(lang,'Monthly expenses','每月支出'),metric(metrics,'monthlyExpenses'),evidenceLabel(snap.evidenceState)),item(text(lang,'Cash-flow surplus','现金流盈余'),metric(metrics,'cashFlowSurplus'),evidenceLabel(snap.evidenceState)),item(text(lang,'Cash-flow deficit','现金流缺口'),metric(metrics,'cashFlowDeficit'),evidenceLabel(snap.evidenceState)),item(text(lang,'Liquidity months','流动性月数'),metric(metrics,'liquidityMonths'),evidenceLabel(snap.evidenceState))];
+ const metricItem=code=>{const c=calculations.find(x=>x.code===code);return deepFreeze({label:c.label,value:c.value,evidenceState:c.evidenceState,representation:c.representation,unit:c.unit});};
+ const currentPosition=['netWorth','grossAssets','totalLiabilities'].map(metricItem);
+ const cashflow=['monthlyIncome','monthlyExpenses','cashFlowSurplus','cashFlowDeficit','liquidityMonths'].map(metricItem);
  const strengthFindings=findings.filter(f=>['STRENGTH','SURPLUS'].includes(f.findingType));
  const attentionFindings=findings.filter(f=>['GAP','CONCENTRATION','EXPOSURE','DEPENDENCY','MISMATCH','SHORTFALL','CONTRADICTION'].includes(f.findingType));
  const explicitUnknownFindings=findings.filter(f=>['UNKNOWN','MISSING_EVIDENCE'].includes(f.findingType));

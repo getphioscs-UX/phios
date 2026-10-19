@@ -1,16 +1,16 @@
 {
-  "at": "2026-10-19T04:42:14.345Z",
+  "at": "2026-10-19T05:30:29.311Z",
   "root": {
     "path": "wrangler.jsonc",
-    "sha256": "a1cc8849a23a5eb3260a940850c7cb13bd91b5dea2f9c83b67ef3b5b06207188",
+    "sha256": "468092ba45d6c21e8fa7f3442b5321ced85fd4e0a47fda014ed9932c9cdb8c59",
     "flags": {
-      "PHIOS_D1_MAINTENANCE_MODE": "UNSET",
+      "PHIOS_D1_MAINTENANCE_MODE": "READ_ONLY",
       "PHIOS_P9_CANARY_ENABLED": "false",
       "PHIOS_P9_CHECKOUT_ENABLED": "false",
       "PHIOS_P9_REFUND_ENABLED": "false",
       "REPORT_PROVIDER_LIVE_ALLOWED": "false"
     },
-    "uncommittedDiff": ""
+    "uncommittedDiff": "diff --git a/wrangler.jsonc b/wrangler.jsonc\nindex 5b238d67..7012bdf3 100644\n--- a/wrangler.jsonc\n+++ b/wrangler.jsonc\n@@ -28,7 +28,7 @@\n     \"nodejs_compat\"\n   ],\n   \"services\": [{\"binding\":\"METHOD_REPORT_RENDERER\",\"service\":\"phios-method-report-renderer-production\"}],\n-  \"vars\": {\"PHIOS_ENVIRONMENT\":\"production\",\"STRIPE_ENVIRONMENT\":\"LIVE\",\"PHIOS_SHARED_PAID_REPORT_ENABLED\":\"true\",\"PHIOS_P9_CANARY_ENABLED\":\"false\",\"PHIOS_P9_CHECKOUT_ENABLED\":\"false\",\"PHIOS_P9_REFUND_ENABLED\":\"false\",\"REPORT_PROVIDER_LIVE_ALLOWED\":\"false\"},\n+  \"vars\": {\"PHIOS_D1_MAINTENANCE_MODE\":\"READ_ONLY\",\"PHIOS_ENVIRONMENT\":\"production\",\"STRIPE_ENVIRONMENT\":\"LIVE\",\"PHIOS_SHARED_PAID_REPORT_ENABLED\":\"true\",\"PHIOS_P9_CANARY_ENABLED\":\"false\",\"PHIOS_P9_CHECKOUT_ENABLED\":\"false\",\"PHIOS_P9_REFUND_ENABLED\":\"false\",\"REPORT_PROVIDER_LIVE_ALLOWED\":\"false\"},\n   \"env\": {\n     \"preview\": {\n       \"services\": [{\"binding\":\"METHOD_REPORT_RENDERER\",\"service\":\"phios-method-report-renderer-qa\"}],\n"
   },
   "reviewedRelease": {
     "path": "artifacts/pages-final-candidate-r1/RELEASE-wrangler.jsonc",
@@ -46,8 +46,24 @@
     }
   },
   "cloudRead": {
-    "state": "NOT_RECHECKED_LOCAL_ONLY",
-    "reason": "Read-only cloud check initially not executed because automatic approval service was at capacity."
+    "state": "VERIFIED_CURRENT_PRODUCTION",
+    "canonicalId": "37d9d35a-1f21-402f-b9b7-90b24f246863",
+    "projectFlags": {
+      "PHIOS_D1_MAINTENANCE_MODE": "READ_ONLY",
+      "PHIOS_P9_CANARY_ENABLED": "false",
+      "PHIOS_P9_CHECKOUT_ENABLED": "false",
+      "PHIOS_P9_REFUND_ENABLED": "false",
+      "REPORT_PROVIDER_LIVE_ALLOWED": "false"
+    },
+    "canonicalFlags": {
+      "PHIOS_D1_MAINTENANCE_MODE": "READ_ONLY",
+      "PHIOS_P9_CANARY_ENABLED": "false",
+      "PHIOS_P9_CHECKOUT_ENABLED": "false",
+      "PHIOS_P9_REFUND_ENABLED": "false",
+      "REPORT_PROVIDER_LIVE_ALLOWED": "false"
+    },
+    "automaticProductionDeploy": false,
+    "productionConfigDifferences": []
   },
   "proposedRootPatch": [
     {
@@ -57,7 +73,22 @@
       "precondition": "Root digest and empty shared diff must still match; preserve all bindings and other vars."
     }
   ],
-  "applied": false,
-  "productionWrites": 0,
-  "r2Writes": 0
+  "applied": true,
+  "productionWrites": 1,
+  "r2Writes": 0,
+  "rootBefore": {
+    "path": "wrangler.jsonc",
+    "sha256": "a1cc8849a23a5eb3260a940850c7cb13bd91b5dea2f9c83b67ef3b5b06207188",
+    "flags": {
+      "PHIOS_D1_MAINTENANCE_MODE": "UNSET",
+      "PHIOS_P9_CANARY_ENABLED": "false",
+      "PHIOS_P9_CHECKOUT_ENABLED": "false",
+      "PHIOS_P9_REFUND_ENABLED": "false",
+      "REPORT_PROVIDER_LIVE_ALLOWED": "false"
+    },
+    "uncommittedDiff": ""
+  },
+  "applicationScope": "ONLY_ROOT_VARS_PHIOS_D1_MAINTENANCE_MODE_ADDED",
+  "productionWriteScope": "ONE_AUTHORIZED_PAGES_DEPLOYMENT_NO_DATA_WRITES",
+  "productionDataWrites": 0
 }

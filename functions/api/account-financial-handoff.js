@@ -1,0 +1,3 @@
+import {customerFinancialPacket} from '../professional/access/financial-preparation-handoff.js';
+import {requireSameOrigin} from '../account/oidc-auth.js';
+export async function onRequestPost(context){try{requireSameOrigin(context.request);const raw=await context.request.text();if(raw.length>16000)throw Error('REQUEST_TOO_LARGE');const body=JSON.parse(raw);return Response.json({ok:true,packet:await customerFinancialPacket(context,body)},{headers:{'cache-control':'private, no-store'}});}catch(e){return Response.json({ok:false,code:e.code||e.message||'HANDOFF_PREVIEW_FAILED'},{status:e.status||422,headers:{'cache-control':'private, no-store'}});}}

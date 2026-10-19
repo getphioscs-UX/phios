@@ -8,7 +8,8 @@ import {loadAcceptedDossier} from './civilization-atlas/atlas-data.js';
 import {activeWorldObject,worldObjectRelations,sameObjectDirection,worldAskContext,askURL,stableWorldURL,currentProjectionState,local,esc} from './civilization-atlas/world-reading-context.js';
 const root=document.querySelector('[data-civilization-atlas-root]'),params=new URLSearchParams(location.search),current=params.get('intent')==='current'||(!params.has('intent')&&!params.has('atlas')&&!params.has('view')&&!params.has('q')&&!params.has('explore'));
 if(current&&!params.has('atlas')&&!document.querySelector('[data-world-r2]')){const u=new URL(location.href);u.searchParams.set('view','reconfiguration');u.searchParams.set('atlas','dossiers');u.searchParams.set('intent','current');history.replaceState(history.state,'',u);}
-if(params.has('reading')){const details=document.querySelector('[data-world-native-details]');if(details)details.open=true;}
+// The public article is in the primary reading region. Legacy tools remain optional.
+if(params.has('reading')){const details=document.querySelector('[data-world-native-details]');if(details)details.open=false;}
 if(params.has('reading'))for(const selector of ['[data-civilization-atlas-root]','[data-world-current-summary]','[data-world-r42]','[data-world-reading-bar]','[data-world-relations]','[data-world-object-actions]','[data-world-observations]'])document.querySelector(selector).hidden=true;
 const reconfig=current||params.get('view')==='reconfiguration';root.dataset.bookId=reconfig?'book-6':'book-5';if(reconfig)root.dataset.atlasMode='reconfiguration';
 if(params.has('atlas')){document.querySelector('.world-r1-hero-visual')?.remove();document.querySelector('main').classList.add('world-r1-reading');}

@@ -2,3 +2,4 @@ const root=document.querySelector('[data-cx-account-continuity]');const sections
 import './account-auth.js';
 import './account-private-material.js';
 import './account-persons.js';
+import './financial-report-library.js';

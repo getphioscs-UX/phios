@@ -1,9 +1,14 @@
 import {esc,tr} from './runtime-ui.js';
 import {installNavigationHandoff} from '../navigation-handoff.js';
+import '../account-session-signal.js';
+const controllers=new Map();
+const pendingRequests=new Set();
+window.addEventListener('phios:account-logout',()=>{for(const controller of pendingRequests)controller.abort();pendingRequests.clear();});
+export const getSecureDraft=kind=>controllers.get(kind)||null;
 export const draftUrl=d=>`/professional/financial/?draft=${encodeURIComponent(d.draftId)}&kind=${d.draftType}&lang=${document.documentElement.lang==='zh-Hans'?'zh-Hans':'en'}${d.draftType==='WILL'?'#estate-planning':''}`;
 export async function accountRequest(path,body){
- const r=await fetch(path,{method:body?'POST':'GET',credentials:'same-origin',cache:'no-store',headers:body?{'Content-Type':'application/json'}:{Accept:'application/json'},...(body?{body:JSON.stringify(body)}:{})});
- const p=await r.json().catch(()=>({}));if(!r.ok||p.ok===false)throw Object.assign(new Error(p.code||'REQUEST_FAILED'),{code:p.code,status:r.status});return p;
+ const controller=new AbortController();pendingRequests.add(controller);try{const r=await fetch(path,{method:body?'POST':'GET',credentials:'same-origin',cache:'no-store',signal:controller.signal,headers:body?{'Content-Type':'application/json'}:{Accept:'application/json'},...(body?{body:JSON.stringify(body)}:{})});
+ const p=await r.json().catch(()=>({}));if(controller.signal.aborted)throw new DOMException('Aborted','AbortError');if(!r.ok||p.ok===false)throw Object.assign(new Error(p.code||'REQUEST_FAILED'),{code:p.code,status:r.status});return p;}finally{pendingRequests.delete(controller);}
 }
 export function draftError(error){
  if(error.status===401)return tr('Sign in again to access your saved drafts.','请重新登录以访问已保存草稿。');
@@ -15,7 +20,9 @@ export function draftError(error){
 export function draftState(d){return tr('Saved','保存于')+` ${new Date(d.createdAt).toLocaleString()} · `+tr('Expires','到期')+` ${new Date(d.expiresAt).toLocaleString()} · `+tr('Version','版本')+` ${d.version}`;}
 export function installSecureDrafts({host,kind,capture,restore}){
  const panel=document.createElement('section');panel.className='cx-card cx-stack';panel.dataset.secureDraft=kind;host.append(panel);
- let saved=null,signed=false,busy=false,message='',confirmation=null,consent=false,retention=false,days='30',drafts=[];
+ let saved=null,signed=false,busy=false,message='',confirmation=null,consent=false,retention=false,days='30',drafts=[],savedPayload=null,activeOwnerRef=null;
+ const controller={get savedRef(){return saved?.savedDraftRef||null;},get dirty(){return savedPayload!==JSON.stringify(capture());},async reopen(id){await load(id);render();},async save(){await save();return saved?.savedDraftRef||null;}};
+ controllers.set(kind,controller);
  const selected=()=>{const q=new URLSearchParams(location.search);return q.get('kind')===kind?q.get('draft'):null;};
  function render(){
   queueMicrotask(()=>document.dispatchEvent(new Event('phios:draft-rendered')));
@@ -35,10 +42,13 @@ export function installSecureDrafts({host,kind,capture,restore}){
   panel.querySelector('[data-cancel]')?.addEventListener('click',()=>{confirmation=null;render();});
   panel.querySelector('[data-confirm]')?.addEventListener('click',async()=>{const action=confirmation;confirmation=null;busy=true;render();try{if(action==='restore')await load(saved.draftId);else{await accountRequest('/api/account-financial-will-drafts',{action,draftId:saved.draftId,confirmed:true});saved=null;consent=false;retention=false;const u=new URL(location.href);u.searchParams.delete('draft');u.searchParams.delete('kind');history.replaceState(null,'',u);message=()=>tr('All saved versions removed. Current entries remain unsaved.','全部已保存版本已删除。当前输入保持未保存。');}}catch(e){message=()=>draftError(e);}finally{busy=false;render();}});
  }
- async function load(id){const data=await accountRequest('/api/account-financial-will-drafts?id='+encodeURIComponent(id));if(data.draftType!==kind)throw new Error('DRAFT_TYPE_MISMATCH');restore(data.payload);saved=data;message=()=>tr('Restored from your secure account.','已从安全账户恢复。');}
- async function save(){if(busy)return;if(!saved&&(!consent||!retention)){message=()=>tr('Choose both save and retention consent before saving.','保存前请分别确认保存同意和保留同意。');render();return;}busy=true;render();try{const data=await accountRequest('/api/account-financial-will-drafts',{action:'save',draftType:kind,payload:capture(),purpose:kind==='WILL'?'WILL_ASSEMBLY':'FINANCIAL_PLANNING',saveConsent:true,retentionConsent:true,expiresAt:saved?.expiresAt||new Date(Date.now()+Number(days)*86400000).toISOString(),draftId:saved?.draftId,expectedVersion:saved?.version||0});saved={...data,createdAt:data.createdAt||new Date().toISOString()};const u=new URL(location.href);u.searchParams.set('draft',saved.draftId);u.searchParams.set('kind',kind);history.replaceState(null,'',u);message=()=>tr('Saved securely.','已安全保存。');}catch(e){message=()=>draftError(e);}finally{busy=false;render();}}
- async function refresh(){try{const p=await accountRequest('/api/account-financial-will-drafts?type='+kind);signed=true;drafts=p.drafts;const id=selected()||saved?.draftId;if(id)await load(id);}catch(e){if(e.status===401||e.status===404){if(e.status===401)signed=false;if(saved)restore({});saved=null;}message=()=>draftError(e);}render();}
+ async function load(id){const data=await accountRequest('/api/account-financial-will-drafts?id='+encodeURIComponent(id));if(data.draftType!==kind)throw new Error('DRAFT_TYPE_MISMATCH');restore(data.payload);saved=data;savedPayload=JSON.stringify(capture());message=()=>tr('Restored from your secure account.','已从安全账户恢复。');}
+ async function save(){if(busy)return;if(!saved&&(!consent||!retention)){message=()=>tr('Choose both save and retention consent before saving.','保存前请分别确认保存同意和保留同意。');render();return;}const payload=capture();busy=true;render();try{const data=await accountRequest('/api/account-financial-will-drafts',{action:'save',draftType:kind,payload,purpose:kind==='WILL'?'WILL_ASSEMBLY':'FINANCIAL_PLANNING',saveConsent:true,retentionConsent:true,expiresAt:saved?.expiresAt||new Date(Date.now()+Number(days)*86400000).toISOString(),draftId:saved?.draftId,expectedVersion:saved?.version||0});saved={...data,createdAt:data.createdAt||new Date().toISOString()};savedPayload=JSON.stringify(payload);const u=new URL(location.href);u.searchParams.set('draft',saved.draftId);u.searchParams.set('kind',kind);history.replaceState(null,'',u);message=()=>tr('Saved securely.','已安全保存。');}catch(e){message=()=>draftError(e);}finally{busy=false;render();}}
+ async function refresh(){try{const p=await accountRequest('/api/account-financial-will-drafts?type='+kind);signed=true;activeOwnerRef=p.accountOwnerRef;drafts=p.drafts;const id=selected()||saved?.draftId;if(id)await load(id);}catch(e){if(e.status===401||e.status===404){if(e.status===401)signed=false;restore({});saved=null;savedPayload=null;}message=()=>draftError(e);}render();}
  render();refresh();window.addEventListener('pageshow',e=>{if(e.persisted)refresh();});window.addEventListener('phios:localechange',render);
  // Do not leave restored private inputs visible in a back/forward-cache snapshot.
- window.addEventListener('pagehide',()=>{if(saved)restore({});});
+ window.addEventListener('pagehide',()=>{restore({});});
+ window.addEventListener('phios:account-logout',()=>{restore({});saved=null;savedPayload=null;activeOwnerRef=null;signed=false;render();});
+ window.addEventListener('focus',async()=>{try{const p=await accountRequest('/api/account-financial-will-drafts?type='+kind);if(activeOwnerRef&&p.accountOwnerRef!==activeOwnerRef){window.dispatchEvent(new Event('phios:account-logout'));restore({});saved=null;savedPayload=null;drafts=p.drafts;signed=true;render();}activeOwnerRef=p.accountOwnerRef;}catch(e){if(e.status===401){window.dispatchEvent(new Event('phios:account-logout'));restore({});saved=null;savedPayload=null;activeOwnerRef=null;signed=false;render();}}});
+ return controller;
 }

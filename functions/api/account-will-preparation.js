@@ -1,0 +1,3 @@
+import {prepareSavedWill,recordSavedWillEvent} from '../account/will-preparation-lifecycle.js';
+import {requireSameOrigin} from '../account/oidc-auth.js';
+export async function onRequestPost(context){try{requireSameOrigin(context.request);const raw=await context.request.text();if(raw.length>20000)throw Error('REQUEST_TOO_LARGE');const body=JSON.parse(raw);return Response.json({ok:true,...(body.action==='prepare'?await prepareSavedWill(context,body):body.action==='event'?{event:await recordSavedWillEvent(context,body)}:(()=>{throw Error('ACTION_INVALID');})())},{headers:{'cache-control':'private, no-store'}});}catch(e){return Response.json({ok:false,code:e.code||e.message||'WILL_PREPARATION_FAILED'},{status:e.status||422,headers:{'cache-control':'private, no-store'}});}}

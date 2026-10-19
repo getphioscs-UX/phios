@@ -1,3 +1,5 @@
+> Historical pre-release local checkpoint. Current limited production result: [world-release-result.json](world-release-result.json). Do not interpret the old NOT_DEPLOYED line below as current release status.
+
 # Current local World checkpoint
 
 W00–W19 overall remains IN_PROGRESS, not fully accepted or deployed.

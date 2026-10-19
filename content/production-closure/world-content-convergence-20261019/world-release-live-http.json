@@ -1,0 +1,104 @@
+{
+  "at": "2026-10-19T05:25:03.637Z",
+  "deploymentId": "37d9d35a-1f21-402f-b9b7-90b24f246863",
+  "origin": "https://getphios.com",
+  "rows": [
+    {
+      "type": "PUBLIC_ARTIFACT_PARITY",
+      "file": "world/index.html",
+      "url": "https://getphios.com/world/?worldRelease=48d3999fda1ce3bb",
+      "status": 200,
+      "expectedSha256": "db1d593b84dd9cb7ad9af677bae79d882c049223ff180a6bb8f84bbc225e71a0",
+      "actualSha256": "db1d593b84dd9cb7ad9af677bae79d882c049223ff180a6bb8f84bbc225e71a0",
+      "state": "PASS"
+    },
+    {
+      "type": "PUBLIC_ARTIFACT_PARITY",
+      "file": "assets/js/pages/civilization-atlas/world-experience-r2.js",
+      "url": "https://getphios.com/assets/js/pages/civilization-atlas/world-experience-r2.js?worldRelease=48d3999fda1ce3bb",
+      "status": 200,
+      "expectedSha256": "0e5aea96d93528a07173b09dee4a187648a2f5c0e41724838da612c19476cd46",
+      "actualSha256": "0e5aea96d93528a07173b09dee4a187648a2f5c0e41724838da612c19476cd46",
+      "state": "PASS"
+    },
+    {
+      "type": "PUBLIC_ARTIFACT_PARITY",
+      "file": "assets/js/pages/civilization-atlas/world-r2-inputs.js",
+      "url": "https://getphios.com/assets/js/pages/civilization-atlas/world-r2-inputs.js?worldRelease=48d3999fda1ce3bb",
+      "status": 200,
+      "expectedSha256": "ef24658bafa6c3e6efff994edd5ce5ed44f88faabf12c8e17ae38a53e3c099fb",
+      "actualSha256": "ef24658bafa6c3e6efff994edd5ce5ed44f88faabf12c8e17ae38a53e3c099fb",
+      "state": "PASS"
+    },
+    {
+      "type": "PUBLIC_ARTIFACT_PARITY",
+      "file": "assets/css/world-experience-r2.css",
+      "url": "https://getphios.com/assets/css/world-experience-r2.css?worldRelease=48d3999fda1ce3bb",
+      "status": 200,
+      "expectedSha256": "7035ad3b046f493a0db71688e5d08c9989c2294e070b21e4e10b7bff66df8446",
+      "actualSha256": "7035ad3b046f493a0db71688e5d08c9989c2294e070b21e4e10b7bff66df8446",
+      "state": "PASS"
+    },
+    {
+      "type": "PUBLIC_ARTIFACT_PARITY",
+      "file": "content/civilization-atlas/search/world-search-index-v1.json",
+      "url": "https://getphios.com/content/civilization-atlas/search/world-search-index-v1.json?worldRelease=48d3999fda1ce3bb",
+      "status": 200,
+      "expectedSha256": "3212b8be82005fdecee9bfaff200755eab897f345a6b5ef68bc636416cecd8d9",
+      "actualSha256": "3212b8be82005fdecee9bfaff200755eab897f345a6b5ef68bc636416cecd8d9",
+      "state": "PASS"
+    },
+    {
+      "type": "PUBLIC_ARTIFACT_PARITY",
+      "file": "content/civilization-atlas/geography/world-selection-geometry-r2.json",
+      "url": "https://getphios.com/content/civilization-atlas/geography/world-selection-geometry-r2.json?worldRelease=48d3999fda1ce3bb",
+      "status": 200,
+      "expectedSha256": "820be8e41016a8736b1841d8f1c6a8d12a167820b96e115913646ebeea8a0165",
+      "actualSha256": "820be8e41016a8736b1841d8f1c6a8d12a167820b96e115913646ebeea8a0165",
+      "state": "PASS"
+    },
+    {
+      "type": "ANONYMOUS_READ_BOUNDARY",
+      "route": "/api/account-world-contexts",
+      "status": 401,
+      "code": "ACCOUNT_REQUIRED",
+      "expectedStatus": 401,
+      "state": "PASS"
+    },
+    {
+      "type": "ANONYMOUS_READ_BOUNDARY",
+      "route": "/api/customer-navigation-handoff",
+      "status": 503,
+      "code": "NAVIGATION_HANDOFF_NOT_ADMITTED",
+      "expectedStatus": 503,
+      "state": "PASS"
+    },
+    {
+      "type": "ANONYMOUS_READ_BOUNDARY",
+      "route": "/api/commerce-book-download",
+      "status": 405,
+      "code": null,
+      "expectedStatus": 405,
+      "state": "PASS"
+    },
+    {
+      "type": "ANONYMOUS_READ_BOUNDARY",
+      "route": "/content/knowledge/manuscripts/completed/book-2-completed-manuscript-en-v1.json",
+      "status": 404,
+      "code": null,
+      "expectedStatus": 404,
+      "state": "PASS"
+    },
+    {
+      "type": "ANONYMOUS_READ_BOUNDARY",
+      "route": "/functions/_source-material/books/book-2-registered-reviewed-corpus.json",
+      "status": 404,
+      "code": null,
+      "expectedStatus": 404,
+      "state": "PASS"
+    }
+  ],
+  "method": "GET_ONLY_NO_AUTHORIZATION_HEADER_PUBLIC_HOST",
+  "providerCalls": 0,
+  "productionWrites": 0
+}

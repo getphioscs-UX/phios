@@ -126,14 +126,18 @@ assert.equal(worldR2.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');assert
 for(const field of ['productionAdmissionChanged','acceptedBindingsChanged','canonicalTheoryChanged'])assert.equal(worldR2[field],false);
 assert.equal(worldR2.sourceOriginal.sha256,'8a12e9857c0eef42331467cef8d772ee5c6908e39f3cd8f8b1d9c497a855119c');
 assert.deepEqual(worldR2.changes.map(c=>c.path),['world/index.html','assets/js/pages/world.js','assets/js/pages/civilization-atlas/world-explorer.js']);
-for(const c of worldR2.changes){const previous=c.path===worldPresentation.change.path?worldPresentation.change:worldPresentation.sourceChanges.find(x=>x.path===c.path);assert.equal(c.previousSha256,previous.successorSha256);assert.equal(digest(c.previousPath),c.previousSha256);assert.equal(digest(c.path),c.successorSha256);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(c.changeClass));}
-for(const d of worldR2.dependencies)assert.equal(digest(d.path),d.sha256,'R2 consumer dependency drift: '+d.path);
+const worldUx=json('content/civilization-atlas/maintenance/book-v-world-ux-successor-v6.json');
+assert.equal(worldUx.predecessor,'content/civilization-atlas/maintenance/book-v-world-r2-convergence-successor-v5.json');assert.equal(worldUx.predecessorSha256,digest(worldUx.predecessor));assert.equal(worldUx.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');assert.equal(worldUx.humanDecision,'PENDING');for(const k of ['productionAdmissionChanged','acceptedBindingsChanged','canonicalTheoryChanged'])assert.equal(worldUx[k],false);
+assert.deepEqual(worldUx.changes.map(c=>c.path),['world/index.html','assets/css/world-experience-r2.css','assets/js/pages/civilization-atlas/world-experience-r2.js','assets/js/pages/world.js','assets/js/pages/civilization-atlas/world-published-reading.js']);
+function worldUxDigest(p,prior){const c=worldUx.changes.find(c=>c.path===p);if(!c)return prior;assert.equal(c.previousSha256,prior);assert.equal(digest(c.previousPath),prior);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(c.changeClass));assert.equal(digest(p),c.successorSha256);return c.successorSha256;}
+for(const c of worldR2.changes){const previous=c.path===worldPresentation.change.path?worldPresentation.change:worldPresentation.sourceChanges.find(x=>x.path===c.path);assert.equal(c.previousSha256,previous.successorSha256);assert.equal(digest(c.previousPath),c.previousSha256);assert.equal(digest(c.path),worldUxDigest(c.path,c.successorSha256));assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(c.changeClass));}
+for(const d of worldR2.dependencies)assert.equal(digest(d.path),worldUxDigest(d.path,d.sha256),'R2 consumer dependency drift: '+d.path);
 const observations='<section class="knowledge-shell" data-world-observations></section>';
 const publishedReading='<section id="world-source-reading" class="knowledge-shell" data-world-published-reading></section>';
 const currentWorld=read(worldR2.changes.find(c=>c.path===worldPresentation.change.path).previousPath);
 assert.deepEqual(worldPresentation.sourceChanges.map(c=>c.path),['assets/js/pages/world.js','assets/js/pages/civilization-atlas/world-explorer.js','assets/js/pages/civilization-atlas/world-search.js']);
 assert.deepEqual(worldPresentation.dependencies.map(c=>c.path),['assets/js/pages/civilization-atlas/world-observations.js','assets/js/pages/civilization-atlas/world-published-reading.js']);
-for(const dependency of worldPresentation.dependencies){const successor=worldR2.dependencies.find(d=>d.path===dependency.path);assert.equal(digest(dependency.path),successor?.sha256||dependency.sha256,'World dependency drift: '+dependency.path);}
+for(const dependency of worldPresentation.dependencies){const successor=worldR2.dependencies.find(d=>d.path===dependency.path);assert.equal(digest(dependency.path),worldUxDigest(dependency.path,successor?.sha256||dependency.sha256),'World dependency drift: '+dependency.path);}
 for(const mount of [observations,publishedReading])assert.equal(currentWorld.split(mount).length,2,'World mount must occur exactly once');
 assert.equal(currentWorld.replace(observations,'').replace(publishedReading,''),read(worldPresentation.change.previousPath),'World changes exceed registered mount points');
 for(const entry of recovery.sourceEvidence){
@@ -143,7 +147,7 @@ for(const entry of recovery.sourceEvidence){
  if(sourceChange){assert.equal(sourceChange.previousSha256,entry.sha256);assert.equal(digest(sourceChange.previousPath),entry.sha256);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(sourceChange.changeClass));}
  const presentationSource=worldPresentation.sourceChanges.find(item=>item.path===entry.path);
  if(presentationSource){assert.equal(presentationSource.previousSha256,sourceChange?.successorSha256||entry.sha256);assert.equal(digest(presentationSource.previousPath),presentationSource.previousSha256);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(presentationSource.changeClass));}
- assert.equal(digest(entry.path),worldR2.changes.find(c=>c.path===entry.path)?.successorSha256||(change?worldPresentation.change.successorSha256:presentationSource?.successorSha256||sourceChange?.successorSha256||entry.sha256),'World recovery source evidence drift: '+entry.path);
+ assert.equal(digest(entry.path),worldUxDigest(entry.path,worldR2.changes.find(c=>c.path===entry.path)?.successorSha256||(change?worldPresentation.change.successorSha256:presentationSource?.successorSha256||sourceChange?.successorSha256||entry.sha256)),'World recovery source evidence drift: '+entry.path);
 }
 const recoveryDigest=(p,prior)=>{const c=recovery.changes.find(c=>c.path===p);let expected=prior;if(c){assert.equal(c.previousSha256,prior,'World recovery predecessor drift: '+p);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(c.changeClass));expected=c.successorSha256;}const next=worldCurrent.loaderChange;if(next.path===p){assert.equal(next.previousSha256,expected);assert.equal(digest(next.previousPath),expected);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(next.changeClass));expected=next.successorSha256;}return expected;};
 const currentVisualDigest=c=>{

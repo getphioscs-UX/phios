@@ -201,7 +201,16 @@ for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
   );
 }
 assert.equal(wranglerReconciliation.predecessor.wranglerSha256, registry.frozenArtifacts['wrangler.jsonc']);
-assert.equal(await sha256('wrangler.jsonc'), wranglerReconciliation.successor.wranglerSha256);
+const readOnlyReconciliation=await readJson('content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v2.json');
+assert.equal(readOnlyReconciliation.status,'ENGINEERING_RECONCILIATION');
+assert.equal(readOnlyReconciliation.predecessor,'content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v1.json');
+assert.equal(await sha256(readOnlyReconciliation.predecessor),readOnlyReconciliation.predecessorSha256);
+assert.equal(readOnlyReconciliation.previousPath,'content/knowledge/registry/m3c-w3-wrangler-before-read-only-v2.json');
+assert.equal(readOnlyReconciliation.previousSha256,wranglerReconciliation.successor.wranglerSha256);
+assert.equal(await sha256(readOnlyReconciliation.previousPath),readOnlyReconciliation.previousSha256);
+assert.deepEqual(readOnlyReconciliation.allowedVars,{PHIOS_D1_MAINTENANCE_MODE:'READ_ONLY'});
+for(const key of ['productionActivationVerified','deploymentExecuted','d1MutationExecuted'])assert.equal(readOnlyReconciliation[key],false);
+assert.equal(await sha256('wrangler.jsonc'), readOnlyReconciliation.successorSha256);
 const wrangler = JSON.parse((await read('wrangler.jsonc')).replace(/^\uFEFF/, ''));
 const publicationDelta=wranglerReconciliation.allowedDelta.pagesPublication;
 assert.equal(publicationDelta.commit,'25226cd27f50c4b7197bd5a6f0371d56202861bf');
@@ -222,7 +231,8 @@ assert.deepEqual(rendererPredecessor,historicalWrangler,'Renderer preparation mu
 assert.deepEqual(rendererSuccessor,{...historicalWrangler,services:rendererDelta.services,vars:rendererDelta.vars},'Only the recorded production renderer and preparation flags may change');
 assert.deepEqual(rendererDelta.services,[{binding:'METHOD_REPORT_RENDERER',service:'phios-method-report-renderer-production'}]);
 assert.deepEqual(rendererDelta.vars,{PHIOS_ENVIRONMENT:'production',STRIPE_ENVIRONMENT:'LIVE',PHIOS_SHARED_PAID_REPORT_ENABLED:'true',PHIOS_P9_CANARY_ENABLED:'false',PHIOS_P9_CHECKOUT_ENABLED:'false',PHIOS_P9_REFUND_ENABLED:'false',REPORT_PROVIDER_LIVE_ALLOWED:'false'});
-assert.deepEqual(wrangler,rendererSuccessor,'Current Wrangler must match the pinned renderer preparation successor');
+assert.deepEqual(await readJson(readOnlyReconciliation.previousPath),rendererSuccessor);
+assert.deepEqual(wrangler,{...rendererSuccessor,vars:{...rendererSuccessor.vars,...readOnlyReconciliation.allowedVars}},'Only the recorded read-only maintenance flag may differ from renderer preparation');
 assert.equal(wrangler.ai.binding, wranglerReconciliation.preserved.aiBinding);
 assert.equal(wrangler.d1_databases.length, 1);
 assert.equal(wrangler.d1_databases[0].binding, wranglerReconciliation.preserved.d1Binding);

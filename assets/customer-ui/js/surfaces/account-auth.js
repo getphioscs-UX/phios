@@ -1,3 +1,4 @@
+import {notifyAccountLogout} from '../account-session-signal.js';
 const host=document.createElement('section');host.dataset.r5AccountAuth='';
 host.className='cx-card cx-stack';host.setAttribute('aria-live','polite');
 document.querySelector('#main .cx-container')?.prepend(host);
@@ -25,7 +26,7 @@ host.addEventListener('submit',async event=>{
  try{
   const r=await fetch('/api/auth/logout',{method:'POST',credentials:'same-origin',cache:'no-store',headers:{Accept:'application/json'}});
   const data=await r.json();if(!r.ok||data.ok!==true||new URL(data.logoutUrl).protocol!=='https:')throw new Error('LOGOUT_FAILED');
-  session={authenticated:false,providerConfigured:true};render();location.assign(data.logoutUrl);
+  session={authenticated:false,providerConfigured:true};notifyAccountLogout();render();location.assign(data.logoutUrl);
  }catch{
   button.disabled=false;let status=form.querySelector('[role="status"]');if(!status){status=document.createElement('p');status.setAttribute('role','status');form.append(status);}
   status.textContent=zh()?'暂时无法完成退出，请重试。':'Sign-out could not finish. Please try again.';

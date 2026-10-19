@@ -1,0 +1,3 @@
+import {requireSameOrigin} from '../account/oidc-auth.js';
+import {previewWillImport,confirmWillImport} from '../account/financial-will-import.js';
+export async function onRequestPost(context){try{requireSameOrigin(context.request);const raw=await context.request.text();if(raw.length>20000)throw Error('REQUEST_TOO_LARGE');const body=JSON.parse(raw);if(body.action==='confirm')return await confirmWillImport(context,body);if(body.action!=='preview')throw Error('ACTION_INVALID');return Response.json({ok:true,preview:await previewWillImport(context,body)},{headers:{'cache-control':'private, no-store'}});}catch(e){return Response.json({ok:false,code:e.code||e.message||'WILL_IMPORT_FAILED'},{status:e.status||422,headers:{'cache-control':'private, no-store'}});}}

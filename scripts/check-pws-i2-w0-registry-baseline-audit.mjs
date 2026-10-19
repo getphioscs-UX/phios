@@ -2,6 +2,7 @@ import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import crypto from 'node:crypto';
 
 const root = process.cwd();
 const read = file => fs.readFile(path.join(root, file), 'utf8');
@@ -49,7 +50,10 @@ const authorisedSevenVolumeSuccessorRegistryFiles = new Set([
   'runtime-position-48-source-windows-v1.json'
 ]);
 const authorisedKnowledgeSuccessorRegistryFiles = new Set([
-  'm3c-w3-wrangler-successor-reconciliation-v1.json'
+  'm3c-w3-wrangler-successor-reconciliation-v1.json',
+  // Configuration reconciliation and predecessor evidence, not Knowledge registries.
+  'm3c-w3-wrangler-successor-reconciliation-v2.json',
+  'm3c-w3-wrangler-before-read-only-v2.json'
 ]);
 const indexedFiles = Object.values(registryIndex.registries)
   .map(file => file.replace(/^\.\//, ''));
@@ -94,6 +98,19 @@ assert(
 const baselineKnowledgeData = knowledgeData.filter(
   file => !authorisedKnowledgeSuccessorRegistryFiles.has(file)
 );
+const knowledgeEvidencePrefix = 'content/knowledge/registry/';
+const configurationEvidence = await readJson(knowledgeEvidencePrefix + 'm3c-w3-wrangler-successor-reconciliation-v2.json');
+const normalizedDigest = async file => crypto.createHash('sha256')
+  .update((await read(file)).replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n')).digest('hex');
+assert.equal(configurationEvidence.status, 'ENGINEERING_RECONCILIATION');
+assert.equal(configurationEvidence.predecessor, knowledgeEvidencePrefix + 'm3c-w3-wrangler-successor-reconciliation-v1.json');
+assert.equal(configurationEvidence.previousPath, knowledgeEvidencePrefix + 'm3c-w3-wrangler-before-read-only-v2.json');
+assert.equal(await normalizedDigest(configurationEvidence.predecessor), configurationEvidence.predecessorSha256);
+assert.equal(await normalizedDigest(configurationEvidence.previousPath), configurationEvidence.previousSha256);
+const configurationPredecessor = await readJson(configurationEvidence.predecessor);
+assert.equal(configurationEvidence.previousSha256, configurationPredecessor.successor.wranglerSha256);
+assert.deepEqual(configurationEvidence.allowedVars, { PHIOS_D1_MAINTENANCE_MODE: 'READ_ONLY' });
+for (const flag of ['productionActivationVerified', 'deploymentExecuted', 'd1MutationExecuted']) assert.equal(configurationEvidence[flag], false);
 const knowledgeSchemas = await listFiles(
   'content/knowledge/registry/schemas',
   '.json'
@@ -204,5 +221,5 @@ assert(
 console.log('✓ PWS-I2-W0 Registry Baseline Audit passed.');
 console.log('  Registry 6 modules; Runtime Contracts/Schemas/Versions 20 each.');
 console.log('  Persistence 9 methods; D1 1 binding; W0 executable Migrations 4.');
-console.log('  Historical Static JSON baseline 114 + 1 authorised 7V architecture pointer + 1 Batch 0 visual freeze; Knowledge Registry 12 frozen + 1 authorised M3C successor reconciliation; registry index 51; historical unindexed excluding index 62.');
+console.log('  Historical Static JSON baseline 114; current architecture/visual/runtime-position records are checked separately. Knowledge Registry 12 frozen + 3 M3C configuration reconciliation/evidence files; registry index 51; historical unindexed excluding index 62.');
 console.log('  Multiple-source risks recorded; no Registry or Migration changed.');
