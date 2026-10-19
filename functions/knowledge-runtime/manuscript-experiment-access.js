@@ -10,3 +10,12 @@ export function experimentFragments(token,source){
  const m=token&&capabilities.get(token);return m?m.fragments.filter(f=>f.bookCode===source.bookCode&&f.sourceSha256===(source.sourceSha256||source.sourceBinaryDigest)&&(!source.sectionCode||f.sectionCode===source.sectionCode)&&(!source.sectionSha256||f.sectionSha256===source.sectionSha256)):[];
 }
 export function experimentAllows(token,source){return experimentFragments(token,source).length>0;}
+// Optional local source-candidate registry belongs to this same in-process
+// capability. It cannot be selected by request parameters or an environment flag.
+export function isolatedExperimentRegistry(token,env){
+ const m=token&&capabilities.get(token);
+ if(env?.PHIOS_ENVIRONMENT!=='local'||env?.PHIOS_ISOLATED_OPERATOR!==true||!m?.sourceCandidateRegistry)return null;
+ const registry=m.sourceCandidateRegistry;
+ if(!Array.isArray(registry.records)||registry.records.some(s=>!['en','zh-Hans'].includes(s.locale)||!experimentFragments(token,s).length))throw Error('EXPERIMENT_SOURCE_REGISTRY_SCOPE_INVALID');
+ return structuredClone(registry);
+}

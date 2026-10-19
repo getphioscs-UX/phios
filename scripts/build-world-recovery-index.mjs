@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import {worldPublishedReadings} from './lib/world-published-readings.mjs';
 import {acquireGeneratedWriter,writeGeneratedFile} from './lib/generated-file-writer.mjs';
 const generationLease=acquireGeneratedWriter(process.cwd(),'world-recovery-index');
 const consumedInputs=new Map();
@@ -40,6 +41,7 @@ const visualRows=bindings.assets.filter(a=>resolveAtlasVisualById(bindings,a.ass
 rows.push(...visualRows);
 // Only human-accepted subsystem records are searchable as admitted current objects.
 for(const file of fs.readdirSync(base+'/reconfiguration').filter(f=>/^dossier-.*-w8i-accepted-current-dossier-v1\.json$/.test(f))){const p=base+'/reconfiguration/'+file,r=read(p),id=r.dossierId||r.id;const dossier=rows.find(x=>x.type==='current-dossier'&&x.id===id);if(!dossier)continue;for(const position of r.admittedPositions||[])rows.push({...dossier,id:id+':'+position.runtimePositionId,type:'runtime-position',title:localized(position.shortLabel||positionRegistry.positions.find(p=>p.id===position.runtimePositionId)?.shortLabel),state:'CURRENT_SUBSYSTEM_ONLY',relatedObjects:[id],source:p,summary:{en:'Human-accepted subsystem position; never a whole-region verdict.','zh-Hans':'人工接受的子系统位置，不代表整个地区。'}});rows.push({...dossier,id:id+':accepted',type:'admitted-current-evidence',state:'CURRENT_SUBSYSTEM_ONLY',source:p,summary:{en:'Human-accepted subsystem evidence only; no whole-region conclusion.','zh-Hans':'仅限人工接受的子系统证据，不代表整个地区。'}});}
+rows.push(...await worldPublishedReadings(read));
 const objectMap=new Map(rows.filter(r=>r.type!=='visual').map(r=>[r.id,r]));const relations=[];const pairSeen=new Set();function edge(from,to,source,basis,kind='READING_ASSOCIATION'){if(!objectMap.has(from)||!objectMap.has(to)||from===to)return;const id=from+'>'+to+':'+basis;if(pairSeen.has(id))return;pairSeen.add(id);relations.push({relationId:id,from,to,fromType:objectMap.get(from).type,toType:objectMap.get(to).type,kind,time:objectMap.get(from).time,scope:objectMap.get(from).regionId,basisRefs:[source+'#'+basis],publicationState:'SOURCE_REGISTERED_READING_LINK',explanation:{en:'This source explicitly registers the related object. It is a reading link, not causal evidence or a current-state conclusion.','zh-Hans':'来源明确登记了这个关联对象。这是阅读关联，不构成因果证据或当前状态结论。'}});}
 for(const r of rows.filter(r=>r.type!=='visual'))for(const id of r.relatedObjects||[])edge(r.id,id,r.source,'relatedObjects');
 for(const [file,array,key]of configs){const source=base+'/'+file;for(const r of read(source)[array]||[])for(const [field,value]of Object.entries(r)){if(!Array.isArray(value))continue;for(const id of value)if(typeof id==='string')edge(r[key],id,source,field);}}

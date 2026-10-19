@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-19T03:43:01.457Z",
+  "scope": "REAL_COMMERCE_HANDLER_MEMORY_SQLITE_SYNTHETIC_RIGHTS_NOT_ACTUAL_ENGLISH_PDF_DELIVERY",
+  "providerCalls": 0,
+  "productionWrites": 0,
+  "rows": [
+    {
+      "id": "anonymous",
+      "status": 401,
+      "issued": false,
+      "error": "commerce_authentication_required"
+    },
+    {
+      "id": "no-entitlement",
+      "status": 403,
+      "issued": false,
+      "error": "book_access_required"
+    },
+    {
+      "id": "expired",
+      "status": 403,
+      "issued": false,
+      "error": "book_access_required"
+    },
+    {
+      "id": "active",
+      "status": 200,
+      "issued": true,
+      "error": null
+    },
+    {
+      "id": "cross-account",
+      "status": 403,
+      "issued": false,
+      "error": "book_access_required"
+    }
+  ],
+  "englishLanguageSelection": "NOT_IMPLEMENTED_EXISTING_API_PRODUCT_ID_ONLY"
+}

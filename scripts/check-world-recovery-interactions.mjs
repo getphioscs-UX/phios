@@ -15,7 +15,7 @@ const ctx=await browser.newContext({viewport:{width,height:900}});
 await ctx.route('**/*',r=>{const u=new URL(r.request().url());return u.origin===origin||u.hostname==='pub-1967bc5812ee4164b19a806fb1427021.r2.dev'?r.continue():r.abort();});
 const page=await ctx.newPage();await page.goto(origin+'/world?locale='+locale);
 const query=page.locator('#world-search-query');await query.fill(locale==='en'?'Meiji':'明治');await query.press('Enter');
-await page.waitForFunction(()=>new URL(location.href).searchParams.get('q'));
+await page.waitForFunction(()=>history.state?.worldSearchQuery);assert.equal(new URL(page.url()).searchParams.has('q'),false);
 assert(await page.locator('[data-search-entity]').count()>0);
 await page.locator('[data-search-filter="type"]').selectOption('civilization');
 assert.equal(new URL(page.url()).searchParams.get('searchType'),'civilization');

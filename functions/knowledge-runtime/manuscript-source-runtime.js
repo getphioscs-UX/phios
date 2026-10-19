@@ -357,7 +357,7 @@ export function searchManuscriptCorpus({
       sourceVersion: source.version || source.sourceCode,
       sourceBinaryDigest: source.sourceSha256,
       sourceAcceptanceDigest: source.acceptanceSha256 || source.sourceAcceptanceSha256 || source.sourceIdentitySha256 || null,
-      sourceAcceptanceBasis:source.sourceIdentitySha256&&!source.acceptanceSha256&&!source.sourceAcceptanceSha256?'VERIFIED_CURRENT_SOURCE_IDENTITY_INHERITANCE_NOT_NEW_TEXT_ACCEPTANCE':'EXISTING_SOURCE_ACCEPTANCE',
+      sourceAcceptanceBasis:source.isolatedSourceCandidate?'ISOLATED_VERIFIED_FRAGMENT_NOT_PRODUCTION_ADMISSION':source.sourceIdentitySha256&&!source.acceptanceSha256&&!source.sourceAcceptanceSha256?'VERIFIED_CURRENT_SOURCE_IDENTITY_INHERITANCE_NOT_NEW_TEXT_ACCEPTANCE':'EXISTING_SOURCE_ACCEPTANCE',
       sourceScopeAdmissionDigest: source.scopeAdmissionSha256 || null,
       wholeChapterQualified:item.record.wholeChapterQualified===true,
       sourceConceptAliases:(item.record.retrievalConcepts||[]).flatMap(c=>c.aliases||[]),

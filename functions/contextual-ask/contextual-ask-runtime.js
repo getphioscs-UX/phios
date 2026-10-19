@@ -102,7 +102,7 @@ export async function resolveSelectedArticle(env,slug,locale='en') {
   if(!row?.path?.startsWith('/content/knowledge/public/'))return null;
   const article=await read(row.path);
   if(article?.publicationStatus!=='published'||article?.reviewStatus!=='approved'||article?.locale!==locale||article?.slug!==row.slug)return null;
-  const paragraphs=(article.sections||[]).flatMap((s,sectionIndex)=>(s.blocks||[]).map(b=>({text:b.text||b.statement||'',anchor:/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s.anchor)?s.anchor:`article-section-${sectionIndex+1}`}))).filter(p=>p.text);
+  const paragraphs=(article.sections||[]).flatMap((s,sectionIndex)=>{const anchor=/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s.anchor)?s.anchor:`article-section-${sectionIndex+1}`;const blocks=Array.isArray(s.blocks)&&s.blocks.length?s.blocks.map(b=>b.text||b.statement||''):Array.isArray(s.paragraphs)?s.paragraphs:[];return blocks.filter(text=>typeof text==='string'&&text.trim()).map(text=>({text,anchor}));});
   if(!paragraphs.length)return null;
   const href=article.publicHref||row.href;
   if(!href?.startsWith('/articles/')||href.startsWith('//'))return null;

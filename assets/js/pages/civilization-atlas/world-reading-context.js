@@ -17,7 +17,13 @@ export function worldAskContext(book,state,data,locale,currentUrl){
  const url=reconfigurationAtlasUrlFromState(currentUrl,state);url.searchParams.set('view','reconfiguration');
  return {contextType:'KNOWLEDGE',contextRef:'BOOK:BOOK-6',contextLabel:locale==='zh-Hans'?'世界重组资料':'World reconfiguration sources',contextRoute:url.pathname+url.search+url.hash,readingPath:'BOOK-6 > PART-13 > '+state.activeLayer,relatedKnowledgeRef:'BOOK:BOOK-6',retrievalScope:scope};
 }
-export function askURL(context){const p=new URLSearchParams();for(const[k,v]of Object.entries(context))if(v)p.set(k,k==='retrievalScope'?JSON.stringify(v):v);return '/knowledge/ask/?'+p;}
+export function askURL(context){
+ const p=new URLSearchParams();for(const key of ['contextType','contextRef','relatedKnowledgeRef','locale'])if(context[key])p.set(key,context[key]);
+ const fields=['schemaVersion','scopeType','bookCode','partCode','activeLayer','time','timeWindowId','snapshotId','regionIds','caseIds','primaryCaseId','comparisonFamilyId','trajectoryIds','transitionWindowId','lossFamilyId','lossTypeId','evidenceClasses','entityId','windowId','dossierId','livedRealityDimensionId','positionId','sectionId','comparisonIds'];
+ if(context.retrievalScope)p.set('retrievalScope',JSON.stringify(Object.fromEntries(fields.filter(k=>context.retrievalScope[k]!=null).map(k=>[k,context.retrievalScope[k]]))));
+ if(context.contextRoute){const u=new URL(context.contextRoute,'https://world.invalid');const safe=new URL(u.pathname,'https://world.invalid');for(const key of ['atlas','view','case','period','snapshot','regions','cases','family','trajectories','tw','lossFamily','lossType','dossier','section','locale','reading'])if(u.searchParams.has(key))safe.searchParams.set(key,u.searchParams.get(key));if(u.pathname.startsWith('/world'))p.set('contextRoute',safe.pathname+safe.search);}
+ return '/knowledge/ask/?'+p;
+}
 export function sameObjectDirection(index,object,layer){
  if(!object)return {state:'BROWSE',candidates:[]};
  const candidates=worldObjectRelations(index,object).map(r=>index.rows.find(x=>x.id===(r.from===object.id?r.to:r.from)&&x.book===object.book&&x.layer===layer&&x.type!=='visual')).filter(Boolean);

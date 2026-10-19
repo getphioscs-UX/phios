@@ -1,4 +1,4 @@
-import {experimentFragments} from '../knowledge-runtime/manuscript-experiment-access.js';
+import {experimentFragments,isolatedExperimentRegistry} from '../knowledge-runtime/manuscript-experiment-access.js';
 import { handlePublicKnowledgeRequest } from './public-knowledge-api.js';
 import {
   MANUSCRIPT_SOURCE_LIMITS,
@@ -61,7 +61,7 @@ async function manuscriptProjection({ env, query, locale, bookCode, experimentAc
     return { status: 'disabled_in_preview', records: [], errors: [] };
   }
   const [registry, reviewedRegistry, bindings, corrections, semanticProfiles] = await Promise.all([
-    readAssetJson(env, manuscriptMetadataRaw.ACTIVE_MANUSCRIPT_SOURCE_REGISTRY || 'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v5.json'),
+    Promise.resolve(isolatedExperimentRegistry(experimentAccess,env)).then(candidate=>candidate||readAssetJson(env, manuscriptMetadataRaw.ACTIVE_MANUSCRIPT_SOURCE_REGISTRY || 'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v5.json')),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-editorial-correction-v1.json'),
@@ -71,6 +71,7 @@ async function manuscriptProjection({ env, query, locale, bookCode, experimentAc
   const sources = registry.records
     .filter(source => source.locale === locale && (source.runtimeAdmission === 'SCOPED_TEXT_CANDIDATE_NOT_ACTIVATED' ? env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' || env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED === 'true' : source.runtimeAdmission !== 'NOT_ADMITTED' || (identityQa&&source.qaOnly===true&&source.sourceIdentityPath) || (env.PHIOS_MANUSCRIPT_DERIVATIVE_QA === 'true' && source.sourceAcceptancePath && source.version?.startsWith('owner-final-20261011-'))) && (!bookCode || source.bookCode === bookCode))
     .map(source => {
+      if(isolatedExperimentRegistry(experimentAccess,env)&&experimentFragments(experimentAccess,source).length)return {...source,isolatedSourceCandidate:true};
       if(identityQa&&source.qaOnly===true&&source.sourceIdentityPath)return source;
       if(env.PHIOS_MANUSCRIPT_TEXT_SCOPE_ENABLED==='true'&&source.scopeAdmissionPath&&source.sourceIdentityPath)return source;
       if (source.runtimeAdmission === 'ADMITTED_READABILITY_SOURCE_PENDING_REMOTE_OBJECT') return source;
