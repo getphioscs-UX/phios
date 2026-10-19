@@ -1,6 +1,8 @@
 import runtimePositions from '../../content/registry/runtime-position-48-v1.json';
 import {atlasUrlFromState} from '../../assets/js/pages/civilization-atlas/atlas-url-state.js';
-import {getAcceptedBook6Projection} from './book6-current-source.js';
+import {getAcceptedBook6Projection as rawAcceptedBook6Projection} from './book6-current-source.js';
+import {publicBook6ProviderBoundary} from './book6-public-provider-boundary.js';
+const getAcceptedBook6Projection=(...args)=>publicBook6ProviderBoundary(rawAcceptedBook6Projection(...args));
 const clean=value=>String(value??'').normalize('NFKC').trim();
 const scalar=(value,max=120)=>clean(value).slice(0,max)||null;
 const list=(value,max=8)=>[...new Set((Array.isArray(value)?value:[]).map(item=>scalar(item)).filter(Boolean))].slice(0,max);

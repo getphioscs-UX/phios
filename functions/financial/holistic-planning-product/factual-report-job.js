@@ -1,7 +1,7 @@
 import {loadOwnedDraft} from '../../account/financial-will-draft-store.js';
 import {requireFinancialGrant,grantOwner} from '../../professional/consent/financial-purpose-grants.js';
 import {runFinancialProduct} from '../product-activation/financial-product-runtime.js';
-import {calculateLoan,calculateRental} from '../calculation-runtime/customer-finance-tools.js';
+import {calculateLoan,calculateRental,calculateRentalPortfolio} from '../calculation-runtime/customer-finance-tools.js';
 import {sha256Hex} from '../../document-assembly/digest.js';
 import {createReportGenerationStore} from '../../personal-reading/report-generation-store.js';
 import {createCustomerReportArtifact} from '../../report-delivery/customer-report-artifact.js';
@@ -16,7 +16,7 @@ export async function buildFinancialReportEvidence(context,{savedDraftRef,grantI
  const source=await loadOwnedDraft(context,{draftId:savedDraftRef.draftId,version:savedDraftRef.version,expectedRef:savedDraftRef,kind:'FINANCIAL'});
  const response=await context.env.ASSETS.fetch(new Request(new URL('/content/financial/analysis-runtime/policies/financial-analysis-policy-set-base-v1.json',context.request.url)));if(!response.ok)fail('FAR_POLICY_UNAVAILABLE');
  const runtime=await runFinancialProduct({input:source.payload,calculationPolicy:'CUSTOMER_NET_DEBT_V2',includeOwnerEvidence:true,analysisPolicySet:await response.json()});
- const scenarios=Object.fromEntries(Object.entries(source.payload.toolScenarios||{}).map(([kind,input])=>[kind,(kind==='loan'?calculateLoan:calculateRental)(input)]));
+ const scenarios=Object.fromEntries(Object.entries(source.payload.toolScenarios||{}).filter(([kind])=>kind!=='rental'||!source.payload.toolScenarios.rentalPortfolio).map(([kind,input])=>[kind,kind==='rentalPortfolio'?calculateRentalPortfolio(input.properties):(kind==='loan'?calculateLoan:calculateRental)(input)]));
  const body={schemaVersion:'FINANCIAL_REPORT_EVIDENCE_V1',source:source.savedDraftRef,currency:source.payload.baseCurrency,asOfDate:source.payload.asOfDate,snapshot:runtime.snapshot,ownerEvidence:runtime.ownerEvidence,calculationDigest:runtime.calculation.resultDigest,metrics:runtime.calculation.metrics,typedMetrics:runtime.calculation.typedMetrics,scenarios,findings:runtime.findings,unknowns:runtime.scenario,language,serviceScope:'FACTUAL_ONLY',registryVersions:{contract:'FINANCE-PREPARATION-R1',math:'MINOR_UNIT_HALF_UP_v1'}};
  return {...body,evidenceDigest:sha256Hex(body)};
 }

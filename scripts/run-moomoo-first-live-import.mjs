@@ -1,11 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {assertNoSecrets,historyKlineUrl,normalizeHistoryKlinePage,priorEndFromNextTime} from './lib/civilization-atlas/moomoo-first-live-import-v1.mjs';
+import {assertNoSecrets,historyKlineUrl,mergeHistoryKlinePages,nextHistoryWindow} from './lib/civilization-atlas/moomoo-first-live-import-v1.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const read=rel=>JSON.parse(fs.readFileSync(path.join(root,rel),'utf8'));
 const write=(rel,v)=>fs.writeFileSync(path.join(root,rel),JSON.stringify(v,null,2)+'\n');
+if(process.argv.includes('--dry-run')){console.log('DRY_RUN_ONLY: bounded forward/backward windows, deduplicated pages, max 20 requests per symbol; no credentials read and no network. Live execution requires separate zero-cost/provider permission.');process.exit(0);}
 const token=String(process.env.MOOMOO_ACCESS_TOKEN||'').trim();
 if(!token){console.error('NO_VALID_AUTH: MOOMOO_ACCESS_TOKEN is not set. No network request was made.');process.exit(2);}
 const plan=read('content/civilization-atlas/reconfiguration/moomoo-first-data-request-plan-v1.json');
@@ -17,12 +18,13 @@ const failures=[];
 const runAt=new Date().toISOString();
 for(const symbol of request.instruments){
   let end=request.window.end;
+  let start=request.window.start;
   let page=0;
   const pages=[];
   while(end&&end>=request.window.start){
     page+=1;
     if(page>20)throw new Error('MOOMOO_PAGINATION_GUARD:'+symbol);
-    const url=historyKlineUrl({host,symbol,start:request.window.start,end,num:370});
+    const url=historyKlineUrl({host,symbol,start,end,num:370});
     const res=await fetch(url,{method:'GET',headers:{Authorization:'Bearer '+token,Accept:'application/json'}});
     const bodyText=await res.text();
     let body;try{body=JSON.parse(bodyText);}catch{throw new Error('MOOMOO_JSON_INVALID:'+symbol+':HTTP_'+res.status);}
@@ -32,13 +34,12 @@ for(const symbol of request.instruments){
     }
     assertNoSecrets(body);
     pages.push(body);
-    const next=body?.data?.next_time??body?.next_time??null;
-    const nextEnd=priorEndFromNextTime(next);
-    if(!nextEnd||nextEnd>=end)break;
-    end=nextEnd;
+    const next=nextHistoryWindow({response:body,start,end});
+    if(!next||(next.start===start&&next.end===end))break;
+    start=next.start;end=next.end;
   }
   if(failures.some(x=>x.symbol===symbol))continue;
-  const normalizedRecords=pages.flatMap(p=>normalizeHistoryKlinePage({symbol,response:p}));
+  const normalizedRecords=mergeHistoryKlinePages({symbol,pages});
   const rawResponse={pages};
   assertNoSecrets(rawResponse);
   payloads.push({

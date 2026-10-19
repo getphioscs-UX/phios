@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-10-19T07:09:50.073Z",
-  "head": "2a9b2574dff3024c46f216a87da4d947dcd93311",
-  "dependencyDigest": "f854924c01a2e7a9cc01f20efdd7a7ee8296b18b190f0fbf4dccb21c6564975c",
-  "status": "PARTIAL_EVIDENCE_GAPS_OPEN",
+  "updatedAt": "2026-10-19T08:24:48.170Z",
+  "head": "4009d2509aeb30c86ec18c39764414f1127b27db",
+  "dependencyDigest": "da5857ab8944dbf3b88d3302a037b0fe3ead6bfcaaf85c9196c71fc7f99f47f3",
+  "status": "READY_FOR_SCOPED_HUMAN_REVIEW_WITH_EXTERNAL_BLOCKERS",
   "environment": "LOCAL_SYNTHETIC_ONLY",
   "cases": [
     {
@@ -646,11 +646,12 @@
       "id": "D13",
       "scenario": "HTML/PDF/图表/下载",
       "expected": "同一正文和 metric 版本，中文英文内容可核对",
-      "status": "NOT_RUN",
+      "status": "PASS",
       "evidence": [
+        "REPORT-PRINT-EVIDENCE.json",
         "M1-BROWSER-EVIDENCE.json"
       ],
-      "limit": "Stored HTML download is exercised. Bilingual PDF print/text/page review is tracked separately and must be reconciled before marking this compound case PASS."
+      "limit": "Exact stored HTML download and local Edge bilingual PDF text/page reconciliation. Production renderer/paid report acceptance remains closed."
     },
     {
       "id": "E01",
@@ -730,7 +731,7 @@
       "evidence": [
         "VALIDATION.json"
       ],
-      "limit": "Existing professional identity/eligibility/assignment/consent owner runs before private source read; exact recipient/scope/version/revocation and independent note persistence verified with synthetic authority. No direct download token issued."
+      "limit": "Authenticated API resolves persisted owner records and rechecks existing professional identity/eligibility/assignment/consent before private source read; exact recipient/scope/version/revocation and independent note persistence verified with synthetic authority. No direct download token issued."
     },
     {
       "id": "F02",
@@ -740,7 +741,7 @@
       "evidence": [
         "VALIDATION.json"
       ],
-      "limit": "Existing professional identity/eligibility/assignment/consent owner runs before private source read; exact recipient/scope/version/revocation and independent note persistence verified with synthetic authority. No direct download token issued."
+      "limit": "Authenticated API resolves persisted owner records and rechecks existing professional identity/eligibility/assignment/consent before private source read; exact recipient/scope/version/revocation and independent note persistence verified with synthetic authority. No direct download token issued."
     },
     {
       "id": "F03",
@@ -750,7 +751,7 @@
       "evidence": [
         "VALIDATION.json"
       ],
-      "limit": "Existing professional identity/eligibility/assignment/consent owner runs before private source read; exact recipient/scope/version/revocation and independent note persistence verified with synthetic authority. No direct download token issued."
+      "limit": "Authenticated API resolves persisted owner records and rechecks existing professional identity/eligibility/assignment/consent before private source read; exact recipient/scope/version/revocation and independent note persistence verified with synthetic authority. No direct download token issued."
     },
     {
       "id": "F04",
@@ -760,7 +761,7 @@
       "evidence": [
         "VALIDATION.json"
       ],
-      "limit": "Existing professional identity/eligibility/assignment/consent owner runs before private source read; exact recipient/scope/version/revocation and independent note persistence verified with synthetic authority. No direct download token issued."
+      "limit": "Authenticated API resolves persisted owner records and rechecks existing professional identity/eligibility/assignment/consent before private source read; exact recipient/scope/version/revocation and independent note persistence verified with synthetic authority. No direct download token issued."
     },
     {
       "id": "F05",
@@ -780,7 +781,7 @@
       "evidence": [
         "VALIDATION.json"
       ],
-      "limit": "Existing professional identity/eligibility/assignment/consent owner runs before private source read; exact recipient/scope/version/revocation and independent note persistence verified with synthetic authority. No direct download token issued."
+      "limit": "Authenticated API resolves persisted owner records and rechecks existing professional identity/eligibility/assignment/consent before private source read; exact recipient/scope/version/revocation and independent note persistence verified with synthetic authority. No direct download token issued."
     },
     {
       "id": "F07",
@@ -816,11 +817,11 @@
       "id": "U03",
       "scenario": "登出/换账户/回退缓存/权限失效",
       "expected": "私人视图清理，不显示上一账户数据",
-      "status": "NOT_RUN",
+      "status": "PASS",
       "evidence": [
         "M1-BROWSER-EVIDENCE.json"
       ],
-      "limit": "Logout clears private views, account-owner change/401/pageshow code is wired; full two-account browser/back-cache/expired-auth compound case still needs independent browser evidence."
+      "limit": "Actual local two-owner switch,401 invalidation and browser back-navigation clear private views in six cases; production identity-provider session remains unverified."
     }
   ]
 }

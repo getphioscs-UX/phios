@@ -1,4 +1,5 @@
 import identity from '../../content/health/health-reality-runtime/deployment/hrx-w33-deployment-identity-v1.json';
+import {healthAuthorityEnabled} from '../health/health-source-policy.js';
 
 const headers = {
   'content-type': 'application/json; charset=utf-8',
@@ -23,7 +24,7 @@ export async function onRequestGet(context) {
       shaMatch: pagesCommitSha ? pagesCommitSha === identity.sourceBaselineSha : null
     },
     activation: {
-      liveAuthorityEnabled: env.PHIOS_HEALTH_AUTHORITY_ENABLED === '1',
+      liveAuthorityEnabled: healthAuthorityEnabled(env),
       persistenceConfigured: Boolean(env.HEALTH_DB && env.PHIOS_HEALTH_DATA_SECRET),
       persistencePromoted: false
     },

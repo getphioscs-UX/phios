@@ -11,6 +11,7 @@ export async function customerFinancialPacket(context,{savedDraftRef,scopes}){
 // The caller supplies no identity, eligibility or assignment decision. Those must
 // already have been loaded by the existing authenticated professional owner.
 export async function readProfessionalFinancialPacket(context,{savedDraftRef,grantId,scopes,jurisdictionScope,serviceScope}){
+ if(context.data?.reloadProfessionalOwner)context=await context.data.reloadProfessionalOwner();
  const access=context.data?.professionalAccess;if(!access)fail('PROFESSIONAL_OWNER_CONTEXT_REQUIRED');
  if(!Array.isArray(access.verifiedJurisdictionScopes)||!access.verifiedJurisdictionScopes.includes(jurisdictionScope)||!Array.isArray(access.verifiedServiceScopes)||!access.verifiedServiceScopes.includes(serviceScope))fail('PROFESSIONAL_JURISDICTION_SERVICE_UNVERIFIED');
  return loadAuthorisedProfessionalWorkspace({...access,read_authorised_resources:async authorized=>{
@@ -22,6 +23,7 @@ export async function readProfessionalFinancialPacket(context,{savedDraftRef,gra
   // Revocation is re-read immediately before any payload is decrypted.
   await requireFinancialGrant(delegated,{grantId,source:savedDraftRef,purpose:'PROFESSIONAL_REVIEW',scopes});
   const source=await loadOwnedDraft(delegated,{draftId:savedDraftRef.draftId,version:savedDraftRef.version,expectedRef:savedDraftRef,kind:'FINANCIAL'});
+  context.data.assertProfessionalSubjectScopes?.(source.payload.inventory,scopes);
   return {client:{reference:source.savedDraftRef.subjectRef},resources:{previous_reports:{source:source.savedDraftRef,sections:Object.fromEntries(scopes.map(s=>[s,source.payload.inventory?.[s]||[]]))}}};
  }},{now:new Date().toISOString()});
 }

@@ -1,5 +1,6 @@
 import { planAskHealthBridge } from './ask-health-bridge.js';
 import { admitHealthSource } from './health-authority-runtime.js';
+import {healthAuthorityEnabled,isVerifiedHealthSource,isVerifiedHealthSupport,healthText} from './health-source-policy.js';
 
 const text = value => String(value ?? '').trim();
 
@@ -9,11 +10,12 @@ export function groundAskHealthEvidence(input = {}, env = {}, authorityRegistry 
   if (['EMERGENCY','URGENT_EVALUATION'].includes(plan.safety?.careState)) {
     return { schemaVersion:'PHI-OS-ASK-HRX-GROUNDING-v1.0.0', answerState:'SAFETY_FIRST', plan, claims:[], sources:[], unknowns:['Clinical cause is not established by PHI OS.'], governance:baseGovernance() };
   }
-  const sourceAdmissions = (Array.isArray(input.sources) ? input.sources : []).map(source => admitHealthSource(source, authorityRegistry));
+  if(!healthAuthorityEnabled(env))return {answerState:'AUTHORITY_REQUIRED',plan,claims:[],sources:[],governance:baseGovernance()};
+  const sourceAdmissions = (Array.isArray(input.sources) ? input.sources : []).filter(isVerifiedHealthSource).map(source => admitHealthSource(source, authorityRegistry));
   const admitted = sourceAdmissions.filter(item => item.admissionState === 'ADMITTED');
   const factualClaims = (Array.isArray(input.claims) ? input.claims : []).map((claim,index)=>({ claimId:text(claim.claimId||`HRX-CLAIM-${index+1}`), text:text(claim.text), sourceId:text(claim.sourceId) }));
   const admittedIds = new Set(admitted.map(item=>item.source.sourceId));
-  const ungrounded = factualClaims.filter(claim=>!claim.sourceId || !admittedIds.has(claim.sourceId));
+  const ungrounded = factualClaims.filter(claim=>!claim.sourceId || !admittedIds.has(claim.sourceId)||(input.supports||[]).filter(isVerifiedHealthSupport).every(p=>p.sourceId!==claim.sourceId||healthText(p.quote)!==healthText(claim.text)));
   if (factualClaims.length && ungrounded.length) {
     return { schemaVersion:'PHI-OS-ASK-HRX-GROUNDING-v1.0.0', answerState:'AUTHORITY_REQUIRED', plan, claims:[], sources:admitted.map(x=>x.source), unknowns:['One or more health fact claims lack an admitted authority source.'], governance:baseGovernance() };
   }

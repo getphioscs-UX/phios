@@ -46,7 +46,8 @@ export function validateDraftVersion(kind,payload,version){
    });
   }
   const assets=new Set((copy.inventory.assets||[]).map((r,i)=>r.assetId||r.recordId||`A${i+1}`)),debts=new Set((copy.inventory.liabilities||[]).map((r,i)=>r.liabilityId||r.recordId||`L${i+1}`));
-  for(const rows of Object.values(copy.inventory).filter(Array.isArray))for(const r of rows){if(r.relatedAssetRefs?.some(id=>!assets.has(id))||r.relatedLiabilityRefs?.some(id=>!debts.has(id)))invalid('DRAFT_REFERENCE_UNRESOLVED');}
+  for(const property of copy.toolScenarios?.rentalPortfolio?.properties||[]){if(property.assetRef&&!assets.has(property.assetRef)||property.loanRefs?.some(id=>!debts.has(id)))invalid('DRAFT_REFERENCE_UNRESOLVED');}
+   for(const rows of Object.values(copy.inventory).filter(Array.isArray))for(const r of rows){if(r.relatedAssetRefs?.some(id=>!assets.has(id))||r.relatedLiabilityRefs?.some(id=>!debts.has(id)))invalid('DRAFT_REFERENCE_UNRESOLVED');}
  }
  // v1 remains the privacy and allowed-field boundary for unchanged fields.
  validateFinancialWillDraft(kind,legacy);

@@ -1449,6 +1449,1332 @@
       "endHead": "2a9b2574dff3024c46f216a87da4d947dcd93311",
       "sourceUnchanged": true,
       "finishedAt": "2026-10-19T07:25:16.009Z"
+    },
+    {
+      "startedAt": "2026-10-19T07:48:33.568Z",
+      "startHead": "4009d2509aeb30c86ec18c39764414f1127b27db",
+      "node": "v24.18.0",
+      "dependencyDigest": "62291f4b493dd8fb805ec48418b72f63ed0dca67c813c63f66c438a7305e9ae6",
+      "results": [
+        {
+          "id": "application-tests",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "--test",
+            "tests/financial-preparation/account-drafts.test.mjs",
+            "tests/financial-preparation/capabilities.test.mjs",
+            "tests/financial-preparation/customer-fcr-successor.test.mjs",
+            "tests/financial-preparation/durable-report.test.mjs",
+            "tests/financial-preparation/factual-report.test.mjs",
+            "tests/financial-preparation/finance-tools.test.mjs",
+            "tests/financial-preparation/provider-boundary.test.mjs",
+            "tests/financial-preparation/purpose-scope.test.mjs",
+            "tests/financial-preparation/tool-export.test.mjs",
+            "tests/financial-preparation/will-and-handoff.test.mjs",
+            "tests/financial-preparation/will-assembly.test.mjs",
+            "tests/financial-preparation/will-import.test.mjs"
+          ],
+          "startedAt": "2026-10-19T07:48:33.783Z",
+          "finishedAt": "2026-10-19T07:48:36.973Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/application-tests-1792396116971.log",
+          "logBytes": 4243,
+          "failure": null
+        },
+        {
+          "id": "reference-tests",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "--test",
+            "tests/financial-preparation/reference/jurisdiction-capability-reference.test.mjs"
+          ],
+          "startedAt": "2026-10-19T07:48:36.975Z",
+          "finishedAt": "2026-10-19T07:48:37.246Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/reference-tests-1792396117235.log",
+          "logBytes": 4555,
+          "failure": null
+        },
+        {
+          "id": "existing-privacy",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fw-s1-contract-privacy.mjs"
+          ],
+          "startedAt": "2026-10-19T07:48:37.246Z",
+          "finishedAt": "2026-10-19T07:48:37.472Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/existing-privacy-1792396117471.log",
+          "logBytes": 116,
+          "failure": null
+        },
+        {
+          "id": "existing-financial-successor",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-financial-will-successor.mjs"
+          ],
+          "startedAt": "2026-10-19T07:48:37.472Z",
+          "finishedAt": "2026-10-19T07:48:37.696Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/existing-financial-successor-1792396117695.log",
+          "logBytes": 182,
+          "failure": null
+        },
+        {
+          "id": "existing-report-material",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fw-report-material.mjs"
+          ],
+          "startedAt": "2026-10-19T07:48:37.696Z",
+          "finishedAt": "2026-10-19T07:48:38.034Z",
+          "exitCode": 1,
+          "status": "BASELINE_FAILURE",
+          "log": ".tmp/finance-validation/existing-report-material-1792396118033.log",
+          "logBytes": 1127,
+          "failure": "node:internal/modules/esm/assert:88\r\n        throw new ERR_IMPORT_ATTRIBUTE_MISSING(url, 'type', validType);\r\n              ^\r\n\r\nTypeError [ERR_IMPORT_ATTRIBUTE_MISSING]: Module \"file:///C:/phios/content/personal-reading/continuity/registries/continuity-subscription-product-registry-v2.json\" needs an import attribute of \"type: json\"\r\n    at validateAttributes (node:internal/modules/esm/assert:88:15)\r\n    at defaultLoadSync (node:internal/modules/esm/load:163:3)\r\n    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:802:12)\r\n    at #loadSync (node:internal/modules/esm/loader:834:53)\r\n    at ModuleLoader.load (node:internal/modules/esm/loader:783:26)\r\n    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:494:31)\r\n    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)\r\n    at afterResolve (node:internal/modules/esm/loader:607:52)\r\n    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:613:12)\r\n    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33) {\r\n  code: 'ERR_IMPORT_ATTRIBUTE_MISSING'\r\n}\r\n\r\nNode.js v24.18.0\r\n"
+        },
+        {
+          "id": "legacy-fcr-runtime",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-runtime.mjs"
+          ],
+          "startedAt": "2026-10-19T07:48:38.034Z",
+          "finishedAt": "2026-10-19T07:48:38.242Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-runtime-1792396118241.log",
+          "logBytes": 199,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-determinism",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-determinism.mjs"
+          ],
+          "startedAt": "2026-10-19T07:48:38.242Z",
+          "finishedAt": "2026-10-19T07:48:38.401Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-determinism-1792396118399.log",
+          "logBytes": 196,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-fdr-boundary",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-fdr-boundary.mjs"
+          ],
+          "startedAt": "2026-10-19T07:48:38.401Z",
+          "finishedAt": "2026-10-19T07:48:38.523Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-fdr-boundary-1792396118521.log",
+          "logBytes": 188,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-contracts",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-contracts.mjs"
+          ],
+          "startedAt": "2026-10-19T07:48:38.523Z",
+          "finishedAt": "2026-10-19T07:48:38.632Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-contracts-1792396118631.log",
+          "logBytes": 160,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-freeze",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-freeze.mjs"
+          ],
+          "startedAt": "2026-10-19T07:48:38.632Z",
+          "finishedAt": "2026-10-19T07:48:38.758Z",
+          "exitCode": 1,
+          "status": "BASELINE_FAILURE",
+          "log": ".tmp/finance-validation/legacy-fcr-freeze-1792396118756.log",
+          "logBytes": 743,
+          "failure": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: The input did not match the regular expression /check-fcr-authority\\.mjs/. Input:\r\n\r\n'node scripts/run-zero-cost-regression.mjs check:fcr'\r\n\r\n    at file:///C:/phios/scripts/check-fcr-freeze.mjs:10:214\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\r\n    at async node:internal/modules/esm/loader:643:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 'node scripts/run-zero-cost-regression.mjs check:fcr',\r\n  expected: /check-fcr-authority\\.mjs/,\r\n  operator: 'match',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n"
+        },
+        {
+          "id": "functions-compile",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "node_modules/wrangler/bin/wrangler.js",
+            "pages",
+            "functions",
+            "build",
+            "functions",
+            "--outdir",
+            ".tmp/finance-master-functions",
+            "--compatibility-date",
+            "2026-07-14",
+            "--compatibility-flags",
+            "nodejs_compat"
+          ],
+          "startedAt": "2026-10-19T07:48:38.758Z",
+          "finishedAt": "2026-10-19T07:48:42.058Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/functions-compile-1792396122057.log",
+          "logBytes": 1295,
+          "failure": null
+        }
+      ],
+      "endHead": "4009d2509aeb30c86ec18c39764414f1127b27db",
+      "sourceUnchanged": true,
+      "finishedAt": "2026-10-19T07:48:42.307Z"
+    },
+    {
+      "startedAt": "2026-10-19T07:52:51.283Z",
+      "startHead": "4009d2509aeb30c86ec18c39764414f1127b27db",
+      "node": "v24.18.0",
+      "dependencyDigest": "6613a99ab8031e39aa3d8c49b26895dfd0b1bd704bab1c6201c7fc442c33fd44",
+      "results": [
+        {
+          "id": "application-tests",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "--test",
+            "tests/financial-preparation/account-drafts.test.mjs",
+            "tests/financial-preparation/capabilities.test.mjs",
+            "tests/financial-preparation/customer-fcr-successor.test.mjs",
+            "tests/financial-preparation/durable-report.test.mjs",
+            "tests/financial-preparation/factual-report.test.mjs",
+            "tests/financial-preparation/finance-tools.test.mjs",
+            "tests/financial-preparation/provider-boundary.test.mjs",
+            "tests/financial-preparation/purpose-scope.test.mjs",
+            "tests/financial-preparation/tool-export.test.mjs",
+            "tests/financial-preparation/will-and-handoff.test.mjs",
+            "tests/financial-preparation/will-assembly.test.mjs",
+            "tests/financial-preparation/will-import.test.mjs"
+          ],
+          "startedAt": "2026-10-19T07:52:51.351Z",
+          "finishedAt": "2026-10-19T07:52:52.737Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/application-tests-1792396372736.log",
+          "logBytes": 4321,
+          "failure": null
+        },
+        {
+          "id": "reference-tests",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "--test",
+            "tests/financial-preparation/reference/jurisdiction-capability-reference.test.mjs"
+          ],
+          "startedAt": "2026-10-19T07:52:52.738Z",
+          "finishedAt": "2026-10-19T07:52:52.964Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/reference-tests-1792396372963.log",
+          "logBytes": 4555,
+          "failure": null
+        },
+        {
+          "id": "existing-privacy",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fw-s1-contract-privacy.mjs"
+          ],
+          "startedAt": "2026-10-19T07:52:52.964Z",
+          "finishedAt": "2026-10-19T07:52:53.184Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/existing-privacy-1792396373183.log",
+          "logBytes": 116,
+          "failure": null
+        },
+        {
+          "id": "existing-financial-successor",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-financial-will-successor.mjs"
+          ],
+          "startedAt": "2026-10-19T07:52:53.184Z",
+          "finishedAt": "2026-10-19T07:52:53.401Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/existing-financial-successor-1792396373400.log",
+          "logBytes": 182,
+          "failure": null
+        },
+        {
+          "id": "existing-report-material",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fw-report-material.mjs"
+          ],
+          "startedAt": "2026-10-19T07:52:53.401Z",
+          "finishedAt": "2026-10-19T07:52:53.713Z",
+          "exitCode": 1,
+          "status": "BASELINE_FAILURE",
+          "log": ".tmp/finance-validation/existing-report-material-1792396373712.log",
+          "logBytes": 1127,
+          "failure": "node:internal/modules/esm/assert:88\r\n        throw new ERR_IMPORT_ATTRIBUTE_MISSING(url, 'type', validType);\r\n              ^\r\n\r\nTypeError [ERR_IMPORT_ATTRIBUTE_MISSING]: Module \"file:///C:/phios/content/personal-reading/continuity/registries/continuity-subscription-product-registry-v2.json\" needs an import attribute of \"type: json\"\r\n    at validateAttributes (node:internal/modules/esm/assert:88:15)\r\n    at defaultLoadSync (node:internal/modules/esm/load:163:3)\r\n    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:802:12)\r\n    at #loadSync (node:internal/modules/esm/loader:834:53)\r\n    at ModuleLoader.load (node:internal/modules/esm/loader:783:26)\r\n    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:494:31)\r\n    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)\r\n    at afterResolve (node:internal/modules/esm/loader:607:52)\r\n    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:613:12)\r\n    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33) {\r\n  code: 'ERR_IMPORT_ATTRIBUTE_MISSING'\r\n}\r\n\r\nNode.js v24.18.0\r\n"
+        },
+        {
+          "id": "legacy-fcr-runtime",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-runtime.mjs"
+          ],
+          "startedAt": "2026-10-19T07:52:53.713Z",
+          "finishedAt": "2026-10-19T07:52:53.831Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-runtime-1792396373830.log",
+          "logBytes": 199,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-determinism",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-determinism.mjs"
+          ],
+          "startedAt": "2026-10-19T07:52:53.831Z",
+          "finishedAt": "2026-10-19T07:52:53.929Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-determinism-1792396373928.log",
+          "logBytes": 196,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-fdr-boundary",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-fdr-boundary.mjs"
+          ],
+          "startedAt": "2026-10-19T07:52:53.929Z",
+          "finishedAt": "2026-10-19T07:52:54.012Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-fdr-boundary-1792396374012.log",
+          "logBytes": 188,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-contracts",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-contracts.mjs"
+          ],
+          "startedAt": "2026-10-19T07:52:54.013Z",
+          "finishedAt": "2026-10-19T07:52:54.103Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-contracts-1792396374102.log",
+          "logBytes": 160,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-freeze",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-freeze.mjs"
+          ],
+          "startedAt": "2026-10-19T07:52:54.103Z",
+          "finishedAt": "2026-10-19T07:52:54.195Z",
+          "exitCode": 1,
+          "status": "BASELINE_FAILURE",
+          "log": ".tmp/finance-validation/legacy-fcr-freeze-1792396374194.log",
+          "logBytes": 743,
+          "failure": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: The input did not match the regular expression /check-fcr-authority\\.mjs/. Input:\r\n\r\n'node scripts/run-zero-cost-regression.mjs check:fcr'\r\n\r\n    at file:///C:/phios/scripts/check-fcr-freeze.mjs:10:214\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\r\n    at async node:internal/modules/esm/loader:643:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 'node scripts/run-zero-cost-regression.mjs check:fcr',\r\n  expected: /check-fcr-authority\\.mjs/,\r\n  operator: 'match',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n"
+        },
+        {
+          "id": "functions-compile",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "node_modules/wrangler/bin/wrangler.js",
+            "pages",
+            "functions",
+            "build",
+            "functions",
+            "--outdir",
+            ".tmp/finance-master-functions",
+            "--compatibility-date",
+            "2026-07-14",
+            "--compatibility-flags",
+            "nodejs_compat"
+          ],
+          "startedAt": "2026-10-19T07:52:54.195Z",
+          "finishedAt": "2026-10-19T07:53:00.868Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/functions-compile-1792396380866.log",
+          "logBytes": 1295,
+          "failure": null
+        }
+      ],
+      "endHead": "4009d2509aeb30c86ec18c39764414f1127b27db",
+      "sourceUnchanged": true,
+      "finishedAt": "2026-10-19T07:53:01.181Z"
+    },
+    {
+      "startedAt": "2026-10-19T08:09:43.649Z",
+      "startHead": "4009d2509aeb30c86ec18c39764414f1127b27db",
+      "node": "v24.18.0",
+      "dependencyDigest": "1a69cb8f001b05a33c95a99ae64acd6c65d79b740d75f623d453a933981949a4",
+      "results": [
+        {
+          "id": "application-tests",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "--test",
+            "tests/financial-preparation/account-drafts.test.mjs",
+            "tests/financial-preparation/capabilities.test.mjs",
+            "tests/financial-preparation/customer-fcr-successor.test.mjs",
+            "tests/financial-preparation/durable-report.test.mjs",
+            "tests/financial-preparation/factual-report.test.mjs",
+            "tests/financial-preparation/finance-tools.test.mjs",
+            "tests/financial-preparation/portfolio-successor.test.mjs",
+            "tests/financial-preparation/professional-owner-context.test.mjs",
+            "tests/financial-preparation/provider-boundary.test.mjs",
+            "tests/financial-preparation/purpose-scope.test.mjs",
+            "tests/financial-preparation/tool-export.test.mjs",
+            "tests/financial-preparation/will-and-handoff.test.mjs",
+            "tests/financial-preparation/will-assembly.test.mjs",
+            "tests/financial-preparation/will-import.test.mjs"
+          ],
+          "startedAt": "2026-10-19T08:09:43.703Z",
+          "finishedAt": "2026-10-19T08:09:46.144Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/application-tests-1792397386143.log",
+          "logBytes": 4664,
+          "failure": null
+        },
+        {
+          "id": "reference-tests",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "--test",
+            "tests/financial-preparation/reference/jurisdiction-capability-reference.test.mjs"
+          ],
+          "startedAt": "2026-10-19T08:09:46.146Z",
+          "finishedAt": "2026-10-19T08:09:46.496Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/reference-tests-1792397386495.log",
+          "logBytes": 4552,
+          "failure": null
+        },
+        {
+          "id": "existing-privacy",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fw-s1-contract-privacy.mjs"
+          ],
+          "startedAt": "2026-10-19T08:09:46.496Z",
+          "finishedAt": "2026-10-19T08:09:46.835Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/existing-privacy-1792397386835.log",
+          "logBytes": 116,
+          "failure": null
+        },
+        {
+          "id": "existing-financial-successor",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-financial-will-successor.mjs"
+          ],
+          "startedAt": "2026-10-19T08:09:46.836Z",
+          "finishedAt": "2026-10-19T08:09:47.143Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/existing-financial-successor-1792397387142.log",
+          "logBytes": 182,
+          "failure": null
+        },
+        {
+          "id": "existing-report-material",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fw-report-material.mjs"
+          ],
+          "startedAt": "2026-10-19T08:09:47.143Z",
+          "finishedAt": "2026-10-19T08:09:47.555Z",
+          "exitCode": 1,
+          "status": "BASELINE_FAILURE",
+          "log": ".tmp/finance-validation/existing-report-material-1792397387553.log",
+          "logBytes": 1127,
+          "failure": "node:internal/modules/esm/assert:88\r\n        throw new ERR_IMPORT_ATTRIBUTE_MISSING(url, 'type', validType);\r\n              ^\r\n\r\nTypeError [ERR_IMPORT_ATTRIBUTE_MISSING]: Module \"file:///C:/phios/content/personal-reading/continuity/registries/continuity-subscription-product-registry-v2.json\" needs an import attribute of \"type: json\"\r\n    at validateAttributes (node:internal/modules/esm/assert:88:15)\r\n    at defaultLoadSync (node:internal/modules/esm/load:163:3)\r\n    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:802:12)\r\n    at #loadSync (node:internal/modules/esm/loader:834:53)\r\n    at ModuleLoader.load (node:internal/modules/esm/loader:783:26)\r\n    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:494:31)\r\n    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)\r\n    at afterResolve (node:internal/modules/esm/loader:607:52)\r\n    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:613:12)\r\n    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33) {\r\n  code: 'ERR_IMPORT_ATTRIBUTE_MISSING'\r\n}\r\n\r\nNode.js v24.18.0\r\n"
+        },
+        {
+          "id": "legacy-fcr-runtime",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-runtime.mjs"
+          ],
+          "startedAt": "2026-10-19T08:09:47.555Z",
+          "finishedAt": "2026-10-19T08:09:47.756Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-runtime-1792397387755.log",
+          "logBytes": 199,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-determinism",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-determinism.mjs"
+          ],
+          "startedAt": "2026-10-19T08:09:47.756Z",
+          "finishedAt": "2026-10-19T08:09:47.957Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-determinism-1792397387956.log",
+          "logBytes": 196,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-fdr-boundary",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-fdr-boundary.mjs"
+          ],
+          "startedAt": "2026-10-19T08:09:47.958Z",
+          "finishedAt": "2026-10-19T08:09:48.134Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-fdr-boundary-1792397388132.log",
+          "logBytes": 188,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-contracts",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-contracts.mjs"
+          ],
+          "startedAt": "2026-10-19T08:09:48.134Z",
+          "finishedAt": "2026-10-19T08:09:48.305Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-contracts-1792397388304.log",
+          "logBytes": 160,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-freeze",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-freeze.mjs"
+          ],
+          "startedAt": "2026-10-19T08:09:48.305Z",
+          "finishedAt": "2026-10-19T08:09:48.507Z",
+          "exitCode": 1,
+          "status": "BASELINE_FAILURE",
+          "log": ".tmp/finance-validation/legacy-fcr-freeze-1792397388506.log",
+          "logBytes": 743,
+          "failure": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: The input did not match the regular expression /check-fcr-authority\\.mjs/. Input:\r\n\r\n'node scripts/run-zero-cost-regression.mjs check:fcr'\r\n\r\n    at file:///C:/phios/scripts/check-fcr-freeze.mjs:10:214\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\r\n    at async node:internal/modules/esm/loader:643:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 'node scripts/run-zero-cost-regression.mjs check:fcr',\r\n  expected: /check-fcr-authority\\.mjs/,\r\n  operator: 'match',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n"
+        },
+        {
+          "id": "functions-compile",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "node_modules/wrangler/bin/wrangler.js",
+            "pages",
+            "functions",
+            "build",
+            "functions",
+            "--outdir",
+            ".tmp/finance-master-functions",
+            "--compatibility-date",
+            "2026-07-14",
+            "--compatibility-flags",
+            "nodejs_compat"
+          ],
+          "startedAt": "2026-10-19T08:09:48.508Z",
+          "finishedAt": "2026-10-19T08:09:53.357Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/functions-compile-1792397393355.log",
+          "logBytes": 1295,
+          "failure": null
+        }
+      ],
+      "endHead": "4009d2509aeb30c86ec18c39764414f1127b27db",
+      "sourceUnchanged": true,
+      "finishedAt": "2026-10-19T08:09:53.752Z"
+    },
+    {
+      "startedAt": "2026-10-19T08:15:01.653Z",
+      "startHead": "4009d2509aeb30c86ec18c39764414f1127b27db",
+      "node": "v24.18.0",
+      "dependencyDigest": "f856769ad0f40b8e129bec7b3e7bcec3947ee184027cdc149f9bf15636eed8df",
+      "results": [
+        {
+          "id": "application-tests",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "--test",
+            "tests/financial-preparation/account-drafts.test.mjs",
+            "tests/financial-preparation/capabilities.test.mjs",
+            "tests/financial-preparation/customer-fcr-successor.test.mjs",
+            "tests/financial-preparation/durable-report.test.mjs",
+            "tests/financial-preparation/factual-report.test.mjs",
+            "tests/financial-preparation/finance-tools.test.mjs",
+            "tests/financial-preparation/portfolio-successor.test.mjs",
+            "tests/financial-preparation/professional-owner-context.test.mjs",
+            "tests/financial-preparation/provider-boundary.test.mjs",
+            "tests/financial-preparation/purpose-scope.test.mjs",
+            "tests/financial-preparation/tool-export.test.mjs",
+            "tests/financial-preparation/will-and-handoff.test.mjs",
+            "tests/financial-preparation/will-assembly.test.mjs",
+            "tests/financial-preparation/will-import.test.mjs"
+          ],
+          "startedAt": "2026-10-19T08:15:01.895Z",
+          "finishedAt": "2026-10-19T08:15:05.884Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/application-tests-1792397705879.log",
+          "logBytes": 4675,
+          "failure": null
+        },
+        {
+          "id": "reference-tests",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "--test",
+            "tests/financial-preparation/reference/jurisdiction-capability-reference.test.mjs"
+          ],
+          "startedAt": "2026-10-19T08:15:05.892Z",
+          "finishedAt": "2026-10-19T08:15:06.409Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/reference-tests-1792397706408.log",
+          "logBytes": 4553,
+          "failure": null
+        },
+        {
+          "id": "existing-privacy",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fw-s1-contract-privacy.mjs"
+          ],
+          "startedAt": "2026-10-19T08:15:06.410Z",
+          "finishedAt": "2026-10-19T08:15:06.716Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/existing-privacy-1792397706715.log",
+          "logBytes": 116,
+          "failure": null
+        },
+        {
+          "id": "existing-financial-successor",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-financial-will-successor.mjs"
+          ],
+          "startedAt": "2026-10-19T08:15:06.716Z",
+          "finishedAt": "2026-10-19T08:15:06.984Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/existing-financial-successor-1792397706983.log",
+          "logBytes": 182,
+          "failure": null
+        },
+        {
+          "id": "existing-report-material",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fw-report-material.mjs"
+          ],
+          "startedAt": "2026-10-19T08:15:06.984Z",
+          "finishedAt": "2026-10-19T08:15:07.513Z",
+          "exitCode": 1,
+          "status": "BASELINE_FAILURE",
+          "log": ".tmp/finance-validation/existing-report-material-1792397707512.log",
+          "logBytes": 1127,
+          "failure": "node:internal/modules/esm/assert:88\r\n        throw new ERR_IMPORT_ATTRIBUTE_MISSING(url, 'type', validType);\r\n              ^\r\n\r\nTypeError [ERR_IMPORT_ATTRIBUTE_MISSING]: Module \"file:///C:/phios/content/personal-reading/continuity/registries/continuity-subscription-product-registry-v2.json\" needs an import attribute of \"type: json\"\r\n    at validateAttributes (node:internal/modules/esm/assert:88:15)\r\n    at defaultLoadSync (node:internal/modules/esm/load:163:3)\r\n    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:802:12)\r\n    at #loadSync (node:internal/modules/esm/loader:834:53)\r\n    at ModuleLoader.load (node:internal/modules/esm/loader:783:26)\r\n    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:494:31)\r\n    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)\r\n    at afterResolve (node:internal/modules/esm/loader:607:52)\r\n    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:613:12)\r\n    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33) {\r\n  code: 'ERR_IMPORT_ATTRIBUTE_MISSING'\r\n}\r\n\r\nNode.js v24.18.0\r\n"
+        },
+        {
+          "id": "legacy-fcr-runtime",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-runtime.mjs"
+          ],
+          "startedAt": "2026-10-19T08:15:07.513Z",
+          "finishedAt": "2026-10-19T08:15:07.680Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-runtime-1792397707679.log",
+          "logBytes": 199,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-determinism",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-determinism.mjs"
+          ],
+          "startedAt": "2026-10-19T08:15:07.680Z",
+          "finishedAt": "2026-10-19T08:15:07.803Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-determinism-1792397707802.log",
+          "logBytes": 196,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-fdr-boundary",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-fdr-boundary.mjs"
+          ],
+          "startedAt": "2026-10-19T08:15:07.803Z",
+          "finishedAt": "2026-10-19T08:15:07.897Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-fdr-boundary-1792397707897.log",
+          "logBytes": 188,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-contracts",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-contracts.mjs"
+          ],
+          "startedAt": "2026-10-19T08:15:07.898Z",
+          "finishedAt": "2026-10-19T08:15:07.988Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-contracts-1792397707988.log",
+          "logBytes": 160,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-freeze",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-freeze.mjs"
+          ],
+          "startedAt": "2026-10-19T08:15:07.988Z",
+          "finishedAt": "2026-10-19T08:15:08.117Z",
+          "exitCode": 1,
+          "status": "BASELINE_FAILURE",
+          "log": ".tmp/finance-validation/legacy-fcr-freeze-1792397708116.log",
+          "logBytes": 743,
+          "failure": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: The input did not match the regular expression /check-fcr-authority\\.mjs/. Input:\r\n\r\n'node scripts/run-zero-cost-regression.mjs check:fcr'\r\n\r\n    at file:///C:/phios/scripts/check-fcr-freeze.mjs:10:214\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\r\n    at async node:internal/modules/esm/loader:643:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 'node scripts/run-zero-cost-regression.mjs check:fcr',\r\n  expected: /check-fcr-authority\\.mjs/,\r\n  operator: 'match',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n"
+        },
+        {
+          "id": "functions-compile",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "node_modules/wrangler/bin/wrangler.js",
+            "pages",
+            "functions",
+            "build",
+            "functions",
+            "--outdir",
+            ".tmp/finance-master-functions",
+            "--compatibility-date",
+            "2026-07-14",
+            "--compatibility-flags",
+            "nodejs_compat"
+          ],
+          "startedAt": "2026-10-19T08:15:08.117Z",
+          "finishedAt": "2026-10-19T08:15:12.119Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/functions-compile-1792397712118.log",
+          "logBytes": 1295,
+          "failure": null
+        }
+      ],
+      "endHead": "4009d2509aeb30c86ec18c39764414f1127b27db",
+      "sourceUnchanged": true,
+      "finishedAt": "2026-10-19T08:15:12.413Z"
+    },
+    {
+      "startedAt": "2026-10-19T08:17:25.170Z",
+      "startHead": "4009d2509aeb30c86ec18c39764414f1127b27db",
+      "node": "v24.18.0",
+      "dependencyDigest": "9abda6def58145c9e0a6615beb357af9d77f5ba9ab8bfa393e03ab799098d3d5",
+      "results": [
+        {
+          "id": "application-tests",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "--test",
+            "tests/financial-preparation/account-drafts.test.mjs",
+            "tests/financial-preparation/capabilities.test.mjs",
+            "tests/financial-preparation/customer-fcr-successor.test.mjs",
+            "tests/financial-preparation/durable-report.test.mjs",
+            "tests/financial-preparation/factual-report.test.mjs",
+            "tests/financial-preparation/finance-tools.test.mjs",
+            "tests/financial-preparation/portfolio-successor.test.mjs",
+            "tests/financial-preparation/professional-owner-context.test.mjs",
+            "tests/financial-preparation/provider-boundary.test.mjs",
+            "tests/financial-preparation/purpose-scope.test.mjs",
+            "tests/financial-preparation/tool-export.test.mjs",
+            "tests/financial-preparation/will-and-handoff.test.mjs",
+            "tests/financial-preparation/will-assembly.test.mjs",
+            "tests/financial-preparation/will-import.test.mjs"
+          ],
+          "startedAt": "2026-10-19T08:17:25.325Z",
+          "finishedAt": "2026-10-19T08:17:27.380Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/application-tests-1792397847379.log",
+          "logBytes": 4666,
+          "failure": null
+        },
+        {
+          "id": "reference-tests",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "--test",
+            "tests/financial-preparation/reference/jurisdiction-capability-reference.test.mjs"
+          ],
+          "startedAt": "2026-10-19T08:17:27.382Z",
+          "finishedAt": "2026-10-19T08:17:27.688Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/reference-tests-1792397847686.log",
+          "logBytes": 4549,
+          "failure": null
+        },
+        {
+          "id": "existing-privacy",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fw-s1-contract-privacy.mjs"
+          ],
+          "startedAt": "2026-10-19T08:17:27.688Z",
+          "finishedAt": "2026-10-19T08:17:27.952Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/existing-privacy-1792397847951.log",
+          "logBytes": 116,
+          "failure": null
+        },
+        {
+          "id": "existing-financial-successor",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-financial-will-successor.mjs"
+          ],
+          "startedAt": "2026-10-19T08:17:27.952Z",
+          "finishedAt": "2026-10-19T08:17:28.214Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/existing-financial-successor-1792397848213.log",
+          "logBytes": 182,
+          "failure": null
+        },
+        {
+          "id": "existing-report-material",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fw-report-material.mjs"
+          ],
+          "startedAt": "2026-10-19T08:17:28.214Z",
+          "finishedAt": "2026-10-19T08:17:28.542Z",
+          "exitCode": 1,
+          "status": "BASELINE_FAILURE",
+          "log": ".tmp/finance-validation/existing-report-material-1792397848542.log",
+          "logBytes": 1127,
+          "failure": "node:internal/modules/esm/assert:88\r\n        throw new ERR_IMPORT_ATTRIBUTE_MISSING(url, 'type', validType);\r\n              ^\r\n\r\nTypeError [ERR_IMPORT_ATTRIBUTE_MISSING]: Module \"file:///C:/phios/content/personal-reading/continuity/registries/continuity-subscription-product-registry-v2.json\" needs an import attribute of \"type: json\"\r\n    at validateAttributes (node:internal/modules/esm/assert:88:15)\r\n    at defaultLoadSync (node:internal/modules/esm/load:163:3)\r\n    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:802:12)\r\n    at #loadSync (node:internal/modules/esm/loader:834:53)\r\n    at ModuleLoader.load (node:internal/modules/esm/loader:783:26)\r\n    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:494:31)\r\n    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)\r\n    at afterResolve (node:internal/modules/esm/loader:607:52)\r\n    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:613:12)\r\n    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33) {\r\n  code: 'ERR_IMPORT_ATTRIBUTE_MISSING'\r\n}\r\n\r\nNode.js v24.18.0\r\n"
+        },
+        {
+          "id": "legacy-fcr-runtime",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-runtime.mjs"
+          ],
+          "startedAt": "2026-10-19T08:17:28.543Z",
+          "finishedAt": "2026-10-19T08:17:28.678Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-runtime-1792397848677.log",
+          "logBytes": 199,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-determinism",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-determinism.mjs"
+          ],
+          "startedAt": "2026-10-19T08:17:28.678Z",
+          "finishedAt": "2026-10-19T08:17:28.787Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-determinism-1792397848786.log",
+          "logBytes": 196,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-fdr-boundary",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-fdr-boundary.mjs"
+          ],
+          "startedAt": "2026-10-19T08:17:28.787Z",
+          "finishedAt": "2026-10-19T08:17:28.877Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-fdr-boundary-1792397848876.log",
+          "logBytes": 188,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-contracts",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-contracts.mjs"
+          ],
+          "startedAt": "2026-10-19T08:17:28.877Z",
+          "finishedAt": "2026-10-19T08:17:28.962Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-contracts-1792397848961.log",
+          "logBytes": 160,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-freeze",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-freeze.mjs"
+          ],
+          "startedAt": "2026-10-19T08:17:28.962Z",
+          "finishedAt": "2026-10-19T08:17:29.053Z",
+          "exitCode": 1,
+          "status": "BASELINE_FAILURE",
+          "log": ".tmp/finance-validation/legacy-fcr-freeze-1792397849052.log",
+          "logBytes": 743,
+          "failure": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: The input did not match the regular expression /check-fcr-authority\\.mjs/. Input:\r\n\r\n'node scripts/run-zero-cost-regression.mjs check:fcr'\r\n\r\n    at file:///C:/phios/scripts/check-fcr-freeze.mjs:10:214\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\r\n    at async node:internal/modules/esm/loader:643:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 'node scripts/run-zero-cost-regression.mjs check:fcr',\r\n  expected: /check-fcr-authority\\.mjs/,\r\n  operator: 'match',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n"
+        },
+        {
+          "id": "functions-compile",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "node_modules/wrangler/bin/wrangler.js",
+            "pages",
+            "functions",
+            "build",
+            "functions",
+            "--outdir",
+            ".tmp/finance-master-functions",
+            "--compatibility-date",
+            "2026-07-14",
+            "--compatibility-flags",
+            "nodejs_compat"
+          ],
+          "startedAt": "2026-10-19T08:17:29.053Z",
+          "finishedAt": "2026-10-19T08:17:31.643Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/functions-compile-1792397851642.log",
+          "logBytes": 1295,
+          "failure": null
+        }
+      ],
+      "endHead": "4009d2509aeb30c86ec18c39764414f1127b27db",
+      "sourceUnchanged": true,
+      "finishedAt": "2026-10-19T08:17:31.946Z"
+    },
+    {
+      "startedAt": "2026-10-19T08:20:19.086Z",
+      "startHead": "4009d2509aeb30c86ec18c39764414f1127b27db",
+      "node": "v24.18.0",
+      "dependencyDigest": "ef54589ad7ce389963a98a06430bbe4570f8dd8f8ac6617f097d762ca75d28c0",
+      "results": [
+        {
+          "id": "application-tests",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "--test",
+            "tests/financial-preparation/account-drafts.test.mjs",
+            "tests/financial-preparation/capabilities.test.mjs",
+            "tests/financial-preparation/customer-fcr-successor.test.mjs",
+            "tests/financial-preparation/durable-report.test.mjs",
+            "tests/financial-preparation/factual-report.test.mjs",
+            "tests/financial-preparation/finance-tools.test.mjs",
+            "tests/financial-preparation/portfolio-successor.test.mjs",
+            "tests/financial-preparation/professional-owner-context.test.mjs",
+            "tests/financial-preparation/provider-boundary.test.mjs",
+            "tests/financial-preparation/purpose-scope.test.mjs",
+            "tests/financial-preparation/tool-export.test.mjs",
+            "tests/financial-preparation/will-and-handoff.test.mjs",
+            "tests/financial-preparation/will-assembly.test.mjs",
+            "tests/financial-preparation/will-import.test.mjs"
+          ],
+          "startedAt": "2026-10-19T08:20:19.202Z",
+          "finishedAt": "2026-10-19T08:20:23.491Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/application-tests-1792398023489.log",
+          "logBytes": 4674,
+          "failure": null
+        },
+        {
+          "id": "reference-tests",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "--test",
+            "tests/financial-preparation/reference/jurisdiction-capability-reference.test.mjs"
+          ],
+          "startedAt": "2026-10-19T08:20:23.493Z",
+          "finishedAt": "2026-10-19T08:20:24.302Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/reference-tests-1792398024300.log",
+          "logBytes": 4555,
+          "failure": null
+        },
+        {
+          "id": "existing-privacy",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fw-s1-contract-privacy.mjs"
+          ],
+          "startedAt": "2026-10-19T08:20:24.302Z",
+          "finishedAt": "2026-10-19T08:20:25.283Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/existing-privacy-1792398025283.log",
+          "logBytes": 116,
+          "failure": null
+        },
+        {
+          "id": "existing-financial-successor",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-financial-will-successor.mjs"
+          ],
+          "startedAt": "2026-10-19T08:20:25.284Z",
+          "finishedAt": "2026-10-19T08:20:25.909Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/existing-financial-successor-1792398025907.log",
+          "logBytes": 182,
+          "failure": null
+        },
+        {
+          "id": "existing-report-material",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fw-report-material.mjs"
+          ],
+          "startedAt": "2026-10-19T08:20:25.909Z",
+          "finishedAt": "2026-10-19T08:20:26.440Z",
+          "exitCode": 1,
+          "status": "BASELINE_FAILURE",
+          "log": ".tmp/finance-validation/existing-report-material-1792398026439.log",
+          "logBytes": 1127,
+          "failure": "node:internal/modules/esm/assert:88\r\n        throw new ERR_IMPORT_ATTRIBUTE_MISSING(url, 'type', validType);\r\n              ^\r\n\r\nTypeError [ERR_IMPORT_ATTRIBUTE_MISSING]: Module \"file:///C:/phios/content/personal-reading/continuity/registries/continuity-subscription-product-registry-v2.json\" needs an import attribute of \"type: json\"\r\n    at validateAttributes (node:internal/modules/esm/assert:88:15)\r\n    at defaultLoadSync (node:internal/modules/esm/load:163:3)\r\n    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:802:12)\r\n    at #loadSync (node:internal/modules/esm/loader:834:53)\r\n    at ModuleLoader.load (node:internal/modules/esm/loader:783:26)\r\n    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:494:31)\r\n    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)\r\n    at afterResolve (node:internal/modules/esm/loader:607:52)\r\n    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:613:12)\r\n    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33) {\r\n  code: 'ERR_IMPORT_ATTRIBUTE_MISSING'\r\n}\r\n\r\nNode.js v24.18.0\r\n"
+        },
+        {
+          "id": "legacy-fcr-runtime",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-runtime.mjs"
+          ],
+          "startedAt": "2026-10-19T08:20:26.440Z",
+          "finishedAt": "2026-10-19T08:20:26.679Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-runtime-1792398026678.log",
+          "logBytes": 199,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-determinism",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-determinism.mjs"
+          ],
+          "startedAt": "2026-10-19T08:20:26.680Z",
+          "finishedAt": "2026-10-19T08:20:26.878Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-determinism-1792398026877.log",
+          "logBytes": 196,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-fdr-boundary",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-fdr-boundary.mjs"
+          ],
+          "startedAt": "2026-10-19T08:20:26.879Z",
+          "finishedAt": "2026-10-19T08:20:27.015Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-fdr-boundary-1792398027014.log",
+          "logBytes": 188,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-contracts",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-contracts.mjs"
+          ],
+          "startedAt": "2026-10-19T08:20:27.015Z",
+          "finishedAt": "2026-10-19T08:20:27.155Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-contracts-1792398027153.log",
+          "logBytes": 160,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-freeze",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-freeze.mjs"
+          ],
+          "startedAt": "2026-10-19T08:20:27.155Z",
+          "finishedAt": "2026-10-19T08:20:27.366Z",
+          "exitCode": 1,
+          "status": "BASELINE_FAILURE",
+          "log": ".tmp/finance-validation/legacy-fcr-freeze-1792398027365.log",
+          "logBytes": 743,
+          "failure": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: The input did not match the regular expression /check-fcr-authority\\.mjs/. Input:\r\n\r\n'node scripts/run-zero-cost-regression.mjs check:fcr'\r\n\r\n    at file:///C:/phios/scripts/check-fcr-freeze.mjs:10:214\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\r\n    at async node:internal/modules/esm/loader:643:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 'node scripts/run-zero-cost-regression.mjs check:fcr',\r\n  expected: /check-fcr-authority\\.mjs/,\r\n  operator: 'match',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n"
+        },
+        {
+          "id": "functions-compile",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "node_modules/wrangler/bin/wrangler.js",
+            "pages",
+            "functions",
+            "build",
+            "functions",
+            "--outdir",
+            ".tmp/finance-master-functions",
+            "--compatibility-date",
+            "2026-07-14",
+            "--compatibility-flags",
+            "nodejs_compat"
+          ],
+          "startedAt": "2026-10-19T08:20:27.366Z",
+          "finishedAt": "2026-10-19T08:20:32.500Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/functions-compile-1792398032499.log",
+          "logBytes": 1295,
+          "failure": null
+        }
+      ],
+      "endHead": "4009d2509aeb30c86ec18c39764414f1127b27db",
+      "sourceUnchanged": true,
+      "finishedAt": "2026-10-19T08:20:33.015Z"
+    },
+    {
+      "startedAt": "2026-10-19T08:21:10.716Z",
+      "startHead": "4009d2509aeb30c86ec18c39764414f1127b27db",
+      "node": "v24.18.0",
+      "dependencyDigest": "da5857ab8944dbf3b88d3302a037b0fe3ead6bfcaaf85c9196c71fc7f99f47f3",
+      "results": [
+        {
+          "id": "application-tests",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "--test",
+            "tests/financial-preparation/account-drafts.test.mjs",
+            "tests/financial-preparation/capabilities.test.mjs",
+            "tests/financial-preparation/customer-fcr-successor.test.mjs",
+            "tests/financial-preparation/durable-report.test.mjs",
+            "tests/financial-preparation/factual-report.test.mjs",
+            "tests/financial-preparation/finance-tools.test.mjs",
+            "tests/financial-preparation/portfolio-successor.test.mjs",
+            "tests/financial-preparation/professional-owner-context.test.mjs",
+            "tests/financial-preparation/provider-boundary.test.mjs",
+            "tests/financial-preparation/purpose-scope.test.mjs",
+            "tests/financial-preparation/tool-export.test.mjs",
+            "tests/financial-preparation/will-and-handoff.test.mjs",
+            "tests/financial-preparation/will-assembly.test.mjs",
+            "tests/financial-preparation/will-import.test.mjs"
+          ],
+          "startedAt": "2026-10-19T08:21:10.808Z",
+          "finishedAt": "2026-10-19T08:21:13.534Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/application-tests-1792398073533.log",
+          "logBytes": 4675,
+          "failure": null
+        },
+        {
+          "id": "reference-tests",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "--test",
+            "tests/financial-preparation/reference/jurisdiction-capability-reference.test.mjs"
+          ],
+          "startedAt": "2026-10-19T08:21:13.535Z",
+          "finishedAt": "2026-10-19T08:21:13.789Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/reference-tests-1792398073788.log",
+          "logBytes": 4555,
+          "failure": null
+        },
+        {
+          "id": "existing-privacy",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fw-s1-contract-privacy.mjs"
+          ],
+          "startedAt": "2026-10-19T08:21:13.789Z",
+          "finishedAt": "2026-10-19T08:21:14.025Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/existing-privacy-1792398074024.log",
+          "logBytes": 116,
+          "failure": null
+        },
+        {
+          "id": "existing-financial-successor",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-financial-will-successor.mjs"
+          ],
+          "startedAt": "2026-10-19T08:21:14.025Z",
+          "finishedAt": "2026-10-19T08:21:14.283Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/existing-financial-successor-1792398074282.log",
+          "logBytes": 182,
+          "failure": null
+        },
+        {
+          "id": "existing-report-material",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fw-report-material.mjs"
+          ],
+          "startedAt": "2026-10-19T08:21:14.283Z",
+          "finishedAt": "2026-10-19T08:21:14.607Z",
+          "exitCode": 1,
+          "status": "BASELINE_FAILURE",
+          "log": ".tmp/finance-validation/existing-report-material-1792398074606.log",
+          "logBytes": 1127,
+          "failure": "node:internal/modules/esm/assert:88\r\n        throw new ERR_IMPORT_ATTRIBUTE_MISSING(url, 'type', validType);\r\n              ^\r\n\r\nTypeError [ERR_IMPORT_ATTRIBUTE_MISSING]: Module \"file:///C:/phios/content/personal-reading/continuity/registries/continuity-subscription-product-registry-v2.json\" needs an import attribute of \"type: json\"\r\n    at validateAttributes (node:internal/modules/esm/assert:88:15)\r\n    at defaultLoadSync (node:internal/modules/esm/load:163:3)\r\n    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:802:12)\r\n    at #loadSync (node:internal/modules/esm/loader:834:53)\r\n    at ModuleLoader.load (node:internal/modules/esm/loader:783:26)\r\n    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:494:31)\r\n    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)\r\n    at afterResolve (node:internal/modules/esm/loader:607:52)\r\n    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:613:12)\r\n    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33) {\r\n  code: 'ERR_IMPORT_ATTRIBUTE_MISSING'\r\n}\r\n\r\nNode.js v24.18.0\r\n"
+        },
+        {
+          "id": "legacy-fcr-runtime",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-runtime.mjs"
+          ],
+          "startedAt": "2026-10-19T08:21:14.607Z",
+          "finishedAt": "2026-10-19T08:21:14.755Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-runtime-1792398074754.log",
+          "logBytes": 199,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-determinism",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-determinism.mjs"
+          ],
+          "startedAt": "2026-10-19T08:21:14.755Z",
+          "finishedAt": "2026-10-19T08:21:14.894Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-determinism-1792398074892.log",
+          "logBytes": 196,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-fdr-boundary",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-fdr-boundary.mjs"
+          ],
+          "startedAt": "2026-10-19T08:21:14.894Z",
+          "finishedAt": "2026-10-19T08:21:14.995Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-fdr-boundary-1792398074993.log",
+          "logBytes": 188,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-contracts",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-contracts.mjs"
+          ],
+          "startedAt": "2026-10-19T08:21:14.995Z",
+          "finishedAt": "2026-10-19T08:21:15.098Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/legacy-fcr-contracts-1792398075097.log",
+          "logBytes": 160,
+          "failure": null
+        },
+        {
+          "id": "legacy-fcr-freeze",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "scripts/check-fcr-freeze.mjs"
+          ],
+          "startedAt": "2026-10-19T08:21:15.098Z",
+          "finishedAt": "2026-10-19T08:21:15.222Z",
+          "exitCode": 1,
+          "status": "BASELINE_FAILURE",
+          "log": ".tmp/finance-validation/legacy-fcr-freeze-1792398075221.log",
+          "logBytes": 743,
+          "failure": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: The input did not match the regular expression /check-fcr-authority\\.mjs/. Input:\r\n\r\n'node scripts/run-zero-cost-regression.mjs check:fcr'\r\n\r\n    at file:///C:/phios/scripts/check-fcr-freeze.mjs:10:214\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\r\n    at async node:internal/modules/esm/loader:643:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 'node scripts/run-zero-cost-regression.mjs check:fcr',\r\n  expected: /check-fcr-authority\\.mjs/,\r\n  operator: 'match',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n"
+        },
+        {
+          "id": "functions-compile",
+          "command": [
+            "C:\\Program Files\\nodejs\\node.exe",
+            "node_modules/wrangler/bin/wrangler.js",
+            "pages",
+            "functions",
+            "build",
+            "functions",
+            "--outdir",
+            ".tmp/finance-master-functions",
+            "--compatibility-date",
+            "2026-07-14",
+            "--compatibility-flags",
+            "nodejs_compat"
+          ],
+          "startedAt": "2026-10-19T08:21:15.222Z",
+          "finishedAt": "2026-10-19T08:21:18.387Z",
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".tmp/finance-validation/functions-compile-1792398078386.log",
+          "logBytes": 1295,
+          "failure": null
+        }
+      ],
+      "endHead": "4009d2509aeb30c86ec18c39764414f1127b27db",
+      "sourceUnchanged": true,
+      "finishedAt": "2026-10-19T08:21:18.704Z"
     }
   ],
   "dependencies": {
@@ -1457,18 +2783,20 @@
     "assets/customer-ui/js/surfaces/account-auth.js": "bd52567e2e8e12f9d17b683f6409fb6daa069ba50befe5c7f97b7d18cba5c9b3",
     "assets/customer-ui/js/surfaces/account.js": "9455c790f389672c7fcab72ce2cf53d10dec00d5a6590f6a28b506748e1c8e24",
     "assets/customer-ui/js/surfaces/estate-planning.js": "d6a08a3a94179232f64fa2a8e53aa6425562ae4e8b77b3e3cb6de02f15a78a0e",
-    "assets/customer-ui/js/surfaces/finance-tool-export.js": "ab23349a8e70182e93d1d091c1abff62b42032e7f19c9f9765168ac3be538ac7",
+    "assets/customer-ui/js/surfaces/finance-tool-export.js": "c2f3791316e8a98972c669db6ef377f2656ea7720f24d0e0871df438d545e46c",
     "assets/customer-ui/js/surfaces/financial-inventory.js": "65cd1806b48bdd1173aa7813fa8fe0359763d0a8033d1bcb0ae9d512e2fcf42e",
     "assets/customer-ui/js/surfaces/financial-preparation-actions.js": "6b5172d3c1ccddf5fffb4f0bb46dce4a440c179fe2a37dfc26df1d68f3f4ef4d",
     "assets/customer-ui/js/surfaces/financial-private-preview.js": "7d2cd22c5546224d30f89ea59944ff1772211d2b1d96133fef0c911a0de656a9",
+    "assets/customer-ui/js/surfaces/financial-professional-review.js": "f305e63caf48ff9bbbe6ba59a0fbce751eec30824375bb57348b6e51fd2e946e",
     "assets/customer-ui/js/surfaces/financial-reality.js": "c241f24b608f5610a29becebd7fe0486960f46d14dc3a4746bae39c11ea2f9d4",
     "assets/customer-ui/js/surfaces/financial-report-library.js": "84d3c925e2736475abf1eb20ba41246fc13365e38173d69024023f694bbdde45",
     "assets/customer-ui/js/surfaces/financial-saved-report-view.js": "7441caa38de90c7ff30372c110bbb5c6c7395931ff9d8738a4a886472f17616d",
-    "assets/customer-ui/js/surfaces/financial-tools.js": "99ec3943e411be9e8897b30b10dbc950974a665e8184528623edfc22bbc6eaf8",
-    "assets/customer-ui/js/surfaces/professional-reports.js": "ce074f563dd735a920408beda8c0078f9ff9be726eda27a797d524e402db942d",
+    "assets/customer-ui/js/surfaces/financial-tools.js": "ae3174746889da6557e458cfcf25d0f0290276c4f354db475764a7d8c617ba1b",
+    "assets/customer-ui/js/surfaces/professional-reports.js": "609b52a9a00b54aa231a044388077fae1a5b2c9e6cfeebe3c8941c3b92a97c81",
+    "assets/customer-ui/js/surfaces/rental-portfolio.js": "2d49d26d37db352082fcf3bdc639aba5387d4586572dc96ac299a92a7e7d3012",
     "assets/customer-ui/js/surfaces/runtime-ui.js": "cf9c4e7065b614eed481239ed985167b7acdbff483b1346e8cc88b9c98b02d55",
     "assets/customer-ui/js/surfaces/secure-drafts.js": "10bf4da724866688ff1d5cbe2102be2e37bb4786f8a28a47a1d5b36f46718481",
-    "assets/customer-ui/surfaces/financial-preparation-r1.css": "2bd1022158888b91cdd4e62ca875b224e48319b08735ed3499928cf49444dd05",
+    "assets/customer-ui/surfaces/financial-preparation-r1.css": "e84ec2fc59ba17d5dccbf856964075008508a12533a7cc72265fdee38fdc23a6",
     "assets/customer-ui/surfaces/financial-reality-r13.css": "b6a7519de67f9db8c06c24a12c9ab8c97a224a574e092b808bbb94aa7537fe45",
     "content/document-assembly/templates/will-assembly-template-v1.json": "89f2ab873f6e0f745d4b471d64868e8ff4d6a6d01fa50bc46f8d0a2e5333423e",
     "content/financial/calculation-runtime/contracts/financial-customer-calculation-successor-v2.json": "42742eb5a4537fd1956fc6bb319fe399f34ebcc1b1c1294a7de8dbec123a6811",
@@ -1483,14 +2811,15 @@
     "content/legal/will/registries/will-execution-requirement-registry-v1.json": "eb8928040a034bf6792a848690a92a7a5e34139fdf29735dd4afac6cf40def52",
     "content/legal/will/registries/will-jurisdiction-registry-v1.json": "20b35aec395b6effb26bf18d308d0b89ef105d09b8d2070a06707cbf2c59ebbe",
     "db/migration-candidates/0019_financial_purpose_grants.sql": "b05daea27ab74643f20776ccf1732533c0aee2b78c11ea827217270b33ff78df",
+    "db/migration-candidates/professional_owner_access_records.sql": "f8079f21fe698885b2d2d636ac178b515beb8a651b02acdb59bc2de33e33e8d4",
     "functions/account/account-contract.js": "73cee382185f52ec0e1224bba4614924023d3f664dcde29c51b51156b2303d56",
     "functions/account/account-reports-api.js": "666f2122e5dd4eb0bb62bb76659d491d1b4d70747e8c1af26d66db3282c1cd08",
     "functions/account/bazi-account-delivery.js": "6202c7ca07cca90a6e965cafa4d7110a9748acd347a30e35f9ea51309ca033c2",
     "functions/account/canonical-person-store.js": "87f94ba6c79c6c349fe85b68bc634365c49004fec3cf54bf3723db0f45ef067a",
     "functions/account/financial-will-draft-schema.js": "79c81a1275fadcfb5f8d85c042f8007e11b9c0e742f2c85187a512d1d15bf04d",
-    "functions/account/financial-will-draft-store.js": "ff0952c4f786cefc71ff2c0508bc5f82ea8ba68f175c39d56ce34fed6f9ab37e",
-    "functions/account/financial-will-draft-v2.js": "c8a1cdc09be2efa31a202b9bf9616c0d8a02734e05c3a6fd3b23b6dc34822487",
-    "functions/account/financial-will-import.js": "5955e8a94aa04bf5fe0087dbdfa8f6f8354cd8761dfb57396999537a60490909",
+    "functions/account/financial-will-draft-store.js": "42edd2762c49fe524435c3477536739c85bf51c06b27171ff978a823bf1fe40b",
+    "functions/account/financial-will-draft-v2.js": "33283dbf809f87d7d84a0d85433ccc1034616b81ab669e0b840e3d0012347c57",
+    "functions/account/financial-will-import.js": "225e0657af287cd37176d4ecb8629a651b7e3e18d71b8d4cd4c79527980a5ff3",
     "functions/account/method-report-delivery.js": "ed17257c3ea31adededddcded02aaa89ee9cb7f2278f79686b5cd1cf4b0eea33",
     "functions/account/method-report-material.js": "e997fd50c6e6292d03a1445253ec46c2d95a412a26895c5ccf7a5573840adeb1",
     "functions/account/my-reality-account-projection.js": "06cc31e8e0ba5f6b6051e3ad95d5f95cb2c3f691ae5ca84c13c55820749141e0",
@@ -1517,9 +2846,9 @@
     "functions/api/account-will-assembly.js": "e5d70dfe299d261154e1e7d01d75f24b0c2d574252dd4b1247a5cb108ed1a120",
     "functions/api/account-will-financial-import.js": "a6fd1402ebc798f883fddc6bc24eecbe4d151e9fb1bd0897ddf68f948d575e21",
     "functions/api/account-will-preparation.js": "bb1fb8a98b3074eb44ce180842fa834f9e81a9176e2725f0977b7547d119beb7",
-    "functions/api/customer-finance-tools.js": "399599fb1fe54f9c0b9236133fb687ff5ac301bf9bf741763025e92ffb6e3868",
-    "functions/api/professional-financial-packet.js": "3348857f63ab4f77706a4a8f565274265c3841eaf0befb497900f60095a2f6d6",
-    "functions/api/professional-financial-review.js": "e4dcb8b7a6dbd20aa17b4323af1d027c556ab4c5701e060e853bb098044716ea",
+    "functions/api/customer-finance-tools.js": "0d27fc831294980daa3234b7e18872390de17559a9cb958f0e89afe589d05102",
+    "functions/api/professional-financial-packet.js": "cff63d1955cdc15ca21d52b41ba8a8b3b1c6d5e961d978d3e3c75dc8ed436997",
+    "functions/api/professional-financial-review.js": "3e1724d88ce06c2ece57e83fb30b342f13c91839d4e1e8c054eadaba73dfa27e",
     "functions/customer-projection/financial-customer-projection.js": "e894e5bdc96730af4c9a520d432c870c6c0ea34aabfa80f2bbdf68d2186420c5",
     "functions/document-assembly/canonical-json.js": "d3b72c87fe7d007e746f2700fd5c2d1310709f71fc8fcd595cc9964cab56aea4",
     "functions/document-assembly/clause-resolver.js": "ebe40f72172a0e88fd74dff00dd2bfe05088a2abae9baaefab5a0cca0eefb272",
@@ -1536,13 +2865,14 @@
     "functions/document-assembly/renderers/dar-pdf-renderer.js": "8aa32704a758213ded1efa7046c86f0623d4daf25348070d0da1a389292e103d",
     "functions/document-assembly/saved-will-assembly.js": "0b00371b1aec680a2231f259099c6aca2e25b91e88e20977f366a24eb4c1f6e7",
     "functions/financial/analysis-runtime/financial-analysis-runtime.js": "8440a8cfd2eaac90cb8140a66c8ba337ffaf5bd1b8dcacf03bf3b98e67e2f487",
-    "functions/financial/calculation-runtime/customer-finance-tools.js": "220ce11d4e200d0bd5542464c2a176d5b52e798078535dee00fc4152f531a59c",
+    "functions/financial/calculation-runtime/customer-finance-tools.js": "97d9d8222f8bd5c9bb20318425b4524d5e47bc58aca1118bee5b707cd497e3b2",
     "functions/financial/calculation-runtime/financial-calculation-customer-v2.js": "51bd56ff10b3cdbb1a2e101c073a212a2d76bb8f62995bb99df3e4d73321b355",
     "functions/financial/calculation-runtime/financial-calculation-runtime.js": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
     "functions/financial/calculation-runtime/range-arithmetic.js": "f44a62ffd74b394844a419b4f120aa5cf0b039fed223924ef42e352e02b7dabe",
+    "functions/financial/calculation-runtime/rental-fact-metadata.js": "e550484db623cfd1692ac1d80cdecaec57d54c1324089e3076818b31bb2f1abf",
     "functions/financial/calculation-runtime/stable-digest.js": "d672adc4a46f3805735af96f05935ac6f226de5d35c9699c88c05b09e73c8245",
     "functions/financial/calculation-runtime/trace-runtime.js": "87466735be0273233dadcbe82cc488135276911f77c9c9810b8cb36a24efdd66",
-    "functions/financial/holistic-planning-product/factual-report-job.js": "7eab5e0961ba74e20c1013693a83a9d94e2e39ad6c6c22f809890611f5a872c7",
+    "functions/financial/holistic-planning-product/factual-report-job.js": "e3aa8cd0ac86fe2a9c4a2ec03ac6d48f117a1e6695576eb2fc46719b62444fd4",
     "functions/financial/holistic-planning-product/factual-report-narrative.js": "026fad559f16e083f5d2b56239a83440c8df4646a891a629e5eac69f3c2ef6ed",
     "functions/financial/holistic-planning-product/holistic-financial-planning-runtime.js": "396551fb88ce2ddbf2d92415e5394ac4ce3b0c9e1b3e9045f902a702edbb90e0",
     "functions/financial/product-activation/customer-assumptions.js": "7ab14465be07494a3d80bb241b7777cbbc13f21801360dede69b645f149ac818",
@@ -1557,7 +2887,8 @@
     "functions/professional/access/financial-capability-decision.js": "ad241b4b09ec89a59fd377f863981984be24aae53e8d136e45cb25d808f41536",
     "functions/professional/access/financial-capability-owner.js": "e47e67ea645ed73533ec38ba496bd43e7429f33b86f2c0a8d1b922d63cfba0b5",
     "functions/professional/access/financial-jurisdiction-profile.js": "1e7deb58599db19db356b74ca51f5786b86b146957820243db0423054ea94358",
-    "functions/professional/access/financial-preparation-handoff.js": "a40bb736180fa41d40d4a0dad2bed90fa0ef90e899c56b13b736b5edb122f2e3",
+    "functions/professional/access/financial-preparation-handoff.js": "8fc7d094862e4914cb659d0a93526e383b1b2410ecf2065497b3670059ea5229",
+    "functions/professional/access/financial-professional-owner-context.js": "92fd6f105c9a2767468690cb7bcfdd6346e79f49e428f2f21ef5205c87f7f2c8",
     "functions/professional/access/professional-access-audit.js": "2c6a8c357705be6e74a5e089387cb09b75cdabaa2111e85e7553b783556ea004",
     "functions/professional/access/professional-assignment-contract.js": "b5a58a7136917a615f97c380386d65879781d55e0c44450352e313d65ebf60e1",
     "functions/professional/access/professional-authorisation-decision.js": "4773665fb4738100e5a7dc4d948002b85dc2f8ae5b232375d2faf2f2071acbc6",
@@ -1578,7 +2909,7 @@
     "professional/reports/index.html": "614083a5f977515bb439465639e5b911067c29584ef65031dfca04d54f19a727",
     "scripts/lib/customer-report-runtime/report-runtime-v2.mjs": "8d3d9d08982a0ceb942834ba697c72a3e0fda8c33f853b7f8b834689e4fe69a9",
     "scripts/verify-finance-document-render.mjs": "8074423552f19b9a08339bbf8d437c489705693d12585d250c0551ecf328f941",
-    "scripts/verify-finance-master-browser.mjs": "aed2eb6a69155da4116ce49305bec2fcbd79fa9bd139c21dc7a97d47edec4ffc",
+    "scripts/verify-finance-master-browser.mjs": "bc01fd810df0d9a54e8ee5ed838bbfa03f435874714a51f8e12db624cdc17738",
     "tests/financial-preparation/account-drafts.test.mjs": "4493d4f5c0bf49b0e656125cdcf656848f979b15d9b0c396e3ca34e723016504",
     "tests/financial-preparation/capabilities.test.mjs": "9a5f7f9b2f909567ef6a13c875a68cc216cdbfdf2a917674c0bbb8cf4309ba41",
     "tests/financial-preparation/customer-fcr-successor.test.mjs": "92c08babfcbf515bd4b75c84569cbcc0b3354c99c786d3e779f8046040f623ee",
@@ -1587,6 +2918,9 @@
     "tests/financial-preparation/factual-report.test.mjs": "a8985180043da0aae2a4d7501a6dfbade4261c2cad7078491e8f3143ce1c0ba2",
     "tests/financial-preparation/finance-tools.test.mjs": "a1bef307a9fd6db7d46efc32bd89254d7a16a41d680f3c8919ce0e49bca6ec6e",
     "tests/financial-preparation/local-account.mjs": "e4e32f1689f2e6a15fb50a906400de380f6d997cd2b29c1a82425070d9a8c659",
+    "tests/financial-preparation/portfolio-successor.test.mjs": "da4474c065778070f839027802259b1f04d866621eee56fd04e9e3ae53599cf0",
+    "tests/financial-preparation/professional-owner-context.test.mjs": "483f6a3c100f2739a9c76b5cf39ac5de1571cdb5495e4826380a253daf974b2f",
+    "tests/financial-preparation/professional-owner-fixture.mjs": "953a5f88456cfe0473adab84d262056849ffe5f4f8a207bbf0c889c5480d4038",
     "tests/financial-preparation/provider-boundary.test.mjs": "1031980e430693b599de02e543967e92d1c710ac49cfa32c2d2ef06370e6f460",
     "tests/financial-preparation/purpose-scope.test.mjs": "7822ab2d31e22bbc1630466da6388ea53259f91b51df3b4cbfd7f8efbc3a3e09",
     "tests/financial-preparation/reference/README.md": "dd6258815309cc6530c30a0893322908d7ea2c7f0306e19c9e95ac7354af0261",
@@ -1595,7 +2929,7 @@
     "tests/financial-preparation/tool-export.test.mjs": "7a9681fc6fb556911399ef35b20409d02ad258cfaf3ee4d2d249cd6f1c010d04",
     "tests/financial-preparation/will-and-handoff.test.mjs": "fbed7f9c5477dabce94970f5aee06f9fc9268f782b7e5305de96e5fa05790582",
     "tests/financial-preparation/will-assembly.test.mjs": "9dce363ab259219bf89615ef520a9e57caf6d6f4e30a61b37d5dacc6342e1a5f",
-    "tests/financial-preparation/will-import.test.mjs": "e0f33545bd030aecfea43fda6b22d4e1810c3d68ebef5e9f85a0a53f2309c30a"
+    "tests/financial-preparation/will-import.test.mjs": "0ec5ba514d2c50f11113c23a0a37a7ed3a97ac9d33297bad47a497fd438ea4fb"
   },
   "production": {
     "deployed": "NOT_DEPLOYED_BY_THIS_TASK",

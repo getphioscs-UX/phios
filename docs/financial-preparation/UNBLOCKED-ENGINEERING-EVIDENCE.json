@@ -1,0 +1,163 @@
+{
+  "timestamp": "2026-10-19T08:24:47.680Z",
+  "status": "PASS_LOCAL_SCOPED_ENGINEERING",
+  "head": "4009d2509aeb30c86ec18c39764414f1127b27db",
+  "applicationTests": 43,
+  "referenceTests": 48,
+  "customerBrowserCases": 6,
+  "professionalBrowserCases": 4,
+  "sourceUnchanged": true,
+  "checks": [
+    {
+      "id": "application-tests",
+      "status": "PASS",
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "tests/financial-preparation/account-drafts.test.mjs",
+        "tests/financial-preparation/capabilities.test.mjs",
+        "tests/financial-preparation/customer-fcr-successor.test.mjs",
+        "tests/financial-preparation/durable-report.test.mjs",
+        "tests/financial-preparation/factual-report.test.mjs",
+        "tests/financial-preparation/finance-tools.test.mjs",
+        "tests/financial-preparation/portfolio-successor.test.mjs",
+        "tests/financial-preparation/professional-owner-context.test.mjs",
+        "tests/financial-preparation/provider-boundary.test.mjs",
+        "tests/financial-preparation/purpose-scope.test.mjs",
+        "tests/financial-preparation/tool-export.test.mjs",
+        "tests/financial-preparation/will-and-handoff.test.mjs",
+        "tests/financial-preparation/will-assembly.test.mjs",
+        "tests/financial-preparation/will-import.test.mjs"
+      ],
+      "log": ".tmp/finance-validation/application-tests-1792398073533.log"
+    },
+    {
+      "id": "reference-tests",
+      "status": "PASS",
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "tests/financial-preparation/reference/jurisdiction-capability-reference.test.mjs"
+      ],
+      "log": ".tmp/finance-validation/reference-tests-1792398073788.log"
+    },
+    {
+      "id": "existing-privacy",
+      "status": "PASS",
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "scripts/check-fw-s1-contract-privacy.mjs"
+      ],
+      "log": ".tmp/finance-validation/existing-privacy-1792398074024.log"
+    },
+    {
+      "id": "existing-financial-successor",
+      "status": "PASS",
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "scripts/check-financial-will-successor.mjs"
+      ],
+      "log": ".tmp/finance-validation/existing-financial-successor-1792398074282.log"
+    },
+    {
+      "id": "existing-report-material",
+      "status": "BASELINE_FAILURE",
+      "exitCode": 1,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "scripts/check-fw-report-material.mjs"
+      ],
+      "log": ".tmp/finance-validation/existing-report-material-1792398074606.log"
+    },
+    {
+      "id": "legacy-fcr-runtime",
+      "status": "PASS",
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "scripts/check-fcr-runtime.mjs"
+      ],
+      "log": ".tmp/finance-validation/legacy-fcr-runtime-1792398074754.log"
+    },
+    {
+      "id": "legacy-fcr-determinism",
+      "status": "PASS",
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "scripts/check-fcr-determinism.mjs"
+      ],
+      "log": ".tmp/finance-validation/legacy-fcr-determinism-1792398074892.log"
+    },
+    {
+      "id": "legacy-fcr-fdr-boundary",
+      "status": "PASS",
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "scripts/check-fcr-fdr-boundary.mjs"
+      ],
+      "log": ".tmp/finance-validation/legacy-fcr-fdr-boundary-1792398074993.log"
+    },
+    {
+      "id": "legacy-fcr-contracts",
+      "status": "PASS",
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "scripts/check-fcr-contracts.mjs"
+      ],
+      "log": ".tmp/finance-validation/legacy-fcr-contracts-1792398075097.log"
+    },
+    {
+      "id": "legacy-fcr-freeze",
+      "status": "BASELINE_FAILURE",
+      "exitCode": 1,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "scripts/check-fcr-freeze.mjs"
+      ],
+      "log": ".tmp/finance-validation/legacy-fcr-freeze-1792398075221.log"
+    },
+    {
+      "id": "functions-compile",
+      "status": "PASS",
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/wrangler/bin/wrangler.js",
+        "pages",
+        "functions",
+        "build",
+        "functions",
+        "--outdir",
+        ".tmp/finance-master-functions",
+        "--compatibility-date",
+        "2026-07-14",
+        "--compatibility-flags",
+        "nodejs_compat"
+      ],
+      "log": ".tmp/finance-validation/functions-compile-1792398078386.log"
+    }
+  ],
+  "browserEvidence": "M1-BROWSER-EVIDENCE.json",
+  "professionalEvidence": "PROFESSIONAL-BROWSER-EVIDENCE.json",
+  "pdfEvidence": "REPORT-PRINT-EVIDENCE.json",
+  "approvalBoundaries": "UNBLOCKED-ENGINEERING-SUCCESSOR.md",
+  "source": "LOCAL_IMPLEMENTED",
+  "deployed": "NOT_DEPLOYED_BY_THIS_TASK",
+  "liveCustomer": "RUNTIME_UNVERIFIED",
+  "providerCalls": 0,
+  "costUSD": 0,
+  "payments": 0,
+  "refunds": 0,
+  "externalSends": 0,
+  "commit": 0,
+  "push": 0,
+  "deploy": 0,
+  "productionMigrations": 0
+}

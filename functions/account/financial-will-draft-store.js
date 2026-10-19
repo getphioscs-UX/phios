@@ -70,7 +70,7 @@ export async function draftApi(context){
   let grant=null,financialSourceRef=null;
   const expected=body.expectedVersion??0;if(!Number.isInteger(expected)||expected<0)throw fail('DRAFT_VERSION_INVALID');
   let prior=null,id=body.draftId;
-  if(id){prior=await db.prepare('SELECT * FROM account_financial_will_drafts WHERE user_id=? AND draft_id=? ORDER BY object_version DESC LIMIT 1').bind(userId,id).first();if(!prior||prior.expires_at<=now)throw fail('DRAFT_NOT_FOUND',404);if(prior.draft_type!==kind||prior.object_version!==expected)throw fail('DRAFT_VERSION_CONFLICT',409);if(prior.legal_hold_reference)throw fail('DRAFT_RIGHTS_REVIEW_REQUIRED',409);}else{if(expected!==0)throw fail('DRAFT_VERSION_CONFLICT',409);id=crypto.randomUUID();}
+  if(id){prior=await db.prepare('SELECT * FROM account_financial_will_drafts WHERE user_id=? AND draft_id=? ORDER BY object_version DESC LIMIT 1').bind(userId,id).first();if(!prior||prior.expires_at<=now)throw fail('DRAFT_NOT_FOUND',404);if(prior.draft_type!==kind||prior.object_version!==expected)throw fail('DRAFT_VERSION_CONFLICT',409);if(prior.legal_hold_reference)throw fail('DRAFT_RIGHTS_REVIEW_REQUIRED',409);}else{if(expected!==0)throw fail('DRAFT_VERSION_CONFLICT',409);id=kind==='WILL'&&context.data?.financialPurposeGrant?.newWillDraftId||crypto.randomUUID();}
   if(kind==='WILL'){
    const old=prior?await loadOwnedDraft(context,{draftId:id,version:prior.object_version}):null;
    if(JSON.stringify(old?.payload.financialSource)!==JSON.stringify(payload.financialSource)){

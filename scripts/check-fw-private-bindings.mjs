@@ -54,7 +54,10 @@ assert.equal((await call({action:'withdraw',draftId:id,confirmed:true})).status,
 assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM account_financial_will_drafts').get().n,0);
 assert.equal(sqlite.prepare('SELECT right_code FROM account_fw_rights_audit').get().right_code,'WITHDRAW_CONSENT');
 const expired=await call(save);sqlite.prepare('UPDATE account_financial_will_drafts SET expires_at=0').run();
-assert.equal((await call(null,{query:`?id=${expired.body.draftId}`})).status,404);
+const expiredRead=await call(null,{query:`?id=${expired.body.draftId}`});
+assert.equal(expiredRead.status,410);
+assert.deepEqual(expiredRead.body,{ok:false,code:'DRAFT_EXPIRED'});
+assert.equal((await call(null,{user:'other',query:`?id=${expired.body.draftId}`})).status,404,'Expired drafts must still be hidden from other accounts');
 assert.deepEqual((await call(null)).body.drafts,[]);
 const will={...save,draftType:'WILL',purpose:'WILL_ASSEMBLY',payload:{sections:{identity:{status:'unknown',items:[]}}}};
 const w=await call(will);assert.equal(w.status,200);assert.deepEqual((await call(null,{query:`?id=${w.body.draftId}`})).body.payload,will.payload);

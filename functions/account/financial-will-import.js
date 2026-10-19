@@ -32,5 +32,11 @@ export async function confirmWillImport(context,body){
  // Import never copies people into role/beneficiary/intent sections.
  if(old&&await willIntentDigest(payload)!==preview.intentDigest)fail('WILL_INTENT_MUTATION_FORBIDDEN');
  const request=new Request(context.request.url,{method:'POST',headers:{origin:new URL(context.request.url).origin,'content-type':'application/json'},body:JSON.stringify({action:'save',draftType:'WILL',payload,purpose:'WILL_ASSEMBLY',saveConsent:true,retentionConsent:true,expiresAt:old?.expiresAt||body.expiresAt,expectedVersion:old?.version||0,draftId:old?.draftId})});
- return draftApi({...context,data:{...context.data,financialPurposeGrant:{grantId:preview.grantId,sourceRef:preview.source.sourceRef,sourceDigest:preview.source.contentDigest,mappingDigest:preview.mappingDigest}},request});
+ const newWillDraftId=old?null:'wi_'+preview.mappingDigest.slice(0,40);
+ const response=await draftApi({...context,data:{...context.data,financialPurposeGrant:{grantId:preview.grantId,sourceRef:preview.source.sourceRef,sourceDigest:preview.source.contentDigest,mappingDigest:preview.mappingDigest,newWillDraftId}},request});
+ if(!old&&response.status===409){
+  const saved=await loadOwnedDraft(context,{draftId:newWillDraftId,version:1,kind:'WILL'});
+  if(saved.payload.financialSource?.mappingDigest===preview.mappingDigest&&saved.payload.financialSource.grantId===preview.grantId)return Response.json({ok:true,draftId:saved.draftId,version:saved.version,digest:saved.digest,savedDraftRef:saved.savedDraftRef,reused:true},{headers:{'cache-control':'private, no-store'}});
+ }
+ return response;
 }

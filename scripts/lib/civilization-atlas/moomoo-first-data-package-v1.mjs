@@ -1,3 +1,4 @@
+import {assessMoomooRequest} from './moomoo-coverage-v2.mjs';
 const capabilityLanes=Object.freeze({
   HISTORY_KLINE:['PRESSURE_FIELD'],
   CAPITAL_FLOW:['PRESSURE_FIELD'],
@@ -28,7 +29,8 @@ export function buildFirstMoomooPackage({plan,snapshots,liveState}={}){
       plannedInstruments:(req.instruments||[]).length,
       liveSnapshots:rows.length,
       observedInstruments:instruments.length,
-      state:rows.length?(instruments.length>=(req.instruments||[]).length?'SNAPSHOTS_COMPLETE_FOR_PLAN':'PARTIAL_SNAPSHOTS'):(executable?(liveState?.networkInvoked?'LIVE_RUN_NO_SNAPSHOT':'AUTH_REQUIRED_OR_NOT_RUN'):'NOT_EXECUTABLE_YET')
+      ...assessMoomooRequest(req,snapRows),
+      planVersion:plan?.version||null
     };
   });
   const hist=requestFamilies.find(x=>x.capability==='HISTORY_KLINE');

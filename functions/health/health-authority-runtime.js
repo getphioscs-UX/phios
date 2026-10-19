@@ -1,9 +1,10 @@
+import {registeredHealthPublisher} from './health-source-policy.js';
 const normalizeHost = value => String(value || '').trim().toLowerCase().replace(/^www\./, '');
 const normalize = value => String(value || '').trim();
 
 export function resolveApprovedAuthority(authorityId, registry = {}) {
   const id = normalize(authorityId).toUpperCase();
-  return (Array.isArray(registry.publishers) ? registry.publishers : []).find(item => item.authorityId === id) || null;
+  return registeredHealthPublisher((Array.isArray(registry.publishers) ? registry.publishers : []).find(item => item.authorityId === id) || null);
 }
 
 export function admitHealthSource(source = {}, registry = {}) {
@@ -12,6 +13,7 @@ export function admitHealthSource(source = {}, registry = {}) {
   if (!authority) return reject('REJECTED_AUTHORITY', 'UNKNOWN_AUTHORITY');
   let url;
   try { url = new URL(source.url); } catch { return reject('REJECTED_PROVENANCE', 'INVALID_URL'); }
+  if(url.protocol!=='https:'||url.username||url.password||(url.port&&url.port!=='443'))return reject('REJECTED_PROVENANCE','HTTPS_EXACT_HOST_REQUIRED');
   const admittedHosts = new Set(authority.hosts.map(normalizeHost));
   if (!admittedHosts.has(normalizeHost(url.hostname))) return reject('REJECTED_HOST', 'HOST_NOT_APPROVED');
   if (!normalize(source.sourceId) || !normalize(source.title) || !normalize(source.retrievedAt) || !normalize(source.contentDigest) || !normalize(source.locale)) {
