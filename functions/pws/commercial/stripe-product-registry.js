@@ -454,6 +454,8 @@ for(const row of rows){const b=bookPublication[row.productId];if(!b)continue;
   if(row.entitlementPolicy!==b[3])throw new Error('BOOK_ENTITLEMENT_IDENTITY_DRIFT');
   if (b[0] === 8) Object.assign(row, {active:false, productionSaleAllowed:false, publicationStatus:'PUBLICATION_NOT_OFFERED', contentStatus:'PRIVATE_DOCTRINE_IN_DEVELOPMENT'});
 }
+const previousFinancialProduct=Object.freeze({...rows.find(p=>p.productId==='COM-REPORT-FINANCIAL-FULL')});
+Object.assign(rows.find(p=>p.productId==='COM-REPORT-FINANCIAL-FULL'),{amountMinor:6900,title:'Personal & Household Financial Preparation Report · 16 pages',titleZh:'个人与家庭财务准备报告 · 16 页',pricingVersion:'FINANCE-RM69-2026-10-20',publicationVersion:'FINANCE_CORE_16_V2',professionalReviewRequired:false,qaPriceId:null,livePriceId:null,checkoutBlockedReason:'FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED'});
 export const STRIPE_PRODUCT_REGISTRY = Object.freeze(rows.map(row => Object.freeze(row)));
 export function commerceProduct(id) {
   const product = STRIPE_PRODUCT_REGISTRY.find(row => row.productId === id);
@@ -856,6 +858,10 @@ const historicalRows=[
   }
 ];
 export function commerceOrderProduct(order){
+ if(order?.product_id==='COM-REPORT-FINANCIAL-FULL'){
+  const previous=order.environment==='LIVE'?commerceStripeProduct(previousFinancialProduct,'LIVE'):previousFinancialProduct;
+  if(order.qa_price_id===previous.qaPriceId)return previous;
+ }
  const registered=STRIPE_PRODUCT_REGISTRY.find(p=>p.productId===order?.product_id);
  const base=registered&&order?.environment==='LIVE'?commerceStripeProduct(registered,'LIVE'):registered;
  const current=base?continuityRefillProduct(base,JSON.parse(order.context_json||'{}')):base;

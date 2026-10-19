@@ -1,3 +1,4 @@
+import {topicRoute} from '../../assets/js/customer-entry-topic-map.js';
 import {ASK_CAPABILITIES} from '../../assets/js/ask-entry-capabilities.js';
 import {routeHealthSafety} from '../health/health-reality-runtime.js';
 const rules=[
@@ -46,6 +47,7 @@ function classifyClientIntent(input={}){
  }
  if(/今天|最新|today|latest/i.test(q)&&/政策|policy/i.test(q))return result('NEEDS_INPUT',['WORLD'],zh?'涉及哪个地区、哪项政策和日期？请先选择当前来源；历史资料不能证明今天的影响。':'Which jurisdiction, policy and date? Select a current source first; historical material cannot establish today’s effect.');
  const explanatory=/为什么|为何|为啥|怎么会|如何|怎样(?:形成|影响|理解)|原因是什么|形成原因|理解.*(?:原因|概念|含义)|解释|\b(?:why|how|explain|what\s+causes|what\s+makes|tell\s+me\s+about)\b/i.test(q);
+ const topical=topicRoute(q,locale,input.topicId);if(!explanatory&&input.task!=='KNOWLEDGE_BASIC'&&topical&&topical.topicIds.length===1)return {...base,...topical};
  if(input.task==='KNOWLEDGE_BASIC'||explanatory)return {...result('KNOWLEDGE_LOOKUP',['KNOWLEDGE']),task:'KNOWLEDGE_BASIC',query:raw,retrievalQuery:q,generalExplanation:true};
  if(input.task==='KNOWLEDGE_BASIC'||/什么是|是什么意思|在哪里读|哪里读|文章|知识|有什么不同|比较|what is|what are|means|where.*read|article|knowledge|definition|difference|compare/i.test(q))return {...result('KNOWLEDGE_LOOKUP',['KNOWLEDGE']),task:'KNOWLEDGE_BASIC',query:raw,retrievalQuery:q};
 
@@ -64,5 +66,6 @@ export function routeClientIntent(input={}){
  const route=classifyClientIntent(input),ids=[...new Set(route.candidates.map(c=>c.capabilityId))];
  const domainHints=rules.filter(([,pattern])=>pattern.test(routingText(String(input.question||input.q||'')))).flatMap(([id])=>caps.find(c=>c.capabilityId===id)?.canonicalDomainRefs||[]);
  const taskAxis=route.task==='KNOWLEDGE_BASIC'?'KNOWLEDGE_BASIC':route.task==='PRODUCT_HELP'||route.outcome==='PRODUCT_HELP'?'PRODUCT_HELP':route.outcome==='PROFESSIONAL_HANDOFF'?'SAFETY_HANDOFF':ids[0]==='REALITY'&&route.outcome==='MATCHED_CAPABILITY'?'REALITY_NAVIGATION':'ENTRY';
+ if(route.href?.includes('method=bazi'))route.clarification=input.locale==='zh-Hans'?'八字以出生资料组织四柱与五行的传统解释。进入现有页面填写资料并查看可用的免费命盘；完整报告是独立付费内容，进入页面不会收费或生成付费报告。':'BaZi is a traditional Four Pillars and Five Elements interpretation using birth details. Enter the existing page to provide inputs and view the available free chart. A full report is separate paid content; opening the page neither charges nor generates one.';
  return {...route,ruleVersion:'ENTRY_TASK_DOMAIN_R1',axes:{task:taskAxis,canonicalDomains:[...new Set([...route.candidates.flatMap(c=>c.canonicalDomainRefs||[]),...domainHints])],products:ids,methodSelection:route.href?.includes('?method=')?new URL(route.href,'https://phios.local').searchParams.get('method'):null},handoff:{execution:'DISCOVERY_ONLY',originalQuestionTransport:'EXPLICIT_SAME_ORIGIN_EPHEMERAL_INPUT_ONLY',automaticGeneration:false,automaticPersistence:false,providerCalls:0}};
 }

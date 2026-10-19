@@ -194,6 +194,10 @@ const admittedBookVii = await loadBookViiPublishedAdmission(async rel => {
   return fs.existsSync(source) ? JSON.parse(fs.readFileSync(source, 'utf8')) : null;
 });
 const publicationFiles = new Set(tracked.stdout.split('\0').filter(Boolean));
+// Customer Entry R1: only these two public discovery assets may join an uncommitted local build.
+// The existing publication predicate still filters every entry; no reviews or private sources are added.
+for(const file of ['assets/js/customer-entry-topic-map.js','assets/customer-ui/surfaces/customer-entry-r1.css'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
+
 // Version-bound public admission metadata; private owner review remains excluded.
 const book5AcceptancePath='content/knowledge/public/successors/book5-publication-v1/human-acceptance-successor-v1.json';
 if(fs.existsSync(path.join(root,book5AcceptancePath))){

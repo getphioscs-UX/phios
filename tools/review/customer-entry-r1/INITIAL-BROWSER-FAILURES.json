@@ -1,0 +1,28 @@
+{
+  "attempts": [
+    {
+      "stage": "sandbox browser launch/preview",
+      "result": "Restricted preview process not reachable from browser; moved own isolated preview to permitted desktop runtime"
+    },
+    {
+      "stage": "preview root",
+      "result": "Local preview root path rejected; corrected root-directory handling without product changes"
+    },
+    {
+      "stage": "viewport harness",
+      "result": "BrowserContext.newPage ignored supplied viewport options, rendering desktop; corrected with explicit page.setViewportSize. No mobile PASS claimed from initial screenshots."
+    },
+    {
+      "stage": "return input",
+      "result": "Actual browser return lost input. Fixed by explicit browser-history state; no account/localStorage writes or automatic resubmission."
+    },
+    {
+      "stage": "reading readiness",
+      "result": "800ms fixed wait inspected an asynchronously loading source before completion. Diagnostic proved full public source loaded accurately; changed test to await actual readable content, retaining the content-length assertion."
+    },
+    {
+      "stage": "public-source completeness assertion",
+      "result": "Book VI existing accepted public explanation is 215 Chinese characters / 4 paragraphs; arbitrary 300-character minimum rejected it. Replaced heuristic with strict exact comparison to ALL sections of the existing approved public source. No content expanded or authority changed; this short explanation is not manuscript coverage."
+    }
+  ]
+}

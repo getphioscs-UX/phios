@@ -83,3 +83,7 @@ refreshMasterOwnerTruth();
 const progressReview=spawnSync(process.execPath,['scripts/complete-master-progress-review.mjs'],{encoding:'utf8'});
 if(progressReview.status!==0)throw Error(progressReview.stderr||progressReview.stdout);
 console.log(progressReview.stdout.trim());
+
+// CUSTOMER_ENTRY_R1_CANONICAL_POINTER: preserve this scoped review in the existing Master.
+// This is a link only; no source/live/acceptance status is inferred by this generator.
+if(fs.existsSync('tools/review/customer-entry-r1/HUMAN-REVIEW.html')){const target=`${dir}/MASTER-HUMAN-REVIEW.html`;let current=fs.readFileSync(target,'utf8');if(!current.includes('id="customer-entry-recovery-r1"')){const link='<section id="customer-entry-recovery-r1"><h2>Customer Entry + Ask Recovery R1</h2><p>本地客户入口候选；人审、构建与生产状态以本轮收据为准，不代表全站完成。</p><p><a href="../../../tools/review/customer-entry-r1/HUMAN-REVIEW.html">客户入口审阅</a> · <a href="../../../docs/customer-entry/EXECUTION-STATE.md">执行台账</a></p></section>';current=current.includes('</body>')?current.replace('</body>',link+'</body>'):current+link;fs.writeFileSync(target,current);}}

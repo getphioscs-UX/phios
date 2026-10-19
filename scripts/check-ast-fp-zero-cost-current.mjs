@@ -101,7 +101,18 @@ for(const row of current.protectedFileReconciliation){
   assert.equal(v8.previousSha256,v7.sha256);
   assert.equal(hash(fs.readFileSync(v8.previousPath,'utf8').replace(/\r\n/g,'\n')),v8.previousSha256);
   for(const key of ['historicalFreezeRewritten','astMeaningAuthorityChanged','productionAcceptanceGranted'])assert.equal(v8[key],false);
-  assert.equal(hash(normalized),v8.sha256,`Current shared manuscript runtime changed: ${row.path}`);
+  const v9=read('content/professional/ast-full-production/acceptance/ast-shared-manuscript-runtime-successor-v9.json');
+  assert.equal(v9.status,'ENGINEERING_RECONCILIATION');assert.equal(v9.path,row.path);
+  assert.equal(v9.predecessorPath,'content/professional/ast-full-production/acceptance/ast-shared-manuscript-runtime-successor-v8.json');
+  assert.equal(hash(fs.readFileSync(v9.predecessorPath,'utf8').replace(/\r\n/g,'\n')),v9.predecessorSha256);
+  assert.equal(v9.previousSha256,v8.sha256);
+  const v9Previous=fs.readFileSync(v9.previousPath,'utf8').replace(/\r\n/g,'\n');
+  assert.equal(hash(v9Previous),v9.previousSha256);
+  for(const key of ['historicalFreezeRewritten','astMeaningAuthorityChanged','productionAcceptanceGranted'])assert.equal(v9[key],false);
+  assert.equal(v9.exactInsertedExpression,"source.isolatedSourceCandidate?'ISOLATED_VERIFIED_FRAGMENT_NOT_PRODUCTION_ADMISSION':");
+  assert.equal(normalized.split(v9.exactInsertedExpression).length,2);
+  assert.equal(normalized.replace(v9.exactInsertedExpression,''),v9Previous,'Shared manuscript changes exceed isolated provenance label');
+  assert.equal(hash(normalized),v9.sha256,`Current shared manuscript runtime changed: ${row.path}`);
  }else assert.equal(hash(normalized),row.currentSha256,`Current protected file changed: ${row.path}`);
  if(row.currentSha256!==row.main2211Sha256)assert.ok(['AST_FP_EXPLICIT_SUCCESSOR','SHARED_MAIN_SUCCESSOR'].includes(row.changeCategory),`Unsupported protected successor category: ${row.path}`);
 }

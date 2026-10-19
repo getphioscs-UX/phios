@@ -1,0 +1,13 @@
+
+> build:pages
+> node scripts/run-zero-cost-regression.mjs build:pages
+
+file:///C:/phios/scripts/lib/pages-output-lock.mjs:17
+  catch(error){if(error.code==='EEXIST')throw Error('PAGES_OUTPUT_BUSY: active build/check or interrupted lock; output must not be inspected or rebuilt until owner finishes: '+lockPath);throw error;}
+                                              ^
+
+Error: PAGES_OUTPUT_BUSY: active build/check or interrupted lock; output must not be inspected or rebuilt until owner finishes: C:\phios\.wrangler\pages-production-build.lock
+    at acquirePagesOutputLock (file:///C:/phios/scripts/lib/pages-output-lock.mjs:17:47)
+    at file:///C:/phios/scripts/build-cloudflare-pages.mjs:49:18
+
+Node.js v24.18.0

@@ -19,6 +19,7 @@ export function draftError(error){
 }
 export function draftState(d){return tr('Saved','保存于')+` ${new Date(d.createdAt).toLocaleString()} · `+tr('Expires','到期')+` ${new Date(d.expiresAt).toLocaleString()} · `+tr('Version','版本')+` ${d.version}`;}
 export function installSecureDrafts({host,kind,capture,restore}){
+ if(kind==='FINANCIAL')host.id='financial-saved';
  const panel=document.createElement('section');panel.className='cx-card cx-stack';panel.dataset.secureDraft=kind;host.append(panel);
  let saved=null,signed=false,busy=false,message='',confirmation=null,consent=false,retention=false,days='30',drafts=[],savedPayload=null,activeOwnerRef=null;
  const controller={get savedRef(){return saved?.savedDraftRef||null;},get dirty(){return savedPayload!==JSON.stringify(capture());},async reopen(id){await load(id);render();},async save(){await save();return saved?.savedDraftRef||null;}};

@@ -54,8 +54,8 @@ function localeControl(compact = false) {
 function headerMarkup(active, state) {
   return `<header class="cx-shell-header" data-open="false" data-cx-shell-region="header">
     <div class="cx-container cx-shell-header__inner">
-      <a class="cx-brand" href="/" aria-label="PHI OS home"><img data-cx-asset="LOGO-009" data-cx-asset-auto="contrast" alt="PHI OS"><span class="cx-visually-hidden" data-cx-asset-fallback>PHI OS</span></a>
-      <nav class="cx-primary-nav" aria-label="Primary">${navLinks(active)}</nav>
+      <a class="cx-brand" href="/" ${aria('PHI OS home', 'PHI OS 首页')}><img data-cx-asset="LOGO-009" data-cx-asset-auto="contrast" alt="PHI OS"><span class="cx-visually-hidden" data-cx-asset-fallback>PHI OS</span></a>
+      <nav class="cx-primary-nav" ${aria('Primary navigation', '主导航')}>${navLinks(active)}</nav>
       <div class="cx-utilities">${utilityControls(state)}${localeControl()}</div>
       <button class="cx-menu-button" type="button" data-cx-menu data-cx-dialog-open="cx-shell-navigation" aria-controls="cx-shell-navigation" aria-expanded="false" ${aria('Open menu', '打开菜单')}><span ${t('Menu', '菜单')}>Menu</span></button>
     </div>
@@ -143,7 +143,7 @@ function installAskDrawerNavigation(scope = document) {
     if(form.getAttribute('aria-busy')==='true')return;
     let result=form.parentElement.querySelector('[data-ask-r1-result]');if(!result){result=document.createElement('section');result.dataset.askR1Result='';form.after(result);}
     form.setAttribute('aria-busy','true');
-    try{const response=await fetch('/api/client-intent-route',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({question:q,locale:document.documentElement.lang,entrySurface:'HEADER'})});const payload=await response.json();if(!response.ok||!payload.ok)throw Error('ENTRY_UNAVAILABLE');renderEntryResult(result,payload.route,{retry:()=>form.requestSubmit(),clarify:()=>textarea?.focus()});}
+    try{const response=await fetch('/api/client-intent-route?'+new URLSearchParams({q,locale:document.documentElement.lang}),{cache:'no-store',signal:AbortSignal.timeout(10000),referrerPolicy:'no-referrer'});const payload=await response.json();if(!response.ok||!payload.ok)throw Error('ENTRY_UNAVAILABLE');renderEntryResult(result,payload.route,{retry:()=>form.requestSubmit(),clarify:()=>textarea?.focus()});}
     catch{renderEntryResult(result,{outcome:'SERVICE_FAILURE',primaryAction:{kind:'RETRY',label:document.documentElement.lang==='zh-Hans'?'重试':'Retry'}},{retry:()=>form.requestSubmit(),clarify:()=>textarea?.focus()});}
     finally{form.setAttribute('aria-busy','false');}
   });
@@ -156,7 +156,7 @@ function footerLink(href, en, zh) {
 
 function footerMarkup() {
   return `<footer class="cx-shell-footer" data-cx-shell-region="footer"><div class="cx-container cx-shell-footer__grid">
-    <div class="cx-stack"><a class="cx-brand" href="/" aria-label="PHI OS home"><img data-cx-asset="LOGO-006" alt="PHI OS"><span class="cx-visually-hidden" data-cx-asset-fallback>PHI OS</span></a><p class="cx-meta" ${t('Reality changes. Your understanding should be able to change with it.', '现实会继续变化，你的理解也应该能够随之更新。')}>Reality changes. Your understanding should be able to change with it.</p></div>
+    <div class="cx-stack"><a class="cx-brand" href="/" ${aria('PHI OS home', 'PHI OS 首页')}><img data-cx-asset="LOGO-006" alt="PHI OS"><span class="cx-visually-hidden" data-cx-asset-fallback>PHI OS</span></a><p class="cx-meta" ${t('Reality changes. Your understanding should be able to change with it.', '现实会继续变化，你的理解也应该能够随之更新。')}>Reality changes. Your understanding should be able to change with it.</p></div>
     <div><p class="cx-eyebrow" ${t('Navigate', '浏览')}>Navigate</p><p class="cx-meta">${footerLink('/about/founder/', 'About PHI OS', '关于 PHI OS')}<br>${footerLink('/reality/', 'My Reality', '我的现实')}<br>${footerLink('/perspectives/', 'Perspectives', '视角')}</p></div>
     <div><p class="cx-eyebrow" ${t('Knowledge', '知识')}>Knowledge</p><p class="cx-meta">${footerLink('/knowledge/', 'Knowledge home', '知识主页')}<br>${footerLink('/search/', 'Search', '搜索')}<br>${footerLink('/knowledge/ask/', 'Ask PHI OS', '向 PHI OS 提问')}</p></div>
     <div><p class="cx-eyebrow" ${t('Continue', '继续')}>Continue</p><p class="cx-meta">${footerLink('/professional/', 'Professional', '专业')}<br>${footerLink('/account/', 'Account', '账户')}<br>${footerLink('/terms', 'Terms', '条款')} · ${footerLink('/privacy', 'Privacy', '隐私')}</p></div>

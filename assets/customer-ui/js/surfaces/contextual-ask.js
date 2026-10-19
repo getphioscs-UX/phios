@@ -295,7 +295,7 @@ function boot(){
     if(!question||form.getAttribute('aria-busy')==='true')return;
     if(form.elements.askTask.value==='ENTRY'){
       form.setAttribute('aria-busy','true');
-      try{const p=await postJson('/api/client-intent-route',{question,locale:locale(),entrySurface:'ASK'});renderEntryResult(entryResult,p.route,{retry:()=>form.requestSubmit(),clarify:()=>form.elements.question.focus()});setStatus(status,'');}
+      try{const response=await fetch('/api/client-intent-route?'+new URLSearchParams({q:question,locale:locale()}),{cache:'no-store',signal:AbortSignal.timeout(10000),referrerPolicy:'no-referrer'});if(!response.ok)throw Error('ENTRY_UNAVAILABLE');const p=await response.json();renderEntryResult(entryResult,p.route,{retry:()=>form.requestSubmit(),clarify:()=>form.elements.question.focus()});setStatus(status,'');}
       catch{setStatus(status,'');renderEntryResult(entryResult,{outcome:'SERVICE_FAILURE',primaryAction:{kind:'RETRY',label:tr('Retry','重试')}},{retry:()=>form.requestSubmit(),clarify:()=>form.elements.question.focus()});}
       finally{form.setAttribute('aria-busy','false');}return;
     }

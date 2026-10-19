@@ -23,7 +23,12 @@ export function normalizeReportPresentation(input={}) {
   throw Object.assign(new Error('Choose the report language explicitly.'),{code:'REPORT_PRESENTATION_REQUIRED',status:422});
  return freeze({reportLanguageMode,reportLocale});
 }
-export function quoteReportPresentation(productId,input,selectedProductIds=[],pricingVersion=REPORT_LANGUAGE_PRICING_VERSION) {
+export function quoteReportPresentation(productId,input,selectedProductIds=[],pricingVersion=productId==='FINANCIAL_FULL_REPORT'?'FINANCE-RM69-2026-10-20':REPORT_LANGUAGE_PRICING_VERSION) {
+ if(productId==='FINANCIAL_FULL_REPORT'&&[REPORT_LANGUAGE_PRICING_VERSION,'FINANCE-RM69-2026-10-20'].includes(pricingVersion)){
+  const presentation=normalizeReportPresentation(input);if(presentation.reportLanguageMode!=='BILINGUAL')throw Object.assign(Error('REPORT_BILINGUAL_ONLY'),{status:422,code:'REPORT_BILINGUAL_ONLY'});
+  const plan=mapReportEntitlements(productId,selectedProductIds),amountMinor=pricingVersion==='FINANCE-RM69-2026-10-20'?6900:15900;
+  return freeze({...presentation,productId,currency:'MYR',baseAmountMinor:amountMinor,surchargeAmountMinor:0,amountMinor,pricingVersion,modifierRule:'INDIVIDUAL_BILINGUAL',selectedProductIds:plan.selectedProductIds});
+ }
  if(pricingVersion!==REPORT_LANGUAGE_PRICING_VERSION)return historicalQuote(productId,input,selectedProductIds,pricingVersion);
  const product=resolveReportProduct(productId), presentation=normalizeReportPresentation(input);
  if(product.bilingualOnly&&presentation.reportLanguageMode!=='BILINGUAL')throw Object.assign(Error('REPORT_BILINGUAL_ONLY'),{status:422,code:'REPORT_BILINGUAL_ONLY'});

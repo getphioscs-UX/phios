@@ -1,0 +1,7 @@
+# WORLD-R3-ANSWER-CONTRACT
+
+MISSING executable World-specific answer contract; PARTIAL reusable source/provenance and Ask contracts. No new registry/authority created in this audit.
+
+For Gate 2 / later explicit successor contract review: originalQuestion (verbatim), locale, explicit region IDs and user-selected observation period; questionType; retrievalStatus (evidence found / partial / missing / service unavailable); directAnswer linked to claimRefs; facts with value, unit, definition, geography, observationPeriod, publicationDate, retrievedAt, sourceRevision, licence/access and authoritative locator; interpretations kept separate with accepted manuscript passage refs; comparisons require aligned definition/year/unit/price basis/frequency/population coverage; visuals need accepted asset identity and meaningful connection, with illustration/observation class; impacts conditional and never personal facts; disagreements/unknowns/non-inferences; relevant reading, compare and follow-up references. Omit absent sections instead of empty cards.
+
+Fail closed: numeric question lacks matching data→explicit gap plus working reading path; no silent latest-year fallback; source timeout≠no phenomenon; general theory≠local statistic; acceptance≠current freshness; method output≠public world fact; private state never into public URL/search without explicit applicable consent. AI composition is not admitted merely by an Ask link or this draft. Ten current searches do not meet this proposed contract.

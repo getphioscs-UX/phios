@@ -1,0 +1,13 @@
+/* Customer entry successor: scope confined to the current homepage. */
+.cx-home .customer-entry-topics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%;max-width:760px}
+.customer-entry-topics button{font:inherit;font-size:15px;line-height:1.4;min-height:48px;padding:10px 12px;border:1px solid #938363;border-radius:10px;color:#f5f1e8;background:#14383c;text-align:left;cursor:pointer;white-space:normal}
+.customer-entry-topics button[aria-pressed=true]{background:#e7cf96;color:#102b2d}
+.cx-home :is(button,a,input):focus-visible{outline:3px solid #e7cf96;outline-offset:4px}
+.cx-home [data-cir-root] .cx-home-hero__grid{align-items:start}
+.cx-home [data-cir-root] .cx-home-hero__title{font-size:clamp(2rem,3.5vw,3.6rem);line-height:1.18;max-width:22ch}
+.cx-home [data-cir-root] .cx-lead{max-width:58ch;line-height:1.65;font-size:18px}
+.cx-home .ask-entry-actions a,.cx-home .ask-entry-actions button{min-height:44px;box-sizing:border-box;line-height:1.6}
+.cx-home [data-cir-root] [data-ask-r1-overview]{display:none}
+@media(max-width:700px){.cx-home [data-cir-root]{padding-top:22px}.cx-home [data-cir-root] .cx-home-hero__grid{display:flex;flex-direction:column;gap:24px}.cx-home [data-cir-root] .cx-home-hero__copy{gap:14px;width:100%;min-width:0}.cx-home .customer-entry-topics{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cx-home [data-cir-root] .cx-home-hero__opening{display:none}.cx-home [data-cir-root] .cx-lead{font-size:16px;margin:0}.cx-home [data-cir-root] .cx-home-hero__title{font-size:29px;line-height:1.25;margin:0}.cx-home [data-cir-root] .cx-home-hero__visual{width:100%;max-height:200px;margin:0;overflow:hidden}.cx-home [data-cir-root] .cx-home-hero__visual img{width:100%;height:200px;object-fit:contain}.cx-home .cx-home-ask__row{display:flex;flex-wrap:wrap;gap:10px}.cx-home .cx-home-ask__row input{flex:1 1 100%;max-width:100%;min-height:44px}.cx-home .cx-home-ask__row button{min-height:44px;width:100%}.cx-home .cx-home-hero__copy>.cx-stack{gap:8px}}
+@media(prefers-reduced-motion:reduce){.cx-home *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@media(max-width:700px){.cx-home [data-cir-root] .cx-home-hero__grid{padding-inline:18px;width:100%;max-width:100%;box-sizing:border-box}.cx-home [data-cir-root] .cx-home-hero__copy{padding:0}.cx-home [data-cir-root]{padding-bottom:24px}}
