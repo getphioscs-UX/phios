@@ -1,0 +1,118 @@
+{
+  "timestamp": "2026-10-19T10:10:30.787Z",
+  "head": "3b08712d4f8f784b68e9aaf49d2ec68e0c94221b",
+  "results": [
+    {
+      "id": "local-closure",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "--test-reporter=tap",
+        "tests/financial-preparation/local-closure.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "historical": null,
+      "log": "docs/financial-preparation/successor-r2/local-closure/local-closure.log",
+      "sha256": "80b77fb092c7edc17e5bc5d27457498ae80db87b08d0a9d630e58fe3d95e2229"
+    },
+    {
+      "id": "package-regression",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "--test-reporter=tap",
+        "--test-name-pattern=N-K|existing report",
+        "tests/financial-preparation/successor-n1-n5.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "historical": null,
+      "log": "docs/financial-preparation/successor-r2/local-closure/package-regression.log",
+      "sha256": "5281e0fca5987bf40ec3f9e8709c44e42c6c553f85cb4826560a883e47f7466e"
+    },
+    {
+      "id": "historical-observation",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "--test-reporter=tap",
+        "tests/financial-preparation/finance-tools.test.mjs",
+        "tests/financial-preparation/portfolio-successor.test.mjs"
+      ],
+      "exitCode": 1,
+      "status": "EXACT_FIVE_EXPLAINED_FAILURES",
+      "historical": {
+        "pass": true,
+        "exitCode": 1,
+        "unexpected": [],
+        "missing": [],
+        "failures": [
+          {
+            "name": "rental ratios distinguish zero, missing and out-of-range; no unsupported currency rounding",
+            "expected": "16000.00",
+            "actual": null,
+            "metric": "operatingCashFlow",
+            "reason": "Missing amountState and cashTiming on operating cost; paid cash cannot be inferred."
+          },
+          {
+            "name": "actual receipts do not lose vacancy twice; forecasts and cash/tax allocation stay independent",
+            "expected": "19500.00",
+            "actual": null,
+            "metric": "operatingCashFlow",
+            "reason": "Missing amountState and cashTiming on maintenance; payment metadata is unspecified."
+          },
+          {
+            "name": "rental tax candidate and cashflow are separate; interest not subtracted twice",
+            "expected": "18700.00",
+            "actual": null,
+            "metric": "operatingCashFlow",
+            "reason": "Missing amountState and cashTiming on operating cost; interest is not a second cash deduction."
+          },
+          {
+            "name": "portfolio API keeps four period/mode/currency groups and stable property identities",
+            "expected": "950.00",
+            "actual": null,
+            "metric": "netCashFlow",
+            "reason": "Missing debtService; omitted debt payment is unknown, not a declared zero."
+          },
+          {
+            "name": "unknown amounts and unpaid costs cannot be coerced into zero cash; metadata survives",
+            "expected": "APPROXIMATE",
+            "actual": "UNKNOWN",
+            "metric": "cashPrecision",
+            "reason": "Missing debtService in approximate-cost fixture; unknown debt dominates approximate cost."
+          }
+        ]
+      },
+      "log": "docs/financial-preparation/successor-r2/local-closure/historical-observation.log",
+      "sha256": "9d9fe73670bd513023b3b26a2d6d9b39ecf72d63ba3b15b0eedffb2b51494de0"
+    },
+    {
+      "id": "compile",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/wrangler/bin/wrangler.js",
+        "pages",
+        "functions",
+        "build",
+        "functions",
+        "--outdir",
+        ".tmp/finance-local-closure-functions",
+        "--compatibility-date",
+        "2026-07-14",
+        "--compatibility-flags",
+        "nodejs_compat"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "historical": null,
+      "log": "docs/financial-preparation/successor-r2/local-closure/compile.log",
+      "sha256": "c389c695ba905bf381ed2e6256b763d48ca0092732882842a0740a2b00d8ecd8"
+    }
+  ],
+  "providerCalls": 0,
+  "costUSD": 0,
+  "externalSends": 0,
+  "productionMutations": 0
+}

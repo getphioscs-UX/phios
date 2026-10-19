@@ -1,0 +1,45 @@
+{
+  "purpose": "Review excerpts from already executed tests, not a code patch or new test execution",
+  "originalTestPath": "tests/world-integrated-r1/runtime.test.mjs",
+  "originalTestSha256": "a55eb565851a56e970fd604ea6086f4a158dae782258d2a83c44493f60d21f88",
+  "resultFile": "integrated-r1/UNIT-RESULTS.json",
+  "providerCalls": 0,
+  "networkCalls": 0,
+  "rows": [
+    {
+      "id": "WRONG_SYMBOL_NOT_COMPLETE",
+      "executedResult": "PASS",
+      "assertionExcerpt": "await test('WRONG_SYMBOL_NOT_COMPLETE',()=>assert.notEqual(pack([snapshot('US.QQQ')]).state,'SNAPSHOTS_COMPLETE_FOR_PLAN'));"
+    },
+    {
+      "id": "EMPTY_NOT_COMPLETE",
+      "executedResult": "PASS",
+      "assertionExcerpt": "await test('EMPTY_NOT_COMPLETE',()=>assert.notEqual(pack([snapshot('US.SPY',[])]).state,'SNAPSHOTS_COMPLETE_FOR_PLAN'));"
+    },
+    {
+      "id": "LONG_TIME_GAP_NOT_TRADING_HOLIDAY",
+      "executedResult": "PASS",
+      "assertionExcerpt": "await test('LONG_TIME_GAP_NOT_TRADING_HOLIDAY',()=>{cap.window.end='2026-10-02';assert(pack([snapshot()]).cells[0].issues.includes('END_WINDOW_GAP'));cap.window.end='2024-01-05'});"
+    },
+    {
+      "id": "MISSING_SUBTYPE_REJECTED",
+      "executedResult": "PASS",
+      "assertionExcerpt": "await test('MISSING_SUBTYPE_REJECTED',()=>{const r=buildFirstMoomooPackage({plan:{requests:[{capability:'VALUATION',instruments:['US.SPY'],valuationTypes:['PE','PB','PS']}]},snapshots:{records:[{...snapshot(),capability:'VALUATION',request:{symbols:['US.SPY'],valuationType:'PE'}}]}});assert.notEqual(r.requestFamilies[0].state,'SNAPSHOTS_COMPLETE_FOR_PLAN');assert(r.requestFamilies[0].cells.some(c=>c.type==='PB'&&c.issues.length));});"
+    },
+    {
+      "id": "DISABLED_ALL_ENTRIES_ZERO_NETWORK",
+      "executedResult": "PASS",
+      "assertionExcerpt": "await test('DISABLED_ALL_ENTRIES_ZERO_NETWORK',async()=>{let calls=0;const fetchImpl=async()=>{calls++;return response()};for(const flag of [undefined,'0','false']){const env={PHIOS_HEALTH_AUTHORITY_ENABLED:flag};await routeAskHealthLive({question:'Explain my blood lab result',sourceRequests:[src]},env,reg,{fetchImpl});await retrieveApprovedHealthSource(src,{registry:reg,fetchImpl});}assert.equal(calls,0);});"
+    },
+    {
+      "id": "BODY_SUPPORT_AND_FORGED_ADMISSIONS",
+      "executedResult": "PASS",
+      "assertionExcerpt": "await test('BODY_SUPPORT_AND_FORGED_ADMISSIONS',async()=>{const r=await retrieveApprovedHealthSource(src,{enabled:true,registry:reg,fetchImpl:async()=>response()});const quote='A laboratory result has a measurement, a unit, and a collection date.',proof=locateHealthSupport(r.source,quote);assert(proof);assert.equal(locateHealthSupport(r.source,'This unsupported conclusion is not in the document.'),null);const a=groundAskHealthEvidence({question:'Explain a blood lab test',sources:[r.source],claims:[{sourceId:src.sourceId,text:quote}],supports:[proof]},{PHIOS_HEALTH_AUTHORITY_ENABLED:'1'},reg);assert.equal(a.claims.length,1);const forged=JSON.parse(JSON.stringify({source:r.source,support:proof,admitted:true}));assert.equal(requireLiveSourceAdmission({sourceIds:[src.sourceId]},[forged]).ready,false);assert.equal(requireLiveSourceAdmission({sourceIds:[src.sourceId]},[{source:r.source,support:proof}]).ready,true);const b=groundAskHealthEvidence({question:'Explain a blood lab test',sources:[forged.source],claims:[{sourceId:src.sourceId,text:quote}],supports:[forged.support]},{PHIOS_HEALTH_AUTHORITY_ENABLED:'1'},reg);assert.equal(b.claims.length,0);});"
+    },
+    {
+      "id": "NO_BODY_IS_NOT_GROUNDED",
+      "executedResult": "PASS",
+      "assertionExcerpt": "await test('NO_BODY_IS_NOT_GROUNDED',async()=>{const r=await routeAskHealthLive({question:'Explain a blood test',sourceRequests:[src]},{PHIOS_HEALTH_AUTHORITY_ENABLED:'1'},reg,{fetchImpl:async()=>new Response('<h1>Title only</h1>',{headers:{'content-type':'text/html'}})});assert.notEqual(r.route,'HRX_GROUNDED_HEALTH');assert.equal(r.support.length,0)});"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import {assertM3cWranglerSuccessor} from './lib/m3c-wrangler-successor.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
@@ -541,7 +542,7 @@ const mcd8Freeze = await readJson(
 const authorizedW14Updates =
   reconstructionExperienceRegistry.authorizedFrozenArtifactUpdates || {};
 for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
-  if (file === 'wrangler.jsonc') { const reconciliation = await readJson('content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v1.json'); assert.equal(reconciliation.predecessor.wranglerSha256, expectedHash); assert.equal(await sha256(file), reconciliation.successor.wranglerSha256); continue; }
+  if (file === 'wrangler.jsonc') { await assertM3cWranglerSuccessor(expectedHash); continue; }
   const currentHash = await sha256(file);
   const m3cAcceptedHash = authorizedW14Updates[file] || expectedHash;
   if (

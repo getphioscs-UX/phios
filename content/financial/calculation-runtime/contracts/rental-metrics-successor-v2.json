@@ -1,11 +1,22 @@
 {
- "contractId":"RENTAL_METRICS_V2",
- "changeClass":"explicit-contract-version-upgrade",
- "owner":"FCR",
- "precision":["EXACT","APPROXIMATE","UNKNOWN","UNSPECIFIED"],
- "compatibility":"Old input and ciphertext remain readable. Absent amountState or cashTiming is UNSPECIFIED in new output, never a retrospective customer declaration. Old report artifacts are not recalculated.",
- "cashBasis":"Paid customer cash in ACTUAL; explicit expected cash in FORECAST. ACCRUED_NOT_PAID has zero paid cash and separate pending liability, not a missing amount.",
- "dependencies":"Gross income independent of expenses; operating cash excludes capital; net cash includes paid capital; tax candidate excludes capital and ignores payment timing; interest candidate is not a second debt cash deduction.",
- "grouping":["currency","asOfDate","period","mode"],
- "taxAuthority":"NOT_GRANTED"
+  "contractId": "RENTAL_METRICS_V2",
+  "changeClass": "explicit-contract-version-upgrade",
+  "owner": "FCR",
+  "precision": [
+    "EXACT",
+    "APPROXIMATE",
+    "UNKNOWN",
+    "UNSPECIFIED"
+  ],
+  "compatibility": "Old input and ciphertext remain readable. Absent amountState or cashTiming is UNSPECIFIED in new output, never a retrospective customer declaration. Old report artifacts are not recalculated.",
+  "cashBasis": "Paid customer cash in ACTUAL; explicit expected cash in FORECAST. ACCRUED_NOT_PAID has zero paid cash and separate pending liability, not a missing amount.",
+  "dependencies": "Gross income independent of expenses; operating cash excludes capital; net cash includes paid capital; tax candidate excludes capital and ignores payment timing; interest candidate is not a second debt cash deduction.",
+  "grouping": [
+    "currency",
+    "asOfDate",
+    "period",
+    "mode"
+  ],
+  "taxAuthority": "NOT_GRANTED",
+  "debtService": "Missing debtService (absent, empty or null) means UNKNOWN and propagates to cashAfterDebt, netCashFlow and cashPrecision. An explicitly declared numeric/string zero means no debt-service cash paid for this period and is a known zero; it is never inferred from omission. Operating cash and tax candidate remain independent."
 }

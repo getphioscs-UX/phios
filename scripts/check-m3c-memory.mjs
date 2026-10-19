@@ -1,3 +1,4 @@
+import {assertM3cWranglerSuccessor} from './lib/m3c-wrangler-successor.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -128,7 +129,7 @@ const navigationOperationalization = await json(
 const authorizedW12Updates =
   navigationOperationalization.authorizedFrozenArtifactUpdates || {};
 for (const [file, expected] of Object.entries(registry.frozenArtifacts)) {
-  if (file === 'wrangler.jsonc') { const reconciliation = await json('content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v1.json'); assert.equal(reconciliation.predecessor.wranglerSha256, expected); assert.equal(await sha256(file), reconciliation.successor.wranglerSha256); continue; }
+  if (file === 'wrangler.jsonc') { await assertM3cWranglerSuccessor(expected); continue; }
   assert.equal(
     await sha256(file),
     authorizedW12Updates[file] || expected,

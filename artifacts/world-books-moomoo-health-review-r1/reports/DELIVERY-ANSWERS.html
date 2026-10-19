@@ -1,0 +1,19 @@
+<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DELIVERY-ANSWERS.md</title><style>body{font:16px/1.7 system-ui;max-width:1100px;margin:auto;padding:24px;background:#fafbf9;color:#17302b}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}a{color:#165b48}</style><a href="../HUMAN-REVIEW.html#portable-package">返回审阅入口</a> · <a href="../DELIVERY-ANSWERS.md">原Markdown文件</a><pre># 逐项结论 / Delivery answers
+
+|核对项|结论|实际证据与边界|
+|---|---|---|
+|错误标的、空 records、时间完成判断|源码已修复并有定向测试|UNIT-RESULTS: WRONG_SYMBOL_NOT_COMPLETE、EMPTY_NOT_COMPLETE、LONG_TIME_GAP_NOT_TRADING_HOLIDAY、MISSING_SUBTYPE_REJECTED。按标的、子类型、有效字段及时间核对，不以数量制造完成。|
+|2024至2026行情缺口|没有补齐，准确保留缺口|实际截止2024-12-23；分页修补已准备，MOOMOO-DRY-RUN仅演练，无新增实时抓取。|
+|ROI|定义未核定，不计算|不以 ROE/ROA/ROIC 替代。|
+|equity ratio|分开核对|Moomoo field50定义仍未核定。内部独立公式明确为Total Equity/Total Assets；公开NVIDIA公式来自发行人股东权益/总资产，保留期间、币种及口径，不能混为同一来源。|
+|Health精确域名|已修复，本地测试通过|明确允许NIDDK/NHLBI实际host；恶意相似域名、未授权子域、非HTTPS、凭据及异常端口被拒。冻结基础记录未改写。|
+|开关一致性|已修复|bridge/router/retrieval API/status共用默认关闭规则；生产未激活。|
+|未配置／关闭时零来源网络请求|有实际mock计数及API测试|UNIT-RESULTS: DISABLED_ALL_ENTRIES_ZERO_NETWORK、API_DISABLED_*；compiled-worker-qa显示默认关闭与零provider/生产写入。这是隔离验证，不冒称线上证据。|
+|正文缺失、摘录不匹配、伪造admitted|被拒绝，测试通过|NO_BODY_IS_NOT_GROUNDED、BODY_SUPPORT_AND_FORGED_ADMISSIONS；不存在的摘录无法建立支持；JSON克隆的admitted/digest/支持对象不能取得服务器身份。另有mutation/expiry拒绝证据。|
+
+NVIDIA企业样本的数据来自发行人公开财报与SEC报告。使用此替代来源完成样本，**不等于Moomoo公开接入完成**。Moomoo的历史时间缺口、再展示许可及部分字段定义仍未闭合。
+
+产品检查结果均复用已有有效记录。本轮仅验证资料导出、链接、文件、敏感数据排除及ZIP完整性，没有新增产品功能、模型调用、Human ACCEPT、部署、迁移或商业激活。
+
+English: wrong-symbol/empty/time-window completion guards are repaired and tested. The2024–2026 price-history gap is NOT filled. ROI remains undefined. Provider Equity Ratio field50 is not semantically approved; explicit internal/provider and public issuer ratios are distinct. Exact health hosts/default-off controls and rejection of missing/mismatched/forged support have executed isolated evidence. NVIDIA issuer disclosure is not proof of Moomoo public integration.
+</pre></html>

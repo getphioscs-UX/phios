@@ -1,0 +1,180 @@
+TAP version 13
+# Subtest: six independent master loan goldens with cent reconciliation
+ok 1 - six independent master loan goldens with cent reconciliation
+  ---
+  duration_ms: 32.2274
+  type: 'test'
+  ...
+# Subtest: actual payment is not forced to a final balloon; excess extra stops at payoff
+ok 2 - actual payment is not forced to a final balloon; excess extra stops at payoff
+  ---
+  duration_ms: 0.9783
+  type: 'test'
+  ...
+# Subtest: stable one-time/recurring extra events reject duplicate IDs and keep known zero distinct
+ok 3 - stable one-time/recurring extra events reject duplicate IDs and keep known zero distinct
+  ---
+  duration_ms: 9.0959
+  type: 'test'
+  ...
+# Subtest: rental ratios distinguish zero, missing and out-of-range; no unsupported currency rounding
+not ok 4 - rental ratios distinguish zero, missing and out-of-range; no unsupported currency rounding
+  ---
+  duration_ms: 9.1428
+  type: 'test'
+  location: 'C:\\phios\\tests\\financial-preparation\\finance-tools.test.mjs:15:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    null !== '16000.00'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '16000.00'
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/phios/tests/financial-preparation/finance-tools.test.mjs:15:245)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1325:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+    Test.postRun (node:internal/test_runner/test:1465:19)
+    Test.run (node:internal/test_runner/test:1390:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+  ...
+# Subtest: rental portfolio preserves losses before aggregation and never invents tax deductibility
+ok 5 - rental portfolio preserves losses before aggregation and never invents tax deductibility
+  ---
+  duration_ms: 2.0256
+  type: 'test'
+  ...
+# Subtest: actual receipts do not lose vacancy twice; forecasts and cash/tax allocation stay independent
+not ok 6 - actual receipts do not lose vacancy twice; forecasts and cash/tax allocation stay independent
+  ---
+  duration_ms: 1.2037
+  type: 'test'
+  location: 'C:\\phios\\tests\\financial-preparation\\finance-tools.test.mjs:17:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    null !== '19500.00'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '19500.00'
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/phios/tests/financial-preparation/finance-tools.test.mjs:17:412)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1325:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+    Test.postRun (node:internal/test_runner/test:1465:19)
+    Test.run (node:internal/test_runner/test:1390:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+  ...
+# Subtest: area allocation keeps unknown, invalid zero denominator, over-allocation and genuine zero distinct
+ok 7 - area allocation keeps unknown, invalid zero denominator, over-allocation and genuine zero distinct
+  ---
+  duration_ms: 1.1136
+  type: 'test'
+  ...
+# Subtest: dates preserve original month-end anchor, not drifting February day
+ok 8 - dates preserve original month-end anchor, not drifting February day
+  ---
+  duration_ms: 4.9981
+  type: 'test'
+  ...
+# Subtest: range, missing input, noninteger term and negative amortization fail explicitly
+ok 9 - range, missing input, noninteger term and negative amortization fail explicitly
+  ---
+  duration_ms: 1.0769
+  type: 'test'
+  ...
+# Subtest: rental tax candidate and cashflow are separate; interest not subtracted twice
+not ok 10 - rental tax candidate and cashflow are separate; interest not subtracted twice
+  ---
+  duration_ms: 2.1932
+  type: 'test'
+  location: 'C:\\phios\\tests\\financial-preparation\\finance-tools.test.mjs:21:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    null !== '18700.00'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '18700.00'
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/phios/tests/financial-preparation/finance-tools.test.mjs:23:149)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1325:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+    Test.postRun (node:internal/test_runner/test:1465:19)
+    Test.run (node:internal/test_runner/test:1390:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+  ...
+# Subtest: portfolio API keeps four period/mode/currency groups and stable property identities
+not ok 11 - portfolio API keeps four period/mode/currency groups and stable property identities
+  ---
+  duration_ms: 78.591
+  type: 'test'
+  location: 'C:\\phios\\tests\\financial-preparation\\portfolio-successor.test.mjs:7:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    null !== '950.00'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '950.00'
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/phios/tests/financial-preparation/portfolio-successor.test.mjs:10:269)
+    async Test.run (node:internal/test_runner/test:1332:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3)
+  ...
+# Subtest: unknown amounts and unpaid costs cannot be coerced into zero cash; metadata survives
+not ok 12 - unknown amounts and unpaid costs cannot be coerced into zero cash; metadata survives
+  ---
+  duration_ms: 3.1795
+  type: 'test'
+  location: 'C:\\phios\\tests\\financial-preparation\\portfolio-successor.test.mjs:12:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'UNKNOWN'
+    - 'APPROXIMATE'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'APPROXIMATE'
+  actual: 'UNKNOWN'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/phios/tests/financial-preparation/portfolio-successor.test.mjs:16:9)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1325:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+    Test.postRun (node:internal/test_runner/test:1465:19)
+    Test.run (node:internal/test_runner/test:1390:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3)
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 7
+# fail 5
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 909.5026
