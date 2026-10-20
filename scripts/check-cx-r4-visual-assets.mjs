@@ -180,7 +180,25 @@ const personal=read('perspectives/personal/index.html');
 assert.match(personal,/data-cx-asset="ILL-004"/,'PPR-owned Personal Reality direct asset identity changed during CX-R4');
 assert.equal(personal.includes('data-cx-asset-role="ILL-005"'),false,'CX-R4 must not rewrite the frozen PPR Personal owner to a new role attribute');
 const financial=read('professional/financial/index.html');
-if(financial.includes('data-approved-visual=')){
+if(financial.includes('data-r5-financial-guide=')){
+ const document=parseHTML(financial).document;
+ const guides=[...document.querySelectorAll('main details[data-r5-financial-guide]')];
+ const ids=['PLAN-FIN-029','PLAN-FIN-030','PLAN-FIN-031','PLAN-FIN-032','PLAN-FIN-033','PLAN-FIN-034','PLAN-FIN-035'];
+ assert.deepEqual(guides.map(g=>g.getAttribute('data-r5-financial-guide')).sort(),ids,'Financial visual guide topology drift');
+ for(const id of ids){
+  const asset=currentBy.get(id);assert.ok(asset?.available&&asset.remoteVerified,'Current financial guide unavailable: '+id);
+  const guide=guides.find(g=>g.getAttribute('data-r5-financial-guide')===id);
+  assert.ok(guide.querySelector('summary')?.textContent.trim(),'Financial guide needs an accessible summary: '+id);
+  const images=guide.querySelectorAll(`figure img[data-cx-asset="${id}"]`);
+  assert.equal(images.length,1,'Financial guide must bind one canonical image: '+id);
+  assert.equal(images[0].closest('a')?.getAttribute('href'),asset.publicUrl,'Financial guide inspection URL drift: '+id);
+  assert.ok(images[0].getAttribute('alt')?.trim(),'Financial guide needs image alt text: '+id);
+  const proof=currentRemoteProof.find(row=>row.planId===id);
+  assert.equal(proof?.decoded,true,'Financial guide lacks recorded decoded proof: '+id);
+  assert.equal(proof.httpStatus,200);assert.equal(proof.requestedURL,asset.publicUrl);assert.equal(proof.sha256,asset.contentHash);
+ }
+ assert.ok(document.querySelector('script[src="/assets/customer-ui/js/shell.js"]'),'Financial guides require the shared asset hydration shell');
+}else if(financial.includes('data-approved-visual=')){
  const document=parseHTML(financial).document;
  for(const id of ['PLAN-FIN-031','PLAN-FIN-032','PLAN-FIN-033','PLAN-FIN-034','PLAN-FIN-035']){
   const asset=currentBy.get(id);assert.ok(asset?.available&&asset.remoteVerified,'Current financial asset unavailable: '+id);

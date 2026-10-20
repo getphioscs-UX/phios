@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import {DatabaseSync} from 'node:sqlite';
 import {createSqliteD1Adapter,loadRuntimeMigrations} from './runtime-migration-loader.mjs';
 import {applyRuntimeMigrations} from '../functions/runtime/migrations/migration-runner.js';
-import {STRIPE_PRODUCT_REGISTRY,commerceSelection,standardBundleProducts,assertReportPriceParity} from '../functions/pws/commercial/stripe-product-registry.js';
+import {STRIPE_PRODUCT_REGISTRY,commerceSelection,standardBundleProducts,assertReportPriceParity,commerceOrderProduct} from '../functions/pws/commercial/stripe-product-registry.js';
 import {isLanguageReport,validateOrderReportPresentation,reportContractId} from '../functions/commerce/report-presentation.js';
 import {quoteReportPresentation,resolveReportProduct} from '../functions/pws/commercial/report-successor-contract.js';
 import {commerceApi} from '../functions/commerce/commerce-stripe-api.js';
@@ -31,10 +31,22 @@ await test('migration preserves existing book purchases, rights and download tok
 });
 await test('current QA prices, retained history and explicit LIVE bindings agree',()=>{
   assert.equal(STRIPE_PRODUCT_REGISTRY.length,27);assert.equal(new Set(STRIPE_PRODUCT_REGISTRY.map(p=>p.qaPriceId)).size,27);assertReportPriceParity();
-  const approved={'COM-REPORT-FINANCIAL-FULL':15900,'COM-BOOK-01':8900,'COM-BOOK-02':8900,'COM-BOOK-03':8900,'COM-BOOK-04':8900,'COM-BOOK-05':10900,'COM-BOOK-CONFIGURATION':10900,'COM-BOOK-06':5900,'COM-BOOK-07':5900,'COM-SUBSCRIPTION-MONTHLY':1900,'COM-WILL-WRITING':2900,'COM-SERVICE-FINANCIAL-CONSULTATION':10000,'COM-SERVICE-CASH-FLOW-GAME':10000,'COM-SERVICE-NATURAL-HEALER':10000};
+  const approved={'COM-REPORT-FINANCIAL-FULL':6900,'COM-BOOK-01':8900,'COM-BOOK-02':8900,'COM-BOOK-03':8900,'COM-BOOK-04':8900,'COM-BOOK-05':10900,'COM-BOOK-CONFIGURATION':10900,'COM-BOOK-06':5900,'COM-BOOK-07':5900,'COM-SUBSCRIPTION-MONTHLY':1900,'COM-WILL-WRITING':2900,'COM-SERVICE-FINANCIAL-CONSULTATION':10000,'COM-SERVICE-CASH-FLOW-GAME':10000,'COM-SERVICE-NATURAL-HEALER':10000};
   for(const [id,amount] of Object.entries(approved))assert.equal(STRIPE_PRODUCT_REGISTRY.find(p=>p.productId===id).amountMinor,amount);
   const provider=JSON.parse(fs.readFileSync('docs/commerce/economics-20261009/stripe-qa-price-readback.json','utf8'));
-  for(const p of STRIPE_PRODUCT_REGISTRY){const q=provider.prices.find(q=>q.id===p.qaPriceId);assert(q);assert.equal(q.product,p.qaProductId);assert.equal(q.unit_amount,p.amountMinor);assert.equal(q.currency,'myr');assert.equal(q.livemode,false);assert.equal(Boolean(p.livePriceId),Boolean(p.liveProductId));assert.equal(Boolean(q.recurring),p.billingType==='RECURRING');if(q.recurring){assert.equal(q.recurring.interval,'month');assert.equal(q.recurring.interval_count,1);}}
+  for(const p of STRIPE_PRODUCT_REGISTRY){
+    if(p.productId==='COM-REPORT-FINANCIAL-FULL'){
+      assert.equal(p.pricingVersion,'FINANCE-RM69-2026-10-20');
+      assert.equal(p.publicationVersion,'FINANCE_CORE_16_V2');
+      assert.equal(p.qaPriceId,null);assert.equal(p.livePriceId,null);
+      assert.equal(p.checkoutBlockedReason,'FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED');
+      const historical=provider.prices.filter(q=>q.product===p.qaProductId&&q.unit_amount===15900&&q.currency==='myr'&&q.livemode===false);
+      assert.equal(historical.length,1,'Historical RM159 QA price must remain identifiable');
+      const old=commerceOrderProduct({product_id:p.productId,environment:'QA',qa_price_id:historical[0].id});
+      assert.equal(old.amountMinor,15900);assert.equal(old.qaPriceId,historical[0].id);
+      continue;
+    }
+    const q=provider.prices.find(q=>q.id===p.qaPriceId);assert(q);assert.equal(q.product,p.qaProductId);assert.equal(q.unit_amount,p.amountMinor);assert.equal(q.currency,'myr');assert.equal(q.livemode,false);assert.equal(Boolean(p.livePriceId),Boolean(p.liveProductId));assert.equal(Boolean(q.recurring),p.billingType==='RECURRING');if(q.recurring){assert.equal(q.recurring.interval,'month');assert.equal(q.recurring.interval_count,1);}}
 });
 await test('bundle eligibility/count/uniqueness server policy',()=>{
   const eligible=standardBundleProducts();assert.equal(eligible.length,3);assert(!eligible.includes('COM-REPORT-PROFILE-FULL'));assert.throws(()=>commerceSelection('COM-REPORT-BUNDLE-2',[eligible[0],'COM-REPORT-PROFILE-FULL']));
@@ -130,6 +142,13 @@ await test('active single products fulfill after verified payment',async()=>{
   for(const product of STRIPE_PRODUCT_REGISTRY.filter(p=>p.active&&!p.productId.includes('BUNDLE'))){
     const beforeCalls=stripeCalls.length,beforeOrders=sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n;
     const response=await commerceApi(context({productId:product.productId}),'checkout');
+    if(product.productId==='COM-REPORT-FINANCIAL-FULL'){
+      assert.equal(response.status,503);
+      assert.equal((await response.json()).error,'FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED');
+      assert.equal(stripeCalls.length,beforeCalls,'Unbound RM69 product must not call Stripe');
+      assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders,'Unbound RM69 product must not create an order');
+      continue;
+    }
     if(isLanguageReport(product)&&resolveReportProduct(reportContractId(product.productId)).newPurchaseDefault===false){
       assert.equal(response.status,422,product.productId);assert.equal((await response.json()).error,'PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED');
       assert.equal(stripeCalls.length,beforeCalls);assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders);
@@ -140,7 +159,10 @@ await test('active single products fulfill after verified payment',async()=>{
   }
   assert.equal(stripeCalls.filter(x=>x.pathname==='/v1/customers').length,1);
   const account=await commerceAccountProjection(env,identity.userId);
-  assert.equal(account.services.length,5);assert(account.services.every(s=>s.state==='INTAKE_REQUIRED'));
+  assert.deepEqual(account.services.map(s=>s.productId).sort(),[
+    'COM-SERVICE-NATURAL-HEALER','COM-SERVICE-CASH-FLOW-GAME',
+    'COM-SERVICE-FINANCIAL-CONSULTATION','COM-WILL-WRITING'
+  ].sort());assert(account.services.every(s=>s.state==='INTAKE_REQUIRED'));
   assert.equal(account.services.find(s=>s.productId.includes('CASH-FLOW')).durationMinutes,120);
   assert.equal(account.services.find(s=>s.productId.includes('NATURAL')).modality,'UNDECIDED');
   assert.equal(account.subscriptions[0].accessGranted,false);

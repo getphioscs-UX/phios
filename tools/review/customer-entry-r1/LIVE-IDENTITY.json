@@ -1,0 +1,409 @@
+{
+  "at": "2026-10-19T22:42:19.442Z",
+  "canonical": "bbd63669-7701-4145-aded-c253f88e3090",
+  "environment": "production",
+  "stage": {
+    "name": "deploy",
+    "started_on": null,
+    "ended_on": "2026-10-19T22:41:29.798974Z",
+    "status": "success"
+  },
+  "sourceMetadata": {
+    "branch": "main",
+    "commit_hash": "",
+    "commit_message": "Human accepted customer-entry-r1; base 510eee069a19a04d31acd6e7d71a201dac83cfb3 plus accepted uncommitted candidate; manifest b12327143c8707f0e39ed768a6feba6c67da8c049847f8dc02895d3e1b000a06",
+    "commit_dirty": false
+  },
+  "functionalConfigurationUnchanged": true,
+  "metadataDifference": "wrangler_config_hash removed by config-free manual upload; no bindings, env values or switches changed",
+  "flags": {
+    "PHIOS_D1_MAINTENANCE_MODE": "READ_ONLY",
+    "PHIOS_P9_CANARY_ENABLED": "false",
+    "PHIOS_P9_CHECKOUT_ENABLED": "false",
+    "PHIOS_P9_REFUND_ENABLED": "false",
+    "REPORT_PROVIDER_LIVE_ALLOWED": "false"
+  },
+  "publicBytes": [
+    {
+      "path": "assets/js/pages/civilization-atlas/world-published-reading.js",
+      "status": 200,
+      "sha256": "952e8f0f3d3aac83183fc9c6a2e1d6aa77ab895a189473ec30303c5a315bf0c4",
+      "expected": "952e8f0f3d3aac83183fc9c6a2e1d6aa77ab895a189473ec30303c5a315bf0c4",
+      "match": true
+    },
+    {
+      "path": "index.html",
+      "status": 200,
+      "sha256": "29ba9d6739550e324f4a04b9327de3f99f57508f9ab6e9ab12fb52b4bd7cd113",
+      "expected": "29ba9d6739550e324f4a04b9327de3f99f57508f9ab6e9ab12fb52b4bd7cd113",
+      "match": true
+    },
+    {
+      "path": "assets/js/customer-entry-topic-map.js",
+      "status": 200,
+      "sha256": "e1b34cc60a610709e770f6414aec20c5743e9423425b9c063259fff5cbd755c8",
+      "expected": "e1b34cc60a610709e770f6414aec20c5743e9423425b9c063259fff5cbd755c8",
+      "match": true
+    },
+    {
+      "path": "assets/js/ask-entry-ui.js",
+      "status": 200,
+      "sha256": "d047b39bdb2bd44de6ccb8a0fe59ddf50a13428eec3b9dc5b4373ae06686fe59",
+      "expected": "d047b39bdb2bd44de6ccb8a0fe59ddf50a13428eec3b9dc5b4373ae06686fe59",
+      "match": true
+    },
+    {
+      "path": "assets/js/pages/client-intent-router.js",
+      "status": 200,
+      "sha256": "8632dbcc1855964400addea1ec5ffa9381a62182a8971197ce4610f9d6c6040d",
+      "expected": "8632dbcc1855964400addea1ec5ffa9381a62182a8971197ce4610f9d6c6040d",
+      "match": true
+    },
+    {
+      "path": "assets/customer-ui/js/shell.js",
+      "status": 200,
+      "sha256": "150705a6f4ea2824b6d38e679b168bb84ffdc0a2749138bf4efa8efbdbdb349a",
+      "expected": "150705a6f4ea2824b6d38e679b168bb84ffdc0a2749138bf4efa8efbdbdb349a",
+      "match": true
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/contextual-ask.js",
+      "status": 200,
+      "sha256": "5165b2715f0182c04d294fbb89936462bb83004f71bee5baa0836d27577e8263",
+      "expected": "5165b2715f0182c04d294fbb89936462bb83004f71bee5baa0836d27577e8263",
+      "match": true
+    },
+    {
+      "path": "assets/customer-ui/surfaces/customer-entry-r1.css",
+      "status": 200,
+      "sha256": "28fbc630309bd55e71c55963c523d5337a49a13267e3e8b987358fdd582d920d",
+      "expected": "28fbc630309bd55e71c55963c523d5337a49a13267e3e8b987358fdd582d920d",
+      "match": true
+    }
+  ],
+  "freeGetApi": [
+    {
+      "locale": "zh-Hans",
+      "q": "爱情",
+      "status": 200,
+      "body": {
+        "ok": true,
+        "route": {
+          "schemaVersion": "PHI-OS-CLIENT-INTENT-ROUTE-v2",
+          "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+          "task": "ENTRY",
+          "generationMode": "DETERMINISTIC",
+          "providerInvoked": false,
+          "providerCalls": 0,
+          "questionPresent": true,
+          "boundaries": {
+            "methodChosenByClientRouter": false,
+            "automaticPersistence": false
+          },
+          "outcome": "TOPIC_PATHWAYS",
+          "candidates": [],
+          "topicIds": [
+            "relationships"
+          ],
+          "selectedTopic": "relationships",
+          "clarification": "先选一个方向。这里提供相关阅读和入口，不会分析你的个人状况。",
+          "navigationActions": [
+            {
+              "href": "/world/?reading=BOOK-1%3Aexpression-media-influence-and-drift",
+              "label": "为什么沟通会影响关系？",
+              "labels": {
+                "zh-Hans": "为什么沟通会影响关系？",
+                "en": "How does communication shape a relationship?"
+              }
+            },
+            {
+              "href": "/world/?reading=BOOK-2%3Along-term-relationships-parenting-and-intergenerational-runtime",
+              "label": "怎样理解长期关系与家庭？",
+              "labels": {
+                "zh-Hans": "怎样理解长期关系与家庭？",
+                "en": "How do long-term relationships and families work?"
+              }
+            },
+            {
+              "href": "/perspectives/personal/",
+              "label": "想主动选择个人探索方法？",
+              "labels": {
+                "zh-Hans": "想主动选择个人探索方法？",
+                "en": "Would you like to choose a personal perspective?"
+              }
+            }
+          ],
+          "sourceTitle": "表达如何进入关系：能力、媒介、影响与偏离",
+          "href": "/world/?reading=BOOK-1%3Aexpression-media-influence-and-drift",
+          "ruleVersion": "ENTRY_TASK_DOMAIN_R1",
+          "axes": {
+            "task": "ENTRY",
+            "canonicalDomains": [],
+            "products": [],
+            "methodSelection": null
+          },
+          "handoff": {
+            "execution": "DISCOVERY_ONLY",
+            "originalQuestionTransport": "EXPLICIT_SAME_ORIGIN_EPHEMERAL_INPUT_ONLY",
+            "automaticGeneration": false,
+            "automaticPersistence": false,
+            "providerCalls": 0
+          }
+        }
+      }
+    },
+    {
+      "locale": "en",
+      "q": "What is PHI OS?",
+      "status": 200,
+      "body": {
+        "ok": true,
+        "route": {
+          "schemaVersion": "PHI-OS-CLIENT-INTENT-ROUTE-v2",
+          "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+          "task": "ENTRY",
+          "generationMode": "DETERMINISTIC",
+          "providerInvoked": false,
+          "providerCalls": 0,
+          "questionPresent": true,
+          "boundaries": {
+            "methodChosenByClientRouter": false,
+            "lensExecutionAllowed": false,
+            "modelCalculationAllowed": false,
+            "persistenceAllowed": false,
+            "automaticRealityCase": false,
+            "automaticJourneyActivation": false
+          },
+          "outcome": "PLATFORM_INTRODUCTION",
+          "candidates": [
+            {
+              "capabilityId": "ABOUT",
+              "displayLabels": {
+                "en": "About PHI OS",
+                "zh-Hans": "关于 PHI OS"
+              },
+              "canonicalRoute": "/about/founder/#how",
+              "routeOwner": "about/founder/index.html",
+              "canonicalDomainRefs": [
+                "KNOWLEDGE"
+              ],
+              "mappingGap": null,
+              "verifiedAt": "2026-10-11T02:19:12.523Z",
+              "canonicalDomainOwner": "CANONICAL_KNOWLEDGE",
+              "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+              "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+              "inputRequirements": [
+                "Public platform introduction"
+              ],
+              "sourceRequirements": [
+                "Existing registered owner; no client-provided authority"
+              ],
+              "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+              "entitlementRequirement": "EXISTING_SERVER_OWNER",
+              "executionClass": "ENTRY",
+              "outputKinds": [
+                "Existing platform/founder copy and real feature entrances"
+              ],
+              "capabilityVersion": "R1-v2",
+              "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+              "label": "About PHI OS",
+              "reason": "Matches an explicit topic or task; you choose whether to continue."
+            }
+          ],
+          "clarification": null,
+          "surface": "ABOUT",
+          "href": "/about/founder/#how",
+          "routeReason": "PLATFORM_INTRODUCTION",
+          "primaryAction": {
+            "href": "/about/founder/#how",
+            "label": "Learn about PHI OS and how to use it"
+          },
+          "auxiliaryActions": [
+            {
+              "href": "/knowledge/",
+              "label": "Explore knowledge"
+            },
+            {
+              "href": "/reality/",
+              "label": "Open My Reality"
+            }
+          ],
+          "ruleVersion": "ENTRY_TASK_DOMAIN_R1",
+          "axes": {
+            "task": "ENTRY",
+            "canonicalDomains": [
+              "KNOWLEDGE"
+            ],
+            "products": [
+              "ABOUT"
+            ],
+            "methodSelection": null
+          },
+          "handoff": {
+            "execution": "DISCOVERY_ONLY",
+            "originalQuestionTransport": "EXPLICIT_SAME_ORIGIN_EPHEMERAL_INPUT_ONLY",
+            "automaticGeneration": false,
+            "automaticPersistence": false,
+            "providerCalls": 0
+          }
+        }
+      }
+    },
+    {
+      "locale": "zh-Hans",
+      "q": "八字",
+      "status": 200,
+      "body": {
+        "ok": true,
+        "route": {
+          "schemaVersion": "PHI-OS-CLIENT-INTENT-ROUTE-v2",
+          "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+          "task": "ENTRY",
+          "generationMode": "DETERMINISTIC",
+          "providerInvoked": false,
+          "providerCalls": 0,
+          "questionPresent": true,
+          "boundaries": {
+            "methodChosenByClientRouter": false,
+            "lensExecutionAllowed": false,
+            "modelCalculationAllowed": false,
+            "persistenceAllowed": false,
+            "automaticRealityCase": false,
+            "automaticJourneyActivation": false
+          },
+          "outcome": "MATCHED_CAPABILITY",
+          "candidates": [
+            {
+              "capabilityId": "PERSONAL_METHODS",
+              "displayLabels": {
+                "en": "Personal methods",
+                "zh-Hans": "个人方法"
+              },
+              "canonicalRoute": "/perspectives/personal/?method=bazi#personal-input",
+              "routeOwner": "assets/customer-ui/js/surfaces/personal-reality.js",
+              "canonicalDomainRefs": [
+                "PERSONAL_REALITY"
+              ],
+              "mappingGap": null,
+              "verifiedAt": "2026-10-11T02:19:12.521Z",
+              "canonicalDomainOwner": "PPR_CURRENT_SHARED_RUNTIME",
+              "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+              "availabilitySource": "content/customer-experience-rebuild/registries/cx-r12r4-method-availability-registry-v1.json",
+              "inputRequirements": [
+                "Birth date; time and place as required; consent"
+              ],
+              "sourceRequirements": [
+                "Existing registered owner; no client-provided authority"
+              ],
+              "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+              "entitlementRequirement": "EXISTING_SERVER_OWNER",
+              "executionClass": "ENTRY",
+              "outputKinds": [
+                "Deterministic method reading"
+              ],
+              "capabilityVersion": "R1-v2",
+              "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+              "label": "个人方法",
+              "reason": "与你的问题中明确的主题或任务相关；由你选择继续。"
+            }
+          ],
+          "clarification": "八字以出生资料组织四柱与五行的传统解释。进入现有页面填写资料并查看可用的免费命盘；完整报告是独立付费内容，进入页面不会收费或生成付费报告。",
+          "surface": "PERSONAL_METHODS",
+          "href": "/perspectives/personal/?method=bazi#personal-input",
+          "routeReason": "MATCHED_CAPABILITY",
+          "ruleVersion": "ENTRY_TASK_DOMAIN_R1",
+          "axes": {
+            "task": "ENTRY",
+            "canonicalDomains": [
+              "PERSONAL_REALITY"
+            ],
+            "products": [
+              "PERSONAL_METHODS"
+            ],
+            "methodSelection": "bazi"
+          },
+          "handoff": {
+            "execution": "DISCOVERY_ONLY",
+            "originalQuestionTransport": "EXPLICIT_SAME_ORIGIN_EPHEMERAL_INPUT_ONLY",
+            "automaticGeneration": false,
+            "automaticPersistence": false,
+            "providerCalls": 0
+          }
+        }
+      }
+    },
+    {
+      "locale": "en",
+      "q": "Why are people unhappy?",
+      "status": 200,
+      "body": {
+        "ok": true,
+        "route": {
+          "schemaVersion": "PHI-OS-CLIENT-INTENT-ROUTE-v2",
+          "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2",
+          "task": "KNOWLEDGE_BASIC",
+          "generationMode": "DETERMINISTIC",
+          "providerInvoked": false,
+          "providerCalls": 0,
+          "questionPresent": true,
+          "boundaries": {
+            "methodChosenByClientRouter": false,
+            "lensExecutionAllowed": false,
+            "modelCalculationAllowed": false,
+            "persistenceAllowed": false,
+            "automaticRealityCase": false,
+            "automaticJourneyActivation": false
+          },
+          "outcome": "NEEDS_CLARIFICATION",
+          "candidates": [],
+          "clarification": "For “people unhappy?”, do you mean its definition, general causes, or a specific situation? The available sources do not yet support an explanation.",
+          "surface": "KNOWLEDGE",
+          "href": "/knowledge/",
+          "routeReason": "KNOWLEDGE_LOOKUP",
+          "query": "Why are people unhappy?",
+          "retrievalQuery": "Why are people unhappy?",
+          "generalExplanation": true,
+          "ruleVersion": "ENTRY_TASK_DOMAIN_R1",
+          "axes": {
+            "task": "KNOWLEDGE_BASIC",
+            "canonicalDomains": [
+              "KNOWLEDGE"
+            ],
+            "products": [
+              "KNOWLEDGE"
+            ],
+            "methodSelection": null
+          },
+          "handoff": {
+            "execution": "DISCOVERY_ONLY",
+            "originalQuestionTransport": "EXPLICIT_SAME_ORIGIN_EPHEMERAL_INPUT_ONLY",
+            "automaticGeneration": false,
+            "automaticPersistence": false,
+            "providerCalls": 0
+          },
+          "knowledge": {
+            "coverage": {
+              "level": "partial",
+              "score": 155,
+              "answerGenerationAllowed": false
+            },
+            "indexDigest": "5d678f48002e15911c29b3b6ffa42f54a9c5888e4859a00a108057276cd4bd83",
+            "results": []
+          },
+          "primaryAction": {
+            "kind": "CLARIFY",
+            "label": "Clarify the question"
+          },
+          "auxiliaryActions": [
+            {
+              "href": "/knowledge/",
+              "label": "Browse existing knowledge"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "providerCalls": 0,
+  "productionDataWrites": 0
+}

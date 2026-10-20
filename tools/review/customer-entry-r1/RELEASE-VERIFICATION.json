@@ -1,0 +1,76 @@
+{
+  "at": "2026-10-19T22:46:59.578Z",
+  "state": "RELEASED_READONLY_PENDING_VISUAL_REVIEW",
+  "deploymentId": "bbd63669-7701-4145-aded-c253f88e3090",
+  "canonical": "bbd63669-7701-4145-aded-c253f88e3090",
+  "rollbackDeployment": "447d676c-e321-47ba-9c72-e149789c84d3",
+  "rollbackPerformed": false,
+  "buildInputDigest": "12c8340c709ac9302bc9c83bb918ef003bd642d47f5174f76cf119e0019c1e43",
+  "workerSha256": "9aa7129602721666948190fcfcfbec0068dca25344e97467d879763e274deee7",
+  "outputManifestSha256": "b12327143c8707f0e39ed768a6feba6c67da8c049847f8dc02895d3e1b000a06",
+  "publicJourneyPass": 20,
+  "faultRecoveryPass": 4,
+  "local": "PASS_EXISTING_ACCEPTED_EVIDENCE_REUSED",
+  "build": "PASS_ACCEPTED_ARTIFACT_UNCHANGED",
+  "deployment": "PASS_ONE_MANUAL_PRODUCTION_DEPLOYMENT",
+  "live": "PASS_SCOPED_PUBLIC_JOURNEYS",
+  "flags": {
+    "PHIOS_D1_MAINTENANCE_MODE": "READ_ONLY",
+    "PHIOS_P9_CANARY_ENABLED": "false",
+    "PHIOS_P9_CHECKOUT_ENABLED": "false",
+    "PHIOS_P9_REFUND_ENABLED": "false",
+    "REPORT_PROVIDER_LIVE_ALLOWED": "false"
+  },
+  "knownTestHarnessFailures": [
+    {
+      "locale": "zh-Hans",
+      "width": 390,
+      "rootCause": "BaZi opens a popup; original harness incorrectly waited for same-tab navigation",
+      "error": "page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+      "resolvedBy": "LIVE-HANDOFF-RECOVERY.json"
+    },
+    {
+      "locale": "zh-Hans",
+      "width": 1440,
+      "rootCause": "BaZi opens a popup; original harness incorrectly waited for same-tab navigation",
+      "error": "page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+      "resolvedBy": "LIVE-HANDOFF-RECOVERY.json"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "rootCause": "BaZi opens a popup; original harness incorrectly waited for same-tab navigation",
+      "error": "page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+      "resolvedBy": "LIVE-HANDOFF-RECOVERY.json"
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "rootCause": "BaZi opens a popup; original harness incorrectly waited for same-tab navigation",
+      "error": "page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+      "resolvedBy": "LIVE-HANDOFF-RECOVERY.json"
+    }
+  ],
+  "publicRemoteAssets": {
+    "distinct": 17,
+    "successful": 17,
+    "httpFailures": [],
+    "scope": "Only observed public assets used by tested pages; not a full-site asset audit"
+  },
+  "configurationMetadataDifference": "wrangler_config_hash removed; functional bindings/env/switches unchanged",
+  "deploymentCommitMetadata": "Manual upload has empty commit_hash; commit_message records accepted base plus candidate manifest. Not claimed byte-identical to any Git commit.",
+  "providerCalls": 0,
+  "realPayments": 0,
+  "productionDataWrites": 0,
+  "r2Writes": 0,
+  "migrations": 0,
+  "commits": 0,
+  "pushes": 0,
+  "automaticDeploymentSettingsChanged": false,
+  "limitations": [
+    "Software Edge 390/1440 viewports, not physical phone testing",
+    "Public navigation and input-only BaZi handoff, not report generation, paid delivery or account save",
+    "Original POST remains READ_ONLY-blocked; new GET is the supported public discovery route",
+    "No commercial activation or full-site completion claim"
+  ]
+}

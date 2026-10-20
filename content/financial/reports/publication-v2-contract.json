@@ -1,7 +1,7 @@
 {
-  "contract": "FINANCE_CORE_16_V2",
-  "layoutVersion": "FINANCE_A4_V2",
-  "status": "IMPLEMENTED_LOCAL_CANDIDATE_NOT_PRODUCTION_RELEASED",
+  "contract": "FINANCE_PUBLICATION_R3",
+  "layoutVersion": "FINANCE_EDITORIAL_A4_R3",
+  "status": "R3_LOCAL_VALIDATED_CANDIDATE_PENDING_HUMAN_REVIEW",
   "decisionSource": "EXPLICIT_USER_REQUEST_2026_10_20",
   "productId": "COM-REPORT-FINANCIAL-FULL",
   "productName": {
@@ -25,7 +25,8 @@
     "reopen": "STORED_ARTIFACT_NO_PROVIDER_CALL",
     "download": "STORED_ARTIFACT_NO_PROVIDER_CALL",
     "updatedDataRegeneration": "NEW_PURCHASE",
-    "historicalOrders": "KEEP_STORED_PRICE_AND_ENTITLEMENT"
+    "historicalOrders": "KEEP_STORED_PRICE_AND_ENTITLEMENT",
+    "scope": "PAID_PRODUCT"
   },
   "free": [
     "INPUT",
@@ -34,235 +35,470 @@
     "SINGLE_TOOLS",
     "MISSING_INFORMATION",
     "PREPARATION_EXPORT",
-    "SAVED_VERSION_COVERAGE_PREVIEW"
+    "SAVED_VERSION_COVERAGE_PREVIEW",
+    "FREE_RULE_BASED_REPORT"
   ],
   "pages": [
     {
       "page": 1,
-      "key": "cover",
+      "id": "cover",
+      "theme": "overview",
       "title": {
         "zh-Hans": "封面与阅读范围",
         "en": "Cover and scope"
       },
-      "metricRefs": [],
-      "commonText": {
-        "zh-Hans": "这份报告整理了你提供的收入、支出、资产、负债和目标准备情况。图表与金额对应同一资料版本；估算或尚待补充的内容会在相关位置标明。你可以用它看清目前的安排，比较自己设定的变化，并准备下一次需要讨论的问题。",
-        "en": "This report organizes the income, spending, assets, debts and goal preparations you have provided. Charts and amounts use the same saved version, with estimates and missing information identified. Use it to review current arrangements, compare changes you define and prepare questions for your next discussion."
-      }
+      "chartTypes": [
+        "cover-art"
+      ],
+      "contentBlocks": [
+        "identity",
+        "scope",
+        "saved-version"
+      ],
+      "dataDependencies": [
+        "source"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": []
     },
     {
       "page": 2,
-      "key": "summary",
+      "id": "overview",
+      "theme": "overview",
       "title": {
-        "zh-Hans": "目前的财务全景",
-        "en": "Financial snapshot"
+        "zh-Hans": "报告总览",
+        "en": "Report overview"
       },
-      "metricRefs": [
-        "netWorth",
-        "cashFlowSurplus",
-        "liquidityMonths"
+      "chartTypes": [
+        "kpi-cards",
+        "donut",
+        "comparison-bars"
       ],
-      "commonText": {
-        "zh-Hans": "先看净资产、月度结余和资金覆盖，再核对尚未提供的资料。",
-        "en": "Start with net worth, monthly surplus and reserve coverage, then review the information still needed."
-      }
+      "contentBlocks": [
+        "four-kpis",
+        "snapshot",
+        "four-pillars"
+      ],
+      "dataDependencies": [
+        "CASH_FLOW",
+        "NET_WORTH"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": [
+        "overview.interpretation"
+      ]
     },
     {
       "page": 3,
-      "key": "household",
+      "id": "executive",
+      "theme": "overview",
       "title": {
-        "zh-Hans": "家庭与财务责任",
-        "en": "Household responsibilities"
+        "zh-Hans": "重点摘要",
+        "en": "Executive summary"
       },
-      "metricRefs": [],
-      "commonText": {
-        "zh-Hans": "核对已申报的家庭成员、责任和期间。家庭关系不会自动确定所有权或受益人。",
-        "en": "Review declared household members, responsibilities and dates. Relationships alone do not establish ownership or beneficiaries."
-      }
+      "chartTypes": [
+        "numbered-findings",
+        "snapshot-cards"
+      ],
+      "contentBlocks": [
+        "findings",
+        "supporting-snapshot",
+        "interpretation"
+      ],
+      "dataDependencies": [
+        "CASH_FLOW",
+        "NET_WORTH",
+        "LIQUIDITY"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": [
+        "executive.interpretation"
+      ]
     },
     {
       "page": 4,
-      "key": "balance",
+      "id": "income",
+      "theme": "analysis",
       "title": {
-        "zh-Hans": "资产、负债与净资产",
-        "en": "Assets, debts and net worth"
+        "zh-Hans": "收入与支出",
+        "en": "Income and expenses"
       },
-      "metricRefs": [
-        "grossAssets",
-        "totalLiabilities",
-        "netWorth"
+      "chartTypes": [
+        "grouped-bars",
+        "annualized-cashflow"
       ],
-      "commonText": {
-        "zh-Hans": "净资产由系统按同一日期和币种计算；估计值或区间保留原有精度。",
-        "en": "The system calculates net worth on a consistent date and currency basis. Estimates and ranges retain their original precision."
-      }
+      "contentBlocks": [
+        "monthly-comparison",
+        "annualized-basis",
+        "interpretation"
+      ],
+      "dataDependencies": [
+        "CASH_FLOW"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": [
+        "income.interpretation"
+      ]
     },
     {
       "page": 5,
-      "key": "cashflow",
+      "id": "flow",
+      "theme": "analysis",
       "title": {
-        "zh-Hans": "每月的钱去了哪里",
-        "en": "Monthly money flow"
+        "zh-Hans": "现金流结构",
+        "en": "Cash flow structure"
       },
-      "metricRefs": [
-        "monthlyIncome",
-        "monthlyExpenses",
-        "cashFlowSurplus"
+      "chartTypes": [
+        "stacked-bar",
+        "expense-donut"
       ],
-      "commonText": {
-        "zh-Hans": "收支使用系统已确定的口径，贷款付款和税款不重复扣除。",
-        "en": "Income and spending follow the system calculation basis. Loan payments and taxes are not deducted again here."
-      }
+      "contentBlocks": [
+        "inflow-outflow",
+        "expense-categories",
+        "commitments",
+        "interpretation"
+      ],
+      "dataDependencies": [
+        "CASH_FLOW",
+        "expenses"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": [
+        "flow.interpretation"
+      ]
     },
     {
       "page": 6,
-      "key": "expenses",
+      "id": "stability",
+      "theme": "analysis",
       "title": {
-        "zh-Hans": "支出的组成",
-        "en": "Spending composition"
+        "zh-Hans": "变化与稳定性",
+        "en": "Trend and stability"
       },
-      "metricRefs": [
-        "monthlyExpenses"
+      "chartTypes": [
+        "history-line-or-single-point",
+        "scenario-comparison"
       ],
-      "commonText": {
-        "zh-Hans": "总支出不代表已经取得分类明细。补充必要支出、可调整支出与付款期间后再比较。",
-        "en": "Total spending does not establish a category breakdown. Add essential and adjustable spending with payment periods before comparing categories."
-      }
+      "contentBlocks": [
+        "dated-observations",
+        "comparison-state",
+        "stability-note"
+      ],
+      "dataDependencies": [
+        "source",
+        "scenarios"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": [
+        "stability.interpretation"
+      ]
     },
     {
       "page": 7,
-      "key": "liquidity",
+      "id": "allocation",
+      "theme": "resources",
       "title": {
-        "zh-Hans": "备用资金",
-        "en": "Accessible reserves"
+        "zh-Hans": "资产配置",
+        "en": "Asset allocation"
       },
-      "metricRefs": [
-        "liquidityMonths"
+      "chartTypes": [
+        "allocation-donut",
+        "category-bars"
       ],
-      "commonText": {
-        "zh-Hans": "此处沿用系统的支出覆盖口径。若尚未区分必要支出，不称为必要生活费覆盖；分母未知或为零时不计算。",
-        "en": "This uses the system spending coverage basis. It is not labelled essential-living-cost coverage without that breakdown. Unknown or zero denominators do not produce a ratio."
-      }
+      "contentBlocks": [
+        "asset-categories",
+        "asset-total",
+        "interpretation"
+      ],
+      "dataDependencies": [
+        "NET_WORTH",
+        "assets"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": [
+        "allocation.interpretation"
+      ]
     },
     {
       "page": 8,
-      "key": "debt",
+      "id": "reserves",
+      "theme": "resources",
       "title": {
-        "zh-Hans": "当前偿债安排",
-        "en": "Debt commitments"
+        "zh-Hans": "储蓄与流动性",
+        "en": "Savings and liquidity"
       },
-      "metricRefs": [
-        "totalLiabilities",
-        "debtServiceRatio"
+      "chartTypes": [
+        "savings-bars",
+        "coverage-meter"
       ],
-      "commonText": {
-        "zh-Hans": "区分未偿本金与每月付款；贷款专项结果另作附录，不再次扣减现金流。",
-        "en": "Distinguish outstanding principal from monthly payments. Loan details belong in an appendix and do not reduce cash flow a second time."
-      }
+      "contentBlocks": [
+        "liquid-assets",
+        "outflow-basis",
+        "coverage",
+        "interpretation"
+      ],
+      "dataDependencies": [
+        "NET_WORTH",
+        "LIQUIDITY",
+        "EMERGENCY_RESERVE"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": [
+        "reserves.interpretation"
+      ]
     },
     {
       "page": 9,
-      "key": "protection",
+      "id": "goals",
+      "theme": "resources",
       "title": {
-        "zh-Hans": "已有保障与长期承诺",
-        "en": "Protection and commitments"
+        "zh-Hans": "目标资金安排",
+        "en": "Goal funding plan"
       },
-      "metricRefs": [],
-      "commonText": {
-        "zh-Hans": "核对保单持有人、保障对象、金额、期限及保费。资料缺失不能证明保障不足或足够。",
-        "en": "Check policy ownership, insured persons, amounts, terms and premiums. Missing information establishes neither adequate nor inadequate protection."
-      }
+      "chartTypes": [
+        "funding-bars",
+        "goal-timeline"
+      ],
+      "contentBlocks": [
+        "goals",
+        "earmarked-funds",
+        "readiness",
+        "interpretation"
+      ],
+      "dataDependencies": [
+        "goals",
+        "assets"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": [
+        "goals.interpretation"
+      ]
     },
     {
       "page": 10,
-      "key": "goals",
+      "id": "liabilities",
+      "theme": "risk",
       "title": {
-        "zh-Hans": "希望完成的目标",
-        "en": "Goals and timing"
+        "zh-Hans": "负债与偿债安排",
+        "en": "Liabilities and debt commitments"
       },
-      "metricRefs": [],
-      "commonText": {
-        "zh-Hans": "仅记录已经申报的目标、期限和优先顺序；没有填报的目标保持待确认。",
-        "en": "Record only declared goals, dates and priorities. Undeclared goals remain open for confirmation."
-      }
+      "chartTypes": [
+        "liability-table",
+        "debt-bars",
+        "ratio-card"
+      ],
+      "contentBlocks": [
+        "balances",
+        "payments",
+        "debt-ratios",
+        "interpretation"
+      ],
+      "dataDependencies": [
+        "DEBT",
+        "liabilities"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": [
+        "liabilities.interpretation"
+      ]
     },
     {
       "page": 11,
-      "key": "funding",
+      "id": "shock",
+      "theme": "risk",
       "title": {
-        "zh-Hans": "目标与资金的衔接",
-        "en": "Funding towards goals"
+        "zh-Hans": "流动性与应变能力",
+        "en": "Liquidity and shock capacity"
       },
-      "metricRefs": [],
-      "commonText": {
-        "zh-Hans": "核对各目标已指定的资金。没有明确分配记录时不计算差额，也不把同一笔资金重复分配。",
-        "en": "Check funds explicitly assigned to each goal. Without allocation records, no funding gap is calculated and funds are not allocated twice."
-      }
+      "chartTypes": [
+        "coverage-meter",
+        "shortfall-bars"
+      ],
+      "contentBlocks": [
+        "coverage",
+        "surplus-or-shortfall",
+        "scenario-boundaries",
+        "interpretation"
+      ],
+      "dataDependencies": [
+        "LIQUIDITY",
+        "EMERGENCY_RESERVE",
+        "CASH_FLOW"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": [
+        "shock.interpretation"
+      ]
     },
     {
       "page": 12,
-      "key": "scenarios",
+      "id": "protection",
+      "theme": "risk",
       "title": {
-        "zh-Hans": "条件改变后会怎样",
-        "en": "Selected scenarios"
+        "zh-Hans": "保障资料与风险画像",
+        "en": "Protection and risk profile"
       },
-      "metricRefs": [],
-      "commonText": {
-        "zh-Hans": "仅展示明确保存的情景及系统结果；没有情景时，请填写想比较的条件，不编造预测。",
-        "en": "Show only explicitly saved scenarios and system results. If none are available, specify the conditions to compare; no forecast is invented."
-      }
+      "chartTypes": [
+        "evidence-radar",
+        "coverage-gap-state"
+      ],
+      "contentBlocks": [
+        "risk-dimensions",
+        "policy-records",
+        "gap-boundaries",
+        "interpretation"
+      ],
+      "dataDependencies": [
+        "PROTECTION_NEED",
+        "DEBT",
+        "LIQUIDITY",
+        "assets"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": [
+        "protection.interpretation"
+      ]
     },
     {
       "page": 13,
-      "key": "tax",
+      "id": "priorities",
+      "theme": "strategy",
       "title": {
-        "zh-Hans": "年度资料与税务准备",
-        "en": "Annual records and tax preparation"
+        "zh-Hans": "当前优先事项",
+        "en": "Key priorities"
       },
-      "metricRefs": [],
-      "commonText": {
-        "zh-Hans": "整理收入证明、费用凭证、课税年度和地区。资料清单不代表税款或扣除资格已核实。",
-        "en": "Organize income records, expense evidence, assessment year and jurisdiction. This checklist does not verify tax liability or deduction eligibility."
-      }
+      "chartTypes": [
+        "icon-cards",
+        "numbered-priorities"
+      ],
+      "contentBlocks": [
+        "priorities",
+        "why-now",
+        "interpretation"
+      ],
+      "dataDependencies": [
+        "CASH_FLOW",
+        "unknowns",
+        "goals"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": [
+        "priorities.interpretation"
+      ]
     },
     {
       "page": 14,
-      "key": "estate",
+      "id": "roadmap",
+      "theme": "strategy",
       "title": {
-        "zh-Hans": "家庭文件与传承准备",
-        "en": "Household documents and estate preparation"
+        "zh-Hans": "分阶段行动路线",
+        "en": "Action roadmap"
       },
-      "metricRefs": [],
-      "commonText": {
-        "zh-Hans": "分别核对提名、分配意愿与法律签署状态；保存财务资料不产生有效遗嘱。",
-        "en": "Review nominations, distribution wishes and legal execution separately. Saving financial information does not create a valid will."
-      }
+      "chartTypes": [
+        "roadmap",
+        "dependency-arrows"
+      ],
+      "contentBlocks": [
+        "near-term",
+        "medium-term",
+        "long-term",
+        "dependencies"
+      ],
+      "dataDependencies": [
+        "source",
+        "unknowns",
+        "goals"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": [
+        "roadmap.interpretation"
+      ]
     },
     {
       "page": 15,
-      "key": "next",
+      "id": "checklist",
+      "theme": "strategy",
       "title": {
-        "zh-Hans": "下一步与讨论问题",
-        "en": "Next review and discussion"
+        "zh-Hans": "行动清单与追踪",
+        "en": "Action checklist"
       },
-      "metricRefs": [],
-      "commonText": {
-        "zh-Hans": "先补齐影响结余和备用资金的缺项，再核对到期责任及目标期限；记录下一次复核日期。",
-        "en": "First complete information affecting surplus and reserves, then check upcoming commitments and goal dates. Record the next review date."
-      }
+      "chartTypes": [
+        "checklist",
+        "status-badges"
+      ],
+      "contentBlocks": [
+        "actions",
+        "status",
+        "next-move",
+        "interpretation"
+      ],
+      "dataDependencies": [
+        "source",
+        "unknowns"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": [
+        "checklist.interpretation"
+      ]
     },
     {
       "page": 16,
-      "key": "sources",
+      "id": "notes",
+      "theme": "notes",
       "title": {
-        "zh-Hans": "来源、假设与计算说明",
-        "en": "Sources and calculation notes"
+        "zh-Hans": "资料、方法与边界",
+        "en": "Data, methods and boundaries"
       },
-      "metricRefs": [],
-      "commonText": {
-        "zh-Hans": "金额来自保存版本和系统计算。申报不是独立核实；未知不补零，情景不是预测。",
-        "en": "Amounts come from the saved version and system calculations. Declarations are not independent verification; unknowns are not zero and scenarios are not forecasts."
-      }
+      "chartTypes": [
+        "completeness-strip",
+        "source-index"
+      ],
+      "contentBlocks": [
+        "completeness",
+        "annualization",
+        "assumptions",
+        "followups",
+        "sources"
+      ],
+      "dataDependencies": [
+        "source",
+        "calculationDigest",
+        "assumptions"
+      ],
+      "visibility": [
+        "PAID"
+      ],
+      "deepeningSlots": []
     }
   ],
   "appendices": [
@@ -285,7 +521,27 @@
     "includedFollowups": 4,
     "costScope": "REPORT_REPAIR_BILINGUAL_AND_FOUR_FOLLOWUPS",
     "automaticRetry": false,
-    "publicationVersion": "FINANCE_CORE_16_V2"
+    "publicationVersion": "FINANCE_PUBLICATION_R3",
+    "realCallsAllowed": false,
+    "slots": [
+      "overview.interpretation",
+      "executive.interpretation",
+      "income.interpretation",
+      "flow.interpretation",
+      "stability.interpretation",
+      "allocation.interpretation",
+      "reserves.interpretation",
+      "goals.interpretation",
+      "liabilities.interpretation",
+      "shock.interpretation",
+      "protection.interpretation",
+      "priorities.interpretation",
+      "roadmap.interpretation",
+      "checklist.interpretation"
+    ],
+    "callLimitScope": "REPORT_GENERATION_ONLY_FOLLOWUPS_SHARE_THE_SAME_USD5_PURCHASE_ENVELOPE",
+    "maximumGenerationCallsPerPurchase": 2,
+    "maximumFollowupQuestions": 4
   },
   "preservation": {
     "legacyReportVersion": "1.0.0",
@@ -300,33 +556,844 @@
       "MISSING"
     ],
     "languages": [
-      "zh-Hans",
-      "en"
+      "en",
+      "zh-Hans"
     ],
-    "browserWidths": [
+    "tiers": [
+      "FREE",
+      "PAID"
+    ],
+    "candidateCount": 12,
+    "htmlCounts": {
+      "FREE": 8,
+      "PAID": 16
+    },
+    "providerCalls": 0,
+    "totalRenderedPdfPages": 144,
+    "pageCountsValidated": true,
+    "orderAndPageMarkersValidated": true,
+    "sharedSavedVersionAcrossLanguages": true,
+    "htmlReproducedWithCurrentRenderer": true,
+    "screenWidths": [
       360,
       768,
       1440
     ],
-    "corePdfPages": 16,
-    "providerCalls": 0
+    "browserEvidence": "tools/review/financial-publication-r3/browser-pdf-verification.json",
+    "pdfEvidence": "tools/review/financial-publication-r3/pdf-verification.json",
+    "regressionEvidence": "tools/review/financial-publication-r3/regression-verification.json"
   },
   "production": {
     "enabled": false,
-    "remoteStripePricesChanged": false,
-    "deployed": false,
-    "remainingWork": [
-      "ACCEPT_AND_REFINE_PUBLICATION_LAYOUT_AND_CHARTS",
-      "ADMIT_FINANCIAL_SHARED_PAID_DELIVERY_ADAPTER",
-      "BIND_RM69_STRIPE_PRICE_FOR_NEW_ORDERS",
-      "WIRE_OPENAI_REQUEST_TO_BUDGETED_DISPATCH_AND_SEMANTIC_VALIDATION",
-      "CONNECT_FOUR_QUESTION_ENTITLEMENT_TO_FINANCIAL_DELIVERY",
-      "END_TO_END_PAID_DELIVERY_VERIFICATION"
-    ]
+    "realPaidCallsAuthorized": false,
+    "commit": false,
+    "push": false,
+    "deploy": false,
+    "migrations": false
   },
   "referenceDocuments": {
     "pageContract": "Desktop/PAGE-CONTRACT.json",
     "checklist": "Desktop/REPORT-CHECKLIST.md",
     "interpretation": "REFERENCE_MATERIAL_ONLY_RM29_AND_USD0_SUPERSEDED_BY_CURRENT_USER_RM69_AND_USD5"
+  },
+  "previousVersion": "FINANCE_CORE_16_V2",
+  "edition": "R3",
+  "pageCount": 16,
+  "editions": {
+    "FREE": {
+      "corePageCount": 8,
+      "providerAllowed": false,
+      "price": {
+        "currency": "MYR",
+        "amountMinor": 0
+      },
+      "entitlement": {
+        "source": "EXACT_SAVED_VERSION",
+        "regeneration": "FREE_DETERMINISTIC_NO_PROVIDER",
+        "includedFollowups": 0
+      },
+      "pages": [
+        {
+          "page": 1,
+          "id": "cover",
+          "theme": "overview",
+          "title": {
+            "zh-Hans": "封面与阅读范围",
+            "en": "Cover and scope"
+          },
+          "chartTypes": [
+            "cover-art"
+          ],
+          "contentBlocks": [
+            "identity",
+            "scope",
+            "saved-version"
+          ],
+          "dataDependencies": [
+            "source"
+          ],
+          "visibility": [
+            "FREE"
+          ],
+          "deepeningSlots": [],
+          "condensed": true
+        },
+        {
+          "page": 2,
+          "id": "overview",
+          "theme": "overview",
+          "title": {
+            "zh-Hans": "报告总览",
+            "en": "Report overview"
+          },
+          "chartTypes": [
+            "kpi-cards",
+            "donut",
+            "comparison-bars"
+          ],
+          "contentBlocks": [
+            "four-kpis",
+            "snapshot",
+            "four-pillars"
+          ],
+          "dataDependencies": [
+            "CASH_FLOW",
+            "NET_WORTH"
+          ],
+          "visibility": [
+            "FREE"
+          ],
+          "deepeningSlots": [],
+          "condensed": true
+        },
+        {
+          "page": 3,
+          "id": "executive",
+          "theme": "overview",
+          "title": {
+            "zh-Hans": "重点摘要",
+            "en": "Executive summary"
+          },
+          "chartTypes": [
+            "numbered-findings",
+            "snapshot-cards"
+          ],
+          "contentBlocks": [
+            "findings",
+            "supporting-snapshot",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "CASH_FLOW",
+            "NET_WORTH",
+            "LIQUIDITY"
+          ],
+          "visibility": [
+            "FREE"
+          ],
+          "deepeningSlots": [],
+          "condensed": true
+        },
+        {
+          "page": 4,
+          "id": "income",
+          "theme": "analysis",
+          "title": {
+            "zh-Hans": "财务分析概览",
+            "en": "Financial analysis overview"
+          },
+          "chartTypes": [
+            "grouped-bars",
+            "annualized-cashflow"
+          ],
+          "contentBlocks": [
+            "monthly-comparison",
+            "annualized-basis",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "CASH_FLOW"
+          ],
+          "visibility": [
+            "FREE"
+          ],
+          "deepeningSlots": [],
+          "condensed": true
+        },
+        {
+          "page": 5,
+          "id": "allocation",
+          "theme": "resources",
+          "title": {
+            "zh-Hans": "资源规划概览",
+            "en": "Resource planning overview"
+          },
+          "chartTypes": [
+            "allocation-donut",
+            "category-bars"
+          ],
+          "contentBlocks": [
+            "asset-categories",
+            "asset-total",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "NET_WORTH",
+            "assets"
+          ],
+          "visibility": [
+            "FREE"
+          ],
+          "deepeningSlots": [],
+          "condensed": true
+        },
+        {
+          "page": 6,
+          "id": "protection",
+          "theme": "risk",
+          "title": {
+            "zh-Hans": "风险评估概览",
+            "en": "Risk assessment overview"
+          },
+          "chartTypes": [
+            "evidence-radar",
+            "coverage-gap-state"
+          ],
+          "contentBlocks": [
+            "risk-dimensions",
+            "policy-records",
+            "gap-boundaries",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "PROTECTION_NEED",
+            "DEBT",
+            "LIQUIDITY",
+            "assets"
+          ],
+          "visibility": [
+            "FREE"
+          ],
+          "deepeningSlots": [],
+          "condensed": true
+        },
+        {
+          "page": 7,
+          "id": "priorities",
+          "theme": "strategy",
+          "title": {
+            "zh-Hans": "行动路径概览",
+            "en": "Strategic next steps overview"
+          },
+          "chartTypes": [
+            "icon-cards",
+            "numbered-priorities"
+          ],
+          "contentBlocks": [
+            "priorities",
+            "why-now",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "CASH_FLOW",
+            "unknowns",
+            "goals"
+          ],
+          "visibility": [
+            "FREE"
+          ],
+          "deepeningSlots": [],
+          "condensed": true
+        },
+        {
+          "page": 8,
+          "id": "notes",
+          "theme": "notes",
+          "title": {
+            "zh-Hans": "资料、方法与边界",
+            "en": "Data, methods and boundaries"
+          },
+          "chartTypes": [
+            "completeness-strip",
+            "source-index"
+          ],
+          "contentBlocks": [
+            "completeness",
+            "annualization",
+            "assumptions",
+            "followups",
+            "sources"
+          ],
+          "dataDependencies": [
+            "source",
+            "calculationDigest",
+            "assumptions"
+          ],
+          "visibility": [
+            "FREE"
+          ],
+          "deepeningSlots": [],
+          "condensed": true
+        }
+      ]
+    },
+    "PAID": {
+      "corePageCount": 16,
+      "providerAllowed": false,
+      "paidDeepeningReserved": true,
+      "pages": [
+        {
+          "page": 1,
+          "id": "cover",
+          "theme": "overview",
+          "title": {
+            "zh-Hans": "封面与阅读范围",
+            "en": "Cover and scope"
+          },
+          "chartTypes": [
+            "cover-art"
+          ],
+          "contentBlocks": [
+            "identity",
+            "scope",
+            "saved-version"
+          ],
+          "dataDependencies": [
+            "source"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": []
+        },
+        {
+          "page": 2,
+          "id": "overview",
+          "theme": "overview",
+          "title": {
+            "zh-Hans": "报告总览",
+            "en": "Report overview"
+          },
+          "chartTypes": [
+            "kpi-cards",
+            "donut",
+            "comparison-bars"
+          ],
+          "contentBlocks": [
+            "four-kpis",
+            "snapshot",
+            "four-pillars"
+          ],
+          "dataDependencies": [
+            "CASH_FLOW",
+            "NET_WORTH"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": [
+            "overview.interpretation"
+          ]
+        },
+        {
+          "page": 3,
+          "id": "executive",
+          "theme": "overview",
+          "title": {
+            "zh-Hans": "重点摘要",
+            "en": "Executive summary"
+          },
+          "chartTypes": [
+            "numbered-findings",
+            "snapshot-cards"
+          ],
+          "contentBlocks": [
+            "findings",
+            "supporting-snapshot",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "CASH_FLOW",
+            "NET_WORTH",
+            "LIQUIDITY"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": [
+            "executive.interpretation"
+          ]
+        },
+        {
+          "page": 4,
+          "id": "income",
+          "theme": "analysis",
+          "title": {
+            "zh-Hans": "收入与支出",
+            "en": "Income and expenses"
+          },
+          "chartTypes": [
+            "grouped-bars",
+            "annualized-cashflow"
+          ],
+          "contentBlocks": [
+            "monthly-comparison",
+            "annualized-basis",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "CASH_FLOW"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": [
+            "income.interpretation"
+          ]
+        },
+        {
+          "page": 5,
+          "id": "flow",
+          "theme": "analysis",
+          "title": {
+            "zh-Hans": "现金流结构",
+            "en": "Cash flow structure"
+          },
+          "chartTypes": [
+            "stacked-bar",
+            "expense-donut"
+          ],
+          "contentBlocks": [
+            "inflow-outflow",
+            "expense-categories",
+            "commitments",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "CASH_FLOW",
+            "expenses"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": [
+            "flow.interpretation"
+          ]
+        },
+        {
+          "page": 6,
+          "id": "stability",
+          "theme": "analysis",
+          "title": {
+            "zh-Hans": "变化与稳定性",
+            "en": "Trend and stability"
+          },
+          "chartTypes": [
+            "history-line-or-single-point",
+            "scenario-comparison"
+          ],
+          "contentBlocks": [
+            "dated-observations",
+            "comparison-state",
+            "stability-note"
+          ],
+          "dataDependencies": [
+            "source",
+            "scenarios"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": [
+            "stability.interpretation"
+          ]
+        },
+        {
+          "page": 7,
+          "id": "allocation",
+          "theme": "resources",
+          "title": {
+            "zh-Hans": "资产配置",
+            "en": "Asset allocation"
+          },
+          "chartTypes": [
+            "allocation-donut",
+            "category-bars"
+          ],
+          "contentBlocks": [
+            "asset-categories",
+            "asset-total",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "NET_WORTH",
+            "assets"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": [
+            "allocation.interpretation"
+          ]
+        },
+        {
+          "page": 8,
+          "id": "reserves",
+          "theme": "resources",
+          "title": {
+            "zh-Hans": "储蓄与流动性",
+            "en": "Savings and liquidity"
+          },
+          "chartTypes": [
+            "savings-bars",
+            "coverage-meter"
+          ],
+          "contentBlocks": [
+            "liquid-assets",
+            "outflow-basis",
+            "coverage",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "NET_WORTH",
+            "LIQUIDITY",
+            "EMERGENCY_RESERVE"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": [
+            "reserves.interpretation"
+          ]
+        },
+        {
+          "page": 9,
+          "id": "goals",
+          "theme": "resources",
+          "title": {
+            "zh-Hans": "目标资金安排",
+            "en": "Goal funding plan"
+          },
+          "chartTypes": [
+            "funding-bars",
+            "goal-timeline"
+          ],
+          "contentBlocks": [
+            "goals",
+            "earmarked-funds",
+            "readiness",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "goals",
+            "assets"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": [
+            "goals.interpretation"
+          ]
+        },
+        {
+          "page": 10,
+          "id": "liabilities",
+          "theme": "risk",
+          "title": {
+            "zh-Hans": "负债与偿债安排",
+            "en": "Liabilities and debt commitments"
+          },
+          "chartTypes": [
+            "liability-table",
+            "debt-bars",
+            "ratio-card"
+          ],
+          "contentBlocks": [
+            "balances",
+            "payments",
+            "debt-ratios",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "DEBT",
+            "liabilities"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": [
+            "liabilities.interpretation"
+          ]
+        },
+        {
+          "page": 11,
+          "id": "shock",
+          "theme": "risk",
+          "title": {
+            "zh-Hans": "流动性与应变能力",
+            "en": "Liquidity and shock capacity"
+          },
+          "chartTypes": [
+            "coverage-meter",
+            "shortfall-bars"
+          ],
+          "contentBlocks": [
+            "coverage",
+            "surplus-or-shortfall",
+            "scenario-boundaries",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "LIQUIDITY",
+            "EMERGENCY_RESERVE",
+            "CASH_FLOW"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": [
+            "shock.interpretation"
+          ]
+        },
+        {
+          "page": 12,
+          "id": "protection",
+          "theme": "risk",
+          "title": {
+            "zh-Hans": "保障资料与风险画像",
+            "en": "Protection and risk profile"
+          },
+          "chartTypes": [
+            "evidence-radar",
+            "coverage-gap-state"
+          ],
+          "contentBlocks": [
+            "risk-dimensions",
+            "policy-records",
+            "gap-boundaries",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "PROTECTION_NEED",
+            "DEBT",
+            "LIQUIDITY",
+            "assets"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": [
+            "protection.interpretation"
+          ]
+        },
+        {
+          "page": 13,
+          "id": "priorities",
+          "theme": "strategy",
+          "title": {
+            "zh-Hans": "当前优先事项",
+            "en": "Key priorities"
+          },
+          "chartTypes": [
+            "icon-cards",
+            "numbered-priorities"
+          ],
+          "contentBlocks": [
+            "priorities",
+            "why-now",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "CASH_FLOW",
+            "unknowns",
+            "goals"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": [
+            "priorities.interpretation"
+          ]
+        },
+        {
+          "page": 14,
+          "id": "roadmap",
+          "theme": "strategy",
+          "title": {
+            "zh-Hans": "分阶段行动路线",
+            "en": "Action roadmap"
+          },
+          "chartTypes": [
+            "roadmap",
+            "dependency-arrows"
+          ],
+          "contentBlocks": [
+            "near-term",
+            "medium-term",
+            "long-term",
+            "dependencies"
+          ],
+          "dataDependencies": [
+            "source",
+            "unknowns",
+            "goals"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": [
+            "roadmap.interpretation"
+          ]
+        },
+        {
+          "page": 15,
+          "id": "checklist",
+          "theme": "strategy",
+          "title": {
+            "zh-Hans": "行动清单与追踪",
+            "en": "Action checklist"
+          },
+          "chartTypes": [
+            "checklist",
+            "status-badges"
+          ],
+          "contentBlocks": [
+            "actions",
+            "status",
+            "next-move",
+            "interpretation"
+          ],
+          "dataDependencies": [
+            "source",
+            "unknowns"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": [
+            "checklist.interpretation"
+          ]
+        },
+        {
+          "page": 16,
+          "id": "notes",
+          "theme": "notes",
+          "title": {
+            "zh-Hans": "资料、方法与边界",
+            "en": "Data, methods and boundaries"
+          },
+          "chartTypes": [
+            "completeness-strip",
+            "source-index"
+          ],
+          "contentBlocks": [
+            "completeness",
+            "annualization",
+            "assumptions",
+            "followups",
+            "sources"
+          ],
+          "dataDependencies": [
+            "source",
+            "calculationDigest",
+            "assumptions"
+          ],
+          "visibility": [
+            "PAID"
+          ],
+          "deepeningSlots": []
+        }
+      ]
+    }
+  },
+  "visualAssets": {
+    "cover": {
+      "objectKey": "images/reports/financial/editorial/bilingual/RPT-FINANCIAL-P01-COVER-v1.webp",
+      "localPath": "/assets/reports/financial/r3/RPT-FINANCIAL-P01-COVER-v1.webp",
+      "width": 1055,
+      "height": 1491,
+      "sha256": "fac87c668c178d2221026fb28ca6852620af4a1057c4aa5804e540db9ec777d4",
+      "bytes": 356238,
+      "publicUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/financial/editorial/bilingual/RPT-FINANCIAL-P01-COVER-v1.webp"
+    },
+    "body": {
+      "objectKey": "images/reports/financial/editorial/bilingual/VIS-REPORT-FINANCIAL-BODY.webp",
+      "localPath": "/assets/reports/financial/r3/VIS-REPORT-FINANCIAL-BODY.webp",
+      "width": 1055,
+      "height": 1491,
+      "sha256": "cc04a2f25f58eb9628ef63cca2e20703aaff6493b773f5c098ca5227f7d712a1",
+      "bytes": 132072,
+      "publicUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/financial/editorial/bilingual/VIS-REPORT-FINANCIAL-BODY.webp"
+    }
+  },
+  "themes": {
+    "overview": {
+      "zh": "阅读总览",
+      "en": "REPORT GUIDE",
+      "icon": "compass",
+      "color": "#173d58"
+    },
+    "analysis": {
+      "zh": "财务分析",
+      "en": "FINANCIAL ANALYSIS",
+      "icon": "chart",
+      "color": "#173d58"
+    },
+    "resources": {
+      "zh": "资源规划",
+      "en": "RESOURCE PLANNING",
+      "icon": "target",
+      "color": "#176b67"
+    },
+    "risk": {
+      "zh": "风险评估",
+      "en": "RISK ASSESSMENT",
+      "icon": "shield",
+      "color": "#996b24"
+    },
+    "strategy": {
+      "zh": "行动路径",
+      "en": "STRATEGIC NEXT STEPS",
+      "icon": "arrow",
+      "color": "#275d62"
+    },
+    "notes": {
+      "zh": "资料与方法",
+      "en": "DATA & METHOD",
+      "icon": "check",
+      "color": "#173d58"
+    }
+  },
+  "pageCountDecision": {
+    "expanded": false,
+    "reason": "Sixteen pages give each paid theme its own page; eight free pages retain overview and all four pillars. Specialist detail stays in optional appendices."
+  },
+  "languageBehavior": {
+    "sharedMeaning": true,
+    "separateLayouts": true,
+    "approvedCoverArtwork": "Mandatory original bilingual art is retained in both paid language editions; all overlaid metadata, body labels and prose are localized."
+  },
+  "dataRules": {
+    "unknownIsNotZero": true,
+    "annualizedNotActualAnnual": true,
+    "noHistoricalTrendFromOneDate": true,
+    "noCompositeRiskScore": true,
+    "declaredZeroDistinct": true,
+    "estimatesAndRangesRetained": true,
+    "goalFundingExplicitAndNonoverlapping": true,
+    "goalTimingCategories": "DECLARED_DATE_WITHIN_24_MONTHS_NEAR_25_TO_60_MEDIUM_OVER_60_LONG_NOT_FORECAST",
+    "protectionGapRequiresPersonEventModel": true
+  },
+  "runtime": {
+    "free": "DETERMINISTIC_SAVED_ACCOUNT_REPORT_NO_PROVIDER",
+    "paid": "ZERO_COST_LOCAL_CANDIDATE_ONLY",
+    "reopen": "IMMUTABLE_STORED_HTML",
+    "assetEmbedding": "APPROVED_WEBP_DATA_URIS",
+    "appendixLayout": "SAME_R3_BACKGROUND_FIXED_A4_PAGES",
+    "appendixCount": "ADDITIONAL_TO_FIXED_CORE_WHEN_EXPLICIT_SPECIALIST_SCENARIOS_OR_LONG_RECORDS_EXIST",
+    "historicalVersionsReadable": [
+      "1.0.0",
+      "FINANCE_CORE_16_V2"
+    ]
   }
 }
