@@ -1,0 +1,207 @@
+{
+  "question": {
+    "original": "能把马来西亚、美国、中国、日本、英国排房贷获批率排名吗？",
+    "lang": "zh-Hans"
+  },
+  "scope": {
+    "country": "GLOBAL",
+    "period": "2024",
+    "topic": "housing_credit",
+    "reading_scale": "current",
+    "comparisonRegions": [
+      "MYS",
+      "USA",
+      "CHN",
+      "JPN",
+      "GBR"
+    ]
+  },
+  "answerability": "PARTIAL_CONTEXT",
+  "direct_answer": {
+    "text": "这些来源不足以排名。批准金额、申请行动、开发商到账、银行问卷及净批准笔数的分母和人群不兼容。应分别展示本地指标及定义，统一排名保持不可用。",
+    "kind": "conditional_mechanism"
+  },
+  "claims": [
+    {
+      "id": "COMPARE-mechanism",
+      "kind": "conditional_mechanism",
+      "text": "文明资源网络出现以后，一个地方不必独立生产全部生存与发展条件。粮食、能源、材料、技术与专业能力可以跨地区流动，不同区域通过分工与交换成为彼此条件。城市能够容纳远超周边土地直接供养的人口，高度专业化行业能够存在，正因为资源网络把许多地方能力重新组合成更大的循环。文明的物质能力因此来自持续关系，而不是某个中心独自拥有一切。",
+      "support": [
+        "READING:BOOK-4:book4-article-039"
+      ],
+      "conditions": [
+        "Interpretation of resources/income/costs; not an empirical causal estimate or current national statistic"
+      ]
+    }
+  ],
+  "indicators": [],
+  "figures": [
+    {
+      "kind": "existing_definition_and_scope_table",
+      "href": "../../gate2c/WORLD-R3-GMCH-PROTOTYPE.html?id=Q16&lang=zh-Hans&country=MYS&period=2024",
+      "source_binding": "Existing prototype uses same SHA-bound normalized observations; Atlas illustration is not numeric evidence",
+      "mode": "OFFLINE_PREVIEW_NOT_PRODUCT"
+    }
+  ],
+  "comparison": {
+    "allowed": false,
+    "reason": "No harmonised same-cohort denominator; MY amounts, US action shares, UK net counts, China developer receipts and bank surveys differ",
+    "evidence": [
+      "MY-SOURCE-REPRODUCTION.json",
+      "US-HMDA-METHOD-REPRODUCTION.json",
+      "COMPARABILITY-COUNTEREXAMPLES.md"
+    ],
+    "evidence_objects": {
+      "MY": {
+        "value": null,
+        "status": "NOT_MEASURABLE_FROM_AVAILABLE_DATA",
+        "missing": "Comparable application record/cohort counts and approved outcomes for the same objects, product, coverage and period"
+      },
+      "US": [
+        {
+          "year": "2024",
+          "sourcePath": "tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/hmda-aggregate-2024.json",
+          "sourceHash": "439f3a462163180af3a0b2ea45a4cdf80207bed1774a103659459aaa2d4fc2de",
+          "requestURL": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2024&loan_purposes=1&actions_taken=1,2,3",
+          "parameters": {
+            "actions_taken": "1,2,3",
+            "loan_purposes": "1"
+          },
+          "actionCounts": {
+            "2": 161054,
+            "3": 623942,
+            "1": 3534113
+          },
+          "numeratorDeniedAction3": 623942,
+          "denominatorActions1_2_3": 4319109,
+          "denial_share_in_defined_hmda_scope": 0.14446081356131554,
+          "unit": "share_of_reported_homepurchase_actionrecords_not_unique_people",
+          "inclusions": [
+            "1 loan originated",
+            "2 approved not accepted",
+            "3 denied"
+          ],
+          "exclusions": [
+            "4 withdrawn",
+            "5 incomplete",
+            "6 purchased",
+            "7 preapproval denied",
+            "8 preapproval approved not accepted",
+            "loanpurpose2/31/32/4/5 excluded"
+          ],
+          "unfiltered": [
+            "loan type",
+            "lien",
+            "occupancy",
+            "dwelling",
+            "open/closed-end",
+            "business purpose",
+            "income band",
+            "reporter institution type"
+          ],
+          "vintage": "DYNAMIC_API_CACHE; not the frozen annual Snapshot",
+          "initialPublicationDate": null,
+          "validConclusion": "Descriptive share in this defined record universe only; not all applications, same origination cohort or applicant probability",
+          "yearToYearCausation": "NOT_IDENTIFIED; applicant mix/reporting/revisions may differ"
+        },
+        {
+          "year": "2025",
+          "sourcePath": "tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/hmda-aggregate-2025.json",
+          "sourceHash": "a964491593a3a5c3789549cb04fb6e404f0922bb239cb3d0cc4c02bcc4ea2a93",
+          "requestURL": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2025&loan_purposes=1&actions_taken=1,2,3",
+          "parameters": {
+            "actions_taken": "1,2,3",
+            "loan_purposes": "1"
+          },
+          "actionCounts": {
+            "1": 3592033,
+            "2": 158865,
+            "3": 607818
+          },
+          "numeratorDeniedAction3": 607818,
+          "denominatorActions1_2_3": 4358716,
+          "denial_share_in_defined_hmda_scope": 0.13944886521627012,
+          "unit": "share_of_reported_homepurchase_actionrecords_not_unique_people",
+          "inclusions": [
+            "1 loan originated",
+            "2 approved not accepted",
+            "3 denied"
+          ],
+          "exclusions": [
+            "4 withdrawn",
+            "5 incomplete",
+            "6 purchased",
+            "7 preapproval denied",
+            "8 preapproval approved not accepted",
+            "loanpurpose2/31/32/4/5 excluded"
+          ],
+          "unfiltered": [
+            "loan type",
+            "lien",
+            "occupancy",
+            "dwelling",
+            "open/closed-end",
+            "business purpose",
+            "income band",
+            "reporter institution type"
+          ],
+          "vintage": "DYNAMIC_API_CACHE; not the frozen annual Snapshot",
+          "initialPublicationDate": null,
+          "validConclusion": "Descriptive share in this defined record universe only; not all applications, same origination cohort or applicant probability",
+          "yearToYearCausation": "NOT_IDENTIFIED; applicant mix/reporting/revisions may differ"
+        }
+      ]
+    }
+  },
+  "unknowns": [
+    "Original observation publication metadata and full cohort alignment remain partial",
+    "No source-bound automatic World answer route or full public scope handoff implemented"
+  ],
+  "source_links": [
+    "https://www.bnm.gov.my/-/sorotan-statistik-bulanan-untuk-jun-2026",
+    "https://ffiec.cfpb.gov/documentation/publications/loan-level-datasets/lar-data-fields",
+    "https://www.stats.gov.cn/english/PressRelease/202601/t20260120_1962353.html",
+    "https://www.jhf.go.jp/about/research/loan/user/index.html",
+    "https://www.bankofengland.co.uk/statistics/money-and-credit/2026/august-2026"
+  ],
+  "continuations": [
+    "Existing Ask input-only; full scope wiring requires Gate3"
+  ],
+  "data_quality": {
+    "freshness": "OFFLINE_HISTORICAL_SNAPSHOT_NOT_REALTIME",
+    "coverage": "BOUNDED",
+    "answer_engine": "CURATED_ANSWER_ONLY"
+  },
+  "mode": "CURATED_ANSWER_ONLY",
+  "schemaOwner": "../gate2c/WORLD-R3-GMCH-ANSWER-SCHEMA.json",
+  "sources": [
+    {
+      "id": "READING:BOOK-4:book4-article-039",
+      "kind": "published_interpretation_not_statistics",
+      "canonical_url": "https://getphios.com/articles/book4-article-039?locale=zh-Hans#article-body",
+      "path": "content\\knowledge\\public\\successors\\book4-publication-v1\\visual-articles\\zh-Hans\\book4-article-039.json",
+      "sha256": "1cb2fdd6125eaf094482139fb4bdc5fd613d00f2d62fa0e26b8d82355e2463a2",
+      "sourceVersion": "1.0.0",
+      "publishedAt": "2026-09-11T08:45:00.000Z",
+      "locator": "/sections/0/blocks/0",
+      "text": "文明资源网络出现以后，一个地方不必独立生产全部生存与发展条件。粮食、能源、材料、技术与专业能力可以跨地区流动，不同区域通过分工与交换成为彼此条件。城市能够容纳远超周边土地直接供养的人口，高度专业化行业能够存在，正因为资源网络把许多地方能力重新组合成更大的循环。文明的物质能力因此来自持续关系，而不是某个中心独自拥有一切。",
+      "permission": "Existing public published reading; own PHI OS interpretation, not national empirical proof"
+    }
+  ],
+  "provenance": {
+    "data_version": "Saved raw SHA-bound fetch vintage; see independent reproduction",
+    "content_version": "1.0.0",
+    "validatedAt": "2026-10-20T03:32:29.728242+00:00",
+    "dynamicQueryExecuted": false,
+    "providerCalls": 0,
+    "production": false
+  },
+  "visualEvidence": {
+    "status": "NO_STATISTICAL_PROOF_FROM_ATLAS",
+    "existingVisuals": "Old mapped Atlas assets retained; optional explanation only, not new causal chart"
+  },
+  "limits": [
+    "Original observation publication metadata and full cohort alignment remain partial",
+    "No source-bound automatic World answer route or full public scope handoff implemented"
+  ]
+}

@@ -1,0 +1,6 @@
+# Freshness / revisions
+Observation period, original publication date, retrieved timestamp, revision date and source vintage are independent fields. Unknown dates stay null plus reason; fetched2026 doesnot make2024data2026facts. Real-time not claimed. BNM page schedule overdue is STALE_SCHEDULE_UNVERIFIED, not fresh proof.
+
+Every source stores expected release window, next update and tolerance; not one global TTL. Decision rates held until an official new decision only with explicit instrument semantics, not forwardfilled annual observations. BNM revisions: fromJuly2021 level shift; latest6months monthly refresh;12month annualrefresh; Oct2025 price buckets versioned. HMDA dynamic cached response is not annual frozen snapshot; releaseJune1vsportalJune2 must be reconciled. FHFA prior estimates kept, not overwritten.
+
+Fail states: DNS/network source_error;401 unauthenticated;403 forbidden;429 rate_limited respectRetryAfter; licence missing not_licensed; changedcolumns/table version schema_drift; futurepublication impossible_date; exactduplicates vs revisionupdates separate; missingcohort no_comparable_data; missingpublicationmetadata metadata_incomplete. No automatic provider fallback.

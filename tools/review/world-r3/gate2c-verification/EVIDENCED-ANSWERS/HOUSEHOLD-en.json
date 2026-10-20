@@ -1,0 +1,222 @@
+{
+  "question": {
+    "original": "Why can a home remain unaffordable after mortgage rates fall?",
+    "lang": "en"
+  },
+  "scope": {
+    "country": "MYS",
+    "period": "2024",
+    "topic": "housing_credit",
+    "reading_scale": "current"
+  },
+  "answerability": "MECHANISM_ANSWERABLE",
+  "direct_answer": {
+    "text": "A lower rate reduces the interest component for a given loan, but the home price, down payment, loan size, term, fees and household income still matter. A larger required deposit or loan can leave housing unaffordable. This is a conditional mechanism, not proof of a current local trend.",
+    "kind": "conditional_mechanism"
+  },
+  "claims": [
+    {
+      "id": "MY_CPI_2024-01-01",
+      "kind": "observed_fact",
+      "text": "MYS · 2024-01 · cpi: 131.4 index_2010_100",
+      "support": [
+        "MY_CPI_2024-01-01"
+      ],
+      "conditions": [
+        "Bounded historical snapshot; original publication date not retained"
+      ],
+      "observation_period": "2024-01",
+      "publication_date": null
+    },
+    {
+      "id": "MY_MEDIAN_2022-01-01",
+      "kind": "observed_fact",
+      "text": "MYS · 2022 · median_household_income: 6338 MYR_per_month",
+      "support": [
+        "MY_MEDIAN_2022-01-01"
+      ],
+      "conditions": [
+        "Bounded historical snapshot; original publication date not retained"
+      ],
+      "observation_period": "2022",
+      "publication_date": null
+    },
+    {
+      "id": "MY_MEDIAN_2024-01-01",
+      "kind": "observed_fact",
+      "text": "MYS · 2024 · median_household_income: 7017 MYR_per_month",
+      "support": [
+        "MY_MEDIAN_2024-01-01"
+      ],
+      "conditions": [
+        "Bounded historical snapshot; original publication date not retained"
+      ],
+      "observation_period": "2024",
+      "publication_date": null
+    },
+    {
+      "id": "HOUSEHOLD-mechanism",
+      "kind": "conditional_mechanism",
+      "text": "Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+      "support": [
+        "READING:BOOK-6:book6-environment-work-income"
+      ],
+      "conditions": [
+        "Interpretation of resources/income/costs; not an empirical causal estimate or current national statistic"
+      ]
+    }
+  ],
+  "indicators": [
+    {
+      "id": "MY_CPI_2024-01-01",
+      "metric_id": "cpi",
+      "country": "MYS",
+      "observation_period": "2024-01",
+      "value": 131.4,
+      "unit": "index_2010_100",
+      "source_id": "my-cpi-full",
+      "locator": "date=2024-01-01;division=overall",
+      "publication_date": null,
+      "fetched_at": "2026-10-20T02:50:53.038197+00:00",
+      "source_hash": "9f5f33b4e6209c6bfbb9320260a2591bd9e38666c908dee85047bf63880649ae",
+      "kind": "observed_fact",
+      "publication_status": "NOT_RETAINED_PER_OBSERVATION; dataset updated 2026-10-19 per official catalogue",
+      "quality": "VALIDATED_VALUE_PUBLICATION_DATE_PARTIAL"
+    },
+    {
+      "id": "MY_MEDIAN_2022-01-01",
+      "metric_id": "median_household_income",
+      "country": "MYS",
+      "observation_period": "2022",
+      "value": 6338,
+      "unit": "MYR_per_month",
+      "source_id": "my-income",
+      "locator": "date=2022-01-01;income_median",
+      "publication_date": null,
+      "fetched_at": "2026-10-20T02:50:53.039254+00:00",
+      "source_hash": "f586d78dd004f7002fb59bdcfdce697d81ecfdb67bb2cd72462ecf0a072345b5",
+      "kind": "observed_fact",
+      "quality": "VALUE_FETCHED_METADATA_REVIEW_REQUIRED"
+    },
+    {
+      "id": "MY_MEDIAN_2024-01-01",
+      "metric_id": "median_household_income",
+      "country": "MYS",
+      "observation_period": "2024",
+      "value": 7017,
+      "unit": "MYR_per_month",
+      "source_id": "my-income",
+      "locator": "date=2024-01-01;income_median",
+      "publication_date": null,
+      "fetched_at": "2026-10-20T02:50:53.039254+00:00",
+      "source_hash": "f586d78dd004f7002fb59bdcfdce697d81ecfdb67bb2cd72462ecf0a072345b5",
+      "kind": "observed_fact",
+      "quality": "VALUE_FETCHED_METADATA_REVIEW_REQUIRED"
+    }
+  ],
+  "figures": [
+    {
+      "kind": "existing_offline_source_table_and_chart",
+      "href": "../../gate2c/WORLD-R3-GMCH-PROTOTYPE.html?id=Q11&lang=en&country=MYS&period=2024",
+      "source_binding": "Existing prototype uses same SHA-bound normalized observations; Atlas illustration is not numeric evidence",
+      "mode": "OFFLINE_PREVIEW_NOT_PRODUCT"
+    }
+  ],
+  "comparison": {
+    "allowed": false,
+    "reason": "No harmonised application-cohort denominator"
+  },
+  "unknowns": [
+    "Original observation publication metadata and full cohort alignment remain partial",
+    "No source-bound automatic World answer route or full public scope handoff implemented"
+  ],
+  "source_links": [
+    "https://www.consumerfinance.gov/owning-a-home/explore-rates/",
+    "https://getphios.com/articles/book6-environment-work-income?locale=en#article-body"
+  ],
+  "continuations": [
+    "Existing Ask input-only; full scope wiring requires Gate3"
+  ],
+  "data_quality": {
+    "freshness": "OFFLINE_HISTORICAL_SNAPSHOT_NOT_REALTIME",
+    "coverage": "BOUNDED",
+    "answer_engine": "CURATED_ANSWER_ONLY"
+  },
+  "mode": "CURATED_ANSWER_ONLY",
+  "schemaOwner": "../gate2c/WORLD-R3-GMCH-ANSWER-SCHEMA.json",
+  "sources": [
+    {
+      "id": "MY_CPI_2024-01-01",
+      "kind": "observed_fact",
+      "path": "tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/my-cpi-full.csv",
+      "sha256": "9f5f33b4e6209c6bfbb9320260a2591bd9e38666c908dee85047bf63880649ae",
+      "locator": "CSV date=2024-01-01,division=overall,index",
+      "official_url": "https://storage.dosm.gov.my/cpi/cpi_2d.csv",
+      "period": "2024-01",
+      "unit": "index_2010_100",
+      "country": "MYS",
+      "fetched_at": "2026-10-20T02:50:53.038197+00:00",
+      "publication_date": null,
+      "retrieval_http_status": 200,
+      "raw_relative_url": "../../../../../tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/my-cpi-full.csv"
+    },
+    {
+      "id": "MY_MEDIAN_2022-01-01",
+      "kind": "observed_fact",
+      "path": "tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/my-income.json",
+      "sha256": "f586d78dd004f7002fb59bdcfdce697d81ecfdb67bb2cd72462ecf0a072345b5",
+      "locator": "income_median; date=2022-01-01",
+      "official_url": "https://api.data.gov.my/data-catalogue?id=hh_income&limit=100",
+      "period": "2022",
+      "unit": "MYR_per_month",
+      "country": "MYS",
+      "fetched_at": "2026-10-20T02:50:53.039254+00:00",
+      "publication_date": null,
+      "retrieval_http_status": 200,
+      "raw_relative_url": "../../../../../tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/my-income.json"
+    },
+    {
+      "id": "MY_MEDIAN_2024-01-01",
+      "kind": "observed_fact",
+      "path": "tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/my-income.json",
+      "sha256": "f586d78dd004f7002fb59bdcfdce697d81ecfdb67bb2cd72462ecf0a072345b5",
+      "locator": "income_median; date=2024-01-01",
+      "official_url": "https://api.data.gov.my/data-catalogue?id=hh_income&limit=100",
+      "period": "2024",
+      "unit": "MYR_per_month",
+      "country": "MYS",
+      "fetched_at": "2026-10-20T02:50:53.039254+00:00",
+      "publication_date": null,
+      "retrieval_http_status": 200,
+      "raw_relative_url": "../../../../../tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/my-income.json"
+    },
+    {
+      "id": "READING:BOOK-6:book6-environment-work-income",
+      "kind": "published_interpretation_not_statistics",
+      "canonical_url": "https://getphios.com/articles/book6-environment-work-income?locale=en#article-body",
+      "path": "content\\knowledge\\public\\successors\\book6-publication-v1\\visual-articles\\en\\book6-environment-work-income.json",
+      "sha256": "d41e4df032036e4f35901e1eb7b66990fd168a4385100b5be0d4e6ab7165ebe2",
+      "sourceVersion": "1.0.0",
+      "publishedAt": "2026-09-24",
+      "locator": "/sections/0/blocks/0",
+      "text": "Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+      "permission": "Existing public published reading; own PHI OS interpretation, not national empirical proof"
+    }
+  ],
+  "provenance": {
+    "data_version": "Saved raw SHA-bound fetch vintage; see independent reproduction",
+    "content_version": "1.0.0",
+    "validatedAt": "2026-10-20T03:32:29.728242+00:00",
+    "dynamicQueryExecuted": false,
+    "providerCalls": 0,
+    "production": false
+  },
+  "visualEvidence": {
+    "status": "NO_STATISTICAL_PROOF_FROM_ATLAS",
+    "existingVisuals": "Old mapped Atlas assets retained; optional explanation only, not new causal chart"
+  },
+  "limits": [
+    "Original observation publication metadata and full cohort alignment remain partial",
+    "No source-bound automatic World answer route or full public scope handoff implemented"
+  ]
+}

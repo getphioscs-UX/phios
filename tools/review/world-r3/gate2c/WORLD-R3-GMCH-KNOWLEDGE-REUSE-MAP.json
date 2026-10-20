@@ -1,0 +1,99 @@
+{
+  "status": "PARTIAL",
+  "counts": {
+    "indexRows": 1133,
+    "types": {
+      "macro-era": 11,
+      "period": 20,
+      "civilization": 120,
+      "snapshot": 15,
+      "comparison": 6,
+      "trajectory": 16,
+      "transition": 32,
+      "scale-shift": 7,
+      "loss-family": 6,
+      "loss-type": 24,
+      "book-section": 85,
+      "reconfiguration-case": 60,
+      "reconfiguration-window": 24,
+      "reconfiguration-snapshot": 12,
+      "current-dossier": 12,
+      "lived-dimension": 14,
+      "visual": 392,
+      "runtime-position": 31,
+      "admitted-current-evidence": 11,
+      "published-reading": 235
+    },
+    "publishedReadings": 235,
+    "localeDocumentsPresent": 448,
+    "visualBindings": 392,
+    "selectionRegions": 176,
+    "publicSampleBooks": 8,
+    "publicSampleFigures": 79,
+    "R2MatchedFigures": 43,
+    "visualBooks": {
+      "BOOK-5": 380,
+      "BOOK-6": 12
+    },
+    "R2MainCaseRegistry": 120
+  },
+  "dependencies": [
+    [
+      "World",
+      "assets/js/pages/civilization-atlas/world-experience-r2.js",
+      "Catalogue search, map and reading state"
+    ],
+    [
+      "Published reading",
+      "assets/js/pages/civilization-atlas/world-published-reading.js",
+      "Hashed public body, Articles canonical links"
+    ],
+    [
+      "Current claims",
+      "assets/js/pages/civilization-atlas/world-current-claims.js",
+      "Accepted claim projection; acceptance not freshness"
+    ],
+    [
+      "Search",
+      "assets/js/knowledge/public-discovery.js",
+      "Article-level full searchText in some successors; not universal passage search"
+    ],
+    [
+      "Ask resolver",
+      "functions/contextual-ask/contextual-ask-runtime.js",
+      "Admitted article paragraphs; six real resolution checks"
+    ],
+    [
+      "Ask API",
+      "functions/api/customer-contextual-ask.js",
+      "Source version checks and deterministic source retrieval"
+    ],
+    [
+      "Handoff",
+      "assets/js/pages/civilization-atlas/world-reading-context.js",
+      "Whitelist retrieval scope; current public place/year handoff incomplete"
+    ]
+  ],
+  "readingEligibility": "Public projections only. Per-article manifest admission and real passage match remain required; 235 rows is not 235 arbitrary-answer passes.",
+  "visualEligibility": "392 accepted bindings retain existing bucket identity. Semantic relevance must be proved per answer; no live decode claim.",
+  "passageEvidence": "SOURCE-RESOLUTION-AND-HANDOFF.json",
+  "sourceFiles": [
+    {
+      "path": "content/civilization-atlas/search/world-search-index-v1.json",
+      "sha256": "3212b8be82005fdecee9bfaff200755eab897f345a6b5ef68bc636416cecd8d9"
+    },
+    {
+      "path": "content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json",
+      "sha256": "9df8b0c4f355829300c531756415fff2acd86167ded04132b899e19973ed2b5e"
+    },
+    {
+      "path": "content/civilization-atlas/geography/world-selection-geometry-r2.json",
+      "sha256": "820be8e41016a8736b1841d8f1c6a8d12a167820b96e115913646ebeea8a0165"
+    },
+    {
+      "path": "content/web-production/registries/book-public-samples-v1.json",
+      "sha256": "a8ccddf26247ea92f9696e2cc23fc16c60563fe0124fee77c5761b0e51a84fcd"
+    }
+  ],
+  "countCorrection": "R2 main case registry120 confirmed separately; index civilization rows120, Book VI reconfiguration-case rows60 are different entities."
+}

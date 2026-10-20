@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "question",
+    "scope",
+    "answerability",
+    "direct_answer",
+    "claims",
+    "unknowns",
+    "source_links",
+    "data_quality"
+  ],
+  "properties": {
+    "question": {
+      "type": "object",
+      "required": [
+        "original",
+        "lang"
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "required": [
+        "country",
+        "period",
+        "topic",
+        "reading_scale"
+      ]
+    },
+    "answerability": {
+      "enum": [
+        "MECHANISM_ANSWERABLE",
+        "FACT_ANSWERABLE",
+        "PARTIAL_CONTEXT",
+        "EVIDENCE_INSUFFICIENT"
+      ]
+    },
+    "direct_answer": {
+      "type": "object",
+      "required": [
+        "text",
+        "kind"
+      ]
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "text",
+          "support"
+        ]
+      }
+    }
+  },
+  "semanticExtension": "validate-contract.mjs checks metadata and rejected economic claims; schema shape is not factual truth"
+}

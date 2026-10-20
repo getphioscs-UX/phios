@@ -1,0 +1,724 @@
+{
+  "examples": [
+    {
+      "question": {
+        "original": "马来西亚房贷是否真的越来越难申请？",
+        "lang": "zh-Hans"
+      },
+      "scope": {
+        "country": "MYS",
+        "period": "2024",
+        "topic": "housing_credit",
+        "reading_scale": "current"
+      },
+      "answerability": "PARTIAL_CONTEXT",
+      "direct_answer": {
+        "text": "本轮证据不能测出全国申请人成功率，也不能证明审批严格程度的趋势。申请、批准与放款金额可描述活动，但没有同一申请群组的分母，不能推算获批概率。",
+        "kind": "conditional_mechanism"
+      },
+      "claims": [
+        {
+          "id": "Q02-direct",
+          "kind": "conditional_mechanism",
+          "text": "本轮证据不能测出全国申请人成功率，也不能证明审批严格程度的趋势。申请、批准与放款金额可描述活动，但没有同一申请群组的分母，不能推算获批概率。",
+          "support": [
+            "MY_LOANS_APPLIED",
+            "MY_LOANS_APPROVED",
+            "MY_CCRIS",
+            "MY_CCRIS",
+            "MY_CPI",
+            "MY_INCOME"
+          ],
+          "conditions": [
+            "直接回答仅覆盖注明的机制或已取到的观察；不证明当前所选国家的全部情况，不作个人获批承诺。"
+          ]
+        }
+      ],
+      "indicators": [
+        {
+          "id": "MY_applied_2024-01",
+          "metric_id": "application_amount",
+          "country": "MYS",
+          "observation_period": "2024-01",
+          "value": 37485251313.68997,
+          "unit": "MYR",
+          "source_id": "my-debt-dashboard",
+          "locator": "props.pageProps.timeseries.data.applied.rm.property_residental[205]",
+          "publication_date": null,
+          "fetched_at": "2026-10-20T03:02:25.808205+00:00",
+          "source_hash": "b972490b40bf3247d2398f2fc91407586bf6c71ba5189e9c3f24d5639036d140",
+          "kind": "observed_fact",
+          "population": "Official CCRIS aggregate residential-purpose loans; reporting exactrefinancing and institution scope not verified",
+          "revision_date": "2026-07-31 15:00",
+          "quality": "OFFICIAL_MONETARY_FLOW_NOT_COHORT; first release date missing"
+        },
+        {
+          "id": "MY_approved_2024-01",
+          "metric_id": "approval_amount",
+          "country": "MYS",
+          "observation_period": "2024-01",
+          "value": 14354020646.680014,
+          "unit": "MYR",
+          "source_id": "my-debt-dashboard",
+          "locator": "props.pageProps.timeseries.data.approved.rm.property_residental[205]",
+          "publication_date": null,
+          "fetched_at": "2026-10-20T03:02:25.808205+00:00",
+          "source_hash": "b972490b40bf3247d2398f2fc91407586bf6c71ba5189e9c3f24d5639036d140",
+          "kind": "observed_fact",
+          "population": "Official CCRIS aggregate residential-purpose loans; reporting exactrefinancing and institution scope not verified",
+          "revision_date": "2026-07-31 15:00",
+          "quality": "OFFICIAL_MONETARY_FLOW_NOT_COHORT; first release date missing"
+        },
+        {
+          "id": "MY_disbursed_2024-01",
+          "metric_id": "disbursement_amount",
+          "country": "MYS",
+          "observation_period": "2024-01",
+          "value": 11836270135.10998,
+          "unit": "MYR",
+          "source_id": "my-debt-dashboard",
+          "locator": "props.pageProps.timeseries.data.disbursed.rm.property_residental[205]",
+          "publication_date": null,
+          "fetched_at": "2026-10-20T03:02:25.808205+00:00",
+          "source_hash": "b972490b40bf3247d2398f2fc91407586bf6c71ba5189e9c3f24d5639036d140",
+          "kind": "observed_fact",
+          "population": "Official CCRIS aggregate residential-purpose loans; reporting exactrefinancing and institution scope not verified",
+          "revision_date": "2026-07-31 15:00",
+          "quality": "OFFICIAL_MONETARY_FLOW_NOT_COHORT; first release date missing"
+        }
+      ],
+      "figures": [],
+      "comparison": {
+        "allowed": false,
+        "reason": "No harmonised application-cohort denominator"
+      },
+      "unknowns": [
+        "Original observation publication metadata and full cohort alignment remain partial"
+      ],
+      "source_links": [
+        "https://www.bnm.gov.my/-/sorotan-statistik-bulanan-untuk-jun-2026",
+        "https://www.bnm.gov.my/-/sorotan-statistik-bulanan-untuk-jun-2026",
+        "https://data.gov.my/dashboard/household-debt",
+        "https://data.gov.my/dashboard/household-debt",
+        "https://open.dosm.gov.my/data-catalogue/cpi_headline",
+        "https://data.gov.my/data-catalogue/hh_income"
+      ],
+      "continuations": [
+        "Existing Ask input-only; full scope wiring requires Gate3"
+      ],
+      "data_quality": {
+        "freshness": "OFFLINE_HISTORICAL_SNAPSHOT_NOT_REALTIME",
+        "coverage": "BOUNDED",
+        "answer_engine": "CURATED_NOT_DYNAMIC"
+      }
+    },
+    {
+      "question": {
+        "original": "Is it really becoming harder to obtain a mortgage in Malaysia?",
+        "lang": "en"
+      },
+      "scope": {
+        "country": "MYS",
+        "period": "2024",
+        "topic": "housing_credit",
+        "reading_scale": "current"
+      },
+      "answerability": "PARTIAL_CONTEXT",
+      "direct_answer": {
+        "text": "The collected evidence cannot measure a national applicant success probability or prove a trend in strictness. Applications, approvals and disbursements by amount can help describe activity, but without a matched application cohort they cannot answer that probability.",
+        "kind": "conditional_mechanism"
+      },
+      "claims": [
+        {
+          "id": "Q02-direct",
+          "kind": "conditional_mechanism",
+          "text": "The collected evidence cannot measure a national applicant success probability or prove a trend in strictness. Applications, approvals and disbursements by amount can help describe activity, but without a matched application cohort they cannot answer that probability.",
+          "support": [
+            "MY_LOANS_APPLIED",
+            "MY_LOANS_APPROVED",
+            "MY_CCRIS",
+            "MY_CCRIS",
+            "MY_CPI",
+            "MY_INCOME"
+          ],
+          "conditions": [
+            "The answer covers the stated mechanism or collected observation only. It does not establish every current local condition or promise an individual approval."
+          ]
+        }
+      ],
+      "indicators": [
+        {
+          "id": "MY_applied_2024-01",
+          "metric_id": "application_amount",
+          "country": "MYS",
+          "observation_period": "2024-01",
+          "value": 37485251313.68997,
+          "unit": "MYR",
+          "source_id": "my-debt-dashboard",
+          "locator": "props.pageProps.timeseries.data.applied.rm.property_residental[205]",
+          "publication_date": null,
+          "fetched_at": "2026-10-20T03:02:25.808205+00:00",
+          "source_hash": "b972490b40bf3247d2398f2fc91407586bf6c71ba5189e9c3f24d5639036d140",
+          "kind": "observed_fact",
+          "population": "Official CCRIS aggregate residential-purpose loans; reporting exactrefinancing and institution scope not verified",
+          "revision_date": "2026-07-31 15:00",
+          "quality": "OFFICIAL_MONETARY_FLOW_NOT_COHORT; first release date missing"
+        },
+        {
+          "id": "MY_approved_2024-01",
+          "metric_id": "approval_amount",
+          "country": "MYS",
+          "observation_period": "2024-01",
+          "value": 14354020646.680014,
+          "unit": "MYR",
+          "source_id": "my-debt-dashboard",
+          "locator": "props.pageProps.timeseries.data.approved.rm.property_residental[205]",
+          "publication_date": null,
+          "fetched_at": "2026-10-20T03:02:25.808205+00:00",
+          "source_hash": "b972490b40bf3247d2398f2fc91407586bf6c71ba5189e9c3f24d5639036d140",
+          "kind": "observed_fact",
+          "population": "Official CCRIS aggregate residential-purpose loans; reporting exactrefinancing and institution scope not verified",
+          "revision_date": "2026-07-31 15:00",
+          "quality": "OFFICIAL_MONETARY_FLOW_NOT_COHORT; first release date missing"
+        },
+        {
+          "id": "MY_disbursed_2024-01",
+          "metric_id": "disbursement_amount",
+          "country": "MYS",
+          "observation_period": "2024-01",
+          "value": 11836270135.10998,
+          "unit": "MYR",
+          "source_id": "my-debt-dashboard",
+          "locator": "props.pageProps.timeseries.data.disbursed.rm.property_residental[205]",
+          "publication_date": null,
+          "fetched_at": "2026-10-20T03:02:25.808205+00:00",
+          "source_hash": "b972490b40bf3247d2398f2fc91407586bf6c71ba5189e9c3f24d5639036d140",
+          "kind": "observed_fact",
+          "population": "Official CCRIS aggregate residential-purpose loans; reporting exactrefinancing and institution scope not verified",
+          "revision_date": "2026-07-31 15:00",
+          "quality": "OFFICIAL_MONETARY_FLOW_NOT_COHORT; first release date missing"
+        }
+      ],
+      "figures": [],
+      "comparison": {
+        "allowed": false,
+        "reason": "No harmonised application-cohort denominator"
+      },
+      "unknowns": [
+        "Original observation publication metadata and full cohort alignment remain partial"
+      ],
+      "source_links": [
+        "https://www.bnm.gov.my/-/sorotan-statistik-bulanan-untuk-jun-2026",
+        "https://www.bnm.gov.my/-/sorotan-statistik-bulanan-untuk-jun-2026",
+        "https://data.gov.my/dashboard/household-debt",
+        "https://data.gov.my/dashboard/household-debt",
+        "https://open.dosm.gov.my/data-catalogue/cpi_headline",
+        "https://data.gov.my/data-catalogue/hh_income"
+      ],
+      "continuations": [
+        "Existing Ask input-only; full scope wiring requires Gate3"
+      ],
+      "data_quality": {
+        "freshness": "OFFLINE_HISTORICAL_SNAPSHOT_NOT_REALTIME",
+        "coverage": "BOUNDED",
+        "answer_engine": "CURATED_NOT_DYNAMIC"
+      }
+    },
+    {
+      "question": {
+        "original": "美国贷款需求减少，是否等于拒绝率上升？",
+        "lang": "zh-Hans"
+      },
+      "scope": {
+        "country": "USA",
+        "period": "2024",
+        "topic": "housing_credit",
+        "reading_scale": "current"
+      },
+      "answerability": "FACT_ANSWERABLE",
+      "direct_answer": {
+        "text": "不等于。2024年10月调查中，49家相关银行对政府类购房贷款报告的标准收紧净比例约2.04%，需求增强净比例约−10.20%。这说明该调查类别可同时出现需求减弱与标准基本未变；两项都不是全国拒贷率。",
+        "kind": "observed_fact"
+      },
+      "claims": [
+        {
+          "id": "Q05-direct",
+          "kind": "observed_fact",
+          "text": "不等于。2024年10月调查中，49家相关银行对政府类购房贷款报告的标准收紧净比例约2.04%，需求增强净比例约−10.20%。这说明该调查类别可同时出现需求减弱与标准基本未变；两项都不是全国拒贷率。",
+          "support": [
+            "US_SLOOS",
+            "US_HMDA",
+            "US_FHFA"
+          ],
+          "conditions": [
+            "直接回答仅覆盖注明的机制或已取到的观察；不证明当前所选国家的全部情况，不作个人获批承诺。"
+          ]
+        }
+      ],
+      "indicators": [
+        {
+          "id": "US_STD_GOV_2024Q3",
+          "metric_id": "survey_standards",
+          "country": "USA",
+          "observation_period": "2024-Q3",
+          "value": 2.0408,
+          "unit": "net_percent_banks_tightening",
+          "source_id": "fed-table-corrected",
+          "locator": "Table1 Q13B all respondents",
+          "publication_date": "2024-11-12",
+          "fetched_at": "2026-10-20T02:50:53.039787+00:00",
+          "source_hash": "f792defe03173304ebc4f3839b36d7e6b4fd4fd8a6bd73577cace0989b94f24c",
+          "kind": "derived_from_reported_counts",
+          "population": "49 domestic responding banks originating government home-purchase mortgages; new originations excluding refinancing",
+          "input_counts": {
+            "Tightened considerably": {
+              "banks": 0,
+              "percent": 0
+            },
+            "Tightened somewhat": {
+              "banks": 1,
+              "percent": 2
+            },
+            "Remained basically unchanged": {
+              "banks": 48,
+              "percent": 98
+            },
+            "Eased somewhat": {
+              "banks": 0,
+              "percent": 0
+            },
+            "Eased considerably": {
+              "banks": 0,
+              "percent": 0
+            },
+            "Total": {
+              "banks": 49,
+              "percent": 100
+            }
+          }
+        },
+        {
+          "id": "US_DEMAND_GOV_2024Q3",
+          "metric_id": "survey_demand",
+          "country": "USA",
+          "observation_period": "2024-Q3",
+          "value": -10.2041,
+          "unit": "net_percent_banks_stronger_demand",
+          "source_id": "fed-table-corrected",
+          "locator": "Table1 Q14B all respondents",
+          "publication_date": "2024-11-12",
+          "fetched_at": "2026-10-20T02:50:53.039787+00:00",
+          "source_hash": "f792defe03173304ebc4f3839b36d7e6b4fd4fd8a6bd73577cace0989b94f24c",
+          "kind": "derived_from_reported_counts",
+          "population": "49 responding domestic banks; government home-purchase mortgages; not national application totals",
+          "input_counts": {
+            "Substantially stronger": {
+              "banks": 0,
+              "percent": 0
+            },
+            "Moderately stronger": {
+              "banks": 5,
+              "percent": 10.2
+            },
+            "About the same": {
+              "banks": 34,
+              "percent": 69.4
+            },
+            "Moderately weaker": {
+              "banks": 10,
+              "percent": 20.4
+            },
+            "Substantially weaker": {
+              "banks": 0,
+              "percent": 0
+            },
+            "Total": {
+              "banks": 49,
+              "percent": 100
+            }
+          }
+        }
+      ],
+      "figures": [],
+      "comparison": {
+        "allowed": false,
+        "reason": "No harmonised application-cohort denominator"
+      },
+      "unknowns": [
+        "Original observation publication metadata and full cohort alignment remain partial"
+      ],
+      "source_links": [
+        "https://www.federalreserve.gov/data/sloos/sloos-202410.htm",
+        "https://ffiec.cfpb.gov/documentation/publications/loan-level-datasets/lar-data-fields",
+        "https://www.fhfa.gov/house-price-index"
+      ],
+      "continuations": [
+        "Existing Ask input-only; full scope wiring requires Gate3"
+      ],
+      "data_quality": {
+        "freshness": "OFFLINE_HISTORICAL_SNAPSHOT_NOT_REALTIME",
+        "coverage": "BOUNDED",
+        "answer_engine": "CURATED_NOT_DYNAMIC"
+      }
+    },
+    {
+      "question": {
+        "original": "Does weaker US loan demand mean a higher denial rate?",
+        "lang": "en"
+      },
+      "scope": {
+        "country": "USA",
+        "period": "2024",
+        "topic": "housing_credit",
+        "reading_scale": "current"
+      },
+      "answerability": "FACT_ANSWERABLE",
+      "direct_answer": {
+        "text": "No. In the October 2024 survey, government home-purchase mortgage respondents reported a net 2.04% tightening standards and net −10.20% stronger demand, from 49 banks. These different survey measures illustrate weaker demand with broadly unchanged standards; neither is a national denial rate.",
+        "kind": "observed_fact"
+      },
+      "claims": [
+        {
+          "id": "Q05-direct",
+          "kind": "observed_fact",
+          "text": "No. In the October 2024 survey, government home-purchase mortgage respondents reported a net 2.04% tightening standards and net −10.20% stronger demand, from 49 banks. These different survey measures illustrate weaker demand with broadly unchanged standards; neither is a national denial rate.",
+          "support": [
+            "US_SLOOS",
+            "US_HMDA",
+            "US_FHFA"
+          ],
+          "conditions": [
+            "The answer covers the stated mechanism or collected observation only. It does not establish every current local condition or promise an individual approval."
+          ]
+        }
+      ],
+      "indicators": [
+        {
+          "id": "US_STD_GOV_2024Q3",
+          "metric_id": "survey_standards",
+          "country": "USA",
+          "observation_period": "2024-Q3",
+          "value": 2.0408,
+          "unit": "net_percent_banks_tightening",
+          "source_id": "fed-table-corrected",
+          "locator": "Table1 Q13B all respondents",
+          "publication_date": "2024-11-12",
+          "fetched_at": "2026-10-20T02:50:53.039787+00:00",
+          "source_hash": "f792defe03173304ebc4f3839b36d7e6b4fd4fd8a6bd73577cace0989b94f24c",
+          "kind": "derived_from_reported_counts",
+          "population": "49 domestic responding banks originating government home-purchase mortgages; new originations excluding refinancing",
+          "input_counts": {
+            "Tightened considerably": {
+              "banks": 0,
+              "percent": 0
+            },
+            "Tightened somewhat": {
+              "banks": 1,
+              "percent": 2
+            },
+            "Remained basically unchanged": {
+              "banks": 48,
+              "percent": 98
+            },
+            "Eased somewhat": {
+              "banks": 0,
+              "percent": 0
+            },
+            "Eased considerably": {
+              "banks": 0,
+              "percent": 0
+            },
+            "Total": {
+              "banks": 49,
+              "percent": 100
+            }
+          }
+        },
+        {
+          "id": "US_DEMAND_GOV_2024Q3",
+          "metric_id": "survey_demand",
+          "country": "USA",
+          "observation_period": "2024-Q3",
+          "value": -10.2041,
+          "unit": "net_percent_banks_stronger_demand",
+          "source_id": "fed-table-corrected",
+          "locator": "Table1 Q14B all respondents",
+          "publication_date": "2024-11-12",
+          "fetched_at": "2026-10-20T02:50:53.039787+00:00",
+          "source_hash": "f792defe03173304ebc4f3839b36d7e6b4fd4fd8a6bd73577cace0989b94f24c",
+          "kind": "derived_from_reported_counts",
+          "population": "49 responding domestic banks; government home-purchase mortgages; not national application totals",
+          "input_counts": {
+            "Substantially stronger": {
+              "banks": 0,
+              "percent": 0
+            },
+            "Moderately stronger": {
+              "banks": 5,
+              "percent": 10.2
+            },
+            "About the same": {
+              "banks": 34,
+              "percent": 69.4
+            },
+            "Moderately weaker": {
+              "banks": 10,
+              "percent": 20.4
+            },
+            "Substantially weaker": {
+              "banks": 0,
+              "percent": 0
+            },
+            "Total": {
+              "banks": 49,
+              "percent": 100
+            }
+          }
+        }
+      ],
+      "figures": [],
+      "comparison": {
+        "allowed": false,
+        "reason": "No harmonised application-cohort denominator"
+      },
+      "unknowns": [
+        "Original observation publication metadata and full cohort alignment remain partial"
+      ],
+      "source_links": [
+        "https://www.federalreserve.gov/data/sloos/sloos-202410.htm",
+        "https://ffiec.cfpb.gov/documentation/publications/loan-level-datasets/lar-data-fields",
+        "https://www.fhfa.gov/house-price-index"
+      ],
+      "continuations": [
+        "Existing Ask input-only; full scope wiring requires Gate3"
+      ],
+      "data_quality": {
+        "freshness": "OFFLINE_HISTORICAL_SNAPSHOT_NOT_REALTIME",
+        "coverage": "BOUNDED",
+        "answer_engine": "CURATED_NOT_DYNAMIC"
+      }
+    },
+    {
+      "question": {
+        "original": "能把马来西亚、美国、中国、日本、英国排房贷获批率排名吗？",
+        "lang": "zh-Hans"
+      },
+      "scope": {
+        "country": "MYS",
+        "period": "2024",
+        "topic": "housing_credit",
+        "reading_scale": "current"
+      },
+      "answerability": "PARTIAL_CONTEXT",
+      "direct_answer": {
+        "text": "这些来源不足以排名。批准金额、申请行动、开发商到账、银行问卷及净批准笔数的分母和人群不兼容。应分别展示本地指标及定义，统一排名保持不可用。",
+        "kind": "conditional_mechanism"
+      },
+      "claims": [
+        {
+          "id": "Q16-direct",
+          "kind": "conditional_mechanism",
+          "text": "这些来源不足以排名。批准金额、申请行动、开发商到账、银行问卷及净批准笔数的分母和人群不兼容。应分别展示本地指标及定义，统一排名保持不可用。",
+          "support": [
+            "MY_LOANS_APPROVED",
+            "US_HMDA",
+            "CN_PROPERTY",
+            "JP_HOUSING",
+            "UK_CREDIT"
+          ],
+          "conditions": [
+            "直接回答仅覆盖注明的机制或已取到的观察；不证明当前所选国家的全部情况，不作个人获批承诺。"
+          ]
+        }
+      ],
+      "indicators": [],
+      "figures": [],
+      "comparison": {
+        "allowed": false,
+        "reason": "No harmonised application-cohort denominator"
+      },
+      "unknowns": [
+        "Original observation publication metadata and full cohort alignment remain partial"
+      ],
+      "source_links": [
+        "https://www.bnm.gov.my/-/sorotan-statistik-bulanan-untuk-jun-2026",
+        "https://ffiec.cfpb.gov/documentation/publications/loan-level-datasets/lar-data-fields",
+        "https://www.stats.gov.cn/english/PressRelease/202601/t20260120_1962353.html",
+        "https://www.jhf.go.jp/about/research/loan/user/index.html",
+        "https://www.bankofengland.co.uk/statistics/money-and-credit/2026/august-2026"
+      ],
+      "continuations": [
+        "Existing Ask input-only; full scope wiring requires Gate3"
+      ],
+      "data_quality": {
+        "freshness": "OFFLINE_HISTORICAL_SNAPSHOT_NOT_REALTIME",
+        "coverage": "BOUNDED",
+        "answer_engine": "CURATED_NOT_DYNAMIC"
+      }
+    },
+    {
+      "question": {
+        "original": "Can MY, US, China, Japan and the UK be ranked by mortgage approval rate?",
+        "lang": "en"
+      },
+      "scope": {
+        "country": "MYS",
+        "period": "2024",
+        "topic": "housing_credit",
+        "reading_scale": "current"
+      },
+      "answerability": "PARTIAL_CONTEXT",
+      "direct_answer": {
+        "text": "Not from these sources. Monetary approvals, reported application actions, developer receipts, lender surveys and net approval counts have incompatible denominators and populations. Show each local metric with its definition; leave a universal ranking unavailable.",
+        "kind": "conditional_mechanism"
+      },
+      "claims": [
+        {
+          "id": "Q16-direct",
+          "kind": "conditional_mechanism",
+          "text": "Not from these sources. Monetary approvals, reported application actions, developer receipts, lender surveys and net approval counts have incompatible denominators and populations. Show each local metric with its definition; leave a universal ranking unavailable.",
+          "support": [
+            "MY_LOANS_APPROVED",
+            "US_HMDA",
+            "CN_PROPERTY",
+            "JP_HOUSING",
+            "UK_CREDIT"
+          ],
+          "conditions": [
+            "The answer covers the stated mechanism or collected observation only. It does not establish every current local condition or promise an individual approval."
+          ]
+        }
+      ],
+      "indicators": [],
+      "figures": [],
+      "comparison": {
+        "allowed": false,
+        "reason": "No harmonised application-cohort denominator"
+      },
+      "unknowns": [
+        "Original observation publication metadata and full cohort alignment remain partial"
+      ],
+      "source_links": [
+        "https://www.bnm.gov.my/-/sorotan-statistik-bulanan-untuk-jun-2026",
+        "https://ffiec.cfpb.gov/documentation/publications/loan-level-datasets/lar-data-fields",
+        "https://www.stats.gov.cn/english/PressRelease/202601/t20260120_1962353.html",
+        "https://www.jhf.go.jp/about/research/loan/user/index.html",
+        "https://www.bankofengland.co.uk/statistics/money-and-credit/2026/august-2026"
+      ],
+      "continuations": [
+        "Existing Ask input-only; full scope wiring requires Gate3"
+      ],
+      "data_quality": {
+        "freshness": "OFFLINE_HISTORICAL_SNAPSHOT_NOT_REALTIME",
+        "coverage": "BOUNDED",
+        "answer_engine": "CURATED_NOT_DYNAMIC"
+      }
+    },
+    {
+      "question": {
+        "original": "为什么房贷利率下降，年轻人仍可能买不起房？",
+        "lang": "zh-Hans"
+      },
+      "scope": {
+        "country": "MYS",
+        "period": "2024",
+        "topic": "housing_credit",
+        "reading_scale": "current"
+      },
+      "answerability": "MECHANISM_ANSWERABLE",
+      "direct_answer": {
+        "text": "对于同一贷款，降息可降低利息部分，但房价、首付、贷款额、期限、费用与家庭收入仍然重要。所需首付或贷款额更高，住房仍可能负担不起。这是条件机制，不是对某地当前趋势的证明。",
+        "kind": "conditional_mechanism"
+      },
+      "claims": [
+        {
+          "id": "Q11-direct",
+          "kind": "conditional_mechanism",
+          "text": "对于同一贷款，降息可降低利息部分，但房价、首付、贷款额、期限、费用与家庭收入仍然重要。所需首付或贷款额更高，住房仍可能负担不起。这是条件机制，不是对某地当前趋势的证明。",
+          "support": [
+            "CFPB_AFFORD",
+            "BOOK_DAILY"
+          ],
+          "conditions": [
+            "直接回答仅覆盖注明的机制或已取到的观察；不证明当前所选国家的全部情况，不作个人获批承诺。"
+          ]
+        }
+      ],
+      "indicators": [],
+      "figures": [],
+      "comparison": {
+        "allowed": false,
+        "reason": "No harmonised application-cohort denominator"
+      },
+      "unknowns": [
+        "Original observation publication metadata and full cohort alignment remain partial"
+      ],
+      "source_links": [
+        "https://www.consumerfinance.gov/owning-a-home/explore-rates/",
+        "https://getphios.com/articles/book6-environment-work-income?locale=en#article-body"
+      ],
+      "continuations": [
+        "Existing Ask input-only; full scope wiring requires Gate3"
+      ],
+      "data_quality": {
+        "freshness": "OFFLINE_HISTORICAL_SNAPSHOT_NOT_REALTIME",
+        "coverage": "BOUNDED",
+        "answer_engine": "CURATED_NOT_DYNAMIC"
+      }
+    },
+    {
+      "question": {
+        "original": "Why can a home remain unaffordable after mortgage rates fall?",
+        "lang": "en"
+      },
+      "scope": {
+        "country": "MYS",
+        "period": "2024",
+        "topic": "housing_credit",
+        "reading_scale": "current"
+      },
+      "answerability": "MECHANISM_ANSWERABLE",
+      "direct_answer": {
+        "text": "A lower rate reduces the interest component for a given loan, but the home price, down payment, loan size, term, fees and household income still matter. A larger required deposit or loan can leave housing unaffordable. This is a conditional mechanism, not proof of a current local trend.",
+        "kind": "conditional_mechanism"
+      },
+      "claims": [
+        {
+          "id": "Q11-direct",
+          "kind": "conditional_mechanism",
+          "text": "A lower rate reduces the interest component for a given loan, but the home price, down payment, loan size, term, fees and household income still matter. A larger required deposit or loan can leave housing unaffordable. This is a conditional mechanism, not proof of a current local trend.",
+          "support": [
+            "CFPB_AFFORD",
+            "BOOK_DAILY"
+          ],
+          "conditions": [
+            "The answer covers the stated mechanism or collected observation only. It does not establish every current local condition or promise an individual approval."
+          ]
+        }
+      ],
+      "indicators": [],
+      "figures": [],
+      "comparison": {
+        "allowed": false,
+        "reason": "No harmonised application-cohort denominator"
+      },
+      "unknowns": [
+        "Original observation publication metadata and full cohort alignment remain partial"
+      ],
+      "source_links": [
+        "https://www.consumerfinance.gov/owning-a-home/explore-rates/",
+        "https://getphios.com/articles/book6-environment-work-income?locale=en#article-body"
+      ],
+      "continuations": [
+        "Existing Ask input-only; full scope wiring requires Gate3"
+      ],
+      "data_quality": {
+        "freshness": "OFFLINE_HISTORICAL_SNAPSHOT_NOT_REALTIME",
+        "coverage": "BOUNDED",
+        "answer_engine": "CURATED_NOT_DYNAMIC"
+      }
+    }
+  ],
+  "shapeChecks": 8,
+  "status": "PASS_SHAPE_NOT_TRUTH_PROOF"
+}

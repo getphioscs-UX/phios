@@ -1,0 +1,255 @@
+{
+  "status": "PASS_OFFLINE_CONTRACT_ASSERTIONS_NOT_ANSWER_ENGINE_PASS",
+  "at": "2026-10-20T03:07:07.944Z",
+  "negativeCases": [
+    {
+      "name": "amount ratio as approval",
+      "input": {
+        "label": "approval_probability",
+        "basis": "amount",
+        "sameCohort": false
+      },
+      "actual": "REJECTED",
+      "expected": "REJECTED",
+      "reason": "INCOMPATIBLE_DENOMINATOR",
+      "synthetic": true
+    },
+    {
+      "name": "UK net count as denial",
+      "input": {
+        "label": "denial_rate",
+        "metric": "net_approvals"
+      },
+      "actual": "REJECTED",
+      "expected": "REJECTED",
+      "reason": "METRIC_IS_NOT_DENIAL_RATE",
+      "synthetic": true
+    },
+    {
+      "name": "CN developerfunds as denial",
+      "input": {
+        "label": "denial_rate",
+        "metric": "developer_funds"
+      },
+      "actual": "REJECTED",
+      "expected": "REJECTED",
+      "reason": "METRIC_IS_NOT_DENIAL_RATE",
+      "synthetic": true
+    },
+    {
+      "name": "Fed net survey as denial",
+      "input": {
+        "label": "denial_rate",
+        "metric": "survey_net"
+      },
+      "actual": "REJECTED",
+      "expected": "REJECTED",
+      "reason": "METRIC_IS_NOT_DENIAL_RATE",
+      "synthetic": true
+    },
+    {
+      "name": "ECB net survey as denial",
+      "input": {
+        "label": "denial_rate",
+        "metric": "survey_net"
+      },
+      "actual": "REJECTED",
+      "expected": "REJECTED",
+      "reason": "METRIC_IS_NOT_DENIAL_RATE",
+      "synthetic": true
+    },
+    {
+      "name": "BISlevel crisisranking",
+      "input": {
+        "label": "crisis_ranking",
+        "metric": "DSR"
+      },
+      "actual": "REJECTED",
+      "expected": "REJECTED",
+      "reason": "NO_CAUSAL_CROSSCOUNTRY_RANK",
+      "synthetic": true
+    },
+    {
+      "name": "globalovernight definitionmissing",
+      "input": {
+        "label": "uniform_overnight",
+        "instrumentDefinitions": false
+      },
+      "actual": "REJECTED",
+      "expected": "REJECTED",
+      "reason": "INSTRUMENT_DEFINITIONS_MISSING",
+      "synthetic": true
+    },
+    {
+      "name": "oil mechanism wrongly refused",
+      "input": {
+        "rejectMechanismBecauseAnnualMissing": true,
+        "supportedPassage": true
+      },
+      "actual": "REJECTED",
+      "expected": "REJECTED",
+      "reason": "MECHANISM_MUST_REMAIN_ANSWERABLE",
+      "synthetic": true
+    },
+    {
+      "name": "catalogue counts asanswer",
+      "input": {
+        "evidence": "links_only"
+      },
+      "actual": "REJECTED",
+      "expected": "REJECTED",
+      "reason": "NO_PASSAGE_OR_OBSERVATION",
+      "synthetic": true
+    },
+    {
+      "name": "futurepublication aslive",
+      "input": {
+        "publication": "2027-01-01"
+      },
+      "actual": "REJECTED",
+      "expected": "REJECTED",
+      "reason": "FUTURE_PUBLICATION",
+      "synthetic": true
+    },
+    {
+      "name": "licenceunknownvalue",
+      "input": {
+        "value": 3,
+        "country": "MYS",
+        "period": "2024",
+        "unit": "percent",
+        "source": "fixture",
+        "hash": "fixture",
+        "license": "unknown"
+      },
+      "actual": "REJECTED",
+      "expected": "REJECTED",
+      "reason": "UNADMITTED_VALUE",
+      "synthetic": true
+    },
+    {
+      "name": "networkfailedvalue",
+      "input": {
+        "value": 3,
+        "country": "MYS",
+        "period": "2024",
+        "unit": "percent",
+        "source": "fixture",
+        "hash": "fixture",
+        "networkFailure": true
+      },
+      "actual": "REJECTED",
+      "expected": "REJECTED",
+      "reason": "UNADMITTED_VALUE",
+      "synthetic": true
+    },
+    {
+      "name": "staleaslive",
+      "input": {
+        "mode": "live",
+        "stale": true
+      },
+      "actual": "REJECTED",
+      "expected": "REJECTED",
+      "reason": "NOT_CURRENT_PROOF",
+      "synthetic": true
+    },
+    {
+      "name": "missingmetadata",
+      "input": {
+        "value": 1
+      },
+      "actual": "REJECTED",
+      "expected": "REJECTED",
+      "reason": "MISSING_FACT_METADATA",
+      "synthetic": true
+    }
+  ],
+  "positiveCases": 3,
+  "observationCount": 71,
+  "realNumericReconciliations": "CPI12months; SLOOS49responses and netcalculations; HMDA4319109records; MYprobabilitynull",
+  "sourceResolutions": 6,
+  "historicalHashes": [
+    {
+      "path": "tools/review/world-r3/gate2b/ASK-SOURCE-RESOLUTION.json",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2b/build-correction.mjs",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2b/finish.mjs",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2b/FIRST-OBSERVATION.json",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2b/REAL-SOURCE-MAPPING.json",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2b/START-STATE.json",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2b/VALIDATION.json",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2b/verify-browser.mjs",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2b/verify-sources.mjs",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2b/WORLD-R3-ANSWER-CONTRACT.md",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2b/WORLD-R3-GATE3-MINIMAL-PATH.md",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2b/WORLD-R3-KNOWLEDGE-AUDIT.md",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2/design-content.js",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2/prototype.js",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2/prototype.css",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2/build-prototype.mjs",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2/WORLD-R3-PROTOTYPE.html",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2/SOURCE-BINDINGS.json",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/gate2/CANDIDATE.json",
+      "matches": true
+    },
+    {
+      "path": "tools/review/world-r3/WORLD-R3-HUMAN-REVIEW.html",
+      "matches": true
+    }
+  ],
+  "providerCalls": 0
+}

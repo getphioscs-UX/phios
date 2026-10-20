@@ -1,0 +1,102 @@
+{
+  "candidate": "FINANCE_PUBLICATION_R3_1_CANDIDATE",
+  "status": "LOCAL_ENGINEERING_VERIFIED_HUMAN_REVIEW_PENDING",
+  "generatedAt": "2026-10-20T04:59:01.956Z",
+  "head": "796802d96e5fe10f8af2f46f3d2d96b0efca51dc",
+  "dirtyHash": "cd011d00101e616885f5ab690ac2748886d5debc86db5e53a269bc317ad60b60",
+  "baselineHead": "796802d96e5fe10f8af2f46f3d2d96b0efca51dc",
+  "providerCalls": 0,
+  "costUSD": 0,
+  "payments": 0,
+  "externalSends": 0,
+  "productionWrites": 0,
+  "commit": false,
+  "push": false,
+  "deploy": false,
+  "steps": {
+    "W0": "LOCAL_COMPLETE_WITH_DECLARED_BOUNDARIES",
+    "W1": "LOCAL_COMPLETE_WITH_DECLARED_BOUNDARIES",
+    "W2": "LOCAL_COMPLETE_WITH_DECLARED_BOUNDARIES",
+    "W3": "LOCAL_COMPLETE_WITH_DECLARED_BOUNDARIES",
+    "W4": "LOCAL_COMPLETE_WITH_DECLARED_BOUNDARIES",
+    "W5": "LOCAL_COMPLETE_WITH_DECLARED_BOUNDARIES",
+    "W6": "LOCAL_COMPLETE_WITH_DECLARED_BOUNDARIES",
+    "W7": "LOCAL_COMPLETE_WITH_DECLARED_BOUNDARIES",
+    "W8": "LOCAL_COMPLETE_WITH_DECLARED_BOUNDARIES",
+    "W9": "LOCAL_COMPLETE_WITH_DECLARED_BOUNDARIES",
+    "W10": "LOCAL_COMPLETE_WITH_DECLARED_BOUNDARIES",
+    "W11": "LOCAL_COMPLETE_WITH_DECLARED_BOUNDARIES",
+    "W12": "LOCAL_COMPLETE_WITH_DECLARED_BOUNDARIES",
+    "W13": "LOCAL_COMPLETE_WITH_DECLARED_BOUNDARIES"
+  },
+  "corePages": 288,
+  "appendixPages": 30,
+  "regression": {
+    "status": "PASS_NO_NEW_FAILURES_EXACT_REVIEWED_HISTORICAL_FIVE",
+    "rawExitCode": 1,
+    "observedTests": 90,
+    "pass": 85,
+    "fail": 5,
+    "knownHistoricalExceptions": [
+      {
+        "name": "rental ratios distinguish zero, missing and out-of-range; no unsupported currency rounding",
+        "expected": "16000.00",
+        "actual": null,
+        "metric": "operatingCashFlow",
+        "reason": "Missing amountState and cashTiming on operating cost; paid cash cannot be inferred."
+      },
+      {
+        "name": "actual receipts do not lose vacancy twice; forecasts and cash/tax allocation stay independent",
+        "expected": "19500.00",
+        "actual": null,
+        "metric": "operatingCashFlow",
+        "reason": "Missing amountState and cashTiming on maintenance; payment metadata is unspecified."
+      },
+      {
+        "name": "rental tax candidate and cashflow are separate; interest not subtracted twice",
+        "expected": "18700.00",
+        "actual": null,
+        "metric": "operatingCashFlow",
+        "reason": "Missing amountState and cashTiming on operating cost; interest is not a second cash deduction."
+      },
+      {
+        "name": "portfolio API keeps four period/mode/currency groups and stable property identities",
+        "expected": "950.00",
+        "actual": null,
+        "metric": "netCashFlow",
+        "reason": "Missing debtService; omitted debt payment is unknown, not a declared zero."
+      },
+      {
+        "name": "unknown amounts and unpaid costs cannot be coerced into zero cash; metadata survives",
+        "expected": "APPROXIMATE",
+        "actual": "UNKNOWN",
+        "metric": "cashPrecision",
+        "reason": "Missing debtService in approximate-cost fixture; unknown debt dominates approximate cost."
+      }
+    ],
+    "unchangedFiles": [
+      "tests/financial-preparation/finance-tools.test.mjs",
+      "tests/financial-preparation/portfolio-successor.test.mjs",
+      "functions/financial/calculation-runtime/customer-finance-tools.js",
+      "functions/financial/calculation-runtime/rental-metric-semantics-v2.js",
+      "functions/financial/calculation-runtime/rental-fact-metadata.js",
+      "functions/api/customer-finance-tools.js"
+    ],
+    "providerCalls": 0
+  },
+  "openAdmissions": [
+    "HUMAN_ACCEPT_PAID20_FOR_NEW_REPORTS",
+    "APPENDIX_ENTITLEMENT",
+    "REAL_SUBJECT_ADMISSION",
+    "PROVIDER_AND_COST_BUDGET",
+    "STRIPE_PRODUCT_ENTITLEMENT",
+    "PRODUCTION_RELEASE"
+  ],
+  "notRun": [
+    "Private PDF inspection; intentionally not mounted",
+    "Overview/Four Pillars PNG comparison; files absent",
+    "Real provider/payment/send/migration/deploy; explicitly forbidden"
+  ],
+  "unsupportedFieldDetails": "FIELD-OWNER-MATRIX.json",
+  "recovery": "Regenerate only local synthetic candidates; never overwrite historical R3 contract or HTML."
+}

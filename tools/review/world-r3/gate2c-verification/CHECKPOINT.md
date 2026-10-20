@@ -1,0 +1,4 @@
+# Recoverable checkpoint
+At 2026-10-20T03:37:07.218564+00:00; baseline HEAD 796802d96e5fe10f8af2f46f3d2d96b0efca51dc. Run scripts only within gate2c-verification; no product implementation. Reproduction command: bundled Python reproduce-sources.py; read-only raw files. Browser evidence and final node handler responses are saved; do not rerun old builders that overwrite gate2c history. Completed: chain audit, MY/US reproduction, rights stages, eight evidence objects,16 unseen observations,17 contract assertions, representative preview.
+
+Next uncompleted external decision: Human evidence review and separate Gate3 local authorisation. Next technical scope only after acceptance: GATE3-MINIMAL-SCOPED-PLAN.md. Keep current zero-call/no-production boundary. Final source/history preservation proof in FINAL-INTEGRITY.json. No pending paid/remote mutation task exists.

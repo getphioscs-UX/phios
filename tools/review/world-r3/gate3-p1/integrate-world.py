@@ -1,0 +1,16 @@
+from pathlib import Path
+p=Path('assets/js/pages/civilization-atlas/world-reading-context.js');s=p.read_text(encoding='utf-8-sig');s=s.replace("let country=countries.length===1?countries[0]:region;", "let country=!intent&&countries.length===1?countries[0]:region;");p.write_text(s,encoding='utf-8')
+p=Path('assets/js/pages/civilization-atlas/world-experience-r2.js');s=p.read_text(encoding='utf-8-sig')
+s=s.replace("import {askURL,worldAskContext} from './world-reading-context.js';", "import {askURL,worldAskContext,worldQuestionPlan,queryWorldEvidence,composeWorldAnswer,WORLD_ANSWER_INTENTS,safeWorldSource} from './world-reading-context.js';")
+needle="let dataRequestSequence=0;";assert needle in s;s=s.replace(needle,needle+"\nlet evidenceIntent='',evidenceQuarter='',answerSequence=0,answerSignature='',answerControllerResult=null;\nconst answerHost=document.createElement('section');answerHost.id='worldEvidenceAnswer';answerHost.className='panel';answerHost.hidden=true;answerHost.setAttribute('aria-live','polite');answerHost.setAttribute('tabindex','-1');$('#searchResults').after(answerHost);\n")
+s=s.replace("${worldGuideLinks(getLocale())}${sourceReadings(topic().book)}", "${customQuestion||evidenceIntent?'':worldGuideLinks(getLocale())}${sourceReadings(topic().book)}")
+s=s.replace("renderBooks();renderSearchResults();saveHash();", "renderBooks();renderSearchResults();renderEvidenceAnswer();saveHash();")
+s=s.replace("const vals={v:2,", "const vals={wi:evidenceIntent,wq:evidenceQuarter,v:2,")
+s=s.replace("function restore(){const p=new URLSearchParams(location.hash.slice(1));", "function restore(){const p=new URLSearchParams(location.hash.slice(1));const nextIntent=p.get('wi')||'';if(evidenceIntent!==nextIntent){customQuestion='';searchText='';searchResults=null;}evidenceIntent=WORLD_ANSWER_INTENTS.includes(nextIntent)?nextIntent:'';evidenceQuarter=p.get('wq')==='Q3'?'Q3':'';")
+s=s.replace("customQuestion=searchText;if(topics.length===1)", "customQuestion=searchText;const evidencePlan=worldQuestionPlan(searchText,{region:state.region,year:state.year});evidenceIntent=evidencePlan.intent;evidenceQuarter=evidencePlan.requests.some(r=>r.period.endsWith('-Q3'))?'Q3':'';if(country(evidencePlan.scope.region))state.region=evidencePlan.scope.region;const evidenceYear=Number(evidencePlan.scope.period.slice(0,4));if(Number.isInteger(evidenceYear))state.year=evidenceYear;history.pushState(history.state,'',location.href);if(topics.length===1)")
+s=s.replace("render();$('#searchResults').scrollIntoView", "render();(evidenceIntent?answerHost:$('#searchResults')).scrollIntoView")
+s=s.replace("case 'reset':customQuestion='';", "case 'reset':evidenceIntent='';evidenceQuarter='';customQuestion='';")
+s=s.replace("function choosePreset(id){", "function choosePreset(id){evidenceIntent='';evidenceQuarter='';")
+# Cancel pending answer when another public route replaces the original question.
+s=s.replace("case 'topic':if(TOPICS[d.topic]){customQuestion='';", "case 'topic':if(TOPICS[d.topic]){evidenceIntent='';customQuestion='';")
+p.write_text(s,encoding='utf-8')

@@ -1,0 +1,309 @@
+{
+  "metrics": [
+    {
+      "metric_id": "policy_rate",
+      "group": "M1",
+      "definition": "Policy instrument / target range",
+      "unit": "percent_pa",
+      "guard": "Not retail or observed overnight; single value/range, effective decision date",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "overnight_market",
+      "group": "M1",
+      "definition": "Observed unsecured overnight market rate",
+      "unit": "percent_pa",
+      "guard": "Instrument/universe/daycount/statistic differs by jurisdiction",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "new_mortgage_rate",
+      "group": "M1",
+      "definition": "New mortgage pricing",
+      "unit": "percent_pa",
+      "guard": "Fixed/floating, term, fees, sample, application vs closing",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "stock_mortgage_rate",
+      "group": "M1",
+      "definition": "Rate on outstanding mortgages",
+      "unit": "percent_pa",
+      "guard": "Stock weighted; resetlags and fixed share",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "government_yield",
+      "group": "M1",
+      "definition": "Government bond yield",
+      "unit": "percent_pa",
+      "guard": "Maturity/currency/nominal/real",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "exchange_rate",
+      "group": "M1",
+      "definition": "FX quote",
+      "unit": "quote_currency_per_base",
+      "guard": "Retain quote direction and date",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "cpi",
+      "group": "M1",
+      "definition": "Representative consumer price index",
+      "unit": "index",
+      "guard": "Base/basket; inflation is change not level",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "application_count",
+      "group": "M2",
+      "definition": "New applications",
+      "unit": "records",
+      "guard": "Entity may file multiple; cohort and purchase/refinance",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "application_amount",
+      "group": "M2",
+      "definition": "Amount applied during period",
+      "unit": "local_currency",
+      "guard": "Not people or demand intensity in isolation",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "approval_count",
+      "group": "M2",
+      "definition": "Approved applications",
+      "unit": "records",
+      "guard": "Gross/netcancellation, accepted/originated distinct",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "approval_amount",
+      "group": "M2",
+      "definition": "Amount approved during period",
+      "unit": "local_currency",
+      "guard": "Same-month ratio not probability; may exceed100%",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "denial_count",
+      "group": "M2",
+      "definition": "Denied reported actions",
+      "unit": "records",
+      "guard": "Only eligible final action categories; exclude purchased/withdrawn/incomplete/preapproval as defined",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "application_approval_probability",
+      "group": "M2",
+      "definition": "Approved share of comparable same-application cohort",
+      "unit": "proportion",
+      "guard": "Require matched denominator, product, period, population; MY NOT_MEASURABLE",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "survey_standards",
+      "group": "M2",
+      "definition": "Net banks reporting tightening minus easing",
+      "unit": "net_percent_banks",
+      "guard": "Not rejectionrate; weights/category",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "survey_demand",
+      "group": "M2",
+      "definition": "Net banks reporting stronger minus weaker demand",
+      "unit": "net_percent_banks",
+      "guard": "Survey not actual applicationcount",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "disbursement_amount",
+      "group": "M2",
+      "definition": "Funds advanced during period",
+      "unit": "local_currency",
+      "guard": "Flow distinct from approvals and balances",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "loan_stock",
+      "group": "M2",
+      "definition": "Outstanding credit at end period",
+      "unit": "local_currency",
+      "guard": "Stock not flow/demand",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "npl",
+      "group": "M3",
+      "definition": "Nonperforming loan stock/share",
+      "unit": "amount_or_percent",
+      "guard": "Country classification/writeoffs",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "bank_capital",
+      "group": "M3",
+      "definition": "Capital adequacy",
+      "unit": "percent_RWA",
+      "guard": "Definition and prudential scope",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "liquidity",
+      "group": "M3",
+      "definition": "Bank liquidity",
+      "unit": "ratio",
+      "guard": "Not loan growth",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "debt_service_ratio",
+      "group": "M3",
+      "definition": "Debt service to income",
+      "unit": "percent_income",
+      "guard": "BIS modelassumptions and sectorcoverage; no absolute crosscountry crisisranking",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "credit_spread",
+      "group": "M3",
+      "definition": "Risk/credit yield differential",
+      "unit": "basis_points",
+      "guard": "Matched maturitycurrencybenchmark",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "housing_price_index",
+      "group": "M4",
+      "definition": "Quality-adjusted residential prices",
+      "unit": "index",
+      "guard": "Geography/type/base/repeat-sales vs hedonic",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "housing_price_change",
+      "group": "M4",
+      "definition": "Housing price index change",
+      "unit": "percent",
+      "guard": "SA/NSA; nominal/real; MoM/YoY",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "housing_transactions",
+      "group": "M4",
+      "definition": "Property transactions",
+      "unit": "count_or_value",
+      "guard": "Cash vs mortgage distinct",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "housing_starts",
+      "group": "M4",
+      "definition": "Residential construction starts",
+      "unit": "units_or_area",
+      "guard": "Flow constructionnotloans",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "housing_inventory",
+      "group": "M4",
+      "definition": "Unsold homes",
+      "unit": "units_or_area",
+      "guard": "Completedvsunderconstruction",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "construction_investment",
+      "group": "M4",
+      "definition": "Construction/developer investment",
+      "unit": "local_currency",
+      "guard": "Nominal/real; cumulative/period",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "rent",
+      "group": "M4",
+      "definition": "Rent level/index",
+      "unit": "currency_or_index",
+      "guard": "Newcontract vs existingstock",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "median_household_income",
+      "group": "M5",
+      "definition": "Median monthly gross household income",
+      "unit": "MYR_per_month",
+      "guard": "Household notindividual; surveyweights; not disposable",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "real_wage",
+      "group": "M5",
+      "definition": "Wage adjusted for price index",
+      "unit": "index_or_currency",
+      "guard": "Deflator/timepopulation",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "household_cost",
+      "group": "M5",
+      "definition": "Necessary spending",
+      "unit": "local_currency_per_month",
+      "guard": "Household composition and localhousing",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "mortgage_payment",
+      "group": "M5",
+      "definition": "Principal/interest plus specified housingcosts",
+      "unit": "currency_per_month",
+      "guard": "Education scenario not lenderoffer",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "employment",
+      "group": "M5",
+      "definition": "Employment including construction",
+      "unit": "persons_or_rate",
+      "guard": "Industryscope/survey",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "consumption",
+      "group": "M5",
+      "definition": "Household consumption",
+      "unit": "local_currency_or_index",
+      "guard": "Nominalvsreal",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "developer_mortgage_funds",
+      "group": "M6",
+      "definition": "Personal mortgage funds received by developers",
+      "unit": "CNY_100_million",
+      "guard": "Not bankapplicationorapproval data",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "crossborder_credit",
+      "group": "M6",
+      "definition": "Foreign/cross-border credit",
+      "unit": "currency_or_ratio",
+      "guard": "Residence/currency/counterparty and FXvaluation",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    },
+    {
+      "metric_id": "global_liquidity",
+      "group": "M6",
+      "definition": "International credit/liquidity",
+      "unit": "currency_or_ratio",
+      "guard": "No automatic crisis score",
+      "status": "DESIGN_DICTIONARY_NOT_ALL_METRICS_FETCHED"
+    }
+  ],
+  "forbiddenName": "mortgage_approval_rate for sameperiod amount flows"
+}

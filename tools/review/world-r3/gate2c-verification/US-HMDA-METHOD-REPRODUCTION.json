@@ -1,0 +1,101 @@
+{
+  "status": "VERIFIED_BOUNDED_RECORD_SHARES_NOT_APPLICANT_PROBABILITY",
+  "years": [
+    {
+      "year": "2024",
+      "sourcePath": "tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/hmda-aggregate-2024.json",
+      "sourceHash": "439f3a462163180af3a0b2ea45a4cdf80207bed1774a103659459aaa2d4fc2de",
+      "requestURL": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2024&loan_purposes=1&actions_taken=1,2,3",
+      "parameters": {
+        "actions_taken": "1,2,3",
+        "loan_purposes": "1"
+      },
+      "actionCounts": {
+        "2": 161054,
+        "3": 623942,
+        "1": 3534113
+      },
+      "numeratorDeniedAction3": 623942,
+      "denominatorActions1_2_3": 4319109,
+      "denial_share_in_defined_hmda_scope": 0.14446081356131554,
+      "unit": "share_of_reported_homepurchase_actionrecords_not_unique_people",
+      "inclusions": [
+        "1 loan originated",
+        "2 approved not accepted",
+        "3 denied"
+      ],
+      "exclusions": [
+        "4 withdrawn",
+        "5 incomplete",
+        "6 purchased",
+        "7 preapproval denied",
+        "8 preapproval approved not accepted",
+        "loanpurpose2/31/32/4/5 excluded"
+      ],
+      "unfiltered": [
+        "loan type",
+        "lien",
+        "occupancy",
+        "dwelling",
+        "open/closed-end",
+        "business purpose",
+        "income band",
+        "reporter institution type"
+      ],
+      "vintage": "DYNAMIC_API_CACHE; not the frozen annual Snapshot",
+      "initialPublicationDate": null,
+      "validConclusion": "Descriptive share in this defined record universe only; not all applications, same origination cohort or applicant probability",
+      "yearToYearCausation": "NOT_IDENTIFIED; applicant mix/reporting/revisions may differ"
+    },
+    {
+      "year": "2025",
+      "sourcePath": "tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/hmda-aggregate-2025.json",
+      "sourceHash": "a964491593a3a5c3789549cb04fb6e404f0922bb239cb3d0cc4c02bcc4ea2a93",
+      "requestURL": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2025&loan_purposes=1&actions_taken=1,2,3",
+      "parameters": {
+        "actions_taken": "1,2,3",
+        "loan_purposes": "1"
+      },
+      "actionCounts": {
+        "1": 3592033,
+        "2": 158865,
+        "3": 607818
+      },
+      "numeratorDeniedAction3": 607818,
+      "denominatorActions1_2_3": 4358716,
+      "denial_share_in_defined_hmda_scope": 0.13944886521627012,
+      "unit": "share_of_reported_homepurchase_actionrecords_not_unique_people",
+      "inclusions": [
+        "1 loan originated",
+        "2 approved not accepted",
+        "3 denied"
+      ],
+      "exclusions": [
+        "4 withdrawn",
+        "5 incomplete",
+        "6 purchased",
+        "7 preapproval denied",
+        "8 preapproval approved not accepted",
+        "loanpurpose2/31/32/4/5 excluded"
+      ],
+      "unfiltered": [
+        "loan type",
+        "lien",
+        "occupancy",
+        "dwelling",
+        "open/closed-end",
+        "business purpose",
+        "income band",
+        "reporter institution type"
+      ],
+      "vintage": "DYNAMIC_API_CACHE; not the frozen annual Snapshot",
+      "initialPublicationDate": null,
+      "validConclusion": "Descriptive share in this defined record universe only; not all applications, same origination cohort or applicant probability",
+      "yearToYearCausation": "NOT_IDENTIFIED; applicant mix/reporting/revisions may differ"
+    }
+  ],
+  "definitionsURL": "https://ffiec.cfpb.gov/documentation/publications/loan-level-datasets/lar-data-fields",
+  "apiDocumentationURL": "https://ffiec.cfpb.gov/documentation/api/data-browser/",
+  "freshDefinitionRead": "2026-10-20",
+  "scopeLimit": "Multiple applications by same person allowed; no income/reporter-type mix adjustment. Reported calendar-year actions, not a tracked original-application cohort."
+}

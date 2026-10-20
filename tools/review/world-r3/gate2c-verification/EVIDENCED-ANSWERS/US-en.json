@@ -1,0 +1,329 @@
+{
+  "question": {
+    "original": "Does weaker US loan demand mean a higher denial rate?",
+    "lang": "en"
+  },
+  "scope": {
+    "country": "USA",
+    "period": "2024",
+    "topic": "housing_credit",
+    "reading_scale": "current"
+  },
+  "answerability": "FACT_ANSWERABLE",
+  "direct_answer": {
+    "text": "No. In the October 2024 survey, government home-purchase mortgage respondents reported a net 2.04% tightening standards and net −10.20% stronger demand, from 49 banks. These different survey measures illustrate weaker demand with broadly unchanged standards; neither is a national denial rate.",
+    "kind": "observed_fact"
+  },
+  "claims": [
+    {
+      "id": "US_STD_GOV_2024Q3",
+      "kind": "observed_fact",
+      "text": "USA · 2024-Q3 · survey_standards: 2.0408 net_percent_banks_tightening",
+      "support": [
+        "US_STD_GOV_2024Q3"
+      ],
+      "conditions": [
+        "Bounded historical snapshot; original publication date not retained"
+      ],
+      "observation_period": "2024-Q3",
+      "publication_date": "2024-11-12"
+    },
+    {
+      "id": "US_DEMAND_GOV_2024Q3",
+      "kind": "observed_fact",
+      "text": "USA · 2024-Q3 · survey_demand: -10.2041 net_percent_banks_stronger_demand",
+      "support": [
+        "US_DEMAND_GOV_2024Q3"
+      ],
+      "conditions": [
+        "Bounded historical snapshot; original publication date not retained"
+      ],
+      "observation_period": "2024-Q3",
+      "publication_date": "2024-11-12"
+    },
+    {
+      "id": "US-mechanism",
+      "kind": "conditional_mechanism",
+      "text": "Once civilizational resource networks exist, no place needs to produce every condition of survival and development on its own. Food, energy, materials, technology, and professional capability can move across regions, allowing different places to become conditions for one another through specialization and exchange. Cities can support populations far larger than nearby land could directly feed, and highly specialized industries can exist because resource networks recombine the capabilities of many places into larger circulation. Material civilizational capacity therefore comes from sustained relations rather than a single center owning everything.",
+      "support": [
+        "READING:BOOK-4:book4-article-039"
+      ],
+      "conditions": [
+        "Interpretation of resources/income/costs; not an empirical causal estimate or current national statistic"
+      ]
+    }
+  ],
+  "indicators": [
+    {
+      "id": "US_STD_GOV_2024Q3",
+      "metric_id": "survey_standards",
+      "country": "USA",
+      "observation_period": "2024-Q3",
+      "value": 2.0408,
+      "unit": "net_percent_banks_tightening",
+      "source_id": "fed-table-corrected",
+      "locator": "Table1 Q13B all respondents",
+      "publication_date": "2024-11-12",
+      "fetched_at": "2026-10-20T02:50:53.039787+00:00",
+      "source_hash": "f792defe03173304ebc4f3839b36d7e6b4fd4fd8a6bd73577cace0989b94f24c",
+      "kind": "derived_from_reported_counts",
+      "population": "49 domestic responding banks originating government home-purchase mortgages; new originations excluding refinancing",
+      "input_counts": {
+        "Tightened considerably": {
+          "banks": 0,
+          "percent": 0.0
+        },
+        "Tightened somewhat": {
+          "banks": 1,
+          "percent": 2.0
+        },
+        "Remained basically unchanged": {
+          "banks": 48,
+          "percent": 98.0
+        },
+        "Eased somewhat": {
+          "banks": 0,
+          "percent": 0.0
+        },
+        "Eased considerably": {
+          "banks": 0,
+          "percent": 0.0
+        },
+        "Total": {
+          "banks": 49,
+          "percent": 100.0
+        }
+      }
+    },
+    {
+      "id": "US_DEMAND_GOV_2024Q3",
+      "metric_id": "survey_demand",
+      "country": "USA",
+      "observation_period": "2024-Q3",
+      "value": -10.2041,
+      "unit": "net_percent_banks_stronger_demand",
+      "source_id": "fed-table-corrected",
+      "locator": "Table1 Q14B all respondents",
+      "publication_date": "2024-11-12",
+      "fetched_at": "2026-10-20T02:50:53.039787+00:00",
+      "source_hash": "f792defe03173304ebc4f3839b36d7e6b4fd4fd8a6bd73577cace0989b94f24c",
+      "kind": "derived_from_reported_counts",
+      "population": "49 responding domestic banks; government home-purchase mortgages; not national application totals",
+      "input_counts": {
+        "Substantially stronger": {
+          "banks": 0,
+          "percent": 0.0
+        },
+        "Moderately stronger": {
+          "banks": 5,
+          "percent": 10.2
+        },
+        "About the same": {
+          "banks": 34,
+          "percent": 69.4
+        },
+        "Moderately weaker": {
+          "banks": 10,
+          "percent": 20.4
+        },
+        "Substantially weaker": {
+          "banks": 0,
+          "percent": 0.0
+        },
+        "Total": {
+          "banks": 49,
+          "percent": 100.0
+        }
+      }
+    }
+  ],
+  "figures": [
+    {
+      "kind": "existing_definition_and_scope_table",
+      "href": "../../gate2c/WORLD-R3-GMCH-PROTOTYPE.html?id=Q05&lang=en&country=USA&period=2024",
+      "source_binding": "Existing prototype uses same SHA-bound normalized observations; Atlas illustration is not numeric evidence",
+      "mode": "OFFLINE_PREVIEW_NOT_PRODUCT"
+    }
+  ],
+  "comparison": {
+    "allowed": false,
+    "reason": "No harmonised application-cohort denominator"
+  },
+  "unknowns": [
+    "Original observation publication metadata and full cohort alignment remain partial",
+    "HMDA year-to-year mix and original publication date unresolved; not synchronous with Q3 SLOOS",
+    "No source-bound automatic World answer route or full public scope handoff implemented"
+  ],
+  "source_links": [
+    "https://www.federalreserve.gov/data/sloos/sloos-202410.htm",
+    "https://ffiec.cfpb.gov/documentation/publications/loan-level-datasets/lar-data-fields",
+    "https://www.fhfa.gov/house-price-index",
+    "https://ffiec.cfpb.gov/documentation/publications/loan-level-datasets/lar-data-fields",
+    "https://ffiec.cfpb.gov/documentation/api/data-browser/"
+  ],
+  "continuations": [
+    "Existing Ask input-only; full scope wiring requires Gate3"
+  ],
+  "data_quality": {
+    "freshness": "OFFLINE_HISTORICAL_SNAPSHOT_NOT_REALTIME",
+    "coverage": "BOUNDED",
+    "answer_engine": "CURATED_ANSWER_ONLY"
+  },
+  "mode": "CURATED_ANSWER_ONLY",
+  "schemaOwner": "../gate2c/WORLD-R3-GMCH-ANSWER-SCHEMA.json",
+  "sources": [
+    {
+      "id": "US_STD_GOV_2024Q3",
+      "kind": "observed_fact",
+      "path": "tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/fed-table-corrected.html",
+      "sha256": "f792defe03173304ebc4f3839b36d7e6b4fd4fd8a6bd73577cace0989b94f24c",
+      "locator": "13. Over / B. Credit standards / all respondent counts",
+      "official_url": "https://www.federalreserve.gov/data/sloos/sloos-202410-table-1.htm",
+      "period": "2024-Q3",
+      "unit": "net_percent_banks_tightening",
+      "country": "USA",
+      "fetched_at": "2026-10-20T02:50:53.039787+00:00",
+      "publication_date": null,
+      "retrieval_http_status": 200,
+      "raw_relative_url": "../../../../../tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/fed-table-corrected.html"
+    },
+    {
+      "id": "US_DEMAND_GOV_2024Q3",
+      "kind": "observed_fact",
+      "path": "tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/fed-table-corrected.html",
+      "sha256": "f792defe03173304ebc4f3839b36d7e6b4fd4fd8a6bd73577cace0989b94f24c",
+      "locator": "14. Apart / B. Demand / all respondent counts",
+      "official_url": "https://www.federalreserve.gov/data/sloos/sloos-202410-table-1.htm",
+      "period": "2024-Q3",
+      "unit": "net_percent_banks_stronger_demand",
+      "country": "USA",
+      "fetched_at": "2026-10-20T02:50:53.039787+00:00",
+      "publication_date": null,
+      "retrieval_http_status": 200,
+      "raw_relative_url": "../../../../../tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/fed-table-corrected.html"
+    },
+    {
+      "id": "READING:BOOK-4:book4-article-039",
+      "kind": "published_interpretation_not_statistics",
+      "canonical_url": "https://getphios.com/articles/book4-article-039?locale=en#article-body",
+      "path": "content\\knowledge\\public\\successors\\book4-publication-v1\\visual-articles\\en\\book4-article-039.json",
+      "sha256": "386c4a6b604a963c99e7f2d8aa7b15be09962ad55dacbb54978ecbf6ad6f55f2",
+      "sourceVersion": "1.0.0",
+      "publishedAt": "2026-09-11T08:45:00.000Z",
+      "locator": "/sections/0/blocks/0",
+      "text": "Once civilizational resource networks exist, no place needs to produce every condition of survival and development on its own. Food, energy, materials, technology, and professional capability can move across regions, allowing different places to become conditions for one another through specialization and exchange. Cities can support populations far larger than nearby land could directly feed, and highly specialized industries can exist because resource networks recombine the capabilities of many places into larger circulation. Material civilizational capacity therefore comes from sustained relations rather than a single center owning everything.",
+      "permission": "Existing public published reading; own PHI OS interpretation, not national empirical proof"
+    }
+  ],
+  "hmdaEvidence": [
+    {
+      "year": "2024",
+      "sourcePath": "tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/hmda-aggregate-2024.json",
+      "sourceHash": "439f3a462163180af3a0b2ea45a4cdf80207bed1774a103659459aaa2d4fc2de",
+      "requestURL": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2024&loan_purposes=1&actions_taken=1,2,3",
+      "parameters": {
+        "actions_taken": "1,2,3",
+        "loan_purposes": "1"
+      },
+      "actionCounts": {
+        "2": 161054,
+        "3": 623942,
+        "1": 3534113
+      },
+      "numeratorDeniedAction3": 623942,
+      "denominatorActions1_2_3": 4319109,
+      "denial_share_in_defined_hmda_scope": 0.14446081356131554,
+      "unit": "share_of_reported_homepurchase_actionrecords_not_unique_people",
+      "inclusions": [
+        "1 loan originated",
+        "2 approved not accepted",
+        "3 denied"
+      ],
+      "exclusions": [
+        "4 withdrawn",
+        "5 incomplete",
+        "6 purchased",
+        "7 preapproval denied",
+        "8 preapproval approved not accepted",
+        "loanpurpose2/31/32/4/5 excluded"
+      ],
+      "unfiltered": [
+        "loan type",
+        "lien",
+        "occupancy",
+        "dwelling",
+        "open/closed-end",
+        "business purpose",
+        "income band",
+        "reporter institution type"
+      ],
+      "vintage": "DYNAMIC_API_CACHE; not the frozen annual Snapshot",
+      "initialPublicationDate": null,
+      "validConclusion": "Descriptive share in this defined record universe only; not all applications, same origination cohort or applicant probability",
+      "yearToYearCausation": "NOT_IDENTIFIED; applicant mix/reporting/revisions may differ"
+    },
+    {
+      "year": "2025",
+      "sourcePath": "tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/hmda-aggregate-2025.json",
+      "sourceHash": "a964491593a3a5c3789549cb04fb6e404f0922bb239cb3d0cc4c02bcc4ea2a93",
+      "requestURL": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2025&loan_purposes=1&actions_taken=1,2,3",
+      "parameters": {
+        "actions_taken": "1,2,3",
+        "loan_purposes": "1"
+      },
+      "actionCounts": {
+        "1": 3592033,
+        "2": 158865,
+        "3": 607818
+      },
+      "numeratorDeniedAction3": 607818,
+      "denominatorActions1_2_3": 4358716,
+      "denial_share_in_defined_hmda_scope": 0.13944886521627012,
+      "unit": "share_of_reported_homepurchase_actionrecords_not_unique_people",
+      "inclusions": [
+        "1 loan originated",
+        "2 approved not accepted",
+        "3 denied"
+      ],
+      "exclusions": [
+        "4 withdrawn",
+        "5 incomplete",
+        "6 purchased",
+        "7 preapproval denied",
+        "8 preapproval approved not accepted",
+        "loanpurpose2/31/32/4/5 excluded"
+      ],
+      "unfiltered": [
+        "loan type",
+        "lien",
+        "occupancy",
+        "dwelling",
+        "open/closed-end",
+        "business purpose",
+        "income band",
+        "reporter institution type"
+      ],
+      "vintage": "DYNAMIC_API_CACHE; not the frozen annual Snapshot",
+      "initialPublicationDate": null,
+      "validConclusion": "Descriptive share in this defined record universe only; not all applications, same origination cohort or applicant probability",
+      "yearToYearCausation": "NOT_IDENTIFIED; applicant mix/reporting/revisions may differ"
+    }
+  ],
+  "provenance": {
+    "data_version": "Saved raw SHA-bound fetch vintage; see independent reproduction",
+    "content_version": "1.0.0",
+    "validatedAt": "2026-10-20T03:32:29.728242+00:00",
+    "dynamicQueryExecuted": false,
+    "providerCalls": 0,
+    "production": false
+  },
+  "visualEvidence": {
+    "status": "NO_STATISTICAL_PROOF_FROM_ATLAS",
+    "existingVisuals": "Old mapped Atlas assets retained; optional explanation only, not new causal chart"
+  },
+  "limits": [
+    "Original observation publication metadata and full cohort alignment remain partial",
+    "HMDA year-to-year mix and original publication date unresolved; not synchronous with Q3 SLOOS",
+    "No source-bound automatic World answer route or full public scope handoff implemented"
+  ]
+}

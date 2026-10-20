@@ -1,0 +1,445 @@
+{
+  "at": "2026-10-20T04:37:03.898Z",
+  "tests": [
+    {
+      "name": "HMDA exact 2024",
+      "passed": true,
+      "detail": {
+        "metric": "denial_share_in_defined_hmda_scope",
+        "value": 0.14446081356131554,
+        "unit": "share",
+        "numerator": 623942,
+        "denominator": 4319109,
+        "formula": "action3 / (action1 + action2 + action3)",
+        "actionCounts": {
+          "1": 3534113,
+          "2": 161054,
+          "3": 623942
+        },
+        "loanPurpose": 1,
+        "excludedActions": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "population": "Reported home-purchase action records; not unique applicants or a matched application cohort"
+      }
+    },
+    {
+      "name": "HMDA exact 2025",
+      "passed": true,
+      "detail": {
+        "metric": "denial_share_in_defined_hmda_scope",
+        "value": 0.13944886521627012,
+        "unit": "share",
+        "numerator": 607818,
+        "denominator": 4358716,
+        "formula": "action3 / (action1 + action2 + action3)",
+        "actionCounts": {
+          "1": 3592033,
+          "2": 158865,
+          "3": 607818
+        },
+        "loanPurpose": 1,
+        "excludedActions": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "population": "Reported home-purchase action records; not unique applicants or a matched application cohort"
+      }
+    },
+    {
+      "name": "zero denominator rejected",
+      "passed": true
+    },
+    {
+      "name": "SLOOS independent balances",
+      "passed": true,
+      "detail": [
+        {
+          "metric": "net_tightening",
+          "questionCode": "Q13B",
+          "value": 2.0408163265306123,
+          "unit": "percent_respondent_banks",
+          "numerator": 1,
+          "denominator": 49,
+          "formula": "(tightened - eased) / respondents * 100",
+          "positiveCount": 1,
+          "oppositeCount": 0
+        },
+        {
+          "metric": "net_stronger_demand",
+          "questionCode": "Q14B",
+          "value": -10.204081632653061,
+          "unit": "percent_respondent_banks",
+          "numerator": -5,
+          "denominator": 49,
+          "formula": "(stronger - weaker) / respondents * 100",
+          "positiveCount": 5,
+          "oppositeCount": 10
+        }
+      ]
+    },
+    {
+      "name": "MY separate frequency/population",
+      "passed": true
+    },
+    {
+      "name": "missing year never fallback",
+      "passed": true
+    },
+    {
+      "name": "wrong country never substitute",
+      "passed": true
+    },
+    {
+      "name": "quality value null",
+      "passed": true
+    },
+    {
+      "name": "quality value -1",
+      "passed": true
+    },
+    {
+      "name": "quality value NaN",
+      "passed": true
+    },
+    {
+      "name": "quality value Infinity",
+      "passed": true
+    },
+    {
+      "name": "quality unit MYR",
+      "passed": true
+    },
+    {
+      "name": "quality frequency MONTHLY",
+      "passed": true
+    },
+    {
+      "name": "quality populationOrInstitutionCoverage every person",
+      "passed": true
+    },
+    {
+      "name": "quality rawArtifactHash 0000000000000000000000000000000000000000000000000000000000000000",
+      "passed": true
+    },
+    {
+      "name": "quality sourceUrl https://evil.example/data",
+      "passed": true
+    },
+    {
+      "name": "quality licenseState UNKNOWN",
+      "passed": true
+    },
+    {
+      "name": "quality qualityState STALE",
+      "passed": true
+    },
+    {
+      "name": "quality countryCode MYS",
+      "passed": true
+    },
+    {
+      "name": "quality observationPeriod 2025",
+      "passed": true
+    },
+    {
+      "name": "source revision requires explicit new hash admission",
+      "passed": true
+    },
+    {
+      "name": "wrong filters rejected",
+      "passed": true
+    },
+    {
+      "name": "API rejects country=USA&series=US_HMDA&period=2024&question=private",
+      "passed": true
+    },
+    {
+      "name": "API rejects country=USA&country=MYS&series=US_HMDA&period=2024",
+      "passed": true
+    },
+    {
+      "name": "API rejects country=ZZZ&series=US_HMDA&period=2024",
+      "passed": true
+    },
+    {
+      "name": "API rejects country=USA&series=GDP_TO_APPROVAL&period=2024",
+      "passed": true
+    },
+    {
+      "name": "API rejects country=USA&series=US_HMDA&period=tomorrow",
+      "passed": true
+    },
+    {
+      "name": "API rejects country=USA&series=US_HMDA&period=111111111111111111111111111111111111111111111111111",
+      "passed": true
+    },
+    {
+      "name": "GET only POST",
+      "passed": true
+    },
+    {
+      "name": "GET only PUT",
+      "passed": true
+    },
+    {
+      "name": "GET only PATCH",
+      "passed": true
+    },
+    {
+      "name": "GET only DELETE",
+      "passed": true
+    },
+    {
+      "name": "GET only HEAD",
+      "passed": true
+    },
+    {
+      "name": "GET only OPTIONS",
+      "passed": true
+    },
+    {
+      "name": "separate request scope, no cache leakage",
+      "passed": true
+    },
+    {
+      "name": "client HTTP 403",
+      "passed": true
+    },
+    {
+      "name": "client HTTP 404",
+      "passed": true
+    },
+    {
+      "name": "client HTTP 500",
+      "passed": true
+    },
+    {
+      "name": "client timeout",
+      "passed": true
+    },
+    {
+      "name": "invalid response shape",
+      "passed": true
+    },
+    {
+      "name": "API does not receive question",
+      "passed": true
+    },
+    {
+      "name": "unsafe source link blocked",
+      "passed": true
+    },
+    {
+      "name": "actual API answer pilot 1 zh-Hans",
+      "passed": true,
+      "detail": {
+        "state": "ANSWERED_BOUNDED",
+        "intent": "hmda"
+      }
+    },
+    {
+      "name": "actual API answer pilot 1 en",
+      "passed": true,
+      "detail": {
+        "state": "ANSWERED_BOUNDED",
+        "intent": "hmda"
+      }
+    },
+    {
+      "name": "actual API answer pilot 2 zh-Hans",
+      "passed": true,
+      "detail": {
+        "state": "ANSWERED_BOUNDED",
+        "intent": "standards"
+      }
+    },
+    {
+      "name": "actual API answer pilot 2 en",
+      "passed": true,
+      "detail": {
+        "state": "ANSWERED_BOUNDED",
+        "intent": "standards"
+      }
+    },
+    {
+      "name": "actual API answer pilot 3 zh-Hans",
+      "passed": true,
+      "detail": {
+        "state": "ANSWERED_BOUNDED",
+        "intent": "income"
+      }
+    },
+    {
+      "name": "actual API answer pilot 3 en",
+      "passed": true,
+      "detail": {
+        "state": "ANSWERED_BOUNDED",
+        "intent": "income"
+      }
+    },
+    {
+      "name": "actual API answer pilot 4 zh-Hans",
+      "passed": true,
+      "detail": {
+        "state": "PARTIAL",
+        "intent": "my-cohort"
+      }
+    },
+    {
+      "name": "actual API answer pilot 4 en",
+      "passed": true,
+      "detail": {
+        "state": "PARTIAL",
+        "intent": "my-cohort"
+      }
+    },
+    {
+      "name": "actual API answer pilot 5 zh-Hans",
+      "passed": true,
+      "detail": {
+        "state": "MECHANISM_ONLY",
+        "intent": "mechanism"
+      }
+    },
+    {
+      "name": "actual API answer pilot 5 en",
+      "passed": true,
+      "detail": {
+        "state": "MECHANISM_ONLY",
+        "intent": "mechanism"
+      }
+    },
+    {
+      "name": "actual API answer pilot 6 zh-Hans",
+      "passed": true,
+      "detail": {
+        "state": "PARTIAL",
+        "intent": "comparison"
+      }
+    },
+    {
+      "name": "actual API answer pilot 6 en",
+      "passed": true,
+      "detail": {
+        "state": "PARTIAL",
+        "intent": "comparison"
+      }
+    },
+    {
+      "name": "unseen U1 zh-Hans",
+      "passed": true,
+      "detail": "MECHANISM_ONLY"
+    },
+    {
+      "name": "unseen U1 en",
+      "passed": true,
+      "detail": "MECHANISM_ONLY"
+    },
+    {
+      "name": "unseen U2 zh-Hans",
+      "passed": true,
+      "detail": "PARTIAL"
+    },
+    {
+      "name": "unseen U2 en",
+      "passed": true,
+      "detail": "PARTIAL"
+    },
+    {
+      "name": "unseen U3 zh-Hans",
+      "passed": true,
+      "detail": "PARTIAL"
+    },
+    {
+      "name": "unseen U3 en",
+      "passed": true,
+      "detail": "PARTIAL"
+    },
+    {
+      "name": "unseen U4 zh-Hans",
+      "passed": true,
+      "detail": "ANSWERED_BOUNDED"
+    },
+    {
+      "name": "unseen U4 en",
+      "passed": true,
+      "detail": "ANSWERED_BOUNDED"
+    },
+    {
+      "name": "unseen U5 zh-Hans",
+      "passed": true,
+      "detail": "NOT_COVERED"
+    },
+    {
+      "name": "unseen U5 en",
+      "passed": true,
+      "detail": "NOT_COVERED"
+    },
+    {
+      "name": "unseen U6 zh-Hans",
+      "passed": true,
+      "detail": "PARTIAL"
+    },
+    {
+      "name": "unseen U6 en",
+      "passed": true,
+      "detail": "PARTIAL"
+    },
+    {
+      "name": "unseen U7 zh-Hans",
+      "passed": true,
+      "detail": "NOT_COVERED"
+    },
+    {
+      "name": "unseen U7 en",
+      "passed": true,
+      "detail": "NOT_COVERED"
+    },
+    {
+      "name": "unseen U8 zh-Hans",
+      "passed": true,
+      "detail": "PARTIAL"
+    },
+    {
+      "name": "unseen U8 en",
+      "passed": true,
+      "detail": "PARTIAL"
+    },
+    {
+      "name": "WB compatible SP.POP.TOTL",
+      "passed": true
+    },
+    {
+      "name": "WB compatible NY.GDP.MKTP.CD",
+      "passed": true
+    },
+    {
+      "name": "WB source failure semantics retained",
+      "passed": true
+    },
+    {
+      "name": "Ask remains input-only owner untouched",
+      "passed": true
+    },
+    {
+      "name": "unknown and unrelated questions never fixed answer fallback",
+      "passed": true
+    },
+    {
+      "name": "period remains public scope on retained intent",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "scope": "ACTUAL_API_HELPER_AND_COMPOSER; injected transport failures and source mutations are test fixtures",
+  "providerCalls": 0,
+  "productionWrites": 0
+}

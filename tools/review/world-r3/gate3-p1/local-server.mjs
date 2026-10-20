@@ -1,0 +1,12 @@
+import fs from 'node:fs';import path from 'node:path';import http from 'node:http';import {build} from 'esbuild';import {Miniflare} from 'miniflare';
+const d='tools/review/world-r3/gate3-p1/';
+export async function startWorldServer(){
+ await build({stdin:{contents:"import {onRequest} from './functions/api/world-observations.js';export default {fetch(request){return onRequest({request})}}",resolveDir:process.cwd()},bundle:true,platform:'browser',format:'esm',outfile:d+'world-api-worker.mjs',logLevel:'silent'});
+ const mf=new Miniflare({modules:true,scriptPath:path.resolve(d+'world-api-worker.mjs'),compatibilityDate:'2026-07-14'});await mf.ready;
+ const calls=[],root=process.cwd(),csp=fs.readFileSync('_headers','utf8').match(/Content-Security-Policy:\s*([^\r\n]+)/)?.[1];const server=http.createServer(async(req,res)=>{try{const u=new URL(req.url,'http://local');if(u.pathname==='/api/world-observations'){
+  const record={method:req.method,path:u.pathname,publicQuery:Object.fromEntries(u.searchParams)};calls.push(record);const result=await mf.dispatchFetch('http://edge.local'+u.pathname+u.search,{method:req.method});record.status=result.status;const txt=await result.text();record.response=JSON.parse(txt);res.writeHead(result.status,Object.fromEntries(result.headers));res.end(txt);return;
+ }if(u.pathname.startsWith('/api/')){res.writeHead(503,{'content-type':'application/json'});return res.end('{"ok":false,"code":"LOCAL_NO_ACCOUNT_EXECUTION"}');}
+ let file=path.resolve(root,'.'+decodeURIComponent(u.pathname));if(!file.startsWith(root+path.sep))return res.writeHead(403).end();if(fs.existsSync(file)&&fs.statSync(file).isDirectory())file=path.join(file,'index.html');if(!fs.existsSync(file))return res.writeHead(404).end();res.writeHead(200,{'content-type':({'.js':'text/javascript','.mjs':'text/javascript','.html':'text/html','.json':'application/json','.css':'text/css','.svg':'image/svg+xml','.png':'image/png'})[path.extname(file)]||'application/octet-stream','cache-control':'no-store','content-security-policy':csp});res.end(fs.readFileSync(file));
+ }catch(e){res.writeHead(500,{'content-type':'application/json'});res.end('{"ok":false,"code":"LOCAL_TRANSPORT_ERROR"}')}});await new Promise(r=>server.listen(0,'127.0.0.1',r));return {origin:'http://127.0.0.1:'+server.address().port,calls,stop:async()=>{server.close();await mf.dispose()}};
+}
+if(process.argv.includes('--serve')){const s=await startWorldServer();console.log(s.origin);process.on('SIGINT',()=>s.stop().then(()=>process.exit(0)));}

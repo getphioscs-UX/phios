@@ -99,7 +99,16 @@ assert.equal(authority.mobileNavigation.separateMobileNavigationAuthorityCreated
 // W3 — Search is a shell entry into the existing operational Search surface, never a second runtime.
 assert.match(shell, /action=\"\/search\/\" method=\"get\" role=\"search\"/);
 assert.match(shell, /type=\"search\" name=\"q\"/);
-assert.equal(/fetch\([^)]*search/i.test(shell), false, 'shell must not fetch or recreate Search');
+// Match URL arguments, not identifiers such as URLSearchParams later in the call.
+const fetchesSearch = source => /\bfetch\s*\(\s*['"`]\/?(?:api\/)?search(?:[/?#'"`])/i.test(source);
+assert.equal(fetchesSearch("fetch('/api/search?q=x')"),true);
+assert.equal(fetchesSearch("fetch('/search/?q=x')"),true);
+assert.equal(fetchesSearch("fetch('/api/client-intent-route?'+new URLSearchParams({q}))"),false);
+assert.equal(fetchesSearch(shell), false, 'shell must not fetch or recreate Search');
+const searchNavigation=shell.split('function installSearchDrawerNavigation(')[1]?.split('function installAskDrawerNavigation(')[0];
+assert.ok(searchNavigation,'Search navigation boundary must be inspectable');
+assert.equal(/\bfetch\s*\(|XMLHttpRequest|\.ajax\s*\(/.test(searchNavigation),false,'Search drawer must navigate without executing search requests');
+assert.ok(searchNavigation.includes('location.assign(destination(input?.value))'),'Search drawer must hand off navigation');
 assert.equal(authority.search.secondSearchAuthorityCreated, false);
 assert.equal(contract.rules.shellMayExecuteSearchRuntime, false);
 

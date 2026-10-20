@@ -1,0 +1,8 @@
+# Review-only release contract · no scheduler activated
+Use existing Answer Schema and source governance, not a new runtime. Per observation retain source ID, original endpoint, raw SHA, JSON/cell locator, region/product/population, metric/unit/base/seasonal adjustment/frequency, observation_period, publication_date, fetched_at, revised_at, effective_date, licence and immutable vintage. Unknown dates remain null with missing_reason, not copied from fetch time.
+
+Policy decisions update on event/effective date; overnight data on published trading day; mortgage flows monthly with source-specific lag; SLOOS quarterly; HMDA calendar-year release plus revisions; income by survey release cycle (monthly income *level* is not monthly frequency). Expected date is an alert, not proof of new release. No all-series daily polling.
+
+New bytes receive new SHA/vintage, previous answers stay pinned. Compare schema and definitions before activating revised fact; reject changed unit/base/population/series identity, do not overwrite old receipt. SOURCE updates facts; ANSWER separately governs interpretation. Missing publication metadata allows labelled historical fact only, not currentness.
+
+403 access_denied, 429 rate_limited, licence_unknown, source_schema_changed, stale_data, missing_series, uncomparable, error are distinct nonzero states. Country/year mismatch, zero cohort denominator or unknown formula reject national claim. MY probability null is not 0%. No automatic retries to bypass restrictions. No private account/Profile/financial text in public external request, URL or persisted logs; only allowlisted public source identifiers. Failure test fixtures do not prove product enforcement before Gate3.

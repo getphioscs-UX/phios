@@ -190,3 +190,15 @@ Bug fix and contract successor: account continuity and exact revision consumptio
 ## Recovery
 
 No uncertain paid, send or production operation has been started. Previous browser sessions 10544, 28544, 58637 and 19069 have completed; do not repeat them as uncertain work. Browser session 68941 was started before latest UI text changes; reconcile its result, then rerun affected checks. Next work: complete the matrix edges, tool mapping/export, exact Will assembly/export bridge and independent professional review persistence. SQL purpose-grant proposal was moved by the concurrent migration owner into db/migration-candidates/0019_financial_purpose_grants.sql; local tests explicitly load it. Do not move it back to the formal migration directory. Do not alter unrelated concurrent work or frozen evidence.
+
+## Financial Publication R3.1 · 2026-10-20 local candidate checkpoint
+
+R3.1 uses independent FINANCE_PUBLICATION_R3_1_CANDIDATE / 20-page Paid presentation and job identity. Existing Finance R3 Paid16 / Free8, historical HTML/PDF, report persistence, source grants, Will preparation and other-window changes are retained.
+
+Actual evidence: 18 full bilingual HTML/PDF candidates, 288 core A4 pages plus 30 conditional appendix pages; six representative PDFs add 30 sample pages. Forty actual old/new page comparisons are included. Core states Complete / Shortfall / Missing use the same saved version across both languages and Free8/Paid20. Joint, explicit-scenario and long-appendix samples are additionally rendered.
+
+Latest financial regression: 90 tests, 85 passed, exactly the five pre-existing rental exceptions and no new failure. Local Functions bundle compiled; existing nodejs_compat warnings remain in the compile receipt. Production runtime was not exercised. Provider calls/cost, payments, external sends, production writes, commit/push/deploy: all zero.
+
+Review and complete W0-W13 execution record: tools/review/financial-publication-r3-1/HANDOFF.html and EXECUTION-STATE.md. Machine receipts, field/source-owner gaps, output SHA manifest and reproduction scripts are linked there. PRIVATE_REFERENCE_NOT_MOUNTED: only the anonymous sixteen-page crosswalk was consumed. No private PDF was copied or uploaded.
+
+Human acceptance of the candidate, any new-order replacement, appendix entitlements, real subject-consent integration, paid model/budget admission, Stripe and production release remain separate admissions. Unsupported field subdivisions remain explicit in FIELD-OWNER-MATRIX.json. This checkpoint records the publication candidate and preserves earlier preparation-workstream receipts.

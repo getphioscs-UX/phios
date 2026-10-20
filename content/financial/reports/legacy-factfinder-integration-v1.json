@@ -1,0 +1,762 @@
+{
+  "schemaVersion": "PHIOS-FINANCIAL-LEGACY-REFERENCE-CROSSWALK-R3.1",
+  "classification": "DESIGN_METADATA_ONLY_NO_CUSTOMER_VALUES",
+  "source": {
+    "kind": "USER_PRIVATE_PDF",
+    "pageCountObserved": 16,
+    "hasSensitiveFillableForms": true,
+    "hasTableOfContentsReferencesToAbsentPages": true,
+    "excludeRawBytesFromRepo": true,
+    "excludeActualClientValuesFromFixtures": true
+  },
+  "target": {
+    "productId": "COM-REPORT-FINANCIAL-FULL",
+    "candidateCorePages": 20,
+    "currentEngineBaselinePaid": 16,
+    "currentEngineBaselineFree": 8,
+    "paidPriceMYR": 69,
+    "includedFollowupQuestions": 4,
+    "overallProviderCostUSDLimit": 5,
+    "enableProviderCallsThisTask": false
+  },
+  "legacyPages": [
+    {
+      "sourcePage": 1,
+      "structuralPurpose": "allocation_concept",
+      "sourceFieldKinds": [
+        "planning_allocation_concept",
+        "income_uses"
+      ],
+      "paidPageIds": [
+        "FPR3-P02",
+        "FPR3-P05"
+      ],
+      "appendixIds": [],
+      "restrictions": [
+        "DECLARED_INTENT_REQUIRED",
+        "NOT_NORMATIVE_RATIO"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    },
+    {
+      "sourcePage": 2,
+      "structuralPurpose": "planning_scope",
+      "sourceFieldKinds": [
+        "planning_scope",
+        "review_cycle",
+        "reader_information"
+      ],
+      "paidPageIds": [
+        "FPR3-P02",
+        "FPR3-P20"
+      ],
+      "appendixIds": [],
+      "restrictions": [
+        "NO_PROFESSIONAL_SIGNATURE_CARRYOVER"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    },
+    {
+      "sourcePage": 3,
+      "structuralPurpose": "consent_and_household",
+      "sourceFieldKinds": [
+        "individual_or_joint_scope",
+        "customer_declaration",
+        "authorization_state"
+      ],
+      "paidPageIds": [
+        "FPR3-P03",
+        "FPR3-P19",
+        "FPR3-P20"
+      ],
+      "appendixIds": [],
+      "restrictions": [
+        "THIRD_PARTY_CONSENT_REQUIRED",
+        "NO_SIGNATURE_IMPORT"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    },
+    {
+      "sourcePage": 4,
+      "structuralPurpose": "contents_incomplete",
+      "sourceFieldKinds": [
+        "table_of_contents",
+        "declared_section_titles"
+      ],
+      "paidPageIds": [
+        "FPR3-P01",
+        "FPR3-P20"
+      ],
+      "appendixIds": [],
+      "restrictions": [
+        "FILE_ENDS_AT_PAGE_16",
+        "PAGES_17_20_NOT_PROVIDED"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    },
+    {
+      "sourcePage": 5,
+      "structuralPurpose": "goal_objectives",
+      "sourceFieldKinds": [
+        "goal_importance_score",
+        "goal_priority_rank",
+        "goal_time_horizon",
+        "goal_category"
+      ],
+      "paidPageIds": [
+        "FPR3-P10",
+        "FPR3-P15",
+        "FPR3-P16"
+      ],
+      "appendixIds": [
+        "FIN-A-GOALS"
+      ],
+      "restrictions": [
+        "DO_NOT_EQUIVALENT_SCORE_TO_RANK",
+        "NO_AUTOMATIC_GOALS"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    },
+    {
+      "sourcePage": 6,
+      "structuralPurpose": "bank_and_deposit_factfinder",
+      "sourceFieldKinds": [
+        "deposit_product_type",
+        "deposit_rate",
+        "deposit_maturity",
+        "deposit_ownership_share",
+        "currency"
+      ],
+      "paidPageIds": [
+        "FPR3-P07",
+        "FPR3-P08",
+        "FPR3-P09"
+      ],
+      "appendixIds": [
+        "FIN-A-BANK"
+      ],
+      "restrictions": [
+        "ACCOUNT_IDENTIFIERS_NEVER_EXPORTED",
+        "OWNERSHIP_CONSENT_REQUIRED",
+        "ACCESS_RESTRICTION_CHECK"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    },
+    {
+      "sourcePage": 7,
+      "structuralPurpose": "investments_unit_trust_prs",
+      "sourceFieldKinds": [
+        "investment_instrument",
+        "cost_basis",
+        "current_value",
+        "acquisition_date",
+        "holder",
+        "investment_class"
+      ],
+      "paidPageIds": [
+        "FPR3-P07",
+        "FPR3-P08"
+      ],
+      "appendixIds": [
+        "FIN-A-INVESTMENTS"
+      ],
+      "restrictions": [
+        "NO_TOTAL_RETURN_INFERENCE",
+        "NO_PRODUCT_ADVICE"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    },
+    {
+      "sourcePage": 8,
+      "structuralPurpose": "properties",
+      "sourceFieldKinds": [
+        "property_acquisition",
+        "property_cost",
+        "market_valuation",
+        "tenure",
+        "linked_property_owner"
+      ],
+      "paidPageIds": [
+        "FPR3-P07",
+        "FPR3-P08",
+        "FPR3-P11"
+      ],
+      "appendixIds": [
+        "FIN-A-PROPERTY"
+      ],
+      "restrictions": [
+        "NO_FULL_ADDRESS_EXPORT",
+        "LINK_LOANS_BY_ID"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    },
+    {
+      "sourcePage": 9,
+      "structuralPurpose": "insurance_protection_part1",
+      "sourceFieldKinds": [
+        "policyholder",
+        "insured_person",
+        "premium_frequency",
+        "insured_event",
+        "policy_cash_value",
+        "nomination"
+      ],
+      "paidPageIds": [
+        "FPR3-P13",
+        "FPR3-P14"
+      ],
+      "appendixIds": [
+        "FIN-A-POLICIES"
+      ],
+      "restrictions": [
+        "SEPARATE_EVENTS",
+        "NO_AUTOMATIC_PROTECTION_GAP"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    },
+    {
+      "sourcePage": 10,
+      "structuralPurpose": "insurance_protection_part2",
+      "sourceFieldKinds": [
+        "policyholder",
+        "insured_person",
+        "premium_frequency",
+        "insured_event",
+        "policy_cash_value",
+        "nomination"
+      ],
+      "paidPageIds": [
+        "FPR3-P13",
+        "FPR3-P14"
+      ],
+      "appendixIds": [
+        "FIN-A-POLICIES"
+      ],
+      "restrictions": [
+        "SEPARATE_EVENTS",
+        "NO_AUTOMATIC_PROTECTION_GAP"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    },
+    {
+      "sourcePage": 11,
+      "structuralPurpose": "other_assets",
+      "sourceFieldKinds": [
+        "equities",
+        "precious_metals",
+        "vehicles",
+        "other_assets",
+        "cost_and_value"
+      ],
+      "paidPageIds": [
+        "FPR3-P07",
+        "FPR3-P08"
+      ],
+      "appendixIds": [
+        "FIN-A-INVESTMENTS"
+      ],
+      "restrictions": [
+        "CLASSIFY_LIQUIDITY_INDEPENDENTLY",
+        "NO_TOTAL_RETURN_INFERENCE"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    },
+    {
+      "sourcePage": 12,
+      "structuralPurpose": "liabilities",
+      "sourceFieldKinds": [
+        "borrower",
+        "loan_rate",
+        "monthly_payment",
+        "original_loan",
+        "outstanding",
+        "linked_property"
+      ],
+      "paidPageIds": [
+        "FPR3-P05",
+        "FPR3-P07",
+        "FPR3-P11",
+        "FPR3-P12"
+      ],
+      "appendixIds": [
+        "FIN-A-LOANS"
+      ],
+      "restrictions": [
+        "NO_DOUBLE_COUNT_PAYMENTS",
+        "ORIGINAL_NE_OUTSTANDING"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    },
+    {
+      "sourcePage": 13,
+      "structuralPurpose": "monthly_income_and_expenses",
+      "sourceFieldKinds": [
+        "income_by_household_person",
+        "gross_net_deductions",
+        "expense_by_payer",
+        "expense_categories"
+      ],
+      "paidPageIds": [
+        "FPR3-P03",
+        "FPR3-P04",
+        "FPR3-P05"
+      ],
+      "appendixIds": [
+        "FIN-A-CASHFLOW"
+      ],
+      "restrictions": [
+        "GROSS_NET_INDEPENDENT",
+        "INTERNAL_TRANSFER_DEDUPLICATION"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    },
+    {
+      "sourcePage": 14,
+      "structuralPurpose": "net_worth_statement",
+      "sourceFieldKinds": [
+        "asset_liability_statement",
+        "liquid_asset_subset",
+        "short_long_liabilities",
+        "net_worth"
+      ],
+      "paidPageIds": [
+        "FPR3-P02",
+        "FPR3-P07",
+        "FPR3-P09",
+        "FPR3-P11"
+      ],
+      "appendixIds": [
+        "FIN-A-RATIOS"
+      ],
+      "restrictions": [
+        "CURRENCY_ASOF_MATCH",
+        "NO_ASSET_SUBSET_DOUBLE_COUNT"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    },
+    {
+      "sourcePage": 15,
+      "structuralPurpose": "spending_scenarios_and_ratios",
+      "sourceFieldKinds": [
+        "expense_baseline",
+        "expense_adjustment_scenario",
+        "ratio_definitions",
+        "historical_benchmarks"
+      ],
+      "paidPageIds": [
+        "FPR3-P05",
+        "FPR3-P06",
+        "FPR3-P12",
+        "FPR3-P14",
+        "FPR3-P15",
+        "FPR3-P16",
+        "FPR3-P17"
+      ],
+      "appendixIds": [
+        "FIN-A-SCENARIOS",
+        "FIN-A-RATIOS"
+      ],
+      "restrictions": [
+        "NOT_OFFICIAL_BENCHMARK",
+        "SCENARIO_NOT_FORECAST",
+        "EXPLICIT_AUTHOR"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    },
+    {
+      "sourcePage": 16,
+      "structuralPurpose": "tax_preparation_historical",
+      "sourceFieldKinds": [
+        "assessment_year",
+        "tax_income_evidence",
+        "relief_candidate_evidence",
+        "tax_payment_evidence"
+      ],
+      "paidPageIds": [
+        "FPR3-P18"
+      ],
+      "appendixIds": [
+        "FIN-A-TAX"
+      ],
+      "restrictions": [
+        "HISTORICAL_YEAR_ONLY",
+        "NO_UNAPPROVED_TAX_CONCLUSION"
+      ],
+      "copyCustomerValues": false,
+      "copyRawFormFields": false
+    }
+  ],
+  "paidPageAddenda": [
+    {
+      "pageId": "FPR3-P01",
+      "ordinal": 1,
+      "layoutPreset": "FULL_BLEED_COVER",
+      "requiredDiagramTypes": [
+        "report_scope",
+        "version",
+        "date"
+      ],
+      "legacySourcePageRefs": [
+        4
+      ],
+      "prohibitedClaims": [
+        "NO_PERSONAL_FULL_ID"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P02",
+      "ordinal": 2,
+      "layoutPreset": "EDITORIAL_OVERVIEW",
+      "requiredDiagramTypes": [
+        "income_expense_net",
+        "asset_liability_bridge",
+        "declared_vs_actual_if_authorized"
+      ],
+      "legacySourcePageRefs": [
+        1,
+        2,
+        14
+      ],
+      "prohibitedClaims": [
+        "NO_AUTO_ALLOCATION_RATIO"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P03",
+      "ordinal": 3,
+      "layoutPreset": "HOUSEHOLD_AND_RESPONSIBILITY",
+      "requiredDiagramTypes": [
+        "person_responsibility_graph",
+        "payer_category_matrix"
+      ],
+      "legacySourcePageRefs": [
+        3,
+        13
+      ],
+      "prohibitedClaims": [
+        "NO_UNCONSENTED_ADULT"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P04",
+      "ordinal": 4,
+      "layoutPreset": "INCOME_SPENDING_GROUPED",
+      "requiredDiagramTypes": [
+        "gross_to_net_if_supported",
+        "income_by_person_and_type"
+      ],
+      "legacySourcePageRefs": [
+        13
+      ],
+      "prohibitedClaims": [
+        "NO_DOUBLE_PAYROLL_DEDUCTION"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P05",
+      "ordinal": 5,
+      "layoutPreset": "CASHFLOW_WATERFALL",
+      "requiredDiagramTypes": [
+        "net_income_to_cash_remain",
+        "expenses_by_category_and_payer"
+      ],
+      "legacySourcePageRefs": [
+        1,
+        12,
+        13,
+        15
+      ],
+      "prohibitedClaims": [
+        "NO_LOAN_DOUBLE_COUNT"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P06",
+      "ordinal": 6,
+      "layoutPreset": "ACTUAL_VS_DECLARED_SCENARIO",
+      "requiredDiagramTypes": [
+        "asof_timeline_or_before_after",
+        "fact_change_ledger"
+      ],
+      "legacySourcePageRefs": [
+        15
+      ],
+      "prohibitedClaims": [
+        "NO_SYNTHETIC_HISTORY"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P07",
+      "ordinal": 7,
+      "layoutPreset": "NET_WORTH_BRIDGE",
+      "requiredDiagramTypes": [
+        "total_assets_minus_liabilities",
+        "owner_share_and_short_long_debt"
+      ],
+      "legacySourcePageRefs": [
+        6,
+        7,
+        8,
+        11,
+        12,
+        14
+      ],
+      "prohibitedClaims": [
+        "NO_FULL_ASSET_ASSUMPTION"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P08",
+      "ordinal": 8,
+      "layoutPreset": "DONUT_AND_COST_VALUE",
+      "requiredDiagramTypes": [
+        "exclusive_asset_allocation",
+        "cost_vs_market_value_if_supported"
+      ],
+      "legacySourcePageRefs": [
+        6,
+        7,
+        8,
+        11
+      ],
+      "prohibitedClaims": [
+        "NO_UNREALIZED_TO_TOTAL_RETURN"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P09",
+      "ordinal": 9,
+      "layoutPreset": "RESERVE_AND_MATURITY",
+      "requiredDiagramTypes": [
+        "two_coverage_denominators",
+        "deposit_maturity_access"
+      ],
+      "legacySourcePageRefs": [
+        6,
+        14
+      ],
+      "prohibitedClaims": [
+        "NO_RESTRICTED_CASH_AUTOMATIC"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P10",
+      "ordinal": 10,
+      "layoutPreset": "GOAL_PRIORITY_AND_FUNDING",
+      "requiredDiagramTypes": [
+        "importance_vs_time_matrix",
+        "assigned_funds_progress"
+      ],
+      "legacySourcePageRefs": [
+        5
+      ],
+      "prohibitedClaims": [
+        "OVERFUNDED_EXPLICIT",
+        "DUPLICATE_ALLOCATION_FLAG"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P11",
+      "ordinal": 11,
+      "layoutPreset": "LIABILITIES_AND_LOAN_FACTS",
+      "requiredDiagramTypes": [
+        "debt_by_type",
+        "borrower_rate_payment_matrix"
+      ],
+      "legacySourcePageRefs": [
+        8,
+        12,
+        14
+      ],
+      "prohibitedClaims": [
+        "NO_FUTURE_LOAN_WITHOUT_TERM"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P12",
+      "ordinal": 12,
+      "layoutPreset": "SHOCK_CAPACITY",
+      "requiredDiagramTypes": [
+        "saved_scenario_comparison_or_evidence_map",
+        "current_cash_coverage"
+      ],
+      "legacySourcePageRefs": [
+        12,
+        15
+      ],
+      "prohibitedClaims": [
+        "NO_UNDECLARED_SHOCK",
+        "UNKNOWN_GOAL_NOT_ZERO"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P13",
+      "ordinal": 13,
+      "layoutPreset": "POLICY_EVENT_MATRIX",
+      "requiredDiagramTypes": [
+        "person_by_insured_event",
+        "premium_due_and_nominee_status"
+      ],
+      "legacySourcePageRefs": [
+        9,
+        10
+      ],
+      "prohibitedClaims": [
+        "NO_POLICY_SUM_AS_FAMILY_COVER"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P14",
+      "ordinal": 14,
+      "layoutPreset": "RATIO_EVIDENCE_PROFILE",
+      "requiredDiagramTypes": [
+        "validated_ratio_by_formula",
+        "evidence_status_compass"
+      ],
+      "legacySourcePageRefs": [
+        9,
+        10,
+        15
+      ],
+      "prohibitedClaims": [
+        "NO_LEGACY_THRESHOLD_RISK_RATING"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P15",
+      "ordinal": 15,
+      "layoutPreset": "PRIORITY_AND_EVIDENCE",
+      "requiredDiagramTypes": [
+        "declared_priority_cards",
+        "cause_source_and_missing_graph"
+      ],
+      "legacySourcePageRefs": [
+        5,
+        15
+      ],
+      "prohibitedClaims": [
+        "NO_PRODUCT_RECOMMENDATION"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P16",
+      "ordinal": 16,
+      "layoutPreset": "DEPENDENCY_ROADMAP",
+      "requiredDiagramTypes": [
+        "fact_to_goal_to_review_arrows",
+        "real_milestones_if_declared"
+      ],
+      "legacySourcePageRefs": [
+        5,
+        15
+      ],
+      "prohibitedClaims": [
+        "NO_INVENTED_DATES"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P17",
+      "ordinal": 17,
+      "layoutPreset": "PREPARATION_TRACKING",
+      "requiredDiagramTypes": [
+        "review_status_swimlanes",
+        "evidence_and_owner_index"
+      ],
+      "legacySourcePageRefs": [
+        15
+      ],
+      "prohibitedClaims": [
+        "NO_IMPLIED_COMPLETION"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P18",
+      "ordinal": 18,
+      "layoutPreset": "TAX_RECORD_COVERAGE",
+      "requiredDiagramTypes": [
+        "year_and_evidence_matrix",
+        "rule_status_provenance"
+      ],
+      "legacySourcePageRefs": [
+        16
+      ],
+      "prohibitedClaims": [
+        "UNAPPROVED_YA_BLOCKS_TAX_CALC"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P19",
+      "ordinal": 19,
+      "layoutPreset": "ESTATE_READINESS",
+      "requiredDiagramTypes": [
+        "asset_role_nomination_will_wishes",
+        "document_status"
+      ],
+      "legacySourcePageRefs": [
+        3
+      ],
+      "prohibitedClaims": [
+        "NO_LEGAL_WILL_WITHOUT_APPROVED_TEMPLATE"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    },
+    {
+      "pageId": "FPR3-P20",
+      "ordinal": 20,
+      "layoutPreset": "METHODS_AND_PROVENANCE",
+      "requiredDiagramTypes": [
+        "fact_to_calculation_to_chart_flow",
+        "certainty_and_scope_matrix"
+      ],
+      "legacySourcePageRefs": [
+        2,
+        3,
+        4
+      ],
+      "prohibitedClaims": [
+        "TECHNICAL_HASH_IN_DETAIL"
+      ],
+      "plannedStatus": "R3_1_REVIEW_CANDIDATE_NOT_DEPLOYED"
+    }
+  ],
+  "freePageCountPolicy": {
+    "existing": 8,
+    "optionalCandidate": 6,
+    "mayChangeExistingWithoutHumanApproval": false
+  },
+  "legalTaxAndProfessionalConclusionsRequireOwnerApproval": true,
+  "noCommitPushDeployOrProductionWrite": true
+}

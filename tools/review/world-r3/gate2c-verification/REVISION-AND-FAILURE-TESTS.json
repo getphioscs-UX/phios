@@ -1,0 +1,162 @@
+{
+  "mode": "EXECUTED_REVIEW_CONTRACT_FIXTURE_NOT_PRODUCT_ENFORCEMENT",
+  "tests": [
+    {
+      "name": "historical date missing",
+      "inputPatch": {},
+      "expected": "HISTORICAL_FACT_ONLY",
+      "actual": "HISTORICAL_FACT_ONLY",
+      "passed": true
+    },
+    {
+      "name": "403",
+      "inputPatch": {
+        "http": 403
+      },
+      "expected": "access_denied",
+      "actual": "access_denied",
+      "passed": true
+    },
+    {
+      "name": "429",
+      "inputPatch": {
+        "http": 429
+      },
+      "expected": "rate_limited",
+      "actual": "rate_limited",
+      "passed": true
+    },
+    {
+      "name": "licence",
+      "inputPatch": {
+        "licence": false
+      },
+      "expected": "license_unknown",
+      "actual": "license_unknown",
+      "passed": true
+    },
+    {
+      "name": "schema",
+      "inputPatch": {
+        "schema": 2
+      },
+      "expected": "source_schema_changed",
+      "actual": "source_schema_changed",
+      "passed": true
+    },
+    {
+      "name": "country",
+      "inputPatch": {
+        "region": "USA"
+      },
+      "expected": "country_mismatch",
+      "actual": "country_mismatch",
+      "passed": true
+    },
+    {
+      "name": "period",
+      "inputPatch": {
+        "period": "2025"
+      },
+      "expected": "year_mismatch",
+      "actual": "year_mismatch",
+      "passed": true
+    },
+    {
+      "name": "unit",
+      "inputPatch": {
+        "unit": "count"
+      },
+      "expected": "uncomparable",
+      "actual": "uncomparable",
+      "passed": true
+    },
+    {
+      "name": "population",
+      "inputPatch": {
+        "population": "HMDA_actions"
+      },
+      "expected": "population_mismatch",
+      "actual": "population_mismatch",
+      "passed": true
+    },
+    {
+      "name": "metric",
+      "inputPatch": {
+        "metric": "denial_share"
+      },
+      "expected": "metric_mismatch",
+      "actual": "metric_mismatch",
+      "passed": true
+    },
+    {
+      "name": "missing",
+      "inputPatch": {
+        "series": false
+      },
+      "expected": "missing_series",
+      "actual": "missing_series",
+      "passed": true
+    },
+    {
+      "name": "stale",
+      "inputPatch": {
+        "stale": true
+      },
+      "expected": "stale_data",
+      "actual": "stale_data",
+      "passed": true
+    },
+    {
+      "name": "formula",
+      "inputPatch": {
+        "formula": "unknown"
+      },
+      "expected": "unknown_formula",
+      "actual": "unknown_formula",
+      "passed": true
+    },
+    {
+      "name": "zero denominator",
+      "inputPatch": {
+        "probability": true,
+        "denominator": 0
+      },
+      "expected": "NOT_MEASURABLE_FROM_AVAILABLE_DATA",
+      "actual": "NOT_MEASURABLE_FROM_AVAILABLE_DATA",
+      "passed": true
+    },
+    {
+      "name": "amount not cohort",
+      "inputPatch": {
+        "probability": true,
+        "denominator": 100
+      },
+      "expected": "NOT_MEASURABLE_FROM_AVAILABLE_DATA",
+      "actual": "NOT_MEASURABLE_FROM_AVAILABLE_DATA",
+      "passed": true
+    },
+    {
+      "name": "private",
+      "inputPatch": {
+        "private": true
+      },
+      "expected": "PRIVATE_DATA_NOT_PUBLIC_SOURCE",
+      "actual": "PRIVATE_DATA_NOT_PUBLIC_SOURCE",
+      "passed": true
+    },
+    {
+      "name": "revision keeps old answer hash pinned",
+      "expected": "v1 unchanged, v2 distinct",
+      "passed": true,
+      "versions": {
+        "v1": "1c88995e4ddd843d4b62d48a48fc5d67dd548eef506929e8edbf55fafd2a73d8",
+        "v2": "f0f3615cbf67b1327521b3a34cd99a8e1cd1c46dfe2be2d54601d17d94e6a59c"
+      }
+    }
+  ],
+  "passed": true,
+  "productGateImplemented": false,
+  "schedulerActivated": false,
+  "productionWrites": 0
+}

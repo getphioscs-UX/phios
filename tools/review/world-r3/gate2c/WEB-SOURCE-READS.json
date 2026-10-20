@@ -1,0 +1,241 @@
+{
+  "at": "2026-10-20T02:53:09.387Z",
+  "method": "web official primary pages / searches; HTTP status not exposed by web tool unless stated",
+  "records": [
+    {
+      "id": "BNM_OPR",
+      "url": "https://financialmarkets.bnm.gov.my/data-download-opr",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "BNM page displays OPR 2.75 percent as of 2026-09-03 and MYOR 2.75 as of 2026-10-19. Different instrument and date. Direct Python download got 403; do not invent original-byte hash."
+    },
+    {
+      "id": "BNM_MHS",
+      "url": "https://www.bnm.gov.my/-/sorotan-statistik-bulanan-untuk-jun-2026",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Current June2026 contents:1.10 Loan/Financing Applied by Purpose,1.12 Loan/Financing Approved,1.14 Disbursed by Purpose. 2022 change revises from July2021; rolling six-month refresh and annual twelve-month refresh. October2025 new housing price buckets; old1.19c/1.19.6a/1.22c discontinued."
+    },
+    {
+      "id": "BNM_LICENSE",
+      "url": "https://www.bnm.gov.my/terms-of-use-bnm-datasets",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "BNM-primary-compiler datasets allow commercial/noncommercial reuse, attribution, link to terms, notice, no endorsement/logos; third-party rights excluded. General web articles are not included."
+    },
+    {
+      "id": "BNM_RRF",
+      "url": "https://www.bnm.gov.my/-/pd-rrf-mar26",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Issued2026-03-27; phase1 effective2026-07-01, phase2 2028-01-02. Strengthens prompt floating-retail instalment adjustments and clear notifications. Avoid repeating old blanket delay explanation for current rules."
+    },
+    {
+      "id": "MY_DEBT",
+      "url": "https://data.gov.my/dashboard/household-debt",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "CCRIS aggregated monthly borrowing flows by purpose, value RM, applied/approved/disbursed. Page shows June2026, updated July31 with expected August31 update; stale-looking schedule is not current data proof."
+    },
+    {
+      "id": "DOSM_CPI",
+      "url": "https://open.dosm.gov.my/data-catalogue/cpi_headline",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "National monthly CPI; 2010=100; representative basket not each household. CC BY4.0. Dataset page asofSep2026 updated2026-10-19 next2026-11-19; historical per-observation release dates not retained in downloaded CSV."
+    },
+    {
+      "id": "DOSM_INCOME",
+      "url": "https://data.gov.my/data-catalogue/hh_income",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Mean/median monthly gross household income, not individual take-home pay. Exact current licence and survey caveats checked separately in registry; raw API has2022 and2024 values."
+    },
+    {
+      "id": "FED_SLOOS",
+      "url": "https://www.federalreserve.gov/data/sloos/sloos-202410.htm",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "October survey concerns generally2024Q3. Domestic bank response sample, not loan universe. Standards net tightened minus eased; demand net stronger minus weaker. Publication lastupdate2024-11-12."
+    },
+    {
+      "id": "HMDA_2025",
+      "url": "https://www.ffiec.gov/news/press-releases/2026/an-06-23",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Release2026-06-23 states2025 transactions,4782 reporting institutions, snapshot asofJune1 2026. Data portal search showed June2 freeze. Preserve discrepancy; do not silently select vintage. No2025 observations downloaded this pass."
+    },
+    {
+      "id": "HMDA_DICT",
+      "url": "https://ffiec.cfpb.gov/documentation/publications/loan-level-datasets/lar-data-fields",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "action_taken1 originated,2 approved not accepted,3 denied,4 withdrawn,5 incomplete,6 purchased,7 preapproval denied,8 preapproval approved not accepted. Annual reporting population not same application-origin cohort."
+    },
+    {
+      "id": "FHFA",
+      "url": "https://www.fhfa.gov/house-price-index",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Official purchase-only monthly workbook fetched; current file is recent change estimates, not a2024 series. Do not label its2026 observations as2024. Purchase-only coverage is mortgage transaction based, not all housing."
+    },
+    {
+      "id": "CN_NBS",
+      "url": "https://www.stats.gov.cn/english/PressRelease/202601/t20260120_1962353.html",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "2025 developer investment/funds release dated2026-01-20. Individual mortgage funds received by developers are not bank approval/rejection statistics. Licence for systematic commercial redistribution not established."
+    },
+    {
+      "id": "PBOC",
+      "url": "https://www.pbc.gov.cn/en/",
+      "status": "SOURCE_ERROR",
+      "findings": "Public page inaccessible with this web tool; no numeric series admitted. LPR, policy operations and overnight market rates remain separate candidate definitions."
+    },
+    {
+      "id": "BOJ",
+      "url": "https://www.boj.or.jp/en/statistics/market/short/mutan/index.htm",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Provisional/final uncollateralized overnight call rates have separate release schedules; final next businessday around10am. Rate-specific terms warn corrections, methodchanges and nonendorsement, not a blanket commercial licence."
+    },
+    {
+      "id": "BOJ_TERMS",
+      "url": "https://www.boj.or.jp/en/statistics/outline/exp/data/exmutan2.pdf",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Rate-specific notices read; original terms do not settle every republication right. Keep commercial redistribution PARTIAL until general terms and usecase checked."
+    },
+    {
+      "id": "JHF",
+      "url": "https://www.jhf.go.jp/about/research/loan/user/index.html",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Borrower survey and https://www.jhf.go.jp/about/research/loan/minkan.html lender trends are distinct surveys. No nationwide application success probability established; sampling and licence require dataset-level review."
+    },
+    {
+      "id": "ECB_BLS",
+      "url": "https://www.ecb.europa.eu/stats/ecb_surveys/bank_lending_survey/html/index.en.html",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Quarterly bank standards and demand; approximately160 representative institutions. Past three months and expectations separate. Country-specific weighting varies."
+    },
+    {
+      "id": "ECB_TERMS",
+      "url": "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Accurate use with attribution; sold documents disclose free source before payment and access; modifications declared; no business framing. Named-author papers need specific permission for republication."
+    },
+    {
+      "id": "UK_CREDIT",
+      "url": "https://www.bankofengland.co.uk/statistics/money-and-credit/2026/august-2026",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Release2026-09-29; net approvals are approvals net of cancellations; seasonally adjusted counts, not percent. New drawn mortgage effective rate and outstanding stock distinct. Base discoveryURL404 corrected to datedrelease."
+    },
+    {
+      "id": "UK_TERMS",
+      "url": "https://www.bankofengland.co.uk/legal",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Database statistics reusable under UK Open Government Licence with attribution; other content and PRA rules have different terms."
+    },
+    {
+      "id": "BIS_DSR",
+      "url": "https://data.bis.org/topics/DSR",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Total private nonfinancial sector32 economies; household/NFC breakdown17. Modelled with income/interest/maturity assumptions. Prefer same-country historical changes; no universal household coverage."
+    },
+    {
+      "id": "BIS_TERMS",
+      "url": "https://data.bis.org/help/legal",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Cite BIS, translated statistics marked unofficial, no endorsement, no additional charge for inclusion in commercial product. SDMX API documented; no raw numerical BIS series fetched."
+    },
+    {
+      "id": "BIS_RPP",
+      "url": "https://data.bis.org/topics/RPP",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Residential price coverage varies by country/type/region/method. Series coverage and baseline must be checked before common chart."
+    },
+    {
+      "id": "FREDDIE",
+      "url": "https://www.freddiemac.com/pmms",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Method changed2022-11-17 from lender survey to LPA applications; ARM and points series stopped. Commercial raw time-series redistribution permission not established; no PMMS cache or FRED bypass."
+    },
+    {
+      "id": "CFPB_AFFORD",
+      "url": "https://www.consumerfinance.gov/owning-a-home/explore-rates/",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Rate is one component alongside amount, downpayment, term, fees and insurance. Numerical examples are third-party Curinos April2025 data, not current quotes or admitted World series."
+    },
+    {
+      "id": "ECB_MECHANISM",
+      "url": "https://www.ecb.europa.eu/mopo/intro/transmission/html/index.en.html",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Policy transmission has long variable uncertain lags; bankrates, lending, expectations, exchange rates and demand pathways are conditional."
+    },
+    {
+      "id": "US_HISTORY",
+      "url": "https://www.federalreservehistory.org/essays/subprime-mortgage-crisis",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "2007–2010 subprime and housing crisis history; securitization and financial losses interact. Not a deterministic law that any lower mortgage flow creates a crisis."
+    },
+    {
+      "id": "JP_HISTORY",
+      "url": "https://www2.boj.or.jp/archive/en/announcements/press/koen_2002/ko0212b.htm",
+      "status": "DISCOVERED_SEARCH_ONLY",
+      "findings": "BOJ2002 discussion of postbubble nonperforming loans and industrial restructuring. Search evidence only; exact article opened in subsequent closure or retainPARTIAL."
+    },
+    {
+      "id": "NAPIC",
+      "url": "https://napic.jpph.gov.my/en",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Official portal offers transaction activity, housing starts, overhang, MHPI and time-series links; no machine series or commercial reuse grant established from homepage."
+    },
+    {
+      "id": "FED_POLICY",
+      "url": "https://www.federalreserve.gov/monetarypolicy/openmarket.htm",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "FOMC target range is policy instrument, not the observed effective federal funds rate."
+    },
+    {
+      "id": "US_EFFR",
+      "url": "https://www.newyorkfed.org/markets/reference-rates/effr",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Effective federal funds rate is observed market rate; separate terms from Board website, no blanket licence transfer."
+    },
+    {
+      "id": "FED_TERMS",
+      "url": "https://www.federalreserve.gov/disclaimer.htm",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Board-produced information public domain unless marked otherwise; citeBoard. NonBoard content and insignia excluded."
+    },
+    {
+      "id": "PRODUCTION",
+      "url": "https://getphios.com",
+      "status": "SOURCE_ERROR",
+      "findings": "Web tool inaccessible; no fresh deployment identity."
+    },
+    {
+      "id": "CLOSURE_20261020",
+      "url": "https://www.consumerfinance.gov/privacy/website-privacy-policy/",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "CFPB-created content public domain; thirdparty material excluded. HMDA public aggregate dataset authority remains separate from private Curinos rate examples."
+    },
+    {
+      "id": "INCOME_LICENSE_CLOSURE",
+      "url": "https://data.gov.my/data-catalogue/hh_income",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Exact dataset CC BY4.0; citizen-households since1989; nominal gross income; surveyyears not annualcensus. Page claims latest2024 but linkedpublication still2022; retain metadata inconsistency. Updated2025-12-31; initial2024publicationdate notproven."
+    },
+    {
+      "id": "JP_HISTORY_FULL_READ",
+      "url": "https://www2.boj.or.jp/archive/en/announcements/press/koen_2002/ko0212b.htm",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Full official2002 discussion opened; nonperformingloans include postbubblelegacy and subsequent industrial/corporate weakness. No common-cause claim."
+    },
+    {
+      "id": "ECB_POLICY_DOC",
+      "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "Official rates page opened; policyDFR vs observedESTR separate. No numeric localtrend series fetched."
+    },
+    {
+      "id": "ECB_API",
+      "url": "https://data.ecb.europa.eu/help/api/overview",
+      "status": "SOURCE_ERROR",
+      "findings": "Documentation URL unavailable this tool; do not invent SDMXkeys."
+    },
+    {
+      "id": "BIS_API",
+      "url": "https://stats.bis.org/api-doc/v2/",
+      "status": "READ_SUCCESS_HTTP_NOT_EXPOSED",
+      "findings": "BIS Stats API documentation opened. Exact dataflowdimensions/countryseries NOT_COLLECTED."
+    }
+  ],
+  "warning": "These are paraphrased audit records, not byte-identical original responses. Hashes of this file must not be presented as original-source hashes."
+}

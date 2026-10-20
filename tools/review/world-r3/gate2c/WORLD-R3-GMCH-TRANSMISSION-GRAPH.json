@@ -1,0 +1,175 @@
+{
+  "status": "PARTIAL_MECHANISM_DESIGN",
+  "nodes": [
+    {
+      "id": "policy",
+      "label": {
+        "zh-Hans": "政策与市场利率",
+        "en": "Policy & market rates"
+      }
+    },
+    {
+      "id": "banks",
+      "label": {
+        "zh-Hans": "银行资金与风险",
+        "en": "Bank funding & risk"
+      }
+    },
+    {
+      "id": "credit",
+      "label": {
+        "zh-Hans": "贷款价格、标准与需求",
+        "en": "Loan prices, standards & demand"
+      }
+    },
+    {
+      "id": "housing",
+      "label": {
+        "zh-Hans": "住房交易与投资",
+        "en": "Housing transactions & investment"
+      }
+    },
+    {
+      "id": "work",
+      "label": {
+        "zh-Hans": "建筑与关联工作",
+        "en": "Construction & related jobs"
+      }
+    },
+    {
+      "id": "household",
+      "label": {
+        "zh-Hans": "家庭住房与消费",
+        "en": "Household housing & spending"
+      }
+    },
+    {
+      "id": "feedback",
+      "label": {
+        "zh-Hans": "企业与宏观反馈",
+        "en": "Business & macro feedback"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "policy",
+      "to": "banks",
+      "kind": "CONDITIONAL_MECHANISM_NOT_IDENTIFIED_CAUSAL_EFFECT",
+      "conditions": [
+        "Fixed/floating repricing, bank balance sheet, income expectations and local supply can alter transmission",
+        "Timing varies; no assumption every economy follows same lag"
+      ],
+      "support": [
+        "https://www.ecb.europa.eu/mopo/intro/transmission/html/index.en.html",
+        "https://www.bnm.gov.my/en/monetary-stability"
+      ],
+      "observable": "policy/market rates",
+      "reverseMechanism": "Weak demand or income prospects can reduce applications and investment and lead to policy response",
+      "coverage": "General mechanism; country empirical magnitudes unverified"
+    },
+    {
+      "from": "banks",
+      "to": "credit",
+      "kind": "CONDITIONAL_MECHANISM_NOT_IDENTIFIED_CAUSAL_EFFECT",
+      "conditions": [
+        "Fixed/floating repricing, bank balance sheet, income expectations and local supply can alter transmission",
+        "Timing varies; no assumption every economy follows same lag"
+      ],
+      "support": [
+        "https://www.ecb.europa.eu/mopo/intro/transmission/html/index.en.html",
+        "https://www.bnm.gov.my/en/monetary-stability"
+      ],
+      "observable": "bank lending prices and survey supply/demand",
+      "reverseMechanism": "Weak demand or income prospects can reduce applications and investment and lead to policy response",
+      "coverage": "General mechanism; country empirical magnitudes unverified"
+    },
+    {
+      "from": "credit",
+      "to": "housing",
+      "kind": "CONDITIONAL_MECHANISM_NOT_IDENTIFIED_CAUSAL_EFFECT",
+      "conditions": [
+        "Fixed/floating repricing, bank balance sheet, income expectations and local supply can alter transmission",
+        "Timing varies; no assumption every economy follows same lag"
+      ],
+      "support": [
+        "https://www.ecb.europa.eu/mopo/intro/transmission/html/index.en.html",
+        "https://www.bnm.gov.my/en/monetary-stability"
+      ],
+      "observable": "housing transactions/investment",
+      "reverseMechanism": "Weak demand or income prospects can reduce applications and investment and lead to policy response",
+      "coverage": "General mechanism; country empirical magnitudes unverified"
+    },
+    {
+      "from": "housing",
+      "to": "work",
+      "kind": "CONDITIONAL_MECHANISM_NOT_IDENTIFIED_CAUSAL_EFFECT",
+      "conditions": [
+        "Fixed/floating repricing, bank balance sheet, income expectations and local supply can alter transmission",
+        "Timing varies; no assumption every economy follows same lag"
+      ],
+      "support": [
+        "https://www.ecb.europa.eu/mopo/intro/transmission/html/index.en.html",
+        "https://www.bnm.gov.my/en/monetary-stability"
+      ],
+      "observable": "construction employment",
+      "reverseMechanism": "Weak demand or income prospects can reduce applications and investment and lead to policy response",
+      "coverage": "General mechanism; country empirical magnitudes unverified"
+    },
+    {
+      "from": "work",
+      "to": "household",
+      "kind": "CONDITIONAL_MECHANISM_NOT_IDENTIFIED_CAUSAL_EFFECT",
+      "conditions": [
+        "Fixed/floating repricing, bank balance sheet, income expectations and local supply can alter transmission",
+        "Timing varies; no assumption every economy follows same lag"
+      ],
+      "support": [
+        "https://www.ecb.europa.eu/mopo/intro/transmission/html/index.en.html",
+        "https://www.bnm.gov.my/en/monetary-stability"
+      ],
+      "observable": "household spending",
+      "reverseMechanism": "Weak demand or income prospects can reduce applications and investment and lead to policy response",
+      "coverage": "General mechanism; country empirical magnitudes unverified"
+    },
+    {
+      "from": "household",
+      "to": "feedback",
+      "kind": "CONDITIONAL_MECHANISM_NOT_IDENTIFIED_CAUSAL_EFFECT",
+      "conditions": [
+        "Fixed/floating repricing, bank balance sheet, income expectations and local supply can alter transmission",
+        "Timing varies; no assumption every economy follows same lag"
+      ],
+      "support": [
+        "https://www.ecb.europa.eu/mopo/intro/transmission/html/index.en.html",
+        "https://www.bnm.gov.my/en/monetary-stability"
+      ],
+      "observable": "household spending",
+      "reverseMechanism": "Weak demand or income prospects can reduce applications and investment and lead to policy response",
+      "coverage": "General mechanism; country empirical magnitudes unverified"
+    }
+  ],
+  "feedbackEdges": [
+    {
+      "from": "feedback",
+      "to": "policy",
+      "kind": "POSSIBLE_POLICY_RESPONSE"
+    },
+    {
+      "from": "household",
+      "to": "credit",
+      "kind": "DEMAND_AND_INCOME_FEEDBACK"
+    }
+  ],
+  "externalConditions": [
+    "FX",
+    "energy",
+    "inflation",
+    "demography",
+    "housing supply",
+    "fiscal subsidies",
+    "bank capital",
+    "income expectations"
+  ],
+  "riskScore": null
+}

@@ -1,0 +1,276 @@
+{
+  "question": {
+    "original": "Is it really becoming harder to obtain a mortgage in Malaysia?",
+    "lang": "en"
+  },
+  "scope": {
+    "country": "MYS",
+    "period": "2024",
+    "topic": "housing_credit",
+    "reading_scale": "current"
+  },
+  "answerability": "PARTIAL_CONTEXT",
+  "direct_answer": {
+    "text": "The collected evidence cannot measure a national applicant success probability or prove a trend in strictness. Applications, approvals and disbursements by amount can help describe activity, but without a matched application cohort they cannot answer that probability.",
+    "kind": "conditional_mechanism"
+  },
+  "claims": [
+    {
+      "id": "MY_applied_2024-01",
+      "kind": "observed_fact",
+      "text": "MYS · 2024-01 · application_amount: 37485251313.68997 MYR",
+      "support": [
+        "MY_applied_2024-01"
+      ],
+      "conditions": [
+        "Bounded historical snapshot; original publication date not retained"
+      ],
+      "observation_period": "2024-01",
+      "publication_date": null
+    },
+    {
+      "id": "MY_applied_2024-12",
+      "kind": "observed_fact",
+      "text": "MYS · 2024-12 · application_amount: 34452150037.85001 MYR",
+      "support": [
+        "MY_applied_2024-12"
+      ],
+      "conditions": [
+        "Bounded historical snapshot; original publication date not retained"
+      ],
+      "observation_period": "2024-12",
+      "publication_date": null
+    },
+    {
+      "id": "MY_approved_2024-01",
+      "kind": "observed_fact",
+      "text": "MYS · 2024-01 · approval_amount: 14354020646.680014 MYR",
+      "support": [
+        "MY_approved_2024-01"
+      ],
+      "conditions": [
+        "Bounded historical snapshot; original publication date not retained"
+      ],
+      "observation_period": "2024-01",
+      "publication_date": null
+    },
+    {
+      "id": "MY_approved_2024-12",
+      "kind": "observed_fact",
+      "text": "MYS · 2024-12 · approval_amount: 14183331801.089996 MYR",
+      "support": [
+        "MY_approved_2024-12"
+      ],
+      "conditions": [
+        "Bounded historical snapshot; original publication date not retained"
+      ],
+      "observation_period": "2024-12",
+      "publication_date": null
+    },
+    {
+      "id": "MY-mechanism",
+      "kind": "conditional_mechanism",
+      "text": "Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+      "support": [
+        "READING:BOOK-6:book6-environment-work-income"
+      ],
+      "conditions": [
+        "Interpretation of resources/income/costs; not an empirical causal estimate or current national statistic"
+      ]
+    }
+  ],
+  "indicators": [
+    {
+      "id": "MY_applied_2024-01",
+      "metric_id": "application_amount",
+      "country": "MYS",
+      "observation_period": "2024-01",
+      "value": 37485251313.68997,
+      "unit": "MYR",
+      "source_id": "my-debt-dashboard",
+      "locator": "props.pageProps.timeseries.data.applied.rm.property_residental[205]",
+      "publication_date": null,
+      "fetched_at": "2026-10-20T03:02:25.808205+00:00",
+      "source_hash": "b972490b40bf3247d2398f2fc91407586bf6c71ba5189e9c3f24d5639036d140",
+      "kind": "observed_fact",
+      "population": "Official CCRIS aggregate residential-purpose loans; reporting exactrefinancing and institution scope not verified",
+      "revision_date": "2026-07-31 15:00",
+      "quality": "OFFICIAL_MONETARY_FLOW_NOT_COHORT; first release date missing"
+    },
+    {
+      "id": "MY_applied_2024-12",
+      "metric_id": "application_amount",
+      "country": "MYS",
+      "observation_period": "2024-12",
+      "value": 34452150037.85001,
+      "unit": "MYR",
+      "source_id": "my-debt-dashboard",
+      "locator": "props.pageProps.timeseries.data.applied.rm.property_residental[216]",
+      "publication_date": null,
+      "fetched_at": "2026-10-20T03:02:25.808205+00:00",
+      "source_hash": "b972490b40bf3247d2398f2fc91407586bf6c71ba5189e9c3f24d5639036d140",
+      "kind": "observed_fact",
+      "population": "Official CCRIS aggregate residential-purpose loans; reporting exactrefinancing and institution scope not verified",
+      "revision_date": "2026-07-31 15:00",
+      "quality": "OFFICIAL_MONETARY_FLOW_NOT_COHORT; first release date missing"
+    },
+    {
+      "id": "MY_approved_2024-01",
+      "metric_id": "approval_amount",
+      "country": "MYS",
+      "observation_period": "2024-01",
+      "value": 14354020646.680014,
+      "unit": "MYR",
+      "source_id": "my-debt-dashboard",
+      "locator": "props.pageProps.timeseries.data.approved.rm.property_residental[205]",
+      "publication_date": null,
+      "fetched_at": "2026-10-20T03:02:25.808205+00:00",
+      "source_hash": "b972490b40bf3247d2398f2fc91407586bf6c71ba5189e9c3f24d5639036d140",
+      "kind": "observed_fact",
+      "population": "Official CCRIS aggregate residential-purpose loans; reporting exactrefinancing and institution scope not verified",
+      "revision_date": "2026-07-31 15:00",
+      "quality": "OFFICIAL_MONETARY_FLOW_NOT_COHORT; first release date missing"
+    },
+    {
+      "id": "MY_approved_2024-12",
+      "metric_id": "approval_amount",
+      "country": "MYS",
+      "observation_period": "2024-12",
+      "value": 14183331801.089996,
+      "unit": "MYR",
+      "source_id": "my-debt-dashboard",
+      "locator": "props.pageProps.timeseries.data.approved.rm.property_residental[216]",
+      "publication_date": null,
+      "fetched_at": "2026-10-20T03:02:25.808205+00:00",
+      "source_hash": "b972490b40bf3247d2398f2fc91407586bf6c71ba5189e9c3f24d5639036d140",
+      "kind": "observed_fact",
+      "population": "Official CCRIS aggregate residential-purpose loans; reporting exactrefinancing and institution scope not verified",
+      "revision_date": "2026-07-31 15:00",
+      "quality": "OFFICIAL_MONETARY_FLOW_NOT_COHORT; first release date missing"
+    }
+  ],
+  "figures": [
+    {
+      "kind": "existing_offline_source_table_and_chart",
+      "href": "../../gate2c/WORLD-R3-GMCH-PROTOTYPE.html?id=Q02&lang=en&country=MYS&period=2024",
+      "source_binding": "Existing prototype uses same SHA-bound normalized observations; Atlas illustration is not numeric evidence",
+      "mode": "OFFLINE_PREVIEW_NOT_PRODUCT"
+    }
+  ],
+  "comparison": {
+    "allowed": false,
+    "reason": "No harmonised application-cohort denominator"
+  },
+  "unknowns": [
+    "Original observation publication metadata and full cohort alignment remain partial",
+    "No source-bound automatic World answer route or full public scope handoff implemented"
+  ],
+  "source_links": [
+    "https://www.bnm.gov.my/-/sorotan-statistik-bulanan-untuk-jun-2026",
+    "https://www.bnm.gov.my/-/sorotan-statistik-bulanan-untuk-jun-2026",
+    "https://data.gov.my/dashboard/household-debt",
+    "https://data.gov.my/dashboard/household-debt",
+    "https://open.dosm.gov.my/data-catalogue/cpi_headline",
+    "https://data.gov.my/data-catalogue/hh_income"
+  ],
+  "continuations": [
+    "Existing Ask input-only; full scope wiring requires Gate3"
+  ],
+  "data_quality": {
+    "freshness": "OFFLINE_HISTORICAL_SNAPSHOT_NOT_REALTIME",
+    "coverage": "BOUNDED",
+    "answer_engine": "CURATED_ANSWER_ONLY"
+  },
+  "mode": "CURATED_ANSWER_ONLY",
+  "schemaOwner": "../gate2c/WORLD-R3-GMCH-ANSWER-SCHEMA.json",
+  "sources": [
+    {
+      "id": "MY_applied_2024-01",
+      "kind": "observed_fact",
+      "path": "tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/my-debt-dashboard.html",
+      "sha256": "b972490b40bf3247d2398f2fc91407586bf6c71ba5189e9c3f24d5639036d140",
+      "locator": "HTML __NEXT_DATA__ props.pageProps.timeseries.data.applied.rm.property_residental[205]",
+      "official_url": "https://data.gov.my/dashboard/household-debt",
+      "period": "2024-01",
+      "unit": "MYR",
+      "country": "MYS",
+      "fetched_at": "2026-10-20T03:02:25.808205+00:00",
+      "publication_date": null,
+      "retrieval_http_status": 200,
+      "raw_relative_url": "../../../../../tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/my-debt-dashboard.html"
+    },
+    {
+      "id": "MY_applied_2024-12",
+      "kind": "observed_fact",
+      "path": "tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/my-debt-dashboard.html",
+      "sha256": "b972490b40bf3247d2398f2fc91407586bf6c71ba5189e9c3f24d5639036d140",
+      "locator": "HTML __NEXT_DATA__ props.pageProps.timeseries.data.applied.rm.property_residental[216]",
+      "official_url": "https://data.gov.my/dashboard/household-debt",
+      "period": "2024-12",
+      "unit": "MYR",
+      "country": "MYS",
+      "fetched_at": "2026-10-20T03:02:25.808205+00:00",
+      "publication_date": null,
+      "retrieval_http_status": 200,
+      "raw_relative_url": "../../../../../tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/my-debt-dashboard.html"
+    },
+    {
+      "id": "MY_approved_2024-01",
+      "kind": "observed_fact",
+      "path": "tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/my-debt-dashboard.html",
+      "sha256": "b972490b40bf3247d2398f2fc91407586bf6c71ba5189e9c3f24d5639036d140",
+      "locator": "HTML __NEXT_DATA__ props.pageProps.timeseries.data.approved.rm.property_residental[205]",
+      "official_url": "https://data.gov.my/dashboard/household-debt",
+      "period": "2024-01",
+      "unit": "MYR",
+      "country": "MYS",
+      "fetched_at": "2026-10-20T03:02:25.808205+00:00",
+      "publication_date": null,
+      "retrieval_http_status": 200,
+      "raw_relative_url": "../../../../../tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/my-debt-dashboard.html"
+    },
+    {
+      "id": "MY_approved_2024-12",
+      "kind": "observed_fact",
+      "path": "tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/my-debt-dashboard.html",
+      "sha256": "b972490b40bf3247d2398f2fc91407586bf6c71ba5189e9c3f24d5639036d140",
+      "locator": "HTML __NEXT_DATA__ props.pageProps.timeseries.data.approved.rm.property_residental[216]",
+      "official_url": "https://data.gov.my/dashboard/household-debt",
+      "period": "2024-12",
+      "unit": "MYR",
+      "country": "MYS",
+      "fetched_at": "2026-10-20T03:02:25.808205+00:00",
+      "publication_date": null,
+      "retrieval_http_status": 200,
+      "raw_relative_url": "../../../../../tools/review/world-r3/gate2c/WORLD-R3-GMCH-PILOT-SNAPSHOTS/my-debt-dashboard.html"
+    },
+    {
+      "id": "READING:BOOK-6:book6-environment-work-income",
+      "kind": "published_interpretation_not_statistics",
+      "canonical_url": "https://getphios.com/articles/book6-environment-work-income?locale=en#article-body",
+      "path": "content\\knowledge\\public\\successors\\book6-publication-v1\\visual-articles\\en\\book6-environment-work-income.json",
+      "sha256": "d41e4df032036e4f35901e1eb7b66990fd168a4385100b5be0d4e6ab7165ebe2",
+      "sourceVersion": "1.0.0",
+      "publishedAt": "2026-09-24",
+      "locator": "/sections/0/blocks/0",
+      "text": "Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+      "permission": "Existing public published reading; own PHI OS interpretation, not national empirical proof"
+    }
+  ],
+  "provenance": {
+    "data_version": "Saved raw SHA-bound fetch vintage; see independent reproduction",
+    "content_version": "1.0.0",
+    "validatedAt": "2026-10-20T03:32:29.728242+00:00",
+    "dynamicQueryExecuted": false,
+    "providerCalls": 0,
+    "production": false
+  },
+  "visualEvidence": {
+    "status": "NO_STATISTICAL_PROOF_FROM_ATLAS",
+    "existingVisuals": "Old mapped Atlas assets retained; optional explanation only, not new causal chart"
+  },
+  "limits": [
+    "Original observation publication metadata and full cohort alignment remain partial",
+    "No source-bound automatic World answer route or full public scope handoff implemented"
+  ]
+}

@@ -2,6 +2,7 @@ import {validateFinancialWillDraft} from './financial-will-draft-schema.js';
 import {assertNoPersistedIdentity} from './person-use-policy.js';
 import {validateToolScenarios} from '../financial/calculation-runtime/customer-finance-tools.js';
 import {validateJurisdictionProfile} from '../professional/access/financial-jurisdiction-profile.js';
+import {validatePublicationFacts,validatePublicationReferences} from '../financial/holistic-planning-product/publication-r3-1-facts.js';
 
 export const FW_V1='FW_CUSTOMER_INTAKE_DRAFT_v1';
 export const FW_V2='FW_CUSTOMER_INTAKE_DRAFT_v2';
@@ -15,6 +16,7 @@ export function validateDraftVersion(kind,payload,version){
  if(version!==FW_V2)invalid('DRAFT_SCHEMA_UNSUPPORTED');
  assertNoPersistedIdentity(payload);
  const copy=structuredClone(payload),legacy=structuredClone(payload);
+ if(kind==='FINANCIAL'&&'publicationFacts' in copy){validatePublicationFacts(copy.publicationFacts);delete legacy.publicationFacts;}
  if(kind==='FINANCIAL'&&'toolScenarios' in copy){validateToolScenarios(copy.toolScenarios);delete legacy.toolScenarios;}
  if(kind==='FINANCIAL'&&'jurisdictionProfile' in copy){validateJurisdictionProfile(copy.jurisdictionProfile);delete legacy.jurisdictionProfile;}
  if(kind==='WILL'&&'financialSource' in copy){
@@ -51,5 +53,6 @@ export function validateDraftVersion(kind,payload,version){
  }
  // v1 remains the privacy and allowed-field boundary for unchanged fields.
  validateFinancialWillDraft(kind,legacy);
+ if(kind==='FINANCIAL'&&copy.publicationFacts)validatePublicationReferences(copy.publicationFacts,copy.inventory||{});
  return copy;
 }

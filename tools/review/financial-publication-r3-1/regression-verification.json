@@ -1,0 +1,53 @@
+{
+  "status": "PASS_NO_NEW_FAILURES_EXACT_REVIEWED_HISTORICAL_FIVE",
+  "rawExitCode": 1,
+  "observedTests": 90,
+  "pass": 85,
+  "fail": 5,
+  "knownHistoricalExceptions": [
+    {
+      "name": "rental ratios distinguish zero, missing and out-of-range; no unsupported currency rounding",
+      "expected": "16000.00",
+      "actual": null,
+      "metric": "operatingCashFlow",
+      "reason": "Missing amountState and cashTiming on operating cost; paid cash cannot be inferred."
+    },
+    {
+      "name": "actual receipts do not lose vacancy twice; forecasts and cash/tax allocation stay independent",
+      "expected": "19500.00",
+      "actual": null,
+      "metric": "operatingCashFlow",
+      "reason": "Missing amountState and cashTiming on maintenance; payment metadata is unspecified."
+    },
+    {
+      "name": "rental tax candidate and cashflow are separate; interest not subtracted twice",
+      "expected": "18700.00",
+      "actual": null,
+      "metric": "operatingCashFlow",
+      "reason": "Missing amountState and cashTiming on operating cost; interest is not a second cash deduction."
+    },
+    {
+      "name": "portfolio API keeps four period/mode/currency groups and stable property identities",
+      "expected": "950.00",
+      "actual": null,
+      "metric": "netCashFlow",
+      "reason": "Missing debtService; omitted debt payment is unknown, not a declared zero."
+    },
+    {
+      "name": "unknown amounts and unpaid costs cannot be coerced into zero cash; metadata survives",
+      "expected": "APPROXIMATE",
+      "actual": "UNKNOWN",
+      "metric": "cashPrecision",
+      "reason": "Missing debtService in approximate-cost fixture; unknown debt dominates approximate cost."
+    }
+  ],
+  "unchangedFiles": [
+    "tests/financial-preparation/finance-tools.test.mjs",
+    "tests/financial-preparation/portfolio-successor.test.mjs",
+    "functions/financial/calculation-runtime/customer-finance-tools.js",
+    "functions/financial/calculation-runtime/rental-metric-semantics-v2.js",
+    "functions/financial/calculation-runtime/rental-fact-metadata.js",
+    "functions/api/customer-finance-tools.js"
+  ],
+  "providerCalls": 0
+}
