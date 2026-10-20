@@ -1,0 +1,15 @@
+# Contract reference
+
+Eight draft-07 JSON schemas are compiled by the repository's existing Ajv. Each requires schemaVersion and explicit fields, rejects unknown top-level fields, specifies enum authority kinds and nullable properties. Opaque nested source-native metadata is not treated as a new fact owner. Required null is distinct from an absent key. Geography is an extensible string/null, not a Malaysia/USA allowlist. schemaVersion identifies a contract; sourceVersionOrDigest binds bytes separately.
+
+Question: exact original text, locale, subject/geography/period, purpose, evidence dependencies, allowed/excluded scopes, selection mode, session-only persistence default. A mechanism question needs neither a person's name nor income nor a mandatory country. Minimal evidence needs are explicit IDs; no keyword inference admits a claim.
+
+Source: owner, publisher, canonical reference, language, rights/publication/access/entitlement, acquisition mode, original fragment/row, byte checksum, observation/publication/revision/retrieval/review times, jurisdiction/population/institution coverage, method/unit/base/frequency/limitations. Public fixture SHA is checked against current local source bytes in a separate test; caller-provided checksum equality is not a cryptographic trust authority. Production adapters must supply owner-verified registries, not arbitrary client source objects.
+
+Claim: source+fragment references, origin class, epistemic kind, confirmation scope, question/dependency/scope binding, temporal validity, version/status/limitations, personal/public flags, authorization and retention references, contradictions/unknown dependencies/supersession/provenance. Source-statement confirmation is not independently confirmed reality. Relevance validates explicit question identity, required evidence dependency and allowed scope. A planner/owner must first establish those dependencies; the candidate is not an unrestricted semantic classifier.
+
+Relation: explicit endpoints, qualifying evidence and owner, justification, scope/time, permission context, admission/version/validity. Unknown: dependency, missing input, reason, consequence, proxy limits, next evidence, whether general explanation remains possible, resolution/review. No qualifying relation means edges remain empty and RELATION_NOT_ESTABLISHED.
+
+AnswerBundle separates observations/derived calculations from interpretations, visible conflicts and unknowns. States are DIRECT_SUPPORTED, BOUNDED_MECHANISM, PARTIAL_SUPPORTED, INSUFFICIENT_EVIDENCE, PERMISSION_REQUIRED, OUT_OF_SCOPE. Local scenarios exercise partial support and transparent insufficient-evidence boundaries; this does not prove a general free-text answering service. No provider is invoked.
+
+Revision events include source updates, claim recheck, user correction, permission revocation, new professional records, confirmed action, observed outcome and completed review. Same ID/version with changed content is rejected. Source or permission changes require recheck; prior user actions are not silently rewritten.

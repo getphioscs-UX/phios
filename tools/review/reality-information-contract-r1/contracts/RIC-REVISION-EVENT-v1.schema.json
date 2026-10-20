@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:phios:RIC-REVISION-EVENT-v1",
+  "title": "Independent local reference; no permission authority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "eventId",
+    "eventType",
+    "previousRef",
+    "nextRef",
+    "effectiveFrom",
+    "effectiveTo",
+    "supersedesVersion",
+    "revisionReason",
+    "sourceOwner",
+    "sourceRef",
+    "decisionAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "RIC-REVISION-EVENT-v1"
+    },
+    "eventId": {
+      "type": "string"
+    },
+    "eventType": {
+      "enum": [
+        "SOURCE_UPDATED",
+        "CLAIM_RECHECK_REQUIRED",
+        "USER_CORRECTION",
+        "PERMISSION_REVOKED",
+        "NEW_PROFESSIONAL_RECORD",
+        "USER_CONFIRMED_ACTION",
+        "OBSERVED_OUTCOME",
+        "REVIEW_COMPLETED"
+      ]
+    },
+    "previousRef": {
+      "type": "string"
+    },
+    "nextRef": {
+      "type": "string"
+    },
+    "effectiveFrom": {
+      "type": "string"
+    },
+    "effectiveTo": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supersedesVersion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "revisionReason": {
+      "type": "string"
+    },
+    "sourceOwner": {
+      "type": "string"
+    },
+    "sourceRef": {
+      "type": "string"
+    },
+    "decisionAt": {
+      "type": "string"
+    }
+  }
+}

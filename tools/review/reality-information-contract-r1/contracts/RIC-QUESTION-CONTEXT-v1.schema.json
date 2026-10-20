@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:phios:RIC-QUESTION-CONTEXT-v1",
+  "title": "Independent local reference; no permission authority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "questionId",
+    "originalText",
+    "locale",
+    "intentClass",
+    "subjectScope",
+    "geography",
+    "period",
+    "topic",
+    "metricDefinitions",
+    "requestedOutcome",
+    "requiredInformation",
+    "knownAtStart",
+    "unknownAtStart",
+    "minimalNextEvidence",
+    "allowedSourceScopes",
+    "excludedScopes",
+    "purpose",
+    "sessionConsentRef",
+    "asOf",
+    "selectionMode",
+    "privacyClass",
+    "persistenceIntent"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "RIC-QUESTION-CONTEXT-v1"
+    },
+    "questionId": {
+      "type": "string"
+    },
+    "originalText": {
+      "type": "string"
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "intentClass": {
+      "type": "string"
+    },
+    "subjectScope": {
+      "type": "object"
+    },
+    "geography": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "period": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "topic": {
+      "type": "string"
+    },
+    "metricDefinitions": {
+      "type": "array",
+      "items": {}
+    },
+    "requestedOutcome": {
+      "type": "string"
+    },
+    "requiredInformation": {
+      "type": "array",
+      "items": {}
+    },
+    "knownAtStart": {
+      "type": "array",
+      "items": {}
+    },
+    "unknownAtStart": {
+      "type": "array",
+      "items": {}
+    },
+    "minimalNextEvidence": {
+      "type": "array",
+      "items": {}
+    },
+    "allowedSourceScopes": {
+      "type": "array",
+      "items": {}
+    },
+    "excludedScopes": {
+      "type": "array",
+      "items": {}
+    },
+    "purpose": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sessionConsentRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "asOf": {
+      "type": "string"
+    },
+    "selectionMode": {
+      "type": "string"
+    },
+    "privacyClass": {
+      "type": "string"
+    },
+    "persistenceIntent": {
+      "enum": [
+        "SESSION_ONLY"
+      ],
+      "default": "SESSION_ONLY"
+    }
+  }
+}

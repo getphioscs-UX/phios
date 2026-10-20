@@ -1,0 +1,402 @@
+{
+  "version": "FINANCE_R3_2_DEEP_DIVE_CANDIDATE",
+  "status": "LOCAL_SYNTHETIC_HUMAN_REVIEW_ONLY",
+  "baseSourceDigest": "b9c09665c96a616c6b91de036763a7fc974cc28a8241321e763008b5f3d6f9cb",
+  "baseCalculationDigest": "00f760c0a2dc4506b2599cb677ff94912ae55b0c06e5a0d163b1503da0c81fcb",
+  "scenarioDigest": "fae8ffc77f176d162797c40b9c72a36e2a17952ac93c40b028ce7d3799b91520",
+  "sourceSnapshot": {
+    "context": {
+      "localPreview": true,
+      "currentConsent": true,
+      "sourceDraftRef": "ACCOUNT_DRAFT:d5e6c29a-28fc-402e-af40-e12181bab2b4:1",
+      "sourceDigest": "b9c09665c96a616c6b91de036763a7fc974cc28a8241321e763008b5f3d6f9cb",
+      "asOfDate": "2026-10-20",
+      "admittedSubjects": [
+        "SELF",
+        "CHILD_A",
+        "CHILD_B"
+      ]
+    },
+    "input": {
+      "subjects": [
+        "SELF",
+        "CHILD_A",
+        "CHILD_B"
+      ],
+      "currency": "MYR",
+      "sourceRefs": [
+        "SYNTHETIC_DECLARATIONS_V1"
+      ],
+      "retirement": {
+        "subjects": [
+          "SELF"
+        ],
+        "currency": "MYR",
+        "sourceRefs": [
+          "RT_SPEND"
+        ],
+        "retirementYear": 2034,
+        "years": 20,
+        "spendingBasis": "AS_OF_YEAR",
+        "annualSpending": {
+          "kind": "EXACT",
+          "value": 32400
+        }
+      },
+      "education": {
+        "subjects": [
+          "CHILD_A",
+          "CHILD_B"
+        ],
+        "currency": "MYR",
+        "sourceRefs": [
+          "ED_STAGE"
+        ],
+        "stages": []
+      },
+      "assets": [],
+      "allocations": [],
+      "retirementFunding": {
+        "subjects": [
+          "SELF"
+        ],
+        "currency": "MYR",
+        "target": "RETIREMENT",
+        "endYear": 2053,
+        "frequency": "MONTHLY",
+        "timing": "PERIOD_END",
+        "contribution": {
+          "kind": "EXACT",
+          "value": 420
+        },
+        "employerContribution": {
+          "kind": "EXACT",
+          "value": 180
+        },
+        "contributionEndYear": 2033,
+        "returnAssumption": {
+          "ref": "RT_RETURN",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.035
+          },
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053"
+        },
+        "feeAssumption": {
+          "ref": "RT_FEE",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.004
+          },
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053"
+        }
+      },
+      "educationFunding": {
+        "subjects": [
+          "SELF",
+          "CHILD_A",
+          "CHILD_B"
+        ],
+        "currency": "MYR",
+        "target": "EDUCATION",
+        "endYear": 2034,
+        "frequency": "ANNUAL",
+        "timing": "PERIOD_END",
+        "contribution": {
+          "kind": "EXACT",
+          "value": 3200
+        },
+        "employerContribution": {
+          "kind": "EXACT",
+          "value": 0
+        },
+        "contributionEndYear": 2034,
+        "returnAssumption": {
+          "ref": "ED_RETURN",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.025
+          },
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053"
+        },
+        "feeAssumption": {
+          "ref": "ED_FEE",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.003
+          },
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053"
+        }
+      },
+      "protection": [],
+      "estate": {
+        "documents": [],
+        "triggers": [
+          {
+            "date": "2027-10-20",
+            "kind": "ANNUAL_REVIEW"
+          },
+          {
+            "date": "2034-01-01",
+            "kind": "DECLARED_RETIREMENT_REVIEW"
+          }
+        ]
+      },
+      "events": []
+    }
+  },
+  "result": {
+    "version": "FINANCE_R3_2_DEEP_DIVE_CANDIDATE",
+    "sourceDigest": "b9c09665c96a616c6b91de036763a7fc974cc28a8241321e763008b5f3d6f9cb",
+    "providerCalls": 0,
+    "providerCostUSD": 0,
+    "models": [
+      {
+        "modelId": "RETIREMENT_NEEDS",
+        "calcVersion": "FCR_R32_PATHS_V1",
+        "sourceDraftRef": "ACCOUNT_DRAFT:d5e6c29a-28fc-402e-af40-e12181bab2b4:1",
+        "sourceDigest": "b9c09665c96a616c6b91de036763a7fc974cc28a8241321e763008b5f3d6f9cb",
+        "asOfDate": "2026-10-20",
+        "ownerSubjectRefs": [
+          "SELF"
+        ],
+        "applicableJurisdiction": "UNKNOWN",
+        "currency": "MYR",
+        "timeBasis": "CALENDAR_YEAR_END",
+        "realOrNominalBasis": "NOMINAL_WITH_BASE_YEAR_REAL",
+        "inputSourceRefs": [
+          "RT_SPEND"
+        ],
+        "assumptions": [],
+        "calculationMetricRefs": [
+          "RETIREMENT_NEEDS:PATH"
+        ],
+        "valueState": "UNKNOWN",
+        "uncoveredDependencies": [
+          "EXPLICIT_SPENDING_YEARS_INFLATION_CURRENCY_REQUIRED"
+        ],
+        "sourceEligibility": "LOCAL_SYNTHETIC_PREVIEW_ONLY",
+        "disclosureBoundary": "CLIENT_SCENARIO_NOT_PROFESSIONAL_ADVICE",
+        "eligible": false,
+        "rows": []
+      },
+      {
+        "modelId": "RETIREMENT_FUNDING",
+        "calcVersion": "FCR_R32_PATHS_V1",
+        "sourceDraftRef": "ACCOUNT_DRAFT:d5e6c29a-28fc-402e-af40-e12181bab2b4:1",
+        "sourceDigest": "b9c09665c96a616c6b91de036763a7fc974cc28a8241321e763008b5f3d6f9cb",
+        "asOfDate": "2026-10-20",
+        "ownerSubjectRefs": [
+          "SELF"
+        ],
+        "applicableJurisdiction": "UNKNOWN",
+        "currency": "MYR",
+        "timeBasis": "CALENDAR_YEAR_END",
+        "realOrNominalBasis": "NOMINAL_WITH_BASE_YEAR_REAL",
+        "inputSourceRefs": [],
+        "assumptions": [],
+        "calculationMetricRefs": [
+          "RETIREMENT_FUNDING:PATH"
+        ],
+        "valueState": "UNKNOWN",
+        "uncoveredDependencies": [
+          "COMPATIBLE_COST_EXPLICIT_RETURN_FEES_CONTRIBUTION_TIMING_REQUIRED"
+        ],
+        "sourceEligibility": "LOCAL_SYNTHETIC_PREVIEW_ONLY",
+        "disclosureBoundary": "CLIENT_SCENARIO_NOT_PROFESSIONAL_ADVICE",
+        "eligible": false,
+        "rows": []
+      },
+      {
+        "modelId": "EDUCATION_COST",
+        "calcVersion": "FCR_R32_PATHS_V1",
+        "sourceDraftRef": "ACCOUNT_DRAFT:d5e6c29a-28fc-402e-af40-e12181bab2b4:1",
+        "sourceDigest": "b9c09665c96a616c6b91de036763a7fc974cc28a8241321e763008b5f3d6f9cb",
+        "asOfDate": "2026-10-20",
+        "ownerSubjectRefs": [
+          "CHILD_A",
+          "CHILD_B"
+        ],
+        "applicableJurisdiction": "UNKNOWN",
+        "currency": "MYR",
+        "timeBasis": "CALENDAR_YEAR_END",
+        "realOrNominalBasis": "NOMINAL_WITH_BASE_YEAR_REAL",
+        "inputSourceRefs": [
+          "ED_STAGE"
+        ],
+        "assumptions": [],
+        "calculationMetricRefs": [
+          "EDUCATION_COST:PATH"
+        ],
+        "valueState": "UNKNOWN",
+        "uncoveredDependencies": [
+          "DECLARED_STAGES_REQUIRED"
+        ],
+        "sourceEligibility": "LOCAL_SYNTHETIC_PREVIEW_ONLY",
+        "disclosureBoundary": "CLIENT_SCENARIO_NOT_PROFESSIONAL_ADVICE",
+        "eligible": false,
+        "rows": []
+      },
+      {
+        "modelId": "EDUCATION_FUNDING",
+        "calcVersion": "FCR_R32_PATHS_V1",
+        "sourceDraftRef": "ACCOUNT_DRAFT:d5e6c29a-28fc-402e-af40-e12181bab2b4:1",
+        "sourceDigest": "b9c09665c96a616c6b91de036763a7fc974cc28a8241321e763008b5f3d6f9cb",
+        "asOfDate": "2026-10-20",
+        "ownerSubjectRefs": [
+          "SELF",
+          "CHILD_A",
+          "CHILD_B"
+        ],
+        "applicableJurisdiction": "UNKNOWN",
+        "currency": "MYR",
+        "timeBasis": "CALENDAR_YEAR_END",
+        "realOrNominalBasis": "NOMINAL_WITH_BASE_YEAR_REAL",
+        "inputSourceRefs": [],
+        "assumptions": [],
+        "calculationMetricRefs": [
+          "EDUCATION_FUNDING:PATH"
+        ],
+        "valueState": "UNKNOWN",
+        "uncoveredDependencies": [
+          "COMPATIBLE_COST_EXPLICIT_RETURN_FEES_CONTRIBUTION_TIMING_REQUIRED"
+        ],
+        "sourceEligibility": "LOCAL_SYNTHETIC_PREVIEW_ONLY",
+        "disclosureBoundary": "CLIENT_SCENARIO_NOT_PROFESSIONAL_ADVICE",
+        "eligible": false,
+        "rows": []
+      },
+      {
+        "modelId": "PROTECTION_EVENT",
+        "calcVersion": "FCR_R32_PATHS_V1",
+        "sourceDraftRef": "ACCOUNT_DRAFT:d5e6c29a-28fc-402e-af40-e12181bab2b4:1",
+        "sourceDigest": "b9c09665c96a616c6b91de036763a7fc974cc28a8241321e763008b5f3d6f9cb",
+        "asOfDate": "2026-10-20",
+        "ownerSubjectRefs": [
+          "SELF",
+          "CHILD_A",
+          "CHILD_B"
+        ],
+        "applicableJurisdiction": "UNKNOWN",
+        "currency": "MYR",
+        "timeBasis": "CALENDAR_YEAR_END",
+        "realOrNominalBasis": "NOMINAL_WITH_BASE_YEAR_REAL",
+        "inputSourceRefs": [
+          "SYNTHETIC_DECLARATIONS_V1"
+        ],
+        "assumptions": [],
+        "calculationMetricRefs": [
+          "PROTECTION_EVENT:PATH"
+        ],
+        "valueState": "UNKNOWN",
+        "uncoveredDependencies": [
+          "MEANINGFUL_AUTHORIZED_FACTS_REQUIRED"
+        ],
+        "sourceEligibility": "LOCAL_SYNTHETIC_PREVIEW_ONLY",
+        "disclosureBoundary": "CLIENT_SCENARIO_NOT_PROFESSIONAL_ADVICE",
+        "eligible": false,
+        "rows": []
+      },
+      {
+        "modelId": "ESTATE_CONTINUITY",
+        "calcVersion": "FCR_R32_PATHS_V1",
+        "sourceDraftRef": "ACCOUNT_DRAFT:d5e6c29a-28fc-402e-af40-e12181bab2b4:1",
+        "sourceDigest": "b9c09665c96a616c6b91de036763a7fc974cc28a8241321e763008b5f3d6f9cb",
+        "asOfDate": "2026-10-20",
+        "ownerSubjectRefs": [
+          "SELF",
+          "CHILD_A",
+          "CHILD_B"
+        ],
+        "applicableJurisdiction": "UNKNOWN",
+        "currency": "MYR",
+        "timeBasis": "CALENDAR_YEAR_END",
+        "realOrNominalBasis": "NOMINAL_WITH_BASE_YEAR_REAL",
+        "inputSourceRefs": [
+          "SYNTHETIC_DECLARATIONS_V1"
+        ],
+        "assumptions": [],
+        "calculationMetricRefs": [
+          "ESTATE_CONTINUITY:PATH"
+        ],
+        "valueState": "UNKNOWN",
+        "uncoveredDependencies": [
+          "MEANINGFUL_AUTHORIZED_FACTS_REQUIRED"
+        ],
+        "sourceEligibility": "LOCAL_SYNTHETIC_PREVIEW_ONLY",
+        "disclosureBoundary": "CLIENT_SCENARIO_NOT_PROFESSIONAL_ADVICE",
+        "eligible": false,
+        "rows": [],
+        "triggers": [
+          {
+            "date": "2027-10-20",
+            "kind": "ANNUAL_REVIEW"
+          },
+          {
+            "date": "2034-01-01",
+            "kind": "DECLARED_RETIREMENT_REVIEW"
+          }
+        ],
+        "legalState": "GATE_BLOCKED",
+        "nominationIsInheritance": false
+      },
+      {
+        "modelId": "LIFE_COURSE_EVENTS",
+        "calcVersion": "FCR_R32_PATHS_V1",
+        "sourceDraftRef": "ACCOUNT_DRAFT:d5e6c29a-28fc-402e-af40-e12181bab2b4:1",
+        "sourceDigest": "b9c09665c96a616c6b91de036763a7fc974cc28a8241321e763008b5f3d6f9cb",
+        "asOfDate": "2026-10-20",
+        "ownerSubjectRefs": [
+          "SELF",
+          "CHILD_A",
+          "CHILD_B"
+        ],
+        "applicableJurisdiction": "UNKNOWN",
+        "currency": "MYR",
+        "timeBasis": "CALENDAR_YEAR_END",
+        "realOrNominalBasis": "NOMINAL_WITH_BASE_YEAR_REAL",
+        "inputSourceRefs": [
+          "SYNTHETIC_DECLARATIONS_V1"
+        ],
+        "assumptions": [],
+        "calculationMetricRefs": [
+          "LIFE_COURSE_EVENTS:PATH"
+        ],
+        "valueState": "UNKNOWN",
+        "uncoveredDependencies": [
+          "MEANINGFUL_AUTHORIZED_FACTS_REQUIRED"
+        ],
+        "sourceEligibility": "LOCAL_SYNTHETIC_PREVIEW_ONLY",
+        "disclosureBoundary": "CLIENT_SCENARIO_NOT_PROFESSIONAL_ADVICE",
+        "eligible": false,
+        "rows": []
+      }
+    ],
+    "allocationAudit": {
+      "eligible": true,
+      "issues": [],
+      "totals": {}
+    }
+  },
+  "contentDigest": "f77ad3e2c8ac2e0013b0ba20f9184b1ae942ba0f2e84759c2ef1b35bf9509163",
+  "commercial": {
+    "priceMYR": 69,
+    "languages": [
+      "zh-Hans",
+      "en"
+    ],
+    "artifactLanguage": "BILINGUAL",
+    "followups": 4,
+    "providerCapUSD": 5,
+    "providerCalls": 0,
+    "costUSD": 0
+  }
+}

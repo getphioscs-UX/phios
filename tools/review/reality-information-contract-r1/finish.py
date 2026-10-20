@@ -1,0 +1,37 @@
+from pathlib import Path
+import json,hashlib,subprocess,re,datetime
+root=Path('C:/phios');out=root/'tools/review/reality-information-contract-r1'
+def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def save(name,value): (out/name).write_bytes(json.dumps(value,ensure_ascii=False,indent=2).encode('utf-8'))
+def git(*args):return subprocess.check_output(['git',*args],cwd=root,text=True,encoding='utf-8').rstrip()
+now=datetime.datetime.now(datetime.timezone.utc).isoformat();baseline=json.loads((out/'R0-FILE-SHA-MANIFEST.json').read_text(encoding='utf-8'))
+drift=[r['path'] for r in baseline['files'] if digest(root/r['path'])!=r['sha256']]
+head=git('rev-parse','HEAD');assert head==baseline['head'],('HEAD_DRIFT',head);assert not drift,('SOURCE_DRIFT',drift)
+# Supplement static import audit with literal dynamic imports / package alias resolution.
+aliases=json.loads((root/'package.json').read_text(encoding='utf-8'))['imports'];dynamic=[]
+for row in baseline['files']:
+ p=root/row['path'];text=p.read_text(encoding='utf-8',errors='replace')
+ for spec in re.findall(r'import\s*\(\s*[\'\"]([^\'\"]+)',text):
+  target=(p.parent/spec).resolve() if spec.startswith('.') else root/aliases.get(spec,'__UNRESOLVED__')
+  dynamic.append({'consumer':row['path'],'specifier':spec,'state':'VERIFIED_LOCAL_BYTES' if target.is_file() else 'UNRESOLVED_OR_NONLOCAL','path':str(target.relative_to(root)) if root in target.parents else None,'sha256':digest(target) if target.is_file() else None})
+consumers=(out/'review/OWNER-CONSUMERS-AND-TESTS.txt').read_text(encoding='utf-8-sig').splitlines()
+save('review/R0-REFERENCE-SUPPLEMENT.json',{'packageAliases':aliases,'dynamicImports':dynamic,'consumerAndTestFiles':[{'path':p.replace('\\','/'),'sha256':digest(root/p)} for p in consumers if (root/p).is_file()],'proof':'Static reference/bytes verified; existing product tests not re-run; no runtime activation inferred'})
+node=(out/'review/NODE-FINAL.log').read_text(encoding='utf-8-sig');assert re.search(r'tests 47',node) and re.search(r'pass 47',node) and re.search(r'fail 0',node)
+browser=json.loads((out/'review/BROWSER-RESULTS.json').read_text(encoding='utf-8'));assert browser['status']=='PASS_LOCAL_BROWSER'
+for path,expected in browser['inputHashes'].items():assert digest((out/'review'/path).resolve())==expected,('BROWSER_EVIDENCE_STALE',path)
+results=json.loads((out/'RIC-TEST-RESULTS.json').read_text(encoding='utf-8'));assert results['negativeCount']==40 and all(r['status']=='PASS' for r in results['results']);results.update(status='PASS_LOCAL_PROCESS',processExitCode=0,totalNodeTests=47,passedNodeTests=47,failedNodeTests=0,command='node --test tools/review/reality-information-contract-r1/tests/ric.test.mjs',completedAt=now);save('RIC-TEST-RESULTS.json',results)
+status=git('status','--short');excluded=[]
+for line in status.splitlines():
+ p=line[3:]
+ if p.startswith('tools/review/reality-information-contract-r1/'):continue
+ if (root/p).is_file():excluded.append({'status':line[:2],'path':p,'sha256':digest(root/p)})
+save('review/EXCLUDED-CONCURRENT-WORK.json',{'observedAt':now,'files':excluded,'initialWorktree':'CLEAN','classification':'Changes appeared during RIC work; untouched by RIC; no staging/cleanup performed'})
+save('review/FAILURE-HISTORY.json',{'preservedFirstAssertions':'FIRST-RUN-ASSERTIONS.json','attempts':[{'phase':'initial Node','exitCode':1,'reason':'claimScope type mismatch and source path resolved to C:/content; fixed reference schema/path, no historical tests changed'},{'phase':'browser first start','exitCode':1,'reason':'Sandbox-local server not reachable by elevated browser; stopped own server and restarted same local server in matching execution context'},{'phase':'browser module parse','exitCode':1,'reason':'Extra parenthesis in newly authored review template; fixed; node --check passed'},{'phase':'extended schema positive','exitCode':1,'reason':'Consent scope incorrectly inherited object type; changed new consent schema to explicit permission-layer enum; retained owner semantics'}],'finalNodeExitCode':0,'finalBrowserExitCode':0,'historyOrFrozenProductTestsChanged':False})
+save('review/EXECUTION-RECEIPT.json',{'at':now,'commands':[{'command':'node --test tools/review/reality-information-contract-r1/tests/ric.test.mjs','exitCode':0,'tests':47,'pass':47,'fail':0},{'command':'node tools/review/reality-information-contract-r1/review/verify-browser.mjs','exitCode':0,'scenarioViewportRuns':len(browser['views'])},{'command':'git diff --check -- tools/review/reality-information-contract-r1','exitCode':0,'scope':'Tracked diff; independent syntax and schema checks cover new untracked files'}],'providerNetworkAttempts':results['networkAttempts'],'browserExternalRequests':browser['externalNetworkAttempts'],'D1R2BindingsPresent':False,'providerCalls':0,'costUSD':0,'D1Mutations':0,'R2Mutations':0,'realPayments':0,'refunds':0,'commit':0,'push':0,'deploy':0,'productionFlags':'NOT_EXERCISED / RUNTIME_UNVERIFIED'})
+save('RIC-MASTER-STATE.json',{'at':now,'head':head,'baselineRemoteMain':'c05f2acc9f73f3de650765e44e36c6e3c0973d47','remoteRead':'git ls-remote origin refs/heads/main, matched at R0; no push/fetch mutation','R0':'SOURCE_AUDIT_VERIFIED_RUNTIME_UNVERIFIED','R1':'CONTRACT_CANDIDATE_VERIFIED','R2':'LOCAL_REFERENCE_CANDIDATE_VERIFIED','status':'READY_FOR_HUMAN_REVIEW','humanAcceptance':'PENDING','recommendation':'ACCEPT_LOCAL_CANDIDATE_ONLY','productIntegrated':False,'sourceFilesRechecked':len(baseline['files']),'sourceDrift':drift,'negativeTests':40,'nodeTests':47,'bilingualScenarios':8,'browserScenarioViews':16,'crossFunctionalQuestionPlans':20,'generalAnswerServicePass':False,'productionRuntime':'RUNTIME_UNVERIFIED','providerCalls':0,'costUSD':0,'next':'Human review. No R3/product integration authorized. Per-item provenance, selected owner handoff, relationship records, revision/action history and rendering invalidation need separate acceptance.'})
+shots=[{'path':'review/'+p.name,'sha256':digest(p),'bytes':p.stat().st_size} for p in (out/'review').glob('final-*.png')]
+save('review/SCREENSHOT-INVENTORY.json',{'policy':'Four representative final views only; failed run metadata retained without redundant images','count':len(shots),'totalBytes':sum(x['bytes'] for x in shots),'references':'RIC-HUMAN-REVIEW.html and BROWSER-RESULTS.json','archivePlan':'Keep this small bound review set with the candidate; no existing screenshots/archives deleted or moved','screenshots':shots})
+save('review/FINAL-INTEGRITY.json',{'head':head,'index':git('diff','--cached','--name-status'),'sourceSHARecheck':'PASS','sourceFileCount':len(baseline['files']),'sourceDrift':drift,'gitStatus':status,'onlyRICWritesPerformed':True,'excludedConcurrentFileCount':len(excluded),'crossIndex':'World review preserved; RIC provides backlink; append deferred to existing review owner','stageBoundary':'STOP_R2_HUMAN_REVIEW'})
+files=[{'path':p.relative_to(out).as_posix(),'bytes':p.stat().st_size,'sha256':digest(p)} for p in out.rglob('*') if p.is_file() and p.name!='DELIVERY-MANIFEST.json']
+save('DELIVERY-MANIFEST.json',{'at':now,'head':head,'files':files,'fileCount':len(files),'totalBytes':sum(f['bytes'] for f in files),'manifestSelfHash':'Excluded to avoid self-reference','status':'READY_FOR_HUMAN_REVIEW_NOT_ACCEPTED'})
+print(json.dumps({'head':head,'files':len(files),'sourceRecheck':len(baseline['files']),'excluded':len(excluded),'screenshots':len(shots),'screenshotBytes':sum(x['bytes'] for x in shots),'status':'READY_FOR_HUMAN_REVIEW'}))

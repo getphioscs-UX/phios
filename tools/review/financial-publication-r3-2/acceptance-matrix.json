@@ -1,0 +1,232 @@
+{
+  "scope": "LOCAL_SYNTHETIC_CANDIDATE_ONLY",
+  "productionPass": false,
+  "assertions": [
+    {
+      "id": "XS01",
+      "expected": "Anonymous 34-sheet metadata; no original workbook inspection",
+      "status": "PASS_ANONYMOUS_SCOPE",
+      "actual": "34 entries validated by supplied attachment validator; workbook source statistics not independently verified",
+      "evidence": "attachment-validation.json",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "XS02",
+      "expected": "No private original or identifying data imported",
+      "status": "PASS_SYNTHETIC_SCOPE",
+      "actual": "Original workbook never mounted; new-scope identifier pattern check and all output provenance in final integrity receipt",
+      "evidence": "integrity-verification.json",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "XS03",
+      "expected": "Historic signatures cannot grant current consent",
+      "status": "BLOCKED_REAL_SUBJECT_ADMISSION",
+      "actual": "Local opt-in synthetic gate only; no historic checkmark imported",
+      "evidence": "admission-and-blockers.json",
+      "assertion": "Do not admit real customer use"
+    },
+    {
+      "id": "RT01",
+      "expected": "No default retirement spending/age/inflation/horizon",
+      "status": "PASS",
+      "actual": "Each omitted required value blocks path and eligible chart",
+      "evidence": "r32-tests.tap",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "RT02",
+      "expected": "Explicit nominal/real basis and contribution timing; independent goldens",
+      "status": "PASS",
+      "actual": "Zero return/inflation and monthly/annual period-end goldens; next complete calendar year, half-cent monetary tolerance",
+      "evidence": "r32-tests.tap",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "RT03",
+      "expected": "Individual access, currencies and contribution horizons",
+      "status": "PASS_LOCAL_BLOCKED_LIVE_RULES",
+      "actual": "Positive multi-person mixed schedule test; unavailable asset and foreign currency block; live pension restrictions unadmitted",
+      "evidence": "r32-tests.tap",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "RT04",
+      "expected": "Unique allocation within owned amount",
+      "status": "PASS_LOCAL_BLOCKED_FULL_CANONICAL_PROVENANCE",
+      "actual": "Supplied cross-target allocations reject over-allocation; full pre-existing goal-to-asset provenance still requires canonical integration",
+      "evidence": "admission-and-blockers.json",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "RT05",
+      "expected": "No return assumption gives no increasing path",
+      "status": "PASS",
+      "actual": "RETIREMENT_NO_ASSUMPTION eligible=false; base facts remain",
+      "evidence": "r32-tests.tap",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "ED01",
+      "expected": "Per dependant independent stage/cost source",
+      "status": "PASS",
+      "actual": "Two declared authorized synthetic dependants; separate stages/source years/fees/regions",
+      "evidence": "r32-tests.tap",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "ED02",
+      "expected": "Do not mix currency or invent FX",
+      "status": "PASS",
+      "actual": "Mixed-currency education model is blocked without conversion",
+      "evidence": "r32-tests.tap",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "ED03",
+      "expected": "Prevent double use across goals/children",
+      "status": "PASS_LOCAL",
+      "actual": "Cross-target repeated asset blocks both funding models; owned-interest and asOf checked",
+      "evidence": "r32-tests.tap",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "ED04",
+      "expected": "Surplus funding is excess, no negative gap",
+      "status": "PASS",
+      "actual": "Explicit zero costs retain full remaining balance, all gaps zero",
+      "evidence": "r32-tests.tap",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "ED05",
+      "expected": "No unauthorized/inferred dependant",
+      "status": "PASS_LOCAL_BLOCKED_REAL_CONSENT",
+      "actual": "Unauthorized dependant stops eligibility; real guardian admission not implemented",
+      "evidence": "r32-tests.tap",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "IN01",
+      "expected": "Person and event distinct",
+      "status": "PASS_FACTS_ONLY",
+      "actual": "Existing event/subject references must match; no combined coverage need",
+      "evidence": "r32-tests.tap",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "IN02",
+      "expected": "No sufficiency without approved need model",
+      "status": "PASS_BOUNDARY",
+      "actual": "Need and gap stay UNKNOWN, expiry/declared evidence only",
+      "evidence": "r32-tests.tap",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "EST01",
+      "expected": "Roles and nomination separate, no legal document",
+      "status": "PASS_PREPARATION_ONLY",
+      "actual": "Will, nomination and executor states separate; nominationIsInheritance=false",
+      "evidence": "r32-tests.tap",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "EST02",
+      "expected": "No historical legal signing/deadline instructions",
+      "status": "PASS_BOUNDARY",
+      "actual": "legalState=GATE_BLOCKED, no jurisdiction conclusion",
+      "evidence": "admission-and-blockers.json",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "EST03",
+      "expected": "Current permission on private reopen",
+      "status": "PASS_LOCAL_BLOCKED_REAL_CUSTOMER_ACCESS",
+      "actual": "Source/tamper/consent reopens tested; local artifacts contain synthetic references only",
+      "evidence": "r32-tests.tap",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "SY01",
+      "expected": "No old professional advice becomes recommendation",
+      "status": "PASS_BOUNDARY",
+      "actual": "Only anonymous crosswalk consumed; model disclosure is CLIENT_SCENARIO_NOT_PROFESSIONAL_ADVICE",
+      "evidence": "source-coverage.json",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "SY02",
+      "expected": "No professional verification from old checkmarks",
+      "status": "PASS_BOUNDARY",
+      "actual": "DECLARED/UNKNOWN shown; professional verification unadmitted",
+      "evidence": "source-coverage.json",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "TL01",
+      "expected": "Dated declared events and distinct statuses",
+      "status": "PASS",
+      "actual": "Missing dates omit timeline; completion needs explicit receipt reference in local synthetic contract",
+      "evidence": "r32-tests.tap",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "TL02",
+      "expected": "D07 differs from P16 dependency roadmap",
+      "status": "PASS_LOCAL",
+      "actual": "Multi-lane dated SVG vs preserved core dependency chart; missing events omit D07",
+      "evidence": "core-integration.json",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "VG01",
+      "expected": "Pinned R2 A4 background, dynamic foreground",
+      "status": "PASS_LOCAL_PDF_QA",
+      "actual": "Actual A4 dimensions, per-page background pixels and HTML overflow checks; frozen chart-source values",
+      "evidence": "pdf-verification.json",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "VG02",
+      "expected": "Historical16/8 and current20 unchanged",
+      "status": "PASS_LOCAL_PRESERVATION",
+      "actual": "Baseline file hashes and original90 regression including exact original five FAILs",
+      "evidence": "integrity-verification.json",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "VG03",
+      "expected": "Single bilingual artifact, shared figures and selectable text",
+      "status": "PASS_LOCAL_QA",
+      "actual": "ZH/EN paired geometry and source parity, A4 selectable text, no body overflow; no Human ACCEPT claimed",
+      "evidence": "pdf-verification.json",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    },
+    {
+      "id": "VG04",
+      "expected": "Provider0, no production mutation, actual statuses",
+      "status": "PASS_LOCAL_ONLY",
+      "actual": "Provider0/USD0, no task commit/push/deploy/payment/production migration; never Production PASS",
+      "evidence": "execution-state.json",
+      "assertion": "Only the stated local scope passes; blocked subscopes are not waived"
+    }
+  ],
+  "tests": [
+    {
+      "name": "r31-regression",
+      "status": "PASS_WITH_EXACT_FIVE_REVIEWED_LEGACY_FAILURES",
+      "rawExit": 1,
+      "tests": 90,
+      "pass": 85,
+      "fail": 5
+    },
+    {
+      "name": "r32-tests",
+      "status": "PASS",
+      "rawExit": 0,
+      "tests": 26,
+      "pass": 26,
+      "fail": 0
+    }
+  ]
+}

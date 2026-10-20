@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:phios:RIC-ANSWER-BUNDLE-v1",
+  "title": "Independent local reference; no permission authority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "question",
+    "answerState",
+    "directAnswer",
+    "supportedClaims",
+    "interpretations",
+    "unknowns",
+    "conflicts",
+    "scope",
+    "evidenceRefs",
+    "visualRefs",
+    "optionsForFurtherInvestigation",
+    "privacyBoundary",
+    "generatedAt",
+    "inputVersionRefs",
+    "admissionState",
+    "recheckTriggers",
+    "governance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "RIC-ANSWER-BUNDLE-v1"
+    },
+    "question": {
+      "type": "object"
+    },
+    "answerState": {
+      "enum": [
+        "DIRECT_SUPPORTED",
+        "BOUNDED_MECHANISM",
+        "PARTIAL_SUPPORTED",
+        "INSUFFICIENT_EVIDENCE",
+        "PERMISSION_REQUIRED",
+        "OUT_OF_SCOPE"
+      ]
+    },
+    "directAnswer": {
+      "type": "string"
+    },
+    "supportedClaims": {
+      "type": "array",
+      "items": {}
+    },
+    "interpretations": {
+      "type": "array",
+      "items": {}
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {}
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {}
+    },
+    "scope": {
+      "type": "object"
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {}
+    },
+    "visualRefs": {
+      "type": "array",
+      "items": {}
+    },
+    "optionsForFurtherInvestigation": {
+      "type": "array",
+      "items": {}
+    },
+    "privacyBoundary": {
+      "type": "string"
+    },
+    "generatedAt": {
+      "type": "string"
+    },
+    "inputVersionRefs": {
+      "type": "array",
+      "items": {}
+    },
+    "admissionState": {
+      "type": "string"
+    },
+    "recheckTriggers": {
+      "type": "array",
+      "items": {}
+    },
+    "governance": {
+      "type": "object"
+    }
+  }
+}

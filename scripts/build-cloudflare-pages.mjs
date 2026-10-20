@@ -8,6 +8,7 @@ import { gzipSync } from 'node:zlib';
 import { transformSync } from 'esbuild';
 import {createHash} from 'node:crypto';
 import {acquirePagesOutputLock} from './lib/pages-output-lock.mjs';
+import {pagesWorkerCompactionOptions} from './lib/pages-worker-compaction.mjs';
 
 const root = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -361,13 +362,10 @@ if (
   );
 }
 
-// Compact only generated whitespace. Keep identifiers, syntax and legal
-// comments; enforce the same publication budgets on the actual shipped bytes.
+// Compact generated bindings and whitespace, preserving runtime names, syntax
+// and legal comments. Enforce unchanged budgets on the actual shipped bytes.
 const compiledWorker = fs.readFileSync(workerSource, 'utf8');
-const compactWorker = transformSync(compiledWorker, {
-  loader: 'js', target: 'esnext', minifyWhitespace: true,
-  minifyIdentifiers: false, minifySyntax: false, legalComments: 'inline'
-}).code;
+const compactWorker = transformSync(compiledWorker, pagesWorkerCompactionOptions).code;
 fs.writeFileSync(workerSource, compactWorker);
 const workerBytes = fs.readFileSync(
   workerSource

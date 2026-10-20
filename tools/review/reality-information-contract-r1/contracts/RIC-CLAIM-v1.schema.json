@@ -1,0 +1,196 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:phios:RIC-CLAIM-v1",
+  "title": "Independent local reference; no permission authority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "claimId",
+    "statement",
+    "language",
+    "sourceRefs",
+    "sourceFragmentRefs",
+    "sourceOwner",
+    "originClass",
+    "epistemicKind",
+    "confirmationScope",
+    "supportsWhichQuestion",
+    "relevanceReason",
+    "admissionReason",
+    "claimScope",
+    "subjectRef",
+    "validForPeriod",
+    "recordedAt",
+    "sourceUpdatedAt",
+    "checkedAt",
+    "freshnessState",
+    "version",
+    "status",
+    "confidenceOrLimitations",
+    "personSpecificFact",
+    "publicShareAllowed",
+    "processingAuthorized",
+    "authorizationRef",
+    "retentionPolicyRef",
+    "contradictions",
+    "unknownDependencies",
+    "supersededBy",
+    "provenanceChain",
+    "dependencyIds",
+    "realityFact",
+    "visualRefs"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "RIC-CLAIM-v1"
+    },
+    "claimId": {
+      "type": "string"
+    },
+    "statement": {
+      "type": "string"
+    },
+    "language": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "sourceRefs": {
+      "type": "array",
+      "items": {}
+    },
+    "sourceFragmentRefs": {
+      "type": "array",
+      "items": {}
+    },
+    "sourceOwner": {
+      "type": "string"
+    },
+    "originClass": {
+      "enum": [
+        "PUBLIC_STATISTIC",
+        "PRIMARY_DOCUMENT",
+        "PUBLISHED_KNOWLEDGE",
+        "USER_SELF_REPORT",
+        "PROFESSIONAL_RECORD",
+        "CALCULATION",
+        "METHOD_INTERPRETATION",
+        "AI_SYNTHESIS",
+        "OTHER"
+      ]
+    },
+    "epistemicKind": {
+      "enum": [
+        "CONFIRMED_SOURCE_STATEMENT",
+        "OBSERVATION",
+        "ESTIMATE",
+        "DERIVED_CALCULATION",
+        "INTERPRETATION",
+        "FORECAST",
+        "OPINION",
+        "UNCONFIRMED",
+        "UNKNOWN"
+      ]
+    },
+    "confirmationScope": {
+      "type": "string"
+    },
+    "supportsWhichQuestion": {
+      "type": "string"
+    },
+    "relevanceReason": {
+      "type": "string"
+    },
+    "admissionReason": {
+      "type": "string"
+    },
+    "claimScope": {
+      "type": "string"
+    },
+    "subjectRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "validForPeriod": {
+      "type": "string"
+    },
+    "recordedAt": {
+      "type": "string"
+    },
+    "sourceUpdatedAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "checkedAt": {
+      "type": "string"
+    },
+    "freshnessState": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "confidenceOrLimitations": {
+      "type": "string"
+    },
+    "personSpecificFact": {
+      "type": "boolean"
+    },
+    "publicShareAllowed": {
+      "type": "boolean"
+    },
+    "processingAuthorized": {
+      "type": "boolean"
+    },
+    "authorizationRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "retentionPolicyRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "contradictions": {
+      "type": "array",
+      "items": {}
+    },
+    "unknownDependencies": {
+      "type": "array",
+      "items": {}
+    },
+    "supersededBy": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "provenanceChain": {
+      "type": "array",
+      "items": {}
+    },
+    "dependencyIds": {
+      "type": "array",
+      "items": {}
+    },
+    "realityFact": {
+      "type": "boolean"
+    },
+    "visualRefs": {
+      "type": "array",
+      "items": {}
+    }
+  }
+}

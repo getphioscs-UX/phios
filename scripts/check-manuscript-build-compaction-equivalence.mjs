@@ -2,11 +2,12 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
 import {build, transformSync, version} from 'esbuild';
+import {pagesWorkerCompactionOptions} from './lib/pages-worker-compaction.mjs';
 const sha=value=>crypto.createHash('sha256').update(value).digest('hex');
 const output='tools/review/free-ask-manuscript-r1/';
 const compiled=await build({entryPoints:['functions/api/customer-contextual-ask.js'],bundle:true,platform:'node',format:'esm',write:false});
 const before=compiled.outputFiles[0].text;
-const after=transformSync(before,{loader:'js',target:'esnext',minifyWhitespace:true,minifyIdentifiers:false,minifySyntax:false,legalComments:'inline'}).code;
+const after=transformSync(before,pagesWorkerCompactionOptions).code;
 const load=text=>import('data:text/javascript;base64,'+Buffer.from(text).toString('base64'));
 const modules=[await load(before),await load(after)];
 const manifest=JSON.parse(fs.readFileSync(output+'CURRENT-IV-VI-CORPUS-MANIFEST.json'));
@@ -28,5 +29,5 @@ for(const c of cases){
   results.push({id:c.id,equivalent:true,state:responses[0].state,responseDigest:sha(JSON.stringify(responses[0]))});
 }
 assert.equal(calls,0);
-fs.writeFileSync(output+'MANUSCRIPT-BUILD-COMPACTION-EQUIVALENCE.json',JSON.stringify({at:new Date().toISOString(),tool:'esbuild',version,options:{minifyWhitespace:true,minifyIdentifiers:false,minifySyntax:false},beforeSha256:sha(before),afterSha256:sha(after),beforeBytes:Buffer.byteLength(before),afterBytes:Buffer.byteLength(after),scope:'Actual customer Ask consumer bundle; not every Worker route',results,providerCalls:calls},null,2)+'\n');
-console.log(`PASS esbuild whitespace-only equivalence: ${results.length} actual customer Ask paths; providerCalls=0.`);
+fs.writeFileSync(output+'MANUSCRIPT-BUILD-COMPACTION-EQUIVALENCE-current.json',JSON.stringify({at:new Date().toISOString(),tool:'esbuild',version,options:pagesWorkerCompactionOptions,beforeSha256:sha(before),afterSha256:sha(after),beforeBytes:Buffer.byteLength(before),afterBytes:Buffer.byteLength(after),scope:'Actual customer Ask consumer bundle; not every Worker route',results,providerCalls:calls},null,2)+'\n');
+console.log(`PASS esbuild deployment compaction equivalence: ${results.length} actual customer Ask paths; providerCalls=0.`);

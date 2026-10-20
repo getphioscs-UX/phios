@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-20T05:23:49.376353+00:00",
+  "commands": [
+    {
+      "command": "node --test tools/review/reality-information-contract-r1/tests/ric.test.mjs",
+      "exitCode": 0,
+      "tests": 47,
+      "pass": 47,
+      "fail": 0
+    },
+    {
+      "command": "node tools/review/reality-information-contract-r1/review/verify-browser.mjs",
+      "exitCode": 0,
+      "scenarioViewportRuns": 16
+    },
+    {
+      "command": "git diff --check -- tools/review/reality-information-contract-r1",
+      "exitCode": 0,
+      "scope": "Tracked diff; independent syntax and schema checks cover new untracked files"
+    }
+  ],
+  "providerNetworkAttempts": 0,
+  "browserExternalRequests": 0,
+  "D1R2BindingsPresent": false,
+  "providerCalls": 0,
+  "costUSD": 0,
+  "D1Mutations": 0,
+  "R2Mutations": 0,
+  "realPayments": 0,
+  "refunds": 0,
+  "commit": 0,
+  "push": 0,
+  "deploy": 0,
+  "productionFlags": "NOT_EXERCISED / RUNTIME_UNVERIFIED"
+}

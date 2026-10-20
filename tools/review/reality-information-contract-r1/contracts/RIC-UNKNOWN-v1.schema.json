@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:phios:RIC-UNKNOWN-v1",
+  "title": "Independent local reference; no permission authority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "unknownId",
+    "questionDependency",
+    "missingField",
+    "reasonKind",
+    "impactOnAnswer",
+    "availableProxyAndLimits",
+    "nextNeededSource",
+    "canAnswerGeneralMechanism",
+    "status",
+    "resolvedBy",
+    "reviewBy"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "RIC-UNKNOWN-v1"
+    },
+    "unknownId": {
+      "type": "string"
+    },
+    "questionDependency": {
+      "type": "string"
+    },
+    "missingField": {
+      "type": "string"
+    },
+    "reasonKind": {
+      "enum": [
+        "NOT_COLLECTED",
+        "SOURCE_UNAVAILABLE",
+        "PERMISSION_NOT_GRANTED",
+        "METRIC_NOT_COMPARABLE",
+        "OBSERVATION_MISSING",
+        "STALE_OR_SUPERSEDED",
+        "SOURCE_CONFLICT",
+        "NOT_APPLICABLE",
+        "UNCERTAIN_MECHANISM"
+      ]
+    },
+    "impactOnAnswer": {
+      "type": "string"
+    },
+    "availableProxyAndLimits": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "nextNeededSource": {
+      "type": "string"
+    },
+    "canAnswerGeneralMechanism": {
+      "type": "boolean"
+    },
+    "status": {
+      "type": "string"
+    },
+    "resolvedBy": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reviewBy": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

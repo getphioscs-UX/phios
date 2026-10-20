@@ -1,0 +1,5 @@
+# Versions and continuity
+
+Three layers remain separate: immutable answerSnapshot; explicitly session-selected preview; persistent continuity NOT_IMPLEMENTED by RIC. Question and input versions accompany a bundle. Same source/claim ID with changed bytes requires a new version and admitted revision evidence. Observation period, publication/retrieval/check time, effective interval, supersession and revision reason are separate fields.
+
+Diff must show previous/new question, new evidence, changed conclusion, unchanged scope, remaining unknowns, next review and revoked-current exclusions. Source update or permission revocation means RECHECK_REQUIRED, not fabricated prior actions. An unconfirmed customer action is denied. In scenario D a synthetic bank assessment is three months later; it supplies only a simulated local comparison. No real history owner is provided, so canonical G3 remains NO_VERIFIED_HISTORY with no events. Continuity's existing upstream-event projection is retained, not replaced.

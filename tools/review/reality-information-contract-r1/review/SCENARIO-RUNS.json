@@ -1,0 +1,4138 @@
+[
+  {
+    "id": "A",
+    "locale": "en",
+    "proofState": "CONTRACT_ONLY",
+    "sourceAvailability": "LOCAL_BYTES_NOT_LIVE",
+    "bundle": {
+      "schemaVersion": "RIC-ANSWER-BUNDLE-v1",
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "A",
+        "originalText": "Is mortgage approval becoming harder in Malaysia?",
+        "locale": "en",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "PUBLIC"
+        },
+        "geography": "MYS",
+        "period": "2024",
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2026-10-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "answerState": "PARTIAL_SUPPORTED",
+      "directAnswer": "There is no matched application denominator here to establish whether Malaysian mortgage approval became harder. Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+      "supportedClaims": [],
+      "interpretations": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "A-public",
+          "statement": "Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+          "language": "en",
+          "sourceRefs": [
+            "book6-en"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "A",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-en"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "A-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "There is no matched application denominator here to establish whether Malaysian mortgage approval became harder.",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "Matched application-cohort counts under consistent definitions.",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "conflicts": [],
+      "scope": {
+        "geography": "MYS",
+        "period": "2024"
+      },
+      "evidenceRefs": [
+        "book6-en"
+      ],
+      "visualRefs": [
+        "https://getphios.com/figure?id=FIG_13F"
+      ],
+      "optionsForFurtherInvestigation": [
+        "Matched application-cohort counts under consistent definitions."
+      ],
+      "privacyBoundary": "SESSION_ONLY",
+      "generatedAt": "2026-10-20T12:00:00Z",
+      "inputVersionRefs": [
+        [
+          "A-public",
+          "1"
+        ]
+      ],
+      "admissionState": "CONTRACT_ONLY",
+      "recheckTriggers": [
+        "SOURCE_UPDATED",
+        "PERMISSION_REVOKED"
+      ],
+      "governance": {
+        "persisted": false,
+        "productIntegrated": false,
+        "providerCalls": 0
+      }
+    },
+    "sources": [
+      {
+        "sourceId": "book6-en",
+        "sourceVersionOrDigest": "d41e4df032036e4f35901e1eb7b66990fd168a4385100b5be0d4e6ab7165ebe2",
+        "sourceOwner": "Existing Book VI publication admission",
+        "sourceClass": "PUBLISHED_KNOWLEDGE",
+        "originalUrlOrCanonicalRef": "https://getphios.com/articles/book6-environment-work-income?locale=en#article-body",
+        "publisher": "PHI OS",
+        "title": "How Living Environment, Employment and Income Carry Civilization into Daily Life",
+        "language": "en",
+        "licenseStatus": "EXISTING_PUBLICATION_ADMISSION_NO_NEW_GRANT",
+        "publicationState": "PUBLISHED",
+        "accessClass": "PUBLIC",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "",
+        "publishedAt": "2026-09-24",
+        "revisedAt": null,
+        "retrievedAt": "2026-10-20T00:00:00Z",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "GENERAL",
+        "populationCoverage": "Not a statistical population",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Published explanation, not measured evidence",
+        "unit": "not_applicable",
+        "priceBasis": null,
+        "timeFrequency": "NOT_APPLICABLE",
+        "sourceFragmentRef": "/sections/0/blocks/0",
+        "quoteSpanOrDatasetRow": "Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+        "checksum": "d41e4df032036e4f35901e1eb7b66990fd168a4385100b5be0d4e6ab7165ebe2",
+        "verifiedChecksum": "d41e4df032036e4f35901e1eb7b66990fd168a4385100b5be0d4e6ab7165ebe2",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": null,
+        "purpose": null,
+        "publicShareAllowed": false,
+        "metric": "mechanism",
+        "value": null,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      }
+    ],
+    "view": {
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "A",
+        "originalText": "Is mortgage approval becoming harder in Malaysia?",
+        "locale": "en",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "PUBLIC"
+        },
+        "geography": "MYS",
+        "period": "2024",
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2026-10-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "claims": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "A-public",
+          "statement": "Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+          "language": "en",
+          "sourceRefs": [
+            "book6-en"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "A",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-en"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "A-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "There is no matched application denominator here to establish whether Malaysian mortgage approval became harder.",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "Matched application-cohort counts under consistent definitions.",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "relations": [],
+      "relationState": "RELATION_NOT_ESTABLISHED",
+      "historyState": "NO_VERIFIED_HISTORY"
+    },
+    "preview": null,
+    "revocation": null,
+    "revision": null,
+    "events": [],
+    "persisted": false
+  },
+  {
+    "id": "B",
+    "locale": "en",
+    "proofState": "CONTRACT_ONLY",
+    "sourceAvailability": "LOCAL_BYTES_NOT_LIVE",
+    "bundle": {
+      "schemaVersion": "RIC-ANSWER-BUNDLE-v1",
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "B",
+        "originalText": "Why can growth coexist with household cost pressure?",
+        "locale": "en",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "PUBLIC"
+        },
+        "geography": null,
+        "period": null,
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2026-10-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "answerState": "PARTIAL_SUPPORTED",
+      "directAnswer": "Aggregate growth does not establish every household’s income or purchasing power. This evidence cannot identify a particular household’s outcome. Macroeconomic growth and lived experience are not interchangeable. Under similar employment rates or average incomes, stability, accessible opportunity and necessary costs can still differ substantially. Malaysia CPI snapshot: 131.4, index (2010=100); period 2024-01. This is not an individual household budget or an inflation percentage.",
+      "supportedClaims": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "B-cpi",
+          "statement": "Malaysia CPI snapshot: 131.4, index (2010=100); period 2024-01. This is not an individual household budget or an inflation percentage.",
+          "language": "en",
+          "sourceRefs": [
+            "MY_CPI"
+          ],
+          "sourceFragmentRefs": [
+            "/observations/6"
+          ],
+          "sourceOwner": "World P1 pinned observation owner",
+          "originClass": "PUBLIC_STATISTIC",
+          "epistemicKind": "OBSERVATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "B",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "PUBLIC_STATISTIC",
+          "subjectRef": null,
+          "validForPeriod": "2024-01",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "MY_CPI"
+          ],
+          "dependencyIds": [
+            "public_indicator"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "interpretations": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "B-public",
+          "statement": "Macroeconomic growth and lived experience are not interchangeable. Under similar employment rates or average incomes, stability, accessible opportunity and necessary costs can still differ substantially.",
+          "language": "en",
+          "sourceRefs": [
+            "book6-en"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/1"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "B",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-en"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "B-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "Aggregate growth does not establish every household’s income or purchasing power. This evidence cannot identify a particular household’s outcome.",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "Consistent household income, necessary costs and budget observations.",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "conflicts": [],
+      "scope": {
+        "geography": null,
+        "period": null
+      },
+      "evidenceRefs": [
+        "book6-en",
+        "MY_CPI"
+      ],
+      "visualRefs": [
+        "https://getphios.com/figure?id=FIG_13F"
+      ],
+      "optionsForFurtherInvestigation": [
+        "Consistent household income, necessary costs and budget observations."
+      ],
+      "privacyBoundary": "SESSION_ONLY",
+      "generatedAt": "2026-10-20T12:00:00Z",
+      "inputVersionRefs": [
+        [
+          "B-public",
+          "1"
+        ],
+        [
+          "B-cpi",
+          "1"
+        ]
+      ],
+      "admissionState": "CONTRACT_ONLY",
+      "recheckTriggers": [
+        "SOURCE_UPDATED",
+        "PERMISSION_REVOKED"
+      ],
+      "governance": {
+        "persisted": false,
+        "productIntegrated": false,
+        "providerCalls": 0
+      }
+    },
+    "sources": [
+      {
+        "sourceId": "book6-en",
+        "sourceVersionOrDigest": "d41e4df032036e4f35901e1eb7b66990fd168a4385100b5be0d4e6ab7165ebe2",
+        "sourceOwner": "Existing Book VI publication admission",
+        "sourceClass": "PUBLISHED_KNOWLEDGE",
+        "originalUrlOrCanonicalRef": "https://getphios.com/articles/book6-environment-work-income?locale=en#article-body",
+        "publisher": "PHI OS",
+        "title": "How Living Environment, Employment and Income Carry Civilization into Daily Life",
+        "language": "en",
+        "licenseStatus": "EXISTING_PUBLICATION_ADMISSION_NO_NEW_GRANT",
+        "publicationState": "PUBLISHED",
+        "accessClass": "PUBLIC",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "",
+        "publishedAt": "2026-09-24",
+        "revisedAt": null,
+        "retrievedAt": "2026-10-20T00:00:00Z",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "GENERAL",
+        "populationCoverage": "Not a statistical population",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Published explanation, not measured evidence",
+        "unit": "not_applicable",
+        "priceBasis": null,
+        "timeFrequency": "NOT_APPLICABLE",
+        "sourceFragmentRef": "/sections/0/blocks/1",
+        "quoteSpanOrDatasetRow": "Macroeconomic growth and lived experience are not interchangeable. Under similar employment rates or average incomes, stability, accessible opportunity and necessary costs can still differ substantially.",
+        "checksum": "d41e4df032036e4f35901e1eb7b66990fd168a4385100b5be0d4e6ab7165ebe2",
+        "verifiedChecksum": "d41e4df032036e4f35901e1eb7b66990fd168a4385100b5be0d4e6ab7165ebe2",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": null,
+        "purpose": null,
+        "publicShareAllowed": false,
+        "metric": "mechanism",
+        "value": null,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      },
+      {
+        "sourceId": "MY_CPI",
+        "sourceVersionOrDigest": "7b1b2e4ee61305221aca3f8b2209a1a251d8da29657df8b67e1bdca4b268de28",
+        "sourceOwner": "World P1 pinned observation owner",
+        "sourceClass": "PUBLIC_STATISTIC",
+        "originalUrlOrCanonicalRef": "https://storage.dosm.gov.my/cpi/cpi_2d.csv",
+        "publisher": "DOSM",
+        "title": "my-cpi-full",
+        "language": "en",
+        "licenseStatus": "CC_BY_4_0",
+        "publicationState": "PUBLISHED",
+        "accessClass": "PUBLIC",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "2024-01",
+        "publishedAt": null,
+        "revisedAt": null,
+        "retrievedAt": "2026-10-20T02:50:53.038197+00:00",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "MYS",
+        "populationCoverage": "DOSM national consumer price basket; not citizen-household income survey",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Monthly overall CPI index, 2010=100; not an inflation percentage",
+        "unit": "index_2010_100",
+        "priceBasis": null,
+        "timeFrequency": "MONTHLY",
+        "sourceFragmentRef": "/observations/6",
+        "quoteSpanOrDatasetRow": "CSV date=2024-01-01,division=overall,index",
+        "checksum": "7b1b2e4ee61305221aca3f8b2209a1a251d8da29657df8b67e1bdca4b268de28",
+        "verifiedChecksum": "7b1b2e4ee61305221aca3f8b2209a1a251d8da29657df8b67e1bdca4b268de28",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": null,
+        "purpose": null,
+        "publicShareAllowed": false,
+        "metric": "CPI",
+        "value": 131.4,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      }
+    ],
+    "view": {
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "B",
+        "originalText": "Why can growth coexist with household cost pressure?",
+        "locale": "en",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "PUBLIC"
+        },
+        "geography": null,
+        "period": null,
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2026-10-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "claims": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "B-public",
+          "statement": "Macroeconomic growth and lived experience are not interchangeable. Under similar employment rates or average incomes, stability, accessible opportunity and necessary costs can still differ substantially.",
+          "language": "en",
+          "sourceRefs": [
+            "book6-en"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/1"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "B",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-en"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "B-cpi",
+          "statement": "Malaysia CPI snapshot: 131.4, index (2010=100); period 2024-01. This is not an individual household budget or an inflation percentage.",
+          "language": "en",
+          "sourceRefs": [
+            "MY_CPI"
+          ],
+          "sourceFragmentRefs": [
+            "/observations/6"
+          ],
+          "sourceOwner": "World P1 pinned observation owner",
+          "originClass": "PUBLIC_STATISTIC",
+          "epistemicKind": "OBSERVATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "B",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "PUBLIC_STATISTIC",
+          "subjectRef": null,
+          "validForPeriod": "2024-01",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "MY_CPI"
+          ],
+          "dependencyIds": [
+            "public_indicator"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "B-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "Aggregate growth does not establish every household’s income or purchasing power. This evidence cannot identify a particular household’s outcome.",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "Consistent household income, necessary costs and budget observations.",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "relations": [],
+      "relationState": "RELATION_NOT_ESTABLISHED",
+      "historyState": "NO_VERIFIED_HISTORY"
+    },
+    "preview": null,
+    "revocation": null,
+    "revision": null,
+    "events": [],
+    "persisted": false
+  },
+  {
+    "id": "C",
+    "locale": "en",
+    "proofState": "SIMULATED",
+    "sourceAvailability": "LOCAL_BYTES_NOT_LIVE",
+    "bundle": {
+      "schemaVersion": "RIC-ANSWER-BUNDLE-v1",
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "C",
+        "originalText": "I want to buy a home within two years.",
+        "locale": "en",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "SYNTHETIC_SELF"
+        },
+        "geography": null,
+        "period": null,
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2026-10-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "answerState": "PARTIAL_SUPPORTED",
+      "directAnswer": "The synthetic budget does not establish affordability or a bank approval outcome. Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change. Synthetic self-report: monthly income MYR 6,000; necessary costs MYR 4,000. Not independently verified.",
+      "supportedClaims": [],
+      "interpretations": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "C-public",
+          "statement": "Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+          "language": "en",
+          "sourceRefs": [
+            "book6-en"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "C",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-en"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "C-budget",
+          "statement": "Synthetic self-report: monthly income MYR 6,000; necessary costs MYR 4,000. Not independently verified.",
+          "language": "en",
+          "sourceRefs": [
+            "synthetic-budget"
+          ],
+          "sourceFragmentRefs": [
+            "/budget/monthly"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+          "originClass": "USER_SELF_REPORT",
+          "epistemicKind": "UNCONFIRMED",
+          "confirmationScope": "SELF_REPORTED",
+          "supportsWhichQuestion": "C",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "SELF_SELECTED",
+          "subjectRef": null,
+          "validForPeriod": "SYNTHETIC_CURRENT_MONTH",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-budget"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "C-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "The synthetic budget does not establish affordability or a bank approval outcome.",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "Consistent household income, necessary costs and budget observations.",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "conflicts": [],
+      "scope": {
+        "geography": null,
+        "period": null
+      },
+      "evidenceRefs": [
+        "book6-en",
+        "synthetic-budget"
+      ],
+      "visualRefs": [
+        "https://getphios.com/figure?id=FIG_13F"
+      ],
+      "optionsForFurtherInvestigation": [
+        "Consistent household income, necessary costs and budget observations."
+      ],
+      "privacyBoundary": "SESSION_ONLY",
+      "generatedAt": "2026-10-20T12:00:00Z",
+      "inputVersionRefs": [
+        [
+          "C-public",
+          "1"
+        ],
+        [
+          "C-budget",
+          "1"
+        ]
+      ],
+      "admissionState": "CONTRACT_ONLY",
+      "recheckTriggers": [
+        "SOURCE_UPDATED",
+        "PERMISSION_REVOKED"
+      ],
+      "governance": {
+        "persisted": false,
+        "productIntegrated": false,
+        "providerCalls": 0
+      }
+    },
+    "sources": [
+      {
+        "sourceId": "book6-en",
+        "sourceVersionOrDigest": "d41e4df032036e4f35901e1eb7b66990fd168a4385100b5be0d4e6ab7165ebe2",
+        "sourceOwner": "Existing Book VI publication admission",
+        "sourceClass": "PUBLISHED_KNOWLEDGE",
+        "originalUrlOrCanonicalRef": "https://getphios.com/articles/book6-environment-work-income?locale=en#article-body",
+        "publisher": "PHI OS",
+        "title": "How Living Environment, Employment and Income Carry Civilization into Daily Life",
+        "language": "en",
+        "licenseStatus": "EXISTING_PUBLICATION_ADMISSION_NO_NEW_GRANT",
+        "publicationState": "PUBLISHED",
+        "accessClass": "PUBLIC",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "",
+        "publishedAt": "2026-09-24",
+        "revisedAt": null,
+        "retrievedAt": "2026-10-20T00:00:00Z",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "GENERAL",
+        "populationCoverage": "Not a statistical population",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Published explanation, not measured evidence",
+        "unit": "not_applicable",
+        "priceBasis": null,
+        "timeFrequency": "NOT_APPLICABLE",
+        "sourceFragmentRef": "/sections/0/blocks/0",
+        "quoteSpanOrDatasetRow": "Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+        "checksum": "d41e4df032036e4f35901e1eb7b66990fd168a4385100b5be0d4e6ab7165ebe2",
+        "verifiedChecksum": "d41e4df032036e4f35901e1eb7b66990fd168a4385100b5be0d4e6ab7165ebe2",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": null,
+        "purpose": null,
+        "publicShareAllowed": false,
+        "metric": "mechanism",
+        "value": null,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      },
+      {
+        "sourceId": "synthetic-budget",
+        "sourceVersionOrDigest": "synthetic-v1",
+        "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+        "sourceClass": "USER_SELF_REPORT",
+        "originalUrlOrCanonicalRef": "urn:synthetic:budget",
+        "publisher": "PHI OS",
+        "title": "Synthetic selected budget",
+        "language": "en",
+        "licenseStatus": "EXISTING_PUBLICATION_ADMISSION_NO_NEW_GRANT",
+        "publicationState": "SYNTHETIC",
+        "accessClass": "PRIVATE",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "SYNTHETIC_CURRENT_MONTH",
+        "publishedAt": null,
+        "revisedAt": null,
+        "retrievedAt": "2026-10-20T12:00:00Z",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "GENERAL",
+        "populationCoverage": "Not a statistical population",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Published explanation, not measured evidence",
+        "unit": "MYR_PER_MONTH",
+        "priceBasis": null,
+        "timeFrequency": "NOT_APPLICABLE",
+        "sourceFragmentRef": "/budget/monthly",
+        "quoteSpanOrDatasetRow": "Synthetic self-report: monthly income MYR 6,000; necessary costs MYR 4,000. Not independently verified.",
+        "checksum": "synthetic-fixture-not-public-digest",
+        "verifiedChecksum": "synthetic-fixture-not-public-digest",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": "synthetic-account",
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "publicShareAllowed": false,
+        "metric": "mechanism",
+        "value": null,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      }
+    ],
+    "view": {
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "C",
+        "originalText": "I want to buy a home within two years.",
+        "locale": "en",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "SYNTHETIC_SELF"
+        },
+        "geography": null,
+        "period": null,
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2026-10-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "claims": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "C-public",
+          "statement": "Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+          "language": "en",
+          "sourceRefs": [
+            "book6-en"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "C",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-en"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "C-budget",
+          "statement": "Synthetic self-report: monthly income MYR 6,000; necessary costs MYR 4,000. Not independently verified.",
+          "language": "en",
+          "sourceRefs": [
+            "synthetic-budget"
+          ],
+          "sourceFragmentRefs": [
+            "/budget/monthly"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+          "originClass": "USER_SELF_REPORT",
+          "epistemicKind": "UNCONFIRMED",
+          "confirmationScope": "SELF_REPORTED",
+          "supportsWhichQuestion": "C",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "SELF_SELECTED",
+          "subjectRef": null,
+          "validForPeriod": "SYNTHETIC_CURRENT_MONTH",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-budget"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "C-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "The synthetic budget does not establish affordability or a bank approval outcome.",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "Consistent household income, necessary costs and budget observations.",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "relations": [],
+      "relationState": "RELATION_NOT_ESTABLISHED",
+      "historyState": "NO_VERIFIED_HISTORY"
+    },
+    "preview": {
+      "state": "PREVIEW_ONLY",
+      "items": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "C-public",
+          "statement": "Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+          "language": "en",
+          "sourceRefs": [
+            "book6-en"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "C",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-en"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "C-budget",
+          "statement": "Synthetic self-report: monthly income MYR 6,000; necessary costs MYR 4,000. Not independently verified.",
+          "language": "en",
+          "sourceRefs": [
+            "synthetic-budget"
+          ],
+          "sourceFragmentRefs": [
+            "/budget/monthly"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+          "originClass": "USER_SELF_REPORT",
+          "epistemicKind": "UNCONFIRMED",
+          "confirmationScope": "SELF_REPORTED",
+          "supportsWhichQuestion": "C",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "SELF_SELECTED",
+          "subjectRef": null,
+          "validForPeriod": "SYNTHETIC_CURRENT_MONTH",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-budget"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "persisted": false,
+      "decisionAuthority": "INJECTED_OWNER_DECISION_NOT_ISSUED_BY_RIC"
+    },
+    "revocation": {
+      "privateFuturePreview": "CONSENT_REVOKED",
+      "publicStillAvailable": "book6-en",
+      "productionDeletionPerformed": false
+    },
+    "revision": null,
+    "events": [
+      {
+        "action": "UNSELECTED_OLD_ACCOUNT_REPORT",
+        "actual": "SOURCE_NOT_SELECTED"
+      }
+    ],
+    "persisted": false
+  },
+  {
+    "id": "D",
+    "locale": "en",
+    "proofState": "SIMULATED",
+    "sourceAvailability": "LOCAL_BYTES_NOT_LIVE",
+    "bundle": {
+      "schemaVersion": "RIC-ANSWER-BUNDLE-v1",
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "D",
+        "originalText": "I want to buy a home within two years.",
+        "locale": "en",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "SYNTHETIC_SELF"
+        },
+        "geography": null,
+        "period": null,
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2027-01-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "answerState": "PARTIAL_SUPPORTED",
+      "directAnswer": "The synthetic budget does not establish affordability or a bank approval outcome. Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change. Synthetic self-report: monthly income MYR 6,000; necessary costs MYR 4,000. Not independently verified. Synthetic assessment: proposed monthly repayment MYR 2,300 instead of assumed MYR 1,800. Final approval and future income remain unknown.",
+      "supportedClaims": [],
+      "interpretations": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-public",
+          "statement": "Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+          "language": "en",
+          "sourceRefs": [
+            "book6-en"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-en"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-budget",
+          "statement": "Synthetic self-report: monthly income MYR 6,000; necessary costs MYR 4,000. Not independently verified.",
+          "language": "en",
+          "sourceRefs": [
+            "synthetic-budget"
+          ],
+          "sourceFragmentRefs": [
+            "/budget/monthly"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+          "originClass": "USER_SELF_REPORT",
+          "epistemicKind": "UNCONFIRMED",
+          "confirmationScope": "SELF_REPORTED",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "SELF_SELECTED",
+          "subjectRef": null,
+          "validForPeriod": "SYNTHETIC_CURRENT_MONTH",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-budget"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-assessment",
+          "statement": "Synthetic assessment: proposed monthly repayment MYR 2,300 instead of assumed MYR 1,800. Final approval and future income remain unknown.",
+          "language": "en",
+          "sourceRefs": [
+            "synthetic-bank-assessment"
+          ],
+          "sourceFragmentRefs": [
+            "/assessment/repayment"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_BANK_OWNER_NOT_REAL_ADMISSION",
+          "originClass": "PROFESSIONAL_RECORD",
+          "epistemicKind": "OPINION",
+          "confirmationScope": "SYNTHETIC_QUALIFICATION_NOT_REAL_PROFESSIONAL",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "2027-01",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-bank-assessment"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "D-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "The synthetic budget does not establish affordability or a bank approval outcome.",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "Consistent household income, necessary costs and budget observations.",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "conflicts": [],
+      "scope": {
+        "geography": null,
+        "period": null
+      },
+      "evidenceRefs": [
+        "book6-en",
+        "synthetic-budget",
+        "synthetic-bank-assessment"
+      ],
+      "visualRefs": [
+        "https://getphios.com/figure?id=FIG_13F"
+      ],
+      "optionsForFurtherInvestigation": [
+        "Consistent household income, necessary costs and budget observations."
+      ],
+      "privacyBoundary": "SESSION_ONLY",
+      "generatedAt": "2027-01-20T12:00:00Z",
+      "inputVersionRefs": [
+        [
+          "D-public",
+          "1"
+        ],
+        [
+          "D-budget",
+          "1"
+        ],
+        [
+          "D-assessment",
+          "1"
+        ]
+      ],
+      "admissionState": "CONTRACT_ONLY",
+      "recheckTriggers": [
+        "SOURCE_UPDATED",
+        "PERMISSION_REVOKED"
+      ],
+      "governance": {
+        "persisted": false,
+        "productIntegrated": false,
+        "providerCalls": 0
+      }
+    },
+    "sources": [
+      {
+        "sourceId": "book6-en",
+        "sourceVersionOrDigest": "d41e4df032036e4f35901e1eb7b66990fd168a4385100b5be0d4e6ab7165ebe2",
+        "sourceOwner": "Existing Book VI publication admission",
+        "sourceClass": "PUBLISHED_KNOWLEDGE",
+        "originalUrlOrCanonicalRef": "https://getphios.com/articles/book6-environment-work-income?locale=en#article-body",
+        "publisher": "PHI OS",
+        "title": "How Living Environment, Employment and Income Carry Civilization into Daily Life",
+        "language": "en",
+        "licenseStatus": "EXISTING_PUBLICATION_ADMISSION_NO_NEW_GRANT",
+        "publicationState": "PUBLISHED",
+        "accessClass": "PUBLIC",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "",
+        "publishedAt": "2026-09-24",
+        "revisedAt": null,
+        "retrievedAt": "2026-10-20T00:00:00Z",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "GENERAL",
+        "populationCoverage": "Not a statistical population",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Published explanation, not measured evidence",
+        "unit": "not_applicable",
+        "priceBasis": null,
+        "timeFrequency": "NOT_APPLICABLE",
+        "sourceFragmentRef": "/sections/0/blocks/0",
+        "quoteSpanOrDatasetRow": "Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+        "checksum": "d41e4df032036e4f35901e1eb7b66990fd168a4385100b5be0d4e6ab7165ebe2",
+        "verifiedChecksum": "d41e4df032036e4f35901e1eb7b66990fd168a4385100b5be0d4e6ab7165ebe2",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": null,
+        "purpose": null,
+        "publicShareAllowed": false,
+        "metric": "mechanism",
+        "value": null,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      },
+      {
+        "sourceId": "synthetic-budget",
+        "sourceVersionOrDigest": "synthetic-v1",
+        "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+        "sourceClass": "USER_SELF_REPORT",
+        "originalUrlOrCanonicalRef": "urn:synthetic:budget",
+        "publisher": "PHI OS",
+        "title": "Synthetic selected budget",
+        "language": "en",
+        "licenseStatus": "EXISTING_PUBLICATION_ADMISSION_NO_NEW_GRANT",
+        "publicationState": "SYNTHETIC",
+        "accessClass": "PRIVATE",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "SYNTHETIC_CURRENT_MONTH",
+        "publishedAt": null,
+        "revisedAt": null,
+        "retrievedAt": "2027-01-20T12:00:00Z",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "GENERAL",
+        "populationCoverage": "Not a statistical population",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Published explanation, not measured evidence",
+        "unit": "MYR_PER_MONTH",
+        "priceBasis": null,
+        "timeFrequency": "NOT_APPLICABLE",
+        "sourceFragmentRef": "/budget/monthly",
+        "quoteSpanOrDatasetRow": "Synthetic self-report: monthly income MYR 6,000; necessary costs MYR 4,000. Not independently verified.",
+        "checksum": "synthetic-fixture-not-public-digest",
+        "verifiedChecksum": "synthetic-fixture-not-public-digest",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": "synthetic-account",
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "publicShareAllowed": false,
+        "metric": "mechanism",
+        "value": null,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      },
+      {
+        "sourceId": "synthetic-bank-assessment",
+        "sourceVersionOrDigest": "synthetic-bank-v2",
+        "sourceOwner": "INJECTED_SYNTHETIC_BANK_OWNER_NOT_REAL_ADMISSION",
+        "sourceClass": "PROFESSIONAL_RECORD",
+        "originalUrlOrCanonicalRef": "urn:synthetic:bank-assessment",
+        "publisher": "PHI OS",
+        "title": "Synthetic bank assessment",
+        "language": "en",
+        "licenseStatus": "EXISTING_PUBLICATION_ADMISSION_NO_NEW_GRANT",
+        "publicationState": "SYNTHETIC",
+        "accessClass": "PRIVATE",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "2027-01",
+        "publishedAt": null,
+        "revisedAt": null,
+        "retrievedAt": "2027-01-20T12:00:00Z",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "GENERAL",
+        "populationCoverage": "Not a statistical population",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Published explanation, not measured evidence",
+        "unit": "MYR_PER_MONTH",
+        "priceBasis": null,
+        "timeFrequency": "NOT_APPLICABLE",
+        "sourceFragmentRef": "/assessment/repayment",
+        "quoteSpanOrDatasetRow": "Synthetic assessment: proposed monthly repayment MYR 2,300 instead of assumed MYR 1,800. Final approval and future income remain unknown.",
+        "checksum": "synthetic-fixture-not-public-digest",
+        "verifiedChecksum": "synthetic-fixture-not-public-digest",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": "synthetic-account",
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "publicShareAllowed": false,
+        "metric": "mechanism",
+        "value": null,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      }
+    ],
+    "view": {
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "D",
+        "originalText": "I want to buy a home within two years.",
+        "locale": "en",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "SYNTHETIC_SELF"
+        },
+        "geography": null,
+        "period": null,
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2027-01-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "claims": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-public",
+          "statement": "Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+          "language": "en",
+          "sourceRefs": [
+            "book6-en"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-en"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-budget",
+          "statement": "Synthetic self-report: monthly income MYR 6,000; necessary costs MYR 4,000. Not independently verified.",
+          "language": "en",
+          "sourceRefs": [
+            "synthetic-budget"
+          ],
+          "sourceFragmentRefs": [
+            "/budget/monthly"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+          "originClass": "USER_SELF_REPORT",
+          "epistemicKind": "UNCONFIRMED",
+          "confirmationScope": "SELF_REPORTED",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "SELF_SELECTED",
+          "subjectRef": null,
+          "validForPeriod": "SYNTHETIC_CURRENT_MONTH",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-budget"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-assessment",
+          "statement": "Synthetic assessment: proposed monthly repayment MYR 2,300 instead of assumed MYR 1,800. Final approval and future income remain unknown.",
+          "language": "en",
+          "sourceRefs": [
+            "synthetic-bank-assessment"
+          ],
+          "sourceFragmentRefs": [
+            "/assessment/repayment"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_BANK_OWNER_NOT_REAL_ADMISSION",
+          "originClass": "PROFESSIONAL_RECORD",
+          "epistemicKind": "OPINION",
+          "confirmationScope": "SYNTHETIC_QUALIFICATION_NOT_REAL_PROFESSIONAL",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "2027-01",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-bank-assessment"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "D-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "The synthetic budget does not establish affordability or a bank approval outcome.",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "Consistent household income, necessary costs and budget observations.",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "relations": [],
+      "relationState": "RELATION_NOT_ESTABLISHED",
+      "historyState": "NO_VERIFIED_HISTORY"
+    },
+    "preview": {
+      "state": "PREVIEW_ONLY",
+      "items": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-public",
+          "statement": "Civilizational structures eventually enter daily life through air, housing, transport, work, income and living costs. Living environment shapes basic conditions, employment connects people to resources and career paths, and the margin between income and necessary costs affects household buffers and capacity to change.",
+          "language": "en",
+          "sourceRefs": [
+            "book6-en"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-en"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-budget",
+          "statement": "Synthetic self-report: monthly income MYR 6,000; necessary costs MYR 4,000. Not independently verified.",
+          "language": "en",
+          "sourceRefs": [
+            "synthetic-budget"
+          ],
+          "sourceFragmentRefs": [
+            "/budget/monthly"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+          "originClass": "USER_SELF_REPORT",
+          "epistemicKind": "UNCONFIRMED",
+          "confirmationScope": "SELF_REPORTED",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "SELF_SELECTED",
+          "subjectRef": null,
+          "validForPeriod": "SYNTHETIC_CURRENT_MONTH",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-budget"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-assessment",
+          "statement": "Synthetic assessment: proposed monthly repayment MYR 2,300 instead of assumed MYR 1,800. Final approval and future income remain unknown.",
+          "language": "en",
+          "sourceRefs": [
+            "synthetic-bank-assessment"
+          ],
+          "sourceFragmentRefs": [
+            "/assessment/repayment"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_BANK_OWNER_NOT_REAL_ADMISSION",
+          "originClass": "PROFESSIONAL_RECORD",
+          "epistemicKind": "OPINION",
+          "confirmationScope": "SYNTHETIC_QUALIFICATION_NOT_REAL_PROFESSIONAL",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "2027-01",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-bank-assessment"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "persisted": false,
+      "decisionAuthority": "INJECTED_OWNER_DECISION_NOT_ISSUED_BY_RIC"
+    },
+    "revocation": {
+      "privateFuturePreview": "CONSENT_REVOKED",
+      "publicStillAvailable": "book6-en",
+      "productionDeletionPerformed": false
+    },
+    "revision": {
+      "localDiff": {
+        "state": "QUALIFIED_LOCAL_DIFF",
+        "historyAuthority": "SIMULATED_NOT_CANONICAL",
+        "previous": {
+          "version": "1",
+          "questionId": "D",
+          "statement": "Affordability not assessed."
+        },
+        "next": {
+          "version": "2",
+          "questionId": "D",
+          "statement": "Synthetic bank assessment received; earlier affordability assumptions require review.",
+          "unknowns": [
+            {
+              "schemaVersion": "RIC-UNKNOWN-v1",
+              "unknownId": "D-gap",
+              "questionDependency": "public_indicator",
+              "missingField": "future_income_and_final_bank_offer",
+              "reasonKind": "OBSERVATION_MISSING",
+              "impactOnAnswer": "The synthetic budget does not establish affordability or a bank approval outcome.",
+              "availableProxyAndLimits": null,
+              "nextNeededSource": "Consistent household income, necessary costs and budget observations.",
+              "canAnswerGeneralMechanism": true,
+              "status": "OPEN",
+              "resolvedBy": null,
+              "reviewBy": null
+            }
+          ]
+        },
+        "acceptedEvidence": {
+          "sourceOwner": "SYNTHETIC_BANK_FIXTURE_NOT_VERIFIED_PROFESSIONAL",
+          "sourceRef": "urn:synthetic:bank-assessment",
+          "recordedAt": "2027-01-20T12:00:00Z"
+        },
+        "changed": true,
+        "unchangedQuestion": true,
+        "recheckRequired": true,
+        "unknowns": [
+          {
+            "schemaVersion": "RIC-UNKNOWN-v1",
+            "unknownId": "D-gap",
+            "questionDependency": "public_indicator",
+            "missingField": "future_income_and_final_bank_offer",
+            "reasonKind": "OBSERVATION_MISSING",
+            "impactOnAnswer": "The synthetic budget does not establish affordability or a bank approval outcome.",
+            "availableProxyAndLimits": null,
+            "nextNeededSource": "Consistent household income, necessary costs and budget observations.",
+            "canAnswerGeneralMechanism": true,
+            "status": "OPEN",
+            "resolvedBy": null,
+            "reviewBy": null
+          }
+        ]
+      },
+      "canonicalHistory": {
+        "state": "NO_VERIFIED_HISTORY",
+        "events": [],
+        "recheckRequired": true
+      }
+    },
+    "events": [
+      {
+        "action": "UNSELECTED_OLD_ACCOUNT_REPORT",
+        "actual": "SOURCE_NOT_SELECTED"
+      }
+    ],
+    "persisted": false
+  },
+  {
+    "id": "A",
+    "locale": "zh-Hans",
+    "proofState": "CONTRACT_ONLY",
+    "sourceAvailability": "LOCAL_BYTES_NOT_LIVE",
+    "bundle": {
+      "schemaVersion": "RIC-ANSWER-BUNDLE-v1",
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "A",
+        "originalText": "马来西亚房贷获批越来越难吗？",
+        "locale": "zh-Hans",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "PUBLIC"
+        },
+        "geography": "MYS",
+        "period": "2024",
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2026-10-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "answerState": "PARTIAL_SUPPORTED",
+      "directAnswer": "这里没有同群组申请分母，无法判断马来西亚房贷获批是否变难。 文明结构最终会进入空气、住房、交通、工作、收入与生活成本。生活环境决定日常基础条件，就业把个人接入社会资源与职业路径，收入与必要成本之间的余量则影响家庭缓冲和转换能力。",
+      "supportedClaims": [],
+      "interpretations": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "A-public",
+          "statement": "文明结构最终会进入空气、住房、交通、工作、收入与生活成本。生活环境决定日常基础条件，就业把个人接入社会资源与职业路径，收入与必要成本之间的余量则影响家庭缓冲和转换能力。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "book6-zh-Hans"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "A",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-zh-Hans"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "A-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "这里没有同群组申请分母，无法判断马来西亚房贷获批是否变难。",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "口径一致的同群组申请数量。",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "conflicts": [],
+      "scope": {
+        "geography": "MYS",
+        "period": "2024"
+      },
+      "evidenceRefs": [
+        "book6-zh-Hans"
+      ],
+      "visualRefs": [
+        "https://getphios.com/figure?id=FIG_13F"
+      ],
+      "optionsForFurtherInvestigation": [
+        "口径一致的同群组申请数量。"
+      ],
+      "privacyBoundary": "SESSION_ONLY",
+      "generatedAt": "2026-10-20T12:00:00Z",
+      "inputVersionRefs": [
+        [
+          "A-public",
+          "1"
+        ]
+      ],
+      "admissionState": "CONTRACT_ONLY",
+      "recheckTriggers": [
+        "SOURCE_UPDATED",
+        "PERMISSION_REVOKED"
+      ],
+      "governance": {
+        "persisted": false,
+        "productIntegrated": false,
+        "providerCalls": 0
+      }
+    },
+    "sources": [
+      {
+        "sourceId": "book6-zh-Hans",
+        "sourceVersionOrDigest": "66222b7a3a4ab886e1c154511e49a87ea1a7fc960ef79c6915388fa3325f9789",
+        "sourceOwner": "Existing Book VI publication admission",
+        "sourceClass": "PUBLISHED_KNOWLEDGE",
+        "originalUrlOrCanonicalRef": "https://getphios.com/articles/book6-environment-work-income?locale=zh-Hans#article-body",
+        "publisher": "PHI OS",
+        "title": "生活环境、就业与收入如何把文明带进日常",
+        "language": "zh-Hans",
+        "licenseStatus": "EXISTING_PUBLICATION_ADMISSION_NO_NEW_GRANT",
+        "publicationState": "PUBLISHED",
+        "accessClass": "PUBLIC",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "",
+        "publishedAt": "2026-09-24",
+        "revisedAt": null,
+        "retrievedAt": "2026-10-20T00:00:00Z",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "GENERAL",
+        "populationCoverage": "Not a statistical population",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Published explanation, not measured evidence",
+        "unit": "not_applicable",
+        "priceBasis": null,
+        "timeFrequency": "NOT_APPLICABLE",
+        "sourceFragmentRef": "/sections/0/blocks/0",
+        "quoteSpanOrDatasetRow": "文明结构最终会进入空气、住房、交通、工作、收入与生活成本。生活环境决定日常基础条件，就业把个人接入社会资源与职业路径，收入与必要成本之间的余量则影响家庭缓冲和转换能力。",
+        "checksum": "66222b7a3a4ab886e1c154511e49a87ea1a7fc960ef79c6915388fa3325f9789",
+        "verifiedChecksum": "66222b7a3a4ab886e1c154511e49a87ea1a7fc960ef79c6915388fa3325f9789",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": null,
+        "purpose": null,
+        "publicShareAllowed": false,
+        "metric": "mechanism",
+        "value": null,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      }
+    ],
+    "view": {
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "A",
+        "originalText": "马来西亚房贷获批越来越难吗？",
+        "locale": "zh-Hans",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "PUBLIC"
+        },
+        "geography": "MYS",
+        "period": "2024",
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2026-10-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "claims": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "A-public",
+          "statement": "文明结构最终会进入空气、住房、交通、工作、收入与生活成本。生活环境决定日常基础条件，就业把个人接入社会资源与职业路径，收入与必要成本之间的余量则影响家庭缓冲和转换能力。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "book6-zh-Hans"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "A",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-zh-Hans"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "A-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "这里没有同群组申请分母，无法判断马来西亚房贷获批是否变难。",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "口径一致的同群组申请数量。",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "relations": [],
+      "relationState": "RELATION_NOT_ESTABLISHED",
+      "historyState": "NO_VERIFIED_HISTORY"
+    },
+    "preview": null,
+    "revocation": null,
+    "revision": null,
+    "events": [],
+    "persisted": false
+  },
+  {
+    "id": "B",
+    "locale": "zh-Hans",
+    "proofState": "CONTRACT_ONLY",
+    "sourceAvailability": "LOCAL_BYTES_NOT_LIVE",
+    "bundle": {
+      "schemaVersion": "RIC-ANSWER-BUNDLE-v1",
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "B",
+        "originalText": "为什么经济增长，家庭仍感到生活成本压力？",
+        "locale": "zh-Hans",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "PUBLIC"
+        },
+        "geography": null,
+        "period": null,
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2026-10-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "answerState": "PARTIAL_SUPPORTED",
+      "directAnswer": "总体增长不等于每个家庭的收入或购买力增加。现有证据不能判断某个家庭的具体结果。 宏观增长与个人体验不能自动画等号。相同就业率或平均收入之下，稳定性、可进入机会与必要成本仍可能非常不同。 马来西亚消费者价格指数快照：131.4（2010 年＝100）；观察期 2024-01。这是总体指数，不是通胀百分比或某个家庭的支出。",
+      "supportedClaims": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "B-cpi",
+          "statement": "马来西亚消费者价格指数快照：131.4（2010 年＝100）；观察期 2024-01。这是总体指数，不是通胀百分比或某个家庭的支出。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "MY_CPI"
+          ],
+          "sourceFragmentRefs": [
+            "/observations/6"
+          ],
+          "sourceOwner": "World P1 pinned observation owner",
+          "originClass": "PUBLIC_STATISTIC",
+          "epistemicKind": "OBSERVATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "B",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "PUBLIC_STATISTIC",
+          "subjectRef": null,
+          "validForPeriod": "2024-01",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "MY_CPI"
+          ],
+          "dependencyIds": [
+            "public_indicator"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "interpretations": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "B-public",
+          "statement": "宏观增长与个人体验不能自动画等号。相同就业率或平均收入之下，稳定性、可进入机会与必要成本仍可能非常不同。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "book6-zh-Hans"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/1"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "B",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-zh-Hans"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "B-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "总体增长不等于每个家庭的收入或购买力增加。现有证据不能判断某个家庭的具体结果。",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "口径一致的家庭收入、必要支出与预算观察。",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "conflicts": [],
+      "scope": {
+        "geography": null,
+        "period": null
+      },
+      "evidenceRefs": [
+        "book6-zh-Hans",
+        "MY_CPI"
+      ],
+      "visualRefs": [
+        "https://getphios.com/figure?id=FIG_13F"
+      ],
+      "optionsForFurtherInvestigation": [
+        "口径一致的家庭收入、必要支出与预算观察。"
+      ],
+      "privacyBoundary": "SESSION_ONLY",
+      "generatedAt": "2026-10-20T12:00:00Z",
+      "inputVersionRefs": [
+        [
+          "B-public",
+          "1"
+        ],
+        [
+          "B-cpi",
+          "1"
+        ]
+      ],
+      "admissionState": "CONTRACT_ONLY",
+      "recheckTriggers": [
+        "SOURCE_UPDATED",
+        "PERMISSION_REVOKED"
+      ],
+      "governance": {
+        "persisted": false,
+        "productIntegrated": false,
+        "providerCalls": 0
+      }
+    },
+    "sources": [
+      {
+        "sourceId": "book6-zh-Hans",
+        "sourceVersionOrDigest": "66222b7a3a4ab886e1c154511e49a87ea1a7fc960ef79c6915388fa3325f9789",
+        "sourceOwner": "Existing Book VI publication admission",
+        "sourceClass": "PUBLISHED_KNOWLEDGE",
+        "originalUrlOrCanonicalRef": "https://getphios.com/articles/book6-environment-work-income?locale=zh-Hans#article-body",
+        "publisher": "PHI OS",
+        "title": "生活环境、就业与收入如何把文明带进日常",
+        "language": "zh-Hans",
+        "licenseStatus": "EXISTING_PUBLICATION_ADMISSION_NO_NEW_GRANT",
+        "publicationState": "PUBLISHED",
+        "accessClass": "PUBLIC",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "",
+        "publishedAt": "2026-09-24",
+        "revisedAt": null,
+        "retrievedAt": "2026-10-20T00:00:00Z",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "GENERAL",
+        "populationCoverage": "Not a statistical population",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Published explanation, not measured evidence",
+        "unit": "not_applicable",
+        "priceBasis": null,
+        "timeFrequency": "NOT_APPLICABLE",
+        "sourceFragmentRef": "/sections/0/blocks/1",
+        "quoteSpanOrDatasetRow": "宏观增长与个人体验不能自动画等号。相同就业率或平均收入之下，稳定性、可进入机会与必要成本仍可能非常不同。",
+        "checksum": "66222b7a3a4ab886e1c154511e49a87ea1a7fc960ef79c6915388fa3325f9789",
+        "verifiedChecksum": "66222b7a3a4ab886e1c154511e49a87ea1a7fc960ef79c6915388fa3325f9789",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": null,
+        "purpose": null,
+        "publicShareAllowed": false,
+        "metric": "mechanism",
+        "value": null,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      },
+      {
+        "sourceId": "MY_CPI",
+        "sourceVersionOrDigest": "7b1b2e4ee61305221aca3f8b2209a1a251d8da29657df8b67e1bdca4b268de28",
+        "sourceOwner": "World P1 pinned observation owner",
+        "sourceClass": "PUBLIC_STATISTIC",
+        "originalUrlOrCanonicalRef": "https://storage.dosm.gov.my/cpi/cpi_2d.csv",
+        "publisher": "DOSM",
+        "title": "my-cpi-full",
+        "language": "en",
+        "licenseStatus": "CC_BY_4_0",
+        "publicationState": "PUBLISHED",
+        "accessClass": "PUBLIC",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "2024-01",
+        "publishedAt": null,
+        "revisedAt": null,
+        "retrievedAt": "2026-10-20T02:50:53.038197+00:00",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "MYS",
+        "populationCoverage": "DOSM national consumer price basket; not citizen-household income survey",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Monthly overall CPI index, 2010=100; not an inflation percentage",
+        "unit": "index_2010_100",
+        "priceBasis": null,
+        "timeFrequency": "MONTHLY",
+        "sourceFragmentRef": "/observations/6",
+        "quoteSpanOrDatasetRow": "CSV date=2024-01-01,division=overall,index",
+        "checksum": "7b1b2e4ee61305221aca3f8b2209a1a251d8da29657df8b67e1bdca4b268de28",
+        "verifiedChecksum": "7b1b2e4ee61305221aca3f8b2209a1a251d8da29657df8b67e1bdca4b268de28",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": null,
+        "purpose": null,
+        "publicShareAllowed": false,
+        "metric": "CPI",
+        "value": 131.4,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      }
+    ],
+    "view": {
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "B",
+        "originalText": "为什么经济增长，家庭仍感到生活成本压力？",
+        "locale": "zh-Hans",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "PUBLIC"
+        },
+        "geography": null,
+        "period": null,
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2026-10-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "claims": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "B-public",
+          "statement": "宏观增长与个人体验不能自动画等号。相同就业率或平均收入之下，稳定性、可进入机会与必要成本仍可能非常不同。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "book6-zh-Hans"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/1"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "B",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-zh-Hans"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "B-cpi",
+          "statement": "马来西亚消费者价格指数快照：131.4（2010 年＝100）；观察期 2024-01。这是总体指数，不是通胀百分比或某个家庭的支出。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "MY_CPI"
+          ],
+          "sourceFragmentRefs": [
+            "/observations/6"
+          ],
+          "sourceOwner": "World P1 pinned observation owner",
+          "originClass": "PUBLIC_STATISTIC",
+          "epistemicKind": "OBSERVATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "B",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "PUBLIC_STATISTIC",
+          "subjectRef": null,
+          "validForPeriod": "2024-01",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "MY_CPI"
+          ],
+          "dependencyIds": [
+            "public_indicator"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "B-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "总体增长不等于每个家庭的收入或购买力增加。现有证据不能判断某个家庭的具体结果。",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "口径一致的家庭收入、必要支出与预算观察。",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "relations": [],
+      "relationState": "RELATION_NOT_ESTABLISHED",
+      "historyState": "NO_VERIFIED_HISTORY"
+    },
+    "preview": null,
+    "revocation": null,
+    "revision": null,
+    "events": [],
+    "persisted": false
+  },
+  {
+    "id": "C",
+    "locale": "zh-Hans",
+    "proofState": "SIMULATED",
+    "sourceAvailability": "LOCAL_BYTES_NOT_LIVE",
+    "bundle": {
+      "schemaVersion": "RIC-ANSWER-BUNDLE-v1",
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "C",
+        "originalText": "我想在两年内买房。",
+        "locale": "zh-Hans",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "SYNTHETIC_SELF"
+        },
+        "geography": null,
+        "period": null,
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2026-10-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "answerState": "PARTIAL_SUPPORTED",
+      "directAnswer": "合成预算不能证实实际负担能力或银行审批结果。 文明结构最终会进入空气、住房、交通、工作、收入与生活成本。生活环境决定日常基础条件，就业把个人接入社会资源与职业路径，收入与必要成本之间的余量则影响家庭缓冲和转换能力。 合成客户自述：每月收入 6,000 马币；必要支出 4,000 马币。未经独立核实。",
+      "supportedClaims": [],
+      "interpretations": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "C-public",
+          "statement": "文明结构最终会进入空气、住房、交通、工作、收入与生活成本。生活环境决定日常基础条件，就业把个人接入社会资源与职业路径，收入与必要成本之间的余量则影响家庭缓冲和转换能力。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "book6-zh-Hans"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "C",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-zh-Hans"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "C-budget",
+          "statement": "合成客户自述：每月收入 6,000 马币；必要支出 4,000 马币。未经独立核实。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "synthetic-budget"
+          ],
+          "sourceFragmentRefs": [
+            "/budget/monthly"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+          "originClass": "USER_SELF_REPORT",
+          "epistemicKind": "UNCONFIRMED",
+          "confirmationScope": "SELF_REPORTED",
+          "supportsWhichQuestion": "C",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "SELF_SELECTED",
+          "subjectRef": null,
+          "validForPeriod": "SYNTHETIC_CURRENT_MONTH",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-budget"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "C-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "合成预算不能证实实际负担能力或银行审批结果。",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "口径一致的家庭收入、必要支出与预算观察。",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "conflicts": [],
+      "scope": {
+        "geography": null,
+        "period": null
+      },
+      "evidenceRefs": [
+        "book6-zh-Hans",
+        "synthetic-budget"
+      ],
+      "visualRefs": [
+        "https://getphios.com/figure?id=FIG_13F"
+      ],
+      "optionsForFurtherInvestigation": [
+        "口径一致的家庭收入、必要支出与预算观察。"
+      ],
+      "privacyBoundary": "SESSION_ONLY",
+      "generatedAt": "2026-10-20T12:00:00Z",
+      "inputVersionRefs": [
+        [
+          "C-public",
+          "1"
+        ],
+        [
+          "C-budget",
+          "1"
+        ]
+      ],
+      "admissionState": "CONTRACT_ONLY",
+      "recheckTriggers": [
+        "SOURCE_UPDATED",
+        "PERMISSION_REVOKED"
+      ],
+      "governance": {
+        "persisted": false,
+        "productIntegrated": false,
+        "providerCalls": 0
+      }
+    },
+    "sources": [
+      {
+        "sourceId": "book6-zh-Hans",
+        "sourceVersionOrDigest": "66222b7a3a4ab886e1c154511e49a87ea1a7fc960ef79c6915388fa3325f9789",
+        "sourceOwner": "Existing Book VI publication admission",
+        "sourceClass": "PUBLISHED_KNOWLEDGE",
+        "originalUrlOrCanonicalRef": "https://getphios.com/articles/book6-environment-work-income?locale=zh-Hans#article-body",
+        "publisher": "PHI OS",
+        "title": "生活环境、就业与收入如何把文明带进日常",
+        "language": "zh-Hans",
+        "licenseStatus": "EXISTING_PUBLICATION_ADMISSION_NO_NEW_GRANT",
+        "publicationState": "PUBLISHED",
+        "accessClass": "PUBLIC",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "",
+        "publishedAt": "2026-09-24",
+        "revisedAt": null,
+        "retrievedAt": "2026-10-20T00:00:00Z",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "GENERAL",
+        "populationCoverage": "Not a statistical population",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Published explanation, not measured evidence",
+        "unit": "not_applicable",
+        "priceBasis": null,
+        "timeFrequency": "NOT_APPLICABLE",
+        "sourceFragmentRef": "/sections/0/blocks/0",
+        "quoteSpanOrDatasetRow": "文明结构最终会进入空气、住房、交通、工作、收入与生活成本。生活环境决定日常基础条件，就业把个人接入社会资源与职业路径，收入与必要成本之间的余量则影响家庭缓冲和转换能力。",
+        "checksum": "66222b7a3a4ab886e1c154511e49a87ea1a7fc960ef79c6915388fa3325f9789",
+        "verifiedChecksum": "66222b7a3a4ab886e1c154511e49a87ea1a7fc960ef79c6915388fa3325f9789",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": null,
+        "purpose": null,
+        "publicShareAllowed": false,
+        "metric": "mechanism",
+        "value": null,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      },
+      {
+        "sourceId": "synthetic-budget",
+        "sourceVersionOrDigest": "synthetic-v1",
+        "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+        "sourceClass": "USER_SELF_REPORT",
+        "originalUrlOrCanonicalRef": "urn:synthetic:budget",
+        "publisher": "PHI OS",
+        "title": "合成的已选预算自述",
+        "language": "zh-Hans",
+        "licenseStatus": "EXISTING_PUBLICATION_ADMISSION_NO_NEW_GRANT",
+        "publicationState": "SYNTHETIC",
+        "accessClass": "PRIVATE",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "SYNTHETIC_CURRENT_MONTH",
+        "publishedAt": null,
+        "revisedAt": null,
+        "retrievedAt": "2026-10-20T12:00:00Z",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "GENERAL",
+        "populationCoverage": "Not a statistical population",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Published explanation, not measured evidence",
+        "unit": "MYR_PER_MONTH",
+        "priceBasis": null,
+        "timeFrequency": "NOT_APPLICABLE",
+        "sourceFragmentRef": "/budget/monthly",
+        "quoteSpanOrDatasetRow": "合成客户自述：每月收入 6,000 马币；必要支出 4,000 马币。未经独立核实。",
+        "checksum": "synthetic-fixture-not-public-digest",
+        "verifiedChecksum": "synthetic-fixture-not-public-digest",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": "synthetic-account",
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "publicShareAllowed": false,
+        "metric": "mechanism",
+        "value": null,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      }
+    ],
+    "view": {
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "C",
+        "originalText": "我想在两年内买房。",
+        "locale": "zh-Hans",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "SYNTHETIC_SELF"
+        },
+        "geography": null,
+        "period": null,
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2026-10-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "claims": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "C-public",
+          "statement": "文明结构最终会进入空气、住房、交通、工作、收入与生活成本。生活环境决定日常基础条件，就业把个人接入社会资源与职业路径，收入与必要成本之间的余量则影响家庭缓冲和转换能力。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "book6-zh-Hans"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "C",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-zh-Hans"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "C-budget",
+          "statement": "合成客户自述：每月收入 6,000 马币；必要支出 4,000 马币。未经独立核实。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "synthetic-budget"
+          ],
+          "sourceFragmentRefs": [
+            "/budget/monthly"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+          "originClass": "USER_SELF_REPORT",
+          "epistemicKind": "UNCONFIRMED",
+          "confirmationScope": "SELF_REPORTED",
+          "supportsWhichQuestion": "C",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "SELF_SELECTED",
+          "subjectRef": null,
+          "validForPeriod": "SYNTHETIC_CURRENT_MONTH",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-budget"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "C-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "合成预算不能证实实际负担能力或银行审批结果。",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "口径一致的家庭收入、必要支出与预算观察。",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "relations": [],
+      "relationState": "RELATION_NOT_ESTABLISHED",
+      "historyState": "NO_VERIFIED_HISTORY"
+    },
+    "preview": {
+      "state": "PREVIEW_ONLY",
+      "items": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "C-public",
+          "statement": "文明结构最终会进入空气、住房、交通、工作、收入与生活成本。生活环境决定日常基础条件，就业把个人接入社会资源与职业路径，收入与必要成本之间的余量则影响家庭缓冲和转换能力。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "book6-zh-Hans"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "C",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-zh-Hans"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "C-budget",
+          "statement": "合成客户自述：每月收入 6,000 马币；必要支出 4,000 马币。未经独立核实。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "synthetic-budget"
+          ],
+          "sourceFragmentRefs": [
+            "/budget/monthly"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+          "originClass": "USER_SELF_REPORT",
+          "epistemicKind": "UNCONFIRMED",
+          "confirmationScope": "SELF_REPORTED",
+          "supportsWhichQuestion": "C",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "SELF_SELECTED",
+          "subjectRef": null,
+          "validForPeriod": "SYNTHETIC_CURRENT_MONTH",
+          "recordedAt": "2026-10-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2026-10-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-budget"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "persisted": false,
+      "decisionAuthority": "INJECTED_OWNER_DECISION_NOT_ISSUED_BY_RIC"
+    },
+    "revocation": {
+      "privateFuturePreview": "CONSENT_REVOKED",
+      "publicStillAvailable": "book6-zh-Hans",
+      "productionDeletionPerformed": false
+    },
+    "revision": null,
+    "events": [
+      {
+        "action": "UNSELECTED_OLD_ACCOUNT_REPORT",
+        "actual": "SOURCE_NOT_SELECTED"
+      }
+    ],
+    "persisted": false
+  },
+  {
+    "id": "D",
+    "locale": "zh-Hans",
+    "proofState": "SIMULATED",
+    "sourceAvailability": "LOCAL_BYTES_NOT_LIVE",
+    "bundle": {
+      "schemaVersion": "RIC-ANSWER-BUNDLE-v1",
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "D",
+        "originalText": "我想在两年内买房。",
+        "locale": "zh-Hans",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "SYNTHETIC_SELF"
+        },
+        "geography": null,
+        "period": null,
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2027-01-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "answerState": "PARTIAL_SUPPORTED",
+      "directAnswer": "合成预算不能证实实际负担能力或银行审批结果。 文明结构最终会进入空气、住房、交通、工作、收入与生活成本。生活环境决定日常基础条件，就业把个人接入社会资源与职业路径，收入与必要成本之间的余量则影响家庭缓冲和转换能力。 合成客户自述：每月收入 6,000 马币；必要支出 4,000 马币。未经独立核实。 合成评估：建议月供 2,300 马币，原假设为 1,800 马币。最终审批与未来收入仍未知。",
+      "supportedClaims": [],
+      "interpretations": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-public",
+          "statement": "文明结构最终会进入空气、住房、交通、工作、收入与生活成本。生活环境决定日常基础条件，就业把个人接入社会资源与职业路径，收入与必要成本之间的余量则影响家庭缓冲和转换能力。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "book6-zh-Hans"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-zh-Hans"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-budget",
+          "statement": "合成客户自述：每月收入 6,000 马币；必要支出 4,000 马币。未经独立核实。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "synthetic-budget"
+          ],
+          "sourceFragmentRefs": [
+            "/budget/monthly"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+          "originClass": "USER_SELF_REPORT",
+          "epistemicKind": "UNCONFIRMED",
+          "confirmationScope": "SELF_REPORTED",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "SELF_SELECTED",
+          "subjectRef": null,
+          "validForPeriod": "SYNTHETIC_CURRENT_MONTH",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-budget"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-assessment",
+          "statement": "合成评估：建议月供 2,300 马币，原假设为 1,800 马币。最终审批与未来收入仍未知。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "synthetic-bank-assessment"
+          ],
+          "sourceFragmentRefs": [
+            "/assessment/repayment"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_BANK_OWNER_NOT_REAL_ADMISSION",
+          "originClass": "PROFESSIONAL_RECORD",
+          "epistemicKind": "OPINION",
+          "confirmationScope": "SYNTHETIC_QUALIFICATION_NOT_REAL_PROFESSIONAL",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "2027-01",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-bank-assessment"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "D-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "合成预算不能证实实际负担能力或银行审批结果。",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "口径一致的家庭收入、必要支出与预算观察。",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "conflicts": [],
+      "scope": {
+        "geography": null,
+        "period": null
+      },
+      "evidenceRefs": [
+        "book6-zh-Hans",
+        "synthetic-budget",
+        "synthetic-bank-assessment"
+      ],
+      "visualRefs": [
+        "https://getphios.com/figure?id=FIG_13F"
+      ],
+      "optionsForFurtherInvestigation": [
+        "口径一致的家庭收入、必要支出与预算观察。"
+      ],
+      "privacyBoundary": "SESSION_ONLY",
+      "generatedAt": "2027-01-20T12:00:00Z",
+      "inputVersionRefs": [
+        [
+          "D-public",
+          "1"
+        ],
+        [
+          "D-budget",
+          "1"
+        ],
+        [
+          "D-assessment",
+          "1"
+        ]
+      ],
+      "admissionState": "CONTRACT_ONLY",
+      "recheckTriggers": [
+        "SOURCE_UPDATED",
+        "PERMISSION_REVOKED"
+      ],
+      "governance": {
+        "persisted": false,
+        "productIntegrated": false,
+        "providerCalls": 0
+      }
+    },
+    "sources": [
+      {
+        "sourceId": "book6-zh-Hans",
+        "sourceVersionOrDigest": "66222b7a3a4ab886e1c154511e49a87ea1a7fc960ef79c6915388fa3325f9789",
+        "sourceOwner": "Existing Book VI publication admission",
+        "sourceClass": "PUBLISHED_KNOWLEDGE",
+        "originalUrlOrCanonicalRef": "https://getphios.com/articles/book6-environment-work-income?locale=zh-Hans#article-body",
+        "publisher": "PHI OS",
+        "title": "生活环境、就业与收入如何把文明带进日常",
+        "language": "zh-Hans",
+        "licenseStatus": "EXISTING_PUBLICATION_ADMISSION_NO_NEW_GRANT",
+        "publicationState": "PUBLISHED",
+        "accessClass": "PUBLIC",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "",
+        "publishedAt": "2026-09-24",
+        "revisedAt": null,
+        "retrievedAt": "2026-10-20T00:00:00Z",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "GENERAL",
+        "populationCoverage": "Not a statistical population",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Published explanation, not measured evidence",
+        "unit": "not_applicable",
+        "priceBasis": null,
+        "timeFrequency": "NOT_APPLICABLE",
+        "sourceFragmentRef": "/sections/0/blocks/0",
+        "quoteSpanOrDatasetRow": "文明结构最终会进入空气、住房、交通、工作、收入与生活成本。生活环境决定日常基础条件，就业把个人接入社会资源与职业路径，收入与必要成本之间的余量则影响家庭缓冲和转换能力。",
+        "checksum": "66222b7a3a4ab886e1c154511e49a87ea1a7fc960ef79c6915388fa3325f9789",
+        "verifiedChecksum": "66222b7a3a4ab886e1c154511e49a87ea1a7fc960ef79c6915388fa3325f9789",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": null,
+        "purpose": null,
+        "publicShareAllowed": false,
+        "metric": "mechanism",
+        "value": null,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      },
+      {
+        "sourceId": "synthetic-budget",
+        "sourceVersionOrDigest": "synthetic-v1",
+        "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+        "sourceClass": "USER_SELF_REPORT",
+        "originalUrlOrCanonicalRef": "urn:synthetic:budget",
+        "publisher": "PHI OS",
+        "title": "合成的已选预算自述",
+        "language": "zh-Hans",
+        "licenseStatus": "EXISTING_PUBLICATION_ADMISSION_NO_NEW_GRANT",
+        "publicationState": "SYNTHETIC",
+        "accessClass": "PRIVATE",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "SYNTHETIC_CURRENT_MONTH",
+        "publishedAt": null,
+        "revisedAt": null,
+        "retrievedAt": "2027-01-20T12:00:00Z",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "GENERAL",
+        "populationCoverage": "Not a statistical population",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Published explanation, not measured evidence",
+        "unit": "MYR_PER_MONTH",
+        "priceBasis": null,
+        "timeFrequency": "NOT_APPLICABLE",
+        "sourceFragmentRef": "/budget/monthly",
+        "quoteSpanOrDatasetRow": "合成客户自述：每月收入 6,000 马币；必要支出 4,000 马币。未经独立核实。",
+        "checksum": "synthetic-fixture-not-public-digest",
+        "verifiedChecksum": "synthetic-fixture-not-public-digest",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": "synthetic-account",
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "publicShareAllowed": false,
+        "metric": "mechanism",
+        "value": null,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      },
+      {
+        "sourceId": "synthetic-bank-assessment",
+        "sourceVersionOrDigest": "synthetic-bank-v2",
+        "sourceOwner": "INJECTED_SYNTHETIC_BANK_OWNER_NOT_REAL_ADMISSION",
+        "sourceClass": "PROFESSIONAL_RECORD",
+        "originalUrlOrCanonicalRef": "urn:synthetic:bank-assessment",
+        "publisher": "PHI OS",
+        "title": "合成银行评估",
+        "language": "zh-Hans",
+        "licenseStatus": "EXISTING_PUBLICATION_ADMISSION_NO_NEW_GRANT",
+        "publicationState": "SYNTHETIC",
+        "accessClass": "PRIVATE",
+        "entitlementRequired": false,
+        "sourceAcquisitionMode": "LOCAL_EXISTING_PUBLICATION",
+        "observationPeriod": "2027-01",
+        "publishedAt": null,
+        "revisedAt": null,
+        "retrievedAt": "2027-01-20T12:00:00Z",
+        "expiresAtOrReviewBy": null,
+        "freshnessState": "VERSION_BOUND_NOT_LIVE",
+        "jurisdiction": "GENERAL",
+        "populationCoverage": "Not a statistical population",
+        "sampleOrInstitutionCoverage": "Not applicable",
+        "methodology": "Published explanation, not measured evidence",
+        "unit": "MYR_PER_MONTH",
+        "priceBasis": null,
+        "timeFrequency": "NOT_APPLICABLE",
+        "sourceFragmentRef": "/assessment/repayment",
+        "quoteSpanOrDatasetRow": "合成评估：建议月供 2,300 马币，原假设为 1,800 马币。最终审批与未来收入仍未知。",
+        "checksum": "synthetic-fixture-not-public-digest",
+        "verifiedChecksum": "synthetic-fixture-not-public-digest",
+        "evidenceAdmissionState": "EXISTING_PUBLISHED_EXPLANATION",
+        "limitations": [],
+        "accountOwnerRef": "synthetic-account",
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "publicShareAllowed": false,
+        "metric": "mechanism",
+        "value": null,
+        "schemaVersion": "RIC-SOURCE-REFERENCE-v1"
+      }
+    ],
+    "view": {
+      "question": {
+        "schemaVersion": "RIC-QUESTION-CONTEXT-v1",
+        "questionId": "D",
+        "originalText": "我想在两年内买房。",
+        "locale": "zh-Hans",
+        "intentClass": "MECHANISM",
+        "subjectScope": {
+          "type": "SYNTHETIC_SELF"
+        },
+        "geography": null,
+        "period": null,
+        "topic": "household_conditions",
+        "metricDefinitions": [],
+        "requestedOutcome": "BOUNDED_EXPLANATION",
+        "requiredInformation": [
+          "mechanism",
+          "public_indicator"
+        ],
+        "knownAtStart": [],
+        "unknownAtStart": [],
+        "minimalNextEvidence": [
+          "matched household observations"
+        ],
+        "allowedSourceScopes": [
+          "GENERAL",
+          "PUBLIC_STATISTIC",
+          "SELF_SELECTED"
+        ],
+        "excludedScopes": [
+          "UNSELECTED_ACCOUNT_REPORT"
+        ],
+        "purpose": "CURRENT_QUESTION_PROCESS",
+        "sessionConsentRef": null,
+        "asOf": "2027-01-20T12:00:00Z",
+        "selectionMode": "EXPLICIT",
+        "privacyClass": "PUBLIC_QUESTION",
+        "persistenceIntent": "SESSION_ONLY"
+      },
+      "claims": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-public",
+          "statement": "文明结构最终会进入空气、住房、交通、工作、收入与生活成本。生活环境决定日常基础条件，就业把个人接入社会资源与职业路径，收入与必要成本之间的余量则影响家庭缓冲和转换能力。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "book6-zh-Hans"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-zh-Hans"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-budget",
+          "statement": "合成客户自述：每月收入 6,000 马币；必要支出 4,000 马币。未经独立核实。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "synthetic-budget"
+          ],
+          "sourceFragmentRefs": [
+            "/budget/monthly"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+          "originClass": "USER_SELF_REPORT",
+          "epistemicKind": "UNCONFIRMED",
+          "confirmationScope": "SELF_REPORTED",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "SELF_SELECTED",
+          "subjectRef": null,
+          "validForPeriod": "SYNTHETIC_CURRENT_MONTH",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-budget"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-assessment",
+          "statement": "合成评估：建议月供 2,300 马币，原假设为 1,800 马币。最终审批与未来收入仍未知。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "synthetic-bank-assessment"
+          ],
+          "sourceFragmentRefs": [
+            "/assessment/repayment"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_BANK_OWNER_NOT_REAL_ADMISSION",
+          "originClass": "PROFESSIONAL_RECORD",
+          "epistemicKind": "OPINION",
+          "confirmationScope": "SYNTHETIC_QUALIFICATION_NOT_REAL_PROFESSIONAL",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "2027-01",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-bank-assessment"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "unknowns": [
+        {
+          "schemaVersion": "RIC-UNKNOWN-v1",
+          "unknownId": "D-gap",
+          "questionDependency": "public_indicator",
+          "missingField": "matched_household_cohort",
+          "reasonKind": "OBSERVATION_MISSING",
+          "impactOnAnswer": "合成预算不能证实实际负担能力或银行审批结果。",
+          "availableProxyAndLimits": null,
+          "nextNeededSource": "口径一致的家庭收入、必要支出与预算观察。",
+          "canAnswerGeneralMechanism": true,
+          "status": "OPEN",
+          "resolvedBy": null,
+          "reviewBy": null
+        }
+      ],
+      "relations": [],
+      "relationState": "RELATION_NOT_ESTABLISHED",
+      "historyState": "NO_VERIFIED_HISTORY"
+    },
+    "preview": {
+      "state": "PREVIEW_ONLY",
+      "items": [
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-public",
+          "statement": "文明结构最终会进入空气、住房、交通、工作、收入与生活成本。生活环境决定日常基础条件，就业把个人接入社会资源与职业路径，收入与必要成本之间的余量则影响家庭缓冲和转换能力。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "book6-zh-Hans"
+          ],
+          "sourceFragmentRefs": [
+            "/sections/0/blocks/0"
+          ],
+          "sourceOwner": "Existing Book VI publication admission",
+          "originClass": "PUBLISHED_KNOWLEDGE",
+          "epistemicKind": "INTERPRETATION",
+          "confirmationScope": "SOURCE_STATEMENT_ONLY",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "GENERAL",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": true,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "book6-zh-Hans"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": [
+            "https://getphios.com/figure?id=FIG_13F"
+          ]
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-budget",
+          "statement": "合成客户自述：每月收入 6,000 马币；必要支出 4,000 马币。未经独立核实。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "synthetic-budget"
+          ],
+          "sourceFragmentRefs": [
+            "/budget/monthly"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_OWNER",
+          "originClass": "USER_SELF_REPORT",
+          "epistemicKind": "UNCONFIRMED",
+          "confirmationScope": "SELF_REPORTED",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "SELF_SELECTED",
+          "subjectRef": null,
+          "validForPeriod": "SYNTHETIC_CURRENT_MONTH",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-budget"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        },
+        {
+          "schemaVersion": "RIC-CLAIM-v1",
+          "claimId": "D-assessment",
+          "statement": "合成评估：建议月供 2,300 马币，原假设为 1,800 马币。最终审批与未来收入仍未知。",
+          "language": "zh-Hans",
+          "sourceRefs": [
+            "synthetic-bank-assessment"
+          ],
+          "sourceFragmentRefs": [
+            "/assessment/repayment"
+          ],
+          "sourceOwner": "INJECTED_SYNTHETIC_BANK_OWNER_NOT_REAL_ADMISSION",
+          "originClass": "PROFESSIONAL_RECORD",
+          "epistemicKind": "OPINION",
+          "confirmationScope": "SYNTHETIC_QUALIFICATION_NOT_REAL_PROFESSIONAL",
+          "supportsWhichQuestion": "D",
+          "relevanceReason": "Bounded required dependency; not keyword matching",
+          "admissionReason": "PINNED_SOURCE_AND_FRAGMENT",
+          "claimScope": "GENERAL",
+          "subjectRef": null,
+          "validForPeriod": "2027-01",
+          "recordedAt": "2027-01-20T12:00:00Z",
+          "sourceUpdatedAt": null,
+          "checkedAt": "2027-01-20T12:00:00Z",
+          "freshnessState": "VERSION_BOUND_NOT_LIVE",
+          "version": "1",
+          "status": "LOCAL_CANDIDATE",
+          "confidenceOrLimitations": "Source statement only; no independent personal confirmation",
+          "personSpecificFact": false,
+          "publicShareAllowed": false,
+          "processingAuthorized": true,
+          "authorizationRef": null,
+          "retentionPolicyRef": null,
+          "contradictions": [],
+          "unknownDependencies": [],
+          "supersededBy": null,
+          "provenanceChain": [
+            "synthetic-bank-assessment"
+          ],
+          "dependencyIds": [
+            "mechanism"
+          ],
+          "realityFact": false,
+          "visualRefs": []
+        }
+      ],
+      "persisted": false,
+      "decisionAuthority": "INJECTED_OWNER_DECISION_NOT_ISSUED_BY_RIC"
+    },
+    "revocation": {
+      "privateFuturePreview": "CONSENT_REVOKED",
+      "publicStillAvailable": "book6-zh-Hans",
+      "productionDeletionPerformed": false
+    },
+    "revision": {
+      "localDiff": {
+        "state": "QUALIFIED_LOCAL_DIFF",
+        "historyAuthority": "SIMULATED_NOT_CANONICAL",
+        "previous": {
+          "version": "1",
+          "questionId": "D",
+          "statement": "负担能力尚未评估。"
+        },
+        "next": {
+          "version": "2",
+          "questionId": "D",
+          "statement": "收到合成银行评估；原有负担能力假设需要复核。",
+          "unknowns": [
+            {
+              "schemaVersion": "RIC-UNKNOWN-v1",
+              "unknownId": "D-gap",
+              "questionDependency": "public_indicator",
+              "missingField": "future_income_and_final_bank_offer",
+              "reasonKind": "OBSERVATION_MISSING",
+              "impactOnAnswer": "合成预算不能证实实际负担能力或银行审批结果。",
+              "availableProxyAndLimits": null,
+              "nextNeededSource": "口径一致的家庭收入、必要支出与预算观察。",
+              "canAnswerGeneralMechanism": true,
+              "status": "OPEN",
+              "resolvedBy": null,
+              "reviewBy": null
+            }
+          ]
+        },
+        "acceptedEvidence": {
+          "sourceOwner": "SYNTHETIC_BANK_FIXTURE_NOT_VERIFIED_PROFESSIONAL",
+          "sourceRef": "urn:synthetic:bank-assessment",
+          "recordedAt": "2027-01-20T12:00:00Z"
+        },
+        "changed": true,
+        "unchangedQuestion": true,
+        "recheckRequired": true,
+        "unknowns": [
+          {
+            "schemaVersion": "RIC-UNKNOWN-v1",
+            "unknownId": "D-gap",
+            "questionDependency": "public_indicator",
+            "missingField": "future_income_and_final_bank_offer",
+            "reasonKind": "OBSERVATION_MISSING",
+            "impactOnAnswer": "合成预算不能证实实际负担能力或银行审批结果。",
+            "availableProxyAndLimits": null,
+            "nextNeededSource": "口径一致的家庭收入、必要支出与预算观察。",
+            "canAnswerGeneralMechanism": true,
+            "status": "OPEN",
+            "resolvedBy": null,
+            "reviewBy": null
+          }
+        ]
+      },
+      "canonicalHistory": {
+        "state": "NO_VERIFIED_HISTORY",
+        "events": [],
+        "recheckRequired": true
+      }
+    },
+    "events": [
+      {
+        "action": "UNSELECTED_OLD_ACCOUNT_REPORT",
+        "actual": "SOURCE_NOT_SELECTED"
+      }
+    ],
+    "persisted": false
+  }
+]

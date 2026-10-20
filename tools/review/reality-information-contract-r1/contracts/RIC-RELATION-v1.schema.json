@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:phios:RIC-RELATION-v1",
+  "title": "Independent local reference; no permission authority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "edgeId",
+    "fromRef",
+    "toRef",
+    "relationKind",
+    "evidenceRefs",
+    "sourceOwner",
+    "justification",
+    "scope",
+    "temporality",
+    "admission",
+    "version",
+    "permissionContext",
+    "validityState"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "RIC-RELATION-v1"
+    },
+    "edgeId": {
+      "type": "string"
+    },
+    "fromRef": {
+      "type": "string"
+    },
+    "toRef": {
+      "type": "string"
+    },
+    "relationKind": {
+      "enum": [
+        "SUPPORTS",
+        "CONTRADICTS",
+        "CONTEXTUALIZES",
+        "DEPENDS_ON",
+        "QUALIFIES",
+        "SUPERSEDES",
+        "COMPARABLE_WITH",
+        "RELEVANT_TO_QUESTION",
+        "HYPOTHESIZED_CAUSAL_LINK"
+      ]
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {}
+    },
+    "sourceOwner": {
+      "type": "string"
+    },
+    "justification": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "object"
+    },
+    "temporality": {
+      "type": "object"
+    },
+    "admission": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "permissionContext": {
+      "type": "object"
+    },
+    "validityState": {
+      "type": "string"
+    }
+  }
+}

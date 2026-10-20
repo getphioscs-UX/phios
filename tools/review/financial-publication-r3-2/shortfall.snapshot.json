@@ -1,0 +1,2901 @@
+{
+  "version": "FINANCE_R3_2_DEEP_DIVE_CANDIDATE",
+  "status": "LOCAL_SYNTHETIC_HUMAN_REVIEW_ONLY",
+  "baseSourceDigest": "9922e368696bb6c89bab5d979d13581f5f99861c05462546e032c12d056f4f9d",
+  "baseCalculationDigest": "f7d2e0852c900827e4df40afa034aa6886fa312267d90b295f84adea793da71b",
+  "scenarioDigest": "1b10cc7f1ec191cf5c0268b1a0c1e285fd1273699afeba1e6e5b472cd0f1f2a0",
+  "sourceSnapshot": {
+    "context": {
+      "localPreview": true,
+      "currentConsent": true,
+      "sourceDraftRef": "ACCOUNT_DRAFT:d66b6ec9-4bec-46e2-89ac-6e726c973e5c:1",
+      "sourceDigest": "9922e368696bb6c89bab5d979d13581f5f99861c05462546e032c12d056f4f9d",
+      "asOfDate": "2026-10-20",
+      "admittedSubjects": [
+        "SELF",
+        "CHILD_A",
+        "CHILD_B"
+      ]
+    },
+    "input": {
+      "subjects": [
+        "SELF",
+        "CHILD_A",
+        "CHILD_B"
+      ],
+      "currency": "MYR",
+      "sourceRefs": [
+        "SYNTHETIC_DECLARATIONS_V1"
+      ],
+      "retirement": {
+        "subjects": [
+          "SELF"
+        ],
+        "currency": "MYR",
+        "sourceRefs": [
+          "RT_SPEND"
+        ],
+        "retirementYear": 2034,
+        "years": 20,
+        "spendingBasis": "AS_OF_YEAR",
+        "annualSpending": {
+          "kind": "EXACT",
+          "value": 32400
+        },
+        "inflation": {
+          "ref": "RT_INFLATION",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.025
+          },
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053"
+        }
+      },
+      "education": {
+        "subjects": [
+          "CHILD_A",
+          "CHILD_B"
+        ],
+        "currency": "MYR",
+        "sourceRefs": [
+          "ED_STAGE"
+        ],
+        "stages": [
+          {
+            "id": "STAGE_A",
+            "subject": "CHILD_A",
+            "region": "DECLARED_LOCAL_ROUTE",
+            "currency": "MYR",
+            "feeYear": 2026,
+            "startYear": 2030,
+            "years": 3,
+            "tuition": {
+              "kind": "EXACT",
+              "value": 12400
+            },
+            "living": {
+              "kind": "EXACT",
+              "value": 6600
+            },
+            "other": {
+              "kind": "EXACT",
+              "value": 1200
+            },
+            "inflation": {
+              "ref": "ED_A_INFLATION",
+              "value": {
+                "kind": "EXACT",
+                "value": 0.03
+              },
+              "source": "CLIENT_DECLARED",
+              "sourceDate": "2026-10-20",
+              "effectivePeriod": "2026-2053"
+            }
+          },
+          {
+            "id": "STAGE_B",
+            "subject": "CHILD_B",
+            "region": "DECLARED_LOCAL_ROUTE",
+            "currency": "MYR",
+            "feeYear": 2026,
+            "startYear": 2033,
+            "years": 2,
+            "tuition": {
+              "kind": "EXACT",
+              "value": 10800
+            },
+            "living": {
+              "kind": "EXACT",
+              "value": 5400
+            },
+            "other": {
+              "kind": "EXACT",
+              "value": 900
+            },
+            "inflation": {
+              "ref": "ED_B_INFLATION",
+              "value": {
+                "kind": "EXACT",
+                "value": 0.02
+              },
+              "source": "CLIENT_DECLARED",
+              "sourceDate": "2026-10-20",
+              "effectivePeriod": "2026-2053"
+            }
+          }
+        ]
+      },
+      "assets": [
+        {
+          "ref": "bank",
+          "subject": "SELF",
+          "ownedValue": {
+            "kind": "EXACT",
+            "value": 14750
+          },
+          "currency": "MYR",
+          "asOfDate": "2026-10-20",
+          "availableYear": 2026,
+          "valueBasis": "OWNED_INTEREST"
+        },
+        {
+          "ref": "investments",
+          "subject": "SELF",
+          "ownedValue": {
+            "kind": "EXACT",
+            "value": 57400
+          },
+          "currency": "MYR",
+          "asOfDate": "2026-10-20",
+          "availableYear": 2030,
+          "valueBasis": "OWNED_INTEREST"
+        }
+      ],
+      "allocations": [
+        {
+          "id": "RT_BANK",
+          "assetRef": "bank",
+          "target": "RETIREMENT",
+          "amount": {
+            "kind": "EXACT",
+            "value": 10000
+          },
+          "currency": "MYR",
+          "asOfDate": "2026-10-20"
+        },
+        {
+          "id": "ED_INVEST",
+          "assetRef": "investments",
+          "target": "EDUCATION",
+          "amount": {
+            "kind": "EXACT",
+            "value": 57400
+          },
+          "currency": "MYR",
+          "asOfDate": "2026-10-20"
+        }
+      ],
+      "retirementFunding": {
+        "subjects": [
+          "SELF"
+        ],
+        "currency": "MYR",
+        "target": "RETIREMENT",
+        "endYear": 2053,
+        "frequency": "MONTHLY",
+        "timing": "PERIOD_END",
+        "contribution": {
+          "kind": "EXACT",
+          "value": 0
+        },
+        "employerContribution": {
+          "kind": "EXACT",
+          "value": 0
+        },
+        "contributionEndYear": 2033,
+        "returnAssumption": {
+          "ref": "RT_RETURN",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.035
+          },
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053"
+        },
+        "feeAssumption": {
+          "ref": "RT_FEE",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.004
+          },
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053"
+        }
+      },
+      "educationFunding": {
+        "subjects": [
+          "SELF",
+          "CHILD_A",
+          "CHILD_B"
+        ],
+        "currency": "MYR",
+        "target": "EDUCATION",
+        "endYear": 2034,
+        "frequency": "ANNUAL",
+        "timing": "PERIOD_END",
+        "contribution": {
+          "kind": "EXACT",
+          "value": 0
+        },
+        "employerContribution": {
+          "kind": "EXACT",
+          "value": 0
+        },
+        "contributionEndYear": 2034,
+        "returnAssumption": {
+          "ref": "ED_RETURN",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.025
+          },
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053"
+        },
+        "feeAssumption": {
+          "ref": "ED_FEE",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.003
+          },
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053"
+        }
+      },
+      "protection": [
+        {
+          "subject": "SELF",
+          "policyRef": "event-1",
+          "event": "DEATH",
+          "termsState": "DECLARED",
+          "expiryDate": "2044-03-10"
+        },
+        {
+          "subject": "SELF",
+          "policyRef": "event-2",
+          "event": "MEDICAL",
+          "termsState": "DECLARED",
+          "expiryDate": "2032-07-20"
+        }
+      ],
+      "estate": {
+        "documents": [
+          {
+            "id": "WILL_STATUS",
+            "subject": "SELF",
+            "kind": "WILL",
+            "state": "DECLARED",
+            "locationRef": "PRIVATE_DOCUMENT_INDEX",
+            "reviewDate": "2026-10-20"
+          },
+          {
+            "id": "NOMINATION_STATUS",
+            "subject": "SELF",
+            "kind": "NOMINATION",
+            "state": "UNKNOWN",
+            "locationRef": "PRIVATE_POLICY_INDEX",
+            "reviewDate": "2026-10-20"
+          },
+          {
+            "id": "EXECUTOR_REVIEW",
+            "subject": "SELF",
+            "kind": "EXECUTOR",
+            "state": "UNKNOWN",
+            "locationRef": "PRIVATE_ROLE_INDEX",
+            "reviewDate": "2026-10-20"
+          }
+        ],
+        "triggers": [
+          {
+            "date": "2027-10-20",
+            "kind": "ANNUAL_REVIEW"
+          },
+          {
+            "date": "2034-01-01",
+            "kind": "DECLARED_RETIREMENT_REVIEW"
+          }
+        ]
+      },
+      "events": [
+        {
+          "id": "RETIRE",
+          "subject": "SELF",
+          "date": "2034-01-01",
+          "state": "PLANNED",
+          "lane": "RETIREMENT",
+          "linkRef": "RT_SPEND",
+          "author": "CLIENT_DECLARED"
+        },
+        {
+          "id": "EDUCATE_A",
+          "subject": "CHILD_A",
+          "date": "2030-01-01",
+          "state": "PLANNED",
+          "lane": "EDUCATION",
+          "linkRef": "STAGE_A",
+          "author": "CLIENT_DECLARED"
+        },
+        {
+          "id": "EDUCATE_B",
+          "subject": "CHILD_B",
+          "date": "2033-01-01",
+          "state": "UNVERIFIED",
+          "lane": "EDUCATION",
+          "linkRef": "STAGE_B",
+          "author": "CLIENT_DECLARED"
+        },
+        {
+          "id": "ESTATE_REVIEW",
+          "subject": "SELF",
+          "date": "2027-10-20",
+          "state": "PLANNED",
+          "lane": "ESTATE",
+          "linkRef": "WILL_STATUS",
+          "author": "CLIENT_DECLARED"
+        }
+      ]
+    }
+  },
+  "result": {
+    "version": "FINANCE_R3_2_DEEP_DIVE_CANDIDATE",
+    "sourceDigest": "9922e368696bb6c89bab5d979d13581f5f99861c05462546e032c12d056f4f9d",
+    "providerCalls": 0,
+    "providerCostUSD": 0,
+    "models": [
+      {
+        "modelId": "RETIREMENT_NEEDS",
+        "calcVersion": "FCR_R32_PATHS_V1",
+        "sourceDraftRef": "ACCOUNT_DRAFT:d66b6ec9-4bec-46e2-89ac-6e726c973e5c:1",
+        "sourceDigest": "9922e368696bb6c89bab5d979d13581f5f99861c05462546e032c12d056f4f9d",
+        "asOfDate": "2026-10-20",
+        "ownerSubjectRefs": [
+          "SELF"
+        ],
+        "applicableJurisdiction": "UNKNOWN",
+        "currency": "MYR",
+        "timeBasis": "CALENDAR_YEAR_END",
+        "realOrNominalBasis": "NOMINAL_WITH_BASE_YEAR_REAL",
+        "inputSourceRefs": [
+          "RT_SPEND"
+        ],
+        "assumptions": [
+          {
+            "name": "INFLATION",
+            "value": {
+              "kind": "EXACT",
+              "value": 0.025
+            },
+            "unit": "ANNUAL_EFFECTIVE_RATE",
+            "source": "CLIENT_DECLARED",
+            "sourceDate": "2026-10-20",
+            "effectivePeriod": "2026-2053",
+            "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+            "ref": "RT_INFLATION"
+          }
+        ],
+        "calculationMetricRefs": [
+          "RETIREMENT_NEEDS:PATH"
+        ],
+        "valueState": "APPROXIMATE",
+        "uncoveredDependencies": [],
+        "sourceEligibility": "LOCAL_SYNTHETIC_PREVIEW_ONLY",
+        "disclosureBoundary": "CLIENT_SCENARIO_NOT_PROFESSIONAL_ADVICE",
+        "eligible": true,
+        "rows": [
+          {
+            "year": 2034,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 39476.25396
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2035,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 40463.160228
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2036,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 41474.739096
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2037,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 42511.607784
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2038,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 43574.397768
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2039,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 44663.757696
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2040,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 45780.351768
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2041,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 46924.860708
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2042,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 48097.982088
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2043,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 49300.431624
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2044,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 50532.942528
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2045,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 51796.266156
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2046,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 53091.172656
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2047,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 54418.45194
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2048,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 55778.91336
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2049,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 57173.386032
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2050,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 58602.72078
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2051,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 60067.78884
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2052,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 61569.48348
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          },
+          {
+            "year": 2053,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 63108.720648
+            },
+            "real": {
+              "kind": "EXACT",
+              "value": 32400
+            }
+          }
+        ],
+        "firstYear": {
+          "kind": "EXACT",
+          "value": 39476.25396
+        },
+        "totalNominal": {
+          "kind": "EXACT",
+          "value": 1008407.38914
+        },
+        "totalReal": {
+          "kind": "EXACT",
+          "value": 648000
+        },
+        "formula": "spending × (1 + inflation)^elapsedYears; sum annual undiscounted cash needs. This is NOT present-value capital.",
+        "retirementYear": 2034,
+        "annualSpending": {
+          "kind": "EXACT",
+          "value": 32400
+        },
+        "spendingBasis": "AS_OF_YEAR",
+        "years": 20
+      },
+      {
+        "modelId": "RETIREMENT_FUNDING",
+        "calcVersion": "FCR_R32_PATHS_V1",
+        "sourceDraftRef": "ACCOUNT_DRAFT:d66b6ec9-4bec-46e2-89ac-6e726c973e5c:1",
+        "sourceDigest": "9922e368696bb6c89bab5d979d13581f5f99861c05462546e032c12d056f4f9d",
+        "asOfDate": "2026-10-20",
+        "ownerSubjectRefs": [
+          "SELF"
+        ],
+        "applicableJurisdiction": "UNKNOWN",
+        "currency": "MYR",
+        "timeBasis": "CALENDAR_YEAR_END",
+        "realOrNominalBasis": "NOMINAL_WITH_BASE_YEAR_REAL",
+        "inputSourceRefs": [],
+        "assumptions": [
+          {
+            "name": "GROSS_RETURN",
+            "value": {
+              "kind": "EXACT",
+              "value": 0.035
+            },
+            "unit": "ANNUAL_EFFECTIVE_RATE",
+            "source": "CLIENT_DECLARED",
+            "sourceDate": "2026-10-20",
+            "effectivePeriod": "2026-2053",
+            "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+            "ref": "RT_RETURN"
+          },
+          {
+            "name": "ANNUAL_FEE",
+            "value": {
+              "kind": "EXACT",
+              "value": 0.004
+            },
+            "unit": "ANNUAL_EFFECTIVE_RATE",
+            "source": "CLIENT_DECLARED",
+            "sourceDate": "2026-10-20",
+            "effectivePeriod": "2026-2053",
+            "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+            "ref": "RT_FEE"
+          }
+        ],
+        "calculationMetricRefs": [
+          "RETIREMENT_FUNDING:PATH"
+        ],
+        "valueState": "APPROXIMATE",
+        "uncoveredDependencies": [],
+        "sourceEligibility": "LOCAL_SYNTHETIC_PREVIEW_ONLY",
+        "disclosureBoundary": "CLIENT_SCENARIO_NOT_PROFESSIONAL_ADVICE",
+        "eligible": true,
+        "rows": [
+          {
+            "year": 2027,
+            "release": {
+              "kind": "EXACT",
+              "value": 10000
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 10000
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 308.59950851
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 10308.59950851
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 10308.59950851
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 10308.59950851
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 0
+            }
+          },
+          {
+            "year": 2028,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 10308.59950851
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 318.12287421
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 10626.72238272
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 10626.72238272
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 10626.72238272
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 0
+            }
+          },
+          {
+            "year": 2029,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 10626.72238272
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 327.94013044
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 10954.66251316
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 10954.66251316
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 10954.66251316
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 0
+            }
+          },
+          {
+            "year": 2030,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 10954.66251316
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 338.06034676
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 11292.72285992
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 11292.72285992
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 11292.72285992
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 0
+            }
+          },
+          {
+            "year": 2031,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 11292.72285992
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 348.49287245
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 11641.21573237
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 11641.21573237
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 11641.21573237
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 0
+            }
+          },
+          {
+            "year": 2032,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 11641.21573237
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 359.24734538
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 12000.46307775
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 12000.46307775
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 12000.46307775
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 0
+            }
+          },
+          {
+            "year": 2033,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 12000.46307775
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 370.33370077
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 12370.79677852
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 12370.79677852
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 12370.79677852
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 0
+            }
+          },
+          {
+            "year": 2034,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 12370.79677852
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 381.76218058
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 39476.25396
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 12752.5589591
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 26723.6950009
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 26723.6950009
+            }
+          },
+          {
+            "year": 2035,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 40463.160228
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 40463.160228
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 67186.8552289
+            }
+          },
+          {
+            "year": 2036,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 41474.739096
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 41474.739096
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 108661.5943249
+            }
+          },
+          {
+            "year": 2037,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 42511.607784
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 42511.607784
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 151173.2021089
+            }
+          },
+          {
+            "year": 2038,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 43574.397768
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 43574.397768
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 194747.5998769
+            }
+          },
+          {
+            "year": 2039,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 44663.757696
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 44663.757696
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 239411.3575729
+            }
+          },
+          {
+            "year": 2040,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 45780.351768
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 45780.351768
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 285191.7093409
+            }
+          },
+          {
+            "year": 2041,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 46924.860708
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 46924.860708
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 332116.5700489
+            }
+          },
+          {
+            "year": 2042,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 48097.982088
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 48097.982088
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 380214.5521369
+            }
+          },
+          {
+            "year": 2043,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 49300.431624
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 49300.431624
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 429514.9837609
+            }
+          },
+          {
+            "year": 2044,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 50532.942528
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 50532.942528
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 480047.9262889
+            }
+          },
+          {
+            "year": 2045,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 51796.266156
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 51796.266156
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 531844.1924449
+            }
+          },
+          {
+            "year": 2046,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 53091.172656
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 53091.172656
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 584935.3651009
+            }
+          },
+          {
+            "year": 2047,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 54418.45194
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 54418.45194
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 639353.8170409
+            }
+          },
+          {
+            "year": 2048,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 55778.91336
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 55778.91336
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 695132.7304009
+            }
+          },
+          {
+            "year": 2049,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 57173.386032
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 57173.386032
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 752306.1164329
+            }
+          },
+          {
+            "year": 2050,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 58602.72078
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 58602.72078
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 810908.8372129
+            }
+          },
+          {
+            "year": 2051,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 60067.78884
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 60067.78884
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 870976.6260529
+            }
+          },
+          {
+            "year": 2052,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 61569.48348
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 61569.48348
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 932546.1095329
+            }
+          },
+          {
+            "year": 2053,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 63108.720648
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 63108.720648
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 995654.8301809
+            }
+          }
+        ],
+        "totalUnmet": {
+          "kind": "EXACT",
+          "value": 995654.8301809
+        },
+        "remaining": {
+          "kind": "EXACT",
+          "value": 0
+        },
+        "allocations": [
+          {
+            "id": "RT_BANK",
+            "assetRef": "bank",
+            "target": "RETIREMENT",
+            "amount": {
+              "kind": "EXACT",
+              "value": 10000
+            },
+            "currency": "MYR",
+            "asOfDate": "2026-10-20"
+          }
+        ],
+        "frequency": "MONTHLY",
+        "periodicContribution": {
+          "kind": "EXACT",
+          "value": 0
+        },
+        "periodicEmployerContribution": {
+          "kind": "EXACT",
+          "value": 0
+        },
+        "contributionEndYear": 2033,
+        "formula": "Restricted allocations grow at the explicitly declared net annual scenario rate before release; prior restricted growth is separate from current-year growth. Projection begins in the next complete calendar year after asOf; no retroactive current-year growth or contribution. End-period contribution after effective-period growth. Annual costs withdrawn at year end; unfunded costs recorded, never financed implicitly. Net annual factor=(1+return)×(1-fee)."
+      },
+      {
+        "modelId": "EDUCATION_COST",
+        "calcVersion": "FCR_R32_PATHS_V1",
+        "sourceDraftRef": "ACCOUNT_DRAFT:d66b6ec9-4bec-46e2-89ac-6e726c973e5c:1",
+        "sourceDigest": "9922e368696bb6c89bab5d979d13581f5f99861c05462546e032c12d056f4f9d",
+        "asOfDate": "2026-10-20",
+        "ownerSubjectRefs": [
+          "CHILD_A",
+          "CHILD_B"
+        ],
+        "applicableJurisdiction": "UNKNOWN",
+        "currency": "MYR",
+        "timeBasis": "CALENDAR_YEAR_END",
+        "realOrNominalBasis": "NOMINAL_WITH_BASE_YEAR_REAL",
+        "inputSourceRefs": [
+          "ED_STAGE"
+        ],
+        "assumptions": [
+          {
+            "name": "STAGE_A:INFLATION",
+            "value": {
+              "kind": "EXACT",
+              "value": 0.03
+            },
+            "unit": "ANNUAL_EFFECTIVE_RATE",
+            "source": "CLIENT_DECLARED",
+            "sourceDate": "2026-10-20",
+            "effectivePeriod": "2026-2053",
+            "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+            "ref": "ED_A_INFLATION"
+          },
+          {
+            "name": "STAGE_B:INFLATION",
+            "value": {
+              "kind": "EXACT",
+              "value": 0.02
+            },
+            "unit": "ANNUAL_EFFECTIVE_RATE",
+            "source": "CLIENT_DECLARED",
+            "sourceDate": "2026-10-20",
+            "effectivePeriod": "2026-2053",
+            "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+            "ref": "ED_B_INFLATION"
+          }
+        ],
+        "calculationMetricRefs": [
+          "EDUCATION_COST:PATH"
+        ],
+        "valueState": "APPROXIMATE",
+        "uncoveredDependencies": [],
+        "sourceEligibility": "LOCAL_SYNTHETIC_PREVIEW_ONLY",
+        "disclosureBoundary": "CLIENT_SCENARIO_NOT_PROFESSIONAL_ADVICE",
+        "eligible": true,
+        "rows": [
+          {
+            "year": 2030,
+            "subject": "CHILD_A",
+            "stage": "STAGE_A",
+            "feeYear": 2026,
+            "region": "DECLARED_LOCAL_ROUTE",
+            "tuition": {
+              "kind": "EXACT",
+              "value": 13956.309244
+            },
+            "living": {
+              "kind": "EXACT",
+              "value": 7428.358146
+            },
+            "other": {
+              "kind": "EXACT",
+              "value": 1350.610572
+            },
+            "nominal": {
+              "kind": "EXACT",
+              "value": 22735.277962
+            }
+          },
+          {
+            "year": 2031,
+            "subject": "CHILD_A",
+            "stage": "STAGE_A",
+            "feeYear": 2026,
+            "region": "DECLARED_LOCAL_ROUTE",
+            "tuition": {
+              "kind": "EXACT",
+              "value": 14374.998468
+            },
+            "living": {
+              "kind": "EXACT",
+              "value": 7651.208862
+            },
+            "other": {
+              "kind": "EXACT",
+              "value": 1391.128884
+            },
+            "nominal": {
+              "kind": "EXACT",
+              "value": 23417.336214
+            }
+          },
+          {
+            "year": 2032,
+            "subject": "CHILD_A",
+            "stage": "STAGE_A",
+            "feeYear": 2026,
+            "region": "DECLARED_LOCAL_ROUTE",
+            "tuition": {
+              "kind": "EXACT",
+              "value": 14806.24852
+            },
+            "living": {
+              "kind": "EXACT",
+              "value": 7880.74518
+            },
+            "other": {
+              "kind": "EXACT",
+              "value": 1432.86276
+            },
+            "nominal": {
+              "kind": "EXACT",
+              "value": 24119.85646
+            }
+          },
+          {
+            "year": 2033,
+            "subject": "CHILD_B",
+            "stage": "STAGE_B",
+            "feeYear": 2026,
+            "region": "DECLARED_LOCAL_ROUTE",
+            "tuition": {
+              "kind": "EXACT",
+              "value": 12405.805236
+            },
+            "living": {
+              "kind": "EXACT",
+              "value": 6202.902618
+            },
+            "other": {
+              "kind": "EXACT",
+              "value": 1033.817103
+            },
+            "nominal": {
+              "kind": "EXACT",
+              "value": 19642.524957
+            }
+          },
+          {
+            "year": 2034,
+            "subject": "CHILD_B",
+            "stage": "STAGE_B",
+            "feeYear": 2026,
+            "region": "DECLARED_LOCAL_ROUTE",
+            "tuition": {
+              "kind": "EXACT",
+              "value": 12653.921304
+            },
+            "living": {
+              "kind": "EXACT",
+              "value": 6326.960652
+            },
+            "other": {
+              "kind": "EXACT",
+              "value": 1054.493442
+            },
+            "nominal": {
+              "kind": "EXACT",
+              "value": 20035.375398
+            }
+          }
+        ],
+        "annual": [
+          {
+            "year": 2030,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 22735.277962
+            }
+          },
+          {
+            "year": 2031,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 23417.336214
+            }
+          },
+          {
+            "year": 2032,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 24119.85646
+            }
+          },
+          {
+            "year": 2033,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 19642.524957
+            }
+          },
+          {
+            "year": 2034,
+            "nominal": {
+              "kind": "EXACT",
+              "value": 20035.375398
+            }
+          }
+        ],
+        "totalNominal": {
+          "kind": "EXACT",
+          "value": 109950.370991
+        },
+        "formula": "Each explicitly declared stage component × (1 + sourced inflation)^(cost year - fee source year). No FX conversion."
+      },
+      {
+        "modelId": "EDUCATION_FUNDING",
+        "calcVersion": "FCR_R32_PATHS_V1",
+        "sourceDraftRef": "ACCOUNT_DRAFT:d66b6ec9-4bec-46e2-89ac-6e726c973e5c:1",
+        "sourceDigest": "9922e368696bb6c89bab5d979d13581f5f99861c05462546e032c12d056f4f9d",
+        "asOfDate": "2026-10-20",
+        "ownerSubjectRefs": [
+          "SELF",
+          "CHILD_A",
+          "CHILD_B"
+        ],
+        "applicableJurisdiction": "UNKNOWN",
+        "currency": "MYR",
+        "timeBasis": "CALENDAR_YEAR_END",
+        "realOrNominalBasis": "NOMINAL_WITH_BASE_YEAR_REAL",
+        "inputSourceRefs": [],
+        "assumptions": [
+          {
+            "name": "GROSS_RETURN",
+            "value": {
+              "kind": "EXACT",
+              "value": 0.025
+            },
+            "unit": "ANNUAL_EFFECTIVE_RATE",
+            "source": "CLIENT_DECLARED",
+            "sourceDate": "2026-10-20",
+            "effectivePeriod": "2026-2053",
+            "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+            "ref": "ED_RETURN"
+          },
+          {
+            "name": "ANNUAL_FEE",
+            "value": {
+              "kind": "EXACT",
+              "value": 0.003
+            },
+            "unit": "ANNUAL_EFFECTIVE_RATE",
+            "source": "CLIENT_DECLARED",
+            "sourceDate": "2026-10-20",
+            "effectivePeriod": "2026-2053",
+            "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+            "ref": "ED_FEE"
+          }
+        ],
+        "calculationMetricRefs": [
+          "EDUCATION_FUNDING:PATH"
+        ],
+        "valueState": "APPROXIMATE",
+        "uncoveredDependencies": [],
+        "sourceEligibility": "LOCAL_SYNTHETIC_PREVIEW_ONLY",
+        "disclosureBoundary": "CLIENT_SCENARIO_NOT_PROFESSIONAL_ADVICE",
+        "eligible": true,
+        "rows": [
+          {
+            "year": 2027,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 0
+            }
+          },
+          {
+            "year": 2028,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 0
+            }
+          },
+          {
+            "year": 2029,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 0
+            }
+          },
+          {
+            "year": 2030,
+            "release": {
+              "kind": "EXACT",
+              "value": 61258.867684
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 3858.867684
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 61258.867684
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 1343.10067397
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 22735.277962
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 62601.96835797
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 39866.69039597
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 39866.69039597
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 0
+            }
+          },
+          {
+            "year": 2031,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 39866.69039597
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 874.07718693
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 23417.336214
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 40740.7675829
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 17323.4313689
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 17323.4313689
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 0
+            }
+          },
+          {
+            "year": 2032,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 17323.4313689
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 379.81623276
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 24119.85646
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 17703.24760166
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 6416.60885834
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 6416.60885834
+            }
+          },
+          {
+            "year": 2033,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 19642.524957
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 19642.524957
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 26059.13381534
+            }
+          },
+          {
+            "year": 2034,
+            "release": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "priorRestrictedGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "opening": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "contributions": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "investmentGrowth": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "need": {
+              "kind": "EXACT",
+              "value": 20035.375398
+            },
+            "available": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "gap": {
+              "kind": "EXACT",
+              "value": 20035.375398
+            },
+            "excess": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "closing": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "unmetToDate": {
+              "kind": "EXACT",
+              "value": 46094.50921334
+            }
+          }
+        ],
+        "totalUnmet": {
+          "kind": "EXACT",
+          "value": 46094.50921334
+        },
+        "remaining": {
+          "kind": "EXACT",
+          "value": 0
+        },
+        "allocations": [
+          {
+            "id": "ED_INVEST",
+            "assetRef": "investments",
+            "target": "EDUCATION",
+            "amount": {
+              "kind": "EXACT",
+              "value": 57400
+            },
+            "currency": "MYR",
+            "asOfDate": "2026-10-20"
+          }
+        ],
+        "frequency": "ANNUAL",
+        "periodicContribution": {
+          "kind": "EXACT",
+          "value": 0
+        },
+        "periodicEmployerContribution": {
+          "kind": "EXACT",
+          "value": 0
+        },
+        "contributionEndYear": 2034,
+        "formula": "Restricted allocations grow at the explicitly declared net annual scenario rate before release; prior restricted growth is separate from current-year growth. Projection begins in the next complete calendar year after asOf; no retroactive current-year growth or contribution. End-period contribution after effective-period growth. Annual costs withdrawn at year end; unfunded costs recorded, never financed implicitly. Net annual factor=(1+return)×(1-fee)."
+      },
+      {
+        "modelId": "PROTECTION_EVENT",
+        "calcVersion": "FCR_R32_PATHS_V1",
+        "sourceDraftRef": "ACCOUNT_DRAFT:d66b6ec9-4bec-46e2-89ac-6e726c973e5c:1",
+        "sourceDigest": "9922e368696bb6c89bab5d979d13581f5f99861c05462546e032c12d056f4f9d",
+        "asOfDate": "2026-10-20",
+        "ownerSubjectRefs": [
+          "SELF",
+          "CHILD_A",
+          "CHILD_B"
+        ],
+        "applicableJurisdiction": "UNKNOWN",
+        "currency": "MYR",
+        "timeBasis": "CALENDAR_YEAR_END",
+        "realOrNominalBasis": "NOMINAL_WITH_BASE_YEAR_REAL",
+        "inputSourceRefs": [
+          "SYNTHETIC_DECLARATIONS_V1"
+        ],
+        "assumptions": [],
+        "calculationMetricRefs": [
+          "PROTECTION_EVENT:PATH"
+        ],
+        "valueState": "DECLARED",
+        "uncoveredDependencies": [],
+        "sourceEligibility": "LOCAL_SYNTHETIC_PREVIEW_ONLY",
+        "disclosureBoundary": "CLIENT_SCENARIO_NOT_PROFESSIONAL_ADVICE",
+        "eligible": true,
+        "rows": [
+          {
+            "subject": "SELF",
+            "policyRef": "event-1",
+            "event": "DEATH",
+            "termsState": "DECLARED",
+            "expiryDate": "2044-03-10",
+            "coverage": {
+              "value": 230000,
+              "kind": "EXACT"
+            },
+            "need": {
+              "kind": "UNKNOWN",
+              "reason": "PROFESSIONAL_NEEDS_MODEL_NOT_ADMITTED"
+            },
+            "gap": {
+              "kind": "UNKNOWN",
+              "reason": "PROFESSIONAL_NEEDS_MODEL_NOT_ADMITTED"
+            }
+          },
+          {
+            "subject": "SELF",
+            "policyRef": "event-2",
+            "event": "MEDICAL",
+            "termsState": "DECLARED",
+            "expiryDate": "2032-07-20",
+            "coverage": {
+              "value": 74000,
+              "kind": "APPROXIMATE"
+            },
+            "need": {
+              "kind": "UNKNOWN",
+              "reason": "PROFESSIONAL_NEEDS_MODEL_NOT_ADMITTED"
+            },
+            "gap": {
+              "kind": "UNKNOWN",
+              "reason": "PROFESSIONAL_NEEDS_MODEL_NOT_ADMITTED"
+            }
+          }
+        ]
+      },
+      {
+        "modelId": "ESTATE_CONTINUITY",
+        "calcVersion": "FCR_R32_PATHS_V1",
+        "sourceDraftRef": "ACCOUNT_DRAFT:d66b6ec9-4bec-46e2-89ac-6e726c973e5c:1",
+        "sourceDigest": "9922e368696bb6c89bab5d979d13581f5f99861c05462546e032c12d056f4f9d",
+        "asOfDate": "2026-10-20",
+        "ownerSubjectRefs": [
+          "SELF",
+          "CHILD_A",
+          "CHILD_B"
+        ],
+        "applicableJurisdiction": "UNKNOWN",
+        "currency": "MYR",
+        "timeBasis": "CALENDAR_YEAR_END",
+        "realOrNominalBasis": "NOMINAL_WITH_BASE_YEAR_REAL",
+        "inputSourceRefs": [
+          "SYNTHETIC_DECLARATIONS_V1"
+        ],
+        "assumptions": [],
+        "calculationMetricRefs": [
+          "ESTATE_CONTINUITY:PATH"
+        ],
+        "valueState": "DECLARED",
+        "uncoveredDependencies": [],
+        "sourceEligibility": "LOCAL_SYNTHETIC_PREVIEW_ONLY",
+        "disclosureBoundary": "CLIENT_SCENARIO_NOT_PROFESSIONAL_ADVICE",
+        "eligible": true,
+        "rows": [
+          {
+            "id": "WILL_STATUS",
+            "subject": "SELF",
+            "kind": "WILL",
+            "state": "DECLARED",
+            "locationRef": "PRIVATE_DOCUMENT_INDEX",
+            "reviewDate": "2026-10-20"
+          },
+          {
+            "id": "NOMINATION_STATUS",
+            "subject": "SELF",
+            "kind": "NOMINATION",
+            "state": "UNKNOWN",
+            "locationRef": "PRIVATE_POLICY_INDEX",
+            "reviewDate": "2026-10-20"
+          },
+          {
+            "id": "EXECUTOR_REVIEW",
+            "subject": "SELF",
+            "kind": "EXECUTOR",
+            "state": "UNKNOWN",
+            "locationRef": "PRIVATE_ROLE_INDEX",
+            "reviewDate": "2026-10-20"
+          }
+        ],
+        "triggers": [
+          {
+            "date": "2027-10-20",
+            "kind": "ANNUAL_REVIEW"
+          },
+          {
+            "date": "2034-01-01",
+            "kind": "DECLARED_RETIREMENT_REVIEW"
+          }
+        ],
+        "legalState": "GATE_BLOCKED",
+        "nominationIsInheritance": false
+      },
+      {
+        "modelId": "LIFE_COURSE_EVENTS",
+        "calcVersion": "FCR_R32_PATHS_V1",
+        "sourceDraftRef": "ACCOUNT_DRAFT:d66b6ec9-4bec-46e2-89ac-6e726c973e5c:1",
+        "sourceDigest": "9922e368696bb6c89bab5d979d13581f5f99861c05462546e032c12d056f4f9d",
+        "asOfDate": "2026-10-20",
+        "ownerSubjectRefs": [
+          "SELF",
+          "CHILD_A",
+          "CHILD_B"
+        ],
+        "applicableJurisdiction": "UNKNOWN",
+        "currency": "MYR",
+        "timeBasis": "CALENDAR_YEAR_END",
+        "realOrNominalBasis": "NOMINAL_WITH_BASE_YEAR_REAL",
+        "inputSourceRefs": [
+          "SYNTHETIC_DECLARATIONS_V1"
+        ],
+        "assumptions": [],
+        "calculationMetricRefs": [
+          "LIFE_COURSE_EVENTS:PATH"
+        ],
+        "valueState": "DECLARED",
+        "uncoveredDependencies": [],
+        "sourceEligibility": "LOCAL_SYNTHETIC_PREVIEW_ONLY",
+        "disclosureBoundary": "CLIENT_SCENARIO_NOT_PROFESSIONAL_ADVICE",
+        "eligible": true,
+        "rows": [
+          {
+            "id": "ESTATE_REVIEW",
+            "subject": "SELF",
+            "date": "2027-10-20",
+            "state": "PLANNED",
+            "lane": "ESTATE",
+            "linkRef": "WILL_STATUS",
+            "author": "CLIENT_DECLARED"
+          },
+          {
+            "id": "EDUCATE_A",
+            "subject": "CHILD_A",
+            "date": "2030-01-01",
+            "state": "PLANNED",
+            "lane": "EDUCATION",
+            "linkRef": "STAGE_A",
+            "author": "CLIENT_DECLARED"
+          },
+          {
+            "id": "EDUCATE_B",
+            "subject": "CHILD_B",
+            "date": "2033-01-01",
+            "state": "UNVERIFIED",
+            "lane": "EDUCATION",
+            "linkRef": "STAGE_B",
+            "author": "CLIENT_DECLARED"
+          },
+          {
+            "id": "RETIRE",
+            "subject": "SELF",
+            "date": "2034-01-01",
+            "state": "PLANNED",
+            "lane": "RETIREMENT",
+            "linkRef": "RT_SPEND",
+            "author": "CLIENT_DECLARED"
+          }
+        ]
+      }
+    ],
+    "allocationAudit": {
+      "eligible": true,
+      "issues": [],
+      "totals": {
+        "bank": {
+          "kind": "EXACT",
+          "value": 10000
+        },
+        "investments": {
+          "kind": "EXACT",
+          "value": 57400
+        }
+      }
+    }
+  },
+  "contentDigest": "70fec8a72575570b0245727437657f7f397ef17f85695b4fa99daf2ce589a79b",
+  "commercial": {
+    "priceMYR": 69,
+    "languages": [
+      "zh-Hans",
+      "en"
+    ],
+    "artifactLanguage": "BILINGUAL",
+    "followups": 4,
+    "providerCapUSD": 5,
+    "providerCalls": 0,
+    "costUSD": 0
+  }
+}

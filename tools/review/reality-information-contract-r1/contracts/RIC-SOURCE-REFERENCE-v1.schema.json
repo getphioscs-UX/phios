@@ -1,0 +1,188 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:phios:RIC-SOURCE-REFERENCE-v1",
+  "title": "Independent local reference; no permission authority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourceId",
+    "sourceVersionOrDigest",
+    "sourceOwner",
+    "sourceClass",
+    "originalUrlOrCanonicalRef",
+    "publisher",
+    "title",
+    "language",
+    "licenseStatus",
+    "publicationState",
+    "accessClass",
+    "entitlementRequired",
+    "sourceAcquisitionMode",
+    "observationPeriod",
+    "publishedAt",
+    "revisedAt",
+    "retrievedAt",
+    "expiresAtOrReviewBy",
+    "freshnessState",
+    "jurisdiction",
+    "populationCoverage",
+    "sampleOrInstitutionCoverage",
+    "methodology",
+    "unit",
+    "priceBasis",
+    "timeFrequency",
+    "sourceFragmentRef",
+    "quoteSpanOrDatasetRow",
+    "checksum",
+    "verifiedChecksum",
+    "evidenceAdmissionState",
+    "limitations",
+    "accountOwnerRef",
+    "purpose",
+    "publicShareAllowed",
+    "metric",
+    "value"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "RIC-SOURCE-REFERENCE-v1"
+    },
+    "sourceId": {
+      "type": "string"
+    },
+    "sourceVersionOrDigest": {
+      "type": "string"
+    },
+    "sourceOwner": {
+      "type": "string"
+    },
+    "sourceClass": {
+      "type": "string"
+    },
+    "originalUrlOrCanonicalRef": {
+      "type": "string"
+    },
+    "publisher": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "language": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "licenseStatus": {
+      "type": "string"
+    },
+    "publicationState": {
+      "type": "string"
+    },
+    "accessClass": {
+      "type": "string"
+    },
+    "entitlementRequired": {
+      "type": "boolean"
+    },
+    "sourceAcquisitionMode": {
+      "type": "string"
+    },
+    "observationPeriod": {
+      "type": "string"
+    },
+    "publishedAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "revisedAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "retrievedAt": {
+      "type": "string"
+    },
+    "expiresAtOrReviewBy": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "freshnessState": {
+      "type": "string"
+    },
+    "jurisdiction": {
+      "type": "string"
+    },
+    "populationCoverage": {
+      "type": "string"
+    },
+    "sampleOrInstitutionCoverage": {
+      "type": "string"
+    },
+    "methodology": {
+      "type": "string"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "priceBasis": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timeFrequency": {
+      "type": "string"
+    },
+    "sourceFragmentRef": {
+      "type": "string"
+    },
+    "quoteSpanOrDatasetRow": {
+      "type": "string"
+    },
+    "checksum": {
+      "type": "string"
+    },
+    "verifiedChecksum": {
+      "type": "string"
+    },
+    "evidenceAdmissionState": {
+      "type": "string"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {}
+    },
+    "accountOwnerRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "purpose": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "publicShareAllowed": {
+      "type": "boolean"
+    },
+    "metric": {
+      "type": "string"
+    },
+    "value": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+# Executable validation
+
+Run `node --test tools/review/reality-information-contract-r1/tests/ric.test.mjs`. Existing Node test runner and repository Ajv; no installation. Forty negatives in five groups of eight record expected/actual code and differences. Additional tests validate eight bilingual scenario runs against schemas, malformed/null/missing/additional fields, real local article/snapshot SHA, and twenty multilingual contract boundary plans. They do not claim twenty live answered questions.
+
+Run `node tools/review/reality-information-contract-r1/review/server.mjs`, then `node tools/review/reality-information-contract-r1/review/verify-browser.mjs`. Browser visits only localhost, exercises A–D at 1440/390 in both locales, selects public+synthetic private items, previews exactly two, revokes and denies new private preview, then confirms public-only preview still works. Checks overflow, page/HTTP errors, keyboard focus, aria-live, reduced motion and no broken images. Four representative final screenshots only; initial failed process metadata retained, no unnecessary repeated screenshot archive.
+
+Schema/source checks are contract evidence. Local fixture consent is simulated. External source availability, real accounts, actual professional credentials, production flags, provider use authorization and durable history are NOT_EXERCISED. Full unrelated repository suites and product compilation are not run because no product code changed.

@@ -1,0 +1,7 @@
+# Relevance and unknowns
+
+Question ID, explicit dependency IDs and admitted scope jointly govern inclusion. Lexical overlap alone is insufficient. Claims cannot silently replace the original question or import unrelated fixed reading. Existing Articles can support many questions; no new article per question is required. No claims in the authorized evidence set produces an insufficient-evidence result, not fabricated filler.
+
+Unknown reason enums distinguish not collected, unavailable, permission absent, incomparable, observation absent, stale/superseded, conflict, not applicable and uncertain mechanism. The bundle displays impact and next source even when a mechanism explanation is available. Missing matched Malaysian application denominator blocks approval probability, not all general household context. CCRIS monetary amounts are not probability; SLOOS net standards are not refusal rates; HMDA action records require the stated action 1+2+3 denominator. CPI monthly indices and survey-year household income are different frequencies, populations and quantities.
+
+Comparison requires identical definitions or an explicitly admitted transformation, geography, unit, price basis and period. This candidate rejects mismatches rather than inventing a transformation. There is no silent year fallback and no null substituted for an observed numeric value. Observation time differs from publication and retrieval time. Pinning a new fetch does not make an old observation live.

@@ -1,0 +1,7 @@
+# World P1 compatibility
+
+Verified source reuse: functions/_lib/world-evidence.js, functions/api/world-observations.js, content/world/world-evidence-series-v1.json and world-evidence-observations-v1.json. RIC consumes only locally bundled observation metadata and the existing Book VI canonical paragraph. It neither changes P1 routes nor registers a new query API. Original P1 and Gate2C negative results remain separate historical records. Prior World 0/16 is not overwritten by the 20 RIC contract plans.
+
+P1 can supply source ID/version, country/period, measurement definition, value/unit, publisher URL, vintage and raw-artifact hash. Missing publication dates stay null. RIC's checksum binds current bundled bytes; this run does not claim a new external raw download. Public source references can be represented without making personal facts.
+
+Future minimum product connections, each needs separate acceptance: (1) World/Ask owner emits per-claim fragment+scope metadata and real relevance decisions; (2) selected handoff calls existing permission and account owners, not this mock; (3) Reality/Navigation accepts owner-admitted relations; (4) Continuity reads actual versioned revision/action/outcome events and invalidation; (5) customer views display these authority lanes and revocation/recheck states. No new database/knowledge/permission system is required. Existing provider budget and entitlement gates remain authoritative.

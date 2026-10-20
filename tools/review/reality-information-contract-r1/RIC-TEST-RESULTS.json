@@ -1,0 +1,338 @@
+{
+  "status": "PASS_LOCAL_PROCESS",
+  "negativeCount": 40,
+  "results": [
+    {
+      "group": "source",
+      "inputSummary": "missing source ID",
+      "expected": "SOURCE_ID_REQUIRED",
+      "actual": "SOURCE_ID_REQUIRED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "source",
+      "inputSummary": "missing version",
+      "expected": "SOURCE_VERSION_REQUIRED",
+      "actual": "SOURCE_VERSION_REQUIRED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "source",
+      "inputSummary": "invalid original URL",
+      "expected": "SOURCE_URL_INVALID",
+      "actual": "SOURCE_URL_INVALID",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "source",
+      "inputSummary": "no original fragment",
+      "expected": "SOURCE_FRAGMENT_REQUIRED",
+      "actual": "SOURCE_FRAGMENT_REQUIRED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "source",
+      "inputSummary": "draft presented as published",
+      "expected": "SOURCE_NOT_PUBLISHED",
+      "actual": "SOURCE_NOT_PUBLISHED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "source",
+      "inputSummary": "theory presented as statistic",
+      "expected": "THEORY_NOT_STATISTIC",
+      "actual": "THEORY_NOT_STATISTIC",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "source",
+      "inputSummary": "AI self reference",
+      "expected": "AI_SELF_REFERENCE_DENIED",
+      "actual": "AI_SELF_REFERENCE_DENIED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "source",
+      "inputSummary": "hash mismatch",
+      "expected": "SOURCE_HASH_MISMATCH",
+      "actual": "SOURCE_HASH_MISMATCH",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "metric",
+      "inputSummary": "amount as approval probability",
+      "expected": "AMOUNT_NOT_PROBABILITY",
+      "actual": "AMOUNT_NOT_PROBABILITY",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "metric",
+      "inputSummary": "SLOOS as denial rate",
+      "expected": "STANDARDS_NOT_DENIAL",
+      "actual": "STANDARDS_NOT_DENIAL",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "metric",
+      "inputSummary": "wrong HMDA denominator",
+      "expected": "HMDA_DENOMINATOR_INVALID",
+      "actual": "HMDA_DENOMINATOR_INVALID",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "metric",
+      "inputSummary": "CPI and income same frequency",
+      "expected": "NOT_COMPARABLE_TIMEFREQUENCY",
+      "actual": "NOT_COMPARABLE_TIMEFREQUENCY",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "metric",
+      "inputSummary": "different price basis",
+      "expected": "NOT_COMPARABLE_PRICEBASIS",
+      "actual": "NOT_COMPARABLE_PRICEBASIS",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "metric",
+      "inputSummary": "country and unit mismatch",
+      "expected": "NOT_COMPARABLE_JURISDICTION",
+      "actual": "NOT_COMPARABLE_JURISDICTION",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "metric",
+      "inputSummary": "year fallback",
+      "expected": "PERIOD_FALLBACK_DENIED",
+      "actual": "PERIOD_FALLBACK_DENIED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "metric",
+      "inputSummary": "null replaces observed value",
+      "expected": "NULL_REPLACEMENT_DENIED",
+      "actual": "NULL_REPLACEMENT_DENIED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "relevance",
+      "inputSummary": "keyword overlap without dependency",
+      "expected": "NO_REQUIRED_DEPENDENCY",
+      "actual": "NO_REQUIRED_DEPENDENCY",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "relevance",
+      "inputSummary": "coincidence promoted to causal link",
+      "expected": "COINCIDENCE_NOT_CAUSATION",
+      "actual": "COINCIDENCE_NOT_CAUSATION",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "relevance",
+      "inputSummary": "unproven graph edge",
+      "expected": "RELATION_NOT_ESTABLISHED",
+      "actual": "RELATION_NOT_ESTABLISHED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "relevance",
+      "inputSummary": "dangling graph node",
+      "expected": "DANGLING_RELATION",
+      "actual": "DANGLING_RELATION",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "relevance",
+      "inputSummary": "stale source",
+      "expected": "SOURCE_RECHECK_REQUIRED",
+      "actual": "SOURCE_RECHECK_REQUIRED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "relevance",
+      "inputSummary": "hidden conflict",
+      "expected": "CONFLICT_MUST_BE_VISIBLE",
+      "actual": "CONFLICT_MUST_BE_VISIBLE",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "relevance",
+      "inputSummary": "replaced original question",
+      "expected": "QUESTION_MISMATCH",
+      "actual": "QUESTION_MISMATCH",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "relevance",
+      "inputSummary": "national source becomes personal fact",
+      "expected": "PUBLIC_NOT_PERSONAL_FACT",
+      "actual": "PUBLIC_NOT_PERSONAL_FACT",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "privacy",
+      "inputSummary": "account without consent",
+      "expected": "CONSENT_REQUIRED",
+      "actual": "CONSENT_REQUIRED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "privacy",
+      "inputSummary": "cross account",
+      "expected": "CROSS_ACCOUNT_DENIED",
+      "actual": "CROSS_ACCOUNT_DENIED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "privacy",
+      "inputSummary": "private manuscript made public",
+      "expected": "PRIVATE_PUBLICATION_DENIED",
+      "actual": "PRIVATE_PUBLICATION_DENIED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "privacy",
+      "inputSummary": "third party auto included",
+      "expected": "THIRD_PARTY_CONSENT_REQUIRED",
+      "actual": "THIRD_PARTY_CONSENT_REQUIRED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "privacy",
+      "inputSummary": "sensitive URL",
+      "expected": "SENSITIVE_URL_DENIED",
+      "actual": "SENSITIVE_URL_DENIED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "privacy",
+      "inputSummary": "use after revocation",
+      "expected": "CONSENT_REVOKED",
+      "actual": "CONSENT_REVOKED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "privacy",
+      "inputSummary": "session auto persisted",
+      "expected": "SESSION_AUTOPERSIST_DENIED",
+      "actual": "SESSION_AUTOPERSIST_DENIED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "privacy",
+      "inputSummary": "method promoted to fact",
+      "expected": "METHOD_NOT_FACT",
+      "actual": "METHOD_NOT_FACT",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "continuity",
+      "inputSummary": "observation confused with release date",
+      "expected": "OBSERVATION_RELEASE_CONFLATED",
+      "actual": "OBSERVATION_RELEASE_CONFLATED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "continuity",
+      "inputSummary": "old data called live",
+      "expected": "HISTORICAL_NOT_LIVE",
+      "actual": "HISTORICAL_NOT_LIVE",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "continuity",
+      "inputSummary": "silent same-version overwrite",
+      "expected": "SILENT_OVERWRITE_DENIED",
+      "actual": "SILENT_OVERWRITE_DENIED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "continuity",
+      "inputSummary": "No revision history owner",
+      "expected": "NO_VERIFIED_HISTORY",
+      "actual": "NO_VERIFIED_HISTORY",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "continuity",
+      "inputSummary": "unconfirmed action",
+      "expected": "ACTION_NOT_CONFIRMED",
+      "actual": "ACTION_NOT_CONFIRMED",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "continuity",
+      "inputSummary": "English includes Chinese UI",
+      "expected": "CUSTOMER_LANGUAGE_MIX",
+      "actual": "CUSTOMER_LANGUAGE_MIX",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "continuity",
+      "inputSummary": "unknown hidden by template",
+      "expected": "UNKNOWN_MUST_BE_VISIBLE",
+      "actual": "UNKNOWN_MUST_BE_VISIBLE",
+      "difference": null,
+      "status": "PASS"
+    },
+    {
+      "group": "continuity",
+      "inputSummary": "static example marked live",
+      "expected": "STATIC_NOT_LIVE",
+      "actual": "STATIC_NOT_LIVE",
+      "difference": null,
+      "status": "PASS"
+    }
+  ],
+  "scenarioRuns": 8,
+  "networkAttempts": 0,
+  "providerCalls": 0,
+  "costUSD": 0,
+  "productionWrites": 0,
+  "proofScope": "Local contract and synthetic private fixtures; not product integration or production runtime",
+  "processExitCode": 0,
+  "totalNodeTests": 47,
+  "passedNodeTests": 47,
+  "failedNodeTests": 0,
+  "command": "node --test tools/review/reality-information-contract-r1/tests/ric.test.mjs",
+  "completedAt": "2026-10-20T05:23:49.376353+00:00"
+}
