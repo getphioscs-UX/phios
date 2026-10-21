@@ -1,7 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import {execFileSync} from 'node:child_process';
 
 const root = process.cwd();
+const trackedTmpFiles = execFileSync('git', ['ls-files', '-z', '--', 'tmp'], {cwd: root, encoding: 'utf8'})
+  .split('\0').filter(Boolean);
 
 const INTERNAL_REGISTRY_SCHEMAS = Object.freeze({
   'content/registry/provider-closure.json':
@@ -56,13 +59,26 @@ function jsonFiles(directory) {
     const absolutePath = path.join(directory, entry.name);
     const relativePath = path.relative(root, absolutePath).replaceAll(path.sep, '/');
     // Isolated P9 QA snapshots have intentionally partial source closures.
-    // Match only the precise local-artifact roots excluded by .gitignore.
-    if (entry.isDirectory() && /^tmp\/(?:p9-d1i1|p9-d1m1|p9-d1r1-[^/]*|p9g3|p9r02)$/.test(relativePath)) {
-      continue;
+    // Honor the existing P9 artifact families only when Git confirms that the
+    // directory is ignored and no repository-owned source would be hidden.
+    if (entry.isDirectory() && /^tmp\/(?:p9-[^/]+|p9g[^/]*|p9r[^/]*)$/.test(relativePath)) {
+      let ignored = false;
+      try {
+        execFileSync('git', ['check-ignore', '-q', '--', relativePath + '/'], {cwd: root, stdio: 'ignore'});
+        ignored = true;
+      } catch (error) {
+        if (error.status !== 1) throw error;
+      }
+      if (ignored) {
+        if (trackedTmpFiles.some(file => file.startsWith(relativePath + '/'))) {
+          throw new Error(`SCHEMA_ARTIFACT_EXCLUSION_WOULD_HIDE_TRACKED_SOURCE: ${relativePath}`);
+        }
+        continue;
+      }
     }
 
     if (entry.isDirectory()) {
-      output.push(...jsonFiles(absolutePath));
+      for (const file of jsonFiles(absolutePath)) output.push(file);
     } else if (
       entry.isFile() &&
       entry.name.endsWith('.json')

@@ -1,0 +1,92 @@
+{
+  "clientDate": "2026-10-21",
+  "at": "2026-10-21T02:40:30.806Z",
+  "state": "P9_FAILED_EXPORT_CLEANED_FORMAL_ORIGINALS_AND_ACCEPTED_EVIDENCE_RETAINED",
+  "deletedPath": "C:\\phios\\tmp\\p9-t8-r4\\source",
+  "deletedFiles": 48118,
+  "logicalBytesRemoved": 7732820580,
+  "observedBatchFreeDelta": 7845945344,
+  "driveBefore": 68792594432,
+  "driveAfter": 76749271040,
+  "wholeTaskDriveDelta": 7956676608,
+  "pngRemoved": 7564,
+  "pngBytesRemoved": 4042449530,
+  "pngIdentity": "All deleted PNG copies exactly matched retained accepted source-blob; every deleted file matched retained tar member",
+  "protectedFilesChecked": 160,
+  "protectedMismatch": [],
+  "existingWorktreeChangesPreserved": true,
+  "head": "9e459a44b0caf55c0515522fa1784cf4c5c718d3",
+  "trackedChangesAddedByCleanup": 0,
+  "retainedArchive": "tmp/p9-t8-r4/candidate.tar",
+  "archiveSha256": "8098dcfd78922c2f29af773c8b7904fc85c6ba9b8fcc8a143794dbec27841136",
+  "restoration": "tar -xf C:\\phios\\tmp\\p9-t8-r4\\candidate.tar -C C:\\phios\\tmp\\p9-t8-r4\\source",
+  "pending": [
+    {
+      "path": "tmp/p9-g3-r6-e1/source",
+      "role": "后续诊断来源",
+      "bytes": 8120190391,
+      "measurement": "PREVIOUS_DIRECTORY_INVENTORY_NOT_RESCANNED",
+      "missing": "有生成元数据复原和真实编译证明；未建立可等价复原且不含唯一内容的证据。",
+      "action": "KEEP_OR_EXACT_HUMAN_REVIEW"
+    },
+    {
+      "path": "tmp/p9-g3-r5/ACCEPTED-SOURCE.tar",
+      "role": "已接受P9来源归档",
+      "bytes": 7772989440,
+      "measurement": "CURRENT_FILE_SIZE",
+      "missing": "未证明所有恢复／验收依赖已结束；与candidate.tar字节不同，不能当重复包删。",
+      "action": "KEEP_OR_EXACT_HUMAN_REVIEW"
+    },
+    {
+      "path": "tmp/p9-t8-r4/candidate.tar",
+      "role": "本批保留恢复归档",
+      "bytes": 7772989440,
+      "measurement": "CURRENT_FILE_SIZE",
+      "missing": "刚删除副本的完整再生成来源；本批必须保留，不能连同副本一起删除。",
+      "action": "KEEP_OR_EXACT_HUMAN_REVIEW"
+    },
+    {
+      "path": "tmp/p9-d1i1/r1.tar",
+      "role": "旧R1归档",
+      "bytes": 7764152320,
+      "measurement": "CURRENT_FILE_SIZE",
+      "missing": "未逐项核定R1接受范围与恢复用途。",
+      "action": "KEEP_OR_EXACT_HUMAN_REVIEW"
+    },
+    {
+      "path": "tmp/p9-t8-r4a/source-blob",
+      "role": "正确的已接受来源",
+      "bytes": 7732820366,
+      "measurement": "PREVIOUS_DIRECTORY_INVENTORY_NOT_RESCANNED",
+      "missing": "实际字节一致性、构建和历史发布记录明确依赖此目录；保留。",
+      "action": "KEEP_OR_EXACT_HUMAN_REVIEW"
+    },
+    {
+      "path": "tmp/p9-d1i1/r1",
+      "role": "旧R1展开候选",
+      "bytes": 7724098720,
+      "measurement": "PREVIOUS_DIRECTORY_INVENTORY_NOT_RESCANNED",
+      "missing": "存在接受记录和隔离覆盖；尚未证明与r1.tar完全一致、没有独立覆盖及消费者。",
+      "action": "KEEP_OR_EXACT_HUMAN_REVIEW"
+    },
+    {
+      "path": "tmp/p9-g3-r6-e1/runtime-source",
+      "role": "运行时来源副本",
+      "bytes": 1215915693,
+      "measurement": "PREVIOUS_DIRECTORY_INVENTORY_NOT_RESCANNED",
+      "missing": "未完成独立覆盖／消费者／恢复关系对账。",
+      "action": "KEEP_OR_EXACT_HUMAN_REVIEW"
+    }
+  ],
+  "remoteActions": 0,
+  "paidProviderCalls": 0,
+  "commits": 0,
+  "pushes": 0,
+  "deployments": 0,
+  "processesStopped": 0,
+  "limitations": [
+    "Not a new full 511k-file scan; retained directory sizes reuse prior inventory with measurement labels",
+    "No whole-repo SHA or semantic rerun; 160 selected protected files and unchanged current Pages boundary checked",
+    "Previous 45060 global PNG baseline minus this batch is an estimate, not a fresh global count"
+  ]
+}

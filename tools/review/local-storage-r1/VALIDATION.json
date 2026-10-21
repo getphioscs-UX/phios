@@ -1,0 +1,140 @@
+{
+  "at": "2026-10-20T11:33:53.841Z",
+  "headBefore": "9e459a44b0caf55c0515522fa1784cf4c5c718d3",
+  "headAfter": "9e459a44b0caf55c0515522fa1784cf4c5c718d3",
+  "headUnchanged": true,
+  "trackedChangedPaths": [],
+  "trackedFileChangeCount": 0,
+  "protectedDigestsChecked": 149,
+  "protectedMismatch": [],
+  "paths": [
+    {
+      "path": "node_modules",
+      "exists": true,
+      "expectedExists": true
+    },
+    {
+      "path": "node_modules/wrangler/bin/wrangler.js",
+      "exists": true,
+      "expectedExists": true
+    },
+    {
+      "path": "node_modules/esbuild/package.json",
+      "exists": true,
+      "expectedExists": true
+    },
+    {
+      "path": "package-lock.json",
+      "exists": true,
+      "expectedExists": true
+    },
+    {
+      "path": "wrangler.jsonc",
+      "exists": true,
+      "expectedExists": true
+    },
+    {
+      "path": ".pages-output/_worker.js",
+      "exists": true,
+      "expectedExists": true
+    },
+    {
+      "path": ".pages-output/_routes.json",
+      "exists": true,
+      "expectedExists": true
+    },
+    {
+      "path": ".wrangler/state",
+      "exists": true,
+      "expectedExists": true
+    },
+    {
+      "path": "assets/reports/financial/r3",
+      "exists": true,
+      "expectedExists": true
+    },
+    {
+      "path": "content",
+      "exists": true,
+      "expectedExists": true
+    },
+    {
+      "path": "images",
+      "exists": false,
+      "expectedExists": false
+    },
+    {
+      "path": "assets",
+      "exists": true,
+      "expectedExists": true
+    },
+    {
+      "path": "books",
+      "exists": true,
+      "expectedExists": true
+    },
+    {
+      "path": "tools/review/customer-entry-r1/RELEASE-VERIFICATION.json",
+      "exists": true,
+      "expectedExists": true
+    }
+  ],
+  "gitHeadTreeReadable": true,
+  "scopedCheck": {
+    "command": "node scripts/check-pages-static-assets.mjs",
+    "exitCode": 0,
+    "result": "PASS Pages publication boundary: 12068 files; no asset exceeds 25 MiB; provider runtime payloads excluded.",
+    "rebuildPerformed": false
+  },
+  "newUntrackedPaths": [
+    "?? tools/review/local-storage-r1/ACTIVE-SESSIONS-BEFORE.json",
+    "?? tools/review/local-storage-r1/CACHE-PROVENANCE.json",
+    "?? tools/review/local-storage-r1/CANDIDATES.csv",
+    "?? tools/review/local-storage-r1/CLEANUP-CHECKPOINT.json",
+    "?? tools/review/local-storage-r1/DELETE-APPROVED.csv",
+    "?? tools/review/local-storage-r1/DELETE-APPROVED.json",
+    "?? tools/review/local-storage-r1/DELETE-LEDGER.jsonl",
+    "?? tools/review/local-storage-r1/DELETE-PLAN.md",
+    "?? tools/review/local-storage-r1/DIRECTORY-SNAPSHOT.json",
+    "?? tools/review/local-storage-r1/DISK-BASELINE.json",
+    "?? tools/review/local-storage-r1/DISK-FREE-AFTER.json",
+    "?? tools/review/local-storage-r1/DISK-FREE-BEFORE.json",
+    "?? tools/review/local-storage-r1/EXTENSION-SUMMARY.csv",
+    "?? tools/review/local-storage-r1/GIT-STATUS-AFTER.txt",
+    "?? tools/review/local-storage-r1/GIT-STATUS-BEFORE.txt",
+    "?? tools/review/local-storage-r1/LARGE-FILE-SNAPSHOT.json",
+    "?? tools/review/local-storage-r1/NEXT-REVIEW-FILES.csv",
+    "?? tools/review/local-storage-r1/PNG-AUDIT.csv",
+    "?? tools/review/local-storage-r1/PNG-DIRECTORIES.csv",
+    "?? tools/review/local-storage-r1/PNG-TOP-100.json",
+    "?? tools/review/local-storage-r1/PROTECTED-DIGESTS-BEFORE.json",
+    "?? tools/review/local-storage-r1/SCRATCH-LARGE-FILES.csv",
+    "?? tools/review/local-storage-r1/SHORTLIST-DUPLICATE-HASHES.json",
+    "?? tools/review/local-storage-r1/TOP-DIRECTORIES.csv",
+    "?? tools/review/local-storage-r1/TOP-LARGE-FILES.csv"
+  ],
+  "remoteRequests": 0,
+  "remoteMutations": 0,
+  "r2Actions": 0,
+  "d1Actions": 0,
+  "stripeActions": 0,
+  "paidProviderCalls": 0,
+  "commits": 0,
+  "pushes": 0,
+  "deployments": 0,
+  "processesStopped": 0,
+  "limitations": [
+    "Selected critical-file content digests, not a full hash of all 92 GB",
+    "One full tree scan; remaining totals derived from inventory minus exact deletion ledger; concurrent OS/other-app writes affect whole-drive free space",
+    "No deployment or live-site validation performed",
+    "Reparse points skipped, not traversed",
+    "Existing root dependencies and current Pages output retained",
+    "CIM command lines do not expose every process working directory; deletion gates additionally used exclusive read handles and exact snapshot checks. This is an instantaneous safety check, not a guarantee against all future cache reuse."
+  ],
+  "initialValidationIssue": {
+    "state": "CORRECTED_BASELINE_ASSUMPTION",
+    "path": "images",
+    "actualBaselineExists": false,
+    "reason": "Root images did not exist in the full scan. No deletion occurred there. Protected digests had no mismatch."
+  }
+}

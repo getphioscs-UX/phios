@@ -26,7 +26,18 @@ const readText=file=>fs.readFile(path.join(root,file),'utf8'); const read=async 
 const norm=s=>s.replace(/^\uFEFF/,'').replace(/\r\n?/g,'\n'); const digestFile=async file=>crypto.createHash('sha256').update(norm(await readText(file)),'utf8').digest('hex');
 
 const foundation=await read(`${base}/freeze/pr-e1-e3-production-foundation-freeze-v1.json`); assert.equal(foundation.status,'FROZEN_POST_FREEZE_PRODUCTION_FOUNDATION_PERSISTENCE_BLOCKED');
-const preservation=await read(`${base}/freeze/pr-e1-e3-upstream-preservation-manifest-v1.json`); for(const item of preservation.preserved) assert.equal(await digestFile(item.reference),item.sha256,`PR_E4_E6_PRESERVATION:${item.reference}`);
+const preservation=await read(`${base}/freeze/pr-e1-e3-upstream-preservation-manifest-v1.json`); for(const item of preservation.preserved){
+ if(item.reference==='scripts/lib/customer-report-runtime/report-runtime-v2.mjs'){
+  const next=await read(base+'/freeze/pr-rr-immutable-locator-successor-v1.json');
+  assert.equal(next.status,'ENGINEERING_RECONCILIATION');assert.equal(next.path,item.reference);
+  assert.equal(next.predecessor,base+'/freeze/pr-e1-e3-upstream-preservation-manifest-v1.json');
+  assert.equal(await digestFile(next.predecessor),next.predecessorSha256);
+  assert.equal(next.previousPath,base+'/freeze/rr-runtime-before-immutable-locator-v1.txt');
+  assert.equal(next.previousSha256,item.sha256);assert.equal(await digestFile(next.previousPath),item.sha256);
+  for(const key of ['historicalFreezeRewritten','professionalJudgmentAuthorityChanged','productionAdmissionGranted'])assert.equal(next[key],false);
+  assert.equal(await digestFile(item.reference),next.sha256,'PR_E4_E6_RR_SUCCESSOR_DRIFT');
+ }else assert.equal(await digestFile(item.reference),item.sha256,`PR_E4_E6_PRESERVATION:${item.reference}`);
+}
 const contract=await read(`${base}/contracts/pr-decision-materialization-contract-v1.json`); assert.equal(contract.rules.onlyHumanProfessionalMayAuthorObservationJudgmentRecommendation,true); assert.equal(contract.rules.aiMayAuthorJudgment,false);
 const pwsContract=await read(`${base}/contracts/pr-pws-workspace-integration-contract-v1.json`); assert.equal(pwsContract.rules.prMutatesPwsWorkspace,false); assert.equal(pwsContract.rules.existingDeliverableRequired,true);
 const rrContract=await read(`${base}/contracts/pr-rr-professional-approval-handoff-contract-v1.json`); assert.equal(rrContract.rules.rrMayCreateProfessionalApproval,false); assert.equal(rrContract.rules.reportAssemblyAuthorityRemainsRr,true);
@@ -60,6 +71,18 @@ const rrHandoff=buildRrProfessionalApprovalHandoff(materialization,released,fixt
 
 const rrBaseRegistry=await read('content/runtime/customer-report-runtime/registries/canonical-report-section-registry-v2.json'); const before=JSON.stringify(rrBaseRegistry); const rrProjected=buildRrProfessionalSectionRegistryProjection(rrBaseRegistry,rrConsumer); assert.equal(JSON.stringify(rrBaseRegistry),before); const recommendation=rrProjected.sections.find(x=>x.sectionCode==='RECOMMENDATION'); assert.ok(recommendation.acceptedDataTypes.includes('OUTCOME_RECORD')); assert.equal(rrProjected.baseRegistryMutated,false);
 const reportInput=fixture.rr.report; const dynamicSections=rrHandoff.professionalSources.map(src=>({sectionCode:src.sectionCode,sourceReferences:[src]})); const assembly=assembleReport({...reportInput,sections:[...reportInput.staticSections,...dynamicSections],unavailableSources:[],assembledAt:'2026-08-11T12:00:00Z'},rrProjected); const candidate=createReportCandidate(assembly,{createdAt:'2026-08-11T12:05:00Z'}); const review=reviewReportCandidate(assembly,candidate,{reviewReference:'RR-PR-REVIEW-001',reviewedAt:'2026-08-11T12:10:00Z'}); assert.equal(review.reviewState,'REVIEW_PASSED'); const rrApproval=approveReportCandidate(assembly,candidate,review,{professionalApproval:rrHandoff.professionalApproval}); assert.equal(rrApproval.approvalState,'APPROVED'); assert.equal(rrApproval.authorityRuntime,'PR'); assert.equal(rrApproval.professionalApprovalCreatedByRr,false); const report=buildCanonicalReport(assembly,candidate,review,rrApproval); assert.equal(report.dataType,'REPORT_RECORD'); assert.equal(report.authorityFlags.professionalJudgmentCreated,false);
+// Optional immutable locator is metadata only; malformed or rebound identities fail closed.
+const locatorInput={...reportInput,sections:structuredClone([...reportInput.staticSections,...dynamicSections]),unavailableSources:[],assembledAt:'2026-08-11T12:00:00Z'};
+const locatorSource=locatorInput.sections.flatMap(s=>s.sourceReferences).find(s=>s.kind==='RDG_DATA');
+assert.ok(locatorSource,'PR fixture must exercise an RDG source');
+locatorSource.immutableLocator={reference:locatorSource.reference,version:'1.0.0',contentDigest:'a'.repeat(64),evidenceDigest:'b'.repeat(64)};
+assert.doesNotThrow(()=>assembleReport(locatorInput,rrProjected));
+for(const patch of [{reference:'OTHER'},{version:''},{contentDigest:'invalid'},{evidenceDigest:'invalid'},{payload:'forbidden'}]){
+ const invalid=structuredClone(locatorInput),source=invalid.sections.flatMap(s=>s.sourceReferences).find(s=>s.kind==='RDG_DATA');
+ Object.assign(source.immutableLocator,patch);
+ assert.throws(()=>assembleReport(invalid,rrProjected),/RR_IMMUTABLE_SOURCE_LOCATOR_INVALID/);
+}
+
 
 for (const schemaFile of [
   `${base}/schemas/pr-decision-materialization-v1.schema.json`,
