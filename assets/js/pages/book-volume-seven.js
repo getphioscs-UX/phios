@@ -71,7 +71,7 @@ async function render() {
     const saleReady = Number(book.volume)<=6 && book.status==='published' && book.content_status==='completed';
     const publicationActions = saleReady
       ? `<span class="wpr-status">${escapeHtml(locale==='zh-Hans'?'已出版 · 完整版可购买':'Published · complete edition available')}</span>${bookId==='book-5'?`<a class="knowledge-action knowledge-action--primary" href="#book-parts">${escapeHtml(locale==='zh-Hans'?'阅读《世界如何分化》':'Read Reality Differentiation')}</a>`:bookId==='book-6'?`<a class="knowledge-action knowledge-action--primary" href="#book-parts">${escapeHtml(locale==='zh-Hans'?'阅读《世界如何重组》':'Read Reality Reconfiguration')}</a>`:''}`
-      : `<span class="wpr-status">${escapeHtml(t('knowledge.production.futureVolumeBoundary'))}</span>`;
+      : `<span class="wpr-status">${escapeHtml(bookId==='book-7'?(locale==='zh-Hans'?'中文原稿已完成；公开阅读、购买和知识解释按各自准入范围提供。':'The Chinese manuscript is complete. Public reading, purchase and knowledge explanations follow their separately admitted scopes.'):t('knowledge.production.futureVolumeBoundary'))}</span>`;
     const readAction=['book-1','book-2','book-3','book-4'].includes(bookId)
       ? `<a class="knowledge-action knowledge-action--primary" data-book-read href="#structured-sources">${locale==='zh-Hans'?'阅读 · 来源与文章':'Read · sources and articles'}</a>` : '';
     const askHref = buildCkaEntryHref({

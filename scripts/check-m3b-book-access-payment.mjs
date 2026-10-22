@@ -1,3 +1,6 @@
+import {createCheckoutAttempt,attachStripeCheckout} from '../functions/commerce/book-commerce-store.js';
+import {createCheckoutSession} from '../functions/commerce/stripe-client.js';
+import {commerceReadiness,requireCheckoutReady} from '../functions/commerce/commerce-readiness.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -183,56 +186,26 @@ assert.equal(BOOK_ONE_PRODUCT.currency, 'MYR');
 assert.equal(BOOK_ONE_PRODUCT.amountMinor, 8900);
 assert.deepEqual(BOOK_ONE_PRODUCT.paymentMethods, ['card', 'fpx']);
 
-const checkoutResponse = await createCheckout({
-  request: new Request('https://phios.example/api/book-one-checkout', {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-      'idempotency-key': 'book-one-test-attempt-0001'
-    },
-    body: JSON.stringify({
-      locale: 'zh-Hans',
-      acceptDigitalPolicy: true,
-      amountMinor: 1,
-      currency: 'USD'
-    })
-  }),
-  env,
-  fetch: fakeFetch
-});
-assert.equal(checkoutResponse.status, 201);
-const checkoutPayload = await checkoutResponse.json();
-assert.equal(checkoutPayload.checkoutSessionId, 'cs_test_book1');
-assert.equal(checkoutPayload.purchaseState, 'payment_pending');
-assert.equal(stripeParameters.get('mode'), 'payment');
-assert.deepEqual(stripeParameters.getAll('payment_method_types[]'), [], 'Stripe dynamic payment methods remain enabled');
-assert.equal(stripeParameters.get('line_items[0][price_data][currency]'), 'myr');
-assert.equal(stripeParameters.get('line_items[0][price_data][unit_amount]'), '8900');
-assert.equal(
-  stripeParameters.get('metadata[product_id]'),
-  BOOK_ONE_PRODUCT.productId
-);
-assert.equal(
-  stripeParameters.get('success_url'),
-  'https://phios.example/payment-success?session_id={CHECKOUT_SESSION_ID}'
-);
-
-const replayCheckoutResponse = await createCheckout({
-  request: new Request('https://phios.example/api/book-one-checkout', {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-      'idempotency-key': 'book-one-test-attempt-0001'
-    },
-    body: JSON.stringify({
-      locale: 'zh-Hans',
-      acceptDigitalPolicy: true
-    })
-  }),
-  env,
-  fetch: fakeFetch
-});
-assert.equal((await replayCheckoutResponse.json()).replay, true);
+// The public work-only entry is retired. Historical orders remain consumable.
+let retiredFetches=0;
+const ordersBefore=database.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n;
+const checkoutResponse=await createCheckout({request:new Request('https://phios.example/api/book-one-checkout',{method:'POST',body:JSON.stringify({locale:'zh-Hans',acceptDigitalPolicy:true})}),env,fetch:async()=>{retiredFetches++;throw Error('RETIRED_ENTRY_MUST_NOT_FETCH');}});
+assert.equal(checkoutResponse.status,409);
+const checkoutPayload=await checkoutResponse.json();assert.equal(checkoutPayload.code,'book_language_version_required');assert.equal(checkoutPayload.purchaseUrl,'/account#commerce');
+assert.equal(retiredFetches,0);assert.equal(database.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,ordersBefore);
+// Explicit in-memory historical fixture; this does not reopen the retired API.
+requireCheckoutReady(await commerceReadiness(env));
+const attempt=await createCheckoutAttempt({env,checkoutAttemptId:'legacy-book-one-test',idempotencyKeyHash:'legacy-book-one-test-key',locale:'zh-Hans'});
+const historicalSession=await createCheckoutSession({env,product:BOOK_ONE_PRODUCT,checkoutAttemptId:attempt.checkout_attempt_id,purchaseId:'pur_legacybookonefixture',origin:'https://phios.example',locale:'zh-Hans',idempotencyKey:'legacy-book-one-test-key',fetcher:fakeFetch});
+await attachStripeCheckout({env,checkoutAttemptId:attempt.checkout_attempt_id,session:historicalSession});
+const replay=await createCheckoutAttempt({env,checkoutAttemptId:'ignored-duplicate',idempotencyKeyHash:'legacy-book-one-test-key',locale:'zh-Hans'});
+assert.equal(replay.checkout_attempt_id,attempt.checkout_attempt_id);
+assert.equal(stripeParameters.get('mode'),'payment');
+assert.deepEqual(stripeParameters.getAll('payment_method_types[]'),[]);
+assert.equal(stripeParameters.get('line_items[0][price_data][currency]'),'myr');
+assert.equal(stripeParameters.get('line_items[0][price_data][unit_amount]'),'8900');
+assert.equal(stripeParameters.get('metadata[product_id]'),BOOK_ONE_PRODUCT.productId);
+assert.equal(stripeParameters.get('success_url'),'https://phios.example/payment-success?session_id={CHECKOUT_SESSION_ID}');
 
 assert.throws(
   () => validatePaidBookSession({
@@ -271,7 +244,7 @@ const webhookResponse = await stripeWebhook({
   env,
   fetch: fakeFetch
 });
-assert.equal(webhookResponse.status, 200);
+assert.equal(webhookResponse.status, 200, JSON.stringify(await webhookResponse.clone().json()));
 assert.equal((await webhookResponse.json()).eventStatus, 'processed');
 assert.equal(watermarkCalls, 1);
 assert.equal(emailCalls, 1);
@@ -508,7 +481,7 @@ assert.doesNotMatch(
 
 console.log(
   '✓ M3B-W4/W8 Book Access and Payment passed: frozen RM89 product, ' +
-  'Stripe Checkout, verified idempotent webhook, D1 purchase and entitlement, ' +
+  'retired work-only checkout denial, historical-order idempotent webhook, local D1 purchase and entitlement, ' +
   'watermarked R2 delivery, limited download tokens, receipt email and refund revocation.'
 );
 

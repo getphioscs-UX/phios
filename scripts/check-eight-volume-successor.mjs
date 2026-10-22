@@ -66,8 +66,27 @@ for(let n=1;n<=8;n++)assert.equal(home.split(`data-cx-seven-volume-asset="BOOK-$
 assert.equal((home.match(/data-cx-home-section="H\d{2}"/g)||[]).length,9);
 for(const p of ['books/index.html','knowledge/index.html','library.html','explore/index.html'])assert(!/\bseven books\b|七册书/i.test(text(p)),p);
 assert(isPublicKnowledgeContextRef('BOOK:BOOK-8'));assert(!isPublicKnowledgeContextRef('BOOK:BOOK-9'));
-const products=STRIPE_PRODUCT_REGISTRY.filter(p=>p.category==='BOOK');
+const allBookProducts=STRIPE_PRODUCT_REGISTRY.filter(p=>p.category==='BOOK');
+const products=allBookProducts.filter(p=>!p.baseProductId);
 assert.equal(products.length,8);assert.equal(new Set(products.map(p=>p.publicationBookCode)).size,8);
+const languageProducts=allBookProducts.filter(p=>p.baseProductId);
+assert.equal(allBookProducts.length,16);assert.equal(languageProducts.length,8);
+for(let volume=1;volume<=4;volume++){
+ const base=products.find(p=>p.publicationVolume===volume);
+ assert.ok(base);assert.equal(base.catalogVisible,false);assert.equal(base.checkoutBlockedReason,'BOOK_LANGUAGE_VERSION_REQUIRED');
+ const variants=languageProducts.filter(p=>p.baseProductId===base.productId);
+ assert.deepEqual(variants.map(p=>p.language).sort(),['en','zh-Hans']);
+ for(const [suffix,language] of [['EN','en'],['ZH','zh-Hans']]){
+  const p=variants.find(p=>p.language===language);
+  assert.equal(p.productId,base.productId+'-'+suffix);assert.equal(p.publicationBookCode,base.publicationBookCode);
+  assert.equal(p.publicationVolume,volume);assert.equal(p.amountMinor,8900);
+  assert.equal(p.entitlementPolicy,`BOOK_${String(volume).padStart(2,'0')}_${suffix}_PDF`);
+  assert.equal(p.fulfillmentType,'WATERMARKED_PDF');assert.equal(p.deliveryFormat,'FULL_PDF_DOWNLOAD');
+  assert.equal(p.requiresBookPdfReadiness,true);assert.equal(p.webReaderRequired,false);
+  assert.equal(p.pricingVersion,'BOOK-PDF-PER-LANGUAGE-RM89-2026-10-21');
+  assert.deepEqual(commerceEntitlements(p.productId),[{productId:p.productId,entitlementCode:p.entitlementPolicy}]);
+ }
+}
 const config=products.find(p=>p.publicationBookCode==='BOOK-6');assert.equal(config.productId,'COM-BOOK-CONFIGURATION');assert.equal(config.amountMinor,10900);
 for(const [id,volume,code] of [['COM-BOOK-06',7,'BOOK_06_FULL_ACCESS'],['COM-BOOK-07',8,'BOOK_07_FULL_ACCESS']]){
  const p=products.find(p=>p.productId===id);assert.equal(p.publicationVolume,volume);

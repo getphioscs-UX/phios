@@ -18,9 +18,13 @@ export async function answerWorldSession({question,locale='en',region='USA',year
  need(typeof question==='string'&&question.length>0&&question.length<=800,'QUESTION_INVALID');need(['en','zh-Hans'].includes(locale),'LOCALE_INVALID');
  const plan=worldQuestionPlan(question,{region,year}),evidence=await Promise.all(plan.requests.map(q=>queryWorldEvidence(q,{fetcher}))),answer=composeWorldAnswer(plan,evidence,locale);
  const explanation=answer.answerState==='ANSWERED_BOUNDED'?null:await queryWorldExplanation(question,locale,fetcher);if(explanation?.sources?.length){answer.explanation=explanation;answer.directAnswer=explanation.directAnswer;answer.answerState=explanation.quality==='DIRECT_USEFUL_BOUNDED'?'SOURCE_SUPPORTED_ANSWER':'SOURCE_SUPPORTED_PARTIAL';}else if(explanation&&(answer.answerState==='NOT_COVERED'||explanation.quality==='NUMERIC_LIMITATION')){answer.explanation=explanation;answer.directAnswer=explanation.directAnswer;}
+ // A generic book explanation does not inherit the typed statistics form's
+ // default country/year as evidence applicability. Retain the requested context
+ // separately; it has not been established by the general source.
+ if(explanation?.sources?.length&&!plan.requests.length){plan.requestedScope=copy(plan.scope);plan.scope={region:null,period:null,topic:'general_mechanism',intent:'GENERAL_MECHANISM'};answer.region=null;answer.period=null;answer.topic='general_mechanism';}
  const sourceVersion=await combinedVersion(evidence,explanation);
  // Consent binds this exact question and language, not merely shared source bytes.
- const version=await versionDigest({sourceVersion,originalQuestion:question,locale,scope:plan.scope});
+ const version=await versionDigest({sourceVersion,originalQuestion:question,locale,scope:plan.scope,...(plan.requestedScope?{requestedScope:plan.requestedScope}:{})});
  const q=normalizeQuestionContext({schemaVersion:'RIC-QUESTION-CONTEXT-v1',questionId:'world:'+version,originalText:question,locale,intentClass:plan.intent,subjectScope:{type:'PUBLIC_WORLD_NOT_PERSONAL'},geography:plan.scope.region,period:plan.scope.period,topic:plan.scope.topic,metricDefinitions:evidence.map(e=>e.definition?.measurementDefinition||e.state),requestedOutcome:'BOUNDED_PUBLIC_ANSWER',requiredInformation:['public_observation','published_mechanism'],knownAtStart:[],unknownAtStart:[],minimalNextEvidence:answer.missingEvidence,allowedSourceScopes:['PUBLIC_STATISTIC','GENERAL'],excludedScopes:['ACCOUNT_DATA','PRIVATE_REPORTS','PROVIDER'],purpose:'SERVICE_DELIVERY',sessionConsentRef:null,asOf:now,selectionMode:'EXPLICIT',privacyClass:'PUBLIC_QUESTION',persistenceIntent:'SESSION_ONLY'});
  const sources={},claims=[];
  for(const [i,row] of answer.observations.entries()){

@@ -1,0 +1,40 @@
+{
+  "status": "PROPOSED_NOT_APPLIED; EXISTING_R3_L1_GATE_UNCHANGED",
+  "localEvidence": "Existing L1 source/version/consent and pure owner projections exercised; no account or persistence identity",
+  "changes": [
+    {
+      "path": "assets/customer-ui/js/surfaces/my-reality.js",
+      "requiredChange": "Use the existing page shell and an owner-approved transport to the bounded workbench. Do not mount /api/local-ric production URLs or duplicate page/state owners.",
+      "gate": "RIC R3-L1 formal consumer approval; implementation still required after approval"
+    },
+    {
+      "path": "functions/api/customer-my-reality.js",
+      "requiredChange": "Project only server-resolved selected source/version/purpose under existing verified-account/permission owner; separate public mechanisms, self report and unknowns. Existing GET owner is not a transient session write store.",
+      "gate": "Approved formal source handoff contract; do not infer persistence approval"
+    },
+    {
+      "path": "functions/_lib/knowledge-reality-handoff.js",
+      "requiredChange": "Reuse existing source grounding/explicit consent/entry seed. Source selection must be rechecked server-side; client viewModel or claimed admitted flags are not authority.",
+      "gate": "RIC owner acceptance and existing KAP/Reality complexity/consent boundaries"
+    },
+    {
+      "path": "functions/customer-projection/reality-navigation-graph-projection.js",
+      "requiredChange": "No graph/history edges from temporary selection or reported observations; retain current empty/unknown semantics.",
+      "gate": "No graph or history permission in this task"
+    },
+    {
+      "path": "functions/_lib/d1-maintenance-guard.js",
+      "requiredChange": "No change. READ_ONLY remains. Account persistence/version events/revocation storage require separate approved design and production authorization.",
+      "gate": "NOT_AUTHORIZED"
+    }
+  ],
+  "minimumRegression": [
+    "Anonymous versus verified-account/source scopes",
+    "Permission revoked/expired or source changed",
+    "Purpose/account/version mismatch",
+    "No observation promoted to personal fact or verified outcome",
+    "Late response after revoke",
+    "Current account save remains blocked in READ_ONLY"
+  ],
+  "noProductionPatchApplied": true
+}

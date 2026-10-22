@@ -1,0 +1,50 @@
+{
+  "at": "2026-10-22T03:26:32.994Z",
+  "bookCode": "BOOK-2",
+  "locale": "zh-Hans",
+  "sku": "COM-BOOK-02-ZH",
+  "currentAuthorSource": {
+    "sha256": "312076cd9acf0bb5b1a87c88acfe26fa1c71a803029d56399300d3300458b260",
+    "pages": 394,
+    "bytes": 232656639,
+    "acceptanceBasis": "User confirmed current completed Chinese sources in unified execution; exact binary bound in UNIFIED-SOURCE-COVERAGE.json and retained by this addendum",
+    "permission": "LOCAL_PRIVATE_EXTRACTION_MAPPING_AND_CANDIDATE_ALLOWED; NOT_PUBLIC_FULL_TEXT_OR_PRODUCTION_SALE_ACTIVATION"
+  },
+  "privateObjectObservation": {
+    "accountId": "0b9f36bdf56f38d7d09aebe388f15204",
+    "bucket": "phios-private-manuscripts",
+    "key": "books/book-2/source/PHI-OS-Book-2-v1.pdf",
+    "actualDownloadedSha256": "312076cd9acf0bb5b1a87c88acfe26fa1c71a803029d56399300d3300458b260",
+    "bytes": 232656639,
+    "byteMatch": true,
+    "operation": "READ_ONLY_GET",
+    "metadataNotUsedAsByteProof": true
+  },
+  "historicalKnowledgeCorpus": {
+    "sha256": "1ae413dbfddae604f65af3e9b16a28a923899e3ebe8f419d9b7f3ff10bfa41fe",
+    "retained": true,
+    "notSilentlyRebound": true
+  },
+  "intendedSkuSource": {
+    "binding": "MANUSCRIPTS",
+    "objectKey": "books/book-2/source/PHI-OS-Book-2-v1.pdf",
+    "sourceSha256": "312076cd9acf0bb5b1a87c88acfe26fa1c71a803029d56399300d3300458b260",
+    "pageCount": 394,
+    "byteSize": 232656639,
+    "state": "EXACT_PROPOSED_CONFIG_READY_LOCAL_TESTED_NOT_DEPLOYED",
+    "useSpecificApproval": "Included in pending commercial release candidate review; no separate confirmation of manuscript identity is needed"
+  },
+  "impacts": {
+    "oldCorpus": "Historical source identity preserved; 172-unit new private candidate, no runtime overwrite",
+    "publicArticles": "No accepted article body or release digest modified",
+    "watermark": "New order snapshot must bind exact current SHA, language and pages; existing orders retain original snapshots",
+    "productionConfig": "COMMERCE_BOOK_SOURCE_VERSIONS_JSON not deployed or mutated; existing checkout gate stays closed"
+  },
+  "decisionCard": {
+    "old": "Historical retrieval corpus 1ae413db… / 105071786 bytes",
+    "current": "Current author source and standard private object 312076cd… / 394 pages / 232656639 bytes",
+    "recommendation": "Use the verified current standard object for the COM-BOOK-02-ZH release candidate. Approve production SKU configuration only with the complete commercial release; do not replace historical orders or old indexes."
+  },
+  "R2Writes": 0,
+  "productionWrites": 0
+}

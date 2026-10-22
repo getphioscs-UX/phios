@@ -30,11 +30,24 @@ await test('migration preserves existing book purchases, rights and download tok
   assert.deepEqual(sqlite.prepare('PRAGMA foreign_key_check').all(),[]);
 });
 await test('current QA prices, retained history and explicit LIVE bindings agree',()=>{
-  assert.equal(STRIPE_PRODUCT_REGISTRY.length,27);assert.equal(new Set(STRIPE_PRODUCT_REGISTRY.map(p=>p.qaPriceId)).size,27);assertReportPriceParity();
+  const languageBooks=STRIPE_PRODUCT_REGISTRY.filter(p=>p.category==='BOOK'&&p.baseProductId);
+  assert.equal(STRIPE_PRODUCT_REGISTRY.length,35);assert.equal(languageBooks.length,8);
+  assert.equal(new Set(STRIPE_PRODUCT_REGISTRY.map(p=>p.productId)).size,35);
+  const boundPrices=STRIPE_PRODUCT_REGISTRY.map(p=>p.qaPriceId).filter(Boolean);
+  assert.equal(boundPrices.length,26);assert.equal(new Set(boundPrices).size,boundPrices.length);assertReportPriceParity();
+  assert.deepEqual(languageBooks.map(p=>p.productId).sort(),[1,2,3,4].flatMap(n=>[`COM-BOOK-0${n}-EN`,`COM-BOOK-0${n}-ZH`]).sort());
   const approved={'COM-REPORT-FINANCIAL-FULL':6900,'COM-BOOK-01':8900,'COM-BOOK-02':8900,'COM-BOOK-03':8900,'COM-BOOK-04':8900,'COM-BOOK-05':10900,'COM-BOOK-CONFIGURATION':10900,'COM-BOOK-06':5900,'COM-BOOK-07':5900,'COM-SUBSCRIPTION-MONTHLY':1900,'COM-WILL-WRITING':2900,'COM-SERVICE-FINANCIAL-CONSULTATION':10000,'COM-SERVICE-CASH-FLOW-GAME':10000,'COM-SERVICE-NATURAL-HEALER':10000};
   for(const [id,amount] of Object.entries(approved))assert.equal(STRIPE_PRODUCT_REGISTRY.find(p=>p.productId===id).amountMinor,amount);
   const provider=JSON.parse(fs.readFileSync('docs/commerce/economics-20261009/stripe-qa-price-readback.json','utf8'));
   for(const p of STRIPE_PRODUCT_REGISTRY){
+    if(p.baseProductId){
+      const base=STRIPE_PRODUCT_REGISTRY.find(x=>x.productId===p.baseProductId);
+      assert.ok(base);assert.equal(base.catalogVisible,false);assert.equal(base.checkoutBlockedReason,'BOOK_LANGUAGE_VERSION_REQUIRED');
+      assert.equal(p.amountMinor,8900);assert.equal(p.qaPriceId,null);
+      assert.equal(p.requiresBookPdfReadiness,true);assert.equal(p.deliveryFormat,'FULL_PDF_DOWNLOAD');
+      assert.equal(p.entitlementPolicy,`BOOK_${String(p.publicationVolume).padStart(2,'0')}_${p.language==='en'?'EN':'ZH'}_PDF`);
+      continue;
+    }
     if(p.productId==='COM-REPORT-FINANCIAL-FULL'){
       assert.equal(p.pricingVersion,'FINANCE-RM69-2026-10-20');
       assert.equal(p.publicationVersion,'FINANCE_CORE_16_V2');
@@ -142,6 +155,14 @@ await test('active single products fulfill after verified payment',async()=>{
   for(const product of STRIPE_PRODUCT_REGISTRY.filter(p=>p.active&&!p.productId.includes('BUNDLE'))){
     const beforeCalls=stripeCalls.length,beforeOrders=sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n;
     const response=await commerceApi(context({productId:product.productId}),'checkout');
+    if(product.checkoutBlockedReason==='BOOK_LANGUAGE_VERSION_REQUIRED'||product.requiresBookPdfReadiness){
+      assert.equal(response.status,503,product.productId);
+      const error=(await response.json()).error;
+      assert.equal(error,product.requiresBookPdfReadiness?'book_pdf_source_unconfigured':'BOOK_LANGUAGE_VERSION_REQUIRED');
+      assert.equal(stripeCalls.length,beforeCalls,'Unavailable language PDF must not call Stripe');
+      assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders);
+      continue;
+    }
     if(product.productId==='COM-REPORT-FINANCIAL-FULL'){
       assert.equal(response.status,503);
       assert.equal((await response.json()).error,'FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED');
@@ -200,8 +221,13 @@ await test('expiration/payment failure do not grant; protected book access is ac
   assert.equal((await commerceApi(context({productId:'COM-REPORT-ECR-FULL'}),'checkout')).status,201);
   const session=[...sessions.values()].at(-1);await send('checkout.session.expired',session);await send('checkout.session.async_payment_failed',session);
   assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM digital_entitlements WHERE purchase_id=?').get('pur_'+session.metadata.order_id).n,0);
-  assert.equal((await commerceApi(context({productId:'COM-BOOK-01'},{data:{symbolicAccountIdentity:{...identity,userId:'other'}}}),'book-download')).status,403);
-  assert.equal((await commerceApi(context({productId:'COM-BOOK-01'}),'book-download')).status,200);
+  const download=(productId,userId=identity.userId)=>commerceApi(context({}, {
+    data:{symbolicAccountIdentity:{...identity,userId}},
+    request:new Request('https://phios.test/api/commerce-book-download',{method:'POST',headers:{origin:'https://phios.test','content-type':'application/json'},body:JSON.stringify({productId})})
+  }),'book-download');
+  assert.equal((await download('COM-BOOK-05','other')).status,403);
+  assert.equal((await download('COM-BOOK-05')).status,200);
+  assert.equal((await download('COM-BOOK-01')).status,403,'No new work-only Book I entitlement was purchased');
 });
 await test('unknown order or absent metadata records terminal review without granting',async()=>{
   const before=(await commerceAccountProjection(env,identity.userId)).entitlements.length;

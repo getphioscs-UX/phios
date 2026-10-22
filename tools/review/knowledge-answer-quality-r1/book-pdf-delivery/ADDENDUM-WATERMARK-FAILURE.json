@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-22T03:31:10.465Z",
+  "checks": [
+    {
+      "name": "watermark outage retained as retryable failure",
+      "pass": true
+    },
+    {
+      "name": "paid purchase retained",
+      "pass": true
+    },
+    {
+      "name": "no unwatermarked fallback",
+      "pass": true
+    },
+    {
+      "name": "same paid event replay restores deliverability",
+      "pass": true
+    },
+    {
+      "name": "retry does not create purchase or charge again",
+      "pass": true
+    },
+    {
+      "name": "one successful derivative after outage",
+      "pass": true
+    }
+  ],
+  "automaticRetry": false,
+  "recovery": "Explicit replay of same synthetic paid event through existing owner",
+  "providerCalls": 0,
+  "realPayments": 0,
+  "productionWrites": 0,
+  "externalNetworkCalls": 0
+}
