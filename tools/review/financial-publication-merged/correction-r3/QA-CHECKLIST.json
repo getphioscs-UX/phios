@@ -1,0 +1,98 @@
+{
+  "status": "HUMAN_REVIEW_CANDIDATE",
+  "reviewer": "LOCAL_AGENT_QA",
+  "independentHumanSignature": false,
+  "independentMethod": "Actual PDF text extraction vs original frozen FCR, independent of renderer field labels. Not a second human audit.",
+  "checks": [
+    {
+      "id": "Q1_TYPED_AND_SOURCE_BOUNDARY",
+      "status": "PASS",
+      "evidence": "correction-r3/merged.tap; 28/28 PASS, source matching, funding initial/restricted classification, native currency and internal-transfer exclusion"
+    },
+    {
+      "id": "Q1_ACTUAL_PDF_SEMANTICS",
+      "status": "PASS_ACTUAL_PDF_SEMANTICS",
+      "evidence": "correction-r3/pdf-semantics.json"
+    },
+    {
+      "id": "Q2_A4_SVG_BOUNDS",
+      "status": "PASS",
+      "evidence": "browser-verification.json; all5 states"
+    },
+    {
+      "id": "Q3_R2_ACTUAL_EMBEDDED_PIXELS",
+      "status": "PASS",
+      "evidence": "correction-r3/r2-revalidation.json + correction-r3/pdf-raster-audit.json; all8 exact RGB matches"
+    },
+    {
+      "id": "Q3_METHOD_EMPTY_SLOT",
+      "status": "BLOCKED",
+      "owner": "Approved asset publisher",
+      "evidence": "Fresh exact R2 object still bakes client tasks; foreground neutralization is not asset approval"
+    },
+    {
+      "id": "Q3_NATIVE_FONT_SIZE",
+      "status": "PASS_MINIMUM_8PT",
+      "minimumNativeFontPt": 8.144999435625039,
+      "evidence": "Actual native text minimum approximately8.14pt; raster text not covered by this claim"
+    },
+    {
+      "id": "Q3_300DPI_AND_PHYSICAL_PRINT",
+      "status": "BLOCKED_AND_NOT_RUN",
+      "owner": "Approved asset publisher / physical print reviewer",
+      "evidence": "Actual source about128dpi; no upsampling; physical A4 review not performed"
+    },
+    {
+      "id": "Q3_ACCESSIBLE_FIXED_CONTENT",
+      "status": "HUMAN_TRANSCRIPTION_REVIEW_PENDING",
+      "evidence": "fixed-content-accessible.html; P02-P05/P21-P22 equivalent, human transcription signature pending"
+    },
+    {
+      "id": "Q3_PDF_NAVIGATION",
+      "status": "PASS",
+      "evidence": "44 bookmarks in complete (22 core +22 annex), tagged output, actual directory links, no fake link in core-only"
+    },
+    {
+      "id": "Q5_LEGACY_RENTAL",
+      "status": "EXACT_FIVE_ORIGINAL_FAILURES",
+      "evidence": "correction-r3/legacy.tap;85/90; no waiver of new failures"
+    },
+    {
+      "id": "Q5_LONG_APPENDIX",
+      "status": "PASS_LOCAL_SYNTHETIC",
+      "evidence": "91 pages;12 admitted people,29 assets,24 policy events,32 expenses,40/47 retirement paths,60 education rows,24 documents,32 events; actual local encrypted save and revocation"
+    },
+    {
+      "id": "Q7_HUMAN_ACCEPT",
+      "status": "PENDING_USER_REVIEW",
+      "owner": "Human user",
+      "signature": null
+    }
+  ],
+  "pdfHashes": [
+    {
+      "stem": "complete",
+      "sha256": "51fa8b80887f1ca4cd8aa3a241a790631ef0d401a77d3719e2de21ea6182135b"
+    },
+    {
+      "stem": "shortfall",
+      "sha256": "3f66a5c936fdd08ddc17196e8c576010490597c1cb11b31c306d632a365d2024"
+    },
+    {
+      "stem": "missing",
+      "sha256": "718e9545824aaf0d6fc88cf0e1f96ee1f86a1802e4795a1084a1045f42caa515"
+    },
+    {
+      "stem": "long-appendix",
+      "sha256": "0b6466072936941d3dbe1b7a648ac39900e1724b1f95464a964c11526ab59ebb"
+    },
+    {
+      "stem": "core-only",
+      "sha256": "333f52f8b9d267fda99211bf85c66a53c38da3c4cbfa41a5150806347b895677"
+    }
+  ],
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "receiptSha256": "ea5d61c82025093456a2519d25bea9e85d89d2f066098a41a6fc57c8a07fb0f9",
+  "signatureMeaning": "Integrity checksum over local agent QA payload. Independent human signature intentionally blank."
+}

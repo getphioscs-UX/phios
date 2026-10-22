@@ -1,0 +1,75 @@
+{
+  "results": [
+    {
+      "name": "legacy",
+      "status": "EXACT_FIVE_LEGACY_FAILURES_UNCHANGED",
+      "rawExit": 1,
+      "tests": 90,
+      "pass": 85,
+      "fail": 5,
+      "historical": {
+        "pass": true,
+        "exitCode": 1,
+        "unexpected": [],
+        "missing": [],
+        "failures": [
+          {
+            "name": "rental ratios distinguish zero, missing and out-of-range; no unsupported currency rounding",
+            "expected": "16000.00",
+            "actual": null,
+            "metric": "operatingCashFlow",
+            "reason": "Missing amountState and cashTiming on operating cost; paid cash cannot be inferred."
+          },
+          {
+            "name": "actual receipts do not lose vacancy twice; forecasts and cash/tax allocation stay independent",
+            "expected": "19500.00",
+            "actual": null,
+            "metric": "operatingCashFlow",
+            "reason": "Missing amountState and cashTiming on maintenance; payment metadata is unspecified."
+          },
+          {
+            "name": "rental tax candidate and cashflow are separate; interest not subtracted twice",
+            "expected": "18700.00",
+            "actual": null,
+            "metric": "operatingCashFlow",
+            "reason": "Missing amountState and cashTiming on operating cost; interest is not a second cash deduction."
+          },
+          {
+            "name": "portfolio API keeps four period/mode/currency groups and stable property identities",
+            "expected": "950.00",
+            "actual": null,
+            "metric": "netCashFlow",
+            "reason": "Missing debtService; omitted debt payment is unknown, not a declared zero."
+          },
+          {
+            "name": "unknown amounts and unpaid costs cannot be coerced into zero cash; metadata survives",
+            "expected": "APPROXIMATE",
+            "actual": "UNKNOWN",
+            "metric": "cashPrecision",
+            "reason": "Missing debtService in approximate-cost fixture; unknown debt dominates approximate cost."
+          }
+        ]
+      }
+    },
+    {
+      "name": "r32",
+      "status": "PASS",
+      "rawExit": 0,
+      "tests": 26,
+      "pass": 26,
+      "fail": 0,
+      "historical": null
+    },
+    {
+      "name": "merged",
+      "status": "PASS",
+      "rawExit": 0,
+      "tests": 11,
+      "pass": 11,
+      "fail": 0,
+      "historical": null
+    }
+  ],
+  "providerCalls": 0,
+  "newFailures": 0
+}

@@ -1,19 +1,14 @@
-# Financial Publication · Merged bilingual successor
+# Merged R3 corrective execution
 
-Status: LOCAL_REVIEW_CANDIDATE / NOT_HUMAN_ACCEPTED / NOT_PRODUCTION_PASS
+Acceptance Fix; HUMAN_REVIEW_CANDIDATE, not human accepted or production approved.
 
-HEAD f6442981af5f2fafd53c3712d30add305901146f
+Q0: current worktree baseline, HEAD b5e2c99aef365572573bb73bdf4883b4df5598bf, original38PDF, original receipts and same-scale predecessor visuals archived in correction-r3/baseline. Other-window changes retained.
+Q1: four typed consuming views and precise FCR arithmetic assertions; no engine edits.
+Q2: topic diagrams and typed chart/table semantics corrected. SVG text bbox checked inside viewBox.
+Q3: all8 R2 objects revalidated no-cache; no byte change. P21 asset blocker and128dpi recorded. Accessible HTML, PDF metadata/tags/bookmarks/internal links added.
+Q4: content-value selection, A00 source/evidence, historical source aliases, variable final ranges.
+Q5: complete: 44 pages; shortfall: 44 pages; missing: 23 pages; long-appendix: 91 pages; core-only: 22 pages. legacy: 85 PASS/5 FAIL; r32: 26 PASS/0 FAIL; merged: 28 PASS/0 FAIL. Original5 strictly matched. Physical print and live gates NOT_RUN/BLOCKED.
+Q6: same existing Master updated; all38 predecessor pages mapped to actual corrected PDF images at identical A4 scale.
+Q7: human acceptance pending; asset/high-res blockers remain. Provider0/USD0, no external or production write.
 
-- User priority: same-page bilingual; exact approved fixed P01–P05; 22-page core; distinct dynamic diagrams.
-- Eight approved R2 assets read-only fetched, pinned and integrated into actual generator.
-- Complete38 / shortfall38 / missing23 / explicit core-only22 actual A4 pages.
-- 22 core topic IDs, no alternating-language default and no split exception.
-- Same frozen FDR/FCR source; R32 deep dives and previous annex owners retained as eligible appendices.
-- Existing tax/estate/source details retained in appendices; no new financial calculator.
-- Method sample identity patched by fixed neutral foreground; P22 uses actual twelve-category inclusion/ranges and formal folio. Approved bytes unchanged.
-- legacy: 85 PASS, 5 FAIL; r32: 26 PASS, 0 FAIL; merged: 11 PASS, 0 FAIL. Historical five reviewed exactly.
-- Actual PDF verification and 22 old-pair/new-merged comparisons available.
-- All PDF source/raster limitations and admission blocks are stated in OLD-VS-NEW.md.
-- Provider calls0/USD0. No commit/push/deploy/migration/payment/customer mutation.
-
-Reproduce: contract-financial-merged.mjs → build-financial-merged.mjs → verify-financial-merged-browser.mjs → verify-financial-merged-pdf.py → verify-financial-merged-tests.mjs → finalize-financial-merged.mjs. Asset preparation is one-time and protected from baseline overwrite.
+Commands: build-financial-merged.mjs → verify-financial-merged-browser.mjs → finish-financial-merged-pdf.py → verify-financial-merged-pdf.py; verify-financial-merged-tests.mjs; finalize-financial-merged.mjs → verify-financial-merged-review-ui.mjs → verify-financial-merged-integrity.mjs.

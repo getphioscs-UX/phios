@@ -1,76 +1,148 @@
 TAP version 13
-# Subtest: merged exact 22 core identities and approved fixed first five, no alternating language pages
-ok 1 - merged exact 22 core identities and approved fixed first five, no alternating language pages
+# Subtest: Q1 four typed views preserve exact FCR values and do not mutate source
+ok 1 - Q1 four typed views preserve exact FCR values and do not mutate source
   ---
-  duration_ms: 26.9395
+  duration_ms: 9.9569
+  type: 'test'
+  ...
+# Subtest: Q1 education tuition/living/other aggregate to annual cost, never a funding gap
+ok 2 - Q1 education tuition/living/other aggregate to annual cost, never a funding gap
+  ---
+  duration_ms: 35.8067
+  type: 'test'
+  ...
+# Subtest: Q1 retirement 2035 closing zero and annual unmet both disclosed
+ok 3 - Q1 retirement 2035 closing zero and annual unmet both disclosed
+  ---
+  duration_ms: 3.884
+  type: 'test'
+  ...
+# Subtest: Q1 education 2033 and 2034 have independent unfunded values
+ok 4 - Q1 education 2033 and 2034 have independent unfunded values
+  ---
+  duration_ms: 2.5998
+  type: 'test'
+  ...
+# Subtest: Q1 2030 release bridges previous closing and opening without double growth
+ok 5 - Q1 2030 release bridges previous closing and opening without double growth
+  ---
+  duration_ms: 2.1286
+  type: 'test'
+  ...
+# Subtest: Q1 asset authorization revoked or double allocated prevents funding view
+ok 6 - Q1 asset authorization revoked or double allocated prevents funding view
+  ---
+  duration_ms: 4.6946
+  type: 'test'
+  ...
+# Subtest: Q1 key previously accepted factual arithmetic unchanged
+ok 7 - Q1 key previously accepted factual arithmetic unchanged
+  ---
+  duration_ms: 0.3281
+  type: 'test'
+  ...
+# Subtest: Q2 P08 waterfall and P09 payment/category destinations have different data grammar
+ok 8 - Q2 P08 waterfall and P09 payment/category destinations have different data grammar
+  ---
+  duration_ms: 2.9862
+  type: 'test'
+  ...
+# Subtest: Q4 low-value protection omitted, source registry is A00 with historical source alias retained
+ok 9 - Q4 low-value protection omitted, source registry is A00 with historical source alias retained
+  ---
+  duration_ms: 11.5389
+  type: 'test'
+  ...
+# Subtest: Q2 all event rows appear in same page bilingual timeline table
+ok 10 - Q2 all event rows appear in same page bilingual timeline table
+  ---
+  duration_ms: 51.6002
+  type: 'test'
+  ...
+# Subtest: Q5 long appendix compiled by existing FCR and record pagination bounded
+ok 11 - Q5 long appendix compiled by existing FCR and record pagination bounded
+  ---
+  duration_ms: 22.2054
+  type: 'test'
+  ...
+# Subtest: Q1 unknown/range funding is never silently point-plotted
+ok 12 - Q1 unknown/range funding is never silently point-plotted
+  ---
+  duration_ms: 0.5889
+  type: 'test'
+  ...
+# Subtest: merged exact 22 core identities and approved fixed first five, no alternating language pages
+ok 13 - merged exact 22 core identities and approved fixed first five, no alternating language pages
+  ---
+  duration_ms: 59.1755
   type: 'test'
   ...
 # Subtest: merged all eight R2 assets are exact pinned bytes; old cover/body unchanged
-ok 2 - merged all eight R2 assets are exact pinned bytes; old cover/body unchanged
+ok 14 - merged all eight R2 assets are exact pinned bytes; old cover/body unchanged
   ---
-  duration_ms: 8.0786
+  duration_ms: 10.3269
   type: 'test'
   ...
 # Subtest: merged dynamic core has a single common diagram with both language labels
-ok 3 - merged dynamic core has a single common diagram with both language labels
+ok 15 - merged dynamic core has a single common diagram with both language labels
   ---
-  duration_ms: 5.24
+  duration_ms: 15.7694
   type: 'test'
   ...
 # Subtest: merged Method is fixed bilingual content and identical across client states
-ok 4 - merged Method is fixed bilingual content and identical across client states
+ok 16 - merged Method is fixed bilingual content and identical across client states
   ---
-  duration_ms: 23.6424
+  duration_ms: 56.1213
   type: 'test'
   ...
 # Subtest: merged appendix catalog exact approved twelve, accurate ranges and no-annex state
-ok 5 - merged appendix catalog exact approved twelve, accurate ranges and no-annex state
+ok 17 - merged appendix catalog exact approved twelve, accurate ranges and no-annex state
   ---
-  duration_ms: 16.5353
+  duration_ms: 38.6367
   type: 'test'
   ...
-# Subtest: merged frozen R32 deep dives retained as merged opt-in appendices, not lost
-ok 6 - merged frozen R32 deep dives retained as merged opt-in appendices, not lost
+# Subtest: merged meaningful R32 deep dives retained; sparse facts consolidated into source evidence
+ok 18 - merged meaningful R32 deep dives retained; sparse facts consolidated into source evidence
   ---
-  duration_ms: 4.0353
+  duration_ms: 5.8822
   type: 'test'
   ...
 # Subtest: merged preserves all selected legacy annex outputs and owner identity
-ok 7 - merged preserves all selected legacy annex outputs and owner identity
+ok 19 - merged preserves all selected legacy annex outputs and owner identity
   ---
-  duration_ms: 29.0588
+  duration_ms: 46.9016
   type: 'test'
   ...
 # Subtest: merged unknown and range are not replaced by zero or midpoint
-ok 8 - merged unknown and range are not replaced by zero or midpoint
+ok 20 - merged unknown and range are not replaced by zero or midpoint
   ---
-  duration_ms: 1.9973
+  duration_ms: 1.6743
   type: 'test'
   ...
 # Subtest: merged no expense scenario is relabelled as an income-shock projection
-ok 9 - merged no expense scenario is relabelled as an income-shock projection
+ok 21 - merged no expense scenario is relabelled as an income-shock projection
   ---
-  duration_ms: 1.8793
+  duration_ms: 1.7874
   type: 'test'
   ...
 # Subtest: merged rendering is read-only and retains source/calculation/scenario digests
-ok 10 - merged rendering is read-only and retains source/calculation/scenario digests
+ok 22 - merged rendering is read-only and retains source/calculation/scenario digests
   ---
-  duration_ms: 13.9143
+  duration_ms: 31.7277
   type: 'test'
   ...
 # Subtest: merged declared rates retain dimensionless units and no language-split exception
-ok 11 - merged declared rates retain dimensionless units and no language-split exception
+ok 23 - merged declared rates retain dimensionless units and no language-split exception
   ---
-  duration_ms: 14.1846
+  duration_ms: 27.9805
   type: 'test'
   ...
-1..11
-# tests 11
+1..23
+# tests 23
 # suites 0
-# pass 11
+# pass 23
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 271.0495
+# duration_ms 524.7545

@@ -1,0 +1,648 @@
+TAP version 13
+# Subtest: real SQLite + AES exact versions, saved-reference summary and CAS preserve history
+ok 1 - real SQLite + AES exact versions, saved-reference summary and CAS preserve history
+  ---
+  duration_ms: 361.3982
+  type: 'test'
+  ...
+# Subtest: historical v1 AAD remains readable; unsupported, corrupt and expired are distinct
+ok 2 - historical v1 AAD remains readable; unsupported, corrupt and expired are distinct
+  ---
+  duration_ms: 390.8257
+  type: 'test'
+  ...
+# Subtest: v2 rejects identity persistence, malformed relationships and duplicate IDs
+ok 3 - v2 rejects identity persistence, malformed relationships and duplicate IDs
+  ---
+  duration_ms: 10.8678
+  type: 'test'
+  ...
+# Subtest: server capability owner ignores client runtime claims; preparation stays available
+ok 4 - server capability owner ignores client runtime claims; preparation stays available
+  ---
+  duration_ms: 231.9684
+  type: 'test'
+  ...
+# Subtest: official source diff is archived and queued; fetch never promotes approval
+ok 5 - official source diff is archived and queued; fetch never promotes approval
+  ---
+  duration_ms: 6.9576
+  type: 'test'
+  ...
+# Subtest: NET is not taxed again; liability repayments enter cashflow and liquidity once
+ok 6 - NET is not taxed again; liability repayments enter cashflow and liquidity once
+  ---
+  duration_ms: 94.4414
+  type: 'test'
+  ...
+# Subtest: annual division does not multiply by a prematurely rounded one-twelfth factor
+ok 7 - annual division does not multiply by a prematurely rounded one-twelfth factor
+  ---
+  duration_ms: 25.7201
+  type: 'test'
+  ...
+# Subtest: master gross/net 3500 and explicit debt-excluded 2000 examples reconcile
+ok 8 - master gross/net 3500 and explicit debt-excluded 2000 examples reconcile
+  ---
+  duration_ms: 116.9852
+  type: 'test'
+  ...
+# Subtest: explicit expense-loan link deduplicates; absent/conflicting links remain unknown
+ok 9 - explicit expense-loan link deduplicates; absent/conflicting links remain unknown
+  ---
+  duration_ms: 102.068
+  type: 'test'
+  ...
+# Subtest: GROSS requires explicit tax assumption; unknown basis and missing FX cannot become a complete total
+ok 10 - GROSS requires explicit tax assumption; unknown basis and missing FX cannot become a complete total
+  ---
+  duration_ms: 80.2071
+  type: 'test'
+  ...
+# Subtest: stock totals do not add rental flow; confirmed empty assets differ from missing assets
+ok 11 - stock totals do not add rental flow; confirmed empty assets differ from missing assets
+  ---
+  duration_ms: 425.1667
+  type: 'test'
+  ...
+# Subtest: approximate and range precision survives FCR, product and customer projection
+ok 12 - approximate and range precision survives FCR, product and customer projection
+  ---
+  duration_ms: 366.8425
+  type: 'test'
+  ...
+# Subtest: separate education goals and unbound insured events never collapse into one fictional gap
+ok 13 - separate education goals and unbound insured events never collapse into one fictional gap
+  ---
+  duration_ms: 142.0518
+  type: 'test'
+  ...
+# Subtest: three independent processes resume stored candidate then reopen the same durable artifact without provider dispatch
+ok 14 - three independent processes resume stored candidate then reopen the same durable artifact without provider dispatch
+  ---
+  duration_ms: 5182.8651
+  type: 'test'
+  ...
+# Subtest: report rejects fabricated value, unsupported prose, evidence drift and personalized action
+ok 15 - report rejects fabricated value, unsupported prose, evidence drift and personalized action
+  ---
+  duration_ms: 474.8597
+  type: 'test'
+  ...
+# Subtest: candidate persists through render failure; new invocation reuses it and account open never regenerates
+ok 16 - candidate persists through render failure; new invocation reuses it and account open never regenerates
+  ---
+  duration_ms: 1512.9103
+  type: 'test'
+  ...
+# Subtest: production and caller-supplied synthetic flag cannot dispatch a provider
+ok 17 - production and caller-supplied synthetic flag cannot dispatch a provider
+  ---
+  duration_ms: 11.2415
+  type: 'test'
+  ...
+# Subtest: missing REPORT grant, injected prose, uncertain dispatch and expired source stay fail-closed
+ok 18 - missing REPORT grant, injected prose, uncertain dispatch and expired source stay fail-closed
+  ---
+  duration_ms: 214.3173
+  type: 'test'
+  ...
+# Subtest: six independent master loan goldens with cent reconciliation
+ok 19 - six independent master loan goldens with cent reconciliation
+  ---
+  duration_ms: 29.9201
+  type: 'test'
+  ...
+# Subtest: actual payment is not forced to a final balloon; excess extra stops at payoff
+ok 20 - actual payment is not forced to a final balloon; excess extra stops at payoff
+  ---
+  duration_ms: 0.8462
+  type: 'test'
+  ...
+# Subtest: stable one-time/recurring extra events reject duplicate IDs and keep known zero distinct
+ok 21 - stable one-time/recurring extra events reject duplicate IDs and keep known zero distinct
+  ---
+  duration_ms: 6.0557
+  type: 'test'
+  ...
+# Subtest: rental ratios distinguish zero, missing and out-of-range; no unsupported currency rounding
+not ok 22 - rental ratios distinguish zero, missing and out-of-range; no unsupported currency rounding
+  ---
+  duration_ms: 5.4334
+  type: 'test'
+  location: 'C:\\phios\\tests\\financial-preparation\\finance-tools.test.mjs:15:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    null !== '16000.00'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '16000.00'
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/phios/tests/financial-preparation/finance-tools.test.mjs:15:245)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1325:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+    Test.postRun (node:internal/test_runner/test:1465:19)
+    Test.run (node:internal/test_runner/test:1390:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+  ...
+# Subtest: rental portfolio preserves losses before aggregation and never invents tax deductibility
+ok 23 - rental portfolio preserves losses before aggregation and never invents tax deductibility
+  ---
+  duration_ms: 2.3136
+  type: 'test'
+  ...
+# Subtest: actual receipts do not lose vacancy twice; forecasts and cash/tax allocation stay independent
+not ok 24 - actual receipts do not lose vacancy twice; forecasts and cash/tax allocation stay independent
+  ---
+  duration_ms: 3.4546
+  type: 'test'
+  location: 'C:\\phios\\tests\\financial-preparation\\finance-tools.test.mjs:17:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    null !== '19500.00'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '19500.00'
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/phios/tests/financial-preparation/finance-tools.test.mjs:17:412)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1325:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+    Test.postRun (node:internal/test_runner/test:1465:19)
+    Test.run (node:internal/test_runner/test:1390:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+  ...
+# Subtest: area allocation keeps unknown, invalid zero denominator, over-allocation and genuine zero distinct
+ok 25 - area allocation keeps unknown, invalid zero denominator, over-allocation and genuine zero distinct
+  ---
+  duration_ms: 1.1049
+  type: 'test'
+  ...
+# Subtest: dates preserve original month-end anchor, not drifting February day
+ok 26 - dates preserve original month-end anchor, not drifting February day
+  ---
+  duration_ms: 1.7192
+  type: 'test'
+  ...
+# Subtest: range, missing input, noninteger term and negative amortization fail explicitly
+ok 27 - range, missing input, noninteger term and negative amortization fail explicitly
+  ---
+  duration_ms: 0.9613
+  type: 'test'
+  ...
+# Subtest: rental tax candidate and cashflow are separate; interest not subtracted twice
+not ok 28 - rental tax candidate and cashflow are separate; interest not subtracted twice
+  ---
+  duration_ms: 1.4298
+  type: 'test'
+  location: 'C:\\phios\\tests\\financial-preparation\\finance-tools.test.mjs:21:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    null !== '18700.00'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '18700.00'
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/phios/tests/financial-preparation/finance-tools.test.mjs:23:149)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1325:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+    Test.postRun (node:internal/test_runner/test:1465:19)
+    Test.run (node:internal/test_runner/test:1390:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+  ...
+# Subtest: strict report selector keeps four fields and rejects list-only metadata
+ok 29 - strict report selector keeps four fields and rejects list-only metadata
+  ---
+  duration_ms: 6.8447
+  type: 'test'
+  ...
+# Subtest: missing debt payment is unknown; declared zero is known without changing operating cash
+ok 30 - missing debt payment is unknown; declared zero is known without changing operating cash
+  ---
+  duration_ms: 9.1237
+  type: 'test'
+  ...
+# Subtest: historical gate allows only exact five names and expected/actual pairs
+ok 31 - historical gate allows only exact five names and expected/actual pairs
+  ---
+  duration_ms: 3.3887
+  type: 'test'
+  ...
+# Subtest: customer metric labels, units, precise missing-input links and enums are bilingual; user labels intact
+ok 32 - customer metric labels, units, precise missing-input links and enums are bilingual; user labels intact
+  ---
+  duration_ms: 4.1027
+  type: 'test'
+  ...
+# Subtest: portfolio API keeps four period/mode/currency groups and stable property identities
+not ok 33 - portfolio API keeps four period/mode/currency groups and stable property identities
+  ---
+  duration_ms: 194.8519
+  type: 'test'
+  location: 'C:\\phios\\tests\\financial-preparation\\portfolio-successor.test.mjs:7:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    null !== '950.00'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '950.00'
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/phios/tests/financial-preparation/portfolio-successor.test.mjs:10:269)
+    async Test.run (node:internal/test_runner/test:1332:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3)
+  ...
+# Subtest: unknown amounts and unpaid costs cannot be coerced into zero cash; metadata survives
+not ok 34 - unknown amounts and unpaid costs cannot be coerced into zero cash; metadata survives
+  ---
+  duration_ms: 4.8891
+  type: 'test'
+  location: 'C:\\phios\\tests\\financial-preparation\\portfolio-successor.test.mjs:12:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'UNKNOWN'
+    - 'APPROXIMATE'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'APPROXIMATE'
+  actual: 'UNKNOWN'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/phios/tests/financial-preparation/portfolio-successor.test.mjs:16:9)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1325:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+    Test.postRun (node:internal/test_runner/test:1465:19)
+    Test.run (node:internal/test_runner/test:1390:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3)
+  ...
+# Subtest: authenticated owner store rejects spoofed account, expiry, revocation, altered payload and test records in production
+ok 35 - authenticated owner store rejects spoofed account, expiry, revocation, altered payload and test records in production
+  ---
+  duration_ms: 946.8312
+  type: 'test'
+  ...
+# Subtest: financial transport rejects BaZi/Zi Wei budgets, missing finance admission and stale source binding before any invocation
+ok 36 - financial transport rejects BaZi/Zi Wei budgets, missing finance admission and stale source binding before any invocation
+  ---
+  duration_ms: 3.3943
+  type: 'test'
+  ...
+# Subtest: SRC01 SRC02 SRC03 CH01 CH09: anonymous structure contract and independent candidate
+ok 37 - SRC01 SRC02 SRC03 CH01 CH09: anonymous structure contract and independent candidate
+  ---
+  duration_ms: 8.404
+  type: 'test'
+  ...
+# Subtest: H02 H03 L01 L03: NET is not deducted twice; internal transfers and unpaid cash excluded
+ok 38 - H02 H03 L01 L03: NET is not deducted twice; internal transfers and unpaid cash excluded
+  ---
+  duration_ms: 1930.2883
+  type: 'test'
+  ...
+# Subtest: H01 A01 A02 A03: unknown share, unauthorized adult and FX never become full owned value
+ok 39 - H01 A01 A02 A03: unknown share, unauthorized adult and FX never become full owned value
+  ---
+  duration_ms: 303.1122
+  type: 'test'
+  ...
+# Subtest: A04 A05 A06: matching cost only; restricted deposits excluded from immediate cash
+ok 40 - A04 A05 A06: matching cost only; restricted deposits excluded from immediate cash
+  ---
+  duration_ms: 215.2161
+  type: 'test'
+  ...
+# Subtest: G01 G02 G03 G04: rank differs from score; overfunding and duplicate links remain explicit
+ok 41 - G01 G02 G03 G04: rank differs from score; overfunding and duplicate links remain explicit
+  ---
+  duration_ms: 195.4095
+  type: 'test'
+  ...
+# Subtest: I01 I02 I03 I04: policy person, event and premium frequency remain separate
+ok 42 - I01 I02 I03 I04: policy person, event and premium frequency remain separate
+  ---
+  duration_ms: 160.6217
+  type: 'test'
+  ...
+# Subtest: SC01 SC02 SC03: saved explicit scenario reruns FCR, never fabricates history
+ok 43 - SC01 SC02 SC03: saved explicit scenario reruns FCR, never fabricates history
+  ---
+  duration_ms: 313.3577
+  type: 'test'
+  ...
+# Subtest: R01 R02 R03 T01 T02 EST01 EST02: unknown target, tax rules and Will authority stay closed
+ok 44 - R01 R02 R03 T01 T02 EST01 EST02: unknown target, tax rules and Will authority stay closed
+  ---
+  duration_ms: 168.0215
+  type: 'test'
+  ...
+# Subtest: APP01 APP02: selected, factual appendices only, long policies paginate six records
+ok 45 - APP01 APP02: selected, factual appendices only, long policies paginate six records
+  ---
+  duration_ms: 272.964
+  type: 'test'
+  ...
+# Subtest: CH07 CH08 SEC01 CONSENT_REVOKED: exact saved reopen, version separation and current grant
+ok 46 - CH07 CH08 SEC01 CONSENT_REVOKED: exact saved reopen, version separation and current grant
+  ---
+  duration_ms: 748.1719
+  type: 'test'
+  ...
+# Subtest: SEC02: arbitrary identifiers and forged verification cannot enter publication metadata
+ok 47 - SEC02: arbitrary identifiers and forged verification cannot enter publication metadata
+  ---
+  duration_ms: 2.3881
+  type: 'test'
+  ...
+# Subtest: L03 SC01 R01 CH02: zero differs from missing; scenarios retain unknown; access denominators are explicit
+ok 48 - L03 SC01 R01 CH02: zero differs from missing; scenarios retain unknown; access denominators are explicit
+  ---
+  duration_ms: 255.2291
+  type: 'test'
+  ...
+# Subtest: CH09 HTTP: opt-in preview has twenty chapters and RM69; live admission stays blocked
+ok 49 - CH09 HTTP: opt-in preview has twenty chapters and RM69; live admission stays blocked
+  ---
+  duration_ms: 100.8223
+  type: 'test'
+  ...
+# Subtest: CH01 compatibility: generated page DTO equals canonical JSON; legacy quick drafts do not need new fields
+ok 50 - CH01 compatibility: generated page DTO equals canonical JSON; legacy quick drafts do not need new fields
+  ---
+  duration_ms: 4.7212
+  type: 'test'
+  ...
+# Subtest: CH02 RANGE: signed uncertainty stays a range and is not called a recorded positive surplus
+ok 51 - CH02 RANGE: signed uncertainty stays a range and is not called a recorded positive surplus
+  ---
+  duration_ms: 77.2674
+  type: 'test'
+  ...
+# Subtest: H02 annual NET: item rows match FCR monthly equivalents and disclose the period conversion
+ok 52 - H02 annual NET: item rows match FCR monthly equivalents and disclose the period conversion
+  ---
+  duration_ms: 63.708
+  type: 'test'
+  ...
+# Subtest: R3 uses existing reconciled math, explicit annualization and distinct tier capabilities
+ok 53 - R3 uses existing reconciled math, explicit annualization and distinct tier capabilities
+  ---
+  duration_ms: 760.9931
+  type: 'test'
+  ...
+# Subtest: missing outflow, declared zero and ranges stay distinct; shared goal funds never allocate twice
+ok 54 - missing outflow, declared zero and ranges stay distinct; shared goal funds never allocate twice
+  ---
+  duration_ms: 566.4226
+  type: 'test'
+  ...
+# Subtest: mandatory publication asset hashes fail closed on a substituted file
+ok 55 - mandatory publication asset hashes fail closed on a substituted file
+  ---
+  duration_ms: 103.5877
+  type: 'test'
+  ...
+# Subtest: annualized display does not round recurring monthly fractions before multiplication
+ok 56 - annualized display does not round recurring monthly fractions before multiplication
+  ---
+  duration_ms: 46.6091
+  type: 'test'
+  ...
+# Subtest: a fully known shortfall stays a known red comparison, rather than a missing surplus segment
+ok 57 - a fully known shortfall stays a known red comparison, rather than a missing surplus segment
+  ---
+  duration_ms: 62.0745
+  type: 'test'
+  ...
+# Subtest: long inventories retain the rest of the allocation and specialist appendices keep R3 backgrounds
+ok 58 - long inventories retain the rest of the allocation and specialist appendices keep R3 backgrounds
+  ---
+  duration_ms: 55.8425
+  type: 'test'
+  ...
+# Subtest: free HTTP generation works without provider admission, reopens unchanged and honours grant withdrawal
+ok 59 - free HTTP generation works without provider admission, reopens unchanged and honours grant withdrawal
+  ---
+  duration_ms: 215.1365
+  type: 'test'
+  ...
+# Subtest: shortfall, unknown and language stay distinct across the sixteen pages
+ok 60 - shortfall, unknown and language stay distinct across the sixteen pages
+  ---
+  duration_ms: 92.6216
+  type: 'test'
+  ...
+# Subtest: explanation request binds evidence, disallows tools and caps input; output remains reviewable
+ok 61 - explanation request binds evidence, disallows tools and caps input; output remains reviewable
+  ---
+  duration_ms: 5.8424
+  type: 'test'
+  ...
+# Subtest: explicit loan scenarios produce optional printable tables without changing the core pages
+ok 62 - explicit loan scenarios produce optional printable tables without changing the core pages
+  ---
+  duration_ms: 5.2598
+  type: 'test'
+  ...
+# Subtest: a browser-supplied professional authority cannot admit the professional packet route
+ok 63 - a browser-supplied professional authority cannot admit the professional packet route
+  ---
+  duration_ms: 205.3187
+  type: 'test'
+  ...
+# Subtest: grant scopes reject substring, empty/duplicate/sparse arrays and sentinel recipient authority
+ok 64 - grant scopes reject substring, empty/duplicate/sparse arrays and sentinel recipient authority
+  ---
+  duration_ms: 65.3752
+  type: 'test'
+  ...
+# Subtest: N-R01 old metadata stays unspecified; input and old ciphertext stay unchanged
+ok 65 - N-R01 old metadata stays unspecified; input and old ciphertext stay unchanged
+  ---
+  duration_ms: 241.8075
+  type: 'test'
+  ...
+# Subtest: N-R02 N-R03 metric precision survives portfolio, CSV and independent groups
+ok 66 - N-R02 N-R03 metric precision survives portfolio, CSV and independent groups
+  ---
+  duration_ms: 5.3537
+  type: 'test'
+  ...
+# Subtest: N-R04 unknown capital does not erase known operating and noncapital candidate
+ok 67 - N-R04 unknown capital does not erase known operating and noncapital candidate
+  ---
+  duration_ms: 0.8285
+  type: 'test'
+  ...
+# Subtest: N-R05 payment unknown, zero, unpaid and interest cash dependencies differ
+ok 68 - N-R05 payment unknown, zero, unpaid and interest cash dependencies differ
+  ---
+  duration_ms: 1.2353
+  type: 'test'
+  ...
+# Subtest: N-P01 N-P02 stable note discovery after session loss; idempotency and distinct new comments
+ok 69 - N-P01 N-P02 stable note discovery after session loss; idempotency and distinct new comments
+  ---
+  duration_ms: 302.3889
+  type: 'test'
+  ...
+# Subtest: N-P05 N-K03 actual APIs reject owner expiry, source mismatch and revoked household scope before new note
+ok 70 - N-P05 N-K03 actual APIs reject owner expiry, source mismatch and revoked household scope before new note
+  ---
+  duration_ms: 41.102
+  type: 'test'
+  ...
+# Subtest: N-K01 N-K02 N-K04 nine-section exact package works without AI, professional or legal approval and deduplicates selected rental
+ok 71 - N-K01 N-K02 N-K04 nine-section exact package works without AI, professional or legal approval and deduplicates selected rental
+  ---
+  duration_ms: 199.8934
+  type: 'test'
+  ...
+# Subtest: N-K03 explicit preparation consent binds package and does not expand an old assets grant
+ok 72 - N-K03 explicit preparation consent binds package and does not expand an old assets grant
+  ---
+  duration_ms: 235.6898
+  type: 'test'
+  ...
+# Subtest: N-C01 application owner rule conflict, expiry, withdrawal, bounded offline cache and current clock
+ok 73 - N-C01 application owner rule conflict, expiry, withdrawal, bounded offline cache and current clock
+  ---
+  duration_ms: 66.7275
+  type: 'test'
+  ...
+# Subtest: N-D01 local delivery unknown reconciles before retry; no repeated dispatch or production transport
+ok 74 - N-D01 local delivery unknown reconciles before retry; no repeated dispatch or production transport
+  ---
+  duration_ms: 51.432
+  type: 'test'
+  ...
+# Subtest: N-P01 interrupted note object/index publication recovers without another creation
+ok 75 - N-P01 interrupted note object/index publication recovers without another creation
+  ---
+  duration_ms: 81.9793
+  type: 'test'
+  ...
+# Subtest: N-D01 explicit failure retries boundedly; revoked prepared dispatch never sends
+ok 76 - N-D01 explicit failure retries boundedly; revoked prepared dispatch never sends
+  ---
+  duration_ms: 38.2129
+  type: 'test'
+  ...
+# Subtest: N-R02 confirmed successor numerical goldens preserve cash/tax separation
+ok 77 - N-R02 confirmed successor numerical goldens preserve cash/tax separation
+  ---
+  duration_ms: 4.0547
+  type: 'test'
+  ...
+# Subtest: N-K03 expanded policy/goal preparation requires their own current household scopes via HTTP
+ok 78 - N-K03 expanded policy/goal preparation requires their own current household scopes via HTTP
+  ---
+  duration_ms: 32.7253
+  type: 'test'
+  ...
+# Subtest: N-C01 current rule unavailability does not rewrite or regenerate an existing report
+ok 79 - N-C01 current rule unavailability does not rewrite or regenerate an existing report
+  ---
+  duration_ms: 193.982
+  type: 'test'
+  ...
+# Subtest: N6 admission review never grants authority even for structurally complete synthetic records
+ok 80 - N6 admission review never grants authority even for structurally complete synthetic records
+  ---
+  duration_ms: 4.32
+  type: 'test'
+  ...
+# Subtest: N-K03 selected Will subject references require Will-source-bound estate consent, not financial person labels
+ok 81 - N-K03 selected Will subject references require Will-source-bound estate consent, not financial person labels
+  ---
+  duration_ms: 57.3548
+  type: 'test'
+  ...
+# Subtest: CSV keeps exact saved version, full final schedule and quoted values; no recalculation in exporter
+ok 82 - CSV keeps exact saved version, full final schedule and quoted values; no recalculation in exporter
+  ---
+  duration_ms: 113.4035
+  type: 'test'
+  ...
+# Subtest: CSV escapes formula-like user labels and preserves negative cash flow as a number
+ok 83 - CSV escapes formula-like user labels and preserves negative cash flow as a number
+  ---
+  duration_ms: 0.8246
+  type: 'test'
+  ...
+# Subtest: Will preparation preserves wishes; download/read/signing declarations never become legal validity
+ok 84 - Will preparation preserves wishes; download/read/signing declarations never become legal validity
+  ---
+  duration_ms: 231.8989
+  type: 'test'
+  ...
+# Subtest: professional owner authorizes before decrypt; recipient, exact version, jurisdiction and revocation remain mandatory
+ok 85 - professional owner authorizes before decrypt; recipient, exact version, jurisdiction and revocation remain mandatory
+  ---
+  duration_ms: 111.5224
+  type: 'test'
+  ...
+# Subtest: isolated synthetic approved package previews before confirmation; exact confirmation gates deterministic exports
+ok 86 - isolated synthetic approved package previews before confirmation; exact confirmation gates deterministic exports
+  ---
+  duration_ms: 324.2617
+  type: 'test'
+  ...
+# Subtest: test package is rejected outside isolated local environment and production package remains closed
+ok 87 - test package is rejected outside isolated local environment and production package remains closed
+  ---
+  duration_ms: 29.274
+  type: 'test'
+  ...
+# Subtest: retrying the same initial import proposal cannot create a second Will draft
+ok 88 - retrying the same initial import proposal cannot create a second Will draft
+  ---
+  duration_ms: 233.5405
+  type: 'test'
+  ...
+# Subtest: Will preview/confirm/update preserves intent and history; exact chosen financial revision survives newer latest
+ok 89 - Will preview/confirm/update preserves intent and history; exact chosen financial revision survives newer latest
+  ---
+  duration_ms: 61.9272
+  type: 'test'
+  ...
+# Subtest: stale mapping, target CAS, expired grant and deleted source reject confirmation; historic imported wishes remain editable
+ok 90 - stale mapping, target CAS, expired grant and deleted source reject confirmation; historic imported wishes remain editable
+  ---
+  duration_ms: 81.8393
+  type: 'test'
+  ...
+1..90
+# tests 90
+# suites 0
+# pass 85
+# fail 5
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6560.0063

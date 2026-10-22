@@ -30,7 +30,10 @@ assert.equal(routes.authorityBoundary.productionBrowserAcceptanceSatisfied,true)
 assert.equal(brand.currentConsumers.publicHeaderLight,'LOGO-009');
 assert.match(shell,/data-cx-asset="LOGO-009"/);
 assert.match(shell,/installAskDrawerNavigation/);
-assert.match(shell,/location\.assign\(destination\(q\)\)/);
+assert.ok(shell.includes("fetch('/api/client-intent-route?'"),'Current Ask entry must use governed intent routing');
+assert.ok(shell.includes('renderEntryResult(result,payload.route'),'Intent result must be rendered by the shared handoff UI');
+assert.ok(shell.includes("const destination = () => '/knowledge/ask/'"),'Canonical Ask destination must remain available');
+assert.equal(shell.includes('/api/customer-ask'),false,'Shell must not execute an answer runtime');
 for(const surface of cutover.surfaces){
   assert.ok(fs.existsSync(surface.htmlPath),`browser-accepted canonical P1 surface missing: ${surface.htmlPath}`);
   const page=text(surface.htmlPath);

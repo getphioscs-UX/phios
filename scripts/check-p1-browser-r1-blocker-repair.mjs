@@ -1,4 +1,5 @@
 import {assertPprCurrentSharedOwner} from './lib/ppr-current-shared-owner.mjs';
+import {currentFooterLogo} from './lib/branding-footer-successor.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -15,8 +16,14 @@ const kapRelevance=json('content/knowledge/answer-projection/reconciliation/kap-
 const kapKirBridge=json('content/knowledge/answer-projection/reconciliation/kap-kir-r2-production-bridge-successor-v1.json');
 const kapKirContent=json('content/knowledge/answer-projection/reconciliation/kap-kir-r2-content-grounding-successor-v2.json');
 const cutover=json('content/customer-experience-rebuild/migration/priority-route-cutover-registry-v2.json');
-assert.equal(brand.status,'ACTIVE_SURFACE_AWARE_CUSTOMER_BRAND_BINDING');assert.equal(brand.currentConsumers.publicHeaderLight,'LOGO-009');assert.match(shell,/headerMarkup[\s\S]*data-cx-asset="LOGO-009"/);assert.match(shell,/data-cx-asset="LOGO-010"/);
-assert.match(shell,/function installAskDrawerNavigation/);assert.match(shell,/form\.addEventListener\('submit'/);assert.match(shell,/location\.assign\(destination\(q\)\)/);assert.match(shell,/openLink\.href = destination/);
+assert.equal(brand.status,'ACTIVE_SURFACE_AWARE_CUSTOMER_BRAND_BINDING');assert.equal(brand.currentConsumers.publicHeaderLight,'LOGO-009');assert.match(shell,/headerMarkup[\s\S]*data-cx-asset="LOGO-009"/);
+assert.ok(shell.includes(`data-cx-asset="${currentFooterLogo()}"`),'Footer must consume the owner-authorized current lockup');
+assert.match(shell,/function installAskDrawerNavigation/);assert.match(shell,/form\.addEventListener\('submit'/);assert.match(shell,/openLink\.href = destination/);
+const askNavigation=shell.split('function installAskDrawerNavigation(')[1]?.split('function footerMarkup(')[0];
+assert.ok(askNavigation?.includes("fetch('/api/client-intent-route?'"),'Ask drawer must use the current intent handoff');
+assert.ok(askNavigation.includes('renderEntryResult(result,payload.route'),'Ask drawer must render the governed route');
+assert.ok(askNavigation.includes("const destination = () => '/knowledge/ask/'"),'Ask drawer must retain canonical Ask entry');
+assert.equal(askNavigation.includes('/api/customer-ask'),false,'Shell must not execute the answer runtime');
 for(const q of ['为什么我丈夫脾气那么坏','为什么我老公总是发脾气','Why is my husband so bad-tempered?']){assert.equal(classifyAsk2Consumption({question:q}).mode,'ASK2',q);assert.equal(classifyLensQuestion({question:q}).taxonomy,'RELATIONSHIP',q)}
 const normalized=normalizeKapQuestion(createKapQuestionIntake({question:'为什么我丈夫脾气那么坏',locale:'zh-Hans'}));
 const unrelated={normalization:normalized,sources:[{text:'为什么需要 PHI OS？人类需要新的现实读取方式。'}]};
@@ -31,7 +38,8 @@ for(const item of kapRelevance.runtimeSuccessors){
   const currentSha=kapMaintenanceSuccessorSha(item.path,frozenSuccessorSha);
   assert.equal(sha(item.path),currentSha,`KAP_RELEVANCE_RUNTIME_DRIFT:${item.path}`);
 }
-const askRequest=new Request('https://phios.test/api/customer-contextual-ask',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({question:'为什么我丈夫脾气那么坏',locale:'zh-Hans',contexts:[{contextType:'KNOWLEDGE'}],questionOnly:false})});const askResponse=await runContextualAsk({request:askRequest,env:{},data:{}});assert.equal(askResponse.status,200);const askPayload=await askResponse.json();assert.equal(askPayload.ok,true);assert.equal(askPayload.view.state,'NEEDS_CONTEXT');assert.match(askPayload.view.answer.text,/脾气坏/);assert.doesNotMatch(askPayload.view.answer.text,/为什么需要 PHI OS/);assert.deepEqual(askPayload.view.relatedKnowledge,[]);assert.ok(askPayload.view.answer.supporting.every(item=>!/I am using the Relational Runtime/.test(item)));assert.ok(askPayload.view.answer.supporting.some(item=>/关系情境/.test(item))); 
+const askRequest=new Request('https://phios.test/api/customer-contextual-ask',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({question:'为什么我丈夫脾气那么坏',locale:'zh-Hans',contexts:[{contextType:'KNOWLEDGE'}],questionOnly:false})});const askResponse=await runContextualAsk({request:askRequest,env:{},data:{}});assert.equal(askResponse.status,200);const askPayload=await askResponse.json();assert.equal(askPayload.ok,true);assert.equal(askPayload.view.state,'SOURCE_INSUFFICIENT');assert.equal(askPayload.view.answer.text,'目前没有足够的来源资料来回答这个问题。');assert.deepEqual(askPayload.view.relatedKnowledge,[]);assert.deepEqual(askPayload.view.answer.supporting,[]);assert.equal(askPayload.execution.providerInvoked,false);assert.equal(askPayload.execution.providerCalls,0);
+
 const z=json('content/customer-experience-rebuild/ziwei-cx-r1/authority/ziwei-cx-r1-w16-current-shared-owner-reconciliation-v3.json');assertPprCurrentSharedOwner(z.sharedFile,{historicalDigest:z.currentOwnerSha256,label:'P1 browser / registered HD intake shared-host successor'});assert.equal(z.ziweiSharedSurfaceMutationByThisWork,false);
 assert.equal(acceptance.productionBrowserAcceptance,false);assert.equal(acceptance.physicalLegacyDeleteAllowed,false);assert.equal(cutover.productionBrowserAcceptance.status,'PENDING_PRODUCTION_BROWSER_ACCEPTANCE');assert.equal(cutover.physicalDelete.performed,false);
 console.log('✓ P1 Browser R1 blocker repair passed: light-header brand variant, Ask drawer navigation, relationship/relevance routing and Zi Wei current-owner reconciliation are code-correct.');
