@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {parseHTML} from 'linkedom';
 import {historicalPisBytes} from './lib/page-consolidation-successor-r1.mjs';
 const read=p=>fs.readFileSync(p,'utf8');
 const routes=[
@@ -27,6 +28,16 @@ for(const path of ['index.html','books/index.html','knowledge/index.html']){
 // The admitted consolidated homepage is checked by the eight-volume successor;
 // retain cover-grid assertions against its digest-verified predecessor.
 const home=historicalPisBytes('index.html').toString('utf8');assert.ok(home.includes('data-cx-en="EIGHT BOOKS"'));for(let i=1;i<=8;i++)assert.ok(home.includes(`data-cx-seven-volume-asset="BOOK-${i}-HARDCOVER"`),`home:cover-${i}`);
-const books=read('books/index.html');assert.ok(books.includes('data-cx-seven-volume-asset="HERO-8V-SYSTEM"'));assert.ok(books.includes('data-cx-en="VOLUME I → VIII"'));
+const books=read('books/index.html');
+if(books.includes('data-approved-visual="PHIOS-HERO-EIGHT-VOLUME-SYSTEM-v1.webp"')){
+ const document=parseHTML(books).document;
+ const heroes=document.querySelectorAll('main figure[data-vr2-role="HERO"] img[data-approved-visual="PHIOS-HERO-EIGHT-VOLUME-SYSTEM-v1.webp"]');
+ assert.equal(heroes.length,1,'Books must consume one eight-volume system hero');
+ assert.equal(heroes[0].getAttribute('src'),'https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/PHIOS-HERO-EIGHT-VOLUME-SYSTEM-v1.webp');
+ assert.ok(heroes[0].getAttribute('alt')?.trim(),'Books hero alternative text required');
+ assert.equal(heroes[0].getAttribute('loading'),'eager');
+ assert.ok(Number(heroes[0].getAttribute('width'))>0&&Number(heroes[0].getAttribute('height'))>0);
+ assert.ok(books.includes('data-cx-en="EIGHT BOOKS"'));
+}else{assert.ok(books.includes('data-cx-seven-volume-asset="HERO-8V-SYSTEM"'));assert.ok(books.includes('data-cx-en="VOLUME I → VIII"'));}
 console.log('✓ Eight-volume current responsive/accessibility projection passed through the existing checker entry point.');
 console.log('  Eight canonical routes retain viewport, canonical and skip/main semantics; seven public volumes retain their renderer, Book VIII preserves its internal-volume identity boundary; CX Home/Books/Knowledge retain the customer shell.');

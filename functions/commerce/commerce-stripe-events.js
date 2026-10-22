@@ -5,6 +5,7 @@ import {validateOrderReportPresentation} from './report-presentation.js';
 // Successor dispatch of the existing /api/stripe-webhook, not a second endpoint.
 import {commerceProduct,commerceOrderProduct} from '../pws/commercial/stripe-product-registry.js';
 import {commerceOrder,commerceCustomerBinding,fulfillCommerceOrder,setCommercePaymentState,markCommerceReview,finishWebhookEvent,recordCommerceSubscription,refundCommerceOrder,prepareCommerceBookDelivery} from './book-commerce-store.js';
+import {orderBookPdfSource} from './book-product-registry.js';
 import {dispatchWatermark} from './book-delivery.js';
 import {commerceLog} from './commerce-observability.js';
 import {retrieveCommerceSession,retrieveCommerceSubscription,requireStripeQa} from './stripe-client.js';
@@ -21,6 +22,7 @@ async function boundOrder(env,object){
   const binding=await commerceCustomerBinding(env,order.customer_id);
   assert(binding&&id(object.customer)===binding.stripe_customer_id);
   let product;try{product=commerceOrderProduct(order);}catch{throw mismatch();}
+  const bookPdf=orderBookPdfSource(order);if(bookPdf)assert(metadata.book_code===bookPdf.bookCode&&metadata.book_language===bookPdf.language&&metadata.book_source_sha256===bookPdf.sourceSha256);
   const presentation=validateOrderReportPresentation(product,order);
   if(presentation)for(const key of ['reportLanguageMode','reportLocale','pricingVersion','modifierRule','surchargeAmountMinor'])assert(metadata[key]===String(presentation[key]));
   assert(order.amount_minor===(presentation?.amountMinor??product.amountMinor)&&order.currency==='MYR'&&order.qa_price_id===product.qaPriceId);
@@ -31,7 +33,8 @@ function validateLineItems(lines,product,order){
   const surcharge=presentation?.surchargeAmountMinor||0;
   assert(lines?.has_more!==true&&lines?.data?.length===(surcharge?2:1));
   const line=lines.data[0],price=line.price||line.pricing?.price_details?.price;
-  if(product.fulfillmentType==='CONTINUITY_QUOTA_REFILL')assert(line.quantity===1&&typeof price==='object'&&price.unit_amount===1900&&price.currency==='myr'&&id(price.product)===product.qaProductId&&!price.recurring);
+  if(product.deliveryFormat==='FULL_PDF_DOWNLOAD')assert(line.quantity===1&&typeof price==='object'&&price.unit_amount===8900&&price.currency==='myr'&&id(price.product)===product.qaProductId&&!price.recurring);
+  else if(product.fulfillmentType==='CONTINUITY_QUOTA_REFILL')assert(line.quantity===1&&typeof price==='object'&&price.unit_amount===1900&&price.currency==='myr'&&id(price.product)===product.qaProductId&&!price.recurring);
   else assert(id(price)===product.qaPriceId&&line.quantity===1);
   if(surcharge){const modifier=lines.data[1];assert(modifier.quantity===1&&modifier.price?.unit_amount===surcharge&&modifier.price.currency==='myr'&&id(modifier.price.product)===product.qaProductId&&!modifier.price.recurring);}
 }

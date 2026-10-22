@@ -198,6 +198,13 @@ async function render() {
     // Public static samples are independent of checkout and paid delivery.
     fetch('/api/commerce-catalog').then(r=>{if(!r.ok)throw new Error('CATALOG_UNAVAILABLE');return r.json();}).then(catalog=>{
       if(generation!==renderGeneration)return;
+      if(Number(book.volume)<=4){
+        const versions=catalog.products?.filter(p=>p.category==='BOOK'&&p.publicationBookCode===book.bookCode&&p.deliveryFormat==='FULL_PDF_DOWNLOAD')||[];
+        const actions=root.querySelector('.knowledge-actions');
+        for(const version of versions){const link=document.createElement('a');link.className='knowledge-action knowledge-action--primary';link.dataset.bookPdfLanguage=version.language;link.href='/account/?product='+encodeURIComponent(version.productId)+'#commerce';link.textContent=(locale==='zh-Hans'?'选择':'Choose ')+(version.language==='en'?(locale==='zh-Hans'?'英文':'English'):(locale==='zh-Hans'?'中文':'Chinese'))+' PDF · RM89';actions?.prepend(link);}
+        const note=document.createElement('p');note.dataset.bookCommercePrice='PER_LANGUAGE_PDF';note.textContent=locale==='zh-Hans'?'中文、英文分别购买，每册每语言 RM89。购买后在个人书库下载对应语言的完整水印 PDF，并可验证权益后重新下载。网站内整本阅读为后续增值功能。':'Chinese and English are sold separately: RM89 per book and language. Download the complete watermarked PDF from My Books, with verified re-downloads. Whole-book web reading is a later extra.';
+        if(versions.every(p=>p.checkoutAvailable===false))note.append(locale==='zh-Hans'?' 购买尚未开放。':' Purchasing is not open yet.');root.querySelector('.knowledge-hero__lead')?.after(note);return;
+      }
       const product=catalog.products?.find(p=>p.category==='BOOK'&&p.publicationBookCode===book.bookCode);
       if(!product)return;
       const price=document.createElement('p');price.dataset.bookCommercePrice=product.productId;

@@ -1,3 +1,4 @@
+import {normalizeVerifiedSymbolicAccountIdentity} from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
 import {
   consumeDownloadToken,
   recordDownload
@@ -11,7 +12,7 @@ import {
   methodNotAllowed
 } from '../commerce/commerce-http.js';
 
-export async function onRequestGet({ request, env = {} }) {
+export async function onRequestGet({ request, env = {},data={} }) {
   try {
     const rawToken = cleanText(
       new URL(request.url).searchParams.get('token'),
@@ -23,7 +24,7 @@ export async function onRequestGet({ request, env = {} }) {
         code: 'download_token_required'
       });
     }
-    const authorization = await consumeDownloadToken({ env, rawToken });
+    const authorization = await consumeDownloadToken({ env, rawToken,customerId:normalizeVerifiedSymbolicAccountIdentity(data.symbolicAccountIdentity)?.userId||null });
     if (!authorization) {
       throw Object.assign(new Error(
         'The download token is invalid, expired, revoked or fully used.'
@@ -33,7 +34,7 @@ export async function onRequestGet({ request, env = {} }) {
       });
     }
     if (
-      !/^private\/books\/(?:book-one|com-book-0[1-7])\/watermarked\/[A-Za-z0-9_-]+\.pdf$/.test(authorization.watermarked_object_key)
+      !/^private\/books\/(?:book-one|com-book-0[1-7]|com-book-0[1-4]-(?:zh|en))\/watermarked\/[A-Za-z0-9_-]+\.pdf$/.test(authorization.watermarked_object_key)
     ) {
       throw Object.assign(new Error('Unwatermarked delivery is forbidden.'), {
         status: 403,
@@ -53,6 +54,7 @@ export async function onRequestGet({ request, env = {} }) {
         code: 'protected_book_unavailable'
       });
     }
+    if(authorization.bookPdf){const b=authorization.bookPdf,m=object.customMetadata||{};if(m.productId!==b.productId||m.language!==b.language||m.sourceSha256!==b.sourceSha256||m.purchaseId!==authorization.purchase_id||Number(m.pageCount)!==b.pageCount)throw Object.assign(Error('Purchased PDF identity mismatch.'),{status:409,code:'book_pdf_identity_mismatch'});}
     const fingerprint = await hmacHex(
       env.BOOK_ACCESS_TOKEN_SECRET,
       [
@@ -69,7 +71,7 @@ export async function onRequestGet({ request, env = {} }) {
     const headers = new Headers({
       'content-type': 'application/pdf',
       'content-disposition':
-        'attachment; filename="PHI-OS-Licensed-Book-Watermarked.pdf"',
+        authorization.bookPdf?`attachment; filename="PHI-OS-${authorization.bookPdf.bookCode}-${authorization.bookPdf.language}.pdf"`:'attachment; filename="PHI-OS-Licensed-Book-Watermarked.pdf"',
       'cache-control': 'private, no-store, max-age=0',
       'content-security-policy': "default-src 'none'",
       'x-content-type-options': 'nosniff',

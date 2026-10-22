@@ -454,6 +454,17 @@ for(const row of rows){const b=bookPublication[row.productId];if(!b)continue;
   if(row.entitlementPolicy!==b[3])throw new Error('BOOK_ENTITLEMENT_IDENTITY_DRIFT');
   if (b[0] === 8) Object.assign(row, {active:false, productionSaleAllowed:false, publicationStatus:'PUBLICATION_NOT_OFFERED', contentStatus:'PRIVATE_DOCTRINE_IN_DEVELOPMENT'});
 }
+// Owner decision 2026-10-21: I–IV are sold per language, full private PDF.
+// Existing work-only IDs remain historical order identities, never bilingual grants.
+for(const base of [...rows].filter(p=>/^COM-BOOK-0[1-4]$/.test(p.productId))){
+  Object.assign(base,{catalogVisible:false,checkoutBlockedReason:'BOOK_LANGUAGE_VERSION_REQUIRED'});
+  for(const [suffix,language,label]of [['ZH','zh-Hans','中文'],['EN','en','English']])rows.push({...base,
+    productId:base.productId+'-'+suffix,language,baseProductId:base.productId,catalogVisible:true,
+    title:base.title+' · '+label+' PDF',titleZh:base.titleZh+' · '+label+' PDF',amountMinor:8900,
+    entitlementPolicy:`BOOK_${String(base.publicationVolume).padStart(2,'0')}_${suffix}_PDF`,
+    fulfillmentType:'WATERMARKED_PDF',deliveryFormat:'FULL_PDF_DOWNLOAD',webReaderRequired:false,
+    qaPriceId:null,checkoutBlockedReason:null,requiresBookPdfReadiness:true,pricingVersion:'BOOK-PDF-PER-LANGUAGE-RM89-2026-10-21'});
+}
 const previousFinancialProduct=Object.freeze({...rows.find(p=>p.productId==='COM-REPORT-FINANCIAL-FULL')});
 Object.assign(rows.find(p=>p.productId==='COM-REPORT-FINANCIAL-FULL'),{amountMinor:6900,title:'Personal & Household Financial Preparation Report · 16 pages',titleZh:'个人与家庭财务准备报告 · 16 页',pricingVersion:'FINANCE-RM69-2026-10-20',publicationVersion:'FINANCE_CORE_16_V2',professionalReviewRequired:false,qaPriceId:null,livePriceId:null,checkoutBlockedReason:'FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED'});
 export const STRIPE_PRODUCT_REGISTRY = Object.freeze(rows.map(row => Object.freeze(row)));

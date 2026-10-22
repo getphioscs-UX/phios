@@ -1,0 +1,13 @@
+from pathlib import Path
+p=Path('tools/review/reality-information-contract-r1/L1/server.mjs');s=p.read_text(encoding='utf-8').replace("&&name!=='/content/civilization-atlas/search/world-search-index-v1.json'","&&name!=='/content/civilization-atlas/search/world-search-index-v1.json'&&name!=='/content/world/local-answer-quality-r1.json'")
+s=s.replace("if(u.pathname.startsWith('/value-r1/'))", "if(u.pathname.startsWith('/quality-r1/'))file=path.resolve(root,'tools/review/world-answer-quality-r1','.'+decodeURIComponent(u.pathname.slice('/quality-r1'.length)));\n   else if(u.pathname.startsWith('/value-r1/'))")
+s=s.replace("['tools/review/world-reality-value-r1','assets'", "['tools/review/world-answer-quality-r1','tools/review/world-reality-value-r1','assets'")
+s=s.replace('RIC_LOCAL_PORT||59833','RIC_LOCAL_PORT||59834')
+p.write_bytes(s.encode())
+p=Path('functions/customer-projection/ric-world-session.js');s=p.read_text(encoding='utf-8')
+s=s.replace("{numeric,passages:","{numeric,answerDigest:explanation.answerDigest||null,passages:")
+s=s.replace("if(explanation?.sources?.length){answer.explanation=explanation;answer.directAnswer=explanation.directAnswer;answer.answerState='SOURCE_SUPPORTED_PARTIAL';}","if(explanation?.sources?.length){answer.explanation=explanation;answer.directAnswer=explanation.directAnswer;answer.answerState=explanation.quality==='DIRECT_USEFUL_BOUNDED'?'SOURCE_SUPPORTED_ANSWER':'SOURCE_SUPPORTED_PARTIAL';}")
+s=s.replace("publisher:'PHI OS',title:p.title,language:locale", "publisher:p.publisher||'PHI OS',title:p.title,language:p.language||locale")
+s=s.replace("quoteSpanOrDatasetRow:p.text", "quoteSpanOrDatasetRow:p.text")
+s=s.replace("limitations:[explanation.boundary]", "limitations:[explanation.boundary,...(p.scope?[p.scope]:[])]")
+p.write_bytes(s.encode())

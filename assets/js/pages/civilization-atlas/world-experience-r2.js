@@ -164,7 +164,7 @@ function renderEvidenceAnswer(){
  const signature=JSON.stringify([plan.intent,plan.scope,state.lang,customQuestion]);if(signature===answerSignature)return;answerSignature=signature;const seq=++answerSequence;answerHost.hidden=false;delete answerHost.dataset.answerState;answerHost.innerHTML=`<p role="status">${pair('正在核对指定范围的来源…','Checking evidence for the selected scope…')}</p>`;
  Promise.all(plan.requests.map(request=>queryWorldEvidence(request))).then(async evidence=>{
   if(seq!==answerSequence)return;const answer=composeWorldAnswer(plan,evidence,getLocale());answerHost.dataset.answerState=answer.answerState;answerHost.dataset.intent=answer.intent;
-  if(answer.answerState!=='ANSWERED_BOUNDED'&&customQuestion){const explanation=await queryWorldExplanation(customQuestion,getLocale());if(seq!==answerSequence)return;if(explanation?.sources?.length||answer.answerState==='NOT_COVERED')answer.explanation=explanation;}
+  if(answer.answerState!=='ANSWERED_BOUNDED'&&customQuestion){const explanation=await queryWorldExplanation(customQuestion,getLocale());if(seq!==answerSequence)return;if(explanation?.sources?.length||answer.answerState==='NOT_COVERED'||explanation?.quality==='NUMERIC_LIMITATION')answer.explanation=explanation;}
   answerHost.innerHTML=worldCustomerAnswerHTML(answer,getLocale());
   if(['127.0.0.1','localhost'].includes(location.hostname)){const link=document.createElement('a');link.href='/L1/PRODUCT-LOCAL.html?locale='+getLocale();link.textContent=pair('整理我自己的处境与选择','Clarify my own situation and choices');answerHost.append(link);}
   if(answer.answerState==='ANSWERED_BOUNDED')answerHost.setAttribute('role','region');else answerHost.setAttribute('role','status');

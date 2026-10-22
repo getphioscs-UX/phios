@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-21T10:20:14.982Z",
+  "source": "CURRENT_CONFIGURED_PRODUCTION_D1_READ_ONLY",
+  "query": "SELECT name FROM sqlite_master WHERE type='table' AND (name LIKE '%commerce%' OR name LIKE '%order%' OR name LIKE '%purchase%' OR name LIKE '%entitlement%')",
+  "response": [
+    {
+      "results": [],
+      "success": true,
+      "meta": {
+        "served_by": "v3-prod",
+        "served_by_region": "APAC",
+        "served_by_colo": "SIN",
+        "served_by_primary": true,
+        "timings": {
+          "sql_duration_ms": 0.2196
+        },
+        "duration": 0.2196,
+        "changes": 0,
+        "last_row_id": 0,
+        "changed_db": false,
+        "size_after": 229376,
+        "rows_read": 51,
+        "rows_written": 0,
+        "total_attempts": 1
+      }
+    }
+  ],
+  "interpretation": "No commerce/order/purchase/entitlement tables found if results are empty. This proves no such persisted orders in this queried database, not absence of Stripe or another database orders.",
+  "stripeHistoricalOrders": "NOT_QUERIED_NO_GLOBAL_ZERO_CUSTOMER_CLAIM",
+  "legacyDeletionPerformed": false,
+  "productionWrites": 0
+}

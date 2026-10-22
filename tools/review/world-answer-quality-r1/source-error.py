@@ -1,0 +1,9 @@
+from pathlib import Path
+p=Path('assets/js/pages/civilization-atlas/world-customer-answer.js');s=p.read_text(encoding='utf-8')
+start=s.index('export async function queryWorldExplanation');end=s.index('\nconst safeLink',start)
+s=s[:start]+'''export async function queryWorldExplanation(question,locale,fetcher=fetch){const unavailable=()=>({state:'SOURCE_UNAVAILABLE',quality:'SOURCE_UNAVAILABLE',sources:[],segments:[],reasons:[],directAnswer:locale==='en'?'The supporting source could not be read. No new answer or number has been inferred from an old result.':'暂时无法读取支撑来源，没有从旧结果推断新答案或数值。',impact:locale==='en'?'Source access must be restored before relying on a new answer.':'恢复来源读取后，才能据此形成新回答。',nextSteps:locale==='en'?['Retry the source lookup, or inspect the original official source.']:['重试来源读取，或查看原始官方资料。'],boundary:locale==='en'?'The source failure remains unresolved.':'来源读取问题尚未解决。',providerCalls:0});try{const r=await fetcher('/api/world-question-explanation',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({question,locale}),cache:'no-store'});if(!r.ok)return unavailable();const data=await r.json();return data.ok===true?data.explanation:unavailable();}catch{return unavailable();}}
+'''+s[end:]
+s=s.replace("${esc(s.publisher||'PHI OS')}${s.publishedAt?' · '+esc(s.publishedAt):''}","${esc(s.publisher||'PHI OS')}${s.publishedAt?' · '+esc(s.publishedAt):''}${s.retrievedAt?' · '+t('查阅于 ','Retrieved ')+esc(s.retrievedAt.slice(0,10)):''}")
+p.write_bytes(s.encode())
+p=Path('functions/customer-projection/ric-world-session.js');s=p.read_text(encoding='utf-8').replace("licenseStatus:'EXISTING_PUBLICATION_ADMISSION'", "licenseStatus:p.sourceType==='PUBLIC_AUTHORITY_EXPLANATION'?'PUBLIC_OFFICIAL_SHORT_EXCERPT_LOCAL_REVIEW':'EXISTING_PUBLICATION_ADMISSION'")
+p.write_bytes(s.encode())

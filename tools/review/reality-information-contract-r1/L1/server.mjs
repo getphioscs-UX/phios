@@ -5,7 +5,7 @@ import {onRequestPost as explainWorld} from '../../../../functions/api/world-que
 import {beginRealityWorkbench,updateRealityWorkbench,projectRealityWorkbench} from '../../../../functions/customer-projection/ric-reality-workbench.js';
 export async function startSessionServer({port=0,ttlMs=600000,clock=()=>Date.now(),evidenceFailure=false}={}){
  const root=process.cwd(),review=path.resolve(root,'tools/review/reality-information-contract-r1'),sessions=new Map(),calls=[];let origin;
- const assets={fetch:async request=>{const name=new URL(request.url).pathname;if(!name.startsWith('/content/knowledge/public/')&&name!=='/content/civilization-atlas/search/world-search-index-v1.json')return new Response(null,{status:403});const file=path.resolve(root,'.'+name);return file.startsWith(root+path.sep)&&fs.existsSync(file)?new Response(fs.readFileSync(file),{headers:{'content-type':'application/json'}}):new Response(null,{status:404});}};
+ const assets={fetch:async request=>{const name=new URL(request.url).pathname;if(!name.startsWith('/content/knowledge/public/')&&name!=='/content/civilization-atlas/search/world-search-index-v1.json'&&name!=='/content/world/local-answer-quality-r1.json')return new Response(null,{status:403});const file=path.resolve(root,'.'+name);return file.startsWith(root+path.sep)&&fs.existsSync(file)?new Response(fs.readFileSync(file),{headers:{'content-type':'application/json'}}):new Response(null,{status:404});}};
  const server=http.createServer(async(req,res)=>{
   const u=new URL(req.url,'http://local');const record={method:req.method,path:u.pathname};calls.push(record);
   const send=(status,body,headers={})=>{record.status=status;res.writeHead(status,{'content-type':'application/json','cache-control':'no-store','referrer-policy':'no-referrer',...headers});res.end(JSON.stringify(body));};
@@ -53,10 +53,11 @@ export async function startSessionServer({port=0,ttlMs=600000,clock=()=>Date.now
    if(u.pathname.startsWith('/api/'))return send(503,{code:'NO_PRODUCTION_API_MOUNTED'});
    if(req.method!=='GET')return send(405,{code:'METHOD_NOT_ALLOWED'});
    let file;
-   if(u.pathname.startsWith('/value-r1/'))file=path.resolve(root,'tools/review/world-reality-value-r1','.'+decodeURIComponent(u.pathname.slice('/value-r1'.length)));
+   if(u.pathname.startsWith('/quality-r1/'))file=path.resolve(root,'tools/review/world-answer-quality-r1','.'+decodeURIComponent(u.pathname.slice('/quality-r1'.length)));
+   else if(u.pathname.startsWith('/value-r1/'))file=path.resolve(root,'tools/review/world-reality-value-r1','.'+decodeURIComponent(u.pathname.slice('/value-r1'.length)));
    else if(/^\/(?:assets|world|content\/civilization-atlas|content\/world|content\/knowledge\/public|content\/web-production\/registries)\//.test(u.pathname)){file=path.resolve(root,'.'+decodeURIComponent(u.pathname));if(fs.existsSync(file)&&fs.statSync(file).isDirectory())file=path.join(file,'index.html');}
    else file=path.resolve(review,'.'+decodeURIComponent(u.pathname==='/'?'/RIC-HUMAN-REVIEW.html':u.pathname));
-   if(!file.startsWith(review+path.sep)&&!['tools/review/world-reality-value-r1','assets','world','content/civilization-atlas','content/world','content/knowledge/public','content/web-production/registries'].some(dir=>file.startsWith(path.resolve(root,dir)+path.sep)))return send(403,{code:'STATIC_SCOPE_DENIED'});
+   if(!file.startsWith(review+path.sep)&&!['tools/review/world-answer-quality-r1','tools/review/world-reality-value-r1','assets','world','content/civilization-atlas','content/world','content/knowledge/public','content/web-production/registries'].some(dir=>file.startsWith(path.resolve(root,dir)+path.sep)))return send(403,{code:'STATIC_SCOPE_DENIED'});
    if(!fs.existsSync(file)||!fs.statSync(file).isFile())return send(404,{code:'NOT_FOUND'});
    record.status=200;res.writeHead(200,{'content-type':({'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.json':'application/json','.md':'text/plain','.png':'image/png'})[path.extname(file)]||'application/octet-stream','cache-control':'no-store','content-security-policy':"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'none'"});res.end(fs.readFileSync(file));
   }catch(e){return send(400,{code:e.code||'LOCAL_REQUEST_FAILED'});}
@@ -64,4 +65,4 @@ export async function startSessionServer({port=0,ttlMs=600000,clock=()=>Date.now
  await new Promise(r=>server.listen(port,'127.0.0.1',r));origin='http://127.0.0.1:'+server.address().port;
  return {origin,calls,stop:()=>new Promise(r=>{server.closeAllConnections();server.close(r);})};
 }
-if(process.argv.includes('--serve')){const s=await startSessionServer({port:Number(process.env.RIC_LOCAL_PORT||59833)});console.log(s.origin+'/RIC-HUMAN-REVIEW.html');process.on('SIGINT',()=>s.stop().then(()=>process.exit(0)));}
+if(process.argv.includes('--serve')){const s=await startSessionServer({port:Number(process.env.RIC_LOCAL_PORT||59834)});console.log(s.origin+'/RIC-HUMAN-REVIEW.html');process.on('SIGINT',()=>s.stop().then(()=>process.exit(0)));}

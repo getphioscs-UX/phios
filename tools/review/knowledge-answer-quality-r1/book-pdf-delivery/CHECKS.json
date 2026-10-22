@@ -1,0 +1,125 @@
+{
+  "at": "2026-10-21T15:00:34.853Z",
+  "compile": [
+    {
+      "entry": "functions/pws/commercial/stripe-product-registry.js",
+      "bytes": 47442,
+      "exitCode": 0,
+      "write": false
+    },
+    {
+      "entry": "functions/commerce/book-product-registry.js",
+      "bytes": 32865,
+      "exitCode": 0,
+      "write": false
+    },
+    {
+      "entry": "functions/commerce/book-commerce-store.js",
+      "bytes": 126357,
+      "exitCode": 0,
+      "write": false
+    },
+    {
+      "entry": "functions/commerce/commerce-stripe-api.js",
+      "bytes": 2212944,
+      "exitCode": 0,
+      "write": false
+    },
+    {
+      "entry": "functions/commerce/commerce-stripe-events.js",
+      "bytes": 2231411,
+      "exitCode": 0,
+      "write": false
+    },
+    {
+      "entry": "functions/commerce/stripe-client.js",
+      "bytes": 33624,
+      "exitCode": 0,
+      "write": false
+    },
+    {
+      "entry": "functions/commerce/book-delivery.js",
+      "bytes": 65608,
+      "exitCode": 0,
+      "write": false
+    },
+    {
+      "entry": "functions/api/book-one-download.js",
+      "bytes": 59538,
+      "exitCode": 0,
+      "write": false
+    },
+    {
+      "entry": "functions/api/book-one-watermark-complete.js",
+      "bytes": 65491,
+      "exitCode": 0,
+      "write": false
+    },
+    {
+      "entry": "assets/customer-ui/js/surfaces/commerce-account.js",
+      "bytes": 27524,
+      "exitCode": 0,
+      "write": false
+    },
+    {
+      "entry": "assets/js/pages/book-volume.js",
+      "bytes": 875717,
+      "exitCode": 0,
+      "write": false
+    },
+    {
+      "entry": "assets/js/pages/book-volume-seven.js",
+      "bytes": 974718,
+      "exitCode": 0,
+      "write": false
+    },
+    {
+      "entry": "functions/api/book-one-checkout.js",
+      "bytes": 49391,
+      "exitCode": 0,
+      "write": false
+    },
+    {
+      "entry": "functions/api/book-one-product.js",
+      "bytes": 31882,
+      "exitCode": 0,
+      "write": false
+    },
+    {
+      "entry": "assets/customer-ui/js/surfaces/commerce-product-visuals.js",
+      "bytes": 4241,
+      "exitCode": 0,
+      "write": false
+    }
+  ],
+  "localChecks": 100,
+  "browserCases": 8,
+  "legacy": [
+    {
+      "command": "node --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-commerce-catalog-runtime.mjs",
+      "exitCode": 0,
+      "status": "PASS_REPORT_CATALOG_UNCHANGED"
+    },
+    {
+      "command": "node --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-books-1-6-publication-commerce.mjs",
+      "exitCode": 1,
+      "status": "SUCCESSOR_CONTRACT_CONFLICT_RETAINED",
+      "assertion": "one active product per book",
+      "actual": 14,
+      "expected": 6,
+      "line": 46,
+      "reason": "Eight language SKUs plus preserved historical IDs replace the old work-only commerce model; old test not changed."
+    },
+    {
+      "command": "node --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-m3b-book-access-payment.mjs",
+      "exitCode": 1,
+      "status": "SUCCESSOR_CONTRACT_CONFLICT_RETAINED",
+      "assertion": "legacy unqualified checkout creates a new purchase",
+      "actual": 409,
+      "expected": 201,
+      "line": 203,
+      "reason": "Fresh legacy checkout retired; select a language SKU through existing Commerce. Historical delivery data and old receipts retained.",
+      "priorObservation": "Passed before deliberate fresh-checkout retirement; not claimed PASS for final candidate."
+    }
+  ]
+}

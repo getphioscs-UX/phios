@@ -1,13 +1,14 @@
 import {commerceEnvironment,commerceStripeProduct} from './commerce-environment.js';
 import {controlledOrderOffer,verifyControlledPayment} from './controlled-purchase-candidate.js';
 import {orderReportPresentation,validateOrderReportPresentation} from './report-presentation.js';
-import { BOOK_ONE_PRODUCT, resolveBookOneSourceKey, resolveCommerceBookSourceKey } from './book-product-registry.js';
+import { BOOK_ONE_PRODUCT, resolveBookOneSourceKey, resolveCommerceBookSourceKey,bookLanguageIdentity,orderBookPdfSource } from './book-product-registry.js';
 import { STRIPE_PRODUCT_REGISTRY, commerceProduct, commerceEntitlements, commerceOrderProduct, commerceOrderEntitlements } from '../pws/commercial/stripe-product-registry.js';
 import {commerceLog} from './commerce-observability.js';
 import {continuityRefillProduct} from '../personal-reading/continuity/continuity-commercial-authority.js';
 import {readContinuityQuota} from '../personal-reading/continuity/continuity-quota-d1.js';
 import {
   encryptSensitive,
+  decryptSensitive,
   randomId,
   randomToken,
   sha256Hex,
@@ -31,9 +32,9 @@ export async function ensureCommerceProducts(env, clock=Date.now) {
   const db=dbFrom(env), now=nowIso(clock);
   await db.batch(STRIPE_PRODUCT_REGISTRY.filter(p=>commerceEnvironment(env)!=='LIVE'||p.livePriceId).map(registered=>{const p=commerceEnvironment(env)==='LIVE'&&registered.active?commerceStripeProduct(registered,'LIVE'):registered;return db.prepare(`INSERT INTO commerce_products
     (product_id,product_version,title,language,format,currency,amount_minor,source_object_key,active,created_at,updated_at,category,billing_type,qa_price_id,qa_product_id)
-    VALUES (?1,'COM-STRIPE-R1',?2,'bilingual',?3,'MYR',?4,'',?10,?5,?5,?6,?7,?8,?9)
-    ON CONFLICT(product_id) DO UPDATE SET active=excluded.active,title=excluded.title,amount_minor=excluded.amount_minor,qa_price_id=excluded.qa_price_id,qa_product_id=excluded.qa_product_id,updated_at=excluded.updated_at`)
-    .bind(p.productId,p.title,p.fulfillmentType,p.amountMinor,now,p.category,p.billingType,p.qaPriceId,p.qaProductId,p.active?1:0);}));
+    VALUES (?1,'COM-STRIPE-R1',?2,?11,?3,'MYR',?4,'',?10,?5,?5,?6,?7,?8,?9)
+    ON CONFLICT(product_id) DO UPDATE SET active=excluded.active,title=excluded.title,language=excluded.language,format=excluded.format,amount_minor=excluded.amount_minor,qa_price_id=excluded.qa_price_id,qa_product_id=excluded.qa_product_id,updated_at=excluded.updated_at`)
+    .bind(p.productId,p.title,p.fulfillmentType,p.amountMinor,now,p.category,p.billingType,p.qaPriceId,p.qaProductId,p.active?1:0,p.language||'bilingual');}));
 }
 export async function createCommerceOrder({env,customerId,productId,selectedProducts,idempotencyKeyHash,requestHash,locale,context={},clock=Date.now}){
   await ensureCommerceProducts(env,clock);
@@ -85,16 +86,17 @@ export async function markCommerceReview(env,orderId){
   if(orderId) await dbFrom(env).prepare('UPDATE commerce_checkout_attempts SET review_required=1 WHERE checkout_attempt_id=?1').bind(orderId).run();
 }
 export async function prepareCommerceBookDelivery(env,order){
-  const source=resolveCommerceBookSourceKey(env,order.product_id);
-  if(!env.BOOKS?.head||!await env.BOOKS.head(source)||String(env.BOOK_ACCESS_TOKEN_SECRET||'').length<32) throw Object.assign(new Error('Protected book delivery is not ready.'),{status:503,code:'commerce_book_delivery_unconfigured'});
+  const bookPdf=orderBookPdfSource(order),source=bookPdf?.objectKey||resolveCommerceBookSourceKey(env,order.product_id);
+  if(!env[bookPdf?.binding||'BOOKS']?.head||!await env[bookPdf?.binding||'BOOKS'].head(source)||String(env.BOOK_ACCESS_TOKEN_SECRET||'').length<32) throw Object.assign(new Error('Protected book delivery is not ready.'),{status:503,code:'commerce_book_delivery_unconfigured'});
   const entitlementCode=commerceOrderProduct(order).entitlementPolicy;
   const entitlementId=`ent_${order.checkout_attempt_id}_${entitlementCode}`, purchaseId=`pur_${order.checkout_attempt_id}`,now=new Date().toISOString();
-  const payload=await encryptSensitive(JSON.stringify({customerId:order.customer_id,purchaseId,productId:order.product_id,notice:'Licensed to this PHI OS account for personal use only.'}),env.BOOK_ACCESS_TOKEN_SECRET);
+  const payload=await encryptSensitive(JSON.stringify({customerId:order.customer_id,purchaseId,productId:order.product_id,...(bookPdf?{bookPdf}:{}),notice:'Licensed to this PHI OS account for personal use only.'}),env.BOOK_ACCESS_TOKEN_SECRET);
   await dbFrom(env).prepare(`INSERT OR IGNORE INTO commerce_watermark_jobs (watermark_job_id,entitlement_id,source_object_key,destination_object_key,watermark_payload_ciphertext,job_status,attempt_count,created_at,updated_at) VALUES (?1,?2,?3,?4,?5,'pending',0,?6,?6)`)
     .bind(`wm_${order.checkout_attempt_id}`,entitlementId,source,`private/books/${order.product_id.toLowerCase()}/watermarked/${purchaseId}.pdf`,payload,now).run();
   return purchaseId;
 }
 export async function ownedCommerceBook(env,customerId,productId){
+  if(bookLanguageIdentity(productId))return dbFrom(env).prepare(`SELECT e.entitlement_id,e.watermark_status,e.watermarked_object_key FROM digital_entitlements e JOIN commerce_purchases p ON p.purchase_id=e.purchase_id JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=p.checkout_attempt_id WHERE e.customer_id=?1 AND p.customer_id=?1 AND o.customer_id=?1 AND e.product_id=?2 AND p.product_id=?2 AND o.product_id=?2 AND e.entitlement_status='active' AND p.purchase_state='purchased' AND p.refunded_amount_minor=0 AND o.review_required=0 AND o.environment=?4 AND o.order_state IN ('FULFILLED','FULFILLMENT_PENDING') AND (e.expires_at IS NULL OR e.expires_at>?3) ORDER BY e.granted_at DESC LIMIT 1`).bind(customerId,productId,new Date().toISOString(),commerceEnvironment(env)).first();
   return dbFrom(env).prepare(`SELECT entitlement_id,watermark_status,watermarked_object_key FROM digital_entitlements WHERE customer_id=?1 AND product_id=?2 AND entitlement_status='active' AND (expires_at IS NULL OR expires_at>?3) ORDER BY granted_at DESC LIMIT 1`).bind(customerId,productId,new Date().toISOString()).first();
 }
 export async function fulfillCommerceOrder({env,order,session,eventId,clock=Date.now}){
@@ -679,6 +681,7 @@ export async function issueDownloadToken({
 export async function consumeDownloadToken({
   env,
   rawToken,
+  customerId=null,
   clock = Date.now
 }) {
   const db = dbFrom(env);
@@ -694,21 +697,30 @@ export async function consumeDownloadToken({
       e.entitlement_status,
       e.watermark_status,
       e.watermarked_object_key,
-      p.purchase_state
+      e.product_id,e.customer_id,e.purchase_id,e.expires_at AS entitlement_expires_at,
+      p.product_id AS purchase_product_id,p.customer_id AS purchase_customer_id,p.purchase_state,p.refunded_amount_minor,
+      o.product_id AS order_product_id,o.customer_id AS order_customer_id,o.context_json,o.environment,o.order_state,o.review_required
     FROM commerce_download_tokens t
     JOIN digital_entitlements e ON e.entitlement_id = t.entitlement_id
     JOIN commerce_purchases p ON p.purchase_id = e.purchase_id
+    LEFT JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=p.checkout_attempt_id
     WHERE t.token_hash = ?1
       AND t.revoked_at IS NULL
       AND t.expires_at > ?2
       AND t.use_count < t.max_uses
       AND e.entitlement_status = 'active'
+      AND (e.expires_at IS NULL OR e.expires_at > ?2)
       AND e.watermark_status = 'ready'
       AND e.watermarked_object_key IS NOT NULL
       AND p.purchase_state = 'purchased'
     LIMIT 1
   `).bind(tokenHash, now).first();
   if (!authorization) return null;
+  if(bookLanguageIdentity(authorization.product_id)){
+    if(!customerId||customerId!==authorization.customer_id||customerId!==authorization.purchase_customer_id||customerId!==authorization.order_customer_id||authorization.product_id!==authorization.purchase_product_id||authorization.product_id!==authorization.order_product_id||authorization.environment!==commerceEnvironment(env)||authorization.review_required||authorization.refunded_amount_minor||!['FULFILLED','FULFILLMENT_PENDING'].includes(authorization.order_state))return null;
+    try{authorization.bookPdf=orderBookPdfSource({...authorization,product_id:authorization.product_id});}catch{return null;}
+    if(authorization.watermarked_object_key!==`private/books/${authorization.product_id.toLowerCase()}/watermarked/${authorization.purchase_id}.pdf`)return null;
+  }
 
   const result = await db.prepare(`
     UPDATE commerce_download_tokens
@@ -839,6 +851,8 @@ export async function markWatermarkReady({
 }) {
   const db = dbFrom(env);
   const now = nowIso(clock);
+  const job=await watermarkJobById(env,watermarkJobId);
+  if(job){const payload=JSON.parse(await decryptSensitive(job.watermark_payload_ciphertext,env.BOOK_ACCESS_TOKEN_SECRET));if(payload.bookPdf){const b=payload.bookPdf,head=await env.BOOKS?.head?.(destinationObjectKey),m=head?.customMetadata||{};if(destinationObjectKey!==job.destination_object_key||m.productId!==b.productId||m.language!==b.language||m.sourceSha256!==b.sourceSha256||m.purchaseId!==job.purchase_id||Number(m.pageCount)!==b.pageCount)throw Object.assign(Error('Watermarked PDF identity or completeness mismatch.'),{status:409,code:'book_pdf_identity_mismatch'});}}
   await db.batch([
     db.prepare(`
       UPDATE commerce_watermark_jobs

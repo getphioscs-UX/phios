@@ -66,7 +66,12 @@ async function render() {
       ? `<div class="wpr-cross-volume"><span>00</span><div><strong>${escapeHtml(partsRegistry.part_0.title?.[locale] || partsRegistry.part_0.title?.en)}</strong><p>${escapeHtml(t('knowledge.production.crossVolume'))}</p></div></div>`
       : '';
 
-    const bookOneActions = bookId === 'book-1'
+    const bookOneActions = Number(book.volume)<=4
+      ? `<p>${locale==='zh-Hans'?'每册每个语言版本 RM89，中文与英文分别购买。购买后从个人书库下载对应语言的完整 PDF，并可经权限验证重新下载。网站整本阅读属于后续增值功能。':'RM89 per book, per language. Chinese and English are sold separately. Download the complete purchased PDF from your personal library, with verified re-downloads. Whole-book web reading is a later extra.'}</p>
+         <a class="knowledge-action knowledge-action--primary" href="/account?product=COM-BOOK-0${book.volume}-ZH#commerce">${locale==='zh-Hans'?'选择中文 PDF · RM89':'Choose Chinese PDF · RM89'}</a>
+         <a class="knowledge-action" href="/account?product=COM-BOOK-0${book.volume}-EN#commerce">${locale==='zh-Hans'?'选择英文 PDF · RM89':'Choose English PDF · RM89'}</a>
+         <a class="knowledge-action" href="/account#commerce">${locale==='zh-Hans'?'我的书库与下载':'My library & downloads'}</a>`
+      : bookId === 'book-1'
       ? `<a class="knowledge-action knowledge-action--primary" href="/checkout">${escapeHtml(t('knowledge.production.bookOnePurchase'))}</a>
          <a class="knowledge-action" href="/book-one-preview">${escapeHtml(t('knowledge.production.bookOnePreview'))}</a>`
       : `<span class="wpr-status">${escapeHtml(t('knowledge.production.futureVolumeBoundary'))}</span>`;

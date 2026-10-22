@@ -34,13 +34,30 @@ const bookOnePrefix=json('content/web-production/client-visual-consumption/succe
 assert.equal(bookOnePrefix.status,'ENGINEERING_RECONCILIATION');
 assert.equal(bookOnePrefix.registryPath,bookViAssets.registryPath);
 assert.equal(bookOnePrefix.predecessorSha256,bookViAssets.currentSha256);
-assert.equal(bookOnePrefix.currentSha256,sha256(bookViAssets.registryPath));
+const founderAssets=json('content/web-production/client-visual-consumption/successors/founder-public-assets-successor-v2.json');
+assert.equal(founderAssets.status,'ENGINEERING_RECONCILIATION');
+assert.equal(founderAssets.predecessor,'content/web-production/client-visual-consumption/successors/book-one-prefix-successor-v1.json');
+assert.equal(founderAssets.predecessorSha256,sha256(founderAssets.predecessor));
+assert.equal(founderAssets.registryPath,bookViAssets.registryPath);
+assert.equal(founderAssets.previousSha256,bookOnePrefix.currentSha256);
+assert.equal(sha256(founderAssets.previousPath),founderAssets.previousSha256);
+assert.equal(sha256(founderAssets.registryPath),founderAssets.currentSha256);
+for(const key of ['historicalRecordsRewritten','remoteVerificationPerformedByThisReconciliation','productionAcceptanceGranted'])assert.equal(founderAssets[key],false);
+assert.deepEqual(founderAssets.addedRecords.map(a=>a.asset_code),['FOUNDER-HERO-001','FOUNDER-PORTRAIT-001']);
+const currentAssetRegistry=json(founderAssets.registryPath);
+assert.equal(currentAssetRegistry.assets.length,159);
+for(const added of founderAssets.addedRecords){
+ const matches=currentAssetRegistry.assets.filter(a=>a.asset_code===added.asset_code);
+ assert.equal(matches.length,1);assert.deepEqual(matches[0],added);
+ assert.equal(added.category,'founder-portrait');assert.equal(added.page_acceptance,'PENDING_HUMAN_REVIEW');
+}
+assert.deepEqual({...currentAssetRegistry,assets:currentAssetRegistry.assets.filter(a=>!founderAssets.addedRecords.some(x=>x.asset_code===a.asset_code))},json(founderAssets.previousPath),'Only the two registered Founder assets may extend the Book I registry');
 assert.equal(bookOnePrefix.remoteVerificationAdvanced,false);assert.equal(bookOnePrefix.productionAcceptanceGranted,false);
 assert.deepEqual(bookOnePrefix.changedAssetCodes,['BOOK-1-PREVIEW','BOOK-1-FIGURES']);
 assert.equal(bookViAssets.productionAdmissionChanged,false);
 assert.equal(bookViAssets.remoteVerificationPerformedByThisReconciliation,false);
 assert.deepEqual(bookViAssets.addedAssetCodes,'ABCDEFGH'.split('').map(x=>'FIG_13'+x));
-const fullAssets=json(bookViAssets.registryPath),bookViSource=json(bookViAssets.source);
+const fullAssets=json(founderAssets.previousPath),bookViSource=json(bookViAssets.source);
 assert.equal(fullAssets.assets.length,157);
 for(const code of bookViAssets.addedAssetCodes){
   const matches=fullAssets.assets.filter(a=>a.asset_code===code),source=bookViSource.assets.find(a=>a.assetId===code);

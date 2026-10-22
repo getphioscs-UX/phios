@@ -10,7 +10,7 @@ import { verifyStripeQaAccount, createCanonicalStripeCustomer, createCommerceChe
 import { sha256Hex } from './commerce-crypto.js';
 import { json,commerceError,readJsonBody,localeFrom } from './commerce-http.js';
 import {commerceLog} from './commerce-observability.js';
-import {resolveCommerceBookSourceKey} from './book-product-registry.js';
+import {resolveCommerceBookSourceKey,bookLanguageIdentity,requireBookPdfReadiness} from './book-product-registry.js';
 import {controlledPurchaseOffer} from './controlled-purchase-candidate.js';
 import {readContinuityQuota} from '../personal-reading/continuity/continuity-quota-d1.js';
 import {continuityRefillProduct,CONTINUITY_COMMERCIAL_AUTHORITY as continuityAuthority} from '../personal-reading/continuity/continuity-commercial-authority.js';
@@ -28,7 +28,7 @@ function sameOrigin(request){
 export async function commerceApi(context,action){
   const {request,env={},fetch:fetcher}=context;
   try{
-    if(action==='catalog') return json({success:true,environment:commerceEnvironment(env),liveEnabled:commerceEnvironment(env)==='LIVE'&&commerceCheckoutAvailable(env),checkoutAvailable:commerceCheckoutAvailable(env),products:STRIPE_PRODUCT_REGISTRY.filter(p=>p.active).map(({qaPriceId,qaProductId,livePriceId,liveProductId,...p})=>{
+    if(action==='catalog') return json({success:true,environment:commerceEnvironment(env),liveEnabled:commerceEnvironment(env)==='LIVE'&&commerceCheckoutAvailable(env),checkoutAvailable:commerceCheckoutAvailable(env),products:STRIPE_PRODUCT_REGISTRY.filter(p=>p.active&&p.catalogVisible!==false).map(({qaPriceId,qaProductId,livePriceId,liveProductId,...p})=>{
       let reportPresentationOptions=null,reportPurchaseState=null;
       if(isLanguageReport(p)){
         try{
@@ -42,7 +42,7 @@ export async function commerceApi(context,action){
         }
       }
       const setup=env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(p)&&!p.productId.includes('BUNDLE')?{methodCode:paidReportMethodForProduct(p.productId)?.methodCode||null,admitted:paidReportMethodForProduct(p.productId)?.p8Admitted===true}:null;
-      return {...p,paidReportSetup:setup,checkoutAvailable:!p.checkoutBlockedReason&&commerceCheckoutAvailable(env)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:commerceEnvironment(env)==='QA'&&commerceCheckoutAvailable(env)&&continuityAuthority.refill.priceMode==='INLINE_ONE_TIME_PRICE_DATA'&&env.PHIOS_CONTINUITY_QUOTA_ENABLED==='true'}:{}),reportPresentationOptions,reportPurchaseState};
+      return {...p,paidReportSetup:setup,checkoutAvailable:!p.checkoutBlockedReason&&(!p.requiresBookPdfReadiness||env.PHIOS_BOOK_PDF_CHECKOUT_ENABLED==='true')&&commerceCheckoutAvailable(env)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:commerceEnvironment(env)==='QA'&&commerceCheckoutAvailable(env)&&continuityAuthority.refill.priceMode==='INLINE_ONE_TIME_PRICE_DATA'&&env.PHIOS_CONTINUITY_QUOTA_ENABLED==='true'}:{}),reportPresentationOptions,reportPurchaseState};
     }),eligibleBundleProducts:standardBundleProducts()});
     const customerId=requireIdentity(context);
     if(action==='account') return json({success:true,...await commerceAccountProjection(env,customerId)});
@@ -54,7 +54,7 @@ export async function commerceApi(context,action){
     }
     const origin=sameOrigin(request);
     if(action==='book-download'){
-      const body=await readJsonBody(request),p=commerceProduct(body.productId);
+      const body=await readJsonBody(request);if(Object.keys(body).some(k=>k!=='productId'))return json({success:false,error:'book_download_input_invalid'},422);const p=commerceProduct(body.productId);
       if(p.category!=='BOOK') return json({success:false,error:'book_required'},422);
       const record=await ownedCommerceBook(env,customerId,p.productId);
       if(!record) return json({success:false,error:'book_access_required'},403);
@@ -79,14 +79,14 @@ export async function commerceApi(context,action){
     if(Object.keys(body).some(k=>!allowed.has(k))) throw Object.assign(new Error('Only canonical product input is accepted.'),{status:422,code:'checkout_input_invalid'});
     let product=commerceProduct(body.productId);if(product.checkoutBlockedReason)throw Object.assign(Error(product.checkoutBlockedReason),{status:503,code:product.checkoutBlockedReason});const selected=commerceSelection(product.productId,body.selectedProducts||[]);
     // A registered price does not establish that the private book can be delivered.
-    if(product.category==='BOOK') resolveCommerceBookSourceKey(env,product.productId);
+    let bookPdf=null;if(product.category==='BOOK'){if(bookLanguageIdentity(product.productId))bookPdf=await requireBookPdfReadiness(env,product.productId);else resolveCommerceBookSourceKey(env,product.productId);}
     if(body.acceptDigitalPolicy!==true) throw Object.assign(new Error('Accept purchase terms.'),{status:422,code:'digital_policy_acceptance_required'});
     const supplied=request.headers.get('idempotency-key')||'';
     if(!/^[A-Za-z0-9._:-]{16,120}$/.test(supplied)) throw Object.assign(new Error('Idempotency key required.'),{status:422,code:'idempotency_key_required'});
     // Context stores only an opaque existing report reference, never raw intake.
     const reference=body.context?.readingId;
     if(body.context&&(Object.keys(body.context).some(k=>!['readingId','reportIntentId'].includes(k))||(reference!==undefined&&(typeof reference!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(reference)))||(body.context.reportIntentId!==undefined&&(typeof body.context.reportIntentId!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(body.context.reportIntentId))))) throw Object.assign(new Error('Invalid report reference.'),{status:422,code:'checkout_context_invalid'});
-    const contextSnapshot=reference?{readingId:reference}:{};
+    const contextSnapshot=reference?{readingId:reference}:{};if(bookPdf)contextSnapshot.bookPdf=bookPdf;
     if(body.purchaseKind!==undefined){
       if(env.PHIOS_CONTINUITY_QUOTA_ENABLED!=='true'||commerceEnvironment(env)!=='QA')throw Object.assign(Error('CONTINUITY_REFILL_NOT_ACTIVATED'),{status:403});
       if(body.purchaseKind!=='CONTINUITY_QUOTA_REFILL'||product.productId!=='COM-SUBSCRIPTION-MONTHLY')throw Object.assign(Error('CONTINUITY_REFILL_PRODUCT_REQUIRED'),{status:422});

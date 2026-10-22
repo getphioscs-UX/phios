@@ -1,0 +1,32 @@
+diff --git a/docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json b/docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json
+index 26824569..3c5e5429 100644
+--- a/docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json
++++ b/docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json
+@@ -1,5 +1,5 @@
+ {
+-  "recordedAt": "2026-10-21T03:17:52.361Z",
++  "recordedAt": "2026-10-21T03:31:37.229Z",
+   "npmHooksGuarded": true,
+   "ordinaryRegressionAliasesGuarded": true,
+   "pagesBuildGuarded": true,
+diff --git a/scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs b/scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs
+index 5476de38..737234c9 100644
+--- a/scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs
++++ b/scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs
+@@ -139,7 +139,15 @@ for(const k of ['productionAdmissionChanged','acceptedBindingsChanged','canonica
+ assert.deepEqual(evidenceUi.changes.map(c=>c.path),['assets/js/pages/civilization-atlas/world-experience-r2.js','assets/js/pages/civilization-atlas/world-reading-context.js','functions/api/world-observations.js']);
+ assert.deepEqual(evidenceUi.dependencies.map(d=>d.path),['functions/_lib/world-evidence.js','content/world/world-evidence-series-v1.json','content/world/world-evidence-observations-v1.json']);
+ for(const d of evidenceUi.dependencies)assert.equal(digest(d.path),d.sha256,'World evidence dependency drift: '+d.path);
+-function worldUxDigest(p,prior){const c=worldUx.changes.find(c=>c.path===p);if(!c){const ui=evidenceUi.changes.find(x=>x.path===p);if(!ui)return prior;assert.equal(ui.previousSha256,prior);assert.equal(digest(ui.previousPath),prior);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(ui.changeClass));return ui.successorSha256;}assert.equal(c.previousSha256,prior);assert.equal(digest(c.previousPath),prior);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(c.changeClass));let expected=c.successorSha256;const n=worldIntegrated.changes.find(x=>x.path===p);if(n){assert.equal(n.previousSha256,expected);assert.equal(digest(n.previousPath),expected);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(n.changeClass));expected=n.successorSha256;}const e=entryReading.changes.find(x=>x.path===p);if(e){assert.equal(e.previousSha256,expected);assert.equal(digest(e.previousPath),expected);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(e.changeClass));expected=e.successorSha256;}const ui=evidenceUi.changes.find(x=>x.path===p);if(ui){assert.equal(ui.previousSha256,expected);assert.equal(digest(ui.previousPath),expected);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(ui.changeClass));expected=ui.successorSha256;}assert.equal(digest(p),expected,'World UX successor drift: '+p);return expected;}
++const localExplanation=json('content/civilization-atlas/maintenance/book-v-world-local-explanation-successor-v10.json');
++assert.equal(localExplanation.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');assert.equal(localExplanation.humanDecision,'PENDING');
++assert.equal(localExplanation.predecessor,'content/civilization-atlas/maintenance/book-v-world-evidence-ui-successor-v9.json');assert.equal(localExplanation.predecessorSha256,digest(localExplanation.predecessor));
++for(const k of ['productionAdmissionChanged','acceptedBindingsChanged','canonicalTheoryChanged'])assert.equal(localExplanation[k],false);
++assert.deepEqual(localExplanation.changes.map(c=>c.path),['assets/js/pages/civilization-atlas/world-experience-r2.js']);
++assert.deepEqual(localExplanation.dependencies.map(d=>d.path),['assets/js/pages/civilization-atlas/world-customer-answer.js','functions/api/world-question-explanation.js','functions/_lib/world-published-explanation.js']);
++for(const d of localExplanation.dependencies)assert.equal(digest(d.path),d.sha256,'World local explanation dependency drift: '+d.path);
++function localExplanationDigest(p,prior){const c=localExplanation.changes.find(c=>c.path===p);if(!c)return prior;assert.equal(c.previousSha256,prior);assert.equal(digest(c.previousPath),prior);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(c.changeClass));return c.successorSha256;}
++function worldUxDigest(p,prior){const c=worldUx.changes.find(c=>c.path===p);if(!c){const ui=evidenceUi.changes.find(x=>x.path===p);if(!ui)return prior;assert.equal(ui.previousSha256,prior);assert.equal(digest(ui.previousPath),prior);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(ui.changeClass));return ui.successorSha256;}assert.equal(c.previousSha256,prior);assert.equal(digest(c.previousPath),prior);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(c.changeClass));let expected=c.successorSha256;const n=worldIntegrated.changes.find(x=>x.path===p);if(n){assert.equal(n.previousSha256,expected);assert.equal(digest(n.previousPath),expected);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(n.changeClass));expected=n.successorSha256;}const e=entryReading.changes.find(x=>x.path===p);if(e){assert.equal(e.previousSha256,expected);assert.equal(digest(e.previousPath),expected);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(e.changeClass));expected=e.successorSha256;}const ui=evidenceUi.changes.find(x=>x.path===p);if(ui){assert.equal(ui.previousSha256,expected);assert.equal(digest(ui.previousPath),expected);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(ui.changeClass));expected=ui.successorSha256;}expected=localExplanationDigest(p,expected);assert.equal(digest(p),expected,'World UX successor drift: '+p);return expected;}
+ for(const c of worldR2.changes){const previous=c.path===worldPresentation.change.path?worldPresentation.change:worldPresentation.sourceChanges.find(x=>x.path===c.path);assert.equal(c.previousSha256,previous.successorSha256);assert.equal(digest(c.previousPath),c.previousSha256);assert.equal(digest(c.path),worldUxDigest(c.path,c.successorSha256));assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(c.changeClass));}
+ for(const d of worldR2.dependencies)assert.equal(digest(d.path),worldUxDigest(d.path,d.sha256),'R2 consumer dependency drift: '+d.path);
+ const observations='<section class="knowledge-shell" data-world-observations></section>';

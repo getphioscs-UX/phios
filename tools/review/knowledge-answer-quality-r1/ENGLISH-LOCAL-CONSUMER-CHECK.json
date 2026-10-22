@@ -1,0 +1,65 @@
+{
+  "at": "2026-10-21T09:53:00.373Z",
+  "status": "VERIFIED_EXISTING_BOOK2_SCOPED_LOCAL_SOURCE_CONSUMER_ONLY",
+  "inputs": [
+    {
+      "path": ".tmp/world-convergence-private/book2-en-scoped-qa-manifest.json",
+      "sha256": "f2dc3e42a2d42fa2061f058938dbf121473f1ac6483a2ea93943137f918c6353"
+    },
+    {
+      "path": ".tmp/world-convergence-private/book2-en-scoped-qa-corpus.json",
+      "sha256": "5ee4ffdddf097ca7dc4e30f941d3ff2384486aa1314c59d0157dfe04afecbe3b"
+    }
+  ],
+  "rows": [
+    {
+      "id": "influence",
+      "http": 200,
+      "expectedSection": "CM-B2V1-P6-S048",
+      "matched": true,
+      "sourceDigests": [
+        "0a2dc36302c44f5f82c47f74480ab603e5a394895422eef34aa97a5419e5d58c"
+      ],
+      "contentLogged": false
+    },
+    {
+      "id": "release",
+      "http": 200,
+      "expectedSection": "CM-B2V1-P6-S049",
+      "matched": true,
+      "sourceDigests": [
+        "0a2dc36302c44f5f82c47f74480ab603e5a394895422eef34aa97a5419e5d58c"
+      ],
+      "contentLogged": false
+    },
+    {
+      "id": "projection",
+      "http": 200,
+      "expectedSection": "CM-B2V1-P7-S002",
+      "matched": true,
+      "sourceDigests": [
+        "0a2dc36302c44f5f82c47f74480ab603e5a394895422eef34aa97a5419e5d58c"
+      ],
+      "contentLogged": false
+    },
+    {
+      "id": "no-capability",
+      "http": 200,
+      "privateEnglishSourceDenied": true
+    },
+    {
+      "id": "forged-capability",
+      "http": 200,
+      "privateEnglishSourceDenied": true
+    },
+    {
+      "id": "production",
+      "http": 200,
+      "privateEnglishSourceDenied": true
+    }
+  ],
+  "book3And4": "NO_CAPABILITY_OR_INDEX_MINTED_THIS_RUN",
+  "providerCalls": 0,
+  "outbound": 0,
+  "productionActivation": false
+}

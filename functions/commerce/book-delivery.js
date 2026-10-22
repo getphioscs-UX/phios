@@ -70,6 +70,7 @@ export async function dispatchWatermark({
       payload: {
         jobId: job.watermark_job_id,
         sourceObjectKey: job.source_object_key,
+        ...(watermark.bookPdf?{sourceBinding:watermark.bookPdf.binding,sourceSha256:watermark.bookPdf.sourceSha256,expectedPageCount:watermark.bookPdf.pageCount,bookCode:watermark.bookPdf.bookCode,language:watermark.bookPdf.language}:{}),
         destinationObjectKey: job.destination_object_key,
         watermark,
         callbackUrl: `${String(

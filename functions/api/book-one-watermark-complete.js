@@ -1,3 +1,4 @@
+import {decryptSensitive} from '../commerce/commerce-crypto.js';
 import {
   markWatermarkFailed,
   markWatermarkReady,
@@ -82,6 +83,7 @@ export async function onRequestPost({
         code: 'watermarked_object_missing'
       });
     }
+    const identity=JSON.parse(await decryptSensitive(job.watermark_payload_ciphertext,env.BOOK_ACCESS_TOKEN_SECRET));if(identity.bookPdf){const b=identity.bookPdf,m=object.customMetadata||{};if(m.productId!==b.productId||m.language!==b.language||m.sourceSha256!==b.sourceSha256||m.purchaseId!==job.purchase_id||Number(m.pageCount)!==b.pageCount)throw Object.assign(Error('Completed PDF does not match the purchased version.'),{status:409,code:'book_pdf_identity_mismatch'});}
     await markWatermarkReady({
       env,
       watermarkJobId: job.watermark_job_id,

@@ -14,7 +14,9 @@ export async function onRequestGet({ env = {} }) {
   return json({
     success: true,
     product: publicProduct(),
-    checkoutReady: readiness.checkoutReady,
+    checkoutReady: false,
+    purchaseUrl:'/account#commerce',
+    languageVersions:['COM-BOOK-01-ZH','COM-BOOK-01-EN'],
     deliveryReady: (
       readiness.privateBookBucketBound &&
       readiness.sourceBookPresent &&

@@ -1,0 +1,69 @@
+{
+  "denied": {
+    "mode": "MODEL_SYNTHESIS_NOT_EXECUTED",
+    "providerCalls": 0,
+    "sourceReady": false,
+    "authorizationPresent": false,
+    "productionAdmission": false,
+    "estimatedUSD": null,
+    "estimateBasis": "NO_VERIFIED_RATE_CARD",
+    "maxOutputTokens": 900,
+    "mayInvoke": false,
+    "blockers": [
+      "EVIDENCE_NOT_SUFFICIENT",
+      "INDEPENDENT_FEE_AUTHORIZATION_REQUIRED",
+      "EXISTING_KIR_RUNTIME_ADMISSION_OFF",
+      "VERIFIED_MODEL_RATE_AND_INPUT_BUDGET_REQUIRED"
+    ],
+    "modelOwner": "EXISTING_KIR_MODEL_GATEWAY",
+    "newAskEngine": false
+  },
+  "missingBudget": {
+    "mode": "MODEL_SYNTHESIS_NOT_EXECUTED",
+    "providerCalls": 0,
+    "sourceReady": true,
+    "authorizationPresent": false,
+    "productionAdmission": true,
+    "estimatedUSD": null,
+    "estimateBasis": "NO_VERIFIED_RATE_CARD",
+    "maxOutputTokens": 900,
+    "mayInvoke": false,
+    "blockers": [
+      "INDEPENDENT_FEE_AUTHORIZATION_REQUIRED",
+      "VERIFIED_MODEL_RATE_AND_INPUT_BUDGET_REQUIRED"
+    ],
+    "modelOwner": "EXISTING_KIR_MODEL_GATEWAY",
+    "newAskEngine": false
+  },
+  "plan": {
+    "mode": "MODEL_SYNTHESIS_NOT_EXECUTED",
+    "providerCalls": 0,
+    "sourceReady": true,
+    "authorizationPresent": true,
+    "productionAdmission": true,
+    "estimatedUSD": 0.0033,
+    "estimateBasis": "CALLER_SUPPLIED_PLANNING_RATES_NOT_VERIFIED_PRICE",
+    "maxOutputTokens": 900,
+    "mayInvoke": true,
+    "blockers": [],
+    "modelOwner": "EXISTING_KIR_MODEL_GATEWAY",
+    "newAskEngine": false
+  },
+  "syntheticRatesAreNotProviderPrices": true,
+  "requestProof": {
+    "endpoint": "api.openai.com",
+    "maxOutputTokens": 900,
+    "store": false,
+    "evidenceBound": true
+  },
+  "testDoubleCalls": 1,
+  "realProviderCalls": 0,
+  "costUSD": 0,
+  "independentAuthorizationNeeded": [
+    "provider/model and allowed task",
+    "one-call/output/input limits",
+    "maximum USD with current verified rate card",
+    "explicit data scope and account/entitlement owner approval",
+    "existing KIR runtime admission; no production activation in this task"
+  ]
+}
