@@ -1,0 +1,38 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {localAccount} from './local-account.mjs';
+import {draftApi,loadOwnedDraft} from '../../functions/account/financial-will-draft-store.js';
+import {previewWillImport,confirmWillImport,willIntentDigest} from '../../functions/account/financial-will-import.js';
+import {createFinancialGrant,revokeFinancialGrant} from '../../functions/professional/consent/financial-purpose-grants.js';
+const expiresAt=()=>new Date(Date.now()+86400000).toISOString();
+test('retrying the same initial import proposal cannot create a second Will draft',async()=>{const a=localAccount(),f=await save(a,'FINANCIAL',{asOfDate:'2026-10-19',baseCurrency:'MYR',inventory:{assets:[{recordId:'bank',label:'Synthetic bank',value:'100',representation:'EXACT',disclosureState:'SELF_REPORTED'}]}});const grant=await createFinancialGrant(a.context({}),{source:f.savedDraftRef,purpose:'WILL_ASSEMBLY',scopes:['assets'],expiresAt:expiresAt()}),body={savedDraftRef:f.savedDraftRef,grantId:grant.grantId,scopes:['assets'],expiresAt:expiresAt()},preview=await previewWillImport(a.context({}),body),request={...body,mappingDigest:preview.mappingDigest,confirmed:true};const first=await(await confirmWillImport(a.context({}),request)).json(),second=await(await confirmWillImport(a.context({}),request)).json();assert.equal(first.ok,true);assert.equal(second.reused,true);assert.equal(second.draftId,first.draftId);assert.equal(a.sql.prepare("SELECT COUNT(*) AS n FROM account_financial_will_drafts WHERE draft_type='WILL'").get().n,1);a.sql.close();});
+async function save(a,kind,payload,prior){const r=await draftApi(a.context({action:'save',draftType:kind,payload,purpose:kind==='WILL'?'WILL_ASSEMBLY':'FINANCIAL_PLANNING',saveConsent:true,retentionConsent:true,expiresAt:expiresAt(),draftId:prior?.draftId,expectedVersion:prior?.version||0}));assert.equal(r.status,200,await r.clone().text());return r.json();}
+test('Will preview/confirm/update preserves intent and history; exact chosen financial revision survives newer latest',async()=>{
+ const a=localAccount(),p={asOfDate:'2026-10-19',baseCurrency:'MYR',inventory:{assets:[{recordId:'asset-one',type:'BANK_ACCOUNT',label:'Savings',value:'5000',representation:'EXACT',disclosureState:'SELF_REPORTED'}],liabilities:[],guarantees:[]}};
+ const f1=await save(a,'FINANCIAL',p),f2=await save(a,'FINANCIAL',{...p,inventory:{...p.inventory,assets:[{...p.inventory.assets[0],value:'6000'}]}},f1);
+ const will=await save(a,'WILL',{dataDate:'2026-10-19',jurisdiction:'MY',currency:'MYR',sections:{executors:{status:'PARTIAL',items:[{personId:'trusted-person',instruction:'Original wish'}]},gifts:{status:'PARTIAL',items:[{instruction:'Keep my original intention'}]}}});
+ const grant=await createFinancialGrant(a.context({}),{source:f1.savedDraftRef,purpose:'WILL_ASSEMBLY',scopes:['assets'],expiresAt:expiresAt()});
+ const body={savedDraftRef:f1.savedDraftRef,willRef:will.savedDraftRef,grantId:grant.grantId,scopes:['assets']};
+ const preview=await previewWillImport(a.context({}),body);assert.equal(preview.sections.assets.items[0].value,'5000');assert.equal(preview.sections.beneficiaries,undefined);
+ const response=await confirmWillImport(a.context({}),{...body,mappingDigest:preview.mappingDigest,confirmed:true});assert.equal(response.status,200,await response.clone().text());const w2=await response.json();
+ const old=await loadOwnedDraft(a.context({}),{draftId:will.draftId,version:1});const current=await loadOwnedDraft(a.context({}),{draftId:will.draftId,version:2});assert.equal(await willIntentDigest(old.payload),await willIntentDigest(current.payload));assert.equal(old.payload.sections.assets,undefined);
+ const grant2=await createFinancialGrant(a.context({}),{source:f2.savedDraftRef,purpose:'WILL_ASSEMBLY',scopes:['assets'],expiresAt:expiresAt()});
+ const update={savedDraftRef:f2.savedDraftRef,willRef:w2.savedDraftRef,grantId:grant2.grantId,scopes:['assets']};const diff=await previewWillImport(a.context({}),update);assert.equal(diff.changes[0].changed,true);assert.equal((await loadOwnedDraft(a.context({}),{draftId:will.draftId,version:2})).payload.sections.assets.items[0].value,'5000');
+ await revokeFinancialGrant(a.context({}),grant2.grantId);await assert.rejects(confirmWillImport(a.context({}),{...update,mappingDigest:diff.mappingDigest,confirmed:true}),{code:'PURPOSE_GRANT_INACTIVE'});a.sql.close();
+});
+
+test('stale mapping, target CAS, expired grant and deleted source reject confirmation; historic imported wishes remain editable',async()=>{
+ const a=localAccount(),p={asOfDate:'2026-10-19',baseCurrency:'MYR',inventory:{assets:[{recordId:'a',label:'Synthetic savings',value:'5000',representation:'EXACT',disclosureState:'SELF_REPORTED'}]}};
+ const f=await save(a,'FINANCIAL',p),w=await save(a,'WILL',{dataDate:'2026-10-19',jurisdiction:'MY',currency:'MYR',sections:{gifts:{status:'PARTIAL',items:[{instruction:'Original wish'}]}}});
+ const grant=await createFinancialGrant(a.context({}),{source:f.savedDraftRef,purpose:'WILL_ASSEMBLY',scopes:['assets'],expiresAt:expiresAt()});
+ const body={savedDraftRef:f.savedDraftRef,willRef:w.savedDraftRef,grantId:grant.grantId,scopes:['assets']},preview=await previewWillImport(a.context({}),body);
+ await assert.rejects(confirmWillImport(a.context({}),{...body,mappingDigest:'forged',confirmed:true}),{code:'WILL_IMPORT_PREVIEW_STALE'});
+ const updated=await save(a,'WILL',{dataDate:'2026-10-19',jurisdiction:'MY',currency:'MYR',sections:{gifts:{status:'PARTIAL',items:[{instruction:'New wish from second window'}]}}},w);
+ const conflict=await confirmWillImport(a.context({}),{...body,mappingDigest:preview.mappingDigest,confirmed:true});assert.equal((await conflict.json()).code,'DRAFT_VERSION_CONFLICT');
+ const currentBody={...body,willRef:updated.savedDraftRef},current=await previewWillImport(a.context({}),currentBody),imported=await(await confirmWillImport(a.context({}),{...currentBody,mappingDigest:current.mappingDigest,confirmed:true})).json();
+ const saved=await loadOwnedDraft(a.context({}),{draftId:imported.draftId,version:imported.version});await revokeFinancialGrant(a.context({}),grant.grantId);
+ const wishes=structuredClone(saved.payload);wishes.sections.gifts.items[0].instruction='Customer explicit new wish';const next=await save(a,'WILL',wishes,imported);assert.equal(next.version,imported.version+1);
+ const forged=structuredClone(wishes);forged.sections.assets.items[0].value='9999';const denied=await draftApi(a.context({action:'save',draftType:'WILL',purpose:'WILL_ASSEMBLY',payload:forged,saveConsent:true,retentionConsent:true,expiresAt:expiresAt(),draftId:next.draftId,expectedVersion:next.version}));assert.equal((await denied.json()).code,'WILL_IMPORTED_FACT_UPDATE_REQUIRES_PROPOSAL');
+ const g2=await createFinancialGrant(a.context({}),{source:f.savedDraftRef,purpose:'WILL_ASSEMBLY',scopes:['assets'],expiresAt:expiresAt()});const b2={...body,willRef:next.savedDraftRef,grantId:g2.grantId};const p2=await previewWillImport(a.context({}),b2);a.sql.prepare('UPDATE financial_purpose_grants SET expires_at=1 WHERE grant_id=?').run(g2.grantId);await assert.rejects(confirmWillImport(a.context({}),{...b2,mappingDigest:p2.mappingDigest,confirmed:true}),{code:'PURPOSE_GRANT_INACTIVE'});
+ const g3=await createFinancialGrant(a.context({}),{source:f.savedDraftRef,purpose:'WILL_ASSEMBLY',scopes:['assets'],expiresAt:expiresAt()});const b3={...b2,grantId:g3.grantId},p3=await previewWillImport(a.context({}),b3);a.sql.prepare('DELETE FROM account_financial_will_drafts WHERE draft_id=?').run(f.draftId);await assert.rejects(confirmWillImport(a.context({}),{...b3,mappingDigest:p3.mappingDigest,confirmed:true}),{code:'DRAFT_NOT_FOUND'});a.sql.close();
+});

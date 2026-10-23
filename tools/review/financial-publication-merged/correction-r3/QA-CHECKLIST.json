@@ -1,5 +1,5 @@
 {
-  "status": "HUMAN_REVIEW_CANDIDATE",
+  "status": "LOCAL_CLOSEOUT_PARTIAL_BLOCKED",
   "reviewer": "LOCAL_AGENT_QA",
   "independentHumanSignature": false,
   "independentMethod": "Actual PDF text extraction vs original frozen FCR, independent of renderer field labels. Not a second human audit.",
@@ -7,7 +7,7 @@
     {
       "id": "Q1_TYPED_AND_SOURCE_BOUNDARY",
       "status": "PASS",
-      "evidence": "correction-r3/merged.tap; 28/28 PASS, source matching, funding initial/restricted classification, native currency and internal-transfer exclusion"
+      "evidence": "correction-r3/merged.tap;36/36 PASS including8 closeout tests"
     },
     {
       "id": "Q1_ACTUAL_PDF_SEMANTICS",
@@ -60,39 +60,49 @@
     {
       "id": "Q5_LONG_APPENDIX",
       "status": "PASS_LOCAL_SYNTHETIC",
-      "evidence": "91 pages;12 admitted people,29 assets,24 policy events,32 expenses,40/47 retirement paths,60 education rows,24 documents,32 events; actual local encrypted save and revocation"
+      "evidence": "80 actual pages; source row equality, existing encrypted-save/grant-revocation receipt preserved"
     },
     {
       "id": "Q7_HUMAN_ACCEPT",
       "status": "PENDING_USER_REVIEW",
       "owner": "Human user",
       "signature": null
+    },
+    {
+      "id": "C2_MAIN_FIXED_SELECTABLE",
+      "status": "BLOCKED_APPROVED_COPY_SOURCE_REQUIRED",
+      "evidence": "closeout-r32/*-fixed-copy-audit.json; native proof is separate, not approval"
+    },
+    {
+      "id": "C6_MISSING_NO_FILLER",
+      "status": "PASS",
+      "evidence": "22 core,0 appendix"
     }
   ],
   "pdfHashes": [
     {
       "stem": "complete",
-      "sha256": "51fa8b80887f1ca4cd8aa3a241a790631ef0d401a77d3719e2de21ea6182135b"
+      "sha256": "733fac2545723ba95bc7371541c540c25979af540856590ed8a0891f301390cf"
     },
     {
       "stem": "shortfall",
-      "sha256": "3f66a5c936fdd08ddc17196e8c576010490597c1cb11b31c306d632a365d2024"
+      "sha256": "f1135224dc4ceb7c1305a6a21cf8d2b137508f485a0f3ddf2959cfb37d93a1a3"
     },
     {
       "stem": "missing",
-      "sha256": "718e9545824aaf0d6fc88cf0e1f96ee1f86a1802e4795a1084a1045f42caa515"
+      "sha256": "0315df83842b111aed3cff80d70dfa32ddb537b75c1d48b440304dc85571be44"
     },
     {
       "stem": "long-appendix",
-      "sha256": "0b6466072936941d3dbe1b7a648ac39900e1724b1f95464a964c11526ab59ebb"
+      "sha256": "6f0dfa0bb82c57292bfd3147c2e41e30d697afbbf8ff25031d6e61582e5878e1"
     },
     {
       "stem": "core-only",
-      "sha256": "333f52f8b9d267fda99211bf85c66a53c38da3c4cbfa41a5150806347b895677"
+      "sha256": "1f071ae6e7c865e3d12d5c2800d4d3dbeffc15c0683bf5027b191755bf99d685"
     }
   ],
   "providerCalls": 0,
   "providerCostUSD": 0,
-  "receiptSha256": "ea5d61c82025093456a2519d25bea9e85d89d2f066098a41a6fc57c8a07fb0f9",
+  "receiptSha256": "f6aa430333eb0ce269b8888ca4b5ac35a2ff2bfa57f6fb6312a995e16fbec3d7",
   "signatureMeaning": "Integrity checksum over local agent QA payload. Independent human signature intentionally blank."
 }

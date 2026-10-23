@@ -23,7 +23,8 @@ for o in build['outputs']:
     annotations=[a.get_object() for p in check.pages for a in p.get('/Annots',[])]
     links=[a for a in annotations if a.get('/Subtype')=='/Link']
     assert len(check.outline)==len(check.pages)
-    if o['stem'] not in ('core-only',):assert links
+    if o['appendixManifest']:assert links
+    else:assert not links
     results.append({'stem':o['stem'],'path':str(path).replace('\\','/'),'pages':len(check.pages),'bookmarks':len(check.outline),'links':len(links),'tagged':bool(check.trailer['/Root'].get('/StructTreeRoot')),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
 (root/'correction-r3/pdf-navigation.json').write_text(json.dumps({'status':'PASS_LOCAL_ONLY','results':results,'providerCalls':0},indent=2),encoding='utf-8')
 print([(r['stem'],r['pages'],r['bookmarks'],r['links'],r['tagged']) for r in results])

@@ -1,0 +1,5 @@
+import fs from 'node:fs';import {execFileSync} from 'node:child_process';
+const root='tools/review/financial-publication-merged',dir=root+'/closeout-r32',b=JSON.parse(fs.readFileSync(dir+'/baseline.json'));
+const changed=execFileSync('git',['diff','--name-only',b.head,'--',root],{encoding:'utf8'}).trim().split('\n').filter(Boolean),records=[];
+for(const path of changed){const dest=dir+'/baseline/'+path;if(fs.existsSync(dest))continue;try{const bytes=execFileSync('git',['show',b.head+':'+path],{maxBuffer:40*1024*1024});fs.mkdirSync(dest.slice(0,dest.lastIndexOf('/')),{recursive:true});fs.writeFileSync(dest,bytes);records.push(path);}catch{throw Error('Cannot preserve '+path);}}
+fs.writeFileSync(dir+'/preserved-earlier-receipts.json',JSON.stringify({baselineHead:b.head,baselineClean:b.status.trim()==='',copiedFromExactBaselineHead:records,oldPdfWitnesses:b.pdfs,oldFilesDeleted:false},null,2));console.log('Preserved preceding receipts/screens from exact clean baseline HEAD',records.length);

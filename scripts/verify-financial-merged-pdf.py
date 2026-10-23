@@ -45,7 +45,7 @@ for n in range(1,39):
  else:
   kind,model,offset=oldDescriptors[n]
   matches=[a for a in newBuild['appendixManifest'] if a['kind']==kind and (not model or a['modelId']==model)]
-  if kind=='YEARLY':matches=[a for a in matches if (a['offset']<offset+10 and a['offset']+(8 if model=='RETIREMENT_NEEDS' else 5 if model=='EDUCATION_COST' else 4)>offset)]
+  if kind=='YEARLY':matches=[a for a in matches if (a['offset']<offset+10 and a['offset']+(5 if model=='EDUCATION_COST' else 10)>offset)]
   if n in (35,36):matches=[a for a in newBuild['appendixManifest'] if a['kind']=='EVIDENCE'];reason='SPARSE_FACTS_RETAINED_IN_A00_EVIDENCE'
   else:reason='TYPED_SEMANTICS_AND_PAGINATION'
   targets=[17] if n==23 else [a['page'] for a in matches]

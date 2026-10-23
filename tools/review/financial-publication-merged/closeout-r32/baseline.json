@@ -1,0 +1,434 @@
+{
+  "changeClass": "acceptance-fix/accessibility-fix",
+  "scope": "Existing renderer only; no financial engine/source/commerce changes",
+  "head": "9a09381acb940ffa58a11c1ba3e8793dd51ffe5b",
+  "status": "?? scripts/financial-merged-closeout-baseline.mjs\n?? tools/review/financial-publication-merged/closeout-r32/\n",
+  "index": "",
+  "sources": [
+    {
+      "path": "functions/financial/analysis-runtime/financial-analysis-runtime.js",
+      "sha256": "8440a8cfd2eaac90cb8140a66c8ba337ffaf5bd1b8dcacf03bf3b98e67e2f487"
+    },
+    {
+      "path": "functions/financial/calculation-runtime/customer-finance-tools.js",
+      "sha256": "ed9a27fa166010475184aea7d2eefd3916195e0e95591664a5b5f37a4f16d8d4"
+    },
+    {
+      "path": "functions/financial/calculation-runtime/financial-calculation-customer-v2.js",
+      "sha256": "51bd56ff10b3cdbb1a2e101c073a212a2d76bb8f62995bb99df3e4d73321b355"
+    },
+    {
+      "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+      "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2"
+    },
+    {
+      "path": "functions/financial/calculation-runtime/publication-accessibility-r3-1.js",
+      "sha256": "3aa21227336166c874cef4b925f4ab74ce05449c52e0cc342e29e5d73464d413"
+    },
+    {
+      "path": "functions/financial/calculation-runtime/publication-paths-r3-2.js",
+      "sha256": "8780f45c8f658fdb0c275e91749f8eb8ae8656091883f337ad36d70fdb03e808"
+    },
+    {
+      "path": "functions/financial/calculation-runtime/range-arithmetic.js",
+      "sha256": "f44a62ffd74b394844a419b4f120aa5cf0b039fed223924ef42e352e02b7dabe"
+    },
+    {
+      "path": "functions/financial/calculation-runtime/rental-fact-metadata.js",
+      "sha256": "0434e264ea0bc3290c8e26dc3c01e1f7cd7b34ce9512e699283dc201cfc125c7"
+    },
+    {
+      "path": "functions/financial/calculation-runtime/rental-metric-semantics-v2.js",
+      "sha256": "a74d6a5542c29abf00d459c95ed439673230e7b4c6dbf103fece9944c363a876"
+    },
+    {
+      "path": "functions/financial/calculation-runtime/stable-digest.js",
+      "sha256": "d672adc4a46f3805735af96f05935ac6f226de5d35c9699c88c05b09e73c8245"
+    },
+    {
+      "path": "functions/financial/calculation-runtime/trace-runtime.js",
+      "sha256": "87466735be0273233dadcbe82cc488135276911f77c9c9810b8cb36a24efdd66"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/factual-report-job.js",
+      "sha256": "b53c059991ee70bb7ba8dfe3e90a6c3710ec8047adc1bb72e8e2f26ec7fd3fb1"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/factual-report-narrative.js",
+      "sha256": "026fad559f16e083f5d2b56239a83440c8df4646a891a629e5eac69f3c2ef6ed"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/financial-explanation-v2.js",
+      "sha256": "62b2e95260a2cefe9abfb33c467765cb527b1bc3778d6e5a23547c43b5551fd5"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/holistic-financial-planning-runtime.js",
+      "sha256": "396551fb88ce2ddbf2d92415e5394ac4ce3b0c9e1b3e9045f902a702edbb90e0"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-merged-diagrams.js",
+      "sha256": "9eb18e4dad14e302e2fbe2368a68086b44cf34c2d06e8f4c11ef5828cd722ec8"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-merged-model-layout.js",
+      "sha256": "1a8ca84ed4e2b7971fc09b885342c75dd84d85ede43536b9fca8c89e55ec3004"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-merged-model-views.js",
+      "sha256": "9508a8af222107f433ba0c3c4a1ace481f6e38ba283bd5108362c3713cf5b15b"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-merged-renderer.js",
+      "sha256": "6cb767dd22492cdc2c990e3027962d3827f85262aaa799d6731e58fcb7fc019a"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-r3-1-appendices.js",
+      "sha256": "7a56c2ae22872fb572ec3def9a7ac2cdc86c90ed6c4c3265dd71430f99abae6a"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-r3-1-charts.js",
+      "sha256": "b6eab16d1b9cd3494c498c2fdba84b4b78066e13c6627c11140abde8642dabae"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-r3-1-facts.js",
+      "sha256": "0a6765ce20133c0a7d2960bcf9d2658306494837335f347159e6d04e4b84929c"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-r3-1-page-map.js",
+      "sha256": "abd224f875722018c9c2f7271bf52a58c2c703ee46ba123f7084086a97229452"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-r3-1-projection.js",
+      "sha256": "c45899d0278b8263182ca04b7b2c096ac925ebfb6ea3fb6b1f41f3ad7897f5a4"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-r3-1-renderer.js",
+      "sha256": "8c9c7d011864081235f5d6e72ea2dd4a1e8e0dcea285aee7874a3271c64bf166"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-r3-1-style.js",
+      "sha256": "f59d48fe279166e30209acbff09632b06858312620566e475d2f9de5ccde536a"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-r3-2-renderer.js",
+      "sha256": "89b1c83de63cc744898c1d42bfc25173cac615c9f046b35640c255a4f7234441"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-r3-appendices.js",
+      "sha256": "1d030b2b3c758d2d15a381dc7c3095634649469a42809cd2dc3e8fede627d2a9"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-r3-assets.js",
+      "sha256": "722d62017258e3d92c352206e1b874cff4ddd5626a2766875b7a84e5d8310a29"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-r3-charts.js",
+      "sha256": "4a6d632641143054105461f95e23e2312c2c33cf881380177206cc44bfacb1a6"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-r3-contract.js",
+      "sha256": "b1f033535cdd6135c9360e84fea17c9e40416d527e6bba0e2b5d1687051fcc65"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-r3-projection.js",
+      "sha256": "aad7d10fd234c86cfa800616d800744d2344dfb03a453942636f9ceb6da6f4ce"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-r3-renderer.js",
+      "sha256": "6fccd6a6ed7afd6617bb87f3d7c2e7f2ae67d47d6f822ecbfd4a9c2f06ba6adb"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/publication-r3-style.js",
+      "sha256": "ca6aacd5d84ef7c5fe4923837e64b1db6f3b06b28ad05df1b77d8652a21edf9e"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/report-appendices-v2.js",
+      "sha256": "ddf901bb2079d413b0da93196950f894bd51641aa60f7848713cedd7b0cc73e8"
+    },
+    {
+      "path": "functions/financial/holistic-planning-product/report-publication-v2.js",
+      "sha256": "49adbd7cabc57eada5cc51b96fc966b8db8e97587a2c79bd1a3ba0aa895da414"
+    },
+    {
+      "path": "functions/financial/product-activation/customer-assumptions.js",
+      "sha256": "7ab14465be07494a3d80bb241b7777cbbc13f21801360dede69b645f149ac818"
+    },
+    {
+      "path": "functions/financial/product-activation/customer-inventory-adapter.js",
+      "sha256": "e3eaca964a1ebd70bbceb0fe1b0d73adef3a8782909e3a5beeefdd9fec3e61fe"
+    },
+    {
+      "path": "functions/financial/product-activation/financial-product-runtime.js",
+      "sha256": "84bc4748c9062cd2e45c3d3e8cf591601dda4c1e40f1eb7c76bd718ae7cb22c1"
+    },
+    {
+      "path": "functions/financial/professional-review/financial-preparation-package.js",
+      "sha256": "e4a0683a5ac9047ff235680fe1d06cb6b23dcf18b9b56eba537eaa99e3b79e4a"
+    },
+    {
+      "path": "functions/financial/professional-review/official-source-lifecycle.js",
+      "sha256": "8e4941b3aa740abab49a6d25f11f5e3edb0158e8d78920683c5bb0b36df92bce"
+    },
+    {
+      "path": "functions/financial/professional-review/professional-financial-review-runtime.js",
+      "sha256": "7322ef23904bff132ab4daa29a2567c4387f71e4291d893e96ddbc2fd402344c"
+    },
+    {
+      "path": "scripts/build-financial-merged.mjs",
+      "sha256": "46a5b9078e0e3c21459adaeea72b6e67fdfd7cb51677546d7785925c9f1ca358"
+    },
+    {
+      "path": "scripts/contract-financial-merged.mjs",
+      "sha256": "f4b93c592bae94ab775f0086d9d3940034ca071064ce9ae827c5f3d7ffbb0a91"
+    },
+    {
+      "path": "scripts/finalize-financial-merged.mjs",
+      "sha256": "22b7ab157b20c772610374dd4db135f3f68d316e6ba9f2cbf882da2516bf0b12"
+    },
+    {
+      "path": "scripts/financial-merged-closeout-baseline.mjs",
+      "sha256": "683a7771c188882c424f52c67e8a5df2afd8d02e21e7f30d7675680ca882e2c7"
+    },
+    {
+      "path": "scripts/financial-merged-correction-fixtures.mjs",
+      "sha256": "1f8e5c459cfa00582d149fcdb21b477241c6bf7a3f842441c115637f2e3e2ba0"
+    },
+    {
+      "path": "scripts/finish-financial-merged-pdf.py",
+      "sha256": "ca04a93cee771d7b83d8560b5646e72b3842e93b26c2036faaf1d5d56d485d16"
+    },
+    {
+      "path": "scripts/prepare-financial-merged-long-saved.mjs",
+      "sha256": "c929e93862516a09bfcb2ddc7617678bab68dfd3ad9357edd401e43706855c60"
+    },
+    {
+      "path": "scripts/prepare-financial-merged.mjs",
+      "sha256": "67ba46c0ee8b9a7a10c1e197a9a3be32425e33099856878a0fe9de2d19e09b9f"
+    },
+    {
+      "path": "scripts/verify-financial-merged-browser.mjs",
+      "sha256": "b047ae01115267f444874902ed26a2294b3ce941d9dae01b78403f5479e703a3"
+    },
+    {
+      "path": "scripts/verify-financial-merged-integrity.mjs",
+      "sha256": "ebd1b582adf65a0640e96fe41be04f3ef711ecb16fa04c6455255daa7d3e8595"
+    },
+    {
+      "path": "scripts/verify-financial-merged-pdf-semantics.py",
+      "sha256": "1dda3976315dc91bb906920d2e577c5a3dc784d0c9a454a31a18899cb04f4b49"
+    },
+    {
+      "path": "scripts/verify-financial-merged-pdf.py",
+      "sha256": "554cc28e8b41ca8e3831474cedbac5e91db3ba01a7394ba8f0dcd1f7f057ef47"
+    },
+    {
+      "path": "scripts/verify-financial-merged-raster.py",
+      "sha256": "cbb4baa139fabd67cd4fba9f8d1fbf150ca1e55825cd7cd54d3dab9628dbfebe"
+    },
+    {
+      "path": "scripts/verify-financial-merged-review-ui.mjs",
+      "sha256": "259832146a13f83bf49e3c7d2b96ca0aae7130eaddd82287006252c9bc12befe"
+    },
+    {
+      "path": "scripts/verify-financial-merged-tests.mjs",
+      "sha256": "56c2805a2e05c5fb5181e59c2c78cc8b1af0b9ab7761a3a13ee60e5caf301330"
+    },
+    {
+      "path": "content/financial/reports/financial-r3-1-chart-grammar.json",
+      "sha256": "091a2b409ca9c478ab300c8bd150ab75b32c9d0213ce6d643078332197cb3e03"
+    },
+    {
+      "path": "content/financial/reports/financial-r3-2-bilingual-policy.json",
+      "sha256": "01e08e2b07111d915534aada9b92a2911023307305a7f0927a121094c5f50861"
+    },
+    {
+      "path": "content/financial/reports/financial-r3-2-expansion-candidate.json",
+      "sha256": "ec44f7a97ed0cdd13480151b6e41f83af11d9c233bbc860212a85636a4d8a9c3"
+    },
+    {
+      "path": "content/financial/reports/financial-r3-2-xlsx-crosswalk.json",
+      "sha256": "2b083519eadddf583b81d008fc38d0a54eb366e803a9a0e4e735f20fb740a851"
+    },
+    {
+      "path": "content/financial/reports/legacy-factfinder-integration-v1.json",
+      "sha256": "f81e779f6493815e15a2ec34b2dcc2f6b312fce7847ff60184fc96d7a98d654d"
+    },
+    {
+      "path": "content/financial/reports/publication-bilingual-merged-22.json",
+      "sha256": "a07eda7db490ee9ac21379145e8dd99568d72b6c11073cda8b80a228f6cd9d75"
+    },
+    {
+      "path": "content/financial/reports/publication-merged-fixed-transcripts.json",
+      "sha256": "a0af424b6ab6f6f6813f28b39d3a53d738aae7ae305c993cdcebe3b86f59d2b4"
+    },
+    {
+      "path": "content/financial/reports/publication-r3-1-candidate.json",
+      "sha256": "5ca3b83ec2eec26dfb3d9ce6d62cd3f7dc8e986bff6adb3caa1c30240ae043bb"
+    },
+    {
+      "path": "content/financial/reports/publication-v2-contract.json",
+      "sha256": "e7875994e32c187040d966d35de58b8f25707fc9264ada27224ac6722654c067"
+    },
+    {
+      "path": "tests/financial-preparation/account-drafts.test.mjs",
+      "sha256": "4493d4f5c0bf49b0e656125cdcf656848f979b15d9b0c396e3ca34e723016504"
+    },
+    {
+      "path": "tests/financial-preparation/capabilities.test.mjs",
+      "sha256": "9a5f7f9b2f909567ef6a13c875a68cc216cdbfdf2a917674c0bbb8cf4309ba41"
+    },
+    {
+      "path": "tests/financial-preparation/customer-fcr-successor.test.mjs",
+      "sha256": "92c08babfcbf515bd4b75c84569cbcc0b3354c99c786d3e779f8046040f623ee"
+    },
+    {
+      "path": "tests/financial-preparation/durable-report-worker.mjs",
+      "sha256": "d0b40daff083768e1a9a5484a37f580e59ccd54d30458589b51bb63c0897057c"
+    },
+    {
+      "path": "tests/financial-preparation/durable-report.test.mjs",
+      "sha256": "dfc5b22b93d488db8b0690769f2e853a74f3e12ff3d871d50e6c2cbf075bb39d"
+    },
+    {
+      "path": "tests/financial-preparation/factual-report.test.mjs",
+      "sha256": "a8985180043da0aae2a4d7501a6dfbade4261c2cad7078491e8f3143ce1c0ba2"
+    },
+    {
+      "path": "tests/financial-preparation/finance-tools.test.mjs",
+      "sha256": "a1bef307a9fd6db7d46efc32bd89254d7a16a41d680f3c8919ce0e49bca6ec6e"
+    },
+    {
+      "path": "tests/financial-preparation/local-account.mjs",
+      "sha256": "a0bc0ad75e060e5576c336b3b8a1a9ca49f5e45eb4d47cbbe6d506218407d9ac"
+    },
+    {
+      "path": "tests/financial-preparation/local-closure.test.mjs",
+      "sha256": "7a24183e7496de29d444fc868d55eed75389a941b4e941c7541465cc9ac4ff1a"
+    },
+    {
+      "path": "tests/financial-preparation/portfolio-successor.test.mjs",
+      "sha256": "da4474c065778070f839027802259b1f04d866621eee56fd04e9e3ae53599cf0"
+    },
+    {
+      "path": "tests/financial-preparation/professional-owner-context.test.mjs",
+      "sha256": "483f6a3c100f2739a9c76b5cf39ac5de1571cdb5495e4826380a253daf974b2f"
+    },
+    {
+      "path": "tests/financial-preparation/professional-owner-fixture.mjs",
+      "sha256": "953a5f88456cfe0473adab84d262056849ffe5f4f8a207bbf0c889c5480d4038"
+    },
+    {
+      "path": "tests/financial-preparation/provider-boundary.test.mjs",
+      "sha256": "1031980e430693b599de02e543967e92d1c710ac49cfa32c2d2ef06370e6f460"
+    },
+    {
+      "path": "tests/financial-preparation/publication-merged-correction.test.mjs",
+      "sha256": "bf38e33dc8f0b27dbb78bcfb672e72616412078c9250e4b2b9be9871e9954fb1"
+    },
+    {
+      "path": "tests/financial-preparation/publication-merged.test.mjs",
+      "sha256": "b792c2d08a79123d2e7aff06ca9f747aa749f1f448232ea344aed8b0d223b79b"
+    },
+    {
+      "path": "tests/financial-preparation/publication-r3-1.test.mjs",
+      "sha256": "fe380e8145c762d1a94d1686bf3e5e39a195688554730d1ea49204a1d60e8499"
+    },
+    {
+      "path": "tests/financial-preparation/publication-r3-2.test.mjs",
+      "sha256": "c37dc71ba68c9fe0695dc51a16fc4ba4b49c8f028bb0e78b7341b62cc3b4b270"
+    },
+    {
+      "path": "tests/financial-preparation/publication-r3.test.mjs",
+      "sha256": "80ff142c198bcdcca98d1abc7a6af2b7706bf0dd7295a462de6616231ab4fc87"
+    },
+    {
+      "path": "tests/financial-preparation/publication-v2.test.mjs",
+      "sha256": "8a70f53245d8838ba4b0f45200d8011d7e6f7621d5e229ab04053d1f437286df"
+    },
+    {
+      "path": "tests/financial-preparation/purpose-scope.test.mjs",
+      "sha256": "7822ab2d31e22bbc1630466da6388ea53259f91b51df3b4cbfd7f8efbc3a3e09"
+    },
+    {
+      "path": "tests/financial-preparation/reference/jurisdiction-capability-reference.mjs",
+      "sha256": "ad241b4b09ec89a59fd377f863981984be24aae53e8d136e45cb25d808f41536"
+    },
+    {
+      "path": "tests/financial-preparation/reference/jurisdiction-capability-reference.test.mjs",
+      "sha256": "b70aee90afce31f62b57a737a70cc41fd9181cb78836fd123c817b218d4130c5"
+    },
+    {
+      "path": "tests/financial-preparation/reference/README.md",
+      "sha256": "dd6258815309cc6530c30a0893322908d7ea2c7f0306e19c9e95ac7354af0261"
+    },
+    {
+      "path": "tests/financial-preparation/successor-n1-n5.test.mjs",
+      "sha256": "b8d85dc0d9fa6a45951c3860b959da0410f0532d37e802d1910c5cb1a09a7b2c"
+    },
+    {
+      "path": "tests/financial-preparation/tool-export.test.mjs",
+      "sha256": "7a9681fc6fb556911399ef35b20409d02ad258cfaf3ee4d2d249cd6f1c010d04"
+    },
+    {
+      "path": "tests/financial-preparation/will-and-handoff.test.mjs",
+      "sha256": "fbed7f9c5477dabce94970f5aee06f9fc9268f782b7e5305de96e5fa05790582"
+    },
+    {
+      "path": "tests/financial-preparation/will-assembly.test.mjs",
+      "sha256": "9dce363ab259219bf89615ef520a9e57caf6d6f4e30a61b37d5dacc6342e1a5f"
+    },
+    {
+      "path": "tests/financial-preparation/will-import.test.mjs",
+      "sha256": "0ec5ba514d2c50f11113c23a0a37a7ed3a97ac9d33297bad47a497fd438ea4fb"
+    }
+  ],
+  "pdfs": [
+    {
+      "stem": "complete",
+      "path": "output/pdf/financial-merged/complete-merged-8169ee1e27.pdf",
+      "pages": 44,
+      "bookmarks": 44,
+      "links": 4,
+      "tagged": true,
+      "sha256": "51fa8b80887f1ca4cd8aa3a241a790631ef0d401a77d3719e2de21ea6182135b"
+    },
+    {
+      "stem": "shortfall",
+      "path": "output/pdf/financial-merged/shortfall-merged-a4e7ddb70f.pdf",
+      "pages": 44,
+      "bookmarks": 44,
+      "links": 4,
+      "tagged": true,
+      "sha256": "3f66a5c936fdd08ddc17196e8c576010490597c1cb11b31c306d632a365d2024"
+    },
+    {
+      "stem": "missing",
+      "path": "output/pdf/financial-merged/missing-merged-f459284d41.pdf",
+      "pages": 23,
+      "bookmarks": 23,
+      "links": 1,
+      "tagged": true,
+      "sha256": "718e9545824aaf0d6fc88cf0e1f96ee1f86a1802e4795a1084a1045f42caa515"
+    },
+    {
+      "stem": "long-appendix",
+      "path": "output/pdf/financial-merged/long-appendix-merged-16c5113ceb.pdf",
+      "pages": 91,
+      "bookmarks": 91,
+      "links": 7,
+      "tagged": true,
+      "sha256": "0b6466072936941d3dbe1b7a648ac39900e1724b1f95464a964c11526ab59ebb"
+    },
+    {
+      "stem": "core-only",
+      "path": "output/pdf/financial-merged/core-only-merged-33499df121.pdf",
+      "pages": 22,
+      "bookmarks": 22,
+      "links": 0,
+      "tagged": true,
+      "sha256": "333f52f8b9d267fda99211bf85c66a53c38da3c4cbfa41a5150806347b895677"
+    }
+  ],
+  "missingSecondAudit": true,
+  "providerCalls": 0
+}

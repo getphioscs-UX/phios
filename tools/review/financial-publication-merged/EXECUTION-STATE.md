@@ -1,14 +1,39 @@
 # Merged R3 corrective execution
 
-Acceptance Fix; HUMAN_REVIEW_CANDIDATE, not human accepted or production approved.
+Acceptance Fix; LOCAL_CLOSEOUT_PARTIAL_BLOCKED, not human accepted or production approved.
 
 Q0: current worktree baseline, HEAD b5e2c99aef365572573bb73bdf4883b4df5598bf, original38PDF, original receipts and same-scale predecessor visuals archived in correction-r3/baseline. Other-window changes retained.
 Q1: four typed consuming views and precise FCR arithmetic assertions; no engine edits.
 Q2: topic diagrams and typed chart/table semantics corrected. SVG text bbox checked inside viewBox.
 Q3: all8 R2 objects revalidated no-cache; no byte change. P21 asset blocker and128dpi recorded. Accessible HTML, PDF metadata/tags/bookmarks/internal links added.
 Q4: content-value selection, A00 source/evidence, historical source aliases, variable final ranges.
-Q5: complete: 44 pages; shortfall: 44 pages; missing: 23 pages; long-appendix: 91 pages; core-only: 22 pages. legacy: 85 PASS/5 FAIL; r32: 26 PASS/0 FAIL; merged: 28 PASS/0 FAIL. Original5 strictly matched. Physical print and live gates NOT_RUN/BLOCKED.
+Q5: complete: 37 pages; shortfall: 37 pages; missing: 22 pages; long-appendix: 80 pages; core-only: 22 pages. legacy: 85 PASS/5 FAIL; r32: 26 PASS/0 FAIL; merged: 36 PASS/0 FAIL. Original5 strictly matched. Physical print and live gates NOT_RUN/BLOCKED.
 Q6: same existing Master updated; all38 predecessor pages mapped to actual corrected PDF images at identical A4 scale.
 Q7: human acceptance pending; asset/high-res blockers remain. Provider0/USD0, no external or production write.
 
 Commands: build-financial-merged.mjs → verify-financial-merged-browser.mjs → finish-financial-merged-pdf.py → verify-financial-merged-pdf.py; verify-financial-merged-tests.mjs; finalize-financial-merged.mjs → verify-financial-merged-review-ui.mjs → verify-financial-merged-integrity.mjs.
+
+
+# R3.2 scoped closeout — actual local results
+
+LOCAL_CLOSEOUT_PARTIAL_BLOCKED. Not HUMAN_ACCEPT, PRINT_ACCEPT or PRODUCTION_PASS.
+
+Change class: acceptance/accessibility fix to existing publication presentation. Existing FDR/FCR, persisted sources, products, price, consent, grants, Will and commercial/provider owners unchanged. RM69 / bilingual /4 questions /USD5 cap retained. Actual Provider0/USD0. No commit/push/deploy, migration, payment, customer data or external delivery.
+
+C0: baseline HEAD 9a09381acb940ffa58a11c1ba3e8793dd51ffe5b; index/status and full source hashes/diffs frozen in baseline.json, baseline.diff and baseline-index.diff. Five preceding PDF witnesses remain byte-identical (44/44/23/91/22). Earlier receipts/screens copied from the exact clean baseline HEAD into baseline/; no source reset. Second Human Audit was not supplied at a discoverable Desktop/Downloads path and remains UNAVAILABLE_LOCAL. Only the provided Closeout Master plus existing audit/source evidence was used; no invented second-human acceptance.
+
+C1 BLOCKED: eight official exact-case R2 GETs match pinned bytes. EXACT_BYTES_VERIFIED is byte identity, not approval of the desired revision. P21 remains the old populated object (01b84c9791efb589d467d34b53044ee30193fcb6b7fbc2d851868bc714645531); approved empty-slot identity cannot be proven. Original asset files untouched. Every candidate page is explicitly watermarked SYNTHETIC REVIEW ONLY; renderer rejects non-TEST_ONLY/non-synthetic-owner sources before composing output. No customer artifact is generated with local placeholders. No R2 writes.
+
+C2 PARTIAL/BLOCKED: approved P01–P05 editorial images unchanged. Native-copy six-page PDF/HTML proof is supplied over the approved Body background; it uses existing transcription, is not a faithful approved artwork replacement and needs bilingual copy/visual acceptance. No new tagline. Main fixed pages still have raster paragraphs; global Tagged=yes does not prove fixed-paragraph accessibility. No unapproved invisible OCR was inserted. Bitmap origin remains approximately128dpi, not true300dpi. Main fixed text/selectability and exact-brand print candidate remain blocked pending approved high-res/vector/copy sources. Physical A4 smoke print PENDING_PHYSICAL_PRINT, not simulated PASS.
+
+C3 PASS_SCOPED: seven assumptions fit one page. Retirement cost20 rows =2 yearly pages; retirement funding27 rows =3 yearly pages; education cost5 rows =1 page; education funding8 rows =1 page. Funding now has one numeric eight-column annual bridge; closing and unfunded remain separate, raw precision unchanged. Browser-measured pagination reduces a semantic chunk and rerenders when actual content is too tall, then rebuilds final ranges. Single-row or non-flow overflow fails closed. Source/scenario-bound measured plans are consumed by the existing builder. All five cases fit at ten-year/5-row maxima; every cell extent and table height is independently checked. This is not blanket approval for arbitrary future labels/intake. Headers and currency/footers repeat. Independent row-index equality and actual PDF year presence verified; no source row removed. Long fixture retained40/47/60/19 model records plus existing selected annexes.
+
+C4 PASS: SCENARIO-FIXTURE-DELTA.json lists every changed model input (3 leaves), declared core expense change (2 leaves), all selected assumption values (including unchanged), starting/allocated available and restricted funds, and derived summaries separately. Complete/shortfall retirement annual contributions7200/0, education3200/0; essentials2500/7000. Monthly deficit does not cause or infer these input changes. Raw FCR semantics are unchanged. Complete cash3250/networth203400/essential cover5.9; shortfall cash-1550/outflow cover approximately1.35. Retirement2035 complete8404.53 and shortfall2034 approximately26723.70; education2033 complete2271.42287154 and shortfall2032 approximately6416.61. Release/prior-growth de-duplication preserved. P14/A09 cross-reference distinguishes one-off declared education goal excess8900 from multi-year requirements. P06 precise denominator is five key amounts only; insurance completeness not asserted.
+
+C5 PASS_SCOPED: existing data-native topic grammars remain distinct. P06–P20 now each includes compact deterministic bilingual explanation and source provenance. No AI calls, fictitious history, health score, missing-to-zero conversion, legal/tax or protection sufficiency conclusion. Human poster-quality acceptance is not inferred from automated checks.
+
+C6 PASS: final actual PDFs complete: 37 (15 appendix); shortfall: 37 (15 appendix); missing: 22 (0 appendix); long-appendix: 80 (58 appendix); core-only: 22 (0 appendix). Core remains22 and same-page bilingual. Missing has no empty source appendix. P22 catalog, actual PDF links/bookmarks and page-map rebuilt after pagination. The12 approved directory categories are unchanged; A00 is separately indexed. Not-applicable is never inferred from missing data.
+
+C7 scoped tests: legacy 85 PASS/5 FAIL; r32 26 PASS/0 FAIL; merged 36 PASS/0 FAIL. Five historical rental failures are exact-matched by reason and are still FAIL, not waived. Six historical Free8 PDFs checked separately for preservation/A4; core-only22 has separate receipt. 46 actual44-before/current37-after same-A4-scale pairs map all44 predecessor pages and cover all37 current pages. Actual PDF raster/semantic/row, browser and native proof results are separately linked. Chromium draft trailer warnings are repaired by navigation finisher; final strict readers pass. Initial P14 note overflow, source-page long-fixture overflow, initial native-proof column fit, and missing P06 provenance assertion were corrected; no failed run is represented as PASS.
+
+Exact next steps: source publisher supplies an explicitly accepted empty-slot P21 revision with digest/dimensions and approved high-resolution/vector/text sources for fixed pages; bilingual editor checks transcription against approved artwork; human prints the proof/main A4 at100% and records findings; supply missing Second Human Audit. Only then close C1/C2, replace the fixed paragraph layer using approved copy, regenerate navigation and request final human acceptance. Production/customer/payment/provider admission remains separate and closed.

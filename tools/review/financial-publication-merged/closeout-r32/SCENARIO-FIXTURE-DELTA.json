@@ -1,0 +1,439 @@
+{
+  "testOnly": true,
+  "note": "Shortfall is a separately declared synthetic fixture. Changed spending AND contribution inputs are not inferred from monthly deficit. Every sourceSnapshot.input leaf difference is listed.",
+  "modelInputs": [
+    {
+      "path": "/retirementFunding/contribution/value",
+      "complete": 420,
+      "shortfall": 0,
+      "classification": "DECLARED_FIXTURE_INPUT"
+    },
+    {
+      "path": "/retirementFunding/employerContribution/value",
+      "complete": 180,
+      "shortfall": 0,
+      "classification": "DECLARED_FIXTURE_INPUT"
+    },
+    {
+      "path": "/educationFunding/contribution/value",
+      "complete": 3200,
+      "shortfall": 0,
+      "classification": "DECLARED_FIXTURE_INPUT"
+    }
+  ],
+  "declarationChanges": [
+    {
+      "path": "/expenseFacts/0/value",
+      "complete": 2500,
+      "shortfall": 7000,
+      "classification": "DECLARED_FIXTURE_INPUT"
+    },
+    {
+      "path": "/expenseFacts/1/value",
+      "complete": 600,
+      "shortfall": 900,
+      "classification": "DECLARED_FIXTURE_INPUT"
+    }
+  ],
+  "derivedChanges": [
+    {
+      "path": "/metrics/expenses/value",
+      "complete": 6150,
+      "shortfall": 10950,
+      "classification": "DERIVED_BY_RULE"
+    },
+    {
+      "path": "/metrics/surplus/value",
+      "complete": 3250,
+      "shortfall": -1550,
+      "classification": "DERIVED_BY_RULE"
+    },
+    {
+      "path": "/metrics/deficit/value",
+      "complete": 0,
+      "shortfall": 1550,
+      "classification": "DERIVED_BY_RULE"
+    },
+    {
+      "path": "/metrics/coverage/value",
+      "complete": 3.57723577,
+      "shortfall": 2.00913242,
+      "classification": "DERIVED_BY_RULE"
+    },
+    {
+      "path": "/metrics/essentialCoverage/value",
+      "complete": 8.8,
+      "shortfall": 3.14285714,
+      "classification": "DERIVED_BY_RULE"
+    },
+    {
+      "path": "/metrics/annualExpenses/value",
+      "complete": 73800,
+      "shortfall": 131400,
+      "classification": "DERIVED_BY_RULE"
+    },
+    {
+      "path": "/metrics/annualSurplus/value",
+      "complete": 39000,
+      "shortfall": -18600,
+      "classification": "DERIVED_BY_RULE"
+    },
+    {
+      "path": "/accessCoverage/value",
+      "complete": 2.39837398,
+      "shortfall": 1.34703196,
+      "classification": "DERIVED_BY_RULE"
+    },
+    {
+      "path": "/accessEssentialCoverage/value",
+      "complete": 5.9,
+      "shortfall": 2.10714286,
+      "classification": "DERIVED_BY_RULE"
+    },
+    {
+      "path": "/priorities/0",
+      "complete": "confirm-reserves",
+      "shortfall": "reconcile-shortfall",
+      "classification": "DERIVED_BY_RULE"
+    },
+    {
+      "path": "/priorities/1",
+      "complete": "review-goals",
+      "shortfall": "review-commitments",
+      "classification": "DERIVED_BY_RULE"
+    },
+    {
+      "path": "/priorities/2",
+      "complete": "check-protection",
+      "shortfall": "confirm-reserves",
+      "classification": "DERIVED_BY_RULE"
+    }
+  ],
+  "unexpected": [],
+  "summary": {
+    "retirementAnnualContributions": [
+      7200,
+      0
+    ],
+    "educationAnnualContributions": [
+      3200,
+      0
+    ],
+    "essentialCosts": [
+      2500,
+      7000
+    ],
+    "accessible": [
+      {
+        "kind": "EXACT",
+        "value": 14750
+      },
+      {
+        "kind": "EXACT",
+        "value": 14750
+      }
+    ],
+    "selectedAssumptionValues": {
+      "complete": [
+        {
+          "name": "INFLATION",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.025
+          },
+          "unit": "ANNUAL_EFFECTIVE_RATE",
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053",
+          "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+          "ref": "RT_INFLATION"
+        },
+        {
+          "name": "GROSS_RETURN",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.035
+          },
+          "unit": "ANNUAL_EFFECTIVE_RATE",
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053",
+          "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+          "ref": "RT_RETURN"
+        },
+        {
+          "name": "ANNUAL_FEE",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.004
+          },
+          "unit": "ANNUAL_EFFECTIVE_RATE",
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053",
+          "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+          "ref": "RT_FEE"
+        },
+        {
+          "name": "STAGE_A:INFLATION",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.03
+          },
+          "unit": "ANNUAL_EFFECTIVE_RATE",
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053",
+          "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+          "ref": "ED_A_INFLATION"
+        },
+        {
+          "name": "STAGE_B:INFLATION",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.02
+          },
+          "unit": "ANNUAL_EFFECTIVE_RATE",
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053",
+          "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+          "ref": "ED_B_INFLATION"
+        },
+        {
+          "name": "GROSS_RETURN",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.025
+          },
+          "unit": "ANNUAL_EFFECTIVE_RATE",
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053",
+          "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+          "ref": "ED_RETURN"
+        },
+        {
+          "name": "ANNUAL_FEE",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.003
+          },
+          "unit": "ANNUAL_EFFECTIVE_RATE",
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053",
+          "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+          "ref": "ED_FEE"
+        }
+      ],
+      "shortfall": [
+        {
+          "name": "INFLATION",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.025
+          },
+          "unit": "ANNUAL_EFFECTIVE_RATE",
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053",
+          "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+          "ref": "RT_INFLATION"
+        },
+        {
+          "name": "GROSS_RETURN",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.035
+          },
+          "unit": "ANNUAL_EFFECTIVE_RATE",
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053",
+          "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+          "ref": "RT_RETURN"
+        },
+        {
+          "name": "ANNUAL_FEE",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.004
+          },
+          "unit": "ANNUAL_EFFECTIVE_RATE",
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053",
+          "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+          "ref": "RT_FEE"
+        },
+        {
+          "name": "STAGE_A:INFLATION",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.03
+          },
+          "unit": "ANNUAL_EFFECTIVE_RATE",
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053",
+          "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+          "ref": "ED_A_INFLATION"
+        },
+        {
+          "name": "STAGE_B:INFLATION",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.02
+          },
+          "unit": "ANNUAL_EFFECTIVE_RATE",
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053",
+          "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+          "ref": "ED_B_INFLATION"
+        },
+        {
+          "name": "GROSS_RETURN",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.025
+          },
+          "unit": "ANNUAL_EFFECTIVE_RATE",
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053",
+          "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+          "ref": "ED_RETURN"
+        },
+        {
+          "name": "ANNUAL_FEE",
+          "value": {
+            "kind": "EXACT",
+            "value": 0.003
+          },
+          "unit": "ANNUAL_EFFECTIVE_RATE",
+          "source": "CLIENT_DECLARED",
+          "sourceDate": "2026-10-20",
+          "effectivePeriod": "2026-2053",
+          "confidence": "CLIENT_DECLARED_NOT_VERIFIED",
+          "ref": "ED_FEE"
+        }
+      ]
+    },
+    "allAssumptions": [],
+    "startingAssets": {
+      "complete": [
+        {
+          "ref": "bank",
+          "subject": "SELF",
+          "ownedValue": {
+            "kind": "EXACT",
+            "value": 14750
+          },
+          "currency": "MYR",
+          "asOfDate": "2026-10-20",
+          "availableYear": 2026,
+          "valueBasis": "OWNED_INTEREST"
+        },
+        {
+          "ref": "investments",
+          "subject": "SELF",
+          "ownedValue": {
+            "kind": "EXACT",
+            "value": 57400
+          },
+          "currency": "MYR",
+          "asOfDate": "2026-10-20",
+          "availableYear": 2030,
+          "valueBasis": "OWNED_INTEREST"
+        }
+      ],
+      "shortfall": [
+        {
+          "ref": "bank",
+          "subject": "SELF",
+          "ownedValue": {
+            "kind": "EXACT",
+            "value": 14750
+          },
+          "currency": "MYR",
+          "asOfDate": "2026-10-20",
+          "availableYear": 2026,
+          "valueBasis": "OWNED_INTEREST"
+        },
+        {
+          "ref": "investments",
+          "subject": "SELF",
+          "ownedValue": {
+            "kind": "EXACT",
+            "value": 57400
+          },
+          "currency": "MYR",
+          "asOfDate": "2026-10-20",
+          "availableYear": 2030,
+          "valueBasis": "OWNED_INTEREST"
+        }
+      ]
+    },
+    "allocations": {
+      "complete": [
+        {
+          "id": "RT_BANK",
+          "assetRef": "bank",
+          "target": "RETIREMENT",
+          "amount": {
+            "kind": "EXACT",
+            "value": 10000
+          },
+          "currency": "MYR",
+          "asOfDate": "2026-10-20"
+        },
+        {
+          "id": "ED_INVEST",
+          "assetRef": "investments",
+          "target": "EDUCATION",
+          "amount": {
+            "kind": "EXACT",
+            "value": 57400
+          },
+          "currency": "MYR",
+          "asOfDate": "2026-10-20"
+        }
+      ],
+      "shortfall": [
+        {
+          "id": "RT_BANK",
+          "assetRef": "bank",
+          "target": "RETIREMENT",
+          "amount": {
+            "kind": "EXACT",
+            "value": 10000
+          },
+          "currency": "MYR",
+          "asOfDate": "2026-10-20"
+        },
+        {
+          "id": "ED_INVEST",
+          "assetRef": "investments",
+          "target": "EDUCATION",
+          "amount": {
+            "kind": "EXACT",
+            "value": 57400
+          },
+          "currency": "MYR",
+          "asOfDate": "2026-10-20"
+        }
+      ]
+    }
+  },
+  "rawSourceDigests": [
+    "5af06d00d291b135e5493a89b7e8c77e17f1f8a9bd8d7af8140de7d548da1ad9",
+    "9922e368696bb6c89bab5d979d13581f5f99861c05462546e032c12d056f4f9d"
+  ],
+  "inputHashes": [
+    "5692f48a01bebcca34934bc7d0002bca976d964e93389e689593c3a74a28b8b9",
+    "1b10cc7f1ec191cf5c0268b1a0c1e285fd1273699afeba1e6e5b472cd0f1f2a0"
+  ],
+  "providerCalls": 0
+}
