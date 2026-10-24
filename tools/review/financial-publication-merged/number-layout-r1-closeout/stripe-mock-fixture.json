@@ -1,0 +1,45 @@
+{
+  "mockOrder": {
+    "orderId": "ord_SYNTHETICR1",
+    "environment": "QA",
+    "currency": "myr",
+    "amountMinor": 6900
+  },
+  "mockInvoice": {
+    "id": "in_SYNTHETICR1",
+    "number": "QA-MOCK-2026-0001",
+    "livemode": false,
+    "customer": "cus_SYNTHETICR1",
+    "currency": "myr",
+    "amount_paid": 6900,
+    "status": "paid",
+    "metadata": {
+      "order_id": "ord_SYNTHETICR1"
+    }
+  },
+  "mockSession": {
+    "id": "cs_test_SYNTHETICR1",
+    "invoice": "in_SYNTHETICR1",
+    "livemode": false,
+    "customer": "cus_SYNTHETICR1",
+    "payment_status": "paid",
+    "amount_total": 6900,
+    "metadata": {
+      "order_id": "ord_SYNTHETICR1"
+    }
+  },
+  "reportNumber": "PHI-QA-FIN-2026-000001",
+  "requestA": {
+    "invoice_creation[enabled]": "true",
+    "invoice_creation[invoice_data][custom_fields][0][name]": "PHI OS Order Reference",
+    "invoice_creation[invoice_data][custom_fields][0][value]": "ord_SYNTHETICR1",
+    "invoice_creation[invoice_data][metadata][order_id]": "ord_SYNTHETICR1"
+  },
+  "requestB": {
+    "invoice_creation[enabled]": "true",
+    "invoice_creation[invoice_data][custom_fields][0][name]": "PHI OS Report Reference",
+    "invoice_creation[invoice_data][custom_fields][0][value]": "PHI-QA-FIN-2026-000001",
+    "invoice_creation[invoice_data][metadata][order_id]": "ord_SYNTHETICR1",
+    "invoice_creation[invoice_data][metadata][report_reference]": "PHI-QA-FIN-2026-000001"
+  }
+}

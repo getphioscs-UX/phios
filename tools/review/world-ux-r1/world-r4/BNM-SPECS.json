@@ -1,0 +1,1181 @@
+[
+  {
+    "id": "opr",
+    "url": "https://api.bnm.gov.my/api/specification/tag?name=Overnight%20Policy%20Rate%20(OPR)",
+    "status": 200,
+    "at": "2026-10-23T03:32:44.688Z",
+    "spec": {
+      "/opr": {
+        "id": "OPRLatest",
+        "method": "get",
+        "uri": "opr",
+        "name": "Overnight Policy Rate (OPR)",
+        "description": "Overnight Policy Rate (OPR) decided by the Monetary Policy Committee.",
+        "summary": "Latest",
+        "parameters": {
+          "path": [],
+          "query": [],
+          "header": [
+            {
+              "name": "Accept",
+              "in": "header",
+              "description": "Define Accept header to request specific version of API",
+              "required": true,
+              "style": "simple",
+              "explode": false,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "application/vnd.BNM.API.v1+json"
+                ],
+                "default": "application/vnd.BNM.API.v1+json"
+              },
+              "key": "Accept"
+            }
+          ]
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Meta",
+                      "children": {
+                        "last_updated": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Last updated date and time",
+                          "required": true
+                        },
+                        "total_result": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "Total number of results",
+                          "required": true
+                        }
+                      }
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/OPR",
+                      "children": {
+                        "year": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "Year of published statement",
+                          "required": false
+                        },
+                        "date": {
+                          "type": "string",
+                          "format": "date",
+                          "description": "Date of published statement",
+                          "required": true
+                        },
+                        "change_in_opr": {
+                          "type": "number",
+                          "description": "The change in the OPR level is derived by substracting the new OPR level with the previous OPR level",
+                          "required": false
+                        },
+                        "new_opr_level": {
+                          "type": "number",
+                          "description": "The new OPR level is an indicator used to signal the current monetary policy stance for Malaysia. The level of OPR is decided by the Monetary Policy Committee. It also serves as the target rate for the day-to-day liquidity operations of the Bank, which will influence other interest rates in the economy.",
+                          "required": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "status": 200
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Error code as listed in RFC2616 Status Code Definitions"
+                    },
+                    "message": {
+                      "type": "string",
+                      "maxLength": 100,
+                      "description": "Description of error"
+                    }
+                  },
+                  "key": "Error"
+                }
+              }
+            },
+            "key": "default"
+          }
+        }
+      },
+      "/opr/year/{year}": {
+        "id": "OPRYear",
+        "method": "get",
+        "uri": "opr/year/{year}",
+        "name": "Overnight Policy Rate (OPR)",
+        "description": "Overnight Policy Rate (OPR) decided by the Monetary Policy Committee.",
+        "summary": "By Year",
+        "parameters": {
+          "path": [
+            {
+              "name": "year",
+              "in": "path",
+              "required": true,
+              "description": "Year in numeric 4-digits format",
+              "schema": {
+                "type": "integer",
+                "minimum": 2000,
+                "default": 2020
+              },
+              "key": "Year"
+            }
+          ],
+          "query": [],
+          "header": [
+            {
+              "name": "Accept",
+              "in": "header",
+              "description": "Define Accept header to request specific version of API",
+              "required": true,
+              "style": "simple",
+              "explode": false,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "application/vnd.BNM.API.v1+json"
+                ],
+                "default": "application/vnd.BNM.API.v1+json"
+              },
+              "key": "Accept"
+            }
+          ]
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Meta",
+                      "children": {
+                        "last_updated": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Last updated date and time",
+                          "required": true
+                        },
+                        "total_result": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "Total number of results",
+                          "required": true
+                        }
+                      }
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OPR"
+                      },
+                      "children": {
+                        "year": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "Year of published statement",
+                          "required": false
+                        },
+                        "date": {
+                          "type": "string",
+                          "format": "date",
+                          "description": "Date of published statement",
+                          "required": true
+                        },
+                        "change_in_opr": {
+                          "type": "number",
+                          "description": "The change in the OPR level is derived by substracting the new OPR level with the previous OPR level",
+                          "required": false
+                        },
+                        "new_opr_level": {
+                          "type": "number",
+                          "description": "The new OPR level is an indicator used to signal the current monetary policy stance for Malaysia. The level of OPR is decided by the Monetary Policy Committee. It also serves as the target rate for the day-to-day liquidity operations of the Bank, which will influence other interest rates in the economy.",
+                          "required": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "status": 200
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Error code as listed in RFC2616 Status Code Definitions"
+                    },
+                    "message": {
+                      "type": "string",
+                      "maxLength": 100,
+                      "description": "Description of error"
+                    }
+                  },
+                  "key": "Error"
+                }
+              }
+            },
+            "key": "default"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "applied",
+    "url": "https://api.bnm.gov.my/api/specification/tag?name=1.10%20%3A%20Banking%20System%3A%20Loan%2FFinancing%20Applied%20by%20Purpose",
+    "status": 200,
+    "at": "2026-10-23T03:32:45.386Z",
+    "spec": {
+      "/msb/1.10": {
+        "id": "MSB110Latest",
+        "method": "get",
+        "uri": "msb/1.10",
+        "name": "1.10 : Banking System: Loan/Financing Applied by Purpose",
+        "description": "Banking System: Loan/Financing Applied by Purpose",
+        "summary": "Latest",
+        "parameters": {
+          "path": [],
+          "query": [
+            {
+              "name": "type",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 10,
+                "enum": [
+                  "commercial",
+                  "islamic",
+                  "investment",
+                  "total"
+                ],
+                "default": "commercial"
+              },
+              "description": "to query back the response with banking institution type",
+              "key": "BankingInstitutionType"
+            }
+          ],
+          "header": [
+            {
+              "name": "Accept",
+              "in": "header",
+              "description": "Define Accept header to request specific version of API",
+              "required": true,
+              "style": "simple",
+              "explode": false,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "application/vnd.BNM.API.v1+json"
+                ],
+                "default": "application/vnd.BNM.API.v1+json"
+              },
+              "key": "Accept"
+            }
+          ]
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Meta",
+                      "children": {
+                        "last_updated": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Last updated date and time",
+                          "required": true
+                        },
+                        "total_result": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "Total number of results",
+                          "required": true
+                        }
+                      }
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/MSB110",
+                      "children": {
+                        "year_dt": {
+                          "type": "string",
+                          "format": "date",
+                          "description": "End of Period Year",
+                          "required": true
+                        },
+                        "month_dt": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "End of Period Month",
+                          "required": true
+                        },
+                        "year_month": {
+                          "type": "string",
+                          "format": "string",
+                          "description": "End of Period",
+                          "required": true
+                        },
+                        "purpose": {
+                          "type": "string",
+                          "format": "string",
+                          "description": "Purpose",
+                          "required": true
+                        },
+                        "pur_sec": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of securities",
+                          "required": true
+                        },
+                        "plb_tot": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of fixed assets other than land and building - Total",
+                          "required": true
+                        },
+                        "plb_ptv_tot": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of fixed assets other than land and building - Purchase of transport vehicles - Total",
+                          "required": true
+                        },
+                        "plb_ptv_pur_pas_car": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of fixed assets other than land and building - Purchase of transport vehicles - Purchase of passenger cars",
+                          "required": true
+                        },
+                        "plb_ptv_oth": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of fixed assets other than land and building - Purchase of transport vehicles - Others",
+                          "required": true
+                        },
+                        "plb_oth": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of fixed assets other than land and building - Others",
+                          "required": true
+                        },
+                        "pur_res_pro": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of residential property",
+                          "required": true
+                        },
+                        "pur_non_res_pro": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of non-residential property",
+                          "required": true
+                        },
+                        "per_use_tot": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Personal uses - Total",
+                          "required": true
+                        },
+                        "per_use_pur_con_goo": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Personal uses - Purchase of consumer durable goods",
+                          "required": true
+                        },
+                        "per_use_oth": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Personal uses - Others",
+                          "required": true
+                        },
+                        "cre_car": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Credit card",
+                          "required": true
+                        },
+                        "con": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Construction",
+                          "required": true
+                        },
+                        "wor_cap": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Working capital",
+                          "required": true
+                        },
+                        "oth_pur": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Other purposes",
+                          "required": true
+                        },
+                        "tot_loa_app": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Total loan financing applied",
+                          "required": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "status": 200
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Error code as listed in RFC2616 Status Code Definitions"
+                    },
+                    "message": {
+                      "type": "string",
+                      "maxLength": 100,
+                      "description": "Description of error"
+                    }
+                  },
+                  "key": "Error"
+                }
+              }
+            },
+            "key": "default"
+          }
+        }
+      },
+      "/msb/1.10/year/{year}": {
+        "id": "MSB110Year",
+        "method": "get",
+        "uri": "msb/1.10/year/{year}",
+        "name": "1.10 : Banking System: Loan/Financing Applied by Purpose",
+        "description": "Banking System: Loan/Financing Applied by Purpose",
+        "summary": "By Year",
+        "parameters": {
+          "path": [
+            {
+              "name": "year",
+              "in": "path",
+              "required": true,
+              "description": "Year in numeric 4-digits format",
+              "schema": {
+                "type": "integer",
+                "minimum": 2000,
+                "default": 2020
+              },
+              "key": "Year"
+            }
+          ],
+          "query": [],
+          "header": [
+            {
+              "name": "Accept",
+              "in": "header",
+              "description": "Define Accept header to request specific version of API",
+              "required": true,
+              "style": "simple",
+              "explode": false,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "application/vnd.BNM.API.v1+json"
+                ],
+                "default": "application/vnd.BNM.API.v1+json"
+              },
+              "key": "Accept"
+            }
+          ]
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Meta",
+                      "children": {
+                        "last_updated": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Last updated date and time",
+                          "required": true
+                        },
+                        "total_result": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "Total number of results",
+                          "required": true
+                        }
+                      }
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MSB110"
+                      },
+                      "children": {
+                        "year_dt": {
+                          "type": "string",
+                          "format": "date",
+                          "description": "End of Period Year",
+                          "required": true
+                        },
+                        "month_dt": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "End of Period Month",
+                          "required": true
+                        },
+                        "year_month": {
+                          "type": "string",
+                          "format": "string",
+                          "description": "End of Period",
+                          "required": true
+                        },
+                        "purpose": {
+                          "type": "string",
+                          "format": "string",
+                          "description": "Purpose",
+                          "required": true
+                        },
+                        "pur_sec": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of securities",
+                          "required": true
+                        },
+                        "plb_tot": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of fixed assets other than land and building - Total",
+                          "required": true
+                        },
+                        "plb_ptv_tot": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of fixed assets other than land and building - Purchase of transport vehicles - Total",
+                          "required": true
+                        },
+                        "plb_ptv_pur_pas_car": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of fixed assets other than land and building - Purchase of transport vehicles - Purchase of passenger cars",
+                          "required": true
+                        },
+                        "plb_ptv_oth": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of fixed assets other than land and building - Purchase of transport vehicles - Others",
+                          "required": true
+                        },
+                        "plb_oth": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of fixed assets other than land and building - Others",
+                          "required": true
+                        },
+                        "pur_res_pro": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of residential property",
+                          "required": true
+                        },
+                        "pur_non_res_pro": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of non-residential property",
+                          "required": true
+                        },
+                        "per_use_tot": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Personal uses - Total",
+                          "required": true
+                        },
+                        "per_use_pur_con_goo": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Personal uses - Purchase of consumer durable goods",
+                          "required": true
+                        },
+                        "per_use_oth": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Personal uses - Others",
+                          "required": true
+                        },
+                        "cre_car": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Credit card",
+                          "required": true
+                        },
+                        "con": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Construction",
+                          "required": true
+                        },
+                        "wor_cap": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Working capital",
+                          "required": true
+                        },
+                        "oth_pur": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Other purposes",
+                          "required": true
+                        },
+                        "tot_loa_app": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Total loan financing applied",
+                          "required": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "status": 200
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Error code as listed in RFC2616 Status Code Definitions"
+                    },
+                    "message": {
+                      "type": "string",
+                      "maxLength": 100,
+                      "description": "Description of error"
+                    }
+                  },
+                  "key": "Error"
+                }
+              }
+            },
+            "key": "default"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "approved",
+    "url": "https://api.bnm.gov.my/api/specification/tag?name=1.12%20%3A%20Banking%20System%3A%20Loan%2FFinancing%20Approved",
+    "status": 200,
+    "at": "2026-10-23T03:32:46.026Z",
+    "spec": {
+      "/msb/1.12": {
+        "id": "MSB112Latest",
+        "method": "get",
+        "uri": "msb/1.12",
+        "name": "1.12 : Banking System: Loan/Financing Approved",
+        "description": "Banking System: Loan/Financing Approved",
+        "summary": "Latest",
+        "parameters": {
+          "path": [],
+          "query": [
+            {
+              "name": "type",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 10,
+                "enum": [
+                  "commercial",
+                  "islamic",
+                  "investment",
+                  "total"
+                ],
+                "default": "commercial"
+              },
+              "description": "to query back the response with banking institution type",
+              "key": "BankingInstitutionType"
+            }
+          ],
+          "header": [
+            {
+              "name": "Accept",
+              "in": "header",
+              "description": "Define Accept header to request specific version of API",
+              "required": true,
+              "style": "simple",
+              "explode": false,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "application/vnd.BNM.API.v1+json"
+                ],
+                "default": "application/vnd.BNM.API.v1+json"
+              },
+              "key": "Accept"
+            }
+          ]
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Meta",
+                      "children": {
+                        "last_updated": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Last updated date and time",
+                          "required": true
+                        },
+                        "total_result": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "Total number of results",
+                          "required": true
+                        }
+                      }
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/MSB112",
+                      "children": {
+                        "year_dt": {
+                          "type": "string",
+                          "format": "date",
+                          "description": "End of Period (Year)",
+                          "required": true
+                        },
+                        "year_month": {
+                          "type": "string",
+                          "format": "string",
+                          "description": "End of Period",
+                          "required": true
+                        },
+                        "month_dt": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "End of Period (Month)",
+                          "required": true
+                        },
+                        "purpose": {
+                          "type": "string",
+                          "format": "string",
+                          "description": "Purpose",
+                          "required": true
+                        },
+                        "pur_sec": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Securities",
+                          "required": true
+                        },
+                        "plb_tot": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Fixed Assets other than Land and Building - Total",
+                          "required": true
+                        },
+                        "plb_ptv_tot": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Fixed Assets other than Land and Building - Purchase of Transport Vehicles - Total",
+                          "required": true
+                        },
+                        "plb_ptv_pur_pas_car": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Fixed Assets other than Land and Building - Purchase of Transport Vehicles - Purchase of Passenger Cars",
+                          "required": true
+                        },
+                        "plb_ptv_oth": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Fixed Assets other than Land and Building - Purchase of Transport Vehicles - Others",
+                          "required": true
+                        },
+                        "plb_oth": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Fixed Assets other than Land and Building - Others",
+                          "required": true
+                        },
+                        "pur_res_pro": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Residential Property",
+                          "required": true
+                        },
+                        "pur_non_res_pro": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Non-Residential Property",
+                          "required": true
+                        },
+                        "per_use_tot": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Personal Uses - Total",
+                          "required": true
+                        },
+                        "per_use_pur_con_goo": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Personal Uses - Purchase of Consumer Durable Goods",
+                          "required": true
+                        },
+                        "per_use_oth": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Personal Uses - Others",
+                          "required": true
+                        },
+                        "cre_car": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Credit Card",
+                          "required": true
+                        },
+                        "con": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Construction",
+                          "required": true
+                        },
+                        "wor_cap": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Working Capital",
+                          "required": true
+                        },
+                        "oth_pur": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Other Purposes",
+                          "required": true
+                        },
+                        "tot_loa_fin_apr": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Total Loan/Financing Approved",
+                          "required": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "status": 200
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Error code as listed in RFC2616 Status Code Definitions"
+                    },
+                    "message": {
+                      "type": "string",
+                      "maxLength": 100,
+                      "description": "Description of error"
+                    }
+                  },
+                  "key": "Error"
+                }
+              }
+            },
+            "key": "default"
+          }
+        }
+      },
+      "/msb/1.12/year/{year}": {
+        "id": "MSB112Year",
+        "method": "get",
+        "uri": "msb/1.12/year/{year}",
+        "name": "1.12 : Banking System: Loan/Financing Approved",
+        "description": "Banking System: Loan/Financing Approved",
+        "summary": "By Year",
+        "parameters": {
+          "path": [
+            {
+              "name": "year",
+              "in": "path",
+              "required": true,
+              "description": "Year in numeric 4-digits format",
+              "schema": {
+                "type": "integer",
+                "minimum": 2000,
+                "default": 2020
+              },
+              "key": "Year"
+            }
+          ],
+          "query": [],
+          "header": [
+            {
+              "name": "Accept",
+              "in": "header",
+              "description": "Define Accept header to request specific version of API",
+              "required": true,
+              "style": "simple",
+              "explode": false,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "application/vnd.BNM.API.v1+json"
+                ],
+                "default": "application/vnd.BNM.API.v1+json"
+              },
+              "key": "Accept"
+            }
+          ]
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/Meta",
+                      "children": {
+                        "last_updated": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Last updated date and time",
+                          "required": true
+                        },
+                        "total_result": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "Total number of results",
+                          "required": true
+                        }
+                      }
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MSB112"
+                      },
+                      "children": {
+                        "year_dt": {
+                          "type": "string",
+                          "format": "date",
+                          "description": "End of Period (Year)",
+                          "required": true
+                        },
+                        "year_month": {
+                          "type": "string",
+                          "format": "string",
+                          "description": "End of Period",
+                          "required": true
+                        },
+                        "month_dt": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "End of Period (Month)",
+                          "required": true
+                        },
+                        "purpose": {
+                          "type": "string",
+                          "format": "string",
+                          "description": "Purpose",
+                          "required": true
+                        },
+                        "pur_sec": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Securities",
+                          "required": true
+                        },
+                        "plb_tot": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Fixed Assets other than Land and Building - Total",
+                          "required": true
+                        },
+                        "plb_ptv_tot": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Fixed Assets other than Land and Building - Purchase of Transport Vehicles - Total",
+                          "required": true
+                        },
+                        "plb_ptv_pur_pas_car": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Fixed Assets other than Land and Building - Purchase of Transport Vehicles - Purchase of Passenger Cars",
+                          "required": true
+                        },
+                        "plb_ptv_oth": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Fixed Assets other than Land and Building - Purchase of Transport Vehicles - Others",
+                          "required": true
+                        },
+                        "plb_oth": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Fixed Assets other than Land and Building - Others",
+                          "required": true
+                        },
+                        "pur_res_pro": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Residential Property",
+                          "required": true
+                        },
+                        "pur_non_res_pro": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Purchase of Non-Residential Property",
+                          "required": true
+                        },
+                        "per_use_tot": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Personal Uses - Total",
+                          "required": true
+                        },
+                        "per_use_pur_con_goo": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Personal Uses - Purchase of Consumer Durable Goods",
+                          "required": true
+                        },
+                        "per_use_oth": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Personal Uses - Others",
+                          "required": true
+                        },
+                        "cre_car": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Credit Card",
+                          "required": true
+                        },
+                        "con": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Construction",
+                          "required": true
+                        },
+                        "wor_cap": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Working Capital",
+                          "required": true
+                        },
+                        "oth_pur": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Other Purposes",
+                          "required": true
+                        },
+                        "tot_loa_fin_apr": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Total Loan/Financing Approved",
+                          "required": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "status": 200
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Error code as listed in RFC2616 Status Code Definitions"
+                    },
+                    "message": {
+                      "type": "string",
+                      "maxLength": 100,
+                      "description": "Description of error"
+                    }
+                  },
+                  "key": "Error"
+                }
+              }
+            },
+            "key": "default"
+          }
+        }
+      }
+    }
+  }
+]

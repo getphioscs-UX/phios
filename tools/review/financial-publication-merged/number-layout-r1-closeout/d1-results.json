@@ -1,0 +1,252 @@
+{
+  "status": "PASS_LOCAL_D1_PARTIAL_DELIVERY",
+  "tests": [
+    {
+      "name": "All 12 namespaces persist and reopen under QA with real D1 binding",
+      "status": "PASS"
+    },
+    {
+      "name": "Retry and re-download preserve number, source version and date",
+      "status": "PASS"
+    },
+    {
+      "name": "Foreign owner cannot read by public/reference identity",
+      "status": "PASS"
+    },
+    {
+      "name": "Revoked entitlement denies download and issuance retry",
+      "status": "PASS"
+    },
+    {
+      "name": "Tampered frozen artifact rejected by actual verifier",
+      "status": "PASS"
+    },
+    {
+      "name": "New source issuance preserves old version and previous reference",
+      "status": "PASS"
+    },
+    {
+      "name": "Valid multi-product order maps separate report references and entitlements",
+      "status": "PASS"
+    },
+    {
+      "name": "Concurrent D1 batches: 80 calls, 65 unique refs; no collision or replay allocation",
+      "status": "PASS"
+    },
+    {
+      "name": "LIVE/QA issuance isolation and missing auth gates fail closed",
+      "status": "PASS"
+    },
+    {
+      "name": "Default real BaZi delivery opener is wired and denies absent material",
+      "status": "PASS"
+    },
+    {
+      "name": "Unbound production-domain owners cannot silently use generic injected authority",
+      "status": "PASS"
+    },
+    {
+      "name": "Current Financial metadata no longer claims 16 pages; old price snapshot remains",
+      "status": "PASS"
+    },
+    {
+      "name": "Cancelled pre-checkout reservation becomes VOID and is never reused",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing refund reverses mapping, denies re-download and preserves original number",
+      "status": "PASS"
+    },
+    {
+      "name": "Canonical paid-delivery bridge derives order/receipt and stable artifact key; retry allocates once",
+      "status": "PASS"
+    },
+    {
+      "name": "Disk D1 survives workerd shutdown/restart",
+      "status": "PASS"
+    }
+  ],
+  "pass": 16,
+  "fail": 0,
+  "persistence": "C:\\phios\\tools\\review\\financial-publication-merged\\number-layout-r1-closeout\\d1-persist-1792749815297",
+  "workerdCompatibilityDate": "2026-08-01",
+  "runtime": "Miniflare 5 local D1/workerd; not SQLite shim; not remote D1",
+  "rows": [
+    {
+      "method": "BZR",
+      "product": "COM-REPORT-BAZI-FULL",
+      "publicReportNumber": "PHI-QA-BZR-2026-000001",
+      "nature": "PAID",
+      "orderId": "ord_SYNTHETIC0",
+      "purchaseId": "pur_SYNTHETIC0",
+      "receiptNumber": "PHI-QA-SYNTHETIC0",
+      "reportId": "synthetic-BZR-R1",
+      "artifactId": "synthetic-BZR-R1",
+      "savedVersion": "R1",
+      "issuedAt": "2026-10-23T10:30:00+08:00",
+      "scope": "Miniflare D1 + existing frozen-artifact verifier; injected synthetic domain opener, not product release admission"
+    },
+    {
+      "method": "ZWR",
+      "product": "COM-REPORT-ZIWEI-FULL",
+      "publicReportNumber": "PHI-QA-ZWR-2026-000001",
+      "nature": "PAID",
+      "orderId": "ord_SYNTHETIC1",
+      "purchaseId": "pur_SYNTHETIC1",
+      "receiptNumber": "PHI-QA-SYNTHETIC1",
+      "reportId": "synthetic-ZWR-R1",
+      "artifactId": "synthetic-ZWR-R1",
+      "savedVersion": "R1",
+      "issuedAt": "2026-10-23T10:30:00+08:00",
+      "scope": "Miniflare D1 + existing frozen-artifact verifier; injected synthetic domain opener, not product release admission"
+    },
+    {
+      "method": "AST",
+      "product": "COM-REPORT-ASTROLOGY-FULL",
+      "publicReportNumber": "PHI-QA-AST-2026-000001",
+      "nature": "PAID",
+      "orderId": "ord_SYNTHETIC2",
+      "purchaseId": "pur_SYNTHETIC2",
+      "receiptNumber": "PHI-QA-SYNTHETIC2",
+      "reportId": "synthetic-AST-R1",
+      "artifactId": "synthetic-AST-R1",
+      "savedVersion": "R1",
+      "issuedAt": "2026-10-23T10:30:00+08:00",
+      "scope": "Miniflare D1 + existing frozen-artifact verifier; injected synthetic domain opener, not product release admission"
+    },
+    {
+      "method": "HD",
+      "product": "COM-REPORT-HD-FULL",
+      "publicReportNumber": "PHI-QA-HD-2026-000001",
+      "nature": "PAID",
+      "orderId": "ord_SYNTHETIC3",
+      "purchaseId": "pur_SYNTHETIC3",
+      "receiptNumber": "PHI-QA-SYNTHETIC3",
+      "reportId": "synthetic-HD-R1",
+      "artifactId": "synthetic-HD-R1",
+      "savedVersion": "R1",
+      "issuedAt": "2026-10-23T10:30:00+08:00",
+      "scope": "Miniflare D1 + existing frozen-artifact verifier; injected synthetic domain opener, not product release admission"
+    },
+    {
+      "method": "ECR",
+      "product": "COM-REPORT-ECR-FULL",
+      "publicReportNumber": "PHI-QA-ECR-2026-000001",
+      "nature": "PAID",
+      "orderId": "ord_SYNTHETIC4",
+      "purchaseId": "pur_SYNTHETIC4",
+      "receiptNumber": "PHI-QA-SYNTHETIC4",
+      "reportId": "synthetic-ECR-R1",
+      "artifactId": "synthetic-ECR-R1",
+      "savedVersion": "R1",
+      "issuedAt": "2026-10-23T10:30:00+08:00",
+      "scope": "Miniflare D1 + existing frozen-artifact verifier; injected synthetic domain opener, not product release admission"
+    },
+    {
+      "method": "PROFILE",
+      "product": "COM-REPORT-PROFILE-FULL",
+      "publicReportNumber": "PHI-QA-PROFILE-2026-000001",
+      "nature": "PAID",
+      "orderId": "ord_SYNTHETIC5",
+      "purchaseId": "pur_SYNTHETIC5",
+      "receiptNumber": "PHI-QA-SYNTHETIC5",
+      "reportId": "synthetic-PROFILE-R1",
+      "artifactId": "synthetic-PROFILE-R1",
+      "savedVersion": "R1",
+      "issuedAt": "2026-10-23T10:30:00+08:00",
+      "scope": "Miniflare D1 + existing frozen-artifact verifier; injected synthetic domain opener, not product release admission"
+    },
+    {
+      "method": "NUM",
+      "product": "COM-REPORT-NUMEROLOGY-FULL",
+      "publicReportNumber": "PHI-QA-NUM-2026-000001",
+      "nature": "PAID",
+      "orderId": "ord_SYNTHETIC6",
+      "purchaseId": "pur_SYNTHETIC6",
+      "receiptNumber": "PHI-QA-SYNTHETIC6",
+      "reportId": "synthetic-NUM-R1",
+      "artifactId": "synthetic-NUM-R1",
+      "savedVersion": "R1",
+      "issuedAt": "2026-10-23T10:30:00+08:00",
+      "scope": "Miniflare D1 + existing frozen-artifact verifier; injected synthetic domain opener, not product release admission"
+    },
+    {
+      "method": "CROSS",
+      "product": "COM-REPORT-CROSS-FULL",
+      "publicReportNumber": "PHI-QA-CROSS-2026-000001",
+      "nature": "PAID",
+      "orderId": "ord_SYNTHETIC7",
+      "purchaseId": "pur_SYNTHETIC7",
+      "receiptNumber": "PHI-QA-SYNTHETIC7",
+      "reportId": "synthetic-CROSS-R1",
+      "artifactId": "synthetic-CROSS-R1",
+      "savedVersion": "R1",
+      "issuedAt": "2026-10-23T10:30:00+08:00",
+      "scope": "Miniflare D1 + existing frozen-artifact verifier; injected synthetic domain opener, not product release admission"
+    },
+    {
+      "method": "FIN",
+      "product": "COM-REPORT-FINANCIAL-FULL",
+      "publicReportNumber": "PHI-QA-FIN-2026-000001",
+      "nature": "PAID",
+      "orderId": "ord_SYNTHETIC8",
+      "purchaseId": "pur_SYNTHETIC8",
+      "receiptNumber": "PHI-QA-SYNTHETIC8",
+      "reportId": "synthetic-FIN-R1",
+      "artifactId": "synthetic-FIN-R1",
+      "savedVersion": "R1",
+      "issuedAt": "2026-10-23T10:30:00+08:00",
+      "scope": "Miniflare D1 + existing frozen-artifact verifier; injected synthetic domain opener, not product release admission"
+    },
+    {
+      "method": "WILL",
+      "product": "COM-WILL-WRITING",
+      "publicReportNumber": "PHI-QA-WILL-2026-000001",
+      "nature": "DRAFT",
+      "orderId": "ord_SYNTHETIC9",
+      "purchaseId": "pur_SYNTHETIC9",
+      "receiptNumber": "PHI-QA-SYNTHETIC9",
+      "reportId": "synthetic-WILL-R1",
+      "artifactId": "synthetic-WILL-R1",
+      "savedVersion": "R1",
+      "issuedAt": "2026-10-23T10:30:00+08:00",
+      "scope": "Miniflare D1 + existing frozen-artifact verifier; injected synthetic domain opener, not product release admission"
+    },
+    {
+      "method": "TAROT",
+      "product": "COM-READING-TAROT-FULL",
+      "publicReportNumber": "PHI-QA-TAROT-2026-000001",
+      "nature": "PAID",
+      "orderId": "ord_SYNTHETIC10",
+      "purchaseId": "pur_SYNTHETIC10",
+      "receiptNumber": "PHI-QA-SYNTHETIC10",
+      "reportId": "synthetic-TAROT-R1",
+      "artifactId": "synthetic-TAROT-R1",
+      "savedVersion": "R1",
+      "issuedAt": "2026-10-23T10:30:00+08:00",
+      "scope": "Miniflare D1 + existing frozen-artifact verifier; injected synthetic domain opener, not product release admission"
+    },
+    {
+      "method": "ICHING",
+      "product": "COM-READING-ICHING-FULL",
+      "publicReportNumber": "PHI-QA-ICHING-2026-000001",
+      "nature": "PAID",
+      "orderId": "ord_SYNTHETIC11",
+      "purchaseId": "pur_SYNTHETIC11",
+      "receiptNumber": "PHI-QA-SYNTHETIC11",
+      "reportId": "synthetic-ICHING-R1",
+      "artifactId": "synthetic-ICHING-R1",
+      "savedVersion": "R1",
+      "issuedAt": "2026-10-23T10:30:00+08:00",
+      "scope": "Miniflare D1 + existing frozen-artifact verifier; injected synthetic domain opener, not product release admission"
+    }
+  ],
+  "ownerCalls": 40,
+  "concurrency": {
+    "calls": 80,
+    "unique": 65
+  },
+  "providerCalls": 0,
+  "productionWrites": 0,
+  "limitation": "12-domain authorized synthetic opener injection verifies candidate contract only. Default adapters: BaZi actual opener bound and denial tested; Financial existing opener bound but source/grant/publication remains gated. Other domain owners remain unbound and denied."
+}

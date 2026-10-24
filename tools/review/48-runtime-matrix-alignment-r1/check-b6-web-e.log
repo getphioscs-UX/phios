@@ -1,0 +1,279 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /import \{t\} from '\.\.\/\.\.\/i18n\.js'/. Input:
+
+"import {acceptedCurrentView,compareAcceptedScopes,renderAcceptedCurrent} from './book6-current-view.js';\n" +
+  "import {loadAcceptedDossier} from './atlas-data.js';\n" +
+  "import {worldSystemLabel} from './world-system-copy.js';\n" +
+  "import {t,getLocale} from '../../i18n.js';\n" +
+  "import {resolveAtlasVisualById} from './atlas-static-visual.js';\n" +
+  '\n' +
+  `const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");\n` +
+  "const loc=(v,l)=>v&&typeof v==='object'?(v[l]||(l==='zh-Hans'?'来源内容尚待中文确认':v.en)||''):(v||'');\n" +
+  "const clean=v=>String(v??'').normalize('NFKC').trim();\n" +
+  'const searchText=v=>clean(v).toLocaleLowerCase();\n' +
+  'const PAGE=12,SEARCH_PAGE=24;\n' +
+  "const tr=(key,fallback='')=>t(`book6Atlas.${key}`,{},fallback);\n" +
+  "const humanize=v=>getLocale()==='zh-Hans'?'尚待来源确认':String(v??'').replaceAll('_',' ').replace(/([a-z])([A-Z])/g,'$1 $2').toLowerCase().replace(/(^|\\s)\\S/g,m=>m.toUpperCase());\n" +
+  "const UI_KEYS=['eyebrow','title','lead','overview','search','cases','timeline','windows','snapshots','dossiers','lived','visuals','compare','compareRuntime','unknown','missing','unverified','ask','noRank','open','previous','next','filters','clear','results','version','previousVersion','dataState','freshness','layer','textAlternative','selectDossier','selectSnapshot','selectDimension','pagination','imageBaseNote','resolverMissing','relatedCases','state','all','allTime','allRegions','allTypes','timeWindow','region','caseType','trigger','pressureField','structuralChange','reconfigurationWindow','linkedCases','dimension','evidenceDate','historicalVersionNote','selectCasesFirst','selectDossiersFirst','noUniversalScore','livedProfile','visualLibrary','visualLibraryLead','visualFamily','visualSubject','visualCount','contextFigures','currentDataNotAdmitted','currentDataBoundary','runtimeReadout','runtimeReadoutLead','runtimeEvidenceGateOpen','runtimeConfidence','runtimeConfidenceUnknown','runtimeNeeds','runtimeNeedEvidence','runtimeNeedObservation','runtimeNeedMethod','runtimeHistoricalContext','runtimeEngineBoundary','runtimeLoading','runtimeUnavailable','historicalEvidence','searchPlaceholder'];\n" +
+  "const copy=()=>Object.fromEntries(UI_KEYS.map(k=>[k,tr('ui.'+k,humanize(k))]));\n" +
+  "const COPY={get en(){return copy();},get 'zh-Hans'(){return copy();}};\n" +
+  'const LIVED_GUIDE=Object.freeze({\n' +
+  " livingEnvironment:{'zh-Hans':'观察居住环境、基础服务、城市条件与日常稳定性如何受到重组影响。',en:'Tracks how housing environment, basic services, urban conditions, and everyday stability are affected by reconfiguration.'},\n" +
+  " employmentOpportunity:{'zh-Hans':'观察工作机会、进入门槛、岗位分布与机会可得性如何变化。',en:'Tracks changes in job availability, entry barriers, opportunity distribution, and access to work.'},\n" +
+  " jobQuality:{'zh-Hans':'观察工作稳定性、保障、技能使用、劳动条件与长期可持续性。',en:'Tracks stability, protection, skill use, working conditions, and long-term sustainability of work.'},\n" +
+  " incomeCostBalance:{'zh-Hans':'观察收入能力、生活成本、家庭预算空间与实际购买力之间的关系。',en:'Tracks the relationship among earning capacity, living costs, household budget room, and real purchasing power.'},\n" +
+  " housingPressure:{'zh-Hans':'观察住房可得性、租购负担、居住稳定性与空间压力。',en:'Tracks housing access, rent or ownership burden, residential stability, and spatial pressure.'},\n" +
+  " timePressure:{'zh-Hans':'观察通勤、照护、工作与制度摩擦如何占用个人可支配时间。',en:'Tracks how commuting, care, work, and institutional friction consume discretionary time.'},\n" +
+  " workPressure:{'zh-Hans':'观察工作强度、绩效要求、不稳定性与职业风险如何进入日常生活。',en:'Tracks how work intensity, performance demands, instability, and career risk enter daily life.'},\n" +
+  " healthLoad:{'zh-Hans':'观察医疗可得性、环境暴露、照护负担与身体健康压力。',en:'Tracks healthcare access, environmental exposure, care burden, and physical health pressure.'},\n" +
+  " psychologicalLoad:{'zh-Hans':'观察不确定性、工作与生活压力如何累积为心理负担。',en:'Tracks how uncertainty and work-life pressures accumulate into psychological load.'},\n" +
+  " subjectiveWellbeing:{'zh-Hans':'观察个人对生活质量、稳定感、希望感与整体处境的评价。',en:'Tracks how people assess quality of life, stability, hope, and their overall situation.'},\n" +
+  " security:{'zh-Hans':'观察人身、经济、制度与未来不确定性对安全感的影响。',en:'Tracks how personal, economic, institutional, and future uncertainty shape felt security.'},\n" +
+  " socialConnection:{'zh-Hans':'观察家庭、社区、工作关系与社会支持网络的连接强度。',en:'Tracks the strength of family, community, workplace, and social-support connections.'},\n" +
+  " mobility:{'zh-Hans':'观察教育、职业、迁移与社会位置改变的可进入路径。',en:'Tracks access to education, careers, migration, and pathways for changing social position.'},\n" +
+  " personalFutureCapacity:{'zh-Hans':'观察一个人是否仍拥有学习、选择、调整与建立未来的现实空间。',en:'Tracks whether a person still has practical room to learn, choose, adapt, and build a future.'}\n" +
+  '});\n' +
+  'const PHRASE_KEY_BY_TEXT=Object.freeze({\n' +
+  " 'Existing institutional configuration before reform':'PRIOR_REFORM',\n" +
+  " 'Prior system configuration':'PRIOR_SYSTEM',\n" +
+  " 'Pre-revolutionary political and institutional configuration':'PRIOR_REVOLUTION',\n" +
+  " 'Pre-war political and institutional configuration':'PRIOR_WAR',\n" +
+  " 'Pre-collapse system configuration':'PRIOR_COLLAPSE',\n" +
+  " 'Prior economic and coordination configuration':'PRIOR_ECONOMIC',\n" +
+  " 'Prior technical and network configuration':'PRIOR_TECH',\n" +
+  " 'Colonial political and administrative configuration':'PRIOR_COLONIAL',\n" +
+  " 'Governed reform and policy reconfiguration':'TRIGGER_REFORM',\n" +
+  " 'System reconfiguration pressure':'TRIGGER_SYSTEM',\n" +
+  " 'Revolutionary rupture':'TRIGGER_REVOLUTION',\n" +
+  " 'Armed conflict / wartime mobilization':'TRIGGER_WAR',\n" +
+  " 'System breakdown / loss of coordinating continuity':'TRIGGER_COLLAPSE',\n" +
+  " 'Economic-system pressure or institutional change':'TRIGGER_ECONOMIC',\n" +
+  " 'Technology adoption / infrastructure transition':'TRIGGER_TECH',\n" +
+  " 'Decolonization / sovereignty transfer':'TRIGGER_DECOLONIZATION',\n" +
+  " 'Revised institutional and economic configuration':'SUCCESSOR_REFORM',\n" +
+  " 'Successor system configuration':'SUCCESSOR_SYSTEM',\n" +
+  " 'Successor political and institutional configuration':'SUCCESSOR_POLITICAL',\n" +
+  " 'Post-conflict institutional and system configuration':'SUCCESSOR_CONFLICT',\n" +
+  " 'Successor states or institutions':'SUCCESSOR_STATES',\n" +
+  " 'Reconfigured economic and network arrangement':'SUCCESSOR_ECONOMIC',\n" +
+  " 'Reconfigured technical and coordination layer':'SUCCESSOR_TECH',\n" +
+  " 'Post-colonial state or regional configuration':'SUCCESSOR_POSTCOLONIAL',\n" +
+  " 'See manuscript-grounded case scope; granular causal weighting is not asserted in B6-WEB-C.':'CASE_PRESSURE_BOUNDARY',\n" +
+  " 'Granular causal attribution, quantitative effects and contested interpretations are not filled by inference.':'CASE_UNKNOWN_BOUNDARY',\n" +
+  " 'Window pressure is represented by the governed set of overlapping cases; no synthetic ranking is created.':'WINDOW_PRESSURE_BOUNDARY',\n" +
+  " 'Successor configurations remain case-scoped; this window does not assert one deterministic outcome.':'WINDOW_SUCCESSOR_BOUNDARY',\n" +
+  " 'Window-level causal weighting remains UNKNOWN; linked cases retain their own evidence boundaries.':'WINDOW_UNKNOWN_BOUNDARY',\n" +
+  " 'Current-data evidence has not been admitted. UNKNOWN is the governed output.':'DOSSIER_CURRENT_NOT_ADMITTED'\n" +
+  '});\n' +
+  "const VALUE_ENUMS=new Set(['UNKNOWN','UNVERIFIED','NOT_APPLICABLE','NOT_CURRENT_DATA','CURRENT_DATA_NOT_ADMITTED','CONTRACT_READY_CURRENT_DATA_NOT_ADMITTED','ACTIVE','SUPERSEDED']);\n" +
+  "const stateLabel=v=>tr('knowledgeState.'+String(v||'UNKNOWN'),humanize(v||'UNKNOWN'));\n" +
+  "const typeLabel=v=>tr('caseType.'+String(v||''),humanize(v));\n" +
+  "const resultTypeLabel=(v,l='en')=>v==='RUNTIME_POSITION'?(l==='zh-Hans'?'运行位置':'Runtime position'):tr('resultType.'+String(v||''),humanize(v));\n" +
+  "const entityTypeLabel=v=>tr('entityType.'+String(v||''),humanize(v));\n" +
+  "const regionLabel=v=>tr('region.'+String(v||''),humanize(v));\n" +
+  "const fieldLabel=v=>tr('field.'+String(v||''),humanize(v));\n" +
+  "const layerLabel=v=>tr('layer.'+String(v||''),humanize(v));\n" +
+  "const changeLabel=v=>tr('change.'+String(v||''),typeLabel(v));\n" +
+  "const visualFamilyLabel=v=>tr('visualFamily.'+String(v||''),humanize(v));\n" +
+  'const W6_STATE_ZH=Object.freeze({\n' +
+  " NO_ADMITTED_CURRENT_EVIDENCE:'尚无已验收当前证据',\n" +
+  " OBSERVATION_TARGET_ONLY:'观察目标',\n" +
+  " NO_OBSERVED_SIGNAL_ADMITTED:'尚无已验收转移讯号',\n" +
+  " NOT_EVALUATED:'尚未评估',\n" +
+  " EVIDENCE_INCOMPLETE:'证据不足',\n" +
+  " CANDIDATE_FOR_HUMAN_REVIEW:'待人工阈值审查',\n" +
+  " HUMAN_CONFIRMED:'人工确认',\n" +
+  " HUMAN_REJECTED:'人工否决',\n" +
+  " BLOCKED_NO_ADMITTED_CURRENT_EVIDENCE:'因缺少当前证据而阻断',\n" +
+  " UNKNOWN:'未知',\n" +
+  " PRESENT:'存在',\n" +
+  " ABSENT:'不存在',\n" +
+  " CONFLICTED:'证据冲突'\n" +
+  '});\n' +
+  "const w6StateLabel=(v,l='en')=>l==='zh-Hans'?(W6_STATE_ZH[String(v||'UNKNOWN')]||humanize(v||'UNKNOWN')):humanize(v||'UNKNOWN');\n" +
+  'const W7_STATE_ZH=Object.freeze({\n' +
+  " NOT_STARTED:'尚未开始',\n" +
+  " SOURCE_CANDIDATES_DISCOVERED:'已发现来源候选',\n" +
+  " SOURCE_ADMISSION_READY:'来源待验收',\n" +
+  " CURRENT_EVIDENCE_ADMITTED:'当前证据已验收',\n" +
+  " RRE_READY:'运行读取已准备',\n" +
+  " POSITION_CANDIDATE_READY:'运行位置候选已准备',\n" +
+  " POSITION_HUMAN_REVIEW:'运行位置待人工验收',\n" +
+  " POSITION_ADMITTED:'运行位置已验收',\n" +
+  " TRANSITION_SIGNAL_REVIEW:'转移讯号待验收',\n" +
+  " THRESHOLD_REVIEW:'观察阈值待验收',\n" +
+  " CONDITIONAL_PROJECTION_READY:'条件性投影已准备',\n" +
+  " BLOCKED_PENDING_ADMITTED_EVIDENCE:'等待已验收证据',\n" +
+  " EVIDENCE_READY:'证据已准备',\n" +
+  " INSUFFICIENT_EVIDENCE:'证据不足',\n" +
+  " HUMAN_REVIEW_READY:'待人工验收',\n" +
+  " ADMITTED:'已验收',\n" +
+  " REJECTED:'已否决'\n" +
+  '});\n' +
+  "const w7StateLabel=(v,l='en')=>l==='zh-Hans'?(W7_STATE_ZH[String(v||'NOT_STARTED')]||humanize(v||'NOT_STARTED')):humanize(v||'NOT_STARTED');\n" +
+  'const W7_LANE_LABEL=Object.freeze({\n' +
+  " DEMOGRAPHY:{'zh-Hans':'人口',en:'Demography'},\n" +
+  " INDUSTRY:{'zh-Hans':'产业',en:'Industry'},\n" +
+  " INFRASTRUCTURE:{'zh-Hans':'基础设施',en:'Infrastructure'},\n" +
+  " ENERGY:{'zh-Hans':'能源',en:'Energy'},\n" +
+  " TRADE_SUPPLY_CHAIN:{'zh-Hans':'贸易与供应链',en:'Trade & supply chain'},\n" +
+  " FINANCE_FISCAL:{'zh-Hans':'金融与财政',en:'Finance & fiscal'},\n" +
+  " TECHNOLOGY:{'zh-Hans':'科技',en:'Technology'},\n" +
+  " LABOUR_SKILLS:{'zh-Hans':'劳动与技能',en:'Labour & skills'},\n" +
+  " HOUSING_URBAN:{'zh-Hans':'住房与城市',en:'Housing & urban'},\n" +
+  " EXTERNAL_DEPENDENCY:{'zh-Hans':'外部依赖',en:'External dependency'},\n" +
+  " CARRIER_STRUCTURE:{'zh-Hans':'载体结构',en:'Carrier structure'},\n" +
+  " PRESSURE_FIELD:{'zh-Hans':'压力场',en:'Pressure field'}\n" +
+  '});\n' +
+  "const w7LaneLabel=(id,l='en')=>W7_LANE_LABEL[id]?.[l]||W7_LANE_LABEL[id]?.en||humanize(id);\n" +
+  "const valueLabel=(v,l='en')=>{\n" +
+  " if(v==null||v==='')return tr('ui.unknown','Unknown');\n" +
+  " if(typeof v==='string'){\n" +
+  '  const upper=v.toUpperCase();\n' +
+  '  if(V'... 69858 more characters
+
+    at file:///C:/phios/scripts/check-b6-web-e.mjs:18:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: "import {acceptedCurrentView,compareAcceptedScopes,renderAcceptedCurrent} from './book6-current-view.js';\n" +
+    "import {loadAcceptedDossier} from './atlas-data.js';\n" +
+    "import {worldSystemLabel} from './world-system-copy.js';\n" +
+    "import {t,getLocale} from '../../i18n.js';\n" +
+    "import {resolveAtlasVisualById} from './atlas-static-visual.js';\n" +
+    '\n' +
+    `const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");\n` +
+    "const loc=(v,l)=>v&&typeof v==='object'?(v[l]||(l==='zh-Hans'?'来源内容尚待中文确认':v.en)||''):(v||'');\n" +
+    "const clean=v=>String(v??'').normalize('NFKC').trim();\n" +
+    'const searchText=v=>clean(v).toLocaleLowerCase();\n' +
+    'const PAGE=12,SEARCH_PAGE=24;\n' +
+    "const tr=(key,fallback='')=>t(`book6Atlas.${key}`,{},fallback);\n" +
+    "const humanize=v=>getLocale()==='zh-Hans'?'尚待来源确认':String(v??'').replaceAll('_',' ').replace(/([a-z])([A-Z])/g,'$1 $2').toLowerCase().replace(/(^|\\s)\\S/g,m=>m.toUpperCase());\n" +
+    "const UI_KEYS=['eyebrow','title','lead','overview','search','cases','timeline','windows','snapshots','dossiers','lived','visuals','compare','compareRuntime','unknown','missing','unverified','ask','noRank','open','previous','next','filters','clear','results','version','previousVersion','dataState','freshness','layer','textAlternative','selectDossier','selectSnapshot','selectDimension','pagination','imageBaseNote','resolverMissing','relatedCases','state','all','allTime','allRegions','allTypes','timeWindow','region','caseType','trigger','pressureField','structuralChange','reconfigurationWindow','linkedCases','dimension','evidenceDate','historicalVersionNote','selectCasesFirst','selectDossiersFirst','noUniversalScore','livedProfile','visualLibrary','visualLibraryLead','visualFamily','visualSubject','visualCount','contextFigures','currentDataNotAdmitted','currentDataBoundary','runtimeReadout','runtimeReadoutLead','runtimeEvidenceGateOpen','runtimeConfidence','runtimeConfidenceUnknown','runtimeNeeds','runtimeNeedEvidence','runtimeNeedObservation','runtimeNeedMethod','runtimeHistoricalContext','runtimeEngineBoundary','runtimeLoading','runtimeUnavailable','historicalEvidence','searchPlaceholder'];\n" +
+    "const copy=()=>Object.fromEntries(UI_KEYS.map(k=>[k,tr('ui.'+k,humanize(k))]));\n" +
+    "const COPY={get en(){return copy();},get 'zh-Hans'(){return copy();}};\n" +
+    'const LIVED_GUIDE=Object.freeze({\n' +
+    " livingEnvironment:{'zh-Hans':'观察居住环境、基础服务、城市条件与日常稳定性如何受到重组影响。',en:'Tracks how housing environment, basic services, urban conditions, and everyday stability are affected by reconfiguration.'},\n" +
+    " employmentOpportunity:{'zh-Hans':'观察工作机会、进入门槛、岗位分布与机会可得性如何变化。',en:'Tracks changes in job availability, entry barriers, opportunity distribution, and access to work.'},\n" +
+    " jobQuality:{'zh-Hans':'观察工作稳定性、保障、技能使用、劳动条件与长期可持续性。',en:'Tracks stability, protection, skill use, working conditions, and long-term sustainability of work.'},\n" +
+    " incomeCostBalance:{'zh-Hans':'观察收入能力、生活成本、家庭预算空间与实际购买力之间的关系。',en:'Tracks the relationship among earning capacity, living costs, household budget room, and real purchasing power.'},\n" +
+    " housingPressure:{'zh-Hans':'观察住房可得性、租购负担、居住稳定性与空间压力。',en:'Tracks housing access, rent or ownership burden, residential stability, and spatial pressure.'},\n" +
+    " timePressure:{'zh-Hans':'观察通勤、照护、工作与制度摩擦如何占用个人可支配时间。',en:'Tracks how commuting, care, work, and institutional friction consume discretionary time.'},\n" +
+    " workPressure:{'zh-Hans':'观察工作强度、绩效要求、不稳定性与职业风险如何进入日常生活。',en:'Tracks how work intensity, performance demands, instability, and career risk enter daily life.'},\n" +
+    " healthLoad:{'zh-Hans':'观察医疗可得性、环境暴露、照护负担与身体健康压力。',en:'Tracks healthcare access, environmental exposure, care burden, and physical health pressure.'},\n" +
+    " psychologicalLoad:{'zh-Hans':'观察不确定性、工作与生活压力如何累积为心理负担。',en:'Tracks how uncertainty and work-life pressures accumulate into psychological load.'},\n" +
+    " subjectiveWellbeing:{'zh-Hans':'观察个人对生活质量、稳定感、希望感与整体处境的评价。',en:'Tracks how people assess quality of life, stability, hope, and their overall situation.'},\n" +
+    " security:{'zh-Hans':'观察人身、经济、制度与未来不确定性对安全感的影响。',en:'Tracks how personal, economic, institutional, and future uncertainty shape felt security.'},\n" +
+    " socialConnection:{'zh-Hans':'观察家庭、社区、工作关系与社会支持网络的连接强度。',en:'Tracks the strength of family, community, workplace, and social-support connections.'},\n" +
+    " mobility:{'zh-Hans':'观察教育、职业、迁移与社会位置改变的可进入路径。',en:'Tracks access to education, careers, migration, and pathways for changing social position.'},\n" +
+    " personalFutureCapacity:{'zh-Hans':'观察一个人是否仍拥有学习、选择、调整与建立未来的现实空间。',en:'Tracks whether a person still has practical room to learn, choose, adapt, and build a future.'}\n" +
+    '});\n' +
+    'const PHRASE_KEY_BY_TEXT=Object.freeze({\n' +
+    " 'Existing institutional configuration before reform':'PRIOR_REFORM',\n" +
+    " 'Prior system configuration':'PRIOR_SYSTEM',\n" +
+    " 'Pre-revolutionary political and institutional configuration':'PRIOR_REVOLUTION',\n" +
+    " 'Pre-war political and institutional configuration':'PRIOR_WAR',\n" +
+    " 'Pre-collapse system configuration':'PRIOR_COLLAPSE',\n" +
+    " 'Prior economic and coordination configuration':'PRIOR_ECONOMIC',\n" +
+    " 'Prior technical and network configuration':'PRIOR_TECH',\n" +
+    " 'Colonial political and administrative configuration':'PRIOR_COLONIAL',\n" +
+    " 'Governed reform and policy reconfiguration':'TRIGGER_REFORM',\n" +
+    " 'System reconfiguration pressure':'TRIGGER_SYSTEM',\n" +
+    " 'Revolutionary rupture':'TRIGGER_REVOLUTION',\n" +
+    " 'Armed conflict / wartime mobilization':'TRIGGER_WAR',\n" +
+    " 'System breakdown / loss of coordinating continuity':'TRIGGER_COLLAPSE',\n" +
+    " 'Economic-system pressure or institutional change':'TRIGGER_ECONOMIC',\n" +
+    " 'Technology adoption / infrastructure transition':'TRIGGER_TECH',\n" +
+    " 'Decolonization / sovereignty transfer':'TRIGGER_DECOLONIZATION',\n" +
+    " 'Revised institutional and economic configuration':'SUCCESSOR_REFORM',\n" +
+    " 'Successor system configuration':'SUCCESSOR_SYSTEM',\n" +
+    " 'Successor political and institutional configuration':'SUCCESSOR_POLITICAL',\n" +
+    " 'Post-conflict institutional and system configuration':'SUCCESSOR_CONFLICT',\n" +
+    " 'Successor states or institutions':'SUCCESSOR_STATES',\n" +
+    " 'Reconfigured economic and network arrangement':'SUCCESSOR_ECONOMIC',\n" +
+    " 'Reconfigured technical and coordination layer':'SUCCESSOR_TECH',\n" +
+    " 'Post-colonial state or regional configuration':'SUCCESSOR_POSTCOLONIAL',\n" +
+    " 'See manuscript-grounded case scope; granular causal weighting is not asserted in B6-WEB-C.':'CASE_PRESSURE_BOUNDARY',\n" +
+    " 'Granular causal attribution, quantitative effects and contested interpretations are not filled by inference.':'CASE_UNKNOWN_BOUNDARY',\n" +
+    " 'Window pressure is represented by the governed set of overlapping cases; no synthetic ranking is created.':'WINDOW_PRESSURE_BOUNDARY',\n" +
+    " 'Successor configurations remain case-scoped; this window does not assert one deterministic outcome.':'WINDOW_SUCCESSOR_BOUNDARY',\n" +
+    " 'Window-level causal weighting remains UNKNOWN; linked cases retain their own evidence boundaries.':'WINDOW_UNKNOWN_BOUNDARY',\n" +
+    " 'Current-data evidence has not been admitted. UNKNOWN is the governed output.':'DOSSIER_CURRENT_NOT_ADMITTED'\n" +
+    '});\n' +
+    "const VALUE_ENUMS=new Set(['UNKNOWN','UNVERIFIED','NOT_APPLICABLE','NOT_CURRENT_DATA','CURRENT_DATA_NOT_ADMITTED','CONTRACT_READY_CURRENT_DATA_NOT_ADMITTED','ACTIVE','SUPERSEDED']);\n" +
+    "const stateLabel=v=>tr('knowledgeState.'+String(v||'UNKNOWN'),humanize(v||'UNKNOWN'));\n" +
+    "const typeLabel=v=>tr('caseType.'+String(v||''),humanize(v));\n" +
+    "const resultTypeLabel=(v,l='en')=>v==='RUNTIME_POSITION'?(l==='zh-Hans'?'运行位置':'Runtime position'):tr('resultType.'+String(v||''),humanize(v));\n" +
+    "const entityTypeLabel=v=>tr('entityType.'+String(v||''),humanize(v));\n" +
+    "const regionLabel=v=>tr('region.'+String(v||''),humanize(v));\n" +
+    "const fieldLabel=v=>tr('field.'+String(v||''),humanize(v));\n" +
+    "const layerLabel=v=>tr('layer.'+String(v||''),humanize(v));\n" +
+    "const changeLabel=v=>tr('change.'+String(v||''),typeLabel(v));\n" +
+    "const visualFamilyLabel=v=>tr('visualFamily.'+String(v||''),humanize(v));\n" +
+    'const W6_STATE_ZH=Object.freeze({\n' +
+    " NO_ADMITTED_CURRENT_EVIDENCE:'尚无已验收当前证据',\n" +
+    " OBSERVATION_TARGET_ONLY:'观察目标',\n" +
+    " NO_OBSERVED_SIGNAL_ADMITTED:'尚无已验收转移讯号',\n" +
+    " NOT_EVALUATED:'尚未评估',\n" +
+    " EVIDENCE_INCOMPLETE:'证据不足',\n" +
+    " CANDIDATE_FOR_HUMAN_REVIEW:'待人工阈值审查',\n" +
+    " HUMAN_CONFIRMED:'人工确认',\n" +
+    " HUMAN_REJECTED:'人工否决',\n" +
+    " BLOCKED_NO_ADMITTED_CURRENT_EVIDENCE:'因缺少当前证据而阻断',\n" +
+    " UNKNOWN:'未知',\n" +
+    " PRESENT:'存在',\n" +
+    " ABSENT:'不存在',\n" +
+    " CONFLICTED:'证据冲突'\n" +
+    '});\n' +
+    "const w6StateLabel=(v,l='en')=>l==='zh-Hans'?(W6_STATE_ZH[String(v||'UNKNOWN')]||humanize(v||'UNKNOWN')):humanize(v||'UNKNOWN');\n" +
+    'const W7_STATE_ZH=Object.freeze({\n' +
+    " NOT_STARTED:'尚未开始',\n" +
+    " SOURCE_CANDIDATES_DISCOVERED:'已发现来源候选',\n" +
+    " SOURCE_ADMISSION_READY:'来源待验收',\n" +
+    " CURRENT_EVIDENCE_ADMITTED:'当前证据已验收',\n" +
+    " RRE_READY:'运行读取已准备',\n" +
+    " POSITION_CANDIDATE_READY:'运行位置候选已准备',\n" +
+    " POSITION_HUMAN_REVIEW:'运行位置待人工验收',\n" +
+    " POSITION_ADMITTED:'运行位置已验收',\n" +
+    " TRANSITION_SIGNAL_REVIEW:'转移讯号待验收',\n" +
+    " THRESHOLD_REVIEW:'观察阈值待验收',\n" +
+    " CONDITIONAL_PROJECTION_READY:'条件性投影已准备',\n" +
+    " BLOCKED_PENDING_ADMITTED_EVIDENCE:'等待已验收证据',\n" +
+    " EVIDENCE_READY:'证据已准备',\n" +
+    " INSUFFICIENT_EVIDENCE:'证据不足',\n" +
+    " HUMAN_REVIEW_READY:'待人工验收',\n" +
+    " ADMITTED:'已验收',\n" +
+    " REJECTED:'已否决'\n" +
+    '});\n' +
+    "const w7StateLabel=(v,l='en')=>l==='zh-Hans'?(W7_STATE_ZH[String(v||'NOT_STARTED')]||humanize(v||'NOT_STARTED')):humanize(v||'NOT_STARTED');\n" +
+    'const W7_LANE_LABEL=Object.freeze({\n' +
+    " DEMOGRAPHY:{'zh-Hans':'人口',en:'Demography'},\n" +
+    " INDUSTRY:{'zh-Hans':'产业',en:'Industry'},\n" +
+    " INFRASTRUCTURE:{'zh-Hans':'基础设施',en:'Infrastructure'},\n" +
+    " ENERGY:{'zh-Hans':'能源',en:'Energy'},\n" +
+    " TRADE_SUPPLY_CHAIN:{'zh-Hans':'贸易与供应链',en:'Trade & supply chain'},\n" +
+    " FINANCE_FISCAL:{'zh-Hans':'金融与财政',en:'Finance & fiscal'},\n" +
+    " TECHNOLOGY:{'zh-Hans':'科技',en:'Technology'},\n" +
+    " LABOUR_SKILLS:{'zh-Hans':'劳动与技能',en:'Labour & skills'},\n" +
+    " HOUSING_URBAN:{'zh-Hans':'住房与城市',en:'Housing & urban'},\n" +
+    " EXTERNAL_DEPENDENCY:{'zh-Hans':'外部依赖',en:'External dependency'},\n" +
+    " CARRIER_STRUCTURE:{'zh-Hans':'载体结构',en:'Carrier structure'},\n" +
+    " PRESSURE_FIELD:{'zh-Hans':'压力场',en:'Pressure field'}\n" +
+    '});\n' +
+    "const w7LaneLabel=(id,l='en')=>W7_LANE_LABEL[id]?.[l]||W7_LANE_LABEL[id]?.en||humanize(id);\n" +
+    "const valueLabel=(v,l='en')=>{\n" +
+    " if(v==null||v==='')return tr('ui.unknown','Unknown');\n" +
+    " if(typeof v==='string'){\n" +
+    '  const upper=v.toUpperCase();\n' +
+    '  if(V'... 69858 more characters,
+  expected: /import \{t\} from '\.\.\/\.\.\/i18n\.js'/,
+  operator: 'match',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

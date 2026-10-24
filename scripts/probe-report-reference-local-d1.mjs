@@ -1,0 +1,2 @@
+import {Miniflare} from 'miniflare';const mf=new Miniflare({modules:true,script:'export default {fetch(){return new Response("LOCAL_ONLY")}}',compatibilityDate:'2026-08-01',d1Databases:{DB:'financial-reference-local-closeout'},persist:'C:/phios/tools/review/financial-publication-merged/number-layout-r1-closeout/d1-local'});try{const db=await mf.getD1Database('DB');console.log(await db.prepare('SELECT 1 AS local_d1').first());}finally{await mf.dispose()}
+

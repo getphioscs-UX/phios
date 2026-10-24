@@ -1,0 +1,142 @@
+{
+  "tests": [
+    {
+      "name": "Registry resolves all 10 requested products without new commerce codes",
+      "status": "PASS"
+    },
+    {
+      "name": "Reservation deterministic on replay; no additional counter",
+      "status": "PASS"
+    },
+    {
+      "name": "Replay with different owner rejected and transaction rolled back",
+      "status": "PASS"
+    },
+    {
+      "name": "Paid grant required before issuance",
+      "status": "PASS"
+    },
+    {
+      "name": "Unfrozen source cannot issue",
+      "status": "PASS"
+    },
+    {
+      "name": "Valid owned paid artifact issues once",
+      "status": "PASS"
+    },
+    {
+      "name": "Duplicate webhook cannot reissue",
+      "status": "PASS"
+    },
+    {
+      "name": "Reopen and technical recovery retain number and issued date",
+      "status": "PASS"
+    },
+    {
+      "name": "New source version new reference and previous reference retained",
+      "status": "PASS"
+    },
+    {
+      "name": "Cancelled reference never reallocated or deleted",
+      "status": "PASS"
+    },
+    {
+      "name": "Refund keeps original number and mapping",
+      "status": "PASS"
+    },
+    {
+      "name": "Issued date and number immutable",
+      "status": "PASS"
+    },
+    {
+      "name": "Bundle one order maps multiple report numbers",
+      "status": "PASS"
+    },
+    {
+      "name": "Free reference has no payment or invoice mapping",
+      "status": "PASS"
+    },
+    {
+      "name": "Will draft reference is preparation identity only",
+      "status": "PASS"
+    },
+    {
+      "name": "Pre-checkout reservation attaches existing verified purchase without reallocating number",
+      "status": "PASS"
+    },
+    {
+      "name": "Unverified or wrong purchase cannot attach",
+      "status": "PASS"
+    },
+    {
+      "name": "LIVE adapter execution denied",
+      "status": "PASS"
+    },
+    {
+      "name": "Invoice number stays distinct from order and report number",
+      "status": "PASS"
+    },
+    {
+      "name": "Duplicate invoice reconciliation creates no grant or reservation",
+      "status": "PASS"
+    },
+    {
+      "name": "Wrong amount, invoice/session/customer/order and LIVE invoice rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Strategies A/B preserve differences and bundles use order",
+      "status": "PASS"
+    },
+    {
+      "name": "Subscription request unchanged; no fixed report on recurring invoice",
+      "status": "PASS"
+    },
+    {
+      "name": "Formal cover without issuance denied; generated date mandatory",
+      "status": "PASS"
+    },
+    {
+      "name": "P21 block retained",
+      "status": "PASS"
+    },
+    {
+      "name": "P22 two spans only, no question or dash symbol or third row",
+      "status": "PASS"
+    },
+    {
+      "name": "Invalid range or inferred status cannot silently render",
+      "status": "PASS"
+    },
+    {
+      "name": "Actual merged report entry remains blocked at P21 source gate",
+      "status": "PASS"
+    },
+    {
+      "name": "Cover rejects technical hash masquerading as report number",
+      "status": "PASS"
+    },
+    {
+      "name": "Expired reservation cannot be reassigned or issued",
+      "status": "PASS"
+    },
+    {
+      "name": "Free frozen report issues with FREE nature and no Stripe invoice",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing Stripe signature verifier accepts local signed synthetic invoice fixture",
+      "status": "PASS"
+    },
+    {
+      "name": "Tampered and stale signed events rejected by existing verifier",
+      "status": "PASS"
+    }
+  ],
+  "passed": 33,
+  "failed": 0,
+  "providerCalls": 0,
+  "stripeRequests": 0,
+  "productionAdmission": false,
+  "scope": "Local SQLite candidate with synthetic commerce fixtures; D1 deployment and adapter wiring not tested"
+}

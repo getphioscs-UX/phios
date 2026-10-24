@@ -466,7 +466,7 @@ for(const base of [...rows].filter(p=>/^COM-BOOK-0[1-4]$/.test(p.productId))){
     qaPriceId:null,checkoutBlockedReason:null,requiresBookPdfReadiness:true,pricingVersion:'BOOK-PDF-PER-LANGUAGE-RM89-2026-10-21'});
 }
 const previousFinancialProduct=Object.freeze({...rows.find(p=>p.productId==='COM-REPORT-FINANCIAL-FULL')});
-Object.assign(rows.find(p=>p.productId==='COM-REPORT-FINANCIAL-FULL'),{amountMinor:6900,title:'Personal & Household Financial Preparation Report · 16 pages',titleZh:'个人与家庭财务准备报告 · 16 页',pricingVersion:'FINANCE-RM69-2026-10-20',publicationVersion:'FINANCE_CORE_16_V2',professionalReviewRequired:false,qaPriceId:null,livePriceId:null,checkoutBlockedReason:'FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED'});
+Object.assign(rows.find(p=>p.productId==='COM-REPORT-FINANCIAL-FULL'),{amountMinor:6900,title:'Personal & Household Financial Preparation Report · Bilingual',titleZh:'个人与家庭财务准备报告 · 双语',pricingVersion:'FINANCE-RM69-2026-10-20',publicationVersion:'FINANCE_BILINGUAL_MERGED_22_CANDIDATE',professionalReviewRequired:false,qaPriceId:null,livePriceId:null,checkoutBlockedReason:'FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED'});
 export const STRIPE_PRODUCT_REGISTRY = Object.freeze(rows.map(row => Object.freeze(row)));
 export function commerceProduct(id) {
   const product = STRIPE_PRODUCT_REGISTRY.find(row => row.productId === id);

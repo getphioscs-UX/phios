@@ -1,0 +1,27 @@
+{
+  "status": "PARTIAL_READONLY_PREPARATION",
+  "sandboxIsAbsoluteFinanceBlocker": false,
+  "source": "User latest steering; Live configuration read-only authorized",
+  "liveReadback": "stripe-live-config-readonly.json",
+  "defaultStrategy": "A_ORDER_REFERENCE",
+  "requestDiffOnly": {
+    "invoice_creation[enabled]": true,
+    "invoice_creation[invoice_data][custom_fields][0][name]": "PHI OS Order Reference",
+    "invoice_creation[invoice_data][custom_fields][0][value]": "<existing canonical order reference>",
+    "invoice_creation[invoice_data][metadata][order_id]": "<same canonical order reference>"
+  },
+  "notExecuted": true,
+  "invoiceNumber": "Assigned only by Stripe; never PHI OS report number",
+  "reportReference": "Assigned only to frozen authorized delivery; never QA-as-LIVE",
+  "requiredBeforeFinalLiveGate": [
+    "Review one-time invoice handler, preserving existing Checkout sole fulfillment owner",
+    "Confirm actual product/price/delivery admission",
+    "Confirm account policy, fee impact and invoice branding",
+    "Explicitly authorize final controlled transaction/invoice validation; no customer notification in this round"
+  ],
+  "finalTransactionInvoiceGate": "PENDING_SEPARATE_ADMISSION",
+  "stripeWrites": 0,
+  "payments": 0,
+  "notifications": 0,
+  "productionMigrations": 0
+}

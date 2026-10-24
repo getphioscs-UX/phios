@@ -6,6 +6,13 @@ import {projectMyRealityWorkspace} from './my-reality-workspace-projection.js';
 import {projectRealityNavigationGraph} from './reality-navigation-graph-projection.js';
 import {evaluateVisibility,evaluateDataPermission} from '../../scripts/lib/reality-data-governance/rdg-access-rights-v1.mjs';
 import {normalizeQuestionContext,admitSourceReference,admitClaim,evaluateQuestionRelevance,assembleRealityView,buildAnswerBundle} from '../../tools/review/reality-information-contract-r1/candidate/ric.mjs';
+import {measurementAskHandoff} from '../_lib/world-measurement-observations.js';
+// Typed measurement successor; only server-resolved local observations are supplied.
+// Existing public answer/session ownership and zero-provider boundary are retained.
+export function answerMeasurementWorldSession(readout,{question,locale='en'}={}){
+ if(readout?.schemaVersion!=='WORLD-R4-BOUNDED-READOUT-v1'||readout.productionEligible!==false||!Array.isArray(readout.observedIndicators))throw Object.assign(new Error('SERVER_MEASUREMENT_READOUT_REQUIRED'),{code:'SERVER_MEASUREMENT_READOUT_REQUIRED'});
+ return measurementAskHandoff(readout,{question,locale});
+}
 const fail=code=>{throw Object.assign(new Error(code),{code});},need=(v,c)=>{if(!v)fail(c);};
 const copy=x=>structuredClone(x);
 function observationText(row,locale){const zh=locale==='zh-Hans',n=new Intl.NumberFormat(locale).format(row.value);if(row.seriesId==='US_HMDA'){const labels=zh?{1:'已发放',2:'批准后未接受',3:'拒绝'}:{1:'originated',2:'approved but not accepted',3:'denied'};return zh?`${row.observationPeriod}年美国购房用途${labels[row.actionCode]}申报记录：${n} 条。不是个人结果。`:`US home-purchase ${labels[row.actionCode]} records in ${row.observationPeriod}: ${n} reported records. Not a personal outcome.`;}return zh?`${row.observationPeriod}，公共统计观察：${n}；指标及单位见来源定义。不是个人结果。`:`${row.sourceDataset}, ${row.observationPeriod}: ${n} (${row.unit}). Not a personal outcome.`;}

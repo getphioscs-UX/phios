@@ -198,6 +198,12 @@ const publicationFiles = new Set(tracked.stdout.split('\0').filter(Boolean));
 // Customer Entry R1: only these two public discovery assets may join an uncommitted local build.
 // The existing publication predicate still filters every entry; no reviews or private sources are added.
 for(const file of ['assets/js/customer-entry-topic-map.js','assets/customer-ui/surfaces/customer-entry-r1.css'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
+// Explicit public W8-I reading adapter for uncommitted local builds. This adds
+// no dossier JSON, private source, review fixture, registry or production switch.
+const acceptedDossierView='assets/js/pages/civilization-atlas/book6-current-view.js';
+if(fs.existsSync(path.join(root,acceptedDossierView)))publicationFiles.add(acceptedDossierView);
+const authorDisplayOverlay='content/civilization-atlas/reconfiguration/runtime-position-display-errata-r1.json';
+if(fs.existsSync(path.join(root,authorDisplayOverlay)))publicationFiles.add(authorDisplayOverlay);
 
 // Version-bound public admission metadata; private owner review remains excluded.
 const book5AcceptancePath='content/knowledge/public/successors/book5-publication-v1/human-acceptance-successor-v1.json';

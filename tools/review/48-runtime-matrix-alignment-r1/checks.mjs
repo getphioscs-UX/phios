@@ -1,0 +1,5 @@
+import fs from 'node:fs';import {spawn} from 'node:child_process';import crypto from 'node:crypto';
+const base='tools/review/48-runtime-matrix-alignment-r1',rows=[];
+for(const name of ['check:runtime-position-48:backbone','check:runtime-position-48:w6','check:runtime-position-48:w8e','check:book6-reconfiguration-atlas','check:book6-reconfiguration-atlas:ask','check:book6-runtime-current-data','check:book6-atlas-no-ranking','check:b6-web-e','check:i18n']){
+ const args=['scripts/run-zero-cost-regression.mjs',name],file=base+'/'+name.replaceAll(':','-')+'.log',start=new Date().toISOString();let log='';const child=spawn(process.execPath,args,{env:{...process.env,WRANGLER_SEND_METRICS:'false'}});child.stdout.on('data',b=>log+=b);child.stderr.on('data',b=>log+=b);const code=await new Promise(r=>child.on('close',r));fs.writeFileSync(file,log);rows.push({command:'node '+args.join(' '),exitCode:code,state:code===0?'PASS':'FAIL',start,log:file,logSha256:crypto.createHash('sha256').update(log).digest('hex')});fs.writeFileSync(base+'/REGRESSIONS.json',JSON.stringify(rows,null,2));console.log(name,code);
+}

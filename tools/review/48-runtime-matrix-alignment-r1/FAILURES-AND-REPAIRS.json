@@ -1,0 +1,55 @@
+{
+  "initialAuditHarness": [
+    "Incorrectly treated alignmentState as mappingMethod",
+    "Then failed to account for already Human-accepted semantic precedents. Corrected only the new audit; original source and historical acceptance unchanged."
+  ],
+  "retainedCommandFailures": [
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:runtime-position-48:w6",
+      "exitCode": 1,
+      "state": "FAIL",
+      "start": "2026-10-23T08:38:19.419Z",
+      "log": "tools/review/48-runtime-matrix-alignment-r1/check-runtime-position-48-w6.log",
+      "logSha256": "a075a630c5664b8632ebce51b23dce59af0e9efb5b0acde3a5e3d130c936e82f"
+    },
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:b6-web-e",
+      "exitCode": 1,
+      "state": "FAIL",
+      "start": "2026-10-23T08:38:21.399Z",
+      "log": "tools/review/48-runtime-matrix-alignment-r1/check-b6-web-e.log",
+      "logSha256": "3a15708a15e87ba79f063c30965189399e8df3ccd2463c711cceb685c310237e"
+    }
+  ],
+  "publicationRepair": {
+    "observed": "Build exit0 initially omitted untracked book6-current-view.js because publication uses git ls-files. Artifact identity check caught missing import.",
+    "repair": "Only exact public adapter JS added to build inclusion. Existing predicate/private exclusions untouched.",
+    "current": "Final Pages check exit0; static adapter/source bytes match; 4 built-static browser flows pass."
+  },
+  "compareLabelRepair": "Browser screenshot inspection found new accepted section needed explicit object names and clearer NOT_COMPARABLE reason; corrected before final artifact build.",
+  "sourceConflicts": [
+    {
+      "id": "G8-ARC",
+      "positions": [
+        "RP-08",
+        "RP-24",
+        "RP-40"
+      ],
+      "registry": "INTERNALIZATION",
+      "figure": "ACTIVATION bracket includes G8",
+      "originalSource": "48 phase.pdf unavailable; publication discusses arcs but does not assign G8",
+      "requestedDecision": "Clarify whether visual brackets are a separate grouping or whether a versioned doctrine/figure annotation is required. No canonical edit is prepared without source authority.",
+      "compatibility": "All three G8 positions and W8 derivation consumers must retain IDs; no reassignment by date or source-context quartet."
+    },
+    {
+      "id": "RP30-SOURCE-WINDOW",
+      "positions": [
+        "RP-30"
+      ],
+      "registry": "4253–3742 BC; source literal overlap anomaly explicitly preserved",
+      "figure": "4153–3742 BC in actual FIG13H / English PDF page235",
+      "requestedDecision": "Confirm how the illustrative figure relates to the literal source coordinates, preferably using original pages59–60. Keep both originals unchanged until resolved.",
+      "compatibility": "A future versioned change could affect source-window and historical temporal crosswalk; do not silently correct it."
+    }
+  ]
+}

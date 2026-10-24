@@ -1,0 +1,8 @@
+// Fail closed until an approved empty-slot source and slot map are provided. No replacement poster.
+export const FIXED_ASSET_POLICY=Object.freeze({mode:'EXACT_R2_IMAGE_WITH_ALLOWED_OVERLAYS',p03:'FROZEN_APPROVED',nativeR4:'HISTORICAL_ONLY',p21:'BLOCKED_APPROVED_EMPTY_SLOT_SOURCE_REQUIRED'});
+export function assertApprovedMethodAsset(){throw Error('P21_APPROVED_EMPTY_SLOT_SOURCE_REQUIRED');}
+const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+export function coverFields({name,reportDate,savedVersion}){
+ if([name,reportDate,savedVersion].some(v=>typeof v!=='string'||!v.trim()))throw Error('COVER_REQUIRED_SAVED_FIELDS');
+ return '<div class="cover-fields" style="position:absolute;top:83.1%;left:10%;right:10%;font:10px/1.7 sans-serif;display:flex;justify-content:center;gap:16px"><div>'+esc(name)+'</div><div>'+esc(reportDate)+'</div><div>'+esc(savedVersion)+'</div></div>';
+}

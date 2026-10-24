@@ -1,0 +1,1667 @@
+{
+  "answers": {
+    "zh-HansA": {
+      "question": "Controlled question with explicitly selected A context",
+      "locale": "zh-Hans",
+      "answer": "Malaysia 2026-09 的消费价格同比变化为 1.8%，环比为 0.1%。这是代表性消费篮子的价格变化，不是个人账单。解释生活成本压力还需要收入、支出权重与实际账单；不能只凭同比率判断生活是否更便宜。 本次可见涨幅较高的类别包括酒类与烟草（2.8%）、个人护理、社会保障及其他商品与服务（2.8%）、交通（2.5%）；这是各类涨幅，不是对总通胀的贡献分解，也不能据此认定主要成因。 单一价格序列不足以证明社会重组、运行位置变化或观察阈值跨越；还需要就业与收入、实际消费，以及财政、能源、制度等跨系统关系变化的证据。",
+      "answerState": "PARTIAL_OBSERVED_PRICES_ONLY",
+      "grounding": {
+        "schemaVersion": "PHI-OS-KAP-W29-KNOWLEDGE-HANDOFF-v1.0.0",
+        "provenanceType": "KNOWLEDGE_GROUNDING_BUNDLE",
+        "bundleId": "WORLD-R4:Malaysia:2026-09",
+        "matchedKnowledge": [
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "DOSM:cpi_2d",
+            "sourceType": "ADMITTED_LOCAL_MEASUREMENT",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://storage.dosm.gov.my/cpi/cpi_2d.csv",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          },
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceType": "ADMITTED_LOCAL_MEASUREMENT",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          },
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceType": "ADMITTED_LOCAL_MEASUREMENT",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          },
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceType": "ADMITTED_LOCAL_MEASUREMENT",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          },
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceType": "ADMITTED_LOCAL_MEASUREMENT",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          },
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceType": "ADMITTED_LOCAL_MEASUREMENT",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          }
+        ],
+        "unknownCodes": [
+          "HOUSEHOLD_EXPENDITURE_WEIGHTS",
+          "CURRENT_HOUSEHOLD_INCOME",
+          "LOCAL_RENT_OR_PERSONAL_BILLS",
+          "CAUSAL_CONTRIBUTION_WEIGHTS"
+        ],
+        "contentMode": "REFERENCE_ONLY_NO_FULL_SOURCE_TEXT",
+        "canonicalKnowledgeAuthorityUnchanged": true
+      },
+      "observations": [
+        {
+          "type": "MEASUREMENT_OBSERVATION",
+          "observationId": "DOSM:9f5f33b4e6209c6b:Malaysia:2026-09:overall:index",
+          "admittedEvidenceId": "EVIDENCE:DOSM:9f5f33b4e6209c6b:Malaysia:2026-09:overall:index",
+          "evidence": {
+            "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+            "claimId": "EVIDENCE:DOSM:9f5f33b4e6209c6b:Malaysia:2026-09:overall:index",
+            "claimText": "Malaysia 2026-09 overall index=137.6",
+            "claimType": "GENERAL_CURRENT_FACT",
+            "sourceId": "DOSM:cpi_2d",
+            "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d.csv",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publisher": "Department of Statistics Malaysia",
+            "title": "cpi_2d",
+            "publishedAt": null,
+            "retrievedAt": "2026-10-23T03:30:03.147Z",
+            "sourceVersion": "9f5f33b4e6209c6bfbb9320260a2591bd9e38666c908dee85047bf63880649ae",
+            "freshnessState": "FRESH",
+            "supportLevel": "DIRECT",
+            "jurisdiction": "MY",
+            "domain": "GENERAL_CURRENT",
+            "conflicts": [],
+            "boundaries": {
+              "searchRankUsedAsAuthority": false,
+              "sourceVotingUsed": false,
+              "lensMutationAllowed": false,
+              "proseGenerationAllowed": false
+            }
+          },
+          "sourceId": "DOSM:cpi_2d",
+          "sourceVersion": "9f5f33b4e6209c6bfbb9320260a2591bd9e38666c908dee85047bf63880649ae",
+          "metricId": "CPI_INDEX",
+          "division": "overall",
+          "value": 137.6,
+          "unit": "index_2010_100",
+          "geographyId": "MYS",
+          "geographyName": "Malaysia",
+          "geographicLevel": "COUNTRY",
+          "observationPeriod": "2026-09",
+          "frequency": "MONTHLY",
+          "publishedAt": null,
+          "retrievedAt": "2026-10-23T03:30:03.147Z",
+          "datasetUpdatedAt": "2026-10-19T13:12:00+08:00",
+          "definition": "CPI_INDEX:INDEX_LEVEL",
+          "statisticalMethod": "DOSM_FIXED_BASKET_CPI_MCOICOP",
+          "denominator": "INDEX_LEVEL",
+          "population": "Represented consumer basket; not a household-specific budget",
+          "coverage": "DOSM_COUNTRY_CPI_BASKET",
+          "baseYear": 2010,
+          "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d.csv",
+          "metadataUrl": "https://open.dosm.gov.my/data-catalogue/cpi_headline",
+          "sourceSnapshotReference": "9f5f33b4e6209c6bfbb9320260a2591bd9e38666c908dee85047bf63880649ae#csv-row=562&field=index",
+          "sourceRow": {
+            "date": "2026-09-01",
+            "division": "overall",
+            "index": "137.6"
+          },
+          "transformationVersion": "WORLD-R4-MEASUREMENT-ROW-v1",
+          "qualityFlags": [
+            "PINNED_VINTAGE",
+            "ROW_REVISION_STATUS_NOT_STATED"
+          ],
+          "admissionStatus": "LOCAL_CWA_ADMITTED",
+          "verificationStatus": "RAW_BYTES_COLUMNS_ROW_SCOPE_METADATA_LICENSE_CHECKED",
+          "productionEligible": false
+        },
+        {
+          "type": "MEASUREMENT_OBSERVATION",
+          "observationId": "DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_yoy",
+          "admittedEvidenceId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_yoy",
+          "evidence": {
+            "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+            "claimId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_yoy",
+            "claimText": "Malaysia 2026-09 overall inflation_yoy=1.8",
+            "claimType": "GENERAL_CURRENT_FACT",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publisher": "Department of Statistics Malaysia",
+            "title": "cpi_2d_inflation",
+            "publishedAt": null,
+            "retrievedAt": "2026-10-23T03:30:03.148Z",
+            "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+            "freshnessState": "FRESH",
+            "supportLevel": "DIRECT",
+            "jurisdiction": "MY",
+            "domain": "GENERAL_CURRENT",
+            "conflicts": [],
+            "boundaries": {
+              "searchRankUsedAsAuthority": false,
+              "sourceVotingUsed": false,
+              "lensMutationAllowed": false,
+              "proseGenerationAllowed": false
+            }
+          },
+          "sourceId": "DOSM:cpi_2d_inflation",
+          "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+          "metricId": "CPI_YOY",
+          "division": "overall",
+          "value": 1.8,
+          "unit": "percent",
+          "geographyId": "MYS",
+          "geographyName": "Malaysia",
+          "geographicLevel": "COUNTRY",
+          "observationPeriod": "2026-09",
+          "frequency": "MONTHLY",
+          "publishedAt": null,
+          "retrievedAt": "2026-10-23T03:30:03.148Z",
+          "datasetUpdatedAt": "2026-10-19T13:12:00+08:00",
+          "definition": "CPI_YOY:CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "statisticalMethod": "DOSM_FIXED_BASKET_CPI_MCOICOP",
+          "denominator": "CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "population": "Represented consumer basket; not a household-specific budget",
+          "coverage": "DOSM_COUNTRY_CPI_BASKET",
+          "baseYear": 2010,
+          "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+          "metadataUrl": "https://open.dosm.gov.my/data-catalogue/cpi_headline_inflation",
+          "sourceSnapshotReference": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc#csv-row=561&field=inflation_yoy",
+          "sourceRow": {
+            "date": "2026-09-01",
+            "division": "overall",
+            "inflation_yoy": "1.8",
+            "inflation_mom": "0.1"
+          },
+          "transformationVersion": "WORLD-R4-MEASUREMENT-ROW-v1",
+          "qualityFlags": [
+            "PINNED_VINTAGE",
+            "ROW_REVISION_STATUS_NOT_STATED"
+          ],
+          "admissionStatus": "LOCAL_CWA_ADMITTED",
+          "verificationStatus": "RAW_BYTES_COLUMNS_ROW_SCOPE_METADATA_LICENSE_CHECKED",
+          "productionEligible": false
+        },
+        {
+          "type": "MEASUREMENT_OBSERVATION",
+          "observationId": "DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_mom",
+          "admittedEvidenceId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_mom",
+          "evidence": {
+            "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+            "claimId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_mom",
+            "claimText": "Malaysia 2026-09 overall inflation_mom=0.1",
+            "claimType": "GENERAL_CURRENT_FACT",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publisher": "Department of Statistics Malaysia",
+            "title": "cpi_2d_inflation",
+            "publishedAt": null,
+            "retrievedAt": "2026-10-23T03:30:03.148Z",
+            "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+            "freshnessState": "FRESH",
+            "supportLevel": "DIRECT",
+            "jurisdiction": "MY",
+            "domain": "GENERAL_CURRENT",
+            "conflicts": [],
+            "boundaries": {
+              "searchRankUsedAsAuthority": false,
+              "sourceVotingUsed": false,
+              "lensMutationAllowed": false,
+              "proseGenerationAllowed": false
+            }
+          },
+          "sourceId": "DOSM:cpi_2d_inflation",
+          "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+          "metricId": "CPI_MOM",
+          "division": "overall",
+          "value": 0.1,
+          "unit": "percent",
+          "geographyId": "MYS",
+          "geographyName": "Malaysia",
+          "geographicLevel": "COUNTRY",
+          "observationPeriod": "2026-09",
+          "frequency": "MONTHLY",
+          "publishedAt": null,
+          "retrievedAt": "2026-10-23T03:30:03.148Z",
+          "datasetUpdatedAt": "2026-10-19T13:12:00+08:00",
+          "definition": "CPI_MOM:CHANGE_FROM_PREVIOUS_MONTH",
+          "statisticalMethod": "DOSM_FIXED_BASKET_CPI_MCOICOP",
+          "denominator": "CHANGE_FROM_PREVIOUS_MONTH",
+          "population": "Represented consumer basket; not a household-specific budget",
+          "coverage": "DOSM_COUNTRY_CPI_BASKET",
+          "baseYear": 2010,
+          "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+          "metadataUrl": "https://open.dosm.gov.my/data-catalogue/cpi_headline_inflation",
+          "sourceSnapshotReference": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc#csv-row=561&field=inflation_mom",
+          "sourceRow": {
+            "date": "2026-09-01",
+            "division": "overall",
+            "inflation_yoy": "1.8",
+            "inflation_mom": "0.1"
+          },
+          "transformationVersion": "WORLD-R4-MEASUREMENT-ROW-v1",
+          "qualityFlags": [
+            "PINNED_VINTAGE",
+            "ROW_REVISION_STATUS_NOT_STATED"
+          ],
+          "admissionStatus": "LOCAL_CWA_ADMITTED",
+          "verificationStatus": "RAW_BYTES_COLUMNS_ROW_SCOPE_METADATA_LICENSE_CHECKED",
+          "productionEligible": false
+        },
+        {
+          "type": "MEASUREMENT_OBSERVATION",
+          "observationId": "DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:02:inflation_yoy",
+          "admittedEvidenceId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:02:inflation_yoy",
+          "evidence": {
+            "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+            "claimId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:02:inflation_yoy",
+            "claimText": "Malaysia 2026-09 02 inflation_yoy=2.8",
+            "claimType": "GENERAL_CURRENT_FACT",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publisher": "Department of Statistics Malaysia",
+            "title": "cpi_2d_inflation",
+            "publishedAt": null,
+            "retrievedAt": "2026-10-23T03:30:03.148Z",
+            "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+            "freshnessState": "FRESH",
+            "supportLevel": "DIRECT",
+            "jurisdiction": "MY",
+            "domain": "GENERAL_CURRENT",
+            "conflicts": [],
+            "boundaries": {
+              "searchRankUsedAsAuthority": false,
+              "sourceVotingUsed": false,
+              "lensMutationAllowed": false,
+              "proseGenerationAllowed": false
+            }
+          },
+          "sourceId": "DOSM:cpi_2d_inflation",
+          "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+          "metricId": "CPI_YOY",
+          "division": "02",
+          "value": 2.8,
+          "unit": "percent",
+          "geographyId": "MYS",
+          "geographyName": "Malaysia",
+          "geographicLevel": "COUNTRY",
+          "observationPeriod": "2026-09",
+          "frequency": "MONTHLY",
+          "publishedAt": null,
+          "retrievedAt": "2026-10-23T03:30:03.148Z",
+          "datasetUpdatedAt": "2026-10-19T13:12:00+08:00",
+          "definition": "CPI_YOY:CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "statisticalMethod": "DOSM_FIXED_BASKET_CPI_MCOICOP",
+          "denominator": "CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "population": "Represented consumer basket; not a household-specific budget",
+          "coverage": "DOSM_COUNTRY_CPI_BASKET",
+          "baseYear": 2010,
+          "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+          "metadataUrl": "https://open.dosm.gov.my/data-catalogue/cpi_headline_inflation",
+          "sourceSnapshotReference": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc#csv-row=1681&field=inflation_yoy",
+          "sourceRow": {
+            "date": "2026-09-01",
+            "division": "02",
+            "inflation_yoy": "2.8",
+            "inflation_mom": "0.0"
+          },
+          "transformationVersion": "WORLD-R4-MEASUREMENT-ROW-v1",
+          "qualityFlags": [
+            "PINNED_VINTAGE",
+            "ROW_REVISION_STATUS_NOT_STATED"
+          ],
+          "admissionStatus": "LOCAL_CWA_ADMITTED",
+          "verificationStatus": "RAW_BYTES_COLUMNS_ROW_SCOPE_METADATA_LICENSE_CHECKED",
+          "productionEligible": false,
+          "labelEn": "Alcoholic Beverages & Tobacco",
+          "labelZh": "酒类与烟草"
+        },
+        {
+          "type": "MEASUREMENT_OBSERVATION",
+          "observationId": "DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:13:inflation_yoy",
+          "admittedEvidenceId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:13:inflation_yoy",
+          "evidence": {
+            "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+            "claimId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:13:inflation_yoy",
+            "claimText": "Malaysia 2026-09 13 inflation_yoy=2.8",
+            "claimType": "GENERAL_CURRENT_FACT",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publisher": "Department of Statistics Malaysia",
+            "title": "cpi_2d_inflation",
+            "publishedAt": null,
+            "retrievedAt": "2026-10-23T03:30:03.148Z",
+            "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+            "freshnessState": "FRESH",
+            "supportLevel": "DIRECT",
+            "jurisdiction": "MY",
+            "domain": "GENERAL_CURRENT",
+            "conflicts": [],
+            "boundaries": {
+              "searchRankUsedAsAuthority": false,
+              "sourceVotingUsed": false,
+              "lensMutationAllowed": false,
+              "proseGenerationAllowed": false
+            }
+          },
+          "sourceId": "DOSM:cpi_2d_inflation",
+          "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+          "metricId": "CPI_YOY",
+          "division": "13",
+          "value": 2.8,
+          "unit": "percent",
+          "geographyId": "MYS",
+          "geographyName": "Malaysia",
+          "geographicLevel": "COUNTRY",
+          "observationPeriod": "2026-09",
+          "frequency": "MONTHLY",
+          "publishedAt": null,
+          "retrievedAt": "2026-10-23T03:30:03.148Z",
+          "datasetUpdatedAt": "2026-10-19T13:12:00+08:00",
+          "definition": "CPI_YOY:CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "statisticalMethod": "DOSM_FIXED_BASKET_CPI_MCOICOP",
+          "denominator": "CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "population": "Represented consumer basket; not a household-specific budget",
+          "coverage": "DOSM_COUNTRY_CPI_BASKET",
+          "baseYear": 2010,
+          "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+          "metadataUrl": "https://open.dosm.gov.my/data-catalogue/cpi_headline_inflation",
+          "sourceSnapshotReference": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc#csv-row=7841&field=inflation_yoy",
+          "sourceRow": {
+            "date": "2026-09-01",
+            "division": "13",
+            "inflation_yoy": "2.8",
+            "inflation_mom": "0.4"
+          },
+          "transformationVersion": "WORLD-R4-MEASUREMENT-ROW-v1",
+          "qualityFlags": [
+            "PINNED_VINTAGE",
+            "ROW_REVISION_STATUS_NOT_STATED"
+          ],
+          "admissionStatus": "LOCAL_CWA_ADMITTED",
+          "verificationStatus": "RAW_BYTES_COLUMNS_ROW_SCOPE_METADATA_LICENSE_CHECKED",
+          "productionEligible": false,
+          "labelEn": "Personal Care, Social Protection & Miscellaneous Goods & Services",
+          "labelZh": "个人护理、社会保障及其他商品与服务"
+        },
+        {
+          "type": "MEASUREMENT_OBSERVATION",
+          "observationId": "DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:07:inflation_yoy",
+          "admittedEvidenceId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:07:inflation_yoy",
+          "evidence": {
+            "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+            "claimId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:07:inflation_yoy",
+            "claimText": "Malaysia 2026-09 07 inflation_yoy=2.5",
+            "claimType": "GENERAL_CURRENT_FACT",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publisher": "Department of Statistics Malaysia",
+            "title": "cpi_2d_inflation",
+            "publishedAt": null,
+            "retrievedAt": "2026-10-23T03:30:03.148Z",
+            "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+            "freshnessState": "FRESH",
+            "supportLevel": "DIRECT",
+            "jurisdiction": "MY",
+            "domain": "GENERAL_CURRENT",
+            "conflicts": [],
+            "boundaries": {
+              "searchRankUsedAsAuthority": false,
+              "sourceVotingUsed": false,
+              "lensMutationAllowed": false,
+              "proseGenerationAllowed": false
+            }
+          },
+          "sourceId": "DOSM:cpi_2d_inflation",
+          "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+          "metricId": "CPI_YOY",
+          "division": "07",
+          "value": 2.5,
+          "unit": "percent",
+          "geographyId": "MYS",
+          "geographyName": "Malaysia",
+          "geographicLevel": "COUNTRY",
+          "observationPeriod": "2026-09",
+          "frequency": "MONTHLY",
+          "publishedAt": null,
+          "retrievedAt": "2026-10-23T03:30:03.148Z",
+          "datasetUpdatedAt": "2026-10-19T13:12:00+08:00",
+          "definition": "CPI_YOY:CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "statisticalMethod": "DOSM_FIXED_BASKET_CPI_MCOICOP",
+          "denominator": "CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "population": "Represented consumer basket; not a household-specific budget",
+          "coverage": "DOSM_COUNTRY_CPI_BASKET",
+          "baseYear": 2010,
+          "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+          "metadataUrl": "https://open.dosm.gov.my/data-catalogue/cpi_headline_inflation",
+          "sourceSnapshotReference": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc#csv-row=4481&field=inflation_yoy",
+          "sourceRow": {
+            "date": "2026-09-01",
+            "division": "07",
+            "inflation_yoy": "2.5",
+            "inflation_mom": "0.6"
+          },
+          "transformationVersion": "WORLD-R4-MEASUREMENT-ROW-v1",
+          "qualityFlags": [
+            "PINNED_VINTAGE",
+            "ROW_REVISION_STATUS_NOT_STATED"
+          ],
+          "admissionStatus": "LOCAL_CWA_ADMITTED",
+          "verificationStatus": "RAW_BYTES_COLUMNS_ROW_SCOPE_METADATA_LICENSE_CHECKED",
+          "productionEligible": false,
+          "labelEn": "Transport",
+          "labelZh": "交通"
+        }
+      ],
+      "structuralEvidenceCandidate": {
+        "owner": "runtime-position-w6-contract-v1",
+        "state": "EVIDENCE_CANDIDATE_ONLY",
+        "sourceRefs": [
+          {
+            "observationId": "DOSM:9f5f33b4e6209c6b:Malaysia:2026-09:overall:index",
+            "sourceVersion": "9f5f33b4e6209c6bfbb9320260a2591bd9e38666c908dee85047bf63880649ae",
+            "supportLocation": "9f5f33b4e6209c6bfbb9320260a2591bd9e38666c908dee85047bf63880649ae#csv-row=562&field=index",
+            "knowledgeState": "CURRENT_DATA",
+            "admissionScope": "LOCAL_VALIDATION_ONLY"
+          },
+          {
+            "observationId": "DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_yoy",
+            "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+            "supportLocation": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc#csv-row=561&field=inflation_yoy",
+            "knowledgeState": "CURRENT_DATA",
+            "admissionScope": "LOCAL_VALIDATION_ONLY"
+          },
+          {
+            "observationId": "DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_mom",
+            "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+            "supportLocation": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc#csv-row=561&field=inflation_mom",
+            "knowledgeState": "CURRENT_DATA",
+            "admissionScope": "LOCAL_VALIDATION_ONLY"
+          }
+        ],
+        "grammarCandidates": [],
+        "domainCandidates": [],
+        "positionCandidates": [],
+        "humanPositionAdmission": "NOT_REQUESTED",
+        "thresholdState": "NOT_EVALUATED",
+        "criteria": [
+          {
+            "id": "PERSISTENCE",
+            "state": "UNKNOWN",
+            "evidenceRefs": [],
+            "reason": "Price-series persistence does not establish persistent structural relation change, cross-system breadth, feedback change or irreversibility."
+          },
+          {
+            "id": "CROSS_SYSTEM_BREADTH",
+            "state": "UNKNOWN",
+            "evidenceRefs": [],
+            "reason": "Price-series persistence does not establish persistent structural relation change, cross-system breadth, feedback change or irreversibility."
+          },
+          {
+            "id": "FEEDBACK_RELATION_CHANGE",
+            "state": "UNKNOWN",
+            "evidenceRefs": [],
+            "reason": "Price-series persistence does not establish persistent structural relation change, cross-system breadth, feedback change or irreversibility."
+          },
+          {
+            "id": "PATH_DEPENDENCE",
+            "state": "UNKNOWN",
+            "evidenceRefs": [],
+            "reason": "Price-series persistence does not establish persistent structural relation change, cross-system breadth, feedback change or irreversibility."
+          }
+        ],
+        "possibilityProjection": "NOT_EVALUATED",
+        "missing": [
+          "EMPLOYMENT_AND_INCOME",
+          "HOUSEHOLD_EXPENDITURE",
+          "FISCAL_ENERGY_AND_INSTITUTIONAL_RELATIONS",
+          "DATED_CROSS_SYSTEM_CHANGE_AND_COUNTEREVIDENCE"
+        ]
+      },
+      "scope": {
+        "geography": "Malaysia",
+        "period": "2026-09"
+      },
+      "missingEvidence": [
+        "HOUSEHOLD_EXPENDITURE_WEIGHTS",
+        "CURRENT_HOUSEHOLD_INCOME",
+        "LOCAL_RENT_OR_PERSONAL_BILLS",
+        "CAUSAL_CONTRIBUTION_WEIGHTS"
+      ],
+      "backHref": "/world/?r4Geo=Malaysia&r4Period=2026-09&locale=zh-Hans",
+      "sourceLanguage": "en/ms",
+      "providerCalls": 0,
+      "membershipAsk": "NOT_VERIFIED_BY_THIS_WORK"
+    },
+    "zh-HansB": {
+      "question": "Controlled question with explicitly selected B context",
+      "locale": "zh-Hans",
+      "answer": "目前核实到的是 Langkawi 的天气预报接口，不是实测降雨、水库储量或农业产量。没有同地区、同期间的水文与产量资料，不能据此断定当地供应或家庭生活已经受影响。",
+      "answerState": "INSUFFICIENT_EVIDENCE",
+      "gap": {
+        "state": "INSUFFICIENT_LINKED_MEASUREMENT",
+        "available": {
+          "forecast": {
+            "source": "METMalaysia via data.gov.my",
+            "receipt": "ENDPOINT-PROBES.json",
+            "location": "Langkawi",
+            "locationId": "Ds001",
+            "date": "2026-10-29",
+            "type": "FORECAST_NOT_OBSERVED_RAINFALL",
+            "rainfallMillimetres": null
+          },
+          "geometry": {
+            "source": "MyGDI catalogue / existing generalized World geometry",
+            "state": "CATALOGUE_ACCESS_ONLY_NO_WATERSHED_LAYER_LICENSE",
+            "receipt": "ENDPOINT-PROBES.json"
+          }
+        },
+        "missing": [
+          "MEASURED_RAINFALL_WITH_GAUGE_AND_PERIOD",
+          "CATCHMENT_AND_WATER_STORAGE",
+          "CROP_OR_FISHERY_OUTPUT_WITH_PERIOD",
+          "SHARED_GEOGRAPHIC_JOIN_AND_LICENSE"
+        ],
+        "causalConclusion": null
+      },
+      "sourceObjects": [
+        {
+          "sourceId": "MET:DATA_GOV_FORECAST",
+          "sourceUrl": "https://api.data.gov.my/weather/forecast?limit=1",
+          "sourceVersion": "130ede807ee579ad9d7b32a487185015ea8e5cd4fbce8755b1c9bc062838fca5",
+          "versionKind": "ORIGINAL_HTTP_BYTES_SHA256",
+          "retrievedAt": "2026-10-23T03:31:49.384Z",
+          "publishedAt": null,
+          "geography": {
+            "location_id": "Ds001",
+            "location_name": "Langkawi"
+          },
+          "period": "2026-10-29",
+          "recordNature": "FORECAST_NOT_OBSERVED_RAINFALL",
+          "sourceState": "CANDIDATE_FORECAST_NOT_MEASUREMENT",
+          "sourceLanguage": "ms",
+          "requiredMeasurementFieldsMissing": [
+            "MEASURED_RAINFALL_WITH_GAUGE_AND_PERIOD",
+            "CATCHMENT_AND_WATER_STORAGE",
+            "CROP_OR_FISHERY_OUTPUT_WITH_PERIOD",
+            "SHARED_GEOGRAPHIC_JOIN_AND_LICENSE"
+          ]
+        }
+      ],
+      "grounding": {
+        "schemaVersion": "PHI-OS-KAP-W29-KNOWLEDGE-HANDOFF-v1.0.0",
+        "provenanceType": "KNOWLEDGE_GROUNDING_BUNDLE",
+        "bundleId": "WORLD-R4:GAP:B",
+        "matchedKnowledge": [
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "MET:DATA_GOV_FORECAST",
+            "sourceType": "CANDIDATE_FORECAST_NOT_MEASUREMENT",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://api.data.gov.my/weather/forecast?limit=1",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          }
+        ],
+        "unknownCodes": [
+          "MEASURED_RAINFALL_WITH_GAUGE_AND_PERIOD",
+          "CATCHMENT_AND_WATER_STORAGE",
+          "CROP_OR_FISHERY_OUTPUT_WITH_PERIOD",
+          "SHARED_GEOGRAPHIC_JOIN_AND_LICENSE"
+        ],
+        "contentMode": "REFERENCE_ONLY_NO_FULL_SOURCE_TEXT",
+        "canonicalKnowledgeAuthorityUnchanged": true
+      },
+      "observations": [],
+      "backHref": "/world/?r4Case=B&locale=zh-Hans",
+      "providerCalls": 0
+    },
+    "zh-HansC": {
+      "question": "Controlled question with explicitly selected C context",
+      "locale": "zh-Hans",
+      "answer": "现有 BNM 接口可以读取按用途分类的贷款申请和批准字段，但本次来源未提供可匹配的申请件数、批准／拒绝件数及相同批次口径，计量单位也未在本次 API schema 中确立。因此不能计算房贷批准率，更不能断定批准越来越难；利率或贷款总量不能替代这些证据。",
+      "answerState": "INSUFFICIENT_EVIDENCE",
+      "gap": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "available": {
+          "authority": "BNM",
+          "receipt": "BNM-PUBLIC-READS.json",
+          "periods": {
+            "applied": "2026-08",
+            "approved": "2026-08"
+          },
+          "institutionScope": "type=total",
+          "fields": [
+            "pur_res_pro",
+            "tot_loa_app",
+            "pur_res_pro",
+            "tot_loa_fin_apr"
+          ],
+          "unit": "NOT_ESTABLISHED_FROM_THIS_API_SCHEMA",
+          "matchedApplicationCounts": false,
+          "matchedApprovalOrRejectionCounts": false
+        },
+        "missing": [
+          "MATCHED_APPLICATION_COUNTS",
+          "COMPARABLE_APPROVAL_AND_REJECTION_COUNTS",
+          "SAME_COHORT_AND_PRODUCT_SCOPE",
+          "CONSISTENT_OUTCOME_DEFINITION",
+          "TIME_SERIES_WITH_SAME_COVERAGE"
+        ],
+        "approvalRate": null,
+        "proxyAmountsNotUsed": true
+      },
+      "sourceObjects": [
+        {
+          "sourceId": "BNM:applied",
+          "sourceUrl": "https://api.bnm.gov.my/public/msb/1.10?type=total",
+          "sourceVersion": "2fecdfc1141b3ab7b46caf431f2b3d38e1dd5cc8c3a76e28bc643dffc3978106",
+          "versionKind": "CANONICAL_JSON_SHA256_NOT_HTTP_BYTE_DIGEST",
+          "retrievedAt": "2026-10-23T03:33:08.140Z",
+          "publishedAt": null,
+          "period": "2026-08",
+          "institutionScope": "type=total",
+          "sourceState": "READ_ONLY_CANDIDATE_UNIT_LICENSE_COHORT_NOT_ADMITTED",
+          "requiredAcceptHeader": "application/vnd.BNM.API.v1+json",
+          "requiredMeasurementFieldsMissing": [
+            "MATCHED_APPLICATION_COUNTS",
+            "COMPARABLE_APPROVAL_AND_REJECTION_COUNTS",
+            "SAME_COHORT_AND_PRODUCT_SCOPE",
+            "CONSISTENT_OUTCOME_DEFINITION",
+            "TIME_SERIES_WITH_SAME_COVERAGE"
+          ]
+        },
+        {
+          "sourceId": "BNM:approved",
+          "sourceUrl": "https://api.bnm.gov.my/public/msb/1.12?type=total",
+          "sourceVersion": "c08c1afd8b0757e328564e477d591cbef41735a1e1a4d56d637a88fed86d3391",
+          "versionKind": "CANONICAL_JSON_SHA256_NOT_HTTP_BYTE_DIGEST",
+          "retrievedAt": "2026-10-23T03:33:08.247Z",
+          "publishedAt": null,
+          "period": "2026-08",
+          "institutionScope": "type=total",
+          "sourceState": "READ_ONLY_CANDIDATE_UNIT_LICENSE_COHORT_NOT_ADMITTED",
+          "requiredAcceptHeader": "application/vnd.BNM.API.v1+json",
+          "requiredMeasurementFieldsMissing": [
+            "MATCHED_APPLICATION_COUNTS",
+            "COMPARABLE_APPROVAL_AND_REJECTION_COUNTS",
+            "SAME_COHORT_AND_PRODUCT_SCOPE",
+            "CONSISTENT_OUTCOME_DEFINITION",
+            "TIME_SERIES_WITH_SAME_COVERAGE"
+          ]
+        }
+      ],
+      "grounding": {
+        "schemaVersion": "PHI-OS-KAP-W29-KNOWLEDGE-HANDOFF-v1.0.0",
+        "provenanceType": "KNOWLEDGE_GROUNDING_BUNDLE",
+        "bundleId": "WORLD-R4:GAP:C",
+        "matchedKnowledge": [
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "BNM:applied",
+            "sourceType": "READ_ONLY_CANDIDATE_UNIT_LICENSE_COHORT_NOT_ADMITTED",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://api.bnm.gov.my/public/msb/1.10?type=total",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          },
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "BNM:approved",
+            "sourceType": "READ_ONLY_CANDIDATE_UNIT_LICENSE_COHORT_NOT_ADMITTED",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://api.bnm.gov.my/public/msb/1.12?type=total",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          }
+        ],
+        "unknownCodes": [
+          "MATCHED_APPLICATION_COUNTS",
+          "COMPARABLE_APPROVAL_AND_REJECTION_COUNTS",
+          "SAME_COHORT_AND_PRODUCT_SCOPE",
+          "CONSISTENT_OUTCOME_DEFINITION",
+          "TIME_SERIES_WITH_SAME_COVERAGE"
+        ],
+        "contentMode": "REFERENCE_ONLY_NO_FULL_SOURCE_TEXT",
+        "canonicalKnowledgeAuthorityUnchanged": true
+      },
+      "observations": [],
+      "backHref": "/world/?r4Case=C&locale=zh-Hans",
+      "providerCalls": 0
+    },
+    "enA": {
+      "question": "Controlled question with explicitly selected A context",
+      "locale": "en",
+      "answer": "For Malaysia in 2026-09, reported consumer-price change was 1.8% year on year and 0.1% month on month. This describes a representative basket, not personal bills. Income, spending weights and actual bills are still needed to explain household cost pressure; the inflation rate alone does not establish affordability. Categories with higher observed increases include Alcoholic Beverages & Tobacco (2.8%), Personal Care, Social Protection & Miscellaneous Goods & Services (2.8%), Transport (2.5%). These are category rates, not contributions to total inflation or established causes. A price series alone does not establish societal reconfiguration, a runtime-position change or a crossed observation threshold. Employment, income, actual spending and dated changes in fiscal, energy and institutional relationships are still needed.",
+      "answerState": "PARTIAL_OBSERVED_PRICES_ONLY",
+      "grounding": {
+        "schemaVersion": "PHI-OS-KAP-W29-KNOWLEDGE-HANDOFF-v1.0.0",
+        "provenanceType": "KNOWLEDGE_GROUNDING_BUNDLE",
+        "bundleId": "WORLD-R4:Malaysia:2026-09",
+        "matchedKnowledge": [
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "DOSM:cpi_2d",
+            "sourceType": "ADMITTED_LOCAL_MEASUREMENT",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://storage.dosm.gov.my/cpi/cpi_2d.csv",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          },
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceType": "ADMITTED_LOCAL_MEASUREMENT",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          },
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceType": "ADMITTED_LOCAL_MEASUREMENT",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          },
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceType": "ADMITTED_LOCAL_MEASUREMENT",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          },
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceType": "ADMITTED_LOCAL_MEASUREMENT",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          },
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceType": "ADMITTED_LOCAL_MEASUREMENT",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          }
+        ],
+        "unknownCodes": [
+          "HOUSEHOLD_EXPENDITURE_WEIGHTS",
+          "CURRENT_HOUSEHOLD_INCOME",
+          "LOCAL_RENT_OR_PERSONAL_BILLS",
+          "CAUSAL_CONTRIBUTION_WEIGHTS"
+        ],
+        "contentMode": "REFERENCE_ONLY_NO_FULL_SOURCE_TEXT",
+        "canonicalKnowledgeAuthorityUnchanged": true
+      },
+      "observations": [
+        {
+          "type": "MEASUREMENT_OBSERVATION",
+          "observationId": "DOSM:9f5f33b4e6209c6b:Malaysia:2026-09:overall:index",
+          "admittedEvidenceId": "EVIDENCE:DOSM:9f5f33b4e6209c6b:Malaysia:2026-09:overall:index",
+          "evidence": {
+            "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+            "claimId": "EVIDENCE:DOSM:9f5f33b4e6209c6b:Malaysia:2026-09:overall:index",
+            "claimText": "Malaysia 2026-09 overall index=137.6",
+            "claimType": "GENERAL_CURRENT_FACT",
+            "sourceId": "DOSM:cpi_2d",
+            "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d.csv",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publisher": "Department of Statistics Malaysia",
+            "title": "cpi_2d",
+            "publishedAt": null,
+            "retrievedAt": "2026-10-23T03:30:03.147Z",
+            "sourceVersion": "9f5f33b4e6209c6bfbb9320260a2591bd9e38666c908dee85047bf63880649ae",
+            "freshnessState": "FRESH",
+            "supportLevel": "DIRECT",
+            "jurisdiction": "MY",
+            "domain": "GENERAL_CURRENT",
+            "conflicts": [],
+            "boundaries": {
+              "searchRankUsedAsAuthority": false,
+              "sourceVotingUsed": false,
+              "lensMutationAllowed": false,
+              "proseGenerationAllowed": false
+            }
+          },
+          "sourceId": "DOSM:cpi_2d",
+          "sourceVersion": "9f5f33b4e6209c6bfbb9320260a2591bd9e38666c908dee85047bf63880649ae",
+          "metricId": "CPI_INDEX",
+          "division": "overall",
+          "value": 137.6,
+          "unit": "index_2010_100",
+          "geographyId": "MYS",
+          "geographyName": "Malaysia",
+          "geographicLevel": "COUNTRY",
+          "observationPeriod": "2026-09",
+          "frequency": "MONTHLY",
+          "publishedAt": null,
+          "retrievedAt": "2026-10-23T03:30:03.147Z",
+          "datasetUpdatedAt": "2026-10-19T13:12:00+08:00",
+          "definition": "CPI_INDEX:INDEX_LEVEL",
+          "statisticalMethod": "DOSM_FIXED_BASKET_CPI_MCOICOP",
+          "denominator": "INDEX_LEVEL",
+          "population": "Represented consumer basket; not a household-specific budget",
+          "coverage": "DOSM_COUNTRY_CPI_BASKET",
+          "baseYear": 2010,
+          "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d.csv",
+          "metadataUrl": "https://open.dosm.gov.my/data-catalogue/cpi_headline",
+          "sourceSnapshotReference": "9f5f33b4e6209c6bfbb9320260a2591bd9e38666c908dee85047bf63880649ae#csv-row=562&field=index",
+          "sourceRow": {
+            "date": "2026-09-01",
+            "division": "overall",
+            "index": "137.6"
+          },
+          "transformationVersion": "WORLD-R4-MEASUREMENT-ROW-v1",
+          "qualityFlags": [
+            "PINNED_VINTAGE",
+            "ROW_REVISION_STATUS_NOT_STATED"
+          ],
+          "admissionStatus": "LOCAL_CWA_ADMITTED",
+          "verificationStatus": "RAW_BYTES_COLUMNS_ROW_SCOPE_METADATA_LICENSE_CHECKED",
+          "productionEligible": false
+        },
+        {
+          "type": "MEASUREMENT_OBSERVATION",
+          "observationId": "DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_yoy",
+          "admittedEvidenceId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_yoy",
+          "evidence": {
+            "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+            "claimId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_yoy",
+            "claimText": "Malaysia 2026-09 overall inflation_yoy=1.8",
+            "claimType": "GENERAL_CURRENT_FACT",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publisher": "Department of Statistics Malaysia",
+            "title": "cpi_2d_inflation",
+            "publishedAt": null,
+            "retrievedAt": "2026-10-23T03:30:03.148Z",
+            "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+            "freshnessState": "FRESH",
+            "supportLevel": "DIRECT",
+            "jurisdiction": "MY",
+            "domain": "GENERAL_CURRENT",
+            "conflicts": [],
+            "boundaries": {
+              "searchRankUsedAsAuthority": false,
+              "sourceVotingUsed": false,
+              "lensMutationAllowed": false,
+              "proseGenerationAllowed": false
+            }
+          },
+          "sourceId": "DOSM:cpi_2d_inflation",
+          "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+          "metricId": "CPI_YOY",
+          "division": "overall",
+          "value": 1.8,
+          "unit": "percent",
+          "geographyId": "MYS",
+          "geographyName": "Malaysia",
+          "geographicLevel": "COUNTRY",
+          "observationPeriod": "2026-09",
+          "frequency": "MONTHLY",
+          "publishedAt": null,
+          "retrievedAt": "2026-10-23T03:30:03.148Z",
+          "datasetUpdatedAt": "2026-10-19T13:12:00+08:00",
+          "definition": "CPI_YOY:CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "statisticalMethod": "DOSM_FIXED_BASKET_CPI_MCOICOP",
+          "denominator": "CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "population": "Represented consumer basket; not a household-specific budget",
+          "coverage": "DOSM_COUNTRY_CPI_BASKET",
+          "baseYear": 2010,
+          "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+          "metadataUrl": "https://open.dosm.gov.my/data-catalogue/cpi_headline_inflation",
+          "sourceSnapshotReference": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc#csv-row=561&field=inflation_yoy",
+          "sourceRow": {
+            "date": "2026-09-01",
+            "division": "overall",
+            "inflation_yoy": "1.8",
+            "inflation_mom": "0.1"
+          },
+          "transformationVersion": "WORLD-R4-MEASUREMENT-ROW-v1",
+          "qualityFlags": [
+            "PINNED_VINTAGE",
+            "ROW_REVISION_STATUS_NOT_STATED"
+          ],
+          "admissionStatus": "LOCAL_CWA_ADMITTED",
+          "verificationStatus": "RAW_BYTES_COLUMNS_ROW_SCOPE_METADATA_LICENSE_CHECKED",
+          "productionEligible": false
+        },
+        {
+          "type": "MEASUREMENT_OBSERVATION",
+          "observationId": "DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_mom",
+          "admittedEvidenceId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_mom",
+          "evidence": {
+            "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+            "claimId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_mom",
+            "claimText": "Malaysia 2026-09 overall inflation_mom=0.1",
+            "claimType": "GENERAL_CURRENT_FACT",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publisher": "Department of Statistics Malaysia",
+            "title": "cpi_2d_inflation",
+            "publishedAt": null,
+            "retrievedAt": "2026-10-23T03:30:03.148Z",
+            "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+            "freshnessState": "FRESH",
+            "supportLevel": "DIRECT",
+            "jurisdiction": "MY",
+            "domain": "GENERAL_CURRENT",
+            "conflicts": [],
+            "boundaries": {
+              "searchRankUsedAsAuthority": false,
+              "sourceVotingUsed": false,
+              "lensMutationAllowed": false,
+              "proseGenerationAllowed": false
+            }
+          },
+          "sourceId": "DOSM:cpi_2d_inflation",
+          "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+          "metricId": "CPI_MOM",
+          "division": "overall",
+          "value": 0.1,
+          "unit": "percent",
+          "geographyId": "MYS",
+          "geographyName": "Malaysia",
+          "geographicLevel": "COUNTRY",
+          "observationPeriod": "2026-09",
+          "frequency": "MONTHLY",
+          "publishedAt": null,
+          "retrievedAt": "2026-10-23T03:30:03.148Z",
+          "datasetUpdatedAt": "2026-10-19T13:12:00+08:00",
+          "definition": "CPI_MOM:CHANGE_FROM_PREVIOUS_MONTH",
+          "statisticalMethod": "DOSM_FIXED_BASKET_CPI_MCOICOP",
+          "denominator": "CHANGE_FROM_PREVIOUS_MONTH",
+          "population": "Represented consumer basket; not a household-specific budget",
+          "coverage": "DOSM_COUNTRY_CPI_BASKET",
+          "baseYear": 2010,
+          "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+          "metadataUrl": "https://open.dosm.gov.my/data-catalogue/cpi_headline_inflation",
+          "sourceSnapshotReference": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc#csv-row=561&field=inflation_mom",
+          "sourceRow": {
+            "date": "2026-09-01",
+            "division": "overall",
+            "inflation_yoy": "1.8",
+            "inflation_mom": "0.1"
+          },
+          "transformationVersion": "WORLD-R4-MEASUREMENT-ROW-v1",
+          "qualityFlags": [
+            "PINNED_VINTAGE",
+            "ROW_REVISION_STATUS_NOT_STATED"
+          ],
+          "admissionStatus": "LOCAL_CWA_ADMITTED",
+          "verificationStatus": "RAW_BYTES_COLUMNS_ROW_SCOPE_METADATA_LICENSE_CHECKED",
+          "productionEligible": false
+        },
+        {
+          "type": "MEASUREMENT_OBSERVATION",
+          "observationId": "DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:02:inflation_yoy",
+          "admittedEvidenceId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:02:inflation_yoy",
+          "evidence": {
+            "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+            "claimId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:02:inflation_yoy",
+            "claimText": "Malaysia 2026-09 02 inflation_yoy=2.8",
+            "claimType": "GENERAL_CURRENT_FACT",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publisher": "Department of Statistics Malaysia",
+            "title": "cpi_2d_inflation",
+            "publishedAt": null,
+            "retrievedAt": "2026-10-23T03:30:03.148Z",
+            "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+            "freshnessState": "FRESH",
+            "supportLevel": "DIRECT",
+            "jurisdiction": "MY",
+            "domain": "GENERAL_CURRENT",
+            "conflicts": [],
+            "boundaries": {
+              "searchRankUsedAsAuthority": false,
+              "sourceVotingUsed": false,
+              "lensMutationAllowed": false,
+              "proseGenerationAllowed": false
+            }
+          },
+          "sourceId": "DOSM:cpi_2d_inflation",
+          "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+          "metricId": "CPI_YOY",
+          "division": "02",
+          "value": 2.8,
+          "unit": "percent",
+          "geographyId": "MYS",
+          "geographyName": "Malaysia",
+          "geographicLevel": "COUNTRY",
+          "observationPeriod": "2026-09",
+          "frequency": "MONTHLY",
+          "publishedAt": null,
+          "retrievedAt": "2026-10-23T03:30:03.148Z",
+          "datasetUpdatedAt": "2026-10-19T13:12:00+08:00",
+          "definition": "CPI_YOY:CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "statisticalMethod": "DOSM_FIXED_BASKET_CPI_MCOICOP",
+          "denominator": "CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "population": "Represented consumer basket; not a household-specific budget",
+          "coverage": "DOSM_COUNTRY_CPI_BASKET",
+          "baseYear": 2010,
+          "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+          "metadataUrl": "https://open.dosm.gov.my/data-catalogue/cpi_headline_inflation",
+          "sourceSnapshotReference": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc#csv-row=1681&field=inflation_yoy",
+          "sourceRow": {
+            "date": "2026-09-01",
+            "division": "02",
+            "inflation_yoy": "2.8",
+            "inflation_mom": "0.0"
+          },
+          "transformationVersion": "WORLD-R4-MEASUREMENT-ROW-v1",
+          "qualityFlags": [
+            "PINNED_VINTAGE",
+            "ROW_REVISION_STATUS_NOT_STATED"
+          ],
+          "admissionStatus": "LOCAL_CWA_ADMITTED",
+          "verificationStatus": "RAW_BYTES_COLUMNS_ROW_SCOPE_METADATA_LICENSE_CHECKED",
+          "productionEligible": false,
+          "labelEn": "Alcoholic Beverages & Tobacco",
+          "labelZh": "酒类与烟草"
+        },
+        {
+          "type": "MEASUREMENT_OBSERVATION",
+          "observationId": "DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:13:inflation_yoy",
+          "admittedEvidenceId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:13:inflation_yoy",
+          "evidence": {
+            "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+            "claimId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:13:inflation_yoy",
+            "claimText": "Malaysia 2026-09 13 inflation_yoy=2.8",
+            "claimType": "GENERAL_CURRENT_FACT",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publisher": "Department of Statistics Malaysia",
+            "title": "cpi_2d_inflation",
+            "publishedAt": null,
+            "retrievedAt": "2026-10-23T03:30:03.148Z",
+            "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+            "freshnessState": "FRESH",
+            "supportLevel": "DIRECT",
+            "jurisdiction": "MY",
+            "domain": "GENERAL_CURRENT",
+            "conflicts": [],
+            "boundaries": {
+              "searchRankUsedAsAuthority": false,
+              "sourceVotingUsed": false,
+              "lensMutationAllowed": false,
+              "proseGenerationAllowed": false
+            }
+          },
+          "sourceId": "DOSM:cpi_2d_inflation",
+          "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+          "metricId": "CPI_YOY",
+          "division": "13",
+          "value": 2.8,
+          "unit": "percent",
+          "geographyId": "MYS",
+          "geographyName": "Malaysia",
+          "geographicLevel": "COUNTRY",
+          "observationPeriod": "2026-09",
+          "frequency": "MONTHLY",
+          "publishedAt": null,
+          "retrievedAt": "2026-10-23T03:30:03.148Z",
+          "datasetUpdatedAt": "2026-10-19T13:12:00+08:00",
+          "definition": "CPI_YOY:CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "statisticalMethod": "DOSM_FIXED_BASKET_CPI_MCOICOP",
+          "denominator": "CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "population": "Represented consumer basket; not a household-specific budget",
+          "coverage": "DOSM_COUNTRY_CPI_BASKET",
+          "baseYear": 2010,
+          "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+          "metadataUrl": "https://open.dosm.gov.my/data-catalogue/cpi_headline_inflation",
+          "sourceSnapshotReference": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc#csv-row=7841&field=inflation_yoy",
+          "sourceRow": {
+            "date": "2026-09-01",
+            "division": "13",
+            "inflation_yoy": "2.8",
+            "inflation_mom": "0.4"
+          },
+          "transformationVersion": "WORLD-R4-MEASUREMENT-ROW-v1",
+          "qualityFlags": [
+            "PINNED_VINTAGE",
+            "ROW_REVISION_STATUS_NOT_STATED"
+          ],
+          "admissionStatus": "LOCAL_CWA_ADMITTED",
+          "verificationStatus": "RAW_BYTES_COLUMNS_ROW_SCOPE_METADATA_LICENSE_CHECKED",
+          "productionEligible": false,
+          "labelEn": "Personal Care, Social Protection & Miscellaneous Goods & Services",
+          "labelZh": "个人护理、社会保障及其他商品与服务"
+        },
+        {
+          "type": "MEASUREMENT_OBSERVATION",
+          "observationId": "DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:07:inflation_yoy",
+          "admittedEvidenceId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:07:inflation_yoy",
+          "evidence": {
+            "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+            "claimId": "EVIDENCE:DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:07:inflation_yoy",
+            "claimText": "Malaysia 2026-09 07 inflation_yoy=2.5",
+            "claimType": "GENERAL_CURRENT_FACT",
+            "sourceId": "DOSM:cpi_2d_inflation",
+            "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+            "authorityClass": "OFFICIAL_PRIMARY",
+            "publisher": "Department of Statistics Malaysia",
+            "title": "cpi_2d_inflation",
+            "publishedAt": null,
+            "retrievedAt": "2026-10-23T03:30:03.148Z",
+            "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+            "freshnessState": "FRESH",
+            "supportLevel": "DIRECT",
+            "jurisdiction": "MY",
+            "domain": "GENERAL_CURRENT",
+            "conflicts": [],
+            "boundaries": {
+              "searchRankUsedAsAuthority": false,
+              "sourceVotingUsed": false,
+              "lensMutationAllowed": false,
+              "proseGenerationAllowed": false
+            }
+          },
+          "sourceId": "DOSM:cpi_2d_inflation",
+          "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+          "metricId": "CPI_YOY",
+          "division": "07",
+          "value": 2.5,
+          "unit": "percent",
+          "geographyId": "MYS",
+          "geographyName": "Malaysia",
+          "geographicLevel": "COUNTRY",
+          "observationPeriod": "2026-09",
+          "frequency": "MONTHLY",
+          "publishedAt": null,
+          "retrievedAt": "2026-10-23T03:30:03.148Z",
+          "datasetUpdatedAt": "2026-10-19T13:12:00+08:00",
+          "definition": "CPI_YOY:CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "statisticalMethod": "DOSM_FIXED_BASKET_CPI_MCOICOP",
+          "denominator": "CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+          "population": "Represented consumer basket; not a household-specific budget",
+          "coverage": "DOSM_COUNTRY_CPI_BASKET",
+          "baseYear": 2010,
+          "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_inflation.csv",
+          "metadataUrl": "https://open.dosm.gov.my/data-catalogue/cpi_headline_inflation",
+          "sourceSnapshotReference": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc#csv-row=4481&field=inflation_yoy",
+          "sourceRow": {
+            "date": "2026-09-01",
+            "division": "07",
+            "inflation_yoy": "2.5",
+            "inflation_mom": "0.6"
+          },
+          "transformationVersion": "WORLD-R4-MEASUREMENT-ROW-v1",
+          "qualityFlags": [
+            "PINNED_VINTAGE",
+            "ROW_REVISION_STATUS_NOT_STATED"
+          ],
+          "admissionStatus": "LOCAL_CWA_ADMITTED",
+          "verificationStatus": "RAW_BYTES_COLUMNS_ROW_SCOPE_METADATA_LICENSE_CHECKED",
+          "productionEligible": false,
+          "labelEn": "Transport",
+          "labelZh": "交通"
+        }
+      ],
+      "structuralEvidenceCandidate": {
+        "owner": "runtime-position-w6-contract-v1",
+        "state": "EVIDENCE_CANDIDATE_ONLY",
+        "sourceRefs": [
+          {
+            "observationId": "DOSM:9f5f33b4e6209c6b:Malaysia:2026-09:overall:index",
+            "sourceVersion": "9f5f33b4e6209c6bfbb9320260a2591bd9e38666c908dee85047bf63880649ae",
+            "supportLocation": "9f5f33b4e6209c6bfbb9320260a2591bd9e38666c908dee85047bf63880649ae#csv-row=562&field=index",
+            "knowledgeState": "CURRENT_DATA",
+            "admissionScope": "LOCAL_VALIDATION_ONLY"
+          },
+          {
+            "observationId": "DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_yoy",
+            "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+            "supportLocation": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc#csv-row=561&field=inflation_yoy",
+            "knowledgeState": "CURRENT_DATA",
+            "admissionScope": "LOCAL_VALIDATION_ONLY"
+          },
+          {
+            "observationId": "DOSM:c7eabdaff61cc8bb:Malaysia:2026-09:overall:inflation_mom",
+            "sourceVersion": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc",
+            "supportLocation": "c7eabdaff61cc8bb42b9802ea4119e0c15702406a03cffb66714931c91a424dc#csv-row=561&field=inflation_mom",
+            "knowledgeState": "CURRENT_DATA",
+            "admissionScope": "LOCAL_VALIDATION_ONLY"
+          }
+        ],
+        "grammarCandidates": [],
+        "domainCandidates": [],
+        "positionCandidates": [],
+        "humanPositionAdmission": "NOT_REQUESTED",
+        "thresholdState": "NOT_EVALUATED",
+        "criteria": [
+          {
+            "id": "PERSISTENCE",
+            "state": "UNKNOWN",
+            "evidenceRefs": [],
+            "reason": "Price-series persistence does not establish persistent structural relation change, cross-system breadth, feedback change or irreversibility."
+          },
+          {
+            "id": "CROSS_SYSTEM_BREADTH",
+            "state": "UNKNOWN",
+            "evidenceRefs": [],
+            "reason": "Price-series persistence does not establish persistent structural relation change, cross-system breadth, feedback change or irreversibility."
+          },
+          {
+            "id": "FEEDBACK_RELATION_CHANGE",
+            "state": "UNKNOWN",
+            "evidenceRefs": [],
+            "reason": "Price-series persistence does not establish persistent structural relation change, cross-system breadth, feedback change or irreversibility."
+          },
+          {
+            "id": "PATH_DEPENDENCE",
+            "state": "UNKNOWN",
+            "evidenceRefs": [],
+            "reason": "Price-series persistence does not establish persistent structural relation change, cross-system breadth, feedback change or irreversibility."
+          }
+        ],
+        "possibilityProjection": "NOT_EVALUATED",
+        "missing": [
+          "EMPLOYMENT_AND_INCOME",
+          "HOUSEHOLD_EXPENDITURE",
+          "FISCAL_ENERGY_AND_INSTITUTIONAL_RELATIONS",
+          "DATED_CROSS_SYSTEM_CHANGE_AND_COUNTEREVIDENCE"
+        ]
+      },
+      "scope": {
+        "geography": "Malaysia",
+        "period": "2026-09"
+      },
+      "missingEvidence": [
+        "HOUSEHOLD_EXPENDITURE_WEIGHTS",
+        "CURRENT_HOUSEHOLD_INCOME",
+        "LOCAL_RENT_OR_PERSONAL_BILLS",
+        "CAUSAL_CONTRIBUTION_WEIGHTS"
+      ],
+      "backHref": "/world/?r4Geo=Malaysia&r4Period=2026-09&locale=en",
+      "sourceLanguage": "en/ms",
+      "providerCalls": 0,
+      "membershipAsk": "NOT_VERIFIED_BY_THIS_WORK"
+    },
+    "enB": {
+      "question": "Controlled question with explicitly selected B context",
+      "locale": "en",
+      "answer": "The verified endpoint supplies a Langkawi weather forecast, not measured rainfall, reservoir storage or agricultural output. Without aligned hydrology and production observations, it cannot establish local supply changes or household impacts.",
+      "answerState": "INSUFFICIENT_EVIDENCE",
+      "gap": {
+        "state": "INSUFFICIENT_LINKED_MEASUREMENT",
+        "available": {
+          "forecast": {
+            "source": "METMalaysia via data.gov.my",
+            "receipt": "ENDPOINT-PROBES.json",
+            "location": "Langkawi",
+            "locationId": "Ds001",
+            "date": "2026-10-29",
+            "type": "FORECAST_NOT_OBSERVED_RAINFALL",
+            "rainfallMillimetres": null
+          },
+          "geometry": {
+            "source": "MyGDI catalogue / existing generalized World geometry",
+            "state": "CATALOGUE_ACCESS_ONLY_NO_WATERSHED_LAYER_LICENSE",
+            "receipt": "ENDPOINT-PROBES.json"
+          }
+        },
+        "missing": [
+          "MEASURED_RAINFALL_WITH_GAUGE_AND_PERIOD",
+          "CATCHMENT_AND_WATER_STORAGE",
+          "CROP_OR_FISHERY_OUTPUT_WITH_PERIOD",
+          "SHARED_GEOGRAPHIC_JOIN_AND_LICENSE"
+        ],
+        "causalConclusion": null
+      },
+      "sourceObjects": [
+        {
+          "sourceId": "MET:DATA_GOV_FORECAST",
+          "sourceUrl": "https://api.data.gov.my/weather/forecast?limit=1",
+          "sourceVersion": "130ede807ee579ad9d7b32a487185015ea8e5cd4fbce8755b1c9bc062838fca5",
+          "versionKind": "ORIGINAL_HTTP_BYTES_SHA256",
+          "retrievedAt": "2026-10-23T03:31:49.384Z",
+          "publishedAt": null,
+          "geography": {
+            "location_id": "Ds001",
+            "location_name": "Langkawi"
+          },
+          "period": "2026-10-29",
+          "recordNature": "FORECAST_NOT_OBSERVED_RAINFALL",
+          "sourceState": "CANDIDATE_FORECAST_NOT_MEASUREMENT",
+          "sourceLanguage": "ms",
+          "requiredMeasurementFieldsMissing": [
+            "MEASURED_RAINFALL_WITH_GAUGE_AND_PERIOD",
+            "CATCHMENT_AND_WATER_STORAGE",
+            "CROP_OR_FISHERY_OUTPUT_WITH_PERIOD",
+            "SHARED_GEOGRAPHIC_JOIN_AND_LICENSE"
+          ]
+        }
+      ],
+      "grounding": {
+        "schemaVersion": "PHI-OS-KAP-W29-KNOWLEDGE-HANDOFF-v1.0.0",
+        "provenanceType": "KNOWLEDGE_GROUNDING_BUNDLE",
+        "bundleId": "WORLD-R4:GAP:B",
+        "matchedKnowledge": [
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "MET:DATA_GOV_FORECAST",
+            "sourceType": "CANDIDATE_FORECAST_NOT_MEASUREMENT",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://api.data.gov.my/weather/forecast?limit=1",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          }
+        ],
+        "unknownCodes": [
+          "MEASURED_RAINFALL_WITH_GAUGE_AND_PERIOD",
+          "CATCHMENT_AND_WATER_STORAGE",
+          "CROP_OR_FISHERY_OUTPUT_WITH_PERIOD",
+          "SHARED_GEOGRAPHIC_JOIN_AND_LICENSE"
+        ],
+        "contentMode": "REFERENCE_ONLY_NO_FULL_SOURCE_TEXT",
+        "canonicalKnowledgeAuthorityUnchanged": true
+      },
+      "observations": [],
+      "backHref": "/world/?r4Case=B&locale=en",
+      "providerCalls": 0
+    },
+    "enC": {
+      "question": "Controlled question with explicitly selected C context",
+      "locale": "en",
+      "answer": "The BNM endpoints expose loan application and approval fields by purpose, but these sources do not establish matched application counts, approval/rejection counts or a common cohort; the measurement unit was not established in the inspected API schema. They cannot yield a mortgage approval rate or establish that approval is becoming harder. Rates and loan totals do not replace those missing observations.",
+      "answerState": "INSUFFICIENT_EVIDENCE",
+      "gap": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "available": {
+          "authority": "BNM",
+          "receipt": "BNM-PUBLIC-READS.json",
+          "periods": {
+            "applied": "2026-08",
+            "approved": "2026-08"
+          },
+          "institutionScope": "type=total",
+          "fields": [
+            "pur_res_pro",
+            "tot_loa_app",
+            "pur_res_pro",
+            "tot_loa_fin_apr"
+          ],
+          "unit": "NOT_ESTABLISHED_FROM_THIS_API_SCHEMA",
+          "matchedApplicationCounts": false,
+          "matchedApprovalOrRejectionCounts": false
+        },
+        "missing": [
+          "MATCHED_APPLICATION_COUNTS",
+          "COMPARABLE_APPROVAL_AND_REJECTION_COUNTS",
+          "SAME_COHORT_AND_PRODUCT_SCOPE",
+          "CONSISTENT_OUTCOME_DEFINITION",
+          "TIME_SERIES_WITH_SAME_COVERAGE"
+        ],
+        "approvalRate": null,
+        "proxyAmountsNotUsed": true
+      },
+      "sourceObjects": [
+        {
+          "sourceId": "BNM:applied",
+          "sourceUrl": "https://api.bnm.gov.my/public/msb/1.10?type=total",
+          "sourceVersion": "2fecdfc1141b3ab7b46caf431f2b3d38e1dd5cc8c3a76e28bc643dffc3978106",
+          "versionKind": "CANONICAL_JSON_SHA256_NOT_HTTP_BYTE_DIGEST",
+          "retrievedAt": "2026-10-23T03:33:08.140Z",
+          "publishedAt": null,
+          "period": "2026-08",
+          "institutionScope": "type=total",
+          "sourceState": "READ_ONLY_CANDIDATE_UNIT_LICENSE_COHORT_NOT_ADMITTED",
+          "requiredAcceptHeader": "application/vnd.BNM.API.v1+json",
+          "requiredMeasurementFieldsMissing": [
+            "MATCHED_APPLICATION_COUNTS",
+            "COMPARABLE_APPROVAL_AND_REJECTION_COUNTS",
+            "SAME_COHORT_AND_PRODUCT_SCOPE",
+            "CONSISTENT_OUTCOME_DEFINITION",
+            "TIME_SERIES_WITH_SAME_COVERAGE"
+          ]
+        },
+        {
+          "sourceId": "BNM:approved",
+          "sourceUrl": "https://api.bnm.gov.my/public/msb/1.12?type=total",
+          "sourceVersion": "c08c1afd8b0757e328564e477d591cbef41735a1e1a4d56d637a88fed86d3391",
+          "versionKind": "CANONICAL_JSON_SHA256_NOT_HTTP_BYTE_DIGEST",
+          "retrievedAt": "2026-10-23T03:33:08.247Z",
+          "publishedAt": null,
+          "period": "2026-08",
+          "institutionScope": "type=total",
+          "sourceState": "READ_ONLY_CANDIDATE_UNIT_LICENSE_COHORT_NOT_ADMITTED",
+          "requiredAcceptHeader": "application/vnd.BNM.API.v1+json",
+          "requiredMeasurementFieldsMissing": [
+            "MATCHED_APPLICATION_COUNTS",
+            "COMPARABLE_APPROVAL_AND_REJECTION_COUNTS",
+            "SAME_COHORT_AND_PRODUCT_SCOPE",
+            "CONSISTENT_OUTCOME_DEFINITION",
+            "TIME_SERIES_WITH_SAME_COVERAGE"
+          ]
+        }
+      ],
+      "grounding": {
+        "schemaVersion": "PHI-OS-KAP-W29-KNOWLEDGE-HANDOFF-v1.0.0",
+        "provenanceType": "KNOWLEDGE_GROUNDING_BUNDLE",
+        "bundleId": "WORLD-R4:GAP:C",
+        "matchedKnowledge": [
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "BNM:applied",
+            "sourceType": "READ_ONLY_CANDIDATE_UNIT_LICENSE_COHORT_NOT_ADMITTED",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://api.bnm.gov.my/public/msb/1.10?type=total",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          },
+          {
+            "kind": "GOVERNED_SOURCE_REF",
+            "sourceId": "BNM:approved",
+            "sourceType": "READ_ONLY_CANDIDATE_UNIT_LICENSE_COHORT_NOT_ADMITTED",
+            "nodeCode": "",
+            "bookCode": "",
+            "partCode": "",
+            "sectionCode": "",
+            "href": "https://api.bnm.gov.my/public/msb/1.12?type=total",
+            "provenance": "KNOWLEDGE_GROUNDING_BUNDLE"
+          }
+        ],
+        "unknownCodes": [
+          "MATCHED_APPLICATION_COUNTS",
+          "COMPARABLE_APPROVAL_AND_REJECTION_COUNTS",
+          "SAME_COHORT_AND_PRODUCT_SCOPE",
+          "CONSISTENT_OUTCOME_DEFINITION",
+          "TIME_SERIES_WITH_SAME_COVERAGE"
+        ],
+        "contentMode": "REFERENCE_ONLY_NO_FULL_SOURCE_TEXT",
+        "canonicalKnowledgeAuthorityUnchanged": true
+      },
+      "observations": [],
+      "backHref": "/world/?r4Case=C&locale=en",
+      "providerCalls": 0
+    }
+  },
+  "confirmedContext": {
+    "caseId": "bcf78100-2425-4cce-932d-70663ab0fac1",
+    "version": 3,
+    "question": "我的家庭需要核对价格变化是否相关。",
+    "goal": "先核对实际账单与支出权重。",
+    "branch": "main",
+    "items": [
+      {
+        "id": "a6957306-a113-4641-8e66-c986691f5d72",
+        "version": 2,
+        "kind": "EVIDENCE",
+        "content": "世界参考：Johor 2026-09 CPI_YOY = 2.2 percent。与问题的相关性由用户确认，实际个人影响尚待核对。",
+        "sourceType": "SERVER_RESOLVED_EVIDENCE",
+        "confirmation": "USER_CONFIRMED",
+        "verification": "SOURCE_BOUND_NOT_PERSONAL_FACT",
+        "source": {
+          "sourceRef": "DOSM:cpi_2d_state_inflation",
+          "sourceVersion": "b457c1a1deb41c3cc695b966163c79103ed224febc529c3880a1a8cbb10f9494",
+          "observationId": "DOSM:b457c1a1deb41c3c:Johor:2026-09:overall:inflation_yoy",
+          "seriesKey": "DOSM_STATE:Johor:CPI_YOY:overall",
+          "statement": "世界参考：Johor 2026-09 CPI_YOY = 2.2 percent。与问题的相关性由用户确认，实际个人影响尚待核对。",
+          "validUntil": "2026-10-24T03:30:03.113Z",
+          "href": "https://storage.dosm.gov.my/cpi/cpi_2d_state_inflation.csv",
+          "supportLocation": "b457c1a1deb41c3cc695b966163c79103ed224febc529c3880a1a8cbb10f9494#csv-row=201&field=inflation_yoy",
+          "geography": "DOSM_STATE:Johor",
+          "period": "2026-09",
+          "applicabilityReason": "我主动选择柔佛的价格变化作为账单核对背景，不代表已受影响。",
+          "applicabilityState": "USER_CONFIRMED_RELEVANCE_NOT_INDEPENDENT_IMPACT",
+          "role": "IMPACT_CANDIDATE",
+          "personalFact": false,
+          "causality": false,
+          "unknowns": [
+            "CASE_APPLICABILITY_EVIDENCE_NOT_ESTABLISHED",
+            "EFFECTIVE_INDIVIDUAL_APPLICABILITY_NOT_ESTABLISHED"
+          ],
+          "permissionPurpose": "WORLD_R4_LOCAL_IMPACT_REFERENCE_ONLY",
+          "permissionSource": "USER_WORLD_R4_EXECUTION_2026_10_23",
+          "productionEligible": false,
+          "measurement": {
+            "observationId": "DOSM:b457c1a1deb41c3c:Johor:2026-09:overall:inflation_yoy",
+            "admittedEvidenceId": "EVIDENCE:DOSM:b457c1a1deb41c3c:Johor:2026-09:overall:inflation_yoy",
+            "sourceId": "DOSM:cpi_2d_state_inflation",
+            "sourceVersion": "b457c1a1deb41c3cc695b966163c79103ed224febc529c3880a1a8cbb10f9494",
+            "metricId": "CPI_YOY",
+            "division": "overall",
+            "value": 2.2,
+            "unit": "percent",
+            "geographyId": "DOSM_STATE:Johor",
+            "geographyName": "Johor",
+            "geographicLevel": "STATE",
+            "observationPeriod": "2026-09",
+            "frequency": "MONTHLY",
+            "definition": "CPI_YOY:CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+            "statisticalMethod": "DOSM_FIXED_BASKET_CPI_MCOICOP",
+            "denominator": "CHANGE_FROM_SAME_MONTH_PREVIOUS_YEAR",
+            "population": "Represented consumer basket; not a household-specific budget",
+            "coverage": "DOSM_STATE_CPI_BASKET",
+            "baseYear": 2010,
+            "sourceUrl": "https://storage.dosm.gov.my/cpi/cpi_2d_state_inflation.csv",
+            "metadataUrl": "https://open.dosm.gov.my/data-catalogue/cpi_state_inflation",
+            "sourceSnapshotReference": "b457c1a1deb41c3cc695b966163c79103ed224febc529c3880a1a8cbb10f9494#csv-row=201&field=inflation_yoy",
+            "transformationVersion": "WORLD-R4-MEASUREMENT-ROW-v1",
+            "admissionStatus": "LOCAL_CWA_ADMITTED",
+            "verificationStatus": "RAW_BYTES_COLUMNS_ROW_SCOPE_METADATA_LICENSE_CHECKED",
+            "productionEligible": false
+          },
+          "limits": [
+            "REPRESENTATIVE_BASKET_NOT_PERSONAL_BILLS",
+            "NO_PERSONAL_LOSS_OR_CAUSALITY_ESTABLISHED",
+            "LOCAL_VALIDATION_NOT_PRODUCTION_ADMISSION"
+          ],
+          "worldHref": "/world/?r4Observation=DOSM%3Ab457c1a1deb41c3c%3AJohor%3A2026-09%3Aoverall%3Ainflation_yoy&locale=zh-Hans&r4CaseId=bcf78100-2425-4cce-932d-70663ab0fac1"
+        },
+        "trustedInstruction": false
+      }
+    ],
+    "sourceIssues": [],
+    "excluded": [],
+    "excludedCount": 0,
+    "excludedByReason": {
+      "SOURCE_RECHECK_REQUIRED": 0,
+      "CAPACITY_LIMIT": 0
+    },
+    "unconfirmed": 0,
+    "reviewRequired": [],
+    "reviewRequiredCount": 0,
+    "world": {
+      "state": "EVIDENCE_REQUIRED",
+      "missing": [
+        "ACTUAL_INCOME_EXPENSES",
+        "TIMING",
+        "COMMITMENTS"
+      ],
+      "href": "/world/"
+    },
+    "boundaries": {
+      "userConfirmedIsExternallyVerified": false,
+      "methodIsRealityEvidence": false,
+      "externalTextIsInstruction": false,
+      "modelAnswer": null,
+      "providerCalls": 0
+    },
+    "capacity": {
+      "maxChars": 12000,
+      "maxRecords": 32,
+      "usedChars": 3633
+    },
+    "updatedAt": "2026-10-23T08:45:37.502Z"
+  }
+}

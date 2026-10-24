@@ -1,0 +1,218 @@
+{
+  "status": "PASS_LOCAL_ENGINEERING_ONLY",
+  "at": "2026-10-23T06:14:46.447Z",
+  "checks": [
+    {
+      "name": "Existing World owner returns pinned public evidence; missing career evidence stays unknown, no unauthorized source persistence",
+      "state": "PASS"
+    },
+    {
+      "name": "Anonymous cannot read cases",
+      "state": "PASS"
+    },
+    {
+      "name": "No consent creates no persisted record",
+      "state": "PASS"
+    },
+    {
+      "name": "Five rounds retain same case; user confirmed is not independently verified",
+      "state": "PASS"
+    },
+    {
+      "name": "Server/database restart restores checkpoint under existing sealed OIDC session",
+      "state": "PASS"
+    },
+    {
+      "name": "Re-login after restart resolves same issuer/subject account and finds saved question",
+      "state": "PASS"
+    },
+    {
+      "name": "Cross-account read and mutation denied",
+      "state": "PASS"
+    },
+    {
+      "name": "Correction requires reconfirmation and invalidates dependent understanding/action/checkpoint",
+      "state": "PASS"
+    },
+    {
+      "name": "Withdrawal excluded from context and reopened old checkpoint",
+      "state": "PASS"
+    },
+    {
+      "name": "Deletion erases record, owner audit snapshot and checkpoint content references",
+      "state": "PASS"
+    },
+    {
+      "name": "Branch returns to main without replacing goal or silently importing branch facts; unrelated branch promotion denied",
+      "state": "PASS"
+    },
+    {
+      "name": "Same request replay does not duplicate mutation; changed replay rejected",
+      "state": "PASS"
+    },
+    {
+      "name": "Stale version cannot overwrite newer case",
+      "state": "PASS"
+    },
+    {
+      "name": "Client claimed evidence cannot create server provenance",
+      "state": "PASS"
+    },
+    {
+      "name": "Non-career household case reuses same owner without fabricated amounts or advice",
+      "state": "PASS"
+    },
+    {
+      "name": "Large history bounded by deterministic whole-record budget, no sentence truncation",
+      "state": "PASS"
+    },
+    {
+      "name": "Expired evidence cannot be newly confirmed; a previously confirmed expired reference is excluded; external text never instructions",
+      "state": "PASS"
+    },
+    {
+      "name": "Method, professional and provider boundaries remain separate",
+      "state": "PASS"
+    },
+    {
+      "name": "Cross-origin write denied",
+      "state": "PASS"
+    },
+    {
+      "name": "Existing production READ_ONLY guard still rejects write before database access",
+      "state": "PASS"
+    },
+    {
+      "name": "Concurrent mutations cannot overwrite one another: one commits, one conflicts",
+      "state": "PASS"
+    },
+    {
+      "name": "Existing account-session revocation prevents subsequent case reads",
+      "state": "PASS"
+    }
+  ],
+  "trace": [
+    {
+      "round": 1,
+      "caseId": "53fca8d8-5761-41c1-90b3-2934ef53f30d",
+      "version": 3,
+      "records": [
+        {
+          "id": "89c0ca05-dc13-48eb-8d1e-3a53280c3340",
+          "content": "曾参与 QMS 与制造业工作。",
+          "verification": "NOT_INDEPENDENTLY_VERIFIED"
+        }
+      ],
+      "automaticSynthesis": false
+    },
+    {
+      "round": 2,
+      "caseId": "53fca8d8-5761-41c1-90b3-2934ef53f30d",
+      "version": 5,
+      "records": [
+        {
+          "id": "e9561987-7c21-4e00-b688-8c72ec176e1a",
+          "content": "曾参与国际 OEM 产品、多个市场协调、产品与价格统一工作，不是独立负责全部业务。",
+          "verification": "NOT_INDEPENDENTLY_VERIFIED"
+        },
+        {
+          "id": "89c0ca05-dc13-48eb-8d1e-3a53280c3340",
+          "content": "曾参与 QMS 与制造业工作。",
+          "verification": "NOT_INDEPENDENTLY_VERIFIED"
+        }
+      ],
+      "automaticSynthesis": false
+    },
+    {
+      "round": 3,
+      "caseId": "53fca8d8-5761-41c1-90b3-2934ef53f30d",
+      "version": 7,
+      "records": [
+        {
+          "id": "427c8ffb-7738-4a3b-8c99-4ae2a5a36183",
+          "content": "ERP 上线前建立 Excel 与 Google Sheets 生产记录，财务使用资料计算成本；不是完整 ERP 软件开发。",
+          "verification": "NOT_INDEPENDENTLY_VERIFIED"
+        },
+        {
+          "id": "e9561987-7c21-4e00-b688-8c72ec176e1a",
+          "content": "曾参与国际 OEM 产品、多个市场协调、产品与价格统一工作，不是独立负责全部业务。",
+          "verification": "NOT_INDEPENDENTLY_VERIFIED"
+        },
+        {
+          "id": "89c0ca05-dc13-48eb-8d1e-3a53280c3340",
+          "content": "曾参与 QMS 与制造业工作。",
+          "verification": "NOT_INDEPENDENTLY_VERIFIED"
+        }
+      ],
+      "automaticSynthesis": false
+    },
+    {
+      "round": 4,
+      "caseId": "53fca8d8-5761-41c1-90b3-2934ef53f30d",
+      "version": 9,
+      "records": [
+        {
+          "id": "21e9d15d-db0e-4243-8263-904448711663",
+          "content": "参与 Microsoft D365 前期准备，职位包括 Team Leader 与 Senior Executive，并非每个岗位都是 Manager。",
+          "verification": "NOT_INDEPENDENTLY_VERIFIED"
+        },
+        {
+          "id": "427c8ffb-7738-4a3b-8c99-4ae2a5a36183",
+          "content": "ERP 上线前建立 Excel 与 Google Sheets 生产记录，财务使用资料计算成本；不是完整 ERP 软件开发。",
+          "verification": "NOT_INDEPENDENTLY_VERIFIED"
+        },
+        {
+          "id": "e9561987-7c21-4e00-b688-8c72ec176e1a",
+          "content": "曾参与国际 OEM 产品、多个市场协调、产品与价格统一工作，不是独立负责全部业务。",
+          "verification": "NOT_INDEPENDENTLY_VERIFIED"
+        },
+        {
+          "id": "89c0ca05-dc13-48eb-8d1e-3a53280c3340",
+          "content": "曾参与 QMS 与制造业工作。",
+          "verification": "NOT_INDEPENDENTLY_VERIFIED"
+        }
+      ],
+      "automaticSynthesis": false
+    },
+    {
+      "round": 5,
+      "caseId": "53fca8d8-5761-41c1-90b3-2934ef53f30d",
+      "version": 11,
+      "records": [
+        {
+          "id": "740aca52-4d1d-40fb-a51a-c72207ff23b1",
+          "content": "需要平衡稳定收入、家庭安排与长期创业；Hybrid 和跨境资格尚待现实核对。",
+          "verification": "NOT_INDEPENDENTLY_VERIFIED"
+        },
+        {
+          "id": "21e9d15d-db0e-4243-8263-904448711663",
+          "content": "参与 Microsoft D365 前期准备，职位包括 Team Leader 与 Senior Executive，并非每个岗位都是 Manager。",
+          "verification": "NOT_INDEPENDENTLY_VERIFIED"
+        },
+        {
+          "id": "427c8ffb-7738-4a3b-8c99-4ae2a5a36183",
+          "content": "ERP 上线前建立 Excel 与 Google Sheets 生产记录，财务使用资料计算成本；不是完整 ERP 软件开发。",
+          "verification": "NOT_INDEPENDENTLY_VERIFIED"
+        },
+        {
+          "id": "e9561987-7c21-4e00-b688-8c72ec176e1a",
+          "content": "曾参与国际 OEM 产品、多个市场协调、产品与价格统一工作，不是独立负责全部业务。",
+          "verification": "NOT_INDEPENDENTLY_VERIFIED"
+        },
+        {
+          "id": "89c0ca05-dc13-48eb-8d1e-3a53280c3340",
+          "content": "曾参与 QMS 与制造业工作。",
+          "verification": "NOT_INDEPENDENTLY_VERIFIED"
+        }
+      ],
+      "automaticSynthesis": false
+    }
+  ],
+  "database": ".tmp/reality-navigation-continuity-r1/test-1792736085392.sqlite",
+  "restoredCaseId": "53fca8d8-5761-41c1-90b3-2934ef53f30d",
+  "storage": "REAL_DISK_SQLITE_EXISTING_RUNTIME_SCHEMA",
+  "auth": "EXISTING_OIDC_OWNER_SYNTHETIC_RSA_PROVIDER",
+  "modelQuality": "NOT_TESTED_NO_MODEL",
+  "providerCalls": 0,
+  "productionWrites": 0
+}

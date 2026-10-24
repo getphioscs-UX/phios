@@ -1,0 +1,27 @@
+{
+  "version": "REPORT-REFERENCE-LOCAL-R1-CLOSEOUT",
+  "changeClass": "explicit-contract-version-upgrade-local-candidate",
+  "productionEnabled": false,
+  "adapter": "functions/commerce/report-reference-candidate.js",
+  "migrationCandidate": "docs/commerce/report-reference-r1/migration-candidate.sql",
+  "overlaySchema": "FIN-OVERLAY-R1",
+  "environments": {
+    "QA": "MINIFLARE_WORKERD_D1_LOCAL_PERSISTENCE_VERIFIED",
+    "LIVE": "BLOCKED"
+  },
+  "numberFormat": "PHI-QA-{display-method}-{year}-{minimum-six-digit-sequence}",
+  "noHistoricalBackfill": true,
+  "identityKinds": [
+    "Stripe Invoice Number",
+    "PHI OS Order Reference",
+    "PHI OS Report Number",
+    "Existing PHI OS Receipt Number"
+  ],
+  "defaultInvoiceStrategy": "ORDER",
+  "privacy": "No personal data in public numbers or invoice request diff",
+  "authorization": "Existing owner, subject consent, grant, version and digest owners remain authoritative",
+  "localD1Adapter": "functions/commerce/report-reference-d1-local.js",
+  "deliveryAdmission": "PARTIAL_PER_DOMAIN_NO_PRODUCTION_ROUTER_IMPORT",
+  "sandboxIsAbsoluteFinanceBlocker": false,
+  "liveTransactionInvoiceGate": "SEPARATE_FINAL_ADMISSION"
+}

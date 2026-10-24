@@ -1,0 +1,231 @@
+{
+  "policy": {
+    "mode": "EXACT_R2_IMAGE_WITH_ALLOWED_OVERLAYS",
+    "p03": "FROZEN_APPROVED",
+    "nativeR4": "HISTORICAL_ONLY",
+    "p21": "BLOCKED_APPROVED_EMPTY_SLOT_SOURCE_REQUIRED"
+  },
+  "providerCalls": 0,
+  "providerUSD": 0,
+  "productionPass": false,
+  "tests": [
+    {
+      "name": "All 8 pinned assets match frozen SHA256",
+      "status": "PASS"
+    },
+    {
+      "name": "P03 frozen approved object retained",
+      "status": "PASS"
+    },
+    {
+      "name": "P21 fail closed without approved empty-slot source",
+      "status": "PASS"
+    },
+    {
+      "name": "Actual report entry fails closed before rendering even synthetic inputs",
+      "status": "PASS"
+    },
+    {
+      "name": "Cover exact saved values and escaped customer text",
+      "status": "PASS"
+    },
+    {
+      "name": "Missing cover fields rejected, no invented zero",
+      "status": "PASS"
+    },
+    {
+      "name": "No native R4 import and no P21 mask output",
+      "status": "PASS"
+    },
+    {
+      "name": "P22 actual generated catalog has 12 entries and matching states/ranges",
+      "status": "PASS"
+    },
+    {
+      "name": "P02–P05 proof has one exact original image and no overlays",
+      "status": "PASS"
+    },
+    {
+      "name": "All historical PDFs byte unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "Obsolete native review controls disabled in existing Master",
+      "status": "PASS"
+    }
+  ],
+  "blocked": [
+    "P21 approved empty-slot source and approved overlay slot map absent",
+    "Named asset-reuse attachment not found locally; full attachment compliance cannot yet be claimed",
+    "Customer PDF generation blocked; no replacement report emitted"
+  ],
+  "visualApproval": "NOT_CLAIMED",
+  "historicalPDFsChecked": 61,
+  "sourceCatalog": [
+    {
+      "id": "A01",
+      "title": {
+        "zh-Hans": "贷款与提前还款",
+        "en": "Loan & Repayment Analysis"
+      },
+      "included": false,
+      "start": null,
+      "end": null,
+      "status": "NOT_SELECTED",
+      "reason": "Not selected for this output"
+    },
+    {
+      "id": "A02",
+      "title": {
+        "zh-Hans": "出租房现金流",
+        "en": "Rental Property Cash Flow"
+      },
+      "included": false,
+      "start": null,
+      "end": null,
+      "status": "MORE_INFO_NEEDED",
+      "reason": "Required applicable evidence not available"
+    },
+    {
+      "id": "A03",
+      "title": {
+        "zh-Hans": "房产组合",
+        "en": "Property Portfolio"
+      },
+      "included": false,
+      "start": null,
+      "end": null,
+      "status": "NOT_SELECTED",
+      "reason": "Not selected for this output"
+    },
+    {
+      "id": "A04",
+      "title": {
+        "zh-Hans": "银行存款与资金到期",
+        "en": "Banking & Deposit Maturity"
+      },
+      "included": false,
+      "start": null,
+      "end": null,
+      "status": "NOT_SELECTED",
+      "reason": "Not selected for this output"
+    },
+    {
+      "id": "A05",
+      "title": {
+        "zh-Hans": "投资组合",
+        "en": "Investment Portfolio"
+      },
+      "included": false,
+      "start": null,
+      "end": null,
+      "status": "NOT_SELECTED",
+      "reason": "Not selected for this output"
+    },
+    {
+      "id": "A06",
+      "title": {
+        "zh-Hans": "保障与保单明细",
+        "en": "Insurance & Protection"
+      },
+      "included": false,
+      "start": null,
+      "end": null,
+      "status": "NOT_SELECTED",
+      "reason": "Not selected for this output"
+    },
+    {
+      "id": "A07",
+      "title": {
+        "zh-Hans": "家庭收支明细",
+        "en": "Household Income & Spending"
+      },
+      "included": false,
+      "start": null,
+      "end": null,
+      "status": "NOT_SELECTED",
+      "reason": "Not selected for this output"
+    },
+    {
+      "id": "A08",
+      "title": {
+        "zh-Hans": "退休规划",
+        "en": "Retirement Planning"
+      },
+      "included": true,
+      "start": 25,
+      "end": 31,
+      "status": "INCLUDED",
+      "reason": "Generated pages indexed"
+    },
+    {
+      "id": "A09",
+      "title": {
+        "zh-Hans": "教育规划",
+        "en": "Education Planning"
+      },
+      "included": true,
+      "start": 32,
+      "end": 36,
+      "status": "INCLUDED",
+      "reason": "Generated pages indexed"
+    },
+    {
+      "id": "A10",
+      "title": {
+        "zh-Hans": "税务资料准备",
+        "en": "Tax Preparation"
+      },
+      "included": false,
+      "start": null,
+      "end": null,
+      "status": "NOT_SELECTED",
+      "reason": "Not selected for this output"
+    },
+    {
+      "id": "A11",
+      "title": {
+        "zh-Hans": "遗产与家庭安排",
+        "en": "Estate & Succession Preparation"
+      },
+      "included": false,
+      "start": null,
+      "end": null,
+      "status": "NOT_SELECTED",
+      "reason": "Not selected for this output"
+    },
+    {
+      "id": "A12",
+      "title": {
+        "zh-Hans": "多年目标与情景",
+        "en": "Goals & Scenario Analysis"
+      },
+      "included": true,
+      "start": 37,
+      "end": 37,
+      "status": "INCLUDED",
+      "reason": "Generated pages indexed"
+    }
+  ],
+  "changes": [
+    "Exact-asset policy and cover field allowlist added",
+    "P21 mask removed from report output and actual report entry hard blocked",
+    "P02–P05 added fixed folio overlays removed",
+    "Existing Master foregrounds asset reuse; native review controls disabled"
+  ],
+  "untouched": [
+    "financial calculation engine",
+    "dynamic body diagrams",
+    "appendix builder and P22 generation",
+    "R2 objects",
+    "old PDFs and receipts"
+  ],
+  "browserEvidence": "browser-check.json",
+  "coverEvidence": "cover-overlay.png",
+  "coverSlotApproval": "PENDING_HUMAN_CONFIRMATION_OF_PLACEMENT; synthetic short-field fit only; long names not visually approved",
+  "attachmentSearch": [
+    "Desktop recursive filename/content search",
+    "Downloads recursive filename/content search",
+    "Codex attachments recursive filename/content search"
+  ]
+}

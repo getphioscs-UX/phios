@@ -1,0 +1,411 @@
+{
+  "scope": "Local HEAD and retained working tree; no live customer data or Stripe lists read",
+  "rows": [
+    {
+      "name": "BaZi",
+      "method": "BZR",
+      "productId": "COM-REPORT-BAZI-FULL",
+      "delivery": "Owner-checked persisted released material",
+      "internalId": "reportId / reportArtifactId",
+      "version": "report_version / reportContentVersion",
+      "transactionReference": "purchaseId + orderId + entitlement",
+      "publicReportNumber": "NOT FOUND IN INSPECTED OWNER; global customer-visible number NOT VERIFIED",
+      "customerVisibility": "NOT VERIFIED as a customer-visible Report No.; internal references do not prove printed visibility",
+      "ownerEvidence": {
+        "path": "functions/account/bazi-account-delivery.js",
+        "matches": [
+          {
+            "line": 24,
+            "excerpt": "async function recoverCompletedMethodCheckpoint(context,binding,inputs){const manuscript=await createReportGenerationStore(context.env,binding,{scope:'manuscript'});for(const {key,value:cp} of await manuscript.inspectStates({suffix:':CHECKP"
+          },
+          {
+            "line": 25,
+            "excerpt": "export async function inspectAccountBaziDeliveryProgress(context,job){gate(context);if(personIdentity(context).userId!==job.ownerAccountId)fail('BAZI_PROGRESS_OWNER_MISMATCH',403);const reportId=await digest(`${job.ownerAccountId}\\0${job.or"
+          },
+          {
+            "line": 58,
+            "excerpt": " const reportId=await digest(`${owner}\\0${order.orderId}\\0${prepared.purchaseId}\\0BAZI`),binding={environment:commerceEnvironment(context.env),ownerAccountId:owner,purchaseId:prepared.purchaseId,orderId:order.orderId,reportId,productId:'COM"
+          },
+          {
+            "line": 64,
+            "excerpt": "  const storedRow=await context.env.RUNTIME_DB.prepare('SELECT report_id FROM account_method_report_materials WHERE report_id=? AND owner_account_id=?').bind(reportId,owner).first();const prior=await store.get('release')||await store.get('a"
+          },
+          {
+            "line": 66,
+            "excerpt": "  const result=await saved('P8_GENERATION_RESULT')||await recoverCompletedMethodCheckpoint(context,binding,inputs)||await produce({env:context.env,binding,pack:inputs.pack,model:inputs.model,policy:inputs.policy,approval:inputs.approval,ord"
+          },
+          {
+            "line": 77,
+            "excerpt": "  const artifact=await createCustomerReportArtifact({reportArtifactId:reportId,customerId:owner,personId:prepared.personId,personVersion:prepared.personVersion,methodCode:'BZR',productCode:binding.productId,entitlementId:right.entitlement_i"
+          },
+          {
+            "line": 79,
+            "excerpt": "  const body={artifactKey,artifactDigest:artifact.artifactDigest,schemaVersion:'BAZI_ACCOUNT_MATERIAL_V1',candidate,personVersion:prepared.personVersion,canonicalBirthInputFingerprint:prepared.canonicalBirthInputFingerprint,verification},re"
+          }
+        ]
+      },
+      "qaEvidence": "Read-only source inspection only; no customer report opened or provider invoked",
+      "sharedPaidRegistryAdmission": true,
+      "productCheckoutBlockedReason": null,
+      "productionAdmission": "NOT VERIFIED IN THIS LOCAL AUDIT"
+    },
+    {
+      "name": "Zi Wei",
+      "method": "ZWR",
+      "productId": "COM-REPORT-ZIWEI-FULL",
+      "delivery": "Owned account material with release receipt",
+      "internalId": "reportId / report_id",
+      "version": "report_version",
+      "transactionReference": "purchaseId / release binding",
+      "publicReportNumber": "NOT FOUND IN INSPECTED OWNER; global customer-visible number NOT VERIFIED",
+      "customerVisibility": "NOT VERIFIED as a customer-visible Report No.; internal references do not prove printed visibility",
+      "ownerEvidence": {
+        "path": "functions/account/ziwei-account-delivery.js",
+        "matches": [
+          {
+            "line": 35,
+            "excerpt": " return {reportId:release.reportId};"
+          },
+          {
+            "line": 37,
+            "excerpt": "export async function openAccountZiweiMaterial(context,reportId){"
+          },
+          {
+            "line": 39,
+            "excerpt": " return readMethodReportMaterial(context,reportId,{ownerAccountId:owner,loadReleaseReceipt:async()=>{const row=await context.env.RUNTIME_DB.prepare('SELECT a.payload FROM runtime_artifacts a JOIN runtimes r ON r.runtime_id=a.runtime_id WHER"
+          },
+          {
+            "line": 43,
+            "excerpt": " const rows=(await context.env.RUNTIME_DB.prepare('SELECT report_id FROM account_method_report_materials WHERE owner_account_id=? ORDER BY released_at DESC LIMIT 100').bind(owner).all()).results;"
+          },
+          {
+            "line": 45,
+            "excerpt": " for(const row of rows){try{const {row:r,candidate}=await openAccountZiweiMaterial(context,row.report_id);reports.push({reportId:r.report_id,method:'ZWR',subjectName:candidate.snapshot.semanticContent.subject.displayName,locale:r.locale,rel"
+          }
+        ]
+      },
+      "qaEvidence": "Read-only source inspection only; no customer report opened or provider invoked",
+      "sharedPaidRegistryAdmission": false,
+      "productCheckoutBlockedReason": null,
+      "productionAdmission": "NOT VERIFIED IN THIS LOCAL AUDIT"
+    },
+    {
+      "name": "Astrology",
+      "method": "AST",
+      "productId": "COM-REPORT-ASTROLOGY-FULL",
+      "delivery": "Review-mode visual projection; separate paid delivery not verified",
+      "internalId": "sourceReportRef = AST_FULL_REPORT:semanticDigest; projectionId",
+      "version": "schemaVersion v3.0.0",
+      "transactionReference": "NOT VERIFIED in projection owner",
+      "publicReportNumber": "NOT FOUND IN INSPECTED OWNER; global customer-visible number NOT VERIFIED",
+      "customerVisibility": "NOT VERIFIED as a customer-visible Report No.; internal references do not prove printed visibility",
+      "ownerEvidence": {
+        "path": "functions/personal-reading/ast-visual-report-projection.js",
+        "matches": [
+          {
+            "line": 4,
+            "excerpt": " const sourceReportRef=`AST_FULL_REPORT:${p.semanticDigest}`,b=visualProjectionBuilder({methodId:'AST',productId:'ASTROLOGY_FULL_REPORT',sourceReportRef,sourceProjectionId:p.projectionId,locale:p.locale,depth,reviewMode,identity:{projection"
+          }
+        ]
+      },
+      "qaEvidence": "Read-only source inspection only; no customer report opened or provider invoked",
+      "sharedPaidRegistryAdmission": "NOT REGISTERED HERE; other domain pipelines not disproven",
+      "productCheckoutBlockedReason": null,
+      "productionAdmission": "NOT VERIFIED IN THIS LOCAL AUDIT"
+    },
+    {
+      "name": "Human Design",
+      "method": "HD (HDR owner)",
+      "productId": "COM-REPORT-HD-FULL",
+      "delivery": "Professional final report, customer release authorization separate",
+      "internalId": "report_id / internalReport.reportId",
+      "version": "Finalisation/version contract",
+      "transactionReference": "NOT VERIFIED in selected professional owner",
+      "publicReportNumber": "NOT FOUND IN INSPECTED OWNER; global customer-visible number NOT VERIFIED",
+      "customerVisibility": "NOT VERIFIED as a customer-visible Report No.; internal references do not prove printed visibility",
+      "ownerEvidence": {
+        "path": "functions/professional/hdr-internal/hdr-registered-professional-final-report-runtime.js",
+        "matches": [
+          {
+            "line": 327,
+            "excerpt": "        report_id: text(finalisation.reportId || `${internalReport.reportId}:FINAL`, 'HDR_FINAL_REPORT_ID_REQUIRED'),"
+          },
+          {
+            "line": 378,
+            "excerpt": "          reportId: internalReport.reportId,"
+          }
+        ]
+      },
+      "qaEvidence": "Read-only source inspection only; no customer report opened or provider invoked",
+      "sharedPaidRegistryAdmission": "NOT REGISTERED HERE; other domain pipelines not disproven",
+      "productCheckoutBlockedReason": null,
+      "productionAdmission": "NOT VERIFIED IN THIS LOCAL AUDIT"
+    },
+    {
+      "name": "ECR",
+      "method": "ECR",
+      "productId": "COM-REPORT-ECR-FULL",
+      "delivery": "Customer-publishable presentation assembly; not payment admission",
+      "internalId": "reportId = ECR-FULL-R1-sourceProjectionId",
+      "version": "schemaVersion / edition ECR_FULL_R1",
+      "transactionReference": "sharedEntitlement; checkoutEnabled false in projection",
+      "publicReportNumber": "NOT FOUND IN INSPECTED OWNER; global customer-visible number NOT VERIFIED",
+      "customerVisibility": "reportId in customer report object; printed visibility NOT VERIFIED",
+      "ownerEvidence": {
+        "path": "functions/ecr-full-report/ecr-core-report-projection.js",
+        "matches": [
+          {
+            "line": 56,
+            "excerpt": " return freeze({schemaVersion:'PHI-OS-ECR-CUSTOMER-FULL-REPORT-v1.0.0',edition:'ECR_FULL_R1',productId:'ECR_FULL_REPORT',methodId:'ECR',reportId:`ECR-FULL-R1-${readingIR.sourceProjectionId}`,sourceProjectionId:readingIR.sourceProjectionId,l"
+          }
+        ]
+      },
+      "qaEvidence": "Read-only source inspection only; no customer report opened or provider invoked",
+      "sharedPaidRegistryAdmission": "NOT REGISTERED HERE; other domain pipelines not disproven",
+      "productCheckoutBlockedReason": null,
+      "productionAdmission": "NOT VERIFIED IN THIS LOCAL AUDIT"
+    },
+    {
+      "name": "Profile",
+      "method": "PROFILE",
+      "productId": "COM-REPORT-PROFILE-FULL",
+      "delivery": "RR case/customer/consent assembly",
+      "internalId": "reportCode PERSONAL_EVIDENCE_DOSSIER-profileViewId",
+      "version": "revision supplied to RR",
+      "transactionReference": "NOT VERIFIED in dossier adapter",
+      "publicReportNumber": "NOT FOUND IN INSPECTED OWNER; global customer-visible number NOT VERIFIED",
+      "customerVisibility": "NOT VERIFIED as a customer-visible Report No.; internal references do not prove printed visibility",
+      "ownerEvidence": {
+        "path": "functions/profile/personal-evidence-report-adapter.js",
+        "matches": [
+          {
+            "line": 29,
+            "excerpt": "  const assembly = rr.assembleReport({reportCode:`PERSONAL_EVIDENCE_DOSSIER-${profileView.profileViewId}`, case:caseReference, customer:customerReference,"
+          }
+        ]
+      },
+      "qaEvidence": "Read-only source inspection only; no customer report opened or provider invoked",
+      "sharedPaidRegistryAdmission": "NOT REGISTERED HERE; other domain pipelines not disproven",
+      "productCheckoutBlockedReason": null,
+      "productionAdmission": "NOT VERIFIED IN THIS LOCAL AUDIT"
+    },
+    {
+      "name": "Numerology",
+      "method": "NUM",
+      "productId": "COM-REPORT-NUMEROLOGY-FULL",
+      "delivery": "Review-mode visual report projection",
+      "internalId": "sourceReportRef NUM_FULL_REPORT:sourceProjectionId",
+      "version": "integrated reading schemaVersion",
+      "transactionReference": "NOT VERIFIED in projection owner",
+      "publicReportNumber": "NOT FOUND IN INSPECTED OWNER; global customer-visible number NOT VERIFIED",
+      "customerVisibility": "NOT VERIFIED as a customer-visible Report No.; internal references do not prove printed visibility",
+      "ownerEvidence": {
+        "path": "functions/personal-reading/num-visual-report-projection.js",
+        "matches": [
+          {
+            "line": 9,
+            "excerpt": " const s=reading.sections,locale=reading.locale,zh=locale==='zh-Hans',local=(en,cn)=>zh?cn:en,sourceReportRef=`NUM_FULL_REPORT:${reading.sourceProjectionId}`,pages=[];"
+          },
+          {
+            "line": 10,
+            "excerpt": " const ref=path=>`${sourceReportRef}#${path}`;"
+          },
+          {
+            "line": 15,
+            "excerpt": " const add=(id,title,question,templateId,type,nodes,insights=[],extra={})=>{if(!nodes.length)return;const refs=nodes.flatMap(x=>x.sourceRefs);pages.push(createVisualPage({pageId:`VRPT-NUM-${id}`,methodId:'NUM',productId:'NUMEROLOGY_FULL_REP"
+          },
+          {
+            "line": 42,
+            "excerpt": " return {schemaVersion:'PHI-OS-PERSONAL-READING-VISUAL-PAGES-v1.0.0',sourceReportRef,sourceProjectionId:reading.sourceProjectionId,methodId:'NUM',productId:'NUMEROLOGY_FULL_REPORT',locale,depth,identity:s.snapshot.map(x=>({role:x.role,value"
+          }
+        ]
+      },
+      "qaEvidence": "Read-only source inspection only; no customer report opened or provider invoked",
+      "sharedPaidRegistryAdmission": "NOT REGISTERED HERE; other domain pipelines not disproven",
+      "productCheckoutBlockedReason": null,
+      "productionAdmission": "NOT VERIFIED IN THIS LOCAL AUDIT"
+    },
+    {
+      "name": "Cross",
+      "method": "CROSS",
+      "productId": "COM-REPORT-CROSS-FULL",
+      "delivery": "Cross visual projection of admitted reading",
+      "internalId": "sourceReportRef readingDigest; sourceProjectionId",
+      "version": "reading.schemaVersion",
+      "transactionReference": "NOT VERIFIED in projection owner",
+      "publicReportNumber": "NOT FOUND IN INSPECTED OWNER; global customer-visible number NOT VERIFIED",
+      "customerVisibility": "NOT VERIFIED as a customer-visible Report No.; internal references do not prove printed visibility",
+      "ownerEvidence": {
+        "path": "functions/personal-reading/cross-visual-report-projection.js",
+        "matches": [
+          {
+            "line": 10,
+            "excerpt": " const methods=crossInput.methodInputs.map(m=>m.methodId),b=visualProjectionBuilder({methodId:'CROSS',productId:'CROSS_FULL_REPORT',sourceReportRef:reading.readingDigest,sourceProjectionId:reading.schemaVersion,locale,depth,reviewMode,ident"
+          }
+        ]
+      },
+      "qaEvidence": "Read-only source inspection only; no customer report opened or provider invoked",
+      "sharedPaidRegistryAdmission": "NOT REGISTERED HERE; other domain pipelines not disproven",
+      "productCheckoutBlockedReason": null,
+      "productionAdmission": "NOT VERIFIED IN THIS LOCAL AUDIT"
+    },
+    {
+      "name": "Financial",
+      "method": "FIN",
+      "productId": "COM-REPORT-FINANCIAL-FULL",
+      "delivery": "Saved private HTML with grant/source checks; new merged PDF P21 blocked",
+      "internalId": "finance_<digest> jobId / reportId / reportArtifactId",
+      "version": "savedDraftRef.version / contentDigest",
+      "transactionReference": "NONCOMMERCIAL_PREPARATION binding; no paid grant in this owner",
+      "publicReportNumber": "NOT FOUND IN INSPECTED OWNER; global customer-visible number NOT VERIFIED",
+      "customerVisibility": "NOT VERIFIED as a customer-visible Report No.; internal references do not prove printed visibility",
+      "ownerEvidence": {
+        "path": "functions/financial/holistic-planning-product/factual-report-job.js",
+        "matches": [
+          {
+            "line": 37,
+            "excerpt": "function reportBinding(owner,id,environment){return {environment,ownerAccountId:owner,orderId:`NONCOMMERCIAL_PREPARATION:${id}`,reportId:id,productId:'FINANCIAL_FACTUAL_R1'};}"
+          },
+          {
+            "line": 68,
+            "excerpt": "  const assembly=assembleReport({reportCode:jobId,case:evidence.source.sourceRef,customer:owner,locale:request.language,serviceContract:{reference:'FINANCIAL-NARRATIVE-SOURCE-R1',requiredSectionTypes:['FINANCIAL_NARRATIVE'],optionalSectionT"
+          },
+          {
+            "line": 74,
+            "excerpt": "  const artifact=await createCustomerReportArtifact({reportArtifactId:jobId,customerId:owner,personId:evidence.source.subjectRef,methodCode:'FINANCIAL_FACTUAL',productCode:'FINANCIAL_FACTUAL_R1',entitlementId:freeR3?'FREE_SAVED_VERSION_NO_P"
+          }
+        ]
+      },
+      "qaEvidence": "Read-only source inspection only; no customer report opened or provider invoked",
+      "sharedPaidRegistryAdmission": "NOT REGISTERED HERE; other domain pipelines not disproven",
+      "productCheckoutBlockedReason": "FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED",
+      "productionAdmission": "NOT VERIFIED IN THIS LOCAL AUDIT"
+    },
+    {
+      "name": "Will",
+      "method": "WILL",
+      "productId": "COM-WILL-WRITING",
+      "delivery": "Downloadable bilingual information HTML; NOT executed will",
+      "internalId": "draftId / digest; professional testamentary reportId separate",
+      "version": "saved.version; case:dataVersion in professional report",
+      "transactionReference": "NOT VERIFIED paid linking; draft delivery consent required",
+      "publicReportNumber": "NOT FOUND IN INSPECTED OWNER; global customer-visible number NOT VERIFIED",
+      "customerVisibility": "draftId/version/digest visibly printed; not formal report number",
+      "ownerEvidence": {
+        "path": "functions/account/will-information-delivery.js",
+        "matches": [
+          {
+            "line": 19,
+            "excerpt": "  if(saved.version!==body.expectedVersion)return json({ok:false,code:'DRAFT_VERSION_CONFLICT'},409);"
+          },
+          {
+            "line": 25,
+            "excerpt": "  const html=`<!doctype html><html lang=\"zh-Hans\"><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Estate information draft / 遗嘱资料整理稿</title><style>body{font:16px/1.7 system-ui;max-width:1000px"
+          },
+          {
+            "line": 26,
+            "excerpt": "  return new Response(html,{headers:{'Content-Type':'text/html; charset=utf-8','Content-Disposition':`attachment; filename=\"will-information-v${saved.version}.html\"`,'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff','Co"
+          }
+        ]
+      },
+      "qaEvidence": "Read-only source inspection only; no customer report opened or provider invoked",
+      "sharedPaidRegistryAdmission": "NOT REGISTERED HERE; other domain pipelines not disproven",
+      "productCheckoutBlockedReason": null,
+      "productionAdmission": "NOT VERIFIED IN THIS LOCAL AUDIT"
+    },
+    {
+      "name": "Tarot",
+      "method": "TAROT",
+      "productId": "COM-READING-TAROT-FULL",
+      "delivery": "Account/guest scoped symbolic persistence; paid admission not inferred",
+      "internalId": "readingId / artifactId",
+      "version": "ARTIFACT_SCHEMA / runtime schema",
+      "transactionReference": "Paid purchase-to-saved-reading mapping NOT VERIFIED",
+      "publicReportNumber": "NOT FOUND IN INSPECTED OWNER; global customer-visible number NOT VERIFIED",
+      "customerVisibility": "NOT VERIFIED as a customer-visible Report No.; internal references do not prove printed visibility",
+      "ownerEvidence": {
+        "path": "functions/symbolic-method-persistence/symbolic-reading-store-d1-v2.js",
+        "matches": [
+          {
+            "line": 29,
+            "excerpt": "    readingId: row.runtime_id,"
+          },
+          {
+            "line": 30,
+            "excerpt": "    artifactId: row.artifact_id,"
+          },
+          {
+            "line": 52,
+            "excerpt": "      const readingId = uuid('symbolic_reading', createId);"
+          },
+          {
+            "line": 53,
+            "excerpt": "      const artifactId = uuid('symbolic_artifact', createId);"
+          },
+          {
+            "line": 57,
+            "excerpt": "        artifactId,"
+          },
+          {
+            "line": 63,
+            "excerpt": "      const eventPayload = JSON.stringify({ artifactId, methodCode: envelope.methodCode, reviewState: envelope.reviewState, retentionExplicit: true, guestPersistence: envelope?.governance?.guestPersistenceAllowed === true });"
+          },
+          {
+            "line": 66,
+            "excerpt": "        db.prepare(`INSERT INTO runtimes (runtime_id,user_id,status,current_stage,schema_version,state,created_at,updated_at) VALUES (?1,?2,'active',?3,?4,?5,?6,?6)`).bind(readingId, identity.userId, STAGE, RUNTIME_SCHEMA, runtimeState, tim"
+          }
+        ]
+      },
+      "qaEvidence": "Read-only source inspection only; no customer report opened or provider invoked",
+      "sharedPaidRegistryAdmission": "NOT REGISTERED HERE; other domain pipelines not disproven",
+      "productCheckoutBlockedReason": null,
+      "productionAdmission": "NOT VERIFIED IN THIS LOCAL AUDIT"
+    },
+    {
+      "name": "I Ching",
+      "method": "ICHING",
+      "productId": "COM-READING-ICHING-FULL",
+      "delivery": "Owned saved readings API; guest retention conditions",
+      "internalId": "readingId + symbolic artifactId via store",
+      "version": "Versioned symbolic D1 store",
+      "transactionReference": "Paid purchase-to-saved-reading mapping NOT VERIFIED",
+      "publicReportNumber": "NOT FOUND IN INSPECTED OWNER; global customer-visible number NOT VERIFIED",
+      "customerVisibility": "NOT VERIFIED as a customer-visible Report No.; internal references do not prove printed visibility",
+      "ownerEvidence": {
+        "path": "functions/api/iching-full-readings.js",
+        "matches": [
+          {
+            "line": 7,
+            "excerpt": "async function deleteOwnedReading(db,identity,readingId){"
+          },
+          {
+            "line": 8,
+            "excerpt": "  const row=await db.prepare('SELECT runtime_id FROM runtimes WHERE runtime_id=?1 AND user_id=?2 LIMIT 1').bind(readingId,identity.userId).first();if(!row)return false;"
+          },
+          {
+            "line": 9,
+            "excerpt": "  const statements=[db.prepare('DELETE FROM runtime_events WHERE runtime_id=?1').bind(readingId),db.prepare('DELETE FROM runtime_artifacts WHERE runtime_id=?1').bind(readingId),db.prepare('DELETE FROM runtimes WHERE runtime_id=?1 AND user_i"
+          },
+          {
+            "line": 14,
+            "excerpt": "export async function onRequestGet(context){try{const {identity,store}=await resolve(context);const url=new URL(context.request.url);const id=String(url.searchParams.get('readingId')||'').trim();if(id){const record=await store.read({identit"
+          },
+          {
+            "line": 15,
+            "excerpt": "export async function onRequestPatch(context){try{const {identity,store}=await resolve(context);let body;try{body=await context.request.json();}catch{return json({ok:false,error:{code:'INVALID_JSON'}},400);}const readingId=String(body?.read"
+          },
+          {
+            "line": 16,
+            "excerpt": "export async function onRequestDelete(context){try{const {identity}=await resolve(context);const url=new URL(context.request.url);const readingId=String(url.searchParams.get('readingId')||'').trim();if(!readingId)return json({ok:false,error"
+          }
+        ]
+      },
+      "qaEvidence": "Read-only source inspection only; no customer report opened or provider invoked",
+      "sharedPaidRegistryAdmission": "NOT REGISTERED HERE; other domain pipelines not disproven",
+      "productCheckoutBlockedReason": null,
+      "productionAdmission": "NOT VERIFIED IN THIS LOCAL AUDIT"
+    }
+  ],
+  "books": "Separate order/receipt/watermark identity; excluded from report number counter",
+  "numberCandidate": "QA-only additive candidate; no production adapters enabled"
+}
