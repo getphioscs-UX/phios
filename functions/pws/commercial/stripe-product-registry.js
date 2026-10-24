@@ -459,7 +459,7 @@ for(const row of rows){const b=bookPublication[row.productId];if(!b)continue;
 for(const base of [...rows].filter(p=>/^COM-BOOK-0[1-4]$/.test(p.productId))){
   Object.assign(base,{catalogVisible:false,checkoutBlockedReason:'BOOK_LANGUAGE_VERSION_REQUIRED'});
   for(const [suffix,language,label]of [['ZH','zh-Hans','中文'],['EN','en','English']])rows.push({...base,
-    productId:base.productId+'-'+suffix,language,baseProductId:base.productId,catalogVisible:true,
+    productId:base.productId+'-'+suffix,language,baseProductId:base.productId,catalogVisible:true,qaOnly:true,
     title:base.title+' · '+label+' PDF',titleZh:base.titleZh+' · '+label+' PDF',amountMinor:8900,
     entitlementPolicy:`BOOK_${String(base.publicationVolume).padStart(2,'0')}_${suffix}_PDF`,
     fulfillmentType:'WATERMARKED_PDF',deliveryFormat:'FULL_PDF_DOWNLOAD',webReaderRequired:false,
