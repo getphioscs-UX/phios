@@ -30,7 +30,7 @@ function dbFrom(env) {
 // purchase_id remains the paid-order identity; no second order store is created.
 export async function ensureCommerceProducts(env, clock=Date.now) {
   const db=dbFrom(env), now=nowIso(clock);
-  await db.batch(STRIPE_PRODUCT_REGISTRY.filter(p=>commerceEnvironment(env)!=='LIVE'||p.livePriceId).map(registered=>{const p=commerceEnvironment(env)==='LIVE'&&registered.active?commerceStripeProduct(registered,'LIVE'):registered;return db.prepare(`INSERT INTO commerce_products
+  await db.batch(STRIPE_PRODUCT_REGISTRY.filter(p=>commerceEnvironment(env)==='LIVE'?Boolean(p.livePriceId):!p.liveOnly).map(registered=>{const p=commerceEnvironment(env)==='LIVE'&&registered.active?commerceStripeProduct(registered,'LIVE'):registered;return db.prepare(`INSERT INTO commerce_products
     (product_id,product_version,title,language,format,currency,amount_minor,source_object_key,active,created_at,updated_at,category,billing_type,qa_price_id,qa_product_id)
     VALUES (?1,'COM-STRIPE-R1',?2,?11,?3,'MYR',?4,'',?10,?5,?5,?6,?7,?8,?9)
     ON CONFLICT(product_id) DO UPDATE SET active=excluded.active,title=excluded.title,language=excluded.language,format=excluded.format,amount_minor=excluded.amount_minor,qa_price_id=excluded.qa_price_id,qa_product_id=excluded.qa_product_id,updated_at=excluded.updated_at`)

@@ -133,10 +133,17 @@ export function createCommerceCheckoutSession({env,product,order,customerId,orig
   const mode=product.billingType==='RECURRING'?'subscription':'payment';
   const metadata={order_id:order.checkout_attempt_id,commerce_product_id:product.productId,customer_id:order.customer_id,environment:commerceEnvironment(env),schema_version:'COM-STRIPE-R1',selected_reports:order.selected_products_json};
   const body=new URLSearchParams({mode,customer:customerId,'line_items[0][price]':product.qaPriceId,'line_items[0][quantity]':'1',success_url:`${origin}/account?commerce_order=${encodeURIComponent(order.checkout_attempt_id)}`,cancel_url:`${origin}/account?commerce_order=${encodeURIComponent(order.checkout_attempt_id)}&checkout=cancelled`,locale:locale==='zh-Hans'?'zh':'en'});
-  if(product.deliveryFormat==='FULL_PDF_DOWNLOAD'){const b=JSON.parse(order.context_json||'{}').bookPdf;if(!b||b.productId!==product.productId||b.language!==product.language)throw Error('BOOK_PDF_METADATA_REQUIRED');Object.assign(metadata,{book_code:b.bookCode,book_language:b.language,book_source_sha256:b.sourceSha256});body.set('custom_text[submit][message]',`Full PDF · ${b.bookCode} · ${b.language==='en'?'English':'中文'} · RM89. Other languages sold separately.`);}
-    if(product.deliveryFormat==='FULL_PDF_DOWNLOAD'){
-      body.delete('line_items[0][price]');body.set('line_items[0][price_data][currency]','myr');body.set('line_items[0][price_data][product]',product.qaProductId);body.set('line_items[0][price_data][unit_amount]','8900');
+  if(product.deliveryFormat==='FULL_PDF_DOWNLOAD'){const b=JSON.parse(order.context_json||'{}').bookPdf;if(!b||b.productId!==product.productId||b.language!==product.language)throw Error('BOOK_PDF_METADATA_REQUIRED');Object.assign(metadata,{book_code:b.bookCode,book_language:b.language,book_source_sha256:b.sourceSha256});body.set('custom_text[submit][message]',`Full PDF · ${b.bookCode} · ${b.language==='en'?'English':'中文'} · RM${product.amountMinor / 100}. Other languages sold separately.`);}
+    if(product.deliveryFormat==='FULL_PDF_DOWNLOAD' && commerceEnvironment(env)==='QA'){
+      // Preserve pre-existing QA fixtures: these product IDs use an inline test price.
+      body.delete('line_items[0][price]');
+      body.set('line_items[0][price_data][currency]', 'myr');
+      body.set('line_items[0][price_data][product]', product.qaProductId);
+      body.set('line_items[0][price_data][unit_amount]', String(product.amountMinor));
     }
+    // In Live, charge only the already registered, exact language-specific Stripe Price.
+    // No inline price, substituted amount, or client-side price authority.
+
     if(product.fulfillmentType==='CONTINUITY_QUOTA_REFILL'){
     body.delete('line_items[0][price]');
     body.set('line_items[0][price_data][currency]','myr');
