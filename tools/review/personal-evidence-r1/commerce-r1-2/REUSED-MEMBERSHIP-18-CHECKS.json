@@ -1,0 +1,101 @@
+{
+  "at": "2026-10-25T06:29:02.380Z",
+  "tests": [
+    {
+      "name": "verified invoice grants one existing quota",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "invoice concurrent replay does not duplicate quota",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "one-time refill replay and anchor unchanged",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "atomic FIFO reservation combines multiple existing quota units",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "repeated request preserves allocation and refuses changed identity",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "cross-account task reads rejected",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "one execution claim wins under concurrency",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "successful result actual-cost settlement releases unused reservation",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "completed answer retrieval never schedules another execution",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "expiry pauses execution while preserving balance",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "undelivered system failure refunds customer but retains platform cost",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "unknown cost is reconciliation not zero provider cost",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "deep task cannot silently upgrade without consent",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "research tool admission fail closed",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "concurrent budget reservations cannot overspend",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "fractional credits use exact integer units",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "paid renewal adds rather than resets retained allowance",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    },
+    {
+      "name": "same-account replacement subscription retains old quota identity",
+      "state": "PASS",
+      "kind": "LOCAL_SQLITE_EXECUTED_NOT_PRODUCTION_D1"
+    }
+  ],
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "realPayments": 0,
+  "productionMigration": false,
+  "fixtures": "SYNTHETIC_SQLITE_SQL_EXECUTION_NOT_REAL_CUSTOMER",
+  "sourceDigest": "be4c1b9333c10ec5b6086fe3f0096536bec3ea7f159d8b91ffff886a31be9007"
+}

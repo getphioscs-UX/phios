@@ -1,4 +1,5 @@
 import {projectExternalRealityContext} from '../customer-projection/external-reality-customer-projection.js';
+import {consumeProfileEcrNavigationR2} from '../customer-projection/profile-ecr-navigation-r2.js';
 import {listCanonicalNavigationHandoffs} from '../customer-projection/canonical-navigation-handoff.js';
 import {buildCurrentRealityBundle} from '../reality-orchestration/reality-orchestrator.js';
 import {projectRealityForCustomer} from '../customer-projection/reality-customer-projection.js';
@@ -53,12 +54,14 @@ export async function onRequestPost(context){
   const question=clean(body?.question)||clean(body?.whatMattersMostNow)||'Current reality';
   const reportedContext=[body?.whatIsHappening,body?.howLong,body?.whatChanged,body?.whatMattersMostNow].map(clean).filter(Boolean);
   try{
+    const profileEvidenceContext=await consumeProfileEcrNavigationR2(context,body.profileEvidenceSelection,question);
     const bundle=await buildCurrentRealityBundle({sourceType:'ASK',locale,source:{question,reportedContext,unknown:[]}});
     const reality=projectRealityForCustomer({bundle,locale});
     const navigation=acceptedNavigationForCustomer(context,{reality,locale,sessionInput:true});
     let workspace=await attachSavedSources(context,workspaceFromProjectedSources({reality,reading:null,navigation,journey:null,reports:[],locale}));
     const externalReality=projectExternalRealityContext(context,{locale,realityRef:reality.overview.bundleId,realityVersion:context.data?.cxRealitySources?.bundle?.version});
     workspace={...workspace,externalReality,currentReality:{...workspace.currentReality,evidence:[...workspace.currentReality.evidence,...externalReality.items]}};
+    if(profileEvidenceContext)workspace={...workspace,profileEvidenceContext};
     return json({ok:true,view:reality,workspace,governance:{persisted:false,canonicalRealityCreated:false,rawRuntimeExposed:false,workspaceConsumesCustomerProjections:true}});
   }catch(error){return json({ok:false,error:error?.code||error?.message||'CUSTOMER_REALITY_PROJECTION_FAILED'},error?.status||422)}
 }

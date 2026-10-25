@@ -1,0 +1,151 @@
+{
+  "state": "PARTIAL_NOT_PRODUCTION_PASS",
+  "acceptance": {
+    "PASS": 65,
+    "FAIL": 0,
+    "BLOCKED": 5,
+    "NOT_RUN": 0
+  },
+  "formerNotRun": [
+    {
+      "id": "ECR-R2-24",
+      "requirement": "历史 ECR_FULL_R1 可重开。",
+      "status": "BLOCKED",
+      "evidence": "navigation-results.json",
+      "scope": "Actual existing account dispatcher tested: METHOD_DELIVERY_ADAPTER_NOT_ADMITTED for ECR. No invented legacy delivery or bypass."
+    },
+    {
+      "id": "ECR-R2-55",
+      "requirement": "四次报告追问与会员额度分离。",
+      "status": "PASS",
+      "evidence": "four-questions.log; membership-owner-results.json",
+      "scope": "ECR synthetic report executes four included answers via existing paid runtime; fifth follows separate USD3 membership owner. Concurrency cap, retry, saved answers, cancellation and unknown usage checked. No actual provider."
+    },
+    {
+      "id": "ECR-R2-56",
+      "requirement": "未购报告的会员无法直接取得付费报告正文。",
+      "status": "PASS",
+      "evidence": "membership-owner-results.json",
+      "scope": "Active paid synthetic member without purchased report is denied report body and followup grant; member quota unchanged by denial."
+    },
+    {
+      "id": "ECR-R2-66",
+      "requirement": "旧 Personal／Profile／ECR 主要功能无新增回归。",
+      "status": "BLOCKED",
+      "evidence": "baseline-failures.json",
+      "scope": "Current Personal contract, Profile functional campaigns, ECR 128 legacy runs and V4.1 pass. Broader Profile freeze/commercial suite still has individually confirmed preexisting failures; not waived as R2 acceptable."
+    }
+  ],
+  "navigation": {
+    "status": "PASS_LOCAL_SESSION_ONLY",
+    "checks": [
+      "Profile→actual My Reality receiver; counterexample retained; no target persistence or inferred direction",
+      "cross-account denied",
+      "no consent denied",
+      "cross origin denied",
+      "expired denied",
+      "explicit ECR checkpoint selection resolved by same-account owner; opposition retained",
+      "revoked ECR checkpoint excluded from future contexts",
+      "stale Profile version rejected",
+      "revoked Profile source blocked on next consumption"
+    ],
+    "providerCalls": 0,
+    "persistedByNavigation": false,
+    "historicalReopen": {
+      "status": "BLOCKED",
+      "requirement": "ECR-R2-24",
+      "reason": "Existing account dispatcher has no admitted ECR reopen adapter. Synthetic stored metadata does not create historical customer delivery.",
+      "code": "METHOD_DELIVERY_ADAPTER_NOT_ADMITTED",
+      "source": "functions/account/method-report-delivery.js → functions/report-delivery/paid-report-method-registry.js"
+    }
+  },
+  "regressions": [
+    {
+      "name": "check-profile-customer-full-production",
+      "log": "check-profile-customer-full-production.log",
+      "status": "PASS"
+    },
+    {
+      "name": "check-profile-personal-evidence-prd-w6-w8",
+      "log": "check-profile-personal-evidence-prd-w6-w8.log",
+      "status": "PASS"
+    },
+    {
+      "name": "check-profile-personal-evidence-prd-w10",
+      "log": "check-profile-personal-evidence-prd-w10.log",
+      "status": "PASS"
+    },
+    {
+      "name": "check-ecr-full-r1-current",
+      "log": "check-ecr-full-r1-current.log",
+      "status": "PASS"
+    },
+    {
+      "name": "check-ecr-human-runtime-v4-1-w12-report",
+      "log": "check-ecr-human-runtime-v4-1-w12-report.log",
+      "status": "PASS"
+    }
+  ],
+  "baselineFailures": [
+    {
+      "test": "check-profile-personal-evidence-prd-w9",
+      "status": "FAIL_PREEXISTING_NOT_WAIVED",
+      "reason": "Expected LEGACY_COMPATIBILITY; current commercial owner is SINGLE_METHOD.",
+      "priorEvidence": "tools/review/personal-evidence-r1/evidence-system-r1/BASELINE-CHECKS.json",
+      "sameFailure": true,
+      "commercialOwnerUnchangedFromHead": true
+    },
+    {
+      "test": "check-profile-personal-evidence-r1",
+      "status": "BLOCKED_HUMAN_FREEZE",
+      "reason": "Explicit PRD-R1 HUMAN ACCEPT receipt missing. No automatic approval."
+    }
+  ],
+  "browser": "browser-navigation-results.json",
+  "fourIncludedQuestions": "four-questions.log",
+  "concurrentQuestionSlots": "question-slots-results.json",
+  "memberOwner": "membership-owner-results.json",
+  "preservedReceipt": {
+    "path": "content/production-closure/live-customer-commercial-convergence/REPORT-FOLLOWUP-STORE-QA.json",
+    "sha256": "8252ded1fb381b1110b389e1ba4d57e94024c566bf696978349f68a077e4b6e5",
+    "unchangedFromHead": true
+  },
+  "build": {
+    "exitCode": 0,
+    "workerSha256": "abcf7d3710653762acf10b34dbd6d8d67a82080442742aaae243a7c94c17faae",
+    "sourceBuilt": {
+      "source": "dca1db970a37e01d5cf95c8bdbaf77b64f607e92b9eadb081c976f8f0ea7f09e",
+      "built": "dca1db970a37e01d5cf95c8bdbaf77b64f607e92b9eadb081c976f8f0ea7f09e"
+    },
+    "privateReviewExcluded": true
+  },
+  "ownImplementation": [
+    {
+      "path": "assets/customer-ui/js/surfaces/personal-evidence-experiences.js",
+      "sha256": "dca1db970a37e01d5cf95c8bdbaf77b64f607e92b9eadb081c976f8f0ea7f09e"
+    },
+    {
+      "path": "functions/api/customer-my-reality.js",
+      "sha256": "18d12802af0946c3ac3dbe00863965f4ce4cf6a5d3653aedf8a58f79f5e4defa"
+    },
+    {
+      "path": "functions/customer-projection/profile-ecr-navigation-r2.js",
+      "sha256": "0438fcf627c6e51cb11406e6ef84029e770e5ae3073460fd6201f2991ad43519"
+    }
+  ],
+  "ownTestScripts": [
+    "check-ecr-r2-followup-isolation-local.mjs",
+    "check-ecr-r2-membership-owner-local.mjs",
+    "check-ecr-r2-navigation-local.mjs",
+    "check-ecr-r2-question-slots-local.mjs",
+    "ecr-r2-navigation-test-server.mjs",
+    "browser-ecr-r2-navigation-local.mjs",
+    "close-ecr-r2-local-continuation.mjs"
+  ],
+  "otherWindowsPreserved": true,
+  "paidProviderCalls": 0,
+  "realPayments": 0,
+  "productionWrites": 0,
+  "commitPushDeploy": 0,
+  "firstRemainingBlocker": "Existing admitted factors produce tags, but no admitted personal meaning/runtime coordinates. Human author/rights decisions and ECR delivery admission remain separate."
+}

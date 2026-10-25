@@ -1,0 +1,500 @@
+diff --git a/functions/account/profile-evidence-store.js b/functions/account/profile-evidence-store.js
+index 325ae7ad..84531182 100644
+--- a/functions/account/profile-evidence-store.js
++++ b/functions/account/profile-evidence-store.js
+@@ -1,9 +1,15 @@
++import {prepareLocalPrivatePdf,deliverLocalPrivatePdf,LOCAL_PDF_TYPE} from './local-private-pdf-artifact.js';
++const localPdfPreparations=new WeakSet();
++import {renderDossierR12,DOSSIER_R12} from '../profile/personal-evidence-dossier-r12.js';
++import {dossierEligibility} from '../profile/personal-evidence-membership.js';
+ import {onRequestPost as produceProfile} from '../api/profile-progressive.js';
+ import {normalizeVerifiedSymbolicAccountIdentity} from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
+ import {requireSameOrigin} from './oidc-auth.js';
+ import {encryptSensitive,decryptSensitive,sha256Hex} from '../commerce/commerce-crypto.js';
+ import {normalizeExperience,describeExperience,compareExperiences,projectExperienceHandoff,evidenceError} from '../profile/personal-evidence-records.js';
+ import {assembleExperienceDossier} from '../profile/personal-evidence-report-adapter.js';
++import {receiveSelectedPersonalEvidence,receiverConsentOwner,personalEvidenceReceiverChoices} from '../profile/personal-evidence-receivers.js';
++import {compareAssessmentVersions} from '../profile/personal-evidence-records.js';
+ const TYPE='PROFILE_PERSONAL_EVIDENCE_OBJECT',SCHEMA='PHIOS-ACCOUNT-PROFILE-EVIDENCE-v1';
+ const reply=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:{'Content-Type':'application/json','Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'}});
+ const fail=(code,status=400)=>Object.assign(new Error(code),{code,status});
+@@ -14,7 +20,7 @@ export async function profileEvidenceApi(context){
+   if(!db?.prepare||typeof key!=='string'||key.length<32)throw fail('PROFILE_ACCOUNT_STORAGE_NOT_CONFIGURED',503);
+   const userId=identity.userId,url=new URL(context.request.url);
+   // Compatible local candidate in this canonical account owner. No production activation.
+-  if(url.searchParams.get('lane')==='experiences')return await experienceLane(context,{db,key,userId,url});
++  if(url.searchParams.get('lane')==='experiences')return await experienceLane(context,{db,key,userId,url,readAssessment:read});
+   async function read(id){
+    const row=await db.prepare('SELECT a.payload FROM runtime_artifacts a JOIN runtimes r ON r.runtime_id=a.runtime_id WHERE a.artifact_id=? AND a.artifact_type=? AND r.user_id=? AND r.status=?').bind(id,TYPE,userId,'active').first();
+    if(!row)throw fail('PROFILE_OBJECT_NOT_FOUND',404);
+@@ -53,7 +59,25 @@ export async function profileEvidenceApi(context){
+ }
+ 
+ const EXPERIENCE_TYPE='PROFILE_EXPERIENCE_REVISION_V1';
+-async function experienceLane(context,{db,key,userId,url}){
++async function purgeExpiredProfileEvidence({db,key,userId,now}){
++ const rows=(await db.prepare('SELECT r.runtime_id,a.artifact_type,a.payload FROM runtimes r JOIN runtime_artifacts a ON a.runtime_id=r.runtime_id WHERE r.user_id=? AND r.current_stage=?').bind(userId,'profile_evidence').all()).results||[];
++ const groups=new Map();for(const row of rows){if(!groups.has(row.runtime_id))groups.set(row.runtime_id,[]);groups.get(row.runtime_id).push(row);}
++ let removedRuntimes=0,removedArtifacts=0,quarantined=0;
++ for(const [id,items]of groups){
++  if(items.some(x=>![TYPE,EXPERIENCE_TYPE,'PROFILE_EXPERIENCE_DOSSIER_V1','PROFILE_RECEIVER_CONSENT_V1',LOCAL_PDF_TYPE].includes(x.artifact_type))){quarantined++;continue;}
++  for(const row of items.filter(x=>x.artifact_type==='PROFILE_RECEIVER_CONSENT_V1')){try{const e=JSON.parse(row.payload),v=JSON.parse(await decryptSensitive(e.ciphertext,key));if(v.ownerId!==userId||await sha256Hex(JSON.stringify(v))!==e.digest||!Number.isFinite(Date.parse(v.expiresAt)))throw Error('INVALID');if(Date.parse(v.expiresAt)<=Date.parse(now)){const result=await db.prepare('DELETE FROM runtime_artifacts WHERE runtime_id=? AND artifact_id=? AND artifact_type=? AND payload=? AND EXISTS(SELECT 1 FROM runtimes WHERE runtime_id=? AND user_id=? AND current_stage=?)').bind(id,v.consent.consentRecordId,'PROFILE_RECEIVER_CONSENT_V1',row.payload,id,userId,'profile_evidence').run();removedArtifacts+=Number(result.meta?.changes||0);}}catch{quarantined++;}}
++  const sources=items.filter(x=>[TYPE,EXPERIENCE_TYPE].includes(x.artifact_type));if(!sources.length)continue;
++  let eligible=true;for(const source of sources){try{const e=JSON.parse(source.payload),v=JSON.parse(await decryptSensitive(e.ciphertext,key));if(await sha256Hex(JSON.stringify(v))!==e.digest||(v.customerId||v.ownerId)!==userId||!Number.isFinite(Date.parse(v.expiresAt)))throw Error('INVALID');if(Date.parse(v.expiresAt)>Date.parse(now))eligible=false;}catch{eligible=false;quarantined++;}}
++  if(!eligible)continue;
++  // Same canonical tables, owner and stage checked in the transaction. No other product runtimes.
++  const out=await db.batch([
++   db.prepare('DELETE FROM runtime_artifacts WHERE runtime_id=? AND EXISTS(SELECT 1 FROM runtimes WHERE runtime_id=? AND user_id=? AND current_stage=?) AND NOT EXISTS(SELECT 1 FROM runtime_artifacts x WHERE x.runtime_id=? AND x.artifact_type NOT IN (?,?,?,?,?))').bind(id,id,userId,'profile_evidence',id,TYPE,EXPERIENCE_TYPE,'PROFILE_EXPERIENCE_DOSSIER_V1','PROFILE_RECEIVER_CONSENT_V1',LOCAL_PDF_TYPE),
++   db.prepare('DELETE FROM runtimes WHERE runtime_id=? AND user_id=? AND current_stage=? AND NOT EXISTS(SELECT 1 FROM runtime_artifacts WHERE runtime_id=?)').bind(id,userId,'profile_evidence',id)
++  ]);removedArtifacts+=Number(out[0].meta?.changes||0);removedRuntimes+=Number(out[1].meta?.changes||0);
++ }
++ return {ok:true,removedRuntimes,removedArtifacts,quarantined,privateTextRetainedInReceipt:false,scope:'EXPIRED_OWN_PROFILE_ONLY',productionCleanupActivated:false};
++}
++async function experienceLane(context,{db,key,userId,url,readAssessment}){
+  const host=url.hostname;
+  if(context.env?.PHIOS_PERSONAL_EVIDENCE_LOCAL!=='true'||!['127.0.0.1','localhost','[::1]'].includes(host))throw evidenceError('EVIDENCE_LOCAL_CANDIDATE_ONLY',403);
+  const now=new Date().toISOString();
+@@ -63,11 +87,12 @@ async function experienceLane(context,{db,key,userId,url}){
+   const rows=await db.prepare('SELECT a.payload FROM runtime_artifacts a JOIN runtimes r ON r.runtime_id=a.runtime_id WHERE a.runtime_id=? AND a.artifact_type=? AND r.user_id=? AND r.status=? ORDER BY a.created_at,a.artifact_id').bind(id,EXPERIENCE_TYPE,userId,'active').all();
+   if(!rows.results?.length)throw evidenceError('EVIDENCE_NOT_FOUND',404);
+   const values=[];
+-  for(const row of rows.results){const e=JSON.parse(row.payload),v=JSON.parse(await decryptSensitive(e.ciphertext,key));if(v.ownerId!==userId||v.record.recordId!==id||await sha256Hex(JSON.stringify(v))!==e.digest)throw evidenceError('EVIDENCE_INTEGRITY_FAILED',409);if(v.expiresAt<=now)throw evidenceError('EVIDENCE_EXPIRED',410);values.push(v);}
++  for(const row of rows.results){const e=JSON.parse(row.payload),v=JSON.parse(await decryptSensitive(e.ciphertext,key));if(v.ownerId!==userId||v.record.recordId!==id||await sha256Hex(JSON.stringify(v))!==e.digest)throw evidenceError('EVIDENCE_INTEGRITY_FAILED',409);if(Date.parse(v.expiresAt)<=Date.parse(now))throw evidenceError('EVIDENCE_EXPIRED',410);values.push(v);}
+   return values.sort((a,b)=>a.record.version-b.record.version);
+  }
+  const latest=async id=>(await revisions(id)).at(-1);
+  if(context.request.method==='GET'){
++  if(url.searchParams.get('catalog')==='receivers')return reply({ok:true,cards:personalEvidenceReceiverChoices(url.searchParams.get('locale')==='zh-Hans'?'zh-Hans':'en')});
+   const reportId=url.searchParams.get('report');
+   if(reportId){
+    if(!/^PED-[a-f0-9-]{36}$/.test(reportId))throw evidenceError('EVIDENCE_REPORT_NOT_FOUND',404);
+@@ -75,8 +100,19 @@ async function experienceLane(context,{db,key,userId,url}){
+    if(!row)throw evidenceError('EVIDENCE_REPORT_NOT_FOUND',404);
+    const e=JSON.parse(row.payload),saved=JSON.parse(await decryptSensitive(e.ciphertext,key));
+    if(saved.ownerId!==userId||saved.reportId!==reportId||await sha256Hex(JSON.stringify(saved))!==e.digest)throw evidenceError('EVIDENCE_REPORT_INTEGRITY_FAILED',409);
+-   let historical=false;for(const ref of saved.refs){const current=await latest(ref.id);if(current.record.version!==ref.version)historical=true;}
+-   const html=historical?saved.html.replace('<main>','<main><p role="status">历史版本：来源已有修正。 / Historical version: source has since been corrected.</p>'):saved.html;
++   if(saved.r12)await dossierEligibility(context.env,userId);
++   let historical=false;const openedVersions=new Map();for(const ref of saved.refs){const current=await latest(ref.id);openedVersions.set(ref.id,current.record.version);if(current.record.version!==ref.version)historical=true;}
++   if(saved.r12){for(const a of saved.assessments||[])await readAssessment(a.objectId);}
++   const rendered=saved.r12?renderDossierR12({...saved.r12,records:saved.records,assessments:saved.assessments||[],reportId:saved.reportId,language:url.searchParams.get('language')||saved.r12.language}):null;
++   const baseHtml=rendered?.html||saved.html;
++   const html=historical?baseHtml.replace('<main>','<main><p role="status">历史版本：来源已有修正。 / Historical version: source has since been corrected.</p>'):baseHtml;
++   if(url.searchParams.get('format')==='pdf'){
++    if(!saved.r12)throw evidenceError('DOSSIER_LEGACY_PDF_PRINT_ONLY',409);
++    const checkSource=async()=>{await dossierEligibility(context.env,userId);for(const ref of saved.refs){if((await latest(ref.id)).record.version!==openedVersions.get(ref.id))throw evidenceError('EVIDENCE_SOURCE_CHANGED_DURING_EXPORT',409);}for(const a of saved.assessments||[])await readAssessment(a.objectId);};
++    const binding={ownerId:userId,runtimeId:saved.parentRuntimeId||saved.refs[0]?.id,documentId:reportId,language:rendered.language,sourceSnapshotVersion:saved.r12.sourceSnapshotVersion,checkSource};
++    if(localPdfPreparations.has(context))return reply(await prepareLocalPrivatePdf(context,{...binding,html}));
++    return deliverLocalPrivatePdf(context,binding);
++   }
+    return new Response(html,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'",'Content-Disposition':`${url.searchParams.get('download')==='1'?'attachment':'inline'}; filename="Personal-Evidence-Dossier.html"`,'X-PHIOS-Report-State':historical?'SUPERSEDED':'LOCAL_CANDIDATE'}});
+   }
+   const id=url.searchParams.get('id');
+@@ -92,23 +128,72 @@ async function experienceLane(context,{db,key,userId,url}){
+  const raw=await context.request.text();if(new TextEncoder().encode(raw).length>30000)throw evidenceError('EVIDENCE_INPUT_TOO_LARGE',413);
+  let body;try{body=JSON.parse(raw);}catch{throw evidenceError('EVIDENCE_INVALID_JSON',400);}
+  if(!body||typeof body!=='object'||Array.isArray(body))throw evidenceError('EVIDENCE_OBJECT_REQUIRED',400);
+- const allowed=['action','record','id','baseVersion','requestToken','consent','retentionConsent','expiresAt','selected','target','purpose','purposeCode'];
++ const allowed=['action','record','id','baseVersion','requestToken','consent','retentionConsent','expiresAt','selected','target','purpose','purposeCode','locale','worldQuery','savedDraftRef','financialConsent','reflection','configurationConsent','contextComparable','consentRef','language','customerName','sections','assessmentIds'];
+  if(Object.keys(body).some(k=>!allowed.includes(k)))throw evidenceError('EVIDENCE_UNKNOWN_FIELD');
+  if(body.consent!==true)throw evidenceError('EVIDENCE_CONSENT_REQUIRED',403);
++ if(body.action==='prepare-pdf'){
++  if(Object.keys(body).some(k=>!['action','id','language','consent'].includes(k))||!/^PED-[a-f0-9-]{36}$/.test(body.id||''))throw evidenceError('DOSSIER_PDF_REFERENCE_REQUIRED');
++  const nextUrl=new URL(url);nextUrl.searchParams.set('report',body.id);nextUrl.searchParams.set('language',body.language);nextUrl.searchParams.set('format','pdf');const next={...context,request:new Request(nextUrl)};localPdfPreparations.add(next);return experienceLane(next,{db,key,userId,url:nextUrl,readAssessment});
++ }
++ if(body.action==='cleanup')return reply(await purgeExpiredProfileEvidence({db,key,userId,now}));
++ if(['receive','withdraw-receiver'].includes(body.action)){
++  if(Object.keys(body).some(k=>!['action','consentRef','consent'].includes(k))||!/^PRC-[a-f0-9-]{36}$/.test(body.consentRef||''))throw evidenceError('RECEIVER_REFERENCE_ONLY_REQUIRED',403);
++  async function open(){const row=await db.prepare('SELECT a.payload FROM runtime_artifacts a JOIN runtimes r ON a.runtime_id=r.runtime_id WHERE a.artifact_id=? AND a.artifact_type=? AND r.user_id=? AND r.status=?').bind(body.consentRef,'PROFILE_RECEIVER_CONSENT_V1',userId,'active').first();if(!row)throw evidenceError('RECEIVER_CONSENT_UNAVAILABLE',403);const e=JSON.parse(row.payload),v=JSON.parse(await decryptSensitive(e.ciphertext,key));if(v.ownerId!==userId||await sha256Hex(JSON.stringify(v))!==e.digest||v.consent.consentRecordId!==body.consentRef)throw evidenceError('RECEIVER_CONSENT_UNAVAILABLE',403);return {v,row};}
++  const {v,row}=await open();
++  if(body.action==='withdraw-receiver'){const consent=receiverConsentOwner.createRecord({...v.consent,consentValid:false,withdrawal:{supported:true,status:'WITHDRAWN',withdrawnAt:now}}),next={...v,consent};const payload=JSON.stringify({ciphertext:await encryptSensitive(JSON.stringify(next),key),digest:await sha256Hex(JSON.stringify(next))});await db.prepare('UPDATE runtime_artifacts SET payload=?,updated_at=? WHERE artifact_id=? AND payload=?').bind(payload,now,body.consentRef,row.payload).run();return reply({ok:true,withdrawn:true});}
++  const assertActive=v=>{if(v.consent.consentValid!==true||v.consent.withdrawal.status!=='AVAILABLE'||Date.parse(v.expiresAt)<=Date.now())throw evidenceError('RECEIVER_CONSENT_INACTIVE',403);};assertActive(v);
++  const records=[];for(const ref of v.input.selected){const current=await latest(ref.id);if(current.record.version!==ref.version)throw evidenceError('EVIDENCE_SOURCE_VERSION_CHANGED',409);records.push(current.record);}
++  const result=await receiveSelectedPersonalEvidence(context,records,v.input,{ownerId:userId,now:new Date().toISOString()});assertActive((await open()).v);
++  for(const ref of v.input.selected)if((await latest(ref.id)).record.version!==ref.version)throw evidenceError('EVIDENCE_SOURCE_VERSION_CHANGED',409);
++  return reply({ok:true,result});
++ }
++ if(body.action==='assessment-compare'){
++  if(!Array.isArray(body.selected)||body.selected.length!==2||body.selected[0]===body.selected[1]||body.selected.some(x=>typeof x!=='string'))throw evidenceError('ASSESSMENT_TWO_OBJECTS_REQUIRED');
++  const values=await Promise.all(body.selected.map(readAssessment));
++  const descriptor=s=>{const result=s.result,cards=result.view.signalCards,provenance=cards.flatMap(c=>c.provenance||[]);return {objectId:s.objectId,mode:result.mode,instrumentId:result.profileSummary?.instrumentId||result.financialSummary?.instrumentId||provenance.find(p=>p.instrumentCode)?.instrumentCode||null,instrumentVersion:result.profileSummary?.instrumentVersion||result.financialSummary?.instrumentVersion||provenance.find(p=>p.instrumentVersion)?.instrumentVersion||null,context:body.contextComparable===true?'USER_CONFIRMED_COMPARABLE_CONTEXT':null,assessmentDate:cards[0]?.assessmentDate||null,coverage:cards.map(c=>[c.domainId,c.facetId]),signals:cards.map(c=>({domainId:c.domainId,facetId:c.facetId,value:c.value,sourceClass:c.sourceClass}))};};
++  const [a,b]=values.map(descriptor),sameCoverage=JSON.stringify(a.coverage)===JSON.stringify(b.coverage)&&a.mode===b.mode;
++  const comparison=compareAssessmentVersions(a,b);if(!sameCoverage){comparison.state='NOT_COMPARABLE';comparison.reason='COVERAGE_OR_MODE_DIFFERS';}else if(!a.context||!b.context){comparison.state='NOT_COMPARABLE';comparison.reason='CONTEXT_NOT_CONFIRMED';}
++  return reply({ok:true,comparison:{...comparison,contextConfirmedByCustomer:body.contextComparable===true,growthProven:false},versions:[a,b]});
++ }
+  if(body.action==='revoke'){
+   await latest(body.id);
+   await db.prepare('UPDATE runtimes SET status=?,updated_at=? WHERE runtime_id=? AND user_id=? AND status=?').bind('revoked',now,body.id,userId,'active').run();
+   return reply({ok:true,revoked:true,newReadsDenied:true,physicalDeletion:false,downloadedCopiesRetractable:false});
+  }
+- if(['compare','handoff','report'].includes(body.action)){
+-  if(!Array.isArray(body.selected)||!body.selected.length||body.selected.length>10||new Set(body.selected.map(x=>x.id)).size!==body.selected.length)throw evidenceError('EVIDENCE_SELECTION_REQUIRED');
++ if(['compare','handoff','report','grant-receiver'].includes(body.action)){
++  const assessmentOnly=body.action==='report'&&body.language!==undefined&&Array.isArray(body.assessmentIds)&&body.assessmentIds.length>0;
++  if(!Array.isArray(body.selected)||(!body.selected.length&&!assessmentOnly)||body.selected.length>10||new Set(body.selected.map(x=>x.id)).size!==body.selected.length)throw evidenceError('EVIDENCE_SELECTION_REQUIRED');
+   const records=[];for(const ref of body.selected){const current=await latest(ref.id);if(current.record.version!==ref.version)throw evidenceError('EVIDENCE_SOURCE_VERSION_CHANGED',409);records.push(current.record);}
++  if(body.action==='grant-receiver'){
++   if(Object.keys(body).some(k=>!['action','selected','target','purpose','purposeCode','consent','expiresAt','locale','worldQuery','savedDraftRef','financialConsent','reflection','configurationConsent'].includes(k)))throw evidenceError('RECEIVER_SCOPE_FIELDS_ONLY');
++   projectExperienceHandoff(records,body,{ownerId:userId,now});
++   const consentRef='PRC-'+crypto.randomUUID(),consent=receiverConsentOwner.createRecord({consentRecordId:consentRef,subjectReference:userId,methodCode:'PROFILE',purposeCode:body.purposeCode,consentClass:'EXPLICIT_CONSENT',retentionClass:'SESSION_END',visibilityScope:'SUBJECT_ONLY',grantedAt:now,expiresAt:body.expiresAt,consentValid:true,withdrawal:{supported:true,status:'AVAILABLE',withdrawnAt:null}});
++   const input=structuredClone(body);delete input.action;const saved={ownerId:userId,consent,input,expiresAt:body.expiresAt},payload=JSON.stringify({ciphertext:await encryptSensitive(JSON.stringify(saved),key),digest:await sha256Hex(JSON.stringify(saved))});
++   await db.prepare('INSERT INTO runtime_artifacts(artifact_id,runtime_id,artifact_type,stage,payload,schema_version,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)').bind(consentRef,records[0].recordId,'PROFILE_RECEIVER_CONSENT_V1','LOCAL_CANDIDATE',payload,'MPA-CONSENT-v1',now,now).run();
++   return reply({ok:true,consentRef,expiresAt:body.expiresAt,referenceIsBearerToken:false},201);
++  }
+   if(body.action==='report'){
+    if(body.retentionConsent!==true)throw evidenceError('EVIDENCE_RETENTION_CONSENT_REQUIRED',403);
+-   const reportId='PED-'+crypto.randomUUID(),report=assembleExperienceDossier({records,ownerId:userId,reportId,now});
+-   const saved={ownerId:userId,reportId,...report},payload=JSON.stringify({ciphertext:await encryptSensitive(JSON.stringify(saved),key),digest:await sha256Hex(JSON.stringify(saved))});
+-   await db.prepare('INSERT INTO runtime_artifacts(artifact_id,runtime_id,artifact_type,stage,payload,schema_version,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)').bind(reportId,records[0].recordId,'PROFILE_EXPERIENCE_DOSSIER_V1','LOCAL_CANDIDATE',payload,'PHIOS-PROFILE-EXPERIENCE-v1',now,now).run();
+-   return reply({ok:true,reportId,refs:report.refs,canonicalState:report.canonical.canonicalState,downloadFormat:'HTML_PRINT_TO_PDF'},201);
++   const reportId='PED-'+crypto.randomUUID();let assessments=[],eligibility;
++   if(body.language!==undefined){
++    eligibility=await dossierEligibility(context.env,userId);
++    const ids=body.assessmentIds||[];if(!Array.isArray(ids)||ids.length>10||new Set(ids).size!==ids.length||ids.some(id=>typeof id!=='string'))throw evidenceError('DOSSIER_ASSESSMENT_SELECTION_INVALID');
++    assessments=await Promise.all(ids.map(readAssessment));
++   }
++   const report=assembleExperienceDossier({records,ownerId:userId,reportId,now,assessments});
++   let parentRuntimeId=records[0]?.recordId;
++   if(!parentRuntimeId){const parent=await db.prepare('SELECT r.runtime_id FROM runtime_artifacts a JOIN runtimes r ON r.runtime_id=a.runtime_id WHERE a.artifact_id=? AND a.artifact_type=? AND r.user_id=? AND r.status=?').bind(assessments[0].objectId,TYPE,userId,'active').first();if(!parent)throw evidenceError('PROFILE_OBJECT_NOT_FOUND',404);parentRuntimeId=parent.runtime_id;}
++   if(body.language!==undefined){
++    const ids=body.assessmentIds||[];
++    if(typeof(body.customerName||'')!=='string'||(body.customerName||'').length>160)throw evidenceError('DOSSIER_CUSTOMER_NAME_INVALID');
++    const sourceSnapshotVersion=await sha256Hex(JSON.stringify({refs:report.refs,assessmentIds:ids}));
++    const r12={language:body.language,now,sourceSnapshotVersion,customerName:body.customerName||'',sections:body.sections||null};
++    const rendering=renderDossierR12({...r12,records,assessments,reportId});
++    Object.assign(report,{canonical:assembleExperienceDossier({records,ownerId:userId,reportId,now,assessments}).canonical,...rendering,r12,records:structuredClone(records),assessments,eligibility,sourceSnapshotVersion,renderingArtifactId:reportId+'-'+rendering.language,schemaVersion:DOSSIER_R12});
++   }
++   const saved={ownerId:userId,reportId,parentRuntimeId,...report},payload=JSON.stringify({ciphertext:await encryptSensitive(JSON.stringify(saved),key),digest:await sha256Hex(JSON.stringify(saved))});
++   await db.prepare('INSERT INTO runtime_artifacts(artifact_id,runtime_id,artifact_type,stage,payload,schema_version,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)').bind(reportId,parentRuntimeId,'PROFILE_EXPERIENCE_DOSSIER_V1','LOCAL_CANDIDATE',payload,'PHIOS-PROFILE-EXPERIENCE-v1',now,now).run();
++   return reply({ok:true,reportId,refs:report.refs,canonicalState:report.canonical.canonicalState,downloadFormat:report.r12?'AUTHENTICATED_PDF_AND_HTML':'HTML_PRINT_TO_PDF',language:report.language||'bilingual',sourceSnapshotVersion:report.sourceSnapshotVersion||null,renderingArtifactId:report.renderingArtifactId||null,artworkState:report.artworkState||null},201);
+   }
+   return reply(body.action==='compare'?{ok:true,comparison:records.length===2?compareExperiences(...records):{state:'INSUFFICIENT_DATA'}}:{ok:true,package:projectExperienceHandoff(records,body,{ownerId:userId,now})});
+  }
+@@ -117,7 +202,7 @@ async function experienceLane(context,{db,key,userId,url}){
+  if(!/^[a-f0-9-]{36}$/i.test(body.requestToken||''))throw evidenceError('EVIDENCE_REQUEST_TOKEN_REQUIRED');
+  let previous=null,recordId,version=1,expiresAt;
+  if(body.id){previous=await latest(body.id);if(body.baseVersion!==previous.record.version)throw evidenceError('EVIDENCE_SOURCE_VERSION_CHANGED',409);recordId=body.id;version=previous.record.version+1;expiresAt=previous.expiresAt;}
+- else{recordId='PEX-'+await sha256Hex(JSON.stringify([userId,body.requestToken]));expiresAt=body.expiresAt;if(!Number.isFinite(Date.parse(expiresAt))||expiresAt<=now||Date.parse(expiresAt)>Date.parse(now)+366*86400000)throw evidenceError('EVIDENCE_RETENTION_INVALID');}
++ else{recordId='PEX-'+await sha256Hex(JSON.stringify([userId,body.requestToken]));expiresAt=body.expiresAt;if(!Number.isFinite(Date.parse(expiresAt))||Date.parse(expiresAt)<=Date.parse(now)||Date.parse(expiresAt)>Date.parse(now)+366*86400000)throw evidenceError('EVIDENCE_RETENTION_INVALID');}
+  const record=normalizeExperience(body.record,{ownerId:userId,recordId,version,now,previous:previous?.record});
+  const inputDigest=await sha256Hex(JSON.stringify(body.record));
+  if(!body.id){try{const prior=await latest(recordId);if(prior.inputDigest!==inputDigest)throw evidenceError('EVIDENCE_IDEMPOTENCY_CONFLICT',409);return reply({ok:true,record:prior.record,reused:true});}catch(e){if(e.code!=='EVIDENCE_NOT_FOUND')throw e;}}
+diff --git a/functions/commerce/book-commerce-store.js b/functions/commerce/book-commerce-store.js
+index 82ad8a07..fc32e433 100644
+--- a/functions/commerce/book-commerce-store.js
++++ b/functions/commerce/book-commerce-store.js
+@@ -37,6 +37,8 @@ export async function ensureCommerceProducts(env, clock=Date.now) {
+     .bind(p.productId,p.title,p.fulfillmentType,p.amountMinor,now,p.category,p.billingType,p.qaPriceId,p.qaProductId,p.active?1:0,p.language||'bilingual');}));
+ }
+ export async function createCommerceOrder({env,customerId,productId,selectedProducts,idempotencyKeyHash,requestHash,locale,context={},clock=Date.now}){
++  // Future-order boundary only. Historical order/read/webhook owners stay readable.
++  if(productId==='COM-REPORT-PROFILE-FULL')throw Object.assign(Error(commerceProduct(productId).checkoutBlockedReason),{code:commerceProduct(productId).checkoutBlockedReason,status:409});
+   await ensureCommerceProducts(env,clock);
+   const p=commerceStripeProduct(continuityRefillProduct(commerceProduct(productId),context),commerceEnvironment(env)), db=dbFrom(env), now=nowIso(clock);
+   await db.prepare(`INSERT OR IGNORE INTO commerce_checkout_attempts
+diff --git a/functions/commerce/commerce-stripe-api.js b/functions/commerce/commerce-stripe-api.js
+index 29f50c40..1621a634 100644
+--- a/functions/commerce/commerce-stripe-api.js
++++ b/functions/commerce/commerce-stripe-api.js
+@@ -42,7 +42,7 @@ export async function commerceApi(context,action){
+         }
+       }
+       const setup=env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(p)&&!p.productId.includes('BUNDLE')?{methodCode:paidReportMethodForProduct(p.productId)?.methodCode||null,admitted:paidReportMethodForProduct(p.productId)?.p8Admitted===true}:null;
+-      return {...p,paidReportSetup:setup,checkoutAvailable:!p.checkoutBlockedReason&&(!p.requiresBookPdfReadiness||env.PHIOS_BOOK_PDF_CHECKOUT_ENABLED==='true')&&commerceCheckoutAvailable(env)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:commerceEnvironment(env)==='QA'&&commerceCheckoutAvailable(env)&&continuityAuthority.refill.priceMode==='INLINE_ONE_TIME_PRICE_DATA'&&env.PHIOS_CONTINUITY_QUOTA_ENABLED==='true'}:{}),reportPresentationOptions,reportPurchaseState};
++      return {...p,paidReportSetup:setup,checkoutAvailable:!p.checkoutBlockedReason&&(!p.requiresBookPdfReadiness||env.PHIOS_BOOK_PDF_CHECKOUT_ENABLED==='true')&&commerceCheckoutAvailable(env)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:false,refillReviewRequired:'R12_MONTHLY_PROVIDER_CAP_RECONCILIATION'}:{}),reportPresentationOptions,reportPurchaseState};
+     }),eligibleBundleProducts:standardBundleProducts()});
+     const customerId=requireIdentity(context);
+     if(action==='account') return json({success:true,...await commerceAccountProjection(env,customerId)});
+@@ -87,15 +87,10 @@ export async function commerceApi(context,action){
+     const reference=body.context?.readingId;
+     if(body.context&&(Object.keys(body.context).some(k=>!['readingId','reportIntentId'].includes(k))||(reference!==undefined&&(typeof reference!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(reference)))||(body.context.reportIntentId!==undefined&&(typeof body.context.reportIntentId!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(body.context.reportIntentId))))) throw Object.assign(new Error('Invalid report reference.'),{status:422,code:'checkout_context_invalid'});
+     const contextSnapshot=reference?{readingId:reference}:{};if(bookPdf)contextSnapshot.bookPdf=bookPdf;
+-    if(body.purchaseKind!==undefined){
+-      if(env.PHIOS_CONTINUITY_QUOTA_ENABLED!=='true'||commerceEnvironment(env)!=='QA')throw Object.assign(Error('CONTINUITY_REFILL_NOT_ACTIVATED'),{status:403});
+-      if(body.purchaseKind!=='CONTINUITY_QUOTA_REFILL'||product.productId!=='COM-SUBSCRIPTION-MONTHLY')throw Object.assign(Error('CONTINUITY_REFILL_PRODUCT_REQUIRED'),{status:422});
+-      const quota=await readContinuityQuota(env,customerId);
+-      if(quota.subscriptionId!==body.subscriptionId||!quota.units.length)throw Object.assign(Error('CONTINUITY_REFILL_OWNED_PERIOD_REQUIRED'),{status:403});
+-      if(!Number.isSafeInteger(quota.billingPeriodStart))throw Object.assign(Error('CONTINUITY_CURRENT_PAID_PERIOD_REQUIRED'),{status:403});
+-      contextSnapshot.continuityRefill={subscriptionId:quota.subscriptionId,periodStart:quota.billingPeriodStart,periodEnd:quota.billingPeriodEnd};
+-      product=continuityRefillProduct(product,contextSnapshot);
+-    }else if(body.subscriptionId!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_KIND_REQUIRED'),{status:422});
++    // R1.2 leaves purchased refill units intact; new sales require reconciliation
++    // with the explicit account-period $3 cap. No paid refill can expand that cap.
++    if(body.purchaseKind!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_R12_COMMERCIAL_REVIEW_REQUIRED'),{code:'CONTINUITY_REFILL_R12_COMMERCIAL_REVIEW_REQUIRED',status:409});
++    if(body.subscriptionId!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_KIND_REQUIRED'),{status:422});
+     if(isLanguageReport(product))contextSnapshot.reportPresentation=commerceReportQuote(product,body,selected);
+     else if(body.reportLanguageMode||body.reportLocale)throw Object.assign(new Error('Report language is not applicable.'),{status:422,code:'REPORT_PRESENTATION_NOT_APPLICABLE'});
+     if(env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(product)&&!product.productId.includes('BUNDLE')){const readiness=await requirePaidReportCheckout(context,{productId:product.productId,readinessId:body.context?.reportIntentId,presentation:contextSnapshot.reportPresentation});contextSnapshot.reportIntentId=readiness.readinessId;}
+diff --git a/functions/commerce/report-presentation.js b/functions/commerce/report-presentation.js
+index 6c14faac..38d267ce 100644
+--- a/functions/commerce/report-presentation.js
++++ b/functions/commerce/report-presentation.js
+@@ -7,7 +7,7 @@ export function validateOrderReportPresentation(product,order){
+  const stored=orderReportPresentation(order);
+  if(!stored)return null; // Orders predating language selection retain their original contract.
+  // Pricing versions come only from the persisted server order, never checkout input.
+- const quote=quoteReportPresentation(reportContractId(product.productId),stored,product.productId.includes('BUNDLE')?JSON.parse(order.selected_products_json).map(reportContractId):[],stored.pricingVersion);
++ const quote=quoteReportPresentation(reportContractId(product.productId),stored,product.productId.includes('BUNDLE')?JSON.parse(order.selected_products_json).map(reportContractId):[],stored.pricingVersion,true);
+  if(JSON.stringify(quote)!==JSON.stringify(stored)||quote.amountMinor!==order.amount_minor)throw Object.assign(new Error('Stored presentation mismatch.'),{code:'commerce_provider_mismatch',status:422});
+  return quote;
+ }
+diff --git a/functions/personal-reading/continuity/continuity-credit-d1.js b/functions/personal-reading/continuity/continuity-credit-d1.js
+index 6cd8ac46..a83cf143 100644
+--- a/functions/personal-reading/continuity/continuity-credit-d1.js
++++ b/functions/personal-reading/continuity/continuity-credit-d1.js
+@@ -1,3 +1,4 @@
++import {membershipBudgetPeriod,membershipPeriodPredicate,readMembershipPeriodBudget} from './membership-period-budget.js';
+ import {activeContinuitySubscription} from './continuity-quota-d1.js';
+ import {commerceEnvironment} from '../../commerce/commerce-environment.js';
+ import {readZeroCallOutcome} from './membership-zero-call-outcome.js';
+@@ -14,7 +15,8 @@ export async function readCreditBalance(env,ownerAccountId,clock=Date.now){
+  const rows=(await env.RUNTIME_DB.prepare(AVAILABLE_CREDIT_SQL+' ORDER BY q.created_at,q.quota_unit_id').bind(ownerAccountId,commerceEnvironment(env),Math.floor(clock()/1000)).all()).results;
+  if(rows.some(r=>r.available<0))fail('CREDIT_RECONCILIATION_REQUIRED');
+  const micro=rows.reduce((n,r)=>n+r.available,0);integerCost(micro);let active=true;try{await activeContinuitySubscription(env,ownerAccountId,null,clock);}catch(error){if(error.code!=='CONTINUITY_ACTIVE_SUBSCRIPTION_REQUIRED')throw error;active=false;}
+- return {availableMicroUSD:micro,credits:formatCredits(micro),active,modelCallsAllowed:active,units:rows};
++ let monthlyBudget=null;if(active){try{monthlyBudget=await readMembershipPeriodBudget(env,ownerAccountId,clock);}catch(error){if(!['MEMBERSHIP_VERIFIED_BILLING_PERIOD_REQUIRED','MEMBERSHIP_OVERLAPPING_PERIODS_REQUIRE_RECONCILIATION'].includes(error.code))throw error;monthlyBudget={state:'UNVERIFIED',maximumMicroUSD:3000000,remainingMicroUSD:0,reconciliationRequired:true,reasonCode:error.code};}}
++ return {availableMicroUSD:micro,credits:formatCredits(micro),active,monthlyBudget,executionAvailableMicroUSD:active&&!monthlyBudget.reconciliationRequired?Math.min(micro,monthlyBudget.remainingMicroUSD):0,modelCallsAllowed:active&&!monthlyBudget.reconciliationRequired&&monthlyBudget.remainingMicroUSD>0,units:rows};
+ }
+ export async function reserveCreditTask(env,{ownerAccountId,taskId,requestDigest,contextDigest,mode,depth,...budget},clock=Date.now){
+  if(taskId?.startsWith('ZERO-'))fail('ZERO_TASK_NAMESPACE_RESERVED');
+@@ -22,6 +24,7 @@ export async function reserveCreditTask(env,{ownerAccountId,taskId,requestDigest
+  const db=env.RUNTIME_DB,old=await db.prepare('SELECT * FROM continuity_ask_tasks WHERE task_id=?').bind(taskId).first();
+  if(old){if(old.owner_account_id!==ownerAccountId||old.request_digest!==requestDigest||old.context_digest!==contextDigest||old.mode!==mode||old.depth!==depth||old.reserved_micro_usd!==maximum)fail('TASK_IDENTITY_CONFLICT');return {task:old,newReservation:false};}
+  await activeContinuitySubscription(env,ownerAccountId,null,clock);
++ const period=await membershipBudgetPeriod(env,ownerAccountId,clock);
+  const now=Math.floor(clock()/1000),stamp=new Date(clock()).toISOString(),environment=commerceEnvironment(env),token=crypto.randomUUID();
+  const inserted=await db.batch([
+  db.prepare(`INSERT OR IGNORE INTO continuity_ask_tasks(task_id,owner_account_id,request_digest,context_digest,reservation_token,mode,depth,reserved_micro_usd,state,created_at)
+@@ -29,7 +32,7 @@ export async function reserveCreditTask(env,{ownerAccountId,taskId,requestDigest
+  EXISTS(SELECT 1 FROM commerce_subscriptions s JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=s.order_id WHERE s.customer_id=?1 AND o.customer_id=?1 AND o.environment=?2 AND o.product_id='COM-SUBSCRIPTION-MONTHLY' AND o.review_required=0 AND s.subscription_status IN ('ACTIVE','CANCEL_AT_PERIOD_END') AND s.paid_until>?3 AND s.current_period_end>?3)
+  AND NOT EXISTS(SELECT 1 FROM provider_product_cost_entries x JOIN provider_product_cost_envelopes a ON a.envelope_id=x.envelope_id WHERE a.owner_account_id=?1 AND x.state='USAGE_UNKNOWN')
+  AND NOT EXISTS(SELECT 1 FROM (${AVAILABLE_CREDIT_SQL}) WHERE available<0)
+- AND (SELECT COALESCE(SUM(MAX(0,available)),0) FROM (${AVAILABLE_CREDIT_SQL}))>=?9`).bind(ownerAccountId,environment,now,taskId,requestDigest,contextDigest,mode,depth,maximum,stamp,token),
++ AND (SELECT COALESCE(SUM(MAX(0,available)),0) FROM (${AVAILABLE_CREDIT_SQL}))>=?9 AND ${membershipPeriodPredicate({owner:'?1',start:'?12',end:'?13',bound:'?9'})}`).bind(ownerAccountId,environment,now,taskId,requestDigest,contextDigest,mode,depth,maximum,stamp,token,period.start,period.end),
+  db.prepare(`INSERT OR IGNORE INTO continuity_ask_allocations(task_id,quota_unit_id,reserved_micro_usd)
+  WITH balances AS (${AVAILABLE_CREDIT_SQL}), ordered AS(SELECT *,COALESCE(SUM(MAX(0,available)) OVER(ORDER BY created_at,quota_unit_id ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING),0) AS prior FROM balances)
+  SELECT ?4,quota_unit_id,MIN(available,?5-prior) FROM ordered WHERE available>0 AND prior<?5 AND EXISTS(SELECT 1 FROM continuity_ask_tasks WHERE task_id=?4 AND owner_account_id=?1 AND reservation_token=?6 AND state='RESERVED')`).bind(ownerAccountId,environment,now,taskId,maximum,token)
+@@ -40,8 +43,8 @@ export async function reserveCreditTask(env,{ownerAccountId,taskId,requestDigest
+  return {task,newReservation:inserted[0].meta?.changes===1};
+ }
+ export async function claimCreditTask(env,{ownerAccountId,taskId},clock=Date.now){
+- await activeContinuitySubscription(env,ownerAccountId,null,clock);
+- const result=await env.RUNTIME_DB.prepare(`UPDATE continuity_ask_tasks SET state='RUNNING' WHERE task_id=?1 AND owner_account_id=?2 AND state='RESERVED' AND NOT EXISTS(SELECT 1 FROM continuity_ask_tasks t WHERE t.owner_account_id=?2 AND t.state='RUNNING') AND EXISTS(SELECT 1 FROM commerce_subscriptions s JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=s.order_id WHERE s.customer_id=?2 AND o.customer_id=?2 AND o.environment=?3 AND o.product_id='COM-SUBSCRIPTION-MONTHLY' AND o.review_required=0 AND s.subscription_status IN ('ACTIVE','CANCEL_AT_PERIOD_END') AND s.paid_until>?4 AND s.current_period_end>?4)`).bind(taskId,ownerAccountId,commerceEnvironment(env),Math.floor(clock()/1000)).run();if(result.meta?.changes!==1)fail('TASK_ALREADY_EXECUTING_OR_FINISHED');
++ const period=await membershipBudgetPeriod(env,ownerAccountId,clock);
++ const result=await env.RUNTIME_DB.prepare(`UPDATE continuity_ask_tasks SET state='RUNNING' WHERE task_id=?1 AND owner_account_id=?2 AND state='RESERVED' AND created_at>=?5 AND created_at<?6 AND NOT EXISTS(SELECT 1 FROM continuity_ask_tasks t WHERE t.owner_account_id=?2 AND t.state='RUNNING') AND EXISTS(SELECT 1 FROM commerce_subscriptions s JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=s.order_id WHERE s.customer_id=?2 AND o.customer_id=?2 AND o.environment=?3 AND o.product_id='COM-SUBSCRIPTION-MONTHLY' AND o.review_required=0 AND s.subscription_status IN ('ACTIVE','CANCEL_AT_PERIOD_END') AND s.paid_until>?4 AND s.current_period_end>?4)`).bind(taskId,ownerAccountId,commerceEnvironment(env),Math.floor(clock()/1000),period.start,period.end).run();if(result.meta?.changes!==1)fail('TASK_ALREADY_EXECUTING_OR_FINISHED');
+ }
+ export async function finishCreditTask(env,{ownerAccountId,taskId,delivered,actualMicroUSD,answer=null,platformEntry,completionOutcome=null},clock=Date.now){
+  // Unknown cost preserves platform liability; no customer delivery releases customer credits.
+diff --git a/functions/personal-reading/continuity/membership-auto-delivery-candidate.js b/functions/personal-reading/continuity/membership-auto-delivery-candidate.js
+index 05d15fcc..b523767d 100644
+--- a/functions/personal-reading/continuity/membership-auto-delivery-candidate.js
++++ b/functions/personal-reading/continuity/membership-auto-delivery-candidate.js
+@@ -1,5 +1,5 @@
+ import {isProductionKnowledgeCapability} from './membership-production-gate.js';
+-import {prepareShortDeliveryRequest,meterShortDeliveryUsage,shortDeliveryMaximum} from './membership-short-delivery-qa.js';
++import {prepareShortDeliveryRequest,meterShortDeliveryUsage,shortDeliveryMaximum,providerRequestReference} from './membership-short-delivery-qa.js';
+ import {validateShortFragmentAnswer} from './membership-short-fragment-contract.js';
+ import {inspectShortAnswerRisks} from './membership-source-coverage.js';
+ import {reserveCreditTask,claimCreditTask,finishCreditTask,readCreditTask} from './continuity-credit-d1.js';
+@@ -55,7 +55,7 @@ export async function runAutomaticDeliveryCandidate(context,input,{capability,pr
+  context.env.RUNTIME_DB.prepare("UPDATE continuity_ask_allocations SET charged_micro_usd=0 WHERE task_id=?1 AND EXISTS(SELECT 1 FROM continuity_ask_tasks WHERE task_id=?1 AND owner_account_id=?2 AND state='RESERVED')").bind(taskId,owner),
+  context.env.RUNTIME_DB.prepare("UPDATE continuity_ask_tasks SET state='FAILED',customer_charge_micro_usd=0 WHERE task_id=?1 AND owner_account_id=?2 AND state='RESERVED'").bind(taskId,owner)
+  ]);throw error;}let nano=0,known=true,calls=0;const receipts=[];
+- const call=async(body,bound)=>{calls++;known=false;const response=await invoke(body,{maximumMicroUSD:bound,taskId,callIndex:calls});const meter=meterShortDeliveryUsage(body.model,response.usage);nano+=meter.modelCostNanoUSD;known=true;receipts.push(meter);if(meter.modelCostMicroUSD>bound||response.status!=='completed')throw Error('INCOMPLETE_OR_OVER_BUDGET_NO_RETRY');return JSON.parse(response.text);};
++ const call=async(body,bound)=>{calls++;known=false;const response=await invoke(body,{maximumMicroUSD:bound,taskId,callIndex:calls});const meter=meterShortDeliveryUsage(body.model,response.usage);nano+=meter.modelCostNanoUSD;known=true;receipts.push({...meter,providerRequestId:providerRequestReference(response.providerRequestId),operationType:calls===1?'ANSWER':'REVIEW'});if(meter.modelCostMicroUSD>bound||response.status!=='completed')throw Error('INCOMPLETE_OR_OVER_BUDGET_NO_RETRY');return JSON.parse(response.text);};
+  try{const answer=await call(r.body,r.maximumMicroUSD);await validateShortFragmentAnswer(answer,r.serverBinding,{...r.serverBinding,locale:pack.locale});
+  if(new TextEncoder().encode(JSON.stringify(answer)).length>REVIEW_TASK_LIMITS.maxAnswerBytes)throw Error('ANSWER_EXCEEDS_REVIEW_ADMISSION');
+  const reviewBody=await prepareAutomaticReview(answer,pack,r.serverBinding);if(new TextEncoder().encode(JSON.stringify(reviewBody)).length>reviewInputByteLimit||shortDeliveryMaximum(reviewBody)>reviewMaximum)throw Error('REVIEW_INPUT_EXCEEDS_RESERVE');
+diff --git a/functions/personal-reading/continuity/membership-production-dispatcher.js b/functions/personal-reading/continuity/membership-production-dispatcher.js
+index 64cbe7b2..93f50472 100644
+--- a/functions/personal-reading/continuity/membership-production-dispatcher.js
++++ b/functions/personal-reading/continuity/membership-production-dispatcher.js
+@@ -14,6 +14,6 @@ export async function executeProductionKnowledge(context,input){
+   if(!productionKnowledgeReady(env)||body.model!=='gpt-5.6-luna'||body.tools?.length||shortDeliveryMaximum(body)>maximumMicroUSD)throw Error('MEMBERSHIP_PROVIDER_REQUEST_NOT_ADMITTED');
+   const response=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+env.OPENAI_API_KEY},body:JSON.stringify({...body,text:{format:{type:'json_object'}}}),signal:AbortSignal.timeout(90000)});
+   if(!response.ok)throw Error('MEMBERSHIP_PROVIDER_REQUEST_FAILED');const raw=await response.json();
+-  return {status:raw.status,usage:raw.usage,text:raw.output_text||raw.output?.flatMap(o=>o.content||[]).filter(c=>c.type==='output_text').map(c=>c.text).join('')||''};
++  return {status:raw.status,usage:raw.usage,providerRequestId:raw.id||null,text:raw.output_text||raw.output?.flatMap(o=>o.content||[]).filter(c=>c.type==='output_text').map(c=>c.text).join('')||''};
+  }});
+ }
+diff --git a/functions/personal-reading/continuity/membership-short-delivery-qa.js b/functions/personal-reading/continuity/membership-short-delivery-qa.js
+index 7e159dd9..64eb8f7a 100644
+--- a/functions/personal-reading/continuity/membership-short-delivery-qa.js
++++ b/functions/personal-reading/continuity/membership-short-delivery-qa.js
+@@ -69,3 +69,6 @@ export async function executeShortMembershipDeliveryQA(context,{taskId,pack,body
+   return {state:'COMPLETE',answer:saved,providerCalls:1,qaOnly:true};
+  }catch(error){await finishCreditTask(context.env,{ownerAccountId,taskId,delivered:false,actualMicroUSD:meter?.modelCostMicroUSD??null,platformEntry:{envelopeId:platformEnvelopeId,payload:meter||{model:body.model,usage:'UNKNOWN'}}});throw error;}
+ }
++
++// Audit-only provider reference, never a credential or a source authority.
++export function providerRequestReference(value){return typeof value==='string'&&/^(resp|req)_[A-Za-z0-9_-]{1,190}$/.test(value)?value:null;}
+diff --git a/functions/profile/personal-evidence-report-adapter.js b/functions/profile/personal-evidence-report-adapter.js
+index 564dfe53..6b7148a8 100644
+--- a/functions/profile/personal-evidence-report-adapter.js
++++ b/functions/profile/personal-evidence-report-adapter.js
+@@ -1,13 +1,16 @@
++export const EXPERIENCE_DOSSIER_CAPABILITY_LABELS={PROCESS_IMPROVEMENT:'流程改善 / Process improvement',DATA_ORGANIZATION:'数据整理 / Data organization',COORDINATION:'协作协调 / Coordination',PROJECT_EXECUTION:'项目执行 / Project execution',COMMUNICATION:'沟通 / Communication',LEARNING:'学习适应 / Learning adaptability',ANALYTICAL_REASONING:'分析推理 / Analytical reasoning',OPERATIONAL_CONTROL:'运营管理 / Operational control',FINANCIAL_AWARENESS:'财务意识 / Financial awareness',SYSTEM_IMPLEMENTATION:'系统实施 / System implementation',PROBLEM_SOLVING:'问题解决 / Problem solving',LEADERSHIP_MANAGEMENT:'领导与管理 / Leadership and management'};
+ // Consumer adapter only: lifecycle and digests are supplied by the existing RR v2.
+ import * as experienceRr from '../../scripts/lib/customer-report-runtime/report-runtime-v2.mjs';
+ import experienceRegistry from '../../content/runtime/customer-report-runtime/registries/canonical-report-section-registry-v2.json';
+ import experienceExtension from '../../content/profile/successors/personal-evidence-r1/contracts/personal-evidence-rr-consumer-extension-v1.json';
+ 
+ // Evidence-only compatible consumer; no fabricated assessment or fixed sixteen-page engine.
+-export function assembleExperienceDossier({records,ownerId,reportId,now}){
+- if(!records.length||records.some(x=>x.ownerId!==ownerId||x.revocationStatus!=='ACTIVE'))throw Error('EXPERIENCE_REPORT_OWNER_REQUIRED');
++export function assembleExperienceDossier({records,ownerId,reportId,now,assessments=[]}){
++ if((!records.length&&!assessments.length)||records.some(x=>x.ownerId!==ownerId||x.revocationStatus!=='ACTIVE'))throw Error('EXPERIENCE_REPORT_OWNER_REQUIRED');
+  const ref=(x,kind)=>({reference:`${x.recordId}#v${x.version}`,kind:'EXTERNAL',externalKind:kind,authority:'PROFILE_PPR',state:'VALID',availability:'AVAILABLE'});
+- const sections=[['EVIDENCE','PERSONAL_EVIDENCE_SOURCE_REFERENCE'],['UNKNOWN','PERSONAL_EVIDENCE_UNKNOWN_REFERENCE'],['BOUNDARY','PERSONAL_EVIDENCE_BOUNDARY_REFERENCE']].map(([sectionCode,kind])=>({sectionCode,sourceReferences:records.map(x=>ref(x,kind))}));
++ if(assessments.some(a=>a.customerId!==ownerId))throw Error('ASSESSMENT_REPORT_OWNER_REQUIRED');
++ const sources=[...records,...assessments.map(a=>({recordId:a.objectId,version:1}))];
++ const sections=[['EVIDENCE','PERSONAL_EVIDENCE_SOURCE_REFERENCE'],['UNKNOWN','PERSONAL_EVIDENCE_UNKNOWN_REFERENCE'],['BOUNDARY','PERSONAL_EVIDENCE_BOUNDARY_REFERENCE']].map(([sectionCode,kind])=>({sectionCode,sourceReferences:sources.map(x=>ref(x,kind))}));
+  const assembly=experienceRr.assembleReport({reportCode:reportId,case:reportId,customer:ownerId,locale:'en',assembledAt:now,consentReferences:[`${reportId}#explicit-request`],sections,serviceContract:{reference:experienceExtension.contractCode,requiredSectionTypes:['EVIDENCE','UNKNOWN','BOUNDARY'],optionalSectionTypes:[],professionalReviewRequired:false,signatureRequired:false,requiresConsent:true,allowedLocales:['en','zh-Hans'],allowedChannels:['HTML','PDF','WORKSPACE']}},projectPersonalEvidenceRrRegistry(experienceRegistry,experienceExtension));
+  const candidate=experienceRr.createReportCandidate(assembly,{createdAt:now});
+  const review=experienceRr.reviewReportCandidate(assembly,candidate,{reviewReference:reportId+'#review',reviewedAt:now});
+@@ -15,8 +18,8 @@ export function assembleExperienceDossier({records,ownerId,reportId,now}){
+  const canonical=experienceRr.buildCanonicalReport(assembly,candidate,review,approval);
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const labels={context:'情境 / Context',role:'角色 / Role',responsibility:'责任 / Responsibility',action:'行动 / Action',tools:'工具 / Tools',people:'协作 / Collaboration',outcome:'可观察结果 / Observable outcome',measurableResult:'自述量化结果 / Reported measured result',sourceReference:'来源 / Source',reflection:'自我反思 / Reflection',unknowns:'待核实 / Unverified',claim:'待检验判断 / Claim to examine'};
+- const capabilityLabels={PROCESS_IMPROVEMENT:'流程改善 / Process improvement',DATA_ORGANIZATION:'数据整理 / Data organization',COORDINATION:'协作协调 / Coordination',PROJECT_EXECUTION:'项目执行 / Project execution',COMMUNICATION:'沟通 / Communication',LEARNING:'学习适应 / Learning adaptability',ANALYTICAL_REASONING:'分析推理 / Analytical reasoning',OPERATIONAL_CONTROL:'运营管理 / Operational control',FINANCIAL_AWARENESS:'财务意识 / Financial awareness',SYSTEM_IMPLEMENTATION:'系统实施 / System implementation',PROBLEM_SOLVING:'问题解决 / Problem solving',LEADERSHIP_MANAGEMENT:'领导与管理 / Leadership and management'};
+- const html=`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Personal Evidence Dossier</title><style>body{background:#102934;color:#f3eddf;font:17px/1.65 system-ui,sans-serif;margin:0}main{max-width:850px;margin:auto;padding:32px}h1,h2{color:#d5b778}section{break-inside:auto;border-top:1px solid #668179;padding:24px 0}dt{color:#d5b778}dd{margin:0 0 16px;overflow-wrap:anywhere}small{display:block} @media print{body{background:#f6f1e7;color:#112e38}h1,h2,dt{color:#234d50}@page{size:A4;margin:18mm}main{padding:0;font-size:13.5px;line-height:1.5}h1{font-size:27px}h2{font-size:21px}dd{margin-bottom:10px}section{padding:16px 0}h2,dt{break-after:avoid}p,dd{orphans:3;widows:3}}</style><main><h1>个人现实证据档案<br>Personal Evidence Dossier</h1><p>双语 · 真实经历补充档案 / Bilingual · Real experience dossier</p><p>此档案根据所选自述生成，不是能力认证、医疗诊断或职业资格。<br>This dossier organizes selected customer accounts, not certified competence, diagnosis or occupational qualification.</p><p>生成 / Generated: ${esc(now)}<br>版本 / Version: 1</p>${records.map(r=>`<section><h2>${esc(r.title)}</h2><p>事件期间 / Event period: ${esc(r.periodStart)} — ${esc(r.periodEnd||'未知 / Unknown')}<br>记录 / Recorded: ${esc(r.recordedAt)}<br>来源版本 / Source version: ${r.version}</p><p>用户提供，未独立核实。<br>Customer supplied; not independently verified.</p><dl>${Object.entries(labels).map(([k,l])=>`<dt>${l}</dt><dd>${esc(r[k]||'未提供 / Not supplied')}</dd>`).join('')}</dl><h3>候选能力 / Candidate capabilities</h3><p>${r.capabilities.length?esc(r.capabilities.map(k=>capabilityLabels[k]).join('、')):'尚无选择 / None selected'}</p><p>由用户选择的待核实方向，不是系统认证。<br>User-selected areas to examine, not system certification.</p><p>下一步：确认负责范围、前后成果、资格与自愿提供的反馈。<br>Next: confirm responsibility, before/after outcomes, qualifications and voluntary feedback.</p><details><summary>来源定位 / Source reference</summary>${esc(r.recordId)} · ${r.version}</details></section>`).join('')}<section><h2>变化与边界 / History and boundaries</h2><p>仅显示实际记录的版本；未生成成长趋势。象征解释、财务账本及市场事实未自动加入。<br>Only recorded versions are represented; no growth trend is invented. Symbolic interpretations, financial ledgers and market facts are not automatically imported.</p><p>撤销可阻止新读取，无法远程收回已下载副本。<br>Revocation prevents new access, but cannot recall downloaded copies.</p></section></main></html>`;
++
++ const html=`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Personal Evidence Dossier</title><style>body{background:#102934;color:#f3eddf;font:17px/1.65 system-ui,sans-serif;margin:0}main{max-width:850px;margin:auto;padding:32px}h1,h2{color:#d5b778}section{break-inside:auto;border-top:1px solid #668179;padding:24px 0}dt{color:#d5b778}dd{margin:0 0 16px;overflow-wrap:anywhere}small{display:block} @media print{body{background:#f6f1e7;color:#112e38}h1,h2,dt{color:#234d50}@page{size:A4;margin:18mm}main{padding:0;font-size:13.5px;line-height:1.5}h1{font-size:27px}h2{font-size:21px}dd{margin-bottom:10px}section{padding:16px 0}h2,dt{break-after:avoid}p,dd{orphans:3;widows:3}}</style><main><h1>个人现实证据档案<br>Personal Evidence Dossier</h1><p>双语 · 真实经历补充档案 / Bilingual · Real experience dossier</p><p>此档案根据所选自述生成，不是能力认证、医疗诊断或职业资格。<br>This dossier organizes selected customer accounts, not certified competence, diagnosis or occupational qualification.</p><p>生成 / Generated: ${esc(now)}<br>版本 / Version: 1</p>${records.map(r=>`<section><h2>${esc(r.title)}</h2><p>事件期间 / Event period: ${esc(r.periodStart)} — ${esc(r.periodEnd||'未知 / Unknown')}<br>记录 / Recorded: ${esc(r.recordedAt)}<br>来源版本 / Source version: ${r.version}</p><p>用户提供，未独立核实。<br>Customer supplied; not independently verified.</p><dl>${Object.entries(labels).map(([k,l])=>`<dt>${l}</dt><dd>${esc(r[k]||'未提供 / Not supplied')}</dd>`).join('')}</dl><h3>候选能力 / Candidate capabilities</h3><p>${r.capabilities.length?esc(r.capabilities.map(k=>EXPERIENCE_DOSSIER_CAPABILITY_LABELS[k]).join('、')):'尚无选择 / None selected'}</p><p>由用户选择的待核实方向，不是系统认证。<br>User-selected areas to examine, not system certification.</p><p>下一步：确认负责范围、前后成果、资格与自愿提供的反馈。<br>Next: confirm responsibility, before/after outcomes, qualifications and voluntary feedback.</p><details><summary>来源定位 / Source reference</summary>${esc(r.recordId)} · ${r.version}</details></section>`).join('')}<section><h2>变化与边界 / History and boundaries</h2><p>仅显示实际记录的版本；未生成成长趋势。象征解释、财务账本及市场事实未自动加入。<br>Only recorded versions are represented; no growth trend is invented. Symbolic interpretations, financial ledgers and market facts are not automatically imported.</p><p>撤销可阻止新读取，无法远程收回已下载副本。<br>Revocation prevents new access, but cannot recall downloaded copies.</p></section></main></html>`;
+  return {canonical,html,refs:records.map(r=>({id:r.recordId,version:r.version}))};
+ }
+ export function projectPersonalEvidenceRrRegistry(baseRegistry, extension) {
+diff --git a/functions/provider-cost/product-cost-envelope.js b/functions/provider-cost/product-cost-envelope.js
+index 6626ae30..95cd6851 100644
+--- a/functions/provider-cost/product-cost-envelope.js
++++ b/functions/provider-cost/product-cost-envelope.js
+@@ -1,4 +1,5 @@
+ // Latest direct owner limits. Price implementation stays with Commerce's owner.
++import {membershipBudgetPeriod,membershipPeriodPredicate} from '../personal-reading/continuity/membership-period-budget.js';
+ import {COMMERCE_ECONOMICS} from '../pws/commercial/commerce-economics-policy.js';
+ export const PRODUCT_TOTAL_COST_USD=Object.freeze(Object.fromEntries(Object.values(COMMERCE_ECONOMICS).filter(p=>p.providerCapUsd!==null).map(p=>[p.productId,p.providerCapUsd])));
+ const authority='DIRECT_OWNER_COMMERCIAL_AMENDMENT_2026-10-09_INCLUDING_FOUR_ASK';
+@@ -31,6 +32,7 @@ export async function reserveProductCost(env,{ownerAccountId,envelopeId,requestI
+  // collectively exceeding the one complete-product pool. Unknown usage stops it.
+  const envelope=await db.prepare('SELECT product_id FROM provider_product_cost_envelopes WHERE envelope_id=? AND owner_account_id=?').bind(envelopeId,ownerAccountId).first();
+  const continuity=envelope?.product_id==='COM-SUBSCRIPTION-MONTHLY';
++ const period=continuity?await membershipBudgetPeriod(env,ownerAccountId,clock):null;
+  const inserted=await db.prepare(`INSERT OR IGNORE INTO provider_product_cost_entries
+  (request_id,envelope_id,cost_class,context_id,reserved_micro_usd,state,cost_basis,payload_json,created_at)
+  SELECT ?1,a.envelope_id,?4,?5,?6,'RESERVED','CONSERVATIVE_PRECALL_BOUND',?7,?8
+@@ -42,9 +44,10 @@ export async function reserveProductCost(env,{ownerAccountId,envelopeId,requestI
+  AND q.billing_period_start<=CAST(strftime('%s',?8) AS INTEGER) AND qp.customer_id=a.owner_account_id AND qo.customer_id=a.owner_account_id AND qp.purchase_state='purchased' AND qo.review_required=0 AND qo.environment=o.environment
+  AND q.quota_unit_id=json_extract(?7,'$.quotaUnit') AND json_extract(?7,'$.billingPeriodEnd')=s.current_period_end
+  AND COALESCE((SELECT SUM(COALESCE(x.measured_micro_usd,x.reserved_micro_usd)) FROM provider_product_cost_entries x WHERE x.envelope_id=a.envelope_id AND json_extract(x.payload_json,'$.quotaUnit')=q.quota_unit_id),0)+?6<=q.maximum_micro_usd)`:`EXISTS(SELECT 1 FROM commerce_purchases p JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=p.checkout_attempt_id JOIN digital_entitlements e ON e.purchase_id=p.purchase_id WHERE p.purchase_id=a.purchase_id AND p.purchase_state='purchased' AND o.customer_id=a.owner_account_id AND o.review_required=0 AND o.order_state IN ('PAID','FULFILLMENT_PENDING','FULFILLED') AND e.customer_id=a.owner_account_id AND e.product_id=a.product_id AND e.entitlement_status='active' AND (e.expires_at IS NULL OR e.expires_at>?8))`}
++ AND ${continuity?membershipPeriodPredicate({owner:'?3',start:'?9',end:'?10',bound:'?6'}):'(?9 IS NULL AND ?10 IS NULL)'}
+  AND NOT EXISTS(SELECT 1 FROM provider_product_cost_entries WHERE envelope_id=?2 AND state='USAGE_UNKNOWN')
+  AND COALESCE((SELECT SUM(COALESCE(measured_micro_usd,reserved_micro_usd)) FROM provider_product_cost_entries WHERE envelope_id=?2),0)+?6<=a.maximum_cost_micro_usd`)
+- .bind(requestId,envelopeId,ownerAccountId,costClass,contextId,bound,json,new Date(clock()).toISOString()).run();
++ .bind(requestId,envelopeId,ownerAccountId,costClass,contextId,bound,json,new Date(clock()).toISOString(),period?.start??null,period?.end??null).run();
+  const entry=await db.prepare('SELECT x.* FROM provider_product_cost_entries x JOIN provider_product_cost_envelopes a ON a.envelope_id=x.envelope_id WHERE x.request_id=? AND x.envelope_id=? AND a.owner_account_id=?').bind(requestId,envelopeId,ownerAccountId).first();
+  if(!entry)fail('COMPLETE_PRODUCT_COST_LIMIT_OR_UNKNOWN_USAGE');
+  if(entry.context_id!==contextId||entry.cost_class!==costClass||entry.reserved_micro_usd!==bound||entry.payload_json!==json)fail('COST_REQUEST_CONFLICT');
+diff --git a/functions/pws/commercial/report-successor-contract.js b/functions/pws/commercial/report-successor-contract.js
+index 2669bf99..718bbc3e 100644
+--- a/functions/pws/commercial/report-successor-contract.js
++++ b/functions/pws/commercial/report-successor-contract.js
+@@ -4,10 +4,10 @@ import {quoteReportPresentation as historicalQuote,eligibleReportIds as historic
+ // No orders, payment sessions or entitlement state live in this module.
+ const freeze=v=>{if(v&&typeof v==='object'){Object.values(v).forEach(freeze);Object.freeze(v);}return v;};
+ export const REPORT_COMMERCE_CONTRACT_ID='phi-os.pws.report-commerce-successor.v1';
+-const version='1.1.0',effectiveAt='2026-10-09T00:00:00.000Z';
++const version='1.2.0',effectiveAt='2026-10-25T00:00:00.000Z';
+ const singles=Object.values(COMMERCE_ECONOMICS).filter(p=>p.methodId).map(p=>{
+  const name=p.productId.startsWith('COM-REPORT-')?p.productId.slice(11,-5):p.productId.startsWith('COM-READING-')?p.productId.slice(12,-5):'WILL';
+- return {productId:`${name}_FULL_REPORT`,productCode:`${name.toLowerCase()}-full-report`,methodId:p.methodId,kind:p.methodId==='CROSS'?'SYNTHESIS':'SINGLE_METHOD',newPrimaryPromotion:true,newPurchaseDefault:true,amountMinor:p.amountMinor,currency:'MYR',bilingualOnly:p.bilingualOnly,bundleEligible:STANDARD_BUNDLE_PRODUCTS.includes(p.productId),entitlementKey:`report:${name.toLowerCase()}:full`,selection:null};
++ return {productId:`${name}_FULL_REPORT`,productCode:`${name.toLowerCase()}-full-report`,methodId:p.methodId,kind:p.methodId==='CROSS'?'SYNTHESIS':'SINGLE_METHOD',newPrimaryPromotion:p.methodId!=='PROFILE',newPurchaseDefault:p.methodId!=='PROFILE',amountMinor:p.amountMinor,currency:'MYR',bilingualOnly:p.bilingualOnly,bundleEligible:STANDARD_BUNDLE_PRODUCTS.includes(p.productId),entitlementKey:`report:${name.toLowerCase()}:full`,selection:null};
+ });
+ const bundles=[['BUNDLE_2',9900,2],['BUNDLE_3',14900,3]].map(([productId,amountMinor,count])=>({productId,productCode:productId.toLowerCase().replaceAll('_','-'),methodId:null,kind:'BUNDLE',amountMinor,currency:'MYR',bundleEligible:false,entitlementKey:null,selection:{min:count,max:count,eligibilityRegistry:'standard-myr59-20261009',distinct:true}}));
+ export const REPORT_COMMERCE_CONTRACT=freeze({contractId:REPORT_COMMERCE_CONTRACT_ID,version,effectiveAt,owner:'PWS_COMMERCIAL_RUNTIME',approval:{source:'EXPLICIT_USER_COMMERCIAL_REVISION',baseline:'538442cae861566956d203eae8cb053f02abf377',policyVersion:COMMERCE_ECONOMICS_VERSION,date:'2026-10-09',scope:'PRICES_COST_CAPS_LANGUAGE_AND_BUNDLE_ELIGIBILITY'},products:[...singles,...bundles],eligibilityRegistries:[{registryId:'standard-myr39-v1',status:'HISTORICAL_ORDER_COMPATIBILITY',productIds:historicalEligibleReportIds('BUNDLE_2')},{registryId:'standard-myr59-20261009',status:'FUTURE_SELECTION',productIds:singles.filter(p=>p.bundleEligible).map(p=>p.productId)}],policy:{bundleCreatesCross:false,crossGrantsSingleMethods:false,selectionIsEntitlement:false,clientPaymentSuccessIsAuthority:false,productionPaymentEnabled:false,activationOwner:'EXISTING_PWS_COMMERCE_GATE',entitlementActivationRequires:'SERVER_VERIFIED_PAYMENT_AND_PRODUCT_ADMISSION'}});
+@@ -18,12 +18,17 @@ export function resolveReportProduct(reference){const p=REPORT_COMMERCE_CONTRACT
+ export const REPORT_LANGUAGE_PRICING_VERSION=COMMERCE_ECONOMICS_VERSION;
+ export const REPORT_LANGUAGE_PRICING_POLICIES=freeze({[REPORT_LANGUAGE_PRICING_VERSION]:Object.fromEntries(REPORT_COMMERCE_CONTRACT.products.map(p=>[p.productId,{BILINGUAL:{surchargeMinor:p.bilingualOnly?0:1000}}]))});
+ export function normalizeReportPresentation(input={}) {
+- const {reportLanguageMode,reportLocale}=input;
++ const {reportLanguageMode,reportLocale:rawLocale}=input;const reportLocale=rawLocale==='zh'?'zh-Hans':rawLocale;
+  if(!((reportLanguageMode==='SINGLE'&&['en','zh-Hans'].includes(reportLocale))||(reportLanguageMode==='BILINGUAL'&&reportLocale==='bilingual')))
+   throw Object.assign(new Error('Choose the report language explicitly.'),{code:'REPORT_PRESENTATION_REQUIRED',status:422});
+  return freeze({reportLanguageMode,reportLocale});
+ }
+-export function quoteReportPresentation(productId,input,selectedProductIds=[],pricingVersion=productId==='FINANCIAL_FULL_REPORT'?'FINANCE-RM69-2026-10-20':REPORT_LANGUAGE_PRICING_VERSION) {
++export function quoteReportPresentation(productId,input,selectedProductIds=[],pricingVersion=productId==='FINANCIAL_FULL_REPORT'?'FINANCE-RM69-2026-10-20':['TAROT_FULL_REPORT','ICHING_FULL_REPORT'].includes(productId)?'PERSONAL-EVIDENCE-READING-R1.2':REPORT_LANGUAGE_PRICING_VERSION, historicalOrder=false) {
++ if(pricingVersion==='PERSONAL-EVIDENCE-READING-R1.2'){
++  if(!['TAROT_FULL_REPORT','ICHING_FULL_REPORT'].includes(productId)||selectedProductIds.length)throw Error('READING_LANGUAGE_PRODUCT_REQUIRED');
++  const presentation=normalizeReportPresentation(input),amountMinor=productId==='TAROT_FULL_REPORT'?1900:3900;
++  return freeze({...presentation,productId,currency:'MYR',baseAmountMinor:amountMinor,surchargeAmountMinor:0,amountMinor,pricingVersion,modifierRule:'LANGUAGE_INDEPENDENT_READING',selectedProductIds:[productId]});
++ }
+  if(productId==='FINANCIAL_FULL_REPORT'&&[REPORT_LANGUAGE_PRICING_VERSION,'FINANCE-RM69-2026-10-20'].includes(pricingVersion)){
+   const presentation=normalizeReportPresentation(input);if(presentation.reportLanguageMode!=='BILINGUAL')throw Object.assign(Error('REPORT_BILINGUAL_ONLY'),{status:422,code:'REPORT_BILINGUAL_ONLY'});
+   const plan=mapReportEntitlements(productId,selectedProductIds),amountMinor=pricingVersion==='FINANCE-RM69-2026-10-20'?6900:15900;
+@@ -32,7 +37,7 @@ export function quoteReportPresentation(productId,input,selectedProductIds=[],pr
+  if(pricingVersion!==REPORT_LANGUAGE_PRICING_VERSION)return historicalQuote(productId,input,selectedProductIds,pricingVersion);
+  const product=resolveReportProduct(productId), presentation=normalizeReportPresentation(input);
+  if(product.bilingualOnly&&presentation.reportLanguageMode!=='BILINGUAL')throw Object.assign(Error('REPORT_BILINGUAL_ONLY'),{status:422,code:'REPORT_BILINGUAL_ONLY'});
+- if(product.newPurchaseDefault===false)throw new Error('PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED');
++ if(product.newPurchaseDefault===false&&!historicalOrder)throw new Error('PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED');
+  const plan=mapReportEntitlements(product.productId,selectedProductIds);
+  const policy=REPORT_LANGUAGE_PRICING_POLICIES[pricingVersion]?.[product.productId];
+  if(!policy)throw new Error('REPORT_PRICING_POLICY_NOT_FOUND');
+@@ -46,7 +51,7 @@ export function quoteReportPresentation(productId,input,selectedProductIds=[],pr
+ export function requirePurchasedReportPresentation(entitlement,requested) {
+  if(entitlement?.entitlement_status!=='active'||!entitlement.purchase_id)throw Object.assign(new Error('Active purchase required.'),{code:'REPORT_ENTITLEMENT_REQUIRED',status:403});
+  const stored=normalizeReportPresentation(entitlement.reportPresentation);
+- if(requested){const selection=normalizeReportPresentation(requested);if(selection.reportLocale!==stored.reportLocale||selection.reportLanguageMode!==stored.reportLanguageMode)throw Object.assign(new Error('Purchased report language is locked.'),{code:'REPORT_LANGUAGE_ENTITLEMENT_MISMATCH',status:403});}
++ if(requested){const selection=normalizeReportPresentation(requested);if(['COM-READING-TAROT-FULL','COM-READING-ICHING-FULL'].includes(entitlement.product_id))return selection;if(selection.reportLocale!==stored.reportLocale||selection.reportLanguageMode!==stored.reportLanguageMode)throw Object.assign(new Error('Purchased report language is locked.'),{code:'REPORT_LANGUAGE_ENTITLEMENT_MISMATCH',status:403});}
+  return stored;
+ }
+ export function eligibleReportIds(bundleId){const p=resolveReportProduct(bundleId);if(p.kind!=='BUNDLE')throw new Error('PWS_REPORT_BUNDLE_REQUIRED');return REPORT_COMMERCE_CONTRACT.eligibilityRegistries.find(r=>r.registryId===p.selection.eligibilityRegistry).productIds;}
+diff --git a/functions/pws/commercial/stripe-product-registry.js b/functions/pws/commercial/stripe-product-registry.js
+index e8406456..ef983836 100644
+--- a/functions/pws/commercial/stripe-product-registry.js
++++ b/functions/pws/commercial/stripe-product-registry.js
+@@ -467,6 +467,11 @@ for(const base of [...rows].filter(p=>/^COM-BOOK-0[1-4]$/.test(p.productId))){
+ }
+ const previousFinancialProduct=Object.freeze({...rows.find(p=>p.productId==='COM-REPORT-FINANCIAL-FULL')});
+ Object.assign(rows.find(p=>p.productId==='COM-REPORT-FINANCIAL-FULL'),{amountMinor:6900,title:'Personal & Household Financial Preparation Report · Bilingual',titleZh:'个人与家庭财务准备报告 · 双语',pricingVersion:'FINANCE-RM69-2026-10-20',publicationVersion:'FINANCE_BILINGUAL_MERGED_22_CANDIDATE',professionalReviewRequired:false,qaPriceId:null,livePriceId:null,checkoutBlockedReason:'FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED'});
++// Read-only PHI OS live-account identity verified 2026-10-25; no activation flags changed.
++Object.assign(rows.find(p=>p.productId==='COM-SUBSCRIPTION-MONTHLY'),{liveProductId:'prod_VUHoL62yNPfzV3',livePriceId:'price_1UTJEhB2F823WiPtompiBRH9'});
++// R1.2 explicit future-sales successor; rows/Stripe IDs remain for historical orders.
++Object.assign(rows.find(p=>p.productId==='COM-REPORT-PROFILE-FULL'),{catalogVisible:false,checkoutBlockedReason:'PERSONAL_EVIDENCE_MEMBERSHIP_NOT_STANDALONE',commercialState:'LEGACY_HISTORY_ONLY'});
++for(const p of rows.filter(p=>['COM-READING-TAROT-FULL','COM-READING-ICHING-FULL'].includes(p.productId)))Object.assign(p,{bilingualOnly:false,languageIndependentPurchase:true,pricingVersion:'PERSONAL-EVIDENCE-READING-R1.2'});
+ export const STRIPE_PRODUCT_REGISTRY = Object.freeze(rows.map(row => Object.freeze(row)));
+ export function commerceProduct(id) {
+   const product = STRIPE_PRODUCT_REGISTRY.find(row => row.productId === id);
+diff --git a/perspectives/iching/index.html b/perspectives/iching/index.html
+index 86a281da..fb4cf517 100644
+--- a/perspectives/iching/index.html
++++ b/perspectives/iching/index.html
+@@ -1,2 +1,4 @@
+ <!DOCTYPE html>
+ <html lang="en"><head><script src="/assets/js/locale-bootstrap.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>I Ching — PHI OS</title><link rel="canonical" href="/perspectives/iching/"><link rel="stylesheet" href="/assets/customer-ui/tokens.css"><link rel="stylesheet" href="/assets/customer-ui/base.css"><link rel="stylesheet" href="/assets/customer-ui/typography.css"><link rel="stylesheet" href="/assets/customer-ui/layout.css"><link rel="stylesheet" href="/assets/customer-ui/components.css"><link rel="stylesheet" href="/assets/customer-ui/motion.css"><link rel="stylesheet" href="/assets/customer-ui/utilities.css"><link rel="stylesheet" href="/assets/customer-ui/surfaces/symbolic-perspectives.css"><link rel="stylesheet" href="/assets/customer-ui/surfaces/iching-entry-customer.css"><link rel="stylesheet" href="/assets/customer-ui/surfaces/visual-binding-r5.css"><link rel="stylesheet" href="/assets/css/global-visual-r2.css"></head><body class="vr2-page" data-cx-surface="SYMBOLIC_ICHING" data-cx-nav="PERSPECTIVES"><a class="cx-skip" href="#main">Skip to content</a><div data-cx-header=""></div><main id="main"><section class="cx-section"><div class="cx-container icx-entry-hero"><div class="cx-stack"><p class="cx-eyebrow">I Ching · 易经</p><h1 class="cx-display" data-cx-en="Ask one question. Cast once. Read the change." data-cx-zh="问一件事，起一卦，再读懂变化。">Ask one question. Cast once. Read the change.</h1><p class="cx-lead" data-cx-en="Start from a situation you want to understand. PHI OS can cast the six lines for you, or you can record your own coins or an existing hexagram." data-cx-zh="从一个你真正想理解的处境开始。PHI OS 可以替你形成六爻，你也可以记录自己的投币结果，或输入已经起好的卦。">Start from a situation you want to understand.</p><div class="icx-entry-actions"><button class="cx-button cx-button--primary" type="button" data-iching-full-entry="" disabled data-cx-en="Start an I Ching reading" data-cx-zh="开始易经阅读">Start an I Ching reading</button><span data-cx-en="One question · one cast · bottom to top" data-cx-zh="一个问题 · 一次起卦 · 从初爻到上爻">One question · one cast · bottom to top</span></div></div></div><figure data-vr2-role="HERO" class="vr2-story"><img data-approved-visual="PHIOS-HERO-ICHING-READING-v2.webp" data-vr2-en-alt="Six lines connect the primary hexagram, changing lines and relating hexagram" data-vr2-zh-alt="六爻连接本卦、变爻与之卦" alt="Six lines connect the primary hexagram, changing lines and relating hexagram" loading="eager" fetchpriority="high" decoding="async" width="1672" height="941" src="https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/PHIOS-HERO-ICHING-READING-v2.webp"></figure></section><section class="cx-section--tight"><div class="cx-container icx-entry-paths"><article><span>1</span><h2 data-cx-en="Ask clearly" data-cx-zh="先把问题问清楚">Ask clearly</h2><p data-cx-en="Keep one situation in focus. Ask what to understand or notice before deciding." data-cx-zh="一次只聚焦一个处境，问自己需要理解、注意或核对什么。">Keep one situation in focus.</p></article><article><span>2</span><h2 data-cx-en="Choose how to cast" data-cx-zh="选择起卦方式">Choose how to cast</h2><p data-cx-en="Use PHI OS, toss three coins yourself, or enter six lines you already have." data-cx-zh="可以让 PHI OS 起卦，也可以自己投三枚硬币，或输入已经取得的六爻。">Use PHI OS or cast yourself.</p></article><article><span>3</span><h2 data-cx-en="Read in order" data-cx-zh="按顺序阅读">Read in order</h2><p data-cx-en="Begin with the primary hexagram, then changing lines, then the relating hexagram and real-world reflection." data-cx-zh="先看本卦，再看变爻与之卦，最后回到现实核对。">Read the primary hexagram first.</p></article></div></section></main><div data-cx-footer=""></div><script type="module" src="/assets/customer-ui/js/shell.js"></script><script type="module" src="/assets/customer-ui/js/surfaces/iching-entry.js"></script><script type="module" src="/assets/customer-ui/js/surfaces/visual-binding-r5-guides.js"></script><script type="module" src="/assets/js/global-visual-r2.js"></script></body></html>
++
++<script type="module" src="/assets/customer-ui/js/surfaces/symbolic-reading-language-r12.js"></script>
+diff --git a/perspectives/profile/index.html b/perspectives/profile/index.html
+index a156f543..1b6d8d91 100644
+--- a/perspectives/profile/index.html
++++ b/perspectives/profile/index.html
+@@ -67,6 +67,9 @@
+   <script type="module" src="/assets/customer-ui/js/shell.js"></script>
+   <script type="module" src="/assets/customer-ui/js/surfaces/profile-progressive.js"></script>
+   <script type="module" src="/assets/customer-ui/js/surfaces/personal-evidence-experiences.js"></script>
++  <script type="module" src="/assets/customer-ui/js/surfaces/personal-evidence-receiver-launcher.js"></script>
+ <script type="module" src="/assets/customer-ui/js/surfaces/visual-binding-r5-guides.js"></script>
+ <script type="module" src="/assets/customer-ui/js/surfaces/product-marketing-r1.js"></script><script type="module" src="/assets/js/global-visual-r2.js"></script></body>
+ </html>
++
++<script type="module" src="/assets/customer-ui/js/surfaces/personal-evidence-dossier-r12.js"></script>
+diff --git a/perspectives/tarot/index.html b/perspectives/tarot/index.html
+index 2b040ab5..6436e091 100644
+--- a/perspectives/tarot/index.html
++++ b/perspectives/tarot/index.html
+@@ -111,3 +111,5 @@
+ <script type="module" src="/assets/customer-ui/js/surfaces/visual-binding-r5-guides.js"></script>
+ <script type="module" src="/assets/js/global-visual-r2.js"></script></body>
+ </html>
++
++<script type="module" src="/assets/customer-ui/js/surfaces/symbolic-reading-language-r12.js"></script>
+

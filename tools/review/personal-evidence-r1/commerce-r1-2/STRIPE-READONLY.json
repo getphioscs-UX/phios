@@ -1,0 +1,177 @@
+{
+  "at": "2026-10-25T06:24:52.246Z",
+  "account": {
+    "stripe_context": "acct_1Pkdz8B2F823WiPt",
+    "livemode": true,
+    "name": "PHI OS"
+  },
+  "method": "CONNECTED_STRIPE_GET_ONLY",
+  "productList": {
+    "count": 32,
+    "has_more": false
+  },
+  "relevantProducts": [
+    {
+      "id": "prod_VUHoL62yNPfzV3",
+      "name": "PHI OS · Monthly Membership",
+      "active": true,
+      "default_price": "price_1UTJEhB2F823WiPtompiBRH9",
+      "metadata": {
+        "billing_interval": "MONTH",
+        "commerce_product_id": "COM-SUBSCRIPTION-MONTHLY",
+        "pricing_version": "2026-10-22",
+        "product_family": "SUBSCRIPTION"
+      }
+    },
+    {
+      "id": "prod_VPJ48RwrcxQ47Z",
+      "name": "PHI OS · I Ching Full Reading",
+      "active": true,
+      "default_price": "price_1UOUSpB2F823WiPt5BqiZDsC",
+      "metadata": {
+        "bilingual_mode": "BILINGUAL_ONLY",
+        "bilingual_surcharge_myr": "0",
+        "commerce_product_id": "COM-READING-ICHING-FULL",
+        "cost_scope": "REPORT_REPAIR_BILINGUAL_AND_FOUR_FOLLOWUPS",
+        "included_followups": "4",
+        "pricing_version": "PHIOS-COMMERCE-2026-10-09",
+        "provider_cap_usd": "2"
+      }
+    },
+    {
+      "id": "prod_VPJ4giIEyqQNex",
+      "name": "PHI OS · Tarot Full Reading",
+      "active": true,
+      "default_price": "price_1UOUSjB2F823WiPtXqfaEJzI",
+      "metadata": {
+        "bilingual_mode": "BILINGUAL_ONLY",
+        "bilingual_surcharge_myr": "0",
+        "commerce_product_id": "COM-READING-TAROT-FULL",
+        "cost_scope": "REPORT_REPAIR_BILINGUAL_AND_FOUR_FOLLOWUPS",
+        "included_followups": "4",
+        "pricing_version": "PHIOS-COMMERCE-2026-10-09",
+        "provider_cap_usd": "1"
+      }
+    }
+  ],
+  "prices": [
+    {
+      "product": "prod_VPJ4Jt88AxeieE",
+      "isError": true,
+      "error": "INVALID_ARGUMENT"
+    },
+    {
+      "product": "prod_VUHoL62yNPfzV3",
+      "isError": false,
+      "has_more": false,
+      "prices": [
+        {
+          "id": "price_1UTJEhB2F823WiPtompiBRH9",
+          "active": true,
+          "currency": "myr",
+          "unit_amount": 1900,
+          "recurring": {
+            "interval": "month",
+            "interval_count": 1,
+            "meter": null,
+            "trial_period_days": null,
+            "usage_type": "licensed"
+          },
+          "product": "prod_VUHoL62yNPfzV3"
+        }
+      ]
+    },
+    {
+      "product": "prod_VPJ4giIEyqQNex",
+      "isError": false,
+      "has_more": false,
+      "prices": [
+        {
+          "id": "price_1UOUSjB2F823WiPtXqfaEJzI",
+          "active": true,
+          "currency": "myr",
+          "unit_amount": 1900,
+          "recurring": null,
+          "product": "prod_VPJ4giIEyqQNex"
+        }
+      ]
+    },
+    {
+      "product": "prod_VPJ48RwrcxQ47Z",
+      "isError": false,
+      "has_more": false,
+      "prices": [
+        {
+          "id": "price_1UOUSpB2F823WiPt5BqiZDsC",
+          "active": true,
+          "currency": "myr",
+          "unit_amount": 3900,
+          "recurring": null,
+          "product": "prod_VPJ48RwrcxQ47Z"
+        }
+      ]
+    }
+  ],
+  "oldProfile": {
+    "productId": "prod_VPJ4Jt88AxeieE",
+    "priceId": "price_1UOURtB2F823WiPt4Efx01Vy",
+    "productResult": "NO_SUCH_PRODUCT",
+    "priceResult": "NO_SUCH_PRICE",
+    "archivalOrDeletionState": "NOT_INFERRED_FROM_NOT_FOUND"
+  },
+  "checkout": {
+    "isError": false,
+    "total": 1,
+    "has_more": false,
+    "sessions": [
+      {
+        "status": "expired",
+        "payment_status": "unpaid",
+        "metadataProduct": null,
+        "lineItemsAvailable": true,
+        "items": [
+          {
+            "product": "prod_QbsHqxilq4lqNw",
+            "price": "price_1PkeX6B2F823WiPthj0mmv9W",
+            "amount_total": 800
+          }
+        ],
+        "moreLineItems": false
+      }
+    ]
+  },
+  "charges": {
+    "isError": false,
+    "count": 2,
+    "has_more": false,
+    "charges": [
+      {
+        "paid": true,
+        "refunded": false,
+        "currency": "myr",
+        "amount": 1000,
+        "created": 1723108389,
+        "product": null
+      },
+      {
+        "paid": false,
+        "refunded": false,
+        "currency": "myr",
+        "amount": 800,
+        "created": 1722919502,
+        "product": null
+      }
+    ]
+  },
+  "subscriptions": {
+    "isError": false,
+    "count": 0,
+    "has_more": false,
+    "subscriptions": []
+  },
+  "customerDetailsRecorded": false,
+  "realPurchaseMapping": "ONE_HISTORICAL_PAID_CHARGE_UNMAPPED_DO_NOT_ASSERT_ZERO_HISTORY",
+  "applicationProductionOrders": "NOT_READ",
+  "stripeMutations": 0,
+  "providerCalls": 0
+}

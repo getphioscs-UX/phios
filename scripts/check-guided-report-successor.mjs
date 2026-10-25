@@ -15,14 +15,27 @@ let prices=0;
 for(const p of REPORT_COMMERCE_CONTRACT.products)for(const reportLocale of ['en','zh-Hans','bilingual']){
  const input={reportLocale,reportLanguageMode:reportLocale==='bilingual'?'BILINGUAL':'SINGLE'};
  const selected=p.kind==='BUNDLE'?eligibleReportIds(p.productId).slice(0,p.selection.min):[];
+ if(['TAROT_FULL_REPORT','ICHING_FULL_REPORT'].includes(p.productId)){
+  const quote=quoteReportPresentation(p.productId,input,selected);
+  assert.equal(quote.pricingVersion,'PERSONAL-EVIDENCE-READING-R1.2');
+  assert.equal(quote.modifierRule,'LANGUAGE_INDEPENDENT_READING');
+  assert.equal(quote.amountMinor,p.productId==='TAROT_FULL_REPORT'?1900:3900);
+  assert.equal(quote.surchargeAmountMinor,0);
+  assert.deepEqual(requirePurchasedReportPresentation({entitlement_status:'active',purchase_id:'reading-fixture',reportPresentation:quote},input),input);
+  prices++;continue;
+ }
  if(p.newPurchaseDefault===false){
-  assert.throws(()=>quoteReportPresentation(p.productId,input,selected),/PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED/);
+  if(p.bilingualOnly&&reportLocale!=='bilingual'){
+   assert.throws(()=>quoteReportPresentation(p.productId,input,selected),error=>error.code==='REPORT_BILINGUAL_ONLY');
+  }else{
+   assert.throws(()=>quoteReportPresentation(p.productId,input,selected),/PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED/);
+  }
   assert.deepEqual(requirePurchasedReportPresentation({entitlement_status:'active',purchase_id:'historical-fixture',reportPresentation:input},input),input);
   continue;
  }
  if(p.bilingualOnly&&reportLocale!=='bilingual'){assert.throws(()=>quoteReportPresentation(p.productId,input,selected),/BILINGUAL/);continue;}
  const quote=quoteReportPresentation(p.productId,input,selected);
- assert.equal(quote.amountMinor,p.amountMinor+(reportLocale==='bilingual'&&!p.bilingualOnly?1000:0));
+ assert.equal(quote.amountMinor,p.productId==='FINANCIAL_FULL_REPORT'?6900:p.amountMinor+(reportLocale==='bilingual'&&!p.bilingualOnly?1000:0));
  const e={entitlement_status:'active',purchase_id:'verified-fixture',reportPresentation:quote};
  assert.deepEqual(requirePurchasedReportPresentation(e,input),input);
  assert.throws(()=>requirePurchasedReportPresentation(e,{reportLanguageMode:'SINGLE',reportLocale:reportLocale==='en'?'zh-Hans':'en'}));prices++;

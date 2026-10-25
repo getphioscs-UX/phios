@@ -41,7 +41,7 @@ export function compareExperiences(a,b){
  return {state:a.claimDirection===b.claimDirection?'CONSISTENT':'CONFLICTING',refs,reason:'CUSTOMER_REPORTED_SUPPORT_AND_COUNTER_EVIDENCE',next:'Confirm the actual scope, outcomes and voluntary feedback; no ability certification follows.'};
 }
 export function compareAssessmentVersions(a,b){
- const same=a.instrumentId&&a.instrumentId===b.instrumentId&&a.instrumentVersion&&a.instrumentVersion===b.instrumentVersion&&a.context===b.context;
+ const same=a.instrumentId&&a.instrumentId===b.instrumentId&&a.instrumentVersion&&a.instrumentVersion===b.instrumentVersion&&typeof a.context==='string'&&a.context.length>0&&a.context===b.context;
  return {state:same?'COMPARABLE_SAME_INSTRUMENT':'NOT_COMPARABLE',scoreConversionAllowed:false,reason:same?'RAW_SCORE_CHANGE_ONLY_NOT_GROWTH_PROOF':'INSTRUMENT_VERSION_OR_CONTEXT_DIFFERS'};
 }
 export function describeExperience(record){

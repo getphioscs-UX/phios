@@ -50,7 +50,13 @@ await test('current QA prices, retained history and explicit LIVE bindings agree
     }
     if(p.productId==='COM-REPORT-FINANCIAL-FULL'){
       assert.equal(p.pricingVersion,'FINANCE-RM69-2026-10-20');
-      assert.equal(p.publicationVersion,'FINANCE_CORE_16_V2');
+      const publication=JSON.parse(fs.readFileSync('content/financial/reports/publication-bilingual-merged-22.json','utf8'));
+      assert.equal(publication.version,'FINANCE_BILINGUAL_MERGED_22_CANDIDATE');
+      assert.equal(p.publicationVersion,publication.version);
+      assert.equal(publication.status,'HUMAN_REVIEW_CANDIDATE');
+      assert.equal(publication.corePages,22);assert.equal(publication.pages.length,22);
+      assert.deepEqual(publication.pages.map(page=>page.page),Array.from({length:22},(_,i)=>i+1));
+      assert.ok(publication.pages.every(page=>page.language==='SAME_PAGE_BILINGUAL'));
       assert.equal(p.qaPriceId,null);assert.equal(p.livePriceId,null);
       assert.equal(p.checkoutBlockedReason,'FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED');
       const historical=provider.prices.filter(q=>q.product===p.qaProductId&&q.unit_amount===15900&&q.currency==='myr'&&q.livemode===false);
@@ -168,6 +174,16 @@ await test('active single products fulfill after verified payment',async()=>{
       assert.equal((await response.json()).error,'FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED');
       assert.equal(stripeCalls.length,beforeCalls,'Unbound RM69 product must not call Stripe');
       assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders,'Unbound RM69 product must not create an order');
+      continue;
+    }
+    if(product.productId==='COM-REPORT-PROFILE-FULL'){
+      assert.equal(product.catalogVisible,false);
+      assert.equal(product.commercialState,'LEGACY_HISTORY_ONLY');
+      assert.equal(product.checkoutBlockedReason,'PERSONAL_EVIDENCE_MEMBERSHIP_NOT_STANDALONE');
+      assert.equal(response.status,503,product.productId);
+      assert.equal((await response.json()).error,'PERSONAL_EVIDENCE_MEMBERSHIP_NOT_STANDALONE');
+      assert.equal(stripeCalls.length,beforeCalls,'Standalone Profile must not call Stripe');
+      assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders,'Standalone Profile must not create an order');
       continue;
     }
     if(isLanguageReport(product)&&resolveReportProduct(reportContractId(product.productId)).newPurchaseDefault===false){

@@ -1,0 +1,86 @@
+[
+  {
+    "command": "esbuild functions/api/account-profile-evidence.js",
+    "status": "PASS_LOCAL",
+    "exitCode": 0,
+    "bytes": 874479
+  },
+  {
+    "command": "esbuild functions/api/customer-contextual-ask.js",
+    "status": "PASS_LOCAL",
+    "exitCode": 0,
+    "bytes": 3503896
+  },
+  {
+    "command": "esbuild functions/api/account-financial-summary.js",
+    "status": "PASS_LOCAL",
+    "exitCode": 0,
+    "bytes": 203991
+  },
+  {
+    "command": "esbuild functions/api/world-observations.js",
+    "status": "PASS_LOCAL",
+    "exitCode": 0,
+    "bytes": 43549
+  },
+  {
+    "command": "esbuild assets/customer-ui/js/surfaces/personal-evidence-receiver.js",
+    "status": "PASS_LOCAL",
+    "exitCode": 0,
+    "bytes": 8414
+  },
+  {
+    "command": "esbuild assets/customer-ui/js/surfaces/personal-evidence-receiver-launcher.js",
+    "status": "PASS_LOCAL",
+    "exitCode": 0,
+    "bytes": 35576
+  },
+  {
+    "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/personal-evidence-r1/evidence-system-r1/receiver-closure/test.mjs",
+    "exitCode": 0,
+    "error": null,
+    "stdout": "PASS 44\n",
+    "stderr": "",
+    "status": "PASS_LOCAL"
+  },
+  {
+    "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/personal-evidence-r1/evidence-system-r1/local-test.mjs",
+    "exitCode": 0,
+    "error": null,
+    "stdout": "PASS 73\n",
+    "stderr": "",
+    "status": "PASS_LOCAL"
+  },
+  {
+    "command": "node --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-profile-customer-full-production.mjs",
+    "exitCode": 0,
+    "error": null,
+    "stdout": "✓ Profile customer full-production campaign passed: 7/7 customer modes, 8 governed runtime result variants (including both IPIP forms).\n  Quick/Full self-assessment, reasoning, external import, IPIP 50/120, O*NET RIASEC and Financial Capability all produce source-preserving Profile views.\n",
+    "stderr": "",
+    "status": "PASS_LOCAL"
+  },
+  {
+    "command": "node --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-profile-personal-evidence-prd-w6-w8.mjs",
+    "exitCode": 0,
+    "error": null,
+    "stdout": "PASS PRD-W6/W7/W8: Personal Evidence dossier publication projection is active with RR admission correctly gated; explicit selected-evidence Personal Reality handoff is implemented; Relationship/Career/Financial reference handoffs are bounded and non-mutating.\n",
+    "stderr": "",
+    "status": "PASS_LOCAL"
+  },
+  {
+    "command": "node --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-profile-personal-evidence-prd-w9.mjs",
+    "exitCode": 1,
+    "error": null,
+    "stdout": "",
+    "stderr": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\r\n+ actual - expected\r\n\r\n+ 'SINGLE_METHOD'\r\n- 'LEGACY_COMPATIBILITY'\r\n\r\n    at file:///C:/phios/scripts/check-profile-personal-evidence-prd-w9.mjs:5:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\r\n    at async node:internal/modules/esm/loader:643:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 'SINGLE_METHOD',\r\n  expected: 'LEGACY_COMPATIBILITY',\r\n  operator: 'strictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n",
+    "status": "INHERITED_BASELINE_FAILURE"
+  },
+  {
+    "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/personal-evidence-r1/evidence-system-r1/receiver-closure/browser.mjs",
+    "exitCode": 0,
+    "error": null,
+    "stdout": "PASS receiver browser 4\n",
+    "stderr": "",
+    "status": "PASS_LOCAL"
+  }
+]

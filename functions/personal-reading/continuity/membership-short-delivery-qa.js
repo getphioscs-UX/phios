@@ -69,3 +69,6 @@ export async function executeShortMembershipDeliveryQA(context,{taskId,pack,body
   return {state:'COMPLETE',answer:saved,providerCalls:1,qaOnly:true};
  }catch(error){await finishCreditTask(context.env,{ownerAccountId,taskId,delivered:false,actualMicroUSD:meter?.modelCostMicroUSD??null,platformEntry:{envelopeId:platformEnvelopeId,payload:meter||{model:body.model,usage:'UNKNOWN'}}});throw error;}
 }
+
+// Audit-only provider reference, never a credential or a source authority.
+export function providerRequestReference(value){return typeof value==='string'&&/^(resp|req)_[A-Za-z0-9_-]{1,190}$/.test(value)?value:null;}

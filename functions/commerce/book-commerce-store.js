@@ -37,6 +37,8 @@ export async function ensureCommerceProducts(env, clock=Date.now) {
     .bind(p.productId,p.title,p.fulfillmentType,p.amountMinor,now,p.category,p.billingType,p.qaPriceId,p.qaProductId,p.active?1:0,p.language||'bilingual');}));
 }
 export async function createCommerceOrder({env,customerId,productId,selectedProducts,idempotencyKeyHash,requestHash,locale,context={},clock=Date.now}){
+  // Future-order boundary only. Historical order/read/webhook owners stay readable.
+  if(productId==='COM-REPORT-PROFILE-FULL')throw Object.assign(Error(commerceProduct(productId).checkoutBlockedReason),{code:commerceProduct(productId).checkoutBlockedReason,status:409});
   await ensureCommerceProducts(env,clock);
   const p=commerceStripeProduct(continuityRefillProduct(commerceProduct(productId),context),commerceEnvironment(env)), db=dbFrom(env), now=nowIso(clock);
   await db.prepare(`INSERT OR IGNORE INTO commerce_checkout_attempts

@@ -1,0 +1,49 @@
+{
+  "at": "2026-10-25T07:18:42.391Z",
+  "status": "PASS_LOCAL",
+  "sourceDigest": "592f492ef8e9becc48e841c9a85009dd3f37dc0e274b49d6d39f9de65c38e70d",
+  "commandEvidence": "VERIFICATION.json",
+  "commands": [
+    {
+      "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/personal-evidence-r1/commerce-r1-2/test.mjs",
+      "exitCode": 0,
+      "stdout": "PASS 120\n",
+      "stderr": ""
+    },
+    {
+      "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/personal-evidence-r1/evidence-system-r1/receiver-closure/test.mjs",
+      "exitCode": 0,
+      "stdout": "PASS 44\n",
+      "stderr": ""
+    },
+    {
+      "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/personal-evidence-r1/commerce-r1-2/browser.mjs",
+      "exitCode": 0,
+      "stdout": "PASS browser 4 PDF renders 11\n",
+      "stderr": ""
+    }
+  ],
+  "scope": "120 actual assertions include signed-PDF READ_ONLY, assessment-only source access and revocation; four browser cases include assessment-only selection.",
+  "testFiles": [
+    {
+      "path": "fixture.mjs",
+      "sha256": "3307c0e0641a2bf588262e19cc5452173d2fce1d82a40cfd173db923835282f6"
+    },
+    {
+      "path": "test.mjs",
+      "sha256": "a7a32f713bd7029b5e75df90474a5d157ae5354a9c0afa25e9a146812156eb37"
+    },
+    {
+      "path": "native-fixture.mjs",
+      "sha256": "20468a164b0a05f2811d5a598fdc3ec181d0f402f579a8e810ca138a5ef02e1c"
+    },
+    {
+      "path": "browser.mjs",
+      "sha256": "f01148865528ea80f701553425716e2d9693a5fedeb7c677698caa67426d1fdd"
+    },
+    {
+      "path": "server.mjs",
+      "sha256": "8484944096fd85640fe108107cfe06298db86b8116f70f9ba731295e52a65683"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "command": "node scripts/check-membership-ask-credit-r1.mjs",
+  "exitCode": 1,
+  "stdout": "",
+  "stderr": "file:///C:/phios/.tmp/membership-credit-r1.mjs:78\r\n  throw Object.assign(Error(code), { code, status: 409 });\r\n                      ^\r\n\r\nError: MEMBERSHIP_VERIFIED_BILLING_PERIOD_REQUIRED\r\n    at fail2 (file:///C:/phios/.tmp/membership-credit-r1.mjs:78:23)\r\n    at membershipBudgetPeriod (file:///C:/phios/.tmp/membership-credit-r1.mjs:83:144)\r\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\r\n    at async readMembershipPeriodBudget (file:///C:/phios/.tmp/membership-credit-r1.mjs:96:18)\r\n    at async Module.readCreditBalance (file:///C:/phios/.tmp/membership-credit-r1.mjs:278:31)\r\n    at async file:///C:/phios/scripts/check-membership-ask-credit-r1.mjs:41:325\r\n    at async test (file:///C:/phios/scripts/check-membership-ask-credit-r1.mjs:10:44)\r\n    at async file:///C:/phios/scripts/check-membership-ask-credit-r1.mjs:41:1 {\r\n  code: 'MEMBERSHIP_VERIFIED_BILLING_PERIOD_REQUIRED',\r\n  status: 409\r\n}\r\n\r\nNode.js v24.18.0\r\n",
+  "historicalArtifactsRestored": true
+}

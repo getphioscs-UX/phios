@@ -467,6 +467,11 @@ for(const base of [...rows].filter(p=>/^COM-BOOK-0[1-4]$/.test(p.productId))){
 }
 const previousFinancialProduct=Object.freeze({...rows.find(p=>p.productId==='COM-REPORT-FINANCIAL-FULL')});
 Object.assign(rows.find(p=>p.productId==='COM-REPORT-FINANCIAL-FULL'),{amountMinor:6900,title:'Personal & Household Financial Preparation Report · Bilingual',titleZh:'个人与家庭财务准备报告 · 双语',pricingVersion:'FINANCE-RM69-2026-10-20',publicationVersion:'FINANCE_BILINGUAL_MERGED_22_CANDIDATE',professionalReviewRequired:false,qaPriceId:null,livePriceId:null,checkoutBlockedReason:'FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED'});
+// Read-only PHI OS live-account identity verified 2026-10-25; no activation flags changed.
+Object.assign(rows.find(p=>p.productId==='COM-SUBSCRIPTION-MONTHLY'),{liveProductId:'prod_VUHoL62yNPfzV3',livePriceId:'price_1UTJEhB2F823WiPtompiBRH9'});
+// R1.2 explicit future-sales successor; rows/Stripe IDs remain for historical orders.
+Object.assign(rows.find(p=>p.productId==='COM-REPORT-PROFILE-FULL'),{catalogVisible:false,checkoutBlockedReason:'PERSONAL_EVIDENCE_MEMBERSHIP_NOT_STANDALONE',commercialState:'LEGACY_HISTORY_ONLY'});
+for(const p of rows.filter(p=>['COM-READING-TAROT-FULL','COM-READING-ICHING-FULL'].includes(p.productId)))Object.assign(p,{bilingualOnly:false,languageIndependentPurchase:true,pricingVersion:'PERSONAL-EVIDENCE-READING-R1.2'});
 export const STRIPE_PRODUCT_REGISTRY = Object.freeze(rows.map(row => Object.freeze(row)));
 export function commerceProduct(id) {
   const product = STRIPE_PRODUCT_REGISTRY.find(row => row.productId === id);

@@ -42,7 +42,7 @@ export async function commerceApi(context,action){
         }
       }
       const setup=env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(p)&&!p.productId.includes('BUNDLE')?{methodCode:paidReportMethodForProduct(p.productId)?.methodCode||null,admitted:paidReportMethodForProduct(p.productId)?.p8Admitted===true}:null;
-      return {...p,paidReportSetup:setup,checkoutAvailable:!p.checkoutBlockedReason&&(!p.requiresBookPdfReadiness||env.PHIOS_BOOK_PDF_CHECKOUT_ENABLED==='true')&&commerceCheckoutAvailable(env)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:commerceEnvironment(env)==='QA'&&commerceCheckoutAvailable(env)&&continuityAuthority.refill.priceMode==='INLINE_ONE_TIME_PRICE_DATA'&&env.PHIOS_CONTINUITY_QUOTA_ENABLED==='true'}:{}),reportPresentationOptions,reportPurchaseState};
+      return {...p,paidReportSetup:setup,checkoutAvailable:!p.checkoutBlockedReason&&(!p.requiresBookPdfReadiness||env.PHIOS_BOOK_PDF_CHECKOUT_ENABLED==='true')&&commerceCheckoutAvailable(env)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:false,refillReviewRequired:'R12_MONTHLY_PROVIDER_CAP_RECONCILIATION'}:{}),reportPresentationOptions,reportPurchaseState};
     }),eligibleBundleProducts:standardBundleProducts()});
     const customerId=requireIdentity(context);
     if(action==='account') return json({success:true,...await commerceAccountProjection(env,customerId)});
@@ -87,15 +87,10 @@ export async function commerceApi(context,action){
     const reference=body.context?.readingId;
     if(body.context&&(Object.keys(body.context).some(k=>!['readingId','reportIntentId'].includes(k))||(reference!==undefined&&(typeof reference!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(reference)))||(body.context.reportIntentId!==undefined&&(typeof body.context.reportIntentId!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(body.context.reportIntentId))))) throw Object.assign(new Error('Invalid report reference.'),{status:422,code:'checkout_context_invalid'});
     const contextSnapshot=reference?{readingId:reference}:{};if(bookPdf)contextSnapshot.bookPdf=bookPdf;
-    if(body.purchaseKind!==undefined){
-      if(env.PHIOS_CONTINUITY_QUOTA_ENABLED!=='true'||commerceEnvironment(env)!=='QA')throw Object.assign(Error('CONTINUITY_REFILL_NOT_ACTIVATED'),{status:403});
-      if(body.purchaseKind!=='CONTINUITY_QUOTA_REFILL'||product.productId!=='COM-SUBSCRIPTION-MONTHLY')throw Object.assign(Error('CONTINUITY_REFILL_PRODUCT_REQUIRED'),{status:422});
-      const quota=await readContinuityQuota(env,customerId);
-      if(quota.subscriptionId!==body.subscriptionId||!quota.units.length)throw Object.assign(Error('CONTINUITY_REFILL_OWNED_PERIOD_REQUIRED'),{status:403});
-      if(!Number.isSafeInteger(quota.billingPeriodStart))throw Object.assign(Error('CONTINUITY_CURRENT_PAID_PERIOD_REQUIRED'),{status:403});
-      contextSnapshot.continuityRefill={subscriptionId:quota.subscriptionId,periodStart:quota.billingPeriodStart,periodEnd:quota.billingPeriodEnd};
-      product=continuityRefillProduct(product,contextSnapshot);
-    }else if(body.subscriptionId!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_KIND_REQUIRED'),{status:422});
+    // R1.2 leaves purchased refill units intact; new sales require reconciliation
+    // with the explicit account-period $3 cap. No paid refill can expand that cap.
+    if(body.purchaseKind!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_R12_COMMERCIAL_REVIEW_REQUIRED'),{code:'CONTINUITY_REFILL_R12_COMMERCIAL_REVIEW_REQUIRED',status:409});
+    if(body.subscriptionId!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_KIND_REQUIRED'),{status:422});
     if(isLanguageReport(product))contextSnapshot.reportPresentation=commerceReportQuote(product,body,selected);
     else if(body.reportLanguageMode||body.reportLocale)throw Object.assign(new Error('Report language is not applicable.'),{status:422,code:'REPORT_PRESENTATION_NOT_APPLICABLE'});
     if(env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(product)&&!product.productId.includes('BUNDLE')){const readiness=await requirePaidReportCheckout(context,{productId:product.productId,readinessId:body.context?.reportIntentId,presentation:contextSnapshot.reportPresentation});contextSnapshot.reportIntentId=readiness.readinessId;}

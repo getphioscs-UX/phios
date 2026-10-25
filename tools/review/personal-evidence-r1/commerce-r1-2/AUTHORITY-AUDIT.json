@@ -1,0 +1,142 @@
+{
+  "at": "2026-10-25T06:56:01.066Z",
+  "head": "883c41766072c7f8df3c83947ed9774906f8e35c",
+  "matrix": [
+    {
+      "feature": "Account middleware",
+      "status": "IMPLEMENTED",
+      "path": "functions/api/_middleware.js",
+      "evidence": "Real synthetic JWE through root/API middleware; not real IdP login"
+    },
+    {
+      "feature": "Profile / Personal Evidence routes",
+      "status": "IMPLEMENTED",
+      "path": "functions/account/profile-evidence-store.js",
+      "evidence": "Existing R1 writer and sources retained; local-only R1.2 scope"
+    },
+    {
+      "feature": "Standalone Profile sales",
+      "status": "LEGACY",
+      "path": "functions/pws/commercial/stripe-product-registry.js",
+      "evidence": "Future sales disabled; history retained; Stripe old IDs NOT_FOUND"
+    },
+    {
+      "feature": "Membership entitlement",
+      "status": "IMPLEMENTED",
+      "path": "functions/profile/personal-evidence-membership.js",
+      "evidence": "Actual existing active subscription / historical owned-report readers"
+    },
+    {
+      "feature": "Monthly shared budget",
+      "status": "IMPLEMENTED",
+      "path": "functions/personal-reading/continuity/membership-period-budget.js",
+      "evidence": "Existing ledger atomic reservations; billing anchor not calendar; local SQLite tested"
+    },
+    {
+      "feature": "Provider reserve / settlement",
+      "status": "IMPLEMENTED",
+      "path": "functions/personal-reading/continuity/continuity-credit-d1.js",
+      "evidence": "Actual owner lifecycle with mock usage; no real Provider call"
+    },
+    {
+      "feature": "Provider request references",
+      "status": "PARTIAL",
+      "path": "functions/personal-reading/continuity/membership-production-dispatcher.js",
+      "evidence": "References preserved/sanitized; no new actual provider runtime receipt"
+    },
+    {
+      "feature": "Membership real billing cycle",
+      "status": "BLOCKED",
+      "path": "functions/personal-reading/continuity/continuity-quota-d1.js",
+      "evidence": "Stripe listed zero subscriptions; cannot establish a real active account anchor"
+    },
+    {
+      "feature": "Legacy refill balance / sales",
+      "status": "PARTIAL",
+      "path": "functions/commerce/commerce-stripe-api.js",
+      "evidence": "Old balances readable/preserved; new refill commercial review required"
+    },
+    {
+      "feature": "Dossier source and language rendering",
+      "status": "IMPLEMENTED",
+      "path": "functions/profile/personal-evidence-dossier-r12.js",
+      "evidence": "Three local supported modes; untranslated private source remains original or affected single mode denied"
+    },
+    {
+      "feature": "Dossier save / reopen / private PDF",
+      "status": "IMPLEMENTED",
+      "path": "functions/account/local-private-pdf-artifact.js",
+      "evidence": "Existing encrypted artifacts + DAR grants; byte-identical redownload / expiry / revoke tested"
+    },
+    {
+      "feature": "Real account production closure",
+      "status": "BLOCKED",
+      "path": "functions/account/oidc-auth.js",
+      "evidence": "Synthetic identity acceptance only; production READ_ONLY/runtime not queried"
+    },
+    {
+      "feature": "Tarot native language consumer",
+      "status": "IMPLEMENTED",
+      "path": "functions/report-delivery/saved-reading-language-projection.js",
+      "evidence": "Actual current owner outputs for synthetic question, three languages, no new draw"
+    },
+    {
+      "feature": "I Ching native language consumer",
+      "status": "IMPLEMENTED",
+      "path": "functions/report-delivery/saved-reading-language-projection.js",
+      "evidence": "Exact original published-content/provenance match before approved counterpart; drift denied"
+    },
+    {
+      "feature": "Reading purchase ownership",
+      "status": "IMPLEMENTED",
+      "path": "functions/report-delivery/symbolic-language-export.js",
+      "evidence": "Exact readingId purchase, ownership and entitlement checks, no membership budget use"
+    },
+    {
+      "feature": "Reading price / cap",
+      "status": "IMPLEMENTED",
+      "path": "functions/pws/commercial/commerce-economics-policy.js",
+      "evidence": "RM19/USD1 Tarot, RM39/USD2 I Ching unchanged; live prices read-only verified"
+    },
+    {
+      "feature": "Production paid delivery admission",
+      "status": "BLOCKED",
+      "path": "functions/report-delivery/paid-report-method-registry.js",
+      "evidence": "Existing registry does not admit Personal Evidence/Tarot/I Ching paid release adapters"
+    },
+    {
+      "feature": "Saved-report library",
+      "status": "PARTIAL",
+      "path": "functions/account/account-reports-api.js",
+      "evidence": "Existing generic released-report owner retained; R1.2 draft list stays in Profile / reading source store"
+    },
+    {
+      "feature": "Visual slots",
+      "status": "IMPLEMENTED",
+      "path": "functions/profile/personal-evidence-dossier-r12.js",
+      "evidence": "15 pending redesign roles; no artwork recreation or R2 writes"
+    },
+    {
+      "feature": "Accepted new artwork",
+      "status": "MISSING",
+      "path": "functions/profile/personal-evidence-visual-assets.js",
+      "evidence": "Historical resolver retained; new 15 bytes / dimensions / language approval absent"
+    },
+    {
+      "feature": "Approved full free-text translations",
+      "status": "MISSING",
+      "path": "functions/report-delivery/output-language.js",
+      "evidence": "No paid fallback; only affected modes unavailable"
+    },
+    {
+      "feature": "Production deployment configuration",
+      "status": "PARTIAL",
+      "path": "wrangler.jsonc",
+      "evidence": "Source READ_ONLY/nodejs_compat verified; actual serving deployment unverified"
+    }
+  ],
+  "governance": "GOVERNANCE.md / content/registry/master-governance.json",
+  "changeClass": "EXPLICIT_CONTRACT_VERSION_UPGRADE",
+  "unrelatedWindows": "PRESERVED_NOT_STAGED",
+  "production": false
+}

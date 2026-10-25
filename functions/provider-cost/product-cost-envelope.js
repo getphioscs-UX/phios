@@ -1,4 +1,5 @@
 // Latest direct owner limits. Price implementation stays with Commerce's owner.
+import {membershipBudgetPeriod,membershipPeriodPredicate} from '../personal-reading/continuity/membership-period-budget.js';
 import {COMMERCE_ECONOMICS} from '../pws/commercial/commerce-economics-policy.js';
 export const PRODUCT_TOTAL_COST_USD=Object.freeze(Object.fromEntries(Object.values(COMMERCE_ECONOMICS).filter(p=>p.providerCapUsd!==null).map(p=>[p.productId,p.providerCapUsd])));
 const authority='DIRECT_OWNER_COMMERCIAL_AMENDMENT_2026-10-09_INCLUDING_FOUR_ASK';
@@ -31,6 +32,7 @@ export async function reserveProductCost(env,{ownerAccountId,envelopeId,requestI
  // collectively exceeding the one complete-product pool. Unknown usage stops it.
  const envelope=await db.prepare('SELECT product_id FROM provider_product_cost_envelopes WHERE envelope_id=? AND owner_account_id=?').bind(envelopeId,ownerAccountId).first();
  const continuity=envelope?.product_id==='COM-SUBSCRIPTION-MONTHLY';
+ const period=continuity?await membershipBudgetPeriod(env,ownerAccountId,clock):null;
  const inserted=await db.prepare(`INSERT OR IGNORE INTO provider_product_cost_entries
  (request_id,envelope_id,cost_class,context_id,reserved_micro_usd,state,cost_basis,payload_json,created_at)
  SELECT ?1,a.envelope_id,?4,?5,?6,'RESERVED','CONSERVATIVE_PRECALL_BOUND',?7,?8
@@ -42,9 +44,10 @@ export async function reserveProductCost(env,{ownerAccountId,envelopeId,requestI
  AND q.billing_period_start<=CAST(strftime('%s',?8) AS INTEGER) AND qp.customer_id=a.owner_account_id AND qo.customer_id=a.owner_account_id AND qp.purchase_state='purchased' AND qo.review_required=0 AND qo.environment=o.environment
  AND q.quota_unit_id=json_extract(?7,'$.quotaUnit') AND json_extract(?7,'$.billingPeriodEnd')=s.current_period_end
  AND COALESCE((SELECT SUM(COALESCE(x.measured_micro_usd,x.reserved_micro_usd)) FROM provider_product_cost_entries x WHERE x.envelope_id=a.envelope_id AND json_extract(x.payload_json,'$.quotaUnit')=q.quota_unit_id),0)+?6<=q.maximum_micro_usd)`:`EXISTS(SELECT 1 FROM commerce_purchases p JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=p.checkout_attempt_id JOIN digital_entitlements e ON e.purchase_id=p.purchase_id WHERE p.purchase_id=a.purchase_id AND p.purchase_state='purchased' AND o.customer_id=a.owner_account_id AND o.review_required=0 AND o.order_state IN ('PAID','FULFILLMENT_PENDING','FULFILLED') AND e.customer_id=a.owner_account_id AND e.product_id=a.product_id AND e.entitlement_status='active' AND (e.expires_at IS NULL OR e.expires_at>?8))`}
+ AND ${continuity?membershipPeriodPredicate({owner:'?3',start:'?9',end:'?10',bound:'?6'}):'(?9 IS NULL AND ?10 IS NULL)'}
  AND NOT EXISTS(SELECT 1 FROM provider_product_cost_entries WHERE envelope_id=?2 AND state='USAGE_UNKNOWN')
  AND COALESCE((SELECT SUM(COALESCE(measured_micro_usd,reserved_micro_usd)) FROM provider_product_cost_entries WHERE envelope_id=?2),0)+?6<=a.maximum_cost_micro_usd`)
- .bind(requestId,envelopeId,ownerAccountId,costClass,contextId,bound,json,new Date(clock()).toISOString()).run();
+ .bind(requestId,envelopeId,ownerAccountId,costClass,contextId,bound,json,new Date(clock()).toISOString(),period?.start??null,period?.end??null).run();
  const entry=await db.prepare('SELECT x.* FROM provider_product_cost_entries x JOIN provider_product_cost_envelopes a ON a.envelope_id=x.envelope_id WHERE x.request_id=? AND x.envelope_id=? AND a.owner_account_id=?').bind(requestId,envelopeId,ownerAccountId).first();
  if(!entry)fail('COMPLETE_PRODUCT_COST_LIMIT_OR_UNKNOWN_USAGE');
  if(entry.context_id!==contextId||entry.cost_class!==costClass||entry.reserved_micro_usd!==bound||entry.payload_json!==json)fail('COST_REQUEST_CONFLICT');

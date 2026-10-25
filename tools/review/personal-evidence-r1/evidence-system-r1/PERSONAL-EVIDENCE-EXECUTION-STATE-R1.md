@@ -13,3 +13,13 @@ URL: http://127.0.0.1:59836/perspectives/profile/?evidence=1&locale=zh-Hans (or 
 Resume: inspect VERIFIED-SOURCE/CHECKPOINT hashes and git diff first. Current running jobs, if any, must be checked before repeating; no paid work was started. Next engineering scope is controlled destination adapters for Ask/Financial/World/Configuration, independent source-reader proofs, historical report UI/retention cleanup and real account middleware E2E. Do not interpret those as requiring paid model authorization; paid narrative remains independently disabled. Keep later changes in other windows.
 
 Commit 0; push 0; deploy 0; paid Provider 0/USD0; production DB/D1 writes 0; R2 writes 0; Stripe mutations/payments/refunds 0.
+
+
+## Receiver closure successor — 2026-10-25
+
+Current continuation: [receiver-closure/EXECUTION-STATE.md](receiver-closure/EXECUTION-STATE.md). Actual source digest: 73b01b198019658214f34960304100fec9027b33dfdd843359ca99ac6778ca25. Current preview port 59838. Existing historical material above is retained.
+
+
+## Commerce R1.2 successor
+
+[Current exact candidate and blockers](../commerce-r1-2/PERSONAL-EVIDENCE-EXECUTION-STATE-R1-2.md). Local only; previous acceptance and receipts above retained.

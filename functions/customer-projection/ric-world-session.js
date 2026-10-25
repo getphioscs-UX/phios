@@ -1,4 +1,13 @@
 // Gate R3-L1 opt-in local consumer. No route, storage, permission issuer or provider.
+export function receivePersonalEvidenceWorld({references,evidence,locale='en'}){
+ const zh=locale==='zh-Hans',observations=evidence?.observations||[];
+ return {surface:'WORLD',received:true,sourceReferences:references,
+  text:zh?'个人经历与公共资料已分别载入。公共统计可以提供环境背景，不能推断个人就业、贷款结果或经历的真实性。':'Personal accounts and public evidence have been loaded separately. Public statistics provide context, not individual employment, loan outcomes or verification of your accounts.',
+  personalAccounts:references.map(r=>({action:r.action,period:r.observationPeriod,unknown:r.unknowns})),
+  publicEvidence:evidence||null,observations,scope:evidence?{country:evidence.country,period:evidence.period,series:evidence.series}:null,
+  nextStep:zh?'先核对地区、观察期与指标定义，再判断它是否与当前问题有关。':'Check geography, observation period and metric definition before deciding relevance to your question.',
+  sourceState:evidence?.state||'WORLD_DATA_NOT_SELECTED',providerCalls:0,personalImpactEstablished:false,causality:false,persisted:false};
+}
 import {worldQuestionPlan,queryWorldEvidence,composeWorldAnswer} from '../../assets/js/pages/civilization-atlas/world-reading-context.js';
 import {queryWorldExplanation} from '../../assets/js/pages/civilization-atlas/world-customer-answer.js';
 import {projectKnowledgeGroundingForHandoff} from '../_lib/knowledge-reality-handoff.js';

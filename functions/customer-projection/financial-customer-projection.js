@@ -1,4 +1,15 @@
 import {projectFinancialNavigation} from './financial-navigation-projection.js';
+
+export function receivePersonalEvidenceFinancial({references,summary=null,locale='en'}){
+ const zh=locale==='zh-Hans';
+ return {surface:'FINANCIAL',received:true,sourceReferences:references,
+  title:zh?'财务行为与实际资源分别核对':'Review financial behaviour separately from actual resources',
+  text:zh?'经历中的组织、预算或管理活动不等于现金流，也不用于信用审批。':'Organisation, budgeting or management activities in your accounts are not cash flow and are not used for credit approval.',
+  behaviours:references.map(r=>({action:r.action,unknown:r.unknowns,verified:false})),
+  financialSnapshot:summary?{savedDraftRef:summary.savedDraftRef,calculations:summary.view?.calculations||[],unknowns:summary.view?.unknowns||[],exactSavedVersion:true}:null,
+  nextStep:zh?(summary?'请比较所选版本的实际收支与自述的预算执行情况。':'如需比较实际资源，请单独选择一个已保存财务版本并授权读取。'):(summary?'Compare the selected revision’s actual income and expenses with your account of budgeting.':'To compare resources, separately select and authorise a saved financial revision.'),
+  providerCalls:0,financialLedgerMutated:false,creditOrInsuranceDecision:false,sourceStatus:summary?'SAVED_REVISION_READ':'NO_FINANCIAL_REVISION_SELECTED'};
+}
 import {CX_PROJECTION_VERSION,boundary,clean,deepFreeze,finite,list,localeOf,object,safeUrl,sourceLineage,text} from './projection-common.js';
 const metric=(metrics,code)=>{const v=metrics?.[code];if(v&&typeof v==='object'&&Number.isFinite(v.min)&&Number.isFinite(v.max)&&v.min<=v.max)return {min:v.min,max:v.max};return finite(v)};
 const evidenceLabel=state=>{const s=clean(state).toUpperCase();if(s.includes('VERIFIED'))return 'VERIFIED';if(s.includes('ASSUM'))return 'ASSUMED';if(s.includes('OUTDATED'))return 'OUTDATED';if(s.includes('MISSING'))return 'MISSING';if(s)return 'REPORTED';return 'MISSING'};

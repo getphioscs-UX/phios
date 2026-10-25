@@ -39,7 +39,7 @@ function init(seed={}){
   $('[data-pe-overview]').textContent=t(`${records.length} saved accounts. Each is customer supplied, not independently verified.`,`${records.length} 条已保存记录；均为用户提供，未独立核实。`);
   $('[data-pe-records]').innerHTML=records.map(r=>`<article><label><input type="checkbox" data-select="${esc(r.recordId)}">${t('Select for comparison or handoff','选取用于比较或交接')}</label><h3>${esc(r.title)}</h3><p>${esc(r.action)}</p><p>${esc(r.outcome||t('Outcome not supplied','未提供成果'))}</p><small>${t('Customer supplied · not independently verified','用户提供 · 未独立核实')} · ${t('Version','版本')} ${r.version}</small><p>${t('Candidate areas: ','待检验方向：')}${r.capabilities.map(k=>t(...capabilities[k])).join('、')||t('None selected','未选择')}</p><p>${t('Still unknown: ','仍待核实：')}${esc(r.unknowns)}</p><button type="button" data-edit="${esc(r.recordId)}">${t('Open / correct','打开／修正')}</button><button type="button" data-revoke="${esc(r.recordId)}">${t('Revoke future access','撤销未来读取')}</button></article>`).join('')||`<p>${t('No experiences saved yet. Add one example; there is no required questionnaire.','尚无已保存经历。可先写一个例子，无需先做问卷。')}</p>`;
  }
- host.addEventListener('change',e=>{if(e.target.matches('[data-select]')){selected=records.filter(r=>$(`[data-select="${r.recordId}"]`)?.checked).map(r=>({id:r.recordId,version:r.version}));$('[data-pe-package]').replaceChildren();$('[data-pe-consent]').checked=false;}});
+ host.addEventListener('change',e=>{if(e.target.matches('[data-select]')){selected=records.filter(r=>$(`[data-select="${r.recordId}"]`)?.checked).map(r=>({id:r.recordId,version:r.version}));withdraw();}});
  $('[data-pe-load]').onclick=()=>load().then(()=>say(t('Saved records reopened.','已重开保存记录。'))).catch(errors);
  $('[data-pe-assess]').onclick=()=>{assessmentDetails.open=true;document.querySelector('[data-prf-mode="QUICK_PROFILE"]')?.scrollIntoView({block:'center'});};
  $('[data-pe-cancel]').onclick=clear;
@@ -50,10 +50,24 @@ function init(seed={}){
   if(report)openReport(report);
  }catch(e){errors(e);}});
  $('[data-pe-compare]').onclick=async()=>{try{const b=await request({action:'compare',selected,...consent()});$('[data-pe-comparison]').textContent=t(...states[b.comparison.state]);}catch(e){errors(e);}};
- let timeout;
- const withdraw=()=>{clearTimeout(timeout);$('[data-pe-package]').replaceChildren();$('[data-pe-consent]').checked=false;};
+ let timeout,handoffVersion=0;
+ const withdraw=()=>{handoffVersion++;clearTimeout(timeout);$('[data-pe-package]').replaceChildren();$('[data-pe-consent]').checked=false;};
  $('[data-pe-withdraw]').onclick=()=>{withdraw();say(t('This selection was withdrawn. No target was saved.','已撤销本次选择，未保存到目标功能。'));};
- $('[data-pe-handoff]').onclick=async()=>{try{const b=await request({action:'handoff',selected,consent:$('[data-pe-consent]').checked,target:$('[data-pe-target]').value,purpose:$('[data-pe-question]').value,purposeCode:'RUNTIME_CONTINUITY',expiresAt:new Date(Date.now()+600000-1000).toISOString()});$('[data-pe-package]').innerHTML=`<h3>${t('Selected evidence is ready to review','所选证据可供审阅')}</h3><p>${esc(b.package.purpose)}</p>${b.package.references.map(r=>`<p>${esc(r.action)} · ${t('Version','版本')} ${r.version}</p>`).join('')}<p>${t('Reference package only: not yet consumed or saved by the destination. No automatic model call.','仅为引用包：目标功能尚未接收或保存，不自动调用模型。')}</p>`;clearTimeout(timeout);timeout=setTimeout(withdraw,Math.max(0,Date.parse(b.package.expiresAt)-Date.now()));}catch(e){withdraw();errors(e);}};
+ $('[data-pe-handoff]').onclick=async()=>{try{
+  const generation=++handoffVersion,selection=selected.map(ref=>({...ref}));
+  const target=$('[data-pe-target]').value,purpose=$('[data-pe-question]').value,expiresAt=new Date(Date.now()+599000).toISOString();
+  const b=await request({action:'handoff',selected:selection,consent:$('[data-pe-consent]').checked,target,purpose,purposeCode:'RUNTIME_CONTINUITY',expiresAt});
+  if(generation!==handoffVersion)return;
+  let received=null;
+  if(target==='NAVIGATION'){
+   const response=await fetch('/api/customer-my-reality',{method:'POST',headers:{'content-type':'application/json'},cache:'no-store',body:JSON.stringify({consent:true,locale:zh?'zh-Hans':'en',question:purpose,profileEvidenceSelection:{selected:selection,expiresAt}})});
+   const body=await response.json();if(!response.ok)throw {code:body.error||'NAVIGATION_UNAVAILABLE',status:response.status};
+   received=body.workspace?.profileEvidenceContext;if(received?.receiverState!=='CONSUMED_FOR_THIS_REQUEST')throw {code:'NAVIGATION_NOT_CONSUMED',status:409};
+  }
+  if(generation!==handoffVersion)return;
+  $('[data-pe-package]').innerHTML=`<h3>${received?t('Reality Navigation received this selection','现实导航已接收本次选择'):t('Selected evidence is ready to review','所选证据可供审阅')}</h3><p>${esc(b.package.purpose)}</p>${b.package.references.map(r=>`<p>${esc(r.action)} · ${t('Version','版本')} ${r.version}</p><p>${esc(r.claimDirection)} · ${esc(r.outcome)} · ${esc(r.unknowns)}</p>`).join('')}<p>${received?t('Used for this request only. No target save, automatic direction, verified ability or model call. Keep counterexamples and review actual conditions next.','仅用于本次请求。未保存到目标功能，不自动选择方向、不认证能力、不调用模型。下一步保留反例，复核实际条件。'):t('Reference package only: not yet consumed or saved by the destination. No automatic model call.','仅为引用包：目标功能尚未接收或保存，不自动调用模型。')}</p>`;
+  clearTimeout(timeout);timeout=setTimeout(withdraw,Math.max(0,Date.parse(b.package.expiresAt)-Date.now()));
+ }catch(e){withdraw();errors(e);}};
  $('[data-pe-question]').oninput=withdraw;$('[data-pe-target]').onchange=withdraw;
  async function openReport(id){const url=endpoint+'&report='+encodeURIComponent(id),r=await fetch(url,{cache:'no-store'});if(!r.ok)throw {status:r.status};reportUrl=url;$('[data-pe-frame]').src=url;$('[data-pe-dialog]').showModal();}
  $('[data-pe-report]').onclick=async()=>{try{const b=await request({action:'report',selected,...consent(),retentionConsent:$('[data-pe-report-consent]').checked});await openReport(b.reportId);await load();}catch(e){errors(e);}};

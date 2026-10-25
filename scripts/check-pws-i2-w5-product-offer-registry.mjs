@@ -3,6 +3,7 @@ import {isProductionClosureReviewEvidence,assertProductionClosureEvidenceQuarant
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import {execFileSync} from 'node:child_process';
 import { DatabaseSync } from 'node:sqlite';
 import {
   createCapabilityCredentialRegistry
@@ -171,14 +172,26 @@ await assert.rejects(
 );
 
 const htmlFiles = [];
+// A nested registered worktree has its own source owner and runs its own checks.
+// Exclude only exact Git-reported checkout roots, never arbitrary HTML paths.
+const currentCheckout = path.resolve(process.cwd());
+const otherCheckouts = new Set(execFileSync('git', ['worktree', 'list', '--porcelain', '-z'], {
+  cwd: currentCheckout, encoding: 'utf8'
+}).split('\0').filter(field => field.startsWith('worktree '))
+  .map(field => path.resolve(field.slice('worktree '.length)))
+  .filter(directory => directory !== currentCheckout));
 const collectHtml = async directory => {
   for (const entry of await fs.readdir(directory, { withFileTypes: true })) {
     if (['node_modules','.git','.wrangler','.tmp','.cache'].includes(entry.name) || entry.name.startsWith('.pages-output')) continue;
     const target = path.join(directory, entry.name);
+    if (entry.isDirectory() && otherCheckouts.has(path.resolve(target))) continue;
     const relative = path.relative(process.cwd(), target).replaceAll(path.sep, '/');
     // The repository-root tmp directory holds isolated QA worktrees and
     // release snapshots. Their duplicated HTML is not a customer source owner.
     if (entry.isDirectory() && relative === 'tmp') continue;
+    // Named review artifacts (including MASTER-before snapshots) are not
+    // customer source pages; Pages excludes the enclosing tools tree.
+    if (entry.isDirectory() && relative === 'tools/review') continue;
     // Browser QA snapshots duplicate the source tree; they are generated review
     // evidence, not an independent customer HTML owner.
     if (entry.isDirectory() && /^tools\/review\/[^/]+\/build-snapshot-\d+$/.test(relative)) continue;

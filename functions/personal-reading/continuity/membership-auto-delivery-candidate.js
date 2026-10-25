@@ -1,5 +1,5 @@
 import {isProductionKnowledgeCapability} from './membership-production-gate.js';
-import {prepareShortDeliveryRequest,meterShortDeliveryUsage,shortDeliveryMaximum} from './membership-short-delivery-qa.js';
+import {prepareShortDeliveryRequest,meterShortDeliveryUsage,shortDeliveryMaximum,providerRequestReference} from './membership-short-delivery-qa.js';
 import {validateShortFragmentAnswer} from './membership-short-fragment-contract.js';
 import {inspectShortAnswerRisks} from './membership-source-coverage.js';
 import {reserveCreditTask,claimCreditTask,finishCreditTask,readCreditTask} from './continuity-credit-d1.js';
@@ -55,7 +55,7 @@ export async function runAutomaticDeliveryCandidate(context,input,{capability,pr
  context.env.RUNTIME_DB.prepare("UPDATE continuity_ask_allocations SET charged_micro_usd=0 WHERE task_id=?1 AND EXISTS(SELECT 1 FROM continuity_ask_tasks WHERE task_id=?1 AND owner_account_id=?2 AND state='RESERVED')").bind(taskId,owner),
  context.env.RUNTIME_DB.prepare("UPDATE continuity_ask_tasks SET state='FAILED',customer_charge_micro_usd=0 WHERE task_id=?1 AND owner_account_id=?2 AND state='RESERVED'").bind(taskId,owner)
  ]);throw error;}let nano=0,known=true,calls=0;const receipts=[];
- const call=async(body,bound)=>{calls++;known=false;const response=await invoke(body,{maximumMicroUSD:bound,taskId,callIndex:calls});const meter=meterShortDeliveryUsage(body.model,response.usage);nano+=meter.modelCostNanoUSD;known=true;receipts.push(meter);if(meter.modelCostMicroUSD>bound||response.status!=='completed')throw Error('INCOMPLETE_OR_OVER_BUDGET_NO_RETRY');return JSON.parse(response.text);};
+ const call=async(body,bound)=>{calls++;known=false;const response=await invoke(body,{maximumMicroUSD:bound,taskId,callIndex:calls});const meter=meterShortDeliveryUsage(body.model,response.usage);nano+=meter.modelCostNanoUSD;known=true;receipts.push({...meter,providerRequestId:providerRequestReference(response.providerRequestId),operationType:calls===1?'ANSWER':'REVIEW'});if(meter.modelCostMicroUSD>bound||response.status!=='completed')throw Error('INCOMPLETE_OR_OVER_BUDGET_NO_RETRY');return JSON.parse(response.text);};
  try{const answer=await call(r.body,r.maximumMicroUSD);await validateShortFragmentAnswer(answer,r.serverBinding,{...r.serverBinding,locale:pack.locale});
  if(new TextEncoder().encode(JSON.stringify(answer)).length>REVIEW_TASK_LIMITS.maxAnswerBytes)throw Error('ANSWER_EXCEEDS_REVIEW_ADMISSION');
  const reviewBody=await prepareAutomaticReview(answer,pack,r.serverBinding);if(new TextEncoder().encode(JSON.stringify(reviewBody)).length>reviewInputByteLimit||shortDeliveryMaximum(reviewBody)>reviewMaximum)throw Error('REVIEW_INPUT_EXCEEDS_RESERVE');

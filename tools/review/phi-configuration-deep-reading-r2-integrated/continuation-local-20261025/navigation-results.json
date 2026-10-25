@@ -1,0 +1,23 @@
+{
+  "status": "PASS_LOCAL_SESSION_ONLY",
+  "checks": [
+    "Profile→actual My Reality receiver; counterexample retained; no target persistence or inferred direction",
+    "cross-account denied",
+    "no consent denied",
+    "cross origin denied",
+    "expired denied",
+    "explicit ECR checkpoint selection resolved by same-account owner; opposition retained",
+    "revoked ECR checkpoint excluded from future contexts",
+    "stale Profile version rejected",
+    "revoked Profile source blocked on next consumption"
+  ],
+  "providerCalls": 0,
+  "persistedByNavigation": false,
+  "historicalReopen": {
+    "status": "BLOCKED",
+    "requirement": "ECR-R2-24",
+    "reason": "Existing account dispatcher has no admitted ECR reopen adapter. Synthetic stored metadata does not create historical customer delivery.",
+    "code": "METHOD_DELIVERY_ADAPTER_NOT_ADMITTED",
+    "source": "functions/account/method-report-delivery.js → functions/report-delivery/paid-report-method-registry.js"
+  }
+}

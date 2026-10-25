@@ -1,3 +1,4 @@
+import {membershipBudgetPeriod,membershipPeriodPredicate,readMembershipPeriodBudget} from './membership-period-budget.js';
 import {activeContinuitySubscription} from './continuity-quota-d1.js';
 import {commerceEnvironment} from '../../commerce/commerce-environment.js';
 import {readZeroCallOutcome} from './membership-zero-call-outcome.js';
@@ -14,7 +15,8 @@ export async function readCreditBalance(env,ownerAccountId,clock=Date.now){
  const rows=(await env.RUNTIME_DB.prepare(AVAILABLE_CREDIT_SQL+' ORDER BY q.created_at,q.quota_unit_id').bind(ownerAccountId,commerceEnvironment(env),Math.floor(clock()/1000)).all()).results;
  if(rows.some(r=>r.available<0))fail('CREDIT_RECONCILIATION_REQUIRED');
  const micro=rows.reduce((n,r)=>n+r.available,0);integerCost(micro);let active=true;try{await activeContinuitySubscription(env,ownerAccountId,null,clock);}catch(error){if(error.code!=='CONTINUITY_ACTIVE_SUBSCRIPTION_REQUIRED')throw error;active=false;}
- return {availableMicroUSD:micro,credits:formatCredits(micro),active,modelCallsAllowed:active,units:rows};
+ let monthlyBudget=null;if(active){try{monthlyBudget=await readMembershipPeriodBudget(env,ownerAccountId,clock);}catch(error){if(!['MEMBERSHIP_VERIFIED_BILLING_PERIOD_REQUIRED','MEMBERSHIP_OVERLAPPING_PERIODS_REQUIRE_RECONCILIATION'].includes(error.code))throw error;monthlyBudget={state:'UNVERIFIED',maximumMicroUSD:3000000,remainingMicroUSD:0,reconciliationRequired:true,reasonCode:error.code};}}
+ return {availableMicroUSD:micro,credits:formatCredits(micro),active,monthlyBudget,executionAvailableMicroUSD:active&&!monthlyBudget.reconciliationRequired?Math.min(micro,monthlyBudget.remainingMicroUSD):0,modelCallsAllowed:active&&!monthlyBudget.reconciliationRequired&&monthlyBudget.remainingMicroUSD>0,units:rows};
 }
 export async function reserveCreditTask(env,{ownerAccountId,taskId,requestDigest,contextDigest,mode,depth,...budget},clock=Date.now){
  if(taskId?.startsWith('ZERO-'))fail('ZERO_TASK_NAMESPACE_RESERVED');
@@ -22,6 +24,7 @@ export async function reserveCreditTask(env,{ownerAccountId,taskId,requestDigest
  const db=env.RUNTIME_DB,old=await db.prepare('SELECT * FROM continuity_ask_tasks WHERE task_id=?').bind(taskId).first();
  if(old){if(old.owner_account_id!==ownerAccountId||old.request_digest!==requestDigest||old.context_digest!==contextDigest||old.mode!==mode||old.depth!==depth||old.reserved_micro_usd!==maximum)fail('TASK_IDENTITY_CONFLICT');return {task:old,newReservation:false};}
  await activeContinuitySubscription(env,ownerAccountId,null,clock);
+ const period=await membershipBudgetPeriod(env,ownerAccountId,clock);
  const now=Math.floor(clock()/1000),stamp=new Date(clock()).toISOString(),environment=commerceEnvironment(env),token=crypto.randomUUID();
  const inserted=await db.batch([
  db.prepare(`INSERT OR IGNORE INTO continuity_ask_tasks(task_id,owner_account_id,request_digest,context_digest,reservation_token,mode,depth,reserved_micro_usd,state,created_at)
@@ -29,7 +32,7 @@ export async function reserveCreditTask(env,{ownerAccountId,taskId,requestDigest
  EXISTS(SELECT 1 FROM commerce_subscriptions s JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=s.order_id WHERE s.customer_id=?1 AND o.customer_id=?1 AND o.environment=?2 AND o.product_id='COM-SUBSCRIPTION-MONTHLY' AND o.review_required=0 AND s.subscription_status IN ('ACTIVE','CANCEL_AT_PERIOD_END') AND s.paid_until>?3 AND s.current_period_end>?3)
  AND NOT EXISTS(SELECT 1 FROM provider_product_cost_entries x JOIN provider_product_cost_envelopes a ON a.envelope_id=x.envelope_id WHERE a.owner_account_id=?1 AND x.state='USAGE_UNKNOWN')
  AND NOT EXISTS(SELECT 1 FROM (${AVAILABLE_CREDIT_SQL}) WHERE available<0)
- AND (SELECT COALESCE(SUM(MAX(0,available)),0) FROM (${AVAILABLE_CREDIT_SQL}))>=?9`).bind(ownerAccountId,environment,now,taskId,requestDigest,contextDigest,mode,depth,maximum,stamp,token),
+ AND (SELECT COALESCE(SUM(MAX(0,available)),0) FROM (${AVAILABLE_CREDIT_SQL}))>=?9 AND ${membershipPeriodPredicate({owner:'?1',start:'?12',end:'?13',bound:'?9'})}`).bind(ownerAccountId,environment,now,taskId,requestDigest,contextDigest,mode,depth,maximum,stamp,token,period.start,period.end),
  db.prepare(`INSERT OR IGNORE INTO continuity_ask_allocations(task_id,quota_unit_id,reserved_micro_usd)
  WITH balances AS (${AVAILABLE_CREDIT_SQL}), ordered AS(SELECT *,COALESCE(SUM(MAX(0,available)) OVER(ORDER BY created_at,quota_unit_id ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING),0) AS prior FROM balances)
  SELECT ?4,quota_unit_id,MIN(available,?5-prior) FROM ordered WHERE available>0 AND prior<?5 AND EXISTS(SELECT 1 FROM continuity_ask_tasks WHERE task_id=?4 AND owner_account_id=?1 AND reservation_token=?6 AND state='RESERVED')`).bind(ownerAccountId,environment,now,taskId,maximum,token)
@@ -40,8 +43,8 @@ export async function reserveCreditTask(env,{ownerAccountId,taskId,requestDigest
  return {task,newReservation:inserted[0].meta?.changes===1};
 }
 export async function claimCreditTask(env,{ownerAccountId,taskId},clock=Date.now){
- await activeContinuitySubscription(env,ownerAccountId,null,clock);
- const result=await env.RUNTIME_DB.prepare(`UPDATE continuity_ask_tasks SET state='RUNNING' WHERE task_id=?1 AND owner_account_id=?2 AND state='RESERVED' AND NOT EXISTS(SELECT 1 FROM continuity_ask_tasks t WHERE t.owner_account_id=?2 AND t.state='RUNNING') AND EXISTS(SELECT 1 FROM commerce_subscriptions s JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=s.order_id WHERE s.customer_id=?2 AND o.customer_id=?2 AND o.environment=?3 AND o.product_id='COM-SUBSCRIPTION-MONTHLY' AND o.review_required=0 AND s.subscription_status IN ('ACTIVE','CANCEL_AT_PERIOD_END') AND s.paid_until>?4 AND s.current_period_end>?4)`).bind(taskId,ownerAccountId,commerceEnvironment(env),Math.floor(clock()/1000)).run();if(result.meta?.changes!==1)fail('TASK_ALREADY_EXECUTING_OR_FINISHED');
+ const period=await membershipBudgetPeriod(env,ownerAccountId,clock);
+ const result=await env.RUNTIME_DB.prepare(`UPDATE continuity_ask_tasks SET state='RUNNING' WHERE task_id=?1 AND owner_account_id=?2 AND state='RESERVED' AND created_at>=?5 AND created_at<?6 AND NOT EXISTS(SELECT 1 FROM continuity_ask_tasks t WHERE t.owner_account_id=?2 AND t.state='RUNNING') AND EXISTS(SELECT 1 FROM commerce_subscriptions s JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=s.order_id WHERE s.customer_id=?2 AND o.customer_id=?2 AND o.environment=?3 AND o.product_id='COM-SUBSCRIPTION-MONTHLY' AND o.review_required=0 AND s.subscription_status IN ('ACTIVE','CANCEL_AT_PERIOD_END') AND s.paid_until>?4 AND s.current_period_end>?4)`).bind(taskId,ownerAccountId,commerceEnvironment(env),Math.floor(clock()/1000),period.start,period.end).run();if(result.meta?.changes!==1)fail('TASK_ALREADY_EXECUTING_OR_FINISHED');
 }
 export async function finishCreditTask(env,{ownerAccountId,taskId,delivered,actualMicroUSD,answer=null,platformEntry,completionOutcome=null},clock=Date.now){
  // Unknown cost preserves platform liability; no customer delivery releases customer credits.
