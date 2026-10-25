@@ -195,6 +195,9 @@ const admittedBookVii = await loadBookViiPublishedAdmission(async rel => {
   return fs.existsSync(source) ? JSON.parse(fs.readFileSync(source, 'utf8')) : null;
 });
 const publicationFiles = new Set(tracked.stdout.split('\0').filter(Boolean));
+// ECR Deep Reading R2 public exploration only. Never include private review
+// reports, synthetic full-reading bodies, checkpoints, or SQLite evidence.
+for(const file of ['assets/customer-ui/js/surfaces/ecr-deep-reading-r2.js','assets/customer-ui/surfaces/ecr-deep-reading-r2.css','assets/customer-ui/media/ecr-deep-r2/public-explorer.json'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
 // Customer Entry R1: only these two public discovery assets may join an uncommitted local build.
 // The existing publication predicate still filters every entry; no reviews or private sources are added.
 for(const file of ['assets/js/customer-entry-topic-map.js','assets/customer-ui/surfaces/customer-entry-r1.css'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);

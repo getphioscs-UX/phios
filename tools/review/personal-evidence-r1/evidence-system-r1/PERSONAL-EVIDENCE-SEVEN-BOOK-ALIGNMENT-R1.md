@@ -1,0 +1,3 @@
+# Seven-book alignment
+
+See [exact identity matrix](SEVEN-BOOK-ALIGNMENT.json). I–III match both successor registries; IV–VII use the eight-volume successor identities. Legacy base registry still has five-volume titles. No silent title change. The supplied high-level roles are owner-provided positioning, not textual or scientific proof. No chapter, page, quotation, private manuscript, public retrieval permission or psychometric validity is inferred. Paragraph-level theory citations remain SOURCE_UNVERIFIED and are withheld from the customer dossier. Book VIII Navigation remains a separate owner, preserved.

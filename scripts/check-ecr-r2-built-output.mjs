@@ -1,0 +1,7 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';
+const out='tools/review/phi-configuration-deep-reading-r2-integrated',files=['perspectives/phi-configuration/index.html','assets/customer-ui/js/surfaces/ecr-deep-reading-r2.js','assets/customer-ui/surfaces/ecr-deep-reading-r2.css','assets/customer-ui/media/ecr-deep-r2/public-explorer.json'];
+const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');const comparisons=files.map(path=>({path,sourceSha256:hash(path),builtSha256:hash(`.pages-output/${path}`)}));
+for(const c of comparisons)assert.equal(c.sourceSha256,c.builtSha256,c.path);
+assert(!fs.existsSync(`.pages-output/${out}`));assert(!fs.existsSync('.pages-output/content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html'));
+const log=fs.readFileSync(`${out}/pages-build-final.log`,'utf8');assert(log.includes('Compiled Worker successfully'));assert(log.includes('PASS Cloudflare Pages build boundary'));
+fs.writeFileSync(`${out}/build-receipt.json`,JSON.stringify({status:'PASS_LOCAL_BUILD_SCOPED',comparisons,workerSha256:hash('.pages-output/_worker.js'),privateReviewExcluded:true,buildCommand:'node scripts/build-cloudflare-pages.mjs',exitCode:0,deployment:false,log:'pages-build-final.log'},null,2));console.log('PASS source/built identity for four ECR entry assets; private review excluded; actual Worker compiled.');

@@ -1,0 +1,74 @@
+[
+  {
+    "command": "node --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-profile-prf-w0-w6.mjs",
+    "exitCode": 0,
+    "status": "PASS_LOCAL",
+    "stdout": "✓ PRF-W0 source-class contract + A0 authority reconciliation passed.\n✓ PRF-W1 external Profile import preserves provider identity and explicit customer provenance.\n✓ PRF-W2 provider capability registry fails closed on testing, scoring and relationship comparison.\n✓ PRF-W3 Self-Assessment v2: 6 domains × 5 facets, bilingual and explicitly non-diagnostic.\n✓ PRF-W4 scoring requires explicit/sensitive consent and produces bounded self-report indices — no quotient or diagnosis.\n✓ PRF-W5 reasoning-task contract is separate, raw-only and closed until an original/admitted production task bank exists.\n✓ PRF-W6 canonical ProfileSignalEnvelope passed: 11 fixture signals preserve source class + deterministic lineage.\n✓ PRF-W0–W6 Profile foundation machine gate passed. Customer publication remains closed until PRF-W12.\n",
+    "stderr": "",
+    "error": null
+  },
+  {
+    "command": "node --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-profile-prf-w10a-w10f.mjs",
+    "exitCode": 0,
+    "status": "PASS_LOCAL",
+    "stdout": "✓ PRF-W10A academic status model passed: availability, norming and scoring provenance remain orthogonal.\n✓ PRF-W10B IPIP passed: 50 + 120 item banks, bilingual candidate, keyed scoring, no invented percentile or diagnosis.\n✓ PRF-W10C original reasoning bank passed: 25 original items, five families/tier coverage, raw performance renderer only.\n✓ PRF-W10D O*NET adapter passed: v2 X-API-Key, 30/60 forms, external RIASEC scoring, attribution and career bridge boundaries.\n✓ PRF-W10E OECD/INFE-adapted financial capability passed: CC BY admission, bilingual adaptation, separated knowledge/self-report scoring, no official OECD-score claim.\n✓ PRF-W10F unified ProfileSignalEnvelope integration passed: 21 signals, source classes preserved, no master-score flattening.\n✓ PRF-W10A–W10F academic bridge full-activation tranche passed; customer cutover remains closed pending PRF-W11/W12.\n",
+    "stderr": "",
+    "error": null
+  },
+  {
+    "command": "node --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-profile-customer-full-production.mjs",
+    "exitCode": 0,
+    "status": "PASS_LOCAL",
+    "stdout": "✓ Profile customer full-production campaign passed: 7/7 customer modes, 8 governed runtime result variants (including both IPIP forms).\n  Quick/Full self-assessment, reasoning, external import, IPIP 50/120, O*NET RIASEC and Financial Capability all produce source-preserving Profile views.\n",
+    "stderr": "",
+    "error": null
+  },
+  {
+    "command": "node --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-profile-personal-evidence-prd-w6-w8.mjs",
+    "exitCode": 0,
+    "status": "PASS_LOCAL",
+    "stdout": "PASS PRD-W6/W7/W8: Personal Evidence dossier publication projection is active with RR admission correctly gated; explicit selected-evidence Personal Reality handoff is implemented; Relationship/Career/Financial reference handoffs are bounded and non-mutating.\n",
+    "stderr": "",
+    "error": null
+  },
+  {
+    "command": "node --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-profile-personal-evidence-prd-w10.mjs",
+    "exitCode": 0,
+    "status": "PASS_LOCAL",
+    "stdout": "PRD_W10_CUSTOMER_CUTOVER = PASS (six offline modes × two locales; O*NET fail-closed; human browser gate pending)\n",
+    "stderr": "",
+    "error": null
+  },
+  {
+    "command": "node --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-profile-personal-evidence-prd-w9.mjs",
+    "exitCode": 1,
+    "status": "BASELINE_FAILURE",
+    "stdout": "",
+    "stderr": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\r\n+ actual - expected\r\n\r\n+ 'SINGLE_METHOD'\r\n- 'LEGACY_COMPATIBILITY'\r\n\r\n    at file:///C:/phios/scripts/check-profile-personal-evidence-prd-w9.mjs:5:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\r\n    at async node:internal/modules/esm/loader:643:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 'SINGLE_METHOD',\r\n  expected: 'LEGACY_COMPATIBILITY',\r\n  operator: 'strictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n",
+    "error": null
+  },
+  {
+    "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/personal-evidence-r1/evidence-system-r1/local-test.mjs",
+    "exitCode": 0,
+    "status": "PASS_LOCAL",
+    "stdout": "PASS 73\n",
+    "stderr": "",
+    "error": null
+  },
+  {
+    "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/personal-evidence-r1/evidence-system-r1/restart.mjs",
+    "exitCode": 0,
+    "status": "PASS_LOCAL",
+    "stdout": "PASS cross-process reopen / revoke\n",
+    "stderr": "",
+    "error": null
+  },
+  {
+    "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/personal-evidence-r1/evidence-system-r1/browser.mjs",
+    "exitCode": 1,
+    "status": "FAIL",
+    "stdout": "",
+    "stderr": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nlocator.fill: Error: Element is not an <input>, <textarea> or [contenteditable] element\r\nCall log:\r\n\u001b[2m  - waiting for locator('[data-prf-form] [name=participantRef]')\u001b[22m\r\n\u001b[2m    - locator resolved to <select name=\"participantRef\">…</select>\u001b[22m\r\n\u001b[2m    - fill(\"SYNTHETIC-QUICK\")\u001b[22m\r\n\u001b[2m  - attempting fill action\u001b[22m\r\n\u001b[2m    - waiting for element to be visible, enabled and editable\u001b[22m\r\n\r\n    at C:\\phios\\tools\\review\\personal-evidence-r1\\evidence-system-r1\\browser.mjs:18:65 {\r\n  log: [\r\n    \"  - waiting for locator('[data-prf-form] [name=participantRef]')\",\r\n    '    - locator resolved to <select name=\"participantRef\">…</select>',\r\n    '    - fill(\"SYNTHETIC-QUICK\")',\r\n    '  - attempting fill action',\r\n    '    - waiting for element to be visible, enabled and editable'\r\n  ]\r\n}\r\n\r\nNode.js v24.18.0\r\n",
+    "error": null
+  }
+]
