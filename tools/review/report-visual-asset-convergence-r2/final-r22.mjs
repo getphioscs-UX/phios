@@ -1,0 +1,15 @@
+import fs from 'node:fs';import cp from 'node:child_process';import {createHash} from 'node:crypto';
+const d='tools/review/report-visual-asset-convergence-r2/recovery-r22/',hash=b=>createHash('sha256').update(b).digest('hex'),j=p=>JSON.parse(fs.readFileSync(p)),v=j(d+'VERIFIED-SOURCE.json');
+const drift=v.files.filter(x=>hash(fs.readFileSync(x.path))!==x.sha256);
+const tests=j(d+'TESTS-R22.json'),r12=j(d+'r12-regression/LOCAL-TESTS.json'),privateGate=j(d+'PRIVATE-DELIVERY.json'),pdf=j(d+'PDF-INSPECTION-R22.json');
+const cpPath='tools/review/personal-evidence-r1/commerce-r1-2/CHECKPOINT.json',before=j(cpPath),after={...before,visualConvergenceR22:{checkpoint:d+'CHECKPOINT.json',status:'LOCAL_HUMAN_REVIEW_READY_WITH_BLOCKERS',sourceDigest:v.digest}};
+fs.writeFileSync(cpPath,JSON.stringify(after,null,2)+'\n');
+const oldCopy={...after};delete oldCopy.visualConvergenceR22;const prior={...before};delete prior.visualConvergenceR22;
+if(JSON.stringify(oldCopy)!==JSON.stringify(prior))throw Error('CHECKPOINT_FIELDS_CHANGED');
+const walk=p=>fs.readdirSync(p,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(p+e.name+'/'):[p+e.name]);
+const artifacts=walk(d).filter(p=>/\.(png|pdf)$/.test(p)).concat(walk('output/pdf/report-visual-asset-convergence-r2/r22/').filter(p=>p.endsWith('.pdf'))).map(path=>({path,bytes:fs.statSync(path).size,sha256:hash(fs.readFileSync(path))}));
+const zi=j(d+'BROWSER-PDF-R22.json').results.find(r=>r.name==='ziwei-native-fixed-and-body');const keys=zi.body.map(x=>x.key).filter(Boolean);if(new Set(keys).size!==keys.length)throw Error('DUPLICATED_NATIVE_BODY_KEY');
+const status=cp.execFileSync('git',['status','--short'],{encoding:'utf8'}),index=cp.execFileSync('git',['diff','--name-only','--cached'],{encoding:'utf8'});
+const result={at:new Date().toISOString(),status:'LOCAL_HUMAN_REVIEW_READY_WITH_BLOCKERS',head:cp.execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),sourceDigest:v.digest,dependencyFiles:v.files.length,drift,tests:tests.total,r12:r12.total,privateSafetyChecks:privateGate.total,workerExit:v.workerBuild.exitCode,nativeZiweiBodyKeysUnique:true,pdfFiles:pdf.files.map(f=>({path:f.path,bytes:f.bytes,pages:f.pageCount,fixed:f.fixedPages,body:f.bodyPages,sha256:f.sha256,bodyProofFailures:f.bodyProofFailures.length})),artifacts,screenshotPolicy:'Failure-only plus representative final; existing unchanged R21 PDFs and browser evidence retained by SHA, no cleanup/archive',stagingArea:index.trim()?'NONEMPTY':'EMPTY',gitStatus:status,existingCheckpointFieldsPreserved:true,receiptRecovery:'SEVEN_GENERATED_FILES_PENDING_EXPLICIT_APPROVAL_AFTER_AUTO_REVIEW_REJECTION',productionWrites:0,r2Writes:0,providerCalls:0,costUSD:0,payments:0,refunds:0,commits:0,pushes:0,deployments:0};
+fs.writeFileSync(d+'FINAL-RECHECK.json',JSON.stringify(result,null,2));
+if(drift.length||v.workerBuild.exitCode||index.trim())throw Error('FINAL_GATE_FAILURE');console.log('FINAL no dependency drift; index empty; tests',tests.total,r12.total,privateGate.total);

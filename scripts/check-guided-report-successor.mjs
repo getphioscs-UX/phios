@@ -3,7 +3,8 @@ import fs from 'node:fs';
 import {REPORT_COMMERCE_CONTRACT,eligibleReportIds,quoteReportPresentation,normalizeReportPresentation,requirePurchasedReportPresentation} from '../functions/pws/commercial/report-successor-contract.js';
 import {summarizeGuidedReality,confirmGuidedReality,guidedRealityQuestions,methodRealityProbes} from '../functions/current-reality/personal-current-reality-runtime.js';
 import {routeGuidedAsk} from '../functions/contextual-ask/contextual-ask-runtime.js';
-import {REPORT_EDITORIAL_ASSETS} from '../functions/canonical-presentation-runtime/report-editorial-registry.js';
+import {REPORT_EDITORIAL_ASSETS,REPORT_EDITORIAL_LOCALES,REPORT_EDITORIAL_ROLES} from '../functions/canonical-presentation-runtime/report-editorial-registry.js';
+import {reportVisualArchitecture} from '../functions/canonical-presentation-runtime/report-visual-architecture.js';
 import {resolveReportEditorialAsset} from '../functions/canonical-presentation-runtime/report-editorial-resolver.js';
 import {REPORT_REFERENCE_BLUEPRINTS} from '../functions/canonical-presentation-runtime/report-blueprint-reference.js';
 import {REPORT_VISUAL_MASTERS,REPORT_CARD_FAMILIES,baziVisualMaster} from '../functions/canonical-presentation-runtime/report-visual-master-contract.js';
@@ -54,14 +55,25 @@ assert.equal(routeGuidedAsk({question:'I feel stuck'}).mode,'CLARIFY');
 assert.equal(routeGuidedAsk({confirmedReality:confirmed}).mode,'REALITY_BASED_RESPONSE');
 assert.equal(routeGuidedAsk({selectedMethod:registry.methods[0].methodId,registry}).mode,'USER_SELECTED_METHOD');
 assert(routeGuidedAsk({methodGuidanceRequested:true,registry}).alternatives.length<=2);
-assert.equal(REPORT_EDITORIAL_ASSETS.length,120);assert.equal(new Set(REPORT_EDITORIAL_ASSETS.map(a=>a.object_key)).size,120);
+const editorialMethods=['BZR','AST','ZWR','NUM','PROFILE','ECR','HD','CROSS'];
+assert.equal(REPORT_EDITORIAL_ASSETS.length,100);assert.equal(new Set(REPORT_EDITORIAL_ASSETS.map(a=>a.object_key)).size,100);
+for(const methodId of editorialMethods){
+ const shared=['PROFILE','ECR'].includes(methodId);
+ assert.equal(reportVisualArchitecture(methodId).fixedAssetLanguagePolicy==='BILINGUAL_SHARED',shared,methodId);
+ const locales=shared?['bilingual']:REPORT_EDITORIAL_LOCALES;
+ const assets=REPORT_EDITORIAL_ASSETS.filter(a=>a.methodId===methodId);
+ assert.equal(assets.length,locales.length*REPORT_EDITORIAL_ROLES.length,methodId);
+ for(const locale of locales)for(const [i,role] of REPORT_EDITORIAL_ROLES.entries()){
+  assert.equal(assets.filter(a=>a.locale===locale&&a.page===i+1&&a.pageRole===role).length,1,`${methodId}:${locale}:${role}`);
+ }
+}
 for(const a of REPORT_EDITORIAL_ASSETS){
  const args={registry:{bucket:'phios-public-assets',assets:REPORT_EDITORIAL_ASSETS},methodId:a.methodId,page:a.page,locale:a.locale,publicBaseUrl:'https://assets.example.test'};
  if(a.active){const result=resolveReportEditorialAsset(args);assert(result.renderable);assert(result.src.endsWith(a.object_key));assert(a.width>0&&a.height>0);}
  else assert.throws(()=>resolveReportEditorialAsset(args),{code:'STATIC_EDITORIAL_ASSET_MISSING'});
  // Explicitly deactivated and wrong-language objects must still fail closed.
  assert.throws(()=>resolveReportEditorialAsset({...args,registry:{...args.registry,assets:[{...a,active:false}]}}),{code:'STATIC_EDITORIAL_ASSET_MISSING'});
- assert.throws(()=>resolveReportEditorialAsset({...args,locale:'fr'}),{code:'STATIC_EDITORIAL_ASSET_MISSING'});
+ assert.throws(()=>resolveReportEditorialAsset({...args,locale:'fr'}),{code:'REPORT_CONTENT_LANGUAGE_INVALID'});
 }
 assert.equal(REPORT_CARD_FAMILIES.length,6);
 const visualSource=fs.readFileSync('docs/guided-report-successor-r1/reference-visual-attachment.md','utf8').split(/\r?\n/);
@@ -89,4 +101,4 @@ const markup=renderVisualReportPages(free);assert(!markup.includes('src="undefin
 const missing=structuredClone(source);for(const p of missing.pages)p.accessState='DATA_REQUIRED';
 assert(!renderVisualReportPages(project(missing)).includes('vrpt-unlock'));
 assert(!project(missing).pages.some(p=>p.accessState==='PAID_LOCKED'));
-console.log(`Guided report successor contracts PASS: ${prices} prices; confirmation, language locks, routing, probes and 120 fail-closed assets. Human parity and actual asset availability are separate.`);
+console.log(`Guided report successor contracts PASS: ${prices} prices; confirmation, language locks, routing, probes and ${REPORT_EDITORIAL_ASSETS.length} fail-closed assets. Human parity and actual asset availability are separate.`);

@@ -15,7 +15,20 @@ function financialEverydayDigest(file,expected){
  assert.equal(document.querySelectorAll('h1').length,1);
  assert(document.querySelector('a[href="/professional/financial/report-preview/"]'));
  assert(document.body.textContent.includes('Paid generation is not available yet.'));
- return next.sha256;
+ const successor=JSON.parse(fs.readFileSync('content/web/index-surfaces/pis-financial-local-receiver-successor-v6.json'));
+ assert.equal(successor.status,'ENGINEERING_RECONCILIATION');assert.equal(successor.file,file);
+ assert.equal(successor.predecessor.path,'content/web/index-surfaces/pis-financial-everyday-successor-v5.json');
+ assert.equal(successor.predecessor.sha256,sha(fs.readFileSync(successor.predecessor.path)));
+ for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(successor[key],false);
+ assert.equal(successor.previousSha256,next.sha256);
+ const previous=fs.readFileSync(successor.previousPath);assert.equal(sha(previous),next.sha256);
+ const insertion='<script type="module" src="/assets/customer-ui/js/surfaces/personal-evidence-receiver.js"></script>';
+ assert.equal(successor.exactInsertion,insertion);
+ const current=fs.readFileSync(file,'utf8');assert.equal(current.split(insertion).length,2);
+ assert.equal(current.replace(insertion,''),previous.toString('utf8'),'Financial receiver must be the only markup change');
+ assert.equal(successor.dependency.path,'assets/customer-ui/js/surfaces/personal-evidence-receiver.js');
+ assert.equal(sha(fs.readFileSync(successor.dependency.path)),successor.dependency.sha256);
+ return successor.sha256;
 }
 export function consolidationSuccessor(){if(!fs.existsSync(manifest))return null;const record=JSON.parse(fs.readFileSync(manifest));assert.equal(record.status,'ENGINEERING_RECONCILIATION');assert.equal(record.humanAcceptanceGranted,false);assert.equal(record.productionActivated,false);assert.equal(sha(fs.readFileSync(root+'/OWNER-WORK-STEP.md')),record.ownerInstructionSha256);return record;}
 export function historicalPisBytes(file){const record=consolidationSuccessor(),item=record?.surfaces.find(s=>s.file===file);if(!item){if(file==='professional/financial/index.html'){const next=JSON.parse(fs.readFileSync('content/web/index-surfaces/pis-current-surface-followup-successor-v4.json'));assert.equal(next.status,'ENGINEERING_RECONCILIATION');assert.equal(next.predecessor.path,manifest);assert.equal(next.predecessor.sha256,sha(fs.readFileSync(manifest)));for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(next[key],false);const c=next.additionalFinancial;assert.equal(c.file,file);const before=fs.readFileSync(c.previousPath);assert.equal(sha(before),c.previousSha256);assert.equal(sha(fs.readFileSync(file)),financialEverydayDigest(file,c.sha256));return before;}return fs.readFileSync(file);}const before=fs.readFileSync(root+'/before/'+file);assert.equal(sha(before),item.previousSha256,file+': consolidation predecessor changed');let expected=currentConsolidationDigest(file,item.sha256);

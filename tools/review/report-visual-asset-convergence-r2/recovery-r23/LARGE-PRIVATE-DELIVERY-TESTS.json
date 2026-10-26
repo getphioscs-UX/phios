@@ -1,0 +1,194 @@
+{
+  "at": "2026-10-26T13:00:01.187Z",
+  "status": "PASS_LOCAL_STREAMING_CANDIDATE",
+  "checks": [
+    {
+      "name": "small authorized full download exact bytes",
+      "status": "PASS"
+    },
+    {
+      "name": "small reissue/repeat without rerender or object rewrite",
+      "status": "PASS"
+    },
+    {
+      "name": "small repeated download byte identical",
+      "status": "PASS"
+    },
+    {
+      "name": "above1MiB authorized full download exact bytes",
+      "status": "PASS"
+    },
+    {
+      "name": "above1MiB reissue/repeat without rerender or object rewrite",
+      "status": "PASS"
+    },
+    {
+      "name": "above1MiB repeated download byte identical",
+      "status": "PASS"
+    },
+    {
+      "name": "actualVisual authorized full download exact bytes",
+      "status": "PASS"
+    },
+    {
+      "name": "actualVisual reissue/repeat without rerender or object rewrite",
+      "status": "PASS"
+    },
+    {
+      "name": "actualVisual repeated download byte identical",
+      "status": "PASS"
+    },
+    {
+      "name": "unauthenticated context denied",
+      "status": "PASS"
+    },
+    {
+      "name": "other authenticated customer denied",
+      "status": "PASS"
+    },
+    {
+      "name": "same customer wrong report denied",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong report language denied",
+      "status": "PASS"
+    },
+    {
+      "name": "source revoked denies future download",
+      "status": "PASS"
+    },
+    {
+      "name": "revoked real existing membership owner denies access",
+      "status": "PASS"
+    },
+    {
+      "name": "expired signed authorization denied by actual delivery module",
+      "status": "PASS"
+    },
+    {
+      "name": "range response bounded and identified",
+      "status": "PASS"
+    },
+    {
+      "name": "suffix range valid",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid and unsatisfiable range denied",
+      "status": "PASS"
+    },
+    {
+      "name": "interrupted client read propagates cancellation",
+      "status": "PASS"
+    },
+    {
+      "name": "resumed transfer has exact remaining bytes",
+      "status": "PASS"
+    },
+    {
+      "name": "HEAD validates permissions without object body read",
+      "status": "PASS"
+    },
+    {
+      "name": "incomplete upload leaves no readable metadata/object",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong expected checksum rejected before metadata commit",
+      "status": "PASS"
+    },
+    {
+      "name": "explicit correct retry recovers after failed upload",
+      "status": "PASS"
+    },
+    {
+      "name": "missing stored object reports repair gate, never success",
+      "status": "PASS"
+    },
+    {
+      "name": "truncated stored-object transfer fails at stream EOF and is audited",
+      "status": "PASS"
+    },
+    {
+      "name": "tampered signed authorization denied",
+      "status": "PASS"
+    },
+    {
+      "name": "changed source version cannot reuse old grant",
+      "status": "PASS"
+    },
+    {
+      "name": "private metadata remains encrypted in existing D1 artifact owner",
+      "status": "PASS"
+    },
+    {
+      "name": "production environment cannot activate local prototype",
+      "status": "PASS"
+    },
+    {
+      "name": "query grant transport rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "bounded chunks and no object arrayBuffer calls",
+      "status": "PASS"
+    },
+    {
+      "name": "no provider or external network",
+      "status": "PASS"
+    }
+  ],
+  "total": 34,
+  "samples": [
+    {
+      "label": "small",
+      "path": "tools/review/report-visual-asset-convergence-r2/owner-inventory-followup/r12-replay/dossier-en.pdf",
+      "expectedBytes": 83527,
+      "expectedDigest": "ebb372386773a8083a3f2416829174954d5fbdc736ea91a09c0c97cb9aad8d08",
+      "downloadedBytes": 83527,
+      "integrity": "PASS"
+    },
+    {
+      "label": "above1MiB",
+      "path": "output/pdf/report-visual-asset-convergence-r2/r22/bazi-body-diagnostic-en.pdf",
+      "expectedBytes": 1403603,
+      "expectedDigest": "b65ac0e5996b30dca5fba4ac7407e7bdeb3f7ef88d0bd6ea3ed4702d901fcad8",
+      "downloadedBytes": 1403603,
+      "integrity": "PASS"
+    },
+    {
+      "label": "actualVisual",
+      "path": "output/pdf/report-visual-asset-convergence-r2/r23/profile-en.pdf",
+      "expectedBytes": 49446831,
+      "expectedDigest": "586882ec8a99506bc2c834f3ed3c8df822bbfd4a294aa69e8414f097c0d52be3",
+      "downloadedBytes": 49446831,
+      "integrity": "PASS"
+    }
+  ],
+  "stats": {
+    "put": 6,
+    "get": 11,
+    "maxChunk": 65536,
+    "arrayBufferCalls": 0
+  },
+  "auditEventCounts": {
+    "PRIVATE_OBJECT_READY": 4,
+    "GRANT_ISSUED": 7,
+    "DOWNLOAD_STARTED": 8,
+    "DOWNLOAD_COMPLETE": 9,
+    "DOWNLOAD_RANGE_STARTED": 3,
+    "DOWNLOAD_CANCELLED": 1,
+    "PREPARE_FAILED": 2,
+    "DOWNLOAD_INTERRUPTED": 1
+  },
+  "storage": "Local filesystem streaming R2 API test adapter plus real existing SQLite D1 adapter, existing membership/identity/encryption/DAR modules",
+  "storageRoot": "C:\\phios\\.tmp\\report-visual-r23-private-15c349cb-a5dc-48d9-90c8-be62b360d6fd",
+  "productionEquivalent": false,
+  "externalGate": "BLOCKED: actual Cloudflare R2 streaming/checksum/conditionals plus account route admission and runtime memory/concurrency proof not exercised; no production writes authorized",
+  "revocation": "Every new proxy request rechecks identity, entitlement and source. Already started transfers and downloaded files are not remotely recalled.",
+  "signedObjectUrlsIssued": false,
+  "secretOrGrantValuesRecorded": false,
+  "providerCalls": 0,
+  "productionWrites": 0
+}

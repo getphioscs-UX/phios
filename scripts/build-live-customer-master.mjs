@@ -84,6 +84,16 @@ const progressReview=spawnSync(process.execPath,['scripts/complete-master-progre
 if(progressReview.status!==0)throw Error(progressReview.stderr||progressReview.stdout);
 console.log(progressReview.stdout.trim());
 
+// Local calibration evidence stays in ignored .tmp; preserve only its scoped pointer.
+const hdCalibrationReview=fs.existsSync('.tmp/hd-chart-confirmation-r41/HUMAN-REVIEW.html')?'.tmp/hd-chart-confirmation-r41/HUMAN-REVIEW.html':fs.existsSync('.tmp/hd-ecr-precision-r4/HUMAN-REVIEW.html')?'.tmp/hd-ecr-precision-r4/HUMAN-REVIEW.html':fs.existsSync('.tmp/hd-ecr-substructure-r3/HUMAN-REVIEW.html')?'.tmp/hd-ecr-substructure-r3/HUMAN-REVIEW.html':'.tmp/hd-ecr-phs-r2/HUMAN-REVIEW.html';
+if(fs.existsSync(hdCalibrationReview)){
+ const target=`${dir}/MASTER-HUMAN-REVIEW.html`,current=fs.readFileSync(target,'utf8');
+ if(!current.includes('id="hd-ecr-phs-calibration-r2"')){
+  const section='<section id="hd-ecr-phs-calibration-r2"><h2>HD/ECR Calibration R2 / Substructure R3 · Local review</h2><p>Private local evidence; calibration, mismatches and unsupported layers are reported separately. This pointer grants no acceptance or publication authority.</p><p><a href="../../../'+hdCalibrationReview+'">本机私有校准审阅（不随网站发布）</a></p></section>';
+  fs.writeFileSync(target,current.includes('</body>')?current.replace('</body>',section+'</body>'):current+section);
+ }
+}
+
 // CUSTOMER_ENTRY_R1_CANONICAL_POINTER: preserve this scoped review in the existing Master.
 // This is a link only; no source/live/acceptance status is inferred by this generator.
 if(fs.existsSync('tools/review/customer-entry-r1/HUMAN-REVIEW.html')){const target=`${dir}/MASTER-HUMAN-REVIEW.html`;let current=fs.readFileSync(target,'utf8');if(!current.includes('id="customer-entry-recovery-r1"')){const link='<section id="customer-entry-recovery-r1"><h2>Customer Entry + Ask Recovery R1</h2><p>本地客户入口候选；人审、构建与生产状态以本轮收据为准，不代表全站完成。</p><p><a href="../../../tools/review/customer-entry-r1/HUMAN-REVIEW.html">客户入口审阅</a> · <a href="../../../docs/customer-entry/EXECUTION-STATE.md">执行台账</a></p></section>';current=current.includes('</body>')?current.replace('</body>',link+'</body>'):current+link;fs.writeFileSync(target,current);}}

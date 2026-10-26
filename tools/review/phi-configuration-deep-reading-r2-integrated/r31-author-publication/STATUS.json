@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "PHI-CONFIGURATION-R31-LOCAL-CLOSEOUT-v1",
+  "status": "PARTIAL_AUTHOR_FULL_TEXT_REQUIRED",
+  "currentHead": "c5851dd86618522b0a1bd92465be3ee9ee37214d",
+  "checks": [
+    {
+      "id": "R31-01",
+      "status": "PASS_LOCAL",
+      "item": "Private author-led workflow and exact-version storage; existing renderer and four-factor owner reused."
+    },
+    {
+      "id": "R31-02",
+      "status": "PARTIAL",
+      "item": "Section01/02 intake slots registered privately; complete manuscripts absent."
+    },
+    {
+      "id": "R31-03",
+      "status": "PASS_LOCAL",
+      "item": "Private author materials outside repo/static server; no personal case copied to fixtures."
+    },
+    {
+      "id": "R31-04",
+      "status": "PASS_LOCAL",
+      "item": "Independent reusable approval, exact conditions, rights and customer-admission separation; no actual meaning admitted."
+    },
+    {
+      "id": "R31-05",
+      "status": "PARTIAL",
+      "item": "Deterministic bilingual QA tested; actual author semantics and full-text checks await manuscripts."
+    },
+    {
+      "id": "R31-06",
+      "status": "BLOCKED",
+      "item": "Actual Section02 author bilingual PDF cannot be generated without complete text. Synthetic engineering PDF is separate."
+    },
+    {
+      "id": "R31-07",
+      "status": "PARTIAL",
+      "item": "Private case calculation binding verified; actual manuscript consistency NOT_RUN. Synthetic Case B/C and targeted condition tests PASS."
+    },
+    {
+      "id": "R31-08",
+      "status": "PASS_LOCAL",
+      "item": "HD shared-authority impact audit; original calculation preserved, no PHS semantics promoted."
+    },
+    {
+      "id": "R31-09",
+      "status": "PARTIAL",
+      "item": "Raw regression: 6 PASS, 2 FAIL. Local current-schema followup successor PASS; old full membership refill expectation remains FAIL. Focused USD3 period-cap check PASS."
+    },
+    {
+      "id": "R31-10",
+      "status": "PASS_LOCAL",
+      "item": "Append-only update to original Master, no new Master created."
+    }
+  ],
+  "engineeringTests": {
+    "passed": 35,
+    "failed": 0
+  },
+  "rawRegression": {
+    "passed": 6,
+    "failed": 2
+  },
+  "schemaSuccessor": [
+    {
+      "name": "check-ecr-r2-followup-isolation-local",
+      "status": "PASS",
+      "exitCode": 0,
+      "changes": "Load existing local candidate SQL in isolated SQLite only; assertions unchanged.",
+      "candidateSql": "db/migration-candidates/0020_continuity_ask_credit_allocations_successor.sql",
+      "productionMigration": false,
+      "originalFailurePreserved": true,
+      "log": "regressions/check-ecr-r2-followup-isolation-local-schema-successor.log"
+    },
+    {
+      "name": "check-ecr-r2-membership-owner-local",
+      "status": "FAIL",
+      "exitCode": 1,
+      "changes": "Load existing local candidate SQL in isolated SQLite only; assertions unchanged.",
+      "candidateSql": "db/migration-candidates/0020_continuity_ask_credit_allocations_successor.sql",
+      "productionMigration": false,
+      "originalFailurePreserved": true,
+      "log": "regressions/check-ecr-r2-membership-owner-local-schema-successor.log"
+    }
+  ],
+  "syntheticPdf": {
+    "syntheticOnly": true,
+    "pages": 6,
+    "pageSizes": [
+      [
+        594.96,
+        841.92
+      ],
+      [
+        594.96,
+        841.92
+      ],
+      [
+        594.96,
+        841.92
+      ],
+      [
+        594.96,
+        841.92
+      ],
+      [
+        594.96,
+        841.92
+      ],
+      [
+        594.96,
+        841.92
+      ]
+    ],
+    "fullZhTextPreserved": true,
+    "fullEnTextPreserved": true,
+    "stampsEveryPage": true,
+    "comparisonRule": "Remove explicit QA headers/footers and layout whitespace only; preserve every manuscript character.",
+    "authorPdfCreated": false,
+    "visualInspection": "ALL_6_PAGES_INSPECTED_NO_CLIPPED_TEXT_OR_MISSING_GLYPHS; layout engineering sample only, no author approval"
+  },
+  "actualManuscriptsIngested": 0,
+  "authorAcceptancesGranted": 0,
+  "reusableMeaningsAdmitted": 0,
+  "customerPublishable": false,
+  "productionPass": false,
+  "providerCalls": 0,
+  "stripeCharges": 0,
+  "productionD1Writes": 0,
+  "productionR2Writes": 0,
+  "productionMigrations": 0,
+  "commits": 0,
+  "pushes": 0,
+  "deployments": 0
+}

@@ -1,4 +1,5 @@
 import {getZwrVfrVisualBinding} from '../../../../functions/canonical-presentation-runtime/ziwei-vfr-r1-visual-bindings.js';
+import {requireFixedReportManifest,renderFixedReportPage,FIXED_REPORT_PAGE_CSS,resolveReportBodyAsset} from '../../../../functions/canonical-presentation-runtime/report-editorial-resolver.js';
 
 export const ZWR_VFR_RENDERER_VERSION='ZWR-VFR-R1-DEEP-RENDERER-v6';
 
@@ -271,14 +272,24 @@ function closingPage(reportIr,binding,pageNumber){
  const en=(reportIr?.closingSummary?.en||[]).map(x=>firstSentence(x,'en'));
  return '<div class="zv-closing-art">'+(binding.hero?'<img src="'+esc(binding.hero)+'" alt="">':'')+(binding.motif?'<img class="zv-closing-motif" src="'+esc(binding.motif)+'" alt="">':'')+'</div><div class="zv-closing"><span>'+esc(pageNumber||'')+'</span><h1>读取边界</h1><h2>Reading Boundary</h2><p>命盘提供结构化观察，不替代现实证据、专业判断或你的实际选择。</p><p lang="en">The chart provides structured observation; it does not replace real-world evidence, professional judgment, or your own decisions.</p><div class="zv-closing-points">'+zh.slice(0,3).map((x,i)=>'<article><b>0'+(i+1)+'</b><p>'+esc(x)+'</p><small>'+esc(en[i]||'')+'</small></article>').join('')+'</div></div>';
 }
-export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
+export function renderZwrVfrReview({reportIr,diagramData,pagePlan,fixedVisualManifest=null,contentLanguage=reportIr.locale||'bilingual'}){
+ if(fixedVisualManifest)requireFixedReportManifest('ZWR',contentLanguage,fixedVisualManifest);
+ const bodyR2=fixedVisualManifest?resolveReportBodyAsset({methodId:'ZWR',manifest:fixedVisualManifest}):null,nativeR2=fixedVisualManifest?.reports.ZWR.nativeBindings;let physicalPage=0;
  const sections=new Map((reportIr?.sections||[]).map(s=>[s.sectionId,s]));
  const diagrams=new Map((diagramData?.diagrams||[]).map(d=>[d.id,d]));
- return pagePlan.map(p=>{
+ return (fixedVisualManifest?'<style>.zv-page[data-page-role="BODY_CONTENT"] .zv-language-reading.is-en{padding-top:6mm}</style>':'')+pagePlan.map(sourcePage=>{
+  let p=sourcePage,prefix='';
+  if(fixedVisualManifest){
+   if(!nativeR2)throw Error('ZIWEI_FIXED_NATIVE_BINDING_REQUIRED');
+   if(p.pageFamily==='SECTION_MASTER'&&nativeR2.bodyOnlySections.includes(p.sectionId))return '';
+   if(p.pageFamily==='OVERVIEW'){physicalPage++;prefix=`<style>${FIXED_REPORT_PAGE_CSS}</style>${renderFixedReportPage({methodId:'ZWR',pageId:nativeR2.overviewMaster,contentLanguage,manifest:fixedVisualManifest})}`;}
+   p={...p,pageNumber:++physicalPage};
+   if(sourcePage.pageNumber<=5||p.pageFamily==='SECTION_MASTER')return `<style>${FIXED_REPORT_PAGE_CSS}</style>${renderFixedReportPage({methodId:'ZWR',pageId:sourcePage.pageNumber<=5?'P0'+sourcePage.pageNumber:nativeR2.sectionMasters[p.sectionId],contentLanguage,manifest:fixedVisualManifest})}`;
+  }
   const s=sections.get(p.sectionId),ds=(p.diagramIds||[]).map(id=>diagrams.get(id)).filter(Boolean);
-  const binding=getZwrVfrVisualBinding({pageNumber:p.pageNumber,sectionId:p.sectionId,pageFamily:p.pageFamily});
+  const binding=fixedVisualManifest?{kind:p.pageFamily==='CLOSING'?'CLOSING':'BODY',hero:bodyR2.url,body:bodyR2.url,motif:null}:getZwrVfrVisualBinding({pageNumber:p.pageNumber,sectionId:p.sectionId,pageFamily:p.pageFamily});
   if(binding.kind==='STATIC_FRONT_MATTER')return '<section class="zv-page zv-static-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-page-key="'+esc(p.pageKey)+'"><img class="zv-static" src="'+esc(binding.url)+'" alt="'+esc(p.pageKey)+'"></section>';
-  if(binding.kind==='CLOSING')return '<section class="zv-page zv-closing-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-page-key="'+esc(p.pageKey)+'">'+closingPage(reportIr,binding,p.pageNumber)+'<footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
+  if(binding.kind==='CLOSING')return '<section class="zv-page zv-closing-page" '+(fixedVisualManifest?'data-page-role="BODY_CONTENT" ':'')+'data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-page-key="'+esc(p.pageKey)+'">'+(bodyR2?'<img class="zv-body-bg" src="'+esc(bodyR2.url)+'" alt="">':'')+closingPage(reportIr,binding,p.pageNumber)+'<footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
   let body='';
   const compact=p.pageFamily==='DIAGRAM_COMPOSITE';
   const diagramHtml=ds.map(d=>renderZwrVfrDiagram(d,{pageKey:p.pageKey,sectionId:p.sectionId,pageFamily:p.pageFamily,compact})).join('');
@@ -287,6 +298,6 @@ export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
   else if(p.pageFamily==='DIAGRAM_COMPOSITE')body='<div class="zv-diagram-composite">'+diagramHtml+'</div>';
   else if(ds.length)body=diagramHtml;
   else body='<div class="zv-front"><h1>'+esc(p.pageKey.replaceAll('_',' '))+'</h1><p>PHI OS · Zi Wei Dou Shu Visual First Report</p></div>';
-  return '<section class="zv-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-page-key="'+esc(p.pageKey)+'" data-section-id="'+esc(p.sectionId||'')+'" style="'+sectionVars(p.sectionId)+'">'+(binding.body?'<img class="zv-body-bg" src="'+esc(binding.body)+'" alt="">':'')+(binding.motif?'<img class="zv-body-motif" src="'+esc(binding.motif)+'" alt="">':'')+'<header><strong>PHI OS</strong><span>ZI WEI DOU SHU · 紫微斗数</span></header><main>'+body+'</main><footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
+  return prefix+'<section class="zv-page" '+(fixedVisualManifest?'data-page-role="BODY_CONTENT" ':'')+'data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-page-key="'+esc(p.pageKey)+'" data-section-id="'+esc(p.sectionId||'')+'" style="'+sectionVars(p.sectionId)+'">'+(binding.body?'<img class="zv-body-bg" src="'+esc(binding.body)+'" alt="">':'')+(binding.motif?'<img class="zv-body-motif" src="'+esc(binding.motif)+'" alt="">':'')+'<header><strong>PHI OS</strong><span>ZI WEI DOU SHU · 紫微斗数</span></header><main>'+body+'</main><footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
  }).join('');
 }

@@ -1,0 +1,25 @@
+{
+  "status": "ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW",
+  "path": "assets/customer-ui/js/surfaces/personal-reality.js",
+  "previousPath": "content/professional/personal-reality/current/personal-reality-before-hd-local-confirmation-v1.txt",
+  "previousSha256": "9c88c86f996ad358744fe547f7755251169b271ac2149ba0c2656ac1824922df",
+  "currentSha256": "c2b72add9f7ca26f5fa141e84d608cd2e546502a96084d03e2b88bf3919ea08b",
+  "insertions": [
+    "import {mountInternalHdConfirmation} from './hd-internal-chart-confirmation-r41.js';\n",
+    "mountInternalHdConfirmation(form,{getPlaceRef:()=>selectedCandidate?.providerRef||''});"
+  ],
+  "dependencies": [
+    {
+      "path": "assets/customer-ui/js/surfaces/hd-internal-chart-confirmation-r41.js",
+      "sha256": "ed5c0b165ba64b5a3479f8e163b4d85d0aab624e5b633d08fb03e7ddc27283f2"
+    },
+    {
+      "path": "functions/api/customer-hd-chart-preview.js",
+      "sha256": "a898d3a5d456523c30227250f7bc142ba6f271dec8052a2d3be38a6663b4f74e"
+    }
+  ],
+  "historicalFreezeRewritten": false,
+  "humanAcceptanceGranted": false,
+  "productionActivated": false,
+  "scope": "Two exact local-only HD preview wiring insertions; original shared host bytes reconstruct exactly; no method, entitlement or production admission."
+}

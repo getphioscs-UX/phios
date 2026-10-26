@@ -103,7 +103,7 @@ async function experienceLane(context,{db,key,userId,url,readAssessment}){
    if(saved.r12)await dossierEligibility(context.env,userId);
    let historical=false;const openedVersions=new Map();for(const ref of saved.refs){const current=await latest(ref.id);openedVersions.set(ref.id,current.record.version);if(current.record.version!==ref.version)historical=true;}
    if(saved.r12){for(const a of saved.assessments||[])await readAssessment(a.objectId);}
-   const rendered=saved.r12?renderDossierR12({...saved.r12,records:saved.records,assessments:saved.assessments||[],reportId:saved.reportId,language:url.searchParams.get('language')||saved.r12.language}):null;
+   const rendered=saved.r12?renderDossierR12({...saved.r12,visualArchitecture:url.searchParams.get('visualArchitecture')||saved.r12.visualArchitecture,records:saved.records,assessments:saved.assessments||[],reportId:saved.reportId,language:url.searchParams.get('language')||saved.r12.language}):null;
    const baseHtml=rendered?.html||saved.html;
    const html=historical?baseHtml.replace('<main>','<main><p role="status">历史版本：来源已有修正。 / Historical version: source has since been corrected.</p>'):baseHtml;
    if(url.searchParams.get('format')==='pdf'){
@@ -128,7 +128,7 @@ async function experienceLane(context,{db,key,userId,url,readAssessment}){
  const raw=await context.request.text();if(new TextEncoder().encode(raw).length>30000)throw evidenceError('EVIDENCE_INPUT_TOO_LARGE',413);
  let body;try{body=JSON.parse(raw);}catch{throw evidenceError('EVIDENCE_INVALID_JSON',400);}
  if(!body||typeof body!=='object'||Array.isArray(body))throw evidenceError('EVIDENCE_OBJECT_REQUIRED',400);
- const allowed=['action','record','id','baseVersion','requestToken','consent','retentionConsent','expiresAt','selected','target','purpose','purposeCode','locale','worldQuery','savedDraftRef','financialConsent','reflection','configurationConsent','contextComparable','consentRef','language','customerName','sections','assessmentIds'];
+ const allowed=['action','record','id','baseVersion','requestToken','consent','retentionConsent','expiresAt','selected','target','purpose','purposeCode','locale','worldQuery','savedDraftRef','financialConsent','reflection','configurationConsent','contextComparable','consentRef','language','customerName','sections','assessmentIds','visualArchitecture'];
  if(Object.keys(body).some(k=>!allowed.includes(k)))throw evidenceError('EVIDENCE_UNKNOWN_FIELD');
  if(body.consent!==true)throw evidenceError('EVIDENCE_CONSENT_REQUIRED',403);
  if(body.action==='prepare-pdf'){
@@ -187,7 +187,7 @@ async function experienceLane(context,{db,key,userId,url,readAssessment}){
     const ids=body.assessmentIds||[];
     if(typeof(body.customerName||'')!=='string'||(body.customerName||'').length>160)throw evidenceError('DOSSIER_CUSTOMER_NAME_INVALID');
     const sourceSnapshotVersion=await sha256Hex(JSON.stringify({refs:report.refs,assessmentIds:ids}));
-    const r12={language:body.language,now,sourceSnapshotVersion,customerName:body.customerName||'',sections:body.sections||null};
+    const r12={language:body.language,now,sourceSnapshotVersion,customerName:body.customerName||'',sections:body.sections||null,...(body.visualArchitecture?{visualArchitecture:body.visualArchitecture}:{})};
     const rendering=renderDossierR12({...r12,records,assessments,reportId});
     Object.assign(report,{canonical:assembleExperienceDossier({records,ownerId:userId,reportId,now,assessments}).canonical,...rendering,r12,records:structuredClone(records),assessments,eligibility,sourceSnapshotVersion,renderingArtifactId:reportId+'-'+rendering.language,schemaVersion:DOSSIER_R12});
    }

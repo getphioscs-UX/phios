@@ -1,0 +1,20 @@
+import fs from 'node:fs';
+const root='tools/review/report-visual-asset-convergence-r2/',d=root+'recovery-r22/',p='content/reports/shared/report-visual-assets-r2.json';
+const manifest=JSON.parse(fs.readFileSync(p)),diag=JSON.parse(fs.readFileSync(d+'PUBLIC-DIAGNOSTICS.json'));
+const z=diag.rows.find(r=>r.report==='ZWR'),probe=z.probes.find(p=>p.method==='GET'&&p.decoded);
+if(!probe)throw Error('ZWR_NOT_DECODED');
+const a=manifest.assets.find(a=>a.methodId==='ZWR'&&a.pageId==='SEC-08');
+if(!a||a.objectKey!==z.key)throw Error('OWNER_KEY_DRIFT');
+fs.writeFileSync(d+'MANIFEST-BEFORE.json',fs.readFileSync(p));
+Object.assign(a,{active:true,verification:'PUBLIC_BYTES_DECODED_AND_VISUALLY_REVIEWED',sha256:probe.sha256,bytes:probe.bytes,width:probe.width,height:probe.height,url:probe.url+'?v='+probe.sha256,publicHttpStatus:200});
+manifest.reports.ZWR.complete=true;
+manifest.reports.ZWR.blockers=[];
+fs.writeFileSync(p,JSON.stringify(manifest,null,2)+'\n');
+const prior=JSON.parse(fs.readFileSync(root+'owner-inventory-followup/PUBLIC-READS.json'));
+const replacement={methodId:'ZWR',pageId:'SEC-08',key:z.key,status:200,decoded:true,sha256:probe.sha256,width:probe.width,height:probe.height,bytes:probe.bytes,localPath:d+probe.sha256+'.webp'};
+prior.rows=prior.rows.map(r=>r.methodId==='ZWR'&&r.pageId==='SEC-08'?replacement:r);
+fs.writeFileSync(d+'PUBLIC-READS.json',JSON.stringify(prior,null,2));
+// A successor test records the verified recovery; original 181 assertions and receipts stay immutable.
+let test=fs.readFileSync(root+'test-r21.mjs','utf8').replaceAll('owner-inventory-followup/','recovery-r22/').replaceAll('TESTS-R21','TESTS-R22');
+test=test.replace("['AST','PROFILE'])check(methodId+' all fifteen", "['AST','PROFILE','ZWR'])check(methodId+' all fifteen").replace("['ECR','ZWR'])check(methodId+' missing", "['ECR'])check(methodId+' missing");
+fs.writeFileSync(root+'test-r22.mjs',test);

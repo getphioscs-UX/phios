@@ -18,3 +18,29 @@ export function inspectAuthorVersion(record,text,{semanticReceipt=null,rightsRec
  return {valid:errors.length===0,authorTextAccepted:accepted,customerPublishable:publishable,errors};
 }
 export function inspectBilingualVersions(zh,en){return {ready:zh?.valid===true&&en?.valid===true&&zh?.customerPublishable===true&&en?.customerPublishable===true};}
+
+export const CASE_MANUSCRIPT_STATES=Object.freeze(['AUTHOR_DRAFT','AUTHOR_REVISION_REQUIRED','AUTHOR_ACCEPTED_TEXT']);
+export function inspectAuthorCaseManuscript(record,text){
+ const mapped={...record,publicationStatus:record.authorState==='AUTHOR_DRAFT'?'DRAFT':record.authorState==='AUTHOR_REVISION_REQUIRED'?'AUTHOR_REVISION':record.authorState};
+ const review=inspectAuthorVersion(mapped,text);
+ const errors=[...review.errors];
+ if(!CASE_MANUSCRIPT_STATES.includes(record.authorState))errors.push('AUTHOR_CASE_STATE_INVALID');
+ if(record.authorState==='AUTHOR_ACCEPTED_TEXT'&&(record.authorAcceptedVersion!==record.manuscriptVersion||record.authorAcceptedLanguage!==record.language||record.authorAcceptedSectionId!==record.sectionId))errors.push('EXACT_SECTION_LANGUAGE_VERSION_ACCEPTANCE_REQUIRED');
+ if(!text.trim())errors.push('COMPLETE_TEXT_REQUIRED');
+ return {...review,valid:errors.length===0,authorTextAccepted:errors.length===0&&review.authorTextAccepted,errors,customerPublishable:false,reusableSemanticAccepted:false};
+}
+export function auditAuthorBilingualPair(zh,en,{calculationRows=[],glossary=[]}={}){
+ if(!zh?.text||!en?.text)return {status:'BLOCKED_MISSING_FULL_TEXT',customerPublishable:false};
+ const errors=[],a=zh.claims||[],b=en.claims||[];
+ const key=c=>JSON.stringify({positions:[...(c.positions||[])].sort(),conditions:[...(c.conditions||[])].sort(),limitations:[...(c.limitations||[])].sort(),prohibitedInferences:[...(c.prohibitedInferences||[])].sort(),factorRefs:[...(c.factorRefs||[])].sort()});
+ if(new Set(a.map(c=>c.claimId)).size!==a.length||new Set(b.map(c=>c.claimId)).size!==b.length)errors.push('DUPLICATE_CLAIM_ID');
+ const ids=[...new Set([...a,...b].map(c=>c.claimId))];
+ for(const id of ids){const c=a.find(c=>c.claimId===id),d=b.find(c=>c.claimId===id);if(!c||!d||key(c)!==key(d))errors.push('CLAIM_CONDITIONS_OR_LIMITATIONS_DIFFER:'+id);}
+ const coordinates=text=>[...text.matchAll(/(?<![\d.])([1-9]|[1-5]\d|6[0-4])\.([1-6])(?![\d.])/g)].map(m=>m[0]).sort();
+ if(JSON.stringify(coordinates(zh.text))!==JSON.stringify(coordinates(en.text)))errors.push('GATE_LINE_TEXT_DIFFER');
+ for(const claim of [...a,...b])for(const position of claim.positions||[]){const [layer,bodyCode,coordinate]=position.split(':');if(!calculationRows.some(r=>r.Layer===layer&&r.BodyCode===bodyCode&&`${r.P64Gate}.${r.Line}`===coordinate))errors.push('POSITION_NOT_IN_VERIFIED_CALCULATION:'+claim.claimId);}
+ const termChecks=glossary.map(t=>({id:t.id,zhPresent:zh.text.includes(t.zh),enPresent:en.text.includes(t.en)}));
+ if(termChecks.some(t=>t.zhPresent!==t.enPresent))errors.push('GLOSSARY_COVERAGE_DIFFERS');
+ // Claims and numbers are checks, not a semantic equivalence oracle.
+ return {status:errors.length?'FAIL':'PARTIAL_HUMAN_SEMANTIC_REVIEW_REQUIRED',errors,alignedClaimCount:ids.length,claimAnnotationsComplete:ids.length>0&&zh.claimCoverageComplete===true&&en.claimCoverageComplete===true,termChecks,humanSemanticApproval:false,customerPublishable:false};
+}

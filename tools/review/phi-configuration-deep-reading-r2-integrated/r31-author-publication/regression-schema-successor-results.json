@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "name": "check-ecr-r2-followup-isolation-local",
+      "status": "PASS",
+      "exitCode": 0,
+      "changes": "Load existing local candidate SQL in isolated SQLite only; assertions unchanged.",
+      "candidateSql": "db/migration-candidates/0020_continuity_ask_credit_allocations_successor.sql",
+      "productionMigration": false,
+      "originalFailurePreserved": true,
+      "log": "regressions/check-ecr-r2-followup-isolation-local-schema-successor.log"
+    },
+    {
+      "name": "check-ecr-r2-membership-owner-local",
+      "status": "FAIL",
+      "exitCode": 1,
+      "changes": "Load existing local candidate SQL in isolated SQLite only; assertions unchanged.",
+      "candidateSql": "db/migration-candidates/0020_continuity_ask_credit_allocations_successor.sql",
+      "productionMigration": false,
+      "originalFailurePreserved": true,
+      "log": "regressions/check-ecr-r2-membership-owner-local-schema-successor.log"
+    }
+  ],
+  "providerCalls": 0,
+  "originalFailuresNotWaived": true
+}

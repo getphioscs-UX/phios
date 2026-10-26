@@ -1,4 +1,15 @@
 import {esc} from '../../surfaces/runtime-ui.js';
+import {composeFixedEditorialReport} from '../../../../../functions/canonical-presentation-runtime/report-editorial-resolver.js';
+import {reportContentLocale} from '../../../../../functions/canonical-presentation-runtime/report-editorial-resolver.js';
+// Local fixed-page candidate reuses the current admitted customer section renderer.
+// Source, entitlement and locale must already have been checked by the ECR owner.
+export function renderEcrFixedAssetCandidate({reports,contentLanguage,manifest}={}){
+ const locale=reportContentLocale(contentLanguage),languages=locale==='bilingual'?['zh-Hans','en']:[locale];
+ if(!Array.isArray(reports)||reports.length!==languages.length||languages.some(l=>reports.filter(r=>r.locale===l).length!==1))throw Error('ECR_APPROVED_LOCALE_CONTENT_REQUIRED');
+ const first=reports[0],reference=first.sourceProjectionId||first.sourceProjectionRef;
+ if(!reference||reports.some(r=>(r.sourceProjectionId||r.sourceProjectionRef)!==reference||r.depth!==first.depth||r.productId!==first.productId||!r.copy||JSON.stringify(r.sections.map(s=>s.sectionId))!==JSON.stringify(first.sections.map(s=>s.sectionId))))throw Error('ECR_FIXED_CONTENT_SOURCE_MISMATCH');
+ return composeFixedEditorialReport({methodId:'ECR',contentLanguage:locale,manifest,contentPages:first.sections.map(section=>({afterSectionId:section.sectionId,locale,sourceOwner:'ECR_FULL_REPORT',sourceReference:reference,html:languages.map(l=>{const r=reports.find(r=>r.locale===l);return `<div lang="${l}">${renderSection(r.sections.find(s=>s.sectionId===section.sectionId),r)}</div>`;}).join('')}))});
+}
 const list=v=>Array.isArray(v)?v:[];
 const id=s=>`ecr-full-${s.sectionId.toLowerCase().replaceAll('_','-')}`;
 const imageUrl=key=>key?`https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/${String(key).replace(/^\/+/, '')}`:'';
@@ -10,7 +21,7 @@ function renderSection(section,report){
  const comparisons=list(section.comparisons).map(x=>`<article data-ecr-baseline-ref="${esc(x.baselineClaimRef)}"><h3>${esc(report.copy.states[x.comparisonState])}</h3><p><b>${esc(report.copy.baseline)}</b>: ${esc(x.baselineText)}</p><p><b>${esc(report.copy.current)}</b>: ${list(x.currentObservations).map(esc).join(' · ')}</p><p>${esc(x.customerExplanation)}</p><p>${esc(x.observationPrompt)}</p></article>`).join('');
  return `<section id="${esc(id(section))}" class="cx-ecr-full-section" data-ecr-full-section="${esc(section.sectionId)}"><h2><small>${String(section.number).padStart(2,'0')}</small> ${esc(section.title)}</h2>${section.body?`<p>${esc(section.body)}</p>`:''}${facts}${cards?`<div class="cx-ecr-full-cards">${cards}</div>`:''}${claims}${observations}${comparisons}</section>`;
 }
-export function renderEcrFullReportSections(report){return `<article class="cx-ecr-full-report" data-ecr-report-depth="${esc(report.depth)}" data-ecr-product-id="${esc(report.productId)}">${report.publicationState==='INTERNAL_REVIEW'?`<p class="cx-ecr-full-review">${esc(report.copy.preview)}</p>`:''}${report.sections.map(s=>renderSection(s,report)).join('')}${report.depth==='FREE'?`<button type="button" class="cx-button cx-ecr-full-unlock" disabled aria-disabled="true">${esc(report.copy.unlock)}</button>`:''}</article>`;}
+export function renderEcrFullReportSections(report){return `<article class="cx-ecr-full-report" data-ecr-report-depth="${esc(report.depth)}" data-ecr-product-id="${esc(report.productId)}">${report.publicationState==='INTERNAL_REVIEW'?`<p class="cx-ecr-full-review">${esc(report.copy.preview)}</p>`:''}<p>${esc(report.locale==='zh-Hans'?'报告内容按照您选择的语言生成；封面及固定章节页统一采用中英双语版本。':'Report content follows your selected language. Covers and fixed section pages use the shared bilingual edition.')}</p>${report.sections.map(s=>renderSection(s,report)).join('')}${report.depth==='FREE'?`<button type="button" class="cx-button cx-ecr-full-unlock" disabled aria-disabled="true">${esc(report.copy.unlock)}</button>`:''}</article>`;}
 export function renderEcrFullReportNavigation(report){return `<nav class="cx-ecr-product-nav" aria-label="${esc(report.title)}">${report.sections.map(s=>`<button type="button" data-ppr-r3-nav-target="#${esc(id(s))}">${esc(s.title)}</button>`).join('')}</nav>`;}
 
 export function renderEcrHumanRuntimeReport(report){

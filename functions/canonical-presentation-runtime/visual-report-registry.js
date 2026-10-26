@@ -49,3 +49,5 @@ export const REPORT_BLUEPRINT_SUCCESSOR=freeze(VISUAL_REPORT_PRODUCTS.map(p=>({
  requiredContext:p.methodId==='ECR'?{pages:[18,19,20],requirement:'INDEPENDENT_CURRENT_REALITY_OBSERVATIONS'}:p.methodId==='HD'?{advanced:['VARIABLES','PHS'],requirement:'ACTUAL_ADMITTED_INPUT'}:p.methodId==='CROSS'?{requirement:'ADMITTED_METHODS_ONLY',relationshipClasses:['COMMON','COMPLEMENTARY','TENSION','CONTEXT_DEPENDENT','OPEN']}:null,
  editorialRegistry:'functions/canonical-presentation-runtime/report-editorial-registry.js',customerPublishable:false,humanReview:'PENDING'
 })));
+
+export {REPORT_VISUAL_ARCHITECTURE_VERSION,REPORT_VISUAL_ARCHITECTURE,reportVisualArchitecture} from './report-visual-architecture.js';

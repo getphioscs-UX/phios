@@ -1,0 +1,8 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {chromium} from 'file:///C:/Users/Guest%20Account/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs';
+const d='tools/review/report-visual-asset-convergence-r2/recovery-r22/',base='http://127.0.0.1:59844',url=base+'/content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html#REPORT-VISUAL-ASSET-CONVERGENCE-R2-2';
+const browser=await chromium.launch({channel:'msedge',headless:true,args:['--no-proxy-server']});
+try{const page=await browser.newPage();await page.goto(url);const section=page.locator('#REPORT-VISUAL-ASSET-CONVERGENCE-R2-2');await section.waitFor();const links=await section.locator('a').evaluateAll(es=>es.map(e=>e.href));const results=[];
+for(const href of links.filter(x=>x.startsWith(base))){const r=await page.request.get(href);results.push({url:href,status:r.status()});await r.dispose();}
+assert(results.every(r=>r.status===200));const widths=[];for(const width of [1440,390]){await page.setViewportSize({width,height:960});await section.scrollIntoViewIfNeeded();const overflow=await section.evaluate(e=>e.scrollWidth>e.clientWidth+1);widths.push({width,sectionOverflow:overflow});assert.equal(overflow,false);await page.screenshot({path:d+'final-review-'+width+'.png'});}
+fs.writeFileSync(d+'REVIEW-VERIFICATION.json',JSON.stringify({at:new Date().toISOString(),url,links:results,widths,publicAssetGetsRepeated:false},null,2));console.log('PASS',results.length,'local review links and desktop/mobile containment');
+}finally{await browser.close();}

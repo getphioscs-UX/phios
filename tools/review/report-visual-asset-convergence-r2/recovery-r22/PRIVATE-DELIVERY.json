@@ -1,0 +1,91 @@
+{
+  "at": "2026-10-26T12:03:24.932Z",
+  "status": "BLOCKED_FOR_LARGE_R22_PDFS",
+  "checks": [
+    {
+      "name": "actual small PDF stored encrypted; token not recorded",
+      "status": "PASS"
+    },
+    {
+      "name": "PDF bytes not plaintext in SQLite",
+      "status": "PASS"
+    },
+    {
+      "name": "repeat preparation reuses immutable bytes",
+      "status": "PASS"
+    },
+    {
+      "name": "authenticated actual-byte download 0",
+      "status": "PASS"
+    },
+    {
+      "name": "authenticated actual-byte download 1",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong authenticated subject denied",
+      "status": "PASS"
+    },
+    {
+      "name": "grant expires after fifteen minutes",
+      "status": "PASS"
+    },
+    {
+      "name": "source revocation denies a still-signed grant",
+      "status": "PASS"
+    },
+    {
+      "name": "oversize failures leave no incomplete private artifact",
+      "status": "PASS"
+    },
+    {
+      "name": "failed render permits successful explicit retry without corrupt saved state",
+      "status": "PASS"
+    },
+    {
+      "name": "zero external calls",
+      "status": "PASS"
+    }
+  ],
+  "total": 11,
+  "smallFile": {
+    "path": "tools/review/report-visual-asset-convergence-r2/owner-inventory-followup/r12-replay/dossier-en.pdf",
+    "bytes": 83527,
+    "sha256": "ebb372386773a8083a3f2416829174954d5fbdc736ea91a09c0c97cb9aad8d08"
+  },
+  "largeFiles": [
+    {
+      "path": "output/pdf/report-visual-asset-convergence-r2/r21/ast-native-fixed-and-body.pdf",
+      "bytes": 43299510,
+      "sha256": "63ebf6a080473e1dfd797d13096b36d4fab969e9f58b18673e3c83009e5df4b7",
+      "limit": 1048576,
+      "result": "REJECTED_BY_EXISTING_GUARD"
+    },
+    {
+      "path": "output/pdf/report-visual-asset-convergence-r2/r22/ziwei-native-fixed-and-body.pdf",
+      "bytes": 44198197,
+      "sha256": "378b037b564246ceda87d1f925713af4aaeba3921d4bf1805aed66d5c0b8151b",
+      "limit": 1048576,
+      "result": "REJECTED_BY_EXISTING_GUARD"
+    },
+    {
+      "path": "output/pdf/report-visual-asset-convergence-r2/r22/bazi-body-diagnostic-en.pdf",
+      "bytes": 1403603,
+      "sha256": "b65ac0e5996b30dca5fba4ac7407e7bdeb3f7ef88d0bd6ea3ed4702d901fcad8",
+      "limit": 1048576,
+      "result": "REJECTED_BY_EXISTING_GUARD"
+    }
+  ],
+  "grantTransport": "AUTHORIZATION_HEADER_NOT_URL",
+  "ttlMinutes": 15,
+  "secretValuesRecorded": false,
+  "productionEquivalent": false,
+  "blockers": [
+    "R1.2 encrypted D1/base64 owner explicitly limits bytes to 1MiB; do not relax",
+    "R2 template identity must be separated from LOCAL-PDF-R1.2 before successful R2 cache issuance",
+    "PRIVATE_REPORTS R2 exists for trusted released reports, but its release/assertion pipeline is not an admitted PE visual PDF byte-ingest adapter",
+    "Production-equivalent streaming, memory/response budget, release admission and recovery at actual visual-PDF sizes not proven"
+  ],
+  "providerCalls": 0,
+  "productionWrites": 0
+}

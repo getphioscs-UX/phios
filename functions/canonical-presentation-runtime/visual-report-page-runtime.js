@@ -28,6 +28,8 @@ export function assemblePublicationSnapshot({methodId,locale,pages,intro,tempora
 }
 export const VISUAL_PAGE_SCHEMA = 'PHI-OS-PERSONAL-READING-VISUAL-PAGE-v1.0.0';
 export const PERSONAL_READING_PARENT_SCHEMA = 'PHI-OS-PERSONAL-READING-REPORT-IR-v2.0.0';
+export {composeFixedEditorialReport} from './report-editorial-resolver.js';
+
 const unique = xs => [...new Set(xs)];
 export const REPORT_ACCESS_STATES=Object.freeze(['OPEN','PREVIEW','PAID_LOCKED','DATA_REQUIRED','CONDITIONAL','NOT_APPLICABLE']);
 // Locale changes presentation only. Callers supply translations bound to the

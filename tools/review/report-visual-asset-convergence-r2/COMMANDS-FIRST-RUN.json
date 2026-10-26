@@ -1,0 +1,85 @@
+{
+  "at": "2026-10-26T06:28:43.815Z",
+  "commands": [
+    {
+      "name": "bazi-dynamic-preservation",
+      "command": "node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-bazi-section-publication.mjs",
+      "exitCode": 0,
+      "log": "bazi-dynamic-preservation.log",
+      "status": "PASS"
+    },
+    {
+      "name": "package-aliases",
+      "command": "node scripts/run-zero-cost-regression.mjs check:package-aliases",
+      "exitCode": 0,
+      "log": "package-aliases.log",
+      "status": "PASS"
+    },
+    {
+      "name": "profile-r12-regression",
+      "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/personal-evidence-r1/commerce-r1-2/test.mjs",
+      "exitCode": 0,
+      "log": "profile-r12-regression.log",
+      "status": "PASS"
+    },
+    {
+      "name": "pages-functions-build",
+      "command": "node node_modules/wrangler/bin/wrangler.js pages functions build --build-output-directory .tmp/report-visual-convergence-r2/empty-assets --outdir .tmp/report-visual-convergence-r2/worker --output-routes-path .tmp/report-visual-convergence-r2/worker/_routes.json --compatibility-date 2026-07-14 --compatibility-flags nodejs_compat",
+      "exitCode": 1,
+      "log": "pages-functions-build.log",
+      "status": "FAIL"
+    }
+  ],
+  "compiled": [
+    {
+      "entry": "functions/canonical-presentation-runtime/report-visual-architecture.js",
+      "exitCode": 0,
+      "bytes": 1439
+    },
+    {
+      "entry": "functions/canonical-presentation-runtime/report-editorial-resolver.js",
+      "exitCode": 0,
+      "bytes": 38476
+    },
+    {
+      "entry": "functions/canonical-presentation-runtime/visual-report-registry.js",
+      "exitCode": 0,
+      "bytes": 306059
+    },
+    {
+      "entry": "functions/canonical-presentation-runtime/visual-report-page-runtime.js",
+      "exitCode": 0,
+      "bytes": 521168
+    },
+    {
+      "entry": "functions/profile/personal-evidence-dossier-r12.js",
+      "exitCode": 0,
+      "bytes": 70655
+    },
+    {
+      "entry": "functions/account/profile-evidence-store.js",
+      "exitCode": 0,
+      "bytes": 1010561
+    },
+    {
+      "entry": "functions/ast-full-production/ast-vfr-r1r2-renderer.js",
+      "exitCode": 0,
+      "bytes": 61495
+    },
+    {
+      "entry": "assets/customer-ui/js/personal-products/ziwei-vfr-r1-pages.js",
+      "exitCode": 0,
+      "bytes": 75886
+    },
+    {
+      "entry": "assets/customer-ui/js/specialists/ecr/full-report-sections-renderer.js",
+      "exitCode": 0,
+      "bytes": 39358
+    },
+    {
+      "entry": "assets/customer-ui/js/surfaces/personal-evidence-dossier-r12.js",
+      "exitCode": 0,
+      "bytes": 10085
+    }
+  ]
+}

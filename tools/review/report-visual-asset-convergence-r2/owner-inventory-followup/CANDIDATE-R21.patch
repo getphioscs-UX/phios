@@ -1,0 +1,338 @@
+diff --git a/assets/customer-ui/js/personal-products/ziwei-vfr-r1-pages.js b/assets/customer-ui/js/personal-products/ziwei-vfr-r1-pages.js
+index beada31d..d414ba2f 100644
+--- a/assets/customer-ui/js/personal-products/ziwei-vfr-r1-pages.js
++++ b/assets/customer-ui/js/personal-products/ziwei-vfr-r1-pages.js
+@@ -1,4 +1,5 @@
+ import {getZwrVfrVisualBinding} from '../../../../functions/canonical-presentation-runtime/ziwei-vfr-r1-visual-bindings.js';
++import {requireFixedReportManifest,renderFixedReportPage,FIXED_REPORT_PAGE_CSS,resolveReportBodyAsset} from '../../../../functions/canonical-presentation-runtime/report-editorial-resolver.js';
+ 
+ export const ZWR_VFR_RENDERER_VERSION='ZWR-VFR-R1-DEEP-RENDERER-v6';
+ 
+@@ -271,14 +272,24 @@ function closingPage(reportIr,binding,pageNumber){
+  const en=(reportIr?.closingSummary?.en||[]).map(x=>firstSentence(x,'en'));
+  return '<div class="zv-closing-art">'+(binding.hero?'<img src="'+esc(binding.hero)+'" alt="">':'')+(binding.motif?'<img class="zv-closing-motif" src="'+esc(binding.motif)+'" alt="">':'')+'</div><div class="zv-closing"><span>'+esc(pageNumber||'')+'</span><h1>读取边界</h1><h2>Reading Boundary</h2><p>命盘提供结构化观察，不替代现实证据、专业判断或你的实际选择。</p><p lang="en">The chart provides structured observation; it does not replace real-world evidence, professional judgment, or your own decisions.</p><div class="zv-closing-points">'+zh.slice(0,3).map((x,i)=>'<article><b>0'+(i+1)+'</b><p>'+esc(x)+'</p><small>'+esc(en[i]||'')+'</small></article>').join('')+'</div></div>';
+ }
+-export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
++export function renderZwrVfrReview({reportIr,diagramData,pagePlan,fixedVisualManifest=null,contentLanguage=reportIr.locale||'bilingual'}){
++ if(fixedVisualManifest)requireFixedReportManifest('ZWR',contentLanguage,fixedVisualManifest);
++ const bodyR2=fixedVisualManifest?resolveReportBodyAsset({methodId:'ZWR',manifest:fixedVisualManifest}):null,nativeR2=fixedVisualManifest?.reports.ZWR.nativeBindings;let physicalPage=0;
+  const sections=new Map((reportIr?.sections||[]).map(s=>[s.sectionId,s]));
+  const diagrams=new Map((diagramData?.diagrams||[]).map(d=>[d.id,d]));
+- return pagePlan.map(p=>{
++ return pagePlan.map(sourcePage=>{
++  let p=sourcePage,prefix='';
++  if(fixedVisualManifest){
++   if(!nativeR2)throw Error('ZIWEI_FIXED_NATIVE_BINDING_REQUIRED');
++   if(p.pageFamily==='SECTION_MASTER'&&nativeR2.bodyOnlySections.includes(p.sectionId))return '';
++   if(p.pageFamily==='OVERVIEW'){physicalPage++;prefix=`<style>${FIXED_REPORT_PAGE_CSS}</style>${renderFixedReportPage({methodId:'ZWR',pageId:nativeR2.overviewMaster,contentLanguage,manifest:fixedVisualManifest})}`;}
++   p={...p,pageNumber:++physicalPage};
++   if(sourcePage.pageNumber<=5||p.pageFamily==='SECTION_MASTER')return `<style>${FIXED_REPORT_PAGE_CSS}</style>${renderFixedReportPage({methodId:'ZWR',pageId:sourcePage.pageNumber<=5?'P0'+sourcePage.pageNumber:nativeR2.sectionMasters[p.sectionId],contentLanguage,manifest:fixedVisualManifest})}`;
++  }
+   const s=sections.get(p.sectionId),ds=(p.diagramIds||[]).map(id=>diagrams.get(id)).filter(Boolean);
+-  const binding=getZwrVfrVisualBinding({pageNumber:p.pageNumber,sectionId:p.sectionId,pageFamily:p.pageFamily});
++  const binding=fixedVisualManifest?{kind:p.pageFamily==='CLOSING'?'CLOSING':'BODY',hero:bodyR2.url,body:bodyR2.url,motif:null}:getZwrVfrVisualBinding({pageNumber:p.pageNumber,sectionId:p.sectionId,pageFamily:p.pageFamily});
+   if(binding.kind==='STATIC_FRONT_MATTER')return '<section class="zv-page zv-static-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-page-key="'+esc(p.pageKey)+'"><img class="zv-static" src="'+esc(binding.url)+'" alt="'+esc(p.pageKey)+'"></section>';
+-  if(binding.kind==='CLOSING')return '<section class="zv-page zv-closing-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-page-key="'+esc(p.pageKey)+'">'+closingPage(reportIr,binding,p.pageNumber)+'<footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
++  if(binding.kind==='CLOSING')return '<section class="zv-page zv-closing-page" '+(fixedVisualManifest?'data-page-role="BODY_CONTENT" ':'')+'data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-page-key="'+esc(p.pageKey)+'">'+closingPage(reportIr,binding,p.pageNumber)+'<footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
+   let body='';
+   const compact=p.pageFamily==='DIAGRAM_COMPOSITE';
+   const diagramHtml=ds.map(d=>renderZwrVfrDiagram(d,{pageKey:p.pageKey,sectionId:p.sectionId,pageFamily:p.pageFamily,compact})).join('');
+@@ -287,6 +298,6 @@ export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
+   else if(p.pageFamily==='DIAGRAM_COMPOSITE')body='<div class="zv-diagram-composite">'+diagramHtml+'</div>';
+   else if(ds.length)body=diagramHtml;
+   else body='<div class="zv-front"><h1>'+esc(p.pageKey.replaceAll('_',' '))+'</h1><p>PHI OS · Zi Wei Dou Shu Visual First Report</p></div>';
+-  return '<section class="zv-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-page-key="'+esc(p.pageKey)+'" data-section-id="'+esc(p.sectionId||'')+'" style="'+sectionVars(p.sectionId)+'">'+(binding.body?'<img class="zv-body-bg" src="'+esc(binding.body)+'" alt="">':'')+(binding.motif?'<img class="zv-body-motif" src="'+esc(binding.motif)+'" alt="">':'')+'<header><strong>PHI OS</strong><span>ZI WEI DOU SHU · 紫微斗数</span></header><main>'+body+'</main><footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
++  return prefix+'<section class="zv-page" '+(fixedVisualManifest?'data-page-role="BODY_CONTENT" ':'')+'data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-page-key="'+esc(p.pageKey)+'" data-section-id="'+esc(p.sectionId||'')+'" style="'+sectionVars(p.sectionId)+'">'+(binding.body?'<img class="zv-body-bg" src="'+esc(binding.body)+'" alt="">':'')+(binding.motif?'<img class="zv-body-motif" src="'+esc(binding.motif)+'" alt="">':'')+'<header><strong>PHI OS</strong><span>ZI WEI DOU SHU · 紫微斗数</span></header><main>'+body+'</main><footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
+  }).join('');
+ }
+diff --git a/assets/customer-ui/js/specialists/ecr/full-report-sections-renderer.js b/assets/customer-ui/js/specialists/ecr/full-report-sections-renderer.js
+index 02b1e393..08b1b2a4 100644
+--- a/assets/customer-ui/js/specialists/ecr/full-report-sections-renderer.js
++++ b/assets/customer-ui/js/specialists/ecr/full-report-sections-renderer.js
+@@ -1,4 +1,15 @@
+ import {esc} from '../../surfaces/runtime-ui.js';
++import {composeFixedEditorialReport} from '../../../../../functions/canonical-presentation-runtime/report-editorial-resolver.js';
++import {reportContentLocale} from '../../../../../functions/canonical-presentation-runtime/report-editorial-resolver.js';
++// Local fixed-page candidate reuses the current admitted customer section renderer.
++// Source, entitlement and locale must already have been checked by the ECR owner.
++export function renderEcrFixedAssetCandidate({reports,contentLanguage,manifest}={}){
++ const locale=reportContentLocale(contentLanguage),languages=locale==='bilingual'?['zh-Hans','en']:[locale];
++ if(!Array.isArray(reports)||reports.length!==languages.length||languages.some(l=>reports.filter(r=>r.locale===l).length!==1))throw Error('ECR_APPROVED_LOCALE_CONTENT_REQUIRED');
++ const first=reports[0],reference=first.sourceProjectionId||first.sourceProjectionRef;
++ if(!reference||reports.some(r=>(r.sourceProjectionId||r.sourceProjectionRef)!==reference||r.depth!==first.depth||r.productId!==first.productId||!r.copy||JSON.stringify(r.sections.map(s=>s.sectionId))!==JSON.stringify(first.sections.map(s=>s.sectionId))))throw Error('ECR_FIXED_CONTENT_SOURCE_MISMATCH');
++ return composeFixedEditorialReport({methodId:'ECR',contentLanguage:locale,manifest,contentPages:first.sections.map(section=>({afterSectionId:section.sectionId,locale,sourceOwner:'ECR_FULL_REPORT',sourceReference:reference,html:languages.map(l=>{const r=reports.find(r=>r.locale===l);return `<div lang="${l}">${renderSection(r.sections.find(s=>s.sectionId===section.sectionId),r)}</div>`;}).join('')}))});
++}
+ const list=v=>Array.isArray(v)?v:[];
+ const id=s=>`ecr-full-${s.sectionId.toLowerCase().replaceAll('_','-')}`;
+ const imageUrl=key=>key?`https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/${String(key).replace(/^\/+/, '')}`:'';
+@@ -10,7 +21,7 @@ function renderSection(section,report){
+  const comparisons=list(section.comparisons).map(x=>`<article data-ecr-baseline-ref="${esc(x.baselineClaimRef)}"><h3>${esc(report.copy.states[x.comparisonState])}</h3><p><b>${esc(report.copy.baseline)}</b>: ${esc(x.baselineText)}</p><p><b>${esc(report.copy.current)}</b>: ${list(x.currentObservations).map(esc).join(' · ')}</p><p>${esc(x.customerExplanation)}</p><p>${esc(x.observationPrompt)}</p></article>`).join('');
+  return `<section id="${esc(id(section))}" class="cx-ecr-full-section" data-ecr-full-section="${esc(section.sectionId)}"><h2><small>${String(section.number).padStart(2,'0')}</small> ${esc(section.title)}</h2>${section.body?`<p>${esc(section.body)}</p>`:''}${facts}${cards?`<div class="cx-ecr-full-cards">${cards}</div>`:''}${claims}${observations}${comparisons}</section>`;
+ }
+-export function renderEcrFullReportSections(report){return `<article class="cx-ecr-full-report" data-ecr-report-depth="${esc(report.depth)}" data-ecr-product-id="${esc(report.productId)}">${report.publicationState==='INTERNAL_REVIEW'?`<p class="cx-ecr-full-review">${esc(report.copy.preview)}</p>`:''}${report.sections.map(s=>renderSection(s,report)).join('')}${report.depth==='FREE'?`<button type="button" class="cx-button cx-ecr-full-unlock" disabled aria-disabled="true">${esc(report.copy.unlock)}</button>`:''}</article>`;}
++export function renderEcrFullReportSections(report){return `<article class="cx-ecr-full-report" data-ecr-report-depth="${esc(report.depth)}" data-ecr-product-id="${esc(report.productId)}">${report.publicationState==='INTERNAL_REVIEW'?`<p class="cx-ecr-full-review">${esc(report.copy.preview)}</p>`:''}<p>${esc(report.locale==='zh-Hans'?'报告内容按照您选择的语言生成；封面及固定章节页统一采用中英双语版本。':'Report content follows your selected language. Covers and fixed section pages use the shared bilingual edition.')}</p>${report.sections.map(s=>renderSection(s,report)).join('')}${report.depth==='FREE'?`<button type="button" class="cx-button cx-ecr-full-unlock" disabled aria-disabled="true">${esc(report.copy.unlock)}</button>`:''}</article>`;}
+ export function renderEcrFullReportNavigation(report){return `<nav class="cx-ecr-product-nav" aria-label="${esc(report.title)}">${report.sections.map(s=>`<button type="button" data-ppr-r3-nav-target="#${esc(id(s))}">${esc(s.title)}</button>`).join('')}</nav>`;}
+ 
+ export function renderEcrHumanRuntimeReport(report){
+diff --git a/assets/customer-ui/js/surfaces/personal-evidence-dossier-r12.js b/assets/customer-ui/js/surfaces/personal-evidence-dossier-r12.js
+index 096b1027..6bba82eb 100644
+--- a/assets/customer-ui/js/surfaces/personal-evidence-dossier-r12.js
++++ b/assets/customer-ui/js/surfaces/personal-evidence-dossier-r12.js
+@@ -4,7 +4,7 @@ if(['localhost','127.0.0.1','[::1]'].includes(location.hostname)&&new URLSearchP
+ }
+ function mount(){
+  const zh=document.documentElement.lang==='zh-Hans',t=(en,cn)=>zh?cn:en,api='/api/account-profile-evidence?lane=experiences';
+- const node=document.createElement('section');node.id='pe-dossier-r12';node.innerHTML=`<h3>${t('Personal Evidence Dossier','个人现实证据档案')}</h3><p>${t('Export your selected evidence through your membership or legitimate historical access. No separate dossier purchase.','凭会员或合法历史权益导出所选证据，不需单独购买档案。')}</p><label>${t('Export language','导出语言')}<select data-dossier-language><option value="zh">中文</option><option value="en">English</option><option value="bilingual">中文 + English</option></select></label><label>${t('Name on cover (optional)','封面姓名（可选）')}<input data-dossier-name maxlength="160" autocomplete="off"></label><button type="button" data-dossier-assessments>${t('Select saved assessments (optional)','选取已保存测评（可选）')}</button><div data-dossier-assessment-list></div><label><input type="checkbox" data-dossier-consent>${t('Save a snapshot of the checked sources. Downloads cannot be recalled remotely.','保存已勾选来源的快照；已下载副本无法远程收回。')}</label><details><summary>${t('Choose sections','选择章节')}</summary>${[['Evidence overview','证据总览'],['Evidence sources','证据结构'],['Candidate areas','候选方向'],['Decisions','自主决定'],['Relationships','关系'],['Career and work','工作'],['Assessments','测评'],['Financial and external evidence','财务及外部资料'],['Next verification','下一步核实'],['Evidence boundaries','证据边界']].map(([en,cn],i)=>`<label><input type="checkbox" checked data-dossier-section="SEC-${String(i+1).padStart(2,'0')}">${t(en,cn)}</label>`).join('')}</details><button type="button" data-dossier-create>${t('Preview and save dossier','预览并保存档案')}</button><button type="button" data-dossier-list>${t('Reopen my dossiers','重开我的档案')}</button><p>${t('Local layout draft: fifteen new artworks await acceptance. Missing translations are not generated.','本地版面验证稿：十五张新图待接受；不自动生成缺失译文。')}</p><p role="status" data-dossier-status></p><div data-dossier-saved></div><dialog data-dossier-dialog style="width:min(960px,95vw);max-height:95vh"><button type="button" data-dossier-close>${t('Close','关闭')}</button><button type="button" data-dossier-pdf>${t('Download PDF','下载 PDF')}</button><iframe title="${t('Dossier preview','档案预览')}" sandbox="allow-same-origin allow-modals" style="width:100%;height:70vh;border:0"></iframe></dialog>`;
++ const node=document.createElement('section');node.id='pe-dossier-r12';node.innerHTML=`<h3>${t('Personal Evidence Dossier','个人现实证据档案')}</h3><p>${t('Export your selected evidence through your membership or legitimate historical access. No separate dossier purchase.','凭会员或合法历史权益导出所选证据，不需单独购买档案。')}</p><p>${t('Report content follows your selected language. Covers and fixed section pages use the shared bilingual edition.','报告内容按照您选择的语言生成；封面及固定章节页统一采用中英双语版本。')}</p><label>${t('Export language','导出语言')}<select data-dossier-language><option value="zh">中文</option><option value="en">English</option><option value="bilingual">中文 + English</option></select></label><label>${t('Name on cover (optional)','封面姓名（可选）')}<input data-dossier-name maxlength="160" autocomplete="off"></label><button type="button" data-dossier-assessments>${t('Select saved assessments (optional)','选取已保存测评（可选）')}</button><div data-dossier-assessment-list></div><label><input type="checkbox" data-dossier-consent>${t('Save a snapshot of the checked sources. Downloads cannot be recalled remotely.','保存已勾选来源的快照；已下载副本无法远程收回。')}</label><details><summary>${t('Choose sections','选择章节')}</summary>${[['Evidence overview','证据总览'],['Evidence sources','证据结构'],['Candidate areas','候选方向'],['Decisions','自主决定'],['Relationships','关系'],['Career and work','工作'],['Assessments','测评'],['Financial and external evidence','财务及外部资料'],['Next verification','下一步核实'],['Evidence boundaries','证据边界']].map(([en,cn],i)=>`<label><input type="checkbox" checked data-dossier-section="SEC-${String(i+1).padStart(2,'0')}">${t(en,cn)}</label>`).join('')}</details><button type="button" data-dossier-create>${t('Preview and save dossier','预览并保存档案')}</button><button type="button" data-dossier-list>${t('Reopen my dossiers','重开我的档案')}</button><p>${t('Local layout draft: fifteen new artworks await acceptance. Missing translations are not generated.','本地版面验证稿：十五张新图待接受；不自动生成缺失译文。')}</p><p role="status" data-dossier-status></p><div data-dossier-saved></div><dialog data-dossier-dialog style="width:min(960px,95vw);max-height:95vh"><button type="button" data-dossier-close>${t('Close','关闭')}</button><button type="button" data-dossier-pdf>${t('Download PDF','下载 PDF')}</button><iframe title="${t('Dossier preview','档案预览')}" sandbox="allow-same-origin allow-modals" style="width:100%;height:70vh;border:0"></iframe></dialog>`;
+  const area=document.querySelector('#pe-area-6');area.append(node);const old=area.querySelector('[data-pe-report]');if(old){old.hidden=true;const label=area.querySelector('[data-pe-report-consent]')?.closest('label');if(label)label.hidden=true;const heading=label?.previousElementSibling;if(heading?.tagName==='H3')heading.hidden=true;}
+  const $=s=>node.querySelector(s),status=$('[data-dossier-status]'),language=$('[data-dossier-language]');language.value=zh?'zh':'en';let reportId=null,blob=null,turn=0;
+  const request=async(url,body,extraHeaders={})=>{const r=await fetch(url,{method:body?'POST':'GET',headers:{...extraHeaders,...(body?{'content-type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),cache:'no-store'});if(!r.ok){const b=await r.json();throw Error(b.code);}return r;};
+diff --git a/functions/account/profile-evidence-store.js b/functions/account/profile-evidence-store.js
+index 84531182..32b7b089 100644
+--- a/functions/account/profile-evidence-store.js
++++ b/functions/account/profile-evidence-store.js
+@@ -103,7 +103,7 @@ async function experienceLane(context,{db,key,userId,url,readAssessment}){
+    if(saved.r12)await dossierEligibility(context.env,userId);
+    let historical=false;const openedVersions=new Map();for(const ref of saved.refs){const current=await latest(ref.id);openedVersions.set(ref.id,current.record.version);if(current.record.version!==ref.version)historical=true;}
+    if(saved.r12){for(const a of saved.assessments||[])await readAssessment(a.objectId);}
+-   const rendered=saved.r12?renderDossierR12({...saved.r12,records:saved.records,assessments:saved.assessments||[],reportId:saved.reportId,language:url.searchParams.get('language')||saved.r12.language}):null;
++   const rendered=saved.r12?renderDossierR12({...saved.r12,visualArchitecture:url.searchParams.get('visualArchitecture')||saved.r12.visualArchitecture,records:saved.records,assessments:saved.assessments||[],reportId:saved.reportId,language:url.searchParams.get('language')||saved.r12.language}):null;
+    const baseHtml=rendered?.html||saved.html;
+    const html=historical?baseHtml.replace('<main>','<main><p role="status">历史版本：来源已有修正。 / Historical version: source has since been corrected.</p>'):baseHtml;
+    if(url.searchParams.get('format')==='pdf'){
+@@ -128,7 +128,7 @@ async function experienceLane(context,{db,key,userId,url,readAssessment}){
+  const raw=await context.request.text();if(new TextEncoder().encode(raw).length>30000)throw evidenceError('EVIDENCE_INPUT_TOO_LARGE',413);
+  let body;try{body=JSON.parse(raw);}catch{throw evidenceError('EVIDENCE_INVALID_JSON',400);}
+  if(!body||typeof body!=='object'||Array.isArray(body))throw evidenceError('EVIDENCE_OBJECT_REQUIRED',400);
+- const allowed=['action','record','id','baseVersion','requestToken','consent','retentionConsent','expiresAt','selected','target','purpose','purposeCode','locale','worldQuery','savedDraftRef','financialConsent','reflection','configurationConsent','contextComparable','consentRef','language','customerName','sections','assessmentIds'];
++ const allowed=['action','record','id','baseVersion','requestToken','consent','retentionConsent','expiresAt','selected','target','purpose','purposeCode','locale','worldQuery','savedDraftRef','financialConsent','reflection','configurationConsent','contextComparable','consentRef','language','customerName','sections','assessmentIds','visualArchitecture'];
+  if(Object.keys(body).some(k=>!allowed.includes(k)))throw evidenceError('EVIDENCE_UNKNOWN_FIELD');
+  if(body.consent!==true)throw evidenceError('EVIDENCE_CONSENT_REQUIRED',403);
+  if(body.action==='prepare-pdf'){
+@@ -187,7 +187,7 @@ async function experienceLane(context,{db,key,userId,url,readAssessment}){
+     const ids=body.assessmentIds||[];
+     if(typeof(body.customerName||'')!=='string'||(body.customerName||'').length>160)throw evidenceError('DOSSIER_CUSTOMER_NAME_INVALID');
+     const sourceSnapshotVersion=await sha256Hex(JSON.stringify({refs:report.refs,assessmentIds:ids}));
+-    const r12={language:body.language,now,sourceSnapshotVersion,customerName:body.customerName||'',sections:body.sections||null};
++    const r12={language:body.language,now,sourceSnapshotVersion,customerName:body.customerName||'',sections:body.sections||null,...(body.visualArchitecture?{visualArchitecture:body.visualArchitecture}:{})};
+     const rendering=renderDossierR12({...r12,records,assessments,reportId});
+     Object.assign(report,{canonical:assembleExperienceDossier({records,ownerId:userId,reportId,now,assessments}).canonical,...rendering,r12,records:structuredClone(records),assessments,eligibility,sourceSnapshotVersion,renderingArtifactId:reportId+'-'+rendering.language,schemaVersion:DOSSIER_R12});
+    }
+diff --git a/functions/ast-full-production/ast-vfr-r1r2-renderer.js b/functions/ast-full-production/ast-vfr-r1r2-renderer.js
+index 0c011593..4121c045 100644
+--- a/functions/ast-full-production/ast-vfr-r1r2-renderer.js
++++ b/functions/ast-full-production/ast-vfr-r1r2-renderer.js
+@@ -1,10 +1,13 @@
+ import {escapeAst as e} from './ast-diagram-renderer.js';
++import {requireFixedReportManifest,renderFixedReportPage,FIXED_REPORT_PAGE_CSS,resolveReportBodyAsset} from '../canonical-presentation-runtime/report-editorial-resolver.js';
+ import {renderAstR1R2Diagram,AST_DIAGRAM_TOKENS} from './ast-vfr-r1r2-diagram-system.js';
+ const descriptors=['深度、结构与整盘入口','日常运行与内在空间','表达、研究与内部调节','责任如何进入一对一结构','行动如何连接公共方向','个人资源与共享依赖','扩张、责任与边界','从能力走向选择','行动与支持性连接','把最深的投入留给重要之事'];
+-export function renderAstR1R2Publication({ir,pagePlan,diagramData,assetUrl}){
+- const by=new Map(ir.visualBindings.map(a=>[a.assetId,a])),url=id=>assetUrl(by.get(id).path),body=url('VIS-REPORT-ASTROLOGY-BODY');
++export function renderAstR1R2Publication({ir,pagePlan,diagramData,assetUrl,fixedVisualManifest=null,contentLanguage=ir.locale||'bilingual'}){
++ if(fixedVisualManifest)requireFixedReportManifest('AST',contentLanguage,fixedVisualManifest);
++ const by=new Map(ir.visualBindings.map(a=>[a.assetId,a])),url=id=>assetUrl(by.get(id).path),body=fixedVisualManifest?resolveReportBodyAsset({methodId:'AST',manifest:fixedVisualManifest}).url:url('VIS-REPORT-ASTROLOGY-BODY');
+  const parts=(xs,mode='')=>xs.map(p=>`${p.heading?`<h2>${e(p.heading)}</h2>`:''}<p class="${mode==='quote-copy'&&/先感受到|外面的系统仍然在运行|理想需要现实|有边界的行动|什么值得我进入这么深/.test(p.text)?mode:''}" data-part="${e(p.blockId)}:${p.paragraphIndex}:${p.offset}">${e(p.text).replace(/\r?\n/g,'<br>')}</p>`).join('');
+  const pages=pagePlan.pages.map(p=>{
++  if(fixedVisualManifest&&['EDITORIAL_FULL_PAGE','SECTION_OPENER'].includes(p.pageType))return `<div class="frame">${renderFixedReportPage({methodId:'AST',pageId:p.pageType==='SECTION_OPENER'?p.sectionId:'P0'+p.pageNumber,contentLanguage,manifest:fixedVisualManifest})}</div>`;
+   const section=ir.sections.find(s=>s.sectionId===p.sectionId),si=ir.sections.indexOf(section),art=p.pageType==='EDITORIAL_FULL_PAGE'||p.pageType==='SECTION_OPENER'?url(p.assetId):body;
+   let inside='';
+   if(p.pageNumber===1)inside=`<div class="cover"><span>${e(ir.customerDisplay.name)}</span><span>${e(ir.customerDisplay.birthDate)}</span><span>${e(ir.customerDisplay.birthTime)}</span></div><div class="place">${e(ir.customerDisplay.birthPlace)}</div>`;
+@@ -18,10 +21,10 @@ export function renderAstR1R2Publication({ir,pagePlan,diagramData,assetUrl}){
+    else if(p.composition==='BODY-H')inside=eyebrow+`<div class="transition reading">${parts(p.parts)}</div><div class="transition-orbit" aria-hidden="true"></div>`;
+    else inside=eyebrow+`<div class="reading column">${parts(p.parts)}</div><div class="margin-mark" aria-hidden="true">${planetForSection(si)}</div>`;
+   }
+-  return `<div class="frame"><article class="page ${p.composition||p.pageType} ${p.side||''}" data-page="${p.pageId}" data-section="${p.sectionId||''}" data-composition="${p.composition||''}" style="background-image:url('${e(art)}')">${inside}${p.pageType==='EDITORIAL_FULL_PAGE'?'':`<footer>PHI OS <span>个人占星解读</span><b>${String(p.pageNumber).padStart(2,'0')}</b></footer>`}</article></div>`;
++  return `<div class="frame"><article class="page ${p.composition||p.pageType} ${p.side||''}" ${fixedVisualManifest?'data-page-role="BODY_CONTENT" ':''}data-page="${p.pageId}" data-section="${p.sectionId||''}" data-composition="${p.composition||''}" style="background-image:url('${e(art)}')">${inside}${p.pageType==='EDITORIAL_FULL_PAGE'?'':`<footer>PHI OS <span>个人占星解读</span><b>${String(p.pageNumber).padStart(2,'0')}</b></footer>`}</article></div>`;
+  }).join('');
+  const tokens=Object.entries(AST_DIAGRAM_TOKENS).map(([k,v])=>`--ast-diagram-${k.replace(/[A-Z]/g,c=>'-'+c.toLowerCase())}:${v}`).join(';');
+- return `<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${e(ir.customerDisplay.name)}｜个人占星解读 · 视觉修订版</title><style>
++ return `<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${e(ir.customerDisplay.name)}｜个人占星解读 · 视觉修订版</title><style>${fixedVisualManifest?FIXED_REPORT_PAGE_CSS:''}
+  :root{${tokens};--ink:#193746;--gold:#a58249;--mist:#557481}*{box-sizing:border-box}body{margin:0;background:#0e2534;color:var(--ink);font-family:Georgia,"Microsoft YaHei",serif}.toolbar{padding:16px;text-align:center;color:#e9dfc9}.toolbar button{padding:8px 20px;color:#e9dfc9;background:transparent;border:1px solid #a58249;font:inherit}.frame{width:794px;height:1123px;margin:25px auto}.page{position:relative;width:794px;height:1123px;background-size:100% 100%;background-repeat:no-repeat}.eyebrow{position:absolute;top:66px;left:65px;right:65px;font-size:14px;letter-spacing:2px;border-bottom:1px solid #a5824970;padding-bottom:14px}.eyebrow span{margin-left:16px}.eyebrow i{float:right;font-size:11px;font-style:normal;letter-spacing:1.5px}.reading{color:var(--ink)}.reading p{font-size:18px;line-height:1.72;margin:0 0 15px;overflow-wrap:anywhere}.reading h2{font-size:25px;line-height:1.45;font-weight:normal;margin:0 0 24px;color:#695333}.column{position:absolute;top:151px;padding:12px 18px 16px;background:linear-gradient(90deg,#fcf9f0de,#fcf9f0b0 75%,#fcf9f000)}.BODY-A .column{left:76px;width:575px}.BODY-B.left .column{left:70px;width:462px}.BODY-B.right .column{right:70px;width:462px;background:linear-gradient(270deg,#fcf9f0de,#fcf9f0b0 75%,#fcf9f000)}.margin-mark{position:absolute;right:90px;top:430px;font-family:"Segoe UI Symbol",serif;font-size:90px;color:#a5824966}.right .margin-mark{right:auto;left:90px}.BODY-A .margin-mark{display:none}.insight{position:absolute;left:95px;right:95px;top:220px;padding:35px 24px;background:radial-gradient(ellipse,#fffaf0d9,transparent 75%)}.quote-mark{font-size:90px;color:var(--gold);height:80px}.insight .reading p{font-size:32px;line-height:1.7;margin-bottom:25px}.insight h2{font-size:24px}.gold-rule{height:1px;width:120px;background:var(--gold);margin-top:28px}.motif{position:absolute;object-fit:contain;opacity:.45}.quote-motif{width:150px;height:150px;right:65px;bottom:150px}.summary{position:absolute;top:180px;left:90px;right:100px;background:linear-gradient(90deg,#fffaf0ce,transparent);padding:24px}.anchor{display:flex;gap:24px;margin-bottom:24px}.anchor-number{font:25px Georgia;color:var(--gold);min-width:36px}.summary .reading p,.summary p{font-size:22px;line-height:1.65}.transition{position:absolute;top:195px;left:100px;width:560px;padding:24px;background:radial-gradient(ellipse,#fffcf4d9,transparent)}.transition p{font-size:24px;line-height:1.75}.transition-orbit{position:absolute;left:275px;bottom:155px;width:230px;height:100px;border:1px solid #a5824980;border-radius:50%;transform:rotate(-15deg)}.diagram-stage{position:absolute;top:125px;left:65px;right:65px;aspect-ratio:1;background:radial-gradient(ellipse at center,#fffaf0dc 0%,#fffaf08c 54%,transparent 73%)}.diagram-stage svg{display:block;width:100%;height:100%;overflow:visible}.BODY-E .explanation{position:absolute;left:90px;right:90px;top:814px;padding:10px 14px;background:linear-gradient(90deg,#fffaf0e0,transparent)}.explanation h2{font-size:22px;margin-bottom:13px}.explanation p{font-size:18px;line-height:1.7;margin-bottom:12px}.BODY-D .diagram-stage,.BODY-F .diagram-stage{left:105px;right:105px;top:130px}.BODY-D .explanation,.BODY-F .explanation{position:absolute;left:82px;right:82px;top:735px;padding:16px 18px;background:linear-gradient(90deg,#fffaf0e0,#fffaf0a0,transparent)}.BODY-F .dual-explanation{columns:2;column-gap:35px;column-rule:1px solid #a5824950}.BODY-F .explanation p{break-inside:avoid}.BODY-F .explanation h2{column-span:all}.section-index{position:absolute;top:85px;left:70px;font:54px Georgia;color:#8a6b36}.opener{position:absolute;left:72px;right:72px;bottom:120px;padding:25px 0;background:linear-gradient(90deg,#fbf6e8e8,#fbf6e8b0 70%,transparent)}.opener small{letter-spacing:3px;font-size:13px;color:#496577}.opener h1{font-size:43px;font-weight:normal;letter-spacing:4px;margin:20px 0;color:#173746}.opener-rule{width:80px;height:2px;background:var(--gold);margin:22px 0}.descriptor{font-size:21px;letter-spacing:2px}.mode-label{font-size:15px;line-height:1.6;margin-top:20px;max-width:510px}.opener-motif{right:50px;bottom:102px;width:105px;height:105px}footer{position:absolute;bottom:34px;left:65px;right:65px;font-size:11px;color:#486775;letter-spacing:2px;border-top:1px solid #a5824940;padding-top:14px}footer span{margin-left:22px}footer b{float:right;font-weight:normal}.cover{position:absolute;top:85.5%;left:8%;right:7%;display:grid;grid-template-columns:26fr 27fr 27fr;gap:3%;text-align:center;font-size:16px}.place{position:absolute;top:90%;left:8%;right:7%;text-align:center;font-size:14px}.ast-glyph{font-family:"Segoe UI Symbol","Arial Unicode MS",serif}
+  .insight .reading p{font-size:18px;line-height:1.8}.insight .reading p.quote-copy{font-size:32px;line-height:1.7}
+  @media print{.frame{width:210mm!important;height:297mm!important}.page{width:210mm;height:297mm}}
+diff --git a/functions/canonical-presentation-runtime/report-editorial-registry.js b/functions/canonical-presentation-runtime/report-editorial-registry.js
+index 1143b2fe..6393b307 100644
+--- a/functions/canonical-presentation-runtime/report-editorial-registry.js
++++ b/functions/canonical-presentation-runtime/report-editorial-registry.js
+@@ -1,14 +1,16 @@
+ import {VISUAL_REPORT_PRODUCTS} from './visual-report-registry.js';
++import currentFixedManifest from '../../content/reports/shared/report-visual-assets-r2.json';
+ import {REPORT_EDITORIAL_VERIFICATION} from './report-editorial-verification.js';
+ export const REPORT_EDITORIAL_LOCALES=Object.freeze(['zh-Hans','en','bilingual']);
+ export const REPORT_EDITORIAL_ROLES=Object.freeze(['COVER','METHOD_INTRO','ORIGIN','PHIOS_LENS','HOW_TO_READ']);
+ const folders={BZR:'bazi',AST:'astrology',ZWR:'ziwei',NUM:'numerology',PROFILE:'profile',ECR:'ecr',HD:'human-design',CROSS:'cross'};
+ const keys={BZR:'BAZI',AST:'ASTROLOGY',ZWR:'ZIWEI',NUM:'NUM',PROFILE:'PROFILE',ECR:'ECR',HD:'HD',CROSS:'CROSS'};
+-export const REPORT_EDITORIAL_ASSETS=Object.freeze(VISUAL_REPORT_PRODUCTS.flatMap(p=>REPORT_EDITORIAL_LOCALES.flatMap(locale=>REPORT_EDITORIAL_ROLES.map((role,i)=>Object.freeze({
++export const REPORT_EDITORIAL_ASSETS=Object.freeze(VISUAL_REPORT_PRODUCTS.flatMap(p=>(['PROFILE','ECR'].includes(p.methodId)?['bilingual']:REPORT_EDITORIAL_LOCALES).flatMap(locale=>REPORT_EDITORIAL_ROLES.map((role,i)=>Object.freeze({
+  asset_code:`RPT-${keys[p.methodId]}-P0${i+1}-${role.replaceAll('_','-')}-${locale}-v1`,methodId:p.methodId,locale,page:i+1,pageRole:role,
+  object_key:`images/reports/${folders[p.methodId]}/editorial/${locale}/RPT-${keys[p.methodId]}-P0${i+1}-${role.replaceAll('_','-')}-v1.webp`,
+  version:'1',format:'webp',mime:'image/webp',targetWidth:2480,targetHeight:3508,width:null,height:null,active:false,verification:'unverified',
+  semanticAuthority:false,customerSpecific:false,reportStaticEditorial:true,humanReview:'USER_APPROVED_2026_09_20',authorityRef:p.authority,
+- ...REPORT_EDITORIAL_VERIFICATION[`${p.methodId}:${locale}:${i+1}`]
++ ...REPORT_EDITORIAL_VERIFICATION[`${p.methodId}:${locale}:${i+1}`],
++ ...((()=>{if(!['PROFILE','ECR'].includes(p.methodId))return {};const a=currentFixedManifest.assets.find(a=>a.methodId===p.methodId&&a.pageId==='P0'+(i+1)&&a.language==='bilingual');return a?{object_key:a.objectKey,active:a.active,verification:a.active?'verified-http-200':'unverified',width:a.width,height:a.height,version:a.version,fixedAssetLanguage:'bilingual',humanReview:a.approval}:{};})())
+ })))));
+ export function editorialAsset(methodId,page,locale){return REPORT_EDITORIAL_ASSETS.find(x=>x.methodId===methodId&&x.page===page&&x.locale===locale)||null;}
+diff --git a/functions/canonical-presentation-runtime/report-editorial-resolver.js b/functions/canonical-presentation-runtime/report-editorial-resolver.js
+index d71ea9be..cf5c77e6 100644
+--- a/functions/canonical-presentation-runtime/report-editorial-resolver.js
++++ b/functions/canonical-presentation-runtime/report-editorial-resolver.js
+@@ -1,7 +1,67 @@
+ import {PublicAssetResolutionError,isAssetVerificationRenderable,resolvePublicAsset} from '../../assets/js/runtime/web-production/asset-resolver.js';
++import {reportVisualArchitecture} from './report-visual-architecture.js';
++import visualManifest from '../../content/reports/shared/report-visual-assets-r2.json';
++const fixedVisualError=message=>Object.assign(new Error(message),{code:message.split(':')[0],status:409});
++
++export function reportContentLocale(locale){if(locale==='zh'||locale==='ZH')return 'zh-Hans';if(locale==='EN')return 'en';if(locale==='BILINGUAL')return 'bilingual';if(!['zh-Hans','en','bilingual'].includes(locale))throw fixedVisualError('REPORT_CONTENT_LANGUAGE_INVALID');return locale;}
++export function resolveFixedReportPage({methodId,pageId,contentLanguage,manifest=visualManifest}={}){
++ const policy=reportVisualArchitecture(methodId),locale=reportContentLocale(contentLanguage);
++ if(policy.publicationReadiness==='PENDING')throw fixedVisualError('REPORT_FIXED_SECTIONS_PENDING_APPROVAL');
++ const language=policy.fixedAssetLanguagePolicy==='BILINGUAL_SHARED'?'bilingual':locale;
++ const rows=manifest.assets.filter(a=>a.methodId===methodId&&a.pageId===pageId&&a.language===language);
++ if(rows.length!==1)throw fixedVisualError('REPORT_FIXED_ASSET_MISSING:'+methodId+':'+pageId+':'+language);
++ const a=rows[0];
++ if(!['COVER','FIXED_PRELIMINARY_PAGE','FIXED_MASTER_SECTION'].includes(a.kind))throw fixedVisualError('REPORT_FIXED_PAGE_ROLE_INVALID');
++ if(a.kind==='FIXED_MASTER_SECTION'&&policy.masterSectionMode!=='FIXED')throw fixedVisualError('REPORT_DYNAMIC_MASTER_MUST_USE_NATIVE_OWNER');
++ if(a.active!==true||a.customerSpecific!==false||a.approval!=='OWNER_APPROVED_R2_20261026'||a.verification!=='PUBLIC_BYTES_DECODED_AND_VISUALLY_REVIEWED'||!/^images\/reports\//.test(a.objectKey)||!/^https:\/\/pub-1967bc5812ee4164b19a806fb1427021\.r2\.dev\//.test(a.url)||!a.url.includes('/'+a.objectKey+'?v='+a.sha256)||!/^[a-f0-9]{64}$/.test(a.sha256)||!(a.width>0&&a.height>0))throw fixedVisualError('REPORT_FIXED_ASSET_NOT_VERIFIED');
++ return Object.freeze({...a,contentLanguage:locale,fixedAssetLanguage:language,masterSectionMode:policy.masterSectionMode});
++}
++const escapeVisual=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
++export const FIXED_REPORT_PAGE_CSS='.report-fixed-page{display:block;position:relative;aspect-ratio:210/297;width:100%;padding:0!important;margin:0;overflow:hidden;background:white;break-after:page}.report-fixed-page>img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}@media print{.report-fixed-page{width:210mm!important;height:297mm!important;aspect-ratio:auto;break-inside:avoid}}';
++export function renderFixedReportPage(options){
++ const a=resolveFixedReportPage(options);
++ // Complete editorial artwork: deliberately no title, prose, values, chart, footer or cover overlays.
++ return `<section class="report-fixed-page" data-page-role="${a.kind==='FIXED_MASTER_SECTION'?'FIXED_MASTER_SECTION':'FIXED_EDITORIAL'}" data-fixed-page="${escapeVisual(a.pageId)}" data-fixed-method="${escapeVisual(a.methodId)}" data-fixed-language="${a.fixedAssetLanguage}" data-content-language="${a.contentLanguage}"><img src="${escapeVisual(a.url)}" alt="${escapeVisual(a.pageId)}" width="${a.width}" height="${a.height}" loading="eager"></section>`;
++}
++export function resolveReportBodyAsset({methodId,manifest=visualManifest}={}){
++ const rows=manifest.assets.filter(a=>a.methodId===methodId&&a.pageId==='BODY');
++ if(rows.length!==1)throw fixedVisualError('REPORT_BODY_ASSET_MISSING:'+methodId);
++ const a=rows[0];
++ if(a.kind!=='OTHER_APPROVED_REPORT_PAGE'||a.active!==true||a.verification!=='PUBLIC_BYTES_DECODED_AND_VISUALLY_REVIEWED'||a.approval!=='OWNER_APPROVED_R2_20261026'||!a.objectKey.endsWith('-BODY.webp')||!a.objectKey.startsWith('images/reports/')||!a.url.startsWith('https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/')||!a.url.includes('/'+a.objectKey+'?v='+a.sha256)||!/^[a-f0-9]{64}$/.test(a.sha256)||!(a.width>0&&a.height>0))throw fixedVisualError('REPORT_BODY_ASSET_UNAVAILABLE:'+methodId);
++ return Object.freeze({...a,pageRole:'BODY_CONTENT',backgroundOnly:true});
++}
++export const REPORT_BODY_PAGE_CSS='.report-body-backdrop{display:none}.report-customer-content{position:relative;background-image:var(--report-body-image);background-size:100% 297mm;background-repeat:repeat-y;background-position:center top;box-decoration-break:clone;-webkit-box-decoration-break:clone;min-height:297mm;padding:22mm 18mm;break-after:page;overflow-wrap:anywhere}.report-body-reading-field{padding:5mm;background:rgba(255,253,247,.94);box-decoration-break:clone;-webkit-box-decoration-break:clone}.report-customer-content h1,.report-customer-content h2,.report-customer-content h3,.report-customer-content dt{break-after:avoid}.report-customer-content p,.report-customer-content dd{orphans:3;widows:3}.report-customer-content pre{white-space:pre-wrap;overflow-wrap:anywhere}@media print{.report-body-backdrop{display:block;position:fixed;inset:0;z-index:-1;background-image:var(--report-body-image);background-size:100% 100%;background-position:center;print-color-adjust:exact;-webkit-print-color-adjust:exact}.report-customer-content{background:transparent;min-height:0;box-decoration-break:clone;-webkit-box-decoration-break:clone}}';
++// Existing-owner content-only preview. It does not imply complete fixed-section composition.
++export function renderReportBodyContentPreview({methodId,contentLanguage,html,sourceOwner,sourceReference,manifest=visualManifest}={}){
++ const locale=reportContentLocale(contentLanguage),body=resolveReportBodyAsset({methodId,manifest});
++ if(typeof html!=='string'||!html.trim()||!sourceOwner||!sourceReference)throw fixedVisualError('REPORT_CUSTOMER_CONTENT_BINDING_REQUIRED');
++ return {html:`<!doctype html><html lang="${locale==='bilingual'?'zh-Hans':locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>@page{size:A4;margin:0}*{box-sizing:border-box}body{margin:0;color:#17333e;font:16px/1.65 system-ui,'Microsoft YaHei',sans-serif;--report-body-image:url('${escapeVisual(body.url)}')}${REPORT_BODY_PAGE_CSS}img{max-width:100%}button{display:none}</style><div class="report-body-backdrop" data-body-key="${escapeVisual(body.objectKey)}" aria-hidden="true"></div><article class="report-customer-content" data-page-role="BODY_CONTENT" data-body-key="${escapeVisual(body.objectKey)}"><div class="report-body-reading-field">${html}</div></article></html>`,bodyAsset:body,contentLanguage:locale,completeReport:false,sourceOwner,sourceReference,providerCalls:0};
++}
++export function requireFixedReportManifest(methodId,contentLanguage,manifest=visualManifest){
++ const p=reportVisualArchitecture(methodId),r=manifest.reports?.[methodId];
++ if(p.publicationReadiness==='PENDING')throw fixedVisualError('REPORT_FIXED_SECTIONS_PENDING_APPROVAL');
++ if(p.masterSectionMode!=='FIXED')throw fixedVisualError('REPORT_DYNAMIC_MASTER_MUST_USE_NATIVE_OWNER');
++ if(!r||r.complete!==true||(p.requiredFrontMatterCount&&r.frontMatter.length!==p.requiredFrontMatterCount)||!r.sections.length||new Set([...r.frontMatter,...r.sections]).size!==r.frontMatter.length+r.sections.length)throw fixedVisualError('REPORT_FIXED_MANIFEST_INCOMPLETE:'+methodId);
++ const pages=[...r.frontMatter,...r.sections].map(pageId=>resolveFixedReportPage({methodId,pageId,contentLanguage,manifest}));
++ if(new Set(pages.map(p=>p.objectKey)).size!==pages.length)throw fixedVisualError('REPORT_FIXED_OBJECT_REPEATED');
++ if(pages.slice(0,r.frontMatter.length).some((p,i)=>i===0?p.kind!=='COVER':p.kind!=='FIXED_PRELIMINARY_PAGE')||pages.slice(r.frontMatter.length).some(p=>p.kind!=='FIXED_MASTER_SECTION'))throw fixedVisualError('REPORT_FIXED_PAGE_ROLE_INVALID');
++ return pages;
++}
+ 
+ export function resolveReportEditorialAsset({registry,methodId,page,locale,publicBaseUrl}={}){
+- const asset=registry?.assets?.find(x=>x.reportStaticEditorial===true&&x.methodId===methodId&&x.page===page&&x.locale===locale);
++ const contentLocale=reportContentLocale(locale),assetLocale=reportVisualArchitecture(methodId).fixedAssetLanguagePolicy==='BILINGUAL_SHARED'?'bilingual':contentLocale;
++ const asset=registry?.assets?.find(x=>x.reportStaticEditorial===true&&x.methodId===methodId&&x.page===page&&x.locale===assetLocale);
+  if(!asset||asset.active!==true||!isAssetVerificationRenderable(asset.verification))throw new PublicAssetResolutionError('STATIC_EDITORIAL_ASSET_MISSING','Required report editorial asset is unavailable.',{methodId,page,locale,objectKey:asset?.object_key||null});
+- return resolvePublicAsset({registry,assetCode:asset.asset_code,publicBaseUrl,locale,surface:'REPORT'});
++ return resolvePublicAsset({registry,assetCode:asset.asset_code,publicBaseUrl,locale:assetLocale,surface:'REPORT'});
++}
++
++// Local R2 composition consumes existing owner-rendered content; it creates no report meaning.
++// A complete, verified fixed-page sequence is mandatory. Samples use renderFixedReportPage separately.
++export function composeFixedEditorialReport({methodId,contentLanguage,contentPages,manifest,contentCss=''}={}){
++ const locale=reportContentLocale(contentLanguage),fixed=requireFixedReportManifest(methodId,locale,manifest);
++ if(!Array.isArray(contentPages)||contentPages.some(p=>reportContentLocale(p.locale)!==locale||typeof p.html!=='string'||!p.sourceOwner||!p.sourceReference||!fixed.some(a=>a.pageId===p.afterSectionId&&a.kind==='FIXED_MASTER_SECTION')))throw fixedVisualError('REPORT_CUSTOMER_CONTENT_BINDING_REQUIRED');
++ const body=contentPages.length?resolveReportBodyAsset({methodId,manifest}):null;
++ if(contentPages.some(p=>!p.html.trim()))throw fixedVisualError('REPORT_EMPTY_CONTENT_PAGE_FORBIDDEN');
++ const pages=fixed.map(a=>renderFixedReportPage({methodId,pageId:a.pageId,contentLanguage:locale,manifest})+contentPages.filter(p=>p.afterSectionId===a.pageId).map(p=>`<article class="report-customer-content" data-page-role="BODY_CONTENT" data-body-key="${escapeVisual(body.objectKey)}" lang="${locale==='bilingual'?'zh-Hans':locale}" data-source-owner="${p.sourceOwner.replace(/[^a-zA-Z0-9_-]/g,'')}"><div class="report-body-reading-field">${p.html}</div></article>`).join('')).join('');
++ return {html:`<!doctype html><html lang="${locale==='bilingual'?'zh-Hans':locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>@page{size:A4;margin:0}body{margin:0;color:#17333e;font:16px/1.65 system-ui,'Microsoft YaHei',sans-serif;${body?`--report-body-image:url('${escapeVisual(body.url)}')`:''}}*{box-sizing:border-box}${FIXED_REPORT_PAGE_CSS}${REPORT_BODY_PAGE_CSS}${contentCss}</style>${body?`<div class="report-body-backdrop" data-body-key="${escapeVisual(body.objectKey)}" aria-hidden="true"></div>`:''}<main>${pages}</main></html>`,contentLanguage:locale,fixedAssetLanguage:fixed[0].fixedAssetLanguage,masterSectionMode:'FIXED',bodyAsset:body?{objectKey:body.objectKey,sha256:body.sha256}:null,providerCalls:0,customerPublishable:false};
+ }
+diff --git a/functions/canonical-presentation-runtime/visual-report-page-runtime.js b/functions/canonical-presentation-runtime/visual-report-page-runtime.js
+index d259a914..d17b9c48 100644
+--- a/functions/canonical-presentation-runtime/visual-report-page-runtime.js
++++ b/functions/canonical-presentation-runtime/visual-report-page-runtime.js
+@@ -28,6 +28,8 @@ export function assemblePublicationSnapshot({methodId,locale,pages,intro,tempora
+ }
+ export const VISUAL_PAGE_SCHEMA = 'PHI-OS-PERSONAL-READING-VISUAL-PAGE-v1.0.0';
+ export const PERSONAL_READING_PARENT_SCHEMA = 'PHI-OS-PERSONAL-READING-REPORT-IR-v2.0.0';
++export {composeFixedEditorialReport} from './report-editorial-resolver.js';
++
+ const unique = xs => [...new Set(xs)];
+ export const REPORT_ACCESS_STATES=Object.freeze(['OPEN','PREVIEW','PAID_LOCKED','DATA_REQUIRED','CONDITIONAL','NOT_APPLICABLE']);
+ // Locale changes presentation only. Callers supply translations bound to the
+diff --git a/functions/canonical-presentation-runtime/visual-report-registry.js b/functions/canonical-presentation-runtime/visual-report-registry.js
+index 5c5fe1ed..26658614 100644
+--- a/functions/canonical-presentation-runtime/visual-report-registry.js
++++ b/functions/canonical-presentation-runtime/visual-report-registry.js
+@@ -49,3 +49,5 @@ export const REPORT_BLUEPRINT_SUCCESSOR=freeze(VISUAL_REPORT_PRODUCTS.map(p=>({
+  requiredContext:p.methodId==='ECR'?{pages:[18,19,20],requirement:'INDEPENDENT_CURRENT_REALITY_OBSERVATIONS'}:p.methodId==='HD'?{advanced:['VARIABLES','PHS'],requirement:'ACTUAL_ADMITTED_INPUT'}:p.methodId==='CROSS'?{requirement:'ADMITTED_METHODS_ONLY',relationshipClasses:['COMMON','COMPLEMENTARY','TENSION','CONTEXT_DEPENDENT','OPEN']}:null,
+  editorialRegistry:'functions/canonical-presentation-runtime/report-editorial-registry.js',customerPublishable:false,humanReview:'PENDING'
+ })));
++
++export {REPORT_VISUAL_ARCHITECTURE_VERSION,REPORT_VISUAL_ARCHITECTURE,reportVisualArchitecture} from './report-visual-architecture.js';
+diff --git a/functions/profile/personal-evidence-dossier-r12.js b/functions/profile/personal-evidence-dossier-r12.js
+index f7a99e9c..ebe2d9fc 100644
+--- a/functions/profile/personal-evidence-dossier-r12.js
++++ b/functions/profile/personal-evidence-dossier-r12.js
+@@ -1,26 +1,34 @@
+-import {EXPERIENCE_DOSSIER_CAPABILITY_LABELS} from './personal-evidence-report-adapter.js';
+-import {evidenceLabel,evidenceValueRows} from '../../assets/customer-ui/js/visuals/personal-evidence-copy.js';
+-import {outputLanguage,requireSourceLanguage} from '../report-delivery/output-language.js';
+-import {PERSONAL_EVIDENCE_STATIC_VISUALS,PERSONAL_EVIDENCE_SECTION_MASTERS,resolvePersonalEvidenceStaticPage,resolvePersonalEvidenceSectionMaster,PERSONAL_EVIDENCE_SHARED_VISUALS,resolvePersonalEvidenceSharedVisual} from './personal-evidence-visual-assets.js';
+-export const DOSSIER_R12='PERSONAL-EVIDENCE-DOSSIER-R1.2';
+-export const dossierAssetReservations=Object.freeze([...Object.keys(PERSONAL_EVIDENCE_STATIC_VISUALS).map(id=>({...resolvePersonalEvidenceStaticPage(id),role:'EDITORIAL'})),...Object.keys(PERSONAL_EVIDENCE_SECTION_MASTERS).map(id=>({...resolvePersonalEvidenceSectionMaster(id),role:'SECTION'}))].map(x=>Object.freeze({...x,version:'REDESIGN_PENDING',checksum:null,dimensions:null,aspectRatio:null,languageBearing:'UNVERIFIED',humanAcceptance:false,approvalState:'ARTWORK_PENDING_HUMAN_ACCEPTANCE',rendererCompatible:false,historicalObjectPreserved:true,currentRendererLoadsAsset:false})));
+-export const dossierSharedVisuals=Object.freeze(Object.keys(PERSONAL_EVIDENCE_SHARED_VISUALS).map(id=>({...resolvePersonalEvidenceSharedVisual(id),approvalForR12:'UNVERIFIED_NOT_LOADED'})));
+-const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+-const labels={context:['情境','Context'],role:['角色','Role'],responsibility:['责任','Responsibility'],action:['行动','Action'],tools:['工具','Tools'],people:['协作','Collaboration'],outcome:['可观察结果','Observable outcome'],measurableResult:['自述量化结果','Reported measured result'],sourceReference:['来源','Source'],reflection:['自我反思','Reflection'],unknowns:['待核实','Unverified'],claim:['待检验判断','Claim to examine']};
+-const opening=[['封面','Cover'],['证据简介','Evidence introduction'],['证据来源','Evidence sources'],['PHI OS 证据视角','PHI OS evidence lens'],['阅读说明','How to read']];
+-const sectionNames=[['证据总览','Evidence overview'],['个人证据结构','Personal evidence structure'],['候选优势与摩擦','Candidate strengths and friction'],['自主决定','Personal decisions'],['关系','Relationships'],['职业与工作','Career and work'],['测评证据','Assessment evidence'],['财务与外部证据','Financial and external evidence'],['回到现实','Integration with reality'],['证据边界','Evidence boundaries']];
+-export function renderDossierR12({records,assessments=[],reportId,sourceSnapshotVersion,language,now,customerName='',sections=null}){
+- language=outputLanguage(language);requireSourceLanguage(records,language);
+- const t=(zh,en)=>language==='zh'?zh:language==='en'?en:zh+' / '+en;
+- const wanted=sections||sectionNames.map((_,i)=>'SEC-'+String(i+1).padStart(2,'0'));
+- if(!Array.isArray(wanted)||new Set(wanted).size!==wanted.length||wanted.some(id=>!/^SEC-(0[1-9]|10)$/.test(id)))throw Object.assign(Error('DOSSIER_SECTION_SELECTION_INVALID'),{code:'DOSSIER_SECTION_SELECTION_INVALID',status:422});
+- const missing=t('未提供，不作推断。','Not supplied; no inference made.');
+- const boundary=t('用户自述与测评保持不同性质。未独立核实；不是能力认证、医疗诊断或职业资格。','Customer accounts and assessments retain different authority. Not independently verified; not certified competence, diagnosis or occupational qualification.');
+- const noSource=t('未选入此类资料，不自动从其他功能导入。','No evidence in this category was selected; other features are not imported automatically.');
+- const recordsHtml=records.map(r=>`<article><h3>${esc(r.title)}</h3><p>${t('事件期间','Event period')}: ${esc(r.periodStart)} — ${esc(r.periodEnd||missing)}<br>${t('记录时间','Recorded')}: ${esc(r.recordedAt)} · ${t('版本','Version')}: ${r.version}</p><dl>${Object.entries(labels).map(([k,v])=>`<dt>${t(...v)}</dt><dd>${esc(r[k]||missing)}</dd>`).join('')}</dl><p>${t('原始客户文字按原语言保留，不自动翻译。','Original customer wording remains in its source language; it is not automatically translated.')}</p><details><summary>${t('来源与核实状态','Source and verification')}</summary><p>${esc(r.recordId)} · v${r.version} · ${esc(r.language)}</p><p>${boundary}</p><pre>${esc(JSON.stringify({observationPeriod:r.observationPeriod,provenance:r.provenance,verificationMethod:r.verificationMethod,revocationStatus:r.revocationStatus},null,2))}</pre></details></article>`).join('');
+- const assessmentHtml=assessments.map(a=>`<article><h3>${t('已保存测评','Saved assessment')}</h3><p>${esc(a.createdAt)}</p>${(a.result?.view?.signalCards||[]).map(c=>{const label=language==='bilingual'?evidenceLabel(c.domainId,'zh-Hans')+' / '+evidenceLabel(c.domainId,'en'):evidenceLabel(c.domainId,language==='zh'?'zh-Hans':'en');let rows=evidenceValueRows(c.value,language==='zh'?'zh-Hans':'en');if(language==='bilingual'){const cn=evidenceValueRows(c.value,'zh-Hans');rows=rows.map(([k,v],i)=>[(cn[i]?.[0]||'')+' / '+k,v]);}return `<h4>${esc(label)}</h4><dl>${rows.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl><details><summary>${t('来源与原始值','Source and original values')}</summary><pre>${esc(JSON.stringify({signalRef:c.signalRef,assessmentDate:c.assessmentDate,value:c.value,provenance:c.provenance,precisionBoundary:c.precisionBoundary},null,2))}</pre></details>`}).join('')}<p>${t('仅原量表结果；不进行跨量表换算或成长推断。','Original instrument values only; no cross-instrument conversion or inferred growth.')}</p></article>`).join('');
+- const content={'SEC-01':`<p>${t('所选经历','Selected experiences')}: ${records.length} · ${t('所选测评','Selected assessments')}: ${assessments.length}</p>`,'SEC-02':recordsHtml||`<p>${noSource}</p>`,'SEC-03':records.map(r=>`<article><h3>${esc(r.title)}</h3><ul>${r.capabilities.map(k=>{const [zh,en]=(EXPERIENCE_DOSSIER_CAPABILITY_LABELS[k]||'待核实 / To verify').split(' / ');return `<li>${esc(t(zh,en))} · ${r.capabilityDerivation?.capability===k?t('由自述活动导出的候选方向，不是认证','Candidate derived from a reported activity, not certification'):t('用户选择的待核实方向，不是认证','User-selected area to verify, not certification')}</li>`}).join('')}</ul><p>${esc(r.unknowns)}</p></article>`).join('')||`<p>${noSource}</p>`,'SEC-07':assessmentHtml||`<p>${noSource}</p>`,'SEC-09':`<p>${t('下一步：选择一项可核实结果，记录后续观察；不自动生成行动或结果。','Next: choose one verifiable outcome and record later observations; actions and outcomes are not invented.')}</p>`,'SEC-10':`<p>${boundary}</p><p>${t('只呈现所选版本，不伪造历史。撤销阻止新读取，已下载副本无法远程收回。','Only selected versions are represented; no history is fabricated. Revocation blocks new reads but cannot recall downloaded copies.')}</p>`};
+- const pending=t('版面验证稿：十五张新图尚待人工接受，不是正式出版文件。','Layout validation draft: fifteen redesigned artworks await human acceptance; this is not a final publication.');
+- const html=`<!doctype html><html lang="${language==='zh'?'zh-Hans':language==='en'?'en':'zh-Hans'}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Personal Evidence Dossier</title><style>@page{size:A4;margin:18mm 16mm}*{box-sizing:border-box}body{margin:0;background:#f6f2e9;color:#17333e;font:16px/1.65 system-ui,'Microsoft YaHei',sans-serif}main{max-width:850px;margin:auto;padding:24px}h1,h2,h3{color:#15565b;break-after:avoid}p,dd{orphans:3;widows:3;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere}section{border-top:1px solid #baab8b;padding:18px 0}.editorial{min-height:220px}.pending{padding:12px;border-left:3px solid #ae9155}dt{font-weight:600}dd{margin:0 0 12px}article{padding:10px 0}footer{border-top:1px solid #baab8b;font-size:12px;margin-top:20px} @media print{body{background:white;font-size:11pt}main{padding:0}.editorial{break-after:page;min-height:0}.report-section{break-before:page}details{display:block}details>summary{display:none}details:not([open])>*{display:block}a{color:inherit}footer{position:running(footer)}}@media(max-width:420px){main{padding:16px}h1{font-size:27px}}</style><main><header><h1>${t('个人现实证据档案','Personal Evidence Dossier')}</h1><p class="pending">${pending}</p></header>${opening.map(([zh,en],i)=>`<section class="editorial" data-editorial-id="P0${i+1}"><h2>${t(zh,en)}</h2>${i===0?`<p>${esc(customerName||t('我的档案','My dossier'))}</p><p>${t('档案编号','Report number')}: ${esc(reportId)}<br>${t('生成日期','Generated')}: ${esc(now)}<br>${t('证据快照','Evidence snapshot')}: ${t('所选记录的保存版本','Saved versions of selected records')}<details><summary>${t('版本校验详情','Version verification details')}</summary>${esc(sourceSnapshotVersion)}</details><br>${t('语言','Language')}: ${esc(language)}</p>`:`<p>${boundary}</p><p>${i===2?t('只使用本次明确选择的来源；日期、版本与未知保持可见。','Only sources explicitly selected for this export are used; dates, versions and unknowns remain visible.'):t('这份档案整理资料，不替用户作永久判断。','This dossier organizes evidence; it does not make permanent judgments about you.')}</p>`}<p>${t('图稿待接受','Artwork awaiting acceptance')}: P0${i+1}</p></section>`).join('')}${sectionNames.map((names,i)=>{const id='SEC-'+String(i+1).padStart(2,'0');return wanted.includes(id)?`<section class="report-section" data-section-id="${id}"><h2>${t(...names)}</h2><small>${t('图稿待接受','Artwork awaiting acceptance')}: ${id}</small>${content[id]||`<p>${noSource}</p>`}</section>`:'';}).join('')}<section><h2>${t('待补图稿','Pending artwork')}</h2><ul>${dossierAssetReservations.map(a=>`<li>${esc(a.file)}</li>`).join('')}</ul></section><footer>PHI OS · ${esc(reportId)} · ${t('版面验证稿，非最终发布','Layout draft, not final release')}</footer></main></html>`;
+- return {html,language,sourceSnapshotVersion,renderingVersion:DOSSIER_R12+'-'+language,artworkState:'ARTWORK_PENDING_HUMAN_ACCEPTANCE',providerCalls:0};
+-}
++import {EXPERIENCE_DOSSIER_CAPABILITY_LABELS} from './personal-evidence-report-adapter.js';
++import {evidenceLabel,evidenceValueRows} from '../../assets/customer-ui/js/visuals/personal-evidence-copy.js';
++import {outputLanguage,requireSourceLanguage} from '../report-delivery/output-language.js';
++import {composeFixedEditorialReport} from '../canonical-presentation-runtime/report-editorial-resolver.js';
++import fixedManifestR2 from '../../content/reports/shared/report-visual-assets-r2.json';
++import {PERSONAL_EVIDENCE_STATIC_VISUALS,PERSONAL_EVIDENCE_SECTION_MASTERS,resolvePersonalEvidenceStaticPage,resolvePersonalEvidenceSectionMaster,PERSONAL_EVIDENCE_SHARED_VISUALS,resolvePersonalEvidenceSharedVisual} from './personal-evidence-visual-assets.js';
++export const DOSSIER_R12='PERSONAL-EVIDENCE-DOSSIER-R1.2';
++export const dossierAssetReservations=Object.freeze([...Object.keys(PERSONAL_EVIDENCE_STATIC_VISUALS).map(id=>({...resolvePersonalEvidenceStaticPage(id),role:'EDITORIAL'})),...Object.keys(PERSONAL_EVIDENCE_SECTION_MASTERS).map(id=>({...resolvePersonalEvidenceSectionMaster(id),role:'SECTION'}))].map(x=>Object.freeze({...x,version:'REDESIGN_PENDING',checksum:null,dimensions:null,aspectRatio:null,languageBearing:'UNVERIFIED',humanAcceptance:false,approvalState:'ARTWORK_PENDING_HUMAN_ACCEPTANCE',rendererCompatible:false,historicalObjectPreserved:true,currentRendererLoadsAsset:false})));
++export const dossierSharedVisuals=Object.freeze(Object.keys(PERSONAL_EVIDENCE_SHARED_VISUALS).map(id=>({...resolvePersonalEvidenceSharedVisual(id),approvalForR12:'UNVERIFIED_NOT_LOADED'})));
++const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
++const labels={context:['情境','Context'],role:['角色','Role'],responsibility:['责任','Responsibility'],action:['行动','Action'],tools:['工具','Tools'],people:['协作','Collaboration'],outcome:['可观察结果','Observable outcome'],measurableResult:['自述量化结果','Reported measured result'],sourceReference:['来源','Source'],reflection:['自我反思','Reflection'],unknowns:['待核实','Unverified'],claim:['待检验判断','Claim to examine']};
++const opening=[['封面','Cover'],['证据简介','Evidence introduction'],['证据来源','Evidence sources'],['PHI OS 证据视角','PHI OS evidence lens'],['阅读说明','How to read']];
++const sectionNames=[['证据总览','Evidence overview'],['个人证据结构','Personal evidence structure'],['候选优势与摩擦','Candidate strengths and friction'],['自主决定','Personal decisions'],['关系','Relationships'],['职业与工作','Career and work'],['测评证据','Assessment evidence'],['财务与外部证据','Financial and external evidence'],['回到现实','Integration with reality'],['证据边界','Evidence boundaries']];
++export function renderDossierR12({records,assessments=[],reportId,sourceSnapshotVersion,language,now,customerName='',sections=null,fixedVisualManifest=null,visualArchitecture=null}){
++ language=outputLanguage(language);requireSourceLanguage(records,language);
++ const t=(zh,en)=>language==='zh'?zh:language==='en'?en:zh+' / '+en;
++ const wanted=sections||sectionNames.map((_,i)=>'SEC-'+String(i+1).padStart(2,'0'));
++ if(!Array.isArray(wanted)||new Set(wanted).size!==wanted.length||wanted.some(id=>!/^SEC-(0[1-9]|10)$/.test(id)))throw Object.assign(Error('DOSSIER_SECTION_SELECTION_INVALID'),{code:'DOSSIER_SECTION_SELECTION_INVALID',status:422});
++ const missing=t('未提供，不作推断。','Not supplied; no inference made.');
++ const boundary=t('用户自述与测评保持不同性质。未独立核实；不是能力认证、医疗诊断或职业资格。','Customer accounts and assessments retain different authority. Not independently verified; not certified competence, diagnosis or occupational qualification.');
++ const noSource=t('未选入此类资料，不自动从其他功能导入。','No evidence in this category was selected; other features are not imported automatically.');
++ const recordsHtml=records.map(r=>`<article><h3>${esc(r.title)}</h3><p>${t('事件期间','Event period')}: ${esc(r.periodStart)} — ${esc(r.periodEnd||missing)}<br>${t('记录时间','Recorded')}: ${esc(r.recordedAt)} · ${t('版本','Version')}: ${r.version}</p><dl>${Object.entries(labels).map(([k,v])=>`<dt>${t(...v)}</dt><dd>${esc(r[k]||missing)}</dd>`).join('')}</dl><p>${t('原始客户文字按原语言保留，不自动翻译。','Original customer wording remains in its source language; it is not automatically translated.')}</p><details><summary>${t('来源与核实状态','Source and verification')}</summary><p>${esc(r.recordId)} · v${r.version} · ${esc(r.language)}</p><p>${boundary}</p><pre>${esc(JSON.stringify({observationPeriod:r.observationPeriod,provenance:r.provenance,verificationMethod:r.verificationMethod,revocationStatus:r.revocationStatus},null,2))}</pre></details></article>`).join('');
++ const assessmentHtml=assessments.map(a=>`<article><h3>${t('已保存测评','Saved assessment')}</h3><p>${esc(a.createdAt)}</p>${(a.result?.view?.signalCards||[]).map(c=>{const label=language==='bilingual'?evidenceLabel(c.domainId,'zh-Hans')+' / '+evidenceLabel(c.domainId,'en'):evidenceLabel(c.domainId,language==='zh'?'zh-Hans':'en');let rows=evidenceValueRows(c.value,language==='zh'?'zh-Hans':'en');if(language==='bilingual'){const cn=evidenceValueRows(c.value,'zh-Hans');rows=rows.map(([k,v],i)=>[(cn[i]?.[0]||'')+' / '+k,v]);}return `<h4>${esc(label)}</h4><dl>${rows.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl><details><summary>${t('来源与原始值','Source and original values')}</summary><pre>${esc(JSON.stringify({signalRef:c.signalRef,assessmentDate:c.assessmentDate,value:c.value,provenance:c.provenance,precisionBoundary:c.precisionBoundary},null,2))}</pre></details>`}).join('')}<p>${t('仅原量表结果；不进行跨量表换算或成长推断。','Original instrument values only; no cross-instrument conversion or inferred growth.')}</p></article>`).join('');
++ const content={'SEC-01':`<p>${t('所选经历','Selected experiences')}: ${records.length} · ${t('所选测评','Selected assessments')}: ${assessments.length}</p>`,'SEC-02':recordsHtml||`<p>${noSource}</p>`,'SEC-03':records.map(r=>`<article><h3>${esc(r.title)}</h3><ul>${r.capabilities.map(k=>{const [zh,en]=(EXPERIENCE_DOSSIER_CAPABILITY_LABELS[k]||'待核实 / To verify').split(' / ');return `<li>${esc(t(zh,en))} · ${r.capabilityDerivation?.capability===k?t('由自述活动导出的候选方向，不是认证','Candidate derived from a reported activity, not certification'):t('用户选择的待核实方向，不是认证','User-selected area to verify, not certification')}</li>`}).join('')}</ul><p>${esc(r.unknowns)}</p></article>`).join('')||`<p>${noSource}</p>`,'SEC-07':assessmentHtml||`<p>${noSource}</p>`,'SEC-09':`<p>${t('下一步：选择一项可核实结果，记录后续观察；不自动生成行动或结果。','Next: choose one verifiable outcome and record later observations; actions and outcomes are not invented.')}</p>`,'SEC-10':`<p>${boundary}</p><p>${t('只呈现所选版本，不伪造历史。撤销阻止新读取，已下载副本无法远程收回。','Only selected versions are represented; no history is fabricated. Revocation blocks new reads but cannot recall downloaded copies.')}</p>`};
++ if(visualArchitecture&&visualArchitecture!=='REPORT-VISUAL-ASSET-R2')throw Error('REPORT_VISUAL_ARCHITECTURE_INVALID');
++ if(visualArchitecture==='REPORT-VISUAL-ASSET-R2')fixedVisualManifest=fixedManifestR2;
++ if(fixedVisualManifest){
++  const composed=composeFixedEditorialReport({methodId:'PROFILE',contentLanguage:language,manifest:fixedVisualManifest,contentPages:wanted.filter(id=>id==='SEC-01'||id==='SEC-02'&&records.length||id==='SEC-03'&&records.some(r=>r.capabilities.length)||id==='SEC-07'&&assessments.length).map(id=>({afterSectionId:id,locale:language,sourceOwner:'PROFILE_PPR',sourceReference:sourceSnapshotVersion,html:`<h2>${t(...sectionNames[Number(id.slice(-2))-1])}</h2>${content[id]||`<p>${noSource}</p>`}`}))});
++  return {...composed,language,sourceSnapshotVersion,renderingVersion:'PERSONAL-EVIDENCE-FIXED-ASSET-R2-'+language,artworkState:'VERIFIED_FIXED_MANIFEST_LOCAL_NOT_RELEASED'};
++ }
++ const pending=t('版面验证稿：十五张新图尚待人工接受，不是正式出版文件。','Layout validation draft: fifteen redesigned artworks await human acceptance; this is not a final publication.');
++ const html=`<!doctype html><html lang="${language==='zh'?'zh-Hans':language==='en'?'en':'zh-Hans'}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Personal Evidence Dossier</title><style>@page{size:A4;margin:18mm 16mm}*{box-sizing:border-box}body{margin:0;background:#f6f2e9;color:#17333e;font:16px/1.65 system-ui,'Microsoft YaHei',sans-serif}main{max-width:850px;margin:auto;padding:24px}h1,h2,h3{color:#15565b;break-after:avoid}p,dd{orphans:3;widows:3;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere}section{border-top:1px solid #baab8b;padding:18px 0}.editorial{min-height:220px}.pending{padding:12px;border-left:3px solid #ae9155}dt{font-weight:600}dd{margin:0 0 12px}article{padding:10px 0}footer{border-top:1px solid #baab8b;font-size:12px;margin-top:20px} @media print{body{background:white;font-size:11pt}main{padding:0}.editorial{break-after:page;min-height:0}.report-section{break-before:page}details{display:block}details>summary{display:none}details:not([open])>*{display:block}a{color:inherit}footer{position:running(footer)}}@media(max-width:420px){main{padding:16px}h1{font-size:27px}}</style><main><header><h1>${t('个人现实证据档案','Personal Evidence Dossier')}</h1><p class="pending">${pending}</p></header>${opening.map(([zh,en],i)=>`<section class="editorial" data-editorial-id="P0${i+1}"><h2>${t(zh,en)}</h2>${i===0?`<p>${esc(customerName||t('我的档案','My dossier'))}</p><p>${t('档案编号','Report number')}: ${esc(reportId)}<br>${t('生成日期','Generated')}: ${esc(now)}<br>${t('证据快照','Evidence snapshot')}: ${t('所选记录的保存版本','Saved versions of selected records')}<details><summary>${t('版本校验详情','Version verification details')}</summary>${esc(sourceSnapshotVersion)}</details><br>${t('语言','Language')}: ${esc(language)}</p>`:`<p>${boundary}</p><p>${i===2?t('只使用本次明确选择的来源；日期、版本与未知保持可见。','Only sources explicitly selected for this export are used; dates, versions and unknowns remain visible.'):t('这份档案整理资料，不替用户作永久判断。','This dossier organizes evidence; it does not make permanent judgments about you.')}</p>`}<p>${t('图稿待接受','Artwork awaiting acceptance')}: P0${i+1}</p></section>`).join('')}${sectionNames.map((names,i)=>{const id='SEC-'+String(i+1).padStart(2,'0');return wanted.includes(id)?`<section class="report-section" data-section-id="${id}"><h2>${t(...names)}</h2><small>${t('图稿待接受','Artwork awaiting acceptance')}: ${id}</small>${content[id]||`<p>${noSource}</p>`}</section>`:'';}).join('')}<section><h2>${t('待补图稿','Pending artwork')}</h2><ul>${dossierAssetReservations.map(a=>`<li>${esc(a.file)}</li>`).join('')}</ul></section><footer>PHI OS · ${esc(reportId)} · ${t('版面验证稿，非最终发布','Layout draft, not final release')}</footer></main></html>`;
++ return {html,language,sourceSnapshotVersion,renderingVersion:DOSSIER_R12+'-'+language,artworkState:'ARTWORK_PENDING_HUMAN_ACCEPTANCE',providerCalls:0};
++}
