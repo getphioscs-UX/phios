@@ -6,7 +6,7 @@
   --phios-fig-ink:#123b48;min-width:0;
 }
 .phios-figure-deck:focus-visible{outline:3px solid #137b76;outline-offset:3px}
-.phios-figure-deck__title{margin:0 0 16px!important;font:600 clamp(1.1rem,2.3vw,1.55rem)/1.35 inherit!important;max-width:unset!important;color:#123b48}
+.phios-figure-deck__title{margin:0 0 16px!important;font-size:clamp(1.1rem,2.3vw,1.55rem)!important;font-weight:600!important;line-height:1.35!important;max-width:unset!important;color:#123b48}
 .phios-figure-deck__track{min-width:0}
 .phios-figure-deck__slide[hidden]{display:none!important}
 .phios-figure-deck__source{
@@ -96,3 +96,18 @@
   @keyframes phios-figure-appear{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 }
 @media(prefers-reduced-motion:reduce){.phios-figure-deck__slide{animation:none!important}}
+
+/* Desktop financial guides: the current step owns its visual, never a different stage. */
+@media(min-width:900px){
+  [data-cx-surface="FINANCIAL_REALITY"] .cx-r13-intake-stage:has(> .phios-figure-context-guide){
+    grid-template-columns:minmax(0,1fr) minmax(260px,.75fr);
+    column-gap:clamp(20px,3vw,36px);
+    align-items:start;
+  }
+  [data-cx-surface="FINANCIAL_REALITY"] .cx-r13-intake-stage > :not(.phios-figure-context-guide){
+    grid-column:1;min-width:0;
+  }
+  [data-cx-surface="FINANCIAL_REALITY"] .cx-r13-intake-stage > .phios-figure-context-guide{
+    grid-column:2;grid-row:1/span 30;align-self:start;position:sticky;top:24px;min-width:0;
+  }
+}
