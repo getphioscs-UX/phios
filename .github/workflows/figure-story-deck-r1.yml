@@ -1,0 +1,31 @@
+name: Figure Story Deck R1 validation
+on:
+  pull_request:
+    paths:
+      - 'assets/js/figure-story-deck.js'
+      - 'assets/css/figure-story-deck.css'
+      - 'assets/js/global-visual-r2.js'
+      - 'scripts/check-figure-story-deck-r1.mjs'
+      - 'index.html'
+      - 'perspectives/**'
+      - 'reality/**'
+      - 'account/**'
+      - 'about/**'
+      - 'professional/financial/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  figure-story-deck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: node --check assets/js/figure-story-deck.js
+      - run: node --check assets/js/global-visual-r2.js
+      - run: node scripts/check-figure-story-deck-r1.mjs
