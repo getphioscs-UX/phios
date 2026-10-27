@@ -74,7 +74,7 @@ const rows = [
     "category": "HUMAN_SERVICE",
     "billingType": "ONE_TIME",
     "currency": "MYR",
-    "amountMinor": 2900,
+    "amountMinor": 8900,
     "qaProductId": "prod_VHPt6JmDxsSc70",
     "qaPriceId": "price_1UGr3jBEKXJyHMkKCulLqIpr",
     "liveProductId": "prod_VPJ4qpBONlSBhY",
@@ -83,7 +83,8 @@ const rows = [
     "title": "WILL WRITING",
     "entitlementPolicy": "PURCHASED_INTAKE_REQUIRED",
     "fulfillmentType": "HUMAN_SERVICE",
-    "pricingVersion": "PHIOS-COMMERCE-2026-10-09",
+    "pricingVersion": "PHIOS-COMMERCE-2026-10-27",
+    "qaPriceRebindRequired": true,
     "bilingualOnly": true
   },
   {
@@ -126,7 +127,7 @@ const rows = [
     "category": "REPORT",
     "billingType": "ONE_TIME",
     "currency": "MYR",
-    "amountMinor": 14900,
+    "amountMinor": 21900,
     "qaProductId": "prod_VHPtwqHj0F4P7C",
     "qaPriceId": "price_1UOUJmBEKXJyHMkKCjj6kfv9",
     "liveProductId": "prod_VPJ4zopAwg8TIz",
@@ -135,7 +136,8 @@ const rows = [
     "title": "REPORT BUNDLE 3",
     "entitlementPolicy": "SELECTED_STANDARD_REPORTS",
     "fulfillmentType": "REPORT_ACCESS",
-    "pricingVersion": "PHIOS-COMMERCE-2026-10-09",
+    "pricingVersion": "PHIOS-COMMERCE-2026-10-27",
+    "qaPriceRebindRequired": true,
     "bilingualOnly": false
   },
   {
@@ -143,7 +145,7 @@ const rows = [
     "category": "REPORT",
     "billingType": "ONE_TIME",
     "currency": "MYR",
-    "amountMinor": 9900,
+    "amountMinor": 15900,
     "qaProductId": "prod_VHPttr1bpn1AU8",
     "qaPriceId": "price_1UOUJbBEKXJyHMkKA66OOmYq",
     "liveProductId": "prod_VPJ4cDdK0u8XbH",
@@ -152,7 +154,8 @@ const rows = [
     "title": "REPORT BUNDLE 2",
     "entitlementPolicy": "SELECTED_STANDARD_REPORTS",
     "fulfillmentType": "REPORT_ACCESS",
-    "pricingVersion": "PHIOS-COMMERCE-2026-10-09",
+    "pricingVersion": "PHIOS-COMMERCE-2026-10-27",
+    "qaPriceRebindRequired": true,
     "bilingualOnly": false
   },
   {
@@ -228,7 +231,7 @@ const rows = [
     "category": "REPORT",
     "billingType": "ONE_TIME",
     "currency": "MYR",
-    "amountMinor": 3900,
+    "amountMinor": 5900,
     "qaProductId": "prod_VHPtzvhrG3VnuD",
     "qaPriceId": "price_1UGr3PBEKXJyHMkKH6EsZNQy",
     "liveProductId": "prod_VPJ4jMMlGcq5nb",
@@ -237,7 +240,8 @@ const rows = [
     "title": "REPORT NUMEROLOGY FULL",
     "entitlementPolicy": "REPORT_NUMEROLOGY_FULL",
     "fulfillmentType": "REPORT_ACCESS",
-    "pricingVersion": "PHIOS-COMMERCE-2026-10-09",
+    "pricingVersion": "PHIOS-COMMERCE-2026-10-27",
+    "qaPriceRebindRequired": true,
     "bilingualOnly": false
   },
   {
@@ -245,7 +249,7 @@ const rows = [
     "category": "REPORT",
     "billingType": "ONE_TIME",
     "currency": "MYR",
-    "amountMinor": 5900,
+    "amountMinor": 8900,
     "qaProductId": "prod_VHPtQk6R2hKboU",
     "qaPriceId": "price_1UOUIgBEKXJyHMkK3JXmPBjG",
     "liveProductId": "prod_VPJ3cSe7zTXqRT",
@@ -254,7 +258,8 @@ const rows = [
     "title": "REPORT ASTROLOGY FULL",
     "entitlementPolicy": "REPORT_ASTROLOGY_FULL",
     "fulfillmentType": "REPORT_ACCESS",
-    "pricingVersion": "PHIOS-COMMERCE-2026-10-09",
+    "pricingVersion": "PHIOS-COMMERCE-2026-10-27",
+    "qaPriceRebindRequired": true,
     "bilingualOnly": false
   },
   {
@@ -262,7 +267,7 @@ const rows = [
     "category": "REPORT",
     "billingType": "ONE_TIME",
     "currency": "MYR",
-    "amountMinor": 5900,
+    "amountMinor": 8900,
     "qaProductId": "prod_VHPt5VvsD8UtOj",
     "qaPriceId": "price_1UOUIQBEKXJyHMkKlkoLy31M",
     "liveProductId": "prod_VPJ30ITqmTtOzH",
@@ -271,7 +276,8 @@ const rows = [
     "title": "REPORT ZIWEI FULL",
     "entitlementPolicy": "REPORT_ZIWEI_FULL",
     "fulfillmentType": "REPORT_ACCESS",
-    "pricingVersion": "PHIOS-COMMERCE-2026-10-09",
+    "pricingVersion": "PHIOS-COMMERCE-2026-10-27",
+    "qaPriceRebindRequired": true,
     "bilingualOnly": false
   },
   {
@@ -279,7 +285,7 @@ const rows = [
     "category": "REPORT",
     "billingType": "ONE_TIME",
     "currency": "MYR",
-    "amountMinor": 5900,
+    "amountMinor": 8900,
     "qaProductId": "prod_VHPthmjwXsFaSG",
     "qaPriceId": "price_1UOUHhBEKXJyHMkKSC3iujbJ",
     "liveProductId": "prod_VPJ3GTLLyGFf4r",
@@ -288,7 +294,8 @@ const rows = [
     "title": "REPORT BAZI FULL",
     "entitlementPolicy": "REPORT_BAZI_FULL",
     "fulfillmentType": "REPORT_ACCESS",
-    "pricingVersion": "PHIOS-COMMERCE-2026-10-09",
+    "pricingVersion": "PHIOS-COMMERCE-2026-10-27",
+    "qaPriceRebindRequired": true,
     "bilingualOnly": false
   },
   {
