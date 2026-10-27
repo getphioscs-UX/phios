@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-26T13:18:53.648Z",
+  "status": "LOCAL_HUMAN_REVIEW_READY_WITH_BLOCKERS",
+  "head": "df8111d6e59e23b3805b6817c92de18ff5cfa72e",
+  "sourceDigest": "200b38ec6b5a0efa897ba3ed3557f6b8b25c48ce3a0b47d26e6e1b2e9277c390",
+  "sourceFiles": [
+    "content/reports/shared/report-visual-assets-r2.json",
+    "functions/account/local-large-private-pdf-artifact.js"
+  ],
+  "gates": {
+    "A": {
+      "status": "PARTIAL",
+      "PROFILE": "PASS_PUBLIC_BYTES_AND_DECODE",
+      "ECR_SEC05": "BLOCKED_CURRENT_HTTP404",
+      "ECR_SEC07": "BLOCKED_CURRENT_HTTP404"
+    },
+    "B": {
+      "status": "PARTIAL",
+      "PROFILE": "PASS_LOCAL_THREE_LANGUAGES",
+      "ECR": {
+        "zh": "BLOCKED_CURRENT_SEC05_SEC07_HTTP404",
+        "en": "BLOCKED_CURRENT_SEC05_SEC07_HTTP404",
+        "bilingual": "BLOCKED_CURRENT_SEC05_SEC07_HTTP404"
+      }
+    },
+    "C": {
+      "status": "PASS_LOCAL_NODE_AND_NATIVE_WORKERD_EXTERNAL_ACCOUNT_BLOCKED",
+      "tests": 35,
+      "productionEquivalent": false,
+      "nativeTests": 6,
+      "nativeBytes": 49446831,
+      "actualAccountProductionProof": false
+    },
+    "D": {
+      "status": "NOT_AUTHORIZED_NOT_PROVEN"
+    }
+  },
+  "review": "content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html#REPORT-VISUAL-ASSET-CONVERGENCE-R2-3",
+  "next": "Resolve exact ECR SEC05/SEC07 public-object evidence. Preserve concurrent ECR semantic changes; review source/locale associations only with that owner. Complete existing account source/consent/retention route admission, actual Cloudflare binding and concurrent-memory proof under separate controlled authorization. No deploy or commercial activation.",
+  "providerCalls": 0,
+  "costUSD": 0,
+  "productionWrites": 0,
+  "commits": 0,
+  "pushes": 0,
+  "deployments": 0,
+  "nativeRuntimeEvidence": "tools/review/report-visual-asset-convergence-r2/recovery-r23/NATIVE-RUNTIME-TESTS.json"
+}

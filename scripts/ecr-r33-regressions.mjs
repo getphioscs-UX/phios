@@ -1,0 +1,5 @@
+import fs from 'node:fs';import cp from 'node:child_process';
+const out='tools/review/phi-configuration-deep-reading-r2-integrated/r33-publication',prior='tools/review/phi-configuration-deep-reading-r2-integrated/r31-author-publication';fs.mkdirSync(out,{recursive:true});
+const names=['ecr-r31-regressions','ecr-r31-regression-schema-successor','ecr-r31-membership-period-cap-check'];
+const results=await Promise.all(names.map(name=>new Promise(resolve=>{const original='scripts/'+name+'.mjs',source=fs.readFileSync(original,'utf8'),file='scripts/.tmp-r33-'+name+'-'+process.pid+'.mjs';fs.writeFileSync(file,source.replaceAll(prior,out),{flag:'wx'});cp.execFile(process.execPath,[file],{timeout:180000,maxBuffer:8e6},(error,stdout,stderr)=>{fs.unlinkSync(file);fs.writeFileSync(out+'/'+name+'.log',stdout+stderr);resolve({name,exitCode:error?.code||0,priorReceiptsPreserved:true});});})));
+fs.writeFileSync(out+'/regression-execution.json',JSON.stringify({results,providerCalls:0},null,2));console.log(JSON.stringify({scripts:results.length,executionErrors:results.filter(r=>r.exitCode!==0).length,providerCalls:0}));

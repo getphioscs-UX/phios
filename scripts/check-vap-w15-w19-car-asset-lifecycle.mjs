@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import {
   APPROVAL_REGISTRY,
@@ -110,11 +109,26 @@ const storedActivation = readJson(root, 'content/production/car/activation/vap-w
 assert.deepEqual(storedActivation, expectedActivation, 'CAR_PRODUCTION_ACTIVATION_MUST_MATCH_REAL_REGISTRIES');
 
 // Isolated full lifecycle fixture: reset successor production state before exercising W15-W19.
-const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'phios-car-life-'));
+const fixtureParent=path.join(root,'.tmp');fs.mkdirSync(fixtureParent,{recursive:true});
+const tmp = fs.mkdtempSync(path.join(fixtureParent, 'phios-car-life-'));
 try {
 // A lifecycle fixture needs repository inputs, not local deployment archives,
 // dependency trees or private scratch files. Prune these at the directory itself.
-fs.cpSync(root, tmp, { recursive: true, filter: src => !path.relative(root, src).split(path.sep).some(segment => ['.git', 'node_modules', '.tmp', '.wrangler'].includes(segment)) });
+const fixtureInputs=[
+  'assets/css/tokens.css',
+  'content/production/car',
+  'content/professional/canonical-asset-runtime',
+  'content/professional/canonical-meaning-runtime',
+  'content/knowledge/registry/nodes.json',
+  'content/knowledge/public/retrieval/fragments.json',
+  'content/knowledge/intelligence/assembly/canonical-assembly.json',
+  'content/knowledge/production/manifests/production-locale-manifest.json',
+  'content/registry/pds-w2-design-token-contract.json',
+  'content/production/canonical-meaning/authority/CM-KNOWLEDGE-AUTHORITY-KN-PREFACE-001-v1.json'
+];
+const fixtureIncludes=src=>{const relative=path.relative(root,src).replaceAll('\\','/');return !relative||fixtureInputs.some(input=>relative===input||relative.startsWith(input+'/')||input.startsWith(relative+'/'));};
+for(const excluded of ['.worktrees/pr6-ebook-closure/content/production/car','tmp/p9/source/content/production/car','tools/review/snapshot/content/production/car','.pages-output/content/production/car'])assert.equal(fixtureIncludes(path.join(root,excluded)),false);
+for(const input of fixtureInputs){const source=path.join(root,input);if(!fs.existsSync(source))continue;const target=path.join(tmp,input);fs.mkdirSync(path.dirname(target),{recursive:true});fs.cpSync(source,target,{recursive:true,filter:fixtureIncludes});}
 for (const [relative, collection, code] of [
   [CANDIDATE_REGISTRY, 'candidates', 'PHI-OS-CAR-PRODUCTION-CANDIDATE-REGISTRY-v1'],
   [REVIEW_REGISTRY, 'reviews', 'PHI-OS-CAR-PRODUCTION-REVIEW-REGISTRY-v1'],
@@ -179,7 +193,7 @@ assert.equal(published.carPublicationRecord.rightsStatus, 'owned');
 assert.equal(published.carPublicationRecord.accessibilityStatus, 'passed');
 assert.equal(readJson(tmp, 'content/production/car/activation/vap-w12-w19-car-production-activation-v1.json').status, 'PILOT_PUBLISHED_ASSET_RECORDED');
 } finally {
-  assert.equal(path.dirname(path.resolve(tmp)), path.resolve(os.tmpdir()));
+  assert.equal(path.dirname(path.resolve(tmp)), path.resolve(fixtureParent));
   assert(path.basename(tmp).startsWith('phios-car-life-'));
   fs.rmSync(tmp, {recursive: true, force: true});
 }

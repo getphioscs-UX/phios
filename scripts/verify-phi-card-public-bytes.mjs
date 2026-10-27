@@ -1,0 +1,8 @@
+// GET-only public asset verification. Does not upload, regenerate or alter art.
+import fs from 'node:fs';import crypto from 'node:crypto';
+const out='tools/review/phi-card-reading-r1',cache='.tmp/phi-card-reading-r1/assets';fs.mkdirSync(cache,{recursive:true});
+const assets=JSON.parse(fs.readFileSync('content/ecr-phi-card/ecr-phi-card-asset-registry-v1.json')).assets;
+const results=[];let index=0;
+async function worker(){while(index<assets.length){const asset=assets[index++],url='https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/'+asset.objectKey;try{const response=await fetch(url,{redirect:'error',signal:AbortSignal.timeout(10000)}),bytes=Buffer.from(await response.arrayBuffer());const webp=bytes.toString('ascii',0,4)==='RIFF'&&bytes.toString('ascii',8,12)==='WEBP';const valid=response.status===200&&webp&&bytes.length>100;const row={cardId:asset.cardId,url,http:response.status,bytes:bytes.length,mime:response.headers.get('content-type'),sha256:crypto.createHash('sha256').update(bytes).digest('hex'),status:valid?'PUBLIC_BYTES_RECEIVED_DECODE_PENDING':'ASSET_NOT_VERIFIED'};if(valid)fs.writeFileSync(cache+'/'+asset.cardId+'.webp',bytes);results.push(row);}catch(error){results.push({cardId:asset.cardId,url,status:'ASSET_NOT_VERIFIED',reason:error.cause?.code||error.name});}}}
+await Promise.all(Array.from({length:4},worker));results.sort((a,b)=>a.cardId.localeCompare(b.cardId));
+fs.writeFileSync(out+'/ASSET-BYTES.json',JSON.stringify({scope:'PUBLIC_GET_ONLY_NO_R2_WRITES',results,decoded:false,humanReadabilityAccepted:false,providerCalls:0},null,2)+'\n');console.log(JSON.stringify({received:results.filter(x=>x.status==='PUBLIC_BYTES_RECEIVED_DECODE_PENDING').length,total:48,providerCalls:0}));

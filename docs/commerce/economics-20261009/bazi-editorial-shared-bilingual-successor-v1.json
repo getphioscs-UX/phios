@@ -1,0 +1,29 @@
+{
+  "status": "ENGINEERING_RECONCILIATION",
+  "path": "functions/canonical-presentation-runtime/report-editorial-registry.js",
+  "previousPath": "docs/commerce/economics-20261009/bazi-editorial-registry-before-shared-bilingual-v1.txt",
+  "baselineSha256": "7aab1d916a4a3cc5c3933422062a30212fe24093d85a5e3ab2dd29db88b2549d",
+  "successorSha256": "dd11be4b226a25564c256bf9740b22bad095bee65ea3090498e4951ae998bdd2",
+  "replacements": [
+    {
+      "from": "import currentFixedManifest from '../../content/reports/shared/report-visual-assets-r2.json';\n",
+      "to": ""
+    },
+    {
+      "from": "(['PROFILE','ECR'].includes(p.methodId)?['bilingual']:REPORT_EDITORIAL_LOCALES)",
+      "to": "REPORT_EDITORIAL_LOCALES"
+    },
+    {
+      "from": "...REPORT_EDITORIAL_VERIFICATION[`${p.methodId}:${locale}:${i+1}`],\n ...((()=>{if(!['PROFILE','ECR'].includes(p.methodId))return {};const a=currentFixedManifest.assets.find(a=>a.methodId===p.methodId&&a.pageId==='P0'+(i+1)&&a.language==='bilingual');return a?{object_key:a.objectKey,active:a.active,verification:a.active?'verified-http-200':'unverified',width:a.width,height:a.height,version:a.version,fixedAssetLanguage:'bilingual',humanReview:a.approval}:{};})())\n",
+      "to": "...REPORT_EDITORIAL_VERIFICATION[`${p.methodId}:${locale}:${i+1}`]\n"
+    }
+  ],
+  "dependency": {
+    "path": "content/reports/shared/report-visual-assets-r2.json",
+    "sha256": "7dbcf87d9f04f22377d31924c26253f6f4e8cfe8d365dd0eab1c3b0965cd9dc0"
+  },
+  "authorityOrAcceptedTextRewritten": false,
+  "humanAcceptanceGranted": false,
+  "productionActivated": false,
+  "scope": "Profile/ECR-only bilingual asset grouping and fixed manifest mapping; exact reverse delta reconstructs frozen registry. BZR branch unchanged; no new publication acceptance."
+}

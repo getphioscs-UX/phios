@@ -1,0 +1,47 @@
+# R3.3 Local Publication Integration
+
+Status: PARTIAL. No Production PASS.
+
+The only active chapter list was used; all 20 source body hashes and explicit Founder receipts were verified, including Section 10. No authored prose was rewritten. Existing IR and renderer were extended for local private publication only. Three complete language editions contain all ten chapters and a separate calculation appendix. Approved R2 assets were GET-only verified; SEC-05 and SEC-07 re-uploaded objects now return 200 and are included. Pixel-equivalent PNG intermediates are a PDF embedding conversion, not redesigned art.
+
+Final: Chinese 65 pages; English 85 pages; bilingual 132 pages. Actual source resolution is retained, not upscaled. Main body backgrounds cover the actual A4 MediaBox. Native text is embedded/selectable. All final pages are rasterized for review. The private review includes all page images, page maps, exact author receipts, quality audit, and explicit interpretation/admission distinctions.
+
+Original regression wrappers: 6 PASS / 2 FAIL; old schema lacked continuity_ask_tasks. Loading the existing SQL candidate in isolated SQLite produces follow-up isolation PASS and preserves the membership refill FAIL. A focused USD3 period-cap test passes. This does not resolve or hide the inherited refill failure. Four report questions and membership ledgers remain separate. No provider call was made.
+
+Save/reopen tests cover actual saved local PDF streams and existing owner-bound signed download runtime. They do not certify live ECR Account delivery. Customer admission, checkout, reusable semantics and rights remain closed.
+
+SEC-07 original top English overlap, low source DPI, chapter-ending whitespace, full bilingual meaning, and human A4 printing remain review issues. The approved poster was not edited.
+
+No commit, push, deploy, production migrations, Stripe writes, production D1/R2 writes or paid provider calls were executed. Other-window modifications were not reverted.
+
+## Changed / added files
+
+- functions/ecr-full-report/ecr-author-led-publication-r31.js
+- content/reports/shared/report-visual-assets-r2.json (only ECR SEC-05/SEC-07 entries)
+- scripts/ecr-r33-appendix.mjs
+- scripts/ecr-r33-assets.mjs
+- scripts/ecr-r33-closeout.py
+- scripts/ecr-r33-complete-assets.mjs
+- scripts/ecr-r33-contact-sheets.py
+- scripts/ecr-r33-final-text-check.py
+- scripts/ecr-r33-image-sources.py
+- scripts/ecr-r33-inspect.py
+- scripts/ecr-r33-prepare.mjs
+- scripts/ecr-r33-private-checks.mjs
+- scripts/ecr-r33-quality-audit.py
+- scripts/ecr-r33-reassemble.mjs
+- scripts/ecr-r33-regressions.mjs
+- scripts/ecr-r33-render.mjs
+- tools/review/phi-configuration-deep-reading-r2-integrated/r33-publication
+- content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html
+
+## Final closeout checks
+
+- Final PDF SHA256 re-read: 3/3.
+- Final native source inclusion: 40/40; raw manuscript SHA256: 20/20.
+- All final page contact-sheet review: 282 pages in 25 sheets, with selected full-page checks; this is not human A4 print approval.
+- Local registry exact-byte bindings: 17/17; only SEC-05/SEC-07 entries changed in the shared registry.
+- Local renderer syntax and isolated Node bundle: PASS.
+- Owned source diff whitespace check: PASS.
+- Public evidence privacy scan: PASS; private report/manuscript assets remain outside the repository.
+- A text-check helper initially consumed next-page numeric headings when stripping concatenated folios. It was fixed to strip folios per page; original author text and rendered report content were unchanged. Earlier test failure was not a manuscript failure.

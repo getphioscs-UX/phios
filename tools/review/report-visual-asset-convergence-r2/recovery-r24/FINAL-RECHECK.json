@@ -1,0 +1,231 @@
+{
+  "at": "2026-10-26T14:09:22.145Z",
+  "status": "LOCAL_PARTIAL_WITH_SPECIFIC_BLOCKERS",
+  "head": "df8111d6e59e23b3805b6817c92de18ff5cfa72e",
+  "sourceDigest": "447e6620a2e4cc8a97fd4113791d629c7090ae73a2a434cfe02a1705490eaf39",
+  "dependencyFiles": 298,
+  "gates": {
+    "A": {
+      "status": "BLOCKED",
+      "reason": "SEC05/07 exact public GET404; actual image bytes and SHA/decode unverified; ROOT_CAUSE_UNCONFIRMED"
+    },
+    "B": {
+      "status": "BLOCKED",
+      "reason": "No new full ECR PDF generated with missing mandatory actual assets; native section and locale source association also requires owner evidence"
+    },
+    "C": {
+      "status": "PARTIAL",
+      "local": "PASS_LOCAL_EXISTING_ACCOUNT_OWNER_AND_SYNTHETIC_PRIVATE_STORAGE",
+      "external": "UNVERIFIED; no actual production/private account binding or trusted renderer admission tested",
+      "testBoundary": "Actual root/account middleware and encrypted synthetic sessions with file-backed R2 contract. Renderer test double streams existing real visual PDF; this is not semantic rendering of the new synthetic report. Native workerd adapter/storage tested separately; combined native account route is not claimed."
+    },
+    "D": {
+      "status": "PASS_LOCAL_MEASURED",
+      "concurrency": [
+        1,
+        5,
+        10,
+        20
+      ],
+      "completed": 36,
+      "failures": 0,
+      "lifecycleChecks": 32,
+      "memoryBoundary": "Windows Toolhelp process tree + PSAPI GetProcessMemoryInfo; 50ms sampled observed peaks. RSS sums may double-count shared pages; not per-isolate JS heap. Only this test process and descendants; sampler excluded.",
+      "productionCapacity": "UNVERIFIED"
+    },
+    "E": {
+      "status": "NOT_AUTHORIZED",
+      "commercialRelease": "NOT_READY"
+    }
+  },
+  "review": {
+    "at": "2026-10-26T14:10:13.089Z",
+    "url": "http://127.0.0.1:59844/content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html#REPORT-VISUAL-ASSET-CONVERGENCE-R2-4",
+    "links": [
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/ECR-ROOT-CAUSE.json",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/LIVE-PUBLIC-CONFIG.json",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/GATE-MATRIX.json",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/R24-SOURCE-CHANGES.json",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/CURRENT-SOURCE-DIFF.log",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/GIT-STATUS.log",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/VERIFIED-SOURCE.json",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/FUNCTIONS-BUILD.log",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/INTEGRATION-LIFECYCLE-TESTS.json",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/LARGE-PRIVATE-DELIVERY-TESTS.json",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/r12-regression-command.json",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/CONCURRENCY-RESULTS.json",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/PROCESS-MEMORY.json",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/PRIVATE-INTEGRATION-CONFIG.md",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/RETAINED-PDFS.json",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/PRESERVATION.json",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/CHECKPOINT.json",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:59844/tools/review/report-visual-asset-convergence-r2/recovery-r24/EXECUTION-STATE.md",
+        "status": 200
+      }
+    ],
+    "linkMethod": "HEAD; no repeated binary downloads",
+    "widths": [
+      {
+        "width": 1440,
+        "overflow": false
+      },
+      {
+        "width": 390,
+        "overflow": false
+      }
+    ],
+    "scope": "R23 section only; other Master content retained, unrelated remote browser requests blocked"
+  },
+  "next": "Close exact ECR object/public association evidence, existing renderer contract and external private binding/admission; no production action authorized.",
+  "providerCalls": 0,
+  "costUSD": 0,
+  "productionMutations": 0,
+  "payments": 0,
+  "refunds": 0,
+  "commits": 0,
+  "pushes": 0,
+  "deployments": 0,
+  "drift": [],
+  "retainedPDFs": [
+    {
+      "path": "output/pdf/report-visual-asset-convergence-r2/r23/profile-zh.pdf",
+      "bytes": 49508684,
+      "sha256": "d3f6999fee20dc7f574184c9777959842890183f3dc0e54a9d7d3bbde3bb85d3",
+      "previousSHA256": "d3f6999fee20dc7f574184c9777959842890183f3dc0e54a9d7d3bbde3bb85d3",
+      "unchangedVsHistoricalEvidence": true
+    },
+    {
+      "path": "output/pdf/report-visual-asset-convergence-r2/r23/profile-en.pdf",
+      "bytes": 49446831,
+      "sha256": "586882ec8a99506bc2c834f3ed3c8df822bbfd4a294aa69e8414f097c0d52be3",
+      "previousSHA256": "586882ec8a99506bc2c834f3ed3c8df822bbfd4a294aa69e8414f097c0d52be3",
+      "unchangedVsHistoricalEvidence": true
+    },
+    {
+      "path": "output/pdf/report-visual-asset-convergence-r2/r23/profile-bilingual.pdf",
+      "bytes": 49529553,
+      "sha256": "6ce977f423b872b08154da83eed7cd345936b1b7c500e27597d90c92e0617ccf",
+      "previousSHA256": "6ce977f423b872b08154da83eed7cd345936b1b7c500e27597d90c92e0617ccf",
+      "unchangedVsHistoricalEvidence": true
+    },
+    {
+      "path": "output/pdf/report-visual-asset-convergence-r2/r22/ziwei-native-fixed-and-body.pdf",
+      "bytes": 44198197,
+      "sha256": "378b037b564246ceda87d1f925713af4aaeba3921d4bf1805aed66d5c0b8151b",
+      "previousSHA256": "378b037b564246ceda87d1f925713af4aaeba3921d4bf1805aed66d5c0b8151b",
+      "unchangedVsHistoricalEvidence": true
+    },
+    {
+      "path": "output/pdf/report-visual-asset-convergence-r2/r21/ast-native-fixed-and-body.pdf",
+      "bytes": 43299510,
+      "sha256": "63ebf6a080473e1dfd797d13096b36d4fab969e9f58b18673e3c83009e5df4b7",
+      "previousSHA256": "63ebf6a080473e1dfd797d13096b36d4fab969e9f58b18673e3c83009e5df4b7",
+      "unchangedVsHistoricalEvidence": true
+    }
+  ],
+  "recovery": [
+    {
+      "path": "tools/review/personal-evidence-r1/commerce-r1-2/NATIVE-READING-EVIDENCE.json",
+      "unchanged": true
+    },
+    {
+      "path": "tools/review/personal-evidence-r1/commerce-r1-2/tarot-zh.html",
+      "unchanged": true
+    },
+    {
+      "path": "tools/review/personal-evidence-r1/commerce-r1-2/tarot-en.html",
+      "unchanged": true
+    },
+    {
+      "path": "tools/review/personal-evidence-r1/commerce-r1-2/tarot-bilingual.html",
+      "unchanged": true
+    },
+    {
+      "path": "tools/review/personal-evidence-r1/commerce-r1-2/i_ching-zh.html",
+      "unchanged": true
+    },
+    {
+      "path": "tools/review/personal-evidence-r1/commerce-r1-2/i_ching-en.html",
+      "unchanged": true
+    },
+    {
+      "path": "tools/review/personal-evidence-r1/commerce-r1-2/i_ching-bilingual.html",
+      "unchanged": true
+    }
+  ],
+  "staging": "",
+  "previousStatus": "LOCAL_HUMAN_REVIEW_READY_WITH_BLOCKERS",
+  "reviewVerification": "tools/review/report-visual-asset-convergence-r2/recovery-r24/REVIEW-VERIFICATION.json",
+  "artifacts": [
+    {
+      "path": "tools/review/report-visual-asset-convergence-r2/recovery-r24/final-review-1440.png",
+      "bytes": 141990,
+      "sha256": "58441c7dfa650430ccf398f2cb3a9e941f117c4b4a69089b2059751071e06371"
+    },
+    {
+      "path": "tools/review/report-visual-asset-convergence-r2/recovery-r24/final-review-390.png",
+      "bytes": 52012,
+      "sha256": "ced7b6ef1b3a9505192e45ae5f263bde1740023b88b4072817b4597b1dcf299d"
+    }
+  ],
+  "finalAt": "2026-10-26T14:10:55.397Z",
+  "headAfter": "df8111d6e59e23b3805b6817c92de18ff5cfa72e",
+  "headUnchanged": true,
+  "notes": [
+    "Functions compiler exit0 and Compiled Worker successfully; Wrangler local log EPERM retained, not a source compilation failure.",
+    "Initial sandbox Edge launch could not write temporary profile; same local-only review check passed with approved elevated execution.",
+    "No credentials or credential files accessed by public-only R24 diagnostics."
+  ]
+}

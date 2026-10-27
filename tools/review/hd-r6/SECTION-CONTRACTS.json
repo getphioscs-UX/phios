@@ -1,0 +1,3914 @@
+{
+  "version": "HD-R6-17-SECTION-CONDITIONAL-CANDIDATE-v1",
+  "owner": "Existing R5 SECTIONS; R6 is a review-only refinement, not a new calculation or publication owner",
+  "sectionCount": 17,
+  "priority": [
+    "SEC07",
+    "SEC09",
+    "SEC10",
+    "SEC15"
+  ],
+  "contracts": [
+    {
+      "sectionId": "SEC01",
+      "sectionKey": "Architecture",
+      "priorityWork": false,
+      "requiredCalculatedFields": [
+        "typeCode",
+        "authority",
+        "definition",
+        "profile",
+        "activations"
+      ],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [],
+      "proposedModuleIds": [
+        "HD-R6-SEC01-ORIGINAL-AUTHORING-PENDING"
+      ],
+      "selection": "Use one same-version chart snapshot; display facts without personality conclusions.",
+      "sourceProvenance": [],
+      "legacyPhysicalPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 110,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED"
+      ],
+      "missingDataRule": "HOLD_AFFECTED_CLAIM_SHOW_EXACT_GAP_NO_FILLER",
+      "languageStatus": {
+        "zhHans": "AUTHORING_PENDING",
+        "en": "AUTHORING_PENDING",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "MISSING_VALUE_SPECIFIC_AUTHORING",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [],
+      "requiredFieldPaths": [
+        "typeCode",
+        "authority",
+        "definition",
+        "profile",
+        "activations"
+      ]
+    },
+    {
+      "sectionId": "SEC02",
+      "sectionKey": "TypeStrategy",
+      "priorityWork": false,
+      "requiredCalculatedFields": [
+        "typeCode"
+      ],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [
+        "HD-R3-W4-TYPE-MANIFESTOR",
+        "HD-R3-W4-TYPE-GENERATOR",
+        "HD-R3-W4-TYPE-MANIFESTING_GENERATOR",
+        "HD-R3-W4-TYPE-PROJECTOR",
+        "HD-R3-W4-TYPE-REFLECTOR"
+      ],
+      "proposedModuleIds": [],
+      "selection": "Exact canonicalType==chart.typeCode; strategy must use same type owner.",
+      "sourceProvenance": [
+        "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W4-type-professional-meaning-corpus-v1.json"
+      ],
+      "legacyPhysicalPages": [
+        8,
+        9
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 20,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED"
+      ],
+      "missingDataRule": "HOLD_AFFECTED_CLAIM_SHOW_EXACT_GAP_NO_FILLER",
+      "languageStatus": {
+        "zhHans": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "en": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "PARTIAL_EXISTING_MODULES_AUTHORING_SCOPE_OPEN",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [
+        {
+          "moduleId": "HD-R3-W4-TYPE-MANIFESTOR",
+          "identity": {
+            "canonicalType": "MANIFESTOR"
+          },
+          "sourceRefs": [
+            "HD-UA-TYPE-MANIFESTOR"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W4-type-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/0",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W4-TYPE-GENERATOR",
+          "identity": {
+            "canonicalType": "GENERATOR"
+          },
+          "sourceRefs": [
+            "HD-UA-TYPE-GENERATOR"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W4-type-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/1",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W4-TYPE-MANIFESTING_GENERATOR",
+          "identity": {
+            "canonicalType": "MANIFESTING_GENERATOR"
+          },
+          "sourceRefs": [
+            "HD-UA-TYPE-MANIFESTING_GENERATOR"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W4-type-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/2",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W4-TYPE-PROJECTOR",
+          "identity": {
+            "canonicalType": "PROJECTOR"
+          },
+          "sourceRefs": [
+            "HD-UA-TYPE-PROJECTOR"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W4-type-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/3",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W4-TYPE-REFLECTOR",
+          "identity": {
+            "canonicalType": "REFLECTOR"
+          },
+          "sourceRefs": [
+            "HD-UA-TYPE-REFLECTOR"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W4-type-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/4",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        }
+      ],
+      "requiredFieldPaths": [
+        "typeCode"
+      ]
+    },
+    {
+      "sectionId": "SEC03",
+      "sectionKey": "Authority",
+      "priorityWork": false,
+      "requiredCalculatedFields": [
+        "authority",
+        "typeCode"
+      ],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [
+        "HD-R3-W5-AUTHORITY-EMOTIONAL",
+        "HD-R3-W5-AUTHORITY-SACRAL",
+        "HD-R3-W5-AUTHORITY-SPLENIC",
+        "HD-R3-W5-AUTHORITY-SELF_PROJECTED",
+        "HD-R3-W5-AUTHORITY-EGO_MANIFESTED",
+        "HD-R3-W5-AUTHORITY-EGO_PROJECTED",
+        "HD-R3-W5-AUTHORITY-MENTAL_ENVIRONMENTAL",
+        "HD-R3-W5-AUTHORITY-LUNAR"
+      ],
+      "proposedModuleIds": [],
+      "selection": "Exact canonicalAuthority==chart.authority; authority outranks generic gate suggestions.",
+      "sourceProvenance": [
+        "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W5-authority-professional-meaning-corpus-v1.json"
+      ],
+      "legacyPhysicalPages": [
+        10
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 10,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED"
+      ],
+      "missingDataRule": "HOLD_AFFECTED_CLAIM_SHOW_EXACT_GAP_NO_FILLER",
+      "languageStatus": {
+        "zhHans": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "en": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "PARTIAL_EXISTING_MODULES_AUTHORING_SCOPE_OPEN",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [
+        {
+          "moduleId": "HD-R3-W5-AUTHORITY-EMOTIONAL",
+          "identity": {
+            "canonicalAuthority": "EMOTIONAL"
+          },
+          "sourceRefs": [
+            "HD-UA-AUTHORITY-EMOTIONAL"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W5-authority-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/0",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W5-AUTHORITY-SACRAL",
+          "identity": {
+            "canonicalAuthority": "SACRAL"
+          },
+          "sourceRefs": [
+            "HD-UA-AUTHORITY-SACRAL"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W5-authority-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/1",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W5-AUTHORITY-SPLENIC",
+          "identity": {
+            "canonicalAuthority": "SPLENIC"
+          },
+          "sourceRefs": [
+            "HD-UA-AUTHORITY-SPLENIC"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W5-authority-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/2",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W5-AUTHORITY-SELF_PROJECTED",
+          "identity": {
+            "canonicalAuthority": "SELF_PROJECTED"
+          },
+          "sourceRefs": [
+            "HD-UA-AUTHORITY-SELF_PROJECTED",
+            "HD-SR-JOVIAN-INNER-AUTHORITY-SERIES"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W5-authority-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/3",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W5-AUTHORITY-EGO_MANIFESTED",
+          "identity": {
+            "canonicalAuthority": "EGO_MANIFESTED"
+          },
+          "sourceRefs": [
+            "HD-UA-AUTHORITY-EGO_WILL_SOURCE_FAMILY",
+            "HD-SR-JOVIAN-EGO-MANIFESTED",
+            "HD-SR-JOVIAN-INNER-AUTHORITY-SERIES"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W5-authority-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/4",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W5-AUTHORITY-EGO_PROJECTED",
+          "identity": {
+            "canonicalAuthority": "EGO_PROJECTED"
+          },
+          "sourceRefs": [
+            "HD-UA-AUTHORITY-EGO_WILL_SOURCE_FAMILY",
+            "HD-SR-JOVIAN-EGO-PROJECTED",
+            "HD-SR-JOVIAN-INNER-AUTHORITY-SERIES"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W5-authority-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/5",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W5-AUTHORITY-MENTAL_ENVIRONMENTAL",
+          "identity": {
+            "canonicalAuthority": "MENTAL_ENVIRONMENTAL"
+          },
+          "sourceRefs": [
+            "HD-UA-AUTHORITY-EXTERNAL_ENVIRONMENTAL_SOURCE_FAMILY",
+            "HD-SR-JOVIAN-NO-DIRECT-INNER-AUTHORITY",
+            "HD-SR-JOVIAN-THREE-PROJECTORS",
+            "HD-SR-JOVIAN-INNER-AUTHORITY-SERIES"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W5-authority-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/6",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W5-AUTHORITY-LUNAR",
+          "identity": {
+            "canonicalAuthority": "LUNAR"
+          },
+          "sourceRefs": [
+            "HD-UA-AUTHORITY-EXTERNAL_ENVIRONMENTAL_SOURCE_FAMILY",
+            "HD-SR-JOVIAN-LUNAR",
+            "HD-SR-JOVIAN-NO-DIRECT-INNER-AUTHORITY",
+            "HD-SR-JOVIAN-INNER-AUTHORITY-SERIES"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W5-authority-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/7",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        }
+      ],
+      "requiredFieldPaths": [
+        "authority",
+        "typeCode"
+      ]
+    },
+    {
+      "sectionId": "SEC04",
+      "sectionKey": "Definition",
+      "priorityWork": false,
+      "requiredCalculatedFields": [
+        "definition",
+        "channels"
+      ],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [
+        "HD-R3-W10-DEFINITION-SINGLE",
+        "HD-R3-W10-DEFINITION-SPLIT",
+        "HD-R3-W10-DEFINITION-TRIPLE_SPLIT",
+        "HD-R3-W10-DEFINITION-QUAD_SPLIT",
+        "HD-R3-W10-DEFINITION-NO_DEFINITION"
+      ],
+      "proposedModuleIds": [],
+      "selection": "Exact definition code and connected components; no inferred psychological incompleteness.",
+      "sourceProvenance": [
+        "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W10-definition-integration-corpus-v1.json"
+      ],
+      "legacyPhysicalPages": [
+        11
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 30,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED"
+      ],
+      "missingDataRule": "HOLD_AFFECTED_CLAIM_SHOW_EXACT_GAP_NO_FILLER",
+      "languageStatus": {
+        "zhHans": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "en": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "PARTIAL_EXISTING_MODULES_AUTHORING_SCOPE_OPEN",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [
+        {
+          "moduleId": "HD-R3-W10-DEFINITION-SINGLE",
+          "identity": {
+            "definition": "SINGLE"
+          },
+          "sourceRefs": [
+            "HD-UA-DEFINITION-SINGLE"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W10-definition-integration-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/0",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W10-DEFINITION-SPLIT",
+          "identity": {
+            "definition": "SPLIT"
+          },
+          "sourceRefs": [
+            "HD-UA-DEFINITION-SPLIT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W10-definition-integration-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/1",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W10-DEFINITION-TRIPLE_SPLIT",
+          "identity": {
+            "definition": "TRIPLE_SPLIT"
+          },
+          "sourceRefs": [
+            "HD-UA-DEFINITION-TRIPLE_SPLIT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W10-definition-integration-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/2",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W10-DEFINITION-QUAD_SPLIT",
+          "identity": {
+            "definition": "QUAD_SPLIT"
+          },
+          "sourceRefs": [
+            "HD-UA-DEFINITION-QUAD_SPLIT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W10-definition-integration-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/3",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W10-DEFINITION-NO_DEFINITION",
+          "identity": {
+            "definition": "NO_DEFINITION"
+          },
+          "sourceRefs": [
+            "HD-UA-EN-DEFINITION-NO_DEFINITION-W10"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W10-definition-integration-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/4",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        }
+      ],
+      "requiredFieldPaths": [
+        "definition",
+        "channels"
+      ]
+    },
+    {
+      "sectionId": "SEC05",
+      "sectionKey": "Centers",
+      "priorityWork": false,
+      "requiredCalculatedFields": [
+        "definedCenters",
+        "undefinedCenters",
+        "activations"
+      ],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [
+        "HD-R3-W7-CENTER-HEAD-DEFINED",
+        "HD-R3-W7-CENTER-HEAD-UNDEFINED",
+        "HD-R3-W7-CENTER-HEAD-OPEN",
+        "HD-R3-W7-CENTER-AJNA-DEFINED",
+        "HD-R3-W7-CENTER-AJNA-UNDEFINED",
+        "HD-R3-W7-CENTER-AJNA-OPEN",
+        "HD-R3-W7-CENTER-THROAT-DEFINED",
+        "HD-R3-W7-CENTER-THROAT-UNDEFINED",
+        "HD-R3-W7-CENTER-THROAT-OPEN",
+        "HD-R3-W7-CENTER-G-DEFINED",
+        "HD-R3-W7-CENTER-G-UNDEFINED",
+        "HD-R3-W7-CENTER-G-OPEN",
+        "HD-R3-W7-CENTER-EGO-DEFINED",
+        "HD-R3-W7-CENTER-EGO-UNDEFINED",
+        "HD-R3-W7-CENTER-EGO-OPEN",
+        "HD-R3-W7-CENTER-SPLEEN-DEFINED",
+        "HD-R3-W7-CENTER-SPLEEN-UNDEFINED",
+        "HD-R3-W7-CENTER-SPLEEN-OPEN",
+        "HD-R3-W7-CENTER-SOLAR_PLEXUS-DEFINED",
+        "HD-R3-W7-CENTER-SOLAR_PLEXUS-UNDEFINED",
+        "HD-R3-W7-CENTER-SOLAR_PLEXUS-OPEN",
+        "HD-R3-W7-CENTER-SACRAL-DEFINED",
+        "HD-R3-W7-CENTER-SACRAL-UNDEFINED",
+        "HD-R3-W7-CENTER-SACRAL-OPEN",
+        "HD-R3-W7-CENTER-ROOT-DEFINED",
+        "HD-R3-W7-CENTER-ROOT-UNDEFINED",
+        "HD-R3-W7-CENTER-ROOT-OPEN"
+      ],
+      "proposedModuleIds": [],
+      "selection": "Select per center DEFINED / UNDEFINED_WITH_ACTIVATION / OPEN_NO_ACTIVATION; never conflate.",
+      "sourceProvenance": [
+        "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json"
+      ],
+      "legacyPhysicalPages": [
+        6,
+        7,
+        12,
+        13
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 40,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED"
+      ],
+      "missingDataRule": "HOLD_AFFECTED_CLAIM_SHOW_EXACT_GAP_NO_FILLER",
+      "languageStatus": {
+        "zhHans": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "en": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "PARTIAL_EXISTING_MODULES_AUTHORING_SCOPE_OPEN",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [
+        {
+          "moduleId": "HD-R3-W7-CENTER-HEAD-DEFINED",
+          "identity": {
+            "canonicalCenter": "HEAD",
+            "centerState": "DEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-HEAD-DEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/0",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-HEAD-UNDEFINED",
+          "identity": {
+            "canonicalCenter": "HEAD",
+            "centerState": "UNDEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-HEAD-UNDEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/1",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-HEAD-OPEN",
+          "identity": {
+            "canonicalCenter": "HEAD",
+            "centerState": "OPEN"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-HEAD-OPEN"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/2",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-AJNA-DEFINED",
+          "identity": {
+            "canonicalCenter": "AJNA",
+            "centerState": "DEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-AJNA-DEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/3",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-AJNA-UNDEFINED",
+          "identity": {
+            "canonicalCenter": "AJNA",
+            "centerState": "UNDEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-AJNA-UNDEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/4",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-AJNA-OPEN",
+          "identity": {
+            "canonicalCenter": "AJNA",
+            "centerState": "OPEN"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-AJNA-OPEN"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/5",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-THROAT-DEFINED",
+          "identity": {
+            "canonicalCenter": "THROAT",
+            "centerState": "DEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-THROAT-DEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/6",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-THROAT-UNDEFINED",
+          "identity": {
+            "canonicalCenter": "THROAT",
+            "centerState": "UNDEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-THROAT-UNDEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/7",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-THROAT-OPEN",
+          "identity": {
+            "canonicalCenter": "THROAT",
+            "centerState": "OPEN"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-THROAT-OPEN"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/8",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-G-DEFINED",
+          "identity": {
+            "canonicalCenter": "G",
+            "centerState": "DEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-G-DEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/9",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-G-UNDEFINED",
+          "identity": {
+            "canonicalCenter": "G",
+            "centerState": "UNDEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-G-UNDEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/10",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-G-OPEN",
+          "identity": {
+            "canonicalCenter": "G",
+            "centerState": "OPEN"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-G-OPEN"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/11",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-EGO-DEFINED",
+          "identity": {
+            "canonicalCenter": "EGO",
+            "centerState": "DEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-EGO-DEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/12",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-EGO-UNDEFINED",
+          "identity": {
+            "canonicalCenter": "EGO",
+            "centerState": "UNDEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-EGO-UNDEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/13",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-EGO-OPEN",
+          "identity": {
+            "canonicalCenter": "EGO",
+            "centerState": "OPEN"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-EGO-OPEN"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/14",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-SPLEEN-DEFINED",
+          "identity": {
+            "canonicalCenter": "SPLEEN",
+            "centerState": "DEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-SPLEEN-DEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/15",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-SPLEEN-UNDEFINED",
+          "identity": {
+            "canonicalCenter": "SPLEEN",
+            "centerState": "UNDEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-SPLEEN-UNDEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/16",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-SPLEEN-OPEN",
+          "identity": {
+            "canonicalCenter": "SPLEEN",
+            "centerState": "OPEN"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-SPLEEN-OPEN"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/17",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-SOLAR_PLEXUS-DEFINED",
+          "identity": {
+            "canonicalCenter": "SOLAR_PLEXUS",
+            "centerState": "DEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-SOLAR_PLEXUS-DEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/18",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-SOLAR_PLEXUS-UNDEFINED",
+          "identity": {
+            "canonicalCenter": "SOLAR_PLEXUS",
+            "centerState": "UNDEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-SOLAR_PLEXUS-UNDEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/19",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-SOLAR_PLEXUS-OPEN",
+          "identity": {
+            "canonicalCenter": "SOLAR_PLEXUS",
+            "centerState": "OPEN"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-SOLAR_PLEXUS-OPEN"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/20",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-SACRAL-DEFINED",
+          "identity": {
+            "canonicalCenter": "SACRAL",
+            "centerState": "DEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-SACRAL-DEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/21",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-SACRAL-UNDEFINED",
+          "identity": {
+            "canonicalCenter": "SACRAL",
+            "centerState": "UNDEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-SACRAL-UNDEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/22",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-SACRAL-OPEN",
+          "identity": {
+            "canonicalCenter": "SACRAL",
+            "centerState": "OPEN"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-SACRAL-OPEN"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/23",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-ROOT-DEFINED",
+          "identity": {
+            "canonicalCenter": "ROOT",
+            "centerState": "DEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-ROOT-DEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/24",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-ROOT-UNDEFINED",
+          "identity": {
+            "canonicalCenter": "ROOT",
+            "centerState": "UNDEFINED"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-ROOT-UNDEFINED"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/25",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W7-CENTER-ROOT-OPEN",
+          "identity": {
+            "canonicalCenter": "ROOT",
+            "centerState": "OPEN"
+          },
+          "sourceRefs": [
+            "HD-UA-CENTER-ROOT-OPEN"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W7-center-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/26",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        }
+      ],
+      "requiredFieldPaths": [
+        "definedCenters",
+        "undefinedCenters",
+        "activations"
+      ]
+    },
+    {
+      "sectionId": "SEC06",
+      "sectionKey": "Channels",
+      "priorityWork": false,
+      "requiredCalculatedFields": [
+        "channels",
+        "activations"
+      ],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [
+        "HD-R3-W8-CHANNEL-2_14",
+        "HD-R3-W8-CHANNEL-3_60",
+        "HD-R3-W8-CHANNEL-8_1",
+        "HD-R3-W8-CHANNEL-9_52",
+        "HD-R3-W8-CHANNEL-10_20",
+        "HD-R3-W8-CHANNEL-10_34",
+        "HD-R3-W8-CHANNEL-10_57",
+        "HD-R3-W8-CHANNEL-11_56",
+        "HD-R3-W8-CHANNEL-12_22",
+        "HD-R3-W8-CHANNEL-15_5",
+        "HD-R3-W8-CHANNEL-16_48",
+        "HD-R3-W8-CHANNEL-17_62",
+        "HD-R3-W8-CHANNEL-18_58",
+        "HD-R3-W8-CHANNEL-20_57",
+        "HD-R3-W8-CHANNEL-25_51",
+        "HD-R3-W8-CHANNEL-26_44",
+        "HD-R3-W8-CHANNEL-27_50",
+        "HD-R3-W8-CHANNEL-28_38",
+        "HD-R3-W8-CHANNEL-30_41",
+        "HD-R3-W8-CHANNEL-31_7",
+        "HD-R3-W8-CHANNEL-32_54",
+        "HD-R3-W8-CHANNEL-33_13",
+        "HD-R3-W8-CHANNEL-34_20",
+        "HD-R3-W8-CHANNEL-35_36",
+        "HD-R3-W8-CHANNEL-37_40",
+        "HD-R3-W8-CHANNEL-42_53",
+        "HD-R3-W8-CHANNEL-43_23",
+        "HD-R3-W8-CHANNEL-45_21",
+        "HD-R3-W8-CHANNEL-46_29",
+        "HD-R3-W8-CHANNEL-49_19",
+        "HD-R3-W8-CHANNEL-55_39",
+        "HD-R3-W8-CHANNEL-57_34",
+        "HD-R3-W8-CHANNEL-59_6",
+        "HD-R3-W8-CHANNEL-61_24",
+        "HD-R3-W8-CHANNEL-63_4",
+        "HD-R3-W8-CHANNEL-64_47"
+      ],
+      "proposedModuleIds": [],
+      "selection": "Both Gates active and channel present; complete channel outranks duplicate isolated gate narrative.",
+      "sourceProvenance": [
+        "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json"
+      ],
+      "legacyPhysicalPages": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 50,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED"
+      ],
+      "missingDataRule": "HOLD_AFFECTED_CLAIM_SHOW_EXACT_GAP_NO_FILLER",
+      "languageStatus": {
+        "zhHans": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "en": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "PARTIAL_EXISTING_MODULES_AUTHORING_SCOPE_OPEN",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-2_14",
+          "identity": {
+            "channelId": "2-14"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-2_14",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-18"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/0",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-3_60",
+          "identity": {
+            "channelId": "3-60"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-3_60",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-23"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/1",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-8_1",
+          "identity": {
+            "channelId": "8-1"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-8_1",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-13"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/2",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-9_52",
+          "identity": {
+            "channelId": "9-52"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-9_52",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-24"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/3",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-10_20",
+          "identity": {
+            "channelId": "10-20"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-10_20",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-35"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/4",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-10_34",
+          "identity": {
+            "channelId": "10-34"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-10_34",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-37"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/5",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-10_57",
+          "identity": {
+            "channelId": "10-57"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-10_57",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-36"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/6",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-11_56",
+          "identity": {
+            "channelId": "11-56"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-11_56",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-7"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/7",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-12_22",
+          "identity": {
+            "channelId": "12-22"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-12_22",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-11"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/8",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-15_5",
+          "identity": {
+            "channelId": "15-5"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-15_5",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-17"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/9",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-16_48",
+          "identity": {
+            "channelId": "16-48"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-16_48",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-8"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/10",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-17_62",
+          "identity": {
+            "channelId": "17-62"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-17_62",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-5"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/11",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-18_58",
+          "identity": {
+            "channelId": "18-58"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-18_58",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-34"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/12",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-20_57",
+          "identity": {
+            "channelId": "20-57"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-20_57",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-9"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/13",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-25_51",
+          "identity": {
+            "channelId": "25-51"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-25_51",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-16"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/14",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-26_44",
+          "identity": {
+            "channelId": "26-44"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-26_44",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-30"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/15",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-27_50",
+          "identity": {
+            "channelId": "27-50"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-27_50",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-21"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/16",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-28_38",
+          "identity": {
+            "channelId": "28-38"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-28_38",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-33"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/17",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-30_41",
+          "identity": {
+            "channelId": "30-41"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-30_41",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-29"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/18",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-31_7",
+          "identity": {
+            "channelId": "31-7"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-31_7",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-12"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/19",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-32_54",
+          "identity": {
+            "channelId": "32-54"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-32_54",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-32"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/20",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-33_13",
+          "identity": {
+            "channelId": "33-13"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-33_13",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-14"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/21",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-34_20",
+          "identity": {
+            "channelId": "34-20"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-34_20",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-20"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/22",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-35_36",
+          "identity": {
+            "channelId": "35-36"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-35_36",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-10"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/23",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-37_40",
+          "identity": {
+            "channelId": "37-40"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-37_40",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-26"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/24",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-42_53",
+          "identity": {
+            "channelId": "42-53"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-42_53",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-22"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/25",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-43_23",
+          "identity": {
+            "channelId": "43-23"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-43_23",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-6"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/26",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-45_21",
+          "identity": {
+            "channelId": "45-21"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-45_21",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-15"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/27",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-46_29",
+          "identity": {
+            "channelId": "46-29"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-46_29",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-19"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/28",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-49_19",
+          "identity": {
+            "channelId": "49-19"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-49_19",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-27"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/29",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-55_39",
+          "identity": {
+            "channelId": "55-39"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-55_39",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-28"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/30",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-57_34",
+          "identity": {
+            "channelId": "57-34"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-57_34",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-31"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/31",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-59_6",
+          "identity": {
+            "channelId": "59-6"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-59_6",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-25"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/32",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-61_24",
+          "identity": {
+            "channelId": "61-24"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-61_24",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-3"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/33",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-63_4",
+          "identity": {
+            "channelId": "63-4"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-63_4",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-4"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/34",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W8-CHANNEL-64_47",
+          "identity": {
+            "channelId": "64-47"
+          },
+          "sourceRefs": [
+            "HD-UA-CHANNEL-64_47",
+            "HD-UA-EN-WORKBOOK-CHANNEL-ROW-2"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W8-channel-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/35",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        }
+      ],
+      "requiredFieldPaths": [
+        "channels",
+        "activations"
+      ]
+    },
+    {
+      "sectionId": "SEC07",
+      "sectionKey": "Gates",
+      "priorityWork": true,
+      "requiredCalculatedFields": [
+        "activations"
+      ],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [
+        "HD-R3-W9-GATE-01",
+        "HD-R3-W9-GATE-02",
+        "HD-R3-W9-GATE-03",
+        "HD-R3-W9-GATE-04",
+        "HD-R3-W9-GATE-05",
+        "HD-R3-W9-GATE-06",
+        "HD-R3-W9-GATE-07",
+        "HD-R3-W9-GATE-08",
+        "HD-R3-W9-GATE-09",
+        "HD-R3-W9-GATE-10",
+        "HD-R3-W9-GATE-11",
+        "HD-R3-W9-GATE-12",
+        "HD-R3-W9-GATE-13",
+        "HD-R3-W9-GATE-14",
+        "HD-R3-W9-GATE-15",
+        "HD-R3-W9-GATE-16",
+        "HD-R3-W9-GATE-17",
+        "HD-R3-W9-GATE-18",
+        "HD-R3-W9-GATE-19",
+        "HD-R3-W9-GATE-20",
+        "HD-R3-W9-GATE-21",
+        "HD-R3-W9-GATE-22",
+        "HD-R3-W9-GATE-23",
+        "HD-R3-W9-GATE-24",
+        "HD-R3-W9-GATE-25",
+        "HD-R3-W9-GATE-26",
+        "HD-R3-W9-GATE-27",
+        "HD-R3-W9-GATE-28",
+        "HD-R3-W9-GATE-29",
+        "HD-R3-W9-GATE-30",
+        "HD-R3-W9-GATE-31",
+        "HD-R3-W9-GATE-32",
+        "HD-R3-W9-GATE-33",
+        "HD-R3-W9-GATE-34",
+        "HD-R3-W9-GATE-35",
+        "HD-R3-W9-GATE-36",
+        "HD-R3-W9-GATE-37",
+        "HD-R3-W9-GATE-38",
+        "HD-R3-W9-GATE-39",
+        "HD-R3-W9-GATE-40",
+        "HD-R3-W9-GATE-41",
+        "HD-R3-W9-GATE-42",
+        "HD-R3-W9-GATE-43",
+        "HD-R3-W9-GATE-44",
+        "HD-R3-W9-GATE-45",
+        "HD-R3-W9-GATE-46",
+        "HD-R3-W9-GATE-47",
+        "HD-R3-W9-GATE-48",
+        "HD-R3-W9-GATE-49",
+        "HD-R3-W9-GATE-50",
+        "HD-R3-W9-GATE-51",
+        "HD-R3-W9-GATE-52",
+        "HD-R3-W9-GATE-53",
+        "HD-R3-W9-GATE-54",
+        "HD-R3-W9-GATE-55",
+        "HD-R3-W9-GATE-56",
+        "HD-R3-W9-GATE-57",
+        "HD-R3-W9-GATE-58",
+        "HD-R3-W9-GATE-59",
+        "HD-R3-W9-GATE-60",
+        "HD-R3-W9-GATE-61",
+        "HD-R3-W9-GATE-62",
+        "HD-R3-W9-GATE-63",
+        "HD-R3-W9-GATE-64"
+      ],
+      "proposedModuleIds": [],
+      "selection": "Match each activation by side+planet+Gate+Line; gate-level corpus is not a64x6 line corpus.",
+      "sourceProvenance": [
+        "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json"
+      ],
+      "legacyPhysicalPages": [
+        14,
+        15,
+        16,
+        17,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 70,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED",
+        "DESIGN_VENUS_LINE46_2_VS46_3_DISPUTE_HOLD_LINE_SPECIFIC_OUTPUT"
+      ],
+      "missingDataRule": "HOLD_AFFECTED_CLAIM_SHOW_EXACT_GAP_NO_FILLER",
+      "languageStatus": {
+        "zhHans": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "en": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "PARTIAL_EXISTING_MODULES_AUTHORING_SCOPE_OPEN",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [
+        {
+          "moduleId": "HD-R3-W9-GATE-01",
+          "identity": {
+            "gate": 1
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-1-REL-8_1-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/0",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-02",
+          "identity": {
+            "gate": 2
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-2-REL-2_14-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/1",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-03",
+          "identity": {
+            "gate": 3
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-3-REL-3_60-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/2",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-04",
+          "identity": {
+            "gate": 4
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-4-REL-63_4-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/3",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-05",
+          "identity": {
+            "gate": 5
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-5-REL-15_5-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/4",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-06",
+          "identity": {
+            "gate": 6
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-6-REL-59_6-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/5",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-07",
+          "identity": {
+            "gate": 7
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-7-REL-31_7-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/6",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-08",
+          "identity": {
+            "gate": 8
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-8-REL-8_1-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/7",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-09",
+          "identity": {
+            "gate": 9
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-9-REL-9_52-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/8",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-10",
+          "identity": {
+            "gate": 10
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-10-REL-10_20-LEFT",
+            "HD-UA-GATE-10-REL-10_57-LEFT",
+            "HD-UA-GATE-10-REL-10_34-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/9",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-11",
+          "identity": {
+            "gate": 11
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-11-REL-11_56-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/10",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-12",
+          "identity": {
+            "gate": 12
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-12-REL-12_22-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/11",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-13",
+          "identity": {
+            "gate": 13
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-13-REL-33_13-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/12",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-14",
+          "identity": {
+            "gate": 14
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-14-REL-2_14-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/13",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-15",
+          "identity": {
+            "gate": 15
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-15-REL-15_5-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/14",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-16",
+          "identity": {
+            "gate": 16
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-16-REL-16_48-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/15",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-17",
+          "identity": {
+            "gate": 17
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-17-REL-17_62-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/16",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-18",
+          "identity": {
+            "gate": 18
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-18-REL-18_58-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/17",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-19",
+          "identity": {
+            "gate": 19
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-19-REL-49_19-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/18",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-20",
+          "identity": {
+            "gate": 20
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-20-REL-20_57-LEFT",
+            "HD-UA-GATE-20-REL-34_20-RIGHT",
+            "HD-UA-GATE-20-REL-10_20-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/19",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-21",
+          "identity": {
+            "gate": 21
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-21-REL-45_21-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/20",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-22",
+          "identity": {
+            "gate": 22
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-22-REL-12_22-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/21",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-23",
+          "identity": {
+            "gate": 23
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-23-REL-43_23-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/22",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-24",
+          "identity": {
+            "gate": 24
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-24-REL-61_24-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/23",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-25",
+          "identity": {
+            "gate": 25
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-25-REL-25_51-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/24",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-26",
+          "identity": {
+            "gate": 26
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-26-REL-26_44-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/25",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-27",
+          "identity": {
+            "gate": 27
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-27-REL-27_50-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/26",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-28",
+          "identity": {
+            "gate": 28
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-28-REL-28_38-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/27",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-29",
+          "identity": {
+            "gate": 29
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-29-REL-46_29-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/28",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-30",
+          "identity": {
+            "gate": 30
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-30-REL-30_41-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/29",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-31",
+          "identity": {
+            "gate": 31
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-31-REL-31_7-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/30",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-32",
+          "identity": {
+            "gate": 32
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-32-REL-32_54-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/31",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-33",
+          "identity": {
+            "gate": 33
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-33-REL-33_13-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/32",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-34",
+          "identity": {
+            "gate": 34
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-34-REL-34_20-LEFT",
+            "HD-UA-GATE-34-REL-57_34-RIGHT",
+            "HD-UA-GATE-34-REL-10_34-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/33",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-35",
+          "identity": {
+            "gate": 35
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-35-REL-35_36-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/34",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-36",
+          "identity": {
+            "gate": 36
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-36-REL-35_36-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/35",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-37",
+          "identity": {
+            "gate": 37
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-37-REL-37_40-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/36",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-38",
+          "identity": {
+            "gate": 38
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-38-REL-28_38-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/37",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-39",
+          "identity": {
+            "gate": 39
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-39-REL-55_39-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/38",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-40",
+          "identity": {
+            "gate": 40
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-40-REL-37_40-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/39",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-41",
+          "identity": {
+            "gate": 41
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-41-REL-30_41-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/40",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-42",
+          "identity": {
+            "gate": 42
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-42-REL-42_53-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/41",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-43",
+          "identity": {
+            "gate": 43
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-43-REL-43_23-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/42",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-44",
+          "identity": {
+            "gate": 44
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-44-REL-26_44-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/43",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-45",
+          "identity": {
+            "gate": 45
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-45-REL-45_21-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/44",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-46",
+          "identity": {
+            "gate": 46
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-46-REL-46_29-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/45",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-47",
+          "identity": {
+            "gate": 47
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-47-REL-64_47-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/46",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-48",
+          "identity": {
+            "gate": 48
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-48-REL-16_48-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/47",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-49",
+          "identity": {
+            "gate": 49
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-49-REL-49_19-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/48",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-50",
+          "identity": {
+            "gate": 50
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-50-REL-27_50-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/49",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-51",
+          "identity": {
+            "gate": 51
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-51-REL-25_51-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/50",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-52",
+          "identity": {
+            "gate": 52
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-52-REL-9_52-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/51",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-53",
+          "identity": {
+            "gate": 53
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-53-REL-42_53-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/52",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-54",
+          "identity": {
+            "gate": 54
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-54-REL-32_54-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/53",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-55",
+          "identity": {
+            "gate": 55
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-55-REL-55_39-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/54",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-56",
+          "identity": {
+            "gate": 56
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-56-REL-11_56-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/55",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-57",
+          "identity": {
+            "gate": 57
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-57-REL-20_57-RIGHT",
+            "HD-UA-GATE-57-REL-57_34-LEFT",
+            "HD-UA-GATE-57-REL-10_57-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/56",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-58",
+          "identity": {
+            "gate": 58
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-58-REL-18_58-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/57",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-59",
+          "identity": {
+            "gate": 59
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-59-REL-59_6-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/58",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-60",
+          "identity": {
+            "gate": 60
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-60-REL-3_60-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/59",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-61",
+          "identity": {
+            "gate": 61
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-61-REL-61_24-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/60",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-62",
+          "identity": {
+            "gate": 62
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-62-REL-17_62-RIGHT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/61",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-63",
+          "identity": {
+            "gate": 63
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-63-REL-63_4-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/62",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W9-GATE-64",
+          "identity": {
+            "gate": 64
+          },
+          "sourceRefs": [
+            "HD-UA-GATE-64-REL-64_47-LEFT"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W9-gate-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/63",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        }
+      ],
+      "requiredFieldPaths": [
+        "activations[*].layer",
+        "activations[*].bodyCode",
+        "activations[*].gate",
+        "activations[*].line",
+        "activations[*].instantUTC",
+        "activations[*].mappingVersion",
+        "channels"
+      ]
+    },
+    {
+      "sectionId": "SEC08",
+      "sectionKey": "Profile",
+      "priorityWork": false,
+      "requiredCalculatedFields": [
+        "profile",
+        "activations"
+      ],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [
+        "HD-R3-W6-PROFILE-1_3",
+        "HD-R3-W6-PROFILE-1_4",
+        "HD-R3-W6-PROFILE-2_4",
+        "HD-R3-W6-PROFILE-2_5",
+        "HD-R3-W6-PROFILE-3_5",
+        "HD-R3-W6-PROFILE-3_6",
+        "HD-R3-W6-PROFILE-4_6",
+        "HD-R3-W6-PROFILE-4_1",
+        "HD-R3-W6-PROFILE-5_1",
+        "HD-R3-W6-PROFILE-5_2",
+        "HD-R3-W6-PROFILE-6_2",
+        "HD-R3-W6-PROFILE-6_3"
+      ],
+      "proposedModuleIds": [],
+      "selection": "Profile code equals Personality Sun line / Design Sun line; do not infer age events.",
+      "sourceProvenance": [
+        "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W6-profile-professional-meaning-corpus-v1.json"
+      ],
+      "legacyPhysicalPages": [
+        21,
+        22
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 60,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED"
+      ],
+      "missingDataRule": "HOLD_AFFECTED_CLAIM_SHOW_EXACT_GAP_NO_FILLER",
+      "languageStatus": {
+        "zhHans": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "en": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "PARTIAL_EXISTING_MODULES_AUTHORING_SCOPE_OPEN",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [
+        {
+          "moduleId": "HD-R3-W6-PROFILE-1_3",
+          "identity": {
+            "canonicalProfile": "1/3"
+          },
+          "sourceRefs": [
+            "HD-UA-PROFILE-1_3"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W6-profile-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/0",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W6-PROFILE-1_4",
+          "identity": {
+            "canonicalProfile": "1/4"
+          },
+          "sourceRefs": [
+            "HD-UA-PROFILE-1_4"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W6-profile-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/1",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W6-PROFILE-2_4",
+          "identity": {
+            "canonicalProfile": "2/4"
+          },
+          "sourceRefs": [
+            "HD-UA-PROFILE-2_4"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W6-profile-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/2",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W6-PROFILE-2_5",
+          "identity": {
+            "canonicalProfile": "2/5"
+          },
+          "sourceRefs": [
+            "HD-UA-PROFILE-2_5"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W6-profile-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/3",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W6-PROFILE-3_5",
+          "identity": {
+            "canonicalProfile": "3/5"
+          },
+          "sourceRefs": [
+            "HD-UA-PROFILE-3_5"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W6-profile-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/4",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W6-PROFILE-3_6",
+          "identity": {
+            "canonicalProfile": "3/6"
+          },
+          "sourceRefs": [
+            "HD-UA-PROFILE-3_6"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W6-profile-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/5",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W6-PROFILE-4_6",
+          "identity": {
+            "canonicalProfile": "4/6"
+          },
+          "sourceRefs": [
+            "HD-UA-PROFILE-4_6"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W6-profile-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/6",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W6-PROFILE-4_1",
+          "identity": {
+            "canonicalProfile": "4/1"
+          },
+          "sourceRefs": [
+            "HD-UA-PROFILE-4_1"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W6-profile-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/7",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W6-PROFILE-5_1",
+          "identity": {
+            "canonicalProfile": "5/1"
+          },
+          "sourceRefs": [
+            "HD-UA-PROFILE-5_1"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W6-profile-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/8",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W6-PROFILE-5_2",
+          "identity": {
+            "canonicalProfile": "5/2"
+          },
+          "sourceRefs": [
+            "HD-UA-PROFILE-5_2"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W6-profile-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/9",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W6-PROFILE-6_2",
+          "identity": {
+            "canonicalProfile": "6/2"
+          },
+          "sourceRefs": [
+            "HD-UA-PROFILE-6_2"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W6-profile-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/10",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W6-PROFILE-6_3",
+          "identity": {
+            "canonicalProfile": "6/3"
+          },
+          "sourceRefs": [
+            "HD-UA-PROFILE-6_3"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W6-profile-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/11",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        }
+      ],
+      "requiredFieldPaths": [
+        "profile",
+        "activations"
+      ]
+    },
+    {
+      "sectionId": "SEC09",
+      "sectionKey": "Cross",
+      "priorityWork": true,
+      "requiredCalculatedFields": [
+        "incarnationCross",
+        "profile",
+        "activations"
+      ],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [],
+      "proposedModuleIds": [
+        "HD-R6-SEC09-ORIGINAL-AUTHORING-PENDING"
+      ],
+      "selection": "Ordered Personality Sun/Earth + Design Sun/Earth; verified name additionally requires exact angle/profile/variant registry evidence.",
+      "sourceProvenance": [],
+      "legacyPhysicalPages": [
+        18,
+        19,
+        20,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 80,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED"
+      ],
+      "missingDataRule": "FOUR_GATE_IDENTITY_ONLY_NO_UNVERIFIED_NAME_OR_BOOK_TEXT",
+      "languageStatus": {
+        "zhHans": "AUTHORING_PENDING",
+        "en": "AUTHORING_PENDING",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "MISSING_VALUE_SPECIFIC_AUTHORING",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [],
+      "requiredFieldPaths": [
+        "incarnationCross.personalitySun",
+        "incarnationCross.personalityEarth",
+        "incarnationCross.designSun",
+        "incarnationCross.designEarth",
+        "incarnationCross.configurationCode",
+        "profile.profileCode",
+        "activations[PERSONALITY/DESIGN:SUN/EARTH].gate/line"
+      ]
+    },
+    {
+      "sectionId": "SEC10",
+      "sectionKey": "Variables",
+      "priorityWork": true,
+      "requiredCalculatedFields": [
+        "variables",
+        "activations"
+      ],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [
+        "HD-R3-W11-DETERMINATION-1_LEFT",
+        "HD-R3-W11-DETERMINATION-1_RIGHT",
+        "HD-R3-W11-DETERMINATION-2_LEFT",
+        "HD-R3-W11-DETERMINATION-2_RIGHT",
+        "HD-R3-W11-DETERMINATION-3_LEFT",
+        "HD-R3-W11-DETERMINATION-3_RIGHT",
+        "HD-R3-W11-DETERMINATION-4_LEFT",
+        "HD-R3-W11-DETERMINATION-4_RIGHT",
+        "HD-R3-W11-DETERMINATION-5_LEFT",
+        "HD-R3-W11-DETERMINATION-5_RIGHT",
+        "HD-R3-W11-DETERMINATION-6_LEFT",
+        "HD-R3-W11-DETERMINATION-6_RIGHT",
+        "HD-R3-W11-COGNITION-1",
+        "HD-R3-W11-COGNITION-2",
+        "HD-R3-W11-COGNITION-3",
+        "HD-R3-W11-COGNITION-4",
+        "HD-R3-W11-COGNITION-5",
+        "HD-R3-W11-COGNITION-6"
+      ],
+      "proposedModuleIds": [],
+      "selection": "Select admitted axis+Color+orientation only; Tone/cognition/PHS rule not implied by matching arrows.",
+      "sourceProvenance": [
+        "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json"
+      ],
+      "legacyPhysicalPages": [
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 90,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED",
+        "TONE_AND_COGNITION_NOT_ADMITTED_BY_ARROW_MATCH"
+      ],
+      "missingDataRule": "HOLD_AFFECTED_CLAIM_SHOW_EXACT_GAP_NO_FILLER",
+      "languageStatus": {
+        "zhHans": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "en": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "PARTIAL_EXISTING_MODULES_AUTHORING_SCOPE_OPEN",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [
+        {
+          "moduleId": "HD-R3-W11-DETERMINATION-1_LEFT",
+          "identity": {
+            "field": "DETERMINATION",
+            "canonicalKey": "1.左"
+          },
+          "sourceRefs": [
+            "HD-UA-DETERMINATION-1-左"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/0",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-DETERMINATION-1_RIGHT",
+          "identity": {
+            "field": "DETERMINATION",
+            "canonicalKey": "1.右"
+          },
+          "sourceRefs": [
+            "HD-UA-DETERMINATION-1-右"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/1",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-DETERMINATION-2_LEFT",
+          "identity": {
+            "field": "DETERMINATION",
+            "canonicalKey": "2.左"
+          },
+          "sourceRefs": [
+            "HD-UA-DETERMINATION-2-左"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/2",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-DETERMINATION-2_RIGHT",
+          "identity": {
+            "field": "DETERMINATION",
+            "canonicalKey": "2.右"
+          },
+          "sourceRefs": [
+            "HD-UA-DETERMINATION-2-右"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/3",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-DETERMINATION-3_LEFT",
+          "identity": {
+            "field": "DETERMINATION",
+            "canonicalKey": "3.左"
+          },
+          "sourceRefs": [
+            "HD-UA-DETERMINATION-3-左"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/4",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-DETERMINATION-3_RIGHT",
+          "identity": {
+            "field": "DETERMINATION",
+            "canonicalKey": "3.右"
+          },
+          "sourceRefs": [
+            "HD-UA-DETERMINATION-3-右"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/5",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-DETERMINATION-4_LEFT",
+          "identity": {
+            "field": "DETERMINATION",
+            "canonicalKey": "4.左"
+          },
+          "sourceRefs": [
+            "HD-UA-DETERMINATION-4-左"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/6",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-DETERMINATION-4_RIGHT",
+          "identity": {
+            "field": "DETERMINATION",
+            "canonicalKey": "4.右"
+          },
+          "sourceRefs": [
+            "HD-UA-DETERMINATION-4-右"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/7",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-DETERMINATION-5_LEFT",
+          "identity": {
+            "field": "DETERMINATION",
+            "canonicalKey": "5.左"
+          },
+          "sourceRefs": [
+            "HD-UA-DETERMINATION-5-左"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/8",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-DETERMINATION-5_RIGHT",
+          "identity": {
+            "field": "DETERMINATION",
+            "canonicalKey": "5.右"
+          },
+          "sourceRefs": [
+            "HD-UA-DETERMINATION-5-右"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/9",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-DETERMINATION-6_LEFT",
+          "identity": {
+            "field": "DETERMINATION",
+            "canonicalKey": "6.左"
+          },
+          "sourceRefs": [
+            "HD-UA-DETERMINATION-6-左"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/10",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-DETERMINATION-6_RIGHT",
+          "identity": {
+            "field": "DETERMINATION",
+            "canonicalKey": "6.右"
+          },
+          "sourceRefs": [
+            "HD-UA-DETERMINATION-6-右"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/11",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-COGNITION-1",
+          "identity": {
+            "field": "COGNITION",
+            "canonicalKey": "1"
+          },
+          "sourceRefs": [
+            "HD-UA-COGNITION-1"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/12",
+          "rule": "HOLD: current R5 explicitly returns false; Tone-to-cognition mapping not admitted"
+        },
+        {
+          "moduleId": "HD-R3-W11-COGNITION-2",
+          "identity": {
+            "field": "COGNITION",
+            "canonicalKey": "2"
+          },
+          "sourceRefs": [
+            "HD-UA-COGNITION-2"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/13",
+          "rule": "HOLD: current R5 explicitly returns false; Tone-to-cognition mapping not admitted"
+        },
+        {
+          "moduleId": "HD-R3-W11-COGNITION-3",
+          "identity": {
+            "field": "COGNITION",
+            "canonicalKey": "3"
+          },
+          "sourceRefs": [
+            "HD-UA-COGNITION-3"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/14",
+          "rule": "HOLD: current R5 explicitly returns false; Tone-to-cognition mapping not admitted"
+        },
+        {
+          "moduleId": "HD-R3-W11-COGNITION-4",
+          "identity": {
+            "field": "COGNITION",
+            "canonicalKey": "4"
+          },
+          "sourceRefs": [
+            "HD-UA-COGNITION-4"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/15",
+          "rule": "HOLD: current R5 explicitly returns false; Tone-to-cognition mapping not admitted"
+        },
+        {
+          "moduleId": "HD-R3-W11-COGNITION-5",
+          "identity": {
+            "field": "COGNITION",
+            "canonicalKey": "5"
+          },
+          "sourceRefs": [
+            "HD-UA-COGNITION-5"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/16",
+          "rule": "HOLD: current R5 explicitly returns false; Tone-to-cognition mapping not admitted"
+        },
+        {
+          "moduleId": "HD-R3-W11-COGNITION-6",
+          "identity": {
+            "field": "COGNITION",
+            "canonicalKey": "6"
+          },
+          "sourceRefs": [
+            "HD-UA-COGNITION-6"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/17",
+          "rule": "HOLD: current R5 explicitly returns false; Tone-to-cognition mapping not admitted"
+        }
+      ],
+      "requiredFieldPaths": [
+        "variables.fields.designUpper.color/tone/orientation/sourceActivationIds/instantUTC",
+        "variables.fields.designLower.color/tone/orientation/sourceActivationIds/instantUTC",
+        "variables.fields.personalityUpper.color/tone/orientation/sourceActivationIds/instantUTC",
+        "variables.fields.personalityLower.color/tone/orientation/sourceActivationIds/instantUTC",
+        "variables.calculationVersion"
+      ]
+    },
+    {
+      "sectionId": "SEC11",
+      "sectionKey": "Environment",
+      "priorityWork": false,
+      "requiredCalculatedFields": [
+        "variables"
+      ],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [
+        "HD-R3-W11-ENVIRONMENT-1_LEFT",
+        "HD-R3-W11-ENVIRONMENT-1_RIGHT",
+        "HD-R3-W11-ENVIRONMENT-2_LEFT",
+        "HD-R3-W11-ENVIRONMENT-2_RIGHT",
+        "HD-R3-W11-ENVIRONMENT-3_LEFT",
+        "HD-R3-W11-ENVIRONMENT-3_RIGHT",
+        "HD-R3-W11-ENVIRONMENT-4_LEFT",
+        "HD-R3-W11-ENVIRONMENT-4_RIGHT",
+        "HD-R3-W11-ENVIRONMENT-5_LEFT",
+        "HD-R3-W11-ENVIRONMENT-5_RIGHT",
+        "HD-R3-W11-ENVIRONMENT-6_LEFT",
+        "HD-R3-W11-ENVIRONMENT-6_RIGHT",
+        "HD-R3-W11-PERSPECTIVE-1",
+        "HD-R3-W11-PERSPECTIVE-2",
+        "HD-R3-W11-PERSPECTIVE-3",
+        "HD-R3-W11-PERSPECTIVE-4",
+        "HD-R3-W11-PERSPECTIVE-5",
+        "HD-R3-W11-PERSPECTIVE-6",
+        "HD-R3-W11-MOTIVATION-1",
+        "HD-R3-W11-MOTIVATION-2",
+        "HD-R3-W11-MOTIVATION-3",
+        "HD-R3-W11-MOTIVATION-4",
+        "HD-R3-W11-MOTIVATION-5",
+        "HD-R3-W11-MOTIVATION-6"
+      ],
+      "proposedModuleIds": [],
+      "selection": "Separate design-lower environment from personality-lower perspective and personality-upper motivation; no fusion.",
+      "sourceProvenance": [
+        "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json"
+      ],
+      "legacyPhysicalPages": [
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 95,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED",
+        "TONE_AND_COGNITION_NOT_ADMITTED_BY_ARROW_MATCH"
+      ],
+      "missingDataRule": "HOLD_AFFECTED_CLAIM_SHOW_EXACT_GAP_NO_FILLER",
+      "languageStatus": {
+        "zhHans": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "en": "EXISTING_CANDIDATE_TEXT_NOT_R6_ACCEPTED",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "PARTIAL_EXISTING_MODULES_AUTHORING_SCOPE_OPEN",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [
+        {
+          "moduleId": "HD-R3-W11-ENVIRONMENT-1_LEFT",
+          "identity": {
+            "field": "ENVIRONMENT",
+            "canonicalKey": "1.左"
+          },
+          "sourceRefs": [
+            "HD-UA-ENVIRONMENT-1-左"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/18",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-ENVIRONMENT-1_RIGHT",
+          "identity": {
+            "field": "ENVIRONMENT",
+            "canonicalKey": "1.右"
+          },
+          "sourceRefs": [
+            "HD-UA-ENVIRONMENT-1-右"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/19",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-ENVIRONMENT-2_LEFT",
+          "identity": {
+            "field": "ENVIRONMENT",
+            "canonicalKey": "2.左"
+          },
+          "sourceRefs": [
+            "HD-UA-ENVIRONMENT-2-左"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/20",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-ENVIRONMENT-2_RIGHT",
+          "identity": {
+            "field": "ENVIRONMENT",
+            "canonicalKey": "2.右"
+          },
+          "sourceRefs": [
+            "HD-UA-ENVIRONMENT-2-右"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/21",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-ENVIRONMENT-3_LEFT",
+          "identity": {
+            "field": "ENVIRONMENT",
+            "canonicalKey": "3.左"
+          },
+          "sourceRefs": [
+            "HD-UA-ENVIRONMENT-3-左"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/22",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-ENVIRONMENT-3_RIGHT",
+          "identity": {
+            "field": "ENVIRONMENT",
+            "canonicalKey": "3.右"
+          },
+          "sourceRefs": [
+            "HD-UA-ENVIRONMENT-3-右"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/23",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-ENVIRONMENT-4_LEFT",
+          "identity": {
+            "field": "ENVIRONMENT",
+            "canonicalKey": "4.左"
+          },
+          "sourceRefs": [
+            "HD-UA-ENVIRONMENT-4-左"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/24",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-ENVIRONMENT-4_RIGHT",
+          "identity": {
+            "field": "ENVIRONMENT",
+            "canonicalKey": "4.右"
+          },
+          "sourceRefs": [
+            "HD-UA-ENVIRONMENT-4-右"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/25",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-ENVIRONMENT-5_LEFT",
+          "identity": {
+            "field": "ENVIRONMENT",
+            "canonicalKey": "5.左"
+          },
+          "sourceRefs": [
+            "HD-UA-ENVIRONMENT-5-左"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/26",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-ENVIRONMENT-5_RIGHT",
+          "identity": {
+            "field": "ENVIRONMENT",
+            "canonicalKey": "5.右"
+          },
+          "sourceRefs": [
+            "HD-UA-ENVIRONMENT-5-右"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/27",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-ENVIRONMENT-6_LEFT",
+          "identity": {
+            "field": "ENVIRONMENT",
+            "canonicalKey": "6.左"
+          },
+          "sourceRefs": [
+            "HD-UA-ENVIRONMENT-6-左"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/28",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-ENVIRONMENT-6_RIGHT",
+          "identity": {
+            "field": "ENVIRONMENT",
+            "canonicalKey": "6.右"
+          },
+          "sourceRefs": [
+            "HD-UA-ENVIRONMENT-6-右"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/29",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-PERSPECTIVE-1",
+          "identity": {
+            "field": "PERSPECTIVE",
+            "canonicalKey": "1"
+          },
+          "sourceRefs": [
+            "HD-UA-PERSPECTIVE-1"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/30",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-PERSPECTIVE-2",
+          "identity": {
+            "field": "PERSPECTIVE",
+            "canonicalKey": "2"
+          },
+          "sourceRefs": [
+            "HD-UA-PERSPECTIVE-2"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/31",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-PERSPECTIVE-3",
+          "identity": {
+            "field": "PERSPECTIVE",
+            "canonicalKey": "3"
+          },
+          "sourceRefs": [
+            "HD-UA-PERSPECTIVE-3"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/32",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-PERSPECTIVE-4",
+          "identity": {
+            "field": "PERSPECTIVE",
+            "canonicalKey": "4"
+          },
+          "sourceRefs": [
+            "HD-UA-PERSPECTIVE-4"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/33",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-PERSPECTIVE-5",
+          "identity": {
+            "field": "PERSPECTIVE",
+            "canonicalKey": "5"
+          },
+          "sourceRefs": [
+            "HD-UA-PERSPECTIVE-5"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/34",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-PERSPECTIVE-6",
+          "identity": {
+            "field": "PERSPECTIVE",
+            "canonicalKey": "6"
+          },
+          "sourceRefs": [
+            "HD-UA-PERSPECTIVE-6"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/35",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-MOTIVATION-1",
+          "identity": {
+            "field": "MOTIVATION",
+            "canonicalKey": "1"
+          },
+          "sourceRefs": [
+            "HD-UA-MOTIVATION-1"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/36",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-MOTIVATION-2",
+          "identity": {
+            "field": "MOTIVATION",
+            "canonicalKey": "2"
+          },
+          "sourceRefs": [
+            "HD-UA-MOTIVATION-2"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/37",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-MOTIVATION-3",
+          "identity": {
+            "field": "MOTIVATION",
+            "canonicalKey": "3"
+          },
+          "sourceRefs": [
+            "HD-UA-MOTIVATION-3"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/38",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-MOTIVATION-4",
+          "identity": {
+            "field": "MOTIVATION",
+            "canonicalKey": "4"
+          },
+          "sourceRefs": [
+            "HD-UA-MOTIVATION-4"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/39",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-MOTIVATION-5",
+          "identity": {
+            "field": "MOTIVATION",
+            "canonicalKey": "5"
+          },
+          "sourceRefs": [
+            "HD-UA-MOTIVATION-5"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/40",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        },
+        {
+          "moduleId": "HD-R3-W11-MOTIVATION-6",
+          "identity": {
+            "field": "MOTIVATION",
+            "canonicalKey": "6"
+          },
+          "sourceRefs": [
+            "HD-UA-MOTIVATION-6"
+          ],
+          "sourcePath": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/semantics/HD-PRO-R3-W11-variable-phs-professional-meaning-corpus-v1.json",
+          "sourcePointer": "/meaningUnits/41",
+          "rule": "EXACT_IDENTITY_MATCH_UNDER_EXISTING_R5_SELECTOR"
+        }
+      ],
+      "requiredFieldPaths": [
+        "variables"
+      ]
+    },
+    {
+      "sectionId": "SEC12",
+      "sectionKey": "Relationship",
+      "priorityWork": false,
+      "requiredCalculatedFields": [
+        "typeCode",
+        "authority",
+        "definition",
+        "definedCenters"
+      ],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [],
+      "proposedModuleIds": [
+        "HD-R6-SEC12-ORIGINAL-AUTHORING-PENDING"
+      ],
+      "selection": "Single-chart observation questions only; partner/composite claim requires separate confirmed partner input and existing relationship owner.",
+      "sourceProvenance": [],
+      "legacyPhysicalPages": [
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 110,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED"
+      ],
+      "missingDataRule": "HOLD_AFFECTED_CLAIM_SHOW_EXACT_GAP_NO_FILLER",
+      "languageStatus": {
+        "zhHans": "AUTHORING_PENDING",
+        "en": "AUTHORING_PENDING",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "MISSING_VALUE_SPECIFIC_AUTHORING",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [],
+      "requiredFieldPaths": [
+        "typeCode",
+        "authority",
+        "definition",
+        "definedCenters"
+      ]
+    },
+    {
+      "sectionId": "SEC13",
+      "sectionKey": "Career",
+      "priorityWork": false,
+      "requiredCalculatedFields": [
+        "typeCode",
+        "authority",
+        "channels"
+      ],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [],
+      "proposedModuleIds": [
+        "HD-R6-SEC13-ORIGINAL-AUTHORING-PENDING"
+      ],
+      "selection": "Optional real work constraints; no BG5 professional claims or promised suitability.",
+      "sourceProvenance": [],
+      "legacyPhysicalPages": [
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 110,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED"
+      ],
+      "missingDataRule": "HOLD_AFFECTED_CLAIM_SHOW_EXACT_GAP_NO_FILLER",
+      "languageStatus": {
+        "zhHans": "AUTHORING_PENDING",
+        "en": "AUTHORING_PENDING",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "MISSING_VALUE_SPECIFIC_AUTHORING",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [],
+      "requiredFieldPaths": [
+        "typeCode",
+        "authority",
+        "channels"
+      ]
+    },
+    {
+      "sectionId": "SEC14",
+      "sectionKey": "Resources",
+      "priorityWork": false,
+      "requiredCalculatedFields": [
+        "authority",
+        "channels"
+      ],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [],
+      "proposedModuleIds": [
+        "HD-R6-SEC14-ORIGINAL-AUTHORING-PENDING"
+      ],
+      "selection": "Optional resource decisions; no wealth, investment return or financial competence inferred from chart.",
+      "sourceProvenance": [],
+      "legacyPhysicalPages": [
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 110,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED"
+      ],
+      "missingDataRule": "HOLD_AFFECTED_CLAIM_SHOW_EXACT_GAP_NO_FILLER",
+      "languageStatus": {
+        "zhHans": "AUTHORING_PENDING",
+        "en": "AUTHORING_PENDING",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "MISSING_VALUE_SPECIFIC_AUTHORING",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [],
+      "requiredFieldPaths": [
+        "authority",
+        "channels"
+      ]
+    },
+    {
+      "sectionId": "SEC15",
+      "sectionKey": "Integration",
+      "priorityWork": true,
+      "requiredCalculatedFields": [
+        "typeCode",
+        "authority",
+        "definition",
+        "profile",
+        "activations"
+      ],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [],
+      "proposedModuleIds": [
+        "HD-R6-SEC15-ORIGINAL-AUTHORING-PENDING"
+      ],
+      "selection": "Only signed same-snapshot, admitted value-specific rules; preserve hierarchy and contradictions; no narrative interpolation.",
+      "sourceProvenance": [],
+      "legacyPhysicalPages": [
+        8,
+        9,
+        11,
+        14,
+        15,
+        16,
+        17,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 100,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED",
+        "DESIGN_VENUS_LINE46_2_VS46_3_DISPUTE_HOLD_LINE_SPECIFIC_OUTPUT"
+      ],
+      "missingDataRule": "HOLD_AFFECTED_CLAIM_SHOW_EXACT_GAP_NO_FILLER",
+      "languageStatus": {
+        "zhHans": "AUTHORING_PENDING",
+        "en": "AUTHORING_PENDING",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "MISSING_VALUE_SPECIFIC_AUTHORING",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [],
+      "requiredFieldPaths": [
+        "typeCode",
+        "authority",
+        "definition",
+        "profile",
+        "definedCenters",
+        "channels",
+        "activations",
+        "sameConfirmedSnapshot",
+        "individuallyAdmittedSectionModuleIds",
+        "explicitContradictions"
+      ]
+    },
+    {
+      "sectionId": "SEC16",
+      "sectionKey": "Reality",
+      "priorityWork": false,
+      "requiredCalculatedFields": [],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [],
+      "proposedModuleIds": [
+        "HD-R6-SEC16-ORIGINAL-AUTHORING-PENDING"
+      ],
+      "selection": "Use optional explicitly supplied observations, keep user assertion separate; no invented events.",
+      "sourceProvenance": [],
+      "legacyPhysicalPages": [
+        12,
+        13,
+        19,
+        57,
+        58
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 110,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED"
+      ],
+      "missingDataRule": "OPTIONAL_QUESTIONS_ONLY_NO_INVENTED_HISTORY",
+      "languageStatus": {
+        "zhHans": "AUTHORING_PENDING",
+        "en": "AUTHORING_PENDING",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "MISSING_VALUE_SPECIFIC_AUTHORING",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [],
+      "requiredFieldPaths": []
+    },
+    {
+      "sectionId": "SEC17",
+      "sectionKey": "Practice",
+      "priorityWork": false,
+      "requiredCalculatedFields": [],
+      "bindingFields": [
+        "inputDigest",
+        "chartResultDigest",
+        "runtimeDependencyDigest",
+        "calculationVersion",
+        "sourceVersion"
+      ],
+      "applicableModuleIds": [],
+      "proposedModuleIds": [
+        "HD-R6-SEC17-ORIGINAL-AUTHORING-PENDING"
+      ],
+      "selection": "Offer reversible observation questions only; no therapy or compulsory decision instruction.",
+      "sourceProvenance": [],
+      "legacyPhysicalPages": [
+        2,
+        3,
+        57,
+        58
+      ],
+      "rightsStatus": "CLAIM_LEVEL_UNVERIFIED_NOT_COMMERCIALLY_ADMITTED",
+      "interpretationPriority": 110,
+      "contradictionRules": [
+        "SAME_SNAPSHOT_ONLY",
+        "EXISTING_AUTHORITY_OVER_GENERIC_GATE",
+        "FULL_CHANNEL_OVER_ISOLATED_GATE_DUPLICATE",
+        "CALCULATION_FACTS_SEPARATE_FROM_SYMBOLIC_INTERPRETATION",
+        "CONFLICT_RECORDED_NOT_SILENTLY_MERGED"
+      ],
+      "missingDataRule": "OPTIONAL_QUESTIONS_ONLY_NO_INVENTED_HISTORY",
+      "languageStatus": {
+        "zhHans": "AUTHORING_PENDING",
+        "en": "AUTHORING_PENDING",
+        "bilingual": "INDEPENDENT_SCOPE_REVIEW_REQUIRED_NOT_AUTO_TRANSLATION_RIGHTS"
+      },
+      "automatedPublicationGate": {
+        "existingReleaseOwner": "functions/canonical-presentation-runtime/report-release-runtime.js",
+        "require": [
+          "SOURCE_COORDINATES",
+          "RIGHTS_SCOPE_FOR_EXPRESSION_AND_LANGUAGE",
+          "CALCULATION_AND_VALUE_BINDING_ADMISSION",
+          "EDITORIAL_AND_BOUNDARY_ACCEPTANCE",
+          "CURRENT_INPUT_AND_SOURCE_HASHES",
+          "EXISTING_REPORT_RELEASE_ADMISSION"
+        ],
+        "r6ProductionIntegration": false,
+        "publicationAllowed": false
+      },
+      "status": "MISSING_VALUE_SPECIFIC_AUTHORING",
+      "selectionOwner": "functions/external-profile/hd-report-automation-candidate.js applicable(unit); R6 does not activate or replace it",
+      "moduleSelection": [],
+      "requiredFieldPaths": []
+    }
+  ]
+}

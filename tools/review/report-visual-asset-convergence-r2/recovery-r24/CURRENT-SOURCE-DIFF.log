@@ -1,0 +1,157 @@
+diff --git a/functions/account/local-large-private-pdf-artifact.js b/functions/account/local-large-private-pdf-artifact.js
+index 3829668d..89f8e512 100644
+--- a/functions/account/local-large-private-pdf-artifact.js
++++ b/functions/account/local-large-private-pdf-artifact.js
+@@ -11,6 +11,7 @@ const TEMPLATE='REPORT-VISUAL-ASSET-R2.3',MAX_BYTES=128*1024*1024;
+ const fail=(code,status=403)=>{throw Object.assign(Error(code),{code,status});};
+ const audit=(c,event)=>c.env.LOCAL_PRIVATE_PDF_AUDIT?.({event});
+ async function config(c,b){
++ try{
+  const env=c.env,u=new URL(c.request.url),identity=normalizeVerifiedSymbolicAccountIdentity(c.data?.symbolicAccountIdentity);
+  if(env.PHIOS_PERSONAL_EVIDENCE_LOCAL!=='true'||env.PHIOS_LARGE_PRIVATE_PDF_LOCAL!=='true'||env.LOCAL_PRIVATE_PDF_STORAGE_SCOPE!=='LOCAL_SYNTHETIC'||env.PHIOS_ENVIRONMENT==='production'||!['localhost','127.0.0.1','[::1]'].includes(u.hostname))fail('LARGE_PDF_LOCAL_ONLY');
+  if(!identity||identity.userId!==b.ownerId)fail('ACCOUNT_REQUIRED',401);
+@@ -19,30 +20,36 @@ async function config(c,b){
+  await dossierEligibility(env,identity.userId);await b.checkSource();
+  const parent=await env.RUNTIME_DB.prepare("SELECT runtime_id FROM runtimes WHERE runtime_id=? AND user_id=? AND status='active'").bind(b.runtimeId,b.ownerId).first();if(!parent)fail('LARGE_PDF_SOURCE_INACTIVE',404);
+  return {db:env.RUNTIME_DB,bucket:env.PRIVATE_REPORTS,key:env.PROFILE_EVIDENCE_ENCRYPTION_KEY,secret:await digest(`PHIOS_PRIVATE_REPORT_GRANT_v1\0${env.AUTH_SESSION_SECRET}`)};
++ }catch(e){audit(c,'ACCESS_DENIED');throw e;}
+ }
+ async function read(c,b,id){const {db,key}=await config(c,b),r=await db.prepare("SELECT a.payload FROM runtime_artifacts a JOIN runtimes r ON a.runtime_id=r.runtime_id WHERE a.artifact_id=? AND a.runtime_id=? AND a.artifact_type=? AND r.user_id=? AND r.status='active'").bind(id,b.runtimeId,LARGE_LOCAL_PDF_TYPE,b.ownerId).first();if(!r)return null;
+- const e=JSON.parse(r.payload),v=JSON.parse(await decryptSensitive(e.ciphertext,key));if(await sha256Hex(JSON.stringify(v))!==e.digest||v.ownerId!==b.ownerId||v.documentId!==b.documentId||v.language!==b.language||v.sourceSnapshotVersion!==b.sourceSnapshotVersion||v.templateVersion!==TEMPLATE||v.artifactId!==id)fail('LARGE_PDF_METADATA_MISMATCH',409);return v;}
++ const e=JSON.parse(r.payload),v=JSON.parse(await decryptSensitive(e.ciphertext,key));if(await sha256Hex(JSON.stringify(v))!==e.digest||v.ownerId!==b.ownerId||v.documentId!==b.documentId||v.language!==b.language||v.sourceSnapshotVersion!==b.sourceSnapshotVersion||v.templateVersion!==TEMPLATE||v.artifactId!==id)fail('LARGE_PDF_METADATA_MISMATCH',409);if(v.state!=='LOCAL_PRIVATE_OBJECT_CANDIDATE_NOT_RELEASED')fail('LARGE_PDF_UNAVAILABLE_STATE',409);return v;}
+ function grant(c,v,secret,reused){const now=new Date().toISOString(),expiresAt=new Date(Date.now()+15*60000).toISOString();const g=issuePrivateDownloadGrant({exportVersion:{documentId:v.documentId,documentVersion:v.artifactId,outputDigest:v.outputDigest,format:'PDF',status:'EXPORTED',legallyExecuted:false},subjectId:v.ownerId,now,expiresAt,secret});audit(c,'GRANT_ISSUED');return {artifactId:v.artifactId,downloadGrant:g.token,expiresAt,outputDigest:v.outputDigest,bytes:v.bytes,reused,queryStringAllowed:false,providerCalls:0,state:'LOCAL_PRIVATE_OBJECT_CANDIDATE_NOT_RELEASED'};}
+ function checkedUpload(stream,expectedBytes,expectedDigest){let count=0,prefix=Buffer.alloc(0);const h=createHash('sha256');return stream.pipeThrough(new TransformStream({transform(chunk,ctl){if(!(chunk instanceof Uint8Array))fail('LARGE_PDF_STREAM_BYTES_REQUIRED',422);count+=chunk.length;if(count>expectedBytes||count>MAX_BYTES)fail('LARGE_PDF_LENGTH_MISMATCH',422);if(prefix.length<5)prefix=Buffer.concat([prefix,chunk.subarray(0,5-prefix.length)]);h.update(chunk);ctl.enqueue(chunk);},flush(){if(count!==expectedBytes||prefix.toString()!=='%PDF-'||h.digest('hex')!==expectedDigest)fail('LARGE_PDF_INTEGRITY_FAILED',422);}}));}
++export async function reuseLocalLargePrivatePdf(c,b,{htmlDigest}={}){
++ const {db,key}=await config(c,b);if(!/^[a-f0-9]{64}$/.test(htmlDigest||''))fail('LARGE_PDF_LAYOUT_DIGEST_REQUIRED',422);
++ const rows=(await db.prepare("SELECT a.payload FROM runtime_artifacts a JOIN runtimes r ON r.runtime_id=a.runtime_id WHERE a.runtime_id=? AND a.artifact_type=? AND r.user_id=? AND r.status='active' ORDER BY a.created_at DESC LIMIT 128").bind(b.runtimeId,LARGE_LOCAL_PDF_TYPE,b.ownerId).all()).results||[];
++ for(const row of rows){const e=JSON.parse(row.payload),v=JSON.parse(await decryptSensitive(e.ciphertext,key));if(await sha256Hex(JSON.stringify(v))!==e.digest||v.ownerId!==b.ownerId)fail('LARGE_PDF_METADATA_MISMATCH',409);if(v.documentId===b.documentId&&v.language===b.language&&v.sourceSnapshotVersion===b.sourceSnapshotVersion&&v.templateVersion===TEMPLATE&&v.htmlDigest===htmlDigest)return prepareLocalLargePrivatePdf(c,b,{expectedBytes:v.bytes,expectedDigest:v.outputDigest});}return null;
++}
+ export async function prepareLocalLargePrivatePdf(c,b,{stream,expectedBytes,expectedDigest}={}){
+  const {db,bucket,key,secret}=await config(c,b);if(!Number.isSafeInteger(expectedBytes)||expectedBytes<5||expectedBytes>MAX_BYTES||!/^[a-f0-9]{64}$/.test(expectedDigest||''))fail('LARGE_PDF_DESCRIPTOR_REQUIRED',422);
+- const artifactId='LPDF3-'+await sha256Hex(JSON.stringify([b.ownerId,b.runtimeId,b.documentId,b.language,b.sourceSnapshotVersion,TEMPLATE,expectedDigest]));const prior=await read(c,b,artifactId);if(prior){const object=await bucket.head(prior.objectKey);if(!object||object.size!==prior.bytes||object.customMetadata?.sha256!==prior.outputDigest)fail('LARGE_PDF_OBJECT_REPAIR_REQUIRED',503);await b.checkSource();return grant(c,prior,secret,true);}
++ const artifactId='LPDF3-'+await sha256Hex(JSON.stringify([b.ownerId,b.runtimeId,b.documentId,b.language,b.sourceSnapshotVersion,TEMPLATE,expectedDigest]));const prior=await read(c,b,artifactId);if(prior){if(prior.bytes!==expectedBytes||prior.outputDigest!==expectedDigest)fail('LARGE_PDF_DESCRIPTOR_MISMATCH',409);if(stream&&!stream.locked)await stream.cancel();const object=await bucket.head(prior.objectKey);if(!object||object.size!==prior.bytes||object.customMetadata?.sha256!==prior.outputDigest)fail('LARGE_PDF_OBJECT_REPAIR_REQUIRED',503);await b.checkSource();return grant(c,prior,secret,true);}
+  if(!stream?.pipeThrough)fail('LARGE_PDF_STREAM_REQUIRED',422);
+  const objectKey=`local-private-pdf-r23/${artifactId}/${crypto.randomUUID()}.pdf`;let linked=false;
+  try{
+  // Workerd/R2 requires a known-length input. Node's local test adapter accepts a
+  // plain stream; production admission still requires exercising this native path.
+  const validated=checkedUpload(stream,expectedBytes,expectedDigest),sized=typeof globalThis.FixedLengthStream==='function'?new globalThis.FixedLengthStream(expectedBytes):null,controller=new AbortController(),pumping=sized?validated.pipeTo(sized.writable,{signal:controller.signal}):null;
+- try{await Promise.all([bucket.put(objectKey,sized?sized.readable:validated,{sha256:expectedDigest,httpMetadata:{contentType:'application/pdf',cacheControl:'private, no-store'},customMetadata:{sha256:expectedDigest,template:TEMPLATE}}),pumping||Promise.resolve()]);}catch(e){controller.abort();await pumping?.catch(()=>{});throw e;}
++ try{await Promise.all([bucket.put(objectKey,sized?sized.readable:validated,{sha256:expectedDigest,httpMetadata:{contentType:'application/pdf',cacheControl:'private, no-store'},customMetadata:{sha256:expectedDigest,template:TEMPLATE,ownerTag:await sha256Hex(b.ownerId),createdAt:new Date().toISOString()}}),pumping||Promise.resolve()]);}catch(e){controller.abort();await pumping?.catch(()=>{});throw e;}
+  const head=await bucket.head(objectKey);if(!head||head.size!==expectedBytes||head.customMetadata?.sha256!==expectedDigest)fail('LARGE_PDF_UPLOAD_NOT_VERIFIED',503);await config(c,b);
+- const now=new Date().toISOString(),v={ownerId:b.ownerId,runtimeId:b.runtimeId,documentId:b.documentId,language:b.language,sourceSnapshotVersion:b.sourceSnapshotVersion,templateVersion:TEMPLATE,artifactId,outputDigest:expectedDigest,bytes:expectedBytes,objectKey,etag:head.etag,createdAt:now,state:'LOCAL_PRIVATE_OBJECT_CANDIDATE_NOT_RELEASED'},payload=JSON.stringify({ciphertext:await encryptSensitive(JSON.stringify(v),key),digest:await sha256Hex(JSON.stringify(v))});
++ const now=new Date().toISOString(),v={ownerId:b.ownerId,runtimeId:b.runtimeId,documentId:b.documentId,language:b.language,sourceSnapshotVersion:b.sourceSnapshotVersion,templateVersion:TEMPLATE,htmlDigest:b.htmlDigest||null,retentionExpiresAt:b.retentionExpiresAt||null,artifactId,outputDigest:expectedDigest,bytes:expectedBytes,objectKey,etag:head.etag,createdAt:now,state:'LOCAL_PRIVATE_OBJECT_CANDIDATE_NOT_RELEASED'},payload=JSON.stringify({ciphertext:await encryptSensitive(JSON.stringify(v),key),digest:await sha256Hex(JSON.stringify(v))});
+  await db.prepare("INSERT OR IGNORE INTO runtime_artifacts(artifact_id,runtime_id,artifact_type,stage,payload,schema_version,created_at,updated_at) SELECT ?,?,?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM runtimes WHERE runtime_id=? AND user_id=? AND status='active')").bind(artifactId,b.runtimeId,LARGE_LOCAL_PDF_TYPE,'LOCAL_CANDIDATE',payload,TEMPLATE,now,now,b.runtimeId,b.ownerId).run();const saved=await read(c,b,artifactId);if(!saved)fail('LARGE_PDF_SOURCE_INACTIVE',404);linked=saved.objectKey===objectKey;if(!linked)await bucket.delete(objectKey);audit(c,'PRIVATE_OBJECT_READY');return grant(c,saved,secret,!linked);
+  }catch(e){if(!linked)await bucket.delete(objectKey).catch(()=>{});audit(c,'PREPARE_FAILED');throw e;}
+ }
+ function parseRange(header,size){if(!header)return null;const m=/^bytes=(\d*)-(\d*)$/.exec(header);if(!m||(!m[1]&&!m[2]))fail('LARGE_PDF_RANGE_INVALID',416);let start,end;if(!m[1]){const suffix=Number(m[2]);if(!Number.isSafeInteger(suffix)||suffix<=0)fail('LARGE_PDF_RANGE_INVALID',416);start=Math.max(0,size-suffix);end=size-1;}else{start=Number(m[1]);end=m[2]?Number(m[2]):size-1;}if(!Number.isSafeInteger(start)||!Number.isSafeInteger(end)||start<0||start>=size||end<start)fail('LARGE_PDF_RANGE_INVALID',416);end=Math.min(end,size-1);return {offset:start,length:end-start+1};}
+ export async function deliverLocalLargePrivatePdf(c,b){
+  const {bucket,secret}=await config(c,b),u=new URL(c.request.url);if([...u.searchParams.keys()].some(k=>/token|grant|secret/i.test(k)))fail('LARGE_PDF_HEADER_ONLY');if(!['GET','HEAD'].includes(c.request.method))fail('METHOD_NOT_ALLOWED',405);
+- const auth=c.request.headers.get('authorization')||'',g=authorizePrivateDownload({token:auth.startsWith('Bearer ')?auth.slice(7):'',subjectId:b.ownerId,now:new Date().toISOString(),secret});if(!g.authorized||g.payload.documentId!==b.documentId||g.payload.format!=='PDF')fail('LARGE_PDF_GRANT_REQUIRED');
++ const auth=c.request.headers.get('authorization')||'',g=authorizePrivateDownload({token:auth.startsWith('Bearer ')?auth.slice(7):'',subjectId:b.ownerId,now:new Date().toISOString(),secret});if(!g.authorized||g.payload.documentId!==b.documentId||g.payload.format!=='PDF'){audit(c,'DOWNLOAD_DENIED');fail('LARGE_PDF_GRANT_REQUIRED');}
+  const v=await read(c,b,g.payload.documentVersion);if(!v||v.outputDigest!==g.payload.outputDigest)fail('LARGE_PDF_BINDING_MISMATCH',409);const head=await bucket.head(v.objectKey);if(!head||head.size!==v.bytes||head.etag!==v.etag||head.customMetadata?.sha256!==v.outputDigest)fail('LARGE_PDF_OBJECT_REPAIR_REQUIRED',503);
+  const range=parseRange(c.request.headers.get('range'),v.bytes),headers={'Content-Type':'application/pdf','Content-Disposition':`attachment; filename="${v.artifactId}.pdf"`,'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff','X-Robots-Tag':'noindex, nofollow, noarchive','Referrer-Policy':'no-referrer','Accept-Ranges':'bytes','Content-Length':String(range?.length||v.bytes),'ETag':'"'+v.outputDigest+'"','X-PHIOS-Output-Digest':v.outputDigest};if(range)headers['Content-Range']=`bytes ${range.offset}-${range.offset+range.length-1}/${v.bytes}`;
+  if(c.request.method==='HEAD')return new Response(null,{status:range?206:200,headers});const object=await bucket.get(v.objectKey,{onlyIf:{etagMatches:v.etag},...(range?{range}:{})});if(!object?.body)fail('LARGE_PDF_OBJECT_REPAIR_REQUIRED',503);try{await config(c,b);}catch(e){await object.body.cancel();audit(c,'ACCESS_REVOKED_BEFORE_TRANSFER');throw e;}
+diff --git a/functions/account/profile-evidence-store.js b/functions/account/profile-evidence-store.js
+index 32b7b089..d7ca91da 100644
+--- a/functions/account/profile-evidence-store.js
++++ b/functions/account/profile-evidence-store.js
+@@ -1,5 +1,8 @@
+ import {prepareLocalPrivatePdf,deliverLocalPrivatePdf,LOCAL_PDF_TYPE} from './local-private-pdf-artifact.js';
++import {prepareLocalLargePrivatePdf,deliverLocalLargePrivatePdf,reuseLocalLargePrivatePdf,LARGE_LOCAL_PDF_TYPE} from './local-large-private-pdf-artifact.js';
++import {purgeLocalLargePdfsForRuntime} from './local-private-pdf-lifecycle.js';
+ const localPdfPreparations=new WeakSet();
++const localLargePdfPreparations=new WeakSet();
+ import {renderDossierR12,DOSSIER_R12} from '../profile/personal-evidence-dossier-r12.js';
+ import {dossierEligibility} from '../profile/personal-evidence-membership.js';
+ import {onRequestPost as produceProfile} from '../api/profile-progressive.js';
+@@ -59,16 +62,18 @@ export async function profileEvidenceApi(context){
+ }
+ 
+ const EXPERIENCE_TYPE='PROFILE_EXPERIENCE_REVISION_V1';
+-async function purgeExpiredProfileEvidence({db,key,userId,now}){
++async function purgeExpiredProfileEvidence({db,key,userId,now,context}){
+  const rows=(await db.prepare('SELECT r.runtime_id,a.artifact_type,a.payload FROM runtimes r JOIN runtime_artifacts a ON a.runtime_id=r.runtime_id WHERE r.user_id=? AND r.current_stage=?').bind(userId,'profile_evidence').all()).results||[];
+  const groups=new Map();for(const row of rows){if(!groups.has(row.runtime_id))groups.set(row.runtime_id,[]);groups.get(row.runtime_id).push(row);}
+  let removedRuntimes=0,removedArtifacts=0,quarantined=0;
+  for(const [id,items]of groups){
+-  if(items.some(x=>![TYPE,EXPERIENCE_TYPE,'PROFILE_EXPERIENCE_DOSSIER_V1','PROFILE_RECEIVER_CONSENT_V1',LOCAL_PDF_TYPE].includes(x.artifact_type))){quarantined++;continue;}
++  const largeEnabled=context?.env?.PHIOS_LARGE_PRIVATE_PDF_LOCAL==='true'&&context?.env?.LOCAL_PRIVATE_PDF_STORAGE_SCOPE==='LOCAL_SYNTHETIC';
++  if(items.some(x=>![TYPE,EXPERIENCE_TYPE,'PROFILE_EXPERIENCE_DOSSIER_V1','PROFILE_RECEIVER_CONSENT_V1',LOCAL_PDF_TYPE,...(largeEnabled?[LARGE_LOCAL_PDF_TYPE]:[])].includes(x.artifact_type))){quarantined++;continue;}
+   for(const row of items.filter(x=>x.artifact_type==='PROFILE_RECEIVER_CONSENT_V1')){try{const e=JSON.parse(row.payload),v=JSON.parse(await decryptSensitive(e.ciphertext,key));if(v.ownerId!==userId||await sha256Hex(JSON.stringify(v))!==e.digest||!Number.isFinite(Date.parse(v.expiresAt)))throw Error('INVALID');if(Date.parse(v.expiresAt)<=Date.parse(now)){const result=await db.prepare('DELETE FROM runtime_artifacts WHERE runtime_id=? AND artifact_id=? AND artifact_type=? AND payload=? AND EXISTS(SELECT 1 FROM runtimes WHERE runtime_id=? AND user_id=? AND current_stage=?)').bind(id,v.consent.consentRecordId,'PROFILE_RECEIVER_CONSENT_V1',row.payload,id,userId,'profile_evidence').run();removedArtifacts+=Number(result.meta?.changes||0);}}catch{quarantined++;}}
+   const sources=items.filter(x=>[TYPE,EXPERIENCE_TYPE].includes(x.artifact_type));if(!sources.length)continue;
+   let eligible=true;for(const source of sources){try{const e=JSON.parse(source.payload),v=JSON.parse(await decryptSensitive(e.ciphertext,key));if(await sha256Hex(JSON.stringify(v))!==e.digest||(v.customerId||v.ownerId)!==userId||!Number.isFinite(Date.parse(v.expiresAt)))throw Error('INVALID');if(Date.parse(v.expiresAt)>Date.parse(now))eligible=false;}catch{eligible=false;quarantined++;}}
+   if(!eligible)continue;
++  if(items.some(x=>x.artifact_type===LARGE_LOCAL_PDF_TYPE)){const assertRetentionExpired=async()=>{const fresh=(await db.prepare('SELECT a.payload FROM runtime_artifacts a JOIN runtimes r ON r.runtime_id=a.runtime_id WHERE a.runtime_id=? AND r.user_id=? AND a.artifact_type IN (?,?)').bind(id,userId,TYPE,EXPERIENCE_TYPE).all()).results||[];if(!fresh.length)return false;for(const row of fresh){const e=JSON.parse(row.payload),v=JSON.parse(await decryptSensitive(e.ciphertext,key));if(await sha256Hex(JSON.stringify(v))!==e.digest||(v.customerId||v.ownerId)!==userId||!Number.isFinite(Date.parse(v.expiresAt))||Date.parse(v.expiresAt)>Date.now())return false;}return true;};const cleaned=await purgeLocalLargePdfsForRuntime(context,{ownerId:userId,runtimeId:id,sourceRetentionExpired:true,assertRetentionExpired,apply:true});removedArtifacts+=cleaned.removedArtifacts;}
+   // Same canonical tables, owner and stage checked in the transaction. No other product runtimes.
+   const out=await db.batch([
+    db.prepare('DELETE FROM runtime_artifacts WHERE runtime_id=? AND EXISTS(SELECT 1 FROM runtimes WHERE runtime_id=? AND user_id=? AND current_stage=?) AND NOT EXISTS(SELECT 1 FROM runtime_artifacts x WHERE x.runtime_id=? AND x.artifact_type NOT IN (?,?,?,?,?))').bind(id,id,userId,'profile_evidence',id,TYPE,EXPERIENCE_TYPE,'PROFILE_EXPERIENCE_DOSSIER_V1','PROFILE_RECEIVER_CONSENT_V1',LOCAL_PDF_TYPE),
+@@ -106,10 +111,21 @@ async function experienceLane(context,{db,key,userId,url,readAssessment}){
+    const rendered=saved.r12?renderDossierR12({...saved.r12,visualArchitecture:url.searchParams.get('visualArchitecture')||saved.r12.visualArchitecture,records:saved.records,assessments:saved.assessments||[],reportId:saved.reportId,language:url.searchParams.get('language')||saved.r12.language}):null;
+    const baseHtml=rendered?.html||saved.html;
+    const html=historical?baseHtml.replace('<main>','<main><p role="status">历史版本：来源已有修正。 / Historical version: source has since been corrected.</p>'):baseHtml;
+-   if(url.searchParams.get('format')==='pdf'){
++   if(['pdf','private-pdf'].includes(url.searchParams.get('format'))){
+     if(!saved.r12)throw evidenceError('DOSSIER_LEGACY_PDF_PRINT_ONLY',409);
+     const checkSource=async()=>{await dossierEligibility(context.env,userId);for(const ref of saved.refs){if((await latest(ref.id)).record.version!==openedVersions.get(ref.id))throw evidenceError('EVIDENCE_SOURCE_CHANGED_DURING_EXPORT',409);}for(const a of saved.assessments||[])await readAssessment(a.objectId);};
+     const binding={ownerId:userId,runtimeId:saved.parentRuntimeId||saved.refs[0]?.id,documentId:reportId,language:rendered.language,sourceSnapshotVersion:saved.r12.sourceSnapshotVersion,checkSource};
++    if(url.searchParams.get('format')==='private-pdf'){
++     const deadlines=[];for(const ref of saved.refs)deadlines.push(Date.parse((await latest(ref.id)).expiresAt));for(const a of saved.assessments||[])deadlines.push(Date.parse((await readAssessment(a.objectId)).expiresAt));
++     if(!deadlines.length||deadlines.some(n=>!Number.isFinite(n)))throw evidenceError('PRIVATE_PDF_RETENTION_SOURCE_REQUIRED',409);
++     const retentionExpiresAt=new Date(Math.min(...deadlines)).toISOString(),htmlDigest=await sha256Hex(html),bounded={...binding,htmlDigest,retentionExpiresAt,checkSource:async()=>{if(Date.now()>=Date.parse(retentionExpiresAt))throw evidenceError('EVIDENCE_EXPIRED',410);await checkSource();}};
++     if(!localLargePdfPreparations.has(context))return deliverLocalLargePrivatePdf(context,bounded);
++     const reused=await reuseLocalLargePrivatePdf(context,bounded,{htmlDigest});if(reused)return reply(reused);
++     if(!context.env.PERSONAL_EVIDENCE_PDF_RENDERER?.fetch)throw evidenceError('LOCAL_PDF_RENDERER_NOT_CONFIGURED',503);
++     const response=await context.env.PERSONAL_EVIDENCE_PDF_RENDERER.fetch(new Request('https://local-renderer.invalid/pdf',{method:'POST',headers:{'content-type':'text/html','x-phios-layout-digest':htmlDigest},body:html}));
++     const expectedBytes=Number(response.headers.get('content-length')),expectedDigest=response.headers.get('x-phios-output-digest');if(!response.ok||!response.headers.get('content-type')?.startsWith('application/pdf')||!response.body||!Number.isSafeInteger(expectedBytes)||expectedBytes<5||!/^[a-f0-9]{64}$/.test(expectedDigest||'')){await response.body?.cancel();throw evidenceError('PRIVATE_PDF_TRUSTED_RENDER_DESCRIPTOR_REQUIRED',503);}
++     try{return reply(await prepareLocalLargePrivatePdf(context,bounded,{stream:response.body,expectedBytes,expectedDigest}));}catch(e){if(!response.body.locked)await response.body.cancel().catch(()=>{});throw e;}
++    }
+     if(localPdfPreparations.has(context))return reply(await prepareLocalPrivatePdf(context,{...binding,html}));
+     return deliverLocalPrivatePdf(context,binding);
+    }
+@@ -131,11 +147,11 @@ async function experienceLane(context,{db,key,userId,url,readAssessment}){
+  const allowed=['action','record','id','baseVersion','requestToken','consent','retentionConsent','expiresAt','selected','target','purpose','purposeCode','locale','worldQuery','savedDraftRef','financialConsent','reflection','configurationConsent','contextComparable','consentRef','language','customerName','sections','assessmentIds','visualArchitecture'];
+  if(Object.keys(body).some(k=>!allowed.includes(k)))throw evidenceError('EVIDENCE_UNKNOWN_FIELD');
+  if(body.consent!==true)throw evidenceError('EVIDENCE_CONSENT_REQUIRED',403);
+- if(body.action==='prepare-pdf'){
++ if(['prepare-pdf','prepare-private-pdf'].includes(body.action)){
+   if(Object.keys(body).some(k=>!['action','id','language','consent'].includes(k))||!/^PED-[a-f0-9-]{36}$/.test(body.id||''))throw evidenceError('DOSSIER_PDF_REFERENCE_REQUIRED');
+-  const nextUrl=new URL(url);nextUrl.searchParams.set('report',body.id);nextUrl.searchParams.set('language',body.language);nextUrl.searchParams.set('format','pdf');const next={...context,request:new Request(nextUrl)};localPdfPreparations.add(next);return experienceLane(next,{db,key,userId,url:nextUrl,readAssessment});
++  const large=body.action==='prepare-private-pdf',nextUrl=new URL(url);nextUrl.searchParams.set('report',body.id);nextUrl.searchParams.set('language',body.language);nextUrl.searchParams.set('format',large?'private-pdf':'pdf');const next={...context,request:new Request(nextUrl)};(large?localLargePdfPreparations:localPdfPreparations).add(next);return experienceLane(next,{db,key,userId,url:nextUrl,readAssessment});
+  }
+- if(body.action==='cleanup')return reply(await purgeExpiredProfileEvidence({db,key,userId,now}));
++ if(body.action==='cleanup')return reply(await purgeExpiredProfileEvidence({db,key,userId,now,context}));
+  if(['receive','withdraw-receiver'].includes(body.action)){
+   if(Object.keys(body).some(k=>!['action','consentRef','consent'].includes(k))||!/^PRC-[a-f0-9-]{36}$/.test(body.consentRef||''))throw evidenceError('RECEIVER_REFERENCE_ONLY_REQUIRED',403);
+   async function open(){const row=await db.prepare('SELECT a.payload FROM runtime_artifacts a JOIN runtimes r ON a.runtime_id=r.runtime_id WHERE a.artifact_id=? AND a.artifact_type=? AND r.user_id=? AND r.status=?').bind(body.consentRef,'PROFILE_RECEIVER_CONSENT_V1',userId,'active').first();if(!row)throw evidenceError('RECEIVER_CONSENT_UNAVAILABLE',403);const e=JSON.parse(row.payload),v=JSON.parse(await decryptSensitive(e.ciphertext,key));if(v.ownerId!==userId||await sha256Hex(JSON.stringify(v))!==e.digest||v.consent.consentRecordId!==body.consentRef)throw evidenceError('RECEIVER_CONSENT_UNAVAILABLE',403);return {v,row};}
+
+NEW UNTRACKED CHILD
+// Local child of the existing profile source-retention owner. No cron/deployment.
+import {normalizeVerifiedSymbolicAccountIdentity} from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
+import {encryptSensitive,decryptSensitive,sha256Hex} from '../commerce/commerce-crypto.js';
+import {LARGE_LOCAL_PDF_TYPE} from './local-large-private-pdf-artifact.js';
+const fail=(code,status=403)=>{throw Object.assign(Error(code),{code,status});};
+function configuration(c,ownerId){const env=c.env,u=new URL(c.request.url),id=normalizeVerifiedSymbolicAccountIdentity(c.data?.symbolicAccountIdentity);if(!id||id.userId!==ownerId)fail('ACCOUNT_REQUIRED',401);if(env.PHIOS_PERSONAL_EVIDENCE_LOCAL!=='true'||env.PHIOS_LARGE_PRIVATE_PDF_LOCAL!=='true'||env.LOCAL_PRIVATE_PDF_STORAGE_SCOPE!=='LOCAL_SYNTHETIC'||env.PHIOS_ENVIRONMENT==='production'||!['localhost','127.0.0.1','[::1]'].includes(u.hostname))fail('PRIVATE_PDF_CLEANUP_LOCAL_ONLY');if(!env.RUNTIME_DB?.prepare||!env.PRIVATE_REPORTS?.delete||typeof env.PROFILE_EVIDENCE_ENCRYPTION_KEY!=='string'||env.PROFILE_EVIDENCE_ENCRYPTION_KEY.length<32)fail('PRIVATE_PDF_CLEANUP_CONFIGURATION_REQUIRED',503);return {db:env.RUNTIME_DB,bucket:env.PRIVATE_REPORTS,key:env.PROFILE_EVIDENCE_ENCRYPTION_KEY};}
+async function decode(payload,key,ownerId){const e=JSON.parse(payload),v=JSON.parse(await decryptSensitive(e.ciphertext,key));if(await sha256Hex(JSON.stringify(v))!==e.digest||v.ownerId!==ownerId||!/^local-private-pdf-r23\/LPDF3-[a-f0-9]{64}\/[a-f0-9-]{36}\.pdf$/.test(v.objectKey))fail('PRIVATE_PDF_CLEANUP_METADATA_UNVERIFIED',409);return v;}
+export async function purgeLocalLargePdfsForRuntime(c,{ownerId,runtimeId,sourceRetentionExpired=false,assertRetentionExpired,apply=false}={}){
+ const {db,bucket,key}=configuration(c,ownerId),rows=(await db.prepare('SELECT a.artifact_id,a.payload,a.stage FROM runtime_artifacts a JOIN runtimes r ON r.runtime_id=a.runtime_id WHERE a.runtime_id=? AND a.artifact_type=? AND r.user_id=?').bind(runtimeId,LARGE_LOCAL_PDF_TYPE,ownerId).all()).results||[],result=[];
+ // sourceRetentionExpired is supplied only by the existing server retention
+ // owner's decrypted-source eligibility decision; never from request JSON.
+ for(const row of rows){const v=await decode(row.payload,key,ownerId);if(v.runtimeId!==runtimeId||v.artifactId!==row.artifact_id)fail('PRIVATE_PDF_CLEANUP_METADATA_UNVERIFIED',409);if(!sourceRetentionExpired){result.push({artifactId:v.artifactId,action:'RETAIN_COMPLETED',reason:'Grant expiry/refund/revocation alone is not source-retention deletion authority'});continue;}
+ if(!apply){result.push({artifactId:v.artifactId,action:'DELETE_SOURCE_RETENTION_EXPIRED_DRY_RUN'});continue;}
+ if(typeof assertRetentionExpired!=='function'||await assertRetentionExpired()!==true)fail('PRIVATE_PDF_RETENTION_NOT_PROVEN',409);
+ const pending={...v,state:'RETENTION_DELETE_PENDING'},payload=JSON.stringify({ciphertext:await encryptSensitive(JSON.stringify(pending),key),digest:await sha256Hex(JSON.stringify(pending))});
+ const changed=await db.prepare('UPDATE runtime_artifacts SET payload=?,stage=?,updated_at=? WHERE artifact_id=? AND payload=? AND runtime_id=?').bind(payload,'RETENTION_DELETE_PENDING',new Date().toISOString(),row.artifact_id,row.payload,runtimeId).run();if(Number(changed.meta?.changes||0)!==1)fail('PRIVATE_PDF_CLEANUP_CONCURRENT_CHANGE',409);
+ if(await assertRetentionExpired()!==true){await db.prepare('UPDATE runtime_artifacts SET payload=?,stage=? WHERE artifact_id=? AND payload=? AND runtime_id=?').bind(row.payload,row.stage,row.artifact_id,payload,runtimeId).run();fail('PRIVATE_PDF_RETENTION_CHANGED',409);}
+ try{await bucket.delete(v.objectKey);}catch{fail('PRIVATE_PDF_CLEANUP_RETRY_REQUIRED',503);}
+ const deleted=await db.prepare('DELETE FROM runtime_artifacts WHERE artifact_id=? AND runtime_id=? AND payload=?').bind(row.artifact_id,runtimeId,payload).run();if(Number(deleted.meta?.changes||0)!==1)fail('PRIVATE_PDF_CLEANUP_CONCURRENT_CHANGE',409);result.push({artifactId:v.artifactId,action:'DELETED_LOCAL_SOURCE_RETENTION_EXPIRED'});
+ }
+ return {rows:result,removedArtifacts:result.filter(r=>r.action==='DELETED_LOCAL_SOURCE_RETENTION_EXPIRED').length,dryRun:!apply,productionDeletion:false};
+}
+export async function cleanupLocalPrivatePdfOrphans(c,{ownerId,apply=false,now=Date.now(),cursor}={}){
+ const {db,bucket,key}=configuration(c,ownerId);if(!bucket.list)fail('PRIVATE_PDF_LIST_REQUIRED',503);
+ const own=(await db.prepare('SELECT a.payload FROM runtime_artifacts a JOIN runtimes r ON r.runtime_id=a.runtime_id WHERE a.artifact_type=? AND r.user_id=?').bind(LARGE_LOCAL_PDF_TYPE,ownerId).all()).results||[];const referenced=new Set();for(const row of own)referenced.add((await decode(row.payload,key,ownerId)).objectKey);
+ const page=await bucket.list({prefix:'local-private-pdf-r23/',limit:100,...(cursor?{cursor}:{}),include:['customMetadata']}),ownerTag=await sha256Hex(ownerId),rows=[];
+ for(const object of page.objects||[]){const metadata=object.customMetadata||{},createdAt=Date.parse(metadata.createdAt);let action,reason;if(referenced.has(object.key)){action='RETAIN_COMPLETED';reason='Referenced metadata wins over grant age, refund or revocation';}else if(metadata.ownerTag!==ownerTag||!Number.isFinite(createdAt)||!/^local-private-pdf-r23\/LPDF3-[a-f0-9]{64}\/[a-f0-9-]{36}\.pdf$/.test(object.key)){action='QUARANTINE_UNVERIFIED';reason='Cannot prove owner/date/key; no deletion';}else if(now-createdAt<24*3600000){action='RETAIN_PENDING';reason='24-hour grace protects in-flight generation and metadata commit';}else{action=apply?'DELETE_LOCAL_ORPHAN':'DELETE_ORPHAN_DRY_RUN';reason='Own exact namespace, aged24h and no own metadata reference';if(apply)await bucket.delete(object.key);}rows.push({key:object.key,action,reason});}
+ return {rows,dryRun:!apply,more:page.truncated===true,cursor:page.truncated?page.cursor:null,productionDeletion:false};
+}

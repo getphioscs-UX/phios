@@ -85,7 +85,7 @@ if(progressReview.status!==0)throw Error(progressReview.stderr||progressReview.s
 console.log(progressReview.stdout.trim());
 
 // Local calibration evidence stays in ignored .tmp; preserve only its scoped pointer.
-const hdCalibrationReview=fs.existsSync('.tmp/hd-chart-confirmation-r41/HUMAN-REVIEW.html')?'.tmp/hd-chart-confirmation-r41/HUMAN-REVIEW.html':fs.existsSync('.tmp/hd-ecr-precision-r4/HUMAN-REVIEW.html')?'.tmp/hd-ecr-precision-r4/HUMAN-REVIEW.html':fs.existsSync('.tmp/hd-ecr-substructure-r3/HUMAN-REVIEW.html')?'.tmp/hd-ecr-substructure-r3/HUMAN-REVIEW.html':'.tmp/hd-ecr-phs-r2/HUMAN-REVIEW.html';
+const hdCalibrationReview=fs.existsSync('.tmp/hd-report-publication-r51/HUMAN-REVIEW.html')?'.tmp/hd-report-publication-r51/HUMAN-REVIEW.html':fs.existsSync('.tmp/hd-report-automation-r5/HUMAN-REVIEW.html')?'.tmp/hd-report-automation-r5/HUMAN-REVIEW.html':fs.existsSync('.tmp/hd-chart-confirmation-r41/HUMAN-REVIEW.html')?'.tmp/hd-chart-confirmation-r41/HUMAN-REVIEW.html':fs.existsSync('.tmp/hd-ecr-precision-r4/HUMAN-REVIEW.html')?'.tmp/hd-ecr-precision-r4/HUMAN-REVIEW.html':fs.existsSync('.tmp/hd-ecr-substructure-r3/HUMAN-REVIEW.html')?'.tmp/hd-ecr-substructure-r3/HUMAN-REVIEW.html':'.tmp/hd-ecr-phs-r2/HUMAN-REVIEW.html';
 if(fs.existsSync(hdCalibrationReview)){
  const target=`${dir}/MASTER-HUMAN-REVIEW.html`,current=fs.readFileSync(target,'utf8');
  if(!current.includes('id="hd-ecr-phs-calibration-r2"')){
@@ -97,3 +97,6 @@ if(fs.existsSync(hdCalibrationReview)){
 // CUSTOMER_ENTRY_R1_CANONICAL_POINTER: preserve this scoped review in the existing Master.
 // This is a link only; no source/live/acceptance status is inferred by this generator.
 if(fs.existsSync('tools/review/customer-entry-r1/HUMAN-REVIEW.html')){const target=`${dir}/MASTER-HUMAN-REVIEW.html`;let current=fs.readFileSync(target,'utf8');if(!current.includes('id="customer-entry-recovery-r1"')){const link='<section id="customer-entry-recovery-r1"><h2>Customer Entry + Ask Recovery R1</h2><p>本地客户入口候选；人审、构建与生产状态以本轮收据为准，不代表全站完成。</p><p><a href="../../../tools/review/customer-entry-r1/HUMAN-REVIEW.html">客户入口审阅</a> · <a href="../../../docs/customer-entry/EXECUTION-STATE.md">执行台账</a></p></section>';current=current.includes('</body>')?current.replace('</body>',link+'</body>'):current+link;fs.writeFileSync(target,current);}}
+
+// PROFILE_NETWORK_R2_LOCAL_REVIEW_POINTER
+if(fs.existsSync('.tmp/profile-network-r2/HUMAN-REVIEW.html')){const p='content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html';const current=fs.readFileSync(p,'utf8');if(!current.includes('id="profile-dependency-network-r2"'))fs.writeFileSync(p,current.replace('</main>','<section id="profile-dependency-network-r2"><h2>Profile Network R2 · Local review</h2><p>Public synthetic visual candidate; private consumers remain gated. No production admission.</p><p><a href="../../../.tmp/profile-network-r2/HUMAN-REVIEW.html">本机R2从属审阅</a></p></section></main>'));}

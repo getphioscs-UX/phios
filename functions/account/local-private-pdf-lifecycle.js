@@ -1,0 +1,29 @@
+// Local child of the existing profile source-retention owner. No cron/deployment.
+import {normalizeVerifiedSymbolicAccountIdentity} from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
+import {encryptSensitive,decryptSensitive,sha256Hex} from '../commerce/commerce-crypto.js';
+import {LARGE_LOCAL_PDF_TYPE} from './local-large-private-pdf-artifact.js';
+const fail=(code,status=403)=>{throw Object.assign(Error(code),{code,status});};
+function configuration(c,ownerId){const env=c.env,u=new URL(c.request.url),id=normalizeVerifiedSymbolicAccountIdentity(c.data?.symbolicAccountIdentity);if(!id||id.userId!==ownerId)fail('ACCOUNT_REQUIRED',401);if(env.PHIOS_PERSONAL_EVIDENCE_LOCAL!=='true'||env.PHIOS_LARGE_PRIVATE_PDF_LOCAL!=='true'||env.LOCAL_PRIVATE_PDF_STORAGE_SCOPE!=='LOCAL_SYNTHETIC'||env.PHIOS_ENVIRONMENT==='production'||!['localhost','127.0.0.1','[::1]'].includes(u.hostname))fail('PRIVATE_PDF_CLEANUP_LOCAL_ONLY');if(!env.RUNTIME_DB?.prepare||!env.PRIVATE_REPORTS?.delete||typeof env.PROFILE_EVIDENCE_ENCRYPTION_KEY!=='string'||env.PROFILE_EVIDENCE_ENCRYPTION_KEY.length<32)fail('PRIVATE_PDF_CLEANUP_CONFIGURATION_REQUIRED',503);return {db:env.RUNTIME_DB,bucket:env.PRIVATE_REPORTS,key:env.PROFILE_EVIDENCE_ENCRYPTION_KEY};}
+async function decode(payload,key,ownerId){const e=JSON.parse(payload),v=JSON.parse(await decryptSensitive(e.ciphertext,key));if(await sha256Hex(JSON.stringify(v))!==e.digest||v.ownerId!==ownerId||!/^local-private-pdf-r23\/LPDF3-[a-f0-9]{64}\/[a-f0-9-]{36}\.pdf$/.test(v.objectKey))fail('PRIVATE_PDF_CLEANUP_METADATA_UNVERIFIED',409);return v;}
+export async function purgeLocalLargePdfsForRuntime(c,{ownerId,runtimeId,sourceRetentionExpired=false,assertRetentionExpired,apply=false}={}){
+ const {db,bucket,key}=configuration(c,ownerId),rows=(await db.prepare('SELECT a.artifact_id,a.payload,a.stage FROM runtime_artifacts a JOIN runtimes r ON r.runtime_id=a.runtime_id WHERE a.runtime_id=? AND a.artifact_type=? AND r.user_id=?').bind(runtimeId,LARGE_LOCAL_PDF_TYPE,ownerId).all()).results||[],result=[];
+ // sourceRetentionExpired is supplied only by the existing server retention
+ // owner's decrypted-source eligibility decision; never from request JSON.
+ for(const row of rows){const v=await decode(row.payload,key,ownerId);if(v.runtimeId!==runtimeId||v.artifactId!==row.artifact_id)fail('PRIVATE_PDF_CLEANUP_METADATA_UNVERIFIED',409);if(!sourceRetentionExpired){result.push({artifactId:v.artifactId,action:'RETAIN_COMPLETED',reason:'Grant expiry/refund/revocation alone is not source-retention deletion authority'});continue;}
+ if(!apply){result.push({artifactId:v.artifactId,action:'DELETE_SOURCE_RETENTION_EXPIRED_DRY_RUN'});continue;}
+ if(typeof assertRetentionExpired!=='function'||await assertRetentionExpired()!==true)fail('PRIVATE_PDF_RETENTION_NOT_PROVEN',409);
+ const pending={...v,state:'RETENTION_DELETE_PENDING'},payload=JSON.stringify({ciphertext:await encryptSensitive(JSON.stringify(pending),key),digest:await sha256Hex(JSON.stringify(pending))});
+ const changed=await db.prepare('UPDATE runtime_artifacts SET payload=?,stage=?,updated_at=? WHERE artifact_id=? AND payload=? AND runtime_id=?').bind(payload,'RETENTION_DELETE_PENDING',new Date().toISOString(),row.artifact_id,row.payload,runtimeId).run();if(Number(changed.meta?.changes||0)!==1)fail('PRIVATE_PDF_CLEANUP_CONCURRENT_CHANGE',409);
+ if(await assertRetentionExpired()!==true){await db.prepare('UPDATE runtime_artifacts SET payload=?,stage=? WHERE artifact_id=? AND payload=? AND runtime_id=?').bind(row.payload,row.stage,row.artifact_id,payload,runtimeId).run();fail('PRIVATE_PDF_RETENTION_CHANGED',409);}
+ try{await bucket.delete(v.objectKey);}catch{fail('PRIVATE_PDF_CLEANUP_RETRY_REQUIRED',503);}
+ const deleted=await db.prepare('DELETE FROM runtime_artifacts WHERE artifact_id=? AND runtime_id=? AND payload=?').bind(row.artifact_id,runtimeId,payload).run();if(Number(deleted.meta?.changes||0)!==1)fail('PRIVATE_PDF_CLEANUP_CONCURRENT_CHANGE',409);result.push({artifactId:v.artifactId,action:'DELETED_LOCAL_SOURCE_RETENTION_EXPIRED'});
+ }
+ return {rows:result,removedArtifacts:result.filter(r=>r.action==='DELETED_LOCAL_SOURCE_RETENTION_EXPIRED').length,dryRun:!apply,productionDeletion:false};
+}
+export async function cleanupLocalPrivatePdfOrphans(c,{ownerId,apply=false,now=Date.now(),cursor}={}){
+ const {db,bucket,key}=configuration(c,ownerId);if(!bucket.list)fail('PRIVATE_PDF_LIST_REQUIRED',503);
+ const own=(await db.prepare('SELECT a.payload FROM runtime_artifacts a JOIN runtimes r ON r.runtime_id=a.runtime_id WHERE a.artifact_type=? AND r.user_id=?').bind(LARGE_LOCAL_PDF_TYPE,ownerId).all()).results||[];const referenced=new Set();for(const row of own)referenced.add((await decode(row.payload,key,ownerId)).objectKey);
+ const page=await bucket.list({prefix:'local-private-pdf-r23/',limit:100,...(cursor?{cursor}:{}),include:['customMetadata']}),ownerTag=await sha256Hex(ownerId),rows=[];
+ for(const object of page.objects||[]){const metadata=object.customMetadata||{},createdAt=Date.parse(metadata.createdAt);let action,reason;if(referenced.has(object.key)){action='RETAIN_COMPLETED';reason='Referenced metadata wins over grant age, refund or revocation';}else if(metadata.ownerTag!==ownerTag||!Number.isFinite(createdAt)||!/^local-private-pdf-r23\/LPDF3-[a-f0-9]{64}\/[a-f0-9-]{36}\.pdf$/.test(object.key)){action='QUARANTINE_UNVERIFIED';reason='Cannot prove owner/date/key; no deletion';}else if(now-createdAt<24*3600000){action='RETAIN_PENDING';reason='24-hour grace protects in-flight generation and metadata commit';}else{action=apply?'DELETE_LOCAL_ORPHAN':'DELETE_ORPHAN_DRY_RUN';reason='Own exact namespace, aged24h and no own metadata reference';if(apply)await bucket.delete(object.key);}rows.push({key:object.key,action,reason});}
+ return {rows,dryRun:!apply,more:page.truncated===true,cursor:page.truncated?page.cursor:null,productionDeletion:false};
+}

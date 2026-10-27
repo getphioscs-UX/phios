@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-26T13:00:01.187Z",
+  "at": "2026-10-26T13:15:37.933Z",
   "status": "PASS_LOCAL_STREAMING_CANDIDATE",
   "checks": [
     {
@@ -36,6 +36,10 @@
     },
     {
       "name": "actualVisual repeated download byte identical",
+      "status": "PASS"
+    },
+    {
+      "name": "cached-file descriptor length mismatch denied",
       "status": "PASS"
     },
     {
@@ -139,7 +143,7 @@
       "status": "PASS"
     }
   ],
-  "total": 34,
+  "total": 35,
   "samples": [
     {
       "label": "small",
@@ -177,13 +181,15 @@
     "GRANT_ISSUED": 7,
     "DOWNLOAD_STARTED": 8,
     "DOWNLOAD_COMPLETE": 9,
+    "ACCESS_DENIED": 5,
+    "DOWNLOAD_DENIED": 3,
     "DOWNLOAD_RANGE_STARTED": 3,
     "DOWNLOAD_CANCELLED": 1,
     "PREPARE_FAILED": 2,
     "DOWNLOAD_INTERRUPTED": 1
   },
   "storage": "Local filesystem streaming R2 API test adapter plus real existing SQLite D1 adapter, existing membership/identity/encryption/DAR modules",
-  "storageRoot": "C:\\phios\\.tmp\\report-visual-r23-private-15c349cb-a5dc-48d9-90c8-be62b360d6fd",
+  "storageRoot": "C:\\phios\\.tmp\\report-visual-r23-private-9bdc258d-63eb-4047-af85-0208d9844225",
   "productionEquivalent": false,
   "externalGate": "BLOCKED: actual Cloudflare R2 streaming/checksum/conditionals plus account route admission and runtime memory/concurrency proof not exercised; no production writes authorized",
   "revocation": "Every new proxy request rechecks identity, entitlement and source. Already started transfers and downloaded files are not remotely recalled.",

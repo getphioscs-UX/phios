@@ -33,3 +33,7 @@ Private intake audit was run with an outside-repo author directory and the expli
 ## Remaining blockers
 
 Read AUTHOR-WORKFLOW.md for exact missing Section01/02 versions, original source/copyright gates, visual-manifest omissions, and the unresolved legacy membership test expectation. New manuscripts must be supplied in full; continue is not version-specific ACCEPT. Actual author bilingual PDF and human semantic correspondence remain BLOCKED. No customer publishable content, commercial admission or production PASS is claimed.
+
+## Concurrent HEAD observation
+
+Repository HEAD changed during execution from c5851dd86618522b0a1bd92465be3ee9ee37214d to df8111d6e59e23b3805b6817c92de18ff5cfa72e. This run issued no commit, push, reset or deployment command and did not undo the external change. See external-head-change.json; zero-commit metrics refer to actions by this run, not all concurrent processes.

@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
+import {assertPprCurrentSharedOwner} from './lib/ppr-current-shared-owner.mjs';
 const root=process.cwd();
 const readJson=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
 const txt=p=>fs.readFileSync(path.join(root,p),'utf8');
@@ -21,7 +22,7 @@ if(freeze.schemaVersion==='PHI-OS-W68-SHARED-FILE-OWNERSHIP-FREEZE-v2.0.0'){asse
 assert.equal(current.owner,'PPR_CURRENT_SHARED_RUNTIME');
 for(const [file,proof] of Object.entries(freeze.sharedFiles)){
   assert.ok(fs.existsSync(path.join(root,file)),`missing ${file}`);
-  const currentProof=current.files?.[file];
+  const currentProof=assertPprCurrentSharedOwner(file,{historicalDigest:proof.sha256,label:'W68 current shared owner'}).record;
   assert.ok(currentProof,`current shared-owner registry missing ${file}`);
   assert.equal(sha(file),currentProof.currentSha256,`W68 current shared-owner digest drift: ${file}`);
   const admittedLineage=new Set([currentProof.currentSha256,...(currentProof.recognizedPredecessors||[])]);

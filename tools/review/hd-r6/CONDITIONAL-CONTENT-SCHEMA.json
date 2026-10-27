@@ -1,0 +1,210 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HD R6 review-only conditional module envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "moduleId",
+    "sectionId",
+    "source",
+    "rights",
+    "binding",
+    "language",
+    "expressionType",
+    "conditions",
+    "reviewOnly"
+  ],
+  "properties": {
+    "moduleId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sectionId": {
+      "enum": [
+        "SEC01",
+        "SEC02",
+        "SEC03",
+        "SEC04",
+        "SEC05",
+        "SEC06",
+        "SEC07",
+        "SEC08",
+        "SEC09",
+        "SEC10",
+        "SEC11",
+        "SEC12",
+        "SEC13",
+        "SEC14",
+        "SEC15",
+        "SEC16",
+        "SEC17"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "sha256",
+        "location",
+        "ownershipClass"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "location": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ownershipClass": {
+          "enum": [
+            "OWNER_ORIGINAL",
+            "THIRD_PARTY",
+            "MIXED",
+            "UNVERIFIED"
+          ]
+        }
+      }
+    },
+    "rights": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "evidenceId",
+        "languages",
+        "uses"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "UNVERIFIED",
+            "OWNER_ORIGINAL_REVIEWED",
+            "LICENSE_SCOPE_REVIEWED",
+            "RESTRICTED"
+          ]
+        },
+        "evidenceId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "languages": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "zh-Hans",
+              "en"
+            ]
+          }
+        },
+        "uses": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "PRIVATE_ANALYSIS",
+              "COMMERCIAL_REPRODUCTION",
+              "ADAPTATION",
+              "TRANSLATION",
+              "AI_INPUT"
+            ]
+          }
+        }
+      }
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inputDigest",
+        "chartResultDigest",
+        "sourceDigest",
+        "calculationVersion"
+      ],
+      "properties": {
+        "inputDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "chartResultDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "sourceDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "calculationVersion": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "language": {
+      "enum": [
+        "zh-Hans",
+        "en",
+        "bilingual"
+      ]
+    },
+    "expressionType": {
+      "enum": [
+        "CALCULATED_FACT",
+        "FIXED_EDUCATION",
+        "CONDITIONAL_INTERPRETATION",
+        "CROSS_SECTION_SYNTHESIS",
+        "OPTIONAL_USER_OBSERVATION",
+        "BOOK_NARRATIVE",
+        "MEDICAL_OR_PREDICTIVE_CLAIM"
+      ]
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "field",
+          "operator",
+          "expected"
+        ],
+        "properties": {
+          "field": {
+            "type": "string",
+            "minLength": 1
+          },
+          "operator": {
+            "enum": [
+              "EQUALS",
+              "INCLUDES"
+            ]
+          },
+          "expected": {
+            "type": [
+              "string",
+              "number",
+              "boolean"
+            ]
+          }
+        }
+      }
+    },
+    "reviewOnly": {
+      "const": true
+    }
+  }
+}

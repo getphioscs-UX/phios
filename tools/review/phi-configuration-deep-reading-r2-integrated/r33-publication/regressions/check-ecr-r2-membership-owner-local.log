@@ -1,0 +1,15 @@
+file:///C:/phios/scripts/runtime-migration-loader.mjs:68
+      const result = database.prepare(this.sql).run(...this.sqliteArguments());
+                              ^
+
+Error: no such table: continuity_ask_tasks
+    at Statement.run (file:///C:/phios/scripts/runtime-migration-loader.mjs:68:31)
+    at reserveProductCost (file:///C:/phios/functions/provider-cost/product-cost-envelope.js:50:146)
+    at async invokeContinuityProvider (file:///C:/phios/functions/personal-reading/continuity/continuity-quota-d1.js:49:18)
+    at async file:///C:/phios/scripts/.tmp-r31-check-ecr-r2-membership-owner-local-53020.mjs:29:1 {
+  code: 'ERR_SQLITE_ERROR',
+  errcode: 1,
+  errstr: 'SQL logic error'
+}
+
+Node.js v24.18.0

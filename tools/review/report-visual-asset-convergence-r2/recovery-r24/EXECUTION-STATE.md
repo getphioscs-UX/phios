@@ -1,0 +1,26 @@
+# R2.4 private integration and lifecycle
+
+Status LOCAL_PARTIAL_WITH_SPECIFIC_BLOCKERS. HEAD df8111d6e59e23b3805b6817c92de18ff5cfa72e; dirty source digest 447e6620a2e4cc8a97fd4113791d629c7090ae73a2a434cfe02a1705490eaf39.
+
+Existing account owner profile-evidence-store.js now connects explicit prepare-private-pdf and format=private-pdf to the existing large child adapter. It preserves verified session, origin, consent, ownership, eligibility, source version and language checks. Reopen reissues a 15-minute DAR header grant after fresh checks without calling renderer/provider; no bearer URL. Small PDF/base64 path and its 1MiB guard are unchanged.
+
+Flow: existing root/account auth -> existing report/source/entitlement owner -> trusted renderer stream(size+SHA) -> PRIVATE_REPORTS bytes + encrypted runtime_artifacts metadata -> DAR header + fresh account/source checks -> streaming/range proxy. Source retention owner -> dry-run -> encrypted deletion tombstone -> private object delete -> metadata CAS removal. Delete failure preserves retryable state.
+
+Local admission requires PHIOS_PERSONAL_EVIDENCE_LOCAL=true, PHIOS_LARGE_PRIVATE_PDF_LOCAL=true and LOCAL_PRIVATE_PDF_STORAGE_SCOPE=LOCAL_SYNTHETIC; production environment is explicitly refused. These guards are not instructions to enable the candidate in production. No new permission owner, bucket, schema, cron, account or storage service.
+
+wrangler.jsonc already declares PRIVATE_REPORTS (phios-private-reports) and RUNTIME_DB, but the actual external binding/bucket permissions were not exercised. PERSONAL_EVIDENCE_PDF_RENDERER is not configured. Existing METHOD_REPORT_RENDERER /verify JSON contract is not the raw HTML /pdf contract; do not alias them blindly. Existing renderer owner must admit a compatible private HTML-to-PDF adapter returning trusted Content-Length, application/pdf and X-PHIOS-Output-Digest; customer-provided descriptors are never trusted. Existing session/encryption secrets must use established secure configuration, not chat. Production successor admission and deployment require separate authorization.
+
+Retention: link expiry, membership withdrawal, entitlement/refund denial and source revocation reject new reads but do not by themselves delete completed objects. Previously downloaded bytes cannot be recalled. Source owner must prove actual retention expiry twice before deletion. Failure leaves a pending tombstone and explicit retry. Orphan scanning is local-only, default dry-run, bounded100 objects/page with cursor; only own hashed-owner-tagged objects older than24h and unreferenced by own encrypted metadata qualify. Foreign, unknown, fresh and referenced/revoked-runtime files are retained/quarantined. Production scheduling is not implemented or authorized.
+
+32 account/lifecycle checks use real existing middleware, encrypted synthetic sessions and file-backed private storage; renderer is a test double streaming the existing49MB visual PDF, not a new report-semantic proof.35 streaming regressions and120 original R1.2 checks pass with isolated outputs. Native Miniflare/workerd R2/D1 transport separately passed36 full downloads across1/5/10/20 concurrency, plus interrupted/repeat, identity, expiry and source revocation. No combined native account end-to-end claim.
+
+Memory is50ms process working-set sampling, not per-isolate heap; shared pages may be counted twice. It cannot prove the production128MB isolate constraint. Initial conservative1GiB free-memory start policy stopped safely and remains in INITIAL-SAFETY-STOP receipts. Calibrated start reserve256MiB+8MiB per stream retained the same runtime abort and exact SHA/byte/status acceptance. No safety abort in final progressive run. Initial new test expected400 for unknown field; canonical422 was confirmed and only the new R24 expectation corrected. Prior failure receipt remains.
+
+Assets: exact ECR SEC05/07 ordinary and no-cache query GET404; same-prefix BODY HEAD200. No response metadata proves stale cache or redirect. Query is diagnostic, not guaranteed cache bypass. /api/public-asset-config503 PUBLIC_ASSET_BASE_URL_UNAVAILABLE is a separate missing/invalid public-base configuration signal, not proof of the direct r2.dev404 cause. No purge, rename, upload or production configuration mutation.
+
+Authenticated-origin comparison remains unavailable: automatic review rejected a proposed fallback reading a local Wrangler OAuth credential file. The rejected script was not created/executed and no credential extracted. Public-only diagnostics completed; no authorization bypass. To close GateA, use an explicitly approved managed read-only object-detail context or exact owner Dashboard public URLs/object metadata; no token contents should be supplied in chat.
+
+
+Resume from CHECKPOINT.json; do not rerun completed tests unless relevant bytes change. Local Master preview: node tools/review/report-visual-asset-convergence-r2/server.mjs, port59844, existing Master #REPORT-VISUAL-ASSET-CONVERGENCE-R2-4. Historical receipts and PDFs retained.
+
+Final verification:18 review links HEAD200;1440/390 no section overflow, representative screenshots inspected.298 source hashes unchanged;5 prior visual PDFs match historical SHA;7 recovered receipts unchanged. Functions exit0 with local Wrangler debug-log EPERM recorded. Staging remains empty.
