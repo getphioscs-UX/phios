@@ -1,3 +1,4 @@
+import {PROFILE_NETWORK_DISPLAY,requireLocalNetworkDisplay,displayBinding} from '../../profile/profile-network-display-policy-r21.js';
 import {PREPARATION_SCOPES} from './financial-preparation-scopes.js';
 import {sha256Hex} from '../../document-assembly/digest.js';
 import {normalizeVerifiedSymbolicAccountIdentity} from '../../symbolic-method-persistence/symbolic-account-identity-v1.js';
@@ -6,9 +7,10 @@ export function grantOwner(context){const identity=normalizeVerifiedSymbolicAcco
 export const FINANCIAL_REPORT_SCOPES=Object.freeze(['people','incomeStreams','expenses','assets','liabilities','guarantees','policies','goals','assumptions']);
 const allowed=[...FINANCIAL_REPORT_SCOPES,...PREPARATION_SCOPES];
 const explicitId=v=>typeof v==='string'&&v.trim()===v&&v.length>0&&v.length<=160&&!['*','ALL','UNKNOWN','UNSPECIFIED','NONE','NULL'].includes(v.toUpperCase());
-export async function createFinancialGrant(context,{source,purpose,scopes,expiresAt,recipientRef=null,jurisdictionScope=null,serviceScope=null,language=null,preparationBinding=null}){
+export async function createFinancialGrant(context,{source,purpose,scopes,expiresAt,recipientRef=null,jurisdictionScope=null,serviceScope=null,language=null,preparationBinding=null,displaySelection=null}){
  const owner=grantOwner(context),now=Date.now();
- if(source.ownerRef!==owner||!['WILL_ASSEMBLY','REPORT','PROFESSIONAL_REVIEW'].includes(purpose))fail('PURPOSE_GRANT_SCOPE_INVALID');
+ if(purpose===PROFILE_NETWORK_DISPLAY){requireLocalNetworkDisplay(context);serviceScope=displayBinding(displaySelection||{});recipientRef=owner;jurisdictionScope='DISPLAY_ONLY_NO_LEGAL_EFFECT';if(preparationBinding||scopes?.some(s=>!['people','assets','liabilities','guarantees','policies'].includes(s)))fail('PROFILE_DISPLAY_SCOPE_INVALID');}
+ if(source.ownerRef!==owner||!['WILL_ASSEMBLY','REPORT','PROFESSIONAL_REVIEW',PROFILE_NETWORK_DISPLAY].includes(purpose))fail('PURPOSE_GRANT_SCOPE_INVALID');
  if(!Array.isArray(scopes)||!scopes.length||Array.from(scopes).some(x=>!allowed.includes(x))||new Set(scopes).size!==scopes.length)fail('PURPOSE_GRANT_SCOPE_INVALID');
  if(scopes.some(s=>PREPARATION_SCOPES.includes(s))&&(purpose!=='PROFESSIONAL_REVIEW'||!preparationBinding||scopes.some(s=>!PREPARATION_SCOPES.includes(s))))fail('PREPARATION_BOUND_GRANT_REQUIRED');
  const expiry=Date.parse(expiresAt);if(!Number.isFinite(expiry)||expiry<=now||expiry>now+366*86400000)fail('PURPOSE_GRANT_EXPIRY_INVALID');
@@ -18,6 +20,7 @@ export async function createFinancialGrant(context,{source,purpose,scopes,expire
  return {grantId:id,purpose,sourceRef:source.sourceRef,scopes,expiresAt:new Date(expiry).toISOString()};
 }
 export async function requireFinancialGrant(context,{grantId,source,purpose,scopes,language}){
+ if(purpose===PROFILE_NETWORK_DISPLAY)requireLocalNetworkDisplay(context);
  if(!Array.isArray(scopes)||!scopes.length||Array.from(scopes).some(x=>!allowed.includes(x))||new Set(scopes).size!==scopes.length)fail('PURPOSE_GRANT_SCOPE_INVALID');
  const row=await context.env.RUNTIME_DB.prepare('SELECT * FROM financial_purpose_grants WHERE grant_id=? AND owner_id=?').bind(grantId,grantOwner(context)).first();
  if(!row||row.revoked_at!==null||row.granted_at>Date.now()||row.expires_at<=Date.now()||row.purpose!==purpose||row.source_ref!==source.sourceRef||row.source_digest!==source.contentDigest)fail('PURPOSE_GRANT_INACTIVE');

@@ -4,7 +4,7 @@ Status: PARTIAL. No Production PASS.
 
 The only active chapter list was used; all 20 source body hashes and explicit Founder receipts were verified, including Section 10. No authored prose was rewritten. Existing IR and renderer were extended for local private publication only. Three complete language editions contain all ten chapters and a separate calculation appendix. Approved R2 assets were GET-only verified; SEC-05 and SEC-07 re-uploaded objects now return 200 and are included. Pixel-equivalent PNG intermediates are a PDF embedding conversion, not redesigned art.
 
-Final: Chinese 65 pages; English 85 pages; bilingual 132 pages. Actual source resolution is retained, not upscaled. Main body backgrounds cover the actual A4 MediaBox. Native text is embedded/selectable. All final pages are rasterized for review. The private review includes all page images, page maps, exact author receipts, quality audit, and explicit interpretation/admission distinctions.
+Final: Chinese 64 pages; English 85 pages; bilingual 132 pages. Actual source resolution is retained, not upscaled. Main body backgrounds cover the actual A4 MediaBox. Native text is embedded/selectable. All final pages are rasterized for review. The private review includes all page images, page maps, exact author receipts, quality audit, and explicit interpretation/admission distinctions.
 
 Original regression wrappers: 6 PASS / 2 FAIL; old schema lacked continuity_ask_tasks. Loading the existing SQL candidate in isolated SQLite produces follow-up isolation PASS and preserves the membership refill FAIL. A focused USD3 period-cap test passes. This does not resolve or hide the inherited refill failure. Four report questions and membership ledgers remain separate. No provider call was made.
 
@@ -18,6 +18,7 @@ No commit, push, deploy, production migrations, Stripe writes, production D1/R2 
 
 - functions/ecr-full-report/ecr-author-led-publication-r31.js
 - content/reports/shared/report-visual-assets-r2.json (only ECR SEC-05/SEC-07 entries)
+- scripts/ecr-r33-appendix-boundary-check.py
 - scripts/ecr-r33-appendix.mjs
 - scripts/ecr-r33-assets.mjs
 - scripts/ecr-r33-closeout.py
@@ -35,13 +36,10 @@ No commit, push, deploy, production migrations, Stripe writes, production D1/R2 
 - tools/review/phi-configuration-deep-reading-r2-integrated/r33-publication
 - content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html
 
-## Final closeout checks
+## Customer appendix boundary correction
 
-- Final PDF SHA256 re-read: 3/3.
-- Final native source inclusion: 40/40; raw manuscript SHA256: 20/20.
-- All final page contact-sheet review: 282 pages in 25 sheets, with selected full-page checks; this is not human A4 print approval.
-- Local registry exact-byte bindings: 17/17; only SEC-05/SEC-07 entries changed in the shared registry.
-- Local renderer syntax and isolated Node bundle: PASS.
-- Owned source diff whitespace check: PASS.
-- Public evidence privacy scan: PASS; private report/manuscript assets remain outside the repository.
-- A text-check helper initially consumed next-page numeric headings when stripping concatenated folios. It was fixed to strip folios per page; original author text and rendered report content were unchanged. Earlier test failure was not a manuscript failure.
+Generator excludes two internal source and legacy-compatibility paragraphs before HTML/PDF rendering in all three languages. Full internal text, former PDFs, page maps and audit records remain in private QA history. Chinese 65 to 64 pages: original page 64 calculation text unchanged; natural reading-field bottom is 8 raster pixels shorter. English remains 85 pages, with only customer Design metadata on the last page. Bilingual remains 132 pages, with only customer activation rows and Design metadata on the last page. All pre-appendix content streams unchanged. Updated appendix pages rendered and visually checked; A4, full background and text safety pass. Original manuscript hashes 20/20 and saved PDF digests 3/3 pass. Existing local owner-bound download checks pass. Prior membership FAIL and human review blockers remain unchanged. No unrelated full regression rerun. Provider 0; no commit/push/deploy/production writes.
+
+## Customer appendix boundary correction
+
+Generator excludes two internal source and legacy-compatibility paragraphs before HTML/PDF rendering in all three languages. Full internal text, former PDFs, page maps and audit records remain in private QA history. Chinese 65 to 64 pages: original page 64 calculation text unchanged; natural reading-field bottom is 8 raster pixels shorter. English remains 85 pages, with only customer Design metadata on the last page. Bilingual remains 132 pages, with only customer activation rows and Design metadata on the last page. All pre-appendix content streams unchanged. Updated appendix pages rendered and visually checked; A4, full background and text safety pass. Original manuscript hashes 20/20 and saved PDF digests 3/3 pass. Existing local owner-bound download checks pass. Prior membership FAIL and human review blockers remain unchanged. No unrelated full regression rerun. Provider 0; no commit/push/deploy/production writes.

@@ -25,7 +25,7 @@
   "pdfs": [
     {
       "locale": "zh-Hans",
-      "pages": 65
+      "pages": 64
     },
     {
       "locale": "en",
@@ -39,14 +39,15 @@
   "allPageInspection": [
     {
       "locale": "zh-Hans",
-      "pages": 65,
+      "pages": 64,
       "integrityPass": 10,
       "integrityTotal": 10,
       "a4All": true,
       "fullBackgroundAll": true,
       "unsafeTextPages": [],
       "fontEmbedFailures": [],
-      "renderedPages": 65
+      "renderedPages": 64,
+      "customerBoundaryRevalidated": true
     },
     {
       "locale": "en",
@@ -57,7 +58,8 @@
       "fullBackgroundAll": true,
       "unsafeTextPages": [],
       "fontEmbedFailures": [],
-      "renderedPages": 85
+      "renderedPages": 85,
+      "customerBoundaryRevalidated": true
     },
     {
       "locale": "bilingual",
@@ -68,7 +70,8 @@
       "fullBackgroundAll": true,
       "unsafeTextPages": [],
       "fontEmbedFailures": [],
-      "renderedPages": 132
+      "renderedPages": 132,
+      "customerBoundaryRevalidated": true
     }
   ],
   "originalSuites": [
@@ -179,26 +182,74 @@
     "Paid customer adapter/checkout and actual account delivery remain closed"
   ],
   "privateOutputsOutsideRepo": true,
-  "visualReview": {
-    "scope": "All 282 final rasterized pages viewed in 25 contact sheets; selected body, appendix and newly uploaded fixed images viewed separately. Contact sheets do not certify human A4 print approval or full semantic approval.",
-    "allPagesContactReviewed": true,
-    "totalPages": 282,
-    "contactSheets": 25,
-    "bodyGeometry": "PASS",
-    "originalImageIssue": {
-      "assetId": "SEC-07",
-      "pages": {
-        "zh-Hans": 38,
-        "en": 46,
-        "bilingual": 72
+  "customerAppendixBoundary": {
+    "status": "PASS_LOCAL_CUSTOMER_APPENDIX_BOUNDARY",
+    "generator": "scripts/ecr-r33-appendix.mjs",
+    "boundary": "CUSTOMER_CALCULATION_ONLY_R1",
+    "reports": [
+      {
+        "locale": "zh-Hans",
+        "oldPages": 65,
+        "pages": 64,
+        "unchangedPreAppendixPages": 63,
+        "unchangedPageContentStreams": true,
+        "customerCalculationRetained": true,
+        "chinese64TextIdentical": true,
+        "chinese64RasterIdentical": false,
+        "naturalLayoutDifference": "Chinese reading-field bottom ends 8 raster pixels earlier; all text and positions remain unchanged.",
+        "internalParagraphsInCustomerAppendix": 0,
+        "internalAuditRetained": true,
+        "appendixRenderedPages": [
+          64
+        ],
+        "a4AndFullBodyBackground": true,
+        "unsafeText": 0
       },
-      "reason": "Baked top English last-line overlap; unchanged original"
-    },
-    "editorialIssues": [
-      "Some chapter-ending pages sparse; author/editor review remains",
-      "Fixed source images approximately 127.5 A4 DPI; no upscale or high-resolution print PASS"
+      {
+        "locale": "en",
+        "oldPages": 85,
+        "pages": 85,
+        "unchangedPreAppendixPages": 83,
+        "unchangedPageContentStreams": true,
+        "customerCalculationRetained": true,
+        "chinese64TextIdentical": null,
+        "chinese64RasterIdentical": null,
+        "naturalLayoutDifference": null,
+        "internalParagraphsInCustomerAppendix": 0,
+        "internalAuditRetained": true,
+        "appendixRenderedPages": [
+          84,
+          85
+        ],
+        "a4AndFullBodyBackground": true,
+        "unsafeText": 0
+      },
+      {
+        "locale": "bilingual",
+        "oldPages": 132,
+        "pages": 132,
+        "unchangedPreAppendixPages": 130,
+        "unchangedPageContentStreams": true,
+        "customerCalculationRetained": true,
+        "chinese64TextIdentical": null,
+        "chinese64RasterIdentical": null,
+        "naturalLayoutDifference": null,
+        "internalParagraphsInCustomerAppendix": 0,
+        "internalAuditRetained": true,
+        "appendixRenderedPages": [
+          131,
+          132
+        ],
+        "a4AndFullBodyBackground": true,
+        "unsafeText": 0
+      }
     ],
-    "humanPrintApproval": false,
-    "status": "PARTIAL"
-  }
+    "sourceHashesUnchanged": 20,
+    "originalPreAppendixPagesUnchanged": 276,
+    "internalParagraphsExcludedPerLanguage": 2,
+    "providerCalls": 0,
+    "productionPass": false
+  },
+  "totalCurrentPages": 281,
+  "historicalVisualReviewReceipt": "The previous 282-page visual receipt remains historical. Current appendix pages re-rendered and reviewed in customer-appendix-boundary.json."
 }

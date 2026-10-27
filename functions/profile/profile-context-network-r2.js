@@ -18,7 +18,7 @@ export async function projectProfileNetwork({identity,selections,readSource,auth
  for(const selected of selections){
   if(!selected||!['RELATIONSHIP','FINANCIAL','ESTATE'].includes(selected.domain)||typeof selected.sourceRef!=='string'||!Number.isInteger(selected.version)||selected.version<1){states.push({status:'REFERENCE_INVALID'});continue;}
   const grant=await authorizeSource?.(selected,actor);
-  if(!grant||grant.ownerRef!==actor.userId||grant.sourceRef!==selected.sourceRef||grant.version!==selected.version||grant.purpose!=='PROFILE_NETWORK_READ'||grant.revokedAt||grant.status!=='ACTIVE'||!Number.isFinite(Date.parse(grant.expiresAt))||Date.parse(grant.expiresAt)<=now){states.push({domain:selected.domain,status:'CONSENT_REQUIRED'});continue;}
+  if(!grant||grant.ownerRef!==actor.userId||grant.sourceRef!==selected.sourceRef||grant.version!==selected.version||grant.purpose!=='PROFILE_NETWORK_DISPLAY'||grant.revokedAt||grant.status!=='ACTIVE'||!Number.isFinite(Date.parse(grant.expiresAt))||Date.parse(grant.expiresAt)<=now){states.push({domain:selected.domain,status:'CONSENT_REQUIRED'});continue;}
   let source;
   try{source=await readSource?.(selected,actor);}catch(cause){
    states.push({domain:selected.domain,status:/DRAFT_(NOT_FOUND|EXPIRED)/.test(cause?.code||cause?.message||'')?'SOURCE_UNAVAILABLE':'SERVICE_UNAVAILABLE'});continue;
