@@ -32,3 +32,6 @@ const surface=document.body.dataset.cxSurface||'';
 document.body.dataset.vr2Density=/ACCOUNT|REPORT/.test(surface)?'WORKSPACE':/BOOK|ARTICLE|CONCEPT|KNOWLEDGE|ACADEMY/.test(surface)?'KNOWLEDGE_READING':/PERSONAL_REALITY|TAROT|ICHING|FINANCIAL|ASK|CONFIGURATION/.test(surface)?'PRODUCT_EXPERIENCE':'MARKET_ENTRY';
 const texture=document.body.dataset.vr2Density==='KNOWLEDGE_READING'?'PHI-OS-IVORY-GRAIN.webp':'PHI-OS-SOFT-MIST.webp';
 resolveApprovedVisual(texture).then(a=>document.body.style.setProperty('--vr2-texture',`url("${a.src}")`)).catch(()=>{});
+
+// Optional presentation layer; an unavailable deck must not block the asset resolver.
+void import('./figure-story-deck.js').catch(()=>console.warn('FIGURE_STORY_DECK_UNAVAILABLE'));
