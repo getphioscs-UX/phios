@@ -50,9 +50,6 @@ const GROUPS={
   '/perspectives/profile/':[{
     ids:['PHIOS-FIGURE-PROFILE-RESULT-READING-KEY-v1.webp','PHIOS-FIGURE-PROFILE-EXTERNAL-CONFIRMATION-v1.webp','PHIOS-FIGURE-PROFILE-SOURCE-DIFFERENCES-v1.webp'],
     label:['Read and compare your evidence','阅读和比较你的个人证据']
-  },{
-    ids:['PHIOS-FIGURE-PROFILE-BILINGUAL-DOSSIER-ACCESS-v1.webp','PHIOS-FIGURE-PROFILE-SELECTIVE-REALITY-HANDOFF-v1.webp'],
-    label:['Continue from Profile to Reality','从个人画像继续到现实']
   }],
   '/account/':[{
     ids:['PHIOS-FIGURE-ACCOUNT-TIMELINE-VERSIONS-v1.webp','PHIOS-FIGURE-ACCOUNT-SAVED-VS-SESSION-v1.webp'],
@@ -62,7 +59,7 @@ const GROUPS={
 };
 const LOCALIZED_SINGLES={
   '/':['PHIOS-FIGURE-PLATFORM-RELATIONSHIP-NETWORK-v1.webp','PHIOS-FIGURE-KNOWLEDGE-DISCOVERY-NETWORK-v1.webp','PHIOS-FIGURE-NAVIGATION-FORMATION-1B-v1.webp'],
-  '/perspectives/profile/':['PHIOS-FIGURE-PROFILE-EVIDENCE-SOURCES-v1.webp','PHIOS-FIGURE-PROFILE-SEVEN-ENTRY-MODES-v1.webp'],
+  '/perspectives/profile/':['PHIOS-FIGURE-PROFILE-EVIDENCE-SOURCES-v1.webp','PHIOS-FIGURE-PROFILE-SEVEN-ENTRY-MODES-v1.webp','PHIOS-FIGURE-PROFILE-SELECTIVE-REALITY-HANDOFF-v1.webp'],
   '/account/':['PHIOS-FIGURE-MY-PHI-ACCOUNT-NETWORK-v2.webp']
 };
 const selectorsForAsset=id=>[...document.querySelectorAll('img[data-approved-visual]')].filter(img=>img.getAttribute('data-approved-visual')===id);
@@ -177,6 +174,10 @@ function compactSingletons(path){
     const figure=images[0].closest('figure');
     const section=figure?.closest('section.vr2-story');
     if(section&&section.querySelectorAll('figure').length===1)section.classList.add('phios-figure-editorial-split');
+  }
+  if(path==='/perspectives/profile/'){
+    const dossier=selectorsForAsset('PHIOS-FIGURE-PROFILE-BILINGUAL-DOSSIER-ACCESS-v1.webp')[0]?.closest('figure');
+    if(dossier&&!isHero(dossier))dossier.classList.add('phios-figure-compact');
   }
   if(path==='/perspectives/personal/'){
     document.querySelector('.cx-r5-governance-figures')?.classList.add('phios-figure-paired');
