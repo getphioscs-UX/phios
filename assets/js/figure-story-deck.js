@@ -34,7 +34,7 @@ const EXPLANATIONS={
 const GROUPS={
   '/perspectives/tarot/':[{
     ids:['PHIOS-FIGURE-TAROT-CONNECTED-READING-v1.webp','PHIOS-FIGURE-TAROT-REALITY-REFLECTION-v1.webp','PHIOS-FIGURE-TAROT-READING-CONTINUITY-v1.webp'],
-    after:'main > section.cx-section--tight',
+    after:'main [data-symbolic-results]',
     label:['Explore the three Tarot reading principles','探索三种塔罗阅读原则']
   }],
   '/perspectives/iching/consult/':[{
@@ -180,6 +180,9 @@ function compactSingletons(path){
   }
   if(path==='/perspectives/personal/'){
     document.querySelector('.cx-r5-governance-figures')?.classList.add('phios-figure-paired');
+  }
+  if(path==='/perspectives/'){
+    document.querySelectorAll('.pv-module figure.figure-editorial').forEach(f=>f.classList.add('phios-figure-compact'));
   }
   if(path==='/about/founder/'){
     document.querySelectorAll('.founder-r1-figure').forEach(f=>{
