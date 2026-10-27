@@ -20,7 +20,7 @@ function makeContext({path='/api/symbolic-method-execute',method='POST',body=tar
     headers:{...(method==='GET'||method==='HEAD'?{}:{'content-type':'application/json'}),origin,'sec-fetch-site':'same-origin',...headers}
   });
   const context={request,env:{PHIOS_D1_MAINTENANCE_MODE:mode,RUNTIME_DB:fakeDb}};
-  context.next=next||(()=>Response.json({ok:true}));
+  context.next=next?()=>next(context):()=>Response.json({ok:true});
   return context;
 }
 async function status(options){return (await onRequest(makeContext(options))).status;}
