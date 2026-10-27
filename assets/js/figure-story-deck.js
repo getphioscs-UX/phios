@@ -86,6 +86,8 @@ function locateGroup(ids){
 }
 function storyDeck(sources,ids,label,{after,kind='sections'}={}){
   if(!sources?.length)return false;
+  const placeholder=document.createComment('Original Figure Story Deck location');
+  sources[0].before(placeholder);
   const deck=make('section','phios-figure-deck');
   deck.dataset.figureDeck='r1';
   deck.setAttribute('role','region');
@@ -98,7 +100,7 @@ function storyDeck(sources,ids,label,{after,kind='sections'}={}){
   const slides=sources.map((source,i)=>{
     const slide=make('div','phios-figure-deck__slide');
     slide.dataset.figureIndex=String(i);
-    const expl=descriptions(ids?.[i],source);
+    const expl=kind==='figures'&&ids?.[i]?.startsWith('ABOUT-')?ABOUT[i]:descriptions(ids?.[i],source);
     if(kind==='figures'){
       const section=make('section','phios-figure-deck__source phios-figure-deck__source--figure');
       const heading=make('h3','phios-figure-deck__heading');setText(heading,expl[0],expl[1]);
@@ -153,7 +155,8 @@ function storyDeck(sources,ids,label,{after,kind='sections'}={}){
   });
   const anchor=after&&document.querySelector(after);
   if(anchor&&!sources.some(s=>s===anchor||s.contains(anchor)))anchor.insertAdjacentElement('afterend',deck);
-  else sources[0].parentElement.insertBefore(deck,sources[0]);
+  else placeholder.parentNode.insertBefore(deck,placeholder);
+  placeholder.remove();
   localize();activate(0);
   new MutationObserver(localize).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   return true;
@@ -162,8 +165,10 @@ function upgradeAbout(){
   const figures=[...document.querySelectorAll('.pis-visual-story .pis-editorial__grid > figure')];
   if(figures.length!==5||figures.some(f=>isHero(f)))return;
   const gallery=figures[0].parentElement;
-  storyDeck(figures,ABOUT.map((_,i)=>'ABOUT-'+i),['Explore five navigation principles','探索五项现实导航原则'],{kind:'figures'});
-  if(!gallery.children.length)gallery.remove();
+  if(storyDeck(figures,ABOUT.map((_,i)=>'ABOUT-'+i),['Explore five navigation principles','探索五项现实导航原则'],{kind:'figures'})){
+    const deck=gallery.querySelector(':scope > .phios-figure-deck');
+    if(deck)gallery.replaceWith(deck);
+  }
 }
 function compactSingletons(path){
   for(const id of LOCALIZED_SINGLES[path]||[]){
