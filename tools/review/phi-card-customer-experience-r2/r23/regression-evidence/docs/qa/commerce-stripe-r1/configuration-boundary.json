@@ -1,0 +1,42 @@
+{
+  "status": "PASS_REJECTS_MISMATCHED_PRICE",
+  "realQaReadiness": "OWNER_CONFIRMED_SANDBOX_READBACK_NOT_RUN",
+  "pending": [
+    "COM-WILL-WRITING",
+    "COM-REPORT-BUNDLE-3",
+    "COM-REPORT-BUNDLE-2",
+    "COM-REPORT-NUMEROLOGY-FULL",
+    "COM-REPORT-ASTROLOGY-FULL",
+    "COM-REPORT-ZIWEI-FULL",
+    "COM-REPORT-BAZI-FULL"
+  ],
+  "verified": "Deliberately stale historical Price fixtures produce503 after read-only GET, before orders or customer/checkout mutations",
+  "cases": [
+    {
+      "name": "migration preserves existing book purchases, rights and download tokens",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "current QA prices, retained history and explicit LIVE bindings agree",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "bundle eligibility/count/uniqueness server policy",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "checkout authenticated, tamper rejected, live keys fail closed, origin protected",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "owner-confirmed QA bindings still verify exact provider price before use",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    }
+  ],
+  "realStripeCalls": 0
+}

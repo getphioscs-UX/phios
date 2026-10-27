@@ -61,14 +61,14 @@ for(const locale of ['en','zh-Hans']){
  const host=document.querySelector('section'),locationRef={href:'https://phios.test/books/reality-formation/?lang=en&mechanism=SK-B1-CONSTRAINT#explorer'};
  const historyRef={pushState:(_,__,url)=>{locationRef.href=String(url);}},events=new EventTarget();
  const dispose=renderFormationExplorer(host,{registry,chains,comparisons,locale,locationRef,historyRef,eventTarget:events});
- assert.match(host.querySelector('[data-formation-ask]').getAttribute('href'),/CONCEPT%3Aconstraint/);
+ assert.equal(new URL(host.querySelector('[data-formation-ask]').getAttribute('href'),'https://phios.test').searchParams.get('contextRef'),'CONCEPT:sk-b1-constraint');
  host.querySelector('[data-object="SK-B1-CARRIER"]').dispatchEvent(new window.Event('click',{bubbles:true}));
  assert.equal(new URL(locationRef.href).searchParams.get('mechanism'),'SK-B1-CARRIER');
  assert.equal(new URL(locationRef.href).searchParams.get('lang'),'en');
  const search=host.querySelector('input');search.value='nothing-matches';search.dispatchEvent(new window.Event('input'));
  assert.equal(host.querySelectorAll('[data-formation-list] button').length,0);
  locationRef.href='https://phios.test/books/reality-formation/?mechanism=SK-B1-FEEDBACK';events.dispatchEvent(new Event('popstate'));
- assert.match(host.querySelector('[data-formation-ask]').getAttribute('href'),/CONCEPT%3Afeedback/);
+ assert.equal(new URL(host.querySelector('[data-formation-ask]').getAttribute('href'),'https://phios.test').searchParams.get('contextRef'),'CONCEPT:sk-b1-feedback');
  dispose();
 }
 if(process.argv.includes('--record')){

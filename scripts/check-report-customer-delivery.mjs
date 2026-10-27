@@ -23,7 +23,7 @@ for(const method of REPORT_DELIVERY_METHODS){const a=await resolveReportAccess({
 assert.equal(calls,0);
 context.data.symbolicAccountIdentity={userId:'test-owner',providerId:'auth0',verified:true,authenticated:true};
 for(const locale of ['en','zh-Hans']){
- const a=await resolveReportAccess({methodId:'BZR',locale,context},deps);assert.equal(a.state,'ENTITLED');assert.equal(a.offer.amountMinor,5900);
+ const a=await resolveReportAccess({methodId:'BZR',locale,context},deps);assert.equal(a.state,'ENTITLED');assert.equal(a.offer.amountMinor,8900);
  const d=buildReportDeliveryEnvelope({methodId:'BZR',access:a,admitted:true,reportAvailable:true});
  assert.equal(resolveReportRoute(d),'PUBLICATION_FULL');assert.equal(resolveReportRoute(d,{technical:true}),'SPECIALIST_EXPLORER');
  assert.equal(buildReportDeliveryEnvelope({methodId:'BZR',access:a,admitted:false,reportAvailable:false}).access.state,'UNAVAILABLE');

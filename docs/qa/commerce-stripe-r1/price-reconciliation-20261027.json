@@ -1,0 +1,70 @@
+{
+  "status": "SUPERSEDED_BY_OWNER_CONFIRMED_BINDINGS",
+  "initialFailure": {
+    "productId": "COM-WILL-WRITING",
+    "expectedMinor": 2900,
+    "actualMinor": 8900,
+    "cause": "outdated checker expectation"
+  },
+  "correctedFile": "scripts/check-commerce-stripe-r1.mjs",
+  "checkerSHA256": "1c4c294a145020b0e15017f817c7d32078898c457f80f0dfebd2bc80981874eb",
+  "currentOwner": "functions/pws/commercial/commerce-economics-policy.js",
+  "pending": [
+    {
+      "productId": "COM-WILL-WRITING",
+      "currentMinor": 8900,
+      "historicalQAMinor": 2900,
+      "qaPriceRebindRequired": true
+    },
+    {
+      "productId": "COM-REPORT-BUNDLE-3",
+      "currentMinor": 21900,
+      "historicalQAMinor": 14900,
+      "qaPriceRebindRequired": true
+    },
+    {
+      "productId": "COM-REPORT-BUNDLE-2",
+      "currentMinor": 15900,
+      "historicalQAMinor": 9900,
+      "qaPriceRebindRequired": true
+    },
+    {
+      "productId": "COM-REPORT-NUMEROLOGY-FULL",
+      "currentMinor": 5900,
+      "historicalQAMinor": 3900,
+      "qaPriceRebindRequired": true
+    },
+    {
+      "productId": "COM-REPORT-ASTROLOGY-FULL",
+      "currentMinor": 8900,
+      "historicalQAMinor": 5900,
+      "qaPriceRebindRequired": true
+    },
+    {
+      "productId": "COM-REPORT-ZIWEI-FULL",
+      "currentMinor": 8900,
+      "historicalQAMinor": 5900,
+      "qaPriceRebindRequired": true
+    },
+    {
+      "productId": "COM-REPORT-BAZI-FULL",
+      "currentMinor": 8900,
+      "historicalQAMinor": 5900,
+      "qaPriceRebindRequired": true
+    }
+  ],
+  "executed": "npm run check:commerce-stripe",
+  "exitCode": 1,
+  "verified": "All seven pending QA products returned503/stripe_qa_price_rebinding_required with zero new orders and zero injected Stripe calls",
+  "notReached": "Subsequent successful-checkout/fulfillment scenarios remain blocked; no suite PASS claimed",
+  "historicalReadbackModified": false,
+  "runtimeModified": false,
+  "realStripeCalls": 0,
+  "providerCalls": 0,
+  "productionWrites": 0,
+  "commit": 0,
+  "push": 0,
+  "deploy": 0,
+  "previousStatus": "BLOCKED_COMMERCE_QA_PRICE_REBINDING_REQUIRED",
+  "successor": "owner-confirmed-bindings-20261027.json"
+}

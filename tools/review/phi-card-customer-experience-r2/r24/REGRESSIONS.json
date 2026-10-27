@@ -1,0 +1,154 @@
+{
+  "rows": [
+    {
+      "id": "ecr-registry",
+      "args": [
+        "--import",
+        "./scripts/lib/pages-json-import-preload.mjs",
+        "scripts/check-ecr-phi-card-r1.mjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "failure": null
+    },
+    {
+      "id": "ecr-mapping",
+      "args": [
+        "--import",
+        "./scripts/lib/pages-json-import-preload.mjs",
+        "scripts/check-ecr-phi-card-r1-s1-s3.mjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "failure": null
+    },
+    {
+      "id": "r1-admission",
+      "args": [
+        "scripts/check-ecr-phi-card-r1-s7-human-admission.mjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "failure": null
+    },
+    {
+      "id": "account-oidc",
+      "args": [
+        "--import",
+        "./scripts/lib/pages-json-import-preload.mjs",
+        "scripts/check-phi-card-r23-account.mjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "failure": null
+    },
+    {
+      "id": "card-engine",
+      "args": [
+        "--import",
+        "./scripts/lib/pages-json-import-preload.mjs",
+        "scripts/check-phi-card-customer-r1.mjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "failure": null
+    },
+    {
+      "id": "card-http",
+      "args": [
+        "--import",
+        "./scripts/lib/pages-json-import-preload.mjs",
+        "scripts/check-phi-card-customer-http-r1.mjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "failure": null
+    },
+    {
+      "id": "books",
+      "args": [
+        "scripts/run-zero-cost-regression.mjs",
+        "check:b14-sks:books"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "failure": null
+    },
+    {
+      "id": "book-1",
+      "args": [
+        "scripts/run-zero-cost-regression.mjs",
+        "check:b14-sks:book1"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "failure": null
+    },
+    {
+      "id": "book-2",
+      "args": [
+        "scripts/run-zero-cost-regression.mjs",
+        "check:b14-sks:book2"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "failure": null
+    },
+    {
+      "id": "book-3",
+      "args": [
+        "scripts/run-zero-cost-regression.mjs",
+        "check:b14-sks:book3"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "failure": null
+    },
+    {
+      "id": "book-4",
+      "args": [
+        "scripts/run-zero-cost-regression.mjs",
+        "check:b14-sks:book4"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "failure": null
+    },
+    {
+      "id": "stripe-local",
+      "args": [
+        "scripts/run-zero-cost-regression.mjs",
+        "check:commerce-stripe"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "failure": null
+    },
+    {
+      "id": "entitlement",
+      "args": [
+        "scripts/run-zero-cost-regression.mjs",
+        "check:ppr-narrative:w54n6-commerce-entitlement"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "failure": null
+    },
+    {
+      "id": "delivery",
+      "args": [
+        "--import",
+        "./scripts/lib/report-zero-cost-preload.mjs",
+        "--import",
+        "./scripts/lib/pages-json-import-preload.mjs",
+        "scripts/check-report-customer-delivery.mjs"
+      ],
+      "status": "PASS",
+      "exitCode": 0,
+      "failure": null
+    }
+  ],
+  "providerCalls": 0,
+  "productionWrites": 0,
+  "previousEvidenceWritesRedirected": true
+}

@@ -57,6 +57,13 @@ async function stripeRequest(env, path, options = {}) {
   return payload;
 }
 
+export async function verifyCommerceQaPrice(env,product,fetcher){
+ if(commerceEnvironment(env)!=='QA')throw Object.assign(Error('QA price verification only.'),{status:503,code:'stripe_qa_required'});
+ requireStripeCommerce(env);
+ const p=await stripeRequest(env,`/prices/${encodeURIComponent(product.qaPriceId)}`,{fetcher});
+ if(p.id!==product.qaPriceId||p.product!==product.qaProductId||p.livemode!==false||p.active!==true||p.currency!=='myr'||p.unit_amount!==product.amountMinor||Boolean(p.recurring)!==(product.billingType==='RECURRING'))throw Object.assign(Error('Sandbox price does not match its confirmed binding.'),{status:503,code:'stripe_qa_price_binding_mismatch'});
+ return{priceId:p.id,amountMinor:p.unit_amount,currency:p.currency,verified:true};
+}
 export async function createCheckoutSession({
   env,
   product,

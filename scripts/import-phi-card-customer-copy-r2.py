@@ -1,6 +1,8 @@
 """Import supplied drafts only; preserve source bytes and frozen question authority."""
 import pathlib,re,json,hashlib,sys
 ROOT=pathlib.Path.cwd(); BASE=ROOT/'content/ecr-phi-card/customer-reading-r2';BASE.mkdir(exist_ok=True)
+if (ROOT/'content/ecr-phi-card/admission/ecr-phi-card-r2-author-acceptance-r23.json').exists():
+ raise SystemExit('APPROVED_R2_SOURCE_FROZEN: preserve originals; prepare a versioned R23 candidate using scripts/prepare-phi-card-r23.mjs')
 sources={'C':'93050034-34be-45dd-9f50-d0cdabeedd6c','D':'41705f90-70c8-42fd-92b8-0e1fe971d4f6','F':'e23b7fe8-0c3c-4498-922c-d431396e336a','G':'b713b852-ae6e-4214-93d6-e5e35ac7bf20','P':'646222ee-bc24-46e9-9c8e-5b0fe4d2c251','T':'84df0ef6-16eb-402a-a03e-c7abd558e59d'}
 deck=json.loads((ROOT/'content/ecr-phi-card/ecr-phi-card-deck-registry-v2.json').read_text(encoding='utf-8'));cards={c['cardId']:c for c in deck['cards']}
 patterns=[('glance','一句话理解'),('invitation','这张卡想提醒什么'),('examples','现实中可能如何出现'),('approach','什么做法更有帮助'),('watch','什么情况需要留意'),('action','现在可以做什么'),('proposedQuestion','留给自己的问题')]

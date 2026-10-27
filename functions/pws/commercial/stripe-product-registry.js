@@ -479,6 +479,12 @@ Object.assign(rows.find(p=>p.productId==='COM-SUBSCRIPTION-MONTHLY'),{liveProduc
 // R1.2 explicit future-sales successor; rows/Stripe IDs remain for historical orders.
 Object.assign(rows.find(p=>p.productId==='COM-REPORT-PROFILE-FULL'),{catalogVisible:false,checkoutBlockedReason:'PERSONAL_EVIDENCE_MEMBERSHIP_NOT_STANDALONE',commercialState:'LEGACY_HISTORY_ONLY'});
 for(const p of rows.filter(p=>['COM-READING-TAROT-FULL','COM-READING-ICHING-FULL'].includes(p.productId)))Object.assign(p,{bilingualOnly:false,languageIndependentPurchase:true,pricingVersion:'PERSONAL-EVIDENCE-READING-R1.2'});
+// Owner explicitly confirmed these Sandbox IDs on Oct27. This is approval to
+// bind, not a provider readback: every use still verifies the actual QA Price.
+const ownerConfirmedQaPrices=new Set(['price_1UOUHhBEKXJyHMkKSC3iujbJ','price_1UOUIQBEKXJyHMkKlkoLy31M','price_1UOUIgBEKXJyHMkK3JXmPBjG','price_1UGr3PBEKXJyHMkKH6EsZNQy','price_1UOUJmBEKXJyHMkKCjj6kfv9','price_1UOUJbBEKXJyHMkKA66OOmYq','price_1UGr3jBEKXJyHMkKCulLqIpr']);
+for(const row of rows.filter(p=>p.qaPriceRebindRequired&&ownerConfirmedQaPrices.has(p.qaPriceId)))Object.assign(row,{qaPriceRebindRequired:false,qaPriceVerificationRequired:true,qaBindingApproval:'OWNER_CONFIRMED_2026_10_27'});
+// Financial also needs its independent publication/delivery gate; retain it.
+Object.assign(rows.find(p=>p.productId==='COM-REPORT-FINANCIAL-FULL'),{qaPriceId:'price_1UGr3gBEKXJyHMkKAmHkIrmz',qaPriceVerificationRequired:true,qaBindingApproval:'OWNER_CONFIRMED_2026_10_27_DELIVERY_GATE_RETAINED'});
 export const STRIPE_PRODUCT_REGISTRY = Object.freeze(rows.map(row => Object.freeze(row)));
 export function commerceProduct(id) {
   const product = STRIPE_PRODUCT_REGISTRY.find(row => row.productId === id);

@@ -1,0 +1,42 @@
+{
+  "historicalRecordsPreserved": true,
+  "items": [
+    {
+      "id": "A_BOOKS_ALIAS",
+      "original": "BOOK_CHECK_ALIAS_DRIFT: package now routes through zero-cost runner.",
+      "rootCause": "Old test expected direct node command; current package uses guarded command.",
+      "repair": "Assert exact guarded alias AND exact canonical zero-cost command target.",
+      "owner": "Books QA",
+      "repaired": true,
+      "final": "PASS",
+      "evidence": "books-final-rerun.log"
+    },
+    {
+      "id": "B_BOOK1_GROUNDING",
+      "original": "groundingSources[0] undefined for selected English constraint source.",
+      "rootCause": "Book 1 source omitted structuredTags; case-sensitive relevance matcher fell back to title-case prose. Later assertions also used obsolete, unqualified contextRef values.",
+      "sourceVerified": "Existing Registry object, manuscript bindings and digest assertions passed before any source change.",
+      "repair": "Add Registry-derived source tags; keep selection/admission/meanings unchanged. Update two URL assertions to exact current scoped object IDs.",
+      "owner": "Book 1 structured retrieval + QA",
+      "repaired": true,
+      "final": "PASS",
+      "evidence": "BOOK1-REPAIR.json / book-1-final.log"
+    },
+    {
+      "id": "C_STRIPE_WILL_PRICE",
+      "original": "8900 !== 2900",
+      "rootCause": "Old RM29 expectation predates current user-approved RM89 authority.",
+      "repair": "Other-window test already aligned RM89; this work did not edit its test or production Stripe bindings. Rerun existing zero-cost test.",
+      "owner": "Existing Commerce workstream",
+      "repaired": true,
+      "final": "PASS",
+      "evidence": "stripe-local.log"
+    }
+  ],
+  "newHarnessIssue": {
+    "issue": "data: test module could not resolve bare jose import",
+    "repair": "Resolve existing package URL in test composition; no auth implementation change.",
+    "final": "PASS",
+    "evidence": "account-oidc-final.log"
+  }
+}

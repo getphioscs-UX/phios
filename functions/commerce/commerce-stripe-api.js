@@ -6,7 +6,7 @@ import {isLanguageReport,commerceReportQuote,orderReportPresentation} from './re
 import { normalizeVerifiedSymbolicAccountIdentity } from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
 import { commerceProduct, commerceSelection, STRIPE_PRODUCT_REGISTRY, standardBundleProducts } from '../pws/commercial/stripe-product-registry.js';
 import { createCommerceOrder, commerceOrder, commerceCustomerBinding, bindCommerceCustomer, attachCommerceCheckout, commerceAccountProjection,ownedCommerceBook,issueDownloadToken } from './book-commerce-store.js';
-import { verifyStripeQaAccount, createCanonicalStripeCustomer, createCommerceCheckoutSession, createCommercePortal, requireStripeQa } from './stripe-client.js';
+import { verifyStripeQaAccount, createCanonicalStripeCustomer, createCommerceCheckoutSession, createCommercePortal, requireStripeQa,verifyCommerceQaPrice } from './stripe-client.js';
 import { sha256Hex } from './commerce-crypto.js';
 import { json,commerceError,readJsonBody,localeFrom } from './commerce-http.js';
 import {commerceLog} from './commerce-observability.js';
@@ -100,6 +100,7 @@ export async function commerceApi(context,action){
       if(product.billingType==='RECURRING'||!isLanguageReport(product))throw Object.assign(Error('Controlled report purchase only.'),{status:403,code:'controlled_product_denied'});
       contextSnapshot.controlledPurchase=controlled;
     }
+    if(commerceEnvironment(env)==='QA'&&product.qaPriceVerificationRequired)await verifyCommerceQaPrice(env,product,fetcher);
     const requestHash=await sha256Hex(JSON.stringify({productId:product.productId,selected,context:contextSnapshot}));
     // One persisted attempt across all products for this campaign/account.
     const key=await sha256Hex(contextSnapshot.p9Canary?`P9-CANARY/${contextSnapshot.p9Canary.releaseCandidateDigest}/${contextSnapshot.p9Canary.ownerOpaqueRef}`:controlled?`COM-STRIPE-R1/${commerceEnvironment(env)}/${controlled.reservationKey}`:`COM-STRIPE-R1/${commerceEnvironment(env)}/${customerId}/${supplied}`);

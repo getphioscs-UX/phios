@@ -1,0 +1,85 @@
+{
+  "status": "PARTIAL_TARGETED_EDITORIAL_REVIEW_REQUIRED",
+  "utc": "2026-10-27T15:32:27.256Z",
+  "branch": "main",
+  "head": "659d7b0d0a80b7b79024bd208bf972ba9a543df9",
+  "userDecisions": {
+    "baseline": "R2_BASELINE_CONTENT_APPROVED",
+    "imagePolicy": "BILINGUAL_IMAGE_USER_APPROVED",
+    "readingText": "SINGLE_LOCALE",
+    "r1Acceptance": "PRESERVED_SEPARATE_12_OF_12"
+  },
+  "sixFixes": [
+    {
+      "id": "01",
+      "status": "PASS",
+      "result": "16 English Field/Phase lists corrected in effective source before rendering/export; Chinese steps and prose ordering preserved. Desktop/mobile and standalone passed."
+    },
+    {
+      "id": "02",
+      "status": "PARTIAL",
+      "result": "F05 exact bilingual addition prepared; baseline approved prose preserved. TARGETED_DELTA_REVIEW_REQUIRED."
+    },
+    {
+      "id": "03",
+      "status": "PARTIAL",
+      "result": "F07 exact bilingual small-trial/participant-feedback/shared-field addition prepared. TARGETED_DELTA_REVIEW_REQUIRED."
+    },
+    {
+      "id": "04",
+      "status": "PASS",
+      "result": "C01 complete preserved source: 417 Unicode points / 414 without whitespace / 379 CJK across six body sections. No longer accepted source found in supplied/current repository scope; no filler."
+    },
+    {
+      "id": "05",
+      "status": "PASS",
+      "result": "Three English boundary residues removed in versioned effective content; all 96 locale variants checked, source originals preserved."
+    },
+    {
+      "id": "06",
+      "status": "PARTIAL",
+      "result": "Default Phase technical language removed by reorganizing already-approved card-specific watch text; complete technical boundary remains on demand. Sixteen natural rewrite candidates require targeted approval."
+    }
+  ],
+  "content": {
+    "cards": 48,
+    "locales": 96,
+    "approvedBaselineLocales": 96,
+    "formatChangedLocales": 19,
+    "pendingSubstantiveLanguageDeltas": 20,
+    "originalSourcesUnchanged": true
+  },
+  "qa": {
+    "browser": 192,
+    "expectedBrowser": 192,
+    "offline": 96,
+    "externalOfflineRequests": 0,
+    "account": "PASS_ISOLATED_SIGNED_OIDC_SAVE_LOGOUT_REENTRY_REOPEN",
+    "accountIssuers": 2,
+    "liveProviderLogin": "NOT_RUN_NOT_AUTHORIZED",
+    "regressions": 14,
+    "totalRegressions": 14,
+    "v41": "PASS",
+    "fullPagesBuild": "PASS",
+    "sourceObjects": "NO_R2_MUTATION",
+    "singleLocaleImageBlocker": "CLOSED_USER_APPROVED_EXCEPTION"
+  },
+  "remaining": [
+    "Targeted author decisions for F05/F07 additions and P01–P08 natural boundary rewrites (20 language deltas); unrelated baseline cards are not reopened.",
+    "No live Account/production deployment verification or production admission is claimed; those actions require separate authority.",
+    "Commit/push/deploy remain unauthorized."
+  ],
+  "providerCalls": 0,
+  "productionWrites": 0,
+  "stripePriceChangesByThisTask": 0,
+  "commit": false,
+  "push": false,
+  "deploy": false,
+  "finalGitRecheck": {
+    "checkedUtc": "2026-10-27T15:35:28.322127+00:00",
+    "localHead": "659d7b0d0a80b7b79024bd208bf972ba9a543df9",
+    "remoteMain": "bfc5c5ab5393a0c5621e8dcac8f37e9f891dd1fa",
+    "status": "REMOTE_ADVANCED_LOCAL_NOT_INTEGRATED",
+    "action": "Read-only ls-remote; no fetch, merge, reset or push. QA applies to local candidate only."
+  }
+}

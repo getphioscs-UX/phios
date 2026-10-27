@@ -23,6 +23,11 @@
       "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
     },
     {
+      "name": "owner-confirmed QA bindings still verify exact provider price before use",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
       "name": "bundle checkout idempotency, collision protection, customer reuse",
       "status": "PASS",
       "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
@@ -88,6 +93,8 @@
       "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
     }
   ],
+  "executionScope": "LOCAL_SYNTHETIC_PRICE_BINDINGS_NETWORK_DISABLED",
+  "realQaReadiness": "OWNER_CONFIRMED_SANDBOX_READBACK_NOT_RUN",
   "providerEndToEnd": "NOT_RUN",
   "humanReview": "PENDING",
   "liveOperations": "NOT_EXECUTED"

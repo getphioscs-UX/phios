@@ -1,0 +1,156 @@
+{
+  "status": "PARTIAL_HUMAN_CONTENT_REVIEW_READY_VISUAL_AND_RELEASE_GATES_OPEN",
+  "observedAt": "2026-10-27T14:35:01.316Z",
+  "baselineHead": "659d7b0d0a80b7b79024bd208bf972ba9a543df9",
+  "currentHead": "659d7b0d0a80b7b79024bd208bf972ba9a543df9",
+  "branch": "main",
+  "protectedFiles": 18,
+  "protectedFilesUnchanged": true,
+  "sourceAttachmentFiles": 6,
+  "cardCount": 48,
+  "languageVersions": 96,
+  "humanStatus": "HUMAN_REVIEW_PENDING",
+  "r1HumanAcceptance": "PRESERVED_12_OF_12_CUSTOMER_ADMITTED",
+  "contentExport": "Actual selectFixedCustomerReading output with frozen title/subtitle/question, all six prose sections, common UI boundary and complete source boundary. No author prose rewritten.",
+  "semantic": {
+    "coverageRows": 48,
+    "qualitativeApproval": false,
+    "priorityCards": [
+      "ECR-PC-F05",
+      "ECR-PC-F07"
+    ],
+    "literalMarkdownBoundaryCards": [
+      "ECR-PC-D04",
+      "ECR-PC-D05",
+      "ECR-PC-G03"
+    ],
+    "duplicateParagraphGroups": 4,
+    "allCardNotes": "SEMANTIC-FINDINGS.json"
+  },
+  "assets": {
+    "imagesAudited": 48,
+    "bakedBilingual": 48,
+    "registeredApprovedSingleLocaleAssets": 0,
+    "requiredMappings": 96,
+    "editableSource": "NOT_FOUND_IN_LOCAL_REPOSITORY_SEARCH",
+    "remoteBucketInventory": "NOT_LISTED; no object-list connector available",
+    "currentStrictSingleLanguage": "BLOCKED",
+    "originalAssetsUnchanged": true,
+    "temporaryImageHiding": "PROPOSAL_ONLY_NOT_ENABLED"
+  },
+  "qa": {
+    "fullPagesBuild": "PASS",
+    "pagesCheck": "PASS",
+    "standaloneOfflineReadings": 96,
+    "offlineNetworkRequests": 0,
+    "newRuntimeOtherViewportReadings": 96,
+    "previousRuntimeReadingCasesReused": 96,
+    "coveredRuntimeCombinations": [
+      "zh-Hans 390",
+      "en 1440",
+      "en 390",
+      "zh-Hans 1440"
+    ],
+    "anonymousIsolation": [
+      {
+        "locale": "en",
+        "width": 390,
+        "anonymousStatus": 401,
+        "isolatedAccount": "PASS",
+        "realLogin": "NOT_RUN_PRODUCTION_CLOSED",
+        "selectionStable": true
+      },
+      {
+        "locale": "zh-Hans",
+        "width": 1440,
+        "anonymousStatus": 401,
+        "isolatedAccount": "PASS",
+        "realLogin": "NOT_RUN_PRODUCTION_CLOSED",
+        "selectionStable": true
+      }
+    ],
+    "realAccount": "NOT_RUN_PRODUCTION_ADMISSION_CLOSED",
+    "engineChecks": 23,
+    "httpChecks": 10,
+    "regressionSuitePass": 11,
+    "regressionSuiteFail": 3,
+    "runtimePixelLanguageGate": "FAIL_KNOWN_BILINGUAL_ARTWORK",
+    "failures": [
+      {
+        "id": "books",
+        "status": "FAIL_PRE_EXISTING_BASELINE_INPUTS_NOT_ACCEPTED",
+        "reason": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: BOOK_CHECK_ALIAS_DRIFT\r\n+ actual - expected\r\n\r\n+ 'node scripts/run-zero-cost-regression.mjs check:b14-sks:book1'\r\n- 'node scripts/check-b14-sks-book1.mjs'\r\n\r\n    at file:///C:/phios/scripts/check-b14-sks-books.mjs:9:9\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\r\n    at async node:internal/modules/esm/loader:643:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 'node scripts/run-zero-cost-regression.mjs check:b14-sks:book1',\r\n  expected: 'node scripts/check-b14-sks-book1.mjs',\r\n  operator: 'strictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n",
+        "classification": "No R2.1 production runtime source was modified. Inputs are present before this task; previous recorded execution state is not assumed. These failures remain release gaps."
+      },
+      {
+        "id": "stripe-local",
+        "status": "FAIL_PRE_EXISTING_BASELINE_INPUTS_NOT_ACCEPTED",
+        "reason": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\r\n\r\n8900 !== 2900\r\n\r\n    at file:///C:/phios/scripts/check-commerce-stripe-r1.mjs:40:60\r\n    at test (file:///C:/phios/scripts/check-commerce-stripe-r1.mjs:15:51)\r\n    at file:///C:/phios/scripts/check-commerce-stripe-r1.mjs:32:7 {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 8900,\r\n  expected: 2900,\r\n  operator: 'strictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n",
+        "classification": "No R2.1 production runtime source was modified. Inputs are present before this task; previous recorded execution state is not assumed. These failures remain release gaps."
+      },
+      {
+        "id": "book-1",
+        "status": "FAIL_PRE_EXISTING_BASELINE_INPUTS_NOT_ACCEPTED",
+        "reason": "file:///C:/phios/scripts/check-b14-sks-book1.mjs:40\r\nassert.equal(retrieval.groundingSources[0].sourceId,'STRUCTURED:SK-B1-CONSTRAINT');\r\n                                           ^\r\n\r\nTypeError: Cannot read properties of undefined (reading 'sourceId')\r\n    at file:///C:/phios/scripts/check-b14-sks-book1.mjs:40:44\r\n\r\nNode.js v24.18.0\r\n",
+        "classification": "No R2.1 production runtime source was modified. Inputs are present before this task; previous recorded execution state is not assumed. These failures remain release gaps."
+      }
+    ],
+    "book1BaselineProvenance": [
+      {
+        "path": "scripts/check-b14-sks-book1.mjs",
+        "unchangedFromStartHead": true,
+        "sha256": "22c2a2662c9f862f85e170ef22cdc985bd8ffd5bb67317b93a464ea739e2d552"
+      },
+      {
+        "path": "functions/_lib/formation-retrieval-scope.js",
+        "unchangedFromStartHead": true,
+        "sha256": "4e26c699d590a60d15c00b693d53e5c9f11b34d28ee6241a46fe18cdb8d949e5"
+      },
+      {
+        "path": "functions/_lib/knowledge-answer-grounding.js",
+        "unchangedFromStartHead": true,
+        "sha256": "84eee54e12ee3133e93565174ed4799872f0cf115ea3c1b525676a031e0c9950"
+      },
+      {
+        "path": "content/knowledge/structured/book-1/book-1-mechanism-registry-v1.json",
+        "unchangedFromStartHead": true,
+        "sha256": "ac29ad4a0e79cb3fc269dd3937bbdec67f4e22e85540d74cb466ec4b8b0d67b8"
+      }
+    ],
+    "commandCaveat": "Existing check:pages-build invokes build-cloudflare-pages.mjs --check-only, but that script does not handle the flag and performs a second build. Both completed. No extra build started beyond these existing entrypoints.",
+    "regressionScope": "11 PASS / 3 FAIL are the recorded test-run outcomes. Stripe test source was subsequently modified by another window; that changed test revision has not been rerun by this task. Do not infer either a current PASS or a newly introduced PHI Cards failure."
+  },
+  "buildSummary": {
+    "files": 12128,
+    "workerBytes": 13628645,
+    "gzipBytes": 3087781,
+    "fullLog": "FULL-PAGES-BUILD.log"
+  },
+  "changes": [
+    ".gitignore (scoped author ZIP exclusion)",
+    "scripts/prepare-phi-card-r21-review.mjs",
+    "scripts/check-phi-card-r21-regressions.mjs",
+    "scripts/check-phi-card-r21-offline.mjs",
+    "scripts/check-phi-card-r21-runtime.mjs",
+    "scripts/close-phi-card-r21-review.mjs",
+    "scripts/package-phi-card-r21-review.py",
+    "tools/review/phi-card-customer-experience-r2/r21/",
+    "artifacts/PHI-CARDS-R2-HUMAN-REVIEW-PACK.zip",
+    "content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html (append only)"
+  ],
+  "providerCalls": 0,
+  "productionWrites": 0,
+  "stripeMutations": 0,
+  "commit": false,
+  "push": false,
+  "deploy": false,
+  "concurrentDrift": {
+    "observedUtc": "2026-10-27T14:35:29.712Z",
+    "path": "scripts/check-commerce-stripe-r1.mjs",
+    "testedSha256": "380cc3c7bb36440526c844146ee26bacb3678412716b197c33b8436f58f85759",
+    "currentSha256": "1c4c294a145020b0e15017f817c7d32078898c457f80f0dfebd2bc80981874eb",
+    "changedAfterRecordedRegression": true,
+    "authoredByThisTask": false,
+    "action": "Preserved other-window edit; original test failure retained as time-bound evidence, not silently replaced."
+  }
+}

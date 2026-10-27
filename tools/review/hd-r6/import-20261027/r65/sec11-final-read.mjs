@@ -1,0 +1,5 @@
+import fs from 'node:fs';import{createHash}from'node:crypto';
+const d='tools/review/hd-r6/import-20261027/r65/',u=new URL('https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/human-design/editorial/shared/VIS-REPORT-HD-SEC-11-ENVIRONMENT-PERCEPTION.webp');
+u.searchParams.set('r65-final-read',String(Date.now()));const row={at:new Date().toISOString(),ownerExactURL:u.origin+u.pathname,request:'Single public GET with no-cache; no credentials or mutation',priorReceipt:'SEC11-OWNER-REFRESH.json',oldSHA256:'f22a1fe71d105bbfd187511591360d1bfc1baed4ed6fbe42eb226154653683aa'};
+try{const r=await fetch(u,{headers:{'Cache-Control':'no-cache'},signal:AbortSignal.timeout(15000)});row.http=r.status;row.lastModified=r.headers.get('last-modified');row.etag=r.headers.get('etag');if(r.ok){const b=Buffer.from(await r.arrayBuffer());row.sha256=createHash('sha256').update(b).digest('hex');row.changed=row.sha256!==row.oldSHA256;row.file=d+'asset-reads/SEC11-FINAL-REFRESH.webp';fs.writeFileSync(row.file,b);}}catch(e){row.error=e.message;}
+fs.writeFileSync(d+'SEC11-FINAL-REFRESH.json',JSON.stringify(row,null,2)+'\n');console.log(row);

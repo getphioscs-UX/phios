@@ -1,0 +1,202 @@
+{
+  "status": "LOCAL_OWNER_CONFIRMED_BINDINGS_PASS",
+  "bindings": [
+    {
+      "productId": "COM-WILL-WRITING",
+      "qaPriceId": "price_1UGr3jBEKXJyHMkKCulLqIpr",
+      "expectedMinor": 8900,
+      "approval": "OWNER_CONFIRMED_2026_10_27",
+      "verificationRequired": true,
+      "remainingGate": null
+    },
+    {
+      "productId": "COM-REPORT-FINANCIAL-FULL",
+      "qaPriceId": "price_1UGr3gBEKXJyHMkKAmHkIrmz",
+      "expectedMinor": 6900,
+      "approval": "OWNER_CONFIRMED_2026_10_27_DELIVERY_GATE_RETAINED",
+      "verificationRequired": true,
+      "remainingGate": "FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED"
+    },
+    {
+      "productId": "COM-REPORT-BUNDLE-3",
+      "qaPriceId": "price_1UOUJmBEKXJyHMkKCjj6kfv9",
+      "expectedMinor": 21900,
+      "approval": "OWNER_CONFIRMED_2026_10_27",
+      "verificationRequired": true,
+      "remainingGate": null
+    },
+    {
+      "productId": "COM-REPORT-BUNDLE-2",
+      "qaPriceId": "price_1UOUJbBEKXJyHMkKA66OOmYq",
+      "expectedMinor": 15900,
+      "approval": "OWNER_CONFIRMED_2026_10_27",
+      "verificationRequired": true,
+      "remainingGate": null
+    },
+    {
+      "productId": "COM-REPORT-NUMEROLOGY-FULL",
+      "qaPriceId": "price_1UGr3PBEKXJyHMkKH6EsZNQy",
+      "expectedMinor": 5900,
+      "approval": "OWNER_CONFIRMED_2026_10_27",
+      "verificationRequired": true,
+      "remainingGate": null
+    },
+    {
+      "productId": "COM-REPORT-ASTROLOGY-FULL",
+      "qaPriceId": "price_1UOUIgBEKXJyHMkK3JXmPBjG",
+      "expectedMinor": 8900,
+      "approval": "OWNER_CONFIRMED_2026_10_27",
+      "verificationRequired": true,
+      "remainingGate": null
+    },
+    {
+      "productId": "COM-REPORT-ZIWEI-FULL",
+      "qaPriceId": "price_1UOUIQBEKXJyHMkKlkoLy31M",
+      "expectedMinor": 8900,
+      "approval": "OWNER_CONFIRMED_2026_10_27",
+      "verificationRequired": true,
+      "remainingGate": null
+    },
+    {
+      "productId": "COM-REPORT-BAZI-FULL",
+      "qaPriceId": "price_1UOUHhBEKXJyHMkKSC3iujbJ",
+      "expectedMinor": 8900,
+      "approval": "OWNER_CONFIRMED_2026_10_27",
+      "verificationRequired": true,
+      "remainingGate": null
+    }
+  ],
+  "tests": {
+    "work": "COM-STRIPE-R1",
+    "status": "PASS",
+    "cases": [
+      {
+        "name": "migration preserves existing book purchases, rights and download tokens",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "current QA prices, retained history and explicit LIVE bindings agree",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "bundle eligibility/count/uniqueness server policy",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "checkout authenticated, tamper rejected, live keys fail closed, origin protected",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "owner-confirmed QA bindings still verify exact provider price before use",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "bundle checkout idempotency, collision protection, customer reuse",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "success poll creates no rights, another account cannot read order",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "unpaid completed does not grant; paid replay and concurrent deliveries grant only selected rights",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "invalid signature and live event do not mutate; RECEIVED replay recovers",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "active single products fulfill after verified payment",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "subscription created is not entitlement; invoice activates; cancellation retains only paid interval; terminal status denies",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "partial/full refunds recorded with review; permanent rights not silently revoked",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "provider price mismatch is review-required without grants; portal cannot select another customer",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "temporary DB failure returns 503; failed event retry succeeds without duplicate rights",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "expiration/payment failure do not grant; protected book access is account-bound",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "unknown order or absent metadata records terminal review without granting",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "bilingual bundle settlement persists one language across every child and blocks tampered provider price",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      },
+      {
+        "name": "bundle language policy: six totals, order-level modifier, browser totals ignored",
+        "status": "PASS",
+        "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+      }
+    ],
+    "executionScope": "LOCAL_SYNTHETIC_PRICE_BINDINGS_NETWORK_DISABLED",
+    "realQaReadiness": "OWNER_CONFIRMED_SANDBOX_READBACK_NOT_RUN",
+    "providerEndToEnd": "NOT_RUN",
+    "humanReview": "PENDING",
+    "liveOperations": "NOT_EXECUTED"
+  },
+  "actualSandboxReadback": "NOT_EXECUTED_IN_THIS_SESSION",
+  "runtimePolicy": "QA Price GET must match exact ID/product/MYR/amount/active/livemode before order creation; owner approval is not provider verification",
+  "liveBindingsUnchanged": true,
+  "productionConfigChanged": false,
+  "realStripeCalls": 0,
+  "realTransactions": 0,
+  "providerCalls": 0,
+  "commit": 0,
+  "push": 0,
+  "deploy": 0,
+  "sourceIdentity": [
+    {
+      "path": "functions/pws/commercial/stripe-product-registry.js",
+      "sha256": "43b3c255577042ed3c91af4e81d9c6b5c8d8f4442308d33fdeec8487b6d08fd0"
+    },
+    {
+      "path": "functions/commerce/commerce-stripe-api.js",
+      "sha256": "7247e3749cd4649396ab0341d41106a81d37db6519330332dc80701ae334042e"
+    },
+    {
+      "path": "functions/commerce/stripe-client.js",
+      "sha256": "595bf8de5e74cccab6cf5e1d4d0a69e291e50f43738556c897078c3d6ee8d63d"
+    },
+    {
+      "path": "scripts/check-commerce-stripe-r1.mjs",
+      "sha256": "dc0966fb96ae4d77dfd064091ca43f3a110d74d521f31d30fa5be4fd5feeca9b"
+    },
+    {
+      "path": "scripts/lib/commerce-stripe-local-fixture-preload.mjs",
+      "sha256": "7adafd89eac0daa1e252fde3a5c1220f1ad0f001cbc5406d24262183afb03e70"
+    }
+  ]
+}

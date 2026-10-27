@@ -1,0 +1,20 @@
+{
+  "initialFailure": "PDF-QA-FIRST-FAILURE.json",
+  "cause1": "Chinese hanging punctuation was outside the narrow text extraction crop but inside the safe physical page margin. Crop expanded from51pt to35pt; exact text comparison retained. No punctuation removed from assertions or manuscripts.",
+  "cause2": "Several chapter ends left short continuation pages. Keep substantial final subsection groups together; body sizes remain11/11.5pt.",
+  "geometryRepair": "Three channel routes avoid unrelated Centers; Ego/Spleen/Emotional labels repositioned away from Gate circles.",
+  "sharedMap": "BODYGRAPH-GEOMETRY.json",
+  "providerCalls": 0,
+  "finalVisualFindings": [
+    {
+      "issue": "English/Bilingual BodyGraph caption orphaned to a separate page",
+      "repair": "Chart flowable630pt, vector scale0.70, caption required on chart page; no body text removed",
+      "evidence": "failed-stages/EN-orphan-bodygraph-caption.jpg"
+    },
+    {
+      "issue": "Comparison fourth box crossed its flowable bottom by5pt and touched caption",
+      "repair": "Raise all four boxes30pt; assert every diagram box remains within declared frame",
+      "evidence": "failed-stages/ZH-comparison-bottom-caption.jpg"
+    }
+  ]
+}

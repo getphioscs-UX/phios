@@ -1,18 +1,23 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {DatabaseSync} from 'node:sqlite';
+import {spawnSync} from 'node:child_process';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import path from 'node:path';
 import {createSqliteD1Adapter,loadRuntimeMigrations} from './runtime-migration-loader.mjs';
 import {applyRuntimeMigrations} from '../functions/runtime/migrations/migration-runner.js';
 import {STRIPE_PRODUCT_REGISTRY,commerceSelection,standardBundleProducts,assertReportPriceParity,commerceOrderProduct} from '../functions/pws/commercial/stripe-product-registry.js';
 import {isLanguageReport,validateOrderReportPresentation,reportContractId} from '../functions/commerce/report-presentation.js';
 import {quoteReportPresentation,resolveReportProduct} from '../functions/pws/commercial/report-successor-contract.js';
 import {commerceApi} from '../functions/commerce/commerce-stripe-api.js';
-import {createStripeTestSignature} from '../functions/commerce/stripe-client.js';
+import {createStripeTestSignature,verifyCommerceQaPrice} from '../functions/commerce/stripe-client.js';
 import {onRequestPost as webhook} from '../functions/api/stripe-webhook.js';
 import {ownedReportPresentation,commerceAccountProjection,registerWebhookEvent,ensureBookProduct} from '../functions/commerce/book-commerce-store.js';
 import {sha256Hex} from '../functions/commerce/commerce-crypto.js';
 
 const cases=[];async function test(name,fn){await fn();cases.push({name,status:'PASS',evidence:'local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end'});}
+const isolatedCheckoutFixture=process.argv.includes('--isolated-checkout-fixture');
+if(isolatedCheckoutFixture&&!STRIPE_PRODUCT_REGISTRY.some(p=>p.offlineCheckoutFixture))throw Error('COMMERCE_FIXTURE_PRELOAD_REQUIRED');
 const sqlite=new DatabaseSync(':memory:');sqlite.exec('PRAGMA foreign_keys=ON');
 const db=createSqliteD1Adapter(sqlite), migrations=loadRuntimeMigrations(process.cwd()).migrations;
 const env={RUNTIME_DB:db,STRIPE_ENVIRONMENT:'QA',STRIPE_SECRET_KEY:'sk_test_fixture_only',STRIPE_WEBHOOK_SECRET:'whsec_fixture_only',PHIOS_COMMERCE_QA_ENABLED:'true'};
@@ -34,11 +39,14 @@ await test('current QA prices, retained history and explicit LIVE bindings agree
   assert.equal(STRIPE_PRODUCT_REGISTRY.length,35);assert.equal(languageBooks.length,8);
   assert.equal(new Set(STRIPE_PRODUCT_REGISTRY.map(p=>p.productId)).size,35);
   const boundPrices=STRIPE_PRODUCT_REGISTRY.map(p=>p.qaPriceId).filter(Boolean);
-  assert.equal(boundPrices.length,26);assert.equal(new Set(boundPrices).size,boundPrices.length);assertReportPriceParity();
+  assert.equal(boundPrices.length,27);assert.equal(new Set(boundPrices).size,boundPrices.length);assertReportPriceParity();
   assert.deepEqual(languageBooks.map(p=>p.productId).sort(),[1,2,3,4].flatMap(n=>[`COM-BOOK-0${n}-EN`,`COM-BOOK-0${n}-ZH`]).sort());
-  const approved={'COM-REPORT-FINANCIAL-FULL':6900,'COM-BOOK-01':8900,'COM-BOOK-02':8900,'COM-BOOK-03':8900,'COM-BOOK-04':8900,'COM-BOOK-05':10900,'COM-BOOK-CONFIGURATION':10900,'COM-BOOK-06':5900,'COM-BOOK-07':5900,'COM-SUBSCRIPTION-MONTHLY':1900,'COM-WILL-WRITING':2900,'COM-SERVICE-FINANCIAL-CONSULTATION':10000,'COM-SERVICE-CASH-FLOW-GAME':10000,'COM-SERVICE-NATURAL-HEALER':10000};
+  // Oct27 owner prices; historical provider readbacks below remain immutable.
+  const approved={'COM-REPORT-BAZI-FULL':8900,'COM-REPORT-ZIWEI-FULL':8900,'COM-REPORT-ASTROLOGY-FULL':8900,'COM-REPORT-NUMEROLOGY-FULL':5900,'COM-REPORT-BUNDLE-2':15900,'COM-REPORT-BUNDLE-3':21900,'COM-REPORT-FINANCIAL-FULL':6900,'COM-BOOK-01':8900,'COM-BOOK-02':8900,'COM-BOOK-03':8900,'COM-BOOK-04':8900,'COM-BOOK-05':10900,'COM-BOOK-CONFIGURATION':10900,'COM-BOOK-06':5900,'COM-BOOK-07':5900,'COM-SUBSCRIPTION-MONTHLY':1900,'COM-WILL-WRITING':8900,'COM-SERVICE-FINANCIAL-CONSULTATION':10000,'COM-SERVICE-CASH-FLOW-GAME':10000,'COM-SERVICE-NATURAL-HEALER':10000};
   for(const [id,amount] of Object.entries(approved))assert.equal(STRIPE_PRODUCT_REGISTRY.find(p=>p.productId===id).amountMinor,amount);
   const provider=JSON.parse(fs.readFileSync('docs/commerce/economics-20261009/stripe-qa-price-readback.json','utf8'));
+  // Synthetic provider prices exist only in the network-disabled child process.
+  for(const p of STRIPE_PRODUCT_REGISTRY.filter(p=>p.offlineCheckoutFixture))provider.prices.push({id:p.qaPriceId,product:p.qaProductId,unit_amount:p.amountMinor,currency:'myr',livemode:false});
   for(const p of STRIPE_PRODUCT_REGISTRY){
     if(p.baseProductId){
       const base=STRIPE_PRODUCT_REGISTRY.find(x=>x.productId===p.baseProductId);
@@ -57,7 +65,7 @@ await test('current QA prices, retained history and explicit LIVE bindings agree
       assert.equal(publication.corePages,22);assert.equal(publication.pages.length,22);
       assert.deepEqual(publication.pages.map(page=>page.page),Array.from({length:22},(_,i)=>i+1));
       assert.ok(publication.pages.every(page=>page.language==='SAME_PAGE_BILINGUAL'));
-      assert.equal(p.qaPriceId,null);assert.equal(p.livePriceId,null);
+      assert.equal(p.qaPriceId,'price_1UGr3gBEKXJyHMkKAmHkIrmz');assert.equal(p.qaPriceVerificationRequired,true);assert.equal(p.livePriceId,null);
       assert.equal(p.checkoutBlockedReason,'FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED');
       const historical=provider.prices.filter(q=>q.product===p.qaProductId&&q.unit_amount===15900&&q.currency==='myr'&&q.livemode===false);
       assert.equal(historical.length,1,'Historical RM159 QA price must remain identifiable');
@@ -65,7 +73,10 @@ await test('current QA prices, retained history and explicit LIVE bindings agree
       assert.equal(old.amountMinor,15900);assert.equal(old.qaPriceId,historical[0].id);
       continue;
     }
-    const q=provider.prices.find(q=>q.id===p.qaPriceId);assert(q);assert.equal(q.product,p.qaProductId);assert.equal(q.unit_amount,p.amountMinor);assert.equal(q.currency,'myr');assert.equal(q.livemode,false);assert.equal(Boolean(p.livePriceId),Boolean(p.liveProductId));assert.equal(Boolean(q.recurring),p.billingType==='RECURRING');if(q.recurring){assert.equal(q.recurring.interval,'month');assert.equal(q.recurring.interval_count,1);}}
+    const q=provider.prices.find(q=>q.id===p.qaPriceId);assert(q);assert.equal(q.product,p.qaProductId);
+    if(p.qaPriceRebindRequired||(p.qaPriceVerificationRequired&&!p.offlineCheckoutFixture)){assert.equal(p.pricingVersion,'PHIOS-COMMERCE-2026-10-27');assert.notEqual(q.unit_amount,p.amountMinor,'Historical QA price must not masquerade as the new binding');}
+    else assert.equal(q.unit_amount,p.amountMinor);
+    assert.equal(q.currency,'myr');assert.equal(q.livemode,false);assert.equal(Boolean(p.livePriceId),Boolean(p.liveProductId));assert.equal(Boolean(q.recurring),p.billingType==='RECURRING');if(q.recurring){assert.equal(q.recurring.interval,'month');assert.equal(q.recurring.interval_count,1);}}
 });
 await test('bundle eligibility/count/uniqueness server policy',()=>{
   const eligible=standardBundleProducts();assert.equal(eligible.length,3);assert(!eligible.includes('COM-REPORT-PROFILE-FULL'));assert.throws(()=>commerceSelection('COM-REPORT-BUNDLE-2',[eligible[0],'COM-REPORT-PROFILE-FULL']));
@@ -81,6 +92,7 @@ const fetcher=async(url,options={})=>{
   const pathname=new URL(url).pathname,body=new URLSearchParams(options.body);stripeCalls.push({pathname,body:Object.fromEntries(body)});
   if(new URL(url).host==='watermark.test')return respond({status:'completed',destinationObjectKey:JSON.parse(options.body).destinationObjectKey});
   if(pathname==='/v1/account')return respond({id:'acct_1UFr0TBEKXJyHMkK'});
+  if(pathname.startsWith('/v1/prices/')){const id=pathname.split('/').at(-1),p=STRIPE_PRODUCT_REGISTRY.find(p=>p.qaPriceId===id);assert(p);const prior=JSON.parse(fs.readFileSync('docs/commerce/economics-20261009/stripe-qa-price-readback.json','utf8')).prices.find(x=>x.id===id);return respond(p.offlineCheckoutFixture?{id,product:p.qaProductId,unit_amount:p.amountMinor,currency:'myr',active:true,livemode:false}:prior);}
   if(pathname==='/v1/customers')return respond({id:'cus_fixture',livemode:false});
   if(pathname==='/v1/billing_portal/sessions')return respond({url:'https://billing.stripe.com/p/session/test_fixture'});
   if(pathname==='/v1/checkout/sessions'){
@@ -121,7 +133,29 @@ await test('checkout authenticated, tamper rejected, live keys fail closed, orig
   assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders);
   assert.equal(stripeCalls.length,beforeCalls,'missing Configuration manuscript must not create any provider operation');
 });
+await test('owner-confirmed QA bindings still verify exact provider price before use',async()=>{
+ const p=STRIPE_PRODUCT_REGISTRY.find(p=>p.productId==='COM-REPORT-BAZI-FULL'),valid={id:p.qaPriceId,product:p.qaProductId,unit_amount:p.amountMinor,currency:'myr',active:true,livemode:false};let calls=0;
+ const read=object=>async(url,options)=>{calls++;assert.equal(options.method,'GET');assert.equal(new URL(url).pathname,'/v1/prices/'+p.qaPriceId);return respond(object);};
+ assert.equal((await verifyCommerceQaPrice(env,p,read(valid))).verified,true);
+ for(const patch of [{id:'price_wrong'},{product:'prod_wrong'},{unit_amount:p.amountMinor-100},{currency:'usd'},{active:false},{livemode:true},{recurring:{interval:'month'}}])await assert.rejects(()=>verifyCommerceQaPrice(env,p,read({...valid,...patch})),e=>e.code==='stripe_qa_price_binding_mismatch');
+ const before=calls;await assert.rejects(()=>verifyCommerceQaPrice({...env,STRIPE_ENVIRONMENT:'LIVE'},p,read(valid)));assert.equal(calls,before,'QA verification never makes a Live request');
+});
 await test('bundle checkout idempotency, collision protection, customer reuse',async()=>{
+  const pending=STRIPE_PRODUCT_REGISTRY.filter(p=>(p.qaPriceRebindRequired||p.qaPriceVerificationRequired)&&!p.offlineCheckoutFixture&&!p.checkoutBlockedReason);
+  if(pending.length){
+    for(const p of pending){const beforeCalls=stripeCalls.length,beforeOrders=sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n;
+      const response=await commerceApi(context({productId:p.productId,selectedProducts:p.productId.includes('BUNDLE')?standardBundleProducts().slice(0,p.productId.endsWith('-2')?2:3):[]}), 'checkout');
+      assert.equal(response.status,503,p.productId);assert.equal((await response.json()).error,p.qaPriceVerificationRequired?'stripe_qa_price_binding_mismatch':'stripe_qa_price_rebinding_required',p.productId);
+      assert.equal(stripeCalls.length,beforeCalls+(p.qaPriceVerificationRequired?1:0));assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders);
+    }
+    fs.mkdirSync('docs/qa/commerce-stripe-r1',{recursive:true});
+    fs.writeFileSync('docs/qa/commerce-stripe-r1/configuration-boundary.json',JSON.stringify({status:'PASS_REJECTS_MISMATCHED_PRICE',realQaReadiness:'OWNER_CONFIRMED_SANDBOX_READBACK_NOT_RUN',pending:pending.map(p=>p.productId),verified:'Deliberately stale historical Price fixtures produce503 after read-only GET, before orders or customer/checkout mutations',cases,realStripeCalls:0},null,2));
+    sqlite.close();
+    const preload=pathToFileURL(path.resolve('scripts/lib/commerce-stripe-local-fixture-preload.mjs')).href;
+    const child=spawnSync(process.execPath,['--import',preload,fileURLToPath(import.meta.url),'--isolated-checkout-fixture'],{stdio:'inherit',env:{...process.env,REPORT_ZERO_COST_REPLAY:'true'}});
+    if(child.error)throw child.error;
+    process.exit(child.status??1);
+  }
   const ctx=context({productId:'COM-REPORT-BUNDLE-2',selectedProducts:standardBundleProducts().slice(0,2)});
   const copy={...ctx,request:ctx.request.clone()},response=await commerceApi(ctx,'checkout');assert.equal(response.status,201);
   bundleOrder=(await response.json()).orderId;const replay=await commerceApi(copy,'checkout');assert.equal((await replay.json()).replay,true);
@@ -215,7 +249,11 @@ await test('subscription created is not entitlement; invoice activates; cancella
   for(const status of ['past_due','unpaid','canceled']){sub.status=status;await send('customer.subscription.updated',sub);assert.equal((await commerceAccountProjection(env,identity.userId)).subscriptions[0].accessGranted,false);}
 });
 await test('partial/full refunds recorded with review; permanent rights not silently revoked',async()=>{
-  for(const amount of [1000,9900])assert.equal((await send('charge.refunded',{payment_intent:bundleSession.payment_intent,amount_refunded:amount,currency:'myr'})).status,200);
+  for(const amount of [1000,bundleSession.amount_total]){
+    assert.equal((await send('charge.refunded',{payment_intent:bundleSession.payment_intent,amount_refunded:amount,currency:'myr'})).status,200);
+    const current=(await commerceAccountProjection(env,identity.userId)).orders.find(o=>o.orderId===bundleOrder);
+    assert.equal(current.state,amount<bundleSession.amount_total?'PARTIALLY_REFUNDED':'REFUNDED');
+  }
   const account=await commerceAccountProjection(env,identity.userId);assert.equal(account.orders.find(o=>o.orderId===bundleOrder).state,'REFUNDED');assert(account.entitlements.some(x=>x.entitlementCode==='REPORT_BAZI_FULL'));
 });
 await test('provider price mismatch is review-required without grants; portal cannot select another customer',async()=>{
@@ -252,7 +290,7 @@ await test('unknown order or absent metadata records terminal review without gra
   assert.equal((await commerceAccountProjection(env,identity.userId)).entitlements.length,before);
 });
 await test('bilingual bundle settlement persists one language across every child and blocks tampered provider price',async()=>{
- for(const [productId,count,total] of [['COM-REPORT-BUNDLE-2',2,10900],['COM-REPORT-BUNDLE-3',3,15900]]){
+ for(const [productId,count,total] of [['COM-REPORT-BUNDLE-2',2,16900],['COM-REPORT-BUNDLE-3',3,22900]]){
   const selectedProducts=standardBundleProducts().slice(0,count);
   const r=await commerceApi(context({productId,selectedProducts,reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}),'checkout');assert.equal(r.status,201);const result=await r.json();
   const session=[...sessions.values()].find(s=>s.metadata.order_id===result.orderId);assert.equal(session.amount_total,total);session.payment_status='paid';
@@ -265,7 +303,7 @@ await test('bilingual bundle settlement persists one language across every child
  assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_purchases WHERE checkout_attempt_id=?').get(result.orderId).n,0);
 });
 await test('bundle language policy: six totals, order-level modifier, browser totals ignored',async()=>{
- for(const [suffix,count,base,total] of [['2',2,9900,10900],['3',3,14900,15900]])for(const bilingual of [false,true]){
+ for(const [suffix,count,base,total] of [['2',2,15900,16900],['3',3,21900,22900]])for(const bilingual of [false,true]){
   const productId=`COM-REPORT-BUNDLE-${suffix}`,selectedProducts=standardBundleProducts().slice(0,count);
   const response=await commerceApi(context({productId,selectedProducts,reportLanguageMode:bilingual?'BILINGUAL':'SINGLE',reportLocale:bilingual?'bilingual':'en',amount:1,surcharge:1,total:16900}),'checkout');
   assert.equal(response.status,201);const {orderId}=await response.json();
@@ -284,5 +322,5 @@ await test('bundle language policy: six totals, order-level modifier, browser to
  const altered={...legacy,pricingVersion:'UNKNOWN'};assert.throws(()=>validateOrderReportPresentation(product,{...legacyOrder,context_json:JSON.stringify({reportPresentation:altered})}));
 });
 fs.mkdirSync('docs/qa/commerce-stripe-r1',{recursive:true});
-fs.writeFileSync('docs/qa/commerce-stripe-r1/machine-results.json',JSON.stringify({work:'COM-STRIPE-R1',status:'PASS',cases,providerEndToEnd:'NOT_RUN',humanReview:'PENDING',liveOperations:'NOT_EXECUTED'},null,2)+'\n');
+fs.writeFileSync('docs/qa/commerce-stripe-r1/machine-results.json',JSON.stringify({work:'COM-STRIPE-R1',status:'PASS',cases,executionScope:isolatedCheckoutFixture?'LOCAL_SYNTHETIC_PRICE_BINDINGS_NETWORK_DISABLED':'LOCAL_FIXTURES',realQaReadiness:isolatedCheckoutFixture?'OWNER_CONFIRMED_SANDBOX_READBACK_NOT_RUN':'NOT_VERIFIED',providerEndToEnd:'NOT_RUN',humanReview:'PENDING',liveOperations:'NOT_EXECUTED'},null,2)+'\n');
 sqlite.close();console.log(`COM-STRIPE-R1: ${cases.length} machine groups PASS (local fixtures; provider E2E NOT_RUN).`);
