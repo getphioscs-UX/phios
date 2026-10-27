@@ -4,3 +4,10 @@ export const REPORT_VISUAL_ARCHITECTURE_VERSION='REPORT-VISUAL-ASSET-R2';
 const rows=[['BZR','BAZI_FULL_REPORT'],['AST','ASTROLOGY_FULL_REPORT'],['ZWR','ZIWEI_FULL_REPORT'],['PROFILE','PROFILE_FULL_REPORT'],['ECR','ECR_FULL_REPORT'],['NUM','NUMEROLOGY_FULL_REPORT'],['HD','HD_FULL_REPORT'],['CROSS','CROSS_FULL_REPORT']];
 export const REPORT_VISUAL_ARCHITECTURE=Object.freeze(Object.fromEntries(rows.map(([methodId,productId])=>[methodId,Object.freeze({methodId,productId,masterSectionMode:methodId==='BZR'?'DYNAMIC':'FIXED',contentLanguagePolicy:'CUSTOMER_SELECTION',bodyBackgroundPolicy:'APPROVED_REPORT_BODY_REQUIRED_ON_CONTENT_AND_CONTINUATION',fixedAssetLanguagePolicy:['PROFILE','ECR'].includes(methodId)?'BILINGUAL_SHARED':'MATCH_APPROVED_LANGUAGE_VARIANT',requiredFrontMatterCount:['PROFILE','ECR'].includes(methodId)?5:null,publicationReadiness:['NUM','HD','CROSS'].includes(methodId)?'PENDING':'BLOCKED',assetManifestVersion:REPORT_VISUAL_ARCHITECTURE_VERSION,assetManifest:'content/reports/shared/report-visual-assets-r2.json',authority:'Owner CODEX MASTER EXECUTION R2 2026-10-26',customerPublishable:false})])));
 export function reportVisualArchitecture(methodId){const p=REPORT_VISUAL_ARCHITECTURE[methodId];if(!p)throw Error('REPORT_VISUAL_METHOD_UNKNOWN');return p;}
+// NUM R2 local candidate: shared artwork does not change purchased body language
+// or the existing per-language editorial pages. Other methods keep their policy.
+export function fixedReportAssetLanguage({methodId,pageRole,contentLanguage}){
+ const p=reportVisualArchitecture(methodId);
+ if(methodId==='NUM')return pageRole==='FIXED_MASTER_SECTION'?'bilingual':contentLanguage;
+ return p.fixedAssetLanguagePolicy==='BILINGUAL_SHARED'?'bilingual':contentLanguage;
+}

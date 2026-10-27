@@ -1,4 +1,4 @@
-import pathlib,json,sys,subprocess,concurrent.futures
+import pathlib,json,sys,subprocess,concurrent.futures,tempfile,shutil
 import pdfplumber
 from pypdf import PdfReader
 root=pathlib.Path(sys.argv[1]);out=root/'r33-publication';results=json.loads((out/'pdf-results.json').read_text(encoding='utf8'))['results']
@@ -36,11 +36,14 @@ def inspect(result):
  text_checks=json.loads((directory/'text-extraction-checks.json').read_text())
  detail={'locale':locale,'pages':len(reader.pages),'pageChecks':page_checks,'fonts':list(font_checks.values()),'textIntegrity':text_checks,'normalization':'Markdown layout markers, whitespace and NFKC ligatures only; source bytes stay exact.'}
  (directory/'pdf-inspection.json').write_text(json.dumps(detail,indent=2),encoding='utf8')
- pages=directory/'pages';pages.mkdir(exist_ok=True)
+ keep_images='--keep-review-images' in sys.argv
+ pages=directory/'pages' if keep_images else pathlib.Path(tempfile.mkdtemp(prefix='r33-raster-'));pages.mkdir(exist_ok=True)
  command=[str(poppler),'-scale-to','1000','-png',result['file'],str(pages/'page')]
  log=subprocess.run(command,capture_output=True);(directory/'poppler-render.log').write_bytes(log.stdout+log.stderr)
- if log.returncode:raise RuntimeError('POPPLER_RENDER_FAILED')
- return {'locale':locale,'pages':len(reader.pages),'integrityPass':sum(c['pass'] for c in text_checks),'integrityTotal':len(text_checks),'a4All':all(p['a4'] for p in page_checks),'fullBackgroundAll':all(p.get('backgroundCoversMediaBox',True) and p.get('actualFullMediaImageCount',1)>0 for p in page_checks),'unsafeTextPages':[p['page'] for p in page_checks if p.get('unsafeCharacters',0)>0],'fontEmbedFailures':[f['font'] for f in font_checks.values() if not f['embedded'] and not f['standard14']],'renderedPages':len(list(pages.glob('page-*.png')))}
+ if log.returncode:raise RuntimeError('POPPLER_RENDER_FAILED; diagnostic images retained: '+str(pages))
+ rendered_count=len(list(pages.glob('page-*.png')))
+ if not keep_images:shutil.rmtree(pages)
+ return {'locale':locale,'pages':len(reader.pages),'integrityPass':sum(c['pass'] for c in text_checks),'integrityTotal':len(text_checks),'a4All':all(p['a4'] for p in page_checks),'fullBackgroundAll':all(p.get('backgroundCoversMediaBox',True) and p.get('actualFullMediaImageCount',1)>0 for p in page_checks),'unsafeTextPages':[p['page'] for p in page_checks if p.get('unsafeCharacters',0)>0],'fontEmbedFailures':[f['font'] for f in font_checks.values() if not f['embedded'] and not f['standard14']],'renderedPages':rendered_count,'retainedImages':keep_images}
 with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:checks=list(pool.map(inspect,results))
 (out/'pdf-all-page-inspection.json').write_text(json.dumps({'reports':checks,'privateScreenshots':True},indent=2),encoding='utf8')
 print(json.dumps({'reports':checks,'pagesRasterized':sum(c['renderedPages'] for c in checks)}))

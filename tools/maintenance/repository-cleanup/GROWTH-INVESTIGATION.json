@@ -1,0 +1,249 @@
+{
+  "status": "PARTIAL_GROWTH_OBSERVED_HISTORICAL_DROP_NOT_FULLY_ATTRIBUTED",
+  "auditedAtUtc": "2026-10-27T07:27:01.3734963Z",
+  "historicalMeasurementAudit": {
+    "originalRawToolEventsFound": false,
+    "matchingEventsWereLaterQuotedMessages": true,
+    "peakBytes": 25748410368,
+    "endBytes": 2903420928,
+    "dropBytes": 22844989440,
+    "unit": "bytes; decimal GB 1e9; GiB 1073741824",
+    "peakTimeBoundUtc": [
+      "2026-10-27T07:04:39Z",
+      "2026-10-27T07:05:47.042Z"
+    ],
+    "peakTimeQualification": "lower bound is screenshot deletion manifest mtime; upper bound is first retained quote. Exact measurement timestamp unavailable.",
+    "finalResultMtimeUtc": "2026-10-27T07:09:47Z",
+    "sameDriveEvidence": "Original commands requested Get-PSDrive C and fs.statfsSync(C:/phios), original capacity 509722226688 equals present C: capacity. Original serial was not captured; historical serial cannot be retroactively proved.",
+    "presentDrive": {
+      "drive": "C:",
+      "label": "Windows-SSD",
+      "serial": "3472030B",
+      "capacity": 509722226688
+    }
+  },
+  "verifiedRounds": [
+    {
+      "utc": "2026-10-27T07:24:56.569Z",
+      "freeBytes": 2463178752,
+      "drive": "C:",
+      "label": "Windows-SSD",
+      "serial": "3472030B",
+      "packBytes": 2138495941,
+      "metadataScanMs": 9677,
+      "boundedDirectories": [
+        "C:\\phios\\.git\\objects",
+        "C:\\phios\\.tmp",
+        "C:\\phios\\tmp",
+        "C:\\phios\\tools\\review",
+        "C:\\phios\\.worktrees\\pr6-ebook-closure",
+        "C:\\phios\\.worktrees\\tarot-pr8-safe",
+        "C:\\Users\\Guest Account\\.codex\\worktrees\\pages-final-candidate\\phios",
+        "C:\\Users\\Guest Account\\.codex\\worktrees\\report-narrative-validation\\phios"
+      ]
+    },
+    {
+      "utc": "2026-10-27T07:25:53.127Z",
+      "freeBytes": 2351980544,
+      "drive": "C:",
+      "label": "Windows-SSD",
+      "serial": "3472030B",
+      "packBytes": 2138495941,
+      "metadataScanMs": 11513,
+      "boundedDirectories": [
+        "C:\\phios\\.git\\objects",
+        "C:\\phios\\.tmp",
+        "C:\\phios\\tmp",
+        "C:\\phios\\tools\\review",
+        "C:\\phios\\.worktrees\\pr6-ebook-closure",
+        "C:\\phios\\.worktrees\\tarot-pr8-safe",
+        "C:\\Users\\Guest Account\\.codex\\worktrees\\pages-final-candidate\\phios",
+        "C:\\Users\\Guest Account\\.codex\\worktrees\\report-narrative-validation\\phios"
+      ]
+    },
+    {
+      "utc": "2026-10-27T07:26:27.397Z",
+      "freeBytes": 2102808576,
+      "drive": "C:",
+      "label": "Windows-SSD",
+      "serial": "3472030B",
+      "packBytes": 2138495941,
+      "metadataScanMs": 19392,
+      "boundedDirectories": [
+        "C:\\phios\\.git\\objects",
+        "C:\\phios\\.tmp",
+        "C:\\phios\\tmp",
+        "C:\\phios\\artifacts",
+        "C:\\phios\\tools\\review",
+        "C:\\phios\\.worktrees\\pr6-ebook-closure",
+        "C:\\phios\\.worktrees\\tarot-pr8-safe",
+        "C:\\Users\\Guest Account\\.codex\\worktrees\\pages-final-candidate\\phios",
+        "C:\\Users\\Guest Account\\.codex\\worktrees\\report-narrative-validation\\phios"
+      ]
+    }
+  ],
+  "initialObservationRounds": [
+    {
+      "utc": "2026-10-27T07:17:55.981Z",
+      "freeBytes": 2175954944
+    },
+    {
+      "utc": "2026-10-27T07:18:27.019Z",
+      "freeBytes": 2627133440
+    },
+    {
+      "utc": "2026-10-27T07:18:59.437Z",
+      "freeBytes": 2387456000
+    }
+  ],
+  "finalObservation": {
+    "utc": "2026-10-27T07:27:01.3734963Z",
+    "drive": "C:",
+    "label": "Windows-SSD",
+    "serial": "3472030B",
+    "capacity": 509722226688,
+    "freeBytes": 1961590784,
+    "pagefile": {
+      "Name": "C:\\pagefile.sys",
+      "AllocatedBaseSize": 27079,
+      "CurrentUsage": 7233,
+      "PeakUsage": 7457
+    },
+    "pagefileBytes": 28394450944,
+    "pagefileModifiedUtc": "2026-10-27T07:13:21.3080295Z"
+  },
+  "observedGrowthGroups": {
+    "HD R64 current author review": {
+      "observedFiles": 84,
+      "observedFinalBytes": 23612498,
+      "knownPositiveSizeDeltaBytes": 0
+    },
+    "Other active project work": {
+      "observedFiles": 6,
+      "observedFinalBytes": 134704,
+      "knownPositiveSizeDeltaBytes": 125
+    },
+    "This audit lightweight evidence": {
+      "observedFiles": 4,
+      "observedFinalBytes": 269913,
+      "knownPositiveSizeDeltaBytes": 130078
+    },
+    "Codex temporary Git index": {
+      "observedFiles": 3,
+      "observedFinalBytes": 9730215,
+      "knownPositiveSizeDeltaBytes": 0
+    },
+    "Numerology R20 current author review": {
+      "observedFiles": 7,
+      "observedFinalBytes": 36476559,
+      "knownPositiveSizeDeltaBytes": 1667
+    }
+  },
+  "growthGroupCaveat": "Observed final bytes are unique visible changed-file sizes, not exact total allocated interval growth. Newly discovered files may have existed outside the preceding scan bound. Bounded directory totals must not be subtracted across rounds when enumeration coverage differs.",
+  "attribution": [
+    {
+      "source": "HD R64",
+      "processes": [
+        {
+          "pid": 760,
+          "script": "tools/review/hd-r6/import-20261027/r64/physical-qa.py"
+        },
+        {
+          "pid": 56476,
+          "script": "tools/review/hd-r6/import-20261027/r64/render.mjs"
+        },
+        {
+          "pid": 37716,
+          "script": "tools/review/hd-r6/import-20261027/r64/render.mjs"
+        }
+      ],
+      "paths": [
+        ".tmp/hd-r64/pages/",
+        "tools/review/hd-r6/import-20261027/r64/pdf-contact-*.png",
+        "output/pdf/hd-r64-owner-review/"
+      ],
+      "basis": "Process command/start/IO plus script-declared destinations and contemporaneous filesystem notifications. Active other-window development; retained."
+    },
+    {
+      "source": "Pages build in other task",
+      "processes": [
+        {
+          "pid": 19940,
+          "script": "scripts/build-cloudflare-pages.mjs",
+          "observedIntervalWriteBytes": 240569241
+        },
+        {
+          "pid": 56716,
+          "script": "scripts/build-cloudflare-pages.mjs",
+          "observedTwoIntervalWriteBytes": 235610889
+        }
+      ],
+      "paths": [
+        ".worktrees/tarot-pr8-safe/.pages-output/"
+      ],
+      "basis": "Process parent run-zero-cost-regression, script command, simultaneous generated file notifications. IO is not equivalent to exact file allocation; no forced termination."
+    },
+    {
+      "source": "Numerology R20",
+      "processes": [
+        {
+          "pid": 34084,
+          "script": "tools/review/numerology-r20/build.mjs --run --reuse-snapshot"
+        }
+      ],
+      "paths": [
+        "output/pdf/numerology-r20/zh-Hans/pages/"
+      ],
+      "basis": "Active other-window script and contemporaneous changed output files; no cleanup of current review."
+    },
+    {
+      "source": "Codex automatic temporary Git diff index",
+      "paths": [
+        "%LOCALAPPDATA%/Temp/agent-host-git-diff-*/index"
+      ],
+      "basis": "Observed git add -A --pathspec-from-file=... command and temporary index creation/disappearance. Small MB-scale files; not evidence of 22.8 GB accumulation."
+    }
+  ],
+  "pagefile": {
+    "path": "C:/pagefile.sys",
+    "bytes": 28394450944,
+    "lastModifiedUtc": "2026-10-27T07:13:21.3080295Z",
+    "allocatedMiB": 27079,
+    "attribution": "Potential contributor only: no pre-cleanup allocated-size baseline. Do not attribute the entire historical drop. No pagefile/system-setting change or unrelated app termination."
+  },
+  "git": {
+    "originalObjectsBytes": 19424795731,
+    "followupObjectsBytes": 19434565588,
+    "observedDifferenceBytes": 9769857,
+    "packBytesStableAcrossVerifiedRounds": true,
+    "rewrite": false
+  },
+  "actions": {
+    "largeBuildsStartedByThisTask": 0,
+    "pdfRenders": 0,
+    "screenshots": 0,
+    "dependencyInstalls": 0,
+    "worktreeCheckouts": 0,
+    "processesTerminated": [],
+    "newJunkDeletedBytes": 0,
+    "reasonNoTerminationOrDeletion": "No surviving writer was established as an abandoned generator owned by this cleanup. Current author-review files belong to other active tasks; automatic temporary Git indexes disappear normally. Finite sampling processes exited and watchers closed.",
+    "deletedTarReappeared": false,
+    "sampling": "Finite three-round loops only; all completed. Initial fair-scan aggregation had mixed path separators and was not used to claim directory growth. Corrected normalized round report is the authoritative directory evidence. Metadata calls sometimes overran the target budget under load; actual intervals and scan times recorded."
+  },
+  "stability": {
+    "confirmed": false,
+    "finalFreeBytes": 1961590784,
+    "reason": "Other tasks and browser/app writes continue. Verified free space changed 2.463 -> 2.352 -> 2.103 GB; final 1.962 GB. No claim that global C: writes stopped."
+  },
+  "unresolved": [
+    "22,844,989,440-byte historical free-space drop has no complete retrospective path/process accounting.",
+    "Exact peak measurement timestamp and historical volume serial were never persisted; later quote timestamps cannot substitute for original measurements.",
+    "Pagefile prior size is unknown; its present 28.394 GB allocation is not proof of growth of that amount.",
+    "Bounded scans do not cover every file, system allocation or browser cache; cumulative process IO includes non-file IO.",
+    "No authorization inferred to terminate other development tasks or the desktop app."
+  ],
+  "providerCalls": 0,
+  "commit": false,
+  "push": false,
+  "deploy": false
+}

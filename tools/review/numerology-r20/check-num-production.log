@@ -1,0 +1,15 @@
+node:fs:441
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open 'C:\phios\personal-runtime.html'
+    at Object.readFileSync (node:fs:441:20)
+    at text (file:///C:/phios/scripts/check-num-production.mjs:7:18)
+    at file:///C:/phios/scripts/check-num-production.mjs:49:12 {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\phios\\personal-runtime.html'
+}
+
+Node.js v24.18.0

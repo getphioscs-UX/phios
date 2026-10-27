@@ -1,0 +1,4 @@
+import fs from 'node:fs';import {createHash} from 'node:crypto';
+const d='tools/review/hd-r6/import-20261027/r63/',old=JSON.parse(fs.readFileSync('.tmp/hd-report-publication-r51/17-ASSET-MANIFEST.json')).rows.find(r=>r.section===11);let result;
+try{const r=await fetch(old.url,{signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error('HTTP_'+r.status);const b=Buffer.from(await r.arrayBuffer()),sha256=createHash('sha256').update(b).digest('hex'),file=d+'SEC11-CURRENT-PUBLIC.webp';fs.writeFileSync(file,b);result={at:new Date().toISOString(),http:r.status,url:old.url,etag:r.headers.get('etag'),file,bytes:b.length,sha256,oldSHA256:old.sha256,sameAsR51:old.sha256===sha256,semanticAcceptanceNotInferred:true};}catch(e){result={at:new Date().toISOString(),url:old.url,status:'UNVERIFIED',error:e.message,notAbsence:true};}
+fs.writeFileSync(d+'SEC11-FRESH-READ.json',JSON.stringify(result,null,2)+'\n');console.log(result);

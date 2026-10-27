@@ -1,21 +1,26 @@
 import {PublicAssetResolutionError,isAssetVerificationRenderable,resolvePublicAsset} from '../../assets/js/runtime/web-production/asset-resolver.js';
-import {reportVisualArchitecture} from './report-visual-architecture.js';
+import {reportVisualArchitecture,fixedReportAssetLanguage} from './report-visual-architecture.js';
 import visualManifest from '../../content/reports/shared/report-visual-assets-r2.json';
 const fixedVisualError=message=>Object.assign(new Error(message),{code:message.split(':')[0],status:409});
 
 export function reportContentLocale(locale){if(locale==='zh'||locale==='ZH')return 'zh-Hans';if(locale==='EN')return 'en';if(locale==='BILINGUAL')return 'bilingual';if(!['zh-Hans','en','bilingual'].includes(locale))throw fixedVisualError('REPORT_CONTENT_LANGUAGE_INVALID');return locale;}
-export function resolveFixedReportPage({methodId,pageId,contentLanguage,manifest=visualManifest}={}){
+function resolveFixedReportPageInternal({methodId,pageId,contentLanguage,manifest=visualManifest}={},localReview=false){
  const policy=reportVisualArchitecture(methodId),locale=reportContentLocale(contentLanguage);
- if(policy.publicationReadiness==='PENDING')throw fixedVisualError('REPORT_FIXED_SECTIONS_PENDING_APPROVAL');
- const language=policy.fixedAssetLanguagePolicy==='BILINGUAL_SHARED'?'bilingual':locale;
+ if(policy.publicationReadiness==='PENDING'&&!(localReview&&methodId==='NUM'))throw fixedVisualError('REPORT_FIXED_SECTIONS_PENDING_APPROVAL');
+ const role=manifest.assets.find(a=>a.methodId===methodId&&a.pageId===pageId)?.kind;
+ const language=fixedReportAssetLanguage({methodId,pageRole:role,contentLanguage:locale});
  const rows=manifest.assets.filter(a=>a.methodId===methodId&&a.pageId===pageId&&a.language===language);
  if(rows.length!==1)throw fixedVisualError('REPORT_FIXED_ASSET_MISSING:'+methodId+':'+pageId+':'+language);
  const a=rows[0];
  if(!['COVER','FIXED_PRELIMINARY_PAGE','FIXED_MASTER_SECTION'].includes(a.kind))throw fixedVisualError('REPORT_FIXED_PAGE_ROLE_INVALID');
  if(a.kind==='FIXED_MASTER_SECTION'&&policy.masterSectionMode!=='FIXED')throw fixedVisualError('REPORT_DYNAMIC_MASTER_MUST_USE_NATIVE_OWNER');
- if(a.active!==true||a.customerSpecific!==false||a.approval!=='OWNER_APPROVED_R2_20261026'||a.verification!=='PUBLIC_BYTES_DECODED_AND_VISUALLY_REVIEWED'||!/^images\/reports\//.test(a.objectKey)||!/^https:\/\/pub-1967bc5812ee4164b19a806fb1427021\.r2\.dev\//.test(a.url)||!a.url.includes('/'+a.objectKey+'?v='+a.sha256)||!/^[a-f0-9]{64}$/.test(a.sha256)||!(a.width>0&&a.height>0))throw fixedVisualError('REPORT_FIXED_ASSET_NOT_VERIFIED');
+ if(a.active!==true||a.customerSpecific!==false||!(a.approval==='OWNER_APPROVED_R2_20261026'||(methodId==='NUM'&&a.approval==='OWNER_APPROVED_NUM_R20_20261027'))||a.verification!=='PUBLIC_BYTES_DECODED_AND_VISUALLY_REVIEWED'||!/^images\/reports\//.test(a.objectKey)||!/^https:\/\/pub-1967bc5812ee4164b19a806fb1427021\.r2\.dev\//.test(a.url)||!a.url.includes('/'+a.objectKey+'?v='+a.sha256)||!/^[a-f0-9]{64}$/.test(a.sha256)||!(a.width>0&&a.height>0))throw fixedVisualError('REPORT_FIXED_ASSET_NOT_VERIFIED');
  return Object.freeze({...a,contentLanguage:locale,fixedAssetLanguage:language,masterSectionMode:policy.masterSectionMode});
 }
+export function resolveFixedReportPage(options){return resolveFixedReportPageInternal(options,false);}
+// Local publication QA only. No production handler calls this adapter; normal
+// resolveFixedReportPage continues to enforce NUM's PENDING release gate.
+export function resolveNumFixedPageForLocalReview(options){if(options?.methodId!=='NUM')throw fixedVisualError('NUM_LOCAL_REVIEW_ONLY');return resolveFixedReportPageInternal(options,true);}
 const escapeVisual=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const FIXED_REPORT_PAGE_CSS='.report-fixed-page{display:block;position:relative;aspect-ratio:210/297;width:100%;padding:0!important;margin:0;overflow:hidden;background:white;break-after:page}.report-fixed-page>img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}@media print{.report-fixed-page{width:210mm!important;height:297mm!important;aspect-ratio:auto;break-inside:avoid}}';
 export function renderFixedReportPage(options){
@@ -27,7 +32,7 @@ export function resolveReportBodyAsset({methodId,manifest=visualManifest}={}){
  const rows=manifest.assets.filter(a=>a.methodId===methodId&&a.pageId==='BODY');
  if(rows.length!==1)throw fixedVisualError('REPORT_BODY_ASSET_MISSING:'+methodId);
  const a=rows[0];
- if(a.kind!=='OTHER_APPROVED_REPORT_PAGE'||a.active!==true||a.verification!=='PUBLIC_BYTES_DECODED_AND_VISUALLY_REVIEWED'||a.approval!=='OWNER_APPROVED_R2_20261026'||!a.objectKey.endsWith('-BODY.webp')||!a.objectKey.startsWith('images/reports/')||!a.url.startsWith('https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/')||!a.url.includes('/'+a.objectKey+'?v='+a.sha256)||!/^[a-f0-9]{64}$/.test(a.sha256)||!(a.width>0&&a.height>0))throw fixedVisualError('REPORT_BODY_ASSET_UNAVAILABLE:'+methodId);
+ if(a.kind!=='OTHER_APPROVED_REPORT_PAGE'||a.active!==true||a.verification!=='PUBLIC_BYTES_DECODED_AND_VISUALLY_REVIEWED'||!(a.approval==='OWNER_APPROVED_R2_20261026'||(methodId==='NUM'&&a.approval==='OWNER_APPROVED_NUM_R20_20261027'))||!a.objectKey.endsWith('-BODY.webp')||!a.objectKey.startsWith('images/reports/')||!a.url.startsWith('https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/')||!a.url.includes('/'+a.objectKey+'?v='+a.sha256)||!/^[a-f0-9]{64}$/.test(a.sha256)||!(a.width>0&&a.height>0))throw fixedVisualError('REPORT_BODY_ASSET_UNAVAILABLE:'+methodId);
  return Object.freeze({...a,pageRole:'BODY_CONTENT',backgroundOnly:true});
 }
 export const REPORT_BODY_PAGE_CSS='.report-body-backdrop{display:none}.report-customer-content{position:relative;background-image:var(--report-body-image);background-size:100% 297mm;background-repeat:repeat-y;background-position:center top;box-decoration-break:clone;-webkit-box-decoration-break:clone;min-height:297mm;padding:22mm 18mm;break-after:page;overflow-wrap:anywhere}.report-body-reading-field{padding:5mm;background:rgba(255,253,247,.94);box-decoration-break:clone;-webkit-box-decoration-break:clone}.report-customer-content h1,.report-customer-content h2,.report-customer-content h3,.report-customer-content dt{break-after:avoid}.report-customer-content p,.report-customer-content dd{orphans:3;widows:3}.report-customer-content pre{white-space:pre-wrap;overflow-wrap:anywhere}@media print{.report-body-backdrop{display:block;position:fixed;inset:0;z-index:-1;background-image:var(--report-body-image);background-size:100% 100%;background-position:center;print-color-adjust:exact;-webkit-print-color-adjust:exact}.report-customer-content{background:transparent;min-height:0;box-decoration-break:clone;-webkit-box-decoration-break:clone}}';

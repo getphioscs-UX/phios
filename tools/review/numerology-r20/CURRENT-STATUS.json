@@ -1,0 +1,86 @@
+{
+  "status": "PARTIAL_LOCAL_REVIEW_CANDIDATE",
+  "SOURCE": "PASS_EXISTING_ACCEPTED_SOURCES_REUSED_NOT_NEW_EDITORIAL_ACCEPTANCE",
+  "CALCULATION": "PARTIAL_ENERGY_DERIVED_DATE_GAP",
+  "SEMANTIC": "PARTIAL_EDITORIAL_CANDIDATE",
+  "BILINGUAL": "PARTIAL_ALIGNED_UNITS_NOT_AUTHOR_ACCEPTED",
+  "ASSETS": "PASS_26_SOURCE_BYTES_9_SHARED_INSERTS",
+  "PDF": "PASS_THREE_33_PAGE_LOCAL_PDFS_NOT_PRINT_PROOF",
+  "CLOUD": "NOT_EXECUTED",
+  "ENTITLEMENT": "PASS_ISOLATED_QA_ONLY",
+  "PRIVATE": "PASS_LOCAL_TRANSPORT_ONLY",
+  "DEPLOYED": "NO",
+  "LIVE": "NOT_EXECUTED",
+  "commercialContract": {
+    "singleLanguageMYR": 39,
+    "bilingualAddOnMYR": 10,
+    "bilingualMYR": 49,
+    "modelBudgetUSD": 2,
+    "includedFollowups": 4,
+    "productionActivated": false
+  },
+  "providerCalls": 0,
+  "productionWrites": 0,
+  "r2Writes": 0,
+  "stripeMutations": 0,
+  "commit": 0,
+  "push": 0,
+  "deploy": 0,
+  "gaps": [
+    [
+      "SEMANTIC / BILINGUAL",
+      "PARTIAL",
+      "19页复用真实计算与已准入含义，但新增组织、图表和观察问题为本地编辑候选，未取得作者正文接受。P17不把姓名平面分布扩写为职业能力结论。"
+    ],
+    [
+      "CALCULATION",
+      "PARTIAL",
+      "原生 Energy 流年在闰日出生、非闰年目标日期上生成无效派生日期；该分支保持未知，独立 Western 周期保留。Y及未核定姓名规则不补造。"
+    ],
+    [
+      "CLOUD / ENTITLEMENT",
+      "BLOCKED",
+      "本轮为现有PWS、PRIVATE_REPORTS和下载授权接口的隔离注入，生产NUM适配器未登记。订单付款状态由合成QA SQL提供，不是Stripe签名Webhook自动发放验证。"
+    ],
+    [
+      "PRIVATE / DEPLOYED / LIVE",
+      "NOT_EXECUTED",
+      "未执行云端水印、正式账户、生产部署或真实支付；新出版内容与现有生产composer/profile准入需一致核定。"
+    ],
+    [
+      "VISUAL PRINT",
+      "PARTIAL",
+      "源图约128 dpi；PDF采用原尺寸JPEG quality100 4:4:4编码以满足既有32MiB上限。原WebP字节保留，PDF不是像素无损；PSNR证据单列。尚无实体印刷打样。"
+    ]
+  ],
+  "inputs": "10de15a265253b59fdd281e3d300ff9504bad1cac5f9d9107b7856c30ecc4526",
+  "pdfs": [
+    {
+      "locale": "zh-Hans",
+      "file": "output/pdf/numerology-r20/zh-Hans/PHI-OS-NUMEROLOGY-R20-zh-Hans.pdf",
+      "pages": 33,
+      "bytes": 29690161,
+      "sha256": "b9469fd27c31266458931aa753a6dd3e1bdf20bc97b4513c125c60c065b73b36",
+      "status": "PASS_LOCAL_PDF_COUNT_AND_SIZE",
+      "snapshotDigest": "e73695ead98079223b20b5286865c5b5c63737873fa8811bddf880256f02e8bb"
+    },
+    {
+      "locale": "en",
+      "file": "output/pdf/numerology-r20/en/PHI-OS-NUMEROLOGY-R20-en.pdf",
+      "pages": 33,
+      "bytes": 29538690,
+      "sha256": "3676a296169395ba0951f182880a4b61655edf879a8c34560ccfcdc995c56aa1",
+      "status": "PASS_LOCAL_PDF_COUNT_AND_SIZE",
+      "snapshotDigest": "e73695ead98079223b20b5286865c5b5c63737873fa8811bddf880256f02e8bb"
+    },
+    {
+      "locale": "bilingual",
+      "file": "output/pdf/numerology-r20/bilingual/PHI-OS-NUMEROLOGY-R20-bilingual.pdf",
+      "pages": 33,
+      "bytes": 30030183,
+      "sha256": "1a07b5c2070c7b0a0533ffae7bc83093ab1d85190a6dfb15148a5a74a4ade229",
+      "status": "PASS_LOCAL_PDF_COUNT_AND_SIZE",
+      "snapshotDigest": "e73695ead98079223b20b5286865c5b5c63737873fa8811bddf880256f02e8bb"
+    }
+  ]
+}

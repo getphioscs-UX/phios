@@ -13,9 +13,10 @@ style='body{font:16px/1.7 system-ui;background:#f8f5ea;color:#173a42;margin:30px
 parts=['<!doctype html><meta charset="utf-8"><title>Private R3.3 Publication Review</title><style>'+style+'</style><h1>PHI Configuration R3.3 · 私人整本审阅</h1><p>PARTIAL · 本地整合完成，未获商业或生产准入。正文原文保持不变。不得将本文件或其链接内容上传公共资产。</p>']
 parts+=['<p><a href="CONTENT-QUALITY-REVIEW.html">完整重复与中英逐段对照</a> · <a href="20-MANUSCRIPT-ACCEPTANCE-PROOF.json">20 份作者接受证明</a> · <a href="FINAL-TEXT-INTEGRITY.json">最终原文与 PDF 完整性</a> · <a href="CALCULATION-SEMANTIC-DIFFERENCES.json">计算与语义差异</a> · <a href="REUSABLE-SEMANTIC-PREPARATION.json">77 项未准入复用候选</a></p>']
 for r in results:
- locale=r['locale'];directory=out/locale;maps=read(directory/'page-map.json');files={int(p.stem.split('-')[-1]):p for p in (directory/'pages').glob('page-*.png')};assert len(files)==r['pages']
+ locale=r['locale'];directory=out/locale;maps=read(directory/'page-map.json');files={int(p.stem.split('-')[-1]):p for p in (directory/'pages').glob('page-*.png')}
  parts.append('<article><h2>'+esc(locale)+' · '+str(r['pages'])+' 页</h2><p><a href="'+locale+'/'+pathlib.Path(r['file']).name+'">完整私人 PDF</a> · <a href="'+locale+'/page-map.json">逐页 page map</a> · <a href="'+locale+'/pdf-inspection.json">字体／背景／边界检查</a></p><div class="gallery">')
  for m in maps:
+  if m['page'] not in files:continue # PDF/page map remain authoritative; raster retention is opt-in.
   p=files[m['page']];parts.append('<figure><a href="'+p.relative_to(out).as_posix()+'"><img loading="lazy" src="'+p.relative_to(out).as_posix()+'" alt="Page '+str(m['page'])+'"></a><figcaption>P'+str(m['page'])+' · '+esc(m.get('assetId') or m.get('sectionId') or m['kind'])+'</figcaption></figure>')
  parts.append('</div></article>')
 parts.append('<article><h2>仍需人审／独立准入</h2><ul><li>SEC-07 批准原图顶部英文末行局部叠字；源图原样保留，未擅自重制。</li><li>全部固定图片的实际分辨率约 127.5 DPI，不能宣称高清印刷或人工 A4 打印验收通过。</li><li>部分章节末页较疏；逐页可读性、长段落节奏和双语完整语义仍需 Founder 出版审阅。</li><li>77 项复用候选保持未准入；作者个案接受不等于可向所有客户自动套用。</li><li>旧会员充值 FAIL 保留；真实 ECR Account 交付、Customer Admission、Shared Paid Adapter 与 Checkout 继续关闭。</li></ul></article>')

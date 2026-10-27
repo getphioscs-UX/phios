@@ -1,0 +1,36 @@
+
+> check:num-fp
+> node scripts/run-zero-cost-regression.mjs check:num-fp
+
+
+> check:num-fp-w0-w18
+> node scripts/run-zero-cost-regression.mjs check:num-fp-w0-w18
+
+✓ NUM-FP W0–W18 final production reconciliation passed. W16 remains 64/64; criterion-attested NUM-R7 succeeds historical W17; default cutover is active.
+
+> check:num-r1-r8
+> node scripts/run-zero-cost-regression.mjs check:num-r1-r8
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: NUM package-script authority projection changed
++ actual - expected
+
++ '333d7fe3c38ce08c9b681da7f2b43317141898cc9f038a71240a6bff0fe27894'
+- 'c11d47efd2658cc63e197448b0e75e4ec2385294d542a1252af7a663aa22081e'
+
+    at file:///C:/phios/scripts/check-num-r1-r8.mjs:21:652
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '333d7fe3c38ce08c9b681da7f2b43317141898cc9f038a71240a6bff0fe27894',
+  expected: 'c11d47efd2658cc63e197448b0e75e4ec2385294d542a1252af7a663aa22081e',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0
