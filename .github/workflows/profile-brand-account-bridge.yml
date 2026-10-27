@@ -1,0 +1,45 @@
+name: Profile brand and Account bridge QA
+on:
+  pull_request:
+    paths:
+      - 'perspectives/profile/index.html'
+      - 'account/index.html'
+      - 'assets/customer-ui/surfaces/profile-context-network-r2.css'
+      - 'assets/customer-ui/surfaces/profile-account-bridge.css'
+      - 'assets/customer-ui/js/surfaces/profile-account-bridge.js'
+      - 'assets/customer-ui/js/surfaces/account-profile-evidence-bridge.js'
+      - 'assets/customer-ui/js/surfaces/account-persons.js'
+      - 'scripts/check-profile-brand-account-bridge-r1.mjs'
+      - '.github/workflows/profile-brand-account-bridge.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  profile-account:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .node-version
+            package.json
+            package-lock.json
+            perspectives/profile/index.html
+            account/index.html
+            assets/images/branding/PHIOS-LOGO-MARK-v1.png
+            assets/customer-ui/surfaces/profile-context-network-r2.css
+            assets/customer-ui/surfaces/profile-account-bridge.css
+            assets/customer-ui/js/surfaces/profile-account-bridge.js
+            assets/customer-ui/js/surfaces/account-profile-evidence-bridge.js
+            assets/customer-ui/js/surfaces/account-persons.js
+            scripts/check-profile-brand-account-bridge-r1.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: node --check assets/customer-ui/js/surfaces/profile-account-bridge.js
+      - run: node --check assets/customer-ui/js/surfaces/account-profile-evidence-bridge.js
+      - run: node scripts/check-profile-brand-account-bridge-r1.mjs
