@@ -4,8 +4,10 @@ import pdfplumber
 from PIL import Image,ImageDraw
 d=Path('tools/review/hd-r6/import-20261027/r64');temp=Path('.tmp/hd-r64/pages');temp.mkdir(parents=True,exist_ok=True);final_images=d/'owner-final';final_images.mkdir(exist_ok=True)
 manifest=json.loads((d/'PDF-MANIFEST.json').read_text());poppler=Path('C:/Users/Guest Account/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/poppler/Library/bin/pdftoppm.exe');norm=lambda s:re.sub(r'\s+','',s)
-results=[]
+results=[];progress_file=d/'PHYSICAL-PROGRESS.json';script_hash=hashlib.sha256(Path(__file__).read_bytes()).hexdigest();prior_progress=json.loads(progress_file.read_text()) if progress_file.exists() else {'results':[]}
 for f in manifest['files']:
+ cached=next((x for x in prior_progress.get('results',[]) if x.get('format')==f['format'] and x.get('pdfSHA256')==f['sha256'] and x.get('qaScriptSHA256')==script_hash),None)
+ if cached:results.append(cached);continue
  fmt=f['format'];p=Path(f['path']);proj=json.loads((d/f'PROJECTION-{fmt}.json').read_text());texts=[];lineMap=[];cursor=0;bounds=[];stats=[];numbers=[];fonts=[]
  with pdfplumber.open(p) as pdf:
   assert len(pdf.pages)==f['pages'];assert hashlib.sha256(p.read_bytes()).hexdigest()==f['sha256']
@@ -49,7 +51,7 @@ for f in manifest['files']:
   dest=final_images/f'pdf-contact-{fmt}-{start//9+1}.png';sheet.save(dest);sheets.append(str(dest))
  for n in [1,2,3,sectionPages[4]['page'],sectionPages[10]['page'],f['pages']]:Image.open(images[n-1]).save(final_images/f'representative-{fmt}-{n}.png')
  result={'format':fmt,'pages':f['pages'],'paragraphs':len(proj['paragraphs']),'missingParagraphs':missing,'orderCorrect':positions==sorted(positions),'languageIsolation':isolation,'boundsFailures':bounds,'forbiddenLeaks':leaks,'splits':splits,'orphanFailures':[x for x in splits if x['orphan']],'lowDensityPages':[x for x in stats if x['lowDensity']],'sectionPages':sectionPages,'pageStats':stats,'fonts':sorted(set(fonts)),'contactSheets':sheets}
- result['status']='PASS_MACHINE_VISUAL_PENDING' if not missing and result['orderCorrect'] and isolation and not bounds and not leaks and not result['orphanFailures'] else 'FAIL';results.append(result)
+ result['status']='PASS_MACHINE_VISUAL_PENDING' if not missing and result['orderCorrect'] and isolation and not bounds and not leaks and not result['orphanFailures'] else 'FAIL';result['pdfSHA256']=f['sha256'];result['qaScriptSHA256']=script_hash;results.append(result);progress_file.write_text(json.dumps({'results':results},ensure_ascii=False,indent=2)+'\n',encoding='utf8')
 (d/'PHYSICAL-QA.json').write_text(json.dumps({'results':results,'scope':'Every physical page rendered, every selected paragraph checked, all17 chapters located, footer/margins/language/leaks checked. Contacts and representatives require actual visual inspection separately.'},ensure_ascii=False,indent=2)+'\n',encoding='utf8')
 print(json.dumps([{k:r[k] for k in ['format','pages','missingParagraphs','orderCorrect','languageIsolation','boundsFailures','forbiddenLeaks','orphanFailures','lowDensityPages','status']} for r in results],ensure_ascii=False))
 reg=json.loads((d/'RENDERER-REGRESSION.json').read_text());controls=[]

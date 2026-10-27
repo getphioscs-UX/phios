@@ -1,0 +1,14 @@
+import fs from'node:fs';
+let s=fs.readFileSync('tools/review/numerology-r20/build.mjs','utf8');
+s=s.replace("import{renderNumR20PublicationHtml}from'../../../functions/personal-reading/narrative/numerology-publication-html.js';","import{renderNumR21EditorialHtml}from'../../../functions/personal-reading/narrative/numerology-editorial-html.js';");
+s=s.replaceAll('output/pdf/numerology-r20','output/pdf/numerology-r21').replaceAll('tools/review/numerology-r20','tools/review/numerology-r21');
+s=s.replace("const snapshot=process.argv.includes('--reuse-snapshot')?JSON.parse(fs.readFileSync('.tmp/numerology-r20/PUBLICATION-SNAPSHOT.json')):await calculateNumPublicationSnapshot({canonicalInput:canonicalInput(sampleInput.birthDate),expansionInput:sampleInput,localReview:true})","const snapshot=JSON.parse(fs.readFileSync('.tmp/numerology-r20/PUBLICATION-SNAPSHOT.json'))");
+s=s.replace("fs.writeFileSync('.tmp/numerology-r20/PUBLICATION-SNAPSHOT.json',JSON.stringify(snapshot,null,2));",'');
+s=s.replace('renderNumR20PublicationHtml({snapshot,pages,locale,manifest,assets,fontUrl,localReview:true})',"renderNumR21EditorialHtml({snapshot,editorialSnapshot:JSON.parse(fs.readFileSync('.tmp/numerology-r21/EDITORIAL-SNAPSHOT.json')),locale,manifest,assets,fontUrl,localReview:true})");
+s=s.replace('const layout=await page.evaluate(',`await page.evaluate(({locale,input})=>{document.querySelectorAll('.reading').forEach(e=>e.classList.toggle('bilingual',locale==='bilingual'));document.querySelectorAll('header small,footer,.observation,.structure').forEach(e=>e.remove());const cover=document.querySelector('[data-page-id=P01]');for(const [key,value]of Object.entries({name:input.identityInput.fullBirthName,date:input.birthDate,time:locale==='zh-Hans'?'未提供':locale==='en'?'Not supplied':'未提供 / Not supplied'})){const e=document.createElement('span');e.className='cover-value cover-'+key;e.textContent=value;cover.append(e);}}, {locale,input:sampleInput});
+ const layout=await page.evaluate(`);
+s=s.replace('const failures=layout.filter',"fs.writeFileSync(folder+'/REPORT.html',await page.content());const failures=layout.filter");
+s=s.replace("if(fs.existsSync(file)&&!fs.existsSync('.tmp/numerology-r20/'+locale+'-RAW.pdf'))fs.copyFileSync(file,'.tmp/numerology-r20/'+locale+'-RAW.pdf');",'');
+s=s.replaceAll('PHI-OS-NUMEROLOGY-R20-','PHI-OS-NUMEROLOGY-R21-');fs.writeFileSync('tools/review/numerology-r21/build.mjs',s);
+const pages=JSON.parse(fs.readFileSync('.tmp/numerology-r21/EDITORIAL-PAGES.json')),snap=JSON.parse(fs.readFileSync('.tmp/numerology-r20/PUBLICATION-SNAPSHOT.json'));
+fs.writeFileSync('.tmp/numerology-r21/EDITORIAL-SNAPSHOT.json',JSON.stringify({origin:'OFFLINE_HANDOFF_REPLAY',calculationSnapshotDigest:snap.snapshotDigest,pages,publicationAllowed:false},null,2));

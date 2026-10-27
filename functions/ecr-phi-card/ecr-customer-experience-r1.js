@@ -1,3 +1,4 @@
+import {selectFixedCustomerReading} from './ecr-customer-reading-copy-r2.js';
 import {personIdentity} from '../account/canonical-person-store.js';
 import {createContinuityD1Store} from '../personal-reading/continuity/continuity-persistence-d1.js';
 import {sha256Stable} from '../interpretation-runtime/mir7-utils.js';
@@ -8,11 +9,11 @@ const GROUPS=['CORE','DRIVER','GIFT','TENSION','FIELD','PHASE'];
 const fail=(code,status=422)=>{throw Object.assign(Error(code),{status});};
 // Local-only adapter of existing selectors, verified identity, and continuity owner.
 // No production result resolver, entitlement expansion, provider, or checkout.
-export function createPhiCardCustomerExperience({context,deck,mapping,assets,admission,resolveOwnedResult}){
+export function createPhiCardCustomerExperience({context,deck,mapping,assets,admission,customerCopy,resolveOwnedResult}){
  const host=new URL(context.request.url).hostname;
  if(context.env.PHIOS_PHI_CARD_LOCAL!=='true'||!['localhost','127.0.0.1','[::1]'].includes(host))fail('CARD_LOCAL_ONLY',403);
  const owner=personIdentity(context).userId,store=createContinuityD1Store(context.env.RUNTIME_DB);
- const fixed=(id,locale)=>{if(!['en','zh-Hans'].includes(locale))fail('CARD_LANGUAGE_INVALID');const c=deck.cards.find(c=>c.cardId===id);if(!c)fail('CARD_NOT_FOUND',404);return {cardId:id,groupId:c.groupId,title:c.title[locale],subtitle:c.subtitle[locale],insight:c.oneLineInsight[locale],meaning:c.canonicalCustomerMeaning[locale],flowingExpression:c.flowingExpression[locale],strainedExpression:c.strainedExpression[locale],prompt:c.observationPrompt[locale],asset:assets.assets.find(a=>a.cardId===id)};};
+ const fixed=(id,locale)=>{if(!['en','zh-Hans'].includes(locale))fail('CARD_LANGUAGE_INVALID');const c=deck.cards.find(c=>c.cardId===id);if(!c)fail('CARD_NOT_FOUND',404);return {reading:selectFixedCustomerReading(customerCopy,c,locale),cardId:id,groupId:c.groupId,title:c.title[locale],subtitle:c.subtitle[locale],insight:c.oneLineInsight[locale],meaning:c.canonicalCustomerMeaning[locale],flowingExpression:c.flowingExpression[locale],strainedExpression:c.strainedExpression[locale],prompt:c.observationPrompt[locale],asset:assets.assets.find(a=>a.cardId===id)};};
  const address=(type,key)=>{if(typeof key!=='string'||!/^PCX-[a-f0-9]{40}$/.test(key))fail('CARD_RECORD_NOT_FOUND',404);return {subjectRef:owner,type,key};};
  const load=async(type,key)=>{const r=await store.get(address(type,key));if(!r||r.owner!==owner)fail('CARD_RECORD_NOT_FOUND',404);if(r.revoked)fail('CARD_ACCESS_REVOKED',410);return r;};
  const source=async(resultId,locale)=>{const r=await resolveOwnedResult({owner,resultId});if(!r||r.resultId!==resultId||r.ownerId!==owner||r.revoked||r.entitlementActive!==true||r.entitlementProductId!=='ECR_FULL_REPORT')fail('CARD_SOURCE_ACCESS_DENIED',403);if(admission.customerAdmission!==true||admission.humanReview.accepted!==12||r.customerPublishable!==true||r.publicationClass!=='CUSTOMER_PUBLISHABLE'||!r.acceptedInterpretationRef||!r.resultDigest||!r.sourceSnapshotRef||!r.calculationVersion||!r.interpretationVersion||!r.cardLocales?.includes(locale)||!r.interpretations?.[r.sourceInterpretationLocale]?.length)fail('CARD_ADMITTED_SOURCE_REQUIRED',403);if(!r.coordinate?.ECR_DRIVER_PRIORITY?.length||r.coordinate.ECR_DRIVER_PRIORITY.some(d=>d.meta?.classification!=='BASELINE_AFFINITY_NOT_CURRENT_REALITY_PRIORITY'))fail('CARD_BASELINE_SOURCE_REQUIRED');return r;};

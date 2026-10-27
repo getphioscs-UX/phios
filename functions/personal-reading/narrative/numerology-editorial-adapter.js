@@ -1,0 +1,15 @@
+import {composeNumR20Pages,verifyNumR20Snapshot} from './numerology-publication-adapter.js';
+import {sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
+import {freezeEditorialRequest} from './method-editorial-contract.js';
+export const NUM_EDITORIAL_VERSION='NUM-R21-EDITORIAL-LOCAL-v1';
+const dependencies={P06:['P06','P07','P14','P20'],P07:['P07','P13','P14'],P08:['P08','P14','P20'],P09:['P09'],P10:['P10'],P11:['P11','P13','P14','P20'],P12:['P11','P12'],P13:['P13'],P14:['P14'],P15:['P15'],P16:['P16'],P17:['P17'],P18:['P18'],P19:['P19'],P20:['P20'],P21:['P13','P14','P20','P21'],P22:['P14','P22'],P23:['P13','P14','P20','P23'],P24:['P24']};
+export async function buildNumEditorialRequests({snapshot,accountId,entitlementId,sourceCatalog,localReview=false}){
+ if(!localReview)throw Error('NUM_EDITORIAL_LOCAL_ONLY');await verifyNumR20Snapshot(snapshot);const pages=composeNumR20Pages(snapshot),requests=[];
+ for(const p of pages){const units=pages.filter(x=>dependencies[p.logicalPageId].includes(x.logicalPageId)).flatMap(x=>x.languages.en.units);const ids=[...new Set(units.filter(u=>u.sourceClaimId||u.kind==='STRUCTURAL_INTERPRETATION').map(u=>u.sourceClaimId||u.sourceRef))];
+ const roleSemantics=ids.map(id=>{const c=sourceCatalog[id],actual=units.find(u=>(u.sourceClaimId||u.sourceRef)===id);if(!c)throw Error('NUM_EDITORIAL_SOURCE_CATALOG_MISSING:'+id);if(c.sourceText?.en!==actual.text)throw Error('NUM_EDITORIAL_SOURCE_CATALOG_STALE:'+id);return c;});
+ const calculatedFacts={birthDate:snapshot.canonicalInput.birthDate,targetDate:snapshot.expansionInput.targetDate??null,roles:snapshot.readings.en.sections.snapshot,chart:p.languages.en.structuredVisual,facts:p.languages.en.facts,nameAdmission:snapshot.inputAdmission,sourceVersions:snapshot.sourceVersions};
+ const factEvidence=Object.entries(calculatedFacts).map(([key,value])=>({id:'FACT:'+key,scope:'CALCULATED_FACT_ONLY',value,sourceDigest:snapshot.calculationDigest,sourcePath:'confirmed-calculation/'+key}));
+ const semanticPlan={calculatedFacts,factEvidence,roleSemantics,meaningBoundaries:['Traditional symbolic interpretation, not verified personal facts.','No meaning transfer across role, school or timing system.','Role definition is not value-specific meaning.','FACT IDs support calculated values only, never a personality inference.','No inferred current events, partner or professional advice.'],customerRealityEvidence:[],publicationContext:{logicalPageId:p.logicalPageId,title:p.title,localeSelection:'bilingual',readerQuestion:p.languages.en.structuredVisual.observation.text,maximumPhysicalPages:1,minimumBodyFontPt:10.5},editorialGuidance:{version:NUM_EDITORIAL_VERSION,nonAuthoritative:true}};
+ requests.push(await freezeEditorialRequest({methodId:'NUM',accountId,entitlementId,inputDigest:await sha256Stable({input:snapshot.inputDigest,calculation:snapshot.calculationDigest,semantic:snapshot.semanticDigest,sourceVersions:snapshot.sourceVersions}),semanticPlan,promptVersion:NUM_EDITORIAL_VERSION}));}
+ return requests;
+}

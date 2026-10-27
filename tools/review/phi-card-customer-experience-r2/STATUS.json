@@ -1,0 +1,133 @@
+{
+  "status": "PARTIAL_LOCAL_INTEGRATION_HUMAN_REVIEW_READY",
+  "observedAt": "2026-10-27T10:07:59.037Z",
+  "branch": "main",
+  "head": "021c27129604b94f898612134dd0700c47a1e016",
+  "remoteMainRead": "021c27129604b94f898612134dd0700c47a1e016",
+  "existingImplementation": "Deck/mapping/copy contract/assets, accepted R1 benchmark and local customer runtime already on main at 021c2712. R2 delta is uncommitted. Other active HD/Numerology changes preserved.",
+  "copy": {
+    "cards": 48,
+    "locales": 96,
+    "missing": 0,
+    "questionDifferences": 0,
+    "sourceHashes": [
+      {
+        "series": "C",
+        "attachmentId": "93050034-34be-45dd-9f50-d0cdabeedd6c",
+        "sha256": "9e8d9bb6756e767fef8c2314ddb7e42780ead38e6452c125ab238c26923b0640",
+        "bytes": 163492
+      },
+      {
+        "series": "D",
+        "attachmentId": "41705f90-70c8-42fd-92b8-0e1fe971d4f6",
+        "sha256": "c8510bff3c5b61fcc9cb55583af0f0f34dd6d3593d074cfe9010cc6972afcb10",
+        "bytes": 306693
+      },
+      {
+        "series": "F",
+        "attachmentId": "e23b7fe8-0c3c-4498-922c-d431396e336a",
+        "sha256": "f59f147d5bbe6def99ce96c6e12ce939a5229577b0d8906521f2867f643bc882",
+        "bytes": 53347
+      },
+      {
+        "series": "G",
+        "attachmentId": "b713b852-ae6e-4214-93d6-e5e35ac7bf20",
+        "sha256": "1d326e76b7d1cf165155c08da4c8397f94a3f87043884503948fda3a9790319a",
+        "bytes": 84223
+      },
+      {
+        "series": "P",
+        "attachmentId": "646222ee-bc24-46e9-9c8e-5b0fe4d2c251",
+        "sha256": "28d14e3d0551386c9743bfe45d6cb80a2f89254e8f2323d9947adedf1dc3edbd",
+        "bytes": 56585
+      },
+      {
+        "series": "T",
+        "attachmentId": "84df0ef6-16eb-402a-a03e-c7abd558e59d",
+        "sha256": "1f33cd3e3a8b82f317890b1a91c6d306de5134bf9f88f29e02065a32b5692610",
+        "bytes": 102596
+      }
+    ],
+    "sourcePreservation": "Exact original source bytes and SHA256; extracted per-language paragraphs. Bilingual subsection labels are split, markdown layout markers removed; no prose summaries or AI translations.",
+    "displayAliases": [
+      {
+        "cardId": "ECR-PC-P06",
+        "locale": "zh-Hans",
+        "section": "watch"
+      },
+      {
+        "cardId": "ECR-PC-T06",
+        "locale": "zh-Hans",
+        "section": "invitation"
+      },
+      {
+        "cardId": "ECR-PC-T06",
+        "locale": "en",
+        "section": "invitation"
+      },
+      {
+        "cardId": "ECR-PC-T07",
+        "locale": "zh-Hans",
+        "section": "watch"
+      }
+    ],
+    "aliasPolicy": "Own card code is rendered as frozen localized title; source text/hash retained. Frozen subtitle/question and the complete source boundary are retained alongside a common localized UI boundary."
+  },
+  "tests": {
+    "browser": 96,
+    "expected": 96,
+    "aliasBrowser": 6,
+    "expectedAlias": 6,
+    "existingEngine": 23,
+    "existingHttp": 10,
+    "benchmarkRecomputed": 12,
+    "missingLocaleDenials": 96,
+    "assetByteHashes": 48,
+    "legacySuites": [
+      "check-ecr-phi-card-r1",
+      "check-ecr-phi-card-r1-s1-s3",
+      "check-ecr-phi-card-r1-s7-human-admission",
+      "check-ecr-human-runtime-v4-1-w13-phi-card"
+    ],
+    "sourceBinding": "PASS_LOCAL_SYNTHETIC",
+    "r1AcceptanceUnchanged": true,
+    "uiEnglishNoChinese": true,
+    "domSelectedLanguageOnly": true,
+    "switchCardAndResultIdentity": true,
+    "layoutWidths": [
+      390,
+      1440
+    ],
+    "screenshots": 12,
+    "assetPixelsSingleLanguage": false,
+    "fullSiteBuild": "NOT_RUN_LOW_DISK_AND_OTHER_ACTIVE_TASKS",
+    "realAccount": "NOT_VERIFIED"
+  },
+  "issues": [
+    "New supplied reading copy remains a separate R2 candidate; 96 language drafts require semantic/editorial human review. R1 12/12 acceptance is unchanged.",
+    "Original WebP artwork contains baked Chinese and English (including some traditional Chinese). No approved monolingual asset variants exist in the supplied registry; image pixels are not single-language. No assets were recreated.",
+    "Customer adapter and existing Profile/Configuration mounts remain LOCAL_ONLY. Production source resolution and real Account admission remain closed.",
+    "No full website build, production report/PDF generation, Stripe or paid-provider execution was run. Module imports/syntax, existing regressions and local browser checks are the verified scope.",
+    "Original R1 browser script asserts old Flowing/Strained headings and writes historical R1 screenshots; it was not rerun against the intentional R2 layout. R2 96 DOM cases, six alias cases, and existing 23 engine/10 HTTP tests cover this local change; original R1 browser receipts remain historical."
+  ],
+  "changedFiles": [
+    "content/ecr-phi-card/customer-reading-r2/ (six original sources + independent reading layer)",
+    "functions/ecr-phi-card/ecr-customer-reading-copy-r2.js",
+    "functions/ecr-phi-card/ecr-customer-experience-r1.js",
+    "scripts/lib/phi-card-customer-local.mjs",
+    "tools/review/phi-card-customer-experience-r1/customer.js",
+    "scripts/import-phi-card-customer-copy-r2.py",
+    "scripts/check-phi-card-customer-r2.mjs",
+    "scripts/close-phi-card-customer-r2.mjs",
+    "tools/review/phi-card-customer-experience-r2/",
+    "content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html"
+  ],
+  "providerCalls": 0,
+  "productionWrites": 0,
+  "stripeWrites": 0,
+  "commit": false,
+  "push": false,
+  "deploy": false,
+  "preview": "http://127.0.0.1:48732/?locale=zh-Hans",
+  "previewEnglish": "http://127.0.0.1:48732/?locale=en"
+}
