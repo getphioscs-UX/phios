@@ -1,0 +1,98 @@
+/* PHI OS figure presentation R1: original full figures remain in DOM and available in lightbox. */
+.phios-figure-deck{
+  box-sizing:border-box;width:min(1180px,calc(100% - 36px));margin:clamp(18px,3vw,42px) auto;
+  padding:clamp(16px,2.5vw,28px);border:1px solid rgba(18,59,72,.16);
+  border-radius:20px;background:#f7f3e9;color:#123b48;box-shadow:0 8px 28px rgba(13,44,54,.06);
+  --phios-fig-ink:#123b48;min-width:0;
+}
+.phios-figure-deck:focus-visible{outline:3px solid #137b76;outline-offset:3px}
+.phios-figure-deck__title{margin:0 0 16px!important;font:600 clamp(1.1rem,2.3vw,1.55rem)/1.35 inherit!important;max-width:unset!important;color:#123b48}
+.phios-figure-deck__track{min-width:0}
+.phios-figure-deck__slide[hidden]{display:none!important}
+.phios-figure-deck__source{
+  width:100%!important;max-width:none!important;margin:0!important;padding:0!important;
+  display:grid!important;grid-template-columns:minmax(0,1.12fr) minmax(220px,.88fr);
+  grid-template-rows:auto auto 1fr;column-gap:clamp(18px,3vw,38px);row-gap:12px;
+  color:#123b48!important;background:transparent!important;
+}
+.phios-figure-deck__source>:is(h2,h3,.phios-figure-deck__heading){
+  grid-column:2;grid-row:1;align-self:end;margin:0!important;max-width:none!important;
+  font-size:clamp(1.25rem,2vw,1.85rem)!important;line-height:1.3!important;color:#123b48!important;
+}
+.phios-figure-deck__description{
+  grid-column:2;grid-row:2;margin:0!important;max-width:48ch;
+  font-size:clamp(.95rem,1.35vw,1.04rem);line-height:1.7;color:#335762;
+}
+.phios-figure-deck__source > figure{
+  grid-column:1;grid-row:1/4;min-width:0;width:100%!important;
+  max-width:100%!important;margin:0!important;align-self:center;
+}
+.phios-figure-deck__source figure img{
+  display:block;width:100%!important;height:auto!important;max-height:380px!important;
+  object-fit:contain!important;object-position:center!important;border-radius:8px;
+}
+.phios-figure-deck__source figure a{display:block}
+.phios-figure-deck__source figcaption{font-size:.83rem;line-height:1.45;color:#506671;padding-block:8px;max-width:60ch}
+.phios-figure-deck__controls{
+  margin-top:16px;padding-top:12px;border-top:1px solid rgba(18,59,72,.14);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+}
+.phios-figure-deck__arrow{
+  width:44px;height:44px;display:grid;place-items:center;font-size:1.8rem;
+  background:transparent;color:#123b48;border:1px solid #c4c1b7;border-radius:50%;cursor:pointer;
+}
+.phios-figure-deck__arrow:hover{background:#eee6d5}
+.phios-figure-deck__counter{font-variant-numeric:tabular-nums;white-space:nowrap;font-size:.85rem;color:#526573}
+.phios-figure-deck__dots{display:flex;justify-content:center;align-items:center;gap:8px;flex:1}
+.phios-figure-deck__dot{
+  width:14px;height:14px;min-width:14px;border:0;border-radius:999px;
+  background:#a4b0ad;cursor:pointer;padding:0;
+}
+.phios-figure-deck__dot[aria-current="true"]{background:#123b48;width:29px}
+.phios-figure-deck button:focus-visible{outline:3px solid #137b76;outline-offset:3px}
+/* A substantial figure is still available at full resolution, but no longer pushes the next action down a whole screen. */
+.phios-figure-editorial-split{
+  width:min(1120px,calc(100% - 36px))!important;margin:clamp(24px,4vw,44px) auto!important;
+  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(240px,.9fr);gap:clamp(18px,3vw,32px);
+  align-items:center;
+}
+.phios-figure-editorial-split > h2{grid-column:2;grid-row:1;margin:0!important;font-size:clamp(1.25rem,2vw,2rem)!important}
+.phios-figure-editorial-split > figure{grid-column:1;grid-row:1/3;width:100%;margin:0}
+.phios-figure-editorial-split > figure img{width:100%;height:auto;max-height:430px;object-fit:contain}
+.phios-figure-editorial-split > p{grid-column:2}
+.phios-figure-compact img{display:block;width:100%;height:auto;max-height:440px;object-fit:contain}
+.phios-figure-paired{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.phios-figure-paired figure{width:100%;min-width:0;margin:0}
+.phios-figure-paired figure img{width:100%;height:auto;max-height:380px;object-fit:contain}
+/* Financial figures remain in their original fieldsets; users open only the explanation relevant to their current inputs. */
+[data-cx-surface="FINANCIAL_REALITY"] .phios-figure-context-guide{
+  width:100%;max-width:100%;margin:8px 0 0;border:1px solid rgba(18,59,72,.14);
+  border-radius:12px;background:#f6f3ed;overflow:hidden;
+}
+[data-cx-surface="FINANCIAL_REALITY"] .phios-figure-context-guide > summary{
+  cursor:pointer;padding:12px 16px;font-size:.95rem;font-weight:600;min-height:44px;
+}
+[data-cx-surface="FINANCIAL_REALITY"] .phios-figure-context-guide[open] figure{margin:8px auto;max-width:720px;padding:0 12px 10px}
+[data-cx-surface="FINANCIAL_REALITY"] .phios-figure-context-guide img{
+  width:100%;height:auto;max-height:350px;object-fit:contain;
+}
+@media(max-width:700px){
+  .phios-figure-deck{width:calc(100% - 24px);padding:14px;border-radius:14px;margin-block:18px}
+  .phios-figure-deck__source{display:flex!important;flex-direction:column;gap:12px}
+  .phios-figure-deck__source > figure{order:0;margin:0!important}
+  .phios-figure-deck__source > :is(h2,h3,.phios-figure-deck__heading){order:1;font-size:1.2rem!important}
+  .phios-figure-deck__description{order:2;font-size:.95rem}
+  .phios-figure-deck__source figure img{max-height:290px!important}
+  .phios-figure-deck__controls{gap:8px}
+  .phios-figure-deck__dots{gap:6px}
+  .phios-figure-deck__dot{width:10px;height:10px;min-width:10px}
+  .phios-figure-editorial-split{display:block}
+  .phios-figure-editorial-split > h2{margin-block:0 12px!important}
+  .phios-figure-editorial-split figure img{max-height:320px}
+  .phios-figure-paired{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:no-preference){
+  .phios-figure-deck__slide:not([hidden]){animation:phios-figure-appear 240ms ease-out}
+  @keyframes phios-figure-appear{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+}
+@media(prefers-reduced-motion:reduce){.phios-figure-deck__slide{animation:none!important}}
