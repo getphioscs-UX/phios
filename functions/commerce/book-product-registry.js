@@ -48,8 +48,8 @@ export function resolveCommerceBookSourceKey(env,productId){
 }
 
 export function bookLanguageIdentity(productId){
- const m=/^COM-BOOK-0([1-4])-(ZH|EN)$/.exec(String(productId||''));
- return m?{productId,bookCode:'BOOK-'+m[1],volume:Number(m[1]),language:m[2]==='EN'?'en':'zh-Hans'}:null;
+ const m=/^COM-BOOK-(0?[1-7])-(ZH|EN)$/.exec(String(productId||''));
+ return m?{productId,bookCode:'BOOK-'+Number(m[1]),volume:Number(m[1]),language:m[2]==='EN'?'en':'zh-Hans'}:null;
 }
 export function resolveBookPdfSource(env,productId){
  const identity=bookLanguageIdentity(productId);if(!identity)throw Object.assign(Error('Choose one book language.'),{status:422,code:'book_language_required'});

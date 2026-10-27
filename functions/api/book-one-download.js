@@ -34,7 +34,7 @@ export async function onRequestGet({ request, env = {},data={} }) {
       });
     }
     if (
-      !/^private\/books\/(?:book-one|com-book-0[1-7]|com-book-0[1-4]-(?:zh|en))\/watermarked\/[A-Za-z0-9_-]+\.pdf$/.test(authorization.watermarked_object_key)
+      !/^private\/books\/(?:book-one|com-book-0[1-7]|com-book-(?:0[1-4]|[1-7])-(?:zh|en))\/watermarked\/[A-Za-z0-9_-]+\.pdf$/.test(authorization.watermarked_object_key)
     ) {
       throw Object.assign(new Error('Unwatermarked delivery is forbidden.'), {
         status: 403,
