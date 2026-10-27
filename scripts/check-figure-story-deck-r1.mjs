@@ -6,7 +6,7 @@ const targets=[
  ['perspectives/tarot/index.html','/perspectives/tarot/',[3]],
  ['perspectives/iching/consult/index.html','/perspectives/iching/consult/',[4]],
  ['reality/index.html','/reality/',[5]],
- ['perspectives/profile/index.html','/perspectives/profile/',[3,2]],
+ ['perspectives/profile/index.html','/perspectives/profile/',[3]],
  ['account/index.html','/account/',[2]],
  ['about/reality-navigation/index.html','/about/reality-navigation/',[5]],
  ['professional/financial/index.html','/professional/financial/',[]],
