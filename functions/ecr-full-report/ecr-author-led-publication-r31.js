@@ -1,6 +1,19 @@
 import {renderReportBodyContentPreview} from '../canonical-presentation-runtime/report-editorial-resolver.js';
 import {ECR_DEEP_R2_SECTIONS,buildEcrDeepReadingR2} from './ecr-deep-reading-r2.js';
 import {PDFDocument,StandardFonts,rgb} from 'pdf-lib';
+// The explicit R3.3 binding is an optional local publication input, never inferred
+// from native report-module order. Existing review callers remain compatible.
+export function validateEcrAuthorVisualBindings({bindingManifest,manuscripts,visualManifest}){
+ if(bindingManifest?.status!=='SECTION_VISUAL_BINDING_APPROVED'||bindingManifest.sections?.length!==10)throw Error('EXPLICIT_SECTION_VISUAL_BINDINGS_REQUIRED');
+ const seen=new Set();for(const b of bindingManifest.sections){
+  if(seen.has(b.sectionId)||!/^SEC-(0[1-9]|10)$/.test(b.sectionId)||b.bindingApproval!=='FOUNDER_APPROVED_R33_20261027')throw Error('SECTION_BINDING_ID_INVALID');seen.add(b.sectionId);
+  if(b.publicationEligibility!=='LOCAL_ACCEPTED_AUTHOR_CASE_ONLY'||b.customerPublicationEligible!==false)throw Error('SECTION_BINDING_SCOPE_INVALID');
+  const art=visualManifest.assets.find(a=>a.methodId==='ECR'&&a.pageId===b.sectionId);
+  if(!art||art.sha256!==b.visualAssetSHA256||b.acceptedVisualAssetId!==art.objectKey||b.renderRole!=='FIXED_MASTER_SECTION_PLUS_AUTHOR_BODY')throw Error('SECTION_VISUAL_VERSION_MISMATCH');
+  for(const locale of ['zh-Hans','en']){const bodies=manuscripts.filter(m=>m.sectionId===b.sectionId.slice(4)&&m.locale===locale);
+   if(bodies.length!==1||bodies[0].exactTextSha256!==b.manuscriptSHA256[locale]||bodies[0].version!==b.acceptedManuscriptId||!bodies[0].shaVerified||!bodies[0].explicitFounderEvidence)throw Error('SECTION_MANUSCRIPT_VERSION_MISMATCH');}
+ }return bindingManifest.sections;
+}
 const escapeText=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const exactProse=text=>text.split(/(\r\n\r\n|\n\n)/).map((part,i)=>i%2?part:`<p style="margin:0;break-inside:avoid;orphans:3;widows:3">${escapeText(part)}</p>`).join('');
 // Local preview adapter to the existing report body renderer, never a paid route.

@@ -1,0 +1,44 @@
+{
+  "status": "PROPOSED_NOT_IMPLEMENTED",
+  "pageRoleLanguageResolver": {
+    "EXISTING_EDITORIAL": "Keep existing registered per-language P01–P05 lookup exactly",
+    "INSERTED_FIXED_SECTION": "Resolve NUM+SEC-ID+language=bilingual independently of customer content language",
+    "EXISTING_LOGICAL_BODY": "Render original P06–P24 in purchased/selected content language"
+  },
+  "forbidden": [
+    "Do not switch all NUM fixedAssetLanguagePolicy to BILINGUAL_SHARED: this would also change P01–P05",
+    "Do not create 27 locale copies of nine shared files",
+    "Do not call requireSourceLanguage on fixed bilingual artwork as though it were purchased manuscript language",
+    "Do not promote complete=true or targetPages=33 before real implementation QA"
+  ],
+  "pagination": {
+    "plan": "NUM-R13-33PHYS",
+    "logicalIdentity": "P01–P24 immutable",
+    "physicalIdentity": "1–33 display-only",
+    "references": "Store both logicalPageId and physicalPageNumber; inserted page has sectionId and no logicalPageId",
+    "overflow": "33 is a physical target, not proof; measure bilingual content. Fail publication on overflow rather than clip text or silently add pages"
+  },
+  "versioning": {
+    "legacy": "Existing reports retain snapshot/outputDigest/artifactRef/locale and old page plan; do not regenerate them on download",
+    "new": "Explicit new publication plan version and verified visual SHA set must be in new snapshot; do not redefine old snapshot hashes",
+    "entitlement": "Use existing product and purchased language; presentation insertion grants no new language or product entitlement"
+  },
+  "implementationFiles": [
+    "functions/canonical-presentation-runtime/report-blueprint-reference.js",
+    "functions/canonical-presentation-runtime/visual-report-registry.js",
+    "functions/canonical-presentation-runtime/report-visual-architecture.js",
+    "functions/canonical-presentation-runtime/report-editorial-resolver.js",
+    "content/reports/shared/report-visual-assets-r2.json",
+    "functions/report-delivery/output-language.js",
+    "functions/report-delivery/paid-report-delivery-core.js"
+  ],
+  "steps": [
+    "Read/verify exact nine assets: discover object keys, GET bytes, SHA256, MIME, dimensions, fixed-content/microtext/A4 checks. Structural asset approval already exists; do not ask again for same design acceptance.",
+    "Add verified rows to the existing shared manifest using actual hashes and provenance; preserve old rows by identity/version. Resolve historical SEC-ID filename collisions explicitly.",
+    "Extend existing blueprint representation with logical ID + insertion table and a versioned 33-physical-page plan. No alternative registry or report product.",
+    "Extend existing resolver with page-role-specific language selection; preserve editorial locale behavior and body purchase language.",
+    "Extend existing renderer to interleave fixed sections before approved logical IDs; do not append all dividers at the beginning via requireFixedReportManifest. Reuse fixed-page renderer without customer overlays.",
+    "Generate three local complete PDFs; verify exact sequence, no duplicate inserts, real 33-page counts, layout overflow, shared-byte equality, language/source/snapshot identity and unchanged entitlement/re-download behavior.",
+    "Only after independent implementation pass consider production target version promotion; no activation in this round."
+  ]
+}

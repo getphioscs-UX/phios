@@ -1,0 +1,91 @@
+{
+  "status": "GIT_INTEGRATION_CANDIDATE_READY_FOR_REVIEW",
+  "overlapDispositions": 5,
+  "unknown": 0,
+  "base": "9e35d04ef98bd2a7e633887366e73e006370962c",
+  "mainHead": "64bced01cc35909aba2ddb584a0003d7ac322ba1",
+  "pr6Head": "19aa304555ef404c76cdac5f7e9e8df584c18cea",
+  "patch": "SAFE-INTEGRATION-CANDIDATE.patch",
+  "patchSHA256": "2258b77e41aec5cd52cd4fca9aa5bade1af9ea56b4d56e58ca6d822788503c8e",
+  "patchApplied": false,
+  "includesThreeRequiredDependencyDeltas": true,
+  "integrationOrder": [
+    {
+      "step": 1,
+      "paths": [
+        "functions/commerce/book-product-registry.js",
+        "functions/commerce/book-delivery.js",
+        "functions/commerce/book-watermark-artifact.js"
+      ],
+      "reason": "Registry/source pin, private delivery dispatch and atomic trusted metadata writer prerequisites; no new migration in this delta"
+    },
+    {
+      "step": 2,
+      "paths": [
+        "functions/commerce/book-commerce-store.js",
+        "functions/commerce/commerce-stripe-api.js",
+        "functions/pws/commercial/stripe-product-registry.js"
+      ],
+      "reason": "Combine only PR6 ebook additions with retained main Profile/refill/language/price guards"
+    },
+    {
+      "step": 3,
+      "paths": [
+        "scripts/check-commerce-stripe-r1.mjs"
+      ],
+      "reason": "Reconcile public future-sales denial with explicit historical paid-order read path; 17 cases passed"
+    },
+    {
+      "step": 4,
+      "paths": [
+        "content/reports/ecr/ecr-author-visual-binding-r33.json",
+        "functions/ecr-full-report/ecr-sec07-presentation-r33.js",
+        "functions/ecr-full-report/ecr-author-led-publication-r31.js"
+      ],
+      "reason": "Already existing concurrent R33 source remains a separate uncommitted report candidate; exact bytes recorded, not copied from PR6 or silently included in ebook patch"
+    },
+    {
+      "step": 5,
+      "paths": [
+        "tools/review/integrated-closure-r25/sec07-presentation-candidate.mjs"
+      ],
+      "reason": "Local R25 publication text correction only; not runtime rollout"
+    },
+    {
+      "step": 6,
+      "paths": [
+        "content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html"
+      ],
+      "reason": "Append review evidence only after preserving both preexisting blocks"
+    }
+  ],
+  "validation": {
+    "commercialCases": 17,
+    "additionalContractChecks": 7,
+    "entryBundles": 6,
+    "reportLifecycleChecks": 32,
+    "pr6LocalDeliveryChecks": 21,
+    "fullPagesBuild": "NOT_RUN_ISOLATED_ENTRY_BUNDLES_ONLY"
+  },
+  "notEnteredMain": [
+    "PR6 branch 11 commits and outstanding classified source/evidence",
+    "R25 three-way/dependency candidate patches",
+    "R33 currently uncommitted binding/presentation sources",
+    "private ECR three-language PDF candidates",
+    "local SEC07 v2 overlays"
+  ],
+  "commit": false,
+  "push": false,
+  "merge": false,
+  "deploy": false,
+  "localProcessorRepair": {
+    "candidate": "pdf-watermark-candidate.py",
+    "patch": "LOCAL-PROCESSOR-OUTLINE-REPAIR.patch",
+    "sha256": "55bbf282eb6c92bd141a585708bf573e1f34d06d005626939e5f7a6d6bdd7b04",
+    "scope": "Existing local watermark test adapter only, not a provisioned or deployed processor",
+    "reason": "Original adapter dropped source outline; append(reader,import_outline=True) preserves document outline before stamping",
+    "validation": "21 current handler checks and 264 page integrity checks plus full 655-outline hierarchy/title/order/destination comparison PASS",
+    "pr6SourceOverwritten": false
+  },
+  "patchApplyCheck": "PASS_READ_ONLY_GIT_APPLY_CHECK"
+}

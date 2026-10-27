@@ -1,0 +1,47 @@
+diff --git a/scripts/check-commerce-stripe-r1.mjs b/scripts/check-commerce-stripe-r1.mjs
+--- a/scripts/check-commerce-stripe-r1.mjs
++++ b/scripts/check-commerce-stripe-r1.mjs
+@@ -3,15 +3,18 @@ import fs from 'node:fs';
+ import {DatabaseSync} from 'node:sqlite';
+ import {createSqliteD1Adapter,loadRuntimeMigrations} from './runtime-migration-loader.mjs';
+ import {applyRuntimeMigrations} from '../functions/runtime/migrations/migration-runner.js';
+-import {STRIPE_PRODUCT_REGISTRY,commerceSelection,standardBundleProducts,assertReportPriceParity,commerceOrderProduct} from '../functions/pws/commercial/stripe-product-registry.js';
++import {STRIPE_PRODUCT_REGISTRY as ALL_STRIPE_PRODUCTS,commerceSelection,standardBundleProducts,assertReportPriceParity,commerceOrderProduct,commerceProduct} from '../functions/pws/commercial/stripe-product-registry.js';
+ import {isLanguageReport,validateOrderReportPresentation,reportContractId} from '../functions/commerce/report-presentation.js';
+ import {quoteReportPresentation,resolveReportProduct} from '../functions/pws/commercial/report-successor-contract.js';
+ import {commerceApi} from '../functions/commerce/commerce-stripe-api.js';
+-import {createStripeTestSignature} from '../functions/commerce/stripe-client.js';
++import {createStripeTestSignature,createCommerceCheckoutSession} from '../functions/commerce/stripe-client.js';
+ import {onRequestPost as webhook} from '../functions/api/stripe-webhook.js';
+-import {ownedReportPresentation,commerceAccountProjection,registerWebhookEvent,ensureBookProduct} from '../functions/commerce/book-commerce-store.js';
++import {ownedReportPresentation,commerceAccountProjection,registerWebhookEvent,ensureBookProduct,createCommerceOrder,attachCommerceCheckout} from '../functions/commerce/book-commerce-store.js';
+ import {sha256Hex} from '../functions/commerce/commerce-crypto.js';
+ 
++// Historical QA assertions apply to the QA offering, not the new Live-only editions.
++const STRIPE_PRODUCT_REGISTRY=ALL_STRIPE_PRODUCTS.filter(p=>!p.liveOnly);
++assert.equal(new Set(ALL_STRIPE_PRODUCTS.map(p=>p.productId)).size,ALL_STRIPE_PRODUCTS.length);
+ const cases=[];async function test(name,fn){await fn();cases.push({name,status:'PASS',evidence:'local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end'});}
+ const sqlite=new DatabaseSync(':memory:');sqlite.exec('PRAGMA foreign_keys=ON');
+ const db=createSqliteD1Adapter(sqlite), migrations=loadRuntimeMigrations(process.cwd()).migrations;
+@@ -117,7 +120,7 @@ await test('checkout authenticated, tamper rejected, live keys fail closed, orig
+   const beforeCalls=stripeCalls.length;
+   const noConfigurationSource={...env,COMMERCE_BOOK_SOURCE_KEYS_JSON:JSON.stringify({'COM-BOOK-06':'private/observation.pdf'})};
+   const unavailable=await commerceApi(context({productId:'COM-BOOK-CONFIGURATION'},{env:noConfigurationSource}),'checkout');
+-  assert.equal(unavailable.status,503);assert.equal((await unavailable.json()).error,'commerce_book_source_unconfigured');
++  assert.equal(unavailable.status,503);assert.equal((await unavailable.json()).error,'BOOK_LANGUAGE_VERSION_REQUIRED');
+   assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders);
+   assert.equal(stripeCalls.length,beforeCalls,'missing Configuration manuscript must not create any provider operation');
+ });
+@@ -241,6 +244,12 @@ await test('expiration/payment failure do not grant; protected book access is ac
+     data:{symbolicAccountIdentity:{...identity,userId}},
+     request:new Request('https://phios.test/api/commerce-book-download',{method:'POST',headers:{origin:'https://phios.test','content-type':'application/json'},body:JSON.stringify({productId})})
+   }),'book-download');
++  // Explicit historical pending order fixture; the current public checkout is
++  // blocked. Fulfill its signed synthetic payment through existing owners so
++  // historical download coverage is retained without reopening work-only sales.
++  const historical=await createCommerceOrder({env,customerId:identity.userId,productId:'COM-BOOK-05',selectedProducts:[],idempotencyKeyHash:'historical-book-five-only',requestHash:'historical-book-five',locale:'en'});
++  const historicalSession=await createCommerceCheckoutSession({env,product:commerceProduct('COM-BOOK-05'),order:historical,customerId:'cus_fixture',origin:'https://phios.test',locale:'en',idempotencyKey:'historical-book-five-session',fetcher});
++  await attachCommerceCheckout(env,historical,historicalSession);historicalSession.payment_status='paid';sessions.set(historicalSession.id,historicalSession);assert.equal((await send('checkout.session.completed',historicalSession)).status,200);
+   assert.equal((await download('COM-BOOK-05','other')).status,403);
+   assert.equal((await download('COM-BOOK-05')).status,200);
+   assert.equal((await download('COM-BOOK-01')).status,403,'No new work-only Book I entitlement was purchased');

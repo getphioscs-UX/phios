@@ -1,0 +1,12 @@
+diff --git a/tools/review/report-visual-asset-convergence-r2/recovery-r24/continuation-20261027/METADATA-WRITER-BEFORE.js.txt b/.worktrees/pr6-ebook-closure/functions/commerce/book-watermark-artifact.js
+index 7b2609fc..2021d6e8 100644
+--- a/tools/review/report-visual-asset-convergence-r2/recovery-r24/continuation-20261027/METADATA-WRITER-BEFORE.js.txt
++++ b/.worktrees/pr6-ebook-closure/functions/commerce/book-watermark-artifact.js
+@@ -5,6 +5,7 @@ export async function writeVerifiedWatermarkArtifact({bucket, job, bytes, inspec
+   const purchaseId = job?.watermark?.purchaseId;
+   const fail = code => { throw Object.assign(new Error(code), {code, status:409}); };
+   if (!b || !purchaseId || !job.watermark.customerId ||
++      job.watermark.productId !== b.productId ||
+       !/^COM-BOOK-[1-7]-(ZH|EN)$/.test(b.productId || '') ||
+       !['zh','en'].includes(b.language) ||
+       b.productId.split('-').at(-1).toLowerCase() !== b.language ||

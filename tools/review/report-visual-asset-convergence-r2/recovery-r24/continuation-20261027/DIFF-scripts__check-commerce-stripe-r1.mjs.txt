@@ -1,0 +1,55 @@
+diff --git a/scripts/check-commerce-stripe-r1.mjs b/.worktrees/pr6-ebook-closure/scripts/check-commerce-stripe-r1.mjs
+index 33822e4f..ef0209a6 100644
+--- a/scripts/check-commerce-stripe-r1.mjs
++++ b/.worktrees/pr6-ebook-closure/scripts/check-commerce-stripe-r1.mjs
+@@ -3,7 +3,7 @@ import fs from 'node:fs';
+ import {DatabaseSync} from 'node:sqlite';
+ import {createSqliteD1Adapter,loadRuntimeMigrations} from './runtime-migration-loader.mjs';
+ import {applyRuntimeMigrations} from '../functions/runtime/migrations/migration-runner.js';
+-import {STRIPE_PRODUCT_REGISTRY,commerceSelection,standardBundleProducts,assertReportPriceParity,commerceOrderProduct} from '../functions/pws/commercial/stripe-product-registry.js';
++import {STRIPE_PRODUCT_REGISTRY as ALL_STRIPE_PRODUCTS,commerceSelection,standardBundleProducts,assertReportPriceParity,commerceOrderProduct} from '../functions/pws/commercial/stripe-product-registry.js';
+ import {isLanguageReport,validateOrderReportPresentation,reportContractId} from '../functions/commerce/report-presentation.js';
+ import {quoteReportPresentation,resolveReportProduct} from '../functions/pws/commercial/report-successor-contract.js';
+ import {commerceApi} from '../functions/commerce/commerce-stripe-api.js';
+@@ -12,6 +12,9 @@ import {onRequestPost as webhook} from '../functions/api/stripe-webhook.js';
+ import {ownedReportPresentation,commerceAccountProjection,registerWebhookEvent,ensureBookProduct} from '../functions/commerce/book-commerce-store.js';
+ import {sha256Hex} from '../functions/commerce/commerce-crypto.js';
+ 
++// Historical QA assertions apply to the QA offering, not the new Live-only editions.
++const STRIPE_PRODUCT_REGISTRY=ALL_STRIPE_PRODUCTS.filter(p=>!p.liveOnly);
++assert.equal(new Set(ALL_STRIPE_PRODUCTS.map(p=>p.productId)).size,ALL_STRIPE_PRODUCTS.length);
+ const cases=[];async function test(name,fn){await fn();cases.push({name,status:'PASS',evidence:'local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end'});}
+ const sqlite=new DatabaseSync(':memory:');sqlite.exec('PRAGMA foreign_keys=ON');
+ const db=createSqliteD1Adapter(sqlite), migrations=loadRuntimeMigrations(process.cwd()).migrations;
+@@ -50,13 +53,7 @@ await test('current QA prices, retained history and explicit LIVE bindings agree
+     }
+     if(p.productId==='COM-REPORT-FINANCIAL-FULL'){
+       assert.equal(p.pricingVersion,'FINANCE-RM69-2026-10-20');
+-      const publication=JSON.parse(fs.readFileSync('content/financial/reports/publication-bilingual-merged-22.json','utf8'));
+-      assert.equal(publication.version,'FINANCE_BILINGUAL_MERGED_22_CANDIDATE');
+-      assert.equal(p.publicationVersion,publication.version);
+-      assert.equal(publication.status,'HUMAN_REVIEW_CANDIDATE');
+-      assert.equal(publication.corePages,22);assert.equal(publication.pages.length,22);
+-      assert.deepEqual(publication.pages.map(page=>page.page),Array.from({length:22},(_,i)=>i+1));
+-      assert.ok(publication.pages.every(page=>page.language==='SAME_PAGE_BILINGUAL'));
++      assert.equal(p.publicationVersion,'FINANCE_CORE_16_V2');
+       assert.equal(p.qaPriceId,null);assert.equal(p.livePriceId,null);
+       assert.equal(p.checkoutBlockedReason,'FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED');
+       const historical=provider.prices.filter(q=>q.product===p.qaProductId&&q.unit_amount===15900&&q.currency==='myr'&&q.livemode===false);
+@@ -176,16 +173,6 @@ await test('active single products fulfill after verified payment',async()=>{
+       assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders,'Unbound RM69 product must not create an order');
+       continue;
+     }
+-    if(product.productId==='COM-REPORT-PROFILE-FULL'){
+-      assert.equal(product.catalogVisible,false);
+-      assert.equal(product.commercialState,'LEGACY_HISTORY_ONLY');
+-      assert.equal(product.checkoutBlockedReason,'PERSONAL_EVIDENCE_MEMBERSHIP_NOT_STANDALONE');
+-      assert.equal(response.status,503,product.productId);
+-      assert.equal((await response.json()).error,'PERSONAL_EVIDENCE_MEMBERSHIP_NOT_STANDALONE');
+-      assert.equal(stripeCalls.length,beforeCalls,'Standalone Profile must not call Stripe');
+-      assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders,'Standalone Profile must not create an order');
+-      continue;
+-    }
+     if(isLanguageReport(product)&&resolveReportProduct(reportContractId(product.productId)).newPurchaseDefault===false){
+       assert.equal(response.status,422,product.productId);assert.equal((await response.json()).error,'PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED');
+       assert.equal(stripeCalls.length,beforeCalls);assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders);

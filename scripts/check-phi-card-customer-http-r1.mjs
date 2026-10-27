@@ -1,0 +1,18 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {startCardCustomer,folder} from './lib/phi-card-customer-local.mjs';
+const s=await startCardCustomer(),checks=[];const check=async(name,fn)=>{await fn();checks.push({name,status:'PASS'});};
+const request=async(path,body=null,cookie='',origin=s.url)=>{const r=await fetch(s.url+path,{method:body?'POST':'GET',headers:{...(body?{'content-type':'application/json',origin}:{}),...(cookie?{cookie}:{})},body:body?JSON.stringify(body):undefined});return {status:r.status,body:await r.json(),cookie:r.headers.get('set-cookie')?.split(';')[0],cache:r.headers.get('cache-control')};};
+const api='/api/phi-card-customer-local';let A,B,saved;
+try{
+await check('HTTP anonymous reading / query-identity spoof denied',async()=>assert.equal((await request(api+'?action=personal&resultId='+s.record.resultId+'&owner=synthetic-A&locale=en')).status,401));
+await check('Cross-origin synthetic session denied',async()=>assert.equal((await request('/local-synthetic-session',{account:'synthetic-A'},'','http://other.invalid')).status,403));
+A=(await request('/local-synthetic-session',{account:'synthetic-A'})).cookie;B=(await request('/local-synthetic-session',{account:'synthetic-B'})).cookie;
+await check('Opaque HttpOnly sessions isolate owners',async()=>{assert(A&&B&&A!==B);assert.equal((await request(api+'?action=personal&resultId='+s.record.resultId+'&locale=en',null,B)).status,403);});
+await check('Reading save cross-origin denied',async()=>assert.equal((await request(api,{action:'save',resultId:s.record.resultId,locale:'en',consent:true},A,'http://other.invalid')).status,403));
+await check('Client owner/entitlement mass assignment rejected',async()=>assert.equal((await request(api,{action:'save',resultId:s.record.resultId,locale:'en',consent:true,ownerId:'synthetic-B',entitlementActive:true},A)).status,422));
+await check('Owned HTTP save and no-store response',async()=>{const r=await request(api,{action:'save',resultId:s.record.resultId,locale:'en',consent:true},A);assert.equal(r.status,200);saved=r.body;assert.equal(r.cache,'private, no-store');});
+await check('Owner B cannot HTTP reopen or revoke A',async()=>{assert.equal((await request(api+'?action=reopen&key='+saved.key+'&locale=en',null,B)).status,404);assert.equal((await request(api,{action:'revoke',key:saved.key,consent:true},B)).status,404);});
+await check('Unauthorized locale denied; interface language leaves same owned IDs',async()=>{assert.equal((await request(api+'?action=reopen&key='+saved.key+'&locale=invalid',null,A)).status,403);const r=await request(api+'?action=reopen&key='+saved.key+'&locale=zh-Hans',null,A);assert.equal(r.status,200);assert.deepEqual(r.body.cards.map(c=>c.cardId),saved.cards.map(c=>c.cardId));});
+await check('Revoked reading denied over HTTP',async()=>{assert.equal((await request(api,{action:'revoke',key:saved.key,consent:true},A)).status,200);assert.equal((await request(api+'?action=reopen&key='+saved.key+'&locale=en',null,A)).status,410);});
+await check('Private DB and source files cannot be served',async()=>{for(const p of ['/.tmp/phi-card-customer-experience-r1/human-review.sqlite','/functions/account/canonical-person-store.js','/.env']){const r=await fetch(s.url+p);assert.equal(r.status,404);}});
+}finally{await s.close();fs.writeFileSync(folder+'/HTTP-CHECKS.json',JSON.stringify({checks,actualChecks:checks.length,realIdentityProvider:false,syntheticCookieSessionOnly:true,providerCalls:0,productionWrites:0},null,2));}
+console.log(JSON.stringify({actualChecks:checks.length,passed:checks.length,providerCalls:0}));

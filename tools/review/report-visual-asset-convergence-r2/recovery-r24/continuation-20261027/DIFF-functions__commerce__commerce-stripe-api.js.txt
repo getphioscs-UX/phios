@@ -1,0 +1,51 @@
+diff --git a/functions/commerce/commerce-stripe-api.js b/.worktrees/pr6-ebook-closure/functions/commerce/commerce-stripe-api.js
+index 1621a634..b276237d 100644
+--- a/functions/commerce/commerce-stripe-api.js
++++ b/.worktrees/pr6-ebook-closure/functions/commerce/commerce-stripe-api.js
+@@ -28,7 +28,7 @@ function sameOrigin(request){
+ export async function commerceApi(context,action){
+   const {request,env={},fetch:fetcher}=context;
+   try{
+-    if(action==='catalog') return json({success:true,environment:commerceEnvironment(env),liveEnabled:commerceEnvironment(env)==='LIVE'&&commerceCheckoutAvailable(env),checkoutAvailable:commerceCheckoutAvailable(env),products:STRIPE_PRODUCT_REGISTRY.filter(p=>p.active&&p.catalogVisible!==false).map(({qaPriceId,qaProductId,livePriceId,liveProductId,...p})=>{
++    if(action==='catalog') return json({success:true,environment:commerceEnvironment(env),liveEnabled:commerceEnvironment(env)==='LIVE'&&commerceCheckoutAvailable(env),checkoutAvailable:commerceCheckoutAvailable(env),products:STRIPE_PRODUCT_REGISTRY.filter(p=>p.active&&p.catalogVisible!==false&&(!p.liveOnly||commerceEnvironment(env)==='LIVE')&&(!p.qaOnly||commerceEnvironment(env)==='QA')).map(({qaPriceId,qaProductId,livePriceId,liveProductId,...p})=>{
+       let reportPresentationOptions=null,reportPurchaseState=null;
+       if(isLanguageReport(p)){
+         try{
+@@ -42,7 +42,7 @@ export async function commerceApi(context,action){
+         }
+       }
+       const setup=env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(p)&&!p.productId.includes('BUNDLE')?{methodCode:paidReportMethodForProduct(p.productId)?.methodCode||null,admitted:paidReportMethodForProduct(p.productId)?.p8Admitted===true}:null;
+-      return {...p,paidReportSetup:setup,checkoutAvailable:!p.checkoutBlockedReason&&(!p.requiresBookPdfReadiness||env.PHIOS_BOOK_PDF_CHECKOUT_ENABLED==='true')&&commerceCheckoutAvailable(env)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:false,refillReviewRequired:'R12_MONTHLY_PROVIDER_CAP_RECONCILIATION'}:{}),reportPresentationOptions,reportPurchaseState};
++      return {...p,paidReportSetup:setup,checkoutAvailable:!p.checkoutBlockedReason&&(!p.requiresBookPdfReadiness||env.PHIOS_BOOK_PDF_CHECKOUT_ENABLED==='true')&&commerceCheckoutAvailable(env)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:commerceEnvironment(env)==='QA'&&commerceCheckoutAvailable(env)&&continuityAuthority.refill.priceMode==='INLINE_ONE_TIME_PRICE_DATA'&&env.PHIOS_CONTINUITY_QUOTA_ENABLED==='true'}:{}),reportPresentationOptions,reportPurchaseState};
+     }),eligibleBundleProducts:standardBundleProducts()});
+     const customerId=requireIdentity(context);
+     if(action==='account') return json({success:true,...await commerceAccountProjection(env,customerId)});
+@@ -77,7 +77,7 @@ export async function commerceApi(context,action){
+     // below is persisted and sent to Stripe; unknown identity/price IDs still fail.
+     const allowed=new Set(['productId','selectedProducts','locale','context','acceptDigitalPolicy','reportLanguageMode','reportLocale','amount','surcharge','total','purchaseKind','subscriptionId']);
+     if(Object.keys(body).some(k=>!allowed.has(k))) throw Object.assign(new Error('Only canonical product input is accepted.'),{status:422,code:'checkout_input_invalid'});
+-    let product=commerceProduct(body.productId);if(product.checkoutBlockedReason)throw Object.assign(Error(product.checkoutBlockedReason),{status:503,code:product.checkoutBlockedReason});const selected=commerceSelection(product.productId,body.selectedProducts||[]);
++    let product=commerceProduct(body.productId);if((product.liveOnly&&commerceEnvironment(env)!=='LIVE')||(product.qaOnly&&commerceEnvironment(env)!=='QA'))throw Object.assign(Error('This book language SKU is not offered in this Stripe environment.'),{status:422,code:'book_language_environment_mismatch'});if(product.checkoutBlockedReason)throw Object.assign(Error(product.checkoutBlockedReason),{status:503,code:product.checkoutBlockedReason});const selected=commerceSelection(product.productId,body.selectedProducts||[]);
+     // A registered price does not establish that the private book can be delivered.
+     let bookPdf=null;if(product.category==='BOOK'){if(bookLanguageIdentity(product.productId))bookPdf=await requireBookPdfReadiness(env,product.productId);else resolveCommerceBookSourceKey(env,product.productId);}
+     if(body.acceptDigitalPolicy!==true) throw Object.assign(new Error('Accept purchase terms.'),{status:422,code:'digital_policy_acceptance_required'});
+@@ -87,10 +87,15 @@ export async function commerceApi(context,action){
+     const reference=body.context?.readingId;
+     if(body.context&&(Object.keys(body.context).some(k=>!['readingId','reportIntentId'].includes(k))||(reference!==undefined&&(typeof reference!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(reference)))||(body.context.reportIntentId!==undefined&&(typeof body.context.reportIntentId!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(body.context.reportIntentId))))) throw Object.assign(new Error('Invalid report reference.'),{status:422,code:'checkout_context_invalid'});
+     const contextSnapshot=reference?{readingId:reference}:{};if(bookPdf)contextSnapshot.bookPdf=bookPdf;
+-    // R1.2 leaves purchased refill units intact; new sales require reconciliation
+-    // with the explicit account-period $3 cap. No paid refill can expand that cap.
+-    if(body.purchaseKind!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_R12_COMMERCIAL_REVIEW_REQUIRED'),{code:'CONTINUITY_REFILL_R12_COMMERCIAL_REVIEW_REQUIRED',status:409});
+-    if(body.subscriptionId!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_KIND_REQUIRED'),{status:422});
++    if(body.purchaseKind!==undefined){
++      if(env.PHIOS_CONTINUITY_QUOTA_ENABLED!=='true'||commerceEnvironment(env)!=='QA')throw Object.assign(Error('CONTINUITY_REFILL_NOT_ACTIVATED'),{status:403});
++      if(body.purchaseKind!=='CONTINUITY_QUOTA_REFILL'||product.productId!=='COM-SUBSCRIPTION-MONTHLY')throw Object.assign(Error('CONTINUITY_REFILL_PRODUCT_REQUIRED'),{status:422});
++      const quota=await readContinuityQuota(env,customerId);
++      if(quota.subscriptionId!==body.subscriptionId||!quota.units.length)throw Object.assign(Error('CONTINUITY_REFILL_OWNED_PERIOD_REQUIRED'),{status:403});
++      if(!Number.isSafeInteger(quota.billingPeriodStart))throw Object.assign(Error('CONTINUITY_CURRENT_PAID_PERIOD_REQUIRED'),{status:403});
++      contextSnapshot.continuityRefill={subscriptionId:quota.subscriptionId,periodStart:quota.billingPeriodStart,periodEnd:quota.billingPeriodEnd};
++      product=continuityRefillProduct(product,contextSnapshot);
++    }else if(body.subscriptionId!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_KIND_REQUIRED'),{status:422});
+     if(isLanguageReport(product))contextSnapshot.reportPresentation=commerceReportQuote(product,body,selected);
+     else if(body.reportLanguageMode||body.reportLocale)throw Object.assign(new Error('Report language is not applicable.'),{status:422,code:'REPORT_PRESENTATION_NOT_APPLICABLE'});
+     if(env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(product)&&!product.productId.includes('BUNDLE')){const readiness=await requirePaidReportCheckout(context,{productId:product.productId,readinessId:body.context?.reportIntentId,presentation:contextSnapshot.reportPresentation});contextSnapshot.reportIntentId=readiness.readinessId;}

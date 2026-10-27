@@ -1,0 +1,44 @@
+{
+  "status": "PASS_LOCAL_PRESENTATION",
+  "originalImageStatus": "VISUAL_AUTHOR_ACCEPTED",
+  "sourceBytesUnmodified": true,
+  "sourceSHA256": "2e9deef92d2e45c5583dd3495253c9f3dca01be534d62024e9f67ddd7a53a9f5",
+  "authority": "content/embodied-configuration/ecr-motion-registry-v1.json",
+  "issues": [
+    {
+      "id": "M8-TRIGRAM-TEXT",
+      "before": "M4 label appears 異; baked small names and English variants are inconsistent with formal M8 registry",
+      "after": "Vector labels: 坤/震/坎/巽/离/艮/乾/兑 and Containment/Activation/Flow/Penetration/Differentiation/Boundary/Expansion/Exchange",
+      "method": "Localized label overlay; original scene and line graphics retained"
+    },
+    {
+      "id": "M8-LOWER-MICROTEXT",
+      "before": "Garbled Chinese micro-lines and uneven small English captions",
+      "after": "Formal Chinese motion labels; exact existing English captions reflowed into complete lines",
+      "method": "No invented Chinese prose; canonical label replaces unreadable lower micro-lines"
+    },
+    {
+      "id": "H64-ENGLISH",
+      "before": "Overlapping/broken English explanation",
+      "after": "Same five English lines rendered as independent PDF text without covering the two motion circles",
+      "method": "Localized text layer"
+    },
+    {
+      "id": "A4",
+      "before": "2:3 source is not A4",
+      "after": "A4 210×297mm; source full height, isotropic scale, 17.007874pt matching frame extension on each side",
+      "method": "No title/footer crop, no BODY frame"
+    },
+    {
+      "id": "FONT-RENDER",
+      "before": "Initial subset font allowed extraction but Chinese labels rasterized incompletely",
+      "after": "Full NotoSansSC embedding; actual raster inspected",
+      "method": "Failed first candidate retained as historical failure, not PASS"
+    }
+  ],
+  "limits": [
+    "Dense fixed-page microtext needs zoom on a 390px screen; mobile fit-width is an overview, not a claim that all microtext is legible without zoom",
+    "This checks local PDF presentation, not a printed proof or commercial release",
+    "H42 remains the accepted fixed example; no TL calculation inserted; original example graphics retained"
+  ]
+}

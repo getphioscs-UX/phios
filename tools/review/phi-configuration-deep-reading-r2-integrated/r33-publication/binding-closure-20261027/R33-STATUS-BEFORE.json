@@ -1,0 +1,255 @@
+{
+  "status": "PARTIAL",
+  "localPublicationIntegration": "COMPLETE_PENDING_HUMAN_REVIEW",
+  "productionPass": false,
+  "providerCalls": 0,
+  "productionWrites": 0,
+  "gitWriteCommands": 0,
+  "authorHashChecks": {
+    "pass": 20,
+    "total": 20
+  },
+  "explicitFounderEvidence": 20,
+  "section10FounderEvidence": true,
+  "finalPdfTextChecks": {
+    "pass": 40,
+    "total": 40
+  },
+  "assets": {
+    "verified": 17,
+    "missing": 0,
+    "reuploadedDividers": "HTTP_200_WEBP_DECODE_AND_SHA256_VERIFIED",
+    "originalPixelsRetained": true,
+    "remainingVisualIssue": "SEC-07 original baked English overlap; human asset decision required"
+  },
+  "pdfs": [
+    {
+      "locale": "zh-Hans",
+      "pages": 64
+    },
+    {
+      "locale": "en",
+      "pages": 85
+    },
+    {
+      "locale": "bilingual",
+      "pages": 132
+    }
+  ],
+  "allPageInspection": [
+    {
+      "locale": "zh-Hans",
+      "pages": 64,
+      "integrityPass": 10,
+      "integrityTotal": 10,
+      "a4All": true,
+      "fullBackgroundAll": true,
+      "unsafeTextPages": [],
+      "fontEmbedFailures": [],
+      "renderedPages": 64,
+      "customerBoundaryRevalidated": true
+    },
+    {
+      "locale": "en",
+      "pages": 85,
+      "integrityPass": 10,
+      "integrityTotal": 10,
+      "a4All": true,
+      "fullBackgroundAll": true,
+      "unsafeTextPages": [],
+      "fontEmbedFailures": [],
+      "renderedPages": 85,
+      "customerBoundaryRevalidated": true
+    },
+    {
+      "locale": "bilingual",
+      "pages": 132,
+      "integrityPass": 20,
+      "integrityTotal": 20,
+      "a4All": true,
+      "fullBackgroundAll": true,
+      "unsafeTextPages": [],
+      "fontEmbedFailures": [],
+      "renderedPages": 132,
+      "customerBoundaryRevalidated": true
+    }
+  ],
+  "originalSuites": [
+    {
+      "name": "check-ecr-human-runtime-v4-1-w3-initialization",
+      "status": "PASS",
+      "exitCode": 0,
+      "sourceSha256": "9c436a5471717bca52e69bd2eff59215c13303c0a059cc734e90374c901979a6",
+      "assertionsChanged": false,
+      "oldReceiptOverwritten": false,
+      "log": "regressions/check-ecr-human-runtime-v4-1-w3-initialization.log"
+    },
+    {
+      "name": "check-ecr-human-runtime-v4-1-w12-report",
+      "status": "PASS",
+      "exitCode": 0,
+      "sourceSha256": "c692b5d3b8804359064d75d86606f4654085b27d4eda3e0acf58db7665b69ad9",
+      "assertionsChanged": false,
+      "oldReceiptOverwritten": false,
+      "log": "regressions/check-ecr-human-runtime-v4-1-w12-report.log"
+    },
+    {
+      "name": "check-ecr-human-runtime-v4-1-w13-phi-card",
+      "status": "PASS",
+      "exitCode": 0,
+      "sourceSha256": "2c95f2a4f03a2e0992ffb0a2e2725fd367f55ec74c9c87426a451ae4c85b4357",
+      "assertionsChanged": false,
+      "oldReceiptOverwritten": false,
+      "log": "regressions/check-ecr-human-runtime-v4-1-w13-phi-card.log"
+    },
+    {
+      "name": "check-ecr-full-r1-current",
+      "status": "PASS",
+      "exitCode": 0,
+      "sourceSha256": "48a6b1613d274eb613ea7e48922171c39e98a9a10360a58b0806b44b7746f84a",
+      "assertionsChanged": false,
+      "oldReceiptOverwritten": false,
+      "log": "regressions/check-ecr-full-r1-current.log"
+    },
+    {
+      "name": "check-ecr-phi-card-r1",
+      "status": "PASS",
+      "exitCode": 0,
+      "sourceSha256": "8ca750dde3ac2a202589388381f2e0ff80cbb23989523607aaae08848b9caa2b",
+      "assertionsChanged": false,
+      "oldReceiptOverwritten": false,
+      "log": "regressions/check-ecr-phi-card-r1.log"
+    },
+    {
+      "name": "check-ecr-r2-followup-isolation-local",
+      "status": "FAIL",
+      "exitCode": 1,
+      "sourceSha256": "ac2ad3fbf830c078aba9216f632381a7db7879039d31f655e32a400f0f706a03",
+      "assertionsChanged": false,
+      "oldReceiptOverwritten": false,
+      "log": "regressions/check-ecr-r2-followup-isolation-local.log"
+    },
+    {
+      "name": "check-ecr-r2-membership-owner-local",
+      "status": "FAIL",
+      "exitCode": 1,
+      "sourceSha256": "82cc16045d4bfdbe15a8443aa83f8d76704da161a6f595b3844f06967e0cdfac",
+      "assertionsChanged": false,
+      "oldReceiptOverwritten": false,
+      "log": "regressions/check-ecr-r2-membership-owner-local.log"
+    },
+    {
+      "name": "check-ecr-r2-question-slots-local",
+      "status": "PASS",
+      "exitCode": 0,
+      "sourceSha256": "83e11f990bdc569aca27066e05f5fb593911165532088bdda494bff4c654964d",
+      "assertionsChanged": false,
+      "oldReceiptOverwritten": false,
+      "log": "regressions/check-ecr-r2-question-slots-local.log"
+    }
+  ],
+  "currentSchemaSuccessors": [
+    {
+      "name": "check-ecr-r2-followup-isolation-local",
+      "status": "PASS",
+      "exitCode": 0,
+      "changes": "Load existing local candidate SQL in isolated SQLite only; assertions unchanged.",
+      "candidateSql": "db/migration-candidates/0020_continuity_ask_credit_allocations_successor.sql",
+      "productionMigration": false,
+      "originalFailurePreserved": true,
+      "log": "regressions/check-ecr-r2-followup-isolation-local-schema-successor.log"
+    },
+    {
+      "name": "check-ecr-r2-membership-owner-local",
+      "status": "FAIL",
+      "exitCode": 1,
+      "changes": "Load existing local candidate SQL in isolated SQLite only; assertions unchanged.",
+      "candidateSql": "db/migration-candidates/0020_continuity_ask_credit_allocations_successor.sql",
+      "productionMigration": false,
+      "originalFailurePreserved": true,
+      "log": "regressions/check-ecr-r2-membership-owner-local-schema-successor.log"
+    }
+  ],
+  "inheritedFailuresRetained": true,
+  "memberCapFocusedCheck": "PASS_USD3_PERIOD_CAP_REMAINS",
+  "localRendererBundle": "PASS_NODE_BUNDLE_NO_SHARED_BUILD_OUTPUT",
+  "deliveryTestScope": "LOCAL_FILE_AND_DAR_SIGNATURE_RUNTIME_ONLY_NOT_LIVE_ECR_ACCOUNT",
+  "remaining": [
+    "SEC-07 original image English overlap needs human decision; no asset recreation authorized",
+    "Human A4 print and final bilingual editorial review pending",
+    "Reusable semantics and rights admission not granted",
+    "Inherited membership refill FAIL remains; current cap safety test passes",
+    "Paid customer adapter/checkout and actual account delivery remain closed"
+  ],
+  "privateOutputsOutsideRepo": true,
+  "customerAppendixBoundary": {
+    "status": "PASS_LOCAL_CUSTOMER_APPENDIX_BOUNDARY",
+    "generator": "scripts/ecr-r33-appendix.mjs",
+    "boundary": "CUSTOMER_CALCULATION_ONLY_R1",
+    "reports": [
+      {
+        "locale": "zh-Hans",
+        "oldPages": 65,
+        "pages": 64,
+        "unchangedPreAppendixPages": 63,
+        "unchangedPageContentStreams": true,
+        "customerCalculationRetained": true,
+        "chinese64TextIdentical": true,
+        "chinese64RasterIdentical": false,
+        "naturalLayoutDifference": "Chinese reading-field bottom ends 8 raster pixels earlier; all text and positions remain unchanged.",
+        "internalParagraphsInCustomerAppendix": 0,
+        "internalAuditRetained": true,
+        "appendixRenderedPages": [
+          64
+        ],
+        "a4AndFullBodyBackground": true,
+        "unsafeText": 0
+      },
+      {
+        "locale": "en",
+        "oldPages": 85,
+        "pages": 85,
+        "unchangedPreAppendixPages": 83,
+        "unchangedPageContentStreams": true,
+        "customerCalculationRetained": true,
+        "chinese64TextIdentical": null,
+        "chinese64RasterIdentical": null,
+        "naturalLayoutDifference": null,
+        "internalParagraphsInCustomerAppendix": 0,
+        "internalAuditRetained": true,
+        "appendixRenderedPages": [
+          84,
+          85
+        ],
+        "a4AndFullBodyBackground": true,
+        "unsafeText": 0
+      },
+      {
+        "locale": "bilingual",
+        "oldPages": 132,
+        "pages": 132,
+        "unchangedPreAppendixPages": 130,
+        "unchangedPageContentStreams": true,
+        "customerCalculationRetained": true,
+        "chinese64TextIdentical": null,
+        "chinese64RasterIdentical": null,
+        "naturalLayoutDifference": null,
+        "internalParagraphsInCustomerAppendix": 0,
+        "internalAuditRetained": true,
+        "appendixRenderedPages": [
+          131,
+          132
+        ],
+        "a4AndFullBodyBackground": true,
+        "unsafeText": 0
+      }
+    ],
+    "sourceHashesUnchanged": 20,
+    "originalPreAppendixPagesUnchanged": 276,
+    "internalParagraphsExcludedPerLanguage": 2,
+    "providerCalls": 0,
+    "productionPass": false
+  },
+  "totalCurrentPages": 281,
+  "historicalVisualReviewReceipt": "The previous 282-page visual receipt remains historical. Current appendix pages re-rendered and reviewed in customer-appendix-boundary.json."
+}

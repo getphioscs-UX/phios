@@ -1,0 +1,51 @@
+{
+  "at": "2026-10-26T14:09:22.145Z",
+  "status": "LOCAL_PARTIAL_WITH_SPECIFIC_BLOCKERS",
+  "head": "df8111d6e59e23b3805b6817c92de18ff5cfa72e",
+  "sourceDigest": "447e6620a2e4cc8a97fd4113791d629c7090ae73a2a434cfe02a1705490eaf39",
+  "dependencyFiles": 298,
+  "gates": {
+    "A": {
+      "status": "BLOCKED",
+      "reason": "SEC05/07 exact public GET404; actual image bytes and SHA/decode unverified; ROOT_CAUSE_UNCONFIRMED"
+    },
+    "B": {
+      "status": "BLOCKED",
+      "reason": "No new full ECR PDF generated with missing mandatory actual assets; native section and locale source association also requires owner evidence"
+    },
+    "C": {
+      "status": "PARTIAL",
+      "local": "PASS_LOCAL_EXISTING_ACCOUNT_OWNER_AND_SYNTHETIC_PRIVATE_STORAGE",
+      "external": "UNVERIFIED; no actual production/private account binding or trusted renderer admission tested",
+      "testBoundary": "Actual root/account middleware and encrypted synthetic sessions with file-backed R2 contract. Renderer test double streams existing real visual PDF; this is not semantic rendering of the new synthetic report. Native workerd adapter/storage tested separately; combined native account route is not claimed."
+    },
+    "D": {
+      "status": "PASS_LOCAL_MEASURED",
+      "concurrency": [
+        1,
+        5,
+        10,
+        20
+      ],
+      "completed": 36,
+      "failures": 0,
+      "lifecycleChecks": 32,
+      "memoryBoundary": "Windows Toolhelp process tree + PSAPI GetProcessMemoryInfo; 50ms sampled observed peaks. RSS sums may double-count shared pages; not per-isolate JS heap. Only this test process and descendants; sampler excluded.",
+      "productionCapacity": "UNVERIFIED"
+    },
+    "E": {
+      "status": "NOT_AUTHORIZED",
+      "commercialRelease": "NOT_READY"
+    }
+  },
+  "review": "content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html#REPORT-VISUAL-ASSET-CONVERGENCE-R2-4",
+  "next": "Close exact ECR object/public association evidence, existing renderer contract and external private binding/admission; no production action authorized.",
+  "providerCalls": 0,
+  "costUSD": 0,
+  "productionMutations": 0,
+  "payments": 0,
+  "refunds": 0,
+  "commits": 0,
+  "pushes": 0,
+  "deployments": 0
+}

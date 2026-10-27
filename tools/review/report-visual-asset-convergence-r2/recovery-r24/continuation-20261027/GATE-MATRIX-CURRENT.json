@@ -1,0 +1,97 @@
+{
+  "classification": "LOCAL_PARTIAL_WITH_NAMED_BLOCKERS",
+  "date": "2026-10-27 Asia/Kuala_Lumpur",
+  "report": [
+    {
+      "gate": "R-A",
+      "status": "PASS_PUBLIC_READ_ONLY",
+      "evidence": "SEC05/07与BODY新读HTTP200；SEC07旧resolver摘要不符，新候选URL与新SHA一致。没有缓存/配置写入。"
+    },
+    {
+      "gate": "R-B",
+      "status": "BLOCKED",
+      "evidence": "SEC07新对象版本尚待接受，部分烘焙小字仍有缺陷；原11个正文模块尚未映射到10固定章节。完整三语言ECR PDF没有生成，不替换成旧图或合成图。"
+    },
+    {
+      "gate": "R-C",
+      "status": "PARTIAL",
+      "evidence": "既有账户/权限/私有流式适配器本地接线32项当前通过；实际Cloudflare私有binding与可信HTML→PDF renderer未验证。"
+    },
+    {
+      "gate": "R-D",
+      "status": "PASS_LOCAL_INHERITED",
+      "evidence": "1/5/10/20并发共36次、0失败；历史实测Node峰值246476800/246943744/255565824/261095424 bytes，约49MB原PDF。适配器依赖未变，不重跑；不证明生产128MB单isolate容量。"
+    },
+    {
+      "gate": "R-E",
+      "status": "PASS_LOCAL_NEW",
+      "evidence": "当前32项含授权、重下、撤销、保留、dry-run、孤儿及删除失败恢复。仅隔离文件存储/SQLite，未生产删除。"
+    },
+    {
+      "gate": "R-F",
+      "status": "NOT_AUTHORIZED",
+      "evidence": "生产商业发布、私有云端renderer准入、真实交易未执行。"
+    }
+  ],
+  "ebook": [
+    {
+      "gate": "E-A",
+      "status": "PASS_INHERITED",
+      "evidence": "975/975结构结果保留；不重审、不做正文语义比较。"
+    },
+    {
+      "gate": "E-B",
+      "status": "PASS_LOCAL_NEW",
+      "evidence": "14个语言商品/价格/权益与原来源pin一致；I–IV RM89，V–VI RM109，VII RM59，VIII禁售。不是当日Stripe远程核验。"
+    },
+    {
+      "gate": "E-C",
+      "status": "BLOCKED_PRODUCTION",
+      "evidence": "14来源清单及历史只读回执保留；第三册英文871805a4…，75,712,797 bytes，264页。本地实际原字节再次核对；生产BOOKS/来源配置与历史版本恢复尚未建立。"
+    },
+    {
+      "gate": "E-D",
+      "status": "PARTIAL",
+      "evidence": "修补顶层与嵌套商品身份不一致；同真实264页原稿完成水印/metadata/严格回调200，本地21项PASS。远程处理owner/独立QA D1/容量未建立，旧远程409保留；封面页脚覆盖插画需审阅。"
+    },
+    {
+      "gate": "E-E",
+      "status": "PASS_LOCAL_NEW",
+      "evidence": "正式handler+真实HMAC的合成支付自动发放准确语言权益；未人工发放，不是Stripe Live实际投递。"
+    },
+    {
+      "gate": "E-F",
+      "status": "PASS_LOCAL_NEW",
+      "evidence": "完整72,821,596字节水印文件；本人下载/重下、跨账户拒绝、token到期与次数限制通过。"
+    },
+    {
+      "gate": "E-G",
+      "status": "PARTIAL",
+      "evidence": "合成重放、退款、故障恢复通过；Live Webhook及真实付款/退款均未验证。"
+    },
+    {
+      "gate": "E-H",
+      "status": "NOT_AUTHORIZED",
+      "evidence": "无生产部署、真实交易或收费激活。"
+    }
+  ],
+  "git": {
+    "main": "64bced01cc35909aba2ddb584a0003d7ac322ba1",
+    "pr6": "19aa304555ef404c76cdac5f7e9e8df584c18cea",
+    "divergence": "5\t11",
+    "overlapCount": 5,
+    "untrackedInitial": 155,
+    "unknown": 0,
+    "integrationPerformed": false
+  },
+  "mutations": {
+    "providerCalls": 0,
+    "productionWrites": 0,
+    "r2Writes": 0,
+    "stripeLiveMutations": 0,
+    "commit": 0,
+    "push": 0,
+    "merge": 0,
+    "deploy": 0
+  }
+}

@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+const root='tools/review/hd-r6/import-20261027/', d=root+'r61/';
+const read=p=>JSON.parse(fs.readFileSync(p)), hash=b=>createHash('sha256').update(b).digest('hex');
+const out=(p,v)=>fs.writeFileSync(d+p,JSON.stringify(v,null,2)+'\n');
+const git=(...a)=>execFileSync('git',a,{encoding:'utf8'}).trim();
+if(fs.existsSync(d+'BASELINE.json'))throw Error('BASELINE_ALREADY_EXISTS_DO_NOT_OVERWRITE');
+const files=read(root+'PROTECTED-INPUTS.json').files;
+const candidate=read(root+'CANDIDATE-IDENTITY.json');
+const verify=rows=>rows.map(r=>({...r,actualSHA256:hash(fs.readFileSync(r.path)),unchanged:hash(fs.readFileSync(r.path))===r.sha256}));
+const protectedFiles=verify(files), candidateFiles=verify(candidate.files);
+const pdfs=verify(read(root+'R51-PDF-PRESERVATION.json').files);
+if([...protectedFiles,...candidateFiles,...pdfs].some(r=>!r.unchanged))throw Error('PRESERVED_INPUT_DRIFT');
+const dirty=git('diff','--name-only').split('\n').filter(Boolean).map(path=>({path,sha256:hash(fs.readFileSync(path))}));
+out('BASELINE.json',{at:new Date().toISOString(),head:git('rev-parse','HEAD'),branch:git('branch','--show-current'),worktrees:git('worktree','list','--porcelain'),status:git('status','--short'),index:git('diff','--cached','--name-only'),dirty,protectedFiles,candidateFiles,pdfs,candidateId:candidate.candidateId,candidateDigest:candidate.digest,agents:'No AGENTS.md found at C:/ or repository root or indexed repository paths; root read-only instruction search performed.'});
+out('SEC15-EDITORIAL-ACCEPTANCE.json',{at:new Date().toISOString(),candidateId:candidate.candidateId,scope:'SEC15 Whole-Chart Integration; both received independent language drafts',authority:'Explicit current user instruction',verbatim:'另外SEC15 · Whole-Chart Integration 请标记为通过',status:'OWNER_EDITORIAL_ACCEPTED',supersedes:'SEC15 review-pending classification only; incoming package log remains immutable',rightsCleared:false,semanticAdmission:false,commercialRelease:false,manuscriptHashes:['en','zh-Hans'].map(language=>({language,sha256:hash(fs.readFileSync(root+'candidate/input/manuscripts/SEC15.'+language+'.md'))}))});
+console.log({protectedFiles:protectedFiles.length,candidateFiles:candidateFiles.length,pdfs:pdfs.length,SEC15:'OWNER_EDITORIAL_ACCEPTED'});

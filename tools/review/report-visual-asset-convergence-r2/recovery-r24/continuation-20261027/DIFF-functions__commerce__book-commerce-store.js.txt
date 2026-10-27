@@ -1,0 +1,44 @@
+diff --git a/functions/commerce/book-commerce-store.js b/.worktrees/pr6-ebook-closure/functions/commerce/book-commerce-store.js
+index fc32e433..796976c2 100644
+--- a/functions/commerce/book-commerce-store.js
++++ b/.worktrees/pr6-ebook-closure/functions/commerce/book-commerce-store.js
+@@ -1,7 +1,7 @@
+ import {commerceEnvironment,commerceStripeProduct} from './commerce-environment.js';
+ import {controlledOrderOffer,verifyControlledPayment} from './controlled-purchase-candidate.js';
+ import {orderReportPresentation,validateOrderReportPresentation} from './report-presentation.js';
+-import { BOOK_ONE_PRODUCT, resolveBookOneSourceKey, resolveCommerceBookSourceKey,bookLanguageIdentity,orderBookPdfSource } from './book-product-registry.js';
++import { BOOK_ONE_PRODUCT, resolveBookOneSourceKey, resolveCommerceBookSourceKey,bookLanguageIdentity,orderBookPdfSource,bookPdfSourceMatchesHead } from './book-product-registry.js';
+ import { STRIPE_PRODUCT_REGISTRY, commerceProduct, commerceEntitlements, commerceOrderProduct, commerceOrderEntitlements } from '../pws/commercial/stripe-product-registry.js';
+ import {commerceLog} from './commerce-observability.js';
+ import {continuityRefillProduct} from '../personal-reading/continuity/continuity-commercial-authority.js';
+@@ -30,15 +30,13 @@ function dbFrom(env) {
+ // purchase_id remains the paid-order identity; no second order store is created.
+ export async function ensureCommerceProducts(env, clock=Date.now) {
+   const db=dbFrom(env), now=nowIso(clock);
+-  await db.batch(STRIPE_PRODUCT_REGISTRY.filter(p=>commerceEnvironment(env)!=='LIVE'||p.livePriceId).map(registered=>{const p=commerceEnvironment(env)==='LIVE'&&registered.active?commerceStripeProduct(registered,'LIVE'):registered;return db.prepare(`INSERT INTO commerce_products
++  await db.batch(STRIPE_PRODUCT_REGISTRY.filter(p=>commerceEnvironment(env)==='LIVE'?Boolean(p.livePriceId):!p.liveOnly).map(registered=>{const p=commerceEnvironment(env)==='LIVE'&&registered.active?commerceStripeProduct(registered,'LIVE'):registered;return db.prepare(`INSERT INTO commerce_products
+     (product_id,product_version,title,language,format,currency,amount_minor,source_object_key,active,created_at,updated_at,category,billing_type,qa_price_id,qa_product_id)
+     VALUES (?1,'COM-STRIPE-R1',?2,?11,?3,'MYR',?4,'',?10,?5,?5,?6,?7,?8,?9)
+     ON CONFLICT(product_id) DO UPDATE SET active=excluded.active,title=excluded.title,language=excluded.language,format=excluded.format,amount_minor=excluded.amount_minor,qa_price_id=excluded.qa_price_id,qa_product_id=excluded.qa_product_id,updated_at=excluded.updated_at`)
+     .bind(p.productId,p.title,p.fulfillmentType,p.amountMinor,now,p.category,p.billingType,p.qaPriceId,p.qaProductId,p.active?1:0,p.language||'bilingual');}));
+ }
+ export async function createCommerceOrder({env,customerId,productId,selectedProducts,idempotencyKeyHash,requestHash,locale,context={},clock=Date.now}){
+-  // Future-order boundary only. Historical order/read/webhook owners stay readable.
+-  if(productId==='COM-REPORT-PROFILE-FULL')throw Object.assign(Error(commerceProduct(productId).checkoutBlockedReason),{code:commerceProduct(productId).checkoutBlockedReason,status:409});
+   await ensureCommerceProducts(env,clock);
+   const p=commerceStripeProduct(continuityRefillProduct(commerceProduct(productId),context),commerceEnvironment(env)), db=dbFrom(env), now=nowIso(clock);
+   await db.prepare(`INSERT OR IGNORE INTO commerce_checkout_attempts
+@@ -88,8 +86,12 @@ export async function markCommerceReview(env,orderId){
+   if(orderId) await dbFrom(env).prepare('UPDATE commerce_checkout_attempts SET review_required=1 WHERE checkout_attempt_id=?1').bind(orderId).run();
+ }
+ export async function prepareCommerceBookDelivery(env,order){
++  const completedPurchaseId=`pur_${order.checkout_attempt_id}`;
++  if((await watermarkJobForPurchase(env,completedPurchaseId))?.job_status==='completed')return completedPurchaseId;
+   const bookPdf=orderBookPdfSource(order),source=bookPdf?.objectKey||resolveCommerceBookSourceKey(env,order.product_id);
+-  if(!env[bookPdf?.binding||'BOOKS']?.head||!await env[bookPdf?.binding||'BOOKS'].head(source)||String(env.BOOK_ACCESS_TOKEN_SECRET||'').length<32) throw Object.assign(new Error('Protected book delivery is not ready.'),{status:503,code:'commerce_book_delivery_unconfigured'});
++  const sourceHead=await env[bookPdf?.binding||'BOOKS']?.head?.(source);
++  if(!sourceHead||String(env.BOOK_ACCESS_TOKEN_SECRET||'').length<32) throw Object.assign(new Error('Protected book delivery is not ready.'),{status:503,code:'commerce_book_delivery_unconfigured'});
++  if(bookPdf&&!bookPdfSourceMatchesHead(bookPdf,sourceHead))throw Object.assign(new Error('The purchased PDF version is not available.'),{status:409,code:'book_pdf_source_version_unavailable'});
+   const entitlementCode=commerceOrderProduct(order).entitlementPolicy;
+   const entitlementId=`ent_${order.checkout_attempt_id}_${entitlementCode}`, purchaseId=`pur_${order.checkout_attempt_id}`,now=new Date().toISOString();
+   const payload=await encryptSensitive(JSON.stringify({customerId:order.customer_id,purchaseId,productId:order.product_id,...(bookPdf?{bookPdf}:{}),notice:'Licensed to this PHI OS account for personal use only.'}),env.BOOK_ACCESS_TOKEN_SECRET);

@@ -1,0 +1,114 @@
+{
+  "results": [
+    {
+      "name": "check-ecr-phi-card-r1-s1-s3",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "name": "check-ecr-phi-card-r1-s7-human-admission",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "name": "check-ecr-phi-card-r1",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "name": "check-ecr-human-runtime-v4-1-w13-phi-card",
+      "status": "PASS",
+      "exitCode": 0
+    }
+  ],
+  "preservedSourceFiles": [
+    {
+      "file": "perspectives/profile/index.html",
+      "sha256": "3b197e9231cf81071d89410769be4e78e4a49170a09def897a55e427df3fea20"
+    },
+    {
+      "file": "perspectives/phi-configuration/index.html",
+      "sha256": "19d4072e43272c3587196da3182b6572317131e33fd5299147a80f93f88e3043"
+    },
+    {
+      "file": "assets/customer-ui/js/surfaces/profile-network-private-r21.js",
+      "sha256": "03767e757af8dd5d747705eec7d2e708b167925428d811c881a9c3a07a212f5f"
+    },
+    {
+      "file": "functions/profile/profile-context-network-r2.js",
+      "sha256": "1d1569d44caf92f34dbd3335b029c151bb79944e076ad946f45ff0bd5074a5f5"
+    },
+    {
+      "file": "functions/account/financial-will-draft-store.js",
+      "sha256": "42edd2762c49fe524435c3477536739c85bf51c06b27171ff978a823bf1fe40b"
+    },
+    {
+      "file": "functions/ecr-full-report/ecr-author-led-publication-r31.js",
+      "sha256": "b851643f86606062698572ab16acaf60ba1e65929a479004ade45dbb83c6ab19"
+    },
+    {
+      "file": "functions/ecr-phi-card/ecr-card-selector.js",
+      "sha256": "76cbdd5658dcfbc864f2cee21ecf0a996505c2f198efe5291dc67b535fe15b26"
+    },
+    {
+      "file": "content/ecr-phi-card/ecr-phi-card-deck-registry-v2.json",
+      "sha256": "3c2e39a9aa92437793e2492e53ca9fb69e684570bc8383e3c65d8a1b3da6f9dc"
+    },
+    {
+      "file": "content/ecr-phi-card/ecr-result-to-phi-card-mapping-matrix-v2.json",
+      "sha256": "664c674ae478d2902d61285b9815df43848af09db9ca9844dae8467b7f944a51"
+    },
+    {
+      "file": "content/ecr-phi-card/ecr-phi-card-copy-contract-v2.json",
+      "sha256": "9e42b7d0b5058bed4987d98be056a527a63f1d390532ec3a55d119d8a8d4f567"
+    },
+    {
+      "file": "content/ecr-phi-card/admission/ecr-phi-card-customer-admission-v1.json",
+      "sha256": "57f083e96c568110e2f5c4ba4c432b7ec0375718cf1951f0ac382f388e5ef1ca"
+    },
+    {
+      "file": "content/ecr-phi-card/review/ecr-phi-card-human-review-results-v1.json",
+      "sha256": "7602511a351d3eea8b4b8aaf63c4d871f9355b826eaec43f00983cf17a0b28c4"
+    }
+  ],
+  "legacyNetworkBlockers": {
+    "financialEstate": {
+      "needed": "Review/register a successor constraint change for existing financial_purpose_grants after verifying actual target DB/schema; no production application authorized",
+      "localRehearsal": "ISOLATED-MIGRATION-REHEARSAL.sql preserves existing REPORT row byte-for-field",
+      "rollback": "Close the display route; do not drop grants, reset old balances, or revert database contents. New-purpose records must survive rollback."
+    },
+    "relationship": {
+      "needed": "Canonical person use/display purpose and source-bound factual relationship reader with each subject authority; report/intake/generic registry is not sufficient",
+      "minimumFields": [
+        "sourceRef",
+        "version",
+        "ownerRef",
+        "recorded endpoints",
+        "relationship assertion",
+        "source status",
+        "purpose consent",
+        "expiry/revocation"
+      ],
+      "productionRead": false
+    },
+    "limits": [
+      "Explicit Financial inventory roles only; no directed support inferred without a recorded provider/recipient source",
+      "No cross-source person merge or inheritance/ownership fact inference",
+      "Consent is checked per request and on refresh/resume; previously viewed information cannot be retroactively erased",
+      "No whole private report, ledger, will text, names, balances or amounts in the projection",
+      "Synthetic QA session is installed only in the local test server, never in the production handler"
+    ],
+    "restrictions": {
+      "providerCalls": 0,
+      "productionWrites": 0,
+      "r2Writes": 0,
+      "stripeMutations": 0,
+      "productionMigrations": 0,
+      "commit": 0,
+      "push": 0,
+      "deploy": 0
+    }
+  },
+  "providerCalls": 0,
+  "productionWrites": 0
+}

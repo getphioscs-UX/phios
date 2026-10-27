@@ -1,0 +1,39 @@
+// Called only inside the authenticated watermark owner, after PDF inspection.
+// Neither browser metadata nor callback payloads are an identity authority.
+export async function writeVerifiedWatermarkArtifact({bucket, job, bytes, inspection}) {
+  const b = job?.watermark?.bookPdf;
+  const purchaseId = job?.watermark?.purchaseId;
+  const fail = code => { throw Object.assign(new Error(code), {code, status:409}); };
+  if (!b || !purchaseId || !job.watermark.customerId ||
+      job.watermark.productId !== b.productId ||
+      !/^COM-BOOK-[1-7]-(ZH|EN)$/.test(b.productId || '') ||
+      !['zh','en'].includes(b.language) ||
+      b.productId.split('-').at(-1).toLowerCase() !== b.language ||
+      !/^[a-f0-9]{64}$/.test(b.sourceSha256 || '') ||
+      job.sourceSha256 !== b.sourceSha256 || job.language !== b.language ||
+      job.expectedPageCount !== b.pageCount || job.sourceObjectKey !== b.objectKey ||
+      job.sourceBinding !== b.binding ||
+      job.destinationObjectKey !== `private/books/${b.productId.toLowerCase()}/watermarked/${purchaseId}.pdf` ||
+      !/^[A-Za-z0-9_-]+$/.test(purchaseId)) fail('watermark_artifact_identity_invalid');
+  if (!(bytes instanceof Uint8Array) || bytes.length < 5 ||
+      new TextDecoder().decode(bytes.subarray(0,5)) !== '%PDF-' ||
+      inspection?.pages !== b.pageCount || inspection?.watermarkedPages !== b.pageCount ||
+      inspection?.sourceSha256 !== b.sourceSha256) fail('watermark_artifact_inspection_invalid');
+  const artifactSha256 = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)), x=>x.toString(16).padStart(2,'0')).join('');
+  const customMetadata = {productId:b.productId, language:b.language,
+    sourceSha256:b.sourceSha256, purchaseId, pageCount:String(b.pageCount), artifactSha256};
+  const matches = head => head && Number(head.size) === bytes.length &&
+    Object.entries(customMetadata).every(([k,v])=>head.customMetadata?.[k] === v);
+  const existing = await bucket.head(job.destinationObjectKey);
+  if (existing) {
+    if (!matches(existing)) fail('watermark_artifact_conflict');
+    return {key:job.destinationObjectKey, artifactSha256, reused:true};
+  }
+  // Conditional creation prevents a concurrent worker from replacing an artifact.
+  const result = await bucket.put(job.destinationObjectKey, bytes, {
+    httpMetadata:{contentType:'application/pdf'}, customMetadata,
+    onlyIf:{etagDoesNotMatch:'*'}
+  });
+  if (!result || !matches(await bucket.head(job.destinationObjectKey))) fail('watermark_artifact_write_unverified');
+  return {key:job.destinationObjectKey, artifactSha256, reused:false};
+}

@@ -1,0 +1,21 @@
+diff --git a/functions/commerce/commerce-stripe-api.js b/functions/commerce/commerce-stripe-api.js
+--- a/functions/commerce/commerce-stripe-api.js
++++ b/functions/commerce/commerce-stripe-api.js
+@@ -28,7 +28,7 @@ function sameOrigin(request){
+ export async function commerceApi(context,action){
+   const {request,env={},fetch:fetcher}=context;
+   try{
+-    if(action==='catalog') return json({success:true,environment:commerceEnvironment(env),liveEnabled:commerceEnvironment(env)==='LIVE'&&commerceCheckoutAvailable(env),checkoutAvailable:commerceCheckoutAvailable(env),products:STRIPE_PRODUCT_REGISTRY.filter(p=>p.active&&p.catalogVisible!==false).map(({qaPriceId,qaProductId,livePriceId,liveProductId,...p})=>{
++    if(action==='catalog') return json({success:true,environment:commerceEnvironment(env),liveEnabled:commerceEnvironment(env)==='LIVE'&&commerceCheckoutAvailable(env),checkoutAvailable:commerceCheckoutAvailable(env),products:STRIPE_PRODUCT_REGISTRY.filter(p=>p.active&&p.catalogVisible!==false&&(!p.liveOnly||commerceEnvironment(env)==='LIVE')&&(!p.qaOnly||commerceEnvironment(env)==='QA')).map(({qaPriceId,qaProductId,livePriceId,liveProductId,...p})=>{
+       let reportPresentationOptions=null,reportPurchaseState=null;
+       if(isLanguageReport(p)){
+         try{
+@@ -77,7 +77,7 @@ export async function commerceApi(context,action){
+     // below is persisted and sent to Stripe; unknown identity/price IDs still fail.
+     const allowed=new Set(['productId','selectedProducts','locale','context','acceptDigitalPolicy','reportLanguageMode','reportLocale','amount','surcharge','total','purchaseKind','subscriptionId']);
+     if(Object.keys(body).some(k=>!allowed.has(k))) throw Object.assign(new Error('Only canonical product input is accepted.'),{status:422,code:'checkout_input_invalid'});
+-    let product=commerceProduct(body.productId);if(product.checkoutBlockedReason)throw Object.assign(Error(product.checkoutBlockedReason),{status:503,code:product.checkoutBlockedReason});const selected=commerceSelection(product.productId,body.selectedProducts||[]);
++    let product=commerceProduct(body.productId);if((product.liveOnly&&commerceEnvironment(env)!=='LIVE')||(product.qaOnly&&commerceEnvironment(env)!=='QA'))throw Object.assign(Error('This book language SKU is not offered in this Stripe environment.'),{status:422,code:'book_language_environment_mismatch'});if(product.checkoutBlockedReason)throw Object.assign(Error(product.checkoutBlockedReason),{status:503,code:product.checkoutBlockedReason});const selected=commerceSelection(product.productId,body.selectedProducts||[]);
+     // A registered price does not establish that the private book can be delivered.
+     let bookPdf=null;if(product.category==='BOOK'){if(bookLanguageIdentity(product.productId))bookPdf=await requireBookPdfReadiness(env,product.productId);else resolveCommerceBookSourceKey(env,product.productId);}
+     if(body.acceptDigitalPolicy!==true) throw Object.assign(new Error('Accept purchase terms.'),{status:422,code:'digital_policy_acceptance_required'});

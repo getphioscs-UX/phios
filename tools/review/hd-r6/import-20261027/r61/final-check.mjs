@@ -1,0 +1,7 @@
+import fs from 'node:fs';import path from 'node:path';import {createHash} from 'node:crypto';
+const d='tools/review/hd-r6/import-20261027/r61/',hash=b=>createHash('sha256').update(b).digest('hex');
+const p=JSON.parse(fs.readFileSync(d+'PDF-REVIEW.json'));p.checks=p.checks.map(x=>x.startsWith('PDF bytes downloaded')?'PDF bytes saved and reopened locally; no download endpoint or paid entitlement tested':x);fs.writeFileSync(d+'PDF-REVIEW.json',JSON.stringify(p,null,2)+'\n');
+const master=fs.readFileSync('content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html','utf8'),block=master.split('<!-- HD-R61-20261027:BEGIN -->')[1].split('<!-- HD-R61-20261027:END -->')[0];
+const links=[...block.matchAll(/href="([^"]+)"/g)].map(m=>path.resolve('content/production-closure/live-customer-commercial-convergence',m[1]));if(!links.every(p=>fs.existsSync(p)))throw Error('MISSING_REVIEW_LINK');
+fs.writeFileSync(d+'FINAL-REVIEW-LINKS.json',JSON.stringify({scope:'Filesystem Master links; existing legacy HTTP server does not serve the output/pdf path',allExist:true,count:links.length,paths:links},null,2)+'\n');
+const cp=JSON.parse(fs.readFileSync(d+'CHECKPOINT.json'));cp.files=fs.readdirSync(d).filter(n=>n!=='CHECKPOINT.json').map(n=>({path:d+n,bytes:fs.statSync(d+n).size,sha256:hash(fs.readFileSync(d+n))}));fs.writeFileSync(d+'CHECKPOINT.json',JSON.stringify(cp,null,2)+'\n');console.log({localReviewLinks:links.length,allExist:true});

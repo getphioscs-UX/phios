@@ -1,0 +1,93 @@
+{
+  "status": "LOCAL_PARTIAL_WITH_NAMED_BLOCKERS",
+  "localReview": "LOCAL_READY_FOR_HUMAN_REVIEW",
+  "gates": {
+    "G1": "AUTHOR_ACCEPTED_SHA_VERIFIED",
+    "G2": "PRECISE_DEFECT_A4_MICROTEXT_PRINT_READABILITY_PENDING",
+    "G3": "10/10_APPROVED_BINDINGS",
+    "G4": "11/11_RECONCILED",
+    "G5": "3_COMPLETE_LOCAL_PDFS_32_ACCOUNT_TESTS_PASS",
+    "G6": "264_PAGES_21_DELIVERY_TESTS_655_BOOKMARKS_PASS",
+    "G7": "CLOUD_WATERMARK_QA_AWAITING_AUTHORIZATION",
+    "G8": "LOCAL_WEBHOOK_PASS_STRIPE_SANDBOX_CONFIGURATION_REQUIRED",
+    "G9": "155_TRACEABLE_5_DISPOSITIONS_ISOLATED_CANDIDATE_READY",
+    "G10": "SOLE_MASTER_OPENED_390_1440_ALL_EVIDENCE_LINKS_PASS"
+  },
+  "scope": [
+    {
+      "workstream": "ECR publication",
+      "SOURCE": "10/10 + 20/20 exact SHA",
+      "LOCAL": "64/85/132 pages; print microtext pending",
+      "BUILD": "3 local PDF builds",
+      "CLOUD_QA": "NOT_RUN",
+      "DEPLOYED": "NOT_AUTHORIZED",
+      "LIVE_CUSTOMER": "NOT_PROVEN"
+    },
+    {
+      "workstream": "Report R2.4 account",
+      "SOURCE": "Existing shared owners",
+      "LOCAL": "32 REEXECUTED_PASS",
+      "BUILD": "Existing source imports / 6 consumer bundles",
+      "CLOUD_QA": "NOT_RUN",
+      "DEPLOYED": "NOT_AUTHORIZED",
+      "LIVE_CUSTOMER": "NOT_PROVEN"
+    },
+    {
+      "workstream": "Ebook PR6",
+      "SOURCE": "Exact 264-page source preserved",
+      "LOCAL": "21 delivery + 264 integrity + 655 outline entries PASS",
+      "BUILD": "Isolated local processor repaired",
+      "CLOUD_QA": "AWAITING_AUTHORIZATION",
+      "DEPLOYED": "NOT_AUTHORIZED",
+      "LIVE_CUSTOMER": "NOT_PROVEN"
+    },
+    {
+      "workstream": "Git integration",
+      "SOURCE": "155 inherited traceable; 3 deltas + 10 new classified; UNKNOWN 0",
+      "LOCAL": "5 dispositions; 17 + 7 cases PASS",
+      "BUILD": "6 entry bundles; full Pages NOT_RUN",
+      "CLOUD_QA": "NOT_RUN",
+      "DEPLOYED": "NOT_AUTHORIZED",
+      "LIVE_CUSTOMER": "NOT_APPLICABLE"
+    }
+  ],
+  "remaining": [
+    {
+      "id": "SEC07_PRINT_MICROTEXT",
+      "reason": "A4 English captions/H64 are about 6.58/6.36pt, smallest traditional caption about 5.92pt. Local glyphs and semantic labels are corrected; print-scale human readability remains pending.",
+      "action": "Inspect exact corrected SEC07 PDF at physical A4; decide whether composition/font enlargement requires a separate visual revision."
+    },
+    {
+      "id": "QA_PROCESSOR_ENVIRONMENT_NOT_ESTABLISHED",
+      "reason": "No proven isolated /jobs processor with trusted metadata writer, separate QA DB, capacity/lease recovery and cost ceiling.",
+      "action": "Approve exact isolated QA target/resources/access and bounded cloud trial; no production fallback."
+    },
+    {
+      "id": "STRIPE_SANDBOX_CONFIGURATION_REQUIRED",
+      "reason": "Current repository Live Price IDs do not prove a connected Sandbox; actual checkout, receipt/email/refund remain unexecuted.",
+      "action": "Connect a separate Sandbox, create corresponding test Price mappings and webhook signing configuration; separately authorize the transaction QA sequence."
+    },
+    {
+      "id": "SAFE_INTEGRATION_NOT_APPLIED",
+      "reason": "Patch is reviewed and tested through overlays; main and PR6 source remain separate. Full Pages combined build not run.",
+      "action": "Review exact 5 overlap candidates, 3 prerequisites and local processor patch, recheck source pins, then authorize any future application/build independently."
+    },
+    {
+      "id": "CUSTOMER_RELEASE_GATES",
+      "reason": "Private accepted author case is not generic semantic/rights admission, real IdP/account browser proof or production delivery acceptance.",
+      "action": "Keep current customerPublishable/READ_ONLY gates closed pending the existing required acceptance process."
+    }
+  ],
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "productionWrites": 0,
+  "r2Writes": 0,
+  "stripeLiveChanges": 0,
+  "realPayments": 0,
+  "realRefunds": 0,
+  "commit": false,
+  "push": false,
+  "merge": false,
+  "deploy": false,
+  "browserEvidence": "BROWSER-REVIEW.json"
+}

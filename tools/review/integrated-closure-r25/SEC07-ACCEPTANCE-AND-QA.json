@@ -1,0 +1,66 @@
+{
+  "source": {
+    "assetId": "VIS-REPORT-ECR-SEC-07-CARRIER-ENVIRONMENT-EXAMPLE.webp",
+    "sha256": "2e9deef92d2e45c5583dd3495253c9f3dca01be534d62024e9f67ddd7a53a9f5",
+    "bytes": 743246,
+    "width": 1024,
+    "height": 1536,
+    "authorAcceptance": "SEC07_AUTHOR_VISUAL_ACCEPTED",
+    "sourceStatus": "SEC07_ASSET_SHA_VERIFIED",
+    "authority": "Explicit Founder attachment R2.5 section 2.1",
+    "attachmentSHA256": "64e4ae625b22b2834cc2554f423f30f8c6461780a339360d89782930bb09c581",
+    "historicalDecisionsPreserved": true
+  },
+  "presentation": {
+    "id": "ECR-SEC07-A4-VECTOR-LABELS-R25-v2",
+    "pdfSHA256": "495bef43b0a4badc6a2d0b68e41f94d0843390e810210eb4693f9218b4595323",
+    "sourceWebPOverwritten": false,
+    "a4": "210x297mm",
+    "isotropic": true,
+    "cropped": false,
+    "horizontalFrameExtension": true,
+    "originalWebPStatus": "IMMUTABLE_EXACT_ACCEPTED_BYTES"
+  },
+  "checks": [
+    {
+      "target": "M1-M8 Chinese and English labels",
+      "status": "PASS_LOCAL_VECTOR_TEXT",
+      "reference": "content/embodied-configuration/ecr-motion-registry-v1.json"
+    },
+    {
+      "target": "Eight trigrams",
+      "status": "PASS_CANONICAL_VECTOR_LINES",
+      "reference": "content/professional/core-method-runtime/iching-trigram-registry-v1.json",
+      "lineOrder": "BOTTOM_TO_TOP",
+      "repair": "Replace raster line motifs with exact canonical binary structures; no new meaning"
+    },
+    {
+      "target": "H64 explanation / two motion roles",
+      "status": "PASS_LOCAL_TEXT_AND_REGISTRY",
+      "remaining": "A4 English explanatory microtext is only 6.36pt; print-size human readability not accepted"
+    },
+    {
+      "target": "Example H42/M6/GEN/艮/M2/ZHEN/震/HEXAGRAM-27/颐",
+      "status": "PASS_SOURCE_BOUND_FIXED_EXAMPLE",
+      "reference": "content/embodied-configuration/ecr-environment-first-configuration-v1.json"
+    },
+    {
+      "target": "Explicit non-personal notice",
+      "status": "PASS_LOCAL_VECTOR_TEXT",
+      "text": "EXAMPLE CONFIGURATION — NOT A PERSONAL RESULT"
+    },
+    {
+      "target": "Micro typography",
+      "status": "PRECISE_DEFECT",
+      "remaining": "English lower card captions 6.58pt, H64 explanation 6.36pt at physical A4. Zoomed rendering is legible; physical print acceptance pending. Avoid changing accepted composition without review. Smallest traditional caption is about 5.92pt. No physical print acceptance inferred."
+    }
+  ],
+  "C1SixRuntimeFunctions": "PRESERVED_DISTINCT_THEORY_ASSETS_NOT_RECLASSIFIED_AS_M8",
+  "customerPublication": "PENDING_HUMAN_PRINT_AND_CUSTOMER_RELEASE_GATES",
+  "providerCalls": 0,
+  "beforeAfter": {
+    "acceptedSourceDecoded": "SEC07-ACCEPTED-ORIGINAL.png",
+    "firstPresentation": "before-sec07-v2/SEC07-A4-R25.png",
+    "final": "SEC07-A4-R25.png"
+  }
+}

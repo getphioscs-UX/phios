@@ -1,0 +1,176 @@
+{
+  "at": "2026-10-27T04:21:23.496Z",
+  "scope": "REAL_FULL_SIZE_PDF_FORMAL_HANDLERS_LOCAL_SQLITE_AND_FILE_BACKED_R2_ADAPTER",
+  "account": "0b9f36bdf56f38d7d09aebe388f15204",
+  "bucket": "LOCAL_ADAPTER_NO_REMOTE_WRITES",
+  "productionD1Writes": 0,
+  "sourceR2Writes": 0,
+  "realPayments": 0,
+  "providerCalls": 0,
+  "remoteUploads": 0,
+  "checks": [
+    {
+      "name": "formal checkout creates QA order",
+      "state": "PASS"
+    },
+    {
+      "name": "signed synthetic payment granted exactly one entitlement",
+      "state": "PASS"
+    },
+    {
+      "name": "watermark outage is not silently delivered",
+      "state": "PASS"
+    },
+    {
+      "name": "watermark dispatch HMAC verified",
+      "state": "PASS"
+    },
+    {
+      "name": "immutable purchased language/source bound",
+      "state": "PASS"
+    },
+    {
+      "name": "existing sandbox destination not overwritten",
+      "state": "PASS"
+    },
+    {
+      "name": "actual full PDF all264 pages watermarked",
+      "state": "PASS"
+    },
+    {
+      "name": "metadata write idempotent",
+      "state": "PASS"
+    },
+    {
+      "name": "forged identity incomplete PDF and metadata conflict rejected",
+      "state": "PASS"
+    },
+    {
+      "name": "retry recovers same paid order",
+      "state": "PASS"
+    },
+    {
+      "name": "payment replay does not regenerate/upload",
+      "state": "PASS"
+    },
+    {
+      "name": "valid callback completes full PDF delivery",
+      "state": "PASS"
+    },
+    {
+      "name": "owner receives download token",
+      "state": "PASS"
+    },
+    {
+      "name": "cross account token denied",
+      "state": "PASS"
+    },
+    {
+      "name": "owner gets actual full watermarked bytes",
+      "state": "PASS"
+    },
+    {
+      "name": "redownload returns same full PDF without generation",
+      "state": "PASS"
+    },
+    {
+      "name": "expired token rejected",
+      "state": "PASS"
+    },
+    {
+      "name": "token use limit enforced",
+      "state": "PASS"
+    },
+    {
+      "name": "token not unlimited",
+      "state": "PASS"
+    },
+    {
+      "name": "cross account denied",
+      "state": "PASS"
+    },
+    {
+      "name": "synthetic refund revokes entitlement",
+      "state": "PASS"
+    }
+  ],
+  "checkout": {
+    "status": 201,
+    "body": {
+      "success": true,
+      "orderId": "ord_9cb4acfeeada4e2eac942ee3bbf7b106",
+      "checkoutUrl": "https://checkout.stripe.com/c/pay/SYNTHETIC"
+    }
+  },
+  "payment": {
+    "status": 503,
+    "body": {
+      "success": false,
+      "error": "commerce_retry_required",
+      "message": "The commerce service could not complete this request."
+    }
+  },
+  "watermark": {
+    "elapsedSeconds": 7.736413000000001,
+    "bytes": 72821596,
+    "sha256": "2009a713578343d8996db783a3046e7b43d524d95c295f67d8530fb2dcc14ac6",
+    "sourceSha256": "871805a46df701d78a121cbb5cff606df80e2097def38684e88a89c609ad796e",
+    "purchaseId": "pur_ord_9cb4acfeeada4e2eac942ee3bbf7b106",
+    "destinationKey": "private/books/com-book-3-en/watermarked/pur_ord_9cb4acfeeada4e2eac942ee3bbf7b106.pdf",
+    "inspection": {
+      "pages": 264,
+      "watermarkedPages": 264,
+      "sourceSha256": "871805a46df701d78a121cbb5cff606df80e2097def38684e88a89c609ad796e"
+    }
+  },
+  "metadataWrite": {
+    "key": "private/books/com-book-3-en/watermarked/pur_ord_9cb4acfeeada4e2eac942ee3bbf7b106.pdf",
+    "artifactSha256": "2009a713578343d8996db783a3046e7b43d524d95c295f67d8530fb2dcc14ac6",
+    "reused": false
+  },
+  "recovery": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "eventStatus": "processed"
+    }
+  },
+  "replay": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "replay": true
+    }
+  },
+  "callback": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "status": "completed"
+    }
+  },
+  "download": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "downloadUrl": "/api/book-one-download?token=REDACTED_SYNTHETIC_GRANT",
+      "expiresAt": "2026-10-27T04:36:48.181Z"
+    }
+  },
+  "successfulLimitedTokenUses": 2,
+  "crossAccount": {
+    "status": 403,
+    "body": {
+      "success": false,
+      "error": "book_access_required"
+    }
+  },
+  "refund": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "eventStatus": "processed"
+    }
+  },
+  "state": "PASS_LOCAL_FULL_SIZE_DELIVERY_NOT_REMOTE_SERVICE_CLOSURE"
+}

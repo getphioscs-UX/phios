@@ -1,0 +1,73 @@
+diff --git a/functions/pws/commercial/stripe-product-registry.js b/functions/pws/commercial/stripe-product-registry.js
+--- a/functions/pws/commercial/stripe-product-registry.js
++++ b/functions/pws/commercial/stripe-product-registry.js
+@@ -459,12 +459,68 @@ for(const row of rows){const b=bookPublication[row.productId];if(!b)continue;
+ for(const base of [...rows].filter(p=>/^COM-BOOK-0[1-4]$/.test(p.productId))){
+   Object.assign(base,{catalogVisible:false,checkoutBlockedReason:'BOOK_LANGUAGE_VERSION_REQUIRED'});
+   for(const [suffix,language,label]of [['ZH','zh-Hans','中文'],['EN','en','English']])rows.push({...base,
+-    productId:base.productId+'-'+suffix,language,baseProductId:base.productId,catalogVisible:true,
++    productId:base.productId+'-'+suffix,language,baseProductId:base.productId,catalogVisible:true,qaOnly:true,
+     title:base.title+' · '+label+' PDF',titleZh:base.titleZh+' · '+label+' PDF',amountMinor:8900,
+     entitlementPolicy:`BOOK_${String(base.publicationVolume).padStart(2,'0')}_${suffix}_PDF`,
+     fulfillmentType:'WATERMARKED_PDF',deliveryFormat:'FULL_PDF_DOWNLOAD',webReaderRequired:false,
+     qaPriceId:null,checkoutBlockedReason:null,requiresBookPdfReadiness:true,pricingVersion:'BOOK-PDF-PER-LANGUAGE-RM89-2026-10-21'});
+ }
++// Live SKU identities are language-specific and follow the existing Stripe Live catalog.
++// Historical COM-BOOK-0N and COM-BOOK-CONFIGURATION IDs remain readable for past orders.
++// Do not enable checkout without pinned R2 source bytes, watermarking, and verified webhook.
++const liveBookPdfListings = [
++  [1, 'EN', 'prod_VUHoX7gwt8gwOM', 'price_1UTJF3B2F823WiPtsfx13AVq'],
++  [1, 'ZH', 'prod_VUHo5EWD1ZkBqx', 'price_1UTJF5B2F823WiPtRebO9WGB'],
++  [2, 'EN', 'prod_VUHoIJ3oTg2lRc', 'price_1UTJF8B2F823WiPtVYasnfVn'],
++  [2, 'ZH', 'prod_VUHowXFx4lzN3k', 'price_1UTJFAB2F823WiPtC9BLLxZB'],
++  [3, 'EN', 'prod_VUHomGg0vNLgDs', 'price_1UTJFCB2F823WiPtzjpmuIir'],
++  [3, 'ZH', 'prod_VUHoZNzv919Lxm', 'price_1UTJFFB2F823WiPtJpZ3bmS6'],
++  [4, 'EN', 'prod_VUHow4o5t6BlHT', 'price_1UTJFHB2F823WiPtwbpQ1KGD'],
++  [4, 'ZH', 'prod_VUHoWwnNwtnEF5', 'price_1UTJFKB2F823WiPtN4Fm1e0A'],
++  [5, 'EN', 'prod_VUHpat9gdbI8js', 'price_1UTJFMB2F823WiPt1GyyaRUp'],
++  [5, 'ZH', 'prod_VUHpfGRBSLY91Z', 'price_1UTJFOB2F823WiPteyXq0EZG'],
++  [6, 'EN', 'prod_VUHp7LOARct0n6', 'price_1UTJFRB2F823WiPtXsDlGh4K'],
++  [6, 'ZH', 'prod_VUHpnA3YbWRmwG', 'price_1UTJFTB2F823WiPtnuQ3e74P'],
++  [7, 'EN', 'prod_VUHph0lSXGYBEV', 'price_1UTJFVB2F823WiPtP3ikfFL9'],
++  [7, 'ZH', 'prod_VUHpKsaFGP7vWH', 'price_1UTJFXB2F823WiPtHSVxpxpl']
++];
++for (const [volume, suffix, liveProductId, livePriceId] of liveBookPdfListings) {
++  const base = rows.find(row => row.category === 'BOOK' && row.publicationVolume === volume && !row.language);
++  const expectedAmount = volume <= 4 ? 8900 : volume <= 6 ? 10900 : 5900;
++  if (!base || !base.active || base.amountMinor !== expectedAmount) {
++    throw new Error('BOOK_LIVE_LANGUAGE_SKU_PRICE_DRIFT:' + volume);
++  }
++  const language = suffix === 'EN' ? 'en' : 'zh-Hans';
++  const label = suffix === 'EN' ? 'English PDF' : '中文 PDF';
++  rows.push({
++    ...base,
++    productId: `COM-BOOK-${volume}-${suffix}`,
++    baseProductId: base.productId,
++    title: `${base.title} · ${label}`,
++    titleZh: `${base.titleZh} · ${label}`,
++    language,
++    amountMinor: expectedAmount,
++    entitlementPolicy: `BOOK_${String(volume).padStart(2, '0')}_${suffix}_PDF`,
++    fulfillmentType: 'WATERMARKED_PDF',
++    deliveryFormat: 'FULL_PDF_DOWNLOAD',
++    webReaderRequired: false,
++    qaProductId: null,
++    qaPriceId: null,
++    liveProductId,
++    livePriceId,
++    liveOnly: true,
++    catalogVisible: true,
++    checkoutBlockedReason: null,
++    requiresBookPdfReadiness: true,
++    pricingVersion: 'BOOK-1-7-PER-LANGUAGE-LIVE-2026-10-24'
++  });
++}
++// From this successor onward, Book V–VII also require an explicit language SKU.
++// Prior work-only orders keep their immutable entitlement codes.
++for (const legacy of rows.filter(row => row.category === 'BOOK' && !row.language && row.publicationVolume >= 5 && row.publicationVolume <= 7)) {
++  Object.assign(legacy, {catalogVisible: false, checkoutBlockedReason: 'BOOK_LANGUAGE_VERSION_REQUIRED'});
++}
++
+ const previousFinancialProduct=Object.freeze({...rows.find(p=>p.productId==='COM-REPORT-FINANCIAL-FULL')});
+ Object.assign(rows.find(p=>p.productId==='COM-REPORT-FINANCIAL-FULL'),{amountMinor:6900,title:'Personal & Household Financial Preparation Report · Bilingual',titleZh:'个人与家庭财务准备报告 · 双语',pricingVersion:'FINANCE-RM69-2026-10-20',publicationVersion:'FINANCE_BILINGUAL_MERGED_22_CANDIDATE',professionalReviewRequired:false,qaPriceId:null,livePriceId:null,checkoutBlockedReason:'FINANCE_RM69_PRICE_AND_DELIVERY_BINDING_REQUIRED'});
+ // Read-only PHI OS live-account identity verified 2026-10-25; no activation flags changed.

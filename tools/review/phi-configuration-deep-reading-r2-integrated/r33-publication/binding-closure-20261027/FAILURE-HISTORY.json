@@ -1,0 +1,27 @@
+{
+  "scope": "This turn only; previous failures retained in existing receipts",
+  "failures": [
+    {
+      "stage": "First PDF assembly",
+      "failure": "Copying one page at a time duplicated shared background resources",
+      "repair": "One batched copyPages operation per original PDF",
+      "effect": "Final PDFs approximately55–58MB rather than229–492MB"
+    },
+    {
+      "stage": "First text assertion",
+      "failure": "Existing private-review footer interleaved between source pages",
+      "repair": "Use existing normalization to exclude only known footer; author prose assertions unchanged"
+    },
+    {
+      "stage": "First font candidate",
+      "failure": "Subset font extraction succeeded but Chinese raster glyphs incomplete",
+      "repair": "Embed full font and inspect actual raster"
+    },
+    {
+      "stage": "First module test harness",
+      "failure": "Read modules key rather than actual rows key",
+      "repair": "Correct harness field; retain all eleven disposition assertions"
+    }
+  ],
+  "historyNotRewritten": true
+}
