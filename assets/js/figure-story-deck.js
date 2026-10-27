@@ -99,6 +99,18 @@ function storyDeck(sources,ids,label,{after,kind='sections'}={}){
     slide.dataset.figureIndex=String(i);
     const expl=kind==='figures'&&ids?.[i]?.startsWith('ABOUT-')?ABOUT[i]:descriptions(ids?.[i],source);
     if(kind==='figures'){
+      const visual=source.querySelector('img');
+      if(visual&&!visual.closest('a')){
+        const open=document.createElement('a');
+        open.className='phios-figure-deck__full-image';
+        open.target='_blank';open.rel='noopener noreferrer';
+        open.dataset.figureFullEn='View full original figure: '+expl[0];
+        open.dataset.figureFullZh='查看完整原图：'+expl[1];
+        visual.before(open);open.append(visual);
+        const updateLink=()=>{const src=visual.currentSrc||visual.getAttribute('src');if(src)open.href=src;};
+        updateLink();
+        new MutationObserver(updateLink).observe(visual,{attributes:true,attributeFilter:['src','srcset']});
+      }
       const section=make('section','phios-figure-deck__source phios-figure-deck__source--figure');
       const heading=make('h3','phios-figure-deck__heading');setText(heading,expl[0],expl[1]);
       const copy=make('p','phios-figure-deck__description');setText(copy,expl[2],expl[3]);
@@ -131,6 +143,7 @@ function storyDeck(sources,ids,label,{after,kind='sections'}={}){
   function localize(){
     deck.setAttribute('aria-label',lang()?label[1]:label[0]);
     deck.querySelectorAll('[data-fig-en]').forEach(n=>{const s=n.getAttribute(lang()?'data-fig-zh':'data-fig-en');if(n.textContent!==s)n.textContent=s;});
+    deck.querySelectorAll('[data-figure-full-en]').forEach(n=>n.setAttribute('aria-label',n.getAttribute(lang()?'data-figure-full-zh':'data-figure-full-en')));
     prev.setAttribute('aria-label',lang()?'上一张图':'Previous figure');
     next.setAttribute('aria-label',lang()?'下一张图':'Next figure');
     for(let i=0;i<buttons.length;i++)buttons[i].setAttribute('aria-label',(lang()?'查看第 ':'View figure ')+(i+1));
