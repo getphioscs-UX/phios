@@ -21,6 +21,27 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .node-version
+            package.json
+            package-lock.json
+            index.html
+            assets/js/figure-story-deck.js
+            assets/js/global-visual-r2.js
+            assets/css/figure-story-deck.css
+            scripts/check-figure-story-deck-r1.mjs
+            perspectives/tarot/index.html
+            perspectives/iching/consult/index.html
+            reality/index.html
+            perspectives/profile/index.html
+            account/index.html
+            about/reality-navigation/index.html
+            professional/financial/index.html
+            perspectives/personal/index.html
+            perspectives/index.html
+            about/founder/index.html
+          sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
