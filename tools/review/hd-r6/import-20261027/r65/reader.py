@@ -4,7 +4,7 @@ for f in pdf:
  langs=['zh-Hans','en'] if f['format']=='bilingual' else [f['format']];sections=[{'sectionId':p['sectionId'],'title':s['sections'][i]['title'][langs[0]],'content':'\n\n'.join(clean(r['text']) for lang in langs for r in p['paragraphs'] if r['language']==lang)} for i,p in enumerate(pack)];(D/('PROJECTION-'+f['format']+'.json')).write_text(json.dumps({'projection':{'sections':sections},'paragraphs':[{'id':r['id'],'text':clean(r['text'])} for p in pack for lang in langs for r in p['paragraphs'] if r['language']==lang],'chartDigest':s['chartDigest'],'commercial':False},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 body=''
 for sec,p in zip(s['sections'],pack):
- n=sec['number'];poster=f'<img class="opener" src="asset-reads/SEC{n:02}.webp" alt="{esc(sec["title"]["en"])} — fixed bilingual editorial artwork">' if n!=11 else '<aside>SEC11 修订固定图尚未取得；旧版不回退。<br>Revised fixed artwork unavailable; stale artwork excluded.</aside>'
+ n=sec['number'];poster=f'<img class="opener" src="asset-reads/SEC{n:02}.webp" alt="{esc(sec["title"]["en"])} — fixed bilingual editorial artwork">'
  content=''
  for lang in ['zh-Hans','en']:
   text='';last=None

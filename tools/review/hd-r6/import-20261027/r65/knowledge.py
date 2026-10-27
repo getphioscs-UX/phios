@@ -70,6 +70,10 @@ for a in assets['rows']:
  im=Image.open(a['file']);im.load();a.update({'width':im.width,'height':im.height,'decode':'PASS','effectiveDpiA4Width':round(im.width/(210/25.4)),'printStatus':'BELOW_300_DPI_PHYSICAL_PRINT_UNVERIFIED','registeredCurrentHdApproval':'NO_HD_BINDING_IN_SHARED_CURRENT_REGISTRY','renderRole':'BODY_BACKGROUND_WITH_OPAQUE_READING_PANEL' if a['section']=='BODY' else 'FIXED_BILINGUAL_CHAPTER_OPENER','localDesignAdmission':'OWNER_R65_LOCAL_ONLY','disposition':'EXCLUDE_STALE_WITHDRAWN_INNER_VISION' if a['section']==11 else 'EMBED_OWNER_REVIEW_CANDIDATE_NOT_COMMERCIAL'})
  if a['section']==11:assert a['sha256']=='f22a1fe71d105bbfd187511591360d1bfc1baed4ed6fbe42eb226154653683aa'
  rows.append(a)
-save('R2-ASSET-MANIFEST.json',{'rows':rows,'embeddedSectionPosters':16,'missingRequiredReplacement':['SEC11 exact approved replacement bytes/hash not supplied; fresh GET matches stale oldSHA'],'print300DpiPass':False,'all17IntegrationPass':False,'bodyReused':True,'writes':0})
+assetManifest={'rows':rows,'embeddedSectionPosters':16,'missingRequiredReplacement':['SEC11 unconfirmed exact fixed-art scope'],'print300DpiPass':False,'all17IntegrationPass':False,'bodyReused':True,'writes':0}
+if (D/'SEC11-OWNER-VISUAL-ACCEPTANCE.json').exists():
+ accept=j(D/'SEC11-OWNER-VISUAL-ACCEPTANCE.json');a=next(x for x in rows if x['section']==11);assert a['sha256']==accept['sha256'] and accept['personalTone4CognitionInferenceAllowed'] is False
+ a.update({'disposition':'EMBED_OWNER_CONFIRMED_FIXED_EDUCATIONAL_ART','localDesignAdmission':'EXPLICIT_OWNER_VISUAL_ACCEPTANCE','acceptanceReceipt':'SEC11-OWNER-VISUAL-ACCEPTANCE.json'});assetManifest.update({'embeddedSectionPosters':17,'missingRequiredReplacement':[],'all17IntegrationPass':'REQUIRES_ACTUAL_PDF_PROOF'})
+save('R2-ASSET-MANIFEST.json',assetManifest)
 save('CHECKPOINT.json',{'stage':'SOURCE_IDENTIFIED_ASSETS_FRESH_NORMALIZATION_READY','next':'Shared64Gate36Channel geometry, controlled section packets, original depth writing, three PDF candidates and physical QA','providerCalls':0,'productionWrites':0})
 print(json.dumps({'sourceUnits':len(units),'structuralRows':len(audit),'riskCells':len(risks),'duplicates':len(duplicates),'corrections':[x['currentObservation'] for x in corrections],'assetsDecoded':len(rows),'posterEmbeddable':16}))

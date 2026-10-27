@@ -33,12 +33,12 @@ for f,layout in zip(manifest['files'],layouts):
   if pageNum in layout['chapters'].values():pass
   for sec,pg in layout['chapters'].items():
    if int(pg)==pageNum:
-    wanted=expected.get(int(sec));matched=wanted in images;posterproof.append({'section':int(sec),'page':pageNum,'exactDecodedPixelMatch':matched,'expected':'HOLD_STALE' if int(sec)==11 else 'EMBED'})
+    wanted=expected.get(int(sec));matched=wanted in images;posterproof.append({'section':int(sec),'page':pageNum,'exactDecodedPixelMatch':matched,'expected':'EMBED_OWNER_CONFIRMED' if int(sec)==11 else 'EMBED'})
   pixelmatches[pageNum]=expected['BODY'] in images
- assert all(pixelmatches.values()),'BODY XObject not actually present';assert sum(x['exactDecodedPixelMatch'] for x in posterproof)==16;assert not next(x for x in posterproof if x['section']==11)['exactDecodedPixelMatch']
+ assert all(pixelmatches.values()),'BODY XObject not actually present';assert sum(x['exactDecodedPixelMatch'] for x in posterproof)==17;assert next(x for x in posterproof if x['section']==11)['exactDecodedPixelMatch']
  # Low density is diagnostic; a final/diagram/opener page is not silently called bad.
  low=[s for s in stats if s['role']=='BODY' and s['textHeight']<140 and s['characters']<220]
- result={'format':fmt,'pdfSHA256':f['sha256'],'pages':f['pages'],'missingParagraphs':missing,'paragraphOrderCorrect':not missing,'boundsFailures':bounds,'forbiddenLeaks':forbidden,'posterPixelProof':posterproof,'BODYActualEveryPage':all(pixelmatches.values()),'lowDensityBodyPages':low,'pageStats':stats,'status':'PASS_MACHINE_VISUAL_PENDING' if not missing and not bounds and not forbidden else 'FAIL'};rows.append(result);save('PDF-QA.json',{'at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'results':rows,'scope':'Private physical PDF candidate;16/17 fixed visuals, commercial BLOCKED'})
+ result={'format':fmt,'pdfSHA256':f['sha256'],'pages':f['pages'],'missingParagraphs':missing,'paragraphOrderCorrect':not missing,'boundsFailures':bounds,'forbiddenLeaks':forbidden,'posterPixelProof':posterproof,'BODYActualEveryPage':all(pixelmatches.values()),'lowDensityBodyPages':low,'pageStats':stats,'status':'PASS_MACHINE_VISUAL_PENDING' if not missing and not bounds and not forbidden else 'FAIL'};rows.append(result);save('PDF-QA.json',{'at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'results':rows,'scope':'Private physical PDF candidate;17/17 fixed visuals, commercial BLOCKED'})
  print(json.dumps({k:result[k] for k in ['format','pages','status','missingParagraphs','lowDensityBodyPages']},ensure_ascii=False),flush=True)
  raster=T/('pages-final-'+fmt+'-'+f['sha256'][:12]);raster.mkdir(exist_ok=True);q=subprocess.run([pop,'-scale-to','850','-jpeg','-jpegopt','quality=74',f['path'],str(raster/'p')],capture_output=True,text=True);assert q.returncode==0,q.stderr
  pages=sorted(raster.glob('p-*.jpg'),key=lambda p:int(p.stem.split('-')[-1]));assert len(pages)==f['pages']
@@ -49,4 +49,4 @@ for f,layout in zip(manifest['files'],layouts):
   contact.save(V/f'{fmt}-contact-{start//12+1:02}.jpg',quality=88)
  reps=[1,4,5,int(layout['chapters']['1']),int(layout['chapters']['1'])+1,int(layout['chapters']['5'])+1,int(layout['chapters']['6'])+1,int(layout['chapters']['13'])+1,f['pages']]
  for pg in reps:subprocess.run([pop,'-f',str(pg),'-l',str(pg),'-scale-to','1200','-singlefile','-png',f['path'],str(V/f'{fmt}-representative-{pg}')],capture_output=True,check=True)
-save('PDF-QA.json',{'at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'results':rows,'physicalPages':sum(x['pages'] for x in rows),'contacts':len(list(V.glob('*contact*'))),'scope':'Actual exported bytes; private16/17 visual candidate, no commercial PASS'})
+save('PDF-QA.json',{'at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'results':rows,'physicalPages':sum(x['pages'] for x in rows),'contacts':len(list(V.glob('*contact*'))),'scope':'Actual exported bytes; private17/17 visual candidate, no commercial PASS'})
