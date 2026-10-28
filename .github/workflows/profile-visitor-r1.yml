@@ -1,0 +1,37 @@
+name: Profile Visitor R1 visual DOM QA
+on:
+  pull_request:
+    paths:
+      - 'assets/icons/profile-r1/**'
+      - 'assets/customer-ui/js/surfaces/profile-visitor-r1.js'
+      - 'assets/customer-ui/surfaces/profile-visitor-r1.css'
+      - 'perspectives/profile/index.html'
+      - 'scripts/check-profile-visitor-r1.mjs'
+      - '.github/workflows/profile-visitor-r1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  profile-visitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .node-version
+            package.json
+            package-lock.json
+            assets/icons/profile-r1
+            assets/customer-ui/js/surfaces/profile-visitor-r1.js
+            assets/customer-ui/surfaces/profile-visitor-r1.css
+            perspectives/profile/index.html
+            scripts/check-profile-visitor-r1.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: node --check assets/customer-ui/js/surfaces/profile-visitor-r1.js
+      - run: node scripts/check-profile-visitor-r1.mjs
