@@ -14,7 +14,7 @@ assert.equal(manifest.newVectorIcons.length,13,'Original six-lens and seven-meth
 const matrix=JSON.parse(readFileSync('content/production-closure/profile-visual-r1/ASSET-STATUS-MATRIX-R2.json','utf8'));
 assert.equal(matrix.total,34,'User asset request comprises 34 distinct entries');
 assert.equal(matrix.counts.AVAILABLE_ORIGINAL_VECTOR,24,'Expected six lenses, seven method, five Account and six state icons');
-assert.equal(matrix.counts.OWNER_UPLOADED_FETCH_VERIFICATION_PENDING,8,'All eight R2 photographs were owner-reported; HTTP visual verification is separate');
+assert.equal(matrix.counts.R2_PUBLIC_CHROMIUM_LOADED,8,'All eight R2 photographs must be independently verified by Chromium');
 assert.equal(matrix.counts.OPTIONAL_STATIC_EXPORT,1,'Static wheel is optional; interactive wheel remains');
 assert.equal(matrix.counts.NOT_AN_EIGHTH_METHOD,1,'Do not invent a new structured assessment method');
 assert.ok(manifest.pending.some(x=>x.kind.startsWith('live_browser')),'Browser visual acceptance cannot be silently assumed');
