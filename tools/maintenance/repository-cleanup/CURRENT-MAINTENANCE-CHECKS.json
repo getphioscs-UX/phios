@@ -1,0 +1,103 @@
+{
+  "utc": "2026-10-27T20:27:32.768749+00:00",
+  "checks": [
+    {
+      "check": "NODE_SYNTAX",
+      "path": "scripts/lib/disk-space-guard.mjs",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "check": "NODE_SYNTAX",
+      "path": "scripts/local-disk-preflight.mjs",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "check": "NODE_SYNTAX",
+      "path": "scripts/check-local-disk-budget.mjs",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "check": "NODE_SYNTAX",
+      "path": "scripts/build-cloudflare-pages.mjs",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "check": "NODE_SYNTAX",
+      "path": "scripts/build-founder-r2-pages-snapshot.mjs",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "check": "NODE_SYNTAX",
+      "path": "scripts/build-external-reality-r1-snapshot.mjs",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "check": "SPACE_GUARD_UNIT",
+      "exitCode": 0,
+      "output": "PASS disk budget: exact threshold, low-space rejection, explicit override, invalid estimates. No build or rendering.\n"
+    },
+    {
+      "check": "PYTHON_AST_ONLY",
+      "path": "scripts/lib/disk_space_guard.py",
+      "status": "PASS"
+    },
+    {
+      "check": "PYTHON_AST_ONLY",
+      "path": "tools/review/hd-r6/import-20261027/r65/render.py",
+      "status": "PASS"
+    },
+    {
+      "check": "PYTHON_AST_ONLY",
+      "path": "tools/review/hd-r6/import-20261027/r65/pdf-qa.py",
+      "status": "PASS"
+    },
+    {
+      "check": "PYTHON_AST_ONLY",
+      "path": "tools/review/numerology-r21/pdf-qa.py",
+      "status": "PASS"
+    },
+    {
+      "check": "CURRENT_REVIEW_PDF_AND_REQUIRED_SOURCE_BYTES",
+      "files": 11,
+      "status": "PASS"
+    },
+    {
+      "check": "SPARSE_CHECKOUT_WHATIF_CREATED_NOTHING",
+      "status": "PASS"
+    },
+    {
+      "check": "PYTHON_RENDER_MUTEX_AND_BUDGET",
+      "status": "PASS",
+      "basis": "Executed inside workspace fixture; initial OS sandbox TEMP attempt failed with PermissionError and was not counted PASS"
+    },
+    {
+      "check": "PRIMARY_RUNTIME_REGISTRY_ASSET_UNCHANGED_FROM_CURRENT_HEAD",
+      "status": "PASS"
+    },
+    {
+      "check": "ONLY_PRIMARY_WORKTREE_REGISTERED",
+      "status": "PASS",
+      "output": "worktree C:/phios\nHEAD ef412baaba16ac497f6c94968015e66e364a729a\nbranch refs/heads/main\n\n"
+    },
+    {
+      "check": "NODE_JUNCTION_REPLACEMENT_TARGET_PRESERVED",
+      "status": "PASS",
+      "basis": "Host test with two tiny fixture directories; sandbox link creation EPERM retained as initial failure, not counted PASS"
+    },
+    {
+      "check": "FINAL_SYNTAX_AND_CRLF_AWARE_WHITESPACE",
+      "status": "PASS",
+      "basis": "Existing CRLF source style preserved; default diff check had flagged CR characters. Only per-command whitespace option used, no Git configuration mutation."
+    }
+  ],
+  "buildRun": false,
+  "renderRun": false,
+  "providerCalls": 0,
+  "limits": "Syntax/maintenance guards and exact retained bytes only; not a new product build or commercial acceptance"
+}

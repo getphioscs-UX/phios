@@ -1,1 +1,0 @@
-import {deepFreeze,clone} from './mir7-utils.js';const ALLOWED=new Set(['OBSERVED','DERIVED','PROJECTED','INTERPRETED','UNKNOWN']);export function preserveRmoEvidenceStates(items=[]){for(const x of items){if(!ALLOWED.has(x?.state))throw new TypeError(`INVALID_RMO_EVIDENCE_STATE:${x?.state}`);}return deepFreeze(clone(items));}

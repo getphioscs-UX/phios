@@ -1,3 +1,9 @@
+import sys
+from pathlib import Path
+sys.path.insert(0,str(Path('scripts/lib').resolve()))
+from disk_space_guard import require_disk_space,reserve_render_slot
+require_disk_space('Numerology R21 raster QA',1_000_000_000)
+reserve_render_slot('Numerology R21 raster QA')
 from pathlib import Path
 from pypdf import PdfReader
 from PIL import Image,ImageDraw

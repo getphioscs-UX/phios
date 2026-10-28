@@ -1,0 +1,40 @@
+{
+  "failures": [
+    {
+      "check": "Default sandbox TEMP fixture",
+      "original": "PermissionError creating/removing lock in sandbox TEMP",
+      "successor": "Workspace fixture passed; empty failed external directory removed only after verified empty"
+    },
+    {
+      "check": "Junction fixture",
+      "original": "EPERM creating junction in sandbox",
+      "successor": "Tiny host fixture passed; target bytes intact; fixture removed"
+    },
+    {
+      "check": "Git temporary deletion",
+      "original": "151 ReadOnly attribute failures, first attempt retained",
+      "successor": "Only eligible temporary garbage ReadOnly bit handled under exclusive reader/writer exclusion; 153 total deleted; valid objects untouched"
+    },
+    {
+      "check": "Old Founder snapshot source stability",
+      "original": "Hardlinked build script changed after baseline by this maintenance guard edit",
+      "successor": "Stopped that preparation; remeasured/rehashed unique source and verified archive before deletion"
+    },
+    {
+      "check": "Git object-count equality",
+      "original": "Assertion failed; exact actual count at that instant was not saved",
+      "successor": "Not converted to PASS. Subsequent measurement recorded new loose objects; registered pack and packed-object counts unchanged. Background attribution not proven."
+    },
+    {
+      "check": "Final status path scope",
+      "original": "Quoted path with spaces failed a literal-prefix assertion",
+      "successor": "NUL-delimited git status verified all 19373 deletions are under the retired tracked snapshot; no assertion relaxed on scope"
+    },
+    {
+      "check": "Whitespace check",
+      "original": "Default git diff --check reported CR characters on existing Windows CRLF files",
+      "successor": "Preserved original style, used per-command cr-at-eol whitespace interpretation, final syntax and whitespace checks passed; no Git config mutation"
+    }
+  ],
+  "noProductBuildOrProviderRun": true
+}

@@ -1,4 +1,9 @@
 import json,pathlib,hashlib,re,io,copy,datetime
+import sys
+sys.path.insert(0,str(pathlib.Path('scripts/lib').resolve()))
+from disk_space_guard import require_disk_space,reserve_render_slot
+require_disk_space('HD R65 report batch',2_000_000_000)
+reserve_render_slot('HD R65 report batch')
 from xml.sax.saxutils import escape
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont

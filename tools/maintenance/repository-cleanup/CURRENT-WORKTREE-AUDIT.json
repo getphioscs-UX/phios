@@ -1,0 +1,2010 @@
+[
+  {
+    "name": "pr6",
+    "path": "C:/phios/.worktrees/pr6-ebook-closure",
+    "head": "19aa304555ef404c76cdac5f7e9e8df584c18cea",
+    "branch": "codex/pr6-ebook-closure-20261025",
+    "uniqueCommits": [
+      "19aa304555ef404c76cdac5f7e9e8df584c18cea test(books): distinguish legacy work-level product count from edition-specific SKUs",
+      "da58ea66582529fed9a289f498130adcef7b6cb8 docs(books): register seven-volume bilingual source census and fail-closed production gates",
+      "ffe488711759e1227b82f387dccb9c5c941a0c14 test(books): add zero-cost 14 Live language SKU and R2 fail-closed contract checks",
+      "c5d714506901417d3f9baf46bab4f961173500dc fix(books): verify paid Live book edition price and amount against immutable order",
+      "d6beae5fd583e696a9917e79e4d19bd246ae8437 fix(books): use exact Stripe Live registered edition prices; retain QA inline-price fixtures",
+      "2d52c29d1a7c75e101b31087322ccacfcd41b8d6 fix(books): prevent Live-only language offers from leaking into QA product persistence",
+      "9ab0f1e361a618fc9b20c3a3ca7049fdaf1f8611 fix(books): isolate Live language catalog and QA historical language SKU checkout",
+      "3975041134390ef51ed832c09ce230a4e8ec300f fix(books): preserve padded language SKU compatibility in QA while separating Live IDs",
+      "dffd9a6f897ad30b7fe4347789d6a993311db49a fix(books): allow securely watermarked Live book-language paths through download endpoint",
+      "8a0a1b9dab0374ed584f206753e924ed32c93c90 fix(books): recognize both historical padded and Live 1-7 language product IDs",
+      "82fa1e3697803865be3cf226f361b9e828a11533 fix(books): register 14 verified Stripe Live language SKU mappings without activating checkout"
+    ],
+    "status": " M assets/customer-ui/js/surfaces/commerce-account.js\n M assets/customer-ui/surfaces/account-delivery.css\n M assets/js/pages/book-volume-seven.js\n M content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html\n M functions/commerce/book-commerce-store.js\n M functions/commerce/book-delivery.js\n M functions/commerce/book-product-registry.js\n M scripts/check-commerce-stripe-r1.mjs\n M tools/review/knowledge-answer-quality-r1/book-pdf-delivery/pdf-fixture.py\n?? functions/commerce/book-watermark-artifact.js\n?? scripts/check-book-pdf-source-version-pin.mjs\n?? scripts/check-seven-book-ebook-browser.mjs\n?? scripts/check-seven-book-ebook-delivery-qa.mjs\n?? scripts/check-seven-book-legacy-compatibility.mjs\n?? tools/review/seven-book-ebook-closure-r1/\n",
+    "files": [
+      {
+        "path": "assets/customer-ui/js/surfaces/commerce-account.js",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 15758,
+        "sha256": "229bffa240f6add34a4a80527ea676cf79d258968801e4231caf3e49355ea7f4"
+      },
+      {
+        "path": "assets/customer-ui/surfaces/account-delivery.css",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 3834,
+        "sha256": "dfff26457d8e74c5ef39da4cab71cefa6fc9035155444846524192e5712fb8e6"
+      },
+      {
+        "path": "assets/js/pages/book-volume-seven.js",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 25881,
+        "sha256": "4c3f5a934bea101c8aa7616098fb9e1b72743d165d043719ee268e09091a83a1"
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 765558,
+        "sha256": "14529b6289aca43be46335b059c6c2f90ba5fd2ab29f2deaedcba78e0cbccfc4"
+      },
+      {
+        "path": "functions/commerce/book-commerce-store.js",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 46020,
+        "sha256": "144955e7e7fdc157e478e04254836f44573c13e9e83923b5f43433dc3e21b2b2"
+      },
+      {
+        "path": "functions/commerce/book-delivery.js",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 8261,
+        "sha256": "6a0888218de3b5f6f6c023067cb17d32b42e020e822f774d0fe1db7c16f6974c"
+      },
+      {
+        "path": "functions/commerce/book-product-registry.js",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 6434,
+        "sha256": "d33132bc3bac597607cbc1204cf1f96e959f89e511273fb1b6d44fae74b157dc"
+      },
+      {
+        "path": "functions/commerce/book-watermark-artifact.js",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2601,
+        "sha256": "96092844446d4faef8b1155086902c7697edbcc94350cf79474f11f7d8bbb179"
+      },
+      {
+        "path": "scripts/check-book-pdf-source-version-pin.mjs",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1464,
+        "sha256": "9ef9db1ea7d4696e51929cd29c1cfa462bf3f352b89d8ae27f3f7668746c0bf5"
+      },
+      {
+        "path": "scripts/check-commerce-stripe-r1.mjs",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 29495,
+        "sha256": "e908d66c52135af4e5b7881cfd9fa6c17f0aa0a6dc08a135ae508f6d1aca4793"
+      },
+      {
+        "path": "scripts/check-seven-book-ebook-browser.mjs",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 5305,
+        "sha256": "4ba3927dd1ad6925c89e9582fb6181e092262fc26364b40eefa985990a714fa2"
+      },
+      {
+        "path": "scripts/check-seven-book-ebook-delivery-qa.mjs",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 13316,
+        "sha256": "fc6f5bc6d951416254d8023af61ad8338286cde5923f448c4e307b9d0189e5be"
+      },
+      {
+        "path": "scripts/check-seven-book-legacy-compatibility.mjs",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2916,
+        "sha256": "2895b5c8be49fd6416c636740e69d57100c58d26599e268947f05dcfa7fe681e"
+      },
+      {
+        "path": "tools/review/knowledge-answer-quality-r1/book-pdf-delivery/pdf-fixture.py",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 1617,
+        "sha256": "3ec2fde581da815adcf9febd9df385412a4718943cf5061d7b99a34e5f50c480"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/AUDIT-KIT-IDENTITY.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 350,
+        "sha256": "34e38f425e012393a06380e765e2b1b17f78921186aa9e146fc7868723789308"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/BATCH-01-VALIDATION.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 318,
+        "sha256": "f8a86287fb98665c26514435e8cc9439b185b5a93be39c756edcee38111c0bd5"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/BOOK-I-COMPLETE-CHAPTER-BATCH-01.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 10236,
+        "sha256": "de94cd10c50cf3cab5f9155e72c17b866f055e5e128074120a24745dabcddc9a"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/BOOK-I-COMPLETE-CHAPTER-BATCH-01.md",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 5888,
+        "sha256": "1e01442919c0fae551f3a040a6bb511770984070ea05f3b3eba9ce64a07cbc30"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/BOOK-III-R3-INCREMENTAL-VERIFICATION.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 35505,
+        "sha256": "5b77925d2e38feb41015c0ff0cb88b56dd3388eb31651df4cba2666eed3b5584"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/BROWSER-DISCLOSURE-PRECONDITION.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 385,
+        "sha256": "0065868ffc74670aa365629adcfc3aae415eb45c1bbf44efcb280407084d374a"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/BROWSER-FAILURE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 3715,
+        "sha256": "bb0112548e6954aa329ae6de9dbd0a9e42f9951ccd21fa965924363a25836030"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/BROWSER-INITIAL-MOCK-ERRORS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 379,
+        "sha256": "768ec6457d7d908d05f2f02ab39780f7469398c34b8407f67e1e12a86c362296"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/BROWSER-INITIAL-REDIRECT-FAILURE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 382,
+        "sha256": "43c1b1a0181fb9ba0ef3a60612ce3e4600c1e5e050e8982a021addb6afc01396"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/BROWSER-MOBILE-OVERFLOW-BEFORE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 3715,
+        "sha256": "bb0112548e6954aa329ae6de9dbd0a9e42f9951ccd21fa965924363a25836030"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/BROWSER-RESULTS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 14140,
+        "sha256": "3a6f9601f483640387907d35680b40ef7ddcb32bb19367b0021bce733eb0202b"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/BUILD-INPUTS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2610176,
+        "sha256": "de13717b8398a06b60d7eb5da3537502a716696d11ce242a5603dc7210b385cf"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/BUILD-OUTPUTS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2625342,
+        "sha256": "d70f46d7bc37cebefb5497bcbdfc29a8ad63cfc6170d4f7b58879081bda45012"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/BUILD-RECEIPT.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2178,
+        "sha256": "e30d43198757f2e2d1b1ba1a5dff6367ff0fb3fd572b2e825b57e26863106da7"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/CHANGED-FILES.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1705,
+        "sha256": "fb17cd80c74d6adbf14820397a086c2cb25662500d5f6f5cfe7fff023d8eb54d"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/CODE-CHANGES.patch",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 47302,
+        "sha256": "f9ef75e211853586c145e9bda5bae06f16cc82745ada4c5c4a8c86fbb889123c"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/COMMAND-RESULTS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2160,
+        "sha256": "1e11056d326ab393a641150a067309f87e46e77e37d357f25cd1026518f0c827"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/COMMERCE-BOOK-SOURCE-VERSIONS-CANDIDATE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 4403,
+        "sha256": "c183d42ac153a26c204e63a3406bb8a4ebb03517d8a9c6354f98fa3426cb595f"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/COMMERCE-PRODUCTION-CLOSURE-CHECKLIST.md",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 4348,
+        "sha256": "b9eea9e5eb70a147a2f75c088508338ae113b7a0893d6bc91da58aef5a2d2b95"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/COMMERCE-R2-CONTINUATION.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1899,
+        "sha256": "4b8635f9bac8df34d9624ef4b4e106c92e60a542eb4485234d2c3ee5f2def41d"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/D1-SCHEMA-READONLY.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 862,
+        "sha256": "32c97115a835f86ecbd692b6a5f368c53e4b90b30b8024251ee8df0b1ed2f964"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/DELIVERY-QA-FAILURE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 9675,
+        "sha256": "435d38bb1ba86db591810a50189f5a99a683228f1f542d054f30fab9b5df5c6e"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/DELIVERY-QA.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 9946,
+        "sha256": "ab775cd11e8eb460c1ee765838cc9d8cd031749698218727d3a4e4b152f29f98"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/FAILURES-AND-REPAIRS.md",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 3232,
+        "sha256": "317695d5dc15b755ea026c9da99c5e6ba9d77685a66bf7d919efa7cbcbcbd749"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/FINAL-INPUT-STABILITY.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 364,
+        "sha256": "7a060f6b67e02fce3faa90424f9237ad6aabfd5c126d2d46b169a43d3c84778f"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/FULL-SIZE-R3-LOCAL-QA-BEFORE-COMPLETED-GUARD.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 3921,
+        "sha256": "e2ac197b9cfc6b6beb321de65ca0e875a69f1a45a68ca7f4e83b65388b2be901"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/FULL-SIZE-R3-LOCAL-QA-BEFORE-CONTRAST.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 3929,
+        "sha256": "65934c020cdb6f74f89002a0558f4a550544505b245887f53b282436f0af96bb"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/FULL-SIZE-R3-LOCAL-QA.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 3929,
+        "sha256": "b38e3e830956c31d43ef1fcb29b24ffbd5eb714c10869b587890890ba490ba95"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/FULL-SIZE-R3-QA-INITIAL-ENVELOPE-FAILURE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1035,
+        "sha256": "6c7076b544f2634e51a813cb0143f925688f125bf6422f9a171a9df86d5090bb"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/FULL-SIZE-R3-QA.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 3698,
+        "sha256": "3ab6c889be97a188f59ee56a2102de6e37814d5b6e2434068fb6ace419e6d853"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/FULL-SIZE-R3-REMOTE-QA.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 3698,
+        "sha256": "3ab6c889be97a188f59ee56a2102de6e37814d5b6e2434068fb6ace419e6d853"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/HUMAN-REVIEW.html",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 606552,
+        "sha256": "00249c4da7e12d0be458274697564fa61cc6aa1491e60579687fa2cfad42a007"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/KIT-FAILURE-RECONCILIATION.md",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 524,
+        "sha256": "b863fc57dfd1ee95c5f89cacd06caa728bcbdb27db803621a524c17c99551703"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/LEGACY-COMPATIBILITY.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1245,
+        "sha256": "38adf1586ee4a268455c1416c34e56261bb1e0316d63ab0d71e1b651334bf56d"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/MASTER-LINK-UPDATE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 854,
+        "sha256": "5f2ec98294f35ae658e1eb8446d510783f69365c113804a04043e11567d0e440"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/PACKAGE-MANIFEST.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 24590,
+        "sha256": "a52b9b35cf51db8c501eb85bdfaea92d4a277217518d00cab4dfde72fe75801e"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/PDF-INTEGRITY.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 9140,
+        "sha256": "b958273eab72d3ea5f16a643771d521375825e27ac600041ab2ec84c080dc6d2"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/PRODUCTION-CLOSURE-R3.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 4328,
+        "sha256": "f51ef849496f9bc35840bca18c6edd9862d4de05d9e58d49ec65e541ee584980"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/PRODUCTION-CONFIG-READONLY.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1446,
+        "sha256": "9f17cadb04100fd74d9afc3308c3e16699d77a16e60acda658529febe67c9d74"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/PUBLISHED-HEADING-HINTS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 560374,
+        "sha256": "fbbad93fbbb71838dacf79505f521a5b4f318a122efbca048cb2c7e2ad75755f"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R2-AUDIT-INPUTS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 8091,
+        "sha256": "11a69cb4a88cb5fe1d3823b5b5f3abd1c8ec73b212dd434edf2228e98c443f16"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R2-BROWSER.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 361,
+        "sha256": "2eea490f712e0667c28a136c5a3d9df71bb2094ba109286a6f6fb7e1858f839d"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R2-ENGLISH-NONCHAPTER-HEADINGS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1319,
+        "sha256": "ce0c3009df86a0c6bbbb85b80d743a310041db638db1190efffb40f076e6208f"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R2-INHERITED-EVIDENCE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1100,
+        "sha256": "08e0e80aab725a7824fb591081033ad59c0527480bbe075a9df9f9a688ea4850"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R2-SCOPE-DECISION.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 705,
+        "sha256": "d292a2647ecdb08c6dcc7428e06ab0eecfa0a7f0bc376612083c99a97a85112f"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R2-VALIDATION.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 465,
+        "sha256": "fe94cade7a0224f56e2a5f525efef12c85eefe0baa78986747aeabb4cc22bde4"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R2-review-1440.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 93297,
+        "sha256": "e558f5622bac4060ca7cdde47055dde2cbb93c5ee99028ec0c11353c924a2a3d"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R2-review-390.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 53553,
+        "sha256": "6aefb4f7e93430b3ddbd81ad961bddec1cc555cbb340cd8fd3a85f82c4dc7d4f"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-BROWSER.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 361,
+        "sha256": "7f85373492d720bfcea4ffbc5ba8c753fc0f370abeeefdf77ba6d8f8378f757e"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-BUILD-PRE-INPUTS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2610256,
+        "sha256": "394cbe605be00ba475035452ba7712f5ab650228230261e3220c4e8e249ab18a"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-COMMAND-RESULTS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1853,
+        "sha256": "c1fb849645ac01bf0eee27e793a09910a351656d16b3a0ec9b77087b6e2780cc"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-D1-READONLY.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 800,
+        "sha256": "e0b3f324c0e983e93bec9be0e25ba460c2ded9ff266bd7b5fdd8a0942f4fa744"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-EXECUTION-INPUTS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1319,
+        "sha256": "8cc9411dd8ca2cdc5e31a8885ce3f89940dd50c967884e0db4824099a2d49e87"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-FOURTEEN-SOURCE-PINS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 7909,
+        "sha256": "c2b9604a102bec5f0046e0ef72b44dc7ef15fb36daebe5c01650d1293391ddd0"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-PREPOST-INPUT-STABILITY.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 73,
+        "sha256": "767a6b3b55cfe890916176b90d286fc0b7bff1791e899e3876d8d044b2a41fbf"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-PRODUCTION-FLAGS-READONLY.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 755,
+        "sha256": "22d43f8ab2353c29e30daf23a532a659e8770ee560a3ffc553e955774c64bd3c"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-SANDBOX-PRIVACY.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 591,
+        "sha256": "4bbbbd92e390e220ae0e46da39982a0f493ff68beeb0c0ce9e1ae77e72243a60"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-STRIPE-WEBHOOK-READONLY.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 320,
+        "sha256": "4955945e5e319af867e9ab7748d528ea72f1feebddefd5b2bc372d479d40f22b"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-VALIDATION.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 615,
+        "sha256": "e402fddb04cccfe678d026a54a2912a1495fd1815810be5690bff09e596f214b"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-build-before-completed-order-guard.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2178,
+        "sha256": "fc3a2c3f80577deb7845d34bbc58b544198a4d21f5677f45745f16771fbcdc18"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-delivery-regression-initial-failure.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 15422,
+        "sha256": "bc564afcb3485c4e773bbb5a2532b46c209b986d4da606666b6ca036747ccf43"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-delivery-regression.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 15317,
+        "sha256": "6a84f582943436451b28792952653e6559429bc8b738af8279fb9c004e067e3b"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-full-local-contrast.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1505,
+        "sha256": "c25c63f8f9767f774f851036e8aaed8a955035dfab377fe6ee84c67aa877749b"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-full-local-final.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1505,
+        "sha256": "efabeb6e1f57736241b421cad64f00164063f42e29260756606a1898dfb323f7"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-full-size-qa-source.mjs.txt",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 13629,
+        "sha256": "4593ddacb32507af107b52ecd851043950bf6da679c19994c2a4184c57bb3c99"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-interrupted-build-lock.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 114,
+        "sha256": "29dc3cbbb73baab464888f016f803ca1836788fc2e731b57929a65579c9f8e86"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-pages-build-sandbox-failure.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1724,
+        "sha256": "ac587efc64d8a35bf260451259ff87d8eb4819c430d9dcaf9cdffa3836d2c781"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-pages-build.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1006,
+        "sha256": "d95890d2b68dedd5b12a25e8efad450877d6332829a731019cd10bf353ecedff"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-review-1440.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 137677,
+        "sha256": "4637253689fd8b99061fa086add8a2df83ef04422b6205e79d678a20cc930d36"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-review-390.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 56778,
+        "sha256": "1e1f36a634bdb4124336c3b08025bef48744c8a09c52269b43ec424dca8512d5"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-watermark-footer-1-initial-contrast-failure.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 128199,
+        "sha256": "cdfeb39716ba33306a003ea66b093419119f733a506dd36998361f261f2caa3d"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-watermark-footer-1.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 112779,
+        "sha256": "d8858f782921892931524db723458942bf7967ad3cfe0ce39d46ade1188f5f1d"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-watermark-footer-122-initial-contrast-failure.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 6003,
+        "sha256": "1de58d8595a4c83529f2f1141f215cb8e31250e2702eda70f27815c1f792795f"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-watermark-footer-122.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 8278,
+        "sha256": "3d6365a8766ea1e86a3c11c64e331fee2553c3fab6ebfb038101f393a8a0b6df"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-watermark-footer-264-initial-contrast-failure.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 77971,
+        "sha256": "baacf4fb66105fd4a1e0aaf849fc9a2daea3f39c179214ebde05d317637b5104"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/R3-watermark-footer-264.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 83363,
+        "sha256": "face3a755b51b77068c8c82165867053537f01ec7d965a6e5f6c647d55bf3043"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/REMAINING-BLOCKERS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 3022,
+        "sha256": "9ac29816c33d4e7d7288b988721c374b5ebb50672ab2217ac89b01af2ece36e1"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/REVIEW-BROWSER.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 322,
+        "sha256": "8104019442315d8a213575a57b52d248f5027f9a3211893688f1e5aa4967f544"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/REVIEW-LINKS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 125,
+        "sha256": "78402ae235558b0a9f9aa93c8eb1957b60eefc92e0ef35e0ca5818414a81c344"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/REVIEW-PACKAGE.zip",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 6298815,
+        "sha256": "487d5446975fb360f90797d001681928970ff8731998e45e132b5136fd1611bc"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/SEMANTIC-EVIDENCE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 25958,
+        "sha256": "a11de1f40423b4d3d3c745cf4c16d2cc4297d67cde8fd5096816148978930936"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/SEVEN-BOOK-ALIGNMENT-MATRIX.csv",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 561363,
+        "sha256": "261c8582f3d8a7ffefbd33dbba192697935c7b97236a29d8408a646ff02d9203"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/SEVEN-BOOK-ALIGNMENT-MATRIX.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1040723,
+        "sha256": "38a8030a0fc158d208ecac807f912b6eddb4a06849ef7b7de9b0f5c31a2f87a4"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/SEVEN-BOOK-ALIGNMENT-REPORT.md",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2279,
+        "sha256": "4dc95afd4aa211fdd48c0becdcf67c6886f43dd31c0d6322f4aeeecd617f32af"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/SEVEN-BOOK-PDF-SUMMARY.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 9316,
+        "sha256": "afb9059128915c98244275e3dc547b84e90ebc306a01b7e03e83b046058c4704"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/STAMP-REAL-R3.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 862,
+        "sha256": "cba8b0ae7bcf30645e73c191e43fc9328e22ede7566f48958e9f9bc9f8ad194d"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/STATUS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2405,
+        "sha256": "ea733cfc77688e824757a1e45ad1cf4b99175c347eace846751fa76f9862dbe4"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/STRIPE-LIVE-READONLY.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 14428,
+        "sha256": "bc13ccfd3cc657fec94a35b81c17f1d33b3d8278c804e001dd3da03b30f69e0a"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/STRIPE-REPO-COMPARISON.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 4436,
+        "sha256": "63e78c943c421a45c2b55a7d7924af75622a801fbf62aa2e2e297d7fd49882aa"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/SUBCHAPTER-COMPLETENESS-R2.csv",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 221917,
+        "sha256": "949ed10a4e976852d986edb1b611e153a9dec669fd2499c64a60c708ee482b2a"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/SUBCHAPTER-COMPLETENESS-R2.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 400725,
+        "sha256": "4120216b1f098166ead42feddf44d02bfce97ec1d0bb529cee29cf0041c40cc8"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/SUBCHAPTER-COMPLETENESS-R2.md",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1446,
+        "sha256": "b5b5fa3315710f11e2ef47fc6e5a1d0e7f7d5756c936ba7dac0e902ca2deb5d5"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/SUBCHAPTER-R2-EVIDENCE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 818205,
+        "sha256": "070ceb604fd33a4daa8f4ad7d0eff931480083e167333dd9b81620755211d52e"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/SUBCHAPTER-R2-EXCEPTIONS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 396,
+        "sha256": "cc7f7d6a22ec116347076c6bdf831caac2105a04c80a354ca04dea779cef5672"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/TARGET-DISCOVERY-R3.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2365,
+        "sha256": "066a6ce368bd17b6c37979347863aa84fa69d213cf5f66a5d2f18a5b2889c34d"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/TRUSTED-METADATA-LOCAL-QA.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 4348,
+        "sha256": "042ba7c89259082bd805756aeb4af68c10eb138dcf3592bff1ba29f857f410a9"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/TRUSTED-METADATA-RECONCILIATION.md",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1974,
+        "sha256": "b68fba10151864df0db3339c82809c578927a5e08150de1b52507a984ee511c6"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/WATERMARK-QA-TARGET-CANDIDATE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2756,
+        "sha256": "e696499dff355d6a75a072775d5a03bd48c7653ea6ab1f894475be7eef369ff9"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/account-en-1440.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 62932,
+        "sha256": "9bb2ea1bba6b6b31acc7a20337fbcba322eaba5827e5844814d865d29298b465"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/account-en-390.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 35395,
+        "sha256": "6863a39b9e64465f169ed8efe4cea236f9fb8dc37c475468806866bcc7fef406"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/account-zh-Hans-1440.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 70747,
+        "sha256": "3637db2dbfc75ee4a20732cdb944b6a2cecccd12b72a6658d5f276f542288e7c"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/account-zh-Hans-390.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 43088,
+        "sha256": "0107cade0722bd772f4dc2d5d29391cdc7c45e88f2114426f800cce02ab09712"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/book7-en-1440.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 317540,
+        "sha256": "4f0a9b42d94759b84a4e34e1679f469172809f380c9c06b547262dab633fb704"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/book7-en-390.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 168326,
+        "sha256": "4443e4b17cf0bf15d29c2e56081ed11ee1056e08e40b2827fd8e7d40319cb08f"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/book7-zh-Hans-1440.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 303507,
+        "sha256": "05d7257f2b306b964da89c4757b316537e1c081785a0e9d2fe7a0a2f60cd0d52"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/book7-zh-Hans-390.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 158863,
+        "sha256": "4010d088ecebaab9288578b16913f1bfcabe0a5724eaaae4a94e474cd1d9ce6e"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/browser-initial-preload-failure.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1156,
+        "sha256": "d4caecd4b0d0f6cb43d79c02c73ea987aae08529681b67261263911a2749138e"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/browser.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 63,
+        "sha256": "36ceb521fe0bbf28ec6b405cfe0873877c59cc93ce74f93c93aa379a44599c08"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/check-closure-r3.mjs",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 3906,
+        "sha256": "9ca4e87e78fd898b3c09de18f285fbc7065d3084112d6336c1abb22c5a0161ef"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/check-subchapter-r2.mjs",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2817,
+        "sha256": "f57f5e5fb99ea0983db05fadbed4200078c11bff425269c279f22dd8606daa60"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/commerce-after-scope.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 761,
+        "sha256": "d0f15b70b2865dfe0a71e59a2915d3fe532e4ab4482cfe2a5e8801b3143ed746"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/continuation-20261027/AFFECTED-COMPILE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 13966,
+        "sha256": "1a6c8e624357b38f95d15104ba048617110e5788da0694c9cd4a6a2be5977486"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/continuation-20261027/CONTINUATION-GATES.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1961,
+        "sha256": "c1331e63deaaec9d8e042654e124fcf16e2baf538f12b75b140c1192d6fb313a"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/continuation-20261027/PDF-VISUAL-CHECK.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1196,
+        "sha256": "ba482c4e9aa3ac2a1fc5fbb493d7c3065b04b641fe16a03adf98ba6c9078e09d"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/continuation-20261027/QA-TARGET-BEFORE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2361,
+        "sha256": "c329afbc5bf36bae71b1239cb03d3ef388583e6925390ec71049dcdda3c03925"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/continuation-20261027/SOURCE-AND-EDITION-CHECK.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 11210,
+        "sha256": "c5ca61224592504709b1ae541086dc770cd27e614ec78825121f10c4134e5e25"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/continuation-20261027/STATUS-BEFORE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1857,
+        "sha256": "5620533cefbe488bde234e4ab43e25cb1e22a8a7482871167c916372b0da4abc"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/continuation-20261027/TRUSTED-METADATA-LOCAL-QA.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 4348,
+        "sha256": "60901433f84f45d0187358277b48e10575db6c446190f59158c18e9293f93ca6"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/continuation-20261027/watermark-footer-1.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 275606,
+        "sha256": "f8d1dc8fd25392e60c382d1641feb2f1bf730ddc888562fbed9d71371a3c89e1"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/continuation-20261027/watermark-footer-132.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 24425,
+        "sha256": "3e9b6492759d50cee71b8ba61599353ee5582449ebbbcfd7851845dd1a0113e9"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/continuation-20261027/watermark-footer-264.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 210779,
+        "sha256": "d51fcd43096fff0b6fe76f4dc0642040487a438b054e4671a52b94d5d50818f6"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/delivery-qa.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 13923,
+        "sha256": "a3a3819f04b41da1088d8e95b460699c87af7af2cffcad7cac44cc331ede3dd9"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/final-pages-build.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1006,
+        "sha256": "a48366b12dc485e27c342c4ae408ba0d95683b2640fca8ac523b43d7a962eb27"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/final-pages-check.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1347,
+        "sha256": "bd5615dc08bf5347f99881da82a65d48435d8d8390051f45513a1b083da260de"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/BUILD-INPUTS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2610176,
+        "sha256": "80e9694babd94c9065800704b15823f825ed616ebc7756b4735893cbd31aceb7"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/BUILD-OUTPUTS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2625342,
+        "sha256": "e6bc07ec500b43e3bcd59e2b88502c0a982a730e5098366f875d2fb3daa52146"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/BUILD-RECEIPT.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1979,
+        "sha256": "7bef6cf6be5193abac10f8c1f7c2467b36bcc9aa17c2f8e68aca94e2ef814c03"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/COMMERCE-BOOK-SOURCE-VERSIONS-CANDIDATE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 4290,
+        "sha256": "e96ce3c94c1946a8eb8c4b075812565ac3eb3d473ff22ea519abad6b06b54102"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/COMMERCE-PRODUCTION-CLOSURE-CHECKLIST.md",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 5873,
+        "sha256": "c6a5f87556916f9f1473cd5d1a871a73b01df1a97816f4e8a0b26708d85f590b"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/DELIVERY-QA.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 9491,
+        "sha256": "7b17411640fcc2d75a8586fda78610cee5cfb803c0fa640c3178915aace5bd1e"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/PDF-INTEGRITY.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 8777,
+        "sha256": "f542e4b827355a3bbfb1b1829350ca690a080c5f73ffaa41b5a8fcd9abb4ccd4"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/PUBLISHED-HEADING-HINTS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 541752,
+        "sha256": "fc1630842748dbaa9527a6ecb102eb6a5c3dca3589ed254ff36e62fd258a4b7b"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/SEVEN-BOOK-ALIGNMENT-MATRIX.csv",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 574686,
+        "sha256": "9fea4b17462d8a27a134d3238cad57bb118f5303f2380ef93cc6a3374daa8408"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/SEVEN-BOOK-ALIGNMENT-MATRIX.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1051986,
+        "sha256": "d342274617c8949a56f9ea80ac99471253bc8a237642df31926de5c71579b2f4"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/SEVEN-BOOK-PDF-SUMMARY.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 9311,
+        "sha256": "abbeb997e8228ed6ef1560f610f5706970a3b45c430922c91d63ac86bcf3f8f0"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/STATUS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1426,
+        "sha256": "676917bd0a2990eb6043ac7172e352c02ddfab2a57036bc8f5bf1cad4739ea25"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/SUBCHAPTER-COMPLETENESS-R2.csv",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 221874,
+        "sha256": "8ca6ab9b28e52bce6360b1a3c1e98cdfb253161ddfde1c4a9452cb7cac26815c"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/SUBCHAPTER-COMPLETENESS-R2.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 400629,
+        "sha256": "322720d67986d770424810f525d6c55a76db4b04c20d0e86d04a9c33a7cdd645"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/SUBCHAPTER-COMPLETENESS-R2.md",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1339,
+        "sha256": "9fa99360231001a37d17890ec3ad4c66773fdc56e3643f718de63a99cb4a29d2"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/SUBCHAPTER-R2-EVIDENCE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 819363,
+        "sha256": "87f4906f22ded48cffff6d00c4ec54ed998e1a6fc885bcf799dbf0d0ab65a109"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/history/r2-before-book3-revision/SUBCHAPTER-R2-EXCEPTIONS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1943,
+        "sha256": "fb673619c621127104132bf2c1a7bfacac906aad971efea1b94d03d64b21fd65"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/initial-commerce-stripe.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 615,
+        "sha256": "67e7d2d6370d9994d07cf8228df65d1837c38f2b7993b68019a0053ddba00992"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/initial-pages-build.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 898,
+        "sha256": "536f057cacfa850f08906d952dfffc4bb49ff2d8527966fce9b1ddf49566f782"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/initial-pages-check.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2442,
+        "sha256": "1187c25bf3ad80c8b3487aa3fdd2d5904f9c97fb27f2c70753993362b71198af"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/initial-seven-volume.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 109,
+        "sha256": "266bf19ba2c523d519abdff17dc043cf34f644d121ad7d0a61360d4f13f3c8ab"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/initial-sync-identity.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 13923,
+        "sha256": "da33e62b122a8c6aea721afd9116cd846c3b7b3738e9aaa52e064fc1ac934fad"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/legacy.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 49,
+        "sha256": "41930749a743811ff3c5c4aa9437610577064328bddaf63044ffe193e202e36d"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/pages-check.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2442,
+        "sha256": "1187c25bf3ad80c8b3487aa3fdd2d5904f9c97fb27f2c70753993362b71198af"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/publication-commerce-after-ui.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 150,
+        "sha256": "0b6e86f1b9221ec6da948945f55653e7747956ac9b85f401448526f684442694"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/publication-commerce-final.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 150,
+        "sha256": "0b6e86f1b9221ec6da948945f55653e7747956ac9b85f401448526f684442694"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/publication-commerce.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 150,
+        "sha256": "0b6e86f1b9221ec6da948945f55653e7747956ac9b85f401448526f684442694"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/review-browser.mjs",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1150,
+        "sha256": "7fd24ac570797966ad32908a02614023e1632115f585c1d23b80b15073aacf3a"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/review-r2-browser.mjs",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1562,
+        "sha256": "0066e1f522706583af1c8604280ab2073c58ef376fe79de985a746d9fa443965"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/review-r3-browser.mjs",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1562,
+        "sha256": "cdd82e3aa267c47e1bfc30a5ca7ad664552455a0b270b1848912a3d0a4926c81"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/seven-volume-final.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 109,
+        "sha256": "266bf19ba2c523d519abdff17dc043cf34f644d121ad7d0a61360d4f13f3c8ab"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/source-pin-pages-build.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1006,
+        "sha256": "e95ea516aa8cd0fc0fde34a818d9d59c19745e0892831be63c9160af3ee379c5"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/source-pin-pages-check.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1347,
+        "sha256": "1072ab471f0dc719e20ba119f2aa82ca2461842f1ebfe71e4465e530f38e3412"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/source-version-pin.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 126,
+        "sha256": "d0ee5c94b7b08c603726739347e3f7b88cafc234126aca4259ae487ef1c0876c"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/structural-audit-r2.py",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 9885,
+        "sha256": "3f1e59e16ae4b057a3e7d8bc1109c6d25fb934445ad279c95353e7bff79136ba"
+      },
+      {
+        "path": "tools/review/seven-book-ebook-closure-r1/trusted-metadata-qa-source.mjs.txt",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 14627,
+        "sha256": "4b1a77ba20f04f0cae845240369249c88214d9d7e867732eebee1e73d8c4bc3b"
+      }
+    ],
+    "recoverySourceBytes": 31097330,
+    "secretsPresent": [],
+    "taskState": "Owner-requested development pause; recoverable checkout, not a claim of feature completion"
+  },
+  {
+    "name": "tarot",
+    "path": "C:/phios/.worktrees/tarot-pr8-safe",
+    "head": "e6fbd2cf9ede763acf81c1c5065f73ee9abf63bf",
+    "branch": "fix/tarot-read-only-execution-20261027",
+    "uniqueCommits": [
+      "e6fbd2cf9ede763acf81c1c5065f73ee9abf63bf test(tarot): pass middleware context into mocked next handler",
+      "97ffbf66ec3222957b95291515fd73ff68965d77 test(tarot): ensure read-only POST exception cannot bypass D1 or checkout guard",
+      "3e0d17c23e1e866c46cfee1ea0cb52a9a69c749a fix(tarot): display safe execution error codes instead of hiding HTTP 503",
+      "639b47daff681e81e10d1d7a259e0c69cc3edd61 fix(tarot): permit stateless Tarot POST while preserving READ_ONLY D1 boundary"
+    ],
+    "status": " M .github/workflows/ptrc-validation.yml\n M assets/customer-ui/js/surfaces/tarot-surface-core.js\n M content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html\n M docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json\n M docs/acceptance/world-recovery/visual-coverage-ledger.json\n M docs/guided-report-successor-r2/visual-commerce/free-en.json\n M docs/guided-report-successor-r2/visual-commerce/free-zh-Hans.json\n M docs/guided-report-successor-r2/visual-commerce/locked-en.json\n M docs/guided-report-successor-r2/visual-commerce/locked-zh-Hans.json\n M docs/guided-report-successor-r2/visual-commerce/paid-en.json\n M docs/guided-report-successor-r2/visual-commerce/paid-zh-Hans.json\n M functions/_middleware.js\n M scripts/check-tarot-canonical-route-reconciliation.mjs\n M scripts/check-tarot-read-only-execution.mjs\n M tools/review/world-ux-r1/world-r4/convergence-checkpoint-en-390.png\n M tools/review/world-ux-r1/world-r4/convergence-checkpoint-zh-Hans-1440.png\n M tools/review/world-ux-r1/world-r4/convergence-checkpoint-zh-Hans-390.png\n M tools/review/world-ux-r1/world-r4/convergence-resume-en-1440.png\n M tools/review/world-ux-r1/world-r4/convergence-resume-en-390.png\n M tools/review/world-ux-r1/world-r4/convergence-resume-zh-Hans-1440.png\n M tools/review/world-ux-r1/world-r4/coverage.mjs\n M tools/review/world-ux-r1/world-r4/deliver.py\n M tools/review/world-ux-r1/world-r4/engine.mjs\n M tools/review/world-ux-r1/world-r4/finalize-continuity.mjs\n M tools/review/world-ux-r1/world-r4/impact-en-1440.png\n M tools/review/world-ux-r1/world-r4/impact-en-390.png\n M tools/review/world-ux-r1/world-r4/impact-zh-Hans-1440.png\n M tools/review/world-ux-r1/world-r4/native-regression.mjs\n M tools/review/world-ux-r1/world-r4/prepare.py\n M tools/review/world-ux-r1/world-r4/server.mjs\n?? functions/_lib/stateless-tarot-execution.js\n?? scripts/check-tarot-read-only-browser.mjs\n?? scripts/check-tarot-read-only-http.mjs\n?? tools/review/tarot-reading-r1/\n",
+    "files": [
+      {
+        "path": ".github/workflows/ptrc-validation.yml",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 583,
+        "sha256": "c82f9d352a28d701fbc5f6ba86863a2a0386d0c1109a45b596a45b4902f11e60"
+      },
+      {
+        "path": "assets/customer-ui/js/surfaces/tarot-surface-core.js",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 25705,
+        "sha256": "3763bb2a4f81876652b7f8da5b9a85eeae2c5c41b1600cd498949a34e99e7aef"
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 929365,
+        "sha256": "f78f61005103368571e232a93fb391f61cf1563fb5bf65c9dc7d7e1225d41be2"
+      },
+      {
+        "path": "docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 482,
+        "sha256": "e423a794723b3472043e9a99b80315c680d112ee74e25dff3190bc9800336805"
+      },
+      {
+        "path": "docs/acceptance/world-recovery/visual-coverage-ledger.json",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 303451,
+        "sha256": "16ff432798116f2f9b0546504f3cebcb1f7b1da3163c14fe5b5824043a8d5a27"
+      },
+      {
+        "path": "docs/guided-report-successor-r2/visual-commerce/free-en.json",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 30146,
+        "sha256": "062bef6caf040f777597559dcbb41e3973fbbba73f498108258987358541344c"
+      },
+      {
+        "path": "docs/guided-report-successor-r2/visual-commerce/free-zh-Hans.json",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 29718,
+        "sha256": "26aa99c737337017940793e747220fa1010b26c0da1812622921345c36e9972d"
+      },
+      {
+        "path": "docs/guided-report-successor-r2/visual-commerce/locked-en.json",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 30146,
+        "sha256": "062bef6caf040f777597559dcbb41e3973fbbba73f498108258987358541344c"
+      },
+      {
+        "path": "docs/guided-report-successor-r2/visual-commerce/locked-zh-Hans.json",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 29718,
+        "sha256": "26aa99c737337017940793e747220fa1010b26c0da1812622921345c36e9972d"
+      },
+      {
+        "path": "docs/guided-report-successor-r2/visual-commerce/paid-en.json",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 572240,
+        "sha256": "2d957b43b55c592a8d879c41250f0dd461fbce54047640632a5a642a67e6f319"
+      },
+      {
+        "path": "docs/guided-report-successor-r2/visual-commerce/paid-zh-Hans.json",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 590128,
+        "sha256": "3af7c602e38c5315b9ea1e5c1f91343edca96aa34a927b7d4f446e7d8b78da7c"
+      },
+      {
+        "path": "functions/_lib/stateless-tarot-execution.js",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 3369,
+        "sha256": "394e7c7e0034543465b76b12ac66520ae65f5db108e76c386ea14ff44988c375"
+      },
+      {
+        "path": "functions/_middleware.js",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 1616,
+        "sha256": "c048ffa2632cb2fa4ac3d042919c7d8efc96ac60dfe247b3673a9800f70b7041"
+      },
+      {
+        "path": "scripts/check-tarot-canonical-route-reconciliation.mjs",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 1799,
+        "sha256": "454e39811b1dee2b8e4d6b655077d057168b3afa57240c3e80b316c15d7820d0"
+      },
+      {
+        "path": "scripts/check-tarot-read-only-browser.mjs",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 6996,
+        "sha256": "4a43ea38e65658a4467d0650c22bf7c043135df880642101f1af9324b9550c88"
+      },
+      {
+        "path": "scripts/check-tarot-read-only-execution.mjs",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 8370,
+        "sha256": "b91901503e10b310a3d487fa4ca6e04869aac5c995a03d521b11c4aa0641a721"
+      },
+      {
+        "path": "scripts/check-tarot-read-only-http.mjs",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 3286,
+        "sha256": "6627083794bb2f15f65c2de628e6183e5f5486e0b7994c5ef0051efdab13f111"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/ARTIFACT-SNAPSHOT.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 148902,
+        "sha256": "92511c4868633df92fedf0202eef6f596906ae7d5fefa4002e387676b452b3a9"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/BROWSER-ACCEPTANCE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 11259,
+        "sha256": "0fd55858b865fc46dc03e5c27b16cd3ebc73df2f92af7f66b75edd53320b3cec"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/CONSOLE-ACCEPTANCE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 841,
+        "sha256": "3ece46ea57467fc0f2d9e6f3b8a0a62c9ccf768d5bfdfd7254fdcbce53557bee"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/HTTP-ACCEPTANCE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2081,
+        "sha256": "ec07d2107daec86e94025f79237cdf1cb568341fd5ea037363ed0593955ed344"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/PROJECT-METADATA.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2713,
+        "sha256": "5404e29e57c1539c6765a0e796e964b25da9562fda50d77236c59f6aaf79d791"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/READONLY-CHECKS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2591,
+        "sha256": "7310ec7ecec382eb625ca78fe8e6134e54e8d9ec511d30e35260571e9061fb54"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/SHARED-PRICE-TEST-CANDIDATE.patch",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1271,
+        "sha256": "a8b47c62bf3dc523be798fcc884cb3fba67af283b5dfec4816f45ba96e833ce2"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/SOURCE-CANDIDATE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1560,
+        "sha256": "a11b822132ba2961ac69e58e5ab9ff389c5f1e3271e25a2f1de28ce738967225"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/STATUS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1240,
+        "sha256": "10a0d8498ffc841575d7048733722c1babb686a31119e7e78e682cbb2fdea97d"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/TAROT-CHECKS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1064,
+        "sha256": "a0b3a1570120edb1d8824fb5c9c2b7d99aafeaa2f7f47e14e0c94491f1448b40"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/TAROT-LOCAL-CLOSEOUT.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1936,
+        "sha256": "f1b1c544af82ec2cdac310aed8f0a990ac5c35c3f2c59cd2aa7466778e4308ee"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/WORKSPACE-PRESERVATION.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 13714,
+        "sha256": "511094ced02c52efa0102769f1684d6825553a813cf7613b304f7a1b9cd43097"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/browser-acceptance-bounded.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 648,
+        "sha256": "b6eefb94995172d648e03c029ff26d93fab575f847a1c87ae215f866fb9d56ec"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/browser-acceptance-scroll.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1032,
+        "sha256": "5fdbc9c4b8277e8f1dca380cd2889021ff567d0b0acb0d50053e781073b64b3b"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/browser-resume.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1045,
+        "sha256": "cf8c05b283facc0eeeb8e35148f50f4b4f13328c8c26043a7bc032892fa23259"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/build-pages-fourth.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2014,
+        "sha256": "663d1c426a8de677555210b993f85e9540b32faec1f6a99d346af60039fe9f29"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/check-pages-build.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2355,
+        "sha256": "1a6d141c9a53093284e2d37149a8697d37c7a8a75cefd6640a32558f52176a21"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/http-acceptance.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 34,
+        "sha256": "4149d9cf09df9ac72baa2b6035adb5c0d0a08868a34d28220482d9e916a12706"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/npm-check-full-text.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 48544,
+        "sha256": "104af67cfe66f2560eac16be5a0344d387e61bd7c894d3275a329921988d3f40"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/owner-approved-release/OWNER-APPROVAL-PROOF.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1690,
+        "sha256": "a639cb2234673f930aa7d4fa4aec1340dabf282f9748a1d6408bb895d7e55b93"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/owner-approved-release/OWNER-CURRENT-LIVE.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1640,
+        "sha256": "b001461b854ab8163ff3686d57da6a9c4f7abaa641d64e92f5cc79552929afe8"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/owner-approved-release/OWNER-GATE-C.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 509,
+        "sha256": "7b513ec8ccfeb26ca28878e884f20d2aa929cfd7b7a0727798a200517fd8a406"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/owner-approved-release/OWNER-OUT-OF-SCOPE-BLOCKER.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 81,
+        "sha256": "48f3469e5d9ff3a25dc62b8574929d137ed6a70187780fc86b276b010559655c"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/owner-approved-release/STATUS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 4191,
+        "sha256": "9e011ab673e45e736ff31efc82804072f657c5ef3b0b98c7af55a2f81c7cc128"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/owner-approved-release/owner-approved-price-check.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1153,
+        "sha256": "018613c18829ecacfa02dbf5e6ed1c2f95445661995777834b8cc26c4c1bcc62"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/owner-approved-release/owner-approved-price-compatible.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 165,
+        "sha256": "5acca5b2cf9b0670f0222f870e0125dd2f632dff3c9dafb45908dcf5cdc96287"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/owner-approved-release/owner-approved-security-check.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 99,
+        "sha256": "d6bc4714b849e4cc938424b08482106c3f0eb72f8b2ceb36af26317721830204"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/owner-approved-release/owner-build-pages-sandbox-failure.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1616,
+        "sha256": "566fd995398670dd1a96671faab9035b80e77672b384b3c733628771e894ff2c"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/owner-approved-release/owner-build-pages.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 921,
+        "sha256": "ab8e166a60be2275830d5676a6ef993a5c6cb1a73e545540af3d3f67b66f1a93"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/owner-approved-release/owner-check-pages-build.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1245,
+        "sha256": "14a35a5b7d6f927aba5c485a47f2a87e1fe52791279320143e45f731ae9025f8"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/owner-approved-release/owner-check.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2717,
+        "sha256": "fcf15f2768d004f7d32c25463131fb63d94cbe83e58dcfdc28f35e4ca56a81e7"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/owner-approved-release/owner-npm-run-check.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 49385,
+        "sha256": "dd4f8c2624016de306a97dc72e7f69cfb99daa18b06e045f115625cdbbdfcce3"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/owner-approved-release/owner-price-exact-repo-env.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 165,
+        "sha256": "5acca5b2cf9b0670f0222f870e0125dd2f632dff3c9dafb45908dcf5cdc96287"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/owner-approved-release/owner-production-before.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 9087,
+        "sha256": "81eeb888ceeb46f71d41169bd110cd7e591bbfcd79a5c84498b05705a0036748"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/DEPLOYMENTS-OBSERVED.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 9095,
+        "sha256": "3707a77f51890e8cb640b5ad68bf3401278e168761bb80e6cd7e19f497e447ba"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/FILE-HASH-PROOF.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2085,
+        "sha256": "af6bb7d38e8fb7eea1e09ab7f4e3d4828f9b5644d2ad54357d5d0895df4a7406"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/LOCAL-COMMERCE-FIXTURE-RESULTS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 4370,
+        "sha256": "4ccc71f5189ff0ac7cb3d0d24efcd5ea2922ff490ffee3a7a94a65cdf1ae89a6"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/PRODUCTION-OBSERVATION.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1726,
+        "sha256": "d1cbae73bfb9977e72496f3f7e439c482f764232347e8f4527cc2d3feffe5a7f"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/PROTECTED-JSON-RECOVERY-PLAN.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2114,
+        "sha256": "3b66085208d0075e37fe4d87cb4da508aacc531037f331a422ef734c41611657"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/RESULTS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1902,
+        "sha256": "32f35b071a04e5d0c491490d1eb078c2d455bf392a7495b278d1b23ffd317d86"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/STATUS.json",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 7976,
+        "sha256": "493a82c4f410a913ceb60a815d5719a043b51f8c4d6caefc42f731e30d75d3e9"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/build-pages.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 885,
+        "sha256": "e17c3c81010ee0647876ea0f87abb8241d87edc777ff6adc22ea3197747ac5da"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/check-pages-build.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1329,
+        "sha256": "093e4d41043ff468e3c0bbc0539d1320ddead52536d223c54b0ec06c1e2f705a"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/check-tarot-canonical-route-reconciliation.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 310,
+        "sha256": "f0673b07f5a66194ee90d955cfae7b6f768748899b87224269fbe7ab81a424c5"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/check-tarot-current.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 914,
+        "sha256": "87d3d2021d389cc5a2f608cdc407b37d9dd9c58f550d5b40019c275a8b411888"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/check-tarot-full-production.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 335,
+        "sha256": "971c2addd595dd6e1393f72639426fc908349e28b72fdd211a21d9618e47bfa3"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/check-tarot-product-surface-current.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 351,
+        "sha256": "52b24c10eae114e404a214723bfd19e367325c2367c38df63583d449174d8631"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/check-tarot-tscp.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 302,
+        "sha256": "2faf6e4ff4114b1a5fdb2e5a035b4e4e074c09751e055faf9cc94a8a74bb73c8"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/check.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 63253,
+        "sha256": "a74738ea564cb4016283900dc44c12e238db776be51ee2f769c709bedc8c38b6"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/deployments-read-errors.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/pr7-commerce-final.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 13989,
+        "sha256": "0df43255cd4bae17d7749c3f38e7b158070016b5861900ecac7879bc3d77d0c1"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/pr7-economics-check.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 851,
+        "sha256": "198d26d3ff88bf86a749cd5ca0a51e5ed37c7814f57d4b4b1bb957222834c089"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/pr7-pws-report-check.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 754,
+        "sha256": "eb498e6fcd44d098c15bcb07465babf1f259a54d7a8f27e39147aab9cf469412"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/report-delivery.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 164,
+        "sha256": "bc39baefcbf16d387dd4c4c621a374e3b5cfabc236199dbf9ce771a91fc9d9c0"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/pr7-final-reconciliation/security.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 97,
+        "sha256": "416c3a719629e5a87c88405626c8b4fdc19a8d86a942e666f2e32c5fb80c58b4"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/read-only-final.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 99,
+        "sha256": "d6bc4714b849e4cc938424b08482106c3f0eb72f8b2ceb36af26317721830204"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/result-en-1440.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1995542,
+        "sha256": "34c06e271b27743f1bbd0cd37f92259ebf8ff659ba66491dc3a8936e022f6296"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/result-en-390.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1209694,
+        "sha256": "bd7050fe0ea6ff4a9622c64d008c7376d4e2cc72c84b09cf3abeb5e7adf340e0"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/result-en-768.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1153537,
+        "sha256": "f40db5202f3ec2a62013165254d50d35ae1b82e482f3c295ceca1dead7471677"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/result-zh-Hans-1440.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 2171063,
+        "sha256": "c14be675ca67135829f5a4779bfb5f115203ec9bd5c3e764ee2537f1a00ad376"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/result-zh-Hans-390.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1393144,
+        "sha256": "4095a22515ecc32ccac1fc58e64213814d124fb29d5bc7d583acccbcf6bbf7f9"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/result-zh-Hans-768.png",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 1269909,
+        "sha256": "33aefd2ea2fe58a5007eb95263e149e8c633d45f6148317938de4dea4202761e"
+      },
+      {
+        "path": "tools/review/tarot-reading-r1/20261027/route-reconciled.log",
+        "kind": "untracked",
+        "exists": true,
+        "bytes": 315,
+        "sha256": "c207f995f21311c7a76b3e5497d89de2867371991179d62d7110842a41b29bd7"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/convergence-checkpoint-en-390.png",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/convergence-checkpoint-zh-Hans-1440.png",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/convergence-checkpoint-zh-Hans-390.png",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/convergence-resume-en-1440.png",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/convergence-resume-en-390.png",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/convergence-resume-zh-Hans-1440.png",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/coverage.mjs",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/deliver.py",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/engine.mjs",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/finalize-continuity.mjs",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/impact-en-1440.png",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/impact-en-390.png",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/impact-zh-Hans-1440.png",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/native-regression.mjs",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/prepare.py",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tools/review/world-ux-r1/world-r4/server.mjs",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "recoverySourceBytes": 12192731,
+    "secretsPresent": [],
+    "taskState": "Owner-requested development pause; recoverable checkout, not a claim of feature completion"
+  },
+  {
+    "name": "pages",
+    "path": "C:/Users/Guest Account/.codex/worktrees/pages-final-candidate/phios",
+    "head": "df56c57b9272365d2e221406fd9cc9cdd8407235",
+    "branch": null,
+    "uniqueCommits": [],
+    "status": " M artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json\n M assets/js/knowledge/book-public-samples.js\n M content/web-production/registries/book-public-samples-v1.json\n M scripts/check-b6-web-e.mjs\n M scripts/check-integrated-r42.mjs\n M wrangler.jsonc\n",
+    "files": [
+      {
+        "path": "artifacts/phi-os-integrated-r42/DETERMINISTIC-CHECKS.json",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 2691,
+        "sha256": "5b51b8b6d82b9e093f742a393a0be9278408dc1bb1361254fb79c858324a75f0"
+      },
+      {
+        "path": "assets/js/knowledge/book-public-samples.js",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 4358,
+        "sha256": "7a5fe551104ae052378fff247cc1b8a39ecf9b5342a4a418aeaef23a99eb5c7c"
+      },
+      {
+        "path": "content/web-production/registries/book-public-samples-v1.json",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 341473,
+        "sha256": "a8ccddf26247ea92f9696e2cc23fc16c60563fe0124fee77c5761b0e51a84fcd"
+      },
+      {
+        "path": "scripts/check-b6-web-e.mjs",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 5938,
+        "sha256": "6b0a76f34f53914d197b0524eb85611de05f32c6d47c1a9a523cff29336e1925"
+      },
+      {
+        "path": "scripts/check-integrated-r42.mjs",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 4357,
+        "sha256": "bd9d129cb729878335187bc036c898c8a6629eab9d7a4e153046340872dc4a34"
+      },
+      {
+        "path": "wrangler.jsonc",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 2476,
+        "sha256": "468092ba45d6c21e8fa7f3442b5321ced85fd4e0a47fda014ed9932c9cdb8c59"
+      }
+    ],
+    "recoverySourceBytes": 361293,
+    "secretsPresent": [],
+    "taskState": "Owner-requested development pause; recoverable checkout, not a claim of feature completion"
+  },
+  {
+    "name": "narrative",
+    "path": "C:/Users/Guest Account/.codex/worktrees/report-narrative-validation/phios",
+    "head": "a8bf5f1f92a9b86446c62c05f86de4b431c58874",
+    "branch": null,
+    "uniqueCommits": [],
+    "status": " M functions/personal-reading/narrative/report-narrative-governance.js\n",
+    "files": [
+      {
+        "path": "functions/personal-reading/narrative/report-narrative-governance.js",
+        "kind": "tracked-change",
+        "exists": true,
+        "bytes": 2042,
+        "sha256": "982cae5dc67758d32b77fb54eb4da8934d5c0dcd3b22dc89763e3ecd998b443d"
+      }
+    ],
+    "recoverySourceBytes": 2042,
+    "secretsPresent": [],
+    "taskState": "Owner-requested development pause; recoverable checkout, not a claim of feature completion"
+  }
+]

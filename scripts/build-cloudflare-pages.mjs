@@ -9,6 +9,9 @@ import { transformSync } from 'esbuild';
 import {createHash} from 'node:crypto';
 import {acquirePagesOutputLock} from './lib/pages-output-lock.mjs';
 import {pagesWorkerCompactionOptions} from './lib/pages-worker-compaction.mjs';
+import {requireDiskSpace} from './lib/disk-space-guard.mjs';
+
+requireDiskSpace({label:'Pages production build',estimatedBytes:2_000_000_000});
 
 const root = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
