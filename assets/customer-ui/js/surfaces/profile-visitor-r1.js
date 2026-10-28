@@ -104,11 +104,47 @@ function decorateChoices(){
   button.dataset.prfVisitorMode=m.id;
  }
  const grid=document.querySelector('#profile-modes .prf-mode-grid');
- if(grid)for(const [index,m] of modes.entries()){
-   const button=buttons.find(x=>x.dataset.prfMode===m.id);
-   const number=button?.querySelector(':scope > span');
-   if(number)number.textContent=String(index+1).padStart(2,'0');
-   if(button)grid.append(button);
+ if(grid&&!grid.querySelector('[data-prf-group]')){
+   const categories=[
+     {
+       id:'start',
+       ids:['QUICK_PROFILE','FULL_SELF_ASSESSMENT'],
+       heading:['Begin with an easy introduction','先从简单方式开始'],
+       description:['New here? Choose one of these two options. The six-question version is the easiest place to begin.','第一次使用？可以先试六道简短问题，再决定是否深入。']
+     },
+     {
+       id:'explore',
+       ids:['BIG_FIVE','CAREER_INTERESTS','FINANCIAL_CAPABILITY','REASONING_TASKS'],
+       heading:['Explore a particular area','进一步探索感兴趣的方面'],
+       description:['Choose a topic that matters to you. Each assessment keeps its own source and interpretation limits.','选择你目前关心的主题；不同测评保留各自的来源与解释限制。']
+     },
+     {
+       id:'existing',
+       ids:['IMPORT_EXTERNAL_RESULT'],
+       heading:['Already have an assessment?','已经有测评结果？'],
+       description:['Bring a result you already have instead of answering the same questions again.','已有其他工具的测评结果，可以直接选择导入，不必为了这一步重复作答。']
+     }
+   ];
+   let index=0;
+   for(const group of categories){
+     const section=create('section','prf-visitor-method-group');
+     section.dataset.prfGroup=group.id;
+     const head=create('div','prf-visitor-method-group__heading');
+     const title=create('h3');const intro=create('p');
+     localized(title,group.heading[0],group.heading[1]);
+     localized(intro,group.description[0],group.description[1]);
+     head.append(title,intro);
+     const cards=create('div','prf-visitor-method-group__cards');
+     for(const id of group.ids){
+       const button=buttons.find(x=>x.dataset.prfMode===id);
+       if(!button)continue;
+       index++;
+       const number=button.querySelector(':scope > span');
+       if(number)number.textContent=String(index).padStart(2,'0');
+       cards.append(button);
+     }
+     section.append(head,cards);grid.append(section);
+   }
  }
  const section=document.querySelector('#profile-modes .prf-section-head');
  if(section){
