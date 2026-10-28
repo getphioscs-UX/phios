@@ -1,6 +1,6 @@
 {
   "schemaVersion": "PHIOS-PROFILE-VISUAL-R1-CANDIDATE-v1",
-  "status": "VISUAL_CANDIDATE_DOM_QA_PASS_BROWSER_QA_PENDING",
+  "status": "VISUAL_R2_PHOTOS_LOADED_DOM_AND_BROWSER_QA_PASS_HUMAN_REVIEW_PENDING",
   "ownerApprovedReferences": [
     "phi_os_personal_profile_landing_page.png",
     "phi_os_personal_profile_journey.png",
@@ -134,18 +134,21 @@
   "pending": [
     {
       "kind": "independent_photographic_hero_atmosphere",
-      "status": "NOT_CREATED_REUSE_EXISTING_HERO",
-      "priority": "P1"
+      "status": "R2_PUBLIC_CHROMIUM_LOADED",
+      "priority": "P1",
+      "reference": "assets recorded in ASSET-STATUS-MATRIX-R2.json"
     },
     {
       "kind": "independent_6_dimension_landscape_cards",
-      "status": "NOT_CREATED",
-      "priority": "P1"
+      "status": "R2_PUBLIC_CHROMIUM_LOADED",
+      "priority": "P1",
+      "reference": "assets recorded in ASSET-STATUS-MATRIX-R2.json"
     },
     {
       "kind": "live_browser_390_768_1024_1440_zh_en",
-      "status": "NOT_RUN",
-      "priority": "P0"
+      "status": "PASS_CANDIDATE_LAYOUT_ONLY",
+      "priority": "P0",
+      "reference": "GitHub workflow run 40656768084, 8/8 viewport/locale, six images loaded"
     },
     {
       "kind": "actual_profile_7_method_execution",
@@ -165,5 +168,8 @@
     "Keep account explicit 30-day consent and separate birth-data owner",
     "Never treat mockup screenshots as independent deployable art",
     "Never merge/deploy before owner approves browser visual"
-  ]
+  ],
+  "photoCount": 8,
+  "photoAudit": "Public R2 Image.onload naturalWidth/Height checked on GitHub run 40655905045 and again on 40656768084",
+  "releaseBoundary": "PR Draft; no main merge/deploy; actual method execution/account save production QA still pending."
 }
