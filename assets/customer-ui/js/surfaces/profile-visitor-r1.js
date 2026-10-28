@@ -45,9 +45,11 @@ function createWheel(){
  const controls=lenses.map(x=>{
   const button=create('button','prf-visitor-wheel__lens');
   button.type='button';button.dataset.prfLens=x.id;button.setAttribute('aria-pressed',String(x.id===selected));
-  const title=create('b');const extra=create('small');
-  localized(title,x.en,x.zh);localized(extra,x.de,x.dz);
-  button.append(image(x.icon),title,extra);
+  const title=create('b');
+  localized(title,x.en,x.zh);
+  button.title=pair(x.de,x.dz);
+  button.setAttribute('aria-label',pair(x.en+': '+x.de,x.zh+'：'+x.dz));
+  button.append(image(x.icon),title);
   button.addEventListener('click',()=>{selected=x.id;refreshSelection();});
   wheel.append(button);return button;
  });
@@ -55,9 +57,13 @@ function createWheel(){
  const mark=document.createElement('img');mark.src='/assets/images/branding/PHIOS-LOGO-MARK-v1.png';
  mark.alt='PHI OS';mark.decoding='async';center.append(mark);wheel.append(center);
  function refreshSelection(){
-  controls.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.prfLens===selected)));
+  controls.forEach(b=>{
+    b.setAttribute('aria-pressed',String(b.dataset.prfLens===selected));
+    const x=lenses.find(l=>l.id===b.dataset.prfLens);
+    if(x){b.title=pair(x.de,x.dz);b.setAttribute('aria-label',pair(x.en+': '+x.de,x.zh+'：'+x.dz));}
+  });
   const current=lenses.find(l=>l.id===selected)||lenses[0];
-  note.textContent=pair(current.de,current.dz);
+  note.textContent=pair(current.en+' — '+current.de,current.zh+' — '+current.dz);
  }
  host.append(wheel,note);refreshSelection();
  host.addEventListener('keydown',e=>{
@@ -98,7 +104,12 @@ function decorateChoices(){
   button.dataset.prfVisitorMode=m.id;
  }
  const grid=document.querySelector('#profile-modes .prf-mode-grid');
- if(grid)for(const m of modes){const button=buttons.find(x=>x.dataset.prfMode===m.id);grid.append(button);}
+ if(grid)for(const [index,m] of modes.entries()){
+   const button=buttons.find(x=>x.dataset.prfMode===m.id);
+   const number=button?.querySelector(':scope > span');
+   if(number)number.textContent=String(index+1).padStart(2,'0');
+   if(button)grid.append(button);
+ }
  const section=document.querySelector('#profile-modes .prf-section-head');
  if(section){
   const kicker=section.querySelector('.cx-eyebrow');
@@ -173,7 +184,13 @@ function heroCopy(){
   ['You choose what to save','由你决定是否保存'],
   ['No prediction or diagnosis','不做诊断或命运判断']
  ]){const line=document.createElement('span');localized(line,en,zh);trust.append(line);}
- grid.querySelector(':scope > div:first-child')?.append(trust);
+ const copy=grid.querySelector(':scope > div:first-child');
+ const disclosure=copy?.querySelector('.pm-actions + p');
+ const guide=grid.querySelector('.prf-visitor-steps');
+ if(guide){
+   if(disclosure)guide.append(disclosure);
+   guide.append(trust);
+ }else copy?.append(trust);
  return wheel;
 }
 function initialize(){
