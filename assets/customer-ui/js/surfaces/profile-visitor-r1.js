@@ -24,6 +24,16 @@ const lenses=[
  {id:'growth',icon:'GROWTH',en:'Growth',zh:'成长',de:'What you learn and how things change over time.',dz:'你如何学习，以及经历怎样随时间改变。'},
  {id:'potential',icon:'POTENTIAL',en:'Possibilities',zh:'可能性',de:'Options worth exploring—not guarantees about the future.',dz:'值得探索的选择，而不是对未来的保证。'}
 ];
+// Owner-uploaded public R2 photographs are display-only; they never enter evidence or scoring.
+const PHOTO_BASE='https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/';
+const photoFiles={
+ identity:'PROFILE-CARD-IDENTITY.webp',
+ expression:'PROFILE-CARD-EXPRESSION.webp',
+ relationships:'PROFILE-CARD-RELATIONSHIP.webp',
+ environment:'PROFILE-CARD-ENVIRONMENT.webp',
+ growth:'PROFILE-CARD-GROWTH.webp',
+ potential:'PROFILE-CARD-POSSIBILITY.webp'
+};
 const steps=[
  ['Choose a starting point','选择一种开始方式','You can begin with six short questions.','可以先从六道简短问题开始。'],
  ['Answer at your own pace','按照自己的节奏回答','Your answers are used for this result only.','答案用于本次测评结果。'],
@@ -73,6 +83,49 @@ function createWheel(){
   controls[next].focus();controls[next].click();
  });
  host.dataset.prfVisitorWheel='true';return {host,refresh:refreshSelection};
+}
+function createDimensionCards(){
+ const section=create('section','prf-visitor-dimensions');
+ section.id='profile-dimension-exploration';
+ section.dataset.prfDimensionCards='r1';
+ section.setAttribute('aria-labelledby','prf-dimensions-title');
+ const header=create('div','prf-visitor-dimensions__head');
+ const heading=create('h2');heading.id='prf-dimensions-title';
+ localized(heading,'Six perspectives for a changing life','从六个角度理解不断变化的自己');
+ const description=create('p');
+ localized(description,'These are ways to explore your own experience, not fixed personality types or predictions. Choose a card to explore the corresponding wheel section.','这六个角度帮助你观察自己的生活，并非固定人格类型或未来预测。选择一张卡片，可以返回轮盘查看对应说明。');
+ header.append(heading,description);
+ const grid=create('div','prf-visitor-dimensions__grid');
+ for(const lens of lenses){
+  const card=create('button','prf-visitor-dimension-card');
+  card.type='button';card.dataset.prfDimension=lens.id;
+  card.setAttribute('aria-label',pair('Explore '+lens.en,'了解'+lens.zh));
+  const visual=create('span','prf-visitor-dimension-card__image');
+  visual.dataset.photoState='loading';
+  const photo=document.createElement('img');
+  photo.src=PHOTO_BASE+photoFiles[lens.id];
+  photo.alt='';photo.loading='lazy';photo.decoding='async';
+  photo.addEventListener('load',()=>{visual.dataset.photoState='loaded';},{once:true});
+  photo.addEventListener('error',()=>{visual.dataset.photoState='unavailable';photo.hidden=true;},{once:true});
+  visual.append(photo);
+  const lower=create('span','prf-visitor-dimension-card__details');
+  const icon=image(lens.icon);icon.className='prf-visitor-dimension-card__icon';
+  const title=create('strong');localized(title,lens.en,lens.zh);
+  const copy=create('span','prf-visitor-dimension-card__copy');localized(copy,lens.de,lens.dz);
+  lower.append(icon,title,copy);card.append(visual,lower);
+  card.addEventListener('click',()=>{
+    const target=document.querySelector('.prf-visitor-wheel__lens[data-prf-lens="'+lens.id+'"]');
+    if(!target)return;
+    target.click();
+    document.querySelector('.prf-visitor-wheel-wrap')?.scrollIntoView({
+      behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',
+      block:'center'
+    });
+  });
+  grid.append(card);
+ }
+ section.append(header,grid);
+ return section;
 }
 function createSteps(){
  const aside=create('aside','prf-visitor-steps');
@@ -234,6 +287,10 @@ function initialize(){
  if(document.body.dataset.prfVisitorR1==='ready')return;
  if(!decorateChoices()||!reorganize())return;
  const wheel=heroCopy();
+ const results=document.querySelector('[data-prf-results]');
+ if(results&&!document.querySelector('[data-prf-dimension-cards="r1"]')){
+   results.after(createDimensionCards());
+ }
  document.body.dataset.prfVisitorR1='ready';
  const onLang=()=>{refreshText();wheel?.refresh();};
  window.addEventListener('phios:localechange',onLang);
