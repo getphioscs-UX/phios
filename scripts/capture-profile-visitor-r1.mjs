@@ -115,7 +115,10 @@ try{
     await page.screenshot({path:path.join(OUTPUT,id+'-methods.png'),fullPage:false,animations:'disabled'});
     const cards=page.locator('.prf-visitor-dimensions');
     if(await cards.count()){
-      await cards.scrollIntoViewIfNeeded();
+      await page.evaluate(()=>{
+        const el=document.querySelector('.prf-visitor-dimensions');
+        if(el)window.scrollTo(0,Math.max(0,el.getBoundingClientRect().top+window.scrollY-88));
+      });
       await page.waitForTimeout(950);
       const photoDetails=await page.evaluate(()=>[...document.querySelectorAll('.prf-visitor-dimension-card')].map(x=>({
          src:x.querySelector('.prf-visitor-dimension-card__image img')?.getAttribute('src'),
