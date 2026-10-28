@@ -316,3 +316,24 @@ body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-visitor-dimensions{
  .prf-visitor-dimension-card,
  .prf-visitor-dimension-card__image img{transition:none!important;transform:none!important}
 }
+
+/* Follow-up from real 390px/1440px screenshots: avoid an unrelated original
+   Hero rendering faintly over the new owner-approved R2 landscape. Preserve
+   the canonical figure node and original asset URL for provenance/lightbox. */
+body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-main > .vr2-hero-surface .pm-hero > figure[data-vr2-role="HERO"]{opacity:0!important}
+/* Six photos should not become six full-height rows on a phone. */
+@media(max-width:520px){
+ body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-visitor-dimensions__grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));gap:10px
+ }
+ body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-visitor-dimension-card__image{aspect-ratio:3/2}
+ body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-visitor-dimension-card__details{
+  grid-template-columns:32px minmax(0,1fr);padding:10px;column-gap:6px;row-gap:4px
+ }
+ body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-visitor-dimension-card__icon{width:30px;height:30px;padding:6px}
+ body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-visitor-dimension-card__details strong{font-size:.9rem}
+ body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-visitor-dimension-card__copy{grid-column:1/-1;font-size:.74rem;line-height:1.4}
+}
+@media(max-width:340px){
+ body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-visitor-dimensions__grid{grid-template-columns:1fr}
+}
