@@ -45,7 +45,7 @@ body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-main .pm-actions .cx-button--tex
 }
 body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-main > .vr2-hero-surface .pm-hero > figure[data-vr2-role="HERO"]{
   position:absolute!important;inset:0!important;width:100%!important;max-width:none!important;height:100%!important;
-  margin:0!important;overflow:hidden;opacity:.18;z-index:-1;pointer-events:none;
+  margin:0!important;overflow:hidden;opacity:.10;z-index:-1;pointer-events:none;
 }
 body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-main > .vr2-hero-surface .pm-hero > figure[data-vr2-role="HERO"] img{
   width:100%!important;height:100%!important;object-fit:cover!important;max-height:none!important;
@@ -71,7 +71,7 @@ body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-main > .vr2-hero-surface .pm-her
   color:#14333b;font-family:inherit;cursor:pointer;padding:6px 2px;transition:background .22s,border-color .22s,transform .22s;
 }
 .prf-visitor-wheel__lens img{width:clamp(22px,3vw,37px);height:clamp(22px,3vw,37px);object-fit:contain}
-.prf-visitor-wheel__lens b{font-size:clamp(.83rem,1.22vw,1.04rem);font-weight:750}
+.prf-visitor-wheel__lens b{font-size:clamp(.74rem,1.1vw,1.02rem);font-weight:750;line-height:1.15;max-width:100%;overflow-wrap:normal;hyphens:none}
 .prf-visitor-wheel__lens small{font-size:clamp(.6rem,.85vw,.76rem);line-height:1.2;text-align:center;max-width:11ch;color:#344a4e}
 .prf-visitor-wheel__lens[aria-pressed="true"]{border-color:#a68548;background:rgba(255,252,241,.92);box-shadow:0 3px 14px rgba(63,53,33,.1);}
 .prf-visitor-wheel__lens:hover{background:rgba(255,255,255,.8);transform:scale(1.025)}
@@ -88,7 +88,7 @@ body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-main > .vr2-hero-surface .pm-her
   background:rgba(255,252,246,.94);border:1px solid #e0d1b7;box-shadow:0 10px 30px rgba(36,51,57,.07);
   border-radius:20px;padding:clamp(18px,1.6vw,25px);position:relative;z-index:2;
 }
-.prf-visitor-steps h2{font-size:clamp(1.12rem,1.5vw,1.48rem);margin:0 0 17px;color:var(--pv-navy);font-family:Georgia,"Noto Serif SC",serif;}
+.prf-visitor-steps h2{font-size:clamp(1.12rem,1.5vw,1.48rem);margin:0 0 17px;color:var(--pv-navy)!important;font-family:Georgia,"Noto Serif SC",serif;}
 .prf-visitor-steps ol{list-style:none;counter-reset:pv-steps;margin:0;padding:0;display:grid;gap:17px}
 .prf-visitor-steps li{position:relative;padding-left:42px;min-height:38px}
 .prf-visitor-steps li::before{
@@ -188,4 +188,22 @@ body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-main a:focus-visible,body[data-c
 }
 @media(prefers-reduced-motion:reduce){
   .prf-visitor-wheel__lens{transition:none!important;transform:none!important}
+}
+
+/* Profile-only tablet header correction: long English nav was 52px wider than viewport at 1024px.
+   Use the existing first-party drawer; do not hide navigation destinations. */
+@media (min-width:981px) and (max-width:1120px){
+  body[data-cx-surface="PROFILE_ASSESSMENT"] .cx-menu-button{display:inline-flex!important;margin-left:auto!important}
+  body[data-cx-surface="PROFILE_ASSESSMENT"] .cx-primary-nav,
+  body[data-cx-surface="PROFILE_ASSESSMENT"] .cx-utilities{display:none!important}
+}
+/* Keep explanations legible in a dedicated area rather than inside small wheel wedges. */
+.prf-visitor-wheel__lens{gap:5px}
+.prf-visitor-wheel__hint{width:min(100%,480px);padding:10px 16px;border-radius:12px;background:rgba(255,253,247,.84);min-height:47px}
+.prf-visitor-steps > p{font-size:.79rem!important;line-height:1.55!important;color:#425f62!important;margin:12px 0 0!important}
+.prf-visitor-steps .prf-visitor-trust{margin-top:9px;gap:6px 14px}
+@media(max-width:760px){
+  body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-main > .vr2-hero-surface .pm-hero .pm-actions{margin:14px 0 0}
+  body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-main .pm-actions .cx-button{min-height:43px}
+  body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-main > .vr2-hero-surface .pm-hero p{line-height:1.6}
 }
