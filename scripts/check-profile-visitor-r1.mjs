@@ -7,6 +7,11 @@ const css=readFileSync('assets/customer-ui/surfaces/profile-visitor-r1.css','utf
 const js=readFileSync('assets/customer-ui/js/surfaces/profile-visitor-r1.js','utf8');
 const codes=['QUICK_PROFILE','FULL_SELF_ASSESSMENT','REASONING_TASKS','IMPORT_EXTERNAL_RESULT','BIG_FIVE','CAREER_INTERESTS','FINANCIAL_CAPABILITY'];
 const icons=['identity','expression','relationships','environment','growth','potential','quick','full','bigfive','career','financial','reasoning','external'];
+const manifest=JSON.parse(readFileSync('content/production-closure/profile-visual-r1/ASSET-INTEGRATION-STATE.json','utf8'));
+assert.equal(manifest.newVectorIcons.length,13,'Manifest must track each independent icon');
+assert.ok(manifest.pending.some(x=>x.kind.startsWith('live_browser')),'Browser visual acceptance cannot be silently assumed');
+assert.ok(manifest.criticalBoundaries.includes('No fake 4.2/5 dimensions'));
+
 for(const icon of icons){
  const path='assets/icons/profile-r1/PHIOS-PROFILE-ICON-'+icon.toUpperCase()+'-v1.svg';
  assert.ok(existsSync(path),path+' missing');
