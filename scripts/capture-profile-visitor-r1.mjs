@@ -70,17 +70,15 @@ try{
     await page.waitForTimeout(300);
     if(width===1440&&loc==='zh-Hans'){
       checkedOwnerPhotos=await page.evaluate(async({base,names})=>{
-        const result=[];
-        for(const name of names){
+        return Promise.all(names.map(async name=>{
           const status=await new Promise(resolve=>{
             const image=new Image();const timeout=setTimeout(()=>resolve({state:'TIMEOUT',width:0,height:0}),12000);
             image.onload=()=>{clearTimeout(timeout);resolve({state:'LOADED',width:image.naturalWidth,height:image.naturalHeight})};
             image.onerror=()=>{clearTimeout(timeout);resolve({state:'ERROR',width:0,height:0})};
             image.src=base+name;
           });
-          result.push({asset:name,...status});
-        }
-        return result;
+          return {asset:name,...status};
+        }));
       },{base:R2,names:PHOTO_NAMES});
       report.ownerUploadedPhotos=checkedOwnerPhotos;
       if(checkedOwnerPhotos.some(x=>x.state!=='LOADED')){
