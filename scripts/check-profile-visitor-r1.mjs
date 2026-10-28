@@ -14,7 +14,7 @@ assert.equal(manifest.newVectorIcons.length,13,'Original six-lens and seven-meth
 const matrix=JSON.parse(readFileSync('content/production-closure/profile-visual-r1/ASSET-STATUS-MATRIX-R2.json','utf8'));
 assert.equal(matrix.total,34,'User asset request comprises 34 distinct entries');
 assert.equal(matrix.counts.AVAILABLE_ORIGINAL_VECTOR,24,'Expected six lenses, seven method, five Account and six state icons');
-assert.equal(matrix.counts.PENDING_INDEPENDENT_IMAGE,8,'Only two photographic Heroes and six editorial cards remain mandatory image generation');
+assert.equal(matrix.counts.OWNER_UPLOADED_FETCH_VERIFICATION_PENDING,8,'All eight R2 photographs were owner-reported; HTTP visual verification is separate');
 assert.equal(matrix.counts.OPTIONAL_STATIC_EXPORT,1,'Static wheel is optional; interactive wheel remains');
 assert.equal(matrix.counts.NOT_AN_EIGHTH_METHOD,1,'Do not invent a new structured assessment method');
 assert.ok(manifest.pending.some(x=>x.kind.startsWith('live_browser')),'Browser visual acceptance cannot be silently assumed');
@@ -50,6 +50,17 @@ assert.equal(document.querySelectorAll('[data-prf-form] input,[data-prf-form] se
 const actual=[...document.querySelectorAll('[data-prf-mode]')].map(x=>x.dataset.prfMode).sort();
 assert.deepEqual(actual,codes.slice().sort(),'Method runtime IDs changed');
 assert.equal(document.querySelectorAll('.prf-visitor-method-icon').length,7,'Missing entry icons');
+const dimensionCards=[...document.querySelectorAll('.prf-visitor-dimension-card')];
+assert.equal(dimensionCards.length,6,'Exactly six editorial R2 photo cards');
+assert.equal(new Set(dimensionCards.map(card=>card.querySelector('img:not(.prf-visitor-dimension-card__icon)')?.getAttribute('src'))).size,6,'Six separate photo sources');
+for(const card of dimensionCards){
+ const photo=card.querySelector('.prf-visitor-dimension-card__image img');
+ assert.ok(photo?.getAttribute('src')?.includes('/images/hero/PROFILE-CARD-'), 'Each photo uses the owner R2 path');
+ assert.ok(card.querySelector('.prf-visitor-dimension-card__icon'), 'Each card has independent vector icon');
+}
+assert.ok(css.includes('PROFILE-HERO-LANDING-DESKTOP.webp'),'Desktop Hero photo not wired');
+assert.ok(css.includes('PROFILE-HERO-LANDING-MOBILE.webp'),'Mobile Hero photo not wired');
+assert.ok(css.includes('PROFILE-CARD-')===false,'Six photo sources should stay individual in JS and not be duplicated in CSS');
 assert.equal(document.querySelectorAll('[data-prf-group]').length,3,'Methods must be grouped into visitor-friendly choices');
 assert.equal(document.querySelector('[data-prf-group="start"] [data-prf-mode="QUICK_PROFILE"]')!==null,true,'Quick assessment should be first');
 assert.equal(document.querySelectorAll('[data-prf-group="explore"] [data-prf-mode]').length,4,'Keep four focused assessments');
