@@ -10,6 +10,9 @@ import { chromium } from 'playwright-core';
 const OUTPUT='artifacts/profile-visitor-r1/browser-capture';
 fs.mkdirSync(OUTPUT,{recursive:true});
 const BASE='https://getphios.com/perspectives/profile/';
+const R2='https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/';
+const PHOTO_NAMES=['PROFILE-HERO-LANDING-DESKTOP.webp','PROFILE-HERO-LANDING-MOBILE.webp','PROFILE-CARD-IDENTITY.webp','PROFILE-CARD-EXPRESSION.webp','PROFILE-CARD-RELATIONSHIP.webp','PROFILE-CARD-ENVIRONMENT.webp','PROFILE-CARD-GROWTH.webp','PROFILE-CARD-POSSIBILITY.webp'];
+let checkedOwnerPhotos=null;
 const localPaths=new Set([
  '/perspectives/profile/',
  '/assets/customer-ui/surfaces/profile-visitor-r1.css',
@@ -65,10 +68,30 @@ try{
       window.dispatchEvent(new Event('phios:localechange'));
     });
     await page.waitForTimeout(300);
+    if(width===1440&&loc==='zh-Hans'){
+      checkedOwnerPhotos=await page.evaluate(async({base,names})=>{
+        const result=[];
+        for(const name of names){
+          const status=await new Promise(resolve=>{
+            const image=new Image();const timeout=setTimeout(()=>resolve({state:'TIMEOUT',width:0,height:0}),12000);
+            image.onload=()=>{clearTimeout(timeout);resolve({state:'LOADED',width:image.naturalWidth,height:image.naturalHeight})};
+            image.onerror=()=>{clearTimeout(timeout);resolve({state:'ERROR',width:0,height:0})};
+            image.src=base+name;
+          });
+          result.push({asset:name,...status});
+        }
+        return result;
+      },{base:R2,names:PHOTO_NAMES});
+      report.ownerUploadedPhotos=checkedOwnerPhotos;
+      if(checkedOwnerPhotos.some(x=>x.state!=='LOADED')){
+        report.errors.push('One or more owner-reported R2 photographs did not load in Chromium. Check R2 public URL/key and CDN accessibility.');
+      }
+    }
     details=await page.evaluate(()=>({
      initialized:document.body?.dataset?.prfVisitorR1==='ready',
      language:document.documentElement.lang,
      wheelLenses:document.querySelectorAll('.prf-visitor-wheel__lens').length,
+     photoCards:document.querySelectorAll('.prf-visitor-dimension-card').length,
      methodOptions:document.querySelectorAll('[data-prf-mode]').length,
      savedConsentDefault:document.querySelector('[data-prf-account-save]')?.checked,
      heroAsset:document.querySelector('[data-vr2-role="HERO"] img')?.dataset?.approvedVisual,
@@ -92,11 +115,23 @@ try{
     });
     await page.waitForTimeout(650);
     await page.screenshot({path:path.join(OUTPUT,id+'-methods.png'),fullPage:false,animations:'disabled'});
+    const cards=page.locator('.prf-visitor-dimensions');
+    if(await cards.count()){
+      await cards.scrollIntoViewIfNeeded();
+      await page.waitForTimeout(950);
+      const photoDetails=await page.evaluate(()=>[...document.querySelectorAll('.prf-visitor-dimension-card')].map(x=>({
+         src:x.querySelector('.prf-visitor-dimension-card__image img')?.getAttribute('src'),
+         state:x.querySelector('.prf-visitor-dimension-card__image')?.dataset.photoState,
+         naturalWidth:x.querySelector('.prf-visitor-dimension-card__image img')?.naturalWidth||0
+      })));
+      details.photoDetails=photoDetails;
+      await page.screenshot({path:path.join(OUTPUT,id+'-dimensions.png'),fullPage:false,animations:'disabled'});
+    }
     if([1440,390].includes(width)){
       await page.evaluate(()=>window.scrollTo(0,0));
       await page.screenshot({path:path.join(OUTPUT,id+'-full.png'),fullPage:true,animations:'disabled',timeout:60000});
     }
-    status=details.initialized&&details.wheelLenses===6&&details.methodOptions===7&&details.savedConsentDefault===false?'DOM_PASS':'DOM_FAIL';
+    status=details.initialized&&details.wheelLenses===6&&details.methodOptions===7&&details.photoCards===6&&details.savedConsentDefault===false?'DOM_PASS':'DOM_FAIL';
     if(status==='DOM_FAIL')failCount++;
    }catch(e){status='BROWSER_ERROR';errors.push(String(e.stack||e).slice(0,1100));failCount++;}
    report.viewports.push({width,height,locale:loc,status,details,errors,failedRequests:failedRequests.slice(0,20)});
@@ -106,6 +141,11 @@ try{
  }
 }finally{await browser.close();}
 report.failCount=failCount;
+report.ownerPhotoLoadState=checkedOwnerPhotos?.every(x=>x.state==='LOADED')?'ALL_EIGHT_LOADED':'INCOMPLETE_OR_UNKNOWN';
+if(checkedOwnerPhotos&&checkedOwnerPhotos.some(x=>x.state!=='LOADED')){
+ report.failCount+=1;
+ report.errors.push('R2 PHOTO LOAD BLOCKER: '+checkedOwnerPhotos.filter(x=>x.state!=='LOADED').map(x=>x.asset+':'+x.state).join(', '));
+}
 report.warning='Screenshots show PR candidate HTML/CSS/JS locally over public live resources; this is NOT deployed main or account/customer-flow acceptance. Some external CDN assets may not load.';
 fs.writeFileSync(path.join(OUTPUT,'CAPTURE-REPORT.json'),JSON.stringify(report,null,2));
 if(failCount)process.exitCode=1;
