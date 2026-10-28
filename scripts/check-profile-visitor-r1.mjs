@@ -6,9 +6,17 @@ const html=readFileSync('perspectives/profile/index.html','utf8');
 const css=readFileSync('assets/customer-ui/surfaces/profile-visitor-r1.css','utf8');
 const js=readFileSync('assets/customer-ui/js/surfaces/profile-visitor-r1.js','utf8');
 const codes=['QUICK_PROFILE','FULL_SELF_ASSESSMENT','REASONING_TASKS','IMPORT_EXTERNAL_RESULT','BIG_FIVE','CAREER_INTERESTS','FINANCIAL_CAPABILITY'];
-const icons=['identity','expression','relationships','environment','growth','potential','quick','full','bigfive','career','financial','reasoning','external'];
+const icons=['identity','expression','relationships','environment','growth','potential','quick','full','bigfive','career','financial','reasoning','external',
+ 'account-login','account-save','account-history','account-private','account-protected',
+ 'state-empty','state-loading','state-success','state-error','state-warning','state-locked'];
 const manifest=JSON.parse(readFileSync('content/production-closure/profile-visual-r1/ASSET-INTEGRATION-STATE.json','utf8'));
-assert.equal(manifest.newVectorIcons.length,13,'Manifest must track each independent icon');
+assert.equal(manifest.newVectorIcons.length,13,'Original six-lens and seven-method identities must remain');
+const matrix=JSON.parse(readFileSync('content/production-closure/profile-visual-r1/ASSET-STATUS-MATRIX-R2.json','utf8'));
+assert.equal(matrix.total,34,'User asset request comprises 34 distinct entries');
+assert.equal(matrix.counts.AVAILABLE_ORIGINAL_VECTOR,24,'Expected six lenses, seven method, five Account and six state icons');
+assert.equal(matrix.counts.PENDING_INDEPENDENT_IMAGE,8,'Only two photographic Heroes and six editorial cards remain mandatory image generation');
+assert.equal(matrix.counts.OPTIONAL_STATIC_EXPORT,1,'Static wheel is optional; interactive wheel remains');
+assert.equal(matrix.counts.NOT_AN_EIGHTH_METHOD,1,'Do not invent a new structured assessment method');
 assert.ok(manifest.pending.some(x=>x.kind.startsWith('live_browser')),'Browser visual acceptance cannot be silently assumed');
 assert.ok(manifest.criticalBoundaries.includes('No fake 4.2/5 dimensions'));
 
@@ -42,6 +50,10 @@ assert.equal(document.querySelectorAll('[data-prf-form] input,[data-prf-form] se
 const actual=[...document.querySelectorAll('[data-prf-mode]')].map(x=>x.dataset.prfMode).sort();
 assert.deepEqual(actual,codes.slice().sort(),'Method runtime IDs changed');
 assert.equal(document.querySelectorAll('.prf-visitor-method-icon').length,7,'Missing entry icons');
+assert.equal(document.querySelectorAll('[data-prf-group]').length,3,'Methods must be grouped into visitor-friendly choices');
+assert.equal(document.querySelector('[data-prf-group="start"] [data-prf-mode="QUICK_PROFILE"]')!==null,true,'Quick assessment should be first');
+assert.equal(document.querySelectorAll('[data-prf-group="explore"] [data-prf-mode]').length,4,'Keep four focused assessments');
+assert.equal(document.querySelectorAll('[data-prf-group="existing"] [data-prf-mode]').length,1,'Keep existing assessment import');
 const wheel=[...document.querySelectorAll('.prf-visitor-wheel__lens')];
 assert.equal(wheel.length,6,'Wheel should have all six sectors');
 assert.equal(wheel.filter(x=>x.getAttribute('aria-pressed')==='true').length,1,'Wheel selection invalid');
@@ -63,4 +75,4 @@ assert.match(css,/object-fit:contain/);
 assert.ok(!/localStorage|sessionStorage|fetch\(|method:\s*['"]POST['"]/.test(js),'Presentation layer may not access account/server storage');
 assert.ok(!/4\.2\s*\/\s*5|3\.9\s*\/\s*5/.test(js),'Never ship fake demo scores');
 assert.ok(html.includes('profile-visitor-r1.css')&&html.includes('profile-visitor-r1.js'),'Page lacks new modules');
-console.log('PASS Profile Visitor R1 — seven native methods, 13 icons, six keyboard-compatible lenses, hero + figures, no new persistence; isolated DOM not live browser QA');
+console.log('PASS Profile Visitor R1 — seven native methods, 24 original icons, six keyboard-compatible lenses, hero + figures, no new persistence; isolated DOM not live browser QA');
