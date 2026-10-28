@@ -44,7 +44,7 @@ wheel[1].click();
 assert.equal(wheel[1].getAttribute('aria-pressed'),'true','Wheel click must activate lens');
 assert.ok(document.querySelector('.prf-visitor-wheel__center img')?.getAttribute('src')?.includes('PHIOS-LOGO-MARK-v1.png'),'Use official mark');
 assert.ok(document.querySelector('[data-prf-account-save]'),'Account opt-in remains');
-assert.equal(document.querySelector('[data-prf-account-save]').checked,false,'Never auto-save');
+assert.equal(document.querySelector('[data-prf-account-save]').hasAttribute('checked'),false,'Never auto-save');
 assert.ok(document.getElementById('prf-visitor-deeper')?.contains(document.querySelector('[data-profile-context-network]')));
 const sample=document.getElementById('profile-example');
 assert.ok(document.getElementById('prf-visitor-deeper').contains(sample),'All demos stay available on demand');
