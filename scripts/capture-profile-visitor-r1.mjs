@@ -77,13 +77,20 @@ try{
      figureCount:document.querySelectorAll('figure').length,
      heroText:document.querySelector('.pm-hero h1')?.textContent?.trim(),
      shownMethod:document.querySelector('#profile-modes .prf-section-head h2')?.textContent?.trim(),
-     loadedImages:[...document.querySelectorAll('.prf-visitor-wheel img,.prf-mode-grid img')].filter(x=>x.complete&&x.naturalWidth>0).length
+     loadedImages:[...document.querySelectorAll('.prf-visitor-wheel img,.prf-mode-grid img')].filter(x=>x.complete&&x.naturalWidth>0).length,
+     overflowItems:[...document.querySelectorAll('body *')].filter(el=>{
+       const r=el.getBoundingClientRect();const st=getComputedStyle(el);
+       return st.position!=='fixed'&&r.width>0&&r.right>innerWidth+3&&r.left<innerWidth+100;
+     }).slice(0,10).map(el=>({tag:el.tagName,cls:String(el.className||'').slice(0,100),right:Math.round(el.getBoundingClientRect().right)}))
     }));
     const id='profile-r1-'+(loc==='en'?'en':'zh')+'-'+width;
     await page.evaluate(()=>window.scrollTo(0,0));
     await page.screenshot({path:path.join(OUTPUT,id+'-hero.png'),fullPage:false,animations:'disabled'});
-    const modes=page.locator('#profile-modes');
-    await modes.scrollIntoViewIfNeeded();
+    await page.evaluate(()=>{
+      const el=document.getElementById('profile-modes');
+      if(el)window.scrollTo(0,Math.max(0,el.getBoundingClientRect().top+window.scrollY-88));
+    });
+    await page.waitForTimeout(650);
     await page.screenshot({path:path.join(OUTPUT,id+'-methods.png'),fullPage:false,animations:'disabled'});
     if([1440,390].includes(width)){
       await page.evaluate(()=>window.scrollTo(0,0));
