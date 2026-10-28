@@ -130,7 +130,10 @@ function reorganize(){
    disclosure.id='prf-visitor-deeper';
    const summary=document.createElement('summary');
    localized(summary,'Explore the six dimensions and a sample profile','了解六个阅读角度，并查看示例');
-   disclosure.append(summary,net,intro,example);saved.after(disclosure);
+   const modesFigure=mode.querySelector('img[data-approved-visual="PHIOS-FIGURE-PROFILE-SEVEN-ENTRY-MODES-v1.webp"]')?.closest('figure');
+   disclosure.append(summary,net,intro,example);
+   if(modesFigure)disclosure.append(modesFigure);
+   saved.after(disclosure);
  }
  // The actual score/legend is governed by Profile's existing producer.
  // Keep sources and customer evidence selectable, but reveal detail on demand.
