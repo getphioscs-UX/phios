@@ -248,3 +248,71 @@ html[lang^="zh"] .prf-visitor-method-group[data-prf-group="start"] [data-prf-mod
  body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-visitor-extras:not([open]){display:none!important}
  body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-visitor-wheel__lens{box-shadow:none}
 }
+
+/* Owner-uploaded R2 photographs (images/hero/). Backgrounds are deliberately
+   separate from the official PHI OS logo and the interactive six-sector wheel. */
+body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-main > .vr2-hero-surface{
+ background-image:
+   linear-gradient(90deg,rgba(251,249,244,.90) 0%,rgba(251,249,244,.77) 27%,rgba(251,249,244,.43) 54%,rgba(250,247,239,.52) 100%),
+   url("https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/PROFILE-HERO-LANDING-DESKTOP.webp")!important;
+ background-size:cover!important;
+ background-position:center 47%!important;
+ background-repeat:no-repeat!important;
+}
+body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-main > .vr2-hero-surface .pm-hero > figure[data-vr2-role="HERO"]{
+ opacity:.08!important;
+}
+/* Six photographic dimension cards: each asset remains a distinct owner-created
+   file. Missing image is visually contained; labels remain actual accessible HTML. */
+body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-visitor-dimensions{
+ width:min(1320px,calc(100% - 32px));margin:26px auto 32px;
+ padding:clamp(20px,2.7vw,34px);
+ background:#fffdf8;border:1px solid #e7dccc;border-radius:22px;
+ color:#123944;
+}
+.prf-visitor-dimensions__head{margin-bottom:23px;display:grid;grid-template-columns:minmax(240px,1fr) minmax(250px,.95fr);gap:22px;align-items:end}
+.prf-visitor-dimensions__head h2{font:700 clamp(1.38rem,2.2vw,2rem)/1.35 Georgia,"Noto Serif SC",serif!important;margin:0!important;color:#173440!important}
+.prf-visitor-dimensions__head p{font-size:.95rem;line-height:1.65;color:#516775;max-width:54ch;margin:0}
+.prf-visitor-dimensions__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.prf-visitor-dimension-card{
+ appearance:none;display:flex;flex-direction:column;overflow:hidden;min-width:0;
+ padding:0!important;border:1px solid #e5d9c7;border-radius:18px;
+ background:#fffaf2!important;cursor:pointer;color:#173b46;text-align:left;
+ box-shadow:0 5px 22px rgba(24,48,55,.055);transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease;
+}
+.prf-visitor-dimension-card:hover{border-color:#cba35a;box-shadow:0 12px 28px rgba(27,48,52,.13);transform:translateY(-2px)}
+.prf-visitor-dimension-card:focus-visible{outline:3px solid #18766b!important;outline-offset:3px}
+.prf-visitor-dimension-card__image{position:relative;display:block;aspect-ratio:3/2;background:linear-gradient(135deg,#efe0c8,#dce9e4);width:100%;overflow:hidden}
+.prf-visitor-dimension-card__image img{
+ display:block;object-fit:cover;width:100%;height:100%;
+ transition:transform .25s ease;
+}
+.prf-visitor-dimension-card:hover .prf-visitor-dimension-card__image img{transform:scale(1.025)}
+.prf-visitor-dimension-card__image[data-photo-state="unavailable"]{background:linear-gradient(145deg,#e6e9df,#e4d9bb)}
+.prf-visitor-dimension-card__details{display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:11px;row-gap:4px;padding:14px 17px 17px;align-content:start}
+.prf-visitor-dimension-card__icon{grid-column:1;grid-row:1 / span 2;align-self:center;background:#f1e7d6;border-radius:50%;width:44px;height:44px;object-fit:contain;padding:10px}
+.prf-visitor-dimension-card__details strong{font:700 clamp(1rem,1.35vw,1.2rem)/1.3 Georgia,"Noto Serif SC",serif;color:#173b46}
+.prf-visitor-dimension-card__copy{grid-column:2;color:#536873;font-size:.88rem;line-height:1.55}
+@media(max-width:900px){
+ .prf-visitor-dimensions__head{grid-template-columns:1fr}
+ .prf-visitor-dimensions__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ body[data-cx-surface="PROFILE_ASSESSMENT"] .prf-main > .vr2-hero-surface{
+   background-image:
+     linear-gradient(180deg,rgba(250,249,244,.91) 0%,rgba(250,249,244,.84) 30%,rgba(251,249,242,.38) 62%,rgba(250,247,239,.67) 100%),
+     url("https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/PROFILE-HERO-LANDING-MOBILE.webp")!important;
+   background-position:center top!important;
+   background-size:cover!important;
+ }
+}
+@media(max-width:520px){
+ .prf-visitor-dimensions__grid{grid-template-columns:1fr;gap:14px}
+ .prf-visitor-dimensions__head{gap:8px}
+ .prf-visitor-dimensions{padding:15px!important}
+ .prf-visitor-dimension-card__image{aspect-ratio:3/1.7}
+}
+@media(prefers-reduced-motion:reduce){
+ .prf-visitor-dimension-card,
+ .prf-visitor-dimension-card__image img{transition:none!important;transform:none!important}
+}
