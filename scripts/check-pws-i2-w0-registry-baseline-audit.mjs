@@ -1,3 +1,4 @@
+import {assertWorldPreviewWranglerSuccessor} from './lib/m3c-wrangler-successor.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -52,7 +53,8 @@ const authorisedSevenVolumeSuccessorRegistryFiles = new Set([
 const authorisedKnowledgeSuccessorRegistryFiles = new Set([
   'm3c-w3-wrangler-successor-reconciliation-v1.json',
   // Configuration reconciliation and predecessor evidence, not Knowledge registries.
-  'm3c-w3-wrangler-successor-reconciliation-v2.json'
+  'm3c-w3-wrangler-successor-reconciliation-v2.json',
+  'm3c-w3-wrangler-successor-reconciliation-v3.json'
 ]);
 const indexedFiles = Object.values(registryIndex.registries)
   .map(file => file.replace(/^\.\//, ''));
@@ -110,6 +112,7 @@ const configurationPredecessor = await readJson(configurationEvidence.predecesso
 assert.equal(configurationEvidence.previousSha256, configurationPredecessor.successor.wranglerSha256);
 assert.deepEqual(configurationEvidence.allowedVars, { PHIOS_D1_MAINTENANCE_MODE: 'READ_ONLY' });
 for (const flag of ['productionActivationVerified', 'deploymentExecuted', 'd1MutationExecuted']) assert.equal(configurationEvidence[flag], false);
+await assertWorldPreviewWranglerSuccessor(configurationEvidence.successorSha256);
 const knowledgeSchemas = await listFiles(
   'content/knowledge/registry/schemas',
   '.json'
@@ -220,5 +223,5 @@ assert(
 console.log('✓ PWS-I2-W0 Registry Baseline Audit passed.');
 console.log('  Registry 6 modules; Runtime Contracts/Schemas/Versions 20 each.');
 console.log('  Persistence 9 methods; D1 1 binding; W0 executable Migrations 4.');
-console.log('  Historical Static JSON baseline 114; current architecture/visual/runtime-position records are checked separately. Knowledge Registry 12 frozen + 2 M3C reconciliation JSON records; predecessor JSONC evidence is digest-checked separately; registry index 51; historical unindexed excluding index 62.');
+console.log('  Historical Static JSON baseline 114; current architecture/visual/runtime-position records are checked separately. Knowledge Registry 12 frozen + 3 M3C reconciliation JSON records; predecessor JSONC evidence is digest-checked separately; registry index 51; historical unindexed excluding index 62.');
 console.log('  Multiple-source risks recorded; no Registry or Migration changed.');

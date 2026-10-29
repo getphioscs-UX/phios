@@ -20,8 +20,22 @@ export async function assertM3cWranglerSuccessor(expectedBaseline) {
   assert.equal(await sha(next.previousPath), next.previousSha256);
   assert.deepEqual(next.allowedVars, {PHIOS_D1_MAINTENANCE_MODE: 'READ_ONLY'});
   for (const flag of ['productionActivationVerified', 'deploymentExecuted', 'd1MutationExecuted']) assert.equal(next[flag], false);
-  assert.equal(await sha('wrangler.jsonc'), next.successorSha256);
+  const readOnlyConfig=await assertWorldPreviewWranglerSuccessor(next.successorSha256);
   const previous = await json(next.previousPath);
-  assert.deepEqual(await json('wrangler.jsonc'), {...previous, vars: {...previous.vars, ...next.allowedVars}},
+  assert.deepEqual(readOnlyConfig, {...previous, vars: {...previous.vars, ...next.allowedVars}},
     'M3C Wrangler changes exceed registered read-only maintenance successor');
+}
+
+// Exact Preview-only successor; never admits production or shared-project writes.
+export async function assertWorldPreviewWranglerSuccessor(expectedPrevious){
+ const n=await json('content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v3.json');
+ assert.equal(n.status,'ENGINEERING_RECONCILIATION');assert.equal(n.humanDecision,'PENDING');
+ assert.equal(n.predecessor,'content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v2.json');
+ assert.equal(await sha(n.predecessor),n.predecessorSha256);assert.equal(n.previousSha256,expectedPrevious);
+ assert.equal(n.previousPath,'content/knowledge/registry/m3c-w3-wrangler-before-world-preview-v3.jsonc');
+ assert.equal(await sha(n.previousPath),expectedPrevious);assert.equal(await sha('wrangler.jsonc'),n.successorSha256);
+ assert.deepEqual(n.allowedPreviewVars,{PHIOS_D1_MAINTENANCE_MODE:'READ_ONLY'});
+ for(const k of ['productionActivationVerified','deploymentExecuted','d1MutationExecuted','projectSettingsChanged'])assert.equal(n[k],false);
+ const prior=await json(n.previousPath),expected=structuredClone(prior);Object.assign(expected.env.preview.vars,n.allowedPreviewVars);
+ assert.deepEqual(await json('wrangler.jsonc'),expected,'Only the registered Preview variable may differ from the original production read-only configuration');return prior;
 }

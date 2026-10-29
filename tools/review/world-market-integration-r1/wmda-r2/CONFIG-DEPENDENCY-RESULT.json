@@ -1,0 +1,27 @@
+{
+  "previewSuccessor": {
+    "localM3cEntry": "PASS",
+    "localM3cGuided": "PASS",
+    "sharedM3cHelper": "PASS",
+    "pwsBaseline": "PASS"
+  },
+  "wprExistingFailures": [
+    {
+      "path": "scripts/check-wpr-w0-production-baseline.mjs:10",
+      "baselineActual": "a1cc8849a23a5eb3260a940850c7cb13bd91b5dea2f9c83b67ef3b5b06207188",
+      "baselineExpected": "468092ba45d6c21e8fa7f3442b5321ced85fd4e0a47fda014ed9932c9cdb8c59",
+      "inheritedFromMain": true,
+      "action": "Recognize exact existing config successor chain without rewriting v1/v2"
+    },
+    {
+      "path": "scripts/check-wpr-w0-production-baseline.mjs:28",
+      "actualRegistryVersion": "1.2.1",
+      "expectedRegistryVersion": "1.2.0",
+      "inheritedFromMain": true,
+      "registryChangedByPR12": false,
+      "action": "BLOCKED; needs Public Assets/WPR owner successor decision; no registry rewrite"
+    }
+  ],
+  "fullLocalCheckRun": false,
+  "productionWrites": 0
+}
