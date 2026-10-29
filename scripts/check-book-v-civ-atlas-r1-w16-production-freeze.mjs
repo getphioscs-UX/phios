@@ -1,3 +1,4 @@
+import {execFileSync as worldGitObject} from 'node:child_process';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -177,6 +178,11 @@ for(const c of market.changes){assert.equal(digest(c.previousPath),c.previousSha
 for(const d of market.dependencies)assert.equal(digest(d.path),d.sha256,'Market dependency drift: '+d.path);
 function preMarketSource(p){const c=market.changes.find(c=>c.path===p);return read(c?c.previousPath:p);}
 function marketDigest(p,prior){const c=market.changes.find(c=>c.path===p);if(!c)return prior;assert.equal(c.previousSha256,prior,'Market predecessor chain drift: '+p);return c.successorSha256;}
+const previewBuild=json('content/civilization-atlas/maintenance/book-v-world-preview-build-successor-v17.json');
+assert.equal(previewBuild.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');assert.equal(previewBuild.humanDecision,'PENDING');assert.equal(previewBuild.predecessor,'content/civilization-atlas/maintenance/book-v-world-market-company-successor-v16.json');assert.equal(digest(previewBuild.predecessor),previewBuild.predecessorSha256);
+assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(previewBuild.changeClass));assert.equal(previewBuild.ownerPath,'scripts/build-cloudflare-pages.mjs');
+assert.equal(crypto.createHash('sha256').update(worldGitObject('git',['show',previewBuild.previousGitRevision+':'+previewBuild.ownerPath])).digest('hex'),previewBuild.previousSha256);assert.equal(digest(previewBuild.ownerPath),previewBuild.successorSha256);
+for(const d of previewBuild.dependencies)assert.equal(digest(d.path),d.sha256);for(const k of ['productionConfigurationChanged','sharedPreviewModeRequired','historicalEvidenceChanged','runtimeMiddlewareChanged'])assert.equal(previewBuild[k],false);
 const localReceiver=json('content/civilization-atlas/maintenance/book-v-world-local-evidence-receiver-successor-v14.json');
 assert.equal(localReceiver.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');assert.equal(localReceiver.humanDecision,'PENDING');
 assert.equal(localReceiver.predecessor,'content/civilization-atlas/maintenance/book-v-world-local-measurement-successor-v13.json');assert.equal(localReceiver.predecessorSha256,digest(localReceiver.predecessor));

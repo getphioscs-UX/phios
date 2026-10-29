@@ -54,7 +54,8 @@ const authorisedKnowledgeSuccessorRegistryFiles = new Set([
   'm3c-w3-wrangler-successor-reconciliation-v1.json',
   // Configuration reconciliation and predecessor evidence, not Knowledge registries.
   'm3c-w3-wrangler-successor-reconciliation-v2.json',
-  'm3c-w3-wrangler-successor-reconciliation-v3.json'
+  'm3c-w3-wrangler-successor-reconciliation-v3.json',
+  'm3c-w3-wrangler-successor-reconciliation-v4.json'
 ]);
 const indexedFiles = Object.values(registryIndex.registries)
   .map(file => file.replace(/^\.\//, ''));
@@ -223,5 +224,5 @@ assert(
 console.log('✓ PWS-I2-W0 Registry Baseline Audit passed.');
 console.log('  Registry 6 modules; Runtime Contracts/Schemas/Versions 20 each.');
 console.log('  Persistence 9 methods; D1 1 binding; W0 executable Migrations 4.');
-console.log('  Historical Static JSON baseline 114; current architecture/visual/runtime-position records are checked separately. Knowledge Registry 12 frozen + 3 M3C reconciliation JSON records; predecessor JSONC evidence is digest-checked separately; registry index 51; historical unindexed excluding index 62.');
+console.log('  Historical Static JSON baseline 114; current architecture/visual/runtime-position records are checked separately. Knowledge Registry 12 frozen + 4 M3C reconciliation JSON records; predecessor JSONC evidence is digest-checked separately; registry index 51; historical unindexed excluding index 62.');
 console.log('  Multiple-source risks recorded; no Registry or Migration changed.');

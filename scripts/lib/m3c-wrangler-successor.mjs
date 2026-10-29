@@ -33,9 +33,12 @@ export async function assertWorldPreviewWranglerSuccessor(expectedPrevious){
  assert.equal(n.predecessor,'content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v2.json');
  assert.equal(await sha(n.predecessor),n.predecessorSha256);assert.equal(n.previousSha256,expectedPrevious);
  assert.equal(n.previousPath,'content/knowledge/registry/m3c-w3-wrangler-before-world-preview-v3.jsonc');
- assert.equal(await sha(n.previousPath),expectedPrevious);assert.equal(await sha('wrangler.jsonc'),n.successorSha256);
+ assert.equal(await sha(n.previousPath),expectedPrevious);const withdrawal=await json('content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v4.json');
+ assert.equal(withdrawal.status,'ENGINEERING_RECONCILIATION');assert.equal(withdrawal.humanDecision,'PENDING');assert.equal(withdrawal.predecessor,'content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v3.json');
+ assert.equal(await sha(withdrawal.predecessor),withdrawal.predecessorSha256);assert.equal(withdrawal.previousSha256,n.successorSha256);assert.equal(await sha(withdrawal.previousPath),n.successorSha256);assert.equal(await sha('wrangler.jsonc'),withdrawal.successorSha256);
+ assert.deepEqual(withdrawal.removedPreviewVars,{PHIOS_D1_MAINTENANCE_MODE:'READ_ONLY'});for(const k of ['productionActivationVerified','d1MutationExecuted'])assert.equal(withdrawal[k],false);
  assert.deepEqual(n.allowedPreviewVars,{PHIOS_D1_MAINTENANCE_MODE:'READ_ONLY'});
  for(const k of ['productionActivationVerified','deploymentExecuted','d1MutationExecuted','projectSettingsChanged'])assert.equal(n[k],false);
  const prior=await json(n.previousPath),expected=structuredClone(prior);Object.assign(expected.env.preview.vars,n.allowedPreviewVars);
- assert.deepEqual(await json('wrangler.jsonc'),expected,'Only the registered Preview variable may differ from the original production read-only configuration');return prior;
+ assert.deepEqual(await json(withdrawal.previousPath),expected,'The withdrawn attempt must remain the exact registered Preview increment');assert.deepEqual(await json('wrangler.jsonc'),prior,'Shared Preview increment must be fully withdrawn; production and existing QA variables are unchanged');return prior;
 }
