@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';import fs from 'node:fs';
 import {analyzeWorldCompany} from '../functions/_lib/world-company-analysis.js';
 import {retrievePublicCompany} from '../functions/current-facts-gateway/world-company-projection.js';
+import {retrieveCurrentFacts} from '../functions/current-facts-gateway/current-facts-gateway.js';
 import {onRequestGet,onRequestPost} from '../functions/api/current-facts.js';
 import {onRequest as middleware} from '../functions/_middleware.js';
 const dir='tools/review/world-market-integration-r1';fs.mkdirSync(dir,{recursive:true});const rows=[];
@@ -20,4 +21,5 @@ await test('GET strict schema / no private data / no duplicated query fields',as
 await test('READ_ONLY GET works without touching D1 / provider',async()=>{const env={PHIOS_D1_MAINTENANCE_MODE:'READ_ONLY',RUNTIME_DB:{prepare(){throw Error('D1_TOUCHED');}}},request=new Request('https://local.invalid/api/current-facts?operation=company&symbol=MYX:0338');const r=await middleware({env,request,next:()=>onRequestGet({request})});assert.equal(r.status,200);assert.equal((await r.json()).result.storageWrites,0);});
 await test('READ_ONLY POST remains blocked',async()=>{let ran=false;const r=await middleware({env:{PHIOS_D1_MAINTENANCE_MODE:'READ_ONLY'},request:new Request('https://local.invalid/api/current-facts',{method:'POST',body:'{}'}),next:()=>{ran=true;return onRequestPost({});}});assert.equal(r.status,503);assert.equal(ran,false);});
 await test('Bounded anonymous public query rate',async()=>{const request=new Request('https://local.invalid/api/current-facts?operation=company&symbol=MYX:0338',{headers:{'cf-connecting-ip':'192.0.2.77'}});let last;for(let i=0;i<61;i++)last=await onRequestGet({request});assert.equal(last.status,429);assert.equal(last.headers.get('retry-after'),'60');});
+await test('Existing Current Facts provider failure is bounded',async()=>{const r=await retrieveCurrentFacts({question:'stock price',env:{PHIOS_CURRENT_FACTS_ENDPOINT:'https://fixture.invalid'},fetcher:async()=>{throw Error('synthetic unavailable');},now});assert.equal(r.state,'PROVIDER_UNAVAILABLE');assert.equal(r.evidence.length,0);const gap=await retrieveCurrentFacts({question:'stock price',env:{},now});assert.equal(gap.state,'PROVIDER_NOT_CONFIGURED');});
 fs.writeFileSync(dir+'/ORIENTAL-KOPI-RESULT.json',JSON.stringify(real,null,2));console.log(JSON.stringify({passed:rows.filter(x=>x.status==='PASS').length,total:rows.length,failures:rows.filter(x=>x.status==='FAIL')}));if(rows.some(x=>x.status==='FAIL'))process.exitCode=1;

@@ -19,3 +19,5 @@ Book VI branch: 2498 main-only / 6 branch-only commits, 43 deltas; 23 same-owner
 Pages project read-only GET verified production main and productionDeploymentsEnabled=false; preview setting all. No settings changed. Production deployment and live customer verification not performed. Existing R42 human acceptance still pending. Prepare review PR, do not force merge or auto-authorize semantic/rights conclusions.
 
 Final correction: unknown MYX symbols do not inherit MYR or a company identity. Currency remains null; deterministic suite rerun 13/13 PASS. Draft PR #12 created and attached; no main merge. Git-connected preview was observed queued; local evidence does not claim remote preview verification.
+
+Added final existing-Gateway unavailable/not-configured and six HTTP503 UI fallback checks. Final engine 14/14 PASS; six browser scenarios additionally verify no stale successful values survive a failed request. First failure assertion raced the existing copy-status node; test wait fixed only, rerun PASS.
