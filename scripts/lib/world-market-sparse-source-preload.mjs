@@ -6,8 +6,11 @@ process.on('exit',()=>{const output=path.join(root,'tools/review/world-market-in
 
 // Read-only support for existing freeze checks using fs rather than ESM imports.
 const originalRead=fs.readFileSync,originalExists=fs.existsSync,originalStat=fs.statSync;
-function sourcePath(p){if(typeof p!=='string'&&!(p instanceof URL))return p;const absolute=p instanceof URL?fileURLToPath(p):path.resolve(p),rel=path.relative(root,absolute).replaceAll('\\','/');if(!originalExists(absolute)&&/^(content|tools\/review|books|knowledge|docs)\//.test(rel)){const fallback=path.join(base,rel);if(originalExists(fallback)){reads.add(rel);return fallback;}}return p;}
+function sourcePath(p){if(typeof p!=='string'&&!(p instanceof URL))return p;const absolute=p instanceof URL?fileURLToPath(p):path.resolve(p),rel=path.relative(root,absolute).replaceAll('\\','/');if(!originalExists(absolute)&&(/^(content|tools\/review|books|knowledge|docs)\//.test(rel)||rel==='reality-entry.html')){const fallback=path.join(base,rel);if(originalExists(fallback)){reads.add(rel);return fallback;}}return p;}
 fs.readFileSync=(p,...args)=>originalRead(sourcePath(p),...args);fs.existsSync=p=>originalExists(sourcePath(p));fs.statSync=(p,...args)=>originalStat(sourcePath(p),...args);syncBuiltinESMExports();
 
 const originalWrite=fs.writeFileSync;
 fs.writeFileSync=(p,...args)=>{if(typeof p==='string'){const rel=path.relative(root,path.resolve(p)).replaceAll('\\','/');if(rel.startsWith('artifacts/')){p=path.join(root,'tools/review/world-market-integration-r1/wmda-r2/legacy-output',rel);fs.mkdirSync(path.dirname(p),{recursive:true});}}return originalWrite(p,...args);};syncBuiltinESMExports();
+
+const originalPromiseRead=fs.promises.readFile.bind(fs.promises),originalAccess=fs.promises.access.bind(fs.promises);
+fs.promises.readFile=(p,...args)=>originalPromiseRead(sourcePath(p),...args);fs.promises.access=(p,...args)=>originalAccess(sourcePath(p),...args);
