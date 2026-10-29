@@ -3,10 +3,71 @@ import {generateZiweiProductionCandidate as generateControlledZiweiReport,requir
 import {releaseControlledZiweiReport,openControlledZiweiReport,listControlledZiweiReports} from '../functions/account/ziwei-controlled-report-material.js';
 import {renderPublicationReport} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
 import {finalizeZiweiNavigation} from '../functions/canonical-presentation-runtime/ziwei-navigation-finalization.js';
+import {createSqliteD1Adapter} from './runtime-migration-loader.mjs';
 import {assertReportSubjectBinding} from '../functions/canonical-presentation-runtime/report-cover-subject.js';
 const frozenDir='docs/reports/ziwei/production-admission/zpa-v1',dir='docs/reports/ziwei/production-admission/cpa-v1',record=JSON.parse(fs.readFileSync('docs/reports/ziwei/production-admission/controlled-subject.json')),owner=record.person.accountOwnerUserId,personId=record.person.personId;
 const sqlite=new DatabaseSync(':memory:');for(const f of fs.readdirSync('db/migrations').filter(f=>f.endsWith('.sql')).sort())sqlite.exec(fs.readFileSync('db/migrations/'+f,'utf8'));
-const db={prepare(sql){return {values:[],bind(...v){this.values=v;return this;},async first(){return sqlite.prepare(sql).get(...this.values)||null;},async all(){return {results:sqlite.prepare(sql).all(...this.values)};},async run(){return sqlite.prepare(sql).run(...this.values);}};},async batch(statements){sqlite.exec('BEGIN');try{const r=[];for(const s of statements)r.push(await s.run());sqlite.exec('COMMIT');return r;}catch(e){sqlite.exec('ROLLBACK');throw e;}}};
+// Test adapter only: reuse the existing numbered-parameter D1 bridge. Validate
+// SQL parameter identity/arity before every execution; never turn SQL errors
+// into authorization success. Mixed/named parameter styles fail closed.
+function assertSqliteBindings(sql, values) {
+  const tokens = /'(?:''|[^'])*'|"(?:""|[^"])*"|`(?:``|[^`])*`|\[[^\]]*\]|--[^\r\n]*|\/\*[\s\S]*?\*\/|(\?)(\d*)|([:@$][A-Za-z0-9_]+)/gu;
+  const indexes = new Set(); let anonymous = 0;
+  for (const token of sql.matchAll(tokens)) {
+    if (token[3]) throw new TypeError('ZPA_SQLITE_NAMED_PARAMETERS_UNSUPPORTED');
+    if (!token[1]) continue;
+    if (!token[2]) { anonymous++; continue; }
+    const index = Number(token[2]);
+    if (!/^[1-9]\d*$/u.test(token[2]) || !Number.isSafeInteger(index) || index > 32766) throw new RangeError('ZPA_SQLITE_PARAMETER_INDEX_INVALID');
+    indexes.add(index);
+  }
+  if (indexes.size && anonymous) throw new TypeError('ZPA_SQLITE_MIXED_PARAMETER_STYLES_UNSUPPORTED');
+  const count = indexes.size ? Math.max(...indexes) : anonymous;
+  if (indexes.size !== 0 && indexes.size !== count) throw new RangeError('ZPA_SQLITE_PARAMETER_INDEX_GAP');
+  if (values.length !== count) throw new RangeError('ZPA_SQLITE_PARAMETER_COUNT_MISMATCH');
+  return indexes.size ? [Object.fromEntries(values.map((value,index)=>['?'+(index+1),value]))] : values;
+}
+const sqliteD1 = createSqliteD1Adapter(sqlite);
+const db = {...sqliteD1, prepare(sql) {
+  function bound(values = []) {
+    const statement = sqliteD1.prepare(sql).bind(...values);
+    // The shared bridge's simple regex also sees quoted/commented question
+    // marks. Override only this test statement's argument selection.
+    statement.sqliteArguments = () => assertSqliteBindings(sql, values);
+    return {
+      bind(...next) { return bound(next); },
+      async first() { assertSqliteBindings(sql, values); return statement.first(); },
+      async all() { assertSqliteBindings(sql, values); return statement.all(); },
+      async run() { assertSqliteBindings(sql, values); return statement.run(); }
+    };
+  }
+  return bound();
+}};
+// Anonymous-only fixtures: exercise the same first/all/run/batch adapter used
+// below by real Commerce entitlement queries, without changing those queries.
+assert.deepEqual({...await db.prepare('SELECT ?2 AS second, ?1 AS first, ?1 AS repeated').bind('ONE', 'TWO').first()}, {second:'TWO',first:'ONE',repeated:'ONE'});
+assert.deepEqual({...await db.prepare("SELECT ? AS value, '?99' AS literal /* ?8 */ -- ?7\n").bind('ONE').first()}, {value:'ONE',literal:'?99'});
+assert.equal(await db.prepare('SELECT 1 WHERE 0').first(), null);
+assert.deepEqual((await db.prepare('SELECT ?1 AS value UNION ALL SELECT ?2').bind('ONE','TWO').all()).results.map(r=>r.value), ['ONE','TWO']);
+await db.prepare('CREATE TEMP TABLE zpa_sqlite_binding_probe(id TEXT PRIMARY KEY)').run();
+await db.prepare('INSERT INTO zpa_sqlite_binding_probe VALUES(?1)').bind('ONE').run();
+await db.prepare('INSERT INTO zpa_sqlite_binding_probe VALUES(?)').bind('TWO').run();
+await db.batch([db.prepare('INSERT INTO zpa_sqlite_binding_probe VALUES(?1)').bind('THREE'),db.prepare('INSERT INTO zpa_sqlite_binding_probe VALUES(?)').bind('FOUR')]);
+for (const method of ['first','all','run']) {
+  for (const [sql,values] of [['SELECT ?1, ?2',['ONE']],['SELECT ?',['ONE','TWO']],['SELECT ?2',['ONE','TWO']],['SELECT ?0',[]]]) {
+    await assert.rejects(()=>db.prepare(sql).bind(...values)[method](), RangeError);
+  }
+  await assert.rejects(()=>db.prepare('SELECT ?1, ?').bind('ONE','TWO')[method](), TypeError);
+  await assert.rejects(()=>db.prepare('SELECT :named').bind('ONE')[method](), TypeError);
+}
+await assert.rejects(()=>db.prepare('SELECT * FROM zpa_missing_sqlite_probe').all(), {code:'ERR_SQLITE_ERROR'});
+await assert.rejects(()=>db.batch([db.prepare('INSERT INTO zpa_sqlite_binding_probe VALUES(?1)').bind('ROLLBACK'),db.prepare('INSERT INTO zpa_sqlite_binding_probe VALUES(?1)').bind('ONE')]), {code:'ERR_SQLITE_ERROR'});
+assert.equal(await db.prepare("SELECT id FROM zpa_sqlite_binding_probe WHERE id='ROLLBACK'").first(),null);
+await assert.rejects(()=>db.batch([db.prepare('INSERT INTO zpa_sqlite_binding_probe VALUES(?)').bind('ROLLBACK-ARITY'),db.prepare('SELECT ?1, ?2').bind('ONE')]),RangeError);
+assert.equal(await db.prepare("SELECT id FROM zpa_sqlite_binding_probe WHERE id='ROLLBACK-ARITY'").first(),null);
+assert.equal((await db.prepare('SELECT count(*) AS count FROM zpa_sqlite_binding_probe').first()).count,4);
+await db.prepare('DROP TABLE zpa_sqlite_binding_probe').run();
+console.log('PASS ZPA SQLite indexed/anonymous binding, strict arity, native errors and atomic batch; runtime='+process.version);
 // Isolated test rows exercise the real Commerce query. No payment is made,
 // webhook simulated as verified, or remote account/entitlement created.
 sqlite.prepare("INSERT INTO commerce_products(product_id,product_version,title,language,format,currency,amount_minor,source_object_key,created_at,updated_at) VALUES(?,'1','Zi Wei local test','bilingual','REPORT','MYR',3900,'controlled','2026-10-01','2026-10-01')").run(ZIWEI_PRODUCT);
@@ -35,6 +96,7 @@ const receipt={passed:true,pageCount:33,semanticSnapshotId:candidate.snapshot.se
 // separate browser gate. This direct call does not establish deployed QA E2E.
 const release=await releaseControlledZiweiReport(context,candidate,{loadSubject,renderVerification:receipt});
 const args={reportId:release.reportId,personId};const original=await openControlledZiweiReport(context,args,{loadSubject});
+await assert.rejects(()=>openControlledZiweiReport({...context,data:{symbolicAccountIdentity:{...context.data.symbolicAccountIdentity,userId:'OTHER-ACCOUNT'}}},args,{loadSubject}),'Another account must not reopen the authorized report');
 await reject('other account owns requested person',()=>generateControlledZiweiReport(context,{personId,locale:'en'},{loadSubject:async()=>({...structuredClone(record),person:{...record.person,accountOwnerUserId:'OTHER'}})}));
 await reject('revoked method consent',()=>generateControlledZiweiReport(context,{personId,locale:'en'},{loadSubject:async()=>({...structuredClone(record),methodConsent:{...record.methodConsent,revocationState:'REVOKED'}})}));
 await reject('deleted person',()=>generateControlledZiweiReport(context,{personId,locale:'en'},{loadSubject:async()=>null}));
