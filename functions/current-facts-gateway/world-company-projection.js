@@ -7,7 +7,7 @@ export function retrievePublicCompany(input,{now=new Date().toISOString()}={}){
  const symbol=companySymbol(input.symbol),comparison=input.compare?companySymbol(input.compare):null;
  if(input.pe!==undefined&&!/^\d{1,3}(?:\.\d{1,2})?(?:,\d{1,3}(?:\.\d{1,2})?){0,4}$/.test(input.pe))throw Error('SCENARIO_ASSUMPTIONS_INVALID');
  const peMultiples=input.pe?input.pe.split(',').map(Number):[];
- const resolve=s=>analyzeWorldCompany(filings.companies.find(x=>x.symbol===s)||{symbol:s,currency:'MYR'},{now,peMultiples});
+ const resolve=s=>analyzeWorldCompany(filings.companies.find(x=>x.symbol===s)||{symbol:s},{now,peMultiples});
  const company=resolve(symbol),other=comparison?resolve(comparison):null;
  const object=c=>({id:c.symbol,type:'COMPANY_FINANCIAL_'+c.period.kind,unit:c.currency,source:c.source.id,time:{start:c.period.start,end:c.period.end},comparisonBasis:c.period.kind,indicatorId:c.period.kind});
  const comparability=other?compareWorldObjects(object(company),object(other)):null;
