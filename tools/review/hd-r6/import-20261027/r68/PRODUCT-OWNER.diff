@@ -1,0 +1,15 @@
+diff --git a/functions/external-profile/hd-premium-section-packet-review.js b/functions/external-profile/hd-premium-section-packet-review.js
+index 90bafbd2..2e0dae7c 100644
+--- a/functions/external-profile/hd-premium-section-packet-review.js
++++ b/functions/external-profile/hd-premium-section-packet-review.js
+@@ -14,7 +14,9 @@ export function prepareHdPremiumSectionPackets({preview,plan,normalization,accep
+ export function admitExactReviewParagraph({paragraph,packet,confirmationDigest,rights=false,semantic=false,commercial=false}){
+  if(confirmationDigest!==packet.calculation.chartDigest)throw Error('HD_PREMIUM_STALE_CONFIRMATION');
+  if(paragraph.sourceId&&!packet.sourceUnits.some(x=>x.id===paragraph.sourceId))throw Error('HD_PREMIUM_SOURCE_NOT_IN_PACKET');
+- for(const f of paragraph.requiredFacts||[]){if(!/^(type|authority|profile\.|definition\.|variables\.|cross\.)/.test(f.path))throw Error('HD_PREMIUM_PREDICATE_PATH_NOT_ALLOWED');const value=f.path.split('.').reduce((o,k)=>o?.[k],packet.calculation);if(value===undefined||JSON.stringify(value)!==JSON.stringify(f.equals))throw Error('HD_PREMIUM_REQUIRED_FACT_MISMATCH');}
++ // Paragraph-level factual binding also covers the existing calculated center,
++ // Channel and activation arrays. Never resolve arbitrary object/prototype paths.
++ for(const f of paragraph.requiredFacts||[]){if(!/^(type|authority|profile|definition|variables|cross|centers|channels|activations)(\.[A-Za-z0-9_]+)*$/.test(f.path)||f.path.split('.').some(k=>['__proto__','prototype','constructor'].includes(k)))throw Error('HD_PREMIUM_PREDICATE_PATH_NOT_ALLOWED');const value=f.path.split('.').reduce((o,k)=>o!=null&&Object.prototype.hasOwnProperty.call(o,k)?o[k]:undefined,packet.calculation);if(value===undefined||typeof value==='function'||typeof value==='symbol'||typeof value==='number'&&!Number.isFinite(value)||!Object.prototype.hasOwnProperty.call(f,'equals')||JSON.stringify(value)!==JSON.stringify(f.equals))throw Error('HD_PREMIUM_REQUIRED_FACT_MISMATCH');}
+  if(paragraph.requiredGate&&paragraph.sourceGate!==paragraph.requiredGate)throw Error('HD_PREMIUM_SOURCE_GATE_IDENTITY_MISMATCH');
+  if(paragraph.requiredActivation){const{layer,bodyCode,gate,line}=paragraph.requiredActivation,a=packet.activationWitness[layer+':'+bodyCode];if(!a||a.gate!==gate||a.line!==line)throw Error('HD_PREMIUM_EXACT_ACTIVATION_MISMATCH');}
+  if(/Inner Vision|内在视觉|DreamRave|Book of Destinies/i.test(paragraph.text))throw Error('HD_PREMIUM_WITHDRAWN_SOURCE');

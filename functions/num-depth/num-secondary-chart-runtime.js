@@ -19,7 +19,12 @@ function perPartValue(parts,predicate=()=>true){const partResults=parts.map(part
 function sourceAlignedCore(name,lifePathValue){
  if(name.state!=='READY')return freezeDeep({availability:name.state,eligible:false});
  const expression=perPartValue(name.parts);const soulUrge=perPartValue(name.parts,c=>VOWELS.has(c));const personality=perPartValue(name.parts,c=>!VOWELS.has(c));const maturity=reducePreserveMaster(reduceSingle(lifePathValue)+expression.final.value);
- return freezeDeep({availability:'AVAILABLE',eligible:true,expression:expression.final,soulUrge:soulUrge.final,personality:personality.final,maturity});
+ // Additive provenance: expose the exact existing part reductions rather than
+ // asking publication code to reconstruct a second calculation path.
+ return freezeDeep({availability:'AVAILABLE',eligible:true,expression:expression.final,soulUrge:soulUrge.final,personality:personality.final,maturity,
+  calculationProvenance:{version:'NUM-D3-NAME-PART-PROVENANCE-v1',letterMapVersion:'PYTHAGOREAN_LATIN_1_9_V1',normalization:'UPPERCASE_ASCII_PARTS_SPACES_HYPHENS_APOSTROPHES_V1',masterNumberPolicy:'PRESERVE_11_22_33_PER_PART_AND_FINAL',vowels:'AEIOU',yPolicy:'BLOCK_SOURCE_ALIGNMENT_UNTIL_CLASSIFIED',
+   parts:name.parts.map((part,i)=>({token:part,letters:[...part].map(letter=>({letter,value:LETTER_VALUES[letter],vowel:VOWELS.has(letter)})),expression:expression.parts[i],soulUrge:soulUrge.parts[i],personality:personality.parts[i]})),
+   roles:{expression,soulUrge,personality}}});
 }
 function frequencies(letters){const f=Object.fromEntries(Array.from({length:9},(_,i)=>[i+1,0]));for(const c of letters)f[LETTER_VALUES[c]]++;return f}
 function plane(letters,set){const xs=letters.filter(c=>set.has(c));const raw=sumLetters(xs);return freezeDeep({letters:xs,count:xs.length,rawValue:raw,reduction:reducePreserveMaster(raw)})}

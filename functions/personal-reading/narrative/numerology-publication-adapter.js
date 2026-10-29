@@ -1,9 +1,10 @@
+import {validateNumPublicationComparisonConsent} from '../../customer-projection/numerology-customer-reading-envelope-v1.js';
 import {executeAndProjectMcd5CurrentRequest} from '../../method-client-delivery/canonical-projection-runtime-current.js';
 import {onRequestPost as meaningPost} from '../../api/method-meaning.js';
 import {REPORT_REFERENCE_BLUEPRINTS} from '../../canonical-presentation-runtime/report-blueprint-reference.js';
 import {numFpRoleMeta} from '../../num-full-production/num-full-production-rules.js';
 import {sha256Stable,deepFreeze} from '../../interpretation-runtime/mir7-utils.js';
-import {resolveAlternativeTimingPhase} from '../../num-expansion/num-alternative-timing-runtime.js';
+import {validateNumPublicationTiming,NUM_PUBLICATION_DIGIT_DISTRIBUTION_SOURCE_REF} from '../../method-client-delivery/num-publication-calculation-adapter.js';
 import roleSources from '../../../content/professional/num-production/full-production/rich-meaning/claims/num-r2-source-claims-v1.json';
 import {numPublicationVisual} from './numerology-publication-visuals.js';
 
@@ -20,13 +21,13 @@ export async function calculateNumPublicationSnapshot({canonicalInput,expansionI
  // time, place or timezone for this birth-date method.
  canonicalInput={birthTime:null,birthPlace:{displayName:null,countryCode:null,latitude:null,longitude:null},timezone:{iana:null,utcOffsetAtBirth:null,source:'UNKNOWN',confidence:'UNKNOWN'},timeAccuracy:'UNKNOWN',locale:'en',inputVersion:'MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0',...canonicalInput};
  if(expansionInput.birthDate!==canonicalInput?.birthDate)fail('NUM_R20_BIRTH_LINEAGE_MISMATCH');
- if(expansionInput.relationship&&!(relationshipConsent?.granted===true&&relationshipConsent?.purpose==='NUM_REPORT_COMPARISON'&&relationshipConsent?.comparisonBirthDate===expansionInput.relationship.comparisonBirthDate))fail('NUM_R20_COMPARISON_CONSENT_REQUIRED');
+ if(!validateNumPublicationComparisonConsent({expansionInput,relationshipConsent}))fail('NUM_R20_COMPARISON_CONSENT_REQUIRED');
  const request={schemaVersion:'PHI-OS-MCD-METHOD-EXECUTION-REQUEST-v1.0.0',methodCode:'NUMEROLOGY',methodVersion:'0.1.0-candidate',capability:'CALCULATION',purposeCode:'NUM_R20_LOCAL_PUBLICATION',canonicalInput,executionParameters:expansionInput.targetDate?{targetDate:expansionInput.targetDate}:{},consentRecordId:canonicalInput?.consent?.recordId,requestId:'NUM-R20-'+await sha256Stable({canonicalInput,expansionInput})};
  const result=await executeAndProjectMcd5CurrentRequest(request),projection=result.canonicalProjection;
  if(!['EXECUTED_BOUND_SCOPE','PARTIAL_EXECUTION'].includes(result.execution?.executionStatus)||!projection?.calculation?.values?.some(v=>v.code==='LIFE_PATH'&&Number.isFinite(v.value)))fail('NUM_R20_NATIVE_CALCULATION_REQUIRED');
  const nativeExpansionInput={...expansionInput},inputAdmission={};
  const name=expansionInput.identityInput?.fullBirthName;if(name&&/[^A-Z\s\-'/.]/i.test(name.normalize('NFKD').replace(/[\u0300-\u036f]/g,''))){delete nativeExpansionInput.identityInput;inputAdmission.name='UNSUPPORTED_NAME_SCRIPT_NOT_TRANSLITERATED';}
- if(expansionInput.targetDate)try{resolveAlternativeTimingPhase({birthDate:expansionInput.birthDate,targetDate:expansionInput.targetDate});}catch(error){if(error.message!=='NUM_ENERGY_BIRTH_DATE_INVALID')throw error;delete nativeExpansionInput.targetDate;inputAdmission.energyTiming={state:'DERIVED_ENERGY_DATE_RULE_UNRESOLVED',nativeError:error.message,westernTargetDatePreserved:expansionInput.targetDate};}
+ if(expansionInput.targetDate)try{validateNumPublicationTiming({birthDate:expansionInput.birthDate,targetDate:expansionInput.targetDate});}catch(error){if(error.message!=='NUM_ENERGY_BIRTH_DATE_INVALID')throw error;delete nativeExpansionInput.targetDate;inputAdmission.energyTiming={state:'DERIVED_ENERGY_DATE_RULE_UNRESOLVED',nativeError:error.message,westernTargetDatePreserved:expansionInput.targetDate};}
  const readings={};for(const locale of ['zh-Hans','en']){const r=await meaningPost({request:new Request('https://phios.local/api/method-meaning',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({schemaVersion:'PHI-OS-CMP-METHOD-MEANING-REQUEST-v1.0.0',locale,canonicalProjection:projection,numerologyExpansionInput:nativeExpansionInput})})});const b=await r.json();if(!r.ok||b.integratedReading?.customerPublishable!==true)fail(b.error||'NUM_R20_NATIVE_MEANING_REQUIRED');readings[locale]=b.integratedReading;}
  const inputDigest=await sha256Stable({canonicalInput,expansionInput,relationshipConsent:relationshipConsent||null}),calculationDigest=await sha256Stable(projection),semanticDigest=await sha256Stable(readings);
  const identity={inputDigest,calculationDigest,semanticDigest,version:NUM_R20_PUBLICATION_VERSION};if(Object.keys(inputAdmission).length)identity.admissionDigest=await sha256Stable({inputAdmission,nativeExpansionInput});
@@ -80,7 +81,7 @@ export function composeNumR20Pages(snapshot){
      scope('limits','这里比较的是同一份计算中不同位置的重复、区别与周期呼应，不是两个人的合盘，也不产生配对分数。','This compares repetition, distinctions and cycle echoes among roles in one calculation. It is not a two-person compatibility reading and creates no score.');break;
     case 9:
      for(let n=1;n<=9;n++)fact(select('数字 ','Digit ')+n,e.digitDistribution.frequency[n],'expansion.sections.digitDistribution.frequency.'+n);
-     scope('distribution','上图只统计当前出生日期输入范围内1至9的出现次数；零不参与九数分布。分布图与归约后的生命路径、姓名字母频率是不同资料，不可混成同一张人格量表。','This chart counts digits 1–9 only within the current birth-date input scope; zero is excluded from the nine-digit distribution. It is distinct from reduced Life Path values and name-letter frequencies, and is not a personality scale.','functions/num-expansion/num-digit-distribution-runtime.js');
+     scope('distribution','上图只统计当前出生日期输入范围内1至9的出现次数；零不参与九数分布。分布图与归约后的生命路径、姓名字母频率是不同资料，不可混成同一张人格量表。','This chart counts digits 1–9 only within the current birth-date input scope; zero is excluded from the nine-digit distribution. It is distinct from reduced Life Path values and name-letter frequencies, and is not a personality scale.',NUM_PUBLICATION_DIGIT_DISTRIBUTION_SOURCE_REF);
      scope('scope','同一数字在多个位置出现，首先说明计算来源与位置的关系。频次不能证明能力、健康、价值或未来结果；后续解释仍需其所属学派的已准入来源。','Repeated values first describe calculation scope and role relationships. Frequency does not establish ability, health, worth or future outcomes. Any further interpretation still needs an admitted source within its own school.');break;
     case 10:
      fact(select('出生日期重复数字','Repeated birth-date digits'),e.digitDistribution.repeatedDigits,'expansion.sections.digitDistribution.repeatedDigits');fact(select('出生日期未出现数字','Absent birth-date digits'),e.digitDistribution.missingDigits,'expansion.sections.digitDistribution.missingDigits');

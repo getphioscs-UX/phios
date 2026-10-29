@@ -78,3 +78,20 @@ export function buildNumerologyCustomerReadingEnvelope({canonicalProjection,mean
 }
 export function projectNumerologyEnvelopeForCustomer(envelope){if(!envelope)return null;const {canonicalProjection:_privateProjection,...safe}=envelope;return freeze({...safe,boundaries:{...(safe.boundaries||{}),rawCanonicalProjectionPubliclyExposed:false}})}
 export default Object.freeze({buildNumerologyChartModel,buildNumerologyCustomerReadingEnvelope,projectNumerologyEnvelopeForCustomer});
+
+
+/**
+ * Validate explicitly supplied Numerology comparison consent.
+ * Does not create, infer or own a second-person input.
+ */
+export function validateNumPublicationComparisonConsent({
+  expansionInput,
+  relationshipConsent
+} = {}) {
+  if (!expansionInput?.relationship) return true;
+
+  return relationshipConsent?.granted === true &&
+    relationshipConsent?.purpose === 'NUM_REPORT_COMPARISON' &&
+    relationshipConsent?.comparisonBirthDate ===
+      expansionInput.relationship.comparisonBirthDate;
+}

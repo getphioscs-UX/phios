@@ -1,0 +1,87 @@
+{
+  "commands": [
+    {
+      "command": "python -X utf8 tools/review/hd-r6/import-20261027/r68/prepare.py",
+      "exitCode": 0,
+      "result": "5 input hashes +18 nested files +3 English edits +7 approved display deltas"
+    },
+    {
+      "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/hd-r6/import-20261027/r68/run.mjs",
+      "exitCode": 0,
+      "result": "61 targeted checks and96 actual recalculations; original snapshot retained as initial binding evidence"
+    },
+    {
+      "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/hd-r6/import-20261027/r68/legacy-focused.mjs",
+      "exitCode": 0,
+      "result": "39 existing owner compatibility checks"
+    },
+    {
+      "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/hd-r6/import-20261027/r68/rebind.mjs",
+      "exitCode": 0,
+      "result": "8 final current-context checks;495 selected paragraphs"
+    },
+    {
+      "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/hd-r6/import-20261027/r68/attempts.mjs",
+      "exitCode": 0,
+      "result": "2 actual contrasting charts x3 actual language plans"
+    },
+    {
+      "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/hd-r6/import-20261027/r68/budget.mjs",
+      "exitCode": 0,
+      "result": "10 existing budget projection simulations, no provider"
+    },
+    {
+      "command": "python -X utf8 tools/review/hd-r6/import-20261027/r68/render.py",
+      "exitCode": 0,
+      "result": "Actual three reference17-section PDFs"
+    },
+    {
+      "command": "python -X utf8 tools/review/hd-r6/import-20261027/r68/render.py en bilingual",
+      "exitCode": 0,
+      "result": "Final balanced EN/BI layout; ZH unchanged"
+    },
+    {
+      "command": "python -X utf8 tools/review/hd-r6/import-20261027/r68/pdf-qa.py --only=en,bilingual",
+      "exitCode": 0,
+      "result": "Final EN/BI physical QA; same-SHA ZH QA reused"
+    },
+    {
+      "command": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/hd-r6/import-20261027/r68/delivery.mjs",
+      "exitCode": 0,
+      "result": "Current exact PDFs saved/reopened/downloaded; unauthorized and revoked denied"
+    },
+    {
+      "command": "python -X utf8 tools/review/hd-r6/import-20261027/r68/physical.py",
+      "exitCode": 0,
+      "result": "314 actual page rasters decoded; opaque reading panels verified"
+    },
+    {
+      "command": "python -X utf8 tools/review/hd-r6/import-20261027/r68/finalize.py",
+      "exitCode": 0,
+      "result": "One existing Master append, final SHA and source/staging proofs"
+    }
+  ],
+  "priorFailuresPreserved": [
+    {
+      "check": "Initial PDF customer internal-language scan",
+      "result": "FAIL",
+      "receipt": "PRE-DISPLAY-REPAIR-PDF-MANIFEST.json",
+      "remediation": "7 owner-approved derived display deltas, sources unchanged; final physical text scan passes"
+    },
+    {
+      "check": "First finalizer attempt",
+      "exitCode": 1,
+      "reason": "Existing Master is an HTML fragment with no closing body tag",
+      "remediation": "Append-only EOF fallback, preexisting bytes preserved; final verification passes"
+    },
+    {
+      "check": "pdftotext helper discovery",
+      "exitCode": 1,
+      "reason": "Executable unavailable",
+      "remediation": "Used installed pypdf/pdfplumber and Poppler rasterizer, no install or network"
+    }
+  ],
+  "globalNpmCheck": "NOT_RUN_PER_SCOPE",
+  "providerCalls": 0,
+  "productionWrites": 0
+}

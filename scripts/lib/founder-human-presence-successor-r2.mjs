@@ -12,7 +12,7 @@ function currentFounderSourceDigest(entry,founder){
   assert.equal(schema.status,'ENGINEERING_RECONCILIATION');assert.equal(schema.file,entry.path);assert.equal(schema.predecessor.path,'content/web/index-surfaces/founder-about-consolidation-successor-r7.json');assert.equal(schema.predecessor.sha256,sha(fs.readFileSync(schema.predecessor.path)));for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(schema[key],false);assert.equal(schema.previousSha256,about.sha256);assert.equal(sha(fs.readFileSync(schema.previousPath)),about.sha256);const order=JSON.parse(fs.readFileSync('content/web/index-surfaces/founder-section-order-successor-r9.json'));
   assert.equal(order.status,'ENGINEERING_RECONCILIATION');assert.equal(order.file,entry.path);assert.equal(order.predecessor.path,'content/web/index-surfaces/founder-about-schema-successor-r8.json');assert.equal(order.predecessor.sha256,sha(fs.readFileSync(order.predecessor.path)));
   for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(order[key],false);
-  assert.equal(order.previousSha256,schema.sha256);assert.equal(sha(fs.readFileSync(order.previousPath)),schema.sha256);return order.sha256;
+  assert.equal(order.previousSha256,schema.sha256);assert.equal(sha(fs.readFileSync(order.previousPath)),schema.sha256);return founderStoryDeckCurrentDigest(entry.path, order);
  }
  if(entry.path==='assets/css/founder-publication-r2.css'){
   const order=JSON.parse(fs.readFileSync('content/web/index-surfaces/founder-section-order-successor-r9.json'));assert.equal(order.status,'ENGINEERING_RECONCILIATION');assert.equal(order.predecessor.path,'content/web/index-surfaces/founder-about-schema-successor-r8.json');assert.equal(order.predecessor.sha256,sha(fs.readFileSync(order.predecessor.path)));for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(order[key],false);
@@ -35,3 +35,41 @@ function currentFounderSourceDigest(entry,founder){
 }
 export function currentConsolidationDigest(file,expected){const r=founderR2Successor();if(file===r?.file){assert.equal(r.previousSha256,expected,'Founder predecessor/consolidation mismatch');return currentFounderSourceDigest({path:file,sha256:r.sha256},r);}return expected;}
 export function historicalFounderRuntimeBytes(file){const r=founderR2Successor();return file===r?.runtime.path?fs.readFileSync(r.runtime.previousPath):fs.readFileSync(file);}
+
+
+function founderStoryDeckCurrentDigest(file, order) {
+  const manifestPath = 'content/web/index-surfaces/founder-story-deck-successor-r11.json';
+  const r9Path = 'content/web/index-surfaces/founder-section-order-successor-r9.json';
+  const record = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+
+  assert.equal(record.status, 'ENGINEERING_RECONCILIATION');
+  for (const k of ['historicalRecordsRewritten', 'humanAcceptanceGranted', 'productionActivated'])
+    assert.equal(record[k], false);
+
+  assert.equal(record.file, file);
+  assert.equal(record.predecessor.path, r9Path);
+  assert.equal(record.predecessor.sha256, sha(fs.readFileSync(r9Path)));
+  assert.equal(record.previousSha256, order.sha256);
+  assert.equal(record.scriptPath, 'assets/js/figure-story-deck.js');
+
+  const insertion = '<script type="module" src="/assets/js/figure-story-deck.js"></script>\n';
+  const marker = '</body></html>';
+  const current = fs.readFileSync(file, 'utf8');
+
+  assert.equal(record.exactInsertion, insertion);
+  assert.equal(current.split(insertion).length, 2);
+  assert(current.includes(insertion + marker));
+
+  const previous = current.replace(insertion + marker, marker);
+
+  assert.equal(sha(Buffer.from(previous)), order.sha256,
+    'Founder R9 historical source mismatch');
+
+  assert.equal(sha(fs.readFileSync(file)), record.sha256,
+    'Founder Story Deck successor source drift');
+
+  assert(fs.existsSync(record.scriptPath),
+    'Founder Story Deck script missing');
+
+  return record.sha256;
+}
