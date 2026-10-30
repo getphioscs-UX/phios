@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+import {retrievePublicCompany} from '../functions/current-facts-gateway/world-company-projection.js';
+import {analyzeWorldCompany} from '../functions/_lib/world-company-analysis.js';
+const catalog=JSON.parse(fs.readFileSync('content/world/company-filings-r1.json'));
+const packet=catalog.companies[0],c=retrievePublicCompany({operation:'company',symbol:'MYX:0338',pe:'10,15'},{now:'2026-10-30T09:00:00Z'}).company;
+const rows=[];function test(id,fn){fn();rows.push({id,status:'PASS'});}
+test('Exact original dated catalog remains recoverable; no historical rewrite',()=>{const prior=execFileSync('git',['show',catalog.predecessorRevision+':content/world/company-filings-r1.json']);assert.equal(crypto.createHash('sha256').update(prior).digest('hex'),catalog.predecessorSha256);});
+test('Official PDF identity and manual latest check remain explicit',()=>{assert.equal(c.source.verifiedReport.sha256,'542364f8e59f1f5a17de729e1d2291b3415c05631efca9b2c9e5dfec94d733c8');assert.equal(c.source.verifiedReport.pages,22);assert.equal(c.source.latestFilingCheck.automaticRefresh,false);assert.equal(c.source.checkedAt,'2026-10-30');assert.equal(c.source.latestFilingCheck.latestListedPeriodEnd,'2026-06-30');});
+test('Consolidated balance sheet reconciles after thousands conversion',()=>{for(const[k,v]of Object.entries({totalAssets:490140000,totalLiabilities:167561000,equity:322579000,cash:13933000,debt:3044000}))assert.equal(c.metrics[k].value,v);assert.equal(c.metrics.totalAssets.value,c.metrics.totalLiabilities.value+c.metrics.equity.value);});
+test('Quarterly profit and basic EPS unchanged; YTD is not substituted',()=>{assert.equal(c.metrics.revenue.value,156626000);assert.equal(c.metrics.netProfit.value,17004000);assert.equal(c.metrics.eps.value,.0085);assert.equal(c.reportedYearToDate.revenue,443079);assert.equal(c.reportedYearToDate.netProfit,49083);assert.equal(c.reportedYearToDate.priorNetProfit,44861);assert.equal(c.reportedYearToDate.unit,'MYR_THOUSANDS');});
+test('Operating/free cash flow use the nine-month period, not Q3',()=>{assert.equal(c.metrics.operatingCashFlow.value,50938000);assert.equal(c.metrics.freeCashFlow.value,26897000);assert.equal(c.metrics.dividendsPaid.value,20000000);for(const k of ['operatingCashFlow','freeCashFlow','dividendsPaid'])assert.deepEqual(c.metrics[k].period,{start:'2025-10-01',end:'2026-06-30',kind:'YTD',statementBasis:'CONSOLIDATED'});});
+test('Stocks have an as-of date; flows retain quarterly dates',()=>{for(const k of ['totalAssets','cash','debt','equity'])assert.equal(c.metrics[k].period.kind,'AS_OF');assert.equal(c.metrics.revenue.period.kind,'QUARTER');assert.equal(packet.filing.sharesOutstanding,2000000000);assert.equal(packet.filing.sharesAsOf,'2026-06-30');});
+test('Borrowings exclude lease liabilities and never equal total liabilities',()=>{assert.notEqual(c.metrics.debt.value,c.metrics.totalLiabilities.value);assert(c.metrics.debt.limitations.some(x=>x.includes('lease liabilities excluded')));assert.equal(c.metrics.netDebt.value,-10889000);});
+test('No fake quote, annualisation, ROE or declared target',()=>{for(const k of ['marketCap','pe','pb','roe','roa','ttmEps','dividendYield'])assert.equal(c.metrics[k].value,null);assert(c.scenarios.every(x=>x.price.value===null));assert.equal(c.providerCalls,0);assert.equal(c.modelCalls,0);});
+test('Invalid cashflow period fails explicitly',()=>{const bad=structuredClone(packet);bad.filing.cashFlowPeriod.end='2025-06-30';assert.throws(()=>analyzeWorldCompany(bad),/CASHFLOW_PERIOD_INVALID/);});
+test('Missing source values remain unknown; declared zero remains zero',()=>{const p=structuredClone(packet);p.filing.cash=null;assert.equal(analyzeWorldCompany(p).metrics.cash.value,null);p.filing.cash=0;assert.equal(analyzeWorldCompany(p).metrics.cash.value,0);});
+test('A check from the future is not latest evidence',()=>assert.equal(analyzeWorldCompany(packet,{now:'2026-10-29T00:00:00Z'}).freshness.filing,'HISTORICAL_AS_FILED_NOT_VERIFIED_LATEST'));
+console.log(JSON.stringify({status:'PASS',passed:rows.length,rows,providerCalls:0,productionWrites:0}));
