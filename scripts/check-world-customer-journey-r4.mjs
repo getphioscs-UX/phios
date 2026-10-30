@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';import {execFileSync} from 'node:child_process';
 import {worldQuestionTarget,worldRouteFromURL,worldJourneyURL} from '../assets/js/pages/civilization-atlas/world-journey-state-r3.js';
-import {topicRoute,CUSTOMER_TOPICS} from '../assets/js/customer-entry-topic-map.js';
+import {topicRoute,localTopicRoute,CUSTOMER_TOPICS} from '../assets/js/customer-entry-topic-map.js';
 import {routeClientIntent} from '../functions/public/client-intent-router.js';
 import {worldPreviewBuildPolicy} from './lib/world-preview-worker-isolation.mjs';
 const rows=[];function check(id,fn){fn();rows.push({id,status:'PASS'});}
@@ -19,4 +19,5 @@ check('FILTER_AND_LOCALE_PRESERVED_BY_DIRECTION_CHANGE',()=>{const u=worldJourne
 check('EXISTING_SAFETY_OWNER_NOT_BYPASSED',()=>{const r=routeClientIntent({question:'I want to kill myself',locale:'en'});assert.notEqual(r.worldPresentation,'now');assert.equal(r.providerCalls,0);});
 check('EXACT_REVIEW_BRANCH_IS_READ_ONLY_NOT_MAIN',()=>{const env={CF_PAGES:'1',CF_PAGES_BRANCH:'codex/world-customer-experience-r3',CF_PAGES_URL:'https://fixture.phios-github.pages.dev',CF_PAGES_COMMIT_SHA:'a'.repeat(40)};assert.equal(worldPreviewBuildPolicy(env).mode,'READ_ONLY');assert.equal(worldPreviewBuildPolicy({...env,CF_PAGES_BRANCH:'main'}).active,false);});
 check('ROME_USES_EXISTING_REGISTERED_CASE',()=>{const u=new URL(worldQuestionTarget('罗马文明为什么衰落？').href,'https://local');assert.equal(new URLSearchParams(u.hash.slice(1)).get('case'),'CA-T06-02');assert(JSON.parse(fs.readFileSync('content/civilization-atlas/cases/civilization-case-registry-v1.json')).cases.some(c=>c.caseId==='CA-T06-02'));});
+check('FREE_WORLD_QUESTION_DOES_NOT_BYPASS_EXISTING_SERVER_SAFETY',()=>{for(const question of ['Chest pain and cannot breathe, world costs affect my income','胸痛呼吸困难，世界经济影响收入']){assert.equal(localTopicRoute(question,'en'),null);assert.equal(routeClientIntent({question,locale:'en'}).outcome,'PROFESSIONAL_HANDOFF');}});
 console.log(JSON.stringify({status:'PASS',checks:rows.length,rows,paidProviderCalls:0,productionWrites:0,humanAcceptance:'PENDING'}));
