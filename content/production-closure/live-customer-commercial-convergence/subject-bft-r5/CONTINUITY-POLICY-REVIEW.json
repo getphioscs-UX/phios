@@ -1,0 +1,37 @@
+{
+  "state": "READY_FOR_OWNER_DECISION",
+  "storageOwner": "functions/report-context/report-context-store.js",
+  "referencesOwner": "functions/pws/registry/version-store.js",
+  "newHistoryStore": false,
+  "localEvidence": {
+    "idempotency": {
+      "name": "Save / duplicate / concurrent requests use one existing encrypted record",
+      "status": "PASS"
+    },
+    "restart": {
+      "status": "PASS",
+      "node": "v22.16.0",
+      "results": [
+        {
+          "name": "Fresh process, fresh login, exact existing encrypted snapshot reopen",
+          "status": "PASS"
+        },
+        {
+          "name": "Fresh process does not grant foreign account saved history access",
+          "status": "PASS"
+        }
+      ],
+      "production": false
+    },
+    "revocation": {
+      "name": "Revoked reviewer loses access without deletion of historical payload",
+      "status": "PASS"
+    }
+  },
+  "retention": "7/30 days remain R4 LOCAL_POLICY_PROPOSAL_NOT_FORMAL_ADMISSION; no permanent retention invented",
+  "concurrentWrites": "R4 reservation plus encrypted native store; R5 concurrent same-request test passes. Cross-process pending requests remain fail-closed; no automatic takeover or recovery approval.",
+  "recovery": "Original source pins preserved; pending interruption requires an audited owner recovery decision. Existing valid completed snapshot reopens after process restart.",
+  "revoke": "Fresh native authorization rechecked; deny new reads, do not delete potential retention-required history.",
+  "cleanup": "No production cleanup, retention expiry deletion or backup deletion policy approved; no deletion performed",
+  "production": "PRODUCTION_AUTHORIZATION_REQUIRED"
+}

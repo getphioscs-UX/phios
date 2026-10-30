@@ -1,0 +1,782 @@
+{
+  "at": "2026-10-30T07:33:53.171Z",
+  "head": "bc18bb9f30abf7b6373c9183d3c8f5e2b7088bd9",
+  "branch": "main",
+  "status": [
+    "M tools/review/world-main-production-continuity-r1/R1-LIVE-SMOKE.log",
+    "?? functions/professional/financial/business-owner-admission-candidate-r5.js",
+    "?? tools/review/subject-bft-r5/prepare.mjs",
+    "?? tools/review/subject-bft-r5/run.mjs",
+    "?? tools/review/world-main-production-continuity-r1/R1-LIVE-HANDOFF.log",
+    "?? tools/review/world-main-production-continuity-r1/R1-LIVE-LANGUAGE.log",
+    "?? tools/review/world-main-production-continuity-r1/R1-LIVE-PUBLIC.log",
+    "?? tools/review/world-main-production-continuity-r1/R1-PRODUCTION-BROWSER-PUBLIC-BOUNDARIES.json",
+    "?? tools/review/world-main-production-continuity-r1/R1-PRODUCTION-LANGUAGE.json",
+    "?? tools/review/world-main-production-continuity-r1/R1-PRODUCTION-PUBLIC-BOUNDARIES.json",
+    "?? tools/review/world-main-production-continuity-r1/R1-PRODUCTION-SMOKE.json",
+    "?? tools/review/world-main-production-continuity-r1/production-en-1440.png",
+    "?? tools/review/world-main-production-continuity-r1/production-zh-Hans-360.png",
+    "?? tools/review/world-main-production-continuity-r1/verify-public-entrances.mjs",
+    "?? tools/review/world-main-production-continuity-r1/verify-public-entrances.py"
+  ],
+  "staged": "",
+  "initialUserFiles": [
+    "tools/review/world-main-production-continuity-r1/R1-PRODUCTION-PUBLIC-BOUNDARIES.json",
+    "tools/review/world-main-production-continuity-r1/production-en-1440.png",
+    "tools/review/world-main-production-continuity-r1/production-zh-Hans-360.png",
+    "tools/review/world-main-production-continuity-r1/verify-public-entrances.py"
+  ],
+  "inherited": [
+    {
+      "path": "functions/profile/subject-bft-authority-candidate-r3.js",
+      "sha256": "3e97a49b8090e4c12254d8b55abdc574e11879b941af336a86cf6bd519b03ae3",
+      "r3Sha": "3e97a49b8090e4c12254d8b55abdc574e11879b941af336a86cf6bd519b03ae3",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "functions/profile/subject-bft-authority-candidate-r3.js",
+      "dependency": [
+        "./subject-context-r1.js",
+        "../account/oidc-auth.js"
+      ],
+      "consumers": [
+        "functions/profile/subject-bft-runtime-candidate-r3.js",
+        "functions/professional/financial/business-intake-candidate-r3.js",
+        "functions/professional/workspace/process-readiness-candidate-r3.js",
+        "functions/professional/workspace/institution-review-candidate-r3.js",
+        "tools/review/subject-bft-r3/browser.mjs",
+        "tools/review/subject-bft-r3/check.mjs",
+        "tools/review/subject-bft-r3/closeout.mjs",
+        "tools/review/subject-bft-r3/owner.mjs",
+        "tools/review/subject-bft-r3/packages.mjs",
+        "tools/review/subject-bft-r3/pages-build.mjs",
+        "tools/review/subject-bft-r3/server.mjs",
+        "functions/professional/financial/business-source-closure-candidate-r4.js",
+        "tools/review/subject-bft-r4/check.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "functions/profile/subject-bft-runtime-candidate-r3.js",
+      "sha256": "7b68409ef844ce690e744e3388f7fe4db17b2b7d0f024404171930ef1d7014bb",
+      "r3Sha": "7b68409ef844ce690e744e3388f7fe4db17b2b7d0f024404171930ef1d7014bb",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "functions/profile/subject-bft-runtime-candidate-r3.js",
+      "dependency": [
+        "./subject-bft-authority-candidate-r3.js",
+        "./subject-context-r1.js",
+        "./subject-owner-integration-r2.js",
+        "../runtime/reading/rule-reading.js",
+        "../customer-projection/canonical-navigation-handoff.js",
+        "../customer-projection/navigation-customer-projection.js",
+        "../report-context/report-context-store.js",
+        "../account/oidc-auth.js"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r3/browser.mjs",
+        "tools/review/subject-bft-r3/closeout.mjs",
+        "tools/review/subject-bft-r3/final-browser.mjs",
+        "tools/review/subject-bft-r3/owner.mjs",
+        "tools/review/subject-bft-r3/packages.mjs",
+        "tools/review/subject-bft-r3/pages-build.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "functions/professional/financial/business-intake-candidate-r3.js",
+      "sha256": "1337aa189e64c6fca42428e4c9b13a31c585d9609d9a647e5295bf7e79771aa4",
+      "r3Sha": "1337aa189e64c6fca42428e4c9b13a31c585d9609d9a647e5295bf7e79771aa4",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "functions/professional/financial/business-intake-candidate-r3.js",
+      "dependency": [
+        "../../financial/calculation-runtime/range-arithmetic.js",
+        "../../profile/subject-bft-authority-candidate-r3.js",
+        "../../account/oidc-auth.js"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r3/browser.mjs",
+        "tools/review/subject-bft-r3/check.mjs",
+        "tools/review/subject-bft-r3/owner.mjs",
+        "tools/review/subject-bft-r3/packages.mjs",
+        "tools/review/subject-bft-r3/pages-build.mjs",
+        "functions/professional/financial/business-source-closure-candidate-r4.js"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "functions/professional/workspace/process-readiness-candidate-r3.js",
+      "sha256": "4853f4a54cc819d28c6f60f31f5befac7ed0ad4dc65bf2e8f0c342de7d37eb6b",
+      "r3Sha": "17f4d6f7b711efd843df894c02d2600374d14f8c4ef99aa2720e912fdfdbc9f0",
+      "r4Sha": "4853f4a54cc819d28c6f60f31f5befac7ed0ad4dc65bf2e8f0c342de7d37eb6b",
+      "category": "R4 Candidate",
+      "owner": "functions/professional/workspace/process-readiness-candidate-r3.js",
+      "dependency": [
+        "../../profile/subject-bft-authority-candidate-r3.js",
+        "../../account/oidc-auth.js"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r3/browser.mjs",
+        "tools/review/subject-bft-r3/check.mjs",
+        "tools/review/subject-bft-r3/owner.mjs",
+        "tools/review/subject-bft-r3/pages-build.mjs",
+        "tools/review/subject-bft-r4/browser.mjs",
+        "tools/review/subject-bft-r4/closeout.mjs",
+        "tools/review/subject-bft-r4/retirement.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "functions/professional/workspace/institution-review-candidate-r3.js",
+      "sha256": "cd70c509f128d3313561aac178dd0ea82ab44d72cf89932f4539a22650904dc1",
+      "r3Sha": "cd70c509f128d3313561aac178dd0ea82ab44d72cf89932f4539a22650904dc1",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "functions/professional/workspace/institution-review-candidate-r3.js",
+      "dependency": [
+        "../../profile/subject-bft-authority-candidate-r3.js",
+        "../../account/oidc-auth.js"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r3/browser.mjs",
+        "tools/review/subject-bft-r3/owner.mjs",
+        "tools/review/subject-bft-r3/pages-build.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/subject-bft-r3.js",
+      "sha256": "d8b209e0f209a9cf535fd00da40e55cd32b9daf9209d199f3a2ecd7e7bbd5d17",
+      "r3Sha": "05ddb8201104e9be2b684fbf0c1d5f98c8c7cc48e393ac063fa97f433bf5367d",
+      "r4Sha": "d8b209e0f209a9cf535fd00da40e55cd32b9daf9209d199f3a2ecd7e7bbd5d17",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [],
+      "consumers": [
+        "assets/customer-ui/surfaces/subject-bft-r3.css",
+        "tools/review/subject-bft-r3/boot.js",
+        "tools/review/subject-bft-r3/browser.mjs",
+        "tools/review/subject-bft-r3/check.mjs",
+        "tools/review/subject-bft-r3/closeout.mjs",
+        "tools/review/subject-bft-r3/discover.mjs",
+        "tools/review/subject-bft-r3/final-browser.mjs",
+        "tools/review/subject-bft-r3/master-verify.mjs",
+        "tools/review/subject-bft-r3/owner.mjs",
+        "tools/review/subject-bft-r3/packages.mjs",
+        "tools/review/subject-bft-r3/pages-build.mjs",
+        "tools/review/subject-bft-r3/run.mjs",
+        "tools/review/subject-bft-r3/server.mjs",
+        "tools/review/subject-bft-r4/browser.mjs",
+        "tools/review/subject-bft-r4/check.mjs",
+        "tools/review/subject-bft-r4/closeout.mjs",
+        "tools/review/subject-bft-r4/discover.mjs",
+        "tools/review/subject-bft-r4/pages-build.mjs",
+        "tools/review/subject-bft-r4/retirement.mjs",
+        "tools/review/subject-bft-r4/server.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "assets/customer-ui/surfaces/subject-bft-r3.css",
+      "sha256": "41a9ad0eb5c7a010b199a9c5480a29fbe9db5de63cb068e54d218a90a271f08e",
+      "r3Sha": "41a9ad0eb5c7a010b199a9c5480a29fbe9db5de63cb068e54d218a90a271f08e",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "LOCAL_QA",
+      "dependency": [],
+      "consumers": [
+        "tools/review/subject-bft-r3/browser.mjs",
+        "tools/review/subject-bft-r3/server.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r3/boot.js",
+      "sha256": "4ffe84e5d3287a01c1896398610f52b9d702c750085bbca7822fb35204baed6c",
+      "r3Sha": "4ffe84e5d3287a01c1896398610f52b9d702c750085bbca7822fb35204baed6c",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "LOCAL_QA",
+      "dependency": [],
+      "consumers": [
+        "tools/review/subject-bft-r3/server.mjs",
+        "tools/review/subject-bft-r4/server.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r3/browser.mjs",
+      "sha256": "0c7dbc42e9d008ec6a74b9604f0cd2ad3da30f4cf1e818502e50f2a4b5676626",
+      "r3Sha": "0c7dbc42e9d008ec6a74b9604f0cd2ad3da30f4cf1e818502e50f2a4b5676626",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:assert/strict",
+        "node:crypto",
+        "file:///C:/Users/Guest%20Account/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r3/closeout.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r3/check.mjs",
+      "sha256": "d8a4474a020a6ee3a7db9846e247abcb8d89085cbc56124484a9d0c78db1de92",
+      "r3Sha": "d8605d1b8acfdad0abd38a607578cbba9d1bde93111d2ca30b41a4f7d101bfa1",
+      "r4Sha": "d8a4474a020a6ee3a7db9846e247abcb8d89085cbc56124484a9d0c78db1de92",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:assert/strict",
+        "node:fs",
+        "./owner.mjs",
+        "../../../functions/professional/financial/business-intake-candidate-r3.js",
+        "../../../functions/profile/subject-bft-authority-candidate-r3.js",
+        "../../../functions/professional/workspace/process-readiness-candidate-r3.js",
+        "../../../functions/account/oidc-auth.js",
+        "../../../functions/report-context/report-context-store.js"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r4/closeout.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r3/closeout.mjs",
+      "sha256": "55762964a668056dc95d15831c93f59ba2e9db7441de7cd1ac189c69248d8aec",
+      "r3Sha": "11ca620cb17530dd6fa826be2c0b4b927e81761c4992d8c620bb779c344bec13",
+      "r4Sha": "55762964a668056dc95d15831c93f59ba2e9db7441de7cd1ac189c69248d8aec",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:crypto",
+        "node:child_process"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r4/closeout.mjs",
+        "tools/review/subject-bft-r4/retirement.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r3/discover.mjs",
+      "sha256": "587c81350522b72d258c06f7fcbb411d471596ab19b4d4b3c7025fd118eb3046",
+      "r3Sha": "587c81350522b72d258c06f7fcbb411d471596ab19b4d4b3c7025fd118eb3046",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:child_process",
+        "node:crypto"
+      ],
+      "consumers": [],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r3/final-browser.mjs",
+      "sha256": "200354efb041c23523dfa310634857ab8a60564b58ff0cb15f04a649736d4220",
+      "r3Sha": "200354efb041c23523dfa310634857ab8a60564b58ff0cb15f04a649736d4220",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:assert/strict",
+        "node:crypto",
+        "file:///C:/Users/Guest%20Account/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r3/closeout.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r3/master-verify.mjs",
+      "sha256": "d709daef51bfb8e9c22bf9df9044ae70ddca4040fdb3e711dcac9d493008538c",
+      "r3Sha": "d709daef51bfb8e9c22bf9df9044ae70ddca4040fdb3e711dcac9d493008538c",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:child_process",
+        "file:///C:/Users/Guest%20Account/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs"
+      ],
+      "consumers": [],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r3/owner.mjs",
+      "sha256": "c625a9d4704a1df4eb2d572b1889dde2688973b36c0983a574acb333c27111f4",
+      "r3Sha": "c625a9d4704a1df4eb2d572b1889dde2688973b36c0983a574acb333c27111f4",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:path",
+        "node:crypto",
+        "../bft-r1/owner.mjs",
+        "../subject-profile-r1/fixtures.mjs",
+        "../../../scripts/runtime-migration-loader.mjs",
+        "../../../functions/profile/subject-bft-authority-candidate-r3.js",
+        "../../../functions/professional/financial/business-intake-candidate-r3.js",
+        "../../../functions/profile/subject-bft-runtime-candidate-r3.js",
+        "../../../functions/professional/workspace/process-readiness-candidate-r3.js",
+        "../../../functions/professional/workspace/institution-review-candidate-r3.js"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r3/check.mjs",
+        "tools/review/subject-bft-r3/server.mjs",
+        "tools/review/subject-bft-r3/smoke.mjs",
+        "tools/review/subject-bft-r4/check.mjs",
+        "tools/review/subject-bft-r4/retirement.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r3/packages.mjs",
+      "sha256": "e4bdf75483aa4749fd9e898c243e35c60d7e367dc929d5afb868cd1992184ec9",
+      "r3Sha": "e4bdf75483aa4749fd9e898c243e35c60d7e367dc929d5afb868cd1992184ec9",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs"
+      ],
+      "consumers": [],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r3/pages-build.mjs",
+      "sha256": "bebe937363d350fb27c8b586e993c3f01260d63a64419ef20520e91c69f4e66e",
+      "r3Sha": "bebe937363d350fb27c8b586e993c3f01260d63a64419ef20520e91c69f4e66e",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:path",
+        "node:child_process",
+        "node:crypto"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r3/closeout.mjs",
+        "tools/review/subject-bft-r4/pages-build.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r3/run.mjs",
+      "sha256": "8fd1d21d50bdfa64d9bc81dc1758480137ce57910db711efe47c6f84bd2a114a",
+      "r3Sha": "8fd1d21d50bdfa64d9bc81dc1758480137ce57910db711efe47c6f84bd2a114a",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:path",
+        "node:crypto",
+        "esbuild"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r3/closeout.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r3/server.mjs",
+      "sha256": "091e63fc51103c9d51fe9862ce6fd37ab3c2a414023d03208159ae2f8238ca5f",
+      "r3Sha": "091e63fc51103c9d51fe9862ce6fd37ab3c2a414023d03208159ae2f8238ca5f",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:path",
+        "node:http",
+        "esbuild",
+        "./owner.mjs",
+        "../../../functions/profile/subject-bft-authority-candidate-r3.js",
+        "../../../functions/profile/subject-context-r1.js"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r3/packages.mjs",
+        "tools/review/subject-bft-r4/server.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r3/smoke.mjs",
+      "sha256": "f755a247326eafb91cd37e2b737cb822934df2104492004699e8d8489dbe310c",
+      "r3Sha": "f755a247326eafb91cd37e2b737cb822934df2104492004699e8d8489dbe310c",
+      "r4Sha": null,
+      "category": "R3 Inherited",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "./owner.mjs"
+      ],
+      "consumers": [],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "functions/professional/financial/business-source-closure-candidate-r4.js",
+      "sha256": "893e6ac1d7efc3fbce86d6d9e43618208694693490d5a76e751c303ce0989599",
+      "r3Sha": null,
+      "r4Sha": "893e6ac1d7efc3fbce86d6d9e43618208694693490d5a76e751c303ce0989599",
+      "category": "R4 Candidate",
+      "owner": "functions/professional/financial/business-source-closure-candidate-r4.js",
+      "dependency": [
+        "../../profile/subject-bft-authority-candidate-r3.js",
+        "../../runtime/reading/rule-reading.js",
+        "../../customer-projection/canonical-navigation-handoff.js",
+        "../../report-context/report-context-store.js",
+        "../../account/oidc-auth.js"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r4/browser.mjs",
+        "tools/review/subject-bft-r4/check.mjs",
+        "tools/review/subject-bft-r4/closeout.mjs",
+        "tools/review/subject-bft-r4/pages-build.mjs",
+        "tools/review/subject-bft-r4/server.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/subject-bft-r4.js",
+      "sha256": "64fadeed4d44cf65d55809f83076809d714ded2a2ac7e34304fc66080a77df34",
+      "r3Sha": null,
+      "r4Sha": "64fadeed4d44cf65d55809f83076809d714ded2a2ac7e34304fc66080a77df34",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [],
+      "consumers": [
+        "tools/review/subject-bft-r4/boot.js",
+        "tools/review/subject-bft-r4/browser.mjs",
+        "tools/review/subject-bft-r4/check.mjs",
+        "tools/review/subject-bft-r4/closeout.mjs",
+        "tools/review/subject-bft-r4/discover.mjs",
+        "tools/review/subject-bft-r4/pages-build.mjs",
+        "tools/review/subject-bft-r4/pdf-source.py",
+        "tools/review/subject-bft-r4/retirement.mjs",
+        "tools/review/subject-bft-r4/run.mjs",
+        "tools/review/subject-bft-r4/server.mjs",
+        "tools/review/subject-bft-r4/finalize.mjs",
+        "tools/review/subject-bft-r4/master-verify.mjs",
+        "tools/review/subject-bft-r4/restart-verify.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "assets/customer-ui/surfaces/subject-bft-r4.css",
+      "sha256": "5f55216bd4c03af01711c0059804ed7cb140afec36806ba8b69118be6d8ea5d3",
+      "r3Sha": null,
+      "r4Sha": "5f55216bd4c03af01711c0059804ed7cb140afec36806ba8b69118be6d8ea5d3",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [],
+      "consumers": [
+        "tools/review/subject-bft-r4/browser.mjs",
+        "tools/review/subject-bft-r4/closeout.mjs",
+        "tools/review/subject-bft-r4/server.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r4/boot.js",
+      "sha256": "f50ad985179dcc357eae6afdfb813ff424a0637b6908cb0d68c07b30da47a84f",
+      "r3Sha": null,
+      "r4Sha": "f50ad985179dcc357eae6afdfb813ff424a0637b6908cb0d68c07b30da47a84f",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "/assets/customer-ui/js/surfaces/subject-bft-r4.js"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r3/server.mjs",
+        "tools/review/subject-bft-r4/server.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r4/browser.mjs",
+      "sha256": "a3c976ec059dece5a9c76b5fb54a6226879434687245f9790cffbd63662d4ee6",
+      "r3Sha": null,
+      "r4Sha": "a3c976ec059dece5a9c76b5fb54a6226879434687245f9790cffbd63662d4ee6",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:assert/strict",
+        "node:crypto",
+        "file:///C:/Users/Guest%20Account/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r3/closeout.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r4/check.mjs",
+      "sha256": "e06a0dbafb79d4458098e0c3375415dd502a44a9b9e00493c1516deeaccb9656",
+      "r3Sha": null,
+      "r4Sha": "e06a0dbafb79d4458098e0c3375415dd502a44a9b9e00493c1516deeaccb9656",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:assert/strict",
+        "../subject-bft-r3/owner.mjs",
+        "../../../functions/professional/financial/business-source-closure-candidate-r4.js",
+        "../../../functions/profile/subject-bft-authority-candidate-r3.js",
+        "../../../functions/report-context/report-context-store.js",
+        "../../../functions/account/oidc-auth.js"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r4/closeout.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r4/closeout.mjs",
+      "sha256": "4d31bab3022f6dd56e629817d8c5f49ccf5bd72b85ee2cec8895c8d0d03afc64",
+      "r3Sha": null,
+      "r4Sha": "4d31bab3022f6dd56e629817d8c5f49ccf5bd72b85ee2cec8895c8d0d03afc64",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:path",
+        "node:crypto",
+        "node:child_process"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r4/retirement.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r4/discover.mjs",
+      "sha256": "039ff7117ba24005f2134fab5f59c59e79c95733c971c24c38104e0b98be8194",
+      "r3Sha": null,
+      "r4Sha": "039ff7117ba24005f2134fab5f59c59e79c95733c971c24c38104e0b98be8194",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:path",
+        "node:crypto",
+        "node:child_process"
+      ],
+      "consumers": [],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r4/pages-build.mjs",
+      "sha256": "0f3c44b52634d1e9e4175218c4894a74ec8007071f4df71cf18f7a904bce43bf",
+      "r3Sha": null,
+      "r4Sha": "0f3c44b52634d1e9e4175218c4894a74ec8007071f4df71cf18f7a904bce43bf",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r3/closeout.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r4/pdf-source.py",
+      "sha256": "9c1446dcfcf787fe6c3b4f52bd434c367b36a2beb9461ff7afa491c91bc3a5ff",
+      "r3Sha": null,
+      "r4Sha": "9c1446dcfcf787fe6c3b4f52bd434c367b36a2beb9461ff7afa491c91bc3a5ff",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [],
+      "consumers": [],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r4/retirement.mjs",
+      "sha256": "2cbfa86e5c58e6c15221c457886f592aa76b29178c16c245283a106baa7553e7",
+      "r3Sha": null,
+      "r4Sha": "2cbfa86e5c58e6c15221c457886f592aa76b29178c16c245283a106baa7553e7",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:assert/strict",
+        "../subject-bft-r3/owner.mjs",
+        "../../../functions/professional/workspace/process-readiness-candidate-r3.js"
+      ],
+      "consumers": [],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r4/run.mjs",
+      "sha256": "0b0f240efcb99319a5d28fa435b6aebab36d98c7a678de9f6b44676a9805eb35",
+      "r3Sha": null,
+      "r4Sha": "0b0f240efcb99319a5d28fa435b6aebab36d98c7a678de9f6b44676a9805eb35",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:path",
+        "node:crypto",
+        "esbuild"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r3/closeout.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r4/server.mjs",
+      "sha256": "508239cf305d7119557b1197cc2d70e4b274818f02bda8bae3f9858e810c4336",
+      "r3Sha": null,
+      "r4Sha": "508239cf305d7119557b1197cc2d70e4b274818f02bda8bae3f9858e810c4336",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "esbuild",
+        "../../../functions/professional/financial/business-source-closure-candidate-r4.js"
+      ],
+      "consumers": [
+        "tools/review/subject-bft-r3/packages.mjs"
+      ],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r4/finalize.mjs",
+      "sha256": "55965041be97eb867a84b6cb1e2ba090ea9e6ae7f39f1ec44087925f1f6973e1",
+      "r3Sha": null,
+      "r4Sha": "55965041be97eb867a84b6cb1e2ba090ea9e6ae7f39f1ec44087925f1f6973e1",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:path",
+        "node:crypto",
+        "node:child_process"
+      ],
+      "consumers": [],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r4/master-verify.mjs",
+      "sha256": "8e5bd345abbdeef48109d1df6e620c5cbff13579da5e26bb140c1ec1e3496014",
+      "r3Sha": null,
+      "r4Sha": "8e5bd345abbdeef48109d1df6e620c5cbff13579da5e26bb140c1ec1e3496014",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:child_process",
+        "file:///C:/Users/Guest%20Account/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs"
+      ],
+      "consumers": [],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    },
+    {
+      "path": "tools/review/subject-bft-r4/restart-verify.mjs",
+      "sha256": "c7ea4a3b7d361d2eb7c71d4e19f2728dff2640686bb1af0acc1ad762d429811d",
+      "r3Sha": null,
+      "r4Sha": "c7ea4a3b7d361d2eb7c71d4e19f2728dff2640686bb1af0acc1ad762d429811d",
+      "category": "R4 Candidate",
+      "owner": "LOCAL_QA",
+      "dependency": [
+        "node:fs",
+        "node:assert/strict",
+        "file:///C:/Users/Guest%20Account/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs"
+      ],
+      "consumers": [],
+      "testEvidence": "See R4 INDEX and hash-reuse reconciliation",
+      "integrationRisk": "No overwrite; local admission remains false",
+      "reuse": true
+    }
+  ],
+  "unknownOwnership": "All unrelated PDFs untouched; no source import",
+  "ignored": "",
+  "note": "Initial read-only status had four World untracked files. World smoke log became dirty during audit; preserved."
+}

@@ -1,0 +1,70 @@
+{
+  "scope": "LOCAL_CANDIDATE_ONLY",
+  "owners": [
+    {
+      "owner": "Account / OIDC",
+      "path": "functions/account/oidc-auth.js",
+      "reuse": "Native signed-token, PKCE, verified-session and logout exercised with a synthetic local IdP. No real Auth0/customer login claimed."
+    },
+    {
+      "owner": "PWS Registry / relationships / versions",
+      "path": "functions/pws/registry/universal-registry.js",
+      "reuse": "Existing generic PWS objects, candidate subject relationships and immutable case versions. No new table or migration."
+    },
+    {
+      "owner": "Financial arithmetic",
+      "path": "functions/financial/calculation-runtime/range-arithmetic.js",
+      "reuse": "Existing arithmetic; additive local compositions, not a second ledger or frozen formula-owner replacement."
+    },
+    {
+      "owner": "Household Consent",
+      "path": "functions/professional/consent/joint-household-consent.js",
+      "reuse": "Explicit per-adult expense sharing; invitation alone creates no financial consent. Revoked grant sources cannot reappear under renewed membership."
+    },
+    {
+      "owner": "Professional task",
+      "path": "functions/professional/workspace/professional-task-contract.js",
+      "reuse": "Native task state machine. Reopening creates a follow-up instead of overwriting completed tasks."
+    },
+    {
+      "owner": "Professional Assignment",
+      "path": "functions/professional/access/professional-assignment-contract.js",
+      "reuse": "Native proposed contract only; no formal capability activation."
+    },
+    {
+      "owner": "Profile Subject R1 / R2",
+      "path": "functions/profile/subject-owner-integration-r2.js",
+      "reuse": "Formal private multi-party source/provisioning remains closed. BFT uses explicitly synthetic candidate references only."
+    },
+    {
+      "owner": "World",
+      "path": "functions/profile/subject-context-r1.js",
+      "reuse": "Existing World context link retained. No invented fiscal/economic observation or inferred private residence."
+    },
+    {
+      "owner": "Reading / Navigation",
+      "path": "functions/customer-projection/canonical-navigation-handoff.js",
+      "reuse": "Existing source families preserved; BFT source family is not admitted. Local professional action references are not formal Navigation."
+    },
+    {
+      "owner": "Continuity",
+      "path": "functions/report-context/report-context-store.js",
+      "reuse": "Formal retention, purpose and idempotency not admitted. PWS synthetic reopen is distinct."
+    },
+    {
+      "owner": "Commercial",
+      "path": "functions/pws/commercial/stripe-product-registry.js",
+      "reuse": "Existing prices and rights preserved. Six review-only service proposals; no new product, checkout or payment."
+    }
+  ],
+  "sourcePdf": "SOURCE_UNAVAILABLE",
+  "existingSubjectR2": {
+    "A": "PARTIAL",
+    "B": "BLOCKED",
+    "C": "PARTIAL",
+    "D": "BLOCKED",
+    "E": "BLOCKED",
+    "F": "PARTIAL",
+    "G": "PARTIAL"
+  }
+}

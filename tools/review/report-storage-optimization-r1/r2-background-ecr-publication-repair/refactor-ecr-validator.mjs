@@ -1,0 +1,8 @@
+import fs from'node:fs';const p='scripts/lib/ecr-author-case-store.mjs';let s=fs.readFileSync(p,'utf8');const a="if(!review.valid||!review.authorTextAccepted||record.authorState!=='AUTHOR_ACCEPTED_TEXT'||exactTextDigest(text)!==v.exactTextSha256||receipt.decision!=='ACCEPT'||receipt.exactTextDigest!==v.exactTextSha256||receipt.sectionId!==v.sectionId||receipt.language!==v.locale||receipt.manuscriptVersion!==v.version)throw Error('ECR_EXACT_AUTHOR_ACCEPTANCE_OR_HASH_REQUIRED');\n  if(requestedCalculationRef&&record.calculationRef!==requestedCalculationRef)throw Error('ECR_AUTHOR_SUBJECT_CALCULATION_MISMATCH');";if(s.split(a).length!==2)throw Error('SOURCE_OWNER_DRIFT');s=s.replace(a,"requireAcceptedEcrSourceBody({entry:v,record,receipt,text,requestedCalculationRef});");s+=`
+export function requireAcceptedEcrSourceBody({entry:v,record,receipt,text,requestedCalculationRef}={}){
+ const review=inspectAuthorCaseManuscript(record,text);
+ if(v?.synthetic===true||!review.valid||!review.authorTextAccepted||record.authorState!=='AUTHOR_ACCEPTED_TEXT'||record.sectionId!==v.sectionId||record.language!==v.locale||record.manuscriptVersion!==v.version||exactTextDigest(text)!==v.exactTextSha256||receipt.decision!=='ACCEPT'||!receipt.evidenceRef||receipt.exactTextDigest!==v.exactTextSha256||receipt.sectionId!==v.sectionId||receipt.language!==v.locale||receipt.manuscriptVersion!==v.version)throw Error('ECR_EXACT_AUTHOR_ACCEPTANCE_OR_HASH_REQUIRED');
+ if(requestedCalculationRef&&record.calculationRef!==requestedCalculationRef)throw Error('ECR_AUTHOR_SUBJECT_CALCULATION_MISMATCH');
+ return {authorAccepted:true,localAuthorCaseOnly:true,rightsStatus:record.rightsStatus,customerPublishable:false};
+}
+`;fs.writeFileSync(p,s);

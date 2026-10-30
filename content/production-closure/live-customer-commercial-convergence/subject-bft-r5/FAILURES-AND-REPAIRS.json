@@ -1,0 +1,22 @@
+{
+  "failures": [
+    {
+      "stage": "First HTTP harness readiness",
+      "result": "ENOENT .tmp/subject-bft-r5/server.json",
+      "cause": "R5 launcher emitted new bundle but imported old R4 bundle by a second absolute import path",
+      "repair": "Stopped only this task process; changed both output and import references to isolated R5 bundle",
+      "impact": "Initialized existing local synthetic R4 fixture; no production/resource mutation or tracked source overwrite",
+      "rerun": "HTTP-BROWSER-TESTS.json"
+    },
+    {
+      "stage": "Sandbox Edge launch",
+      "result": "browserType.launch Target page/context closed; temporary profile filesystem access errors",
+      "repair": "Normal-host fresh headless browser and loopback service; all external browser requests blocked",
+      "rerun": "HTTP-BROWSER-TESTS.json",
+      "productAssertionWeakened": false
+    }
+  ],
+  "node24FirstPass": "NODE24-FIRST-PASS.json",
+  "finalNode22": "v22.16.0",
+  "providerCalls": 0
+}

@@ -1,0 +1,43 @@
+{
+  "scope": "Additional push-main workflows, outside accepted World Market feature and required PTRC/BaZi gates",
+  "runs": [
+    {
+      "id": 41015143986,
+      "owner": "REPORT-NARRATIVE-T2",
+      "firstError": "Direct Node22 check-rnt2-core lacks JSON import compatibility for continuity-subscription-product-registry-v2.json",
+      "classification": "Unchanged independent test invocation; ordinary full guarded npm check PASS"
+    },
+    {
+      "id": 41015143874,
+      "owner": "B6-WEB-E static test",
+      "firstError": "Stale exact import regex expects {t}; existing reconfiguration renderer imports {t,getLocale}",
+      "classification": "Static-check expectation mismatch in unchanged old-production code/checker"
+    }
+  ],
+  "exactSourceComparison": [
+    {
+      "path": "scripts/check-rnt2-core.mjs",
+      "oldProductionAndNewMainSame": true,
+      "sha256": "08ef4801a2e27b18b390cc4e2adedc4a143412339d00e3bef935a2458221d3c7"
+    },
+    {
+      "path": "content/personal-reading/continuity/registries/continuity-subscription-product-registry-v2.json",
+      "oldProductionAndNewMainSame": true,
+      "sha256": "739f9d865c50146928db245917e1a61e0597a36d2ef6c95120b63b6c666cec1e"
+    },
+    {
+      "path": "scripts/check-b6-web-e.mjs",
+      "oldProductionAndNewMainSame": true,
+      "sha256": "020efba70f1aafd0d5ceb8fa75fa5a39fcb1a2285dd1eba37d72903e60e90a63"
+    },
+    {
+      "path": "assets/js/pages/civilization-atlas/reconfiguration-renderer.js",
+      "oldProductionAndNewMainSame": true,
+      "sha256": "ebd6fda548e2cd65291eeffc063d7e6842af62cc0d7e0530cdf90d7406c08144"
+    }
+  ],
+  "oldProductionFullWorkflowIndependentlyRerun": false,
+  "fixApplied": false,
+  "productionFaultInferredFromTheseFailures": false,
+  "disposition": "Do not expand unrelated development. Retain failures; release only after actual formal Pages build/check and real production smoke pass."
+}

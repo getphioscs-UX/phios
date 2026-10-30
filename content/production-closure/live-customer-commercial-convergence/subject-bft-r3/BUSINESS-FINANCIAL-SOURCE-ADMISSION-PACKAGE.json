@@ -1,0 +1,45 @@
+{
+  "id": "BUSINESS-FINANCIAL-SOURCE-ADMISSION-PACKAGE",
+  "version": "R3-LOCAL-DECISION-PACKAGE-v1",
+  "workstream": "SUBJECT-BFT-INTEGRATED-CLOSURE-R3",
+  "state": "PROPOSED_NOT_ADMITTED",
+  "productionDefault": "BLOCKED",
+  "cost": "NO_PAID_CALLS",
+  "migrationCandidate": "NO_NEW_SCHEMA_OR_REMOTE_MIGRATION_IN_THIS_CANDIDATE",
+  "compatibility": "Existing subject IDs, six dimensions, historical freezes, Method/Report/Ebook/Stripe/entitlement identities and prices preserved",
+  "rollback": "Do not register production consumers. Disable/remove only the proposed adapter registration after separate review; preserve prior native versions and accepted records. No destructive cleanup.",
+  "existingAuthority": [
+    "functions/api/account-financial-summary.js",
+    "functions/account/financial-will-draft-store.js:loadOwnedDraft/savedDraftRef",
+    "functions/professional/consent/financial-purpose-grants.js:createFinancialGrant/requireFinancialGrant",
+    "functions/professional/financial/financial-formula-registry.js",
+    "functions/financial/calculation-runtime/range-arithmetic.js"
+  ],
+  "exactMissingContract": "Saved FINANCIAL drafts are PERSONAL source refs (subjectRef=account owner), and purpose scopes are existing report/preparation fields. They do not admit an organization ledger, its source versions or shared mandate.",
+  "proposedDelta": "Admit BUSINESS_STATEMENT_SOURCE under Financial with canonical Subject, custodian Account, legal form, reporting boundary, dates, basis, currency, reviewed source digest and field-level scope. Reuse existing PWS references and an approved private encrypted object Owner. No public upload path or additional accounting ledger.",
+  "actualConsumer": [
+    "functions/professional/financial/business-intake-candidate-r3.js",
+    "functions/profile/subject-bft-runtime-candidate-r3.js"
+  ],
+  "requiredData": [
+    "Business identity/mandate",
+    "Manual/CSV/reviewed statement values and provenance",
+    "P&L/balance/cash flow classifications",
+    "Separate settled owner transactions and household period/purpose consent"
+  ],
+  "permissionBoundary": "Production off. Local writes require an existing synthetic native Subject, native membership, independently accepted FINANCIAL_SUMMARY and candidate-purpose scopes. Format validation and mathematical reconciliation never claim audited accounts.",
+  "securityRisks": [
+    "PWS candidate payloads are only local synthetic data; real raw statements need approved private encrypted storage",
+    "Account custodian is not the legal business entity",
+    "No automatic owner withdrawal from profit or cash balance",
+    "Quarterly business and monthly household data cannot be mixed"
+  ],
+  "storageRequirements": "Production must bind an approved encrypted source object and PWS metadata/digest. Existing saved-draft schema cannot silently be repurposed for a business ledger. Any metadata/kind extension requires explicit Owner decision; no migration applied.",
+  "readResultShape": "Subject ref + source version + quality + source facts + formula/version/input refs/period/currency/unit/time/exceptions; separate reported values, calculations, estimates, unknown owner-accessible cash and non-comparable household requirements.",
+  "tests": [
+    "R3 CONTRACT-TESTS: exact cents, CSV validation, missing/zero/period/currency/source conflicts, independent review/reconciliation/rejection, source version and stale continuity",
+    "R3 BROWSER: actual manual/CSV consumer and profit/cash/household boundary"
+  ],
+  "humanDecision": "Approve the Financial source kind, encryption Owner, fields, grant purpose/scopes/recipient/versions, review qualification and freshness/reconciliation policy. Do not approve a new price, report identity or real financial recommendation.",
+  "nextExecutableAction": "Review the adapter/quality contract, select the existing private source storage binding and approve the precise Financial source/grant delta before controlled real-data Cloud QA."
+}

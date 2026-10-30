@@ -1,0 +1,25 @@
+{
+  "checkedUtc": "2026-10-30T08:16:26.167229+00:00",
+  "run": 41023981098,
+  "job": 123957618216,
+  "head": "0d9089af4d0227f19867777a30eccd2c4515eb88",
+  "owner": "B6-WEB-E static contract",
+  "status": "FAIL_RETAINED",
+  "firstError": "check-b6-web-e.mjs:18 expects import {t}; unchanged renderer imports {t,getLocale}.",
+  "classification": "Same first assertion and identical checker/renderer bytes as old production; not repaired or reported PASS",
+  "sourceComparison": [
+    {
+      "path": "scripts/check-b6-web-e.mjs",
+      "sameAsPriorProduction": true,
+      "sha256": "020efba70f1aafd0d5ceb8fa75fa5a39fcb1a2285dd1eba37d72903e60e90a63"
+    },
+    {
+      "path": "assets/js/pages/civilization-atlas/reconfiguration-renderer.js",
+      "sameAsPriorProduction": true,
+      "sha256": "ebd6fda548e2cd65291eeffc063d7e6842af62cc0d7e0530cdf90d7406c08144"
+    }
+  ],
+  "worldActualPreview": "PASS 16+2+4 at cfe44e80",
+  "requiredPtrcMain": "PASS 41023981100 including full npm check and git diff --exit-code",
+  "otherWorkflowFailureDoesNotMeanAllCIIsGreen": true
+}

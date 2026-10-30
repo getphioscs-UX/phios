@@ -1,0 +1,4237 @@
+{
+  "status": "PARTIAL",
+  "at": "2026-10-30T07:15:50.403Z",
+  "section": "subject-bft-owner-admission-r4",
+  "sourceFiles": [
+    {
+      "path": "functions/professional/financial/business-source-closure-candidate-r4.js",
+      "sha256": "893e6ac1d7efc3fbce86d6d9e43618208694693490d5a76e751c303ce0989599",
+      "dependencies": [
+        "functions/profile/subject-bft-authority-candidate-r3.js",
+        "functions/runtime/reading/rule-reading.js",
+        "functions/customer-projection/canonical-navigation-handoff.js",
+        "functions/report-context/report-context-store.js",
+        "functions/account/oidc-auth.js"
+      ]
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/subject-bft-r4.js",
+      "sha256": "64fadeed4d44cf65d55809f83076809d714ded2a2ac7e34304fc66080a77df34",
+      "dependencies": []
+    },
+    {
+      "path": "assets/customer-ui/surfaces/subject-bft-r4.css",
+      "sha256": "5f55216bd4c03af01711c0059804ed7cb140afec36806ba8b69118be6d8ea5d3",
+      "dependencies": []
+    },
+    {
+      "path": "functions/professional/workspace/process-readiness-candidate-r3.js",
+      "sha256": "4853f4a54cc819d28c6f60f31f5befac7ed0ad4dc65bf2e8f0c342de7d37eb6b",
+      "dependencies": [
+        "functions/profile/subject-bft-authority-candidate-r3.js",
+        "functions/account/oidc-auth.js"
+      ]
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/subject-bft-r3.js",
+      "sha256": "d8b209e0f209a9cf535fd00da40e55cd32b9daf9209d199f3a2ecd7e7bbd5d17",
+      "dependencies": []
+    },
+    {
+      "path": "tools/review/subject-bft-r3/check.mjs",
+      "sha256": "d8a4474a020a6ee3a7db9846e247abcb8d89085cbc56124484a9d0c78db1de92",
+      "dependencies": [
+        "node:assert/strict",
+        "node:fs",
+        "tools/review/subject-bft-r3/owner.mjs",
+        "functions/professional/financial/business-intake-candidate-r3.js",
+        "functions/profile/subject-bft-authority-candidate-r3.js",
+        "functions/professional/workspace/process-readiness-candidate-r3.js",
+        "functions/account/oidc-auth.js",
+        "functions/report-context/report-context-store.js"
+      ]
+    },
+    {
+      "path": "tools/review/subject-bft-r3/closeout.mjs",
+      "sha256": "55762964a668056dc95d15831c93f59ba2e9db7441de7cd1ac189c69248d8aec",
+      "dependencies": [
+        "node:fs",
+        "node:crypto",
+        "node:child_process"
+      ]
+    },
+    {
+      "path": "tools/review/subject-bft-r4/boot.js",
+      "sha256": "f50ad985179dcc357eae6afdfb813ff424a0637b6908cb0d68c07b30da47a84f",
+      "dependencies": [
+        "/assets/customer-ui/js/surfaces/subject-bft-r4.js"
+      ]
+    },
+    {
+      "path": "tools/review/subject-bft-r4/browser.mjs",
+      "sha256": "a3c976ec059dece5a9c76b5fb54a6226879434687245f9790cffbd63662d4ee6",
+      "dependencies": [
+        "node:fs",
+        "node:assert/strict",
+        "node:crypto",
+        "file:///C:/Users/Guest%20Account/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs"
+      ]
+    },
+    {
+      "path": "tools/review/subject-bft-r4/check.mjs",
+      "sha256": "e06a0dbafb79d4458098e0c3375415dd502a44a9b9e00493c1516deeaccb9656",
+      "dependencies": [
+        "node:fs",
+        "node:assert/strict",
+        "tools/review/subject-bft-r3/owner.mjs",
+        "functions/professional/financial/business-source-closure-candidate-r4.js",
+        "functions/profile/subject-bft-authority-candidate-r3.js",
+        "functions/report-context/report-context-store.js",
+        "functions/account/oidc-auth.js"
+      ]
+    },
+    {
+      "path": "tools/review/subject-bft-r4/closeout.mjs",
+      "sha256": "4d31bab3022f6dd56e629817d8c5f49ccf5bd72b85ee2cec8895c8d0d03afc64",
+      "dependencies": [
+        "node:fs",
+        "node:path",
+        "node:crypto",
+        "node:child_process"
+      ]
+    },
+    {
+      "path": "tools/review/subject-bft-r4/discover.mjs",
+      "sha256": "039ff7117ba24005f2134fab5f59c59e79c95733c971c24c38104e0b98be8194",
+      "dependencies": [
+        "node:fs",
+        "node:path",
+        "node:crypto",
+        "node:child_process"
+      ]
+    },
+    {
+      "path": "tools/review/subject-bft-r4/pages-build.mjs",
+      "sha256": "0f3c44b52634d1e9e4175218c4894a74ec8007071f4df71cf18f7a904bce43bf",
+      "dependencies": [
+        "node:fs"
+      ]
+    },
+    {
+      "path": "tools/review/subject-bft-r4/pdf-source.py",
+      "sha256": "9c1446dcfcf787fe6c3b4f52bd434c367b36a2beb9461ff7afa491c91bc3a5ff",
+      "dependencies": []
+    },
+    {
+      "path": "tools/review/subject-bft-r4/retirement.mjs",
+      "sha256": "2cbfa86e5c58e6c15221c457886f592aa76b29178c16c245283a106baa7553e7",
+      "dependencies": [
+        "node:fs",
+        "node:assert/strict",
+        "tools/review/subject-bft-r3/owner.mjs",
+        "functions/professional/workspace/process-readiness-candidate-r3.js"
+      ]
+    },
+    {
+      "path": "tools/review/subject-bft-r4/run.mjs",
+      "sha256": "0b0f240efcb99319a5d28fa435b6aebab36d98c7a678de9f6b44676a9805eb35",
+      "dependencies": [
+        "node:fs",
+        "node:path",
+        "node:crypto",
+        "esbuild"
+      ]
+    },
+    {
+      "path": "tools/review/subject-bft-r4/server.mjs",
+      "sha256": "508239cf305d7119557b1197cc2d70e4b274818f02bda8bae3f9858e810c4336",
+      "dependencies": [
+        "node:fs",
+        "esbuild",
+        "functions/professional/financial/business-source-closure-candidate-r4.js"
+      ]
+    },
+    {
+      "path": "tools/review/subject-bft-r4/finalize.mjs",
+      "sha256": "55965041be97eb867a84b6cb1e2ba090ea9e6ae7f39f1ec44087925f1f6973e1",
+      "dependencies": [
+        "node:fs",
+        "node:path",
+        "node:crypto",
+        "node:child_process"
+      ]
+    },
+    {
+      "path": "tools/review/subject-bft-r4/master-verify.mjs",
+      "sha256": "8e5bd345abbdeef48109d1df6e620c5cbff13579da5e26bb140c1ec1e3496014",
+      "dependencies": [
+        "node:fs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:child_process",
+        "file:///C:/Users/Guest%20Account/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs"
+      ]
+    },
+    {
+      "path": "tools/review/subject-bft-r4/restart-verify.mjs",
+      "sha256": "c7ea4a3b7d361d2eb7c71d4e19f2728dff2640686bb1af0acc1ad762d429811d",
+      "dependencies": [
+        "node:fs",
+        "node:assert/strict",
+        "file:///C:/Users/Guest%20Account/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/BROWSER-REOPEN-FAILURE.json",
+      "sha256": "41366766beb391bc2347f20261369bc9f46683c2a19ea54196a391477665d156"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/BROWSER-ROUTING-DIAGNOSTIC.json",
+      "sha256": "6223a224e4e53a5dad30a3e32b4fad86818011986bb7fe606f2ba3c74d6a6798"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/BROWSER.json",
+      "sha256": "4437f277c4358d4917555f1cb576e7765710400c009b514c8fc19509556383e0"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/business-en-1440.png",
+      "sha256": "48b94d423506694455b0ed8f6bcec351ed1e3ad7583371878eeb3f350a37c80d"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/business-en-390.png",
+      "sha256": "796f4fccbb4b80318d39e03ec0f51295543b2a58657ee29d7397460819e01b13"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/business-zh-Hans-1440.png",
+      "sha256": "485434845c46ced71c5ff83144c61218cecacbb871ca918264620de8c9ab5dd5"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/business-zh-Hans-390.png",
+      "sha256": "2e49462357f6dbf85841c63305b6b2587c7807ecd35a997951ff1b927662d49a"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/FAILURE-REPAIR.json",
+      "sha256": "f059364ebce1b63eb4935d75bcca579c6b12ba12242cd807cc5b1a85afc1b20c"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/FIRST-BUSINESS-JOURNEY.json",
+      "sha256": "9aaa0d6287c2f8bd3440d002e0569ea15a0bba2a428483e26febe89e050e8ffa"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/FIVE-OWNER-ADMISSION-REVIEW.json",
+      "sha256": "e627d6c19688cd1621c6e7cbcaec062749dc1600025e3d8d8e69ef0c1f3d5302"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/FRAMEWORK-RETIREMENT.json",
+      "sha256": "02d4853977aff10216fa3d47db318112a80e941d4bab0cf79fdd9c875c3aeaee"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/INTEGRATION-SCOPE-MANIFEST.json",
+      "sha256": "adb1ea791dfac5ad4598a9bec84ccbbabcddb5ae207035297094ec5ea19c650a"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/MASTER-SERVER-STOPPED.json",
+      "sha256": "cd76881b4822e185950fe72a2360a249d5a701602091d56555d134dab3bcc20d"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/MASTER-UPDATE.json",
+      "sha256": "478d587eecc6d96dd84fcc27466317f1db40f3f1c37930cc5d821f6d5be39040"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/MASTER-VERIFY.json",
+      "sha256": "c8e9e2a2a61ed63460f56f3d4872fe8b0cbef7dfff05543c81ab345ae3189b14"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/PAGES-BUILD.json",
+      "sha256": "d9c1a4415ca3d2eb089b38eab655f309c9cf67910c439158051646927ae5270c"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/PAGES-BUILD.log",
+      "sha256": "4d662af1bf91a11845224793a3a7f6e5ea6b02bceefae6e999a3b9fd2f48c309"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/PDF-SOURCE-STRUCTURE.json",
+      "sha256": "96c81b6b71497b97dbea736feb0374992d096965cb91bee73f21686e6254f891"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/PLANNING-METHODOLOGY-REVIEW.json",
+      "sha256": "d201aabdfc0f185177726162728fd9bb78548995e529ae2072150856cc3b5b28"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/REUSE-AND-PROTECTION.json",
+      "sha256": "3bf77f14f5fdaba584209a65c797a701e93dfe6d87840a272f3e1ee78f5b696b"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/SERVER-RESTART-VERIFY.json",
+      "sha256": "b1d649cc5ed971c4bedbbf9f2f4861109e3691919f6fc3cbd89a7c99a95b0652"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/SETUP-FIRST-FAILURE.json",
+      "sha256": "494f4d7b66edc1be6e2131f119ab6bfd56b766f438439a444e9b846ee3c207df"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/SETUP-MEMBERSHIP-FAILURE.json",
+      "sha256": "3ca587f58801b91118229fe949b844be02df23fdd48fc50d4551f8bc4dbca4b9"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/TARGETED-TESTS.json",
+      "sha256": "7f69f25ee84213d77bdfa1490c7392ec4ec1e46093e3c92527b552924f073a5d"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/W0-SCOPE-MANIFEST.json",
+      "sha256": "bca45bf28748363ec518321f072f0024d7ab20967de1b5e91ac75c25558398eb"
+    }
+  ],
+  "tests": {
+    "contract": 20,
+    "browser": 11,
+    "retirement": 5,
+    "isolatedPagesExitCode": 0
+  },
+  "production": false,
+  "paidProviderCalls": 0,
+  "productionD1R2Writes": 0,
+  "stripeModifications": 0,
+  "fullNpmCheck": "NOT_RUN_USER_RESERVED",
+  "dirty": [
+    {
+      "path": "assets/customer-ui/js/surfaces/my-reality.js",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/personal-method-entry-r1.js",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/profile-visitor-r1.js",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": "Bounded append of R4 section"
+    },
+    {
+      "path": "content/reports/shared/report-visual-assets-r2.json",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-editorial-registry.js",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-editorial-resolver.js",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "functions/personal-reading/narrative/numerology-publication-html.js",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "functions/personal-reading/narrative/numerology-publication-system.js",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "perspectives/personal/index.html",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "perspectives/phi-configuration/index.html",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "scripts/lib/bazi-editorial-owner-successor.mjs",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "scripts/lib/ecr-author-case-store.mjs",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "scripts/lib/ppr-current-shared-owner.mjs",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/optimize.py",
+      "status": " M",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/bft-r1.js",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/ecr-flagship-r1.js",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/preentry-five-method-r5-model.js",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/preentry-five-method-r5.js",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/preentry-hub-links-r5.js",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/subject-bft-r3.js",
+      "status": "??",
+      "category": "R3 Product Source",
+      "r4AuthorizedChange": "Owner-directed checklist removal"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/subject-bft-r4.js",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/subject-workspace-r1.js",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/ecr-flagship-r1/presentation.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/astrology/en.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/astrology/interaction.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/astrology/zh-Hans.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/bazi/en.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/bazi/interaction.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/bazi/zh-Hans.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/human-design/en.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/human-design/interaction.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/human-design/zh-Hans.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/numerology/en.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/numerology/interaction.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/numerology/zh-Hans.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/ziwei/en.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/ziwei/figures/ZIWEI-WEB-P02-ILLUSTRATION-R4.svg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/ziwei/figures/ZIWEI-WEB-P03-ILLUSTRATION-R4.svg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/ziwei/figures/ZIWEI-WEB-P04-ILLUSTRATION-R4.svg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/ziwei/interaction.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/media/preentry-r5/ziwei/zh-Hans.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/surfaces/bft-r1.css",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/surfaces/ecr-flagship-r1.css",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/surfaces/preentry-five-method-r5.css",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/surfaces/subject-bft-r3.css",
+      "status": "??",
+      "category": "R3 Product Source",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/surfaces/subject-bft-r4.css",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "assets/customer-ui/surfaces/subject-workspace-r1.css",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/customer-experience-rebuild/ziwei-cx-r1/review/ziwei-cx-r1-preentry-shared-owner-reconciliation-current.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/customer-experience-rebuild/ziwei-cx-r1/review/ziwei-cx-r1-preentry-shared-owner-reconciliation-current.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/customer-experience-rebuild/ziwei-cx-r1/review/ziwei-cx-r1-preentry-shared-owner-successor-checks-current.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/BLOCKERS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/BROWSER-FIRST-FAILURE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/BROWSER.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/BUILD.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/CONTRACT-TESTS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/FAILURE-REPAIR.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/FINAL-RENDER.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/INDEX.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/JOURNEY-SNAPSHOTS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/MASTER-REVIEW.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/MASTER-UPDATE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/OWNER-AUDIT.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/PRESERVATION.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/SERVICE-CANDIDATES.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/SOURCE-MAP.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/STATUS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/W0-BASELINE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/WORKSTREAM-MATRIX.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/bft-family-en-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/bft-family-zh-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/bft-institution-en-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/bft-institution-zh-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/bft-owner-en-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/bft-owner-zh-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/bft-team-en-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/bft-r1/bft-team-zh-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/ADMISSION-PACKAGES.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/BROWSER-FIRST-FAILURE.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/BROWSER-SECOND-FAILURE.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/BROWSER-THIRD-FAILURE.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/BROWSER.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/BUSINESS-FINANCIAL-SOURCE-ADMISSION-PACKAGE.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/CONTRACT-BUILD-FIRST.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/CONTRACT-FIRST-PASS.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/CONTRACT-PRE-COMPATIBILITY.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/CONTRACT-TESTS.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/EVIDENCE-REUSE.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/FAILURE-REPAIR.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/FINAL-BROWSER-DELTA.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/FINAL-BROWSER-HARNESS-FAILURE.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/FINAL-BROWSER-RESPONSE-FILTER-FAILURE.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/FINAL-MATRIX.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/INDEX.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/JOURNEYS.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/MASTER-UPDATE.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/MASTER-VERIFY.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/OWNER-REUSE-AND-BLOCKERS.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/PAGES-BUILD-FIRST.log",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/PAGES-BUILD.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/PAGES-BUILD.log",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/PROTECTION.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/SUBJECT-AUTHORITY-ADMISSION-PACKAGE.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/SUBJECT-CONTINUITY-SUCCESSOR-ADMISSION-PACKAGE.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/SUBJECT-NAVIGATION-SOURCE-ADMISSION-PACKAGE.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/SUBJECT-READING-SOURCE-ADMISSION-PACKAGE.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/W0.json",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/business-en-1440.png",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/business-financial-detail-en-1440.png",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/business-zh-Hans-360.png",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/country-en-1440.png",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/country-zh-Hans-360.png",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/existing-wheel-reused.png",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/family-en-1440.png",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/family-zh-Hans-360.png",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/institution-en-1440.png",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/institution-zh-Hans-360.png",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/personal-en-1440.png",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/personal-zh-Hans-360.png",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/team-en-1440.png",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/team-zh-Hans-360.png",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/BROWSER-REOPEN-FAILURE.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/BROWSER-ROUTING-DIAGNOSTIC.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/BROWSER.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/FAILURE-REPAIR.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/FIRST-BUSINESS-JOURNEY.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/FIVE-OWNER-ADMISSION-REVIEW.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/FRAMEWORK-RETIREMENT.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/INDEX.json",
+      "status": "??",
+      "category": "R4 New Work"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/INTEGRATION-SCOPE-MANIFEST.json",
+      "status": "??",
+      "category": "R4 New Work"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/MASTER-SERVER-STOPPED.json",
+      "status": "??",
+      "category": "R4 New Work"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/MASTER-UPDATE.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/MASTER-VERIFY.json",
+      "status": "??",
+      "category": "R4 New Work"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/PAGES-BUILD.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/PAGES-BUILD.log",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/PDF-SOURCE-STRUCTURE.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/PLANNING-METHODOLOGY-REVIEW.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/REUSE-AND-PROTECTION.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/SERVER-RESTART-VERIFY.json",
+      "status": "??",
+      "category": "R4 New Work"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/SETUP-FIRST-FAILURE.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/SETUP-MEMBERSHIP-FAILURE.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/TARGETED-TESTS.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/W0-SCOPE-MANIFEST.json",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/business-en-1440.png",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/business-en-390.png",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/business-zh-Hans-1440.png",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r4/business-zh-Hans-390.png",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/ARCHITECTURE-INVENTORY.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/BLOCKERS.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/BROWSER-RESULTS.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/BUILD-HISTORY.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/BUILD-RECEIPT.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/COUNTRY-ID-CROSSWALK.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/DELIVERY-VALIDATION.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/DIMENSION-MATRIX.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/EXECUTION-STATE.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/FAILURE-AND-REPAIR-RECORD.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/FINANCIAL-DOMAIN-MATRIX.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/LOGOUT-DOM-RESULT.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/MASTER-BROWSER-STATUS.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/MASTER-UPDATE-RECEIPT.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/MODIFIED-FILES.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/P0-INVENTORY.md",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/PROTECTED-CONTRACTS.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/QA-ADAPTER-RESULTS.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/RESUME.md",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/SCREENSHOT-MANIFEST.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/TEST-HISTORY.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/TEST-RESULTS.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/WORLD-ENTRY-RESULT.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/AFTER-COMPUTED.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/BASELINE.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/BEFORE-COMPUTED.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/BEFORE-SUBJECT-WORKSPACE.css",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/BROWSER-MATRIX.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/FINAL-PRESERVATION-CHECK.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/INITIAL-MOBILE-LABEL-ISSUE.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/MASTER-UPDATE-RECEIPT.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/RESULT.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/SCREENSHOT-MANIFEST.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/STATIC-DELTA-IDENTITY.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-business-en-1440.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-business-en-1440.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-business-en-360.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-business-en-768.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-business-zh-Hans-1440.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-business-zh-Hans-360.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-business-zh-Hans-768.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-personal-A-en-1440.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-personal-A-en-360.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-personal-A-en-768.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-personal-A-zh-Hans-1440.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-personal-A-zh-Hans-360.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-personal-A-zh-Hans-768.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-world-MY-ref-en-1440.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-world-MY-ref-en-360.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-world-MY-ref-en-768.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-world-MY-ref-zh-Hans-1440.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-world-MY-ref-zh-Hans-360.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/after-qa-world-MY-ref-zh-Hans-768.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/before-business-en-1440.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/r11/screenshots/keyboard-focus-zh-1440.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/screenshots/account-B-denied-zh-360.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/screenshots/business-en-1440.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/screenshots/business-en-360.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/screenshots/business-en-768.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/screenshots/business-final-en-360.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/screenshots/business-resume-en-1440.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/screenshots/business-zh-1440.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/screenshots/business-zh-360.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/screenshots/business-zh-768.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/screenshots/country-en-1440.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/screenshots/country-zh-360.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/screenshots/personal-en-1440.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r1/screenshots/personal-zh-360.png",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r2/BLOCKERS.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r2/BROWSER.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r2/BUILD.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r2/CONTRACT-HTTP.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r2/FAILURE-REPAIR.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r2/INTEGRATION-MATRIX.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r2/JOURNEYS.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r2/MASTER-BROWSER.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r2/MASTER-UPDATE.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r2/METHODS.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r2/NODE22-RESTART.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r2/OWNER-AUDIT.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/subject-profile-r2/STATUS.json",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "content/professional/personal-reality/current/ppr-five-method-preentry-engineering-successor-v1.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "docs/acceptance/bazi-paid-report/deep-manuscript-r2/PRELIVE-SHARED-SUCCESSOR-CHECKS-current.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "docs/acceptance/bazi-paid-report/deep-manuscript-r2/PRELIVE-SHARED-SUCCESSOR-current.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "docs/acceptance/bazi-paid-report/deep-manuscript-r2/PRELIVE-SHARED-SUCCESSOR-current.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "docs/acceptance/cx-local-route-fixes/BFT-REALITY-LINK-current.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "docs/commerce/economics-20261009/bazi-numerology-shared-owner-successor-v4.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "functions/api/customer-subject-workspace.js",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "functions/personal-reading/narrative/numerology-owner-sections.js",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "functions/professional/financial/bft-liquidity-candidate-r1.js",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "functions/professional/financial/business-intake-candidate-r3.js",
+      "status": "??",
+      "category": "R3 Product Source",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "functions/professional/financial/business-source-closure-candidate-r4.js",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "functions/professional/workspace/bft-local-workflow-r1.js",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "functions/professional/workspace/institution-review-candidate-r3.js",
+      "status": "??",
+      "category": "R3 Product Source",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "functions/professional/workspace/process-readiness-candidate-r3.js",
+      "status": "??",
+      "category": "R3 Product Source",
+      "r4AuthorizedChange": "Owner-directed checklist removal"
+    },
+    {
+      "path": "functions/profile/subject-bft-authority-candidate-r3.js",
+      "status": "??",
+      "category": "R3 Product Source",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "functions/profile/subject-bft-runtime-candidate-r3.js",
+      "status": "??",
+      "category": "R3 Product Source",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "functions/profile/subject-context-r1.js",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "functions/profile/subject-owner-integration-r2.js",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "output/pdf/r2-background-ecr-publication-repair/AST-FULL-BLEED-REVIEW.pdf",
+      "status": "??",
+      "category": "Unknown Ownership",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "output/pdf/r2-background-ecr-publication-repair/HD-FULL-BLEED-REVIEW.pdf",
+      "status": "??",
+      "category": "Unknown Ownership",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "output/pdf/r2-background-ecr-publication-repair/ZWR-FULL-BLEED-REVIEW.pdf",
+      "status": "??",
+      "category": "Unknown Ownership",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "perspectives/personal/astrology/index.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "perspectives/personal/bazi/index.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "perspectives/personal/human-design/index.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "perspectives/personal/numerology/index.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "perspectives/personal/ziwei/index.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "scripts/check-bazi-numerology-shared-owner-successor.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "scripts/check-ppr-five-method-preentry-successor.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "scripts/lib/bazi-numerology-shared-owner-successor.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "scripts/lib/ppr-five-method-preentry-successor.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "scripts/lib/report_background_layout.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/bft-r1/browser.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/bft-r1/check.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/bft-r1/closeout.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/bft-r1/final-render.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/bft-r1/owner.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/bft-r1/review.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/bft-r1/server.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/bft-r1/setup.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/ASSET-DECODE-AND-EDGES.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/ASSET-USAGE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/BASELINE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/BROWSER-FAILURE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/BROWSER-QA.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/CURRENT-TO-TARGET.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/DELIVERY-MANIFEST.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/DESKTOP-HERO-REVIEW.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/DESKTOP-REPORT-REVIEW.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/EXECUTION-STATE.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/FAILURE-QA.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/FINAL-CHECKS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/FINAL-VISUAL-QA.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/INITIAL-BROWSER-QA.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/INITIAL-MOBILE-CLIPPING.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/INPUT-NAVIGATION.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/MASTER-APPEND-RECEIPT.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/MOBILE-FINAL-CHECK.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/MOBILE-HERO-REVIEW.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/PAGE-BEFORE.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/PAGES-BUILD.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/PAGES-BUILD.log",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/PHI-CARDS-48-CONTACT.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/PREVIEW-SERVER.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/PUBLIC-ASSET-READS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/RECEIVER-PRESERVATION-DELTA.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/RECEIVER-QA.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/RESPONSIVE-HEADERS-CONTACT.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/browser-qa.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/cache-assets.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/finalize.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/prepare-presentation.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/preview-server.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/receiver-qa.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/refresh-visuals.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/screenshots/PHI-Configuration-en-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/screenshots/PHI-Configuration-en-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/screenshots/PHI-Configuration-en-768.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/screenshots/PHI-Configuration-zh-Hans-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/screenshots/PHI-Configuration-zh-Hans-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/screenshots/PHI-Configuration-zh-Hans-768.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-paid-report-r1/CROSS-WINDOW-CONTRACT.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-paid-report-r1/EXISTING-PDF-AUDIT.json",
+      "status": "??",
+      "category": "Concurrent Workstream"
+    },
+    {
+      "path": "tools/review/five-method-paid-report-r1/P0-BASELINE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-paid-report-r1/audit-existing-pdfs.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-paid-report-r1/paid-report-production-capabilities.staged.js",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-paid-report-r1/screenshots/AST-page-33.png",
+      "status": "??",
+      "category": "Concurrent Workstream"
+    },
+    {
+      "path": "tools/review/five-method-paid-report-r1/screenshots/AST-page-7.png",
+      "status": "??",
+      "category": "Concurrent Workstream"
+    },
+    {
+      "path": "tools/review/five-method-paid-report-r1/screenshots/BZR-page-25.png",
+      "status": "??",
+      "category": "Concurrent Workstream"
+    },
+    {
+      "path": "tools/review/five-method-paid-report-r1/screenshots/BZR-page-7.png",
+      "status": "??",
+      "category": "Concurrent Workstream"
+    },
+    {
+      "path": "tools/review/five-method-paid-report-r1/screenshots/HD-page-7.png",
+      "status": "??",
+      "category": "Concurrent Workstream"
+    },
+    {
+      "path": "tools/review/five-method-paid-report-r1/screenshots/HD-page-73.png",
+      "status": "??",
+      "category": "Concurrent Workstream"
+    },
+    {
+      "path": "tools/review/five-method-paid-report-r1/screenshots/NUM-page-17.png",
+      "status": "??",
+      "category": "Concurrent Workstream"
+    },
+    {
+      "path": "tools/review/five-method-paid-report-r1/screenshots/NUM-page-7.png",
+      "status": "??",
+      "category": "Concurrent Workstream"
+    },
+    {
+      "path": "tools/review/five-method-paid-report-r1/screenshots/ZWR-page-35.png",
+      "status": "??",
+      "category": "Concurrent Workstream"
+    },
+    {
+      "path": "tools/review/five-method-paid-report-r1/screenshots/ZWR-page-7.png",
+      "status": "??",
+      "category": "Concurrent Workstream"
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/ASSET-REUSE-GAP-LEDGER.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/BASELINE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/BROWSER-MATRIX.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/CHANGE-LIST.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/EXISTING-OWNER-CONNECTION-RECEIPT.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/FINAL-QA.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/HANDOFF.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/HUB-BROWSER-CHECKS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/IMAGE-RESOURCE-CHECKS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/MASTER-UPDATE-RECEIPT.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/NAMED-BLOCKERS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/OFFER-BROWSER-CHECKS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/OWNERSHIP-AUDIT.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/P1-BROWSER-QA.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/PHASE-LOG.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/PREVIEW-SERVER.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/PUBLIC-OUTLINE-SOURCE-CHECK.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/ROLLBACK-PLAN.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/ROUTE-OWNER-MATRIX.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/SCREENSHOT-CROPS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/SECURITY-CHECKS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/SOURCE-FROZEN.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/SOURCE-INPUTS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/TARGETED-CHECKS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/browser-qa.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/build-four.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/build.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/check.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/connect-existing.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/finalize.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/hub-browser-check.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/image-resource-check.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/index.html.MAIN-BEFORE",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/input/CHANGELOG_AND_HANDOFF_R4.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/input/QA-RESULTS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/input/R4-EN-CONTENT.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/input/R4-ZH-CONTENT.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/input/README.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/input/ZIWEI_PREENTRY_R4_EN.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/input/ZIWEI_PREENTRY_R4_ZH.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/input/ZIWEI_R4_THREE_FIGURES_OVERVIEW.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/input/figures/ZIWEI-WEB-P02-ILLUSTRATION-R4.svg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/input/figures/ZIWEI-WEB-P03-ILLUSTRATION-R4.svg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/input/figures/ZIWEI-WEB-P04-ILLUSTRATION-R4.svg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/input/screenshots/zh-1440-top.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/method-copy.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/personal-method-entry-r1.js.MAIN-BEFORE",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/preview-server.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/publish-review.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/CONTACT-LOWER-zh-Hans-390.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/CONTACT-en-390.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/CONTACT-zh-Hans-390.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/INSPECT-ziwei-P02.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/INSPECT-ziwei-P03.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/INSPECT-ziwei-P04.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/OFFER-bazi-en-390.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/OFFER-ziwei-en-390.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/astrology-en-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/astrology-en-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/astrology-en-390.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/astrology-en-768.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/astrology-zh-Hans-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/astrology-zh-Hans-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/astrology-zh-Hans-390.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/astrology-zh-Hans-768.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/bazi-en-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/bazi-en-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/bazi-en-390.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/bazi-en-768.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/bazi-zh-Hans-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/bazi-zh-Hans-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/bazi-zh-Hans-390.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/bazi-zh-Hans-768.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/human-design-en-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/human-design-en-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/human-design-en-390.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/human-design-en-768.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/human-design-zh-Hans-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/human-design-zh-Hans-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/human-design-zh-Hans-390.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/human-design-zh-Hans-768.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/numerology-en-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/numerology-en-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/numerology-en-390.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/numerology-en-768.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/numerology-zh-Hans-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/numerology-zh-Hans-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/numerology-zh-Hans-390.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/numerology-zh-Hans-768.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/ziwei-en-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/ziwei-en-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/ziwei-en-390.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/ziwei-en-768.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/ziwei-zh-Hans-1440.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/ziwei-zh-Hans-360.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/ziwei-zh-Hans-390.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/screenshots/ziwei-zh-Hans-768.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/security-check.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/five-method-preentry-r5/skin-additions.css",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/ASSET-BINDINGS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/BOUNDARY-CHECKS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/CHANGES-AND-PROVENANCE.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/GENERATION.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/INTEGRATION-EDITORIAL.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/PDF-QA.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/PUBLICATION.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/SECTION-OWNER.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/SOURCE-PRESERVATION.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/TARGETED-CHECKS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/VISUAL-EVIDENCE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/assets.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/assets/P06.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/assets/P06.webp",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/assets/SEC-01.webp",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/assets/SEC-02.webp",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/assets/SEC-03.webp",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/assets/SEC-04.webp",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/assets/SEC-05.webp",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/assets/SEC-06.webp",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/assets/SEC-07.webp",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/assets/SEC-08.webp",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/assets/SEC-09.webp",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/assets/SEC-10.webp",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/bind-registry.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/boundary-check.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/build.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/check.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/pdf-qa.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/run-build.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/update-master.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual-qa.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-I10-1-p36.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-I10-2-p37.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-I10-3-p38.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-I10-4-p39.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-P10-p14.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-P12-p16.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-P19-p27.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-P20-p28.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-SEC-01-p07.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-SEC-02-p10.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-SEC-03-p12.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-SEC-04-p17.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-SEC-05-p20.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-SEC-06-p23.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-SEC-07-p26.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-SEC-08-p29.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-SEC-09-p31.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-SEC-10-p34.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/bilingual-integration-CONTACT.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/en-I10-1-p36.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/en-I10-2-p37.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/en-I10-3-p38.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/en-I10-4-p39.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/en-integration-CONTACT.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/native-four-CONTACT.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/posters-CONTACT.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/zh-Hans-I10-1-p36.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/zh-Hans-I10-2-p37.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/zh-Hans-I10-3-p38.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/zh-Hans-I10-4-p39.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/numerology-owner-sections-r1/visual/zh-Hans-integration-CONTACT.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ASSET-IDENTITY-MAP.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/AST-006-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/AST-014-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/AST-026-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/AST-031-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/AST-036-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/AST-041-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/AST-046-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/AST-051-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/AST-056-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/AST-060-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/BACKGROUND-LAYOUT-UNIT-CHECKS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/BASELINE-REPORTS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/BASELINE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/CONTACT-SHEETS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ECR-CONTENT-STATUS.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ECR-FINAL-CONTENT-CHECKS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ECR-PDF-AUDIT.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ECR-PRIVATE-HTML.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ECR-Q87-FIRST-RECEIPT-FAILURE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ECR-Q87-REGRESSION.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ECR-SECTION-COVERAGE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ECR-SOURCE-AUTHORITY.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ECR-SOURCE-BINDING.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ECR-SOURCE-NEGATIVE-TESTS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ECR-STORE-BEFORE.sha256",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ECR-VISUAL-REPRESENTATIVES.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ECR-VISUAL-REVIEW.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/EDGE-ALGORITHM-INITIAL.py.txt",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/EDGE-EXTEND-FIRST-VISUAL-REVIEW.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/EXECUTION-STATE.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/FIRST-FAILED-VISUAL-CHECK.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/FULL-BLEED-BEFORE-AFTER.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/FULL-BLEED-COMPARISON-1.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/FULL-BLEED-COMPARISON-2.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/FULL-BLEED-COMPARISON-3.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/FULL-BLEED-REGRESSION.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/FULL-BLEED-ROOT-CAUSE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/HD-001-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/HUMAN-REVIEW.html",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/INCIDENTAL-CACHE-BASELINE-REPAIR.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/INITIAL-CTM-FAILURE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/OPTIMIZER-BEFORE.sha256",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/Q87-ENCODING-VERIFY.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/Q87-REGRESSION.md",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/REPAIRED-PDF-MANIFEST.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/REVIEW-HTML-VALIDATION.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/SAFETY-RECEIPT.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/SOURCE-ARTWORK-CONTACT.jpg",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/SOURCE-CANDIDATE-MANIFEST.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ZWR-019-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ZWR-033-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ZWR-039-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ZWR-046-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ZWR-051-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/ZWR-057-original-placed-image.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/audit-targets.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/check-ecr-source.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/check-layout.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-006-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-006-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-014-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-014-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-026-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-026-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-031-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-031-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-036-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-036-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-041-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-041-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-046-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-046-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-051-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-051-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-056-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-056-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-060-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/AST-060-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/HD-001-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/HD-001-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/ZWR-019-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/ZWR-019-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/ZWR-033-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/ZWR-033-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/ZWR-039-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/ZWR-039-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/ZWR-046-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/ZWR-046-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/ZWR-051-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/ZWR-051-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/ZWR-057-after.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/current-page-rasters/ZWR-057-before.png",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/finalize-review.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/implement-ecr-selector.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/optimize-ecr.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/recover-ecr-q87.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/refactor-ecr-validator.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/render-ecr-representatives.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/repair-backgrounds.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/select-ecr-source.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/verify-backgrounds.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/verify-ecr-text.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/report-storage-optimization-r1/r2-background-ecr-publication-repair/verify-q87.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r3/boot.js",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r3/browser.mjs",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r3/check.mjs",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": "Owner-directed checklist removal"
+    },
+    {
+      "path": "tools/review/subject-bft-r3/closeout.mjs",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": "Owner-directed checklist removal"
+    },
+    {
+      "path": "tools/review/subject-bft-r3/discover.mjs",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r3/final-browser.mjs",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r3/master-verify.mjs",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r3/owner.mjs",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r3/packages.mjs",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r3/pages-build.mjs",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r3/run.mjs",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r3/server.mjs",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r3/smoke.mjs",
+      "status": "??",
+      "category": "R3 Tests and Evidence",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r4/boot.js",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r4/browser.mjs",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r4/check.mjs",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r4/closeout.mjs",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r4/discover.mjs",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r4/finalize.mjs",
+      "status": "??",
+      "category": "R4 New Work"
+    },
+    {
+      "path": "tools/review/subject-bft-r4/master-verify.mjs",
+      "status": "??",
+      "category": "R4 New Work"
+    },
+    {
+      "path": "tools/review/subject-bft-r4/pages-build.mjs",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r4/pdf-source.py",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r4/restart-verify.mjs",
+      "status": "??",
+      "category": "R4 New Work"
+    },
+    {
+      "path": "tools/review/subject-bft-r4/retirement.mjs",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r4/run.mjs",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-bft-r4/server.mjs",
+      "status": "??",
+      "category": "R4 New Work",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r1/boot.js",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r1/build.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r1/finalize.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r1/fixtures.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r1/logout-dom-test.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r1/qa-adapter-regression.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r1/r11-visual-review.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r1/server.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r1/test.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r2/boot.js",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r2/browser.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r2/build.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r2/check-method-boundary.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r2/check-node22-restart.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r2/check.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r2/closeout.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r2/review-check.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/subject-profile-r2/server.mjs",
+      "status": "??",
+      "category": "Earlier Subject R1/R2",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/CONFIG-CONTINUITY-COMPARISON.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/GIT-BASELINE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/INTERRUPTED-CHECK-LOCK.json",
+      "status": "??",
+      "category": "Concurrent Workstream"
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/NODE22-RELEASE-RUNTIME.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/PR12-MERGE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/PRODUCTION-BASELINE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/PRODUCTION-CURRENT.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/R1-ADDITIONAL-MAIN-WORKFLOW-FINDINGS.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/R1-BUILD-VALIDATION.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/R1-BUILD.log",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/R1-CHECK-PAGES-RETRY.log",
+      "status": "??",
+      "category": "Concurrent Workstream"
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/R1-CHECK-PAGES.log",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/R1-CLEAN-RELEASE-WORKSPACE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/R1-EXACT-TRANSITIVE-DEPENDENCIES.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/R1-MAIN-CI.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/R1-PREDEPLOY-PUBLIC-BASELINE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/R1-SPARSE-REQUIRED-METADATA.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/TL-PAGE-ACCEPTANCE.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/WMDA-PROTECTED-MANIFEST.json",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/production-baseline.py",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/production-network-preload.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/release-preflight.py",
+      "status": "??",
+      "category": "Concurrent Workstream"
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/verify-production-handoff.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/verify-production-locale.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    },
+    {
+      "path": "tools/review/world-main-production-continuity-r1/verify-production.mjs",
+      "status": "??",
+      "category": "Concurrent Workstream",
+      "r4AuthorizedChange": null
+    }
+  ],
+  "dirtyFiles": 659,
+  "masterUrl": "http://127.0.0.1:51051/content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html#subject-bft-owner-admission-r4",
+  "resumePath": "/reality/?subjectId=r3-request-aa42689d-48ec-4de7-a55b-792766a4de6f&intakeRef=r3-intake%3A2e77318f-4c8b-4df9-b6a1-f04c3ac1c47e&r4Record=r4-continuity%3Aa39e9b8946fed18b449ed0b87740a42e1393f1d4f90b5d9a0c3f40045ef071bd&r4Subject=r3-request-aa42689d-48ec-4de7-a55b-792766a4de6f&locale=zh-Hans#business-liquidity-r4",
+  "sourcePdfUsedForRuntimeData": false,
+  "retiredFrameworkStatus": "REMOVED_FROM_CURRENT_RUNTIME_UI_DEVELOPMENT;HISTORICAL_EVIDENCE_RETAINED"
+}

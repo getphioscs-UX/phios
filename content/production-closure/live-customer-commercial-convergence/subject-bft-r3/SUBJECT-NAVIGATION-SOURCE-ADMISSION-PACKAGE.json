@@ -1,0 +1,40 @@
+{
+  "id": "SUBJECT-NAVIGATION-SOURCE-ADMISSION-PACKAGE",
+  "version": "R3-LOCAL-DECISION-PACKAGE-v1",
+  "workstream": "SUBJECT-BFT-INTEGRATED-CLOSURE-R3",
+  "state": "PROPOSED_NOT_ADMITTED",
+  "productionDefault": "BLOCKED",
+  "cost": "NO_PAID_CALLS",
+  "migrationCandidate": "NO_NEW_SCHEMA_OR_REMOTE_MIGRATION_IN_THIS_CANDIDATE",
+  "compatibility": "Existing subject IDs, six dimensions, historical freezes, Method/Report/Ebook/Stripe/entitlement identities and prices preserved",
+  "rollback": "Do not register production consumers. Disable/remove only the proposed adapter registration after separate review; preserve prior native versions and accepted records. No destructive cleanup.",
+  "existingAuthority": [
+    "functions/customer-projection/canonical-navigation-handoff.js:navigationSourceOwners.FINANCIAL/produceCustomerNavigationSnapshot",
+    "functions/customer-projection/navigation-customer-projection.js:projectNavigationForCustomer",
+    "functions/runtime/navigation/reading-navigation-builder.js"
+  ],
+  "exactMissingContract": "FINANCIAL currently resolves CUSTOMER_CONSENTED_INTAKE_DRAFT owned by the same Account. It does not resolve a Business statement or delegated Subject authority.",
+  "proposedDelta": "Keep the FINANCIAL family. Propose a versioned BUSINESS_STATEMENT source-reader branch with server-authorized Subject context; keep current PERSONAL draft resolver unchanged. Source identity/version, options, decision, approval, execution and observed outcome must remain separate.",
+  "actualConsumer": [
+    "functions/profile/subject-bft-runtime-candidate-r3.js:financialNavigationProbe"
+  ],
+  "requiredData": [
+    "Admitted Financial source ref/digest",
+    "Native Subject/domain-purpose permission",
+    "Verified owner/custodian vs delegated manager relation",
+    "Applicable options and explicit decision evidence"
+  ],
+  "permissionBoundary": "The source-reader injection is an isolated local compatibility seam only. The existing owner-account mismatch check is preserved; delegated financial snapshot generation is not bypassed by rewriting ownerId. No SUBJECT source family added.",
+  "securityRisks": [
+    "Delegation is not same-account ownership",
+    "Review prompt is not established Navigation",
+    "Selection must not promote an option to an approved action",
+    "No report/paid execution entitlement from source access"
+  ],
+  "tests": [
+    "R3 CONTRACT-TESTS: actual native FINANCIAL snapshot, mismatch denial, no new family",
+    "R3 BROWSER: native compatibility request, source-bound choice and professional tasks"
+  ],
+  "humanDecision": "Approve a precise FINANCIAL source kind and authorized Subject/custodian/delegate mapping, including which actions need independent/professional/client approval.",
+  "nextExecutableAction": "Review and register only the approved FINANCIAL reader extension; rerun source/permission/version and action-boundary tests before an authorized Cloud QA."
+}

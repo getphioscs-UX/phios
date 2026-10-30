@@ -1,0 +1,144 @@
+{
+  "status": "PASS",
+  "expectedHead": "60e2a4d0aad747e82fd3b63d58b06dbf1586306c",
+  "origin": "https://getphios.com",
+  "productionIdentity": {
+    "checkedUtc": "2026-10-30T07:28:37.024181+00:00",
+    "environment": "production",
+    "commitHash": "60e2a4d0aad747e82fd3b63d58b06dbf1586306c",
+    "id": "cb5ff9da-eac8-42bc-8fed-28340725bff4",
+    "latestStage": {
+      "name": "deploy",
+      "started_on": null,
+      "ended_on": "2026-10-30T07:28:02.114505Z",
+      "status": "success"
+    },
+    "url": "https://getphios.com",
+    "deploymentUrl": "https://cb5ff9da.phios-github.pages.dev",
+    "automaticProductionDeployment": false,
+    "configurationUnchanged": true,
+    "rollbackDeploymentId": "f03d4af8-ab63-49d2-b553-c82dea0c10d8"
+  },
+  "rows": [
+    {
+      "id": "REAL_PRODUCTION_PUBLIC_API_SOURCE_AND_UNKNOWNS",
+      "status": "PASS",
+      "productionIdentityBoundToMain": true
+    },
+    {
+      "id": "READ_ONLY_POST_PROBE_EMPTY_BODY",
+      "httpStatus": 503,
+      "status": "PASS",
+      "expected": 503,
+      "safety": "Empty body is invalid for POST provider dispatch; other methods have no write handler even if guard is OFF"
+    },
+    {
+      "id": "READ_ONLY_PUT_PROBE_EMPTY_BODY",
+      "httpStatus": 503,
+      "status": "PASS",
+      "expected": 503,
+      "safety": "Empty body is invalid for POST provider dispatch; other methods have no write handler even if guard is OFF"
+    },
+    {
+      "id": "READ_ONLY_PATCH_PROBE_EMPTY_BODY",
+      "httpStatus": 503,
+      "status": "PASS",
+      "expected": 503,
+      "safety": "Empty body is invalid for POST provider dispatch; other methods have no write handler even if guard is OFF"
+    },
+    {
+      "id": "READ_ONLY_DELETE_PROBE_EMPTY_BODY",
+      "httpStatus": 503,
+      "status": "PASS",
+      "expected": 503,
+      "safety": "Empty body is invalid for POST provider dispatch; other methods have no write handler even if guard is OFF"
+    },
+    {
+      "id": "VALID_SAFE_POST_READ_ONLY",
+      "status": "PASS",
+      "httpStatus": 503,
+      "providerNotRequiredEvenWithoutGuard": true
+    },
+    {
+      "id": "PRODUCTION_CUSTOM_DOMAIN_AND_IMMUTABLE_PAGES_API_MATCH",
+      "status": "PASS"
+    },
+    {
+      "id": "PUBLIC_GET_REJECTS_UNREGISTERED_CONTEXT",
+      "status": "PASS"
+    },
+    {
+      "id": "NO_GENERIC_PRIVATE_GET",
+      "status": "PASS"
+    },
+    {
+      "id": "REAL_WORLD_COMPANY_UI",
+      "locale": "zh-Hans",
+      "width": 360,
+      "status": "PASS",
+      "apiMocked": false,
+      "sourceUnknowns": true,
+      "overflow": false
+    },
+    {
+      "id": "REAL_WORLD_COMPANY_UI",
+      "locale": "zh-Hans",
+      "width": 768,
+      "status": "PASS",
+      "apiMocked": false,
+      "sourceUnknowns": true,
+      "overflow": false
+    },
+    {
+      "id": "REAL_WORLD_COMPANY_UI",
+      "locale": "zh-Hans",
+      "width": 1440,
+      "status": "PASS",
+      "apiMocked": false,
+      "sourceUnknowns": true,
+      "overflow": false
+    },
+    {
+      "id": "REAL_WORLD_COMPANY_UI",
+      "locale": "en",
+      "width": 360,
+      "status": "PASS",
+      "apiMocked": false,
+      "sourceUnknowns": true,
+      "overflow": false
+    },
+    {
+      "id": "REAL_WORLD_COMPANY_UI",
+      "locale": "en",
+      "width": 768,
+      "status": "PASS",
+      "apiMocked": false,
+      "sourceUnknowns": true,
+      "overflow": false
+    },
+    {
+      "id": "REAL_WORLD_COMPANY_UI",
+      "locale": "en",
+      "width": 1440,
+      "status": "PASS",
+      "apiMocked": false,
+      "sourceUnknowns": true,
+      "overflow": false
+    },
+    {
+      "id": "REAL_WORLD_R42_COMPARE_TIMELINE",
+      "locale": "en",
+      "status": "PASS"
+    },
+    {
+      "id": "REAL_WORLD_R42_COMPARE_TIMELINE",
+      "locale": "zh-Hans",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "blockedRequests": [],
+  "providerCalls": 0,
+  "productionWrites": 0,
+  "oldScreenshotsUsed": false
+}

@@ -1,0 +1,40 @@
+{
+  "id": "SUBJECT-READING-SOURCE-ADMISSION-PACKAGE",
+  "version": "R3-LOCAL-DECISION-PACKAGE-v1",
+  "workstream": "SUBJECT-BFT-INTEGRATED-CLOSURE-R3",
+  "state": "PROPOSED_NOT_ADMITTED",
+  "productionDefault": "BLOCKED",
+  "cost": "NO_PAID_CALLS",
+  "migrationCandidate": "NO_NEW_SCHEMA_OR_REMOTE_MIGRATION_IN_THIS_CANDIDATE",
+  "compatibility": "Existing subject IDs, six dimensions, historical freezes, Method/Report/Ebook/Stripe/entitlement identities and prices preserved",
+  "rollback": "Do not register production consumers. Disable/remove only the proposed adapter registration after separate review; preserve prior native versions and accepted records. No destructive cleanup.",
+  "existingAuthority": [
+    "functions/runtime/reading/rule-reading.js:readRuntimeRuleFirst",
+    "functions/runtime/reading/reading-evidence-contract.js",
+    "functions/runtime/reading/reading-evidence-boundary.js",
+    "functions/runtime/reading/reading-experience.js"
+  ],
+  "exactMissingContract": "The existing deterministic Reading engine executes, but Subject-specific source mapping and safe five-output publication semantics are not admitted for non-personal subjects.",
+  "proposedDelta": "Add an authorized Subject context/source mapping at the existing input Owner: Account, Subject type/ref/version, purpose/grant, evidence refs/versions, financial/process facts and Method applicability. Keep unreviewed financial input in reported experience; only actual dated public World evidence is observed. Never invent a parallel BFT Reading engine.",
+  "actualConsumer": [
+    "functions/profile/subject-bft-runtime-candidate-r3.js:context"
+  ],
+  "requiredData": [
+    "Authorized source versions",
+    "Evidence-class mapping",
+    "Five-output publication template approval by Subject type",
+    "Unknown/assumption and alternative explanation boundaries"
+  ],
+  "permissionBoundary": "The local native Runtime probe is not exposed as a formal accepted five-output product. Non-personal Method interpretation is disabled/inapplicable. Personal needs real Person/consent/input authority before Method use.",
+  "securityRisks": [
+    "Personal psychological/default inference may be unsuitable for business/government",
+    "A computed number or submitted statement is not independently observed fact",
+    "Archived public observations are not current causal forecasts"
+  ],
+  "tests": [
+    "R3 CONTRACT-TESTS: actual native Reading schema, no unreviewed observed facts, six Method boundaries, Country identity/archive",
+    "R3 BROWSER: source maps and explicit five-output stop status"
+  ],
+  "humanDecision": "Approve each source class, Subject context and safe output treatment for Reality Map/Diagnosis/Navigation Path/Action Guidance/Continuity Plan. Native execution alone does not close publication admission.",
+  "nextExecutableAction": "Review the versioned input adapter and per-Subject five-output mappings; register an admitted mapping in the existing Reading Owner only after acceptance."
+}

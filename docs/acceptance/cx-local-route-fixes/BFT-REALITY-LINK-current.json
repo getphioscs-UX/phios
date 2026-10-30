@@ -1,0 +1,38 @@
+{
+  "status": "CANONICAL_LINK_ACCEPTANCE_FIX",
+  "HEAD": "af44a78737fa8378fb4c5e284b2a6216d0364ea5",
+  "path": "assets/customer-ui/js/surfaces/bft-r1.js",
+  "previousSHA256": "17365c6cb62a814c3105bbcf5e0766e70e30b80a3b479f0cf6c5767e07326f39",
+  "currentSHA256": "a3a3f231c02191c0c99a967c2ff1e6392965a164b44c5e9ffd01f9a29212762c",
+  "replacement": {
+    "from": "/account/my-reality/",
+    "to": "/reality/",
+    "occurrences": 1
+  },
+  "allOtherBytesPreserved": true,
+  "existingUntrackedWorkPreserved": true,
+  "routeAuthority": [
+    "assets/customer-ui/js/navigation.js",
+    "content/customer-experience-rebuild/authority/canonical-customer-route-registry-v5.json",
+    "reality/index.html"
+  ],
+  "routeRegistryChanged": false,
+  "redirectsChanged": false,
+  "legacyGuardChanged": false,
+  "providerCalls": 0,
+  "productionWrites": 0,
+  "commit": 0,
+  "push": 0,
+  "deploy": 0,
+  "validation": [
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:cx-no-legacy-route-reference",
+      "exitCode": 0,
+      "files": 289
+    },
+    {
+      "command": "node --check assets/customer-ui/js/surfaces/bft-r1.js",
+      "exitCode": 0
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const base=JSON.parse(fs.readFileSync('.tmp/subject-profile-r2/PREVIEW.json')).url;
+assert.equal(new URL(base).hostname,'127.0.0.1');
+const cases=[];let cookie='';
+async function api(url,{method='GET',body,origin=base,session=cookie}={}){const r=await fetch(base+url,{method,headers:{...(session?{cookie:session}:{}),...(method==='POST'?{origin,'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{})});return{r,body:await r.json()};}
+async function test(name,fn){await fn();cases.push({name,status:'PASS'});}
+await test('Public Country discovery grants no private account or national ownership',async()=>{const {body}=await api('/api/customer-subject-workspace');assert.equal(body.items.length,1);assert.equal(body.items[0].subjectType,'COUNTRY');assert.equal(body.accountVerified,false);assert.equal(body.provisioning.status,'BLOCKED');});
+await test('Private subjects reject missing and forged sessions',async()=>{for(const session of ['', 'subject-r2-session=forged']){const {r}=await api('/api/customer-subject-workspace?subjectId=qa-personal-A',{session});assert.equal(r.status,401);}});
+await test('Local login still enforces Origin',async()=>{assert.equal((await api('/__qa/login',{method:'POST',body:{account:'A'},origin:'https://foreign.invalid'})).r.status,403);});
+await test('Signed OIDC native Account session resolves PWS subject access',async()=>{const {r}=await api('/__qa/login',{method:'POST',body:{account:'A'}});assert.equal(r.status,200);cookie=r.headers.get('set-cookie').split(';')[0];const {body}=await api('/api/customer-subject-workspace');assert.equal(body.accountVerified,true);assert.equal(body.items.length,3);});
+for(const id of ['qa-personal-A','qa-business','qa-world-MY-ref'])await test('Subject/source/World/financial boundaries: '+id,async()=>{
+ const {r,body}=await api('/api/customer-subject-workspace?subjectId='+id+(id==='qa-personal-A'?'&worldSubjectId=qa-world-MY-ref':''));assert.equal(r.status,200);assert.match(r.headers.get('cache-control'),/no-store/);
+ const w=body.workspace,i=body.integration;assert.equal(w.subjectId,id);assert.equal(w.dimensions.length,6);assert.equal(i.subjectId,id);assert.equal(i.profileVersion,w.profileVersion);assert.equal(i.evidenceSourceVersion,w.sourceVersion);
+ assert.equal(i.world.status,'PASS');assert(i.world.evidence.length>=12);assert(i.world.countries.some(c=>c.id==='MYS'&&c.iso2==='MY'));assert.equal(i.world.ownsCountry,false);
+ for(const e of i.world.evidence){assert(e.period&&e.revision&&e.version&&e.geography&&e.unit&&e.sourceUrl&&e.indicatorDefinition);assert.equal(e.latestClaim,false);}
+ assert.equal(i.financial.status,'BLOCKED');assert.deepEqual(w.financial.metrics,[]);assert.equal(w.financial.sourceVersion,null);assert.equal(i.continuity.status,'BLOCKED');assert.equal(w.navigation.formalReadingEstablished,false);
+ assert.equal(w.ownsSubject,false);if(w.subjectType==='BUSINESS')assert.equal(w.independentLegalPerson,false);
+ if(w.subjectType!=='PERSONAL')assert(w.methods.every(m=>m.status==='NOT_APPLICABLE'&&m.publicationEligible===false));
+});
+await test('Unadmitted save returns a named blocker, not fake persistence',async()=>{const {r,body}=await api('/api/customer-subject-workspace?subjectId=qa-business',{method:'POST'});assert.equal(r.status,503);assert.match(body.code,/CONTINUITY/);});
+await test('Second native Account cannot read private Personal subject',async()=>{const {r}=await api('/__qa/login',{method:'POST',body:{account:'B'}});const second=r.headers.get('set-cookie').split(';')[0];assert.equal((await api('/api/customer-subject-workspace?subjectId=qa-personal-A',{session:second})).r.status,404);});
+await test('Revocation immediately rejects subsequent private subject reads',async()=>{const {r}=await api('/__qa/revoke',{method:'POST'});assert.equal(r.status,200);assert.equal((await api('/api/customer-subject-workspace?subjectId=qa-business')).r.status,404);});
+await test('Native logout revokes old sessions; public country remains public',async()=>{const old=cookie;assert.equal((await api('/__qa/logout',{method:'POST'})).r.status,200);assert.equal((await api('/api/customer-subject-workspace?subjectId=qa-personal-A',{session:old})).r.status,401);const {body}=await api('/api/customer-subject-workspace',{session:''});assert.equal(body.items.length,1);});
+const out='content/production-closure/live-customer-commercial-convergence/subject-profile-r2';fs.mkdirSync(out,{recursive:true});fs.writeFileSync(out+'/CONTRACT-HTTP.json',JSON.stringify({status:'PASS',scope:'SYNTHETIC_IDP_NATIVE_ACCOUNT_PWS_LOCAL_SQL_ONLY',cases,formalFinancialData:'BLOCKED',formalReadingNavigation:'BLOCKED',formalContinuityPersistence:'BLOCKED',liveAccount:'NOT_RUN'},null,2));console.log('PASS R2 '+cases.length+' directed HTTP/Owner boundary cases.');

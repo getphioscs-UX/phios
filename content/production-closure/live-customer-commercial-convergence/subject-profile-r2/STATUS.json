@@ -1,0 +1,53 @@
+{
+  "status": "PARTIAL",
+  "scope": "SUBJECT_PROFILE_R2_LOCAL_OWNER_INTEGRATION",
+  "gates": {
+    "A": "PARTIAL",
+    "B": "BLOCKED",
+    "C": "PARTIAL",
+    "D": "BLOCKED",
+    "E": "BLOCKED",
+    "F": "PARTIAL",
+    "G": "PARTIAL"
+  },
+  "actualTests": {
+    "directedHttp": 11,
+    "browser": 19,
+    "methodBoundaries": 6,
+    "node22Runtime": "v22.16.0",
+    "targetedPagesFunctionsBuild": "PASS"
+  },
+  "pagesArtifacts": [
+    {
+      "path": ".tmp/subject-profile-r2/pages-worker/_worker.js",
+      "sha256": "6166128da245ea1f9c9ed17f794a7cbbfc87684cfbcee557f8bf18b6cf36ccfd",
+      "bytes": 15210453
+    }
+  ],
+  "evidence": {
+    "account": "CONTRACT-HTTP.json",
+    "browser": "BROWSER.json",
+    "methods": "METHODS.json",
+    "restart": "NODE22-RESTART.json",
+    "build": "BUILD.json"
+  },
+  "blockers": [
+    "SUBJECT_PRODUCTION_OWNER_POLICY",
+    "BUSINESS_FINANCIAL_READ_OWNER_NOT_ADMITTED",
+    "SUBJECT_READING_RUNTIME_BINDING_NOT_ADMITTED",
+    "SUBJECT_NAVIGATION_RUNTIME_BINDING_NOT_ADMITTED",
+    "FORMAL_SUBJECT_CONTINUITY_RETENTION_AND_IDEMPOTENCY_NOT_ADMITTED",
+    "MULTIPARTY_AND_GUARDIAN_OWNER",
+    "FORMAL_CLOUD_QA_AND_PRODUCTION_NOT_AUTHORIZED"
+  ],
+  "r1ArchitectureRewritten": false,
+  "productionActivation": "BLOCKED",
+  "cloudQa": "NOT_RUN",
+  "liveCustomerEvidence": "NOT_RUN",
+  "gitOperations": "NOT_RUN",
+  "fullNpmCheck": "NOT_RUN_USER_OWNED",
+  "reviewUrl": "http://127.0.0.1:60392/content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html#subject-profile-r2-integration-closure",
+  "localPreview": "http://127.0.0.1:60392/reality/?subjectId=qa-world-MY-ref",
+  "node22BinarySha256": "c5ff4c736112dd483c750fd4149d30c8a116db1a49b8b3ec88be4b65e6c86c19",
+  "transportNote": "HTTP loopback test cookie carries an actual native sealed Account session. Synthetic IdP only; no production login claim. R2 local shim maps D1 numbered SQL parameters for Node22."
+}

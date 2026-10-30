@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {readBaziSharedOwnerPredecessor} from './bazi-numerology-shared-owner-successor.mjs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
@@ -38,10 +39,11 @@ export function assertBaziEditorialOwnerSuccessor(owner){
 
 
 function assertInactiveContentsAppend(ownerPath,predecessor){
- const source=fs.readFileSync(ownerPath,'utf8');
+ let source=fs.readFileSync(ownerPath,'utf8');
  const hash=s=>createHash('sha256').update(s).digest('hex');
  if(hash(source)===predecessor.successorSha256)return source;
  const r=JSON.parse(fs.readFileSync('docs/commerce/economics-20261009/bazi-editorial-contents-successor-v2.json'));
+ source=readBaziSharedOwnerPredecessor(ownerPath,r.successorSha256);
  assert.equal(r.status,'ENGINEERING_RECONCILIATION');
  assert.equal(r.changeType,'ADDITIVE_INACTIVE_CONTENTS_EVIDENCE');assert.equal(r.path,ownerPath);
  assert.equal(r.predecessor.path,'docs/commerce/economics-20261009/bazi-editorial-shared-bilingual-successor-v1.json');
@@ -81,10 +83,10 @@ function assertBaziAssetV3(v2,archive) {
  assert.equal(v3.archivePath,archive);
  assert.equal(sha(archive),v2.sha256);
  assert.equal(v3.path,v2.path);
- assert.equal(sha(v3.path),v3.sha256);
+ const priorAssetSource=readBaziSharedOwnerPredecessor(v3.path,v3.sha256);
 
  const before=JSON.parse(fs.readFileSync(archive));
- const now=JSON.parse(fs.readFileSync(v3.path));
+ const now=JSON.parse(priorAssetSource);
  assert.equal(before.assets.length,67);
  assert.equal(now.assets.length,93);
  assert.equal(before.revision,now.revision);

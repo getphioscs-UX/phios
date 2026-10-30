@@ -1,0 +1,7 @@
+// Bundle existing Pages-compatible JSON imports rather than altering frozen owners.
+import fs from 'node:fs';import path from 'node:path';import {createHash} from 'node:crypto';import {build} from 'esbuild';
+const target=process.argv[2]||'check';if(!['check','server','smoke'].includes(target))throw Error('R3_RUN_TARGET_INVALID');
+const hashes=new Map(),sha=b=>createHash('sha256').update(b).digest('hex');
+await build({entryPoints:['tools/review/subject-bft-r3/'+target+'.mjs'],outfile:'.tmp/subject-bft-r3/'+target+'.bundle.mjs',bundle:true,packages:'external',platform:'node',format:'esm',target:'node22',logLevel:'warning',plugins:[{name:'r3-source-stability',setup(b){b.onLoad({filter:/\.(js|mjs|json)$/},a=>{const bytes=fs.readFileSync(a.path),hash=sha(bytes);if(hashes.has(a.path)&&hashes.get(a.path)!==hash)throw Error('R3_CONCURRENT_INPUT_CHANGED');hashes.set(a.path,hash);return{contents:bytes,loader:a.path.endsWith('.json')?'json':'js',resolveDir:path.dirname(a.path)};});}}]});
+for(const[p,h]of hashes)if(sha(fs.readFileSync(p))!==h)throw Error('R3_CONCURRENT_INPUT_CHANGED:'+p);
+fs.writeFileSync('.tmp/subject-bft-r3/'+target+'-build.json',JSON.stringify({status:'PASS',nodeTarget:'22',scope:'ISOLATED_INPUT_STABLE_BUNDLE',inputs:[...hashes].map(([p,sha256])=>({path:path.relative(process.cwd(),p).replaceAll('\\','/'),sha256}))},null,2));await import('../../../.tmp/subject-bft-r3/'+target+'.bundle.mjs');
