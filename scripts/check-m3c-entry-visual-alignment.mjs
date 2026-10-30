@@ -1,3 +1,4 @@
+import {assertWorldPreviewWranglerSuccessor} from './lib/m3c-wrangler-successor.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
@@ -210,8 +211,18 @@ assert.equal(readOnlyReconciliation.previousSha256,wranglerReconciliation.succes
 assert.equal(await sha256(readOnlyReconciliation.previousPath),readOnlyReconciliation.previousSha256);
 assert.deepEqual(readOnlyReconciliation.allowedVars,{PHIOS_D1_MAINTENANCE_MODE:'READ_ONLY'});
 for(const key of ['productionActivationVerified','deploymentExecuted','d1MutationExecuted'])assert.equal(readOnlyReconciliation[key],false);
-assert.equal(await sha256('wrangler.jsonc'), readOnlyReconciliation.successorSha256);
-const wrangler = JSON.parse((await read('wrangler.jsonc')).replace(/^\uFEFF/, ''));
+const worldPreviewReconciliation=await readJson('content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v3.json');
+assert.equal(worldPreviewReconciliation.status,'ENGINEERING_RECONCILIATION');assert.equal(worldPreviewReconciliation.humanDecision,'PENDING');
+assert.equal(worldPreviewReconciliation.predecessor,'content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v2.json');
+assert.equal(await sha256(worldPreviewReconciliation.predecessor),worldPreviewReconciliation.predecessorSha256);
+assert.equal(worldPreviewReconciliation.previousSha256,readOnlyReconciliation.successorSha256);
+assert.equal(await sha256(worldPreviewReconciliation.previousPath),readOnlyReconciliation.successorSha256);
+const worldReadOnlyPredecessor=await assertWorldPreviewWranglerSuccessor(readOnlyReconciliation.successorSha256);
+assert.deepEqual(worldPreviewReconciliation.allowedPreviewVars,{PHIOS_D1_MAINTENANCE_MODE:'READ_ONLY'});
+for(const key of ['productionActivationVerified','deploymentExecuted','d1MutationExecuted','projectSettingsChanged'])assert.equal(worldPreviewReconciliation[key],false);
+const wrangler=await readJson(worldPreviewReconciliation.previousPath),worldPreview=await readJson('content/knowledge/registry/m3c-w3-wrangler-preview-attempt-before-withdrawal-v4.jsonc');
+const expectedPreview=structuredClone(wrangler);Object.assign(expectedPreview.env.preview.vars,worldPreviewReconciliation.allowedPreviewVars);
+assert.deepEqual(worldPreview,expectedPreview,'Only the recorded Preview maintenance variable may differ; production and QA bindings are preserved');
 const publicationDelta=wranglerReconciliation.allowedDelta.pagesPublication;
 assert.equal(publicationDelta.commit,'25226cd27f50c4b7197bd5a6f0371d56202861bf');
 assert.equal(publicationDelta.predecessorOutputDirectory,wranglerReconciliation.preserved.pagesBuildOutputDirectory);

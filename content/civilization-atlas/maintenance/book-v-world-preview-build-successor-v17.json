@@ -1,0 +1,26 @@
+{
+  "status": "ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW",
+  "humanDecision": "PENDING",
+  "predecessor": "content/civilization-atlas/maintenance/book-v-world-market-company-successor-v16.json",
+  "predecessorSha256": "f54b5d41ec142da5dc07a0208b92370e3e2b11a8933c339a3bd9f089699ae54c",
+  "changeClass": "NEW_ATLAS_RELEASE_SUCCESSOR",
+  "ownerPath": "scripts/build-cloudflare-pages.mjs",
+  "previousGitRevision": "29cf2bd4cd5da36edae752a2d4b11962af02ac1e",
+  "previousSha256": "df84de4c5fc8a097adcea26123aac61d477e32642417d06b65e50d2091920212",
+  "successorSha256": "53ce6fd2959d9bdefd7e84d5ca8a0b3e957575335b581e219b8f16cb428251e1",
+  "dependencies": [
+    {
+      "path": "scripts/lib/world-preview-worker-isolation.mjs",
+      "sha256": "b5bb35fd95021877b0125f736739f99682cbbb9913f1bf1bac2d1fd5bf94c4fa"
+    },
+    {
+      "path": "scripts/check-world-preview-worker-isolation.mjs",
+      "sha256": "e31ef9b379c8f5ad957abc89ad1b7e06b5904f5ad45db9108493b4b7d3589e5b"
+    }
+  ],
+  "productionConfigurationChanged": false,
+  "sharedPreviewModeRequired": false,
+  "historicalEvidenceChanged": false,
+  "runtimeMiddlewareChanged": false,
+  "scope": "Only immutable Pages builds of the two named World review branches wrap the existing Worker with READ_ONLY. Other branch Worker bytes and production config are unchanged."
+}

@@ -1,0 +1,57 @@
+{
+  "status": "ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW",
+  "humanDecision": "PENDING",
+  "predecessor": "content/civilization-atlas/maintenance/book-v-atlas-cache-display-successor-v15.json",
+  "predecessorSha256": "64c2920edc8f225150a3ad2e2a11e7860e4e74adf62e01d66cfd54330663f6aa",
+  "productionAdmissionChanged": false,
+  "acceptedBindingsChanged": false,
+  "canonicalTheoryChanged": false,
+  "historicalRegistriesChanged": false,
+  "releaseEligibility": "HUMAN_REVIEW_REQUIRED_NO_PRODUCTION_ADMISSION",
+  "scope": "Two exact additive World company mount/import calls. Dated issuer source and deterministic research only; no current quote or redistribution permission inferred. Historical receiver and R42 remain unchanged.",
+  "changes": [
+    {
+      "path": "world/index.html",
+      "previousPath": "content/civilization-atlas/maintenance/world-before-market-company-v16.txt",
+      "previousSha256": "dd365692a435d3052da99961ca84414b15fe500e2ca6143e5c8245b988ec74bc",
+      "successorSha256": "c60f85d887232a445d8047eeaab6a1fc05565ce97ca4620d9e7531c5988eda2e",
+      "changeClass": "NEW_ATLAS_RELEASE_SUCCESSOR",
+      "exactInsertions": [
+        "<section class=\"knowledge-shell\" data-world-company></section>"
+      ]
+    },
+    {
+      "path": "assets/js/pages/world.js",
+      "previousPath": "content/civilization-atlas/maintenance/world-script-before-market-company-v16.txt",
+      "previousSha256": "357dcc06ac600a04d097f4ef3676ab963b7c67a06eaad96c3a27a5836c89eef0",
+      "successorSha256": "3d79359e60c99a9cd818d5c22116778eaee81bbe464da8db2f6220412f210619",
+      "changeClass": "NEW_ATLAS_RELEASE_SUCCESSOR",
+      "exactInsertions": [
+        "import {mountWorldCompany} from './civilization-atlas/world-company-analysis.js';\n",
+        "mountWorldCompany(document.querySelector('[data-world-company]'));\n"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "assets/js/pages/civilization-atlas/world-company-analysis.js",
+      "sha256": "fefc49418e05019adca2fa74973b26179bb4309ca9a128e5afb11baaee755ae2"
+    },
+    {
+      "path": "functions/_lib/world-company-analysis.js",
+      "sha256": "a60597988785f92281c822b26c02a852cc1b4cb7561d78a5ba88a26ee9ef0da2"
+    },
+    {
+      "path": "functions/current-facts-gateway/world-company-projection.js",
+      "sha256": "74d345451b8cf6d76a8f6cd58e6e346c876b377ec73fed6917fac188dfa9a7e4"
+    },
+    {
+      "path": "functions/api/current-facts.js",
+      "sha256": "f03f4cc639f9518884ea6e8768ddbf2adfe777aba4df0f2456b2df7270d6a78d"
+    },
+    {
+      "path": "content/world/company-filings-r1.json",
+      "sha256": "911e769330935ba36ed345376ea5ef7ab753759c5bc1cee301d1ebb714ef69c1"
+    }
+  ]
+}
