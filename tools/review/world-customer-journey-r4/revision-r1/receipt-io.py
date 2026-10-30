@@ -1,0 +1,2 @@
+from pathlib import Path
+q=Path('C:/phios/tools/review/world-customer-journey-r4/revision-r1');p=q/'regression.mjs';s=p.read_text(encoding='utf-8');mark="fs.writeFileSync(dir+'/BROWSER-CHECKS.json',";a=s.index(mark);b=s.index(';',a)+1;write=s[a:b];s=s[:a]+s[b:];s+='\n'+write+"\nif(rows.some(r=>r.status==='FAIL'))process.exitCode=1;\n";s=s.replace("humanAcceptance:'PENDING'","humanAcceptance:'REVISE_PENDING_RECHECK'");p.write_text(s,encoding='utf-8')

@@ -1,0 +1,631 @@
+<!doctype html><meta charset="utf-8"><title>Subject BFT R6.3</title><style>body{max-width:1100px;margin:32px auto;padding:20px;font:16px/1.7 system-ui}pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer}</style><h1>R6.3 · POLICY REVIEW ONLY · NOT HUMAN_ACCEPTED</h1><p>四项 Local Acceptance 原样保留。真实主体授权、正式生命周期、Cloud QA 与 Production 均未准入。LGS Wealth Management 仅为未来候选，未读取登记资料。</p><details><summary>CLOUD-QA-AND-JOURNEY.json</summary><a href="CLOUD-QA-AND-JOURNEY.json">Exact JSON</a><pre>{
+  &quot;ready&quot;: false,
+  &quot;authorized&quot;: false,
+  &quot;firstFormalStop&quot;: &quot;SUBJECT_PRODUCTION_OWNER_POLICY&quot;,
+  &quot;changed&quot;: false,
+  &quot;currentCustomerEntry&quot;: &quot;CLOSED&quot;,
+  &quot;localContracts&quot;: [
+    {
+      &quot;owner&quot;: &quot;Subject&quot;,
+      &quot;proposalId&quot;: &quot;BUSINESS_SUBJECT_AUTHORIZATION_CONTRACT_R6&quot;,
+      &quot;sha256&quot;: &quot;77574634a9671f7204936dbd7a610cdc4f55f27c530173f19b0ae79a485616e9&quot;,
+      &quot;state&quot;: &quot;LOCAL_CONTRACT_ACCEPTED&quot;,
+      &quot;receipt&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/SUBJECT-LOCAL-ACCEPTANCE.json&quot;
+    },
+    {
+      &quot;owner&quot;: &quot;Financial&quot;,
+      &quot;proposalId&quot;: &quot;BUSINESS_FINANCIAL_SOURCE_SUCCESSOR&quot;,
+      &quot;sha256&quot;: &quot;784092d5526efec325852d297bf13eed82052fd6a8396ee1d6153269c9210c95&quot;,
+      &quot;state&quot;: &quot;LOCAL_CONTRACT_ACCEPTED&quot;,
+      &quot;receipt&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/FINANCIAL-LOCAL-ACCEPTANCE.json&quot;
+    },
+    {
+      &quot;owner&quot;: &quot;Reading&quot;,
+      &quot;proposalId&quot;: &quot;READING_SOURCE_ADMISSION_R6&quot;,
+      &quot;sha256&quot;: &quot;43e2e23581b4cf59d3c8069dc46f7fbd33e57a82c1a32c5870126f9eb7619d38&quot;,
+      &quot;state&quot;: &quot;LOCAL_CONTRACT_ACCEPTED&quot;,
+      &quot;receipt&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/READING-LOCAL-ACCEPTANCE.json&quot;
+    },
+    {
+      &quot;owner&quot;: &quot;Navigation&quot;,
+      &quot;proposalId&quot;: &quot;NAVIGATION_FINANCIAL_ADMISSION_R6&quot;,
+      &quot;sha256&quot;: &quot;b4dc4bb54f4b12a594f7fc5b690cc316b798daed09e5b0b134b29c55bbeb78a7&quot;,
+      &quot;state&quot;: &quot;LOCAL_CONTRACT_ACCEPTED&quot;,
+      &quot;receipt&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/NAVIGATION-LOCAL-ACCEPTANCE.json&quot;
+    }
+  ],
+  &quot;journey&quot;: [
+    [
+      &quot;Verified Account&quot;,
+      &quot;OIDC capability exists; real test Account/proof not supplied&quot;
+    ],
+    [
+      &quot;Authorized Sole Proprietor Subject&quot;,
+      &quot;STOP: real proprietor match, evidence custody, reviewer and issuer unapproved&quot;
+    ],
+    [
+      &quot;Business Financial Source&quot;,
+      &quot;Exact source permission/period/currency/formula/independent review admission remains open&quot;
+    ],
+    [
+      &quot;Financial Review&quot;,
+      &quot;No Personal/Household consumer cutover&quot;
+    ],
+    [
+      &quot;Reading / Navigation&quot;,
+      &quot;Only accepted synthetic mapping/comparison; interpretation/publication/action separate&quot;
+    ],
+    [
+      &quot;User Decision&quot;,
+      &quot;Options are not decision/approval/execution/outcome&quot;
+    ],
+    [
+      &quot;Continuity Save&quot;,
+      &quot;Formal lifecycle/custody/pins unadmitted; local R5 record preserved&quot;
+    ],
+    [
+      &quot;Reopen&quot;,
+      &quot;Local evidence only; cannot bypass real authorization&quot;
+    ]
+  ],
+  &quot;matrix&quot;: [
+    {
+      &quot;name&quot;: &quot;Approved Host&quot;,
+      &quot;status&quot;: &quot;NOT_FULLY_EVIDENCED_OR_AUTHORIZED&quot;,
+      &quot;required&quot;: &quot;Named nonproduction URL/project and Owner authorization; current loopback only&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Explicit Environment Mode&quot;,
+      &quot;status&quot;: &quot;NOT_FULLY_EVIDENCED_OR_AUTHORIZED&quot;,
+      &quot;required&quot;: &quot;Reviewed QA host/mode adapter; do not turn off current synthetic guards&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Test Identity&quot;,
+      &quot;status&quot;: &quot;NOT_FULLY_EVIDENCED_OR_AUTHORIZED&quot;,
+      &quot;required&quot;: &quot;Explicit test account; synthetic data cannot prove real proprietor&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Authorized Subject&quot;,
+      &quot;status&quot;: &quot;NOT_FULLY_EVIDENCED_OR_AUTHORIZED&quot;,
+      &quot;required&quot;: &quot;Reviewed person-to-proprietor proof and scoped existing PWS issuer&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Data Storage&quot;,
+      &quot;status&quot;: &quot;NOT_FULLY_EVIDENCED_OR_AUTHORIZED&quot;,
+      &quot;required&quot;: &quot;Named isolated bindings; data class/purpose and policy admitted&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Encryption / Key Custody&quot;,
+      &quot;status&quot;: &quot;NOT_FULLY_EVIDENCED_OR_AUTHORIZED&quot;,
+      &quot;required&quot;: &quot;Named custodian, secure key provisioning and recovery/backup rules&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Write Permissions&quot;,
+      &quot;status&quot;: &quot;NOT_FULLY_EVIDENCED_OR_AUTHORIZED&quot;,
+      &quot;required&quot;: &quot;Exact nonproduction write allowlist independently authorized&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Retention / Cleanup&quot;,
+      &quot;status&quot;: &quot;NOT_FULLY_EVIDENCED_OR_AUTHORIZED&quot;,
+      &quot;required&quot;: &quot;Signed class schedule, hold/deletion/backup procedure&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Isolation from Production&quot;,
+      &quot;status&quot;: &quot;NOT_FULLY_EVIDENCED_OR_AUTHORIZED&quot;,
+      &quot;required&quot;: &quot;Proven separate bindings/credentials, deny production access&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Rollback&quot;,
+      &quot;status&quot;: &quot;NOT_FULLY_EVIDENCED_OR_AUTHORIZED&quot;,
+      &quot;required&quot;: &quot;Environment rollback + cleanup evidence, unchanged production&quot;
+    },
+    {
+      &quot;name&quot;: &quot;No Real Payment&quot;,
+      &quot;status&quot;: &quot;REQUIRED_ZERO_ACTIVITY_NO_ENABLEMENT&quot;,
+      &quot;required&quot;: &quot;No Stripe calls or real checkout/payment&quot;
+    },
+    {
+      &quot;name&quot;: &quot;No Paid Provider Calls&quot;,
+      &quot;status&quot;: &quot;REQUIRED_ZERO_ACTIVITY_NO_ENABLEMENT&quot;,
+      &quot;required&quot;: &quot;Zero paid calls; deny network by default&quot;
+    }
+  ],
+  &quot;nextExecutableStep&quot;: &quot;Owner assigns proof reviewer/custodian and decides seven exact policy items; collect approved real proof only after separate custody permission. Approve environment and implementation separately. Do not reapprove four local contracts.&quot;
+}
+</pre></details><details><summary>CONTINUITY-SEVEN-DECISION-REVIEW.json</summary><a href="CONTINUITY-SEVEN-DECISION-REVIEW.json">Exact JSON</a><pre>{
+  &quot;policyId&quot;: &quot;CONTINUITY_POLICY_DECISION_R6&quot;,
+  &quot;predecessorPath&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/CONTINUITY-POLICY-CANDIDATE-R6.2.json&quot;,
+  &quot;predecessorSha256&quot;: &quot;afda484d7888c745e8d45fafbbdfe79476525ddc2f0f9597dbadb0294e7ec087&quot;,
+  &quot;revision&quot;: &quot;R6.3-REVIEW-ADDENDUM&quot;,
+  &quot;samePolicyAndHistoryOwner&quot;: true,
+  &quot;humanAccepted&quot;: false,
+  &quot;formalPolicyAdmitted&quot;: false,
+  &quot;decisions&quot;: [
+    {
+      &quot;exactDecisionId&quot;: &quot;EXT-A-CUSTODY&quot;,
+      &quot;currentProposedRule&quot;: &quot;Account custodian + exact Subject purpose/scope&quot;,
+      &quot;existingOwnerSupport&quot;: &quot;PWS relationship refs, Account-owned encrypted context; no enterprise proof vault&quot;,
+      &quot;requiredDataClassification&quot;: &quot;All five classes + identity/authority evidence (separate restricted class)&quot;,
+      &quot;securityPrivacyImpact&quot;: &quot;Minimized opaque references; no raw ID in PWS attributes&quot;,
+      &quot;proposedDefault&quot;: &quot;Keep existing Account custody; no shared access until named custodian accepts responsibility&quot;,
+      &quot;alternative&quot;: &quot;Later reviewed organization custody/delegation&quot;,
+      &quot;legalContractReviewRequirement&quot;: &quot;Privacy/contract review required for real evidence custody&quot;,
+      &quot;requiredOwnerAction&quot;: &quot;Name Business Data custodian, identity reviewer and approved evidence repository&quot;,
+      &quot;testEvidence&quot;: &quot;R6 account/Subject mismatch denial; source inspection shows JSON attributes not encrypted&quot;,
+      &quot;rollback&quot;: &quot;Withdraw candidate; keep existing local snapshot inaccessible to new roles&quot;,
+      &quot;status&quot;: &quot;EXTERNAL_DECISION_REQUIRED&quot;
+    },
+    {
+      &quot;exactDecisionId&quot;: &quot;EXT-A-RETENTION-SCHEDULE&quot;,
+      &quot;currentProposedRule&quot;: &quot;Explicit class-specific end date and basis; no perpetual default&quot;,
+      &quot;existingOwnerSupport&quot;: &quot;R4 local 7/30 days only; reopen checks original expiresAt&quot;,
+      &quot;requiredDataClassification&quot;: &quot;ORIGINAL_FINANCIAL_SOURCE / READING / NAVIGATION / ACTION / AUDIT separately&quot;,
+      &quot;securityPrivacyImpact&quot;: &quot;Excess retention and purpose creep; Audit must not duplicate payload&quot;,
+      &quot;proposedDefault&quot;: &quot;No formal persistence until five signed retention schedules exist&quot;,
+      &quot;alternative&quot;: &quot;Session-only without persistence if separately authorized&quot;,
+      &quot;legalContractReviewRequirement&quot;: &quot;Actual jurisdiction, contracts and applicable obligations need qualified review; no term asserted&quot;,
+      &quot;requiredOwnerAction&quot;: &quot;Provide triggers, end dates, approvers, review date and hold interaction per class&quot;,
+      &quot;testEvidence&quot;: &quot;R6 local retention tests; no production expiry/deletion proof&quot;,
+      &quot;rollback&quot;: &quot;Do not extend old expiry; no migration&quot;,
+      &quot;status&quot;: &quot;EXTERNAL_REVIEW_REQUIRED&quot;
+    },
+    {
+      &quot;exactDecisionId&quot;: &quot;EXT-B-ARCHIVE-ACCESS&quot;,
+      &quot;currentProposedRule&quot;: &quot;Revoke new access; retention basis distinct from private access&quot;,
+      &quot;existingOwnerSupport&quot;: &quot;R6 validates current authority on reopen; R4 fresh authorization before replay&quot;,
+      &quot;requiredDataClassification&quot;: &quot;All private snapshots + restricted audit&quot;,
+      &quot;securityPrivacyImpact&quot;: &quot;Residual access after mandate expiry&quot;,
+      &quot;proposedDefault&quot;: &quot;Deny revoked user; archive access only through separately authorized custodian&quot;,
+      &quot;alternative&quot;: &quot;No archive access until purpose/basis established&quot;,
+      &quot;legalContractReviewRequirement&quot;: &quot;Retention/access basis needs privacy and contract review&quot;,
+      &quot;requiredOwnerAction&quot;: &quot;Name archive role, access purpose, reviewer and basis&quot;,
+      &quot;testEvidence&quot;: &quot;R6 revoked/expired/wrong-account reopen denials&quot;,
+      &quot;rollback&quot;: &quot;Revoke new archive grant; retain lawful records only under approved policy&quot;,
+      &quot;status&quot;: &quot;EXTERNAL_REVIEW_REQUIRED&quot;
+    },
+    {
+      &quot;exactDecisionId&quot;: &quot;EXT-C-DELETION-HOLD-BACKUP&quot;,
+      &quot;currentProposedRule&quot;: &quot;Eligibility, approved hold, scoped executor and verified deletion audit&quot;,
+      &quot;existingOwnerSupport&quot;: &quot;R4 expiry denies reopen; no reviewed deletion executor&quot;,
+      &quot;requiredDataClassification&quot;: &quot;All five classes, encrypted objects/indexes/backups/key references&quot;,
+      &quot;securityPrivacyImpact&quot;: &quot;False erasure or destruction of held evidence&quot;,
+      &quot;proposedDefault&quot;: &quot;No formal save until deletion/hold/backup policy and executor approved&quot;,
+      &quot;alternative&quot;: &quot;Restricted quarantine only if specifically authorized; not indefinite retention&quot;,
+      &quot;legalContractReviewRequirement&quot;: &quot;Legal hold/erasure duties require actual jurisdiction and contract review&quot;,
+      &quot;requiredOwnerAction&quot;: &quot;Approve workflow, backup scope, hold exit/review, failure retry and responsible operator&quot;,
+      &quot;testEvidence&quot;: &quot;No physical erasure test exists; expiry denial is not deletion&quot;,
+      &quot;rollback&quot;: &quot;Pause executor on partial failure; minimal tombstone; never restore deleted private data blindly&quot;,
+      &quot;status&quot;: &quot;EXTERNAL_REVIEW_REQUIRED&quot;
+    },
+    {
+      &quot;exactDecisionId&quot;: &quot;TECH-D-ATOMIC-RESERVATION&quot;,
+      &quot;currentProposedRule&quot;: &quot;Exact request digest replay, conflict denial, durable reservation/CAS&quot;,
+      &quot;existingOwnerSupport&quot;: &quot;R4 request ID/digest/inflight map + object reservation; PWS UNIQUE(object_id,version_number)&quot;,
+      &quot;requiredDataClassification&quot;: &quot;Request/Subject/source/consent/retention/version refs&quot;,
+      &quot;securityPrivacyImpact&quot;: &quot;R2 put and D1 index/version are separate operations; process map not distributed lock&quot;,
+      &quot;proposedDefault&quot;: &quot;Retain current local duplicate/conflict checks; recommend accepting fail-closed rule only&quot;,
+      &quot;alternative&quot;: &quot;Later reviewed existing Owner durable CAS/lease reconciliation&quot;,
+      &quot;legalContractReviewRequirement&quot;: &quot;No legal term decision; approved storage/processing scope still required&quot;,
+      &quot;requiredOwnerAction&quot;: &quot;Approve canonical tuple and later same-Owner cross-process crash/CAS work; not a new store&quot;,
+      &quot;testEvidence&quot;: &quot;Existing R5 duplicate/concurrent PASS; R6 source pins; source proves PENDING denied, not cross-store atomicity&quot;,
+      &quot;rollback&quot;: &quot;Keep prior reader/keys; incomplete records blocked, no blind takeover&quot;,
+      &quot;status&quot;: &quot;RULE_ACCEPTANCE_RECOMMENDED_IMPLEMENTATION_GAP&quot;
+    },
+    {
+      &quot;exactDecisionId&quot;: &quot;TECH-E-RECOVERY-AND-KEYS&quot;,
+      &quot;currentProposedRule&quot;: &quot;Fresh auth, COMPLETE + digest/AAD/version/expiry checks; fail closed on anomalies&quot;,
+      &quot;existingOwnerSupport&quot;: &quot;R4 reopen + native AES-GCM/context digest; R6 separate-process restart evidence&quot;,
+      &quot;requiredDataClassification&quot;: &quot;Encrypted snapshot, checksum, version refs and restricted key metadata&quot;,
+      &quot;securityPrivacyImpact&quot;: &quot;Lost keys, orphan object, interrupted save; do not expose key material&quot;,
+      &quot;proposedDefault&quot;: &quot;Recommend accept existing fail-closed read/restart rule only; no automatic repair&quot;,
+      &quot;alternative&quot;: &quot;Manual audited reconciliation under future named Security/Storage operator&quot;,
+      &quot;legalContractReviewRequirement&quot;: &quot;Key custody/backup responsibility and data access require contractual/security approval&quot;,
+      &quot;requiredOwnerAction&quot;: &quot;Assign key custodian, rotation/loss process and recovery approver; authorize later fault-injection environment&quot;,
+      &quot;testEvidence&quot;: &quot;R6 restart PASS; current native negative checks; no formal key-loss/rotation recovery proof&quot;,
+      &quot;rollback&quot;: &quot;Select prior verified reader; block corrupted record, never guess key or fabricate COMPLETE&quot;,
+      &quot;status&quot;: &quot;PARTIAL_RULE_ACCEPTANCE_RECOMMENDED_KEY_CUSTODY_OPEN&quot;
+    },
+    {
+      &quot;exactDecisionId&quot;: &quot;TECH-F-VERSION-PINS-MIGRATION&quot;,
+      &quot;currentProposedRule&quot;: &quot;Immutable old snapshots/IDs, explicit new schema pins, dry-run/rollback&quot;,
+      &quot;existingOwnerSupport&quot;: &quot;PWS append/checksum; R4 Subject/source pins; R6 formalGrantVersionPinned=false&quot;,
+      &quot;requiredDataClassification&quot;: &quot;Case/source/formula/Reading/output/locale/grant/policy versions&quot;,
+      &quot;securityPrivacyImpact&quot;: &quot;Historical mutation or silently treating changed source as current&quot;,
+      &quot;proposedDefault&quot;: &quot;Recommend accept preserve-old/fail-closed rule; no migration authorized&quot;,
+      &quot;alternative&quot;: &quot;Read-only historical record using exact old reader&quot;,
+      &quot;legalContractReviewRequirement&quot;: &quot;Source rights/retention compatibility reviewed before any transfer&quot;,
+      &quot;requiredOwnerAction&quot;: &quot;Approve exact future pin tuple and from/to compatibility; authorize migration separately&quot;,
+      &quot;testEvidence&quot;: &quot;R6 preserved R5 reopen/source identity; no R6 formal grant/lifecycle pins implemented&quot;,
+      &quot;rollback&quot;: &quot;Use original immutable reader/record; no destructive in-place update&quot;,
+      &quot;status&quot;: &quot;RULE_ACCEPTANCE_RECOMMENDED_PIN_SCHEMA_OPEN&quot;
+    }
+  ]
+}
+</pre></details><details><summary>FIRST-BUSINESS-SUBJECT-POLICY.json</summary><a href="FIRST-BUSINESS-SUBJECT-POLICY.json">Exact JSON</a><pre>{
+  &quot;policyId&quot;: &quot;BUSINESS_SUBJECT_AUTHORIZATION_CONTRACT_R6&quot;,
+  &quot;revision&quot;: &quot;R6.3-SOLE-PROPRIETOR-POLICY-CANDIDATE&quot;,
+  &quot;state&quot;: &quot;REVIEWABLE_NOT_ADMITTED&quot;,
+  &quot;owners&quot;: [
+    &quot;ACCOUNT&quot;,
+    &quot;PWS&quot;,
+    &quot;PROFILE existing reference owner&quot;
+  ],
+  &quot;newIdentityOwner&quot;: false,
+  &quot;productionIssuance&quot;: false,
+  &quot;privateDocumentsRead&quot;: false,
+  &quot;steps&quot;: [
+    {
+      &quot;field&quot;: &quot;Account Identity&quot;,
+      &quot;existingSupport&quot;: &quot;Existing OIDC issuer/sub signature, verified email and current non-revoked session&quot;,
+      &quot;requiredProcedure&quot;: &quot;Authenticated Account is not verified legal identity. Named approved identity proofing process/service must bind real person to Account; no service selected or called.&quot;
+    },
+    {
+      &quot;field&quot;: &quot;Business Identity&quot;,
+      &quot;existingSupport&quot;: &quot;Existing PROFILE Subject reference and PWS object/version&quot;,
+      &quot;requiredProcedure&quot;: &quot;Business name, legal form, jurisdiction, registration reference and current status must be independently reviewed; LGS Wealth Management is a future candidate name only, not verified.&quot;
+    },
+    {
+      &quot;field&quot;: &quot;Sole Proprietor Verification&quot;,
+      &quot;existingSupport&quot;: &quot;R6 SOLE_PROPRIETOR / SOLE_PROPRIETORSHIP / VERIFIED_OPERATOR shape&quot;,
+      &quot;requiredProcedure&quot;: &quot;Approved reviewer must match verified person to current registered proprietor, record match/mismatch and evidence version; self-declaration or email alone fails.&quot;
+    },
+    {
+      &quot;field&quot;: &quot;Authority Evidence&quot;,
+      &quot;existingSupport&quot;: &quot;R6 authorityBasis reference/reviewAccountRef/reviewVersion + auditReference&quot;,
+      &quot;requiredProcedure&quot;: &quot;Private evidence custody, encryption, approved upload/reviewer access, minimization, retention and disposal are not implemented for this proof class. PWS attributes are plain JSON: store opaque refs only, never raw identity documents.&quot;
+    },
+    {
+      &quot;field&quot;: &quot;Purpose Scope&quot;,
+      &quot;existingSupport&quot;: &quot;BUSINESS_OWNER_LIQUIDITY_DIAGNOSTIC&quot;,
+      &quot;requiredProcedure&quot;: &quot;Explicit purpose consent; no all-purpose business mandate.&quot;
+    },
+    {
+      &quot;field&quot;: &quot;Resource Scope&quot;,
+      &quot;existingSupport&quot;: &quot;R6 accountId/subjectId/subjectVersion/caseId/resourceScope + active PWS FINANCIAL_SUMMARY membership&quot;,
+      &quot;requiredProcedure&quot;: &quot;Exact case/source/resource allowlist; no cross-Subject wildcard; downstream financial admission independent.&quot;
+    },
+    {
+      &quot;field&quot;: &quot;Grant Version&quot;,
+      &quot;existingSupport&quot;: &quot;Existing relationship attributes + PWS immutable versions&quot;,
+      &quot;requiredProcedure&quot;: &quot;Approved issuer must bind immutable verification receipt/version, policy version, evidence digest and grant version; no issuer exists here.&quot;
+    },
+    {
+      &quot;field&quot;: &quot;Effective Date&quot;,
+      &quot;existingSupport&quot;: &quot;R6 effectiveAt checked against current time&quot;,
+      &quot;requiredProcedure&quot;: &quot;Issue only after successful independent review, never backdate to imply prior permission.&quot;
+    },
+    {
+      &quot;field&quot;: &quot;Expiry&quot;,
+      &quot;existingSupport&quot;: &quot;R6 expiresAt required and checked&quot;,
+      &quot;requiredProcedure&quot;: &quot;Owner must set explicit review-backed expiry and next review date; no invented fixed duration or infinite default.&quot;
+    },
+    {
+      &quot;field&quot;: &quot;Revocation&quot;,
+      &quot;existingSupport&quot;: &quot;R6 current relationship/status + revokedAt checks&quot;,
+      &quot;requiredProcedure&quot;: &quot;Deny new reads/replays after revocation; independent archival basis never restores revoked access.&quot;
+    },
+    {
+      &quot;field&quot;: &quot;Audit&quot;,
+      &quot;existingSupport&quot;: &quot;Existing PWS audit/reference and version owners&quot;,
+      &quot;requiredProcedure&quot;: &quot;Record actor, reviewer, policy/evidence/grant versions, result/reason and timestamps; minimal refs only; actual reviewer and custodian unassigned.&quot;
+    },
+    {
+      &quot;field&quot;: &quot;Reverification&quot;,
+      &quot;existingSupport&quot;: &quot;Existing expiry/version/revocation primitives&quot;,
+      &quot;requiredProcedure&quot;: &quot;Proposed triggers: expiry, business ownership/status change, identity mismatch, evidence expiry or scope expansion. Suspend affected grant until new review; event feed/issuer/review runbook missing.&quot;
+    }
+  ],
+  &quot;workflow&quot;: [
+    &quot;REQUEST_REFERENCE_ONLY&quot;,
+    &quot;CURRENT_ACCOUNT_CHECK&quot;,
+    &quot;APPROVED_PRIVATE_PROOF_CUSTODY&quot;,
+    &quot;REAL_PERSON_VERIFICATION&quot;,
+    &quot;CURRENT_PROPRIETOR_MATCH&quot;,
+    &quot;INDEPENDENT_REVIEW_RECEIPT&quot;,
+    &quot;SCOPE_EXPIRY_POLICY_CHECK&quot;,
+    &quot;AUTHORIZED_EXISTING_PWS_ISSUER&quot;,
+    &quot;REVERIFY_ON_USE&quot;
+  ],
+  &quot;failClosed&quot;: &quot;Any missing proof/reviewer/custody/issuer blocks issuance; current synthetic runtime must not be bypassed.&quot;,
+  &quot;implementationDelta&quot;: [
+    &quot;Approve actual identity proofing service or manual verification procedure and named reviewer, including discrepancy handling.&quot;,
+    &quot;Approve secure evidence custody/ref owner; existing encrypted context is not automatically an identity document vault.&quot;,
+    &quot;Authorize additive issuer/enforcement in existing Account/PWS only after policy approval; current Runtime stays synthetic-only.&quot;,
+    &quot;Implement reviewed verification-to-grant pins/reverification hooks and targeted tests only under later explicit implementation scope.&quot;
+  ],
+  &quot;localContractReapproval&quot;: false,
+  &quot;admissionReady&quot;: false
+}
+</pre></details><details><summary>FROZEN-ACCEPTANCE-AND-SOURCES.json</summary><a href="FROZEN-ACCEPTANCE-AND-SOURCES.json">Exact JSON</a><pre>{
+  &quot;head&quot;: &quot;3c197c509e01e95cc18651cb2a05bf63a1259dc4&quot;,
+  &quot;branch&quot;: &quot;main&quot;,
+  &quot;at&quot;: &quot;2026-10-30T12:14:50.278Z&quot;,
+  &quot;localAcceptance&quot;: [
+    {
+      &quot;owner&quot;: &quot;Subject&quot;,
+      &quot;proposalId&quot;: &quot;BUSINESS_SUBJECT_AUTHORIZATION_CONTRACT_R6&quot;,
+      &quot;sha256&quot;: &quot;77574634a9671f7204936dbd7a610cdc4f55f27c530173f19b0ae79a485616e9&quot;,
+      &quot;state&quot;: &quot;LOCAL_CONTRACT_ACCEPTED&quot;,
+      &quot;receipt&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/SUBJECT-LOCAL-ACCEPTANCE.json&quot;
+    },
+    {
+      &quot;owner&quot;: &quot;Financial&quot;,
+      &quot;proposalId&quot;: &quot;BUSINESS_FINANCIAL_SOURCE_SUCCESSOR&quot;,
+      &quot;sha256&quot;: &quot;784092d5526efec325852d297bf13eed82052fd6a8396ee1d6153269c9210c95&quot;,
+      &quot;state&quot;: &quot;LOCAL_CONTRACT_ACCEPTED&quot;,
+      &quot;receipt&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/FINANCIAL-LOCAL-ACCEPTANCE.json&quot;
+    },
+    {
+      &quot;owner&quot;: &quot;Reading&quot;,
+      &quot;proposalId&quot;: &quot;READING_SOURCE_ADMISSION_R6&quot;,
+      &quot;sha256&quot;: &quot;43e2e23581b4cf59d3c8069dc46f7fbd33e57a82c1a32c5870126f9eb7619d38&quot;,
+      &quot;state&quot;: &quot;LOCAL_CONTRACT_ACCEPTED&quot;,
+      &quot;receipt&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/READING-LOCAL-ACCEPTANCE.json&quot;
+    },
+    {
+      &quot;owner&quot;: &quot;Navigation&quot;,
+      &quot;proposalId&quot;: &quot;NAVIGATION_FINANCIAL_ADMISSION_R6&quot;,
+      &quot;sha256&quot;: &quot;b4dc4bb54f4b12a594f7fc5b690cc316b798daed09e5b0b134b29c55bbeb78a7&quot;,
+      &quot;state&quot;: &quot;LOCAL_CONTRACT_ACCEPTED&quot;,
+      &quot;receipt&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/NAVIGATION-LOCAL-ACCEPTANCE.json&quot;
+    }
+  ],
+  &quot;protectedFiles&quot;: [
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/BUSINESS-FINANCIAL-SOURCE-SUCCESSOR.json&quot;,
+      &quot;sha256&quot;: &quot;784092d5526efec325852d297bf13eed82052fd6a8396ee1d6153269c9210c95&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/BUSINESS-JOURNEY.json&quot;,
+      &quot;sha256&quot;: &quot;41205c9c6674abc3c4897f506a70697266b63e1d326341fac64f21346e5be854&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/CONTINUITY-POLICY-DECISION.json&quot;,
+      &quot;sha256&quot;: &quot;9814524f8b1d991850cc6a8576316e74e3389628b32481dace5e40f5962e29d8&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/CONTROLLED-CLOUD-QA-GATES.json&quot;,
+      &quot;sha256&quot;: &quot;941f8dfc7eb1108c442956b416f89ecf1f5f8d6217c2cc53ea27d51c3565f7b0&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/FAILURES-AND-REPAIRS.json&quot;,
+      &quot;sha256&quot;: &quot;c9fcb208c0055c8cd21edbbd0cc135c8346e4272891747fedea60ff7491f8aff&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/FINAL-INTEGRITY.json&quot;,
+      &quot;sha256&quot;: &quot;b60460e99e8b407f1a9275acb6850b79f3b6a4acf0441ca6d0ba6c3fc3fca9d8&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/FIVE-OWNER-DECISION-MATRIX.json&quot;,
+      &quot;sha256&quot;: &quot;95ad84cb8c21295d6dc92eb34bcf8076c797ed07544d7dc2a833b4237d2b1ce9&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/HTTP-BROWSER-TESTS.json&quot;,
+      &quot;sha256&quot;: &quot;72415735ab8a3ab8cab3fa31efbf0db2364f2dac1cd1b94c40d49770c957a288&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/INITIAL-LOCAL-COOKIE-FINDING.json&quot;,
+      &quot;sha256&quot;: &quot;03764a682d111eac4f57547b8208e57b9ea506f368786b8ca4f432cc986847d6&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/INITIAL-REPLAY-FIXTURE-FINDING.json&quot;,
+      &quot;sha256&quot;: &quot;8403c953185eacd2d1bd2ef3665dd41e13e640086e0c656f4170fb166cadd44d&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/INITIAL-SANDBOX-NETWORK-FINDING.json&quot;,
+      &quot;sha256&quot;: &quot;3f9877d89d7166ce3cdb1545dce1c1c1c36fb0c366814a6cef66c1d7f53f8809&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/INITIAL-SOURCE-TIMESTAMP-FINDING.json&quot;,
+      &quot;sha256&quot;: &quot;a5274cc644e67587780ba36ecdd4fa7e391dee31e35ae1408c3a0121bde72f84&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/MASTER-APPEND-RECEIPT.json&quot;,
+      &quot;sha256&quot;: &quot;a965d9f3b77f598e41daef8c7eb2987fe565ac9f97251bb15b2ffe885adda16c&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/NAVIGATION-ADMISSION-DECISION.json&quot;,
+      &quot;sha256&quot;: &quot;b4dc4bb54f4b12a594f7fc5b690cc316b798daed09e5b0b134b29c55bbeb78a7&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/PAGES-FUNCTIONS-COMPATIBILITY.json&quot;,
+      &quot;sha256&quot;: &quot;2051a925781e53bbd6555d74fb167bd2fe6c8ed162b85e571dd5dc31e99b987d&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/PAGES-FUNCTIONS-COMPATIBILITY.log&quot;,
+      &quot;sha256&quot;: &quot;4d662af1bf91a11845224793a3a7f6e5ea6b02bceefae6e999a3b9fd2f48c309&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/R6-SOURCE-DEPENDENCY-MANIFEST.json&quot;,
+      &quot;sha256&quot;: &quot;4977e5e00d53d90616d4b5c5c12f88932b6e7c792632796ac96f64a795b6b46b&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/READING-ADMISSION-DECISION.json&quot;,
+      &quot;sha256&quot;: &quot;43e2e23581b4cf59d3c8069dc46f7fbd33e57a82c1a32c5870126f9eb7619d38&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/RESTART.json&quot;,
+      &quot;sha256&quot;: &quot;017dbe667631aae979723a6208a2ccc80f5b575272850435c2a5c11153d46107&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/REUSE-SNAPSHOT.json&quot;,
+      &quot;sha256&quot;: &quot;367a5a1d0489d7a76f63a76d33b2575066a8a0e51534e001b70e2f7cdbad826b&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/SUBJECT-AUTHORIZATION-DECISION.json&quot;,
+      &quot;sha256&quot;: &quot;77574634a9671f7204936dbd7a610cdc4f55f27c530173f19b0ae79a485616e9&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json&quot;,
+      &quot;sha256&quot;: &quot;57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/W0.json&quot;,
+      &quot;sha256&quot;: &quot;0647860fcc9b48e377b18df25ac0ba00b1114c9914ad9592a9fddda770d3b928&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-1/decision-details.html&quot;,
+      &quot;sha256&quot;: &quot;9e13bf0de490a07accea86703c04e55c953c6a716076bc1df0eb06a64ccadc60&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-1/FROZEN-R6-IDENTITY.json&quot;,
+      &quot;sha256&quot;: &quot;fc6d4becfd9d06eaa2ecd08b224b82d88ba839471bcd231d0dcaaed0d2f45258&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-1/INTEGRITY-RECEIPT.json&quot;,
+      &quot;sha256&quot;: &quot;291d281524ce1ca3fdcf20fa328c8ee7fde39ab53cbad159c6db1ec1c40a2bd2&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-1/OWNER-DECISION-RECORDS.json&quot;,
+      &quot;sha256&quot;: &quot;7f13f51d025e137baf5f56416ba3e6b8bb1b82cfc3e55fa11b8131d1a5db591c&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-1/OWNER-RESPONSE-TEMPLATE.json&quot;,
+      &quot;sha256&quot;: &quot;ec5bec713914372b5a2e7ee8ce7718d0dca10a6d7120cb438b26be10f1ed2aeb&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-1/REVIEW-VERIFICATION.json&quot;,
+      &quot;sha256&quot;: &quot;4d832cf0e495603b393202fc722ee6b88940f8fcff127fdb1ce120b747156cd5&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/CONTINUITY-POLICY-CANDIDATE-R6.2.json&quot;,
+      &quot;sha256&quot;: &quot;afda484d7888c745e8d45fafbbdfe79476525ddc2f0f9597dbadb0294e7ec087&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/continuity-policy-details.html&quot;,
+      &quot;sha256&quot;: &quot;ccb9f6cd4a29e3dd24504f9730f9d47378f14a5a2dbffaaf9050ccb42038394d&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/CONTINUITY-REVISION-DECISION.json&quot;,
+      &quot;sha256&quot;: &quot;cb09a2bb7d74d39efd72dbd2155ed370cafd6d8e533d5264c0151f789d07ca99&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/CURRENT-INTEGRATION-STATE.json&quot;,
+      &quot;sha256&quot;: &quot;ed8adcbd9a17835eae1e47d44cf18c95cd04f850adcf944a8353bbb354d73f9e&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/FINANCIAL-LOCAL-ACCEPTANCE.json&quot;,
+      &quot;sha256&quot;: &quot;d87c68aab024cce4c62cd90824a6642682f03e0a32d5ed5e37ca3f8783303430&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/NAVIGATION-LOCAL-ACCEPTANCE.json&quot;,
+      &quot;sha256&quot;: &quot;98ea6024bf8448ee492aa8338a672cb15ceaf49a1f4acb4aa9299ea7d11d26ab&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/OWNER-INSTRUCTION-REFERENCE.json&quot;,
+      &quot;sha256&quot;: &quot;2ea97622e998e6877ad5c4c54eea195ea391170c1e29071acc41957748c9efbe&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/READING-LOCAL-ACCEPTANCE.json&quot;,
+      &quot;sha256&quot;: &quot;28c41fe80b694e989a8d9c55e430db42a79b14b1513456501302af1931d053da&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/REGISTRATION-INTEGRITY.json&quot;,
+      &quot;sha256&quot;: &quot;fafcb5f5e05481f116965623a08bd6a0390308a56ccc52a45774351f6e041d6a&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/SHA-VERIFICATION.json&quot;,
+      &quot;sha256&quot;: &quot;10fc092486c7ce15726c3764ccdd73cfc6e9514206d7d75d9a2888fd68935e2c&quot;
+    },
+    {
+      &quot;path&quot;: &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/SUBJECT-LOCAL-ACCEPTANCE.json&quot;,
+      &quot;sha256&quot;: &quot;4d3fea14bf4c16f1f97c2dfe79401c5b13384bbbe928aafdaff62a9607f1a16d&quot;
+    }
+  ],
+  &quot;sources&quot;: [
+    {
+      &quot;path&quot;: &quot;functions/account/oidc-auth.js&quot;,
+      &quot;sha256&quot;: &quot;f465f1f01fe86ccac89691dba4d966a69f240d82a7773b4860e5f72b29fe310b&quot;
+    },
+    {
+      &quot;path&quot;: &quot;functions/profile/business-subject-authorization-candidate-r6.js&quot;,
+      &quot;sha256&quot;: &quot;c208bb6bba7565f5f54e4cd86570b955c5644bb198a922d0a9175956303f37b6&quot;
+    },
+    {
+      &quot;path&quot;: &quot;functions/profile/subject-bft-authority-candidate-r3.js&quot;,
+      &quot;sha256&quot;: &quot;3e97a49b8090e4c12254d8b55abdc574e11879b941af336a86cf6bd519b03ae3&quot;
+    },
+    {
+      &quot;path&quot;: &quot;functions/pws/registry/relationship-store.js&quot;,
+      &quot;sha256&quot;: &quot;5118035eb65ff1d52edb6687d2992b45c1a997182766f8b67c4655edcc7cb10e&quot;
+    },
+    {
+      &quot;path&quot;: &quot;functions/pws/registry/version-store.js&quot;,
+      &quot;sha256&quot;: &quot;b1becccfe069462b9650a52de41a586b285c7773a30706df0772ce04283cab62&quot;
+    },
+    {
+      &quot;path&quot;: &quot;functions/report-context/report-context-store.js&quot;,
+      &quot;sha256&quot;: &quot;ba40892a19a3260ff879e62d4d4d2269cfac1920e7cc435849455537ab8bd053&quot;
+    },
+    {
+      &quot;path&quot;: &quot;functions/professional/financial/business-source-closure-candidate-r4.js&quot;,
+      &quot;sha256&quot;: &quot;893e6ac1d7efc3fbce86d6d9e43618208694693490d5a76e751c303ce0989599&quot;
+    },
+    {
+      &quot;path&quot;: &quot;db/migrations/0005_pws_universal_registry.sql&quot;,
+      &quot;sha256&quot;: &quot;2116170067cadf284285a98aebf43ddad0e19955cc0b9ddab1368fec52723edb&quot;
+    }
+  ],
+  &quot;r6ManifestRowsVerified&quot;: 455,
+  &quot;scopeShaVerified&quot;: true,
+  &quot;localReapprovalRequired&quot;: false
+}
+</pre></details><details><summary>TARGETED-VALIDATION.json</summary><a href="TARGETED-VALIDATION.json">Exact JSON</a><pre>{
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;at&quot;: &quot;2026-10-30T12:14:56.080Z&quot;,
+  &quot;node&quot;: &quot;v24.18.0&quot;,
+  &quot;scope&quot;: &quot;PURE_EXISTING_CONTRACT_FUNCTIONS_AND_ARTIFACT_INTEGRITY_ONLY&quot;,
+  &quot;tests&quot;: [
+    {
+      &quot;name&quot;: &quot;Contract shape never claims actual mandate or issuance&quot;,
+      &quot;status&quot;: &quot;PASS&quot;
+    },
+    {
+      &quot;name&quot;: &quot;revoked fails closed&quot;,
+      &quot;status&quot;: &quot;PASS&quot;
+    },
+    {
+      &quot;name&quot;: &quot;expired fails closed&quot;,
+      &quot;status&quot;: &quot;PASS&quot;
+    },
+    {
+      &quot;name&quot;: &quot;future fails closed&quot;,
+      &quot;status&quot;: &quot;PASS&quot;
+    },
+    {
+      &quot;name&quot;: &quot;wrongAccount fails closed&quot;,
+      &quot;status&quot;: &quot;PASS&quot;
+    },
+    {
+      &quot;name&quot;: &quot;wrongSubject fails closed&quot;,
+      &quot;status&quot;: &quot;PASS&quot;
+    },
+    {
+      &quot;name&quot;: &quot;wrongVersion fails closed&quot;,
+      &quot;status&quot;: &quot;PASS&quot;
+    },
+    {
+      &quot;name&quot;: &quot;missingEvidence fails closed&quot;,
+      &quot;status&quot;: &quot;PASS&quot;
+    },
+    {
+      &quot;name&quot;: &quot;scopeExpansion fails closed&quot;,
+      &quot;status&quot;: &quot;PASS&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Production host/mode guard remains closed&quot;,
+      &quot;status&quot;: &quot;PASS&quot;
+    }
+  ],
+  &quot;previousEvidenceReused&quot;: [
+    &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json&quot;,
+    &quot;content/production-closure/live-customer-commercial-convergence/subject-bft-r6/RESTART.json&quot;
+  ],
+  &quot;newJourneyCreated&quot;: false,
+  &quot;newConcurrencyOrCrashTest&quot;: false,
+  &quot;realIdentityVerified&quot;: false,
+  &quot;storageWrites&quot;: 0,
+  &quot;providerCalls&quot;: 0,
+  &quot;fullNpmCheck&quot;: false
+}
+</pre></details>

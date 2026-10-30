@@ -1,0 +1,90 @@
+{
+  "ready": false,
+  "environmentAuthorization": {
+    "granted": false,
+    "scope": null
+  },
+  "testAuthorization": {
+    "granted": false,
+    "scope": null
+  },
+  "statusesAreNotAuthorization": true,
+  "conditions": [
+    {
+      "name": "Approved Host",
+      "status": "OWNER_APPROVAL_REQUIRED",
+      "evidence": "No independently approved staging URL/project",
+      "stagingEnvironmentVerified": false
+    },
+    {
+      "name": "Explicit Environment Mode",
+      "status": "CONFIGURATION_REQUIRED",
+      "evidence": "Current adapter loopback/synthetic-only; no staging mode admitted",
+      "stagingEnvironmentVerified": false
+    },
+    {
+      "name": "Test Identity",
+      "status": "EXTERNAL_REVIEW_REQUIRED",
+      "evidence": "Real-person identity process and test identity absent",
+      "stagingEnvironmentVerified": false
+    },
+    {
+      "name": "Authorized Subject",
+      "status": "BLOCKED",
+      "evidence": "Proprietor match/reviewer/issuer missing",
+      "stagingEnvironmentVerified": false
+    },
+    {
+      "name": "Data Storage",
+      "status": "OWNER_APPROVAL_REQUIRED",
+      "evidence": "Exact isolated binding/data scope/write authorization absent",
+      "stagingEnvironmentVerified": false
+    },
+    {
+      "name": "Encryption / Key Custody",
+      "status": "EXTERNAL_REVIEW_REQUIRED",
+      "evidence": "Primitive tested; named custodian/backup/recovery policy absent",
+      "stagingEnvironmentVerified": false
+    },
+    {
+      "name": "Write Permissions",
+      "status": "OWNER_APPROVAL_REQUIRED",
+      "evidence": "No staging writes authorized",
+      "stagingEnvironmentVerified": false
+    },
+    {
+      "name": "Retention / Cleanup",
+      "status": "EXTERNAL_REVIEW_REQUIRED",
+      "evidence": "No approved class schedules/deletion/backup/hold obligations",
+      "stagingEnvironmentVerified": false
+    },
+    {
+      "name": "Isolation from Production",
+      "status": "CONFIGURATION_REQUIRED",
+      "evidence": "No environment configuration inspected/proven separate",
+      "stagingEnvironmentVerified": false
+    },
+    {
+      "name": "Rollback",
+      "status": "CONFIGURATION_REQUIRED",
+      "evidence": "No staging rollback/cleanup run completed",
+      "stagingEnvironmentVerified": false
+    },
+    {
+      "name": "No Real Payment",
+      "status": "VERIFIED",
+      "evidence": "This run: no payment/Stripe activity; future staging payment guard must be separately verified",
+      "stagingEnvironmentVerified": false
+    },
+    {
+      "name": "No Paid Provider Calls",
+      "status": "VERIFIED",
+      "evidence": "This run: zero paid calls; future staging network guard must be separately verified",
+      "stagingEnvironmentVerified": false
+    }
+  ],
+  "satisfiedStagingEnvironmentConditions": 0,
+  "verifiedExecutionRestrictionsOnly": 2,
+  "firstJourneyStop": "SUBJECT_PRODUCTION_OWNER_POLICY",
+  "stopChanged": false
+}

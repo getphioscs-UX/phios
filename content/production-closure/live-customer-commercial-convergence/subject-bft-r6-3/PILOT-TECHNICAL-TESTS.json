@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "at": "2026-10-30T13:14:17.201Z",
+  "node": "v22.16.0",
+  "results": [
+    {
+      "name": "Two OS processes racing native PWS append on actual migration schema",
+      "status": "PASS",
+      "outcomes": [
+        "REJECTED:UNIQUE constraint failed: pws_registry_versions.object_id, pws_registry_versions.version_number",
+        "INSERTED"
+      ],
+      "limit": "SQLite local unique version rejection only; no D1/R2 transaction or automatic retry proven"
+    },
+    {
+      "name": "Native AES-GCM synthetic roundtrip",
+      "status": "PASS"
+    },
+    {
+      "name": "missing-key",
+      "status": "PASS",
+      "meaning": "Denied, not key-loss recovery"
+    },
+    {
+      "name": "wrong-key",
+      "status": "PASS",
+      "meaning": "Denied, not key-loss recovery"
+    },
+    {
+      "name": "Missing encrypted object denied",
+      "status": "PASS"
+    },
+    {
+      "name": "Digest mismatch denied",
+      "status": "PASS"
+    }
+  ],
+  "scope": "ISOLATED_SYNTHETIC_LOCAL_SQLITE_AND_MEMORY_OBJECTS",
+  "privateData": false,
+  "productionWrites": 0,
+  "paidCalls": 0,
+  "keyRecoveryProven": false,
+  "crossStoreAtomicityProven": false,
+  "formalMigrationProven": false,
+  "tmp": "C:\\phios\\.tmp\\subject-bft-pilot-7fOiRQ"
+}

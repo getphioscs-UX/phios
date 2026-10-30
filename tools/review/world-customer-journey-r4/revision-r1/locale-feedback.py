@@ -1,0 +1,3 @@
+from pathlib import Path
+import json,hashlib
+r=Path(r'C:/Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios');p=r/'assets/js/pages/civilization-atlas/world-journey-shell-r3.js';s=p.read_text(encoding='utf-8');s=s.replace("document.title=pair('World — PHI OS','世界 — PHI OS');", "for(const p of panels)if(p.dataset.worldWorkspaceState)feedbackState(p.dataset.worldUxPanel,p.dataset.worldWorkspaceState);document.title=pair('World — PHI OS','世界 — PHI OS');");p.write_bytes(s.encode());v=r/'content/civilization-atlas/maintenance/book-v-world-journey-keyboard-successor-v21.json';d=json.loads(v.read_text());d['successorSha256']=hashlib.sha256(p.read_bytes()).hexdigest();v.write_bytes((json.dumps(d,indent=2)+'\n').encode())

@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('C:/phios/tools/review/world-customer-journey-r4/revision-r1/review.py');s=p.read_text(encoding='utf-8');extra="links += [('旧 Atlas 深链',base+'/world/?atlas=cases&intent=structure&locale=zh-Hans'),('旧阅读深链',base+'/world/?reading=BOOK-6%3Abook6-internet-supply-chains-global-cities&locale=zh-Hans')];";assert extra in s;s=s.replace(extra,'',1);s=s.replace(";s='<!-- WORLD_R4_REVISION_R1_START",';'+extra+"s='<!-- WORLD_R4_REVISION_R1_START",1);p.write_text(s,encoding='utf-8')

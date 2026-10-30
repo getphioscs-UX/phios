@@ -1,0 +1,74 @@
+{
+  "candidate": "LGS Wealth Management — Sole Proprietorship — UNVERIFIED_CANDIDATE",
+  "realExecutionReady": false,
+  "customerEntry": "CLOSED",
+  "roles": {
+    "accountVerifier": "Existing OIDC verifies login/email only; real-person verification process/provider not configured",
+    "businessReviewer": {
+      "assignedPerson": null,
+      "requiredAuthority": "Owner-designated reviewer with approved person-to-proprietor procedure and privacy/conflict responsibility; self-approval not assumed"
+    },
+    "evidenceCustodian": {
+      "assignedPerson": null,
+      "requiredAuthority": "Approved private evidence custody and narrowly scoped reviewer access"
+    },
+    "pwsIssuer": {
+      "assignedPerson": null,
+      "service": null,
+      "currentAuthority": "Existing registry write API is storage capability, not authority to issue a verified real Business grant"
+    }
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "Use existing Account OIDC login; bind an approved real-person verification outcome to issuer/sub-derived Account ID",
+      "status": "CONFIGURATION_REQUIRED"
+    },
+    {
+      "step": 2,
+      "action": "Proprietor securely provides applicable current SSM Business Profile and registration identifier/status/jurisdiction. Do not email/upload into Git, fixture or public Master.",
+      "status": "BLOCKED",
+      "reason": "Approved private intake/vault and named custodian absent"
+    },
+    {
+      "step": 3,
+      "action": "Approved reviewer checks verified natural person against registered proprietor, evidence currency/authenticity and discrepancies; record review outcome, not raw ID",
+      "status": "EXTERNAL_REVIEW_REQUIRED"
+    },
+    {
+      "step": 4,
+      "action": "Owner designates named reviewer and records authority/responsibility; do not infer authority from developer/admin role",
+      "status": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "step": 5,
+      "action": "Existing PWS stores only opaque evidence/verification references, digests, status, version, reviewer, review time, purpose and expiry; raw private documents excluded",
+      "status": "CONFIGURATION_REQUIRED",
+      "gap": "Secure reference custodian and accepted evidence schema/retention not configured; PWS attributes plain JSON"
+    },
+    {
+      "step": 6,
+      "action": "Authorized existing Account/PWS issuer checks verification receipt, Subject/resource/purpose, effective/expiry, grant version and current revocation before issue",
+      "status": "BLOCKED",
+      "reason": "No admitted real-Business issuer or production provisioning path; current R3/R6 explicitly synthetic-only"
+    },
+    {
+      "step": 7,
+      "action": "In separately authorized isolated environment test revoke/expiry/reverify/version/scope denial using actual verified test Subject; never synthetic proof of legal identity",
+      "status": "BLOCKED",
+      "existingEvidence": "R6 pure/isolated denials remain valid, no live grant proven"
+    }
+  ],
+  "proprietorSuppliedSecurely": [
+    "Current applicable SSM Business Profile showing entity/legal form/registration status and proprietor relation",
+    "Real-person proof required by the separately approved verification process; exact fields/copy need not be collected until minimization reviewed",
+    "Explicit purpose/resource scope consent and intended custodian; evidence authority/currency and any discrepancy explanation"
+  ],
+  "privateDocumentRead": false,
+  "noLegalRetentionTermInvented": true,
+  "nextOwnerActions": [
+    "Name reviewer and evidence custodian with approved secure channel; no document collection until then",
+    "Approve actual identity/proprietor verification procedure and discrepancy/reverification handling",
+    "Assign and authorize same-Owner PWS issuer only after proof/policy/security readiness; no new Identity owner"
+  ]
+}

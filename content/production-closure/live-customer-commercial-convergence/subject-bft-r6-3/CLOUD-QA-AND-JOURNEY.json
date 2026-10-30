@@ -1,0 +1,134 @@
+{
+  "ready": false,
+  "authorized": false,
+  "firstFormalStop": "SUBJECT_PRODUCTION_OWNER_POLICY",
+  "changed": false,
+  "currentCustomerEntry": "CLOSED",
+  "localContracts": [
+    {
+      "owner": "Subject",
+      "proposalId": "BUSINESS_SUBJECT_AUTHORIZATION_CONTRACT_R6",
+      "sha256": "77574634a9671f7204936dbd7a610cdc4f55f27c530173f19b0ae79a485616e9",
+      "state": "LOCAL_CONTRACT_ACCEPTED",
+      "receipt": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/SUBJECT-LOCAL-ACCEPTANCE.json"
+    },
+    {
+      "owner": "Financial",
+      "proposalId": "BUSINESS_FINANCIAL_SOURCE_SUCCESSOR",
+      "sha256": "784092d5526efec325852d297bf13eed82052fd6a8396ee1d6153269c9210c95",
+      "state": "LOCAL_CONTRACT_ACCEPTED",
+      "receipt": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/FINANCIAL-LOCAL-ACCEPTANCE.json"
+    },
+    {
+      "owner": "Reading",
+      "proposalId": "READING_SOURCE_ADMISSION_R6",
+      "sha256": "43e2e23581b4cf59d3c8069dc46f7fbd33e57a82c1a32c5870126f9eb7619d38",
+      "state": "LOCAL_CONTRACT_ACCEPTED",
+      "receipt": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/READING-LOCAL-ACCEPTANCE.json"
+    },
+    {
+      "owner": "Navigation",
+      "proposalId": "NAVIGATION_FINANCIAL_ADMISSION_R6",
+      "sha256": "b4dc4bb54f4b12a594f7fc5b690cc316b798daed09e5b0b134b29c55bbeb78a7",
+      "state": "LOCAL_CONTRACT_ACCEPTED",
+      "receipt": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6-2/NAVIGATION-LOCAL-ACCEPTANCE.json"
+    }
+  ],
+  "journey": [
+    [
+      "Verified Account",
+      "OIDC capability exists; real test Account/proof not supplied"
+    ],
+    [
+      "Authorized Sole Proprietor Subject",
+      "STOP: real proprietor match, evidence custody, reviewer and issuer unapproved"
+    ],
+    [
+      "Business Financial Source",
+      "Exact source permission/period/currency/formula/independent review admission remains open"
+    ],
+    [
+      "Financial Review",
+      "No Personal/Household consumer cutover"
+    ],
+    [
+      "Reading / Navigation",
+      "Only accepted synthetic mapping/comparison; interpretation/publication/action separate"
+    ],
+    [
+      "User Decision",
+      "Options are not decision/approval/execution/outcome"
+    ],
+    [
+      "Continuity Save",
+      "Formal lifecycle/custody/pins unadmitted; local R5 record preserved"
+    ],
+    [
+      "Reopen",
+      "Local evidence only; cannot bypass real authorization"
+    ]
+  ],
+  "matrix": [
+    {
+      "name": "Approved Host",
+      "status": "NOT_FULLY_EVIDENCED_OR_AUTHORIZED",
+      "required": "Named nonproduction URL/project and Owner authorization; current loopback only"
+    },
+    {
+      "name": "Explicit Environment Mode",
+      "status": "NOT_FULLY_EVIDENCED_OR_AUTHORIZED",
+      "required": "Reviewed QA host/mode adapter; do not turn off current synthetic guards"
+    },
+    {
+      "name": "Test Identity",
+      "status": "NOT_FULLY_EVIDENCED_OR_AUTHORIZED",
+      "required": "Explicit test account; synthetic data cannot prove real proprietor"
+    },
+    {
+      "name": "Authorized Subject",
+      "status": "NOT_FULLY_EVIDENCED_OR_AUTHORIZED",
+      "required": "Reviewed person-to-proprietor proof and scoped existing PWS issuer"
+    },
+    {
+      "name": "Data Storage",
+      "status": "NOT_FULLY_EVIDENCED_OR_AUTHORIZED",
+      "required": "Named isolated bindings; data class/purpose and policy admitted"
+    },
+    {
+      "name": "Encryption / Key Custody",
+      "status": "NOT_FULLY_EVIDENCED_OR_AUTHORIZED",
+      "required": "Named custodian, secure key provisioning and recovery/backup rules"
+    },
+    {
+      "name": "Write Permissions",
+      "status": "NOT_FULLY_EVIDENCED_OR_AUTHORIZED",
+      "required": "Exact nonproduction write allowlist independently authorized"
+    },
+    {
+      "name": "Retention / Cleanup",
+      "status": "NOT_FULLY_EVIDENCED_OR_AUTHORIZED",
+      "required": "Signed class schedule, hold/deletion/backup procedure"
+    },
+    {
+      "name": "Isolation from Production",
+      "status": "NOT_FULLY_EVIDENCED_OR_AUTHORIZED",
+      "required": "Proven separate bindings/credentials, deny production access"
+    },
+    {
+      "name": "Rollback",
+      "status": "NOT_FULLY_EVIDENCED_OR_AUTHORIZED",
+      "required": "Environment rollback + cleanup evidence, unchanged production"
+    },
+    {
+      "name": "No Real Payment",
+      "status": "REQUIRED_ZERO_ACTIVITY_NO_ENABLEMENT",
+      "required": "No Stripe calls or real checkout/payment"
+    },
+    {
+      "name": "No Paid Provider Calls",
+      "status": "REQUIRED_ZERO_ACTIVITY_NO_ENABLEMENT",
+      "required": "Zero paid calls; deny network by default"
+    }
+  ],
+  "nextExecutableStep": "Owner assigns proof reviewer/custodian and decides seven exact policy items; collect approved real proof only after separate custody permission. Approve environment and implementation separately. Do not reapprove four local contracts."
+}

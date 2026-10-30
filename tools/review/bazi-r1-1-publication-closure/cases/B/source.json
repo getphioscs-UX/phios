@@ -1,0 +1,1654 @@
+{
+  "input": {
+    "birthDate": "1984-02-15",
+    "birthTime": "12:00:00",
+    "birthPlace": {
+      "displayName": "Taipei",
+      "countryCode": "TW",
+      "latitude": 25.033,
+      "longitude": 121.5654
+    },
+    "timezone": {
+      "iana": "Asia/Taipei",
+      "utcOffsetAtBirth": "+08:00",
+      "source": "HUMAN_DECLARATION",
+      "confidence": "UNKNOWN"
+    },
+    "timeAccuracy": "EXACT",
+    "locale": "en",
+    "consent": {
+      "recordId": "7647d5b9-59d5-45c7-b5ff-8985703f0842",
+      "granted": true,
+      "purposeCode": "PERSONAL_RUNTIME_METHOD_PROJECTION",
+      "persistence": "EXPLICIT"
+    },
+    "inputVersion": "MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0"
+  },
+  "execution": {
+    "execution": {
+      "schemaVersion": "PHI-OS-MCD-METHOD-EXECUTION-RESULT-v1.0.0",
+      "requestId": "SYNTHETIC-R1.1-B",
+      "methodCode": "BAZI",
+      "pluginCode": "BZR",
+      "methodVersion": "0.1.0",
+      "capability": "CALCULATION",
+      "executionStatus": "EXECUTED_BOUND_SCOPE",
+      "mpaEvaluation": {
+        "authorityOwner": "MPA",
+        "authoritySource": "MPA_MCD_1_PRODUCTION_AUTHORITY_SUCCESSOR",
+        "methodCode": "BAZI",
+        "pluginCode": "BZR",
+        "methodVersion": "0.1.0",
+        "capability": "CALCULATION",
+        "state": "PRODUCTION_AUTHORITY_GRANTED_FOR_BOUND_SCOPE",
+        "decision": "ELIGIBLE",
+        "productionEligible": true,
+        "dispatchAllowed": true,
+        "blockingReasons": []
+      },
+      "inputEvaluation": {
+        "state": "READY",
+        "canonicalInputValid": true,
+        "missingFields": [],
+        "reasonCodes": []
+      },
+      "partialExecution": {
+        "performed": true,
+        "coreExecutionPerformed": true,
+        "coreHistoricalExecutionMode": "validation",
+        "executedStages": [
+          "BZR_SOLAR_CALENDAR",
+          "BZR_FOUR_PILLARS",
+          "BZR_LUCK_CYCLE"
+        ],
+        "deferredStages": [],
+        "coreResults": [
+          {
+            "schemaVersion": "PHI-OS-SHARED-CALCULATION-RESULT-v1.0.0",
+            "calculationId": "SYNTHETIC-R1.1-B-BZR-W1",
+            "runtimeCode": "SHARED_CALCULATION_RUNTIME",
+            "runtimeVersion": "1.0.0",
+            "methodCode": "BAZI",
+            "pluginCode": "BZR",
+            "algorithmCode": "BZR_SOLAR_CALENDAR_CONTEXT",
+            "algorithmVersion": "1.0.0",
+            "inputRecordIds": [
+              "SDA-SYNTHETIC-R1.1-B-BZR-BIRTH",
+              "SDA-SYNTHETIC-R1.1-B-BZR-COORD"
+            ],
+            "inputDigest": "58b5d29aa9618675f93656eab056c5ad4e8ff27193d105464e81be486ce18632",
+            "referenceVersions": {
+              "executionMode": "validation",
+              "policyCode": "PHI_OS_BAZI_POLICY_V1",
+              "policyVersion": "PHI_OS_BAZI_POLICY_V1",
+              "tzdbVersion": "2026c",
+              "dstDisambiguationPolicyCode": "EXPLICIT_FAIL_CLOSED_V1",
+              "equationOfTimePolicyCode": "APPARENT_SOLAR_TIME_V1",
+              "timeScale": "TT",
+              "referenceFrame": "ECLIPTIC_OF_DATE",
+              "mcdProductionAuthority": "MPA",
+              "productionAdapterBinding": "MCD_BZR_PRODUCTION_SUCCESSOR_V1"
+            },
+            "deterministic": true,
+            "aiUsed": false,
+            "providerUsed": false,
+            "output": {
+              "schemaVersion": "PHI-OS-BZR-SOLAR-CALENDAR-RESULT-v1.0.0",
+              "runtimeCode": "BZR_SOLAR_CALENDAR_RUNTIME",
+              "runtimeVersion": "1.0.0",
+              "methodCode": "BAZI",
+              "pluginCode": "BZR",
+              "calculationType": "SOLAR_CALENDAR_CONTEXT",
+              "executionMode": "validation",
+              "recordedCivilTime": {
+                "localDate": "1984-02-15",
+                "localTime": "12:00:00",
+                "timezoneId": "Asia/Taipei"
+              },
+              "utcIso": "1984-02-15T04:00:00.000Z",
+              "timezone": {
+                "timezoneId": "Asia/Taipei",
+                "utcOffsetMinutes": 480,
+                "dstApplied": false,
+                "dstTransitionStatus": "explicit_canonical_offset_no_host_tz_inference"
+              },
+              "coordinate": {
+                "latitude": 25.033,
+                "longitude": 121.5654,
+                "elevationMeters": 0,
+                "datum": "WGS84"
+              },
+              "trueSolarTime": {
+                "trueSolarIso": "1984-02-15T11:52:00.755047+08:00",
+                "longitudeCorrectionMinutes": 6.2616,
+                "equationOfTimeMinutes": -14.249015887,
+                "totalCorrectionMinutes": -7.987415887
+              },
+              "solarCalendar": {
+                "liChunUtcIso": "1984-02-04T15:18:42.826Z",
+                "jieBoundaries": [
+                  {
+                    "jieCode": "LI_CHUN",
+                    "utcIso": "1984-02-04T15:18:42.826Z",
+                    "solarLongitudeDegrees": 315
+                  },
+                  {
+                    "jieCode": "JING_ZHE",
+                    "utcIso": "1984-03-05T09:24:20.188Z",
+                    "solarLongitudeDegrees": 345
+                  },
+                  {
+                    "jieCode": "QING_MING",
+                    "utcIso": "1984-04-04T14:21:49.917Z",
+                    "solarLongitudeDegrees": 15
+                  },
+                  {
+                    "jieCode": "LI_XIA",
+                    "utcIso": "1984-05-05T07:50:31.488Z",
+                    "solarLongitudeDegrees": 45
+                  },
+                  {
+                    "jieCode": "MANG_ZHONG",
+                    "utcIso": "1984-06-05T12:08:29.111Z",
+                    "solarLongitudeDegrees": 75
+                  },
+                  {
+                    "jieCode": "XIAO_SHU",
+                    "utcIso": "1984-07-06T22:29:11.557Z",
+                    "solarLongitudeDegrees": 105
+                  },
+                  {
+                    "jieCode": "LI_QIU",
+                    "utcIso": "1984-08-07T08:18:01.844Z",
+                    "solarLongitudeDegrees": 135
+                  },
+                  {
+                    "jieCode": "BAI_LU",
+                    "utcIso": "1984-09-07T11:09:53.422Z",
+                    "solarLongitudeDegrees": 165
+                  },
+                  {
+                    "jieCode": "HAN_LU",
+                    "utcIso": "1984-10-08T02:42:34.277Z",
+                    "solarLongitudeDegrees": 195
+                  },
+                  {
+                    "jieCode": "LI_DONG",
+                    "utcIso": "1984-11-07T05:45:31.285Z",
+                    "solarLongitudeDegrees": 225
+                  },
+                  {
+                    "jieCode": "DA_XUE",
+                    "utcIso": "1984-12-06T22:28:07.749Z",
+                    "solarLongitudeDegrees": 255
+                  },
+                  {
+                    "jieCode": "XIAO_HAN",
+                    "utcIso": "1984-01-06T03:41:04.667Z",
+                    "solarLongitudeDegrees": 285
+                  }
+                ],
+                "yearBoundaryPolicy": "exact_li_chun_instant",
+                "monthBoundaryPolicy": "exact_twelve_jie_instants",
+                "dayBoundaryTimeBasis": "true_solar_time",
+                "dayBoundaryLocalTime": "00:00"
+              },
+              "lineage": {
+                "tzdbAuthorityCode": "IANA_TZDB",
+                "tzdbAuthorityVersion": "2026c",
+                "timezoneAdapterCode": "MCD_BZR_EXPLICIT_TZDB_OFFSET_ADAPTER",
+                "timezoneAdapterVersion": "1.0.0",
+                "trueSolarAlgorithmCode": "PHI_OS_TRUE_SOLAR_TIME",
+                "trueSolarAlgorithmVersion": "1.0.0",
+                "trueSolarAdapterCode": "MCD_BZR_TRUE_SOLAR_TIME_ADAPTER",
+                "trueSolarAdapterVersion": "1.0.0",
+                "solarTermEngineCode": "ASTRONOMY_ENGINE_JS",
+                "solarTermEngineVersion": "2.1.19",
+                "solarTermLicenseCode": "MIT",
+                "solarTermAdapterCode": "MCD_BZR_SOLAR_TERM_PRODUCTION_ADAPTER",
+                "solarTermAdapterVersion": "1.0.0",
+                "policyCode": "PHI_OS_BAZI_POLICY_V1",
+                "policyVersion": "PHI_OS_BAZI_POLICY_V1",
+                "referenceVersions": {
+                  "executionMode": "validation",
+                  "policyCode": "PHI_OS_BAZI_POLICY_V1",
+                  "policyVersion": "PHI_OS_BAZI_POLICY_V1",
+                  "tzdbVersion": "2026c",
+                  "dstDisambiguationPolicyCode": "EXPLICIT_FAIL_CLOSED_V1",
+                  "equationOfTimePolicyCode": "APPARENT_SOLAR_TIME_V1",
+                  "timeScale": "TT",
+                  "referenceFrame": "ECLIPTIC_OF_DATE",
+                  "mcdProductionAuthority": "MPA",
+                  "productionAdapterBinding": "MCD_BZR_PRODUCTION_SUCCESSOR_V1"
+                }
+              },
+              "deterministic": true,
+              "providerUsed": false,
+              "aiUsed": false,
+              "stemCreated": false,
+              "branchCreated": false,
+              "pillarCreated": false,
+              "luckCycleCreated": false,
+              "projectionCreated": false,
+              "interpretationCreated": false,
+              "professionalConclusionCreated": false,
+              "productionEligible": false
+            },
+            "outputDigest": "823990336d8c4205d74d36b45532a4ab4e2165d9c1d48bad7367f2e4f7c5416a",
+            "projectionCreated": false,
+            "interpretationCreated": false,
+            "professionalConclusionCreated": false
+          },
+          {
+            "schemaVersion": "PHI-OS-SHARED-CALCULATION-RESULT-v1.0.0",
+            "calculationId": "SYNTHETIC-R1.1-B-BZR-W2",
+            "runtimeCode": "SHARED_CALCULATION_RUNTIME",
+            "runtimeVersion": "1.0.0",
+            "methodCode": "BAZI",
+            "pluginCode": "BZR",
+            "algorithmCode": "BZR_FOUR_PILLARS",
+            "algorithmVersion": "1.0.0",
+            "inputRecordIds": [
+              "SDA-SYNTHETIC-R1.1-B-BZR-CALENDAR"
+            ],
+            "inputDigest": "9972c772d4e437344e644b919eab479800d1a979301e048e27540cb0d7f5a771",
+            "referenceVersions": {
+              "executionMode": "validation",
+              "policyCode": "PHI_OS_BAZI_POLICY_V1",
+              "policyVersion": "PHI_OS_BAZI_POLICY_V1",
+              "ziHourPolicyCode": "TRUE_SOLAR_ZI_HOUR_V1",
+              "sexagenaryAlgorithmVersion": "1.0.0",
+              "mcdProductionAuthority": "MPA",
+              "productionAdapterBinding": "MCD_BZR_PRODUCTION_SUCCESSOR_V1"
+            },
+            "deterministic": true,
+            "aiUsed": false,
+            "providerUsed": false,
+            "output": {
+              "schemaVersion": "PHI-OS-BZR-FOUR-PILLARS-RESULT-v1.0.0",
+              "runtimeCode": "BZR_FOUR_PILLARS_RUNTIME",
+              "runtimeVersion": "1.0.0",
+              "methodCode": "BAZI",
+              "pluginCode": "BZR",
+              "calculationType": "FOUR_PILLARS",
+              "executionMode": "validation",
+              "calculationMode": "FOUR_PILLARS",
+              "birthTimeKnown": true,
+              "hourPillarStatus": "RESOLVED",
+              "sourceCalendarContextType": "BZR_SOLAR_CALENDAR_CONTEXT",
+              "yearPillar": {
+                "pillarType": "YEAR",
+                "stemCode": "JIA",
+                "branchCode": "ZI",
+                "sexagenaryIndex": 1
+              },
+              "monthPillar": {
+                "pillarType": "MONTH",
+                "stemCode": "BING",
+                "branchCode": "YIN",
+                "sexagenaryIndex": 3
+              },
+              "dayPillar": {
+                "pillarType": "DAY",
+                "stemCode": "JI",
+                "branchCode": "MAO",
+                "sexagenaryIndex": 16
+              },
+              "hourPillar": {
+                "pillarType": "HOUR",
+                "stemCode": "GENG",
+                "branchCode": "WU",
+                "sexagenaryIndex": 7
+              },
+              "pillars": [
+                {
+                  "pillarType": "YEAR",
+                  "stemCode": "JIA",
+                  "branchCode": "ZI",
+                  "sexagenaryIndex": 1
+                },
+                {
+                  "pillarType": "MONTH",
+                  "stemCode": "BING",
+                  "branchCode": "YIN",
+                  "sexagenaryIndex": 3
+                },
+                {
+                  "pillarType": "DAY",
+                  "stemCode": "JI",
+                  "branchCode": "MAO",
+                  "sexagenaryIndex": 16
+                },
+                {
+                  "pillarType": "HOUR",
+                  "stemCode": "GENG",
+                  "branchCode": "WU",
+                  "sexagenaryIndex": 7
+                }
+              ],
+              "lineage": {
+                "sourceCalendarRuntimeCode": "BZR_SOLAR_CALENDAR_RUNTIME",
+                "sourceCalendarRuntimeVersion": "1.0.0",
+                "sourceCalendarOutputDigest": "823990336d8c4205d74d36b45532a4ab4e2165d9c1d48bad7367f2e4f7c5416a",
+                "sexagenaryAlgorithmCode": "PHI_OS_SEXAGENARY_CALENDAR",
+                "sexagenaryAlgorithmVersion": "1.0.0",
+                "sexagenaryAdapterCode": "MCD_BZR_SEXAGENARY_PRODUCTION_ADAPTER",
+                "sexagenaryAdapterVersion": "1.0.0",
+                "policyCode": "PHI_OS_BAZI_POLICY_V1",
+                "policyVersion": "PHI_OS_BAZI_POLICY_V1",
+                "referenceVersions": {
+                  "executionMode": "validation",
+                  "policyCode": "PHI_OS_BAZI_POLICY_V1",
+                  "policyVersion": "PHI_OS_BAZI_POLICY_V1",
+                  "ziHourPolicyCode": "TRUE_SOLAR_ZI_HOUR_V1",
+                  "sexagenaryAlgorithmVersion": "1.0.0",
+                  "mcdProductionAuthority": "MPA",
+                  "productionAdapterBinding": "MCD_BZR_PRODUCTION_SUCCESSOR_V1"
+                }
+              },
+              "deterministic": true,
+              "providerUsed": false,
+              "aiUsed": false,
+              "stemCreated": true,
+              "branchCreated": true,
+              "pillarCreated": true,
+              "luckCycleCreated": false,
+              "projectionNormalized": false,
+              "projectionCreated": false,
+              "interpretationCreated": false,
+              "knowledgeCreated": false,
+              "professionalConclusionCreated": false,
+              "productionEligible": false
+            },
+            "outputDigest": "68440edf7cff5e1cebeeddc6d6c2f5af34cd2c93c8f13020cc5f86c777cfeb9d",
+            "projectionCreated": false,
+            "interpretationCreated": false,
+            "professionalConclusionCreated": false
+          },
+          {
+            "schemaVersion": "PHI-OS-SHARED-CALCULATION-RESULT-v1.0.0",
+            "calculationId": "SYNTHETIC-R1.1-B-BZR-W3",
+            "runtimeCode": "SHARED_CALCULATION_RUNTIME",
+            "runtimeVersion": "1.0.0",
+            "methodCode": "BAZI",
+            "pluginCode": "BZR",
+            "algorithmCode": "BZR_LUCK_CYCLE_SEQUENCE",
+            "algorithmVersion": "1.0.0",
+            "inputRecordIds": [
+              "SDA-SYNTHETIC-R1.1-B-BZR-CALENDAR",
+              "SDA-SYNTHETIC-R1.1-B-BZR-PILLARS",
+              "SDA-SYNTHETIC-R1.1-B-BZR-TRADITIONAL-SEX"
+            ],
+            "inputDigest": "2558ea6ddfc1934fe5094dcc050b4b7b46d07f356d269849feea7d543aa9ade0",
+            "referenceVersions": {
+              "executionMode": "validation",
+              "policyCode": "PHI_OS_BAZI_POLICY_V1",
+              "policyVersion": "PHI_OS_BAZI_POLICY_V1",
+              "cycleCount": 8,
+              "luckCycleAlgorithmVersion": "1.0.0",
+              "mcdProductionAuthority": "MPA",
+              "productionAdapterBinding": "MCD_BZR_PRODUCTION_SUCCESSOR_V1"
+            },
+            "deterministic": true,
+            "aiUsed": false,
+            "providerUsed": false,
+            "output": {
+              "schemaVersion": "PHI-OS-BZR-LUCK-CYCLE-RESULT-v1.0.0",
+              "runtimeCode": "BZR_LUCK_CYCLE_RUNTIME",
+              "runtimeVersion": "1.0.0",
+              "methodCode": "BAZI",
+              "pluginCode": "BZR",
+              "calculationType": "LUCK_CYCLE_SEQUENCE",
+              "executionMode": "validation",
+              "direction": "FORWARD",
+              "yearStemPolarity": "YANG",
+              "traditionalCalculationSex": "MALE",
+              "traditionalCalculationSexUseScope": "LUCK_CYCLE_DIRECTION_ONLY",
+              "birthTrueSolarIso": "1984-02-15T11:52:00.755047+08:00",
+              "referenceJie": "NEXT_JIE",
+              "referenceJieCode": "JING_ZHE",
+              "referenceJieUtcIso": "1984-03-05T09:24:20.188Z",
+              "intervalSeconds": 1661060,
+              "startAge": {
+                "years": 6,
+                "months": 4,
+                "days": 27,
+                "totalYearsNumerator": 83053,
+                "totalYearsDenominator": 12960,
+                "roundingApplied": false
+              },
+              "cycleDurationYears": 10,
+              "cycleCount": 8,
+              "cycles": [
+                {
+                  "cycleNumber": 1,
+                  "direction": "FORWARD",
+                  "startAgeYears": 6,
+                  "endAgeYears": 16,
+                  "pillar": {
+                    "stemCode": "DING",
+                    "branchCode": "MAO",
+                    "sexagenaryIndex": 4
+                  }
+                },
+                {
+                  "cycleNumber": 2,
+                  "direction": "FORWARD",
+                  "startAgeYears": 16,
+                  "endAgeYears": 26,
+                  "pillar": {
+                    "stemCode": "WU",
+                    "branchCode": "CHEN",
+                    "sexagenaryIndex": 5
+                  }
+                },
+                {
+                  "cycleNumber": 3,
+                  "direction": "FORWARD",
+                  "startAgeYears": 26,
+                  "endAgeYears": 36,
+                  "pillar": {
+                    "stemCode": "JI",
+                    "branchCode": "SI",
+                    "sexagenaryIndex": 6
+                  }
+                },
+                {
+                  "cycleNumber": 4,
+                  "direction": "FORWARD",
+                  "startAgeYears": 36,
+                  "endAgeYears": 46,
+                  "pillar": {
+                    "stemCode": "GENG",
+                    "branchCode": "WU",
+                    "sexagenaryIndex": 7
+                  }
+                },
+                {
+                  "cycleNumber": 5,
+                  "direction": "FORWARD",
+                  "startAgeYears": 46,
+                  "endAgeYears": 56,
+                  "pillar": {
+                    "stemCode": "XIN",
+                    "branchCode": "WEI",
+                    "sexagenaryIndex": 8
+                  }
+                },
+                {
+                  "cycleNumber": 6,
+                  "direction": "FORWARD",
+                  "startAgeYears": 56,
+                  "endAgeYears": 66,
+                  "pillar": {
+                    "stemCode": "REN",
+                    "branchCode": "SHEN",
+                    "sexagenaryIndex": 9
+                  }
+                },
+                {
+                  "cycleNumber": 7,
+                  "direction": "FORWARD",
+                  "startAgeYears": 66,
+                  "endAgeYears": 76,
+                  "pillar": {
+                    "stemCode": "GUI",
+                    "branchCode": "YOU",
+                    "sexagenaryIndex": 10
+                  }
+                },
+                {
+                  "cycleNumber": 8,
+                  "direction": "FORWARD",
+                  "startAgeYears": 76,
+                  "endAgeYears": 86,
+                  "pillar": {
+                    "stemCode": "JIA",
+                    "branchCode": "XU",
+                    "sexagenaryIndex": 11
+                  }
+                }
+              ],
+              "lineage": {
+                "fourPillarsRuntimeCode": "BZR_FOUR_PILLARS_RUNTIME",
+                "fourPillarsRuntimeVersion": "1.0.0",
+                "fourPillarsOutputDigest": "68440edf7cff5e1cebeeddc6d6c2f5af34cd2c93c8f13020cc5f86c777cfeb9d",
+                "solarCalendarRuntimeCode": "BZR_SOLAR_CALENDAR_RUNTIME",
+                "solarCalendarRuntimeVersion": "1.0.0",
+                "solarCalendarOutputDigest": "823990336d8c4205d74d36b45532a4ab4e2165d9c1d48bad7367f2e4f7c5416a",
+                "algorithmCode": "PHI_OS_BAZI_LUCK_CYCLE",
+                "algorithmVersion": "1.0.0",
+                "adapterCode": "MCD_BZR_LUCK_CYCLE_PRODUCTION_ADAPTER",
+                "adapterVersion": "1.0.0",
+                "policyCode": "PHI_OS_BAZI_POLICY_V1",
+                "policyVersion": "PHI_OS_BAZI_POLICY_V1",
+                "referenceVersions": {
+                  "executionMode": "validation",
+                  "policyCode": "PHI_OS_BAZI_POLICY_V1",
+                  "policyVersion": "PHI_OS_BAZI_POLICY_V1",
+                  "cycleCount": 8,
+                  "luckCycleAlgorithmVersion": "1.0.0",
+                  "mcdProductionAuthority": "MPA",
+                  "productionAdapterBinding": "MCD_BZR_PRODUCTION_SUCCESSOR_V1"
+                }
+              },
+              "deterministic": true,
+              "providerUsed": false,
+              "aiUsed": false,
+              "luckCycleCreated": true,
+              "projectionCreated": false,
+              "interpretationCreated": false,
+              "knowledgeCreated": false,
+              "identityInferenceCreated": false,
+              "personalityClaimCreated": false,
+              "relationshipRoleClaimCreated": false,
+              "professionalConclusionCreated": false,
+              "productionEligible": false
+            },
+            "outputDigest": "45c900f0d0daac7432d4aabeb4cfdd1aa36e320e8191836bb3de51c3b5bee472",
+            "projectionCreated": false,
+            "interpretationCreated": false,
+            "professionalConclusionCreated": false
+          }
+        ]
+      },
+      "reasonCodes": [
+        "MPA_ELIGIBLE",
+        "CANONICAL_INPUT_VALID",
+        "ADAPTER_BZR_REGISTERED",
+        "BZR_GOVERNED_PRODUCTION_ADAPTER_EXECUTED"
+      ],
+      "governance": {
+        "mpaEvaluatedBeforeInput": true,
+        "mpaEligibleBeforeExecution": true,
+        "coreHistoricalValidationModePreserved": true,
+        "mcdProductionUseAuthorized": true,
+        "currentPhysicalAdapterSuccessor": true,
+        "canonicalProjectionCreated": false,
+        "interpretationCreated": false,
+        "professionalJudgmentCreated": false,
+        "hdrFailClosed": false
+      }
+    },
+    "canonicalProjection": {
+      "schemaVersion": "PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0",
+      "projectionId": "CMP-E6113EC2FD9A94E264C338B6",
+      "method": {
+        "publicMethodCode": "BAZI_PROJECTION",
+        "publicLabel": "Bazi Projection",
+        "publicLabels": {
+          "en": "Bazi Projection",
+          "zh-Hans": "八字投射"
+        },
+        "internalReference": {
+          "opaqueId": "MREF-9347ED88FDE02E17",
+          "protected": true,
+          "rawIdentityExposed": false
+        },
+        "version": "0.1.0",
+        "status": "PRODUCTION_BOUND_SCOPE",
+        "calculationMode": "DETERMINISTIC_BOUND_SCOPE"
+      },
+      "calculation": {
+        "status": "COMPLETE",
+        "deterministic": true,
+        "values": [],
+        "coordinates": null,
+        "structures": [
+          {
+            "code": "FOUR_PILLARS",
+            "items": [
+              {
+                "code": "YEAR_STEM",
+                "value": "JIA",
+                "rawValue": null,
+                "meta": {
+                  "sexagenaryIndex": 1
+                }
+              },
+              {
+                "code": "YEAR_BRANCH",
+                "value": "ZI",
+                "rawValue": null,
+                "meta": {
+                  "sexagenaryIndex": 1
+                }
+              },
+              {
+                "code": "MONTH_STEM",
+                "value": "BING",
+                "rawValue": null,
+                "meta": {
+                  "sexagenaryIndex": 3
+                }
+              },
+              {
+                "code": "MONTH_BRANCH",
+                "value": "YIN",
+                "rawValue": null,
+                "meta": {
+                  "sexagenaryIndex": 3
+                }
+              },
+              {
+                "code": "DAY_STEM",
+                "value": "JI",
+                "rawValue": null,
+                "meta": {
+                  "sexagenaryIndex": 16
+                }
+              },
+              {
+                "code": "DAY_BRANCH",
+                "value": "MAO",
+                "rawValue": null,
+                "meta": {
+                  "sexagenaryIndex": 16
+                }
+              },
+              {
+                "code": "HOUR_STEM",
+                "value": "GENG",
+                "rawValue": null,
+                "meta": {
+                  "sexagenaryIndex": 7
+                }
+              },
+              {
+                "code": "HOUR_BRANCH",
+                "value": "WU",
+                "rawValue": null,
+                "meta": {
+                  "sexagenaryIndex": 7
+                }
+              }
+            ]
+          }
+        ],
+        "cycles": [
+          {
+            "code": "LUCK_CYCLE",
+            "value": "DING-MAO",
+            "rawValue": null,
+            "startAge": 6,
+            "endAge": 16,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "LUCK_CYCLE",
+            "value": "WU-CHEN",
+            "rawValue": null,
+            "startAge": 16,
+            "endAge": 26,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "LUCK_CYCLE",
+            "value": "JI-SI",
+            "rawValue": null,
+            "startAge": 26,
+            "endAge": 36,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "LUCK_CYCLE",
+            "value": "GENG-WU",
+            "rawValue": null,
+            "startAge": 36,
+            "endAge": 46,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "LUCK_CYCLE",
+            "value": "XIN-WEI",
+            "rawValue": null,
+            "startAge": 46,
+            "endAge": 56,
+            "cycleNumber": 5,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "LUCK_CYCLE",
+            "value": "REN-SHEN",
+            "rawValue": null,
+            "startAge": 56,
+            "endAge": 66,
+            "cycleNumber": 6,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "LUCK_CYCLE",
+            "value": "GUI-YOU",
+            "rawValue": null,
+            "startAge": 66,
+            "endAge": 76,
+            "cycleNumber": 7,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "LUCK_CYCLE",
+            "value": "JIA-XU",
+            "rawValue": null,
+            "startAge": 76,
+            "endAge": 86,
+            "cycleNumber": 8,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "positions": []
+      },
+      "projection": {
+        "contract": "CANONICAL_METHOD_PROJECTION",
+        "status": "COMPLETE",
+        "clientRenderable": true,
+        "productionResult": true,
+        "coreSchemaExposed": false,
+        "unknownDisclosureRequired": false
+      },
+      "unknown": [],
+      "evidence": [
+        {
+          "type": "INPUT_SOURCE",
+          "status": "AVAILABLE",
+          "sourceCode": "CANONICAL_BIRTH_INPUT_CLIENT_ENTRY",
+          "reference": "CanonicalBirthInput",
+          "version": "MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0",
+          "confidence": "HIGH"
+        },
+        {
+          "type": "TIMEZONE_SOURCE",
+          "status": "AVAILABLE",
+          "sourceCode": "HUMAN_DECLARATION",
+          "reference": "Asia/Taipei",
+          "version": null,
+          "confidence": "UNKNOWN"
+        },
+        {
+          "type": "COORDINATES_SOURCE",
+          "status": "AVAILABLE",
+          "sourceCode": "CANONICAL_BIRTH_INPUT_CLIENT_ENTRY",
+          "reference": "COORDINATES_PRESENT",
+          "version": "MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0",
+          "confidence": "HIGH"
+        },
+        {
+          "type": "RUNTIME_AUTHORITY",
+          "status": "AVAILABLE",
+          "sourceCode": "MCD_5",
+          "reference": "MCD_CANONICAL_PROJECTION_RUNTIME",
+          "version": "1.0.0",
+          "confidence": "HIGH"
+        },
+        {
+          "type": "PRODUCTION_DISPATCH_AUTHORITY",
+          "status": "AVAILABLE",
+          "sourceCode": "MPA",
+          "reference": "ELIGIBLE",
+          "version": "MCD-1-SUCCESSOR-v1.0.0",
+          "confidence": "HIGH"
+        },
+        {
+          "type": "RULE_SOURCE",
+          "status": "AVAILABLE",
+          "sourceCode": "BZR_SOLAR_CALENDAR_CONTEXT",
+          "reference": "BZR_SOLAR_CALENDAR_CONTEXT",
+          "version": "1.0.0",
+          "confidence": "HIGH"
+        },
+        {
+          "type": "CALCULATION_AUTHORITY",
+          "status": "AVAILABLE",
+          "sourceCode": "SHARED_CALCULATION_RUNTIME",
+          "reference": "SYNTHETIC-R1.1-B-BZR-W1",
+          "version": "1.0.0",
+          "confidence": "HIGH"
+        },
+        {
+          "type": "RULE_SOURCE",
+          "status": "AVAILABLE",
+          "sourceCode": "BZR_FOUR_PILLARS",
+          "reference": "BZR_FOUR_PILLARS",
+          "version": "1.0.0",
+          "confidence": "HIGH"
+        },
+        {
+          "type": "CALCULATION_AUTHORITY",
+          "status": "AVAILABLE",
+          "sourceCode": "SHARED_CALCULATION_RUNTIME",
+          "reference": "SYNTHETIC-R1.1-B-BZR-W2",
+          "version": "1.0.0",
+          "confidence": "HIGH"
+        },
+        {
+          "type": "RULE_SOURCE",
+          "status": "AVAILABLE",
+          "sourceCode": "BZR_LUCK_CYCLE_SEQUENCE",
+          "reference": "BZR_LUCK_CYCLE_SEQUENCE",
+          "version": "1.0.0",
+          "confidence": "HIGH"
+        },
+        {
+          "type": "CALCULATION_AUTHORITY",
+          "status": "AVAILABLE",
+          "sourceCode": "SHARED_CALCULATION_RUNTIME",
+          "reference": "SYNTHETIC-R1.1-B-BZR-W3",
+          "version": "1.0.0",
+          "confidence": "HIGH"
+        }
+      ],
+      "version": {
+        "methodRegistryVersion": "2.0.0",
+        "runtimeVersion": "1.0.0",
+        "adapterVersion": "1.0.0",
+        "inputContractVersion": "1.0.0",
+        "projectionContractVersion": "1.0.0"
+      },
+      "execution": {
+        "requestId": "SYNTHETIC-R1.1-B",
+        "status": "EXECUTED_BOUND_SCOPE",
+        "mpaDecision": {
+          "authorityOwner": "MPA",
+          "decision": "ELIGIBLE",
+          "dispatchAllowed": true,
+          "state": "PRODUCTION_AUTHORITY_GRANTED_FOR_BOUND_SCOPE"
+        },
+        "runtimeIdentity": "MCD_CANONICAL_PROJECTION_RUNTIME@1.0.0",
+        "executedAt": "2026-10-30T13:41:05.651Z"
+      },
+      "interpretation": {
+        "included": false,
+        "principle": "CALCULATION_NOT_EQUAL_INTERPRETATION",
+        "meaningAuthorityCreated": false,
+        "realityReadingCreated": false,
+        "professionalJudgmentCreated": false
+      }
+    },
+    "executedAt": "2026-10-30T13:41:05.651Z"
+  },
+  "projection": {
+    "schemaVersion": "PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0",
+    "projectionId": "CMP-E6113EC2FD9A94E264C338B6",
+    "method": {
+      "publicMethodCode": "BAZI_PROJECTION",
+      "publicLabel": "Bazi Projection",
+      "publicLabels": {
+        "en": "Bazi Projection",
+        "zh-Hans": "八字投射"
+      },
+      "internalReference": {
+        "opaqueId": "MREF-9347ED88FDE02E17",
+        "protected": true,
+        "rawIdentityExposed": false
+      },
+      "version": "0.1.0",
+      "status": "PRODUCTION_BOUND_SCOPE",
+      "calculationMode": "DETERMINISTIC_BOUND_SCOPE"
+    },
+    "calculation": {
+      "status": "COMPLETE",
+      "deterministic": true,
+      "values": [],
+      "coordinates": null,
+      "structures": [
+        {
+          "code": "FOUR_PILLARS",
+          "items": [
+            {
+              "code": "YEAR_STEM",
+              "value": "JIA",
+              "rawValue": null,
+              "meta": {
+                "sexagenaryIndex": 1
+              }
+            },
+            {
+              "code": "YEAR_BRANCH",
+              "value": "ZI",
+              "rawValue": null,
+              "meta": {
+                "sexagenaryIndex": 1
+              }
+            },
+            {
+              "code": "MONTH_STEM",
+              "value": "BING",
+              "rawValue": null,
+              "meta": {
+                "sexagenaryIndex": 3
+              }
+            },
+            {
+              "code": "MONTH_BRANCH",
+              "value": "YIN",
+              "rawValue": null,
+              "meta": {
+                "sexagenaryIndex": 3
+              }
+            },
+            {
+              "code": "DAY_STEM",
+              "value": "JI",
+              "rawValue": null,
+              "meta": {
+                "sexagenaryIndex": 16
+              }
+            },
+            {
+              "code": "DAY_BRANCH",
+              "value": "MAO",
+              "rawValue": null,
+              "meta": {
+                "sexagenaryIndex": 16
+              }
+            },
+            {
+              "code": "HOUR_STEM",
+              "value": "GENG",
+              "rawValue": null,
+              "meta": {
+                "sexagenaryIndex": 7
+              }
+            },
+            {
+              "code": "HOUR_BRANCH",
+              "value": "WU",
+              "rawValue": null,
+              "meta": {
+                "sexagenaryIndex": 7
+              }
+            }
+          ]
+        }
+      ],
+      "cycles": [
+        {
+          "code": "LUCK_CYCLE",
+          "value": "DING-MAO",
+          "rawValue": null,
+          "startAge": 6,
+          "endAge": 16,
+          "cycleNumber": 1,
+          "certainty": "DETERMINISTIC"
+        },
+        {
+          "code": "LUCK_CYCLE",
+          "value": "WU-CHEN",
+          "rawValue": null,
+          "startAge": 16,
+          "endAge": 26,
+          "cycleNumber": 2,
+          "certainty": "DETERMINISTIC"
+        },
+        {
+          "code": "LUCK_CYCLE",
+          "value": "JI-SI",
+          "rawValue": null,
+          "startAge": 26,
+          "endAge": 36,
+          "cycleNumber": 3,
+          "certainty": "DETERMINISTIC"
+        },
+        {
+          "code": "LUCK_CYCLE",
+          "value": "GENG-WU",
+          "rawValue": null,
+          "startAge": 36,
+          "endAge": 46,
+          "cycleNumber": 4,
+          "certainty": "DETERMINISTIC"
+        },
+        {
+          "code": "LUCK_CYCLE",
+          "value": "XIN-WEI",
+          "rawValue": null,
+          "startAge": 46,
+          "endAge": 56,
+          "cycleNumber": 5,
+          "certainty": "DETERMINISTIC"
+        },
+        {
+          "code": "LUCK_CYCLE",
+          "value": "REN-SHEN",
+          "rawValue": null,
+          "startAge": 56,
+          "endAge": 66,
+          "cycleNumber": 6,
+          "certainty": "DETERMINISTIC"
+        },
+        {
+          "code": "LUCK_CYCLE",
+          "value": "GUI-YOU",
+          "rawValue": null,
+          "startAge": 66,
+          "endAge": 76,
+          "cycleNumber": 7,
+          "certainty": "DETERMINISTIC"
+        },
+        {
+          "code": "LUCK_CYCLE",
+          "value": "JIA-XU",
+          "rawValue": null,
+          "startAge": 76,
+          "endAge": 86,
+          "cycleNumber": 8,
+          "certainty": "DETERMINISTIC"
+        }
+      ],
+      "positions": []
+    },
+    "projection": {
+      "contract": "CANONICAL_METHOD_PROJECTION",
+      "status": "COMPLETE",
+      "clientRenderable": true,
+      "productionResult": true,
+      "coreSchemaExposed": false,
+      "unknownDisclosureRequired": false
+    },
+    "unknown": [],
+    "evidence": [
+      {
+        "type": "INPUT_SOURCE",
+        "status": "AVAILABLE",
+        "sourceCode": "CANONICAL_BIRTH_INPUT_CLIENT_ENTRY",
+        "reference": "CanonicalBirthInput",
+        "version": "MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0",
+        "confidence": "HIGH"
+      },
+      {
+        "type": "TIMEZONE_SOURCE",
+        "status": "AVAILABLE",
+        "sourceCode": "HUMAN_DECLARATION",
+        "reference": "Asia/Taipei",
+        "version": null,
+        "confidence": "UNKNOWN"
+      },
+      {
+        "type": "COORDINATES_SOURCE",
+        "status": "AVAILABLE",
+        "sourceCode": "CANONICAL_BIRTH_INPUT_CLIENT_ENTRY",
+        "reference": "COORDINATES_PRESENT",
+        "version": "MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0",
+        "confidence": "HIGH"
+      },
+      {
+        "type": "RUNTIME_AUTHORITY",
+        "status": "AVAILABLE",
+        "sourceCode": "MCD_5",
+        "reference": "MCD_CANONICAL_PROJECTION_RUNTIME",
+        "version": "1.0.0",
+        "confidence": "HIGH"
+      },
+      {
+        "type": "PRODUCTION_DISPATCH_AUTHORITY",
+        "status": "AVAILABLE",
+        "sourceCode": "MPA",
+        "reference": "ELIGIBLE",
+        "version": "MCD-1-SUCCESSOR-v1.0.0",
+        "confidence": "HIGH"
+      },
+      {
+        "type": "RULE_SOURCE",
+        "status": "AVAILABLE",
+        "sourceCode": "BZR_SOLAR_CALENDAR_CONTEXT",
+        "reference": "BZR_SOLAR_CALENDAR_CONTEXT",
+        "version": "1.0.0",
+        "confidence": "HIGH"
+      },
+      {
+        "type": "CALCULATION_AUTHORITY",
+        "status": "AVAILABLE",
+        "sourceCode": "SHARED_CALCULATION_RUNTIME",
+        "reference": "SYNTHETIC-R1.1-B-BZR-W1",
+        "version": "1.0.0",
+        "confidence": "HIGH"
+      },
+      {
+        "type": "RULE_SOURCE",
+        "status": "AVAILABLE",
+        "sourceCode": "BZR_FOUR_PILLARS",
+        "reference": "BZR_FOUR_PILLARS",
+        "version": "1.0.0",
+        "confidence": "HIGH"
+      },
+      {
+        "type": "CALCULATION_AUTHORITY",
+        "status": "AVAILABLE",
+        "sourceCode": "SHARED_CALCULATION_RUNTIME",
+        "reference": "SYNTHETIC-R1.1-B-BZR-W2",
+        "version": "1.0.0",
+        "confidence": "HIGH"
+      },
+      {
+        "type": "RULE_SOURCE",
+        "status": "AVAILABLE",
+        "sourceCode": "BZR_LUCK_CYCLE_SEQUENCE",
+        "reference": "BZR_LUCK_CYCLE_SEQUENCE",
+        "version": "1.0.0",
+        "confidence": "HIGH"
+      },
+      {
+        "type": "CALCULATION_AUTHORITY",
+        "status": "AVAILABLE",
+        "sourceCode": "SHARED_CALCULATION_RUNTIME",
+        "reference": "SYNTHETIC-R1.1-B-BZR-W3",
+        "version": "1.0.0",
+        "confidence": "HIGH"
+      }
+    ],
+    "version": {
+      "methodRegistryVersion": "2.0.0",
+      "runtimeVersion": "1.0.0",
+      "adapterVersion": "1.0.0",
+      "inputContractVersion": "1.0.0",
+      "projectionContractVersion": "1.0.0"
+    },
+    "execution": {
+      "requestId": "SYNTHETIC-R1.1-B",
+      "status": "EXECUTED_BOUND_SCOPE",
+      "mpaDecision": {
+        "authorityOwner": "MPA",
+        "decision": "ELIGIBLE",
+        "dispatchAllowed": true,
+        "state": "PRODUCTION_AUTHORITY_GRANTED_FOR_BOUND_SCOPE"
+      },
+      "runtimeIdentity": "MCD_CANONICAL_PROJECTION_RUNTIME@1.0.0",
+      "executedAt": "2026-10-30T13:41:05.651Z"
+    },
+    "interpretation": {
+      "included": false,
+      "principle": "CALCULATION_NOT_EQUAL_INTERPRETATION",
+      "meaningAuthorityCreated": false,
+      "realityReadingCreated": false,
+      "professionalJudgmentCreated": false
+    }
+  },
+  "chart": {
+    "schemaVersion": "PHI-OS-BAZI-CANONICAL-CHART-IR-v1.0.0",
+    "work": "BAZI-FP-W1",
+    "runtimeVersion": "1.0.0",
+    "methodCode": "BAZI",
+    "authorityState": "ENGINEERING_SOURCE_GATED",
+    "sourceProjection": {
+      "projectionId": "CMP-E6113EC2FD9A94E264C338B6",
+      "publicMethodCode": "BAZI_PROJECTION",
+      "methodVersion": "0.1.0",
+      "calculationStatus": "COMPLETE",
+      "projectionStatus": "COMPLETE"
+    },
+    "pillars": [
+      {
+        "position": "YEAR",
+        "stem": {
+          "code": "JIA",
+          "zh": "甲",
+          "element": "WOOD",
+          "polarity": "YANG",
+          "sourceRef": "CMP-E6113EC2FD9A94E264C338B6#FOUR_PILLARS:YEAR_STEM"
+        },
+        "branch": {
+          "code": "ZI",
+          "zh": "子",
+          "element": "WATER",
+          "sourceRef": "CMP-E6113EC2FD9A94E264C338B6#FOUR_PILLARS:YEAR_BRANCH"
+        },
+        "hiddenStems": [
+          {
+            "code": "GUI",
+            "zh": "癸",
+            "element": "WATER",
+            "polarity": "YIN",
+            "order": 1,
+            "sourceClass": "BZR_STRUCTURAL_REGISTRY_DERIVATION",
+            "sourceAuthorityState": "SOURCE_GATED"
+          }
+        ]
+      },
+      {
+        "position": "MONTH",
+        "stem": {
+          "code": "BING",
+          "zh": "丙",
+          "element": "FIRE",
+          "polarity": "YANG",
+          "sourceRef": "CMP-E6113EC2FD9A94E264C338B6#FOUR_PILLARS:MONTH_STEM"
+        },
+        "branch": {
+          "code": "YIN",
+          "zh": "寅",
+          "element": "WOOD",
+          "sourceRef": "CMP-E6113EC2FD9A94E264C338B6#FOUR_PILLARS:MONTH_BRANCH"
+        },
+        "hiddenStems": [
+          {
+            "code": "JIA",
+            "zh": "甲",
+            "element": "WOOD",
+            "polarity": "YANG",
+            "order": 1,
+            "sourceClass": "BZR_STRUCTURAL_REGISTRY_DERIVATION",
+            "sourceAuthorityState": "SOURCE_GATED"
+          },
+          {
+            "code": "BING",
+            "zh": "丙",
+            "element": "FIRE",
+            "polarity": "YANG",
+            "order": 2,
+            "sourceClass": "BZR_STRUCTURAL_REGISTRY_DERIVATION",
+            "sourceAuthorityState": "SOURCE_GATED"
+          },
+          {
+            "code": "WU",
+            "zh": "戊",
+            "element": "EARTH",
+            "polarity": "YANG",
+            "order": 3,
+            "sourceClass": "BZR_STRUCTURAL_REGISTRY_DERIVATION",
+            "sourceAuthorityState": "SOURCE_GATED"
+          }
+        ]
+      },
+      {
+        "position": "DAY",
+        "stem": {
+          "code": "JI",
+          "zh": "己",
+          "element": "EARTH",
+          "polarity": "YIN",
+          "sourceRef": "CMP-E6113EC2FD9A94E264C338B6#FOUR_PILLARS:DAY_STEM"
+        },
+        "branch": {
+          "code": "MAO",
+          "zh": "卯",
+          "element": "WOOD",
+          "sourceRef": "CMP-E6113EC2FD9A94E264C338B6#FOUR_PILLARS:DAY_BRANCH"
+        },
+        "hiddenStems": [
+          {
+            "code": "YI",
+            "zh": "乙",
+            "element": "WOOD",
+            "polarity": "YIN",
+            "order": 1,
+            "sourceClass": "BZR_STRUCTURAL_REGISTRY_DERIVATION",
+            "sourceAuthorityState": "SOURCE_GATED"
+          }
+        ]
+      },
+      {
+        "position": "HOUR",
+        "stem": {
+          "code": "GENG",
+          "zh": "庚",
+          "element": "METAL",
+          "polarity": "YANG",
+          "sourceRef": "CMP-E6113EC2FD9A94E264C338B6#FOUR_PILLARS:HOUR_STEM"
+        },
+        "branch": {
+          "code": "WU",
+          "zh": "午",
+          "element": "FIRE",
+          "sourceRef": "CMP-E6113EC2FD9A94E264C338B6#FOUR_PILLARS:HOUR_BRANCH"
+        },
+        "hiddenStems": [
+          {
+            "code": "DING",
+            "zh": "丁",
+            "element": "FIRE",
+            "polarity": "YIN",
+            "order": 1,
+            "sourceClass": "BZR_STRUCTURAL_REGISTRY_DERIVATION",
+            "sourceAuthorityState": "SOURCE_GATED"
+          },
+          {
+            "code": "JI",
+            "zh": "己",
+            "element": "EARTH",
+            "polarity": "YIN",
+            "order": 2,
+            "sourceClass": "BZR_STRUCTURAL_REGISTRY_DERIVATION",
+            "sourceAuthorityState": "SOURCE_GATED"
+          }
+        ]
+      }
+    ],
+    "dayMaster": {
+      "code": "JI",
+      "zh": "己",
+      "element": "EARTH",
+      "polarity": "YIN",
+      "pillar": "DAY",
+      "sourceRef": "CMP-E6113EC2FD9A94E264C338B6#FOUR_PILLARS:DAY_STEM"
+    },
+    "monthCommand": {
+      "branch": {
+        "code": "YIN",
+        "zh": "寅",
+        "element": "WOOD",
+        "sourceRef": "CMP-E6113EC2FD9A94E264C338B6#FOUR_PILLARS:MONTH_BRANCH"
+      },
+      "season": "SPRING",
+      "sourceRef": "CMP-E6113EC2FD9A94E264C338B6#FOUR_PILLARS:MONTH_BRANCH"
+    },
+    "fiveElementInventory": {
+      "visibleStems": {
+        "WOOD": 1,
+        "FIRE": 1,
+        "EARTH": 1,
+        "METAL": 1,
+        "WATER": 0
+      },
+      "visibleBranches": {
+        "WOOD": 2,
+        "FIRE": 1,
+        "EARTH": 0,
+        "METAL": 0,
+        "WATER": 1
+      },
+      "hiddenStemsUnweighted": {
+        "WOOD": 2,
+        "FIRE": 2,
+        "EARTH": 2,
+        "METAL": 0,
+        "WATER": 1
+      },
+      "weightedHiddenStemScoringApplied": false
+    },
+    "yinYangInventory": {
+      "visibleStems": {
+        "YANG": 3,
+        "YIN": 1
+      }
+    },
+    "unknowns": [],
+    "lineage": {
+      "structuralRegistryVersion": "1.0.0",
+      "sourceStrategyRef": "content/interpretation/bazi/authority/bzr-r1-source-strategy-v1.json",
+      "sourceAdmissionState": "NO_PRODUCTION_RULE_CLAIMS_ADMITTED"
+    },
+    "boundaries": {
+      "canonicalProjectionReused": true,
+      "secondProjectionAuthorityCreated": false,
+      "fourPillarsRecalculated": false,
+      "interpretationCreated": false,
+      "fortunePredictionCreated": false,
+      "professionalJudgmentCreated": false,
+      "hiddenStemWeightsInvented": false,
+      "productionEligible": false
+    },
+    "chartDigest": "2b76d5d2fb9f93d2193f95a3f114fae4928459c0c66a2e4a4a0d17e60e485862",
+    "executionCompleteness": "COMPLETE"
+  },
+  "tenGods": {
+    "schemaVersion": "PHI-OS-BAZI-TEN-GOD-STRUCTURAL-IR-v1.0.0",
+    "work": "BAZI-FP-W4",
+    "runtimeVersion": "1.0.0",
+    "sourceChartDigest": "2b76d5d2fb9f93d2193f95a3f114fae4928459c0c66a2e4a4a0d17e60e485862",
+    "authorityState": "ENGINEERING_STRUCTURAL_CLASSIFICATION_SOURCE_GATED",
+    "dayMaster": {
+      "code": "JI",
+      "zh": "己",
+      "element": "EARTH",
+      "polarity": "YIN"
+    },
+    "visibleStems": [
+      {
+        "location": "YEAR_STEM",
+        "pillar": "YEAR",
+        "stemCode": "JIA",
+        "stemZh": "甲",
+        "classification": "TEN_GOD",
+        "tenGodCode": "ZHENG_GUAN",
+        "tenGodZh": "正官",
+        "tenGodEn": "Direct Officer"
+      },
+      {
+        "location": "MONTH_STEM",
+        "pillar": "MONTH",
+        "stemCode": "BING",
+        "stemZh": "丙",
+        "classification": "TEN_GOD",
+        "tenGodCode": "ZHENG_YIN",
+        "tenGodZh": "正印",
+        "tenGodEn": "Direct Resource"
+      },
+      {
+        "location": "DAY_STEM",
+        "pillar": "DAY",
+        "stemCode": "JI",
+        "stemZh": "己",
+        "classification": "DAY_MASTER",
+        "tenGodCode": null,
+        "tenGodZh": "日主",
+        "tenGodEn": "Day Master"
+      },
+      {
+        "location": "HOUR_STEM",
+        "pillar": "HOUR",
+        "stemCode": "GENG",
+        "stemZh": "庚",
+        "classification": "TEN_GOD",
+        "tenGodCode": "SHANG_GUAN",
+        "tenGodZh": "伤官",
+        "tenGodEn": "Hurting Officer"
+      }
+    ],
+    "hiddenStems": [
+      {
+        "location": "YEAR_BRANCH_HIDDEN_1",
+        "pillar": "YEAR",
+        "branchCode": "ZI",
+        "branchZh": "子",
+        "hiddenStemCode": "GUI",
+        "hiddenStemZh": "癸",
+        "order": 1,
+        "tenGodCode": "PIAN_CAI",
+        "tenGodZh": "偏财",
+        "tenGodEn": "Indirect Wealth"
+      },
+      {
+        "location": "MONTH_BRANCH_HIDDEN_1",
+        "pillar": "MONTH",
+        "branchCode": "YIN",
+        "branchZh": "寅",
+        "hiddenStemCode": "JIA",
+        "hiddenStemZh": "甲",
+        "order": 1,
+        "tenGodCode": "ZHENG_GUAN",
+        "tenGodZh": "正官",
+        "tenGodEn": "Direct Officer"
+      },
+      {
+        "location": "MONTH_BRANCH_HIDDEN_2",
+        "pillar": "MONTH",
+        "branchCode": "YIN",
+        "branchZh": "寅",
+        "hiddenStemCode": "BING",
+        "hiddenStemZh": "丙",
+        "order": 2,
+        "tenGodCode": "ZHENG_YIN",
+        "tenGodZh": "正印",
+        "tenGodEn": "Direct Resource"
+      },
+      {
+        "location": "MONTH_BRANCH_HIDDEN_3",
+        "pillar": "MONTH",
+        "branchCode": "YIN",
+        "branchZh": "寅",
+        "hiddenStemCode": "WU",
+        "hiddenStemZh": "戊",
+        "order": 3,
+        "tenGodCode": "JIE_CAI",
+        "tenGodZh": "劫财",
+        "tenGodEn": "Rob Wealth"
+      },
+      {
+        "location": "DAY_BRANCH_HIDDEN_1",
+        "pillar": "DAY",
+        "branchCode": "MAO",
+        "branchZh": "卯",
+        "hiddenStemCode": "YI",
+        "hiddenStemZh": "乙",
+        "order": 1,
+        "tenGodCode": "QI_SHA",
+        "tenGodZh": "七杀",
+        "tenGodEn": "Seven Killings"
+      },
+      {
+        "location": "HOUR_BRANCH_HIDDEN_1",
+        "pillar": "HOUR",
+        "branchCode": "WU",
+        "branchZh": "午",
+        "hiddenStemCode": "DING",
+        "hiddenStemZh": "丁",
+        "order": 1,
+        "tenGodCode": "PIAN_YIN",
+        "tenGodZh": "偏印",
+        "tenGodEn": "Indirect Resource"
+      },
+      {
+        "location": "HOUR_BRANCH_HIDDEN_2",
+        "pillar": "HOUR",
+        "branchCode": "WU",
+        "branchZh": "午",
+        "hiddenStemCode": "JI",
+        "hiddenStemZh": "己",
+        "order": 2,
+        "tenGodCode": "BI_JIAN",
+        "tenGodZh": "比肩",
+        "tenGodEn": "Peer"
+      }
+    ],
+    "distribution": {
+      "visibleUnweighted": {
+        "ZHENG_GUAN": 1,
+        "ZHENG_YIN": 1,
+        "SHANG_GUAN": 1
+      },
+      "visiblePlusHiddenUnweighted": {
+        "ZHENG_GUAN": 2,
+        "ZHENG_YIN": 2,
+        "SHANG_GUAN": 1,
+        "PIAN_CAI": 1,
+        "JIE_CAI": 1,
+        "QI_SHA": 1,
+        "PIAN_YIN": 1,
+        "BI_JIAN": 1
+      },
+      "weightsApplied": false
+    },
+    "lineage": {
+      "sourceStrategyRef": "content/interpretation/bazi/authority/bzr-r1-source-strategy-v1.json"
+    },
+    "boundaries": {
+      "structuralClassificationOnly": true,
+      "personalityMeaningCreated": false,
+      "wealthOutcomeCreated": false,
+      "careerOutcomeCreated": false,
+      "relationshipOutcomeCreated": false,
+      "interpretationCreated": false,
+      "productionEligible": false
+    },
+    "tenGodDigest": "78120f96746dec3f23a05c2892cd72a4e32d9b2eafd1dfaf79ce42d0ec561784"
+  },
+  "relationships": {
+    "schemaVersion": "PHI-OS-BAZI-STEM-BRANCH-RELATIONSHIPS-v1.0.0",
+    "work": "BAZI-FP-W3",
+    "runtimeVersion": "1.0.0",
+    "sourceChartDigest": "2b76d5d2fb9f93d2193f95a3f114fae4928459c0c66a2e4a4a0d17e60e485862",
+    "authorityState": "ENGINEERING_STRUCTURAL_RELATIONS_SOURCE_GATED",
+    "relations": [
+      {
+        "type": "STEM_COMBINATION",
+        "members": [
+          "JIA",
+          "JI"
+        ],
+        "memberZh": [
+          "甲",
+          "己"
+        ],
+        "positions": [
+          "YEAR",
+          "DAY"
+        ],
+        "transformationEstablished": false,
+        "sourceAuthorityState": "SOURCE_GATED"
+      },
+      {
+        "type": "BRANCH_CLASH",
+        "members": [
+          "ZI",
+          "WU"
+        ],
+        "memberZh": [
+          "子",
+          "午"
+        ],
+        "positions": [
+          "YEAR",
+          "HOUR"
+        ],
+        "transformationEstablished": false,
+        "sourceAuthorityState": "SOURCE_GATED"
+      },
+      {
+        "type": "BRANCH_BREAK",
+        "members": [
+          "MAO",
+          "WU"
+        ],
+        "memberZh": [
+          "卯",
+          "午"
+        ],
+        "positions": [
+          "DAY",
+          "HOUR"
+        ],
+        "transformationEstablished": false,
+        "sourceAuthorityState": "SOURCE_GATED"
+      },
+      {
+        "type": "BRANCH_PUNISHMENT_PAIR",
+        "members": [
+          "ZI",
+          "MAO"
+        ],
+        "positions": [
+          "YEAR",
+          "DAY"
+        ],
+        "transformationEstablished": false,
+        "sourceAuthorityState": "SOURCE_GATED"
+      }
+    ],
+    "typeCounts": {
+      "STEM_COMBINATION": 1,
+      "BRANCH_CLASH": 1,
+      "BRANCH_BREAK": 1,
+      "BRANCH_PUNISHMENT_PAIR": 1
+    },
+    "limitations": [
+      "PAIR_OR_FULL_GROUP_PRESENCE_ONLY",
+      "NO_TRANSFORMATION_OR_COMBINATION_SUCCESS_VERDICT",
+      "NO_GOOD_BAD_SCORING",
+      "NO_EVENT_PREDICTION"
+    ],
+    "lineage": {
+      "sourceStrategyRef": "content/interpretation/bazi/authority/bzr-r1-source-strategy-v1.json"
+    },
+    "boundaries": {
+      "transformationVerdictCreated": false,
+      "goodBadConclusionCreated": false,
+      "interpretationCreated": false,
+      "eventPredictionCreated": false,
+      "productionEligible": false
+    },
+    "relationshipDigest": "3313915ec7ccd31826ca6c065285f23e9d0e91c503657af85d802a8d974ae7a2"
+  }
+}
