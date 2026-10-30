@@ -4,9 +4,16 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 import path from 'node:path';
 const root=process.cwd();
-const read=p=>fs.readFileSync(path.join(root,p),'utf8').replace(/^\uFEFF/,'');
+const uiPredecessors=new Map();
+const read=p=>(uiPredecessors.get(p)||fs.readFileSync(path.join(root,p))).toString('utf8').replace(/^\uFEFF/,'');
 const json=p=>JSON.parse(read(p));
-const digest=p=>crypto.createHash('sha256').update(fs.readFileSync(path.join(root,p))).digest('hex');
+const digest=p=>crypto.createHash('sha256').update(uiPredecessors.get(p)||fs.readFileSync(path.join(root,p))).digest('hex');
+
+// Validate current R4 bytes first, then run every historical assertion on its exact registered predecessor.
+const ui=json('content/civilization-atlas/maintenance/book-v-world-customer-journey-successor-v20.json');
+assert.equal(ui.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');assert.equal(ui.humanDecision,'PENDING');assert.equal(ui.predecessor,'content/civilization-atlas/maintenance/book-v-world-official-filing-successor-v19.json');assert.equal(digest(ui.predecessor),ui.predecessorSha256);
+for(const c of ui.changes){assert.equal(c.previousGitRevision,'8e77898f5ae86788789ae3ab45a4c51fc0f18a0b');const prior=worldGitObject('git',['show',c.previousGitRevision+':'+c.path]);assert.equal(crypto.createHash('sha256').update(prior).digest('hex'),c.previousSha256);assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,c.path))).digest('hex'),c.successorSha256);uiPredecessors.set(c.path,prior);}
+for(const d of ui.dependencies)assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,d.path))).digest('hex'),d.sha256);for(const k of ['canonicalTheoryChanged','historicalRecordsChanged','providerLiveEnabled','productionScheduleEnabled','productionAdmissionChanged'])assert.equal(ui[k],false);
 
 const freeze=json('content/civilization-atlas/freeze/book-v-civ-atlas-r1-production-freeze-v1.json');
 assert.equal(freeze.status,'PRODUCTION_ADMITTED_FROZEN');

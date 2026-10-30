@@ -1,0 +1,22 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';import {execFileSync} from 'node:child_process';
+import {worldQuestionTarget,worldRouteFromURL,worldJourneyURL} from '../assets/js/pages/civilization-atlas/world-journey-state-r3.js';
+import {topicRoute,CUSTOMER_TOPICS} from '../assets/js/customer-entry-topic-map.js';
+import {routeClientIntent} from '../functions/public/client-intent-router.js';
+import {worldPreviewBuildPolicy} from './lib/world-preview-worker-isolation.mjs';
+const rows=[];function check(id,fn){fn();rows.push({id,status:'PASS'});}
+const predecessor=execFileSync('git',['show','8e77898f5ae86788789ae3ab45a4c51fc0f18a0b:assets/js/customer-entry-topic-map.js'],{encoding:'utf8'});
+const old=await import('data:text/javascript;base64,'+Buffer.from(predecessor).toString('base64'));
+for(const topic of CUSTOMER_TOPICS.filter(x=>x.id!=='world'))for(const lang of ['zh-Hans','en'])check('OTHER_HOME_TOPIC_UNCHANGED_'+topic.id+'_'+lang,()=>assert.deepEqual(topicRoute(topic.name[lang],lang,topic.id),old.topicRoute(topic.name[lang],lang,topic.id)));
+for(const[q,mode]of [['世界正在发生什么？','landing'],['马来西亚经济有哪些变化？','now'],['全球供应链如何影响城市？','connections'],['罗马文明为什么衰落？','history'],['比较两个地区的发展。','compare'],['NVIDIA 过去两年的利润如何？','companies'],['东方咖啡市值多少？','companies'],['How do supply chains affect cities?','connections'],['Compare two regions','compare']])check('ACTUAL_EXISTING_HOME_ROUTER_'+q,()=>{const r=routeClientIntent({question:q,locale:'zh-Hans'});assert.equal(r.worldPresentation,mode);assert(!r.href.includes('reading='));assert.equal(r.providerCalls,0);assert.equal(r.boundaries.automaticPersistence,false);for(const k of ['methodChosenByClientRouter','lensExecutionAllowed','modelCalculationAllowed','persistenceAllowed','automaticRealityCase','automaticJourneyActivation'])assert.equal(r.boundaries[k],false);});
+check('EXPLICIT_READING_STAYS_KNOWLEDGE',()=>assert.equal(worldQuestionTarget('阅读相关文章：全球供应链'),null));
+check('OLD_ARTICLE_OVERRIDES_CONFLICTING_COMPANY_PARAMETER',()=>assert.equal(worldRouteFromURL('/world/?worldJourney=companies&reading=BOOK-6:x').journey,'history'));
+check('OLD_ATLAS_LINK_IS_HISTORY',()=>assert.equal(worldRouteFromURL('/world/?atlas=cases&intent=structure').journey,'history'));
+check('DEFAULT_DOES_NOT_MOUNT_COMPANY_OR_DATA',()=>assert.equal(worldRouteFromURL('/world/').journey,'landing'));
+check('UNKNOWN_ROUTE_HAS_EXPLICIT_REASON',()=>assert.equal(worldRouteFromURL('/world/?worldJourney=unregistered').unknownIntent,true));
+check('KNOWN_COMPANY_ID_PRESERVED_UNKNOWN_ENTITY_NOT_SUBSTITUTED',()=>{assert(worldQuestionTarget('东方咖啡市值多少？').href.includes('MYX%3A0338'));assert(worldQuestionTarget('NVIDIA profit').href.includes('q=NVIDIA'));assert(!worldQuestionTarget('NVIDIA profit').href.includes('0338'));});
+check('FILTER_AND_LOCALE_PRESERVED_BY_DIRECTION_CHANGE',()=>{const u=worldJourneyURL('/world/?locale=zh-Hans#v=2&region=MYS&year=2024','connections');assert.equal(u.searchParams.get('locale'),'zh-Hans');assert.equal(new URLSearchParams(u.hash.slice(1)).get('region'),'MYS');});
+check('EXISTING_SAFETY_OWNER_NOT_BYPASSED',()=>{const r=routeClientIntent({question:'I want to kill myself',locale:'en'});assert.notEqual(r.worldPresentation,'now');assert.equal(r.providerCalls,0);});
+check('EXACT_REVIEW_BRANCH_IS_READ_ONLY_NOT_MAIN',()=>{const env={CF_PAGES:'1',CF_PAGES_BRANCH:'codex/world-customer-experience-r3',CF_PAGES_URL:'https://fixture.phios-github.pages.dev',CF_PAGES_COMMIT_SHA:'a'.repeat(40)};assert.equal(worldPreviewBuildPolicy(env).mode,'READ_ONLY');assert.equal(worldPreviewBuildPolicy({...env,CF_PAGES_BRANCH:'main'}).active,false);});
+check('ROME_USES_EXISTING_REGISTERED_CASE',()=>{const u=new URL(worldQuestionTarget('罗马文明为什么衰落？').href,'https://local');assert.equal(new URLSearchParams(u.hash.slice(1)).get('case'),'CA-T06-02');assert(JSON.parse(fs.readFileSync('content/civilization-atlas/cases/civilization-case-registry-v1.json')).cases.some(c=>c.caseId==='CA-T06-02'));});
+console.log(JSON.stringify({status:'PASS',checks:rows.length,rows,paidProviderCalls:0,productionWrites:0,humanAcceptance:'PENDING'}));
