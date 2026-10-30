@@ -1,0 +1,16 @@
+# R6.11A cache-consumption trace
+
+This is a bounded local successor to R6.11, not a new report engine or asset registry.
+
+1. **Remote owner** — `phios-public-assets`, the fifteen exact existing registered keys. `read-assets.mjs` uses only the existing managed authorization and HTTPS GET. Current listing HTTP401; object GETs HTTP401 followed by HTTP429. These statuses prove neither existence nor absence, update time nor current hash. No automatic retry, token refresh, permission or remote mutation.
+2. **Historical authorized/read cache** — `.tmp/hd-report-automation-r5/visual-source-bytes/{locale}__{filename}` identifies a key by filename. The R5 metadata binds historical SHA. A same-key reupload does not change this pathname or automatically refresh its bytes. R611 used these historical bytes openly; they are retained, not reused as current evidence.
+3. **Canonical editorial Registry** — `functions/canonical-presentation-runtime/report-editorial-registry.js` generates the correct fifteen exact language/page object keys. Registry association alone is not freshness or semantic proof. `editorialAsset('HD',6,locale)` is null for all three locales; no P06 key/extension is invented. Remote P06 presence remains unknown.
+4. **New local authorized read cache** — successful GET bytes alone may populate `.tmp/hd-r611a/assets/{actual-SHA256}.webp`. The loader never overwrites a historical object. `decode-current.py` actually decodes WebP and calculates `SHA256('RGB:{width}x{height}:' + RGB pixels)`. ETag and SHA256 remain different fields. A new content version has a new path; no random query parameter, TTL guess or public configuration change.
+5. **Selection** — `freshness-gate.mjs` requires all fifteen current authenticated/decode identities, exact Registry identities, immutable content bytes, recorded visual role/language review and three distinct cover pixel identities. It then calls the original R611 orchestration/persisted-purchase/presentation owners. The synthetic 24-check validator fixture is not a real object observation.
+6. **Rendering** — `prepare-current.mjs` only writes the new folder's plans on gate PASS. `render-current.py` configures the original R611 native export owner, preserving accepted paragraphs, calculations, diagrams and 17 posters. Current preflight is BLOCKED before any PDF generation; no old-cache substitute. Existing private entitlement/storage/download owners remain unchanged. No production path has been enabled.
+
+**P04/P05:** historical cached EN P04 is the read guide (baked05); historical P05 is the PHI OS lens (baked04). Registry key assignment was correct; renderer faithfully consumed the historical bound bytes. Whether the latest upload fixes it cannot be resolved without reading the new bytes. No silent swap.
+
+**Covers:** all three historical cover RGB hashes match. Current covers have not been read, so neither correction nor continued failure is asserted. Current generation is held, not silently allowed to fall back.
+
+**TOC:** the actual preserved 95→96 native reflow fixture was rechecked (17 numbers, real page-reference link destinations, bookmarks and fixed geometry). This is explicitly historical evidence. New-image reflow and P06 integration remain untested/blocked; no new 95/96 page-count claim.

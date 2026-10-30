@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-29T09:58:31.746Z",
+  "apiTypePreviouslyUsed": "Cloudflare REST v4 R2 object/list endpoints",
+  "actualCredentialField": "Wrangler managed oauth_token",
+  "credentialPresent": true,
+  "configuredExpiry": "2026-10-29T07:33:19.869Z",
+  "expiredByLocalMetadata": true,
+  "credentialTypeCompatibleWithREST": "OAuth bearer is the correct credential class for Wrangler REST; no evidence an S3/Object Token was used as REST bearer",
+  "tokenValueRecorded": false,
+  "environmentCredentialNames": [],
+  "s3OwnerCodeExists": "scripts/book-i-manuscript.mjs:createR2Client and scripts/lib/knowledge-manuscripts/p0-human-review.mjs",
+  "s3Scope": "Existing code targets private manuscripts; not evidence of an authorized public-assets S3 credential",
+  "workerBindings": [
+    "phios-private-manuscripts",
+    "phios-private-reports",
+    "phios-private-books-sandbox",
+    "phios-private-reports-sandbox"
+  ],
+  "publicAssetsBindingConfigured": false,
+  "previous401": "Authenticated listing and first3 object GETs rejected. Server error details were not retained; do not assert a server-specific missing permission from HTTP401 alone.",
+  "previous429": "Prior script kept issuing sequential GETs after401, without per-response stop/backoff. This is a confirmed client retry-policy defect. Attribution of server rate limit to this process versus concurrent windows remains unproven.",
+  "currentNetworkRequests": 0,
+  "credentialChanges": 0,
+  "productionConfigurationChanges": 0,
+  "remoteStatus": "R2_REMOTE_BYTES_UNVERIFIED",
+  "concurrentProcessObservation": {
+    "nodePythonProcesses": 27,
+    "knownR2Readers": 0,
+    "scope": "OS read-only process snapshot; no command lines persisted. Other uninstrumented windows or account traffic remain unverified."
+  },
+  "existingPublicReadResolution": {
+    "requests": 6,
+    "http200": 6,
+    "credentialsUsed": false,
+    "permissionChanges": 0,
+    "scope": "Only current six P06 exact keys; independent from expired REST OAuth and HD15 front matter. Existing public channel was already available; it was not enabled by this task."
+  }
+}

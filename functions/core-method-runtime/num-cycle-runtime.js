@@ -10,6 +10,26 @@ export const NUM_CYCLE_ALGORITHM_VERSION = '1.0.0';
 
 const MASTER = new Set([11,22,33]);
 
+// Select among already calculated Western age bands. No Energy timing or new
+// cycle formula is introduced. Completed age changes on the birthday (a Feb 29
+// birthday changes on March 1 in a non-leap year under this calendar policy).
+export function selectNumWesternLifeStage(input={}) {
+  const {birthDate,targetDate,pinnacles=[],challenges=[]}=input??{};
+  if(!birthDate||!targetDate)return Object.freeze({available:false,reason:'DATES_REQUIRED'});
+  let b,t;
+  try { b=parseDate(birthDate,'birthDate');t=parseDate(targetDate,'targetDate'); }
+  catch { return Object.freeze({available:false,reason:'INVALID_DATES'}); }
+  const completedAge=t.year-b.year-Number(t.month<b.month||(t.month===b.month&&t.day<b.day));
+  if(completedAge<0)return Object.freeze({available:false,reason:'TARGET_BEFORE_BIRTH'});
+  if(!Array.isArray(pinnacles)||!Array.isArray(challenges))return Object.freeze({available:false,reason:'NATIVE_BANDS_REQUIRED'});
+  const matches=pinnacles.filter(x=>x&&Number.isInteger(x.cycleNumber)&&x.cycleNumber>=1&&x.cycleNumber<=4&&Number.isInteger(x.startAge)&&x.startAge>=0&&(x.endAge===null||(Number.isInteger(x.endAge)&&x.endAge>=x.startAge))&&completedAge>=x.startAge&&(x.endAge===null||completedAge<=x.endAge));
+  if(matches.length!==1)return Object.freeze({available:false,reason:matches.length?'AMBIGUOUS_STAGE':'NATIVE_BANDS_REQUIRED'});
+  const selected=matches[0],paired=challenges.filter(x=>x?.cycleNumber===selected.cycleNumber);
+  if(paired.length!==1||!Number.isFinite(selected.value??selected.number)||!Number.isFinite(paired[0].value??paired[0].number))return Object.freeze({available:false,reason:'NATIVE_BANDS_REQUIRED'});
+  const challenge=paired[0];
+  return Object.freeze({available:true,birthDate,targetDate,completedAge,cycleNumber:selected.cycleNumber,pinnacle:selected.value??selected.number,challenge:challenge.value??challenge.number,startAge:selected.startAge,endAge:selected.endAge,agePolicy:'COMPLETED_CALENDAR_YEARS_FEB29_ROLLOVER_MARCH1',boundaryPolicy:'PHI_OS_NUMERIC_LIFE_STAGE_BOUNDARY_V1',calculationAuthority:'functions/core-method-runtime/num-cycle-runtime.js'});
+}
+
 function object(value, message) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
     throw new TypeError(message);

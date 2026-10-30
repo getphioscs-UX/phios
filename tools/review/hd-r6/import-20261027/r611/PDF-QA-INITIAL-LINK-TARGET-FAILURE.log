@@ -1,0 +1,6 @@
+[disk-budget] R611 full physical page raster QA: {"availableBytes": 46717198336, "estimatedBytes": 800000000, "reserveBytes": 5000000000, "requiredBytes": 5800000000, "overridden": false}
+Traceback (most recent call last):
+  File "C:\phios\tools\review\hd-r6\import-20261027\r611\pdf-qa.py", line 12, in <module>
+    dest=a['/Dest'];index=next(i for i,p in enumerate(r.pages) if p.indirect_reference==dest[0]);expected=layout['chapters'][str(n)];assert index+1==expected;assert r.get_destination_page_number(r.outline[n-1])+1==expected;links.append({'section':n,'printedPage':expected,'linkTargetPage':index+1,'bookmarkTargetPage':expected})
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration

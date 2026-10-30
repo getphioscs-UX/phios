@@ -1,0 +1,78 @@
+{
+  "identity": "PHIOS-HD-TOC-SEMIFIXED-R611",
+  "scope": "HUMAN_DESIGN_REPORT_ONLY",
+  "page_size": "A4_PORTRAIT",
+  "version": "1.0.0",
+  "authoritative_assets": "existing local repository + registered R2 mapping, never inferred from these relative paths alone",
+  "front_matter_order": ["P01_COVER", "P02_METHOD_INTRO", "P03_ORIGIN", "P04_PHIOS_LENS", "P05_HOW_TO_READ"],
+  "toc_position": "immediately after P05 and before calculated BodyGraph and activation table",
+  "toc_page_role": "ONE_SEMIFIXED_PAGE",
+  "toc_fixed_content": ["background", "branding", "title", "17 section names", "section order", "typography", "decoration", "row geometry"],
+  "toc_dynamic_content": ["17 physical final section-opener page numbers", "internal TOC links", "PDF outlines/bookmarks"],
+  "page_number_rules": {
+    "source": "actual final rendered PDF page map, 1-based physical page indexing",
+    "target": "each section's fixed visual opener, not subsequent body text",
+    "must_not": ["reuse R610 page numbers", "add a hard-coded offset", "estimate from word count", "derive from draft HTML pagination"],
+    "missing_section": "BLOCK_PDF_RELEASE_AND_RECORD_PRECISE_REASON",
+    "link_target": "same exact section visual opener page as printed number",
+    "two_pass_layout": "first compose with reserved one-page TOC -> collect real chapter page map -> inject numerals/links -> revalidate no pagination change"
+  },
+  "languages": {
+    "zh-Hans": {
+      "front_pages": [
+        "images/reports/human-design/editorial/zh-Hans/RPT-HD-P01-COVER-v1.webp",
+        "images/reports/human-design/editorial/zh-Hans/RPT-HD-P02-METHOD-INTRO-v1.webp",
+        "images/reports/human-design/editorial/zh-Hans/RPT-HD-P03-ORIGIN-v1.webp",
+        "images/reports/human-design/editorial/zh-Hans/RPT-HD-P04-PHIOS-LENS-v1.webp",
+        "images/reports/human-design/editorial/zh-Hans/RPT-HD-P05-HOW-TO-READ-v1.webp"
+      ]
+    },
+    "en": {
+      "front_pages": [
+        "images/reports/human-design/editorial/en/RPT-HD-P01-COVER-v1.webp",
+        "images/reports/human-design/editorial/en/RPT-HD-P02-METHOD-INTRO-v1.webp",
+        "images/reports/human-design/editorial/en/RPT-HD-P03-ORIGIN-v1.webp",
+        "images/reports/human-design/editorial/en/RPT-HD-P04-PHIOS-LENS-v1.webp",
+        "images/reports/human-design/editorial/en/RPT-HD-P05-HOW-TO-READ-v1.webp"
+      ]
+    },
+    "bilingual": {
+      "front_pages": [
+        "images/reports/human-design/editorial/bilingual/RPT-HD-P01-COVER-v1.webp",
+        "images/reports/human-design/editorial/bilingual/RPT-HD-P02-METHOD-INTRO-v1.webp",
+        "images/reports/human-design/editorial/bilingual/RPT-HD-P03-ORIGIN-v1.webp",
+        "images/reports/human-design/editorial/bilingual/RPT-HD-P04-PHIOS-LENS-v1.webp",
+        "images/reports/human-design/editorial/bilingual/RPT-HD-P05-HOW-TO-READ-v1.webp"
+      ]
+    }
+  },
+  "section_titles": [
+    {"id":"SEC01","zh-Hans":"人类图结构","en":"Human Design Architecture"},
+    {"id":"SEC02","zh-Hans":"类型与策略","en":"Type & Strategy"},
+    {"id":"SEC03","zh-Hans":"内在权威","en":"Inner Authority"},
+    {"id":"SEC04","zh-Hans":"定义与整合","en":"Definition & Integration"},
+    {"id":"SEC05","zh-Hans":"九个中心","en":"Nine Centers"},
+    {"id":"SEC06","zh-Hans":"通道与回路","en":"Channels & Circuits"},
+    {"id":"SEC07","zh-Hans":"闸门与爻线","en":"Gates & Lines"},
+    {"id":"SEC08","zh-Hans":"人生角色","en":"Profile & Life Role"},
+    {"id":"SEC09","zh-Hans":"轮回交叉与生命主题","en":"Incarnation Cross & Life Theme"},
+    {"id":"SEC10","zh-Hans":"变量与PHS","en":"Variables & PHS"},
+    {"id":"SEC11","zh-Hans":"环境与感知","en":"Environment & Perception"},
+    {"id":"SEC12","zh-Hans":"关系与制约","en":"Relationship & Conditioning"},
+    {"id":"SEC13","zh-Hans":"工作与协作","en":"Career & Collaboration"},
+    {"id":"SEC14","zh-Hans":"资源与贡献","en":"Resources & Contribution"},
+    {"id":"SEC15","zh-Hans":"整张图整合","en":"Whole-Chart Integration"},
+    {"id":"SEC16","zh-Hans":"现实对照","en":"Reality Comparison"},
+    {"id":"SEC17","zh-Hans":"练习、持续观察与边界","en":"Practice, Continuity & Boundaries"}
+  ],
+  "publication_rules": {
+    "selected_language_is_immutable_order_field": true,
+    "forbid_cross_locale_image_fallback": true,
+    "forbid_old_first_two_pages": true,
+    "preserve_bodygraph_activation_data_chapters_and_17_posters": true,
+    "preserve_six_owner_editorial_accepted_chapters": true,
+    "cognition_inner_vision_restored_subject_to_precision_gates": true,
+    "no_commercial_promotion_on_visual_acceptance": true,
+    "never_infer_r2_keys": true
+  }
+}

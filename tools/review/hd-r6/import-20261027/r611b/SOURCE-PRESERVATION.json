@@ -1,0 +1,729 @@
+{
+  "HEAD": "0deb123097062750ba4d294171a2d975bff1b2a0",
+  "changedProductFiles": [
+    {
+      "path": "functions/canonical-presentation-runtime/report-editorial-registry.js",
+      "sha256": "dd11be4b226a25564c256bf9740b22bad095bee65ea3090498e4951ae998bdd2",
+      "currentSHA256": "88c7d35c21febb016667617a525ad742e1a6fe2d8f02417359088a1bfbdcab4f",
+      "diff": "diff --git a/functions/canonical-presentation-runtime/report-editorial-registry.js b/functions/canonical-presentation-runtime/report-editorial-registry.js\nindex 6393b307..f125ac25 100644\n--- a/functions/canonical-presentation-runtime/report-editorial-registry.js\n+++ b/functions/canonical-presentation-runtime/report-editorial-registry.js\n@@ -14,3 +14,129 @@ export const REPORT_EDITORIAL_ASSETS=Object.freeze(VISUAL_REPORT_PRODUCTS.flatMa\n  ...((()=>{if(!['PROFILE','ECR'].includes(p.methodId))return {};const a=currentFixedManifest.assets.find(a=>a.methodId===p.methodId&&a.pageId==='P0'+(i+1)&&a.language==='bilingual');return a?{object_key:a.objectKey,active:a.active,verification:a.active?'verified-http-200':'unverified',width:a.width,height:a.height,version:a.version,fixedAssetLanguage:'bilingual',humanReview:a.approval}:{};})())\n })))));\n export function editorialAsset(methodId,page,locale){return REPORT_EDITORIAL_ASSETS.find(x=>x.methodId===methodId&&x.page===page&&x.locale===locale)||null;}\n+\n+// R6.11B explicit contents evidence stays separate from the five front-page roles.\n+// All six exact keys now have actual GET200 + decoded byte identities. No -v1 suffix was appended.\n+export const REPORT_CONTENTS_ASSETS=Object.freeze([\n+ {\n+  \"methodId\": \"ZWR\",\n+  \"locale\": \"bilingual\",\n+  \"page\": 6,\n+  \"pageRole\": \"SEMIFIXED_CONTENTS\",\n+  \"asset_code\": \"RPT-ZIWEI-P06-CONTENT\",\n+  \"object_key\": \"images/reports/ziwei/editorial/bilingual/RPT-ZIWEI-P06-CONTENT.webp\",\n+  \"bucket\": \"phios-public-assets\",\n+  \"ownerEvidence\": \"OWNER_R611B_SCOPE_AND_ACTUAL_PUBLIC_GET_200\",\n+  \"sha256\": \"e20165dfd79ba879da0f14c53327b13de46604ffae5d2b47e29d5bafc78d95b7\",\n+  \"pixelSHA256\": \"f4daf04b5bbbb737f9c9cecb2246ee40d6f756b0744657d413bfed55ae3852f9\",\n+  \"width\": 1122,\n+  \"height\": 1402,\n+  \"bytes\": 409794,\n+  \"mime\": \"image/webp\",\n+  \"active\": false,\n+  \"verification\": \"CURRENT_BYTES_DECODED\",\n+  \"visualAcceptance\": \"PENDING_OWNER_WITH_DOCUMENTED_TITLE_ISSUES\",\n+  \"customerPublishable\": false\n+ },\n+ {\n+  \"methodId\": \"HD\",\n+  \"locale\": \"bilingual\",\n+  \"page\": 6,\n+  \"pageRole\": \"SEMIFIXED_CONTENTS\",\n+  \"asset_code\": \"RPT-HD-P06-CONTENT\",\n+  \"object_key\": \"images/reports/human-design/editorial/bilingual/RPT-HD-P06-CONTENT.webp\",\n+  \"bucket\": \"phios-public-assets\",\n+  \"ownerEvidence\": \"OWNER_R611B_SCOPE_AND_ACTUAL_PUBLIC_GET_200\",\n+  \"sha256\": \"d226a4fa4158e51f9b328caf62b89c4e23295d1ede2ec014688ee945b10ec083\",\n+  \"pixelSHA256\": \"d2920efff6e697daab718dc7bf67cf5ea3a4a358fa8827199de3b38d01d198fd\",\n+  \"width\": 1024,\n+  \"height\": 1536,\n+  \"bytes\": 320412,\n+  \"mime\": \"image/webp\",\n+  \"active\": false,\n+  \"verification\": \"CURRENT_BYTES_DECODED\",\n+  \"visualAcceptance\": \"PENDING_OWNER_WITH_DOCUMENTED_TITLE_ISSUES\",\n+  \"customerPublishable\": false\n+ },\n+ {\n+  \"methodId\": \"BZR\",\n+  \"locale\": \"bilingual\",\n+  \"page\": 6,\n+  \"pageRole\": \"SEMIFIXED_CONTENTS\",\n+  \"asset_code\": \"RPT-BAZI-P06-CONTENT\",\n+  \"object_key\": \"images/reports/bazi/editorial/bilingual/RPT-BAZI-P06-CONTENT.webp\",\n+  \"bucket\": \"phios-public-assets\",\n+  \"ownerEvidence\": \"OWNER_R611B_SCOPE_AND_ACTUAL_PUBLIC_GET_200\",\n+  \"sha256\": \"9ab82efc1756b34f810b12a82b542a5df835fb53000d1438c7c1fccc58f243d5\",\n+  \"pixelSHA256\": \"c90da0580113cd219484edfbac8f26937e7ee091436008afc93f7f34dacf2fbf\",\n+  \"width\": 1055,\n+  \"height\": 1491,\n+  \"bytes\": 393880,\n+  \"mime\": \"image/webp\",\n+  \"active\": false,\n+  \"verification\": \"CURRENT_BYTES_DECODED\",\n+  \"visualAcceptance\": \"PENDING_OWNER_WITH_DOCUMENTED_TITLE_ISSUES\",\n+  \"customerPublishable\": false\n+ },\n+ {\n+  \"methodId\": \"NUM\",\n+  \"locale\": \"bilingual\",\n+  \"page\": 6,\n+  \"pageRole\": \"SEMIFIXED_CONTENTS\",\n+  \"asset_code\": \"RPT-NUM-P06-CONTENT\",\n+  \"object_key\": \"images/reports/numerology/editorial/bilingual/RPT-NUM-P06-CONTENT.webp\",\n+  \"bucket\": \"phios-public-assets\",\n+  \"ownerEvidence\": \"OWNER_R611B_SCOPE_AND_ACTUAL_PUBLIC_GET_200\",\n+  \"sha256\": \"23f46aed1cfde3ff8b2e9d9f3b4b6e28dc43d5809f7af8f267b10a0d7e572a54\",\n+  \"pixelSHA256\": \"a82edb958622b271573459b9cd36e0dd63efcf67a6ea3df58e566db5becae29b\",\n+  \"width\": 1024,\n+  \"height\": 1536,\n+  \"bytes\": 405850,\n+  \"mime\": \"image/webp\",\n+  \"active\": false,\n+  \"verification\": \"CURRENT_BYTES_DECODED\",\n+  \"visualAcceptance\": \"PENDING_OWNER_WITH_DOCUMENTED_TITLE_ISSUES\",\n+  \"customerPublishable\": false\n+ },\n+ {\n+  \"methodId\": \"AST\",\n+  \"locale\": \"bilingual\",\n+  \"page\": 6,\n+  \"pageRole\": \"SEMIFIXED_CONTENTS\",\n+  \"asset_code\": \"RPT-ASTROLOGY-P06-CONTENT\",\n+  \"object_key\": \"images/reports/astrology/editorial/bilingual/RPT-ASTROLOGY-P06-CONTENT.webp\",\n+  \"bucket\": \"phios-public-assets\",\n+  \"ownerEvidence\": \"OWNER_R611B_SCOPE_AND_ACTUAL_PUBLIC_GET_200\",\n+  \"sha256\": \"9ceef3a884c829da8087734f4f627366da9929809c9473cac9c7beb042048097\",\n+  \"pixelSHA256\": \"40eedd98b770e5d5432e661f82c84f16cec95f1cf1227dc4c4f8f7fa1803fa85\",\n+  \"width\": 1024,\n+  \"height\": 1536,\n+  \"bytes\": 458058,\n+  \"mime\": \"image/webp\",\n+  \"active\": false,\n+  \"verification\": \"CURRENT_BYTES_DECODED\",\n+  \"visualAcceptance\": \"PENDING_OWNER_WITH_DOCUMENTED_TITLE_ISSUES\",\n+  \"customerPublishable\": false\n+ },\n+ {\n+  \"methodId\": \"ECR\",\n+  \"locale\": \"bilingual\",\n+  \"page\": 6,\n+  \"pageRole\": \"SEMIFIXED_CONTENTS\",\n+  \"asset_code\": \"RPT-ECR-P06-CONTENT\",\n+  \"object_key\": \"images/reports/ecr/editorial/bilingual/RPT-ECR-P06-CONTENT.webp\",\n+  \"bucket\": \"phios-public-assets\",\n+  \"ownerEvidence\": \"OWNER_R611B_SCOPE_AND_ACTUAL_PUBLIC_GET_200\",\n+  \"sha256\": \"446724d48de3f0d16626a5ae1d9c53fea71833acbffe896eee9926b1b10f206e\",\n+  \"pixelSHA256\": \"199a485d4479c5524e51a0a0704dd0f9987e8db185588bbb19b057461acb249e\",\n+  \"width\": 1055,\n+  \"height\": 1491,\n+  \"bytes\": 375050,\n+  \"mime\": \"image/webp\",\n+  \"active\": false,\n+  \"verification\": \"CURRENT_BYTES_DECODED\",\n+  \"visualAcceptance\": \"PENDING_OWNER_WITH_DOCUMENTED_TITLE_ISSUES\",\n+  \"customerPublishable\": false\n+ }\n+].map(Object.freeze));\n+export function reportContentsAsset(methodId){return REPORT_CONTENTS_ASSETS.find(a=>a.methodId===methodId)||null;}\n",
+      "changeClass": "EXPLICIT_LOCAL_PRESENTATION_ACCEPTANCE_FIX",
+      "productionActivated": false
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-editorial-resolver.js",
+      "sha256": "ea4a13f777022cd7d69f373910f0bf00d5dfc208a11bf31f58e0e806305df4c6",
+      "currentSHA256": "2b8a378614b9be691b032265d83a355d83728a15982d76eebaec463b0454b699",
+      "diff": "diff --git a/functions/canonical-presentation-runtime/report-editorial-resolver.js b/functions/canonical-presentation-runtime/report-editorial-resolver.js\nindex a379cd1b..52690b3e 100644\n--- a/functions/canonical-presentation-runtime/report-editorial-resolver.js\n+++ b/functions/canonical-presentation-runtime/report-editorial-resolver.js\n@@ -1,6 +1,24 @@\n import {PublicAssetResolutionError,isAssetVerificationRenderable,resolvePublicAsset} from '../../assets/js/runtime/web-production/asset-resolver.js';\n import {reportVisualArchitecture,fixedReportAssetLanguage} from './report-visual-architecture.js';\n import visualManifest from '../../content/reports/shared/report-visual-assets-r2.json';\n+\n+// R6.11 pure presentation boundary. The server caller checks the existing\n+// purchase owner first and supplies its language plus existing registry rows.\n+// This function never grants access or enables production publication.\n+export function resolveHdFrontMatterForLocalReview({purchasedPresentation,registeredPages,bindings,localReview=false}={}){\n+ if(!localReview)throw fixedVisualError('HD_FRONT_MATTER_LOCAL_REVIEW_ONLY');\n+ if(!purchasedPresentation||!['zh-Hans','en','bilingual'].includes(purchasedPresentation.reportLocale)||!['SINGLE','BILINGUAL'].includes(purchasedPresentation.reportLanguageMode))throw fixedVisualError('HD_FRONT_MATTER_PERSISTED_LANGUAGE_REQUIRED');\n+ const locale=purchasedPresentation.reportLocale;\n+ const pages=[];\n+ for(let n=1;n<=5;n++){\n+  const registered=registeredPages?.[n-1],rows=bindings?.rows?.filter(r=>r.language===locale&&r.pageId==='P0'+n)||[];\n+  if(!registered||rows.length!==1)throw fixedVisualError('HD_FRONT_MATTER_EXACT_ASSET_MISSING:'+locale+':P0'+n);\n+  const a=rows[0];\n+  if(a.registryAssetId!==registered.asset_code||a.objectKey!==registered.object_key||a.mime!=='image/webp'||!Number.isInteger(a.width)||!Number.isInteger(a.height)||a.width<=0||a.height<=0||!/^[a-f0-9]{64}$/.test(a.sha256)||a.verification!=='LOCAL_BYTES_DECODED_EXACT_HASH'||a.approval!=='OWNER_SELECTED_EXACT_PATH_R611_LOCAL_CANDIDATE')throw fixedVisualError('HD_FRONT_MATTER_ASSET_BINDING_INVALID:'+locale+':P0'+n);\n+  pages.push(Object.freeze({...a,contentLanguage:locale,physicalRole:'FIXED_EDITORIAL',productionAdmitted:false}));\n+ }\n+ return Object.freeze({methodId:'HD',contentLanguage:locale,languageAuthority:'PERSISTED_ORDER_REPORT_PRESENTATION',pages:Object.freeze(pages),localReview:true,customerPublishable:false});\n+}\n const fixedVisualError=message=>Object.assign(new Error(message),{code:message.split(':')[0],status:409});\n \n export function reportContentLocale(locale){if(locale==='zh'||locale==='ZH')return 'zh-Hans';if(locale==='EN')return 'en';if(locale==='BILINGUAL')return 'bilingual';if(!['zh-Hans','en','bilingual'].includes(locale))throw fixedVisualError('REPORT_CONTENT_LANGUAGE_INVALID');return locale;}\n@@ -70,3 +88,31 @@ export function composeFixedEditorialReport({methodId,contentLanguage,contentPag\n  const pages=fixed.map(a=>renderFixedReportPage({methodId,pageId:a.pageId,contentLanguage:locale,manifest})+contentPages.filter(p=>p.afterSectionId===a.pageId).map(p=>`<article class=\"report-customer-content\" data-page-role=\"BODY_CONTENT\" data-body-key=\"${escapeVisual(body.objectKey)}\" lang=\"${locale==='bilingual'?'zh-Hans':locale}\" data-source-owner=\"${p.sourceOwner.replace(/[^a-zA-Z0-9_-]/g,'')}\"><div class=\"report-body-reading-field\">${p.html}</div></article>`).join('')).join('');\n  return {html:`<!doctype html><html lang=\"${locale==='bilingual'?'zh-Hans':locale}\"><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><style>@page{size:A4;margin:0}body{margin:0;color:#17333e;font:16px/1.65 system-ui,'Microsoft YaHei',sans-serif;${body?`--report-body-image:url('${escapeVisual(body.url)}')`:''}}*{box-sizing:border-box}${FIXED_REPORT_PAGE_CSS}${REPORT_BODY_PAGE_CSS}${contentCss}</style>${body?`<div class=\"report-body-backdrop\" data-body-key=\"${escapeVisual(body.objectKey)}\" aria-hidden=\"true\"></div>`:''}<main>${pages}</main></html>`,contentLanguage:locale,fixedAssetLanguage:fixed[0].fixedAssetLanguage,masterSectionMode:'FIXED',bodyAsset:body?{objectKey:body.objectKey,sha256:body.sha256}:null,providerCalls:0,customerPublishable:false};\n }\n+\n+// Acceptance-fix candidate: one shared bilingual P06, actual native final-layout\n+// events, and measured number slots. Publication remains with existing owners.\n+export function planSemiFixedReportContents({methodId,purchasedPresentation,registeredAsset,assetRead,visualReview,sectionContract,finalLayout}={}){\n+ const fail=code=>{throw fixedVisualError(code);};\n+ if(!['HD','BZR','ZWR','NUM','AST','ECR'].includes(methodId))fail('P06_METHOD_INVALID');\n+ const locale=reportContentLocale(purchasedPresentation?.reportLocale);\n+ if(purchasedPresentation?.reportLanguageMode!==(locale==='bilingual'?'BILINGUAL':'SINGLE'))fail('P06_PURCHASE_LANGUAGE_REQUIRED');\n+ if(!registeredAsset||registeredAsset.methodId!==methodId||registeredAsset.locale!=='bilingual'||registeredAsset.page!==6||registeredAsset.pageRole!=='SEMIFIXED_CONTENTS'||!registeredAsset.object_key)fail('P06_EXACT_REGISTRY_REQUIRED');\n+ if(assetRead?.methodId!==methodId||assetRead.objectKey!==registeredAsset.object_key||assetRead.httpStatus!==200||assetRead.verification!=='CURRENT_BYTES_DECODED'||assetRead.mime!=='image/webp'||!Number.isInteger(assetRead.width)||!Number.isInteger(assetRead.height)||Math.min(assetRead.width,assetRead.height)<=0||!/^[a-f0-9]{64}$/.test(assetRead.sha256)||!/^[a-f0-9]{64}$/.test(assetRead.decodedPngSHA256))fail('P06_CURRENT_OBJECT_BYTES_REQUIRED');\n+ if(registeredAsset.sha256&&registeredAsset.sha256!==assetRead.sha256)fail('P06_REGISTERED_VERSION_DRIFT');\n+ if(!sectionContract||sectionContract.methodId!==methodId||!sectionContract.version||!Array.isArray(sectionContract.sections)||!sectionContract.sections.length)fail('P06_SECTION_OWNER_REQUIRED');\n+ const sections=sectionContract.sections,ids=sections.map(s=>s.id);\n+ if(new Set(ids).size!==ids.length||sections.some(s=>!s.id||!s.zh||!s.en))fail('P06_SECTION_IDENTITY_INVALID');\n+ if((visualReview?.accepted!==true&&visualReview?.localCandidate!==true)||visualReview.sha256!==assetRead.sha256||visualReview.methodId!==methodId||visualReview.fixedTitlesVerified!==true||visualReview.pageNumbersBlank!==true||!Array.isArray(visualReview.rows)||visualReview.rows.length!==ids.length)fail('P06_VISUAL_ACCEPTANCE_REQUIRED');\n+ if(finalLayout?.methodId!==methodId||finalLayout.contentLanguage!==locale||!finalLayout.reportId||!finalLayout.version||!Number.isInteger(finalLayout.pageCount)||finalLayout.pageCount<7||!Array.isArray(finalLayout.sectionOpeners)||finalLayout.sectionOpeners.length!==ids.length)fail('P06_FINAL_LAYOUT_REQUIRED');\n+ let previous=5;\n+ const rows=sections.map((s,i)=>{\n+  const events=finalLayout.sectionOpeners.filter(e=>e.sectionId===s.id),slots=visualReview.rows.filter(r=>r.sectionId===s.id);\n+  if(events.length!==1||slots.length!==1)fail('P06_SECTION_DUPLICATE_OR_MISSING');\n+  const ev=events[0],slot=slots[0],n=ev.physicalPageIndex0;\n+  if(slot.zh!==s.zh||slot.en!==s.en)fail('P06_FIXED_TITLES_MISMATCH');\n+  if(!Number.isInteger(n)||n<=previous||n>=finalLayout.pageCount)fail('P06_SECTION_PAGE_ORDER_INVALID');previous=n;\n+  if(!Number.isFinite(slot.xRight)||!Number.isFinite(slot.y)||slot.xRight<=0||slot.xRight>=1||slot.y<=0||slot.y>=1||!Array.isArray(slot.rect)||slot.rect.length!==4||slot.rect.some(x=>!Number.isFinite(x)||x<0||x>1)||slot.rect[0]>=slot.rect[2]||slot.rect[1]>=slot.rect[3]||slot.xRight<slot.rect[0]||slot.xRight>slot.rect[2]||slot.y<slot.rect[1]||slot.y>slot.rect[3])fail('P06_NUMBER_SLOT_INVALID');\n+  return Object.freeze({sectionId:s.id,titleZh:s.zh,titleEn:s.en,physicalPageNumber1:n+1,targetPageIndex0:n,xRight:slot.xRight,y:slot.y,rect:Object.freeze([...slot.rect])});\n+ });\n+ return Object.freeze({methodId,contentLanguage:locale,fixedAssetLanguage:'bilingual',objectKey:registeredAsset.object_key,sourceSHA256:assetRead.sha256,decodedPngSHA256:assetRead.decodedPngSHA256,imageWidth:assetRead.width,imageHeight:assetRead.height,tocPageIndex0:5,physicalPageCount:finalLayout.pageCount,reportId:finalLayout.reportId,version:finalLayout.version,visualAcceptance:visualReview.accepted===true?'OWNER_ACCEPTED':'LOCAL_CANDIDATE_PENDING_OWNER',rows:Object.freeze(rows),customerPublishable:false});\n+}\n",
+      "changeClass": "EXPLICIT_LOCAL_PRESENTATION_ACCEPTANCE_FIX",
+      "productionActivated": false
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/private-pdf-renderer.js",
+      "sha256": "26e6846f49b023087a3a40fa7c686156bb431ed67a6baa8598227e649dc0cdca",
+      "currentSHA256": "439b4004a01f4ebccfa6b6db90b5a84f57d50f623d2f65fab6bc407284a9204a",
+      "diff": "diff --git a/functions/canonical-presentation-runtime/private-pdf-renderer.js b/functions/canonical-presentation-runtime/private-pdf-renderer.js\nindex 567497f0..f2001bf9 100644\n--- a/functions/canonical-presentation-runtime/private-pdf-renderer.js\n+++ b/functions/canonical-presentation-runtime/private-pdf-renderer.js\n@@ -1,7 +1,7 @@\n-import {PDFDocument,rgb,StandardFonts} from 'pdf-lib';\n+import {PDFDocument,rgb,StandardFonts,PDFName,PDFHexString} from 'pdf-lib';\n import fontkit from '@pdf-lib/fontkit';\n // Layout only: consumes the existing governed customer PDF projection.\n-export async function renderReleasedCustomerPdf(projection,fontBytes){\n+export async function renderReleasedCustomerPdf(projection,fontBytes,{onSectionOpener}={}){\n  if(projection?.surface!=='PDF'||projection.renderState!=='ready_for_render')throw new Error('CPR_PDF_PROJECTION_REQUIRED');\n  const pdf=await PDFDocument.create();pdf.registerFontkit(fontkit);\n  // Review-only subset embedding preserves unambiguous digit/CJK ToUnicode\n@@ -33,10 +33,48 @@ export async function renderReleasedCustomerPdf(projection,fontBytes){\n  }\n  // Local review candidates must not inherit the released-report label.\n  const reviewOnly=projection.reviewOnly===true;\n+ if(reviewOnly&&onSectionOpener){\n+  const ref=projection.reportReference;\n+  if(!projection.methodId||!ref?.reportId||!ref.reportVersion||!projection.locale)throw Error('P06_NATIVE_REPORT_IDENTITY_REQUIRED');\n+  pdf.catalog.set(PDFName.of('PHIOSContentsIdentity'),pdf.context.obj({MethodId:PDFHexString.fromText(projection.methodId),ReportId:PDFHexString.fromText(ref.reportId),Version:PDFHexString.fromText(ref.reportVersion),ContentLanguage:PDFHexString.fromText(projection.locale)}));\n+ }\n+\n  next();paragraph(reviewOnly?(projection.locale==='zh-Hans'?'部分审阅稿 · 不可交付':'Partial review - not for delivery'):(projection.locale==='zh-Hans'?'私人已发布报告':'Private released report'),21,accent);\n  paragraph(`${projection.locale==='zh-Hans'?'版本':'Version'} ${projection.reportReference.reportVersion}`,10);\n  const headingReserve=balancedReview&&projection.reviewHeadingReserve===175?175:(balancedReview?210:140);\n- for(const section of projection.sections){const reserve=balancedReview&&projection.reviewHeadingReserve===175&&section.reviewChapterOpening===true?260:headingReserve;if(section.pageBreakBefore===true||y<reserve)next();paragraph(section.title,15,accent);paragraph(section.authorityLabel,9,accent);const reviewSize=balancedReview&&Number.isFinite(section.reviewFontSize)&&section.reviewFontSize>=9&&section.reviewFontSize<=11?section.reviewFontSize:11;paragraph(section.content,reviewSize);}\n+ for(const section of projection.sections){const reserve=balancedReview&&projection.reviewHeadingReserve===175&&section.reviewChapterOpening===true?260:headingReserve;if(section.pageBreakBefore===true||y<reserve)next();if(reviewOnly&&onSectionOpener)onSectionOpener({sectionId:section.id,physicalPageIndex0:pages.length-1});paragraph(section.title,15,accent);paragraph(section.authorityLabel,9,accent);const reviewSize=balancedReview&&Number.isFinite(section.reviewFontSize)&&section.reviewFontSize>=9&&section.reviewFontSize<=11?section.reviewFontSize:11;paragraph(section.content,reviewSize);}\n  pages.forEach((p,i)=>p.drawText(`${i+1} / ${pages.length}`,{x:480,y:32,size:9,font,color:ink}));\n  pdf.setTitle('PHI OS private report');pdf.setProducer('PHI OS governed private delivery');return pdf.save();\n }\n+\n+// Post-layout helper on the existing native PDF document. It does not grant\n+// entitlement, source rights, current-asset approval or production admission.\n+export async function applySemiFixedReportContents(pdf,{plan,pngBytes,font}={}){\n+ const bytes=pngBytes instanceof Uint8Array?pngBytes:new Uint8Array(pngBytes||[]);\n+ const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),x=>x.toString(16).padStart(2,'0')).join('');\n+ if(!plan||plan.customerPublishable!==false||plan.tocPageIndex0!==5||plan.physicalPageCount!==pdf.getPageCount()||digest!==plan.decodedPngSHA256||!font)throw Error('P06_PDF_BOUND_PLAN_REQUIRED');\n+ const identity=pdf.catalog.lookup(PDFName.of('PHIOSContentsIdentity'));\n+ if(!identity||[['MethodId',plan.methodId],['ReportId',plan.reportId],['Version',plan.version],['ContentLanguage',plan.contentLanguage]].some(([key,value])=>identity.get(PDFName.of(key))?.decodeText?.()!==value))throw Error('P06_REPORT_IDENTITY_DRIFT');\n+ const pages=pdf.getPages(),page=pages[5];\n+ if(page.node.Annots()?.size())throw Error('P06_EXISTING_ANNOTATIONS_REQUIRE_OWNER_RECONCILIATION');\n+ const image=await pdf.embedPng(bytes);if(image.width!==plan.imageWidth||image.height!==plan.imageHeight)throw Error('P06_DECODE_DIMENSIONS_DRIFT');\n+ const {width:W,height:H}=page.getSize(),scale=Math.min(W/image.width,H/image.height),w=image.width*scale,h=image.height*scale,x=(W-w)/2,y=(H-h)/2;\n+ // Replace the reserved slot stream; do not hide stale/internal text beneath art.\n+ page.node.delete(PDFName.of('Contents'));page.resetPosition();\n+ page.drawRectangle({x:0,y:0,width:W,height:H,color:rgb(1,1,1)});page.drawImage(image,{x,y,width:w,height:h});\n+ const c=pdf.context,items=[];\n+ for(const row of plan.rows){\n+  if(!pages[row.targetPageIndex0]||row.physicalPageNumber1!==row.targetPageIndex0+1)throw Error('P06_TARGET_PAGE_DRIFT');\n+  const text=String(row.physicalPageNumber1),size=11;page.drawText(text,{x:x+row.xRight*w-font.widthOfTextAtSize(text,size),y:y+row.y*h,size,font,color:rgb(.10,.20,.25)});\n+  const r=row.rect,annotation=c.register(c.obj({Type:'Annot',Subtype:'Link',Rect:[x+r[0]*w,y+r[1]*h,x+r[2]*w,y+r[3]*h],Border:[0,0,0],Dest:[pages[row.targetPageIndex0].ref,PDFName.of('Fit')]}));page.node.addAnnot(annotation);\n+  items.push({row,dest:pages[row.targetPageIndex0].ref});\n+ }\n+ let outlinesCreated=false;\n+ if(!pdf.catalog.get(PDFName.of('Outlines'))){\n+  const root=c.obj({Type:'Outlines',Count:items.length}),rootRef=c.register(root);\n+  const nodes=items.map(({row,dest})=>c.obj({Title:PDFHexString.fromText(row.sectionId+' '+row.titleZh+' / '+row.titleEn),Parent:rootRef,Dest:[dest,PDFName.of('Fit')]}));const refs=nodes.map(n=>c.register(n));\n+  nodes.forEach((n,i)=>{if(i)n.set(PDFName.of('Prev'),refs[i-1]);if(i+1<refs.length)n.set(PDFName.of('Next'),refs[i+1]);});\n+  root.set(PDFName.of('First'),refs[0]);root.set(PDFName.of('Last'),refs.at(-1));pdf.catalog.set(PDFName.of('Outlines'),rootRef);outlinesCreated=true;\n+ }\n+ return {methodId:plan.methodId,linksCreated:items.length,outlinesCreated,existingOutlinesPreserved:!outlinesCreated,pages:pages.length,sourceSHA256:plan.sourceSHA256,customerPublishable:false};\n+}\n",
+      "changeClass": "EXPLICIT_LOCAL_PRESENTATION_ACCEPTANCE_FIX",
+      "productionActivated": false
+    }
+  ],
+  "acceptedR610SourceComparison": [
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/COGNITION-MODULES.json",
+      "acceptedSHA256": "3a141d87e5ee22510ff1eb2468929adffb9a067b1cc82e4e49431ae3c6e4caaa",
+      "currentSHA256": "3a141d87e5ee22510ff1eb2468929adffb9a067b1cc82e4e49431ae3c6e4caaa",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/COMMON-SEMANTIC-CANDIDATES.json",
+      "acceptedSHA256": "318c8c3588fb8b9f0ab20c5412c14d81d88e49f98db18d3ece296a403eb2aa3c",
+      "currentSHA256": "318c8c3588fb8b9f0ab20c5412c14d81d88e49f98db18d3ece296a403eb2aa3c",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/common.py",
+      "acceptedSHA256": "9127774943d9ef16e23533a2ca30bfd3c935fa29f415bdcb2ae72df6641a9bef",
+      "currentSHA256": "9127774943d9ef16e23533a2ca30bfd3c935fa29f415bdcb2ae72df6641a9bef",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/compare.py",
+      "acceptedSHA256": "7e979f1ca2fad5a402f0320079c6024b75fb49931a75db6af29822d592cff50d",
+      "currentSHA256": "7e979f1ca2fad5a402f0320079c6024b75fb49931a75db6af29822d592cff50d",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/content.py",
+      "acceptedSHA256": "fa629edd193f8eb199866abcec677d538112126ab4dcce045b4b91a75cd9a464",
+      "currentSHA256": "fa629edd193f8eb199866abcec677d538112126ab4dcce045b4b91a75cd9a464",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/contrast-render.py",
+      "acceptedSHA256": "b9ce0452d569dfeeb01982db4e6f1ada565b7105b362f7aff6491120a2034f32",
+      "currentSHA256": "b9ce0452d569dfeeb01982db4e6f1ada565b7105b362f7aff6491120a2034f32",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/coverage.mjs",
+      "acceptedSHA256": "509d8a2ed3886096cb539b3b7d2622aa2598b49035a01cd1ff41666155d259e8",
+      "currentSHA256": "509d8a2ed3886096cb539b3b7d2622aa2598b49035a01cd1ff41666155d259e8",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/CURRENT-PLAN.json",
+      "acceptedSHA256": "6c3cb47488aed30719e5e49d1b3792478c4967daa2fa584fc2bd116c77d16788",
+      "currentSHA256": "6c3cb47488aed30719e5e49d1b3792478c4967daa2fa584fc2bd116c77d16788",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/delivery.mjs",
+      "acceptedSHA256": "1cfb49ae21285fc2a3d062e7266c57c68ea9747f13b9bda884e85a673950e7ea",
+      "currentSHA256": "1cfb49ae21285fc2a3d062e7266c57c68ea9747f13b9bda884e85a673950e7ea",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagram-check.py",
+      "acceptedSHA256": "e619c20565a0a5ac5cddaa38530c3223c85892aaa1367b4eb778df32c20dfa02",
+      "currentSHA256": "e619c20565a0a5ac5cddaa38530c3223c85892aaa1367b4eb778df32c20dfa02",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-0-bodygraph.svg",
+      "acceptedSHA256": "3ebff372c9c005537e134ff27373977ae5bca5c1f43328c8ad295db84d0c755e",
+      "currentSHA256": "3ebff372c9c005537e134ff27373977ae5bca5c1f43328c8ad295db84d0c755e",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-0-centers.svg",
+      "acceptedSHA256": "c3f1075f38aad2127b0a7a58eee7e97c472db207fa3a27d2ab7d3ad58f13fe15",
+      "currentSHA256": "c3f1075f38aad2127b0a7a58eee7e97c472db207fa3a27d2ab7d3ad58f13fe15",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-0-channels.svg",
+      "acceptedSHA256": "b8b7a98946f4ec424a22745b875876deb3f00986cab79b2f30583b47d94935f5",
+      "currentSHA256": "b8b7a98946f4ec424a22745b875876deb3f00986cab79b2f30583b47d94935f5",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-0-comparison.svg",
+      "acceptedSHA256": "7b50992db01607b0df89232b31e7792f258d5eae876e9dedab9a16918e9cd9b8",
+      "currentSHA256": "7b50992db01607b0df89232b31e7792f258d5eae876e9dedab9a16918e9cd9b8",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-0-cross.svg",
+      "acceptedSHA256": "787a16fe237a94096ca17f2cfc4dd4edb757030ff4494cd47906ddc9bb2133cc",
+      "currentSHA256": "787a16fe237a94096ca17f2cfc4dd4edb757030ff4494cd47906ddc9bb2133cc",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-0-definition.svg",
+      "acceptedSHA256": "60773da722b0b97c4da83c50f9955b6720c473b2230e11e0ae2e1621b9c271c0",
+      "currentSHA256": "60773da722b0b97c4da83c50f9955b6720c473b2230e11e0ae2e1621b9c271c0",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-0-environment.svg",
+      "acceptedSHA256": "1f977cc114cdbc7426c695a76b853ac4253cfc9df47f01ff326d40a7fa4f0f28",
+      "currentSHA256": "1f977cc114cdbc7426c695a76b853ac4253cfc9df47f01ff326d40a7fa4f0f28",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-0-profile.svg",
+      "acceptedSHA256": "26b384b216e6f94ee253fdc51cc8355cbf66148746cc5dffcfc0dc13c333ee33",
+      "currentSHA256": "26b384b216e6f94ee253fdc51cc8355cbf66148746cc5dffcfc0dc13c333ee33",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-0-variables.svg",
+      "acceptedSHA256": "24301ad38550ce3417845ed0cd5aede7e1f29e3b24141a6c9ca4a2d16c8ffba7",
+      "currentSHA256": "24301ad38550ce3417845ed0cd5aede7e1f29e3b24141a6c9ca4a2d16c8ffba7",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-2-bodygraph.svg",
+      "acceptedSHA256": "6f1d545797ede4634db89a86bd034f3b466a5876bc464fc48b4b202ca8fb30ba",
+      "currentSHA256": "6f1d545797ede4634db89a86bd034f3b466a5876bc464fc48b4b202ca8fb30ba",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-2-centers.svg",
+      "acceptedSHA256": "271c81e112f127ad286b05ddb70b92fc2eac978f232b16b70135f194d199dcce",
+      "currentSHA256": "271c81e112f127ad286b05ddb70b92fc2eac978f232b16b70135f194d199dcce",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-2-channels.svg",
+      "acceptedSHA256": "bf1e78afa95392293ef6e54aabb63e8f3e4824867c9db3e80503aaf3ca9c74ee",
+      "currentSHA256": "bf1e78afa95392293ef6e54aabb63e8f3e4824867c9db3e80503aaf3ca9c74ee",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-2-comparison.svg",
+      "acceptedSHA256": "7b50992db01607b0df89232b31e7792f258d5eae876e9dedab9a16918e9cd9b8",
+      "currentSHA256": "7b50992db01607b0df89232b31e7792f258d5eae876e9dedab9a16918e9cd9b8",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-2-cross.svg",
+      "acceptedSHA256": "a0a9dd26a772a44dc3d3d71e6317f4bdb947703c176107d80d6725aba00d5885",
+      "currentSHA256": "a0a9dd26a772a44dc3d3d71e6317f4bdb947703c176107d80d6725aba00d5885",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-2-definition.svg",
+      "acceptedSHA256": "5cfb82dad3dd39b6e0eb7e6d319c3e1d1a0862ea7319b744a01ed2a49cc89c71",
+      "currentSHA256": "5cfb82dad3dd39b6e0eb7e6d319c3e1d1a0862ea7319b744a01ed2a49cc89c71",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-2-environment.svg",
+      "acceptedSHA256": "365b42761858f63b69f293c3cded492ab31062f750aaa51e5600a731960f24c1",
+      "currentSHA256": "365b42761858f63b69f293c3cded492ab31062f750aaa51e5600a731960f24c1",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-2-profile.svg",
+      "acceptedSHA256": "a17cfee38422909766efd521778952bc3dc263ce0c2a2f3931cf520bec08f8f5",
+      "currentSHA256": "a17cfee38422909766efd521778952bc3dc263ce0c2a2f3931cf520bec08f8f5",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-2-variables.svg",
+      "acceptedSHA256": "f7416fc99258390d9359011ceac606bc24ac525bf9988e186d2d1918a10edc2f",
+      "currentSHA256": "f7416fc99258390d9359011ceac606bc24ac525bf9988e186d2d1918a10edc2f",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-3-bodygraph.svg",
+      "acceptedSHA256": "fac5454f963345c983f4fd38dc6c288d1543adeda6dcb9d50812ff8c532b90f1",
+      "currentSHA256": "fac5454f963345c983f4fd38dc6c288d1543adeda6dcb9d50812ff8c532b90f1",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-3-centers.svg",
+      "acceptedSHA256": "e3d0c4d27654d26929df0a9515a940f998531924a6b7074bfc5b1f1361e73eb6",
+      "currentSHA256": "e3d0c4d27654d26929df0a9515a940f998531924a6b7074bfc5b1f1361e73eb6",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-3-channels.svg",
+      "acceptedSHA256": "b404cb1b997f27967a94c0c22e254f54182b69372448d1337fa4f8715b106efa",
+      "currentSHA256": "b404cb1b997f27967a94c0c22e254f54182b69372448d1337fa4f8715b106efa",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-3-comparison.svg",
+      "acceptedSHA256": "7b50992db01607b0df89232b31e7792f258d5eae876e9dedab9a16918e9cd9b8",
+      "currentSHA256": "7b50992db01607b0df89232b31e7792f258d5eae876e9dedab9a16918e9cd9b8",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-3-cross.svg",
+      "acceptedSHA256": "a3e441508237df88167311d6530683829747b08e65b1431ff5a3ffcce4d4e40b",
+      "currentSHA256": "a3e441508237df88167311d6530683829747b08e65b1431ff5a3ffcce4d4e40b",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-3-definition.svg",
+      "acceptedSHA256": "5b1d0260efeb5aaba86957f1245fac5800eb2213371cf297e90941eca37c1bba",
+      "currentSHA256": "5b1d0260efeb5aaba86957f1245fac5800eb2213371cf297e90941eca37c1bba",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-3-environment.svg",
+      "acceptedSHA256": "398de6bd63c8acb3c7c207b88fe04f4d3343174ce1ed7c2e30b425a21c615952",
+      "currentSHA256": "398de6bd63c8acb3c7c207b88fe04f4d3343174ce1ed7c2e30b425a21c615952",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-3-profile.svg",
+      "acceptedSHA256": "ddd9bd0ff24ef9ebb489c273cb96bab98ab071b22eb3f813f9dc10738ce77eb7",
+      "currentSHA256": "ddd9bd0ff24ef9ebb489c273cb96bab98ab071b22eb3f813f9dc10738ce77eb7",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-3-variables.svg",
+      "acceptedSHA256": "7da66c18e756fcb45ab5f9cd9fb6e6454e465f4bb481bfae3d01637bf301b5d4",
+      "currentSHA256": "7da66c18e756fcb45ab5f9cd9fb6e6454e465f4bb481bfae3d01637bf301b5d4",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-52-bodygraph.svg",
+      "acceptedSHA256": "32b0a762d00cb14f4b4b32a4923d0a931b114705507e21a11f708e76dc05aadb",
+      "currentSHA256": "32b0a762d00cb14f4b4b32a4923d0a931b114705507e21a11f708e76dc05aadb",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-52-centers.svg",
+      "acceptedSHA256": "aa5f56427d76d6e040a69b73faf086a10549a153e8c603a69df94cd72721750d",
+      "currentSHA256": "aa5f56427d76d6e040a69b73faf086a10549a153e8c603a69df94cd72721750d",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-52-channels.svg",
+      "acceptedSHA256": "706c74bfc66b6ce484027b1f0d7557cf1f7c6d159566d6875b87ef697afbaeb1",
+      "currentSHA256": "706c74bfc66b6ce484027b1f0d7557cf1f7c6d159566d6875b87ef697afbaeb1",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-52-comparison.svg",
+      "acceptedSHA256": "7b50992db01607b0df89232b31e7792f258d5eae876e9dedab9a16918e9cd9b8",
+      "currentSHA256": "7b50992db01607b0df89232b31e7792f258d5eae876e9dedab9a16918e9cd9b8",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-52-cross.svg",
+      "acceptedSHA256": "959c618bb70ced0a6be3c6ea9699b20be3ee4b0f5844143c5bbf68acbc4834ab",
+      "currentSHA256": "959c618bb70ced0a6be3c6ea9699b20be3ee4b0f5844143c5bbf68acbc4834ab",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-52-definition.svg",
+      "acceptedSHA256": "e03135bb3abad6a952e4b3e60d9834b5897c792a4f37238a62889cbf0984285c",
+      "currentSHA256": "e03135bb3abad6a952e4b3e60d9834b5897c792a4f37238a62889cbf0984285c",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-52-environment.svg",
+      "acceptedSHA256": "57e20473c37a5891949f803bf5d7da4ceaec3ccea2860626a98f1c337f3b1092",
+      "currentSHA256": "57e20473c37a5891949f803bf5d7da4ceaec3ccea2860626a98f1c337f3b1092",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-52-profile.svg",
+      "acceptedSHA256": "58ca4741a3254b84d3b3f865dbdf2245694f7772f07d9c48a07bd074566a775e",
+      "currentSHA256": "58ca4741a3254b84d3b3f865dbdf2245694f7772f07d9c48a07bd074566a775e",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-52-variables.svg",
+      "acceptedSHA256": "65d15513a9d3d1250f989ecdf243e49eed1310553a8066308a6f2db76a5c071c",
+      "currentSHA256": "65d15513a9d3d1250f989ecdf243e49eed1310553a8066308a6f2db76a5c071c",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-59-bodygraph.svg",
+      "acceptedSHA256": "ee9da438104c4ae344ca32e4a6ffda9677f44915e9740804c9936dcaf55a3c49",
+      "currentSHA256": "ee9da438104c4ae344ca32e4a6ffda9677f44915e9740804c9936dcaf55a3c49",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-59-centers.svg",
+      "acceptedSHA256": "67ce49069c20818770af19271b764ae6ed4246c2539bef27635798117578e566",
+      "currentSHA256": "67ce49069c20818770af19271b764ae6ed4246c2539bef27635798117578e566",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-59-channels.svg",
+      "acceptedSHA256": "5fca8b8f311d21b641be1eb28e61b9caa8613dd060905fc11051930343412b7f",
+      "currentSHA256": "5fca8b8f311d21b641be1eb28e61b9caa8613dd060905fc11051930343412b7f",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-59-comparison.svg",
+      "acceptedSHA256": "7b50992db01607b0df89232b31e7792f258d5eae876e9dedab9a16918e9cd9b8",
+      "currentSHA256": "7b50992db01607b0df89232b31e7792f258d5eae876e9dedab9a16918e9cd9b8",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-59-cross.svg",
+      "acceptedSHA256": "0ab589c1a358b33510154917615b890120f44ddcb67ad39f70c313e35772f05d",
+      "currentSHA256": "0ab589c1a358b33510154917615b890120f44ddcb67ad39f70c313e35772f05d",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-59-definition.svg",
+      "acceptedSHA256": "2d1a656ac50d21adc807de0d0f85601fa72d735f148858dd86ed840aff8fe476",
+      "currentSHA256": "2d1a656ac50d21adc807de0d0f85601fa72d735f148858dd86ed840aff8fe476",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-59-environment.svg",
+      "acceptedSHA256": "fc9a12f38a4f7905d3f17ebaf1d6a1a60e9d80c93bfa364fa99e54c9330000fc",
+      "currentSHA256": "fc9a12f38a4f7905d3f17ebaf1d6a1a60e9d80c93bfa364fa99e54c9330000fc",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-59-profile.svg",
+      "acceptedSHA256": "ddd9bd0ff24ef9ebb489c273cb96bab98ab071b22eb3f813f9dc10738ce77eb7",
+      "currentSHA256": "ddd9bd0ff24ef9ebb489c273cb96bab98ab071b22eb3f813f9dc10738ce77eb7",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/R65-59-variables.svg",
+      "acceptedSHA256": "c907b673892398b089475faea6f4a8ca336cd4cac09af47d9050ced029233fc6",
+      "currentSHA256": "c907b673892398b089475faea6f4a8ca336cd4cac09af47d9050ced029233fc6",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/REFERENCE-bodygraph.svg",
+      "acceptedSHA256": "e268b90cfddd55392f68ffc265a04eed0e6d223157f5880228d59e5932d05164",
+      "currentSHA256": "e268b90cfddd55392f68ffc265a04eed0e6d223157f5880228d59e5932d05164",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/REFERENCE-centers.svg",
+      "acceptedSHA256": "9ba73b46ae57ff978202a78192b4b34119649c9a24a189fdb00f1f0d43c74815",
+      "currentSHA256": "9ba73b46ae57ff978202a78192b4b34119649c9a24a189fdb00f1f0d43c74815",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/REFERENCE-channels.svg",
+      "acceptedSHA256": "f73d41dacf7474b855dd3305ed341930b5b994f607103809857ca6b34d3cd7db",
+      "currentSHA256": "f73d41dacf7474b855dd3305ed341930b5b994f607103809857ca6b34d3cd7db",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/REFERENCE-comparison.svg",
+      "acceptedSHA256": "7b50992db01607b0df89232b31e7792f258d5eae876e9dedab9a16918e9cd9b8",
+      "currentSHA256": "7b50992db01607b0df89232b31e7792f258d5eae876e9dedab9a16918e9cd9b8",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/REFERENCE-cross.svg",
+      "acceptedSHA256": "b09484abf54a00b7d5dd80ac5100a2eaff8a4212a70c48e52d46ee10924bfd47",
+      "currentSHA256": "b09484abf54a00b7d5dd80ac5100a2eaff8a4212a70c48e52d46ee10924bfd47",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/REFERENCE-definition.svg",
+      "acceptedSHA256": "c75b84d716e0953b5c3a75480b6765ebb8ef6346de066c4a7570a34c31f36822",
+      "currentSHA256": "c75b84d716e0953b5c3a75480b6765ebb8ef6346de066c4a7570a34c31f36822",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/REFERENCE-environment.svg",
+      "acceptedSHA256": "7807af8b13b10d5e2bd0beb3dd71f944ddb9c479d89afef7a423c31c02bcf8c2",
+      "currentSHA256": "7807af8b13b10d5e2bd0beb3dd71f944ddb9c479d89afef7a423c31c02bcf8c2",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/REFERENCE-profile.svg",
+      "acceptedSHA256": "58ca4741a3254b84d3b3f865dbdf2245694f7772f07d9c48a07bd074566a775e",
+      "currentSHA256": "58ca4741a3254b84d3b3f865dbdf2245694f7772f07d9c48a07bd074566a775e",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/diagrams/REFERENCE-variables.svg",
+      "acceptedSHA256": "1bece91087040f99e24f84adc4766fab79b3a6169197c749cb2d317bba1d0d49",
+      "currentSHA256": "1bece91087040f99e24f84adc4766fab79b3a6169197c749cb2d317bba1d0d49",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/final-check.mjs",
+      "acceptedSHA256": "4fca8f624a076a003da5c65afda31c87e80b888e293a54dbd07b5bedad79b487",
+      "currentSHA256": "4fca8f624a076a003da5c65afda31c87e80b888e293a54dbd07b5bedad79b487",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/finalize.py",
+      "acceptedSHA256": "f54dc43b521ed853bf2137cbf6df42b1c549674aeb4dd82acac6811da8de870a",
+      "currentSHA256": "f54dc43b521ed853bf2137cbf6df42b1c549674aeb4dd82acac6811da8de870a",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/FULL-REPORT-SELECTION.json",
+      "acceptedSHA256": "de3feabcbbae29d82273ff433de8923a26077f7fa128b095d18cf6c20555aa5b",
+      "currentSHA256": "de3feabcbbae29d82273ff433de8923a26077f7fa128b095d18cf6c20555aa5b",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/incremental-rasters.py",
+      "acceptedSHA256": "0be1e3937167806c5c130c9730c59a902c7251409d94730c2517b653a6137036",
+      "currentSHA256": "0be1e3937167806c5c130c9730c59a902c7251409d94730c2517b653a6137036",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/input/r610/CODEX-RESTORATION-MASTER.md",
+      "acceptedSHA256": "b7e547855e3a37e6bfe7e8585792c12996e21598a455887fd1451d234ee6649f",
+      "currentSHA256": "b7e547855e3a37e6bfe7e8585792c12996e21598a455887fd1451d234ee6649f",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/input/r610/COGNITION-INTERFACE-CROSSWALK.md",
+      "acceptedSHA256": "4a1dde8412800c4c126a9ced59b55d1273fb1ff27e3ae43eac0c7444914691ae",
+      "currentSHA256": "4a1dde8412800c4c126a9ced59b55d1273fb1ff27e3ae43eac0c7444914691ae",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/input/r610/README.md",
+      "acceptedSHA256": "a8e4d0cef5d5273e10988ecc22de908401659f4d56873e6db06927510ccac57c",
+      "currentSHA256": "a8e4d0cef5d5273e10988ecc22de908401659f4d56873e6db06927510ccac57c",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/input/r610/SEC10.07-INNER-VISION.en.md",
+      "acceptedSHA256": "aa6f4da0f51791149a50ad20aa1a388a95a8f330fd2878586067fc0c7c74e57e",
+      "currentSHA256": "aa6f4da0f51791149a50ad20aa1a388a95a8f330fd2878586067fc0c7c74e57e",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/input/r610/SEC10.07-INNER-VISION.zh-Hans.md",
+      "acceptedSHA256": "a0865b49d7fa269a3f6c5d762e9198ef02741e1873e253840a8de29bb38862a2",
+      "currentSHA256": "a0865b49d7fa269a3f6c5d762e9198ef02741e1873e253840a8de29bb38862a2",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/input/r69/CODEX-R69-SEMANTIC-AND-DIAGRAM-CLOSURE.md",
+      "acceptedSHA256": "af636ffaaa616dec3af9f60dca3e0386d9d0453e93027cec3bee99a3bd467bc9",
+      "currentSHA256": "af636ffaaa616dec3af9f60dca3e0386d9d0453e93027cec3bee99a3bd467bc9",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/input/r69/PHIOS-HD-R69-COLOUR-DIAGRAMS.html",
+      "acceptedSHA256": "2fbcddafe77117ab3e0ad6f5108a442230da10c8388e3a92a6e2a0cc74c9dad9",
+      "currentSHA256": "2fbcddafe77117ab3e0ad6f5108a442230da10c8388e3a92a6e2a0cc74c9dad9",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/input/r69/README.md",
+      "acceptedSHA256": "0cabb8b9f099221fb294a22f0663875e427c8382a21ae814cbaff79f1f009377",
+      "currentSHA256": "0cabb8b9f099221fb294a22f0663875e427c8382a21ae814cbaff79f1f009377",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/input/r69/svg/01-definition.svg",
+      "acceptedSHA256": "939b7cfd9e70570e859727a3ded1a3e7fc0b8743c1a24e7ab7dbb4ce6dc57b45",
+      "currentSHA256": "939b7cfd9e70570e859727a3ded1a3e7fc0b8743c1a24e7ab7dbb4ce6dc57b45",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/input/r69/svg/02-centers.svg",
+      "acceptedSHA256": "c0c64039bab7197586adcec8fce52a81682c7aff25526d1f4ff3c1b43669e321",
+      "currentSHA256": "c0c64039bab7197586adcec8fce52a81682c7aff25526d1f4ff3c1b43669e321",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/input/r69/svg/03-channels.svg",
+      "acceptedSHA256": "9572b94cc1e406e82208348725d073f2ec17caa94cad9ead0d6addee0ee74cfe",
+      "currentSHA256": "9572b94cc1e406e82208348725d073f2ec17caa94cad9ead0d6addee0ee74cfe",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/input/r69/svg/04-cross.svg",
+      "acceptedSHA256": "b020381a263d1705b817400b216dc57e0c676f909382b3ef05abf44822f3fa06",
+      "currentSHA256": "b020381a263d1705b817400b216dc57e0c676f909382b3ef05abf44822f3fa06",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/input/r69/svg/05-variables.svg",
+      "acceptedSHA256": "d51544e8e4fd54696046bc12b093f35ea04808b4f1bc60a2235c89b47182b84b",
+      "currentSHA256": "d51544e8e4fd54696046bc12b093f35ea04808b4f1bc60a2235c89b47182b84b",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/input/r69/svg/06-reality.svg",
+      "acceptedSHA256": "239f402c71a3c9fccc15ebf57e72f2fa71f33c2851c763cd73947614476be74d",
+      "currentSHA256": "239f402c71a3c9fccc15ebf57e72f2fa71f33c2851c763cd73947614476be74d",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/normalize-pdf.py",
+      "acceptedSHA256": "5802afe01cb883ccdc04d9ec26b741402841c528bed5b5c545082cf9a454e921",
+      "currentSHA256": "5802afe01cb883ccdc04d9ec26b741402841c528bed5b5c545082cf9a454e921",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/patch-diagram-pages.py",
+      "acceptedSHA256": "dedc390d302301bac8f888582ed23c360d0d68c73668a77b6f29e8156b183c26",
+      "currentSHA256": "dedc390d302301bac8f888582ed23c360d0d68c73668a77b6f29e8156b183c26",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/pdf-qa.py",
+      "acceptedSHA256": "e69d96e6e59893953607d222eddeab396cc92e2c2c95e3805a98c9c357fe2486",
+      "currentSHA256": "e69d96e6e59893953607d222eddeab396cc92e2c2c95e3805a98c9c357fe2486",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/PROJECTION-bilingual.json",
+      "acceptedSHA256": "4118fde91cbdf121c4145895530919a8453c888018f47db052a18cc727b9fbb9",
+      "currentSHA256": "4118fde91cbdf121c4145895530919a8453c888018f47db052a18cc727b9fbb9",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/PROJECTION-en.json",
+      "acceptedSHA256": "f1fbd1f67a16a77c37879d800e6e5d39c55931faa3d777fab26fc6e62841c36b",
+      "currentSHA256": "f1fbd1f67a16a77c37879d800e6e5d39c55931faa3d777fab26fc6e62841c36b",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/PROJECTION-zh-Hans.json",
+      "acceptedSHA256": "033459a4efd2799161b52e6c9bb30b8367906424515fd86dce5ff2c2b3d92071",
+      "currentSHA256": "033459a4efd2799161b52e6c9bb30b8367906424515fd86dce5ff2c2b3d92071",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/render.py",
+      "acceptedSHA256": "e1c97014fd5207dd9b87c011f7f02c64819252a6d872da90529cc39b54e85bde",
+      "currentSHA256": "e1c97014fd5207dd9b87c011f7f02c64819252a6d872da90529cc39b54e85bde",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/REVIEW-READER.html",
+      "acceptedSHA256": "444b2b53a5cc799760e4f9895ec2bb25f0a6b8d03e6dbc2da39699620206db1b",
+      "currentSHA256": "444b2b53a5cc799760e4f9895ec2bb25f0a6b8d03e6dbc2da39699620206db1b",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/review.py",
+      "acceptedSHA256": "c77c65721586a1388691d6a3683e1ef6cac3fe07a35c04464d9d83f717160d9c",
+      "currentSHA256": "c77c65721586a1388691d6a3683e1ef6cac3fe07a35c04464d9d83f717160d9c",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/run.mjs",
+      "acceptedSHA256": "03add562cc05e26ffcd1449cb006f37b39f29ddb6e091149313f5c9bcda4674f",
+      "currentSHA256": "03add562cc05e26ffcd1449cb006f37b39f29ddb6e091149313f5c9bcda4674f",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "C:/phios/tools/review/hd-r6/import-20261027/r610/SECTION-PACKETS.json",
+      "acceptedSHA256": "0c3c695995e8b5163447a61d560923c741941dd3cd10e0daac15fc6ba84c4dbe",
+      "currentSHA256": "0c3c695995e8b5163447a61d560923c741941dd3cd10e0daac15fc6ba84c4dbe",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "functions/external-profile/hd-bodygraph-vector-review.js",
+      "acceptedSHA256": "629f09e93a9bd8bef1c52efb612f4ecb0d2374ba2fa20f6fe106478cf4fea35b",
+      "currentSHA256": "629f09e93a9bd8bef1c52efb612f4ecb0d2374ba2fa20f6fe106478cf4fea35b",
+      "unchanged": true,
+      "changeClass": null
+    },
+    {
+      "path": "functions/external-profile/hd-premium-section-packet-review.js",
+      "acceptedSHA256": "cbd6608b05a2eced23b3bc6300572d10dad5739d934dd5962af10d1db05e0e32",
+      "currentSHA256": "cbd6608b05a2eced23b3bc6300572d10dad5739d934dd5962af10d1db05e0e32",
+      "unchanged": true,
+      "changeClass": null
+    }
+  ],
+  "historicalPDFs": [
+    {
+      "path": "output/pdf/hd-r611-owner-review/HD-R611-PREMIUM-OWNER-zh-Hans-FINAL.pdf",
+      "sha256": "25af33cf8acc776196f53c602d5db93f89e7cb105c8aa67491211b522ce05bd5",
+      "unchanged": true
+    },
+    {
+      "path": "output/pdf/hd-r611-owner-review/HD-R611-PREMIUM-OWNER-en-FINAL.pdf",
+      "sha256": "14e79ad20492d941bcc0f7f943698103c0c111a9610ddf1a2ae08841ec5d80dc",
+      "unchanged": true
+    },
+    {
+      "path": "output/pdf/hd-r611-owner-review/HD-R611-PREMIUM-OWNER-bilingual-FINAL.pdf",
+      "sha256": "e30d71233c42d413270ecb85d4a40b96821c05cd36810fefe22bc6cf6cf9577a",
+      "unchanged": true
+    },
+    {
+      "path": "output/pdf/hd-r610-owner-review/HD-R610-PREMIUM-OWNER-zh-Hans.pdf",
+      "sha256": "cc57520a488d841f3dba888687fe17389f58aef30fc200f850392129a099db6f",
+      "unchanged": true
+    },
+    {
+      "path": "output/pdf/hd-r610-owner-review/HD-R610-PREMIUM-OWNER-en.pdf",
+      "sha256": "fdc9a532c4a54dd32e45633562abb2ae458ababc94df665e1a3bb6a3fc4e18b2",
+      "unchanged": true
+    },
+    {
+      "path": "output/pdf/hd-r610-owner-review/HD-R610-PREMIUM-OWNER-bilingual.pdf",
+      "sha256": "6067159f6f335768c1b9af007a05ce44fce64f58c21b7f5b22e5b32972f44e28",
+      "unchanged": true
+    }
+  ],
+  "unrelatedFilesWrittenByTask": []
+}

@@ -12,10 +12,11 @@ export function assertBaziEditorialOwnerSuccessor(owner){
  assert.equal(record.replacements[1].from,"(['PROFILE','ECR'].includes(p.methodId)?['bilingual']:REPORT_EDITORIAL_LOCALES)");assert.equal(record.replacements[1].to,'REPORT_EDITORIAL_LOCALES');
  assert(record.replacements[2].from.includes("if(!['PROFILE','ECR'].includes(p.methodId))return {}"));
  assert.equal(record.replacements[2].to,'...REPORT_EDITORIAL_VERIFICATION[`${p.methodId}:${locale}:${i+1}`]\n');
- let previous=fs.readFileSync(owner.path,'utf8');
+ const ownerSource=assertInactiveContentsAppend(owner.path,record);
+ let previous=ownerSource;
  for(const r of record.replacements){assert.equal(previous.split(r.from).length,2);previous=previous.replace(r.from,r.to);}
  assert.equal(previous,fs.readFileSync(record.previousPath,'utf8'),'Unregistered editorial owner change');
- assert.equal(sha(owner.path),record.successorSha256);
+ assert.equal(createHash('sha256').update(ownerSource).digest('hex'),record.successorSha256);
  assert.equal(record.dependency.path,'content/reports/shared/report-visual-assets-r2.json');
  const next=JSON.parse(fs.readFileSync('docs/commerce/economics-20261009/bazi-editorial-asset-dependency-successor-v2.json'));
  assert.equal(next.status,'ENGINEERING_RECONCILIATION');
@@ -35,6 +36,36 @@ export function assertBaziEditorialOwnerSuccessor(owner){
  const issue=current.assets.find(a=>a.methodId==='ECR'&&a.pageId==='SEC-07');assert.equal(issue.verification,'PUBLIC_BYTES_DECODED_VISUAL_ISSUE_RECORDED');assert.match(issue.visualReviewIssue,/overlap.*human decision pending/);assertBaziAssetV3(next,v2Archive);
 }
 
+
+function assertInactiveContentsAppend(ownerPath,predecessor){
+ const source=fs.readFileSync(ownerPath,'utf8');
+ const hash=s=>createHash('sha256').update(s).digest('hex');
+ if(hash(source)===predecessor.successorSha256)return source;
+ const r=JSON.parse(fs.readFileSync('docs/commerce/economics-20261009/bazi-editorial-contents-successor-v2.json'));
+ assert.equal(r.status,'ENGINEERING_RECONCILIATION');
+ assert.equal(r.changeType,'ADDITIVE_INACTIVE_CONTENTS_EVIDENCE');assert.equal(r.path,ownerPath);
+ assert.equal(r.predecessor.path,'docs/commerce/economics-20261009/bazi-editorial-shared-bilingual-successor-v1.json');
+ assert.equal(sha(r.predecessor.path),r.predecessor.sha256);assert.equal(r.predecessor.runtimeSha256,predecessor.successorSha256);
+ for(const k of ['authorityOrAcceptedTextRewritten','humanAcceptanceGranted','productionActivated','currentRendererFitAccepted'])assert.equal(r[k],false);
+ assert.equal(r.sourceEvidence.path,'tools/review/hd-r6/import-20261027/r611b/SOURCE-PRESERVATION.json');
+ assert.equal(r.byteIdentityEvidence.path,'tools/review/hd-r6/import-20261027/r611b/ACTUAL-P06-BYTE-IDENTITIES.json');
+ assert.equal(sha(r.sourceEvidence.path),r.sourceEvidence.sha256);assert.equal(sha(r.byteIdentityEvidence.path),r.byteIdentityEvidence.sha256);
+ const entry=JSON.parse(fs.readFileSync(r.sourceEvidence.path)).changedProductFiles.find(x=>x.path===ownerPath);assert(entry);
+ assert.equal(entry.sha256,predecessor.successorSha256);assert.equal(entry.currentSHA256,r.successorSha256);assert.equal(hash(source),r.successorSha256);
+ const added=entry.diff.split('\n').filter(l=>l.startsWith('+')&&!l.startsWith('+++')).map(l=>l.slice(1)).join('\n')+'\n';
+ assert.equal(hash(added),r.appendixSha256);assert(source.endsWith(added));
+ const original=source.slice(0,-added.length);assert.equal(hash(original),predecessor.successorSha256,'Editorial front matter changed');
+ const match=added.match(/export const REPORT_CONTENTS_ASSETS=Object\.freeze\((\[[\s\S]*?\])\.map\(Object\.freeze\)\);/);assert(match);
+ const assets=JSON.parse(match[1]),identities=JSON.parse(fs.readFileSync(r.byteIdentityEvidence.path)).rows;
+ assert.deepEqual(assets.map(x=>x.methodId).sort(),['AST','BZR','ECR','HD','NUM','ZWR']);
+ for(const a of assets){
+  assert.equal(a.page,6);assert.equal(a.pageRole,'SEMIFIXED_CONTENTS');assert.equal(a.locale,'bilingual');
+  assert.equal(a.active,false);assert.equal(a.customerPublishable,false);assert.equal(a.visualAcceptance,'PENDING_OWNER_WITH_DOCUMENTED_TITLE_ISSUES');assert.equal(a.verification,'CURRENT_BYTES_DECODED');
+  const bytes=identities.find(x=>x.methodId===a.methodId);assert(bytes);assert.equal(bytes.httpStatus,200);assert.equal(a.object_key,bytes.objectKey);
+  for(const k of ['sha256','pixelSHA256','width','height','bytes','mime'])assert.equal(a[k],bytes[k],a.methodId+':'+k);
+ }
+ return original;
+}
 
 function assertBaziAssetV3(v2,archive) {
  const v3=JSON.parse(fs.readFileSync(

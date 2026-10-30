@@ -1,0 +1,28 @@
+import fs from'node:fs';import assert from'node:assert/strict';import{createHash}from'node:crypto';import{selectCurrentHdFrontMatter as select}from'./freshness-gate.mjs';
+const D='tools/review/hd-r6/import-20261027/r611a/',old=JSON.parse(fs.readFileSync(D+'../r611/FRONT-MATTER-BINDINGS.json')),sha=b=>createHash('sha256').update(b).digest('hex'),results=[];
+const entitlement=language=>({product_id:'COM-REPORT-HD-FULL',entitlement_status:'active',purchase_id:'QA-NO-CHARGE',reportPresentation:{reportLocale:language,reportLanguageMode:language==='bilingual'?'BILINGUAL':'SINGLE'}});
+// Synthetic assertions exercise the gate only: never remote observation or deliverable evidence.
+const bytes=Buffer.from('SYNTHETIC_GATE_VALIDATOR_ONLY_NOT_A_WEBP'),h=sha(bytes),sample={auth:{present:true,tokenValueRecorded:false},rows:old.rows.map(a=>({...a,readHTTP:200,status:'CURRENT_BYTES_DECODED',file:'.tmp/hd-r611a/assets/'+h+'.webp',bytes:bytes.length,sha256:h,pixelSHA256:sha(a.language+a.pageId),visualRoleReview:{status:'MATCHES_ROLE',language:a.language,pageId:a.pageId}}))};
+const run=x=>select({evidence:x,entitlement:entitlement('en'),readBytes:()=>bytes});
+const test=(name,fn)=>{fn();results.push({name,result:'PASS'});};
+for(const lang of ['zh-Hans','en','bilingual'])test(lang+' persisted-language five keys and noncommercial scope',()=>{const p=select({evidence:sample,entitlement:entitlement(lang),readBytes:()=>bytes});assert.equal(p.contentLanguage,lang);assert.equal(p.pages.length,5);assert.equal(p.customerPublishable,false);});
+const bad=(name,mutate,code)=>test(name,()=>{const x=structuredClone(sample);mutate(x);assert.throws(()=>run(x),e=>e.message.startsWith(code));});
+bad('missing current read',x=>delete x.rows[0].readHTTP,'CURRENT_OBJECT_READ_BLOCKED');
+for(const status of [401,403,404,429])bad('HTTP '+status+' cannot imply object existence/freshness',x=>x.rows[0].readHTTP=status,'CURRENT_OBJECT_READ_BLOCKED');
+bad('no credential observation',x=>x.auth.present=false,'CURRENT_AUTHENTICATED_EVIDENCE_REQUIRED');
+bad('credential-bearing evidence refused',x=>x.auth.tokenValueRecorded=true,'CURRENT_AUTHENTICATED_EVIDENCE_REQUIRED');
+bad('old key-only cache refused',x=>x.rows[0].file=old.rows[0].file,'CONTENT_ADDRESSED_CACHE_REQUIRED');
+bad('changed payload cannot reuse old content hash',x=>x.rows[0].sha256='0'.repeat(64),'CONTENT_ADDRESSED_CACHE_REQUIRED');
+bad('wrong registry association refused',x=>x.rows[0].objectKey=x.rows[1].objectKey,'CURRENT_REGISTRY_BINDING_MISMATCH');
+bad('duplicate object refused',x=>x.rows[1]=x.rows[0],'DUPLICATE_OR_MISSING_CURRENT_OBJECT');
+bad('missing object refused',x=>x.rows.pop(),'EXACT_15_CURRENT_OBJECTS_REQUIRED');
+bad('undecoded image refused',x=>delete x.rows[0].pixelSHA256,'CURRENT_DECODE_IDENTITY_REQUIRED');
+bad('ETag cannot replace SHA256',x=>x.rows[0].sha256='"etag-only"','CURRENT_DECODE_IDENTITY_REQUIRED');
+bad('negative dimensions refused',x=>x.rows[0].width=-1,'CURRENT_DECODE_IDENTITY_REQUIRED');
+bad('same cover across languages refused',x=>x.rows.filter(r=>r.pageId==='P01').forEach(r=>r.pixelSHA256='1'.repeat(64)),'COVER_LANGUAGE_DIFFERENTIATION_REQUIRED');
+bad('unreviewed P04 visual content refused',x=>delete x.rows.find(r=>r.language==='en'&&r.pageId==='P04').visualRoleReview,'VISUAL_ROLE_REVIEW_REQUIRED');
+bad('P04/P05 semantic role swap refused',x=>x.rows.find(r=>r.language==='en'&&r.pageId==='P04').visualRoleReview.pageId='P05','VISUAL_ROLE_REVIEW_REQUIRED');
+test('mutated content addressed cache bytes refused',()=>assert.throws(()=>select({evidence:sample,entitlement:entitlement('en'),readBytes:()=>Buffer.from('changed')}),/CURRENT_CACHE_BYTES_DRIFT/));
+test('purchased language cannot be overridden',()=>assert.throws(()=>select({evidence:sample,entitlement:entitlement('en'),requested:{reportLocale:'zh-Hans',reportLanguageMode:'SINGLE'},readBytes:()=>bytes})));
+test('real current HTTP evidence fails closed before output',()=>assert.throws(()=>select({evidence:JSON.parse(fs.readFileSync(D+'AUTHORIZED-R2-READ.json')),entitlement:entitlement('en')}),/CURRENT_OBJECT_READ_BLOCKED/));
+fs.writeFileSync(D+'TARGETED-CHECKS.json',JSON.stringify({status:'PASS_VALIDATOR_ONLY',count:results.length,fixtureScope:'Synthetic freshness-gate unit assertions only. Not actual R2 or PDF verification.',results,providerCalls:0,productionWrites:0},null,2));console.log(results.length+' freshness/cache/language denial checks passed; actual R2 gate BLOCKED');

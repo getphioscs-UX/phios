@@ -1,0 +1,129 @@
+{
+  "commands": [
+    {
+      "command": "ZIP CRC + R610 manifest SHA-256 validation",
+      "exitCode": 0
+    },
+    {
+      "command": "content.py",
+      "exitCode": 0
+    },
+    {
+      "command": "common.py",
+      "exitCode": 0
+    },
+    {
+      "command": "r610/run.mjs initial run",
+      "exitCode": 1,
+      "reason": "NEG-03 valid Tone5/Color5 fixture absent from inherited96; fixed by bounded additional real birth-input recalculations, not by changing expected result"
+    },
+    {
+      "command": "r610/run.mjs current run",
+      "exitCode": 0,
+      "checks": 24,
+      "actualCohort": 96
+    },
+    {
+      "command": "r610/coverage.mjs",
+      "exitCode": 0,
+      "charts": 96
+    },
+    {
+      "command": "scripts/check-hd-report-automation-r5.mjs",
+      "exitCode": 0,
+      "checks": 19
+    },
+    {
+      "command": "scripts/check-hdr-w4-bodygraph-runtime.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "r610/render.py first draft",
+      "exitCode": 0,
+      "status": "SUPERSEDED: four-corner ordering corrected before final visual QA; initial hashes retained"
+    },
+    {
+      "command": "r610/final-check.mjs",
+      "exitCode": 0,
+      "checks": 29
+    },
+    {
+      "command": "r610/render.py final corner-corrected run",
+      "exitCode": 1,
+      "completed": [
+        "zh-Hans80",
+        "en92"
+      ],
+      "reason": "OSError [Errno22] opening bilingual output; final bilingual remains unverified/superseded until successful export"
+    },
+    {
+      "command": "r610/render.py bilingual retry preflight",
+      "exitCode": 1,
+      "reason": "REPORT_RENDER_ALREADY_RESERVED; lock is R30 actual PDF evidence pid65196; no lock removed"
+    },
+    {
+      "command": "render.py bilingual after shared slot released",
+      "exitCode": 0,
+      "pages": 142
+    },
+    {
+      "command": "pdf-qa.py initial",
+      "exitCode": 0,
+      "semanticResult": "Bilingual order-cursor FAIL; every Chinese paragraph independently found in actual PDF; current selection language ordering corrected, no prose or assertion removed"
+    },
+    {
+      "command": "patch-diagram-pages.py",
+      "exitCode": 0,
+      "pagesRepainted": 9,
+      "unaffectedContentHashes": 305
+    },
+    {
+      "command": "pdf-qa.py after initial incremental export",
+      "exitCode": 1,
+      "cause": "PDFminer detected malformed inline Contents streams; retained diagnostic manifest; strict dual-reader repair completed"
+    },
+    {
+      "command": "normalize-pdf.py",
+      "exitCode": 0,
+      "decodedPageContentHashesUnchanged": 314
+    },
+    {
+      "command": "pdf-qa.py --skip-rasters final",
+      "exitCode": 0,
+      "pages": 314,
+      "missingParagraphs": 0,
+      "boundsFailures": 0,
+      "forbiddenLeaks": 0
+    },
+    {
+      "command": "incremental-rasters.py",
+      "exitCode": 0,
+      "diagramPages": 9,
+      "cognitionScreenshots": 4
+    },
+    {
+      "command": "contrast-render.py",
+      "exitCode": 0,
+      "actualTypes": 5,
+      "vectorPages": 48
+    },
+    {
+      "command": "diagram-check.py final",
+      "exitCode": 0,
+      "svgFiles": 48
+    },
+    {
+      "command": "delivery.mjs final",
+      "exitCode": 0,
+      "formats": 3
+    },
+    {
+      "command": "compare.py",
+      "exitCode": 0,
+      "pairs": 7
+    }
+  ],
+  "globalNpmCheckRun": false,
+  "providerCalls": 0,
+  "productionWrites": 0
+}

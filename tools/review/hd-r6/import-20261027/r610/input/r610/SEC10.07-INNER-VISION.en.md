@@ -1,0 +1,13 @@
+# SEC10.7 · Inner Vision | Cognition
+
+**Internal applicability:** Human Design PHS Cognition; verified Design Sun Tone = 4. New customer-facing editorial candidate, not a copied textbook or legacy-report passage. Hide this metadata from customer content.
+
+## 10.7 Inner Vision: When Understanding Takes Shape Within You
+
+Your Human Design Cognition is classified as Inner Vision. In the traditional framework, this brings attention to the way images, spatial relationships and an overall sense of a situation may take shape internally. At times, other people may still be explaining a problem step by step while you are beginning to imagine how its parts belong together. You might picture the eventual outcome before knowing exactly how to describe the path toward it, or discover that disconnected details begin to make more sense once you have a quieter moment to consider them. Understanding does not always begin as a complete sentence. Sometimes it starts as an internal outline that has yet to find its language.
+
+This perspective may feel especially relevant when you are learning, creating or improving a process. Imagine reviewing a workflow that involves several people. You might first form an overall impression of how information moves between them and where the sequence could be simpler. Explaining that picture to others is a separate task. A sketch, a process map or a concrete example can help translate what you have imagined into something that other people can examine and test. The potential strength is not merely having an internal image, but learning when and how to make that understanding accessible and useful.
+
+You may also notice that constant interruptions leave little room to organize an impression fully. Sometimes a short interval without new demands is enough to return to an idea with more clarity. Writing down relationships, drawing a rough diagram or revisiting a question later may provide a helpful bridge. You do not need to force yourself to see vivid mental pictures: for some people, the experience may be closer to recognizing an arrangement, a sequence or a whole. Whatever form it takes, an internal impression can be a starting point for exploration; reliable conclusions still benefit from evidence, feedback and practical testing.
+
+Read alongside the other verified elements of your chart, Inner Vision can offer a more personal way to consider when ideas begin to cohere, how you communicate them and which possibilities deserve further attention. You do not have to turn every inner picture into a task or assume that a lack of immediate agreement makes your understanding less valuable. Allowing an idea to develop, find clear expression and meet reality gives this theme a practical place in everyday life.

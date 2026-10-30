@@ -1,0 +1,17 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {inspectHdCognitionClassification,admitExactReviewParagraph,selectHdCommonReviewCandidates,assessHdAutomaticReportSupport} from '../../../../../functions/external-profile/hd-premium-section-packet-review.js';
+const d='tools/review/hd-r6/import-20261027/r610/',j=n=>JSON.parse(fs.readFileSync(d+n)),p=j('SECTION-PACKETS.json').packets[9],modules=j('COMMON-SEMANTIC-CANDIDATES.json').modules,checks=[];const check=(name,f)=>{f();checks.push({name,status:'PASS'});};
+for(const value of [null,undefined,0,7,'4',NaN,Infinity])check('Invalid Tone '+String(value)+' holds',()=>{const q=structuredClone(p);q.activationWitness['DESIGN:SUN'].substructure.tone=value;assert(!inspectHdCognitionClassification(q).ready);});
+for(const mutate of [q=>delete q.activationWitness['DESIGN:SUN'],q=>q.activationWitness['DESIGN:SUN'].substructure.boundarySnapApplied=true,q=>q.activationWitness['DESIGN:SUN'].substructure.parentCompatibility='MISMATCH',q=>q.activationWitness['DESIGN:SUN'].substructure.precision='DISPUTED',q=>delete q.calculation.variables.fields.designUpper,q=>q.calculation.variables.fields.designUpper.color=2])check('Missing/contradictory/boundary field holds '+checks.length,()=>{const q=structuredClone(p);mutate(q);assert(!inspectHdCognitionClassification(q).ready);});
+check('No semantic inventory fails closed before payment',()=>assert(assessHdAutomaticReportSupport(p.calculation).unsupportedBeforePayment));
+check('Quadruple explicit pre-payment customer notice',()=>{const q={definition:{definitionCode:'QUADRUPLE_SPLIT_DEFINITION'}};const a=assessHdAutomaticReportSupport(q);assert(a.unsupportedBeforePayment);assert(a.customerNotice.en.includes('not purchase'));});
+for(const topic of ['TYPE','AUTHORITY','DEFINITION','PROFILE','CENTER','CHANNEL'])for(const lang of ['zh-Hans','en']){
+ const set=modules.filter(m=>m.topic===topic&&m.language===lang);check(topic+' '+lang+' true/false/missing/stale/contradictory family',()=>{
+  const selected=selectHdCommonReviewCandidates(p,set,p.calculation.chartDigest);assert(selected.length>0);assert.throws(()=>selectHdCommonReviewCandidates(p,set,'STALE'),/STALE/);
+  const q=structuredClone(p);q.calculation={...q.calculation,type:'NOT_A_TYPE',authority:'NOT_AUTHORITY',definition:{definitionCode:'UNKNOWN'},profile:{profileCode:'UNKNOWN'},channels:[],centers:[],activations:[]};const wrong=selectHdCommonReviewCandidates(q,set,q.calculation.chartDigest);
+  if(topic!=='CENTER')assert.equal(wrong.length,0);else assert(wrong.every(x=>x.selector.state==='FULLY_OPEN'));
+  assert.equal(selectHdCommonReviewCandidates(p,set.map(m=>({...m,selector:{path:'type',equals:'MISSING'}})),p.calculation.chartDigest).length,0);
+  assert.equal(selectHdCommonReviewCandidates(p,set.map(m=>({...m,publicationAllowed:true})),p.calculation.chartDigest).length,0);
+ });
+}
+for(const lang of ['zh-Hans','en'])check('Restored '+lang+' text retained and PHS eight excluded',()=>{const paras=j('SECTION-PACKETS.json').packets.flatMap(p=>p.paragraphs).filter(p=>p.language===lang);assert.equal(paras.filter(p=>p.subsectionId==='SEC10.07').length,4);const hold=j('PHS-EIGHT-HOLD-DISPOSITION.json').rows;assert(!paras.some(p=>hold.some(h=>h.id===p.id)));});
+fs.writeFileSync(d+'FINAL-OWNER-CHECKS.json',JSON.stringify({checks,passed:checks.length,scope:'Current final owner bytes; field mutations are deliberate negative inputs, not asserted to be valid birth charts',providerCalls:0},null,2)+'\n');console.log({finalOwnerChecks:checks.length});
