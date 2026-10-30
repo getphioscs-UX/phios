@@ -1,3 +1,4 @@
+import {worldPreviewBuildPolicy,isolateWorldPreviewWorker} from './lib/world-preview-worker-isolation.mjs';
 import {loadBookViiPublishedAdmission,BOOK_VII_ADMISSION_PATH} from '../functions/_lib/book-vii-published-admission.js';
 import {internalPublicationFile} from './lib/publication-boundary.mjs';
 ﻿import fs from 'node:fs';
@@ -376,7 +377,9 @@ if (
 
 // Compact generated bindings and whitespace, preserving runtime names, syntax
 // and legal comments. Enforce unchanged budgets on the actual shipped bytes.
-const compiledWorker = fs.readFileSync(workerSource, 'utf8');
+const worldPreviewPolicy=worldPreviewBuildPolicy(process.env);
+const compiledWorker = isolateWorldPreviewWorker(workerSource,worldPreviewPolicy);
+console.log('World immutable build scope: '+JSON.stringify(worldPreviewPolicy));
 const compactWorker = transformSync(compiledWorker, pagesWorkerCompactionOptions).code;
 fs.writeFileSync(workerSource, compactWorker);
 const workerBytes = fs.readFileSync(

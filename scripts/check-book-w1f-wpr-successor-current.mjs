@@ -225,6 +225,34 @@ for (const checker of currentSuccessor.presentationSuccessor.supersededHistorica
   assert.equal(checker.sha256, sha256(checker.path), `Historical WPR presentation checker drift: ${checker.path}`);
 }
 
+// v8 extends engineering verification; it neither replaces v7 nor grants human admission.
+const configSuccessor = json('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v8.json');
+assert.equal(configSuccessor.schemaVersion, 'PHI-OS-BOOK-W1F-CURRENT-WPR-SUCCESSOR-v8.0.0');
+assert.equal(configSuccessor.status, 'ENGINEERING_RECONCILIATION');
+assert.equal(configSuccessor.owner, 'WPR_TEST_CONFIG');
+assert.equal(configSuccessor.changeClass, 'CURRENT_CHECKER_CONFIG_INHERITANCE_ONLY');
+assert.equal(configSuccessor.humanDecision, 'PENDING');
+assert.deepEqual(configSuccessor.predecessorCurrentSuccessor, {
+  path: 'content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v7.json',
+  sha256: sha256('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v7.json'), rewritten: false
+});
+assert.equal(configSuccessor.historicalChecker.path, currentSuccessor.currentCheckerSuccessor.w0Path);
+assert.equal(configSuccessor.historicalChecker.sha256, currentSuccessor.currentCheckerSuccessor.w0CurrentSha256);
+assert.equal(configSuccessor.historicalChecker.byteSha256,
+  crypto.createHash('sha256').update(fs.readFileSync(configSuccessor.historicalChecker.path)).digest('hex'));
+assert.equal(configSuccessor.currentChecker.path, 'scripts/check-wpr-w0-governed-current.mjs');
+assert.equal(configSuccessor.currentChecker.sha256, sha256(configSuccessor.currentChecker.path));
+assert.deepEqual(configSuccessor.configurationLineage.map(item => item.path), [1,2,3,4].map(i =>
+  `content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v${i}.json`));
+for (const item of configSuccessor.configurationLineage) assert.equal(item.sha256, sha256(item.path));
+assert.deepEqual(configSuccessor.authority, {
+  historicalWprFreezeRewritten: false, predecessorCurrentSuccessorRewritten: false,
+  productionActivationVerified: false, deploymentExecuted: false, d1MutationExecuted: false,
+  newWebProductionAuthorityCreated: false, paidProviderCalls: 0
+});
+const currentW0Result = spawnSync(process.execPath, [configSuccessor.currentChecker.path], {stdio: 'inherit'});
+assert.equal(currentW0Result.status, 0, 'Governed current W0/READ_ONLY configuration inheritance failed');
+
 const compatibleHistoricalChecks = [
   'scripts/check-wpr-w1-authority-boundary.mjs',
   'scripts/check-wpr-w2-canonical-web-production.mjs',

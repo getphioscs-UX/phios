@@ -30,5 +30,7 @@ const child=spawnSync(process.execPath,['--input-type=module','-e',code],{encodi
 assert.equal(child.status,0,child.stderr);assert(child.stdout.includes('ZERO_COST_CHILD_PASS'));
 for(const [key,value] of Object.entries(pkg.scripts))if(/^check:/.test(key)&&!value.includes('run-zero-cost-regression')&&!value.includes('npm run check:legacy'))throw Error('UNGUARDED_REGRESSION_ALIAS:'+key);
 const evidence={recordedAt:new Date().toISOString(),npmHooksGuarded:true,ordinaryRegressionAliasesGuarded:true,pagesBuildGuarded:true,liveOptInOverriddenInRegression:true,nodeChildGuardInherited:true,fetchAndHttpsPaidRequestsBlockedBeforeNetwork:true,arbitraryExternalPostBlocked:true,nonNodeProviderCredentialsRemovedByRunner:true,providerCalls:0,providerCost:0,fullHistoricalSuiteExecuted:false,commandCount:Object.keys(commands).length};
-fs.mkdirSync('docs/acceptance/bazi-paid-report/visual-first-r1',{recursive:true});fs.writeFileSync('docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json',JSON.stringify(evidence,null,2)+'\n');
+// Accepted evidence is immutable. Each ordinary run overwrites only its ignored receipt.
+const receiptDirectory='.runtime-evidence/report-provider-spend-protection';
+fs.mkdirSync(receiptDirectory,{recursive:true});fs.writeFileSync(`${receiptDirectory}/current.json`,JSON.stringify(evidence,null,2)+'\n');
 console.log('PASS ordinary npm checks/builds: inherited zero-cost guard denies paid network even when parent requests live mode.');

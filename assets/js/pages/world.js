@@ -1,4 +1,5 @@
 import {mountWorldObservations} from './civilization-atlas/world-observations.js';
+import {mountWorldCompany} from './civilization-atlas/world-company-analysis.js';
 import {mountWorldPublishedReading} from './civilization-atlas/world-published-reading.js';
 import {loadWorldAcceptedClaims} from './civilization-atlas/world-current-claims.js';
 import {worldSystemLabel} from './civilization-atlas/world-system-copy.js';
@@ -41,3 +42,4 @@ let printDetails=[];window.addEventListener('beforeprint',()=>{printDetails=[...
 document.querySelector('main').addEventListener('click',e=>{const a=e.target.closest('a[href]');if(!a)return;const u=new URL(a.href,location.href);if(u.origin===location.origin&&u.pathname.startsWith('/world')){if(!u.searchParams.has('locale'))u.searchParams.set('locale',getLocale());a.href=u.pathname+u.search+u.hash;}});
 
 mountWorldObservations(document.querySelector('[data-world-observations]'));
+mountWorldCompany(document.querySelector('[data-world-company]'));

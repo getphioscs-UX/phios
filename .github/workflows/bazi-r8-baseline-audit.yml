@@ -5,6 +5,8 @@ on:
     paths:
       - ".github/workflows/bazi-r8-baseline-audit.yml"
       - "scripts/audit-bazi-r8-baseline-render.mjs"
+      - "scripts/lib/pages-json-import-preload.mjs"
+      - "scripts/lib/report-zero-cost-preload.mjs"
       - "functions/personal-reading/**"
       - "functions/canonical-presentation-runtime/**"
       - "config/reports/**"
@@ -23,7 +25,7 @@ jobs:
         with:
           node-version: 22.16.0
       - name: Run R8 baseline render audit
-        run: node scripts/audit-bazi-r8-baseline-render.mjs
+        run: node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/audit-bazi-r8-baseline-render.mjs
       - name: Upload audit artifact
         uses: actions/upload-artifact@v4
         with:

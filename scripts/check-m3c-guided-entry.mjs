@@ -1,3 +1,4 @@
+import {assertWorldPreviewWranglerSuccessor} from './lib/m3c-wrangler-successor.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
@@ -246,9 +247,9 @@ for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
     assert.equal(await sha256(successor.previousPath), successor.previousSha256);
     assert.deepEqual(successor.allowedVars, { PHIOS_D1_MAINTENANCE_MODE: 'READ_ONLY' });
     for (const flag of ['productionActivationVerified', 'deploymentExecuted', 'd1MutationExecuted']) assert.equal(successor[flag], false);
-    assert.equal(await sha256(file), successor.successorSha256);
+    const readOnlyConfig=await assertWorldPreviewWranglerSuccessor(successor.successorSha256);
     const previousConfig = await readJson(successor.previousPath);
-    assert.deepEqual(await readJson(file), {
+    assert.deepEqual(readOnlyConfig, {
       ...previousConfig,
       vars: { ...previousConfig.vars, ...successor.allowedVars }
     }, 'Guided Entry only recognizes the exact read-only maintenance configuration successor');

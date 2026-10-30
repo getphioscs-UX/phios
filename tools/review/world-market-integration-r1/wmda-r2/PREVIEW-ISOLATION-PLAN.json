@@ -1,0 +1,17 @@
+{
+  "authority": "Versioned wrangler.jsonc in PR12 source branch only; no Cloudflare project PATCH or production variable change",
+  "productionMode": "READ_ONLY_UNCHANGED",
+  "worldPreviewRequiredMode": "READ_ONLY",
+  "otherPreviewQAMayNeedWrites": [
+    "Ebook",
+    "Tarot",
+    "Profile",
+    "Commerce",
+    "ECR"
+  ],
+  "isolation": "Each Git Preview deployment reads that branch commit configuration; existing immutable deployments keep their environment. Verify old Preview remains OFF and new World Preview becomes READ_ONLY.",
+  "futureMainIntegration": "TL must review Preview QA compatibility before merging this default into main. No automatic merge.",
+  "documentation": "https://developers.cloudflare.com/pages/functions/wrangler-configuration/",
+  "sharedDashboardSettingChanged": false,
+  "status": "SOURCE_READY_RUNTIME_PROOF_PENDING"
+}
