@@ -1,0 +1,24 @@
+
+> build:pages
+> node scripts/run-zero-cost-regression.mjs build:pages
+
+[disk-budget] Pages production build: {"availableBytes":36849025024,"estimatedBytes":2000000000,"reserveBytes":5000000000,"requiredBytes":7000000000,"overridden":false}
+node:fs:442
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open 'C:\phios\.worktrees\world-release-main\tools\review\free-ask-manuscript-r1\whole-chapter-batch-r1\CHAPTER-CURRENT-CLOSURE.json'
+    at Object.readFileSync (node:fs:442:20)
+    at file:///C:/phios/.worktrees/world-release-main/scripts/build-manuscript-server-metadata.mjs:12:49
+    at Array.map (<anonymous>)
+    at file:///C:/phios/.worktrees/world-release-main/scripts/build-manuscript-server-metadata.mjs:12:36
+    at ModuleJob.run (node:internal/modules/esm/module_job:274:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:644:26)
+    at async file:///C:/phios/.worktrees/world-release-main/scripts/build-cloudflare-pages.mjs:34:1 {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\phios\\.worktrees\\world-release-main\\tools\\review\\free-ask-manuscript-r1\\whole-chapter-batch-r1\\CHAPTER-CURRENT-CLOSURE.json'
+}
+
+Node.js v22.16.0

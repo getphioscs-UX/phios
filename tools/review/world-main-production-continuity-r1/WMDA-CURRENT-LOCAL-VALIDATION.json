@@ -1,0 +1,75 @@
+{
+  "checkedUtc": "2026-10-30T07:59:17.320221+00:00",
+  "head": "cfe44e808e405c038a29e127198e384ccbeed424",
+  "sourceFiles": [
+    {
+      "path": "assets/js/pages/civilization-atlas/world-company-analysis.js",
+      "sha256": "66ed06264fff28898eb9e8b246bffeb038b462f2b73126c66981f6fc24c66976"
+    },
+    {
+      "path": "functions/_lib/world-company-analysis.js",
+      "sha256": "676af12eb60d33d1bff05bdb58ad97a95913cace51516c721a1678ed42e32ee4"
+    },
+    {
+      "path": "content/world/company-filings-r1.json",
+      "sha256": "b12401a5eb0eda08acf9ca301c7d6e4c6123904290ba90af260355a20b58e3a7"
+    },
+    {
+      "path": "scripts/lib/world-preview-worker-isolation.mjs",
+      "sha256": "e835a7af0d3031aa1bfcf0f19ad9732a3a1d83a3192a8de3c7cf09321104e4b8"
+    },
+    {
+      "path": "scripts/check-world-preview-worker-isolation.mjs",
+      "sha256": "9c57878a7dc5900f6e2dd6c95e0b01ce3532b92349ddc7322fdd20b2c6398de5"
+    },
+    {
+      "path": "scripts/check-world-market-official-filing-r2.mjs",
+      "sha256": "7f7ad2334fd636021cef7b334710a4c5c356abf4e8b4870d1c9c7719ed545bd1"
+    },
+    {
+      "path": "scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs",
+      "sha256": "40c60bbf1976ee8847263c93848c9dcdcbc2a8da2089cf7306e2bd083bfe19a3"
+    },
+    {
+      "path": "content/civilization-atlas/maintenance/book-v-world-official-filing-successor-v19.json",
+      "sha256": "a375c6d4c2ab90f65ab3986e287c6e3c522de3c5405e509d94d43c139def2e75"
+    }
+  ],
+  "localTests": {
+    "wmda": {
+      "pass": 38,
+      "log": "WMDA-FINAL-38.log"
+    },
+    "issuerSource": {
+      "pass": 11,
+      "log": "WMDA-OFFICIAL-FILING-11.log"
+    },
+    "originalEngine": {
+      "pass": 14,
+      "log": "WMDA-ENRICHED-14.log"
+    },
+    "r42": {
+      "pass": 33,
+      "log": "WMDA-R42-33-PASS.log"
+    },
+    "previewIsolation": {
+      "pass": 9,
+      "receipt": "WMDA-PREVIEW-ISOLATION-CURRENT.json"
+    },
+    "w16": {
+      "status": "PASS",
+      "log": "WMDA-PREVIEW-W16.log"
+    },
+    "edge": {
+      "status": "PASS",
+      "log": "WMDA-EDGE-FINAL.log"
+    },
+    "browser": {
+      "pass": 6,
+      "receipt": "wmda-local-ui/BROWSER-CHECKS.json"
+    }
+  },
+  "fullLocalNpmCheck": false,
+  "paidProviderCalls": 0,
+  "productionBusinessDataWrites": 0
+}

@@ -1,0 +1,151 @@
+{
+  "checkedUtc": "2026-10-30T09:43:41.496644+00:00",
+  "status": "WORLD_PRODUCTION_VERIFIED_LOCAL_CONVERGENCE_PARTIAL",
+  "remoteMain": "0d9089af4d0227f19867777a30eccd2c4515eb88",
+  "production": {
+    "checkedUtc": "2026-10-30T09:42:28.109277+00:00",
+    "environment": "production",
+    "commitHash": "0d9089af4d0227f19867777a30eccd2c4515eb88",
+    "id": "eb30bd35-5b6f-411c-80f0-d0d57599797d",
+    "latestStage": {
+      "name": "deploy",
+      "started_on": null,
+      "ended_on": "2026-10-30T08:16:31.575631Z",
+      "status": "success"
+    },
+    "url": "https://getphios.com",
+    "deploymentUrl": "https://eb30bd35.phios-github.pages.dev",
+    "automaticProductionDeployment": false,
+    "configurationUnchanged": true,
+    "rollbackDeploymentId": "cb5ff9da-eac8-42bc-8fed-28340725bff4"
+  },
+  "prs": [
+    {
+      "number": 12,
+      "status": "MERGED_NORMAL",
+      "main": "60e2a4d0aad747e82fd3b63d58b06dbf1586306c"
+    },
+    {
+      "number": 13,
+      "status": "MERGED_NORMAL",
+      "main": "0d9089af4d0227f19867777a30eccd2c4515eb88"
+    }
+  ],
+  "productionChecks": {
+    "world": {
+      "status": "PASS",
+      "receipt": "wmda-production/WMDA-PRODUCTION-SMOKE.json"
+    },
+    "locale": {
+      "status": "PASS",
+      "receipt": "wmda-production/WMDA-PRODUCTION-LANGUAGE.json"
+    },
+    "handoff": {
+      "status": "PASS",
+      "receipt": "wmda-production/WMDA-PRODUCTION-HANDOFF.json"
+    },
+    "public": {
+      "status": "PASS",
+      "receipt": "wmda-production/WMDA-PRODUCTION-BROWSER-PUBLIC-BOUNDARIES.json"
+    }
+  },
+  "counts": {
+    "world": 17,
+    "locale": 2,
+    "publicHandoff": 4,
+    "publicSensitivePaths": 12,
+    "assetHashes": 6,
+    "anonymousAccountDenials": 3
+  },
+  "capabilities": [
+    {
+      "capability": "World Market R1",
+      "main": "MERGED",
+      "production": "PASS",
+      "customerVerified": "PASS_REAL_BROWSER"
+    },
+    {
+      "capability": "Company Financial Analysis",
+      "main": "MERGED_26_METRICS",
+      "production": "PASS_18_KNOWN_8_UNKNOWN",
+      "customerVerified": "PASS_SOURCE_PERIODS_AND_LAYOUT"
+    },
+    {
+      "capability": "Official Filing Sources",
+      "main": "SOURCE_BOUND_MANUAL_Q3_2026",
+      "production": "PASS_CHECKED_2026_10_30",
+      "customerVerified": "PASS_DATED_FACTS_NOT_LIVE"
+    },
+    {
+      "capability": "World Comparison",
+      "main": "EXISTING_R4_2_PRESERVED",
+      "production": "PASS",
+      "customerVerified": "PASS_BOTH_LOCALES"
+    },
+    {
+      "capability": "Ask / Navigation Handoff",
+      "main": "EXISTING_PUBLIC_ENTRY_REUSED",
+      "production": "PASS_PUBLIC_ONLY",
+      "customerVerified": "PASS_NO_QUESTION_OR_CASE_SAVED"
+    },
+    {
+      "capability": "WMDA-R2 Refresh",
+      "main": "MERGED_LOCAL_ENGINE_AND_MANUAL_CATALOG",
+      "production": "MANUAL_FACTS_RELEASED_AUTOMATION_OFF",
+      "customerVerified": "MANUAL_RESULT_PASS_AUTOMATED_NOT_RUN"
+    },
+    {
+      "capability": "Moomoo Live Data",
+      "main": "EXISTING_ADAPTER_RETAINED",
+      "production": "OFF_NOT_ADMITTED",
+      "customerVerified": "NOT_ADMITTED"
+    },
+    {
+      "capability": "Bursa Live Quote",
+      "main": "NO_LICENSED_QUOTE_ADMISSION",
+      "production": "OFF_NOT_ADMITTED",
+      "customerVerified": "NOT_ADMITTED"
+    }
+  ],
+  "protectedOriginalWmda": {
+    "head": "88e5821b089cd7281097cbc473f23880e51e7bfc",
+    "all11HashesMatch": true
+  },
+  "cleanup": {
+    "utc": "2026-10-30T08:25:23.412416+00:00",
+    "status": "REMOVED_WITH_NORMAL_GIT_WORKTREE_REMOVE",
+    "path": "C:\\phios\\.worktrees\\world-release-main",
+    "removedFiles": 33725,
+    "removedLogicalBytes": 2148991858,
+    "sharedDependenciesPreserved": true,
+    "diskFreeAfter": 38930034688,
+    "diskFreeDelta": 2223935488,
+    "diskDeltaIncludesConcurrentOtherWindows": true,
+    "forceUsed": false
+  },
+  "rootLocalMain": {
+    "head": "bc18bb9f30abf7b6373c9183d3c8f5e2b7088bd9",
+    "branch": "main",
+    "uniqueCommitsVsRemote": 2,
+    "status": "OWNER_RECONCILIATION_REQUIRED_NOT_FORCED",
+    "preflight": "ROOT-MAIN-FF-PREFLIGHT.json"
+  },
+  "inheritedFailure": "WMDA-INHERITED-B6-FAILURE.json",
+  "oldIndependentNarrativeFailure": "R1-ADDITIONAL-MAIN-WORKFLOW-FINDINGS.json",
+  "noBlanketAllWorkflowPass": true,
+  "paidProviderCalls": 0,
+  "productionBusinessDataWrites": 0,
+  "stripeChanges": 0,
+  "productionMigrations": 0,
+  "productionCronEnabled": false,
+  "authorizedPagesProductionDeployments": 2,
+  "humanSemanticOrRightsAdmissionPromoted": false,
+  "tlCommercialDecisions": [
+    "Moomoo MY data account/API entitlement and redistribution/derived-use rights",
+    "Bursa real-time/delayed quote commercial permission",
+    "Any paid provider, production refresh schedule, operations and cost policy"
+  ],
+  "retainedNodeRuntime": "Verified 85MB Node22 runtime retained for future exact-version release; no repeated installation or backup ZIP",
+  "masterUpdate": "MASTER-FINAL-UPDATE-RECEIPT.json",
+  "masterLinkValidation": "MASTER-LINKS.json"
+}
