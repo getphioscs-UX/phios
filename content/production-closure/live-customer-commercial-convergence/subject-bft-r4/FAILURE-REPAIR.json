@@ -1,0 +1,38 @@
+{
+  "status": "REPAIRED_LOCAL",
+  "failures": [
+    {
+      "stage": "Fixture first setup",
+      "cause": "Nonexistent issuer case; changed to actual existing authorized native Business case.",
+      "exitCode": 1,
+      "receipt": "SETUP-FIRST-FAILURE.json",
+      "note": "Zero assertions initially produced a misleading every([]) PASS field; invalid receipt excluded and harness now records setup failure."
+    },
+    {
+      "stage": "Invitation fixture",
+      "cause": "Invitee cannot read private case before acceptance; owner obtains version while native mutate still authenticates actual invitee.",
+      "receipt": "SETUP-MEMBERSHIP-FAILURE.json"
+    },
+    {
+      "stage": "Local server build",
+      "cause": "Generated dynamic module and original owner import resolveDir corrected; no owner source modified."
+    },
+    {
+      "stage": "Browser reopen",
+      "cause": "Native Subject logout intentionally clears subjectId. R4 now retains explicit saved Subject reference in routing metadata while clearing private DOM and rechecking permissions.",
+      "receipt": "BROWSER-REOPEN-FAILURE.json"
+    },
+    {
+      "stage": "Repeated browser setup",
+      "cause": "Root without subject defaulted to historical qa-business after a fresh native Subject existed. R4 GET entry now explicitly selects current Business; POST semantics and auth unchanged.",
+      "receipt": "BROWSER-ROUTING-DIAGNOSTIC.json",
+      "note": "Partial pass entries with nonzero exit were not accepted; final browser requires actual 11-step completion."
+    }
+  ],
+  "finalEvidence": [
+    "TARGETED-TESTS.json",
+    "BROWSER.json",
+    "FRAMEWORK-RETIREMENT.json",
+    "PAGES-BUILD.json"
+  ]
+}

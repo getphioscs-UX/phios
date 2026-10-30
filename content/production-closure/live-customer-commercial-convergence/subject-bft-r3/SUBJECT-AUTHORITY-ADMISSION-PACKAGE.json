@@ -1,0 +1,43 @@
+{
+  "id": "SUBJECT-AUTHORITY-ADMISSION-PACKAGE",
+  "version": "R3-LOCAL-DECISION-PACKAGE-v1",
+  "workstream": "SUBJECT-BFT-INTEGRATED-CLOSURE-R3",
+  "state": "PROPOSED_NOT_ADMITTED",
+  "productionDefault": "BLOCKED",
+  "cost": "NO_PAID_CALLS",
+  "migrationCandidate": "NO_NEW_SCHEMA_OR_REMOTE_MIGRATION_IN_THIS_CANDIDATE",
+  "compatibility": "Existing subject IDs, six dimensions, historical freezes, Method/Report/Ebook/Stripe/entitlement identities and prices preserved",
+  "rollback": "Do not register production consumers. Disable/remove only the proposed adapter registration after separate review; preserve prior native versions and accepted records. No destructive cleanup.",
+  "existingAuthority": [
+    "functions/profile/subject-context-r1.js:authorizeSubject",
+    "functions/profile/subject-owner-integration-r2.js:rejectUnadmittedSubjectOperation",
+    "functions/account/oidc-auth.js:authenticate",
+    "functions/account/canonical-person-store.js:loadCanonicalPersonSubject",
+    "functions/pws/registry/universal-registry.js",
+    "functions/professional/consent/joint-household-consent.js"
+  ],
+  "exactMissingContract": "Formal create/access-request/organization mandate/guardian authority and domain-purpose grants are not admitted. SUBJECT_PROFILE_DISPLAY is a display grant, not a business financial/Reading/save grant.",
+  "proposedDelta": "Reuse native PWS SUBJECT_CONTEXT_REF and account references. Keep Account, canonical Person, Subject, Membership, Workspace, Consent, Evidence and Entitlement distinct. Admit a versioned provisioning policy and purpose/resource/source-version grant mapping only after review. Local candidate has request→owner decision→invitation→independent acceptance; no automatic production grant.",
+  "actualConsumer": [
+    "functions/profile/subject-bft-authority-candidate-r3.js",
+    "tools/review/subject-bft-r3/server.mjs"
+  ],
+  "requiredData": [
+    "Canonical Person ref for real PERSONAL",
+    "Verified business/organization mandate for BUSINESS/TEAM/INSTITUTION",
+    "Independent adult decisions for FAMILY",
+    "Verified guardian authority before minor data",
+    "Existing World canonical ref for COUNTRY"
+  ],
+  "permissionBoundary": "Service checks native Account, R1 profile authorization, current PWS purpose grant, subject version and native case membership/role/expiry on every private read/write. Requests and invitations never confer access. COUNTRY remains public observation, never government ownership.",
+  "securityRisks": [
+    "Client-supplied adult/mandate claims cannot become real proof",
+    "Organization delegation and guardian verification owner missing",
+    "Resource/source-specific grant version policy needs approval"
+  ],
+  "tests": [
+    "R3 CONTRACT-TESTS: formal-mode/foreign-host denial, profile-only grant denial, adult consent, revoke, cross-subject, request approve/reject and Country/minor denial"
+  ],
+  "humanDecision": "Approve/reject the exact issuer, mandate-verification, canonical-person, guardian, role/scope, purpose/version and audit rules. A generic direction approval is not sufficient to open production.",
+  "nextExecutableAction": "Review local native candidate actions and agree the provisioning/purpose contract; then implement the admitted production entry in the existing Owner without replacing R1/R2."
+}

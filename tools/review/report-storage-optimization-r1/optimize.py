@@ -22,7 +22,7 @@ def decode_image(obj):
 def identity(reader):
  keys=['/PHIOSReportId','/PHIOSSourceReportReference','/PHIOSChartDigest','/PHIOSLanguage','/Title','/Author','/Creator','/Producer']
  return {k:str(reader.metadata[k])for k in keys if k in(reader.metadata or{})}
-def optimize(report,quality):
+def optimize(report,quality,*,output_path=None):
  source=Path(report['path']);before=source.read_bytes();r=PdfReader(io.BytesIO(before));t=time.perf_counter();cpu=time.process_time();writer=PdfWriter(clone_from=r);changes=[];skips=[]
  if any('/ByteRange'in obj for _,obj in all_objects(r)if isinstance(obj,dict)):raise ValueError('Signed PDF requires separate review')
  if quality:
@@ -41,12 +41,14 @@ def optimize(report,quality):
  writer.compress_identical_objects(remove_duplicates=True,remove_unreferenced=True)
  policy='LOSSLESS_DEDUP_ONLY'if not quality else f'BACKGROUND_JPEG_Q{quality}_444_NO_RESIZE'
  writer.add_metadata({'/PHIOSOptimizationSourceSHA256':report['sha256'],'/PHIOSOptimizationWorkId':'PHIOS-REPORT-STORAGE-OPTIMIZATION-R1','/PHIOSOptimizationPolicy':policy,'/PHIOSOptimizationAdmission':'LOCAL_PROOF_NOT_HUMAN_ACCEPTED'})
- target=ROOT/'proofs'/report['method']/(report['id']+('-lossless'if not quality else f'-q{quality}')+'.pdf');target.parent.mkdir(parents=True,exist_ok=True)
+ target=Path(output_path).resolve() if output_path is not None else ROOT/'proofs'/report['method']/(report['id']+('-lossless'if not quality else f'-q{quality}')+'.pdf');target.parent.mkdir(parents=True,exist_ok=True)
  with target.open('wb')as f:writer.write(f)
  wall=time.perf_counter()-t;cpu_used=time.process_time()-cpu;new=inspect_pdf(target,report['id']+'-'+str(quality),report['method'],'Isolated rendition proof; original report remains authoritative')
  old_pages=report['pages'];pages=new['pages'];checks={'pageCount':len(pages)==len(old_pages),'pageBoundaries':all([a['mediaBox'],a['cropBox'],a['rotate']]==[b['mediaBox'],b['cropBox'],b['rotate']]for a,b in zip(old_pages,pages)),'dynamicContentStreamsExact':all(a['contentSHA256']==b['contentSHA256']for a,b in zip(old_pages,pages)),'extractedTextExactPerPage':all(a['textSHA256']==b['textSHA256']for a,b in zip(old_pages,pages)),'fontPayloadSetUnchanged':new['uniqueFontPayloadSHA256']==report['uniqueFontPayloadSHA256'],'fontNamesUnchanged':new['fontNames']==report['fontNames'],'originalIdentityMetadataRetained':identity(PdfReader(target))==identity(r),'originalUnmodified':sha(source.read_bytes())==report['sha256']}
  row={'reportId':report['id'],'method':report['method'],'quality':quality,'policy':policy,'source':report['path'],'sourceSHA256':report['sha256'],'output':str(target.relative_to(Path.cwd())).replace('\\','/'),'outputSHA256':new['sha256'],'originalBytes':report['fileBytes'],'optimizedBytes':new['fileBytes'],'savedBytes':report['fileBytes']-new['fileBytes'],'reductionPercent':round(100*(1-new['fileBytes']/report['fileBytes']),3),'pageCount':new['pageCount'],'encoderWallSeconds':round(wall,4),'encoderCpuSeconds':round(cpu_used,4),'verificationWallSeconds':new['inspectionWallSeconds'],'imageChanges':changes,'skippedImages':skips,'checks':checks,'passStructural':all(checks.values()),'visualApproval':'PENDING_ACTUAL_RENDER_AND_HUMAN_REVIEW','newManuscriptGenerated':False,'humanAccepted':False,'providerCalls':0}
- save('proofs/'+report['method']+'/'+target.stem+'-DETAIL.json',new);return row
+ if output_path is None:save('proofs/'+report['method']+'/'+target.stem+'-DETAIL.json',new)
+ else:target.with_suffix('.DETAIL.json').write_text(json.dumps(new,ensure_ascii=False,indent=2),encoding='utf-8')
+ return row
 def main():
  audit=read(ROOT/'SIZE-AUDIT.json');only=next((a.split('=',1)[1]for a in sys.argv if a.startswith('--only=')),None);rows=read(ROOT/'OPTIMIZATION-RESULTS.json')['rows']if only else[]
  if only:rows=[r for r in rows if r['reportId']!=only]

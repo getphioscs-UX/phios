@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import {readPprPreentrySuccessor,PPR_PREENTRY_SUCCESSOR} from './ppr-five-method-preentry-successor.mjs';
 
 const REGISTRY='content/professional/personal-reality/current/ppr-current-shared-owner-registry-v1.json';
 const read=p=>fs.readFileSync(p,'utf8');
@@ -35,6 +36,10 @@ export function assertPprCurrentSharedOwner(path,{historicalDigest=null,label='P
     assert.equal(dependencySuccessor.additionalDependency.path,'functions/external-profile/hd-report-automation-candidate.js');
     assert.equal(sha(dependencySuccessor.additionalDependency.path),dependencySuccessor.additionalDependency.sha256);
     record={...record,currentSha256:next.currentSha256,recognizedPredecessors:[...record.recognizedPredecessors,record.currentSha256]};
+  }
+  if(path==='perspectives/personal/index.html'&&sha(path)!==record.currentSha256){
+    const next=readPprPreentrySuccessor(record);
+    record={...record,currentSha256:next.currentSha256,recognizedPredecessors:[...record.recognizedPredecessors,record.currentSha256],engineeringSuccessorRef:PPR_PREENTRY_SUCCESSOR};
   }
   assert.equal(sha(path),record.currentSha256,`${label}: current owner digest drift: ${path}`);
   if(historicalDigest&&historicalDigest!==record.currentSha256)assert(record.recognizedPredecessors.includes(historicalDigest),`${label}: historical predecessor is not recognized: ${path}`);

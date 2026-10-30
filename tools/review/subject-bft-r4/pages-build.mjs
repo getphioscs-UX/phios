@@ -1,0 +1,2 @@
+import fs from 'node:fs';
+let source=fs.readFileSync('tools/review/subject-bft-r3/pages-build.mjs','utf8');if(!/const modules=\[[\s\S]*?\];/.test(source))throw Error('PAGES_HARNESS_DEPENDENCY_DRIFT');source=source.replace(/const modules=\[[\s\S]*?\];/,"const modules=['functions/professional/financial/business-source-closure-candidate-r4.js'];").replaceAll('subject-bft-r3','subject-bft-r4');fs.writeFileSync('.tmp/subject-bft-r4/pages-builder.mjs',source);await import('../../../.tmp/subject-bft-r4/pages-builder.mjs');

@@ -1,0 +1,62 @@
+{
+  "status": "PASS_LOCAL_SUCCESSOR_RECONCILIATION",
+  "HEAD": "af44a78737fa8378fb4c5e284b2a6216d0364ea5",
+  "baselineFailure": {
+    "status": "BASELINE_FAILURE",
+    "reason": "Historical inactive-contents SHA against current NUM-only successor",
+    "actual": "aa94550b13768b04726e90a6d51ae91c2bc39825ed32b38e805fd73cf2329b95",
+    "expected": "88c7d35c21febb016667617a525ad742e1a6fe2d8f02417359088a1bfbdcab4f"
+  },
+  "sourceFiles": [
+    {
+      "path": "scripts/lib/bazi-editorial-owner-successor.mjs",
+      "sha256": "8282077a88ed2822e3c0f8563b3840330f8bdcb5299123bdb88ce958680a86f3"
+    },
+    {
+      "path": "scripts/lib/bazi-numerology-shared-owner-successor.mjs",
+      "sha256": "55ea4721061205b92dd469141e1c92aba07f99bc6c81c1dffabb14eacb450d3b"
+    },
+    {
+      "path": "scripts/check-bazi-numerology-shared-owner-successor.mjs",
+      "sha256": "c23a14437560cca450ddc663936d0436b2ed868a076c23168915093126bdbae5"
+    },
+    {
+      "path": "docs/commerce/economics-20261009/bazi-numerology-shared-owner-successor-v4.json",
+      "sha256": "95b55d638c1efcaf58e69ca3f214a6a0f5665d48de55ef9cf73195e00b5dd3d8"
+    }
+  ],
+  "commands": [
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:bazi-deep-manuscript:r2-prelive",
+      "exitCode": 0,
+      "groups": 46
+    },
+    {
+      "command": "node scripts/check-bazi-numerology-shared-owner-successor.mjs",
+      "exitCode": 0,
+      "groups": 17
+    },
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:bazi-deep-manuscript:r2-final-closure",
+      "exitCode": 0,
+      "groups": 9,
+      "scope": "HISTORICAL_R2_RECEIPTS_WITH_EXACT_VERSION_BINDING"
+    }
+  ],
+  "historicalRecordsUnchanged": [
+    "docs/commerce/economics-20261009/bazi-editorial-shared-bilingual-successor-v1.json",
+    "docs/commerce/economics-20261009/bazi-editorial-contents-successor-v2.json",
+    "docs/commerce/economics-20261009/bazi-editorial-asset-dependency-successor-v2.json",
+    "docs/commerce/economics-20261009/bazi-editorial-asset-dependency-successor-v3.json"
+  ],
+  "sharedRuntimeFilesWritten": false,
+  "currentRendererFitAccepted": false,
+  "contentRepair": "PENDING",
+  "humanAcceptance": "PENDING",
+  "providerCalls": 0,
+  "actualCost": 0,
+  "productionWrites": 0,
+  "commit": 0,
+  "push": 0,
+  "deploy": 0
+}

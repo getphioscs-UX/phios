@@ -1,0 +1,22 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+import {chromium} from 'file:///C:/Users/Guest%20Account/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs';
+const out='content/production-closure/live-customer-commercial-convergence/subject-profile-r2',base=JSON.parse(fs.readFileSync('.tmp/subject-profile-r2/PREVIEW.json')).url;
+assert.equal(new URL(base).hostname,'127.0.0.1');const hash=b=>createHash('sha256').update(b).digest('hex');
+assert.equal((await fetch(base+'/assets/..%2f.tmp/subject-profile-r2/PREVIEW.json')).status,404,'Encoded traversal must not reach private/local directories');
+assert.equal((await fetch(base+'/'+out+'/STATUS.json')).status,200);
+const browser=await chromium.launch({channel:'msedge',headless:true,args:['--no-proxy-server']});
+try{const page=await browser.newPage();await page.route('**/*',r=>new URL(r.request().url()).origin===base?r.continue():r.abort('blockedbyclient'));
+ const r=await page.goto(base+'/content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html#subject-profile-r2-integration-closure',{waitUntil:'domcontentloaded'});assert.equal(r.status(),200);
+ const section=page.locator('#subject-profile-r2-integration-closure');assert.equal(await section.count(),1);assert.equal(await section.locator('tbody tr').count(),9);assert.equal(await section.locator('h5').count(),3);assert((await section.innerText()).includes('PARTIAL'));
+}finally{await browser.close();}
+fs.writeFileSync(out+'/MASTER-BROWSER.json',JSON.stringify({status:'PASS',scope:'ACTUAL_LOCAL_EXISTING_MASTER_R2_SECTION_AND_STATIC_BOUNDARY',matrixRows:9,consumerJourneys:3,encodedTraversalDenied:true},null,2));
+fs.copyFileSync('.tmp/subject-profile-r2/BUILD.json',out+'/BUILD.json');
+const status=JSON.parse(fs.readFileSync(out+'/STATUS.json'));
+status.pagesArtifacts=fs.readdirSync('.tmp/subject-profile-r2/pages-worker').filter(p=>fs.statSync('.tmp/subject-profile-r2/pages-worker/'+p).isFile()).map(p=>({path:'.tmp/subject-profile-r2/pages-worker/'+p,sha256:hash(fs.readFileSync('.tmp/subject-profile-r2/pages-worker/'+p)),bytes:fs.statSync('.tmp/subject-profile-r2/pages-worker/'+p).size}));
+status.reviewUrl=base+'/content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html#subject-profile-r2-integration-closure';
+status.localPreview=base+'/reality/?subjectId=qa-world-MY-ref';
+status.node22BinarySha256=hash(fs.readFileSync('.tmp/subject-profile-r2/node22/node.exe'));
+status.transportNote='HTTP loopback test cookie carries an actual native sealed Account session. Synthetic IdP only; no production login claim. R2 local shim maps D1 numbered SQL parameters for Node22.';
+fs.writeFileSync(out+'/STATUS.json',JSON.stringify(status,null,2)+'\n');
+fs.writeFileSync(out+'/FAILURE-REPAIR.json',JSON.stringify({scope:'R2 local diagnostics; original R1 evidence untouched',items:[{failure:'Initial sandbox server inaccessible from browser',repair:'Both loopback service and browser moved to the permitted local execution environment'},{failure:'Network-idle wait depended on out-of-scope external resources',repair:'Local-only browser requests and DOM-ready criterion; no external-asset acceptance claim'},{failure:'Personal Subject had no declared World context',repair:'Explicit optional public Country reference selection; no residence or nationality inference'},{failure:'Node22 numbered SQLite placeholders failed in inherited R1 QA adapter',repair:'R2 local-only numbered-parameter transport normalization; Account/PWS SQL and policies unchanged'}]},null,2));
+console.log('PASS existing Master R2 review and encoded static-path denial; final artifact hashes recorded.');

@@ -1,3 +1,4 @@
+import {installSubjectWorkspace} from './subject-workspace-r1.js';
 import {externalConditionsHtml} from './external-reality.js';
 import {installNavigationHandoff} from '../navigation-handoff.js';
 import {arr,esc,installTabs,locale,postJson,reRenderOnLocale,setStatus,tr,valueText} from './runtime-ui.js';
@@ -178,3 +179,5 @@ document.querySelector('[data-reality-structure-start]')?.addEventListener('clic
 for(const button of document.querySelectorAll('[data-reality-structure-tab]'))button.addEventListener('click',()=>{const tab=document.querySelector('[data-cx-tab="'+button.dataset.realityStructureTab+'"]');tab?.click();document.querySelector('[data-cx-workspace]')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});tab?.focus({preventScroll:true});});
 
 document.addEventListener('click',event=>{const button=event.target.closest('[data-external-ignore]');if(!button||!currentView?.externalReality)return;const id=button.dataset.externalIgnore;const graph=currentView.graphProjection;const graphProjection=graph?{...graph,G1:{...graph.G1,nodes:graph.G1.nodes.filter(n=>!(n.type==='EXTERNAL_CURRENT'&&n.id.endsWith(':external:'+id)))}}:graph;currentView={...currentView,graphProjection,externalReality:{...currentView.externalReality,items:currentView.externalReality.items.filter(i=>i.eventId!==id)},currentReality:{...currentView.currentReality,evidence:arr(currentView.currentReality?.evidence).filter(i=>i.eventId!==id)}};render(currentView);});
+
+void installSubjectWorkspace();

@@ -1,0 +1,148 @@
+{
+  "status": "PARTIAL",
+  "duplicatePackagesCreated": false,
+  "decisions": [
+    {
+      "name": "Subject / Multi-Party",
+      "classification": "READY_FOR_HUMAN_ADMISSION_REVIEW",
+      "secondary": [
+        "EXTERNAL_APPROVAL_REQUIRED",
+        "PRODUCTION_AUTHORIZATION_REQUIRED"
+      ],
+      "delta": "Approve verified Subject issuer, canonical Person vs custodian Account, real business mandate and purpose/version scopes. Family/Team/Institution delegation and guardian approval remain separate.",
+      "compatibility": "Native OIDC/PWS/R1 profile gate preserved. R4 exposes Business synthetic entry only.",
+      "boundary": "Private access requires current native identity, synthetic Subject, accepted purpose/resource/version and membership; no new multi-party policy.",
+      "risk": "Client adult/mandate declarations are not real verification.",
+      "local": "Existing R3 gates reused; R4 rejects other private Subject paths.",
+      "tests": "R4 20 contract / 11 browser; cross-account, role, source scope and non-Business denial.",
+      "external": "Verified organization mandate/guardian and professional authority evidence before any real private sharing.",
+      "rollback": "Disable R4 local entry; leave native R1/R2 and R3 records unchanged.",
+      "existingPackage": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/SUBJECT-AUTHORITY-ADMISSION-PACKAGE.json",
+      "packageSha256": "8ae9303e50941c688d0f9a4c86faeaf53987c4cc24396be912c8af44afb0d370",
+      "existingOwner": [
+        "functions/profile/subject-context-r1.js:authorizeSubject",
+        "functions/profile/subject-owner-integration-r2.js:rejectUnadmittedSubjectOperation",
+        "functions/account/oidc-auth.js:authenticate",
+        "functions/account/canonical-person-store.js:loadCanonicalPersonSubject",
+        "functions/pws/registry/universal-registry.js",
+        "functions/professional/consent/joint-household-consent.js"
+      ],
+      "requestedChange": "Reuse native PWS SUBJECT_CONTEXT_REF and account references. Keep Account, canonical Person, Subject, Membership, Workspace, Consent, Evidence and Entitlement distinct. Admit a versioned provisioning policy and purpose/resource/source-version grant mapping only after review. Local candidate has request→owner decision→invitation→independent acceptance; no automatic production grant.",
+      "formalStatus": "NOT_ADMITTED",
+      "humanDecision": "Approve verified Subject issuer, canonical Person vs custodian Account, real business mandate and purpose/version scopes. Family/Team/Institution delegation and guardian approval remain separate.",
+      "productionImpact": "NOT_AUTHORIZED; no production route/config/grant opened"
+    },
+    {
+      "name": "Business Financial",
+      "classification": "CONFLICT_BLOCKED",
+      "secondary": [
+        "SAFE_LOCAL_IMPLEMENTATION",
+        "READY_FOR_HUMAN_ADMISSION_REVIEW",
+        "EXTERNAL_APPROVAL_REQUIRED"
+      ],
+      "delta": "Admit a Business statement source shape, approved encrypted private source owner, custodian/delegation scopes, source freshness and review policy. Do not relabel Business as household.",
+      "compatibility": "Existing calculateFinancialMetric requires household_id; existing draft/grant paths are personal. Native range-arithmetic reused; no second ledger or formula registry.",
+      "boundary": "Parsed/validated is not reviewed. R4 refuses diagnosis until independently REVIEWED/RECONCILED; no real-data adapter entry.",
+      "risk": "Company/sole-proprietor rules, profit/cash/withdrawal and monthly/quarterly comparison must stay distinct.",
+      "local": "Actual R3 native source read/review/version + native financial arithmetic + typed summary; encrypted derived snapshot through native Context Owner.",
+      "tests": "R4 source review/version, profit/cash unknown, exact source pin, delegated owner mismatch and historical drift.",
+      "external": "Qualified financial/legal review and permitted real source documents. PDF case tax/insurance/estate recommendations are not endorsed.",
+      "rollback": "Remove local R4 adapter entry; immutable R3 source and history retained.",
+      "existingPackage": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/BUSINESS-FINANCIAL-SOURCE-ADMISSION-PACKAGE.json",
+      "packageSha256": "d19911e5dfedc92d5346ab4911d350118ea237525e55bd29a6a43195da15564a",
+      "existingOwner": [
+        "functions/api/account-financial-summary.js",
+        "functions/account/financial-will-draft-store.js:loadOwnedDraft/savedDraftRef",
+        "functions/professional/consent/financial-purpose-grants.js:createFinancialGrant/requireFinancialGrant",
+        "functions/professional/financial/financial-formula-registry.js",
+        "functions/financial/calculation-runtime/range-arithmetic.js"
+      ],
+      "requestedChange": "Admit BUSINESS_STATEMENT_SOURCE under Financial with canonical Subject, custodian Account, legal form, reporting boundary, dates, basis, currency, reviewed source digest and field-level scope. Reuse existing PWS references and an approved private encrypted object Owner. No public upload path or additional accounting ledger.",
+      "formalStatus": "NOT_ADMITTED",
+      "humanDecision": "Admit a Business statement source shape, approved encrypted private source owner, custodian/delegation scopes, source freshness and review policy. Do not relabel Business as household.",
+      "productionImpact": "NOT_AUTHORIZED; no production route/config/grant opened"
+    },
+    {
+      "name": "Subject Reading",
+      "classification": "READY_FOR_HUMAN_ADMISSION_REVIEW",
+      "secondary": [
+        "SAFE_LOCAL_IMPLEMENTATION"
+      ],
+      "delta": "Approve exact Source Fact / Computed Metric / Interpretation / Scenario / Missing Evidence / Professional Review mappings and permitted customer output.",
+      "compatibility": "Actual readRuntimeRuleFirst receives existing schema; financial source and computed strings remain reported, observedEvidence stays empty.",
+      "boundary": "Native engine execution is not five-output semantic/publication admission.",
+      "risk": "A source review is not professional judgment; scenarios are not forecasts.",
+      "local": "Typed, source-version-bound compatibility context and native call implemented.",
+      "tests": "R4 type separation, bilingual numeric/source identity and real UI.",
+      "external": "Professional interpretation review if a regulated/advisory diagnosis is proposed.",
+      "rollback": "Disable R4 mapping; existing Reading owner untouched.",
+      "existingPackage": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/SUBJECT-READING-SOURCE-ADMISSION-PACKAGE.json",
+      "packageSha256": "5b9bd8409ef6b11afb29d0bb08080fbe3eff30cdf3405245ea090fdb090147a7",
+      "existingOwner": [
+        "functions/runtime/reading/rule-reading.js:readRuntimeRuleFirst",
+        "functions/runtime/reading/reading-evidence-contract.js",
+        "functions/runtime/reading/reading-evidence-boundary.js",
+        "functions/runtime/reading/reading-experience.js"
+      ],
+      "requestedChange": "Add an authorized Subject context/source mapping at the existing input Owner: Account, Subject type/ref/version, purpose/grant, evidence refs/versions, financial/process facts and Method applicability. Keep unreviewed financial input in reported experience; only actual dated public World evidence is observed. Never invent a parallel BFT Reading engine.",
+      "formalStatus": "NOT_ADMITTED",
+      "humanDecision": "Approve exact Source Fact / Computed Metric / Interpretation / Scenario / Missing Evidence / Professional Review mappings and permitted customer output.",
+      "productionImpact": "NOT_AUTHORIZED; no production route/config/grant opened"
+    },
+    {
+      "name": "Navigation",
+      "classification": "READY_FOR_HUMAN_ADMISSION_REVIEW",
+      "secondary": [
+        "SAFE_LOCAL_IMPLEMENTATION",
+        "PRODUCTION_AUTHORIZATION_REQUIRED"
+      ],
+      "delta": "Admit Business reviewed source within an existing suitable family, precise source shape and purpose/delegated read contract. No SUBJECT source family.",
+      "compatibility": "FINANCIAL source reader compatibility + actual native handoff. Native ownerId check preserved; reviewer is not rewritten as source owner.",
+      "boundary": "Direction stays NOT_ESTABLISHED; human review options have implemented=false, actionOwner=null.",
+      "risk": "Clicking a review prompt cannot become an action or full Navigation Path.",
+      "local": "Actual FINANCIAL snapshot/handoff and explicit reconciliation choice.",
+      "tests": "Native family/constraints, owner mismatch denial, no implementation or inferred direction.",
+      "external": "Any real action needing financial/professional responsibility requires separate authority.",
+      "rollback": "Disable injected local source reader; original FINANCIAL owner remains unchanged.",
+      "existingPackage": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/SUBJECT-NAVIGATION-SOURCE-ADMISSION-PACKAGE.json",
+      "packageSha256": "75b5fcf3cb6c2bf7a9aa1a9aeaede44939a4ec2d66e0f9438f6e8d5236626882",
+      "existingOwner": [
+        "functions/customer-projection/canonical-navigation-handoff.js:navigationSourceOwners.FINANCIAL/produceCustomerNavigationSnapshot",
+        "functions/customer-projection/navigation-customer-projection.js:projectNavigationForCustomer",
+        "functions/runtime/navigation/reading-navigation-builder.js"
+      ],
+      "requestedChange": "Keep the FINANCIAL family. Propose a versioned BUSINESS_STATEMENT source-reader branch with server-authorized Subject context; keep current PERSONAL draft resolver unchanged. Source identity/version, options, decision, approval, execution and observed outcome must remain separate.",
+      "formalStatus": "NOT_ADMITTED",
+      "humanDecision": "Admit Business reviewed source within an existing suitable family, precise source shape and purpose/delegated read contract. No SUBJECT source family.",
+      "productionImpact": "NOT_AUTHORIZED; no production route/config/grant opened"
+    },
+    {
+      "name": "Continuity",
+      "classification": "READY_FOR_HUMAN_ADMISSION_REVIEW",
+      "secondary": [
+        "SAFE_LOCAL_IMPLEMENTATION",
+        "PRODUCTION_AUTHORIZATION_REQUIRED"
+      ],
+      "delta": "Approve Subject payload/identity, permitted private source references, retention/withdrawal, history pin/current-use rules, interrupted-write and cross-process recovery policy.",
+      "compatibility": "Native encrypted NAVIGATION/ACCOUNT_CONTEXT primitive with existing SQLite tables and PWS references; payload stays a local policy candidate.",
+      "boundary": "Same account + current resource/purpose/member authorization and expiry checked on every reopen. Changed source yields historical-only snapshot and current-use block.",
+      "risk": "7/30-day local proposal does not authorize production; global concurrency/recovery and withdrawal policy need formal approval.",
+      "local": "Six concurrent requests → one native encrypted record; retry, restart, pending-write denial, audit, original-source pin and logout routing fixed.",
+      "tests": "R4 native encryption/tamper/expiry/idempotency/restart/revocation and complete UI logout/login/reopen/review.",
+      "external": "Cloud binding, retention/legal data lifecycle and controlled real-data QA after authorization.",
+      "rollback": "Disable R4 local entry; no destructive purge or history rewrite.",
+      "existingPackage": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/SUBJECT-CONTINUITY-SUCCESSOR-ADMISSION-PACKAGE.json",
+      "packageSha256": "b5aca7ecdaa85cbfcdf1f314caf92df44bfe8707fa2d76bbf285c14dfe0f33f7",
+      "existingOwner": [
+        "functions/report-context/report-context-store.js:saveContextRecord/loadContextRecord",
+        "functions/customer-projection/canonical-navigation-handoff.js:saveCanonicalNavigationHandoff/reopenCanonicalNavigationHandoff",
+        "db/migrations/0012_report_context_admission.sql",
+        "functions/pws/registry/version-store.js"
+      ],
+      "requestedChange": "Reuse the existing encrypted Context Owner and ACCOUNT_CONTEXT anchor, with Subject ref/version and immutable source refs in the payload. Native PWS stores a stable request reservation/reference; it is not a second history DB. Do not equate storage-owner execution with approved Continuity policy.",
+      "formalStatus": "NOT_ADMITTED",
+      "humanDecision": "Approve Subject payload/identity, permitted private source references, retention/withdrawal, history pin/current-use rules, interrupted-write and cross-process recovery policy.",
+      "productionImpact": "NOT_AUTHORIZED; no production route/config/grant opened"
+    }
+  ]
+}

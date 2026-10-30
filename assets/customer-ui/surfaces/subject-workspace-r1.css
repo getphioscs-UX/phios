@@ -1,0 +1,24 @@
+.subject-workspace{padding:24px clamp(16px,3vw,40px);margin-block:20px;border:1px solid var(--cx-border,#ddcfae);border-radius:18px;background:var(--cx-surface,#faf7f0);color:var(--cx-text,#18343a);overflow-wrap:anywhere}
+.subject-workspace label{display:block;margin:12px 0 6px}.subject-workspace select,.subject-workspace button{font:inherit;min-height:44px;max-width:100%;padding:10px;border:1px solid #95815d;border-radius:8px;background:#fffaf0;color:#173b3b}.subject-workspace select{width:min(100%,36rem);display:block}.subject-workspace button{margin-top:10px}.subject-workspace :focus-visible{outline:3px solid #217a7a;outline-offset:4px}.subject-overview{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:24px}.subject-overview .prf-visitor-wheel{max-width:440px;box-sizing:border-box}.subject-overview .prf-visitor-wheel__center{display:flex;flex-direction:column;justify-content:center;align-items:center}.subject-overview .prf-visitor-wheel__center img{width:48%;height:48%}.subject-wheel-name{font-size:clamp(9px,1.1vw,14px);line-height:1.1;text-align:center;color:#18343a;max-width:90%}.subject-source{font-size:.85em;opacity:.85}.subject-workspace dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);max-width:34rem;gap:8px}.subject-workspace dd{margin:0;text-align:end}.subject-workspace section{margin-block:26px}.subject-data-label{font-size:.85em;font-weight:bold}.subject-workspace .prf-visitor-wheel__lens:focus-visible{outline:3px solid #217a7a}.subject-workspace [hidden],[data-cx-workspace][hidden],.cx-my-reality__context[hidden],.pm-reality-help[hidden],.pis-visual-story[hidden]{display:none!important}
+@media(max-width:700px){.subject-overview{grid-template-columns:minmax(0,1fr);gap:14px}.subject-workspace{margin-inline:12px;width:auto}.subject-overview .prf-visitor-wheel__lens{min-height:44px}.subject-overview .prf-visitor-wheel__lens b{font-size:12px}}
+
+[data-cx-start-reality][hidden],[data-reality-structure-start][hidden]{display:none!important}
+
+/* R1.1: wheel controls are sector labels, not generic form-button cards. */
+.subject-workspace .prf-visitor-wheel__lens,
+.subject-workspace .prf-visitor-wheel__lens[aria-pressed="true"],
+.subject-workspace .prf-visitor-wheel__lens:hover,
+.subject-workspace .prf-visitor-wheel__lens:focus-visible{
+  background:transparent;border:0;box-shadow:none;border-radius:0;
+  padding:0;margin:0;color:#14333b;transform:none;
+}
+.subject-workspace .prf-visitor-wheel__lens[aria-pressed="true"] b{
+  font-weight:800;text-decoration:underline;text-decoration-color:#785f2b;
+  text-decoration-thickness:2px;text-underline-offset:4px;
+}
+.subject-workspace .prf-visitor-wheel__lens:focus-visible{
+  outline:3px solid #174f4c;outline-offset:2px;
+}
+@media(max-width:700px){
+  html[lang="en"] .subject-workspace .prf-visitor-wheel__lens b{letter-spacing:-.2px}
+}

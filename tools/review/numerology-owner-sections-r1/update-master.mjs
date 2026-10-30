@@ -1,0 +1,19 @@
+import fs from'node:fs';import{NUM_OWNER_SECTIONS}from'../../../functions/personal-reading/narrative/numerology-owner-sections.js';
+const r='tools/review/numerology-owner-sections-r1',read=p=>JSON.parse(fs.readFileSync(p)),gen=read(r+'/GENERATION.json'),qa=read(r+'/PDF-QA.json'),visual=read(r+'/VISUAL-EVIDENCE.json'),owner=read(r+'/SECTION-OWNER.json');
+if(gen.results.length!==3||qa.results.length!==3||visual.visualReviewStatus!=='CODEX_INSPECTED_TARGETED_PDF_RASTERS_OWNER_REVIEW_PENDING')throw Error('ACTUAL_PDF_REVIEW_NOT_READY');
+const file='content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html',id='numerology-owner-sections-r1',links=gen.results.map(row=>`<li><a href="../../../${row.pdf}">${row.locale} · ${row.pages} 页 PDF · ${(row.bytes/1048576).toFixed(2)} MiB</a></li>`).join(''),rows=NUM_OWNER_SECTIONS.map(s=>{const p=owner.plans.bilingual.find(p=>p.pageRole==='FIXED_MASTER_SECTION'&&p.sectionId===s.id);return`<tr><td>${s.id}</td><td>${s.zh} / ${s.en}</td><td>${p.physicalPageNumber}</td><td>${s.pages.join('、')}</td></tr>`;}).join('');
+const section=`<!-- NUM_OWNER_SECTIONS_R1_BEGIN -->
+<section id="${id}" style="max-width:1200px;margin:32px auto;padding:28px;background:#fffdf5;color:#193442;border:1px solid #b99e66;border-radius:12px">
+<h2>Numerology · SEC-01–SEC-10 · Owner Review</h2><p><strong>章节映射已更新；SEC10 正文与三语 PDF 待人审。</strong>本轮为本地 SYNTHETIC Owner-review，不等同于 Live Customer 验收。</p>
+<p>P06 按 Owner 本轮确认直接绑定，未重新查验内容。实际对象为 <code>RPT-NUM-P06-CONTENT.webp</code>；使用已有目录页码槽，生成 10 个动态页码、10 个章节跳转及书签。</p>
+<p>39 页 = 6 页前置内容 + 10 张新章节图 + 19 张原动态页 + SEC10 四个新小节页。原“综合阅读”P21 正式归入 SEC10；原正文及 19 张 native 图保留。四个新小节用于综合总览、关键主题汇聚、人生整合地图、行动方向。</p><ul>${links}</ul>
+<p>实际 PDF：三语均为 39 页 A4；原 19 页可提取文字在排除物理页码后逐页一致；新四页中英正文可提取。10 个目录链接及书签目标已核对。四组合成资料的新增整合文字引用各自 native 角色与 Personal Year；没有新增计算或解释来源准入。</p>
+<table style="width:100%;border-collapse:collapse"><thead><tr><th>正式章节</th><th>标题</th><th>最终页码</th><th>正文来源 ID</th></tr></thead><tbody>${rows}</tbody></table>
+<p>正文 ID P06–P24 是沿用的 native 内部来源 ID；实体第 6 页是目录，二者已单独映射。旧 SEC-04–SEC-12 只保留历史来源记录，不再用于当前章节绑定。</p>
+<h3>实际 PDF 视觉证据</h3><p>未渲染或复查 P06 内容。以下为章节图、SEC10 三语正文，以及四张重点 native 图的实际 PDF 栅格证据。</p>
+${['posters','zh-Hans-integration','en-integration','bilingual-integration','native-four'].map(g=>`<details><summary>${g}</summary><a href="../../../${r}/visual/${g}-CONTACT.jpg"><img src="../../../${r}/visual/${g}-CONTACT.jpg" alt="${g} actual PDF evidence" loading="lazy" style="max-width:100%;height:auto"></a></details>`).join('')}
+<p><a href="../../../${r}/CHANGES-AND-PROVENANCE.md">变更与来源说明</a> · <a href="../../../${r}/SECTION-OWNER.json">章节与页码映射</a> · <a href="../../../${r}/ASSET-BINDINGS.json">R2 字节绑定</a> · <a href="../../../${r}/PDF-QA.json">实际 PDF 验证</a> · <a href="../../../${r}/TARGETED-CHECKS.json">四组资料定向检查</a> · <a href="../../../${r}/BOUNDARY-CHECKS.json">发布边界检查</a></p>
+<p>沿用现有 Numerology renderer、固定页 assembler、封面身份绑定与共享目录/书签 owner。没有提交、推送、部署、生产写入、Stripe 修改或付费 Provider 调用；未运行全局检查。P06 的 Owner 确认只适用于其现有内容，本轮新正文不自动记为 Human ACCEPT。</p>
+</section>
+<!-- NUM_OWNER_SECTIONS_R1_END -->`;
+let html=fs.readFileSync(file,'utf8');if(html.includes('<!-- NUM_OWNER_SECTIONS_R1_BEGIN -->'))html=html.replace(/<!-- NUM_OWNER_SECTIONS_R1_BEGIN -->[\s\S]*?<!-- NUM_OWNER_SECTIONS_R1_END -->/,section);else{html=html.includes('</body>')?html.replace('</body>',section+'\n</body>'):html+'\n'+section;}const notice='<p id="numerology-owner-sections-current" style="padding:12px 20px;border:1px solid #b99e66;background:#fffdf5"><a href="#numerology-owner-sections-r1">Numerology 最新章节候选：SEC-01–SEC-10 · 三语 39 页 · Owner review</a></p>';if(html.includes('id="numerology-owner-sections-current"'))html=html.replace(/<p id="numerology-owner-sections-current"[\s\S]*?<\/p>/,notice);else if(/<body[^>]*>/.test(html))html=html.replace(/<body([^>]*)>/,'<body$1>'+notice);else html=html.replace('</h1>','</h1>'+notice);fs.writeFileSync(file,html);console.log(file+'#'+id);

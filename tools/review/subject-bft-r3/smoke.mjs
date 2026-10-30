@@ -1,0 +1,2 @@
+import {openR3Owner,SUBJECTS,sampleBusiness} from './owner.mjs';
+const o=await openR3Owner(),a=await o.identity(await o.login('A'));try{const i=await o.intakes.submit(SUBJECTS.BUSINESS,a,sampleBusiness());const r=await o.runtime.context(SUBJECTS.BUSINESS,a,{intakeRef:i.referenceId});console.log(JSON.stringify({state:r.workspace.financial.ownerCashAccess.state,nativeReading:r.readingProbe.native.schemaVersion}));}finally{o.close();}

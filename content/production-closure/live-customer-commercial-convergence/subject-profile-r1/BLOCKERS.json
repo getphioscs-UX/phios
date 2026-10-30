@@ -1,0 +1,58 @@
+[
+  {
+    "id": "SUBJECT_PRODUCTION_OWNER_POLICY",
+    "phase": "P1/P5",
+    "path": "functions/api/customer-subject-workspace.js",
+    "reason": "Gateway intentionally requires loopback + explicit local flag. No real subject provisioning or purpose-grant authority has been approved.",
+    "next": "Review PWS object/reference and grant policy with existing Account/Consent Owner; keep production route closed.",
+    "decision": "Approval of exact production Owner/policy and later operations; no production action requested now"
+  },
+  {
+    "id": "PRIVATE_FINANCIAL_AUTHORITY_ADAPTER",
+    "phase": "P3",
+    "path": "functions/profile/subject-context-r1.js",
+    "reason": "Financial source summaries are synthetic in the Business slice; Personal/Family remain delegated. No real ledger access or full diagnosis/trend/scenario delivery proved.",
+    "next": "Bind minimum authorized summary/version from existing Financial Authority and test isolation in QA; do not copy full ledgers or infer shared assets.",
+    "decision": "Existing private Owner/version/purpose needs confirmation before real data"
+  },
+  {
+    "id": "MULTIPARTY_AND_GUARDIAN_OWNER",
+    "phase": "P1/P2",
+    "path": "functions/profile/subject-context-r1.js",
+    "reason": "Family/Team/Institution definitions and registry tests exist, not live group onboarding. Member-private evidence is excluded; guardian-dependent access is blocked.",
+    "next": "Reuse approved multi-party and guardian Consent authority; test participant-specific data rights. Do not manufacture members.",
+    "decision": "Exact Owner/consent policy required for real group data"
+  },
+  {
+    "id": "WORLD_FULL_CONSUMER_QA",
+    "phase": "P4",
+    "path": "tools/review/subject-profile-r1/server.mjs",
+    "reason": "Public World page bytes/entry are served; subject context and archived trend work. This service does not enable all old World API consumers or run full World journey QA.",
+    "next": "Reuse the existing dedicated World QA adapter for its broader interactions; current snapshot is explicitly historical, not current macroeconomic diagnosis.",
+    "decision": "No new data service or provider is needed for current bounded context"
+  },
+  {
+    "id": "FORMAL_CONTINUITY_AND_HISTORY_OWNER",
+    "phase": "P4/P5",
+    "path": "tools/review/subject-profile-r1/server.mjs",
+    "reason": "Actual local Case persistence, subject/source refs and account isolation passed. Production persistence, creation concurrency/idempotence, encrypted live history and complete lifecycle are not newly certified by this QA adapter.",
+    "next": "Bind the approved formal Continuity Owner and retention/version contract; retain original account/report entitlements.",
+    "decision": "Production persistence/operation authority remains outside this task"
+  },
+  {
+    "id": "LEGACY_AND_METHOD_DELIVERY_SCOPE",
+    "phase": "P6",
+    "path": "functions/profile/subject-context-r1.js",
+    "reason": "Personal selectors and native contracts are preserved and targeted regressions passed. The new QA service does not replay all seven assessments, five numerical engines, existing reports or every historical order. Applicability is a gate, not verified calculation/publication.",
+    "next": "Reuse unchanged original evidence; verify only affected real Owner handoffs before a future activation.",
+    "decision": "No new symbolic use or commercial entitlement is granted"
+  },
+  {
+    "id": "LOCAL_BUNDLE_NOT_PRODUCTION_RELEASE",
+    "phase": "P7",
+    "path": "tools/review/subject-profile-r1/build.mjs",
+    "reason": "Compiled Node service + browser module verified; no fresh whole Pages build, cloud QA, deployment or live customer test in this task. Node 24.18.0 executed; target Node22 is not a Node22 runtime test.",
+    "next": "After local human review, prepare exact affected Pages build and authorized QA/operations package.",
+    "decision": "Production deployment/migration/commercial activation not authorized"
+  }
+]

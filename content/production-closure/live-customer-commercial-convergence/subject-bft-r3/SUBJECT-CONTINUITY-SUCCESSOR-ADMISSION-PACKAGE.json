@@ -1,0 +1,43 @@
+{
+  "id": "SUBJECT-CONTINUITY-SUCCESSOR-ADMISSION-PACKAGE",
+  "version": "R3-LOCAL-DECISION-PACKAGE-v1",
+  "workstream": "SUBJECT-BFT-INTEGRATED-CLOSURE-R3",
+  "state": "PROPOSED_NOT_ADMITTED",
+  "productionDefault": "BLOCKED",
+  "cost": "NO_PAID_CALLS",
+  "migrationCandidate": "NO_NEW_SCHEMA_OR_REMOTE_MIGRATION_IN_THIS_CANDIDATE",
+  "compatibility": "Existing subject IDs, six dimensions, historical freezes, Method/Report/Ebook/Stripe/entitlement identities and prices preserved",
+  "rollback": "Do not register production consumers. Disable/remove only the proposed adapter registration after separate review; preserve prior native versions and accepted records. No destructive cleanup.",
+  "existingAuthority": [
+    "functions/report-context/report-context-store.js:saveContextRecord/loadContextRecord",
+    "functions/customer-projection/canonical-navigation-handoff.js:saveCanonicalNavigationHandoff/reopenCanonicalNavigationHandoff",
+    "db/migrations/0012_report_context_admission.sql",
+    "functions/pws/registry/version-store.js"
+  ],
+  "exactMissingContract": "Native encrypted storage is exercised, but formal Subject retention, delegated-source permission, global idempotency, pending-write recovery and historical snapshot policy are not admitted.",
+  "proposedDelta": "Reuse the existing encrypted Context Owner and ACCOUNT_CONTEXT anchor, with Subject ref/version and immutable source refs in the payload. Native PWS stores a stable request reservation/reference; it is not a second history DB. Do not equate storage-owner execution with approved Continuity policy.",
+  "actualConsumer": [
+    "functions/profile/subject-bft-runtime-candidate-r3.js:save/reopen"
+  ],
+  "requiredData": [
+    "Actor/purpose/grant and Subject version",
+    "Source version list and snapshot rules",
+    "Explicit choice/save consent",
+    "Approved retention/expiry/withdrawal policy",
+    "Global retry/CAS and native blob/metadata recovery contract"
+  ],
+  "permissionBoundary": "Every reopen repeats native Account, Subject, purpose, membership, source version, expiry and native crypto/digest checks. Revocation stops future private reads; the candidate never automatically deletes retained history. Local 7/30-day choices are policy proposals, not legal retention decisions.",
+  "securityRisks": [
+    "Native blob put + metadata insert is not a cross-resource transaction",
+    "Pending reservation must not silently create duplicate cases",
+    "A changed source is denied rather than silently rebased",
+    "Local idempotency is not an accepted multi-process/production recovery guarantee"
+  ],
+  "dataLifecycle": "Reserve request → native encrypted write → complete immutable reference. Retry same completed request rechecks source/access. Pending/failed write returns named RECOVERY_REQUIRED. Cipher tamper and stale source fail closed. Historical source remains in native versions; no automatic cleanup.",
+  "tests": [
+    "R3 CONTRACT-TESTS: encrypted-owner save/reopen, native logout/login, retry, tamper, revoke, stale source, interrupted storage/pending recovery and Node22 restart",
+    "R3 BROWSER: actual encrypted owner path for Personal/Business/Family/Country"
+  ],
+  "humanDecision": "Approve retention, scope-specific delegation, withdrawal/history obligations, source snapshot semantics, global CAS/idempotency and operator recovery. Production remains blocked until those decisions and Cloud QA.",
+  "nextExecutableAction": "Review native storage behavior and the failure/recovery evidence; approve the versioned policy and recovery executor, then bind the admitted source family and perform controlled Cloud QA."
+}
