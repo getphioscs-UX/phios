@@ -1,0 +1,2 @@
+from pathlib import Path
+r=Path(r'C:/Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios');q=Path('C:/phios/tools/review/world-customer-journey-r4');s=(r/'tools/review/world-ux-r3/native-checks.mjs').read_text(encoding='utf-8').replace("const out='content/production-closure/live-customer-commercial-convergence/world-customer-experience-r3'","const out='C:/phios/tools/review/world-customer-journey-r4/native'").replace('.tmp/world-ux-r3','.tmp/world-journey-r4');(q/'native-checks.mjs').write_bytes(s.encode())

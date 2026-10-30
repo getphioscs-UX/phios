@@ -1,0 +1,50 @@
+{
+  "status": "FAIL",
+  "node": "v22.16.0",
+  "at": "2026-10-30T10:22:26.508Z",
+  "results": [
+    {
+      "name": "Existing R5 case retained; R6 missing policy metadata stops before private source read",
+      "status": "PASS"
+    },
+    {
+      "name": "Five representative models have explicit basis/type/scope; no private public-observer grant",
+      "status": "PASS"
+    },
+    {
+      "name": "Server binding/time/revocation/role/purpose/audit negative decisions fail closed",
+      "status": "PASS"
+    },
+    {
+      "name": "Current native account, Subject, resource and membership still required; client role ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "Subject-aware Financial Business source is typed/versioned/reviewed without household_id coercion",
+      "status": "PASS"
+    },
+    {
+      "name": "Personal/Household inputs and old calculations retain exact identity and result",
+      "status": "PASS"
+    },
+    {
+      "name": "Reading retains reported/computed/scenario distinctions and independent three admissions",
+      "status": "PASS"
+    },
+    {
+      "name": "Navigation stays FINANCIAL, with unapproved action and all formal gates closed",
+      "status": "PASS"
+    },
+    {
+      "name": "Bilingual existing journey preserves numeric/source identity and versions",
+      "status": "FAIL",
+      "reason": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n... Skipped lines\n\n  {\n    accountId: 'oidc_fc4fd4c4017a2f9546e751bd2c20db2e9dafbf8cec035b0cc6544b52a18d533e',\n    authorization: {\n      accountId: 'oidc_fc4fd4c4017a2f9546e751bd2c20db2e9dafbf8cec035b0cc6544b52a18d533e',\n      auditReference: 'SYNTHETIC_R6_OWNER_POLICY_TEST_ONLY',\n...\n          accountingVerified: false,\n+         computedAt: '2026-10-30T10:22:26.463Z',\n-         computedAt: '2026-10-30T10:22:26.354Z',\n          currency: 'MYR',\n          dataQuality: 'REVIEWED',\n          exceptions: [],\n          formula: 'Revenue - Cost of Sales',\n          formulaId: 'BFT-R3:grossProfit',\n...\n          accountingVerified: false,\n+         computedAt: '2026-10-30T10:22:26.463Z',\n-         computedAt: '2026-10-30T10:22:26.354Z',\n          currency: 'MYR',\n          dataQuality: 'REVIEWED',\n          exceptions: [],\n          formula: 'Gross Profit / Revenue',\n          formulaId: 'BFT-R3:grossMargin',\n...\n          accountingVerified: false,\n+         computedAt: '2026-10-30T10:22:26.463Z',\n-         computedAt: '2026-10-30T10:22:26.354Z',\n          currency: 'MYR',\n          dataQuality: 'REVIEWED',\n          exceptions: [],\n          formula: 'Gross Profit - Operating Expenses',\n          formulaId: 'BFT-R3:operatingProfit',\n...\n          accountingVerified: false,\n+         computedAt: '2026-10-30T10:22:26.463Z',\n-         computedAt: '2026-10-30T10:22:26.354Z',\n          currency: 'MYR',\n          dataQuality: 'REVIEWED',\n          exceptions: [],\n          formula: 'Operating Profit - Finance Costs - Tax',\n          formulaId: 'BFT-R3:calculatedNetProfit',\n...\n          accountingVerified: false,\n+         computedAt: '2026-10-30T10:22:26.463Z',\n-         computedAt: '2026-10-30T10:22:26.354Z',\n          currency: 'MYR',\n          dataQuality: 'REVIEWED',\n          exceptions: [],\n          formula: 'Source value, not distributable cash',\n          formulaId: 'BFT-R3:reportedNetProfit',\n...\n          accountingVerified: false,\n+         computedAt: '2026-10-30T10:22:26.463Z',\n-         computedAt: '2026-10-30T10:22:26.354Z',\n          currency: 'MYR',\n          dataQuality: 'REVIEWED',\n          exceptions: [],\n          formula: 'Current Assets - Current Liabilities',\n          formulaId: 'BFT-R3:workingCapital',\n...\n          accountingVerified: false,\n+         computedAt: '2026-10-30T10:22:26.463Z',\n-         computedAt: '2026-10-30T10:22:26.354Z',\n          currency: 'MYR',\n          dataQuality: 'REVIEWED',\n          exceptions: [],\n          formula: 'Current Assets / Current Liabilities',\n          formulaId: 'BFT-R3:currentRatio',\n...\n          accountingVerified: false,\n+         computedAt: '2026-10-30T10:22:26.463Z',\n-         computedAt: '2026-10-30T10:22:26.354Z',\n          currency: 'MYR',\n          dataQuality: 'REVIEWED',\n          exceptions: [],\n          formula: 'Source operating flow; not revenue',\n          formulaId: 'BFT-R3:operatingCashFlow',\n...\n          accountingVerified: false,\n+         computedAt: '2026-10-30T10:22:26.463Z',\n-         computedAt: '2026-10-30T10:22:26.354Z',\n          currency: 'MYR',\n          dataQuality: 'REVIEWED',\n          exceptions: [],\n          formula: 'Average Inventory / Cost of Sales × days',\n          formulaId: 'BFT-R3:DIO',\n...\n          accountingVerified: false,\n+         computedAt: '2026-10-30T10:22:26.463Z',\n-         computedAt: '2026-10-30T10:22:26.354Z',\n          currency: 'MYR',\n          dataQuality: 'REVIEWED',\n          exceptions: [],\n          formula: 'Average Receivables / Credit Sales × days',\n          formulaId: 'BFT-R3:DSO',\n...\n          accountingVerified: false,\n+         computedAt: '2026-10-30T10:22:26.463Z',\n-         computedAt: '2026-10-30T10:22:26.354Z',\n          currency: 'MYR',\n          dataQuality: 'REVIEWED',\n          exceptions: [],\n          formula: 'Average Payables / Credit Purchases × days',\n          formulaId: 'BFT-R3:DPO',\n...\n          accountingVerified: false,\n+         computedAt: '2026-10-30T10:22:26.463Z',\n-         computedAt: '2026-10-30T10:22:26.354Z',\n          currency: 'MYR',\n          dataQuality: 'REVIEWED',\n          exceptions: [],\n          formula: 'DIO + DSO - DPO',\n          formulaId: 'BFT-R3:CCC',\n...\n          accountingVerified: false,\n+         computedAt: '2026-10-30T10:22:26.463Z',\n-         computedAt: '2026-10-30T10:22:26.354Z',\n          currency: 'MYR',\n          dataQuality: 'REVIEWED',\n          exceptions: [],\n          formula: 'OCF / (cash principal + cash interest)',\n          formulaId: 'BFT-R3:debtServiceCoverage',\n...\n          accountingVerified: false,\n+         computedAt: '2026-10-30T10:22:26.463Z',\n-         computedAt: '2026-10-30T10:22:26.354Z',\n          currency: 'MYR',\n          dataQuality: 'REVIEWED',\n          exceptions: [],\n          formula: 'Closing - (Opening + Operating + Investing + Financing); never deduct CAPEX twice',\n          formulaId: 'BFT-R3:cashReconciliationDifference',\n...\n          accountingVerified: false,\n+         computedAt: '2026-10-30T10:22:26.463Z',\n-         computedAt: '2026-10-30T10:22:26.354Z',\n          currency: 'MYR',\n          dataQuality: 'REVIEWED',\n          exceptions: [],\n          formula: 'Business operational headroom, not legal owner access',\n          formulaId: 'BFT-R3:operatingHeadroom',\n\n    at file:///C:/phios/.tmp/subject-bft-r6/check.bundle.mjs:42084:12\n    at async test (file:///C:/phios/.tmp/subject-bft-r6/check.bundle.mjs:41999:5)\n    at async file:///C:/phios/.tmp/subject-bft-r6/check.bundle.mjs:42082:3"
+    }
+  ],
+  "existingJourneyReused": true,
+  "newBusinessCaseCreated": false,
+  "externalMandateVerified": false,
+  "formalAdmission": false,
+  "providerCalls": 0,
+  "production": false
+}

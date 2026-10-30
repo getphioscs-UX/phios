@@ -1,0 +1,102 @@
+{
+  "id": "BUSINESS_SUBJECT_AUTHORIZATION_CONTRACT_R6",
+  "state": "PROPOSED_NOT_ACCEPTED",
+  "existingOwner": {
+    "identity": "functions/account/oidc-auth.js:authenticate",
+    "subject": "functions/profile/subject-context-r1.js:authorizeSubject",
+    "relationship": "functions/pws/registry/relationship-store.js",
+    "membership": "functions/professional/workspace/bft-local-workflow-r1.js"
+  },
+  "exactProposedAddition": {
+    "relationshipType": "Existing SUBJECT_BFT_CANDIDATE_ACCESS for local candidate only; no new production type admitted",
+    "attribute": "attributes.businessAuthorizationContractR6",
+    "schemaVersion": "SUBJECT-BFT-BUSINESS-AUTHORIZATION-CANDIDATE-R6",
+    "requiredFields": [
+      "accountId",
+      "subjectId",
+      "subjectVersion",
+      "caseId",
+      "businessType",
+      "authorityBasis.kind",
+      "authorityBasis.reference",
+      "authorityBasis.reviewAccountRef",
+      "authorityBasis.reviewVersion",
+      "representativeRole",
+      "purpose",
+      "resourceScope",
+      "effectiveAt",
+      "expiresAt",
+      "grantVersion",
+      "revocation.revokedAt",
+      "auditReference"
+    ]
+  },
+  "roles": [
+    {
+      "role": "SOLE_PROPRIETOR",
+      "basis": "VERIFIED_OPERATOR",
+      "proof": "Independently verified operator identity and business registration/operation authority; knowing name or self-declaration insufficient",
+      "localScopes": "Existing R3 scopes, narrowed by native case role and independent source review"
+    },
+    {
+      "role": "COMPANY_REPRESENTATIVE",
+      "basis": "ORGANIZATION_MANDATE",
+      "proof": "Versioned verifiable organization mandate, representative identity, limits and verifier",
+      "localScopes": "Existing permitted scopes only; no automatic issuer or ownership transfer"
+    },
+    {
+      "role": "DELEGATED_EMPLOYEE",
+      "basis": "SCOPED_EMPLOYEE_DELEGATION",
+      "proof": "Issuer authority plus explicit work-resource delegation/expiry",
+      "localScopes": [
+        "intake:read",
+        "intake:write",
+        "reading:probe",
+        "navigation:probe",
+        "continuity:reopen"
+      ],
+      "notGranted": "Independent approval, formal issuance, export or publication"
+    },
+    {
+      "role": "EXTERNAL_CONSULTANT",
+      "basis": "EXPLICIT_CLIENT_MANDATE",
+      "proof": "Client authorization with purpose, resources, term and revocation",
+      "localScopes": [
+        "intake:read",
+        "intake:review",
+        "reading:probe",
+        "navigation:probe",
+        "continuity:save",
+        "continuity:reopen"
+      ],
+      "notGranted": "Other account history, client authority, regulated sign-off or residual rights after revocation"
+    },
+    {
+      "role": "PUBLIC_OBSERVER",
+      "basis": "PUBLIC_SOURCE_ONLY",
+      "localScopes": [
+        "public:read"
+      ],
+      "notGranted": "All private Subject/source/history actions; no private workspace from a known company name"
+    }
+  ],
+  "nativeIdentitySupported": "Verified OIDC account + PWS account/Subject refs + active case membership + separately consented FINANCIAL_SUMMARY scope",
+  "notMachineVerified": "Real organization mandate, employment delegation, client authority and verifier competence. Structural validation is NOT proof verification.",
+  "independentApproval": [
+    "Formal Subject issuer policy",
+    "Mandate verification/issuer responsibility",
+    "Independent financial source review",
+    "Professional judgment/publication",
+    "Formal retention and migration"
+  ],
+  "forbiddenSharing": [
+    "Business cash/revenue into personal income or owner cash",
+    "Private Household/Personal sources across Subject or Account",
+    "Consultant data outside purpose, scope or expiry",
+    "Saved account-owned history to another custodian"
+  ],
+  "formalEntrypoints": "Closed: create real Business, issue real private grant, professional release/publication and formal cloud lifecycle",
+  "humanDecision": "Accept/reject this exact versioned design foundation; acceptance does not verify any actual enterprise.",
+  "externalAuthorizationRequired": true,
+  "newGrantRegistry": false
+}

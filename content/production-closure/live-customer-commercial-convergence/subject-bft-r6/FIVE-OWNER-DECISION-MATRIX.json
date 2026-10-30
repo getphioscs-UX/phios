@@ -1,0 +1,284 @@
+{
+  "version": "R6",
+  "humanAcceptance": false,
+  "matrix": [
+    {
+      "owner": "Subject",
+      "existingState": "READY_FOR_OWNER_DECISION",
+      "existingPackage": {
+        "owner": "Subject",
+        "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/SUBJECT-AUTHORITY-ADMISSION-PACKAGE.json",
+        "sha256": "8ae9303e50941c688d0f9a4c86faeaf53987c4cc24396be912c8af44afb0d370",
+        "matchesR5": true,
+        "currentState": "READY_FOR_OWNER_DECISION",
+        "requiredDecision": "Approve/reject the exact issuer, mandate-verification, canonical-person, guardian, role/scope, purpose/version and audit rules. A generic direction approval is not sufficient to open production."
+      },
+      "proposalId": "BUSINESS_SUBJECT_AUTHORIZATION_CONTRACT_R6",
+      "proposedChange": {
+        "relationshipType": "Existing SUBJECT_BFT_CANDIDATE_ACCESS for local candidate only; no new production type admitted",
+        "attribute": "attributes.businessAuthorizationContractR6",
+        "schemaVersion": "SUBJECT-BFT-BUSINESS-AUTHORIZATION-CANDIDATE-R6",
+        "requiredFields": [
+          "accountId",
+          "subjectId",
+          "subjectVersion",
+          "caseId",
+          "businessType",
+          "authorityBasis.kind",
+          "authorityBasis.reference",
+          "authorityBasis.reviewAccountRef",
+          "authorityBasis.reviewVersion",
+          "representativeRole",
+          "purpose",
+          "resourceScope",
+          "effectiveAt",
+          "expiresAt",
+          "grantVersion",
+          "revocation.revokedAt",
+          "auditReference"
+        ]
+      },
+      "technicalEvidence": [
+        "TARGETED-TESTS.json",
+        "RESTART.json",
+        "PAGES-FUNCTIONS-COMPATIBILITY.json",
+        "R5 exact hash-bound 18/18, 2/2, 7/7 reuse"
+      ],
+      "securityBoundary": [
+        "Business cash/revenue into personal income or owner cash",
+        "Private Household/Personal sources across Subject or Account",
+        "Consultant data outside purpose, scope or expiry",
+        "Saved account-owned history to another custodian"
+      ],
+      "compatibility": "Existing R1–R5 and Personal/Household sources remain byte-identical; original records and product boundaries retained.",
+      "impact": "Local candidate only; no production behavior or configuration change",
+      "reversibility": "Disable this additive R6 consumer; preserve prior grants, schemas, records and all history",
+      "recommendedDecision": "Accept this exact design foundation only; real mandate verification and issuing policy remain required",
+      "humanApprovalRequired": true,
+      "humanDecision": "PENDING",
+      "externalAuthorizationRequired": true,
+      "externalAuthorization": "Real organization mandate, employment delegation, client authority and verifier competence. Structural validation is NOT proof verification.",
+      "productionEffect": "NONE — NOT_AUTHORIZED"
+    },
+    {
+      "owner": "Financial",
+      "existingState": "CONFLICT_BLOCKED",
+      "existingPackage": {
+        "owner": "Financial",
+        "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/BUSINESS-FINANCIAL-SOURCE-ADMISSION-PACKAGE.json",
+        "sha256": "d19911e5dfedc92d5346ab4911d350118ea237525e55bd29a6a43195da15564a",
+        "matchesR5": true,
+        "currentState": "CONFLICT_BLOCKED",
+        "requiredDecision": "Approve the Financial source kind, encryption Owner, fields, grant purpose/scopes/recipient/versions, review qualification and freshness/reconciliation policy. Do not approve a new price, report identity or real financial recommendation."
+      },
+      "proposalId": "BUSINESS_FINANCIAL_SOURCE_SUCCESSOR",
+      "proposedChange": {
+        "path": "functions/professional/financial/subject-aware-source-candidate-r6.js",
+        "schemaVersion": "BUSINESS_FINANCIAL_SOURCE_SUCCESSOR_R6",
+        "discriminator": [
+          "PERSONAL",
+          "HOUSEHOLD",
+          "BUSINESS"
+        ],
+        "common": [
+          "currency",
+          "reportingPeriod.id/start/end",
+          "source.owner/referenceId/sourceVersion/sourceDate",
+          "dataQuality",
+          "reviewState",
+          "reviewer.accountId/at/reviewVersion"
+        ],
+        "businessOnly": [
+          "legalForm",
+          "reportingScope",
+          "operatingScope",
+          "accountingBasis",
+          "sourceFields (existing BUSINESS_FIELDS)",
+          "calculationReferences (existing formula IDs/versions/inputs)",
+          "ownerTransactions",
+          "formulaVersions"
+        ],
+        "derivedOutputs": "classification.calculatedMetrics retains actual native result and computedAt; it is NOT an immutable source fact",
+        "unknown": "Missing raw fields null; no zero substitution",
+        "legacyDispatch": "PERSONAL/HOUSEHOLD identity passthrough to existing owners; no additional Business fields or changed formula required",
+        "businessDispatch": "Only existing Business intake + businessSummary/range arithmetic; never fabricate household_id or call Personal composer"
+      },
+      "technicalEvidence": [
+        "TARGETED-TESTS.json",
+        "RESTART.json",
+        "PAGES-FUNCTIONS-COMPATIBILITY.json",
+        "R5 exact hash-bound 18/18, 2/2, 7/7 reuse"
+      ],
+      "securityBoundary": {
+        "account": "Native OIDC/PWS checks first",
+        "subject": "Exact Subject/case/version",
+        "scope": "FINANCIAL_SUMMARY and current R6 stored contract, role, purpose, resources, expiry, revocation",
+        "sourceReview": "Independent reviewed/reconciled input and exact digest; no self approval"
+      },
+      "compatibility": "Existing R1–R5 and Personal/Household sources remain byte-identical; original records and product boundaries retained.",
+      "impact": "Local candidate only; no production behavior or configuration change",
+      "reversibility": "Disable this additive R6 consumer; preserve prior grants, schemas, records and all history",
+      "recommendedDecision": "Accept typed BUSINESS source successor design; approve accounting/formula meaning separately",
+      "humanApprovalRequired": true,
+      "humanDecision": "PENDING",
+      "externalAuthorizationRequired": true,
+      "externalAuthorization": "Permitted real financial documents and qualified accounting/financial/legal scope review",
+      "productionEffect": "NONE — NOT_AUTHORIZED"
+    },
+    {
+      "owner": "Reading",
+      "existingState": "READY_FOR_OWNER_DECISION",
+      "existingPackage": {
+        "owner": "Reading",
+        "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/SUBJECT-READING-SOURCE-ADMISSION-PACKAGE.json",
+        "sha256": "5b9bd8409ef6b11afb29d0bb08080fbe3eff30cdf3405245ea090fdb090147a7",
+        "matchesR5": true,
+        "currentState": "READY_FOR_OWNER_DECISION",
+        "requiredDecision": "Approve each source class, Subject context and safe output treatment for Reality Map/Diagnosis/Navigation Path/Action Guidance/Continuity Plan. Native execution alone does not close publication admission."
+      },
+      "proposalId": "READING_SOURCE_ADMISSION_R6",
+      "proposedChange": [
+        "Subject ID/version",
+        "Current native grant + proposed contract version",
+        "Authorized source ref/digest",
+        "Existing applicable rule-first Reading",
+        "Output version",
+        "Independent source review, with professional interpretation/publication separate"
+      ],
+      "technicalEvidence": [
+        "TARGETED-TESTS.json",
+        "RESTART.json",
+        "PAGES-FUNCTIONS-COMPATIBILITY.json",
+        "R5 exact hash-bound 18/18, 2/2, 7/7 reuse"
+      ],
+      "securityBoundary": {
+        "data": "PENDING_OWNER_DECISION",
+        "interpretation": "PENDING_EXACT_RULE_AND_PROFESSIONAL_REVIEW",
+        "publication": "PENDING_SEPARATE_CUSTOMER_RELEASE"
+      },
+      "compatibility": "Existing R1–R5 and Personal/Household sources remain byte-identical; original records and product boundaries retained.",
+      "impact": "Local candidate only; no production behavior or configuration change",
+      "reversibility": "Disable this additive R6 consumer; preserve prior grants, schemas, records and all history",
+      "recommendedDecision": "Decide Data / Interpretation / Publication separately for this source/version",
+      "humanApprovalRequired": true,
+      "humanDecision": "PENDING",
+      "externalAuthorizationRequired": true,
+      "externalAuthorization": "Professional interpretation where proposed; PDF recommendations not endorsed",
+      "productionEffect": "NONE — NOT_AUTHORIZED"
+    },
+    {
+      "owner": "Navigation",
+      "existingState": "READY_FOR_OWNER_DECISION",
+      "existingPackage": {
+        "owner": "Navigation",
+        "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/SUBJECT-NAVIGATION-SOURCE-ADMISSION-PACKAGE.json",
+        "sha256": "75b5fcf3cb6c2bf7a9aa1a9aeaede44939a4ec2d66e0f9438f6e8d5236626882",
+        "matchesR5": true,
+        "currentState": "READY_FOR_OWNER_DECISION",
+        "requiredDecision": "Approve a precise FINANCIAL source kind and authorized Subject/custodian/delegate mapping, including which actions need independent/professional/client approval."
+      },
+      "proposalId": "NAVIGATION_FINANCIAL_ADMISSION_R6",
+      "proposedChange": "BUSINESS_STATEMENT_SOURCE_SUCCESSOR_R6 after Subject/Financial/Reading admission",
+      "technicalEvidence": [
+        "TARGETED-TESTS.json",
+        "RESTART.json",
+        "PAGES-FUNCTIONS-COMPATIBILITY.json",
+        "R5 exact hash-bound 18/18, 2/2, 7/7 reuse"
+      ],
+      "securityBoundary": "Selection does not create execution, improved cash, a confirmed direction, guaranteed outcome or professional authority.",
+      "compatibility": "Existing R1–R5 and Personal/Household sources remain byte-identical; original records and product boundaries retained.",
+      "impact": "Local candidate only; no production behavior or configuration change",
+      "reversibility": "Disable this additive R6 consumer; preserve prior grants, schemas, records and all history",
+      "recommendedDecision": "Admit only FINANCIAL after each explicit gate; not SUBJECT and not actions",
+      "humanApprovalRequired": true,
+      "humanDecision": "PENDING",
+      "externalAuthorizationRequired": true,
+      "externalAuthorization": "Actual decision owner and independently admitted action scope",
+      "productionEffect": "NONE — NOT_AUTHORIZED"
+    },
+    {
+      "owner": "Continuity",
+      "existingState": "READY_FOR_OWNER_DECISION",
+      "existingPackage": {
+        "owner": "Continuity",
+        "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r3/SUBJECT-CONTINUITY-SUCCESSOR-ADMISSION-PACKAGE.json",
+        "sha256": "b5aca7ecdaa85cbfcdf1f314caf92df44bfe8707fa2d76bbf285c14dfe0f33f7",
+        "matchesR5": true,
+        "currentState": "READY_FOR_OWNER_DECISION",
+        "requiredDecision": "Approve retention, scope-specific delegation, withdrawal/history obligations, source snapshot semantics, global CAS/idempotency and operator recovery. Production remains blocked until those decisions and Cloud QA."
+      },
+      "proposalId": "CONTINUITY_POLICY_DECISION_R6",
+      "proposedChange": [
+        {
+          "question": "Which cases are retained long term?",
+          "proposal": "Local QA remains existing 7/30 days. Formal drafts, approved deliveries and audit references each require explicit purpose/jurisdiction/Owner retention, no permanent default."
+        },
+        {
+          "question": "Who may reopen?",
+          "proposal": "Keep Account custodian + Business Subject + current purpose/resource/member scope. A shared enterprise custody model is an independent future decision, not current support."
+        },
+        {
+          "question": "Consultant leaves?",
+          "proposal": "Expiry/revocation blocks access immediately; no retained client-file access. New access requires separate client grant."
+        },
+        {
+          "question": "Business revokes?",
+          "proposal": "Block new reads; preserve existing delivery/audit history pending approved retention/legal-hold decision. Never equate revoke with delete."
+        },
+        {
+          "question": "Duplicate requests?",
+          "proposal": "Reuse native Account/Subject/request ID + digest reservation; replay same input, reject conflicting reuse. New formal grant/output pins need approved metadata version."
+        },
+        {
+          "question": "Retention expires?",
+          "proposal": "Deny reopen first. No cleanup worker is authorized here; approved auditable deletion must respect record class, holds and encryption/backups."
+        },
+        {
+          "question": "Loss/concurrency/recovery?",
+          "proposal": "Current same-request concurrency and fresh-process decrypt are verified. PENDING/orphan/key-loss cases stay explicit, not auto-COMPLETE; an Owner-reviewed reconciliation/recovery procedure is still required."
+        }
+      ],
+      "technicalEvidence": [
+        "TARGETED-TESTS.json",
+        "RESTART.json",
+        "PAGES-FUNCTIONS-COMPATIBILITY.json",
+        "R5 exact hash-bound 18/18, 2/2, 7/7 reuse"
+      ],
+      "securityBoundary": [
+        {
+          "question": "Who may reopen?",
+          "proposal": "Keep Account custodian + Business Subject + current purpose/resource/member scope. A shared enterprise custody model is an independent future decision, not current support."
+        },
+        {
+          "question": "Consultant leaves?",
+          "proposal": "Expiry/revocation blocks access immediately; no retained client-file access. New access requires separate client grant."
+        },
+        {
+          "question": "Business revokes?",
+          "proposal": "Block new reads; preserve existing delivery/audit history pending approved retention/legal-hold decision. Never equate revoke with delete."
+        },
+        {
+          "question": "Duplicate requests?",
+          "proposal": "Reuse native Account/Subject/request ID + digest reservation; replay same input, reject conflicting reuse. New formal grant/output pins need approved metadata version."
+        },
+        {
+          "question": "Retention expires?",
+          "proposal": "Deny reopen first. No cleanup worker is authorized here; approved auditable deletion must respect record class, holds and encryption/backups."
+        },
+        {
+          "question": "Loss/concurrency/recovery?",
+          "proposal": "Current same-request concurrency and fresh-process decrypt are verified. PENDING/orphan/key-loss cases stay explicit, not auto-COMPLETE; an Owner-reviewed reconciliation/recovery procedure is still required."
+        }
+      ],
+      "compatibility": "Existing R1–R5 and Personal/Household sources remain byte-identical; original records and product boundaries retained.",
+      "impact": "Local candidate only; no production behavior or configuration change",
+      "reversibility": "Disable this additive R6 consumer; preserve prior grants, schemas, records and all history",
+      "recommendedDecision": "Decide exact retention/custody/version pin/recovery policy; no permanent retention or implicit delete",
+      "humanApprovalRequired": true,
+      "humanDecision": "PENDING",
+      "externalAuthorizationRequired": true,
+      "externalAuthorization": "Cloud/storage binding plus record-class and applicable retention review",
+      "productionEffect": "NONE — NOT_AUTHORIZED"
+    }
+  ]
+}

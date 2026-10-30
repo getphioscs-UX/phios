@@ -1,0 +1,6 @@
+from pathlib import Path
+import json,hashlib
+r=Path(r'C:/Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios');p=r/'functions/public/client-intent-router.js';s=p.read_text(encoding='utf-8');old='return {...base,...worldPresentation};';assert old in s;s=s.replace(old,'return {...base,...worldPresentation,boundaries:{...base.boundaries,...worldPresentation.boundaries}};');p.write_bytes(s.encode());p=r/'scripts/check-world-customer-journey-r4.mjs';s=p.read_text(encoding='utf-8');needle='assert.equal(r.boundaries.automaticPersistence,false);';s=s.replace(needle,needle+"for(const k of ['methodChosenByClientRouter','lensExecutionAllowed','modelCalculationAllowed','persistenceAllowed','automaticRealityCase','automaticJourneyActivation'])assert.equal(r.boundaries[k],false);");p.write_bytes(s.encode());p=r/'content/civilization-atlas/maintenance/book-v-world-customer-journey-successor-v20.json';d=json.loads(p.read_text(encoding='utf-8'))
+for c in d['changes']:c['successorSha256']=hashlib.sha256((r/c['path']).read_bytes()).hexdigest()
+for c in d['dependencies']:c['sha256']=hashlib.sha256((r/c['path']).read_bytes()).hexdigest()
+p.write_bytes((json.dumps(d,ensure_ascii=False,indent=2)+'\n').encode());print('Preserved every original client-router safety boundary in the World presentation overlay; strengthened all nine route assertions.')

@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('C:/phios/tools/review/world-customer-journey-r4/dev-server.mjs');s=p.read_text(encoding='utf-8');old="if(rel===master&&base===root)file=path.resolve('C:/phios',master);";new=old+"const r4Evidence=/^tools\\/review\\/world-customer-journey-r4\\/[a-zA-Z0-9_./-]+\\.(?:png|json|md)$/.test(rel);if(r4Evidence)file=path.resolve('C:/phios',rel);";assert old in s;s=s.replace(old,new).replace("const publicFile=rel==='index.html'||", "const publicFile=r4Evidence||rel==='index.html'||");p.write_text(s,encoding='utf-8')

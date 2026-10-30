@@ -1,0 +1,2 @@
+import fs from 'node:fs';import {createPreviewServer} from '../preview-server.mjs';
+const server=createPreviewServer();server.listen(0,'127.0.0.1',()=>{const origin='http://127.0.0.1:'+server.address().port;fs.writeFileSync('tools/review/ecr-flagship-visual-r1/r2/PREVIEW-SERVER.json',JSON.stringify({origin,pid:process.pid,onlyGET:true,providerCalls:0,productionWrites:0},null,2));console.log(origin+'/perspectives/phi-configuration/?locale=zh-Hans');});
