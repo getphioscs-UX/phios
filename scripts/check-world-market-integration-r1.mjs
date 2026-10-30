@@ -4,7 +4,7 @@ import {retrievePublicCompany} from '../functions/current-facts-gateway/world-co
 import {retrieveCurrentFacts} from '../functions/current-facts-gateway/current-facts-gateway.js';
 import {onRequestGet,onRequestPost} from '../functions/api/current-facts.js';
 import {onRequest as middleware} from '../functions/_middleware.js';
-const dir='tools/review/world-market-integration-r1';fs.mkdirSync(dir,{recursive:true});const rows=[];
+const dir=process.env.WORLD_ENGINE_EVIDENCE_DIR||'tools/review/world-market-integration-r1';fs.mkdirSync(dir,{recursive:true});const rows=[];
 async function test(id,run){try{await run();rows.push({id,status:'PASS'});}catch(e){rows.push({id,status:'FAIL',reason:e.message});}finally{fs.writeFileSync(dir+'/ENGINE-CHECKS.json',JSON.stringify({rows,providerCalls:0,productionWrites:0},null,2));}}
 const now='2026-10-29T08:00:00Z',real=retrievePublicCompany({operation:'company',symbol:'MYX:0338',pe:'10,15'},{now}).company;
 await test('Official dated quarterly extract / MYR thousands',()=>{assert.equal(real.metrics.revenue.value,156626000);assert.equal(real.metrics.netProfit.value,17004000);assert.equal(real.period.end,'2026-06-30');assert.equal(real.period.audited,false);});

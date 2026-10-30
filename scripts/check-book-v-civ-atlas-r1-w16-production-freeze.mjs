@@ -175,7 +175,13 @@ assert.equal(market.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');assert.
 for(const k of ['productionAdmissionChanged','acceptedBindingsChanged','canonicalTheoryChanged','historicalRegistriesChanged'])assert.equal(market[k],false);
 assert.deepEqual(market.changes.map(c=>c.path),['world/index.html','assets/js/pages/world.js']);
 for(const c of market.changes){assert.equal(digest(c.previousPath),c.previousSha256);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(c.changeClass));let reversed=read(c.path);for(const insertion of c.exactInsertions){assert.equal(reversed.split(insertion).length,2);reversed=reversed.replace(insertion,'');}assert.equal(reversed,read(c.previousPath),'Market successor exceeds registered append-only content: '+c.path);assert.equal(digest(c.path),c.successorSha256);}
-for(const d of market.dependencies)assert.equal(digest(d.path),d.sha256,'Market dependency drift: '+d.path);
+const automation=json('content/civilization-atlas/maintenance/book-v-world-market-automation-successor-v18.json');
+assert.equal(automation.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');assert.equal(automation.humanDecision,'PENDING');assert.equal(automation.predecessor,'content/civilization-atlas/maintenance/book-v-world-preview-build-successor-v17.json');assert.equal(digest(automation.predecessor),automation.predecessorSha256);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(automation.changeClass));
+assert.deepEqual(automation.changes.map(c=>c.path),['assets/js/pages/civilization-atlas/world-company-analysis.js','functions/_lib/world-company-analysis.js']);
+for(const c of automation.changes){assert.equal(market.dependencies.find(d=>d.path===c.path)?.sha256,c.previousSha256);assert.equal(crypto.createHash('sha256').update(worldGitObject('git',['show',c.previousGitRevision+':'+c.path])).digest('hex'),c.previousSha256);assert.equal(digest(c.path),c.successorSha256);}
+for(const d of automation.dependencies)assert.equal(digest(d.path),d.sha256);for(const k of ['productionAdmissionChanged','canonicalTheoryChanged','historicalRecordsChanged','providerLiveEnabled','productionScheduleEnabled','rrePromotionsAllowed'])assert.equal(automation[k],false);
+for(const d of market.dependencies){const next=automation.changes.find(c=>c.path===d.path);assert.equal(digest(d.path),next?next.successorSha256:d.sha256,'Market dependency drift: '+d.path);}
+
 function preMarketSource(p){const c=market.changes.find(c=>c.path===p);return read(c?c.previousPath:p);}
 function marketDigest(p,prior){const c=market.changes.find(c=>c.path===p);if(!c)return prior;assert.equal(c.previousSha256,prior,'Market predecessor chain drift: '+p);return c.successorSha256;}
 const previewBuild=json('content/civilization-atlas/maintenance/book-v-world-preview-build-successor-v17.json');
