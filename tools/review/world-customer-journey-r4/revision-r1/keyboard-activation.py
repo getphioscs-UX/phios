@@ -1,0 +1,3 @@
+from pathlib import Path
+import json,hashlib
+r=Path(r'C:/Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios');p=r/'assets/js/pages/civilization-atlas/world-journey-shell-r3.js';s=p.read_text(encoding='utf-8').replace("t.addEventListener('click',()=>activate(t.dataset.worldJourney,{push:true,reveal:true}))", "t.addEventListener('click',e=>activate(t.dataset.worldJourney,{push:true,reveal:e.detail===0?'keyboard':true}))");p.write_bytes(s.encode());v=r/'content/civilization-atlas/maintenance/book-v-world-journey-keyboard-successor-v21.json';d=json.loads(v.read_text());d['successorSha256']=hashlib.sha256(p.read_bytes()).hexdigest();v.write_bytes((json.dumps(d,indent=2)+'\n').encode())

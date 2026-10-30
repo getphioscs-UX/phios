@@ -13,3 +13,8 @@ This contract is written before the shared commerce source patch. Do not copy a 
 
 ## PDF delivery successor
 The existing BZR verifier currently discards the PDF and the existing account method endpoint downloads HTML. This task adds a private `/pdf` renderer mode using the same publication/fit checks, caches the byte-identical derivative under the existing customer artifact store/state/lock owner, and adds authenticated `format=pdf` on the existing method report route. Every read rechecks the exact original purchase/entitlement and subject permission. Existing HTML and historical report identity remain unchanged. No new storage table or engine is introduced. The worker protocol and route require cloud QA and deployment approval before release. Account UI integration, if needed, is supplied as a compatible small patch; Pre-Entry remains untouched.
+
+## Final original-byte protocol
+Normal issuance uses `/verify` with `includePdf:true`, returning the first verified PDF as private multipart bytes; it does not discard or print again. `/pdf` is only an explicit generation/recovery path from frozen IR with exact source HTML digest. New publication is withheld until private PDF persistence succeeds. Customer GET/download has no renderer callback. The existing artifact store owns an immutable versioned PDF reference with SHA and first-write condition. Library exposes PDF only when stored; retained HTML download is explicitly labelled HTML. Cloud QA and approval remain required.
+
+Final base reconciliation: isolated worktree advanced to main 3c197c509e01e95cc18651cb2a05bf63a1259dc4 with all 18 source SHAs preserved and zero overlapping changed paths. NUM39 now exists in main but retains local-review publication restrictions.

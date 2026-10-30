@@ -1,0 +1,227 @@
+{
+  "releaseId": "PHIOS-UNIFIED-RELEASE-CONVERGENCE-R1-PREP",
+  "at": "2026-10-30T12:21:28.258Z",
+  "status": "INVENTORY_AND_SAFE_CANDIDATE_PREPARATION_HUMAN_REVIEW",
+  "candidate": {
+    "worktree": "C:/phios/.worktrees/unified-release-convergence-r1",
+    "branch": "codex/unified-release-convergence-r1",
+    "baseCommit": "3c197c509e01e95cc18651cb2a05bf63a1259dc4",
+    "baseTree": "ddf57dbd52ef080334c611cb56c8ddcb2008312b",
+    "finalReleaseCommit": null,
+    "approvedNewScope": [],
+    "appliedPatches": [],
+    "dirty": "",
+    "sourceChanges": 0
+  },
+  "main": "3c197c509e01e95cc18651cb2a05bf63a1259dc4",
+  "production": {
+    "id": "eb30bd35-5b6f-411c-80f0-d0d57599797d",
+    "commit": "0d9089af4d0227f19867777a30eccd2c4515eb88",
+    "url": "https://getphios.com",
+    "autoDeploy": false,
+    "readOnlyMetadata": "READ_ONLY",
+    "actualRuntimeIsolation": "NOT_REPROVEN_BY_THIS_READ_ONLY_TASK"
+  },
+  "preparedPatches": [
+    {
+      "command": "git -C C:/phios/.worktrees/unified-release-convergence-r1 apply --cached --check C:\\phios\\tools\\review\\unified-release-convergence-r1\\ECR-R31-UNAPPLIED.patch",
+      "exitCode": 0,
+      "stderr": "",
+      "patchSha256": "9b87d1492f142eea1f3ae01fc7e6397bcbd3c8b36c79c0ac81b4e38ae2417a84",
+      "applied": false
+    },
+    {
+      "command": "git -C C:/phios/.worktrees/unified-release-convergence-r1 apply --cached --check C:\\phios\\tools\\review\\five-method-paid-report-r1\\PRODUCTION-CHANGES.patch",
+      "exitCode": 0,
+      "stderr": "",
+      "patchSha256": "b2f9e6eb496559582f984d3318c3ed329c8b3f374be8ac5e6a92d4844f31c266",
+      "applied": false
+    }
+  ],
+  "ecrExactHashes": [
+    {
+      "path": "assets/customer-ui/js/surfaces/ecr-flagship-r1.js",
+      "sha256": "fad1034b09ebc0ee9fdeff6a6e5c7ff653648ba9c6384bd4ce7295bfd54e7398",
+      "bytes": 33657,
+      "match": true
+    },
+    {
+      "path": "assets/customer-ui/surfaces/ecr-flagship-r1.css",
+      "sha256": "e8cd6229162480a60890f9bbeae52ce159c8d172d827879840f4f4cb94183c53",
+      "bytes": 27868,
+      "match": true
+    },
+    {
+      "path": "assets/customer-ui/media/ecr-flagship-r1/presentation.json",
+      "sha256": "5850f53f5403bc9c30cc10087aa821d29f60772ac0b8107d3ca438b207d4f8ba",
+      "bytes": 137583,
+      "match": true
+    },
+    {
+      "path": "content/web-production/registries/ecr-flagship-visual-r31-successor.json",
+      "sha256": "f428d3fdda3173839cc28c8475097a4845561a514fffa4989dba673106d9cdee",
+      "bytes": 7200,
+      "match": true
+    }
+  ],
+  "reportExactHashes": [
+    {
+      "file": "assets/customer-ui/js/surfaces/account-persons.js",
+      "sha256": "01490e1c4371b210f79177d15e13dec4be5c04e0eee1655faf16bee472eea704",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "functions/account/bazi-account-delivery.js",
+      "sha256": "c335b432eabf8e2e0067ae8dc0bfe3a4ac46ae166327dd5af12dc5db863d4caa",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "functions/api/account-method-reports.js",
+      "sha256": "7e9b80a5cbc6cc7316cf16a2938bd51d206115844832b23204b070c513637135",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "functions/commerce/book-commerce-store.js",
+      "sha256": "22e73b101b4e20ec7d6d388df02a18d0a404c0bae4d205cdae244933f1b2ab2b",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "functions/commerce/commerce-stripe-api.js",
+      "sha256": "18f9bf0b5e2843593f66358caa293b53dd743416a3e978d814b04e715d437b34",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "functions/personal-reading/deep-manuscript/bazi-production-generation-config.js",
+      "sha256": "37df164c2c9d81b693dd95ac565b245fe3b653761d6d5c2f4f0aeaa9ffeba9dd",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "functions/report-delivery/bazi-account-candidate.js",
+      "sha256": "47330baab025fead707606464b05127d1e2fe25bb1fea15c03d4ff7b36e30b29",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "functions/report-delivery/customer-artifact-store.js",
+      "sha256": "868490905e1c0a38bfeccaeafac5bec690f2e91f1eee1fb16785eb15898520d0",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "functions/report-delivery/customer-report-artifact.js",
+      "sha256": "0c4c571dcd5cbce1a62e02b2dc63b8bf877c04047e146c33d51077b6e101f159",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "functions/report-delivery/paid-report-bazi-adapter.js",
+      "sha256": "52cb94f4ba1dcbf5f33211807cd966380fd806b947f84839f93840cc7a74b6c6",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "functions/report-delivery/paid-report-delivery-core.js",
+      "sha256": "c74b83955b796f760e2afa947890b2cdedc4435a026b99eb9a7e4e96351ef350",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "functions/report-delivery/paid-report-readiness.js",
+      "sha256": "29dcc6f0fe2075737a700d433f6933088ed9c1a6445b2ba2e4548646ba145760",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "scripts/lib/persistent-private-reports-qa.mjs",
+      "sha256": "93b85aa319ff02f0394176da06ed752856ec31a1dac732db19d1e011ba0bdfb4",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "workers/method-report-renderer/bazi-verification.js",
+      "sha256": "b544f657bbaf6076015e8a966f2677d35dcd3cfd621b5c269afb2254ce0eddf3",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "workers/method-report-renderer/index.js",
+      "sha256": "b11c98bedcc137843e62d36d25d03cb854ffd6582c88b25900edf95c6d6624e2",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "workers/method-report-renderer/production.js",
+      "sha256": "0c5362d30df624489fa15c68db2d23b803cb0c56c46c3ccc4288de3f265d1612",
+      "kind": "modified",
+      "match": true
+    },
+    {
+      "file": "functions/account/bazi-pdf-delivery.js",
+      "sha256": "6377031b9aa762d9947b1b24d4b3baf7044e2d641deb70c2ef69f33095b99f8e",
+      "kind": "new",
+      "match": true
+    },
+    {
+      "file": "functions/report-delivery/paid-report-production-capabilities.js",
+      "sha256": "bfe59a0e5388ec03ef0087e6515908975241e4cd4d9525cfb6e129aae8e55065",
+      "kind": "new",
+      "match": true
+    }
+  ],
+  "mainToProduction": {
+    "changedPaths": 1126,
+    "commits": [
+      "3c197c509e01e95cc18651cb2a05bf63a1259dc4 Profile world",
+      "8e77898f5ae86788789ae3ab45a4c51fc0f18a0b Merge branch 'main' of https://github.com/getphioscs-UX/phios",
+      "6d5bed2c5baed6d24612eaf7ecb8e8c4b6f81b88 world",
+      "bc18bb9f30abf7b6373c9183d3c8f5e2b7088bd9 Merge branch 'main' of https://github.com/getphioscs-UX/phios",
+      "0a16f8aee9d51ed73b3181c30ce8ef5a14a0d95f method"
+    ]
+  },
+  "preview": {
+    "testedUrl": "https://55ced5c1.phios-github.pages.dev",
+    "testedCommit": "fc5c693c986ab875dc627eceb5d8962304019512",
+    "currentWorldRevision": "29d2a31ae482072bca3797bf6463025bdcd5406b",
+    "newRevisionAcceptance": "NOT_TRANSFERRED_FROM_OLD_PREVIEW",
+    "layoutCases": 88,
+    "pageErrors": 0,
+    "publicAssetConfig": "HTTP_503_UNRESOLVED",
+    "anonymousAccount": "HTTP_401_EXPECTED_NOT_AUTHENTICATED_ACCEPTANCE",
+    "fullPreviewPass": false
+  },
+  "rollback": {
+    "priorDeployment": "eb30bd35-5b6f-411c-80f0-d0d57599797d",
+    "priorCommit": "0d9089af4d0227f19867777a30eccd2c4515eb88",
+    "artifactAvailability": "NOT_VERIFIED",
+    "procedure": "Separately authorize rollback to retained known deployment; independently assess D1/R2/Stripe effects; no inverse migration by assumption",
+    "executed": false
+  },
+  "blockers": [
+    "RELEASE_SCOPE_NOT_HUMAN_ACCEPTED",
+    "BAZI_R11_JSON_IMPORT_CI_FAILURE_UNWAIVED",
+    "WORLD_PR14_REVISION_CHANGED_CI_PREVIEW_PENDING",
+    "PREVIEW_PUBLIC_ASSET_CONFIG_503",
+    "PREVIEW_FULL_STORAGE_PAYMENT_PROVIDER_ISOLATION_UNVERIFIED",
+    "11_SHARED_PATHS_DIVERGENT_OWNER_HANDOFF_REQUIRED",
+    "REPOSITORY_PROTECTION_DETAIL_403",
+    "ONE_WORKTREE_LOCKED_INITIALIZING_NOT_AUDITED",
+    "FINAL_INTEGRATED_FULL_CHECK_RESERVED_FOR_USER"
+  ],
+  "sourceIntegrationBlockedByReportCommercialGaps": false,
+  "productionOperationAuthorized": false,
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "payments": 0,
+  "refunds": 0,
+  "productionMutations": 0,
+  "commits": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deploymentsCreatedByThisTask": 0
+}

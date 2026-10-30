@@ -1,0 +1,493 @@
+diff --git a/assets/customer-ui/js/surfaces/account-persons.js b/assets/customer-ui/js/surfaces/account-persons.js
+index 562730cf..7d166d13 100644
+--- a/assets/customer-ui/js/surfaces/account-persons.js
++++ b/assets/customer-ui/js/surfaces/account-persons.js
+@@ -33,13 +33,18 @@ function render(){
+  <details class="cx-account-editor"><summary>${esc(tr('Create your report','创建个人报告'))}</summary><form data-generate-form class="cx-stack cx-person-generate"><h3>${esc(tr('Generate your purchased report','生成已购买报告'))}</h3><label class="cx-field">${esc(tr('Method','方法'))}<select class="cx-select" name="methodCode"><option value="BZR">BaZi · 八字</option><option value="ZWR">Zi Wei · 紫微</option></select></label><label class="cx-field">${esc(tr('Birth details','出生资料'))}<select class="cx-select" name="personId" required>${persons.filter(p=>p.consentState==='ACTIVE').map(p=>`<option value="${esc(p.personId)}">${esc(p.name)}</option>`).join('')}</select></label><label class="cx-field">${esc(tr('Report language','报告语言'))}<select class="cx-select" name="locale"><option value="zh-Hans">中文</option><option value="en">English</option></select></label>
+  ${field('targetDate','Reading reference date','读取参考日期','date',new Date().toISOString().slice(0,10),'required')}
+  <p class="cx-field-helper">${esc(tr('PHI OS uses your saved profile and purchased report access. You do not need to re-enter technical birth data.','PHI OS 会直接使用已保存的出生资料与已购买的报告权益，不需要重复填写技术资料。'))}</p><button class="cx-button cx-button--primary" type="submit">${esc(tr('Generate report','生成报告'))}</button></form></details>
+- <section data-released-reports class="cx-account-reports"><div class="cx-account-reports__heading"><h3>${esc(tr('Your released reports','你的已发布报告'))}</h3><button class="cx-button cx-button--secondary" type="button" data-refresh-reports>${esc(tr('Refresh','刷新'))}</button></div>${reportsState==='error'?`<p role="status">${esc(tr('Reports could not be loaded. Refresh to try again.','报告列表加载失败，请刷新重试。'))}</p>`:reportsState==='loading'?`<p role="status">${esc(tr('Loading your reports…','正在加载你的报告…'))}</p>`:''}<div class="cx-account-report-grid">${reports.map(r=>`<article class="cx-account-report-card"><img src="${r.method==='BZR'?'/assets/icons/methods/PHIOS-ICON-METHOD-BAZI-v1.svg':'/assets/icons/methods/PHIOS-ICON-METHOD-ZIWEI-v1.svg'}" alt="" aria-hidden="true"><h4>${esc(r.method==='BZR'?tr('BaZi report','八字报告'):r.method==='BZR'?tr('BaZi report','八字报告'):tr('Zi Wei report','紫微报告'))} · ${esc(r.subjectName||'')}</h4><p>${r.presentationMode==='BILINGUAL'?'中文 · English':r.locale==='zh-Hans'?'中文':'English'} · ${esc(tr('Version','版本'))} ${r.version} · ${esc(new Date(r.releasedAt).toLocaleString())} · ${esc(tr('Released','已发布'))}</p><a class="cx-button" target="_blank" rel="noopener" href="/api/account-method-reports?reportId=${encodeURIComponent(r.reportId)}">${esc(tr('Open report','打开报告'))}</a><a class="cx-button cx-button--secondary" href="/api/account-method-reports?reportId=${encodeURIComponent(r.reportId)}&amp;download=1">${esc(tr('Download saved report','下载已保存报告'))}</a><a class="cx-button cx-button--secondary" href="/api/account-method-reports?reportId=${encodeURIComponent(r.reportId)}&amp;download=1">${esc(tr('Download saved report','下载已保存报告'))}</a></article>`).join('')||(reportsState==='ready'?`<p>${esc(tr('No released method reports yet.','目前没有已发布的方法报告。'))}</p>`:'')}</div></section>`:''}`;
++ <section data-released-reports class="cx-account-reports"><div class="cx-account-reports__heading"><h3>${esc(tr('Your released reports','你的已发布报告'))}</h3><button class="cx-button cx-button--secondary" type="button" data-refresh-reports>${esc(tr('Refresh','刷新'))}</button></div>${reportsState==='error'?`<p role="status">${esc(tr('Reports could not be loaded. Refresh to try again.','报告列表加载失败，请刷新重试。'))}</p>`:reportsState==='loading'?`<p role="status">${esc(tr('Loading your reports…','正在加载你的报告…'))}</p>`:''}<div class="cx-account-report-grid">${reports.map(r=>`<article class="cx-account-report-card"><img src="${r.method==='BZR'?'/assets/icons/methods/PHIOS-ICON-METHOD-BAZI-v1.svg':'/assets/icons/methods/PHIOS-ICON-METHOD-ZIWEI-v1.svg'}" alt="" aria-hidden="true"><h4>${esc(r.method==='BZR'?tr('BaZi report','八字报告'):r.method==='BZR'?tr('BaZi report','八字报告'):tr('Zi Wei report','紫微报告'))} · ${esc(r.subjectName||'')}</h4><p>${r.presentationMode==='BILINGUAL'?'中文 · English':r.locale==='zh-Hans'?'中文':'English'} · ${esc(tr('Version','版本'))} ${r.version} · ${esc(new Date(r.releasedAt).toLocaleString())} · ${esc(tr('Released','已发布'))}</p><a class="cx-button" target="_blank" rel="noopener" href="/api/account-method-reports?reportId=${encodeURIComponent(r.reportId)}">${esc(tr('Open report','打开报告'))}</a><a class="cx-button cx-button--secondary" href="/api/account-method-reports?reportId=${encodeURIComponent(r.reportId)}&amp;download=1">${esc(tr('Download HTML','下载 HTML'))}</a>${r.pdfDownloadUrl?`<button class="cx-button cx-button--secondary" type="button" data-method-pdf="${esc(r.reportId)}">${esc(tr('Download PDF','下载 PDF'))}</button>`:''}</article>`).join('')||(reportsState==='ready'?`<p>${esc(tr('No released method reports yet.','目前没有已发布的方法报告。'))}</p>`:'')}</div></section>`:''}`;
+  installReportQuestions(host);
+  for(const report of reports.filter(r=>r.method==='BZR')){const link=[...host.querySelectorAll('a[href*="/api/account-method-reports?"]')].find(a=>new URL(a.href,location.href).searchParams.get('reportId')===report.reportId);if(link)installNavigationHandoff(link.closest('article'),{productFamily:'BAZI',objectId:report.reportId});}
+  const reportSection=host.querySelector('[data-released-reports]');
+  const editor=host.querySelector('.cx-account-editor');
+  if(reportSection&&editor)host.insertBefore(reportSection,editor);
+  host.querySelector('[data-refresh-reports]')?.addEventListener('click',()=>refreshReports());
++ host.querySelectorAll('[data-method-pdf]').forEach(button=>button.onclick=async()=>{
++  let status=button.closest('article').querySelector('[data-method-pdf-status]');if(!status){status=document.createElement('p');status.dataset.methodPdfStatus='';status.setAttribute('role','status');button.after(status);}button.disabled=true;status.textContent=tr('Preparing your PDF…','正在准备 PDF…');
++  try{const response=await fetch('/api/account-method-reports?reportId='+encodeURIComponent(button.dataset.methodPdf)+'&format=pdf',{credentials:'same-origin',headers:{Accept:'application/pdf'}});if(!response.ok||!response.headers.get('content-type')?.startsWith('application/pdf'))throw Error('PDF_UNAVAILABLE');const blob=await response.blob(),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='PHI-OS-'+button.dataset.methodPdf.replace(/[^A-Za-z0-9_-]/g,'')+'.pdf';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent=tr('PDF download started.','PDF 已开始下载。');}
++  catch{status.textContent=tr('The PDF could not be downloaded. Refresh the report list and retry later; you do not need to pay again.','PDF 暂时无法下载。请刷新报告列表后稍后重试，无需再次付款。');}finally{button.disabled=false;}
++ });
+  host.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>{editing=b.dataset.edit;selectedLocation=null;locationCandidates=[];message='';render();});
+  host.querySelectorAll('[data-revoke]').forEach(b=>b.onclick=async()=>{const p=persons.find(p=>p.personId===b.dataset.revoke);try{await accountRequest('/api/account-persons',{action:'revoke',personId:p.personId,expectedVersion:p.version});await refresh();}catch{message=tr('Unable to withdraw consent. Try again.','无法撤回同意，请重试。');render();}});
+  const personForm=host.querySelector('[data-person-form]'),placeInput=personForm?.elements?.placeSearch;
+diff --git a/functions/account/bazi-account-delivery.js b/functions/account/bazi-account-delivery.js
+index 6e6cd0d7..a605013c 100644
+--- a/functions/account/bazi-account-delivery.js
++++ b/functions/account/bazi-account-delivery.js
+@@ -1,3 +1,5 @@
++import {persistAccountBaziPdf,hasAccountBaziPdf} from './bazi-pdf-delivery.js';
++import {reportBirthInputFingerprint} from '../canonical-presentation-runtime/report-cover-subject.js';
+ ﻿import {persistCustomerArtifactInHeldStore} from '../report-delivery/customer-artifact-store.js';
+ import {buildCustomerNativeBaziInputs} from '../report-delivery/bazi-customer-native-inputs.js';
+ import {requireP9Owner} from '../report-delivery/p9-canary-admission.js';
+@@ -49,7 +51,7 @@ export async function generateAndReleaseAccountBazi(context,selection,{resolveIn
+  if(context.env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&!context.env.PAID_REPORT_WORKER_FENCE)fail('PAID_REPORT_WORKER_REQUIRED');await assertPaidReportWorkerFence(context.env);
+  gate(context);if(!selection||Object.keys(selection).some(k=>!['personId','locale'].includes(k))||!['en','zh-Hans','bilingual'].includes(selection.locale))fail('BAZI_SELECTION_INVALID',400);
+  const prepared=await prepareAccountBaziCandidate(context,{personId:selection.personId});if(prepared.state!=='RELEASE_PENDING')fail('BAZI_CALCULATION_INCOMPLETE');
+- const right=await ownedReportPresentation(context.env,prepared.customerId,'COM-REPORT-BAZI-FULL');
++ const right=await ownedReportPresentation(context.env,prepared.customerId,'COM-REPORT-BAZI-FULL',Date.now,{purchaseId:prepared.purchaseId});
+  requirePurchasedReportPresentation(right,{reportLocale:selection.locale,reportLanguageMode:selection.locale==='bilingual'?'BILINGUAL':'SINGLE'});
+  const inputs=await resolveInputs(context,prepared),owner=prepared.customerId;
+  if(inputs.pack?.subject?.subjectId!==prepared.personId||inputs.calculationDigest!==prepared.calculationDigest||inputs.canonicalBirthInputFingerprint!==prepared.canonicalBirthInputFingerprint)fail('BAZI_SUBJECT_AUTHORITY_MISMATCH');
+@@ -61,7 +63,7 @@ export async function generateAndReleaseAccountBazi(context,selection,{resolveIn
+   const checkpoint=async(key,value)=>{if(!context.env.PAID_REPORT_WORKER_FENCE)return;const body={binding,claim,value};await store.put(key,{...body,integritySeal:await seal(context.env,body)});await context.env.P8_BAZI_CHECKPOINT?.(key);};
+   const saved=async key=>verifyDeliveryCheckpoint(context.env,await store.get(key),binding,claim);
+   const claim={personId:prepared.personId,personVersion:prepared.personVersion,inputDigest:prepared.canonicalBirthInputFingerprint,locale:selection.locale,purchaseId:prepared.purchaseId},existingClaim=await store.get('subject-binding');if(existingClaim&&JSON.stringify(existingClaim)!==JSON.stringify(claim))fail('ENTITLEMENT_ALREADY_BOUND_TO_DIFFERENT_SUBJECT_OR_VERSION');if(!existingClaim)await store.putIfAbsent('subject-binding',claim);
+-  const storedRow=await context.env.RUNTIME_DB.prepare('SELECT report_id FROM account_method_report_materials WHERE report_id=? AND owner_account_id=?').bind(reportId,owner).first();const prior=await store.get('release')||await store.get('artifact-ready')||(storedRow?{reportId:storedRow.report_id}:null);if(prior){const saved=await openAccountBaziMaterial(context,prior.reportId);await closeReleasedReportBudget(context,{candidate:saved.candidate,release:{reportId:prior.reportId},receipt:saved.verification});await grantDeliveredReportFollowups(context.env,{reportId:prior.reportId,ownerAccountId:owner,purchaseId:prepared.purchaseId,methodCode:'BZR'});await store.put('release',prior);return {reportId:prior.reportId,cacheHit:true,providerCalls:0};}
++  const storedRow=await context.env.RUNTIME_DB.prepare('SELECT report_id FROM account_method_report_materials WHERE report_id=? AND owner_account_id=?').bind(reportId,owner).first();const prior=await store.get('release')||await store.get('artifact-ready')||(storedRow?{reportId:storedRow.report_id}:null);if(prior){const saved=await openAccountBaziMaterial(context,prior.reportId);await persistAccountBaziPdf(context,{binding:saved.candidate.paidReportBinding,artifact:saved.artifact,verification:saved.verification});await closeReleasedReportBudget(context,{candidate:saved.candidate,release:{reportId:prior.reportId},receipt:saved.verification});await grantDeliveredReportFollowups(context.env,{reportId:prior.reportId,ownerAccountId:owner,purchaseId:prepared.purchaseId,methodCode:'BZR'});await store.put('release',prior);return {reportId:prior.reportId,cacheHit:true,providerCalls:0};}
+   if(!context.env.METHOD_REPORT_RENDERER?.fetch)fail('REPORT_BROWSER_VERIFIER_NOT_CONFIGURED',503);
+   const result=await saved('P8_GENERATION_RESULT')||await recoverCompletedMethodCheckpoint(context,binding,inputs)||await produce({env:context.env,binding,pack:inputs.pack,model:inputs.model,policy:inputs.policy,approval:inputs.approval,order:{...order,paymentConfirmed:true,requiredInputsValid:true,authorityReady:true,subjectId:prepared.personId,authorityDigest:inputs.pack.digest},candidateId:reportId,subjectId:prepared.personId,validateProviderOutput:body=>{if(body.authorityDigest&&body.authorityDigest!==inputs.pack.digest)fail('BAZI_GENERATED_AUTHORITY_MISMATCH');}});
+   if(!result.snapshot)fail('BAZI_MANUSCRIPT_INCOMPLETE');
+@@ -69,14 +71,15 @@ export async function generateAndReleaseAccountBazi(context,selection,{resolveIn
+   const ir=await saved('P8_PUBLICATION_RESULT')||await compileBaziDeepPublication({snapshot:result.snapshot,pack:inputs.pack,productionFrozen:true,presentationMode:selection.locale==='en'?'EN':selection.locale==='zh-Hans'?'ZH_HANS':'BILINGUAL'});
+   if(!ir.customerPublishable||ir.fixture||ir.reviewOnly)fail('BAZI_REFERENCE_NOT_CUSTOMER_MATERIAL');
+   await checkpoint('P8_PUBLICATION_RESULT',ir);await assertPaidReportWorkerFence(context.env);
+-  let rendered=await saved('P8_RENDER_RESULT');if(!rendered){const response=await context.env.METHOD_REPORT_RENDERER.fetch(new Request('https://method-report-renderer.internal/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({method:'BZR',publication:ir,compositionVersion:result.snapshot.versions})}));if(!response.ok)fail('BAZI_RENDER_FAILED');rendered=await response.json();}const {html,verification}=rendered;
++  let rendered=await saved('P8_RENDER_RESULT'),pdfBytes=null;if(!rendered){const response=await context.env.METHOD_REPORT_RENDERER.fetch(new Request('https://method-report-renderer.internal/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({method:'BZR',publication:ir,compositionVersion:result.snapshot.versions,includePdf:true})}));if(!response.ok)fail('BAZI_RENDER_FAILED');if(!response.headers.get('content-type')?.startsWith('multipart/form-data'))fail('BAZI_PDF_TRANSFER_REQUIRED',503);const form=await response.formData(),metadata=form.get('metadata'),pdf=form.get('pdf');if(!metadata||!pdf||metadata.size>8000000||pdf.size<1000||pdf.size>128*1024*1024||pdf.type!=='application/pdf')fail('BAZI_PDF_TRANSFER_INVALID');rendered=JSON.parse(await metadata.text());pdfBytes=new Uint8Array(await pdf.arrayBuffer());}const {html,verification}=rendered;
+   if(typeof html!=='string'||html.length>8000000||verification?.passed!==true||verification.outputDigest!==await digest(html)||verification.manuscriptDigest!==result.snapshot.digest||verification.publicationDigest!==ir.digest||verification.browserReady!==true||verification.pdfReady!==true||verification.printReady!==true||verification.pageCount!==48||verification.diagramCount!==15)fail('BAZI_RENDER_RECEIPT_REQUIRED');
+-  await checkpoint('P8_RENDER_RESULT',rendered);await assertPaidReportWorkerFence(context.env);
++  await assertPaidReportWorkerFence(context.env);
+   const candidate={customerId:owner,personId:prepared.personId,purchaseId:prepared.purchaseId,locale:selection.locale,paidReportBinding:binding,snapshot:{methodId:'BZR',semanticSnapshotId:result.snapshot.digest,compositionVersion:result.snapshot.versions,semanticContent:{authorityDigest:inputs.pack.digest,visualReportIr:{sections:result.snapshot.sections.map(s=>({sectionId:s.sectionId,authorityRefs:[`BAZI:${inputs.pack.digest}:${s.sectionId}`],zhHans:{manuscript:s.zhHansManuscript},en:{manuscript:s.enManuscript}}))}}}};
+-  const nativeSubject=await loadCanonicalPersonSubject(context.env,owner,prepared.personId);
+-  const artifact=await createCustomerReportArtifact({reportArtifactId:reportId,customerId:owner,personId:prepared.personId,personVersion:prepared.personVersion,methodCode:'BZR',productCode:binding.productId,entitlementId:right.entitlement_id,inputDigest:prepared.canonicalBirthInputFingerprint,localeMode:selection.locale,inputSnapshot:inputs.inputSnapshot||nativeSubject.canonicalBirthInput,calculationSnapshot:inputs.calculationSnapshot||prepared.execution.canonicalProjection,authorityPackVersion:inputs.pack.schemaVersion,reportContentVersion:result.snapshot.versions?.schema||result.snapshot.schemaVersion||'BAZI_DEEP_MANUSCRIPT_R2',rendererVersion:result.snapshot.versions?.renderer||'BDM-RENDERER-3',providerGenerationReceipt:{records:result.snapshot.usage||[],providerCalls:(result.snapshot.usage||[]).length},generatedSections:result.snapshot.sections,publicationIR:ir,htmlSnapshotOrRenderState:{objectKey:`released-method/${reportId}/${verification.outputDigest}.html`,outputDigest:verification.outputDigest},createdAt:result.snapshot.generatedAt||order.purchasedAt,updatedAt:result.snapshot.generatedAt||order.purchasedAt,generationCompletedAt:result.snapshot.generatedAt||order.purchasedAt});
++  const nativeSubject=await loadCanonicalPersonSubject(context.env,owner,prepared.personId);if(nativeSubject.personVersion!==prepared.personVersion||await reportBirthInputFingerprint(nativeSubject.canonicalBirthInput)!==prepared.canonicalBirthInputFingerprint)fail('SUBJECT_AUTHORITY_MISMATCH');
++  const artifact=await createCustomerReportArtifact({pdfPolicy:'PERSISTED_PRIVATE_PDF_REQUIRED',reportArtifactId:reportId,customerId:owner,personId:prepared.personId,personVersion:prepared.personVersion,methodCode:'BZR',productCode:binding.productId,entitlementId:right.entitlement_id,inputDigest:prepared.canonicalBirthInputFingerprint,localeMode:selection.locale,inputSnapshot:inputs.inputSnapshot||nativeSubject.canonicalBirthInput,calculationSnapshot:inputs.calculationSnapshot||prepared.execution.canonicalProjection,authorityPackVersion:inputs.pack.schemaVersion,reportContentVersion:result.snapshot.versions?.schema||result.snapshot.schemaVersion||'BAZI_DEEP_MANUSCRIPT_R2',rendererVersion:result.snapshot.versions?.renderer||'BDM-RENDERER-3',providerGenerationReceipt:{records:result.snapshot.usage||[],providerCalls:(result.snapshot.usage||[]).length},generatedSections:result.snapshot.sections,publicationIR:ir,htmlSnapshotOrRenderState:{objectKey:`released-method/${reportId}/${verification.outputDigest}.html`,outputDigest:verification.outputDigest},createdAt:result.snapshot.generatedAt||order.purchasedAt,updatedAt:result.snapshot.generatedAt||order.purchasedAt,generationCompletedAt:result.snapshot.generatedAt||order.purchasedAt});
++  rendered.pdfRef=await persistAccountBaziPdf(context,{binding,artifact,pdfBytes,verification});pdfBytes=null;await checkpoint('P8_RENDER_RESULT',rendered);await assertPaidReportWorkerFence(context.env);
+   const artifactRef=await persistCustomerArtifactInHeldStore(context.env,binding,store,artifact),artifactKey=artifactRef.objectKey;
+-  const body={artifactKey,artifactDigest:artifact.artifactDigest,schemaVersion:'BAZI_ACCOUNT_MATERIAL_V1',candidate,personVersion:prepared.personVersion,canonicalBirthInputFingerprint:prepared.canonicalBirthInputFingerprint,verification},receipt={...body,integritySeal:await seal(context.env,body)},objectKey=`released-method/${reportId}/${verification.outputDigest}.html`,now=new Date().toISOString();
++  const body={pdfRef:rendered.pdfRef,artifactKey,artifactDigest:artifact.artifactDigest,schemaVersion:'BAZI_ACCOUNT_MATERIAL_V1',candidate,personVersion:prepared.personVersion,canonicalBirthInputFingerprint:prepared.canonicalBirthInputFingerprint,verification},receipt={...body,integritySeal:await seal(context.env,body)},objectKey=`released-method/${reportId}/${verification.outputDigest}.html`,now=new Date().toISOString();
+   await assertPaidReportWorkerFence(context.env);await context.env.PRIVATE_REPORTS.put(objectKey,html,{httpMetadata:{contentType:'text/html; charset=utf-8',cacheControl:'private, no-store'}});
+   const fence=workerFenceSql(context.env);await assertPaidReportWorkerFence(context.env);const written=await context.env.RUNTIME_DB.prepare(`INSERT INTO account_method_report_materials SELECT ?,?,?,?,?,?,?,?,?,? WHERE ${fence.sql} ON CONFLICT(report_id) DO NOTHING`).bind(reportId,owner,prepared.personId,'BZR',selection.locale,result.snapshot.digest,objectKey,verification.outputDigest,now,JSON.stringify(receipt),...fence.bindings).run();if(written.meta?.changes!==1)await assertPaidReportWorkerFence(context.env);await context.env.P8_BAZI_CHECKPOINT?.('P8_MATERIAL_PERSISTED');
+   await store.putIfAbsent('artifact-ready',{reportId});
+@@ -87,9 +90,12 @@ export async function openAccountBaziMaterial(context,reportId){
+  gate(context);const owner=personIdentity(context).userId,row=await context.env.RUNTIME_DB.prepare('SELECT rowid AS report_version,* FROM account_method_report_materials WHERE report_id=? AND owner_account_id=? AND method_code=\'BZR\'').bind(reportId,owner).first();if(!row)fail('REPORT_UNAVAILABLE',404);
+  const {integritySeal,...body}=JSON.parse(row.verifier_receipt);if(body.schemaVersion!=='BAZI_ACCOUNT_MATERIAL_V1'||integritySeal!==await seal(context.env,body))fail('REPORT_UNAVAILABLE',404);
+  const candidate=body.candidate;if(candidate.customerId!==owner||candidate.personId!==row.person_id||candidate.snapshot.semanticSnapshotId!==row.snapshot_id||body.verification.outputDigest!==row.output_digest)fail('REPORT_UNAVAILABLE',404);
+- await loadCanonicalPersonSubject(context.env,owner,row.person_id);if(!await ownedReportPresentation(context.env,owner,'COM-REPORT-BAZI-FULL'))fail('REPORT_UNAVAILABLE',404);
+- const object=await context.env.PRIVATE_REPORTS.get(row.object_key);if(!object)fail('REPORT_UNAVAILABLE',404);const html=await object.text();if(await digest(html)!==row.output_digest)fail('REPORT_UNAVAILABLE',404);let artifact=null;if(body.artifactKey){const a=await context.env.PRIVATE_REPORTS.get(body.artifactKey);if(!a)fail('REPORT_UNAVAILABLE',404);artifact=await verifyCustomerReportArtifact(JSON.parse(await a.text()),{customerId:owner,reportArtifactId:reportId});if(artifact.artifactDigest!==body.artifactDigest||artifact.personId!==row.person_id||artifact.methodCode!=='BZR'||artifact.productCode!=='COM-REPORT-BAZI-FULL'||artifact.localeMode!==row.locale||artifact.inputDigest!==body.canonicalBirthInputFingerprint||artifact.htmlSnapshotOrRenderState.objectKey!==row.object_key||artifact.htmlSnapshotOrRenderState.outputDigest!==row.output_digest)fail('REPORT_UNAVAILABLE',404);}return {row,candidate,html,artifact,verification:body.verification};
++ await loadCanonicalPersonSubject(context.env,owner,row.person_id);
++ const purchase=await context.env.RUNTIME_DB.prepare("SELECT e.entitlement_id FROM commerce_purchases p JOIN digital_entitlements e ON e.purchase_id=p.purchase_id JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=p.checkout_attempt_id WHERE p.purchase_id=? AND p.customer_id=? AND p.product_id='COM-REPORT-BAZI-FULL' AND p.purchase_state='purchased' AND e.customer_id=p.customer_id AND e.product_id=p.product_id AND e.entitlement_status='active' AND (e.expires_at IS NULL OR e.expires_at>?) AND o.customer_id=p.customer_id AND o.order_state='FULFILLED' AND o.review_required=0 AND o.environment=?").bind(candidate.purchaseId,owner,new Date().toISOString(),commerceEnvironment(context.env)).first();if(!purchase)fail('REPORT_UNAVAILABLE',404);
++ const object=await context.env.PRIVATE_REPORTS.get(row.object_key);if(!object)fail('REPORT_UNAVAILABLE',404);const html=await object.text();if(await digest(html)!==row.output_digest)fail('REPORT_UNAVAILABLE',404);let artifact=null;if(body.artifactKey){const a=await context.env.PRIVATE_REPORTS.get(body.artifactKey);if(!a)fail('REPORT_UNAVAILABLE',404);artifact=await verifyCustomerReportArtifact(JSON.parse(await a.text()),{customerId:owner,reportArtifactId:reportId});if(artifact.entitlementId!==purchase.entitlement_id||artifact.artifactDigest!==body.artifactDigest||artifact.personId!==row.person_id||artifact.methodCode!=='BZR'||artifact.productCode!=='COM-REPORT-BAZI-FULL'||artifact.localeMode!==row.locale||artifact.inputDigest!==body.canonicalBirthInputFingerprint||artifact.htmlSnapshotOrRenderState.objectKey!==row.object_key||artifact.htmlSnapshotOrRenderState.outputDigest!==row.output_digest)fail('REPORT_UNAVAILABLE',404);}return {row,candidate,html,artifact,pdfRef:body.pdfRef||null,verification:body.verification};
++}
++export async function listAccountBaziMaterials(context){
++ gate(context);const rows=(await context.env.RUNTIME_DB.prepare("SELECT report_id FROM account_method_report_materials WHERE owner_account_id=? AND method_code='BZR' ORDER BY released_at DESC LIMIT 100").bind(personIdentity(context).userId).all()).results||[],out=[];
++ for(const r of rows){try{const material=await openAccountBaziMaterial(context,r.report_id),{row}=material,pdf=await hasAccountBaziPdf(context,material);out.push({reportId:row.report_id,method:'BZR',subjectName:material.artifact?.publicationIR?.identity?.displayName||'',locale:row.locale,presentationMode:material.artifact?.localeMode==='bilingual'?'BILINGUAL':row.locale,publicationVersion:material.artifact?.publicationIR?.lineage?.versions?.compiler||null,releasedAt:row.released_at,version:row.report_version,status:'RELEASED',...(pdf?{pdfDownloadUrl:'/api/account-method-reports?reportId='+encodeURIComponent(row.report_id)+'&format=pdf'}:{})});}catch(e){if(e.status!==404)throw e;}}
++ return out;
+ }
+-export async function listAccountBaziMaterials(context){gate(context);const rows=(await context.env.RUNTIME_DB.prepare('SELECT report_id FROM account_method_report_materials WHERE owner_account_id=? AND method_code=\'BZR\' ORDER BY released_at DESC LIMIT 100').bind(personIdentity(context).userId).all()).results||[],out=[];for(const r of rows){const {row}=await openAccountBaziMaterial(context,r.report_id);out.push({reportId:row.report_id,method:'BZR',locale:row.locale,releasedAt:row.released_at,version:row.report_version,status:'RELEASED'});}return out;}
+-
+-
+diff --git a/functions/api/account-method-reports.js b/functions/api/account-method-reports.js
+index 043f4189..5aa530c0 100644
+--- a/functions/api/account-method-reports.js
++++ b/functions/api/account-method-reports.js
+@@ -9,7 +9,7 @@ export async function onRequest(context){
+   if(!['local','qa','preview'].includes(context.env?.PHIOS_ENVIRONMENT))requireP9Owner(context.env,personIdentity(context).userId,{allowExpired:true});
+   if(context.request.method==='GET'){
+    const id=new URL(context.request.url).searchParams.get('reportId');
+-   if(id){const {html}=await openOwnedMethodReport(context,id);const download=new URL(context.request.url).searchParams.get('download')==='1';return new Response(html,{headers:{...headers,...(download?{'Content-Disposition':'attachment; filename="PHI-OS-report.html"'}:{}),'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':"default-src 'none'; img-src 'self' data: https://assets.getphios.com https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'none'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'"}});}
++   if(id){const material=await openOwnedMethodReport(context,id);if(new URL(context.request.url).searchParams.get('format')==='pdf'){const adapter=resolveMethodDeliveryAdapter(material.row.method_code);if(typeof adapter.downloadPdf!=='function')throw Object.assign(Error('REPORT_PDF_NOT_AVAILABLE'),{status:409});return await adapter.downloadPdf(context,id);}const {html}=material;const download=new URL(context.request.url).searchParams.get('download')==='1';return new Response(html,{headers:{...headers,...(download?{'Content-Disposition':'attachment; filename="PHI-OS-report.html"'}:{}),'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':"default-src 'none'; img-src 'self' data: https://assets.getphios.com https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'none'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'"}});}
+    return Response.json({ok:true,reports:await listOwnedMethodReports(context)},{headers});
+   }
+   if(context.request.method!=='POST')return Response.json({ok:false,code:'METHOD_NOT_ALLOWED'},{status:405,headers});
+diff --git a/functions/commerce/book-commerce-store.js b/functions/commerce/book-commerce-store.js
+index fc32e433..dfd187da 100644
+--- a/functions/commerce/book-commerce-store.js
++++ b/functions/commerce/book-commerce-store.js
+@@ -54,14 +54,14 @@ export async function commerceOrder(env,id,customerId){
+ }
+ // Language is bound through the immutable purchase -> checkout order relation.
+ // Bundle children each resolve the same purchased presentation, without a new store.
+-export async function ownedReportPresentation(env,customerId,productId,clock=Date.now){
++export async function ownedReportPresentation(env,customerId,productId,clock=Date.now,{purchaseId=null}={}){
+  const row=await dbFrom(env).prepare(`SELECT e.entitlement_id,e.entitlement_status,e.purchase_id,o.context_json
+  FROM digital_entitlements e JOIN commerce_purchases p ON p.purchase_id=e.purchase_id
+  JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=p.checkout_attempt_id
+  WHERE e.customer_id=?1 AND e.product_id=?2 AND e.entitlement_status='active'
+  AND (e.expires_at IS NULL OR e.expires_at>?3) AND o.review_required=0
+  AND o.customer_id=e.customer_id AND p.purchase_state='purchased'
+- AND o.order_state IN ('FULFILLED','FULFILLMENT_PENDING') AND o.environment=?4 ORDER BY e.granted_at DESC LIMIT 1`).bind(customerId,productId,nowIso(clock),commerceEnvironment(env)).first();
++ AND o.order_state IN ('FULFILLED','FULFILLMENT_PENDING') AND o.environment=?4 AND (?5 IS NULL OR e.purchase_id=?5) ORDER BY e.granted_at DESC LIMIT 1`).bind(customerId,productId,nowIso(clock),commerceEnvironment(env),purchaseId).first();
+  return row?{entitlement_id:row.entitlement_id,entitlement_status:row.entitlement_status,purchase_id:row.purchase_id,reportPresentation:orderReportPresentation(row)}:null;
+ }
+ export async function commerceCustomerBinding(env,customerId){
+diff --git a/functions/commerce/commerce-stripe-api.js b/functions/commerce/commerce-stripe-api.js
+index 41e1b478..8cba7abb 100644
+--- a/functions/commerce/commerce-stripe-api.js
++++ b/functions/commerce/commerce-stripe-api.js
+@@ -1,4 +1,5 @@
+-import {requirePaidReportCheckout} from '../report-delivery/paid-report-readiness.js';
++import {fiveMethodReportCapability,requireFiveMethodReportSetup} from '../report-delivery/paid-report-production-capabilities.js';
++import {requirePaidReportCheckout,paidReportSubjectSnapshot} from '../report-delivery/paid-report-readiness.js';
+ import {paidReportMethodForProduct} from '../report-delivery/paid-report-method-registry.js';
+ import {requireP9Payment} from '../report-delivery/p9-canary-admission.js';
+ import {commerceEnvironment,commerceCheckoutAvailable,requireStripeCommerce} from './commerce-environment.js';
+@@ -42,7 +43,8 @@ export async function commerceApi(context,action){
+         }
+       }
+       const setup=env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(p)&&!p.productId.includes('BUNDLE')?{methodCode:paidReportMethodForProduct(p.productId)?.methodCode||null,admitted:paidReportMethodForProduct(p.productId)?.p8Admitted===true}:null;
+-      return {...p,paidReportSetup:setup,checkoutAvailable:!p.checkoutBlockedReason&&(!p.requiresBookPdfReadiness||env.PHIOS_BOOK_PDF_CHECKOUT_ENABLED==='true')&&commerceCheckoutAvailable(env)&&!(commerceEnvironment(env)==='QA'&&p.qaPriceRebindRequired)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:false,refillReviewRequired:'R12_MONTHLY_PROVIDER_CAP_RECONCILIATION'}:{}),reportPresentationOptions,reportPurchaseState};
++      const fullReportCapability=fiveMethodReportCapability(p.productId,env);
++      return {...p,paidReportSetup:setup,fullReportCapability,checkoutAvailable:(!fullReportCapability||fullReportCapability.setupAvailable)&&!p.checkoutBlockedReason&&(!p.requiresBookPdfReadiness||env.PHIOS_BOOK_PDF_CHECKOUT_ENABLED==='true')&&commerceCheckoutAvailable(env)&&!(commerceEnvironment(env)==='QA'&&p.qaPriceRebindRequired)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:false,refillReviewRequired:'R12_MONTHLY_PROVIDER_CAP_RECONCILIATION'}:{}),reportPresentationOptions,reportPurchaseState};
+     }),eligibleBundleProducts:standardBundleProducts()});
+     const customerId=requireIdentity(context);
+     if(action==='account') return json({success:true,...await commerceAccountProjection(env,customerId)});
+@@ -93,7 +95,8 @@ export async function commerceApi(context,action){
+     if(body.subscriptionId!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_KIND_REQUIRED'),{status:422});
+     if(isLanguageReport(product))contextSnapshot.reportPresentation=commerceReportQuote(product,body,selected);
+     else if(body.reportLanguageMode||body.reportLocale)throw Object.assign(new Error('Report language is not applicable.'),{status:422,code:'REPORT_PRESENTATION_NOT_APPLICABLE'});
+-    if(env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(product)&&!product.productId.includes('BUNDLE')){const readiness=await requirePaidReportCheckout(context,{productId:product.productId,readinessId:body.context?.reportIntentId,presentation:contextSnapshot.reportPresentation});contextSnapshot.reportIntentId=readiness.readinessId;}
++    const fullReportCapability=requireFiveMethodReportSetup(product.productId,env);
++    if(fullReportCapability||env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(product)&&!product.productId.includes('BUNDLE')){const readiness=await requirePaidReportCheckout(context,{productId:product.productId,readinessId:body.context?.reportIntentId,presentation:contextSnapshot.reportPresentation});contextSnapshot.reportIntentId=readiness.readinessId;contextSnapshot.reportSubject=paidReportSubjectSnapshot(readiness);}
+     if(commerceEnvironment(env)==='LIVE'&&(isLanguageReport(product)||product.category==='REPORT'))contextSnapshot.p9Canary=await requireP9Payment(context,{productId:product.productId,readinessId:contextSnapshot.reportIntentId,presentation:contextSnapshot.reportPresentation});
+     const controlled=controlledPurchaseOffer(env,{ownerId:customerId,productId:product.productId,originalAmountMinor:contextSnapshot.reportPresentation?.amountMinor??product.amountMinor});
+     if(controlled){
+diff --git a/functions/personal-reading/deep-manuscript/bazi-production-generation-config.js b/functions/personal-reading/deep-manuscript/bazi-production-generation-config.js
+index 202d76e7..91a55f9b 100644
+--- a/functions/personal-reading/deep-manuscript/bazi-production-generation-config.js
++++ b/functions/personal-reading/deep-manuscript/bazi-production-generation-config.js
+@@ -215,7 +215,11 @@ export function buildBaziProductionGenerationConfig() {
+   if (
+     economics.productId !==
+       'COM-REPORT-BAZI-FULL' ||
+-    economics.amountMinor !== 5900 ||
++    // Price belongs to the current canonical Economics Policy, not the
++    // historical manuscript admission's RM59 observation. USD guards stay exact.
++    !Number.isSafeInteger(economics.amountMinor) ||
++    economics.amountMinor <= 0 ||
++    economics.currency !== 'MYR' ||
+     economics.providerCapUsd !== 4 ||
+     economics.includedFollowups !== 4
+   ) {
+diff --git a/functions/report-delivery/bazi-account-candidate.js b/functions/report-delivery/bazi-account-candidate.js
+index a80b42ce..7c01e20e 100644
+--- a/functions/report-delivery/bazi-account-candidate.js
++++ b/functions/report-delivery/bazi-account-candidate.js
+@@ -1,3 +1,4 @@
++import {assertPaidReportWorkerFence} from './paid-report-worker-fence.js';
+ import {personIdentity,loadCanonicalPersonSubject} from '../account/canonical-person-store.js';
+ import {ownedReportPresentation} from '../commerce/book-commerce-store.js';
+ import {requireP9Owner} from './p9-canary-admission.js';
+@@ -11,7 +12,8 @@ export async function prepareAccountBaziCandidate(context,selection){
+  const owner=personIdentity(context).userId;
+  if(!['local','qa','preview'].includes(context.env?.PHIOS_ENVIRONMENT))requireP9Owner(context.env,owner,{allowExpired:true});
+  if(!selection||Object.keys(selection).some(k=>k!=='personId')||typeof selection.personId!=='string'||!selection.personId)fail('BAZI_SUBJECT_SELECTION_REQUIRED',400);
+- const right=await ownedReportPresentation(context.env,owner,'COM-REPORT-BAZI-FULL');
++ const fence=await assertPaidReportWorkerFence(context.env);let purchaseId=null;if(fence){const job=await context.env.RUNTIME_DB.prepare("SELECT purchase_id FROM paid_report_jobs WHERE job_id=? AND owner_account_id=? AND method_code='BZR' AND product_id='COM-REPORT-BAZI-FULL'").bind(fence.jobId,owner).first();if(!job)fail('BAZI_JOB_PURCHASE_REQUIRED',403);purchaseId=job.purchase_id;}
++ const right=await ownedReportPresentation(context.env,owner,'COM-REPORT-BAZI-FULL',Date.now,{purchaseId});
+  if(!right)fail('BAZI_ENTITLEMENT_REQUIRED',403);
+  const subject=await loadCanonicalPersonSubject(context.env,owner,selection.personId);
+  const request={schemaVersion:'PHI-OS-MCD-METHOD-EXECUTION-REQUEST-v1.0.0',methodCode:'BAZI',methodVersion:'0.1.0',capability:'CALCULATION',purposeCode:'PERSONAL_RUNTIME_METHOD_PROJECTION',canonicalInput:subject.canonicalBirthInput,executionParameters:{traditionalCalculationSex:subject.calculationSex},consentRecordId:subject.methodConsent.consentId,requestId:`BAZI-CANDIDATE:${subject.person.personId}:v${subject.personVersion}`};
+diff --git a/functions/report-delivery/customer-artifact-store.js b/functions/report-delivery/customer-artifact-store.js
+index 7d5a57b1..affb3e6a 100644
+--- a/functions/report-delivery/customer-artifact-store.js
++++ b/functions/report-delivery/customer-artifact-store.js
+@@ -16,6 +16,19 @@ export async function createCustomerArtifactStore(env,binding){
+  const read=async ref=>{const object=await env.PRIVATE_REPORTS.get(ref.objectKey);if(!object)throw Error('ARTIFACT_OBJECT_MISSING_REPAIR_REQUIRED');const artifact=await verify(JSON.parse(await object.text()));if(artifact.artifactDigest!==ref.artifactDigest)throw Error('ARTIFACT_REFERENCE_DIGEST_MISMATCH');return artifact;};
+  return Object.freeze({
+   async save(artifact){await verify(artifact);return state.withLock('customer-artifact',async()=>{const cacheHit=!!await state.get('customer-artifact'),ref=await persistCustomerArtifactInHeldStore(env,binding,state,artifact);return {artifact:await read(ref),cacheHit};});},
+-  async open(){return state.withLock('customer-artifact',async()=>{const ref=await state.get('customer-artifact');if(!ref)throw Error('CUSTOMER_ARTIFACT_NOT_GENERATED');return {artifact:await read(ref),providerCalls:0};});}
++  async open(){return state.withLock('customer-artifact',async()=>{const ref=await state.get('customer-artifact');if(!ref)throw Error('CUSTOMER_ARTIFACT_NOT_GENERATED');return {artifact:await read(ref),providerCalls:0};});},
++  async hasPdfDerivative({artifact,version,outputDigest}){await verify(artifact);if(!/^[A-Z0-9-]{1,100}$/.test(version))return false;const object=await env.PRIVATE_REPORTS.head?.('customer-artifacts/'+binding.reportId+'/'+artifact.artifactDigest+'/'+version+'.pdf');return !!object&&object.size>=1000&&object.size<=128*1024*1024&&object.customMetadata?.artifactDigest===artifact.artifactDigest&&object.customMetadata?.htmlDigest===artifact.htmlSnapshotOrRenderState.outputDigest&&object.customMetadata?.publicationDigest===artifact.publicationIR.digest&&object.customMetadata?.derivativeVersion===version&&(!outputDigest||object.customMetadata?.outputDigest===outputDigest);},
++  // Same immutable artifact/private bucket owner; no new report table or identity.
++  // Conditional R2 put makes concurrent derivatives converge on the first bytes.
++  async pdfDerivative({artifact,version,authorize,render,allowCreate=false}){
++   await verify(artifact);if(!/^[A-Z0-9-]{1,100}$/.test(version)||typeof authorize!=='function')throw Error('PDF_DERIVATIVE_SERVER_DEPENDENCIES_REQUIRED');
++   await authorize();const objectKey='customer-artifacts/'+binding.reportId+'/'+artifact.artifactDigest+'/'+version+'.pdf',hash=async b=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',b)),v=>v.toString(16).padStart(2,'0')).join('');
++   const load=async()=>{const object=await env.PRIVATE_REPORTS.get(objectKey);if(!object)return null;if(object.size>128*1024*1024)throw Error('PDF_DERIVATIVE_SIZE_INVALID');const meta=object.customMetadata,bytes=new Uint8Array(await object.arrayBuffer());if(meta?.artifactDigest!==artifact.artifactDigest||meta?.htmlDigest!==artifact.htmlSnapshotOrRenderState.outputDigest||meta?.publicationDigest!==artifact.publicationIR.digest||meta?.derivativeVersion!==version||bytes.length>128*1024*1024||bytes.length<1000||new TextDecoder().decode(bytes.subarray(0,5))!=='%PDF-'||await hash(bytes)!==meta?.outputDigest)throw Error('PDF_DERIVATIVE_INTEGRITY_FAILED');return {bytes,outputDigest:meta.outputDigest};};
++   const cached=await load();if(cached){await authorize();return {...cached,cacheHit:true,providerCalls:0};}
++   if(!allowCreate)throw Object.assign(Error('PRIVATE_PDF_NOT_ISSUED'),{code:'PRIVATE_PDF_NOT_ISSUED',status:409});if(typeof render!=='function')throw Error('PDF_DERIVATIVE_RENDERER_REQUIRED');const bytes=await render();if(!(bytes instanceof Uint8Array)||bytes.length<1000||bytes.length>128*1024*1024||new TextDecoder().decode(bytes.subarray(0,5))!=='%PDF-')throw Error('PDF_DERIVATIVE_BYTES_INVALID');const outputDigest=await hash(bytes);await authorize();
++   const written=await env.PRIVATE_REPORTS.put(objectKey,bytes,{sha256:Uint8Array.from(outputDigest.match(/../g),x=>parseInt(x,16)).buffer,onlyIf:new Headers({'If-None-Match':'*'}),httpMetadata:{contentType:'application/pdf',cacheControl:'private, no-store'},customMetadata:{artifactDigest:artifact.artifactDigest,htmlDigest:artifact.htmlSnapshotOrRenderState.outputDigest,publicationDigest:artifact.publicationIR.digest,derivativeVersion:version,outputDigest}});
++   if(written){if(written.size!==bytes.length||written.customMetadata?.outputDigest!==outputDigest)throw Error('PDF_DERIVATIVE_STORAGE_ACK_INVALID');await authorize();return {bytes,outputDigest,cacheHit:false,providerCalls:0};}
++   const stored=await load();if(!stored)throw Error('PDF_DERIVATIVE_STORAGE_FAILED');await authorize();return {...stored,cacheHit:false,providerCalls:0};
++  }
+  });
+ }
+diff --git a/functions/report-delivery/customer-report-artifact.js b/functions/report-delivery/customer-report-artifact.js
+index 8661ca3a..ac4b3d51 100644
+--- a/functions/report-delivery/customer-report-artifact.js
++++ b/functions/report-delivery/customer-report-artifact.js
+@@ -6,7 +6,7 @@ export async function createCustomerReportArtifact(value){
+  if(!value.inputSnapshot||!value.calculationSnapshot||!value.publicationIR||!Array.isArray(value.generatedSections)||!value.generatedSections.length||!value.htmlSnapshotOrRenderState?.objectKey)fail('CUSTOMER_ARTIFACT_CONTENT_REQUIRED');
+  const generatedCopy=structuredClone(value.generatedSections),contentDigest=await digest(generatedCopy);
+  const {artifactDigest:priorDigest,...input}=structuredClone(value);
+- const body={...input,schemaVersion:CUSTOMER_ARTIFACT_VERSION,generatedCopy,contentDigest,status:'FROZEN_CUSTOMER_COPY',pdfPolicy:'ON_DEMAND_DERIVATIVE',sharedAssetsEmbedded:false};
++ const body={...input,schemaVersion:CUSTOMER_ARTIFACT_VERSION,generatedCopy,contentDigest,status:'FROZEN_CUSTOMER_COPY',pdfPolicy:value.pdfPolicy==='PERSISTED_PRIVATE_PDF_REQUIRED'?'PERSISTED_PRIVATE_PDF_REQUIRED':'ON_DEMAND_DERIVATIVE',sharedAssetsEmbedded:false};
+  if(JSON.stringify(body).includes('data:image/'))fail('CUSTOMER_ARTIFACT_EMBEDDED_ASSET_FORBIDDEN');
+  body.sourceDigest=await digest({input:value.inputSnapshot,calculation:value.calculationSnapshot,authority:value.authorityPackVersion});
+  return deepFreeze({...body,artifactDigest:await digest(body)});
+diff --git a/functions/report-delivery/paid-report-bazi-adapter.js b/functions/report-delivery/paid-report-bazi-adapter.js
+index fbb3b216..23eb8a40 100644
+--- a/functions/report-delivery/paid-report-bazi-adapter.js
++++ b/functions/report-delivery/paid-report-bazi-adapter.js
+@@ -1,3 +1,4 @@
++import {downloadAccountBaziPdf,hasAccountBaziPdf,baziPdfRendererReady} from '../account/bazi-pdf-delivery.js';
+ import {loadCanonicalPersonSubject} from '../account/canonical-person-store.js';
+ import {executeAndProjectMcd5CurrentRequest} from '../method-client-delivery/canonical-projection-runtime-current.js';
+ import {reportBirthInputFingerprint} from '../canonical-presentation-runtime/report-cover-subject.js';
+@@ -13,7 +14,7 @@ import {buildBaziDeepDiagrams} from '../personal-reading/deep-manuscript/bazi-de
+ import {expectedBaziDiagramTopology} from '../personal-reading/publication-fit/bazi-publication-fit-gate.js';
+ const productId='COM-REPORT-BAZI-FULL';
+ export const baziPaidReportAdapter=Object.freeze({
+- version:'P8-BZR-ADAPTER-1',supportedPresentations:['en','zh-Hans','bilingual'],generationPolicy:{normalCalls:3,technicalRecoveryCalls:2,semanticVerifierCalls:0,editorialRewriteCalls:0},recoveryPolicy:{maximumAttempts:2,rescue:true},costPolicy:reportEconomics(productId),followupPolicy:{includedQuestions:4,reserveUsd:reportFollowupReserve(productId),generationCeilingUsd:reportGenerationCeiling(productId)},
++ downloadPdf:downloadAccountBaziPdf,version:'P8-BZR-ADAPTER-1',supportedPresentations:['en','zh-Hans','bilingual'],generationPolicy:{normalCalls:3,technicalRecoveryCalls:2,semanticVerifierCalls:0,editorialRewriteCalls:0},recoveryPolicy:{maximumAttempts:2,rescue:true},costPolicy:reportEconomics(productId),followupPolicy:{includedQuestions:4,reserveUsd:reportFollowupReserve(productId),generationCeilingUsd:reportGenerationCeiling(productId)},
+  async readiness(context,intent){
+   const subject=await loadCanonicalPersonSubject(context.env,intent.ownerAccountId,intent.personId);
+   const request={schemaVersion:'PHI-OS-MCD-METHOD-EXECUTION-REQUEST-v1.0.0',methodCode:'BAZI',methodVersion:'0.1.0',capability:'CALCULATION',purposeCode:'PERSONAL_RUNTIME_METHOD_PROJECTION',canonicalInput:subject.canonicalBirthInput,executionParameters:{traditionalCalculationSex:subject.calculationSex},consentRecordId:subject.methodConsent.consentId,requestId:`BAZI-CANDIDATE:${subject.person.personId}:v${subject.personVersion}`};
+@@ -22,20 +23,20 @@ export const baziPaidReportAdapter=Object.freeze({
+   const prepared={customerId:intent.ownerAccountId,personId:intent.personId,personVersion:subject.personVersion,canonicalBirthInputFingerprint:await reportBirthInputFingerprint(subject.canonicalBirthInput),calculationDigest:await sha256Stable(execution.canonicalProjection),execution};
+   const native=await buildCustomerNativeBaziInputs(context,prepared),config=context.env.BAZI_REPORT_GENERATION_CONFIG||buildBaziProductionGenerationConfig();
+   const diagrams=await buildBaziDeepDiagrams(native.pack);expectedBaziDiagramTopology(diagrams);if(diagrams.length!==15)throw Error('PUBLICATION_PREFLIGHT_INCOMPLETE');
+-  return {inputValid:true,calculationReady:true,authorityReady:true,publicationPreflightReady:true,rendererReady:!!context.env.METHOD_REPORT_RENDERER?.fetch,productionConfigReady:!!config.approval?.productionFrozen&&!!config.model&&!!config.policy,commercialProductReady:commerceProduct(productId).active===true,personVersion:subject.personVersion,inputDigest:prepared.canonicalBirthInputFingerprint,authorityDigest:native.pack.digest};
++  return {inputValid:true,calculationReady:true,authorityReady:true,publicationPreflightReady:true,rendererReady:await baziPdfRendererReady(context),productionConfigReady:!!config.approval?.productionFrozen&&!!config.model&&!!config.policy,commercialProductReady:commerceProduct(productId).active===true,personVersion:subject.personVersion,inputDigest:prepared.canonicalBirthInputFingerprint,authorityDigest:native.pack.digest};
+  },
+  // The accepted owner already performs atomic generation -> validation -> compose
+  // -> verified rendering -> immutable release -> budget/followups. Preserve it.
+  // Subsequent shared checkpoints verify its persisted outputs, never recompute them.
+- async prepare(context,job){const fresh=await this.readiness(context,{...job});if(fresh.personVersion!==job.personVersion||fresh.inputDigest!==job.inputDigest||fresh.authorityDigest!==job.authorityDigest)throw Error('SUBJECT_AUTHORITY_MISMATCH');return {personId:job.personId,locale:job.presentation.reportLocale};},
++ async prepare(context,job){const fresh=await this.readiness(context,{...job});if(!fresh.rendererReady)throw Error('REPORT_PDF_RENDERER_UNAVAILABLE');if(fresh.personVersion!==job.personVersion||fresh.inputDigest!==job.inputDigest||fresh.authorityDigest!==job.authorityDigest)throw Error('SUBJECT_AUTHORITY_MISMATCH');return {personId:job.personId,locale:job.presentation.reportLocale};},
+  async generate(context,job,selection){const released=await generateAndReleaseAccountBazi(context,selection,context.env.P8_BAZI_QA_OPTIONS||{});return {reportId:released.reportId};},
+- async inspectDurableProgress(context,job){try{const p=await inspectAccountBaziDeliveryProgress(context,job);if(p.material){await this.validate(context,job,{reportId:p.material.row.report_id});const e=await context.env.RUNTIME_DB.prepare("SELECT entitlement_id FROM digital_entitlements WHERE purchase_id=? AND customer_id=? AND product_id=? AND entitlement_status='active'").bind(job.purchaseId,job.ownerAccountId,job.productId).first();if(e?.entitlement_id!==p.material.artifact?.entitlementId)throw Error('ENTITLEMENT_MISMATCH');}return {...p,materialVerified:!!p.material,renderVerified:!!p.render,publicationVerified:!!p.publication,generationVerified:!!p.result?.snapshot};}catch(error){if(/INTEGRITY|REPORT_UNAVAILABLE|ARTIFACT/.test(error.code||error.message))return {materialInvalid:true,locks:[],stores:{},integrityError:error.code||error.message};throw error;}},
++ async inspectDurableProgress(context,job){try{const p=await inspectAccountBaziDeliveryProgress(context,job);if(p.material){await this.validate(context,job,{reportId:p.material.row.report_id});const e=await context.env.RUNTIME_DB.prepare("SELECT entitlement_id FROM digital_entitlements WHERE purchase_id=? AND customer_id=? AND product_id=? AND entitlement_status='active'").bind(job.purchaseId,job.ownerAccountId,job.productId).first();if(e?.entitlement_id!==p.material.artifact?.entitlementId)throw Error('ENTITLEMENT_MISMATCH');}return {...p,materialVerified:!!p.material&&(p.material.artifact?.pdfPolicy!=='PERSISTED_PRIVATE_PDF_REQUIRED'||await hasAccountBaziPdf(context,p.material)),renderVerified:!!p.render,publicationVerified:!!p.publication,generationVerified:!!p.result?.snapshot};}catch(error){if(/INTEGRITY|REPORT_UNAVAILABLE|ARTIFACT/.test(error.code||error.message))return {materialInvalid:true,locks:[],stores:{},integrityError:error.code||error.message};throw error;}},
+  async resumeFrom(context,job){return this.generate(context,job,{personId:job.personId,locale:job.presentation.reportLocale});},
+  async validate(context,job,output){const m=await openAccountBaziMaterial(context,output.reportId);if(m.row.person_id!==job.personId||m.candidate.purchaseId!==job.purchaseId||m.row.locale!==job.presentation.reportLocale)throw Error('SUBJECT_OR_PURCHASE_MISMATCH');return output;},
+  async compile(context,job,output){const m=await openAccountBaziMaterial(context,output.reportId);if(!m.artifact?.publicationIR?.customerPublishable)throw Error('PUBLICATION_NOT_COMPLETE');return output;},
+  async render(context,job,output){const m=await openAccountBaziMaterial(context,output.reportId);if(m.verification.passed!==true||m.verification.pageCount!==48||m.verification.diagramCount!==15)throw Error('RENDER_NOT_VERIFIED');return output;},
+  async release(context,job,output){return this.validate(context,job,output);},
+- async reconcile(context,job){const row=await context.env.RUNTIME_DB.prepare('SELECT report_id FROM account_method_report_materials WHERE owner_account_id=? AND person_id=? AND method_code=?').bind(job.ownerAccountId,job.personId,'BZR').all();for(const r of row.results){const m=await openAccountBaziMaterial(context,r.report_id);if(m.candidate.purchaseId===job.purchaseId){await closeReleasedReportBudget(context,{candidate:m.candidate,release:{reportId:r.report_id},receipt:m.verification});await grantDeliveredReportFollowups(context.env,{reportId:r.report_id,ownerAccountId:job.ownerAccountId,purchaseId:job.purchaseId,methodCode:'BZR'});return {reportId:r.report_id};}}return null;},
++ async reconcile(context,job){const row=await context.env.RUNTIME_DB.prepare('SELECT report_id FROM account_method_report_materials WHERE owner_account_id=? AND person_id=? AND method_code=?').bind(job.ownerAccountId,job.personId,'BZR').all();for(const r of row.results){const m=await openAccountBaziMaterial(context,r.report_id);if(m.candidate.purchaseId===job.purchaseId){if(m.artifact?.pdfPolicy==='PERSISTED_PRIVATE_PDF_REQUIRED'&&!await hasAccountBaziPdf(context,m))return null;await closeReleasedReportBudget(context,{candidate:m.candidate,release:{reportId:r.report_id},receipt:m.verification});await grantDeliveredReportFollowups(context.env,{reportId:r.report_id,ownerAccountId:job.ownerAccountId,purchaseId:job.purchaseId,methodCode:'BZR'});return {reportId:r.report_id};}}return null;},
+  async reopen(context,job,output){return openAccountBaziMaterial(context,output.reportId);},
+- async verifyDelivered(context,job,output){const m=await this.reopen(context,job,output);if(m.row.person_id!==job.personId||m.row.locale!==job.presentation.reportLocale||m.candidate.purchaseId!==job.purchaseId)throw Error('MATERIAL_IDENTITY_MISMATCH');const entitlement=await context.env.RUNTIME_DB.prepare("SELECT entitlement_id FROM digital_entitlements WHERE purchase_id=? AND customer_id=? AND product_id=? AND entitlement_status='active'").bind(job.purchaseId,job.ownerAccountId,job.productId).first();if(!entitlement||entitlement.entitlement_id!==m.artifact.entitlementId)throw Error('ENTITLEMENT_MISMATCH');const closed=await closeReleasedReportBudget(context,{candidate:m.candidate,release:{reportId:output.reportId},receipt:m.verification});if(closed?.budgetDelivered!==true)throw Error('BUDGET_CLOSURE_REQUIRED');const grant=await context.env.RUNTIME_DB.prepare('SELECT included_questions FROM account_report_followup_grants WHERE report_id=? AND owner_account_id=? AND purchase_id=?').bind(output.reportId,job.ownerAccountId,job.purchaseId).first();if(grant?.included_questions!==4)throw Error('FOLLOWUP_GRANT_REQUIRED');return true;}
++ async verifyDelivered(context,job,output){const m=await this.reopen(context,job,output);if(m.row.person_id!==job.personId||m.row.locale!==job.presentation.reportLocale||m.candidate.purchaseId!==job.purchaseId)throw Error('MATERIAL_IDENTITY_MISMATCH');const entitlement=await context.env.RUNTIME_DB.prepare("SELECT entitlement_id FROM digital_entitlements WHERE purchase_id=? AND customer_id=? AND product_id=? AND entitlement_status='active'").bind(job.purchaseId,job.ownerAccountId,job.productId).first();if(!entitlement||entitlement.entitlement_id!==m.artifact.entitlementId)throw Error('ENTITLEMENT_MISMATCH');if(m.artifact?.pdfPolicy==='PERSISTED_PRIVATE_PDF_REQUIRED'){const pdf=await downloadAccountBaziPdf(context,output.reportId);await pdf.body?.cancel();}const closed=await closeReleasedReportBudget(context,{candidate:m.candidate,release:{reportId:output.reportId},receipt:m.verification});if(closed?.budgetDelivered!==true)throw Error('BUDGET_CLOSURE_REQUIRED');const grant=await context.env.RUNTIME_DB.prepare('SELECT included_questions FROM account_report_followup_grants WHERE report_id=? AND owner_account_id=? AND purchase_id=?').bind(output.reportId,job.ownerAccountId,job.purchaseId).first();if(grant?.included_questions!==4)throw Error('FOLLOWUP_GRANT_REQUIRED');return true;}
+ });
+diff --git a/functions/report-delivery/paid-report-delivery-core.js b/functions/report-delivery/paid-report-delivery-core.js
+index c2a5344c..4a48dd95 100644
+--- a/functions/report-delivery/paid-report-delivery-core.js
++++ b/functions/report-delivery/paid-report-delivery-core.js
+@@ -4,7 +4,7 @@ import {requireP9Owner,requireP9Job} from './p9-canary-admission.js';
+ import {PAID_REPORT_METHODS} from './paid-report-method-registry.js';
+ import {paidReportStateStore} from './paid-report-state-store.js';
+ import {PAID_REPORT_POLICY,TERMINAL_PAID_STATES,paidReportError,classifyReportFailure} from './paid-report-policy.js';
+-import {requireSharedPaidReportLocal,customerReportStatus} from './paid-report-readiness.js';
++import {requireSharedPaidReportLocal,customerReportStatus,paidReportSubjectSnapshot} from './paid-report-readiness.js';
+ import {runPaidReportRefund,verifyPaidReportRefundTerminal} from './paid-report-refund.js';
+ import {digest} from '../account/oidc-auth.js';
+ import {paidReportWorkerContext} from './paid-report-worker-fence.js';
+@@ -12,10 +12,21 @@ import {reconcilePaidReportDurableTruth} from './paid-report-reconciler.js';
+ export async function ensureVerifiedPaidReportJob(env,order,{registry=PAID_REPORT_METHODS,clock=Date.now}={}){
+  requireSharedPaidReportLocal(env);const store=paidReportStateStore(env,clock),db=store.db,intentId=JSON.parse(order.context_json||'{}').reportIntentId;
+  if(commerceEnvironment(env)==='LIVE'){const policy=requireP9Owner(env,order.customer_id,{clock,allowExpired:true});if(order.product_id!==policy.product||JSON.parse(order.context_json||'{}').p9Canary?.releaseCandidateDigest!==policy.releaseCandidateDigest)throw paidReportError('P9_PAYMENT_SCOPE_MISMATCH');}
+- if(!intentId)return null;const r=await store.readiness(intentId,order.customer_id),adapter=registry[r?.methodCode];
+- if(!r||!adapter?.p8Admitted||r.productId!==order.product_id||r.state!=='READY_TO_PAY')throw paidReportError('PAYMENT_READINESS_BINDING_REQUIRED');
++ if(!intentId)return null;const saved=await store.readiness(intentId,order.customer_id),context=JSON.parse(order.context_json),frozen=context.reportSubject?paidReportSubjectSnapshot(context.reportSubject):null;
++ // New checkouts bind payment to the verified subject at checkout, never to a
++ // subsequently edited/pruned readiness row. Legacy purchases keep their path.
++ const r=frozen?{...frozen,ownerAccountId:order.customer_id,productId:order.product_id,readinessId:intentId,presentation:context.reportPresentation}:saved,adapter=registry[r?.methodCode];
++ if(!r||!adapter?.p8Admitted||adapter.productId!==order.product_id||r.productId!==order.product_id||!frozen&&r.state!=='READY_TO_PAY')throw paidReportError('PAYMENT_READINESS_BINDING_REQUIRED');
++ if(frozen&&(!adapter.supportedPresentations?.includes(r.presentation?.reportLocale)||r.presentation.reportLanguageMode!==(r.presentation.reportLocale==='bilingual'?'BILINGUAL':'SINGLE')))throw paidReportError('PURCHASE_PRESENTATION_MISMATCH');
+  const p=await db.prepare("SELECT p.* FROM commerce_purchases p JOIN digital_entitlements e ON e.purchase_id=p.purchase_id JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=p.checkout_attempt_id WHERE p.checkout_attempt_id=? AND p.customer_id=? AND p.product_id=? AND p.purchase_state='purchased' AND e.entitlement_status='active' AND e.product_id=p.product_id AND e.customer_id=p.customer_id AND o.order_state='FULFILLED' AND o.review_required=0 AND o.environment=?").bind(order.checkout_attempt_id,order.customer_id,order.product_id,commerceEnvironment(env)).first();
+- if(!p)throw paidReportError('VERIFIED_PURCHASE_REQUIRED');const presentation=JSON.parse(order.context_json).reportPresentation;
++ if(!p)throw paidReportError('VERIFIED_PURCHASE_REQUIRED');
++ if(frozen&&!saved){
++  // Rehydrate the existing FK owner only after the purchase is verified. The
++  // captured-payment state cannot be reused as READY_TO_PAY for another sale.
++  await store.saveReadiness({...r,state:'PAYMENT_CAPTURED',createdAt:clock(),updatedAt:clock(),expiresAt:clock()+PAID_REPORT_POLICY.readinessRetention});
++  if(!await store.readiness(intentId,order.customer_id))throw paidReportError('PAYMENT_READINESS_BINDING_REQUIRED');
++ }
++ const presentation=JSON.parse(order.context_json).reportPresentation;
+  if(presentation?.reportLocale!==r.presentation.reportLocale||presentation?.reportLanguageMode!==r.presentation.reportLanguageMode)throw paidReportError('PURCHASE_PRESENTATION_MISMATCH');
+  const id=await digest([commerceEnvironment(env),p.purchase_id,r.methodCode,r.personId].join('\0'));
+  const j={jobId:id,environment:commerceEnvironment(env),ownerAccountId:r.ownerAccountId,purchaseId:p.purchase_id,orderId:order.checkout_attempt_id,productId:r.productId,methodCode:r.methodCode,personId:r.personId,personVersion:r.personVersion,inputDigest:r.inputDigest,readinessId:r.readinessId,presentation:r.presentation,authorityDigest:r.authorityDigest,reportId:id,state:'DELIVERY_JOB_CREATED',stageIndex:0,attempts:0,rescueUsed:false,createdAt:clock(),updatedAt:clock(),dueAt:clock()+PAID_REPORT_POLICY.jobStartGrace};
+diff --git a/functions/report-delivery/paid-report-readiness.js b/functions/report-delivery/paid-report-readiness.js
+index d8b05c8d..064f9c46 100644
+--- a/functions/report-delivery/paid-report-readiness.js
++++ b/functions/report-delivery/paid-report-readiness.js
+@@ -29,3 +29,11 @@ export async function requirePaidReportCheckout(context,{productId,readinessId,p
+ export function customerReportSetup(r,clock=Date.now){return {...customerReportStatus(r.expiresAt<=clock()?{...r,state:'SYSTEM_AUTO_REPAIRING'}:r),selection:{methodCode:r.methodCode,productId:r.productId,personId:r.personId,presentation:r.presentation}};}
+ export async function readPaidReportReadiness(context,id){requireSharedPaidReportLocal(context.env);const r=await paidReportStateStore(context.env).readiness(id,personIdentity(context).userId);if(!r)throw paidReportError('REPORT_SETUP_UNAVAILABLE',404);return customerReportSetup(r);}
+ export function customerReportStatus(r){const details=/TIME/.test(r.blockerCode||'')?['Please confirm your birth time in your saved person details so we can calculate the selected report. Your other information is saved.','请在已保存的人物资料中确认出生时间，以便计算所选报告；其他资料已保存。']:/PLACE/.test(r.blockerCode||'')?['Please confirm your birth place in your saved person details so we can calculate the selected report. Your other information is saved.','请在已保存的人物资料中确认出生地点，以便计算所选报告；其他资料已保存。']:/CONSENT/.test(r.blockerCode||'')?['Please review the method permission for your selected person before we prepare this report. Your information is saved.','请先核对所选人物的方法授权，再准备报告；资料已保存。']:['Please review the required birth details for your selected person before we prepare this report. Your other information is saved.','请核对所选人物的必要出生资料，再准备报告；其他资料已保存。'];const pair=r.state==='READY_TO_PAY'?['Your report setup is ready. You can continue to payment.','报告准备检查已完成，可以继续付款。']:r.state==='CUSTOMER_INPUT_REQUIRED'?details:r.state==='METHOD_SCOPE_ALTERNATIVE'?['This report does not support the selected details. Please choose another available option.','此报告不支持所选资料，请选择其他可用选项。']:r.state==='DELIVERED'?['Your report is ready.','报告已准备完成。']:r.state==='REFUNDED'?['Refund completed.','退款已完成。']:/^REFUND/.test(r.state)?['We could not complete your report. Your payment is being refunded.','报告未能完成，付款正在退款处理。']:['Your report setup is saved. We are resolving a temporary issue. No action is needed from you.','报告设置已保存，我们正在处理暂时的问题；你无需重复操作。'];return {id:r.jobId||r.readinessId,status:r.state==='CUSTOMER_INPUT_REQUIRED'?'DETAIL_REQUIRED':r.state==='READY_TO_PAY'?'READY':r.state==='DELIVERED'?'READY':/^REFUND/.test(r.state)?'REFUND':'PREPARING',message:pair[0],messageZh:pair[1],customerActionRequired:r.state==='CUSTOMER_INPUT_REQUIRED'||r.state==='READY_TO_PAY'};}
++
++// Server-owned checkout receipt: opaque subject/version/source references only.
++// It survives input edits or readiness pruning while an asynchronous payment settles.
++export function paidReportSubjectSnapshot(r){
++ const s={methodCode:r?.methodCode,personId:r?.personId,personVersion:r?.personVersion,inputDigest:r?.inputDigest,authorityDigest:r?.authorityDigest};
++ if(typeof s.methodCode!=='string'||!/^[A-Z]{2,8}$/.test(s.methodCode)||typeof s.personId!=='string'||!s.personId||s.personId.length>200||!Number.isSafeInteger(s.personVersion)||s.personVersion<1||['inputDigest','authorityDigest'].some(k=>typeof s[k]!=='string'||!s[k]||s[k].length>512))throw paidReportError('PAID_REPORT_SUBJECT_SNAPSHOT_INVALID',409);
++ return Object.freeze(s);
++}
+diff --git a/scripts/lib/persistent-private-reports-qa.mjs b/scripts/lib/persistent-private-reports-qa.mjs
+index b61fed6e..263ac116 100644
+--- a/scripts/lib/persistent-private-reports-qa.mjs
++++ b/scripts/lib/persistent-private-reports-qa.mjs
+@@ -6,7 +6,7 @@ import {randomBytes,createHash} from 'node:crypto';
+ export function persistentPrivateReportsQa(root){
+  const absolute=path.resolve(root);fs.mkdirSync(absolute,{recursive:true});
+  const objectPath=key=>{if(typeof key!=='string'||!key||key.split(/[\\/]/).includes('..'))throw Error('QA_OBJECT_KEY_UNSAFE');return path.join(absolute,createHash('sha256').update(key).digest('hex')+'.object');};
+- return {async put(key,value,options={}){let bytes;if(typeof value==='string')bytes=Buffer.from(value);else if(value instanceof ArrayBuffer)bytes=Buffer.from(value);else if(ArrayBuffer.isView(value))bytes=Buffer.from(value.buffer,value.byteOffset,value.byteLength);else if(value?.arrayBuffer)bytes=Buffer.from(await value.arrayBuffer());else throw Error('QA_OBJECT_VALUE_UNSUPPORTED');const p=objectPath(key);fs.writeFileSync(p,bytes);if(Object.keys(options).length)fs.writeFileSync(p+'.metadata.json',JSON.stringify(options));},async get(key){const p=objectPath(key);if(!fs.existsSync(p))return null;const bytes=fs.readFileSync(p);return {async text(){return bytes.toString('utf8');},async json(){return JSON.parse(bytes.toString('utf8'));},async arrayBuffer(){return bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength);},size:bytes.length};}};
++ return {async head(key){const p=objectPath(key);if(!fs.existsSync(p))return null;const metadata=fs.existsSync(p+'.metadata.json')?JSON.parse(fs.readFileSync(p+'.metadata.json','utf8')):{};return {size:fs.statSync(p).size,httpMetadata:metadata.httpMetadata,customMetadata:metadata.customMetadata};},async put(key,value,options={}){let bytes;if(typeof value==='string')bytes=Buffer.from(value);else if(value instanceof ArrayBuffer)bytes=Buffer.from(value);else if(ArrayBuffer.isView(value))bytes=Buffer.from(value.buffer,value.byteOffset,value.byteLength);else if(value?.arrayBuffer)bytes=Buffer.from(await value.arrayBuffer());else throw Error('QA_OBJECT_VALUE_UNSUPPORTED');const p=objectPath(key);if((options.onlyIf?.etagDoesNotMatch==='*'||options.onlyIf instanceof Headers&&options.onlyIf.get('If-None-Match')==='*')){try{fs.writeFileSync(p,bytes,{flag:'wx'});}catch(e){if(e.code==='EEXIST')return null;throw e;}}else fs.writeFileSync(p,bytes);if(Object.keys(options).length)fs.writeFileSync(p+'.metadata.json',JSON.stringify(options));return {size:bytes.length,httpMetadata:options.httpMetadata,customMetadata:options.customMetadata};},async get(key){const p=objectPath(key);if(!fs.existsSync(p))return null;const bytes=fs.readFileSync(p),metadata=fs.existsSync(p+'.metadata.json')?JSON.parse(fs.readFileSync(p+'.metadata.json','utf8')):{};return {httpMetadata:metadata.httpMetadata,customMetadata:metadata.customMetadata,async text(){return bytes.toString('utf8');},async json(){return JSON.parse(bytes.toString('utf8'));},async arrayBuffer(){return bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength);},size:bytes.length};}};
+ }
+ export function p7r3jStorage({create=false,rootPath='tmp/bazi-r2-p7r3j-r1'}={}){
+  const root=path.resolve(rootPath),configPath=path.join(root,'qa-crypto.json');
+diff --git a/workers/method-report-renderer/bazi-verification.js b/workers/method-report-renderer/bazi-verification.js
+index dc873c35..163f2f03 100644
+--- a/workers/method-report-renderer/bazi-verification.js
++++ b/workers/method-report-renderer/bazi-verification.js
+@@ -13,7 +13,7 @@ export async function settleBaziReportImages({timeoutMs=60000}={}){
+  const diagnostics=images.map((image,index)=>({index,src:image.src,currentSrc:image.currentSrc,complete:image.complete,naturalWidth:image.naturalWidth,naturalHeight:image.naturalHeight,decodeState:states[index]}));
+  return {status:!timedOut&&diagnostics.every(i=>i.decodeState==='DECODED')?'PASS':'FAIL',imageCount:images.length,completedCount:diagnostics.filter(i=>i.complete).length,decodedCount:states.filter(s=>s==='DECODED').length,decodeFailures:diagnostics.filter(i=>i.decodeState.startsWith('DECODE_FAILED')||i.decodeState==='INVALID_DIMENSIONS'),unresolvedImages:diagnostics.filter(i=>i.decodeState!=='DECODED'),timeoutUsed:timeoutMs,timedOut,arbitrarySleepUsed:false,images:diagnostics};
+ }
+-export async function verifyBaziPublication(publication,env,puppeteer){
++export async function verifyBaziPublication(publication,env,puppeteer,{pdfResponse=false,includePdf=false,expectedHtmlDigest}={}){
+  const expectedDiagramTopology=expectedBaziDiagramTopology(publication.technical.diagrams);
+  const html=await renderCustomerBaziHtml(publication),origin=env.PHIOS_ENVIRONMENT==='production'?env.BAZI_RENDER_ASSET_ORIGIN:'https://qa.phios-github.pages.dev';if(!['https://qa.phios-github.pages.dev','https://phios-github.pages.dev'].includes(origin))throw Error('BAZI_RENDER_ASSET_ORIGIN_NOT_ADMITTED');let browser;
+  try{
+@@ -29,6 +29,8 @@ export async function verifyBaziPublication(publication,env,puppeteer){
+   const pdf=await page.pdf({preferCSSPageSize:true,printBackground:true}),pdfPages=(await PDFDocument.load(pdf)).getPageCount();
+   Object.assign(measured,{fitStatus:fit.fitStatus,diagramViolations:fit.diagramViolations,topology:fit.topology,fit});
+   const passed=!printAssetReadiness.length&&fit.fitStatus==='PASS'&&measured.pageCount===48&&measured.diagramCount===15&&pdfPages===48&&!measured.brokenImages&&!measured.overflowPages.length&&!measured.missingRequiredContent&&!measured.undefinedText&&!errors.length;
++  if(pdfResponse){if(!passed||!expectedHtmlDigest||await hash(html)!==expectedHtmlDigest)return Response.json({ok:false,code:'PDF_SOURCE_OR_RENDER_MISMATCH'},{status:422});return new Response(pdf,{headers:{'Content-Type':'application/pdf','Cache-Control':'private, no-store','X-PHIOS-HTML-Digest':await hash(html),'X-PHIOS-Publication-Digest':publication.digest,'X-PHIOS-PDF-Pages':String(pdfPages)}});}
++  if(includePdf&&passed){const outputDigest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',pdf)),v=>v.toString(16).padStart(2,'0')).join(''),verification={passed,assetSettle,printAssetReadiness,outputDigest:await hash(html),manuscriptDigest:publication.manuscript.digest,publicationDigest:publication.digest,pageCount:measured.pageCount,diagramCount:measured.diagramCount,browserReady:true,pdfReady:true,printReady:true,pdfDerivative:{persisted:false,outputDigest,bytes:pdf.byteLength,pages:pdfPages,derivedFromManuscriptDigest:publication.manuscript.digest,rendererVersion:publication.lineage.versions.renderer,renderedAt:new Date().toISOString()},measured,errors,providerCalls:0};const body=new FormData();body.append('metadata',new Blob([JSON.stringify({html,verification})],{type:'application/json'}),'verification.json');body.append('pdf',new Blob([pdf],{type:'application/pdf'}),'report.pdf');return new Response(body,{headers:{'Cache-Control':'private, no-store'}});}
+   return Response.json({html,verification:{passed,assetSettle,printAssetReadiness,outputDigest:await hash(html),manuscriptDigest:publication.manuscript.digest,publicationDigest:publication.digest,pageCount:measured.pageCount,diagramCount:measured.diagramCount,browserReady:passed,pdfReady:pdfPages===48,printReady:passed,pdfDerivative:{persisted:false,derivedFromManuscriptDigest:publication.manuscript.digest,rendererVersion:publication.lineage.versions.renderer,renderedAt:new Date().toISOString(),bytes:pdf.byteLength,pages:pdfPages},measured,errors,providerCalls:0}},{status:passed?200:422,headers:{'cache-control':'private, no-store'}});
+  }finally{if(browser)await browser.close();}
+ }
+diff --git a/workers/method-report-renderer/index.js b/workers/method-report-renderer/index.js
+index 871bf264..79c640a8 100644
+--- a/workers/method-report-renderer/index.js
++++ b/workers/method-report-renderer/index.js
+@@ -11,14 +11,16 @@ const hash=async text=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA
+ 
+ export default {
+  async fetch(request,env){
++  if(env.PHIOS_ENVIRONMENT==='qa'&&request.method==='GET'&&new URL(request.url).pathname==='/health')return Response.json({ok:true,pdfTransferProtocol:'BZR-PDF-MULTIPART-1'},{headers:{'cache-control':'no-store'}});
+   // No public endpoint. Only Pages' private service binding may invoke this worker.
+-  if(env.PHIOS_ENVIRONMENT!=='qa'||request.method!=='POST'||new URL(request.url).pathname!=='/verify')return new Response(null,{status:404});
++  if(env.PHIOS_ENVIRONMENT!=='qa'||request.method!=='POST'||!['/verify','/pdf'].includes(new URL(request.url).pathname))return new Response(null,{status:404});
+   let browser,stage='INPUT';const startedAt=Date.now(),timings={};
+   try{
+    const reader=request.body?.getReader();if(!reader)throw Error('BODY_REQUIRED');let size=0,raw='';const decoder=new TextDecoder();
+    for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>8000000){await reader.cancel();throw Error('TOO_LARGE');}raw+=decoder.decode(value,{stream:true});}
+    const parsed=JSON.parse(raw+decoder.decode()),{candidate,method,compositionVersion}=parsed;
+-   if(method==='BZR')return await verifyBaziPublication(parsed.publication,env,puppeteer);
++   if(method==='BZR')return await verifyBaziPublication(parsed.publication,env,puppeteer,{pdfResponse:new URL(request.url).pathname==='/pdf',expectedHtmlDigest:parsed.expectedHtmlDigest,includePdf:parsed.includePdf===true});
++   if(new URL(request.url).pathname==='/pdf')throw Error('METHOD_PDF_NOT_ADMITTED');
+    const contract=await assertMethodGeneration(candidate),expectedPageCount=contract.expectedPageCount;
+    if(method!==contract.methodCode||compositionVersion!==contract.compositionVersion||candidate?.scope!=='CONTROLLED_QA_ONLY'||candidate.snapshot?.locale!==candidate.locale||(await createCustomerDeliverySnapshot(candidate.snapshot)).semanticSnapshotId!==candidate.snapshot.semanticSnapshotId)throw Error('SNAPSHOT_INVALID');
+    if(compositionVersion==='ZIWEI-CONTEXTUAL-RCA-R1')await assertZiweiContextSnapshot(candidate);
+diff --git a/workers/method-report-renderer/production.js b/workers/method-report-renderer/production.js
+index 8d2a0ce5..266ed2f6 100644
+--- a/workers/method-report-renderer/production.js
++++ b/workers/method-report-renderer/production.js
+@@ -3,7 +3,7 @@ import {verifyBaziPublication} from './bazi-verification.js';
+ import {P9_BAZI_FIT_CODE} from './bazi-production-fit.generated.js';
+ export const P9_RENDERER_VERSION='P9-BZR-RENDERER-1';
+ export default {async fetch(request,env){
+- if(request.method==='GET'&&new URL(request.url).pathname==='/health'){const ready=env.PHIOS_ENVIRONMENT==='production'&&env.PHIOS_P9_RENDERER_ENABLED==='true';return Response.json({ok:ready,status:ready?'ready':'unavailable'},{status:ready?200:503,headers:{'cache-control':'no-store'}});}
+- if(env.PHIOS_ENVIRONMENT!=='production'||request.method!=='POST'||new URL(request.url).pathname!=='/verify'||env.PHIOS_P9_RENDERER_ENABLED!=='true')return new Response(null,{status:404});
+- try{if(Number(request.headers.get('content-length'))>8000000)return new Response(null,{status:413});const reader=request.body?.getReader();if(!reader)return new Response(null,{status:400});let size=0,raw='';const decoder=new TextDecoder();for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>8000000){await reader.cancel();return new Response(null,{status:413});}raw+=decoder.decode(value,{stream:true});}const payload=JSON.parse(raw+decoder.decode());if(payload.method!=='BZR'||payload.publication?.fixture||payload.publication?.reviewOnly||payload.publication?.customerPublishable!==true)return new Response(null,{status:422});return await verifyBaziPublication(payload.publication,{...env,BAZI_BROWSER_FIT_CODE:P9_BAZI_FIT_CODE},puppeteer);}catch{return Response.json({ok:false,code:'BZR_RENDER_REJECTED'},{status:422});}
++ if(request.method==='GET'&&new URL(request.url).pathname==='/health'){const ready=env.PHIOS_ENVIRONMENT==='production'&&env.PHIOS_P9_RENDERER_ENABLED==='true';return Response.json({ok:ready,status:ready?'ready':'unavailable',pdfTransferProtocol:'BZR-PDF-MULTIPART-1'},{status:ready?200:503,headers:{'cache-control':'no-store'}});}
++ if(env.PHIOS_ENVIRONMENT!=='production'||request.method!=='POST'||!['/verify','/pdf'].includes(new URL(request.url).pathname)||env.PHIOS_P9_RENDERER_ENABLED!=='true')return new Response(null,{status:404});
++ try{if(Number(request.headers.get('content-length'))>8000000)return new Response(null,{status:413});const reader=request.body?.getReader();if(!reader)return new Response(null,{status:400});let size=0,raw='';const decoder=new TextDecoder();for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>8000000){await reader.cancel();return new Response(null,{status:413});}raw+=decoder.decode(value,{stream:true});}const payload=JSON.parse(raw+decoder.decode());if(payload.method!=='BZR'||payload.publication?.fixture||payload.publication?.reviewOnly||payload.publication?.customerPublishable!==true)return new Response(null,{status:422});return await verifyBaziPublication(payload.publication,{...env,BAZI_BROWSER_FIT_CODE:P9_BAZI_FIT_CODE},puppeteer,{pdfResponse:new URL(request.url).pathname==='/pdf',expectedHtmlDigest:payload.expectedHtmlDigest,includePdf:payload.includePdf===true});}catch{return Response.json({ok:false,code:'BZR_RENDER_REJECTED'},{status:422});}
+ }};
+diff --git a/functions/account/bazi-pdf-delivery.js b/functions/account/bazi-pdf-delivery.js
+new file mode 100644
+--- /dev/null
++++ b/functions/account/bazi-pdf-delivery.js
+@@ -0,0 +1,50 @@
++import {openAccountBaziMaterial} from './bazi-account-delivery.js';
++import {createCustomerArtifactStore} from '../report-delivery/customer-artifact-store.js';
++import {personIdentity,loadCanonicalPersonSubject} from './canonical-person-store.js';
++import {commerceEnvironment} from '../commerce/commerce-environment.js';
++export const BAZI_PDF_DERIVATIVE_VERSION='BZR-PRIVATE-PDF-DERIVATIVE-1';
++const fail=(code,status=409)=>{throw Object.assign(Error(code),{code,status});};
++const hash=async b=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',b)),v=>v.toString(16).padStart(2,'0')).join('');
++async function authorizeSource(context,binding,artifact){
++ const owner=personIdentity(context).userId;
++ if(!binding||binding.ownerAccountId!==owner||binding.reportId!==artifact.reportArtifactId||binding.productId!=='COM-REPORT-BAZI-FULL'||artifact.customerId!==owner||artifact.methodCode!=='BZR'||artifact.productCode!==binding.productId)fail('REPORT_UNAVAILABLE',404);
++ await loadCanonicalPersonSubject(context.env,owner,artifact.personId);
++ const right=await context.env.RUNTIME_DB.prepare("SELECT e.entitlement_id FROM commerce_purchases p JOIN digital_entitlements e ON e.purchase_id=p.purchase_id JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=p.checkout_attempt_id WHERE p.purchase_id=? AND p.customer_id=? AND p.product_id=? AND p.purchase_state='purchased' AND e.entitlement_id=? AND e.customer_id=p.customer_id AND e.product_id=p.product_id AND e.entitlement_status='active' AND (e.expires_at IS NULL OR e.expires_at>?) AND o.customer_id=p.customer_id AND o.order_state='FULFILLED' AND o.review_required=0 AND o.environment=?").bind(binding.purchaseId,owner,binding.productId,artifact.entitlementId,new Date().toISOString(),commerceEnvironment(context.env)).first();
++ if(!right)fail('REPORT_UNAVAILABLE',404);
++}
++async function repairFromFrozenPublication(context,artifact){
++ if(!context.env.METHOD_REPORT_RENDERER?.fetch)fail('REPORT_PDF_RENDERER_UNAVAILABLE',503);
++ const response=await context.env.METHOD_REPORT_RENDERER.fetch(new Request('https://method-report-renderer.internal/pdf',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({method:'BZR',publication:artifact.publicationIR,expectedHtmlDigest:artifact.htmlSnapshotOrRenderState.outputDigest})}));
++ if(!response.ok||!response.headers.get('content-type')?.startsWith('application/pdf')||response.headers.get('x-phios-html-digest')!==artifact.htmlSnapshotOrRenderState.outputDigest||response.headers.get('x-phios-publication-digest')!==artifact.publicationIR.digest)fail('REPORT_PDF_RENDER_VERIFICATION_REQUIRED',503);
++ const reader=response.body?.getReader();if(!reader)fail('REPORT_PDF_RENDER_FAILED',503);const chunks=[];let size=0;
++ for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>128*1024*1024){await reader.cancel();fail('REPORT_PDF_SIZE_INVALID',503);}chunks.push(value);}
++ const bytes=new Uint8Array(size);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}return bytes;
++}
++// Called only by the existing generation/recovery owner, never by a download.
++// A successful first render supplies its original bytes; no second render occurs.
++export async function persistAccountBaziPdf(context,{binding,artifact,pdfBytes,verification}={}){
++ if(!artifact||!binding)fail('REPORT_PDF_MATERIAL_REQUIRED');await authorizeSource(context,binding,artifact);const store=await createCustomerArtifactStore(context.env,binding);
++ const result=await store.pdfDerivative({artifact,version:BAZI_PDF_DERIVATIVE_VERSION,allowCreate:true,authorize:()=>authorizeSource(context,binding,artifact),render:async()=>{
++  if(!pdfBytes)return repairFromFrozenPublication(context,artifact);
++  if(verification?.outputDigest!==artifact.htmlSnapshotOrRenderState.outputDigest||verification.publicationDigest!==artifact.publicationIR.digest||verification.pdfDerivative?.pages!==48||verification.pdfDerivative.bytes!==pdfBytes.length||verification.pdfDerivative.outputDigest!==await hash(pdfBytes))fail('REPORT_PDF_SOURCE_BINDING_INVALID');
++  return pdfBytes;
++ }});
++ return {persisted:true,outputDigest:result.outputDigest,bytes:result.bytes.length,artifactDigest:artifact.artifactDigest,sourceHtmlDigest:artifact.htmlSnapshotOrRenderState.outputDigest,publicationDigest:artifact.publicationIR.digest,derivativeVersion:BAZI_PDF_DERIVATIVE_VERSION,optimization:'NONE_UNOPTIMIZED_VERIFIED_RENDER',cacheHit:result.cacheHit};
++}
++export async function hasAccountBaziPdf(context,material){
++ if(!material.artifact||!material.candidate.paidReportBinding)return false;
++ const store=await createCustomerArtifactStore(context.env,material.candidate.paidReportBinding);
++ return store.hasPdfDerivative({artifact:material.artifact,version:material.pdfRef?.derivativeVersion||BAZI_PDF_DERIVATIVE_VERSION,outputDigest:material.pdfRef?.outputDigest});
++}
++export async function downloadAccountBaziPdf(context,reportId){
++ const material=await openAccountBaziMaterial(context,reportId),artifact=material.artifact,binding=material.candidate.paidReportBinding;
++ if(!artifact||!binding)fail('REPORT_PDF_MATERIAL_REQUIRED');
++ const store=await createCustomerArtifactStore(context.env,binding);
++ // Intentionally no renderer callback: missing/corrupt issued files fail safely.
++ const result=await store.pdfDerivative({artifact,version:material.pdfRef?.derivativeVersion||BAZI_PDF_DERIVATIVE_VERSION,authorize:()=>authorizeSource(context,binding,artifact)});
++ if(artifact.pdfPolicy==='PERSISTED_PRIVATE_PDF_REQUIRED'&&!material.pdfRef)fail('REPORT_PDF_RELEASE_RECEIPT_REQUIRED');
++ if(material.pdfRef&&(material.pdfRef.outputDigest!==result.outputDigest||material.pdfRef.bytes!==result.bytes.length||material.pdfRef.artifactDigest!==artifact.artifactDigest||material.pdfRef.publicationDigest!==artifact.publicationIR.digest||material.pdfRef.sourceHtmlDigest!==artifact.htmlSnapshotOrRenderState.outputDigest))fail('REPORT_PDF_IMMUTABLE_RECEIPT_MISMATCH');
++ return new Response(result.bytes,{headers:{'Content-Type':'application/pdf','Content-Disposition':`attachment; filename="PHI-OS-BaZi-${reportId.replace(/[^A-Za-z0-9_-]/g,'')}.pdf"`,'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Robots-Tag':'noindex, nofollow','X-PHIOS-Output-Digest':result.outputDigest}});
++}
++
++export async function baziPdfRendererReady(context){try{const response=await context.env.METHOD_REPORT_RENDERER?.fetch(new Request('https://method-report-renderer.internal/health'));if(!response?.ok)return false;const receipt=await response.json();return receipt.ok===true&&receipt.pdfTransferProtocol==='BZR-PDF-MULTIPART-1';}catch{return false;}}
+diff --git a/functions/report-delivery/paid-report-production-capabilities.js b/functions/report-delivery/paid-report-production-capabilities.js
+new file mode 100644
+--- /dev/null
++++ b/functions/report-delivery/paid-report-production-capabilities.js
+@@ -0,0 +1,32 @@
++import profiles from '../../content/reports/method-publication-profiles-v1.json';
++import {PAID_REPORT_METHODS} from './paid-report-method-registry.js';
++import {reportEconomics} from '../pws/commercial/commerce-economics-policy.js';
++
++// References to existing native owners, not a second report or product registry.
++const nativeOwners=Object.freeze({
++ AST:{calculation:'functions/single-method-reading/astrology-production-adapter.js',publication:'scripts/build-ast-vfr-r1r5.mjs',input:['ACCOUNT_OWNED_SUBJECT','EXPLICIT_CONSENT','VERIFIED_BIRTH_DATE_TIME_PLACE']},
++ BZR:{calculation:'functions/report-delivery/bazi-customer-native-inputs.js',publication:'functions/personal-reading/deep-manuscript/bazi-deep-manuscript-publication.js',input:['ACCOUNT_OWNED_SUBJECT','EXPLICIT_CONSENT','VERIFIED_BIRTH_DATE_TIME_PLACE','SUPPORTED_CALENDAR_AND_SOLAR_TERMS']},
++ ZWR:{calculation:'functions/personal-reading/narrative/ziwei-publication-adapter.js',publication:'functions/report-delivery/ziwei-vfr-profile-policy.js',input:['ACCOUNT_OWNED_SUBJECT','EXPLICIT_CONSENT','VERIFIED_BIRTH_DATE_TIME_PLACE','REQUIRED_CALCULATION_SEX']},
++ NUM:{calculation:'functions/personal-reading/narrative/numerology-publication-adapter.js',publication:'functions/personal-reading/narrative/numerology-publication-system.js',input:['ACCOUNT_OWNED_SUBJECT','EXPLICIT_CONSENT','BIRTH_DATE','OPTIONAL_ORIGINAL_NAME_WITH_DECLARED_RULES']},
++ HD:{calculation:'functions/external-profile/external-profile-confirmation.js',publication:'functions/external-profile/human-design-r3-professional-runtime.js',input:['ACCOUNT_OWNED_SUBJECT','AUTHORISED_EXTERNAL_CHART','USER_CONFIRMED_CHART','SOURCE_BINDING','ADVANCED_FIELDS_REQUIRE_ADMITTED_DATA']}
++});
++const lifecycle=['readiness','prepare','generate','validate','compile','render','release','reconcile','verifyDelivered'];
++export function fiveMethodReportCapability(productId,env={},registry=PAID_REPORT_METHODS){
++ let economics;try{economics=reportEconomics(productId);}catch{return null;}
++ const methodId=economics.methodId,native=nativeOwners[methodId];
++ if(!native||economics.productId!==productId)return null;
++ const adapter=registry[methodId],profile=profiles.profiles.find(p=>p.methodId===methodId);
++ const blockedReason=!adapter?'SHARED_ADAPTER_ABSENT':adapter.p8Admitted!==true?'METHOD_ADMISSION_CLOSED':lifecycle.some(k=>typeof adapter[k]!=='function')?'METHOD_LIFECYCLE_INCOMPLETE':env.PHIOS_SHARED_PAID_REPORT_ENABLED!=='true'?'SHARED_REPORT_SETUP_DISABLED':null;
++ return {schemaVersion:'FIVE_METHOD_REPORT_CAPABILITY_V1',methodId,productId,
++  publication:{version:profile?.version||null,profileVersion:profile?.profileVersion||null,status:profile?.status||'UNRESOLVED',unresolvedFieldCount:profile?.unresolvedFields?.length??null,owner:'content/reports/method-publication-profiles-v1.json'},
++  nativeOwners:{calculation:native.calculation,publication:native.publication},eligibleInputRequirements:[...native.input],
++  sharedAdapterPresent:!!adapter,admitted:adapter?.p8Admitted===true,setupAvailable:blockedReason===null,blockedReason,
++  supportedPresentations:[...(adapter?.supportedPresentations||[])],
++  checkoutDestination:blockedReason===null?'/account/?product='+encodeURIComponent(productId):null,accountDestination:'/account/',
++  serverReadinessRequired:true,grantsEntitlement:false};
++}
++export function requireFiveMethodReportSetup(productId,env,registry=PAID_REPORT_METHODS){
++ const capability=fiveMethodReportCapability(productId,env,registry);
++ if(capability&&!capability.setupAvailable)throw Object.assign(Error(capability.blockedReason),{code:capability.blockedReason,status:409});
++ return capability;
++}

@@ -1,0 +1,224 @@
+{
+  "policyId": "CONTINUITY_POLICY_DECISION_R6",
+  "revision": "R6.2-CANDIDATE",
+  "state": "REVISED_POLICY_CANDIDATE_NOT_FORMALLY_ADMITTED",
+  "lineage": {
+    "previousProposalPath": "C:/phios/content/production-closure/live-customer-commercial-convergence/subject-bft-r6/CONTINUITY-POLICY-DECISION.json",
+    "previousProposalSha256": "9814524f8b1d991850cc6a8576316e74e3389628b32481dace5e40f5962e29d8",
+    "previousDecisionRecord": "CONTINUITY_POLICY_DECISION_R6:R6.1:9814524f8b1d",
+    "relation": "REVISE_UNDECIDED_POLICY_ITEMS_ONLY",
+    "sameHistoryOwner": true
+  },
+  "runtimeOwners": [
+    "functions/report-context/report-context-store.js",
+    "functions/pws/registry/version-store.js"
+  ],
+  "newHistoryOwner": false,
+  "implementedByThisRevision": false,
+  "productionStorageAuthorized": false,
+  "existingSnapshot": {
+    "state": "PRESERVE_VERIFIED_R5_R6_LOCAL_ENCRYPTED_SNAPSHOT",
+    "localRetention": "Existing explicit 7 or 30 days; no extension from reopen or this decision",
+    "migration": "NONE",
+    "newCopyOrRewritePerformed": false
+  },
+  "A_dataClassificationAndRetention": {
+    "state": "STRUCTURAL_POLICY_DEFINED_RETENTION_SCHEDULE_REQUIRES_NAMED_DECISION",
+    "commonRule": "Before any production write, require dataClass, Subject, Account custodian, purpose, jurisdiction, source/version refs, approvedRetentionEndAt, approving role/person, lawful-basis/contract reference and deletion/hold policy version. Null or unresolved fields block storage; no permanent default.",
+    "classes": [
+      {
+        "type": "ORIGINAL_FINANCIAL_SOURCE",
+        "retain": "Only authorized source scope and exact immutable source refs/digests; private payload only if separately permitted.",
+        "basis": "Verified source permission, purpose, applicable jurisdiction and client contract.",
+        "approvalResponsibility": [
+          "Financial Data Owner",
+          "Privacy/Legal reviewer",
+          "Subject custodian"
+        ],
+        "term": "Explicit approvedRetentionEndAt required; no duration invented."
+      },
+      {
+        "type": "READING",
+        "retain": "Authorized source versions, applicable rule/output version, locale and review boundary; source facts and derived output remain distinct.",
+        "basis": "Permitted derived use and any independently approved delivery record class.",
+        "approvalResponsibility": [
+          "Reading Owner",
+          "Financial Data Owner",
+          "Privacy/Legal reviewer"
+        ],
+        "term": "Explicit approvedRetentionEndAt; no automatic extension beyond permitted source use; conflicting source/delivery retention requires review."
+      },
+      {
+        "type": "NAVIGATION",
+        "retain": "Source context, candidate options, separately recorded decision/approval/execution/outcome evidence; never fabricate missing stages.",
+        "basis": "Explicit processing/persistence purpose and decision-authority scope.",
+        "approvalResponsibility": [
+          "Navigation Owner",
+          "Subject custodian",
+          "Privacy/Legal reviewer"
+        ],
+        "term": "Explicit approvedRetentionEndAt; reopen does not reset expiry."
+      },
+      {
+        "type": "ACTION",
+        "retain": "Only actual independently authorized action/approval/execution/outcome records, if such a separate system exists. Current local candidate options do not create them.",
+        "basis": "Actual action responsibility, applicable contract and permitted record keeping.",
+        "approvalResponsibility": [
+          "Decision/Action Owner",
+          "Relevant Professional/Legal reviewer"
+        ],
+        "term": "Explicit class-specific approvedRetentionEndAt before any formal record."
+      },
+      {
+        "type": "AUDIT",
+        "retain": "Minimal actor/Subject/resource/version/event/time/digest references; do not copy full financial payload under an audit label.",
+        "basis": "Approved audit purpose and minimization/retention schedule.",
+        "approvalResponsibility": [
+          "Audit/Continuity Owner",
+          "Privacy/Legal reviewer",
+          "Security Owner"
+        ],
+        "term": "Separate explicit approvedRetentionEndAt; not perpetual by default."
+      }
+    ],
+    "pending": [
+      "EXT-A-CUSTODY",
+      "EXT-A-RETENTION-SCHEDULE"
+    ]
+  },
+  "B_revocation": {
+    "state": "POLICY_RULE_DEFINED_FORMAL_ARCHIVE_ACCESS_REQUIRES_REVIEW",
+    "rules": [
+      "Check current Account, Subject, purpose, resource scope, effective period and revocation before every new read/save/reopen/replay.",
+      "Revoked or expired authority denies new access immediately; a previously saved snapshot or local-contract acceptance is not an access grant.",
+      "Lawful historical retention is separate from the revoked person’s private access. Do not automatically delete retained delivery/audit records or automatically grant archive access.",
+      "Consultant departure ends access under that mandate. Any subsequent custodian/archive access needs a fresh independently approved basis.",
+      "Original product/report/entitlement behavior is not modified by this policy."
+    ],
+    "pending": [
+      "EXT-B-ARCHIVE-ACCESS"
+    ]
+  },
+  "C_deletion": {
+    "state": "CANDIDATE_WORKFLOW_DEFINED_NO_EXECUTOR_AUTHORIZED",
+    "eligibility": [
+      "Authenticated authorized deletion request or approved retention expiry",
+      "Exact data-class/record/version/ref scope and Subject/custodian matching",
+      "Verified retention/contract/legal-hold assessment; unknown assessment blocks formal storage/deletion, not a claim of indefinite rights",
+      "Named approver(s) and authorized executor with auditable ticket",
+      "Reviewed dependent references, deliveries, indexes, encrypted objects, backups and keys"
+    ],
+    "workflow": [
+      "REQUESTED",
+      "ELIGIBILITY_REVIEW",
+      "APPROVED",
+      "EXECUTING",
+      "VERIFIED_DELETED or PARTIAL_FAILED"
+    ],
+    "controls": [
+      "Deny normal reopen at expiry; do not mark physical deletion complete until authorized object/reference/backup scope is verified.",
+      "Where a documented hold applies, use separately authorized restricted custody, mandatory reviewAt and a defined hold exit condition; no invisible perpetual hold.",
+      "On partial failure retain minimal tombstone/audit, exact failed items and retry identity; never resurrect stale content or silently report success.",
+      "Do not treat key rotation or destruction as verified erasure without an approved key/backup scope.",
+      "No production cleanup, migration, backup deletion, grant revocation or data deletion runs in R6.2."
+    ],
+    "pending": [
+      "EXT-C-DELETION-HOLD-BACKUP"
+    ]
+  },
+  "D_idempotencyAndConcurrency": {
+    "state": "CANDIDATE_ATOMICITY_RULES_DEFINED_CROSS_PROCESS_NOT_VERIFIED",
+    "rules": [
+      "Preserve existing R5 request identities and digests; do not retroactively change historical idempotency keys.",
+      "For any future formal contract, bind idempotency to Account/Subject/purpose/resource/request ID and the approved input/source/retention/version tuple. The exact canonical digest fields require versioned Owner approval.",
+      "An exact authorized COMPLETE request may replay its existing result; a reused key with different content is a conflict. Revocation is rechecked before returning a replay.",
+      "Use a durable unique reservation and expected-version compare-and-set/transaction in the existing Owner. No last-writer-wins or a second history store.",
+      "PENDING is not COMPLETE. Cross-process retries require bounded reservation ownership/expiry and an audited reconciliation procedure; never take over blindly."
+    ],
+    "existingEvidence": "R5 duplicate and same-request concurrent local saves passed; this does not prove distributed crash recovery.",
+    "pending": [
+      "TECH-D-ATOMIC-RESERVATION"
+    ]
+  },
+  "E_recovery": {
+    "state": "RESTART_SUPPORTED_INTERRUPTION_AND_KEY_RECOVERY_REQUIRE_OWNER_VERIFICATION",
+    "rules": [
+      "Preserve verified completed R5 encrypted snapshots; restart requires fresh login, current authority and exact integrity/version checks.",
+      "After interrupted save, reconcile native reservation/reference, encrypted object, checksum/AAD, Subject/source/version, retention and authorization before any approved completion.",
+      "Missing/corrupt object, inconsistent version or unknown key is a blocked recovery case; no fabricated plaintext, fallback source or synthetic COMPLETE.",
+      "A changed current source may leave the pinned snapshot historical-only; it must not silently become current evidence or trigger recomputation in place.",
+      "Key loss/rotation recovery uses a separately approved secure key/backup procedure and audit. Do not print secrets or replace the key by guessing."
+    ],
+    "pending": [
+      "TECH-E-RECOVERY-AND-KEYS"
+    ]
+  },
+  "F_versionMigration": {
+    "state": "BACKWARD_COMPATIBILITY_RULES_DEFINED_NO_MIGRATION_AUTHORIZED",
+    "rules": [
+      "Keep old Case IDs, source refs, ciphertext, checksums, report/order identities and historical versions immutable. No in-place migration from local acceptance.",
+      "Preserve the exact existing R5 reader; old snapshots remain old snapshots, not formally R6-admitted records.",
+      "Before future formal storage, approve source/Subject/grant/formula/Reading/output/locale version pins and an explicit from-version/to-version map. Current R5 formalGrantVersionPinned remains false.",
+      "Require an authorized migration plan, dry-run comparison, versioned read compatibility and per-record verification; missing old fields are explicit Unknown, not fabricated financial data.",
+      "Rollback selects the prior verified immutable version/reader. Do not overwrite original records, reinterpret old reports or erase an audit trail.",
+      "No schema migration or data transfer is executed here."
+    ],
+    "pending": [
+      "TECH-F-VERSION-PINS-MIGRATION"
+    ]
+  },
+  "namedOutstandingDecisions": [
+    {
+      "id": "EXT-A-CUSTODY",
+      "responsibleRole": "Subject/Account-PWS Owner + Business Data Owner",
+      "assignedPerson": null,
+      "requiredEvidence": "Named custodian/controller responsibility, permitted delegation and lawful source ownership; approve whether any shared enterprise custody is allowed.",
+      "status": "DECISION_REQUIRED"
+    },
+    {
+      "id": "EXT-A-RETENTION-SCHEDULE",
+      "responsibleRole": "Privacy/Legal reviewer + Financial/Reading/Navigation Data Owners",
+      "assignedPerson": null,
+      "requiredEvidence": "Actual jurisdiction, data/record class and contract/lawful purpose; signed numeric maximum/end dates and trigger/reset rules per formal class. No legal retention period is assumed.",
+      "status": "EXTERNAL_REVIEW_REQUIRED"
+    },
+    {
+      "id": "EXT-B-ARCHIVE-ACCESS",
+      "responsibleRole": "Privacy/Legal reviewer + Continuity Owner",
+      "assignedPerson": null,
+      "requiredEvidence": "Revocation vs lawful retention and the independently authorized archive-access role; no residual consultant rights.",
+      "status": "EXTERNAL_REVIEW_REQUIRED"
+    },
+    {
+      "id": "EXT-C-DELETION-HOLD-BACKUP",
+      "responsibleRole": "Privacy/Legal + Storage/Security Owners",
+      "assignedPerson": null,
+      "requiredEvidence": "Deletion eligibility, approval/hold limits, backup/key scope, failure/retry procedure and minimal deletion audit.",
+      "status": "EXTERNAL_REVIEW_REQUIRED"
+    },
+    {
+      "id": "TECH-D-ATOMIC-RESERVATION",
+      "responsibleRole": "PWS/Storage Owner",
+      "assignedPerson": null,
+      "requiredEvidence": "Reviewed canonical idempotency/version tuple and durable atomic reservation/CAS design, with cross-process conflict/interruption evidence.",
+      "status": "TECHNICAL_OWNER_DECISION_REQUIRED"
+    },
+    {
+      "id": "TECH-E-RECOVERY-AND-KEYS",
+      "responsibleRole": "Continuity/Storage/Security Owner",
+      "assignedPerson": null,
+      "requiredEvidence": "Approved PENDING/orphan/corruption/key-loss runbook, recovery approver and environment-specific verification; restart PASS alone insufficient.",
+      "status": "TECHNICAL_OWNER_DECISION_REQUIRED"
+    },
+    {
+      "id": "TECH-F-VERSION-PINS-MIGRATION",
+      "responsibleRole": "Continuity + Financial/Reading/Navigation Source Owners",
+      "assignedPerson": null,
+      "requiredEvidence": "Exact immutable pin schema, old/new compatibility, migration and rollback approval with verification evidence.",
+      "status": "TECHNICAL_OWNER_DECISION_REQUIRED"
+    }
+  ],
+  "policyAdmitted": false,
+  "permanentRetentionAllowed": false,
+  "productionDeletionAllowed": false
+}

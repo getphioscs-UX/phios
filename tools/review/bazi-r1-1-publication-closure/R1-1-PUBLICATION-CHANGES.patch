@@ -1,0 +1,448 @@
+diff --git a/assets/customer-ui/js/personal-products/bazi-deep-diagrams.js b/assets/customer-ui/js/personal-products/bazi-deep-diagrams.js
+index 38d8f6cc..1a09e6e8 100644
+--- a/assets/customer-ui/js/personal-products/bazi-deep-diagrams.js
++++ b/assets/customer-ui/js/personal-products/bazi-deep-diagrams.js
+@@ -5,14 +5,15 @@ const text=(x,y,t,width=24,cls='')=>`<text x="${x}" y="${y}" text-anchor="middle
+ export function renderBaziDiagram(d,mode='BILINGUAL',compact=false){
+  if(BAZI_DIAGRAM_FIDELITY_V1[d.id]?.grammar!==d.visualGrammarId)throw Error('UNSUPPORTED_PRIMARY_DIAGRAM_GRAMMAR');
+  const zh=mode!=='EN',en=mode!=='ZH_HANS',label=n=>mode==='EN'?n.en:mode==='ZH_HANS'?n.zh:n.zh+' / '+n.en;
+- let content='',height=470;const g=d.graph;
+- const value=n=>mode==='EN'&&n.id==='relations'?'Shen-Zi-Chen combination / Yin-Shen clash':mode==='EN'?String(n.value).replaceAll('伤官生财','Hurting Officer producing Wealth').replaceAll('财的兑现条件','Realization conditions').replaceAll('印比承载','Resource / Peer support').replaceAll('印比支持','Resource / Peer support').replaceAll('三合','combination').replaceAll('冲','clash').replaceAll('土 / 金','Earth / Metal'):n.value;
++ let content='',height=470;const g=d.graph,revised=d.qualityRevision==='BZR-R1.1';
++ const value=n=>mode==='EN'&&n.id==='relations'&&!revised?'Shen-Zi-Chen combination / Yin-Shen clash':mode==='EN'?String(n.value).replaceAll('伤官生财','Hurting Officer producing Wealth').replaceAll('财的兑现条件','Realization conditions').replaceAll('印比承载','Resource / Peer support').replaceAll('印比支持','Resource / Peer support').replaceAll('三合','combination').replaceAll('冲','clash').replaceAll('土 / 金','Earth / Metal'):n.value;
+  const box=(n,x,y,w=175,h=100)=>{const widthEn=d.id==='D04'&&n.id==='month'?14:Math.floor(w/10),widthZh=Math.floor(w/20),titleLines=mode==='BILINGUAL'?[...wrap(n.zh,widthZh),...wrap(n.en,widthEn)]:wrap(label(n),mode==='EN'?widthEn:widthZh),valueLines=wrap(value(n),Math.floor(w/(mode==='EN'?10:18)));h=Math.max(h,26*(titleLines.length+valueLines.length)+16);const top=y-h/2;return `<g data-node-id="${esc(n.id)}"><rect x="${x-w/2}" y="${top}" width="${w}" height="${h}" rx="12" class="bdm-node"/>${titleLines.map((t,i)=>text(x,top+24+i*26,t,100,'bdm-diagram-label')).join('')}${valueLines.map((t,i)=>text(x,top+24+(titleLines.length+i)*26,t,100,'bdm-node-value')).join('')}</g>`;};
+- const edge=(e,a,b)=>`<g data-edge-from="${esc(e.from)}" data-edge-to="${esc(e.to)}" data-edge-type="${esc(e.type)}"><path d="M ${a[0]} ${a[1]} L ${b[0]} ${b[1]}" class="bdm-edge ${e.type==='冲'?'bdm-edge-clash':''}" marker-end="url(#arrow-${d.id})"/></g>`;
+- const legend=(items,y)=>items.map((v,i)=>text(360,y+i*(mode==='BILINGUAL'?47:28),label(v),mode==='BILINGUAL'?68:75,'bdm-legend')).join('');
++ const edge=(e,a,b)=>`<g data-edge-from="${esc(e.from)}" data-edge-to="${esc(e.to)}" data-edge-type="${esc(e.type)}"><path d="${revised&&d.id==='D05'&&g.edges.length>1?'M '+a.join(' ')+' Q '+((a[0]+b[0])/2+(g.edges.indexOf(e)%2?18:-18))+' '+((a[1]+b[1])/2+(g.edges.indexOf(e)%2?18:-18))+' '+b.join(' '):'M '+a.join(' ')+' L '+b.join(' ')}" class="bdm-edge ${e.type==='冲'?'bdm-edge-clash':''}" marker-end="url(#arrow-${d.id})"/></g>`;
++ const legend=(items,y)=>{if(!revised)return items.map((v,i)=>text(360,y+i*(mode==='BILINGUAL'?47:28),label(v),mode==='BILINGUAL'?68:75,'bdm-legend')).join('');let cursor=y;return items.map(v=>{const lines=[...(zh?[[v.zh,32]]:[]),...(en?[[v.en,64]]:[])];return lines.map(([value,width])=>{const out=text(360,cursor,value,width,'bdm-legend');cursor+=wrap(value,width).length*26+6;return out;}).join('');}).join('');};
+  if(d.id==='D01'){
+   height=700;content=d.nodes.map((n,i)=>{const x=15+i*175;const title={zh:n.label.split(' / ')[0],en:n.label.split(' / ')[1]};return `<g data-node-id="pillar-${i}"><rect x="${x}" y="15" width="160" height="670" rx="15" class="bdm-node"/>${text(x+80,48,label(title),20,'bdm-diagram-label')}${text(x+80,160,n.value[0],10,'bdm-pillar')}${text(x+80,265,n.value[1],10,'bdm-pillar')}${text(x+80,345,mode==='EN'?i===2?'Day Master':({'比肩':'Peer','劫财':'Rob Wealth','食神':'Eating God','伤官':'Hurting Officer','偏财':'Indirect Wealth','正财':'Direct Wealth','七杀':'Seven Killings','正官':'Direct Officer','偏印':'Indirect Resource','正印':'Direct Resource'}[n.stemGod]||'Unknown'):n.stemGod,20,'bdm-diagram-label')}${n.hiddenFacts.map((f,j)=>text(x+80,400+j*90,f.token+' '+(mode==='EN'?f.en:mode==='ZH_HANS'?f.tenGod:f.tenGod+' / '+f.en),14,'bdm-hidden-stem')).join('')}</g>`;}).join('');
+  }else if(d.id==='D02'){
++  if(revised)height=620;
+   const max=Math.max(1,...d.nodes.map(n=>n.value));content=d.nodes.map((n,i)=>{const y=35+i*65,l=n.label.split(' / ');return `<g data-node-id="element-${i}">${text(120,y+16,label({zh:l[0],en:l[1]}),22)}<rect x="250" y="${y}" width="350" height="23" class="bdm-track"/><rect x="250" y="${y}" width="${350*n.value/max}" height="23" class="bdm-bar"/>${text(643,y+18,n.value)}</g>`;}).join('')+legend(g.legend,400);
+  }else if(d.id==='D03'){
+   height=680;const total=d.nodes.reduce((s,n)=>s+n.value,0),colors=['#42655a','#9f8560','#638998','#b29253','#758061','#a57662','#8e6b79','#7b8296','#8a9474','#b7a77e'];let angle=-Math.PI/2;content=`<g data-feature="ring">`;d.nodes.forEach((n,i)=>{if(!n.value)return;const next=angle+Math.PI*2*n.value/Math.max(1,total),a=[210+125*Math.cos(angle),230+125*Math.sin(angle)],b=[210+125*Math.cos(next),230+125*Math.sin(next)];content+=`<path d="M ${a} A 125 125 0 ${next-angle>Math.PI?1:0} 1 ${b}" fill="none" stroke="${colors[i]}" stroke-width="46"/>`;angle=next;});content+=text(210,230,total)+text(210,260,mode==='EN'?'Stem records':mode==='ZH_HANS'?'十神记录':'十神 / Records')+'</g>';content+=d.nodes.map((n,i)=>{const y=32+i*60,l=n.label.split(' / ');return `<g data-node-id="god-${i}"><rect x="395" y="${y-13}" width="12" height="12" fill="${colors[i]}"/>${text(535,y,label({zh:l[0],en:l[1]}),35,'bdm-diagram-label')}${text(535,y+29,(zh?'透 '+n.visible+' · 藏 '+n.hidden:'Visible '+n.visible+' · Hidden '+n.hidden),35,'bdm-legend')}</g>`;}).join('');
+@@ -26,7 +27,7 @@ export function renderBaziDiagram(d,mode='BILINGUAL',compact=false){
+   else if(d.id==='D05'){g.nodes.forEach((n,i)=>points[n.id]=[[165,75],[550,75],[165,240],[550,240]][i]);}
+   else if(d.id==='D11'){g.nodes.slice(0,3).forEach((n,i)=>points[n.id]=[120+i*240,85]);points.resource=[360,265];points.shared=[360,435];}
+   else{points.day=[360,300];points.month=[120,90];points.peer=[600,90];points.resource=[120,300];points.support=[600,300];points.output=[360,90];}
+-  content=g.edges.map(e=>{const a=points[e.from],b=points[e.to],dx=b[0]-a[0],dy=b[1]-a[1],len=Math.hypot(dx,dy),offset=70;return edge(e,[a[0]+dx/len*offset,a[1]+dy/len*offset],[b[0]-dx/len*offset,b[1]-dy/len*offset]);}).join('')+g.nodes.map(n=>box(n,...points[n.id],d.id==='D15'?172:195,100)).join('');if(d.id==='D05'){content+=g.edges.map((e,i)=>{const a=points[e.from],b=points[e.to];return text((a[0]+b[0])/2+(i===1?-85:i===2?85:0),(a[1]+b[1])/2-12+(i===1?-17:i===2?17:0),label(e),22,'bdm-legend');}).join('')+legend(g.legend,350);}
++  content=g.edges.map(e=>{const a=points[e.from],b=points[e.to],dx=b[0]-a[0],dy=b[1]-a[1],len=Math.hypot(dx,dy),offset=70;return edge(e,[a[0]+dx/len*offset,a[1]+dy/len*offset],[b[0]-dx/len*offset,b[1]-dy/len*offset]);}).join('')+g.nodes.map(n=>box(n,...points[n.id],d.id==='D15'?172:195,100)).join('');if(d.id==='D05'){if(revised&&g.edges.length>1)height=380+g.legend.reduce((sum,v)=>sum+(zh?wrap(v.zh,32).length*26+6:0)+(en?wrap(v.en,64).length*26+6:0),0);content+=g.edges.map((e,i)=>{const a=points[e.from],b=points[e.to];return revised&&g.edges.length>1?'':text((a[0]+b[0])/2+(i===1?-85:i===2?85:0),(a[1]+b[1])/2-12+(i===1?-17:i===2?17:0),revised&&g.edges.length>1?String(i+1):label(e),22,'bdm-legend');}).join('')+legend(revised&&g.edges.length>1?g.legend.map((v,i)=>({...v,zh:(i+1)+'. '+v.zh,en:(i+1)+'. '+v.en})):g.legend,350);}
+ 
+  }else if(d.id==='D10'){
+   height=500;content=`<rect x="25" y="22" width="670" height="450" rx="30" class="bdm-enclosure" data-feature="enclosure"/>${text(360,59,label(g.layers[0]),60)}`;const points={day:[360,160]};g.nodes.slice(1).forEach((n,i)=>points[n.id]=[145+i*215,350]);content+=g.edges.map(e=>edge(e,[360,210],[points[e.to][0],300])).join('')+g.nodes.map(n=>box(n,...points[n.id],195,105)).join('');
+diff --git a/assets/customer-ui/js/personal-products/bazi-deep-manuscript-pages.js b/assets/customer-ui/js/personal-products/bazi-deep-manuscript-pages.js
+index d3728c55..7f460c4e 100644
+--- a/assets/customer-ui/js/personal-products/bazi-deep-manuscript-pages.js
++++ b/assets/customer-ui/js/personal-products/bazi-deep-manuscript-pages.js
+@@ -23,9 +23,14 @@ function prose(content,locales,sectionId,manuscriptDigest){
+  }).join('');
+ }
+ export function renderBaziDeepManuscript(ir){
+- if(ir.method!=='BAZI'||ir.publication?.pages?.length!==48||ir.technical?.diagrams?.length!==15)throw Error('BDM_RESOLVED_IR_REQUIRED');
++ const revised=ir.qualityRevision==='BZR-R1.1';
++ if(ir.method!=='BAZI'||(revised?ir.publication?.pages?.length!==ir.publication?.pageCount:ir.publication?.pages?.length!==48)||ir.technical?.diagrams?.length!==15)throw Error('BDM_RESOLVED_IR_REQUIRED');
++ if(revised&&!ir.reviewOnly&&!ir.publicationIdentity?.approvedCommercialPolicyRef)throw Error('BZR_COMMERCIAL_WATERMARK_ADMISSION_REQUIRED');
+  const mode=ir.presentationMode,locales=layoutProfile(mode).locales;const title=t=>mode==='EN'?esc(t.en):mode==='ZH_HANS'?esc(t.zh):esc(t.zh)+'<small lang="en">'+esc(t.en)+'</small>';
+  const identity={displayName:null,birthDate:null,birthTime:null,timeAccuracy:'UNKNOWN',...ir.identity};
++ const basis=ir.consistency?.timeBasis;
++ const calculationNote=basis?'<p style="font-size:14px;line-height:1.5">出生地 / Place: '+esc(basis.coordinate.latitude)+', '+esc(basis.coordinate.longitude)+' · '+esc(basis.timezone.timezoneId)+'<br>民用 / Civil '+esc(basis.recordedCivilTime.localTime)+' → 真太阳时 / Apparent solar '+esc(basis.trueSolarTime.trueSolarIso.slice(11,19))+'<br>总修正 / Total correction '+Number(basis.trueSolarTime.totalCorrectionMinutes).toFixed(3)+' min</p>':'';
++ const toc=revised?calculationNote+'<nav aria-label="Report contents" style="font-size:14px;line-height:1.5;margin-top:4mm">'+ir.publication.pages.filter(p=>p.role==='SECTION_OPENER').map(p=>'<a href="#bzr-page-'+p.pageNumber+'" style="display:flex;justify-content:space-between;gap:4mm;margin:1mm 0;color:#23364a;text-decoration:none"><span>'+esc(p.title.zh)+'<span lang="en" style="display:block;font:14px/1.4 Georgia,serif">'+esc(p.title.en)+'</span></span><span>'+p.pageNumber+'</span></a>').join('')+'</nav>':'';
+  const pages=ir.publication.pages.map(p=>{
+   let body;
+   if(p.staticAsset){body=`<div class="pub-decoration pub-decoration--single"><img class="pub-page-background" src="${esc(p.staticAsset)}" alt="${esc(p.title.zh)}"></div>`+(p.staticFolioMasks||[]).map(m=>`<span class="bdm-static-folio-mask" data-pagination-owner="BDM_GLOBAL_PAGINATION" style="left:${m.left}%;top:${m.top}%;width:${m.width}%;height:${m.height}%"><b>${String(p.pageNumber).padStart(2,'0')}</b>${m.mode==='PAGE_TOTAL'?'<small>/ '+ir.publication.pageCount+'</small>':''}</span>`).join('')+(p.pageNumber===1?renderReportCoverOverlay({methodId:'BZR',subject:identity,locale:mode==='EN'?'en':mode==='ZH_HANS'?'zh-Hans':'bilingual'}):'');}
+@@ -33,12 +38,13 @@ export function renderBaziDeepManuscript(ir){
+    const diagrams=ir.technical.diagrams.filter(d=>d.id===p.diagramId||p.diagramIds?.includes(d.id));
+    const heading=`<div class="pub-heading"><h2>${title(p.title)}</h2></div>`;
+    const decoration=`<div class="pub-decoration pub-decoration--single"><img class="pub-page-background" src="${esc(p.sectionMasterAsset||p.bodyAsset)}" alt=""></div>`;
+-   const content=p.insightCards?`<div class="bdm-insights">${Array.from({length:3},(_,i)=>`<div><b>0${i+1}</b>${locales.map(l=>{const v=p.insightCards[l][i];return v?`<p lang="${l}" data-source-start="${v.start}" data-source-end="${v.end}" data-source-role="${v.role}">${esc(v.text)}</p>`:'<p data-missing-required="true">'+(mode==='EN'?'Editorial selection pending':'待补齐审阅选段')+'</p>';}).join('')}</div>`).join('')}</div>`:diagrams.length?diagrams.map(d=>renderBaziDiagram(d,mode,diagrams.length===2)).join(''):p.role==='OVERVIEW'?`<div class="bdm-overview"><p>${mode==='EN'?'Natal pillars':mode==='ZH_HANS'?'四柱':'四柱 / Natal pillars'}</p><h3>${ir.technical.diagrams[0].nodes.map(n=>esc(n.value)).join(' · ')}</h3><p>${mode==='EN'?'Day Master':mode==='ZH_HANS'?'日主':'日主 / Day Master'}：${esc(ir.technical.diagrams[3].nodes[0].value)}</p><p>${mode==='EN'?'The following foundation pages distinguish inventory, functional support and natal relations.':mode==='ZH_HANS'?'以下基础页分别呈现四柱藏干、五行十神、日主支持与原局关系。':'以下基础页分别呈现四柱藏干、五行十神、日主支持与原局关系。 / The following pages separate inventory, support and natal relations.'}</p></div>`:prose(p.content,locales,p.sectionId,ir.manuscript.digest);
+-   body=decoration+`<header class="pub-header"><span>P H I O S</span><span>${mode==='EN'?'BaZi':mode==='ZH_HANS'?'八字':'八字 / BaZi'}</span></header>`+heading+`<div class="bdm-content">${content}</div>`;
++   const content=p.insightCards?`<div class="bdm-insights">${Array.from({length:3},(_,i)=>`<div><b>0${i+1}</b>${locales.map(l=>{const v=p.insightCards[l][i];return v?`<p lang="${l}" data-source-start="${v.start}" data-source-end="${v.end}" data-source-role="${v.role}">${esc(v.text)}</p>`:'<p data-missing-required="true">'+(mode==='EN'?'Editorial selection pending':'待补齐审阅选段')+'</p>';}).join('')}</div>`).join('')}</div>`:diagrams.length?diagrams.map(d=>renderBaziDiagram(d,mode,diagrams.length===2)).join(''):p.role==='OVERVIEW'?`<div class="bdm-overview"${revised?' style="margin-top:3mm;padding:6mm"':''}><p>${mode==='EN'?'Natal pillars':mode==='ZH_HANS'?'四柱':'四柱 / Natal pillars'}</p><h3>${ir.technical.diagrams[0].nodes.map(n=>esc(n.value)).join(' · ')}</h3><p>${mode==='EN'?'Day Master':mode==='ZH_HANS'?'日主':'日主 / Day Master'}：${esc(revised?ir.identity.dayMaster:ir.technical.diagrams[3].nodes[0].value)}</p><p>${mode==='EN'?'The following foundation pages distinguish inventory, functional support and natal relations.':mode==='ZH_HANS'?'以下基础页分别呈现四柱藏干、五行十神、日主支持与原局关系。':'以下基础页分别呈现四柱藏干、五行十神、日主支持与原局关系。 / The following pages separate inventory, support and natal relations.'}</p></div>`:prose(p.content,locales,p.sectionId,ir.manuscript.digest);
++   body=decoration+`<header class="pub-header"><span>P H I O S</span><span>${mode==='EN'?'BaZi':mode==='ZH_HANS'?'八字':'八字 / BaZi'}</span></header>`+heading+`<div class="bdm-content">${content}${p.role==='OVERVIEW'?toc:''}</div>`;
+   }
+-  return `<section class="pub-page bdm-page${p.staticAsset?' bdm-static':''}" data-page-number="${p.pageNumber}" data-page-role="${p.role}" data-section-id="${p.sectionId||''}">${body}<footer class="pub-footer"><span>${mode==='EN'?'Your life, in context':mode==='ZH_HANS'?'在情境中理解人生':'在情境中理解人生 / Your life, in context'}</span><span>${p.pageNumber} / 48</span></footer></section>`;
++  const closure=revised?`<div class="bdm-closure-mark" style="position:absolute;top:1.5mm;left:17mm;right:17mm;font:10px sans-serif;text-align:center;color:#815746;z-index:9">${ir.reviewOnly?'SYNTHETIC QA · NOT A CUSTOMER REPORT':esc(ir.publicationIdentity.watermarkText)} · ${esc(ir.publicationIdentity?.reportRef||'')}</div>`:'';
++  return `<section${revised?' id="bzr-page-'+p.pageNumber+'"':''} class="pub-page bdm-page${p.staticAsset?' bdm-static':''}" data-page-number="${p.pageNumber}" data-page-role="${p.role}" data-section-id="${p.sectionId||''}">${body}${closure}<footer class="pub-footer"><span>${mode==='EN'?'Your life, in context':mode==='ZH_HANS'?'在情境中理解人生':'在情境中理解人生 / Your life, in context'}</span><span>${p.pageNumber} / ${ir.publication.pageCount}</span></footer></section>`;
+  });
+- return `<article class="pub-report bdm-report" data-recompose-pass="${ir.publication.recomposePass||0}" data-presentation-mode="${mode}" data-method="BZR" data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2" data-manuscript-digest="${esc(ir.manuscript.digest)}">${pages.join('')}</article>`;
++ return `<article class="pub-report bdm-report" ${revised?'data-publication-page-count="'+ir.publication.pageCount+'" ':''}data-recompose-pass="${ir.publication.recomposePass||0}" data-presentation-mode="${mode}" data-method="BZR" data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2" data-manuscript-digest="${esc(ir.manuscript.digest)}">${pages.join('')}</article>`;
+ }
+ // Browser/PDF/print readiness is technical. No provider or authoring dependency.
+ export function inspectBaziDeepLayout(root){
+diff --git a/functions/personal-professional-reading/bazi-customer-narrative-composer.js b/functions/personal-professional-reading/bazi-customer-narrative-composer.js
+index 09ba4865..36bb10c5 100644
+--- a/functions/personal-professional-reading/bazi-customer-narrative-composer.js
++++ b/functions/personal-professional-reading/bazi-customer-narrative-composer.js
+@@ -168,6 +168,22 @@ function timingNarrative(timeline,priority,lang){
+  return freeze({available:true,headline:bi(headline,headline),paragraphs:freeze(paragraphs.map(x=>bi(x,x))),topicCodes:freeze(focal.map(x=>x.topicCode)),priorityRefs:freeze(priRefs)});
+ }
+ 
++// R1.1 depth extension in the existing narrative owner. Conditions use the
++// admitted topic composition; examples are observation situations, not biography.
++function publicationDepthForTopic(t,topicIndex){
++ const has=g=>list(t.relevantGroups).some(x=>x.groupCode===g&&Number(x.ratio)>0),refs=['professionalModules/professionalTopics/topics/'+topicIndex],support=has('RESOURCE'),pressure=has('OFFICER'),output=has('OUTPUT'),wealth=has('WEALTH');let text;
++ switch(t.topicCode){
++ case 'CAPABILITY':text=support&&output?bi('Learning/support and output both enter this capability structure. The distinction is between taking something in and making it usable for another person: understanding a method is not the same task as explaining or applying it. When comparing a study task with a task that requires a finished explanation, notice whether support remains available at both stages.','学习支持与表达输出同时进入这组能力结构。需要区分的是吸收内容与把内容转成他人能够使用的成果：理解一种方法，与说明或应用这种方法，并不是同一项任务。比较学习任务与需要完成说明的任务时，可以观察支持条件在两个阶段是否都能保留。'):bi('The capability topic does not give learning/support and output equal prominence. Avoid filling the less prominent side with an assumed skill or deficit; instead compare preparation, expression and sustained carrying separately. A practical observation is whether a change in learning support changes the task itself or only the effort needed to complete it.','这组能力主题没有让学习支持与表达输出占据相同位置。较不突出的部分不应直接被补写成某项优势或缺陷，应把准备、表达与持续承载分开观察。一个具体的对照是：学习支持改变后，改变的是任务本身，还是完成任务所需的投入。');break;
++ case 'LIFE_OPERATION':text=list(t.relationshipInterfaces).some(x=>['TENSION','REPEAT_TENSION'].includes(x.relationFamily))?bi('The recorded interfaces include tension rather than only linkage. Read coordination between positions before treating the functional groups as independent strengths: the same requirement may be supported at one interface and constrained at another. Compare two roles with similar demands but different room to negotiate responsibility; this is a way to test the structural reading, not evidence that conflict has occurred.','已记录的柱位接口包含张力，而不只是联结。因此，应先看位置之间怎样协调，再把各功能组分别当作优势：同一种要求，在一个接口获得支持，在另一个接口可能受到约束。可以比较要求相近、责任协商空间却不同的两个角色；这用于检验结构解读，并不证明现实中已经发生冲突。'):bi('The recorded topic does not foreground a tension interface. Its operating question is therefore how the available functions coordinate, without inventing a conflict to make the reading sound dramatic. Compare a setting with clear responsibilities and one with changing responsibilities, and distinguish what stays stable from what depends on the setting.','这组主题没有把张力接口列在前景。运行方式的重点因此是已有功能怎样配合，不应为了制造戏剧性而补写冲突。可以比较责任清楚与责任变化的两种情境，区分哪些部分保持稳定，哪些部分依赖具体环境。');break;
++ case 'CAREER':text=pressure&&support&&!list(t.relevantTenGods).some(x=>x.functionGroup==='OFFICER'&&x.visibleCount>0)?bi('The career-related Officer records are carried in hidden stems rather than visible stems, while the topic also includes learning/support. Keep those source layers distinct: this is a structural basis for examining when responsibilities become explicit, not proof of continuous external pressure. In a work setting, compare an obligation that is clearly assigned with one that becomes apparent only after the task develops, and ask what support is usable in each situation.','事业相关的官杀记录主要来自藏干，而不是透干；主题中也同时存在学习支持。需要保留这些来源层次的差别：它提供的是观察责任在何种条件下变得明确的结构依据，并不证明现实中一直承受外部压力。在工作情境中，可以比较明确被分配的责任与任务展开后才显现的责任，并分别观察哪些支持能够使用。'):pressure&&support?bi('Rules/responsibility and learning/support are both relevant to work here. The useful mechanism is their coordination: a demanding role and a workable method are separate conditions, so responsibility alone does not establish professional readiness. In a role with explicit standards, compare the demand with the training, tools and support actually available before reading the combination as sustainable.','规则责任与学习支持同时参与这里的事业结构。值得解释的是两者怎样配合：有要求的角色与可使用的方法是两种不同条件，单有责任并不能证明专业准备已经充分。在标准明确的工作情境中，可以把要求与实际可用的训练、工具及支持逐项对照，再观察这种组合能否持续。'):bi('The career composition gives a different balance to output, exchange and responsibility. Do not borrow a standard authority-and-support career story when that combination is not prominent. Compare what a role asks you to produce, how that output is used, and which responsibilities are genuinely attached to it; a job title alone cannot answer these questions.','这组事业结构对输出、交换与责任给出了不同的配置。若官杀与印星的组合并不突出，就不应借用一套标准的“权威与支持”事业故事。可以分别看角色要求产出什么、这些产出怎样被使用，以及实际附带哪些责任；职位名称本身不能回答这些问题。');break;
++ case 'WEALTH':text=wealth&&output?bi('Output and wealth/exchange both appear in this resource topic. Keep producing value, exchanging it and retaining resources as separate questions; one recorded connection does not make them a guaranteed sequence. In a project or service scenario, distinguish the work delivered, the terms of exchange and what remains after the resources required to deliver it.','输出与财星交换同时出现在这组资源主题中。创造价值、完成交换与保留资源应分开理解，不能把结构上的联系直接写成必然发生的连续结果。在项目或服务的情境里，可以分别观察交付的工作、交换条件，以及扣除完成交付所需资源之后留下的部分。'):bi('Output and wealth/exchange are not equally foregrounded in this resource composition. A resource reading should not invent an automatic path from effort to income. Compare access to resources, the conditions of exchange and the ability to retain them separately; differences between these stages may matter more than a single wealth label.','这组资源结构没有让输出与财星交换同样进入前景。资源解读不能据此补写一条从付出自动通向收入的路径。可以分别比较资源能否取得、交换需要哪些条件，以及能否保留资源；几个阶段之间的差异，可能比单一财星标签更值得观察。');break;
++ case 'RELATIONSHIPS':text=support&&pressure?bi('Support and responsibility are both part of the relationship composition. Receiving care and agreeing to an obligation are different interactions; treating one as proof of the other can hide the boundary that needs discussion. In a shared decision, compare what each person offers, what each person expects and which expectations have actually been agreed, without assigning a chart role to a partner.','支持与责任同时进入关系结构。接受照顾与同意承担义务是两种不同互动，把其中一种当成另一种的证明，会掩盖真正需要沟通的边界。在共同决定的情境中，可以分别看彼此提供什么、期待什么，以及哪些期待已经获得明确同意；不把某个命盘角色直接指定给伴侣。'):bi('The relationship topic has its own distribution of relevant functions and interfaces. Begin with the recorded combination rather than assuming that closeness must be organized around duty or support. Compare how a shared decision is made and how room for independent choice is maintained; the comparison is an observation prompt, not a verdict about another person.','关系主题有其自身的相关功能与接口分布。应从已有组合出发，而不是预设亲密关系一定围绕责任或支持组织。可以比较共同决定怎样形成，以及独立选择的空间怎样被保留；这种比较是观察入口，不是对另一个人的判断。');break;
++ case 'FAMILY':text=support?bi('Learning/support is present in the family composition, but support is not identical to a family member or a permanent duty. Distinguish the availability of help, the way it is requested and how the load is shared. A practical example is a recurring care task: observe who can contribute under which conditions rather than inferring the family history from a pillar.','学习支持功能参与家庭结构，但支持并不等同于某位家人或一项永久义务。应区分帮助是否可用、怎样提出需要，以及负担怎样分配。一个具体的观察情境是反复出现的照顾任务：看不同条件下谁能够参与，而不是根据某一柱推断家庭经历。'):bi('Learning/support is not foregrounded in this family composition. This does not establish that support was absent in your life; symbolic prominence and actual care are different kinds of evidence. For a recurring shared task, compare the help that is explicitly available with the help that is only assumed, and keep the family history open until real information is supplied.','学习支持功能没有在这组家庭结构中进入前景。这不证明现实中没有得到支持；符号是否突出与实际照顾属于不同层次的证据。面对反复出现的共同任务，可以比较明确可用的帮助与只是被默认存在的帮助；没有现实资料之前，家庭经历仍保持开放。');break;
++ case 'PRESSURE':text=pressure&&support?bi('Pressure/responsibility and support both enter the carrying picture. They should be read as separate conditions rather than cancelling each other in a numerical score. In a demanding period, compare the requirement, the resources available to meet it and the opportunity to recover; the presence of support does not prove that it is accessible in that situation.','压力责任与支持同时进入承载结构。两者是需要分别核对的条件，不能在一个数字分数里简单抵消。在要求较高的阶段，可以把要求、应对要求所需的资源与恢复机会分开对照；命盘中出现支持，也不证明在某个具体情境中一定能够使用。'):bi('The pressure topic is not reducible to a dominant Officer label. Look at the existing combination of carrying, outward demand and support instead of inventing a stress history. Compare tasks with similar effort but different recovery conditions; this can clarify which conditions matter without turning the chart into a diagnosis.','压力主题不能被压缩成一个突出的官杀标签。应回到承载、向外投入与支持的已有组合，不补写压力经历。可以比较投入相近、恢复条件却不同的任务，以此辨认哪些条件值得关注，而不把命盘当作诊断。');break;
++ }
++ return text?[{text,sourceRefs:refs,sourceOwner:'EXISTING_R11_AND_NATIVE_DOMAIN_MEANINGS',humanReview:'R1_1_CANDIDATE'}]:[];
++}
++
+ function collectCopies(narrative){
+  const out=[];const add=(key,c)=>{if(c?.en)out.push({key:`${key}:en`,lang:'en',text:c.en});if(c?.zhHans)out.push({key:`${key}:zhHans`,lang:'zhHans',text:c.zhHans})};
+  add('opening:headline',narrative.opening.headline);narrative.opening.paragraphs.forEach((x,i)=>add(`opening:p${i+1}`,x));
+@@ -190,7 +206,7 @@ export function buildBaziCustomerNarrative({fiveElements,wholeChartPriority,prof
+  const openingEn=openingCopy({priority:wholeChartPriority,fiveElements},'en'),openingZh=openingCopy({priority:wholeChartPriority,fiveElements},'zhHans');
+  const opening=freeze({headline:bi(openingEn.headline,openingZh.headline),paragraphs:freeze(openingEn.paragraphs.map((x,i)=>bi(x,openingZh.paragraphs[i]||''))),priorityRefs:freeze(list(wholeChartPriority.themes).map(x=>x.priorityId))});
+  const priorityChapters=freeze(list(wholeChartPriority.themes).map(theme=>{const en=priorityCopy(theme,{},'en'),zh=priorityCopy(theme,{},'zhHans');return freeze({chapterId:`NARRATIVE-PRI-${String(theme.rank).padStart(2,'0')}`,rank:theme.rank,priorityRef:theme.priorityId,themeType:theme.themeType,themeKey:theme.themeKey,title:bi(en.title,zh.title),thesis:bi(en.thesis,zh.thesis),development:bi(en.development,zh.development),condition:bi(en.condition,zh.condition),sourceRefs:freeze(list(theme.sourceRefs))});}));
+- const topicNarratives=freeze(list(professionalTopics.topics).map(item=>{const en=topicNarrative(item,{},'en'),zh=topicNarrative(item,{},'zhHans');return freeze({topicCode:item.topicCode,headline:bi(en.headline,zh.headline),lead:bi(en.lead,zh.lead),development:bi(en.development,zh.development),condition:bi(en.condition,zh.condition),priorityRefs:freeze(list(item.priorityRefs)),sourceState:item.state});}));
++ const topicNarratives=freeze(list(professionalTopics.topics).map(item=>{const en=topicNarrative(item,{},'en'),zh=topicNarrative(item,{},'zhHans');return freeze({topicCode:item.topicCode,publicationDepth:publicationDepthForTopic(item,professionalTopics.topics.indexOf(item)),headline:bi(en.headline,zh.headline),lead:bi(en.lead,zh.lead),development:bi(en.development,zh.development),condition:bi(en.condition,zh.condition),priorityRefs:freeze(list(item.priorityRefs)),sourceState:item.state});}));
+  const timingEn=timingNarrative(professionalTimeline,wholeChartPriority,'en'),timingZh=timingNarrative(professionalTimeline,wholeChartPriority,'zhHans');
+  const timing=freeze({available:timingEn.available&&timingZh.available,headline:bi(timingEn.headline?.en||'',timingZh.headline?.zhHans||''),paragraphs:freeze(list(timingEn.paragraphs).map((x,i)=>bi(x.en||'',timingZh.paragraphs?.[i]?.zhHans||''))),topicCodes:timingEn.topicCodes,priorityRefs:timingEn.priorityRefs});
+  const base={schemaVersion:'PHI-OS-BAZI-CX-PRO-CUSTOMER-NARRATIVE-v1.0.0',work:'BAZI-CX-PRO-W10',opening,priorityChapters,topicNarratives,timingNarrative:timing,boundaries:freeze({sourceFactsRecalculated:false,newChartFactCreated:false,priorityOrderPreserved:true,topicCompositionPreserved:true,timingDoesNotOverwriteNatal:true,fortunePredictionCreated:false,eventPredictionCreated:false,goodBadScoreCreated:false,identityLabelCreated:false,oneBoundaryParagraphPerNarrativeUnit:true,rendererMayNotInventNarrative:true})};
+@@ -200,3 +216,18 @@ export function buildBaziCustomerNarrative({fiveElements,wholeChartPriority,prof
+ }
+ 
+ export default Object.freeze({buildBaziCustomerNarrative});
++
++// Publication reuse of existing functional meanings, explicitly per cycle, never
++// an invented current-cycle selection or an event forecast.
++export function describeBaziNativeCycle(cycle){
++ const g=list(cycle.functionGroups),has=x=>g.includes(x);
++ if(has('RESOURCE')&&has('OUTPUT'))return bi('This cycle combines learning/support with expression/output. Read the availability of support and the conversion into usable work as different conditions: preparation does not automatically become a finished result. Compare what the natal chart can carry with what this period adds, and observe whether both stages have practical support.','本步运同时引入学习支持与表达输出。支持是否可用、能否转为可使用的成果，是两种需要分别核对的条件，准备并不自动变成完成的结果。可把原局的承载与这一步增加的功能放在一起，观察两个阶段是否都有现实支持。');
++ if(has('OFFICER')&&has('RESOURCE'))return bi('Responsibility/pressure and learning/support enter this cycle together. This makes their coordination a useful question, rather than treating responsibility as either a promise or a threat. Where a role becomes more demanding, compare the actual methods, resources and permission available to carry it; the chart does not establish that such a role has occurred.','责任压力与学习支持同时进入本步运。重点在两者如何配合，不能把责任单独当作机会承诺或威胁。若某个角色的要求增加，可比较是否有实际方法、资源与权限来承接；命盘不证明这样的角色已经出现。');
++ if(has('WEALTH')&&has('OUTPUT'))return bi('Output and exchange are joined in this cycle composition. The reading distinguishes making something useful, agreeing the exchange and retaining resources; these remain separate conditions, not a guaranteed chain of events. A project provides a useful comparison between what is produced and what its delivery actually requires.','输出与交换同时进入本步运的组合。解读应区分形成有用成果、达成交换与保留资源，这些仍是不同条件，并不构成必然发生的事件链。可以借一个具体项目，比较产出的内容与完成交付真正需要的投入。');
++ if(has('PEER')&&has('WEALTH'))return bi('Self-position and resource exchange both enter this period. Keep control over resources separate from the responsibilities shared with others; one does not prove the other. Compare how decisions, contributions and retained resources are agreed, without turning a Peer or Wealth symbol into a story about another person.','自我位置与资源交换同时进入这一阶段。对资源的选择权与同他人分担的责任需要分开，不能相互作为证明。可以比较决定、投入与资源留存怎样达成约定，不把比劫或财星符号改写成关于他人的故事。');
++ if(has('OFFICER'))return bi('Rules and responsibility enter this cycle without Resource being listed among this cycle’s own functions. That does not mean support is absent from the natal chart or real life. It makes the source of support a condition to check alongside the demand, rather than assuming that a new responsibility supplies its own means of being carried.','规则责任进入本步运，而这一步自身列出的功能组未包含印星。这不等于原局或现实中没有支持，而是需要把支持从哪里取得，与要求本身放在一起核对，不能假定一项新的责任会自动提供承接它的方法。');
++ if(has('RESOURCE'))return bi('Learning/support is one of this cycle’s recorded functions. Its value depends on whether what is available can actually be used in the relevant situation; symbolic presence alone is not proof of access. Compare an opportunity to prepare or learn with the task that preparation is meant to support, while retaining the natal chart’s other demands.','学习支持是本步运列出的功能之一。它的作用仍取决于已有条件能否在具体情境中使用，符号出现本身不证明支持已经可取得。可以把准备或学习的机会，与它要支持的实际任务相对照，同时保留原局其他要求。');
++ if(has('OUTPUT'))return bi('Expression/output enters this cycle. The useful distinction is between having something to express and sustaining the conditions needed to produce it. Compare the form of the output with its time, support and carrying requirements, without treating the cycle as a promise of achievement.','表达输出进入本步运。值得区分的是有内容需要表达，与能够持续维持产出条件。可把产出的形式同它所需的时间、支持和承载相比较，不把这一步运当作成就承诺。');
++ if(has('WEALTH'))return bi('Resource exchange enters this cycle. Access, exchange terms and retention should be observed separately, in relation to the natal structure. None of these symbols confirms actual income, and a change in one stage does not establish a change in all of them.','资源交换进入本步运。取得资源、交换条件与留存需要分别观察，并结合原局读取。符号不能证实实际收入，其中一个阶段改变，也不证明其他阶段都已经改变。');
++ return bi('Read this cycle’s recorded functions with the natal structure rather than as a replacement chart. Compare self-position, shared responsibilities and the conditions that make an arrangement sustainable; the period does not establish a personal event.','本步运列出的功能应与原局合读，不另起一张命盘。可以对照自我位置、共同责任与安排得以持续的条件，而不把这一阶段当作个人事件的证明。');
++}
+diff --git a/functions/personal-reading/bazi-section-publication.js b/functions/personal-reading/bazi-section-publication.js
+index b7c86066..fccf1011 100644
+--- a/functions/personal-reading/bazi-section-publication.js
++++ b/functions/personal-reading/bazi-section-publication.js
+@@ -249,21 +249,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
+  };
+  const r11Repeated=topic=>(topic?.relevantTenGods||[]).filter(x=>x.repeatState==='REPEATED').sort((a,b)=>b.count-a.count);
+  const r11TenGodDetail=code=>reading.professionalModules.tenGods?.items?.find(x=>x.tenGodCode===code)||null;
+- const r11TenGodStructure=code=>{
+-  const x=r11TenGodDetail(code);if(!x)return '';
+-  const presence=x.repeatState==='REPEATED'
+-   ?pick('repeats across the chart','在命盘中重复出现')
+-   :pick('has a more limited presence','出现较有限');
+-  const visibility=x.visibleCount>0&&x.hiddenCount>0
+-   ?pick('appears through both visible and hidden layers','同时通过透干与藏干进入结构')
+-   :x.visibleCount>0
+-    ?pick('is expressed through the visible layer','主要通过透干进入结构')
+-    :pick('is carried in the hidden layer','主要保留在藏干层');
+-  return pick(
+-   `${R11_TEN_GOD[code]||code} ${presence} and ${visibility}. The distinction matters because repetition and visibility describe different structural roles; neither should be converted into a score.`,
+-   `${R11_TEN_GOD[code]||code}${presence}，并且${visibility}。这里要区分“是否重复”与“通过哪一层进入结构”；两者都不应被转换成评分。`
+-  );
+- };
++ const r11TenGodStructure=code=>describeBaziR11TenGod(r11TenGodDetail(code),locale);
+  const r11Pattern=topic=>(topic?.patternCandidates||[]);
+  const r11Relations=topic=>(topic?.relationshipInterfaces||[]);
+  const r11Module=(key,code,paragraphs,{boundary='',observations=r11Prompts(code),extraRefs=[]}={})=>{
+@@ -854,3 +840,22 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
+  }
+  return {pages,sections,internalSections,legacy,...(crossSection?{crossSection}:{})};
+ }
++
++// Same R11 source owner, reused by the full-report publication adapter.
++export function describeBaziR11TenGod(x,locale){
++ if(!x)return '';const pick=(en,zh)=>locale==='en'?en:zh;
++ const R11_TEN_GOD={BI_JIAN:pick('Peer','比肩'),JIE_CAI:pick('Rob Wealth','劫财'),SHI_SHEN:pick('Eating God','食神'),SHANG_GUAN:pick('Hurting Officer','伤官'),PIAN_CAI:pick('Indirect Wealth','偏财'),ZHENG_CAI:pick('Direct Wealth','正财'),QI_SHA:pick('Seven Killings','七杀'),ZHENG_GUAN:pick('Direct Officer','正官'),PIAN_YIN:pick('Indirect Resource','偏印'),ZHENG_YIN:pick('Direct Resource','正印')};const code=x.tenGodCode;
++  const presence=x.repeatState==='REPEATED'
++   ?pick('repeats across the chart','在命盘中重复出现')
++   :pick('has a more limited presence','出现较有限');
++  const visibility=x.visibleCount>0&&x.hiddenCount>0
++   ?pick('appears through both visible and hidden layers','同时通过透干与藏干进入结构')
++   :x.visibleCount>0
++    ?pick('is expressed through the visible layer','主要通过透干进入结构')
++    :pick('is carried in the hidden layer','主要保留在藏干层');
++  return pick(
++   `${R11_TEN_GOD[code]||code} ${presence} and ${visibility}. The distinction matters because repetition and visibility describe different structural roles; neither should be converted into a score.`,
++   `${R11_TEN_GOD[code]||code}${presence}，并且${visibility}。这里要区分“是否重复”与“通过哪一层进入结构”；两者都不应被转换成评分。`
++  );
++
++}
+diff --git a/functions/personal-reading/deep-manuscript/bazi-deep-manuscript-publication.js b/functions/personal-reading/deep-manuscript/bazi-deep-manuscript-publication.js
+index f5e30996..abb16faa 100644
+--- a/functions/personal-reading/deep-manuscript/bazi-deep-manuscript-publication.js
++++ b/functions/personal-reading/deep-manuscript/bazi-deep-manuscript-publication.js
+@@ -1,6 +1,7 @@
++import {assertBaziPublicationConsistency,assertBaziPublicationDiagramConsistency,partitionBaziPublicationUnits} from '../publication-fit/bazi-publication-consistency.js';
+ import {enrichBaziDiagram,inspectBaziDiagramFidelity} from '../publication-fit/bazi-diagram-fidelity.js';
+ import {layoutProfile} from '../publication-fit/bazi-publication-layout-profiles.js';
+-import {selectPublicationSpans,publicationCoverage} from '../publication-fit/bazi-publication-lead-selector.js';
++import {selectPublicationSpans,publicationCoverage,classifySpan} from '../publication-fit/bazi-publication-lead-selector.js';
+ import {SECTIONS,LOCALES,FIELD,VERSIONS,digest,deepFreeze} from './bazi-deep-manuscript-contract.js';
+ import {STEMS,BRANCHES} from '../../bzr-full-production/bazi-structural-registry.js';
+ import {REPORT_EDITORIAL_ASSETS} from '../../canonical-presentation-runtime/report-editorial-registry.js';
+@@ -17,19 +18,19 @@ export const BDM_STATIC_FOLIO_MASKS=Object.freeze({
+  4:[{left:5.05,top:6.0,width:4.3,height:3.9,mode:'PAGE_TOTAL'},{left:95.5,top:1.45,width:2.5,height:1.4,mode:'PAGE'}],
+  5:[{left:5.1,top:15.1,width:7.4,height:6.1,mode:'PAGE_TOTAL'}]
+ });
+-export function buildBazi48PagePlan(){
++export function buildBazi48PagePlan(sectionPageCounts=null,{separateRelations=false}={}){
+  const pages=[];const add=p=>pages.push({...p,pageNumber:pages.length+1});
+  ['COVER','METHOD_INTRO','ORIGIN','PHIOS_LENS','HOW_TO_READ'].forEach((role,i)=>add({role,staticAssetPage:i+1}));
+- add({role:'OVERVIEW'});for(let i=0;i<3;i++)add({role:'TECHNICAL_FOUNDATION',diagramId:DIAGRAM_PLAN[i].id});add({role:'TECHNICAL_FOUNDATION',diagramIds:['D04','D05']});
+- SECTIONS.forEach((s,i)=>{add({role:'SECTION_OPENER',sectionId:s.sectionId});add({role:'SECTION_DIAGRAM',sectionId:s.sectionId,diagramId:DIAGRAM_PLAN[i+5].id});add({role:'INTERPRETATION_A',sectionId:s.sectionId,excerptIndex:0});add({role:'INTERPRETATION_B',sectionId:s.sectionId,excerptIndex:1});});
++ add({role:'OVERVIEW'});for(let i=0;i<3;i++)add({role:'TECHNICAL_FOUNDATION',diagramId:DIAGRAM_PLAN[i].id});if(separateRelations){add({role:'TECHNICAL_FOUNDATION',diagramId:'D04'});add({role:'TECHNICAL_FOUNDATION',diagramId:'D05'});}else add({role:'TECHNICAL_FOUNDATION',diagramIds:['D04','D05']});
++ SECTIONS.forEach((s,i)=>{add({role:'SECTION_OPENER',sectionId:s.sectionId});add({role:'SECTION_DIAGRAM',sectionId:s.sectionId,diagramId:DIAGRAM_PLAN[i+5].id});for(let page=0;page<(sectionPageCounts?.[s.sectionId]??2);page++)add({role:page?'INTERPRETATION_B':'INTERPRETATION_A',sectionId:s.sectionId,excerptIndex:page});});
+  add({role:'INTEGRATED_MAP',diagramId:'D15'});add({role:'CLOSING_REALITY_BRIDGE'});return pages;
+ }
+ function node(label,value,sourcePath,element=null,state='SUPPLIED'){return {label,value:value??null,sourcePath,element,state:value==null?'UNKNOWN':state};}
+-export async function buildBaziDeepDiagrams(pack){
++export async function buildBaziDeepDiagrams(pack,options={}){
+  const n=pack.natal,v=pack.globalVerdict,identities=[...Object.values(STEMS),...Object.values(BRANCHES)];const element=t=>identities.find(x=>x.zh===t)?.element||null;
+  const positions=['year','month','day','hour'],labels=['年柱 / Year','月柱 / Month','日柱 / Day','时柱 / Hour'];
+  const pillarNodes=positions.map((p,i)=>({...node(labels[i],n.pillars[p],`natal.pillars.${p}`,element(n.pillars[p][0])),hiddenStems:n.tenGodFacts.filter(f=>f.position===p.toUpperCase()+'_BRANCH_HIDDEN').map(f=>f.token)}));
+- const inventory=[...Object.values(n.pillars).join(''),...n.tenGodFacts.filter(f=>f.position.includes('HIDDEN')).map(f=>f.token)];
++ const inventory=[...(options.qualityRevision==='BZR-R1.1'?Object.values(n.pillars).map(p=>p[0]):Object.values(n.pillars).join('')),...n.tenGodFacts.filter(f=>f.position.includes('HIDDEN')).map(f=>f.token)];
+  const elementNodes=[['木 / Wood','WOOD'],['火 / Fire','FIRE'],['土 / Earth','EARTH'],['金 / Metal','METAL'],['水 / Water','WATER']].map(([label,e])=>node(label,inventory.filter(t=>element(t)===e).length,'natal.pillars + natal.tenGodFacts',e));
+  const godNames=['比肩','劫财','食神','伤官','偏财','正财','七杀','正官','偏印','正印'];const en=['Peer','Rob Wealth','Eating God','Hurting Officer','Indirect Wealth','Direct Wealth','Seven Killings','Direct Officer','Indirect Resource','Direct Resource'];
+  const godNodes=godNames.map((g,i)=>({...node(g+' / '+en[i],n.tenGodFacts.filter(f=>f.tenGod===g).length,'natal.tenGodFacts'),visible:n.tenGodFacts.filter(f=>f.tenGod===g&&!f.position.includes('HIDDEN')).length,hidden:n.tenGodFacts.filter(f=>f.tenGod===g&&f.position.includes('HIDDEN')).length}));
+@@ -39,23 +40,34 @@ export async function buildBaziDeepDiagrams(pack){
+  const pattern=[node('格局 / Pattern',v.primaryPattern?.familyZh,'globalVerdict.primaryPattern.familyZh'),node('路径 / Formation',v.primaryPattern?.formationPathZh,'globalVerdict.primaryPattern.formationPathZh'),node('承载条件 / Carrying',v.primaryPattern?.qualifier,'globalVerdict.primaryPattern.qualifier')];
+  const timing=[node('大运 / Da Yun',pack.timing.daYun,'timing.daYun'),node('年度 / Annual',pack.timing.annual,'timing.annual'),...pack.timing.relations.map((r,i)=>node('作用关系 / Relation',r,`timing.relations.${i}`))];
+  const datasets=[pillarNodes,elementNodes,godNodes,support,natalRelations,[...support.slice(0,3),...subset(['食神','伤官'])],[...pattern,...natalRelations],[...subset(['食神','伤官','偏财','正财','正官','七杀']),...support.slice(3)],[...subset(['偏财','正财','比肩','劫财']),...support.slice(3)],[pillarNodes[2],...subset(['偏财','正财']),...natalRelations],[pillarNodes[0],pillarNodes[2],pillarNodes[3],...subset(['正印','偏印'])],[...support,...natalRelations],[...pattern,...support.slice(3)],timing,[...support.slice(0,3),...pattern.slice(0,2),...timing.slice(0,2)]];
+- const pagePlan=buildBazi48PagePlan();return Promise.all(DIAGRAM_PLAN.map(async(d,i)=>{const nodes=datasets[i];if(!nodes.length)nodes.push(node('未获准 / Not supplied',null,'natal.relationships'));const refs=[...new Set(nodes.map(n=>n.sourcePath))];const result=enrichBaziDiagram({...d,nodes,sourceDataIds:refs,authorityDigest:pack.authorityDigest,timingDigest:d.id==='D14'||d.id==='D15'?pack.timingDigest:null,timingScope:d.id==='D14'||d.id==='D15'?pack.timing.identityState:'NATAL',certainty:nodes.some(n=>n.state==='UNKNOWN')?'PARTIAL':'SUPPLIED_WITH_SOURCE_BOUNDARIES',sourceDigest:await digest({nodes,refs}),pagePlacement:pagePlan.filter(p=>p.diagramId===d.id||p.diagramIds?.includes(d.id)).map(p=>p.pageNumber),caption:{zh:i===1?'未加权清单计数，不等于强弱或能量评分。':i===2?'统计已获准的天干与藏干记录，零表示该清单未列出。':'按命盘与已提供结论展示，未知保持未知；图示不预定事件。',en:i===1?'Unweighted inventory counts, not strength or energy scores.':i===2?'Counts of supplied visible and hidden stem records; zero refers to this inventory.':'Displays supplied chart data and conclusions. Unknowns remain unknown; the diagram does not predict events.'}},pack);result.sourceDataIds=[...new Set([...refs,...result.graph.nodes.map(n=>n.sourcePath),...result.graph.edges.map(e=>e.sourcePath)].filter(Boolean))];result.sourceDigest=await digest({nodes:result.nodes,graph:result.graph,refs:result.sourceDataIds,visualGrammarId:result.visualGrammarId});return result;}));
++ const pagePlan=buildBazi48PagePlan();return Promise.all(DIAGRAM_PLAN.map(async(d,i)=>{const nodes=datasets[i];if(!nodes.length)nodes.push(node('未获准 / Not supplied',null,'natal.relationships'));const refs=[...new Set(nodes.map(n=>n.sourcePath))];const result=enrichBaziDiagram({...d,nodes,sourceDataIds:refs,authorityDigest:pack.authorityDigest,timingDigest:d.id==='D14'||d.id==='D15'?pack.timingDigest:null,timingScope:d.id==='D14'||d.id==='D15'?pack.timing.identityState:'NATAL',certainty:nodes.some(n=>n.state==='UNKNOWN')?'PARTIAL':'SUPPLIED_WITH_SOURCE_BOUNDARIES',sourceDigest:await digest({nodes,refs}),pagePlacement:pagePlan.filter(p=>p.diagramId===d.id||p.diagramIds?.includes(d.id)).map(p=>p.pageNumber),caption:{zh:i===1?'未加权清单计数，不等于强弱或能量评分。':i===2?'统计已获准的天干与藏干记录，零表示该清单未列出。':'按命盘与已提供结论展示，未知保持未知；图示不预定事件。',en:i===1?'Unweighted inventory counts, not strength or energy scores.':i===2?'Counts of supplied visible and hidden stem records; zero refers to this inventory.':'Displays supplied chart data and conclusions. Unknowns remain unknown; the diagram does not predict events.'}},pack,options);result.sourceDataIds=[...new Set([...refs,...result.graph.nodes.map(n=>n.sourcePath),...result.graph.edges.map(e=>e.sourcePath)].filter(Boolean))];result.sourceDigest=await digest({nodes:result.nodes,graph:result.graph,refs:result.sourceDataIds,visualGrammarId:result.visualGrammarId});return result;}));
+ }
+ // Each exact excerpt retains its original offset. Never cut mid-sentence or rewrite.
+ export function manuscriptSentences(text){const spans=[];const re=/[^。！？.!?]+[。！？.!?]+[”’"')）\]]*/g;let m;while((m=re.exec(text)))if(m[0].trim())spans.push({text:m[0].trim(),start:m.index+m[0].indexOf(m[0].trim()),end:m.index+m[0].trimEnd().length});return spans;}
+ function publicationExcerpts(text,meta){return selectPublicationSpans(manuscriptSentences(text),text,{...meta,compilerVersion:VERSIONS.compiler});}
+-export async function compileBaziDeepPublication({snapshot,pack,productionFrozen=false,fixture=false,presentationMode='BILINGUAL',recomposePass=0}){
++export async function compileBaziDeepPublication({snapshot,pack,productionFrozen=false,fixture=false,presentationMode='BILINGUAL',recomposePass=0,qualityRevision=null,nativeSource=null,publicationIdentity=null}){
+  if(snapshot.method!=='BAZI'||snapshot.authorityDigest!==pack.authorityDigest||snapshot.timingDigest!==pack.timingDigest||snapshot.realityDigest!==pack.realityDigest)throw Error('BDM_PUBLICATION_LINEAGE_MISMATCH');
+  const {digest:stored,...snapshotBody}=snapshot;if(await digest(snapshotBody)!==stored)throw Error('BDM_MANUSCRIPT_SNAPSHOT_INTEGRITY');
+  if(snapshot.sections.length!==9||new Set(snapshot.sections.map(s=>s.sectionId)).size!==9)throw Error('BDM_PUBLICATION_SECTION_TOPOLOGY');
+  for(const s of snapshot.sections)for(const l of LOCALES)if(await digest(s[FIELD[l]])!==s.unitDigests?.[l])throw Error('BDM_MANUSCRIPT_UNIT_INTEGRITY');
+  const profile=layoutProfile(presentationMode);
+- const sections=SECTIONS.map(s=>{const source=snapshot.sections.find(x=>x.sectionId===s.sectionId);if(!source)throw Error('BDM_PUBLICATION_SECTION_MISSING');return {sectionId:s.sectionId,title:{zh:s.zh,en:s.en},titleTrace:{owner:'BAZI_SECTION_PURPOSE',sectionId:s.sectionId,authorityDigest:pack.authorityDigest,compilerVersion:VERSIONS.compiler},...Object.fromEntries(LOCALES.map(locale=>[locale,publicationExcerpts(source[FIELD[locale]],{sectionId:s.sectionId,locale,authorityDigest:pack.authorityDigest,profile,pass:recomposePass})]))};});
+- const diagrams=await buildBaziDeepDiagrams(pack),pages=buildBazi48PagePlan();
++ const consistency=qualityRevision==='BZR-R1.1'?await assertBaziPublicationConsistency(pack,nativeSource):null;
++ if(consistency&&snapshot.sourceDigest!==consistency.sourceDigest)throw Error('BZR_PUBLICATION_MANUSCRIPT_SOURCE_MISMATCH');
++ const sections=SECTIONS.map(s=>{const source=snapshot.sections.find(x=>x.sectionId===s.sectionId);if(!source)throw Error('BDM_PUBLICATION_SECTION_MISSING');return {sectionId:s.sectionId,title:{zh:s.zh,en:s.en},titleTrace:{owner:'BAZI_SECTION_PURPOSE',sectionId:s.sectionId,authorityDigest:pack.authorityDigest,compilerVersion:VERSIONS.compiler},...Object.fromEntries(LOCALES.map(locale=>[locale,publicationExcerpts(source[FIELD[locale]],{sectionId:s.sectionId,locale,authorityDigest:pack.authorityDigest,profile,pass:recomposePass})])),...(consistency?completePublicationSelection(source,profile,pack.authorityDigest):{})};});
++ const diagrams=await buildBaziDeepDiagrams(pack,{qualityRevision,consistency}),pages=buildBazi48PagePlan(consistency?Object.fromEntries(sections.map(s=>[s.sectionId,s[profile.locales[0]].excerpts.length])):null,{separateRelations:!!consistency&&pack.natal.relationships.length>1});
++ if(consistency)for(const d of diagrams)d.pagePlacement=pages.filter(p=>p.diagramId===d.id||p.diagramIds?.includes(d.id)).map(p=>p.pageNumber);
+  const base='https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev';
+  const assets=Array.from({length:5},(_,i)=>resolveReportEditorialAsset({registry:{bucket:'phios-public-assets',assets:REPORT_EDITORIAL_ASSETS},methodId:'BZR',page:i+1,locale:presentationMode==='EN'?'en':presentationMode==='ZH_HANS'?'zh-Hans':'bilingual',publicBaseUrl:base}).src);
+  const bodyAsset=bindSectionVisual(BAZI_SECTION_REGISTRY.sections[1].key).bodyUrl;
+- const resolved=pages.map(p=>{const s=sections.find(s=>s.sectionId===p.sectionId);return {...p,title:p.diagramIds?{zh:'日主支持与原局关系',en:'Day Master Support and Natal Relations'}:p.sectionId?s.title:{zh:DIAGRAM_PLAN.find(d=>d.id===p.diagramId)?.zh||['八字个人解读','八字与生活','命理源流','观察你的结构','如何阅读'][p.staticAssetPage-1]||'把解读带回生活',en:DIAGRAM_PLAN.find(d=>d.id===p.diagramId)?.en||['Your BaZi Reading','BaZi and Life','Origins','Your Structure','How to Read'][p.staticAssetPage-1]||'Bring the Reading into Life'},staticAsset:p.staticAssetPage?assets[p.staticAssetPage-1]:null,staticFolioMasks:BDM_STATIC_FOLIO_MASKS[p.staticAssetPage]||[],bodyAsset,sectionMasterAsset:p.role==='SECTION_OPENER'?bindSectionVisual(BAZI_SECTION_REGISTRY.sections[SECTIONS.findIndex(x=>x.sectionId===p.sectionId)+1].key).url:null,content:p.excerptIndex!=null?Object.fromEntries(LOCALES.map(l=>[l,s[l].excerpts[p.excerptIndex]])):null,insightCards:p.role==='SECTION_OPENER'?Object.fromEntries(LOCALES.map(l=>[l,s[l].insightCards])):null};});
++ const resolved=pages.map(p=>{const s=sections.find(s=>s.sectionId===p.sectionId);return {...p,title:consistency&&p.role==='OVERVIEW'?{zh:'命盘总览与目录',en:'Chart Overview and Contents'}:p.diagramIds?{zh:'日主支持与原局关系',en:'Day Master Support and Natal Relations'}:p.sectionId?s.title:{zh:DIAGRAM_PLAN.find(d=>d.id===p.diagramId)?.zh||['八字个人解读','八字与生活','命理源流','观察你的结构','如何阅读'][p.staticAssetPage-1]||'把解读带回生活',en:DIAGRAM_PLAN.find(d=>d.id===p.diagramId)?.en||['Your BaZi Reading','BaZi and Life','Origins','Your Structure','How to Read'][p.staticAssetPage-1]||'Bring the Reading into Life'},staticAsset:p.staticAssetPage?assets[p.staticAssetPage-1]:null,staticFolioMasks:BDM_STATIC_FOLIO_MASKS[p.staticAssetPage]||[],bodyAsset,sectionMasterAsset:p.role==='SECTION_OPENER'?bindSectionVisual(BAZI_SECTION_REGISTRY.sections[SECTIONS.findIndex(x=>x.sectionId===p.sectionId)+1].key).url:null,content:p.excerptIndex!=null?Object.fromEntries(LOCALES.map(l=>[l,s[l].excerpts[p.excerptIndex]])):null,insightCards:p.role==='SECTION_OPENER'?Object.fromEntries(LOCALES.map(l=>[l,s[l].insightCards])):null};});
+  const closing=Object.fromEntries(LOCALES.map(locale=>[locale,sections.slice(-3).map(s=>s[locale].insightCards[0])]));resolved.at(-1).content=closing;
+- const ir={method:'BAZI',presentationMode,layoutProfileVersion:profile.id,identity:pack.subject,authority:{digest:pack.authorityDigest,timingDigest:pack.timingDigest,realityDigest:pack.realityDigest},manuscript:{digest:snapshot.digest,sections:snapshot.sections},editorial:{compilerVersion:VERSIONS.compiler,sections,closingSummary:closing,coverage:publicationCoverage(sections,profile.locales)},technical:{diagramRegistryVersion:VERSIONS.diagram,diagrams,fidelity:inspectBaziDiagramFidelity(diagrams)},publication:{pagePlanVersion:VERSIONS.pagePlan,pageCount:48,pages:resolved,recomposePass,recomposeOperations:['TIGHTER_SOURCE_SELECTION','DEDUPLICATE_CONTEXT','NO_SAFE_REGISTERED_COMPRESSION','APPROVED_TYPOGRAPHY','LOCAL_REFLOW'].slice(0,recomposePass)},providerUsage:{records:snapshot.usage||[],publicationProviderCalls:0,semanticVerifierCalls:0,semanticReviewCalls:0},cache:{manuscriptNamespace:'BDM:MANUSCRIPT',publicationNamespace:'BDM:PUBLICATION'},lineage:{versions:VERSIONS,authorityLineage:pack.lineage,manuscriptDigest:snapshot.digest},customerPublishable:productionFrozen&&!fixture&&!snapshot.fixture&&!snapshot.reviewSource&&publicationCoverage(sections,profile.locales).every(s=>Object.values(s.locales).every(l=>l.status==='PASS')),reviewSource:snapshot.reviewSource||null,fixture:fixture||snapshot.fixture===true,reviewOnly:!productionFrozen||fixture||snapshot.fixture===true};ir.digest=await digest(ir);return deepFreeze(ir);
++ const ir={method:'BAZI',...(consistency?{qualityRevision,consistency,publicationIdentity,sourceAdmission:{R11:'USER_CONFIRMED_ACCEPT',newPublication:'PENDING_HUMAN_REVIEW'}}:{}),presentationMode,layoutProfileVersion:profile.id,identity:{...pack.subject,...(consistency?{dayMaster:pack.natal.dayMaster}:{})},authority:{digest:pack.authorityDigest,timingDigest:pack.timingDigest,realityDigest:pack.realityDigest},manuscript:{digest:snapshot.digest,sections:snapshot.sections},editorial:{compilerVersion:VERSIONS.compiler,sections,closingSummary:closing,coverage:publicationCoverage(sections,profile.locales)},technical:{diagramRegistryVersion:VERSIONS.diagram,diagrams,fidelity:inspectBaziDiagramFidelity(diagrams,{qualityRevision})},publication:{pagePlanVersion:VERSIONS.pagePlan,pageCount:resolved.length,pages:resolved,recomposePass,recomposeOperations:['TIGHTER_SOURCE_SELECTION','DEDUPLICATE_CONTEXT','NO_SAFE_REGISTERED_COMPRESSION','APPROVED_TYPOGRAPHY','LOCAL_REFLOW'].slice(0,recomposePass)},providerUsage:{records:snapshot.usage||[],publicationProviderCalls:0,semanticVerifierCalls:0,semanticReviewCalls:0},cache:{manuscriptNamespace:'BDM:MANUSCRIPT',publicationNamespace:'BDM:PUBLICATION'},lineage:{versions:VERSIONS,authorityLineage:pack.lineage,manuscriptDigest:snapshot.digest},customerPublishable:productionFrozen&&!fixture&&!snapshot.fixture&&!snapshot.reviewSource&&publicationCoverage(sections,profile.locales).every(s=>Object.values(s.locales).every(l=>l.status==='PASS')),reviewSource:snapshot.reviewSource||null,fixture:fixture||snapshot.fixture===true,reviewOnly:!productionFrozen||fixture||snapshot.fixture===true};if(consistency)assertBaziPublicationDiagramConsistency(ir);ir.digest=await digest(ir);return deepFreeze(ir);
++}
++
++// R1.1 source-complete selection. Bilingual paragraph pairs stay on the same
++// physical page and every approved unit remains visible exactly once in the body.
++function completePublicationSelection(source,profile,authorityDigest){
++ if(!source.publicationUnits?.length)throw Error('BZR_R11_SOURCE_UNITS_REQUIRED');const cursors={'zh-Hans':0,en:0};
++ const units=source.publicationUnits.map(u=>({...u,...Object.fromEntries(LOCALES.map(l=>{const text=u[l].text,start=cursors[l];cursors[l]+=text.length+2;return [l,{text,start,end:start+text.length,sourceRef:u.sourceRef,...classifySpan({text,start,end:start+text.length},source.sectionId),sourceKind:u.kind,authorityDigest}]}))}));
++ const groups=partitionBaziPublicationUnits(units,profile);return Object.fromEntries(LOCALES.map(l=>[l,{excerpts:groups.map(g=>g.map(u=>u[l])),insightCards:units.slice(0,3).map(u=>u[l]),allSpans:units.map(u=>u[l]),sourceComplete:true,contentAdmission:source.contentAdmission}]));
+ }
+diff --git a/functions/personal-reading/publication-fit/bazi-diagram-fidelity.js b/functions/personal-reading/publication-fit/bazi-diagram-fidelity.js
+index 9f358053..103f9fe5 100644
+--- a/functions/personal-reading/publication-fit/bazi-diagram-fidelity.js
++++ b/functions/personal-reading/publication-fit/bazi-diagram-fidelity.js
+@@ -1,4 +1,4 @@
+-import {STEMS,BRANCHES} from '../../bzr-full-production/bazi-structural-registry.js';
++import {STEMS,BRANCHES,SEASON_BY_MONTH_BRANCH} from '../../bzr-full-production/bazi-structural-registry.js';
+ // Approved visual semantics, not screenshot matching. No chart calculation.
+ export const BAZI_DIAGRAM_FIDELITY_V1=Object.freeze({
+  D01:{grammar:'PILLAR_MATRIX',features:['hidden-stems','ten-god-labels']},D02:{grammar:'ELEMENT_BARS',features:['month-command']},D03:{grammar:'TEN_GOD_RING',features:['ring','visible-hidden','legend']},
+@@ -30,7 +30,8 @@ function normalizeDiagramRelation(r,index,pillars){
+  const members=r.members||[],memberZh=r.memberZh||members.map(code=>(layer==='STEM'?STEMS:BRANCHES)[code]?.zh||code);
+  return {canonical:true,layer,type:r.type,positions:r.positions.map(p=>positionIds[p]),memberZh,members,transformationEstablished:r.transformationEstablished??false,sourcePath:r.sourcePath||'natal.relationships.'+index,zhLabel:labels[0],enLabel:labels[1],summary:joinedDisplay([memberZh.join('—'),labels[0]],' · ')};
+ }
+-export function enrichBaziDiagram(d,pack){
++export function enrichBaziDiagram(d,pack,options={}){
++ const revised=options.qualityRevision==='BZR-R1.1';
+  const spec=BAZI_DIAGRAM_FIDELITY_V1[d.id];if(!spec)throw Error('UNSUPPORTED_PRIMARY_DIAGRAM_GRAMMAR');
+  const facts=pack.natal.tenGodFacts,positions=['year','month','day','hour'];
+  const god=(g)=>facts.filter(f=>f.tenGod===g).map(f=>f.token).filter((v,i,a)=>a.indexOf(v)===i).join('、')||'—';
+@@ -38,8 +39,8 @@ export function enrichBaziDiagram(d,pack){
+  const peer=n('peer','比肩','Peer',god('比肩'),'natal.tenGodFacts');
+  const output=n('output','食神 · 伤官','Eating God · Hurting Officer',god('食神')+' / '+god('伤官'),'natal.tenGodFacts');
+  const wealth=n('wealth','偏财 · 正财','Indirect · Direct Wealth',god('偏财')+' / '+god('正财'),'natal.tenGodFacts');
+- const resource=n('resource','偏印支持','Indirect Resource',god('偏印'),'natal.tenGodFacts');
+- const pressure=n('pressure','七杀责任','Seven Killings',god('七杀'),'natal.tenGodFacts');
++ const resource=revised?n('resource','印星支持','Resource support',[god('偏印'),god('正印')].filter(x=>x!=='—').join(' / ')||'—','natal.tenGodFacts'):n('resource','偏印支持','Indirect Resource',god('偏印'),'natal.tenGodFacts');
++ const pressure=revised?n('pressure','官杀责任','Officer / pressure',[god('七杀'),god('正官')].filter(x=>x!=='—').join(' / ')||'—','natal.tenGodFacts'):n('pressure','七杀责任','Seven Killings',god('七杀'),'natal.tenGodFacts');
+  const day=n('day','日主','Day Master',pack.natal.dayMaster,'natal.dayMaster');
+  const graph={nodes:[],edges:[],layers:[],legend:[]};
+  const edge=(from,to,zh,en,type='FUNCTIONAL')=>({from,to,zh,en,type,sourcePath:type==='FUNCTIONAL'?'globalVerdict.primaryPattern':'natal.relationships'});
+@@ -61,7 +62,12 @@ export function enrichBaziDiagram(d,pack){
+  if(d.id==='D13')cycle([peer,output,wealth,pressure,resource]);
+  if(d.id==='D14'){graph.layers=[n('natal','原局','Natal',Object.values(pack.natal.pillars).join(' · '),'natal.pillars'),n('dayun','当前大运','Current Da Yun',displayPart(pack.timing?.daYun)||'—','timing.daYun'),n('annual','年度层','Annual layer',displayPart(pack.timing?.annual)||'—','timing.annual')];graph.nodes=graph.layers;graph.edges=[{...edge('natal','dayun','叠加读取','Layered reading'),sourcePath:'timing'}, {...edge('dayun','annual','当前激活','Current activation'),sourcePath:'timing'}];graph.legend=(pack.timing?.relations||[]).map((r,i)=>({zh:r+(r==='甲己合'?'，不判化土':''),en:['Jia–Ji combination; no Earth transformation','Si–Shen combination and break','Si–Yin harm','Yin–Si–Shen punishment','Annual Yin repeats natal Yin','Annual Yin clashes with natal Shen','Annual Yin harms Da Yun Si'][i]||r,sourcePath:'timing.relations.'+i}));}
+  if(d.id==='D15'){graph.nodes=[day,peer,output,wealth,pressure,resource,n('timing','大运 · 年度','Da Yun · Annual',joinedDisplay([pack.timing?.daYun,pack.timing?.annual]),'timing'),n('relations','原局关系','Natal relations',joinedDisplay(pack.natal.relationships.map((r,i)=>normalizeDiagramRelation(r,i,pack.natal.pillars).summary),' · '),'natal.relationships')];graph.edges=graph.nodes.slice(1).map(v=>edge('day',v.id,'整体关联','Integrated reading'));}
+- return {...d,visualGrammarId:spec.grammar,features:spec.features,graph,caption:{zh:d.id==='D02'?graph.legend[0].zh:d.id==='D03'?'透干与藏干分列；记录数量不等于结构力量。':'连线表达结构或功能路径，不代表事件因果或必然结果。',en:d.id==='D02'?graph.legend[0].en:d.id==='D03'?'Visible and hidden records are separate; counts are not structural strength.':'Connectors describe structural or functional paths, not event causation or guaranteed outcomes.'}};
++ if(revised){
++  if(d.id==='D02'){const branch=Object.values(BRANCHES).find(x=>x.zh===pack.natal.monthBranch),season=SEASON_BY_MONTH_BRANCH[branch.code],label={SPRING:['春令','spring'],LATE_SPRING:['季春','late spring'],SUMMER:['夏令','summer'],LATE_SUMMER:['季夏','late summer'],AUTUMN:['秋令','autumn'],LATE_AUTUMN:['季秋','late autumn'],WINTER:['冬令','winter'],LATE_WINTER:['季冬','late winter']}[season],c=options.consistency;graph.legend=[{zh:branch.zh+'月 · '+label[0]+'；四干'+c.visibleStemCount+' + 藏干'+c.hiddenStemCount+' = '+c.totalStemOccurrences+'次。地支本气另列，不重复加总；非加权强弱分数。',en:branch.zh+' month · '+label[1]+'; '+c.visibleStemCount+' visible + '+c.hiddenStemCount+' hidden stems = '+c.totalStemOccurrences+' occurrences. Branch identities are separate, not added again; no weighted strength score.'}];}
++  if(d.id==='D04'){graph.nodes[0].zh='月令';graph.nodes[0].en='Month command';graph.edges[0].zh='结合月令';graph.edges[0].en='Month-command context';}
++  if(d.id==='D14'){graph.legend=[{zh:pack.timing.targetContext?'当前大运、流年以已选择的观察时间为准。':'未提供完整观察时间，当前大运及流年未准入。',en:pack.timing.targetContext?'Current Da Yun and annual identity follow the selected observation time.':'No complete observation time; current Da Yun and annual reading are unavailable.',sourcePath:'timing.identityState'}];}
++ }
++ return {...d,...(revised?{qualityRevision:options.qualityRevision}:{}),visualGrammarId:spec.grammar,features:spec.features,graph,caption:{zh:d.id==='D02'?graph.legend[0].zh:d.id==='D03'?(revised?'三他干与藏干分列；不计日主自身。次数不是结构强弱分数。':'透干与藏干分列；记录数量不等于结构力量。'):'连线表达结构或功能路径，不代表事件因果或必然结果。',en:d.id==='D02'?graph.legend[0].en:d.id==='D03'?(revised?'Other visible stems and hidden stems are separate; the Day Master itself is excluded. Counts are not strength scores.':'Visible and hidden records are separate; counts are not structural strength.'):'Connectors describe structural or functional paths, not event causation or guaranteed outcomes.'}};
+ }
+ export const BAZI_DIAGRAM_FIDELITY_R1_ACCEPTED_CANDIDATE=Object.freeze({
+  D04:{nodes:['month','day','peer','resource','support','output'],edges:['month>day','peer>day','resource>day','support>day','day>output']},
+@@ -77,6 +83,6 @@ export const BAZI_DIAGRAM_FIDELITY_R1_ACCEPTED_CANDIDATE=Object.freeze({
+  D14:{nodes:['natal','dayun','annual'],edges:['natal>dayun','dayun>annual']},
+  D15:{nodes:['day','peer','output','wealth','pressure','resource','timing','relations'],edges:['day>peer','day>output','day>wealth','day>pressure','day>resource','day>timing','day>relations']}
+ });
+-export function inspectBaziDiagramFidelity(diagrams){
+- return Object.entries(BAZI_DIAGRAM_FIDELITY_V1).map(([id,spec])=>{const d=diagrams.find(d=>d.id===id),errors=[];if(!d||d.visualGrammarId!==spec.grammar)errors.push('GRAMMAR');if(d){const fixed=BAZI_DIAGRAM_FIDELITY_R1_ACCEPTED_CANDIDATE[id];if(fixed){const nodes=d.graph.nodes.map(n=>n.id),edges=d.graph.edges.map(e=>e.from+'>'+e.to);if(nodes.length!==fixed.nodes.length||fixed.nodes.some(n=>!nodes.includes(n)))errors.push('REQUIRED_NODE_TOPOLOGY');if(edges.length!==fixed.edges.length||fixed.edges.some(e=>!edges.includes(e)))errors.push('REQUIRED_EDGE_TOPOLOGY');if(d.graph.nodes.some(n=>!n.zh||!n.en||!n.sourcePath)||d.graph.edges.some(e=>!e.zh||!e.en||!e.type||!e.sourcePath))errors.push('LABEL_OR_PROVENANCE');}if(id==='D05'&&(d.graph.edges.filter(e=>e.type==='三合').length!==2||d.graph.edges.filter(e=>e.type==='冲').length!==1||d.graph.edges.some(e=>e.transformationEstablished)))errors.push('RELATION_SEMANTICS');if(id==='D14'&&(d.graph.legend.length!==7||!d.graph.legend[0].zh.includes('不判化土')))errors.push('TIMING_RELATIONS');if(spec.features.some(f=>!d.features.includes(f)))errors.push('FEATURE');if(!d.nodes.length)errors.push('NODES');if(!['D01','D02','D03'].includes(id)&&!d.graph.edges.length)errors.push('EDGES');if(id==='D14'&&d.graph.layers.length!==3)errors.push('LAYERS');if(id==='D03'&&!d.nodes.every(n=>Number.isInteger(n.visible)&&Number.isInteger(n.hidden)))errors.push('VISIBLE_HIDDEN');if(id==='D06'&&!['wealth','resource'].every(k=>d.graph.nodes.some(n=>n.id===k)))errors.push('CHAIN');if(['D07','D13'].includes(id)&&(!d.graph.nodes.every(n=>d.graph.edges.filter(e=>e.from===n.id).length===1)||d.graph.edges.length!==d.graph.nodes.length))errors.push('CYCLE');if(id==='D13'&&d.graph.nodes.length!==5)errors.push('FIVE_FUNCTIONS');if(id==='D15'&&(!d.graph.nodes.some(n=>n.id==='day')||d.graph.edges.length!==d.graph.nodes.length-1))errors.push('RADIAL');if(['D03','D05','D14'].includes(id)&&!d.graph.legend.length)errors.push('LEGEND');if(id==='D01'&&!d.nodes.every(n=>Array.isArray(n.hiddenFacts)&&n.stemGod))errors.push('HIDDEN_FACTS');if(d.graph.edges.some(e=>!d.graph.nodes.some(n=>n.id===e.from)||!d.graph.nodes.some(n=>n.id===e.to)))errors.push('DANGLING_EDGE');}return {diagramId:id,visualGrammarId:spec.grammar,requiredFeatures:spec.features,nodes:d?.graph.nodes.map(n=>n.id)||[],edges:d?.graph.edges||[],layers:d?.graph.layers||[],status:errors.length?'FAIL':'PASS',errors};});
++export function inspectBaziDiagramFidelity(diagrams,{qualityRevision=null}={}){const revised=qualityRevision==='BZR-R1.1';
++ return Object.entries(BAZI_DIAGRAM_FIDELITY_V1).map(([id,spec])=>{const d=diagrams.find(d=>d.id===id),errors=[];if(!d||d.visualGrammarId!==spec.grammar)errors.push('GRAMMAR');if(d){const fixed=BAZI_DIAGRAM_FIDELITY_R1_ACCEPTED_CANDIDATE[id];if(fixed&&!(revised&&['D05','D10'].includes(id))){const nodes=d.graph.nodes.map(n=>n.id),edges=d.graph.edges.map(e=>e.from+'>'+e.to);if(nodes.length!==fixed.nodes.length||fixed.nodes.some(n=>!nodes.includes(n)))errors.push('REQUIRED_NODE_TOPOLOGY');if(edges.length!==fixed.edges.length||fixed.edges.some(e=>!edges.includes(e)))errors.push('REQUIRED_EDGE_TOPOLOGY');if(d.graph.nodes.some(n=>!n.zh||!n.en||!n.sourcePath)||d.graph.edges.some(e=>!e.zh||!e.en||!e.type||!e.sourcePath))errors.push('LABEL_OR_PROVENANCE');}if(!revised&&id==='D05'&&(d.graph.edges.filter(e=>e.type==='三合').length!==2||d.graph.edges.filter(e=>e.type==='冲').length!==1||d.graph.edges.some(e=>e.transformationEstablished)))errors.push('RELATION_SEMANTICS');if(!revised&&id==='D14'&&(d.graph.legend.length!==7||!d.graph.legend[0].zh.includes('不判化土')))errors.push('TIMING_RELATIONS');if(spec.features.some(f=>!d.features.includes(f)))errors.push('FEATURE');if(!d.nodes.length)errors.push('NODES');if(!['D01','D02','D03'].includes(id)&&!d.graph.edges.length)errors.push('EDGES');if(id==='D14'&&d.graph.layers.length!==3)errors.push('LAYERS');if(id==='D03'&&!d.nodes.every(n=>Number.isInteger(n.visible)&&Number.isInteger(n.hidden)))errors.push('VISIBLE_HIDDEN');if(id==='D06'&&!['wealth','resource'].every(k=>d.graph.nodes.some(n=>n.id===k)))errors.push('CHAIN');if(['D07','D13'].includes(id)&&(!d.graph.nodes.every(n=>d.graph.edges.filter(e=>e.from===n.id).length===1)||d.graph.edges.length!==d.graph.nodes.length))errors.push('CYCLE');if(id==='D13'&&d.graph.nodes.length!==5)errors.push('FIVE_FUNCTIONS');if(id==='D15'&&(!d.graph.nodes.some(n=>n.id==='day')||d.graph.edges.length!==d.graph.nodes.length-1))errors.push('RADIAL');if(['D03','D05','D14'].includes(id)&&!d.graph.legend.length)errors.push('LEGEND');if(id==='D01'&&!d.nodes.every(n=>Array.isArray(n.hiddenFacts)&&n.stemGod))errors.push('HIDDEN_FACTS');if(d.graph.edges.some(e=>!d.graph.nodes.some(n=>n.id===e.from)||!d.graph.nodes.some(n=>n.id===e.to)))errors.push('DANGLING_EDGE');}return {diagramId:id,visualGrammarId:spec.grammar,requiredFeatures:spec.features,nodes:d?.graph.nodes.map(n=>n.id)||[],edges:d?.graph.edges||[],layers:d?.graph.layers||[],status:errors.length?'FAIL':'PASS',errors};});
+ }
+diff --git a/functions/personal-reading/publication-fit/bazi-publication-fit-gate.js b/functions/personal-reading/publication-fit/bazi-publication-fit-gate.js
+index 48de1050..795d7ee6 100644
+--- a/functions/personal-reading/publication-fit/bazi-publication-fit-gate.js
++++ b/functions/personal-reading/publication-fit/bazi-publication-fit-gate.js
+@@ -55,7 +55,7 @@ export function measureBaziPublication(root,options={}){
+   if(failed)overflowPages.push(pageId);
+  }
+  const assetFailures=[...root.querySelectorAll('img')].filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src),diagrams=[...root.querySelectorAll('figure[data-diagram-id]')];
+- const fail=pages.length!==48||diagrams.length!==15||new Set(diagrams.map(d=>d.dataset.diagramId)).size!==15||overflowPages.length||clippedSlots.length||hiddenTextSlots.length||fontMinimumViolations.length||assetFailures.length||missingLocales.length||diagramViolations.length||diagramLocaleViolations.length||root.querySelector('[data-missing-required]');
++ const fail=pages.length!==(options.expectedPageCount??48)||diagrams.length!==15||new Set(diagrams.map(d=>d.dataset.diagramId)).size!==15||overflowPages.length||clippedSlots.length||hiddenTextSlots.length||fontMinimumViolations.length||assetFailures.length||missingLocales.length||diagramViolations.length||diagramLocaleViolations.length||root.querySelector('[data-missing-required]');
+  return {presentationMode:mode,layoutProfileVersion:profile.id,pageCount:pages.length,diagramCount:diagrams.length,overflowPages,clippedSlots,hiddenTextSlots,fontMinimumViolations,assetFailures,missingLocales,diagramLocaleViolations,diagramViolations,topology,slots,recomposePasses:[],fitStatus:fail?'FAIL':'PASS',providerCalls:0};
+ }
+ export function assertBaziFitRelease(ir,receipt){if(receipt.presentationMode!==ir.presentationMode||!['PASS','PASS_AFTER_RECOMPOSE'].includes(receipt.fitStatus))throw Error('PUBLICATION_OVERFLOW_UNRESOLVED');if(ir.customerPublishable!==true)throw Error('HUMAN_REVIEW_OR_COVERAGE_PENDING');return true;}
+diff --git a/functions/personal-reading/deep-manuscript/bazi-r11-publication-adapter.js b/functions/personal-reading/deep-manuscript/bazi-r11-publication-adapter.js
+new file mode 100644
+--- /dev/null
++++ b/functions/personal-reading/deep-manuscript/bazi-r11-publication-adapter.js
+@@ -0,0 +1,65 @@
++import {describeBaziNativeCycle} from '../../personal-professional-reading/bazi-customer-narrative-composer.js';
++import {TEN_GODS} from '../../bzr-full-production/bazi-structural-registry.js';
++import {BAZI_SECTION_EDITORIAL} from '../bazi-section-editorial.js';
++import {describeBaziR11TenGod} from '../bazi-section-publication.js';
++import {SECTIONS,FIELD,VERSIONS,digest} from './bazi-deep-manuscript-contract.js';
++const MAP={S02:['CAPABILITY','S02_PERSONALITY'],S03:['LIFE_OPERATION','S03_LIFE_STRUCTURE'],S04:['CAREER','S04_CAREER'],S05:['WEALTH','S05_WEALTH'],S06:['RELATIONSHIPS','S06_RELATIONSHIP'],S07:['FAMILY',null],S08:['PRESSURE','S07_HEALTH']};
++// Publication adaptation only: existing native customer prose, R11 editorial
++// copy, R11 Ten-God description and existing Reality Bridge questions. Never
++// call the reference-specific R11 paragraph projection as a generic manuscript.
++export async function adaptBaziR11Publication({reading,pack,sourceDigest}={}){
++ if(reading?.evidence?.sourceNatalProjectionId!==pack.lineage?.publicationSource?.projectionId)throw Error('BZR_R11_READING_SOURCE_MISMATCH');
++ const p=reading.professionalModules,n=p.customerNarrative,sections=[],seen=new Set();
++ for(const spec of SECTIONS){
++  const units=[];
++  const add=(id,text,sourceRef,kind='METHOD_INTERPRETATION')=>{
++   if(!text?.en||!text?.zhHans)return;const key=text.en+'|'+text.zhHans;if(seen.has(key))return;seen.add(key);units.push({id:spec.sectionId+':'+id,sourceRef,kind,'zh-Hans':{text:text.zhHans},en:{text:text.en}});
++  };
++  if(MAP[spec.sectionId]){
++   const [code,edKey]=MAP[spec.sectionId],index=n.topicNarratives.findIndex(t=>t.topicCode===code),topic=n.topicNarratives[index],facts=p.professionalTopics.topics.find(t=>t.topicCode===code);
++   if(!topic||!facts)throw Error('BZR_R11_NATIVE_TOPIC_REQUIRED');
++   const ref='professionalModules/customerNarrative/topicNarratives/'+index;
++   add('lead',topic.lead,ref+'/lead');add('native-mechanism',topic.development,ref+'/development');
++   for(const [i,depth] of (topic.publicationDepth||[]).entries())add('native-depth-'+i,depth.text,ref+'/publicationDepth/'+i);
++   if(edKey){const ed=BAZI_SECTION_EDITORIAL[edKey].bridge;add('r11-domain-mechanism',{en:ed.en,zhHans:ed['zh-Hans']},'functions/personal-reading/bazi-section-editorial.js#'+edKey+'.bridge');}
++   // Pick different topic-relevant actual records, not a reference chart's gods.
++   const candidates=[...(facts.relevantTenGods||[])].filter(x=>x.count>0).sort((a,b)=>b.count-a.count||a.tenGodCode.localeCompare(b.tenGodCode));
++   for(const t of candidates.slice(0,2)){
++    const item=p.tenGods.items.find(x=>x.tenGodCode===t.tenGodCode);if(!item)throw Error('BZR_R11_TEN_GOD_SOURCE_REQUIRED');
++    const en=describeBaziR11TenGod(item,'en'),zh=describeBaziR11TenGod(item,'zh-Hans');
++    // Exact first complete sentence; the shared caution is not repeated 14 times.
++    add('r11-'+t.tenGodCode,{en:en.match(/^[\s\S]*?[.!?](?:\s|$)/)?.[0].trim()||en,zhHans:zh.match(/^[\s\S]*?[。！？]/)?.[0]||zh},'professionalModules/tenGods/items/'+p.tenGods.items.indexOf(item));
++   }
++   add('condition',topic.condition,ref+'/condition','BOUNDARY');
++   const prompts=p.realityBridge.topicPrompts.find(t=>t.topicCode===code)?.prompts||[];
++   for(const prompt of prompts.slice(0,2))add('observe-'+prompt.index,prompt.prompt,'professionalModules/realityBridge#'+prompt.promptId,'OBSERVATION_PROMPT');
++  }else{
++   const timeline=p.professionalTimeline,ed=BAZI_SECTION_EDITORIAL.S08_TIMING;
++   if(spec.sectionId==='S09'){
++    add('r11-long-term-domain',{en:ed.intro.en,zhHans:ed.intro['zh-Hans']},'functions/personal-reading/bazi-section-editorial.js#S08_TIMING.intro');
++    const cycles=timeline.daYunTimeline||[];
++    if(!cycles.length)add('no-cycles',{en:'No admitted Da Yun sequence is available for this report. A personal long-term timing reading is therefore unavailable.',zhHans:'本报告没有获准的大运序列，因此暂不能提供个人长期时序解读。'},'professionalModules/professionalTimeline/daYunTimeline','BOUNDARY');
++    for(const cycle of cycles){
++     const pillar=cycle.pillar.stem.zh+cycle.pillar.branch.zh;
++     add('cycle-'+cycle.cycleNumber,{en:`Da Yun ${cycle.cycleNumber}: ${pillar}; age-band reference ${cycle.startAge}-${cycle.endAge}. The stem role is ${cycle.stemTenGod.en}; the recorded hidden-stem roles are ${cycle.branchHiddenTenGods.map(t=>TEN_GODS[t.tenGodCode]?.en||t.tenGodZh).join(', ')}.`,zhHans:`第${cycle.cycleNumber}步大运：${pillar}；年龄参考${cycle.startAge}-${cycle.endAge}岁。运干对应${cycle.stemTenGod.zh}，藏干对应${cycle.branchHiddenTenGods.map(t=>t.tenGodZh).join('、')}。`},'professionalModules/professionalTimeline/daYunTimeline/'+(cycle.cycleNumber-1),'TIMING_FACT');
++     add('cycle-mechanism-'+cycle.cycleNumber,describeBaziNativeCycle(cycle),'professionalModules/professionalTimeline/daYunTimeline/'+(cycle.cycleNumber-1)+'#functionGroups','TIMING');
++    }
++    add('cycle-scope',{en:'These are the admitted cycle sequence and age-band references, not precise transition instants or a claim that a particular cycle is current. Selecting a current Da Yun and annual layer requires a complete observation date, time and timezone.',zhHans:'这里列出已有的大运顺序与年龄参考，不把它们当作精确交运时刻，也不把其中某一步直接称为当前大运。选择当前大运与流年层，需要完整的观察日期、时间与时区。'},'professionalModules/professionalTimeline/state','BOUNDARY');
++   }else if(n.timingNarrative.available){
++    add('current-identity',n.timingNarrative.headline,'professionalModules/customerNarrative/timingNarrative/headline','TIMING_FACT');
++    n.timingNarrative.paragraphs.forEach((t,i)=>add('current-'+i,t,'professionalModules/customerNarrative/timingNarrative/paragraphs/'+i,'TIMING'));
++    const w=timeline.currentWindow,year=w.annual;
++    add('annual-source',{en:`Annual layer / Liu Nian: ${year.stem.zh}${year.branch.zh}; observation date ${timeline.targetContext.targetDate}.`,zhHans:`年度层／流年：${year.stem.zh}${year.branch.zh}；观察日期：${timeline.targetContext.targetDate}。`},'professionalModules/professionalTimeline/currentWindow/annual','TIMING_FACT');
++    add('r11-timing-domain',{en:ed.bridge.en,zhHans:ed.bridge['zh-Hans']},'functions/personal-reading/bazi-section-editorial.js#S08_TIMING.bridge');
++   }else{
++    add('not-admitted',n.timingNarrative.headline,'professionalModules/customerNarrative/timingNarrative/headline','BOUNDARY');
++    add('missing-input',{en:'The observation date, local time, IANA timezone and UTC offset have not been supplied together. No current Da Yun or annual pillar is selected, and no current personal timing interpretation is claimed.',zhHans:'观察日期、当地时间、IANA时区与UTC偏移尚未完整提供。本报告不选择当前大运或流年干支，也不宣称已完成当前个人时序解读。'},'normalizeBaziTargetContext#UNAVAILABLE','BOUNDARY');
++    add('r11-timing-domain',{en:ed.bridge.en,zhHans:ed.bridge['zh-Hans']},'functions/personal-reading/bazi-section-editorial.js#S08_TIMING.bridge');
++   }
++  }
++  const text=Object.fromEntries(Object.entries(FIELD).map(([l,f])=>[f,units.map(u=>u[l].text).join('\n\n')]));
++  sections.push({sectionId:spec.sectionId,...text,publicationUnits:units,contentAdmission:spec.sectionId==='S10'&&!n.timingNarrative.available?'CURRENT_TIMING_UNAVAILABLE_EXPLICIT_BOUNDARY':'NATIVE_SOURCE_BOUND_R11_REUSE',unitDigests:{'zh-Hans':await digest(text.zhHansManuscript),en:await digest(text.enManuscript)}});
++ }
++ const body={version:'BDM-MANUSCRIPT-SNAPSHOT-1',method:'BAZI',authorityDigest:pack.authorityDigest,timingDigest:pack.timingDigest,realityDigest:pack.realityDigest,versions:VERSIONS,sections,usage:[],fixture:true,reviewSource:'USER_ACCEPTED_R11_NATIVE_REUSE_R1_1_CANDIDATE',sourceDigest,providerCalls:0};
++ return {...body,digest:await digest(body)};
++}
+diff --git a/functions/personal-reading/publication-fit/bazi-publication-consistency.js b/functions/personal-reading/publication-fit/bazi-publication-consistency.js
+new file mode 100644
+--- /dev/null
++++ b/functions/personal-reading/publication-fit/bazi-publication-consistency.js
+@@ -0,0 +1,51 @@
++import {STEMS,BRANCHES,SEASON_BY_MONTH_BRANCH} from '../../bzr-full-production/bazi-structural-registry.js';
++import {digest} from '../deep-manuscript/bazi-deep-manuscript-contract.js';
++import {assertBaziNativeAuthorityComplete} from '../../report-delivery/bazi-customer-native-inputs.js';
++const fail=code=>{throw Object.assign(Error(code),{code,status:409});};
++// Cross-field validation of existing native outputs, never a second calculator.
++export async function assertBaziPublicationConsistency(pack,source){
++ if(!source?.chart||!source.tenGods||!source.relationships||!source.projection)fail('BZR_PUBLICATION_NATIVE_SOURCE_REQUIRED');
++ const {chart,tenGods,relationships,projection}=source;
++ if(await digest(projection)!==await digest(source.execution?.canonicalProjection))fail('BZR_PUBLICATION_EXECUTION_SNAPSHOT_MISMATCH');
++ const time=source.execution.execution.partialExecution.coreResults.find(r=>r.output?.trueSolarTime)?.output,input=source.input;
++ if(!time||time.recordedCivilTime.localDate!==input?.birthDate||time.recordedCivilTime.localTime!==input.birthTime||time.timezone.timezoneId!==input.timezone.iana||time.coordinate.longitude!==input.birthPlace.longitude||time.coordinate.latitude!==input.birthPlace.latitude)fail('BZR_PUBLICATION_TIME_SOURCE_MISMATCH');
++ if(pack.subject.birthDate!==input.birthDate||pack.subject.birthTime!==input.birthTime)fail('BZR_PUBLICATION_COVER_INPUT_MISMATCH');
++ assertBaziNativeAuthorityComplete({chart,tenGods,relationships,projection:pack.natal});
++ if(chart.sourceProjection.projectionId!==projection.projectionId||pack.natal.dayMaster!==chart.dayMaster.zh||pack.natal.monthBranch!==chart.monthCommand.branch.zh||pack.natal.monthBranch!==pack.natal.pillars.month[1])fail('BZR_PUBLICATION_CROSS_FIELD_IDENTITY');
++ if(chart.monthCommand.season!==SEASON_BY_MONTH_BRANCH[chart.monthCommand.branch.code])fail('BZR_PUBLICATION_SEASON_MISMATCH');
++ const hidden=pack.natal.tenGodFacts.filter(f=>f.position.endsWith('_BRANCH_HIDDEN'));
++ for(const position of ['year','month','day','hour']){
++  const branch=Object.values(BRANCHES).find(x=>x.zh===pack.natal.pillars[position][1]);
++  const expected=branch.hiddenStems.map(x=>STEMS[x].zh),actual=hidden.filter(x=>x.position===position.toUpperCase()+'_BRANCH_HIDDEN').map(x=>x.token);
++  if(JSON.stringify(expected)!==JSON.stringify(actual))fail('BZR_PUBLICATION_HIDDEN_STEM_MISMATCH');
++ }
++ const visible=chart.fiveElementInventory.visibleStems,hiddenCounts=chart.fiveElementInventory.hiddenStemsUnweighted;
++ const inventory=Object.fromEntries(Object.keys(visible).map(e=>[e,visible[e]+hiddenCounts[e]]));
++ const tenGodRecords=pack.natal.tenGodFacts.filter(f=>f.position!=='DAY_STEM');
++ if(Object.values(inventory).reduce((a,b)=>a+b,0)!==4+hidden.length||tenGodRecords.length!==3+hidden.length)fail('BZR_PUBLICATION_INVENTORY_CONSERVATION');
++ return {version:'BZR-PUBLICATION-CONSISTENCY-1',sourceDigest:await digest(source),projectionId:projection.projectionId,chartDigest:chart.chartDigest,tenGodDigest:tenGods.tenGodDigest,pillars:pack.natal.pillars,dayMaster:pack.natal.dayMaster,tenGodCounts:tenGodRecords.reduce((o,f)=>(o[f.tenGod]=(o[f.tenGod]||0)+1,o),{}),monthBranch:chart.monthCommand.branch.zh,season:chart.monthCommand.season,inventoryDefinition:'VISIBLE_STEMS_PLUS_HIDDEN_STEMS_UNWEIGHTED',visibleStemCount:4,hiddenStemCount:hidden.length,totalStemOccurrences:4+hidden.length,separateBranchCount:4,weighted:false,tenGodOccurrencesExcludingDayMaster:tenGodRecords.length,inventory,timeBasis:{recordedCivilTime:time.recordedCivilTime,coordinate:time.coordinate,timezone:time.timezone,trueSolarTime:time.trueSolarTime,policy:time.lineage,solarCalendar:time.solarCalendar}};
++}
++
++export function assertBaziPublicationDiagramConsistency(ir){
++ const c=ir.consistency,diagrams=ir.technical.diagrams,d1=diagrams.find(d=>d.id==='D01'),d2=diagrams.find(d=>d.id==='D02'),d3=diagrams.find(d=>d.id==='D03');
++ if(d1.nodes.some((n,i)=>n.value!==c.pillars[['year','month','day','hour'][i]])||ir.identity.dayMaster!==c.dayMaster)fail('BZR_PUBLICATION_PILLAR_RENDER_MISMATCH');
++ if(d2.nodes.some(n=>n.value!==c.inventory[n.element])||!d2.caption.zh.includes(c.monthBranch+'月'))fail('BZR_PUBLICATION_ELEMENT_RENDER_MISMATCH');
++ if(d3.nodes.some(n=>n.value!==(c.tenGodCounts[n.label.split(' / ')[0]]||0)||n.visible+n.hidden!==n.value))fail('BZR_PUBLICATION_TEN_GOD_RENDER_MISMATCH');
++ return true;
++}
++
++// Complete, paired paragraph partition. No ranking, truncation or empty tail page.
++export function partitionBaziPublicationUnits(units,profile){
++ if(!units?.length)fail('BZR_PUBLICATION_NO_APPROVED_BODY');
++ const sizes=units.map(u=>Math.max(...profile.locales.map(l=>u[l].text.length/profile.bodyBudget[l])));
++ if(sizes.some(x=>x>1))fail('BZR_PUBLICATION_SOURCE_UNIT_EXCEEDS_PAGE');
++ const n=units.length;let solution;
++ for(let pages=1;pages<=n;pages++){
++  const target=sizes.reduce((a,b)=>a+b,0)/pages,memo=new Map();
++  const solve=(i,k)=>{if(k===0)return i===n?{cost:0,groups:[]}:null;const key=i+':'+k;if(memo.has(key))return memo.get(key);let best=null;
++   for(let end=i+1;end<=n-k+1;end++){const part=units.slice(i,end);if(profile.locales.some(l=>part.reduce((s,u)=>s+u[l].text.length,0)>profile.bodyBudget[l]))break;const rest=solve(end,k-1);if(!rest)continue;const size=sizes.slice(i,end).reduce((a,b)=>a+b,0),cost=(size-target)**2+rest.cost;if(!best||cost<best.cost)best={cost,groups:[part,...rest.groups]};}memo.set(key,best);return best;};
++  solution=solve(0,pages);if(solution)break;
++ }
++ if(!solution||solution.groups.some(g=>!g.length))fail('BZR_PUBLICATION_PARTITION_FAILED');
++ return solution.groups;
++}

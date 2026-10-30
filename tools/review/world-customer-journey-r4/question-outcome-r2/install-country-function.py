@@ -1,0 +1,2 @@
+from pathlib import Path
+r=Path(r'C:/Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios');p=r/'assets/js/pages/civilization-atlas/world-country-search.js';s=p.read_text(encoding='utf-8');a=s.index('export function countriesInQuestion(');b=s.index('\nexport function mountCountrySearch',a);replacement=Path('C:/phios/tools/review/world-customer-journey-r4/question-outcome-r2/countries-function.js').read_text(encoding='utf-8-sig');p.write_bytes((s[:a]+replacement+s[b:]).encode())

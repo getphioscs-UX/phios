@@ -1,0 +1,95 @@
+{
+  "policyId": "BUSINESS_SUBJECT_AUTHORIZATION_CONTRACT_R6",
+  "revision": "R6.3-SOLE-PROPRIETOR-POLICY-CANDIDATE",
+  "state": "REVIEWABLE_NOT_ADMITTED",
+  "owners": [
+    "ACCOUNT",
+    "PWS",
+    "PROFILE existing reference owner"
+  ],
+  "newIdentityOwner": false,
+  "productionIssuance": false,
+  "privateDocumentsRead": false,
+  "steps": [
+    {
+      "field": "Account Identity",
+      "existingSupport": "Existing OIDC issuer/sub signature, verified email and current non-revoked session",
+      "requiredProcedure": "Authenticated Account is not verified legal identity. Named approved identity proofing process/service must bind real person to Account; no service selected or called."
+    },
+    {
+      "field": "Business Identity",
+      "existingSupport": "Existing PROFILE Subject reference and PWS object/version",
+      "requiredProcedure": "Business name, legal form, jurisdiction, registration reference and current status must be independently reviewed; LGS Wealth Management is a future candidate name only, not verified."
+    },
+    {
+      "field": "Sole Proprietor Verification",
+      "existingSupport": "R6 SOLE_PROPRIETOR / SOLE_PROPRIETORSHIP / VERIFIED_OPERATOR shape",
+      "requiredProcedure": "Approved reviewer must match verified person to current registered proprietor, record match/mismatch and evidence version; self-declaration or email alone fails."
+    },
+    {
+      "field": "Authority Evidence",
+      "existingSupport": "R6 authorityBasis reference/reviewAccountRef/reviewVersion + auditReference",
+      "requiredProcedure": "Private evidence custody, encryption, approved upload/reviewer access, minimization, retention and disposal are not implemented for this proof class. PWS attributes are plain JSON: store opaque refs only, never raw identity documents."
+    },
+    {
+      "field": "Purpose Scope",
+      "existingSupport": "BUSINESS_OWNER_LIQUIDITY_DIAGNOSTIC",
+      "requiredProcedure": "Explicit purpose consent; no all-purpose business mandate."
+    },
+    {
+      "field": "Resource Scope",
+      "existingSupport": "R6 accountId/subjectId/subjectVersion/caseId/resourceScope + active PWS FINANCIAL_SUMMARY membership",
+      "requiredProcedure": "Exact case/source/resource allowlist; no cross-Subject wildcard; downstream financial admission independent."
+    },
+    {
+      "field": "Grant Version",
+      "existingSupport": "Existing relationship attributes + PWS immutable versions",
+      "requiredProcedure": "Approved issuer must bind immutable verification receipt/version, policy version, evidence digest and grant version; no issuer exists here."
+    },
+    {
+      "field": "Effective Date",
+      "existingSupport": "R6 effectiveAt checked against current time",
+      "requiredProcedure": "Issue only after successful independent review, never backdate to imply prior permission."
+    },
+    {
+      "field": "Expiry",
+      "existingSupport": "R6 expiresAt required and checked",
+      "requiredProcedure": "Owner must set explicit review-backed expiry and next review date; no invented fixed duration or infinite default."
+    },
+    {
+      "field": "Revocation",
+      "existingSupport": "R6 current relationship/status + revokedAt checks",
+      "requiredProcedure": "Deny new reads/replays after revocation; independent archival basis never restores revoked access."
+    },
+    {
+      "field": "Audit",
+      "existingSupport": "Existing PWS audit/reference and version owners",
+      "requiredProcedure": "Record actor, reviewer, policy/evidence/grant versions, result/reason and timestamps; minimal refs only; actual reviewer and custodian unassigned."
+    },
+    {
+      "field": "Reverification",
+      "existingSupport": "Existing expiry/version/revocation primitives",
+      "requiredProcedure": "Proposed triggers: expiry, business ownership/status change, identity mismatch, evidence expiry or scope expansion. Suspend affected grant until new review; event feed/issuer/review runbook missing."
+    }
+  ],
+  "workflow": [
+    "REQUEST_REFERENCE_ONLY",
+    "CURRENT_ACCOUNT_CHECK",
+    "APPROVED_PRIVATE_PROOF_CUSTODY",
+    "REAL_PERSON_VERIFICATION",
+    "CURRENT_PROPRIETOR_MATCH",
+    "INDEPENDENT_REVIEW_RECEIPT",
+    "SCOPE_EXPIRY_POLICY_CHECK",
+    "AUTHORIZED_EXISTING_PWS_ISSUER",
+    "REVERIFY_ON_USE"
+  ],
+  "failClosed": "Any missing proof/reviewer/custody/issuer blocks issuance; current synthetic runtime must not be bypassed.",
+  "implementationDelta": [
+    "Approve actual identity proofing service or manual verification procedure and named reviewer, including discrepancy handling.",
+    "Approve secure evidence custody/ref owner; existing encrypted context is not automatically an identity document vault.",
+    "Authorize additive issuer/enforcement in existing Account/PWS only after policy approval; current Runtime stays synthetic-only.",
+    "Implement reviewed verification-to-grant pins/reverification hooks and targeted tests only under later explicit implementation scope."
+  ],
+  "localContractReapproval": false,
+  "admissionReady": false
+}

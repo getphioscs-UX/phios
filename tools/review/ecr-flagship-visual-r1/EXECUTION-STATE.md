@@ -43,3 +43,9 @@ Actual: 6 bilingual dimensions, native ECR selected and synthetic date/time ente
 Review: content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html#ECR-FLAGSHIP-VISUAL-EXPERIENCE-R3
 Preview: http://127.0.0.1:51260/perspectives/phi-configuration/?locale=zh-Hans (reuse existing GET-only preview service).
 Next: Human visual and content review; separate figure upload/verification if approved. No commit/push/merge/deploy/production writes/paid calls performed.
+
+
+## R3.1 verified R2 Figure binding · 2026-10-30
+ECR_FLAGSHIP_VISUAL_R3_1_HUMAN_REVIEW_READY. Source digest 9d114f7f7bf525a41c8a1ce3198e0b960534007695824d08e46c11e0f6eb331e.
+Three exact images/figures/method WebPs GET200/type/decode/distinct-theme/SHA verified; no image writes. P04 portrait whole frame, P03/P07 contain. SVG fallback original bytes preserved, delayed-load frame heights stable. Six bilingual dimensions + 14 protection checks + client/isolated Functions compile PASS. P08 source block and quote function byte-identical; no calculation/Free Preview/payment newly performed.
+Review content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html#ECR-FLAGSHIP-VISUAL-EXPERIENCE-R3-1. Preview http://127.0.0.1:51260/perspectives/phi-configuration/?locale=zh-Hans (existing GET-only server). No pending test/build jobs. No global check/commit/push/merge/deploy/production writes/paid calls. Await human visual review.

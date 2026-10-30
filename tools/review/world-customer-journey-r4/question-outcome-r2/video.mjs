@@ -1,0 +1,6 @@
+import fs from 'node:fs';import {pathToFileURL} from 'node:url';
+import {loadWorldPlaywright,worldBrowserLaunchOptions} from '../../../../scripts/lib/world-browser-runtime.mjs';
+const dir='tools/review/world-customer-journey-r4/question-outcome-r2';const source='C:/Users/Guest Account/Videos/Screen Recordings/Screen Recording 2026-10-30 212337.mp4';
+const browser=await loadWorldPlaywright().chromium.launch(worldBrowserLaunchOptions());
+try{const page=await browser.newPage({viewport:{width:1440,height:1000}});await page.goto(pathToFileURL(source).href);await page.waitForFunction(()=>document.querySelector('video')?.readyState>=1);const duration=await page.locator('video').evaluate(v=>{v.pause();return v.duration});const frames=[];
+for(const fraction of [.02,.17,.33,.5,.67,.83,.97]){const at=duration*fraction;await page.locator('video').evaluate(async(v,t)=>{v.pause();await new Promise(r=>{v.addEventListener('seeked',r,{once:true});v.currentTime=t;});},at);const file=`${dir}/recording-${Math.round(at)}s.png`;await page.screenshot({path:file});frames.push({at,file});}fs.writeFileSync(dir+'/VIDEO-EVIDENCE.json',JSON.stringify({source,duration,frames,sourceModified:false},null,2));console.log(JSON.stringify({duration,frames}));}finally{await browser.close();}

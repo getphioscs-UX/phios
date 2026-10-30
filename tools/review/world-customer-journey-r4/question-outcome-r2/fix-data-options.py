@@ -1,0 +1,2 @@
+from pathlib import Path
+r=Path(r'C:/Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios');p=r/'assets/js/pages/civilization-atlas/world-experience-r2.js';s=p.read_text(encoding='utf-8').replace("['regionSelect','dataRight','baselineSelect']","['regionSelect','dataLeft','dataRight','baselineSelect']").replace("id==='regionSelect'?'region':'baseline'","['regionSelect','dataLeft'].includes(id)?'region':'baseline'").replace('function areaOptions(sel){return GEO.filter','function areaOptions(sel){return WORLD_COUNTRIES.filter');p.write_bytes(s.encode())

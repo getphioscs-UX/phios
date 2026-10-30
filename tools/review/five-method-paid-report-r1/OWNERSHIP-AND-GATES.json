@@ -1,0 +1,391 @@
+{
+  "base": "3c197c509e01e95cc18651cb2a05bf63a1259dc4",
+  "rows": [
+    {
+      "capability": {
+        "schemaVersion": "FIVE_METHOD_REPORT_CAPABILITY_V1",
+        "methodId": "AST",
+        "productId": "COM-REPORT-ASTROLOGY-FULL",
+        "publication": {
+          "version": null,
+          "profileVersion": null,
+          "status": "PROFILE_GATE_OPEN",
+          "unresolvedFieldCount": 40,
+          "owner": "content/reports/method-publication-profiles-v1.json"
+        },
+        "nativeOwners": {
+          "calculation": "functions/single-method-reading/astrology-production-adapter.js",
+          "publication": "scripts/build-ast-vfr-r1r5.mjs"
+        },
+        "eligibleInputRequirements": [
+          "ACCOUNT_OWNED_SUBJECT",
+          "EXPLICIT_CONSENT",
+          "VERIFIED_BIRTH_DATE_TIME_PLACE"
+        ],
+        "sharedAdapterPresent": false,
+        "admitted": false,
+        "setupAvailable": false,
+        "blockedReason": "SHARED_ADAPTER_ABSENT",
+        "supportedPresentations": [],
+        "checkoutDestination": null,
+        "accountDestination": "/account/",
+        "serverReadinessRequired": true,
+        "grantsEntitlement": false
+      },
+      "economics": {
+        "productId": "COM-REPORT-ASTROLOGY-FULL",
+        "amountMinor": 8900,
+        "currency": "MYR",
+        "providerCapUsd": 3,
+        "bilingualOnly": false,
+        "methodId": "AST",
+        "bilingualSurchargeMinor": 1000,
+        "includedFollowups": 4,
+        "freeProviderCalls": 0,
+        "costScope": "REPORT_REPAIR_BILINGUAL_AND_FOUR_FOLLOWUPS"
+      }
+    },
+    {
+      "capability": {
+        "schemaVersion": "FIVE_METHOD_REPORT_CAPABILITY_V1",
+        "methodId": "BZR",
+        "productId": "COM-REPORT-BAZI-FULL",
+        "publication": {
+          "version": "DEEP_MANUSCRIPT_R2_READABILITY_R4",
+          "profileVersion": null,
+          "status": "PROFILE_GATE_OPEN",
+          "unresolvedFieldCount": 32,
+          "owner": "content/reports/method-publication-profiles-v1.json"
+        },
+        "nativeOwners": {
+          "calculation": "functions/report-delivery/bazi-customer-native-inputs.js",
+          "publication": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-publication.js"
+        },
+        "eligibleInputRequirements": [
+          "ACCOUNT_OWNED_SUBJECT",
+          "EXPLICIT_CONSENT",
+          "VERIFIED_BIRTH_DATE_TIME_PLACE",
+          "SUPPORTED_CALENDAR_AND_SOLAR_TERMS"
+        ],
+        "sharedAdapterPresent": true,
+        "admitted": true,
+        "setupAvailable": true,
+        "blockedReason": null,
+        "supportedPresentations": [
+          "en",
+          "zh-Hans",
+          "bilingual"
+        ],
+        "checkoutDestination": "/account/?product=COM-REPORT-BAZI-FULL",
+        "accountDestination": "/account/",
+        "serverReadinessRequired": true,
+        "grantsEntitlement": false
+      },
+      "economics": {
+        "productId": "COM-REPORT-BAZI-FULL",
+        "amountMinor": 8900,
+        "currency": "MYR",
+        "providerCapUsd": 4,
+        "bilingualOnly": false,
+        "methodId": "BZR",
+        "bilingualSurchargeMinor": 1000,
+        "includedFollowups": 4,
+        "freeProviderCalls": 0,
+        "costScope": "REPORT_REPAIR_BILINGUAL_AND_FOUR_FOLLOWUPS"
+      }
+    },
+    {
+      "capability": {
+        "schemaVersion": "FIVE_METHOD_REPORT_CAPABILITY_V1",
+        "methodId": "ZWR",
+        "productId": "COM-REPORT-ZIWEI-FULL",
+        "publication": {
+          "version": "ZIWEI-VFR-R1-AUTO-DEEP-GENERATION-v3",
+          "profileVersion": "ZWR-VFR-R1-METHOD-PUBLICATION-PROFILE-v1",
+          "status": "LOCAL_PROFILE_RESOLVED",
+          "unresolvedFieldCount": 0,
+          "owner": "content/reports/method-publication-profiles-v1.json"
+        },
+        "nativeOwners": {
+          "calculation": "functions/personal-reading/narrative/ziwei-publication-adapter.js",
+          "publication": "functions/report-delivery/ziwei-vfr-profile-policy.js"
+        },
+        "eligibleInputRequirements": [
+          "ACCOUNT_OWNED_SUBJECT",
+          "EXPLICIT_CONSENT",
+          "VERIFIED_BIRTH_DATE_TIME_PLACE",
+          "REQUIRED_CALCULATION_SEX"
+        ],
+        "sharedAdapterPresent": true,
+        "admitted": false,
+        "setupAvailable": false,
+        "blockedReason": "METHOD_ADMISSION_CLOSED",
+        "supportedPresentations": [],
+        "checkoutDestination": null,
+        "accountDestination": "/account/",
+        "serverReadinessRequired": true,
+        "grantsEntitlement": false
+      },
+      "economics": {
+        "productId": "COM-REPORT-ZIWEI-FULL",
+        "amountMinor": 8900,
+        "currency": "MYR",
+        "providerCapUsd": 3,
+        "bilingualOnly": false,
+        "methodId": "ZWR",
+        "bilingualSurchargeMinor": 1000,
+        "includedFollowups": 4,
+        "freeProviderCalls": 0,
+        "costScope": "REPORT_REPAIR_BILINGUAL_AND_FOUR_FOLLOWUPS"
+      }
+    },
+    {
+      "capability": {
+        "schemaVersion": "FIVE_METHOD_REPORT_CAPABILITY_V1",
+        "methodId": "NUM",
+        "productId": "COM-REPORT-NUMEROLOGY-FULL",
+        "publication": {
+          "version": null,
+          "profileVersion": null,
+          "status": "PROFILE_GATE_OPEN",
+          "unresolvedFieldCount": 40,
+          "owner": "content/reports/method-publication-profiles-v1.json"
+        },
+        "nativeOwners": {
+          "calculation": "functions/personal-reading/narrative/numerology-publication-adapter.js",
+          "publication": "functions/personal-reading/narrative/numerology-publication-system.js"
+        },
+        "eligibleInputRequirements": [
+          "ACCOUNT_OWNED_SUBJECT",
+          "EXPLICIT_CONSENT",
+          "BIRTH_DATE",
+          "OPTIONAL_ORIGINAL_NAME_WITH_DECLARED_RULES"
+        ],
+        "sharedAdapterPresent": false,
+        "admitted": false,
+        "setupAvailable": false,
+        "blockedReason": "SHARED_ADAPTER_ABSENT",
+        "supportedPresentations": [],
+        "checkoutDestination": null,
+        "accountDestination": "/account/",
+        "serverReadinessRequired": true,
+        "grantsEntitlement": false
+      },
+      "economics": {
+        "productId": "COM-REPORT-NUMEROLOGY-FULL",
+        "amountMinor": 5900,
+        "currency": "MYR",
+        "providerCapUsd": 2,
+        "bilingualOnly": false,
+        "methodId": "NUM",
+        "bilingualSurchargeMinor": 1000,
+        "includedFollowups": 4,
+        "freeProviderCalls": 0,
+        "costScope": "REPORT_REPAIR_BILINGUAL_AND_FOUR_FOLLOWUPS"
+      }
+    },
+    {
+      "capability": {
+        "schemaVersion": "FIVE_METHOD_REPORT_CAPABILITY_V1",
+        "methodId": "HD",
+        "productId": "COM-REPORT-HD-FULL",
+        "publication": {
+          "version": null,
+          "profileVersion": null,
+          "status": "PROFILE_GATE_OPEN",
+          "unresolvedFieldCount": 40,
+          "owner": "content/reports/method-publication-profiles-v1.json"
+        },
+        "nativeOwners": {
+          "calculation": "functions/external-profile/external-profile-confirmation.js",
+          "publication": "functions/external-profile/human-design-r3-professional-runtime.js"
+        },
+        "eligibleInputRequirements": [
+          "ACCOUNT_OWNED_SUBJECT",
+          "AUTHORISED_EXTERNAL_CHART",
+          "USER_CONFIRMED_CHART",
+          "SOURCE_BINDING",
+          "ADVANCED_FIELDS_REQUIRE_ADMITTED_DATA"
+        ],
+        "sharedAdapterPresent": false,
+        "admitted": false,
+        "setupAvailable": false,
+        "blockedReason": "SHARED_ADAPTER_ABSENT",
+        "supportedPresentations": [],
+        "checkoutDestination": null,
+        "accountDestination": "/account/",
+        "serverReadinessRequired": true,
+        "grantsEntitlement": false
+      },
+      "economics": {
+        "productId": "COM-REPORT-HD-FULL",
+        "amountMinor": 12900,
+        "currency": "MYR",
+        "providerCapUsd": 5,
+        "bilingualOnly": false,
+        "methodId": "HD",
+        "bilingualSurchargeMinor": 1000,
+        "includedFollowups": 4,
+        "freeProviderCalls": 0,
+        "costScope": "REPORT_REPAIR_BILINGUAL_AND_FOUR_FOLLOWUPS"
+      }
+    }
+  ],
+  "gates": {
+    "AST": {
+      "SOURCE": "NATIVE_EXISTS_SCOPE_LIMITED_SEE_BLOCKERS",
+      "PUBLICATION": "FORMAL_FULL_CUSTOMER_PUBLICATION_BLOCKED",
+      "ADAPTER": "SHARED_ADAPTER_ABSENT_NATIVE_NOT_ABSENT",
+      "COMMERCIAL": "CANONICAL_PRICE_AND_LOCAL_SIGNED_WEBHOOK_QA_ONLY_STRIPE_READBACK_UNVERIFIED",
+      "LOCAL QA": "CAPABILITY_NEGATIVES_AND_REFERENCE_PDF_INSPECTION_ONLY",
+      "CLOUD QA": "NOT_RUN",
+      "HUMAN ACCEPT": "NO_NEW_ACCEPTANCE",
+      "DEPLOYED": "NOT_DEPLOYED",
+      "LIVE CUSTOMER": "NOT_VERIFIED",
+      "blocker": "Native AST calculation/customer reading exists and is independently admitted. Frozen 64-page full publication binds TL manuscript; customerPublicationAllowed=false. Need subject-specific full IR/manuscript authority; never rename TL PDF."
+    },
+    "BZR": {
+      "SOURCE": "EXISTING_NATIVE_P8_AUTHORITY",
+      "PUBLICATION": "NATIVE_REFERENCE_LOCAL_SUCCESSOR_REQUIRES_REVIEW",
+      "ADAPTER": "PASS_LOCAL_CANDIDATE",
+      "COMMERCIAL": "CANONICAL_PRICE_AND_LOCAL_SIGNED_WEBHOOK_QA_ONLY_STRIPE_READBACK_UNVERIFIED",
+      "LOCAL QA": "PASS_LOCAL_SYNTHETIC_NATIVE_JOB_PDF_ACCOUNT_REOPEN",
+      "CLOUD QA": "NOT_RUN",
+      "HUMAN ACCEPT": "NO_NEW_ACCEPTANCE",
+      "DEPLOYED": "NOT_DEPLOYED",
+      "LIVE CUSTOMER": "NOT_VERIFIED",
+      "blocker": "Actual native shared job -> first multipart PDF -> existing private artifact store -> account PDF verified locally. No paid provider, Cloud QA or successor Human ACCEPT. Existing PDF has 0 bookmarks; commercial watermark not independently verified."
+    },
+    "ZWR": {
+      "SOURCE": "NATIVE_EXISTS_SCOPE_LIMITED_SEE_BLOCKERS",
+      "PUBLICATION": "FORMAL_FULL_CUSTOMER_PUBLICATION_BLOCKED",
+      "ADAPTER": "LEGACY_READ_EXISTS_SHARED_ADMISSION_CLOSED",
+      "COMMERCIAL": "CANONICAL_PRICE_AND_LOCAL_SIGNED_WEBHOOK_QA_ONLY_STRIPE_READBACK_UNVERIFIED",
+      "LOCAL QA": "CAPABILITY_NEGATIVES_AND_REFERENCE_PDF_INSPECTION_ONLY",
+      "CLOUD QA": "NOT_RUN",
+      "HUMAN ACCEPT": "NO_NEW_ACCEPTANCE",
+      "DEPLOYED": "NOT_DEPLOYED",
+      "LIVE CUSTOMER": "NOT_VERIFIED",
+      "blocker": "Native calculation and resolved VFR profile exist. Shared lifecycle/admission remains closed. Must supply explicit targetContext and verified private-browser admission receipt with exact profile/renderer/source acceptance digest; no bool flip."
+    },
+    "NUM": {
+      "SOURCE": "NATIVE_EXISTS_SCOPE_LIMITED_SEE_BLOCKERS",
+      "PUBLICATION": "FORMAL_FULL_CUSTOMER_PUBLICATION_BLOCKED",
+      "ADAPTER": "SHARED_ADAPTER_ABSENT_NATIVE_NOT_ABSENT",
+      "COMMERCIAL": "CANONICAL_PRICE_AND_LOCAL_SIGNED_WEBHOOK_QA_ONLY_STRIPE_READBACK_UNVERIFIED",
+      "LOCAL QA": "CAPABILITY_NEGATIVES_AND_REFERENCE_PDF_INSPECTION_ONLY",
+      "CLOUD QA": "NOT_RUN",
+      "HUMAN ACCEPT": "NO_NEW_ACCEPTANCE",
+      "DEPLOYED": "NOT_DEPLOYED",
+      "LIVE CUSTOMER": "NOT_VERIFIED",
+      "blocker": "Native calculation exists. Main compiler is localReview-only/customerPublishable=false. New root Owner SEC01-10 + Integration is 39 pages, not old 33; now integrated in latest main, still local-review publication source. P06 content already accepted: bind without re-review. Need formal current publication/subject binding; do not promote isolated QA replay."
+    },
+    "HD": {
+      "SOURCE": "NATIVE_EXISTS_SCOPE_LIMITED_SEE_BLOCKERS",
+      "PUBLICATION": "FORMAL_FULL_CUSTOMER_PUBLICATION_BLOCKED",
+      "ADAPTER": "SHARED_ADAPTER_ABSENT_NATIVE_NOT_ABSENT",
+      "COMMERCIAL": "CANONICAL_PRICE_AND_LOCAL_SIGNED_WEBHOOK_QA_ONLY_STRIPE_READBACK_UNVERIFIED",
+      "LOCAL QA": "CAPABILITY_NEGATIVES_AND_REFERENCE_PDF_INSPECTION_ONLY",
+      "CLOUD QA": "NOT_RUN",
+      "HUMAN ACCEPT": "NO_NEW_ACCEPTANCE",
+      "DEPLOYED": "NOT_DEPLOYED",
+      "LIVE CUSTOMER": "NOT_VERIFIED",
+      "blocker": "Native R3 customer professional reading is CUSTOMER_PUBLISHED; accepted modules exist. Confirm endpoint does not persist an authenticated account-owned subject/chart consent binding. R611 145-page owner review is not commercial publication. Need confirmed external-chart persistence and formal full publication; internal chart remains disabled."
+    }
+  },
+  "pdfStates": {
+    "AST": {
+      "PDF_RENDER": "EXISTING_OWNER_REFERENCE_ONLY",
+      "PDF_OPTIMIZATION": "EXISTING_OFFLINE_CANDIDATE_AUDITED_NOT_HUMAN_ACCEPTED_NOT_CONNECTED",
+      "PRIVATE_STORAGE": "NO_CURRENT_NATIVE_PAID_FULL_PDF_STORAGE_PROOF",
+      "ACCOUNT_PDF_DOWNLOAD": "NO_SHARED_PAID_FULL_PDF_PROOF",
+      "REOPEN": "NO_CURRENT_NATIVE_PAID_FULL_PDF_REOPEN_PROOF"
+    },
+    "BZR": {
+      "PDF_RENDER": "PASS_LOCAL_NATIVE_48_PAGE_SYNTHETIC",
+      "PDF_OPTIMIZATION": "EXISTING_OFFLINE_CANDIDATE_AUDITED_NOT_HUMAN_ACCEPTED_NOT_CONNECTED",
+      "PRIVATE_STORAGE": "PASS_LOCAL_EXISTING_PRIVATE_STORE_CLOUD_UNVERIFIED",
+      "ACCOUNT_PDF_DOWNLOAD": "PASS_LOCAL_ACTUAL_API_BROWSER_SHA_MATCH",
+      "REOPEN": "PASS_SEPARATE_LOCAL_PROCESS_PERMISSION_NEGATIVES_ZERO_RENDER"
+    },
+    "ZWR": {
+      "PDF_RENDER": "EXISTING_OWNER_REFERENCE_ONLY",
+      "PDF_OPTIMIZATION": "EXISTING_OFFLINE_CANDIDATE_AUDITED_NOT_HUMAN_ACCEPTED_NOT_CONNECTED",
+      "PRIVATE_STORAGE": "NO_CURRENT_NATIVE_PAID_FULL_PDF_STORAGE_PROOF",
+      "ACCOUNT_PDF_DOWNLOAD": "LEGACY_HTML_DOWNLOAD_ONLY_NO_PDF_PROOF",
+      "REOPEN": "NO_CURRENT_NATIVE_PAID_FULL_PDF_REOPEN_PROOF"
+    },
+    "NUM": {
+      "PDF_RENDER": "EXISTING_OWNER_REFERENCE_ONLY",
+      "PDF_OPTIMIZATION": "EXISTING_OFFLINE_CANDIDATE_AUDITED_NOT_HUMAN_ACCEPTED_NOT_CONNECTED",
+      "PRIVATE_STORAGE": "NO_CURRENT_NATIVE_PAID_FULL_PDF_STORAGE_PROOF",
+      "ACCOUNT_PDF_DOWNLOAD": "NO_SHARED_PAID_FULL_PDF_PROOF",
+      "REOPEN": "NO_CURRENT_NATIVE_PAID_FULL_PDF_REOPEN_PROOF"
+    },
+    "HD": {
+      "PDF_RENDER": "EXISTING_OWNER_REFERENCE_ONLY",
+      "PDF_OPTIMIZATION": "EXISTING_OFFLINE_CANDIDATE_AUDITED_NOT_HUMAN_ACCEPTED_NOT_CONNECTED",
+      "PRIVATE_STORAGE": "NO_CURRENT_NATIVE_PAID_FULL_PDF_STORAGE_PROOF",
+      "ACCOUNT_PDF_DOWNLOAD": "NO_SHARED_PAID_FULL_PDF_PROOF",
+      "REOPEN": "NO_CURRENT_NATIVE_PAID_FULL_PDF_REOPEN_PROOF"
+    }
+  },
+  "nativeOwners": [
+    {
+      "file": "functions/ast-full-production/ast-r2-production-admission-authority.js",
+      "exists": true,
+      "sha256": "504e638f115ed165f601090914a5f37f91828ed824dd35046832bd6a9e8f37dc"
+    },
+    {
+      "file": "functions/ast-full-production/ast-customer-reading-production.js",
+      "exists": true,
+      "sha256": "ff954206e269f35823f364a00597c2fda3793197ac68a30deabbe09a2289b451"
+    },
+    {
+      "file": "functions/ast-full-production/ast-publication-freeze-v1.js",
+      "exists": true,
+      "sha256": "b07cb99d50cf87e7c1070ee9ded229fdcddb597675af17c3a05a091993ca9820"
+    },
+    {
+      "file": "functions/external-profile/human-design-r3-production-authority.js",
+      "exists": true,
+      "sha256": "ebba903d2446b888c05090712eff4d3695ef701be7c7a13d56f665c8a33c6980"
+    },
+    {
+      "file": "functions/api/customer-external-profile-confirm.js",
+      "exists": true,
+      "sha256": "3da4d03f785df609a0c420a953d1b3109174bb744812f1e4e8f9367bcbf70ead"
+    },
+    {
+      "file": "functions/personal-reading/narrative/numerology-publication-adapter.js",
+      "exists": true,
+      "sha256": "90b68db36d109d6998c9b21dfd188cf3674ee1f074604645be09448ce3329616"
+    },
+    {
+      "file": "functions/report-delivery/ziwei-vfr-profile-policy.js",
+      "exists": true,
+      "sha256": "c49e473b7b4376f77b4b851b4a9a9e20d5a2531bdb2f79917b3f1d4cc2c13aa0"
+    },
+    {
+      "file": "functions/report-delivery/ziwei-canonical-person-binding.js",
+      "exists": true,
+      "sha256": "75d7b63d03d6ed96a40dce0f26837cd91c91c13344d6a2cf0c36f1c3fed3e614"
+    },
+    {
+      "file": "functions/report-delivery/p9-canary-admission.js",
+      "exists": true,
+      "sha256": "06b3d763369d5050ac7fccf3e72a1ded0e96c34c31f53f4a885c7206e2488a84"
+    }
+  ],
+  "blockedReasons": {
+    "AST": "Native AST calculation/customer reading exists and is independently admitted. Frozen 64-page full publication binds TL manuscript; customerPublicationAllowed=false. Need subject-specific full IR/manuscript authority; never rename TL PDF.",
+    "BZR": "Actual native shared job -> first multipart PDF -> existing private artifact store -> account PDF verified locally. No paid provider, Cloud QA or successor Human ACCEPT. Existing PDF has 0 bookmarks; commercial watermark not independently verified.",
+    "ZWR": "Native calculation and resolved VFR profile exist. Shared lifecycle/admission remains closed. Must supply explicit targetContext and verified private-browser admission receipt with exact profile/renderer/source acceptance digest; no bool flip.",
+    "NUM": "Native calculation exists. Main compiler is localReview-only/customerPublishable=false. New root Owner SEC01-10 + Integration is 39 pages, not old 33; now integrated in latest main, still local-review publication source. P06 content already accepted: bind without re-review. Need formal current publication/subject binding; do not promote isolated QA replay.",
+    "HD": "Native R3 customer professional reading is CUSTOMER_PUBLISHED; accepted modules exist. Confirm endpoint does not persist an authenticated account-owned subject/chart consent binding. R611 145-page owner review is not commercial publication. Need confirmed external-chart persistence and formal full publication; internal chart remains disabled."
+  },
+  "optimizationsConnected": false,
+  "newHumanAccept": false,
+  "StripeReadback": "BLOCKED_AUTHENTICATION_RETRY_LOOP_THREE_ATTEMPTS",
+  "productionReleaseCandidate": false
+}
