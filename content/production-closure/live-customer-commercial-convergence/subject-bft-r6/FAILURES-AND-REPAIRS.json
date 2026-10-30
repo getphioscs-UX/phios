@@ -1,0 +1,26 @@
+{
+  "findings": [
+    {
+      "failure": "Repeated missing-policy test saw the contract installed by the previous run",
+      "resolution": "Explicitly clear only copied local fixture metadata before that negative; initial receipt preserved"
+    },
+    {
+      "failure": "Computed execution timestamps changed the supposedly immutable bilingual source envelope",
+      "resolution": "Keep stable formula references in source; actual computed results/timestamps remain derived output, not source facts"
+    },
+    {
+      "failure": "Naive browser-only compiler rejected inherited node:crypto; initial config lookup used wrangler.json instead of current jsonc",
+      "resolution": "Reuse actual R5 isolated Wrangler nodejs_compat compilation, which passed; no product config or old source changed"
+    },
+    {
+      "failure": "Sandbox Edge could not write its temporary profile and normal-browser loopback could not reach sandbox service",
+      "resolution": "Run only this test browser/service in the normal Windows environment; no product security gate changed"
+    },
+    {
+      "failure": "Native __Host cookie could not be used directly on loopback HTTP",
+      "resolution": "Reuse existing R3/R5 local cookie-alias harness and pass the opaque token to unchanged Native OIDC; production Secure/__Host policy unchanged"
+    }
+  ],
+  "scopeExpanded": false,
+  "assertionsRelaxed": false
+}

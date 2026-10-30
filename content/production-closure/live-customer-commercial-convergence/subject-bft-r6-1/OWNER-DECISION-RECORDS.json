@@ -1,0 +1,981 @@
+{
+  "version": "R6.1",
+  "purpose": "DECISION_RECORDS_OVER_EXISTING_R6_PROPOSALS_NOT_NEW_PROPOSALS",
+  "candidate": "cca2a203be4fe655b6e2d2474d68e28b8a807f37f9ada529a0f753655aec724c",
+  "sourceDataset": {
+    "subject": "qa-business",
+    "referenceId": "r4-continuity:448d5cbaba210d6d9c16409c5ddc329b42afd71a19da19475652bbb139dfe41a",
+    "sourceVersion": "c57199116c1b5dd1520b694fd8f9ab6cc25afbf11645a65313b5b0d3e9c96b6d",
+    "nature": "EXISTING_SYNTHETIC_R5_ONLY; no actual business mandate or customer data accepted"
+  },
+  "choices": [
+    "ACCEPT_LOCAL_CONTRACT_ONLY",
+    "REVISE_SPECIFIC_ITEMS",
+    "REJECT"
+  ],
+  "records": [
+    {
+      "decisionRecordId": "BUSINESS_SUBJECT_AUTHORIZATION_CONTRACT_R6:R6.1:77574634a967",
+      "decisionRecordVersion": "R6.1-OWNER-DECISION-v1",
+      "owner": "Subject",
+      "proposalId": "BUSINESS_SUBJECT_AUTHORIZATION_CONTRACT_R6",
+      "proposalVersion": "R6 existing document; exact identity is this SHA256",
+      "exactSourcePath": "C:/phios/content/production-closure/live-customer-commercial-convergence/subject-bft-r6/SUBJECT-AUTHORIZATION-DECISION.json",
+      "proposalRepositoryPath": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/SUBJECT-AUTHORIZATION-DECISION.json",
+      "sha256": "77574634a9671f7204936dbd7a610cdc4f55f27c530173f19b0ae79a485616e9",
+      "r6SourceDigest": "cca2a203be4fe655b6e2d2474d68e28b8a807f37f9ada529a0f753655aec724c",
+      "actualGitHead": "8e77898f5ae86788789ae3ab45a4c51fc0f18a0b",
+      "sourceCode": [
+        {
+          "exactSourcePath": "C:/phios/functions/profile/business-subject-authorization-candidate-r6.js",
+          "repositoryPath": "functions/profile/business-subject-authorization-candidate-r6.js",
+          "sha256": "c208bb6bba7565f5f54e4cd86570b955c5644bb198a922d0a9175956303f37b6",
+          "line": 27,
+          "symbolOrField": "export async function authorizeBusinessCandidateR6"
+        }
+      ],
+      "currentContract": "Native Account/PWS identity and case/Subject scopes work only for the restricted synthetic candidate; real business issuer/mandate proof is not admitted.",
+      "proposedContractDelta": "Accept exact nested role/basis/purpose/resource/time/version/revocation/audit contract design over existing PWS; no new registry or actual grant.",
+      "affectedConsumers": [
+        "Existing R6 local source/reopen adapter only"
+      ],
+      "securityDataImpact": "No real organization authority inferred from role strings, company name or structural validation. Private Financial scope and current native membership remain required.",
+      "compatibilityTests": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+          "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+          "name": "Five representative models have explicit basis/type/scope; no private public-observer grant",
+          "status": "PASS"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+          "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+          "name": "Server binding/time/revocation/role/purpose/audit negative decisions fail closed",
+          "status": "PASS"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+          "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+          "name": "Current native account, Subject, resource and membership still required; client role ignored",
+          "status": "PASS"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/HTTP-BROWSER-TESTS.json",
+          "sha256": "72415735ab8a3ab8cab3fa31efbf0db2364f2dac1cd1b94c40d49770c957a288",
+          "scope": "8 actual local HTTP/Edge checks; synthetic OIDC only"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/RESTART.json",
+          "sha256": "017dbe667631aae979723a6208a2ccc80f5b575272850435c2a5c11153d46107",
+          "scope": "Original encrypted R5 snapshot restart/reopen"
+        }
+      ],
+      "rollback": "A local contract decision does not mutate runtime. If later reverting the R6 consumer, stop its local use; preserve original R1–R5, grants, history, products and records. Implementation/removal requires separate scoped authorization.",
+      "recommendedDecision": "ACCEPT_LOCAL_CONTRACT_ONLY",
+      "exactRecommendedScope": "Only the existing R6 local authorization-contract shape and fail-closed synthetic validation; no real Business Subject or private permission issuance.",
+      "afterAcceptLocalContract": "Continue existing local five-role contract validation and authorized synthetic source checks. No new capability is unlocked by this record.",
+      "remainingBlockers": [
+        "Independent real account/business representative mandate verification and verifier responsibility",
+        "Approved real Subject issuer and delegation policy",
+        "Formal private-data entry authorization"
+      ],
+      "revisionItemIds": [
+        "S1: specify verifier and accepted mandate evidence if revising",
+        "S2: specify role/resource/time limitations if revising"
+      ],
+      "productionEffect": "NONE — NOT_AUTHORIZED; no config, D1/R2, grant, price, entitlement, report, cloud host or release switch changes.",
+      "allowedChoices": [
+        "ACCEPT_LOCAL_CONTRACT_ONLY",
+        "REVISE_SPECIFIC_ITEMS",
+        "REJECT"
+      ],
+      "humanDecision": null,
+      "decisionState": "EXPLICIT_VERSION_BOUND_OWNER_CHOICE_REQUIRED",
+      "principlesGuidanceReceived": true,
+      "principlesAreNotSpecificAcceptance": true,
+      "scopeSha256": "f4fcd25018800eaddc71ef58e7636d28c8f9712cfd268a798cb5547372ea8b81",
+      "decisionOptions": [
+        {
+          "choice": "ACCEPT_LOCAL_CONTRACT_ONLY",
+          "scope": "Only the existing R6 local authorization-contract shape and fail-closed synthetic validation; no real Business Subject or private permission issuance.",
+          "scopeSha256": "f4fcd25018800eaddc71ef58e7636d28c8f9712cfd268a798cb5547372ea8b81",
+          "effect": "Records acceptance only of this exact local contract scope. Does not mutate runtime, issue real rights, admit professional interpretation/publication, or authorize cloud/production.",
+          "requiredOwnerFields": [
+            "choice",
+            "proposalSha256",
+            "choiceScopeSha256",
+            "ownerIdentity",
+            "decidedAt"
+          ]
+        },
+        {
+          "choice": "REVISE_SPECIFIC_ITEMS",
+          "scope": "Return this exact proposal for named revisions; no acceptance recorded. Preserve current approved historical/local behavior and all old evidence.",
+          "specificItemIds": [
+            "S1: specify verifier and accepted mandate evidence if revising",
+            "S2: specify role/resource/time limitations if revising"
+          ],
+          "effect": "Owner names item IDs and required changes; any changed proposal/code requires a new identity binding before acceptance.",
+          "requiredOwnerFields": [
+            "choice",
+            "proposalSha256",
+            "specificItems",
+            "ownerIdentity",
+            "decidedAt"
+          ],
+          "scopeSha256": "3fdbe169b4ecfe304bca9dabf875a2b320b33d6bc40276a743b1639c42782582"
+        },
+        {
+          "choice": "REJECT",
+          "scope": "Reject this exact proposal as an admission basis. No prior records, grants, product rights or verified snapshots are deleted or rewritten; no automatic code removal is authorized.",
+          "effect": "No new local-contract admission. Existing R1–R5 historical evidence and independently authorized behavior remain intact.",
+          "requiredOwnerFields": [
+            "choice",
+            "proposalSha256",
+            "reason",
+            "ownerIdentity",
+            "decidedAt"
+          ],
+          "scopeSha256": "1c27249e06f82a5fda0fc406125034d874fe0a6de4c12216eb5fcda644f288cd"
+        }
+      ]
+    },
+    {
+      "decisionRecordId": "BUSINESS_FINANCIAL_SOURCE_SUCCESSOR:R6.1:784092d5526e",
+      "decisionRecordVersion": "R6.1-OWNER-DECISION-v1",
+      "owner": "Financial",
+      "proposalId": "BUSINESS_FINANCIAL_SOURCE_SUCCESSOR",
+      "proposalVersion": "R6",
+      "exactSourcePath": "C:/phios/content/production-closure/live-customer-commercial-convergence/subject-bft-r6/BUSINESS-FINANCIAL-SOURCE-SUCCESSOR.json",
+      "proposalRepositoryPath": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/BUSINESS-FINANCIAL-SOURCE-SUCCESSOR.json",
+      "sha256": "784092d5526efec325852d297bf13eed82052fd6a8396ee1d6153269c9210c95",
+      "r6SourceDigest": "cca2a203be4fe655b6e2d2474d68e28b8a807f37f9ada529a0f753655aec724c",
+      "actualGitHead": "8e77898f5ae86788789ae3ab45a4c51fc0f18a0b",
+      "sourceCode": [
+        {
+          "exactSourcePath": "C:/phios/functions/professional/financial/subject-aware-source-candidate-r6.js",
+          "repositoryPath": "functions/professional/financial/subject-aware-source-candidate-r6.js",
+          "sha256": "2db3f04c80422de6fd57b9811d048db4087b86480388c7272ede71ba44aad215",
+          "line": 9,
+          "symbolOrField": "export function financialSourceDispatchR6"
+        },
+        {
+          "exactSourcePath": "C:/phios/functions/professional/financial/subject-aware-source-candidate-r6.js",
+          "repositoryPath": "functions/professional/financial/subject-aware-source-candidate-r6.js",
+          "sha256": "2db3f04c80422de6fd57b9811d048db4087b86480388c7272ede71ba44aad215",
+          "line": 13,
+          "symbolOrField": "export function legacyFinancialIdentityR6"
+        },
+        {
+          "exactSourcePath": "C:/phios/functions/professional/financial/subject-aware-source-candidate-r6.js",
+          "repositoryPath": "functions/professional/financial/subject-aware-source-candidate-r6.js",
+          "sha256": "2db3f04c80422de6fd57b9811d048db4087b86480388c7272ede71ba44aad215",
+          "line": 21,
+          "symbolOrField": "export function createSubjectAwareFinancialCandidateR6"
+        },
+        {
+          "exactSourcePath": "C:/phios/functions/professional/financial/financial-formula-registry.js",
+          "repositoryPath": "functions/professional/financial/financial-formula-registry.js",
+          "sha256": "2c8923b2253eb3b2eaf5086c8c7b7e09a02f27737ab267e02717fc24fd1d9a8a",
+          "line": 217,
+          "symbolOrField": "household_id: requiredText"
+        },
+        {
+          "exactSourcePath": "C:/phios/functions/account/financial-will-draft-store.js",
+          "repositoryPath": "functions/account/financial-will-draft-store.js",
+          "sha256": "42edd2762c49fe524435c3477536739c85bf51c06b27171ff978a823bf1fe40b",
+          "line": 18,
+          "symbolOrField": "export function savedDraftRef"
+        }
+      ],
+      "currentContract": "Original household_id and Account-owned draft contract remain; R6 already isolates a local BUSINESS source instead of coercing it into the old contract.",
+      "proposedContractDelta": "Accept the additive source-kind/type envelope and unchanged Personal/Household dispatch; preserve currency, period, data attribution, review/source/formula versions.",
+      "affectedConsumers": [
+        {
+          "exactSourcePath": "C:/phios/functions/api/account-financial-summary.js",
+          "repositoryPath": "functions/api/account-financial-summary.js",
+          "sha256": "71d6a60e71603f6cbbb8791f339652e62feea976f47aa79761f5f474c8d8e949",
+          "line": 2,
+          "symbolOrField": "loadOwnedDraft",
+          "change": "UNCHANGED; not cut over"
+        },
+        {
+          "exactSourcePath": "C:/phios/functions/api/account-financial-consent.js",
+          "repositoryPath": "functions/api/account-financial-consent.js",
+          "sha256": "737635c4e15e2be05339a184c2c96a1d7cf6b407985b208663070fe4e2816aff",
+          "line": 5,
+          "symbolOrField": "loadOwnedDraft",
+          "change": "UNCHANGED; not cut over"
+        },
+        {
+          "exactSourcePath": "C:/phios/functions/financial/holistic-planning-product/factual-report-job.js",
+          "repositoryPath": "functions/financial/holistic-planning-product/factual-report-job.js",
+          "sha256": "b53c059991ee70bb7ba8dfe3e90a6c3710ec8047adc1bb72e8e2f26ec7fd3fb1",
+          "line": 1,
+          "symbolOrField": "loadOwnedDraft",
+          "change": "UNCHANGED; not cut over"
+        },
+        {
+          "exactSourcePath": "C:/phios/functions/professional/access/financial-capability-owner.js",
+          "repositoryPath": "functions/professional/access/financial-capability-owner.js",
+          "sha256": "ab64ad6ebee2056620c9183d75c68c3eaee2c59ddc91e11e42459b08e0471528",
+          "line": 2,
+          "symbolOrField": "loadOwnedDraft",
+          "change": "UNCHANGED; not cut over"
+        },
+        {
+          "exactSourcePath": "C:/phios/functions/professional/access/financial-preparation-handoff.js",
+          "repositoryPath": "functions/professional/access/financial-preparation-handoff.js",
+          "sha256": "37b8d05f6c886aa52cb81ddcccfc4de7c0e49736579240b46129ae15acc43682",
+          "line": 3,
+          "symbolOrField": "loadOwnedDraft",
+          "change": "UNCHANGED; not cut over"
+        },
+        {
+          "exactSourcePath": "C:/phios/functions/professional/financial/business-source-closure-candidate-r4.js",
+          "repositoryPath": "functions/professional/financial/business-source-closure-candidate-r4.js",
+          "sha256": "893e6ac1d7efc3fbce86d6d9e43618208694693490d5a76e751c303ce0989599",
+          "line": 19,
+          "symbolOrField": "formulaContractConflict",
+          "change": "UNCHANGED; not cut over"
+        }
+      ],
+      "securityDataImpact": "No Business revenue becomes Personal income; no Business cash/profit becomes owner-available funds. Existing composer, products, grants, old records and arithmetic are untouched.",
+      "compatibilityTests": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+          "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+          "name": "Subject-aware Financial Business source is typed/versioned/reviewed without household_id coercion",
+          "status": "PASS"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+          "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+          "name": "Personal/Household inputs and old calculations retain exact identity and result",
+          "status": "PASS"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+          "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+          "name": "Reading retains reported/computed/scenario distinctions and independent three admissions",
+          "status": "PASS"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/HTTP-BROWSER-TESTS.json",
+          "sha256": "72415735ab8a3ab8cab3fa31efbf0db2364f2dac1cd1b94c40d49770c957a288",
+          "scope": "8 actual local HTTP/Edge checks; synthetic OIDC only"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/RESTART.json",
+          "sha256": "017dbe667631aae979723a6208a2ccc80f5b575272850435c2a5c11153d46107",
+          "scope": "Original encrypted R5 snapshot restart/reopen"
+        }
+      ],
+      "rollback": "A local contract decision does not mutate runtime. If later reverting the R6 consumer, stop its local use; preserve original R1–R5, grants, history, products and records. Implementation/removal requires separate scoped authorization.",
+      "recommendedDecision": "ACCEPT_LOCAL_CONTRACT_ONLY",
+      "exactRecommendedScope": "Only the implemented R6 typed source adapter and local compatibility proof. Not formal accounting-rule acceptance or a consumer cutover.",
+      "afterAcceptLocalContract": "Read the same reviewed synthetic Business source with exact attribution/version; use existing local calculations for review with current limitations.",
+      "remainingBlockers": [
+        "Financial Owner acceptance of exact source/custody/purpose mapping",
+        "Qualified review of formula/accounting-basis meanings and permitted sources",
+        "Approved real Business consumer branch; none installed here"
+      ],
+      "revisionItemIds": [
+        "F1: identify disputed field/formula/basis and expected meaning",
+        "F2: specify permitted source and consumer, without changing legacy semantics"
+      ],
+      "productionEffect": "NONE — NOT_AUTHORIZED; no config, D1/R2, grant, price, entitlement, report, cloud host or release switch changes.",
+      "allowedChoices": [
+        "ACCEPT_LOCAL_CONTRACT_ONLY",
+        "REVISE_SPECIFIC_ITEMS",
+        "REJECT"
+      ],
+      "humanDecision": null,
+      "decisionState": "EXPLICIT_VERSION_BOUND_OWNER_CHOICE_REQUIRED",
+      "principlesGuidanceReceived": true,
+      "principlesAreNotSpecificAcceptance": true,
+      "scopeSha256": "9d2f1b7a7b213c1142d4c2a5a9fbfb25fa6161e5b7a8c385ded36db86f998737",
+      "decisionOptions": [
+        {
+          "choice": "ACCEPT_LOCAL_CONTRACT_ONLY",
+          "scope": "Only the implemented R6 typed source adapter and local compatibility proof. Not formal accounting-rule acceptance or a consumer cutover.",
+          "scopeSha256": "9d2f1b7a7b213c1142d4c2a5a9fbfb25fa6161e5b7a8c385ded36db86f998737",
+          "effect": "Records acceptance only of this exact local contract scope. Does not mutate runtime, issue real rights, admit professional interpretation/publication, or authorize cloud/production.",
+          "requiredOwnerFields": [
+            "choice",
+            "proposalSha256",
+            "choiceScopeSha256",
+            "ownerIdentity",
+            "decidedAt"
+          ]
+        },
+        {
+          "choice": "REVISE_SPECIFIC_ITEMS",
+          "scope": "Return this exact proposal for named revisions; no acceptance recorded. Preserve current approved historical/local behavior and all old evidence.",
+          "specificItemIds": [
+            "F1: identify disputed field/formula/basis and expected meaning",
+            "F2: specify permitted source and consumer, without changing legacy semantics"
+          ],
+          "effect": "Owner names item IDs and required changes; any changed proposal/code requires a new identity binding before acceptance.",
+          "requiredOwnerFields": [
+            "choice",
+            "proposalSha256",
+            "specificItems",
+            "ownerIdentity",
+            "decidedAt"
+          ],
+          "scopeSha256": "3fdbe169b4ecfe304bca9dabf875a2b320b33d6bc40276a743b1639c42782582"
+        },
+        {
+          "choice": "REJECT",
+          "scope": "Reject this exact proposal as an admission basis. No prior records, grants, product rights or verified snapshots are deleted or rewritten; no automatic code removal is authorized.",
+          "effect": "No new local-contract admission. Existing R1–R5 historical evidence and independently authorized behavior remain intact.",
+          "requiredOwnerFields": [
+            "choice",
+            "proposalSha256",
+            "reason",
+            "ownerIdentity",
+            "decidedAt"
+          ],
+          "scopeSha256": "1c27249e06f82a5fda0fc406125034d874fe0a6de4c12216eb5fcda644f288cd"
+        }
+      ]
+    },
+    {
+      "decisionRecordId": "READING_SOURCE_ADMISSION_R6:R6.1:43e2e23581b4",
+      "decisionRecordVersion": "R6.1-OWNER-DECISION-v1",
+      "owner": "Reading",
+      "proposalId": "READING_SOURCE_ADMISSION_R6",
+      "proposalVersion": "R6 existing document; exact identity is this SHA256",
+      "exactSourcePath": "C:/phios/content/production-closure/live-customer-commercial-convergence/subject-bft-r6/READING-ADMISSION-DECISION.json",
+      "proposalRepositoryPath": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/READING-ADMISSION-DECISION.json",
+      "sha256": "43e2e23581b4cf59d3c8069dc46f7fbd33e57a82c1a32c5870126f9eb7619d38",
+      "r6SourceDigest": "cca2a203be4fe655b6e2d2474d68e28b8a807f37f9ada529a0f753655aec724c",
+      "actualGitHead": "8e77898f5ae86788789ae3ab45a4c51fc0f18a0b",
+      "sourceCode": [
+        {
+          "exactSourcePath": "C:/phios/functions/professional/financial/subject-aware-source-candidate-r6.js",
+          "repositoryPath": "functions/professional/financial/subject-aware-source-candidate-r6.js",
+          "sha256": "2db3f04c80422de6fd57b9811d048db4087b86480388c7272ede71ba44aad215",
+          "line": 21,
+          "symbolOrField": "export function createSubjectAwareFinancialCandidateR6"
+        },
+        {
+          "exactSourcePath": "C:/phios/functions/runtime/reading/rule-reading.js",
+          "repositoryPath": "functions/runtime/reading/rule-reading.js",
+          "sha256": "03352e4a0ae8d0d9aac9e5c4354c6f5a6e76ec0443b5cd8e7bab98a4762a5fd4",
+          "line": 1112,
+          "symbolOrField": "export function readRuntimeRuleFirst"
+        }
+      ],
+      "currentContract": "Existing rule-first local read runs on reported/reviewed source and derived metrics. Data/Interpretation/Publication are all unadmitted.",
+      "proposedContractDelta": "Accept only verified local source-to-Reading DATA mapping bound to the same R5 source digest; keep observed facts empty and distinguish computed, scenario candidates and unknowns.",
+      "affectedConsumers": [
+        "Existing R6 local source wrapper; original native owner unchanged"
+      ],
+      "securityDataImpact": "A reviewed statement is not independently observed reality; a local source review is not regulated interpretation. No natal/personality conversion or PDF-case recommendation reuse.",
+      "compatibilityTests": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+          "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+          "name": "Reading retains reported/computed/scenario distinctions and independent three admissions",
+          "status": "PASS"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+          "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+          "name": "Bilingual existing journey preserves numeric/source identity and versions",
+          "status": "PASS"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/HTTP-BROWSER-TESTS.json",
+          "sha256": "72415735ab8a3ab8cab3fa31efbf0db2364f2dac1cd1b94c40d49770c957a288",
+          "scope": "8 actual local HTTP/Edge checks; synthetic OIDC only"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/RESTART.json",
+          "sha256": "017dbe667631aae979723a6208a2ccc80f5b575272850435c2a5c11153d46107",
+          "scope": "Original encrypted R5 snapshot restart/reopen"
+        }
+      ],
+      "rollback": "A local contract decision does not mutate runtime. If later reverting the R6 consumer, stop its local use; preserve original R1–R5, grants, history, products and records. Implementation/removal requires separate scoped authorization.",
+      "recommendedDecision": "ACCEPT_LOCAL_CONTRACT_ONLY",
+      "exactRecommendedScope": "LOCAL DATA-CONTRACT mapping only for the exact reused synthetic source and tested source quality/version rules. Interpretation Admission and Publication Admission remain excluded.",
+      "afterAcceptLocalContract": "Continue EN/zh-Hans source-bound local Reading inspection. No real-customer data admission or professional/client publication is granted.",
+      "remainingBlockers": [
+        "Real source permission and independent source review for any real dataset",
+        "Separate interpretation rule/professional review",
+        "Separate customer publication/release decision"
+      ],
+      "revisionItemIds": [
+        "R1: name exact data class/ref/digest if revising local data scope",
+        "R2: interpretation and publication require separate future decisions, not broadening this choice"
+      ],
+      "productionEffect": "NONE — NOT_AUTHORIZED; no config, D1/R2, grant, price, entitlement, report, cloud host or release switch changes.",
+      "allowedChoices": [
+        "ACCEPT_LOCAL_CONTRACT_ONLY",
+        "REVISE_SPECIFIC_ITEMS",
+        "REJECT"
+      ],
+      "humanDecision": null,
+      "decisionState": "EXPLICIT_VERSION_BOUND_OWNER_CHOICE_REQUIRED",
+      "principlesGuidanceReceived": true,
+      "principlesAreNotSpecificAcceptance": true,
+      "scopeSha256": "e7e1684ba1b20dab38ef890f158c20a44feb683183dd0d633dd08ef596fedbbc",
+      "decisionOptions": [
+        {
+          "choice": "ACCEPT_LOCAL_CONTRACT_ONLY",
+          "scope": "LOCAL DATA-CONTRACT mapping only for the exact reused synthetic source and tested source quality/version rules. Interpretation Admission and Publication Admission remain excluded.",
+          "scopeSha256": "e7e1684ba1b20dab38ef890f158c20a44feb683183dd0d633dd08ef596fedbbc",
+          "effect": "Records acceptance only of this exact local contract scope. Does not mutate runtime, issue real rights, admit professional interpretation/publication, or authorize cloud/production.",
+          "requiredOwnerFields": [
+            "choice",
+            "proposalSha256",
+            "choiceScopeSha256",
+            "ownerIdentity",
+            "decidedAt"
+          ]
+        },
+        {
+          "choice": "REVISE_SPECIFIC_ITEMS",
+          "scope": "Return this exact proposal for named revisions; no acceptance recorded. Preserve current approved historical/local behavior and all old evidence.",
+          "specificItemIds": [
+            "R1: name exact data class/ref/digest if revising local data scope",
+            "R2: interpretation and publication require separate future decisions, not broadening this choice"
+          ],
+          "effect": "Owner names item IDs and required changes; any changed proposal/code requires a new identity binding before acceptance.",
+          "requiredOwnerFields": [
+            "choice",
+            "proposalSha256",
+            "specificItems",
+            "ownerIdentity",
+            "decidedAt"
+          ],
+          "scopeSha256": "3fdbe169b4ecfe304bca9dabf875a2b320b33d6bc40276a743b1639c42782582"
+        },
+        {
+          "choice": "REJECT",
+          "scope": "Reject this exact proposal as an admission basis. No prior records, grants, product rights or verified snapshots are deleted or rewritten; no automatic code removal is authorized.",
+          "effect": "No new local-contract admission. Existing R1–R5 historical evidence and independently authorized behavior remain intact.",
+          "requiredOwnerFields": [
+            "choice",
+            "proposalSha256",
+            "reason",
+            "ownerIdentity",
+            "decidedAt"
+          ],
+          "scopeSha256": "1c27249e06f82a5fda0fc406125034d874fe0a6de4c12216eb5fcda644f288cd"
+        }
+      ]
+    },
+    {
+      "decisionRecordId": "NAVIGATION_FINANCIAL_ADMISSION_R6:R6.1:b4dc4bb54f4b",
+      "decisionRecordVersion": "R6.1-OWNER-DECISION-v1",
+      "owner": "Navigation",
+      "proposalId": "NAVIGATION_FINANCIAL_ADMISSION_R6",
+      "proposalVersion": "R6 existing document; exact identity is this SHA256",
+      "exactSourcePath": "C:/phios/content/production-closure/live-customer-commercial-convergence/subject-bft-r6/NAVIGATION-ADMISSION-DECISION.json",
+      "proposalRepositoryPath": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/NAVIGATION-ADMISSION-DECISION.json",
+      "sha256": "b4dc4bb54f4b12a594f7fc5b690cc316b798daed09e5b0b134b29c55bbeb78a7",
+      "r6SourceDigest": "cca2a203be4fe655b6e2d2474d68e28b8a807f37f9ada529a0f753655aec724c",
+      "actualGitHead": "8e77898f5ae86788789ae3ab45a4c51fc0f18a0b",
+      "sourceCode": [
+        {
+          "exactSourcePath": "C:/phios/functions/professional/financial/subject-aware-source-candidate-r6.js",
+          "repositoryPath": "functions/professional/financial/subject-aware-source-candidate-r6.js",
+          "sha256": "2db3f04c80422de6fd57b9811d048db4087b86480388c7272ede71ba44aad215",
+          "line": 21,
+          "symbolOrField": "export function createSubjectAwareFinancialCandidateR6"
+        },
+        {
+          "exactSourcePath": "C:/phios/functions/customer-projection/canonical-navigation-handoff.js",
+          "repositoryPath": "functions/customer-projection/canonical-navigation-handoff.js",
+          "sha256": "095d76cd3876ffc8a1955d7555c56fcff9ba52d11dc3138cd513b96c4a11dae7",
+          "line": 32,
+          "symbolOrField": "export async function produceCustomerNavigationSnapshot"
+        }
+      ],
+      "currentContract": "Existing FINANCIAL family is used; options are not actions, ownerBoundPass=false, direction remains NOT_ESTABLISHED.",
+      "proposedContractDelta": "Accept the source/version/constraints/decision-owner contract for local option comparison within FINANCIAL.",
+      "affectedConsumers": [
+        "Existing R6 local source wrapper; original native owner unchanged"
+      ],
+      "securityDataImpact": "Keep customer choice, approval, execution and observed result separate; do not rewrite source ownership to fit a delegated account or create SUBJECT family.",
+      "compatibilityTests": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+          "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+          "name": "Reading retains reported/computed/scenario distinctions and independent three admissions",
+          "status": "PASS"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+          "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+          "name": "Navigation stays FINANCIAL, with unapproved action and all formal gates closed",
+          "status": "PASS"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/HTTP-BROWSER-TESTS.json",
+          "sha256": "72415735ab8a3ab8cab3fa31efbf0db2364f2dac1cd1b94c40d49770c957a288",
+          "scope": "8 actual local HTTP/Edge checks; synthetic OIDC only"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/RESTART.json",
+          "sha256": "017dbe667631aae979723a6208a2ccc80f5b575272850435c2a5c11153d46107",
+          "scope": "Original encrypted R5 snapshot restart/reopen"
+        }
+      ],
+      "rollback": "A local contract decision does not mutate runtime. If later reverting the R6 consumer, stop its local use; preserve original R1–R5, grants, history, products and records. Implementation/removal requires separate scoped authorization.",
+      "recommendedDecision": "ACCEPT_LOCAL_CONTRACT_ONLY",
+      "exactRecommendedScope": "Only existing local FINANCIAL context and source-bound candidate-option comparison shape. No accepted direction/action, professional mandate or execution permission.",
+      "afterAcceptLocalContract": "Review sourced alternatives and limitations in the same local candidate; no confirmed action or saved success is generated.",
+      "remainingBlockers": [
+        "Financial source and applicable Reading admission",
+        "Valid decision owner, action scope and independent approval",
+        "Actual integration evidence before Owner Bound PASS"
+      ],
+      "revisionItemIds": [
+        "N1: specify source/constraint/option field requiring revision",
+        "N2: identify decision/action responsibility separately"
+      ],
+      "productionEffect": "NONE — NOT_AUTHORIZED; no config, D1/R2, grant, price, entitlement, report, cloud host or release switch changes.",
+      "allowedChoices": [
+        "ACCEPT_LOCAL_CONTRACT_ONLY",
+        "REVISE_SPECIFIC_ITEMS",
+        "REJECT"
+      ],
+      "humanDecision": null,
+      "decisionState": "EXPLICIT_VERSION_BOUND_OWNER_CHOICE_REQUIRED",
+      "principlesGuidanceReceived": true,
+      "principlesAreNotSpecificAcceptance": true,
+      "scopeSha256": "9f81b058f575fdea14e007628d3b37dcc31a280b17a41791c56274ec35879598",
+      "decisionOptions": [
+        {
+          "choice": "ACCEPT_LOCAL_CONTRACT_ONLY",
+          "scope": "Only existing local FINANCIAL context and source-bound candidate-option comparison shape. No accepted direction/action, professional mandate or execution permission.",
+          "scopeSha256": "9f81b058f575fdea14e007628d3b37dcc31a280b17a41791c56274ec35879598",
+          "effect": "Records acceptance only of this exact local contract scope. Does not mutate runtime, issue real rights, admit professional interpretation/publication, or authorize cloud/production.",
+          "requiredOwnerFields": [
+            "choice",
+            "proposalSha256",
+            "choiceScopeSha256",
+            "ownerIdentity",
+            "decidedAt"
+          ]
+        },
+        {
+          "choice": "REVISE_SPECIFIC_ITEMS",
+          "scope": "Return this exact proposal for named revisions; no acceptance recorded. Preserve current approved historical/local behavior and all old evidence.",
+          "specificItemIds": [
+            "N1: specify source/constraint/option field requiring revision",
+            "N2: identify decision/action responsibility separately"
+          ],
+          "effect": "Owner names item IDs and required changes; any changed proposal/code requires a new identity binding before acceptance.",
+          "requiredOwnerFields": [
+            "choice",
+            "proposalSha256",
+            "specificItems",
+            "ownerIdentity",
+            "decidedAt"
+          ],
+          "scopeSha256": "3fdbe169b4ecfe304bca9dabf875a2b320b33d6bc40276a743b1639c42782582"
+        },
+        {
+          "choice": "REJECT",
+          "scope": "Reject this exact proposal as an admission basis. No prior records, grants, product rights or verified snapshots are deleted or rewritten; no automatic code removal is authorized.",
+          "effect": "No new local-contract admission. Existing R1–R5 historical evidence and independently authorized behavior remain intact.",
+          "requiredOwnerFields": [
+            "choice",
+            "proposalSha256",
+            "reason",
+            "ownerIdentity",
+            "decidedAt"
+          ],
+          "scopeSha256": "1c27249e06f82a5fda0fc406125034d874fe0a6de4c12216eb5fcda644f288cd"
+        }
+      ]
+    },
+    {
+      "decisionRecordId": "CONTINUITY_POLICY_DECISION_R6:R6.1:9814524f8b1d",
+      "decisionRecordVersion": "R6.1-OWNER-DECISION-v1",
+      "owner": "Continuity",
+      "proposalId": "CONTINUITY_POLICY_DECISION_R6",
+      "proposalVersion": "R6 existing document; exact identity is this SHA256",
+      "exactSourcePath": "C:/phios/content/production-closure/live-customer-commercial-convergence/subject-bft-r6/CONTINUITY-POLICY-DECISION.json",
+      "proposalRepositoryPath": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/CONTINUITY-POLICY-DECISION.json",
+      "sha256": "9814524f8b1d991850cc6a8576316e74e3389628b32481dace5e40f5962e29d8",
+      "r6SourceDigest": "cca2a203be4fe655b6e2d2474d68e28b8a807f37f9ada529a0f753655aec724c",
+      "actualGitHead": "8e77898f5ae86788789ae3ab45a4c51fc0f18a0b",
+      "sourceCode": [
+        {
+          "exactSourcePath": "C:/phios/functions/professional/financial/subject-aware-source-candidate-r6.js",
+          "repositoryPath": "functions/professional/financial/subject-aware-source-candidate-r6.js",
+          "sha256": "2db3f04c80422de6fd57b9811d048db4087b86480388c7272ede71ba44aad215",
+          "line": 21,
+          "symbolOrField": "export function createSubjectAwareFinancialCandidateR6"
+        },
+        {
+          "exactSourcePath": "C:/phios/functions/report-context/report-context-store.js",
+          "repositoryPath": "functions/report-context/report-context-store.js",
+          "sha256": "ba40892a19a3260ff879e62d4d4d2269cfac1920e7cc435849455537ab8bd053",
+          "line": 22,
+          "symbolOrField": "export async function loadContextRecord"
+        }
+      ],
+      "currentContract": "Original encrypted R5 snapshot and local 7/30-day proposal remain; formal retention/deletion/migration and grant-version pin are not admitted.",
+      "proposedContractDelta": "Do not approve a formal lifecycle yet. Resolve C1–C7 in the attached clarification against the existing R6 policy proposal; keep the original local snapshot.",
+      "affectedConsumers": [
+        "Existing local R5 snapshot / R6 guarded reopen; formal save closed"
+      ],
+      "securityDataImpact": "No permanent customer retention, production save, automatic deletion, archive-access grant, crash recovery or migration is authorized.",
+      "compatibilityTests": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+          "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+          "name": "Reopen uses existing R5 encrypted record without claiming R6 migration or lifecycle acceptance",
+          "status": "PASS"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+          "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+          "name": "Expired/revoked contract and wrong account/subject deny saved-history access without deleting record",
+          "status": "PASS"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+          "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+          "name": "Retention, recovery and deletion are explicit proposed policy, never permanent or automatic",
+          "status": "PASS"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/HTTP-BROWSER-TESTS.json",
+          "sha256": "72415735ab8a3ab8cab3fa31efbf0db2364f2dac1cd1b94c40d49770c957a288",
+          "scope": "8 actual local HTTP/Edge checks; synthetic OIDC only"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/RESTART.json",
+          "sha256": "017dbe667631aae979723a6208a2ccc80f5b575272850435c2a5c11153d46107",
+          "scope": "Original encrypted R5 snapshot restart/reopen"
+        }
+      ],
+      "rollback": "A local contract decision does not mutate runtime. If later reverting the R6 consumer, stop its local use; preserve original R1–R5, grants, history, products and records. Implementation/removal requires separate scoped authorization.",
+      "recommendedDecision": "REVISE_SPECIFIC_ITEMS",
+      "exactRecommendedScope": "Request exact formal-policy revisions C1–C7. Existing verified local snapshot preservation continues independently; no policy is silently accepted.",
+      "afterAcceptLocalContract": "Original same-account authorized local reopen/review remains available. Formal R6 save/publish/issue remain blocked.",
+      "remainingBlockers": [
+        "C1: approved custodian and record classes",
+        "C2: numeric retention limits/end times and triggers per formal class",
+        "C3: deletion/hold authority and evidence, including backups",
+        "C4: revocation/archive access boundaries",
+        "C5: cross-process concurrency and PENDING recovery acceptance",
+        "C6: key-loss/orphan recovery and rollback",
+        "C7: formal version pin and backward-compatible migration"
+      ],
+      "revisionItemIds": [
+        "C1: approved custodian and record classes",
+        "C2: numeric retention limits/end times and triggers per formal class",
+        "C3: deletion/hold authority and evidence, including backups",
+        "C4: revocation/archive access boundaries",
+        "C5: cross-process concurrency and PENDING recovery acceptance",
+        "C6: key-loss/orphan recovery and rollback",
+        "C7: formal version pin and backward-compatible migration"
+      ],
+      "productionEffect": "NONE — NOT_AUTHORIZED; no config, D1/R2, grant, price, entitlement, report, cloud host or release switch changes.",
+      "allowedChoices": [
+        "ACCEPT_LOCAL_CONTRACT_ONLY",
+        "REVISE_SPECIFIC_ITEMS",
+        "REJECT"
+      ],
+      "humanDecision": null,
+      "decisionState": "EXPLICIT_VERSION_BOUND_OWNER_CHOICE_REQUIRED",
+      "principlesGuidanceReceived": true,
+      "principlesAreNotSpecificAcceptance": true,
+      "scopeSha256": "c4f8f1fa0246045db68f8ba11ff93d6fae751efc2f9a0fe7e34f3e638edddeb2",
+      "decisionOptions": [
+        {
+          "choice": "ACCEPT_LOCAL_CONTRACT_ONLY",
+          "scope": "Only preserve and inspect the exact existing R5 local encrypted snapshot under its current local checks. Formal Retention, Deletion, Revocation, Concurrency, Recovery, Migration and production storage remain unaccepted.",
+          "scopeSha256": "c957d5f48e3d8b4852f93a11c7e4691571186ae27cbd813e8529fe930870f109",
+          "effect": "Records acceptance only of this exact local contract scope. Does not mutate runtime, issue real rights, admit professional interpretation/publication, or authorize cloud/production.",
+          "requiredOwnerFields": [
+            "choice",
+            "proposalSha256",
+            "choiceScopeSha256",
+            "ownerIdentity",
+            "decidedAt"
+          ]
+        },
+        {
+          "choice": "REVISE_SPECIFIC_ITEMS",
+          "scope": "Return this exact proposal for named revisions; no acceptance recorded. Preserve current approved historical/local behavior and all old evidence.",
+          "specificItemIds": [
+            "C1: approved custodian and record classes",
+            "C2: numeric retention limits/end times and triggers per formal class",
+            "C3: deletion/hold authority and evidence, including backups",
+            "C4: revocation/archive access boundaries",
+            "C5: cross-process concurrency and PENDING recovery acceptance",
+            "C6: key-loss/orphan recovery and rollback",
+            "C7: formal version pin and backward-compatible migration"
+          ],
+          "effect": "Owner names item IDs and required changes; any changed proposal/code requires a new identity binding before acceptance.",
+          "requiredOwnerFields": [
+            "choice",
+            "proposalSha256",
+            "specificItems",
+            "ownerIdentity",
+            "decidedAt"
+          ],
+          "scopeSha256": "3fdbe169b4ecfe304bca9dabf875a2b320b33d6bc40276a743b1639c42782582"
+        },
+        {
+          "choice": "REJECT",
+          "scope": "Reject this exact proposal as an admission basis. No prior records, grants, product rights or verified snapshots are deleted or rewritten; no automatic code removal is authorized.",
+          "effect": "No new local-contract admission. Existing R1–R5 historical evidence and independently authorized behavior remain intact.",
+          "requiredOwnerFields": [
+            "choice",
+            "proposalSha256",
+            "reason",
+            "ownerIdentity",
+            "decidedAt"
+          ],
+          "scopeSha256": "1c27249e06f82a5fda0fc406125034d874fe0a6de4c12216eb5fcda644f288cd"
+        }
+      ]
+    }
+  ],
+  "financialConflict": {
+    "status": "ADDITIVE_LOCAL_TYPE_RESOLUTION_EXISTS_FORMAL_ROUTING_AND_MEANING_NOT_ADMITTED",
+    "actualConflicts": [
+      {
+        "field": "household_id",
+        "location": {
+          "exactSourcePath": "C:/phios/functions/professional/financial/financial-formula-registry.js",
+          "repositoryPath": "functions/professional/financial/financial-formula-registry.js",
+          "sha256": "2c8923b2253eb3b2eaf5086c8c7b7e09a02f27737ab267e02717fc24fd1d9a8a",
+          "line": 217,
+          "symbolOrField": "household_id: requiredText"
+        },
+        "oldMeaning": "Existing Personal/Household calculation attribution; requiredText remains mandatory.",
+        "businessMeaning": "Business Subject ID is not a household ID.",
+        "resolution": "BUSINESS dispatch does NOT call the household formula contract. It uses existing Business intake / businessSummary and preserves their formula IDs and source limitations."
+      },
+      {
+        "field": "FINANCIAL_HOUSEHOLD_TYPES includes business",
+        "location": {
+          "exactSourcePath": "C:/phios/functions/professional/financial/financial-intake-contract.js",
+          "repositoryPath": "functions/professional/financial/financial-intake-contract.js",
+          "sha256": "9f7af390ac9a1c5a8f8122c5f64d8721009b64872f88680d5e853ddae7a6fae9",
+          "line": 3,
+          "symbolOrField": "FINANCIAL_HOUSEHOLD_TYPES"
+        },
+        "oldMeaning": "Legacy professional intake category; historical meaning unchanged.",
+        "businessMeaning": "Not an admitted BUSINESS_STATEMENT_SOURCE or enterprise accounting authority.",
+        "resolution": "Explicit subjectType/sourceKind discriminators, not renaming the old category."
+      },
+      {
+        "field": "ownerRef / subjectRef / savedDraftRef",
+        "location": {
+          "exactSourcePath": "C:/phios/functions/account/financial-will-draft-store.js",
+          "repositoryPath": "functions/account/financial-will-draft-store.js",
+          "sha256": "42edd2762c49fe524435c3477536739c85bf51c06b27171ff978a823bf1fe40b",
+          "line": 18,
+          "symbolOrField": "export function savedDraftRef"
+        },
+        "oldMeaning": "Saved Personal financial draft is owned by the authenticated Account; ownerRef/subjectRef remain native Account identity.",
+        "businessMeaning": "Business Subject and custodian Account must remain distinct; a delegated role is not a draft owner.",
+        "resolution": "R6 source carries separate Subject/Account, native PWS grant/case and source versions; old loadOwnedDraft consumers remain untouched."
+      },
+      {
+        "field": "income / bank_cash / profit / owner receipts",
+        "location": {
+          "exactSourcePath": "C:/phios/functions/professional/financial/subject-aware-source-candidate-r6.js",
+          "repositoryPath": "functions/professional/financial/subject-aware-source-candidate-r6.js",
+          "sha256": "2db3f04c80422de6fd57b9811d048db4087b86480388c7272ede71ba44aad215",
+          "line": 21,
+          "symbolOrField": "export function createSubjectAwareFinancialCandidateR6"
+        },
+        "oldMeaning": "Personal income, household cash and approved Personal report fields remain unchanged.",
+        "businessMeaning": "Revenue, Business cash, accounting profit and actual authorized owner transfers differ.",
+        "resolution": "personalIncomeProjection/personalCashProjection/distributableProfit stay null; householdMerge=false; source fields separated from derived metrics."
+      }
+    ],
+    "oldConsumers": [
+      {
+        "exactSourcePath": "C:/phios/functions/api/account-financial-summary.js",
+        "repositoryPath": "functions/api/account-financial-summary.js",
+        "sha256": "71d6a60e71603f6cbbb8791f339652e62feea976f47aa79761f5f474c8d8e949",
+        "line": 2,
+        "symbolOrField": "loadOwnedDraft"
+      },
+      {
+        "exactSourcePath": "C:/phios/functions/api/account-financial-consent.js",
+        "repositoryPath": "functions/api/account-financial-consent.js",
+        "sha256": "737635c4e15e2be05339a184c2c96a1d7cf6b407985b208663070fe4e2816aff",
+        "line": 5,
+        "symbolOrField": "loadOwnedDraft"
+      },
+      {
+        "exactSourcePath": "C:/phios/functions/financial/holistic-planning-product/factual-report-job.js",
+        "repositoryPath": "functions/financial/holistic-planning-product/factual-report-job.js",
+        "sha256": "b53c059991ee70bb7ba8dfe3e90a6c3710ec8047adc1bb72e8e2f26ec7fd3fb1",
+        "line": 1,
+        "symbolOrField": "loadOwnedDraft"
+      },
+      {
+        "exactSourcePath": "C:/phios/functions/professional/access/financial-capability-owner.js",
+        "repositoryPath": "functions/professional/access/financial-capability-owner.js",
+        "sha256": "ab64ad6ebee2056620c9183d75c68c3eaee2c59ddc91e11e42459b08e0471528",
+        "line": 2,
+        "symbolOrField": "loadOwnedDraft"
+      },
+      {
+        "exactSourcePath": "C:/phios/functions/professional/access/financial-preparation-handoff.js",
+        "repositoryPath": "functions/professional/access/financial-preparation-handoff.js",
+        "sha256": "37b8d05f6c886aa52cb81ddcccfc4de7c0e49736579240b46129ae15acc43682",
+        "line": 3,
+        "symbolOrField": "loadOwnedDraft"
+      },
+      {
+        "exactSourcePath": "C:/phios/functions/professional/financial/business-source-closure-candidate-r4.js",
+        "repositoryPath": "functions/professional/financial/business-source-closure-candidate-r4.js",
+        "sha256": "893e6ac1d7efc3fbce86d6d9e43618208694693490d5a76e751c303ce0989599",
+        "line": 19,
+        "symbolOrField": "formulaContractConflict"
+      }
+    ],
+    "newBusinessAdapter": [
+      {
+        "exactSourcePath": "C:/phios/functions/professional/financial/subject-aware-source-candidate-r6.js",
+        "repositoryPath": "functions/professional/financial/subject-aware-source-candidate-r6.js",
+        "sha256": "2db3f04c80422de6fd57b9811d048db4087b86480388c7272ede71ba44aad215",
+        "line": 9,
+        "symbolOrField": "export function financialSourceDispatchR6"
+      },
+      {
+        "exactSourcePath": "C:/phios/functions/professional/financial/subject-aware-source-candidate-r6.js",
+        "repositoryPath": "functions/professional/financial/subject-aware-source-candidate-r6.js",
+        "sha256": "2db3f04c80422de6fd57b9811d048db4087b86480388c7272ede71ba44aad215",
+        "line": 13,
+        "symbolOrField": "export function legacyFinancialIdentityR6"
+      },
+      {
+        "exactSourcePath": "C:/phios/functions/professional/financial/subject-aware-source-candidate-r6.js",
+        "repositoryPath": "functions/professional/financial/subject-aware-source-candidate-r6.js",
+        "sha256": "2db3f04c80422de6fd57b9811d048db4087b86480388c7272ede71ba44aad215",
+        "line": 21,
+        "symbolOrField": "export function createSubjectAwareFinancialCandidateR6"
+      }
+    ],
+    "canResolveAdditively": true,
+    "existingContractChangeRequired": false,
+    "actuallyImplemented": [
+      "Strict type dispatch and rejection of Business-to-legacy coercion",
+      "Version-pinned reviewed Business source envelope, currency/period/attribution/formula references",
+      "Original Personal/Household paths unchanged; no fabricated household_id"
+    ],
+    "notImplementedOrApproved": [
+      "No formal Business branch installed in existing customer Financial endpoint or composer",
+      "No real Business purpose-grant/custody policy accepted",
+      "Formal Business formula semantics and accounting applicability not accepted"
+    ],
+    "formalStatusNotEdited": "Original R5/R6 CONFLICT_BLOCKED/history fields preserved. R6.1 is a version-bound decision record, not a status override.",
+    "evidence": [
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+        "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+        "name": "Current native account, Subject, resource and membership still required; client role ignored",
+        "status": "PASS"
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+        "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+        "name": "Subject-aware Financial Business source is typed/versioned/reviewed without household_id coercion",
+        "status": "PASS"
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/subject-bft-r6/TARGETED-TESTS.json",
+        "sha256": "57df7949235a99d4078c64fea1ce778d31bef814e302f57ec7f14e16b43e0495",
+        "name": "Personal/Household inputs and old calculations retain exact identity and result",
+        "status": "PASS"
+      }
+    ]
+  },
+  "continuityPolicyClarification": {
+    "scope": "Decision clarification of existing CONTINUITY_POLICY_DECISION_R6; no replacement proposal or executable policy",
+    "retentionCandidates": [
+      {
+        "class": "LOCAL_SYNTHETIC_QA",
+        "candidate": "Existing explicit 7 or 30 days from original savedAt; no extension by view/reopen.",
+        "state": "Existing local-only behavior retained",
+        "production": false
+      },
+      {
+        "class": "FORMAL_DRAFT",
+        "candidate": "Require approved purpose, jurisdiction, custodian and explicit retentionEndAt BEFORE any write. No inherited 7/30-day default.",
+        "specificDecisionNeeded": "Owner supplies maximum duration, start/reset trigger and withdrawal rule, checked against actual document/data purpose."
+      },
+      {
+        "class": "APPROVED_DELIVERY",
+        "candidate": "Separately bounded retentionEndAt and lawful archival purpose; never inherit a temporary grant expiry or assume perpetual retention.",
+        "specificDecisionNeeded": "Owner/qualified reviewer determines applicable record category and retention term; original Report rights remain unchanged."
+      },
+      {
+        "class": "AUDIT_REFERENCE",
+        "candidate": "Minimal access/version/audit references only; separate explicit retentionEndAt, access role and minimization policy; do not retain full financial payload merely as audit.",
+        "specificDecisionNeeded": "Approve audit schema, retention term and accountable custodian."
+      }
+    ],
+    "revocation": "Immediately deny live access/new saves using revoked/expired authority; revocation alone does not authorize deletion of delivery/audit records.",
+    "deletionCandidates": {
+      "normal": "On expiry deny ordinary reopen. Only a separately approved deletion executor may purge the defined record classes and references after a hold check; produce minimal audit proof.",
+      "hold": "If a documented lawful hold exists, restrict access to a separately authorized custodian, set a mandatory reviewAt and defined exit condition; no invisible indefinite hold.",
+      "unresolved": "If retention/hold/deletion authority is unknown, block production storage rather than collecting data without an executable lifecycle."
+    },
+    "concurrency": {
+      "existing": "Same-request idempotency and in-process concurrency verified in R5.",
+      "required": "Atomic durable reservation, conflict detection and explicit PENDING reconciliation across processes; no last-writer-wins acceptance by inference."
+    },
+    "recovery": {
+      "existing": "Completed encrypted R5 snapshot reopens after restart.",
+      "required": "Audit recovery of orphaned reference/object pairs, missing/corrupt object, unavailable/rotated key and partial write; no synthetic COMPLETE or silent overwrite."
+    },
+    "migration": {
+      "existing": "R5 snapshots are not migrated; formalGrantVersionPinned=false.",
+      "required": "Approve immutable grant/source/formula/Reading/output pin schema, backward read strategy, migration authorization, verification and rollback before formal R6 storage."
+    },
+    "externalVerification": [
+      "Actual jurisdiction and record/data category",
+      "Lawful purpose, data-subject/controller/custodian responsibilities",
+      "Required retention terms and erasure/hold exceptions",
+      "Backup/key rotation/deletion scope",
+      "Authorized recovery operator and real QA environment/bindings"
+    ],
+    "productionStorageAllowed": false,
+    "recommendedChoice": "REVISE_SPECIFIC_ITEMS",
+    "specificItems": [
+      "C1: approved custodian and record classes",
+      "C2: numeric retention limits/end times and triggers per formal class",
+      "C3: deletion/hold authority and evidence, including backups",
+      "C4: revocation/archive access boundaries",
+      "C5: cross-process concurrency and PENDING recovery acceptance",
+      "C6: key-loss/orphan recovery and rollback",
+      "C7: formal version pin and backward-compatible migration"
+    ]
+  },
+  "cloudQa": {
+    "ready": false,
+    "state": "PRECONDITIONS_NOT_MET",
+    "reason": "Even all five ACCEPT_LOCAL_CONTRACT_ONLY choices would not authorize cloud execution. Current code still rejects cloud/foreign hosts.",
+    "missing": [
+      "Exact version-bound Owner decisions, not just principles",
+      "Real identity/business mandate and permitted real data if any real Subject is used",
+      "Financial accounting/source/professional scope decisions appropriate to QA",
+      "Formal custody/retention/deletion/revocation/concurrency/recovery/migration decisions if cloud persistence is requested",
+      "Named authorized nonproduction environment, bindings, secret authority and write scope",
+      "Separately authorized/reviewed host-mode adapter; current loopback guard stays unchanged"
+    ],
+    "production": "NOT_AUTHORIZED"
+  },
+  "automaticRuntimeEffect": false,
+  "production": "NOT_AUTHORIZED"
+}

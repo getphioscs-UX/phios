@@ -1,0 +1,5 @@
+from pathlib import Path
+q=Path('C:/phios/tools/review/world-customer-journey-r4');preview='https://55ced5c1.phios-github.pages.dev';(q/'preview/regression/screens').mkdir(parents=True,exist_ok=True)
+s=(q/'home-journeys.mjs').read_text(encoding='utf-8');s=s.replace("const dir='C:/phios/tools/review/world-customer-journey-r4',cfg=JSON.parse(fs.readFileSync(dir+'/SERVER.json'))", "const dir='C:/phios/tools/review/world-customer-journey-r4/preview',cfg={candidate:'"+preview+"'}");(q/'preview-home-journeys.mjs').write_text(s,encoding='utf-8')
+s=(q/'browser-checks.mjs').read_text(encoding='utf-8').replace("JSON.parse(fs.readFileSync('C:/phios/tools/review/world-customer-journey-r4/SERVER.json'))", "{candidate:'"+preview+"'}").replace("dir='C:/phios/tools/review/world-customer-journey-r4/regression'", "dir='C:/phios/tools/review/world-customer-journey-r4/preview/regression'");(q/'preview-browser-checks.mjs').write_text(s,encoding='utf-8')
+print('Prepared actual Preview runners; only host and receipt destination differ; no success responses are injected.')

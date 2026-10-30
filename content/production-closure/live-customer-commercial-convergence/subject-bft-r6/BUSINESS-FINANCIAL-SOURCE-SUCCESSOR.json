@@ -1,0 +1,131 @@
+{
+  "id": "BUSINESS_FINANCIAL_SOURCE_SUCCESSOR",
+  "version": "R6",
+  "state": "LOCAL_TYPE_CONFLICT_RESOLVED_FORMAL_ADMISSION_PENDING",
+  "existingSchema": {
+    "intake": {
+      "path": "functions/professional/financial/financial-intake-contract.js",
+      "version": "phi-os.financial-intake.v2",
+      "householdTypes": [
+        "individual",
+        "joint",
+        "family",
+        "business"
+      ],
+      "note": "Legacy household_type business is NOT an admitted Business statement schema"
+    },
+    "formula": {
+      "path": "functions/professional/financial/financial-formula-registry.js",
+      "version": "phi-os.financial-formula-registry.v1",
+      "requiredIdentity": "household_id",
+      "unchanged": true
+    },
+    "savedSource": {
+      "path": "functions/account/financial-will-draft-store.js",
+      "kind": "FINANCIAL",
+      "reference": [
+        "sourceKind:SAVED_INTAKE",
+        "draftId",
+        "kind",
+        "version",
+        "schemaVersion",
+        "contentDigest",
+        "ownerRef",
+        "subjectRef",
+        "sourceRef"
+      ],
+      "ownerRule": "Exact authenticated Account, version and digest"
+    },
+    "businessSource": {
+      "path": "functions/professional/financial/business-intake-candidate-r3.js",
+      "version": "BUSINESS-FINANCIAL-INTAKE-CANDIDATE-R3",
+      "localOnly": true
+    }
+  },
+  "exactAddition": {
+    "path": "functions/professional/financial/subject-aware-source-candidate-r6.js",
+    "schemaVersion": "BUSINESS_FINANCIAL_SOURCE_SUCCESSOR_R6",
+    "discriminator": [
+      "PERSONAL",
+      "HOUSEHOLD",
+      "BUSINESS"
+    ],
+    "common": [
+      "currency",
+      "reportingPeriod.id/start/end",
+      "source.owner/referenceId/sourceVersion/sourceDate",
+      "dataQuality",
+      "reviewState",
+      "reviewer.accountId/at/reviewVersion"
+    ],
+    "businessOnly": [
+      "legalForm",
+      "reportingScope",
+      "operatingScope",
+      "accountingBasis",
+      "sourceFields (existing BUSINESS_FIELDS)",
+      "calculationReferences (existing formula IDs/versions/inputs)",
+      "ownerTransactions",
+      "formulaVersions"
+    ],
+    "derivedOutputs": "classification.calculatedMetrics retains actual native result and computedAt; it is NOT an immutable source fact",
+    "unknown": "Missing raw fields null; no zero substitution",
+    "legacyDispatch": "PERSONAL/HOUSEHOLD identity passthrough to existing owners; no additional Business fields or changed formula required",
+    "businessDispatch": "Only existing Business intake + businessSummary/range arithmetic; never fabricate household_id or call Personal composer"
+  },
+  "compatibility": {
+    "originalOwnerFilesUnchanged": true,
+    "legacyPayloadIdentityAndFormulaTested": true,
+    "originalSavedR5SnapshotReopened": true,
+    "oldReportsPricesEntitlementsUnchanged": true,
+    "businessReportComposerApplicable": false
+  },
+  "security": {
+    "account": "Native OIDC/PWS checks first",
+    "subject": "Exact Subject/case/version",
+    "scope": "FINANCIAL_SUMMARY and current R6 stored contract, role, purpose, resources, expiry, revocation",
+    "sourceReview": "Independent reviewed/reconciled input and exact digest; no self approval"
+  },
+  "sourceReview": {
+    "preparedBy": "Existing native Account",
+    "reviewedBy": "Different existing Account",
+    "sourceVersion": "Existing PWS version checksum",
+    "formulaVersion": "Existing LOCAL-FINANCIAL-COMPOSITION-R3, not silently promoted to a formal accounting rule"
+  },
+  "migrationRequirements": {
+    "currentLocal": "NONE: optional relationship metadata, projection only",
+    "executed": false,
+    "formal": "Approve final source schema, private custodian/storage policy and grant/source version pin before real-data/cloud integration; assess existing PWS/Context metadata, no new ledger assumed"
+  },
+  "tests": [
+    "TARGETED-TESTS.json",
+    "RESTART.json",
+    "HTTP-BROWSER-TESTS.json",
+    "PAGES-FUNCTIONS-COMPATIBILITY.json"
+  ],
+  "rollback": "Disable R6 imports/consumer; keep R3/R4/R5, Personal/Household schemas, encrypted history and original grants. Do not delete actual delivery/audit records.",
+  "requiredAdmission": [
+    "Subject mandate policy",
+    "Financial source and formula meaning",
+    "Reading data/interpretation/publication separately",
+    "Navigation FINANCIAL contract",
+    "Continuity lifecycle"
+  ],
+  "unresolvedMeaningDecisions": [
+    {
+      "field": "ownerWithdrawableCash / distributableProfit",
+      "recommended": "Keep null until independent legal/cash restrictions/withdrawal policy review",
+      "alternative": "Separately approved rule, source and responsible reviewer; never net profit alias"
+    },
+    {
+      "field": "ownerTransactions -> personal receipts",
+      "recommended": "Separate authorized settled-transfer source, independently consented Personal/Household contract",
+      "alternative": "No cross-Subject integration; show missing evidence"
+    },
+    {
+      "field": "formal formula versions / accounting basis",
+      "recommended": "Approve exact original native composition and limitations per formula; no generic Financial acceptance",
+      "alternative": "Keep calculated metrics in local review only"
+    }
+  ]
+}

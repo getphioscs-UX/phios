@@ -1,0 +1,3 @@
+from pathlib import Path
+import json,hashlib
+q=Path('C:/phios/tools/review/world-customer-journey-r4');p=q/'preview/regression/BROWSER-CHECKS.json';b=p.read_bytes();(q/'preview/WRITER-INTERRUPTION.json').write_bytes(b);p=q/'preview-browser-checks.mjs';s=p.read_text(encoding='utf-8');needle="fs.writeFileSync(dir+'/BROWSER-CHECKS.json',JSON.stringify({scope:'PREVIEW_EXACT_FC5C693C_ACTUAL_NATIVE_PUBLIC_GET',rows,errors,network,providerCalls:0,productionWrites:0,humanAcceptance:'PENDING'},null,2));";assert needle in s;s=s.replace(needle,'');last="if(rows.some(r=>r.status==='FAIL'))process.exitCode=1;";print(s[-500:]);s+='\n'+needle+'\n';p.write_text(s,encoding='utf-8');print('Deferred only receipt IO until all original assertions finish; interruption retained.')

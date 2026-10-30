@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "failure": "First visible-image assertion counted two empty src images",
+      "evidence": "BROWSER-FAILURE.json: both have zero-size rect; existing viewer placeholders",
+      "fix": "Assert broken images only when actually rendered; no product image excluded. Preserve diagnostic."
+    },
+    {
+      "failure": "Footer Logo not in QA allowlist",
+      "fix": "GET existing LOGO-006 registry URL; source Header/Footer untouched; verified cache used"
+    },
+    {
+      "note": "After scene state switching, explicitly settle image decode before geometry checks",
+      "productSemanticsChanged": false
+    }
+  ],
+  "finalResult": "BROWSER-QA PASS six dimensions plus failure and synthetic availability branches",
+  "qaDoesNotImplyProduction": true
+}

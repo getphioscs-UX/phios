@@ -1,0 +1,48 @@
+{
+  "id": "CONTINUITY_POLICY_DECISION_R6",
+  "existingOwners": [
+    "functions/report-context/report-context-store.js",
+    "functions/pws/registry/version-store.js"
+  ],
+  "newStore": false,
+  "questions": [
+    {
+      "question": "Which cases are retained long term?",
+      "proposal": "Local QA remains existing 7/30 days. Formal drafts, approved deliveries and audit references each require explicit purpose/jurisdiction/Owner retention, no permanent default."
+    },
+    {
+      "question": "Who may reopen?",
+      "proposal": "Keep Account custodian + Business Subject + current purpose/resource/member scope. A shared enterprise custody model is an independent future decision, not current support."
+    },
+    {
+      "question": "Consultant leaves?",
+      "proposal": "Expiry/revocation blocks access immediately; no retained client-file access. New access requires separate client grant."
+    },
+    {
+      "question": "Business revokes?",
+      "proposal": "Block new reads; preserve existing delivery/audit history pending approved retention/legal-hold decision. Never equate revoke with delete."
+    },
+    {
+      "question": "Duplicate requests?",
+      "proposal": "Reuse native Account/Subject/request ID + digest reservation; replay same input, reject conflicting reuse. New formal grant/output pins need approved metadata version."
+    },
+    {
+      "question": "Retention expires?",
+      "proposal": "Deny reopen first. No cleanup worker is authorized here; approved auditable deletion must respect record class, holds and encryption/backups."
+    },
+    {
+      "question": "Loss/concurrency/recovery?",
+      "proposal": "Current same-request concurrency and fresh-process decrypt are verified. PENDING/orphan/key-loss cases stay explicit, not auto-COMPLETE; an Owner-reviewed reconciliation/recovery procedure is still required."
+    }
+  ],
+  "formalGrantVersionPin": "NOT_IMPLEMENTED_OR_ADMITTED; R5 snapshot preserved, not migrated",
+  "formalRetentionDays": null,
+  "deletionExecutorAuthorized": false,
+  "historyMutation": false,
+  "localEvidenceReuse": [
+    "R5 18/18 includes duplicate/concurrent save and revoke",
+    "R5 2/2 restart",
+    "R6 fresh native login/reopen and negative grant checks"
+  ],
+  "decision": "Approve/reject exact record-class retention/custody/revocation/recovery design; authorize no production cleanup by implication"
+}

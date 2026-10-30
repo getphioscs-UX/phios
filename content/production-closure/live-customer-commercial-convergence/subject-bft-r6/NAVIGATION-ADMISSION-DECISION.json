@@ -1,0 +1,35 @@
+{
+  "id": "NAVIGATION_FINANCIAL_ADMISSION_R6",
+  "owner": "functions/customer-projection/canonical-navigation-handoff.js",
+  "family": "FINANCIAL",
+  "newFamily": false,
+  "proposedSource": "BUSINESS_STATEMENT_SOURCE_SUCCESSOR_R6 after Subject/Financial/Reading admission",
+  "requiredContext": [
+    "Subject permission",
+    "Approved source scope",
+    "Reading ref/version",
+    "Evidence quality",
+    "Constraints",
+    "Options",
+    "Decision owner"
+  ],
+  "directions": [
+    "Receivables improvement",
+    "Inventory reduction",
+    "Expense management",
+    "Debt structure review",
+    "Owner liquidity arrangement",
+    "Protection review"
+  ],
+  "directionState": "OPTIONS_FOR_REVIEW_NOT_ACTIONS",
+  "gates": {
+    "sourceContractAccepted": false,
+    "financialContextValid": false,
+    "readingVersionAdmitted": false,
+    "userDecisionAuthorityValid": false,
+    "actionScopeValid": false,
+    "ownerBoundPass": false
+  },
+  "explicitLimits": "Selection does not create execution, improved cash, a confirmed direction, guaranteed outcome or professional authority.",
+  "custodianBoundary": "Existing private source.ownerId must match authenticated Account. Consultant/other-account source ownership is not rewritten to pass the evaluator."
+}

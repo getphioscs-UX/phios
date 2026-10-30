@@ -23,3 +23,23 @@ Retention: one current six-screenshot set plus derived contacts, original assets
 Post-visual nonvisual preservation delta: the pre-existing local-only Personal Evidence receiver is retained as the same DOM node across language rerender. Its existing listeners and authorization owner are unchanged; dedicated browser QA PASS; ordinary page has no receiver. No private account was read. FINAL-VISUAL-QA source bridge is recorded in DELIVERY-MANIFEST.json.
 
 Preview transport correction: initial sandbox-only listener was stopped; one current normal-host read-only loopback service is active, allowing the desktop browser to reach the page. No production setting changed.
+
+
+## R2 WebP + native SVG successor · 2026-10-30
+Status: ECR_FLAGSHIP_VISUAL_R2_HUMAN_REVIEW_READY.
+Source digest: 70a424ad21bb350740beeda5dd7c94b6037dd1887ae4b8ec79289adcd92c6d7e
+Four Owner-uploaded WebPs publicly read/decode/SHA/display PASS; independent management-object SHA not obtained. Three local native SVGs safe/render PASS. Six current bilingual 360/768/1440 screenshots, state/keyboard/gallery/locale/quote/link smoke, failure fallback, reduced-motion and print checks PASS. Client bundle + isolated Pages Functions compiler PASS; full npm check not run.
+R1 historical evidence remains unchanged; original presentation fields other than additive visualSuccessor are exact. Header/Runtime/48cards/3report assets/Commerce rights untouched.
+Preview: http://127.0.0.1:51260/perspectives/phi-configuration/?locale=zh-Hans
+Restart: node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/ecr-flagship-visual-r1/r2/server.mjs
+No pending QA/build process. One GET-only local preview intentionally remains. Human visual review pending; no production acceptance. No commit/push/merge/deploy/paid provider/production writes.
+
+
+## R3 Hero / figure pipeline / conversion · 2026-10-30
+Status ECR_FLAGSHIP_VISUAL_R3_HUMAN_REVIEW_READY.
+Source digest c01f9773f604f9febdc232472f72b4c55fbe31db47ec633490e9307220e226fd.
+Exact R2 baseline retained in r3/BASELINE and BEFORE source files. Hero uses same WebP as masked scene; no new image. Three independent local SVGs remain exact active bytes, planned R2 keys are unuploaded/unverified. P03/P04/P07 HTML preserved, P04 mobile full figure scrolls. P08 native form entry, Free/Full comparison and ten connected chapter nodes implemented. No iframe or duplicate input owner because existing CSP frame-ancestors none.
+Actual: 6 bilingual dimensions, native ECR selected and synthetic date/time entered (consent false, no submit), failure/Commerce branches PASS; 11 protection tests PASS; client and isolated Functions compile PASS. Not a new free personal calculation or paid delivery test. No global npm check.
+Review: content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html#ECR-FLAGSHIP-VISUAL-EXPERIENCE-R3
+Preview: http://127.0.0.1:51260/perspectives/phi-configuration/?locale=zh-Hans (reuse existing GET-only preview service).
+Next: Human visual and content review; separate figure upload/verification if approved. No commit/push/merge/deploy/production writes/paid calls performed.
