@@ -1,3 +1,4 @@
+import {createStrictSqliteD1TestAdapter} from './lib/sqlite-d1-test-adapter.mjs';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
@@ -15,7 +16,7 @@ const generateAccountZiweiCandidate=(context,selection)=>generateProductionAccou
 const generateAndReleaseAccountZiwei=(context,selection)=>generateProductionAndReleaseAccountZiwei(context,selection,{generateCandidate:generateAccountZiweiCandidate});
 const sqlite=new DatabaseSync(':memory:');
 for(const file of fs.readdirSync('db/migrations').filter(f=>f.endsWith('.sql')).sort())sqlite.exec(fs.readFileSync('db/migrations/'+file,'utf8'));
-const db={prepare(sql){return {values:[],bind(...v){this.values=v;return this;},async first(){return sqlite.prepare(sql).get(...this.values)||null;},async all(){return {results:sqlite.prepare(sql).all(...this.values)};},async run(){return sqlite.prepare(sql).run(...this.values);}};},async batch(statements){sqlite.exec('BEGIN');try{const result=[];for(const s of statements)result.push(await s.run());sqlite.exec('COMMIT');return result;}catch(e){sqlite.exec('ROLLBACK');throw e;}}};
+const db=createStrictSqliteD1TestAdapter(sqlite);
 const objects=new Map(),env={PHIOS_ENVIRONMENT:'local',RUNTIME_DB:db,CANONICAL_PERSON_ENCRYPTION_KEY:randomBytes(32).toString('hex'),PRIVATE_REPORTS:{async put(k,v){objects.set(k,v);},async get(k){return objects.has(k)?{text:async()=>objects.get(k)}:null;}}};
 const account=userId=>({env,data:{symbolicAccountIdentity:{userId,providerId:'ISOLATED_LOCAL_TEST',authenticated:true,verified:true}}});
 const a=account('LOCAL-CPA-A'),b=account('LOCAL-CPA-B'),f=JSON.parse(fs.readFileSync('docs/reports/ziwei/production-admission/controlled-subject.json'));
