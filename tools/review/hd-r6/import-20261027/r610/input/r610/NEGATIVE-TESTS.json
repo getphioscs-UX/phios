@@ -1,0 +1,67 @@
+[
+  {
+    "case": "POS-01",
+    "design_sun_tone": 4,
+    "determination_color": 5,
+    "direction": "Right",
+    "expected": "Inner Vision selected; Low Sound separately if its own verified mapping/approval pass"
+  },
+  {
+    "case": "NEG-02",
+    "design_sun_tone": 3,
+    "determination_color": 5,
+    "direction": "Left",
+    "expected": "Do not select Inner Vision"
+  },
+  {
+    "case": "NEG-03",
+    "design_sun_tone": 5,
+    "determination_color": 5,
+    "direction": "Right",
+    "expected": "Do not select Inner Vision merely because Right and Color 5"
+  },
+  {
+    "case": "NEG-04",
+    "design_sun_tone": null,
+    "determination_color": 5,
+    "direction": "Right",
+    "expected": "Cognition HOLD, never infer Tone4"
+  },
+  {
+    "case": "NEG-05",
+    "design_sun_tone": 4,
+    "confidence": "boundary_uncertain",
+    "expected": "Tone-based interpretation HOLD"
+  },
+  {
+    "case": "NEG-06",
+    "design_sun_tone": 4,
+    "snapshot_confirmation": "revoked_after_birth_edit",
+    "expected": "Deny stale content generation"
+  },
+  {
+    "case": "NEG-07",
+    "personality_sun_tone": 4,
+    "design_sun_tone": 2,
+    "expected": "Taste, not Inner Vision"
+  },
+  {
+    "case": "POS-08",
+    "design_sun_tone": 4,
+    "determination_color": 3,
+    "direction": "Right",
+    "expected": "Inner Vision may be selected; not conditional on Color5 or Low Sound"
+  },
+  {
+    "case": "LANG-09",
+    "design_sun_tone": 4,
+    "language": "zh/en",
+    "expected": "Matched bilingual conditions and content identity"
+  },
+  {
+    "case": "SEC-10",
+    "design_sun_tone": 4,
+    "reader": "unauthorized",
+    "expected": "Deny private review source access"
+  }
+]

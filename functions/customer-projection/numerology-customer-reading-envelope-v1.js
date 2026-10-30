@@ -1,6 +1,8 @@
 import {numerologyPublicLabel} from './numerology-public-labels-v1.js';
 import {buildNumerologyPriorityNarrative} from './numerology-priority-narrative-v1.js';
 import {buildNumerologyRadialOverview} from './numerology-radial-overview-v1.js';
+import {selectNumWesternLifeStage} from '../core-method-runtime/num-cycle-runtime.js';
+import {buildNumRichReviewPreview} from '../num-full-production/num-rich-reading-preview.js';
 const SCHEMA='PHI-OS-NUM-CX-CUSTOMER-READING-ENVELOPE-v1.0.0';
 const CHART_SCHEMA='PHI-OS-NUM-CX-CHART-MODEL-v1.0.0';
 const CORE_ROLES=new Set(['LIFE_PATH','BIRTHDAY_NUMBER','ATTITUDE_NUMBER']);
@@ -60,12 +62,18 @@ function buildReadingIA(blocks){
  ];
  return freeze({schemaVersion:'PHI-OS-NUM-CX-READING-IA-v1.0.0',presentation:'CHART_FIRST',blocks:rows.map(([blockId,available],i)=>freeze({blockId,order:i+1,available})),technicalEvidenceCollapsedByDefault:true,genericAtomicCardLoopForbidden:true});
 }
-export function buildNumerologyChartModel({integratedReading,locale='en'}={}){
+export function buildNumerologyChartModel({integratedReading,locale='en',publicationSourceView=null}={}){
  if(integratedReading?.customerPublishable!==true)fail('NUM_CX_PUBLISHABLE_INTEGRATED_READING_REQUIRED');
  const snapshot=arr(integratedReading.sections?.snapshot);const expansion=integratedReading.sections?.expansion;const depth=integratedReading.sections?.depth;
  const base={schemaVersion:CHART_SCHEMA,chartSpecVersion:'PHI-OS-NUM-CX-CHART-SPEC-v1.0.0',methodId:'NUM',locale,overviewTiles:snapshot.filter(x=>CORE_ROLES.has(x.role)).map(x=>snapshotNode(x,locale)),coreNumberMap:{nodes:snapshot.map(x=>snapshotNode(x,locale)),relations:arr(integratedReading.sections?.relationships).map(relationshipEdge)},wholeChartPattern:buildPatternBoard(expansion),nameLayerMap:buildNameLayer(expansion,locale),secondaryChartMap:buildSecondaryChart(depth),cycleTimeline:buildCycleTimeline(integratedReading,locale),timingBand:buildTimingBand(integratedReading,locale),energyPatternMap:buildEnergyPatternMap(integratedReading),relationshipOverlay:buildRelationshipOverlay(integratedReading),priorityThemes:arr(integratedReading.sections?.standoutThemes).slice(0,5).map(x=>freeze({themeCode:x.themeCode,priority:x.priority,title:x.title,summary:x.summary,evidence:arr(x.evidence)}))};
  const priorityNarrative=buildNumerologyPriorityNarrative({integratedReading,chartModel:base,locale,limit:5});
- const enriched={...base,priorityNarrative};
+ const publicationDetail=publicationSourceView?{
+  nameCalculationTree:publicationSourceView.name,
+  energyCombinations:arr(integratedReading.sections?.timing?.lifePeriod?.calculatedPatterns).map(x=>({...x,meaning:arr(depth?.sections?.energyPatternMeanings).find(m=>m.pattern===x.pattern&&m.runtimeUseAllowed===true&&m.customerPublishable!==false)||null,sourcePath:'sections.timing.lifePeriod.calculatedPatterns#'+x.positionCode})),
+  westernTimeline:{pinnacles:publicationSourceView.timing.pinnacles,challenges:publicationSourceView.timing.challenges,selection:selectNumWesternLifeStage({birthDate:publicationSourceView.birthDate,targetDate:publicationSourceView.targetDate,pinnacles:publicationSourceView.timing.pinnacles,challenges:publicationSourceView.timing.challenges})},
+  personalCycleWheel:{targetDate:publicationSourceView.targetDate,calendar:publicationSourceView.timing.calendar,months:publicationSourceView.months.map(x=>({...x,theme:buildNumRichReviewPreview({calendar:[{code:'PERSONAL_MONTH',value:x.value}],locale}).cycleReadings[0]||null}))}
+ }:null;
+ const enriched={...base,priorityNarrative,...(publicationDetail?{publicationDetail}:{})};
  const radialOverview=buildNumerologyRadialOverview({chartModel:enriched,integratedReading:projectPublicIntegratedReading(integratedReading,{locale}),locale});
  return freeze({...enriched,radialOverview,readingIA:buildReadingIA(enriched),boundaries:{chartCreatesMeaning:false,chartChangesCalculation:false,schoolMergeCreated:false,compatibilityScoreCreated:false,fortunePredictionCreated:false}})
 }

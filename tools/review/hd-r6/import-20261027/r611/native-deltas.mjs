@@ -1,0 +1,10 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+import {fullReportFixture} from '../../../../../scripts/lib/ecr-full-report-fixture.mjs';
+import {buildEcrCustomerFullReport} from '../../../../../functions/ecr-full-report/ecr-customer-full-report.js';
+import {composeZiweiEditorialR2} from '../../../../../functions/personal-reading/narrative/ziwei-editorial-r2.js';
+import {buildZiweiCustomerPublicationR2} from '../../../../../functions/personal-reading/ziwei-customer-publication-r2.js';
+const D='tools/review/hd-r6/import-20261027/r611/',j=p=>JSON.parse(fs.readFileSync(p)),hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex'),rows=[];
+globalThis.fetch=async()=>{throw Error('R611_NATIVE_DELTA_NETWORK_DENIED');};
+for(const i of [0,23])for(const locale of ['zh-Hans','en']){const f=await fullReportFixture(i,locale),a=f.report(true),b=f.report(true);assert.deepEqual(a,b);assert(a.sections.length>5);assert(a.claims.length>0);assert(a.claims.every(c=>c.evidenceRefs.length&&c.lineage.meaningRefs.length));assert.throws(()=>buildEcrCustomerFullReport({...f.args,readingIR:{...f.readingIR,sourceProjectionId:'STALE'}}),/SOURCE_MISMATCH/);rows.push({method:'ECR',fixture:i,locale,result:'PASS',reportDigest:hash(a),claims:a.claims.length,scope:'NATIVE_DETERMINISTIC_REVIEW_NOT_PDF_OR_PRODUCTION'});}
+for(const subject of ['SUBJECT_A','SUBJECT_B'])for(const locale of ['zh-Hans','en']){const r1=j('docs/reports/ziwei/full-report-r1/'+subject+'-'+locale+'.json'),sections=await composeZiweiEditorialR2(r1),a=buildZiweiCustomerPublicationR2({r1,sections}),b=buildZiweiCustomerPublicationR2({r1,sections});assert.deepEqual(a,b);assert(a.totalPages>20);assert(a.pages.every(p=>p.visualBinding));rows.push({method:'ZWR',subject,locale,result:'PASS',pageCount:a.totalPages,reportDigest:hash(a),scope:'NATIVE_RECOMPOSITION_IN_MEMORY_NOT_NEW_PDF_OR_HUMAN_ACCEPTANCE'});}
+fs.writeFileSync(D+'ECR-ZIWEI-NATIVE-DELTAS.json',JSON.stringify({rows,providerCalls:0,productionWrites:0},null,2));console.log(rows.length+' native ECR/Zi Wei deterministic source-bound executions passed');

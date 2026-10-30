@@ -3,6 +3,7 @@ import {renderNumR20PublicationHtml} from './numerology-publication-html.js';
 import {buildNumR27SourceView} from './numerology-school-transparent.js';
 import {buildNumerologyChartModel} from '../../customer-projection/numerology-customer-reading-envelope-v1.js';
 import {sha256Stable,deepFreeze} from '../../interpretation-runtime/mir7-utils.js';
+import {numerologyPublicLabel} from '../../customer-projection/numerology-public-labels-v1.js';
 import {renderNumR28Diagram} from './numerology-publication-diagrams.js';
 
 export const NUM_R28_VERSION='NUM-R28-UNIFIED-PUBLICATION-CANDIDATE-v1';
@@ -12,22 +13,22 @@ const purposes=['CORE_HIERARCHY','BIRTH_CALCULATION_TREE','ROLE_NETWORK','BIRTH_
 
 // Inject into the existing isolated delivery owner. Frozen publication is stored
 // with its existing private artifact, so re-download never runs this projector.
-export async function projectNumR28ForLocalDelivery({snapshot,editorial=null}){
+export async function projectNumR28ForLocalDelivery({snapshot,editorial=null,refinement=null}){
  await verifyNumR20Snapshot(snapshot);const monthlySnapshots=[];
  if(snapshot.expansionInput.targetDate&&snapshot.readings.en.sections.timing.calendar.length){
   const year=snapshot.expansionInput.targetDate.slice(0,4);
   for(let month=1;month<=12;month++)monthlySnapshots.push(await calculateNumPublicationSnapshot({canonicalInput:snapshot.canonicalInput,expansionInput:{...snapshot.expansionInput,targetDate:year+'-'+String(month).padStart(2,'0')+'-01'},relationshipConsent:snapshot.relationshipConsent,localReview:true}));
  }
  const editorialSnapshot=editorial?{...editorial,calculationSnapshotDigest:snapshot.snapshotDigest}:null;
- return projectNumR28Publication({snapshot,monthlySnapshots,editorialSnapshot});
+ return projectNumR28Publication({snapshot,monthlySnapshots,editorialSnapshot,refinement});
 }
 
-export async function projectNumR28Publication({snapshot,monthlySnapshots=[],editorialSnapshot=null,realityObservations=[]}){
+export async function projectNumR28Publication({snapshot,monthlySnapshots=[],editorialSnapshot=null,realityObservations=[],refinement=null}){
  await verifyNumR20Snapshot(snapshot);
  const editorialChanges=[];const sourceView=await buildNumR27SourceView({snapshot,monthlySnapshots}),pages=structuredClone(composeNumR20Pages(snapshot));
  if(editorialSnapshot&&(editorialSnapshot.calculationSnapshotDigest!==snapshot.snapshotDigest||editorialSnapshot.pages?.length!==19||editorialSnapshot.publicationAllowed!==false))throw Error('NUM_R28_FROZEN_EDITORIAL_BINDING_REQUIRED');
  const observations=realityObservations.map(x=>{if(x.status!=='USER_CONFIRMED'||!x.sourceRef||typeof x.text!=='string')throw Error('NUM_R28_REALITY_SOURCE_REQUIRED');return{sourceRef:x.sourceRef,text:x.text,status:x.status};});
- const chartModels=Object.fromEntries(['zh-Hans','en'].map(locale=>[locale,buildNumerologyChartModel({integratedReading:snapshot.readings[locale],locale})]));
+ const chartModels=Object.fromEntries(['zh-Hans','en'].map(locale=>[locale,buildNumerologyChartModel({integratedReading:snapshot.readings[locale],locale,...(['R30_PILOT','R30_FULL19'].includes(refinement)?{publicationSourceView:sourceView}:{})})]));
  const diagrams=pages.map((p,i)=>{
   const sourceClaimRefs=[...new Set(['zh-Hans','en'].flatMap(l=>p.languages[l].units.map(u=>u.sourceClaimId).filter(Boolean)))];
   const sourceRows=p.languages.en.structuredVisual;
@@ -41,30 +42,40 @@ export async function projectNumR28Publication({snapshot,monthlySnapshots=[],edi
   if(p.logicalPageId==='P09')d.finalValues=Object.entries(sourceView.frequency).map(([digit,value])=>({digit,value}));
   if(p.logicalPageId==='P10'){d.finalValues=sourceView.name.roles;d.sourcePaths=['depth.sections.secondaryChart.sourceAlignedCore.calculationProvenance','expansion.sections.nameNumbers.values'];}
   if(p.logicalPageId==='P10'&&(sourceView.name.parts.length>6||sourceView.name.parts.some(x=>x.token.length>24))){d.availability='BLOCKED_PRINT_BUDGET';d.unknownReasons.push('NAME_TRACE_REQUIRES_ADDITIONAL_REVIEW_SPACE');}
+  if(['R30_PILOT','R30_FULL19'].includes(refinement)&&p.logicalPageId==='P10'&&(sourceView.name.parts.length>4||sourceView.name.parts.some(x=>x.letters.length>12))){d.availability='BLOCKED_PRINT_BUDGET';d.unknownReasons.push('R30_NAME_TREE_REQUIRES_MORE_SPACE');}
   if(p.logicalPageId==='P19'){d.finalValues={pinnacles:sourceView.timing.pinnacles,challenges:sourceView.timing.challenges};d.sourcePaths=['sections.timing.pinnacles','sections.timing.challenges'];d.calculationAuthority='functions/core-method-runtime/num-cycle-runtime.js';}
   if(p.logicalPageId==='P20'){d.finalValues={calendar:sourceView.timing.calendar,months:sourceView.months};d.sourcePaths=['sections.timing.calendar'];d.calculationAuthority='functions/core-method-runtime/num-cycle-runtime.js';}
   if(editorialSnapshot){const e=editorialSnapshot.pages.find(x=>x.logicalPageId===p.logicalPageId);if(!e)throw Error('NUM_R28_EDITORIAL_PAGE_MISSING');for(const locale of ['zh-Hans','en']){const text=e.languages[locale];if(!Array.isArray(text)||!text.length)throw Error('NUM_R28_EDITORIAL_LANGUAGE_REQUIRED');p.languages[locale].units=text.map((text,j)=>({unitId:p.logicalPageId+'-r27-editorial-'+j,text:(()=>{const before='出生日期频率应与姓名频率放在两个独立矩阵里，让读者一眼看出分布差异。',after='出生日期频次见上一页；本页展开姓名字母换算与姓名分布，两个输入范围分别核对。';if(p.logicalPageId==='P10'&&locale==='zh-Hans'&&text.includes(before)){editorialChanges.push({logicalPageId:p.logicalPageId,locale,before:text,after:text.replace(before,after),reason:'Align the retained prose with P09 DOB matrix and P10 name trace/frequency',sourceClaimRefs});return text.replace(before,after);}return text;})(),sourceClaimId:null,sourceRef:editorialSnapshot.sourceRef,kind:'EDITORIAL_CANDIDATE',candidateClaimRefs:sourceClaimRefs}));}}
+  if(refinement==='R30_FULL19')for(const locale of ['zh-Hans','en']){
+   if(['P13','P16'].includes(p.logicalPageId)&&!nameAbsent)for(const role of sourceView.name.roles){const row=d.languages[locale].visual.rows.find(x=>x.label===numerologyPublicLabel(role.role,locale));if(row){row.value=String(role.value);row.detail=role.reductionSteps.join(' → ');}}
+   if(nameAbsent&&['P10','P15','P16','P17','P18'].includes(p.logicalPageId)){d.languages[locale].visual.rows=[];if(p.logicalPageId!=='P10')p.languages[locale].facts=[];}
+   if(nameAbsent&&p.logicalPageId==='P14')d.languages[locale].visual.rows=d.languages[locale].visual.rows.slice(0,2);
+  }
   return d;
  });
  const overview=diagrams.find(d=>d.logicalPageId==='P06');for(const locale of ['zh-Hans','en']){const before=overview.languages[locale].visual.observation.text;const after=locale==='en'?'Compare the birth-date and eligible name roles with one actual experience; distinguish fit, counterexample and uncertainty.':'从出生日期与合格姓名的不同角色中，选一个角度核对真实经历，并区分符合、反例与未知。';overview.languages[locale].visual.observation.text=after;editorialChanges.push({logicalPageId:'P06',locale,before,after,reason:'Five-role chart replaces predecessor three-role caption',sourceClaimRefs:overview.sourceClaimRefs});}
- const result={editorialChanges,version:NUM_R28_VERSION,snapshotDigest:snapshot.snapshotDigest,sourceView,chartModels,pages,diagrams,observations,editorialStatus:editorialSnapshot?'PRIOR_R27_CANDIDATE_NOT_NEW_SOURCE_ADMISSION':'NATIVE_ADMITTED_UNITS_NOT_EDITORIALLY_COMPRESSED',customerPublishable:false};
+ const result={...(refinement?{refinement}:{}),...(refinement==='R30_FULL19'?{publicationScope:'FULL19'}:{}),editorialChanges,version:NUM_R28_VERSION,snapshotDigest:snapshot.snapshotDigest,sourceView,chartModels,pages,diagrams,observations,editorialStatus:editorialSnapshot?'PRIOR_R27_CANDIDATE_NOT_NEW_SOURCE_ADMISSION':'NATIVE_ADMITTED_UNITS_NOT_EDITORIALLY_COMPRESSED',customerPublishable:false};
  return deepFreeze({...result,publicationDigest:await sha256Stable(result)});
 }
 
 export function renderNumR28PublicationHtml({publication,snapshot,styles,edition='R28',...options}){
  if(publication.snapshotDigest!==snapshot.snapshotDigest||publication.version!==NUM_R28_VERSION)throw Error('NUM_R28_PUBLICATION_IDENTITY_MISMATCH');
+ if(edition==='R30'&&publication.diagrams.some(d=>d.availability==='BLOCKED_PRINT_BUDGET'))throw Error('NUM_R30_PRINT_BUDGET_REVIEW_REQUIRED');
  if(!styles?.shell||!styles?.method)throw Error('NUM_R28_SHARED_SHELL_AND_METHOD_CSS_REQUIRED');
  const lang=options.locale==='bilingual'?['zh-Hans','en']:[options.locale];
  const renderBody=({page,entry,locale,bodyUrl})=>{
   const d=publication.diagrams.find(x=>x.logicalPageId===page.logicalPageId),zh=locale!=='en';
-  const title=page.title[zh?'zh-Hans':'en'];
+  const displayTitle=edition==='R30'&&page.logicalPageId==='P10'?{'zh-Hans':'姓名计算与角色',en:'NAME CALCULATION & ROLES'}:page.title;
+  const title=displayTitle[zh?'zh-Hans':'en'];
   const panel=(part)=>lang.map(l=>`<section class="num-interpretation" lang="${l}">${locale==='bilingual'&&part!=='rest'?`<h2>${l==='en'?'English':'中文'}</h2>`:''}${page.languages[l].units.map((u,i)=>({u,i})).filter(({i})=>part==='all'||(part==='lead'?i===0:i>0)).map(({u,i})=>`<p class="num-text-${i===0?'lead':'body'}" data-unit="${esc(u.unitId)}" data-claim="${esc(u.sourceClaimId||'')}" data-claim-candidates="${esc((u.candidateClaimRefs||[]).join(' '))}">${esc(u.text)}</p>`).join('')}</section>`).join('');
-  const diagramHtml=`<figure class="pub-visual num-diagram-frame">${renderNumR28Diagram({diagram:d,publication,locale})}<figcaption>${esc(d.languages[zh?'zh-Hans':'en'].visual.observation.text)}</figcaption></figure>`;
+  const full=publication.publicationScope==='FULL19';
+  const pilot=edition==='R30'&&['P10','P12','P19','P20'].includes(page.logicalPageId);
+  const diagramHtml=`<figure class="pub-visual num-diagram-frame">${renderNumR28Diagram({diagram:d,publication,locale})}${pilot||full?'':`<figcaption>${esc(d.languages[zh?'zh-Hans':'en'].visual.observation.text)}</figcaption>`}</figure>`;
   const panelHtml=part=>`<div class="num-interpretation-panels num-panel-${part}" data-language-count="${lang.length}">${panel(part)}</div>`;
-  const composition=['L2','L3','L5'].includes(d.diagramFamily)?panelHtml('lead')+diagramHtml+panelHtml('rest'):diagramHtml+panelHtml('all');
-  return `<section class="sheet body pub-page pub-composed-page num-publication-page num-family-${d.diagramFamily}" data-family="${d.diagramFamily}" data-page-id="${page.logicalPageId}" data-physical="${entry.physicalPageNumber}" data-snapshot="${snapshot.snapshotDigest}"><div class="pub-decoration pub-decoration--single"><img class="pub-page-background" alt="" src="${bodyUrl}"></div><header class="pub-header"><span class="num-brand">PHI <b>OS</b></span><span>${zh?'数字学 · 个人解读':'NUMEROLOGY · PERSONAL READING'}<small>${page.logicalPageId} / ${entry.physicalPageNumber}</small></span></header><div class="pub-heading"><p class="num-section-heading">${d.diagramFamily} · ${zh?'结构与观察':'STRUCTURE & OBSERVATION'}</p><h1>${esc(title)}</h1>${locale==='bilingual'?`<p class="num-subtitle">${esc(page.title.en)}</p>`:''}</div><div class="num-page-content">${composition}</div><footer class="pub-footer"><span>${zh?'本地合成审阅候选 · 传统象征解释':'Synthetic local candidate · Traditional symbolic interpretation'}</span><span>PHI OS · ${entry.physicalPageNumber} / 33</span></footer></section>`;
+  const composition=pilot?diagramHtml+panelHtml('all'):['L2','L3','L5'].includes(d.diagramFamily)?panelHtml('lead')+diagramHtml+panelHtml('rest'):diagramHtml+panelHtml('all');
+  return `<section class="sheet body pub-page pub-composed-page num-publication-page num-family-${d.diagramFamily}" data-family="${d.diagramFamily}" data-page-id="${page.logicalPageId}" data-physical="${entry.physicalPageNumber}" data-snapshot="${snapshot.snapshotDigest}"><div class="pub-decoration pub-decoration--single"><img class="pub-page-background" alt="" src="${bodyUrl}"></div><header class="pub-header"><span class="num-brand">PHI <b>OS</b></span><span>${zh?'数字学 · 个人解读':'NUMEROLOGY · PERSONAL READING'}<small>${page.logicalPageId} / ${entry.physicalPageNumber}</small></span></header><div class="pub-heading"><p class="num-section-heading">${pilot?esc(({P10:zh?'姓名 · 计算与角色':'NAME · CALCULATION & ROLES',P12:zh?'能量数字学 · 独立组合':'ENERGY NUMEROLOGY · DISTINCT PATTERNS',P19:zh?'西方周期 · 人生阶段':'WESTERN CYCLES · LIFE STAGES',P20:zh?'个人周期 · 年月日':'PERSONAL CYCLES · YEAR / MONTH / DAY'})[page.logicalPageId]):full?esc(({L1:zh?'出生与姓名 · 角色与联系':'BIRTH & NAME · ROLES AND CONNECTIONS',L2:zh?'数字分布 · 方法与组合':'DISTRIBUTIONS · METHODS AND PATTERNS',L3:zh?'个人视角 · 支持与张力':'PERSONAL LENSES · SUPPORT AND TENSION',L4:zh?'时间尺度 · 阶段与周期':'TIME SCALES · STAGES AND CYCLES',L5:zh?'综合阅读 · 方法与反思':'SYNTHESIS · METHODS AND REFLECTION'})[d.diagramFamily]):d.diagramFamily+' · '+(zh?'结构与观察':'STRUCTURE & OBSERVATION')}</p><h1>${esc(title)}</h1>${locale==='bilingual'?`<p class="num-subtitle">${esc(displayTitle.en)}</p>`:''}</div><div class="num-page-content">${composition}</div><footer class="pub-footer"><span>${options.localReview?'SYNTHETIC · ':''}${zh?'传统象征解释':'Traditional symbolic interpretation'}</span><span>PHI OS · ${entry.physicalPageNumber} / 33</span></footer></section>`;
  };
  const result=renderNumR20PublicationHtml({...options,snapshot,pages:publication.pages,bodyContentRenderer:renderBody});
  const css=`<style>${styles.shell}\n${styles.method}</style>`;
- return {...result,html:result.html.replace('</style>','</style>'+css).replace('<section class="sheet', '<body><main class="pub-report num-publication" data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2" data-edition="'+edition+'" data-locale="'+options.locale+'"><section class="sheet').replace('</html>','</main></body></html>'),publicationDigest:publication.publicationDigest,layoutIdentity:edition==='R29'?'NUM-R29-BODY-EDITORIAL-v1':NUM_R28_VERSION,customerPublishable:false};
+ return {...result,html:result.html.replace('</style>','</style>'+css).replace('<section class="sheet', '<body><main class="pub-report num-publication" data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2" data-edition="'+edition+'" data-publication-scope="'+(publication.publicationScope||'PILOT')+'" data-locale="'+options.locale+'"><section class="sheet').replace('</html>','</main></body></html>'),publicationDigest:publication.publicationDigest,layoutIdentity:edition==='R30'?'NUM-R30-FOUR-PAGE-PILOT-v1':edition==='R29'?'NUM-R29-BODY-EDITORIAL-v1':NUM_R28_VERSION,customerPublishable:false};
 }

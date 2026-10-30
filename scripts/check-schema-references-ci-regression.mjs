@@ -4,12 +4,19 @@ const files=['provider-closure','runtime-bugs','runtime-freeze-audit','runtime-f
 const write=(p,s)=>{const f=path.join(temp,p);fs.mkdirSync(path.dirname(f),{recursive:true});fs.writeFileSync(f,s);};
 const run=()=>spawnSync(process.execPath,[path.join(root,'scripts/check-schema-references.mjs')],{cwd:temp,encoding:'utf8'});
 try{
+ assert.equal(spawnSync('git',['init','--quiet'],{cwd:temp,encoding:'utf8'}).status,0);
  for(const f of files)write(f,fs.readFileSync(path.join(root,f)));
  write('.pages-output/broken.json','not json');write('.wrangler/broken.json','not json');
+ const nested=path.join(temp,'.worktrees/nested');fs.mkdirSync(nested,{recursive:true});
+ assert.equal(spawnSync('git',['init','--quiet'],{cwd:nested,encoding:'utf8'}).status,0);
+ write('.worktrees/nested/content/manifest.json','{"$schema":"missing.schema.json"}');
  write('fixtures/bom.json','\uFEFF{"$schema":"bom.schema.json","value":1}');write('fixtures/bom.schema.json','\uFEFF{"type":"object"}');
  assert.equal(run().status,0,'BOM sources and schemas must parse; generated copies must be ignored');
+ write('.worktrees/ordinary/manifest.json','{"$schema":"missing.schema.json"}');
+ let boundary=run();assert.notEqual(boundary.status,0);assert.match(boundary.stderr,/Missing local JSON Schema for .worktrees\/ordinary/);
+ fs.unlinkSync(path.join(temp,'.worktrees/ordinary/manifest.json'));
  write('fixtures/bom.json','{broken');let r=run();assert.notEqual(r.status,0);assert.match(r.stderr,/Invalid JSON: fixtures/);
  write('fixtures/bom.json','{"$schema":"missing.schema.json"}');r=run();assert.notEqual(r.status,0);assert.match(r.stderr,/Missing local JSON Schema/);
  write('fixtures/bom.json','{"$schema":"bom.schema.json"}');write('fixtures/bom.schema.json','{broken');r=run();assert.notEqual(r.status,0);assert.match(r.stderr,/Invalid JSON|Referenced JSON Schema is invalid/);
- console.log('PASS schema CI regression: BOM source/schema accepted, build output ignored; malformed source/schema and missing schema rejected.');
+ console.log('PASS schema CI regression: nested Git checkout/build output excluded; ordinary directories, malformed source/schema and missing schema remain checked; BOM accepted.');
 }finally{fs.rmSync(temp,{recursive:true,force:true});}

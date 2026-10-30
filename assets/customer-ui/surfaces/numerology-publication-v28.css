@@ -27,25 +27,37 @@
 .num-publication .pub-footer span{font-size:inherit}
 
 /* R2.9: the artwork belongs to the canonical BODY layer, not an opaque skin. */
-.num-publication[data-edition="R29"],.num-publication[data-edition="R29"] .num-publication-page{background:transparent!important}
-.num-publication[data-edition="R29"] .pub-header,.num-publication[data-edition="R29"] .pub-heading{background:rgba(255,253,246,.88);padding-inline:2mm}
-.num-publication[data-edition="R29"] .num-interpretation{background:rgba(255,253,246,.90);padding:2mm}
-.num-publication[data-edition="R29"] .num-diagram-frame{background:rgba(255,253,246,.82)}
-.num-publication[data-edition="R29"] .pub-footer{background:rgba(255,253,246,.88)}
-.num-publication[data-edition="R29"] .pub-footer span{font-size:7.5pt!important}
-.num-publication[data-edition="R29"] .num-interpretation p{font-size:11.5pt;line-height:1.40;margin-bottom:2.3mm}
-.num-publication[data-edition="R29"] .num-interpretation h2{font-size:13pt}
-.num-publication[data-edition="R29"] .pub-heading h1{font-size:24pt}
-.num-publication[data-edition="R29"][data-locale="bilingual"] .num-interpretation p{font-size:10pt;line-height:1.28;margin-bottom:1.3mm}
-.num-publication[data-edition="R29"][data-locale="bilingual"] .num-interpretation h2{font-size:10.5pt}
-.num-publication[data-edition="R29"][data-locale="bilingual"] .pub-heading h1{font-size:21pt}
-.num-publication[data-edition="R29"][data-locale="bilingual"] .num-interpretation{padding:1mm}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]),.num-publication:is([data-edition="R29"],[data-edition="R30"]) .num-publication-page{background:transparent!important}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .pub-header,.num-publication:is([data-edition="R29"],[data-edition="R30"]) .pub-heading{background:rgba(255,253,246,.88);padding-inline:2mm}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .num-interpretation{background:rgba(255,253,246,.90);padding:2mm}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .num-diagram-frame{background:rgba(255,253,246,.82)}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .pub-footer{background:rgba(255,253,246,.88)}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .pub-footer span{font-size:7.5pt!important}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .num-interpretation p{font-size:11.5pt;line-height:1.40;margin-bottom:2.3mm}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .num-interpretation h2{font-size:13pt}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .pub-heading h1{font-size:24pt}
+.num-publication:is([data-edition="R29"],[data-edition="R30"])[data-locale="bilingual"] .num-interpretation p{font-size:10pt;line-height:1.28;margin-bottom:1.3mm}
+.num-publication:is([data-edition="R29"],[data-edition="R30"])[data-locale="bilingual"] .num-interpretation h2{font-size:10.5pt}
+.num-publication:is([data-edition="R29"],[data-edition="R30"])[data-locale="bilingual"] .pub-heading h1{font-size:21pt}
+.num-publication:is([data-edition="R29"],[data-edition="R30"])[data-locale="bilingual"] .num-interpretation{padding:1mm}
 
-.num-publication[data-edition="R29"] svg .note{font-size:14px}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) svg .note{font-size:14px}
 
 /* R29 measured-density refinement: fixed locale typography, never fit-to-page. */
-.num-publication[data-edition="R29"] .num-interpretation p{font-size:12pt;line-height:1.5}
-.num-publication[data-edition="R29"][data-locale="bilingual"] .num-interpretation p{font-size:10.5pt;line-height:1.34}
-.num-publication[data-edition="R29"] .num-interpretation .num-text-body:last-child{border-top:1px solid rgba(177,138,71,.35);padding-top:2mm}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .num-interpretation p{font-size:12pt;line-height:1.5}
+.num-publication:is([data-edition="R29"],[data-edition="R30"])[data-locale="bilingual"] .num-interpretation p{font-size:10.5pt;line-height:1.34}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .num-interpretation .num-text-body:last-child{border-top:1px solid rgba(177,138,71,.35);padding-top:2mm}
 
-.num-publication[data-edition="R29"][data-locale="bilingual"] [data-page-id="P10"] .num-interpretation .num-text-body:last-child{padding-top:.5mm}
+.num-publication:is([data-edition="R29"],[data-edition="R30"])[data-locale="bilingual"] [data-page-id="P10"] .num-interpretation .num-text-body:last-child{padding-top:.5mm}
+
+/* R30: four-page proof only. Same body fonts; no fit-to-page routine. */
+.num-publication[data-edition="R30"] [data-page-id]:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"]){gap:1.5mm!important}
+.num-publication[data-edition="R30"] [data-page-id]:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"]) .num-diagram-frame{padding:1.5mm}
+.num-publication[data-edition="R30"][data-locale="bilingual"] [data-page-id]:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"]) .num-interpretation p{line-height:1.28;margin-bottom:1mm}
+.num-publication[data-edition="R30"][data-locale="bilingual"] [data-page-id]:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"]) .num-interpretation{padding:.5mm}
+.num-publication[data-edition="R30"][data-locale="bilingual"] [data-page-id]:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"]) .num-interpretation h2{margin:0 0 1mm;line-height:1.1}
+.num-publication[data-edition="R30"][data-locale="bilingual"] [data-page-id]:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"]) .num-interpretation h2{display:none}
+
+/* Approved pilot rollout: the four accepted pages retain their exact rules. */
+.num-publication[data-publication-scope="FULL19"][data-locale="bilingual"] .num-publication-page:not(:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"])) .num-interpretation h2{display:none}
+.num-publication[data-publication-scope="FULL19"][data-locale="bilingual"] .num-publication-page:not(:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"])) .num-interpretation p{line-height:1.28;margin-bottom:1mm}

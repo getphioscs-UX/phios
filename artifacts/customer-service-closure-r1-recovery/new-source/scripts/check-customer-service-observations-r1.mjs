@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {normalizeProfileObservation} from '../functions/profile/profile-observation-contract-r1.js';
+import {PROFILE_OBSERVATION_PROMPTS} from '../assets/customer-ui/js/personal-products/profile-observation-prompts-r1.js';
+const tests=[],check=(id,fn)=>{fn();tests.push({id,result:'PASS'});};
+const sample={lens:'identity',responseState:'ANSWERED',answer:'Synthetic role and value observation',currentQuestion:'Which current commitment should I examine?',observedAt:'2026-10-29',processingConsent:true};
+check('observation-not-an-eighth-assessment',()=>assert.equal(Object.keys(PROFILE_OBSERVATION_PROMPTS).length,7));
+for(const lens of Object.keys(PROFILE_OBSERVATION_PROMPTS))check('source-bound-'+lens,()=>{const x=normalizeProfileObservation({...sample,lens,sensitiveConsent:lens==='body_lifestyle'});assert.equal(x.questionRef,'MASTER-R1-5.4:'+lens);assert.equal(x.scoringAuthority,null);assert.equal(x.automaticPersistence,false);assert.equal(x.realityFact,false);});
+for(const responseState of ['UNSURE','SKIPPED','NOT_APPLICABLE'])check('missingness-distinct-'+responseState,()=>{const x=normalizeProfileObservation({...sample,answer:'',responseState});assert.equal(x.responseState,responseState);assert.equal(x.answer,'');assert.ok(!('score'in x));});
+for(const lens of ['__proto__','constructor','toString','made-up'])check('unknown-lens-'+lens,()=>assert.throws(()=>normalizeProfileObservation({...sample,lens}),/OBSERVATION_LENS_INVALID/));
+check('no-consent',()=>assert.throws(()=>normalizeProfileObservation({...sample,processingConsent:false}),/CONSENT_REQUIRED/));
+check('sensitive-separate',()=>assert.throws(()=>normalizeProfileObservation({...sample,lens:'body_lifestyle'}),/SENSITIVE_CONSENT_REQUIRED/));
+check('invalid-calendar-date',()=>assert.throws(()=>normalizeProfileObservation({...sample,observedAt:'2026-02-30'}),/DATE_INVALID/));
+check('current-question-not-inferred',()=>assert.throws(()=>normalizeProfileObservation({...sample,currentQuestion:''}),/CURRENT_QUESTION_REQUIRED/));
+check('oversize-answer',()=>assert.throws(()=>normalizeProfileObservation({...sample,answer:'x'.repeat(1501)}),/TOO_LONG/));
+check('skip-cannot-smuggle-an-answer',()=>assert.throws(()=>normalizeProfileObservation({...sample,responseState:'SKIPPED'}),/STATE_TEXT_CONFLICT/));
+check('authority-mass-assignment',()=>assert.throws(()=>normalizeProfileObservation({...sample,sourceClass:'VERIFIED_MEDICAL'}),/FIELDS_INVALID/));
+const file='content/production-closure/live-customer-commercial-convergence/customer-service-closure-r1/OBSERVATION-CONTRACT-RESULTS.json';fs.mkdirSync(file.slice(0,file.lastIndexOf('/')),{recursive:true});fs.writeFileSync(file,JSON.stringify({status:'PASS',tests,providerCalls:0,scope:'SERVER_NORMALIZATION_NOT_MODEL_OR_CLINICAL_VALIDATION'},null,2));console.log('PASS Customer observation contract: '+tests.length+' cases; no score, source promotion or persistence.');

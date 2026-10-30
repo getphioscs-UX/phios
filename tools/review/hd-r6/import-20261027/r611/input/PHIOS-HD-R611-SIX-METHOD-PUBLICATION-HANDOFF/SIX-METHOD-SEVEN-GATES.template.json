@@ -1,0 +1,31 @@
+{
+  "identity": "PHIOS-SIX-METHOD-PUBLICATION-AND-AUTOMATED-PRODUCTION-ACCEPTANCE",
+  "source": "owner-approved scope, existing Master only",
+  "methods": [
+    "Astrology",
+    "BaZi",
+    "Zi Wei",
+    "Numerology",
+    "Human Design",
+    "PHI Configuration"
+  ],
+  "gates": [
+    "SOURCE_HUMAN_ACCEPTED",
+    "PUBLICATION_HUMAN_ACCEPTED",
+    "AUTOMATED_GENERATION_PASS",
+    "DYNAMIC_PDF_PASS",
+    "MULTI_CUSTOMER_REGRESSION_PASS",
+    "REAL_ACCOUNT_DELIVERY_PASS",
+    "PRODUCTION_ADMITTED"
+  ],
+  "allowed_states": ["PASS", "PARTIAL", "BLOCKED", "NOT_RUN"],
+  "record_fields": ["method", "canonical_report_identity", "language_or_variant", "gate", "status", "source_hash", "owner_receipt", "actual_consumer", "evidence_path", "environment", "blocker", "next_action"],
+  "initial_status": "NOT_EVALUATED_HERE; PRESERVE THE EXISTING MASTER'S CURRENT VERIFIED STATUSES",
+  "non_promotion_rules": [
+    "HD front-matter editorial approval does not approve any other method",
+    "local synthetic checkout does not prove real account delivery",
+    "source HUMAN ACCEPT does not approve commercial publication",
+    "one method delivery E2E does not substitute for another method adapter-specific delta",
+    "production admission requires explicit owner authorization and real evidence"
+  ]
+}

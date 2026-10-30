@@ -1,0 +1,22 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+import {selectHdFrontMatterForLocalReview as select} from './front-matter-binding.mjs';
+import {quoteReportPresentation,requirePurchasedReportPresentation} from '../../../../../functions/pws/commercial/report-successor-contract.js';
+import {validateFinalTocPageMap} from './input/PHIOS-HD-R611-SIX-METHOD-PUBLICATION-HANDOFF/toc_page_map_check.mjs';
+const D='tools/review/hd-r6/import-20261027/r611/',bindings=JSON.parse(fs.readFileSync(D+'FRONT-MATTER-BINDINGS.json')),results=[];
+const test=(name,fn)=>{fn();results.push({name,result:'PASS'});},copy=x=>structuredClone(x),ent=locale=>({product_id:'COM-REPORT-HD-FULL',entitlement_status:'active',purchase_id:'QA-NO-CHARGE',reportPresentation:{reportLocale:locale,reportLanguageMode:locale==='bilingual'?'BILINGUAL':'SINGLE'}});
+for(const locale of ['zh-Hans','en','bilingual']){
+ let args={localReview:true,bindings,entitlement:ent(locale)};
+ test(locale+' exact five existing IDs',()=>{let x=select(args);assert.deepEqual(x,JSON.parse(fs.readFileSync(D+'FRONT-MATTER-SELECTION.json')).plans.find(p=>p.contentLanguage===locale));assert.equal(x.pages.length,5);for(const a of x.pages){assert.equal(a.language,locale);assert.equal(createHash('sha256').update(fs.readFileSync(a.file)).digest('hex'),a.sha256);assert.equal(a.productionAdmitted,false);}});
+ test(locale+' missing persisted language denied',()=>assert.throws(()=>select({...args,entitlement:{...ent(locale),reportPresentation:null}})));
+ test(locale+' missing stored locale denied',()=>assert.throws(()=>select({...args,entitlement:{...ent(locale),reportPresentation:{reportLanguageMode:'SINGLE'}}})));
+ test(locale+' no public activation',()=>assert.throws(()=>select({...args,localReview:false})));
+ test(locale+' revoked entitlement',()=>assert.throws(()=>select({...args,entitlement:{...ent(locale),entitlement_status:'revoked'}})));
+ test(locale+' missing purchase',()=>assert.throws(()=>select({...args,entitlement:{...ent(locale),purchase_id:null}})));
+ test(locale+' requested other language denied',()=>assert.throws(()=>select({...args,requested:ent(locale==='en'?'zh-Hans':'en').reportPresentation})));
+ for(const kind of ['missing','duplicate','wrongKey','wrongAssetId','unverified','wrongLanguage','badHash'])test(locale+' '+kind,()=>{let b=copy(bindings),i=b.rows.findIndex(r=>r.language===locale&&r.pageId==='P03');if(kind==='missing')b.rows.splice(i,1);if(kind==='duplicate')b.rows.push(copy(b.rows[i]));if(kind==='wrongKey')b.rows[i].objectKey+='x';if(kind==='wrongAssetId')b.rows[i].registryAssetId+='x';if(kind==='unverified')b.rows[i].verification='HTTP200';if(kind==='wrongLanguage')b.rows[i].language='xx';if(kind==='badHash')b.rows[i].sha256='bad';assert.throws(()=>select({...args,bindings:b}));});
+}
+// Native immutable price/language owner delta; no Checkout, provider or writes.
+for(const [method,product,price] of [['AST','ASTROLOGY_FULL_REPORT',8900],['BZR','BAZI_FULL_REPORT',8900],['ZWR','ZIWEI_FULL_REPORT',8900],['NUM','NUMEROLOGY_FULL_REPORT',5900],['HD','HD_FULL_REPORT',12900],['ECR','ECR_FULL_REPORT',12900]])for(const locale of ['zh-Hans','en','bilingual'])test(method+' '+locale+' current purchase language and price',()=>{let q=quoteReportPresentation(product,ent(locale).reportPresentation);assert.equal(q.amountMinor,price+(locale==='bilingual'?1000:0));assert.equal(q.reportLocale,locale);assert.equal(requirePurchasedReportPresentation({...ent(locale),reportPresentation:q}).reportLocale,locale);});
+let map={selectedLanguage:'en',physicalPageCount:120,sectionOpenerEvents:Array.from({length:17},(_,i)=>({sectionId:'SEC'+String(i+1).padStart(2,'0'),physicalPageIndex0:8+i*5}))};
+for(const kind of ['missing','duplicate','negative','outOfOrder','wrongLanguage'])test('TOC refuses '+kind,()=>{let x=copy(map);if(kind==='missing')x.sectionOpenerEvents.pop();if(kind==='duplicate')x.sectionOpenerEvents.push(x.sectionOpenerEvents[0]);if(kind==='negative')x.sectionOpenerEvents[0].physicalPageIndex0=-1;if(kind==='outOfOrder')x.sectionOpenerEvents[1].physicalPageIndex0=8;if(kind==='wrongLanguage')x.selectedLanguage='fr';assert.throws(()=>validateFinalTocPageMap(x));});
+fs.writeFileSync(D+'TARGETED-CHECKS.json',JSON.stringify({result:'PASS',count:results.length,environment:'LOCAL_QA',results,providerCalls:0,realPayments:0,productionWrites:0},null,2));console.log(results.length+' exact-asset, language, price and TOC negative checks passed');

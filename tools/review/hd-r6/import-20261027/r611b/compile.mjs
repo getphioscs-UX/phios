@@ -1,0 +1,4 @@
+import fs from'node:fs';import{build}from'esbuild';
+const rows=[];
+for(const entryPoint of ['functions/canonical-presentation-runtime/report-editorial-resolver.js','functions/canonical-presentation-runtime/private-pdf-renderer.js']){try{const r=await build({entryPoints:[entryPoint],bundle:true,write:false,format:'esm',platform:'browser',logLevel:'silent'});rows.push({entryPoint,status:'PASS',outputBytes:r.outputFiles[0].contents.length});}catch(e){rows.push({entryPoint,status:'FAIL',errors:e.errors?.map(x=>x.text)});}}
+fs.writeFileSync('tools/review/hd-r6/import-20261027/r611b/COMPILE.json',JSON.stringify({scope:'Two changed shared owners, browser bundle compile only; not global npm check',rows},null,2));console.log(JSON.stringify(rows));if(rows.some(r=>r.status==='FAIL'))process.exitCode=1;

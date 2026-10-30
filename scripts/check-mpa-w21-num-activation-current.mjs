@@ -1,4 +1,5 @@
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
+import {assertNumWesternLifeStageSuccessor,NUM_WESTERN_CYCLE_RUNTIME_PATH} from './lib/num-western-life-stage-successor.mjs';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import {
@@ -121,7 +122,11 @@ assert.equal(comparison.effects.productionEligibilityCreated, false);
 
 // Freeze the exact NUM validation/regression implementation set used by W21.
 for (const item of regression.fingerprints) {
-  assert.equal(sha256File(item.path), item.sha256, `NUM_W21_REGRESSION_DRIFT:${item.path}`);
+  if (item.path === NUM_WESTERN_CYCLE_RUNTIME_PATH) {
+    assertNumWesternLifeStageSuccessor(item.sha256);
+  } else {
+    assert.equal(sha256File(item.path), item.sha256, `NUM_W21_REGRESSION_DRIFT:${item.path}`);
+  }
 }
 for (const alias of regression.checkerAliases) {
   const pkg = effectivePackageScripts(readJson('package.json'));

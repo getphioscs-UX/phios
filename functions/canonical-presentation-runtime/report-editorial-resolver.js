@@ -1,6 +1,24 @@
 import {PublicAssetResolutionError,isAssetVerificationRenderable,resolvePublicAsset} from '../../assets/js/runtime/web-production/asset-resolver.js';
 import {reportVisualArchitecture,fixedReportAssetLanguage} from './report-visual-architecture.js';
 import visualManifest from '../../content/reports/shared/report-visual-assets-r2.json';
+
+// R6.11 pure presentation boundary. The server caller checks the existing
+// purchase owner first and supplies its language plus existing registry rows.
+// This function never grants access or enables production publication.
+export function resolveHdFrontMatterForLocalReview({purchasedPresentation,registeredPages,bindings,localReview=false}={}){
+ if(!localReview)throw fixedVisualError('HD_FRONT_MATTER_LOCAL_REVIEW_ONLY');
+ if(!purchasedPresentation||!['zh-Hans','en','bilingual'].includes(purchasedPresentation.reportLocale)||!['SINGLE','BILINGUAL'].includes(purchasedPresentation.reportLanguageMode))throw fixedVisualError('HD_FRONT_MATTER_PERSISTED_LANGUAGE_REQUIRED');
+ const locale=purchasedPresentation.reportLocale;
+ const pages=[];
+ for(let n=1;n<=5;n++){
+  const registered=registeredPages?.[n-1],rows=bindings?.rows?.filter(r=>r.language===locale&&r.pageId==='P0'+n)||[];
+  if(!registered||rows.length!==1)throw fixedVisualError('HD_FRONT_MATTER_EXACT_ASSET_MISSING:'+locale+':P0'+n);
+  const a=rows[0];
+  if(a.registryAssetId!==registered.asset_code||a.objectKey!==registered.object_key||a.mime!=='image/webp'||!Number.isInteger(a.width)||!Number.isInteger(a.height)||a.width<=0||a.height<=0||!/^[a-f0-9]{64}$/.test(a.sha256)||a.verification!=='LOCAL_BYTES_DECODED_EXACT_HASH'||a.approval!=='OWNER_SELECTED_EXACT_PATH_R611_LOCAL_CANDIDATE')throw fixedVisualError('HD_FRONT_MATTER_ASSET_BINDING_INVALID:'+locale+':P0'+n);
+  pages.push(Object.freeze({...a,contentLanguage:locale,physicalRole:'FIXED_EDITORIAL',productionAdmitted:false}));
+ }
+ return Object.freeze({methodId:'HD',contentLanguage:locale,languageAuthority:'PERSISTED_ORDER_REPORT_PRESENTATION',pages:Object.freeze(pages),localReview:true,customerPublishable:false});
+}
 const fixedVisualError=message=>Object.assign(new Error(message),{code:message.split(':')[0],status:409});
 
 export function reportContentLocale(locale){if(locale==='zh'||locale==='ZH')return 'zh-Hans';if(locale==='EN')return 'en';if(locale==='BILINGUAL')return 'bilingual';if(!['zh-Hans','en','bilingual'].includes(locale))throw fixedVisualError('REPORT_CONTENT_LANGUAGE_INVALID');return locale;}
@@ -69,4 +87,32 @@ export function composeFixedEditorialReport({methodId,contentLanguage,contentPag
  if(contentPages.some(p=>!p.html.trim()))throw fixedVisualError('REPORT_EMPTY_CONTENT_PAGE_FORBIDDEN');
  const pages=fixed.map(a=>renderFixedReportPage({methodId,pageId:a.pageId,contentLanguage:locale,manifest})+contentPages.filter(p=>p.afterSectionId===a.pageId).map(p=>`<article class="report-customer-content" data-page-role="BODY_CONTENT" data-body-key="${escapeVisual(body.objectKey)}" lang="${locale==='bilingual'?'zh-Hans':locale}" data-source-owner="${p.sourceOwner.replace(/[^a-zA-Z0-9_-]/g,'')}"><div class="report-body-reading-field">${p.html}</div></article>`).join('')).join('');
  return {html:`<!doctype html><html lang="${locale==='bilingual'?'zh-Hans':locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>@page{size:A4;margin:0}body{margin:0;color:#17333e;font:16px/1.65 system-ui,'Microsoft YaHei',sans-serif;${body?`--report-body-image:url('${escapeVisual(body.url)}')`:''}}*{box-sizing:border-box}${FIXED_REPORT_PAGE_CSS}${REPORT_BODY_PAGE_CSS}${contentCss}</style>${body?`<div class="report-body-backdrop" data-body-key="${escapeVisual(body.objectKey)}" aria-hidden="true"></div>`:''}<main>${pages}</main></html>`,contentLanguage:locale,fixedAssetLanguage:fixed[0].fixedAssetLanguage,masterSectionMode:'FIXED',bodyAsset:body?{objectKey:body.objectKey,sha256:body.sha256}:null,providerCalls:0,customerPublishable:false};
+}
+
+// Acceptance-fix candidate: one shared bilingual P06, actual native final-layout
+// events, and measured number slots. Publication remains with existing owners.
+export function planSemiFixedReportContents({methodId,purchasedPresentation,registeredAsset,assetRead,visualReview,sectionContract,finalLayout}={}){
+ const fail=code=>{throw fixedVisualError(code);};
+ if(!['HD','BZR','ZWR','NUM','AST','ECR'].includes(methodId))fail('P06_METHOD_INVALID');
+ const locale=reportContentLocale(purchasedPresentation?.reportLocale);
+ if(purchasedPresentation?.reportLanguageMode!==(locale==='bilingual'?'BILINGUAL':'SINGLE'))fail('P06_PURCHASE_LANGUAGE_REQUIRED');
+ if(!registeredAsset||registeredAsset.methodId!==methodId||registeredAsset.locale!=='bilingual'||registeredAsset.page!==6||registeredAsset.pageRole!=='SEMIFIXED_CONTENTS'||!registeredAsset.object_key)fail('P06_EXACT_REGISTRY_REQUIRED');
+ if(assetRead?.methodId!==methodId||assetRead.objectKey!==registeredAsset.object_key||assetRead.httpStatus!==200||assetRead.verification!=='CURRENT_BYTES_DECODED'||assetRead.mime!=='image/webp'||!Number.isInteger(assetRead.width)||!Number.isInteger(assetRead.height)||Math.min(assetRead.width,assetRead.height)<=0||!/^[a-f0-9]{64}$/.test(assetRead.sha256)||!/^[a-f0-9]{64}$/.test(assetRead.decodedPngSHA256))fail('P06_CURRENT_OBJECT_BYTES_REQUIRED');
+ if(registeredAsset.sha256&&registeredAsset.sha256!==assetRead.sha256)fail('P06_REGISTERED_VERSION_DRIFT');
+ if(!sectionContract||sectionContract.methodId!==methodId||!sectionContract.version||!Array.isArray(sectionContract.sections)||!sectionContract.sections.length)fail('P06_SECTION_OWNER_REQUIRED');
+ const sections=sectionContract.sections,ids=sections.map(s=>s.id);
+ if(new Set(ids).size!==ids.length||sections.some(s=>!s.id||!s.zh||!s.en))fail('P06_SECTION_IDENTITY_INVALID');
+ if((visualReview?.accepted!==true&&visualReview?.localCandidate!==true)||visualReview.sha256!==assetRead.sha256||visualReview.methodId!==methodId||visualReview.fixedTitlesVerified!==true||visualReview.pageNumbersBlank!==true||!Array.isArray(visualReview.rows)||visualReview.rows.length!==ids.length)fail('P06_VISUAL_ACCEPTANCE_REQUIRED');
+ if(finalLayout?.methodId!==methodId||finalLayout.contentLanguage!==locale||!finalLayout.reportId||!finalLayout.version||!Number.isInteger(finalLayout.pageCount)||finalLayout.pageCount<7||!Array.isArray(finalLayout.sectionOpeners)||finalLayout.sectionOpeners.length!==ids.length)fail('P06_FINAL_LAYOUT_REQUIRED');
+ let previous=5;
+ const rows=sections.map((s,i)=>{
+  const events=finalLayout.sectionOpeners.filter(e=>e.sectionId===s.id),slots=visualReview.rows.filter(r=>r.sectionId===s.id);
+  if(events.length!==1||slots.length!==1)fail('P06_SECTION_DUPLICATE_OR_MISSING');
+  const ev=events[0],slot=slots[0],n=ev.physicalPageIndex0;
+  if(slot.zh!==s.zh||slot.en!==s.en)fail('P06_FIXED_TITLES_MISMATCH');
+  if(!Number.isInteger(n)||n<=previous||n>=finalLayout.pageCount)fail('P06_SECTION_PAGE_ORDER_INVALID');previous=n;
+  if(!Number.isFinite(slot.xRight)||!Number.isFinite(slot.y)||slot.xRight<=0||slot.xRight>=1||slot.y<=0||slot.y>=1||!Array.isArray(slot.rect)||slot.rect.length!==4||slot.rect.some(x=>!Number.isFinite(x)||x<0||x>1)||slot.rect[0]>=slot.rect[2]||slot.rect[1]>=slot.rect[3]||slot.xRight<slot.rect[0]||slot.xRight>slot.rect[2]||slot.y<slot.rect[1]||slot.y>slot.rect[3])fail('P06_NUMBER_SLOT_INVALID');
+  return Object.freeze({sectionId:s.id,titleZh:s.zh,titleEn:s.en,physicalPageNumber1:n+1,targetPageIndex0:n,xRight:slot.xRight,y:slot.y,rect:Object.freeze([...slot.rect])});
+ });
+ return Object.freeze({methodId,contentLanguage:locale,fixedAssetLanguage:'bilingual',objectKey:registeredAsset.object_key,sourceSHA256:assetRead.sha256,decodedPngSHA256:assetRead.decodedPngSHA256,imageWidth:assetRead.width,imageHeight:assetRead.height,tocPageIndex0:5,physicalPageCount:finalLayout.pageCount,reportId:finalLayout.reportId,version:finalLayout.version,visualAcceptance:visualReview.accepted===true?'OWNER_ACCEPTED':'LOCAL_CANDIDATE_PENDING_OWNER',rows:Object.freeze(rows),customerPublishable:false});
 }

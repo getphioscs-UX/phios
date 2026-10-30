@@ -78,6 +78,9 @@ function jsonFiles(directory) {
     }
 
     if (entry.isDirectory()) {
+      // Nested repositories/worktrees own their source and schema closure.
+      // Validate them from their own root, never as part of this checkout.
+      if (fs.existsSync(path.join(absolutePath, '.git'))) continue;
       for (const file of jsonFiles(absolutePath)) output.push(file);
     } else if (
       entry.isFile() &&

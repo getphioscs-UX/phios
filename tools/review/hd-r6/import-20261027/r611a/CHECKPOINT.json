@@ -1,0 +1,83 @@
+{
+  "state": "R611A_BLOCKED_CURRENT_R2_ASSET_READ",
+  "at": "2026-10-29T09:53:04.238Z",
+  "HEAD": "0deb123097062750ba4d294171a2d975bff1b2a0",
+  "phases": {
+    "W0": "PASS_24_R611_95_R610_3_PDFS_UNCHANGED",
+    "W1": "BLOCKED_LIST401_OBJECT401_THEN429",
+    "W2": "CURRENT_VISUALS_UNVERIFIED_HISTORICAL_DISCREPANCIES_PRESERVED",
+    "W3": "LOCAL_CONTENT_HASH_FRESHNESS_GATE_AND_EXISTING_RENDERER_PREFLIGHT_IMPLEMENTED_FAIL_CLOSED",
+    "W4": "FUNCTIONAL_TOC_RETAINED_P06_REGISTERED_ROW_ABSENT_REMOTE_UNVERIFIED",
+    "W5": "BLOCKED_ZERO_NEW_PDFS_NO_STALE_SUBSTITUTE",
+    "W6": "NEW_PDF_VISUAL_AND_PRIVATE_DELIVERY_NOT_RUN",
+    "W7": "126_INDEPENDENT_GATE_ROWS_CURRENT_RECEIPT_HASHES_UNCHANGED",
+    "W8": "SAME_MASTER_UPDATED_EXACT_BLOCKER"
+  },
+  "currentDecodedAssets": 0,
+  "newPDFs": [],
+  "historicalPDFs": [
+    {
+      "format": "zh-Hans",
+      "path": "output/pdf/hd-r611-owner-review/HD-R611-PREMIUM-OWNER-zh-Hans-FINAL.pdf",
+      "pages": 83,
+      "bytes": 72214439,
+      "sha256": "25af33cf8acc776196f53c602d5db93f89e7cb105c8aa67491211b522ce05bd5",
+      "paragraphs": 284,
+      "embeddedPosters": 17,
+      "BODYBackground": true,
+      "commercial": false,
+      "amountMinor": 12900
+    },
+    {
+      "format": "en",
+      "path": "output/pdf/hd-r611-owner-review/HD-R611-PREMIUM-OWNER-en-FINAL.pdf",
+      "pages": 95,
+      "bytes": 72292844,
+      "sha256": "14e79ad20492d941bcc0f7f943698103c0c111a9610ddf1a2ae08841ec5d80dc",
+      "paragraphs": 219,
+      "embeddedPosters": 17,
+      "BODYBackground": true,
+      "commercial": false,
+      "amountMinor": 12900
+    },
+    {
+      "format": "bilingual",
+      "path": "output/pdf/hd-r611-owner-review/HD-R611-PREMIUM-OWNER-bilingual-FINAL.pdf",
+      "pages": 145,
+      "bytes": 71549565,
+      "sha256": "e30d71233c42d413270ecb85d4a40b96821c05cd36810fefe22bc6cf6cf9577a",
+      "paragraphs": 503,
+      "embeddedPosters": 17,
+      "BODYBackground": true,
+      "commercial": false,
+      "amountMinor": 13900
+    }
+  ],
+  "validatorChecks": 24,
+  "validatorScope": "Local synthetic unit assertions only; not current object observations",
+  "inheritedTOCRecheck": "PASS_95_TO_96_EXISTING_REAL_REFLOW_FIXTURE_ONLY",
+  "productionRelease": "BLOCKED",
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "StripeMutations": 0,
+  "R2Writes": 0,
+  "productionWrites": 0,
+  "commit": 0,
+  "push": 0,
+  "merge": 0,
+  "deploy": 0,
+  "fullNpmCheck": "NOT_RUN_USER_MANAGED",
+  "firstRemainingBlocker": "CURRENT_AUTHORIZED_R2_BYTES_UNAVAILABLE_HTTP401_THEN429",
+  "next": "Obtain current authorized exact objects without creating/renewing tokens or changing access. Preserve this failed-read receipt; do not retry automatically. Decode and visually verify fifteen current rows and cover differences; then run the prepared gate/native owner, inspect every page, verify TOC/reflow and isolated private save/reopen/download.",
+  "activeOwnJobs": [],
+  "resumeCommandAfterVerifiedBytes": "python tools/review/hd-r6/import-20261027/r611a/decode-current.py, then exact visual-role review, then render-current.py --preflight-only; actual PDF authoring marker and shared render-slot preflight before approved local render",
+  "currentPreflightCommand": "node --import ./scripts/lib/pages-json-import-preload.mjs tools/review/hd-r6/import-20261027/r611a/prepare-current.mjs",
+  "currentPreflightExitCode": 2,
+  "doNotRepeat": [
+    "R61017chapter authoring",
+    "R611 historical rendering",
+    "already inherited six-method tests",
+    "unauthorized/rate-limited network retries"
+  ],
+  "pendingQuestion": "Current existing read-only authorization configuration or local latest15asset directory; no secret requested"
+}

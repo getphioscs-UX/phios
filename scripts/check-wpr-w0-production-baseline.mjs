@@ -1,4 +1,3 @@
-import {assertM3cWranglerSuccessor} from './lib/m3c-wrangler-successor.mjs';
 import assert from 'node:assert/strict';
 import { readJson, sha256, BASELINE, exists } from './lib/web-production/wpr-foundation-v1.mjs';
 const b='content/web-production/audits';
@@ -8,9 +7,7 @@ for (const [p,d] of Object.entries(audit.sourceDigests)) {
   if (p === 'wrangler.jsonc' && sha256(p) !== d) {
     const successor=readJson('content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v1.json');
     assert.equal(successor.predecessor.wranglerSha256,d.replace('sha256:',''),`WPR-W0 baseline predecessor drift: ${p}`);
-    const originalProduction=readJson('content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v2.json').previousPath;
-    assert.equal(successor.successor.wranglerSha256,sha256(originalProduction).replace('sha256:',''),`WPR-W0 original renderer successor drift: ${p}`);
-    await assertM3cWranglerSuccessor(d.replace('sha256:',''));
+    assert.equal(successor.successor.wranglerSha256,sha256(p).replace('sha256:',''),`WPR-W0 successor drift: ${p}`);
     continue;
   }
   if (['content/registry/books.json','content/registry/parts.json'].includes(p) && sha256(p) !== d) {

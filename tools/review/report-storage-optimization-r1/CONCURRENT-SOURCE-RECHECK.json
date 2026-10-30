@@ -1,0 +1,27 @@
+{
+  "observedAt": "2026-10-29T10:29:14Z",
+  "changes": [
+    {
+      "path": "functions/canonical-presentation-runtime/private-pdf-renderer.js",
+      "initialSHA256": "a62594b6ffc72d2ce5bff75573d2dc097c49903b338aa14b2ab950f9abee2c77",
+      "currentSHA256": "439b4004a01f4ebccfa6b6db90b5a84f57d50f623d2f65fab6bc407284a9204a",
+      "currentReadOnlyInspection": {
+        "fontSubsetConditionalStillPresent": true,
+        "currentReviewIdentityGuardPresent": true,
+        "currentTOCHelperPresent": true
+      },
+      "origin": "Concurrent external workspace change; not modified or rolled back by this work. Baseline already dirty; HEAD diff is not asserted to be the exact concurrent delta.",
+      "impact": "All original PDF hashes and R2 registry remain unchanged. Frozen-file optimization/visual proofs remain applicable to those exact PDFs. Future renderer integration must bind/retest this new code SHA; current renderer itself was not executed.",
+      "reconciledForFrozenPdfAudit": true
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html",
+      "initialSHA256": "23898d5b53fc864aff83a813241fe3afecd3d3c46a8dc02e32ef8e022550d3b2",
+      "currentSHA256": "87a77eb9e617cecff166a556833721897d67b3a63b1f0d33d13b9a812b45f7cc",
+      "classification": "GLOBAL_REVIEW_PRESENTATION_NOT_PDF_GENERATION_SOURCE",
+      "origin": "Concurrent external review update; this work never writes the global Master.",
+      "impact": "Original PDF hashes and immutable asset registry unchanged. Global review presentation updates do not alter frozen-file size/visual/text proofs; no acceptance status inferred or rewritten.",
+      "reconciledForFrozenPdfAudit": true
+    }
+  ]
+}

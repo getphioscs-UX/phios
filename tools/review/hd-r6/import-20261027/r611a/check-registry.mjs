@@ -1,0 +1,3 @@
+import fs from'node:fs';import{editorialAsset}from'../../../../../functions/canonical-presentation-runtime/report-editorial-registry.js';
+const rows=['zh-Hans','en','bilingual'].map(language=>({language,registeredP06:editorialAsset('HD',6,language),remotePresence:'UNKNOWN_AUTHENTICATED_LIST_HTTP401',visualIntegration:'BLOCKED_NO_REGISTERED_APPROVED_ACCESSIBLE_P06',retainedConsumer:'Existing R611 functional semi-fixed Contents flowable with dynamic numeric overlay, real PDF page-reference links and outlines.'}));
+fs.writeFileSync('tools/review/hd-r6/import-20261027/r611a/P06-STATUS.json',JSON.stringify({rows,guessedKeys:[],productionChanged:false},null,2));console.log('P06: no existing registry row for any language; no remote absence inferred');
