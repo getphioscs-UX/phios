@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import {buildSync} from 'esbuild';
 
-const branches=new Set(['codex/world-market-integration-r1','codex/world-market-wmda-r2']);
+const branches=new Set(['codex/world-market-integration-r1','codex/world-market-wmda-r2','codex/world-market-wmda-r2-integration']);
 // Build identity is supplied by Pages, never by request headers or query input.
 export function worldPreviewBuildPolicy(env={}){
  if(env.CF_PAGES!=='1'||!branches.has(env.CF_PAGES_BRANCH))return {active:false,mode:'INHERIT_EXISTING_CONFIGURATION'};

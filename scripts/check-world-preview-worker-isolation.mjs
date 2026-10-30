@@ -10,7 +10,7 @@ export default {fetch(request,env){return onRequest({request,env,next:async()=>{
  if(new URL(request.url).pathname==='/trap'){try{await env.RUNTIME_DB.prepare('INSERT INTO isolation_probe VALUES(1)').run();}catch{}return Response.json({swallowed:true});}
  if(request.method==='GET')return onRequestGet({request});return Response.json({safePost:true});
 }})}};`);
-const identity={CF_PAGES:'1',CF_PAGES_BRANCH:'codex/world-market-integration-r1',CF_PAGES_URL:'https://fixture.phios-github.pages.dev',CF_PAGES_COMMIT_SHA:'a'.repeat(40)};
+const identity={CF_PAGES:'1',CF_PAGES_BRANCH:'codex/world-market-wmda-r2-integration',CF_PAGES_URL:'https://fixture.phios-github.pages.dev',CF_PAGES_COMMIT_SHA:'a'.repeat(40)};
 const rows=[];async function test(id,fn){try{await fn();rows.push({id,status:'PASS'});}catch(e){rows.push({id,status:'FAIL',reason:e.message});}}
 await test('OTHER_BRANCH_MAIN_AND_LOCAL_KEEP_ORIGINAL_WORKER_BYTES',()=>{for(const env of [{},{...identity,CF_PAGES_BRANCH:'main'},{...identity,CF_PAGES_BRANCH:'codex/profile-visual-r1'},{...identity,CF_PAGES_BRANCH:'codex/commerce-qa'}]){const policy=worldPreviewBuildPolicy(env);assert.equal(policy.active,false);assert.equal(isolateWorldPreviewWorker(base,policy),fs.readFileSync(base,'utf8'));}});
 await test('WORLD_BUILD_REQUIRES_PROJECT_URL_AND_COMMIT',()=>{for(const env of [{...identity,CF_PAGES_URL:'https://getphios.com'},{...identity,CF_PAGES_COMMIT_SHA:'unknown'}])assert.throws(()=>worldPreviewBuildPolicy(env));});
