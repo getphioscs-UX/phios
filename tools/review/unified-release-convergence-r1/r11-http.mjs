@@ -1,0 +1,7 @@
+import fs from 'node:fs';
+const rows=[];
+for(const base of ['https://55ced5c1.phios-github.pages.dev','https://f4430c31.phios-github.pages.dev']){
+ const url=base+'/api/public-asset-config';try{const r=await fetch(url,{signal:AbortSignal.timeout(20000)});rows.push({at:new Date().toISOString(),method:'GET',url,status:r.status,headers:Object.fromEntries(['content-type','cache-control','cf-ray','date'].map(k=>[k,r.headers.get(k)])),body:await r.text()});}catch(e){rows.push({url,error:e.message});}
+}
+const out={requests:rows,rootCause:'Preview PHIOS_PUBLIC_ASSET_BASE_URL absent in freshly read project configuration. Handler normalizes only that variable and returns this exact 503 before any upstream request.',excludedCauses:['Handler performs no R2 lookup, registry lookup, authentication, READ_ONLY check or external fetch. Exact JSON response proves handler executes, rather than a generic Functions compilation error.'],fix:'Owner must supply approved public-only asset origin to Preview configuration after isolation verification. No production secret value copied. No remote configuration write authorized/executed.',logs:'HTTP responses and cf-ray recorded. Cloudflare invocation/tail logs not fetched; no fabricated runtime log.',resolved:false};
+fs.mkdirSync('tools/review/unified-release-convergence-r1/r11',{recursive:true});fs.writeFileSync('tools/review/unified-release-convergence-r1/r11/ASSET-CONFIG-503.json',JSON.stringify(out,null,2));console.log(JSON.stringify(out));

@@ -1,0 +1,56 @@
+diff --git a/assets/customer-ui/js/surfaces/profile-visitor-r1.js b/assets/customer-ui/js/surfaces/profile-visitor-r1.js
+index 50719528..71aabedb 100644
+--- a/assets/customer-ui/js/surfaces/profile-visitor-r1.js
++++ b/assets/customer-ui/js/surfaces/profile-visitor-r1.js
+@@ -45,14 +45,14 @@ function localized(node,en,zh){
+ }
+ function create(tag,cls){const el=document.createElement(tag);if(cls)el.className=cls;return el;}
+ const image=(id)=>{const im=document.createElement('img');im.src=iconBase+id+'-v1.svg';im.alt='';im.setAttribute('aria-hidden','true');im.loading='lazy';im.decoding='async';return im;};
+-function createWheel(){
++function createWheel({items=lenses,groupLabel=pair('Six ways to think about yourself','六个理解自己的角度'),centerLabel=null,onSelect=null}={}){
+  const host=create('div','prf-visitor-wheel-wrap');
+  const wheel=create('div','prf-visitor-wheel');
+- wheel.setAttribute('role','group');wheel.setAttribute('aria-label',pair('Six ways to think about yourself','六个理解自己的角度'));
++ wheel.setAttribute('role','group');wheel.setAttribute('aria-label',groupLabel);
+  let selected='identity';
+  const note=create('p','prf-visitor-wheel__hint');
+  note.setAttribute('role','status');note.setAttribute('aria-live','polite');
+- const controls=lenses.map(x=>{
++ const controls=items.map(x=>{
+   const button=create('button','prf-visitor-wheel__lens');
+   button.type='button';button.dataset.prfLens=x.id;button.setAttribute('aria-pressed',String(x.id===selected));
+   const title=create('b');
+@@ -66,24 +66,30 @@ function createWheel(){
+  const center=create('div','prf-visitor-wheel__center');
+  const mark=document.createElement('img');mark.src='/assets/images/branding/PHIOS-LOGO-MARK-v1.png';
+  mark.alt='PHI OS';mark.decoding='async';center.append(mark);wheel.append(center);
++ if(centerLabel){const name=create('span');name.className='subject-wheel-name';name.textContent=centerLabel;center.append(name);}
+  function refreshSelection(){
+   controls.forEach(b=>{
+     b.setAttribute('aria-pressed',String(b.dataset.prfLens===selected));
+-    const x=lenses.find(l=>l.id===b.dataset.prfLens);
++    const x=items.find(l=>l.id===b.dataset.prfLens);
+     if(x){b.title=pair(x.de,x.dz);b.setAttribute('aria-label',pair(x.en+': '+x.de,x.zh+'：'+x.dz));}
+   });
+-  const current=lenses.find(l=>l.id===selected)||lenses[0];
++  const current=items.find(l=>l.id===selected)||items[0];
+   note.textContent=pair(current.en+' — '+current.de,current.zh+' — '+current.dz);
++  onSelect?.(selected);
+  }
+  host.append(wheel,note);refreshSelection();
+  host.addEventListener('keydown',e=>{
+   if(!['ArrowRight','ArrowLeft'].includes(e.key)||!e.target.closest('button[data-prf-lens]'))return;
+   e.preventDefault();
+-  const i=lenses.findIndex(l=>l.id===selected);const next=(i+(e.key==='ArrowRight'?1:-1)+lenses.length)%lenses.length;
++  const i=items.findIndex(l=>l.id===selected);const next=(i+(e.key==='ArrowRight'?1:-1)+items.length)%items.length;
+   controls[next].focus();controls[next].click();
+  });
+  host.dataset.prfVisitorWheel='true';return {host,refresh:refreshSelection};
+ }
++// Presentation-only extension point; keeps the existing classic-script contract.
++document.addEventListener('phios:request-six-lens-wheel',event=>{
++ if(event.detail?.version==='SUBJECT-CONTEXT-R1'&&typeof event.detail.receive==='function')event.detail.receive(createWheel(event.detail.options));
++});
+ function createDimensionCards(){
+  const section=create('section','prf-visitor-dimensions');
+  section.id='profile-dimension-exploration';

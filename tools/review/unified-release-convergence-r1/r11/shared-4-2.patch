@@ -1,0 +1,36 @@
+diff --git a/assets/customer-ui/js/surfaces/profile-progressive.js b/assets/customer-ui/js/surfaces/profile-progressive.js
+index 193639b5..a131e6b2 100644
+--- a/assets/customer-ui/js/surfaces/profile-progressive.js
++++ b/assets/customer-ui/js/surfaces/profile-progressive.js
+@@ -6,6 +6,7 @@ const $=(s,r=document)=>r.querySelector(s);
+ const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+ const state={mode:null,config:null,onetForm:'MINI_30',ipipForm:'IPIP_BIG_FIVE_50'};
+ let latestProfileResult=null;
++let lastHandoffAssessmentInput=null;
+ let accountSaveAttempt=null; // PROFILE_ACCOUNT_SAVING: explicit consent; native producer remains the owner.
+ const workbench=$('[data-prf-workbench]');
+ const form=$('[data-prf-form]');
+@@ -107,7 +108,7 @@ handoffButton?.addEventListener('click',async()=>{
+   const viewModel=buildPersonalEvidenceRealityHandoff({profileView:latestProfileResult.view,selectedEvidenceRefs:selected,
+     selectionAction:$('[data-prf-handoff-action]')?.value||'KEEP_EVIDENCE',observationNote:$('[data-prf-handoff-note]')?.value||'',openQuestion:$('[data-prf-handoff-question]')?.value||''});
+   handoffStatus.textContent=locale()==='zh-Hans'?'正在准备所选证据…':'Preparing selected evidence…';
+-  try{await handoffToMyReality({sourceType:'PERSONAL_EVIDENCE',viewModel,statusNode:handoffStatus})}catch(error){handoffStatus.textContent=locale()==='zh-Hans'?'证据衔接暂时无法完成，请重试。':'The evidence handoff could not be completed. Please try again.'}
++  try{const verifiedInput=latestProfileResult.accountObject?.objectId?{accountObjectId:latestProfileResult.accountObject.objectId,accountObjectVersion:latestProfileResult.accountObject.version}:{assessmentInput:lastHandoffAssessmentInput};await handoffToMyReality({sourceType:'PERSONAL_EVIDENCE',viewModel:{...viewModel,...verifiedInput},statusNode:handoffStatus})}catch(error){handoffStatus.textContent=locale()==='zh-Hans'?'证据衔接暂时无法完成，请重试。':'The evidence handoff could not be completed. Please try again.'}
+ });
+ form.addEventListener('submit',async e=>{
+   e.preventDefault();setStatus(locale()==='zh-Hans'?'正在准备个人证据…':'Preparing personal evidence…');
+@@ -120,6 +121,7 @@ form.addEventListener('submit',async e=>{
+     body.form=state.ipipForm;body.responses=collectResponses();
+   }else body.responses=collectResponses();
+   let endpoint='/api/profile-progressive';if($('[data-prf-account-save]')?.checked){const signature=JSON.stringify(body);if(accountSaveAttempt?.signature!==signature)accountSaveAttempt={signature,requestToken:crypto.randomUUID(),expiresAt:new Date(Date.now()+30*86400000).toISOString()};Object.assign(body,{saveConsent:true,retentionConsent:true,requestToken:accountSaveAttempt.requestToken,expiresAt:accountSaveAttempt.expiresAt});endpoint='/api/account-profile-evidence';}
++  lastHandoffAssessmentInput=structuredClone(body);
+   try{const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},body:JSON.stringify(body)}),data=await r.json();if(!r.ok)throw new Error(data.error||'PROFILE_REQUEST_FAILED');setStatus('');render(data)}catch(err){setStatus(err.message,true)}
+ });
+ 
+@@ -131,3 +133,6 @@ $('[data-prf-domain-actions]')?.addEventListener('click',event=>{const key=event
+ window.addEventListener('phios:localechange',()=>{if(state.mode){$('[data-prf-mode-label]').textContent=$('[data-prf-form-title]').textContent=labels[state.mode]?.[locale()==='zh-Hans'?1:0]||humanize(state.mode);const data=state.config;if(data&&['QUICK_PROFILE','FULL_SELF_ASSESSMENT','REASONING_TASKS','BIG_FIVE','FINANCIAL_CAPABILITY','IMPORT_EXTERNAL_RESULT'].includes(state.mode)){const responses=collectResponses(),textValues=new Map($$('input:not([type=radio]),textarea,select',fields).map(x=>[x.name,x.value]));if(state.mode==='QUICK_PROFILE'||state.mode==='FULL_SELF_ASSESSMENT')fields.innerHTML=data.instrument.items.map(scaleHtml).join('');else if(state.mode==='BIG_FIVE')fields.innerHTML=ipipHtml(data);else if(state.mode==='FINANCIAL_CAPABILITY')fields.innerHTML=financialHtml(data);else if(state.mode==='IMPORT_EXTERNAL_RESULT')fields.innerHTML=externalHtml(data.providers);else fields.innerHTML=data.taskBank.items.map(reasoningHtml).join('');for(const input of $$('input[type=radio]',fields))if(responses[input.name.slice(2)]===input.value)input.checked=true;for(const input of $$('input:not([type=radio]),textarea,select',fields))if(textValues.has(input.name))input.value=textValues.get(input.name);$$('[data-ipip-form]',fields).forEach(b=>b.addEventListener('click',()=>loadIpipForm(b.dataset.ipipForm).catch(e=>setStatus(e.message,true))))}}if(latestProfileResult&&!results.hidden)render(latestProfileResult,{scroll:false});});
+ 
+ $('[data-prf-account-load]')?.addEventListener('click',async()=>{const host=$('[data-prf-account-list]');try{const r=await fetch('/api/account-profile-evidence'),data=await r.json();if(!r.ok)throw new Error(data.code);host.replaceChildren();for(const item of data.objects){const button=document.createElement('button');button.type='button';button.className='cx-button';button.textContent=(labels[item.mode]?.[locale()==='zh-Hans'?1:0]||humanize(item.mode))+' · '+item.createdAt;button.onclick=async()=>{try{const response=await fetch('/api/account-profile-evidence?id='+encodeURIComponent(item.objectId)),saved=await response.json();if(!response.ok)throw new Error(saved.code);render(saved);$('[data-prf-results]').scrollIntoView({block:'start'});}catch(e){host.textContent=locale()==='zh-Hans'?'无法打开保存记录，请登录后重试。':'Unable to open saved records. Sign in and try again.';}};host.append(button);}}catch(e){host.textContent=locale()==='zh-Hans'?'无法打开保存记录，请登录后重试。':'Unable to open saved records. Sign in and try again.';}});
++
++window.addEventListener('pagehide',()=>{lastHandoffAssessmentInput=null;});
++window.addEventListener('phios:account-logout',()=>{lastHandoffAssessmentInput=null;latestProfileResult=null;form.reset();results.hidden=true;});

@@ -1,0 +1,24 @@
+diff --git a/scripts/build-cloudflare-pages.mjs b/scripts/build-cloudflare-pages.mjs
+index 6725c87d..e3ef0d48 100644
+--- a/scripts/build-cloudflare-pages.mjs
++++ b/scripts/build-cloudflare-pages.mjs
+@@ -198,6 +198,10 @@ const admittedBookVii = await loadBookViiPublishedAdmission(async rel => {
+   return fs.existsSync(source) ? JSON.parse(fs.readFileSync(source, 'utf8')) : null;
+ });
+ const publicationFiles = new Set(tracked.stdout.split('\0').filter(Boolean));
++// Explicit local Customer Service R1 entry candidates; no review, private source or QA server is published.
++for(const slug of ['astrology','bazi','zi-wei','numerology','human-design']){const entry='perspectives/'+slug+'/index.html';if(fs.existsSync(path.join(root,entry)))publicationFiles.add(entry);}
++for(const file of ['assets/customer-ui/js/surfaces/profile-observation-panels-r1.js','assets/customer-ui/js/personal-products/profile-observation-prompts-r1.js'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
++const methodEntryProjection='assets/customer-ui/js/surfaces/personal-method-entries.generated.js';if(fs.existsSync(path.join(root,methodEntryProjection)))publicationFiles.add(methodEntryProjection);
+ // ECR Deep Reading R2 public exploration only. Never include private review
+ // reports, synthetic full-reading bodies, checkpoints, or SQLite evidence.
+ for(const file of ['assets/customer-ui/js/surfaces/ecr-deep-reading-r2.js','assets/customer-ui/surfaces/ecr-deep-reading-r2.css','assets/customer-ui/media/ecr-deep-r2/public-explorer.json'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
+@@ -326,6 +330,8 @@ run(
+     emptyAssets,
+     '--outdir',
+     workerBuild,
++    '--metafile',
++    path.join(workerBuild, 'esbuild-meta.json'),
+     '--output-routes-path',
+     path.join(workerBuild, '_routes.json'),
+     '--compatibility-date',
