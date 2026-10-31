@@ -215,7 +215,11 @@ export function buildBaziProductionGenerationConfig() {
   if (
     economics.productId !==
       'COM-REPORT-BAZI-FULL' ||
-    economics.amountMinor !== 5900 ||
+    // Price belongs to the current canonical Economics Policy, not the
+    // historical manuscript admission's RM59 observation. USD guards stay exact.
+    !Number.isSafeInteger(economics.amountMinor) ||
+    economics.amountMinor <= 0 ||
+    economics.currency !== 'MYR' ||
     economics.providerCapUsd !== 4 ||
     economics.includedFollowups !== 4
   ) {

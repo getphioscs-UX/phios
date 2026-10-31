@@ -1,4 +1,5 @@
-import {requirePaidReportCheckout} from '../report-delivery/paid-report-readiness.js';
+import {fiveMethodReportCapability,requireFiveMethodReportSetup} from '../report-delivery/paid-report-production-capabilities.js';
+import {requirePaidReportCheckout,paidReportSubjectSnapshot} from '../report-delivery/paid-report-readiness.js';
 import {paidReportMethodForProduct} from '../report-delivery/paid-report-method-registry.js';
 import {requireP9Payment} from '../report-delivery/p9-canary-admission.js';
 import {commerceEnvironment,commerceCheckoutAvailable,requireStripeCommerce} from './commerce-environment.js';
@@ -42,7 +43,8 @@ export async function commerceApi(context,action){
         }
       }
       const setup=env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(p)&&!p.productId.includes('BUNDLE')?{methodCode:paidReportMethodForProduct(p.productId)?.methodCode||null,admitted:paidReportMethodForProduct(p.productId)?.p8Admitted===true}:null;
-      return {...p,paidReportSetup:setup,checkoutAvailable:!p.checkoutBlockedReason&&(!p.requiresBookPdfReadiness||env.PHIOS_BOOK_PDF_CHECKOUT_ENABLED==='true')&&commerceCheckoutAvailable(env)&&!(commerceEnvironment(env)==='QA'&&p.qaPriceRebindRequired)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:false,refillReviewRequired:'R12_MONTHLY_PROVIDER_CAP_RECONCILIATION'}:{}),reportPresentationOptions,reportPurchaseState};
+      const fullReportCapability=fiveMethodReportCapability(p.productId,env);
+      return {...p,paidReportSetup:setup,fullReportCapability,checkoutAvailable:(!fullReportCapability||fullReportCapability.setupAvailable)&&!p.checkoutBlockedReason&&(!p.requiresBookPdfReadiness||env.PHIOS_BOOK_PDF_CHECKOUT_ENABLED==='true')&&commerceCheckoutAvailable(env)&&!(commerceEnvironment(env)==='QA'&&p.qaPriceRebindRequired)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:false,refillReviewRequired:'R12_MONTHLY_PROVIDER_CAP_RECONCILIATION'}:{}),reportPresentationOptions,reportPurchaseState};
     }),eligibleBundleProducts:standardBundleProducts()});
     const customerId=requireIdentity(context);
     if(action==='account') return json({success:true,...await commerceAccountProjection(env,customerId)});
@@ -93,7 +95,8 @@ export async function commerceApi(context,action){
     if(body.subscriptionId!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_KIND_REQUIRED'),{status:422});
     if(isLanguageReport(product))contextSnapshot.reportPresentation=commerceReportQuote(product,body,selected);
     else if(body.reportLanguageMode||body.reportLocale)throw Object.assign(new Error('Report language is not applicable.'),{status:422,code:'REPORT_PRESENTATION_NOT_APPLICABLE'});
-    if(env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(product)&&!product.productId.includes('BUNDLE')){const readiness=await requirePaidReportCheckout(context,{productId:product.productId,readinessId:body.context?.reportIntentId,presentation:contextSnapshot.reportPresentation});contextSnapshot.reportIntentId=readiness.readinessId;}
+    const fullReportCapability=requireFiveMethodReportSetup(product.productId,env);
+    if(fullReportCapability||env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(product)&&!product.productId.includes('BUNDLE')){const readiness=await requirePaidReportCheckout(context,{productId:product.productId,readinessId:body.context?.reportIntentId,presentation:contextSnapshot.reportPresentation});contextSnapshot.reportIntentId=readiness.readinessId;contextSnapshot.reportSubject=paidReportSubjectSnapshot(readiness);}
     if(commerceEnvironment(env)==='LIVE'&&(isLanguageReport(product)||product.category==='REPORT'))contextSnapshot.p9Canary=await requireP9Payment(context,{productId:product.productId,readinessId:contextSnapshot.reportIntentId,presentation:contextSnapshot.reportPresentation});
     const controlled=controlledPurchaseOffer(env,{ownerId:customerId,productId:product.productId,originalAmountMinor:contextSnapshot.reportPresentation?.amountMinor??product.amountMinor});
     if(controlled){

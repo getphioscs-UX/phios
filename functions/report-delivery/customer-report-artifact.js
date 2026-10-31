@@ -6,7 +6,7 @@ export async function createCustomerReportArtifact(value){
  if(!value.inputSnapshot||!value.calculationSnapshot||!value.publicationIR||!Array.isArray(value.generatedSections)||!value.generatedSections.length||!value.htmlSnapshotOrRenderState?.objectKey)fail('CUSTOMER_ARTIFACT_CONTENT_REQUIRED');
  const generatedCopy=structuredClone(value.generatedSections),contentDigest=await digest(generatedCopy);
  const {artifactDigest:priorDigest,...input}=structuredClone(value);
- const body={...input,schemaVersion:CUSTOMER_ARTIFACT_VERSION,generatedCopy,contentDigest,status:'FROZEN_CUSTOMER_COPY',pdfPolicy:'ON_DEMAND_DERIVATIVE',sharedAssetsEmbedded:false};
+ const body={...input,schemaVersion:CUSTOMER_ARTIFACT_VERSION,generatedCopy,contentDigest,status:'FROZEN_CUSTOMER_COPY',pdfPolicy:value.pdfPolicy==='PERSISTED_PRIVATE_PDF_REQUIRED'?'PERSISTED_PRIVATE_PDF_REQUIRED':'ON_DEMAND_DERIVATIVE',sharedAssetsEmbedded:false};
  if(JSON.stringify(body).includes('data:image/'))fail('CUSTOMER_ARTIFACT_EMBEDDED_ASSET_FORBIDDEN');
  body.sourceDigest=await digest({input:value.inputSnapshot,calculation:value.calculationSnapshot,authority:value.authorityPackVersion});
  return deepFreeze({...body,artifactDigest:await digest(body)});

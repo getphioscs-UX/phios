@@ -11,14 +11,16 @@ const hash=async text=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA
 
 export default {
  async fetch(request,env){
+  if(env.PHIOS_ENVIRONMENT==='qa'&&request.method==='GET'&&new URL(request.url).pathname==='/health')return Response.json({ok:true,pdfTransferProtocol:'BZR-PDF-MULTIPART-1'},{headers:{'cache-control':'no-store'}});
   // No public endpoint. Only Pages' private service binding may invoke this worker.
-  if(env.PHIOS_ENVIRONMENT!=='qa'||request.method!=='POST'||new URL(request.url).pathname!=='/verify')return new Response(null,{status:404});
+  if(env.PHIOS_ENVIRONMENT!=='qa'||request.method!=='POST'||!['/verify','/pdf'].includes(new URL(request.url).pathname))return new Response(null,{status:404});
   let browser,stage='INPUT';const startedAt=Date.now(),timings={};
   try{
    const reader=request.body?.getReader();if(!reader)throw Error('BODY_REQUIRED');let size=0,raw='';const decoder=new TextDecoder();
    for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>8000000){await reader.cancel();throw Error('TOO_LARGE');}raw+=decoder.decode(value,{stream:true});}
    const parsed=JSON.parse(raw+decoder.decode()),{candidate,method,compositionVersion}=parsed;
-   if(method==='BZR')return await verifyBaziPublication(parsed.publication,env,puppeteer);
+   if(method==='BZR')return await verifyBaziPublication(parsed.publication,env,puppeteer,{pdfResponse:new URL(request.url).pathname==='/pdf',expectedHtmlDigest:parsed.expectedHtmlDigest,includePdf:parsed.includePdf===true});
+   if(new URL(request.url).pathname==='/pdf')throw Error('METHOD_PDF_NOT_ADMITTED');
    const contract=await assertMethodGeneration(candidate),expectedPageCount=contract.expectedPageCount;
    if(method!==contract.methodCode||compositionVersion!==contract.compositionVersion||candidate?.scope!=='CONTROLLED_QA_ONLY'||candidate.snapshot?.locale!==candidate.locale||(await createCustomerDeliverySnapshot(candidate.snapshot)).semanticSnapshotId!==candidate.snapshot.semanticSnapshotId)throw Error('SNAPSHOT_INVALID');
    if(compositionVersion==='ZIWEI-CONTEXTUAL-RCA-R1')await assertZiweiContextSnapshot(candidate);

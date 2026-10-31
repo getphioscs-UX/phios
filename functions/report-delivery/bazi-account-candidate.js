@@ -1,3 +1,4 @@
+import {assertPaidReportWorkerFence} from './paid-report-worker-fence.js';
 import {personIdentity,loadCanonicalPersonSubject} from '../account/canonical-person-store.js';
 import {ownedReportPresentation} from '../commerce/book-commerce-store.js';
 import {requireP9Owner} from './p9-canary-admission.js';
@@ -11,7 +12,8 @@ export async function prepareAccountBaziCandidate(context,selection){
  const owner=personIdentity(context).userId;
  if(!['local','qa','preview'].includes(context.env?.PHIOS_ENVIRONMENT))requireP9Owner(context.env,owner,{allowExpired:true});
  if(!selection||Object.keys(selection).some(k=>k!=='personId')||typeof selection.personId!=='string'||!selection.personId)fail('BAZI_SUBJECT_SELECTION_REQUIRED',400);
- const right=await ownedReportPresentation(context.env,owner,'COM-REPORT-BAZI-FULL');
+ const fence=await assertPaidReportWorkerFence(context.env);let purchaseId=null;if(fence){const job=await context.env.RUNTIME_DB.prepare("SELECT purchase_id FROM paid_report_jobs WHERE job_id=? AND owner_account_id=? AND method_code='BZR' AND product_id='COM-REPORT-BAZI-FULL'").bind(fence.jobId,owner).first();if(!job)fail('BAZI_JOB_PURCHASE_REQUIRED',403);purchaseId=job.purchase_id;}
+ const right=await ownedReportPresentation(context.env,owner,'COM-REPORT-BAZI-FULL',Date.now,{purchaseId});
  if(!right)fail('BAZI_ENTITLEMENT_REQUIRED',403);
  const subject=await loadCanonicalPersonSubject(context.env,owner,selection.personId);
  const request={schemaVersion:'PHI-OS-MCD-METHOD-EXECUTION-REQUEST-v1.0.0',methodCode:'BAZI',methodVersion:'0.1.0',capability:'CALCULATION',purposeCode:'PERSONAL_RUNTIME_METHOD_PROJECTION',canonicalInput:subject.canonicalBirthInput,executionParameters:{traditionalCalculationSex:subject.calculationSex},consentRecordId:subject.methodConsent.consentId,requestId:`BAZI-CANDIDATE:${subject.person.personId}:v${subject.personVersion}`};

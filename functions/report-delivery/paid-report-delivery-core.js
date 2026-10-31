@@ -4,7 +4,7 @@ import {requireP9Owner,requireP9Job} from './p9-canary-admission.js';
 import {PAID_REPORT_METHODS} from './paid-report-method-registry.js';
 import {paidReportStateStore} from './paid-report-state-store.js';
 import {PAID_REPORT_POLICY,TERMINAL_PAID_STATES,paidReportError,classifyReportFailure} from './paid-report-policy.js';
-import {requireSharedPaidReportLocal,customerReportStatus} from './paid-report-readiness.js';
+import {requireSharedPaidReportLocal,customerReportStatus,paidReportSubjectSnapshot} from './paid-report-readiness.js';
 import {runPaidReportRefund,verifyPaidReportRefundTerminal} from './paid-report-refund.js';
 import {digest} from '../account/oidc-auth.js';
 import {paidReportWorkerContext} from './paid-report-worker-fence.js';
@@ -12,10 +12,21 @@ import {reconcilePaidReportDurableTruth} from './paid-report-reconciler.js';
 export async function ensureVerifiedPaidReportJob(env,order,{registry=PAID_REPORT_METHODS,clock=Date.now}={}){
  requireSharedPaidReportLocal(env);const store=paidReportStateStore(env,clock),db=store.db,intentId=JSON.parse(order.context_json||'{}').reportIntentId;
  if(commerceEnvironment(env)==='LIVE'){const policy=requireP9Owner(env,order.customer_id,{clock,allowExpired:true});if(order.product_id!==policy.product||JSON.parse(order.context_json||'{}').p9Canary?.releaseCandidateDigest!==policy.releaseCandidateDigest)throw paidReportError('P9_PAYMENT_SCOPE_MISMATCH');}
- if(!intentId)return null;const r=await store.readiness(intentId,order.customer_id),adapter=registry[r?.methodCode];
- if(!r||!adapter?.p8Admitted||r.productId!==order.product_id||r.state!=='READY_TO_PAY')throw paidReportError('PAYMENT_READINESS_BINDING_REQUIRED');
+ if(!intentId)return null;const saved=await store.readiness(intentId,order.customer_id),context=JSON.parse(order.context_json),frozen=context.reportSubject?paidReportSubjectSnapshot(context.reportSubject):null;
+ // New checkouts bind payment to the verified subject at checkout, never to a
+ // subsequently edited/pruned readiness row. Legacy purchases keep their path.
+ const r=frozen?{...frozen,ownerAccountId:order.customer_id,productId:order.product_id,readinessId:intentId,presentation:context.reportPresentation}:saved,adapter=registry[r?.methodCode];
+ if(!r||!adapter?.p8Admitted||adapter.productId!==order.product_id||r.productId!==order.product_id||!frozen&&r.state!=='READY_TO_PAY')throw paidReportError('PAYMENT_READINESS_BINDING_REQUIRED');
+ if(frozen&&(!adapter.supportedPresentations?.includes(r.presentation?.reportLocale)||r.presentation.reportLanguageMode!==(r.presentation.reportLocale==='bilingual'?'BILINGUAL':'SINGLE')))throw paidReportError('PURCHASE_PRESENTATION_MISMATCH');
  const p=await db.prepare("SELECT p.* FROM commerce_purchases p JOIN digital_entitlements e ON e.purchase_id=p.purchase_id JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=p.checkout_attempt_id WHERE p.checkout_attempt_id=? AND p.customer_id=? AND p.product_id=? AND p.purchase_state='purchased' AND e.entitlement_status='active' AND e.product_id=p.product_id AND e.customer_id=p.customer_id AND o.order_state='FULFILLED' AND o.review_required=0 AND o.environment=?").bind(order.checkout_attempt_id,order.customer_id,order.product_id,commerceEnvironment(env)).first();
- if(!p)throw paidReportError('VERIFIED_PURCHASE_REQUIRED');const presentation=JSON.parse(order.context_json).reportPresentation;
+ if(!p)throw paidReportError('VERIFIED_PURCHASE_REQUIRED');
+ if(frozen&&!saved){
+  // Rehydrate the existing FK owner only after the purchase is verified. The
+  // captured-payment state cannot be reused as READY_TO_PAY for another sale.
+  await store.saveReadiness({...r,state:'PAYMENT_CAPTURED',createdAt:clock(),updatedAt:clock(),expiresAt:clock()+PAID_REPORT_POLICY.readinessRetention});
+  if(!await store.readiness(intentId,order.customer_id))throw paidReportError('PAYMENT_READINESS_BINDING_REQUIRED');
+ }
+ const presentation=JSON.parse(order.context_json).reportPresentation;
  if(presentation?.reportLocale!==r.presentation.reportLocale||presentation?.reportLanguageMode!==r.presentation.reportLanguageMode)throw paidReportError('PURCHASE_PRESENTATION_MISMATCH');
  const id=await digest([commerceEnvironment(env),p.purchase_id,r.methodCode,r.personId].join('\0'));
  const j={jobId:id,environment:commerceEnvironment(env),ownerAccountId:r.ownerAccountId,purchaseId:p.purchase_id,orderId:order.checkout_attempt_id,productId:r.productId,methodCode:r.methodCode,personId:r.personId,personVersion:r.personVersion,inputDigest:r.inputDigest,readinessId:r.readinessId,presentation:r.presentation,authorityDigest:r.authorityDigest,reportId:id,state:'DELIVERY_JOB_CREATED',stageIndex:0,attempts:0,rescueUsed:false,createdAt:clock(),updatedAt:clock(),dueAt:clock()+PAID_REPORT_POLICY.jobStartGrace};
