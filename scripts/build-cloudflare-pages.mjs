@@ -1,4 +1,5 @@
 import {worldPreviewBuildPolicy,isolateWorldPreviewWorker} from './lib/world-preview-worker-isolation.mjs';
+import {unifiedPreviewBuildPolicy,applyUnifiedPreviewPublication,isolateUnifiedPreviewWorker} from './lib/unified-preview-publication.mjs';
 import {loadBookViiPublishedAdmission,BOOK_VII_ADMISSION_PATH} from '../functions/_lib/book-vii-published-admission.js';
 import {internalPublicationFile} from './lib/publication-boundary.mjs';
 ﻿import fs from 'node:fs';
@@ -302,6 +303,8 @@ if (!fs.existsSync(path.join(output, 'index.html'))) {
 console.log(
   `Pages static publication: copied=${copied}, skipped=${skipped}`
 );
+const unifiedPreviewPolicy=unifiedPreviewBuildPolicy(process.env);
+console.log('Unified Preview publication: '+JSON.stringify(applyUnifiedPreviewPublication(output,unifiedPreviewPolicy)));
 
 recordStage('WORKER_COMPILE');
 cleanDirectory(workerBuild);
@@ -378,7 +381,9 @@ if (
 // Compact generated bindings and whitespace, preserving runtime names, syntax
 // and legal comments. Enforce unchanged budgets on the actual shipped bytes.
 const worldPreviewPolicy=worldPreviewBuildPolicy(process.env);
-const compiledWorker = isolateWorldPreviewWorker(workerSource,worldPreviewPolicy);
+const worldScopedWorker = isolateWorldPreviewWorker(workerSource,worldPreviewPolicy);
+// The two branch allowlists are disjoint. Keep the existing World wrapper intact.
+const compiledWorker = unifiedPreviewPolicy.active?isolateUnifiedPreviewWorker(workerSource,unifiedPreviewPolicy):worldScopedWorker;
 console.log('World immutable build scope: '+JSON.stringify(worldPreviewPolicy));
 const compactWorker = transformSync(compiledWorker, pagesWorkerCompactionOptions).code;
 fs.writeFileSync(workerSource, compactWorker);
