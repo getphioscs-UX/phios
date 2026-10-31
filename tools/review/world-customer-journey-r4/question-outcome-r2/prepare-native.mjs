@@ -1,0 +1,1 @@
+import fs from 'node:fs';const dir='C:/phios/tools/review/world-customer-journey-r4/question-outcome-r2';let s=fs.readFileSync('C:/phios/tools/review/world-customer-journey-r4/native-checks.mjs','utf8').replace("out='C:/phios/tools/review/world-customer-journey-r4/native'","out='"+dir+"/native'");fs.writeFileSync(dir+'/native-checks.mjs',s);

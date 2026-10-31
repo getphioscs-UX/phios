@@ -1,0 +1,205 @@
+{
+  "results": [
+    {
+      "name": "COM-REPORT-ASTROLOGY-FULL disabled flag cannot admit",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-ASTROLOGY-FULL native capability remains explicit",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-ASTROLOGY-FULL economics followups preserved",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-ASTROLOGY-FULL remaining method closed",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-BAZI-FULL disabled flag cannot admit",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-BAZI-FULL native capability remains explicit",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-BAZI-FULL economics followups preserved",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-BAZI-FULL independent setup",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-ZIWEI-FULL disabled flag cannot admit",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-ZIWEI-FULL native capability remains explicit",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-ZIWEI-FULL economics followups preserved",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-ZIWEI-FULL remaining method closed",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-NUMEROLOGY-FULL disabled flag cannot admit",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-NUMEROLOGY-FULL native capability remains explicit",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-NUMEROLOGY-FULL economics followups preserved",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-NUMEROLOGY-FULL remaining method closed",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-HD-FULL disabled flag cannot admit",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-HD-FULL native capability remains explicit",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-HD-FULL economics followups preserved",
+      "passed": true
+    },
+    {
+      "name": "COM-REPORT-HD-FULL remaining method closed",
+      "passed": true
+    },
+    {
+      "name": "unrelated products untouched",
+      "passed": true
+    },
+    {
+      "name": "incomplete adapter cannot advertise setup",
+      "passed": true
+    },
+    {
+      "name": "real catalog handler flag false",
+      "passed": true
+    },
+    {
+      "name": "real checkout rejects unready COM-REPORT-ASTROLOGY-FULL flag false",
+      "passed": true,
+      "httpStatus": 409,
+      "body": {
+        "success": false,
+        "error": "SHARED_ADAPTER_ABSENT",
+        "message": "SHARED_ADAPTER_ABSENT"
+      }
+    },
+    {
+      "name": "real checkout rejects unready COM-REPORT-BAZI-FULL flag false",
+      "passed": true,
+      "httpStatus": 409,
+      "body": {
+        "success": false,
+        "error": "SHARED_REPORT_SETUP_DISABLED",
+        "message": "SHARED_REPORT_SETUP_DISABLED"
+      }
+    },
+    {
+      "name": "real checkout rejects unready COM-REPORT-ZIWEI-FULL flag false",
+      "passed": true,
+      "httpStatus": 409,
+      "body": {
+        "success": false,
+        "error": "METHOD_ADMISSION_CLOSED",
+        "message": "METHOD_ADMISSION_CLOSED"
+      }
+    },
+    {
+      "name": "real checkout rejects unready COM-REPORT-NUMEROLOGY-FULL flag false",
+      "passed": true,
+      "httpStatus": 409,
+      "body": {
+        "success": false,
+        "error": "SHARED_ADAPTER_ABSENT",
+        "message": "SHARED_ADAPTER_ABSENT"
+      }
+    },
+    {
+      "name": "real checkout rejects unready COM-REPORT-HD-FULL flag false",
+      "passed": true,
+      "httpStatus": 409,
+      "body": {
+        "success": false,
+        "error": "SHARED_ADAPTER_ABSENT",
+        "message": "SHARED_ADAPTER_ABSENT"
+      }
+    },
+    {
+      "name": "real catalog handler flag true",
+      "passed": true
+    },
+    {
+      "name": "real checkout rejects unready COM-REPORT-ASTROLOGY-FULL flag true",
+      "passed": true,
+      "httpStatus": 409,
+      "body": {
+        "success": false,
+        "error": "SHARED_ADAPTER_ABSENT",
+        "message": "SHARED_ADAPTER_ABSENT"
+      }
+    },
+    {
+      "name": "real checkout rejects unready COM-REPORT-BAZI-FULL flag true",
+      "passed": true,
+      "httpStatus": 503,
+      "body": {
+        "success": false,
+        "error": "PAID_REPORT_DATABASE_REQUIRED",
+        "message": "The commerce service could not complete this request."
+      }
+    },
+    {
+      "name": "real checkout rejects unready COM-REPORT-ZIWEI-FULL flag true",
+      "passed": true,
+      "httpStatus": 409,
+      "body": {
+        "success": false,
+        "error": "METHOD_ADMISSION_CLOSED",
+        "message": "METHOD_ADMISSION_CLOSED"
+      }
+    },
+    {
+      "name": "real checkout rejects unready COM-REPORT-NUMEROLOGY-FULL flag true",
+      "passed": true,
+      "httpStatus": 409,
+      "body": {
+        "success": false,
+        "error": "SHARED_ADAPTER_ABSENT",
+        "message": "SHARED_ADAPTER_ABSENT"
+      }
+    },
+    {
+      "name": "real checkout rejects unready COM-REPORT-HD-FULL flag true",
+      "passed": true,
+      "httpStatus": 409,
+      "body": {
+        "success": false,
+        "error": "SHARED_ADAPTER_ABSENT",
+        "message": "SHARED_ADAPTER_ABSENT"
+      }
+    }
+  ],
+  "checksPassed": 34,
+  "networkCalls": 0,
+  "providerCalls": 0,
+  "realPayments": 0,
+  "scope": "Actual catalog/checkout handler, current native adapter map. Negative checkout and capability checks only; not successful payment/generation."
+}

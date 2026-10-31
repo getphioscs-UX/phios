@@ -1,0 +1,14 @@
+import fs from 'node:fs';import {execFileSync} from 'node:child_process';
+const wt='C:/phios/.worktrees/unified-release-convergence-r1',D='C:/phios/tools/review/unified-release-convergence-r1/r11';
+const {internalPublicationFile}=await import('file:///C:/phios/.worktrees/unified-release-convergence-r1/scripts/lib/publication-boundary.mjs');
+const build=fs.readFileSync(wt+'/scripts/build-cloudflare-pages.mjs','utf8');
+const sets=['excludedTopLevel','excludedRootFiles','excludedRuntimeAssets'].map(n=>build.match(new RegExp(`const ${n} = new Set\\(\\[[\\s\\S]*?\\]\\);`))?.[0]);if(sets.some(x=>!x))throw Error('BOUNDARY_PARSE');
+const functions=build.slice(build.indexOf('function normalize(rel)'),build.indexOf('function run(command'));
+const isPublishable=new Function('internalPublicationFile',sets.join('\n')+'\n'+functions+';return isPublishable;')(internalPublicationFile);
+const git=(...a)=>execFileSync('git',['-C',wt,...a],{encoding:'utf8',maxBuffer:100_000_000}).trim();
+const delta=JSON.parse(fs.readFileSync(D+'/PRODUCTION-MAIN-DELTA.json'));
+for(const r of delta.files){r.staticPublicationBoundary=isPublishable(r.path)?'INCLUDED_IF_MATERIALIZED':'EXCLUDED';if(r.path.startsWith('functions/'))r.exposure='COMPILED_FUNCTIONS_ROUTE_OR_INTERNAL_MODULE';else if(!isPublishable(r.path))r.exposure='EXCLUDED_FROM_STATIC_PAGES_BY_CURRENT_BOUNDARY';else if(/\.html?$/.test(r.path))r.exposure='PUBLIC_STATIC_HTML_IF_CURRENT_MAIN_DEPLOYED';else r.exposure='PUBLIC_STATIC_ASSET_OR_DATA_IF_MATERIALIZED';}
+fs.writeFileSync(D+'/PRODUCTION-MAIN-DELTA.json',JSON.stringify(delta,null,2));
+const files=git('ls-tree','-r','--name-only','HEAD').split('\n'),included=files.filter(isPublishable),changed=delta.files.filter(r=>r.staticPublicationBoundary==='INCLUDED_IF_MATERIALIZED');
+fs.writeFileSync(D+'/STATIC-PUBLICATION.json',JSON.stringify({at:new Date().toISOString(),candidate:git('rev-parse','HEAD'),method:'Evaluate actual current builder exclusion sets and isPublishable with its imported internalPublicationFile; do not run builder or publish files.',limitations:'Potential tracked-file publication manifest; full output not materialized. Additional admitted BookVII publication and generated allowlists require final build receipt.',potentialTrackedPublicFiles:included,changedPotentialPublicFiles:changed.map(r=>({path:r.path,status:r.status,risk:r.risk})),changedPublicHtml:changed.filter(r=>/\.html?$/.test(r.path)),potentialReviewArtifacts:changed.filter(r=>/^(artifacts|tmp)\//.test(r.path)).map(r=>r.path),branchIsolation:'worldPreviewBuildPolicy has explicit branch allowlist; codex/unified-release-convergence-r1 is absent. Do not inherit World branch READ_ONLY proof.'},null,2));
+console.log(JSON.stringify({potentialPublicFiles:included.length,changedPotentialPublicFiles:changed.length,changedPublicHtml:changed.filter(r=>/\.html?$/.test(r.path)).length,reviewArtifacts:changed.filter(r=>/^(artifacts|tmp)\//.test(r.path)).length}));

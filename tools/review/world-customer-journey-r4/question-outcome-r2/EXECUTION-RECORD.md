@@ -38,3 +38,13 @@ TL visual decision pending. CI and Preview must be tied to the eventual candidat
 - content/civilization-atlas/maintenance/book-v-world-question-outcome-successor-v22.json
 - Sole existing Master: only the new bounded R4 child is changed.
 - Current lightweight receipts and current screenshots in this existing QA subtree; original receipts retained.
+
+## Final exact-SHA closeout
+
+Candidate9005a87671e8d448ee995e599977d0d312796eac. GitHub CI41155452474 PASS: Pages build, complete npm run check and git diff --exit-code. Exact Preview https://f4430c31.phios-github.pages.dev: five frontend SHA256 matches, actual public GET, READ_ONLY and safety PASS. Actual customer flows36/36 plus private/locale3/3, original58/58 conditions, World42/42 and Home14/14 PASS. Both Malaysian observations and all four2024 comparison observations were actually retrieved. No source success response was mocked.
+
+The prior d0 candidate had a real private-input transport-loop risk from an existing fallback route.9005 prevents automatic World self-transport and provides a user-selected input-only REALITY action from the existing capability registration. Its prior manifest SHA is retained in the explicit UNACCEPTED_CANDIDATE_CORRECTION record. Historical frozen records are unchanged. Two remote destination checks initially observed Loading due fixed waits; they now wait for actual approved body/search controls. The original58 runner could dereference the root during reload/retry. The current review runner retains every original assertion and adds only root readiness polling; the frozen original validator is byte-identical.
+
+WMDA tree and18 recorded file hashes match baseline. It was already an ancestor of29d and published main; no new WMDA integration was performed. Production canonical deployment remains0d9089af and automatic Production deployment is disabled. No main merge, Production deploy, production data write, paid Provider, Cron or live data activation was executed.
+
+Overall PARTIAL solely for TL visual acceptance and separate release authority. Domain coverage gaps remain disclosed. Source commits are pushed in the same Draft PR14; final post-CI receipts and Master refresh remain local review changes to avoid changing the exact tested HEAD. No additional code or deployment is pending in this task.

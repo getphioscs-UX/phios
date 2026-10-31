@@ -1,0 +1,117 @@
+{
+  "inputs": {
+    "assets/customer-ui/js/assets.js": {
+      "bytes": 10029,
+      "imports": [
+        {
+          "path": "assets/js/runtime/web-production/asset-resolver.js",
+          "kind": "dynamic-import",
+          "original": "../../js/runtime/web-production/asset-resolver.js"
+        },
+        {
+          "path": "assets/js/runtime/web-production/asset-resolver.js",
+          "kind": "dynamic-import",
+          "original": "../../js/runtime/web-production/asset-resolver.js"
+        },
+        {
+          "path": "assets/js/runtime/web-production/asset-resolver.js",
+          "kind": "dynamic-import",
+          "original": "../../js/runtime/web-production/asset-resolver.js"
+        },
+        {
+          "path": "assets/js/runtime/web-production/asset-resolver.js",
+          "kind": "dynamic-import",
+          "original": "../../js/runtime/web-production/asset-resolver.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "assets/js/runtime/web-production/asset-resolver.js": {
+      "bytes": 13217,
+      "imports": [
+        {
+          "path": "assets/customer-ui/js/assets.js",
+          "kind": "import-statement",
+          "original": "../../../customer-ui/js/assets.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "functions/canonical-presentation-runtime/report-visual-architecture.js": {
+      "bytes": 1970,
+      "imports": [],
+      "format": "esm"
+    },
+    "content/reports/shared/report-visual-assets-r2.json": {
+      "bytes": 117488,
+      "imports": [],
+      "format": "esm",
+      "with": {
+        "type": "json"
+      }
+    },
+    "functions/canonical-presentation-runtime/report-editorial-resolver.js": {
+      "bytes": 17773,
+      "imports": [
+        {
+          "path": "assets/js/runtime/web-production/asset-resolver.js",
+          "kind": "import-statement",
+          "original": "../../assets/js/runtime/web-production/asset-resolver.js"
+        },
+        {
+          "path": "functions/canonical-presentation-runtime/report-visual-architecture.js",
+          "kind": "import-statement",
+          "original": "./report-visual-architecture.js"
+        },
+        {
+          "path": "content/reports/shared/report-visual-assets-r2.json",
+          "kind": "import-statement",
+          "original": "../../content/reports/shared/report-visual-assets-r2.json",
+          "with": {
+            "type": "json"
+          }
+        }
+      ],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    "report-editorial-resolver.js": {
+      "imports": [],
+      "exports": [
+        "FIXED_REPORT_PAGE_CSS",
+        "REPORT_BODY_PAGE_CSS",
+        "composeFixedEditorialReport",
+        "planSemiFixedReportContents",
+        "renderFixedReportPage",
+        "renderReportBodyContentPreview",
+        "reportContentLocale",
+        "requireFixedReportManifest",
+        "resolveFixedReportPage",
+        "resolveHdFrontMatterForLocalReview",
+        "resolveNumFixedPageForLocalReview",
+        "resolveReportBodyAsset",
+        "resolveReportEditorialAsset"
+      ],
+      "entryPoint": "functions/canonical-presentation-runtime/report-editorial-resolver.js",
+      "inputs": {
+        "assets/customer-ui/js/assets.js": {
+          "bytesInOutput": 408
+        },
+        "assets/js/runtime/web-production/asset-resolver.js": {
+          "bytesInOutput": 5182
+        },
+        "functions/canonical-presentation-runtime/report-editorial-resolver.js": {
+          "bytesInOutput": 17801
+        },
+        "functions/canonical-presentation-runtime/report-visual-architecture.js": {
+          "bytesInOutput": 1788
+        },
+        "content/reports/shared/report-visual-assets-r2.json": {
+          "bytesInOutput": 113428
+        }
+      },
+      "bytes": 139624
+    }
+  }
+}

@@ -1,0 +1,36 @@
+diff --git a/scripts/build-cloudflare-pages.mjs b/scripts/build-cloudflare-pages.mjs
+index 6725c87d..07ccd1bd 100644
+--- a/scripts/build-cloudflare-pages.mjs
++++ b/scripts/build-cloudflare-pages.mjs
+@@ -239,6 +239,31 @@ for(const file of ["assets/js/pages/civilization-atlas/world-guided-readings.js"
+ // Include this new local customer consumer before commit; it remains subject
+ // to the same public boundary, size checks and source-identity receipt.
+ for(const file of ['world/index.html','assets/js/pages/world.js','assets/customer-ui/surfaces/reality-structure.css','assets/customer-ui/surfaces/professional-visual-r1.css','assets/customer-ui/js/professional-visual-r1.js','assets/customer-ui/surfaces/personal-method-visual-r1.css','assets/customer-ui/js/personal-method-visual-r1.js'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
++// Explicit public W4/W5/W9/W10 local candidate inputs, including the existing R5
++// presale owner. Never enumerate all untracked files or publish review/QA data.
++const visualJourneyPublic = [
++ 'assets/customer-ui/js/surfaces/journey-method-visual-r1.js',
++ 'assets/customer-ui/js/surfaces/journey-method-visual-model-r1.js',
++ 'assets/customer-ui/surfaces/journey-method-visual-r1.css',
++ 'assets/customer-ui/js/surfaces/preentry-five-method-r5.js',
++ 'assets/customer-ui/js/surfaces/preentry-five-method-r5-model.js',
++ 'assets/customer-ui/js/surfaces/preentry-hub-links-r5.js',
++ 'assets/customer-ui/surfaces/preentry-five-method-r5.css',
++ 'assets/customer-ui/js/surfaces/subject-workspace-r1.js',
++ 'assets/customer-ui/surfaces/subject-workspace-r1.css'
++];
++for(const method of ['astrology','bazi','ziwei','numerology','human-design']){
++ visualJourneyPublic.push('perspectives/personal/'+method+'/index.html');
++ for(const name of ['en.html','zh-Hans.html','interaction.json'])visualJourneyPublic.push('assets/customer-ui/media/preentry-r5/'+method+'/'+name);
++}
++for(const name of ['ZIWEI-WEB-P02-ILLUSTRATION-R4.svg','ZIWEI-WEB-P03-ILLUSTRATION-R4.svg','ZIWEI-WEB-P04-ILLUSTRATION-R4.svg'])visualJourneyPublic.push('assets/customer-ui/media/preentry-r5/ziwei/figures/'+name);
++for(const file of visualJourneyPublic)if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
++const clientVisualPointer = JSON.parse(fs.readFileSync(path.join(root,'content/web-production/registries/current-client-visual-registry.json'),'utf8'));
++const activeClientVisual = clientVisualPointer.currentRegistryPath;
++if(typeof activeClientVisual!=='string'||!/^\/content\/web-production\/registries\/client-visual-asset-registry-v\d+(?:\.\d+)+\.json$/.test(activeClientVisual))throw Error('PUBLIC_CLIENT_VISUAL_POINTER_INVALID');
++if(!fs.existsSync(path.join(root,activeClientVisual.slice(1))))throw Error('ACTIVE_PUBLIC_CLIENT_VISUAL_REGISTRY_MISSING');
++publicationFiles.add(activeClientVisual.slice(1));
++
+ // Bounded External Reality customer renderer; no review fixtures are published.
+ for(const file of ['assets/customer-ui/js/surfaces/external-reality.js'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
+ const atlasReadingBridge='assets/js/pages/civilization-atlas/atlas-reading-bridge.js';
