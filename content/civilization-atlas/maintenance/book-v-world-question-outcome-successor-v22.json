@@ -15,7 +15,7 @@
       "path": "assets/js/pages/civilization-atlas/world-journey-shell-r3.js",
       "previousGitRevision": "29d2a31ae482072bca3797bf6463025bdcd5406b",
       "previousSha256": "ff6b941b77186798b1612bda2b2c0bb9d9a59dd4f43b07b458dc89a985ee96d2",
-      "successorSha256": "4b4f4b9a65f35d224dc8697a7d3cb01bdbda033d9b5fb070923860332a3ca3ad"
+      "successorSha256": "cf2c74db8e11b2554bccdd05f4d5ad7348d7b3ab603d4f11f6ea703fa18cfa57"
     },
     {
       "path": "assets/js/pages/civilization-atlas/world-journey-state-r3.js",
@@ -44,6 +44,10 @@
     {
       "path": "content/civilization-atlas/geography/world-selection-geometry-r2.json",
       "sha256": "820be8e41016a8736b1841d8f1c6a8d12a167820b96e115913646ebeea8a0165"
+    },
+    {
+      "path": "assets/js/ask-entry-capabilities.js",
+      "sha256": "ea0c89a0ad94a974c23ee0b0f00bef3378457c04a73e74c8178c4bc10106cf13"
     }
   ],
   "validation": "scripts/check-world-question-outcome-r2.mjs",
@@ -61,5 +65,11 @@
   "productionAdmissionChanged": false,
   "parallelKnowledgeAskNavigationSystem": false,
   "sourceMatchingOwner": "assets/js/pages/civilization-atlas/world-search.js",
-  "privacy": "Public non-sensitive question in browser history state; never raw private question in public route; existing entry safety owner runs first."
+  "privacy": "Public non-sensitive question in browser history state; never raw private question in public route; existing entry safety owner runs first.",
+  "candidateCorrection": {
+    "priorCommit": "d0acf8e7e2b01232c77a699d672056612243ff58",
+    "priorManifestSha256": "c5f003d651663e72f8fa75ebb3313461eb6da607a0902dbde5f10074b45dbe35",
+    "status": "UNACCEPTED_CANDIDATE_CORRECTION",
+    "reason": "Existing owner may return World for private address text. Refuse automatic World self-transport; explicit input-only next step uses existing REALITY capability registration. No safety classification or authority changed."
+  }
 }
