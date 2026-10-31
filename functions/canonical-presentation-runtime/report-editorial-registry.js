@@ -1,5 +1,5 @@
 import {VISUAL_REPORT_PRODUCTS} from './visual-report-registry.js';
-import currentFixedManifest from '../../content/reports/shared/report-visual-assets-r2.json' with {type:'json'};
+import currentFixedManifest from '../../content/reports/shared/report-visual-assets-r2.json';
 import {REPORT_EDITORIAL_VERIFICATION} from './report-editorial-verification.js';
 export const REPORT_EDITORIAL_LOCALES=Object.freeze(['zh-Hans','en','bilingual']);
 export const REPORT_EDITORIAL_ROLES=Object.freeze(['COVER','METHOD_INTRO','ORIGIN','PHIOS_LENS','HOW_TO_READ']);
