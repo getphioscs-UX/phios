@@ -1,3 +1,4 @@
+import {worldQuestionTarget} from './pages/civilization-atlas/world-journey-state-r3.js';
 // Discovery mapping only; public source and destination owners retain authority.
 export const CUSTOMER_TOPICS=[
   {
@@ -313,7 +314,7 @@ export const CUSTOMER_TOPICS=[
           "zh-Hans": "理解网络、城市与经济联系",
           "en": "Read about networks, cities and economic connections"
         },
-        "href": "/world/?reading=BOOK-6%3Abook6-internet-supply-chains-global-cities",
+        "href": "/world/?worldJourney=connections",
         "permission": "PUBLIC_DISCOVERY_EXISTING_TARGET_RULES",
         "availability": "EXISTING_PAGE",
         "fallback": "/knowledge/"
@@ -348,6 +349,8 @@ export const CUSTOMER_TOPICS=[
   }
 ];
 export function topicRoute(question,locale='en',selected=null){
+ const wt=worldQuestionTarget(question,{selected:selected==='world'});if(wt){const lang=locale==='zh-Hans'?'zh-Hans':'en',zh=lang==='zh-Hans',generic=wt.journey==='landing',title=zh?'世界探索':'World exploration';const targetURL=new URL(wt.href,'https://getphios.com');targetURL.searchParams.set('locale',lang);const href=targetURL.pathname+targetURL.search+targetURL.hash;return {outcome:generic?'TOPIC_PATHWAYS':'MATCHED_CAPABILITY',worldPresentation:wt.journey,topicIds:['world'],selectedTopic:'world',candidates:[],href,primaryAction:{href,label:zh?'开始探索世界':'Start exploring World'},clarification:zh?'按你明确选择的公开主题进入对应工作区；没有生成或保存个人资料。':'Open the workspace for your explicit public topic. No personal information has been generated or saved.',navigationActions:[{href:'/world/?worldJourney=now&locale='+lang,label:zh?'选择地区，查看事实与来源年份':'Choose a region; check facts and dates'},{href:'/world/?worldJourney=connections&locale='+lang,label:zh?'理解网络、城市与经济联系':'Explore networks, cities and economic connections'},{href:'/knowledge/?locale='+lang,label:zh?'搜索更多公开知识':'Search more published knowledge'}],providerCalls:0,generationMode:'DETERMINISTIC',boundaries:{automaticPersistence:false,methodChosenByClientRouter:false}};}
+
  const zh=locale==='zh-Hans',q=String(question||'').normalize('NFKC').trim().replace(/(?:不要|不想|不需要|别推荐|不是问|don't want|do not want|not asking about|not interested in)\s*[^，,。.;；!?！？]*(?=[，,。.;；!?！？]|$)/ig,'');
  if(!q)return null;const matches=CUSTOMER_TOPICS.filter(t=>selected?t.id===selected:new RegExp(t.pattern,'i').test(q));if(!matches.length)return null;
  const t=matches[0],choices=matches.length>1&&!selected?matches.map(t=>({label:t.name[locale],labels:t.name,topicId:t.id})):t.choices.map(c=>({href:c.href,label:c.label[locale],labels:c.label}));
@@ -355,5 +358,5 @@ export function topicRoute(question,locale='en',selected=null){
  return {outcome:'TOPIC_PATHWAYS',candidates:[],topicIds:matches.map(t=>t.id),selectedTopic:t.id,clarification:matches.length>1&&!selected?(zh?'你提到了几个方面，想先探索哪一个？':'You mentioned several areas. Which would you like to explore first?'):(zh?'先选一个方向。这里提供相关阅读和入口，不会分析你的个人状况。':'Choose a direction. These are related readings and entrances, not an assessment of your situation.'),navigationActions:choices,sourceTitle:t.sourceTitle[locale],providerCalls:0,providerInvoked:false,generationMode:'DETERMINISTIC',href:choices[0].href||'/knowledge/',boundaries:{methodChosenByClientRouter:false,automaticPersistence:false}};
 }
 
-// Offline shortcut only for topic labels/short names, never a personal or risk assessment.
+// Offline shortcut only for exact topic labels/short names. Free questions must use the existing server safety owner.
 export function localTopicRoute(question,locale,selected){const q=String(question||'').normalize('NFKC').trim().toLowerCase(),aliases={relationships:['爱情','感情','关系','恋爱','love','relationships'],work:['工作','职业','职场','work','career','job'],money:['钱不够用','金钱','预算','money','not enough money','money is tight'],family:['家庭','养育','family','parenting'],self:['认识自己','了解自己','understand myself'],world:['马来西亚经济','世界','malaysian economy','malaysia economy','world']};const match=CUSTOMER_TOPICS.find(t=>q===t.name[locale]?.toLowerCase()||(aliases[t.id]||[]).includes(q));return match?topicRoute(question,locale,selected||match.id):null;}

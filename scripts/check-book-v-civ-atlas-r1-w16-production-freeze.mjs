@@ -4,9 +4,26 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 import path from 'node:path';
 const root=process.cwd();
-const read=p=>fs.readFileSync(path.join(root,p),'utf8').replace(/^\uFEFF/,'');
+const uiPredecessors=new Map();
+const read=p=>(uiPredecessors.get(p)||fs.readFileSync(path.join(root,p))).toString('utf8').replace(/^\uFEFF/,'');
 const json=p=>JSON.parse(read(p));
-const digest=p=>crypto.createHash('sha256').update(fs.readFileSync(path.join(root,p))).digest('hex');
+const digest=p=>crypto.createHash('sha256').update(uiPredecessors.get(p)||fs.readFileSync(path.join(root,p))).digest('hex');
+
+// Question-to-outcome successor validates only current bytes; historical assertion inputs stay unchanged.
+const outcome=json('content/civilization-atlas/maintenance/book-v-world-question-outcome-successor-v22.json');
+assert.equal(outcome.status,'ENGINEERING_REVISION_PENDING_RECHECK');assert.equal(outcome.humanDecision,'REVISE_PENDING_RECHECK');assert.equal(digest(outcome.predecessor),outcome.predecessorSha256);
+assert.deepEqual(outcome.changes.map(c=>c.path),['assets/js/pages/civilization-atlas/world-experience-r2.js','assets/js/pages/civilization-atlas/world-journey-shell-r3.js','assets/js/pages/civilization-atlas/world-journey-state-r3.js']);
+for(const c of outcome.changes){assert.equal(c.previousGitRevision,'29d2a31ae482072bca3797bf6463025bdcd5406b');assert.equal(crypto.createHash('sha256').update(worldGitObject('git',['show',c.previousGitRevision+':'+c.path])).digest('hex'),c.previousSha256);assert.equal(digest(c.path),c.successorSha256);}
+const correction=outcome.candidateCorrection;assert.equal(correction.status,'UNACCEPTED_CANDIDATE_CORRECTION');assert.equal(correction.priorCommit,'d0acf8e7e2b01232c77a699d672056612243ff58');assert.equal(crypto.createHash('sha256').update(worldGitObject('git',['show',correction.priorCommit+':content/civilization-atlas/maintenance/book-v-world-question-outcome-successor-v22.json'])).digest('hex'),correction.priorManifestSha256);
+for(const d of outcome.dependencies)assert.equal(digest(d.path),d.sha256,'Question outcome dependency drift: '+d.path);
+for(const k of ['canonicalTheoryChanged','historicalRecordsChanged','providerLiveEnabled','productionScheduleEnabled','productionAdmissionChanged','parallelKnowledgeAskNavigationSystem'])assert.equal(outcome[k],false);
+function currentExpected(p,previous){const c=outcome.changes.find(c=>c.path===p);if(!c)return previous;assert.equal(c.previousSha256,previous,'Question successor predecessor drift: '+p);return c.successorSha256;}
+await import('./check-world-question-outcome-r2.mjs');
+// Validate current R4 bytes first, then run every historical assertion on its exact registered predecessor.
+const ui=json('content/civilization-atlas/maintenance/book-v-world-customer-journey-successor-v20.json');
+assert.equal(ui.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');assert.equal(ui.humanDecision,'PENDING');assert.equal(ui.predecessor,'content/civilization-atlas/maintenance/book-v-world-official-filing-successor-v19.json');assert.equal(digest(ui.predecessor),ui.predecessorSha256);
+for(const c of ui.changes){assert.equal(c.previousGitRevision,'8e77898f5ae86788789ae3ab45a4c51fc0f18a0b');const prior=worldGitObject('git',['show',c.previousGitRevision+':'+c.path]);assert.equal(crypto.createHash('sha256').update(prior).digest('hex'),c.previousSha256);assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,c.path))).digest('hex'),currentExpected(c.path,c.successorSha256));uiPredecessors.set(c.path,prior);}
+const revision=json('content/civilization-atlas/maintenance/book-v-world-journey-keyboard-successor-v21.json');assert.equal(revision.humanDecision,'REVISE_PENDING_RECHECK');assert.equal(revision.status,'ENGINEERING_REVISION_PENDING_RECHECK');assert.equal(revision.validation.path,'scripts/check-world-journey-interaction-r1.mjs');assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,revision.validation.path))).digest('hex'),revision.validation.sha256);assert.equal(revision.path,'assets/js/pages/civilization-atlas/world-journey-shell-r3.js');assert.equal(revision.sourceGitRevision,'fc5c693c986ab875dc627eceb5d8962304019512');assert.equal(revision.predecessor,'content/civilization-atlas/maintenance/book-v-world-customer-journey-successor-v20.json');assert.equal(digest(revision.predecessor),revision.predecessorSha256);assert.equal(crypto.createHash('sha256').update(worldGitObject('git',['show',revision.sourceGitRevision+':'+revision.path])).digest('hex'),revision.previousSha256);for(const d of ui.dependencies){if(d.path===revision.path){assert.equal(d.sha256,revision.previousSha256);assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,d.path))).digest('hex'),currentExpected(d.path,revision.successorSha256));}else assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,d.path))).digest('hex'),currentExpected(d.path,d.sha256));}for(const k of ['canonicalTheoryChanged','historicalRecordsChanged','providerLiveEnabled','productionScheduleEnabled','productionAdmissionChanged'])assert.equal(ui[k],false);
 
 const freeze=json('content/civilization-atlas/freeze/book-v-civ-atlas-r1-production-freeze-v1.json');
 assert.equal(freeze.status,'PRODUCTION_ADMITTED_FROZEN');
