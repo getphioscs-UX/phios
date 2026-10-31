@@ -1,0 +1,26 @@
+name: Unified Preview R1.2 scope safety
+on:
+  pull_request:
+    paths:
+      - 'functions/_lib/unified-preview-scope.js'
+      - 'scripts/lib/unified-preview-publication.mjs'
+      - 'scripts/check-unified-preview-scope-r12.mjs'
+      - 'scripts/build-cloudflare-pages.mjs'
+      - '.github/workflows/unified-preview-r12.yml'
+  push:
+    branches: [codex/unified-release-preview-r12]
+permissions:
+  contents: read
+jobs:
+  bounded-preview-scope:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: node --import ./scripts/lib/report-zero-cost-preload.mjs scripts/check-unified-preview-scope-r12.mjs
+      - run: npm run check:cloudflare-function-import-compat

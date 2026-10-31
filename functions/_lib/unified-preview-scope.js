@@ -18,6 +18,7 @@ export function unifiedPreviewBuildPolicy(env={}){
  return {active:true,branch:UNIFIED_PREVIEW_BRANCH,commit:env.CF_PAGES_COMMIT_SHA,mode:'RELEASE_A_READ_ONLY'};
 }
 export function canonicalPreviewPath(pathname){
+ if(typeof pathname!=='string')return null;
  let p=pathname;try{for(let i=0;i<2;i++)p=decodeURIComponent(p);}catch{return null;}
  p=p.replaceAll('\\','/').replace(/\/{2,}/g,'/');
  if(/%[0-9a-f]{2}/i.test(p)||p.split('/').some(x=>x==='.'||x==='..'))return null;
