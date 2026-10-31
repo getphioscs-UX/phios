@@ -1,0 +1,18 @@
+{
+  "Ask": {
+    "source": "../ASK-MAIN-COMPARISON.json",
+    "sha256": "e9d9a5a62e6c1613fcabc1e698e9e243348c5bcf3d986a1837654ac314411392",
+    "historical": 5,
+    "intentionalR4Comparison": 1,
+    "expectationsChanged": false
+  },
+  "accountReadAttempt": {
+    "path": "/api/customer-current-reality",
+    "action": "REPORT_CONTEXT_ELIGIBLE",
+    "owner": "functions/report-context/report-context-store.js:47",
+    "meaning": "Existing entitlement eligibility read; no context creation/generation. Browser harness aborts all non-GET, so no request reached a write handler.",
+    "sourceSha256": "ba40892a19a3260ff879e62d4d4d2269cfac1920e7cc435849455537ab8bd053",
+    "blocked": true
+  },
+  "initialProbe": "BROWSER-FIRST.json is diagnostic only. Its route/open checks did not qualify as customer completion. Final36 uses actual recipient readonly textarea and destinations. Closed details were opened by real clicks before asserting missing market-cap text."
+}

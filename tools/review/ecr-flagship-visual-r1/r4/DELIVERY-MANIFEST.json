@@ -1,0 +1,128 @@
+{
+  "at": "2026-10-30T14:31:45.554Z",
+  "status": "R4_FREE_READING_HUMAN_REVIEW_READY",
+  "head": "088e0c1f5fd789009ae8545d24f38e20bdf59f61",
+  "source": [
+    {
+      "path": "assets/customer-ui/js/surfaces/ecr-flagship-r1.js",
+      "sha256": "84f67b2ea33f572b5948b4d754635dcdbf8bab10360372208051aca058995797",
+      "bytes": 38345,
+      "beforeSha256": "fad1034b09ebc0ee9fdeff6a6e5c7ff653648ba9c6384bd4ce7295bfd54e7398"
+    },
+    {
+      "path": "assets/customer-ui/surfaces/ecr-flagship-r1.css",
+      "sha256": "579257b0297183524a7806da24be7e28d90c782093b8b81dd7f047b06a37983f",
+      "bytes": 29126,
+      "beforeSha256": "e8cd6229162480a60890f9bbeae52ce159c8d172d827879840f4f4cb94183c53"
+    },
+    {
+      "path": "assets/customer-ui/media/ecr-flagship-r1/presentation.json",
+      "sha256": "877fa5e69b253f389b1a30fcb3afc8931b16c08ffd25763fca07e73b1d660fa1",
+      "bytes": 237891,
+      "beforeSha256": "5850f53f5403bc9c30cc10087aa821d29f60772ac0b8107d3ca438b207d4f8ba"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-editorial-resolver.js",
+      "sha256": "2f0c996946a13939fd115c0d97b422c3c31567d32aacba252fff71623d2428c0",
+      "bytes": 17773,
+      "beforeSha256": "40be5ec92289288d3e05207179b31d609c7040592367eef1a44b5a0300e50196"
+    }
+  ],
+  "sourceDigest": "3faeeab550a06030b7832890b4924f7d4071fdd697a34351ec9e58c3a6250fe6",
+  "checks": {
+    "api": 25,
+    "browser": 64,
+    "boundary": 16,
+    "failed": 0
+  },
+  "freeJourney": "P08 → native ECR-only input → actual location validation with local provider fixture → deterministic calculation → admitted customer reading → personal Mandala → Back; no private result in URL",
+  "p08InlineCalculation": "NOT_IMPLEMENTED_NATIVE_FALLBACK",
+  "accountSave": "NOT_CONNECTED_NOT_CLAIMED",
+  "paidConversion": "BLOCKED_NO_ORDER_NO_PAYMENT_NO_ENTITLEMENT",
+  "privatePdf": "NOT_GENERATED_OR_GRANTED",
+  "compilation": {
+    "clientBuild": "PASS",
+    "bytes": 135496,
+    "sha256": "0d3f72c2d01f413ff4a6c70c7632983107172fb1a4f0db5c09e96cb70cc0f4d6",
+    "approvedP01P07MarkupIdentical": true,
+    "calculationInputAdmissionCommerceAccountOwnersUnchanged": true,
+    "fullPagesBuild": "NOT_RUN_FIXED_SHARED_OUTPUT_AND_METADATA_WRITES_AVOIDED; isolated Functions and both relevant browser bundles compiled instead",
+    "providerCalls": 0,
+    "clientEntries": [
+      {
+        "path": "C:\\phios\\.tmp\\ecr-r4-client\\surfaces\\ecr-flagship-r1.js",
+        "bytes": 135496,
+        "sha256": "0d3f72c2d01f413ff4a6c70c7632983107172fb1a4f0db5c09e96cb70cc0f4d6"
+      },
+      {
+        "path": "C:\\phios\\.tmp\\ecr-r4-client\\specialists\\ecr\\product-renderer.js",
+        "bytes": 434182,
+        "sha256": "a8a871fa63578a10d0fbab90979b32517fc87f7aadb76c3716ff929b3d9a0cb3"
+      }
+    ],
+    "isolatedFunctions": {
+      "command": "wrangler pages functions build functions --outdir .tmp/ecr-free-r4-functions --compatibility-date 2026-07-14 --compatibility-flags nodejs_compat --minify",
+      "exitCode": 0,
+      "workerBytes": 15210453,
+      "workerSha256": "6166128da245ea1f9c9ed17f794a7cbbfc87684cfbcee557f8bf18b6cf36ccfd",
+      "warning": "Initial debug-log EPERM warning; actual Worker compile completed exit0"
+    },
+    "additionalCompatibilityFix": "One explicit JSON import type in existing shared report-editorial resolver; data and functions unchanged"
+  },
+  "production": "NOT_DEPLOYED_RUNTIME_UNVERIFIED",
+  "blockers": [
+    "P08_INLINE_INPUT_NOT_IMPLEMENTED",
+    "FREE_ACCOUNT_SAVE_HANDOFF_NOT_CONNECTED",
+    "ECR_FULL_R1_NOT_CUSTOMER_PUBLISHABLE",
+    "ECR_PAID_ADAPTER_ABSENT",
+    "ECR_PAID_LIFECYCLE_NOT_RUN",
+    "PRODUCTION_STATIC_MODULE_GRAPH_NOT_VERIFIED"
+  ],
+  "providerCalls": 0,
+  "costUSD": 0,
+  "payments": 0,
+  "productionWrites": 0,
+  "commits": 0,
+  "pushes": 0,
+  "deployments": 0,
+  "localPreview": "http://127.0.0.1:56324",
+  "reviewToolSources": [
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/preview-server.mjs",
+      "sha256": "4b82b506ec81a3a9c4f07c896d1bcb524f9be50570d5cf26791697911f01ff34"
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/r4/api-checks.mjs",
+      "sha256": "6cd4974cb2d2a55cd5c4738b812631645761f51ad374dd23773d2a6b951a54a2"
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/r4/boundary-browser.mjs",
+      "sha256": "4dae94a1cc9b04d8d1052d538409a181db44988453b8542edb3769a8ef684c6e"
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/r4/browser.mjs",
+      "sha256": "8b61a520d9a668c599cf3882803c8d69678fcf4f25e10d317c1de3f74c5fbee0"
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/r4/diagnose-renderer.mjs",
+      "sha256": "89622c082fc8ef57efa37e2754e353cd9a5296435226d6df26565380595167da"
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/r4/finalize.mjs",
+      "sha256": "6eb15d9cb9d334a48d06d0873f2be4b9c941c3b45784d50fefe4bece5d51de39"
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/r4/implement.mjs",
+      "sha256": "bd96f6b19425a17233ac5f30614480fcfe8f646f0293d2af5c43203ec11014cb"
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/r4/probe.mjs",
+      "sha256": "69ee0444892131420d3d7b3116e9b1a1ae509c1954697f978ec155e5ce0b1677"
+    },
+    {
+      "path": "tools/review/ecr-flagship-visual-r1/r4/server.mjs",
+      "sha256": "c0bbc0455391de89aab958093d61350aac4c0b3f52cac8a4f07e38967d20137b"
+    }
+  ],
+  "reviewServerEntryFix": "Inherited helper now starts only as direct entrypoint; task-owned duplicate listener stopped. Own accidental generic server metadata restoration receipt in REVIEW-SERVER-ENTRY-REPAIR.json; R4 SERVER.json remains actual live functional server."
+}

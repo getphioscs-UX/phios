@@ -1,0 +1,83 @@
+{
+  "origin": "http://127.0.0.1:64213",
+  "rows": [
+    {
+      "name": "ten-registry-chapters-en-360",
+      "status": "PASS",
+      "detail": {}
+    },
+    {
+      "name": "chapter-detail-en-360",
+      "status": "PASS",
+      "detail": {}
+    },
+    {
+      "name": "chapter-refresh-en-360",
+      "status": "PASS",
+      "detail": {}
+    },
+    {
+      "name": "P08-quote-closed-en-360",
+      "status": "PASS",
+      "detail": {}
+    },
+    {
+      "name": "native-ECR-only-en-360",
+      "status": "PASS",
+      "detail": [
+        "ecr"
+      ]
+    },
+    {
+      "name": "real-free-reading-en-360",
+      "status": "PASS",
+      "detail": {
+        "http": 200,
+        "method": "ECR",
+        "state": "READY_TO_READ",
+        "saved": false
+      }
+    },
+    {
+      "name": "execution",
+      "status": "FAIL",
+      "detail": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-cx-specialist-products] svg').first()\u001b[22m\n\n    at C:\\phios\\tools\\review\\ecr-flagship-visual-r1\\r4\\browser.mjs:8:1133"
+    }
+  ],
+  "errors": [],
+  "network": [
+    {
+      "method": "GET",
+      "path": "/api/commerce-catalog"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public-asset-config"
+    },
+    {
+      "method": "GET",
+      "path": "/api/commerce-catalog"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public-asset-config"
+    },
+    {
+      "method": "GET",
+      "path": "/api/location-search"
+    },
+    {
+      "method": "POST",
+      "path": "/api/location-resolve"
+    },
+    {
+      "method": "POST",
+      "path": "/api/customer-personal-reality"
+    }
+  ],
+  "syntheticOnly": true,
+  "location": "Local fixture through actual search/resolver/timezone owners",
+  "calculation": "Real existing runtime",
+  "providerCalls": 0,
+  "productionWrites": 0
+}

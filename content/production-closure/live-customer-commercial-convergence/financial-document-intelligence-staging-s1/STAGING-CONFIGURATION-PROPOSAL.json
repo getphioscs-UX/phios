@@ -1,0 +1,90 @@
+{
+  "task": "BFT-FINANCIAL-DOCUMENT-STAGING-S1",
+  "state": "CONFIGURATION_PROPOSAL_ONLY_NOT_DEPLOYABLE",
+  "project": "phios-financial-document-s1",
+  "host": "phios-financial-document-s1.pages.dev",
+  "resourcesExistenceVerified": false,
+  "d1": {
+    "binding": "RUNTIME_DB",
+    "candidateName": "phios-financial-document-s1",
+    "databaseId": null
+  },
+  "r2": {
+    "binding": "PRIVATE_REPORTS",
+    "candidateBucket": "phios-financial-document-s1-private",
+    "publicAccess": false
+  },
+  "secrets": [
+    "Separate test OIDC credentials and AUTH_SESSION_SECRET",
+    "Separate REPORT_CONTEXT_ENCRYPTION_KEY"
+  ],
+  "secretValuesIncluded": false,
+  "identity": "Synthetic test A/B/C, no real proprietor proof",
+  "mode": "ISOLATED_SYNTHETIC_CANDIDATE",
+  "writes": "Only isolated synthetic source/document/snapshot/audit references, never production",
+  "retention": "Local synthetic 7 days only; cloud numeric retention and cleanup deadline require Owner approval",
+  "keyCustodian": null,
+  "cleanupOperator": null,
+  "rollback": "Disable test entry; revoke test permissions; return to prior verified test build; reconcile/delete authorized test objects and metadata only; record failed cleanup, do not claim success",
+  "productionResourceDenylist": {
+    "project": "phios-github",
+    "productionD1": [
+      {
+        "binding": "RUNTIME_DB",
+        "database_name": "phios-runtime-production",
+        "database_id": "073639fa-01e4-4868-af10-6ed032637dab",
+        "migrations_dir": "db/migrations"
+      }
+    ],
+    "productionR2": [
+      {
+        "binding": "MANUSCRIPTS",
+        "bucket_name": "phios-private-manuscripts"
+      },
+      {
+        "binding": "PRIVATE_REPORTS",
+        "bucket_name": "phios-private-reports"
+      }
+    ],
+    "previewD1": [
+      {
+        "binding": "RUNTIME_DB",
+        "database_name": "phios-runtime-sandbox",
+        "database_id": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+        "migrations_dir": "db/migrations"
+      }
+    ],
+    "previewR2": [
+      {
+        "binding": "BOOKS",
+        "bucket_name": "phios-private-books-sandbox"
+      },
+      {
+        "binding": "PRIVATE_REPORTS",
+        "bucket_name": "phios-private-reports-sandbox"
+      }
+    ],
+    "services": [
+      {
+        "binding": "METHOD_REPORT_RENDERER",
+        "service": "phios-method-report-renderer-production"
+      }
+    ]
+  },
+  "pagesEnvironmentConstraint": "Separate nonproduction Pages project. Pages supports production/preview named configuration, not arbitrary Workers env.staging. The separate project production slot is still nonproduction data; explicitly isolated bindings required.",
+  "documentation": "https://developers.cloudflare.com/pages/functions/wrangler-configuration/",
+  "currentServerGuard": "Loopback only and actual local DB/object paths checked. Cloud execution denied; no cloud adapter deployed.",
+  "approvals": {
+    "A_environmentConfiguration": "NOT_GRANTED",
+    "B_resourceCreation": "NOT_GRANTED",
+    "C_cloudTestExecution": "NOT_GRANTED",
+    "D_productionRelease": "NOT_GRANTED"
+  },
+  "costs": {
+    "providerCalls": 0,
+    "payments": 0,
+    "cloudBudget": null
+  },
+  "noProductionSecrets": true,
+  "noProductionMigration": true
+}

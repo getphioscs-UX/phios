@@ -39,7 +39,7 @@ A没有目标日期/时间/时区，因此S10明确为 CURRENT_TIMING_UNAVAILABL
 
 ## P4：目录、书签、引用与水印
 
-PDF采用原生outline/tagged输出，目录有9条内部链接；封存和Q87必须保持书签树与目的页完全一致。报告、Subject、Order、chart/source/publication/manuscript摘要封存到metadata；文件名只有不含生日等私人字段的合成case引用。
+PDF采用原生outline/tagged输出，封存时补齐固定目录入口，P06使用用户新指定的既有R2原图，并叠加13个数字槽/导航热点；封存和Q87必须保持书签树与目的页完全一致。报告、Subject、Order、chart/source/publication/manuscript摘要封存到metadata；文件名只有不含生日等私人字段的合成case引用。
 
 所有审核页保留可见SYNTHETIC QA。当前不存在可据以宣称已批准的BaZi商业水印回执，因此没有伪造商业水印通过，也没有把本批文件签发给客户。建议方案及待决定事项见COMMERCIAL-WATERMARK-PROPOSAL.md。正式客户版本必须用真实服务端Subject/Order绑定、批准水印及重新验证的新字节；不能剥掉本批合成标签直接交付。
 
@@ -73,3 +73,5 @@ Q87仍为 LOCAL_PROOF_NOT_HUMAN_ACCEPTED，没有正式Artifact Store写入。�
 2. 在既有renderer内按已批准版本读取IR实际页数、outline/tagged及正式标记；保留旧R1的48页/default行为和原字节读回。当前R1 worker/账户交付代码故意没有被覆盖。
 3. 原生PDF→封存→批准的Q87形成一个受控provenance receipt，保留raw/sealed/optimized SHA；不能把优化字节直接冒充当前R1 raw verifier digest。现有Artifact Store接收经过验证的最终pdfRef，旧已签发文件保持原样。
 4. 再做获授权的Cloud QA与实际账户权限/下载；重新下载只读已签发最终对象，绝不重生成、重压或重收费。新出版/商业水印/Q87/生产部署均无自动ACCEPT。
+
+最新P06指示已执行：附件、R2、既有registry SHA均为9ab82efc1756b34f810b12a82b542a5df835fb53000d1438c7c1fccc58f243d5。保留既有13行图面，不重写文字或生成新目录图；页码来自最终layout。人生结构正文与书签保留。计算时间说明移到P07。动态目录草稿已废弃。P06-SOURCE-BINDING.json保留原有槽位来源；商业出版状态不因绑定原图自动改变。

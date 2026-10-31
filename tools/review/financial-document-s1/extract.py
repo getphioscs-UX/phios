@@ -21,8 +21,9 @@ try:
   if any('vbaProject' in x.filename or 'externalLink' in x.filename for x in items):raise ValueError('ACTIVE_WORKBOOK_QUARANTINED')
   w=load_workbook(io.BytesIO(b),data_only=False,read_only=True);out=[]
   for s in w:
-   if s.max_row>300 or s.max_column>10:raise ValueError('XLSX_DIMENSION_LIMIT')
+   if (s.max_row or 0)>300 or (s.max_column or 0)>10:raise ValueError('XLSX_DIMENSION_LIMIT')
    for i,row in enumerate(s.iter_rows(values_only=True),1):
+    if i>300 or len(row)>10:raise ValueError("XLSX_DIMENSION_LIMIT")
     if i==1:continue
     if len(row)<7 or not row[0]:continue
     if any(isinstance(v,str) and v.startswith('=') for v in row):raise ValueError('SPREADSHEET_FORMULA_REVIEW_REQUIRED')

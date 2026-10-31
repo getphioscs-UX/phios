@@ -1,0 +1,7 @@
+import fs from 'node:fs';
+import {onRequestPost} from '../../../../functions/api/customer-personal-reality.js';
+import {createConfirmedBirthLocationSnapshot} from '../../../../functions/location/confirmed-birth-location-snapshot.js';
+const location={provider:'OPENSTREETMAP_NOMINATIM',providerRef:'R2939672',state:'CONFIRMED',displayName:'Kuala Lumpur, Malaysia',countryCode:'MY',latitude:3.139,longitude:101.6869,timezone:{iana:'Asia/Kuala_Lumpur',utcOffsetAtBirth:'+08:00',source:'GOVERNED_RESOLUTION',confidence:'HIGH'}};
+const birthDate='2000-01-01',birthTime='12:00';
+const body={reportSubjectName:'Synthetic R4 Review',birthDate,birthTime,birthTimeUnknown:false,placeRef:location.providerRef,birthLocationSnapshot:createConfirmedBirthLocationSnapshot(location,{birthDate,birthTime}),methods:['ecr'],consent:true,locale:'en'};
+const response=await onRequestPost({request:new Request('http://127.0.0.1/api/customer-personal-reality',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}),env:{PHIOS_ENVIRONMENT:'local',REPORT_PROVIDER_LIVE_ALLOWED:'false'},data:{}}),result=await response.json();fs.writeFileSync('tools/review/ecr-flagship-visual-r1/r4/FIRST-REAL-API.json',JSON.stringify({synthetic:true,input:body,status:response.status,result,providerCalls:0},null,2));console.log(JSON.stringify({status:response.status,keys:Object.keys(result),overview:result.view?.overview,reading:result.view?.reading?.methods?.map(x=>({method:x.methodId,state:x.state,keys:Object.keys(x)})),error:result.error}));
